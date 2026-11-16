@@ -856,6 +856,9 @@ hidden = true
 key    = "records_door"
 hidden = true
 [[traits.labels]]
+key    = "next_release_open"
+hidden = true
+[[traits.labels]]
 key    = "vega_cell"
 label  = "Vega's cell"
 hidden = true
@@ -1459,6 +1462,11 @@ sabin_custody_drains = 0
 keeper_drains_done   = 0
 study_door           = 0
 records_door         = 0
+# beat_0281, THE CUT (LO 2026-11-15): 0.2.6 ships with the guard and the technician; Sabin and the keeper are the next
+# release. Nothing sets next_release_open in 0.2.6. Sabin's study and his hub read it, so his door stays shut even
+# after the technician's drain hands her the code (study_door 1, kept so saves carry it forward). The next release
+# deletes those two gates and the 0.2.6 end card, and the climb goes on from the code she already holds.
+next_release_open    = 0
 
 # ─── Daily decay (engine-applied at every day rollover) ───────────────────────
 # advanceDay subtracts each value from its trait and floors at 0 (v2.py:5532-5544); parsed at
@@ -3168,8 +3176,9 @@ image_search_queries = ["cluttered engineer study blueprints desk lamp night", "
 entry_from  = "holding_floor"
 entry_conditions = { version = "1.0", items = [
   { type = "trait", subject = "player", trait_key = "study_door", operator = "gte", value = 1 },
+  { type = "trait", subject = "player", trait_key = "next_release_open", operator = "gte", value = 1 },
 ] }
-blocked_message = "Locked. She does not have his hours yet."
+blocked_message = "Sabin's door. Locked, and it stays locked for now."
 
 [[locations]]
 id          = "records_room"
@@ -10532,7 +10541,6 @@ time_progression_minutes = 420
 id   = "pain"
 name = "Pain"
 blocks = [
-  { type = "image", props = { file = "scenes/test_pain.jpg", description = "A naked woman strapped down on a clinical table flinching hard, eyes squeezed shut, a technician beside her adjusting a dial on a machine, monitor lines spiking.", search_queries = ["strapped woman flinching clinical table monitor spike", "restrained woman pain test lab technician dial"] } },
   { type = "paragraph", content = "The straps again, and a new machine with two leads that clip onto her nipples and one that goes inside her. The technician turns a dial." },
   { type = "dialog", props = { speaker = "npc", npcId = "npc_technician" }, content = "This one hurts. I'm telling you because the readings are better if you know it's coming." },
   { type = "dialog", props = { speaker = "player" }, content = "Is that supposed to be kind?" },
@@ -37196,7 +37204,7 @@ conditions = { version = "1.0", logic = "AND", items = [
 id   = "base"
 name = "Mercer"
 blocks = [
-  { type = "image", props = { file = "scenes/mercer_last_visit.jpg", description = "A man in an expensive suit standing on the other side of a glass cell wall at night, smiling, a naked young woman sitting on a cot inside looking back at him.", search_queries = ["man in suit outside glass cell woman inside night", "businessman looking through glass wall at woman on bed"] } },
+  { type = "image", props = { file = "scenes/mercer_last_visit.gif", description = "A man in an expensive suit standing on the other side of a glass cell wall at night, smiling, a naked young woman sitting on a cot inside looking back at him.", search_queries = ["man in suit outside glass cell woman inside night", "businessman looking through glass wall at woman on bed"] } },
   { type = "paragraph", content = "The glass slides back at eight and it is not the guard. It is Mercer, in a suit she has not seen since the penthouse, shaved, pressed, a man with a floor under him again." },
   { type = "dialog", props = { speaker = "npc", npcId = "npc_mercer" }, content = "Look at me. Look at this. Top of the tower, my own lift, my name on the door. I wanted you to see it. You're the only one left who knew me before." },
   { type = "dialog", props = { speaker = "player" }, content = "You came down here to show me your suit." },
@@ -37655,7 +37663,7 @@ time_progression_minutes = 60
 id   = "rung0"
 name = "He watches"
 blocks = [
-  { type = "image", props = { file = "scenes/guard_watches.jpg", description = "A naked young woman standing in a white glass-walled cell at night slowly undressing, a big uniformed guard sitting in a chair on the other side of the glass watching her.", search_queries = ["woman undressing behind glass wall guard watching", "naked woman in glass cell man sitting watching night"] } },
+  { type = "image", props = { file = "scenes/guard_watches.gif", description = "A naked young woman standing in a white glass-walled cell at night slowly undressing, a big uniformed guard sitting in a chair on the other side of the glass watching her.", search_queries = ["woman undressing behind glass wall guard watching", "naked woman in glass cell man sitting watching night"] } },
   { type = "paragraph", content = "She goes back into her cell and stands at the glass, right in front of his desk, where he can see all of her. She takes off the grey shift they put her in. Slow. Her tits first, then her belly, then all of it on the floor." },
   { type = "dialog", props = { speaker = "npc", npcId = "npc_guard" }, content = "Hey. Hey. What are you doing?" },
   { type = "dialog", props = { speaker = "player" }, content = "You've been looking for weeks. Look properly." },
@@ -37679,7 +37687,7 @@ time_progression_minutes = 60
 id   = "rung1"
 name = "He comes in"
 blocks = [
-  { type = "image", props = { file = "scenes/guard_hands.jpg", description = "A big uniformed guard inside a white cell standing behind a naked woman, his hands on her breasts, her eyes half closed.", search_queries = ["guard groping naked woman in cell from behind", "man in uniform hands on naked woman breasts white room"] } },
+  { type = "image", props = { file = "scenes/guard_hands_t5.gif", description = "A big uniformed guard inside a white cell standing behind a naked woman, his hands on her breasts, her eyes half closed.", search_queries = ["guard groping naked woman in cell from behind", "man in uniform hands on naked woman breasts white room"] } },
   { type = "paragraph", content = "He makes up a reason. A count, a check, something about the drain in the floor. He unlocks the glass and comes in and does not check anything." },
   { type = "dialog", props = { speaker = "npc", npcId = "npc_guard" }, content = "Stand still. I have to make sure you're not hiding anything." },
   { type = "paragraph", content = "His hands go straight to her tits. Big rough hands, squeezing, his thumbs dragging over her nipples until they're hard. Then down her belly and between her legs, two fingers pushing into her cunt." },
@@ -38252,7 +38260,6 @@ blocks = [
   { type = "group", props = { conditions = { version = "1.0", logic = "AND", items = [
       { type = "trait", subject = "player", trait_key = "guard_step", operator = "lt", value = 3 },
     ] } }, blocks = [
-    { type = "video", props = { pool_dir = "sex/guard_caught_shower_walk_t4", pool = 4, description = "A uniformed guard walking a naked dripping wet woman out of a prison shower room and down a corridor by the arm, his other hand on her bare ass. Must show: her naked and wet, him clothed, his hand on her ass, being led away. Avoid: a home, avoid: sex.", search_queries = ["guard leading naked wet girl by the arm", "naked woman marched down prison corridor", "man escorting naked wet girl hand on ass"] } },
     { type = "paragraph", content = "The water is still running when he comes in. He shuts it off, takes her by the arm and walks her out naked and dripping, his other hand on her bare ass the whole way down the corridor." },
     { type = "dialog", props = { speaker = "npc", npcId = "npc_guard" }, content = "Curfew was ten. You know where you're meant to be." },
     { type = "dialog", props = { speaker = "player" }, content = "I was only washing." },
@@ -38756,7 +38763,6 @@ locationId = "holding_floor"
 id   = "table"
 name = "His table"
 blocks = [
-  { type = "image", props = { file = "scenes/tech_on_his_table.jpg", description = "A young technician in a lab coat sitting at a bank of glowing screens in a dark lab at night, a naked woman sitting on the end of a padded clinical table in front of his chair.", search_queries = ["naked woman sitting on exam table man at computer screens dark lab", "technician night lab screens woman on table"] } },
   { type = "paragraph", content = "She walks past his chair to the padded test table, the one he straps her to every day, and sits up on the end of it. He turns his chair round from the screens to face her." },
   { type = "group", props = { conditions = { version = "1.0", logic = "AND", items = [
       { type = "trait", subject = "player", trait_key = "tech_step", operator = "lt", value = 1 },
@@ -39511,6 +39517,7 @@ is_active     = true
 conditions = { version = "1.0", logic = "AND", items = [
   { type = "flag", subject = "player", flag_key = "in_custody", operator = "is_true" },
   { type = "trait", subject = "player", trait_key = "study_door", operator = "gte", value = 1 },
+  { type = "trait", subject = "player", trait_key = "next_release_open", operator = "gte", value = 1 },   # beat_0281, the cut
 ] }
 
 [[canvases.nodes]]
@@ -40718,7 +40725,7 @@ time_progression_minutes = 60
 id   = "rung1"
 name = "He looks"
 blocks = [
-  { type = "image", props = { file = "scenes/keeper_looks.jpg", description = "A naked young woman standing in the lamplight at the end of a long archive table, an old man in a dark suit looking up at her over his glasses for the first time.", search_queries = ["naked woman standing lamp light old man looking up over glasses", "old man staring at naked woman archive room"] } },
+  { type = "image", props = { file = "scenes/keeper_looks_t5.jpg", description = "A naked young woman standing in the lamplight at the end of a long archive table, an old man in a dark suit looking up at her over his glasses for the first time.", search_queries = ["naked woman standing lamp light old man looking up over glasses", "old man staring at naked woman archive room"] } },
   { type = "paragraph", content = "She stands up in the lamplight and takes the shift off and stands there with nothing on." },
   { type = "dialog", props = { speaker = "npc", npcId = "npc_keeper" }, content = "Put that back on." },
   { type = "dialog", props = { speaker = "player" }, content = "Look at me first." },
@@ -40738,7 +40745,7 @@ time_progression_minutes = 60
 id   = "rung2"
 name = "He lets her stay"
 blocks = [
-  { type = "image", props = { file = "scenes/keeper_lets_her_stay.jpg", description = "An old man and a naked young woman sitting side by side at a long table under one lamp in a records room, close, him reading aloud from a file.", search_queries = ["old man and naked woman sitting close at table lamp", "elderly man reading to woman archive table night"] } },
+  { type = "image", props = { file = "scenes/keeper_lets_her_stay_t5.jpg", description = "An old man and a naked young woman sitting side by side at a long table under one lamp in a records room, close, him reading aloud from a file.", search_queries = ["old man and naked woman sitting close at table lamp", "elderly man reading to woman archive table night"] } },
   { type = "paragraph", content = "She sits in the second chair. Naked, close, her thigh against his. He reads, and after an hour he starts reading aloud, quietly, because it is something to do with his mouth." },
   { type = "dialog", props = { speaker = "npc", npcId = "npc_keeper" }, content = "Thirty years I have read these to nobody." },
   { type = "dialog", props = { speaker = "player" }, content = "Read me another." },
@@ -40757,7 +40764,7 @@ time_progression_minutes = 60
 id   = "rung3"
 name = "His hands"
 blocks = [
-  { type = "image", props = { file = "scenes/keeper_hands.jpg", description = "An old man's hands on the bare hips and breasts of a young naked woman standing between his knees by a lamp-lit archive table, his face turned up to her.", search_queries = ["old man hands on naked woman standing between his knees", "elderly man touching young naked woman breasts lamp"] } },
+  { type = "image", props = { file = "scenes/keeper_hands_t5.jpg", description = "An old man's hands on the bare hips and breasts of a young naked woman standing between his knees by a lamp-lit archive table, his face turned up to her.", search_queries = ["old man hands on naked woman standing between his knees", "elderly man touching young naked woman breasts lamp"] } },
   { type = "paragraph", content = "She takes his hand and puts it on her hip. Then on her tit. His palm is dry and old and shaking." },
   { type = "dialog", props = { speaker = "npc", npcId = "npc_keeper" }, content = "I cannot. I am Mr. Vance's man." },
   { type = "dialog", props = { speaker = "player" }, content = "He isn't here. I am." },
@@ -41575,6 +41582,20 @@ when = [
   { trait = "tech_drains_done", subject = "player", op = "gte", value = 1 },
 ]
 
+# ── Y2 · THE 0.2.6 END CARD. Terminal. beat_0281, THE CUT (LO 2026-11-15). ──
+# 0.2.6 ends at the technician's first drain: he gives her Sabin's code, and Sabin's door is the next release. Live
+# while next_release_open is 0, so the next release turns it off by opening the gate. ⚠️ NO APOSTROPHE IN terminal_text.
+[[quest_cards]]
+priority   = 10
+text       = "The technician says your name now, and he gave you the code to Sabin's door. Sabin runs the line that is building a body out of you, for someone. The code is in your hand."
+tip        = "That is where this build ends. Sabin's door and what is behind it are the next release. Inside, the tests still come every morning, and the guard and the technician are yours at their hours. If you want the next part sooner, Support Us in the sidebar."
+terminal      = true
+terminal_text = "Chapter complete. The story continues in the next release"
+when = [
+  { trait = "tech_drains_done", subject = "player", op = "gte", value = 1 },
+  { trait = "next_release_open", subject = "player", op = "lt", value = 1 },
+]
+
 # ── Z · SABIN. beat_0271 (0.2.6). From Sabin's door until the records room. ──
 [[quest_cards]]
 priority   = 10
@@ -41583,6 +41604,7 @@ tip        = "Sabin's Study is off the floor. He is there in the evening, six to
 when = [
   { trait = "study_door", subject = "player", op = "gte", value = 1 },
   { trait = "records_door", subject = "player", op = "lt", value = 1 },
+  { trait = "next_release_open", subject = "player", op = "gte", value = 1 },   # beat_0281, the cut
 ]
 
 # ── Sabin's 0.2.6 cards. beat_0271. His Whose Hand cards stay as they are; these show only while she is inside. ──
@@ -41596,6 +41618,7 @@ when = [
   { flag = "in_custody", op = "is_true" },
   { trait = "sabin_step", subject = "player", op = "lt", value = 1 },
   { trait = "study_door", subject = "player", op = "gte", value = 1 },
+  { trait = "next_release_open", subject = "player", op = "gte", value = 1 },   # beat_0281, the cut
 ]
 goals = [
   { trait = "sabin_step", subject = "player", op = "gte", value = 1, label = "Let him see you" },
@@ -41743,15 +41766,14 @@ when = [
   { trait = "keeper_drains_done", subject = "player", op = "lt", value = 1 },
 ]
 
-# ── AB · THE END CARD. Terminal. beat_0273 (0.2.6). The only terminal Story-Goals card in the game. ──
+# ── AB · THE END CARD. beat_0273, NOT terminal since beat_0281 (the cut). It ends the NEXT release now; when that
+# release opens Sabin's door it turns terminal = true back on and retires card Y2, the 0.2.6 end card. ──
 # ⚠️ NO APOSTROPHE IN terminal_text (SugarCube source-byte escaping). Places re-read at beat_0273: the guard 23-05 at
 # the cell, the technician late in the lab 22-24, Sabin in his study 18-21, the keeper in the records room 21-02.
 [[quest_cards]]
 priority   = 10
 text       = "You know what he wants and why. His wife died in his first transfer, into a body with nothing in it, and he put her death on Cain. Second Life is a body that feels, built out of you, for him to live in. He does not know a transfer can be survived. You do."
-tip        = "That is where this build ends. The vault, the line and the way out are the next release. Inside, the tests still come every morning, and the guard, the technician, Sabin and the keeper are all yours at their hours. If you want the next part sooner, Support Us in the sidebar."
-terminal      = true
-terminal_text = "Chapter complete. The story continues in the next release"
+tip        = "The vault, the line and the way out come after this. Inside, the tests still come every morning, and the guard, the technician, Sabin and the keeper are all yours at their hours. If you want the next part sooner, Support Us in the sidebar."
 when = [
   { flag = "wife_file_read", op = "is_true" },
 ]

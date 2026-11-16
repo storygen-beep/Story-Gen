@@ -390,6 +390,20 @@ for k, nid in enumerate(LINKS):
               f"0280c: link {k + 1} needs his corruption {TT[k]}")
         check(k == 0 or has(ci, type="time_of_day", start_time="21:00", end_time="23:59"),
               f"0280c: link {k + 1} opens only inside his hours (a run past midnight is not the next night)")
+# ── 0281, THE CUT: 0.2.6 ends at the technician's first drain; Sabin's door is the next release
+G = dict(type="trait", subject="player", trait_key="next_release_open", operator="gte", value=1)
+check(G in items(locs["sabin_study"].get("entry_conditions")), "0281: Sabin's study is shut on next_release_open")
+check(has(items(trig("hub_sabin_study")["conditions"]), **G), "0281: Sabin's hub is shut on next_release_open")
+check(traits.get("next_release_open") == 0, "0281: next_release_open starts at 0")
+setters = [cid for cid, cv in canv.items() if not cid.startswith("dev_") for d in walk(cv, [])
+           for e in (d.get("effects") or []) if isinstance(e, dict) and e.get("trait") == "next_release_open"]
+check(not setters, f"0281: nothing in 0.2.6 opens the next release ({setters})")
+endc = [c for c in story if c.get("terminal") and {"trait": "tech_drains_done", "subject": "player", "op": "gte", "value": 1} in c.get("when", [])]
+check(len(endc) == 1 and {"trait": "next_release_open", "subject": "player", "op": "lt", "value": 1} in endc[0].get("when", [])
+      and "'" not in endc[0].get("terminal_text", ""), "0281: one 0.2.6 end card at the technician's drain, off once the next release opens")
+for c in story:
+    if any(w.get("trait") == "study_door" and w.get("op") == "gte" for w in c.get("when", [])):
+        check({"trait": "next_release_open", "subject": "player", "op": "gte", "value": 1} in c["when"], "0281: Sabin's story card waits for the next release")
 # 0279: every test wears on the technician, +2
 gw = [c for cid, cv in canv.items() for n in cv.get("nodes", []) for c in choices(n) if c.get("text") == "Go with them."]
 check(len(gw) == 10 and all(any(e.get("npcId") == "npc_technician" and e.get("trait") == "corruption" and e.get("value") == 2
@@ -500,7 +514,10 @@ check(sets("cap_the_wifes_file", "wife_file_read"), "0273: sets wife_file_read")
 ft = text_of(canv.get("cap_the_wifes_file"))
 check("subject did not survive transfer" in ft and "Cain" in ft and "A. Vance" in ft, "0273: what the file says")
 terms = [c for c in story if c.get("terminal")]
-check(len(terms) == 1 and terms[0].get("when") == [{"flag": "wife_file_read", "op": "is_true"}], "0273: end card AB is the only terminal story card")
+check(len(terms) == 1 and {"trait": "tech_drains_done", "subject": "player", "op": "gte", "value": 1} in terms[0].get("when", []),
+      "0273/0281: the 0.2.6 end card (the technician's drain) is the only terminal story card")
+check(any(c.get("when") == [{"flag": "wife_file_read", "op": "is_true"}] and not c.get("terminal") for c in story),
+      "0281: card AB waits for the next release, not terminal")
 if terms:
     check("'" not in terms[0].get("terminal_text", ""), "0273: no apostrophe in terminal_text")
 leak = [c.get("npc_id") for c in cards if c.get("npc_id") and {"flag": "in_vega", "op": "is_false"} in c.get("when", [])
@@ -532,10 +549,11 @@ steps = [("0.2.5 ended", {}), ("Cain taken", {"cain_taken": True}), ("offer made
 inside = {"cain_taken": True, "offer_made": True, "in_custody": True}
 steps += [("going in", inside), ("inside", {**inside, "chairman_met": True}),
           ("lab open", {**inside, "chairman_met": True, "lab_door": 1}),
-          ("study open", {**inside, "chairman_met": True, "lab_door": 1, "study_door": 1}),
-          ("records open", {**inside, "chairman_met": True, "lab_door": 1, "study_door": 1, "records_door": 1}),
-          ("keeper drained", {**inside, "chairman_met": True, "lab_door": 1, "study_door": 1, "records_door": 1, "keeper_drains_done": 1}),
-          ("the end", {**inside, "chairman_met": True, "lab_door": 1, "study_door": 1, "records_door": 1, "keeper_drains_done": 1, "wife_file_read": True})]
+          ("0.2.6 ends", {**inside, "chairman_met": True, "lab_door": 1, "study_door": 1, "tech_drains_done": 1}),
+          ("study open", {**inside, "chairman_met": True, "lab_door": 1, "study_door": 1, "tech_drains_done": 1, "next_release_open": 1}),
+          ("records open", {**inside, "chairman_met": True, "lab_door": 1, "study_door": 1, "tech_drains_done": 1, "next_release_open": 1, "records_door": 1}),
+          ("keeper drained", {**inside, "chairman_met": True, "lab_door": 1, "study_door": 1, "tech_drains_done": 1, "next_release_open": 1, "records_door": 1, "keeper_drains_done": 1}),
+          ("the end", {**inside, "chairman_met": True, "lab_door": 1, "study_door": 1, "tech_drains_done": 1, "next_release_open": 1, "records_door": 1, "keeper_drains_done": 1, "wife_file_read": True})]
 for name, extra in steps:
     got = live_story({**base, **extra})
     ok1 = len(got) == 1 or (name in ("going in", "keeper drained") and len(got) <= 1)

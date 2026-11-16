@@ -453,6 +453,14 @@ def main():
                             "Wipe your hand on his coat.", "Wipe your mouth."], "tech_drains_done", "Take the code.")
         ok(tr("study_door") == 1, f"the technician is drained and Sabin's door opens ({d} nights, {n} runs)")
         print(f"TECHNICIAN CHAIN: {d} nights, {n} runs to the first drain")
+        # 0281, the cut: 0.2.6 ends here. The code is hers, Sabin's door stays shut, the end card shows.
+        qt = play("QuestsPage")
+        ok("That is where this build ends" in qt and "Sabin's door and what is behind it" in qt and qt.count("Chapter complete") == 1,
+           "0281: the 0.2.6 end card after the technician's drain, once")
+        ok("Sabin's Study is off the floor" not in qt and "Let him see you" not in qt, "0281: no Sabin card in 0.2.6")
+        play("Location_test_lab")  # back out of the Quests page the way its return link does, so the next arrival counts
+        # the rest of this run is the NEXT release's content: open the gate the way it will, and keep testing it
+        setv("next_release_open", 1)
         d, n = grind("Sabin", "npc_sabin", "Canvas_hub_sabin_study_Node_base", 18, 0, "sabin_step",
                      ["Let him see you.", "Ask him about his work.", "Pose for him.", "Touch yourself on his bench.", "Tell him what it is.",
                       "Take him in your hand.", "Go down on him.", "Clear his plans."], [0, 25, 35, 45, 55, 65, 77, 90],
@@ -478,7 +486,7 @@ def main():
         click("Close the file.")
         ok(flag("wife_file_read"), "wife_file_read")
         qt = play("QuestsPage")
-        ok(qt.count("Chapter complete") == 1 and "That is where this build ends" in qt, "end card AB, once")
+        ok("The vault, the line and the way out" in qt, "end card AB (the next release's), once the gate is open")
         ok("&#x27;" not in qt, "no escaped apostrophes")
         b.close()
     ok(not errs, f"js errors {errs[:3]}")

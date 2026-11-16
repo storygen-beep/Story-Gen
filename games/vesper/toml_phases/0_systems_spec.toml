@@ -848,6 +848,9 @@ hidden = true
 key    = "records_door"
 hidden = true
 [[traits.labels]]
+key    = "next_release_open"
+hidden = true
+[[traits.labels]]
 key    = "vega_cell"
 label  = "Vega's cell"
 hidden = true
