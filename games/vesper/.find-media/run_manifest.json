@@ -4565,5 +4565,29 @@
     "options": 155,
     "queries": 4,
     "date": "2026-11-16"
+  },
+  {
+    "slot": "chairman.jpg",
+    "generator": "v3",
+    "status": "shelf_ready",
+    "options": 270,
+    "queries": 3,
+    "date": "2026-11-16"
+  },
+  {
+    "slot": "guard.jpg",
+    "generator": "v3",
+    "status": "shelf_ready",
+    "options": 272,
+    "queries": 4,
+    "date": "2026-11-16"
+  },
+  {
+    "slot": "technician.jpg",
+    "generator": "v3",
+    "status": "shelf_ready",
+    "options": 246,
+    "queries": 4,
+    "date": "2026-11-16"
   }
 ]
