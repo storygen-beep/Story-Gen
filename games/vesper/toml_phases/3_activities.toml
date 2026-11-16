@@ -6664,7 +6664,6 @@ time_progression_minutes = 420
 id   = "pain"
 name = "Pain"
 blocks = [
-  { type = "image", props = { file = "scenes/test_pain.jpg", description = "A naked woman strapped down on a clinical table flinching hard, eyes squeezed shut, a technician beside her adjusting a dial on a machine, monitor lines spiking.", search_queries = ["strapped woman flinching clinical table monitor spike", "restrained woman pain test lab technician dial"] } },
   { type = "paragraph", content = "The straps again, and a new machine with two leads that clip onto her nipples and one that goes inside her. The technician turns a dial." },
   { type = "dialog", props = { speaker = "npc", npcId = "npc_technician" }, content = "This one hurts. I'm telling you because the readings are better if you know it's coming." },
   { type = "dialog", props = { speaker = "player" }, content = "Is that supposed to be kind?" },

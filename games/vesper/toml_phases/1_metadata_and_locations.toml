@@ -430,6 +430,11 @@ sabin_custody_drains = 0
 keeper_drains_done   = 0
 study_door           = 0
 records_door         = 0
+# beat_0281, THE CUT (LO 2026-11-15): 0.2.6 ships with the guard and the technician; Sabin and the keeper are the next
+# release. Nothing sets next_release_open in 0.2.6. Sabin's study and his hub read it, so his door stays shut even
+# after the technician's drain hands her the code (study_door 1, kept so saves carry it forward). The next release
+# deletes those two gates and the 0.2.6 end card, and the climb goes on from the code she already holds.
+next_release_open    = 0
 
 # ─── Daily decay (engine-applied at every day rollover) ───────────────────────
 # advanceDay subtracts each value from its trait and floors at 0 (v2.py:5532-5544); parsed at
@@ -2139,8 +2144,9 @@ image_search_queries = ["cluttered engineer study blueprints desk lamp night", "
 entry_from  = "holding_floor"
 entry_conditions = { version = "1.0", items = [
   { type = "trait", subject = "player", trait_key = "study_door", operator = "gte", value = 1 },
+  { type = "trait", subject = "player", trait_key = "next_release_open", operator = "gte", value = 1 },
 ] }
-blocked_message = "Locked. She does not have his hours yet."
+blocked_message = "Sabin's door. Locked, and it stays locked for now."
 
 [[locations]]
 id          = "records_room"

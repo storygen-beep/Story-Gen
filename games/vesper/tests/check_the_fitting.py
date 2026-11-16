@@ -368,8 +368,8 @@ terms = [c for c in story if c.get("terminal")]
 # as O became S here. 0.2.6's own end card (AB, when wife_file_read) is the only terminal story card from beat_0273.
 check(any(c.get("when") == [{"flag": "more_coming", "op": "is_true"}, {"flag": "cain_taken", "op": "is_false"}]
           and not c.get("terminal") for c in story), "0260/0264: card U is live from the end of 0.2.5 until cain_taken")
-check(len(terms) <= 1 and all({"flag": "wife_file_read", "op": "is_true"} in t.get("when", []) for t in terms),
-      "0260/0273: the only terminal story card is 0.2.6's end card")
+check(len(terms) <= 1 and all({"trait": "tech_drains_done", "subject": "player", "op": "gte", "value": 1} in t.get("when", []) for t in terms),
+      "0260/0273/0281: the only terminal story card is 0.2.6's end card (at the technician's drain since the cut)")
 if terms:
     check("'" not in terms[0].get("terminal_text", ""), "0260: no apostrophe in terminal_text")
 # The story cards are exclusive across the chapter: exactly one live in each state.

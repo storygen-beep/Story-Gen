@@ -1242,3 +1242,11 @@ going as far as he allows is the grind. One new link opens a night, and only dur
 21:00 to 23:59 so three runs fit. Links already open stay open on every run. Her hand and her mouth stop him just
 before he comes when the next link is open to her; otherwise he comes. After the first fuck the table goes straight
 to the repeat loop. Measured live: seven nights and nineteen runs to the first drain. Sabin gets the same shape next.
+
+## The cut (beat 0281, LO 2026-11-15)
+
+0.2.6 ships with the guard and the technician. Sabin and the keeper move to the next release, which also lets that
+release rebuild both of them as chains like the technician's. The technician's first drain still gives her the code
+to Sabin's door, and this release ends there: a new end card says the code is in her hand and Sabin's door is the
+next release. His door stays locked behind a hidden trait, next_release_open, that nothing in 0.2.6 sets. The next
+release removes that lock and turns the wife's-file card back into the end card.
