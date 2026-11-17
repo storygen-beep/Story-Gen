@@ -26058,14 +26058,108 @@ blocks = [
   { type = "dialog", props = { speaker = "npc", npcId = "npc_chairman" }, content = "They'll take you down now. Try to be useful." },
 ]
 [canvases.nodes.exit_block]
+type = "choices"
+# ⚠️ beat 0283 (LO 2026-11-17): THE SPIRE TAKES HER CLOTHES AND HER FACE. Before this beat she went into custody in
+# whatever she had on at Mercer's (a cover, the Undertow dress, the bought face) and stayed in it for the whole
+# chapter, because the wardrobe and the face both live at the cot and the cot is out of reach in custody. The
+# custody prose says "the grey shift they put her in" and "nothing under it", so the sidebar portrait and the prose
+# disagreed. The outfit is remembered first (remember_outfit), so the next release can give it back with
+# restore_outfit when she gets out; nothing leaves her wardrobe. outfit_taken marks it done, and custody_outfit_heal
+# (below) does the same once for a save that was already inside before this beat.
+# ⚠️ The wardrobe change rides the CHOICE (on click), the face comes off on the intake node's exit, AFTER its blocks
+# render, so the face_worn group in the intake prose still reads the face she walked in with.
+[[canvases.nodes.exit_block.choices]]
+text       = "Go down with them."
+targetType = "node"
+nodeId     = "cap_chairman_talk.intake"
+wardrobeEffects = [
+  { action = "remember_outfit" },
+  { action = "equip",   item_id = "company_grays" },
+  { action = "unequip", item_id = "plain_bra" },
+  { action = "unequip", item_id = "plain_briefs" },
+  { action = "unequip", item_id = "flat_shoes" },
+]
+flagEffects = [
+  { targetType = "player", flag = "outfit_taken", op = "set" },
+]
+
+[[canvases.nodes]]
+id   = "intake"
+name = "Intake"
+blocks = [
+  { type = "paragraph", content = "Two floors down there is a white room with a drain in the floor. A woman in company grey strips her to the skin, every piece, and bags everything she came in with. She does not look at her body. She looks at the seams." },
+  { type = "group", props = { conditions = { version = "1.0", logic = "AND", items = [
+      { type = "flag", subject = "player", flag_key = "face_worn", operator = "is_true" },
+    ] } }, blocks = [
+    { type = "paragraph", content = "Then a cold wet cloth across her face, hard, again and again, until the bought face comes off in grey smears and it is only Wren in the steel mirror." },
+    { type = "thought_bubble", props = { speaker = "player" }, content = "Twenty minutes to put on, a minute to take off. They took it in less." },
+  ] },
+  { type = "paragraph", content = "A grey company shift over her head, nothing under it, bare feet on the cold floor. It is what she wore every day of her first two years. It still fits." },
+]
+[canvases.nodes.exit_block]
 type = "location"
-text = "Go down with them."
+text = "Into the cell."
 [canvases.nodes.exit_block.config]
 destinationType          = "specific"
 locationId               = "holding_cell"
 time_progression_minutes = 120
 flagEffects = [
   { targetType = "player", flag = "chairman_met", op = "set" },
+  { targetType = "player", flag = "face_worn",    op = "unset" },
+]
+
+# ── custody_outfit_heal — beat 0283. The save fix for a player who went in before the Spire took her clothes. ──
+# Auto-fire @holding_cell, pri 12, ONE-SHOT, gated in_custody + chairman_met + outfit_taken is_false. A save that went
+# through cap_chairman_talk.intake has outfit_taken set and never sees this. A save that was already inside when the
+# intake was written (LO's own phone save among them) gets the same change once, as a short scene at her glass, the
+# next time she is in her cell. Same wardrobe effects as the intake choice; idempotent, so nothing breaks if a save
+# is already in the grays. No requires_npc: the woman at the glass has no row, the arrival is the presence.
+[[canvases]]
+id          = "custody_outfit_heal"
+name        = "Intake"
+description = "beat_0283 (0.2.6). Save fix. Auto-fire @holding_cell, pri 12, one-shot, gated in_custody + chairman_met + outfit_taken is_false. A woman in company grey takes what she came in with and the bought face, and puts her in the grey shift. remember_outfit, equip company_grays, unequip bra/briefs/flats; sets outfit_taken, unsets face_worn on click."
+[canvases.trigger]
+location      = "holding_cell"
+is_repeatable = false
+priority      = 12
+is_active     = true
+conditions = { version = "1.0", logic = "AND", items = [
+  { type = "flag", subject = "player", flag_key = "in_custody",   operator = "is_true"  },
+  { type = "flag", subject = "player", flag_key = "chairman_met", operator = "is_true"  },
+  { type = "flag", subject = "player", flag_key = "outfit_taken", operator = "is_false" },
+] }
+
+[[canvases.nodes]]
+id   = "base"
+name = "Intake"
+blocks = [
+  { type = "paragraph", content = "The glass opens and a woman in company grey comes in with a folded shift over her arm and a bag in her other hand." },
+  { type = "paragraph", content = "\"Intake missed you,\" she says. \"In here everyone wears the grey.\"" },
+  { type = "paragraph", content = "She strips her to the skin, every piece, and bags everything she came in with. She does not look at her body. She looks at the seams." },
+  { type = "group", props = { conditions = { version = "1.0", logic = "AND", items = [
+      { type = "flag", subject = "player", flag_key = "face_worn", operator = "is_true" },
+    ] } }, blocks = [
+    { type = "paragraph", content = "Then a cold wet cloth across her face, hard, again and again, until the bought face comes off in grey smears and it is only Wren in the glass." },
+  ] },
+  { type = "paragraph", content = "A grey company shift over her head, nothing under it, bare feet on the cold floor. It is what she wore every day of her first two years. It still fits." },
+]
+[canvases.nodes.exit_block]
+type = "choices"
+[[canvases.nodes.exit_block.choices]]
+text       = "Let her take it."
+targetType = "location"
+locationId = "holding_cell"
+time_progression_minutes = 10
+wardrobeEffects = [
+  { action = "remember_outfit" },
+  { action = "equip",   item_id = "company_grays" },
+  { action = "unequip", item_id = "plain_bra" },
+  { action = "unequip", item_id = "plain_briefs" },
+  { action = "unequip", item_id = "flat_shoes" },
+]
+flagEffects = [
+  { targetType = "player", flag = "outfit_taken", op = "set" },
+  { targetType = "player", flag = "face_worn",    op = "unset" },
 ]
 
 # ══ 0.2.6 part four — MERCER'S END (beat_0268). design_the_offer.md part four, agreed "Yess": reported, not shown. ══
@@ -30242,12 +30336,14 @@ when = [
 ]
 
 # ── The guard's cards. beat_0278 (the REWORK): one card per step, each naming what moves him now. ──
-# His climb is his corruption (her teases) plus one step a calendar day. The goal rows read his corruption the way
-# Renner's ladder does (the shipped tease-grind pattern, 5_scenes.toml Renner cards). Exclusive on guard_step.
+# His climb is his corruption (her teases) plus one step a calendar day. Each step card carries three goal rows: his
+# corruption (counted), the day since the last step (guard_day), and the step itself. The step row stays unmet until
+# she takes it, so the "To advance" block never goes blank while she waits on him or on the day (a met-only goal
+# block renders empty, v2.py renderQuestsGoalBlock Frame 3; beat 0282). Exclusive on guard_step.
 [[quest_cards]]
 npc_id     = "npc_guard"
 priority   = 9
-text       = "Your keeper. He sits at his desk outside your glass, day and night, and he has been told you are a machine. He watches you like a man who knows better."
+text       = "Your guard. He sits at his desk outside your glass, day and night, and he has been told you are a machine. He watches you like a man who knows better."
 tip        = "Go out to his desk, the Post, and let him watch you at the glass. That is the first step. After it, one step a day, and only once he wants it badly enough: tease him to make him want it."
 when = [
   { flag = "in_vega", op = "is_false" },
@@ -30271,6 +30367,8 @@ when = [
 ]
 goals = [
   { trait = "corruption", subject = "npc", npc_id = "npc_guard", op = "gte", value = 20, label = "Make him want to come in: tease him" },
+  { days_since_flag = "guard_day", op = "gte", value = 1, label = "A day since the last step" },
+  { trait = "guard_step", subject = "player", op = "gte", value = 2, label = "Let him in (at the Post)" },
 ]
 
 [[quest_cards]]
@@ -30286,6 +30384,8 @@ when = [
 ]
 goals = [
   { trait = "corruption", subject = "npc", npc_id = "npc_guard", op = "gte", value = 45, label = "Get him to open his belt: tease him" },
+  { days_since_flag = "guard_day", op = "gte", value = 1, label = "A day since the last step" },
+  { trait = "guard_step", subject = "player", op = "gte", value = 3, label = "Get on your knees for him (at the Post)" },
 ]
 
 [[quest_cards]]
@@ -30301,6 +30401,8 @@ when = [
 ]
 goals = [
   { trait = "corruption", subject = "npc", npc_id = "npc_guard", op = "gte", value = 70, label = "Make him take you: tease him" },
+  { days_since_flag = "guard_day", op = "gte", value = 1, label = "A day since the last step" },
+  { trait = "guard_step", subject = "player", op = "gte", value = 4, label = "Let him have you (at the Post)" },
 ]
 
 [[quest_cards]]
@@ -30342,14 +30444,18 @@ when = [
 ]
 
 # ── The technician's cards. beat_0270 (0.2.6), the chain since beat_0280c. ──
+# Beat 0282: the first card waits on lab_door (the lab is shut until the guard's drain), and each step card carries
+# his corruption, the night since the last link (tech_day) and the link itself, so the goal block never goes blank:
+# his corruption runs ahead of every threshold (+3 a link, +2 a test), which left it empty for the whole climb.
 [[quest_cards]]
 npc_id     = "npc_technician"
 priority   = 9
 text       = "He tests you every day and tells himself you are a machine, because then nothing he does to you counts."
-tip        = "Late at night, nine to midnight, he is alone in the Test Lab, once the guard has given you the lab. Get on his table and undress for him. After that, one new step a night, and only once he wants it badly enough."
+tip        = "Late at night, nine to midnight, he is alone in the Test Lab. Get on his table and undress for him. After that, one new step a night, and only once he wants it badly enough."
 when = [
   { flag = "in_vega", op = "is_false" },
   { flag = "in_custody", op = "is_true" },
+  { trait = "lab_door", subject = "player", op = "gte", value = 1 },
   { trait = "tech_step", subject = "player", op = "lt", value = 1 },
 ]
 goals = [
@@ -30369,6 +30475,8 @@ when = [
 ]
 goals = [
   { trait = "corruption", subject = "npc", npc_id = "npc_technician", op = "gte", value = 15, label = "Make him want to watch you" },
+  { days_since_flag = "tech_day", op = "gte", value = 1, label = "A night since the last step" },
+  { trait = "tech_step", subject = "player", op = "gte", value = 2, label = "Touch yourself for him (on his table)" },
 ]
 
 [[quest_cards]]
@@ -30384,6 +30492,8 @@ when = [
 ]
 goals = [
   { trait = "corruption", subject = "npc", npc_id = "npc_technician", op = "gte", value = 30, label = "Make him want to touch you" },
+  { days_since_flag = "tech_day", op = "gte", value = 1, label = "A night since the last step" },
+  { trait = "tech_step", subject = "player", op = "gte", value = 3, label = "Let him put his fingers in you (on his table)" },
 ]
 
 [[quest_cards]]
@@ -30399,6 +30509,8 @@ when = [
 ]
 goals = [
   { trait = "corruption", subject = "npc", npc_id = "npc_technician", op = "gte", value = 45, label = "Make him want to taste you" },
+  { days_since_flag = "tech_day", op = "gte", value = 1, label = "A night since the last step" },
+  { trait = "tech_step", subject = "player", op = "gte", value = 4, label = "Let him put his mouth on your clit (on his table)" },
 ]
 
 [[quest_cards]]
@@ -30414,6 +30526,8 @@ when = [
 ]
 goals = [
   { trait = "corruption", subject = "npc", npc_id = "npc_technician", op = "gte", value = 60, label = "Get your hand on him" },
+  { days_since_flag = "tech_day", op = "gte", value = 1, label = "A night since the last step" },
+  { trait = "tech_step", subject = "player", op = "gte", value = 5, label = "Take him in your hand (on his table)" },
 ]
 
 [[quest_cards]]
@@ -30429,6 +30543,8 @@ when = [
 ]
 goals = [
   { trait = "corruption", subject = "npc", npc_id = "npc_technician", op = "gte", value = 75, label = "Get your mouth on him" },
+  { days_since_flag = "tech_day", op = "gte", value = 1, label = "A night since the last step" },
+  { trait = "tech_step", subject = "player", op = "gte", value = 6, label = "Take him in your mouth (on his table)" },
 ]
 
 [[quest_cards]]
@@ -30444,6 +30560,8 @@ when = [
 ]
 goals = [
   { trait = "corruption", subject = "npc", npc_id = "npc_technician", op = "gte", value = 90, label = "Make him take you" },
+  { days_since_flag = "tech_day", op = "gte", value = 1, label = "A night since the last step" },
+  { trait = "tech_step", subject = "player", op = "gte", value = 7, label = "Let him fuck you (on his table)" },
 ]
 
 [[quest_cards]]
@@ -30463,7 +30581,7 @@ goals = [
 [[quest_cards]]
 npc_id     = "npc_technician"
 priority   = 9
-text       = "He says your name now. He gave you the records and the code to Sabin's door."
+text       = "He says your name now. He gave you the code to Sabin's door."
 tip        = "He is still in the Test Lab late at night, nine to midnight, if you want him."
 terminal      = true
 terminal_text = "He says her name."
