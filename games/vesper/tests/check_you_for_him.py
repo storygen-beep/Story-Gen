@@ -252,7 +252,7 @@ check("activity_cell_sleep" in canv and "activity_cell_wait" in canv, "0267/0268
 cot = canv.get("activity_cell_sleep") or {}
 check(not trig("activity_cell_sleep").get("schedules"), "0279a: the cot card shows at every hour (no card schedule)")
 cot_ch = {c.get("text"): c for c in choices(node(cot, "base"))}
-rough = cot_ch.get("Lie down a couple of hours. (Half a charge.)") or {}
+rough = cot_ch.get("Lie down a couple of hours. (+40 Charge.)") or {}
 night = cot_ch.get("Sleep the night. (Full charge.)") or {}
 check(any(e.get("trait") == "energy" and e.get("value") == 40 for e in rough.get("effects", [])), "0279a: the rough tier gives +40")
 check(not rough.get("conditions"), "0279a: the rough tier is open at any hour")

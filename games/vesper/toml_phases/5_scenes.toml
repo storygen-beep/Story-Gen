@@ -6448,7 +6448,7 @@ id   = "answer"
 name = "Mercer"
 blocks = [
   { type = "paragraph", content = "He puts the glass down. For once he isn't performing anything. He just wants it." },
-  { type = "dialog", props = { speaker = "npc", npcId = "npc_mercer" }, content = "You walk out of here with me, tonight. They let him go the hour you're inside. That's the deal, and it's the only one there is." },
+  { type = "dialog", props = { speaker = "npc", npcId = "npc_mercer" }, content = "You walk out of here with me, now. They let him go the hour you're inside. That's the deal, and it's the only one there is." },
   { type = "dialog", props = { speaker = "player" }, content = "And you get your floor back." },
   { type = "dialog", props = { speaker = "npc", npcId = "npc_mercer" }, content = "I get my floor back. I won't lie to you about that. I've never once lied to you, Wren. I never had to." },
   { type = "thought_bubble", props = { speaker = "player" }, content = "No plan. No trick. Me, for him. That's all I've got to give, so that's what I'm giving." },
@@ -25889,9 +25889,9 @@ id   = "base"
 name = "Nobody comes"
 blocks = [
   { type = "image", props = { file = "scenes/strip_nobody_came.jpg", description = "A crowded neon underworld market street at night, a lone young woman standing tense in the middle of it looking back over her shoulder, nobody coming for her.", search_queries = ["woman alone tense crowded neon street night looking back", "cyberpunk market street night woman standing still crowd"] } },
-  { type = "paragraph", content = "She walks the strip the way she has walked it every night since the first loss: slow, blade arm loose, ready to run. Every doorway. Every gap in the crowd." },
+  { type = "paragraph", content = "She walks the strip the way she has walked it since the first loss: slow, blade arm loose, ready to run. Every doorway. Every gap in the crowd." },
   { type = "paragraph", content = "Nobody steps out. She walks it to the end and back. Nothing. The crowd stays a crowd." },
-  { type = "thought_bubble", props = { speaker = "player" }, content = "They come every night. Every single night. If they're not here for me, they're somewhere else, for someone else." },
+  { type = "thought_bubble", props = { speaker = "player" }, content = "They could come any night. Tonight they don't. If they're not here for me, they're somewhere else, for someone else." },
   { type = "paragraph", content = "There is only one person they would want more than her. She is already running." },
 ]
 [canvases.nodes.exit_block]
@@ -25980,9 +25980,9 @@ name = "Mercer"
 blocks = [
   { type = "image", props = { file = "scenes/mercer_offer.jpg", description = "A man in a good dark coat standing in the doorway of a cramped underground bunk room in morning light, a young woman sitting up on a cot looking at him.", search_queries = ["man in dark coat standing in doorway woman on cot morning", "well dressed man at door of shabby room woman sitting on bed"] } },
   { type = "paragraph", content = "Morning, and somebody is standing in the door of the cot. A good coat, clean shoes on the steel floor of the Berth. Mercer." },
-  { type = "dialog", props = { speaker = "npc", npcId = "npc_mercer" }, content = "Don't get up. I'm not here to take anything. I'm here to carry a message, and you're going to hate it." },
+  { type = "dialog", props = { speaker = "npc", npcId = "npc_mercer" }, content = "Hear me out. I'm not here to take anything. I'm here to carry a message, and you're going to hate it." },
   { type = "dialog", props = { speaker = "player" }, content = "Where is he." },
-  { type = "dialog", props = { speaker = "npc", npcId = "npc_mercer" }, content = "Alive. Up the Rise, in a room with no handle on the inside. They came to my stall last night. They knew my new name. They knew everything. And they gave me a job." },
+  { type = "dialog", props = { speaker = "npc", npcId = "npc_mercer" }, content = "Alive. Up the Rise, in a room with no handle on the inside. They came to my stall. They knew my new name. They knew everything. And they gave me a job." },
   { type = "dialog", props = { speaker = "npc", npcId = "npc_mercer" }, content = "You, for him. You walk in, he walks out. That's the whole of it." },
   { type = "thought_bubble", props = { speaker = "player" }, content = "He's dressed for the Spire. He's already halfway back up there in his head." },
   { type = "dialog", props = { speaker = "player" }, content = "And what do you get?" },
@@ -26117,7 +26117,7 @@ flagEffects = [
 [[canvases]]
 id          = "custody_outfit_heal"
 name        = "Intake"
-description = "beat_0283 (0.2.6). Save fix. Auto-fire @holding_cell, pri 12, one-shot, gated in_custody + chairman_met + outfit_taken is_false. A woman in company grey takes what she came in with and the bought face, and puts her in the grey shift. remember_outfit, equip company_grays, unequip bra/briefs/flats; sets outfit_taken, unsets face_worn on click."
+description = "beat_0283 (0.2.6). Save fix. Auto-fire @holding_cell, pri 12, one-shot, gated in_custody + chairman_met + outfit_taken is_false. A woman in company grey takes what she came in with and the bought face, and puts her in the grey shift. The choice carries remember_outfit, equip company_grays, unequip bra/briefs/flats and sets outfit_taken; the done node narrates it and unsets face_worn on its exit."
 [canvases.trigger]
 location      = "holding_cell"
 is_repeatable = false
@@ -26135,21 +26135,13 @@ name = "Intake"
 blocks = [
   { type = "paragraph", content = "The glass opens and a woman in company grey comes in with a folded shift over her arm and a bag in her other hand." },
   { type = "paragraph", content = "\"Intake missed you,\" she says. \"In here everyone wears the grey.\"" },
-  { type = "paragraph", content = "She strips her to the skin, every piece, and bags everything she came in with. She does not look at her body. She looks at the seams." },
-  { type = "group", props = { conditions = { version = "1.0", logic = "AND", items = [
-      { type = "flag", subject = "player", flag_key = "face_worn", operator = "is_true" },
-    ] } }, blocks = [
-    { type = "paragraph", content = "Then a cold wet cloth across her face, hard, again and again, until the bought face comes off in grey smears and it is only Wren in the glass." },
-  ] },
-  { type = "paragraph", content = "A grey company shift over her head, nothing under it, bare feet on the cold floor. It is what she wore every day of her first two years. It still fits." },
 ]
 [canvases.nodes.exit_block]
 type = "choices"
 [[canvases.nodes.exit_block.choices]]
 text       = "Let her take it."
-targetType = "location"
-locationId = "holding_cell"
-time_progression_minutes = 10
+targetType = "node"
+nodeId     = "custody_outfit_heal.done"
 wardrobeEffects = [
   { action = "remember_outfit" },
   { action = "equip",   item_id = "company_grays" },
@@ -26159,7 +26151,32 @@ wardrobeEffects = [
 ]
 flagEffects = [
   { targetType = "player", flag = "outfit_taken", op = "set" },
-  { targetType = "player", flag = "face_worn",    op = "unset" },
+]
+
+# The wardrobe change rides the choice above, so the sidebar shows the grays while this node is read; the face
+# comes off on this node's exit, after its blocks render, so the face_worn group still reads the face she had on.
+[[canvases.nodes]]
+id   = "done"
+name = "Intake"
+blocks = [
+  { type = "paragraph", content = "She strips her to the skin, every piece, and bags everything she came in with. She does not look at her body. She looks at the seams." },
+  { type = "group", props = { conditions = { version = "1.0", logic = "AND", items = [
+      { type = "flag", subject = "player", flag_key = "face_worn", operator = "is_true" },
+    ] } }, blocks = [
+    { type = "paragraph", content = "Then a cold wet cloth across her face, hard, again and again, until the bought face comes off in grey smears and it is only Wren in the glass." },
+  ] },
+  { type = "paragraph", content = "A grey company shift over her head, nothing under it, bare feet on the cold floor. It is what she wore every day of her first two years. It still fits." },
+  { type = "paragraph", content = "She goes with the bag. Out past the glass, the man at the desk looks up from his screen and takes his time over what the grey does not cover." },
+]
+[canvases.nodes.exit_block]
+type = "location"
+text = "Back into the cell."
+[canvases.nodes.exit_block.config]
+destinationType          = "specific"
+locationId               = "holding_cell"
+time_progression_minutes = 10
+flagEffects = [
+  { targetType = "player", flag = "face_worn", op = "unset" },
 ]
 
 # ══ 0.2.6 part four — MERCER'S END (beat_0268). design_the_offer.md part four, agreed "Yess": reported, not shown. ══
@@ -26190,7 +26207,7 @@ id   = "base"
 name = "Mercer"
 blocks = [
   { type = "image", props = { file = "scenes/mercer_last_visit.gif", description = "A man in an expensive suit standing on the other side of a glass cell wall at night, smiling, a naked young woman sitting on a cot inside looking back at him.", search_queries = ["man in suit outside glass cell woman inside night", "businessman looking through glass wall at woman on bed"] } },
-  { type = "paragraph", content = "The glass slides back at eight and it is not the guard. It is Mercer, in a suit she has not seen since the penthouse, shaved, pressed, a man with a floor under him again." },
+  { type = "paragraph", content = "The glass slides back after dark and it is not the guard. It is Mercer, in a suit she has not seen since the penthouse, shaved, pressed, a man with a floor under him again." },
   { type = "dialog", props = { speaker = "npc", npcId = "npc_mercer" }, content = "Look at me. Look at this. Top of the tower, my own lift, my name on the door. I wanted you to see it. You're the only one left who knew me before." },
   { type = "dialog", props = { speaker = "player" }, content = "You came down here to show me your suit." },
   { type = "dialog", props = { speaker = "npc", npcId = "npc_mercer" }, content = "I came down here for you. Like before. One more time, the way it used to be, and then I'm going back up and I'm never coming down again." },
@@ -26285,7 +26302,7 @@ conditions = { version = "1.0", logic = "AND", items = [
 id   = "base"
 name = "The Guard"
 blocks = [
-  { type = "paragraph", content = "The guard is in his chair at the desk with his feet up. He looks at her the way he always looks at her, then at his paper." },
+  { type = "paragraph", content = "The guard is in his chair at the desk with his feet up. He looks her up and down, slow, the way he does when he thinks nobody is counting, then back at his paper." },
   { type = "dialog", props = { speaker = "npc", npcId = "npc_guard" }, content = "Your old owner. Went off the roof of his own building today. Forty floors. They're saying he jumped." },
   { type = "paragraph", content = "He turns a page." },
   { type = "dialog", props = { speaker = "npc", npcId = "npc_guard" }, content = "Nobody jumps the week they get their office back." },
@@ -26394,6 +26411,7 @@ blocks = [
       { type = "trait", subject = "player", trait_key = "guard_step", operator = "gte", value = 3 },
       { type = "trait", subject = "player", trait_key = "guard_step", operator = "lt", value = 4 },
       { type = "trait", subject = "npc", npc_id = "npc_guard", trait_key = "corruption", operator = "gte", value = 70 },
+      { type = "days_since_flag", subject = "player", flag_key = "guard_day", operator = "gte", value = 1 },
     ] } }, blocks = [
     { type = "paragraph", content = "He is already standing when she comes out, the key in his hand, his cock hard against his trousers." },
     { type = "dialog", props = { speaker = "npc", npcId = "npc_guard" }, content = "Inside. Now. I'm done waiting." },
@@ -26549,7 +26567,7 @@ blocks = [
   { type = "paragraph", content = "She walks up to his desk and lifts the grey shift to her chin. Nothing under it. Her tits, her belly, her bare cunt, a foot from his face." },
   { type = "dialog", props = { speaker = "npc", npcId = "npc_guard" }, content = "Put that down. There's a camera on this desk." },
   { type = "dialog", props = { speaker = "player" }, content = "Then it's getting a good look too." },
-  { type = "dialog", props = { speaker = "player" }, content = "Look all you want. It's what you've been doing for weeks." },
+  { type = "dialog", props = { speaker = "player" }, content = "Look all you want. It's what you've been doing since they brought me in." },
   { type = "paragraph", content = "She holds it there and lets him stare. His hand goes under the desk to the front of his trousers and stays there." },
   { type = "dialog", props = { speaker = "npc", npcId = "npc_guard" }, content = "You're going to get me sacked." },
   { type = "dialog", props = { speaker = "player" }, content = "Not if you're quick." },
@@ -26578,9 +26596,19 @@ blocks = [
   { type = "paragraph", content = "He gets up and stands on his side of the glass, his breath fogging it. She turns round, bends over and spreads her ass with both hands, her cunt open an inch from the glass." },
   { type = "dialog", props = { speaker = "npc", npcId = "npc_guard" }, content = "Fuck. I can see everything." },
   { type = "dialog", props = { speaker = "player" }, content = "That's the idea." },
-  { type = "dialog", props = { speaker = "player" }, content = "Look at it. That's what you're not allowed to have. Yet." },
-  { type = "dialog", props = { speaker = "npc", npcId = "npc_guard" }, content = "Yet?" },
-  { type = "dialog", props = { speaker = "player" }, content = "Yet." },
+  { type = "group", props = { conditions = { version = "1.0", logic = "AND", items = [
+      { type = "trait", subject = "player", trait_key = "guard_step", operator = "lt", value = 4 },
+    ] } }, blocks = [
+    { type = "dialog", props = { speaker = "player" }, content = "Look at it. That's what you're not allowed to have. Yet." },
+    { type = "dialog", props = { speaker = "npc", npcId = "npc_guard" }, content = "Yet?" },
+    { type = "dialog", props = { speaker = "player" }, content = "Yet." },
+  ] },
+  { type = "group", props = { conditions = { version = "1.0", logic = "AND", items = [
+      { type = "trait", subject = "player", trait_key = "guard_step", operator = "gte", value = 4 },
+    ] } }, blocks = [
+    { type = "dialog", props = { speaker = "player" }, content = "Look at it. You've had it, and you still can't stop looking." },
+    { type = "dialog", props = { speaker = "npc", npcId = "npc_guard" }, content = "Nobody could." },
+  ] },
   { type = "paragraph", content = "She stays bent over until she hears him groan through the glass, his hand rubbing his cock through his trousers." },
 ]
 [canvases.nodes.exit_block]
@@ -26634,7 +26662,16 @@ blocks = [
   { type = "dialog", props = { speaker = "npc", npcId = "npc_guard" }, content = "Keep your voice down." },
   { type = "dialog", props = { speaker = "player" }, content = "Then I want you to bend me over the cot and fuck me until I can't stand up." },
   { type = "paragraph", content = "Her hand goes under the desk and finds his cock, hard as wood in his trousers. She squeezes it once, slow, and lets go." },
-  { type = "dialog", props = { speaker = "npc", npcId = "npc_guard" }, content = "Soon. You hear me? Soon." },
+  { type = "group", props = { conditions = { version = "1.0", logic = "AND", items = [
+      { type = "trait", subject = "player", trait_key = "guard_step", operator = "lt", value = 4 },
+    ] } }, blocks = [
+    { type = "dialog", props = { speaker = "npc", npcId = "npc_guard" }, content = "Soon. You hear me? Soon." },
+  ] },
+  { type = "group", props = { conditions = { version = "1.0", logic = "AND", items = [
+      { type = "trait", subject = "player", trait_key = "guard_step", operator = "gte", value = 4 },
+    ] } }, blocks = [
+    { type = "dialog", props = { speaker = "npc", npcId = "npc_guard" }, content = "Later. You hear me? Later, and you won't walk straight after." },
+  ] },
 ]
 [canvases.nodes.exit_block]
 type = "location"
@@ -26651,7 +26688,7 @@ blocks = [
   { type = "image", props = { file = "scenes/guard_watches.gif", description = "A naked young woman standing in a white glass-walled cell at night slowly undressing, a big uniformed guard sitting in a chair on the other side of the glass watching her.", search_queries = ["woman undressing behind glass wall guard watching", "naked woman in glass cell man sitting watching night"] } },
   { type = "paragraph", content = "She goes back into her cell and stands at the glass, right in front of his desk, where he can see all of her. She takes off the grey shift they put her in. Slow. Her tits first, then her belly, then all of it on the floor." },
   { type = "dialog", props = { speaker = "npc", npcId = "npc_guard" }, content = "Hey. Hey. What are you doing?" },
-  { type = "dialog", props = { speaker = "player" }, content = "You've been looking for weeks. Look properly." },
+  { type = "dialog", props = { speaker = "player" }, content = "You've been looking since the day they brought me in. Look properly." },
   { type = "dialog", props = { speaker = "npc", npcId = "npc_guard" }, content = "Fuck me. Turn round." },
   { type = "paragraph", content = "She turns round. She bends to pick the shift up and takes her time about it, her ass to the glass, her cunt on show between her thighs." },
   { type = "dialog", props = { speaker = "npc", npcId = "npc_guard" }, content = "Do that again." },
@@ -26673,7 +26710,7 @@ id   = "rung1"
 name = "He comes in"
 blocks = [
   { type = "image", props = { file = "scenes/guard_hands_t5.gif", description = "A big uniformed guard inside a white cell standing behind a naked woman, his hands on her breasts, her eyes half closed.", search_queries = ["guard groping naked woman in cell from behind", "man in uniform hands on naked woman breasts white room"] } },
-  { type = "paragraph", content = "He makes up a reason. A count, a check, something about the drain in the floor. He unlocks the glass and comes in and does not check anything." },
+  { type = "paragraph", content = "He makes up a reason. A count, a check, something about the drain in the floor. He walks her back to her cell, unlocks the glass, comes in after her and does not check anything." },
   { type = "dialog", props = { speaker = "npc", npcId = "npc_guard" }, content = "Stand still. I have to make sure you're not hiding anything." },
   { type = "paragraph", content = "His hands go straight to her tits. Big rough hands, squeezing, his thumbs dragging over her nipples until they're hard. Then down her belly and between her legs, two fingers pushing into her cunt." },
   { type = "dialog", props = { speaker = "player" }, content = "Is this the check?" },
@@ -26683,6 +26720,7 @@ blocks = [
   { type = "dialog", props = { speaker = "npc", npcId = "npc_guard" }, content = "Christ. Christ, you're soaking." },
   { type = "dialog", props = { speaker = "player" }, content = "Then come back and do something about it." },
   { type = "dialog", props = { speaker = "player" }, content = "You've got all day." },
+  { type = "dialog", props = { speaker = "npc", npcId = "npc_guard" }, content = "The showers are yours now. Seven in the morning, when I'm on the door. Ten at night you're back in here, or I come and get you." },
 ]
 [canvases.nodes.exit_block]
 type = "location"
@@ -26698,8 +26736,8 @@ id   = "rung2"
 name = "On her knees"
 blocks = [
   { type = "video", props = { pool_dir = "sex/guard_rung_knees_t5", pool = 4, description = "A naked woman kneeling on the floor of a white cell sucking the cock of a big man in a guard uniform standing over her, the glass door open behind him. Must show: a blowjob, his uniform, the open glass door. Avoid: a bedroom, avoid: tenderness.", search_queries = ["girl on knees sucking guard cock cell", "uniformed man blowjob kneeling woman white room", "kneeling blowjob security guard uniform"] } },
-  { type = "paragraph", content = "This time he doesn't make up a reason. He comes in, leaves the glass open behind him and unbuckles his belt." },
-  { type = "dialog", props = { speaker = "player" }, content = "No count tonight?" },
+  { type = "paragraph", content = "This time he doesn't make up a reason. He walks her back into the cell, leaves the glass open behind them and unbuckles his belt." },
+  { type = "dialog", props = { speaker = "player" }, content = "No count this time?" },
   { type = "dialog", props = { speaker = "npc", npcId = "npc_guard" }, content = "Fuck the count." },
   { type = "dialog", props = { speaker = "npc", npcId = "npc_guard" }, content = "On your knees." },
   { type = "dialog", props = { speaker = "player" }, content = "Ask me nicely." },
@@ -26710,6 +26748,7 @@ blocks = [
   { type = "dialog", props = { speaker = "npc", npcId = "npc_guard" }, content = "Fuck. Look at you. Look at that mouth." },
   { type = "paragraph", content = "She doesn't. She sucks him slow and wet with the open door behind him, and when he comes he holds her head and comes down her throat, and she swallows every drop of it." },
   { type = "dialog", props = { speaker = "npc", npcId = "npc_guard" }, content = "Same time tomorrow. I'm not asking." },
+  { type = "dialog", props = { speaker = "npc", npcId = "npc_guard" }, content = "The yard's yours at five, the laundry at six. Curfew's midnight now. Same rule." },
 ]
 [canvases.nodes.exit_block]
 type = "location"
@@ -26730,7 +26769,7 @@ id   = "intro"
 name = "Let him have you"
 blocks = [
   { type = "video", props = { pool_dir = "sex/guard_loop_intro_t4", pool = 4, description = "A big man in a guard uniform pushing a naked woman back against a white cell wall, kissing her neck, his hands on her body. Must show: the uniform, the white wall, his hands on her. Avoid: a bedroom.", search_queries = ["guard pushing naked woman against wall kissing neck", "man in uniform pins naked girl against white wall"] } },
-  { type = "paragraph", content = "He comes through the glass and shoves her up against the wall of the cell with his whole weight, his mouth on her neck, his hands everywhere." },
+  { type = "paragraph", content = "He walks her back through the glass and shoves her up against the wall of the cell with his whole weight, his mouth on her neck, his hands everywhere." },
   { type = "dialog", props = { speaker = "npc", npcId = "npc_guard" }, content = "Every day. Every fucking hour I think about this." },
   { type = "thought_bubble", props = { speaker = "player" }, content = "Every time he gets a little more of me. And every time I get a little more of him." },
 ]
@@ -26916,6 +26955,7 @@ blocks = [
     { type = "paragraph", content = "He pulls out of her mouth and comes all over her face and her tits, groaning, holding her by the hair so she can't move away from it." },
     { type = "dialog", props = { speaker = "npc", npcId = "npc_guard" }, content = "Look at you. Look at the state of you." },
     { type = "dialog", props = { speaker = "player" }, content = "All of it. On me." },
+    { type = "dialog", props = { speaker = "npc", npcId = "npc_guard" }, content = "Next time I want that ass." },
   ] },
   { type = "group", props = { conditions = { version = "1.0", logic = "AND", items = [
       { type = "trait", subject = "player", trait_key = "sex_finisher_type", operator = "eq", value = 1 },
@@ -27038,7 +27078,7 @@ blocks = [
   { type = "cascade", props = { beats = [
     { blocks = [
         { type = "video", props = { file = "sex/guard_drain_first_t5.webm", description = "A big man in a guard uniform cumming in the ass of a naked woman on all fours on a narrow cot, then collapsing forward onto her back, spent. Must show: anal finish, him falling forward onto her, the cot. Avoid: vaginal, avoid: a big soft bed.", search_queries = ["anal creampie then collapses on her back gif", "man cums in her ass and collapses on top gif", "spent after anal creampie lying on her"] } },
-        { type = "paragraph", content = "This time, when he comes in her ass, the drain opens. It takes his cum and then it takes him: his breath, his strength, the will in his legs. He falls forward onto her back, and holds on." },
+        { type = "paragraph", content = "When he comes in her ass, the drain opens. It takes his cum and then it takes him: his breath, his strength, the will in his legs. He falls forward onto her back, and holds on." },
         { type = "dialog", props = { speaker = "npc", npcId = "npc_guard" }, content = "What... what did you do. I can't. My legs." },
     ] },
     { advance_text = "Hold him.", blocks = [
@@ -27217,7 +27257,7 @@ conditions = { version = "1.0", logic = "AND", items = [
 id   = "base"
 name = "Wash alone"
 blocks = [
-  { type = "paragraph", content = "She stands under the hot water on her own and washes the day off her skin: her hair, her tits, the sticky pads of the test sensors, between her legs." },
+  { type = "paragraph", content = "She stands under the hot water and washes the day off her skin: her hair, her tits, between her legs." },
 ]
 [canvases.nodes.exit_block]
 type = "location"
@@ -27255,11 +27295,11 @@ blocks = [
     ] } }, blocks = [
     { type = "video", props = { pool_dir = "sex/guard_caught_shower_tiles_t5", pool = 4, description = "A uniformed guard pinning a naked wet woman face first against white shower tiles, his hand round the back of her neck, his body grinding against her ass. Must show: her pinned to wet tiles, him clothed behind her, his hand on her neck. Avoid: a home bathroom.", search_queries = ["man pins naked girl against shower wall from behind", "guard pins wet naked woman to tiles hand on neck", "pinned against shower wall grinding ass"] } },
     { type = "paragraph", content = "He comes in, shuts the water off and shoves her up against the wet tiles, his body pinning hers, his hand round the back of her neck and his cock hard against her ass." },
-    { type = "dialog", props = { speaker = "npc", npcId = "npc_guard" }, content = "Midnight. I said midnight. Next time I won't wait." },
+    { type = "dialog", props = { speaker = "npc", npcId = "npc_guard" }, content = "Midnight. I said midnight." },
     { type = "dialog", props = { speaker = "player" }, content = "You came all this way just to grab my ass?" },
     { type = "dialog", props = { speaker = "npc", npcId = "npc_guard" }, content = "I came to put you back where you belong." },
   ] },
-  { type = "paragraph", content = "He marches her back down the corridor, naked and wet, and locks the glass behind her." },
+  { type = "paragraph", content = "He marches her back down the corridor, naked and wet, and shuts the glass behind her." },
 ]
 [canvases.nodes.exit_block]
 type = "location"
@@ -27327,6 +27367,7 @@ blocks = [
   { type = "dialog", props = { speaker = "npc", npcId = "npc_guard" }, content = "Greedy." },
   { type = "dialog", props = { speaker = "player" }, content = "For you? Always." },
   { type = "paragraph", content = "She grinds back onto his fingers with her ass in the air, her cunt clenching on them, until the drum stops." },
+  { type = "dialog", props = { speaker = "npc", npcId = "npc_guard" }, content = "Same time tomorrow. Bend over my desk like that and see what happens." },
 ]
 [canvases.nodes.exit_block]
 type = "location"
@@ -27398,11 +27439,11 @@ name = "Caught"
 blocks = [
   { type = "video", props = { pool_dir = "sex/guard_caught_laundry_t5", pool = 4, description = "A uniformed guard pinning a woman in a short grey shift face down over a washing machine at night, one arm twisted up behind her back, his other hand squeezing her ass. Must show: her bent over the machine, arm behind her back, his hand on her ass. Avoid: a home kitchen.", search_queries = ["man pins girl over washing machine arm behind back", "bent over washing machine ass grabbed", "guard pins woman face down over machine"] } },
   { type = "paragraph", content = "He finds her in the laundry after midnight. He pins her face down over the machine, one hand twisting her arm up behind her back, the other squeezing her ass through the shift." },
-  { type = "dialog", props = { speaker = "npc", npcId = "npc_guard" }, content = "Midnight means midnight. Next time I won't wait." },
+  { type = "dialog", props = { speaker = "npc", npcId = "npc_guard" }, content = "Midnight means midnight." },
   { type = "dialog", props = { speaker = "player" }, content = "I lost track of the time." },
   { type = "dialog", props = { speaker = "npc", npcId = "npc_guard" }, content = "No, you didn't. You wanted me to come and get you." },
   { type = "dialog", props = { speaker = "player" }, content = "Maybe I did." },
-  { type = "paragraph", content = "He marches her back to the cell by the arm, his hand still on her ass, and locks the glass." },
+  { type = "paragraph", content = "He marches her back to the cell by the arm, his hand still on her ass, and shuts the glass on her." },
 ]
 [canvases.nodes.exit_block]
 type = "location"
@@ -27437,7 +27478,7 @@ id   = "base"
 name = "The Guard"
 blocks = [
   { type = "paragraph", content = "He stands by the wall for the yard hour and watches her walk." },
-  { type = "dialog", props = { speaker = "npc", npcId = "npc_guard" }, content = "Ten more minutes. Make them count." },
+  { type = "dialog", props = { speaker = "npc", npcId = "npc_guard" }, content = "Till six. Make it count." },
 ]
 [canvases.nodes.exit_block]
 type = "choices"
@@ -27468,6 +27509,7 @@ blocks = [
   { type = "dialog", props = { speaker = "npc", npcId = "npc_guard" }, content = "Christ. Anyone up on the roof can see you." },
   { type = "dialog", props = { speaker = "player" }, content = "Then let them look." },
   { type = "dialog", props = { speaker = "npc", npcId = "npc_guard" }, content = "Inside. Before the cameras get a look." },
+  { type = "dialog", props = { speaker = "npc", npcId = "npc_guard" }, content = "Same time tomorrow. Same nothing under it." },
 ]
 [canvases.nodes.exit_block]
 type = "location"
@@ -27539,10 +27581,10 @@ name = "Caught"
 blocks = [
   { type = "video", props = { pool_dir = "sex/guard_caught_yard_t5", pool = 4, description = "A uniformed guard pinning a woman in a thin grey shift against a concrete wall in a dark yard at night, his hand shoved between her legs. Must show: her pinned to the wall, his hand between her legs, night. Avoid: daylight, avoid: a bedroom.", search_queries = ["man pins girl against wall hand between her legs night", "pinned against concrete wall fingered outside", "guard pins woman to wall groping her pussy"] } },
   { type = "paragraph", content = "He comes out into the dark yard and pins her to the wall with his whole weight, his hand shoved between her legs." },
-  { type = "dialog", props = { speaker = "npc", npcId = "npc_guard" }, content = "Out here after midnight? Next time I won't wait." },
+  { type = "dialog", props = { speaker = "npc", npcId = "npc_guard" }, content = "Out here after midnight?" },
   { type = "dialog", props = { speaker = "player" }, content = "I wanted to see the sky." },
   { type = "dialog", props = { speaker = "npc", npcId = "npc_guard" }, content = "You can see it from your cell. Move." },
-  { type = "paragraph", content = "He walks her back inside by the arm and locks her in." },
+  { type = "paragraph", content = "He walks her back inside by the arm and shuts her in." },
 ]
 [canvases.nodes.exit_block]
 type = "location"
@@ -28205,7 +28247,7 @@ blocks = [
   { type = "dialog", props = { speaker = "npc", npcId = "npc_technician" }, content = "You're so wet. You're so... you're not a machine. You're not." },
   { type = "paragraph", content = "Her cunt squeezes his cock on every thrust, her tits bouncing, her clit grinding on him each time he bottoms out." },
   { type = "dialog", props = { speaker = "player" }, content = "Say it again." },
-  { type = "dialog", props = { speaker = "npc", npcId = "npc_technician" }, content = "Wren. Wren. Is that right? Is that your name?" },
+  { type = "dialog", props = { speaker = "npc", npcId = "npc_technician" }, content = "Wren. Wren. God, Wren." },
   { type = "dialog", props = { speaker = "player" }, content = "Fuck me and say it again." },
   { type = "dialog", props = { speaker = "npc", npcId = "npc_technician" }, content = "Wren." },
 ]
@@ -30328,7 +30370,7 @@ when = [
 # ── X · THE TESTS. beat_0267 (0.2.6); REWORKED beat_0278. From the Chairman's room until the guard's drain. ──
 [[quest_cards]]
 priority   = 10
-text       = "Cain is free. You are the company's test subject, high in the Rise, and the Chairman wants to know how what you feel was put in you. By day they test you. The rest of the time there is a guard at a desk outside your glass, and he has been watching you for weeks."
+text       = "Cain is free. You are the company's test subject, high in the Rise, and the Chairman wants to know how what you feel was put in you. By day they test you. The rest of the time there is a guard at a desk outside your glass, and he watches you all day."
 tip        = "Between nine and noon they come for you for the tests, at your cell or at the Post, one a day. The guard is at his desk outside your glass, the Post, most of the day and all night. Start with him."
 when = [
   { flag = "chairman_met", op = "is_true" },
