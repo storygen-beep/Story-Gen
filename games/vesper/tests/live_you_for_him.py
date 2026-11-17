@@ -305,8 +305,11 @@ def main():
         pg.evaluate(WEAR_COVER_JS + "; (function(){var F=SugarCube.State.variables.flags; if(Array.isArray(F)){var i=F.indexOf('outfit_taken'); if(i>-1)F.splice(i,1);} else delete F['outfit_taken'];})()")
         at(18)
         play("Location_holding_cell")
-        ok(psg() == "Canvas_custody_outfit_heal_Node_base" and "the bought face comes off" in text(), f"the save fix fires at the cell ({psg()})")
+        ok(psg() == "Canvas_custody_outfit_heal_Node_base" and "Intake missed you" in text(), f"the save fix fires at the cell ({psg()})")
         click("Let her take it.")
+        ok(psg() == "Canvas_custody_outfit_heal_Node_done" and "the bought face comes off" in text(), f"the save fix strips her and takes the face ({psg()})")
+        ok(outfit()["eq"].get("dress") == "company_grays", "the sidebar is already in the grays while the strip is read")
+        click("Back into the cell.")
         o = outfit()
         ok(psg() == "Location_holding_cell" and o["eq"].get("dress") == "company_grays" and not flag("face_worn") and flag("outfit_taken"),
            f"the save fix puts her in the grays ({o['eq']})")
@@ -338,7 +341,7 @@ def main():
         ok(psg() == "Location_holding_cell", f"day 3 at noon: the window is shut, nobody comes ({psg()})")
 
         # ── 0279a: the cell's cot, the Berth cot's two tiers (half a charge any hour, the full night 19:00-05:00)
-        rough_t, night_t = "Lie down a couple of hours. (Half a charge.)", "Sleep the night. (Full charge.)"
+        rough_t, night_t = "Lie down a couple of hours. (+40 Charge.)", "Sleep the night. (Full charge.)"
         setv("energy", 30)
         at(12)
         play("Canvas_activity_cell_sleep_Node_base")

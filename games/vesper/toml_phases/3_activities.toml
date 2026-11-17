@@ -6587,6 +6587,16 @@ id   = "base"
 name = "The daily test"
 blocks = [
   { type = "paragraph", content = "The glass slides back. The technician with his tablet, and the two men in grey behind him, the same as every morning now." },
+  { type = "group", props = { conditions = { version = "1.0", logic = "AND", items = [
+      { type = "trait", subject = "player", trait_key = "tech_step", operator = "gte", value = 5 },
+    ] } }, blocks = [
+    { type = "paragraph", content = "He checks her straps himself, and his hand stays on her thigh a second longer than the strap needs." },
+  ] },
+  { type = "group", props = { conditions = { version = "1.0", logic = "AND", items = [
+      { type = "trait", subject = "player", trait_key = "tech_step", operator = "gte", value = 1 },
+    ] } }, blocks = [
+    { type = "paragraph", content = "He will not look at her in front of the men in grey. His ears go red anyway." },
+  ] },
   { type = "dialog", props = { speaker = "npc", npcId = "npc_technician" }, content = "Up, please. Today's on the board." },
   { type = "dialog", props = { speaker = "player" }, content = "And if I say no?" },
   { type = "dialog", props = { speaker = "npc", npcId = "npc_technician" }, content = "Then they carry you, and I write down that you said no. Up." },
@@ -6613,6 +6623,7 @@ blocks = [
   { type = "paragraph", content = "The lab is bright enough to hurt. They strip her at the door and put her on the padded table, and the technician starts sticking sensors on her like stamps on a parcel. Her temples. Her throat. Under each breast. Her nipples. Her belly. The inside of each thigh." },
   { type = "dialog", props = { speaker = "npc", npcId = "npc_technician" }, content = "Legs apart. Wider. I need the pads on the labia and I need them flat." },
   { type = "paragraph", content = "He presses them on with two fingers, flat against her cunt, the way he'd press a seal on a jar. He checks every lead. He rolls her nipple between his finger and thumb and watches a line jump on the screen." },
+  { type = "paragraph", content = "When the men in grey look away, so does he: off the screen and onto her. Her tits, the wires on her nipples, the pads flat on her cunt. He looks back at the screen fast, red to the ears." },
   { type = "dialog", props = { speaker = "player" }, content = "You could at least warm your hands." },
   { type = "dialog", props = { speaker = "npc", npcId = "npc_technician" }, content = "Why? Units don't care about temperature." },
   { type = "dialog", props = { speaker = "player" }, content = "I'm not a unit." },
@@ -7151,7 +7162,7 @@ blocks = [
 [canvases.nodes.exit_block]
 type = "choices"
 [[canvases.nodes.exit_block.choices]]
-text       = "Lie down a couple of hours. (Half a charge.)"
+text       = "Lie down a couple of hours. (+40 Charge.)"
 targetType = "node"
 nodeId     = "activity_cell_sleep.rough"
 effects    = [{ targetType = "player", trait = "energy", op = "add", value = 40, clamp = true }]
@@ -7172,7 +7183,7 @@ locationId = "holding_cell"
 id   = "rough"
 name = "A couple of hours"
 blocks = [
-  { type = "paragraph", content = "She lies down on her side with her back to the glass and lets the wall point pull at her cells. Two hours of half-sleep with the light on her eyelids. She comes up at half a charge, enough to stand and go out there and do it again." },
+  { type = "paragraph", content = "She lies down on her side with her back to the glass and lets the wall point pull at her cells. Two hours of half-sleep with the light on her eyelids. She comes up with some charge back, enough to stand and go out there and do it again." },
 ]
 [canvases.nodes.exit_block]
 type = "location"
