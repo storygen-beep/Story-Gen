@@ -2296,7 +2296,9 @@ when = { version = "1.0", logic = "AND", items = [
 id          = "npc_keeper"
 name        = "The Keeper"
 description = "The Chairman's most loyal man, thirty years at his side. He keeps the sealed files, and he wants nothing from anyone except the Chairman's approval."
-portrait    = "keeper.jpg"
+# portrait    = "keeper.jpg"   # 0.2.6: off until the image exists. The keeper never shows in this build
+#   (next_release_open), and a portrait pointing at a missing file stops scripts/release_upload.py. Put it back
+#   with the next release, when keeper.jpg is in games/vesper/videos.
 core_traits = { relation = 0, corruption = 0 }
 flag_keys   = []
 arc_stages  = ["The keeper of records"]
