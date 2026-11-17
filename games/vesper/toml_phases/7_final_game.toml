@@ -37535,7 +37535,7 @@ costs      = [{ trait = "energy", value = 15 }]
 effects = [
   { targetType = "player", trait = "guard_step", op = "add", value = 1, clamp = true, cap = 4 },
 ]
-flagEffects = [{ targetType = "player", flag = "guard_day", op = "set" }]
+flagEffects = [{ targetType = "player", flag = "guard_day", op = "set" }, { targetType = "player", flag = "guard_step1_done", op = "set" }]
 [[canvases.nodes.exit_block.choices]]
 text       = "Let him in."
 targetType = "node"
@@ -37551,7 +37551,7 @@ effects = [
   { targetType = "player", trait = "guard_step", op = "add", value = 1, clamp = true, cap = 4 },
   { targetType = "player", trait = "showers_door", op = "set", value = 1, clamp = false },
 ]
-flagEffects = [{ targetType = "player", flag = "guard_day", op = "set" }]
+flagEffects = [{ targetType = "player", flag = "guard_day", op = "set" }, { targetType = "player", flag = "guard_step2_done", op = "set" }]
 [[canvases.nodes.exit_block.choices]]
 text       = "Get on your knees for him."
 targetType = "node"
@@ -37567,7 +37567,7 @@ effects = [
   { targetType = "player", trait = "guard_step", op = "add", value = 1, clamp = true, cap = 4 },
   { targetType = "player", trait = "yard_door", op = "set", value = 1, clamp = false },
 ]
-flagEffects = [{ targetType = "player", flag = "guard_day", op = "set" }]
+flagEffects = [{ targetType = "player", flag = "guard_day", op = "set" }, { targetType = "player", flag = "guard_step3_done", op = "set" }]
 [[canvases.nodes.exit_block.choices]]
 text       = "Let him have you."
 targetType = "node"
@@ -37587,7 +37587,7 @@ effects = [
   { targetType = "player", trait = "anal_active",       op = "set", value = 0, clamp = false },
   { targetType = "player", trait = "sex_entry_origin",  op = "set", value = 0, clamp = false },
 ]
-flagEffects = [{ targetType = "player", flag = "guard_day", op = "set" }]
+flagEffects = [{ targetType = "player", flag = "guard_day", op = "set" }, { targetType = "player", flag = "guard_step4_done", op = "set" }]
 [[canvases.nodes.exit_block.choices]]
 text       = "Let him have you."
 targetType = "node"
@@ -38898,7 +38898,7 @@ effects = [
   { targetType = "player", trait = "tech_step", op = "add", value = 1, clamp = true, cap = 7 },
   { targetType = "npc", npcId = "npc_technician", trait = "corruption", op = "add", value = 3, clamp = true },
 ]
-flagEffects = [{ targetType = "player", flag = "tech_day", op = "set" }]
+flagEffects = [{ targetType = "player", flag = "tech_day", op = "set" }, { targetType = "player", flag = "tech_step1_done", op = "set" }]
 [[canvases.nodes.exit_block.choices]]
 text       = "Get off the table."
 targetType = "location"
@@ -38945,7 +38945,7 @@ effects = [
   { targetType = "player", trait = "tech_step", op = "add", value = 1, clamp = true, cap = 7 },
   { targetType = "npc", npcId = "npc_technician", trait = "corruption", op = "add", value = 3, clamp = true },
 ]
-flagEffects = [{ targetType = "player", flag = "tech_day", op = "set" }]
+flagEffects = [{ targetType = "player", flag = "tech_day", op = "set" }, { targetType = "player", flag = "tech_step2_done", op = "set" }]
 [[canvases.nodes.exit_block.choices]]
 text       = "Pick up your shift."
 targetType = "location"
@@ -38993,7 +38993,7 @@ effects = [
   { targetType = "player", trait = "tech_step", op = "add", value = 1, clamp = true, cap = 7 },
   { targetType = "npc", npcId = "npc_technician", trait = "corruption", op = "add", value = 3, clamp = true },
 ]
-flagEffects = [{ targetType = "player", flag = "tech_day", op = "set" }]
+flagEffects = [{ targetType = "player", flag = "tech_day", op = "set" }, { targetType = "player", flag = "tech_step3_done", op = "set" }]
 [[canvases.nodes.exit_block.choices]]
 text       = "Close your legs."
 targetType = "location"
@@ -39041,7 +39041,7 @@ effects = [
   { targetType = "player", trait = "tech_step", op = "add", value = 1, clamp = true, cap = 7 },
   { targetType = "npc", npcId = "npc_technician", trait = "corruption", op = "add", value = 3, clamp = true },
 ]
-flagEffects = [{ targetType = "player", flag = "tech_day", op = "set" }]
+flagEffects = [{ targetType = "player", flag = "tech_day", op = "set" }, { targetType = "player", flag = "tech_step4_done", op = "set" }]
 [[canvases.nodes.exit_block.choices]]
 text       = "Let go of his wrist."
 targetType = "location"
@@ -39088,7 +39088,7 @@ effects = [
   { targetType = "player", trait = "tech_step", op = "add", value = 1, clamp = true, cap = 7 },
   { targetType = "npc", npcId = "npc_technician", trait = "corruption", op = "add", value = 3, clamp = true },
 ]
-flagEffects = [{ targetType = "player", flag = "tech_day", op = "set" }]
+flagEffects = [{ targetType = "player", flag = "tech_day", op = "set" }, { targetType = "player", flag = "tech_step5_done", op = "set" }]
 [[canvases.nodes.exit_block.choices]]
 text       = "Leave him wanting it."
 targetType = "location"
@@ -39156,7 +39156,7 @@ effects = [
   { targetType = "player", trait = "tech_step", op = "add", value = 1, clamp = true, cap = 7 },
   { targetType = "npc", npcId = "npc_technician", trait = "corruption", op = "add", value = 3, clamp = true },
 ]
-flagEffects = [{ targetType = "player", flag = "tech_day", op = "set" }]
+flagEffects = [{ targetType = "player", flag = "tech_day", op = "set" }, { targetType = "player", flag = "tech_step6_done", op = "set" }]
 [[canvases.nodes.exit_block.choices]]
 text       = "Wipe your hand on his coat."
 targetType = "location"
@@ -39212,7 +39212,7 @@ effects = [
   { targetType = "player", trait = "anal_active", op = "set", value = 0, clamp = false },
   { targetType = "player", trait = "sex_entry_origin", op = "set", value = 0, clamp = false },
 ]
-flagEffects = [{ targetType = "player", flag = "tech_day", op = "set" }]
+flagEffects = [{ targetType = "player", flag = "tech_day", op = "set" }, { targetType = "player", flag = "tech_step7_done", op = "set" }]
 [[canvases.nodes.exit_block.choices]]
 text       = "Wipe your mouth."
 targetType = "location"
@@ -41460,7 +41460,7 @@ when = [
   { trait = "guard_step", subject = "player", op = "lt", value = 1 },
 ]
 goals = [
-  { trait = "guard_step", subject = "player", op = "gte", value = 1, label = "Let him watch you at the glass" },
+  { flag = "guard_step1_done", op = "is_true", label = "Let him watch you at the glass" },
 ]
 
 [[quest_cards]]
@@ -41477,7 +41477,7 @@ when = [
 goals = [
   { trait = "corruption", subject = "npc", npc_id = "npc_guard", op = "gte", value = 20, label = "Make him want to come in: tease him" },
   { days_since_flag = "guard_day", op = "gte", value = 1, label = "A day since the last step" },
-  { trait = "guard_step", subject = "player", op = "gte", value = 2, label = "Let him in (at the Post)" },
+  { flag = "guard_step2_done", op = "is_true", label = "Let him in (at the Post)" },
 ]
 
 [[quest_cards]]
@@ -41494,7 +41494,7 @@ when = [
 goals = [
   { trait = "corruption", subject = "npc", npc_id = "npc_guard", op = "gte", value = 45, label = "Get him to open his belt: tease him" },
   { days_since_flag = "guard_day", op = "gte", value = 1, label = "A day since the last step" },
-  { trait = "guard_step", subject = "player", op = "gte", value = 3, label = "Get on your knees for him (at the Post)" },
+  { flag = "guard_step3_done", op = "is_true", label = "Get on your knees for him (at the Post)" },
 ]
 
 [[quest_cards]]
@@ -41511,7 +41511,7 @@ when = [
 goals = [
   { trait = "corruption", subject = "npc", npc_id = "npc_guard", op = "gte", value = 70, label = "Make him take you: tease him" },
   { days_since_flag = "guard_day", op = "gte", value = 1, label = "A day since the last step" },
-  { trait = "guard_step", subject = "player", op = "gte", value = 4, label = "Let him have you (at the Post)" },
+  { flag = "guard_step4_done", op = "is_true", label = "Let him have you (at the Post)" },
 ]
 
 [[quest_cards]]
@@ -41568,7 +41568,7 @@ when = [
   { trait = "tech_step", subject = "player", op = "lt", value = 1 },
 ]
 goals = [
-  { trait = "tech_step", subject = "player", op = "gte", value = 1, label = "Get on his table and undress for him" },
+  { flag = "tech_step1_done", op = "is_true", label = "Get on his table and undress for him" },
 ]
 
 [[quest_cards]]
@@ -41585,7 +41585,7 @@ when = [
 goals = [
   { trait = "corruption", subject = "npc", npc_id = "npc_technician", op = "gte", value = 15, label = "Make him want to watch you" },
   { days_since_flag = "tech_day", op = "gte", value = 1, label = "A night since the last step" },
-  { trait = "tech_step", subject = "player", op = "gte", value = 2, label = "Touch yourself for him (on his table)" },
+  { flag = "tech_step2_done", op = "is_true", label = "Touch yourself for him (on his table)" },
 ]
 
 [[quest_cards]]
@@ -41602,7 +41602,7 @@ when = [
 goals = [
   { trait = "corruption", subject = "npc", npc_id = "npc_technician", op = "gte", value = 30, label = "Make him want to touch you" },
   { days_since_flag = "tech_day", op = "gte", value = 1, label = "A night since the last step" },
-  { trait = "tech_step", subject = "player", op = "gte", value = 3, label = "Let him put his fingers in you (on his table)" },
+  { flag = "tech_step3_done", op = "is_true", label = "Let him put his fingers in you (on his table)" },
 ]
 
 [[quest_cards]]
@@ -41619,7 +41619,7 @@ when = [
 goals = [
   { trait = "corruption", subject = "npc", npc_id = "npc_technician", op = "gte", value = 45, label = "Make him want to taste you" },
   { days_since_flag = "tech_day", op = "gte", value = 1, label = "A night since the last step" },
-  { trait = "tech_step", subject = "player", op = "gte", value = 4, label = "Let him put his mouth on your clit (on his table)" },
+  { flag = "tech_step4_done", op = "is_true", label = "Let him put his mouth on your clit (on his table)" },
 ]
 
 [[quest_cards]]
@@ -41636,7 +41636,7 @@ when = [
 goals = [
   { trait = "corruption", subject = "npc", npc_id = "npc_technician", op = "gte", value = 60, label = "Get your hand on him" },
   { days_since_flag = "tech_day", op = "gte", value = 1, label = "A night since the last step" },
-  { trait = "tech_step", subject = "player", op = "gte", value = 5, label = "Take him in your hand (on his table)" },
+  { flag = "tech_step5_done", op = "is_true", label = "Take him in your hand (on his table)" },
 ]
 
 [[quest_cards]]
@@ -41653,7 +41653,7 @@ when = [
 goals = [
   { trait = "corruption", subject = "npc", npc_id = "npc_technician", op = "gte", value = 75, label = "Get your mouth on him" },
   { days_since_flag = "tech_day", op = "gte", value = 1, label = "A night since the last step" },
-  { trait = "tech_step", subject = "player", op = "gte", value = 6, label = "Take him in your mouth (on his table)" },
+  { flag = "tech_step6_done", op = "is_true", label = "Take him in your mouth (on his table)" },
 ]
 
 [[quest_cards]]
@@ -41670,7 +41670,7 @@ when = [
 goals = [
   { trait = "corruption", subject = "npc", npc_id = "npc_technician", op = "gte", value = 90, label = "Make him take you" },
   { days_since_flag = "tech_day", op = "gte", value = 1, label = "A night since the last step" },
-  { trait = "tech_step", subject = "player", op = "gte", value = 7, label = "Let him fuck you (on his table)" },
+  { flag = "tech_step7_done", op = "is_true", label = "Let him fuck you (on his table)" },
 ]
 
 [[quest_cards]]
@@ -45664,7 +45664,18 @@ flagEffects = [
   { targetType = "player", flag = "wife_file_read", op = "unset" },
   { targetType = "player", flag = "test_day", op = "unset" },
   { targetType = "player", flag = "guard_day", op = "unset" },
+  { targetType = "player", flag = "guard_step1_done", op = "unset" },
+  { targetType = "player", flag = "guard_step2_done", op = "unset" },
+  { targetType = "player", flag = "guard_step3_done", op = "unset" },
+  { targetType = "player", flag = "guard_step4_done", op = "unset" },
   { targetType = "player", flag = "tech_day", op = "unset" },
+  { targetType = "player", flag = "tech_step1_done", op = "unset" },
+  { targetType = "player", flag = "tech_step2_done", op = "unset" },
+  { targetType = "player", flag = "tech_step3_done", op = "unset" },
+  { targetType = "player", flag = "tech_step4_done", op = "unset" },
+  { targetType = "player", flag = "tech_step5_done", op = "unset" },
+  { targetType = "player", flag = "tech_step6_done", op = "unset" },
+  { targetType = "player", flag = "tech_step7_done", op = "unset" },
   { targetType = "player", flag = "sabin_day", op = "unset" },
   { targetType = "player", flag = "keeper_day", op = "unset" },
 
@@ -46166,7 +46177,18 @@ flagEffects = [
   { targetType = "player", flag = "wife_file_read", op = "unset" },
   { targetType = "player", flag = "test_day", op = "unset" },
   { targetType = "player", flag = "guard_day", op = "unset" },
+  { targetType = "player", flag = "guard_step1_done", op = "unset" },
+  { targetType = "player", flag = "guard_step2_done", op = "unset" },
+  { targetType = "player", flag = "guard_step3_done", op = "unset" },
+  { targetType = "player", flag = "guard_step4_done", op = "unset" },
   { targetType = "player", flag = "tech_day", op = "unset" },
+  { targetType = "player", flag = "tech_step1_done", op = "unset" },
+  { targetType = "player", flag = "tech_step2_done", op = "unset" },
+  { targetType = "player", flag = "tech_step3_done", op = "unset" },
+  { targetType = "player", flag = "tech_step4_done", op = "unset" },
+  { targetType = "player", flag = "tech_step5_done", op = "unset" },
+  { targetType = "player", flag = "tech_step6_done", op = "unset" },
+  { targetType = "player", flag = "tech_step7_done", op = "unset" },
   { targetType = "player", flag = "sabin_day", op = "unset" },
   { targetType = "player", flag = "keeper_day", op = "unset" },
 ]
@@ -46326,7 +46348,18 @@ flagEffects = [
   { targetType = "player", flag = "wife_file_read", op = "unset" },
   { targetType = "player", flag = "test_day", op = "unset" },
   { targetType = "player", flag = "guard_day", op = "unset" },
+  { targetType = "player", flag = "guard_step1_done", op = "unset" },
+  { targetType = "player", flag = "guard_step2_done", op = "unset" },
+  { targetType = "player", flag = "guard_step3_done", op = "unset" },
+  { targetType = "player", flag = "guard_step4_done", op = "unset" },
   { targetType = "player", flag = "tech_day", op = "unset" },
+  { targetType = "player", flag = "tech_step1_done", op = "unset" },
+  { targetType = "player", flag = "tech_step2_done", op = "unset" },
+  { targetType = "player", flag = "tech_step3_done", op = "unset" },
+  { targetType = "player", flag = "tech_step4_done", op = "unset" },
+  { targetType = "player", flag = "tech_step5_done", op = "unset" },
+  { targetType = "player", flag = "tech_step6_done", op = "unset" },
+  { targetType = "player", flag = "tech_step7_done", op = "unset" },
   { targetType = "player", flag = "sabin_day", op = "unset" },
   { targetType = "player", flag = "keeper_day", op = "unset" },
 
@@ -46832,7 +46865,18 @@ flagEffects = [
   { targetType = "player", flag = "wife_file_read", op = "unset" },
   { targetType = "player", flag = "test_day", op = "unset" },
   { targetType = "player", flag = "guard_day", op = "unset" },
+  { targetType = "player", flag = "guard_step1_done", op = "unset" },
+  { targetType = "player", flag = "guard_step2_done", op = "unset" },
+  { targetType = "player", flag = "guard_step3_done", op = "unset" },
+  { targetType = "player", flag = "guard_step4_done", op = "unset" },
   { targetType = "player", flag = "tech_day", op = "unset" },
+  { targetType = "player", flag = "tech_step1_done", op = "unset" },
+  { targetType = "player", flag = "tech_step2_done", op = "unset" },
+  { targetType = "player", flag = "tech_step3_done", op = "unset" },
+  { targetType = "player", flag = "tech_step4_done", op = "unset" },
+  { targetType = "player", flag = "tech_step5_done", op = "unset" },
+  { targetType = "player", flag = "tech_step6_done", op = "unset" },
+  { targetType = "player", flag = "tech_step7_done", op = "unset" },
   { targetType = "player", flag = "sabin_day", op = "unset" },
   { targetType = "player", flag = "keeper_day", op = "unset" },
 ]
