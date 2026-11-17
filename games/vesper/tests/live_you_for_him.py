@@ -16,6 +16,9 @@ URL = (pathlib.Path(__file__).resolve().parent.parent / "output_dev" / "index.ht
 TS = "SugarCube.State.variables.game_state.time_state"
 CT = "SugarCube.State.variables.player.core_traits"
 fails, errs = [], []
+WEAR_COVER_JS = ("SugarCube.setup.addToWardrobe('cover_stranger'); SugarCube.setup.equipItem('cover_stranger'); "
+                 "SugarCube.setup.equipItem('plain_bra'); SugarCube.setup.equipItem('plain_briefs'); SugarCube.setup.equipItem('flat_shoes'); "
+                 "(function(){var F=SugarCube.State.variables.flags; if(Array.isArray(F)){if(F.indexOf('face_worn')<0)F.push('face_worn');} else F['face_worn']=true;})()")
 
 
 def ok(cond, msg):
@@ -274,6 +277,8 @@ def main():
         click("Give him your answer.")
         ok("Once you go in, the city is closed until the next release." in text(), "the plain warning")
         setv("equipped_weapon", 2)
+        # beat 0283: she walks in in a cover with the bought face on, so the intake has something to take.
+        pg.evaluate(WEAR_COVER_JS)
         click("Go with him.")
         ok(flag("in_custody") and tr("equipped_weapon") == 1, "in_custody, and the drain is what she carries in")
 
@@ -284,7 +289,29 @@ def main():
         t = text()
         ok("I want to know how it was put in you. All of it." in t and "That's not a question you get to ask yet." in t and "Ask Mr. Mercer." in t and "Try to be useful." in t, "lines 3-6")
         click("Go down with them.")
+        ok(psg() == "Canvas_cap_chairman_talk_Node_intake", f"the intake ({psg()})")
+        ok("the bought face comes off" in text() and "nothing under it" in text(), "the intake takes the face and gives her the shift")
+        click("Into the cell.")
         ok(psg() == "Location_holding_cell" and flag("chairman_met"), f"down to the cell ({psg()})")
+        def outfit():
+            return pg.evaluate("(function(){var p=SugarCube.State.variables.player; return {eq: p.equipped, kept: p.kept_outfit || null, portrait: SugarCube.setup.getPlayerPortrait()};})()")
+        o = outfit()
+        ok(o["eq"].get("dress") == "company_grays" and not o["eq"].get("bra") and not o["eq"].get("underwear") and not o["eq"].get("shoes"),
+           f"she is in the grey shift and nothing else ({o['eq']})")
+        ok(not flag("face_worn") and flag("outfit_taken"), "the face is off and outfit_taken is set")
+        ok((o["kept"] or {}).get("dress") == "cover_stranger", f"her own outfit is remembered for later ({o['kept']})")
+        ok("wren_grays" in o["portrait"], f"the sidebar shows her in the grays ({o['portrait']})")
+        # beat 0283: a save that was already inside before the intake existed gets the change once, at her cell.
+        pg.evaluate(WEAR_COVER_JS + "; (function(){var F=SugarCube.State.variables.flags; if(Array.isArray(F)){var i=F.indexOf('outfit_taken'); if(i>-1)F.splice(i,1);} else delete F['outfit_taken'];})()")
+        at(18)
+        play("Location_holding_cell")
+        ok(psg() == "Canvas_custody_outfit_heal_Node_base" and "the bought face comes off" in text(), f"the save fix fires at the cell ({psg()})")
+        click("Let her take it.")
+        o = outfit()
+        ok(psg() == "Location_holding_cell" and o["eq"].get("dress") == "company_grays" and not flag("face_worn") and flag("outfit_taken"),
+           f"the save fix puts her in the grays ({o['eq']})")
+        play("Location_holding_cell")
+        ok(psg() != "Canvas_custody_outfit_heal_Node_base", "the save fix fires once")
         cell = text()
         ok("All locations" not in cell and "Waterfront" not in cell and "The Underground" not in cell, "the cell is sealed: no city on its grid")
 

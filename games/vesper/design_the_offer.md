@@ -1250,3 +1250,32 @@ release rebuild both of them as chains like the technician's. The technician's f
 to Sabin's door, and this release ends there: a new end card says the code is in her hand and Sabin's door is the
 next release. His door stays locked behind a hidden trait, next_release_open, that nothing in 0.2.6 sets. The next
 release removes that lock and turns the wife's-file card back into the end card.
+
+## The Quests page for the guard and the technician (beat 0282, LO 2026-11-16)
+
+A live probe of the Quests page over the whole 0.2.6 run showed the "To advance" block missing for most of both
+climbs. The engine draws that block only while a goal is unmet, and the step cards' only goal was his corruption. The
+technician's corruption runs ahead of every threshold (three a link and two a test), so his block was empty from his
+first link to the first fuck. The guard's emptied every time his corruption had reached the threshold and the day had
+not yet passed, which is exactly when the player needs to be told to wait and then to take the step.
+
+Each step card now carries three goals: his corruption (with its number), the day since the last step, and the step
+itself. The step stays unmet until she takes it, so the block always says what to do next and whether the day is
+the thing she is waiting on. The technician's first card now waits until the lab is open, his finished card no
+longer claims he gave her the records (he gives only the code to Sabin's door), and the guard's first card calls him
+her guard rather than her keeper, a name that belongs to another man. Sabin's and the keeper's cards have the same
+pattern and get the same fix when they are reworked in the next release.
+
+## The Spire takes her clothes and her face (beat 0283, LO 2026-11-17)
+
+Before this beat Wren went into custody in whatever she had on at Mercer's, a cover outfit, the Undertow dress or the
+bought face, and kept it for the whole chapter. Her wardrobe and the face both live at the cot, which she cannot reach
+from a cell, so nothing could take them off. The custody scenes already said she wore "the grey shift they put her
+in" with nothing under it, and the sidebar portrait said otherwise.
+
+Now the Chairman's "Go down with them." leads to a short intake scene: a white room two floors down, a woman in
+company grey who strips her and bags everything she came in with, the bought face scrubbed off if she wore it, and
+the grey company shift with nothing under it and bare feet. Mechanically she is put in the Company grays (the item
+keeps its name), her bra, briefs and flats come off, and the face flag is cleared. Nothing leaves her wardrobe, and
+her outfit is remembered so the next release can give it back when she gets out. A save that was already inside
+before this beat gets the same change once, as a short scene at her glass the next time she is in her cell.
