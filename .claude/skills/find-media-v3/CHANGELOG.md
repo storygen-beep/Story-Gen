@@ -1,5 +1,17 @@
 # find-media-v3 — CHANGELOG
 
+## 2026-11-18 — a slot's name is its shelf key
+
+- **`SKILL.md` non-negotiables:** new bullet after the `slot_key` one. Never rename a stocked slot
+  (adding an extension to a pool name counts as a rename); change `pool = N` to resize it.
+- **Why:** first_term's release 1 pools were cut from 4 files to 1 or 2 (DECISIONS 246). The first plan
+  renamed them to single `.jpg` files, which would have stranded 74 stocked shelves and one installed
+  pick under the old keys. It was caught by checking `media_options.json` first, and the pools were
+  resized with `pool = N` instead.
+- **Verified:** read against `api/v1/media_finder.py` (`options/clear` and the shelf key `slot_key`, which
+  defaults to `file`) and `apps/common/media_blocks.py` (`block_slot_key`, `block_media_pool` reading
+  `pool`).
+
 ## 2026-08-09 — the human's pick now installs as `.mp4`
 
 - **`SKILL.md` §"The deliverable contract" item 3** — noted that `grab` re-encodes any animated

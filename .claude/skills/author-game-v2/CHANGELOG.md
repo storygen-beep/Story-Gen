@@ -5,6 +5,59 @@ same turn: what changed, why, and how it was verified.
 
 ---
 
+## 2026-11-18 — media: lint · a man in her picture
+
+Source: LO, 2026-11-18, on `look/mark_kl_breakfast_lookover_t3`: "this is suffering from same issue, we have
+solved earlier… Why it got left?? Are there more??", then "yes, go ahead with the 17 and the report". The first
+"his view" pass found its 56 spots with a keyword scan of looking-verbs over descriptions, narrowed to lines that
+named a body part and read only the first 60 hits. It missed 17 spots that still asked for a man and her in one
+frame ("looks his step-daughter over", "a man in the doorway", "an older man passing behind"). Rule 9 said what to
+write, but nothing checked it.
+- `scripts/gates.py`: new `_man_in_her_picture_rows` / `_man_in_her_picture_lint`, placed above `def main()`; the
+  call is appended to the existing group-2 lint line, so no cited line moves. It lists every non-explicit `_t1`-`_t3`
+  spot whose description names a man and her. It tests who is in the frame, not the verb. A list, never a score.
+- `scripts/tests/test_gates_man_in_her_picture.py`: 5 fixture tests (a look with no looking-verb is listed, his view
+  passes, explicit and `_t0` spots are skipped, one asset counts once).
+- `references/media-blocks.md`: rule 9 says to test who is in the frame; "How it is checked" lists the lint.
+- `SKILL.md`: the lint index names **a man in her picture**.
+- Verified: the new tests pass; on first_term (after its 17 were rewritten) the lint lists only the spots LO has not
+  decided yet (the touch spots and Ryan's hallway).
+
+## 2026-11-18 — media: how many files a spot holds, a picture you can find, the name is the shelf key
+
+Source: LO, 2026-11-18, on first_term's release 1 media: "some have been marked as media folder blocks but they
+dont need 4 shelfs they can just be one", then on the glance spots "these are very very hard to find", then
+"What did we learnt on it on skill level so this didn't happens again" and "make the skill level changes". The
+skill taught the mistake: its table asked for a rotating pool on every often-seen screen and every person's hub,
+and nothing said how many files a pool holds, so all 452 release 1 pools fell to the engine default of 4 and the
+release asked for 1,808 files (740 once sized; first_term DECISIONS 246).
+- `references/media-blocks.md`:
+  - the table's often-seen-screen and person's-hub rows now ask for one picture (a body look gets a pool of 2);
+    a rotating picture of a named person is a new face every visit
+  - rule 6: `_t0` and `_t3` are a still or a gif. The old text said a still only, but `tier_format_check.py`
+    allows `.gif` there, and a `.gif` in a picture pool renders as an animated `<img>` (tested on first_term).
+  - new rule 8, "How many files a spot holds": a table sizing `pool = N` by tier and by how often the screen is
+    seen
+  - new rule 9, "A picture you can find": one subject per frame, and a look is written as what he sees
+  - new rule 10, "The name is the shelf key": never rename a stocked spot
+  - "No harvest while writing" moves to rule 11
+  - "How it is checked" names the new lint
+- `scripts/gates.py`: new `lint · media files asked for` (`_media_files_asked_rows`, `_media_files_asked_lint`,
+  `MEDIA_POOL_DEFAULT`). It lists the files the build asks for by tier, and every non-explicit pool left at the
+  default, and is never a score. The helpers are placed just above `main()`; the only other edit is the call,
+  appended to the existing lint line.
+- `scripts/tests/test_gates_media_files_asked.py`: 5 tests on fixtures (the default counts 4 and is listed, a
+  sized pool counts its size, an explicit pool at the default is counted but not listed, a single file counts
+  once per asset, `pool = true` is a typo).
+- `SKILL.md`: the lint is added to the lint index next to **a screen without media**.
+- Verified:
+  - `gates.py first_term`: the new lint reports 740 files across 476 spots, with 0 non-explicit pools at the
+    default; the scoreboard is unchanged (95/112, 0 fail)
+  - `--selfcheck`: "the index is current"
+  - `cite_check.py --strict`: 0 wrong in SKILL.md + references
+  - `scripts/tests`: 1064 passed
+  - `skill-evals/author-game/tests`: 107 passed
+
 ## 2026-11-12 — engine: `trigger.random_cooldown` (Vesper 0.2.6 automatic tests)
 
 Source: LO, 2026-11-12, on the daily test that now comes for her on the random path: "2nd first" (fix the engine

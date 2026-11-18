@@ -19239,6 +19239,108 @@ def _screen_without_media_lint(game):
           " the hub picture is gone once a choice opens the next screen)")
 
 
+# ── media files asked for (references/media-blocks.md "How many files a spot holds"; LO, 2026-11-18) ──
+MEDIA_POOL_DEFAULT = 4   # apps/common/media_blocks.py DEFAULT_POOL_TARGET: a pool with no `pool` aims for this many
+
+
+def _media_files_asked_rows(game):
+    """(total files, {tier: [spots, files]}, [non-explicit pools left at the default]). A LIST, never a score: what
+    a harvest will be asked to find, counted before anyone searches. A pool counts its `pool` (or the default); a
+    `file`/`files` block counts its paths. The listed pools are the first_term mistake (452 pools left at 4)."""
+    total, by_tier, at_default, seen = 0, {}, [], set()
+    for c in _g2_canvases(game):
+        for nd in c.get("nodes") or []:
+            for b in _flat_blocks(nd.get("blocks")):
+                if b.get("type") not in MEDIA_BLOCKS:
+                    continue
+                p = b.get("props") or {}
+                pool = str(p.get("pool_dir") or "").strip().rstrip("/")
+                if pool:
+                    if pool in seen:
+                        continue
+                    seen.add(pool)
+                    n = p.get("pool")
+                    explicit_n = isinstance(n, int) and not isinstance(n, bool) and n >= 1
+                    n = n if explicit_n else MEDIA_POOL_DEFAULT
+                    name = pool
+                    if not explicit_n and not EXPLICIT_MEDIA.search(pool):
+                        at_default.append(f"{c.get('id')}#{nd.get('id')}: {pool}")
+                else:
+                    paths = [x for x in (p.get("files") or [p.get("file")]) if isinstance(x, str) and x]
+                    paths = [x for x in paths if x not in seen]
+                    seen.update(paths)
+                    if not paths:
+                        continue
+                    n, name = len(paths), paths[0]
+                m = re.search(r"_t(\d)", name)
+                tier = f"t{m.group(1)}" if m else "untagged"
+                row = by_tier.setdefault(tier, [0, 0])
+                row[0] += 1
+                row[1] += n
+                total += n
+    return total, by_tier, at_default
+
+
+def _media_files_asked_lint(game):
+    total, by_tier, at_default = _media_files_asked_rows(game)
+    if not total:
+        return
+    print(f"  {'─'*72}")
+    print(f"  lint · media files asked for — {total} file(s) across {sum(v[0] for v in by_tier.values())} spot(s)"
+          + (f", {len(at_default)} non-explicit pool(s) at the default {MEDIA_POOL_DEFAULT}" if at_default else ""))
+    print("          · " + " · ".join(f"{t}: {v[0]} spots, {v[1]} files" for t, v in sorted(by_tier.items())))
+    for h in _rows(at_default, 12):
+        print(f"          · at the default: {h}")
+    if len(at_default) > 12:
+        print(f"          · … and {len(at_default)-12} more")
+    print("          (references/media-blocks.md rule 8 — explicit on a repeat screen 4, a _t3 look 2, everything"
+          " else 1; set `pool = N`, never leave the default by accident)")
+
+
+# references/media-blocks.md rule 9 (LO, 2026-11-18): a look's picture is what he sees. A `_t1`-`_t3` spot whose
+# description names a man AND her asks for two people and a glance in one real photo, which barely exists. The
+# first pass found these with a keyword scan of looking-verbs and missed 17 ("looks her over", "a man in the
+# doorway"), so this check reads who is in the frame, not what he does.
+LOOK_TIER = re.compile(r"_t[123]\b")
+FRAME_MAN = re.compile(r"\b(man|men|guy|guys|boy|he|him|his|professor|lecturer|owner|neighbour|neighbor|"
+                       r"customer|driver|stepdad|step-?father|father|brother)\b", re.I)
+FRAME_HER = re.compile(r"\b(woman|women|girl|girls|waitress|student|she|her|step-?daughter)\b", re.I)
+
+
+def _man_in_her_picture_rows(game):
+    """Every non-explicit `_t1`-`_t3` spot whose description puts a man and her in one frame. A LIST, never a
+    score: a touch or a hallway squeeze may be meant, and the list is read, not passed."""
+    out, seen = [], set()
+    for c in _g2_canvases(game):
+        for nd in c.get("nodes") or []:
+            for b in _flat_blocks(nd.get("blocks")):
+                if b.get("type") not in MEDIA_BLOCKS:
+                    continue
+                p = b.get("props") or {}
+                name = str(p.get("pool_dir") or p.get("file") or "").strip().rstrip("/")
+                desc = str(p.get("description") or "")
+                if not name or name in seen or EXPLICIT_MEDIA.search(name) or not LOOK_TIER.search(name):
+                    continue
+                seen.add(name)
+                if FRAME_MAN.search(desc) and FRAME_HER.search(desc):
+                    out.append(f"{c.get('id')}#{nd.get('id')}: {name} — {desc[:90]}")
+    return out
+
+
+def _man_in_her_picture_lint(game):
+    rows = _man_in_her_picture_rows(game)
+    if not rows:
+        return
+    print(f"  {'─'*72}")
+    print(f"  lint · a man in her picture — {len(rows)} look spot(s) ask for him and her in one frame")
+    for h in _rows(rows, 12):
+        print(f"          · {h}")
+    if len(rows) > 12:
+        print(f"          · … and {len(rows)-12} more")
+    print("          (references/media-blocks.md rule 9 — write what he sees, \"Seen from the couch: her legs…\";"
+          " keep a man in frame only where the touch is the picture)")
+
+
 def main():
     if len(sys.argv) < 2:
         print(__doc__)
@@ -20114,7 +20216,7 @@ def main():
               " Walk-ins and windowed scenes are legitimate hits, which is why this cannot"
               " fail anything)")
 
-    _group2_lints(model, game, state); _screen_without_media_lint(game)   # LO 2026-11-03 group 2; media 2026-11-12; above main()
+    _group2_lints(model, game, state); _screen_without_media_lint(game); _media_files_asked_lint(game); _man_in_her_picture_lint(game)   # LO 2026-11-03 group 2; media 2026-11-12, 11-18; above main()
     if tok_summary:
         print(f"  {'─'*72}")
         print(f"  lint · a token the engine never resolves — {tok_summary}")

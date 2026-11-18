@@ -15,8 +15,8 @@ where 24 of 167 shipped screens had media and the everyday screens had none.
 | the screen | the block |
 |---|---|
 | a body moment: a look, something shows, sex, her own hand | a clip (or still) right after the line that says it, on the same screen |
-| a screen she sees often (class, shift, dinner, bed, the park) | one rotating pool, first on the screen |
-| a person's hub (his room, her kitchen) | one rotating picture of that person, first on the screen |
+| a screen she sees often (class, shift, dinner, bed, the park) | one picture, first on the screen; a body look on it gets a pool of 2 |
+| a person's hub (his room, her kitchen) | one picture of that person, first on the screen (a rotating picture of a named person is a new face every visit) |
 | a one-time step | one picture or clip on its key line |
 | a talk screen at a hub (each choice opens one) | one picture of that person doing what the screen says; the hub's own picture is gone once the choice opens the new screen |
 | a door, a notice, a system screen | none, written down as none with the reason |
@@ -48,15 +48,39 @@ places blocks from a table must stop when a row never lands, or the row is lost 
 5. **A repeatable explicit screen cycles.** It uses `pool_dir`, never a single `file` (gate `repeatable explicit
    media cycles`).
 6. **The tier is in the name, and it sets the format** (find-media `tier_format_check.py`):
-   - `_t0` everyday, a still
-   - `_t3` a look, a towel, cleavage, a still
+   - `_t0` everyday, a still or a gif
+   - `_t3` a look, a towel, cleavage, a still or a gif (`tier_format_check.py` allows `.gif` at `_t0`-`_t3`;
+     a `.gif` in a picture pool renders as an animated `<img>`)
    - `_t4` skin, a still or a clip
    - `_t5` sex or masturbation, animated only
    - `sex/` for `_t4`/`_t5`; the gates count `_t4`, `_t5` and `sex/` as explicit
 7. **Describe it for the search, and read it as an adult.** `description` says what the frame shows, with the
    people's ages when they matter (every person is an adult). `search_queries` are two or three plain search
    phrases. No gate reads either one. The media review does.
-8. **No harvest while writing.** Writing a block never means searching or downloading. The files come when the
+8. **How many files a spot holds.** A pool aims for 4 files unless it says otherwise (`DEFAULT_POOL_TARGET`,
+   `apps/common/media_blocks.py`), and the engine starts every pool at its first file, so set `pool = N` by what
+   the spot needs:
+
+   | the spot | files |
+   |---|---|
+   | explicit (`_t4`/`_t5`/`sex/`) on a repeat screen | 4, the default (gate `repeatable explicit media cycles`) |
+   | a `_t3` look on a repeat screen | `pool = 2` |
+   | an everyday spot, a person, a room, a thing | `pool = 1` (or a single `file`) |
+   | anything on a screen seen once | `pool = 1`: a second file would never show |
+
+   Never leave the default by accident. Taught from first_term (LO, 2026-11-18: "they dont need 4 shelfs they
+   can just be one"), where the every-screen pass left 452 pools at 4 and release 1 asked for 1,808 files; sized
+   by this table it asked for 740.
+9. **A picture you can find.** One subject per frame. A look is written as what he sees ("her bare legs walking
+   past a couch", "down her low-cut top from the next seat"), never as a man looking at her: two people and a
+   glance in one real photo barely exists, and the line already says who looks. Taught from first_term's 56
+   glance spots (LO, 2026-11-18: "these are very very hard to find"), and 17 more a keyword scan missed: test who
+   is in the frame, not whether the line says "looks". Keep a man in frame only where the touch is the picture.
+10. **The name is the shelf key.** The harvest stocks a spot's shelf, and records LO's pick, under the spot's
+   name. Once a spot has either, don't rename it (adding an extension is a rename): change how many files it
+   holds with `pool = N`. A block with an authored `id` keeps its shelf when its path moves
+   (`apps/common/media_blocks.py`, `block_slot_key`).
+11. **No harvest while writing.** Writing a block never means searching or downloading. The files come when the
    person who owns the game asks for them.
 
 ## How it is checked
@@ -64,5 +88,9 @@ places blocks from a table must stop when a row never lands, or the row is lost 
   never fails). Read the list each release; each name on it has a block or a reason on the media sheet.
 - `an explicit beat carries a clip`: at least 50% of explicit beats carry their own clip. Its report lists every
   screen still missing one, so read the list, not only the number.
+- `lint · media files asked for`: the files the build asks for, by tier, and every non-explicit pool still at
+  the default 4 (rule 8). Read it before any harvest.
+- `lint · a man in her picture`: every `_t1`-`_t3` look spot whose description names a man and her (rule 9).
+  Read it before any harvest; each name on it is rewritten as his view or kept because the touch is the picture.
 - `one asset, one block` and `repeatable explicit media cycles`, as above.
 - `--release`: "no missing media". Only then must the files exist.

@@ -38,7 +38,7 @@ name = "Monday"
 [[canvases.nodes.blocks]]
 type = "image"
 [canvases.nodes.blocks.props]
-file           = "scenes/opening_wake.jpg"
+file           = "scenes/opening_wake_t0.jpg"
 description    = "a girl waking in a small bedroom, morning light, alarm on the phone, posters, clothes on a chair"
 search_queries = ["girl waking up bedroom morning phone alarm", "young woman in bed morning light"]
 
@@ -96,8 +96,8 @@ content = "You get the bathroom first, before anyone. When you come out in the t
 type = "image"
 [canvases.nodes.blocks.props]
 file           = "look/opening_skip_hall_t3.jpg"
-description    = "a young woman in a towel stepping out of a bathroom, a young man of 22 in the hall staring at the knot at her chest"
-search_queries = ["girl in towel leaving bathroom guy in hallway staring"]   # opening media (LO, 2026-11-12; DECISIONS 241)
+description    = "Seen from a narrow hall: a young woman, 18, stepping out of a bathroom in a towel, the knot over her chest."
+search_queries = ["girl in towel stepping out of bathroom", "girl wrapped in towel bathroom doorway steam"]   # opening media (LO, 2026-11-12; DECISIONS 241)
 
 [[canvases.nodes.blocks]]
 type = "dialog"
@@ -131,6 +131,7 @@ name = "Seventy-five"
 type = "image"
 [canvases.nodes.blocks.props]
 pool_dir       = "people/ryan01_rent_dinner_mark_t0"
+pool           = 1   # DECISIONS 246 (LO, 2026-11-18)
 description    = "a man of 46 at a family dinner table with his fork put down, talking about money"
 search_queries = ["stern man at family dinner table", "father talking money at dinner"]   # every screen (LO, 2026-11-12; DECISIONS 243)
 
@@ -235,8 +236,8 @@ name = "The hall"
 type = "image"
 [canvases.nodes.blocks.props]
 file           = "scenes/ryan_01_hall.jpg"
-description    = "a young man in a t-shirt leaning on a hallway wall, looking at a girl stepping out of a bathroom in a towel, morning"
-search_queries = ["guy leaning on hallway wall girl in towel bathroom door", "girl in towel hallway morning brother waiting"]
+description    = "Seen from the hall in the morning: a young woman, 18, stepping out of a bathroom door in a towel."
+search_queries = ["girl in towel coming out of bathroom morning", "woman in towel bathroom door hallway"]
 
 [[canvases.nodes.blocks]]
 type    = "paragraph"
@@ -371,8 +372,8 @@ content = "He says sorry, but he doesn't step back. His eyes drop to your towel 
 type = "image"
 [canvases.nodes.blocks.props]
 file           = "look/opening_towel_knock_t3.jpg"
-description    = "a young man in a narrow hall looking at the carpet, red-faced, as a girl in a towel squeezes past"
-search_queries = ["embarrassed guy girl in towel hallway"]   # opening media (LO, 2026-11-12; DECISIONS 241)
+description    = "A young woman, 18, in a towel squeezing sideways through a narrow hallway, holding the knot."
+search_queries = ["girl in towel walking down narrow hallway", "girl holding towel knot hallway"]   # opening media (LO, 2026-11-12; DECISIONS 241)
 
 # H6 (pass 3 A63): after the accident, her own voice turns it into a wish, behind the flag the accident sets
 # reader batch 4 (pass 3): her voice at her level (W1b): pushback below Curious, the wish at Curious and up
@@ -440,8 +441,8 @@ content = "He's the only one in this house who asked. Then his eyes slip down to
 type = "image"
 [canvases.nodes.blocks.props]
 file           = "look/opening_towel_talk_t3.jpg"
-description    = "a girl in a towel standing in a bathroom doorway, a young man in the hall grinning, caught looking"
-search_queries = ["girl in towel doorway guy caught looking"]   # opening media (LO, 2026-11-12; DECISIONS 241)
+description    = "A young woman, 18, in a towel standing in a bathroom doorway, wet hair, one hand on the frame."
+search_queries = ["girl in towel standing in bathroom doorway", "wet hair girl towel doorway"]   # opening media (LO, 2026-11-12; DECISIONS 241)
 
 # H6 (pass 3 A63): after the accident, her own voice turns it into a wish, behind the flag the accident sets
 # reader batch 4 (pass 3): her voice at her level (W1b): pushback below Curious, the wish at Curious and up
@@ -575,6 +576,7 @@ content = "Down the hall the shower is running again: Ryan, in the bathroom now,
 type = "image"
 [canvases.nodes.blocks.props]
 pool_dir       = "people/ryan01_rule_laura_coffee_t0"
+pool           = 1   # DECISIONS 246 (LO, 2026-11-18)
 description    = "a woman of 41 at the kitchen table with both hands round her mug, reacting to what her daughter, hair still wet, just told her"
 search_queries = ["mother with coffee in kitchen looking down hall", "woman at breakfast table daughter wet hair"]   # every screen (LO, 2026-11-12; DECISIONS 243)
 
@@ -615,6 +617,7 @@ name = "Your first week"
 type = "image"
 [canvases.nodes.blocks.props]
 pool_dir       = "life/ryan01_card_bag_door_t0"
+pool           = 1   # DECISIONS 246 (LO, 2026-11-18)
 description    = "A young woman with her bag on her shoulder heading out the front door for her first day of college."
 search_queries = ["young woman leaving house with bag morning", "college student going out front door"]   # every screen (LO, 2026-11-12; DECISIONS 243)
 

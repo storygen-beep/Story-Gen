@@ -357,3 +357,12 @@ Back in release 1 (LO, 2026-11-12: "On campuss add what can be added"). The read
 
 None, with the reason: `door_grade_psych`, `door_grade_art`, `door_grade_business`, `door_grade_bio` (a grade
 sheet on a door, a notice like the dean's).
+
+## How many files each spot holds (LO, 2026-11-18; DECISIONS 246)
+
+The names in this sheet are unchanged; how many files a pool aims for now follows its tier (`canv._pool_size`):
+explicit spots on a repeat screen 4, `_t3` looks on a repeat screen 2, every `_t0` spot and anything on a
+screen seen once 1. Release 1: 294 pools of 1, 105 of 2, 53 of 4, plus 24 single files, 740 in all
+(it was 1,808). 56 spots that asked for a man looking at her body in the same shot now show what he sees;
+their descriptions and search words in `media.py` and `2_one_shots.toml` are the current ones, and the rows
+above may still carry the old wording.

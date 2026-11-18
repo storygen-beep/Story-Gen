@@ -136,7 +136,7 @@ name = "His porch"
 # media sheet row (sheets/media/release1.md, signed 2026-11-12, DECISIONS 238)
 [[canvases.nodes.blocks]]
 type = "image"
-props = { description = "a man in his mid-fifties in a cardigan and slippers on a porch with the evening paper", search_queries = ["older man porch evening newspaper slippers"], pool_dir = "people/vance_porch_t0" }
+props = { description = "a man in his mid-fifties in a cardigan and slippers on a porch with the evening paper", search_queries = ["older man porch evening newspaper slippers"], pool_dir = "people/vance_porch_t0", pool = 1 }
 
 
 # pass 3 D32 (the-surfaces.md R6): ONE constant opener; his Want band only changes what he does after it.
@@ -329,6 +329,7 @@ name = "Past his porch"
 type = "image"
 [canvases.nodes.blocks.props]
 pool_dir       = "people/vance_porch_walkpast_t0"
+pool           = 1   # DECISIONS 246 (LO, 2026-11-18)
 description    = "A man, 54, sitting on his front porch behind a garden gate as a young woman walks past on the sidewalk."
 search_queries = ["older man on porch watching woman walk by", "neighbor on front porch woman walking past gate"]   # every screen (LO, 2026-11-12; DECISIONS 243)
 
@@ -411,7 +412,7 @@ name = "The grass"
 # media sheet row (sheets/media/release1.md, signed 2026-11-12, DECISIONS 238)
 [[canvases.nodes.blocks]]
 type = "image"
-props = { description = "students lying on the grass of a college quad, bags under their heads", search_queries = ["students lying on grass campus quad"], pool_dir = "life/quad_grass_t0" }
+props = { description = "students lying on the grass of a college quad, bags under their heads", search_queries = ["students lying on grass campus quad"], pool_dir = "life/quad_grass_t0", pool = 1 }
 
 
 [[canvases.nodes.blocks]]
@@ -465,7 +466,7 @@ name = "A tray"
 # media sheet row (sheets/media/release1.md, signed 2026-11-12, DECISIONS 238)
 [[canvases.nodes.blocks]]
 type = "image"
-props = { description = "a college canteen counter: pasta, burgers, fries, trays", search_queries = ["college canteen food counter trays"], pool_dir = "life/canteen_tray_t0" }
+props = { description = "a college canteen counter: pasta, burgers, fries, trays", search_queries = ["college canteen food counter trays"], pool_dir = "life/canteen_tray_t0", pool = 1 }
 
 
 # Iteration 002, part 8 (reader): the counter first; she eats only after "Eat".
@@ -503,6 +504,7 @@ name = "Not hungry"
 type = "image"
 [canvases.nodes.blocks.props]
 pool_dir       = "life/canteen_line_step_out_t0"
+pool           = 1   # DECISIONS 246 (LO, 2026-11-18)
 description    = "A college canteen serving line, students with trays queueing at the hot counter."
 search_queries = ["college cafeteria serving line trays", "university canteen queue at counter"]   # every screen (LO, 2026-11-12; DECISIONS 243)
 
@@ -537,6 +539,7 @@ name = "Eaten"
 type = "image"
 [canvases.nodes.blocks.props]
 pool_dir       = "life/canteen_eaten_meal_t0"
+pool           = 1   # DECISIONS 246 (LO, 2026-11-18)
 description    = "A cheap canteen meal on a tray in a busy college canteen, students eating around it."
 search_queries = ["college cafeteria food on tray", "university canteen lunch busy"]   # every screen (LO, 2026-11-12; DECISIONS 243)
 
@@ -577,6 +580,7 @@ name = "The canteen"
 type = "image"
 [canvases.nodes.blocks.props]
 pool_dir       = "life/canteen_wall_listen_t0"
+pool           = 1   # DECISIONS 246 (LO, 2026-11-18)
 description    = "A young woman, 18, sitting with her back to the wall in a busy college canteen while the table behind her laughs."
 search_queries = ["college canteen students gossiping table", "girl eavesdropping in cafeteria"]   # every screen (LO, 2026-11-12; DECISIONS 243)
 
@@ -637,6 +641,7 @@ name = "The table"
 type = "image"
 [canvases.nodes.blocks.props]
 pool_dir       = "life/canteen_long_table_t0"
+pool           = 1   # DECISIONS 246 (LO, 2026-11-18)
 description    = "College students around 19 and 20 crowded loudly round a long canteen table by the windows at lunch."
 search_queries = ["college students loud lunch table canteen", "friends long cafeteria table windows"]   # every screen (LO, 2026-11-12; DECISIONS 243)
 
@@ -701,7 +706,7 @@ name = "A desk"
 # media sheet row (sheets/media/release1.md, signed 2026-11-12, DECISIONS 238)
 [[canvases.nodes.blocks]]
 type = "image"
-props = { description = "a girl at a library desk under a green lamp, reading", search_queries = ["girl studying library green lamp"], pool_dir = "life/library_lamp_t0" }
+props = { description = "a girl at a library desk under a green lamp, reading", search_queries = ["girl studying library green lamp"], pool_dir = "life/library_lamp_t0", pool = 1 }
 
 
 [[canvases.nodes.blocks]]
@@ -755,6 +760,7 @@ name = "The sink"
 type = "image"
 [canvases.nodes.blocks.props]
 pool_dir       = "life/toilet_wash_sink_t0"
+pool           = 1   # DECISIONS 246 (LO, 2026-11-18)
 description    = "A young woman, 18, splashing cold water on her face at a public restroom sink."
 search_queries = ["woman washing face public restroom sink", "girl splashing water face bathroom"]   # every screen (LO, 2026-11-12; DECISIONS 243)
 
@@ -791,7 +797,7 @@ name = "The long mirror"
 # media sheet row (sheets/media/release1.md, signed 2026-11-12, DECISIONS 238)
 [[canvases.nodes.blocks]]
 type = "image"
-props = { description = "a girl checking herself in a long lit mirror over college sinks", search_queries = ["girl checking reflection bathroom mirror college"], pool_dir = "look/toilet_mirror_t3" }
+props = { description = "a girl checking herself in a long lit mirror over college sinks", search_queries = ["girl checking reflection bathroom mirror college"], pool_dir = "look/toilet_mirror_t3", pool = 2 }
 
 
 [[canvases.nodes.blocks]]
@@ -1104,7 +1110,7 @@ blocks = [ { type = "group", conditions = { version = "1.0", logic = "AND", item
 # media sheet row (sheets/media/release1.md, signed 2026-11-12, DECISIONS 238)
 [[canvases.nodes.blocks]]
 type = "image"
-props = { description = "a girl changing behind a curtain that doesn't reach the wall, a man outside by the shirt rail", search_queries = ["changing room curtain gap man looking"], pool_dir = "look/changing_gap_t3" }
+props = { description = "Seen through the gap at the edge of a changing-room curtain: a young woman, 18, in her underwear pulling a top over her head.", search_queries = ["changing room curtain gap girl underwear", "girl changing in fitting room peek gif"], pool_dir = "look/changing_gap_t3", pool = 2 }
 
 [[canvases.nodes.blocks]]
 type = "paragraph"

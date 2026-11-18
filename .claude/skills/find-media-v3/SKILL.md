@@ -362,6 +362,10 @@ Non-negotiables (each has a recorded failure behind it):
 - `file` = the slot's TOML-declared path, character for character; also send the item's own
   `slot_key` verbatim — the shelf is keyed on it, and a tagged slot's shelf survives its path
   moving.
+- **A slot's name is its shelf key, so never rename a stocked slot.** Adding an extension to a pool
+  name (`life/x_t0` to `life/x_t0.jpg`) is a rename: the shelf and any pick stay under the old key
+  and the new slot starts empty. To change how many files a slot wants, change its `pool = N`
+  (LO, 2026-11-18: first_term's pools were resized this way with 74 shelves already stocked).
 - **`query` on every `options/add`.** It is what puts a candidate in a labelled bucket instead
   of an undifferentiated pile. There is **no retroactive attribution** — the ledger records
   only a date, and dedup makes timestamps non-invertible — so an option stocked without it is
