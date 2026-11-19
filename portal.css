@@ -274,6 +274,10 @@ footer {
 }
 .media-card.approved { border-left-color: #5fae6e; }
 .media-card.disapproved { border-left-color: #c2554e; }
+/* Not needed: a missing spot the human decided needs no media — dimmed, out of the way. */
+.media-card.not-needed { border-left-color: #6b6b6b; opacity: 0.6; }
+/* The line a picture sits under: set off so it reads before the description. */
+.media-line { font-style: italic; margin: 2px 0 4px; }
 .media-thumb {
   width: 100%;
   aspect-ratio: 16 / 10;
@@ -396,6 +400,7 @@ footer {
 }
 .rev-btn.approve.on { background: #2f5d39; color: #d7f0dd; border-color: #3f7d4c; }
 .rev-btn.disapprove.on { background: #5d2f2f; color: #f0d7d7; border-color: #7d3f3f; }
+.rev-btn.notneeded.on { background: #444; color: #e6e6e6; border-color: #666; }
 .rev-btn:hover { color: var(--text); }
 .media-note {
   width: 100%;

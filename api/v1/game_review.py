@@ -715,6 +715,19 @@ def load_game(request):
     # Extract missing media
     media_info = _extract_missing_media(data, game)
 
+    # A spot the human marked Not needed on the media review page leaves
+    # `missing_media` — the list the media search works from — so no harvest stocks
+    # its shelf. Imported lazily: media_review imports this module.
+    try:
+        from .media_review import not_needed_keys
+        skip = not_needed_keys(game_dir)
+    except Exception:
+        skip = set()
+    missing_media, not_needed_media = [], []
+    for m in media_info["missing"]:
+        key = m.get("slot_key") or m.get("file")
+        (not_needed_media if key in skip else missing_media).append(m)
+
     return JsonResponse({
         "project": {
             "id": project.get("id", game),
@@ -726,7 +739,8 @@ def load_game(request):
         "canvases": canvases,
         "story_arc": story_arc,
         "starting_canvas": data.get("starting_canvas", ""),
-        "missing_media": media_info["missing"],
+        "missing_media": missing_media,
+        "not_needed_media": not_needed_media,
         "found_media": media_info["found"],
     })
 

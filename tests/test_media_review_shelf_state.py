@@ -255,3 +255,70 @@ text = "Done."
 
     assert item["options_count"] == 2
     assert result["counts"]["ready_to_pick"] == 1
+
+
+# ── Not needed: a missing spot the human decided needs no media ──────────────
+
+def _mark(root, key, status):
+    (root / ".find-media" / "media_reviews.json").write_text(
+        json.dumps({"game": "g", "reviews": {key: {"status": status, "note": ""}}})
+    )
+
+
+def test_a_not_needed_spot_leaves_missing_and_unworked(game):
+    root = game(SINGLE)
+    _mark(root, "sex/a_t5.webm", "not_needed")
+    result = _enumerate(root)
+
+    assert _only(result)["status"] == "not_needed"
+    assert result["counts"]["not_needed"] == 1
+    assert result["counts"]["missing"] == 0
+    assert result["counts"]["unworked"] == 0
+
+
+def test_a_not_needed_spot_with_a_shelf_is_not_ready_to_pick(game):
+    root = game(SINGLE, shelf={"sex/a_t5.webm": [{"url": "u1"}]})
+    _mark(root, "sex/a_t5.webm", "not_needed")
+
+    assert _enumerate(root)["counts"]["ready_to_pick"] == 0
+
+
+def test_post_review_accepts_not_needed_and_still_rejects_junk(game):
+    from django.test import RequestFactory
+
+    root = game(SINGLE)
+    rf = RequestFactory()
+
+    def post(status):
+        req = rf.post("/x?game=g", data=json.dumps({"file": "sex/a_t5.webm", "status": status}),
+                      content_type="application/json")
+        return mr.post_review(req)
+
+    assert post("not_needed").status_code == 200
+    assert mr.not_needed_keys(root) == {"sex/a_t5.webm"}
+    assert post("bogus").status_code == 400
+    assert post(None).status_code == 200
+    assert mr.not_needed_keys(root) == set()
+
+
+def test_game_review_load_moves_a_not_needed_spot_out_of_missing_media(game):
+    """`missing_media` is what the media search works from, so a spot marked
+    Not needed must not be in it — no harvest stocks its shelf."""
+    from django.test import RequestFactory
+
+    root = game(SINGLE)
+    _mark(root, "sex/a_t5.webm", "not_needed")
+    data = json.loads(gr.load_game(RequestFactory().get("/x?game=g")).content)
+
+    assert [m["file"] for m in data["not_needed_media"]] == ["sex/a_t5.webm"]
+    assert data["missing_media"] == []
+
+
+def test_each_item_carries_the_line_it_sits_under():
+    data = {"canvases": [{"id": "c", "name": "Lie in the sun", "nodes": [{"id": "n", "name": "The lounger", "blocks": [
+        {"type": "image", "props": {"pool_dir": "life/top_t0"}},
+        {"type": "paragraph", "content": "You lie down on the lounger."},
+        {"type": "image", "props": {"pool_dir": "look/after_t3"}}]}]}]}
+    lines = mr._lines_by_spot(data)
+    assert lines["life/top_t0"] == {"screen": "Lie in the sun · The lounger", "line": "You lie down on the lounger."}
+    assert lines["look/after_t3"]["line"] == "You lie down on the lounger."

@@ -56,8 +56,12 @@
       if (i.pool_dir) return !(i.pool_items && i.pool_items.length);
       return !i.found;
     }
-    function readyToPick(i) { return shelfDepth(i) > 0 && nothingSelected(i); }
-    function unworked(i) { return !i.found && shelfDepth(i) === 0; }
+    // A missing spot LO marked "Not needed" owes nobody a move: it leaves Missing,
+    // Ready to pick and Not worked, and the media search skips it too
+    // (game-review `load` moves it to `not_needed_media`).
+    function notNeeded(i) { return i.status === "not_needed"; }
+    function readyToPick(i) { return shelfDepth(i) > 0 && nothingSelected(i) && !notNeeded(i); }
+    function unworked(i) { return !i.found && shelfDepth(i) === 0 && !notNeeded(i); }
 
     var AXES = [
       { id: "status", label: "Status", options: [
@@ -67,7 +71,8 @@
         { key: "needs", label: "Needs review", test: function (i) { return i.found && !i.status; } },
         { key: "ready", label: "Ready to pick", test: readyToPick },
         { key: "unworked", label: "Not worked", test: unworked },
-        { key: "missing", label: "Missing", test: function (i) { return !i.found; } }
+        { key: "missing", label: "Missing", test: function (i) { return !i.found && !notNeeded(i); } },
+        { key: "notneeded", label: "Not needed", test: notNeeded }
       ]},
       { id: "band", label: "Content", options: [
         { key: "all", label: "All", test: function () { return true; } },
@@ -88,7 +93,7 @@
     };
 
     var state = {
-      items: [], laneOrder: [], toml: "", expanded: new Set(),
+      items: [], laneOrder: [], toml: "", counts: {}, expanded: new Set(),
       filters: { status: "all", band: "all", shape: "all" }
     };
 
@@ -346,6 +351,7 @@
       function reflectStatus() {
         card.classList.toggle("approved", item.status === "approved");
         card.classList.toggle("disapproved", item.status === "disapproved");
+        card.classList.toggle("not-needed", notNeeded(item));
       }
 
       // media / placeholder
@@ -382,6 +388,8 @@
           recheckI();
           card.appendChild(img);
         }
+      } else if (notNeeded(item)) {
+        card.appendChild(el("div", "media-thumb missing", "not needed — no media wanted"));
       } else {
         card.appendChild(el("div", "media-thumb missing", shelfDepth(item)
           ? "nothing selected — " + shelfDepth(item) + " option" + (shelfDepth(item) === 1 ? "" : "s") + " waiting"
@@ -408,7 +416,15 @@
       metaLine("location", item.location_name);
       if (item.lane === "npc") metaLine("npc", item.npc_name + (item.ambient ? " (ambient)" : ""));
       if (item.reused_in && item.reused_in.length) metaLine("also in", item.reused_in.join(", "));
-      if (item.description) metaLine("desc", item.description);
+      // The words this picture sits under, so a picture that misses its line shows at a glance (LO, 2026-11-18).
+      if (item.screen) metaLine("screen", item.screen);
+      if (item.line) {
+        var ln = el("div", "media-line");
+        ln.appendChild(el("span", "k", "line: "));
+        ln.appendChild(document.createTextNode("\u201c" + item.line + "\u201d"));
+        meta.appendChild(ln);
+      }
+      if (item.description) metaLine("wants", item.description);
 
       var fileLine = el("div");
       fileLine.appendChild(el("span", "k", "file: "));
@@ -475,6 +491,28 @@
         row.append(approve, disapprove);
         body.append(row, note, tick);
         reflectButtons();
+      } else {
+        // A missing spot: one button to say no media is wanted here. Clicking it
+        // again clears the verdict and the spot is Missing again. render() after the
+        // save so the filter counts and the header move with it.
+        var nTick = el("div", "saved-tick", "");
+        var nRow = el("div", "review-row");
+        var nBtn = el("button", "rev-btn notneeded" + (notNeeded(item) ? " on" : ""),
+                      notNeeded(item) ? "Not needed ✓ (undo)" : "Not needed");
+        var nNote = el("textarea", "media-note");
+        nNote.placeholder = "why not needed…";
+        nNote.value = item.note || "";
+        nBtn.addEventListener("click", function () {
+          var next = notNeeded(item) ? null : "not_needed";
+          saveReview(item, next, nNote.value, nTick, function () {
+            render(); renderSub();
+          });
+        });
+        nNote.addEventListener("blur", function () {
+          if (nNote.value !== (item.note || "")) saveReview(item, item.status || null, nNote.value, nTick);
+        });
+        nRow.appendChild(nBtn);
+        body.append(nRow, nNote, nTick);
       }
 
       // Find media — on every card (fill a missing slot, or replace this one).
@@ -599,6 +637,23 @@
       });
     }
 
+    // The header line. Status-driven numbers are counted from state.items, so a
+    // verdict saved on this page moves them without a reload; the rest are the
+    // server's and cannot change here.
+    function renderSub() {
+      var c = state.counts || {}, items = state.items;
+      function n(t) { return items.filter(t).length; }
+      subEl.textContent = (c.found || 0) + " media · " +
+        n(function (i) { return !i.found && !notNeeded(i); }) + " missing · " +
+        n(notNeeded) + " not needed · " +
+        n(function (i) { return i.status === "approved"; }) + " approved · " +
+        n(function (i) { return i.status === "disapproved"; }) + " disapproved · " +
+        n(readyToPick) + " ready to pick / " + n(unworked) + " not worked · " +
+        (c.nsfw || 0) + " nsfw / " + (c.sfw || 0) + " sfw · " +
+        (c.pool || 0) + " pools / " + (c.single || 0) + " single" +
+        (state.toml ? "  ·  " + state.toml : "");
+    }
+
     function showOffline() {
       filtersEl.hidden = true;
       subEl.textContent = "";
@@ -650,14 +705,9 @@
         state.items = (data.items || []).slice().sort(function (a, b) { return (a.order || 0) - (b.order || 0); });
         state.laneOrder = data.lane_order || ["location", "npc", "solo", "story", "clothing", "phone", "other"];
         state.toml = data.toml || "";
-        var c = data.counts || {};
-        subEl.textContent = (c.found || 0) + " media · " + (c.missing || 0) + " missing · " +
-          (c.approved || 0) + " approved · " + (c.disapproved || 0) + " disapproved · " +
-          (c.ready_to_pick || 0) + " ready to pick / " + (c.unworked || 0) + " not worked · " +
-          (c.nsfw || 0) + " nsfw / " + (c.sfw || 0) + " sfw · " +
-          (c.pool || 0) + " pools / " + (c.single || 0) + " single" +
-          (state.toml ? "  ·  " + state.toml : "");
+        state.counts = data.counts || {};
         render();
+        renderSub();
         // After render, not before: the page is empty until this fetch resolves, so
         // the browser's own scroll restoration has nothing to scroll to. Tiles
         // reserve their height via `aspect-ratio` (portal.css .pool-thumb /
