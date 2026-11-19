@@ -706,9 +706,10 @@ _hub["nodes"] += [node("mremote", "The remote", [
     # reader a3 #1 (DECISIONS 131): channel 5 beside him after his accident, like "Leave it on."; reader batch 5 (pass 3):
     # and at Curious, as "Leave it on." is: putting porn on beside him is watching by choice (the-heat-ladder.md H1)
     ], remote_choices("mch_", "madult", adult_cond=cond(flag("mark_saw_her"), CURIOUS)) + [go("Leave him to it.", loc="home_hall")])]
+# a channel screen has no picture of its own: a scene keeps one everyday picture (LO, 2026-11-18, DECISIONS 251)
 for cid, btn, lines, desc, qs, pool in CHANNELS:
     _hub["nodes"].append(node(f"mch_{cid}", btn.split(": ", 1)[1].rstrip(".").capitalize(),
-        [POOL(*[P(x) for x in MARK_TV_LINES[cid]]), MARK_CH[cid], VID(desc, *qs, pool_dir=pool.replace("tv/", "tv/mark_"))],
+        [POOL(*[P(x) for x in MARK_TV_LINES[cid]]), MARK_CH[cid]],
         [*watch_plain(LR), go("Change the channel.", node="mremote"), go("Leave him to it.", loc="home_hall")]))
 _hub["nodes"] += [
     node("madult", "Channel 5", [P(MARK_TV_ADULT),

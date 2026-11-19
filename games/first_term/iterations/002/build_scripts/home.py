@@ -408,15 +408,17 @@ _ANYWAY = {"version": "1.0", "logic": "AND", "items": []}
 tv_nodes = [node("remote", "The remote", [
         P("You drop onto the couch and pick up the remote. Five channels, and one of them is the one Mark pays for."),
     ], remote_choices("ch_", "adult") + [go("Turn it off.", loc="home_hall")])]
+# a channel screen has no picture of its own: a scene keeps one everyday picture (LO, 2026-11-18, DECISIONS 251)
 for cid, btn, lines, desc, qs, pool in CHANNELS:
-    tv_nodes.append(node(f"ch_{cid}", btn.split(": ", 1)[1].rstrip(".").capitalize(), [POOL(*[GC(_ANYWAY, P(x), WHO(TV_VOICE[x])) for x in lines]), VID(desc, *qs, pool_dir=pool)],
+    tv_nodes.append(node(f"ch_{cid}", btn.split(": ", 1)[1].rstrip(".").capitalize(), [POOL(*[GC(_ANYWAY, P(x), WHO(TV_VOICE[x])) for x in lines])],
         [*watch_plain("home_living_room"), go("Change the channel.", node="remote"), go("Turn it off.", loc="home_hall")]))
 tv_nodes += [
     node("adult", "Channel 5", [P(LIVING_TV_WATCH),
         WHO("Oh God, your cock. Harder. Don't stop."),
         VID("a couple having sex on a TV screen in a dark living room, the woman riding the man", "porn on tv screen living room", "woman riding man on tv adult channel", pool_dir="sex/tv_adult_alone_t5")],
-        [go("Keep watching.", loc="home_living_room", mins=30, eff=tv_pay(1, 19), cond_=cond(TV_GG)),
-         go("Keep watching.", loc="home_living_room", mins=30, eff=tv_pay(1, 39), cond_=cond(TV_CUR)),
+        # "Keep watching." goes on to tv_still_watching, where someone may walk in on her (LO, 2026-11-18, DECISIONS 257)
+        [go("Keep watching.", node="tv_still_watching.still", mins=30, eff=tv_pay(1, 19), cond_=cond(TV_GG)),
+         go("Keep watching.", node="tv_still_watching.still", mins=30, eff=tv_pay(1, 39), cond_=cond(TV_CUR)),
          go("Touch yourself.", node="touch", mins=5, cond_=cond(TV_CUR)),
          # C2 (DECISIONS 147): Corruption 10, +1 cap 19; it ends the session like "Keep watching." (DECISIONS 91). The sound
          # stays up for the day (`tv_loud`, cleared at midnight), and while it is the walk-ins here roll 0.5 (walkins.py B3).
@@ -427,7 +429,7 @@ tv_nodes += [
         P("Anyone in the house can hear it now. Your nipples go hard. You squeeze your thighs together on the couch and leave it right where it is."),
         WHO("Harder. Oh God, harder. Don't stop."),
         VID("a couple having sex on a TV screen, the volume bar full, a girl on a couch", "porn on tv volume up living room", "loud porn on tv girl watching", pool_dir="sex/tv_adult_loud_t5")],
-        [go("Keep watching.", loc="home_living_room", mins=30, eff=tv_pay(1, 19), flags=[fset("tv_loud")])]),
+        [go("Keep watching.", node="tv_still_watching.still", mins=30, eff=tv_pay(1, 19), flags=[fset("tv_loud")])]),
     node("touch", "On the couch", [
         G(cond(here(M, "home_kitchen")), P("In the kitchen a cupboard bangs. Mark is home.")),
         G(cond(here(R, "home_ryan_room")), P("Across the hall, Ryan's music thumps through his door.")),
@@ -436,6 +438,16 @@ tv_nodes += [
         VID("a girl alone on a couch touching herself while porn plays on the TV", "girl masturbating on couch watching porn on tv", "woman fingering herself couch tv porn", pool_dir="sex/tv_adult_touch_t5")],
         [go("Fix your clothes.", loc="home_living_room", mins=25, eff=tv_pay(2, 39))]),
 ]
+# She keeps watching channel 5, and this is where someone can walk in on her: the walk-ins' substitution rules sit on
+# this canvas (walkins.py B3), which the engine rolls when its first screen opens (v2.py checkAndSubstituteCanvas).
+# Nobody comes: the half hour passes and she gets up. Reached only from "Keep watching." (LO, 2026-11-18, DECISIONS 257)
+out.append({"id": "tv_still_watching", "name": "Still watching",
+    "description": "After 'Keep watching.' on channel 5: the walk-ins roll here, so whoever comes in finds her already watching the same film. Nobody comes: she gets up. Reached only from living_tv.",
+    "trigger": {"location": "home_living_room", "is_repeatable": True, "priority": 1, "is_active": True,
+                "substitution_only": True},
+    "nodes": [node("still", "Still watching", [
+        P("The half hour goes. On screen she rides his cock to the end, her tits bouncing, and the channel rolls on to the next one. Nobody comes in. You get up off the couch with your face hot, your nipples tight and your thighs pressed together."),
+    ], [go("Get up.", loc="home_living_room", mins=0)])]})
 out.append(solo("living_tv", "Watch TV",
     "The remote alone (DECISIONS 85-86, 91): at most five sessions a day, then the row greys out. Five channels, each with a clip. The plain four: 30 min, energy +5 once a day. Channel 5: corruption +1 every watch, cap 19 at Good Girl, 39 at Curious; touch herself at Curious, +2, cap 39.",
     "home_living_room", tv_nodes, sched=S(ALL, "07:00", "02:00"), conds=LIVING_EMPTY,
@@ -555,12 +567,12 @@ out.append({"id": "master_door_saturday_night", "name": "Their door's ajar",
     "nodes": [
         node("gap", "Their door, ajar", [P(MASTER_GAP),
             G(cond(here(L, "home_master_bedroom"), here(M, "home_master_bedroom")), D(M, "Christ, that ass. Keep still."), D(L, "Are you nearly done?"), D(M, "I'll be done when I'm done. Push back."), D(L, "Mark. They'll hear.")),   # LO 2026-11-03: his grunt, her flat voice
-            VID("through a bedroom door left ajar, a middle-aged man taking a woman from behind on the bed, lamp on", "couple sex seen through bedroom door ajar", "peeking at parents bedroom door gap", pool_dir="sex/master_door_gap_t5")],
+            VID("Through a bedroom door left ajar: a man, 46, taking a woman, 41, from behind on the bed, the lamp on.", "couple sex seen through bedroom door ajar", "peeking at parents bedroom door gap", pool_dir="sex/master_door_gap_t5")],
             [go("Stay at the gap.", node="stay", mins=5, flags=[fset("saw_mark_and_laura"), fset("mark_laura_seen")]),
              go("Go back to bed.", loc="home_ella_room", mins=2, flags=[fset("saw_mark_and_laura"), fset("mark_laura_seen")])]),
         node("stay", "At the gap", [G(cond(here(L, "home_master_bedroom"), here(M, "home_master_bedroom")), D(M, "Ass up, Laura. Nearly there."), D(L, "Yes. Fine. Yes.")), P(MASTER_STAY),
             G(cond(here(L, "home_master_bedroom")), D(L, "Oh. Oh, God. Yes."), P("She says it into the pillow, so quiet it's almost nothing.")),
-            VID("a woman lying awake in bed touching herself under the sheet while the man beside her sleeps", "wife masturbating next to sleeping husband", "woman touches herself after husband falls asleep", pool_dir="sex/master_door_stay_t5"),
+            VID("A woman, 41, lying awake in bed touching herself under the sheet while the man beside her sleeps.", "wife masturbating next to sleeping husband", "woman touches herself after husband falls asleep", pool_dir="sex/master_door_stay_t5"),
             # scene reader b03 (2026-11-03): the hook (the canvas's window is every Saturday night, Sun 00:00-01:00)
             # reader pass 4 b4: her voice at her level; the stay pays to Corruption 19, so Good Girl gets her pushback
             G(cond(trait("corruption", "lt", 20)), T("Next Saturday night, after midnight, their door will be open a crack again. You swear you won't be out in that hall. You know you will.")),

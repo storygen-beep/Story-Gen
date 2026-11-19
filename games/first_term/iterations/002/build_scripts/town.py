@@ -313,7 +313,7 @@ STREET_CASES = [
 STREET_POOLS = {
     "nobra": [VID("a braless girl walking down a street, her nipples showing through her top, a man staring at her tits",
                   "braless walking street nipples showing", "no bra walk in public stared at", pool_dir="sex/street_seen_nobra_t4")],
-    "nopanties": [VID("a girl in a short skirt on a windy street, the breeze lifting the hem over her bare ass",
+    "nopanties": [VID("A young woman, 18, in a short skirt on a windy street, the breeze lifting the hem over her bare ass, no panties.",
                       "no panties skirt wind street", "skirt blows up no panties walking", pool_dir="sex/street_seen_nopanties_t4")],
 }
 SHOP_NEXT = "He'll be out front tomorrow."

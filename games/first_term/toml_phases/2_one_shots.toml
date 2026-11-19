@@ -39,7 +39,7 @@ name = "Monday"
 type = "image"
 [canvases.nodes.blocks.props]
 file           = "scenes/opening_wake_t0.jpg"
-description    = "a girl waking in a small bedroom, morning light, alarm on the phone, posters, clothes on a chair"
+description    = "A young woman, 18, waking in a small bedroom in morning light, reaching for the alarm on her phone, posters on the wall and clothes on a chair."
 search_queries = ["girl waking up bedroom morning phone alarm", "young woman in bed morning light"]
 
 [[canvases.nodes.blocks]]
@@ -97,7 +97,7 @@ type = "image"
 [canvases.nodes.blocks.props]
 file           = "look/opening_skip_hall_t3.jpg"
 description    = "Seen from a narrow hall: a young woman, 18, stepping out of a bathroom in a towel, the knot over her chest."
-search_queries = ["girl in towel stepping out of bathroom", "girl wrapped in towel bathroom doorway steam"]   # opening media (LO, 2026-11-12; DECISIONS 241)
+search_queries = ["girl in towel stepping out of bathroom", "girl wrapped in towel bathroom doorway steam gif"]   # opening media (LO, 2026-11-12; DECISIONS 241)
 
 [[canvases.nodes.blocks]]
 type = "dialog"
@@ -127,13 +127,6 @@ id   = "problem"
 name = "Seventy-five"
 
 # Q10 (LO, 2026-11-04): Mark has left before breakfast, so his words are last night's, said in his own voice here
-[[canvases.nodes.blocks]]
-type = "image"
-[canvases.nodes.blocks.props]
-pool_dir       = "people/ryan01_rent_dinner_mark_t0"
-pool           = 1   # DECISIONS 246 (LO, 2026-11-18)
-description    = "a man of 46 at a family dinner table with his fork put down, talking about money"
-search_queries = ["stern man at family dinner table", "father talking money at dinner"]   # every screen (LO, 2026-11-12; DECISIONS 243)
 
 [[canvases.nodes.blocks]]
 type    = "paragraph"
@@ -186,7 +179,7 @@ content = "You stand under the water until it runs hot, and you let yourself hav
 type = "video"
 [canvases.nodes.blocks.props]
 file           = "sex/opening_shower_t4.webm"
-description    = "a young woman alone in a small, old home shower, eyes shut under the hot water"
+description    = "A young woman, 18, alone in a small, old home shower, eyes shut under the hot water."
 search_queries = ["girl showering alone small bathroom eyes closed"]   # opening media (LO, 2026-11-12; DECISIONS 241)
 
 [[canvases.nodes.blocks]]
@@ -211,8 +204,8 @@ content = "Ryan. Your step-brother, through the door, right outside it. You turn
 type = "image"
 [canvases.nodes.blocks.props]
 file           = "look/opening_towel_tuck_t3.jpg"
-description    = "a wet girl in a small bathroom tucking a towel in over her chest, looking at the door"
-search_queries = ["wet girl tucking towel bathroom door"]   # opening media (LO, 2026-11-12; DECISIONS 241)
+description    = "A wet young woman, 18, in a small bathroom tucking a towel in over her chest, looking at the door."
+search_queries = ["wet girl tucking towel bathroom door gif"]   # opening media (LO, 2026-11-12; DECISIONS 241)
 
 [canvases.nodes.exit_block]
 type = "choices"
@@ -309,8 +302,8 @@ content = "You hold the towel shut with both hands and go, fast, past him, close
 type = "image"
 [canvases.nodes.blocks.props]
 file           = "look/opening_towel_run_t3.jpg"
-description    = "a girl in a towel hurrying down a narrow house hallway, seen from behind, her legs bare"
-search_queries = ["girl in towel walking down hallway from behind"]   # opening media (LO, 2026-11-12; DECISIONS 241)
+description    = "Seen from behind: a young woman, 18, in a towel hurrying down a narrow house hallway, her legs bare."
+search_queries = ["girl in towel walking down hallway from behind gif"]   # opening media (LO, 2026-11-12; DECISIONS 241)
 
 # pass 4 B3: the door is narration, so it is a paragraph; the thoughts below keep only what she thinks
 [[canvases.nodes.blocks]]
@@ -373,7 +366,7 @@ type = "image"
 [canvases.nodes.blocks.props]
 file           = "look/opening_towel_knock_t3.jpg"
 description    = "A young woman, 18, in a towel squeezing sideways through a narrow hallway, holding the knot."
-search_queries = ["girl in towel walking down narrow hallway", "girl holding towel knot hallway"]   # opening media (LO, 2026-11-12; DECISIONS 241)
+search_queries = ["girl in towel walking down narrow hallway", "girl holding towel knot hallway gif"]   # opening media (LO, 2026-11-12; DECISIONS 241)
 
 # H6 (pass 3 A63): after the accident, her own voice turns it into a wish, behind the flag the accident sets
 # reader batch 4 (pass 3): her voice at her level (W1b): pushback below Curious, the wish at Curious and up
@@ -481,12 +474,6 @@ wardrobeEffects = [ { action = "equip", item_id = "plain_bra" }, { action = "equ
 id   = "breakfast"
 name = "Breakfast"
 
-[[canvases.nodes.blocks]]
-type = "image"
-[canvases.nodes.blocks.props]
-file           = "scenes/opening_breakfast.jpg"
-description    = "a family kitchen in the morning, a woman in her forties in a work blouse pouring coffee, an envelope propped against the sugar bowl"
-search_queries = ["family kitchen morning mom pouring coffee", "suburban kitchen breakfast parents work clothes"]
 
 [[canvases.nodes.blocks]]
 type    = "paragraph"
@@ -572,13 +559,6 @@ blocks = [ { type = "paragraph", content = "Laura goes quiet and looks into her 
 type    = "paragraph"
 content = "Down the hall the shower is running again: Ryan, in the bathroom now, taking his turn. Laura looks toward the sound, then at your wet hair, then toward the sound again."
 
-[[canvases.nodes.blocks]]
-type = "image"
-[canvases.nodes.blocks.props]
-pool_dir       = "people/ryan01_rule_laura_coffee_t0"
-pool           = 1   # DECISIONS 246 (LO, 2026-11-18)
-description    = "a woman of 41 at the kitchen table with both hands round her mug, reacting to what her daughter, hair still wet, just told her"
-search_queries = ["mother with coffee in kitchen looking down hall", "woman at breakfast table daughter wet hair"]   # every screen (LO, 2026-11-12; DECISIONS 243)
 
 [[canvases.nodes.blocks]]
 type = "dialog"
@@ -613,13 +593,6 @@ flagEffects = [ { targetType = "player", flag = "laura_rule_ryan_first", op = "s
 id   = "card"
 name = "Your first week"
 
-[[canvases.nodes.blocks]]
-type = "image"
-[canvases.nodes.blocks.props]
-pool_dir       = "life/ryan01_card_bag_door_t0"
-pool           = 1   # DECISIONS 246 (LO, 2026-11-18)
-description    = "A young woman with her bag on her shoulder heading out the front door for her first day of college."
-search_queries = ["young woman leaving house with bag morning", "college student going out front door"]   # every screen (LO, 2026-11-12; DECISIONS 243)
 
 [[canvases.nodes.blocks]]
 type    = "paragraph"

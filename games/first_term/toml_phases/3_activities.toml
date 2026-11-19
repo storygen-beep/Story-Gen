@@ -409,10 +409,6 @@ substitutions = [{ target_canvas_id = "walkin_quad_team", chance = 0.25, conditi
 id   = "grass"
 name = "The grass"
 
-# media sheet row (sheets/media/release1.md, signed 2026-11-12, DECISIONS 238)
-[[canvases.nodes.blocks]]
-type = "image"
-props = { description = "students lying on the grass of a college quad, bags under their heads", search_queries = ["students lying on grass campus quad"], pool_dir = "life/quad_grass_t0", pool = 1 }
 
 
 [[canvases.nodes.blocks]]
@@ -500,13 +496,6 @@ nodeId     = "not_hungry"
 id   = "not_hungry"
 name = "Not hungry"
 
-[[canvases.nodes.blocks]]
-type = "image"
-[canvases.nodes.blocks.props]
-pool_dir       = "life/canteen_line_step_out_t0"
-pool           = 1   # DECISIONS 246 (LO, 2026-11-18)
-description    = "A college canteen serving line, students with trays queueing at the hot counter."
-search_queries = ["college cafeteria serving line trays", "university canteen queue at counter"]   # every screen (LO, 2026-11-12; DECISIONS 243)
 
 [[canvases.nodes.blocks]]
 type = "dialog"
@@ -535,13 +524,6 @@ time_progression_minutes = 2
 id   = "eaten"
 name = "Eaten"
 
-[[canvases.nodes.blocks]]
-type = "image"
-[canvases.nodes.blocks.props]
-pool_dir       = "life/canteen_eaten_meal_t0"
-pool           = 1   # DECISIONS 246 (LO, 2026-11-18)
-description    = "A cheap canteen meal on a tray in a busy college canteen, students eating around it."
-search_queries = ["college cafeteria food on tray", "university canteen lunch busy"]   # every screen (LO, 2026-11-12; DECISIONS 243)
 
 [[canvases.nodes.blocks]]
 type = "block_pool"
@@ -576,13 +558,6 @@ substitutions = [{ target_canvas_id = "walkin_canteen_zoe", chance = 0.25, condi
 id   = "listen"
 name = "The canteen"
 
-[[canvases.nodes.blocks]]
-type = "image"
-[canvases.nodes.blocks.props]
-pool_dir       = "life/canteen_wall_listen_t0"
-pool           = 1   # DECISIONS 246 (LO, 2026-11-18)
-description    = "A young woman, 18, sitting with her back to the wall in a busy college canteen while the table behind her laughs."
-search_queries = ["college canteen students gossiping table", "girl eavesdropping in cafeteria"]   # every screen (LO, 2026-11-12; DECISIONS 243)
 
 [[canvases.nodes.blocks]]
 type = "paragraph"
@@ -703,10 +678,6 @@ max_triggers_per_day = 2
 id   = "desk"
 name = "A desk"
 
-# media sheet row (sheets/media/release1.md, signed 2026-11-12, DECISIONS 238)
-[[canvases.nodes.blocks]]
-type = "image"
-props = { description = "a girl at a library desk under a green lamp, reading", search_queries = ["girl studying library green lamp"], pool_dir = "life/library_lamp_t0", pool = 1 }
 
 
 [[canvases.nodes.blocks]]
@@ -756,13 +727,6 @@ substitutions = [{ target_canvas_id = "walkin_toilet_zoe", chance = 0.25, condit
 id   = "sink"
 name = "The sink"
 
-[[canvases.nodes.blocks]]
-type = "image"
-[canvases.nodes.blocks.props]
-pool_dir       = "life/toilet_wash_sink_t0"
-pool           = 1   # DECISIONS 246 (LO, 2026-11-18)
-description    = "A young woman, 18, splashing cold water on her face at a public restroom sink."
-search_queries = ["woman washing face public restroom sink", "girl splashing water face bathroom"]   # every screen (LO, 2026-11-12; DECISIONS 243)
 
 [[canvases.nodes.blocks]]
 type = "paragraph"
@@ -797,7 +761,7 @@ name = "The long mirror"
 # media sheet row (sheets/media/release1.md, signed 2026-11-12, DECISIONS 238)
 [[canvases.nodes.blocks]]
 type = "image"
-props = { description = "a girl checking herself in a long lit mirror over college sinks", search_queries = ["girl checking reflection bathroom mirror college"], pool_dir = "look/toilet_mirror_t3", pool = 2 }
+props = { description = "A young woman, 18, checking herself in a long lit mirror over college restroom sinks. No phone.", search_queries = ["girl checking reflection bathroom mirror college gif"], pool_dir = "look/toilet_mirror_t3", pool = 2 }
 
 
 [[canvases.nodes.blocks]]

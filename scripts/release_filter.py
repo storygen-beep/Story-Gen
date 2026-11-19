@@ -30,7 +30,20 @@ What it does, repeated until nothing changes:
   4. DANGLING. Anything pointing at a dropped canvas, place or person is dropped with it
      (navigation_order entries, door options, substitutions, cheat `play` grants, schedule and
      timetable rows, phone items, quest cards), and labels nothing reads any more.
-  5. REPORT. Every drop, by kind, plus the kept flag setters whose only reader was cut — a
+  5. WHAT SHE CAN WEAR, AND WHERE. A garment she can never get or put on this release makes a
+     "wearing a <type>" condition false, not only a check for that exact item. A scene whose
+     clothing conditions no wearable outfit meets inside the room's dress code (the engine checks
+     the code before every room, v2.py Config.navigation.override) is dropped, and so is a block
+     inside a kept scene that asks for such an outfit. Her portrait outfits she can never wear go.
+  5b. A METER NOTHING MOVES. A trait of hers that nothing kept can raise any more is judged at its
+     start value, like a frozen meter (its only raiser may have been cut by any rule above).
+  6. NO DOOR. A `substitution_only` canvas that nothing kept opens any more (no substitution,
+     jump into one of its screens, door option, phone item, cheat grant or start) is dropped.
+  7. CHECK. After cutting, the skill's reach checker (.claude/skills/author-game-v2/scripts/
+     reach.py) plays the slice's own rules forward, separately from this filter. Anything kept
+     that can never open or show fails the build, named, so a case this filter does not know
+     is never shipped in silence.
+  8. REPORT. Every drop, by kind, plus the kept flag setters whose only reader was cut — a
      button that now leads nowhere (Laura's Tuesday invite was the first one found).
 
 No runtime wrappers, no second game, no change to v2.py.
@@ -175,9 +188,18 @@ def judge_item(item, frozen, gone):
     if t == "npc_at_location" and item.get("npc_id") in gone["npcs"]:
         return item.get("operator") == "is_absent"
     # A garment she can never get this release (locked on the rail and handed out by nothing): never worn or owned.
-    if t == "clothing_item" and item.get("item_id") in (gone.get("no_clothes") or ()):
+    ids = gone.get("clothes_ids")
+    if t == "clothing_item" and (item.get("item_id") in (gone.get("no_clothes") or ())
+                                 or (ids is not None and item.get("item_id") not in ids)):
         op = item.get("operator")
         return {"equipped": False, "owned": False, "unequipped": True, "not_owned": True}.get(op)
+    # "wearing a <type>": the engine looks at the types of what she has on (v2.py worn_type), so it can never hold
+    # when no garment she can wear this release is of that type (first_term 2026-11-18: the plunge slip waited on
+    # `plunge_dress`, which needs Exhibitionism 60, and release 1 holds it at 0)
+    wt = gone.get("worn_types")
+    if t == "worn_type" and wt is not None and item.get("value") and item.get("value") not in wt:
+        op = item.get("operator") or "eq"
+        return False if op == "eq" else True if op == "neq" else None
     # A flag nothing in this release can set (rule 3, release builds only): read true it never holds; a
     # days/hours-since wait on it never opens either (both fail closed on an unset flag, v2.py:5212).
     never = gone.get("never_set") or ()
@@ -204,6 +226,8 @@ def judge_item(item, frozen, gone):
         return None
     subject = item.get("subject") or "player"
     rng = frozen.range_of(subject, trait, item.get("npc_id"))
+    if rng is None and subject == "player":
+        rng = (gone.get("unmoved") or {}).get(trait)
     if rng is None:
         return None
     can_t, can_f = _cmp_possible(rng[0], rng[1], op, float(val))
@@ -516,12 +540,218 @@ def unobtainable_clothing(game, fz, gone, unpriced_too=False):
     return out
 
 
+def wearable_clothing(game, fz, gone):
+    """Garments she can have on this release: worn at the start, handed out by a wardrobe action, or sold — and whose
+    own conditions (the shop's and the wardrobe's lock, v2.py equipItem) can hold."""
+    granted = set()
+
+    def walk(n):
+        if isinstance(n, dict):
+            if n.get("action") in ("add", "equip") and n.get("item_id"):
+                granted.add(n["item_id"])
+            for k, v in n.items():
+                if k != "clothing":
+                    walk(v)
+        elif isinstance(n, list):
+            for v in n:
+                walk(v)
+    walk(game)
+    out = set()
+    for c in game.get("clothing") or []:
+        if not isinstance(c, dict):
+            continue
+        if not (c.get("initial") or c.get("id") in granted or (c.get("price") or 0) > 0):
+            continue
+        if c.get("conditions") is not None and judge_block(c["conditions"], fz, gone) is False:
+            continue
+        out.add(c.get("id"))
+    return out
+
+
+def unmoved_traits(game, fz):
+    """Her traits that nothing kept in this slice can raise any more, pinned to their start (or below it when
+    something can still lower them): {trait: (lo, hi)}. A frozen meter is judged by its freeze instead; the engine's
+    own (money, energy, hygiene, the rent counters) are never pinned. first_term 2026-11-18: `complaints` rose only
+    in a scene the dress code cut, so the dean's "COMPLAINT" line could never show."""
+    up, down = set(), set()
+    rent = ((game.get("settings") or {}).get("rent") or {}).get("enabled")
+    engine = {"money", "energy", "hygiene"} | ({"rent_short_weeks", "rent_late_fee", "paid_full_streak"} if rent else set())
+
+    def walk(n):
+        if isinstance(n, dict):
+            t, op, v = n.get("trait"), n.get("op"), n.get("value")
+            if isinstance(t, str) and op and "operator" not in n and n.get("targetType") in (None, "player"):
+                if op == "set" or (op == "add" and (isinstance(v, dict) or (isinstance(v, (int, float)) and v > 0))):
+                    up.add(t)
+                if op != "add" or (isinstance(v, (int, float)) and v < 0):
+                    down.add(t)
+            if isinstance(n.get("trait_offsets"), dict):
+                up.update(k for k, o in n["trait_offsets"].items() if isinstance(o, (int, float)) and o > 0)
+            if isinstance(n.get("counter_trait"), str):
+                up.add(n["counter_trait"])
+            for v2 in n.values():
+                walk(v2)
+        elif isinstance(n, list):
+            for v2 in n:
+                walk(v2)
+    walk({k: v for k, v in game.items() if k != "player"})
+    decay = set(((game.get("player") or {}).get("trait_decay") or {}).keys())
+    out = {}
+    for t, s0 in ((game.get("player") or {}).get("core_traits") or {}).items():
+        if t in engine or t in fz.player or t in up or not isinstance(s0, (int, float)) or isinstance(s0, bool):
+            continue
+        out[t] = (-math.inf if (t in down or t in decay) else float(s0), float(s0))
+    return out
+
+
+def canvas_doors(game):
+    """Every canvas something kept can open other than by its own trigger: a substitution, a jump into one of its
+    screens ("<canvas>.<node>"), a door option, a phone item (a call's `accept`), a cheat grant, the start."""
+    out = {(game.get("project") or {}).get("starting_canvas")}
+    for c in game.get("canvases") or []:
+        for s in (c.get("trigger") or {}).get("substitutions") or []:
+            if isinstance(s, dict) and s.get("target_canvas_id") != c.get("id"):
+                out.add(s.get("target_canvas_id"))
+        for n in c.get("nodes") or []:
+            for x in ((n.get("exit_block") or {}).get("choices") or []):
+                if isinstance(x, dict):
+                    nid = x.get("nodeId")
+                    if isinstance(nid, str) and "." in nid:
+                        out.add(nid.split(".", 1)[0])
+                    if x.get("targetType") == "canvas":
+                        out.add(x.get("canvasId"))
+
+    def walk(n, keys):
+        if isinstance(n, dict):
+            gt = n.get("goes_to")
+            if isinstance(gt, dict) and gt.get("type") == "canvas":
+                out.add(gt.get("canvas_id"))
+            for k in keys:
+                if isinstance(n.get(k), str):
+                    out.add(n[k])
+            for v in n.values():
+                walk(v, keys)
+        elif isinstance(n, list):
+            for v in n:
+                walk(v, keys)
+    walk(game.get("locations"), ("canvas",))
+    walk(game.get("phone"), ("accept", "canvas", "canvas_id", "opens"))
+    for g in (((game.get("ui") or {}).get("cheat_page") or {}).get("grants") or []):
+        if isinstance(g, dict):
+            out.add(g.get("canvas"))
+    return out
+
+
+_CLOTH_TYPES = ("clothing_slot", "clothing_item", "worn_type", "worn_exposure", "worn_beauty", "worn_corruption")
+
+
+class Dress:
+    """Every outfit she can put together this release, and whether a room's dress code lets her stand in it.
+    The engine checks the code before any room is entered and the first rule whose conditions hold decides
+    (v2.py clothingCheckForLocation); a dress fills the top and bottom slots for it."""
+
+    def __init__(self, game, wear, fz, gone):
+        self.clothes = {c.get("id"): c for c in game.get("clothing") or [] if isinstance(c, dict)}
+        self.locs = {l.get("id"): l for l in game.get("locations") or [] if isinstance(l, dict)}
+        self.fz, self.gone = fz, gone
+        slots = collections.defaultdict(list)
+        for i in sorted(wear):
+            slots[self.clothes[i].get("slot")].append(i)
+        names = sorted(k for k in slots if k)
+        self.outfits = []
+        for combo in __import__("itertools").product(*[[None] + slots[k] for k in names]):
+            eq = dict(zip(names, combo))
+            if not (eq.get("dress") and (eq.get("top") or eq.get("bottom"))):
+                self.outfits.append(eq)
+
+    def cloth(self, it, eq):
+        t, op = it.get("type"), it.get("operator")
+        worn = [i for i in eq.values() if i]
+        if t == "clothing_slot":
+            return bool(eq.get(it.get("slot"))) if op == "equipped" else not eq.get(it.get("slot")) if op == "unequipped" else False
+        if t == "clothing_item":
+            return {"equipped": it.get("item_id") in worn, "unequipped": it.get("item_id") not in worn}.get(op)
+        if t == "worn_type":
+            ty = {self.clothes[i].get("type") for i in worn}
+            v = it.get("value")
+            return False if not v else v in ty if op in (None, "eq") else v not in ty if op == "neq" else False
+        if t == "worn_exposure":
+            up = 0 if eq.get("dress") or eq.get("top") else (1 if eq.get("bra") else 2)
+            lo = 0 if eq.get("dress") or eq.get("bottom") else (1 if eq.get("underwear") else 2)
+            x = max([up, lo] + [self.clothes[i].get("exposure") or 0 for i in worn])
+            v = it.get("value") or 0
+            return {"eq": x == v, "gte": x >= v, "gt": x > v, "lte": x <= v, "lt": x < v}.get(op or "gte")
+        return None
+
+    def room_lets_in(self, loc_id, eq):
+        """True, False, or None when a rule reads something this release does not pin."""
+        for r in (self.locs.get(loc_id) or {}).get("clothing_rules") or []:
+            hit = True
+            for it in ((r.get("conditions") or {}).get("items") or []):
+                v = self.cloth(it, eq) if it.get("type") in _CLOTH_TYPES else judge_item(it, self.fz, self.gone)
+                if v is None:
+                    return None
+                if not v:
+                    hit = False
+                    break
+            if hit:
+                return not [s for s in r.get("slots_required") or []
+                            if not (s in ("top", "bottom") and eq.get("dress")) and not eq.get(s)]
+        return True
+
+    def holds(self, cond, eq):
+        if not isinstance(cond, dict) or cond.get("version") != "1.0" or not cond.get("items"):
+            return True
+        vs = []
+        for it in cond["items"]:
+            if it.get("type") in _CLOTH_TYPES:
+                v = self.cloth(it, eq)
+                vs.append(True if v is None else v)
+            else:
+                vs.append(judge_item(it, self.fz, self.gone) is not False)
+        return any(vs) if str(cond.get("logic") or "AND").upper() == "OR" else all(vs)
+
+    def never(self, loc_id, conds):
+        """True when no wearable outfit the room lets her stand in meets every one of these conditions."""
+        if not loc_id or not any(isinstance(c, dict) and any(isinstance(i, dict) and i.get("type") in _CLOTH_TYPES
+                                                             for i in c.get("items") or []) for c in conds):
+            return False
+        return not any(self.room_lets_in(loc_id, eq) is not False and all(self.holds(c, eq) for c in conds)
+                       for eq in self.outfits)
+
+
+def prune_dress_blocks(blocks, dress, loc_id, chain, rep, cid):
+    """A block asking for an outfit the room never lets her stand in goes (first_term 2026-11-18: the park run's
+    no-bra clip, the park needs a bra at Exhibitionism 0)."""
+    out = []
+    for b in blocks or []:
+        if isinstance(b, dict):
+            c = b.get("conditions")
+            here = chain + ([c] if isinstance(c, dict) else [])
+            if isinstance(c, dict) and dress.never(loc_id, here):
+                rep.drop("lines/blocks her dress code never shows", cid)
+                continue
+            if isinstance(b.get("blocks"), list):
+                b["blocks"] = prune_dress_blocks(b["blocks"], dress, loc_id, here, rep, cid)
+                if not b["blocks"] and b.get("type") in ("group", "block_pool"):
+                    continue
+        out.append(b)
+    return out
+
+
 def one_pass(game, fz, gone, rep):
     """One sweep of rules 3 and 4. Returns True when anything changed."""
     changed = False
     if gone.get("release_mode"):
         gone["never_set"] = never_set_flags(game)
         gone["no_clothes"] = unobtainable_clothing(game, fz, gone)
+        gone["clothes_ids"] = {c.get("id") for c in game.get("clothing") or [] if isinstance(c, dict)}
+        wear = wearable_clothing(game, fz, gone)
+        gone["worn_types"] = {c.get("type") for c in game.get("clothing") or [] if isinstance(c, dict) and c.get("id") in wear}
+        gone["wear"] = wear
+        gone["unmoved"] = unmoved_traits(game, fz)
+    dress = Dress(game, gone["wear"], fz, gone) if gone.get("release_mode") else None
+    doors = canvas_doors(game) if gone.get("release_mode") else set()
     loc_ids = {l.get("id") for l in game.get("locations") or []}
     npc_ids = {n.get("id") for n in game.get("npcs") or []}
 
@@ -566,6 +796,10 @@ def one_pass(game, fz, gone, rep):
             why = "canvases of a cut person"
         elif _cond_false(t, "conditions", fz, gone):
             why = "canvases that can't fire this release"
+        elif dress and isinstance(t.get("conditions"), dict) and dress.never(t.get("location"), [t["conditions"]]):
+            why = "canvases her dress code never lets fire"
+        elif gone.get("release_mode") and t.get("substitution_only") and cid not in doors:
+            why = "canvases nothing opens any more"
         if why:
             rep.drop(why, cid)
             gone["canvases"].add(cid)
@@ -588,6 +822,10 @@ def one_pass(game, fz, gone, rep):
         for n in c.get("nodes") or []:
             before = json.dumps(n.get("blocks"), sort_keys=True)
             n["blocks"] = prune_blocks(n.get("blocks"), fz, gone, rep, cid)
+            if dress and '"wardrobeEffects"' not in json.dumps(c):
+                tc = t.get("conditions")
+                n["blocks"] = prune_dress_blocks(n["blocks"], dress, t.get("location"),
+                                                 [tc] if isinstance(tc, dict) else [], rep, cid)
             if json.dumps(n["blocks"], sort_keys=True) != before:
                 changed = True
             eb = n.get("exit_block") or {}
@@ -923,7 +1161,7 @@ def filter_game(game, state, target, rep):
     drop_tagged(game, target, rep)
     fz, ladder_cut = build_frozen(game, state, target)
     gone = {"npcs": set(), "locations": set(), "canvases": set(), "ladder": ladder_cut,
-            "release_mode": target != MAX, "never_set": set()}
+            "release_mode": target != MAX, "never_set": set(), "wear": set()}
     strip_effects(game, fz, rep)
     for _ in range(40):
         gone["npcs"] = npc_before - {n.get("id") for n in game.get("npcs") or []}
@@ -959,13 +1197,20 @@ def filter_game(game, state, target, rep):
         prune_wardrobe(game.get("phone") or {})
     if gone["release_mode"]:
         prune_unread_upkeep(game, rep)
-        types = {c.get("type") for c in game.get("clothing") or [] if isinstance(c, dict)}
+        wear = wearable_clothing(game, fz, gone)
+        types = {c.get("type") for c in game.get("clothing") or [] if isinstance(c, dict) and c.get("id") in wear}
         pp = game.get("player_portrait") or {}
         outs = pp.get("outfits")
         if isinstance(outs, list):
-            pp["outfits"] = [o for o in outs if not (isinstance(o, dict) and isinstance(o.get("when"), dict)
-                                                     and o["when"].get("worn_type")
-                                                     and o["when"]["worn_type"] not in types)]
+            # an outfit picture shows only while she wears it; one she can never wear this release goes
+            def never_worn(o):
+                wh = o.get("when") if isinstance(o, dict) else None
+                return isinstance(wh, dict) and ((wh.get("worn_type") and wh["worn_type"] not in types)
+                                                 or (wh.get("wearing") and wh["wearing"] not in wear))
+            for o in outs:
+                if never_worn(o):
+                    rep.drop("portrait outfits she can't wear", o.get("image"))
+            pp["outfits"] = [o for o in outs if not never_worn(o)]
     prune_labels(game, rep)
     # kept setters whose only reader was cut
     slice_reads = flag_reads(game)
@@ -998,7 +1243,7 @@ def main(argv=None):
     filter_game(game, state, target, rep)
     if game == pristine:
         print(f"release filter ({args.release}): nothing tagged or frozen — {toml_path.name} left as merged")
-        return 0
+        return reach_check(game, args.release) if target != MAX else 0
     toml_path.write_text(
         f"# 7_final_game.toml — merged, then cut by scripts/release_filter.py --release {args.release}\n"
         "# DO NOT EDIT THIS FILE BY HAND. Edit the phases and the build scripts, then rebuild.\n\n"
@@ -1008,6 +1253,20 @@ def main(argv=None):
     print(f"release filter ({args.release}): " + ", ".join(f"{k} {before[k]}→{after[k]}" for k in before))
     for line in rep.lines():
         print(line)
+    return reach_check(game, args.release) if target != MAX else 0
+
+
+def reach_check(game, release):
+    """The separate check (step 7): whatever this filter missed fails a release build here, by name. 0 or 1."""
+    sys.path.insert(0, str(Path(__file__).resolve().parent.parent / ".claude" / "skills" / "author-game-v2" / "scripts"))
+    import reach
+    found = reach.rows(reach.check(game))
+    if found:
+        print(f"release filter ({release}): {len(found)} kept thing(s) can never open or show — the build stops:")
+        for line in found:
+            print("  " + line)
+        return 1
+    print(f"release filter ({release}): reach check — every kept scene has a way in, every media spot can show")
     return 0
 
 
