@@ -5,6 +5,139 @@ same turn: what changed, why, and how it was verified.
 
 ---
 
+## 2026-11-18 — the walk-in floor follows "keep going" into a door-only canvas
+
+- **`scripts/gates.py`:** `_continued_subs`, above `main()`. The one counting line in `_walkin_join` now adds the walk-in rules on a `substitution_only` canvas in the same room that a solo activity's choice jumps into (`"<canvas>.<node>"`). It is a same-line edit, so no cited line moves.
+- **`scripts/tests/test_gates_continued_walkin.py`:** new.
+- **Why:** first_term DECISIONS 257 (LO, 2026-11-18: "walkin shows what that person is already doing"). Channel 5's "Keep watching." now jumps into `tv_still_watching`, which carries the TV walk-ins. A walk-in now catches her watching what she already chose. The gate saw no rule on `living_tv` itself and failed the living room, "nobody ever walks in".
+- **Verified:** first_term 97 PASS 0 FAIL, the walk-in floor 17/17, `cite_check --strict` 0 wrong, `--selfcheck` current.
+
+## 2026-11-18 — `lint · a picture that misses its line`; the review page shows each picture's line
+
+- **`scripts/gates.py`:** `BODY_WORDS`, `SCENE_PLACES`, `PLACE_SAYS`, `_picture_misses_line_rows`, `_picture_misses_line_lint`, above `main()`, called on the lint line.
+  - It lists a screen whose words are about her body but whose only picture names no person and no body.
+  - It also lists a scene named for a mirror, shower, window or bath whose picture of her never says it. A reaction shot of him is not judged.
+- **`references/media-blocks.md`** "How it is checked" and **`SKILL.md`** index.
+- **`scripts/tests/test_gates_picture_misses_line.py`:** new.
+- **Repo:** `api/v1/media_review.py` `_lines_by_spot` adds `screen` and `line` to each item, and `media.html` shows them on the card, with the description renamed "wants". `portal.css` gets `.media-line`. Test in `tests/test_media_review_shelf_state.py`.
+- **Why:** LO, 2026-11-18: "yes go ahead with both". The garden lounger's first screen says "Topless, on your front, the side of your tits pressed flat to the lounger" under a picture of an empty lounger. The bedroom peek put "a bedroom seen through a door gap" over Laura's hand on her bare stomach. Nothing checked a picture against its words.
+- **Verified:**
+  - On first_term now the lint lists 2: the garden lounger, and Laura's wardrobe (a find, kept by design).
+  - On the build from before DECISIONS 256 it also lists the bedroom peek.
+  - The live review list gives a line for 259 of 346 items. The rest are rooms, faces and clothes.
+
+## 2026-11-18 — a dress rule keeps its word: one gate, two lints
+
+- **`scripts/reach.py`:** three new functions.
+  - `narrow_ways`: a kept scene her clothes decide that only 1-3 outfits can open, with the outfits named.
+  - `dress_rule_holes`: a refusal that names a garment and a number must hold at every value under it, matched the way the engine matches (the first rule whose conditions hold; a dress fills top and bottom).
+  - `dress_exception_rows`: a rule that lets one garment stand in for an empty top or bottom without also saying `dress` unequipped.
+- **`scripts/gates.py`:**
+  - New gate `a dress rule keeps its word`, called on the existing gate line.
+  - New lints `a scene few outfits reach` and `a dress exception that a dress slips through`, called on the existing lint line.
+  - The helpers sit above `main()`.
+- **`references/engine.md`** "A dress code": the writing rule, that an exception names everything it allows, a dress included. **`SKILL.md`:** the gate's row and the two lints in the index.
+- **`scripts/tests/test_gates_dress_rules.py`:** new, 5 tests.
+- **Why:** LO, 2026-11-18: "How it doesnt happen again??", then "yes go ahead with all three". first_term's street let her out in a sports bra and the café uniform with no panties at Exhibitionism 0, though its message says "No panties out of the house needs Exhibitionism 40". The rule "Not in just the sports bra" asked only for a top, and a dress fills one. The cut and `every kept scene can be reached` follow the rules as written, so they kept the scene. LO found it by asking.
+- **Verified:** on the first_term build from before the fix (DECISIONS 256), all three name it: 2 holes at 0 and 19, the street's three sports-bra rules, and `street_seen_nopanties` reachable only as "bra sports_bra, dress cafe_uniform_normal". On the current build all three read clean. Results are in the next entry's runs.
+
+## 2026-11-18 — `two people in her picture` reads explicit walk-in clips too
+
+- **`scripts/gates.py`:**
+  - New `FRAME_LOOK` regex.
+  - The lint now also lists an explicit spot (`_t4`/`_t5`/`sex/`) whose description shows two people and a look ("staring", "watching", "in the doorway", "stops in"). Two people having sex, with no looker, is the act and is not listed.
+- **`references/media-blocks.md`** "How it is checked" and **`SKILL.md`** index: say so.
+- **`scripts/tests/test_gates_man_in_her_picture.py`:** the old test "an explicit spot is not this lint's business" now says the opposite, and a new test covers the act versus the walk-in. 8 tests in the file.
+- **Why:** LO, 2026-11-18: "check if there are more of them??". A full read of first_term's 261 release 1 spots found 14 explicit walk-in clips written as "a man in a doorway staring at a naked girl". The ones searched had shelves of 20–34 options, against 100–250 elsewhere. The lint skipped every explicit spot.
+- **Verified:** after first_term's rewrite (DECISIONS 256) the lint lists 9, all touches. 96 PASS 0 FAIL. Skill tests 1,086 passed, skill-evals 107, `--selfcheck` current, `cite_check --strict` 0 wrong.
+
+## 2026-11-18 — media-blocks rule 7: name the scene's place, give her age, a mirror says "No phone"
+
+- **`references/media-blocks.md` rule 7:** three sub-rules for the description.
+  - Name the place the scene is named for: the mirror goes in every mirror scene's pictures.
+  - Always give her age, or the search writes `milf`.
+  - A mirror picture says "No phone.", or the search writes `selfie`.
+- **Why:** LO, 2026-11-18, on first_term's hall mirror: "it was about mirror checking herself out but I think it took hall mirror".
+  - Two of the scene's three descriptions never said mirror.
+  - The search ran `nude milf walking naked house hallway voyeur gif`.
+  - The naked clip's 4 picks were women walking down hallways.
+  - The search-side rule is in find-media-v3 `SKILL.md` §2.
+- **Verified:** read against first_term's `media.py` rows and the shelf's query records. `--selfcheck` and `cite_check --strict` were rerun.
+
+## 2026-11-18 — lint `a man in her picture` becomes `two people in her picture`
+
+- **`scripts/gates.py`:** the lint now also lists a look whose description names any two people, whoever they are. `FRAME_PERSON` and `_people_in_frame` cover the generic person words plus the game's own first names. A word that only dresses her ("a waitress uniform") is not a second person. Its printed name changed to `two people in her picture`, and the function names stayed the same.
+- **`references/media-blocks.md` rule 9:** a look is what the one looking sees, or the looker alone. The looker can be a woman. The "How it is checked" line is updated.
+- **`SKILL.md`:** the index entry. **`scripts/tests/test_gates_man_in_her_picture.py`:** 2 tests added (7 in the file).
+- **Why:** LO, 2026-11-18: "the search terms has lesbians if Im right, check". first_term's `look/ta_door_look_t3` read "a young woman of 28 … her eyes running down a student". The lint only knew men, so it passed. The harvest then searched "lesbian milf checking out woman tease" and two more like it, and stocked 167 options for a shy, clothed glance by a 28-year-old.
+- **Verified:** on first_term, before the TA rewrite, the lint listed the 2 TA door pictures, the TA leaning over the desk and Laura's 3 towel tucks, which are touches and may be meant. The waitress-uniform walk-away was not listed. After the rewrite, the TA door pictures leave the list.
+
+## 2026-11-18 — media by kind of screen, not on every screen
+
+- **`references/media-blocks.md`:**
+  - The intro says a block costs a search, a shelf and a pick later.
+  - The "What gets a block" table is now by kind of screen, with the top games' share beside each kind (from `register.md` "The table"). It adds a moment with a person, a find that matters, and a solo chore, which gets none. A person's hub gets one picture only, because a stock photo of a named person is a new face every time.
+  - The section "Every screen, not every scene" is rewritten as "By kind of screen, not every screen", with the question "what should the player SEE here?" and the history.
+  - "How it is checked" now describes the reworked lint.
+- **`scripts/gates.py` `lint · a screen without media`:**
+  - It prints our share of screens with a picture by kind (`_screen_kind`, using the study's markers and the frozen `EXPLICIT` list) beside `SCREEN_PICTURE_FIELD`.
+  - It lists only the bare screens the rule wants a picture on: a sex screen with no clip, a one-time scene with no picture anywhere, a person's hub opening bare.
+  - It no longer lists every bare screen. Helpers stay in place above `main()`.
+- **`SKILL.md`:** the lint's index entry. **`scripts/tests/test_gates_screen_without_media.py`:** rewritten, 6 tests.
+- **Why:** LO, 2026-11-18: "Does all scenes needs media blocks?? How top games do it??", then "Now skill??". The 2026-11-12 rule ("every screen") pushed first_term's release 1 to a block on 439 of 446 screens (98%). The skill's own field table says top games use 86–92% on sex screens, 64% on talk, 41% on rooms, 36% on ordinary screens and 21% on one-liners, and `register.md` already said "Put media everywhere is wrong". The two references contradicted each other.
+- **Verified:** first_term after DECISIONS 251/252, as the lint prints it: sex 19/19, talk 33/48, room/hub 12/35, ordinary 167/283, one-liners 15/61, and 0 bare screens listed. The first run flagged `cafe_shift#shift` as a bare sex screen, because it summed explicit words across a pool's alternative lines, of which only one renders. It now counts per block, the gates' unit for an explicit beat. Test added (6 in the file). Skill tests 1,083 passed, skill-evals 107; `--selfcheck` current; `cite_check --strict` 0 wrong; first_term 96 PASS 0 FAIL.
+
+## 2026-11-18 — gate `every kept scene can be reached` (`scripts/reach.py`)
+
+- **New `scripts/reach.py`:** plays a build's own rules forward to find what can never open or show. It covers every door into a scene (its trigger, a substitution, a jump into one of its screens, a door option, a phone item's `accept`, a cheat grant, the start). It uses only the flags, trait ranges and garments that live scenes can give, as a fixed point. It tries every outfit she can wear against each room's dress code, which the engine checks before any room (`v2.py` `Config.navigation.override`, first matching rule wins). It only calls a thing unreachable when it can prove it.
+- **`scripts/gates.py`:** new gate `every kept scene can be reached` (`_every_kept_scene_reached`, placed above `main()`, called on the existing gate line so no cited line moves). **`SKILL.md`:** its row in the gate table. **`references/state.md`:** named in the release-slices row.
+- **Repo `scripts/release_filter.py`** (not a skill file, logged here because the gate and it work together):
+  - The filter now judges `worn_type` against what she can wear, and treats a garment id the game lacks as never worn.
+  - It drops a `substitution_only` canvas nothing opens any more, a scene or block whose clothing no wearable outfit meets inside the room's dress code, and a portrait outfit she can never wear.
+  - It pins a trait of hers that nothing kept can raise any more to its start value.
+  - It runs `reach.py` after every slice, including one it left unchanged, and exits 1 on a finding, so the build stops.
+- **Why:** LO, 2026-11-18. first_term release 1 kept 11 scenes, 22 media spots (53 files) and 2 portrait outfits no player could reach: the plunge slip, both wind events, the micro shorts bench, the skirt street and Nadia scenes, the no-bra street and whistle scenes, the lecture-hall dress code event, Laura's peek and her curfew call. All gates passed. `every kept thing can happen` reads only flags and traits, and the filter reasons the same way, so neither saw garment types, cut doors or dress codes.
+- **Verified:**
+  - Before the filter fix, `reach.py` on the release 1 build listed exactly those 11 scenes, 22 spots and 2 portraits, the same set traced by hand.
+  - On the full game it listed nothing.
+  - After the fix, the release 1 rebuild drops exactly that set (diffed against the last commit) and the check reads clean.
+  - Tests in `scripts/tests/test_gates_reach.py` and the repo's `tests/test_release_filter_reach.py`.
+  - The pinning rule came from the old gate: once the dress-code scene was cut, `every kept thing can happen` failed on the dean's notice. `complaints` had risen only in that scene, so the notice's "COMPLAINT" line could never show. The filter now drops that line, and it was the only extra change in the build.
+  - The full game build is byte-identical before and after.
+  - first_term scoreboard: 96 PASS, 0 FAIL. Skill tests 1,079 passed, skill-evals 107, `--selfcheck` current, `cite_check --strict` 0 wrong.
+
+## 2026-11-18 — rule 6 asks "does something happen in the picture?"
+
+- **`references/media-blocks.md` rule 6:** the gif-or-still test is now one plain question, with the
+  movements that make a gif (tucking, sitting up, slipping past, stretching, checking a mirror, writing,
+  being caught, a man reaching, steam, water) and the cases that stay still (a held body, a room, someone
+  asleep, a held touch, eyes only). It says to read the description's verbs, not a keyword list, and that
+  find-media-v3 now reads `gif` in the search words as animated.
+- **Why:** LO, 2026-11-18: "there are a lot of t3 that should have been gifs and are images still". The
+  first pass kept 65 looks still, and 26 of them do have something happening (`opening_towel_tuck`
+  tucks, `garden_sun_slats` sits up, `hall_slip_past` slips past). The old line listed only a few verbs,
+  so the pass matched those and missed the rest.
+- **Verified:** all 115 first_term `_t3` look descriptions were read one by one: 76 gif, 39 still.
+  `lint · a look's format` reports the same split after the rebuild.
+
+## 2026-11-18 — media: a moving look asks for a gif; lint · a look's format
+
+Source: LO, 2026-11-18, on `look/hose_stay_t3.jpg`: "this should be a gif right?? … why it got missed, and are
+there more??", then "only 11 there are no more like these??", then "Go ahead with all three." Rule 6 said a `_t3`
+look *may* be a gif and never said when, so the "his view" rewrites added `gif` by feel. A keyword scan for
+movement words then found 11 moving looks; reading every look found 25.
+- `references/media-blocks.md` rule 6: a look whose picture is a movement (she walks, bends, stands up, tugs,
+  drips, bounces, leans across, the wind takes her skirt) asks for a gif in its search words. The name can stay
+  `.jpg` or a picture pool, because `v2.py` `_find_media_file` matches any extension. A still pose stays a still.
+  "How it is checked" lists the new lint.
+- `scripts/gates.py`: new `_look_format_rows` / `_look_format_lint`, placed above `def main()`, with the call
+  appended to the existing group-2 lint line (no cited line moves). It lists every non-explicit `_t3` look, still
+  ones first, and never cuts the list short, because whether a picture moves is a reading, not a keyword.
+- `scripts/tests/test_gates_look_format.py`: 4 fixture tests.
+- `SKILL.md`: the lint index names **a look's format**.
+- Verified: the new tests pass, `--selfcheck` and `cite_check --strict` are clean, and on first_term the lint lists
+  every look.
+
 ## 2026-11-18 — media: lint · a man in her picture
 
 Source: LO, 2026-11-18, on `look/mark_kl_breakfast_lookover_t3`: "this is suffering from same issue, we have

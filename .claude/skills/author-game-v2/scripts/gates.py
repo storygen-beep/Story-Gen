@@ -3808,7 +3808,7 @@ def _walkin_join(model, game):
         if not (_trigger_slots(t) - occupied.get(loc, set())):
             continue                  # somebody is always there when this runs: not alone
         solo[loc].append(c["id"])
-        subs[loc] += len(t.get("substitutions") or [])
+        subs[loc] += len(t.get("substitutions") or []) + _continued_subs((c.get("raw") or {}), game, loc)
 
     qualifying = [l for l in solo if sched.get(l)]
     covered = [l for l in qualifying if subs[l] > 0]
@@ -17615,7 +17615,7 @@ def _group2_gates(gate, _N, model, game, state):
     # PLAYTEST 2026-11-09 (REPORT.md §1-3); defined above main().
     gate("a pay can happen", *_pay_can_happen(game, state))
     gate("the loop is open enough hours", *_routine_open_hours(model, game, state)); gate("a walk-in can happen", *_walkin_can_happen(game)); gate("a person's scene is inside their portrait", *_scene_in_portrait(game))
-    gate("a card line belongs to its person", *_card_line_is_its_own(game, state)); gate("a goal line reads the way it works", *_goal_line_reads_true(game)); gate("every kept thing can happen", *_every_kept_thing_can_happen(game, state))
+    gate("a card line belongs to its person", *_card_line_is_its_own(game, state)); gate("a goal line reads the way it works", *_goal_line_reads_true(game)); gate("every kept thing can happen", *_every_kept_thing_can_happen(game, state)); gate("every kept scene can be reached", *_every_kept_scene_reached(game)); gate("a dress rule keeps its word", *_dress_rule_keeps_its_word(game))   # LO 2026-11-18, helpers above main()
 
 
 # ── the group-2 lints: a LIST each, never a score (a hit needs a human to judge it) ─────────
@@ -19212,31 +19212,75 @@ def score(model, game, state=None, game_dir=None):   # noqa: F811 — the ledger
 
 
 # ── a screen without media (references/media-blocks.md "Every screen, not every scene"; LO, 2026-11-12) ──
+# Share of screens carrying a picture in top games, by kind of screen (references/register.md "The table", the
+# 2026-08-18 study of 27 shipped sandboxes, 54,630 screens). Printed beside ours; never a pass/fail.
+SCREEN_PICTURE_FIELD = {"sex": "86-92%", "talk": "64%", "room/hub": "41%", "ordinary": "36%", "one-liner": "21%"}
+
+
+def _screen_kind(c, nd):
+    """The kind of screen, by the study's own markers: a block with 3+ frozen-list words is sex; under 25 words a one-liner;
+    40%+ of the words spoken (dialog blocks) a talk screen; 4+ ways out with little spoken a room/hub; else
+    ordinary. An approximation of the study's sort, for reading, not for a verdict."""
+    bl = _flat_blocks(nd.get("blocks"))
+    text = " ".join(str(b.get("content")) for b in bl if b.get("content") and b.get("type") in ("paragraph", "dialog"))
+    words = len(text.split())
+    spoken = sum(len(str(b.get("content")).split()) for b in bl if b.get("type") == "dialog" and b.get("content"))
+    exits = len(((nd.get("exit_block") or {}).get("choices")) or [])
+    # an explicit beat is ONE block with 3+ frozen-list words (the gates' own unit): summing a pool's alternative
+    # lines, of which one renders a visit, would call a café shift with five one-word variants a sex screen
+    if any(len(EXPLICIT.findall(str(b.get("content")))) >= 3 for b in bl if b.get("content")):
+        return "sex"
+    if words < 25:
+        return "one-liner"
+    if words and spoken / words >= 0.4:
+        return "talk"
+    if exits >= 4 and spoken / max(words, 1) < 0.2:
+        return "room/hub"
+    return "ordinary"
+
+
 def _screen_without_media_rows(game):
-    """Every screen (node) that carries no image or video block of its own. A LIST, never a score: a door or a
-    notice is rightly none, and the reason belongs on the game's media sheet. Counted by screen, never by scene:
-    a scene with one picture on its first screen still leaves every other screen bare."""
-    rows, n = [], 0
+    """The bare screens the media rule says want a picture (references/media-blocks.md "By kind of screen"), and the
+    per-kind counts. A LIST, never a score. Wanted: a sex screen (its clip); a one-time scene with no picture on any
+    screen (one on its key line); a person's hub (a repeatable scene with `npc`) whose first screen is bare (one
+    picture of that person). A bare chore, errand or stat screen is not listed: top games leave most of those plain."""
+    rows, kinds = [], {}
     for c in _g2_canvases(game):
-        for nd in c.get("nodes") or []:
-            n += 1
-            if not any(b.get("type") in MEDIA_BLOCKS for b in _flat_blocks(nd.get("blocks"))):
-                rows.append(f"{c.get('id')}#{nd.get('id')}")
-    return rows, n
+        t = c.get("trigger") or {}
+        nodes = c.get("nodes") or []
+        has = [any(b.get("type") in MEDIA_BLOCKS for b in _flat_blocks(nd.get("blocks"))) for nd in nodes]
+        for nd, pic in zip(nodes, has):
+            k = _screen_kind(c, nd)
+            kinds.setdefault(k, [0, 0])
+            kinds[k][0] += 1
+            kinds[k][1] += pic
+            if k == "sex" and not pic:
+                rows.append(f"{c.get('id')}#{nd.get('id')}: a sex screen with no clip")
+        if nodes and t.get("is_repeatable") is False and not any(has):
+            rows.append(f"{c.get('id')}: a one-time scene with no picture on any screen")
+        if nodes and t.get("npc") and t.get("is_repeatable") and not has[0]:
+            rows.append(f"{c.get('id')}#{nodes[0].get('id')}: {t['npc']}'s hub opens with no picture of them")
+    return rows, kinds
 
 
 def _screen_without_media_lint(game):
-    rows, n = _screen_without_media_rows(game)
-    if not rows:
+    rows, kinds = _screen_without_media_rows(game)
+    if not kinds:
         return
+    n = sum(v[0] for v in kinds.values())
     print(f"  {'─'*72}")
-    print(f"  lint · a screen without media — {len(rows)} of {n} screen(s) carry no picture or clip of their own")
+    print(f"  lint · a screen without media — {len(rows)} bare screen(s) the rule wants a picture on; "
+          f"{sum(v[1] for v in kinds.values())} of {n} screens carry one")
+    for k in ("sex", "talk", "room/hub", "ordinary", "one-liner"):
+        if k in kinds:
+            tot, pic = kinds[k]
+            print(f"          {k:10} {pic:>4}/{tot:<4} {round(100 * pic / tot):>3}% with a picture   top games {SCREEN_PICTURE_FIELD[k]}")
     for h in _rows(rows, 12):
         print(f"          · {h}")
     if len(rows) > 12:
         print(f"          · … and {len(rows)-12} more")
-    print("          (references/media-blocks.md — every screen gets a block, or a reason on the media sheet;"
-          " the hub picture is gone once a choice opens the next screen)")
+    print("          (references/media-blocks.md \"By kind of screen\" — a body moment, a person, a find that matters;"
+          " a chore she does alone stays plain)")
 
 
 # ── media files asked for (references/media-blocks.md "How many files a spot holds"; LO, 2026-11-18) ──
@@ -19305,12 +19349,33 @@ LOOK_TIER = re.compile(r"_t[123]\b")
 FRAME_MAN = re.compile(r"\b(man|men|guy|guys|boy|he|him|his|professor|lecturer|owner|neighbour|neighbor|"
                        r"customer|driver|stepdad|step-?father|father|brother)\b", re.I)
 FRAME_HER = re.compile(r"\b(woman|women|girl|girls|waitress|student|she|her|step-?daughter)\b", re.I)
+# LO, 2026-11-18: the looker can be a woman too (the Biology TA "her eyes running down a student" sent the harvest to
+# "lesbian milf" searches). Two person-words in one look's description, whoever they are, is two people in one frame.
+# A word that only dresses her ("a waitress uniform") is not a second person.
+FRAME_PERSON = (r"woman|women|girl|girls|waitress|student|students|daughter|step-?daughter|teaching assistant|TA|"
+                r"lecturer|mother|mum|mom|wife|man|men|guy|guys|boy|professor|owner|neighbou?r|customer|driver|"
+                r"father|brother")
+
+
+# An explicit spot is two people by nature when it is the act. It is the same unfindable frame as a look when it
+# shows one person watching the other (first_term 2026-11-18: 14 walk-in clips "a man in a doorway staring at a naked
+# girl" — the ones searched stocked 20-34 options against 100-250 elsewhere).
+FRAME_LOOK = re.compile(r"\b(stares?|staring|watch(es|ing)?|looks? (at|over|down)|looking at|eyes on|in the doorway|"
+                        r"in a doorway|stops in|frozen in)\b", re.I)
+
+
+def _people_in_frame(desc, names):
+    """How many person-words a description names: the generic ones plus the game's own first names."""
+    alt = FRAME_PERSON + "".join("|" + re.escape(n) for n in names)
+    return len(re.findall(r"\b(?:" + alt + r")\b(?!\s+(?:uniform|dress|outfit|apron))", desc))
 
 
 def _man_in_her_picture_rows(game):
-    """Every non-explicit `_t1`-`_t3` spot whose description puts a man and her in one frame. A LIST, never a
-    score: a touch or a hallway squeeze may be meant, and the list is read, not passed."""
+    """Every non-explicit `_t1`-`_t3` spot whose description puts a man and her, or any two people, in one frame. A
+    LIST, never a score: a touch or a hallway squeeze may be meant, and the list is read, not passed."""
     out, seen = [], set()
+    firsts = [(str(n.get("name") or "").split() or [""])[0] for n in game.get("npcs") or []]
+    names = [w for w in firsts if w[:1].isupper() and w.rstrip(".").lower() not in ("the", "dr", "mr", "mrs", "ms")]
     for c in _g2_canvases(game):
         for nd in c.get("nodes") or []:
             for b in _flat_blocks(nd.get("blocks")):
@@ -19319,10 +19384,14 @@ def _man_in_her_picture_rows(game):
                 p = b.get("props") or {}
                 name = str(p.get("pool_dir") or p.get("file") or "").strip().rstrip("/")
                 desc = str(p.get("description") or "")
-                if not name or name in seen or EXPLICIT_MEDIA.search(name) or not LOOK_TIER.search(name):
+                explicit = bool(EXPLICIT_MEDIA.search(name))
+                if not name or name in seen or not (explicit or LOOK_TIER.search(name)):
                     continue
                 seen.add(name)
-                if FRAME_MAN.search(desc) and FRAME_HER.search(desc):
+                two = (FRAME_MAN.search(desc) and FRAME_HER.search(desc)) or _people_in_frame(desc, names) >= 2
+                if explicit and not (two and FRAME_LOOK.search(desc)):
+                    continue
+                if two:
                     out.append(f"{c.get('id')}#{nd.get('id')}: {name} — {desc[:90]}")
     return out
 
@@ -19332,13 +19401,193 @@ def _man_in_her_picture_lint(game):
     if not rows:
         return
     print(f"  {'─'*72}")
-    print(f"  lint · a man in her picture — {len(rows)} look spot(s) ask for him and her in one frame")
+    print(f"  lint · two people in her picture — {len(rows)} look spot(s) ask for her and someone else in one frame")
     for h in _rows(rows, 12):
         print(f"          · {h}")
     if len(rows) > 12:
         print(f"          · … and {len(rows)-12} more")
-    print("          (references/media-blocks.md rule 9 — write what he sees, \"Seen from the couch: her legs…\";"
-          " keep a man in frame only where the touch is the picture)")
+    print("          (references/media-blocks.md rule 9 — write what the one looking sees, \"Seen from the couch: her"
+          " legs…\", or the looker alone; keep two people in frame only where the touch is the picture)")
+
+
+# references/media-blocks.md rule 6 (LO, 2026-11-18): a look whose picture is a movement asks for a gif. Whether a
+# picture moves is a reading, not a keyword: first_term's keyword pass found 11 and a full read found 25. So this
+# lint lists EVERY look, still ones first, and never cuts the list short.
+def _look_format_rows(game):
+    """[(format, name, description)] for every non-explicit `_t3` look; format is 'gif' when a search word asks for
+    one, else 'still'. A LIST, never a score."""
+    out, seen = [], set()
+    for c in _g2_canvases(game):
+        for nd in c.get("nodes") or []:
+            for b in _flat_blocks(nd.get("blocks")):
+                if b.get("type") not in MEDIA_BLOCKS:
+                    continue
+                p = b.get("props") or {}
+                name = str(p.get("pool_dir") or p.get("file") or "").strip().rstrip("/")
+                if not name or name in seen or EXPLICIT_MEDIA.search(name) or not re.search(r"_t3\b", name):
+                    continue
+                seen.add(name)
+                words = " ".join(q for q in (p.get("search_queries") or []) if isinstance(q, str)).lower()
+                out.append(("gif" if re.search(r"\bgif\b", words) else "still", name, str(p.get("description") or "")))
+    return sorted(out, key=lambda r: (r[0] != "still", r[1]))
+
+
+def _look_format_lint(game):
+    rows = _look_format_rows(game)
+    if not rows:
+        return
+    stills = sum(1 for r in rows if r[0] == "still")
+    print(f"  {'─'*72}")
+    print(f"  lint · a look's format — {len(rows)} look spot(s): {stills} still, {len(rows)-stills} gif (all listed)")
+    for fmt, name, desc in rows:
+        print(f"          · {fmt:5} {name} — {desc[:80]}")
+    print("          (references/media-blocks.md rule 6 — read every still: if she walks, bends, stands up, tugs,"
+          " drips or the wind moves her, add `gif` to its search words)")
+
+
+
+# LO 2026-11-18 ("yes go ahead with filter fix and checker"): a release slice kept 11 scenes no player could open
+# — a garment type she could never wear, a door the slice cut, a room's dress code at frozen meters — and every
+# gate passed, because the gates and the filter reason the same way. reach.py plays the build's own rules forward
+# instead (every door, every outfit she can wear against every dress code), so it shares neither one's blind spots.
+def _every_kept_scene_reached(game):
+    """Gate `every kept scene can be reached`: no kept scene that no door, outfit or dress code ever lets open, no
+    media spot whose every placement is such a scene or a screen or group nothing reaches, no portrait outfit she
+    can never wear. Judged by reach.py on whatever build it is handed, full game or slice."""
+    if not (game.get("canvases") or []):
+        return None, "no canvases", []
+    here = os.path.dirname(os.path.abspath(__file__))
+    if here not in sys.path:
+        sys.path.insert(0, here)
+    import reach
+    r = reach.check(game)
+    rows = reach.rows(r)
+    n_s, n_m = len(r["scenes"]), len(r["spots"]) + len(r["portraits"])
+    return not rows, (f"{n_s} kept scene(s) can never open, {n_m} media spot(s) can never show" if rows else
+                      "every kept scene has a way in, and every media spot can show"), rows
+
+
+# LO 2026-11-18 ("yes go ahead with all three"): first_term's street let her out with no panties at Exhibitionism 0,
+# its own refusal saying that needs 40, because "Not in just the sports bra" asked for a top and a dress fills one.
+# The cut and `every kept scene can be reached` follow the rules as written, so a hole in a rule reads as a way in.
+def _reach_mod():
+    here = os.path.dirname(os.path.abspath(__file__))
+    if here not in sys.path:
+        sys.path.insert(0, here)
+    import reach
+    return reach
+
+
+def _dress_rule_keeps_its_word(game):
+    """Gate `a dress rule keeps its word`: a refusal that says what she can't go out without and from what number
+    ("No panties out of the house needs Exhibitionism 40") holds at every value under that number — no outfit
+    without that garment gets out, whichever rule the engine reaches first."""
+    if not any(l.get("clothing_rules") for l in game.get("locations") or []):
+        return None, "no dress codes", []
+    holes = _reach_mod().dress_rule_holes(game)
+    rows = [f"{p} at {v}: \"{m}\" — but {o} gets out by \"{by}\"" for p, m, v, o, by in holes]
+    return not rows, (f"{len(rows)} outfit(s) get out that a dress rule's own words refuse" if rows else
+                      "every dress rule that names a garment and a number refuses it below that number"), rows
+
+
+def _narrow_ways_lint(game):
+    ways = _reach_mod().narrow_ways(game)
+    if not ways:
+        return
+    print(f"  {'─'*72}")
+    print(f"  lint · a scene few outfits reach — {len(ways)} scene(s) her clothes open in only 1-3 outfits")
+    for cid, place, outfits in ways:
+        print(f"          · {cid} at {place}: {' | '.join(outfits)}")
+    print("          (references/engine.md \"A dress code\" — a real way in is usually many outfits; one or two is often"
+          " a hole in a dress rule: read the outfit and decide)")
+
+
+def _dress_exception_lint(game):
+    rows = _reach_mod().dress_exception_rows(game)
+    if not rows:
+        return
+    print(f"  {'─'*72}")
+    print(f"  lint · a dress exception that a dress slips through — {len(rows)} rule(s)")
+    for place, msg in rows:
+        print(f"          · {place}: \"{msg}\"")
+    print("          (references/engine.md \"A dress code\" — a rule that lets one garment stand in for an empty top or"
+          " bottom also needs `dress` unequipped: a dress fills both)")
+
+
+# LO 2026-11-18 ("yes go ahead with both"): the garden lounger screen says "Topless, on your front, the side of your
+# tits pressed flat to the lounger" under a picture of an empty lounger; the bedroom peek put "a bedroom seen through a
+# door gap" over Laura's hand on her bare stomach. Pictures were written from where a line happens, not from what it
+# shows. This reads each screen's own words against its pictures.
+BODY_WORDS = re.compile(r"\b(tits?|breasts?|nipples?|ass|arse|legs?|thighs?|cleavage|bra|panties|underwear|lingerie|"
+                        r"towel|naked|nude|topless|bare|cock|pussy|bulge|erection|hard-on|nightdress|robe|stomach|"
+                        r"hips?|skin|wet|soaked|see-through|shorts|skirt|sex|fuck\w*|couple)\b", re.I)
+SCENE_PLACES = re.compile(r"\b(mirror|shower|window|bath)\b", re.I)
+# what a picture may say instead of the scene's own place word ("steam" off a shower, "the glass" of a mirror)
+PLACE_SAYS = {"mirror": r"mirror|reflection|the glass", "shower": r"shower|bathroom|steam", "window": r"window",
+              "bath": r"bath"}
+
+
+def _picture_misses_line_rows(game):
+    """[(canvas#node, picture, why)]: a screen whose words are about her body (2+ body words) with no picture of a
+    body on it — its only picture names no person and no body; or a scene named for a place (mirror, shower,
+    window, bath) whose picture never says it. A LIST to read, never a score."""
+    out = []
+    names = [w for w in ((str(n.get("name") or "").split() or [""])[0] for n in game.get("npcs") or []) if w[:1].isupper()]
+    for c in _g2_canvases(game):
+        place = SCENE_PLACES.search(str(c.get("name") or ""))
+        for nd in c.get("nodes") or []:
+            bl = _flat_blocks(nd.get("blocks"))
+            pics = [b for b in bl if b.get("type") in MEDIA_BLOCKS]
+            if not pics:
+                continue
+            text = " ".join(str(b.get("content")) for b in bl if b.get("content") and b.get("type") in ("paragraph", "dialog"))
+            descs = [str((b.get("props") or {}).get("description") or "") for b in pics]
+            shown = [((b.get("props") or {}).get("pool_dir") or (b.get("props") or {}).get("file")) for b in pics]
+            if len(set(BODY_WORDS.findall(text.lower()))) >= 2 and not any(
+                    BODY_WORDS.search(d) or _people_in_frame(d, names) or FRAME_HER.search(d) for d in descs):
+                out.append((f"{c.get('id')}#{nd.get('id')}", shown[0],
+                            f"the words are about her body; the picture shows only \"{descs[0][:70]}\""))
+            if place:
+                for nm, d in zip(shown, descs):
+                    # only a picture of her: a reaction shot of him in the doorway needn't show the room
+                    if FRAME_HER.search(d) and not re.search(r"\b(" + PLACE_SAYS[place.group(1).lower()] + r")", d, re.I):
+                        out.append((f"{c.get('id')}#{nd.get('id')}", nm,
+                                    f"the scene is \"{c.get('name')}\"; the picture never says {place.group(1).lower()}"))
+    return out
+
+
+def _picture_misses_line_lint(game):
+    rows = _picture_misses_line_rows(game)
+    if not rows:
+        return
+    print(f"  {'─'*72}")
+    print(f"  lint · a picture that misses its line — {len(rows)} picture(s)")
+    for where, name, why in rows[:20]:
+        print(f"          · {where}: {name} — {why}")
+    if len(rows) > 20:
+        print(f"          · … and {len(rows)-20} more")
+    print("          (references/media-blocks.md rule 7 — write the picture from what the line shows, and name the place"
+          " the scene is named for)")
+
+
+# LO 2026-11-18 (first_term DECISIONS 257): a walk-in can roll after she has started, not only as she starts. "Keep
+# watching." on channel 5 jumps into a door-only canvas in the same room that carries the walk-in rules, so whoever
+# comes in finds her already watching. The walk-in floor counts those rules for the room too.
+def _continued_subs(canvas, game, loc):
+    """Walk-in rules on door-only canvases in the same room that this canvas's choices jump into ("<canvas>.<node>")."""
+    by_id = {c.get("id"): c for c in game.get("canvases") or [] if isinstance(c, dict)}
+    seen, n = set(), 0
+    for nd in canvas.get("nodes") or []:
+        for ch in ((nd.get("exit_block") or {}).get("choices") or []):
+            tgt = ch.get("nodeId") if isinstance(ch, dict) else None
+            if not (isinstance(tgt, str) and "." in tgt):
+                continue
+            cid = tgt.split(".", 1)[0]
+            t = (by_id.get(cid) or {}).get("trigger") or {}
+            if cid not in seen and t.get("substitution_only") and t.get("location") == loc:
+                seen.add(cid)
+                n += len(t.get("substitutions") or [])
+    return n
 
 
 def main():
@@ -20216,7 +20465,7 @@ def main():
               " Walk-ins and windowed scenes are legitimate hits, which is why this cannot"
               " fail anything)")
 
-    _group2_lints(model, game, state); _screen_without_media_lint(game); _media_files_asked_lint(game); _man_in_her_picture_lint(game)   # LO 2026-11-03 group 2; media 2026-11-12, 11-18; above main()
+    _group2_lints(model, game, state); _screen_without_media_lint(game); _media_files_asked_lint(game); _man_in_her_picture_lint(game); _look_format_lint(game); _narrow_ways_lint(game); _dress_exception_lint(game); _picture_misses_line_lint(game)   # LO 2026-11-03 group 2; media 2026-11-12, 11-18; above main()
     if tok_summary:
         print(f"  {'─'*72}")
         print(f"  lint · a token the engine never resolves — {tok_summary}")
