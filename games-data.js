@@ -15,6 +15,19 @@
 //                        NOT whatever is currently half-built in the working tree.
 window.GAMES = [
   {
+    // Listed 2026-11-20. The test game for the new skill author-game-lean: first_term rebuilt
+    // from its premise (IDEA.md and WANT.md only), one approved piece card at a time
+    // (games/first_term_lean/STATE.md, NOTES.md). Release 1 skeleton, pieces P01-P06 and P13
+    // built: the frame, every place, travel, the daily loop and the opening with Ryan. Release
+    // form (no dev controls), so LO can play it on his phone. No media. No `version`: nothing
+    // has shipped. Its own title, "First Term (Lean)", so its saves don't collide with first_term.
+    slug: "first_term_lean",
+    title: "First Term (Lean)",
+    badge: "lean",
+    dev: true,
+    summary: `You're eighteen and it's your first day of college. You still live at home with your mom, your step-father and your step-brother, four people and one bathroom, and you've never had a dollar of your own. This is an early skeleton: the house, the street, campus and the café are all there to walk, the day turns over when you sleep, and the opening plays your first morning, out in the hall in a towel, with your step-brother looking.`,
+  },
+  {
     // Listed 2026-10-08; rebuilt 2026-10-10 as iteration 002, the everyday pass (areas and walk
     // times, home life, college, town, the phone; games/first_term/iterations/002/REPORT.md).
     // 60/88 gates, shape 22/0, --ship NO (8 BLOCK rows, reasons in REPORT.md); 18 of Laura's
