@@ -48,8 +48,12 @@ PARK_RULES = [
 # The street (LO, 2026-11-10, DECISIONS 225: "yes she can walk in gym cloths in streets"; the sports bra alone
 # "Yes, from 20"): the park's two bra rows, but for the sports bra only, so she can walk to the gym in it. Any other
 # bra alone still needs a top. The rows are tried in order, so these go before PUBLIC_RULES' generic ones.
+# "Alone" means no dress either: the engine fills top and bottom with a dress (v2.py clothingCheckForLocation), so
+# without this a sports bra under the café uniform matched "just the sports bra", needed only a top, and let her out
+# with no panties at Exhibitionism 0 (LO, 2026-11-18, DECISIONS 256).
 _SPORTS_ALONE = [{"type": "clothing_item", "item_id": "sports_bra", "operator": "equipped"},
-                 {"type": "clothing_slot", "slot": "top", "operator": "unequipped"}]
+                 {"type": "clothing_slot", "slot": "top", "operator": "unequipped"},
+                 {"type": "clothing_slot", "slot": "dress", "operator": "unequipped"}]
 STREET_RULES = [
     TOWEL_RULE, SLEEP_RULE, SKIRT_RULE,
     {"conditions": cond(*_SPORTS_ALONE, trait("exhibitionism", "lt", 20)),

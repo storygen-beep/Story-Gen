@@ -1,0 +1,111 @@
+# First Term (first_term_lean) — systems spec. Piece P01: the frame.
+
+[project]
+id = "first_term_lean"
+# LO 2026-11-20: a title of its own, because browser save slots key off the title (games-data.js, vesper_two note).
+title = "First Term (Lean)"
+description = "Ella's first term of college, living at home with the family that starts looking at her differently."
+quests_engine = "v2"
+starting_canvas = "opening"
+
+# P02 — second person, declared once for the whole game (C503, C548; validated at template_import.py:4108).
+[settings]
+narration_person = "second"
+
+# The game starts on her first day of college: Monday, week 1, 07:00 (template_import.py:2319-2325).
+[time]
+enabled = true
+starting_hour = 7
+starting_day = "Monday"
+starting_week = 1
+
+[[traits.labels]]
+key = "energy"
+label = "Energy"
+
+[[traits.labels]]
+key = "money"
+label = "Money"
+
+[[traits.labels]]
+key = "corruption"
+label = "Corruption"
+
+[[traits.labels]]
+key = "exhibitionism"
+label = "Exhibitionism"
+
+# Sidebar, top to bottom under the engine's clock line (v2.py:20828).
+[[sidebar_items]]
+type = "trait_bar"
+trait = "energy"
+label = "Energy"
+max = 100
+
+[[sidebar_items]]
+type = "trait_words"
+trait = "money"
+label = "Money"
+show_value = true
+# One band with no word, so the line reads "Money: N" (v2.py:21416-21418).
+bands = [{ min = 0, max = 1000000, text = "" }]
+
+# Her two meters, 20 points a stage (C285). Release 1 moves neither.
+[[sidebar_items]]
+type = "trait_words"
+trait = "corruption"
+label = "Corruption"
+show_value = true
+bands = [
+  { min = 0, max = 19, text = "Good Girl" },
+  { min = 20, max = 39, text = "Curious" },
+  { min = 40, max = 59, text = "Bold" },
+  { min = 60, max = 79, text = "Wild" },
+  { min = 80, max = 100, text = "Shameless" },
+]
+
+[[sidebar_items]]
+type = "trait_words"
+trait = "exhibitionism"
+label = "Exhibitionism"
+show_value = true
+bands = [
+  { min = 0, max = 19, text = "Covered" },
+  { min = 20, max = 39, text = "Noticed" },
+  { min = 40, max = 59, text = "Showing Off" },
+  { min = 60, max = 79, text = "Exposed" },
+  { min = 80, max = 100, text = "On Display" },
+]
+
+[[traits.labels]]
+key = "want"
+label = "Want"
+
+[[traits.labels]]
+key = "warmth"
+label = "Warmth"
+
+# P13 — the people page. Who is listed is the quest cards' decision (template_import.py:684-708):
+# a person shows once a card's `when` holds, so each person's card gates on their met flag.
+[ui.cast_page]
+title = "People"
+show_traits = ["want", "warmth"]
+
+[ui.cast_page.trait_bands]
+want = [
+  { min = 0, max = 24, text = "Hides it" },
+  { min = 25, max = 49, text = "Looks" },
+  { min = 50, max = 74, text = "Doesn't hide it" },
+  { min = 75, max = 100, text = "Wants you" },
+]
+warmth = [
+  { min = 0, max = 24, text = "Distant" },
+  { min = 25, max = 49, text = "Friendly" },
+  { min = 50, max = 74, text = "On your side" },
+  { min = 75, max = 100, text = "Close" },
+]
+
+[[quest_cards]]
+npc_id = "npc_ryan"
+when = [{ flag = "met_ryan", op = "is_true" }]
+text = "Your step-brother, 22. He shares the hall and the bathroom with you."

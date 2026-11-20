@@ -1,0 +1,292 @@
+# First Term (first_term_lean) — player, locations, people. Piece P01: the player's traits only.
+
+[player]
+id = "player"
+name = "Ella"
+# money is not a 0-100 meter: every money effect must set clamp = false (v2.py:7361-7364).
+core_traits = { energy = 100, money = 0, corruption = 0, exhibitionism = 0 }
+# Every player flag is declared here. P05: zoe_place_known (set by P20) reveals Zoe's Apartment.
+flag_keys = [
+  "zoe_place_known",
+  # P13 — the opening
+  "start_grades", "start_fun", "start_freedom",
+  "met_ryan", "ryan_hall_seen", "ryan_hall_ran", "ryan_hall_knock", "ryan_hall_talked", "ryan_path_closed",
+]
+# P13 — the name screen (template_import.py:2332-2357). "name" writes $player.name; any other id
+# becomes $player.<id> (v2.py:1569-1573). Printed with @player / @player.nickname (v2.py:18598-18629).
+customizable = true
+
+[[player.customization_fields]]
+id = "name"
+type = "text"
+label = "Your name"
+default = "Ella"
+
+[[player.customization_fields]]
+id = "nickname"
+type = "text"
+label = "What Ryan calls you"
+default = "El"
+
+# ── P02 · Home: one area, the hall its hub, every room off the hall ──
+# Nav: a place lists the places whose entry_from is it (v2.py _ordered_navigation); each room
+# gets "Leave <room>" back to its entry_from (v2.py:24797-24802).
+
+[[locations]]
+id = "home"
+name = "Home"
+description = "The house you grew up in."
+is_container = true
+default_entry = "home_hall"
+# P03 — Home's way out is her street: the hall (the default entry) gets "Exit Home" (v2.py:24804-24820).
+entry_from = "hood_street"
+
+[[locations]]
+id = "home_hall"
+name = "Hall"
+description = "The hall. Every room in the house opens off it."
+parent = "home"
+kind = "thoroughfare"
+image = "locations/home_hall.jpg"
+
+[[locations]]
+id = "home_kitchen"
+name = "Kitchen"
+description = "The kitchen: the table where the family eats, the fridge, a coffee pot that's always on."
+parent = "home"
+entry_from = "home_hall"
+kind = "destination"
+image = "locations/home_kitchen.jpg"
+
+[[locations]]
+id = "home_living_room"
+name = "Living Room"
+description = "The living room: the couch, the TV, and the big armchair nobody else sits in. Nothing to do here right now."
+parent = "home"
+entry_from = "home_hall"
+kind = "destination"
+image = "locations/home_living_room.jpg"
+
+[[locations]]
+id = "home_bathroom"
+name = "Bathroom"
+description = "The bathroom, the only one in the house. One shower, a lock that sticks, and four people sharing it."
+parent = "home"
+entry_from = "home_hall"
+kind = "destination"
+image = "locations/home_bathroom.jpg"
+
+[[locations]]
+id = "home_her_room"
+name = "Your Bedroom"
+description = "Your bedroom. The same single bed since you were twelve, and your old key in the lock: the one thing in this house that's yours."
+parent = "home"
+entry_from = "home_hall"
+kind = "destination"
+image = "locations/home_her_room.jpg"
+
+[[locations]]
+id = "home_ryans_room"
+name = "Ryan's Room"
+description = "Ryan's room. Clothes on the floor, the curtains shut, and it smells like him. Nothing to do here right now."
+parent = "home"
+entry_from = "home_hall"
+kind = "destination"
+image = "locations/home_ryans_room.jpg"
+
+[[locations]]
+id = "home_master_bedroom"
+name = "Master Bedroom"
+description = "Your mom and Mark's room. The big bed, her wardrobe, and the feeling you shouldn't be in here. Nothing to do here right now."
+parent = "home"
+entry_from = "home_hall"
+kind = "destination"
+image = "locations/home_master_bedroom.jpg"
+
+# ── P03 · Neighbourhood: one area, her street its hub ──
+
+[[locations]]
+id = "neighbourhood"
+name = "Neighbourhood"
+description = "Your street and what's on it."
+is_container = true
+default_entry = "hood_street"
+
+[[locations]]
+id = "hood_street"
+name = "Your Street"
+description = "Your street. The same row of houses, the corner shop at the end, the park across the road, the gym over the laundromat, and a bus stop."
+parent = "neighbourhood"
+kind = "thoroughfare"
+image = "locations/hood_street.jpg"
+
+[[locations]]
+id = "hood_next_door"
+name = "The House Next Door"
+description = "The house next door. The man who owns your family's house lives here: a porch, one chair on it, and a clear view of your front door. Nothing to do here right now."
+parent = "neighbourhood"
+kind = "destination"
+image = "locations/hood_next_door.jpg"
+entry_from = "hood_street"
+
+[[locations]]
+id = "hood_shop"
+name = "Corner Shop"
+description = "The corner shop: snacks, phone credit, cigarettes behind the counter, the till by the door. Nothing to do here right now."
+parent = "neighbourhood"
+kind = "destination"
+image = "locations/hood_shop.jpg"
+entry_from = "hood_street"
+hours = [{ weekdays = [], open = "07:00", close = "23:00" }]
+closed_text = "The corner shop is shut. It opens at 7am."
+
+[[locations]]
+id = "hood_park"
+name = "Park"
+description = "The park: a running loop, benches, the pond. Nothing to do here right now."
+parent = "neighbourhood"
+kind = "destination"
+image = "locations/hood_park.jpg"
+entry_from = "hood_street"
+hours = [{ weekdays = [], open = "06:00", close = "21:00" }]
+closed_text = "The park gates are locked. They open at 6am."
+
+[[locations]]
+id = "hood_gym"
+name = "Gym"
+description = "The gym: weights, treadmills, mirrors on every wall. Nothing to do here right now."
+parent = "neighbourhood"
+kind = "destination"
+image = "locations/hood_gym.jpg"
+entry_from = "hood_street"
+hours = [{ weekdays = [], open = "06:00", close = "22:00" }]
+closed_text = "The gym is closed. It opens at 6am."
+
+# ── P04 · Campus: one area, the quad its hub. No entry_from on the area, so there is no free
+# "Exit Campus": the only ways in and out are the travel canvases in 5_scenes.toml. ──
+
+[[locations]]
+id = "campus"
+name = "Campus"
+description = "The college campus."
+is_container = true
+default_entry = "campus_quad"
+
+[[locations]]
+id = "campus_quad"
+name = "The Quad"
+description = "The quad. Paths cut across the grass to every building on campus."
+parent = "campus"
+kind = "thoroughfare"
+image = "locations/campus_quad.jpg"
+
+[[locations]]
+id = "campus_lecture_hall"
+name = "Lecture Hall"
+description = "The lecture hall: rows of seats rising to the back, a screen, a lectern at the bottom. Your classes are here. Nothing to do here right now."
+parent = "campus"
+kind = "destination"
+image = "locations/campus_lecture_hall.jpg"
+entry_from = "campus_quad"
+hours = [{ weekdays = [0, 1, 2, 3, 4], open = "08:00", close = "18:00" }]
+closed_text = "The lecture hall is locked. It opens at 8am on weekdays."
+
+[[locations]]
+id = "campus_bathroom"
+name = "Women's Bathroom"
+description = "The women's bathroom off the lecture-hall corridor: three stalls and one long mirror. Nothing to do here right now."
+parent = "campus"
+kind = "destination"
+image = "locations/campus_bathroom.jpg"
+entry_from = "campus_lecture_hall"
+hours = [{ weekdays = [0, 1, 2, 3, 4], open = "08:00", close = "18:00" }]
+closed_text = "The bathroom is locked with the lecture hall."
+
+[[locations]]
+id = "campus_library"
+name = "Library"
+description = "The library: long tables, quiet floors, and the desk by the door. Nothing to do here right now."
+parent = "campus"
+kind = "destination"
+image = "locations/campus_library.jpg"
+entry_from = "campus_quad"
+hours = [{ weekdays = [], open = "08:00", close = "22:00" }]
+closed_text = "The library is closed. It opens at 8am."
+
+[[locations]]
+id = "campus_cafeteria"
+name = "Cafeteria"
+description = "The cafeteria: trays, long tables, the lunch counter. Nothing to do here right now."
+parent = "campus"
+kind = "destination"
+image = "locations/campus_cafeteria.jpg"
+entry_from = "campus_quad"
+hours = [{ weekdays = [0, 1, 2, 3, 4], open = "08:00", close = "16:00" }]
+closed_text = "The cafeteria is closed. It's open weekdays, 8am to 4pm."
+
+[[locations]]
+id = "campus_offices"
+name = "Faculty Offices"
+description = "The faculty corridor: a row of office doors with name plates, and the dean's office at the end. Nothing to do here right now."
+parent = "campus"
+kind = "destination"
+image = "locations/campus_offices.jpg"
+entry_from = "campus_quad"
+hours = [{ weekdays = [0, 1, 2, 3, 4], open = "08:00", close = "18:00" }]
+closed_text = "The faculty corridor is locked. It opens at 8am on weekdays."
+
+[[locations]]
+id = "campus_theatre"
+name = "Theatre"
+description = "The theatre: a black stage, rows of folding seats, and the lights rigged overhead. Nothing to do here right now."
+parent = "campus"
+kind = "destination"
+image = "locations/campus_theatre.jpg"
+entry_from = "campus_quad"
+hours = [{ weekdays = [0, 1, 2, 3, 4], open = "09:00", close = "21:00" }]
+closed_text = "The theatre is dark. It's open weekdays, 9am to 9pm."
+
+# ── P05 · Near campus: the café and Zoe's apartment, both off The Quad ──
+
+[[locations]]
+id = "near_campus"
+name = "Near Campus"
+description = "The streets around campus."
+is_container = true
+
+[[locations]]
+id = "near_cafe"
+name = "Café"
+description = "The café across from campus: the coffee machine hissing, a long counter, a tip jar by the till. Nothing to do here right now."
+parent = "near_campus"
+entry_from = "campus_quad"
+kind = "destination"
+image = "locations/near_cafe.jpg"
+costs = { time = 5 }
+hours = [{ weekdays = [], open = "07:00", close = "21:00" }]
+closed_text = "The café is shut. It opens at 7am."
+
+# Hidden, name withheld, until she knows where Zoe lives (EN4, TemplateLocation.hidden_until).
+# P20 (Zoe's meeting) sets zoe_place_known.
+[[locations]]
+id = "near_zoe_apartment"
+name = "Zoe's Apartment"
+description = "Zoe's apartment, two streets from campus: a sofa that's seen things, clothes on every chair, and music always on. Nothing to do here right now."
+parent = "near_campus"
+entry_from = "campus_quad"
+kind = "destination"
+image = "locations/near_zoe_apartment.jpg"
+costs = { time = 10 }
+hidden_until = { flag = "zoe_place_known" }
+
+# ── People. Everyone is 18 or over, and the game says so on their card. ──
+
+# P13 — Ryan, step-brother, 22. Want + Warmth (WANT.md §5); release 1 moves neither.
+[[npcs]]
+id = "npc_ryan"
+name = "Ryan"
+role = "Step-brother"
+# The people page prints `relationship` in the card body (v2.py:13474); it carries the card's line and his age.
+relationship = "Your step-brother, 22. He shares the hall and the bathroom with you."
+description = "Your step-brother, 22."
+core_traits = { want = 0, warmth = 0 }

@@ -1,0 +1,532 @@
+# =============================================================================
+# First Term — 2 · the opening (sheets/OPENING.md · sheets/scenes/ryan_01_hall_first_morning.md)
+#
+# A staged open, one canvas: the boot in her room (screens 2-4), Ryan step 1 in
+# the hall (5-6), breakfast and Laura's rule (7-8), the card (9). It is the
+# starting canvas, so the ladder's `fires_from = "opening"` holds, and it is
+# located at the hall (the ledger's `where`). The clock after each screen is the
+# sheet's: 07:03 · 07:05 · 07:15 · 07:18 · 07:30 · 07:40 · 07:45 · 07:50, and it hands
+# over in the kitchen at 07:50, where Laura is until 08:00.
+# =============================================================================
+
+[[canvases]]
+id   = "ryan_01_hall_first_morning"
+name = "Your first morning"
+description = "The opening and Ryan step 1. Sets opening_done, rent_starts, the start choice, laura_rule_ryan_first, hygiene_off (or not), ryan_step 1 (or -1: his path ends)."
+
+[canvases.trigger]
+location      = "home_hall"
+is_repeatable = false
+priority      = 12
+is_active     = true
+
+[canvases.trigger.conditions]
+version = "1.0"
+logic   = "AND"
+[[canvases.trigger.conditions.items]]
+type      = "trait"
+subject   = "player"
+trait_key = "ryan_step"
+operator  = "eq"
+value     = 0
+
+# ── screen 2 · the boot: who she is ──
+[[canvases.nodes]]
+id   = "wake"
+name = "Monday"
+
+[[canvases.nodes.blocks]]
+type = "image"
+[canvases.nodes.blocks.props]
+file           = "scenes/opening_wake.jpg"
+description    = "a girl waking in a small bedroom, morning light, alarm on the phone, posters, clothes on a chair"
+search_queries = ["girl waking up bedroom morning phone alarm", "young woman in bed morning light"]
+
+[[canvases.nodes.blocks]]
+type    = "paragraph"
+content = "Your alarm goes at seven and you're already awake, staring at the ceiling of the room you've slept in since you were twelve. Monday. Your first day of college."
+
+[[canvases.nodes.blocks]]
+type    = "paragraph"
+content = "You're eighteen. You still live at home, in this house, with your mom and your step-father and your step-brother and one bathroom between the four of you. You've never had a job. You've never had a lock on anything that was yours. Your account has nothing in it, and you checked twice."
+
+[[canvases.nodes.blocks]]
+type = "thought_bubble"
+content = "College. New people. Nobody there knows the old you. That has to count for something."
+[canvases.nodes.blocks.props]
+speaker = "player"
+
+[canvases.nodes.exit_block]
+type = "choices"
+
+[[canvases.nodes.exit_block.choices]]
+text       = "Get up."
+targetType = "node"
+nodeId     = "problem"
+time_progression_minutes = 3
+wardrobeEffects = [ { action = "add", item_id = "sleep_shirt" }, { action = "add", item_id = "towel" } ]
+
+[[canvases.nodes.exit_block.choices]]
+text       = "Skip the opening"
+targetType = "node"
+nodeId     = "card"
+time_progression_minutes = 45
+wardrobeEffects = [ { action = "add", item_id = "sleep_shirt" }, { action = "add", item_id = "towel" } ]
+flagEffects = [
+  { targetType = "player", flag = "rent_starts", op = "set" },
+  { targetType = "player", flag = "laura_rule_ryan_first", op = "set" },
+  { targetType = "player", flag = "ryan_hall_seen", op = "set" },
+]
+effects = [ { targetType = "player", trait = "ryan_step", op = "set", value = 1 }, { targetType = "npc", npcId = "npc_ryan", trait = "want", op = "add", value = 10 } ]
+
+# ── screen 3 · the problem ──
+[[canvases.nodes]]
+id   = "problem"
+name = "Seventy-five"
+
+[[canvases.nodes.blocks]]
+type    = "paragraph"
+content = "Last night Mark put his fork down at dinner and said it like he'd been saving it. You're an adult now. Adults pay their way. Seventy-five a week, from Sunday, at the kitchen table. Laura looked at her plate and said nothing, which is how you knew it was real."
+
+[[canvases.nodes.blocks]]
+type = "thought_bubble"
+content = "Seventy-five a week. With what? You don't have seventy-five. You don't have seven."
+[canvases.nodes.blocks.props]
+speaker = "player"
+
+[[canvases.nodes.blocks]]
+type    = "paragraph"
+content = "Somewhere in town somebody is hiring a girl with no experience. You have six days to find them. First, you need a shower, before anyone else in this house gets to the bathroom."
+
+[canvases.nodes.exit_block]
+type = "choices"
+
+[[canvases.nodes.exit_block.choices]]
+text       = "Grab a towel."
+targetType = "node"
+nodeId     = "shower"
+time_progression_minutes = 2
+
+# ── screen 4 · the shower ──
+[[canvases.nodes]]
+id   = "shower"
+name = "The one bathroom"
+
+[[canvases.nodes.blocks]]
+type    = "paragraph"
+content = "The bathroom is still cold from the night. You lock the door, but the lock sticks halfway like it always has. The walls in this house are paper. You can hear the kettle downstairs, and Mark's radio, and the bed creak next door in Ryan's room as he gets up."
+
+[[canvases.nodes.blocks]]
+type    = "paragraph"
+content = "You stand under the water until it runs hot, and you let yourself have one minute. Then the handle rattles."
+
+[[canvases.nodes.blocks]]
+type = "dialog"
+content = "Some of us have places to be, @player.nickname."
+[canvases.nodes.blocks.props]
+speaker = "npc"
+npcId   = "npc_ryan"
+
+[[canvases.nodes.blocks]]
+type    = "paragraph"
+content = "Ryan. Your step-brother, through the door, right outside it. You turn the water off and wrap the towel round yourself and tuck it in over your tits. It covers you. Mostly."
+
+[canvases.nodes.exit_block]
+type = "choices"
+
+[[canvases.nodes.exit_block.choices]]
+text       = "Open the door."
+targetType = "node"
+nodeId     = "hall"
+time_progression_minutes = 10
+wardrobeEffects = [ { action = "unequip", item_id = "plain_bra" }, { action = "unequip", item_id = "plain_panties" }, { action = "unequip", item_id = "sneakers" }, { action = "equip", item_id = "towel" } ]
+
+# ── screen 5 · the hall: Ryan, the first look (Ryan step 1) ──
+[[canvases.nodes]]
+id   = "hall"
+name = "The hall"
+
+[[canvases.nodes.blocks]]
+type = "image"
+[canvases.nodes.blocks.props]
+file           = "scenes/ryan_01_hall.jpg"
+description    = "a young man in a t-shirt leaning on a hallway wall, looking at a girl stepping out of a bathroom in a towel, morning"
+search_queries = ["guy leaning on hallway wall girl in towel bathroom door", "girl in towel hallway morning brother waiting"]
+
+[[canvases.nodes.blocks]]
+type    = "paragraph"
+content = "Ryan is leaning on the wall opposite the bathroom door with his arms folded and his towel over his shoulder. Twenty-two, Mark's son, broad from lifting at the yard. He's waiting his turn, and he doesn't move out of your way."
+
+[[canvases.nodes.blocks]]
+type = "dialog"
+content = "First day of college, huh. Look at you."
+[canvases.nodes.blocks.props]
+speaker = "npc"
+npcId   = "npc_ryan"
+
+[[canvases.nodes.blocks]]
+type    = "paragraph"
+content = "His eyes go down your legs, all the way to your wet feet, and come back up slower. He doesn't hide it. He's never once looked at you like this, and you're standing in a towel in the hall with nothing under it, and your face goes hot all at once."
+
+[[canvases.nodes.blocks]]
+type = "thought_bubble"
+content = "He's your brother. Step-brother. He's looking at you like you're not."
+[canvases.nodes.blocks.props]
+speaker = "player"
+
+[canvases.nodes.exit_block]
+type = "choices"
+
+[[canvases.nodes.exit_block.choices]]
+text        = "Run to your room."
+targetType  = "node"
+nodeId      = "run"
+time_progression_minutes = 3
+flagEffects = [ { targetType = "player", flag = "ryan_hall_seen", op = "set" } ]
+effects     = [ { targetType = "npc", npcId = "npc_ryan", trait = "want", op = "add", value = 10 } ]
+
+[[canvases.nodes.exit_block.choices]]
+text        = "Knock next time."
+targetType  = "node"
+nodeId      = "knock"
+time_progression_minutes = 3
+flagEffects = [ { targetType = "player", flag = "ryan_hall_knock", op = "set" } ]
+
+[[canvases.nodes.exit_block.choices]]
+text        = "Stop and talk."
+targetType  = "node"
+nodeId      = "talk"
+time_progression_minutes = 3
+flagEffects = [ { targetType = "player", flag = "ryan_hall_talked", op = "set" } ]
+effects     = [ { targetType = "npc", npcId = "npc_ryan", trait = "warmth", op = "add", value = 5 } ]
+
+[[canvases.nodes.exit_block.choices]]
+text        = "Don't ever look at me like that. (ends his path)"
+targetType  = "node"
+nodeId      = "final"
+time_progression_minutes = 3
+flagEffects = [ { targetType = "player", flag = "ryan_01_hall_first_morning_closed", op = "set" } ]
+
+# ── screen 6 · the reaction ──
+[[canvases.nodes]]
+id   = "run"
+name = "Down the hall"
+
+[[canvases.nodes.blocks]]
+type    = "paragraph"
+content = "You hold the towel shut with both hands and go, fast, past him, close enough to smell his sleep. Your face is burning. You feel his eyes on the backs of your legs the whole way down the hall, and you don't look round, but you know he's still watching when your door shuts."
+
+[[canvases.nodes.blocks]]
+type = "dialog"
+content = "@player, you'll be late on your first day!"
+[canvases.nodes.blocks.props]
+speaker = "npc"
+npcId   = "npc_laura"
+
+[canvases.nodes.exit_block]
+type = "choices"
+
+[[canvases.nodes.exit_block.choices]]
+text       = "Get dressed."
+targetType = "node"
+nodeId     = "breakfast"
+time_progression_minutes = 12
+effects    = [ { targetType = "player", trait = "ryan_step", op = "set", value = 1 } ]
+wardrobeEffects = [ { action = "equip", item_id = "plain_bra" }, { action = "equip", item_id = "plain_panties" }, { action = "equip", item_id = "tshirt" }, { action = "equip", item_id = "jeans" }, { action = "equip", item_id = "sneakers" } ]
+
+[[canvases.nodes]]
+id   = "knock"
+name = "Knock next time"
+
+[[canvases.nodes.blocks]]
+type = "dialog"
+content = "Knock next time."
+[canvases.nodes.blocks.props]
+speaker = "player"
+
+[[canvases.nodes.blocks]]
+type = "dialog"
+content = "Yeah. Sorry."
+[canvases.nodes.blocks.props]
+speaker = "npc"
+npcId   = "npc_ryan"
+
+[[canvases.nodes.blocks]]
+type    = "paragraph"
+content = "He says sorry, but he doesn't step back, and he doesn't look away until you're past him. Your face is still hot when you shut your door."
+
+[[canvases.nodes.blocks]]
+type = "dialog"
+content = "@player, you'll be late on your first day!"
+[canvases.nodes.blocks.props]
+speaker = "npc"
+npcId   = "npc_laura"
+
+[canvases.nodes.exit_block]
+type = "choices"
+
+[[canvases.nodes.exit_block.choices]]
+text       = "Get dressed."
+targetType = "node"
+nodeId     = "breakfast"
+time_progression_minutes = 12
+effects    = [ { targetType = "player", trait = "ryan_step", op = "set", value = 1 } ]
+wardrobeEffects = [ { action = "equip", item_id = "plain_bra" }, { action = "equip", item_id = "plain_panties" }, { action = "equip", item_id = "tshirt" }, { action = "equip", item_id = "jeans" }, { action = "equip", item_id = "sneakers" } ]
+
+[[canvases.nodes]]
+id   = "talk"
+name = "In the doorway"
+
+[[canvases.nodes.blocks]]
+type    = "paragraph"
+content = "You stop in the bathroom doorway with one hand on the towel. He blinks, like he didn't expect you to stay."
+
+[[canvases.nodes.blocks]]
+type = "dialog"
+content = "Nervous? About today?"
+[canvases.nodes.blocks.props]
+speaker = "npc"
+npcId   = "npc_ryan"
+
+[[canvases.nodes.blocks]]
+type = "dialog"
+content = "Terrified. I don't know anyone."
+[canvases.nodes.blocks.props]
+speaker = "player"
+
+[[canvases.nodes.blocks]]
+type = "dialog"
+content = "You'll be fine. Give it a week and they'll all know you."
+[canvases.nodes.blocks.props]
+speaker = "npc"
+npcId   = "npc_ryan"
+
+[[canvases.nodes.blocks]]
+type    = "paragraph"
+content = "He's the only one in this house who asked. Then his eyes slip down to where the towel is tucked, and back up, and he grins like he got caught and doesn't mind."
+
+[[canvases.nodes.blocks]]
+type = "dialog"
+content = "@player, you'll be late on your first day!"
+[canvases.nodes.blocks.props]
+speaker = "npc"
+npcId   = "npc_laura"
+
+[canvases.nodes.exit_block]
+type = "choices"
+
+[[canvases.nodes.exit_block.choices]]
+text       = "Get dressed."
+targetType = "node"
+nodeId     = "breakfast"
+time_progression_minutes = 12
+effects    = [ { targetType = "player", trait = "ryan_step", op = "set", value = 1 } ]
+wardrobeEffects = [ { action = "equip", item_id = "plain_bra" }, { action = "equip", item_id = "plain_panties" }, { action = "equip", item_id = "tshirt" }, { action = "equip", item_id = "jeans" }, { action = "equip", item_id = "sneakers" } ]
+
+[[canvases.nodes]]
+id   = "final"
+name = "Don't"
+
+[[canvases.nodes.blocks]]
+type = "dialog"
+content = "Don't ever look at me like that."
+[canvases.nodes.blocks.props]
+speaker = "player"
+
+[[canvases.nodes.blocks]]
+type    = "paragraph"
+content = "He goes white. He steps back against the wall like you slapped him, and he looks at the carpet."
+
+[[canvases.nodes.blocks]]
+type = "dialog"
+content = "Right. Yeah. Got it."
+[canvases.nodes.blocks.props]
+speaker = "npc"
+npcId   = "npc_ryan"
+
+[[canvases.nodes.blocks]]
+type    = "paragraph"
+content = "He goes into the bathroom and shuts the door, and from now on he's your brother and nothing else, and polite, and cold."
+
+[[canvases.nodes.blocks]]
+type = "dialog"
+content = "@player, you'll be late on your first day!"
+[canvases.nodes.blocks.props]
+speaker = "npc"
+npcId   = "npc_laura"
+
+[canvases.nodes.exit_block]
+type = "choices"
+
+[[canvases.nodes.exit_block.choices]]
+text       = "Get dressed."
+targetType = "node"
+nodeId     = "breakfast"
+time_progression_minutes = 12
+effects    = [ { targetType = "player", trait = "ryan_step", op = "set", value = -1, clamp = false } ]
+wardrobeEffects = [ { action = "equip", item_id = "plain_bra" }, { action = "equip", item_id = "plain_panties" }, { action = "equip", item_id = "tshirt" }, { action = "equip", item_id = "jeans" }, { action = "equip", item_id = "sneakers" } ]
+
+# ── screen 7 · breakfast: Laura, Mark, the rent, the start choice ──
+[[canvases.nodes]]
+id   = "breakfast"
+name = "Breakfast"
+
+[[canvases.nodes.blocks]]
+type = "image"
+[canvases.nodes.blocks.props]
+file           = "scenes/opening_breakfast.jpg"
+description    = "a family kitchen in the morning, a woman in her forties in a work blouse pouring coffee, a man with car keys at the counter"
+search_queries = ["family kitchen morning mom pouring coffee", "suburban kitchen breakfast parents work clothes"]
+
+[[canvases.nodes.blocks]]
+type    = "paragraph"
+content = "Your mom, Laura, is at the counter in her work blouse, pouring coffee into two mugs. Forty-one, pretty in a way she's stopped noticing, hair still damp. She pushes one mug at you before you've sat down."
+
+[[canvases.nodes.blocks]]
+type    = "paragraph"
+content = "Mark, your step-father, stands by the back door with his car keys in his hand. Forty-six, work boots, the face of a man who is already late and has decided it's somebody else's fault. He looks at you over his coffee."
+
+[[canvases.nodes.blocks]]
+type = "dialog"
+content = "Sunday. Kitchen table. All of it."
+[canvases.nodes.blocks.props]
+speaker = "npc"
+npcId   = "npc_mark"
+
+[[canvases.nodes.blocks]]
+type = "dialog"
+content = "Mark. It's her first day."
+[canvases.nodes.blocks.props]
+speaker = "npc"
+npcId   = "npc_laura"
+
+[[canvases.nodes.blocks]]
+type = "dialog"
+content = "And on Sunday it'll be her first rent. Seventy-five. Vance doesn't take excuses, so I don't."
+[canvases.nodes.blocks.props]
+speaker = "npc"
+npcId   = "npc_mark"
+
+[[canvases.nodes.blocks]]
+type    = "paragraph"
+content = "Laura sighs and lets it go. She sits down across from you and wraps both hands round her mug, and for a second she looks at you like she's seeing someone she doesn't know yet."
+
+[[canvases.nodes.blocks]]
+type = "dialog"
+content = "So. What do you want from college, sweetheart?"
+[canvases.nodes.blocks.props]
+speaker = "npc"
+npcId   = "npc_laura"
+
+[canvases.nodes.exit_block]
+type = "choices"
+
+[[canvases.nodes.exit_block.choices]]
+text        = "\"Good grades.\""
+targetType  = "node"
+nodeId      = "rule"
+time_progression_minutes = 10
+flagEffects = [ { targetType = "player", flag = "college_for_grades", op = "set" }, { targetType = "player", flag = "rent_starts", op = "set" } ]
+
+[[canvases.nodes.exit_block.choices]]
+text        = "\"Fun.\""
+targetType  = "node"
+nodeId      = "rule"
+time_progression_minutes = 10
+flagEffects = [ { targetType = "player", flag = "college_for_fun", op = "set" }, { targetType = "player", flag = "rent_starts", op = "set" } ]
+
+[[canvases.nodes.exit_block.choices]]
+text        = "\"Freedom.\""
+targetType  = "node"
+nodeId      = "rule"
+time_progression_minutes = 10
+flagEffects = [ { targetType = "player", flag = "college_for_freedom", op = "set" }, { targetType = "player", flag = "rent_starts", op = "set" } ]
+
+# ── screen 8 · the reaction, and Laura's rule ──
+[[canvases.nodes]]
+id   = "rule"
+name = "Laura's rule"
+
+[[canvases.nodes.blocks]]
+type = "group"
+conditions = { version = "1.0", logic = "AND", items = [ { type = "flag", subject = "player", flag_key = "college_for_grades", operator = "is_true" } ] }
+blocks = [ { type = "paragraph", content = "Laura beams like you've handed her something. Mark snorts into his coffee." } ]
+
+[[canvases.nodes.blocks]]
+type = "group"
+conditions = { version = "1.0", logic = "AND", items = [ { type = "flag", subject = "player", flag_key = "college_for_fun", operator = "is_true" } ] }
+blocks = [
+  { type = "paragraph", content = "Laura laughs, surprised, and covers her mouth. Mark doesn't laugh." },
+  { type = "dialog", content = "Fun's not free. Seventy-five.", props = { speaker = "npc", npcId = "npc_mark" } },
+]
+
+[[canvases.nodes.blocks]]
+type = "group"
+conditions = { version = "1.0", logic = "AND", items = [ { type = "flag", subject = "player", flag_key = "college_for_freedom", operator = "is_true" } ] }
+blocks = [ { type = "paragraph", content = "Laura goes quiet and looks into her coffee. Mark looks at you a beat too long, over the rim of his mug, like you've said something about him." } ]
+
+[[canvases.nodes.blocks]]
+type    = "paragraph"
+content = "The stairs thump and Ryan comes in with his hair wet, in a fresh T-shirt, and reaches past you for the toast. His arm brushes your shoulder. Laura watches it happen. She looks at him, then at you, then at him again."
+
+[[canvases.nodes.blocks]]
+type = "dialog"
+content = "Ryan, you shower first from now on. Before your sister's up. I'm not having the two of you in that hall in towels."
+[canvases.nodes.blocks.props]
+speaker = "npc"
+npcId   = "npc_laura"
+
+[[canvases.nodes.blocks]]
+type = "dialog"
+content = "Fine by me."
+[canvases.nodes.blocks.props]
+speaker = "npc"
+npcId   = "npc_ryan"
+
+[[canvases.nodes.blocks]]
+type    = "paragraph"
+content = "Mark leaves without saying goodbye. The back door bangs. Ryan takes his toast upstairs, and his door shuts behind him."
+
+[canvases.nodes.exit_block]
+type = "choices"
+
+[[canvases.nodes.exit_block.choices]]
+text        = "Grab your bag."
+targetType  = "node"
+nodeId      = "card"
+time_progression_minutes = 5
+flagEffects = [ { targetType = "player", flag = "laura_rule_ryan_first", op = "set" } ]
+
+# ── screen 9 · the card, the plain lines, the hygiene choice ──
+[[canvases.nodes]]
+id   = "card"
+name = "Your first week"
+
+[[canvases.nodes.blocks]]
+type    = "paragraph"
+content = "Class at half past eight. A café on your street with a sign in the window. Seventy-five for Mark by Sunday. And Ryan's door, shut, at the top of the stairs."
+
+[[canvases.nodes.blocks]]
+type    = "heading"
+content = "How this week works"
+
+[[canvases.nodes.blocks]]
+type    = "paragraph"
+content = "You need $75 by Sunday: the rent is taken then. The café on your street is hiring. Classes are three a day Monday to Thursday and one on Friday; skipping one costs your grade. People are in different places at different hours: the People and Schedules pages show where. What you wear changes how people look at you. Hygiene is on unless you turn it off now: shower to keep it up."
+
+[canvases.nodes.exit_block]
+type = "choices"
+
+[[canvases.nodes.exit_block.choices]]
+text        = "Keep hygiene on"
+targetType  = "location"
+locationId  = "home_kitchen"
+time_progression_minutes = 5
+flagEffects = [ { targetType = "player", flag = "opening_done", op = "set" } ]
+
+[[canvases.nodes.exit_block.choices]]
+text        = "Turn hygiene off"
+targetType  = "location"
+locationId  = "home_kitchen"
+time_progression_minutes = 5
+flagEffects = [ { targetType = "player", flag = "opening_done", op = "set" }, { targetType = "player", flag = "hygiene_off", op = "set" } ]

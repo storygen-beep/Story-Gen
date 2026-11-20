@@ -1,5 +1,53 @@
 # find-media-v3 — CHANGELOG
 
+## 2026-11-18 — keep the description's age, setting and props
+
+- **`SKILL.md` §2 PLAN:** a new rule, "Keep what the description pins down, and never add what it rules out".
+  - Keep its age: no `milf` or `mature` for "a young woman, 18".
+  - Keep its setting: `mirror` stays `mirror`.
+  - No `selfie` unless the description says phone, and no `nude` on an underwear look.
+- **Why:** LO, 2026-11-18: "is it a mirror selfie??", then "it was about mirror checking herself out but I think it took hall mirror, check".
+  - first_term's six mirror shelves were searched with `milf` for an 18-year-old, `selfie` for a girl checking herself, and `walking naked house hallway` for a mirror scene.
+  - They stocked 1,008 options, and the naked mirror clip's 4 picks were women walking down hallways.
+  - Two of the descriptions had also left the mirror out. That was fixed on the author side, in author-game-v2 `media-blocks.md` rule 7.
+- **Verified:** read against the shelf's own query records in `games/first_term/.find-media/media_options.json` (`queries`). No search was run.
+
+## 2026-11-18 — a slot whose search words say gif is animated
+
+- **`SKILL.md` FORMAT axis:** the search words come first. A slot whose search words say `gif` is
+  animated whatever its name says; otherwise the extension decides as before, and an empty pool with no
+  `gif` in its words is still. A new paragraph under the table says why.
+- **Why:** LO, 2026-11-18: "there are a lot of t3 that should have been gifs and are images still". The
+  FORMAT rule read only the extension, and author-game-v2 marks a moving look with `gif` in its search
+  words without renaming it (the name is the shelf key). So a `.jpg` look, or a picture pool, would have
+  been stocked with stills anyway. Measured: all 36 stocked first_term `_t3` shelves were 96–100% stills,
+  and 19 had no animated option at all.
+- **Verified:** read against `v2.py` `_find_media_file` (finds a file whatever its extension) and
+  author-game-v2 `references/media-blocks.md` rule 6. No search was run.
+
+## 2026-11-18 — skip spots marked Not needed
+
+- **`SKILL.md` step 0:** a spot LO marked Not needed on the media review page is in
+  `not_needed_media` from `game-review/load`, never in `missing_media`. Never search for it or stock its
+  shelf, and the TOML-walk cross-check doesn't add it back.
+- **Why:** LO wanted a way to say a missing spot needs no media (2026-11-18). The review page now has a
+  Not needed button (`media.html`), which saves `status = "not_needed"` to `media_reviews.json`
+  (`api/v1/media_review.py`), and `game_review.load_game` moves that spot out of `missing_media`.
+- **Verified:** `tests/test_media_review_shelf_state.py` covers the save, the page counts, and the
+  `missing_media` / `not_needed_media` split; 72 tests passed across the review suites.
+
+## 2026-11-18 — a slot's name is its shelf key
+
+- **`SKILL.md` non-negotiables:** new bullet after the `slot_key` one. Never rename a stocked slot
+  (adding an extension to a pool name counts as a rename); change `pool = N` to resize it.
+- **Why:** first_term's release 1 pools were cut from 4 files to 1 or 2 (DECISIONS 246). The first plan
+  renamed them to single `.jpg` files, which would have stranded 74 stocked shelves and one installed
+  pick under the old keys. It was caught by checking `media_options.json` first, and the pools were
+  resized with `pool = N` instead.
+- **Verified:** read against `api/v1/media_finder.py` (`options/clear` and the shelf key `slot_key`, which
+  defaults to `file`) and `apps/common/media_blocks.py` (`block_slot_key`, `block_media_pool` reading
+  `pool`).
+
 ## 2026-08-09 — the human's pick now installs as `.mp4`
 
 - **`SKILL.md` §"The deliverable contract" item 3** — noted that `grab` re-encodes any animated

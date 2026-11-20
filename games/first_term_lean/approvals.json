@@ -1,0 +1,47 @@
+{
+  "limit": "A record here proves a yes was recorded against this exact card text. It cannot prove LO typed it: the words are copied from chat by the session.",
+  "approvals": [
+    {
+      "card": "P01",
+      "sha256": "01219beee288c372d4529706d1b4e4db1e899f7f954c586e83fc3e9b0a00e502",
+      "words": "yes",
+      "date": "2026-11-20"
+    },
+    {
+      "card": "P02",
+      "sha256": "722aa7c5e1fefe04f8c0c70940e60032dbfbd6af05e2b42b94330539e0466c5b",
+      "words": "yes",
+      "date": "2026-11-20"
+    },
+    {
+      "card": "P03",
+      "sha256": "7da3361099271ac35026e9aac451bafd2ee080170344bc94da7649a642eddf73",
+      "words": "yes, A",
+      "date": "2026-11-20"
+    },
+    {
+      "card": "P04",
+      "sha256": "de8cd634d86ff3ccc37d815b229a4f1d12e4059ba044f47410128b47d7a2a672",
+      "words": "yes",
+      "date": "2026-11-20"
+    },
+    {
+      "card": "P05",
+      "sha256": "d7ceb2b269a0977eb939ba101f55d949c3f167dd70ce74d1a171c269b1c23c3a",
+      "words": "yes",
+      "date": "2026-11-20"
+    },
+    {
+      "card": "P06",
+      "sha256": "afb40f2e0940c755c4adef13e32c3027c43c2aeced824d589afb0d42af0f4f37",
+      "words": "yes",
+      "date": "2026-11-20"
+    },
+    {
+      "card": "P13",
+      "sha256": "0dd91e733b821487408502a267e1536cb2150984b778ab7fbc73caac87eec86d",
+      "words": "yes",
+      "date": "2026-11-20"
+    }
+  ]
+}

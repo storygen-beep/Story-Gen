@@ -196,11 +196,37 @@ def POOL(*blocks, pid=None, bag=False):
     return b
 
 
+# Pools on a screen seen only once: the engine starts every pool at its first file, so a second one never shows.
+POOL_ONCE = {"look/hale_crouch_legs_t3", "sex/figure_class_pose_first_t4", "sex/figure_late_lifemodel_t4"}
+
+
+def _pool_size(pool_dir):
+    """How many files a pool aims for (LO, 2026-11-18; DECISIONS 246). The name stays a folder either way, so a
+    shelf or a pick already keyed to it keeps working.
+      · explicit (`sex/`, `_t4`+) on a repeat screen: the engine default, 4 (gate G4 wants these to cycle)
+      · `_t3` on a repeat screen: 2, a body look that would go stale as one picture
+      · `_t0`-`_t2`, and anything on a screen seen once: 1, one picture every visit (a person keeps one face,
+        a room stays the same room)
+    None means "leave the default"."""
+    name = pool_dir.rstrip("/")
+    if name in POOL_ONCE:
+        return 1
+    m = re.search(r"_t(\d)$", name)
+    if name.startswith("sex/") or not m:
+        return None
+    tier = int(m.group(1))
+    if tier >= 4:
+        return None
+    return 2 if tier == 3 else 1
+
+
 def IMG(file, desc, *queries, pool_dir=None):
     """A still. `pool_dir` (media sheet, DECISIONS 238) makes it a rotating pool: the engine cycles one file a visit."""
     props = {"description": desc, "search_queries": list(queries)}
     if pool_dir:
         props["pool_dir"] = pool_dir
+        if _pool_size(pool_dir):
+            props["pool"] = _pool_size(pool_dir)
     else:
         props["file"] = file
     return {"type": "image", "props": props}
@@ -210,6 +236,8 @@ def VID(desc, *queries, file=None, pool_dir=None):
     props = {"description": desc, "search_queries": list(queries)}
     if pool_dir:
         props["pool_dir"] = pool_dir
+        if _pool_size(pool_dir):
+            props["pool"] = _pool_size(pool_dir)
     else:
         props["file"] = file
     return {"type": "video", "props": props}
@@ -242,6 +270,12 @@ def own_media(tree, tag):
                 if props.get(k):
                     props[k] = re.sub(r"(_t\d)((?:\.\w+)?)$", rf"_{tag}\1\2", props[k], count=1) \
                         if re.search(r"_t\d(?:\.\w+)?$", props[k]) else re.sub(r"((?:\.\w+)?)$", rf"_{tag}\1", props[k], count=1)
+            if props.get("pool_dir"):   # the copy's own name decides its size (POOL_ONCE names a copy)
+                size = _pool_size(props["pool_dir"])
+                if size:
+                    props["pool"] = size
+                else:
+                    props.pop("pool", None)
         for x in tree.values():
             own_media(x, tag)
     return tree

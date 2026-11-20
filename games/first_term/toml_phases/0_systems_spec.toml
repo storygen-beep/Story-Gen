@@ -305,7 +305,7 @@ traitEffects = [
 enabled         = true
 default_image   = "portraits/her_default.jpg"
 underwear_image = "portraits/her_underwear.jpg"
-naked_image     = "portraits/her_naked.jpg"
+naked_image     = "portraits/her_naked_t5.jpg"
 
 [[player_portrait.outfits]]
 image = "portraits/her_towel.jpg"

@@ -593,6 +593,13 @@ whose conditions hold applies (`setup.checkLocationClothing`, `v2.py:2181`). It 
 only** — a `dress` counts for `top` and `bottom` — so it is a floor. Entering in breach plays
 `ClothingBlock` (`v2.py:19084`) instead of the room, which never renders, so she isn't there and no
 visit is recorded: the message, **"Change clothes"** and "Go back".
+⚠️ **An exception names everything it allows, a dress included.** A rule that lets one garment stand in for a
+missing top or bottom ("Not in just the sports bra": `sports_bra` on, `top` empty) must also say `dress`
+unequipped. A dress fills top and bottom, so without that the exception also matches her in a dress, and the
+dress code lets out what its own message forbids. first_term (LO, 2026-11-18): sports bra plus the café uniform
+with no panties got onto the street at Exhibitionism 0, where the street says "No panties out of the house needs
+Exhibitionism 40". Checked by gate `a dress rule keeps its word`, `lint · a dress exception that a dress slips
+through`, and `lint · a scene few outfits reach`, which names any scene only 1-3 outfits open.
 ⚠️ **The loophole:** by default "Change clothes" opens the wardrobe from wherever she is, so any dress
 code is one click from met. `[settings] wardrobe_anywhere = false` shows it only when she came from a
 wardrobe room (`setup.canChangeClothesHere`, `v2.py:2234`).

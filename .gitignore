@@ -296,3 +296,6 @@ patreon/
 
 # Exam run records (transcripts, diffs, grades), kept on disk only; 125 MB by 2026-10-04 (LO, 2026-11-03)
 .claude/skill-evals/author-game/results/
+
+# author-game-lean: check.py's last-run file, per game, local only (LO, 2026-11-19)
+games/*/.check_last.json

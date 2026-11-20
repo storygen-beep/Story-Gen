@@ -177,7 +177,7 @@ walkin("walkin_shower_ryan", "The door opens", "home_bathroom",
      GC(cond(ntrait(R, "want", "lt", 40)), P("He goes red to the ears. He turns side-on, too late. The front of his shorts is already tenting."), D(R, "Shit. Sorry. I didn't. The lock. I didn't know you were in here."), ME("Well, now you know.")),
      GC(cond(*ANY), P("He doesn't go red. He leans on the door frame and keeps looking at your tits. His cock is hard in his shorts, and he doesn't turn it away."), D(R, "Don't mind me. I'm just getting my toothbrush."), ME("Your toothbrush is on the sink, Ryan.")),
      unlock_line("You left the door unlocked for this. For somebody to walk through it."),
-     VID("a young man frozen in a bathroom doorway, a naked girl in the shower looking back at him", "brother walks in on sister in shower", "guy walks in on naked girl showering", pool_dir="sex/walkin_shower_ryan_t4")],
+     VID("Seen from a bathroom doorway: a naked young woman, 18, in the shower, looking back over her shoulder.", "naked girl in shower looking back over shoulder gif", "caught naked in shower looking at door gif", pool_dir="sex/walkin_shower_ryan_t4")],
     a, raise_=[lust(R)], records=["ryan_walked_in_shower"], extra=n, moment_wardrobe=STRIP)
 
 a, n = shower_answers("k",
@@ -240,7 +240,7 @@ walkin("walkin_shower_mark", "The door opens", "home_bathroom",
      GC(cond(*ANY), P("He doesn't look away. He turns the tap on at the sink and scrubs his hands, and in the mirror his eyes are on you the whole time."),
         D(M, "Don't stop on my account.")),
      unlock_line("You left the lock off, and he walked right in. You knew he might."),
-     VID("a middle-aged man at a bathroom sink watching a naked girl in the shower in the mirror", "stepdad walks in on girl in shower", "man watches naked girl shower mirror", pool_dir="sex/walkin_shower_mark_t4")],
+     VID("Seen in a bathroom mirror from the sink: a naked young woman, 18, in the shower behind.", "naked girl in shower reflected in bathroom mirror gif", "nude young woman shower seen in mirror gif", pool_dir="sex/walkin_shower_mark_t4")],
     # reader batch 4 (pass 3): not while Laura has the bathroom (her Saturday shower row, 16:30-17:00)
     a, raise_=[lust(M)], records=["mark_walked_in_shower"], extra=n, moment_wardrobe=STRIP, when=[wd(5), tod("14:00", "17:00"), here(L, "home_bathroom", False)])
 
@@ -265,7 +265,7 @@ walkin("walkin_kitchen_ryan", "Reaching past", "home_kitchen",
     [P("He feels it the same second you do. Neither of you moves. His cock is hard against your ass through his boxers, and his breath is hot on your neck."),
      GC(cond(ntrait(R, "want", "lt", 40)), P("Then he goes red to the ears and stays exactly where he is, too scared to move, his hand frozen on the mug on the top shelf."), D(R, "Morning. Sorry. Morning. That was the counter."), ME("Sure, Ryan. The counter.")),
      GC(cond(*ANY), P("He doesn't jerk back. He stays pressed to you one second longer than the mug needs, then reaches past you, slow."), D(R, "Morning, @player.nickname. Sleep well?"), ME("Better than you, by the feel of it.")),
-     VID("a young man in boxers reaching over a girl at a kitchen counter for a mug, pressed against her from behind", "brother presses against sister kitchen counter morning", "guy morning wood presses girl kitchen", pool_dir="sex/walkin_kitchen_ryan_t4")],
+     VID("A young man, 22, in boxers reaching over a young woman, 18, at a kitchen counter for a mug, pressed against her from behind.", "brother presses against sister kitchen counter morning", "guy morning wood presses girl kitchen", pool_dir="sex/walkin_kitchen_ryan_t4")],
     [go("Step aside.", node="r_aside", mins=2),
      go("Don't move.", node="r_stay", mins=2, cond_=cond(*C_GG), eff=[pay("corruption", 19)]),
      go("Don't move.", node="r_stay", mins=2, cond_=cond(*C_CUR), eff=[pay("corruption", 39)]),
@@ -308,7 +308,7 @@ walkin("walkin_kitchen_mark", "Reaching past", "home_kitchen",
         D(M, "Sorry, @player. You're in front of the coffee."), ME("You could have asked me to move."), D(M, "I should have.")),
      GC(cond(ntrait(M, "want", "lt", 50)), P("He clears his throat and gets the lid off, slow, like that's what he's doing."), D(M, "Morning, @player. You're in my way."), ME("You could have asked me to move."), D(M, "Could have.")),
      GC(cond(*ANY), P("He doesn't pretend. He looks down over your shoulder, straight down your front, and his fingers spread on your hip."), D(M, "Nice view from up here, @player."), ME("Get your coffee, Mark."), D(M, "I'm getting it.")),
-     VID("a middle-aged man behind a girl at a kitchen counter, his hand on her hip, reaching past her", "stepdad hand on hip kitchen counter morning", "man brushes past girl kitchen counter hand on hip", pool_dir="sex/walkin_kitchen_mark_t4")],
+     VID("A man, 46, behind a young woman, 18, at a kitchen counter, his hand on her hip, reaching past her.", "stepdad hand on hip kitchen counter morning", "man brushes past girl kitchen counter hand on hip", pool_dir="sex/walkin_kitchen_mark_t4")],
     [go("Step aside.", node="m_aside", mins=2),
      go("Don't move.", node="m_stay", mins=2, cond_=cond(*C_GG), eff=[pay("corruption", 19)]),
      go("Don't move.", node="m_stay", mins=2, cond_=cond(*C_CUR), eff=[pay("corruption", 39)]),
@@ -333,13 +333,16 @@ for host in ("kitchen_breakfast", "kitchen_coffee"):
     rule(host, "walkin_kitchen_mark", 0.25, here(M, "home_master_bedroom"), wd(5), tod("08:15", "08:30"))
 
 # ═════════════════════════════════════════════════════════════════════════════
-# B3 · THE LIVING ROOM (host living_tv): channel 5 on, someone walks in. C2: the sound up (`tv_loud`) doubles it.
+# B3 · THE LIVING ROOM (host tv_still_watching, home.py): she chose channel 5 and keeps watching, and someone walks in
+# on her (LO, 2026-11-18: "walkin shows what that person is already doing"). Channel 5 is one film, the one living_tv
+# shows (the woman riding a man on a leather couch), so no walk-in has porn of its own: what is new is who comes in.
+# C2: the sound up (`tv_loud`) doubles it.
 # Mark from the garage (Mon, Tue, Thu, Fri) or the kitchen (Wed), whose late TV row starts at 22:00; Ryan before
 # his weekend TV row (14:00); Laura on a Sunday from the kitchen, the cover branch: one line, no heat, no pay.
 # ═════════════════════════════════════════════════════════════════════════════
 def ch5_in(opening, scene, loud):
-    """Channel 5 on by accident (she pressed plain "Watch TV"), worded per walker: how it comes up, what is on the
-    screen, then the sound (C2's `tv_loud`)."""
+    """She is still on channel 5 when he comes in: where she sits, the same film still playing, then the sound
+    (C2's `tv_loud`)."""
     return [P(opening + " " + scene),
             GC(cond(TV_LOUD), P(loud)), GC(cond(TV_QUIET), P("The sound's low, at least. You look at the hall door, quick."))]
 
@@ -363,7 +366,7 @@ def mark_tv(cid, here_item, from_where, mother_line, when, opening, scene, lines
          D(M, "Channel five, @player?"),
          GC(cond(ntrait(M, "want", "lt", 20)), P(cover["answer"])),
          GC(cond(*ANY), P(lines[1])),
-         VID("a man standing behind a couch with a beer, staring, porn on the TV, a girl curled on the couch", "stepdad catches girl watching porn tv", "man walks in on girl watching porn living room", pool_dir=f"sex/{cid}_t5")],
+         VID("A man, 46, standing behind a couch with a beer can halfway to his mouth, porn on the TV in front of him, the front of his jeans tight.", "man with beer staring at tv bulge in jeans gif", "man standing watching porn on tv bulge gif", pool_dir=f"sex/{cid}_t5")],
         CH5_ANS("m"), raise_=[lust(M)], records=["mark_caught_ch5"], when=when, extra=[
             res("m_off", "Turn it off", [P("You jab the remote and the screen goes black. Your face is burning."),
                                          ME("I didn't put this on. It was just on."),
@@ -375,8 +378,7 @@ def mark_tv(cid, here_item, from_where, mother_line, when, opening, scene, lines
                                     D(M, "Your mother doesn't watch this one."), ME("I'm not my mother."), D(M, "I know. Turn it off, @player."), P(cover["gg_end"])],
                 "Get up.", "home_hall", 2),
             res("m_cur", "Leave it on", [P(lines[3]), P(lines[4]),
-                                         D(M, mother_line), ME("So go, Mark."), P("You say it, but he doesn't go."), D(M, "In a minute."),
-                                         VID("porn on a living room TV at night, a girl watching from the couch, a man standing behind her", "girl keeps watching porn while stepdad watches", "watching porn on tv man behind couch", pool_dir=f"sex/{cid}_leave_t5")],
+                                         D(M, mother_line), ME("So go, Mark."), P("You say it, but he doesn't go."), D(M, "In a minute.")],
                 "Turn it off.", "home_hall", 5)])
     return cid
 
@@ -384,11 +386,11 @@ def mark_tv(cid, here_item, from_where, mother_line, when, opening, scene, lines
 # Mon, Tue, Thu, Fri 19:15-21:45 Laura is in the kitchen until 21:30, then in her shower (her rows); on Wednesday she has no
 # row, she is out. The living-room host needs the room empty, so Ryan's couch rows (to 20:30, Wednesday to 21:00) close it.
 mark_tv("walkin_tv_mark_garage", here(M, "home_garage"), "the garage", "Not with your mother in the house, @player.", [wd(0, 1, 3, 4), tod("19:15", "21:45")],  # reach audit 2026-11-09 (DECISIONS 218): rolls while he is next door, not only on his arrival
-        "You drop onto the couch and thumb the TV on, and it comes up on channel 5, where whoever had it last left it.",
-        "A woman on her knees on a bed, a man behind her, his cock sliding in and out of her. Her tits swing with every thrust.",
-        ["He looks at the screen. The man's cock drives into her, and she moans. Then Mark looks down at you.",
+        "Half an hour into channel 5, you're low on the couch with your feet tucked under you.",
+        "On screen she's still riding him on the leather couch, his cock sliding in and out of her, her tits bouncing.",
+        ["He looks at the screen. She drops down on the man's cock, and she moans. Then Mark looks down at you.",
          "He doesn't sit. He stands there with the can halfway to his mouth, and the front of his jeans fills.",
-         "You don't reach for the remote. Not yet. On screen he grips her hips and pounds her. Mark watches two seconds of it with you, then he catches himself and looks at the hall door. Your face is hot and your nipples are tight.",
+         "You don't reach for the remote. Not yet. On screen he grips her ass and pulls her down on his cock, hard. Mark watches two seconds of it with you, then he catches himself and looks at the hall door. Your face is hot and your nipples are tight.",
          "You leave it on. You don't look at him. On screen she's on her back now, legs up, and he drives into her slow and deep, his cock shining every time it slides out.",
          "Behind you Mark doesn't move. The beer can creaks in his fist. You're wet, and you squeeze your thighs together and keep watching."],
         "You left the sound up from earlier. Her moans fill the room and carry out to the garage door.",
@@ -396,12 +398,12 @@ mark_tv("walkin_tv_mark_garage", here(M, "home_garage"), "the garage", "Not with
              off="He drinks with his eyes on the black screen, and he doesn't look at you until you're up.",
              gg_end="You turn it off. He breathes out through his nose and keeps his eyes on the hall door."))
 mark_tv("walkin_tv_mark_kitchen", here(M, "home_kitchen"), "the kitchen", "Your mother'll be back, @player.", [wd(2), tod("21:00", "21:45")],  # reach audit 2026-11-09 (DECISIONS 218): rolls while he is next door, not only on his arrival
-        "The TV's on with nobody watching it, stuck on channel 5. You're on the couch before you see what's on it.",
-        "Two women on a couch with one man between them. One rides his cock while the other one kisses her tits.",
-        ["He smells of chilli and beer. He looks at the screen, at the girl bouncing on that cock, and then at you, curled up in front of it.",
+        "You're still on channel 5, curled up at the end of the couch.",
+        "On screen the woman rides him on the leather couch, her tits bouncing, his hands full of her ass.",
+        ["He smells of chilli and beer. He looks at the screen, at the woman bouncing on that cock, and then at you, curled up in front of it.",
          "He leans on the back of the couch with both hands. The bulge in his jeans is right there at the edge of your eye, and he doesn't move it.",
-         "You don't reach for the remote. Not yet. On screen the girl on top comes, loud, and the other one licks her nipple. Mark's hands come off the back of the couch, and he catches himself and looks at the ceiling. Your face is burning, and your nipples are tight.",
-         "You leave it on. On screen they swap, and the second girl sinks down on his cock, slow, her ass bouncing. You can feel Mark's eyes on the side of your face.",
+         "You don't reach for the remote. Not yet. On screen she comes, loud, grinding down on his cock, her tits bouncing. Mark's hands come off the back of the couch, and he catches himself and looks at the ceiling. Your face is burning, and your nipples are tight.",
+         "You leave it on. On screen she turns round and sinks back down on his cock, slow, her ass bouncing. You can feel Mark's eyes on the side of your face.",
          "He doesn't say turn it off. His knuckles go white on the couch. You're wet, and you press your thighs together and watch her ride."],
         "You left the sound up from earlier. The moaning carries over the kitchen fan.",
         dict(answer="He catches himself. He straightens up off the couch, looks at the ceiling, then the fan through the door, and he holds the can low, in front of his jeans.",
@@ -411,8 +413,8 @@ mark_tv("walkin_tv_mark_kitchen", here(M, "home_kitchen"), "the kitchen", "Your 
 walkin("walkin_tv_ryan", "Channel 5", "home_living_room",
     "B3, Ryan: down from his room for his weekend TV row, he finds channel 5 on. His Lust +2 on the moment; her answer on Corruption: off 0, wait +1 cap 19, leave it on (Curious) +1 cap 39.",
     [here(R, "home_ryan_room")],
-    ch5_in("You flop down, hit the power button, and there it is, channel 5, the last thing anybody had on.",
-           "A man flat on his back and a girl riding him, her tits bouncing, his hands full of her ass.",
+    ch5_in("You're still on channel 5, sprawled on the couch with your feet up.",
+           "On screen she's riding him on the leather couch, her tits bouncing, his hands full of her ass.",
            "You left the sound up. Her moans go all the way down the hall.")
     + [P("Ryan comes in from the hall for the TV and stops in the doorway.")],
     "He's seen the screen.",
@@ -420,7 +422,7 @@ walkin("walkin_tv_ryan", "Channel 5", "home_living_room",
      D(R, "Seriously, @player.nickname? It's broad daylight."), ME("And?"),
      P("He goes red, but he doesn't go back to his room. His eyes go to her tits on the screen, then to your chest, then away, fast, and he shoves his hands in his pockets."),
      D(R, "I'm not sitting down with that on. Not a chance."),   # writing pass: low heat (H4), the not-yet; "Leave it on." is where it gives way
-     VID("a young man in the doorway staring at porn on the living room TV, a girl on the couch", "brother catches sister watching porn", "guy walks in girl watching porn couch", pool_dir="sex/walkin_tv_ryan_t5")],
+     VID("A young man, 22, in a living-room doorway staring at porn on the TV, red in the face.", "young man in doorway staring at porn on tv gif", "guy embarrassed watching porn on tv gif", pool_dir="sex/walkin_tv_ryan_t5")],
     CH5_ANS("r"), raise_=[lust(R)], records=["ryan_caught_ch5"], when=[wd(5, 6), tod("10:00", "13:45")], extra=[   # reach audit 2026-11-09: his weekend room hours (Saturday from 10:00, Kayla gone), not only before his TV row
         res("r_off", "Turn it off", [P("You jab the remote. The screen goes black. Ryan lets out a breath."), D(R, "My turn for the TV, then."), ME("Don't you dare tell anyone."), D(R, "Who would I tell? Mom?")],
             "Get up.", "home_hall", 2),
@@ -429,15 +431,14 @@ walkin("walkin_tv_ryan", "Channel 5", "home_living_room",
             "Get up.", "home_hall", 2),
         res("r_cur", "Leave it on", [P("You leave it on. Ryan sits down on the far end of the couch, very straight. On screen he takes her from behind, hard, and she moans every time his cock drives in."),
                                      P("Ryan's knee bounces. His hand sits on his thigh, an inch from the bulge in his shorts. You're wet, and you don't move either."),
-                                     D(R, "We're not doing this. We're not. Turn it off."), ME("You turn it off. The remote's right there."), D(R, "Don't. Just. Fuck."),
-                                     VID("a young man and a girl at opposite ends of a couch, both staring at porn on the TV", "brother and sister watching porn together couch", "watching porn together awkward couch", pool_dir="sex/walkin_tv_ryan_leave_t5")],
+                                     D(R, "We're not doing this. We're not. Turn it off."), ME("You turn it off. The remote's right there."), D(R, "Don't. Just. Fuck.")],
             "Turn it off.", "home_hall", 5)])
 
 walkin("walkin_tv_laura", "Channel 5", "home_living_room",
     "B3, Laura (the cover branch): in from the kitchen on a Sunday night, she sees the screen. One line, no heat, no pay.",
     [here(L, "home_kitchen")],
-    ch5_in("You press power without looking, and the set comes up on channel 5. Nobody changed it back.",
-           "A man has a woman bent over the arm of a couch, his cock driving into her from behind.",
+    ch5_in("You're still on channel 5, the remote loose in your hand.",
+           "On screen the woman rides him on the leather couch, his cock driving up into her.",
            "You left the sound up. Her moans carry all the way into the kitchen.")
     + [P("Laura comes through from the kitchen with a tea towel over her shoulder, and stops.")],
     "She's seen the screen.",
@@ -453,11 +454,11 @@ walkin("walkin_tv_laura", "Channel 5", "home_living_room",
     [go("Turn it off.", loc="home_hall", mins=2)], records=["laura_saw_ch5"], when=[wd(6), tod("20:30", "21:28")])   # 2026-11-09: her kitchen ends 21:30; Ryan's couch to 20:30
 
 for chance, loud in ((0.25, TV_QUIET), (0.5, TV_LOUD)):
-    rule("living_tv", "walkin_tv_mark_garage", chance, loud, here(M, "home_garage"), wd(0, 1, 3, 4), tod("19:15", "21:45"))
-    rule("living_tv", "walkin_tv_mark_kitchen", chance, loud, here(M, "home_kitchen"), wd(2), tod("21:00", "21:45"))
-    rule("living_tv", "walkin_tv_ryan", chance, loud, here(R, "home_ryan_room"), wd(5, 6), tod("10:00", "13:45"))
+    rule("tv_still_watching", "walkin_tv_mark_garage", chance, loud, here(M, "home_garage"), wd(0, 1, 3, 4), tod("19:15", "21:45"))
+    rule("tv_still_watching", "walkin_tv_mark_kitchen", chance, loud, here(M, "home_kitchen"), wd(2), tod("21:00", "21:45"))
+    rule("tv_still_watching", "walkin_tv_ryan", chance, loud, here(R, "home_ryan_room"), wd(5, 6), tod("10:00", "13:45"))
     # Laura's window stops at 21:28: the answer screen comes 2 minutes in and says she is in the kitchen, her row until 21:30
-    rule("living_tv", "walkin_tv_laura", chance, loud, here(L, "home_kitchen"), wd(6), tod("20:30", "21:28"))
+    rule("tv_still_watching", "walkin_tv_laura", chance, loud, here(L, "home_kitchen"), wd(6), tod("20:30", "21:28"))
 
 # ═════════════════════════════════════════════════════════════════════════════
 # B4 · THE GARAGE (host garage_laundry): Mark back from dinner, bent at the drum. Her answers route into his
@@ -662,7 +663,7 @@ walkin("walkin_wardrobe_mark", "Laura's lingerie", "home_master_bedroom",
         P("He leans on the door frame to look longer, and he wets his lips.")),
      # pass 4 B51 (LO, 2026-11-04: Mark may speak here): his one line, true in every band; the chain ends on it
      D(M, "That's your mother's."),
-     VID("a middle-aged man in a bedroom doorway staring at a girl in a black lace bra at a long mirror", "stepdad catches girl in mom's lingerie", "man walks in on girl trying on lingerie bedroom", pool_dir="sex/walkin_wardrobe_mark_t4")],
+     VID("Seen from a bedroom doorway: a young woman, 18, in a black lace bra at a long mirror.", "girl in black lace bra at bedroom mirror", "young woman lace lingerie long mirror from doorway", pool_dir="sex/walkin_wardrobe_mark_t4")],
     [go("Cover up.", node="m_cover", mins=2),
      go("Let him look.", node="m_look", mins=3, cond_=cond(*E_COV), eff=[pay("exhibitionism", 19)]),
      go("Let him look.", node="m_look", mins=3, cond_=cond(*E_DAR), eff=[pay("exhibitionism", 39)]),
@@ -778,7 +779,7 @@ walkin("walkin_nap_ryan", "The door clicks", "home_ella_room",
         D(R, "Charger. Mine's dead. You were asleep, I wasn't going to wake you. I'm going."), ME("You could knock.")),
      GC(cond(*ANY), P("He doesn't go red, but he doesn't leave either. He leans back on your desk and keeps looking, and he doesn't turn the front of his shorts away from you."),
         D(R, "Didn't want to wake you. Good nap?"), ME("So you stood there and watched me instead.")),
-     VID("a young man in a bedroom holding a phone charger, staring at a girl waking up on top of the covers", "brother walks in on sister napping", "guy walks in on girl sleeping in bed", pool_dir="sex/walkin_nap_ryan_t4")],
+     VID("Seen from a bedroom doorway: a young woman, 18, lying on her front on top of her covers, just waking up.", "girl asleep on stomach on bed waking up gif", "young woman lying on front on bed covers from doorway", pool_dir="sex/walkin_nap_ryan_t4")],
     [go("Pull the blanket over you.", node="r_cover", mins=2),
      go("Don't move.", node="r_cov", mins=3, cond_=cond(*E_COV), eff=[pay("exhibitionism", 19)]),
      go("Stretch.", node="r_dar", mins=3, cond_=cond(*E_DAR), eff=[pay("exhibitionism", 39)]),
@@ -830,7 +831,7 @@ walkin("walkin_garden_mark", "The back step", "home_garden",
         D(M, "Nice day for it, @player."), ME("The tomatoes are drowning, Mark.")),
      GC(cond(*ANY), P("He doesn't pretend. He drops the hose on the grass, still running, and drinks his beer and looks, and the front of his jeans fills."),
         D(M, "Sunday's my day off, @player. This is a good way to spend it.")),
-     VID("a middle-aged man on a back step with a beer and a garden hose, staring at a girl sunbathing on a lounger", "stepdad watches girl sunbathing garden", "man stares at girl sunbathing backyard", pool_dir="sex/walkin_garden_mark_t4")],
+     VID("Seen from a back step: a young woman, 18, sunbathing on a lounger on the grass, eyes shut.", "girl sunbathing on lounger garden gif", "young woman sunbathing backyard lounger eyes closed gif", pool_dir="sex/walkin_garden_mark_t4")],
     [go("Sit up and cover up.", node="m_cover", mins=2),
      go("Stay as you are.", node="m_stay", mins=5, cond_=cond(*E_COV), eff=[pay("exhibitionism", 19)]),
      go("Stretch your legs out.", node="m_stretch", mins=5, cond_=cond(*E_DAR), eff=[pay("exhibitionism", 39)]),

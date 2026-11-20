@@ -112,7 +112,9 @@ curl -s "http://localhost:8000/api/v1/dev/game-review/load?game=<game>" \
   > games/<game>/.find-media/game_review.json
 ```
 
-(no trailing slash on `load` — it 404s), run v2's TOML-walk cross-check, and do the tier
+(no trailing slash on `load` — it 404s). A spot LO marked **Not needed** on the media review page is
+in `not_needed_media`, never in `missing_media`: never search for it or stock its shelf, and don't
+put it back from the TOML-walk cross-check below. Run v2's TOML-walk cross-check, and do the tier
 audit/retag before scoping. **Pools:** a `pool_dir` slot is ONE row, ONE shelf, keyed by
 `pool_dir` — v2 `SKILL.md` §"A POOL slot wants N files" still governs, minus the install half.
 
@@ -151,6 +153,16 @@ The two rules that decide whether a query lands at all, both measured:
 - **Name HIS posture when it isn't the act's default.** `kneeling blowjob` retrieves
   she-kneels-he-STANDS. A beat that needs him seated must say `office chair` / `under the
   desk`. The largest single source of rejections in this skill's history.
+
+- **Keep what the description pins down, and never add what it rules out.** Its age, its setting and its
+  props are the slot's, not yours to swap:
+  - "a young woman, 18" never becomes `milf` or `mature`;
+  - "at a hall mirror" keeps `mirror` and never drifts to `walking hallway`;
+  - a description that says "no phone", or never says phone at all, never gets `selfie`;
+  - a bra-and-panties look never gets `nude`.
+  Measured on first_term (2026-11-18): six mirror shelves were searched with `milf` for an 18-year-old, with
+  `selfie` for her checking herself in the mirror, and with `walking naked house hallway` for a scene at the
+  mirror. They stocked 1,008 options, and four of the naked mirror clip's picks were women walking down hallways.
 
 Plus: zero story or character words, `gif` appended (measured 7→59, 1→54, 0→91 fetchable
 urls), an anti-studio modifier (`amateur`, `real`, `voyeur`) when the beat is grimy, and at
@@ -219,8 +231,14 @@ before it ran.
 
 | Axis | Read it from | Decides |
 |---|---|---|
-| **FORMAT** — animated or still | the declared file **extension** — `.webm/.mp4/.gif` animated, `.jpg/.png/.webp` still; for a pool, what is inside it | the §4 extraction **regex**, and nothing else |
+| **FORMAT** — animated or still | the slot's **search words** first: a slot whose search words say `gif` is **animated**, whatever its name says; otherwise the declared file **extension** — `.webm/.mp4/.gif` animated, `.jpg/.png/.webp` still; for a pool, what is inside it, and an empty pool with no `gif` in its words is still | the §4 extraction **regex**, and nothing else |
 | **CONTENT** — act or place | the **band / tier suffix** — `_t2`…`_t8` or a `sex/` path = **act**; `base` / `location` / no suffix = **place** | the query dialect, the histogram reading below, and the §4 grid glance |
+
+**The search words outrank the name.** The engine finds a spot's file whatever its extension
+(`v2.py` `_find_media_file`), so a look named `hose_stay_t3.jpg`, or a picture pool, can hold a `.gif`.
+author-game-v2 `media-blocks.md` rule 6 marks a look that should move by putting `gif` in its search
+words, never by renaming it: the name is the shelf key. Reading the extension alone stocked first_term's
+`_t3` shelves with 96–100% stills (36 shelves measured on 2026-11-18).
 
 They do not move together:
 
@@ -362,6 +380,10 @@ Non-negotiables (each has a recorded failure behind it):
 - `file` = the slot's TOML-declared path, character for character; also send the item's own
   `slot_key` verbatim — the shelf is keyed on it, and a tagged slot's shelf survives its path
   moving.
+- **A slot's name is its shelf key, so never rename a stocked slot.** Adding an extension to a pool
+  name (`life/x_t0` to `life/x_t0.jpg`) is a rename: the shelf and any pick stay under the old key
+  and the new slot starts empty. To change how many files a slot wants, change its `pool = N`
+  (LO, 2026-11-18: first_term's pools were resized this way with 74 shelves already stocked).
 - **`query` on every `options/add`.** It is what puts a candidate in a labelled bucket instead
   of an undifferentiated pile. There is **no retroactive attribution** — the ledger records
   only a date, and dedup makes timestamps non-invertible — so an option stocked without it is

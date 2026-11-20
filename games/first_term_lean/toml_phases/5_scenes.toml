@@ -1,0 +1,488 @@
+# First Term (first_term_lean) — scenes.
+
+# ── P13 · the opening, and Ryan step 1. The starting canvas: it runs after the age gate and the
+# name screen (C1641), straight through with no map, and hands over to the Kitchen. Monday 7:00.
+# Screen 2 and Talk have one node per first answer, so the answer is read without conditions.
+# Screen 4's line closes each screen-3 node (one button, as the card names it). ──
+
+[[canvases]]
+id = "opening"
+name = "First Day"
+
+[[canvases.nodes]]
+id = "wake"
+name = "Screen 1"
+blocks = [
+  { type = "image", props = { file = "opening/bedroom_morning.jpg" } },
+  { type = "paragraph", content = "Monday, seven in the morning. Today you start college." },
+  { type = "paragraph", content = "You're eighteen. You still sleep in the single bed you had at twelve, and you've never had a dollar that wasn't your mom's. Down the hall: your mom, your step-father, your step-brother. One bathroom between the four of you." },
+  { type = "paragraph", content = "Your old key is still in your bedroom door. It's the one thing in this house that's yours." },
+  { type = "paragraph", content = "*College. Finally, something that's mine.*" },
+  { type = "paragraph", content = "So what do you actually want out of it?" },
+]
+
+[canvases.nodes.exit_block]
+type = "choices"
+
+[[canvases.nodes.exit_block.choices]]
+text = "Good grades. Make Mom proud."
+targetType = "node"
+nodeId = "hall_grades"
+flagEffects = [{ flag = "start_grades", op = "set" }]
+
+[[canvases.nodes.exit_block.choices]]
+text = "Fun. I've waited eighteen years for it."
+targetType = "node"
+nodeId = "hall_fun"
+flagEffects = [{ flag = "start_fun", op = "set" }]
+
+[[canvases.nodes.exit_block.choices]]
+text = "Freedom. Anywhere that isn't this house."
+targetType = "node"
+nodeId = "hall_freedom"
+flagEffects = [{ flag = "start_freedom", op = "set" }]
+
+[[canvases.nodes]]
+id = "hall_grades"
+name = "Screen 2"
+blocks = [
+  { type = "paragraph", content = "*Mom's going to be so proud. Don't screw this up.*" },
+  { type = "image", props = { file = "opening/hall_towel.gif" } },
+  { type = "paragraph", content = "You grab your towel and get to the bathroom first. The water takes forever to run hot." },
+  { type = "paragraph", content = "When you open the door, steam rolls out into the hall, and your step-brother is leaning on the wall opposite, arms folded, waiting his turn." },
+  { type = "paragraph", content = "Ryan. Twenty-two, shirtless, sleep still in his eyes. He doesn't move out of the way." },
+  { type = "paragraph", content = "His eyes drop. Down the towel, to where it stops at the top of your thighs, down your wet legs. Then slowly back up, and they stop on your chest, where your nipples are hard against the damp cotton." },
+  { type = "dialog", content = "First day of college, huh.", props = { speaker = "npc", npcId = "npc_ryan" } },
+  { type = "paragraph", content = "His mouth pulls up at one side." },
+  { type = "dialog", content = "Look at you.", props = { speaker = "npc", npcId = "npc_ryan" } },
+  { type = "paragraph", content = "*He's looking. Ryan is actually looking at me. And I'm standing here letting him.*" },
+]
+
+[canvases.nodes.exit_block]
+type = "choices"
+
+[[canvases.nodes.exit_block.choices]]
+text = "Run to your room"
+targetType = "node"
+nodeId = "run"
+flagEffects = [{ flag = "met_ryan", op = "set" }, { flag = "ryan_hall_seen", op = "set" }, { flag = "ryan_hall_ran", op = "set" }]
+
+[[canvases.nodes.exit_block.choices]]
+text = "\"Knock next time.\""
+targetType = "node"
+nodeId = "knock"
+flagEffects = [{ flag = "met_ryan", op = "set" }, { flag = "ryan_hall_seen", op = "set" }, { flag = "ryan_hall_knock", op = "set" }]
+
+[[canvases.nodes.exit_block.choices]]
+text = "Stop and talk"
+targetType = "node"
+nodeId = "talk_grades"
+flagEffects = [{ flag = "met_ryan", op = "set" }, { flag = "ryan_hall_seen", op = "set" }, { flag = "ryan_hall_talked", op = "set" }]
+
+[[canvases.nodes.exit_block.choices]]
+text = "\"Don't ever look at me like that.\" (ends his path)"
+targetType = "node"
+nodeId = "final_no"
+flagEffects = [{ flag = "met_ryan", op = "set" }, { flag = "ryan_hall_seen", op = "set" }, { flag = "ryan_path_closed", op = "set" }]
+
+[[canvases.nodes]]
+id = "hall_fun"
+name = "Screen 2"
+blocks = [
+  { type = "paragraph", content = "*Parties. Boys. Not being anybody's little girl.*" },
+  { type = "image", props = { file = "opening/hall_towel.gif" } },
+  { type = "paragraph", content = "You grab your towel and get to the bathroom first. The water takes forever to run hot." },
+  { type = "paragraph", content = "When you open the door, steam rolls out into the hall, and your step-brother is leaning on the wall opposite, arms folded, waiting his turn." },
+  { type = "paragraph", content = "Ryan. Twenty-two, shirtless, sleep still in his eyes. He doesn't move out of the way." },
+  { type = "paragraph", content = "His eyes drop. Down the towel, to where it stops at the top of your thighs, down your wet legs. Then slowly back up, and they stop on your chest, where your nipples are hard against the damp cotton." },
+  { type = "dialog", content = "First day of college, huh.", props = { speaker = "npc", npcId = "npc_ryan" } },
+  { type = "paragraph", content = "His mouth pulls up at one side." },
+  { type = "dialog", content = "Look at you.", props = { speaker = "npc", npcId = "npc_ryan" } },
+  { type = "paragraph", content = "*He's looking. Ryan is actually looking at me. And I'm standing here letting him.*" },
+]
+
+[canvases.nodes.exit_block]
+type = "choices"
+
+[[canvases.nodes.exit_block.choices]]
+text = "Run to your room"
+targetType = "node"
+nodeId = "run"
+flagEffects = [{ flag = "met_ryan", op = "set" }, { flag = "ryan_hall_seen", op = "set" }, { flag = "ryan_hall_ran", op = "set" }]
+
+[[canvases.nodes.exit_block.choices]]
+text = "\"Knock next time.\""
+targetType = "node"
+nodeId = "knock"
+flagEffects = [{ flag = "met_ryan", op = "set" }, { flag = "ryan_hall_seen", op = "set" }, { flag = "ryan_hall_knock", op = "set" }]
+
+[[canvases.nodes.exit_block.choices]]
+text = "Stop and talk"
+targetType = "node"
+nodeId = "talk_fun"
+flagEffects = [{ flag = "met_ryan", op = "set" }, { flag = "ryan_hall_seen", op = "set" }, { flag = "ryan_hall_talked", op = "set" }]
+
+[[canvases.nodes.exit_block.choices]]
+text = "\"Don't ever look at me like that.\" (ends his path)"
+targetType = "node"
+nodeId = "final_no"
+flagEffects = [{ flag = "met_ryan", op = "set" }, { flag = "ryan_hall_seen", op = "set" }, { flag = "ryan_path_closed", op = "set" }]
+
+[[canvases.nodes]]
+id = "hall_freedom"
+name = "Screen 2"
+blocks = [
+  { type = "paragraph", content = "*Six hours a day out of this house. It's a start.*" },
+  { type = "image", props = { file = "opening/hall_towel.gif" } },
+  { type = "paragraph", content = "You grab your towel and get to the bathroom first. The water takes forever to run hot." },
+  { type = "paragraph", content = "When you open the door, steam rolls out into the hall, and your step-brother is leaning on the wall opposite, arms folded, waiting his turn." },
+  { type = "paragraph", content = "Ryan. Twenty-two, shirtless, sleep still in his eyes. He doesn't move out of the way." },
+  { type = "paragraph", content = "His eyes drop. Down the towel, to where it stops at the top of your thighs, down your wet legs. Then slowly back up, and they stop on your chest, where your nipples are hard against the damp cotton." },
+  { type = "dialog", content = "First day of college, huh.", props = { speaker = "npc", npcId = "npc_ryan" } },
+  { type = "paragraph", content = "His mouth pulls up at one side." },
+  { type = "dialog", content = "Look at you.", props = { speaker = "npc", npcId = "npc_ryan" } },
+  { type = "paragraph", content = "*He's looking. Ryan is actually looking at me. And I'm standing here letting him.*" },
+]
+
+[canvases.nodes.exit_block]
+type = "choices"
+
+[[canvases.nodes.exit_block.choices]]
+text = "Run to your room"
+targetType = "node"
+nodeId = "run"
+flagEffects = [{ flag = "met_ryan", op = "set" }, { flag = "ryan_hall_seen", op = "set" }, { flag = "ryan_hall_ran", op = "set" }]
+
+[[canvases.nodes.exit_block.choices]]
+text = "\"Knock next time.\""
+targetType = "node"
+nodeId = "knock"
+flagEffects = [{ flag = "met_ryan", op = "set" }, { flag = "ryan_hall_seen", op = "set" }, { flag = "ryan_hall_knock", op = "set" }]
+
+[[canvases.nodes.exit_block.choices]]
+text = "Stop and talk"
+targetType = "node"
+nodeId = "talk_freedom"
+flagEffects = [{ flag = "met_ryan", op = "set" }, { flag = "ryan_hall_seen", op = "set" }, { flag = "ryan_hall_talked", op = "set" }]
+
+[[canvases.nodes.exit_block.choices]]
+text = "\"Don't ever look at me like that.\" (ends his path)"
+targetType = "node"
+nodeId = "final_no"
+flagEffects = [{ flag = "met_ryan", op = "set" }, { flag = "ryan_hall_seen", op = "set" }, { flag = "ryan_path_closed", op = "set" }]
+
+[[canvases.nodes]]
+id = "run"
+name = "Screen 3: run"
+blocks = [
+  { type = "paragraph", content = "You clutch the towel and run. Your door slams, and through it you hear him laugh, low. Your face is burning. So is the rest of you." },
+  { type = "paragraph", content = "Your mom's voice comes down the hall: \"@player! Breakfast! You'll be late on your first day!\"" },
+]
+
+[canvases.nodes.exit_block]
+type = "choices"
+
+[[canvases.nodes.exit_block.choices]]
+text = "Get dressed and go to breakfast (20 min)"
+targetType = "location"
+locationId = "home_kitchen"
+time_progression_minutes = 20
+
+[[canvases.nodes]]
+id = "knock"
+name = "Screen 3: knock"
+blocks = [
+  { type = "dialog", content = "Knock next time.", props = { speaker = "player" } },
+  { type = "dialog", content = "Yeah.", props = { speaker = "npc", npcId = "npc_ryan" } },
+  { type = "paragraph", content = "He looks away first." },
+  { type = "dialog", content = "Sorry, @player.nickname.", props = { speaker = "npc", npcId = "npc_ryan" } },
+  { type = "paragraph", content = "His eyes go to the floor and stay there while you squeeze past him." },
+  { type = "paragraph", content = "Your mom's voice comes down the hall: \"@player! Breakfast! You'll be late on your first day!\"" },
+]
+
+[canvases.nodes.exit_block]
+type = "choices"
+
+[[canvases.nodes.exit_block.choices]]
+text = "Get dressed and go to breakfast (20 min)"
+targetType = "location"
+locationId = "home_kitchen"
+time_progression_minutes = 20
+
+[[canvases.nodes]]
+id = "talk_grades"
+name = "Screen 3: talk"
+blocks = [
+  { type = "dialog", content = "You good, @player.nickname? Nervous?", props = { speaker = "npc", npcId = "npc_ryan" } },
+  { type = "dialog", content = "Terrified. If I don't get good grades, Mom will kill me.", props = { speaker = "player" } },
+  { type = "dialog", content = "Yeah. I get that.", props = { speaker = "npc", npcId = "npc_ryan" } },
+  { type = "paragraph", content = "He still hasn't looked at your face for more than a second." },
+  { type = "paragraph", content = "Your mom's voice comes down the hall: \"@player! Breakfast! You'll be late on your first day!\"" },
+]
+
+[canvases.nodes.exit_block]
+type = "choices"
+
+[[canvases.nodes.exit_block.choices]]
+text = "Get dressed and go to breakfast (20 min)"
+targetType = "location"
+locationId = "home_kitchen"
+time_progression_minutes = 20
+
+[[canvases.nodes]]
+id = "talk_fun"
+name = "Screen 3: talk"
+blocks = [
+  { type = "dialog", content = "You good, @player.nickname? Nervous?", props = { speaker = "npc", npcId = "npc_ryan" } },
+  { type = "dialog", content = "Not nervous. Excited. I'm going to have so much fun.", props = { speaker = "player" } },
+  { type = "dialog", content = "Yeah. I get that.", props = { speaker = "npc", npcId = "npc_ryan" } },
+  { type = "paragraph", content = "He still hasn't looked at your face for more than a second." },
+  { type = "paragraph", content = "Your mom's voice comes down the hall: \"@player! Breakfast! You'll be late on your first day!\"" },
+]
+
+[canvases.nodes.exit_block]
+type = "choices"
+
+[[canvases.nodes.exit_block.choices]]
+text = "Get dressed and go to breakfast (20 min)"
+targetType = "location"
+locationId = "home_kitchen"
+time_progression_minutes = 20
+
+[[canvases.nodes]]
+id = "talk_freedom"
+name = "Screen 3: talk"
+blocks = [
+  { type = "dialog", content = "You good, @player.nickname? Nervous?", props = { speaker = "npc", npcId = "npc_ryan" } },
+  { type = "dialog", content = "I just want to be out of this house.", props = { speaker = "player" } },
+  { type = "dialog", content = "Yeah. I get that.", props = { speaker = "npc", npcId = "npc_ryan" } },
+  { type = "paragraph", content = "He still hasn't looked at your face for more than a second." },
+  { type = "paragraph", content = "Your mom's voice comes down the hall: \"@player! Breakfast! You'll be late on your first day!\"" },
+]
+
+[canvases.nodes.exit_block]
+type = "choices"
+
+[[canvases.nodes.exit_block.choices]]
+text = "Get dressed and go to breakfast (20 min)"
+targetType = "location"
+locationId = "home_kitchen"
+time_progression_minutes = 20
+
+[[canvases.nodes]]
+id = "final_no"
+name = "Screen 3: final no"
+blocks = [
+  { type = "dialog", content = "Don't ever look at me like that.", props = { speaker = "player" } },
+  { type = "paragraph", content = "Ryan's face shuts." },
+  { type = "dialog", content = "Like what?", props = { speaker = "npc", npcId = "npc_ryan" } },
+  { type = "paragraph", content = "He shoulders past you into the bathroom and slams the door. Your hands are shaking." },
+  { type = "paragraph", content = "Your mom's voice comes down the hall: \"@player! Breakfast! You'll be late on your first day!\"" },
+]
+
+[canvases.nodes.exit_block]
+type = "choices"
+
+[[canvases.nodes.exit_block.choices]]
+text = "Get dressed and go to breakfast (20 min)"
+targetType = "location"
+locationId = "home_kitchen"
+time_progression_minutes = 20
+
+# ── P04 · travel: four one-screen canvases. A canvas's costs are checked and taken on entry, and an
+# unaffordable one shows dimmed with its cost (v2.py:6700-6732); the choice spends the minutes. ──
+
+[[canvases]]
+id = "travel_bus_to_campus"
+name = "Take the bus to campus ($2, 20 min)"
+
+[canvases.trigger]
+location = "hood_street"
+trigger_mode = "manual"
+is_repeatable = true
+costs = [{ trait = "money", value = 2 }]
+
+[[canvases.nodes]]
+id = "ride"
+name = "Take the bus to campus ($2, 20 min)"
+blocks = [
+  { type = "paragraph", content = "The bus is packed. You stand the whole way, pressed between strangers, and step off at the campus gates." },
+]
+
+[canvases.nodes.exit_block]
+type = "choices"
+
+[[canvases.nodes.exit_block.choices]]
+text = "Get off at campus"
+targetType = "location"
+locationId = "campus_quad"
+time_progression_minutes = 20
+
+[[canvases]]
+id = "travel_walk_to_campus"
+name = "Walk to campus (45 min)"
+
+[canvases.trigger]
+location = "hood_street"
+trigger_mode = "manual"
+is_repeatable = true
+costs = [{ trait = "energy", value = 10 }]
+
+[[canvases.nodes]]
+id = "ride"
+name = "Walk to campus (45 min)"
+blocks = [
+  { type = "paragraph", content = "It's a long walk: past the park, over the bridge, along the main road. By the campus gates your feet ache." },
+]
+
+[canvases.nodes.exit_block]
+type = "choices"
+
+[[canvases.nodes.exit_block.choices]]
+text = "Walk through the gates"
+targetType = "location"
+locationId = "campus_quad"
+time_progression_minutes = 45
+
+[[canvases]]
+id = "travel_bus_home"
+name = "Take the bus home ($2, 20 min)"
+
+[canvases.trigger]
+location = "campus_quad"
+trigger_mode = "manual"
+is_repeatable = true
+costs = [{ trait = "money", value = 2 }]
+
+[[canvases.nodes]]
+id = "ride"
+name = "Take the bus home ($2, 20 min)"
+blocks = [
+  { type = "paragraph", content = "The bus home is half empty. You get the back seat and watch campus go." },
+]
+
+[canvases.nodes.exit_block]
+type = "choices"
+
+[[canvases.nodes.exit_block.choices]]
+text = "Get off on your street"
+targetType = "location"
+locationId = "hood_street"
+time_progression_minutes = 20
+
+[[canvases]]
+id = "travel_walk_home"
+name = "Walk home (45 min)"
+
+[canvases.trigger]
+location = "campus_quad"
+trigger_mode = "manual"
+is_repeatable = true
+costs = [{ trait = "energy", value = 10 }]
+
+[[canvases.nodes]]
+id = "ride"
+name = "Walk home (45 min)"
+blocks = [
+  { type = "paragraph", content = "The walk home takes forever. Your street, finally." },
+]
+
+[canvases.nodes.exit_block]
+type = "choices"
+
+[[canvases.nodes.exit_block.choices]]
+text = "Walk up your street"
+targetType = "location"
+locationId = "hood_street"
+time_progression_minutes = 45
+
+# ── P06 · the daily loop. The clock only moves forward by minutes (C926, v2.py:7004), so sleep is
+# "8 hours", not "until 7am". A canvas shut only by the clock shows greyed with show_when_blocked
+# (v2.py:6684-6690). ──
+
+[[canvases]]
+id = "loop_sleep"
+name = "Sleep (8 hours)"
+
+[canvases.trigger]
+location = "home_her_room"
+trigger_mode = "manual"
+is_repeatable = true
+show_when_blocked = true
+cooldown_message = "you're not tired enough yet. From 9pm."
+conditions = { version = "1.0", logic = "AND", items = [{ type = "time_of_day", start_time = "21:00", end_time = "03:00" }] }
+
+[[canvases.nodes]]
+id = "do"
+name = "Sleep (8 hours)"
+blocks = [
+  { type = "image", props = { file = "loop/sleep.jpg" } },
+  { type = "paragraph", content = "You crawl into the single bed, and you're gone before you've finished thinking about tomorrow." },
+]
+
+[canvases.nodes.exit_block]
+type = "choices"
+
+[[canvases.nodes.exit_block.choices]]
+text = "Wake up"
+targetType = "location"
+locationId = "home_her_room"
+time_progression_minutes = 480
+effects = [{ trait = "energy", op = "set", value = 100 }]
+
+[[canvases]]
+id = "loop_eat"
+name = "Eat something (20 min)"
+
+[canvases.trigger]
+location = "home_kitchen"
+trigger_mode = "manual"
+is_repeatable = true
+max_triggers_per_day = 3
+show_when_blocked = true
+cooldown_message = "you've eaten enough today."
+
+[[canvases.nodes]]
+id = "do"
+name = "Eat something (20 min)"
+blocks = [
+  { type = "image", props = { file = "loop/eat.jpg" } },
+  { type = "paragraph", content = "You eat standing at the counter: toast, whatever's in the fridge, coffee from the pot." },
+]
+
+[canvases.nodes.exit_block]
+type = "choices"
+
+[[canvases.nodes.exit_block.choices]]
+text = "Done"
+targetType = "location"
+locationId = "home_kitchen"
+time_progression_minutes = 20
+effects = [{ trait = "energy", op = "add", value = 15 }]
+
+[[canvases]]
+id = "loop_shower"
+name = "Shower (15 min)"
+
+[canvases.trigger]
+location = "home_bathroom"
+trigger_mode = "manual"
+is_repeatable = true
+
+[[canvases.nodes]]
+id = "do"
+name = "Shower (15 min)"
+blocks = [
+  { type = "image", props = { file = "loop/shower.jpg" } },
+  { type = "paragraph", content = "The water takes forever to run hot. You stand under it until it does, and you come out pink and awake." },
+]
+
+[canvases.nodes.exit_block]
+type = "choices"
+
+[[canvases.nodes.exit_block.choices]]
+text = "Done"
+targetType = "location"
+locationId = "home_bathroom"
+time_progression_minutes = 15
+effects = [{ trait = "energy", op = "add", value = 5 }]

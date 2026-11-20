@@ -13,6 +13,7 @@ Endpoints (under /api/v1/dev/media-review/):
 - GET  list?game=<slug>     -> enriched media items with lane + names + media_url + status
                                + shelf depth (options_count / options_total)
 - POST reviews?game=<slug>  -> upsert one {file, status, note} into media_reviews.json
+                               status: approved | disapproved | not_needed | null
 """
 
 import json
@@ -99,6 +100,20 @@ def _reviews_lock(game_dir: Path):
     return ledger_lock(_reviews_path(game_dir))
 
 
+# A missing spot the human decided needs no media. It leaves "missing" everywhere —
+# this page's counts AND game-review's `missing_media`, which the media search reads —
+# so no harvest session stocks a shelf for it.
+NOT_NEEDED = "not_needed"
+
+
+def not_needed_keys(game_dir: Path) -> set:
+    """Review keys (slot_key or file) the human marked Not needed."""
+    return {
+        k for k, v in _read_reviews(game_dir).get("reviews", {}).items()
+        if isinstance(v, dict) and v.get("status") == NOT_NEEDED
+    }
+
+
 def _lane_for(item: dict, canvas_by_id: dict, npc_name_by_id: dict) -> dict:
     """Classify a media item into a lane and attach npc context.
 
@@ -169,6 +184,44 @@ def _nothing_selected(item: dict) -> bool:
     return not item["found"]
 
 
+def _lines_by_spot(data: dict) -> dict:
+    """{spot: {"screen": "<scene> · <screen>", "line": "..."}} — the words each picture sits under, so the review
+    page can show what the picture is FOR (LO, 2026-11-18). A block placed after a line gets that line; one at the
+    top of its screen gets the screen's first lines. Every version of a screen's text is joined, so a picture that
+    can only fit one of them shows it."""
+    out: dict = {}
+
+    def texts(blocks, acc):
+        for b in blocks or []:
+            if isinstance(b, dict):
+                if b.get("type") in ("paragraph", "dialog") and b.get("content"):
+                    acc.append(str(b["content"]))
+                texts(b.get("blocks"), acc)
+                texts((b.get("props") or {}).get("blocks"), acc)
+        return acc
+
+    def walk(blocks, screen, before, rest):
+        for i, b in enumerate(blocks or []):
+            if not isinstance(b, dict):
+                continue
+            if b.get("type") in ("image", "video"):
+                p = b.get("props") or {}
+                name = p.get("pool_dir") or p.get("file")
+                if name and name not in out:
+                    after = texts(blocks[i + 1:], []) + rest
+                    line = before[-1] if before else " / ".join(after[:3])
+                    out[name] = {"screen": screen, "line": line[:400]}
+            elif b.get("type") in ("paragraph", "dialog") and b.get("content"):
+                before = before + [str(b["content"])]
+            walk(b.get("blocks"), screen, before, texts(blocks[i + 1:], []) + rest)
+            walk((b.get("props") or {}).get("blocks"), screen, before, rest)
+
+    for c in data.get("canvases", []) or []:
+        for n in c.get("nodes") or []:
+            walk(n.get("blocks"), f"{c.get('name') or c.get('id')} · {n.get('name') or n.get('id')}", [], [])
+    return out
+
+
 def _enumerate(game: str, game_dir: Path) -> dict | None:
     """Parse the game and return enriched, review-merged media items. None if no TOML."""
     toml_path = _resolve_final_toml(game_dir)
@@ -183,6 +236,7 @@ def _enumerate(game: str, game_dir: Path) -> dict | None:
     loc_by_image = {l["image"]: l for l in data.get("locations", []) if l.get("image")}
 
     media = _extract_missing_media(data, game)
+    lines = _lines_by_spot(data)
     reviews = _read_reviews(game_dir).get("reviews", {})
     shelf = _read_shelf(game_dir)
 
@@ -196,6 +250,10 @@ def _enumerate(game: str, game_dir: Path) -> dict | None:
                 "video" if item.get("type") == "video" else "image"
             )
             item.update(_lane_for(item, canvas_by_id, npc_name_by_id))
+            # the words this picture sits under (LO, 2026-11-18)
+            ln = lines.get(item.get("pool_dir") or item.get("file")) or {}
+            item["screen"] = ln.get("screen", "")
+            item["line"] = ln.get("line", "")
 
             # location context
             if item.get("lane") == "location":
@@ -214,7 +272,7 @@ def _enumerate(game: str, game_dir: Path) -> dict | None:
             # merge saved review (keyed by the declared file path)
             # Read the verdict under the same key it was written with.
             rev = reviews.get(item.get("slot_key") or item.get("file"), {})
-            item["status"] = rev.get("status")  # "approved" | "disapproved" | None
+            item["status"] = rev.get("status")  # "approved" | "disapproved" | "not_needed" | None
             item["note"] = rev.get("note", "")
 
             # Shelf depth, read under the same key as the verdict. Attached BEFORE
@@ -255,15 +313,18 @@ def _enumerate(game: str, game_dir: Path) -> dict | None:
         "counts": {
             "total": len(items),
             "found": sum(1 for i in items if i["found"]),
-            "missing": sum(1 for i in items if not i["found"]),
+            "missing": sum(1 for i in items if not i["found"] and i["status"] != NOT_NEEDED),
+            "not_needed": sum(1 for i in items if not i["found"] and i["status"] == NOT_NEEDED),
             "approved": sum(1 for i in items if i["status"] == "approved"),
             "disapproved": sum(1 for i in items if i["status"] == "disapproved"),
             # Shelf state: work waiting on the HUMAN vs work waiting on the SEARCH.
             "ready_to_pick": sum(
-                1 for i in items if i["options_count"] and _nothing_selected(i)
+                1 for i in items
+                if i["options_count"] and _nothing_selected(i) and i["status"] != NOT_NEEDED
             ),
             "unworked": sum(
-                1 for i in items if not i["found"] and not i["options_count"]
+                1 for i in items
+                if not i["found"] and not i["options_count"] and i["status"] != NOT_NEEDED
             ),
             # Content band and slot shape. Both are per-SLOT: a pool is one row
             # holding N clips, so `pool` counts folders, not files.
@@ -298,7 +359,7 @@ def list_media(request):
 def post_review(request):
     """POST /api/v1/dev/media-review/reviews?game=<slug>
 
-    Body: {"file": "...", "status": "approved"|"disapproved"|null, "note": "..."}
+    Body: {"file": "...", "status": "approved"|"disapproved"|"not_needed"|null, "note": "..."}
     Upserts one entry into games/<slug>/.find-media/media_reviews.json.
     """
     game = request.GET.get("game", "")
@@ -318,8 +379,10 @@ def post_review(request):
     if not file_:
         return JsonResponse({"error": "Missing 'file'"}, status=400)
     status = body.get("status")
-    if status not in ("approved", "disapproved", None):
-        return JsonResponse({"error": "status must be approved, disapproved, or null"}, status=400)
+    if status not in ("approved", "disapproved", NOT_NEEDED, None):
+        return JsonResponse(
+            {"error": "status must be approved, disapproved, not_needed, or null"}, status=400
+        )
     note = body.get("note", "")
 
     with _reviews_lock(game_dir):
