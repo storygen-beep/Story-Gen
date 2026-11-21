@@ -12,6 +12,8 @@ PHASES = ["SKILL.md", "plan.md", "piece.md", "build.md", "release.md"]
 
 # Files that exist per game, not in the skill or the repo; a pointer to one of these is not checked.
 PER_GAME = {"STATE.md", "NOTES.md", "approvals.json", "7_final_game.toml", "6_dev_shortcuts.toml", "output/", "output_dev/"}
+# A bare `v2.py` in a cite means the engine SKILL.md rule 3 names; it is the only short name a cite may use.
+ALIASES = {"v2.py": "apps/game_generation/twee_comprehensive/generators/v2.py"}
 CITE = re.compile(r"([\w./-]*\.\w+):(\d+(?:[-,]\d+)*)")
 
 
@@ -47,8 +49,10 @@ def bad_cites(skill, repo=REPO):
     It does NOT catch drift: a cite that still lands inside the file but on the wrong line passes.
     Green here means every cite points somewhere real, not that it points at the right thing."""
     rows = []
-    for name in PHASES:
-        for f, lines in CITE.findall((skill / name).read_text(encoding="utf-8")):
+    for path in id_files(skill):
+        name = path.relative_to(skill)
+        for f, lines in CITE.findall(path.read_text(encoding="utf-8")):
+            f = ALIASES.get(f, f)
             target = next((b / f for b in (repo, skill) if (b / f).is_file()), None)
             if target is None:
                 rows.append(f"{name}: cite `{f}:{lines}` names a missing file")
@@ -60,9 +64,16 @@ def bad_cites(skill, repo=REPO):
     return rows
 
 
-def unknown_c_ids(skill):
+def id_files(skill):
+    """The phase files and every craft file: anything that cites a C- or L-id as a rule."""
+    return [skill / n for n in PHASES] + sorted((skill / "craft").glob("*.md"))
+
+
+def unknown_ids(skill):
+    """C-ids not in lists/COVERAGE.md and L-ids not in lists/LESSONS.md, cited in a phase or craft file."""
     known = set(re.findall(r"^\| (C\d+) \|", (skill / "lists" / "COVERAGE.md").read_text(encoding="utf-8"), re.M))
-    cited = {c for name in PHASES for c in re.findall(r"\b(C\d{3,5})\b", (skill / name).read_text(encoding="utf-8"))}
+    known |= set(re.findall(r"^\| (L\d+) \|", (skill / "lists" / "LESSONS.md").read_text(encoding="utf-8"), re.M))
+    cited = {c for p in id_files(skill) for c in re.findall(r"\b([CL]\d{2,5})\b", p.read_text(encoding="utf-8"))}
     return sorted(cited - known)
 
 
@@ -92,8 +103,8 @@ def test_cites():
     assert bad_cites(SKILL) == []
 
 
-def test_c_ids():
-    assert unknown_c_ids(SKILL) == []
+def test_ids():
+    assert unknown_ids(SKILL) == []
 
 
 def test_no_plain_python3():
@@ -142,9 +153,86 @@ def test_planted_cite_to_a_missing_file(copy):
 
 def test_planted_unknown_c_id(copy):
     append(copy / "plan.md", "\nAs C9999 says.\n")
-    assert unknown_c_ids(copy) == ["C9999"]
+    assert unknown_ids(copy) == ["C9999"]
+
+
+def test_planted_unknown_l_id_in_a_craft_file(copy):
+    append(copy / "craft" / "opening.md", "\nSee L9999.\n")
+    assert unknown_ids(copy) == ["L9999"]
 
 
 def test_planted_plain_python3(copy):
     append(copy / "release.md", "\n    python3 .claude/skills/author-game-lean/scripts/check.py games/<slug>\n")
     assert len(plain_python3(copy)) == 1
+
+
+# ── piece.md points the card at the craft files (LO, 2026-11-20) ──────────────────────────────────────────────
+
+def piece_misses_craft(skill):
+    """piece.md must send the card to craft/, and every craft file it names must exist."""
+    text = (skill / "piece.md").read_text(encoding="utf-8")
+    rows = [] if "craft/" in text else ["piece.md does not name craft/"]
+    rows += [f"piece.md names `{m}`, which does not exist" for m in re.findall(r"`(craft/[\w-]+\.md)`", text)
+             if not (skill / m).is_file()]
+    return rows
+
+
+def test_piece_names_craft():
+    assert piece_misses_craft(SKILL) == []
+
+
+def test_planted_piece_without_craft(copy):
+    p = copy / "piece.md"
+    p.write_text(p.read_text().replace("craft/", "notes/"))
+    assert piece_misses_craft(copy) == ["piece.md does not name craft/"]
+
+
+def test_planted_piece_names_a_missing_craft_file(copy):
+    append(copy / "piece.md", "\nAlso read `craft/phone.md`.\n")
+    assert piece_misses_craft(copy) == ["piece.md names `craft/phone.md`, which does not exist"]
+
+
+# ── the reader is in the loop (LO, 2026-11-20) ──────────────────────────────────────────────────────────────
+
+def reader_missing(skill):
+    """SKILL.md's loop, build.md and release.md all name reader.md, and the file exists."""
+    rows = [] if (skill / "reader.md").is_file() else ["reader.md does not exist"]
+    loop = (skill / "SKILL.md").read_text(encoding="utf-8").split("## The loop", 1)[-1].split("## Always", 1)[0]
+    rows += [] if "`reader.md`" in loop else ["SKILL.md's loop does not name reader.md"]
+    rows += [f"{n} does not name reader.md" for n in ("build.md", "release.md")
+             if "`reader.md`" not in (skill / n).read_text(encoding="utf-8")]
+    return rows
+
+
+def test_reader_in_the_loop():
+    assert reader_missing(SKILL) == []
+
+
+def test_planted_loop_without_reader(copy):
+    p = copy / "SKILL.md"
+    p.write_text(p.read_text().replace("**Read** (`reader.md`)", "**Read**"))
+    assert reader_missing(copy) == ["SKILL.md's loop does not name reader.md"]
+
+
+def test_planted_reader_file_gone(copy):
+    (copy / "reader.md").unlink()
+    assert "reader.md does not exist" in reader_missing(copy)
+
+
+def piece_misses_card_check(skill):
+    """change 6 (2026-11-20): piece.md runs `check.py --card` and no longer checks by hand."""
+    text = (skill / "piece.md").read_text(encoding="utf-8")
+    rows = [] if "check.py --card" in text else ["piece.md does not run check.py --card"]
+    rows += ["piece.md still checks the card by hand"] if "check by hand" in text else []
+    return rows
+
+
+def test_piece_names_the_card_check():
+    assert piece_misses_card_check(SKILL) == []
+
+
+def test_planted_piece_back_to_hand_check(copy):
+    p = copy / "piece.md"
+    p.write_text(p.read_text().replace("check.py --card", "check by hand"))
+    assert piece_misses_card_check(copy) == ["piece.md does not run check.py --card",
+                                             "piece.md still checks the card by hand"]

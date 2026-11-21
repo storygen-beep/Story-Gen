@@ -27,9 +27,10 @@ The front door. It always loads. It holds the loop, the rules, and where everyth
 4. **Yes** (`piece.md`). Record LO's words with `scripts/approve.py`. "Change" means a new card and a new ask. Silence or "sounds good" is not a yes.
 5. **Build** (`build.md`) only that piece: `venv/bin/python .claude/skills/author-game-lean/scripts/build.py games/<slug>`. It refuses a piece with no approval, or whose card changed after the yes. Small calls go in NOTES.md as `Ruling: what · why · cost if wrong`.
 6. **Check** (`build.md`). `scripts/check.py` runs by itself after the build. Fix red. INCOMPLETE names what wasn't checked.
-7. **Close the piece** (`build.md`), same turn: update STATE.md, then list this piece's rulings to LO.
-8. **Play.** Every few pieces LO plays: "this should happen. Does it?"
-9. **Release** (`release.md`), once every piece is checked: `venv/bin/python .claude/skills/author-game-lean/scripts/build.py games/<slug> --release`, then `venv/bin/python .claude/skills/author-game-lean/scripts/check.py games/<slug> --release`, then the reader on this release's scenes, then LO plays the whole release, then the media search, only after LO says "release ready", then ship.
+7. **Read** (`reader.md`). Every scene piece, after check is green and before LO plays: a fresh agent reads the built scene against its craft files and the scene tests. LO sees the table; each FAIL goes back into the card.
+8. **Close the piece** (`build.md`), same turn: update STATE.md, then list this piece's rulings to LO.
+9. **Play.** Every few pieces LO plays: "this should happen. Does it?"
+10. **Release** (`release.md`), once every piece is checked: `venv/bin/python .claude/skills/author-game-lean/scripts/build.py games/<slug> --release`, then `venv/bin/python .claude/skills/author-game-lean/scripts/check.py games/<slug> --release`, then the reader again on any piece whose card changed since its last reading, then LO plays the whole release, then the media search, only after LO says "release ready", then ship.
 
 ## Always
 
@@ -64,9 +65,11 @@ The dev file is dropped only on `--no-dev` (`scripts/merge_toml_phases.py:80`). 
 | what | file |
 |---|---|
 | phase steps | `plan.md`, `piece.md`, `build.md`, `release.md` |
-| state template | `templates/STATE.md` |
+| the reader | `reader.md` |
+| craft by area | `craft/opening.md`, `craft/meters.md`, `craft/media.md`, `craft/walk-ins.md` |
+| state and plan templates | `templates/STATE.md`, `templates/PLAN.md` |
 | piece card | `templates/piece-card.md` |
-| check | `scripts/check.py`, `scripts/reach.py` |
+| check | `scripts/check.py`, `scripts/reach.py`, `scripts/who_is_where.py` |
 | build, approve | `scripts/build.py`, `scripts/approve.py` |
 | craft still to port | `lists/COVERAGE.md` — every item ends ported, or dropped by LO |
 | checks still to port | `lists/CHECKS.md` — same |

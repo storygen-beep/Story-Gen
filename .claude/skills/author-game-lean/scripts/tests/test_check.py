@@ -44,7 +44,7 @@ def test_planted_broken_toml_is_red_merge(game):
 def test_planted_scene_nothing_opens_is_red_reach(game):
     p = game / "toml_phases" / "5_scenes.toml"
     p.write_text(p.read_text() + "\n" + canvas("peek", substitution_only="true"))
-    (game / "cards" / "p1.md").write_text("PIECE p1\nBuilds: start, kitchen, peek\n")
+    (game / "cards" / "p1.md").write_text("PIECE p1\nBuilds: start, kitchen, home, peek\n")
     approve.approve(game, "p1", "yes")
     r = results(game)
     assert r["reach"][0] == check.RED and "`peek`" in r["reach"][1][0]
@@ -156,3 +156,92 @@ def test_dev_build_never_writes_the_public_output_folder(game, monkeypatch):
     dev, rel = cmds
     assert dev[dev.index("--output") + 1].endswith("output_dev") and "--dev" in dev
     assert rel[rel.index("--output") + 1].endswith("/output") and "--dev" not in rel
+
+
+# ── change 6 (2026-11-20): places, people and sidebar items need an approved card too ──────────────────────
+
+def add_phase(game, text):
+    p = game / "toml_phases" / "1_metadata_and_locations.toml"
+    p.write_text(p.read_text() + "\n" + text)
+
+
+def test_planted_extra_place_is_red(game):
+    add_phase(game, '[[locations]]\nid = "gym"\n')
+    assert ("place `gym` is built but never approved (no approved card lists it in Builds:)"
+            in results(game)["builds"][1])
+
+
+def test_planted_extra_person_is_red(game):
+    add_phase(game, '[[npcs]]\nid = "npc_x"\nname = "X"\n')
+    assert any(r.startswith("person `npc_x`") for r in results(game)["builds"][1])
+
+
+def test_planted_extra_sidebar_item_is_red(game):
+    add_phase(game, '[[sidebar_items]]\ntype = "trait_bar"\ntrait = "energy"\nlabel = "Energy"\n')
+    assert any(r.startswith("sidebar item `sidebar:energy`") for r in results(game)["builds"][1])
+
+
+def test_a_card_that_lists_place_person_and_sidebar_is_green(game):
+    add_phase(game, '[[locations]]\nid = "gym"\n\n[[npcs]]\nid = "npc_x"\nname = "X"\n\n'
+                    '[[sidebar_items]]\ntype = "trait_bar"\ntrait = "energy"\n')
+    (game / "cards" / "p1.md").write_text("PIECE p1\nBuilds: start, kitchen, home, gym, npc_x, sidebar:energy\n")
+    approve.approve(game, "p1", "yes")
+    assert results(game)["builds"] == (check.GREEN, [])
+
+
+# ── the card check: check.py --card ─────────────────────────────────────────────────────────────────────────
+
+@pytest.fixture
+def skill(tmp_path):
+    """A craft folder with one file whose must-read rows are C1 and L2."""
+    s = tmp_path / "skill"
+    (s / "craft").mkdir(parents=True)
+    (s / "craft" / "area.md").write_text("# area\n\n## Must read\n\n| id | what |\n|---|---|\n| C1 | a |\n| L2 | b |\n\n"
+                                         "## The shape\n\n| C9 | not a must-read row |\n")
+    (s / "craft" / "media.md").write_text("## Must read\n\n| id | what |\n|---|---|\n| C3 | c |\n")
+    return s
+
+
+def card(game, craft, media=0):
+    (game / "cards" / "c1.md").write_text(f"PIECE c1\nMedia: {media} spots\nBuilds: x\nCraft: {craft}\n")
+
+
+def test_card_citing_or_skipping_every_must_read_is_green(game, skill):
+    card(game, "craft/area.md · cites C1 · skip L2: no person in this piece")
+    assert check.check_card(game, "c1", skill) == (check.GREEN, [])
+
+
+def test_planted_card_missing_a_must_read_is_red(game, skill):
+    card(game, "craft/area.md · cites C1")
+    assert check.check_card(game, "c1", skill) == (
+        check.RED, ["craft/area.md: must-read L2 is neither cited nor skipped with a reason"])
+
+
+def test_planted_skip_without_a_reason_is_red(game, skill):
+    card(game, "craft/area.md · cites C1 · skip L2: ")
+    assert check.check_card(game, "c1", skill) == (check.RED, ["craft/area.md: `skip L2` gives no reason"])
+
+
+def test_planted_media_spot_without_media_craft_is_red(game, skill):
+    card(game, "craft/area.md · cites C1, L2", media=2)
+    assert check.check_card(game, "c1", skill)[1] == [
+        "the card has 2 media spot(s) and its Craft: line does not name craft/media.md"]
+
+
+def test_planted_missing_craft_file_is_red(game, skill):
+    card(game, "craft/area.md, craft/phone.md · cites C1, L2")
+    assert check.check_card(game, "c1", skill)[1] == ["the Craft: line names craft/phone.md, which does not exist"]
+
+
+def test_a_card_with_no_craft_line_is_red(game, skill):
+    (game / "cards" / "c1.md").write_text("PIECE c1\nBuilds: x\n")
+    assert check.check_card(game, "c1", skill)[1] == ["the card has no Craft: line"]
+
+
+def test_card_cli_exit_codes(game, skill, capsys, monkeypatch):
+    monkeypatch.setattr(check, "SKILL", skill)
+    card(game, "craft/area.md · cites C1, L2")
+    assert check.main(["--card", str(game), "c1"]) == 0 and capsys.readouterr().out.startswith("GREEN")
+    card(game, "craft/area.md · cites C1")
+    assert check.main(["--card", str(game), "c1"]) == 1
+    assert not (game / check.LAST).exists()  # the card check saves nothing

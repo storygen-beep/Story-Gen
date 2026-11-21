@@ -1,0 +1,92 @@
+# craft/media.md — where pictures go, and what they ask for
+
+Read this before you fill a card's `Media:` slot. A spot is a design decision; files come only after LO says "release ready" (SKILL.md, Always 6).
+
+## Must read
+
+The card's `Craft:` line cites each one, or says in one line why it skips it.
+
+| id | what it asks | the failure it stops |
+|---|---|---|
+| C1261 | each spot costs a search, a shelf and a pick: put one where the player wants to look | P02–P06: 24 spots of "the room, empty" |
+| C1267 | ask of each screen what the player should see that the words can't give; if nothing much, no spot | same |
+| C1249 | the field's screen kinds: 41% of room screens in top games carry a picture | — (why a place may have one) |
+| C1250 | the room card stays bare in words; media goes to sex and talk | P02–P06 |
+| C1265 | a chore alone, a one-liner, a notice, a menu or a door gets no spot | P06's meals and sleep |
+| C1262 | a body moment gets a clip or still right after the line that says it | — |
+| C1234 | the clip sits on the beat the player is reading | L125 |
+| L121 | media by kind of screen: every body moment, one everyday picture per scene; the every-screen overshoot was cut | first_term DECISIONS 251–252 cut solo everyday pictures that only repeat the line |
+| L125 | a clip that opens its screen with the payoff spoils it | first_term's early-payoff clips |
+| C1280 | pool size by spot: explicit repeat 4, a `_t3` look on a repeat 2, everyday, person, room or once-seen 1; never the default by accident | L119 |
+| L119 | default pools of 4 asked for 1,808 files | first_term DECISIONS 246 |
+| C1281 | a look is written as what the looker sees, or the looker alone; never someone looking at her in the same frame | L120 |
+| C1284 | a walk-in picture is what he sees: "Seen from a bathroom doorway: …" | L120 |
+| L120 | "a man looking at her" frames can't be found, and two-person frames drew wrong searches | first_term DECISIONS 246–247, 253–254 |
+| C1275 | a look where something happens asks for a gif (put "gif" in the search words); a held body or a room stays a still | L122 |
+| C1274 | the tier suffix sets the format: `_t0` everyday, `_t3` a look, `_t4` skin, `_t5` sex, animated only | — |
+| C1278 | the description always gives her age | L123 |
+| C1277 | name the place the scene is named for in every picture | L123 |
+| C1238 | a picture matches its line on every visit | first_term's empty lounger, DECISIONS 258 (`games/first_term/DECISIONS.md:959`) |
+| C1255 | one asset, one block | L126 |
+| L97 | a walk-in shows what that person was already doing | first_term DECISIONS 257 |
+
+## The engine (cited)
+
+- A place's picture is one file, `image` on the `[[locations]]` row, with `image_search_queries` for the missing-media page (`v2.py:484`, `v2.py:493`).
+- `pool_dir` names a folder; the game finds its files on disk and cycles them, one per visit (`v2.py:16359-16364`).
+- `pool = N` is a target, not a manifest: it says how many files to aim for, so a half-filled pool reads "3 of 4" (`apps/common/media_blocks.py:18-20`). Left out, it is 4 (`apps/common/media_blocks.py:33`). That's the default L119 warns about, so always write it.
+
+## The shape
+
+1. **Sit on the payoff.** A spot goes right after the line where her body, his look or the act happens. The screen before it carries no spot.
+2. **A place gets at most one picture: one file, tier 0, with her in it.** Never the empty room. The top games put a picture on 41% of room screens (C1249), and a picture of her in the place is what first_term's lounger fix asked for (DECISIONS 258, `games/first_term/DECISIONS.md:959`).
+3. **Chores, doors, menus and solo everyday screens get none** (C1265). An everyday picture that only repeats the line goes (first_term DECISIONS 251–252, `games/first_term/DECISIONS.md:952-953`).
+4. **Size the pool by tier:** 4 for a repeatable explicit spot, 2 for a `_t3` look on a repeat, 1 for everything else.
+5. **A look shows what he sees.** Describe her, as seen from where he stands, with no man in frame.
+6. **Does something happen in the picture?** Yes: a gif, with "gif" in the search words. No: a sharp still.
+7. **The description:** her age, the place the scene is named for, what she's wearing on that visit, two or three plain search phrases.
+
+## Worked example
+
+Roles, not a world: a café as a place, the opening's lodger scene, and a repeatable act later.
+
+**The café, its one place picture.** A place's picture is not a block: it is one file on the `[[locations]]` row, `image` with `image_search_queries` (`v2.py:484`, `v2.py:493`). There is no `pool` and no description field, so the search words carry her age and the place.
+
+```toml
+[[locations]]
+id    = "cafe"
+image = "places/cafe_t0.jpg"
+image_search_queries = ["woman of 19 at a cafe window table with coffee", "young woman in a grey hoodie sitting in a cafe"]
+```
+
+She's in it, it's one file, and it's tier 0. Nothing moves, so it's a still.
+
+**The temptation screen, one spot, right after the look** (screen 5 of `craft/opening.md`):
+> His eyes drop to your wet thighs, where the towel ends, and climb slow to your chest.
+
+```toml
+[[canvases.nodes.blocks]]
+type = "image"
+props = { description = "Seen from a landing: a woman of 19 in a short white towel outside a bathroom door, legs wet, the knot under her arm slipping. No man in frame.", search_queries = ["woman short towel outside bathroom door gif", "towel slipping wet legs hallway gif"], pool_dir = "look/landing_towel_t3", pool = 1 }
+```
+
+It's seen once, so the pool is 1. The knot slips, so it's a gif.
+
+**The same scene's other screens:** the setup, the landlord, the start choice, the bathroom and the card get no spot, because nothing on them is a body moment. The kitchen hand-over uses the kitchen's own place picture.
+
+**A repeatable act at a later stage, one spot per beat:**
+> He pulls the towel off you and you let it go. *(beat 1: a clip right after this line)*
+> His mouth is on your tit before you can say his name. *(beat 2: its own clip, its own pool)*
+
+Each beat is `_t5`, video, `pool = 4`, because the player comes back to it.
+
+## Not this
+
+- "The room, empty, tier 0, her view" on every place. A place gets one picture with her in it. (P02–P06; DECISIONS 258)
+- A spot on her meal or her bed when she's alone. A chore alone gets none. (P06; C1265)
+- A second picture on a place, or a picture that only repeats the line. (DECISIONS 251–252)
+- A pool with no `pool =`, which asks for 4. Write the number every time. (L119; `apps/common/media_blocks.py:33`)
+- "A man looking at her in a towel." Write what he sees. (L120; C1281)
+- A moving look tagged as a still. Does something happen? Then it's a gif. (L122; C1275)
+- A picture on the line before the payoff. It sits on the line that says it. (L125; C1234)
+- A picture with no age, or no named place. (L123; C1278, C1277)

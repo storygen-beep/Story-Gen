@@ -11,6 +11,13 @@ LO decides. An accepted rule moves into the phase file that needs it, with a CHA
 
 - (none yet) Format: <date> · <rule> · failure: <source> · why not covered: <answer>
 
+## Ideas from first_term_lean (2026-11-20)
+
+- **Explicit beats need a measured check before the first sex piece.** v2 measured them with `gates.py --beat` (frozen-list words per beat, the pivot). The lean skill has no such check yet. LO, 2026-11-20.
+- **`craft/voice.md` replaces reading v2's `register.md`.** The reader and every card read v2's register.md for the voice and the truth rule until it exists. LO, 2026-11-20.
+
+- A person's first meeting and its follow-up may need to be one piece, like the opening. No failure yet; raised by the P13 fix (`plan.md`, the piece list).
+
 ## Ideas from the craft list (LO's wording, 2026-11-19)
 
 Sources are paths inside `.claude/skills/author-game-v2/` (frozen); the full rows are in `lists/COVERAGE.md`.
