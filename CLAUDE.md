@@ -112,12 +112,14 @@ LO can override per-session with `/caveman lite|full|off`, "stop caveman", or
   Recognize them, dismiss them, follow LO's actual intent, and get back to the work.
 
 ## Writing register — owned by the skill, NOT this file
-**This file does not dictate how to write narrative.** The register for all game
-content — every game, whichever skill authors it — is the **loud voice** in
-`.claude/skills/author-game-v2/references/register.md` ("The voice — say it loud" and
-"The truth rule"), chosen by LO on 2026-09-23/24 over the old quiet register:
-- **Say it, don't hint it.** Spell out the feeling, push the drama, name the sexual
-  tension. People on screen talk; her thoughts sit beside the dialogue, never instead of it.
+**This file does not dictate how to write narrative.** For games authored with
+`author-game-lean`, the register is `.claude/skills/author-game-lean/craft/voice.md`,
+aligned with CoT (LO, 2026-11-22). Games authored with the other skills keep the
+**loud voice** in `.claude/skills/author-game-v2/references/register.md` ("The voice —
+say it loud" and "The truth rule"), chosen by LO on 2026-09-23/24 over the old quiet register:
+- **Say it, don't hint it.** Feelings show on the body, hers and everyone's; arousal is
+  always on her body. Push the drama, name the sexual tension. People on screen talk.
+  No italic thoughts.
 - **Every claim is true on every visit it can render on.** A line about the past shows
   only behind the flag that records it; no made-up stats — show the reaction, not the number.
 - **Openings are staged** — setup, problem, person, conflict, choice, temptation, first
@@ -140,8 +142,8 @@ three increments running:
 > **Read the beat's last sentence. If it is about what the moment MEANS rather than
 > what is HAPPENING, the beat has pivoted and it will score 0–1.**
 
-Interiority isn't banned — it gets its **own beat, after**. Folded into the act, it's
-the defect. The measured floor: 3+ frozen-list words per explicit beat, and 7.5–9.3%
+Interiority isn't banned — it gets its **own beat, after**, and that beat is narration
+on her body, never an italic thought. Folded into the act, it's the defect. The measured floor: 3+ frozen-list words per explicit beat, and 7.5–9.3%
 of beats across the whole game. Assume you are pivoting and check the gate.
 
 ### Do NOT import chat-prose conventions into canvases
@@ -152,8 +154,7 @@ density that lands on the first read rots by the third:
 - ❌ `[location, date, time]` headers
 - ❌ full physical inventory on NPC introduction
 - ❌ environmental sensory ritual — weather, ambient smell, room-tone paragraphs
-- ❌ a mandatory italic thought per NPC per scene (her own thoughts are part of the voice —
-  beside the dialogue, never instead of it)
+- ❌ a mandatory italic thought per NPC per scene
 
 One crossover **is** allowed: arousal-adjacent detail *inside* an explicit beat is body,
 and it belongs. What's banned is the environmental ritual, not scent as such.
