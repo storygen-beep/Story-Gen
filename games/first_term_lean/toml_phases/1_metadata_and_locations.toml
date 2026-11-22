@@ -10,7 +10,10 @@ flag_keys = [
   "zoe_place_known",
   # P13 — the opening
   "start_grades", "start_fun", "start_freedom",
-  "met_ryan", "ryan_hall_seen", "ryan_hall_ran", "ryan_hall_knock", "ryan_hall_talked", "ryan_path_closed",
+  "met_laura", "met_mark",
+  "met_ryan", "ryan_hall_seen", "ryan_hall_past", "ryan_hall_spoke", "ryan_hall_waited", "goal1_shown",
+  # Goal 1's card reads these; P21 sets cafe_hired, P11 sets rent_paid_once.
+  "cafe_hired", "rent_paid_once",
 ]
 # P13 — the name screen (template_import.py:2332-2357). "name" writes $player.name; any other id
 # becomes $player.<id> (v2.py:1569-1573). Printed with @player / @player.nickname (v2.py:18598-18629).
@@ -290,3 +293,220 @@ role = "Step-brother"
 relationship = "Your step-brother, 22. He shares the hall and the bathroom with you."
 description = "Your step-brother, 22."
 core_traits = { want = 0, warmth = 0 }
+
+# His whole week, from PLAN §9a. Weekdays 12–6 at the repair shop: no row.
+[[npcs.schedules]]
+location = "home_ryans_room"
+weekdays = [0, 1, 2, 3, 4]
+start_time = "07:00"
+end_time = "07:25"
+activity = "in his room"
+
+[[npcs.schedules]]
+location = "home_bathroom"
+weekdays = [0, 1, 2, 3, 4]
+start_time = "07:25"
+end_time = "07:45"
+activity = "in the shower"
+
+[[npcs.schedules]]
+location = "home_ryans_room"
+weekdays = [0, 1, 2, 3, 4]
+start_time = "07:45"
+end_time = "12:00"
+activity = "in his room"
+
+[[npcs.schedules]]
+location = "home_kitchen"
+weekdays = [0, 1, 2, 3, 4]
+start_time = "18:00"
+end_time = "19:00"
+activity = "eating"
+
+[[npcs.schedules]]
+location = "home_living_room"
+weekdays = [0, 1, 2, 3, 4]
+start_time = "19:00"
+end_time = "23:00"
+activity = "on the couch"
+
+[[npcs.schedules]]
+location = "home_ryans_room"
+weekdays = [0, 1, 2, 3, 4]
+start_time = "23:00"
+end_time = "07:00"
+activity = "in his room"
+
+[[npcs.schedules]]
+location = "home_ryans_room"
+weekdays = [5, 6]
+start_time = "23:00"
+end_time = "10:00"
+activity = "asleep"
+
+[[npcs.schedules]]
+location = "home_bathroom"
+weekdays = [5, 6]
+start_time = "10:00"
+end_time = "10:30"
+activity = "in the shower"
+
+[[npcs.schedules]]
+location = "home_ryans_room"
+weekdays = [5, 6]
+start_time = "10:30"
+end_time = "12:00"
+activity = "in his room"
+
+[[npcs.schedules]]
+location = "home_living_room"
+weekdays = [5, 6]
+start_time = "12:00"
+end_time = "17:00"
+activity = "on the couch"
+
+[[npcs.schedules]]
+location = "home_kitchen"
+weekdays = [5, 6]
+start_time = "17:00"
+end_time = "19:00"
+activity = "eating"
+
+[[npcs.schedules]]
+location = "home_ryans_room"
+weekdays = [5, 6]
+start_time = "19:00"
+end_time = "23:00"
+activity = "in his room"
+
+# P13 — Laura, Mom, 41. Warmth only (PLAN §3); release 1 moves nothing.
+[[npcs]]
+id = "npc_laura"
+name = "Laura"
+role = "Mom"
+relationship = "Your mom, 41. She married Mark three years ago."
+description = "Your mom, 41."
+core_traits = { warmth = 30 }
+
+# Her whole week, from PLAN §9a (LO "yes", 2026-11-21). Weekdays 8–5 she's at work: no row.
+[[npcs.schedules]]
+location = "home_kitchen"
+weekdays = [0, 1, 2, 3, 4]
+start_time = "07:00"
+end_time = "08:00"
+activity = "making breakfast"
+
+[[npcs.schedules]]
+location = "home_kitchen"
+weekdays = [0, 1, 2, 3, 4]
+start_time = "17:00"
+end_time = "19:00"
+activity = "making dinner"
+
+[[npcs.schedules]]
+location = "home_living_room"
+weekdays = [0, 1, 2, 3, 4]
+start_time = "19:00"
+end_time = "23:00"
+activity = "watching TV with Mark"
+
+[[npcs.schedules]]
+location = "home_master_bedroom"
+weekdays = [0, 1, 2, 3, 4, 5, 6]
+start_time = "23:00"
+end_time = "07:00"
+activity = "asleep"
+
+[[npcs.schedules]]
+location = "home_kitchen"
+weekdays = [5, 6]
+start_time = "08:00"
+end_time = "12:00"
+activity = "a slow breakfast"
+
+[[npcs.schedules]]
+location = "home_kitchen"
+weekdays = [5, 6]
+start_time = "17:00"
+end_time = "19:00"
+activity = "making dinner"
+
+[[npcs.schedules]]
+location = "home_living_room"
+weekdays = [5, 6]
+start_time = "19:00"
+end_time = "23:00"
+activity = "on the couch"
+
+[[npcs.schedules]]
+location = "home_master_bedroom"
+weekdays = [5, 6]
+start_time = "07:00"
+end_time = "08:00"
+activity = "asleep"
+
+# P13 — Mark, step-father, 46. Want + power (PLAN §3); release 1 moves nothing.
+[[npcs]]
+id = "npc_mark"
+name = "Mark"
+role = "Step-father"
+relationship = "Your step-father, 46. He collects the rent."
+description = "Your step-father, 46."
+core_traits = { want = 0, power = 50 }
+
+# His whole week, from PLAN §9a. Weekdays 7:30–4:30 at work; Saturday 7–11pm at the bar: no row.
+[[npcs.schedules]]
+location = "home_kitchen"
+weekdays = [0, 1, 2, 3, 4]
+start_time = "07:00"
+end_time = "07:30"
+activity = "coffee before work"
+
+[[npcs.schedules]]
+location = "home_living_room"
+weekdays = [0, 1, 2, 3, 4]
+start_time = "16:30"
+end_time = "23:00"
+activity = "in his chair"
+
+[[npcs.schedules]]
+location = "home_master_bedroom"
+weekdays = [0, 1, 2, 3, 4, 5, 6]
+start_time = "23:00"
+end_time = "07:00"
+activity = "asleep"
+
+[[npcs.schedules]]
+location = "home_kitchen"
+weekdays = [5, 6]
+start_time = "08:00"
+end_time = "10:00"
+activity = "breakfast"
+
+[[npcs.schedules]]
+location = "home_living_room"
+weekdays = [5]
+start_time = "10:00"
+end_time = "19:00"
+activity = "in his chair"
+
+[[npcs.schedules]]
+location = "home_kitchen"
+weekdays = [6]
+start_time = "10:00"
+end_time = "12:00"
+activity = "at the table, Sunday"
+
+[[npcs.schedules]]
+location = "home_living_room"
+weekdays = [6]
+start_time = "12:00"
+end_time = "23:00"
+activity = "in his chair"
+
+[[npcs.schedules]]
+location = "home_master_bedroom"
+weekdays = [5, 6]
+start_time = "07:00"
+end_time = "08:00"
+activity = "asleep"
