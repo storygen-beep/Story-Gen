@@ -85,11 +85,15 @@ label = "Want"
 key = "warmth"
 label = "Warmth"
 
+[[traits.labels]]
+key = "power"
+label = "Power"
+
 # P13 — the people page. Who is listed is the quest cards' decision (template_import.py:684-708):
 # a person shows once a card's `when` holds, so each person's card gates on their met flag.
 [ui.cast_page]
 title = "People"
-show_traits = ["want", "warmth"]
+show_traits = ["want", "warmth", "power"]
 
 [ui.cast_page.trait_bands]
 want = [
@@ -97,6 +101,12 @@ want = [
   { min = 25, max = 49, text = "Looks" },
   { min = 50, max = 74, text = "Doesn't hide it" },
   { min = 75, max = 100, text = "Wants you" },
+]
+power = [
+  { min = 0, max = 24, text = "Backs off" },
+  { min = 25, max = 49, text = "Pushes" },
+  { min = 50, max = 74, text = "In charge" },
+  { min = 75, max = 100, text = "Owns the house" },
 ]
 warmth = [
   { min = 0, max = 24, text = "Distant" },
@@ -109,3 +119,26 @@ warmth = [
 npc_id = "npc_ryan"
 when = [{ flag = "met_ryan", op = "is_true" }]
 text = "Your step-brother, 22. He shares the hall and the bathroom with you."
+
+# P13 — Laura and Mark on the People page once met.
+[[quest_cards]]
+npc_id = "npc_laura"
+when = [{ flag = "met_laura", op = "is_true" }]
+text = "Your mom, 41. She married Mark three years ago."
+
+[[quest_cards]]
+npc_id = "npc_mark"
+when = [{ flag = "met_mark", op = "is_true" }]
+text = "Your step-father, 46. He collects the rent."
+
+# P13 — goal 1's card, armed by the opening (C1604). P11 adds the Sundays count.
+[[quest_cards]]
+group = "story_goals"
+when = [{ flag = "goal1_shown", op = "is_true" }]
+text = "Pay your own way. Pay Mark your share every Sunday. This week: seventy-five."
+tip = "You need money. Take shifts, or find another way. People are in different places at different hours. What you say changes how they treat you."
+goals = [
+  { flag = "cafe_hired", op = "is_true", label = "Ask about work at the café across from campus" },
+  { flag = "rent_paid_once", op = "is_true", label = "Pay Mark on Sunday" },
+]
+

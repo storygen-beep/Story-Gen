@@ -38,6 +38,6 @@ def make_game(where):
     (g / "toml_phases" / "5_scenes.toml").write_text(canvas("start") + "\n" + canvas("kitchen"))
     (g / "toml_phases" / "6_dev_shortcuts.toml").write_text(canvas("dev_jump_x", name="Dev jump: to the kitchen"))
     (g / "STATE.md").write_text(STATE)
-    (g / "cards" / "p1.md").write_text("PIECE p1 · <person>, step 1: <name>\nBuilds: start, kitchen\n")
+    (g / "cards" / "p1.md").write_text("PIECE p1 · <person>, step 1: <name>\nBuilds: start, kitchen, home\n")
     approve.approve(g, "p1", "yes", date="2026-11-19")
     return g

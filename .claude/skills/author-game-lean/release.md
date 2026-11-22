@@ -5,7 +5,7 @@ Stub. Filled in during Phase 3.
 **What it is.** Close a release once every piece in it is checked, in this order:
 
 1. `venv/bin/python .claude/skills/author-game-lean/scripts/build.py games/<slug> --release` (merges with `--no-dev`, `scripts/merge_toml_phases.py:80`), then `venv/bin/python .claude/skills/author-game-lean/scripts/check.py games/<slug> --release`, which is red if any canvas from `6_dev_shortcuts.toml` is in the release output;
-2. the reader on this release's scenes;
+2. the reader (`reader.md`) again on any piece whose card changed since its last reading; every scene piece was already read before LO played it;
 3. LO plays the whole release;
 4. the media search, only after LO says "release ready";
 5. ship.

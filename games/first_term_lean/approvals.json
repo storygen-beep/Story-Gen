@@ -42,6 +42,42 @@
       "sha256": "0dd91e733b821487408502a267e1536cb2150984b778ab7fbc73caac87eec86d",
       "words": "yes",
       "date": "2026-11-20"
+    },
+    {
+      "card": "P01",
+      "sha256": "df997fa90992107011efe74e5f924378edb485aef4e3efd2d8f476ca74e65125",
+      "words": "Yes to P01, and yes, go on the new order.",
+      "date": "2026-11-21"
+    },
+    {
+      "card": "P13",
+      "sha256": "e0930193eb21260da8af2625431e6b8827aedf77ebad7d873640b4d09b8ab761",
+      "words": "yes",
+      "date": "2026-11-21"
+    },
+    {
+      "card": "P13",
+      "sha256": "60f731d128b08d218c1f7770c5a51ed216900538a5d6530190bc80ca8ea88287",
+      "words": "yes",
+      "date": "2026-11-21"
+    },
+    {
+      "card": "P13",
+      "sha256": "e2a3f24c7b4631039510ee917266fbe09c0581eee36699fbe9e80c04ef4ad22d",
+      "words": "yes",
+      "date": "2026-11-21"
+    },
+    {
+      "card": "P13",
+      "sha256": "52dab8e9e6f45e40898191800822d8db563272e451dbe3707d338f9a13d4b037",
+      "words": "yes",
+      "date": "2026-11-21"
+    },
+    {
+      "card": "P13",
+      "sha256": "40e2134512432932f0acdf5c6c5c857c9cb7e99c5f19d669ae7be2331f12e582",
+      "words": "yes, fix them and I'll play",
+      "date": "2026-11-22"
     }
   ]
 }

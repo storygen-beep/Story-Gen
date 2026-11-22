@@ -6,8 +6,15 @@ Checks:
   merge      scripts/merge_toml_phases.py runs and the merged TOML parses (--no-dev under --release)
   reach      reach.py finds no scene, media spot or portrait that can never show
   approvals  every STATE.md piece with a built date has a current approval (approve.status == approved)
-  builds     every canvas in the merged TOML is listed in the Builds: line of an APPROVED card
-             (a changed card covers nothing; canvases from 6_dev_shortcuts.toml are skipped)
+  builds     every canvas, place, person and sidebar item in the merged TOML is listed in the Builds: line
+             of an APPROVED card (a changed card covers nothing; canvases from 6_dev_shortcuts.toml are
+             skipped; a sidebar item, which has no id, is listed as `sidebar:<trait>`, or `sidebar:<label>`)
+
+    python3 check.py --card games/<slug> <id>
+
+  card       before LO's yes: the card's Craft: line cites every must-read id of every craft file it names,
+             or skips one as `skip <id>: <reason>`; every named craft file exists; a card with a media spot
+             names craft/media.md. Reads only; saves nothing.
   release    --release only: no dev canvas id or name is left in the merged TOML or the built HTML
 
 Output: one verdict line (GREEN, RED <n>, or INCOMPLETE: <reason>), then every red, with NEW on the ones
@@ -131,8 +138,23 @@ def check_approvals(game_dir):
     return (RED, rows) if rows else (GREEN, [])
 
 
+def sidebar_key(item):
+    """A sidebar item has no id in the TOML; a card lists it as `sidebar:<trait>` (or `sidebar:<label>`)."""
+    return "sidebar:" + str(item.get("trait") or item.get("label") or "?")
+
+
+def built_things(game, dev):
+    """(kind, id) for everything a card must approve: canvases (minus dev ones), places, people, sidebar items."""
+    out = [("canvas", c.get("id")) for c in game.get("canvases", []) if c.get("id") not in dev]
+    out += [("place", l.get("id")) for l in game.get("locations", [])]
+    out += [("person", n.get("id")) for n in game.get("npcs", [])]
+    out += [("sidebar item", sidebar_key(s)) for s in game.get("sidebar_items", []) if isinstance(s, dict)]
+    return [(k, i) for k, i in out if i]
+
+
 def check_builds(game_dir, game):
-    """Every non-dev canvas must be listed by an approved card. A changed card covers nothing."""
+    """Every built canvas, place, person and sidebar item must be listed by an approved card.
+    A changed card covers nothing."""
     if game is None:
         return INCOMPLETE, ["the merged TOML did not parse"]
     dev = dev_canvases(game_dir) or {}
@@ -140,8 +162,49 @@ def check_builds(game_dir, game):
     for cid, ids in card_builds(game_dir).items():
         if approve.status(game_dir, cid) == "approved":
             covered |= ids
-    rows = [f"canvas `{c['id']}` is built but never approved (no approved card lists it in Builds:)"
-            for c in game.get("canvases", []) if c.get("id") not in dev and c.get("id") not in covered]
+    rows = [f"{kind} `{i}` is built but never approved (no approved card lists it in Builds:)"
+            for kind, i in built_things(game, dev) if i not in covered]
+    return (RED, rows) if rows else (GREEN, [])
+
+
+# ── the card check (before LO's yes) ───────────────────────────────────────────────────────────────────────
+
+SKILL = HERE.parent
+
+
+def must_read(craft_file):
+    """The ids in a craft file's `## Must read` table (first column)."""
+    text = craft_file.read_text(encoding="utf-8")
+    part = text.split("## Must read", 1)[-1].split("\n## ", 1)[0] if "## Must read" in text else ""
+    return re.findall(r"^\| ([CL]\d+) \|", part, re.M)
+
+
+def check_card(game_dir, card_id, skill=None):
+    """Rows that make a card red before LO's yes. Reads only."""
+    skill = Path(skill) if skill else SKILL
+    path = Path(game_dir) / "cards" / f"{card_id}.md"
+    if not path.is_file():
+        return INCOMPLETE, [f"no card at {path}"]
+    text = path.read_text(encoding="utf-8")
+    m = re.search(r"^Craft:\s*(.*)$", text, re.M)
+    line = m.group(1) if m else ""
+    rows = [] if m else ["the card has no Craft: line"]
+    named = re.findall(r"craft/[\w-]+\.md", line)
+    media = re.search(r"^Media:\s*(\d+)", text, re.M)
+    if media and int(media.group(1)) > 0 and "craft/media.md" not in named:
+        rows.append(f"the card has {media.group(1)} media spot(s) and its Craft: line does not name craft/media.md")
+    skips = dict(re.findall(r"skip ([CL]\d+):\s*([^·;]*)", line))
+    for name in named:
+        f = skill / name
+        if not f.is_file():
+            rows.append(f"the Craft: line names {name}, which does not exist")
+            continue
+        for i in must_read(f):
+            if i in skips:
+                if not skips[i].strip():
+                    rows.append(f"{name}: `skip {i}` gives no reason")
+            elif not re.search(rf"\b{i}\b", line):
+                rows.append(f"{name}: must-read {i} is neither cited nor skipped with a reason")
     return (RED, rows) if rows else (GREEN, [])
 
 
@@ -203,7 +266,21 @@ def report(results, last):
     return lines, code
 
 
+def card_main(argv):
+    ap = argparse.ArgumentParser(description="Check one card before LO's yes.")
+    ap.add_argument("game_dir")
+    ap.add_argument("card_id")
+    args = ap.parse_args(argv)
+    status, rows = check_card(args.game_dir, args.card_id)
+    print({GREEN: "GREEN", RED: f"RED {len(rows)}", INCOMPLETE: "INCOMPLETE"}[status])
+    print("\n".join(f"  {r}" for r in rows))
+    return {GREEN: 0, RED: 1, INCOMPLETE: 2}[status]
+
+
 def main(argv=None):
+    argv = list(sys.argv[1:] if argv is None else argv)
+    if argv[:1] == ["--card"]:
+        return card_main(argv[1:])
     ap = argparse.ArgumentParser(description="Check a game built with author-game-lean.")
     ap.add_argument("game_dir")
     ap.add_argument("--release", action="store_true")
