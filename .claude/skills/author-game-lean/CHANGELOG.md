@@ -68,3 +68,16 @@
 - No check.py hook. A card has no marker for a body moment, so the reader's test 13 is the check. Verified: 86 passed (`venv/bin/python -m pytest -p no:django -q .claude/skills/author-game-lean/scripts/tests`); `check.must_read` reads the 9 ids.
 - **Approval: LO's own words, relayed by the ENI session (2026-11-22):** "4. And for onetime scenes like opening it should have only one."
 - `craft/body-moments.md` step 5: a body moment on a repeat button gets pool 4 and one in a one-time scene gets pool 1, quoting LO. The "LO's call to confirm" note is gone, and the worked example's daily shower now says pool 4. `craft/media.md`: the C1280 row and step 4 add the `_t4` body-moment-on-a-repeat case at 4. Why: this settles the open ruling from the body-moments entry above. Verified: grep finds no "pool 2" in body-moments.md and no "to confirm"; tests below.
+- **Approval: LO's own yes, relayed by the ENI session (ENI for LO, standing authorization, 2026-11-20).** LO: "does walkins progresses?? like she can do more in those walkins as things rises?? In the release 1 it stays basic obv. But how does top games do it??" Then: "yes, send it".
+- `craft/walk-ins.md` (now 184 lines): new must-read rows C1820, C724, C1821, C1864, C792 and C302 (23 ids now), and a new section "How a walk-in grows". Its cited engine notes: conditions are checked before each rule's own dice (v2.py:6987-6994); an exclusive group shares one roll and a failed claimed slot falls to the plain act (v2.py:6909-6914, 6962-6981), so bands are independent rules; `substitution_only` (v2.py:15104-15107); the payoff needs a `trigger.location`, because `setup.getCanvasById` reads only location canvases (v2.py:4118-4131; v2 the-surfaces.md:282-285, whose own v2.py:4009-4023 cite has drifted). Seven steps:
+  1. two sides grow: his version with his arc, her options with her meter along the H3 ladder;
+  2. one canvas banded on her meter, with release 1 as the bottom band;
+  3. the odds climb with the same meter, and a flat chance is listed;
+  4. two screens at most;
+  5. caught becomes a door, never a skip;
+  6. release 1 is the bottom band, a flag and no meter (L70);
+  7. at least three of her states open scenes (C857).
+
+  Worked example E, in roles: an overheard housemate in three bands (hear, listen, look) with chances 0.10, 0.35 and 0.70, a line each, and the TOML for the bottom rule. Three new "Not this" lines. Why: the file taught only his side growing; C1820, C724, C302, C792 and C1821 were marked port in COVERAGE but cited in no craft file (grep). Verified: sources read at v2 the-surfaces.md:250-290 and 330-345 and the-heat-ladder.md:90-100; the engine lines re-read today; the trait condition shape was checked against `games/first_term/toml_phases/7_final_game.toml:1068-1072`.
+- `plan.md` §8: each walk-in names its next band and what opens it, pointing at the new section. `templates/PLAN.md` §8: new column "next band, after which meter or arc step". Verified: re-read.
+- The cites test caught two short `author-game-v2/...` paths in the new section; they now use the full `.claude/skills/...` path. Verified: 86 passed.

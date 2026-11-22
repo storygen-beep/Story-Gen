@@ -18,6 +18,12 @@ The card's `Craft:` line cites each one, or says in one line why it skips it.
 | C858 | a place she visits several times a day needs many scenes, each spaced a day or more apart | — (later releases) |
 | C859 | pure chance annoys; a scene can also take something, not only add | — |
 | C28 | the taboo-at-home shape runs on walk-in risk: each housemate has at least one walk-in at home | — (the person pass) |
+| C1820 | the odds ride the same meter as the content: chance bands 0.10 / 0.35 / 0.70 into one canvas banded watch / touch / act | — (how it grows) |
+| C724 | walk-in odds read her climb; flat odds are listed | — |
+| C1821 | three parts: the router (substitutions on the act), the branch (one `substitution_only` canvas with bands), the payoff (into a rung that exists) | — |
+| C1864 | band with a rule's `conditions`; in an exclusive group, append a new rule last | — |
+| C792 | a walk-in is two screens: the moment, and one answer screen per choice; a third screen is the defect | — |
+| C302 | peek or catch: an option is added each stage, and being caught becomes a door | — |
 | C212 | a story beat is never left to luck: it fires the first time it can | — |
 | C174 | a person's next arc step comes before any dice | — |
 | L97 | a walk-in only fires where the walker's rows put them, and it shows what they were already doing | first_term's walk-ins almost never fired; a TV walk-in swapped her film for its own |
@@ -118,6 +124,50 @@ The area's count, on the card: A is everyday, B and C are not; two of three name
 | "Watch" | *He comes into his fist with a grunt and drops the phone on his chest.* · sets `saw_housemate_alone` |
 | "Back away" | *You ease back down the landing, and the floorboard doesn't give you away.* |
 
+## How a walk-in grows
+
+(LO, relayed 2026-11-22: "does walkins progresses?? like she can do more in those walkins as things rises?? In the release 1 it stays basic obv. But how does top games do it??")
+
+Engine, cited:
+- A substitution rule's `conditions` are checked before its own dice: `_tryRule` first, then `Math.random() < chance` (v2.py:6987-6994). Rules with disjoint meter ranges are bands, each with its own chance.
+- Rules sharing an `exclusive_group` share one roll in cumulative slots, and a claimed slot whose conditions fail falls to the plain act, not to the next rule (v2.py:6909-6914, 6962-6981). So bands go as independent rules; when an act already has a group, a new rule goes last in it (C1864).
+- `substitution_only = true` keeps the branch canvas out of the place's buttons (v2.py:15104-15107). The payoff canvas must have a `trigger.location`: `setup.getCanvasById` finds only canvases listed under a location (v2.py:4118-4131), so a payoff with none never fires and nothing says so (`.claude/skills/author-game-v2/references/the-surfaces.md:282-285`).
+
+1. **Two sides grow.** His version moves with his arc (shape step 13). What she can do moves with her meter, up the kind's ladder (`.claude/skills/author-game-v2/references/the-heat-ladder.md` H3): overhearing goes hear, listen, look, touch, one button per rung; peek or catch adds an option each stage; an accident becomes her choice.
+2. **One canvas, banded on her meter.** The bottom band is release 1. Build release 1's walk-in as that one canvas with its one band, so a later release adds a band and never rewrites the scene (C1820, C1821).
+3. **The odds climb with the same meter as the content.** Low band rare, top band likely (0.10 / 0.35 / 0.70, C1820). A flat chance is listed on the card as a choice (C724).
+4. **Two screens at most:** the moment, then one answer screen per choice (C792).
+5. **Caught becomes a door.** Being caught can open his arc's next step (C302). It never skips past that step (C174).
+6. **Release 1 is the bottom band only:** a flag, no meter. When meters move, a meter's first gain is never behind the dice (L70).
+7. **Count her states.** Across a game, at least three of her states open new scenes or bands (C857).
+
+**E · One walk-in in three bands** (overhearing; roles: a housemate in the next room). The router is on her act "Go to bed", while his rows put him in his room. Three rules on the same canvas, each with its own meter range and chance; only the bottom one exists in release 1.
+
+| band | her meter | chance | the moment (one line) | her new choice |
+|---|---|---|---|---|
+| hear | under 20 | 0.10 | *Through the wall: his headboard, a girl's moan, his voice low.* | turn the music up, or lie still and hear it |
+| listen | 20–39 | 0.35 | *You put your ear to the wall. You can hear what he's telling her to do.* | adds: press closer |
+| look | 40 and up | 0.70 | *His door's open a crack, and from the landing you can see all of it.* | adds: stay where he might see you, the "caught" door into his arc |
+
+```toml
+[[canvases.trigger.substitutions]]
+target_canvas_id = "wall_housemate"
+chance = 0.10
+
+[canvases.trigger.substitutions.conditions]
+version = "1.0"
+logic = "AND"
+
+[[canvases.trigger.substitutions.conditions.items]]
+type = "trait"
+subject = "player"
+trait_key = "<her meter>"
+operator = "lt"
+value = 20
+```
+
+A later release appends the 0.35 and 0.70 rules with their ranges and adds their bands to `wall_housemate`; the hear band's text stays as it was.
+
 ## Not this
 
 - An area where every scene is about her body. About half are everyday: someone else's life going on (L147; C802).
@@ -127,5 +177,8 @@ The area's count, on the card: A is everyday, B and C are not; two of three name
 - A meter's first point behind a 1-in-4 roll. The first gain is open without dice; chance only repeats it (L70).
 - A person's next step left to the dice. It fires the first time it can (C174, C212).
 - A scene with one button. She can always leave, and leaving has its line.
+- A walk-in rewritten each release. It's one canvas; a release adds a band (C1820).
+- The same chance at every meter level. The odds climb with the content (C724).
+- A third screen after the answer (C792).
 - A housemate who wants her in his first walk-in because his end want says so. His first one is about him, not her; she comes into it only as his arc moves (LO, 2026-11-21).
 - Walk-ins found only by going place by place. Ask what each person does when alone, too, or the best ones turn up only by luck.
