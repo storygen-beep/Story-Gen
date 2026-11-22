@@ -89,7 +89,12 @@ The dev file is dropped only on `--no-dev` (`scripts/merge_toml_phases.py:80`). 
 | walk-ins (topic) | `craft/walk-ins.md` |
 | body moments (topic) | `craft/body-moments.md` |
 | voice | `craft/voice.md` |
-| want, arc, heat, people, places, clock, economy, phone, clothes, systems, returning player | none yet: `craft/<area>.md`, with spaces as hyphens |
+| places | `craft/places.md` |
+| clock | `craft/clock.md` |
+| people | `craft/people.md` |
+| economy | `craft/economy.md` |
+| want | `craft/want.md` |
+| arc, heat, phone, clothes, systems, returning player | none yet: `craft/<area>.md`, with spaces as hyphens |
 
 Never read a list in `lists/` whole. Grep the area you're porting.
 

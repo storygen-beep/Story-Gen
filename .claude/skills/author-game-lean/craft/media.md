@@ -39,7 +39,7 @@ The card's `Craft:` line cites each one, or says in one line why it skips it.
 ## The shape
 
 1. **Sit on the payoff.** A spot goes right after the line where her body, his look or the act happens. The screen before it carries no spot.
-2. **A place gets at most one picture: one file, tier 0, with her in it.** Never the empty room. The top games put a picture on 41% of room screens (C1249), and a picture of her in the place is what first_term's lounger fix asked for (DECISIONS 258, `games/first_term/DECISIONS.md:959`).
+2. **A place gets at most one picture: one file, tier 0, with her in it.** Never the empty room. The top games put a picture on 41% of room screens (C1249); CoT, the model for `craft/places.md`, puts none on its 126 location screens, so this rule comes from the field, not from CoT, and a picture of her in the place is what first_term's lounger fix asked for (DECISIONS 258, `games/first_term/DECISIONS.md:959`).
 3. **Chores, doors, menus and solo everyday screens get none** (C1265). A moment alone with her body is not one of them: a shower, dressing or undressing, the towel, bed, the mirror each get a picture of her (`craft/body-moments.md`; first_term_lean's P06 shower picture was "the shower running, steam on the glass"). An everyday picture that only repeats the line goes (first_term DECISIONS 251–252, `games/first_term/DECISIONS.md:952-953`).
 4. **Size the pool by tier:** 4 for a repeatable explicit spot or a `_t4` body moment on a repeat (`craft/body-moments.md`), 2 for a `_t3` look on a repeat, 1 for everything else.
 5. **A look shows what he sees.** Describe her, as seen from where he stands, with no man in frame.

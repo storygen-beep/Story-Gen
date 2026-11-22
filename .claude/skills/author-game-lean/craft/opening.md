@@ -83,7 +83,7 @@ Buttons: "Hold the towel and get past him" · "Say good morning back" · "Wait f
 > A hundred by Friday. Forty in your purse.
 > The café on the corner has a sign in the window. And on the stairs the landlord said there are "other ways to make rent in this house." He didn't say what.
 
-The card it arms: *Make the rent by Friday.* Goals: *Ask at the café* · *Find out what he meant.*
+The card it arms: *Pay your own way: rent every Friday.* Goals: *Ask at the café* · *Find out what he meant.*
 Plain lines under it: *You need money. Take shifts, or find another way. People are in different places at different hours. What you say changes how they treat you.*
 
 **7 · The hand-over, on a hook** (53 words)

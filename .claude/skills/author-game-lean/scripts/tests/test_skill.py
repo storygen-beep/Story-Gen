@@ -259,5 +259,7 @@ def test_area_table_matches_check():
 
 def test_planted_area_missing_from_the_table(copy):
     p = copy / "SKILL.md"
-    p.write_text(p.read_text().replace("economy, ", ""))
+    text = p.read_text()  # drop the area wherever it sits: its own row, or inside the no-file row
+    text = re.sub(r"^\| economy \|.*\n", "", text, flags=re.M).replace("economy, ", "")
+    p.write_text(text)
     assert area_table_misses(copy) == ["SKILL.md's area table does not name `economy`"]

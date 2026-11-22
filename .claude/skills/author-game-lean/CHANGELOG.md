@@ -112,3 +112,80 @@
 - `SKILL.md`: the area table gives voice its file. `LATER.md`: the craft/voice.md idea is marked done for the voice, with the truth rule still open.
 - The cites test caught five short `register.md:` cites; they now use the full path. Verified: 95 passed; `check.must_read` reads the 11 ids.
 - Not changed: `CLAUDE.md`, which is LO's file. Lines 115-120, 143 and 155-156 still teach v2's voice and "her thoughts sit beside the dialogue". Listed for LO through the ENI session.
+- **Approval: LO's own yes, relayed by the ENI session (ENI for LO, standing authorization, 2026-11-22):** "Confirm each with the top games and CoT mostly", then "yes, send it".
+- Created `craft/places.md`, the places area's file. Must-read rows: C769, C794, C795, C804, L106, C776, C777, C773, C758, C953, C954, C738, C762, L147, C808, C811, C770, C771 and C707. The measures table covers CoT's 126 `location`-tagged passages. The shape has nine rules, each marked measured or LO's choice:
+  1. the identity line is the same every visit;
+  2. one presence line per person, from their rows, plus the crowd;
+  3. the menu holds needs, systems and people only;
+  4. short labels with the cost shown, and never pay she earns;
+  5. "not now" says why;
+  6. every open place has one thing to do alone, stricter than C738 (LO's choice, L147);
+  7. streets or quads are hubs;
+  8. short screens;
+  9. two DoL-only rules (C771, C707/C739), marked as not from CoT.
+
+  The place picture points at `craft/media.md`, noting that CoT isn't its source. The worked example is LO's kitchen text in roles (mom, step-father). Four "Not this" lines. Pointers to `walk-ins.md` (C785's event pools) and the future clothes file (C1173's door check) instead of duplicating them. Verified by re-running the counts here:
+  - 126 passages; median 64.5 words, p75 112; 285 labels, median 3 words;
+  - cost shown 97, people offered 62, `$peopleatlocation` 19, `setup.Events.passage` 29, `clothes_ok` 22, pictures 0. The peer's counts were 24 and 30 for the two that differ; this file uses these.
+  - The BangCoffee opening and "You really aren't that thirsty right now." were found in `BangCoffee.txt`.
+  - One of the peer's claims was corrected before writing: CoT's streets name their buildings ("You are on Emerson Road. A large academic building is here…") rather than carrying many links.
+- `craft/media.md` step 2: the one-picture-per-place rule now says it comes from the field (C1249, 41%), not from CoT, which has 0 pictures on its location screens.
+- `SKILL.md`: the area table gives places its file. Verified: 95 passed, and the area-table test is green.
+- `craft/places.md` rule 3, corrected (ENI session, 2026-11-22): BangCoffee does have a bathroom button. `BangCoffee.txt:36` calls `<<bathroom "A public restroom is available here.">>`, and the widget in `GlobalWidgets.txt:1468` renders `<<link "Use restroom" Restroom>>`. My grep looked for `<<bathroom>>` with no argument, missed it, and the entry above had wrongly said there was none; that line is fixed. The menu is coffee and Use restroom (needs), Study and Use laptop (systems), and `<<godate>>` (people). Verified: both lines read in the corpus; tests below.
+- **Approval: LO's own yes, relayed by the ENI session (ENI for LO, standing authorization, 2026-11-22):** "yes, send it".
+- Created `craft/clock.md`, the clock area's file. It has 23 must-read rows: C889, C906, C926, C900, C902, C903, C904, C892, C910, C929, C897, C924, C920, C913, C930, C914, C916, C915, C921, C927, C928, C931 and C890. Its engine section was re-cited against today's v2.py:
+  - `advanceTime` takes minutes only (7004);
+  - an exit with no time costs 3 (17924);
+  - `isCurrentTimeSlot` wraps past midnight and defaults to an hour (4770-4790), and `time_of_day` uses it (5283-5285);
+  - `deductLocationCosts` and `getLocationCostTag` (6226-6236);
+  - `show_when_blocked` is read at 15098-15102 and drawn dimmed at 6734-6742;
+  - `locClosedReason` gives "Closed. Opens at …" (11766-11773), and `closed_text` shows at the door (11438-11441);
+  - the SchedulePage is at 24387;
+  - there is no `@time` token (grep).
+
+  C925, the peer's eighth engine fact (an exit runs advanceTime before flags), was left out because it wasn't re-verified today. The file has a CoT measures table, eight rules each marked measured or LO's choice, LO's café text in roles (the café owner), and four "Not this" lines. Verified by re-running over all 5,294 CoT passages (425,667 words stripped):
+  - clock times 26, or 0.61 per 10,000 (the peer had 21, 0.49); weekdays 61, or 1.43 per 10,000 (the peer had 1.39);
+  - 65 files with closed or opening text; `<<advtime>>` sizes 1 (180), 5 (114), 20 (76), 60 (74), 10 (72), 30 (38);
+  - the four "A sign says it's open between …" lines, the bus at `RiversidePlaza.txt:110`, and "Nightlife Schedule" at `DisplayNPCWidgets.txt:816`.
+
+  Fixed per-person schedules are marked as coming from IHOH (C892) and our engine, not CoT.
+- `craft/places.md`: points at `craft/clock.md` for hours, closed lines and button times, with no duplication. `SKILL.md`: the area table gives clock its file.
+- **Approval: LO's own yes, relayed by the ENI session (ENI for LO, standing authorization, 2026-11-22):** "yes, send it".
+- Created `craft/people.md`, the people area's file. Must-read rows: C618, C619, C622, C627, C625, C626, C630, C632, C598, C620, C690, C613, C639, C640, C961, C954, C447, C593, C644, C596, C656, C660 and C448. It has a measures section and nine rules, each marked measured or LO's choice:
+  1. nobody is met at the start except the people she lives with;
+  2. a role until the meeting, then name and relation;
+  3. unmet people are hidden;
+  4. his wanting shows on his body first;
+  5. three to five graded answers, with a no that lands and never pays;
+  6. each person's own manner, subject and name for her;
+  7. the talk screen's shape;
+  8. one short, shown meter per person, still in release 1;
+  9. obvious on arrival (LO's rule).
+
+  It points at voice.md, places.md and clock.md instead of repeating them. The worked example is LO's café meeting, with the role "the café manager" and "I run the place" (ENI's correction, `games/first_term_lean/PLAN.md:55`), his name as a slot, and no pay amount (C954). Four "Not this" lines. Verified in CoT today:
+  - the `anonorfullname` widget at `GlobalWidgets.txt` line 882, called 953 times (the `anonor…` family about 3,050);
+  - `BusGrope.txt`'s five answers;
+  - "That certainly backfired." in `EventResHallPropositionShowersBold.txt`.
+
+  The field-measured rows are marked as from COVERAGE's evidence column, not re-run. The brief's "two versions of the café pay" line was dropped: ENI corrected it (NOTES.md:65 superseded :59).
+- `SKILL.md`: the area table gives people its file.
+- **Approval: LO's own yes, relayed by the ENI session (ENI for LO, standing authorization, 2026-11-22):** "yes, send it".
+- Created `craft/economy.md`, the economy area's file. Must-read rows: C1003, C1004, C1033, C1008, C1014, C1013, C1016, C1020, C1021, C1022, C954, C1001, C1002, C989, C990, C951, C952, C992, C1017 and C967. It has a measures section, nine rules each marked measured or LO's choice, a "when paid sex opens" section marked not in release 1 (C966–C973), LO's Sunday rent text in roles (step-father, mom) with the figures marked as filler (C992), and four "Not this" lines. Verified by reading CoT's `WeeklyDebtPayment.txt`, `WeeklyDebtPaid.txt` and `WeeklyDebtUnpaid.txt` at the lines cited:
+  - the bill starts at 100 and is capped at 200, with the author's note;
+  - the phone hand-over lines and the first call with its GPA rule at 2.5;
+  - the rises 100→150 at $500 paid and 150→200 at $1,000, the 250 and 300 rises switched off with `false and`, and the "same amount" line;
+  - the lecture and `<<dalterneed Relaxation -50 true>>`.
+
+  New today: every CoT amount is multiplied by `$optdebtpaymentmultiplier`, a difficulty option. The peer couldn't confirm the job button; I read one: QuickieBurger's "Work" button shows time and rest and no pay, and the wage is on the Work page (`Work.txt`, line 14). That's one job, said as such. The field rows come from COVERAGE's evidence column and were not re-run.
+- `SKILL.md`: the area table gives economy its file.
+- `scripts/tests/test_skill.py`: `test_planted_area_missing_from_the_table` now drops `economy` wherever it sits in the table (its own row, or inside the no-file row). Before, it removed "economy, " from the no-file row, which stopped working once economy got its own row. Verified: tests below.
+- **Approval: LO's own yes, relayed by the ENI session (ENI for LO, standing authorization, 2026-11-22):** "yes, send it".
+- Created `craft/want.md`, the want area's file. It has 23 must-read rows: C54, C43, C44, C46, C48, C51, C1619, C1628, C430, C598, C952, C992, C34, C35, C36, C37, C433, C32, C56, C72, C63, C64 and C65. It has a measures section, seven rules each marked measured or LO's choice, LO's goal card in roles (step-father, the café across from campus) with the amount marked as filler, and four "Not this" lines. The plan-level rows are pointed at `plan.md` §2. The peer said C6 and C24–C31 already live there; in fact §2 cites only C25, C26 and C28 (grep), and the file says so instead of claiming the rest are covered. Verified in CoT today:
+  - the quoted lines in `Prologue.txt`, `Prologue14.txt` and `Prologue16.txt`;
+  - "Think back..." leading to `PrologueHighSchool.txt`, which asks through `<<pickstartingtrait "popularity">>`. The peer had read only its first line; four such picks run across the prologue (popularity, relationship, relationship type, hobbies);
+  - the "for now!" end line in `StoryHintWidgets.txt`;
+  - the systems lecture in `PrologueFinal.txt`.
+
+  The field rows come from COVERAGE's evidence column and were not re-run.
+- `craft/opening.md`: the example's quest card went from "Make the rent by Friday." to "Pay your own way: rent every Friday." The old wording was a dated goal, which the new want.md's C34 and its "Not this" forbid. The hold's "Friday" in the dialogue stays, because a due day said by a person is the bill's date (C1004), not the goal's.
+- `SKILL.md`: the area table gives want its file.
