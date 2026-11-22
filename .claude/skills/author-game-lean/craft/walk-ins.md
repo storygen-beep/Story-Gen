@@ -58,19 +58,19 @@ The card's `Craft:` line cites each one, or says in one line why it skips it.
 
 Roles, not a world: a riverside park in her area, a neighbour she knows, two strangers, and a lodger at home. Word counts are for the story text.
 
-**A · Everyday, a person she knows** (38 words). Button at the park, 07:00–10:00, while the neighbour's row puts him on the path. Once a day.
+**A · Everyday, a person she knows** (40 words). Button at the park, 07:00–10:00, while the neighbour's row puts him on the path. Once a day.
 > The neighbour is on the bench by the gate, his dog's lead wrapped twice round his fist.
 > "You. Hold him a minute? My laces." The dog is already pulling toward you.
-> *He's never asked you for anything before.*
+> You blink. He's never asked you for anything before.
 
 | button | the first line after the click |
 |---|---|
 | "Take the lead" | *The dog drags you two steps. He laughs, the first time you've heard it.* · sets `held_the_dog` |
 | "Sorry, I'm late" | *"Course you are." He bends to his laces without looking up again.* |
 
-**B · She walks in on something, strangers** (51 words). Button "Take the path under the bridge", 19:00–21:30. Once a day.
+**B · She walks in on something, strangers** (53 words). Button "Take the path under the bridge", 19:00–21:30. Once a day.
 > Under the bridge it's darker than the path. Then you hear it: a gasp, a belt buckle, skin on stone. A woman is pinned to the wall with her skirt up round her waist, and the man's hips slam into her, slow and hard.
-> *Leave. Right now. Why aren't you leaving?*
+> Your face is burning, and your feet don't move.
 
 | button | the first line after the click |
 |---|---|
@@ -104,20 +104,20 @@ The area's count, on the card: A is everyday, B and C are not; two of three name
 
 **D · The person pass: a housemate alone, in three versions.** A button "His door's open a crack" on the landing, in the hours his rows put him in his room, once a night. Each version shows behind the arc step that opens it; before that step it doesn't exist. Her choice in each is to watch or back away, and in release 1 each sets a flag only.
 
-*D1, at the start: nothing about her* (40 words).
+*D1, at the start: nothing about her* (41 words).
 > His door is open a crack. He's on his bed with his jeans open and his phone held up, sound low, his hand working his cock fast.
 > He hasn't seen you. The phone's what he's looking at.
-> *Back away. Now.*
+> Your face goes hot.
 
-*D2, after his first step toward her: her underwear* (36 words).
+*D2, after his first step toward her: her underwear* (39 words).
 > The door's open again. He's on the bed, but there's no phone tonight. He has your black underwear from the laundry pile wrapped round his cock, and he's stroking slow.
-> *Those are mine. He took those.*
+> Your stomach drops. Those are yours. He took them.
 
-*D3, near the top of his arc: her name* (33 words).
+*D3, near the top of his arc: her name* (36 words).
 > His door's open wider than a crack tonight. He's working his cock hard, eyes shut, and he says it out loud, rough.
 > "Fuck. Fuck, ___."
 > Your name.
-> *He left it open on purpose.*
+> Your breath catches. He left it open on purpose.
 
 | button | the first line after the click (D1) |
 |---|---|

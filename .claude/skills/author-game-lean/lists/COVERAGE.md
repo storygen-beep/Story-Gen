@@ -473,9 +473,9 @@ Harvested 2026-11-19 from `.claude/skills/author-game-v2/` (frozen at `ea8f6465`
 | C441 | Loud is not long and short is not compressed; length is set by the scored model beats, not by a number. | references/register.md:27 | port |  | stated | |
 | C442 | Say it, don't hint it: tell the player what is happening and what it means. | references/register.md:30 | port |  | stated | |
 | C443 | Spell out the feelings (angry, scared, turned on, embarrassed). | references/register.md:31 | port |  | stated | |
-| C444 | Her thoughts go on screen in italics (`thought_bubble`), beside the dialogue and never instead of it. | references/register.md:32 | port |  | stated | |
+| C444 | Her thoughts go on screen in italics (`thought_bubble`), beside the dialogue and never instead of it. | references/register.md:32 | drop |  | stated | 2026-11-22 LO, relayed: "Remove thoughts in itallic. Dont show in body too." (dropped; `craft/voice.md` rule 4) |
 | C445 | Push the drama so the situation is obvious and felt; not every line has to be loud. | references/register.md:35 | port |  | stated | |
-| C446 | More dialogue than narration; the shape of a scene with a person is: someone speaks, she answers, they push, she thinks, a choice. | references/register.md:36 | port |  | stated | |
+| C446 | More dialogue than narration; the shape of a scene with a person is: someone speaks, she answers, they push, she thinks, a choice. | references/register.md:36 | drop |  | stated | 2026-11-22 LO, relayed: "Lets align it with Cot" (dropped; narration leads under 5:1 in every measured top game, `craft/voice.md` rule 5) |
 | C447 | Every character sounds like themselves: pick one manner per person and hold it; nobody sounds like the narrator. | references/register.md:38 | port |  | stated | |
 | C448 | Obvious on arrival: within the first lines the player knows who a person is, what they want, and how they feel about her. | references/register.md:41 | port |  | stated | |
 | C449 | Name the sexual tension; don't bury it. | references/register.md:43 | port |  | stated | |

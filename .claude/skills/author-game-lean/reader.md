@@ -7,8 +7,8 @@
 ## Reads
 
 - `games/<slug>/cards/<id>.md`: what the card promised, its `Builds:` and its `Craft:` lines.
-- Every craft file the `Craft:` line names (`.claude/skills/author-game-lean/craft/*.md`), and the craft file for any area the piece touches that the card left out (`craft/opening.md` for the opening, `craft/meters.md` for a meter or an act that pays one, `craft/media.md` for any media spot, `craft/walk-ins.md` for a scene she walks into or someone walking in on her, `craft/body-moments.md` for a moment alone with her body). A craft file the card should have named and didn't is itself a FAIL.
-- `.claude/skills/author-game-v2/references/register.md`, "The voice — say it loud" and "The truth rule". CLAUDE.md names it the register for every game until `craft/voice.md` exists (`LATER.md`).
+- Every craft file the `Craft:` line names (`.claude/skills/author-game-lean/craft/*.md`), and the craft file for any area the piece touches that the card left out (`craft/opening.md` for the opening, `craft/meters.md` for a meter or an act that pays one, `craft/media.md` for any media spot, `craft/walk-ins.md` for a scene she walks into or someone walking in on her, `craft/body-moments.md` for a moment alone with her body). A craft file the card should have named and didn't is itself a FAIL, and so is an area the scene touches that the card's `Areas:` line doesn't name.
+- `craft/voice.md` for the voice, on every scene piece. The truth rule is still read from `.claude/skills/author-game-v2/references/register.md`, "The truth rule", because `craft/voice.md` carries only its headline rows (C460, C461), not its worked cases.
 - The canvases in `Builds:`, from `games/<slug>/toml_phases/7_final_game.toml`.
 - `games/<slug>/PLAN.md` and `games/<slug>/NOTES.md`.
 - Who is where: `venv/bin/python .claude/skills/author-game-lean/scripts/who_is_where.py games/<slug>`.
@@ -27,7 +27,7 @@ How three rows are read (the false-red test on the old first_term opening, 2026-
 1. **want:** the person visibly wants something here. On a sexual step, an earlier canvas already showed him wanting it. Name the canvases you checked.
 2. **next step:** something goes one step further than the last scene with this person.
 3. **hook:** the scene points at what comes next: a line, a promise, a choice that names it.
-4. **her voice at her level:** her thought matches her meter: pushback at a low level, appetite at a high one. At stage 0–1 her thought reacts; it never chooses an act her stage hasn't opened (L71).
+4. **her voice at her level:** her reaction matches her meter: pushback at a low level, appetite at a high one, on her body and in what she says, never in an italic thought (`craft/voice.md`). At stage 0–1 she reacts; it never chooses an act her stage hasn't opened (L71).
 5. **who notices:** someone reacts to what she does, or PLAN.md declares nobody does.
 6. **the written no:** where she gets an offer, a refusal exists, is written and lands somewhere. A final no ("(ends his path)") on a main arc's first step, or in the opening, is a FAIL (C166).
 7. **the body:** an explicit beat's last sentence is about what is happening, not what it means.
