@@ -7,7 +7,7 @@
 ## Reads
 
 - `games/<slug>/cards/<id>.md`: what the card promised, its `Builds:` and its `Craft:` lines.
-- Every craft file the `Craft:` line names (`.claude/skills/author-game-lean/craft/*.md`), and the craft file for any area the piece touches that the card left out (`craft/opening.md` for the opening, `craft/meters.md` for a meter or an act that pays one, `craft/media.md` for any media spot, `craft/walk-ins.md` for a scene she walks into or someone walking in on her). A craft file the card should have named and didn't is itself a FAIL.
+- Every craft file the `Craft:` line names (`.claude/skills/author-game-lean/craft/*.md`), and the craft file for any area the piece touches that the card left out (`craft/opening.md` for the opening, `craft/meters.md` for a meter or an act that pays one, `craft/media.md` for any media spot, `craft/walk-ins.md` for a scene she walks into or someone walking in on her, `craft/body-moments.md` for a moment alone with her body). A craft file the card should have named and didn't is itself a FAIL.
 - `.claude/skills/author-game-v2/references/register.md`, "The voice — say it loud" and "The truth rule". CLAUDE.md names it the register for every game until `craft/voice.md` exists (`LATER.md`).
 - The canvases in `Builds:`, from `games/<slug>/toml_phases/7_final_game.toml`.
 - `games/<slug>/PLAN.md` and `games/<slug>/NOTES.md`.
@@ -22,7 +22,7 @@ How three rows are read (the false-red test on the old first_term opening, 2026-
 - **C109 on a person's first scene:** there is no step before it, so the leak half is N/A; judge only the promise the scene ends on. His look, caught and covered, is judged at C601, not here.
 - **C1604:** judge the objective cards showing at the hand-over, the ones that tell her what to do. A person's card on the people page is not one.
 
-**B · The scene** (from `v2-reader`'s tests; `PLAN.md` stands in for WANT.md and the v2 ledger):
+**B · The scene** (from `v2-reader`'s tests, plus test 13; `PLAN.md` stands in for WANT.md and the v2 ledger):
 
 1. **want:** the person visibly wants something here. On a sexual step, an earlier canvas already showed him wanting it. Name the canvases you checked.
 2. **next step:** something goes one step further than the last scene with this person.
@@ -36,6 +36,7 @@ How three rows are read (the false-red test on the old first_term opening, 2026-
 10. **true on every visit:** read each line at the first and last minute it can show, and on the second visit. Who it says is there is there (who_is_where). A past it names is behind its flag. A "first time" is behind a seen flag.
 11. **a solo button is a real act:** it changes something she or the game can see, or shows the act it names.
 12. **low heat is on the body:** a charged scene with no explicit beat names a part of her body, writes his reaction, and holds a "not yet" or a price (C311). Talk only is a FAIL (C314).
+13. **a moment alone with her body is a body moment:** a shower, dressing or undressing, the towel, bed or the mirror stays on her body and has a picture of her. Written as a chore (no body, or no picture), or skipped ("Back in your room, dressed"), is a FAIL.
 
 ## Output
 

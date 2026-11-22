@@ -66,7 +66,7 @@ The dev file is dropped only on `--no-dev` (`scripts/merge_toml_phases.py:80`). 
 |---|---|
 | phase steps | `plan.md`, `piece.md`, `build.md`, `release.md` |
 | the reader | `reader.md` |
-| craft by area | `craft/opening.md`, `craft/meters.md`, `craft/media.md`, `craft/walk-ins.md` |
+| craft by area | `craft/opening.md`, `craft/meters.md`, `craft/media.md`, `craft/walk-ins.md`, `craft/body-moments.md` |
 | state and plan templates | `templates/STATE.md`, `templates/PLAN.md` |
 | piece card | `templates/piece-card.md` |
 | check | `scripts/check.py`, `scripts/reach.py`, `scripts/who_is_where.py` |

@@ -101,6 +101,7 @@ Buttons: "Sit with her" · "Go and find work". Both lead into the live kitchen, 
 - He looks and keeps looking. A man she lives with catches himself and covers. (P13, 4; C601)
 - A screen that drifts off her body into talk. His line may be about her day; the screen stays on her body and his eyes. (C311, C314)
 - Her thought choosing it ("and I'm letting him") below the stage that opens a choice. Her thought reacts. (P13, 5; L71)
+- "You give yourself five minutes." The shower and the towel are body moments: on her body, with a picture of her (`craft/body-moments.md`). (P13)
 - "(ends his path)" on his first step. The opening says no to nobody. (P13, 6; C166)
 - A last screen that ends on an errand ("go to breakfast"). End on the hook. (P13; C1621)
 - A hand-over into an empty room, waiting for a later piece. The last place has a person in it at that minute. (P13, 7; C1631)
