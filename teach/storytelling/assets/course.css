@@ -1,0 +1,90 @@
+/* Shared stylesheet for every lesson and reference sheet in this course.
+   Tufte-leaning: one serif text column, citations as margin-style notes,
+   generous whitespace, prints cleanly on A4/Letter. */
+
+@import url("https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400;0,600;1,400&family=Inter:wght@400;600&display=swap");
+
+:root {
+  --bg: #fffff8;
+  --ink: #111;
+  --muted: #5a5a55;
+  --rule: #d8d6c8;
+  --accent: #a33a1f;
+  --card: #f6f4e8;
+  --good: #1f6b3a;
+  --bad: #a3261f;
+  --serif: "EB Garamond", Georgia, "Times New Roman", serif;
+  --sans: "Inter", system-ui, sans-serif;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --bg: #161614; --ink: #ecebe4; --muted: #a3a296; --rule: #3a3a34;
+    --accent: #e07a5a; --card: #22221e; --good: #6fcf8f; --bad: #f08a80;
+  }
+}
+:root[data-theme="dark"] {
+  --bg: #161614; --ink: #ecebe4; --muted: #a3a296; --rule: #3a3a34;
+  --accent: #e07a5a; --card: #22221e; --good: #6fcf8f; --bad: #f08a80;
+}
+
+* { box-sizing: border-box; }
+html { font-size: 19px; }
+body {
+  margin: 0; background: var(--bg); color: var(--ink);
+  font-family: var(--serif); line-height: 1.55;
+}
+main { max-width: 38rem; margin: 0 auto; padding: 3rem 16px 5rem; }
+
+nav.crumbs { font-family: var(--sans); font-size: .72rem; letter-spacing: .04em;
+  text-transform: uppercase; color: var(--muted); margin-bottom: 2.5rem; }
+nav.crumbs a { color: var(--muted); }
+
+h1 { font-weight: 400; font-size: 2.1rem; line-height: 1.15; margin: 0 0 .4rem; }
+.subtitle { font-style: italic; color: var(--muted); margin: 0 0 2.5rem; font-size: 1.1rem; }
+h2 { font-weight: 400; font-style: italic; font-size: 1.4rem; margin: 2.6rem 0 .6rem; }
+h3 { font-family: var(--sans); font-size: .8rem; text-transform: uppercase;
+  letter-spacing: .06em; color: var(--muted); margin: 2rem 0 .4rem; }
+p, li { hyphens: auto; }
+a { color: var(--accent); text-underline-offset: 2px; }
+
+/* The one idea of the lesson, set large. */
+.big-idea { font-size: 1.35rem; line-height: 1.35; border-left: 3px solid var(--accent);
+  padding: .2rem 0 .2rem 1rem; margin: 1.8rem 0; }
+
+/* Citation notes: small, muted, sit right under the claim they back. */
+.cite { display: block; font-size: .78rem; color: var(--muted); margin: -.4rem 0 1rem;
+  font-family: var(--sans); line-height: 1.4; }
+
+blockquote { margin: 1.2rem 0; padding-left: 1rem; border-left: 1px solid var(--rule);
+  font-style: italic; }
+
+/* A numbered example told story, line by line. */
+ol.story { counter-reset: line; list-style: none; padding: 0; margin: 1.2rem 0;
+  background: var(--card); padding: 1rem 1.2rem; border-radius: 4px; }
+ol.story li { counter-increment: line; padding-left: 2rem; position: relative; margin: .35rem 0; }
+ol.story li::before { content: counter(line); position: absolute; left: 0; font-family: var(--sans);
+  font-size: .75rem; color: var(--muted); top: .3rem; }
+
+.box { background: var(--card); border-radius: 4px; padding: 1rem 1.2rem; margin: 1.5rem 0; }
+.box h3 { margin-top: 0; }
+
+.source { border-top: 1px solid var(--rule); border-bottom: 1px solid var(--rule);
+  padding: 1rem 0; margin: 2.5rem 0; }
+.ask { font-family: var(--sans); font-size: .85rem; color: var(--muted); }
+
+table.ref { width: 100%; border-collapse: collapse; font-size: .95rem; margin: 1rem 0; }
+table.ref th, table.ref td { text-align: left; vertical-align: top; padding: .45rem .6rem .45rem 0;
+  border-bottom: 1px solid var(--rule); }
+table.ref th { font-family: var(--sans); font-size: .72rem; text-transform: uppercase;
+  letter-spacing: .05em; color: var(--muted); font-weight: 600; }
+
+footer { margin-top: 3rem; font-family: var(--sans); font-size: .75rem; color: var(--muted); }
+
+@media print {
+  :root { --bg: #fff; --ink: #000; --card: #f3f3f3; }
+  html { font-size: 12pt; }
+  main { max-width: none; padding: 0; }
+  nav.crumbs, .quiz button, .no-print { display: none; }
+  a { color: inherit; }
+  h2, .box, ol.story { break-inside: avoid; }
+}
