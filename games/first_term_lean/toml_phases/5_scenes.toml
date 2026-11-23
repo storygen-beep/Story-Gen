@@ -341,7 +341,10 @@ blocks = [
   { type = "paragraph", content = "Hair still wet, you sit on the bed and do the sums." },
   { type = "paragraph", content = "Seventy-five by Sunday. You have nothing." },
   { type = "paragraph", content = "Last week there was a Help Wanted sign in the window of the café across from campus. And Mark said \"one way or another\" like he'd already picked one." },
-  { type = "paragraph", content = "**Pay your own way.** Pay Mark your share every Sunday. · ✅ Mark told you the rent · ➜ Ask about the Help Wanted sign at the café across from campus. It's open from 7am to 9pm. · ➜ Pay Mark on Sunday morning, at the kitchen table ($75 this week)." },
+  { type = "paragraph", content = "<strong>Pay your own way.</strong> Pay Mark your share every Sunday." },
+  { type = "paragraph", content = "✅ Mark told you the rent" },
+  { type = "paragraph", content = "➜ Ask about the Help Wanted sign at the café across from campus. It's open from 7am to 9pm." },
+  { type = "paragraph", content = "➜ Pay Mark on Sunday morning, at the kitchen table ($75 this week)." },
   { type = "paragraph", content = "You need money. Take shifts, or find another way. People are in different places at different hours. What you say changes how they treat you." },
 ]
 
