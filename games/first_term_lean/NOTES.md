@@ -191,3 +191,5 @@
 2026-11-23 · relayed by the main-lean session (LO, typed there: "Yes"): every lean build goes to games/first_term_lean/output/, dev builds too; LO plays from output/. STATE's output_dev/ mentions changed to output/.
 2026-11-23 · LO, typed here, on reader pass 10 (9 FAILs, 3 causes): "Yes and play". The three fixes (Ryan named as step-brother on arrival; "empty" off the All-yours hall line; Mark's and Ryan's two short lines), rebuilt into output/, and LO plays without another reader pass: later reader findings waived until after he has played.
 2026-11-23 · P13 pass-10 fixes approved (LO: "Yes and play"), P43 matched; built into output/ (dev), GREEN, replayed headless (no errors).
+2026-11-23 · relayed by the main-lean session (LO, typed there: "Yes"): goal 1's card on the opening's sums screen shows as one run-on line with stray stars. Fix: real bold title on its own line, one line per step, like the Quests page.
+2026-11-23 · P13 goal-card layout approved (LO: "Yes"), built into output/ (dev + debug), GREEN. Checked in the built screen: four lines, "Pay your own way." in bold, no stars, no errors.

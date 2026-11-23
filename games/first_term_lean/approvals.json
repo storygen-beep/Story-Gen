@@ -210,6 +210,12 @@
       "sha256": "9271531aff0072ca330dca8177092bdb47a0bafbd3c5033a1bc65464169410a8",
       "words": "Yes and play",
       "date": "2026-11-23"
+    },
+    {
+      "card": "P13",
+      "sha256": "429719ba4dc0a7862963e0c00ad3ee734785bc797385a110a04be12a84a3d572",
+      "words": "Yes",
+      "date": "2026-11-23"
     }
   ]
 }
