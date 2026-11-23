@@ -44,6 +44,7 @@ SKILL = HERE.parent
 sys.path.insert(0, str(HERE))
 import scenes  # noqa: E402
 import sheet  # noqa: E402
+import rules  # noqa: E402
 
 VERDICTS = ("PASS", "FAIL", "N/A", "WAIVED")
 KEEP = ("PASS", "N/A", "WAIVED")
@@ -89,12 +90,35 @@ def card_lines(game_dir, card_id):
     return files, [i for i in ids if i and i.lower() != "none" and not i.startswith("<")]
 
 
+def does_of(game_dir, card_id):
+    return rules.card_does((Path(game_dir) / "cards" / f"{card_id}.md").read_text(encoding="utf-8"))
+
+
 def rows_for(game_dir, card_id, skill=SKILL):
-    """{row: text}: the 13 scene tests, plus every row of every craft file the card names, plus voice.md."""
-    files, _ = card_lines(game_dir, card_id)
+    """{row: text}. A card with a Does: block: the 13 scene tests plus its rule list (rules.py), each row's text
+    with its labels, so a relabel re-opens it. An older card: the 13 tests plus every must-read row and shape step
+    of every craft file its Craft: line names, plus voice.md."""
+    does = does_of(game_dir, card_id)
     out = dict(scene_tests(skill))
+    if does is not None:
+        table = rules.table(skill)
+        for rid in rules.rule_list(does, skill, table):
+            r = table[rid]
+            out[rid] = f"{r['asks']} | {', '.join(r['when'])} | {r['judge']}"
+        return out
+    files, _ = card_lines(game_dir, card_id)
     for f in files:
         out.update(craft_rows(f, skill))
+    return out
+
+
+def row_screens(game_dir, card_id, skill=SKILL):
+    """{row: set of screens it applies on}, or None for a card without Does: (every row on every screen)."""
+    does = does_of(game_dir, card_id)
+    if does is None:
+        return None
+    out = {rid: set(on) for rid, on in rules.rule_list(does, skill).items()}
+    out.update({t: set(does) for t in scene_tests(skill)})
     return out
 
 
@@ -171,9 +195,11 @@ def work_list(game_dir, card_id, everything=False, skill=SKILL, game=None):
     def want(row, screen, why):
         wanted.setdefault((row, screen), why)
 
+    where = row_screens(game_dir, card_id, skill)
     for s in sorted(changed):
         for r in sorted(rows):
-            want(r, s, "screen is new" if s not in old_sc else "screen changed")
+            if where is None or s in where.get(r, ()):
+                want(r, s, "screen is new" if s not in old_sc else "screen changed")
     judged = set()
     for v in rec.get("verdicts", []):
         r, s = v["row"], v["screen"]

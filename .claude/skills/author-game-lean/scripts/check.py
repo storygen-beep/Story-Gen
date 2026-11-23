@@ -16,6 +16,13 @@ Checks:
   sheet      every card with a `Sheet:` block: each row matches the sheet sheet.py works out from the build
              (clock, place, who is there, what she wears, flags). A column it can't work out is INCOMPLETE. A card
              with no Sheet: block (every card from before 2026-11-24) is not compared; `--card` asks new ones for it.
+  does       every card with a `Does:` block: what a script can see each built screen do (rules.GUARD's list: a
+             person, an equip, a garment named, a price, a time on a label, a picture, a meter effect, a goal card,
+             the last screen, a first meeting, a place entered, one-time or repeatable, the opening) is named
+             on that screen's Does: line. Cards without Does: are not judged.
+
+    python3 check.py --rules games/<slug> <id>    the piece's rule list, from its Does: block (rules.py)
+    python3 check.py --rules games/<slug> plan    the rules whose `when` is "the plan"
 
     python3 check.py --card games/<slug> <id>
 
@@ -55,10 +62,11 @@ import approve  # noqa: E402
 import reach  # noqa: E402
 import scenes  # noqa: E402
 import sheet  # noqa: E402
+import rules  # noqa: E402
 
 GREEN, RED, INCOMPLETE = "green", "red", "incomplete"
 # Every check a craft row's `judge` may name (SKILL.md, "Rule labels").
-CHECKS = ("merge", "reach", "approvals", "builds", "release", "card", "beat", "sheet",
+CHECKS = ("merge", "reach", "approvals", "builds", "release", "card", "beat", "sheet", "does",
           "talk", "length", "presence", "creation", "saves", "speakers", "goals")
 GATES = REPO / ".claude" / "skills" / "author-game-v2" / "scripts" / "gates.py"
 BEAT_FLOOR = 3  # C254: an explicit beat has 3+ frozen-list words
@@ -242,6 +250,14 @@ def check_card(game_dir, card_id, skill=None):
             rows.append(f"area `{area}` has no craft file yet: write {area_file(area)} first (piece.md step 1)")
         elif area_file(area) not in named:
             rows.append(f"area `{area}`: the Craft: line does not name {area_file(area)}")
+    does = rules.card_does(text)
+    if does is not None:
+        rows += rules.does_problems(does, skill)
+        mine = sheet.card_sheet(text)
+        if mine is not None and set(mine) != set(does):
+            rows.append(f"Does: and Sheet: name different screens: {sorted(set(mine) ^ set(does))}")
+    elif re.search(r"^[ \t]*Screen \d", text, re.M):
+        rows.append("the card has screens and no Does: block; name each screen's triggers (SKILL.md, Rule labels)")
     if re.search(r"^[ \t]*Screen \d", text, re.M) and sheet.card_sheet(text) is None:
         rows.append("the card has screens and no Sheet: block (templates/piece-card.md); "
                     "write each screen's clock, place, who, wearing and flags before the prose")
@@ -326,6 +342,18 @@ def check_release(game_dir, game):
     return (RED, rows) if rows else (GREEN, [])
 
 
+def check_does(game_dir, game):
+    """Each card's Does: against what the build shows. Cards without a Does: block are not judged."""
+    if game is None:
+        return INCOMPLETE, ["the merged TOML did not parse"]
+    red = []
+    for path in sorted((Path(game_dir) / "cards").glob("*.md")):
+        does = rules.card_does(path.read_text(encoding="utf-8"))
+        if does is not None:
+            red += [f"{path.stem}: {r}" for r in rules.guard(does, game)]
+    return (RED, red) if red else (GREEN, [])
+
+
 def check_sheet(game_dir, game):
     """Each card's Sheet: against the computed one. Cards without a Sheet: block are not compared."""
     if game is None:
@@ -351,6 +379,7 @@ def run_all(game_dir, release=False, against=None):
     results["builds"] = check_builds(game_dir, game)
     results.update(scenes.run(game_dir, game, dev_canvases(game_dir) or {}, ref=against))
     results["sheet"] = check_sheet(game_dir, game)
+    results["does"] = check_does(game_dir, game)
     if release:
         results["release"] = check_release(game_dir, game)
     return results
@@ -394,6 +423,28 @@ def card_main(argv):
     return {GREEN: 0, RED: 1, INCOMPLETE: 2}[status]
 
 
+def rules_main(argv):
+    ap = argparse.ArgumentParser(description="Print a piece's rule list, or the plan's.")
+    ap.add_argument("game_dir")
+    ap.add_argument("card_id")
+    args = ap.parse_args(argv)
+    rows = rules.table()
+    if args.card_id == "plan":
+        ids = rules.plan_rows()
+        print(f"the plan: {len(ids)} rules")
+        print("\n".join(rules.print_list(ids, rows)))
+        return 0
+    path = Path(args.game_dir) / "cards" / f"{args.card_id}.md"
+    does = rules.card_does(path.read_text(encoding="utf-8")) if path.is_file() else None
+    if does is None:
+        print(f"INCOMPLETE: {path} has no Does: block")
+        return 2
+    lst = rules.rule_list(does, rows=rows)
+    print(f"{args.card_id}: {len(lst)} rules over {len(does)} screen(s), {sum(len(v) for v in lst.values())} rule-screen pairs")
+    print("\n".join(rules.print_list(lst, rows, lst)))
+    return 0
+
+
 def beat_main(argv):
     ap = argparse.ArgumentParser(description="Check the beats a card or file marks [explicit].")
     ap.add_argument("path")
@@ -410,6 +461,8 @@ def main(argv=None):
         return card_main(argv[1:])
     if argv[:1] == ["--beat"]:
         return beat_main(argv[1:])
+    if argv[:1] == ["--rules"]:
+        return rules_main(argv[1:])
     ap = argparse.ArgumentParser(description="Check a game built with author-game-lean.")
     ap.add_argument("game_dir")
     ap.add_argument("--release", action="store_true")

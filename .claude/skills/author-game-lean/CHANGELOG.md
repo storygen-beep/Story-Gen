@@ -451,3 +451,23 @@ Why for all of these: P13's reader found new FAILs on every pass, v5 to v11 (99 
     - `PENDING_HOMES` is empty, so the one-home test runs on every id in every craft file.
   - **Heat, kept blocking as LO's rules:** C254, C248, C239, C276, C255, C256 and C252, each marked "LO's rule, explicit prose is the register (CLAUDE.md; 2026-11-24)". C254 is `script + beat`, and C249 stays `script + beat`. C255, C256 and C252 keep the trigger "the plan": they are game-wide shares, and "the plan" covers the game plan and each release's piece list, so they apply from release 1. "a release after the first" would skip release 1.
   - **Kept blocking as LO's choice (2026-11-24):** C284 and C289 (heat); C164 and C165 (arc); C951, C989, C990, C1016 and C1017 (economy); C773, C776, C777 and C738 (places); C913, C914, C916, C903 and C890 (clock); C1431, C1432 and C1438 (systems); C1667, C1681, C1647, C1664 and C1666 (returning-player). All other "—" rows stay notes.
+- Part B of the rule-pipeline plan, the rule list per piece (LO relayed 2026-11-24: "Yes"):
+  - **Created `scripts/rules.py`.** `table()` reads every labelled home row; pointer rows are skipped. `card_does()` parses the card's new `Does:` block (`<canvas>.<node> | <trigger>, …`). `rule_list()` gives each screen every `always` row plus the rows whose `when` names one of its triggers. `plan_rows()` lists the "the plan" rows.
+  - **The guard:** `seen()` and `meetings()` work out what a script can see a built screen do: a person on screen, one-time or repeatable (the starting canvas counts as one-time), the opening, the last screen, an equip on its exit, a catalog garment named, a "$" figure, a time on a label or in prose, a picture or clip, an effect on a meter (not energy or money), a goal card (✅ or ➜), an exit to a place, and a met_ flag (named on the screen that sets it or the one it leads to). `guard()` is red when the `Does:` line leaves one out. It can't see these, which the writer names: a moment alone with her body, something sexual shows, an explicit beat, a walk-in, a release after the first, and a price written in words ("seventy-five").
+  - **`check.py`:**
+    - `--rules <game> <id>` prints the list, grouped by judge, with each rule's home and how many screens it applies on; `--rules <game> plan` prints the plan's rows.
+    - `--card` is red on an unknown trigger, a non-screen trigger ("always", "the plan", "a rule is changed"), a screen with none, `Does:` and `Sheet:` naming different screens, and a card with `Screen <n>` lines and no `Does:`.
+    - A new `does` check runs the guard on every card with a `Does:` block. Cards without one are not judged.
+    - `CHECKS` gains "does".
+  - **`reading.py`:** for a card with `Does:`, the rows are its rule list plus the 13 scene tests, each hashed with its labels. A changed screen asks only the rows its triggers fire. Cards without `Does:` keep the old rows.
+  - **`piece.md` step 1:** write the screens and `Does:` first, print the list with `--rules`, then read each rule in its home. Cards without `Does:` keep the old area reading.
+  - **`templates/piece-card.md`** gains the `Does:` block, and **`reader.md`** says the rows come from the same list.
+  - **Created `scripts/tests/test_rules.py`, 21 tests:**
+    - the list is the `always` rows plus the screen's triggers, pointers are skipped, and plan rows are their own list;
+    - planted bad `Does:` lines are red, and so is a screen mismatch with `Sheet:`;
+    - an old card isn't asked;
+    - the guard is green when `Does:` names everything, red for each of 7 planted missing triggers, and accepts a first meeting on either screen;
+    - the CLI works;
+    - a changed screen asks only its own rows.
+  - **Verified read-only:** a `Does:` block for P13 was written into a scratchpad copy of the card, with `games/first_term_lean/toml_phases` linked read-only. The guard is green on it. P13's list is 156 rules: 1 script, 88 reader, 67 note. That is 169 rows with the scene tests, against today's 445 from the whole craft files. By screen: 64 to 103 rules (the hall 103, the bathroom and knot screens 99, the kitchen and start-choice screens 64).
+  - **Proposed, not done:** `Does:` replaces the card's `Areas:` and `Craft:` lines; plan.md runs `--rules … plan`.

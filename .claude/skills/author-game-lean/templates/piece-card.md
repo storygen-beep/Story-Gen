@@ -8,6 +8,8 @@ What the player sees:
 Variants: <n>. A, <name>: <what differs, when it shows>. B, <...>
 Sheet:
   <canvas>.<node> | <clock in>–<clock out> | <place> | <who is there, npc ids, or nobody> | <garment ids she wears, or any> | <flags set before it; by path: …>
+Does:
+  <canvas>.<node> | <what the screen does, from SKILL.md's Rule labels, comma-separated; never "always">
 Changes: <flags set, traits moved, items, doors opened — by name>
 Media: <n> spots. <spot>: <what it shows>, <tier>, <view>
 Earlier releases: <what changes in shipped content, or "none">
