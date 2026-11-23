@@ -14,11 +14,15 @@ The record, games/<slug>/reader/<id>.json:
      "verdicts": [{"row", "screen", "verdict", "line", "why", "cause", "screen_hash", "row_hash", "carried"}],
      "causes": [{"id", "what", "rows": [[row, screen], ...]}]}
 A screen is "<canvas>.<node>" for every canvas the card's Builds: line names, or "*" for a verdict on the whole
-scene. Verdicts are PASS, FAIL, N/A or WAIVED (a FAIL LO waived in NOTES.md, in his words).
+scene. Verdicts are PASS, FAIL, N/A or WAIVED (a FAIL LO waived in NOTES.md, in his words). A FAIL always names the
+screen of the line judged; --record refuses a "*" FAIL.
 
 What goes on the work list:
-  - every row on a screen that is new or whose hash changed;
-  - every verdict on "*" when any screen changed;
+  - every row that fires on a screen that is new or whose hash changed, asked for that screen only (on a card
+    with Does:, a row fires on a screen when it is `always` or a trigger on the screen's Does: line);
+  - a "*" verdict is NOT asked again when one screen changes: a "*" PASS means "passes on every screen it fires
+    on", so it carries for the screens that didn't change. Only SCENE_WIDE tests (B1, B2, B9) are asked again on
+    "*" when any screen changes, and so is every "*" verdict on a card without Does:;
   - every FAIL from the last pass;
   - every row whose text changed in its craft file;
   - every row never judged (on "*": the reader judges it wherever it applies).
@@ -47,6 +51,10 @@ import sheet  # noqa: E402
 import rules  # noqa: E402
 
 VERDICTS = ("PASS", "FAIL", "N/A", "WAIVED")
+# Scene tests that judge the scene as a whole and can't be placed on one screen: B1 (an earlier canvas showed him
+# wanting it), B2 (this scene goes one step further than the last one with him), B9 (companion and rival, from
+# PLAN.md). A "*" verdict on one of these is asked again on "*" whenever any screen of the scene changes.
+SCENE_WIDE = ("B1", "B2", "B9")
 KEEP = ("PASS", "N/A", "WAIVED")
 WHOLE = "*"
 
@@ -118,7 +126,7 @@ def row_screens(game_dir, card_id, skill=SKILL):
     if does is None:
         return None
     out = {rid: set(on) for rid, on in rules.rule_list(does, skill).items()}
-    out.update({t: set(does) for t in scene_tests(skill)})
+    out.update({t: (set() if t in SCENE_WIDE else set(does)) for t in scene_tests(skill)})  # scene-wide: "*" only
     return out
 
 
@@ -188,6 +196,7 @@ def work_list(game_dir, card_id, everything=False, skill=SKILL, game=None):
         items = [{"row": r, "screen": WHOLE, "why": why} for r in sorted(rows)]
         return {"items": items, "carried": [], "screens": sc, "rows": rows}
     old_sc, old_rows = rec.get("screens", {}), rec.get("rows", {})
+    where = row_screens(game_dir, card_id, skill)
     changed = {s for s in sc if s != WHOLE and old_sc.get(s) != sc[s]}
     gone = {s for s in old_sc if s not in sc}
     wanted = {}
@@ -195,7 +204,6 @@ def work_list(game_dir, card_id, everything=False, skill=SKILL, game=None):
     def want(row, screen, why):
         wanted.setdefault((row, screen), why)
 
-    where = row_screens(game_dir, card_id, skill)
     for s in sorted(changed):
         for r in sorted(rows):
             if where is None or s in where.get(r, ()):
@@ -208,11 +216,13 @@ def work_list(game_dir, card_id, everything=False, skill=SKILL, game=None):
             continue
         if v["verdict"] == "FAIL":
             want(r, s, "failed last pass")
-        elif s == WHOLE and changed:
-            want(r, s, "a screen of the scene changed")
         elif r in rows and old_rows.get(r) != rows[r]:
             want(r, s, "its rule's text changed")
+        elif s == WHOLE and changed and (r in SCENE_WIDE or where is None):
+            want(r, s, "a screen of the scene changed")
         elif (r, s) not in wanted:
+            # A "*" PASS holds on every screen the row fires on. A changed screen it fires on is already asked
+            # above, for that screen only; the "*" verdict carries for the rest.
             carried.append(dict(v, carried=True))
     for r in sorted(set(rows) - judged):
         want(r, WHOLE, "never judged")
@@ -237,6 +247,8 @@ def record(game_dir, card_id, reader_out, skill=SKILL, game=None):
             raise ValueError(f"{key[0]} on {key[1]} was not on the work list")
         if v["verdict"] == "FAIL" and not v.get("cause"):
             raise ValueError(f"{key[0]} on {key[1]}: a FAIL names its cause")
+        if v["verdict"] == "FAIL" and key[1] == WHOLE:
+            raise ValueError(f"{key[0]}: a FAIL names the screen of the line judged, never \"*\"")
         new.append({"row": key[0], "screen": key[1], "verdict": v["verdict"], "line": v.get("line", ""),
                     "why": v.get("why", ""), "cause": v.get("cause"),
                     "screen_hash": work["screens"].get(key[1]), "row_hash": work["rows"].get(key[0]),
@@ -247,9 +259,11 @@ def record(game_dir, card_id, reader_out, skill=SKILL, game=None):
     missing = sorted(asked - answered)
     if missing:
         raise ValueError(f"{len(missing)} work-list item(s) have no verdict, first: {missing[0]}")
-    redone = {(v["row"], v["screen"]) for v in new} | {(v["row"], WHOLE) for v in new}
-    kept = [v for v in work["carried"] if (v["row"], v["screen"]) not in redone and v["row"] not in
-            {r for r, s in asked if s == WHOLE}]
+    # A carried verdict is replaced only by a new verdict on the same screen, or when its row was asked on "*"
+    # again (then the new verdicts are the whole answer). A "*" PASS survives a new verdict on one screen.
+    redone = {(v["row"], v["screen"]) for v in new}
+    whole_again = {r for r, s in asked if s == WHOLE}
+    kept = [v for v in work["carried"] if (v["row"], v["screen"]) not in redone and v["row"] not in whole_again]
     causes = reader_out.get("causes", [])
     known = {c.get("id") for c in causes}
     for v in new:

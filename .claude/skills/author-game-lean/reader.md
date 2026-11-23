@@ -48,7 +48,7 @@ Two files in your scratchpad, both returned:
                   "why": "<one line>", "cause": "c1"}],
     "causes": [{"id": "c1", "what": "<the one thing that is wrong, in one line>"}]}
    ```
-   An item asked on `*` may be answered on one or more screens. Verdicts are PASS, FAIL, N/A, or WAIVED for a FAIL LO waived in NOTES.md (quote his words in `why`). Every FAIL names a cause; one cause covers every row it breaks, so three rows broken by one line are one cause, not three.
+   An item asked on `*` may be answered on one or more screens. Verdicts are PASS, FAIL, N/A, or WAIVED for a FAIL LO waived in NOTES.md (quote his words in `why`). A FAIL always names the screen of the line judged, never `*` (`--record` refuses a `*` FAIL). A PASS on `*` means it passes on every screen the row fires on; when one screen changes, the row is asked again for that screen only, and its `*` PASS carries for the rest. Only B1, B2 and B9, which judge the scene as a whole, are asked again on `*` after any change. Every FAIL names a cause; one cause covers every row it breaks, so three rows broken by one line are one cause, not three.
 2. `reader_<slug>_<id>.md`: the same verdicts as a table, `row | screen | verdict | the line judged | why`, then the FAILs grouped by cause, one head line per cause and its rows under it.
 
 A FAIL you can't quote a line for is N/A, and you say why. No fixes, no severity, no score.

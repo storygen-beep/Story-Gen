@@ -491,3 +491,16 @@ Why for all of these: P13's reader found new FAILs on every pass, v5 to v11 (99 
   - **Part D:**
     - **`build.md` is written in full** (60 lines): build; the scripts, the sheet and the `Does:` guard, all blocking; the reader on `reading.py`'s work list, where reader rows, scene tests and the truth rule block and notes are shown on their own; record the pass; close the piece; LO plays. There is no pass limit. Commits: LO decides when, and a session commits only on his word.
     - **`SKILL.md`'s loop** steps 2, 6 and 7 match it. Always rule 7 now reads "LO decides commits", which is what is true today. Its "check" row names `scenes.py`, `sheet.py` and `rules.py`, and a new row names `reading.py`.
+- `scripts/reading.py` fix, from a real failure (ENI for LO, standing authorization, 2026-11-24).
+  - **The failure:** the live P13 trial. Pass A's work list was 161 items, all on `*`, and the reader answered 136 of them on `*`. One line then changed on `opening.room_spoke`. Pass B's work list was 229 items with 31 carried, because every `*` verdict was re-asked as "a screen of the scene changed". After a first pass, the carry never engaged.
+  - **The fix:**
+    - A `*` PASS now means "passes on every screen the row fires on". When a screen changes, only the rows that fire on it (an `always` row, or a trigger on its `Does:` line) are asked again, for that screen, and the `*` verdict carries for the rest. `record()` keeps a carried `*` verdict beside a new verdict on one screen.
+    - Three scene tests judge the scene as a whole and are asked on `*` only, again after any change: B1 (wanting shown earlier), B2 (one step further) and B9 (companion and rival). They are `SCENE_WIDE` in `reading.py`.
+    - `--record` refuses a `*` FAIL; a FAIL names the screen of its line.
+    - A card without `Does:` keeps the old re-ask.
+    - The first pass is still asked on `*`, not as rule-and-screen pairs.
+  - **Verified:**
+    - On the live record, read-only: 93 items (90 on room_spoke plus B1, B2 and B9), 164 carried, against 229.
+    - On a copy of `reader/P13.json` in the scratchpad: the same 93. After a simulated pass on those 93, the work list is empty.
+    - Tests: `test_rules.py` has four new ones on the tiny game: a `*` PASS is asked again only on the changed screen and carries for the other; only the scene-wide tests go back on `*`; a `*` PASS survives a new verdict on one screen; a `*` FAIL is refused.
+    - `reader.md` and `reading.py`'s docstring say so.

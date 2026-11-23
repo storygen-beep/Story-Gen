@@ -116,3 +116,46 @@ def test_a_changed_screen_asks_only_the_rows_its_triggers_fire(game):
     b_only = {r for r, on in rules.rule_list(rules.card_does(DOES)).items() if on == ["start.b"]}
     a_only = {r for r, on in rules.rule_list(rules.card_does(DOES)).items() if on == ["start.a"]}
     assert asked and b_only <= asked and not (a_only & asked) and asked <= on_b | set(reading.scene_tests())
+
+
+# ── "*" verdicts after one screen changes (P13 live trial, 2026-11-24: one changed line re-asked 229 of 260) ──
+
+def scene_wide_pass(game):
+    card(game)
+    work = reading.work_list(game, "p1")
+    reading.record(game, "p1", {"verdicts": [dict(row=i["row"], screen="*", verdict="PASS") for i in work["items"]]})
+    p = game / "toml_phases" / "7_final_game.toml"
+    p.write_text(p.read_text().replace("You pull your jeans on.", "You pull your jeans on, fast."))
+    return reading.work_list(game, "p1")
+
+
+def test_a_star_pass_is_asked_again_only_on_the_changed_screen(game):
+    work = scene_wide_pass(game)
+    lst = rules.rule_list(rules.card_does(DOES))
+    on_b = {r for r, on in lst.items() if "start.b" in on} | set(reading.scene_tests())
+    rows_b = {i["row"] for i in work["items"] if i["screen"] == "start.b"}
+    assert rows_b == on_b - set(reading.SCENE_WIDE)
+    assert not any(i["screen"] == "start.a" for i in work["items"])
+    a_only = {r for r, on in lst.items() if on == ["start.a"]}
+    assert a_only and a_only <= {v["row"] for v in work["carried"]}  # carried, not asked
+
+
+def test_only_the_scene_wide_tests_go_back_on_star(game):
+    work = scene_wide_pass(game)
+    assert {i["row"] for i in work["items"] if i["screen"] == "*"} == set(reading.SCENE_WIDE)
+
+
+def test_a_star_pass_survives_a_new_verdict_on_one_screen(game):
+    work = scene_wide_pass(game)
+    rec = reading.record(game, "p1", {"verdicts": [dict(row=i["row"], screen=i["screen"], verdict="PASS")
+                                                   for i in work["items"]]})
+    stars = {v["row"] for v in rec["verdicts"] if v["screen"] == "*"}
+    assert "C460" in stars and reading.work_list(game, "p1")["items"] == []
+
+
+def test_a_star_fail_is_refused(game):
+    card(game)
+    item = reading.work_list(game, "p1")["items"][0]
+    with pytest.raises(ValueError, match="never"):
+        reading.record(game, "p1", {"verdicts": [dict(item, verdict="FAIL", cause="c1")],
+                                    "causes": [{"id": "c1", "what": "x"}]})
