@@ -148,13 +148,13 @@ def test_build_packages_when_everything_is_approved(game, capsys, monkeypatch):
     assert build.main([str(game), "--release"]) == 2 and called[-1][1] is True
 
 
-def test_dev_build_never_writes_the_public_output_folder(game, monkeypatch):
+def test_every_build_writes_the_output_folder(game, monkeypatch):
     cmds = []
     monkeypatch.setattr(build.subprocess, "run", lambda cmd, cwd=None: cmds.append(cmd) or type("P", (), {"returncode": 0}))
     build.package(game)
     build.package(game, release=True)
     dev, rel = cmds
-    assert dev[dev.index("--output") + 1].endswith("output_dev") and "--dev" in dev
+    assert dev[dev.index("--output") + 1].endswith("/output") and "--dev" in dev
     assert rel[rel.index("--output") + 1].endswith("/output") and "--dev" not in rel
 
 
