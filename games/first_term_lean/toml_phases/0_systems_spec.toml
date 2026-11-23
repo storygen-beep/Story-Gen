@@ -142,3 +142,8 @@ goals = [
   { flag = "rent_paid_once", op = "is_true", label = "Pay Mark on Sunday" },
 ]
 
+# P42 — the day turn clears the once-a-day talk flags (v2.py:1269-1277, v2.py:7158).
+[engine.daily_tick]
+flagEffects = [
+  { targetType = "player", flag = "talked_mom_today", op = "unset" },
+]

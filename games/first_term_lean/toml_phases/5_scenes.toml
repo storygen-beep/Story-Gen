@@ -90,10 +90,12 @@ blocks = [
   { type = "dialog", content = "Good. Make it count.", props = { speaker = "npc", npcId = "npc_laura" } },
   { type = "paragraph", content = "She squeezes your arm." },
   { type = "dialog", content = "Grades don't pay rent.", props = { speaker = "npc", npcId = "npc_mark" } },
-  { type = "paragraph", content = "Upstairs, you get the bathroom first. The bolt hasn't held in years, and the water takes forever to run hot. You give yourself five minutes." },
-  { type = "paragraph", content = "Then a fist on the door." },
+  { type = "paragraph", content = "Upstairs, you get the bathroom first. The bolt hasn't held in years, and the water takes forever to run hot." },
+  { type = "paragraph", content = "You strip and step in before it's warm. It hits your nipples cold, and they go hard. Then the heat comes. You stand under it with your eyes shut and let it run down your neck, over your tits, down your stomach and between your thighs. Your shoulders drop for the first time all morning." },
+  { type = "image", props = { description = "A woman of 18 in a small family bathroom shower, water running down her bare body, eyes shut, head tipped back. No one else in frame.", search_queries = ["woman 18 shower water running down body gif", "girl in a small bathroom shower eyes closed gif"], pool_dir = "body/opening_shower_t4", pool = 1 } },
+  { type = "paragraph", content = "Then a fist bangs on the door." },
   { type = "dialog", content = "@player.nickname. Some of us need that too.", props = { speaker = "npc", npcId = "npc_ryan" } },
-  { type = "paragraph", content = "You grab the towel off the rail. It's the small one." },
+  { type = "paragraph", content = "Your heart jumps. You grab the towel off the rail. It's the small one." },
 ]
 
 [canvases.nodes.exit_block]
@@ -113,10 +115,12 @@ blocks = [
   { type = "paragraph", content = "Mom laughs, and it comes out nervous." },
   { type = "dialog", content = "Just don't tell me about it.", props = { speaker = "npc", npcId = "npc_laura" } },
   { type = "paragraph", content = "Mark doesn't laugh." },
-  { type = "paragraph", content = "Upstairs, you get the bathroom first. The bolt hasn't held in years, and the water takes forever to run hot. You give yourself five minutes." },
-  { type = "paragraph", content = "Then a fist on the door." },
+  { type = "paragraph", content = "Upstairs, you get the bathroom first. The bolt hasn't held in years, and the water takes forever to run hot." },
+  { type = "paragraph", content = "You strip and step in before it's warm. It hits your nipples cold, and they go hard. Then the heat comes. You stand under it with your eyes shut and let it run down your neck, over your tits, down your stomach and between your thighs. Your shoulders drop for the first time all morning." },
+  { type = "image", props = { description = "A woman of 18 in a small family bathroom shower, water running down her bare body, eyes shut, head tipped back. No one else in frame.", search_queries = ["woman 18 shower water running down body gif", "girl in a small bathroom shower eyes closed gif"], pool_dir = "body/opening_shower_t4", pool = 1 } },
+  { type = "paragraph", content = "Then a fist bangs on the door." },
   { type = "dialog", content = "@player.nickname. Some of us need that too.", props = { speaker = "npc", npcId = "npc_ryan" } },
-  { type = "paragraph", content = "You grab the towel off the rail. It's the small one." },
+  { type = "paragraph", content = "Your heart jumps. You grab the towel off the rail. It's the small one." },
 ]
 
 [canvases.nodes.exit_block]
@@ -136,10 +140,12 @@ blocks = [
   { type = "paragraph", content = "Mom's smile goes stiff." },
   { type = "dialog", content = "This is your home, baby.", props = { speaker = "npc", npcId = "npc_laura" } },
   { type = "dialog", content = "Then pay for it.", props = { speaker = "npc", npcId = "npc_mark" } },
-  { type = "paragraph", content = "Upstairs, you get the bathroom first. The bolt hasn't held in years, and the water takes forever to run hot. You give yourself five minutes." },
-  { type = "paragraph", content = "Then a fist on the door." },
+  { type = "paragraph", content = "Upstairs, you get the bathroom first. The bolt hasn't held in years, and the water takes forever to run hot." },
+  { type = "paragraph", content = "You strip and step in before it's warm. It hits your nipples cold, and they go hard. Then the heat comes. You stand under it with your eyes shut and let it run down your neck, over your tits, down your stomach and between your thighs. Your shoulders drop for the first time all morning." },
+  { type = "image", props = { description = "A woman of 18 in a small family bathroom shower, water running down her bare body, eyes shut, head tipped back. No one else in frame.", search_queries = ["woman 18 shower water running down body gif", "girl in a small bathroom shower eyes closed gif"], pool_dir = "body/opening_shower_t4", pool = 1 } },
+  { type = "paragraph", content = "Then a fist bangs on the door." },
   { type = "dialog", content = "@player.nickname. Some of us need that too.", props = { speaker = "npc", npcId = "npc_ryan" } },
-  { type = "paragraph", content = "You grab the towel off the rail. It's the small one." },
+  { type = "paragraph", content = "Your heart jumps. You grab the towel off the rail. It's the small one." },
 ]
 
 [canvases.nodes.exit_block]
@@ -320,34 +326,71 @@ targetType = "location"
 locationId = "home_kitchen"
 time_progression_minutes = 0
 
-# ── P13 · Talk to Mom: in the Kitchen while her rows put her there (requires_npc obeys the rows on
-# the manual lane, template_import.py:882-911), once a day. P34 grows it. ──
+# ── P42 · Mom: her face and her menu. `npc` on the trigger makes each canvas her card on the room
+# screen, not a room button (template_import.py:2581, v2.py:15080-15082, v2.py:5925-5948). One canvas
+# per room her rows put her in awake. Talk is once a day by talked_mom_today, which the day turn
+# clears ([engine.daily_tick], v2.py:7158); the menu itself never locks. ──
 
 [[canvases]]
 id = "talk_mom"
-name = "Talk to Mom (5 min)"
+name = "Mom"
 
 [canvases.trigger]
 location = "home_kitchen"
 trigger_mode = "manual"
 is_repeatable = true
-max_triggers_per_day = 1
+npc = "npc_laura"
 requires_npc = "npc_laura"
 
-# Her line asks about Mark, so it shows only while his rows keep him out of the Kitchen (v2.py:5384-5401).
 [canvases.trigger.conditions]
 version = "1.0"
 logic = "AND"
-items = [{ type = "npc_at_location", npc_id = "npc_mark", location_id = "home_kitchen", operator = "is_absent" }]
+items = [{ type = "flag", subject = "player", flag_key = "met_laura", operator = "is_true" }]
+
+[[canvases.nodes]]
+id = "hub"
+name = "Mom"
+blocks = [
+  { type = "group", props = { conditions = { version = "1.0", logic = "AND", items = [{ type = "npc_at_location", npc_id = "npc_mark", location_id = "home_kitchen", operator = "is_absent" }] } }, blocks = [
+    { type = "paragraph", content = "Mom's in the kitchen. She looks up when you come in, and her face goes soft." },
+  ] },
+  { type = "group", props = { conditions = { version = "1.0", logic = "AND", items = [{ type = "npc_at_location", npc_id = "npc_mark", location_id = "home_kitchen", operator = "is_present" }] } }, blocks = [
+    { type = "paragraph", content = "Mom's in the kitchen. Mark's at the table. She looks up at you, then at him." },
+  ] },
+  { type = "image", props = { description = "A woman of 41 in a cardigan over a blouse, at a kitchen counter with a mug, looking up.", search_queries = ["woman 41 cardigan kitchen counter mug", "mother in a cardigan in a small kitchen"], pool_dir = "everyday/mom_kitchen_t0", pool = 1 } },
+]
+
+[canvases.nodes.exit_block]
+type = "choices"
+
+[[canvases.nodes.exit_block.choices]]
+text = "Talk (5 min)"
+targetType = "node"
+nodeId = "talk"
+show_when_locked = true
+locked_text = "You've already talked today."
+conditions = { version = "1.0", logic = "AND", items = [{ type = "flag", subject = "player", flag_key = "talked_mom_today", operator = "is_false" }] }
+flagEffects = [{ flag = "talked_mom_today", op = "set" }]
+time_progression_minutes = 5
+
+[[canvases.nodes.exit_block.choices]]
+text = "Leave"
+targetType = "location"
+locationId = "home_kitchen"
+time_progression_minutes = 0
 
 [[canvases.nodes]]
 id = "talk"
 name = "Talk to Mom"
 blocks = [
-  { type = "image", props = { description = "A woman of 41 in a cardigan over a blouse, at a kitchen counter with a mug, watching, seen from across the kitchen.", search_queries = ["woman 40s kitchen counter holding mug watching", "mother at kitchen counter coffee mug worried"], pool_dir = "everyday/talk_mom_t0", pool = 1 } },
-  { type = "dialog", content = "Did Mark say anything else? About the rent?", props = { speaker = "npc", npcId = "npc_laura" } },
-  { type = "paragraph", content = "She watches your face while you shake your head." },
-  { type = "paragraph", content = "*What does she think he's going to say to me?*" },
+  { type = "group", props = { conditions = { version = "1.0", logic = "AND", items = [{ type = "npc_at_location", npc_id = "npc_mark", location_id = "home_kitchen", operator = "is_absent" }] } }, blocks = [
+    { type = "dialog", content = "Did Mark say anything else? About the rent?", props = { speaker = "npc", npcId = "npc_laura" } },
+    { type = "paragraph", content = "She watches your face while you shake your head. Your stomach tightens. She's waiting for something, and she won't say what." },
+  ] },
+  { type = "group", props = { conditions = { version = "1.0", logic = "AND", items = [{ type = "npc_at_location", npc_id = "npc_mark", location_id = "home_kitchen", operator = "is_present" }] } }, blocks = [
+    { type = "dialog", content = "Did you eat, baby?", props = { speaker = "npc", npcId = "npc_laura" } },
+    { type = "paragraph", content = "She doesn't look at Mark while she asks. Mark turns a page and doesn't look at either of you." },
+  ] },
 ]
 
 [canvases.nodes.exit_block]
@@ -355,9 +398,82 @@ type = "choices"
 
 [[canvases.nodes.exit_block.choices]]
 text = "Done"
-targetType = "location"
-locationId = "home_kitchen"
+targetType = "node"
+nodeId = "hub"
+time_progression_minutes = 0
+
+[[canvases]]
+id = "mom_living_room"
+name = "Mom"
+
+[canvases.trigger]
+location = "home_living_room"
+trigger_mode = "manual"
+is_repeatable = true
+npc = "npc_laura"
+requires_npc = "npc_laura"
+
+[canvases.trigger.conditions]
+version = "1.0"
+logic = "AND"
+items = [{ type = "flag", subject = "player", flag_key = "met_laura", operator = "is_true" }]
+
+[[canvases.nodes]]
+id = "hub"
+name = "Mom"
+blocks = [
+  { type = "group", props = { conditions = { version = "1.0", logic = "AND", items = [{ type = "npc_at_location", npc_id = "npc_mark", location_id = "home_living_room", operator = "is_absent" }] } }, blocks = [
+    { type = "paragraph", content = "Mom's on the couch with her feet under her, the TV on low. She moves over to make room." },
+  ] },
+  { type = "group", props = { conditions = { version = "1.0", logic = "AND", items = [{ type = "npc_at_location", npc_id = "npc_mark", location_id = "home_living_room", operator = "is_present" }] } }, blocks = [
+    { type = "paragraph", content = "Mom's on the couch. Mark's in his chair, the remote on his knee. She smiles at you and doesn't move over." },
+  ] },
+  { type = "image", props = { description = "A woman of 41 in a cardigan on a living room couch, her feet under her, TV light on her face.", search_queries = ["woman 41 cardigan on couch watching TV", "mother on a sofa at night with the TV on"], pool_dir = "everyday/mom_living_t0", pool = 1 } },
+]
+
+[canvases.nodes.exit_block]
+type = "choices"
+
+[[canvases.nodes.exit_block.choices]]
+text = "Talk (5 min)"
+targetType = "node"
+nodeId = "talk"
+show_when_locked = true
+locked_text = "You've already talked today."
+conditions = { version = "1.0", logic = "AND", items = [{ type = "flag", subject = "player", flag_key = "talked_mom_today", operator = "is_false" }] }
+flagEffects = [{ flag = "talked_mom_today", op = "set" }]
 time_progression_minutes = 5
+
+[[canvases.nodes.exit_block.choices]]
+text = "Leave"
+targetType = "location"
+locationId = "home_living_room"
+time_progression_minutes = 0
+
+[[canvases.nodes]]
+id = "talk"
+name = "Talk to Mom"
+blocks = [
+  { type = "group", props = { conditions = { version = "1.0", logic = "AND", items = [{ type = "npc_at_location", npc_id = "npc_mark", location_id = "home_living_room", operator = "is_absent" }] } }, blocks = [
+    { type = "dialog", content = "Sit with me a minute, baby.", props = { speaker = "npc", npcId = "npc_laura" } },
+    { type = "paragraph", content = "She pats the couch." },
+    { type = "dialog", content = "Tell me one good thing. Just one.", props = { speaker = "npc", npcId = "npc_laura" } },
+    { type = "paragraph", content = "You sit. She listens to all of it, and her shoulders come down for the first time all day." },
+  ] },
+  { type = "group", props = { conditions = { version = "1.0", logic = "AND", items = [{ type = "npc_at_location", npc_id = "npc_mark", location_id = "home_living_room", operator = "is_present" }] } }, blocks = [
+    { type = "dialog", content = "Did you eat, baby?", props = { speaker = "npc", npcId = "npc_laura" } },
+    { type = "paragraph", content = "She doesn't look at Mark while she asks. Mark turns the TV up and doesn't look at either of you." },
+  ] },
+]
+
+[canvases.nodes.exit_block]
+type = "choices"
+
+[[canvases.nodes.exit_block.choices]]
+text = "Done"
+targetType = "node"
+nodeId = "hub"
+time_progression_minutes = 0
 
 # ── P04 · travel: four one-screen canvases. A canvas's costs are checked and taken on entry, and an
 # unaffordable one shows dimmed with its cost (v2.py:6700-6732); the choice spends the minutes. ──

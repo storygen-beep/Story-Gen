@@ -221,7 +221,7 @@ Energy is the one body need. Sources: sleep (to 100), a meal (+15), a shower (+5
 | place | alone | with a person |
 |---|---|---|
 | Your Bedroom | Sleep (built) | none |
-| Bathroom | Shower (built) | the shared bathroom; walk-ins later (release 2) |
+| Bathroom | Shower (built) | the shared bathroom; walk-ins in release 1 (P38, §10a) |
 | Living Room | Watch TV (+5) | (home life) |
 | Park | Go for a run (45 min, 15 energy): the run on screen, and who looks | none in release 1 |
 | Gym | Work out (1 hour, 20 energy, $5 day pass) | Marco, at his meeting |

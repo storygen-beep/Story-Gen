@@ -13,6 +13,8 @@ flag_keys = [
   # P13 — the opening
   "start_grades", "start_fun", "start_freedom",
   "met_laura", "met_mark",
+  # P42 — Mom's Talk, once a day; the day turn clears it
+  "talked_mom_today",
   "met_ryan", "ryan_hall_seen", "ryan_hall_past", "ryan_hall_spoke", "ryan_hall_waited", "goal1_shown",
   # Goal 1's card reads these; P21 sets cafe_hired, P11 sets rent_paid_once.
   "cafe_hired", "rent_paid_once",
