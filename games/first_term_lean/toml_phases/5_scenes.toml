@@ -59,7 +59,9 @@ id = "kitchen_ask"
 name = "Screen 3: the kitchen, Mom asks"
 blocks = [
   { type = "paragraph", content = "Mom turns round with the spatula, too bright." },
-  { type = "dialog", content = "Anyway! First day, baby. So what do you want out of it? Tell me.", props = { speaker = "npc", npcId = "npc_laura" } },
+  { type = "dialog", content = "Anyway! First day, baby.", props = { speaker = "npc", npcId = "npc_laura" } },
+  { type = "paragraph", content = "She points the spatula at you." },
+  { type = "dialog", content = "Just... promise me you'll still be the girl you were in high school.", props = { speaker = "npc", npcId = "npc_laura" } },
   { type = "paragraph", content = "Mark turns a page. He's listening." },
 ]
 
@@ -67,21 +69,21 @@ blocks = [
 type = "choices"
 
 [[canvases.nodes.exit_block.choices]]
-text = "Good grades. I'll make you proud. (3 min)"
+text = "I was the good girl, Mom. Straight A's. Same girl. (3 min)"
 targetType = "node"
 nodeId = "bath_grades"
 time_progression_minutes = 3
 flagEffects = [{ flag = "start_grades", op = "set" }]
 
 [[canvases.nodes.exit_block.choices]]
-text = "Fun. I've waited eighteen years. (3 min)"
+text = "The girl at all those parties? I can't promise she's gone. (3 min)"
 targetType = "node"
 nodeId = "bath_fun"
 time_progression_minutes = 3
 flagEffects = [{ flag = "start_fun", op = "set" }]
 
 [[canvases.nodes.exit_block.choices]]
-text = "Freedom. Anywhere that isn't here. (3 min)"
+text = "The girl who spent four years planning how to get out of here? She's still here. (3 min)"
 targetType = "node"
 nodeId = "bath_freedom"
 time_progression_minutes = 3
@@ -91,9 +93,9 @@ flagEffects = [{ flag = "start_freedom", op = "set" }]
 id = "bath_grades"
 name = "Screen 4a: the reaction (grades)"
 blocks = [
-  { type = "dialog", content = "Good. Make it count.", props = { speaker = "npc", npcId = "npc_laura" } },
+  { type = "dialog", content = "Good. Then make it count.", props = { speaker = "npc", npcId = "npc_laura" } },
   { type = "paragraph", content = "She squeezes your arm." },
-  { type = "dialog", content = "Grades don't pay rent.", props = { speaker = "npc", npcId = "npc_mark" } },
+  { type = "dialog", content = "Straight A's don't pay rent.", props = { speaker = "npc", npcId = "npc_mark" } },
 ]
 
 [canvases.nodes.exit_block]
@@ -110,8 +112,9 @@ id = "bath_fun"
 name = "Screen 4a: the reaction (fun)"
 blocks = [
   { type = "paragraph", content = "Mom laughs, and it comes out nervous." },
-  { type = "dialog", content = "Just don't tell me about it.", props = { speaker = "npc", npcId = "npc_laura" } },
+  { type = "dialog", content = "That's exactly what I'm afraid of.", props = { speaker = "npc", npcId = "npc_laura" } },
   { type = "paragraph", content = "Mark doesn't laugh." },
+  { type = "dialog", content = "Parties cost money, kid.", props = { speaker = "npc", npcId = "npc_mark" } },
 ]
 
 [canvases.nodes.exit_block]
@@ -213,7 +216,7 @@ blocks = [
   { type = "paragraph", content = "Ryan flattens himself against the wall so nothing touches. Halfway past him, the knot gives. The towel drops off your tits, and for one second you're bare in the hall before you catch it against you." },
   { type = "image", props = { description = "A woman of 18 in a narrow upstairs hall, a small white towel dropping off her bare chest as she catches it, wet hair. No man in frame.", search_queries = ["woman 18 towel drops off chest hallway gif", "girl catching falling towel wet hair gif"], pool_dir = "body/hall_knot_past_t4", pool = 1 } },
   { type = "paragraph", content = "Ryan's eyes are on the ceiling, and they stay there." },
-  { type = "dialog", content = "Sorry.", props = { speaker = "npc", npcId = "npc_ryan" } },
+  { type = "dialog", content = "Sorry. I didn't— Sorry.", props = { speaker = "npc", npcId = "npc_ryan" } },
   { type = "paragraph", content = "He says it to the ceiling." },
   { type = "paragraph", content = "You run for your room. The bathroom bolt hasn't held in years, and everyone in this house knows it." },
 ]
@@ -232,8 +235,9 @@ id = "room_spoke"
 name = "Screen 6: the hall, the knot (spoke)"
 blocks = [
   { type = "dialog", content = "Thanks. Go get dressed.", props = { speaker = "npc", npcId = "npc_ryan" } },
-  { type = "paragraph", content = "He goes in sideways, eyes on the sink. The door bangs shut, and the knot gives. The towel slides to your waist, and you stand bare in the hall, your nipples tight in the cold, before you yank it up." },
+  { type = "paragraph", content = "He turns to face the bathroom door and waits for you to move. The knot gives. The towel slides to your waist, and you stand bare in the hall, your nipples tight in the cold, before you yank it up." },
   { type = "image", props = { description = "A woman of 18 alone in a narrow upstairs hall, a small white towel slid to her waist, bare from the waist up, wet hair.", search_queries = ["woman 18 towel slips to waist hallway gif", "girl towel falls in hall wet hair gif"], pool_dir = "body/hall_knot_spoke_t4", pool = 1 } },
+  { type = "paragraph", content = "His eyes never leave the door." },
   { type = "paragraph", content = "You run for your room. The bathroom bolt hasn't held in years, and everyone in this house knows it." },
 ]
 
@@ -362,7 +366,7 @@ id = "handover"
 name = "Screen 7: the kitchen, Mom"
 blocks = [
   { type = "paragraph", content = "Mark's gone to work. His mug is still on the table. Mom's alone at the sink, and this time she looks right at you." },
-  { type = "dialog", content = "He means it, baby. I tried.", props = { speaker = "npc", npcId = "npc_laura" } },
+  { type = "dialog", content = "He means it, @player. I tried.", props = { speaker = "npc", npcId = "npc_laura" } },
   { type = "paragraph", content = "She dries the same plate twice." },
   { type = "dialog", content = "There's toast. Eat before you go looking.", props = { speaker = "npc", npcId = "npc_laura" } },
   { type = "paragraph", content = "Your throat goes tight. Tried what?" },
@@ -395,7 +399,7 @@ blocks = [
 [canvases.nodes.exit_block]
 type = "choices"
 
-# Lands about 7:53: Laura's Kitchen row runs to 8:00, so Talk to Mom is on the page (C1631).
+# Lands about 7:50: Laura's Kitchen row runs to 8:00, so Talk to Mom is on the page (C1631).
 [[canvases.nodes.exit_block.choices]]
 text = "Done"
 targetType = "location"
@@ -407,14 +411,14 @@ id = "ask_mom"
 name = "Screen 8b: the kitchen, what she tried"
 blocks = [
   { type = "paragraph", content = "She won't look at you." },
-  { type = "dialog", content = "Doesn't matter. Eat.", props = { speaker = "npc", npcId = "npc_laura" } },
+  { type = "dialog", content = "Doesn't matter, baby. Eat something. You'll be late.", props = { speaker = "npc", npcId = "npc_laura" } },
   { type = "paragraph", content = "She pushes the toast across the counter and turns the tap on hard. She still won't look at you." },
 ]
 
 [canvases.nodes.exit_block]
 type = "choices"
 
-# Lands about 7:43, Laura's Kitchen row runs to 8:00 (C1631).
+# Lands about 7:40, Laura's Kitchen row runs to 8:00 (C1631).
 [[canvases.nodes.exit_block.choices]]
 text = "Done"
 targetType = "location"
@@ -447,7 +451,7 @@ id = "hub"
 name = "Mom"
 blocks = [
   { type = "group", props = { conditions = { version = "1.0", logic = "AND", items = [{ type = "npc_at_location", npc_id = "npc_mark", location_id = "home_kitchen", operator = "is_absent" }] } }, blocks = [
-    { type = "paragraph", content = "Mom's in the kitchen. She looks up when you come in, and her face goes soft." },
+    { type = "paragraph", content = "Mom's in the kitchen. She looks up at you, and her face goes soft." },
   ] },
   { type = "group", props = { conditions = { version = "1.0", logic = "AND", items = [{ type = "npc_at_location", npc_id = "npc_mark", location_id = "home_kitchen", operator = "is_present" }] } }, blocks = [
     { type = "paragraph", content = "Mom's in the kitchen. Mark's at the table. She looks up at you, then at him." },
@@ -489,11 +493,14 @@ name = "Talk to Mom"
 blocks = [
   { type = "group", props = { conditions = { version = "1.0", logic = "AND", items = [{ type = "npc_at_location", npc_id = "npc_mark", location_id = "home_kitchen", operator = "is_absent" }] } }, blocks = [
     { type = "dialog", content = "Did Mark say anything else? About the rent?", props = { speaker = "npc", npcId = "npc_laura" } },
-    { type = "paragraph", content = "She watches your face while you shake your head. Your stomach tightens. She's waiting for something, and she won't say what." },
+    { type = "paragraph", content = "She watches your face while you shake your head." },
+    { type = "dialog", content = "If he does, you come to me first. Not him. Me. Promise?", props = { speaker = "npc", npcId = "npc_laura" } },
+    { type = "paragraph", content = "Your stomach tightens. She's waiting for something, and she won't say what." },
   ] },
   { type = "group", props = { conditions = { version = "1.0", logic = "AND", items = [{ type = "npc_at_location", npc_id = "npc_mark", location_id = "home_kitchen", operator = "is_present" }] } }, blocks = [
-    { type = "dialog", content = "Did you eat, baby?", props = { speaker = "npc", npcId = "npc_laura" } },
+    { type = "dialog", content = "Did you eat, baby? Sit. I'll make you a plate.", props = { speaker = "npc", npcId = "npc_laura" } },
     { type = "paragraph", content = "She doesn't look at Mark while she asks. Mark turns a page and doesn't look at either of you." },
+    { type = "dialog", content = "Take an apple for later. Go on.", props = { speaker = "npc", npcId = "npc_laura" } },
   ] },
 ]
 
@@ -570,23 +577,31 @@ blocks = [
   { type = "group", props = { conditions = { version = "1.0", logic = "AND", items = [{ type = "npc_at_location", npc_id = "npc_mark", location_id = "home_living_room", operator = "is_absent" }, { type = "flag", subject = "player", flag_key = "start_grades", operator = "is_true" }] } }, blocks = [
     { type = "dialog", content = "Sit with me a minute, baby.", props = { speaker = "npc", npcId = "npc_laura" } },
     { type = "paragraph", content = "She pats the couch." },
-    { type = "dialog", content = "How are your classes? Tell me everything.", props = { speaker = "npc", npcId = "npc_laura" } },
+    { type = "dialog", content = "How are your classes? Tell me everything. Your teachers won't know what hit them.", props = { speaker = "npc", npcId = "npc_laura" } },
     { type = "paragraph", content = "You sit. She listens to all of it, and her shoulders come down for the first time all day." },
   ] },
   { type = "group", props = { conditions = { version = "1.0", logic = "AND", items = [{ type = "npc_at_location", npc_id = "npc_mark", location_id = "home_living_room", operator = "is_absent" }, { type = "flag", subject = "player", flag_key = "start_freedom", operator = "is_true" }] } }, blocks = [
     { type = "dialog", content = "Sit with me a minute, baby. Or do you have somewhere better to be?", props = { speaker = "npc", npcId = "npc_laura" } },
     { type = "paragraph", content = "She says it light, but she's watching your face." },
+    { type = "dialog", content = "Stay in tonight. Just tonight. For me.", props = { speaker = "npc", npcId = "npc_laura" } },
     { type = "paragraph", content = "You sit. She talks about nothing, and her hand stays on your knee the whole time." },
   ] },
-  { type = "group", props = { conditions = { version = "1.0", logic = "AND", items = [{ type = "npc_at_location", npc_id = "npc_mark", location_id = "home_living_room", operator = "is_absent" }, { type = "flag", subject = "player", flag_key = "start_grades", operator = "is_false" }, { type = "flag", subject = "player", flag_key = "start_freedom", operator = "is_false" }] } }, blocks = [
+  { type = "group", props = { conditions = { version = "1.0", logic = "AND", items = [{ type = "npc_at_location", npc_id = "npc_mark", location_id = "home_living_room", operator = "is_absent" }, { type = "flag", subject = "player", flag_key = "start_fun", operator = "is_true" }] } }, blocks = [
     { type = "dialog", content = "Sit with me a minute, baby.", props = { speaker = "npc", npcId = "npc_laura" } },
     { type = "paragraph", content = "She pats the couch." },
-    { type = "dialog", content = "Tell me one good thing. Just one.", props = { speaker = "npc", npcId = "npc_laura" } },
+    { type = "dialog", content = "And tell me you're behaving. I was eighteen once, you know. I remember.", props = { speaker = "npc", npcId = "npc_laura" } },
+    { type = "paragraph", content = "You sit. She laughs at your answer, but she's watching your face." },
+  ] },
+  { type = "group", props = { conditions = { version = "1.0", logic = "AND", items = [{ type = "npc_at_location", npc_id = "npc_mark", location_id = "home_living_room", operator = "is_absent" }, { type = "flag", subject = "player", flag_key = "start_grades", operator = "is_false" }, { type = "flag", subject = "player", flag_key = "start_freedom", operator = "is_false" }, { type = "flag", subject = "player", flag_key = "start_fun", operator = "is_false" }] } }, blocks = [
+    { type = "dialog", content = "Sit with me a minute, baby.", props = { speaker = "npc", npcId = "npc_laura" } },
+    { type = "paragraph", content = "She pats the couch." },
+    { type = "dialog", content = "Tell me one good thing. Just one. Even a small one counts.", props = { speaker = "npc", npcId = "npc_laura" } },
     { type = "paragraph", content = "You sit. She listens to all of it, and her shoulders come down for the first time all day." },
   ] },
   { type = "group", props = { conditions = { version = "1.0", logic = "AND", items = [{ type = "npc_at_location", npc_id = "npc_mark", location_id = "home_living_room", operator = "is_present" }] } }, blocks = [
-    { type = "dialog", content = "Did you eat, baby?", props = { speaker = "npc", npcId = "npc_laura" } },
+    { type = "dialog", content = "Did you eat, baby? There's a plate for you in the oven.", props = { speaker = "npc", npcId = "npc_laura" } },
     { type = "paragraph", content = "She doesn't look at Mark while she asks. Mark turns the TV up and doesn't look at either of you." },
+    { type = "dialog", content = "Go on, then. Don't let it get cold.", props = { speaker = "npc", npcId = "npc_laura" } },
   ] },
 ]
 

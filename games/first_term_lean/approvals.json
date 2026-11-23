@@ -216,6 +216,42 @@
       "sha256": "429719ba4dc0a7862963e0c00ad3ee734785bc797385a110a04be12a84a3d572",
       "words": "Yes",
       "date": "2026-11-23"
+    },
+    {
+      "card": "P13",
+      "sha256": "2d708d637674481bd9402619ce6fabab83155f22774e9d068e882f9960bc486d",
+      "words": "Yes",
+      "date": "2026-11-24"
+    },
+    {
+      "card": "P42",
+      "sha256": "ee002b0b923544cec6dca4fad8401bcd5929601265c3c3edd361273d00b66fed",
+      "words": "Yes",
+      "date": "2026-11-24"
+    },
+    {
+      "card": "P13",
+      "sha256": "3069862e987b7d1874a1aca2eb49c90333a6fe7ff9dca87b4dd98e86a0f33d90",
+      "words": "Yes",
+      "date": "2026-11-24"
+    },
+    {
+      "card": "P13",
+      "sha256": "7fcc0ca65d7e1a5112893b4285ea5a9eeda3dc7933909632b7104a93c6121b77",
+      "words": "ENI for LO (delegated 2026-11-24): \"Yes, with eighteen and the any-hour kitchen line\"",
+      "date": "2026-11-24"
+    },
+    {
+      "card": "P42",
+      "sha256": "5749717c0156a2a6f9b20fe1fbd8952d468f450e4e6320fc488cd8f9c339d986",
+      "words": "ENI for LO (delegated 2026-11-24): \"Yes, with eighteen and the any-hour kitchen line\"",
+      "date": "2026-11-24"
+    },
+    {
+      "card": "P13",
+      "sha256": "35f8c6694f0ed849ce7303b66909344a22e02d585fcd93775d77f16b2fd76c07",
+      "words": "ENI for LO (delegated 2026-11-24): \"Yes, he faces the door and waits\"",
+      "date": "2026-11-24"
     }
   ]
 }
