@@ -13,7 +13,7 @@ The card's `Craft:` line cites each one, or says in one line why it skips it. `w
 | C926 | the clock moves only by minutes; nothing sends it to a named hour | — | the clock moves | note |
 | C900 | a beat never says what time it is; a repeatable canvas fires at any minute of its window. Make it a rule on a sign | P13 reader pass 6: the wake screen said "Monday, seven in the morning." | the clock moves | reader |
 | C902 | the test: read the line at the last minute of its window; is it still true? | — | the clock moves | note |
-| C903 | the same for the weekday: a named day on a repeatable canvas is usually wrong | — · kept blocking: LO's choice (2026-11-24) | the clock moves | reader |
+| C903 | a repeatable names a weekday only behind a weekday condition, on its trigger or a group around the line, that makes it true on every visit | — · kept blocking: LO's choice (2026-11-24) | the clock moves | reader |
 | C904 | the field names a clock time about 1.1 times per 10,000 words | — | the plan | note |
 | C892 | the hour goes on the door, not in the act | — | the clock moves | note |
 | C910 | a button that spends time says how much, one form across the game | — | the clock moves | note |
@@ -68,7 +68,7 @@ Each rule is marked **measured** or **LO's choice**.
 4. **A closed place stays visible, dimmed, and says when it opens** (C913, C914). An event that happens to her stays hidden when shut (C916). *LO's choice,* and our engine does it ("Closed. Opens at …").
 5. **People's hours go on their page** (C915). *Measured:* CoT's "Nightlife Schedule"; our engine's Schedules page.
 6. **Durations, never "till X"** (C889, C906, C926). *Measured in the field:* 24 of 84,009 labels name a clock time (C906); the engine only adds minutes.
-7. **No named weekday on a repeatable screen** (C903). *LO's choice;* CoT names a weekday 1.43 times per 10,000 words.
+7. **A repeatable names a weekday only where a weekday condition makes it true** (C903): "Saturdays" inside a Saturday group is fine; "See you Monday" on a screen any day reaches is not. *LO's choice;* CoT names a weekday 1.43 times per 10,000 words.
 8. **The clock repeats** (C890): a weekly bill, a weekly count, not a deadline. *LO's choice, stated.*
 
 ## Worked example

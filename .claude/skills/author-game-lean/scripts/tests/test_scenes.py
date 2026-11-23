@@ -274,3 +274,36 @@ def test_the_sheet_reads_the_weekday_too():
     g = weekday_game()
     row = sheet.compute(g, {"breakfast"})["breakfast.a"]
     assert row["who"] == "npc_mom" and row["clock"] == "07:00–09:00 +0 · Mon Tue Wed Thu Fri Sat"
+
+
+# ── a line inside a group shows only when the group holds (P10's build, 2026-11-24) ──
+
+def weekend_game(line_in_group=True, group_cond=None):
+    g = clean()
+    g["npcs"][0]["schedules"][0]["weekdays"] = [5]  # Mom in the kitchen Saturday mornings only
+    g["canvases"][0]["trigger"]["conditions"]["items"].append({"type": "weekday", "weekdays": [5, 6]})
+    line = say("Saturday. Eggs?")
+    group_cond = group_cond or {"version": "1.0", "items": [{"type": "weekday", "weekdays": [5]}]}
+    blocks = [para("The kitchen's quiet."), group(line, **group_cond) if line_in_group else line]
+    g["canvases"][0]["nodes"] = [node("a", *blocks)]
+    return g
+
+
+def test_a_saturday_group_line_on_a_weekend_scene_is_green_on_sunday():
+    assert scenes.check_presence(weekend_game()) == (GREEN, [])
+
+
+def test_the_same_line_outside_the_group_is_red_on_sunday():
+    status, rows = scenes.check_presence(weekend_game(line_in_group=False))
+    assert status == RED and "Sun" in rows[0]
+
+
+def test_a_group_with_a_time_window_narrows_too():
+    g = clean()
+    g["npcs"][0]["schedules"][0]["end_time"] = "08:00"  # Mom leaves at 8, the scene runs to 9
+    g["canvases"][0]["nodes"][0]["blocks"] = [para("Mom is at the stove."), group(
+        say("Morning. Eggs?"), version="1.0", items=[{"type": "time_of_day", "start_time": "07:00", "end_time": "08:00"}])]
+    g["canvases"][0]["nodes"][1]["blocks"] = [para("She slides the plate over.")]
+    assert scenes.check_presence(g) == (GREEN, [])
+    g["canvases"][0]["nodes"][0]["blocks"][1] = say("Morning. Eggs?")  # out of the group: 08:00-09:00 is red
+    assert scenes.check_presence(g)[0] == RED
