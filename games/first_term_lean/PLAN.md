@@ -471,7 +471,7 @@ week (C159), e.g. Mon–Thu 5–8.
 | Marco Silva | Gym, weekdays 6–10am and 5–9pm, Saturday 8am–2pm | 46 |
 | Nina Kovac | Clothes Shop, Mon–Sat 10am–7pm | 54 |
 | Tom | Café, Mon–Sat 10am–9pm; Sunday off | 66 |
-| Chris Dale | Café, weekdays 7am–3pm, weekends 10am–7pm | 58 |
+| Chris Dale | Café, weekdays 7am–3pm, weekends 10am–8pm (to 8pm: he closes up after the last shift; ENI for LO, delegated 2026-11-24) | 60 |
 
 Vance's porch hours are when she comes home. Sunday shifts are Chris alone. Chris hands the counter
 over to her at 2pm on weekdays.

@@ -1,24 +1,88 @@
 {
  "piece": "P13",
- "pass": 4,
+ "pass": 5,
  "screens": {
-  "opening.wake": "6c71d8498e93d426",
-  "opening.kitchen_rent": "0bae8381ecb42a76",
-  "opening.kitchen_ask": "34c604add195cb91",
-  "opening.bath_grades": "f516801a9b5f39a6",
-  "opening.bath_fun": "89049cc2ee22b17e",
-  "opening.bath_freedom": "27be67ce74770c09",
-  "opening.bath": "22c6afbdda9dd0ba",
-  "opening.hall": "d8d773b7b9f14049",
-  "opening.room_past": "630fec82e8ffca1a",
-  "opening.room_spoke": "286b0d733d65a436",
-  "opening.room_waited": "032357d9e2feb7e2",
-  "opening.room": "999e67fa1c2205c6",
-  "opening.sums": "5a7f9f7e34f7e280",
-  "opening.handover": "7c705ec20d93af5a",
-  "opening.sit_with_mom": "606038a4efcfa402",
-  "opening.ask_mom": "f8efb229048f40a2",
-  "*": "4e2fe2f55f322f1f"
+  "opening.wake": {
+   "text": "e151e2a47117a98b",
+   "facts": "e0c40fd7cb43a940",
+   "all": "6c71d8498e93d426"
+  },
+  "opening.kitchen_rent": {
+   "text": "58683dab2944f811",
+   "facts": "74b6fedff22531d4",
+   "all": "0bae8381ecb42a76"
+  },
+  "opening.kitchen_ask": {
+   "text": "493b3c80469ab308",
+   "facts": "7dd448ed98d06f8c",
+   "all": "34c604add195cb91"
+  },
+  "opening.bath_grades": {
+   "text": "ddc4c8196a699ac4",
+   "facts": "d24845c8cc44c34f",
+   "all": "f516801a9b5f39a6"
+  },
+  "opening.bath_fun": {
+   "text": "a91d550d5f7ef222",
+   "facts": "8efbfd3a047efce0",
+   "all": "89049cc2ee22b17e"
+  },
+  "opening.bath_freedom": {
+   "text": "eba7beacc0939787",
+   "facts": "228bbf3b47ce67a9",
+   "all": "27be67ce74770c09"
+  },
+  "opening.bath": {
+   "text": "65cecb4204fd2e05",
+   "facts": "e1ee538ce6c86a3e",
+   "all": "22c6afbdda9dd0ba"
+  },
+  "opening.hall": {
+   "text": "983cd29f6ea9d4b6",
+   "facts": "37d02972975bc8ed",
+   "all": "d8d773b7b9f14049"
+  },
+  "opening.room_past": {
+   "text": "6dffcc94554269ed",
+   "facts": "f8646ff6d2f4e652",
+   "all": "630fec82e8ffca1a"
+  },
+  "opening.room_spoke": {
+   "text": "645c8c4f9b10b927",
+   "facts": "b68c8b8504981c73",
+   "all": "286b0d733d65a436"
+  },
+  "opening.room_waited": {
+   "text": "2d9cc753aafef247",
+   "facts": "aec99f4041209f8c",
+   "all": "032357d9e2feb7e2"
+  },
+  "opening.room": {
+   "text": "5aa193b86273e353",
+   "facts": "23b2193f30810469",
+   "all": "999e67fa1c2205c6"
+  },
+  "opening.sums": {
+   "text": "5a86ece0192c9eb7",
+   "facts": "1bb55a6bea468407",
+   "all": "5a7f9f7e34f7e280"
+  },
+  "opening.handover": {
+   "text": "4fe187a129483ea0",
+   "facts": "336a86197feb1b71",
+   "all": "7c705ec20d93af5a"
+  },
+  "opening.sit_with_mom": {
+   "text": "edb4bbda96fbbc4a",
+   "facts": "2ea39687654a300e",
+   "all": "606038a4efcfa402"
+  },
+  "opening.ask_mom": {
+   "text": "bd9877d6df12da4c",
+   "facts": "cbbdbf31101f41e2",
+   "all": "f8efb229048f40a2"
+  },
+  "*": "d817bff4bc185950"
  },
  "rows": {
   "B1": "5276068df1ca6fa9",
@@ -53,7 +117,7 @@
   "C926": "177d1e1776fac74b",
   "C900": "6372efb027eb2034",
   "C902": "df5ed7a36dbc74e4",
-  "C903": "5e42a6ca2c00ded3",
+  "C903": "4f83b0b5eb45f71b",
   "C892": "5c890033f6ac38b8",
   "C910": "be1c18ee466455f6",
   "C929": "e20b027bad88ca8c",
@@ -193,7 +257,7 @@
    "cause": null,
    "screen_hash": "f8efb229048f40a2",
    "row_hash": "5276068df1ca6fa9",
-   "carried": false
+   "carried": true
   },
   {
    "row": "B1",
@@ -204,7 +268,7 @@
    "cause": null,
    "screen_hash": "22c6afbdda9dd0ba",
    "row_hash": "5276068df1ca6fa9",
-   "carried": false
+   "carried": true
   },
   {
    "row": "B1",
@@ -215,7 +279,7 @@
    "cause": null,
    "screen_hash": "d8d773b7b9f14049",
    "row_hash": "5276068df1ca6fa9",
-   "carried": false
+   "carried": true
   },
   {
    "row": "B1",
@@ -226,7 +290,7 @@
    "cause": null,
    "screen_hash": "0bae8381ecb42a76",
    "row_hash": "5276068df1ca6fa9",
-   "carried": false
+   "carried": true
   },
   {
    "row": "B1",
@@ -237,7 +301,7 @@
    "cause": null,
    "screen_hash": "630fec82e8ffca1a",
    "row_hash": "5276068df1ca6fa9",
-   "carried": false
+   "carried": true
   },
   {
    "row": "B1",
@@ -248,7 +312,7 @@
    "cause": null,
    "screen_hash": "286b0d733d65a436",
    "row_hash": "5276068df1ca6fa9",
-   "carried": false
+   "carried": true
   },
   {
    "row": "B1",
@@ -259,7 +323,7 @@
    "cause": null,
    "screen_hash": "032357d9e2feb7e2",
    "row_hash": "5276068df1ca6fa9",
-   "carried": false
+   "carried": true
   },
   {
    "row": "B1",
@@ -270,7 +334,7 @@
    "cause": null,
    "screen_hash": "606038a4efcfa402",
    "row_hash": "5276068df1ca6fa9",
-   "carried": false
+   "carried": true
   },
   {
    "row": "B10",
@@ -3037,34 +3101,45 @@
    "row": "C903",
    "screen": "*",
    "verdict": "PASS",
-   "line": "\"Monday morning.\"",
-   "why": "A named weekday on a one-time canvas that only runs on Monday, week 1.",
+   "line": "Monday morning. Today you start college. / Seventy-five a week, starting Sunday.",
+   "why": "The opening is the starting canvas with no trigger, played once from Monday week 1 07:00 ([time] starting_day = \"Monday\"); no opening screen is part of a scene that plays again, so no repeatable names a weekday. Every weekday it names is true on its one visit.",
    "cause": null,
-   "screen_hash": "2553ececd707bf70",
-   "row_hash": "5e42a6ca2c00ded3",
-   "carried": true
+   "note": false,
+   "screen_hash": "d817bff4bc185950",
+   "row_hash": "4f83b0b5eb45f71b",
+   "carried": false
   },
   {
    "row": "C903",
    "screen": "opening.room_spoke",
    "verdict": "PASS",
-   "line": "\"You run for your room. The bathroom bolt hasn't held in years, and everyone in this house knows it.\"",
-   "why": "No weekday named.",
+   "line": "Thanks. Go get dressed.",
+   "why": "The screen names no weekday at all, and it is a once screen of the opening, not a repeatable.",
    "cause": null,
-   "screen_hash": "286b0d733d65a436",
-   "row_hash": "5e42a6ca2c00ded3",
-   "carried": true
+   "note": false,
+   "screen_hash": {
+    "text": "645c8c4f9b10b927",
+    "facts": "b68c8b8504981c73",
+    "all": "286b0d733d65a436"
+   },
+   "row_hash": "4f83b0b5eb45f71b",
+   "carried": false
   },
   {
    "row": "C903",
    "screen": "opening.sums",
    "verdict": "PASS",
-   "line": "\u279c Ask about the Help Wanted sign at the caf\u00e9 across from campus. The manager's in Monday to Saturday, from 10am.",
-   "why": "One-time screen; the weekdays are a rule, not today's name.",
+   "line": "The manager's in Monday to Saturday, from 10am. / Pay Mark on Sunday morning",
+   "why": "A once screen of the opening, reached only on Monday week 1 at about 07:30, so it is not a repeatable. Its weekdays are a standing hours rule and the next rent day, both true on that visit.",
    "cause": null,
-   "screen_hash": "5a7f9f7e34f7e280",
-   "row_hash": "5e42a6ca2c00ded3",
-   "carried": true
+   "note": false,
+   "screen_hash": {
+    "text": "5a86ece0192c9eb7",
+    "facts": "1bb55a6bea468407",
+    "all": "5a7f9f7e34f7e280"
+   },
+   "row_hash": "4f83b0b5eb45f71b",
+   "carried": false
   },
   {
    "row": "C906",

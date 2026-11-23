@@ -556,3 +556,34 @@ Why for all of these: P13's reader found new FAILs on every pass, v5 to v11 (99 
   - **Shared wording checked:** no craft row states B1's "an earlier canvas showed him wanting it". C613 and C109 are related and unchanged.
   - **Narrower than C286:** C286's stage 1 lists "his brush or grope"; the grope is left out on purpose, per the instruction.
   - **Verified:** B1's text changed, so `reading.py` re-asks B1 on its next pass (its row hash covers the text).
+- `scripts/scenes.py`, `presence`: a line inside a group is judged only when its groups hold (ENI for LO, standing authorization, 2026-11-24).
+  - **The failure:** P10's build. The weekend shift puts Tom's line inside a Saturday group (`weekday`, `[5]`) and Chris's inside a Sunday group, and presence still said "Tom isn't there Sun 10:00". `check_presence` narrowed the slots by the trigger only; `walk()` handed it each block's group conditions, but those were read only for `npc_at_location`.
+  - **The fix:** each dialog block's slots are the trigger's `when_slots` intersected with `when_slots` of every enclosing group's conditions. It is the same helper, with the same OR widening.
+  - **What isn't modelled:** adjacent groups merge into one if/elseif chain, so a later group also needs the earlier ones to fail. A group's own conditions are a superset of when it shows, so this can keep a red too long but never hide one. A comment in the code says so.
+  - **The sheet:** it reads who is there only from schedule rows at the screen's place and time, never from text inside a group, so it needed no change.
+  - **Tests:** three new: a Saturday-group line on a Sat–Sun scene is green on Sunday; the same line outside the group is red; a group with a `time_of_day` narrows too, and goes red once the line leaves the group.
+  - **Verified read-only:** presence on first_term_lean is green.
+- `craft/clock.md`, C903 and shape rule 7 (ENI for LO, standing authorization, 2026-11-24).
+  - **The failure:** P10's reader pass A. The rule said flatly "no named weekday on a repeatable", but P10's weekend shift names "Saturdays" and "Sundays" inside weekday groups, which is true on every visit. The reader passed C903 only by reading around the rule.
+  - **The change:** the C903 row now says what it means: "a repeatable names a weekday only behind a weekday condition, on its trigger or a group around the line, that makes it true on every visit". Rule 7 says the same in one line, with one example each way, and cites C903.
+  - **One home:** C903 lives only in clock.md, and no other file holds a copy (checked with grep). The labels (the clock moves, reader, LO's choice) are unchanged.
+  - **Verified:** the full suite runs green. The rule text changed, so `reading.py` re-asks C903 on the next pass of any piece whose list holds it.
+- `scripts/reading.py`, two fixes (ENI for LO, standing authorization, 2026-11-24).
+  - **The failure:** P10's and P21's pass B.
+  - **(1) A FAIL on a `note` row never left the work list.** P10's three C151 FAILs ("a repeatable stays short") kept coming back. Adding lines failed C151, and cutting them failed the blocking `talk` check, so the list could never empty.
+    - **Fix:** on a card with `Does:`, a note's FAIL is recorded with no cause and carried like a PASS. It comes back only when its screen's text, its facts or its rule change. `--record` doesn't ask a note FAIL for a cause. `by_cause` shows notes in their own section, and the `--record` exit counts only FAILs that hold.
+  - **(2) A moved fact re-opened every row.** Chris's weekend row moved from 19:00 to 20:00, and through the sheet hash that re-asked every row on every screen naming him: P21 asked 349 rows, against 151 on pass A, and P10 asked 298, against 101.
+    - **Fix: the screen hash is split** into `text` (the node and its trigger) and `facts` (the schedule rows of the people it names, and its sheet row). It also keeps `all`, the old single hash, so records written before still read. A changed old-format screen counts as a text change, the safe reading.
+    - A text change re-asks the screen's rows as before. A facts-only change re-asks only the rows that read facts:
+      - the truth rule, C460 and C461;
+      - scene tests B8 (the numbers and the clothes agree) and B10 (true on every visit). B8 is added beside ENI's list, because clothes are on the sheet row;
+      - rows judged `+ presence` or `+ sheet`;
+      - rows whose `when` is "a person is on screen", "the clock moves", "a garment is named" or "she dresses or undresses".
+    - The scene-wide tests B1, B2 and B9 go back on `*` only after a text change.
+    - **Why this can't miss a truth break:** a moved fact can only break a line that claims that fact, and every such line is judged by C460 and B10, which apply on every screen and are always re-asked where facts moved.
+  - **Tests:** three new in `test_rules.py`: a note FAIL carries while a reader FAIL comes back; a note FAIL re-opens when its screen changes; a facts-only change (Mom's row moved) asks only fact-reading rows, C460 and B10 among them.
+  - **Verified on a scratchpad copy of `reader/P21.json`:**
+    - the live record (old format) reads as unchanged against today's build;
+    - after one simulated pass, replaying Chris's weekend row move re-asks 102 items, 34 rules, against the 349 seen;
+    - many of those come from "a person is on screen" rows, such as C447, C593 and C625, which judge how a person sounds or is named, not where they are. Narrowing that trigger out of the fact list would cut it further, which is LO's call.
+- `scripts/reading.py` and `reader.md`: "a person is on screen" is no longer a trigger that marks a rule as reading facts (LO, relayed 2026-11-24: "yes"). Those rows judge how a person sounds or is named, not where they are. Still re-asked when only a fact moves: C460 and C461, B8 and B10, rows judged `+ presence` or `+ sheet` (L106 among them), and rows whose `when` is "the clock moves", "a garment is named" or "she dresses or undresses". Verified on the scratchpad P21 replay of Chris's weekend row move: 72 items, 24 rules (C460, C461, B8, B10, L106 and 19 clock rows), on the 3 screens that name him. Before this change it was 102 items, and the pass B count was 349. The full suite runs green.

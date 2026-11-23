@@ -196,3 +196,51 @@ items = [{ type = "npc_at_location", npc_id = "npc_mom", location_id = "home", o
     g = autofire_game(game)
     rows = rules.guard({"hire.ask": ["a person's arc step"]}, g)  # no "no" here: an arrival scene she can't refuse
     assert not any("fires by itself" in r for r in rows)
+
+
+# ── a note's FAIL carries; a fact-only change asks only the rows that read facts (P10, P21 pass B, 2026-11-24) ──
+
+def _passed(game, verdict_for=lambda r: "PASS"):
+    card(game)
+    work = reading.work_list(game, "p1")
+    out = {"verdicts": [], "causes": [{"id": "c1", "what": "x"}]}
+    for i in work["items"]:
+        v = verdict_for(i["row"])
+        out["verdicts"].append(dict(row=i["row"], screen="start.a" if v == "FAIL" else "*", verdict=v,
+                                    cause="c1" if v == "FAIL" else None))
+    return reading.record(game, "p1", out)
+
+
+def _rows_on_a(judge):
+    table = rules.table()
+    lst = rules.rule_list(rules.card_does(DOES), rows=table)
+    return [r for r, on in lst.items() if "start.a" in on and table[r]["judge"] == judge and not reading.reads_facts(r, table)]
+
+
+def test_a_note_fail_carries_and_a_reader_fail_comes_back(game):
+    note, reader = _rows_on_a("note")[0], _rows_on_a("reader")[0]
+    _passed(game, lambda r: "FAIL" if r in (note, reader) else "PASS")
+    items = {(i["row"], i["why"]) for i in reading.work_list(game, "p1")["items"]}
+    assert (reader, "failed last pass") in items and not any(r == note for r, _ in items)
+    rec = reading.load_record(game, "p1")
+    assert [v["cause"] for v in rec["verdicts"] if v["row"] == note] == [None]  # kept out of causes
+    assert any("notes, shown" in line for line in reading.by_cause(rec))
+
+
+def test_a_note_fail_reopens_when_its_screen_changes(game):
+    note = _rows_on_a("note")[0]
+    _passed(game, lambda r: "FAIL" if r == note else "PASS")
+    p = game / "toml_phases" / "7_final_game.toml"
+    p.write_text(p.read_text().replace("Mom is at the stove.", "Mom is at the stove, humming."))
+    assert any(i["row"] == note and i["screen"] == "start.a" for i in reading.work_list(game, "p1")["items"])
+
+
+def test_a_fact_only_change_asks_only_the_rows_that_read_facts(game):
+    _passed(game)
+    p = game / "toml_phases" / "7_final_game.toml"
+    p.write_text(p.read_text().replace('end_time = "07:10"', 'end_time = "07:20"'))  # Mom's row moves
+    items = reading.work_list(game, "p1")["items"]
+    table = rules.table()
+    assert items and all(i["why"] == "a fact changed" for i in items)
+    assert all(reading.reads_facts(i["row"], table) for i in items)
+    assert {"C460", "B10"} <= {i["row"] for i in items}

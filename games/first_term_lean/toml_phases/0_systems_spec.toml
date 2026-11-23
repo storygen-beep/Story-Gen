@@ -161,7 +161,7 @@ tip = "He's behind the counter Monday to Saturday, from 10am to 9pm."
 npc_id = "npc_chris"
 when = [{ flag = "met_chris", op = "is_true" }]
 text = "Chris, 24. The café's barista. Tom gave you his afternoons."
-tip = "He has the counter weekday mornings until 3pm, and weekends until 7pm."
+tip = "He has the counter weekday mornings until 3pm, and weekends until 8pm."
 
 # P42 — the day turn clears the once-a-day talk flags (v2.py:1269-1277, v2.py:7158).
 [engine.daily_tick]

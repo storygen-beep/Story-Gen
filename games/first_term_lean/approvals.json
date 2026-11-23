@@ -276,6 +276,30 @@
       "sha256": "b77769cde735ccdc10baffc4b6c0e7bbbc1e87b2b4d845b3c4ca6770c6b2b683",
       "words": "ENI for LO (delegated 2026-11-24): \"Yes to c1, c2, c4 and the goal line; c3 waived to P31\"",
       "date": "2026-11-24"
+    },
+    {
+      "card": "P10",
+      "sha256": "d8ad7539f9323744bed0a920f08885e5a27235ae130e6cf385bdcfe997f5e5c6",
+      "words": "ENI for LO (delegated 2026-11-24): \"Yes, three rows, Chris pays on Sunday\"",
+      "date": "2026-11-24"
+    },
+    {
+      "card": "P10",
+      "sha256": "6204305a6d5ea1680ad8bc5efd0759c55c08cd6863f03ce3f4421b91bea50020",
+      "words": "ENI for LO (delegated 2026-11-24): \"Yes to the talk lines, Sunday's as 'Slow day, new girl. Entertain me.'\"",
+      "date": "2026-11-24"
+    },
+    {
+      "card": "P10",
+      "sha256": "e20a9e1c79b4120f7338b76113e734f55208cf86dd78358fe50657513abf9c46",
+      "words": "ENI for LO (delegated 2026-11-24): \"Yes to c1 (Chris to 8pm on weekends), c2 and c3\"",
+      "date": "2026-11-24"
+    },
+    {
+      "card": "P21",
+      "sha256": "4d2df36779fb57778c554f526b168a8ddd67f8f93c339345f0794bb954004b92",
+      "words": "ENI for LO (delegated 2026-11-24): \"Yes to c1 (Chris to 8pm on weekends), c2 and c3\"",
+      "date": "2026-11-24"
     }
   ]
 }

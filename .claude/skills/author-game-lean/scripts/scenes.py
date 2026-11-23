@@ -266,12 +266,20 @@ def check_presence(game, dev=()):
                     continue
                 if any(i.get("type") == "npc_at_location" and i.get("npc_id") == pid for i in items(list(cond))):
                     continue
+                # A line inside a group shows only when its groups' conditions hold too, so its slots are the
+                # trigger's narrowed by each enclosing group's clock conditions (the same when_slots, OR widened).
+                # Adjacent groups merge into one if/elseif chain, so a later group also needs the earlier ones to
+                # fail; that isn't modelled. Its own conditions are a superset of when it really shows, so this can
+                # only keep a red too long, never hide one.
+                line_slots = set(slots)
+                for gc in cond:
+                    line_slots &= who_is_where.when_slots(gc)
                 table = where.get(pid)
-                gone = sorted(s for s in slots if not table or place not in {p for p, _ in table.get(s, ())})
+                gone = sorted(s for s in line_slots if not table or place not in {p for p, _ in table.get(s, ())})
                 if gone:
                     d, m = gone[0]
                     rows.append(f"{c['id']} · {n.get('id')}: {names.get(pid, pid)} speaks at {place}, but isn't there "
-                                f"{who_is_where.DAYS[d]} {m // 60:02d}:{m % 60:02d} ({len(gone)} of {len(slots)} "
+                                f"{who_is_where.DAYS[d]} {m // 60:02d}:{m % 60:02d} ({len(gone)} of {len(line_slots)} "
                                 f"five-minute slots); bind the scene to them, check they're present, or fix their rows")
     return (RED, rows) if rows else (GREEN, [])
 
