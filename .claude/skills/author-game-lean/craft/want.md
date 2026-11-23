@@ -66,6 +66,8 @@ Each rule is marked **measured** or **LO's choice**.
 
 Roles: her step-father, and the café across from campus. LO approved these words, with the names swapped for roles. The amount is filler (C992).
 
+The examples are written in Markdown so they read here. In a game, the Quests page lays the card out itself. When a screen also shows it in the story, each line is its own `paragraph` block, and the title's bold is SugarCube's `''…''` or `<strong>…</strong>`, never `**…**`, which SugarCube prints as stars. One paragraph with "·" between the steps runs them into one line (first_term_lean P13, screen 6, LO 2026-11-23).
+
 **The card at the hand-over**
 > **Pay your own way.** Pay your step-father your share every Sunday.
 > ✅ Your step-father told you the rent
