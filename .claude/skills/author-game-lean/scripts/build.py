@@ -6,7 +6,7 @@
 2. Refuse, and package nothing, if any canvas is on no approved card's Builds: line, or any STATE.md piece
    marked built has no current approval (check.py's `builds` and `approvals` checks).
 3. Package with package_from_toml (no database by default, package_from_toml.py:218): a dev build goes to
-   output/ with --dev, a release to output/ without it. Both go to output/, the folder LO plays from (LO, 2026-11-23).
+   output/ with --dev --debug (always together), a release to output/ with neither. Both go to output/, the folder LO plays from (LO, 2026-11-23).
 4. Run check.py, so the checks never depend on memory.
 Exit 0 when built and green, non-zero otherwise.
 """
@@ -34,13 +34,14 @@ def refusals(game_dir):
 
 def package(game_dir, release=False):
     """Every build goes to games/<slug>/output/, the folder LO plays from on his phone (LO, 2026-11-23:
-    builds kept going to output_dev/, which he doesn't play). A dev build adds --dev (package_from_toml.py:151)."""
+    builds kept going to output_dev/, which he doesn't play). A dev build adds --dev and --debug, always together (LO, 2026-11-23): --debug draws the
+    grey box where a picture is still missing (v2.py:16424-16431)."""
     game_dir = Path(game_dir).resolve()
     cmd = [sys.executable, str(check.REPO / "manage.py"), "package_from_toml",
            "--file", str(game_dir / "toml_phases" / check.MERGED),
            "--output", str(game_dir / "output"), "--gen-version", "v2"]
     if not release:
-        cmd.append("--dev")
+        cmd += ["--dev", "--debug"]
     return subprocess.run(cmd, cwd=check.REPO).returncode
 
 
