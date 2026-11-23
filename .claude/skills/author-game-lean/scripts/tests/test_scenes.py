@@ -1,0 +1,222 @@
+"""scenes.py: each check passes a clean game and goes red on a planted break, so no green here can't go red."""
+import copy
+import subprocess
+import sys
+from pathlib import Path
+
+import pytest
+
+sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
+import scenes  # noqa: E402
+
+GREEN, RED = scenes.GREEN, scenes.RED
+
+
+def para(text):
+    return {"type": "paragraph", "content": text}
+
+
+def say(text, npc="npc_mom"):
+    return {"type": "dialog", "content": text, "props": {"speaker": "npc", "npcId": npc}}
+
+
+def group(*blocks, **cond):
+    return {"type": "group", "props": {"conditions": cond or {"version": "1.0"}}, "blocks": list(blocks)}
+
+
+def node(nid, *blocks, to=()):
+    return {"id": nid, "blocks": list(blocks),
+            "exit_block": {"type": "choices", "choices": [{"text": f"Go to {t}", "targetType": "node", "nodeId": t,
+                                                            "flagEffects": [{"flag": f"went_{t}", "op": "set"}]}
+                                                           for t in to]}}
+
+
+def clean():
+    """A small game every check passes: Mom in the kitchen 7-9 every day, one scene there, one name field printed."""
+    return {
+        "player": {"customization_fields": [{"id": "name", "label": "Your name"}], "flag_keys": ["met_mom"],
+                   "core_traits": {"energy": 100}},
+        "traits": {"labels": [{"key": "energy"}]},
+        "sidebar_items": [{"type": "trait_bar", "trait": "energy", "max": 100}],
+        "locations": [{"id": "kitchen"}],
+        "npcs": [{"id": "npc_mom", "name": "Laura", "role": "Mom",
+                  "schedules": [{"location": "kitchen", "start_time": "07:00", "end_time": "09:00"}]}],
+        "quest_cards": [{"npc_id": "npc_mom", "goals": [{"label": "Pay the rent", "flag": "paid", "op": "is_true"}]}],
+        "canvases": [{
+            "id": "breakfast",
+            "trigger": {"location": "kitchen", "is_repeatable": True,
+                        "conditions": {"version": "1.0", "items": [
+                            {"type": "time_of_day", "start_time": "07:00", "end_time": "09:00"}]}},
+            "nodes": [node("a", para("Mom is at the stove."), say("Morning, @player. Eggs?"), to=["b"]),
+                      node("b", para("She slides the plate over."), say("Eat. You're late."))],
+        }],
+    }
+
+
+# ── talk ──
+
+def test_talk_clean_is_green():
+    assert scenes.check_talk(clean()) == (GREEN, [])
+
+
+def test_planted_silent_person_is_red_talk():
+    g = clean()
+    g["canvases"][0]["nodes"][1]["blocks"] = [para("Mom slides the plate over and watches you eat every bite of it, "
+                                                   "slowly, without a word, the radio on low behind her.")]
+    status, rows = scenes.check_talk(g)
+    assert status == RED and "breakfast" in rows[0] and "a > b" in rows[0]
+
+
+def test_talk_judges_every_path_and_the_worst_variant():
+    g = clean()
+    long = para("Mom stands at the window a long time with the cup in both hands and says nothing at all to you.")
+    g["canvases"][0]["nodes"][0]["blocks"] = [group(para("Mom is at the stove.")), group(long), say("Eggs?")]
+    status, rows = scenes.check_talk(g)
+    assert status == RED  # the silent window variant is one the player can get
+
+
+def test_quoted_speech_in_a_paragraph_counts_as_speech():
+    assert scenes.text_split(para('Mom looks up. "Is that mine?"')) == (3, 3)
+
+
+def test_a_scene_she_is_alone_in_needs_no_speech():
+    g = clean()
+    g["canvases"][0]["nodes"] = [node("a", para("You stand under the shower a long time and let the water run "
+                                               "down your back until it goes cold."))]
+    assert scenes.check_talk(g) == (GREEN, [])
+
+
+# ── length ──
+
+def test_length_clean_is_green():
+    assert scenes.check_length(clean()) == (GREEN, [])
+
+
+def test_planted_long_screen_is_red_length():
+    g = clean()
+    g["canvases"][0]["nodes"][0]["blocks"].append(para("word " * 160))
+    status, rows = scenes.check_length(g)
+    assert status == RED and "breakfast · a" in rows[0]
+
+
+def test_adjacent_groups_count_their_longest_only():
+    blocks = [group(para("word " * 100)), group(para("word " * 100))]
+    assert scenes.screen_words(blocks) == 100
+
+
+# ── presence ──
+
+def test_presence_clean_is_green():
+    assert scenes.check_presence(clean()) == (GREEN, [])
+
+
+def test_planted_speaker_outside_her_rows_is_red_presence():
+    g = clean()
+    g["canvases"][0]["trigger"]["conditions"]["items"][0]["end_time"] = "10:00"
+    status, rows = scenes.check_presence(g)
+    assert status == RED and "Laura speaks at kitchen" in rows[0] and "09:00" in rows[0]
+
+
+def test_a_scene_bound_to_the_speaker_is_not_red():
+    g = clean()
+    g["canvases"][0]["trigger"]["conditions"]["items"][0]["end_time"] = "10:00"
+    g["canvases"][0]["trigger"]["requires_npc"] = "npc_mom"
+    assert scenes.check_presence(g) == (GREEN, [])
+
+
+# ── creation ──
+
+def test_creation_clean_is_green():
+    assert scenes.check_creation(clean()) == (GREEN, [])
+
+
+def test_planted_name_never_printed_is_red_creation():
+    g = clean()
+    g["canvases"][0]["nodes"][0]["blocks"][1]["content"] = "Morning. Eggs?"
+    status, rows = scenes.check_creation(g)
+    assert status == RED and "`name`" in rows[0]
+
+
+def test_name_at_the_end_of_a_sentence_counts():
+    g = clean()
+    g["canvases"][0]["nodes"][0]["blocks"][1]["content"] = "Eggs, @player."
+    assert scenes.check_creation(g) == (GREEN, [])
+
+
+# ── saves ──
+
+def test_saves_same_build_is_green(tmp_path):
+    assert scenes.check_saves(tmp_path, clean(), baseline=clean(), ref="x") == (GREEN, [])
+
+
+def test_planted_removed_flag_and_scene_are_red_saves(tmp_path):
+    now = clean()
+    now["player"]["flag_keys"] = []
+    now["canvases"][0]["id"] = "breakfast_2"
+    status, rows = scenes.check_saves(tmp_path, now, baseline=clean(), ref="x")
+    assert status == RED and any("flag `met_mom`" in r for r in rows) and any("scene `breakfast`" in r for r in rows)
+
+
+def test_planted_flag_set_by_a_new_choice_is_red_until_notes_say_same_meaning(tmp_path):
+    now = clean()
+    now["canvases"][0]["nodes"][0]["exit_block"]["choices"][0]["text"] = "Skip breakfast"
+    status, rows = scenes.check_saves(tmp_path, now, baseline=clean(), ref="x")
+    assert status == RED and "flag `went_b`" in rows[0]
+    (tmp_path / "NOTES.md").write_text("Same meaning: went_b · LO: yes\n")
+    assert scenes.check_saves(tmp_path, now, baseline=clean(), ref="x") == (GREEN, [])
+
+
+def test_planted_meter_range_change_is_red_saves(tmp_path):
+    now = clean()
+    now["sidebar_items"][0]["max"] = 10
+    status, rows = scenes.check_saves(tmp_path, now, baseline=clean(), ref="x")
+    assert status == RED and "meter `energy`" in rows[0]
+
+
+def test_saves_reads_the_last_played_build_from_git(tmp_path):
+    import tomllib  # noqa: F401  (the game below is written as TOML by hand)
+    g = tmp_path / "games" / "tiny"
+    (g / "toml_phases").mkdir(parents=True)
+    (g / "output").mkdir()
+    toml = g / "toml_phases" / "7_final_game.toml"
+    toml.write_text('[player]\nflag_keys = ["met_mom"]\n')
+    (g / "output" / "index.html").write_text("<html></html>")
+    git = ["git", "-c", "user.name=t", "-c", "user.email=t@t", "-c", "commit.gpgsign=false"]
+    subprocess.run(["git", "init", "-q"], cwd=tmp_path, check=True)
+    subprocess.run(git + ["add", "."], cwd=tmp_path, check=True)
+    subprocess.run(git + ["commit", "-qm", "played"], cwd=tmp_path, check=True)
+    toml.write_text('[player]\nflag_keys = []\n')
+    ref, base = scenes.played(g)
+    assert ref and base["player"]["flag_keys"] == ["met_mom"]
+    status, rows = scenes.check_saves(g, {"player": {"flag_keys": []}})
+    assert status == RED and "flag `met_mom`" in rows[0]
+
+
+def test_nothing_played_yet_is_green(tmp_path):
+    assert scenes.played(tmp_path) == (None, None)
+
+
+# ── speakers and goals ──
+
+def test_speakers_clean_is_green():
+    assert scenes.check_speakers(clean()) == (GREEN, [])
+
+
+@pytest.mark.parametrize("props", [{}, {"speaker": "npc", "npcId": "npc_nobody"}])
+def test_planted_unnamed_or_unknown_speaker_is_red(props):
+    g = clean()
+    g["canvases"][0]["nodes"][0]["blocks"][1]["props"] = props
+    assert scenes.check_speakers(g)[0] == RED
+
+
+def test_goals_clean_is_green():
+    assert scenes.check_goals(clean()) == (GREEN, [])
+
+
+@pytest.mark.parametrize("goal", [{"label": "Pay the rent", "flag": "paid", "op": "is_false"},
+                                  {"label": "Rent left", "trait": "debt", "op": "lte", "value": 0},
+                                  {"label": "3 Sundays paid", "trait": "paid", "op": "gte", "value": 3}])
+def test_planted_goal_that_reads_wrong_is_red(goal):
+    g = copy.deepcopy(clean())
+    g["quest_cards"][0]["goals"] = [goal]
+    assert scenes.check_goals(g)[0] == RED

@@ -45,7 +45,7 @@ The card's `Craft:` line cites each one, or says in one line why it skips it.
 - **Granting again is safe.** `setup.addToWardrobe` returns early if she already owns the item (v2.py:1736-1745).
 - **Old waits.** A flag with only `set_day` reads as set at the start of that day (v2.py:4983-4988).
 - **The footer** shows the version and the release (v2.py:20812-20820).
-- **The save check** lives in v2 only: `saves_mode` (`.claude/skills/author-game-v2/scripts/gates.py:10603`). The lean skill has none yet (`LATER.md`).
+- **The save check** is `check.py`'s `saves` (`scripts/scenes.py`), adapted from v2's `saves_mode` (`.claude/skills/author-game-v2/scripts/gates.py:10603`). It reads the merged TOML at the last commit of `output/index.html` (the build LO played), or `--against <git ref>`, and is red on a removed id or key, a meter whose range or bands changed, or a flag now set only by different choices (unless NOTES.md says `Same meaning: <flag>` with LO's yes). It can't tell a reworded button from a changed meaning, so it asks.
 
 ## The measures
 
@@ -76,7 +76,7 @@ Each rule says what CoT and the field do, then whether it's **measured** or **LO
 8. **Never refuse an old save; note the version** (C1662, C1663). *CoT, the field and the engine agree:* CoT keeps every version a save has run, the engine only logs a mismatch, and players hate a forced restart. *Measured.*
 9. **A reset is the last resort:** a major version, said in the release notes, never silent (C1667). *The field:* players hate resets, and CoT never resets, it migrates. *LO's choice.*
 10. **Each card's `Earlier releases:` line says what an old save sees** (the card template; C1681). It names what's new, and confirms that nothing shipped was renamed. *LO's choice.*
-11. **Before re-shipping, compare with the last shipped build** (C1664, C1666, C1647). Check a rescaled meter and a used-up grant by hand. *LO's choice;* the tool is v2's for now.
+11. **Before re-shipping, compare with the last shipped build** (C1664, C1666, C1647). `check.py`'s `saves` does the key compare; check a rescaled meter and a used-up grant by hand. *LO's choice.*
 12. **Tell the player how to keep a save:** one line on the tips page that saves live in the browser, and how to save to disk. *The field:* lost browser saves are the commonest save complaint. *LO's choice* (a new rule from the study).
 
 ## Worked example

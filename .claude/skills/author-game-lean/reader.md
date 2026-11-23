@@ -2,13 +2,13 @@
 
 **Who runs it.** A fresh agent (the Agent tool, general-purpose), given this file, the game folder and the piece id, and nothing else from the session. It never saw the build: the one who checks is never the one who built. It reads. It never writes under `games/`, never fixes, never scores, never ranks.
 
-**Input.** `games/<slug>` and a piece id whose `Builds:` names at least one canvas.
+**Input.** `games/<slug>`, a piece id whose `Builds:` names at least one canvas, and the work list: `venv/bin/python .claude/skills/author-game-lean/scripts/reading.py games/<slug> <id>` (the session runs it and hands over its JSON). Judge only the work list's items, each a row on a screen (`<canvas>.<node>`, or `*` for wherever the row applies). Everything else was judged before on the same text and is carried. At release, or when LO asks, the session runs it with `--all`. Why: every P13 pass, v5 to v11, judged everything again, and a row passed on one pass and failed on the next on unchanged text (LO, relayed 2026-11-24).
 
 ## Reads
 
 - `games/<slug>/cards/<id>.md`: what the card promised, its `Builds:` and its `Craft:` lines.
 - Every craft file the `Craft:` line names (`.claude/skills/author-game-lean/craft/*.md`), and the craft file for any area the piece touches that the card left out (`craft/opening.md` for the opening, `craft/meters.md` for a meter or an act that pays one, `craft/media.md` for any media spot, `craft/walk-ins.md` for a scene she walks into or someone walking in on her, `craft/body-moments.md` for a moment alone with her body). A craft file the card should have named and didn't is itself a FAIL, and so is an area the scene touches that the card's `Areas:` line doesn't name.
-- `craft/voice.md` for the voice, on every scene piece. The truth rule is still read from `.claude/skills/author-game-v2/references/register.md`, "The truth rule", because `craft/voice.md` carries only its headline rows (C460, C461), not its worked cases.
+- `craft/voice.md` for the voice and "The truth rule", on every scene piece. The writer reads the same text (`piece.md` step 3).
 - The canvases in `Builds:`, from `games/<slug>/toml_phases/7_final_game.toml`.
 - `games/<slug>/PLAN.md` and `games/<slug>/NOTES.md`.
 - Who is where: `venv/bin/python .claude/skills/author-game-lean/scripts/who_is_where.py games/<slug>`.
@@ -40,14 +40,21 @@ How three rows are read (the false-red test on the old first_term opening, 2026-
 
 ## Output
 
-One table, written to your scratchpad as `reader_<slug>_<id>.md` and returned:
+Two files in your scratchpad, both returned:
 
-```
-test | PASS / FAIL / N/A | the line judged (quoted, short) | why (one line)
-```
+1. `reader_<slug>_<id>.json`, one verdict per work-list item, for `reading.py --record`:
+   ```
+   {"verdicts": [{"row": "C460", "screen": "opening.kitchen_ask", "verdict": "FAIL", "line": "<quoted, short>",
+                  "why": "<one line>", "cause": "c1"}],
+    "causes": [{"id": "c1", "what": "<the one thing that is wrong, in one line>"}]}
+   ```
+   An item asked on `*` may be answered on one or more screens. Verdicts are PASS, FAIL, N/A, or WAIVED for a FAIL LO waived in NOTES.md (quote his words in `why`). Every FAIL names a cause; one cause covers every row it breaks, so three rows broken by one line are one cause, not three.
+2. `reader_<slug>_<id>.md`: the same verdicts as a table, `row | screen | verdict | the line judged | why`, then the FAILs grouped by cause, one head line per cause and its rows under it.
 
-Then one line per FAIL, grouped by test. A FAIL you can't quote a line for is N/A, and you say why. No fixes, no severity, no score.
+A FAIL you can't quote a line for is N/A, and you say why. No fixes, no severity, no score.
 
 ## After (the session, not the reader)
 
-The session shows LO the whole table. Each FAIL becomes a change to the card, shown to LO as before and after. A new yes means rebuild, then the reader again. LO plays a piece only when its reader table has no FAIL he hasn't waived. A waiver goes in NOTES.md in his words.
+The session records the pass: `venv/bin/python .claude/skills/author-game-lean/scripts/reading.py --record games/<slug> <id> <the JSON>`. It refuses a verdict that wasn't asked, an item with no verdict, and a FAIL with no cause, and it writes `games/<slug>/reader/<id>.json`. Then it shows LO the table, by cause. Each cause becomes one change to the card, shown to LO as before and after. A new yes means rebuild, then `reading.py` again: it asks again every row on a changed screen, every FAIL, and every row whose rule text changed. The pass is over when the work list is empty. There is no limit on the number of passes. LO plays a piece only when its work list is empty, or every FAIL left is one he waived. A waiver goes in NOTES.md in his words.
+
+What the work list can't see yet: a fact that changed outside the screen and outside the schedules of the people it names (an equip or a flag on another canvas, a number in PLAN.md or another card). Until the scene sheet exists, re-read with `--all` when one of those changes.
