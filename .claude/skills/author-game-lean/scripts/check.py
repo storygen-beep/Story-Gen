@@ -13,6 +13,9 @@ Checks:
              the measured scene checks in scenes.py (its docstring says what each one can and can't see).
              `--against <git ref>` sets the build `saves` compares with; the default is the last commit of
              output/index.html, the build LO played.
+  sheet      every card with a `Sheet:` block: each row matches the sheet sheet.py works out from the build
+             (clock, place, who is there, what she wears, flags). A column it can't work out is INCOMPLETE. A card
+             with no Sheet: block (every card from before 2026-11-24) is not compared; `--card` asks new ones for it.
 
     python3 check.py --card games/<slug> <id>
 
@@ -51,6 +54,7 @@ sys.path.insert(0, str(HERE))
 import approve  # noqa: E402
 import reach  # noqa: E402
 import scenes  # noqa: E402
+import sheet  # noqa: E402
 
 GREEN, RED, INCOMPLETE = "green", "red", "incomplete"
 GATES = REPO / ".claude" / "skills" / "author-game-v2" / "scripts" / "gates.py"
@@ -235,6 +239,9 @@ def check_card(game_dir, card_id, skill=None):
             rows.append(f"area `{area}` has no craft file yet: write {area_file(area)} first (piece.md step 1)")
         elif area_file(area) not in named:
             rows.append(f"area `{area}`: the Craft: line does not name {area_file(area)}")
+    if re.search(r"^[ \t]*Screen \d", text, re.M) and sheet.card_sheet(text) is None:
+        rows.append("the card has screens and no Sheet: block (templates/piece-card.md); "
+                    "write each screen's clock, place, who, wearing and flags before the prose")
     skips = dict(re.findall(r"skip ([CL]\d+):\s*([^·;]*)", line))
     for name in named:
         f = skill / name
@@ -316,6 +323,23 @@ def check_release(game_dir, game):
     return (RED, rows) if rows else (GREEN, [])
 
 
+def check_sheet(game_dir, game):
+    """Each card's Sheet: against the computed one. Cards without a Sheet: block are not compared."""
+    if game is None:
+        return INCOMPLETE, ["the merged TOML did not parse"]
+    red, inc = [], []
+    for path in sorted((Path(game_dir) / "cards").glob("*.md")):
+        mine, computed = sheet.for_card(game, game_dir, path.stem)
+        if mine is None:
+            continue
+        r, i = sheet.compare(mine, computed)
+        red += [f"{path.stem}: {x}" for x in r]
+        inc += [f"{path.stem}: {x}" for x in i]
+    if red:
+        return RED, red + inc
+    return (INCOMPLETE, inc) if inc else (GREEN, [])
+
+
 def run_all(game_dir, release=False, against=None):
     results = {"merge": merge(game_dir, release)}
     game = load_merged(game_dir) if results["merge"][0] == GREEN else None
@@ -323,6 +347,7 @@ def run_all(game_dir, release=False, against=None):
     results["approvals"] = check_approvals(game_dir)
     results["builds"] = check_builds(game_dir, game)
     results.update(scenes.run(game_dir, game, dev_canvases(game_dir) or {}, ref=against))
+    results["sheet"] = check_sheet(game_dir, game)
     if release:
         results["release"] = check_release(game_dir, game)
     return results

@@ -24,11 +24,12 @@ What goes on the work list:
   - every row never judged (on "*": the reader judges it wherever it applies).
 A PASS, N/A or WAIVED on unchanged text is carried, marked "carried". --all puts every row on every screen.
 
-A screen's hash covers its blocks and its exit, the trigger of its canvas, and the schedule rows of everyone it
-can name (a speaker, or a name or one-word role in its prose, `scenes.people`), so a moved schedule row re-opens
-the screens that name that person. It does NOT cover facts that live elsewhere: an equip or a flag set on an
-earlier screen of another canvas, a number in PLAN.md or another card. Those re-open only with --all, until the
-scene sheet (the plan's Part C) puts them in the hash.
+A screen's hash covers its blocks and its exit, the trigger of its canvas, the schedule rows of everyone it can name
+(a speaker, or a name or one-word role in its prose, `scenes.people`), and its row of the scene sheet (sheet.py:
+clock, place, who is there, what she wears, flags), so a moved schedule row, or an equip or flag changed on an
+earlier screen, re-opens it. It does NOT cover a number in PLAN.md or another card, or what another canvas does to
+her clothes before a repeatable (the sheet reads a repeatable's clothes only from its own trigger). Those re-open
+only with --all.
 """
 import argparse
 import hashlib
@@ -42,6 +43,7 @@ HERE = Path(__file__).resolve().parent
 SKILL = HERE.parent
 sys.path.insert(0, str(HERE))
 import scenes  # noqa: E402
+import sheet  # noqa: E402
 
 VERDICTS = ("PASS", "FAIL", "N/A", "WAIVED")
 KEEP = ("PASS", "N/A", "WAIVED")
@@ -102,8 +104,10 @@ def load_game(game_dir):
     return tomllib.loads((Path(game_dir) / "toml_phases" / "7_final_game.toml").read_text(encoding="utf-8"))
 
 
-def screens(game, canvas_ids):
-    """{screen: hash} for every screen of the named canvases."""
+def screens(game, canvas_ids, sheet_rows=None):
+    """{screen: hash} for every screen of the named canvases. The hash takes in the screen's sheet row, so a time,
+    a person, a garment or a flag that changed upstream re-opens it."""
+    sheet_rows = sheet_rows or {}
     who = scenes.people(game)
     rows_of = {n.get("id"): n.get("schedules") or [] for n in game.get("npcs") or []}
     out = {}
@@ -117,7 +121,8 @@ def screens(game, canvas_ids):
             named |= set(re.findall(r'"npcId": "([\w-]+)"', blob))
             named |= {trig.get("npc"), trig.get("requires_npc")} - {None}
             facts = {p: rows_of.get(p, []) for p in sorted(named)}
-            out[f"{c['id']}.{node.get('id')}"] = digest({"node": node, "trigger": trig, "facts": facts})
+            key = f"{c['id']}.{node.get('id')}"
+            out[key] = digest({"node": node, "trigger": trig, "facts": facts, "sheet": sheet_rows.get(key)})
     return out
 
 
@@ -142,7 +147,8 @@ def current(game_dir, card_id, skill=SKILL, game=None):
     """(screen hashes, row hashes) for the build as it is now."""
     game = game or load_game(game_dir)
     _, builds = card_lines(game_dir, card_id)
-    sc = screens(game, set(builds))
+    _, sheet_rows = sheet.for_card(game, game_dir, card_id)
+    sc = screens(game, set(builds), sheet_rows)
     sc[WHOLE] = whole_hash(sc)
     rows = {r: digest(t) for r, t in rows_for(game_dir, card_id, skill).items()}
     return sc, rows
