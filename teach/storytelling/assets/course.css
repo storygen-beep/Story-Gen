@@ -1,30 +1,32 @@
-/* Shared stylesheet for every lesson and reference sheet in this course.
-   Tufte-leaning: one serif text column, citations as margin-style notes,
-   generous whitespace, prints cleanly on A4/Letter. */
+/* Shared stylesheet for every page in this course (home, lessons, reference).
+   Layout: one Tufte-style reading column, citations set small under the claim
+   they back; an ink-blue "stage light" accent marks the one idea per lesson. */
 
-@import url("https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400;0,600;1,400&family=Inter:wght@400;600&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,600;1,6..72,400&family=Inter:wght@400;600&display=swap");
 
 :root {
-  --bg: #fffff8;
-  --ink: #111;
-  --muted: #5a5a55;
-  --rule: #d8d6c8;
-  --accent: #a33a1f;
-  --card: #f6f4e8;
+  --bg: #fbfbfd;
+  --ink: #16171d;
+  --muted: #5b5e6e;
+  --rule: #d9dbe5;
+  --accent: #2b4fa3;
+  --card: #f0f2f8;
   --good: #1f6b3a;
   --bad: #a3261f;
-  --serif: "EB Garamond", Georgia, "Times New Roman", serif;
+  --serif: "Newsreader", Georgia, "Times New Roman", serif;
   --sans: "Inter", system-ui, sans-serif;
 }
 @media (prefers-color-scheme: dark) {
   :root:not([data-theme="light"]) {
-    --bg: #161614; --ink: #ecebe4; --muted: #a3a296; --rule: #3a3a34;
-    --accent: #e07a5a; --card: #22221e; --good: #6fcf8f; --bad: #f08a80;
+    --bg: #121319; --ink: #e8e9ef; --muted: #9a9db0; --rule: #2e3140;
+    --accent: #8fa9ff; --card: #1c1e27; --good: #6fcf8f; --bad: #f08a80;
+    color-scheme: dark;
   }
 }
 :root[data-theme="dark"] {
-  --bg: #161614; --ink: #ecebe4; --muted: #a3a296; --rule: #3a3a34;
-  --accent: #e07a5a; --card: #22221e; --good: #6fcf8f; --bad: #f08a80;
+  --bg: #121319; --ink: #e8e9ef; --muted: #9a9db0; --rule: #2e3140;
+  --accent: #8fa9ff; --card: #1c1e27; --good: #6fcf8f; --bad: #f08a80;
+  color-scheme: dark;
 }
 
 * { box-sizing: border-box; }
@@ -33,7 +35,14 @@ body {
   margin: 0; background: var(--bg); color: var(--ink);
   font-family: var(--serif); line-height: 1.55;
 }
-main { max-width: 38rem; margin: 0 auto; padding: 3rem 16px 5rem; }
+main { max-width: 38rem; margin: 0 auto; padding-block: 3rem 5rem;
+  padding-left: max(16px, env(safe-area-inset-left, 0px));
+  padding-right: max(16px, env(safe-area-inset-right, 0px)); }
+h1, h2 { text-wrap: balance; }
+:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+ul.toc { list-style: none; padding: 0; display: grid; gap: .8rem; }
+ul.toc a { font-size: 1.15rem; }
+ul.toc .meta { display: block; font-family: var(--sans); font-size: .78rem; color: var(--muted); }
 
 nav.crumbs { font-family: var(--sans); font-size: .72rem; letter-spacing: .04em;
   text-transform: uppercase; color: var(--muted); margin-bottom: 2.5rem; }
