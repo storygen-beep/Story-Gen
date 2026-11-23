@@ -33,7 +33,7 @@ The card's `Craft:` line cites each one, or says in one line why it skips it.
 ## The engine (cited)
 
 - A place's picture is one file, `image` on the `[[locations]]` row, with `image_search_queries` for the missing-media page (`v2.py:484`, `v2.py:493`).
-- `pool_dir` names a folder; the game finds its files on disk and cycles them, one per visit (`v2.py:16359-16364`).
+- `pool_dir` names a folder; the game finds its files on disk and cycles them, one per visit (`v2.py:16371-16376`).
 - `pool = N` is a target, not a manifest: it says how many files to aim for, so a half-filled pool reads "3 of 4" (`apps/common/media_blocks.py:18-20`). Left out, it is 4 (`apps/common/media_blocks.py:33`). That's the default L119 warns about, so always write it.
 
 ## The shape

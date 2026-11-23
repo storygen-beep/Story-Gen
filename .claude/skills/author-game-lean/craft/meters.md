@@ -27,9 +27,9 @@ The card's `Craft:` line cites each one, or says in one line why it skips it.
 
 ## The engine (cited; `v2.py` is `apps/game_generation/twee_comprehensive/generators/v2.py`)
 
-- **An act's `cap` stops the meter there.** `if (next > capNum) next = Math.max(current, capNum)` (`v2.py:7371`). An act capped at 19 can never carry her past 19.
-- **The daily cap per band** is `[engine.daily_caps.<trait>]`, read at `v2.py:1282-1283`. Each band is `{ below, cap }`: the most the meter may rise in one day while it is under `below` (`setup.dailyCapAllow`, `v2.py:7500-7516`). `hold_band_while` keeps her inside her band while a listed modifier is on.
-- **`first_gain_message`** shows once, on the first rise (`v2.py:7541-7543`).
+- **An act's `cap` stops the meter there.** `if (next > capNum) next = Math.max(current, capNum)` (`v2.py:7377`). An act capped at 19 can never carry her past 19.
+- **The daily cap per band** is `[engine.daily_caps.<trait>]`, read at `v2.py:1282-1283`. Each band is `{ below, cap }`: the most the meter may rise in one day while it is under `below` (`setup.dailyCapAllow`, `v2.py:7506-7522`). `hold_band_while` keeps her inside her band while a listed modifier is on.
+- **`first_gain_message`** shows once, on the first rise (`v2.py:7547-7549`).
 
 ## The shape
 
@@ -99,7 +99,7 @@ His line opens the screen, and the engine's toast shows the +1. No "+1 Nerve" is
 - A card that cites the stage table and none of the rungs, talks or pace. A meter card cites every row above. (P01; NOTES skill gap 2026-11-20)
 - Stage 1 acts that all need 20 already. Two acts pay at 0. (L68)
 - An accident that pays her. It pays him; her button inside it pays her. (C338)
-- An act capped at its own stage's top, so she stands at 19, then 39, forever. Cap at the stage above. (L69; `v2.py:7371`)
+- An act capped at its own stage's top, so she stands at 19, then 39, forever. Cap at the stage above. (L69; `v2.py:7377`)
 - A cap of 1 a day, so a stage takes 20 days. 2–3 a day. (L69; C1401)
 - The first gain behind a chance walk-in. The first rise is open at 0, every day. (L70)
 - A card that sends her to places that pay nothing at her stage. Name only the paying ones. (C1366; L68)

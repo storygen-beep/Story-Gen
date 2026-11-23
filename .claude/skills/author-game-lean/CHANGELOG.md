@@ -240,3 +240,32 @@
 - `craft/heat.md`: the "Open" section is now "The explicit-beat check", describing what was built. Rule 6 says to mark the beat and run it.
 - `LATER.md`: the beat-check item is struck through as done. The game-wide floor stays open.
 - Tests: 100 passed.
+- **Approval: LO's own yes to the clothes example A–D, relayed by main-lean (ENI for LO, standing authorization, 2026-11-20):** "Yes". It came with one change to A, ENI's pick, which LO approved: her usual clothes go on by default, and the screen offers a short list of whole outfits instead of the full picker.
+- Created `craft/clothes.md`, the clothes area's file. Why: P07 (clothes) goes before the opening's re-check, and the area had no file (piece.md step 1).
+  - Must read, 23 rows: C719, C1158, C1206, C1166, C1167, C1204, C1183, C1171, C1169, C1150, C1201, C1173, C1184, C1198, C1185, C1220, C1221, C1177, C1176, C1189, C1197, C1200 and C1207.
+  - An engine section, CoT measures, nine rules each marked measured or LO's choice, the approved example A–D in roles, and six "Not this" lines.
+- Engine, verified by reading v2.py:
+  - the seven slots (`template_import.py:278`);
+  - `wardrobeEffects` actions (v2.py:18207-18224);
+  - `equipItem` taking off top and bottom for a dress, and failing silently on an item's own conditions (v2.py:1751-1768);
+  - dress codes and ClothingBlock's "Change clothes" and "Go back" (v2.py:2189-2200, 21039-21066);
+  - the settings (v2.py:1196-1202);
+  - the clothing conditions (v2.py:9505-9589).
+- Found reading the engine, and changed in D: a room button gated on clothes is hidden, not dimmed. `show_when_blocked` dims only when the clock alone shut it (v2.py:6686-6691, `onlyTheClockShut` at v2.py:6058). LO's "dimmed run button" can't be a room button, so D puts the check on the "Run" choice inside the scene, shown locked with `show_when_locked` and `locked_text` (v2.py:17262-17266). This is flagged to ENI for LO.
+- CoT, read today:
+  - `Prologue6c.txt` and `PrologueWidgets.txt`, lines 6-18 (a short list of whole outfits, "Default" picked);
+  - `Wardrobe.txt` ("change into your … outfit", `<<maybechangingwitnessedbyadmirer>>`);
+  - "It would be daring to go out like this…" in 5 files (`MainHall.txt`, line 107);
+  - `ExitShower.txt`;
+  - `DressingRoom.txt`, line 5;
+  - `clothes_ok` in 30 files.
+  
+  The field rows come from COVERAGE's evidence column and were not re-run.
+- `SKILL.md`: the area table gives clothes its file.
+- **Approval: LO's own yes to the engine fix, typed in the game session, relayed by main-lean:** "yes, do the engine fix". The engine change is main-lean's work (template_import.py, game_graph.py, v2.py, `apps/game_generation/tests/test_blocked_row_hours.py`). Only the skill files below are this entry's.
+- `craft/clothes.md`:
+  - D goes back to one click. The room button "Go for a run (45 min)" has `show_when_blocked = true`, `clothing_item` conditions with `operator = "equipped"` on the leggings and the sports top, and `locked_text = "Needs leggings and a sports top"`, shown greyed as "Go for a run — Needs leggings and a sports top". The inside-choice workaround is dropped.
+  - The engine note "hidden, not dimmed" is replaced by how `locked_text` works. Each line was found by grep and read today: parsed at `template_import.py:2598`, carried at `game_graph.py:357`, emitted at v2.py:15183-15185, rendered by the new branch at v2.py:6689-6697 and the dimmed line at v2.py:6741-6748; the absent person stays hidden (v2.py:6685); the `clothing_item` operators are at v2.py:5236-5243.
+  - Rule 7 and its "Not this" line now say to use it.
+- `craft/clock.md`: the `show_when_blocked` line says the hours show only when the clock alone shut the row, and that `locked_text` covers other locks.
+- Every v2.py cite in `craft/*.md` moved with the engine change. The diff adds 6 lines after old line 6690 and 6 more after old line 15173, so I shifted old lines over 6690 by 6 and over 15173 by 12, by script. Spot-checked 19 targets against the new file: advanceTime at 7010, the exit default at 17936, show_when_blocked read at 15104-15108, the render at 6740-6748, locClosedReason at 11772, closed_text at 11444, SchedulePage at 24399, checkAndSubstituteCanvas at 6921, the group's failed slot at 6986, Pattern A at 6993, max_triggers_per_day at 15066, chance at 15092, substitution_only at 15110, exclusive_group at 14684, npc_id at 15086, the daily_tick hook at 7162, the media pool at 16365 and the meter cap at 7377. Each one is the line cited. `lists/COVERAGE.md` and `lists/LESSONS.md` keep their source cites as written, since those record where each idea came from, not a current claim.

@@ -95,7 +95,8 @@ The dev file is dropped only on `--no-dev` (`scripts/merge_toml_phases.py:80`). 
 | economy | `craft/economy.md` |
 | want | `craft/want.md` |
 | heat | `craft/heat.md` |
-| arc, phone, clothes, systems, returning player | none yet: `craft/<area>.md`, with spaces as hyphens |
+| clothes | `craft/clothes.md` |
+| arc, phone, systems, returning player | none yet: `craft/<area>.md`, with spaces as hyphens |
 
 Never read a list in `lists/` whole. Grep the area you're porting.
 
