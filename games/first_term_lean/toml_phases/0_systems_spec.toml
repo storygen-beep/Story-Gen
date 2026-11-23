@@ -11,6 +11,10 @@ starting_canvas = "opening"
 # P02 — second person, declared once for the whole game (C503, C548; validated at template_import.py:4108).
 [settings]
 narration_person = "second"
+# P07 — clothes on; the full wardrobe only in her bedroom (v2.py:1190-1198).
+clothing_enabled = true
+wardrobe_location = "home_her_room"
+wardrobe_anywhere = false
 
 # The game starts on her first day of college: Monday, week 1, 07:00 (template_import.py:2319-2325).
 [time]

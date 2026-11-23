@@ -19,6 +19,10 @@ starting_canvas = "opening"
 # P02 — second person, declared once for the whole game (C503, C548; validated at template_import.py:4108).
 [settings]
 narration_person = "second"
+# P07 — clothes on; the full wardrobe only in her bedroom (v2.py:1190-1198).
+clothing_enabled = true
+wardrobe_location = "home_her_room"
+wardrobe_anywhere = false
 
 # The game starts on her first day of college: Monday, week 1, 07:00 (template_import.py:2319-2325).
 [time]
@@ -291,6 +295,17 @@ default_entry = "hood_street"
 id = "hood_street"
 name = "Your Street"
 description = "Your street. The same row of houses, the corner shop at the end, the park across the road, the gym over the laundromat, and a bus stop."
+# P07 — the leave rule: a top and a bottom, or a dress (a dress counts for both, v2.py:2219).
+clothing_rules = [
+  { slots_required = ["top", "bottom"], message = "You're not going out like this. You need a top and a bottom, or a dress." },
+]
+# P07 — the street notices skin, in daylight hours (worn_exposure, v2.py:5264-5272).
+description_variants = [
+  { conditions = { version = "1.0", logic = "AND", items = [
+      { type = "worn_exposure", operator = "gte", value = 1 },
+      { type = "time_of_day", start_time = "07:00", end_time = "21:00" },
+    ] }, text = "Your street. The same row of houses, the corner shop at the end, the park across the road, the gym over the laundromat, and a bus stop. Across the road, a neighbour stops what he's doing and watches you all the way to the corner." },
+]
 parent = "neighbourhood"
 kind = "thoroughfare"
 # P03 re-check: no picture, the street only routes (craft/media.md, C1265).
@@ -697,6 +712,73 @@ start_time = "07:00"
 end_time = "08:00"
 activity = "asleep"
 
+# ── P07 · clothes. None owned at the start: the opening's hall choices add hers and equip her usual;
+# borrowing adds Mom's and Ryan's (C1150). Slots at template_import.py:278. ──
+
+[[clothing]]
+id = "plain_bra"
+name = "Plain bra"
+slot = "bra"
+
+[[clothing]]
+id = "plain_panties"
+name = "Plain panties"
+slot = "underwear"
+
+[[clothing]]
+id = "jeans"
+name = "Jeans"
+slot = "bottom"
+
+[[clothing]]
+id = "tshirt"
+name = "T-shirt"
+slot = "top"
+
+[[clothing]]
+id = "sundress"
+name = "Sundress"
+slot = "dress"
+
+[[clothing]]
+id = "sneakers"
+name = "Sneakers"
+slot = "shoes"
+
+[[clothing]]
+id = "leggings"
+name = "Leggings"
+slot = "bottom"
+type = "fitness"
+
+[[clothing]]
+id = "sports_top"
+name = "Sports top"
+slot = "top"
+type = "fitness"
+
+[[clothing]]
+id = "mom_short_skirt"
+name = "Mom's short skirt"
+slot = "bottom"
+exposure = 1
+
+[[clothing]]
+id = "mom_lowcut_top"
+name = "Mom's low-cut top"
+slot = "top"
+exposure = 1
+
+[[clothing]]
+id = "mom_heels"
+name = "Mom's heels"
+slot = "shoes"
+
+[[clothing]]
+id = "ryan_hoodie"
+name = "Ryan's hoodie"
+slot = "top"
+
 # ══════════════════════════════════════════════════════════════════
 # Phase: 5_scenes.toml
 # ══════════════════════════════════════════════════════════════════
@@ -883,6 +965,17 @@ targetType = "node"
 nodeId = "room_past"
 time_progression_minutes = 3
 flagEffects = [{ flag = "ryan_hall_past", op = "set" }, { flag = "goal1_shown", op = "set" }]
+# P07 — her clothes into the drawer, her usual on (v2.py:18219-18250).
+wardrobeEffects = [
+  { action = "add", item_id = "sundress" },
+  { action = "add", item_id = "leggings" },
+  { action = "add", item_id = "sports_top" },
+  { action = "equip", item_id = "plain_bra" },
+  { action = "equip", item_id = "plain_panties" },
+  { action = "equip", item_id = "jeans" },
+  { action = "equip", item_id = "tshirt" },
+  { action = "equip", item_id = "sneakers" },
+]
 
 [[canvases.nodes.exit_block.choices]]
 text = "\"All yours.\""
@@ -890,6 +983,17 @@ targetType = "node"
 nodeId = "room_spoke"
 time_progression_minutes = 3
 flagEffects = [{ flag = "ryan_hall_spoke", op = "set" }, { flag = "goal1_shown", op = "set" }]
+# P07 — her clothes into the drawer, her usual on (v2.py:18219-18250).
+wardrobeEffects = [
+  { action = "add", item_id = "sundress" },
+  { action = "add", item_id = "leggings" },
+  { action = "add", item_id = "sports_top" },
+  { action = "equip", item_id = "plain_bra" },
+  { action = "equip", item_id = "plain_panties" },
+  { action = "equip", item_id = "jeans" },
+  { action = "equip", item_id = "tshirt" },
+  { action = "equip", item_id = "sneakers" },
+]
 
 [[canvases.nodes.exit_block.choices]]
 text = "Fix the knot first"
@@ -897,6 +1001,17 @@ targetType = "node"
 nodeId = "room_waited"
 time_progression_minutes = 3
 flagEffects = [{ flag = "ryan_hall_waited", op = "set" }, { flag = "goal1_shown", op = "set" }]
+# P07 — her clothes into the drawer, her usual on (v2.py:18219-18250).
+wardrobeEffects = [
+  { action = "add", item_id = "sundress" },
+  { action = "add", item_id = "leggings" },
+  { action = "add", item_id = "sports_top" },
+  { action = "equip", item_id = "plain_bra" },
+  { action = "equip", item_id = "plain_panties" },
+  { action = "equip", item_id = "jeans" },
+  { action = "equip", item_id = "tshirt" },
+  { action = "equip", item_id = "sneakers" },
+]
 
 [[canvases.nodes]]
 id = "room_past"
@@ -905,7 +1020,9 @@ blocks = [
   { type = "paragraph", content = "Ryan flattens himself against the wall so nothing touches." },
   { type = "dialog", content = "Sorry.", props = { speaker = "npc", npcId = "npc_ryan" } },
   { type = "paragraph", content = "He says it to the floor." },
-  { type = "paragraph", content = "Back in your room, dressed, hair still wet, you sit on the bed and do the sums." },
+  { type = "paragraph", content = "Back in your room, you shut the door and let the towel drop. The air's cold on your wet skin, and your nipples go tight. You pull a plain bra and panties from the drawer, then your jeans, a T-shirt and sneakers. Your usual." },
+  { type = "image", props = { description = "A woman of 18 in a small bedroom, a towel on the floor, stepping into jeans, wet hair. Alone.", search_queries = ["woman 18 bedroom towel on floor stepping into jeans", "girl getting dressed after shower wet hair bedroom"], pool_dir = "body/opening_dressing_t4", pool = 1 } },
+  { type = "paragraph", content = "Hair still wet, you sit on the bed and do the sums." },
   { type = "paragraph", content = "Seventy-five by Sunday. You have nothing." },
   { type = "paragraph", content = "Last week there was a Help Wanted sign in the window of the café across from campus. And Mark said \"one way or another\" like he'd already picked one." },
   { type = "paragraph", content = "**Pay your own way.** Pay Mark your share every Sunday. This week: seventy-five. · Ask about work at the café across from campus · Pay Mark on Sunday" },
@@ -916,10 +1033,24 @@ blocks = [
 type = "choices"
 
 [[canvases.nodes.exit_block.choices]]
-text = "Go back down"
+text = "Go down to the kitchen (15 min)"
 targetType = "node"
 nodeId = "handover"
 time_progression_minutes = 15
+
+[[canvases.nodes.exit_block.choices]]
+text = "Wear the sundress instead (15 min)"
+targetType = "node"
+nodeId = "handover"
+time_progression_minutes = 15
+wardrobeEffects = [{ action = "equip", item_id = "sundress" }]
+
+[[canvases.nodes.exit_block.choices]]
+text = "Wear the leggings and sports top instead (15 min)"
+targetType = "node"
+nodeId = "handover"
+time_progression_minutes = 15
+wardrobeEffects = [{ action = "equip", item_id = "leggings" }, { action = "equip", item_id = "sports_top" }]
 
 [[canvases.nodes]]
 id = "room_spoke"
@@ -927,7 +1058,9 @@ name = "Screen 6: your room (all yours)"
 blocks = [
   { type = "dialog", content = "Thanks.", props = { speaker = "npc", npcId = "npc_ryan" } },
   { type = "paragraph", content = "He goes in sideways, eyes on the sink, and shuts the door fast." },
-  { type = "paragraph", content = "Back in your room, dressed, hair still wet, you sit on the bed and do the sums." },
+  { type = "paragraph", content = "Back in your room, you shut the door and let the towel drop. The air's cold on your wet skin, and your nipples go tight. You pull a plain bra and panties from the drawer, then your jeans, a T-shirt and sneakers. Your usual." },
+  { type = "image", props = { description = "A woman of 18 in a small bedroom, a towel on the floor, stepping into jeans, wet hair. Alone.", search_queries = ["woman 18 bedroom towel on floor stepping into jeans", "girl getting dressed after shower wet hair bedroom"], pool_dir = "body/opening_dressing_t4", pool = 1 } },
+  { type = "paragraph", content = "Hair still wet, you sit on the bed and do the sums." },
   { type = "paragraph", content = "Seventy-five by Sunday. You have nothing." },
   { type = "paragraph", content = "Last week there was a Help Wanted sign in the window of the café across from campus. And Mark said \"one way or another\" like he'd already picked one." },
   { type = "paragraph", content = "**Pay your own way.** Pay Mark your share every Sunday. This week: seventy-five. · Ask about work at the café across from campus · Pay Mark on Sunday" },
@@ -938,17 +1071,33 @@ blocks = [
 type = "choices"
 
 [[canvases.nodes.exit_block.choices]]
-text = "Go back down"
+text = "Go down to the kitchen (15 min)"
 targetType = "node"
 nodeId = "handover"
 time_progression_minutes = 15
+
+[[canvases.nodes.exit_block.choices]]
+text = "Wear the sundress instead (15 min)"
+targetType = "node"
+nodeId = "handover"
+time_progression_minutes = 15
+wardrobeEffects = [{ action = "equip", item_id = "sundress" }]
+
+[[canvases.nodes.exit_block.choices]]
+text = "Wear the leggings and sports top instead (15 min)"
+targetType = "node"
+nodeId = "handover"
+time_progression_minutes = 15
+wardrobeEffects = [{ action = "equip", item_id = "leggings" }, { action = "equip", item_id = "sports_top" }]
 
 [[canvases.nodes]]
 id = "room_waited"
 name = "Screen 6: your room (fixed the knot)"
 blocks = [
   { type = "paragraph", content = "You stand there and tie it again. Ryan stares hard at the light switch the whole time." },
-  { type = "paragraph", content = "Back in your room, dressed, hair still wet, you sit on the bed and do the sums." },
+  { type = "paragraph", content = "Back in your room, you shut the door and let the towel drop. The air's cold on your wet skin, and your nipples go tight. You pull a plain bra and panties from the drawer, then your jeans, a T-shirt and sneakers. Your usual." },
+  { type = "image", props = { description = "A woman of 18 in a small bedroom, a towel on the floor, stepping into jeans, wet hair. Alone.", search_queries = ["woman 18 bedroom towel on floor stepping into jeans", "girl getting dressed after shower wet hair bedroom"], pool_dir = "body/opening_dressing_t4", pool = 1 } },
+  { type = "paragraph", content = "Hair still wet, you sit on the bed and do the sums." },
   { type = "paragraph", content = "Seventy-five by Sunday. You have nothing." },
   { type = "paragraph", content = "Last week there was a Help Wanted sign in the window of the café across from campus. And Mark said \"one way or another\" like he'd already picked one." },
   { type = "paragraph", content = "**Pay your own way.** Pay Mark your share every Sunday. This week: seventy-five. · Ask about work at the café across from campus · Pay Mark on Sunday" },
@@ -959,10 +1108,24 @@ blocks = [
 type = "choices"
 
 [[canvases.nodes.exit_block.choices]]
-text = "Go back down"
+text = "Go down to the kitchen (15 min)"
 targetType = "node"
 nodeId = "handover"
 time_progression_minutes = 15
+
+[[canvases.nodes.exit_block.choices]]
+text = "Wear the sundress instead (15 min)"
+targetType = "node"
+nodeId = "handover"
+time_progression_minutes = 15
+wardrobeEffects = [{ action = "equip", item_id = "sundress" }]
+
+[[canvases.nodes.exit_block.choices]]
+text = "Wear the leggings and sports top instead (15 min)"
+targetType = "node"
+nodeId = "handover"
+time_progression_minutes = 15
+wardrobeEffects = [{ action = "equip", item_id = "leggings" }, { action = "equip", item_id = "sports_top" }]
 
 [[canvases.nodes]]
 id = "handover"
@@ -1061,6 +1224,15 @@ blocks = [
     { type = "paragraph", content = "Mom's in the kitchen. Mark's at the table. She looks up at you, then at him." },
   ] },
   { type = "image", props = { description = "A woman of 41 in a cardigan over a blouse, at a kitchen counter with a mug, looking up.", search_queries = ["woman 41 cardigan kitchen counter mug", "mother in a cardigan in a small kitchen"], pool_dir = "everyday/mom_kitchen_t0", pool = 1 } },
+  { type = "group", props = { conditions = { version = "1.0", logic = "AND", items = [{ type = "clothing_item", item_id = "mom_short_skirt", operator = "equipped" }] } }, blocks = [
+    { type = "paragraph", content = "Mom's eyes drop to the skirt. \"Is that mine?\" She doesn't wait for an answer." },
+  ] },
+  { type = "group", props = { conditions = { version = "1.0", logic = "AND", items = [{ type = "clothing_item", item_id = "mom_lowcut_top", operator = "equipped" }] } }, blocks = [
+    { type = "paragraph", content = "Mom's eyes drop to the top. \"Is that mine?\" She doesn't wait for an answer." },
+  ] },
+  { type = "group", props = { conditions = { version = "1.0", logic = "AND", items = [{ type = "clothing_item", item_id = "mom_heels", operator = "equipped" }] } }, blocks = [
+    { type = "paragraph", content = "Mom looks down at your feet. \"Are those my heels?\" She doesn't wait for an answer." },
+  ] },
 ]
 
 [canvases.nodes.exit_block]
@@ -1132,6 +1304,15 @@ blocks = [
     { type = "paragraph", content = "Mom's on the couch. Mark's in his chair, the remote on his knee. She smiles at you and doesn't move over." },
   ] },
   { type = "image", props = { description = "A woman of 41 in a cardigan on a living room couch, her feet under her, TV light on her face.", search_queries = ["woman 41 cardigan on couch watching TV", "mother on a sofa at night with the TV on"], pool_dir = "everyday/mom_living_t0", pool = 1 } },
+  { type = "group", props = { conditions = { version = "1.0", logic = "AND", items = [{ type = "clothing_item", item_id = "mom_short_skirt", operator = "equipped" }] } }, blocks = [
+    { type = "paragraph", content = "Mom's eyes drop to the skirt. \"Is that mine?\" She doesn't wait for an answer." },
+  ] },
+  { type = "group", props = { conditions = { version = "1.0", logic = "AND", items = [{ type = "clothing_item", item_id = "mom_lowcut_top", operator = "equipped" }] } }, blocks = [
+    { type = "paragraph", content = "Mom's eyes drop to the top. \"Is that mine?\" She doesn't wait for an answer." },
+  ] },
+  { type = "group", props = { conditions = { version = "1.0", logic = "AND", items = [{ type = "clothing_item", item_id = "mom_heels", operator = "equipped" }] } }, blocks = [
+    { type = "paragraph", content = "Mom looks down at your feet. \"Are those my heels?\" She doesn't wait for an answer." },
+  ] },
 ]
 
 [canvases.nodes.exit_block]
@@ -1177,6 +1358,85 @@ text = "Done"
 targetType = "node"
 nodeId = "hub"
 time_progression_minutes = 0
+
+# ── P07 · borrowing: one click adds the garments (wardrobeEffects add is a no-op on what she owns).
+# Greyed with locked_text while the room's people are in it (craft/clothes.md rule 7). ──
+
+[[canvases]]
+id = "borrow_mom"
+name = "Borrow Mom's things (5 min)"
+
+[canvases.trigger]
+location = "home_master_bedroom"
+trigger_mode = "manual"
+is_repeatable = true
+show_when_blocked = true
+locked_text = "Not while they're in here."
+
+[canvases.trigger.conditions]
+version = "1.0"
+logic = "AND"
+items = [{ type = "npc_at_location", npc_id = "npc_laura", location_id = "home_master_bedroom", operator = "is_absent" }, { type = "npc_at_location", npc_id = "npc_mark", location_id = "home_master_bedroom", operator = "is_absent" }]
+
+[[canvases.nodes]]
+id = "take"
+name = "Borrow Mom's things (5 min)"
+blocks = [
+  { type = "group", props = { conditions = { version = "1.0", logic = "AND", items = [{ type = "clothing_item", item_id = "mom_short_skirt", operator = "not_owned" }] } }, blocks = [
+    { type = "paragraph", content = "Her side of the wardrobe smells like her perfume. You take a short skirt, a low-cut top and the heels she never wears, and carry them back to your room." },
+  ] },
+  { type = "group", props = { conditions = { version = "1.0", logic = "AND", items = [{ type = "clothing_item", item_id = "mom_short_skirt", operator = "owned" }] } }, blocks = [
+    { type = "paragraph", content = "Her things are already on your chair." },
+  ] },
+]
+
+[canvases.nodes.exit_block]
+type = "choices"
+
+[[canvases.nodes.exit_block.choices]]
+text = "Done"
+targetType = "location"
+locationId = "home_master_bedroom"
+time_progression_minutes = 5
+wardrobeEffects = [{ action = "add", item_id = "mom_short_skirt" }, { action = "add", item_id = "mom_lowcut_top" }, { action = "add", item_id = "mom_heels" }]
+
+[[canvases]]
+id = "borrow_hoodie"
+name = "Borrow one of his hoodies (5 min)"
+
+[canvases.trigger]
+location = "home_ryans_room"
+trigger_mode = "manual"
+is_repeatable = true
+show_when_blocked = true
+locked_text = "Not while Ryan's in here."
+
+[canvases.trigger.conditions]
+version = "1.0"
+logic = "AND"
+items = [{ type = "npc_at_location", npc_id = "npc_ryan", location_id = "home_ryans_room", operator = "is_absent" }]
+
+[[canvases.nodes]]
+id = "take"
+name = "Borrow one of his hoodies (5 min)"
+blocks = [
+  { type = "group", props = { conditions = { version = "1.0", logic = "AND", items = [{ type = "clothing_item", item_id = "ryan_hoodie", operator = "not_owned" }] } }, blocks = [
+    { type = "paragraph", content = "You pick the grey one up off his floor. It's huge on you, and it smells like him." },
+  ] },
+  { type = "group", props = { conditions = { version = "1.0", logic = "AND", items = [{ type = "clothing_item", item_id = "ryan_hoodie", operator = "owned" }] } }, blocks = [
+    { type = "paragraph", content = "You've already got one of his." },
+  ] },
+]
+
+[canvases.nodes.exit_block]
+type = "choices"
+
+[[canvases.nodes.exit_block.choices]]
+text = "Done"
+targetType = "location"
+locationId = "home_ryans_room"
+time_progression_minutes = 5
+wardrobeEffects = [{ action = "add", item_id = "ryan_hoodie" }]
 
 # ── P04 · travel: four one-screen canvases. A canvas's costs are checked and taken on entry, and an
 # unaffordable one shows dimmed with its cost (v2.py:6700-6732); the choice spends the minutes. ──

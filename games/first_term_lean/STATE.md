@@ -34,7 +34,7 @@ friends; Zoe staying over and Jake at the door (release 2); short arcs for named
 | P43 | the opening's shower: her body under the water and a gif before Ryan's fist (body moment, pool 1), all three bath nodes (LO 2026-11-23). Played headless: the beat shows on all three screens, no errors; picture wired, no file yet | 2026-11-23 | 2026-11-23 | 2026-11-23 | |
 | P34 | home life: talk to each housemate, Wait, the dishes, meals with the family, lock your door, Watch TV (PLAN 8a) | | | | |
 | P33 | body care: Go for a run, Work out ($5), hair and make-up, a snack ($2), a coffee ($3), lunch ($4), sit on the grass (PLAN 8b) | | | | |
-| P07 | clothes: her wardrobe and the picker, Laura's wardrobe, Ryan's hoodie, the leave-the-house rule, the run/workout rule, noticing lines (PLAN 8d) | | | | |
+| P07 | clothes: 12 garments (hers, Mom's three, Ryan's hoodie), the opening's dressing beat with three outfits, Change clothes in her bedroom only, the leave rule on her street, Borrow Mom's things and one of Ryan's hoodies (greyed while they're in), Mom's "Is that mine?" on her menu, the neighbour's line on her street. Played headless 2026-11-23: all cases right, no errors. The run/workout gates moved to P33 | 2026-11-23 | 2026-11-23 | 2026-11-23 | |
 | P35 | the clothes shop and Nina: place, stock in four levels, trait and money locks, clothes_layout = room (PLAN 8d) | | | | |
 | P09 | college: the timetable, Go to class, Study, drama, practise on the stage, Grades shown, still (PLAN 8f) | | | | |
 | P10 | the café job: shifts every day, $22 a shift, behind P21 (PLAN 8f) | | | | |
@@ -69,7 +69,7 @@ friends; Zoe staying over and Jake at the door (release 2); short arcs for named
 
 - On the portal as "First Term (Lean)"; output/ is a dev + debug build of the re-carded opening, pushed to main 2026-11-22 (LO: "rebuild with dev and debug, commit, merge and push").
 
-- Body moments, relayed from LO by the ENI session 2026-11-22 (craft/body-moments.md, read): the P02–P06 re-check also carries, each shown to LO as a card: the opening's shower (done in P43, 2026-11-23); the slipping knot (:164, :241) paid off on her body with a picture, Ryan still looks away (B); "Back in your room, dressed" (:199/221/242) becomes the towel off and the dressing, clothes equipped (C719; needs P07's wardrobe or a piece of it first); P06's daily shower (:546-547), her under the water, pool 4 (LO 2026-11-22); the opening's pictures pool 1 each (LO); one line each for her body on the packed bus (:379) and her noticing Ryan shirtless (:159). No meter moves.
+- Body moments, relayed from LO by the ENI session 2026-11-22 (craft/body-moments.md, read): the P02–P06 re-check also carries, each shown to LO as a card: the opening's shower (done in P43, 2026-11-23); the slipping knot (:164, :241) paid off on her body with a picture, Ryan still looks away (B); the towel off and the dressing (done in P07, 2026-11-23); getting out of bed on the opening's first screen ("in the single bed you had at twelve"), one line on her body, maybe a picture (P13's re-check; LO 2026-11-23); going to sleep, what she sleeps in and the sheet on her, with the pyjamas (P06's re-check; LO 2026-11-23); P06's daily shower (:546-547), her under the water, pool 4 (LO 2026-11-22); the opening's pictures pool 1 each (LO); one line each for her body on the packed bus (:379) and her noticing Ryan shirtless (:159). No meter moves.
 - Walk-ins are in release 1 (P38–P41), both kinds (LO, 2026-11-23). P07 (clothes) goes before the opening's re-check, so "Back in your room, dressed" equips her clothes (LO, 2026-11-23); clothes has no craft file yet, so craft/clothes.md comes first (piece.md step 1).
 - P32 adds the rows for everyone outside the house; Laura, Mark and Ryan have their week from P13.
 - P20 must set `zoe_place_known` (from P05), so P27 can reach Zoe's.
@@ -77,4 +77,4 @@ friends; Zoe staying over and Jake at the door (release 2); short arcs for named
 - P04's six campus places still say "Nothing to do here right now."; they go with P04's re-check.
 - Piece list approved 2026-11-20, with LO's three changes (NOTES).
 
-Next step: play — LO plays the opening (with the shower), the re-checked places and Mom's menu (output_dev/); then piece — craft/clothes.md, P07, and the P04, P06, P01, P13 re-checks
+Next step: play — LO plays the opening (shower, dressing), the re-checked places, Mom's menu and the clothes (output_dev/); then piece — the P04, P06, P01, P13 re-checks (P04, P06 and P01 need craft/systems.md)

@@ -114,6 +114,12 @@
       "sha256": "b51c854607387d743678ffada5d4f9f644c097688e363d82623b5ae3ed54fda7",
       "words": "Yes",
       "date": "2026-11-23"
+    },
+    {
+      "card": "P07",
+      "sha256": "cb390b6b783e0214d68f31aa6a791f3ab3e59f450da8fbce421b839a62203691",
+      "words": "Yes, and add both to STATE",
+      "date": "2026-11-23"
     }
   ]
 }
