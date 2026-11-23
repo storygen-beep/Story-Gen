@@ -165,6 +165,8 @@ core_traits = { energy = 100, money = 0, corruption = 0, exhibitionism = 0 }
 # Every player flag is declared here. P05: zoe_place_known (set by P20) reveals Zoe's Apartment.
 flag_keys = [
   "zoe_place_known",
+  # P03 re-check: the house next door opens once she has met him (P24 sets it)
+  "met_vance",
   # P13 — the opening
   "start_grades", "start_fun", "start_freedom",
   "met_laura", "met_mark",
@@ -207,7 +209,7 @@ name = "Hall"
 description = "The hall. Every room in the house opens off it."
 parent = "home"
 kind = "thoroughfare"
-image = "locations/home_hall.jpg"
+# P02 re-check: no picture, the hall only routes (craft/media.md, C1265).
 
 [[locations]]
 id = "home_kitchen"
@@ -216,16 +218,18 @@ description = "The kitchen: the table where the family eats, the fridge, a coffe
 parent = "home"
 entry_from = "home_hall"
 kind = "destination"
-image = "locations/home_kitchen.jpg"
+image = "locations/home_kitchen_t0.jpg"
+image_search_queries = ["woman of 18 eating toast at a small family kitchen counter", "young woman with a coffee mug in a kitchen"]
 
 [[locations]]
 id = "home_living_room"
 name = "Living Room"
-description = "The living room: the couch, the TV, and the big armchair nobody else sits in. Nothing to do here right now."
+description = "The living room: the couch, the TV, and the big armchair nobody else sits in."
 parent = "home"
 entry_from = "home_hall"
 kind = "destination"
-image = "locations/home_living_room.jpg"
+image = "locations/home_living_room_t0.jpg"
+image_search_queries = ["woman of 18 curled on a couch watching TV in a family living room", "young woman on a sofa with the remote"]
 
 [[locations]]
 id = "home_bathroom"
@@ -234,7 +238,8 @@ description = "The bathroom, the only one in the house. One shower, a lock that 
 parent = "home"
 entry_from = "home_hall"
 kind = "destination"
-image = "locations/home_bathroom.jpg"
+image = "locations/home_bathroom_t0.jpg"
+image_search_queries = ["woman of 18 brushing her teeth at a small bathroom sink", "young woman at a bathroom sink, shower behind her"]
 
 [[locations]]
 id = "home_her_room"
@@ -243,25 +248,28 @@ description = "Your bedroom. The same single bed since you were twelve, and your
 parent = "home"
 entry_from = "home_hall"
 kind = "destination"
-image = "locations/home_her_room.jpg"
+image = "locations/home_her_room_t0.jpg"
+image_search_queries = ["woman of 18 sitting cross-legged on a single bed in a small bedroom", "young woman on a narrow bed with a laptop"]
 
 [[locations]]
 id = "home_ryans_room"
 name = "Ryan's Room"
-description = "Ryan's room. Clothes on the floor, the curtains shut, and it smells like him. Nothing to do here right now."
+description = "Ryan's room. Clothes on the floor, the curtains shut, and it smells like him."
 parent = "home"
 entry_from = "home_hall"
 kind = "destination"
-image = "locations/home_ryans_room.jpg"
+image = "locations/home_ryans_room_t0.jpg"
+image_search_queries = ["woman of 18 holding up a grey hoodie in a messy guy's bedroom, curtains shut", "young woman picking a hoodie off a bedroom floor"]
 
 [[locations]]
 id = "home_master_bedroom"
 name = "Master Bedroom"
-description = "Your mom and Mark's room. The big bed, her wardrobe, and the feeling you shouldn't be in here. Nothing to do here right now."
+description = "Your mom and Mark's room. The big bed, her wardrobe, and the feeling you shouldn't be in here."
 parent = "home"
 entry_from = "home_hall"
 kind = "destination"
-image = "locations/home_master_bedroom.jpg"
+image = "locations/home_master_bedroom_t0.jpg"
+image_search_queries = ["woman of 18 holding a dress up against herself at a wardrobe in her parents' bedroom", "young woman at an open wardrobe by a big bed"]
 
 # ── P03 · Neighbourhood: one area, her street its hub ──
 
@@ -278,24 +286,28 @@ name = "Your Street"
 description = "Your street. The same row of houses, the corner shop at the end, the park across the road, the gym over the laundromat, and a bus stop."
 parent = "neighbourhood"
 kind = "thoroughfare"
-image = "locations/hood_street.jpg"
+# P03 re-check: no picture, the street only routes (craft/media.md, C1265).
 
 [[locations]]
 id = "hood_next_door"
 name = "The House Next Door"
-description = "The house next door. The man who owns your family's house lives here: a porch, one chair on it, and a clear view of your front door. Nothing to do here right now."
+description = "The house next door. The man who owns your family's house lives here: a porch, one chair on it, and a clear view of your front door."
 parent = "neighbourhood"
 kind = "destination"
-image = "locations/hood_next_door.jpg"
+image = "locations/hood_next_door_t0.jpg"
+# P03 re-check: hidden until she has met the man next door; P24 meets him on her street, on his porch.
+hidden_until = { flag = "met_vance" }
+image_search_queries = ["woman of 18 on the pavement in front of a neighbour's porch with one chair", "young woman at the bottom of porch steps, suburban street"]
 entry_from = "hood_street"
 
 [[locations]]
 id = "hood_shop"
 name = "Corner Shop"
-description = "The corner shop: snacks, phone credit, cigarettes behind the counter, the till by the door. Nothing to do here right now."
+description = "The corner shop: snacks, cigarettes behind the counter, the till by the door. A sign on the door says it's open from 7am to 11pm."
 parent = "neighbourhood"
 kind = "destination"
-image = "locations/hood_shop.jpg"
+image = "locations/hood_shop_t0.jpg"
+image_search_queries = ["woman of 18 picking snacks off a shelf in a small corner shop", "young woman at the till of a convenience store"]
 entry_from = "hood_street"
 hours = [{ weekdays = [], open = "07:00", close = "23:00" }]
 closed_text = "The corner shop is shut. It opens at 7am."
@@ -303,10 +315,11 @@ closed_text = "The corner shop is shut. It opens at 7am."
 [[locations]]
 id = "hood_park"
 name = "Park"
-description = "The park: a running loop, benches, the pond. Nothing to do here right now."
+description = "The park: a running loop, benches, the pond. A sign at the gates says they open at 6am and lock at 9pm."
 parent = "neighbourhood"
 kind = "destination"
-image = "locations/hood_park.jpg"
+image = "locations/hood_park_t0.jpg"
+image_search_queries = ["woman of 18 sitting on a park bench by a pond", "young woman on a bench in a small town park"]
 entry_from = "hood_street"
 hours = [{ weekdays = [], open = "06:00", close = "21:00" }]
 closed_text = "The park gates are locked. They open at 6am."
@@ -314,10 +327,11 @@ closed_text = "The park gates are locked. They open at 6am."
 [[locations]]
 id = "hood_gym"
 name = "Gym"
-description = "The gym: weights, treadmills, mirrors on every wall. Nothing to do here right now."
+description = "The gym: weights, treadmills, mirrors on every wall. A sign on the door says it's open from 6am to 10pm."
 parent = "neighbourhood"
 kind = "destination"
-image = "locations/hood_gym.jpg"
+image = "locations/hood_gym_t0.jpg"
+image_search_queries = ["woman of 18 with a gym bag walking past the weights in a small gym", "young woman in a gym with mirrors on every wall"]
 entry_from = "hood_street"
 hours = [{ weekdays = [], open = "06:00", close = "22:00" }]
 closed_text = "The gym is closed. It opens at 6am."
@@ -417,11 +431,18 @@ is_container = true
 [[locations]]
 id = "near_cafe"
 name = "Café"
-description = "The café across from campus: the coffee machine hissing, a long counter, a tip jar by the till. Nothing to do here right now."
+description = "The café across from campus: the coffee machine hissing, a long counter, a tip jar by the till. A sign on the door says it's open from 7am to 9pm."
+# P05 re-check: the Help Wanted line shows until P21 sets cafe_hired (first match, v2.py:11775-11819).
+description_variants = [
+  { conditions = { version = "1.0", logic = "AND", items = [
+      { type = "flag", subject = "player", flag_key = "cafe_hired", operator = "is_false" },
+    ] }, text = "The café across from campus: the coffee machine hissing, a long counter, a tip jar by the till. A sign on the door says it's open from 7am to 9pm. A Help Wanted sign is taped in the window." },
+]
 parent = "near_campus"
 entry_from = "campus_quad"
 kind = "destination"
-image = "locations/near_cafe.jpg"
+image = "locations/near_cafe_t0.jpg"
+image_search_queries = ["woman of 18 at a cafe window table with a coffee", "young woman sitting in a small cafe across from a college"]
 costs = { time = 5 }
 hours = [{ weekdays = [], open = "07:00", close = "21:00" }]
 closed_text = "The café is shut. It opens at 7am."
@@ -431,11 +452,12 @@ closed_text = "The café is shut. It opens at 7am."
 [[locations]]
 id = "near_zoe_apartment"
 name = "Zoe's Apartment"
-description = "Zoe's apartment, two streets from campus: a sofa that's seen things, clothes on every chair, and music always on. Nothing to do here right now."
+description = "Zoe's apartment, two streets from campus: a sofa that's seen things, clothes on every chair, and a speaker on the windowsill."
 parent = "near_campus"
 entry_from = "campus_quad"
 kind = "destination"
-image = "locations/near_zoe_apartment.jpg"
+image = "locations/near_zoe_apartment_t0.jpg"
+image_search_queries = ["woman of 18 on a messy sofa in a student apartment, clothes on the chairs", "young woman on a couch in a cluttered apartment"]
 costs = { time = 10 }
 hidden_until = { flag = "zoe_place_known" }
 
