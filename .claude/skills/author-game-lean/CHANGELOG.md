@@ -290,3 +290,19 @@
   - "You really aren't that hungry right now." in `ChamberlainHallInterior.txt`, line 20.
 - The field rows come from `round8/ROUND8_REPORT.md` §2.5 and key points, and `round9b/ROUND9B_REPORT.md` §2.1, §2.6, §3 and §4, read today; their numbers were not re-run.
 - `SKILL.md`: the area table gives systems its file.
+- **Approval: LO's own words, typed in the main-lean session and relayed (ENI for LO, standing authorization, 2026-11-20):** "Confirm it with top games and CoT."
+- Created `craft/arc.md`, the arc area's file: one person's story from meeting to where it stops in a release. The meeting, the goal card, heat and meters point to their own files and aren't restated.
+  - Must read, 24 rows: C180, C160, C120, C109, C115, C162, C146, C151, C148, C149, C198, C131, C174, C212, C124, C164, C165, C166, C121, C127, C140, C215, C217 and C171. The failure column cites L18 and L80.
+  - An engine section, measures, ten rules each saying whether CoT and the field agree or split, a worked example in roles (a housemate's step table), and six "Not this" lines.
+  - The one split is rule 3: CoT's own dice and day floor against its players' "making this take months". The rule follows the players.
+- Engine, read today:
+  - one-time is `is_repeatable = false` (v2.py:15065; `template_import.py:833`);
+  - `days_since_flag` (v2.py:5167-5180);
+  - `consume_on`, `final` and `retry_after_days` (v2.py:5436-5445; `template_import.py:924-931`);
+  - the quest card's `terminal_text` (v2.py:19970-19974; `template_import.py:1405-1411`).
+- CoT, read today in the quest log (`_cot_js.txt`, lines 83664, 83665 and 83669): the place-and-hour hint, the wait paired with a thing to do, and the open last line. Also `StoryHintWidgets.txt`, line 123.
+- The field comes from `ARC_CRAFT_STUDY.md`. Ten of its cites were re-opened in `round2/passages`, and all ten say what the study says: CoT 43682, 45271, 65940 and 43690; IHOH 9556, 5667, 15597 and 12219; CW 1231. CoT 136570 was opened too; it is one line of the condition, and the study's range covers the rest.
+- Not used, and said so in the file: COVERAGE's C156 ("the first third has no sex"), because the field's median is 43%, ranging from 0% to 85%.
+- Kept to `plan.md` §9 and L91: the plan holds only the arc's scaffold, and each release designs its own steps. My first draft said to plan the whole arc up front. I caught that against plan.md before sending, and fixed it.
+- `SKILL.md`: the area table gives arc its file.
+- `plan.md` §9 (line 98) and `templates/PLAN.md` (line 46): the arc scaffold's "first third" now reads "the opening (the steps before the first sex)", so it matches `craft/arc.md`, which drops COVERAGE's C156 because the field's first sex falls at a median 43% of an arc (0–85%). LO's yes, relayed by ENI (2026-11-23: "yes, change the wording and commit it"). Verified by grep: the only "first third" left in the skill is in the lists (LESSONS L83 and L91, COVERAGE C156 and C184), which record sources and stay as they are, and arc.md's note on C156.
