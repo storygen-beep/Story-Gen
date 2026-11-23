@@ -57,7 +57,7 @@ Each rule is marked **measured** or **LO's choice**.
 3. **She gets a choice, and the no is written** (C639, C640). *Measured:* "Have a look" or "Resist the urge to look", and the line after each.
 4. **The stage order** (C284–C289). Release 1 uses only stage 1 (things that happen to her, his leak, overhearing, her body moments) and sex she sees. Nothing she does sexually, and no meter moves. *Measured* order; release 1's cut is *LO's choice* (`plan.md` §10: her own sex opens only with a partner).
 5. **The people she lives with start with accidents; her choice comes later** (C297). *Measured* in the earlier CoT study.
-6. **An explicit beat stays on the body to its last sentence,** with 3+ explicit words, crude by default (C248, C249, C254, C276). What it means gets its own beat after, as narration on her body, never an italic thought (`craft/voice.md`). *Measured* in the field; crude is *LO's choice* (CLAUDE.md).
+6. **An explicit beat stays on the body to its last sentence,** with 3+ explicit words, crude by default (C248, C249, C254, C276). What it means gets its own beat after, as narration on her body, never an italic thought (`craft/voice.md`). Mark it `[explicit]` on the card, and run `check.py --beat` (below). *Measured* in the field; crude is *LO's choice* (CLAUDE.md).
 7. **Low heat is on the body** (C311). It's in `craft/opening.md`; cite it there.
 
 ## Worked example
@@ -88,6 +88,6 @@ Either way, it sets a flag only. The two explicit beats end on bodies: her shirt
 - Euphemism: "between her legs". Name it (C239; CLAUDE.md, crude by default).
 - An italic thought about it. Her reaction is narration on her body (`craft/voice.md`).
 
-## Open: the explicit-beat check
+## The explicit-beat check
 
-`LATER.md` holds "explicit beats need a measured check before the first sex piece" (LO, 2026-11-20). The walk-ins now show sex: P39's park couple and P40's library stacks are the lean game's first explicit beats. So the check is due before those cards, not later. Proposed, not built: `check.py --beat <file or card>` counts v2's frozen `EXPLICIT` words per beat and flags a beat marked explicit that has fewer than 3, or whose last sentence has none (the pivot, C249). The game-wide floor (C255) waits until there are enough beats to share.
+`check.py --beat <card or file>` (LO, relayed 2026-11-23: "Continue"). Mark each explicit beat on the card as `[explicit] … [/explicit]`; an unclosed tag runs to the next blank line. The check counts v2's frozen `EXPLICIT` words in each marked beat, loaded from `.claude/skills/author-game-v2/scripts/gates.py:311-315` and never copied. It is red when a beat has fewer than 3 (C254), or when its last sentence has none (the pivot, C249). A file with no marked beat is INCOMPLETE, never GREEN. The worked example's Watch beat passes with 5. A faded copy ("You watch until it's over.") and a copy ending on what it means are both red; the tests hold all three. The game-wide floor (C255) waits until there are enough beats to share.

@@ -13,4 +13,4 @@ Out of scope: <what this piece does not do>. Events only: never the body of a mo
 Builds: <canvas, place and person ids, and `sidebar:<trait>` for a sidebar item, this piece adds or edits, comma-separated>
 Areas: <each area and topic this piece touches, from SKILL.md's list, comma-separated>
 Craft: <craft/<area>.md, …> · cites <every must-read id> · skip <id>: <why> (one per skip)
-Card checks: <`check.py --card` verdict, pasted: GREEN, or each red line>
+Card checks: <`check.py --card` verdict, pasted: GREEN, or each red line> · <`check.py --beat` verdict, when a beat is marked `[explicit]`>

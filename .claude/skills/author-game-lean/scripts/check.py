@@ -17,6 +17,13 @@ Checks:
              names craft/media.md. Reads only; saves nothing.
   release    --release only: no dev canvas id or name is left in the merged TOML or the built HTML
 
+    python3 check.py --beat <card or text file>
+
+  beat       every beat marked explicit, from `[explicit]` to `[/explicit]` (or to the next blank line), has 3+
+             words from v2's frozen EXPLICIT list (author-game-v2/scripts/gates.py:311-315, imported, never
+             copied), and its last sentence has at least one (the pivot, C249). Reads only; saves nothing.
+             A file with no marked beat is INCOMPLETE, never GREEN. The 7.5% game-wide floor (C255) waits.
+
 Output: one verdict line (GREEN, RED <n>, or INCOMPLETE: <reason>), then every red, with NEW on the ones
 that weren't red last run, then what was fixed since last run. It never says GREEN when a check was skipped.
 Exit 0 green, 1 red, 2 incomplete. The last run is kept in games/<slug>/.check_last.json (git-ignored).
@@ -41,6 +48,8 @@ import approve  # noqa: E402
 import reach  # noqa: E402
 
 GREEN, RED, INCOMPLETE = "green", "red", "incomplete"
+GATES = REPO / ".claude" / "skills" / "author-game-v2" / "scripts" / "gates.py"
+BEAT_FLOOR = 3  # C254: an explicit beat has 3+ frozen-list words
 
 
 # ── inputs ────────────────────────────────────────────────────────────────────────────────────────────────
@@ -236,6 +245,52 @@ def check_card(game_dir, card_id, skill=None):
     return (RED, rows) if rows else (GREEN, [])
 
 
+def explicit_words():
+    """v2's frozen EXPLICIT regex, loaded from gates.py so the list can never drift from the build's."""
+    import importlib.util
+    spec = importlib.util.spec_from_file_location("v2_gates", GATES)
+    gates = importlib.util.module_from_spec(spec)
+    spec.loader.exec_module(gates)
+    return gates.EXPLICIT
+
+
+def marked_beats(text):
+    """The beats marked explicit: `[explicit]` up to `[/explicit]`, or up to the next blank line."""
+    beats = []
+    for m in re.finditer(r"\[explicit\](.*?)(?:\[/explicit\]|\n[ \t>]*\n|\Z)", text, re.S | re.I):
+        lines = [re.sub(r"^[ \t]*>?[ \t]*", "", l) for l in m.group(1).splitlines()]
+        beats.append(" ".join(l for l in lines if l).strip())
+    return beats
+
+
+def last_sentence(beat):
+    """The beat's last sentence, quotes and markdown stripped."""
+    plain = re.sub(r"[*_\"“”]", "", beat).strip()
+    parts = [s for s in re.split(r"(?<=[.!?…])\s+", plain) if s.strip()]
+    return parts[-1] if parts else ""
+
+
+def check_beats(path, words=None):
+    """Rows that make the marked beats red. Reads only."""
+    path = Path(path)
+    if not path.is_file():
+        return INCOMPLETE, [f"no file at {path}"]
+    beats = marked_beats(path.read_text(encoding="utf-8"))
+    if not beats:
+        return INCOMPLETE, [f"{path.name} marks no beat with [explicit]"]
+    words = words or explicit_words()
+    rows = []
+    for n, beat in enumerate(beats, 1):
+        head = f"beat {n} (\"{beat[:40]}…\")"
+        found = words.findall(beat)
+        if len(found) < BEAT_FLOOR:
+            rows.append(f"{head}: {len(found)} explicit word(s), needs {BEAT_FLOOR} (C254)")
+        end = last_sentence(beat)
+        if not words.search(end):
+            rows.append(f"{head}: its last sentence has no explicit word, the pivot (C249): \"{end}\"")
+    return (RED, rows) if rows else (GREEN, [])
+
+
 def check_release(game_dir, game):
     """After a --no-dev merge, no dev canvas may survive in the TOML or in the built HTML."""
     if game is None:
@@ -305,10 +360,22 @@ def card_main(argv):
     return {GREEN: 0, RED: 1, INCOMPLETE: 2}[status]
 
 
+def beat_main(argv):
+    ap = argparse.ArgumentParser(description="Check the beats a card or file marks [explicit].")
+    ap.add_argument("path")
+    args = ap.parse_args(argv)
+    status, rows = check_beats(args.path)
+    print({GREEN: "GREEN", RED: f"RED {len(rows)}", INCOMPLETE: "INCOMPLETE"}[status])
+    print("\n".join(f"  {r}" for r in rows))
+    return {GREEN: 0, RED: 1, INCOMPLETE: 2}[status]
+
+
 def main(argv=None):
     argv = list(sys.argv[1:] if argv is None else argv)
     if argv[:1] == ["--card"]:
         return card_main(argv[1:])
+    if argv[:1] == ["--beat"]:
+        return beat_main(argv[1:])
     ap = argparse.ArgumentParser(description="Check a game built with author-game-lean.")
     ap.add_argument("game_dir")
     ap.add_argument("--release", action="store_true")

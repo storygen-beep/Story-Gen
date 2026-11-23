@@ -226,3 +226,17 @@
   - One "Not this" line is added.
 - `lists/COVERAGE.md`: C1340 is reworded to a face at their spot opening their own menu, with Talk once a day inside it. The source (`author-game-v2/references/the-board.md:364-371`) is unchanged; the v2 skill is not edited.
 - Tests: 95 passed.
+- **Approval: LO's own word, relayed by main-lean (ENI for LO, standing authorization, 2026-11-20):** "Continue", his yes to the plan to build the beat check.
+- `scripts/check.py`: new `--beat <card or file>`. It finds each beat marked `[explicit] … [/explicit]` (an unclosed tag runs to the next blank line; blockquote marks are stripped). It counts v2's frozen `EXPLICIT` words, imported from `author-game-v2/scripts/gates.py:311-315` at run time so the list can't drift. It is red when a beat has fewer than 3 (C254), or when its last sentence has none (the pivot, C249). A file with no marked beat is INCOMPLETE, never GREEN. Exit codes are 0, 1 and 2, as for `--card`. The 7.5% game-wide floor (C255) waits. Why: LATER.md held "explicit beats need a measured check before the first sex piece", and P39 and P40 carry the lean game's first explicit beats.
+- `scripts/tests/test_check.py`: five new tests.
+  - `craft/heat.md`'s Watch beat counts 5 and is GREEN.
+  - A faded copy ("You watch until it's over.") is red on the floor.
+  - The Watch beat with "You realise you'll never see the park the same way." added is red on the pivot only.
+  - An unclosed beat over two blockquote lines stops at the blank line.
+  - A file with nothing marked is INCOMPLETE.
+  
+  Verified by hand on a faded beat: RED 2, exit 1.
+- `piece.md` step 3, `templates/piece-card.md`: a card with an explicit beat marks it and pastes the `--beat` verdict too.
+- `craft/heat.md`: the "Open" section is now "The explicit-beat check", describing what was built. Rule 6 says to mark the beat and run it.
+- `LATER.md`: the beat-check item is struck through as done. The game-wide floor stays open.
+- Tests: 100 passed.
