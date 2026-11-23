@@ -471,3 +471,23 @@ Why for all of these: P13's reader found new FAILs on every pass, v5 to v11 (99 
     - a changed screen asks only its own rows.
   - **Verified read-only:** a `Does:` block for P13 was written into a scratchpad copy of the card, with `games/first_term_lean/toml_phases` linked read-only. The guard is green on it. P13's list is 156 rules: 1 script, 88 reader, 67 note. That is 169 rows with the scene tests, against today's 445 from the whole craft files. By screen: 64 to 103 rules (the hall 103, the bathroom and knot screens 99, the kitchen and start-choice screens 64).
   - **Proposed, not done:** `Does:` replaces the card's `Areas:` and `Craft:` lines; plan.md runs `--rules … plan`.
+- Three follow-ups to Part B and Part D (LO relayed 2026-11-24: "Yes"):
+  - **`Does:` replaces `Areas:` and `Craft:` on new cards.** `check.py --card` judges a card with `Does:` only on `Does:` and `Sheet:`: known triggers, one per screen at least, the same screens. The cite-every-id check is gone for it, because listing an id is not applying it. A card without `Does:` keeps the old `Areas:` and `Craft:` check, so the cards approved before today stay green.
+    - `templates/piece-card.md` drops the `Areas:` and `Craft:` lines, and `Card checks:` pastes the `--rules` count line.
+    - `piece.md` steps 2 and 4 and `SKILL.md`'s "Areas." paragraph say so.
+    - Tests: a card with `Does:` and no `Areas:` or `Craft:` is green.
+  - **`plan.md`:** a new line has the writer print `check.py --rules games/<slug> plan` before the first bite and before each release's piece list, and write to those rules. It says plainly that the reader does not judge them yet.
+  - **"the opening" and "a one-time step" tightened.** 25 rows were relabelled, with no rule text changed. `SKILL.md` gains five triggers, each with two or more rows:
+    - "the first screen": C54, C43, C1626, C1613, C1628;
+    - "the start choice": C43, C44;
+    - "the hand-over": C1604, C1609, C1621, C1631;
+    - "a person's arc step": C180, C120, C109, C115, C162, C148;
+    - "a no is possible": C164, C165, C166, C639, C640.
+    
+    Other relabels: C146 is now "a repeatable" only. C1166 is now "she dresses or undresses". C48 and C51 are now "the plan", because the creation screen is the engine's, not a canvas screen, and `creation` still checks C48 at every build. Three rows keep "the opening" because they hold on every opening screen: C520, C1611 and C327. No row is left on "a one-time step"; the trigger stays, and the guard still sees it.
+    - The guard (`rules.py`) now sees "the first screen" (the starting canvas's first node) and "the hand-over" (its last screens).
+    - Tests cover both triggers.
+    - **Verified read-only on the scratchpad P13:** 153 rules (166 with the scene tests) against 156 (169), and 988 rule-screen pairs against 1,287. The hall goes from 103 to 89 rows and the start-choice screens from 64 to 45.
+  - **Part D:**
+    - **`build.md` is written in full** (60 lines): build; the scripts, the sheet and the `Does:` guard, all blocking; the reader on `reading.py`'s work list, where reader rows, scene tests and the truth rule block and notes are shown on their own; record the pass; close the piece; LO plays. There is no pass limit. Commits: LO decides when, and a session commits only on his word.
+    - **`SKILL.md`'s loop** steps 2, 6 and 7 match it. Always rule 7 now reads "LO decides commits", which is what is true today. Its "check" row names `scenes.py`, `sheet.py` and `rules.py`, and a new row names `reading.py`.

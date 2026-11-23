@@ -11,7 +11,7 @@ The card's `Craft:` line cites each one, or says in one line why it skips it. `w
 | C719 | a button does something: no "get dressed" that moves no garment | first_term_lean's "Back in your room, dressed" | she dresses or undresses | reader |
 | C1158 | the clothes the prose names are backed by a condition, an earlier equip, or the beat that equips her; undressing in an act is backed by the act | the opening's dressing line failed this row and passed rule 4 (P13 reader pass 8) | a garment is named | reader + sheet |
 | C1206 | prose never names a garment she may not be wearing | — · kept blocking: the truth rule | a garment is named | reader + sheet |
-| C1166 | the opening arms the wardrobe, with the outfit choice on the screen where she dresses | — · kept blocking: LO's choice (2026-11-23) | the opening | reader |
+| C1166 | the opening arms the wardrobe, with the outfit choice on the screen where she dresses | — · kept blocking: LO's choice (2026-11-23) | she dresses or undresses | reader |
 | C1167 | release 1's minimum: one number the world reads, one gate with a notice, leave rules, one event, one line where a person notices | — | the plan | note |
 | C1204 | release 1: cheap clothes, one number, one gate on day 1, the leave rules, one event, one line | — | the plan | note |
 | C1183 | the unit is the state, not the item: design states first, then items | — | the plan | note |

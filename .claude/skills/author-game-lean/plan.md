@@ -2,6 +2,8 @@
 
 A new game starts here. The plan is written in `games/<slug>/PLAN.md` from `templates/PLAN.md`, one bite at a time, in the order below. Show each bite to LO in chat and take his answer before the next one. Record each answer in `NOTES.md` in his words, with the date. For a bite's craft beyond its must-read ids, grep its area in `lists/COVERAGE.md`.
 
+**The plan's rules.** Before the first bite, and again before each release's piece list, run `venv/bin/python .claude/skills/author-game-lean/scripts/check.py --rules games/<slug> plan`. It prints every craft rule whose `when` is "the plan": the ones that design a whole system (the bill, the clothes states, the meters' stages, the heat floor across the game). Write the bites and the piece list to them. The reader does not judge these yet: no script or reader pass reads a plan, so they hold only as far as the writer and LO read them (LO, relayed 2026-11-24: "Yes").
+
 **Every bite starts from what LO has already named.** Place everyone and everything he named, then point out the gaps. Never re-propose or drop something he named. (NOTES gap "the people bite took only the starting core", 2026-11-20.)
 
 ## 1 · Her

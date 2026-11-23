@@ -26,7 +26,9 @@ Checks:
 
     python3 check.py --card games/<slug> <id>
 
-  card       before LO's yes: the card's Craft: line cites every must-read id of every craft file it names,
+  card       before LO's yes. A card with a Does: block: every trigger is known and written per screen, every
+             screen has one, Does: and Sheet: name the same screens. An older card without Does: keeps the old
+             check: the card's Craft: line cites every must-read id of every craft file it names,
              or skips one as `skip <id>: <reason>`; every named craft file exists; a card with a media spot
              names craft/media.md. Reads only; saves nothing.
   release    --release only: no dev canvas id or name is left in the merged TOML or the built HTML
@@ -230,9 +232,29 @@ def check_card(game_dir, card_id, skill=None):
     if not path.is_file():
         return INCOMPLETE, [f"no card at {path}"]
     text = path.read_text(encoding="utf-8")
+    rows = []
+    has_screens = bool(re.search(r"^[ \t]*Screen \d", text, re.M))
+    does = rules.card_does(text)
+    if does is not None:
+        # A card with Does: (2026-11-24 on): its rule list comes from Does:, so it has no Areas: or Craft: line and
+        # no cite-every-id check; listing an id was never applying it (LO, relayed 2026-11-24: "Yes").
+        rows += rules.does_problems(does, skill)
+        mine = sheet.card_sheet(text)
+        if mine is not None and set(mine) != set(does):
+            rows.append(f"Does: and Sheet: name different screens: {sorted(set(mine) ^ set(does))}")
+        if has_screens and mine is None:
+            rows.append("the card has screens and no Sheet: block (templates/piece-card.md); "
+                        "write each screen's clock, place, who, wearing and flags before the prose")
+        return (RED, rows) if rows else (GREEN, [])
+    if has_screens:
+        rows.append("the card has screens and no Does: block; name each screen's triggers (SKILL.md, Rule labels)")
+        if sheet.card_sheet(text) is None:
+            rows.append("the card has screens and no Sheet: block (templates/piece-card.md); "
+                        "write each screen's clock, place, who, wearing and flags before the prose")
+    # An older card, without Does: its Areas: and Craft: lines are checked as before.
     m = re.search(r"^Craft:[ \t]*(.*)$", text, re.M)
     line = m.group(1) if m else ""
-    rows = [] if m else ["the card has no Craft: line"]
+    rows += [] if m else ["the card has no Craft: line"]
     named = re.findall(r"craft/[\w-]+\.md", line)
     media = re.search(r"^Media:\s*(\d+)", text, re.M)
     if media and int(media.group(1)) > 0 and "craft/media.md" not in named:
@@ -250,17 +272,6 @@ def check_card(game_dir, card_id, skill=None):
             rows.append(f"area `{area}` has no craft file yet: write {area_file(area)} first (piece.md step 1)")
         elif area_file(area) not in named:
             rows.append(f"area `{area}`: the Craft: line does not name {area_file(area)}")
-    does = rules.card_does(text)
-    if does is not None:
-        rows += rules.does_problems(does, skill)
-        mine = sheet.card_sheet(text)
-        if mine is not None and set(mine) != set(does):
-            rows.append(f"Does: and Sheet: name different screens: {sorted(set(mine) ^ set(does))}")
-    elif re.search(r"^[ \t]*Screen \d", text, re.M):
-        rows.append("the card has screens and no Does: block; name each screen's triggers (SKILL.md, Rule labels)")
-    if re.search(r"^[ \t]*Screen \d", text, re.M) and sheet.card_sheet(text) is None:
-        rows.append("the card has screens and no Sheet: block (templates/piece-card.md); "
-                    "write each screen's clock, place, who, wearing and flags before the prose")
     skips = dict(re.findall(r"skip ([CL]\d+):\s*([^·;]*)", line))
     for name in named:
         f = skill / name

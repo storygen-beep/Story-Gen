@@ -12,8 +12,8 @@ from test_sheet import MERGED, SHEET  # noqa: E402
 from tiny_game import make_game  # noqa: E402
 
 DOES = """Does:
-  start.a | the opening, a one-time step, a person is on screen, the clock moves, a first meeting, she dresses or undresses
-  start.b | the opening, a one-time step, the clock moves, a garment is named, a place is entered, a scene's last screen
+  start.a | the opening, the first screen, a one-time step, a person is on screen, the clock moves, a first meeting, she dresses or undresses
+  start.b | the opening, the hand-over, a one-time step, the clock moves, a garment is named, a place is entered, a scene's last screen
 """
 
 
@@ -60,6 +60,11 @@ def test_does_and_sheet_must_name_the_same_screens(game):
     assert any("different screens" in r for r in check.check_card(game, "p1")[1])
 
 
+def test_a_card_with_does_needs_no_areas_or_craft_line(game):
+    card(game)
+    assert check.check_card(game, "p1") == ("green", [])
+
+
 def test_a_new_card_with_screens_and_no_does_is_red(game):
     card(game, "")
     assert any("no Does: block" in r for r in check.check_card(game, "p1")[1])
@@ -76,7 +81,7 @@ def test_the_guard_is_green_when_does_names_what_the_build_does(game):
     assert check.check_does(game, check.load_merged(game)) == ("green", [])
 
 
-@pytest.mark.parametrize("drop", ["a person is on screen", "the clock moves", "she dresses or undresses",
+@pytest.mark.parametrize("drop", ["the first screen", "the hand-over", "a person is on screen", "the clock moves", "she dresses or undresses",
                                   "a garment is named", "a place is entered", "a scene's last screen", "a one-time step"])
 def test_planted_missing_trigger_is_red_by_the_guard(game, drop):
     card(game, DOES.replace(f", {drop}", "").replace(f"| {drop}, ", "| "))

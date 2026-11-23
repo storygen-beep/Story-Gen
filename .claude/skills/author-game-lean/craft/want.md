@@ -8,14 +8,14 @@ The card's `Craft:` line cites each one, or says in one line why it skips it. `w
 
 | id | what it asks | the failure it stops | when | judge |
 |---|---|---|---|---|
-| C54 | her situation at minute zero is concrete: a job, a debt, a room, a reputation | — · kept blocking: LO's choice (2026-11-24) | the opening | reader |
-| C43 | give her the premise and a choice at minute zero | — | the opening | note |
-| C44 | the start choice is a memory, not a slider, and sets a flag | P13 reader pass 7: the start choice was a wish about the future ("Good grades. I'll make you proud."), not a memory | the opening | reader |
+| C54 | her situation at minute zero is concrete: a job, a debt, a room, a reputation | — · kept blocking: LO's choice (2026-11-24) | the first screen | reader |
+| C43 | give her the premise and a choice at minute zero | — | the first screen, the start choice | note |
+| C44 | the start choice is a memory, not a slider, and sets a flag | P13 reader pass 7: the start choice was a wish about the future ("Good grades. I'll make you proud."), not a memory | the start choice | reader |
 | C46 | a start-choice flag nobody reads is fake freedom | — | the plan | note |
-| C48 | ask on a creation screen only what you print back | P13 reader pass 11: "Your name" was asked and never printed back | the opening | script + creation |
-| C51 | a creation screen is about three fields | — | the opening | note |
+| C48 | ask on a creation screen only what you print back | P13 reader pass 11: "Your name" was asked and never printed back | the plan | script + creation |
+| C51 | a creation screen is about three fields | — | the plan | note |
 | C1619 | the first objective is a quest card with steps: what's done and what's next | LO played P13's sums screen (2026-11-23): goal 1's card was one run-on line with stray stars, no steps to read ("What is this??"; fixed in 324ae159) | a goal card is shown | reader |
-| C1628 | never spend the first screen on a systems lecture | — | the opening | note |
+| C1628 | never spend the first screen on a systems lecture | — | the first screen | note |
 | C430 | every step says how the player finds the next one | — · kept blocking: LO's choice (2026-11-24) | a goal card is shown | reader |
 | C598 | see `craft/people.md` |  |  |  |
 | C952 | see `craft/economy.md` |  |  |  |

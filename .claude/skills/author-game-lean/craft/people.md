@@ -20,8 +20,8 @@ The card's `Craft:` line cites each one, or says in one line why it skips it. `w
 | C620 | a person is listed at a place only if met and there | — | a place is entered | note |
 | C690 | the People page lists only people she has met | — | the plan | note |
 | C613 | his wanting shows on his body, seen by her, before he acts on it | — | something sexual shows | note |
-| C639 | an offer has three to five graded answers, eager to refusing, every one written | — | a person is on screen | note |
-| C640 | a no is content; a no that returns to an unchanged menu was never a door | — | a person is on screen | note |
+| C639 | an offer has three to five graded answers, eager to refusing, every one written | — | a no is possible | note |
+| C640 | a no is content; a no that returns to an unchanged menu was never a door | — | a no is possible | note |
 | C961 | her no never raises a meter | — | a meter is shown or paid | note |
 | C954 | see `craft/economy.md` |  |  |  |
 | C447 | see `craft/voice.md` |  |  |  |

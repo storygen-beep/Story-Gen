@@ -113,7 +113,8 @@ def print_list(ids, rows, screens_of=None):
 
 # What a script can see on a built screen. Triggers not here are the writer's and the reader's to name:
 # a moment alone with her body, something sexual shows, an explicit beat (the card's own [explicit] marks),
-# a walk-in, a release after the first.
+# a walk-in, a release after the first, the start choice, a person's arc step, a no is possible, and a price written
+# in words. The hand-over is seen only on the opening's last screens; a screen before them may name it too.
 TIME = re.compile(r"\(\s*\d+\s*(?:min|mins|minutes|hour|hours|h)\b|\b\d{1,2}(?::\d{2})?\s*(?:am|pm)\b", re.I)
 MONEY = re.compile(r"\$\s?\d")
 GOAL_MARKS = ("✅", "➜")
@@ -150,6 +151,10 @@ def seen(game):
             seen_here.add("a repeatable" if rep else "a one-time step")
             if cid == start:
                 seen_here.add("the opening")
+                if nid == (c.get("nodes") or [{}])[0].get("id"):
+                    seen_here.add("the first screen")
+                if not nxt.get(nid):
+                    seen_here.add("the hand-over")
             if not nxt.get(nid):
                 seen_here.add("a scene's last screen")
             if any(ch.get("wardrobeEffects") for ch in choices):
