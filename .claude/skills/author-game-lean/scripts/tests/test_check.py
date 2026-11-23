@@ -196,52 +196,95 @@ def skill(tmp_path):
     """A craft folder with one file whose must-read rows are C1 and L2."""
     s = tmp_path / "skill"
     (s / "craft").mkdir(parents=True)
-    (s / "craft" / "area.md").write_text("# area\n\n## Must read\n\n| id | what |\n|---|---|\n| C1 | a |\n| L2 | b |\n\n"
+    (s / "craft" / "people.md").write_text("# area\n\n## Must read\n\n| id | what |\n|---|---|\n| C1 | a |\n| L2 | b |\n\n"
                                          "## The shape\n\n| C9 | not a must-read row |\n")
     (s / "craft" / "media.md").write_text("## Must read\n\n| id | what |\n|---|---|\n| C3 | c |\n")
     return s
 
 
-def card(game, craft, media=0):
-    (game / "cards" / "c1.md").write_text(f"PIECE c1\nMedia: {media} spots\nBuilds: x\nCraft: {craft}\n")
+def card(game, craft, media=0, areas="people"):
+    (game / "cards" / "c1.md").write_text(f"PIECE c1\nMedia: {media} spots\nBuilds: x\nAreas: {areas}\nCraft: {craft}\n")
 
 
 def test_card_citing_or_skipping_every_must_read_is_green(game, skill):
-    card(game, "craft/area.md · cites C1 · skip L2: no person in this piece")
+    card(game, "craft/people.md · cites C1 · skip L2: no person in this piece")
     assert check.check_card(game, "c1", skill) == (check.GREEN, [])
 
 
 def test_planted_card_missing_a_must_read_is_red(game, skill):
-    card(game, "craft/area.md · cites C1")
+    card(game, "craft/people.md · cites C1")
     assert check.check_card(game, "c1", skill) == (
-        check.RED, ["craft/area.md: must-read L2 is neither cited nor skipped with a reason"])
+        check.RED, ["craft/people.md: must-read L2 is neither cited nor skipped with a reason"])
 
 
 def test_planted_skip_without_a_reason_is_red(game, skill):
-    card(game, "craft/area.md · cites C1 · skip L2: ")
-    assert check.check_card(game, "c1", skill) == (check.RED, ["craft/area.md: `skip L2` gives no reason"])
+    card(game, "craft/people.md · cites C1 · skip L2: ")
+    assert check.check_card(game, "c1", skill) == (check.RED, ["craft/people.md: `skip L2` gives no reason"])
 
 
 def test_planted_media_spot_without_media_craft_is_red(game, skill):
-    card(game, "craft/area.md · cites C1, L2", media=2)
+    card(game, "craft/people.md · cites C1, L2", media=2)
     assert check.check_card(game, "c1", skill)[1] == [
         "the card has 2 media spot(s) and its Craft: line does not name craft/media.md"]
 
 
 def test_planted_missing_craft_file_is_red(game, skill):
-    card(game, "craft/area.md, craft/phone.md · cites C1, L2")
+    card(game, "craft/people.md, craft/phone.md · cites C1, L2")
     assert check.check_card(game, "c1", skill)[1] == ["the Craft: line names craft/phone.md, which does not exist"]
 
 
 def test_a_card_with_no_craft_line_is_red(game, skill):
-    (game / "cards" / "c1.md").write_text("PIECE c1\nBuilds: x\n")
-    assert check.check_card(game, "c1", skill)[1] == ["the card has no Craft: line"]
+    (game / "cards" / "c1.md").write_text("PIECE c1\nBuilds: x\nAreas: people\n")
+    assert check.check_card(game, "c1", skill)[1] == [
+        "the card has no Craft: line", "area `people`: the Craft: line does not name craft/people.md"]
 
 
 def test_card_cli_exit_codes(game, skill, capsys, monkeypatch):
     monkeypatch.setattr(check, "SKILL", skill)
-    card(game, "craft/area.md · cites C1, L2")
+    card(game, "craft/people.md · cites C1, L2")
     assert check.main(["--card", str(game), "c1"]) == 0 and capsys.readouterr().out.startswith("GREEN")
-    card(game, "craft/area.md · cites C1")
+    card(game, "craft/people.md · cites C1")
     assert check.main(["--card", str(game), "c1"]) == 1
     assert not (game / check.LAST).exists()  # the card check saves nothing
+
+
+# ── the area line (LO, 2026-11-22): no piece in an area with no craft file ───────────────────────────────────
+
+def test_planted_area_with_no_craft_file_is_red(game, skill):
+    card(game, "craft/people.md · cites C1, L2", areas="people, clothes")
+    assert check.check_card(game, "c1", skill)[1] == [
+        "area `clothes` has no craft file yet: write craft/clothes.md first (piece.md step 1)"]
+
+
+def test_area_with_its_craft_file_named_is_green(game, skill):
+    (skill / "craft" / "clothes.md").write_text("## Must read\n\n| id | what |\n|---|---|\n| C5 | e |\n")
+    card(game, "craft/people.md, craft/clothes.md · cites C1, L2, C5", areas="people, clothes")
+    assert check.check_card(game, "c1", skill) == (check.GREEN, [])
+
+
+def test_planted_area_whose_file_is_not_on_the_craft_line_is_red(game, skill):
+    (skill / "craft" / "clothes.md").write_text("## Must read\n\n| id | what |\n|---|---|\n| C5 | e |\n")
+    card(game, "craft/people.md · cites C1, L2", areas="people, clothes")
+    assert check.check_card(game, "c1", skill)[1] == ["area `clothes`: the Craft: line does not name craft/clothes.md"]
+
+
+def test_planted_card_with_no_areas_line_is_red(game, skill):
+    (game / "cards" / "c1.md").write_text("PIECE c1\nBuilds: x\nCraft: craft/people.md · cites C1, L2\n")
+    assert check.check_card(game, "c1", skill)[1] == ["the card has no Areas: line"]
+
+
+def test_planted_empty_areas_line_is_red(game, skill):
+    card(game, "craft/people.md · cites C1, L2", areas="")
+    assert check.check_card(game, "c1", skill)[1] == ["the Areas: line names no area"]
+
+
+def test_planted_unknown_area_is_red(game, skill):
+    card(game, "craft/people.md · cites C1, L2", areas="people, romance")
+    assert check.check_card(game, "c1", skill)[1] == ["Areas: `romance` is not an area (see SKILL.md, Where things live)"]
+
+
+def test_first_hour_maps_to_the_opening_and_topics_to_their_files():
+    assert check.area_file("first hour") == "craft/opening.md"
+    assert check.area_file("body moments") == "craft/body-moments.md"
+    for name in ("first hour", "media", "meters", "walk-ins", "body moments"):
+        assert (check.SKILL / check.area_file(name)).is_file(), name

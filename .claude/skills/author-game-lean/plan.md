@@ -88,7 +88,7 @@ After the schedules, because a walk-in sits where that person's rows already put
 
 **A walk-in shows the person now, not their end want.** A person who wants her later does not want her in their first walk-in. A walk-in gets a new version only when that person's arc moves a step, and each version is still what they were already doing (L97).
 
-While her meters are still, a walk-in sets a flag only and never pays. A meter's first gain is never behind a chance roll (L70). A person's next arc step is never left to the dice (C174, C212). No "nothing happens" (L150). Write the scenes from `craft/walk-ins.md`.
+While her meters are still, a walk-in sets a flag only and never pays. A meter's first gain is never behind a chance roll (L70). A person's next arc step is never left to the dice (C174, C212). No "nothing happens" (L150). Write the scenes from `craft/walk-ins.md`. Each walk-in also names its next band and what opens it: a meter level or an arc step (`craft/walk-ins.md`, "How a walk-in grows").
 
 Must read: C788, C802, C854, C678, C212, C174, C28, L70, L97, L147, L150, L4.
 Why: the plan asked who notices her (§5) and what she can do (§6), but nothing asked what she walks into at a place. LO: "random scenes where she walks in, like in the old first term there was this park and library scenes... Here we dont have anything for it in the skill." (relayed by the ENI session, 2026-11-21; first_term_lean NOTES, 2026-11-21, sex scenes.) Going place by place, nobody asked what each person does alone, so a scene like old first_term's `ryan_door_ajar` (`games/first_term/toml_phases/7_final_game.toml:49479`) came up only by luck (LO, relayed 2026-11-21).

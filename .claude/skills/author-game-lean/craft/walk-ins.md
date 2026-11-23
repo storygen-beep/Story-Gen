@@ -18,6 +18,12 @@ The card's `Craft:` line cites each one, or says in one line why it skips it.
 | C858 | a place she visits several times a day needs many scenes, each spaced a day or more apart | — (later releases) |
 | C859 | pure chance annoys; a scene can also take something, not only add | — |
 | C28 | the taboo-at-home shape runs on walk-in risk: each housemate has at least one walk-in at home | — (the person pass) |
+| C1820 | the odds ride the same meter as the content: chance bands 0.10 / 0.35 / 0.70 into one canvas banded watch / touch / act | — (how it grows) |
+| C724 | walk-in odds read her climb; flat odds are listed | — |
+| C1821 | three parts: the router (substitutions on the act), the branch (one `substitution_only` canvas with bands), the payoff (into a rung that exists) | — |
+| C1864 | band with a rule's `conditions`; in an exclusive group, append a new rule last | — |
+| C792 | a walk-in is two screens: the moment, and one answer screen per choice; a third screen is the defect | — |
+| C302 | peek or catch: an option is added each stage, and being caught becomes a door | — |
 | C212 | a story beat is never left to luck: it fires the first time it can | — |
 | C174 | a person's next arc step comes before any dice | — |
 | L97 | a walk-in only fires where the walker's rows put them, and it shows what they were already doing | first_term's walk-ins almost never fired; a TV walk-in swapped her film for its own |
@@ -52,19 +58,19 @@ The card's `Craft:` line cites each one, or says in one line why it skips it.
 
 Roles, not a world: a riverside park in her area, a neighbour she knows, two strangers, and a lodger at home. Word counts are for the story text.
 
-**A · Everyday, a person she knows** (38 words). Button at the park, 07:00–10:00, while the neighbour's row puts him on the path. Once a day.
+**A · Everyday, a person she knows** (40 words). Button at the park, 07:00–10:00, while the neighbour's row puts him on the path. Once a day.
 > The neighbour is on the bench by the gate, his dog's lead wrapped twice round his fist.
 > "You. Hold him a minute? My laces." The dog is already pulling toward you.
-> *He's never asked you for anything before.*
+> You blink. He's never asked you for anything before.
 
 | button | the first line after the click |
 |---|---|
 | "Take the lead" | *The dog drags you two steps. He laughs, the first time you've heard it.* · sets `held_the_dog` |
 | "Sorry, I'm late" | *"Course you are." He bends to his laces without looking up again.* |
 
-**B · She walks in on something, strangers** (51 words). Button "Take the path under the bridge", 19:00–21:30. Once a day.
+**B · She walks in on something, strangers** (53 words). Button "Take the path under the bridge", 19:00–21:30. Once a day.
 > Under the bridge it's darker than the path. Then you hear it: a gasp, a belt buckle, skin on stone. A woman is pinned to the wall with her skirt up round her waist, and the man's hips slam into her, slow and hard.
-> *Leave. Right now. Why aren't you leaving?*
+> Your face is burning, and your feet don't move.
 
 | button | the first line after the click |
 |---|---|
@@ -98,25 +104,69 @@ The area's count, on the card: A is everyday, B and C are not; two of three name
 
 **D · The person pass: a housemate alone, in three versions.** A button "His door's open a crack" on the landing, in the hours his rows put him in his room, once a night. Each version shows behind the arc step that opens it; before that step it doesn't exist. Her choice in each is to watch or back away, and in release 1 each sets a flag only.
 
-*D1, at the start: nothing about her* (40 words).
+*D1, at the start: nothing about her* (41 words).
 > His door is open a crack. He's on his bed with his jeans open and his phone held up, sound low, his hand working his cock fast.
 > He hasn't seen you. The phone's what he's looking at.
-> *Back away. Now.*
+> Your face goes hot.
 
-*D2, after his first step toward her: her underwear* (36 words).
+*D2, after his first step toward her: her underwear* (39 words).
 > The door's open again. He's on the bed, but there's no phone tonight. He has your black underwear from the laundry pile wrapped round his cock, and he's stroking slow.
-> *Those are mine. He took those.*
+> Your stomach drops. Those are yours. He took them.
 
-*D3, near the top of his arc: her name* (33 words).
+*D3, near the top of his arc: her name* (36 words).
 > His door's open wider than a crack tonight. He's working his cock hard, eyes shut, and he says it out loud, rough.
 > "Fuck. Fuck, ___."
 > Your name.
-> *He left it open on purpose.*
+> Your breath catches. He left it open on purpose.
 
 | button | the first line after the click (D1) |
 |---|---|
 | "Watch" | *He comes into his fist with a grunt and drops the phone on his chest.* · sets `saw_housemate_alone` |
 | "Back away" | *You ease back down the landing, and the floorboard doesn't give you away.* |
+
+## How a walk-in grows
+
+(LO, relayed 2026-11-22: "does walkins progresses?? like she can do more in those walkins as things rises?? In the release 1 it stays basic obv. But how does top games do it??")
+
+Engine, cited:
+- A substitution rule's `conditions` are checked before its own dice: `_tryRule` first, then `Math.random() < chance` (v2.py:6987-6994). Rules with disjoint meter ranges are bands, each with its own chance.
+- Rules sharing an `exclusive_group` share one roll in cumulative slots, and a claimed slot whose conditions fail falls to the plain act, not to the next rule (v2.py:6909-6914, 6962-6981). So bands go as independent rules; when an act already has a group, a new rule goes last in it (C1864).
+- `substitution_only = true` keeps the branch canvas out of the place's buttons (v2.py:15104-15107). The payoff canvas must have a `trigger.location`: `setup.getCanvasById` finds only canvases listed under a location (v2.py:4118-4131), so a payoff with none never fires and nothing says so (`.claude/skills/author-game-v2/references/the-surfaces.md:282-285`).
+
+1. **Two sides grow.** His version moves with his arc (shape step 13). What she can do moves with her meter, up the kind's ladder (`.claude/skills/author-game-v2/references/the-heat-ladder.md` H3): overhearing goes hear, listen, look, touch, one button per rung; peek or catch adds an option each stage; an accident becomes her choice.
+2. **One canvas, banded on her meter.** The bottom band is release 1. Build release 1's walk-in as that one canvas with its one band, so a later release adds a band and never rewrites the scene (C1820, C1821).
+3. **The odds climb with the same meter as the content.** Low band rare, top band likely (0.10 / 0.35 / 0.70, C1820). A flat chance is listed on the card as a choice (C724).
+4. **Two screens at most:** the moment, then one answer screen per choice (C792).
+5. **Caught becomes a door.** Being caught can open his arc's next step (C302). It never skips past that step (C174).
+6. **Release 1 is the bottom band only:** a flag, no meter. When meters move, a meter's first gain is never behind the dice (L70).
+7. **Count her states.** Across a game, at least three of her states open new scenes or bands (C857).
+
+**E · One walk-in in three bands** (overhearing; roles: a housemate in the next room). The router is on her act "Go to bed", while his rows put him in his room. Three rules on the same canvas, each with its own meter range and chance; only the bottom one exists in release 1.
+
+| band | her meter | chance | the moment (one line) | her new choice |
+|---|---|---|---|---|
+| hear | under 20 | 0.10 | *Through the wall: his headboard, a girl's moan, his voice low.* | turn the music up, or lie still and hear it |
+| listen | 20–39 | 0.35 | *You put your ear to the wall. You can hear what he's telling her to do.* | adds: press closer |
+| look | 40 and up | 0.70 | *His door's open a crack, and from the landing you can see all of it.* | adds: stay where he might see you, the "caught" door into his arc |
+
+```toml
+[[canvases.trigger.substitutions]]
+target_canvas_id = "wall_housemate"
+chance = 0.10
+
+[canvases.trigger.substitutions.conditions]
+version = "1.0"
+logic = "AND"
+
+[[canvases.trigger.substitutions.conditions.items]]
+type = "trait"
+subject = "player"
+trait_key = "<her meter>"
+operator = "lt"
+value = 20
+```
+
+A later release appends the 0.35 and 0.70 rules with their ranges and adds their bands to `wall_housemate`; the hear band's text stays as it was.
 
 ## Not this
 
@@ -127,5 +177,8 @@ The area's count, on the card: A is everyday, B and C are not; two of three name
 - A meter's first point behind a 1-in-4 roll. The first gain is open without dice; chance only repeats it (L70).
 - A person's next step left to the dice. It fires the first time it can (C174, C212).
 - A scene with one button. She can always leave, and leaving has its line.
+- A walk-in rewritten each release. It's one canvas; a release adds a band (C1820).
+- The same chance at every meter level. The odds climb with the content (C724).
+- A third screen after the answer (C792).
 - A housemate who wants her in his first walk-in because his end want says so. His first one is about him, not her; she comes into it only as his arc moves (LO, 2026-11-21).
 - Walk-ins found only by going place by place. Ask what each person does when alone, too, or the best ones turn up only by luck.

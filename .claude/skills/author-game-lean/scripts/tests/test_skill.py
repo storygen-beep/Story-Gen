@@ -236,3 +236,30 @@ def test_planted_piece_back_to_hand_check(copy):
     p.write_text(p.read_text().replace("check.py --card", "check by hand"))
     assert piece_misses_card_check(copy) == ["piece.md does not run check.py --card",
                                              "piece.md still checks the card by hand"]
+
+
+# ── SKILL.md's area table matches check.py's list (LO, 2026-11-22) ───────────────────────────────────────────
+
+def area_table_misses(skill):
+    """Every area and topic check.py accepts is named in SKILL.md, and every file the table names exists."""
+    import importlib.util
+    spec = importlib.util.spec_from_file_location("lean_check", skill / "scripts" / "check.py")
+    mod = importlib.util.module_from_spec(spec); spec.loader.exec_module(mod)
+    text = (skill / "SKILL.md").read_text(encoding="utf-8")
+    table = text.split("**Areas.**", 1)[-1] if "**Areas.**" in text else ""
+    rows = [f"SKILL.md's area table does not name `{a}`" for a in mod.AREAS + mod.TOPICS if a not in table]
+    rows += [f"SKILL.md's area table names `{f}`, which does not exist"
+             for f in re.findall(r"`(craft/[\w-]+\.md)`", table) if not (skill / f).is_file()]
+    return rows
+
+
+def test_area_table_matches_check():
+    assert area_table_misses(SKILL) == []
+
+
+def test_planted_area_missing_from_the_table(copy):
+    p = copy / "SKILL.md"
+    text = p.read_text()  # drop the area wherever it sits: its own row, or inside the no-file row
+    text = re.sub(r"^\| economy \|.*\n", "", text, flags=re.M).replace("economy, ", "")
+    p.write_text(text)
+    assert area_table_misses(copy) == ["SKILL.md's area table does not name `economy`"]

@@ -34,7 +34,7 @@ The card's `Craft:` line cites each one, or says in one line why it skips it.
 2. **The problem, carried by a person.** Someone says the hold out loud: an amount, a day, a condition. Someone who could help says nothing, and the screen says what that silence means.
 3. **The start choice, asked by a person.** A person on screen asks what she wants. Each answer costs or earns something with that person: a reaction line, and a flag only on the one that matters later.
 4. **The build-up.** The room works against her (a lock, thin walls, one towel), then the interruption.
-5. **The temptation, at her stage.** It happens to her. The screen stays on her body and his reaction: a named part of her, his eyes on it, his leak, and (a man she lives with) his cover. His spoken line can be about anything; the screen around it is about her body. There's a price or a "not yet" (the towel slipping). Her thought reacts; a question is the default hook. No button is a final no; staying a beat is allowed.
+5. **The temptation, at her stage.** It happens to her. The screen stays on her body and his reaction: a named part of her, his eyes on it, his leak, and (a man she lives with) his cover. His spoken line can be about anything; the screen around it is about her body. There's a price or a "not yet" (the towel slipping). She reacts on her body (her face, her breath, her nipples), never in an italic thought (`craft/voice.md`). No button is a final no; staying a beat is allowed.
 6. **Objective and card.** The hold becomes the first quest card with goal steps, with plain tutorial lines under it.
 7. **The hand-over, on a hook.** The last click lands where a person is doing something at that minute. The screen ends on money, the objective, a mystery, a person and a choice.
 
@@ -42,21 +42,21 @@ The card's `Craft:` line cites each one, or says in one line why it skips it.
 
 Roles, not a world: a rented room, a landlord, his wife, another lodger. Word counts are for the story text.
 
-**1 · Setup** (42 words)
+**1 · Setup** (44 words)
 > You're nineteen, it's your first morning in a rented room above somebody else's kitchen, and you have forty dollars to your name. The bed sags, the window sticks, and the door doesn't lock.
-> *New city. New room. Nobody here knows you. Good.*
+> Your stomach's tight, and you're smiling anyway. Nobody here knows you.
 
 **2 · The problem, carried by a person** (57 words)
 > The landlord is at the bottom of the stairs with a mug, like he's been waiting for you.
 > "Rent's a hundred a week. Friday. I said it on the phone, and I'm saying it again."
 > His wife is at the stove behind him. She doesn't turn round.
-> *A hundred. You have forty. And she heard every word.*
+> Your face goes hot. You have forty. She heard it.
 
-**3 · The start choice, asked by a person** (38 words)
+**3 · The start choice, asked by a person** (37 words)
 > He doesn't move off the bottom step.
 > "So what are you here for, anyway? School? A boyfriend? Running from somebody?"
 > He asks like your answer decides how much slack you get on Friday.
-> *Careful what you tell him.*
+> Your mouth goes dry.
 
 | button | the first line after the click |
 |---|---|
@@ -75,7 +75,7 @@ Roles, not a world: a rented room, a landlord, his wife, another lodger. Word co
 > He catches himself, stares at the wall, and holds his jacket low over his jeans.
 > "Morning. Sorry."
 > The knot is slipping.
-> *Is he still looking? Don't check.*
+> Your face burns. Don't look back.
 
 Buttons: "Hold the towel and get past him" · "Say good morning back" · "Wait for him to go first". Each opens on one line of his reaction. None closes anything.
 
@@ -83,13 +83,13 @@ Buttons: "Hold the towel and get past him" · "Say good morning back" · "Wait f
 > A hundred by Friday. Forty in your purse.
 > The café on the corner has a sign in the window. And on the stairs the landlord said there are "other ways to make rent in this house." He didn't say what.
 
-The card it arms: *Make the rent by Friday.* Goals: *Ask at the café* · *Find out what he meant.*
+The card it arms: *Pay your own way: rent every Friday.* Goals: *Ask at the café* · *Find out what he meant.*
 Plain lines under it: *You need money. Take shifts, or find another way. People are in different places at different hours. What you say changes how they treat you.*
 
-**7 · The hand-over, on a hook** (46 words)
+**7 · The hand-over, on a hook** (53 words)
 > His wife is at the stove, alone now, and this time she looks right at you.
 > "He told you Friday." She turns the gas down. "He'll tell you a lot of things. Sit. Eat something before you go looking."
-> *Was that a warning? Or an offer?*
+> Your stomach drops. You can't tell if that was a warning or an offer.
 
 Buttons: "Sit with her" · "Go and find work". Both lead into the live kitchen, where she is.
 
@@ -100,7 +100,9 @@ Buttons: "Sit with her" · "Go and find work". Both lead into the live kitchen, 
 - One sentence of bathroom before the hall. Build the room and the interruption first. (P13, 3)
 - He looks and keeps looking. A man she lives with catches himself and covers. (P13, 4; C601)
 - A screen that drifts off her body into talk. His line may be about her day; the screen stays on her body and his eyes. (C311, C314)
-- Her thought choosing it ("and I'm letting him") below the stage that opens a choice. Her thought reacts. (P13, 5; L71)
+- Her choosing it ("and I'm letting him") below the stage that opens a choice. She reacts, on her body. (P13, 5; L71)
+- An italic thought on any screen ("*Did he just... no.*"). Her reaction goes on her body (`craft/voice.md`). (P13)
+- "You give yourself five minutes." The shower and the towel are body moments: on her body, with a picture of her (`craft/body-moments.md`). (P13)
 - "(ends his path)" on his first step. The opening says no to nobody. (P13, 6; C166)
 - A last screen that ends on an errand ("go to breakfast"). End on the hook. (P13; C1621)
 - A hand-over into an empty room, waiting for a later piece. The last place has a person in it at that minute. (P13, 7; C1631)

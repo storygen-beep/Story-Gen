@@ -32,8 +32,8 @@ Shape · hold (and who enforces it) · goal, its flag, the next goal · mystery 
 
 ## 8. What she walks into
 ### <area>
-| place | the scene, and her choice | kind (she walks in / walks in on her) | who (known?) | everyday? | window | once / once a day | sets |
-|---|---|---|---|---|---|---|---|
+| place | the scene, and her choice | kind (she walks in / walks in on her) | who (known?) | everyday? | window | once / once a day | sets | next band, after which meter or arc step |
+|---|---|---|---|---|---|---|---|---|
 
 Count: <n> scenes, <n> everyday, <n> name someone she knows.
 

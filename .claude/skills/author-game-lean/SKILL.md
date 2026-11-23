@@ -66,7 +66,7 @@ The dev file is dropped only on `--no-dev` (`scripts/merge_toml_phases.py:80`). 
 |---|---|
 | phase steps | `plan.md`, `piece.md`, `build.md`, `release.md` |
 | the reader | `reader.md` |
-| craft by area | `craft/opening.md`, `craft/meters.md`, `craft/media.md`, `craft/walk-ins.md` |
+| craft by area | see the area table below |
 | state and plan templates | `templates/STATE.md`, `templates/PLAN.md` |
 | piece card | `templates/piece-card.md` |
 | check | `scripts/check.py`, `scripts/reach.py`, `scripts/who_is_where.py` |
@@ -78,6 +78,23 @@ The dev file is dropped only on `--no-dev` (`scripts/merge_toml_phases.py:80`). 
 | edit log | `CHANGELOG.md` |
 | per game | `games/<slug>/STATE.md`, `NOTES.md`, `approvals.json`, `cards/<id>.md` |
 | notes template | `templates/NOTES.md` |
+
+**Areas.** A card's `Areas:` line names these; `scripts/check.py --card` holds the same list (`AREAS`, `TOPICS`). An area with no file gets its craft file before its first piece (`piece.md` step 1).
+
+| area or topic | craft file |
+|---|---|
+| first hour | `craft/opening.md` |
+| media | `craft/media.md` |
+| meters (topic) | `craft/meters.md` |
+| walk-ins (topic) | `craft/walk-ins.md` |
+| body moments (topic) | `craft/body-moments.md` |
+| voice | `craft/voice.md` |
+| places | `craft/places.md` |
+| clock | `craft/clock.md` |
+| people | `craft/people.md` |
+| economy | `craft/economy.md` |
+| want | `craft/want.md` |
+| arc, heat, phone, clothes, systems, returning player | none yet: `craft/<area>.md`, with spaces as hyphens |
 
 Never read a list in `lists/` whole. Grep the area you're porting.
 

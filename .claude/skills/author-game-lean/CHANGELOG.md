@@ -56,3 +56,136 @@
 - `craft/walk-ins.md` (now 131 lines): added must-read C28 (taboo at home runs on walk-in risk). Shape step 12 is the person pass: for each person she lives with or sees often, what are they doing alone right now, at this point in their arc, with the where and when taken from their rows; in a taboo-at-home game each housemate has at least one walk-in at home. Shape step 13: a walk-in shows the person now, not their end want; a new version only after an arc step, each still what they were already doing (L97). Worked example D, in roles: a housemate alone in three versions (porn on his phone, nothing about her; her underwear after his first step; her name near the top), watch or back away, a flag only in release 1. Two new "Not this" lines. Why: §8 went place by place, so nobody asked what each person does alone; old first_term had such a scene as `ryan_door_ajar` (`games/first_term/toml_phases/7_final_game.toml:49479`). Verified: example word counts by script, 40, 36 and 33; `check.must_read` now reads 17 ids.
 - `plan.md` (124 lines): §8 has the person pass, the taboo-at-home floor (C28) and the "person now" rule, adds C28 to its must-read line, and gives the gap in its Why: line. §3 asks for two lines per person, where they end up and where they are now, quoting LO. Verified: the ID test is green.
 - `templates/PLAN.md`: the people table gains "where they end up (their want)" and "where they are now, at the start". §8 gains a "People alone" table (what they're doing now, where and when, the next version after which arc step). Verified: re-read.
+
+## 2026-11-22
+
+- **Approval: LO's own yes, relayed by the ENI session (ENI for LO, standing authorization, 2026-11-20).** LO: "in the opening it says she is taking shower, but here there can be a media too, where she is taking shower. This is hot. See if there are similar issues in the other scenes, where hot is compromised or skipped." Then: "yes, send the skill fix first".
+- Created `craft/body-moments.md` (56 lines). A moment alone with her body (shower, dressing or undressing, the towel, bed, the mirror) is a body moment, not a chore. Must-read rows: C1262, C1275, C1274, C1280, C1277, C1279, C782, C1158 and C719. A 7-step shape: name the moment; stay on her body at her level (L71); no skip; one picture of her right after the body line (gif when something happens, `_t4` bare, `_t3` covered); pool 1 once-seen and 2 on a repeat; no meter moves while meters are still; the events (touching, walk-ins) stay scoped, never the moment's body. There's a worked example in roles (daily shower, towel and dressing, bed; 38, 44 and 29 words by script) and five "Not this" lines from first_term_lean. A new file, not a section, because the rule covers both prose and media, and the existing files each hold one of those. Why: first_term_lean's opening shower was "You give yourself five minutes." (`games/first_term_lean/toml_phases/5_scenes.toml:93`, :116, :139); "Back in your room, dressed" skipped the towel and the dressing (:199, :221, :242); the slipping knot (:164) got no picture; the daily shower (:547) was one line under a picture the P06 card described as "the shower running, steam on the glass"; and P06's out-of-scope line dropped "anything that happens during a shower or in bed". The root cause, verified: the heat rule (C311/C314, reader test 12) covers only charged scenes with a man reacting, and media.md step 3 gave "solo everyday screens" no picture. Ruling to confirm with LO: C1280 names no pool size for `_t4` on a repeat; the file uses 2, as for a look on a repeat.
+- `craft/media.md` step 3: solo everyday screens exclude a moment alone with her body, which gets a picture of her, naming the P06 shower picture. Verified: re-read; 92 lines.
+- `reader.md`: new test 13, where a moment alone with her body written as a chore (no body, or no picture) or skipped is a FAIL; Reads routes such a piece to `craft/body-moments.md`. Verified: re-read.
+- `piece.md` and `templates/piece-card.md`: step 1 routes to `craft/body-moments.md`; an out-of-scope line scopes events, never the body of a moment the piece builds. Verified: `piece_misses_craft` is green.
+- `SKILL.md`: the craft list names `craft/body-moments.md`. `craft/opening.md`: a "Not this" line for "You give yourself five minutes." Verified: the ID test is green.
+- No check.py hook. A card has no marker for a body moment, so the reader's test 13 is the check. Verified: 86 passed (`venv/bin/python -m pytest -p no:django -q .claude/skills/author-game-lean/scripts/tests`); `check.must_read` reads the 9 ids.
+- **Approval: LO's own words, relayed by the ENI session (2026-11-22):** "4. And for onetime scenes like opening it should have only one."
+- `craft/body-moments.md` step 5: a body moment on a repeat button gets pool 4 and one in a one-time scene gets pool 1, quoting LO. The "LO's call to confirm" note is gone, and the worked example's daily shower now says pool 4. `craft/media.md`: the C1280 row and step 4 add the `_t4` body-moment-on-a-repeat case at 4. Why: this settles the open ruling from the body-moments entry above. Verified: grep finds no "pool 2" in body-moments.md and no "to confirm"; tests below.
+- **Approval: LO's own yes, relayed by the ENI session (ENI for LO, standing authorization, 2026-11-20).** LO: "does walkins progresses?? like she can do more in those walkins as things rises?? In the release 1 it stays basic obv. But how does top games do it??" Then: "yes, send it".
+- `craft/walk-ins.md` (now 184 lines): new must-read rows C1820, C724, C1821, C1864, C792 and C302 (23 ids now), and a new section "How a walk-in grows". Its cited engine notes: conditions are checked before each rule's own dice (v2.py:6987-6994); an exclusive group shares one roll and a failed claimed slot falls to the plain act (v2.py:6909-6914, 6962-6981), so bands are independent rules; `substitution_only` (v2.py:15104-15107); the payoff needs a `trigger.location`, because `setup.getCanvasById` reads only location canvases (v2.py:4118-4131; v2 the-surfaces.md:282-285, whose own v2.py:4009-4023 cite has drifted). Seven steps:
+  1. two sides grow: his version with his arc, her options with her meter along the H3 ladder;
+  2. one canvas banded on her meter, with release 1 as the bottom band;
+  3. the odds climb with the same meter, and a flat chance is listed;
+  4. two screens at most;
+  5. caught becomes a door, never a skip;
+  6. release 1 is the bottom band, a flag and no meter (L70);
+  7. at least three of her states open scenes (C857).
+
+  Worked example E, in roles: an overheard housemate in three bands (hear, listen, look) with chances 0.10, 0.35 and 0.70, a line each, and the TOML for the bottom rule. Three new "Not this" lines. Why: the file taught only his side growing; C1820, C724, C302, C792 and C1821 were marked port in COVERAGE but cited in no craft file (grep). Verified: sources read at v2 the-surfaces.md:250-290 and 330-345 and the-heat-ladder.md:90-100; the engine lines re-read today; the trait condition shape was checked against `games/first_term/toml_phases/7_final_game.toml:1068-1072`.
+- `plan.md` §8: each walk-in names its next band and what opens it, pointing at the new section. `templates/PLAN.md` §8: new column "next band, after which meter or arc step". Verified: re-read.
+- The cites test caught two short `author-game-v2/...` paths in the new section; they now use the full `.claude/skills/...` path. Verified: 86 passed.
+- **Approval: LO's own yes, relayed by the ENI session (ENI for LO, standing authorization, 2026-11-22):** "yes, send item 1 and the pointer fix".
+- `piece.md` step 1: no piece in an area with no craft file. Before the first piece in such an area, write `craft/<area>.md` from the area's COVERAGE section, its LESSONS rows and the CHECKS `later` rows that touch it, in the existing craft shape. Show it to LO in bites and take his yes before carding the piece. The broken pointer ("an area with no craft file yet is listed in `LATER.md`") is gone. LATER.md lists no areas, and no card P01–P06 or P13 recorded the COVERAGE grep it asked for. The card's areas now come from SKILL.md's area table. Steps 2 and 3 name the new `Areas:` line and its red reasons. Why: P06 touched the clock and the shower with no craft file, and the shower became a chore. Port rows cited outside `lists/` and CHANGELOG, recounted here by script: economy 0/115, phone 0/62, returning player 0/34, clothes 1/70, clock 3/42; 1,596 port rows in all.
+- `scripts/check.py`: new `AREAS` (the 14 craft sections of COVERAGE), `TOPICS` (meters, walk-ins, body moments) and `area_file()`. An area's file is `craft/<area with hyphens>.md`, except `first hour`, which maps to `craft/opening.md`. `check_card` is red when:
+  - the card has no `Areas:` line, or names no area;
+  - it names an area not on the list;
+  - a named area has no craft file yet;
+  - a named area's file isn't on the `Craft:` line.
+
+  The mapping, and why: the opening is the first hour's file (8 of its C-ids are in "first hour"); `media.md` is media (16 of 16). `meters.md`, `walk-ins.md` and `body-moments.md` are topics, not areas: their ids spread across heat, arc, systems and places, and mapping heat to `meters.md` or places to `walk-ins.md` would let a heat or places piece pass with no file for most of that area. Heat, places and systems therefore have no file yet. Also fixed: `^Craft:\s*(.*)$` let `\s*` run past an empty line into the next one; both line patterns now use `[ \t]*`.
+- `scripts/tests/test_check.py`: the card fixture's craft file is now `people.md` and the card carries `Areas: people`. New tests: an area with no file is red ("clothes"); an area whose file exists and is named is green; a file that exists but isn't named is red; no `Areas:` line is red; an empty one is red; an unknown area is red; the mapping (first hour to the opening, and the topic files exist). The empty-line test caught the regex bug above.
+- `scripts/tests/test_skill.py`: `area_table_misses`, which checks that SKILL.md's area table names every area and topic check.py accepts and that every file it names exists, plus a planted test.
+- `templates/piece-card.md`: a new `Areas:` slot. `reader.md`: an area the scene touches that the `Areas:` line doesn't name is a FAIL (the backstop). `SKILL.md`: the "craft by area" row points at a new area table showing which areas have a file and which don't yet.
+- The existing cards are not re-carded by this; the game session does that in its re-check. `check.py --card games/first_term_lean P06` is now RED 2: no `Areas:` line, plus the media row it already had. Verified: 95 passed (`venv/bin/python -m pytest -p no:django -q .claude/skills/author-game-lean/scripts/tests`).
+- **Approval: LO's own words, relayed by the ENI session (ENI for LO, standing authorization, 2026-11-22):** "Remove thoughts in itallic. Dont show in body too." · "Does Cot shows feelings??" · "Lets align it with Cot" · "yes, send it". This changes the voice LO chose on 2026-09-23/24 (v2 `register.md`) for this skill; it is his change.
+- Created `craft/voice.md` (84 lines), the first area file under the area gate. Must-read rows: C442, C449, C451, C447, C593, C448, C450, C422, C460, C461 and L163. It has a measures section and eight rules, each marked measured (with numbers) or LO's choice:
+  1. second person, about 10-word sentences;
+  2. feelings on the body, hers and others', with a named feeling rare;
+  3. arousal always on her body;
+  4. no italic thoughts, which drops C444;
+  5. people speak in most scenes and narration leads, under 5:1, which drops C446;
+  6. say it plainly, name the tension, keep the detail;
+  7. the truth rule;
+  8. each person's own manner and term of address, obvious on arrival, a hook at the end, plain labels (the last three are LO's rules, not measured).
+
+  The worked example is LO's approved bathroom and hall text, with names swapped for roles (71 and 103 words by script). Four "Not this" lines, including the italic thought at `games/first_term_lean/toml_phases/5_scenes.toml:165`. Why and verification: the peer's `voice.py`, re-run here on a 277-passage CoT sample, gives 68% with speech, 3.92:1, a 10-word median and "you" 70.4 per 1,000. DoL (286) gives 76%, 3.23:1, 8 words; Hellfire (296) gives 91%, 1.87:1, 14 words. Those two needed the passage-name filter removed, because their index tags don't match `event|hangout|dialog|class`. Italic thoughts in CoT: 27 of 4,066 `Event*.txt` passages have a `<i>` span of 4 or more words outside quote marks; the peer's broader count is 42. Every match of the peer's `//`, `''` and `@@` patterns there is 0; all italic markup is `<i>`, and much of it is emphasis ("<i>fuck</i>"). Exact-phrase counts: "You blush" 76, "you feel your face heat" 5, "Your cheeks burn" 3, "you feel your stomach drop" 2, "You feel embarrassed" 1, "looks away" 11, "seems nervous" 0, "a thrill of arousal" 7, "an ache between your" 3; macros `<<conj>>` 10,992, `<<ps>>` 5,411, `<<pp>>` 4,928. The quotes-only count is valid for CoT and DoL because both put speech in quote marks (v2 register.md:640-646, "unchanged"; L163).
+- `lists/COVERAGE.md`: C444 (italic thoughts, `thought_bubble`) and C446 ("more dialogue than narration") are marked drop, each with LO's relayed words. This is a drop of craft, done on LO's own words.
+- Italic thoughts were removed from the worked examples: `craft/opening.md` (five lines; step 5 now says she reacts on her body; a new "Not this" line; screen word counts re-run as 44, 57, 37, 54, 55, 40, 53), `craft/walk-ins.md` (five lines; counts 40, 53, 42, 41, 39, 36) and `craft/meters.md` (three lines; the Quests-page card text stays italic because it is card text, not a thought). Each became a body reaction. `craft/body-moments.md` had none. No file taught "more dialogue than narration".
+- `reader.md`: the voice is now read from `craft/voice.md`. The truth rule stays read from v2's `register.md` "The truth rule", because voice.md carries only its headline rows (C460, C461), not its worked cases. Test 4 now reads her reaction on her body and in what she says, never an italic thought.
+- `SKILL.md`: the area table gives voice its file. `LATER.md`: the craft/voice.md idea is marked done for the voice, with the truth rule still open.
+- The cites test caught five short `register.md:` cites; they now use the full path. Verified: 95 passed; `check.must_read` reads the 11 ids.
+- Not changed: `CLAUDE.md`, which is LO's file. Lines 115-120, 143 and 155-156 still teach v2's voice and "her thoughts sit beside the dialogue". Listed for LO through the ENI session.
+- **Approval: LO's own yes, relayed by the ENI session (ENI for LO, standing authorization, 2026-11-22):** "Confirm each with the top games and CoT mostly", then "yes, send it".
+- Created `craft/places.md`, the places area's file. Must-read rows: C769, C794, C795, C804, L106, C776, C777, C773, C758, C953, C954, C738, C762, L147, C808, C811, C770, C771 and C707. The measures table covers CoT's 126 `location`-tagged passages. The shape has nine rules, each marked measured or LO's choice:
+  1. the identity line is the same every visit;
+  2. one presence line per person, from their rows, plus the crowd;
+  3. the menu holds needs, systems and people only;
+  4. short labels with the cost shown, and never pay she earns;
+  5. "not now" says why;
+  6. every open place has one thing to do alone, stricter than C738 (LO's choice, L147);
+  7. streets or quads are hubs;
+  8. short screens;
+  9. two DoL-only rules (C771, C707/C739), marked as not from CoT.
+
+  The place picture points at `craft/media.md`, noting that CoT isn't its source. The worked example is LO's kitchen text in roles (mom, step-father). Four "Not this" lines. Pointers to `walk-ins.md` (C785's event pools) and the future clothes file (C1173's door check) instead of duplicating them. Verified by re-running the counts here:
+  - 126 passages; median 64.5 words, p75 112; 285 labels, median 3 words;
+  - cost shown 97, people offered 62, `$peopleatlocation` 19, `setup.Events.passage` 29, `clothes_ok` 22, pictures 0. The peer's counts were 24 and 30 for the two that differ; this file uses these.
+  - The BangCoffee opening and "You really aren't that thirsty right now." were found in `BangCoffee.txt`.
+  - One of the peer's claims was corrected before writing: CoT's streets name their buildings ("You are on Emerson Road. A large academic building is here…") rather than carrying many links.
+- `craft/media.md` step 2: the one-picture-per-place rule now says it comes from the field (C1249, 41%), not from CoT, which has 0 pictures on its location screens.
+- `SKILL.md`: the area table gives places its file. Verified: 95 passed, and the area-table test is green.
+- `craft/places.md` rule 3, corrected (ENI session, 2026-11-22): BangCoffee does have a bathroom button. `BangCoffee.txt:36` calls `<<bathroom "A public restroom is available here.">>`, and the widget in `GlobalWidgets.txt:1468` renders `<<link "Use restroom" Restroom>>`. My grep looked for `<<bathroom>>` with no argument, missed it, and the entry above had wrongly said there was none; that line is fixed. The menu is coffee and Use restroom (needs), Study and Use laptop (systems), and `<<godate>>` (people). Verified: both lines read in the corpus; tests below.
+- **Approval: LO's own yes, relayed by the ENI session (ENI for LO, standing authorization, 2026-11-22):** "yes, send it".
+- Created `craft/clock.md`, the clock area's file. It has 23 must-read rows: C889, C906, C926, C900, C902, C903, C904, C892, C910, C929, C897, C924, C920, C913, C930, C914, C916, C915, C921, C927, C928, C931 and C890. Its engine section was re-cited against today's v2.py:
+  - `advanceTime` takes minutes only (7004);
+  - an exit with no time costs 3 (17924);
+  - `isCurrentTimeSlot` wraps past midnight and defaults to an hour (4770-4790), and `time_of_day` uses it (5283-5285);
+  - `deductLocationCosts` and `getLocationCostTag` (6226-6236);
+  - `show_when_blocked` is read at 15098-15102 and drawn dimmed at 6734-6742;
+  - `locClosedReason` gives "Closed. Opens at …" (11766-11773), and `closed_text` shows at the door (11438-11441);
+  - the SchedulePage is at 24387;
+  - there is no `@time` token (grep).
+
+  C925, the peer's eighth engine fact (an exit runs advanceTime before flags), was left out because it wasn't re-verified today. The file has a CoT measures table, eight rules each marked measured or LO's choice, LO's café text in roles (the café owner), and four "Not this" lines. Verified by re-running over all 5,294 CoT passages (425,667 words stripped):
+  - clock times 26, or 0.61 per 10,000 (the peer had 21, 0.49); weekdays 61, or 1.43 per 10,000 (the peer had 1.39);
+  - 65 files with closed or opening text; `<<advtime>>` sizes 1 (180), 5 (114), 20 (76), 60 (74), 10 (72), 30 (38);
+  - the four "A sign says it's open between …" lines, the bus at `RiversidePlaza.txt:110`, and "Nightlife Schedule" at `DisplayNPCWidgets.txt:816`.
+
+  Fixed per-person schedules are marked as coming from IHOH (C892) and our engine, not CoT.
+- `craft/places.md`: points at `craft/clock.md` for hours, closed lines and button times, with no duplication. `SKILL.md`: the area table gives clock its file.
+- **Approval: LO's own yes, relayed by the ENI session (ENI for LO, standing authorization, 2026-11-22):** "yes, send it".
+- Created `craft/people.md`, the people area's file. Must-read rows: C618, C619, C622, C627, C625, C626, C630, C632, C598, C620, C690, C613, C639, C640, C961, C954, C447, C593, C644, C596, C656, C660 and C448. It has a measures section and nine rules, each marked measured or LO's choice:
+  1. nobody is met at the start except the people she lives with;
+  2. a role until the meeting, then name and relation;
+  3. unmet people are hidden;
+  4. his wanting shows on his body first;
+  5. three to five graded answers, with a no that lands and never pays;
+  6. each person's own manner, subject and name for her;
+  7. the talk screen's shape;
+  8. one short, shown meter per person, still in release 1;
+  9. obvious on arrival (LO's rule).
+
+  It points at voice.md, places.md and clock.md instead of repeating them. The worked example is LO's café meeting, with the role "the café manager" and "I run the place" (ENI's correction, `games/first_term_lean/PLAN.md:55`), his name as a slot, and no pay amount (C954). Four "Not this" lines. Verified in CoT today:
+  - the `anonorfullname` widget at `GlobalWidgets.txt` line 882, called 953 times (the `anonor…` family about 3,050);
+  - `BusGrope.txt`'s five answers;
+  - "That certainly backfired." in `EventResHallPropositionShowersBold.txt`.
+
+  The field-measured rows are marked as from COVERAGE's evidence column, not re-run. The brief's "two versions of the café pay" line was dropped: ENI corrected it (NOTES.md:65 superseded :59).
+- `SKILL.md`: the area table gives people its file.
+- **Approval: LO's own yes, relayed by the ENI session (ENI for LO, standing authorization, 2026-11-22):** "yes, send it".
+- Created `craft/economy.md`, the economy area's file. Must-read rows: C1003, C1004, C1033, C1008, C1014, C1013, C1016, C1020, C1021, C1022, C954, C1001, C1002, C989, C990, C951, C952, C992, C1017 and C967. It has a measures section, nine rules each marked measured or LO's choice, a "when paid sex opens" section marked not in release 1 (C966–C973), LO's Sunday rent text in roles (step-father, mom) with the figures marked as filler (C992), and four "Not this" lines. Verified by reading CoT's `WeeklyDebtPayment.txt`, `WeeklyDebtPaid.txt` and `WeeklyDebtUnpaid.txt` at the lines cited:
+  - the bill starts at 100 and is capped at 200, with the author's note;
+  - the phone hand-over lines and the first call with its GPA rule at 2.5;
+  - the rises 100→150 at $500 paid and 150→200 at $1,000, the 250 and 300 rises switched off with `false and`, and the "same amount" line;
+  - the lecture and `<<dalterneed Relaxation -50 true>>`.
+
+  New today: every CoT amount is multiplied by `$optdebtpaymentmultiplier`, a difficulty option. The peer couldn't confirm the job button; I read one: QuickieBurger's "Work" button shows time and rest and no pay, and the wage is on the Work page (`Work.txt`, line 14). That's one job, said as such. The field rows come from COVERAGE's evidence column and were not re-run.
+- `SKILL.md`: the area table gives economy its file.
+- `scripts/tests/test_skill.py`: `test_planted_area_missing_from_the_table` now drops `economy` wherever it sits in the table (its own row, or inside the no-file row). Before, it removed "economy, " from the no-file row, which stopped working once economy got its own row. Verified: tests below.
+- **Approval: LO's own yes, relayed by the ENI session (ENI for LO, standing authorization, 2026-11-22):** "yes, send it".
+- Created `craft/want.md`, the want area's file. It has 23 must-read rows: C54, C43, C44, C46, C48, C51, C1619, C1628, C430, C598, C952, C992, C34, C35, C36, C37, C433, C32, C56, C72, C63, C64 and C65. It has a measures section, seven rules each marked measured or LO's choice, LO's goal card in roles (step-father, the café across from campus) with the amount marked as filler, and four "Not this" lines. The plan-level rows are pointed at `plan.md` §2. The peer said C6 and C24–C31 already live there; in fact §2 cites only C25, C26 and C28 (grep), and the file says so instead of claiming the rest are covered. Verified in CoT today:
+  - the quoted lines in `Prologue.txt`, `Prologue14.txt` and `Prologue16.txt`;
+  - "Think back..." leading to `PrologueHighSchool.txt`, which asks through `<<pickstartingtrait "popularity">>`. The peer had read only its first line; four such picks run across the prologue (popularity, relationship, relationship type, hobbies);
+  - the "for now!" end line in `StoryHintWidgets.txt`;
+  - the systems lecture in `PrologueFinal.txt`.
+
+  The field rows come from COVERAGE's evidence column and were not re-run.
+- `craft/opening.md`: the example's quest card went from "Make the rent by Friday." to "Pay your own way: rent every Friday." The old wording was a dated goal, which the new want.md's C34 and its "Not this" forbid. The hold's "Friday" in the dialogue stays, because a due day said by a person is the bill's date (C1004), not the goal's.
+- `SKILL.md`: the area table gives want its file.

@@ -17,7 +17,7 @@ The card's `Craft:` line cites each one, or says in one line why it skips it.
 | C1234 | the clip sits on the beat the player is reading | L125 |
 | L121 | media by kind of screen: every body moment, one everyday picture per scene; the every-screen overshoot was cut | first_term DECISIONS 251–252 cut solo everyday pictures that only repeat the line |
 | L125 | a clip that opens its screen with the payoff spoils it | first_term's early-payoff clips |
-| C1280 | pool size by spot: explicit repeat 4, a `_t3` look on a repeat 2, everyday, person, room or once-seen 1; never the default by accident | L119 |
+| C1280 | pool size by spot: explicit repeat 4, a `_t4` body moment on a repeat 4 (LO, 2026-11-22), a `_t3` look on a repeat 2, everyday, person, room or once-seen 1; never the default by accident | L119 |
 | L119 | default pools of 4 asked for 1,808 files | first_term DECISIONS 246 |
 | C1281 | a look is written as what the looker sees, or the looker alone; never someone looking at her in the same frame | L120 |
 | C1284 | a walk-in picture is what he sees: "Seen from a bathroom doorway: …" | L120 |
@@ -39,9 +39,9 @@ The card's `Craft:` line cites each one, or says in one line why it skips it.
 ## The shape
 
 1. **Sit on the payoff.** A spot goes right after the line where her body, his look or the act happens. The screen before it carries no spot.
-2. **A place gets at most one picture: one file, tier 0, with her in it.** Never the empty room. The top games put a picture on 41% of room screens (C1249), and a picture of her in the place is what first_term's lounger fix asked for (DECISIONS 258, `games/first_term/DECISIONS.md:959`).
-3. **Chores, doors, menus and solo everyday screens get none** (C1265). An everyday picture that only repeats the line goes (first_term DECISIONS 251–252, `games/first_term/DECISIONS.md:952-953`).
-4. **Size the pool by tier:** 4 for a repeatable explicit spot, 2 for a `_t3` look on a repeat, 1 for everything else.
+2. **A place gets at most one picture: one file, tier 0, with her in it.** Never the empty room. The top games put a picture on 41% of room screens (C1249); CoT, the model for `craft/places.md`, puts none on its 126 location screens, so this rule comes from the field, not from CoT, and a picture of her in the place is what first_term's lounger fix asked for (DECISIONS 258, `games/first_term/DECISIONS.md:959`).
+3. **Chores, doors, menus and solo everyday screens get none** (C1265). A moment alone with her body is not one of them: a shower, dressing or undressing, the towel, bed, the mirror each get a picture of her (`craft/body-moments.md`; first_term_lean's P06 shower picture was "the shower running, steam on the glass"). An everyday picture that only repeats the line goes (first_term DECISIONS 251–252, `games/first_term/DECISIONS.md:952-953`).
+4. **Size the pool by tier:** 4 for a repeatable explicit spot or a `_t4` body moment on a repeat (`craft/body-moments.md`), 2 for a `_t3` look on a repeat, 1 for everything else.
 5. **A look shows what he sees.** Describe her, as seen from where he stands, with no man in frame.
 6. **Does something happen in the picture?** Yes: a gif, with "gif" in the search words. No: a sharp still.
 7. **The description:** her age, the place the scene is named for, what she's wearing on that visit, two or three plain search phrases.

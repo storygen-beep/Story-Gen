@@ -79,7 +79,7 @@ All three places pay at Careful. The neighbour's doorframe isn't named until she
 **The walk-in, after "Don't grab it"** (C338, C541):
 > The towel slides to your waist, and you don't grab it. One second. Two. His eyes are on your tits, and he doesn't even pretend.
 > "Jesus. Sorry." He backs out and pulls the door shut.
-> *You didn't grab it. Why didn't you grab it?*
+> Your face burns. You didn't grab it.
 
 His line opens the screen, and the engine's toast shows the +1. No "+1 Nerve" is printed in the text.
 
@@ -87,11 +87,11 @@ His line opens the screen, and the engine's toast shows the +1. No "+1 Nerve" is
 > The neighbour leans on the doorframe. "You keep coming back here, and you keep going home."
 > "Because I'm not that girl yet."
 > "Yet," he says, and smiles like he's already won.
-> *Yet. Why did you say yet?*
+> Your cheeks go hot. You said yet.
 
 **The crossing** (one time, at 20, on the morning after, pays nothing):
 > You catch yourself in the bathroom mirror, and you don't fix your top. A month ago you would have.
-> *When did that stop mattering?*
+> Your face goes warm, and you still don't fix it.
 > You're Curious now. There are things you might say yes to.
 
 ## Not this

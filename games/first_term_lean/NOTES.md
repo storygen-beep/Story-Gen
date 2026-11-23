@@ -89,6 +89,7 @@
 - 2026-11-21 · P13 card after the third reader: "yes" — recorded with approve.py (sha256 52dab8e9e6f4). Built GREEN; headless: goal1_shown false in the hall, true on screen 6; Talk to Mom shows the new thought. (P13)
 - 2026-11-22 · P13 fourth reader (6 FAILs): "yes, fix them and I'll play" — the six fixes as shown (steam in the towel picture; Ryan named; Laura warmth only, Mark want + power 50 with Power words on the People page; the out-of-scope reason; Talk to Mom only while Mark is not in the Kitchen). Card written to exactly those fixes, checked GREEN, recorded with approve.py on those words (sha256 40e213451243); diff shown to LO after. Waiver: no fifth reader pass before LO plays (his words above). Built GREEN; headless: Talk to Mom at 7:53 with Mark gone; People page Laura Kitchen, Mark Away. (P13)
 
+- 2026-11-22 · body-moment pools, relayed from LO by the ENI session (not typed here): "4. And for onetime scenes like opening it should have only one." — the daily shower (P06) gets pool 4; the opening's shower, knot and dressing pictures get pool 1 each. (re-check, media)
 ## Rulings
 
 - 2026-11-20 · plan · Ruling: piece ids stay as first shown; P13 keeps its id but moves after P06 in the table; P29's split takes P29, P30, P31 · ids LO already read stay stable · cost if wrong: the table order and the id numbers no longer match.
@@ -147,3 +148,7 @@
 | cards shown | yeses | changes asked | bugs LO found playing | skill gaps |
 |---|---|---|---|---|
 | 9 | 8 | 1 | 0 | 11 (10 closed 2026-11-21, 1 open) |
+
+2026-11-23 · re-check of P02, P03, P05 started on LO's go, relayed by the main-lean session (not typed here). Cards re-carded with Areas: lines; check.py --card GREEN on all three; shown to LO, yes pending.
+2026-11-23 · process slip: a grep for `description_variants` across games/*/toml_phases printed 4 lines from games/first_term/toml_phases (frozen, not to be read). Nothing from it was used; the shape came from games/vesper.
+2026-11-23 · relayed from LO by the main-lean session (not typed here): "Yes" to ENI's four recommendations. (1) Drop "phone credit" from the corner shop's line. (2) Hide the house next door until met_vance (P24); P24's meeting plays on her street, Vance on his porch (PLAN.md:121), then the house opens. (3) Alone at Zoe's: "Knock on Zoe's door"; Zoe or Sam opens, by who's home (P27); she never sees the place before zoe_place_known. (4) Presence lines stay in P28/P29/P31 until those people have rows (truth rule).

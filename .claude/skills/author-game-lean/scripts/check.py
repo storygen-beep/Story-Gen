@@ -172,6 +172,21 @@ def check_builds(game_dir, game):
 SKILL = HERE.parent
 
 
+# The areas a card may name on its `Areas:` line: the craft sections of lists/COVERAGE.md, plus three
+# topics that already have a craft file of their own (LO, 2026-11-22). An area's craft file is
+# craft/<area, spaces as hyphens>.md unless AREA_FILES says otherwise. No file yet means no piece yet:
+# piece.md step 1 writes the area's craft file first.
+AREAS = ("want", "arc", "heat", "voice", "people", "places", "clock", "economy", "phone", "clothes", "media",
+         "systems", "first hour", "returning player")
+TOPICS = ("meters", "walk-ins", "body moments")
+AREA_FILES = {"first hour": "craft/opening.md"}
+
+
+def area_file(area):
+    """The craft file an area or topic is written in."""
+    return AREA_FILES.get(area, "craft/" + area.replace(" ", "-") + ".md")
+
+
 def must_read(craft_file):
     """The ids in a craft file's `## Must read` table (first column)."""
     text = craft_file.read_text(encoding="utf-8")
@@ -186,13 +201,26 @@ def check_card(game_dir, card_id, skill=None):
     if not path.is_file():
         return INCOMPLETE, [f"no card at {path}"]
     text = path.read_text(encoding="utf-8")
-    m = re.search(r"^Craft:\s*(.*)$", text, re.M)
+    m = re.search(r"^Craft:[ \t]*(.*)$", text, re.M)
     line = m.group(1) if m else ""
     rows = [] if m else ["the card has no Craft: line"]
     named = re.findall(r"craft/[\w-]+\.md", line)
     media = re.search(r"^Media:\s*(\d+)", text, re.M)
     if media and int(media.group(1)) > 0 and "craft/media.md" not in named:
         rows.append(f"the card has {media.group(1)} media spot(s) and its Craft: line does not name craft/media.md")
+    a = re.search(r"^Areas:[ \t]*(.*)$", text, re.M)
+    areas = [x.strip().lower() for x in (a.group(1).split(",") if a else []) if x.strip()]
+    if not a:
+        rows.append("the card has no Areas: line")
+    elif not areas:
+        rows.append("the Areas: line names no area")
+    for area in areas:
+        if area not in AREAS + TOPICS:
+            rows.append(f"Areas: `{area}` is not an area (see SKILL.md, Where things live)")
+        elif not (skill / area_file(area)).is_file():
+            rows.append(f"area `{area}` has no craft file yet: write {area_file(area)} first (piece.md step 1)")
+        elif area_file(area) not in named:
+            rows.append(f"area `{area}`: the Craft: line does not name {area_file(area)}")
     skips = dict(re.findall(r"skip ([CL]\d+):\s*([^·;]*)", line))
     for name in named:
         f = skill / name

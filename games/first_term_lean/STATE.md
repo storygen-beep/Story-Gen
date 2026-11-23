@@ -25,10 +25,10 @@ friends; Zoe staying over and Jake at the door (release 2); short arcs for named
 | piece | what | approved | built | checked | played |
 |---|---|---|---|---|---|
 | P13 | the opening, re-carded from craft/opening.md as one piece: Mom on screen, breakfast with Laura and Mark, Mark's rent line ($75 every Sunday), goal 1's card, Ryan's look per LO's B, hand-over on a hook; check.py --card, the reader, then LO plays | 2026-11-21 | 2026-11-21 | 2026-11-21 | |
-| P02 | Home: re-check against the craft files and craft/media.md | 2026-11-20 | 2026-11-20 | 2026-11-20 | |
-| P03 | Neighbourhood: re-check; the clothes shop's link comes with P35 | 2026-11-20 | 2026-11-20 | 2026-11-20 | |
+| P02 | Home: re-checked 2026-11-23 (places, clock, voice, media): no "Nothing to do", menus named by piece, pictures of her, none on the hall | 2026-11-23 | 2026-11-23 | 2026-11-23 | |
+| P03 | Neighbourhood: re-checked 2026-11-23: hours on signs, no "phone credit", the house next door hidden until met_vance (P24), pictures of her, none on the street; the clothes shop's link comes with P35 | 2026-11-23 | 2026-11-23 | 2026-11-23 | |
 | P04 | Campus: re-check | 2026-11-20 | 2026-11-20 | 2026-11-20 | |
-| P05 | Near campus: re-check | 2026-11-20 | 2026-11-20 | 2026-11-20 | |
+| P05 | Near campus: re-checked 2026-11-23: the café's sign, the Help Wanted line until cafe_hired, Zoe's line true when she's out, "Knock on Zoe's door" (P27) | 2026-11-23 | 2026-11-23 | 2026-11-23 | |
 | P06 | the daily loop: re-check | 2026-11-20 | 2026-11-20 | 2026-11-20 | |
 | P34 | home life: talk to each housemate, Wait, the dishes, meals with the family, lock your door, Watch TV (PLAN 8a) | | | | |
 | P33 | body care: Go for a run, Work out ($5), hair and make-up, a snack ($2), a coffee ($3), lunch ($4), sit on the grass (PLAN 8b) | | | | |
@@ -65,11 +65,13 @@ friends; Zoe staying over and Jake at the door (release 2); short arcs for named
 
 ## Open
 
-- On the portal since 2026-11-20 as "First Term (Lean)", release form; rebuild output/ with `build.py --release` when LO wants the phone copy refreshed.
+- On the portal as "First Term (Lean)"; output/ is a dev + debug build of the re-carded opening, pushed to main 2026-11-22 (LO: "rebuild with dev and debug, commit, merge and push").
 
-- P14 must take over the opening's hand-over (now to the Kitchen) and meet Laura and Mark on screen; it carries "Ryan, you shower first from now on" (P13 out of scope).
-- P32 gives Ryan a schedule; until then the People page says "Away" (P13 ruling).
+- Body moments, relayed from LO by the ENI session 2026-11-22 (craft/body-moments.md, read): the P02–P06 re-check also carries, each shown to LO as a card: the opening's shower (5_scenes.toml:93/116/139, "You give yourself five minutes."), a beat on her body and a gif before Ryan's fist; the slipping knot (:164, :241) paid off on her body with a picture, Ryan still looks away (B); "Back in your room, dressed" (:199/221/242) becomes the towel off and the dressing, clothes equipped (C719; needs P07's wardrobe or a piece of it first); P06's daily shower (:546-547), her under the water, pool 4 (LO 2026-11-22); the opening's pictures pool 1 each (LO); one line each for her body on the packed bus (:379) and her noticing Ryan shirtless (:159). No meter moves.
+- P32 adds the rows for everyone outside the house; Laura, Mark and Ryan have their week from P13.
 - P20 must set `zoe_place_known` (from P05), so P27 can reach Zoe's.
+- P24 must set `met_vance` (from P03), on her street with him on his porch; then the house next door opens.
+- P04's six campus places still say "Nothing to do here right now."; they go with P04's re-check.
 - Piece list approved 2026-11-20, with LO's three changes (NOTES).
 
-Next step: play — LO plays the opening (P13, output_dev/); then piece — P02–P06 re-checked
+Next step: play — LO plays the opening and the re-checked Home, Neighbourhood and Near campus (output_dev/); then piece — P04, P06, P01, P13 re-checked once craft/heat.md and craft/systems.md are in
