@@ -354,6 +354,7 @@ def build_game_graph(
                             "costs": c.trigger.costs if c.trigger.costs else None,
                             "show_when_blocked": c.trigger.show_when_blocked or None,
                             "cooldown_message": c.trigger.cooldown_message,
+                            "locked_text": c.trigger.locked_text,
                             "substitutions": c.trigger.substitutions
                             if c.trigger.substitutions
                             else None,

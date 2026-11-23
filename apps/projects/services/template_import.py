@@ -844,6 +844,9 @@ class TemplateTrigger:
     # explaining when it will be available again. Default off (silent filter).
     show_when_blocked: bool = False
     cooldown_message: Optional[str] = None  # custom text; falls back to a generic message
+    # A row shut by something waiting can't open (clothes, money, a meter, a flag) greys out
+    # with this line instead of hiding, when show_when_blocked is on. It says what's missing.
+    locked_text: Optional[str] = None
     # Lane 2 anti-toggle cooldown (L2-2 doctrine fix, 2026-05-12).
     # When non-empty, this canvas only fires if the player entered the current
     # location from one of these locations. Empty list = fire on any entry.
@@ -2592,6 +2595,7 @@ def normalize(data: Dict[str, Any]) -> GameTemplate:
                     ],
                     show_when_blocked=bool(trig_def.get("show_when_blocked", False)),
                     cooldown_message=_require_str(trig_def, "cooldown_message", "") or None,
+                    locked_text=_require_str(trig_def, "locked_text", "") or None,
                     # L2-2 — Lane 2 anti-toggle cooldown. Author writes location slugs;
                     # validator cross-refs to existing locations. Build resolves to
                     # runtime passage names at help_data emission (v1.py).
@@ -9529,6 +9533,7 @@ def create_project_from_template(
                             # E21 — opt-in cooldown visibility
                             "show_when_blocked": c.trigger.show_when_blocked or None,
                             "cooldown_message": c.trigger.cooldown_message,
+                            "locked_text": c.trigger.locked_text,
                             # PRD 25 — Lane 3 dispatcher substitution
                             "substitutions": c.trigger.substitutions if c.trigger.substitutions else None,
                             "substitution_only": c.trigger.substitution_only if c.trigger.substitution_only else None,

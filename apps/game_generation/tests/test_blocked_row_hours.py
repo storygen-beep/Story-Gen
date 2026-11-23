@@ -15,7 +15,8 @@ FIXTURE = "apps/game_generation/games_toml_files/engine_skill_test_fixes_2026_09
 LOC = "loc_bar"
 
 
-def _row(cid, conditions="", schedules=""):
+def _row(cid, conditions="", schedules="", locked=False):
+    locked_line = f'locked_text = "NEEDS_{cid}"' if locked else ""
     return f"""
 
 [[canvases]]
@@ -27,6 +28,7 @@ location          = "{LOC}"
 is_repeatable     = true
 show_when_blocked = true
 cooldown_message  = "HOURS_{cid}"
+{locked_line}
 {conditions}
 {schedules}
 
@@ -44,6 +46,7 @@ def _conds(*items, logic="AND"):
 SHUT_CLOCK = '{ type = "time_of_day", start_time = "03:00", end_time = "03:01" }'
 HIGH_METER = '{ type = "trait", subject = "player", trait_key = "corr", operator = "gte", value = 60 }'
 LOW_METER = '{ type = "trait", subject = "player", trait_key = "corr", operator = "gte", value = 0 }'
+NOT_WEARING = '{ type = "clothing_item", item_id = "leggings", operator = "equipped" }'
 UNSET_FLAG = '{ type = "flag", subject = "player", flag_key = "started", operator = "is_true" }'
 AT_HOUR3 = """
 [[canvases.trigger.schedules]]
@@ -60,6 +63,11 @@ ROWS = (
     + _row("flag_with_schedule", _conds(UNSET_FLAG), AT_HOUR3)
     + _row("schedule_only", "", AT_HOUR3)
     + _row("either_clock_or_meter", _conds(HIGH_METER, SHUT_CLOCK, logic="OR"))
+    # locked_text: a row waiting can't open greys out with the author's own line.
+    + _row("locked_meter", _conds(HIGH_METER), locked=True)
+    + _row("locked_clothes", _conds(NOT_WEARING), locked=True)
+    + _row("locked_both", _conds(HIGH_METER, SHUT_CLOCK), locked=True)
+    + _row("locked_clock_only", _conds(SHUT_CLOCK), locked=True)
 )
 
 
@@ -90,3 +98,29 @@ def test_the_helper_is_on_the_blocked_branch_only():
     """The daily-limit branch stays as it was: a limit is the clock's to reopen."""
     src = open("apps/game_generation/twee_comprehensive/generators/v2.py", encoding="utf-8").read()
     assert src.count("c.showWhenBlocked && setup.onlyTheClockShut(c)") == 1
+
+
+@needs_browser
+def test_a_row_waiting_cant_open_greys_out_with_its_locked_text(html):
+    """Clothes, a meter or a flag: greyed with locked_text, never with the hours."""
+    with open_game(html) as game:
+        game.js("""() => { const sv = SugarCube.State.variables;
+            sv.game_state.time_state.current_hour = 12; sv.game_state.time_state.current_minute = 0; }""")
+        out = game.js("(l) => SugarCube.setup.renderSoloActivities(l)", LOC)
+        assert not game.errors, game.errors
+    for cid in ("locked_meter", "locked_clothes", "locked_both"):
+        assert f"NEEDS_{cid}" in out, (cid, out)
+        assert f"HOURS_{cid}" not in out, (cid, out)
+        assert "solo-activity-cooldown" in out
+    # Shut by the clock alone: the hours stay, the locked line is not used.
+    assert "HOURS_locked_clock_only" in out, out
+    assert "NEEDS_locked_clock_only" not in out, out
+    # A greyed locked row is text, not a link into the canvas.
+    assert 'data-passage="locked_meter' not in out, out
+
+
+def test_locked_text_is_emitted_only_when_set():
+    """A game that authors no locked_text builds a byte-identical payload."""
+    src = open("apps/game_generation/twee_comprehensive/generators/v2.py", encoding="utf-8").read()
+    assert src.count('location_canvas_list[-1]["lockedText"]') == 1
+    assert '"lockedText": ' not in src
