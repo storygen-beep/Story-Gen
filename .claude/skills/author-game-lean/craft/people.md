@@ -29,7 +29,7 @@ The card's `Craft:` line cites each one, or says in one line why it skips it.
 | C644 | each person owns a corner of the world: their own subject, their own people offscreen | — |
 | C596 | the talk screen: about 55 words, two-thirds spoken, one picture, one exit | — |
 | C656 | a per-person meter is short: median 3 steps | — |
-| C660 | each person's meter is shown, one word for it across the cast | — |
+| C660 | each person's meter (one or two) is shown, each meter's word the same across the cast | — |
 | C448 | obvious on arrival: who they are, what they want, how they feel about her | — |
 | C1340 | the household loop: each housemate is their face at their spot, Talk inside their menu, +1 a click | first_term_lean's `talk_mom`, a Talk button on the kitchen menu |
 
@@ -55,7 +55,7 @@ Each rule is marked **measured** or **LO's choice**.
 5. **An offer has three to five graded answers,** eager to refusing, every one written. A no lands somewhere: a reply, a return later, a cost (C639, C640). Her no never raises a meter (C961). *Measured:* CoT's `BusGrope` and "That certainly backfired."
 6. **Each person has their own manner, their own subject and their own name for her** (C447, C593, C644). *Measured* for C593 and C644; C447 is *LO's choice.*
 7. **A talk screen is about 55 words, two-thirds spoken, one picture, one exit** (C596). *Measured in the field.*
-8. **One meter per person, shown, with few steps** (C656, C660). In release 1 it is shown and doesn't move. *Measured in the field;* release 1 is *LO's choice.*
+8. **One or two meters per person, each shown with its word, each with its own job, with few steps** (C656, C660). One is the field's common case (9 of 13 games); CoT gives every person two, friendship and lust (`<<friendship>>` 936 calls, `<<lust>>` 833 in round2/passages/course-of-temptation.txt): how close she is to him, and how much he wants her. In release 1 they are shown and don't move. *Measured in the field and in CoT;* two, and release 1, are *LO's choice.*
 9. **Obvious on arrival** (C448). *LO's rule, not measured.*
 10. **A person's actions are in their own menu, behind their face** (C1340). On the room screen the person is their face. Clicking it opens their menu: Talk, and whatever else she can do with them. None of it is a room button. Talk is once a day, and the person never locks: after Talk is used, the face still opens the menu, and the other options are still there. *Measured:* CoT's People Here list (`StoryCaption.txt`, lines 585-596) opens the person's card with "Talk to her" (`DisplayNPCWidgets.txt`, lines 33-68), and her own menu has 38 `<<link>>`s, 14 of them checked once a day against `$interactionstoday` (one at `InPersonDialogueMenu.txt`, line 77). Of 9 other top games, 5 put a person's actions behind the person: click the person (family-ties), one room button into her own menu (3, such as the-hellfire-club's "Speak to Daisy" in `DaisyRoom.txt`, line 18, into `Daisy_conv`), or her room is her menu (degrees-of-lewdity). The other 4 put each action loose on the room menu, shown while the person is there (lust-for-life's kitchen: "Approach Cory", `home-kitchen.txt`, line 15). Faces, not buttons, is *LO's choice* (relayed 2026-11-23: "Yes"), with CoT.
 

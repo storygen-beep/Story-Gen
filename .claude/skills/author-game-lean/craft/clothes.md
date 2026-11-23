@@ -9,7 +9,7 @@ The card's `Craft:` line cites each one, or says in one line why it skips it.
 | id | what it asks | the failure it stops |
 |---|---|---|
 | C719 | a button does something: no "get dressed" that moves no garment | first_term_lean's "Back in your room, dressed" |
-| C1158 | prose names her clothes only where a clothing condition or an earlier equip backs it | — |
+| C1158 | prose names her clothes only where a clothing condition, an earlier equip, or the beat that equips her backs it | the opening's dressing line failed this row and passed rule 4 (P13 reader pass 8) |
 | C1206 | prose never names a garment she may not be wearing | — |
 | C1166 | the opening arms the wardrobe, with the outfit choice on the screen where she dresses | — |
 | C1167 | release 1's minimum: one number the world reads, one gate with a notice, leave rules, one event, one line where a person notices | — |
