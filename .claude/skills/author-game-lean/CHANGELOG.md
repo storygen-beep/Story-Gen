@@ -189,3 +189,9 @@
   The field rows come from COVERAGE's evidence column and were not re-run.
 - `craft/opening.md`: the example's quest card went from "Make the rent by Friday." to "Pay your own way: rent every Friday." The old wording was a dated goal, which the new want.md's C34 and its "Not this" forbid. The hold's "Friday" in the dialogue stays, because a due day said by a person is the bill's date (C1004), not the goal's.
 - `SKILL.md`: the area table gives want its file.
+
+## 2026-11-23
+
+- **Approval: LO's own yes, relayed by the ENI session (now named main-lean; ENI for LO, standing authorization, 2026-11-20):** "Yes".
+- Created `craft/heat.md`, the heat area's file. Must-read rows: C255, C256, C252, C254, C239, C248, C249, C276, C291, C296, C284, C285, C286, C287, C288, C289, C297, C639, C640 and C311. It has a measures section, seven rules each marked measured or LO's choice, and pointers to opening.md (C311/C314), body-moments.md, walk-ins.md, voice.md and meters.md instead of repeating them. The worked example is LO's park text, scored per beat with v2's frozen `EXPLICIT` regex (`gates.py:311-315`): 1, 5, 1, 5 and 0 matches. Four "Not this" lines. An "Open" section proposes `check.py --beat` (not built): the walk-ins are the lean game's first explicit beats (P39, P40), so LATER.md's beat check is due before those cards. Verified in CoT today: 364 of 3,067 event passages (11.9%) have 3+ matches, by the peer's method; the peer had 353 of 3,108 (11%). The shower lines and the skillgate/"Resist the urge to look" pair were confirmed in `EventResHallExhibShowers.txt`. The field rows come from COVERAGE's evidence column and were not re-run.
+- `SKILL.md`: the area table gives heat its file.
