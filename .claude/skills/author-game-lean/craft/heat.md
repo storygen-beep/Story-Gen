@@ -9,30 +9,30 @@ Read this before you write a card with anything sexual in it: something that sho
 
 ## Must read
 
-The card's `Craft:` line cites each one, or says in one line why it skips it.
+The card's `Craft:` line cites each one, or says in one line why it skips it. `when` and `judge` are the labels in `SKILL.md`, "Rule labels".
 
-| id | what it asks | the failure it stops |
-|---|---|---|
-| C255 | across the game, at least 7.5% of beats carry 3+ frozen-list words | — |
-| C256 | 7.5% is a floor, never a ceiling; never dilute toward it | — |
-| C252 | the floor is a share across the game, not a per-beat quota | — |
-| C254 | an explicit beat has 3+ words from the frozen list | — |
-| C239 | the list is anatomy and acts; states ("hard", "wet") don't count; a coy gesture is the failure | — |
-| C248 | an explicit beat stays on the body, first sentence to last | — |
-| C249 | the pivot: a last sentence about what it means, not what's happening | three v2 increments shipped pivoted beats |
-| C276 | the model beat: crude, 5 explicit words, body in the last sentence, then its own interiority beat | — |
-| C291 | what shows sets the level; more watchers add risk, not a level | — |
-| C296 | a kind climbs inside itself: the low version opens low | — |
-| C284 | the order: things happen to her, she watches, then acts she chooses | — |
-| C285 | five stages on her two meters; a game may move a row, never drop the order | — |
-| C286 | stage 1: accidents, overhearing, his brush or grope, his leak | — |
-| C287 | stage 2: she watches by choice, a flirt, a first dare | — |
-| C288 | stage 3: private contact with someone she knows | — |
-| C289 | stage 4: her bare body before strangers, known people together | — |
-| C297 | people she lives with are reached through accidents first, her choice after | — |
-| C639 | an offer has graded answers, every one written | — |
-| C640 | a no is content | — |
-| C311 | low heat: a named part of her, his reaction, a "not yet" or a price (in `craft/opening.md`) | — |
+| id | what it asks | the failure it stops | when | judge |
+|---|---|---|---|---|
+| C255 | across the game, at least 7.5% of beats carry 3+ frozen-list words | — · kept blocking: LO's rule, explicit prose is the register (CLAUDE.md; 2026-11-24) | the plan | reader |
+| C256 | 7.5% is a floor, never a ceiling; never dilute toward it | — · kept blocking: LO's rule, explicit prose is the register (CLAUDE.md; 2026-11-24) | the plan | reader |
+| C252 | the floor is a share across the game, not a per-beat quota | — · kept blocking: LO's rule, explicit prose is the register (CLAUDE.md; 2026-11-24) | the plan | reader |
+| C254 | an explicit beat has 3+ words from the frozen list | — · kept blocking: LO's rule, explicit prose is the register (CLAUDE.md; 2026-11-24) | an explicit beat | script + beat |
+| C239 | the list is anatomy and acts; states ("hard", "wet") don't count; a coy gesture is the failure | — · kept blocking: LO's rule, explicit prose is the register (CLAUDE.md; 2026-11-24) | an explicit beat | reader |
+| C248 | an explicit beat stays on the body, first sentence to last | — · kept blocking: LO's rule, explicit prose is the register (CLAUDE.md; 2026-11-24) | an explicit beat | reader |
+| C249 | the pivot: a last sentence about what it means, not what's happening | three v2 increments shipped pivoted beats | an explicit beat | script + beat |
+| C276 | the model beat: crude, 5 explicit words, body in the last sentence, then its own interiority beat | — · kept blocking: LO's rule, explicit prose is the register (CLAUDE.md; 2026-11-24) | an explicit beat | reader |
+| C291 | what shows sets the level; more watchers add risk, not a level | — | something sexual shows | note |
+| C296 | a kind climbs inside itself: the low version opens low | — | something sexual shows | note |
+| C284 | the order: things happen to her, she watches, then acts she chooses | — · kept blocking: LO's choice (2026-11-24) | the plan | reader |
+| C285 | see `craft/meters.md` |  |  |  |
+| C286 | stage 1: accidents, overhearing, his brush or grope, his leak | — | something sexual shows | note |
+| C287 | stage 2: she watches by choice, a flirt, a first dare | — | something sexual shows | note |
+| C288 | stage 3: private contact with someone she knows | — | something sexual shows | note |
+| C289 | stage 4: her bare body before strangers, known people together | — · kept blocking: LO's choice (2026-11-24) | something sexual shows | reader |
+| C297 | people she lives with are reached through accidents first, her choice after | — | something sexual shows | note |
+| C639 | see `craft/people.md` |  |  |  |
+| C640 | see `craft/people.md` |  |  |  |
+| C311 | see `craft/opening.md` |  |  |  |
 
 ## The measures
 

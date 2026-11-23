@@ -2,6 +2,7 @@
 with a planted bug must fail it, so no green here is a check that cannot go red."""
 import re
 import shutil
+import sys
 from pathlib import Path
 
 import pytest
@@ -24,6 +25,8 @@ def instruction_files(skill):
 def size_problems(skill):
     rows = []
     for p in instruction_files(skill):
+        if p.name == "CHANGELOG.md":
+            continue  # a diary, not an instruction file (C2170; LO, 2026-11-24)
         n = len(p.read_text(encoding="utf-8").splitlines())
         cap = 200 if p == skill / "SKILL.md" else 400
         if n >= cap:
@@ -133,6 +136,7 @@ def test_planted_long_front_door(copy):
 def test_planted_long_instruction_file_and_lists_do_not_count(copy):
     (copy / "plan.md").write_text("x\n" * 400)
     (copy / "lists" / "BIG.md").write_text("x\n" * 2000)
+    (copy / "CHANGELOG.md").write_text("x\n" * 2000)
     assert size_problems(copy) == ["plan.md: 400 lines (cap 400)"]
 
 
@@ -263,3 +267,133 @@ def test_planted_area_missing_from_the_table(copy):
     text = re.sub(r"^\| economy \|.*\n", "", text, flags=re.M).replace("economy, ", "")
     p.write_text(text)
     assert area_table_misses(copy) == ["SKILL.md's area table does not name `economy`"]
+
+
+# ── rule labels (the rule pipeline, Part A + F, LO 2026-11-24) ──────────────────────────────────────────────
+
+# The craft files labelled so far; the rest are labelled one area at a time, and each is added here.
+LABELLED = sorted(f"craft/{p.name}" for p in (SKILL / "craft").glob("*.md"))
+# Ids shared with another file whose one home LO hasn't chosen yet (shown to LO 2026-11-24). Remove each as he answers.
+PENDING_HOMES = set()
+
+
+def triggers(skill):
+    part = (skill / "SKILL.md").read_text(encoding="utf-8").split("## Rule labels", 1)[-1].split("\n## ", 1)[0]
+    return set(re.findall(r"^\| ([a-z][^|]*?) \| ", part, re.M)) - {"when"}
+
+
+def check_names():
+    sys.path.insert(0, str(SKILL / "scripts"))
+    import check
+    return set(check.CHECKS)
+
+
+def must_rows(path):
+    """[(id, cells)] of a craft file's must-read table."""
+    text = path.read_text(encoding="utf-8")
+    part = text.split("## Must read", 1)[-1].split("\n## ", 1)[0] if "## Must read" in text else ""
+    return [(m.group(1), [c.strip() for c in m.group(0).strip().strip("|").split("|")])
+            for m in re.finditer(r"^\| ([CL]\d+) \|.*$", part, re.M)]
+
+
+def label_problems(skill, labelled=None):
+    rows, when_ok, checks = [], triggers(skill), check_names()
+    for name in labelled or LABELLED:
+        for rid, cells in must_rows(skill / name):
+            if len(cells) != 5:
+                rows.append(f"{name} {rid}: {len(cells)} columns, needs id | asks | failure | when | judge")
+                continue
+            _, asks, failure, when, judge = cells
+            if asks.startswith("see "):
+                continue  # a pointer to the row's home
+            bad = [w.strip() for w in when.split(",") if w.strip() not in when_ok]
+            if bad or not when.strip():
+                rows.append(f"{name} {rid}: `when` {bad or when!r} is not in SKILL.md's Rule labels")
+            kind, _, named = judge.partition("+")
+            kind = kind.strip()
+            if kind not in ("script", "reader", "note"):
+                rows.append(f"{name} {rid}: judge `{judge}` is not script, reader or note")
+            names = [x.strip() for x in named.split(",") if x.strip()]
+            if kind == "script" and not names:
+                rows.append(f"{name} {rid}: a script row names its check")
+            rows += [f"{name} {rid}: judge names `{x}`, which is not in check.py's CHECKS" for x in names
+                     if x not in checks]
+            if kind in ("script", "reader") and failure in ("", "—", "-"):
+                rows.append(f"{name} {rid}: a {kind} row needs a real failure, or says why it stays blocking")
+    return rows
+
+
+def home_problems(skill, labelled=None, pending=PENDING_HOMES):
+    """An id's row text lives in one craft file; every other file's row points there ("see craft/x.md")."""
+    labelled = set(labelled or LABELLED)
+    homes = {}
+    for path in sorted((skill / "craft").glob("*.md")):
+        for rid, cells in must_rows(path):
+            if not (len(cells) > 1 and cells[1].startswith("see ")):
+                homes.setdefault(rid, []).append(f"craft/{path.name}")
+    return [f"{rid}: row text in {', '.join(files)}; keep it in one and point from the rest"
+            for rid, files in sorted(homes.items())
+            if len(files) > 1 and rid not in pending and labelled & set(files)]
+
+
+def test_labels():
+    assert label_problems(SKILL) == []
+
+
+def test_one_home():
+    assert home_problems(SKILL) == []
+
+
+def test_checks_names_every_check():
+    sys.path.insert(0, str(SKILL / "scripts"))
+    import check
+    import scenes
+    assert {"talk", "length", "presence", "creation", "saves", "speakers", "goals", "sheet"} <= set(check.CHECKS)
+    assert set(scenes.run(None, None)) <= set(check.CHECKS)
+
+
+def test_planted_unknown_when_is_red(copy):
+    p = copy / "craft" / "voice.md"
+    p.write_text(p.read_text().replace("| C442 | say it, don't hint it: tell the player what is happening | — · kept "
+                                       "blocking: the voice, LO's (2026-11-22) | always |", "| C442 | say it, don't "
+                                       "hint it: tell the player what is happening | — · kept blocking: the voice, "
+                                       "LO's (2026-11-22) | sometimes |"))
+    assert any("C442" in r and "when" in r for r in label_problems(copy))
+
+
+def test_planted_reader_row_with_no_failure_is_red(copy):
+    p = copy / "craft" / "voice.md"
+    p.write_text(p.read_text().replace("| — · kept blocking: the voice, LO's (2026-11-22) | always | reader |",
+                                       "| — | always | reader |", 1))
+    assert any("real failure" in r for r in label_problems(copy))
+
+
+def test_planted_script_row_naming_no_check_is_red(copy):
+    p = copy / "craft" / "voice.md"
+    p.write_text(p.read_text().replace("| always | reader + presence, sheet, creation |", "| always | script |"))
+    assert any("names its check" in r for r in label_problems(copy))
+    p.write_text(p.read_text().replace("| always | script |", "| always | script + vibes |"))
+    assert any("`vibes`" in r for r in label_problems(copy))
+
+
+def test_planted_second_copy_of_a_row_is_red(copy):
+    p = copy / "craft" / "people.md"
+    t = p.read_text()
+    p.write_text(t.replace("| C644 | each person owns a corner of the world: their own subject, their own people offscreen | — |",
+                           "| C644 | each person owns a corner of the world: their own subject, their own people offscreen | — |\n| C442 | say it | — |"))
+    assert home_problems(copy) == ["C442: row text in craft/people.md, craft/voice.md; keep it in one and point "
+                                   "from the rest"]
+
+
+def test_a_pointer_is_not_a_second_copy(copy):
+    p = copy / "craft" / "people.md"
+    p.write_text(p.read_text().replace("| C644 | each person owns a corner of the world: their own subject, their own people offscreen | — |",
+                                       "| C644 | each person owns a corner of the world: their own subject, their own people offscreen | — |\n"
+                                       "| C442 | see `craft/voice.md` | | | |"))
+    assert home_problems(copy) == []
+
+
+def test_an_unlabelled_file_is_not_judged(copy):
+    assert label_problems(copy, ["craft/voice.md"]) == []
+    (copy / "craft" / "new-area.md").write_text("## Must read\n\n| id | what it asks | the failure it stops |\n|---|---|---|\n| C442 | x | — |\n")
+    assert label_problems(copy, ["craft/new-area.md"])  # an unlabelled file is red once it's listed

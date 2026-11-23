@@ -1,24 +1,24 @@
 # craft/voice.md — the voice, aligned with Course of Temptation
 
-Read this before you write any card with prose on it. It replaces reading v2's `register.md` "The voice — say it loud" (LO, relayed 2026-11-22: "Remove thoughts in itallic. Dont show in body too." · "Does Cot shows feelings??" · "Lets align it with Cot"). The truth rule stays in v2's `register.md` "The truth rule" until it's ported here in full (`reader.md`).
+Read this before you write any card with prose on it. It replaces reading v2's `register.md` "The voice — say it loud" (LO, relayed 2026-11-22: "Remove thoughts in itallic. Dont show in body too." · "Does Cot shows feelings??" · "Lets align it with Cot"). It also carries the truth rule in full ("The truth rule", below), ported from v2's `register.md` so the writer and the reader read the same text (LO, relayed 2026-11-24: the P13 reader found a new truth FAIL on every pass from v5 to v11, and the writer had only this file's headline row).
 
 ## Must read
 
-The card's `Craft:` line cites each one, or says in one line why it skips it.
+The card's `Craft:` line cites each one, or says in one line why it skips it. `when` and `judge` are the labels in `SKILL.md`, "Rule labels".
 
-| id | what it asks | the failure it stops |
-|---|---|---|
-| C442 | say it, don't hint it: tell the player what is happening | — |
-| C449 | name the sexual tension; don't bury it | — |
-| C451 | keep the concrete detail: places, objects, money, times | — |
-| C447 | every person sounds like themselves: one manner each, held | — |
-| C593 | one term of address per person that nobody else uses | — |
-| C448 | obvious on arrival: who a person is, what they want, how they feel about her, in the first lines | — |
-| C450 | end a scene on a hook that points at what happens next | P13 ended on "go to breakfast" |
-| C422 | labels, room names and cards say plainly what clicking does | — |
-| C460 | the truth rule: every claim is true on every playthrough that can reach the screen | — |
-| C461 | what's allowed under it: texture that can't clash, her opinions, dialogue that fits the cast entry | — |
-| L163 | a rule removed needs the same proof as a rule added, measured the way the player sees it | a quotes-only count once deleted a correct dialogue rule |
+| id | what it asks | the failure it stops | when | judge |
+|---|---|---|---|---|
+| C442 | say it, don't hint it: tell the player what is happening | — · kept blocking: the voice, LO's (2026-11-22) | always | reader |
+| C449 | name the sexual tension; don't bury it | — · kept blocking: the voice, LO's (2026-11-22) | something sexual shows | reader |
+| C451 | keep the concrete detail: places, objects, money, times | — · kept blocking: the voice, LO's (2026-11-22) | always | reader |
+| C447 | every person sounds like themselves: one manner each, held | — · kept blocking: the voice, LO's (2026-11-22) | a person is on screen | reader |
+| C593 | one term of address per person that nobody else uses | P13 reader pass 7: Mark had no term of address for her (Mom "baby", Ryan the nickname) | a person is on screen | reader |
+| C448 | see `craft/people.md` | | | |
+| C450 | end a scene on a hook that points at what happens next | P13 ended on "go to breakfast" | a scene's last screen | reader |
+| C422 | labels, room names and cards say plainly what clicking does | — · kept blocking: the voice, LO's (2026-11-22) | always | reader |
+| C460 | the truth rule: every claim is true on every playthrough that can reach the screen | P13 reader pass 11: Mom's "promise me it won't be like high school", on the screen all three start choices leave from | always | reader + presence, sheet, creation |
+| C461 | what's allowed under it: texture that can't clash, her opinions, dialogue that fits the cast entry | — · kept blocking: the truth rule | always | reader |
+| L163 | a rule removed needs the same proof as a rule added, measured the way the player sees it | a quotes-only count once deleted a correct dialogue rule | a rule is changed | reader |
 
 ## The measures (re-run 2026-11-22)
 
@@ -45,10 +45,49 @@ Each rule is marked **measured** (with its numbers) or **LO's choice**.
 2. **Feelings show on the body,** hers and everyone else's: "your cheeks burn", "your stomach drops", "his ears go red", "she looks away". Naming a feeling ("you feel embarrassed") is rare: about once where the body carries it a hundred times. *Measured:* the CoT counts above.
 3. **Arousal is always on her body:** her nipples, the heat between her legs, her breath. *LO's choice,* matched to CoT ("a thrill of arousal", "an ache between your").
 4. **No italic thoughts,** not in their own line and not inside the prose. What she thinks goes on her body, in the narration, or out loud to the person in front of her. *LO's choice,* matched to CoT (under 1% of its event passages). This drops C444 (thoughts in italics, `thought_bubble`).
-5. **People speak in most scenes, and narration leads,** under 5 : 1 on a scene with someone in it. *Measured:* CoT 3.92 : 1, DoL 3.23 : 1, Hellfire 1.87 : 1; field median 2.93 : 1 over 27 games, gate `somebody speaks` ≤ 5 : 1 (`.claude/skills/author-game-v2/references/register.md:57`, `.claude/skills/author-game-v2/references/register.md:658`). This drops C446 ("more dialogue than narration"), which none of the measured top games does. A scene she is alone in needs no speech.
+5. **People speak in most scenes, and narration leads,** under 5 : 1 on a scene with someone in it. *Measured:* CoT 3.92 : 1, DoL 3.23 : 1, Hellfire 1.87 : 1; field median 2.93 : 1 over 27 games, gate `somebody speaks` ≤ 5 : 1 (`.claude/skills/author-game-v2/references/register.md:57`, `.claude/skills/author-game-v2/references/register.md:658`). This drops C446 ("more dialogue than narration"), which none of the measured top games does. A scene she is alone in needs no speech. How to count: words in `dialog` blocks, and words inside quote marks in a paragraph, are speech; everything else on the screen is narration. Where a screen has variants, count the one that leans most on narration. Count only the screens with someone else in them: a line from them, a presence check for them, or their name or role in the prose. Count each path through the scene, from its first screen to where it leaves, and every path stays at or under 5 : 1. `check.py` counts it (`talk`).
 6. **Say what happens plainly and name the sexual tension** (C442, C449), and keep the concrete detail (C451): the bolt, the small towel, the time. *LO's choice:* the loud voice is "a decision made against the field" (`.claude/skills/author-game-v2/references/register.md:15-17`).
-7. **True on every visit** (C460, C461). A line about the past shows only behind the flag that records it; who it says is there is there. *LO's choice,* kept in practice by CoT's macros above.
+7. **True on every visit** (C460, C461): "The truth rule", below. *LO's choice,* kept in practice by CoT's macros above.
 8. **Each person sounds like themselves,** with one term of address that nobody else uses (C447; C593 is *measured:* 5–18% of lines in two games). **Obvious on arrival** (C448), **end on a hook** (C450), **labels plain** (C422): *LO's rules, not measured.*
+
+## The truth rule
+
+Ported from `.claude/skills/author-game-v2/references/register.md:89-156`, with these changes for this skill: her opinions go on her body or out loud (rule 4 here, no italic thoughts); the schedules are read with `scripts/who_is_where.py`; and one line in rule 2 and step 7 is new, from P13's reader pass 11 (2026-11-24): Mom's "promise me it won't be like high school", on the screen all three start choices leave from, assumed a bad high school that the grades answer ("It'll be the same") then called good. v2's step 7 (write the facts list at the top of the draft) is dropped: the card is the draft.
+
+**Loud writing makes claims.** "She hasn't slept." "You didn't eat last night." Every claim has to be true on every playthrough that can reach the screen. The first loud rewrite of a real scene in v2 had five lines and five defects: the wrong clothes for the hour, two pasts the player may not have had ("last night" on what could be day one), one line out of character, and one printed stat that doesn't exist.
+
+| allowed | not allowed |
+|---|---|
+| texture that can't clash with anything: the kettle, a pet name, the oil in the pan | anything that contradicts the design: clothes, times, who is where |
+| her opinions, on her body or said aloud | a past about her that no flag records: "you came last night", "you did this again". "Again" alone on a repeatable is fine ("he wants you again") |
+| dialogue that fits the person's entry in the plan | behaviour the plan rules out for them |
+| a consequence on a button when a real flag or number sits behind it | a "+X" for a number that doesn't exist (`craft/meters.md`) |
+
+**The five rules.**
+
+1. **Every fact line is checked** against the plan and the schedules: who is there, what they wear, what time it is, what day, at every minute it can show. Run `who_is_where.py` for every line that puts a person somewhere.
+2. **A line about the past shows only behind the flag or count that records it,** in a group whose conditions read it. "You're late again" is true inside `late_count gte 1` and a lie outside it. A meter many scenes raise records no one event. A line on a screen every path reaches can't assume a past or a fact that only one path makes true.
+3. **A big moment is a one-time step, not a repeatable** (C146). A repeatable plays every visit, so it can't carry a reveal.
+4. **A consequence on a button is a real flag or number,** or it goes into the plan first.
+5. **Prose names her clothes only where a clothing condition, an earlier equip, or the beat that equips her backs it** (C1158; `craft/clothes.md` rule 4).
+
+Who judges each rule: 1 is the reader's, helped by `presence` and `sheet` (who is where, the clock, the place); 2 to 5 are the reader's, and 5 is helped by `sheet` (what she wears). Rules 1, 2, 4 and 5 apply always (`when`); rule 3 applies on a repeatable.
+
+**A promise about the future must be built.** A line that names a future event ("next month he decides") is true only if the game builds it, or the plan has the step that reaches it. Otherwise cut the line, or drop the date.
+
+**How to check a scene: seven steps.**
+
+1. List every time the scene can show: its trigger, and each person's rows on every weekday. A scene that can show at 09:00 on a Saturday can't say "tonight" (`craft/clock.md`).
+2. List every claim: times, clothes, who is where, what the past was, what someone knows.
+3. Check each one against a source: `PLAN.md`, the other cards, and `who_is_where.py`.
+4. A claim true only sometimes gets a condition or a variant. With neither, cut it.
+5. Check each person's lines against their entry in the plan, including how they say no and what they never do.
+6. Check each printed consequence against the button's real effects.
+7. Read each screen on every path into it and out of it: a line every path shares is true on all of them, and each answer still fits what was said before it.
+
+**One line, wrong and right.** On a repeatable scene:
+- Wrong: "Late again. Third time this week." True on the third visit, a lie on the first.
+- Right: the same line inside a group on `late_count gte 3`, with "You're late. Apron's on the hook." as the fallback.
 
 ## Worked example
 

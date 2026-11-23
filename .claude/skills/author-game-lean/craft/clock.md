@@ -4,33 +4,33 @@ Read this before you write a card that spends time, gives a place or a person ho
 
 ## Must read
 
-The card's `Craft:` line cites each one, or says in one line why it skips it.
+The card's `Craft:` line cites each one, or says in one line why it skips it. `when` and `judge` are the labels in `SKILL.md`, "Rule labels".
 
-| id | what it asks | the failure it stops |
-|---|---|---|
-| C889 | a label never promises a clock time; it states the duration, equal to the real spend | — |
-| C906 | "till one" is a promise the engine can't keep; keep only the duration | — |
-| C926 | the clock moves only by minutes; nothing sends it to a named hour | — |
-| C900 | a beat never says what time it is; a repeatable canvas fires at any minute of its window. Make it a rule on a sign | — |
-| C902 | the test: read the line at the last minute of its window; is it still true? | — |
-| C903 | the same for the weekday: a named day on a repeatable canvas is usually wrong | — |
-| C904 | the field names a clock time about 1.1 times per 10,000 words | — |
-| C892 | the hour goes on the door, not in the act | — |
-| C910 | a button that spends time says how much, one form across the game | — |
-| C929 | travel time is tagged on the nav card; an activity's time is tagged nowhere, so the label carries it | — |
-| C897 | put time on crossing an area, never on every room | — |
-| C924 | travel cost is what makes a schedule matter | — |
-| C920 | a move costs a few minutes; a bus to town 20 | — |
-| C913 | a thing with hours publishes them: a shut activity stays as a dimmed line | — |
-| C930 | without `show_when_blocked`, windowed work vanishes out of hours | — |
-| C914 | a row shows its hours only when the clock alone shut it | — |
-| C916 | hours go on what she chooses; an event that happens to her stays hidden when shut | — |
-| C915 | people's hours go on the schedule page; places with hours get closed text | — |
-| C921 | a schedule window may wrap past midnight; no end time means one hour | — |
-| C927 | an exit with no time still costs 3 minutes | — |
-| C928 | the clock can be shown in the HUD, not printed into prose | — |
-| C931 | `time_of_day` is re-read every time, end exclusive, and wraps like schedules | — |
-| C890 | the clock repeats, like a bill or a weekly count; it isn't a deadline | — |
+| id | what it asks | the failure it stops | when | judge |
+|---|---|---|---|---|
+| C889 | a label never promises a clock time; it states the duration, equal to the real spend | — | the clock moves | note |
+| C906 | "till one" is a promise the engine can't keep; keep only the duration | — | the clock moves | note |
+| C926 | the clock moves only by minutes; nothing sends it to a named hour | — | the clock moves | note |
+| C900 | a beat never says what time it is; a repeatable canvas fires at any minute of its window. Make it a rule on a sign | P13 reader pass 6: the wake screen said "Monday, seven in the morning." | the clock moves | reader |
+| C902 | the test: read the line at the last minute of its window; is it still true? | — | the clock moves | note |
+| C903 | the same for the weekday: a named day on a repeatable canvas is usually wrong | — · kept blocking: LO's choice (2026-11-24) | the clock moves | reader |
+| C904 | the field names a clock time about 1.1 times per 10,000 words | — | the plan | note |
+| C892 | the hour goes on the door, not in the act | — | the clock moves | note |
+| C910 | a button that spends time says how much, one form across the game | — | the clock moves | note |
+| C929 | travel time is tagged on the nav card; an activity's time is tagged nowhere, so the label carries it | — | the clock moves | note |
+| C897 | put time on crossing an area, never on every room | — | the clock moves | note |
+| C924 | travel cost is what makes a schedule matter | — | the clock moves | note |
+| C920 | a move costs a few minutes; a bus to town 20 | P13 reader pass 7: the same move inside the house was "(10 min)" on one screen and "(5 min)" on another | the clock moves | reader |
+| C913 | a thing with hours publishes them: a shut activity stays as a dimmed line | — · kept blocking: LO's choice (2026-11-24) | the clock moves | reader |
+| C930 | without `show_when_blocked`, windowed work vanishes out of hours | — | the clock moves | note |
+| C914 | a row shows its hours only when the clock alone shut it | — · kept blocking: LO's choice (2026-11-24) | the clock moves | reader |
+| C916 | hours go on what she chooses; an event that happens to her stays hidden when shut | — · kept blocking: LO's choice (2026-11-24) | the clock moves | reader |
+| C915 | people's hours go on the schedule page; places with hours get closed text | — | the plan | note |
+| C921 | a schedule window may wrap past midnight; no end time means one hour | — | the plan | note + sheet |
+| C927 | an exit with no time still costs 3 minutes | — | the clock moves | note + sheet |
+| C928 | the clock can be shown in the HUD, not printed into prose | P13 reader pass 6: the same line printed the clock into prose | the clock moves | reader |
+| C931 | `time_of_day` is re-read every time, end exclusive, and wraps like schedules | — | the clock moves | note + sheet |
+| C890 | the clock repeats, like a bill or a weekly count; it isn't a deadline | — · kept blocking: LO's choice (2026-11-24) | the plan | reader |
 
 ## The engine (cited; `v2.py` is `apps/game_generation/twee_comprehensive/generators/v2.py`)
 

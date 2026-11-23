@@ -45,6 +45,42 @@ def in_window(m, start, end):
     return (m >= s or m < e) if e < s else (s <= m < e)
 
 
+def item_slots(item):
+    """The (day, minute) slots one condition item allows by the clock. A time_of_day item is its window
+    (`in_window`); a weekday item is its days, 0 = Monday, and an empty list never holds (v2.py:5203-5207);
+    an item with its own `items` is a block, read the same way; any other item can hold at any time."""
+    if not isinstance(item, dict):
+        return set(SLOTS)
+    if isinstance(item.get("items"), list):
+        return when_slots(item)
+    if item.get("type") == "time_of_day":
+        return {(d, m) for d, m in SLOTS if in_window(m, item.get("start_time"), item.get("end_time"))}
+    if item.get("type") == "weekday":
+        days = set(item.get("weekdays") or [])
+        return {(d, m) for d, m in SLOTS if d in days}
+    return set(SLOTS)
+
+
+def when_slots(conditions):
+    """The slots a condition block lets a scene show at, by the clock alone (`setup.triggerConditionsSatisfied`,
+    v2.py:5028-5035). AND intersects its items; OR is the union of its items, and since a non-clock item counts as
+    every slot, an OR that holds any non-clock item stays every slot. So an OR never narrows below what the engine
+    allows: it can only say "can show" too often, which presence and the sheet read as "could be there", never as
+    a red. A block without version "1.0" or items is always satisfied in the engine, so every slot."""
+    if not isinstance(conditions, dict) or conditions.get("version") != "1.0":
+        return set(SLOTS)
+    items = [i for i in conditions.get("items") or [] if isinstance(i, dict)]
+    if not items:
+        return set(SLOTS)
+    parts = [item_slots(i) for i in items]
+    if conditions.get("logic") == "OR":
+        return set().union(*parts)
+    out = set(SLOTS)
+    for s in parts:
+        out &= s
+    return out
+
+
 def weekdays(v):
     return set(v) if isinstance(v, (list, tuple)) and v else set(range(7))
 

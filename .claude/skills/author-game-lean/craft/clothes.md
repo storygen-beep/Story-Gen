@@ -4,33 +4,33 @@ Read this before you write a card that dresses her, gives or sells her a garment
 
 ## Must read
 
-The card's `Craft:` line cites each one, or says in one line why it skips it.
+The card's `Craft:` line cites each one, or says in one line why it skips it. `when` and `judge` are the labels in `SKILL.md`, "Rule labels".
 
-| id | what it asks | the failure it stops |
-|---|---|---|
-| C719 | a button does something: no "get dressed" that moves no garment | first_term_lean's "Back in your room, dressed" |
-| C1158 | prose names her clothes only where a clothing condition, an earlier equip, or the beat that equips her backs it | the opening's dressing line failed this row and passed rule 4 (P13 reader pass 8) |
-| C1206 | prose never names a garment she may not be wearing | — |
-| C1166 | the opening arms the wardrobe, with the outfit choice on the screen where she dresses | — |
-| C1167 | release 1's minimum: one number the world reads, one gate with a notice, leave rules, one event, one line where a person notices | — |
-| C1204 | release 1: cheap clothes, one number, one gate on day 1, the leave rules, one event, one line | — |
-| C1183 | the unit is the state, not the item: design states first, then items | — |
-| C1171 | each clothing state and key item is read in 3+ places | — |
-| C1169 | a clothing read is armed only if something she can get satisfies it | — |
-| C1150 | every garment has a way into the wardrobe: initial, a shop price over 0, or `wardrobeEffects` | — |
-| C1201 | few items is fine if each moves a state; an item nothing reads is a defect | — |
-| C1173 | clothing doors are few and loud: gate at the door, say why at the door, offer the change | — |
-| C1184 | the refusal says what's missing, in her voice | — |
-| C1198 | a refusal always offers the way out: change, or what to buy | — |
-| C1185 | a dress code checks coverage, not style | — |
-| C1220 | a dress code's breach plays ClothingBlock: "Go back", plus "Change clothes" only where she can change | first_term_lean P07: the front door showed only "Go back" |
-| C1221 | a dress-code exception names everything it allows, `dress` unequipped included | first_term's dress slipped through |
-| C1177 | exposure is outfit plus place plus audience: bare in her bedroom is nothing, on the street it's the event | — |
-| C1176 | clothing reads belong on streets and open places, not on sex scenes | — |
-| C1189 | people notice: one line per state worth noticing, in their own manner | — |
-| C1197 | changing is cheap: one or two clicks, whole outfits | — |
-| C1200 | place clothes only where the place's activity asks for them | — |
-| C1207 | the wardrobe screen works on a phone | — |
+| id | what it asks | the failure it stops | when | judge |
+|---|---|---|---|---|
+| C719 | a button does something: no "get dressed" that moves no garment | first_term_lean's "Back in your room, dressed" | she dresses or undresses | reader |
+| C1158 | the clothes the prose names are backed by a condition, an earlier equip, or the beat that equips her; undressing in an act is backed by the act | the opening's dressing line failed this row and passed rule 4 (P13 reader pass 8) | a garment is named | reader + sheet |
+| C1206 | prose never names a garment she may not be wearing | — · kept blocking: the truth rule | a garment is named | reader + sheet |
+| C1166 | the opening arms the wardrobe, with the outfit choice on the screen where she dresses | — · kept blocking: LO's choice (2026-11-23) | she dresses or undresses | reader |
+| C1167 | release 1's minimum: one number the world reads, one gate with a notice, leave rules, one event, one line where a person notices | — | the plan | note |
+| C1204 | release 1: cheap clothes, one number, one gate on day 1, the leave rules, one event, one line | — | the plan | note |
+| C1183 | the unit is the state, not the item: design states first, then items | — | the plan | note |
+| C1171 | each clothing state and key item is read in 3+ places | — | the plan | note |
+| C1169 | a clothing read is armed only if something she can get satisfies it | — | the plan | note + reach |
+| C1150 | every garment has a way into the wardrobe: initial, a shop price over 0, or `wardrobeEffects` | — | the plan | note |
+| C1201 | few items is fine if each moves a state; an item nothing reads is a defect | — | the plan | note |
+| C1173 | clothing doors are few and loud: gate at the door, say why at the door, offer the change | — | a place is entered | note |
+| C1184 | the refusal says what's missing, in her voice | — | a place is entered | note |
+| C1198 | a refusal always offers the way out: change, or what to buy | — | a place is entered | note |
+| C1185 | a dress code checks coverage, not style | — | a place is entered | note |
+| C1220 | a dress code's breach plays ClothingBlock: "Go back", plus "Change clothes" only where she can change | first_term_lean P07: the front door showed only "Go back" | a place is entered | reader |
+| C1221 | a dress-code exception names everything it allows, `dress` unequipped included | first_term's dress slipped through | a place is entered | reader + reach |
+| C1177 | exposure is outfit plus place plus audience: bare in her bedroom is nothing, on the street it's the event | — | a garment is named | note |
+| C1176 | clothing reads belong on streets and open places, not on sex scenes | — | something sexual shows | note |
+| C1189 | people notice: one line per state worth noticing, in their own manner | — | a person is on screen | note |
+| C1197 | changing is cheap: one or two clicks, whole outfits | — | she dresses or undresses | note |
+| C1200 | place clothes only where the place's activity asks for them | — · kept blocking: LO's choice (2026-11-23) | a place is entered | reader |
+| C1207 | the wardrobe screen works on a phone | — | she dresses or undresses | note |
 
 ## The engine (cited; `v2.py` is `apps/game_generation/twee_comprehensive/generators/v2.py`)
 

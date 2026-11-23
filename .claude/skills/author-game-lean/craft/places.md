@@ -4,29 +4,29 @@ Read this before you write a card that builds or changes a place: its descriptio
 
 ## Must read
 
-The card's `Craft:` line cites each one, or says in one line why it skips it.
+The card's `Craft:` line cites each one, or says in one line why it skips it. `when` and `judge` are the labels in `SKILL.md`, "Rule labels".
 
-| id | what it asks | the failure it stops |
-|---|---|---|
-| C769 | a place says what it is and what happens there in its own description | — |
-| C794 | the identity sentence is the same on every visit | — |
-| C795 | re-entry changes come from one presence line per person there, the crowd, the menu, and events | — |
-| C804 | places have people: text that changes with who is there | first_term: 16% of places had people |
-| L106 | a line claims someone is there whom their rows don't put there | first_term's `master_asleep` snored while Mark was in the living room |
-| C776 | the menu holds three kinds of thing: a need, a system, a person | — |
-| C777 | anything else goes inside a beat, not on the menu | — |
-| C773 | top games' room buttons are sleep, work, dress, eat, wash; never a browse list of objects | — |
-| C758 | labels run short: median 3 words | — |
-| C953 | the label carries its cost before the click: time, money, energy | — |
-| C954 | a price she pays stays on the button; pay she earns never does | — |
-| C738 | a thoroughfare only routes; a destination has one thing to do alone, or hours and a closed line | — |
-| C762 | "Nothing happens." is banned | L150 |
-| L147 | the world felt empty | first_term_lean: 15 places said "Nothing to do here right now" |
-| C808 | root the world outdoors, in more than one zone | — |
-| C811 | the map shapes: nested zones by default, a street or quad as each zone's hub | — |
-| C770 | the field's room screen: median 82 words a visit | — |
-| C771 | a first-visit screen is rare (DoL only); never a place's only introduction | — |
-| C707 | world fill: one anchor holds about 30% of place prose | — |
+| id | what it asks | the failure it stops | when | judge |
+|---|---|---|---|---|
+| C769 | a place says what it is and what happens there in its own description | — | a place is entered | note |
+| C794 | the identity sentence is the same on every visit | — | a place is entered | note |
+| C795 | re-entry changes come from one presence line per person there, the crowd, the menu, and events | — | a place is entered | note |
+| C804 | places have people: text that changes with who is there | first_term: 16% of places had people | a place is entered | reader |
+| L106 | a line claims someone is there whom their rows don't put there | first_term's `master_asleep` snored while Mark was in the living room | a place is entered, a person is on screen | reader + presence |
+| C776 | the menu holds three kinds of thing: a need, a system, a person | — · kept blocking: LO's choice (2026-11-24) | a place is entered | reader |
+| C777 | anything else goes inside a beat, not on the menu | — · kept blocking: LO's choice (2026-11-24) | a place is entered | reader |
+| C773 | top games' room buttons are sleep, work, dress, eat, wash; never a browse list of objects | — · kept blocking: LO's choice (2026-11-24) | a place is entered | reader |
+| C758 | labels run short: median 3 words | — | a place is entered | note |
+| C953 | the label carries its cost before the click: time, money, energy | — | a place is entered, a price or pay is shown | note |
+| C954 | see `craft/economy.md` |  |  |  |
+| C738 | a thoroughfare only routes; a destination has one thing to do alone, or hours and a closed line | — · kept blocking: LO's choice (2026-11-24) | the plan | reader |
+| C762 | "Nothing happens." is banned | L150; first_term_lean: 15 places said "Nothing to do here right now" | a place is entered | reader |
+| L147 | see `craft/walk-ins.md` |  |  |  |
+| C808 | root the world outdoors, in more than one zone | — | the plan | note |
+| C811 | the map shapes: nested zones by default, a street or quad as each zone's hub | — | the plan | note |
+| C770 | the field's room screen: median 82 words a visit | — | a place is entered | note + length |
+| C771 | a first-visit screen is rare (DoL only); never a place's only introduction | — | a place is entered | note |
+| C707 | world fill: one anchor holds about 30% of place prose | — | the plan | note |
 
 ## The measures (re-run 2026-11-22)
 

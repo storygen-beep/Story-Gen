@@ -9,38 +9,45 @@ Read this before you plan a person's steps or write a card for one of them. Chec
 
 ## Must read
 
-The card's `Craft:` line cites each one, or says in one line why it skips it.
+The card's `Craft:` line cites each one, or says in one line why it skips it. `when` and `judge` are the labels in `SKILL.md`, "Rule labels".
 
-| id | what it asks | the failure it stops |
-|---|---|---|
-| C180 | every step pays the one before and opens the one after, and the text says so | — |
-| C160 | central people get a long chain, the rest shorter: a shape, not a quota | — |
-| C120 | every step adds a new witness, risk or kind of yes; two flat steps in a row, cut one | L18 |
-| C109 | each step carries a leak (his want, shown before) and a promise (the line it ends on) | — |
-| C115 | his move: what he wants for his own reason, shown before, and what he does about it | — |
-| C162 | information the player earns is a step; information the game narrates is exposition | — |
-| C146 | a big moment is a one-time step, not a repeatable | — |
-| C151 | the repeatable stays short: one spoken line and one visible want | — |
-| C148 | each scene goes one step further than the last | — |
-| C149 | each scene points at what comes next | — |
-| C198 | an arc runs on one step counter, not a pile of flags | — |
-| C131 | every dependency is written down: another person's step, a window, a place | — |
-| C174 | the next step comes before any dice | — |
-| C212 | a story step fires the first time it can, never by luck | — |
-| C124 | slow is fine if his card says what to do; bored is fine, lost is not | L80 |
-| C164 | an ordinary no is parked: the step comes back after a wait | — |
-| C165 | a final no is only on a button that says so, and closes his story, not the person | — |
-| C166 | no final no on a central arc's first step | — |
-| C121 | the release's top step is a payoff; a talk or a locked door is not a top step | L18 |
-| C127 | something still happens after the top step | — |
-| C140 | each arc's last card says where it stops and what comes next, and it's true | — |
-| C215 | an arc that stops at the build's edge says so on its card ("for now"), never "Arc complete" | — |
-| C217 | a step's ✓ reads a flag the step sets on its way out | — |
-| C171 | an arc ends by pointing at another | — |
+| id | what it asks | the failure it stops | when | judge |
+|---|---|---|---|---|
+| C180 | every step pays the one before and opens the one after, and the text says so | P13 reader pass 6: Ryan's step ended on "He says it to the floor." and opened nothing after it | a person's arc step | reader |
+| C160 | central people get a long chain, the rest shorter: a shape, not a quota | — | the plan | note |
+| C120 | every step adds a new witness, risk or kind of yes; two flat steps in a row, cut one | L18 | a person's arc step | reader |
+| C109 | each step carries a leak (his want, shown before) and a promise (the line it ends on) | P13's Ryan leered and never covered (`craft/opening.md`, C601) | a person's arc step | reader |
+| C115 | his move: what he wants for his own reason, shown before, and what he does about it | — | a person's arc step | note |
+| C162 | information the player earns is a step; information the game narrates is exposition | — | a person's arc step | note |
+| C146 | a big moment is a one-time step, not a repeatable | — | a repeatable | note |
+| C151 | the repeatable stays short: one spoken line and one visible want | — | a repeatable | note |
+| C148 | each scene goes one step further than the last | — | a person's arc step | note |
+| C149 | each scene points at what comes next | P13 reader pass 6: Ryan's scene didn't point at what comes next with him | a scene's last screen | reader |
+| C198 | an arc runs on one step counter, not a pile of flags | — | the plan | note |
+| C131 | every dependency is written down: another person's step, a window, a place | — | the plan | note |
+| C174 | a person's next arc step comes before any dice | — | the plan | note |
+| C212 | a story step fires the first time it can, never by luck | — | the plan | note |
+| C124 | slow is fine if his card says what to do; bored is fine, lost is not | L80 | a goal card is shown | reader |
+| C164 | an ordinary no is parked: the step comes back after a wait | — · kept blocking: LO's choice (2026-11-24) | a no is possible | reader |
+| C165 | a final no is only on a button that says so, and closes his story, not the person | — · kept blocking: LO's choice (2026-11-24) | a no is possible | reader |
+| C166 | never a final no on the main arc's first step, or in the opening | P13's "(ends his path)" | a no is possible | reader |
+| C121 | the release's top step is a payoff; a talk or a locked door is not a top step | L18 | the plan | reader |
+| C127 | something still happens after the top step | — | the plan | note |
+| C140 | each arc's last card says where it stops and what comes next, and it's true | — | a goal card is shown | note |
+| C215 | an arc that stops at the build's edge says so on its card ("for now"), never "Arc complete" | — | a goal card is shown | note |
+| C217 | a step's ✓ reads a flag the step sets on its way out | P13 reader pass 6: goal 1's ✅ read met_mark, set on the way into the rent screen, not on the step's way out | a goal card is shown | reader |
+| C171 | an arc ends by pointing at another | — | the plan | note |
 
 ## The engine (cited; `v2.py` is `apps/game_generation/twee_comprehensive/generators/v2.py`)
 
 - **A step is a one-time canvas.** A canvas is repeatable unless it says `is_repeatable = false` (read at v2.py:15065; `apps/projects/services/template_import.py:833`).
+- **How a step reaches her.** A one-time canvas at a place fires by itself when she walks in: the highest-priority one whose conditions hold (`setup.selectAutoFireCanvasForLocation`, v2.py:5895-5915, called on entry at v2.py:6511-6522). It doesn't check the person is there: `requires_npc` isn't read on that path (v2.py:6083-6086; played on first_term, where `zoe_00_quad_meeting` opened with Zoe placed nowhere, `.claude/skills/author-game-v2/CHANGELOG.md:690`). So a step that fires on arrival and needs a person gates on that person being there in its own conditions: `npc_at_location`, or the hours of their rows. A button in the room, or in a person's menu, is only ever a repeatable canvas (v2.py:5925-5944, 5958-5975). Both filters, and the entry that fires the auto-fire pick, are pinned by `apps/game_generation/tests/test_step_shapes.py`. So a step she chooses from a menu ("Ask about the job") is a repeatable row in the person's menu, with:
+  - its done flag `is_false`;
+  - a parked flag her no sets, cleared by `[engine.daily_tick]` (or a `days_since_flag` for a longer wait);
+  - the person's presence and hours;
+  - `show_when_blocked` and a `cooldown_message` for the clock.
+  
+  `consume_on` and `retry_after_days` are for a step that happens to her when she arrives. Failure: P21's card as first written made Tom's hire and Chris's first shift one-time canvases with `consume_on`, meant as buttons; the writer found it only from the engine, before any build (2026-11-24).
 - **What opens the next step** is the step's own conditions: the last step's flag, a window, money, a meter. A gap in days is a `days_since_flag` condition, counted from the day the flag was set (v2.py:5167-5180).
 - **The no:** `consume_on = "exit"` on a one-time step uses it up only on the yes (`consumes`). A warned no (`final`) closes it and sets `<canvas>_closed`. A `retry_after_days` choice parks it for N days, and leaving mid-scene parks it for 1 (v2.py:5436-5445; `apps/projects/services/template_import.py:924-931`).
 - **The card's end:** a quest card with `terminal = true` reads "Arc complete" unless `terminal_text` says otherwise (v2.py:19970-19974; `apps/projects/services/template_import.py:1405-1411`). An arc that stops at the build's edge sets `terminal_text`.
@@ -79,7 +86,7 @@ Each rule says what CoT and the field do, then whether it's **measured** or **LO
 4. **Between steps, she does something with them.** Their own menu (`craft/people.md` rule 10), or a place they share, so the wait is play, not a timer (C124). *CoT and the field agree:* CoT's first hint is "Hang out in … dorm room in the evening."; the field's good case is IHOH's Shaun telling her he's in the kitchen at 2 a.m. after the club. *Measured.*
 5. **The card says what's next, as a place and a time, in one line.** A wait always comes with something to do (C124, C149; the card's shape is `craft/want.md`). *CoT and the field agree:* "Wait for a favor to be called in, or go to the quad party … on Friday night."; stuck is the field's biggest complaint. *Measured.*
 6. **Pace is set by the clock, not by the step count.** Most gaps are 1–4 days; a missed weekly slot costs 7. A central arc reaches its repeat around day 20–55. Write the days on the plan's arc table. *The field, measured* (CoT has no single clock).
-7. **The no parks; a final no says so on its button** (C164, C165). There's no final no on a central arc's first step (C166). In the engine: `consume_on = "exit"` with `retry_after_days`, or `final`. *Measured in the field;* the first-step rule is *LO's choice.*
+7. **The no parks; a final no says so on its button** (C164, C165). There's no final no on a central arc's first step (C166). In the engine: on a step that fires by itself, `consume_on = "exit"` with `retry_after_days`, or `final`; on a step she chooses from a menu, a parked flag on a repeatable row ("How a step reaches her", above). *Measured in the field;* the first-step rule is *LO's choice.*
 8. **Where it stops in a release:** on a payoff, not a talk or a locked door (C121, L18). The last card says it stops "for now" and what she can keep doing (C140, C215), and its ✓ reads the flag the last step sets (C217). *CoT and the field agree:* CoT's "for now!… there may still be recurring events". *Measured.*
 9. **It doesn't die after the sex** (C127). Something still happens after the first sex, or after "boyfriend": a move, a rule, a new person, a cost. The arc can also hand over to another (C171). *CoT and the field agree* (Q7, strong; CW's Connor asks her to move in after first sex). *Measured.*
 10. **Information she earns is a step; what's only narrated isn't** (C162). The harasser's scholarship comes back as his weak spot at the end. *CoT, measured;* the field's info steps agree.

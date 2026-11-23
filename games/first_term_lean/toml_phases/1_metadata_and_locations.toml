@@ -17,6 +17,8 @@ flag_keys = [
   "met_laura", "met_mark",
   # P42 — Mom's Talk, once a day; the day turn clears it
   "talked_mom_today",
+  # P21 — the café job
+  "met_tom", "met_chris", "cafe_first_shift_done", "cafe_ask_parked",
   "met_ryan", "ryan_hall_seen", "ryan_hall_past", "ryan_hall_spoke", "ryan_hall_waited", "goal1_shown",
   # Goal 1's card reads these; P21 sets cafe_hired, P11 sets rent_paid_once.
   "cafe_hired", "rent_paid_once",
@@ -630,3 +632,41 @@ slot = "shoes"
 id = "ryan_hoodie"
 name = "Ryan's hoodie"
 slot = "top"
+
+# ── P21 · Tom and Chris, the café. Their rows from PLAN §9c (LO "yes", 2026-11-21); P32 does everyone else. ──
+
+[[npcs]]
+id = "npc_tom"
+name = "Tom"
+role = "Café manager"
+relationship = "Tom, 31. He runs the café across from campus, and now he's your boss."
+description = "The café manager, 31."
+core_traits = { want = 0, power = 50 }
+
+[[npcs.schedules]]
+location = "near_cafe"
+weekdays = [0, 1, 2, 3, 4, 5]
+start_time = "10:00"
+end_time = "21:00"
+activity = "behind the counter"
+
+[[npcs]]
+id = "npc_chris"
+name = "Chris"
+role = "Barista"
+relationship = "Chris, 24. The café's barista. Tom gave you his afternoons."
+description = "The café's barista, 24."
+
+[[npcs.schedules]]
+location = "near_cafe"
+weekdays = [0, 1, 2, 3, 4]
+start_time = "07:00"
+end_time = "15:00"
+activity = "at the machine"
+
+[[npcs.schedules]]
+location = "near_cafe"
+weekdays = [5, 6]
+start_time = "10:00"
+end_time = "19:00"
+activity = "at the machine"

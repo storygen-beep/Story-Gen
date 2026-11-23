@@ -334,3 +334,225 @@
 - Every build goes to `games/<slug>/output/` now, the folder LO plays from: `SKILL.md`'s dev build command, `scripts/build.py` (`package()` and the docstring), and the test, renamed `test_every_build_writes_the_output_folder`. Why: dev builds kept landing in `output_dev/`, which LO doesn't play (LO, 2026-11-23: "it keeps building the game in output_dev when it should build the game in output"). The old reason, that `output/` is a public portal (`.gitignore:204-214`), doesn't hold: the portal is LO's own phone play channel (LO, 2026-11-02), and he had a dev build pushed to `output/` on 2026-11-22. The `.gitignore` note now says so. LO's yes, relayed by ENI (2026-11-23: "Yes").
 - Every dev build now passes `--dev` and `--debug` together: `scripts/build.py` (`package()`), `SKILL.md`'s dev command, and the test (a dev build has both, a release has neither). Why: LO played a build with no picture placeholders. The engine draws the grey "[IMAGE POOL MISSING]" box only in a debug build (v2.py:16424-16431), and the built `output/index.html` had `debug_mode: false` because build.py added `--dev` alone. LO's yes, relayed by ENI (2026-11-23: "Yes and make sure to use them together").
 - `craft/want.md`, worked example: a note that the examples are Markdown. On a game screen the card is one `paragraph` block per line, and bold is `''…''` or `<strong>…</strong>`, never `**…**`. Why: first_term_lean's P13 screen 6 copied the example's `**…**` into one paragraph joined by "·", and LO saw stray stars and one run-on line. LO's yes, relayed by ENI (2026-11-23: "Yes").
+
+## 2026-11-24
+
+Why for all of these: P13's reader found new FAILs on every pass, v5 to v11 (99 FAIL rows over 7 passes, a truth FAIL on 6 of them), and the fix plan came from LO, relayed by the ENI session 2026-11-24 ("Would you send it to the skill session"). This is Part 1 and Part 2 of that plan.
+
+- Part 1 · `craft/voice.md`: the truth rule is ported in full as its own section, "The truth rule", from `.claude/skills/author-game-v2/references/register.md:89-156`: the allowed / not-allowed table, the five rules, the future-promise rule and the seven steps. Changes from v2: her opinions go on her body or out loud (no italic thoughts), schedules are read with `who_is_where.py`, v2's step 7 (a facts list on the draft) is dropped, and one new line in rule 2 and step 7 says a line every path shares must be true on all of them (P13 v11: Mom's "promise me it won't be like high school" on the screen all three start choices leave from, against the grades answer). Shape rule 7 now points at the section. Rule 5 now says how to count the 5 : 1: dialog blocks and quoted words are speech, only screens with someone in them, the worst variant, every path. Why the count: passes counted it differently. Verified: tests green; the cites test passes on the new `register.md:89-156` cite.
+- Part 1 · `reader.md`: the reader reads the truth rule from `craft/voice.md`, not from v2's `register.md`, so the writer and the reader read the same text.
+- Part 1 · `piece.md`: a new step 3, "Read the card the way the reader will", before `check.py --card`: part B's 13 scene tests on every screen and every path, the truth rule's seven steps, and `who_is_where.py --person` for every line that puts a person somewhere. Steps 3–6 became 4–7 (no other file cites those numbers; step 1, which `check.py` cites, is unchanged). Why: the writer never saw the reader's tests, and `who_is_where.py` ran only in the reader.
+- Part 2 · created `scripts/scenes.py` and wired it into `check.py` (`run_all`, the docstring, and `--against <git ref>`). Seven measured checks on the merged TOML: `talk` (every path, screens with someone in them, ≤ 5 : 1), `length` (≤ 150 words a screen, adjacent groups counted as one chain), `presence` (a speaker on a repeatable scene at a place is there at every five-minute slot it can show, by `who_is_where.where`, unless the scene is bound to them or checks them), `creation` (each customization field printed back through `@player` / `@player.<id>`, v2.py:18608-18653), `saves` (against the merged TOML at the last commit of `output/index.html`: removed scene, screen, person, place, flag, meter or garment ids; a meter's bar max or bands; a flag now set only by different choices, unless NOTES.md says `Same meaning: <flag>`), `speakers` (v2 `speakers are named`, gates.py:9500) and `goals` (v2 `_goal_line_reads_true`, gates.py:18911, ported). Created `scripts/tests/test_scenes.py`: 27 tests, a clean game green on each check and a planted break red on each. Verified on first_term_lean, read-only (scenes.run called directly, so nothing under `games/` was written): `creation` is red on the committed TOML (HEAD, the name field never printed) and green on today's working tree, which prints `@player`; `saves` is red on start_fun, start_grades and start_freedom, each now set by a reworded choice against 324ae159; `talk` is red on the opening (5.6 : 1 on its worst path), talk_mom (6.7 : 1) and mom_living_room (7.6 : 1); length, presence, speakers and goals are green. Full suite: 127 passed.
+- `LATER.md`: the save-check item and the truth-rule half of the voice item are struck through, done. `craft/returning-player.md`: the engine section's save-check line and rule 11 now point at `check.py`'s `saves` and say what it can't see.
+- Step 0 of the rule-pipeline plan (`~/.claude/plans/lean-skill-rule-pipeline.md`, LO relayed 2026-11-24: "Yes go ahead") · `craft/voice.md`, the truth rule's rule 5: "a clothing condition, an earlier equip, or the beat that equips her", cited to C1158. Why: the second copy kept the old wording that `craft/clothes.md:12` dropped on 2026-11-23 after P13 reader pass 8, so the clash came back. Verified: the two lines now say the same.
+- Part E of the same plan · created `scripts/reading.py`, the reader's memory. `reading.py games/<slug> <id>` prints the next pass's work list: every row on a new or changed screen, every verdict on the whole scene when a screen changed, every FAIL from last pass, every row whose text changed in its craft file, and every row never judged. A PASS, N/A or WAIVED on unchanged text is carried and marked so. `--all` asks everything. `--record` stamps the reader's verdicts with the screen and row hashes, carries the rest, refuses a verdict not on the work list, a missing verdict and a FAIL with no cause, and writes `games/<slug>/reader/<id>.json` with the FAILs stored by cause. The rows are reader.md's 13 scene tests, and the must-read rows and shape steps of every craft file on the card's `Craft:` line, plus `craft/voice.md`. A screen's hash covers its blocks, its exit, its canvas's trigger, and the schedule rows of everyone it names (a speaker, a name or a one-word role), so a moved schedule row re-opens the screens that name that person. Not covered until the scene sheet (Part C): an equip or flag set on another canvas, and numbers in PLAN.md or other cards; `reader.md` says to re-read with `--all` when one changes. Why: every P13 pass from v5 to v11 judged everything again, and a row (Ryan's step-brother label) passed in v9 and failed in v10 on unchanged text. Created `scripts/tests/test_reading.py`, 11 tests on the tiny game: an unchanged build gives no rows; one changed screen gives only its rows; a carried PASS stays PASS over three empty passes; a FAIL comes back; Mom's moved row re-opens only the screen that names her, and another person's moved row re-opens nothing; `--all`; the refusals; FAILs grouped by cause. Read-only on first_term_lean: P13's first work list is 445 rows over 16 screens, since it has no record yet.
+- Part E · `reader.md`: the input is the work list, the output is a JSON file of verdicts with causes plus the table grouped by cause, and "After" says the session records the pass with `reading.py --record`, a pass ends when the work list is empty, and there is no pass limit. It also says what the work list can't see yet.
+- Part C of the rule-pipeline plan (LO relayed 2026-11-24: "Commit and continue") · created `scripts/sheet.py`, the scene sheet. From the merged TOML it works out, for each screen of the card's canvases with every path merged, five columns:
+  - **clock:** the start time from `[time]` (v2.py:1592-1593), plus each choice's minutes, 3 when it has none (v2.py:17744, 17758); a repeatable shows its window, or "while <id> is there" when it is bound to a person;
+  - **place:** the trigger's location, or the card's own place, marked "(card)", where the engine has none (the opening);
+  - **who is there:** from `who_is_where.where`, with "(part)" for someone there only some of the time;
+  - **what she wears:** the `initial` garments (v2.py:1213-1235), then each equip on the path, with the dress rule (v2.py:1760-1766); on a repeatable, only what its trigger checks, else "any";
+  - **flags:** those set before the screen, with the ones that differ by path after "by path:".
+  
+  `sheet.py games/<slug> <id>` prints the rows in the card's format. Why: on P13 a fact lived only in prose, so a fix broke another line (Ryan's row moved two minutes, and "the empty hall" went false).
+- Part C · `check.py`: a new `sheet` check compares each card's `Sheet:` block with the computed sheet. It is red on a different value, on a screen built but not on the sheet, and on a sheet row that isn't built. A column it can't work out is INCOMPLETE, never green. A card with no `Sheet:` block is not compared, so the cards approved before today stay as they are. `--card` is red on a card that has `Screen <n>` lines and no `Sheet:` block, so every new or re-carded piece gets one. `templates/piece-card.md` has the `Sheet:` block, and `piece.md` step 2 says it comes before the prose.
+- Part C · `scripts/reading.py`: a screen's hash now takes in its sheet row, so an equip or a flag changed on an earlier screen re-opens the later screens. The docstring and `reader.md` say what's still outside the hash: a number in PLAN.md or another card, and what another canvas does to her clothes before a repeatable.
+- Part C · created `scripts/tests/test_sheet.py`, 12 tests: the computed sheet, a matching card green, and these planted wrong facts red: a wrong time, a person who isn't there, a garment not on yet, a missing flag, and Mom judged at the card's place. Also: a screen missing from the sheet or not built is red, an unknown place is INCOMPLETE, an old card with no sheet is not compared, `--card` asks for a sheet, and an upstream equip change re-opens the later screen. Suite: 150 passed.
+- Verified read-only on first_term_lean (nothing written under `games/`):
+  - P13's computed clock runs from 07:00 (wake) to 07:50; the hall screens are 07:20–07:25.
+  - With the card's places supplied in memory, Ryan is in `home_hall` there, inside his 07:12–07:25 row. Mark and Mom are in the kitchen from 07:05 to 07:12. Mom is alone in the kitchen at the hand-over (07:35 on), since Mark's row ends at 07:30.
+  - She wears nothing (engine-wise) until her room's exit equips her outfit, because no garment is `initial`.
+  - `check.py`'s `sheet` is green, because no card has a `Sheet:` block yet. `--card P13` is now red for the missing block; P42, P07 and P06 are not.
+- Parts A and F of the rule-pipeline plan, the frame and the first area (LO relayed 2026-11-24: "Commit and continue"):
+  - **`SKILL.md`, new section "Rule labels":** the 21 `when` triggers, each with what it means, and the three judges (`script + <check>`, `reader`, with `+ <check>` when a check helps, and `note`). Two triggers are new beside the plan's draft:
+    - "a scene's last screen", because C450 (end on a hook) applies only there;
+    - "a rule is changed", because L163 governs skill edits, not screens.
+    
+    A `script` or `reader` row needs a real failure, or says why it stays blocking. SKILL.md is now 142 lines.
+  - **`scripts/check.py`:** a new `CHECKS` tuple lists every check a judge may name.
+  - **`craft/voice.md`:** the must-read table gains `when` and `judge` columns, and every row is labelled. All eleven rows are `reader`; C460 is `reader + presence, sheet, creation`. Under Part F's exemption (the voice, the truth rule, LO's own rules), nothing is demoted to `note`. The seven voice rows with no recorded failure say "— · kept blocking: the voice, LO's (2026-11-22)", and C461 says "kept blocking: the truth rule". C460's failure column now names P13 reader pass 11 (Mom's "high school" line). A line under the truth rule's five rules says who judges each, and that rule 3 applies on a repeatable.
+  - **`scripts/tests/test_skill.py`:** six new checks:
+    - `label_problems`: every row of a file on `LABELLED` has five columns, a `when` from SKILL.md's list, a judge, a check name for `script` that is in `CHECKS`, and a failure for `script` and `reader`;
+    - `home_problems`: an id's row text lives in one craft file and the others point to it ("see `craft/x.md`"), judged only for ids in a labelled file;
+    - a test that `CHECKS` covers every scene check;
+    - planted breaks for each;
+    - a test that an unlabelled file isn't judged until it's listed.
+    
+    `LABELLED = ["craft/voice.md"]`. `PENDING_HOMES = {C447, C448, C593}` waits on LO's choice of home, because voice.md and people.md each hold a copy. Suite: 159 passed.
+- Voice decisions applied (LO relayed 2026-11-24: "Yes continue"):
+  - C447 and C593 live in `craft/voice.md`, and `craft/people.md` points there.
+  - C448 lives in `craft/people.md`, with voice's fuller wording ("… in the first lines"), and `craft/voice.md` points there.
+  - Two failure columns are filled from the reader tables, checked first: C593 is P13 reader pass 7 (Mark had no term of address for her, `reader_first_term_lean_P13_v7.md`, line 82); C448 is pass 10 (Ryan arrived as a bare name, `…_v10.md`, line 42).
+  - `PENDING_HOMES` no longer holds them. people.md's rows keep three columns until its area is labelled.
+- Parts A and F, the second area: `craft/clothes.md` and `craft/body-moments.md`, labelled together because they share C719 and C1158.
+  - **`SKILL.md`:** a new trigger, "the plan", because 8 clothes rows (C1167, C1204, C1183, C1171, C1169, C1150, C1201 and the like) design the whole clothes system, not a screen.
+  - **`craft/clothes.md`, by Part F's default:**
+    - 18 rows with "—" become `note`;
+    - C1206 stays blocking, as the truth rule's clothes half;
+    - C719, C1158, C1220 and C1221 stay `reader`, with their failures;
+    - C1158 and C1206 are helped by `sheet`, and C1221 and C1169 by `reach`.
+  - **`craft/body-moments.md`:** C1275, C1274 and C1277 become `note`. C1262, C1280, C1279, C782, C1158 and C719 stay `reader`.
+  - **Shared ids, waiting on LO's choice of home** (`PENDING_HOMES`):
+    - C719 and C1158 (clothes and body-moments);
+    - C1262 (body-moments, media and walk-ins);
+    - C1274, C1275, C1277 and C1280 (body-moments and media).
+  - `test_skill.py` `LABELLED` now holds three files, and two planted tests anchor on C644, since people.md's C447 row is now a pointer. Suite: 159 passed.
+- Clothes, body-moments and media decisions applied (LO relayed 2026-11-24: "Yes"):
+  - **Homes:**
+    - C719 lives in `craft/clothes.md`, with clothes' wording.
+    - C1158 lives in `craft/clothes.md`, with body-moments' fuller wording ("… undressing in an act is backed by the act").
+    - C1262 lives in `craft/body-moments.md`; `craft/media.md` and `craft/walk-ins.md` point to it.
+    - C1274, C1275, C1277 and C1280 live in `craft/media.md`, with media's wording; body-moments points to them.
+  - **Kept blocking:** C1166 and C1200 (shape rule 7 cites C1200), each "— · kept blocking: LO's choice (2026-11-23)". The other 16 clothes rows stay notes.
+  - **`craft/media.md` labelled:** C1249 and C1274 are `note`; the rest are `reader`, each with a failure.
+  - **New shared id:** L97 (media and walk-ins, different wording) waits in `PENDING_HOMES`.
+- Parts A and F, the third area: `craft/people.md`, `craft/opening.md` and `craft/want.md` are labelled.
+  - **Failures filled from the P13 reader tables, each checked first:**
+    - C630: pass 10, Ryan's name and never his relation;
+    - C44: pass 7, the start choice was a wish, not a memory;
+    - C48: pass 11, the name was never printed back. C48 is `script + creation`.
+    - C596: pass 12, Mom's talk screen at 26 words and 42% spoken. Labelled `note + talk, length`, because its ~55 words is a borrowed number.
+  - **Length rows:** C519, C1626 and C1637 are `note + length`; C520 is `reader + length`.
+  - **Other help from checks:** C1631 (where the hand-over lands) is `reader + sheet`.
+  - **Opening rows:** all are `reader`, each with a P13 failure.
+  - **Notes:** every people and want row with no recorded failure is a `note`, by Part F's default. Shape rules marked "LO's choice" (people 6 and 8, want 1, 5 and 6) are listed for LO to keep blocking.
+  - **Shared ids waiting on LO's choice of home** (`PENDING_HOMES`): C109, C166, C311, C598, C639, C640, C952, C954, C992 and L97.
+  - Suite: 159 passed (the unlabelled-file test now uses arc.md). Sizes: people 110, opening 108, want 90 lines.
+- The size cap no longer covers `CHANGELOG.md` (LO relayed 2026-11-24: "Yes"). It is a diary, not an instruction file (C2170). `test_skill.py`'s `size_problems` skips it, its planted test now writes a 2,000-line CHANGELOG that must not count, and `SKILL.md`'s "Size caps" line says so. Why: the CHANGELOG reached 420 lines and turned `test_sizes` red. The earlier "159 passed" was run before that batch's CHANGELOG lines went in, so it was not the state handed over.
+- Decisions from the third batch applied (LO relayed 2026-11-24: "Yes"):
+  - **Homes:** C109 and C166 live in `craft/arc.md`. C166 takes opening's fuller wording, and both keep opening's P13 failures. C311 lives in `craft/opening.md`. C598, C639 and C640 live in `craft/people.md`. C952, C954 and C992 live in `craft/economy.md`, and C952 and C954 take the merged wordings LO approved. L97 lives in `craft/walk-ins.md`. Every other copy is now a pointer.
+  - **Kept blocking:** C656, C660, C34, C35, C36, C37, C433, C54 and C952 are marked "— · kept blocking: LO's choice (2026-11-24)".
+  - **C1619** now names its failure: LO played P13's sums screen on 2026-11-23, and goal 1's card was one run-on line with stray stars ("What is this??"; fixed in 324ae159).
+  - **C430 is kept blocking as LO's choice, not with that failure.** Its rule (each step says how to find the next) wasn't what broke: the steps did say where and when, and only the layout was wrong.
+- Parts A and F, the last batch: arc, heat, economy, meters, places, clock, systems, walk-ins and returning-player are labelled. Every craft file is now labelled, and `LABELLED` in `test_skill.py` is every file in `craft/`.
+  - **New test:** the unlabelled-file test plants a new craft file.
+  - **`SKILL.md`:** "Rule labels" says every file is labelled.
+  - **Default labels:** rows with a failure are `reader`, and rows with "—" are `note`. The exceptions:
+    - C249 is `script + beat`;
+    - C1656 and C1658 are `script + saves`;
+    - L106 is `reader + presence`;
+    - C1428 and C1652 are kept blocking as "LO's rule";
+    - checks help on C254 and C239 (beat), C770 (length), C921, C927 and C931 (sheet), and C1657 and C1659 (saves).
+  - **Real failures filled in from the P13 reader tables** (every note row in every craft file was grepped against passes v5 to v12):
+    - C180, C149 and C217 (v6);
+    - C1022 (v8, "dollar");
+    - C900 and C928 (v6, "Monday, seven in the morning.");
+    - C920 (v7, 10 min against 5 min);
+    - C541 (v9);
+    - C1658 (v11, start_fun).
+  - **Shared ids waiting on LO's choice of home:** C285 (heat and meters), C212 and C174 (arc and walk-ins), L70 (meters and walk-ins), and L147 (places and walk-ins).
+- Parts A and F finished (LO relayed 2026-11-24: "Yes").
+  - **Homes:**
+    - C285 lives in `craft/meters.md`, with meters' wording; heat points there.
+    - C212 lives in `craft/arc.md`; walk-ins points there.
+    - C174 lives in `craft/arc.md`, with walk-ins' wording ("a person's next arc step comes before any dice").
+    - L70 lives in `craft/meters.md`, with walk-ins' fuller failure ("…behind a 1-in-4 walk-in").
+    - L147 lives in `craft/walk-ins.md`. Places' failure for it ("15 places said 'Nothing to do here right now'") moved to places' C762 row, beside L150.
+    - `PENDING_HOMES` is empty, so the one-home test runs on every id in every craft file.
+  - **Heat, kept blocking as LO's rules:** C254, C248, C239, C276, C255, C256 and C252, each marked "LO's rule, explicit prose is the register (CLAUDE.md; 2026-11-24)". C254 is `script + beat`, and C249 stays `script + beat`. C255, C256 and C252 keep the trigger "the plan": they are game-wide shares, and "the plan" covers the game plan and each release's piece list, so they apply from release 1. "a release after the first" would skip release 1.
+  - **Kept blocking as LO's choice (2026-11-24):** C284 and C289 (heat); C164 and C165 (arc); C951, C989, C990, C1016 and C1017 (economy); C773, C776, C777 and C738 (places); C913, C914, C916, C903 and C890 (clock); C1431, C1432 and C1438 (systems); C1667, C1681, C1647, C1664 and C1666 (returning-player). All other "—" rows stay notes.
+- Part B of the rule-pipeline plan, the rule list per piece (LO relayed 2026-11-24: "Yes"):
+  - **Created `scripts/rules.py`.** `table()` reads every labelled home row; pointer rows are skipped. `card_does()` parses the card's new `Does:` block (`<canvas>.<node> | <trigger>, …`). `rule_list()` gives each screen every `always` row plus the rows whose `when` names one of its triggers. `plan_rows()` lists the "the plan" rows.
+  - **The guard:** `seen()` and `meetings()` work out what a script can see a built screen do: a person on screen, one-time or repeatable (the starting canvas counts as one-time), the opening, the last screen, an equip on its exit, a catalog garment named, a "$" figure, a time on a label or in prose, a picture or clip, an effect on a meter (not energy or money), a goal card (✅ or ➜), an exit to a place, and a met_ flag (named on the screen that sets it or the one it leads to). `guard()` is red when the `Does:` line leaves one out. It can't see these, which the writer names: a moment alone with her body, something sexual shows, an explicit beat, a walk-in, a release after the first, and a price written in words ("seventy-five").
+  - **`check.py`:**
+    - `--rules <game> <id>` prints the list, grouped by judge, with each rule's home and how many screens it applies on; `--rules <game> plan` prints the plan's rows.
+    - `--card` is red on an unknown trigger, a non-screen trigger ("always", "the plan", "a rule is changed"), a screen with none, `Does:` and `Sheet:` naming different screens, and a card with `Screen <n>` lines and no `Does:`.
+    - A new `does` check runs the guard on every card with a `Does:` block. Cards without one are not judged.
+    - `CHECKS` gains "does".
+  - **`reading.py`:** for a card with `Does:`, the rows are its rule list plus the 13 scene tests, each hashed with its labels. A changed screen asks only the rows its triggers fire. Cards without `Does:` keep the old rows.
+  - **`piece.md` step 1:** write the screens and `Does:` first, print the list with `--rules`, then read each rule in its home. Cards without `Does:` keep the old area reading.
+  - **`templates/piece-card.md`** gains the `Does:` block, and **`reader.md`** says the rows come from the same list.
+  - **Created `scripts/tests/test_rules.py`, 21 tests:**
+    - the list is the `always` rows plus the screen's triggers, pointers are skipped, and plan rows are their own list;
+    - planted bad `Does:` lines are red, and so is a screen mismatch with `Sheet:`;
+    - an old card isn't asked;
+    - the guard is green when `Does:` names everything, red for each of 7 planted missing triggers, and accepts a first meeting on either screen;
+    - the CLI works;
+    - a changed screen asks only its own rows.
+  - **Verified read-only:** a `Does:` block for P13 was written into a scratchpad copy of the card, with `games/first_term_lean/toml_phases` linked read-only. The guard is green on it. P13's list is 156 rules: 1 script, 88 reader, 67 note. That is 169 rows with the scene tests, against today's 445 from the whole craft files. By screen: 64 to 103 rules (the hall 103, the bathroom and knot screens 99, the kitchen and start-choice screens 64).
+  - **Proposed, not done:** `Does:` replaces the card's `Areas:` and `Craft:` lines; plan.md runs `--rules … plan`.
+- Three follow-ups to Part B and Part D (LO relayed 2026-11-24: "Yes"):
+  - **`Does:` replaces `Areas:` and `Craft:` on new cards.** `check.py --card` judges a card with `Does:` only on `Does:` and `Sheet:`: known triggers, one per screen at least, the same screens. The cite-every-id check is gone for it, because listing an id is not applying it. A card without `Does:` keeps the old `Areas:` and `Craft:` check, so the cards approved before today stay green.
+    - `templates/piece-card.md` drops the `Areas:` and `Craft:` lines, and `Card checks:` pastes the `--rules` count line.
+    - `piece.md` steps 2 and 4 and `SKILL.md`'s "Areas." paragraph say so.
+    - Tests: a card with `Does:` and no `Areas:` or `Craft:` is green.
+  - **`plan.md`:** a new line has the writer print `check.py --rules games/<slug> plan` before the first bite and before each release's piece list, and write to those rules. It says plainly that the reader does not judge them yet.
+  - **"the opening" and "a one-time step" tightened.** 25 rows were relabelled, with no rule text changed. `SKILL.md` gains five triggers, each with two or more rows:
+    - "the first screen": C54, C43, C1626, C1613, C1628;
+    - "the start choice": C43, C44;
+    - "the hand-over": C1604, C1609, C1621, C1631;
+    - "a person's arc step": C180, C120, C109, C115, C162, C148;
+    - "a no is possible": C164, C165, C166, C639, C640.
+    
+    Other relabels: C146 is now "a repeatable" only. C1166 is now "she dresses or undresses". C48 and C51 are now "the plan", because the creation screen is the engine's, not a canvas screen, and `creation` still checks C48 at every build. Three rows keep "the opening" because they hold on every opening screen: C520, C1611 and C327. No row is left on "a one-time step"; the trigger stays, and the guard still sees it.
+    - The guard (`rules.py`) now sees "the first screen" (the starting canvas's first node) and "the hand-over" (its last screens).
+    - Tests cover both triggers.
+    - **Verified read-only on the scratchpad P13:** 153 rules (166 with the scene tests) against 156 (169), and 988 rule-screen pairs against 1,287. The hall goes from 103 to 89 rows and the start-choice screens from 64 to 45.
+  - **Part D:**
+    - **`build.md` is written in full** (60 lines): build; the scripts, the sheet and the `Does:` guard, all blocking; the reader on `reading.py`'s work list, where reader rows, scene tests and the truth rule block and notes are shown on their own; record the pass; close the piece; LO plays. There is no pass limit. Commits: LO decides when, and a session commits only on his word.
+    - **`SKILL.md`'s loop** steps 2, 6 and 7 match it. Always rule 7 now reads "LO decides commits", which is what is true today. Its "check" row names `scenes.py`, `sheet.py` and `rules.py`, and a new row names `reading.py`.
+- `scripts/reading.py` fix, from a real failure (ENI for LO, standing authorization, 2026-11-24).
+  - **The failure:** the live P13 trial. Pass A's work list was 161 items, all on `*`, and the reader answered 136 of them on `*`. One line then changed on `opening.room_spoke`. Pass B's work list was 229 items with 31 carried, because every `*` verdict was re-asked as "a screen of the scene changed". After a first pass, the carry never engaged.
+  - **The fix:**
+    - A `*` PASS now means "passes on every screen the row fires on". When a screen changes, only the rows that fire on it (an `always` row, or a trigger on its `Does:` line) are asked again, for that screen, and the `*` verdict carries for the rest. `record()` keeps a carried `*` verdict beside a new verdict on one screen.
+    - Three scene tests judge the scene as a whole and are asked on `*` only, again after any change: B1 (wanting shown earlier), B2 (one step further) and B9 (companion and rival). They are `SCENE_WIDE` in `reading.py`.
+    - `--record` refuses a `*` FAIL; a FAIL names the screen of its line.
+    - A card without `Does:` keeps the old re-ask.
+    - The first pass is still asked on `*`, not as rule-and-screen pairs.
+  - **Verified:**
+    - On the live record, read-only: 93 items (90 on room_spoke plus B1, B2 and B9), 164 carried, against 229.
+    - On a copy of `reader/P13.json` in the scratchpad: the same 93. After a simulated pass on those 93, the work list is empty.
+    - Tests: `test_rules.py` has four new ones on the tiny game: a `*` PASS is asked again only on the changed screen and carries for the other; only the scene-wide tests go back on `*`; a `*` PASS survives a new verdict on one screen; a `*` FAIL is refused.
+    - `reader.md` and `reading.py`'s docstring say so.
+- `craft/arc.md`, a gap the P21 card found (ENI for LO, standing authorization, 2026-11-24).
+  - **The failure:** P21's card as first written made Tom's hire and Chris's first shift one-time canvases with `consume_on`, meant as buttons. In v2 a one-time canvas at a place fires by itself on entry (v2.py:5895-5915, 6511-6522), and buttons and a person's menu list only repeatables (v2.py:5925-5944, 5958-5975). The writer found it only from the engine, before any build.
+  - **The fix:**
+    - A new engine bullet, "How a step reaches her", says how a step reaches her and that self-firing doesn't check the person is there (v2.py:6083-6086, with the played zoe_00 case, `.claude/skills/author-game-v2/CHANGELOG.md:690`). A step that fires on arrival and needs a person gates on `npc_at_location` or their hours. A step she chooses from a menu is a repeatable row: a done flag, a parked flag cleared by `[engine.daily_tick]`, presence and hours, and `show_when_blocked` with a `cooldown_message`.
+    - `consume_on` stays for a step that happens on arrival.
+    - Rule 7's "In the engine:" sentence now names both.
+  - **`rules.py`'s guard** is now red when `Does:` names "a person's arc step" and "a no is possible" on a screen of a one-time canvas at a place (not the starting canvas) whose trigger has no `npc_at_location` (is_present) or `time_of_day`. Two tests cover the red, a presence gate, and an arrival step with no "no".
+  - **Not done:** an engine test pinning both filters is an engine edit, put to LO.
+- Presence and the scene sheet now read weekday items (ENI for LO, standing authorization, 2026-11-24).
+  - **The failure:** P21's build. `fire_slots` in `scenes.py` and `window` in `sheet.py` read only `time_of_day` items, so a trigger's `{ type = "weekday", weekdays = [0..5] }` (v2.py:5203-5207) was ignored. That gave 7 presence reds ("Tom isn't there Sun 10:00" on a scene that can't show on Sunday) and 6 "(part)" reds on the sheet.
+  - **The fix: one shared helper,** `who_is_where.when_slots(conditions)` with `item_slots(item)`, used by both `scenes.fire_slots` and the sheet, so they can't drift.
+    - **Which items count:** `time_of_day` (its window) and `weekday` (its days; an empty list never holds). These are the only clock items the engine reads by the week. Every other item counts as every slot.
+    - **AND and OR:** an AND block intersects its items. An OR block is the union of its items, so an OR holding any non-clock item stays every slot. This can't make a false green: a wider set of slots only asks more of presence, and on the sheet only marks someone "(part)", never present. A block without version "1.0" is every slot, as in the engine (v2.py:5028-5035).
+    - **Nested blocks:** the engine's evaluator reads a flat item list; an item with its own `items` is read the same way here, defensively. The old `items()` flattened every item and intersected them, so an OR would have narrowed wrongly. It is no longer used for the clock.
+    - **The sheet's clock column** now names the days: "07:00–09:00 +0 · Mon Tue Wed Thu Fri Sat".
+  - **Two more fixes, found on P21 the same pass:**
+    - **Who is there is read at the minute a screen shows,** not across the time its choice spends. A "4 hours" shift button marked Chris "(part)" because he leaves mid-shift.
+    - **Order doesn't matter in a set column:** the sheet's who, wearing and flags columns are compared as sets ("npc_tom, npc_chris" equals "npc_chris, npc_tom").
+  - **Tests:** 7 new:
+    - a Mon–Sat scene has no Sunday red, and a planted every-day scene with Mom off on Sunday stays red;
+    - an OR of two windows covers both, and goes red when the evening window loses Mom;
+    - an OR with a flag item never narrows;
+    - an empty weekday list never holds;
+    - the sheet reads the weekday;
+    - order in a set column doesn't matter.
+  - **Verified read-only on first_term_lean:** presence is green, where it had 7 reds. The sheet's 16 remaining P21 reds are the card's own wording: clocks written as "Mon–Sat 10:00–20:55, any minute", Chris written "by the hour as above" where the sheet says "npc_chris (part)", and flags set by other canvases (met_tom) or negatives ("not cafe_hired"), which the flags column doesn't model. It holds flags set on the path plus flags the trigger checks `is_true`.
+- The sheet check keeps its teeth (ENI for LO, standing authorization, 2026-11-24).
+  - **The hole:** my own advice on P21 was to paste `sheet.py`'s rows into the card. A pasted row agrees with the build by definition, so the check stops checking. P21's card now holds pasted rows.
+  - **The fix:**
+    - `piece.md` step 2 and `build.md` step 2 say a red sheet row is never fixed by pasting the script's value. The writer says per row whether it is (a) format only, (b) a wrong story (fix the story, then the row), or (c) a wrong script (stop and report), and records (b) and (c) in NOTES.md.
+    - To make (a) rare, `sheet.py` compares the clock by meaning (`clock_meaning`). A hand-written clock becomes the (day, minute) slots the screen shows at:
+      - days: "weekdays", "weekends", "daily", "Mon–Sat", or day names; no days means every day;
+      - the window, with an optional "+N"; with none, the window is already the screen's;
+      - "any", and "while <id> is there";
+      - the opening's "07:20–07:23" compared as exact in and out minutes, with the leading zero optional.
+      
+      Who, wearing and flags were already compared as sets.
+    - `templates/piece-card.md` lists the accepted hand forms, so a row can be written before any build.
+  - **Tests:** 11 new in `test_sheet.py`:
+    - four hand forms equal to the build's "10:00–20:55 +5 · Mon Tue Wed Thu Fri Sat" (among them "Mon–Sat 10:05–21:00" and "weekdays and Sat 10:05–21:00");
+    - four that differ in meaning (Sunday added, a wider window, weekdays only, a double shift);
+    - "weekdays" equal to "Mon Tue Wed Thu Fri";
+    - the opening's exact clock green by hand and red when a minute is off.
+  - `piece.md` also says `sheet.py` prints the build's rows for reading a red, never for pasting.
+  - **Verified read-only:** on first_term_lean's P21, the one red left is a flag (met_chris on cafe_first_shift.end, which the build doesn't set before that screen). The game session judges it as (a), (b) or (c).
+- `craft/arc.md`, "How a step reaches her": the bullet now cites `apps/game_generation/tests/test_step_shapes.py`, the engine test LO approved and ENI added on 2026-11-24. Its 5 tests check that auto-fire takes only non-repeatables, that entry fires the auto-fire pick and marks it, that the room list and a person's menu take only repeatables, and that `is_repeatable` reaches the payload both ways. With it, the craft line's v2.py cites can't drift silently. Verified: the test file runs green (5 passed), and the skill's cites and pointer tests pass.
+- `reader.md`, scene test B1 (ENI for LO, standing authorization, 2026-11-24).
+  - **The failure:** P21 reader pass B. B1 failed on Chris's brush at the machine (`cafe_first_shift.start`), his first canvas, although his want was on the same screen before the act ("He looks you over like he's pricing you."). B1 had no first-meeting exception, so no line could make a brush on a first meeting pass.
+  - **The change:** on a person's first canvas, his want shown on the same screen, before the act, on his body and seen by her (C613), satisfies B1, but only when the act is an accident or his brush, the lowest rung (C286). A deliberate touch, a grope, or anything above that rung still needs an earlier canvas. It is worded like part A's C109 exception, and it points at C613 and C286 in `craft/people.md` and `craft/heat.md` rather than copying them.
+  - **Shared wording checked:** no craft row states B1's "an earlier canvas showed him wanting it". C613 and C109 are related and unchanged.
+  - **Narrower than C286:** C286's stage 1 lists "his brush or grope"; the grope is left out on purpose, per the instruction.
+  - **Verified:** B1's text changed, so `reading.py` re-asks B1 on its next pass (its row hash covers the text).

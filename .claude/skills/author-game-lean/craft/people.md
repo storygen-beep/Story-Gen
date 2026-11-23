@@ -4,34 +4,34 @@ Read this before you write a card that brings in a person, or a scene with someo
 
 ## Must read
 
-The card's `Craft:` line cites each one, or says in one line why it skips it.
+The card's `Craft:` line cites each one, or says in one line why it skips it. `when` and `judge` are the labels in `SKILL.md`, "Rule labels".
 
-| id | what it asks | the failure it stops |
-|---|---|---|
-| C618 | every person's hub sits behind a meeting; the first visit is the meeting | — |
-| C619 | top games keep a first-contact flag per person, and nobody is met at turn one | — |
-| C622 | a hub can hold its own first contact: the first visit is the meeting, later visits the hub | — |
-| C627 | a met flag counts only if the one-time scene that sets it names the person | — |
-| C625 | role before name: the relation first, the name when they meet | — |
-| C626 | swap the description for the name once the met flag is set, where the reference matters | — |
-| C630 | name and relation both, never one instead of the other | — |
-| C632 | a role label says who the person is ("housemate, top floor"), not what they do for the plot | — |
-| C598 | a card names only people she has met | first_term's Ryan card |
-| C620 | a person is listed at a place only if met and there | — |
-| C690 | the People page lists only people she has met | — |
-| C613 | his wanting shows on his body, seen by her, before he acts on it | — |
-| C639 | an offer has three to five graded answers, eager to refusing, every one written | — |
-| C640 | a no is content; a no that returns to an unchanged menu was never a door | — |
-| C961 | her no never raises a meter | — |
-| C954 | pay she earns is said in the scene, never on the button | — |
-| C447 | each person sounds like themselves | — |
-| C593 | one term of address per person that nobody else uses | — |
-| C644 | each person owns a corner of the world: their own subject, their own people offscreen | — |
-| C596 | the talk screen: about 55 words, two-thirds spoken, one picture, one exit | — |
-| C656 | a per-person meter is short: median 3 steps | — |
-| C660 | each person's meter (one or two) is shown, each meter's word the same across the cast | — |
-| C448 | obvious on arrival: who they are, what they want, how they feel about her | — |
-| C1340 | the household loop: each housemate is their face at their spot, Talk inside their menu, +1 a click | first_term_lean's `talk_mom`, a Talk button on the kitchen menu |
+| id | what it asks | the failure it stops | when | judge |
+|---|---|---|---|---|
+| C618 | every person's hub sits behind a meeting; the first visit is the meeting | — | a first meeting | note |
+| C619 | top games keep a first-contact flag per person, and nobody is met at turn one | — | a first meeting | note |
+| C622 | a hub can hold its own first contact: the first visit is the meeting, later visits the hub | — | a first meeting | note |
+| C627 | a met flag counts only if the one-time scene that sets it names the person | — | a first meeting | note |
+| C625 | role before name: the relation first, the name when they meet | — | a person is on screen | note |
+| C626 | swap the description for the name once the met flag is set, where the reference matters | — | a person is on screen | note |
+| C630 | name and relation both, never one instead of the other | P13 reader pass 10: Ryan got his name and never his relation on screen | a person is on screen | reader |
+| C632 | a role label says who the person is ("housemate, top floor"), not what they do for the plot | — | a person is on screen | note |
+| C598 | a card names only people she has met | first_term's Ryan card | a goal card is shown | reader |
+| C620 | a person is listed at a place only if met and there | — | a place is entered | note |
+| C690 | the People page lists only people she has met | — | the plan | note |
+| C613 | his wanting shows on his body, seen by her, before he acts on it | — | something sexual shows | note |
+| C639 | an offer has three to five graded answers, eager to refusing, every one written | — | a no is possible | note |
+| C640 | a no is content; a no that returns to an unchanged menu was never a door | — | a no is possible | note |
+| C961 | her no never raises a meter | — | a meter is shown or paid | note |
+| C954 | see `craft/economy.md` |  |  |  |
+| C447 | see `craft/voice.md` |  |  |  |
+| C593 | see `craft/voice.md` |  |  |  |
+| C644 | each person owns a corner of the world: their own subject, their own people offscreen | — | a person is on screen | note |
+| C596 | the talk screen: about 55 words, two-thirds spoken, one picture, one exit | P13 reader pass 12: Mom's living-room talk ran 26 words, 42% spoken (a judgement on a borrowed number) | a person is on screen | note + talk, length |
+| C656 | a per-person meter is short: median 3 steps | — · kept blocking: LO's choice (2026-11-24) | the plan | reader |
+| C660 | each person's meter (one or two) is shown, each meter's word the same across the cast | — · kept blocking: LO's choice (2026-11-24) | a meter is shown or paid | reader |
+| C448 | obvious on arrival: who a person is, what they want, how they feel about her, in the first lines | P13 reader pass 10: Ryan arrived as a bare name, never "step-brother" on screen | a first meeting | reader |
+| C1340 | the household loop: each housemate is their face at their spot, Talk inside their menu, +1 a click | first_term_lean's `talk_mom`, a Talk button on the kitchen menu | a repeatable, a person is on screen | reader |
 
 ## The measures
 

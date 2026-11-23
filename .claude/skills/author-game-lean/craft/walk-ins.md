@@ -4,34 +4,34 @@ Read this before you write a card for a scene that waits at a place: something s
 
 ## Must read
 
-The card's `Craft:` line cites each one, or says in one line why it skips it.
+The card's `Craft:` line cites each one, or says in one line why it skips it. `when` and `judge` are the labels in `SKILL.md`, "Rule labels".
 
-| id | what it asks | the failure it stops |
-|---|---|---|
-| C788 | random scenes are people: about 45 words, half everyday, nearly half with a choice; who is there and what they want sets the tone | L147 |
-| C802 | the world is more than her body: about half of the events are everyday life (65% early): other people's lives, small social moments | L147 |
-| C678 | at least half of these scenes name a person she knows | — |
-| C854 | count the pool once, and credit each scene to the system it belongs to | — (the count) |
-| C855 | each scene is filtered by hours, who is here, what she wears, her meters, days since | — |
-| C856 | about half carry a time window | — |
-| C857 | the pool opens as she changes: at least 3 of her states open new scenes | — (later releases) |
-| C858 | a place she visits several times a day needs many scenes, each spaced a day or more apart | — (later releases) |
-| C859 | pure chance annoys; a scene can also take something, not only add | — |
-| C28 | the taboo-at-home shape runs on walk-in risk: each housemate has at least one walk-in at home | — (the person pass) |
-| C1820 | the odds ride the same meter as the content: chance bands 0.10 / 0.35 / 0.70 into one canvas banded watch / touch / act | — (how it grows) |
-| C724 | walk-in odds read her climb; flat odds are listed | — |
-| C1821 | three parts: the router (substitutions on the act), the branch (one `substitution_only` canvas with bands), the payoff (into a rung that exists) | — |
-| C1864 | band with a rule's `conditions`; in an exclusive group, append a new rule last | — |
-| C792 | a walk-in is two screens: the moment, and one answer screen per choice; a third screen is the defect | — |
-| C302 | peek or catch: an option is added each stage, and being caught becomes a door | — |
-| C1262 | a body moment always gets a clip or still right after the line that says it (`craft/body-moments.md`) | first_term_lean's shower had no body and an empty picture |
-| C212 | a story beat is never left to luck: it fires the first time it can | — |
-| C174 | a person's next arc step comes before any dice | — |
-| L97 | a walk-in only fires where the walker's rows put them, and it shows what they were already doing | first_term's walk-ins almost never fired; a TV walk-in swapped her film for its own |
-| L70 | a meter's first gain is never behind a chance roll | first_term's Exhibitionism sat at 0 behind a 1-in-4 walk-in |
-| L147 | the world felt empty: 69 of first_term's 82 random scenes were about her body | — |
-| L150 | no "nothing happens" scene, anywhere | first_term had them; LO cut them all |
-| L4 | plan from the study's answer and its target, not from the tools already built | first_term planned 10 random events because a helper existed, and reached 19% of ~50% |
+| id | what it asks | the failure it stops | when | judge |
+|---|---|---|---|---|
+| C788 | random scenes are people: about 45 words, half everyday, nearly half with a choice; who is there and what they want sets the tone | L147 | a walk-in | reader |
+| C802 | the world is more than her body: about half of the events are everyday life (65% early): other people's lives, small social moments | L147 | the plan | reader |
+| C678 | at least half of these scenes name a person she knows | — | the plan | note |
+| C854 | count the pool once, and credit each scene to the system it belongs to | — (the count) | the plan | note |
+| C855 | each scene is filtered by hours, who is here, what she wears, her meters, days since | — | a walk-in | note |
+| C856 | about half carry a time window | — | a walk-in | note |
+| C857 | the pool opens as she changes: at least 3 of her states open new scenes | — (later releases) | the plan | note |
+| C858 | a place she visits several times a day needs many scenes, each spaced a day or more apart | — (later releases) | the plan | note |
+| C859 | pure chance annoys; a scene can also take something, not only add | — | a walk-in | note |
+| C28 | the taboo-at-home shape runs on walk-in risk: each housemate has at least one walk-in at home | — (the person pass) | the plan | note |
+| C1820 | the odds ride the same meter as the content: chance bands 0.10 / 0.35 / 0.70 into one canvas banded watch / touch / act | — (how it grows) | a walk-in | note |
+| C724 | walk-in odds read her climb; flat odds are listed | — | a walk-in | note |
+| C1821 | three parts: the router (substitutions on the act), the branch (one `substitution_only` canvas with bands), the payoff (into a rung that exists) | — | a walk-in | note |
+| C1864 | band with a rule's `conditions`; in an exclusive group, append a new rule last | — | a walk-in | note |
+| C792 | a walk-in is two screens: the moment, and one answer screen per choice; a third screen is the defect | — | a walk-in | note |
+| C302 | peek or catch: an option is added each stage, and being caught becomes a door | — | a walk-in | note |
+| C1262 | see `craft/body-moments.md` |  |  |  |
+| C212 | see `craft/arc.md` |  |  |  |
+| C174 | see `craft/arc.md` |  |  |  |
+| L97 | a walk-in only fires where the walker's rows put them, and it shows what they were already doing | first_term's walk-ins almost never fired; a TV walk-in swapped her film for its own | a walk-in | reader |
+| L70 | see `craft/meters.md` |  |  |  |
+| L147 | the world felt empty: 69 of first_term's 82 random scenes were about her body | the lesson itself: 69 of first_term's 82 random scenes were about her body (`lists/LESSONS.md`) | the plan | reader |
+| L150 | no "nothing happens" scene, anywhere | first_term had them; LO cut them all | a walk-in | reader |
+| L4 | plan from the study's answer and its target, not from the tools already built | first_term planned 10 random events because a helper existed, and reached 19% of ~50% | the plan | reader |
 
 ## The engine (cited; `v2.py` is `apps/game_generation/twee_comprehensive/generators/v2.py`)
 

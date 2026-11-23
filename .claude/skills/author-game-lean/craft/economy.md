@@ -4,30 +4,30 @@ Read this before you write a card that pays her, charges her, or collects a bill
 
 ## Must read
 
-The card's `Craft:` line cites each one, or says in one line why it skips it.
+The card's `Craft:` line cites each one, or says in one line why it skips it. `when` and `judge` are the labels in `SKILL.md`, "Rule labels".
 
-| id | what it asks | the failure it stops |
-|---|---|---|
-| C1003 | the bill is real, recurring and has a face | — |
-| C1004 | it has a date, a face who collects, and is armed only after income exists | — |
-| C1033 | the first collection is free and explains the rules | — |
-| C1008 | a rise works when the collector says the new number at the moment of payment | — |
-| C1014 | climb through the opening, then plateau; top games cap it by hand | — |
-| C1013 | a short week is carried, not game over, and costs her something | — |
-| C1016 | the first rent can be paid by working clean | — |
-| C1020 | one currency, declared once | — |
-| C1021 | a price on a button is a figure: "($3)" | — |
-| C1022 | the default is `$`, and prose names no real-world currency | — |
-| C954 | a spend price stays on the button; pay she earns never does | — |
-| C1001 | spends outnumber earns | — |
-| C1002 | a spend lives where the thing bought lives | — |
-| C989 | money is the system that makes her choose | — |
-| C990 | money gates content: conditions read the money, not only prices | — |
-| C951 | keep the amount in prose; the player budgets against it | — |
-| C952 | every number a scene states agrees with the plan and the ledger | — |
-| C992 | example numbers are filler; derive real prices from her week's income | — |
-| C1017 | a route to money she'd be ashamed of is visible but locked, never the only way to pay | — |
-| C967 | a game with no paid sex says so | — |
+| id | what it asks | the failure it stops | when | judge |
+|---|---|---|---|---|
+| C1003 | the bill is real, recurring and has a face | — | the plan | note |
+| C1004 | it has a date, a face who collects, and is armed only after income exists | — | the plan | note |
+| C1033 | the first collection is free and explains the rules | — | a price or pay is shown | note |
+| C1008 | a rise works when the collector says the new number at the moment of payment | — | a price or pay is shown | note |
+| C1014 | climb through the opening, then plateau; top games cap it by hand | — | the plan | note |
+| C1013 | a short week is carried, not game over, and costs her something | — | a price or pay is shown | note |
+| C1016 | the first rent can be paid by working clean | — · kept blocking: LO's choice (2026-11-24) | the plan | reader |
+| C1020 | one currency, declared once | — | the plan | note |
+| C1021 | a price on a button is a figure: "($3)" | — | a price or pay is shown | note |
+| C1022 | the default is `$`, and prose names no real-world currency | P13 reader pass 8: "you've never had a dollar that wasn't your mom's" | a price or pay is shown | reader |
+| C954 | a spend price stays on the button; pay she earns is said in the scene, never on the button | — | a price or pay is shown | note |
+| C1001 | spends outnumber earns | — | the plan | note |
+| C1002 | a spend lives where the thing bought lives | — | a place is entered | note |
+| C989 | money is the system that makes her choose | — · kept blocking: LO's choice (2026-11-24) | the plan | reader |
+| C990 | money gates content: conditions read the money, not only prices | — · kept blocking: LO's choice (2026-11-24) | the plan | reader |
+| C951 | keep the amount in prose; the player budgets against it | — · kept blocking: LO's choice (2026-11-24) | a price or pay is shown | reader |
+| C952 | every number a scene or a card states agrees with the plan and the ledger | — · kept blocking: LO's choice (2026-11-24) | a price or pay is shown, a goal card is shown | reader |
+| C992 | example numbers are filler; derive real prices from her week's income | — | the plan | note |
+| C1017 | a route to money she'd be ashamed of is visible but locked, never the only way to pay | — · kept blocking: LO's choice (2026-11-24) | the plan | reader |
+| C967 | a game with no paid sex says so | — | the plan | note |
 
 ## The measures
 

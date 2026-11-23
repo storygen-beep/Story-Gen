@@ -13,9 +13,9 @@ LO decides. An accepted rule moves into the phase file that needs it, with a CHA
 
 ## Ideas from first_term_lean (2026-11-20)
 
-- **A save check before release 2.** v2 compares the save keys of two shipped builds (`saves_mode`, `.claude/skills/author-game-v2/scripts/gates.py:10603`). The lean skill has no such check, so a rename between releases would pass every lean check (`craft/returning-player.md` rule 11). LO, 2026-11-23 ("Go ahead", after the returning-player study).
+- ~~**A save check before release 2.**~~ Done 2026-11-24: `check.py`'s `saves` (`scripts/scenes.py`) compares the merged TOML with the one at the last commit of `output/index.html`, the build LO played: removed ids and keys, a meter's range or bands, and a flag set by a new choice. Was: v2 compares the save keys of two shipped builds (`saves_mode`, `.claude/skills/author-game-v2/scripts/gates.py:10603`). The lean skill has no such check, so a rename between releases would pass every lean check (`craft/returning-player.md` rule 11). LO, 2026-11-23 ("Go ahead", after the returning-player study).
 - ~~**Explicit beats need a measured check before the first sex piece.**~~ Done 2026-11-23: `check.py --beat` (frozen-list words per marked beat, and the pivot). The 7.5% game-wide floor (C255) is still open; it waits until there are enough beats to share. LO, 2026-11-20.
-- ~~**`craft/voice.md` replaces reading v2's `register.md`.**~~ Done 2026-11-22 for the voice; the truth rule is still read from v2's `register.md` until it's ported in full. LO, 2026-11-20.
+- ~~**`craft/voice.md` replaces reading v2's `register.md`.**~~ Done 2026-11-22 for the voice, and 2026-11-24 for the truth rule, ported in full (`craft/voice.md`, "The truth rule"). LO, 2026-11-20.
 
 - A person's first meeting and its follow-up may need to be one piece, like the opening. No failure yet; raised by the P13 fix (`plan.md`, the piece list).
 

@@ -4,19 +4,19 @@ Read this before you write a card that builds a moment she spends alone with her
 
 ## Must read
 
-The card's `Craft:` line cites each one, or says in one line why it skips it.
+The card's `Craft:` line cites each one, or says in one line why it skips it. `when` and `judge` are the labels in `SKILL.md`, "Rule labels".
 
-| id | what it asks | the failure it stops |
-|---|---|---|
-| C1262 | a body moment always gets a clip or still right after the line that says it | first_term_lean's shower had no body and an empty picture |
-| C1275 | something happens in the picture: a gif; a held body stays a still | — |
-| C1274 | the tier sets the format: `_t0` everyday, `_t3` a look, `_t4` skin | — |
-| C1280 | pool size by spot; never the default by accident | L119 |
-| C1277 | name the place the scene is named for in every picture | — |
-| C1279 | a mirror picture says "No phone", or the search writes "selfie" | L123 |
-| C782 | a solo act is a choice inside the moment's own screen, not a second link | L151 |
-| C1158 | the clothes the prose names are backed by a condition, an earlier equip, or the beat that equips her; undressing in an act is backed by the act | the opening's dressing line (P13 reader pass 8) |
-| C719 | a button does something: "get dressed" moves a garment | the opening skipped the towel and the dressing with "Back in your room, dressed" |
+| id | what it asks | the failure it stops | when | judge |
+|---|---|---|---|---|
+| C1262 | a body moment always gets a clip or still right after the line that says it | first_term_lean's shower had no body and an empty picture | a moment alone with her body | reader |
+| C1275 | see `craft/media.md` |  |  |  |
+| C1274 | see `craft/media.md` |  |  |  |
+| C1280 | see `craft/media.md` |  |  |  |
+| C1277 | see `craft/media.md` |  |  |  |
+| C1279 | a mirror picture says "No phone", or the search writes "selfie" | L123 | a media spot | reader |
+| C782 | a solo act is a choice inside the moment's own screen, not a second link | L151 | a moment alone with her body | reader |
+| C1158 | see `craft/clothes.md` |  |  |  |
+| C719 | see `craft/clothes.md` |  |  |  |
 
 ## The shape
 

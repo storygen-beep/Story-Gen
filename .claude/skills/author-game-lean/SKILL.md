@@ -22,12 +22,12 @@ The front door. It always loads. It holds the loop, the rules, and where everyth
 ## The loop
 
 1. **Plan** (`plan.md`). List the release's pieces in STATE.md, with an out-of-scope line. Release 1 is the skeleton: every person, place, system and the daily loop, all shallow.
-2. **Card** (`piece.md`). Write the next piece from `templates/piece-card.md`. Run the checks that can judge the card.
+2. **Card** (`piece.md`). Write the screens and the `Does:` block, print the piece's rule list (`check.py --rules`), then write the card from `templates/piece-card.md` to those rules. Run the checks that can judge the card.
 3. **Show** (`piece.md`). Show the card. Build nothing in the same reply.
 4. **Yes** (`piece.md`). Record LO's words with `scripts/approve.py`. "Change" means a new card and a new ask. Silence or "sounds good" is not a yes.
 5. **Build** (`build.md`) only that piece: `venv/bin/python .claude/skills/author-game-lean/scripts/build.py games/<slug>`. It refuses a piece with no approval, or whose card changed after the yes. Small calls go in NOTES.md as `Ruling: what · why · cost if wrong`.
-6. **Check** (`build.md`). `scripts/check.py` runs by itself after the build. Fix red. INCOMPLETE names what wasn't checked.
-7. **Read** (`reader.md`). Every scene piece, after check is green and before LO plays: a fresh agent reads the built scene against its craft files and the scene tests. LO sees the table; each FAIL goes back into the card.
+6. **Check** (`build.md`). `scripts/check.py` runs by itself after the build: the scripts, the sheet and the `Does:` guard, all blocking. Fix red in the card. INCOMPLETE names what wasn't checked.
+7. **Read** (`reader.md`). Every scene piece, after check is green and before LO plays: a fresh agent judges the work list from `scripts/reading.py` (the rule list and the scene tests, only what changed after the first pass), and its `--record` keeps the verdicts. Reader rows, scene tests and the truth rule block; notes are shown on their own. LO sees the table by cause; each blocking cause goes back into the card. No pass limit: done when the work list is empty.
 8. **Close the piece** (`build.md`), same turn: update STATE.md, then list this piece's rulings to LO.
 9. **Play.** Every few pieces LO plays: "this should happen. Does it?"
 10. **Release** (`release.md`), once every piece is checked: `venv/bin/python .claude/skills/author-game-lean/scripts/build.py games/<slug> --release`, then `venv/bin/python .claude/skills/author-game-lean/scripts/check.py games/<slug> --release`, then the reader again on any piece whose card changed since its last reading, then LO plays the whole release, then the media search, only after LO says "release ready", then ship.
@@ -40,7 +40,7 @@ The front door. It always loads. It holds the loop, the rules, and where everyth
 4. **Examples use placeholders** (`<slug>`, `<person>`, `<place>`), never a real game's names: an example outranks the rules beside it. (C2168)
 5. **Nothing is built without LO's yes on its card,** recorded in `approvals.json`.
 6. **Never run a media search unasked.** Don't list missing media until LO says "release ready".
-7. **LO commits.** Never commit, push or merge.
+7. **LO decides commits.** A session commits only on his word, relayed or direct, and never pushes or merges unless he says so.
 
 ## Build commands (engine)
 
@@ -69,7 +69,8 @@ The dev file is dropped only on `--no-dev` (`scripts/merge_toml_phases.py:80`). 
 | craft by area | see the area table below |
 | state and plan templates | `templates/STATE.md`, `templates/PLAN.md` |
 | piece card | `templates/piece-card.md` |
-| check | `scripts/check.py`, `scripts/reach.py`, `scripts/who_is_where.py` |
+| check | `scripts/check.py`, `scripts/scenes.py`, `scripts/sheet.py`, `scripts/rules.py`, `scripts/reach.py`, `scripts/who_is_where.py` |
+| the reader's memory | `scripts/reading.py` |
 | build, approve | `scripts/build.py`, `scripts/approve.py` |
 | craft still to port | `lists/COVERAGE.md` — every item ends ported, or dropped by LO |
 | checks still to port | `lists/CHECKS.md` — same |
@@ -79,7 +80,7 @@ The dev file is dropped only on `--no-dev` (`scripts/merge_toml_phases.py:80`). 
 | per game | `games/<slug>/STATE.md`, `NOTES.md`, `approvals.json`, `cards/<id>.md` |
 | notes template | `templates/NOTES.md` |
 
-**Areas.** A card's `Areas:` line names these; `scripts/check.py --card` holds the same list (`AREAS`, `TOPICS`). An area with no file gets its craft file before its first piece (`piece.md` step 1).
+**Areas.** Each area's rules live in its craft file below. A new card names no areas: its `Does:` block does that work ("Rule labels"). Cards from before 2026-11-24 still carry an `Areas:` line, which `scripts/check.py --card` checks against the same list (`AREAS`, `TOPICS`). An area with no file gets its craft file before its first piece (`piece.md` step 1).
 
 | area or topic | craft file |
 |---|---|
@@ -103,8 +104,46 @@ The dev file is dropped only on `--no-dev` (`scripts/merge_toml_phases.py:80`). 
 
 Never read a list in `lists/` whole. Grep the area you're porting.
 
+## Rule labels
+
+A craft file's must-read table has two more columns, `when` and `judge`, beside the failure column (the rule pipeline, LO 2026-11-24). Every craft file is labelled (2026-11-24); `scripts/tests/test_skill.py` (`LABELLED`) checks every file in `craft/`, so a new one is labelled from the start.
+
+**`when`**, one or more of these, comma-separated. Each names something a screen does:
+
+| when | the screen… |
+|---|---|
+| always | any screen with text on it |
+| a person is on screen | has someone besides her: a line from them, a presence check, their name |
+| a first meeting | is the first time she meets someone |
+| the first screen | is the game's first screen of story |
+| the start choice | asks the start choice (who she was before) |
+| the hand-over | is the opening's last screens, where play is handed to the player |
+| a person's arc step | is part of a one-time scene that moves someone's arc a step |
+| a no is possible | offers her a choice she can say no to |
+| a one-time step | is part of a one-time scene |
+| a repeatable | is part of a scene that plays again |
+| a scene's last screen | is the last screen before the scene leaves |
+| a place is entered | is the screen of a place, or the arrival at one |
+| a price or pay is shown | shows money: a price, a cost, pay, the rent |
+| the clock moves | spends time, or says a time |
+| she dresses or undresses | moves a garment |
+| a garment is named | names something she wears |
+| a moment alone with her body | is a shower, dressing, the towel, bed or the mirror |
+| something sexual shows | shows arousal, a look, a touch, or sex |
+| an explicit beat | has a beat marked `[explicit]` |
+| a meter is shown or paid | shows a meter, or moves one |
+| a goal card is shown | shows a quest card or a goal line |
+| a media spot | has a picture or a clip |
+| a walk-in | is someone walking in on her, or her walking in |
+| the opening | is in the opening |
+| a release after the first | ships in release 2 or later, onto old saves |
+| the plan | not a screen: the game plan or a release's piece list, where a whole system is designed |
+| a rule is changed | not a screen: a skill edit that adds or removes a rule |
+
+**`judge`**: `script + <check>, …` (a check in `scripts/check.py`'s `CHECKS` decides it), `reader` (the reader decides it; `reader + <check>, …` when a check helps), or `note` (the reader reports it in its own section; it never holds a piece). A `script` or `reader` row has a real failure in its failure column, or says why it stays blocking ("— · kept blocking: the voice, LO's").
+
 ## Changing this skill
 
 - A new rule needs a real failure, and an answer to "why doesn't an existing rule cover this?". Until then it goes in `LATER.md`.
 - Every edit gets a dated `CHANGELOG.md` line: what changed, why, how it was verified.
-- Size caps, enforced by tests on instruction files (everything outside `lists/`): this file under 200 lines, every other file under 400.
+- Size caps, enforced by tests on instruction files (everything outside `lists/`, except `CHANGELOG.md`, which is a diary, C2170): this file under 200 lines, every other file under 400.

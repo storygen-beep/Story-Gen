@@ -12,8 +12,10 @@ her own. Her old bedroom key is the one thing that's hers.
 - **The player:** female, a written character (Ella). (WANT §1)
 - **Name screen, two fields:** her name (default *Ella*) and what Ryan calls her (default *El*).
   Both are printed back in scenes, never used as gates. (IDEA §3)
-- **Start choice, asked by the first scene:** what does she want from college: good grades, fun, or
-  freedom. Sets one flag that later scenes read. A memory, never a stat screen. (WANT §1)
+- **Start choice, asked by the first scene:** who she was in high school, asked by Mom at breakfast on
+  her first day ("promise me you'll still be the girl you were in high school"): the good girl, the
+  party girl, or the one planning to get out. Sets one flag (start_grades / start_fun /
+  start_freedom) that later scenes read. A memory, never a stat screen. (WANT §1; LO 2026-11-24)
 - **What she has to lose:** her mom's trust, and how the house sees her. (WANT §1)
 - **Her face:** open.
 

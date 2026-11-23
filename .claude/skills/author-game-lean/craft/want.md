@@ -4,33 +4,33 @@ Read this before you write a card for the start (her situation, the creation scr
 
 ## Must read
 
-The card's `Craft:` line cites each one, or says in one line why it skips it.
+The card's `Craft:` line cites each one, or says in one line why it skips it. `when` and `judge` are the labels in `SKILL.md`, "Rule labels".
 
-| id | what it asks | the failure it stops |
-|---|---|---|
-| C54 | her situation at minute zero is concrete: a job, a debt, a room, a reputation | — |
-| C43 | give her the premise and a choice at minute zero | — |
-| C44 | the start choice is a memory, not a slider, and sets a flag | — |
-| C46 | a start-choice flag nobody reads is fake freedom | — |
-| C48 | ask on a creation screen only what you print back | — |
-| C51 | a creation screen is about three fields | — |
-| C1619 | the first objective is a quest card with steps: what's done and what's next | — |
-| C1628 | never spend the first screen on a systems lecture | — |
-| C430 | every step says how the player finds the next one | — |
-| C598 | a card names only people she has met | first_term's Ryan card |
-| C952 | every number on a card agrees with the plan and the ledger | — |
-| C992 | example numbers are filler | — |
-| C34 | the goal has no date | — |
-| C35 | a goal that can end names the next goal | — |
-| C36 | each goal names the flag set when it's met | — |
-| C37 | a goal whose end is in a later release says which release | — |
-| C433 | say the current ceiling honestly: "for now" | — |
-| C32 | keep the promise alive after the hold goes quiet | — |
-| C56 | a bill is one hold of nine; an ambition she picked is the commonest for a female lead | — |
-| C72 | a real recurring bill is rarer for a female lead, behind an ambition | — |
-| C63 | her appetite is a destination, not where she starts | — |
-| C64 | what she becomes is access: rising widens what she can reach | — |
-| C65 | the ascent is a sentence about doors | — |
+| id | what it asks | the failure it stops | when | judge |
+|---|---|---|---|---|
+| C54 | her situation at minute zero is concrete: a job, a debt, a room, a reputation | — · kept blocking: LO's choice (2026-11-24) | the first screen | reader |
+| C43 | give her the premise and a choice at minute zero | — | the first screen, the start choice | note |
+| C44 | the start choice is a memory, not a slider, and sets a flag | P13 reader pass 7: the start choice was a wish about the future ("Good grades. I'll make you proud."), not a memory | the start choice | reader |
+| C46 | a start-choice flag nobody reads is fake freedom | — | the plan | note |
+| C48 | ask on a creation screen only what you print back | P13 reader pass 11: "Your name" was asked and never printed back | the plan | script + creation |
+| C51 | a creation screen is about three fields | — | the plan | note |
+| C1619 | the first objective is a quest card with steps: what's done and what's next | LO played P13's sums screen (2026-11-23): goal 1's card was one run-on line with stray stars, no steps to read ("What is this??"; fixed in 324ae159) | a goal card is shown | reader |
+| C1628 | never spend the first screen on a systems lecture | — | the first screen | note |
+| C430 | every step says how the player finds the next one | — · kept blocking: LO's choice (2026-11-24) | a goal card is shown | reader |
+| C598 | see `craft/people.md` |  |  |  |
+| C952 | see `craft/economy.md` |  |  |  |
+| C992 | see `craft/economy.md` |  |  |  |
+| C34 | the goal has no date | — · kept blocking: LO's choice (2026-11-24) | a goal card is shown | reader |
+| C35 | a goal that can end names the next goal | — · kept blocking: LO's choice (2026-11-24) | a goal card is shown | reader |
+| C36 | each goal names the flag set when it's met | — · kept blocking: LO's choice (2026-11-24) | a goal card is shown | reader |
+| C37 | a goal whose end is in a later release says which release | — · kept blocking: LO's choice (2026-11-24) | a goal card is shown | reader |
+| C433 | say the current ceiling honestly: "for now" | — · kept blocking: LO's choice (2026-11-24) | a goal card is shown | reader |
+| C32 | keep the promise alive after the hold goes quiet | — | the plan | note |
+| C56 | a bill is one hold of nine; an ambition she picked is the commonest for a female lead | — | the plan | note |
+| C72 | a real recurring bill is rarer for a female lead, behind an ambition | — | the plan | note |
+| C63 | her appetite is a destination, not where she starts | — | the plan | note |
+| C64 | what she becomes is access: rising widens what she can reach | — | the plan | note |
+| C65 | the ascent is a sentence about doors | — | the plan | note |
 
 ## The measures
 

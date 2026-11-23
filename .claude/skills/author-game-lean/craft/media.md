@@ -4,31 +4,31 @@ Read this before you fill a card's `Media:` slot. A spot is a design decision; f
 
 ## Must read
 
-The card's `Craft:` line cites each one, or says in one line why it skips it.
+The card's `Craft:` line cites each one, or says in one line why it skips it. `when` and `judge` are the labels in `SKILL.md`, "Rule labels".
 
-| id | what it asks | the failure it stops |
-|---|---|---|
-| C1261 | each spot costs a search, a shelf and a pick: put one where the player wants to look | P02–P06: 24 spots of "the room, empty" |
-| C1267 | ask of each screen what the player should see that the words can't give; if nothing much, no spot | same |
-| C1249 | the field's screen kinds: 41% of room screens in top games carry a picture | — (why a place may have one) |
-| C1250 | the room card stays bare in words; media goes to sex and talk | P02–P06 |
-| C1265 | a chore alone, a one-liner, a notice, a menu or a door gets no spot | P06's meals and sleep |
-| C1262 | a body moment gets a clip or still right after the line that says it | — |
-| C1234 | the clip sits on the beat the player is reading | L125 |
-| L121 | media by kind of screen: every body moment, one everyday picture per scene; the every-screen overshoot was cut | first_term DECISIONS 251–252 cut solo everyday pictures that only repeat the line |
-| L125 | a clip that opens its screen with the payoff spoils it | first_term's early-payoff clips |
-| C1280 | pool size by spot: explicit repeat 4, a `_t4` body moment on a repeat 4 (LO, 2026-11-22), a `_t3` look on a repeat 2, everyday, person, room or once-seen 1; never the default by accident | L119 |
-| L119 | default pools of 4 asked for 1,808 files | first_term DECISIONS 246 |
-| C1281 | a look is written as what the looker sees, or the looker alone; never someone looking at her in the same frame | L120 |
-| C1284 | a walk-in picture is what he sees: "Seen from a bathroom doorway: …" | L120 |
-| L120 | "a man looking at her" frames can't be found, and two-person frames drew wrong searches | first_term DECISIONS 246–247, 253–254 |
-| C1275 | a look where something happens asks for a gif (put "gif" in the search words); a held body or a room stays a still | L122 |
-| C1274 | the tier suffix sets the format: `_t0` everyday, `_t3` a look, `_t4` skin, `_t5` sex, animated only | — |
-| C1278 | the description always gives her age | L123 |
-| C1277 | name the place the scene is named for in every picture | L123 |
-| C1238 | a picture matches its line on every visit | first_term's empty lounger, DECISIONS 258 (`games/first_term/DECISIONS.md:959`) |
-| C1255 | one asset, one block | L126 |
-| L97 | a walk-in shows what that person was already doing | first_term DECISIONS 257 |
+| id | what it asks | the failure it stops | when | judge |
+|---|---|---|---|---|
+| C1261 | each spot costs a search, a shelf and a pick: put one where the player wants to look | P02–P06: 24 spots of "the room, empty" | a media spot | reader |
+| C1267 | ask of each screen what the player should see that the words can't give; if nothing much, no spot | same | a media spot | reader |
+| C1249 | the field's screen kinds: 41% of room screens in top games carry a picture | — (why a place may have one) | a media spot | note |
+| C1250 | the room card stays bare in words; media goes to sex and talk | P02–P06 | a place is entered | reader |
+| C1265 | a chore alone, a one-liner, a notice, a menu or a door gets no spot | P06's meals and sleep | a media spot | reader |
+| C1262 | see `craft/body-moments.md` |  |  |  |
+| C1234 | the clip sits on the beat the player is reading | L125 | a media spot | reader |
+| L121 | media by kind of screen: every body moment, one everyday picture per scene; the every-screen overshoot was cut | first_term DECISIONS 251–252 cut solo everyday pictures that only repeat the line | a media spot | reader |
+| L125 | a clip that opens its screen with the payoff spoils it | first_term's early-payoff clips | a media spot | reader |
+| C1280 | pool size by spot: explicit repeat 4, a `_t4` body moment on a repeat 4 (LO, 2026-11-22), a `_t3` look on a repeat 2, everyday, person, room or once-seen 1; never the default by accident | L119 | a media spot | reader |
+| L119 | default pools of 4 asked for 1,808 files | first_term DECISIONS 246 | a media spot | reader |
+| C1281 | a look is written as what the looker sees, or the looker alone; never someone looking at her in the same frame | L120 | a media spot | reader |
+| C1284 | a walk-in picture is what he sees: "Seen from a bathroom doorway: …" | L120 | a walk-in, a media spot | reader |
+| L120 | "a man looking at her" frames can't be found, and two-person frames drew wrong searches | first_term DECISIONS 246–247, 253–254 | a media spot | reader |
+| C1275 | a look where something happens asks for a gif (put "gif" in the search words); a held body or a room stays a still | L122 | a media spot | reader |
+| C1274 | the tier suffix sets the format: `_t0` everyday, `_t3` a look, `_t4` skin, `_t5` sex, animated only | — | a media spot | note |
+| C1278 | the description always gives her age | L123 | a media spot | reader |
+| C1277 | name the place the scene is named for in every picture | L123 | a media spot | reader |
+| C1238 | a picture matches its line on every visit | first_term's empty lounger, DECISIONS 258 (`games/first_term/DECISIONS.md:959`) | a media spot | reader |
+| C1255 | one asset, one block | L126 | a media spot | reader |
+| L97 | see `craft/walk-ins.md` |  |  |  |
 
 ## The engine (cited)
 

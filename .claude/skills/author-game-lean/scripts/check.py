@@ -1,6 +1,6 @@
 """One check command for a game built with author-game-lean.
 
-    python3 check.py games/<slug> [--release]
+    python3 check.py games/<slug> [--release] [--against <git ref>]
 
 Checks:
   merge      scripts/merge_toml_phases.py runs and the merged TOML parses (--no-dev under --release)
@@ -9,10 +9,26 @@ Checks:
   builds     every canvas, place, person and sidebar item in the merged TOML is listed in the Builds: line
              of an APPROVED card (a changed card covers nothing; canvases from 6_dev_shortcuts.toml are
              skipped; a sidebar item, which has no id, is listed as `sidebar:<trait>`, or `sidebar:<label>`)
+  talk, length, presence, creation, saves, speakers, goals
+             the measured scene checks in scenes.py (its docstring says what each one can and can't see).
+             `--against <git ref>` sets the build `saves` compares with; the default is the last commit of
+             output/index.html, the build LO played.
+  sheet      every card with a `Sheet:` block: each row matches the sheet sheet.py works out from the build
+             (clock, place, who is there, what she wears, flags). A column it can't work out is INCOMPLETE. A card
+             with no Sheet: block (every card from before 2026-11-24) is not compared; `--card` asks new ones for it.
+  does       every card with a `Does:` block: what a script can see each built screen do (rules.GUARD's list: a
+             person, an equip, a garment named, a price, a time on a label, a picture, a meter effect, a goal card,
+             the last screen, a first meeting, a place entered, one-time or repeatable, the opening) is named
+             on that screen's Does: line. Cards without Does: are not judged.
+
+    python3 check.py --rules games/<slug> <id>    the piece's rule list, from its Does: block (rules.py)
+    python3 check.py --rules games/<slug> plan    the rules whose `when` is "the plan"
 
     python3 check.py --card games/<slug> <id>
 
-  card       before LO's yes: the card's Craft: line cites every must-read id of every craft file it names,
+  card       before LO's yes. A card with a Does: block: every trigger is known and written per screen, every
+             screen has one, Does: and Sheet: name the same screens. An older card without Does: keeps the old
+             check: the card's Craft: line cites every must-read id of every craft file it names,
              or skips one as `skip <id>: <reason>`; every named craft file exists; a card with a media spot
              names craft/media.md. Reads only; saves nothing.
   release    --release only: no dev canvas id or name is left in the merged TOML or the built HTML
@@ -46,8 +62,14 @@ LAST = ".check_last.json"
 sys.path.insert(0, str(HERE))
 import approve  # noqa: E402
 import reach  # noqa: E402
+import scenes  # noqa: E402
+import sheet  # noqa: E402
+import rules  # noqa: E402
 
 GREEN, RED, INCOMPLETE = "green", "red", "incomplete"
+# Every check a craft row's `judge` may name (SKILL.md, "Rule labels").
+CHECKS = ("merge", "reach", "approvals", "builds", "release", "card", "beat", "sheet", "does",
+          "talk", "length", "presence", "creation", "saves", "speakers", "goals")
 GATES = REPO / ".claude" / "skills" / "author-game-v2" / "scripts" / "gates.py"
 BEAT_FLOOR = 3  # C254: an explicit beat has 3+ frozen-list words
 
@@ -210,9 +232,29 @@ def check_card(game_dir, card_id, skill=None):
     if not path.is_file():
         return INCOMPLETE, [f"no card at {path}"]
     text = path.read_text(encoding="utf-8")
+    rows = []
+    has_screens = bool(re.search(r"^[ \t]*Screen \d", text, re.M))
+    does = rules.card_does(text)
+    if does is not None:
+        # A card with Does: (2026-11-24 on): its rule list comes from Does:, so it has no Areas: or Craft: line and
+        # no cite-every-id check; listing an id was never applying it (LO, relayed 2026-11-24: "Yes").
+        rows += rules.does_problems(does, skill)
+        mine = sheet.card_sheet(text)
+        if mine is not None and set(mine) != set(does):
+            rows.append(f"Does: and Sheet: name different screens: {sorted(set(mine) ^ set(does))}")
+        if has_screens and mine is None:
+            rows.append("the card has screens and no Sheet: block (templates/piece-card.md); "
+                        "write each screen's clock, place, who, wearing and flags before the prose")
+        return (RED, rows) if rows else (GREEN, [])
+    if has_screens:
+        rows.append("the card has screens and no Does: block; name each screen's triggers (SKILL.md, Rule labels)")
+        if sheet.card_sheet(text) is None:
+            rows.append("the card has screens and no Sheet: block (templates/piece-card.md); "
+                        "write each screen's clock, place, who, wearing and flags before the prose")
+    # An older card, without Does: its Areas: and Craft: lines are checked as before.
     m = re.search(r"^Craft:[ \t]*(.*)$", text, re.M)
     line = m.group(1) if m else ""
-    rows = [] if m else ["the card has no Craft: line"]
+    rows += [] if m else ["the card has no Craft: line"]
     named = re.findall(r"craft/[\w-]+\.md", line)
     media = re.search(r"^Media:\s*(\d+)", text, re.M)
     if media and int(media.group(1)) > 0 and "craft/media.md" not in named:
@@ -311,12 +353,44 @@ def check_release(game_dir, game):
     return (RED, rows) if rows else (GREEN, [])
 
 
-def run_all(game_dir, release=False):
+def check_does(game_dir, game):
+    """Each card's Does: against what the build shows. Cards without a Does: block are not judged."""
+    if game is None:
+        return INCOMPLETE, ["the merged TOML did not parse"]
+    red = []
+    for path in sorted((Path(game_dir) / "cards").glob("*.md")):
+        does = rules.card_does(path.read_text(encoding="utf-8"))
+        if does is not None:
+            red += [f"{path.stem}: {r}" for r in rules.guard(does, game)]
+    return (RED, red) if red else (GREEN, [])
+
+
+def check_sheet(game_dir, game):
+    """Each card's Sheet: against the computed one. Cards without a Sheet: block are not compared."""
+    if game is None:
+        return INCOMPLETE, ["the merged TOML did not parse"]
+    red, inc = [], []
+    for path in sorted((Path(game_dir) / "cards").glob("*.md")):
+        mine, computed = sheet.for_card(game, game_dir, path.stem)
+        if mine is None:
+            continue
+        r, i = sheet.compare(mine, computed)
+        red += [f"{path.stem}: {x}" for x in r]
+        inc += [f"{path.stem}: {x}" for x in i]
+    if red:
+        return RED, red + inc
+    return (INCOMPLETE, inc) if inc else (GREEN, [])
+
+
+def run_all(game_dir, release=False, against=None):
     results = {"merge": merge(game_dir, release)}
     game = load_merged(game_dir) if results["merge"][0] == GREEN else None
     results["reach"] = check_reach(game)
     results["approvals"] = check_approvals(game_dir)
     results["builds"] = check_builds(game_dir, game)
+    results.update(scenes.run(game_dir, game, dev_canvases(game_dir) or {}, ref=against))
+    results["sheet"] = check_sheet(game_dir, game)
+    results["does"] = check_does(game_dir, game)
     if release:
         results["release"] = check_release(game_dir, game)
     return results
@@ -360,6 +434,28 @@ def card_main(argv):
     return {GREEN: 0, RED: 1, INCOMPLETE: 2}[status]
 
 
+def rules_main(argv):
+    ap = argparse.ArgumentParser(description="Print a piece's rule list, or the plan's.")
+    ap.add_argument("game_dir")
+    ap.add_argument("card_id")
+    args = ap.parse_args(argv)
+    rows = rules.table()
+    if args.card_id == "plan":
+        ids = rules.plan_rows()
+        print(f"the plan: {len(ids)} rules")
+        print("\n".join(rules.print_list(ids, rows)))
+        return 0
+    path = Path(args.game_dir) / "cards" / f"{args.card_id}.md"
+    does = rules.card_does(path.read_text(encoding="utf-8")) if path.is_file() else None
+    if does is None:
+        print(f"INCOMPLETE: {path} has no Does: block")
+        return 2
+    lst = rules.rule_list(does, rows=rows)
+    print(f"{args.card_id}: {len(lst)} rules over {len(does)} screen(s), {sum(len(v) for v in lst.values())} rule-screen pairs")
+    print("\n".join(rules.print_list(lst, rows, lst)))
+    return 0
+
+
 def beat_main(argv):
     ap = argparse.ArgumentParser(description="Check the beats a card or file marks [explicit].")
     ap.add_argument("path")
@@ -376,9 +472,12 @@ def main(argv=None):
         return card_main(argv[1:])
     if argv[:1] == ["--beat"]:
         return beat_main(argv[1:])
+    if argv[:1] == ["--rules"]:
+        return rules_main(argv[1:])
     ap = argparse.ArgumentParser(description="Check a game built with author-game-lean.")
     ap.add_argument("game_dir")
     ap.add_argument("--release", action="store_true")
+    ap.add_argument("--against", help="git ref of the build LO played, for the saves check")
     args = ap.parse_args(argv)
     game_dir = Path(args.game_dir)
     store = game_dir / LAST
@@ -387,7 +486,7 @@ def main(argv=None):
     except (OSError, ValueError):
         saved = {}
     mode = "release" if args.release else "dev"
-    results = run_all(game_dir, args.release)
+    results = run_all(game_dir, args.release, args.against)
     lines, code = report(results, {k: tuple(v) for k, v in saved.get(mode, {}).items()})
     print("\n".join(lines))
     saved[mode] = {k: [s, rows] for k, (s, rows) in results.items()}

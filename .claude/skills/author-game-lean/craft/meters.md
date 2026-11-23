@@ -4,26 +4,26 @@ Read this before you write a card that defines a meter, or an act that pays one.
 
 ## Must read
 
-The card's `Craft:` line cites each one, or says in one line why it skips it.
+The card's `Craft:` line cites each one, or says in one line why it skips it. `when` and `judge` are the labels in `SKILL.md`, "Rule labels".
 
-| id | what it asks | the failure it stops |
-|---|---|---|
-| C285 | five stages of 20 on each climb meter; a game may move a row, never drop the order | — (the table) |
-| C294 | a release that writes stages up to N caps every pay at N's top, shows no button for an unwritten stage, names the next stage only on a card | P01 |
-| C295 | small rungs at 5, 10, 15 inside each 20: a small step of the same kind, never the next stage's kind | P01 cited C294 and missed this |
-| C381 | a small rung may show greyed as a preview of the next bolder act | P01 |
-| C188 | three "not yet" talks just below each line: she says why not yet; they raise and unlock nothing | P01 |
-| C330 | a repeatable act caps at the top of the stage above the one it opens in | P01 |
-| C1401 | a daily cap per band; about 2–3 paying acts a day at every stage; flag a stage over 14 days | P01 |
-| C210 | crossing a stage is a one-time moment that pays nothing | P01 |
-| C338 | an accident pays him, never her; the button where she goes further pays her; the way out pays nothing and is always there | first_term's accidents raised only the man (L68) |
-| C1366 | the Quests page names only places that pay at her stage | first_term's four cards named places that paid nothing at stage 1 (L68) |
-| C388 | a locked door says why: a number lock shows the engine's need, a story lock carries `locked_text` | first_term's "(Needs Hungry)" (L116) |
-| C541 | after a choice, his reaction line opens the next node and the engine's toast stays; never print a +X for a stat that isn't shown | — |
-| L68 | every stage, the first included, has acts that pay; only her choice pays | first_term stood at 0 on day 4 |
-| L69 | an act capped at its own stage's top can never cross it; 1-a-day caps made 20-day stages | first_term stuck at 39 |
-| L70 | the first gain on each climb meter is open at 0, not behind a 1-in-4 walk-in | first_term's Exhibitionism sat at 0 |
-| L116 | a lock names the meter and a number the player knows, never a stage word | "(Needs Hungry)" read like food |
+| id | what it asks | the failure it stops | when | judge |
+|---|---|---|---|---|
+| C285 | five stages of 20 on each climb meter; a game may move a row, never drop the order | — (the table) | the plan | note |
+| C294 | a release that writes stages up to N caps every pay at N's top, shows no button for an unwritten stage, names the next stage only on a card | P01 | the plan | reader |
+| C295 | small rungs at 5, 10, 15 inside each 20: a small step of the same kind, never the next stage's kind | P01 cited C294 and missed this | a meter is shown or paid | reader |
+| C381 | a small rung may show greyed as a preview of the next bolder act | P01 | a meter is shown or paid | reader |
+| C188 | three "not yet" talks just below each line: she says why not yet; they raise and unlock nothing | P01 | a meter is shown or paid | reader |
+| C330 | a repeatable act caps at the top of the stage above the one it opens in | P01 | a repeatable, a meter is shown or paid | reader |
+| C1401 | a daily cap per band; about 2–3 paying acts a day at every stage; flag a stage over 14 days | P01 | the plan | reader |
+| C210 | crossing a stage is a one-time moment that pays nothing | P01 | a meter is shown or paid | reader |
+| C338 | an accident pays him, never her; the button where she goes further pays her; the way out pays nothing and is always there | first_term's accidents raised only the man (L68) | a meter is shown or paid | reader |
+| C1366 | the Quests page names only places that pay at her stage | first_term's four cards named places that paid nothing at stage 1 (L68) | a goal card is shown | reader |
+| C388 | a locked door says why: a number lock shows the engine's need, a story lock carries `locked_text` | first_term's "(Needs Hungry)" (L116) | a meter is shown or paid | reader |
+| C541 | after a choice, his reaction line opens the next node and the engine's toast stays; never print a +X for a stat that isn't shown | P13 reader pass 9: after "Fix the knot first" the next screen didn't open on Ryan's reaction | a meter is shown or paid | reader |
+| L68 | every stage, the first included, has acts that pay; only her choice pays | first_term stood at 0 on day 4 | the plan | reader |
+| L69 | an act capped at its own stage's top can never cross it; 1-a-day caps made 20-day stages | first_term stuck at 39 | the plan | reader |
+| L70 | the first gain on each climb meter is open at 0, not behind a 1-in-4 walk-in | first_term's Exhibitionism sat at 0 behind a 1-in-4 walk-in | a meter is shown or paid | reader |
+| L116 | a lock names the meter and a number the player knows, never a stage word | "(Needs Hungry)" read like food | a meter is shown or paid | reader |
 
 ## The engine (cited; `v2.py` is `apps/game_generation/twee_comprehensive/generators/v2.py`)
 
