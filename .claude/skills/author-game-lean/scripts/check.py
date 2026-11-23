@@ -57,6 +57,9 @@ import scenes  # noqa: E402
 import sheet  # noqa: E402
 
 GREEN, RED, INCOMPLETE = "green", "red", "incomplete"
+# Every check a craft row's `judge` may name (SKILL.md, "Rule labels").
+CHECKS = ("merge", "reach", "approvals", "builds", "release", "card", "beat", "sheet",
+          "talk", "length", "presence", "creation", "saves", "speakers", "goals")
 GATES = REPO / ".claude" / "skills" / "author-game-v2" / "scripts" / "gates.py"
 BEAT_FLOOR = 3  # C254: an explicit beat has 3+ frozen-list words
 

@@ -9,31 +9,31 @@ Read this before you write a card that costs or refills energy, caps how often s
 
 ## Must read
 
-The card's `Craft:` line cites each one, or says in one line why it skips it.
+The card's `Craft:` line cites each one, or says in one line why it skips it. `when` and `judge` are the labels in `SKILL.md`, "Rule labels".
 
-| id | what it asks | the failure it stops |
-|---|---|---|
-| C1446 | a system repeats, has rules, remembers, changes, touches money, body, people or sex, she chooses it, and it has a place or action | — |
-| C1386 | a meter lives inside a system: the system writes it and reads it | — |
-| C1303 | every need is read by a condition; a refill that gates nothing buys nothing | — |
-| C1337 | energy moves both ways and isn't a climb, but it must be read | — |
-| C1431 | a need falls, she refills it, and while it's empty something is shut | — |
-| C1432 | a need declares what drains it, what refills it (place, activity, minutes), what it costs, and what it shuts | — |
-| C1438 | a need decays over time or is spent by use; never neither | — |
-| C1342 | each need can be refilled from some room's list, or it is a countdown to a wall | L45 |
-| C1433 | an energy-type need shuts a door while empty | — |
-| C1434 | an empty need sends her to the refill place, and that place has something happen | — |
-| C1313 | a repeatable refill carries a substitution, or its room holds an event | — |
-| C1428 | energy is the wrong lock on a person ("too tired to seduce him"), a fine throttle elsewhere | — |
-| C1345 | the brake goes on the way in: trigger costs, a cap per day, or a day-cap flag | — |
-| C1423 | a gate that's worth something costs something to pass: a cost, a daily cap, or real time | — |
-| C1425 | four levers pace a repeat: spacing, a time cost, a daily cap, a resource cost; none works alone | — |
-| C1427 | a time cost bites only when sized against the window it sits in | — |
-| C1360 | a locked choice shows greyed with its action as the label; a number lock lets the engine print the need | — |
-| C1421 | when something's out of reach, the requirement is told | — |
-| C1441 | a number-only result is for work (a shift); a step about a person or her body gets a scene | — |
-| C1369 | every live system is armed in the first hour, or sits readable on the sidebar | — |
-| C1403 | players mind grind in jobs and money, not a slow sexual climb | L80 |
+| id | what it asks | the failure it stops | when | judge |
+|---|---|---|---|---|
+| C1446 | a system repeats, has rules, remembers, changes, touches money, body, people or sex, she chooses it, and it has a place or action | — | the plan | note |
+| C1386 | a meter lives inside a system: the system writes it and reads it | — | the plan | note |
+| C1303 | every need is read by a condition; a refill that gates nothing buys nothing | — | a repeatable | note |
+| C1337 | energy moves both ways and isn't a climb, but it must be read | — | a repeatable | note |
+| C1431 | a need falls, she refills it, and while it's empty something is shut | — · kept blocking: LO's choice (2026-11-24) | a repeatable | reader |
+| C1432 | a need declares what drains it, what refills it (place, activity, minutes), what it costs, and what it shuts | — · kept blocking: LO's choice (2026-11-24) | a repeatable | reader |
+| C1438 | a need decays over time or is spent by use; never neither | — · kept blocking: LO's choice (2026-11-24) | a repeatable | reader |
+| C1342 | each need can be refilled from some room's list, or it is a countdown to a wall | L45 | a repeatable | reader |
+| C1433 | an energy-type need shuts a door while empty | — | a repeatable | note |
+| C1434 | an empty need sends her to the refill place, and that place has something happen | — | a repeatable | note |
+| C1313 | a repeatable refill carries a substitution, or its room holds an event | — | a repeatable | note |
+| C1428 | energy is the wrong lock on a person ("too tired to seduce him"), a fine throttle elsewhere | — · kept blocking: LO's rule (2026-11-23) | a repeatable | reader |
+| C1345 | the brake goes on the way in: trigger costs, a cap per day, or a day-cap flag | — | a repeatable | note |
+| C1423 | a gate that's worth something costs something to pass: a cost, a daily cap, or real time | — | a repeatable | note |
+| C1425 | four levers pace a repeat: spacing, a time cost, a daily cap, a resource cost; none works alone | — | a repeatable | note |
+| C1427 | a time cost bites only when sized against the window it sits in | — | a repeatable | note |
+| C1360 | a locked choice shows greyed with its action as the label; a number lock lets the engine print the need | — | a repeatable | note |
+| C1421 | when something's out of reach, the requirement is told | — | a repeatable | note |
+| C1441 | a number-only result is for work (a shift); a step about a person or her body gets a scene | — | a repeatable | note |
+| C1369 | every live system is armed in the first hour, or sits readable on the sidebar | — | the plan | note |
+| C1403 | players mind grind in jobs and money, not a slow sexual climb | L80 | the plan | reader |
 
 ## The engine (cited; `v2.py` is `apps/game_generation/twee_comprehensive/generators/v2.py`)
 

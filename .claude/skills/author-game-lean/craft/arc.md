@@ -9,34 +9,34 @@ Read this before you plan a person's steps or write a card for one of them. Chec
 
 ## Must read
 
-The card's `Craft:` line cites each one, or says in one line why it skips it.
+The card's `Craft:` line cites each one, or says in one line why it skips it. `when` and `judge` are the labels in `SKILL.md`, "Rule labels".
 
-| id | what it asks | the failure it stops |
-|---|---|---|
-| C180 | every step pays the one before and opens the one after, and the text says so | — |
-| C160 | central people get a long chain, the rest shorter: a shape, not a quota | — |
-| C120 | every step adds a new witness, risk or kind of yes; two flat steps in a row, cut one | L18 |
-| C109 | each step carries a leak (his want, shown before) and a promise (the line it ends on) | — |
-| C115 | his move: what he wants for his own reason, shown before, and what he does about it | — |
-| C162 | information the player earns is a step; information the game narrates is exposition | — |
-| C146 | a big moment is a one-time step, not a repeatable | — |
-| C151 | the repeatable stays short: one spoken line and one visible want | — |
-| C148 | each scene goes one step further than the last | — |
-| C149 | each scene points at what comes next | — |
-| C198 | an arc runs on one step counter, not a pile of flags | — |
-| C131 | every dependency is written down: another person's step, a window, a place | — |
-| C174 | the next step comes before any dice | — |
-| C212 | a story step fires the first time it can, never by luck | — |
-| C124 | slow is fine if his card says what to do; bored is fine, lost is not | L80 |
-| C164 | an ordinary no is parked: the step comes back after a wait | — |
-| C165 | a final no is only on a button that says so, and closes his story, not the person | — |
-| C166 | no final no on a central arc's first step | — |
-| C121 | the release's top step is a payoff; a talk or a locked door is not a top step | L18 |
-| C127 | something still happens after the top step | — |
-| C140 | each arc's last card says where it stops and what comes next, and it's true | — |
-| C215 | an arc that stops at the build's edge says so on its card ("for now"), never "Arc complete" | — |
-| C217 | a step's ✓ reads a flag the step sets on its way out | — |
-| C171 | an arc ends by pointing at another | — |
+| id | what it asks | the failure it stops | when | judge |
+|---|---|---|---|---|
+| C180 | every step pays the one before and opens the one after, and the text says so | P13 reader pass 6: Ryan's step ended on "He says it to the floor." and opened nothing after it | a one-time step | reader |
+| C160 | central people get a long chain, the rest shorter: a shape, not a quota | — | the plan | note |
+| C120 | every step adds a new witness, risk or kind of yes; two flat steps in a row, cut one | L18 | a one-time step | reader |
+| C109 | each step carries a leak (his want, shown before) and a promise (the line it ends on) | P13's Ryan leered and never covered (`craft/opening.md`, C601) | a one-time step | reader |
+| C115 | his move: what he wants for his own reason, shown before, and what he does about it | — | a one-time step | note |
+| C162 | information the player earns is a step; information the game narrates is exposition | — | a one-time step | note |
+| C146 | a big moment is a one-time step, not a repeatable | — | a one-time step, a repeatable | note |
+| C151 | the repeatable stays short: one spoken line and one visible want | — | a repeatable | note |
+| C148 | each scene goes one step further than the last | — | a one-time step | note |
+| C149 | each scene points at what comes next | P13 reader pass 6: Ryan's scene didn't point at what comes next with him | a scene's last screen | reader |
+| C198 | an arc runs on one step counter, not a pile of flags | — | the plan | note |
+| C131 | every dependency is written down: another person's step, a window, a place | — | the plan | note |
+| C174 | a person's next arc step comes before any dice | — | the plan | note |
+| C212 | a story step fires the first time it can, never by luck | — | the plan | note |
+| C124 | slow is fine if his card says what to do; bored is fine, lost is not | L80 | a goal card is shown | reader |
+| C164 | an ordinary no is parked: the step comes back after a wait | — · kept blocking: LO's choice (2026-11-24) | a one-time step | reader |
+| C165 | a final no is only on a button that says so, and closes his story, not the person | — · kept blocking: LO's choice (2026-11-24) | a one-time step | reader |
+| C166 | never a final no on the main arc's first step, or in the opening | P13's "(ends his path)" | a one-time step, the opening | reader |
+| C121 | the release's top step is a payoff; a talk or a locked door is not a top step | L18 | the plan | reader |
+| C127 | something still happens after the top step | — | the plan | note |
+| C140 | each arc's last card says where it stops and what comes next, and it's true | — | a goal card is shown | note |
+| C215 | an arc that stops at the build's edge says so on its card ("for now"), never "Arc complete" | — | a goal card is shown | note |
+| C217 | a step's ✓ reads a flag the step sets on its way out | P13 reader pass 6: goal 1's ✅ read met_mark, set on the way into the rent screen, not on the step's way out | a goal card is shown | reader |
+| C171 | an arc ends by pointing at another | — | the plan | note |
 
 ## The engine (cited; `v2.py` is `apps/game_generation/twee_comprehensive/generators/v2.py`)
 

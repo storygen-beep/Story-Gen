@@ -363,3 +363,91 @@ Why for all of these: P13's reader found new FAILs on every pass, v5 to v11 (99 
   - With the card's places supplied in memory, Ryan is in `home_hall` there, inside his 07:12–07:25 row. Mark and Mom are in the kitchen from 07:05 to 07:12. Mom is alone in the kitchen at the hand-over (07:35 on), since Mark's row ends at 07:30.
   - She wears nothing (engine-wise) until her room's exit equips her outfit, because no garment is `initial`.
   - `check.py`'s `sheet` is green, because no card has a `Sheet:` block yet. `--card P13` is now red for the missing block; P42, P07 and P06 are not.
+- Parts A and F of the rule-pipeline plan, the frame and the first area (LO relayed 2026-11-24: "Commit and continue"):
+  - **`SKILL.md`, new section "Rule labels":** the 21 `when` triggers, each with what it means, and the three judges (`script + <check>`, `reader`, with `+ <check>` when a check helps, and `note`). Two triggers are new beside the plan's draft:
+    - "a scene's last screen", because C450 (end on a hook) applies only there;
+    - "a rule is changed", because L163 governs skill edits, not screens.
+    
+    A `script` or `reader` row needs a real failure, or says why it stays blocking. SKILL.md is now 142 lines.
+  - **`scripts/check.py`:** a new `CHECKS` tuple lists every check a judge may name.
+  - **`craft/voice.md`:** the must-read table gains `when` and `judge` columns, and every row is labelled. All eleven rows are `reader`; C460 is `reader + presence, sheet, creation`. Under Part F's exemption (the voice, the truth rule, LO's own rules), nothing is demoted to `note`. The seven voice rows with no recorded failure say "— · kept blocking: the voice, LO's (2026-11-22)", and C461 says "kept blocking: the truth rule". C460's failure column now names P13 reader pass 11 (Mom's "high school" line). A line under the truth rule's five rules says who judges each, and that rule 3 applies on a repeatable.
+  - **`scripts/tests/test_skill.py`:** six new checks:
+    - `label_problems`: every row of a file on `LABELLED` has five columns, a `when` from SKILL.md's list, a judge, a check name for `script` that is in `CHECKS`, and a failure for `script` and `reader`;
+    - `home_problems`: an id's row text lives in one craft file and the others point to it ("see `craft/x.md`"), judged only for ids in a labelled file;
+    - a test that `CHECKS` covers every scene check;
+    - planted breaks for each;
+    - a test that an unlabelled file isn't judged until it's listed.
+    
+    `LABELLED = ["craft/voice.md"]`. `PENDING_HOMES = {C447, C448, C593}` waits on LO's choice of home, because voice.md and people.md each hold a copy. Suite: 159 passed.
+- Voice decisions applied (LO relayed 2026-11-24: "Yes continue"):
+  - C447 and C593 live in `craft/voice.md`, and `craft/people.md` points there.
+  - C448 lives in `craft/people.md`, with voice's fuller wording ("… in the first lines"), and `craft/voice.md` points there.
+  - Two failure columns are filled from the reader tables, checked first: C593 is P13 reader pass 7 (Mark had no term of address for her, `reader_first_term_lean_P13_v7.md`, line 82); C448 is pass 10 (Ryan arrived as a bare name, `…_v10.md`, line 42).
+  - `PENDING_HOMES` no longer holds them. people.md's rows keep three columns until its area is labelled.
+- Parts A and F, the second area: `craft/clothes.md` and `craft/body-moments.md`, labelled together because they share C719 and C1158.
+  - **`SKILL.md`:** a new trigger, "the plan", because 8 clothes rows (C1167, C1204, C1183, C1171, C1169, C1150, C1201 and the like) design the whole clothes system, not a screen.
+  - **`craft/clothes.md`, by Part F's default:**
+    - 18 rows with "—" become `note`;
+    - C1206 stays blocking, as the truth rule's clothes half;
+    - C719, C1158, C1220 and C1221 stay `reader`, with their failures;
+    - C1158 and C1206 are helped by `sheet`, and C1221 and C1169 by `reach`.
+  - **`craft/body-moments.md`:** C1275, C1274 and C1277 become `note`. C1262, C1280, C1279, C782, C1158 and C719 stay `reader`.
+  - **Shared ids, waiting on LO's choice of home** (`PENDING_HOMES`):
+    - C719 and C1158 (clothes and body-moments);
+    - C1262 (body-moments, media and walk-ins);
+    - C1274, C1275, C1277 and C1280 (body-moments and media).
+  - `test_skill.py` `LABELLED` now holds three files, and two planted tests anchor on C644, since people.md's C447 row is now a pointer. Suite: 159 passed.
+- Clothes, body-moments and media decisions applied (LO relayed 2026-11-24: "Yes"):
+  - **Homes:**
+    - C719 lives in `craft/clothes.md`, with clothes' wording.
+    - C1158 lives in `craft/clothes.md`, with body-moments' fuller wording ("… undressing in an act is backed by the act").
+    - C1262 lives in `craft/body-moments.md`; `craft/media.md` and `craft/walk-ins.md` point to it.
+    - C1274, C1275, C1277 and C1280 live in `craft/media.md`, with media's wording; body-moments points to them.
+  - **Kept blocking:** C1166 and C1200 (shape rule 7 cites C1200), each "— · kept blocking: LO's choice (2026-11-23)". The other 16 clothes rows stay notes.
+  - **`craft/media.md` labelled:** C1249 and C1274 are `note`; the rest are `reader`, each with a failure.
+  - **New shared id:** L97 (media and walk-ins, different wording) waits in `PENDING_HOMES`.
+- Parts A and F, the third area: `craft/people.md`, `craft/opening.md` and `craft/want.md` are labelled.
+  - **Failures filled from the P13 reader tables, each checked first:**
+    - C630: pass 10, Ryan's name and never his relation;
+    - C44: pass 7, the start choice was a wish, not a memory;
+    - C48: pass 11, the name was never printed back. C48 is `script + creation`.
+    - C596: pass 12, Mom's talk screen at 26 words and 42% spoken. Labelled `note + talk, length`, because its ~55 words is a borrowed number.
+  - **Length rows:** C519, C1626 and C1637 are `note + length`; C520 is `reader + length`.
+  - **Other help from checks:** C1631 (where the hand-over lands) is `reader + sheet`.
+  - **Opening rows:** all are `reader`, each with a P13 failure.
+  - **Notes:** every people and want row with no recorded failure is a `note`, by Part F's default. Shape rules marked "LO's choice" (people 6 and 8, want 1, 5 and 6) are listed for LO to keep blocking.
+  - **Shared ids waiting on LO's choice of home** (`PENDING_HOMES`): C109, C166, C311, C598, C639, C640, C952, C954, C992 and L97.
+  - Suite: 159 passed (the unlabelled-file test now uses arc.md). Sizes: people 110, opening 108, want 90 lines.
+- The size cap no longer covers `CHANGELOG.md` (LO relayed 2026-11-24: "Yes"). It is a diary, not an instruction file (C2170). `test_skill.py`'s `size_problems` skips it, its planted test now writes a 2,000-line CHANGELOG that must not count, and `SKILL.md`'s "Size caps" line says so. Why: the CHANGELOG reached 420 lines and turned `test_sizes` red. The earlier "159 passed" was run before that batch's CHANGELOG lines went in, so it was not the state handed over.
+- Decisions from the third batch applied (LO relayed 2026-11-24: "Yes"):
+  - **Homes:** C109 and C166 live in `craft/arc.md`. C166 takes opening's fuller wording, and both keep opening's P13 failures. C311 lives in `craft/opening.md`. C598, C639 and C640 live in `craft/people.md`. C952, C954 and C992 live in `craft/economy.md`, and C952 and C954 take the merged wordings LO approved. L97 lives in `craft/walk-ins.md`. Every other copy is now a pointer.
+  - **Kept blocking:** C656, C660, C34, C35, C36, C37, C433, C54 and C952 are marked "— · kept blocking: LO's choice (2026-11-24)".
+  - **C1619** now names its failure: LO played P13's sums screen on 2026-11-23, and goal 1's card was one run-on line with stray stars ("What is this??"; fixed in 324ae159).
+  - **C430 is kept blocking as LO's choice, not with that failure.** Its rule (each step says how to find the next) wasn't what broke: the steps did say where and when, and only the layout was wrong.
+- Parts A and F, the last batch: arc, heat, economy, meters, places, clock, systems, walk-ins and returning-player are labelled. Every craft file is now labelled, and `LABELLED` in `test_skill.py` is every file in `craft/`.
+  - **New test:** the unlabelled-file test plants a new craft file.
+  - **`SKILL.md`:** "Rule labels" says every file is labelled.
+  - **Default labels:** rows with a failure are `reader`, and rows with "—" are `note`. The exceptions:
+    - C249 is `script + beat`;
+    - C1656 and C1658 are `script + saves`;
+    - L106 is `reader + presence`;
+    - C1428 and C1652 are kept blocking as "LO's rule";
+    - checks help on C254 and C239 (beat), C770 (length), C921, C927 and C931 (sheet), and C1657 and C1659 (saves).
+  - **Real failures filled in from the P13 reader tables** (every note row in every craft file was grepped against passes v5 to v12):
+    - C180, C149 and C217 (v6);
+    - C1022 (v8, "dollar");
+    - C900 and C928 (v6, "Monday, seven in the morning.");
+    - C920 (v7, 10 min against 5 min);
+    - C541 (v9);
+    - C1658 (v11, start_fun).
+  - **Shared ids waiting on LO's choice of home:** C285 (heat and meters), C212 and C174 (arc and walk-ins), L70 (meters and walk-ins), and L147 (places and walk-ins).
+- Parts A and F finished (LO relayed 2026-11-24: "Yes").
+  - **Homes:**
+    - C285 lives in `craft/meters.md`, with meters' wording; heat points there.
+    - C212 lives in `craft/arc.md`; walk-ins points there.
+    - C174 lives in `craft/arc.md`, with walk-ins' wording ("a person's next arc step comes before any dice").
+    - L70 lives in `craft/meters.md`, with walk-ins' fuller failure ("…behind a 1-in-4 walk-in").
+    - L147 lives in `craft/walk-ins.md`. Places' failure for it ("15 places said 'Nothing to do here right now'") moved to places' C762 row, beside L150.
+    - `PENDING_HOMES` is empty, so the one-home test runs on every id in every craft file.
+  - **Heat, kept blocking as LO's rules:** C254, C248, C239, C276, C255, C256 and C252, each marked "LO's rule, explicit prose is the register (CLAUDE.md; 2026-11-24)". C254 is `script + beat`, and C249 stays `script + beat`. C255, C256 and C252 keep the trigger "the plan": they are game-wide shares, and "the plan" covers the game plan and each release's piece list, so they apply from release 1. "a release after the first" would skip release 1.
+  - **Kept blocking as LO's choice (2026-11-24):** C284 and C289 (heat); C164 and C165 (arc); C951, C989, C990, C1016 and C1017 (economy); C773, C776, C777 and C738 (places); C913, C914, C916, C903 and C890 (clock); C1431, C1432 and C1438 (systems); C1667, C1681, C1647, C1664 and C1666 (returning-player). All other "—" rows stay notes.

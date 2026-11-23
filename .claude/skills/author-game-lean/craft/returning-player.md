@@ -4,31 +4,31 @@ Read this before you write a card for release 2 or later, or before any rebuild 
 
 ## Must read
 
-The card's `Craft:` line cites each one, or says in one line why it skips it.
+The card's `Craft:` line cites each one, or says in one line why it skips it. `when` and `judge` are the labels in `SKILL.md`, "Rule labels".
 
-| id | what it asks | the failure it stops |
-|---|---|---|
-| C1651 | every later release lands on old saves, and the damage shows only for the player who loads | — |
-| C1652 | once LO plays a dev build, the save rules apply to every rebuild after it | — |
-| C1653 | a load doesn't re-run `:: Start`, so a new default is missing from an old save | — |
-| C1675 | the engine fills in what's missing, on every passage | — |
-| C1654 | a save joins the new build through passage names, person keys, flag and meter keys, and what a number means | — |
-| C1655 | safe to add: new flags, meters, people, systems, and new keys inside them | — |
-| C1656 | never repaired: a renamed key, a removed key, a changed meaning, anything the save already used up | L101 |
-| C1657 | every TOML id is permanent; display names and prose change freely | L49 |
-| C1658 | never rename or repurpose a live flag or meter key; add a new one instead | — |
-| C1659 | once a meter ships, freeze its range and bands; one gate's value can change | — |
-| C1660 | the game's title is fixed | — |
-| C1661 | an item that gates progress is granted again where it's needed, never once only | L138 |
-| C1649 | a start choice added later doesn't take anything from an old save | — |
-| C1662 | each save records the version it began in and the version it's on now | — |
-| C1663 | a version mismatch on load is noted, never refused | — |
-| C1667 | an unavoidable rename is a major version with an announced reset, never silent | — |
-| C1680 | a wait set before the minute stamp existed opens early, never strands | — |
-| C1681 | each opt-in system says what an old save does with it | — |
-| C1664 | before re-shipping, compare with the last build actually shipped | — |
-| C1666 | the save check can't see a rescaled meter or a used-up grant; check those by hand | — |
-| C1647 | three places say what shipped (portal, the sidebar footer, the archived build), and they drift | — |
+| id | what it asks | the failure it stops | when | judge |
+|---|---|---|---|---|
+| C1651 | every later release lands on old saves, and the damage shows only for the player who loads | — | a release after the first | note |
+| C1652 | once LO plays a dev build, the save rules apply to every rebuild after it | — · kept blocking: LO's rule (2026-11-23) | a release after the first | reader |
+| C1653 | a load doesn't re-run `:: Start`, so a new default is missing from an old save | — | a release after the first | note |
+| C1675 | the engine fills in what's missing, on every passage | — | a release after the first | note |
+| C1654 | a save joins the new build through passage names, person keys, flag and meter keys, and what a number means | — | a release after the first | note |
+| C1655 | safe to add: new flags, meters, people, systems, and new keys inside them | — | a release after the first | note |
+| C1656 | never repaired: a renamed key, a removed key, a changed meaning, anything the save already used up | L101 | a release after the first | script + saves |
+| C1657 | every TOML id is permanent; display names and prose change freely | L49 | a release after the first | note + saves |
+| C1658 | never rename or repurpose a live flag or meter key; add a new one instead | P13 reader pass 11: start_fun kept its key and changed its meaning (the `saves` check went red on it too) | a release after the first | script + saves |
+| C1659 | once a meter ships, freeze its range and bands; one gate's value can change | — | a release after the first | note + saves |
+| C1660 | the game's title is fixed | — | a release after the first | note |
+| C1661 | an item that gates progress is granted again where it's needed, never once only | L138 | a release after the first | reader |
+| C1649 | a start choice added later doesn't take anything from an old save | — | a release after the first | note |
+| C1662 | each save records the version it began in and the version it's on now | — | a release after the first | note |
+| C1663 | a version mismatch on load is noted, never refused | — | a release after the first | note |
+| C1667 | an unavoidable rename is a major version with an announced reset, never silent | — · kept blocking: LO's choice (2026-11-24) | a release after the first | reader |
+| C1680 | a wait set before the minute stamp existed opens early, never strands | — | a release after the first | note |
+| C1681 | each opt-in system says what an old save does with it | — · kept blocking: LO's choice (2026-11-24) | a release after the first | reader |
+| C1664 | before re-shipping, compare with the last build actually shipped | — · kept blocking: LO's choice (2026-11-24) | a release after the first | reader |
+| C1666 | the save check can't see a rescaled meter or a used-up grant; check those by hand | — · kept blocking: LO's choice (2026-11-24) | a release after the first | reader |
+| C1647 | three places say what shipped (portal, the sidebar footer, the archived build), and they drift | — · kept blocking: LO's choice (2026-11-24) | a release after the first | reader |
 
 ## The engine (cited; `v2.py` is `apps/game_generation/twee_comprehensive/generators/v2.py`)
 

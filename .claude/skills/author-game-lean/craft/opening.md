@@ -4,27 +4,27 @@ Read this before you write the opening's card. The opening is one piece (`plan.m
 
 ## Must read
 
-The card's `Craft:` line cites each one, or says in one line why it skips it.
+The card's `Craft:` line cites each one, or says in one line why it skips it. `when` and `judge` are the labels in `SKILL.md`, "Rule labels".
 
-| id | what it asks | the failure it stops |
-|---|---|---|
-| C520 | the staged opening: setup, the problem with a person, the temptation, the objective and its card; 34–57 words a screen is its target (stated, not measured) | P13 had no problem: a nice morning, then a towel |
-| C519 | loud is not long: split a screen with two jobs rather than fatten it | — (length) |
-| C1626 | the field's first fiction screen: median 144 words (measured, 25 games) | — (the length ceiling) |
-| C1637 | a meeting is small and somebody speaks: median about 100 words, most under 150 (measured, 696 passages) | — (the length ceiling) |
-| C1611 | staged open: one person at a time, on screen and speaking | P13's start choice was a narrator quiz |
-| C1613 | staged is the default; a cold open only when no person can be on screen | same |
-| C327 | an opening of talk only is a failure; fill it with what her stage allows | P13's bathroom was one sentence |
-| C311 | a low-heat scene names a part of her body, writes his reaction, has a "not yet" or a price, and a hook | P13's hall |
-| C314 | the low-heat failure is talk only: no body, no reaction | same |
-| C601 | his leak shows on his body, she sees it; a man she lives with catches himself and covers | P13's Ryan leered and never covered |
-| C109 | each step carries a leak before it and a promise it ends on | same |
-| C166 | never a final no on the main arc's first step, or in the opening | P13's "(ends his path)" |
-| L71 | at stage 0–1 things happen to her; she doesn't choose to let him | P13's "And I'm standing here letting him" |
-| C1604 | the cards showing at the hand-over carry goals | P13 left the goal card to P12 |
-| C1609 | the last screens may carry plain tutorial lines | same |
-| C1621 | the last screen ends on a hook: money problem, objective, mystery, person, choice | P13 ended on "go to breakfast" |
-| C1631 | the hand-over lands where something is live at that minute | P13 landed in an empty kitchen |
+| id | what it asks | the failure it stops | when | judge |
+|---|---|---|---|---|
+| C520 | the staged opening: setup, the problem with a person, the temptation, the objective and its card; 34–57 words a screen is its target (stated, not measured) | P13 had no problem: a nice morning, then a towel | the opening | reader + length |
+| C519 | loud is not long: split a screen with two jobs rather than fatten it | — (length) | always | note + length |
+| C1626 | the field's first fiction screen: median 144 words (measured, 25 games) | — (the length ceiling) | the opening | note + length |
+| C1637 | a meeting is small and somebody speaks: median about 100 words, most under 150 (measured, 696 passages) | — (the length ceiling) | a first meeting | note + length |
+| C1611 | staged open: one person at a time, on screen and speaking | P13's start choice was a narrator quiz | the opening | reader |
+| C1613 | staged is the default; a cold open only when no person can be on screen | same | the opening | reader |
+| C327 | an opening of talk only is a failure; fill it with what her stage allows | P13's bathroom was one sentence | the opening | reader |
+| C311 | a low-heat scene names a part of her body, writes his reaction, has a "not yet" or a price, and a hook | P13's hall | something sexual shows | reader |
+| C314 | the low-heat failure is talk only: no body, no reaction | same | something sexual shows | reader |
+| C601 | his leak shows on his body, she sees it; a man she lives with catches himself and covers | P13's Ryan leered and never covered | a first meeting, something sexual shows | reader |
+| C109 | see `craft/arc.md` |  |  |  |
+| C166 | see `craft/arc.md` |  |  |  |
+| L71 | at stage 0–1 things happen to her; she doesn't choose to let him | P13's "And I'm standing here letting him" | something sexual shows | reader |
+| C1604 | the cards showing at the hand-over carry goals | P13 left the goal card to P12 | the opening, a goal card is shown | reader |
+| C1609 | the last screens may carry plain tutorial lines | same | the opening | reader |
+| C1621 | the last screen ends on a hook: money problem, objective, mystery, person, choice | P13 ended on "go to breakfast" | the opening, a scene's last screen | reader |
+| C1631 | the hand-over lands where something is live at that minute | P13 landed in an empty kitchen | the opening | reader + sheet |
 
 ## The shape
 

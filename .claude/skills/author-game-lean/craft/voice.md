@@ -4,21 +4,21 @@ Read this before you write any card with prose on it. It replaces reading v2's `
 
 ## Must read
 
-The card's `Craft:` line cites each one, or says in one line why it skips it.
+The card's `Craft:` line cites each one, or says in one line why it skips it. `when` and `judge` are the labels in `SKILL.md`, "Rule labels".
 
-| id | what it asks | the failure it stops |
-|---|---|---|
-| C442 | say it, don't hint it: tell the player what is happening | — |
-| C449 | name the sexual tension; don't bury it | — |
-| C451 | keep the concrete detail: places, objects, money, times | — |
-| C447 | every person sounds like themselves: one manner each, held | — |
-| C593 | one term of address per person that nobody else uses | — |
-| C448 | obvious on arrival: who a person is, what they want, how they feel about her, in the first lines | — |
-| C450 | end a scene on a hook that points at what happens next | P13 ended on "go to breakfast" |
-| C422 | labels, room names and cards say plainly what clicking does | — |
-| C460 | the truth rule: every claim is true on every playthrough that can reach the screen | — |
-| C461 | what's allowed under it: texture that can't clash, her opinions, dialogue that fits the cast entry | — |
-| L163 | a rule removed needs the same proof as a rule added, measured the way the player sees it | a quotes-only count once deleted a correct dialogue rule |
+| id | what it asks | the failure it stops | when | judge |
+|---|---|---|---|---|
+| C442 | say it, don't hint it: tell the player what is happening | — · kept blocking: the voice, LO's (2026-11-22) | always | reader |
+| C449 | name the sexual tension; don't bury it | — · kept blocking: the voice, LO's (2026-11-22) | something sexual shows | reader |
+| C451 | keep the concrete detail: places, objects, money, times | — · kept blocking: the voice, LO's (2026-11-22) | always | reader |
+| C447 | every person sounds like themselves: one manner each, held | — · kept blocking: the voice, LO's (2026-11-22) | a person is on screen | reader |
+| C593 | one term of address per person that nobody else uses | P13 reader pass 7: Mark had no term of address for her (Mom "baby", Ryan the nickname) | a person is on screen | reader |
+| C448 | see `craft/people.md` | | | |
+| C450 | end a scene on a hook that points at what happens next | P13 ended on "go to breakfast" | a scene's last screen | reader |
+| C422 | labels, room names and cards say plainly what clicking does | — · kept blocking: the voice, LO's (2026-11-22) | always | reader |
+| C460 | the truth rule: every claim is true on every playthrough that can reach the screen | P13 reader pass 11: Mom's "promise me it won't be like high school", on the screen all three start choices leave from | always | reader + presence, sheet, creation |
+| C461 | what's allowed under it: texture that can't clash, her opinions, dialogue that fits the cast entry | — · kept blocking: the truth rule | always | reader |
+| L163 | a rule removed needs the same proof as a rule added, measured the way the player sees it | a quotes-only count once deleted a correct dialogue rule | a rule is changed | reader |
 
 ## The measures (re-run 2026-11-22)
 
@@ -70,6 +70,8 @@ Ported from `.claude/skills/author-game-v2/references/register.md:89-156`, with 
 3. **A big moment is a one-time step, not a repeatable** (C146). A repeatable plays every visit, so it can't carry a reveal.
 4. **A consequence on a button is a real flag or number,** or it goes into the plan first.
 5. **Prose names her clothes only where a clothing condition, an earlier equip, or the beat that equips her backs it** (C1158; `craft/clothes.md` rule 4).
+
+Who judges each rule: 1 is the reader's, helped by `presence` and `sheet` (who is where, the clock, the place); 2 to 5 are the reader's, and 5 is helped by `sheet` (what she wears). Rules 1, 2, 4 and 5 apply always (`when`); rule 3 applies on a repeatable.
 
 **A promise about the future must be built.** A line that names a future event ("next month he decides") is true only if the game builds it, or the plan has the step that reaches it. Otherwise cut the line, or drop the date.
 

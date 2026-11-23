@@ -103,8 +103,41 @@ The dev file is dropped only on `--no-dev` (`scripts/merge_toml_phases.py:80`). 
 
 Never read a list in `lists/` whole. Grep the area you're porting.
 
+## Rule labels
+
+A craft file's must-read table has two more columns, `when` and `judge`, beside the failure column (the rule pipeline, LO 2026-11-24). Every craft file is labelled (2026-11-24); `scripts/tests/test_skill.py` (`LABELLED`) checks every file in `craft/`, so a new one is labelled from the start.
+
+**`when`**, one or more of these, comma-separated. Each names something a screen does:
+
+| when | the screen… |
+|---|---|
+| always | any screen with text on it |
+| a person is on screen | has someone besides her: a line from them, a presence check, their name |
+| a first meeting | is the first time she meets someone |
+| a one-time step | is part of a one-time scene |
+| a repeatable | is part of a scene that plays again |
+| a scene's last screen | is the last screen before the scene leaves |
+| a place is entered | is the screen of a place, or the arrival at one |
+| a price or pay is shown | shows money: a price, a cost, pay, the rent |
+| the clock moves | spends time, or says a time |
+| she dresses or undresses | moves a garment |
+| a garment is named | names something she wears |
+| a moment alone with her body | is a shower, dressing, the towel, bed or the mirror |
+| something sexual shows | shows arousal, a look, a touch, or sex |
+| an explicit beat | has a beat marked `[explicit]` |
+| a meter is shown or paid | shows a meter, or moves one |
+| a goal card is shown | shows a quest card or a goal line |
+| a media spot | has a picture or a clip |
+| a walk-in | is someone walking in on her, or her walking in |
+| the opening | is in the opening |
+| a release after the first | ships in release 2 or later, onto old saves |
+| the plan | not a screen: the game plan or a release's piece list, where a whole system is designed |
+| a rule is changed | not a screen: a skill edit that adds or removes a rule |
+
+**`judge`**: `script + <check>, …` (a check in `scripts/check.py`'s `CHECKS` decides it), `reader` (the reader decides it; `reader + <check>, …` when a check helps), or `note` (the reader reports it in its own section; it never holds a piece). A `script` or `reader` row has a real failure in its failure column, or says why it stays blocking ("— · kept blocking: the voice, LO's").
+
 ## Changing this skill
 
 - A new rule needs a real failure, and an answer to "why doesn't an existing rule cover this?". Until then it goes in `LATER.md`.
 - Every edit gets a dated `CHANGELOG.md` line: what changed, why, how it was verified.
-- Size caps, enforced by tests on instruction files (everything outside `lists/`): this file under 200 lines, every other file under 400.
+- Size caps, enforced by tests on instruction files (everything outside `lists/`, except `CHANGELOG.md`, which is a diary, C2170): this file under 200 lines, every other file under 400.
