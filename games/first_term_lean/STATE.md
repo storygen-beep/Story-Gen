@@ -37,7 +37,7 @@ friends; Zoe staying over and Jake at the door (release 2); short arcs for named
 | P07 | clothes: 12 garments (hers, Mom's three, Ryan's hoodie), the opening's dressing beat with three outfits, Change clothes in her bedroom only, the leave rule on her street, Borrow Mom's things and one of Ryan's hoodies (greyed while they're in), Mom's "Is that mine?" on her menu, the neighbour's line on her street. Played headless 2026-11-23: all cases right, no errors. The run/workout gates moved to P33 | 2026-11-23 | 2026-11-23 | 2026-11-23 | 2026-11-24 |
 | P35 | the clothes shop and Nina: place, stock in four levels, trait and money locks, clothes_layout = room (PLAN 8d) | | | | |
 | P09 | college: the timetable, Go to class, Study, drama, practise on the stage, Grades shown, still (PLAN 8f) | | | | |
-| P10 | the café job: shifts every day, $22 a shift, behind P21 (PLAN 8f) | | | | |
+| P10 | the café job: three rows (weekdays 2pm, weekends 10am and 3pm), 4 hours, 15 energy, $22 said in the scene; Tom pays, Chris on Sunday (PLAN.md:476); Chris's weekend row to 8pm. Reader: 2 passes, work list empty (C151 notes carried). Ready for LO to play (ENI for LO, delegated) | 2026-11-24 | 2026-11-24 | 2026-11-24 | ready |
 | P11 | Sunday rent: the rent page, Mark at the table, the short line, the Sundays-paid-in-a-row counter on goal 1's card (PLAN 8c, 8i) | | | | |
 | P08 | the phone: chat only, a text after each meeting (PLAN 8e) | | | | |
 | P36 | reputation: the meter (still), the Sunday board on the quad, overheard lines at the mirror and the next table (PLAN 8g) | | | | |
@@ -79,4 +79,4 @@ friends; Zoe staying over and Jake at the door (release 2); short arcs for named
 - P16 must set `met_walsh` (from P04), so the Faculty Offices open.
 - Piece list approved 2026-11-20, with LO's three changes (NOTES).
 
-Next step: piece — P10 (the repeat shift; ENI: someone must be there to pay her on Sunday, Tom is off), then P11
+Next step: play — LO plays the café job (P21, P10) in output/; then piece — P11 (Sunday rent)

@@ -1,14 +1,14 @@
 {
  "piece": "P21",
- "pass": 3,
+ "pass": 4,
  "screens": {
   "cafe_hire.ask": "246f9dfc34aaf852",
-  "cafe_hire.sign": "2c7079252f8ae4c5",
-  "cafe_hire.both": "6c687f2a2add5c32",
+  "cafe_hire.sign": "3df42923d5534123",
+  "cafe_hire.both": "86e14e5a8ea04e28",
   "cafe_hire.no": "18df5d6eee9b713d",
-  "cafe_first_shift.start": "641173334639bd65",
+  "cafe_first_shift.start": "148d1bc08acf279e",
   "cafe_first_shift.end": "5dbf0b8e3fb8fc07",
-  "*": "01aba219cc852902"
+  "*": "6fa40bc231649c1d"
  },
  "rows": {
   "B1": "5276068df1ca6fa9",
@@ -42,7 +42,7 @@
   "C926": "177d1e1776fac74b",
   "C900": "6372efb027eb2034",
   "C902": "df5ed7a36dbc74e4",
-  "C903": "5e42a6ca2c00ded3",
+  "C903": "4f83b0b5eb45f71b",
   "C892": "5c890033f6ac38b8",
   "C910": "be1c18ee466455f6",
   "C929": "e20b027bad88ca8c",
@@ -173,7 +173,7 @@
    "cause": null,
    "screen_hash": "641173334639bd65",
    "row_hash": "5276068df1ca6fa9",
-   "carried": false
+   "carried": true
   },
   {
    "row": "B1",
@@ -184,7 +184,7 @@
    "cause": null,
    "screen_hash": "6c687f2a2add5c32",
    "row_hash": "5276068df1ca6fa9",
-   "carried": false
+   "carried": true
   },
   {
    "row": "B1",
@@ -195,7 +195,7 @@
    "cause": null,
    "screen_hash": "2c7079252f8ae4c5",
    "row_hash": "5276068df1ca6fa9",
-   "carried": false
+   "carried": true
   },
   {
    "row": "B10",
@@ -212,12 +212,34 @@
    "row": "B10",
    "screen": "cafe_first_shift.start",
    "verdict": "PASS",
-   "line": "Tom, from the till: / So you're the new girl.",
-   "why": "window Mon\u2013Fri 14:00\u201315:00: Chris 07\u201315 and Tom 10\u201321 are both there at 14:00 and 14:59 (who_is_where); 'new girl' gated by cafe_first_shift_done false, set on the scene's only exit",
+   "line": "So you're the new girl. Tom's giving you my afternoons.",
+   "why": "Weekdays 14:00\u201315:00 at +0: Chris (07\u201315) and Tom (10\u201321) both there at 14:59; met_chris is set only on leaving, so the first meeting is true. Plays once.",
    "cause": null,
-   "screen_hash": "641173334639bd65",
+   "screen_hash": "148d1bc08acf279e",
    "row_hash": "c1c0e2ac2588a579",
-   "carried": true
+   "carried": false
+  },
+  {
+   "row": "B10",
+   "screen": "cafe_hire.both",
+   "verdict": "PASS",
+   "line": "Your first one's a weekday afternoon. Chris'll show you the machine. Don't be late, rookie.",
+   "why": "Same as 2a: Tom there at every minute; the weekday claim matches cafe_first_shift's weekday condition.",
+   "cause": null,
+   "screen_hash": "86e14e5a8ea04e28",
+   "row_hash": "c1c0e2ac2588a579",
+   "carried": false
+  },
+  {
+   "row": "B10",
+   "screen": "cafe_hire.sign",
+   "verdict": "PASS",
+   "line": "Your first one's a weekday afternoon. Chris'll show you the machine. Don't be late, rookie.",
+   "why": "Tom's rows Mon\u2013Sat 10\u201321 cover 10:05\u201321:00; the first shift is weekday-only and Chris is in until 15:00, so the line is true on every visit, Saturday included (Chris now 10\u201320 there, not contradicted). Plays once (cafe_hired hides it).",
+   "cause": null,
+   "screen_hash": "3df42923d5534123",
+   "row_hash": "c1c0e2ac2588a579",
+   "carried": false
   },
   {
    "row": "B11",
@@ -234,34 +256,67 @@
    "row": "B11",
    "screen": "cafe_first_shift.start",
    "verdict": "PASS",
-   "line": "Work the shift",
-   "why": "spends 240 minutes and leads to the closing screen that shows the shift and pays $22",
+   "line": "Work the shift (240 min; sets met_chris)",
+   "why": "Spends 4 hours and shows the shift and the $22 on the next screen.",
    "cause": null,
-   "screen_hash": "641173334639bd65",
+   "screen_hash": "148d1bc08acf279e",
    "row_hash": "1e252efd0904a971",
-   "carried": true
+   "carried": false
+  },
+  {
+   "row": "B11",
+   "screen": "cafe_hire.both",
+   "verdict": "N/A",
+   "line": "\u2014",
+   "why": "No solo button; \"Done\" closes a scene with Tom.",
+   "cause": null,
+   "screen_hash": "86e14e5a8ea04e28",
+   "row_hash": "1e252efd0904a971",
+   "carried": false
+  },
+  {
+   "row": "B11",
+   "screen": "cafe_hire.sign",
+   "verdict": "N/A",
+   "line": "\u2014",
+   "why": "No solo button; \"Done\" closes a scene with Tom.",
+   "cause": null,
+   "screen_hash": "3df42923d5534123",
+   "row_hash": "1e252efd0904a971",
+   "carried": false
   },
   {
    "row": "B12",
    "screen": "cafe_first_shift.start",
    "verdict": "PASS",
-   "line": "Reaching past you for a jug, his arm drags across your chest. He doesn't say sorry. He watches you notice. ... Later, new girl.",
-   "why": "names her chest, writes his reaction, a not-yet (she steps away, Tom stops him) and a hook",
+   "line": "Reaching past you for a jug, his arm drags across your chest. He doesn't say sorry. He watches you notice.",
+   "why": "Names her chest, his reaction (watches her notice), Tom's \"Chris. Customers.\" is the not-yet, \"Later, new girl.\" the hook.",
    "cause": null,
-   "screen_hash": "641173334639bd65",
+   "screen_hash": "148d1bc08acf279e",
    "row_hash": "fd109745c67b71d7",
-   "carried": true
+   "carried": false
   },
   {
    "row": "B12",
    "screen": "cafe_hire.both",
    "verdict": "PASS",
    "line": "His eyes go to your mouth when you smile, then down to the till, fast.",
-   "why": "Her mouth, his look, his own cover as the not-yet, the job as the hook.",
+   "why": "Names her mouth, writes his reaction, and he pulls his eyes away fast (the not-yet).",
    "cause": null,
-   "screen_hash": "6c687f2a2add5c32",
+   "screen_hash": "86e14e5a8ea04e28",
    "row_hash": "fd109745c67b71d7",
-   "carried": true
+   "carried": false
+  },
+  {
+   "row": "B12",
+   "screen": "cafe_hire.sign",
+   "verdict": "N/A",
+   "line": "\u2014",
+   "why": "Not a charged scene: Tom's look is a hiring look; Does: has no \"something sexual shows\" here.",
+   "cause": null,
+   "screen_hash": "3df42923d5534123",
+   "row_hash": "fd109745c67b71d7",
+   "carried": false
   },
   {
    "row": "B13",
@@ -278,23 +333,45 @@
    "row": "B13",
    "screen": "cafe_first_shift.start",
    "verdict": "N/A",
-   "line": "-",
-   "why": "no moment alone with her body",
+   "line": "\u2014",
+   "why": "No moment alone with her body.",
    "cause": null,
-   "screen_hash": "641173334639bd65",
+   "screen_hash": "148d1bc08acf279e",
    "row_hash": "aaf6518b64dcce55",
-   "carried": true
+   "carried": false
+  },
+  {
+   "row": "B13",
+   "screen": "cafe_hire.both",
+   "verdict": "N/A",
+   "line": "\u2014",
+   "why": "No moment alone with her body.",
+   "cause": null,
+   "screen_hash": "86e14e5a8ea04e28",
+   "row_hash": "aaf6518b64dcce55",
+   "carried": false
+  },
+  {
+   "row": "B13",
+   "screen": "cafe_hire.sign",
+   "verdict": "N/A",
+   "line": "\u2014",
+   "why": "No moment alone with her body.",
+   "cause": null,
+   "screen_hash": "3df42923d5534123",
+   "row_hash": "aaf6518b64dcce55",
+   "carried": false
   },
   {
    "row": "B2",
    "screen": "*",
    "verdict": "PASS",
-   "line": "Reaching past you for a jug, his arm drags across your chest. He doesn't say sorry. He watches you notice.",
-   "why": "one step past cafe_hire (Tom's look at her mouth / the used-car look): first contact, with Tom as witness",
+   "line": "So you're the new girl. Tom's giving you my afternoons.",
+   "why": "Tom goes from the Help Wanted line (P05, goal 1) to hiring her; Chris's first canvas goes from his look to a brush, past the hire's glance. Canvases checked: cafe_hire, cafe_first_shift, P05's Caf\u00e9 variant.",
    "cause": null,
-   "screen_hash": "01aba219cc852902",
+   "screen_hash": "6fa40bc231649c1d",
    "row_hash": "4d9f2ebbce9a39cc",
-   "carried": true
+   "carried": false
   },
   {
    "row": "B3",
@@ -312,44 +389,66 @@
    "screen": "cafe_first_shift.start",
    "verdict": "PASS",
    "line": "Later, new girl.",
-   "why": "Chris names a next time",
+   "why": "Chris promises more; the shift follows.",
    "cause": null,
-   "screen_hash": "641173334639bd65",
+   "screen_hash": "148d1bc08acf279e",
    "row_hash": "4d1fce1c4523b5d4",
-   "carried": true
+   "carried": false
+  },
+  {
+   "row": "B3",
+   "screen": "cafe_hire.both",
+   "verdict": "PASS",
+   "line": "Your first one's a weekday afternoon. Chris'll show you the machine. Don't be late, rookie.",
+   "why": "Same hook as 2a: the first shift, and Chris.",
+   "cause": null,
+   "screen_hash": "86e14e5a8ea04e28",
+   "row_hash": "4d1fce1c4523b5d4",
+   "carried": false
+  },
+  {
+   "row": "B3",
+   "screen": "cafe_hire.sign",
+   "verdict": "PASS",
+   "line": "Your first one's a weekday afternoon. Chris'll show you the machine. Don't be late, rookie.",
+   "why": "Points at the first shift and Chris.",
+   "cause": null,
+   "screen_hash": "3df42923d5534123",
+   "row_hash": "4d1fce1c4523b5d4",
+   "carried": false
   },
   {
    "row": "B4",
    "screen": "cafe_first_shift.start",
    "verdict": "PASS",
    "line": "Your face burns. You step out from his reach. / \"I've got it.\"",
-   "why": "stage-0 pushback, on her body and said aloud; no italic thought",
+   "why": "Pushback at stage 0, on her body and spoken.",
    "cause": null,
-   "screen_hash": "641173334639bd65",
+   "screen_hash": "148d1bc08acf279e",
    "row_hash": "ced37cb0de6e7202",
-   "carried": true
+   "carried": false
   },
   {
    "row": "B4",
    "screen": "cafe_hire.both",
    "verdict": "PASS",
-   "line": "His eyes go to your mouth when you smile, then down to the till, fast.",
-   "why": "Her joke and smile get his look; her reaction is on her face; no act chosen.",
+   "line": "Your face goes warm.",
+   "why": "Her reaction to his glance stays on her body; she doesn't invite more (stage 0).",
    "cause": null,
-   "screen_hash": "6c687f2a2add5c32",
+   "screen_hash": "86e14e5a8ea04e28",
    "row_hash": "ced37cb0de6e7202",
-   "carried": true
+   "carried": false
   },
   {
    "row": "B4",
    "screen": "cafe_hire.sign",
    "verdict": "PASS",
    "line": "Your face goes warm. You've got a job.",
-   "why": "Stage 0: a reaction on her body.",
+   "why": "Stage 0, non-sexual: her reaction on her body, no italic thought.",
    "cause": null,
-   "screen_hash": "2c7079252f8ae4c5",
+   "screen_hash": "3df42923d5534123",
    "row_hash": "ced37cb0de6e7202",
-   "carried": true
+   "carried": false
   },
   {
    "row": "B5",
@@ -367,11 +466,33 @@
    "screen": "cafe_first_shift.start",
    "verdict": "PASS",
    "line": "Tom, from the till: \"Chris. Customers.\"",
-   "why": "Tom sees it and breaks it up",
+   "why": "Tom sees it and calls Chris off; Chris watches her notice.",
    "cause": null,
-   "screen_hash": "641173334639bd65",
+   "screen_hash": "148d1bc08acf279e",
    "row_hash": "efcbd1ac6a95e2f2",
-   "carried": true
+   "carried": false
+  },
+  {
+   "row": "B5",
+   "screen": "cafe_hire.both",
+   "verdict": "PASS",
+   "line": "His eyes go to your mouth when you smile, then down to the till, fast.",
+   "why": "Tom reacts to her smile.",
+   "cause": null,
+   "screen_hash": "86e14e5a8ea04e28",
+   "row_hash": "efcbd1ac6a95e2f2",
+   "carried": false
+  },
+  {
+   "row": "B5",
+   "screen": "cafe_hire.sign",
+   "verdict": "PASS",
+   "line": "He looks you over once, the way you'd check a used car.",
+   "why": "Tom reacts to her answer: the look and \"Good answer.\"",
+   "cause": null,
+   "screen_hash": "3df42923d5534123",
+   "row_hash": "efcbd1ac6a95e2f2",
+   "carried": false
   },
   {
    "row": "B6",
@@ -388,12 +509,34 @@
    "row": "B6",
    "screen": "cafe_first_shift.start",
    "verdict": "N/A",
-   "line": "Work the shift",
-   "why": "no offer on this screen: the brush happens to her; the only button is the shift she already chose at the door",
+   "line": "\u2014",
+   "why": "No offer: the brush happens to her (stage 1); nothing is asked of her.",
    "cause": null,
-   "screen_hash": "641173334639bd65",
+   "screen_hash": "148d1bc08acf279e",
    "row_hash": "0e32092e9fe64f2c",
-   "carried": true
+   "carried": false
+  },
+  {
+   "row": "B6",
+   "screen": "cafe_hire.both",
+   "verdict": "N/A",
+   "line": "\u2014",
+   "why": "No offer on this screen; the no lives on cafe_hire.ask.",
+   "cause": null,
+   "screen_hash": "86e14e5a8ea04e28",
+   "row_hash": "0e32092e9fe64f2c",
+   "carried": false
+  },
+  {
+   "row": "B6",
+   "screen": "cafe_hire.sign",
+   "verdict": "N/A",
+   "line": "\u2014",
+   "why": "No offer on this screen; the offer's no (\"Not today.\") is on cafe_hire.ask and parks.",
+   "cause": null,
+   "screen_hash": "3df42923d5534123",
+   "row_hash": "0e32092e9fe64f2c",
+   "carried": false
   },
   {
    "row": "B7",
@@ -410,12 +553,34 @@
    "row": "B7",
    "screen": "cafe_first_shift.start",
    "verdict": "N/A",
-   "line": "-",
-   "why": "no explicit beat on this screen",
+   "line": "\u2014",
+   "why": "No explicit beat.",
    "cause": null,
-   "screen_hash": "641173334639bd65",
+   "screen_hash": "148d1bc08acf279e",
    "row_hash": "cef53154cc971fef",
-   "carried": true
+   "carried": false
+  },
+  {
+   "row": "B7",
+   "screen": "cafe_hire.both",
+   "verdict": "N/A",
+   "line": "\u2014",
+   "why": "No explicit beat.",
+   "cause": null,
+   "screen_hash": "86e14e5a8ea04e28",
+   "row_hash": "cef53154cc971fef",
+   "carried": false
+  },
+  {
+   "row": "B7",
+   "screen": "cafe_hire.sign",
+   "verdict": "N/A",
+   "line": "\u2014",
+   "why": "No explicit beat.",
+   "cause": null,
+   "screen_hash": "3df42923d5534123",
+   "row_hash": "cef53154cc971fef",
+   "carried": false
   },
   {
    "row": "B8",
@@ -432,23 +597,45 @@
    "row": "B8",
    "screen": "cafe_first_shift.start",
    "verdict": "PASS",
-   "line": "A guy in his twenties is at the machine",
-   "why": "Chris is 24 (PLAN \u00a75); no number or garment named on the screen",
+   "line": "A guy in his twenties is at the machine, a pencil behind his ear. He looks you over like he's pricing you.",
+   "why": "Chris 24 (\"in his twenties\") and 15 energy agree with PLAN; no garment of hers named (\"across your chest\").",
    "cause": null,
-   "screen_hash": "641173334639bd65",
+   "screen_hash": "148d1bc08acf279e",
    "row_hash": "80d415cf08e0ebfe",
-   "carried": true
+   "carried": false
+  },
+  {
+   "row": "B8",
+   "screen": "cafe_hire.both",
+   "verdict": "PASS",
+   "line": "Four-hour shifts, five an hour, plus whatever lands in the tip jar. Call it twenty-two a shift. / He taps the shift board by the till: weekdays 2pm\u20136pm, Saturday and Sunday 10am\u20132pm and 3pm\u20137pm.",
+   "why": "Same numbers as PLAN \u00a78c/8f; no garment of hers named.",
+   "cause": null,
+   "screen_hash": "86e14e5a8ea04e28",
+   "row_hash": "80d415cf08e0ebfe",
+   "carried": false
+  },
+  {
+   "row": "B8",
+   "screen": "cafe_hire.sign",
+   "verdict": "PASS",
+   "line": "Four-hour shifts, five an hour, plus whatever lands in the tip jar. Call it twenty-two a shift. / He taps the shift board by the till: weekdays 2pm\u20136pm, Saturday and Sunday 10am\u20132pm and 3pm\u20137pm.",
+   "why": "$5 an hour, $22 a shift, weekdays 2\u20136, weekends 10\u20132 and 3\u20137 agree with PLAN \u00a78c/8f; no garment of hers named.",
+   "cause": null,
+   "screen_hash": "3df42923d5534123",
+   "row_hash": "80d415cf08e0ebfe",
+   "carried": false
   },
   {
    "row": "B9",
    "screen": "*",
    "verdict": "N/A",
-   "line": "-",
-   "why": "PLAN declares the companion (Zoe) and rival (Brooke) apart; Chris and Tom are neither",
+   "line": "\u2014",
+   "why": "PLAN names Zoe as companion and Brooke as rival; neither is in this scene.",
    "cause": null,
-   "screen_hash": "01aba219cc852902",
+   "screen_hash": "6fa40bc231649c1d",
    "row_hash": "3b1fcdf549bcc558",
-   "carried": true
+   "carried": false
   },
   {
    "row": "C1002",
@@ -462,6 +649,28 @@
    "carried": true
   },
   {
+   "row": "C1002",
+   "screen": "cafe_hire.both",
+   "verdict": "N/A",
+   "line": "\u2014",
+   "why": "No spend, rise, short week or collection here.",
+   "cause": null,
+   "screen_hash": "86e14e5a8ea04e28",
+   "row_hash": "657248766e62061f",
+   "carried": false
+  },
+  {
+   "row": "C1002",
+   "screen": "cafe_hire.sign",
+   "verdict": "N/A",
+   "line": "\u2014",
+   "why": "No spend, rise, short week or collection here.",
+   "cause": null,
+   "screen_hash": "3df42923d5534123",
+   "row_hash": "657248766e62061f",
+   "carried": false
+  },
+  {
    "row": "C1008",
    "screen": "*",
    "verdict": "N/A",
@@ -471,6 +680,28 @@
    "screen_hash": "f54fc2669ff97376",
    "row_hash": "7a86c32012a0b1d3",
    "carried": true
+  },
+  {
+   "row": "C1008",
+   "screen": "cafe_hire.both",
+   "verdict": "N/A",
+   "line": "\u2014",
+   "why": "No spend, rise, short week or collection here.",
+   "cause": null,
+   "screen_hash": "86e14e5a8ea04e28",
+   "row_hash": "7a86c32012a0b1d3",
+   "carried": false
+  },
+  {
+   "row": "C1008",
+   "screen": "cafe_hire.sign",
+   "verdict": "N/A",
+   "line": "\u2014",
+   "why": "No spend, rise, short week or collection here.",
+   "cause": null,
+   "screen_hash": "3df42923d5534123",
+   "row_hash": "7a86c32012a0b1d3",
+   "carried": false
   },
   {
    "row": "C1013",
@@ -484,6 +715,28 @@
    "carried": true
   },
   {
+   "row": "C1013",
+   "screen": "cafe_hire.both",
+   "verdict": "N/A",
+   "line": "\u2014",
+   "why": "No spend, rise, short week or collection here.",
+   "cause": null,
+   "screen_hash": "86e14e5a8ea04e28",
+   "row_hash": "bb1069aa828de0f6",
+   "carried": false
+  },
+  {
+   "row": "C1013",
+   "screen": "cafe_hire.sign",
+   "verdict": "N/A",
+   "line": "\u2014",
+   "why": "No spend, rise, short week or collection here.",
+   "cause": null,
+   "screen_hash": "3df42923d5534123",
+   "row_hash": "bb1069aa828de0f6",
+   "carried": false
+  },
+  {
    "row": "C1021",
    "screen": "*",
    "verdict": "N/A",
@@ -493,6 +746,28 @@
    "screen_hash": "f54fc2669ff97376",
    "row_hash": "ba42f7c2cf26a19a",
    "carried": true
+  },
+  {
+   "row": "C1021",
+   "screen": "cafe_hire.both",
+   "verdict": "N/A",
+   "line": "\u2014",
+   "why": "No price on a button.",
+   "cause": null,
+   "screen_hash": "86e14e5a8ea04e28",
+   "row_hash": "ba42f7c2cf26a19a",
+   "carried": false
+  },
+  {
+   "row": "C1021",
+   "screen": "cafe_hire.sign",
+   "verdict": "N/A",
+   "line": "\u2014",
+   "why": "No price on a button.",
+   "cause": null,
+   "screen_hash": "3df42923d5534123",
+   "row_hash": "ba42f7c2cf26a19a",
+   "carried": false
   },
   {
    "row": "C1022",
@@ -506,6 +781,28 @@
    "carried": true
   },
   {
+   "row": "C1022",
+   "screen": "cafe_hire.both",
+   "verdict": "PASS",
+   "line": "Four-hour shifts, five an hour, plus whatever lands in the tip jar. Call it twenty-two a shift.",
+   "why": "No real-world currency named.",
+   "cause": null,
+   "screen_hash": "86e14e5a8ea04e28",
+   "row_hash": "c800d0d9acba0592",
+   "carried": false
+  },
+  {
+   "row": "C1022",
+   "screen": "cafe_hire.sign",
+   "verdict": "PASS",
+   "line": "Four-hour shifts, five an hour, plus whatever lands in the tip jar. Call it twenty-two a shift.",
+   "why": "No real-world currency named.",
+   "cause": null,
+   "screen_hash": "3df42923d5534123",
+   "row_hash": "c800d0d9acba0592",
+   "carried": false
+  },
+  {
    "row": "C1033",
    "screen": "*",
    "verdict": "N/A",
@@ -517,15 +814,37 @@
    "carried": true
   },
   {
+   "row": "C1033",
+   "screen": "cafe_hire.both",
+   "verdict": "N/A",
+   "line": "\u2014",
+   "why": "No spend, rise, short week or collection here.",
+   "cause": null,
+   "screen_hash": "86e14e5a8ea04e28",
+   "row_hash": "9daf075fd3c2e30e",
+   "carried": false
+  },
+  {
+   "row": "C1033",
+   "screen": "cafe_hire.sign",
+   "verdict": "N/A",
+   "line": "\u2014",
+   "why": "No spend, rise, short week or collection here.",
+   "cause": null,
+   "screen_hash": "3df42923d5534123",
+   "row_hash": "9daf075fd3c2e30e",
+   "carried": false
+  },
+  {
    "row": "C109",
    "screen": "cafe_first_shift.start",
    "verdict": "PASS",
-   "line": "Later, new girl.",
-   "why": "first scene with Chris: leak half N/A; ends on his promise of a later",
+   "line": "A guy in his twenties is at the machine, a pencil behind his ear. He looks you over like he's pricing you. \u2026 Later, new girl.",
+   "why": "First canvas: the promise it ends on is \"Later, new girl.\"; his leak shown before the brush.",
    "cause": null,
-   "screen_hash": "641173334639bd65",
+   "screen_hash": "148d1bc08acf279e",
    "row_hash": "61500f5337c3614a",
-   "carried": true
+   "carried": false
   },
   {
    "row": "C109",
@@ -542,23 +861,23 @@
    "row": "C109",
    "screen": "cafe_hire.both",
    "verdict": "PASS",
-   "line": "Your first one's a weekday afternoon. Chris'll show you the machine. Don't be late, rookie.",
-   "why": "Same promise.",
+   "line": "His eyes go to your mouth when you smile, then down to the till, fast. \u2026 Your first one's a weekday afternoon. Chris'll show you the machine. Don't be late, rookie.",
+   "why": "Leak on his body; promise: the first shift.",
    "cause": null,
-   "screen_hash": "6c687f2a2add5c32",
+   "screen_hash": "86e14e5a8ea04e28",
    "row_hash": "61500f5337c3614a",
-   "carried": true
+   "carried": false
   },
   {
    "row": "C109",
    "screen": "cafe_hire.sign",
    "verdict": "PASS",
-   "line": "Your first one's a weekday afternoon. Chris'll show you the machine. Don't be late, rookie.",
-   "why": "First scene: the promise is the first shift.",
+   "line": "He looks you over once, the way you'd check a used car. \u2026 Your first one's a weekday afternoon. Chris'll show you the machine. Don't be late, rookie.",
+   "why": "Leak: his appraising look; promise: the first shift.",
    "cause": null,
-   "screen_hash": "2c7079252f8ae4c5",
+   "screen_hash": "3df42923d5534123",
    "row_hash": "61500f5337c3614a",
-   "carried": true
+   "carried": false
   },
   {
    "row": "C115",
@@ -576,11 +895,33 @@
    "screen": "cafe_first_shift.start",
    "verdict": "PASS",
    "line": "So you're the new girl. Tom's giving you my afternoons.",
-   "why": "his own reason (she took his afternoons) and his move (the brush)",
+   "why": "Chris wants his afternoons back, and her; shown, then the brush.",
    "cause": null,
-   "screen_hash": "641173334639bd65",
+   "screen_hash": "148d1bc08acf279e",
    "row_hash": "4200139d2b8f5464",
-   "carried": true
+   "carried": false
+  },
+  {
+   "row": "C115",
+   "screen": "cafe_hire.both",
+   "verdict": "PASS",
+   "line": "Your first one's a weekday afternoon. Chris'll show you the machine. Don't be late, rookie.",
+   "why": "Tom wants staff (and her behind the counter); he hires her and sets the first shift.",
+   "cause": null,
+   "screen_hash": "86e14e5a8ea04e28",
+   "row_hash": "4200139d2b8f5464",
+   "carried": false
+  },
+  {
+   "row": "C115",
+   "screen": "cafe_hire.sign",
+   "verdict": "PASS",
+   "line": "Your first one's a weekday afternoon. Chris'll show you the machine. Don't be late, rookie.",
+   "why": "Tom wants staff (and her behind the counter); he hires her and sets the first shift.",
+   "cause": null,
+   "screen_hash": "3df42923d5534123",
+   "row_hash": "4200139d2b8f5464",
+   "carried": false
   },
   {
    "row": "C1173",
@@ -592,6 +933,28 @@
    "screen_hash": "f54fc2669ff97376",
    "row_hash": "541a03815a8d19c4",
    "carried": true
+  },
+  {
+   "row": "C1173",
+   "screen": "cafe_hire.both",
+   "verdict": "N/A",
+   "line": "\u2014",
+   "why": "The Caf\u00e9 has no clothing_rules and these buttons have no clothes gate.",
+   "cause": null,
+   "screen_hash": "86e14e5a8ea04e28",
+   "row_hash": "541a03815a8d19c4",
+   "carried": false
+  },
+  {
+   "row": "C1173",
+   "screen": "cafe_hire.sign",
+   "verdict": "N/A",
+   "line": "\u2014",
+   "why": "The Caf\u00e9 has no clothing_rules and these buttons have no clothes gate.",
+   "cause": null,
+   "screen_hash": "3df42923d5534123",
+   "row_hash": "541a03815a8d19c4",
+   "carried": false
   },
   {
    "row": "C1176",
@@ -609,11 +972,22 @@
    "screen": "cafe_first_shift.start",
    "verdict": "PASS",
    "line": "Reaching past you for a jug, his arm drags across your chest. He doesn't say sorry. He watches you notice.",
-   "why": "no clothing read on this sexual screen",
+   "why": "No clothing read on a sexual screen.",
    "cause": null,
-   "screen_hash": "641173334639bd65",
+   "screen_hash": "148d1bc08acf279e",
    "row_hash": "7632b28c693a43a4",
-   "carried": true
+   "carried": false
+  },
+  {
+   "row": "C1176",
+   "screen": "cafe_hire.both",
+   "verdict": "PASS",
+   "line": "Reaching past you for a jug, his arm drags across your chest. He doesn't say sorry. He watches you notice.",
+   "why": "No clothing read on a sexual screen.",
+   "cause": null,
+   "screen_hash": "86e14e5a8ea04e28",
+   "row_hash": "7632b28c693a43a4",
+   "carried": false
   },
   {
    "row": "C1184",
@@ -627,6 +1001,28 @@
    "carried": true
   },
   {
+   "row": "C1184",
+   "screen": "cafe_hire.both",
+   "verdict": "N/A",
+   "line": "\u2014",
+   "why": "The Caf\u00e9 has no clothing_rules and these buttons have no clothes gate.",
+   "cause": null,
+   "screen_hash": "86e14e5a8ea04e28",
+   "row_hash": "71c57d9a2f8fdca7",
+   "carried": false
+  },
+  {
+   "row": "C1184",
+   "screen": "cafe_hire.sign",
+   "verdict": "N/A",
+   "line": "\u2014",
+   "why": "The Caf\u00e9 has no clothing_rules and these buttons have no clothes gate.",
+   "cause": null,
+   "screen_hash": "3df42923d5534123",
+   "row_hash": "71c57d9a2f8fdca7",
+   "carried": false
+  },
+  {
    "row": "C1185",
    "screen": "*",
    "verdict": "N/A",
@@ -636,6 +1032,28 @@
    "screen_hash": "f54fc2669ff97376",
    "row_hash": "db808998ed69c649",
    "carried": true
+  },
+  {
+   "row": "C1185",
+   "screen": "cafe_hire.both",
+   "verdict": "N/A",
+   "line": "\u2014",
+   "why": "The Caf\u00e9 has no clothing_rules and these buttons have no clothes gate.",
+   "cause": null,
+   "screen_hash": "86e14e5a8ea04e28",
+   "row_hash": "db808998ed69c649",
+   "carried": false
+  },
+  {
+   "row": "C1185",
+   "screen": "cafe_hire.sign",
+   "verdict": "N/A",
+   "line": "\u2014",
+   "why": "The Caf\u00e9 has no clothing_rules and these buttons have no clothes gate.",
+   "cause": null,
+   "screen_hash": "3df42923d5534123",
+   "row_hash": "db808998ed69c649",
+   "carried": false
   },
   {
    "row": "C1189",
@@ -652,12 +1070,34 @@
    "row": "C1189",
    "screen": "cafe_first_shift.start",
    "verdict": "N/A",
-   "line": "-",
-   "why": "no clothing state on this screen for anyone to notice",
+   "line": "\u2014",
+   "why": "No clothing state is read at the Caf\u00e9 in this piece.",
    "cause": null,
-   "screen_hash": "641173334639bd65",
+   "screen_hash": "148d1bc08acf279e",
    "row_hash": "2afadc6bbe1996bd",
-   "carried": true
+   "carried": false
+  },
+  {
+   "row": "C1189",
+   "screen": "cafe_hire.both",
+   "verdict": "N/A",
+   "line": "\u2014",
+   "why": "No clothing state is read at the Caf\u00e9 in this piece.",
+   "cause": null,
+   "screen_hash": "86e14e5a8ea04e28",
+   "row_hash": "2afadc6bbe1996bd",
+   "carried": false
+  },
+  {
+   "row": "C1189",
+   "screen": "cafe_hire.sign",
+   "verdict": "N/A",
+   "line": "\u2014",
+   "why": "No clothing state is read at the Caf\u00e9 in this piece.",
+   "cause": null,
+   "screen_hash": "3df42923d5534123",
+   "row_hash": "2afadc6bbe1996bd",
+   "carried": false
   },
   {
    "row": "C1198",
@@ -669,6 +1109,28 @@
    "screen_hash": "f54fc2669ff97376",
    "row_hash": "48eae9ceae06ae00",
    "carried": true
+  },
+  {
+   "row": "C1198",
+   "screen": "cafe_hire.both",
+   "verdict": "N/A",
+   "line": "\u2014",
+   "why": "The Caf\u00e9 has no clothing_rules and these buttons have no clothes gate.",
+   "cause": null,
+   "screen_hash": "86e14e5a8ea04e28",
+   "row_hash": "48eae9ceae06ae00",
+   "carried": false
+  },
+  {
+   "row": "C1198",
+   "screen": "cafe_hire.sign",
+   "verdict": "N/A",
+   "line": "\u2014",
+   "why": "The Caf\u00e9 has no clothing_rules and these buttons have no clothes gate.",
+   "cause": null,
+   "screen_hash": "3df42923d5534123",
+   "row_hash": "48eae9ceae06ae00",
+   "carried": false
   },
   {
    "row": "C120",
@@ -685,12 +1147,34 @@
    "row": "C120",
    "screen": "cafe_first_shift.start",
    "verdict": "PASS",
-   "line": "Tom, from the till:",
-   "why": "adds contact and a witness over cafe_hire's look",
+   "line": "Chris. Customers.",
+   "why": "New risk and a witness: Tom at the till.",
    "cause": null,
-   "screen_hash": "641173334639bd65",
+   "screen_hash": "148d1bc08acf279e",
    "row_hash": "35e706c759372357",
-   "carried": true
+   "carried": false
+  },
+  {
+   "row": "C120",
+   "screen": "cafe_hire.both",
+   "verdict": "PASS",
+   "line": "He peels the sign off the window and drops it under the counter. Your face goes warm. You've got a job.",
+   "why": "A new kind of yes: the job.",
+   "cause": null,
+   "screen_hash": "86e14e5a8ea04e28",
+   "row_hash": "35e706c759372357",
+   "carried": false
+  },
+  {
+   "row": "C120",
+   "screen": "cafe_hire.sign",
+   "verdict": "PASS",
+   "line": "He peels the sign off the window and drops it under the counter. Your face goes warm. You've got a job.",
+   "why": "A new kind of yes: the job.",
+   "cause": null,
+   "screen_hash": "3df42923d5534123",
+   "row_hash": "35e706c759372357",
+   "carried": false
   },
   {
    "row": "C1200",
@@ -704,6 +1188,28 @@
    "carried": true
   },
   {
+   "row": "C1200",
+   "screen": "cafe_hire.both",
+   "verdict": "PASS",
+   "line": "The caf\u00e9 across from campus: the coffee machine hissing, a long counter, a tip jar by the till. A sign on the door says it's open from 7am to 9pm.",
+   "why": "No place clothes asked for at the Caf\u00e9.",
+   "cause": null,
+   "screen_hash": "86e14e5a8ea04e28",
+   "row_hash": "65e6616cd17c7eb3",
+   "carried": false
+  },
+  {
+   "row": "C1200",
+   "screen": "cafe_hire.sign",
+   "verdict": "PASS",
+   "line": "The caf\u00e9 across from campus: the coffee machine hissing, a long counter, a tip jar by the till. A sign on the door says it's open from 7am to 9pm.",
+   "why": "No place clothes asked for at the Caf\u00e9.",
+   "cause": null,
+   "screen_hash": "3df42923d5534123",
+   "row_hash": "65e6616cd17c7eb3",
+   "carried": false
+  },
+  {
    "row": "C1220",
    "screen": "*",
    "verdict": "N/A",
@@ -715,6 +1221,28 @@
    "carried": true
   },
   {
+   "row": "C1220",
+   "screen": "cafe_hire.both",
+   "verdict": "N/A",
+   "line": "\u2014",
+   "why": "The Caf\u00e9 has no clothing_rules and these buttons have no clothes gate.",
+   "cause": null,
+   "screen_hash": "86e14e5a8ea04e28",
+   "row_hash": "18d85534582def9d",
+   "carried": false
+  },
+  {
+   "row": "C1220",
+   "screen": "cafe_hire.sign",
+   "verdict": "N/A",
+   "line": "\u2014",
+   "why": "The Caf\u00e9 has no clothing_rules and these buttons have no clothes gate.",
+   "cause": null,
+   "screen_hash": "3df42923d5534123",
+   "row_hash": "18d85534582def9d",
+   "carried": false
+  },
+  {
    "row": "C1221",
    "screen": "*",
    "verdict": "N/A",
@@ -724,6 +1252,28 @@
    "screen_hash": "f54fc2669ff97376",
    "row_hash": "3835fed23cc316c7",
    "carried": true
+  },
+  {
+   "row": "C1221",
+   "screen": "cafe_hire.both",
+   "verdict": "N/A",
+   "line": "\u2014",
+   "why": "The Caf\u00e9 has no clothing_rules and these buttons have no clothes gate.",
+   "cause": null,
+   "screen_hash": "86e14e5a8ea04e28",
+   "row_hash": "3835fed23cc316c7",
+   "carried": false
+  },
+  {
+   "row": "C1221",
+   "screen": "cafe_hire.sign",
+   "verdict": "N/A",
+   "line": "\u2014",
+   "why": "The Caf\u00e9 has no clothing_rules and these buttons have no clothes gate.",
+   "cause": null,
+   "screen_hash": "3df42923d5534123",
+   "row_hash": "3835fed23cc316c7",
+   "carried": false
   },
   {
    "row": "C1234",
@@ -740,23 +1290,23 @@
    "row": "C1234",
    "screen": "cafe_first_shift.start",
    "verdict": "PASS",
-   "line": "He watches you notice. [picture]",
-   "why": "the spot sits right after the brush line it shows",
+   "line": "Seen from behind the counter: a woman of 18 at a caf\u00e9 espresso machine, steam rising, her face flushed. No man in frame. (pool_dir look/chris_wand_t3, pool 1)",
+   "why": "Sits right after \"He watches you notice.\", the beat being read.",
    "cause": null,
-   "screen_hash": "641173334639bd65",
+   "screen_hash": "148d1bc08acf279e",
    "row_hash": "1b2a2d5f05b10331",
-   "carried": true
+   "carried": false
   },
   {
    "row": "C1238",
    "screen": "cafe_first_shift.start",
    "verdict": "PASS",
-   "line": "Seen from behind the counter: a woman of 18 at a caf\u00e9 espresso machine, steam rising, her face flushed. No man in frame.",
-   "why": "once-seen; his view of her flushed at the machine matches 'He watches you notice' and 'Your face burns'; no garment named to clash",
+   "line": "Seen from behind the counter: a woman of 18 at a caf\u00e9 espresso machine, steam rising, her face flushed. No man in frame. (pool_dir look/chris_wand_t3, pool 1)",
+   "why": "Plays once; her at the machine, flushed, matches the jug/brush line and \"Your face burns.\"",
    "cause": null,
-   "screen_hash": "641173334639bd65",
+   "screen_hash": "148d1bc08acf279e",
    "row_hash": "6fd430204e984124",
-   "carried": true
+   "carried": false
   },
   {
    "row": "C1238",
@@ -783,13 +1333,13 @@
   {
    "row": "C1249",
    "screen": "cafe_first_shift.start",
-   "verdict": "PASS",
-   "line": "Seen from behind the counter: a woman of 18 at a caf\u00e9 espresso machine, steam rising, her face flushed. No man in frame.",
-   "why": "one picture on a person screen",
+   "verdict": "N/A",
+   "line": "\u2014",
+   "why": "Not a room screen.",
    "cause": null,
-   "screen_hash": "641173334639bd65",
+   "screen_hash": "148d1bc08acf279e",
    "row_hash": "a843f9b57e43a020",
-   "carried": true
+   "carried": false
   },
   {
    "row": "C1250",
@@ -801,6 +1351,28 @@
    "screen_hash": "f54fc2669ff97376",
    "row_hash": "fde578d75b0d3620",
    "carried": true
+  },
+  {
+   "row": "C1250",
+   "screen": "cafe_hire.both",
+   "verdict": "PASS",
+   "line": "The caf\u00e9 across from campus: the coffee machine hissing, a long counter, a tip jar by the till. A sign on the door says it's open from 7am to 9pm.",
+   "why": "The room card stays words-bare; the place picture is the location row's one file of her.",
+   "cause": null,
+   "screen_hash": "86e14e5a8ea04e28",
+   "row_hash": "fde578d75b0d3620",
+   "carried": false
+  },
+  {
+   "row": "C1250",
+   "screen": "cafe_hire.sign",
+   "verdict": "PASS",
+   "line": "The caf\u00e9 across from campus: the coffee machine hissing, a long counter, a tip jar by the till. A sign on the door says it's open from 7am to 9pm.",
+   "why": "The room card stays words-bare; the place picture is the location row's one file of her.",
+   "cause": null,
+   "screen_hash": "3df42923d5534123",
+   "row_hash": "fde578d75b0d3620",
+   "carried": false
   },
   {
    "row": "C1255",
@@ -817,12 +1389,12 @@
    "row": "C1255",
    "screen": "cafe_first_shift.start",
    "verdict": "PASS",
-   "line": "pool_dir = look/chris_wand_t3",
-   "why": "used by this one block only",
+   "line": "Seen from behind the counter: a woman of 18 at a caf\u00e9 espresso machine, steam rising, her face flushed. No man in frame. (pool_dir look/chris_wand_t3, pool 1)",
+   "why": "look/chris_wand_t3 is used by this block only.",
    "cause": null,
-   "screen_hash": "641173334639bd65",
+   "screen_hash": "148d1bc08acf279e",
    "row_hash": "803b4c46f1e9d7c7",
-   "carried": true
+   "carried": false
   },
   {
    "row": "C1261",
@@ -839,12 +1411,12 @@
    "row": "C1261",
    "screen": "cafe_first_shift.start",
    "verdict": "PASS",
-   "line": "Reaching past you for a jug, his arm drags across your chest. He doesn't say sorry. He watches you notice.",
-   "why": "the spot is on the brush, where the player wants to look",
+   "line": "Seen from behind the counter: a woman of 18 at a caf\u00e9 espresso machine, steam rising, her face flushed. No man in frame. (pool_dir look/chris_wand_t3, pool 1)",
+   "why": "On the payoff, where the player wants to look.",
    "cause": null,
-   "screen_hash": "641173334639bd65",
+   "screen_hash": "148d1bc08acf279e",
    "row_hash": "536e26b5fdc76194",
-   "carried": true
+   "carried": false
   },
   {
    "row": "C1265",
@@ -861,12 +1433,12 @@
    "row": "C1265",
    "screen": "cafe_first_shift.start",
    "verdict": "PASS",
-   "line": "Reaching past you for a jug, his arm drags across your chest. He doesn't say sorry. He watches you notice.",
-   "why": "not a chore, menu, notice or door",
+   "line": "Seen from behind the counter: a woman of 18 at a caf\u00e9 espresso machine, steam rising, her face flushed. No man in frame. (pool_dir look/chris_wand_t3, pool 1)",
+   "why": "Not a chore, one-liner, notice, menu or door.",
    "cause": null,
-   "screen_hash": "641173334639bd65",
+   "screen_hash": "148d1bc08acf279e",
    "row_hash": "aa7b2f3c1d2b81da",
-   "carried": true
+   "carried": false
   },
   {
    "row": "C1267",
@@ -883,12 +1455,12 @@
    "row": "C1267",
    "screen": "cafe_first_shift.start",
    "verdict": "PASS",
-   "line": "Seen from behind the counter: a woman of 18 at a caf\u00e9 espresso machine, steam rising, her face flushed. No man in frame.",
-   "why": "her flushed face as he sees it is what the words don't show",
+   "line": "Seen from behind the counter: a woman of 18 at a caf\u00e9 espresso machine, steam rising, her face flushed. No man in frame. (pool_dir look/chris_wand_t3, pool 1)",
+   "why": "Shows her flushed at the machine, which the words don't.",
    "cause": null,
-   "screen_hash": "641173334639bd65",
+   "screen_hash": "148d1bc08acf279e",
    "row_hash": "f0db81b801577bf2",
-   "carried": true
+   "carried": false
   },
   {
    "row": "C1274",
@@ -905,12 +1477,12 @@
    "row": "C1274",
    "screen": "cafe_first_shift.start",
    "verdict": "PASS",
-   "line": "look/chris_wand_t3",
-   "why": "_t3, a look",
+   "line": "Seen from behind the counter: a woman of 18 at a caf\u00e9 espresso machine, steam rising, her face flushed. No man in frame. (pool_dir look/chris_wand_t3, pool 1)",
+   "why": "_t3, a look; a gif is allowed.",
    "cause": null,
-   "screen_hash": "641173334639bd65",
+   "screen_hash": "148d1bc08acf279e",
    "row_hash": "f44d59a3bd6bb921",
-   "carried": true
+   "carried": false
   },
   {
    "row": "C1275",
@@ -927,12 +1499,12 @@
    "row": "C1275",
    "screen": "cafe_first_shift.start",
    "verdict": "PASS",
-   "line": "woman 18 cafe espresso machine steam wand gif",
-   "why": "something moves (steam, her flush): gif, with 'gif' in the searches",
+   "line": "search: \"woman 18 cafe espresso machine steam wand gif\"",
+   "why": "Something moves (steam): gif in the search words.",
    "cause": null,
-   "screen_hash": "641173334639bd65",
+   "screen_hash": "148d1bc08acf279e",
    "row_hash": "ef82ef3fdf215191",
-   "carried": true
+   "carried": false
   },
   {
    "row": "C1277",
@@ -949,23 +1521,23 @@
    "row": "C1277",
    "screen": "cafe_first_shift.start",
    "verdict": "PASS",
-   "line": "a caf\u00e9 espresso machine ... behind the counter",
-   "why": "names the caf\u00e9",
+   "line": "Seen from behind the counter: a woman of 18 at a caf\u00e9 espresso machine, steam rising, her face flushed. No man in frame. (pool_dir look/chris_wand_t3, pool 1)",
+   "why": "Names the caf\u00e9 and the counter.",
    "cause": null,
-   "screen_hash": "641173334639bd65",
+   "screen_hash": "148d1bc08acf279e",
    "row_hash": "ee51917c5fb43c13",
-   "carried": true
+   "carried": false
   },
   {
    "row": "C1278",
    "screen": "cafe_first_shift.start",
    "verdict": "PASS",
-   "line": "a woman of 18",
-   "why": "gives her age",
+   "line": "Seen from behind the counter: a woman of 18 at a caf\u00e9 espresso machine, steam rising, her face flushed. No man in frame. (pool_dir look/chris_wand_t3, pool 1)",
+   "why": "Gives her age, 18.",
    "cause": null,
-   "screen_hash": "641173334639bd65",
+   "screen_hash": "148d1bc08acf279e",
    "row_hash": "4d23ccfdc4e41cd9",
-   "carried": true
+   "carried": false
   },
   {
    "row": "C1278",
@@ -993,12 +1565,12 @@
    "row": "C1279",
    "screen": "cafe_first_shift.start",
    "verdict": "N/A",
-   "line": "-",
-   "why": "not a mirror picture",
+   "line": "\u2014",
+   "why": "No mirror.",
    "cause": null,
-   "screen_hash": "641173334639bd65",
+   "screen_hash": "148d1bc08acf279e",
    "row_hash": "534032f000706830",
-   "carried": true
+   "carried": false
   },
   {
    "row": "C1280",
@@ -1015,23 +1587,23 @@
    "row": "C1280",
    "screen": "cafe_first_shift.start",
    "verdict": "PASS",
-   "line": "pool = 1",
-   "why": "_t3 look on a once-played scene: 1",
+   "line": "Seen from behind the counter: a woman of 18 at a caf\u00e9 espresso machine, steam rising, her face flushed. No man in frame. (pool_dir look/chris_wand_t3, pool 1)",
+   "why": "Once-seen _t3 look: pool 1.",
    "cause": null,
-   "screen_hash": "641173334639bd65",
+   "screen_hash": "148d1bc08acf279e",
    "row_hash": "a709f257162373b0",
-   "carried": true
+   "carried": false
   },
   {
    "row": "C1281",
    "screen": "cafe_first_shift.start",
    "verdict": "PASS",
-   "line": "Seen from behind the counter ... No man in frame.",
-   "why": "what the looker sees, no man in frame",
+   "line": "Seen from behind the counter: a woman of 18 at a caf\u00e9 espresso machine, steam rising, her face flushed. No man in frame. (pool_dir look/chris_wand_t3, pool 1)",
+   "why": "Seen from behind the counter, no man in frame.",
    "cause": null,
-   "screen_hash": "641173334639bd65",
+   "screen_hash": "148d1bc08acf279e",
    "row_hash": "4e5683077291be1f",
-   "carried": true
+   "carried": false
   },
   {
    "row": "C1281",
@@ -1059,12 +1631,12 @@
    "row": "C1284",
    "screen": "cafe_first_shift.start",
    "verdict": "N/A",
-   "line": "-",
-   "why": "not a walk-in",
+   "line": "\u2014",
+   "why": "Not a walk-in.",
    "cause": null,
-   "screen_hash": "641173334639bd65",
+   "screen_hash": "148d1bc08acf279e",
    "row_hash": "c3025295db7bb1d6",
-   "carried": true
+   "carried": false
   },
   {
    "row": "C1303",
@@ -1081,12 +1653,34 @@
    "row": "C1303",
    "screen": "cafe_first_shift.start",
    "verdict": "PASS",
-   "line": "costs = [{ trait = \"energy\", value = 15 }]",
-   "why": "energy is read by the button's cost",
+   "line": "Work your first shift (4 hours, 15 energy)",
+   "why": "Energy is read by the trigger's cost.",
    "cause": null,
-   "screen_hash": "641173334639bd65",
+   "screen_hash": "148d1bc08acf279e",
    "row_hash": "5b031a6b82899cfd",
-   "carried": true
+   "carried": false
+  },
+  {
+   "row": "C1303",
+   "screen": "cafe_hire.both",
+   "verdict": "N/A",
+   "line": "\u2014",
+   "why": "No need is spent or refilled on this screen, and the row is not a paced repeat.",
+   "cause": null,
+   "screen_hash": "86e14e5a8ea04e28",
+   "row_hash": "5b031a6b82899cfd",
+   "carried": false
+  },
+  {
+   "row": "C1303",
+   "screen": "cafe_hire.sign",
+   "verdict": "N/A",
+   "line": "\u2014",
+   "why": "No need is spent or refilled on this screen, and the row is not a paced repeat.",
+   "cause": null,
+   "screen_hash": "3df42923d5534123",
+   "row_hash": "5b031a6b82899cfd",
+   "carried": false
   },
   {
    "row": "C1313",
@@ -1103,12 +1697,34 @@
    "row": "C1313",
    "screen": "cafe_first_shift.start",
    "verdict": "N/A",
-   "line": "-",
-   "why": "the shift is not a refill",
+   "line": "\u2014",
+   "why": "Not a refill.",
    "cause": null,
-   "screen_hash": "641173334639bd65",
+   "screen_hash": "148d1bc08acf279e",
    "row_hash": "c26c2fb5c1443dab",
-   "carried": true
+   "carried": false
+  },
+  {
+   "row": "C1313",
+   "screen": "cafe_hire.both",
+   "verdict": "N/A",
+   "line": "\u2014",
+   "why": "No need is spent or refilled on this screen, and the row is not a paced repeat.",
+   "cause": null,
+   "screen_hash": "86e14e5a8ea04e28",
+   "row_hash": "c26c2fb5c1443dab",
+   "carried": false
+  },
+  {
+   "row": "C1313",
+   "screen": "cafe_hire.sign",
+   "verdict": "N/A",
+   "line": "\u2014",
+   "why": "No need is spent or refilled on this screen, and the row is not a paced repeat.",
+   "cause": null,
+   "screen_hash": "3df42923d5534123",
+   "row_hash": "c26c2fb5c1443dab",
+   "carried": false
   },
   {
    "row": "C1337",
@@ -1126,11 +1742,33 @@
    "screen": "cafe_first_shift.start",
    "verdict": "PASS",
    "line": "Work your first shift (4 hours, 15 energy)",
-   "why": "energy spent here and read by the cost; refilled by coffee, snack, lunch (PLAN sinks)",
+   "why": "Energy is spent and read (greyed under 15).",
    "cause": null,
-   "screen_hash": "641173334639bd65",
+   "screen_hash": "148d1bc08acf279e",
    "row_hash": "9a1ab783f9ab6731",
-   "carried": true
+   "carried": false
+  },
+  {
+   "row": "C1337",
+   "screen": "cafe_hire.both",
+   "verdict": "N/A",
+   "line": "\u2014",
+   "why": "No need is spent or refilled on this screen, and the row is not a paced repeat.",
+   "cause": null,
+   "screen_hash": "86e14e5a8ea04e28",
+   "row_hash": "9a1ab783f9ab6731",
+   "carried": false
+  },
+  {
+   "row": "C1337",
+   "screen": "cafe_hire.sign",
+   "verdict": "N/A",
+   "line": "\u2014",
+   "why": "No need is spent or refilled on this screen, and the row is not a paced repeat.",
+   "cause": null,
+   "screen_hash": "3df42923d5534123",
+   "row_hash": "9a1ab783f9ab6731",
+   "carried": false
   },
   {
    "row": "C1340",
@@ -1147,12 +1785,34 @@
    "row": "C1340",
    "screen": "cafe_first_shift.start",
    "verdict": "N/A",
-   "line": "-",
-   "why": "Chris and Tom are not housemates",
+   "line": "\u2014",
+   "why": "Tom and Chris aren't housemates.",
    "cause": null,
-   "screen_hash": "641173334639bd65",
+   "screen_hash": "148d1bc08acf279e",
    "row_hash": "b76a6583ae88c60f",
-   "carried": true
+   "carried": false
+  },
+  {
+   "row": "C1340",
+   "screen": "cafe_hire.both",
+   "verdict": "N/A",
+   "line": "\u2014",
+   "why": "Tom and Chris aren't housemates.",
+   "cause": null,
+   "screen_hash": "86e14e5a8ea04e28",
+   "row_hash": "b76a6583ae88c60f",
+   "carried": false
+  },
+  {
+   "row": "C1340",
+   "screen": "cafe_hire.sign",
+   "verdict": "N/A",
+   "line": "\u2014",
+   "why": "Tom and Chris aren't housemates.",
+   "cause": null,
+   "screen_hash": "3df42923d5534123",
+   "row_hash": "b76a6583ae88c60f",
+   "carried": false
   },
   {
    "row": "C1342",
@@ -1169,12 +1829,34 @@
    "row": "C1342",
    "screen": "cafe_first_shift.start",
    "verdict": "PASS",
-   "line": "15 energy",
-   "why": "energy refills at the caf\u00e9, shop, cafeteria (PLAN sinks table)",
+   "line": "Work your first shift (4 hours, 15 energy)",
+   "why": "Energy refills elsewhere (sleep, coffee); this only spends it.",
    "cause": null,
-   "screen_hash": "641173334639bd65",
+   "screen_hash": "148d1bc08acf279e",
    "row_hash": "59e008f8733a29e2",
-   "carried": true
+   "carried": false
+  },
+  {
+   "row": "C1342",
+   "screen": "cafe_hire.both",
+   "verdict": "N/A",
+   "line": "\u2014",
+   "why": "No need is spent or refilled on this screen, and the row is not a paced repeat.",
+   "cause": null,
+   "screen_hash": "86e14e5a8ea04e28",
+   "row_hash": "59e008f8733a29e2",
+   "carried": false
+  },
+  {
+   "row": "C1342",
+   "screen": "cafe_hire.sign",
+   "verdict": "N/A",
+   "line": "\u2014",
+   "why": "No need is spent or refilled on this screen, and the row is not a paced repeat.",
+   "cause": null,
+   "screen_hash": "3df42923d5534123",
+   "row_hash": "59e008f8733a29e2",
+   "carried": false
   },
   {
    "row": "C1345",
@@ -1191,12 +1873,34 @@
    "row": "C1345",
    "screen": "cafe_first_shift.start",
    "verdict": "PASS",
-   "line": "costs 15 energy; cafe_first_shift_done",
-   "why": "brake on the way in: a cost and a done flag",
+   "line": "Work your first shift (4 hours, 15 energy)",
+   "why": "Energy cost and the done flag on the trigger.",
    "cause": null,
-   "screen_hash": "641173334639bd65",
+   "screen_hash": "148d1bc08acf279e",
    "row_hash": "823e315ef0b56f94",
-   "carried": true
+   "carried": false
+  },
+  {
+   "row": "C1345",
+   "screen": "cafe_hire.both",
+   "verdict": "PASS",
+   "line": "Done (0 min; sets met_tom, cafe_hired)",
+   "why": "The brake is on the way in: hours, the parked flag, and cafe_hired.",
+   "cause": null,
+   "screen_hash": "86e14e5a8ea04e28",
+   "row_hash": "823e315ef0b56f94",
+   "carried": false
+  },
+  {
+   "row": "C1345",
+   "screen": "cafe_hire.sign",
+   "verdict": "PASS",
+   "line": "Done (0 min; sets met_tom, cafe_hired)",
+   "why": "The brake is on the way in: hours, the parked flag, and cafe_hired.",
+   "cause": null,
+   "screen_hash": "3df42923d5534123",
+   "row_hash": "823e315ef0b56f94",
+   "carried": false
   },
   {
    "row": "C1360",
@@ -1213,12 +1917,34 @@
    "row": "C1360",
    "screen": "cafe_first_shift.start",
    "verdict": "PASS",
-   "line": "Work your first shift (4 hours, 15 energy)",
-   "why": "show_when_blocked greys it with the action as label; the engine prints the energy need (played, NOTES 214)",
+   "line": "Work your first shift (4 hours, 15 energy) \u2014 it starts at 2pm on a weekday.",
+   "why": "Greyed by clock with reason, by energy with (15 Energy).",
    "cause": null,
-   "screen_hash": "641173334639bd65",
+   "screen_hash": "148d1bc08acf279e",
    "row_hash": "8c9dc844365f81a5",
-   "carried": true
+   "carried": false
+  },
+  {
+   "row": "C1360",
+   "screen": "cafe_hire.both",
+   "verdict": "PASS",
+   "line": "Ask about the Help Wanted sign (5 min) \u2014 the manager's in from 10am, Monday to Saturday.",
+   "why": "Greyed with its action and reason when the clock shuts it.",
+   "cause": null,
+   "screen_hash": "86e14e5a8ea04e28",
+   "row_hash": "8c9dc844365f81a5",
+   "carried": false
+  },
+  {
+   "row": "C1360",
+   "screen": "cafe_hire.sign",
+   "verdict": "PASS",
+   "line": "Ask about the Help Wanted sign (5 min) \u2014 the manager's in from 10am, Monday to Saturday.",
+   "why": "Greyed with its action and reason when the clock shuts it.",
+   "cause": null,
+   "screen_hash": "3df42923d5534123",
+   "row_hash": "8c9dc844365f81a5",
+   "carried": false
   },
   {
    "row": "C1421",
@@ -1236,11 +1962,33 @@
    "screen": "cafe_first_shift.start",
    "verdict": "PASS",
    "line": "it starts at 2pm on a weekday.",
-   "why": "the requirement is told when shut",
+   "why": "The requirement is told; energy prints its need.",
    "cause": null,
-   "screen_hash": "641173334639bd65",
+   "screen_hash": "148d1bc08acf279e",
    "row_hash": "ef34ee4a51e65d00",
-   "carried": true
+   "carried": false
+  },
+  {
+   "row": "C1421",
+   "screen": "cafe_hire.both",
+   "verdict": "PASS",
+   "line": "the manager's in from 10am, Monday to Saturday.",
+   "why": "The requirement is told.",
+   "cause": null,
+   "screen_hash": "86e14e5a8ea04e28",
+   "row_hash": "ef34ee4a51e65d00",
+   "carried": false
+  },
+  {
+   "row": "C1421",
+   "screen": "cafe_hire.sign",
+   "verdict": "PASS",
+   "line": "the manager's in from 10am, Monday to Saturday.",
+   "why": "The requirement is told.",
+   "cause": null,
+   "screen_hash": "3df42923d5534123",
+   "row_hash": "ef34ee4a51e65d00",
+   "carried": false
   },
   {
    "row": "C1423",
@@ -1257,12 +2005,34 @@
    "row": "C1423",
    "screen": "cafe_first_shift.start",
    "verdict": "PASS",
-   "line": "15 energy, 4 hours",
-   "why": "the gate costs energy and time",
+   "line": "Work your first shift (4 hours, 15 energy)",
+   "why": "Costs 4 hours and 15 energy.",
    "cause": null,
-   "screen_hash": "641173334639bd65",
+   "screen_hash": "148d1bc08acf279e",
    "row_hash": "4b77685af58632a5",
-   "carried": true
+   "carried": false
+  },
+  {
+   "row": "C1423",
+   "screen": "cafe_hire.both",
+   "verdict": "PASS",
+   "line": "Ask about the Help Wanted sign (5 min)",
+   "why": "The ask costs time, in Tom's hours, and plays once.",
+   "cause": null,
+   "screen_hash": "86e14e5a8ea04e28",
+   "row_hash": "4b77685af58632a5",
+   "carried": false
+  },
+  {
+   "row": "C1423",
+   "screen": "cafe_hire.sign",
+   "verdict": "PASS",
+   "line": "Ask about the Help Wanted sign (5 min)",
+   "why": "The ask costs time, in Tom's hours, and plays once.",
+   "cause": null,
+   "screen_hash": "3df42923d5534123",
+   "row_hash": "4b77685af58632a5",
+   "carried": false
   },
   {
    "row": "C1425",
@@ -1279,12 +2049,34 @@
    "row": "C1425",
    "screen": "cafe_first_shift.start",
    "verdict": "PASS",
-   "line": "weekday 14:00\u201315:00 \u00b7 240 min \u00b7 15 energy \u00b7 done flag",
-   "why": "spacing, time, resource and a cap together",
+   "line": "Work your first shift (4 hours, 15 energy)",
+   "why": "Plays once; window, 4-hour time cost and 15 energy pace it.",
    "cause": null,
-   "screen_hash": "641173334639bd65",
+   "screen_hash": "148d1bc08acf279e",
    "row_hash": "34826508394ba8c0",
-   "carried": true
+   "carried": false
+  },
+  {
+   "row": "C1425",
+   "screen": "cafe_hire.both",
+   "verdict": "N/A",
+   "line": "\u2014",
+   "why": "No need is spent or refilled on this screen, and the row is not a paced repeat.",
+   "cause": null,
+   "screen_hash": "86e14e5a8ea04e28",
+   "row_hash": "34826508394ba8c0",
+   "carried": false
+  },
+  {
+   "row": "C1425",
+   "screen": "cafe_hire.sign",
+   "verdict": "N/A",
+   "line": "\u2014",
+   "why": "No need is spent or refilled on this screen, and the row is not a paced repeat.",
+   "cause": null,
+   "screen_hash": "3df42923d5534123",
+   "row_hash": "34826508394ba8c0",
+   "carried": false
   },
   {
    "row": "C1427",
@@ -1300,13 +2092,35 @@
   {
    "row": "C1427",
    "screen": "cafe_first_shift.start",
-   "verdict": "PASS",
-   "line": "time_progression_minutes = 240",
-   "why": "four hours out of her weekday afternoon, against office hours and the library (PLAN \u00a79)",
+   "verdict": "N/A",
+   "line": "\u2014",
+   "why": "Plays once; no repeat to size against its window.",
    "cause": null,
-   "screen_hash": "641173334639bd65",
+   "screen_hash": "148d1bc08acf279e",
    "row_hash": "68a94621cd19c13c",
-   "carried": true
+   "carried": false
+  },
+  {
+   "row": "C1427",
+   "screen": "cafe_hire.both",
+   "verdict": "N/A",
+   "line": "\u2014",
+   "why": "No need is spent or refilled on this screen, and the row is not a paced repeat.",
+   "cause": null,
+   "screen_hash": "86e14e5a8ea04e28",
+   "row_hash": "68a94621cd19c13c",
+   "carried": false
+  },
+  {
+   "row": "C1427",
+   "screen": "cafe_hire.sign",
+   "verdict": "N/A",
+   "line": "\u2014",
+   "why": "No need is spent or refilled on this screen, and the row is not a paced repeat.",
+   "cause": null,
+   "screen_hash": "3df42923d5534123",
+   "row_hash": "68a94621cd19c13c",
+   "carried": false
   },
   {
    "row": "C1428",
@@ -1323,12 +2137,34 @@
    "row": "C1428",
    "screen": "cafe_first_shift.start",
    "verdict": "PASS",
-   "line": "costs = 15 energy",
-   "why": "energy locks the work, not a person",
+   "line": "Work your first shift (4 hours, 15 energy)",
+   "why": "Energy throttles work, not a person.",
    "cause": null,
-   "screen_hash": "641173334639bd65",
+   "screen_hash": "148d1bc08acf279e",
    "row_hash": "cf8af3e56f435107",
-   "carried": true
+   "carried": false
+  },
+  {
+   "row": "C1428",
+   "screen": "cafe_hire.both",
+   "verdict": "PASS",
+   "line": "Ask about the Help Wanted sign (5 min)",
+   "why": "No energy lock on Tom.",
+   "cause": null,
+   "screen_hash": "86e14e5a8ea04e28",
+   "row_hash": "cf8af3e56f435107",
+   "carried": false
+  },
+  {
+   "row": "C1428",
+   "screen": "cafe_hire.sign",
+   "verdict": "PASS",
+   "line": "Ask about the Help Wanted sign (5 min)",
+   "why": "No energy lock on Tom.",
+   "cause": null,
+   "screen_hash": "3df42923d5534123",
+   "row_hash": "cf8af3e56f435107",
+   "carried": false
   },
   {
    "row": "C1431",
@@ -1345,12 +2181,34 @@
    "row": "C1431",
    "screen": "cafe_first_shift.start",
    "verdict": "PASS",
-   "line": "15 energy",
-   "why": "under 15 the shift greys (card; NOTES 214)",
+   "line": "Work your first shift (4 hours, 15 energy)",
+   "why": "Energy falls by this cost, and under 15 the row is shut (greyed).",
    "cause": null,
-   "screen_hash": "641173334639bd65",
+   "screen_hash": "148d1bc08acf279e",
    "row_hash": "aca442d29c1c8146",
-   "carried": true
+   "carried": false
+  },
+  {
+   "row": "C1431",
+   "screen": "cafe_hire.both",
+   "verdict": "N/A",
+   "line": "\u2014",
+   "why": "No need is spent or refilled on this screen, and the row is not a paced repeat.",
+   "cause": null,
+   "screen_hash": "86e14e5a8ea04e28",
+   "row_hash": "aca442d29c1c8146",
+   "carried": false
+  },
+  {
+   "row": "C1431",
+   "screen": "cafe_hire.sign",
+   "verdict": "N/A",
+   "line": "\u2014",
+   "why": "No need is spent or refilled on this screen, and the row is not a paced repeat.",
+   "cause": null,
+   "screen_hash": "3df42923d5534123",
+   "row_hash": "aca442d29c1c8146",
+   "carried": false
   },
   {
    "row": "C1432",
@@ -1367,12 +2225,34 @@
    "row": "C1432",
    "screen": "cafe_first_shift.start",
    "verdict": "PASS",
-   "line": "15 energy",
-   "why": "PLAN declares energy's drains (shifts 15) and refills (coffee +10, snack +10, lunch +15)",
+   "line": "Work your first shift (4 hours, 15 energy)",
+   "why": "This piece's part is declared: drain 15, shut under 15; the refill is the plan's.",
    "cause": null,
-   "screen_hash": "641173334639bd65",
+   "screen_hash": "148d1bc08acf279e",
    "row_hash": "ccd7a74d85c7d7fe",
-   "carried": true
+   "carried": false
+  },
+  {
+   "row": "C1432",
+   "screen": "cafe_hire.both",
+   "verdict": "N/A",
+   "line": "\u2014",
+   "why": "No need is spent or refilled on this screen, and the row is not a paced repeat.",
+   "cause": null,
+   "screen_hash": "86e14e5a8ea04e28",
+   "row_hash": "ccd7a74d85c7d7fe",
+   "carried": false
+  },
+  {
+   "row": "C1432",
+   "screen": "cafe_hire.sign",
+   "verdict": "N/A",
+   "line": "\u2014",
+   "why": "No need is spent or refilled on this screen, and the row is not a paced repeat.",
+   "cause": null,
+   "screen_hash": "3df42923d5534123",
+   "row_hash": "ccd7a74d85c7d7fe",
+   "carried": false
   },
   {
    "row": "C1433",
@@ -1389,12 +2269,34 @@
    "row": "C1433",
    "screen": "cafe_first_shift.start",
    "verdict": "PASS",
-   "line": "15 energy",
-   "why": "an empty energy shuts this door",
+   "line": "Work your first shift (4 hours, 15 energy)",
+   "why": "Greys with \"(15 Energy)\" under 15.",
    "cause": null,
-   "screen_hash": "641173334639bd65",
+   "screen_hash": "148d1bc08acf279e",
    "row_hash": "f47fc5030774db86",
-   "carried": true
+   "carried": false
+  },
+  {
+   "row": "C1433",
+   "screen": "cafe_hire.both",
+   "verdict": "N/A",
+   "line": "\u2014",
+   "why": "No need is spent or refilled on this screen, and the row is not a paced repeat.",
+   "cause": null,
+   "screen_hash": "86e14e5a8ea04e28",
+   "row_hash": "f47fc5030774db86",
+   "carried": false
+  },
+  {
+   "row": "C1433",
+   "screen": "cafe_hire.sign",
+   "verdict": "N/A",
+   "line": "\u2014",
+   "why": "No need is spent or refilled on this screen, and the row is not a paced repeat.",
+   "cause": null,
+   "screen_hash": "3df42923d5534123",
+   "row_hash": "f47fc5030774db86",
+   "carried": false
   },
   {
    "row": "C1434",
@@ -1411,12 +2313,34 @@
    "row": "C1434",
    "screen": "cafe_first_shift.start",
    "verdict": "N/A",
-   "line": "-",
-   "why": "this screen spends energy; it is not where an empty need sends her",
+   "line": "\u2014",
+   "why": "The refill place is not this piece's.",
    "cause": null,
-   "screen_hash": "641173334639bd65",
+   "screen_hash": "148d1bc08acf279e",
    "row_hash": "6ac94d11992c72ec",
-   "carried": true
+   "carried": false
+  },
+  {
+   "row": "C1434",
+   "screen": "cafe_hire.both",
+   "verdict": "N/A",
+   "line": "\u2014",
+   "why": "No need is spent or refilled on this screen, and the row is not a paced repeat.",
+   "cause": null,
+   "screen_hash": "86e14e5a8ea04e28",
+   "row_hash": "6ac94d11992c72ec",
+   "carried": false
+  },
+  {
+   "row": "C1434",
+   "screen": "cafe_hire.sign",
+   "verdict": "N/A",
+   "line": "\u2014",
+   "why": "No need is spent or refilled on this screen, and the row is not a paced repeat.",
+   "cause": null,
+   "screen_hash": "3df42923d5534123",
+   "row_hash": "6ac94d11992c72ec",
+   "carried": false
   },
   {
    "row": "C1438",
@@ -1433,12 +2357,34 @@
    "row": "C1438",
    "screen": "cafe_first_shift.start",
    "verdict": "PASS",
-   "line": "15 energy",
-   "why": "spent by use",
+   "line": "Work your first shift (4 hours, 15 energy)",
+   "why": "Spent by use.",
    "cause": null,
-   "screen_hash": "641173334639bd65",
+   "screen_hash": "148d1bc08acf279e",
    "row_hash": "e4d4d230d2bd3815",
-   "carried": true
+   "carried": false
+  },
+  {
+   "row": "C1438",
+   "screen": "cafe_hire.both",
+   "verdict": "N/A",
+   "line": "\u2014",
+   "why": "No need is spent or refilled on this screen, and the row is not a paced repeat.",
+   "cause": null,
+   "screen_hash": "86e14e5a8ea04e28",
+   "row_hash": "e4d4d230d2bd3815",
+   "carried": false
+  },
+  {
+   "row": "C1438",
+   "screen": "cafe_hire.sign",
+   "verdict": "N/A",
+   "line": "\u2014",
+   "why": "No need is spent or refilled on this screen, and the row is not a paced repeat.",
+   "cause": null,
+   "screen_hash": "3df42923d5534123",
+   "row_hash": "e4d4d230d2bd3815",
+   "carried": false
   },
   {
    "row": "C1441",
@@ -1456,11 +2402,33 @@
    "screen": "cafe_first_shift.start",
    "verdict": "PASS",
    "line": "Reaching past you for a jug, his arm drags across your chest. He doesn't say sorry. He watches you notice.",
-   "why": "the first shift is a step about a person, so it gets a scene; the work itself is the closing screen's number",
+   "why": "A step about a person gets a scene; the number-only line is for the shift's end.",
    "cause": null,
-   "screen_hash": "641173334639bd65",
+   "screen_hash": "148d1bc08acf279e",
    "row_hash": "6b5fb464471de4c7",
-   "carried": true
+   "carried": false
+  },
+  {
+   "row": "C1441",
+   "screen": "cafe_hire.both",
+   "verdict": "PASS",
+   "line": "He peels the sign off the window and drops it under the counter. Your face goes warm. You've got a job.",
+   "why": "A step about a person gets a scene.",
+   "cause": null,
+   "screen_hash": "86e14e5a8ea04e28",
+   "row_hash": "6b5fb464471de4c7",
+   "carried": false
+  },
+  {
+   "row": "C1441",
+   "screen": "cafe_hire.sign",
+   "verdict": "PASS",
+   "line": "He peels the sign off the window and drops it under the counter. Your face goes warm. You've got a job.",
+   "why": "A step about a person gets a scene.",
+   "cause": null,
+   "screen_hash": "3df42923d5534123",
+   "row_hash": "6b5fb464471de4c7",
+   "carried": false
   },
   {
    "row": "C146",
@@ -1477,12 +2445,34 @@
    "row": "C146",
    "screen": "cafe_first_shift.start",
    "verdict": "PASS",
-   "line": "cafe_first_shift_done",
-   "why": "repeatable only by engine; it switches itself off on its only exit, so the meeting plays once",
+   "line": "Work the shift (240 min; sets met_chris)",
+   "why": "Switched off by cafe_first_shift_done; plays once.",
    "cause": null,
-   "screen_hash": "641173334639bd65",
+   "screen_hash": "148d1bc08acf279e",
    "row_hash": "a08ace799dcefe85",
-   "carried": true
+   "carried": false
+  },
+  {
+   "row": "C146",
+   "screen": "cafe_hire.both",
+   "verdict": "PASS",
+   "line": "Done (0 min; sets met_tom, cafe_hired)",
+   "why": "The hire is a repeatable row that switches itself off on cafe_hired, so it plays once (arc.md, how a step reaches her).",
+   "cause": null,
+   "screen_hash": "86e14e5a8ea04e28",
+   "row_hash": "a08ace799dcefe85",
+   "carried": false
+  },
+  {
+   "row": "C146",
+   "screen": "cafe_hire.sign",
+   "verdict": "PASS",
+   "line": "Done (0 min; sets met_tom, cafe_hired)",
+   "why": "The hire is a repeatable row that switches itself off on cafe_hired, so it plays once (arc.md, how a step reaches her).",
+   "cause": null,
+   "screen_hash": "3df42923d5534123",
+   "row_hash": "a08ace799dcefe85",
+   "carried": false
   },
   {
    "row": "C148",
@@ -1500,11 +2490,33 @@
    "screen": "cafe_first_shift.start",
    "verdict": "PASS",
    "line": "Reaching past you for a jug, his arm drags across your chest. He doesn't say sorry. He watches you notice.",
-   "why": "contact, one step past the hire's look",
+   "why": "Further than the hire's glance: a touch.",
    "cause": null,
-   "screen_hash": "641173334639bd65",
+   "screen_hash": "148d1bc08acf279e",
    "row_hash": "d2b40c16ae543d86",
-   "carried": true
+   "carried": false
+  },
+  {
+   "row": "C148",
+   "screen": "cafe_hire.both",
+   "verdict": "PASS",
+   "line": "He peels the sign off the window and drops it under the counter. Your face goes warm. You've got a job.",
+   "why": "From the sign in the window (P05) to the job.",
+   "cause": null,
+   "screen_hash": "86e14e5a8ea04e28",
+   "row_hash": "d2b40c16ae543d86",
+   "carried": false
+  },
+  {
+   "row": "C148",
+   "screen": "cafe_hire.sign",
+   "verdict": "PASS",
+   "line": "He peels the sign off the window and drops it under the counter. Your face goes warm. You've got a job.",
+   "why": "From the sign in the window (P05) to the job.",
+   "cause": null,
+   "screen_hash": "3df42923d5534123",
+   "row_hash": "d2b40c16ae543d86",
+   "carried": false
   },
   {
    "row": "C149",
@@ -1516,6 +2528,28 @@
    "screen_hash": "f54fc2669ff97376",
    "row_hash": "b8cdd5b1ce3f89ea",
    "carried": true
+  },
+  {
+   "row": "C149",
+   "screen": "cafe_hire.both",
+   "verdict": "PASS",
+   "line": "Your first one's a weekday afternoon. Chris'll show you the machine. Don't be late, rookie.",
+   "why": "Points at the first shift.",
+   "cause": null,
+   "screen_hash": "86e14e5a8ea04e28",
+   "row_hash": "b8cdd5b1ce3f89ea",
+   "carried": false
+  },
+  {
+   "row": "C149",
+   "screen": "cafe_hire.sign",
+   "verdict": "PASS",
+   "line": "Your first one's a weekday afternoon. Chris'll show you the machine. Don't be late, rookie.",
+   "why": "Points at the first shift.",
+   "cause": null,
+   "screen_hash": "3df42923d5534123",
+   "row_hash": "b8cdd5b1ce3f89ea",
+   "carried": false
   },
   {
    "row": "C151",
@@ -1532,12 +2566,12 @@
    "row": "C151",
    "screen": "cafe_first_shift.start",
    "verdict": "N/A",
-   "line": "-",
-   "why": "repeatable in the engine only; it plays once (cafe_first_shift_done on its only exit), so it is not a repeat that comes back",
+   "line": "\u2014",
+   "why": "Rows that switch themselves off after one play; C151 governs a repeat seen many times.",
    "cause": null,
-   "screen_hash": "641173334639bd65",
+   "screen_hash": "148d1bc08acf279e",
    "row_hash": "d5758757a709b1af",
-   "carried": true
+   "carried": false
   },
   {
    "row": "C151",
@@ -1554,12 +2588,12 @@
    "row": "C151",
    "screen": "cafe_hire.both",
    "verdict": "N/A",
-   "line": "",
-   "why": "Plays once.",
+   "line": "\u2014",
+   "why": "Rows that switch themselves off after one play; C151 governs a repeat seen many times.",
    "cause": null,
-   "screen_hash": "6c687f2a2add5c32",
+   "screen_hash": "86e14e5a8ea04e28",
    "row_hash": "d5758757a709b1af",
-   "carried": true
+   "carried": false
   },
   {
    "row": "C151",
@@ -1576,12 +2610,12 @@
    "row": "C151",
    "screen": "cafe_hire.sign",
    "verdict": "N/A",
-   "line": "",
-   "why": "Plays once: cafe_hired switches the row off.",
+   "line": "\u2014",
+   "why": "Rows that switch themselves off after one play; C151 governs a repeat seen many times.",
    "cause": null,
-   "screen_hash": "2c7079252f8ae4c5",
+   "screen_hash": "3df42923d5534123",
    "row_hash": "d5758757a709b1af",
-   "carried": true
+   "carried": false
   },
   {
    "row": "C162",
@@ -1598,12 +2632,34 @@
    "row": "C162",
    "screen": "cafe_first_shift.start",
    "verdict": "PASS",
-   "line": "Tom's giving you my afternoons.",
-   "why": "his grievance is told by him, not narrated",
+   "line": "So you're the new girl. Tom's giving you my afternoons.",
+   "why": "Information comes in Chris's own line.",
    "cause": null,
-   "screen_hash": "641173334639bd65",
+   "screen_hash": "148d1bc08acf279e",
    "row_hash": "408df581d2b341b6",
-   "carried": true
+   "carried": false
+  },
+  {
+   "row": "C162",
+   "screen": "cafe_hire.both",
+   "verdict": "PASS",
+   "line": "He taps the shift board by the till: weekdays 2pm\u20136pm, Saturday and Sunday 10am\u20132pm and 3pm\u20137pm.",
+   "why": "The shift times are earned by asking, said by Tom in the scene.",
+   "cause": null,
+   "screen_hash": "86e14e5a8ea04e28",
+   "row_hash": "408df581d2b341b6",
+   "carried": false
+  },
+  {
+   "row": "C162",
+   "screen": "cafe_hire.sign",
+   "verdict": "PASS",
+   "line": "He taps the shift board by the till: weekdays 2pm\u20136pm, Saturday and Sunday 10am\u20132pm and 3pm\u20137pm.",
+   "why": "The shift times are earned by asking, said by Tom in the scene.",
+   "cause": null,
+   "screen_hash": "3df42923d5534123",
+   "row_hash": "408df581d2b341b6",
+   "carried": false
   },
   {
    "row": "C1637",
@@ -1620,12 +2676,34 @@
    "row": "C1637",
    "screen": "cafe_first_shift.start",
    "verdict": "PASS",
-   "line": "whole screen, about 89 words",
-   "why": "a meeting under 150, Chris and Tom speak",
+   "line": "89 words, Chris speaks",
+   "why": "A small meeting, under 150.",
    "cause": null,
-   "screen_hash": "641173334639bd65",
+   "screen_hash": "148d1bc08acf279e",
    "row_hash": "72923a871f0435e6",
-   "carried": true
+   "carried": false
+  },
+  {
+   "row": "C1637",
+   "screen": "cafe_hire.both",
+   "verdict": "PASS",
+   "line": "91 words, Tom speaks",
+   "why": "A small meeting, under 150.",
+   "cause": null,
+   "screen_hash": "86e14e5a8ea04e28",
+   "row_hash": "72923a871f0435e6",
+   "carried": false
+  },
+  {
+   "row": "C1637",
+   "screen": "cafe_hire.sign",
+   "verdict": "PASS",
+   "line": "89 words, Tom speaks",
+   "why": "A small meeting, under 150.",
+   "cause": null,
+   "screen_hash": "3df42923d5534123",
+   "row_hash": "72923a871f0435e6",
+   "carried": false
   },
   {
    "row": "C164",
@@ -1675,12 +2753,34 @@
    "row": "C180",
    "screen": "cafe_first_shift.start",
    "verdict": "PASS",
-   "line": "He shows you the grinder, the milk jugs, the till. ... Later, new girl.",
-   "why": "pays Tom's 'Chris'll show you the machine'; opens 'later'",
+   "line": "So you're the new girl. Tom's giving you my afternoons. / Later, new girl.",
+   "why": "Pays the hire, opens Chris's next step.",
    "cause": null,
-   "screen_hash": "641173334639bd65",
+   "screen_hash": "148d1bc08acf279e",
    "row_hash": "d1b589361cb96867",
-   "carried": true
+   "carried": false
+  },
+  {
+   "row": "C180",
+   "screen": "cafe_hire.both",
+   "verdict": "PASS",
+   "line": "He peels the sign off the window and drops it under the counter. Your face goes warm. You've got a job. / Your first one's a weekday afternoon. Chris'll show you the machine. Don't be late, rookie.",
+   "why": "Pays the Help Wanted sign (it comes down) and opens the first shift.",
+   "cause": null,
+   "screen_hash": "86e14e5a8ea04e28",
+   "row_hash": "d1b589361cb96867",
+   "carried": false
+  },
+  {
+   "row": "C180",
+   "screen": "cafe_hire.sign",
+   "verdict": "PASS",
+   "line": "He peels the sign off the window and drops it under the counter. Your face goes warm. You've got a job. / Your first one's a weekday afternoon. Chris'll show you the machine. Don't be late, rookie.",
+   "why": "Pays the Help Wanted sign (it comes down) and opens the first shift.",
+   "cause": null,
+   "screen_hash": "3df42923d5534123",
+   "row_hash": "d1b589361cb96867",
+   "carried": false
   },
   {
    "row": "C286",
@@ -1698,11 +2798,22 @@
    "screen": "cafe_first_shift.start",
    "verdict": "PASS",
    "line": "Reaching past you for a jug, his arm drags across your chest. He doesn't say sorry. He watches you notice.",
-   "why": "stage 1: his brush",
+   "why": "Stage 1: his brush.",
    "cause": null,
-   "screen_hash": "641173334639bd65",
+   "screen_hash": "148d1bc08acf279e",
    "row_hash": "23fc75bfc032d31c",
-   "carried": true
+   "carried": false
+  },
+  {
+   "row": "C286",
+   "screen": "cafe_hire.both",
+   "verdict": "PASS",
+   "line": "His eyes go to your mouth when you smile, then down to the till, fast.",
+   "why": "Stage 1: his leak.",
+   "cause": null,
+   "screen_hash": "86e14e5a8ea04e28",
+   "row_hash": "23fc75bfc032d31c",
+   "carried": false
   },
   {
    "row": "C287",
@@ -1719,12 +2830,23 @@
    "row": "C287",
    "screen": "cafe_first_shift.start",
    "verdict": "N/A",
-   "line": "-",
-   "why": "nothing she chooses to watch or dare",
+   "line": "\u2014",
+   "why": "Nothing at this stage: release 1, stage 0; she doesn't choose anything sexual.",
    "cause": null,
-   "screen_hash": "641173334639bd65",
+   "screen_hash": "148d1bc08acf279e",
    "row_hash": "480f7e9a025db5b0",
-   "carried": true
+   "carried": false
+  },
+  {
+   "row": "C287",
+   "screen": "cafe_hire.both",
+   "verdict": "N/A",
+   "line": "\u2014",
+   "why": "Nothing at this stage: release 1, stage 0; she doesn't choose anything sexual.",
+   "cause": null,
+   "screen_hash": "86e14e5a8ea04e28",
+   "row_hash": "480f7e9a025db5b0",
+   "carried": false
   },
   {
    "row": "C288",
@@ -1741,12 +2863,23 @@
    "row": "C288",
    "screen": "cafe_first_shift.start",
    "verdict": "N/A",
-   "line": "-",
-   "why": "no private contact with someone she knows",
+   "line": "\u2014",
+   "why": "Nothing at this stage: release 1, stage 0; she doesn't choose anything sexual.",
    "cause": null,
-   "screen_hash": "641173334639bd65",
+   "screen_hash": "148d1bc08acf279e",
    "row_hash": "7b5399adec567cd4",
-   "carried": true
+   "carried": false
+  },
+  {
+   "row": "C288",
+   "screen": "cafe_hire.both",
+   "verdict": "N/A",
+   "line": "\u2014",
+   "why": "Nothing at this stage: release 1, stage 0; she doesn't choose anything sexual.",
+   "cause": null,
+   "screen_hash": "86e14e5a8ea04e28",
+   "row_hash": "7b5399adec567cd4",
+   "carried": false
   },
   {
    "row": "C289",
@@ -1763,12 +2896,23 @@
    "row": "C289",
    "screen": "cafe_first_shift.start",
    "verdict": "N/A",
-   "line": "-",
-   "why": "no bare body",
+   "line": "\u2014",
+   "why": "Nothing at this stage: release 1, stage 0; she doesn't choose anything sexual.",
    "cause": null,
-   "screen_hash": "641173334639bd65",
+   "screen_hash": "148d1bc08acf279e",
    "row_hash": "3952eba1e2267f12",
-   "carried": true
+   "carried": false
+  },
+  {
+   "row": "C289",
+   "screen": "cafe_hire.both",
+   "verdict": "N/A",
+   "line": "\u2014",
+   "why": "Nothing at this stage: release 1, stage 0; she doesn't choose anything sexual.",
+   "cause": null,
+   "screen_hash": "86e14e5a8ea04e28",
+   "row_hash": "3952eba1e2267f12",
+   "carried": false
   },
   {
    "row": "C291",
@@ -1786,11 +2930,22 @@
    "screen": "cafe_first_shift.start",
    "verdict": "PASS",
    "line": "Reaching past you for a jug, his arm drags across your chest. He doesn't say sorry. He watches you notice.",
-   "why": "clothed chest, a brush: stage 1; Tom watching adds risk, not a level",
+   "why": "The level is set by what shows: an arm across her chest, clothed.",
    "cause": null,
-   "screen_hash": "641173334639bd65",
+   "screen_hash": "148d1bc08acf279e",
    "row_hash": "53bd56cf597f7ee3",
-   "carried": true
+   "carried": false
+  },
+  {
+   "row": "C291",
+   "screen": "cafe_hire.both",
+   "verdict": "PASS",
+   "line": "His eyes go to your mouth when you smile, then down to the till, fast.",
+   "why": "The level is set by what shows: a glance at her mouth.",
+   "cause": null,
+   "screen_hash": "86e14e5a8ea04e28",
+   "row_hash": "53bd56cf597f7ee3",
+   "carried": false
   },
   {
    "row": "C296",
@@ -1808,11 +2963,22 @@
    "screen": "cafe_first_shift.start",
    "verdict": "PASS",
    "line": "Reaching past you for a jug, his arm drags across your chest. He doesn't say sorry. He watches you notice.",
-   "why": "the low version of touch opens Chris's line",
+   "why": "Low version first: a glance (Tom), a brush (Chris).",
    "cause": null,
-   "screen_hash": "641173334639bd65",
+   "screen_hash": "148d1bc08acf279e",
    "row_hash": "d702aa9200d2154d",
-   "carried": true
+   "carried": false
+  },
+  {
+   "row": "C296",
+   "screen": "cafe_hire.both",
+   "verdict": "PASS",
+   "line": "Reaching past you for a jug, his arm drags across your chest. He doesn't say sorry. He watches you notice.",
+   "why": "Low version first: a glance (Tom), a brush (Chris).",
+   "cause": null,
+   "screen_hash": "86e14e5a8ea04e28",
+   "row_hash": "d702aa9200d2154d",
+   "carried": false
   },
   {
    "row": "C297",
@@ -1829,34 +2995,45 @@
    "row": "C297",
    "screen": "cafe_first_shift.start",
    "verdict": "N/A",
-   "line": "-",
-   "why": "Chris does not live with her",
+   "line": "\u2014",
+   "why": "Tom and Chris don't live with her.",
    "cause": null,
-   "screen_hash": "641173334639bd65",
+   "screen_hash": "148d1bc08acf279e",
    "row_hash": "b920ef848ab61988",
-   "carried": true
+   "carried": false
+  },
+  {
+   "row": "C297",
+   "screen": "cafe_hire.both",
+   "verdict": "N/A",
+   "line": "\u2014",
+   "why": "Tom and Chris don't live with her.",
+   "cause": null,
+   "screen_hash": "86e14e5a8ea04e28",
+   "row_hash": "b920ef848ab61988",
+   "carried": false
   },
   {
    "row": "C311",
    "screen": "cafe_first_shift.start",
    "verdict": "PASS",
-   "line": "Reaching past you for a jug, his arm drags across your chest. He doesn't say sorry. He watches you notice. / Later, new girl.",
-   "why": "her chest, his watching, a not-yet, a hook",
+   "line": "Reaching past you for a jug, his arm drags across your chest. He doesn't say sorry. He watches you notice.",
+   "why": "Chest, his reaction, Tom's interruption (not yet), \"Later, new girl.\" (hook).",
    "cause": null,
-   "screen_hash": "641173334639bd65",
+   "screen_hash": "148d1bc08acf279e",
    "row_hash": "bad20c9f078e8b87",
-   "carried": true
+   "carried": false
   },
   {
    "row": "C311",
    "screen": "cafe_hire.both",
    "verdict": "PASS",
    "line": "His eyes go to your mouth when you smile, then down to the till, fast.",
-   "why": "Body part, his reaction, his cover, the job as hook.",
+   "why": "Body part (mouth), his reaction, his eyes away fast (not yet), hook to the shift.",
    "cause": null,
-   "screen_hash": "6c687f2a2add5c32",
+   "screen_hash": "86e14e5a8ea04e28",
    "row_hash": "bad20c9f078e8b87",
-   "carried": true
+   "carried": false
   },
   {
    "row": "C314",
@@ -1874,11 +3051,22 @@
    "screen": "cafe_first_shift.start",
    "verdict": "PASS",
    "line": "Reaching past you for a jug, his arm drags across your chest. He doesn't say sorry. He watches you notice.",
-   "why": "body and reaction, not talk only",
+   "why": "Not talk only: body and reaction.",
    "cause": null,
-   "screen_hash": "641173334639bd65",
+   "screen_hash": "148d1bc08acf279e",
    "row_hash": "0304731d263aed9f",
-   "carried": true
+   "carried": false
+  },
+  {
+   "row": "C314",
+   "screen": "cafe_hire.both",
+   "verdict": "PASS",
+   "line": "His eyes go to your mouth when you smile, then down to the till, fast.",
+   "why": "Not talk only: body and reaction.",
+   "cause": null,
+   "screen_hash": "86e14e5a8ea04e28",
+   "row_hash": "0304731d263aed9f",
+   "carried": false
   },
   {
    "row": "C330",
@@ -1895,12 +3083,34 @@
    "row": "C330",
    "screen": "cafe_first_shift.start",
    "verdict": "N/A",
-   "line": "-",
-   "why": "no meter moves",
+   "line": "\u2014",
+   "why": "No repeatable sexual act; these rows play once.",
    "cause": null,
-   "screen_hash": "641173334639bd65",
+   "screen_hash": "148d1bc08acf279e",
    "row_hash": "923a40b5ad4048fd",
-   "carried": true
+   "carried": false
+  },
+  {
+   "row": "C330",
+   "screen": "cafe_hire.both",
+   "verdict": "N/A",
+   "line": "\u2014",
+   "why": "No repeatable sexual act; these rows play once.",
+   "cause": null,
+   "screen_hash": "86e14e5a8ea04e28",
+   "row_hash": "923a40b5ad4048fd",
+   "carried": false
+  },
+  {
+   "row": "C330",
+   "screen": "cafe_hire.sign",
+   "verdict": "N/A",
+   "line": "\u2014",
+   "why": "No repeatable sexual act; these rows play once.",
+   "cause": null,
+   "screen_hash": "3df42923d5534123",
+   "row_hash": "923a40b5ad4048fd",
+   "carried": false
   },
   {
    "row": "C422",
@@ -1918,11 +3128,33 @@
    "screen": "cafe_first_shift.start",
    "verdict": "PASS",
    "line": "Work the shift",
-   "why": "says what clicking does",
+   "why": "Plain label.",
    "cause": null,
-   "screen_hash": "641173334639bd65",
+   "screen_hash": "148d1bc08acf279e",
    "row_hash": "7e128897077ecee6",
-   "carried": true
+   "carried": false
+  },
+  {
+   "row": "C422",
+   "screen": "cafe_hire.both",
+   "verdict": "PASS",
+   "line": "Done (0 min; sets met_tom, cafe_hired)",
+   "why": "Plain label.",
+   "cause": null,
+   "screen_hash": "86e14e5a8ea04e28",
+   "row_hash": "7e128897077ecee6",
+   "carried": false
+  },
+  {
+   "row": "C422",
+   "screen": "cafe_hire.sign",
+   "verdict": "PASS",
+   "line": "Done (0 min; sets met_tom, cafe_hired)",
+   "why": "Plain label.",
+   "cause": null,
+   "screen_hash": "3df42923d5534123",
+   "row_hash": "7e128897077ecee6",
+   "carried": false
   },
   {
    "row": "C442",
@@ -1940,11 +3172,33 @@
    "screen": "cafe_first_shift.start",
    "verdict": "PASS",
    "line": "Reaching past you for a jug, his arm drags across your chest. He doesn't say sorry. He watches you notice.",
-   "why": "the brush and its intent are said plainly",
+   "why": "Says what happens.",
    "cause": null,
-   "screen_hash": "641173334639bd65",
+   "screen_hash": "148d1bc08acf279e",
    "row_hash": "59b8d8d24f0c7c38",
-   "carried": true
+   "carried": false
+  },
+  {
+   "row": "C442",
+   "screen": "cafe_hire.both",
+   "verdict": "PASS",
+   "line": "He peels the sign off the window and drops it under the counter. Your face goes warm. You've got a job.",
+   "why": "Says what happens.",
+   "cause": null,
+   "screen_hash": "86e14e5a8ea04e28",
+   "row_hash": "59b8d8d24f0c7c38",
+   "carried": false
+  },
+  {
+   "row": "C442",
+   "screen": "cafe_hire.sign",
+   "verdict": "PASS",
+   "line": "He peels the sign off the window and drops it under the counter. Your face goes warm. You've got a job.",
+   "why": "Says what happens.",
+   "cause": null,
+   "screen_hash": "3df42923d5534123",
+   "row_hash": "59b8d8d24f0c7c38",
+   "carried": false
   },
   {
    "row": "C447",
@@ -1961,12 +3215,34 @@
    "row": "C447",
    "screen": "cafe_first_shift.start",
    "verdict": "PASS",
-   "line": "Sure you do. / Later, new girl. / Chris. Customers.",
-   "why": "Chris smug, Tom clipped, each held",
+   "line": "Later, new girl.",
+   "why": "Chris: smug, \"new girl\".",
    "cause": null,
-   "screen_hash": "641173334639bd65",
+   "screen_hash": "148d1bc08acf279e",
    "row_hash": "5f664198d19facd8",
-   "carried": true
+   "carried": false
+  },
+  {
+   "row": "C447",
+   "screen": "cafe_hire.both",
+   "verdict": "PASS",
+   "line": "Your first one's a weekday afternoon. Chris'll show you the machine. Don't be late, rookie.",
+   "why": "Tom: curt, practical, \"rookie\".",
+   "cause": null,
+   "screen_hash": "86e14e5a8ea04e28",
+   "row_hash": "5f664198d19facd8",
+   "carried": false
+  },
+  {
+   "row": "C447",
+   "screen": "cafe_hire.sign",
+   "verdict": "PASS",
+   "line": "Your first one's a weekday afternoon. Chris'll show you the machine. Don't be late, rookie.",
+   "why": "Tom: curt, practical, \"rookie\".",
+   "cause": null,
+   "screen_hash": "3df42923d5534123",
+   "row_hash": "5f664198d19facd8",
+   "carried": false
   },
   {
    "row": "C448",
@@ -1983,12 +3259,34 @@
    "row": "C448",
    "screen": "cafe_first_shift.start",
    "verdict": "PASS",
-   "line": "A guy in his twenties is at the machine ... He looks you over like he's pricing you. / Chris \u00b7 Barista: So you're the new girl. Tom's giving you my afternoons.",
-   "why": "who, what he wants, how he sees her, in the first lines",
+   "line": "A guy in his twenties is at the machine, a pencil behind his ear. He looks you over like he's pricing you. / So you're the new girl. Tom's giving you my afternoons.",
+   "why": "Who (the guy at the machine whose afternoons she's taking), want, how he sees her.",
    "cause": null,
-   "screen_hash": "641173334639bd65",
+   "screen_hash": "148d1bc08acf279e",
    "row_hash": "b86596f1a02766de",
-   "carried": true
+   "carried": false
+  },
+  {
+   "row": "C448",
+   "screen": "cafe_hire.both",
+   "verdict": "PASS",
+   "line": "His eyes go to your mouth when you smile, then down to the till, fast. / Cute. I'm Tom. I run the place.",
+   "why": "Who, want, how he feels, in the first lines.",
+   "cause": null,
+   "screen_hash": "86e14e5a8ea04e28",
+   "row_hash": "b86596f1a02766de",
+   "carried": false
+  },
+  {
+   "row": "C448",
+   "screen": "cafe_hire.sign",
+   "verdict": "PASS",
+   "line": "He looks you over once, the way you'd check a used car. / Good answer. I'm Tom. I run the place. Four-hour shifts, five an hour, plus whatever lands in the tip jar. Call it twenty-two a shift.",
+   "why": "Who (runs the place), what he wants (a worker), how he sees her (sizing her up), in the first lines.",
+   "cause": null,
+   "screen_hash": "3df42923d5534123",
+   "row_hash": "b86596f1a02766de",
+   "carried": false
   },
   {
    "row": "C449",
@@ -2005,12 +3303,23 @@
    "row": "C449",
    "screen": "cafe_first_shift.start",
    "verdict": "PASS",
-   "line": "He doesn't say sorry. He watches you notice.",
-   "why": "the brush is named as deliberate and on her chest",
+   "line": "Reaching past you for a jug, his arm drags across your chest. He doesn't say sorry. He watches you notice.",
+   "why": "Said plainly: it was deliberate and he watches her notice.",
    "cause": null,
-   "screen_hash": "641173334639bd65",
+   "screen_hash": "148d1bc08acf279e",
    "row_hash": "e33f3e7fed17fa30",
-   "carried": true
+   "carried": false
+  },
+  {
+   "row": "C449",
+   "screen": "cafe_hire.both",
+   "verdict": "PASS",
+   "line": "His eyes go to your mouth when you smile, then down to the till, fast. / \"Cute.\"",
+   "why": "The tension is said: his eyes on her mouth, and \"Cute.\"",
+   "cause": null,
+   "screen_hash": "86e14e5a8ea04e28",
+   "row_hash": "e33f3e7fed17fa30",
+   "carried": false
   },
   {
    "row": "C450",
@@ -2022,6 +3331,28 @@
    "screen_hash": "f54fc2669ff97376",
    "row_hash": "b01ad555668aba2d",
    "carried": true
+  },
+  {
+   "row": "C450",
+   "screen": "cafe_hire.both",
+   "verdict": "PASS",
+   "line": "Your first one's a weekday afternoon. Chris'll show you the machine. Don't be late, rookie. \u2026 He peels the sign off the window and drops it under the counter. Your face goes warm. You've got a job.",
+   "why": "The scene closes on the first shift ahead and Chris.",
+   "cause": null,
+   "screen_hash": "86e14e5a8ea04e28",
+   "row_hash": "b01ad555668aba2d",
+   "carried": false
+  },
+  {
+   "row": "C450",
+   "screen": "cafe_hire.sign",
+   "verdict": "PASS",
+   "line": "Your first one's a weekday afternoon. Chris'll show you the machine. Don't be late, rookie. \u2026 He peels the sign off the window and drops it under the counter. Your face goes warm. You've got a job.",
+   "why": "The scene closes on the first shift ahead and Chris.",
+   "cause": null,
+   "screen_hash": "3df42923d5534123",
+   "row_hash": "b01ad555668aba2d",
+   "carried": false
   },
   {
    "row": "C451",
@@ -2038,12 +3369,34 @@
    "row": "C451",
    "screen": "cafe_first_shift.start",
    "verdict": "PASS",
-   "line": "the grinder, the milk jugs, the till ... a pencil behind his ear",
-   "why": "concrete detail",
+   "line": "He shows you the grinder, the milk jugs, the till.",
+   "why": "Concrete objects.",
    "cause": null,
-   "screen_hash": "641173334639bd65",
+   "screen_hash": "148d1bc08acf279e",
    "row_hash": "50dbf74577a813c7",
-   "carried": true
+   "carried": false
+  },
+  {
+   "row": "C451",
+   "screen": "cafe_hire.both",
+   "verdict": "PASS",
+   "line": "He taps the shift board by the till: weekdays 2pm\u20136pm, Saturday and Sunday 10am\u20132pm and 3pm\u20137pm.",
+   "why": "Concrete: the board, the till, the tip jar, the money.",
+   "cause": null,
+   "screen_hash": "86e14e5a8ea04e28",
+   "row_hash": "50dbf74577a813c7",
+   "carried": false
+  },
+  {
+   "row": "C451",
+   "screen": "cafe_hire.sign",
+   "verdict": "PASS",
+   "line": "He taps the shift board by the till: weekdays 2pm\u20136pm, Saturday and Sunday 10am\u20132pm and 3pm\u20137pm.",
+   "why": "Concrete: the board, the till, the tip jar, the money.",
+   "cause": null,
+   "screen_hash": "3df42923d5534123",
+   "row_hash": "50dbf74577a813c7",
+   "carried": false
   },
   {
    "row": "C460",
@@ -2060,12 +3413,34 @@
    "row": "C460",
    "screen": "cafe_first_shift.start",
    "verdict": "PASS",
-   "line": "So you're the new girl. / Tom, from the till:",
-   "why": "true at 14:00 and 14:59 on every weekday; once only; no past claimed",
+   "line": "So you're the new girl. Tom's giving you my afternoons.",
+   "why": "Weekdays 14\u201315: Chris and Tom there; met_chris only after; plays once.",
    "cause": null,
-   "screen_hash": "641173334639bd65",
+   "screen_hash": "148d1bc08acf279e",
    "row_hash": "67e48e60d5053a2e",
-   "carried": true
+   "carried": false
+  },
+  {
+   "row": "C460",
+   "screen": "cafe_hire.both",
+   "verdict": "PASS",
+   "line": "Your first one's a weekday afternoon. Chris'll show you the machine. Don't be late, rookie.",
+   "why": "Same as 2a.",
+   "cause": null,
+   "screen_hash": "86e14e5a8ea04e28",
+   "row_hash": "67e48e60d5053a2e",
+   "carried": false
+  },
+  {
+   "row": "C460",
+   "screen": "cafe_hire.sign",
+   "verdict": "PASS",
+   "line": "Your first one's a weekday afternoon. Chris'll show you the machine. Don't be late, rookie.",
+   "why": "Checked against who_is_where, PLAN \u00a78c/8f/9c and the trigger: true at every minute and day it shows.",
+   "cause": null,
+   "screen_hash": "3df42923d5534123",
+   "row_hash": "67e48e60d5053a2e",
+   "carried": false
   },
   {
    "row": "C461",
@@ -2082,12 +3457,34 @@
    "row": "C461",
    "screen": "cafe_first_shift.start",
    "verdict": "PASS",
-   "line": "a pencil behind his ear",
-   "why": "texture and dialogue fit PLAN's Chris (wants her shifts, and her)",
+   "line": "Your face burns. You step out from his reach. / \"I've got it.\"",
+   "why": "Her reaction, dialogue in character.",
    "cause": null,
-   "screen_hash": "641173334639bd65",
+   "screen_hash": "148d1bc08acf279e",
    "row_hash": "310706ee076318f2",
-   "carried": true
+   "carried": false
+  },
+  {
+   "row": "C461",
+   "screen": "cafe_hire.both",
+   "verdict": "PASS",
+   "line": "He peels the sign off the window and drops it under the counter. Your face goes warm. You've got a job.",
+   "why": "Her reaction and texture only.",
+   "cause": null,
+   "screen_hash": "86e14e5a8ea04e28",
+   "row_hash": "310706ee076318f2",
+   "carried": false
+  },
+  {
+   "row": "C461",
+   "screen": "cafe_hire.sign",
+   "verdict": "PASS",
+   "line": "He peels the sign off the window and drops it under the counter. Your face goes warm. You've got a job.",
+   "why": "Her reaction and texture only.",
+   "cause": null,
+   "screen_hash": "3df42923d5534123",
+   "row_hash": "310706ee076318f2",
+   "carried": false
   },
   {
    "row": "C519",
@@ -2104,12 +3501,34 @@
    "row": "C519",
    "screen": "cafe_first_shift.start",
    "verdict": "PASS",
-   "line": "whole screen",
-   "why": "one job (meeting Chris, the brush), about 89 words",
+   "line": "89 words",
+   "why": "One job (meeting Chris at the machine), under 150.",
    "cause": null,
-   "screen_hash": "641173334639bd65",
+   "screen_hash": "148d1bc08acf279e",
    "row_hash": "e78502f7aa28746d",
-   "carried": true
+   "carried": false
+  },
+  {
+   "row": "C519",
+   "screen": "cafe_hire.both",
+   "verdict": "PASS",
+   "line": "91 words",
+   "why": "One job (the hire), under 150.",
+   "cause": null,
+   "screen_hash": "86e14e5a8ea04e28",
+   "row_hash": "e78502f7aa28746d",
+   "carried": false
+  },
+  {
+   "row": "C519",
+   "screen": "cafe_hire.sign",
+   "verdict": "PASS",
+   "line": "89 words",
+   "why": "One job (the hire), under 150.",
+   "cause": null,
+   "screen_hash": "3df42923d5534123",
+   "row_hash": "e78502f7aa28746d",
+   "carried": false
   },
   {
    "row": "C593",
@@ -2127,11 +3546,33 @@
    "screen": "cafe_first_shift.start",
    "verdict": "PASS",
    "line": "new girl",
-   "why": "Chris's term, used by nobody else (Tom says 'rookie')",
+   "why": "Only Chris says \"new girl\" in the game.",
    "cause": null,
-   "screen_hash": "641173334639bd65",
+   "screen_hash": "148d1bc08acf279e",
    "row_hash": "370371a278b9f182",
-   "carried": true
+   "carried": false
+  },
+  {
+   "row": "C593",
+   "screen": "cafe_hire.both",
+   "verdict": "PASS",
+   "line": "rookie",
+   "why": "Only Tom says \"rookie\" in the game.",
+   "cause": null,
+   "screen_hash": "86e14e5a8ea04e28",
+   "row_hash": "370371a278b9f182",
+   "carried": false
+  },
+  {
+   "row": "C593",
+   "screen": "cafe_hire.sign",
+   "verdict": "PASS",
+   "line": "rookie",
+   "why": "Only Tom says \"rookie\" in the game.",
+   "cause": null,
+   "screen_hash": "3df42923d5534123",
+   "row_hash": "370371a278b9f182",
+   "carried": false
   },
   {
    "row": "C596",
@@ -2148,23 +3589,45 @@
    "row": "C596",
    "screen": "cafe_first_shift.start",
    "verdict": "N/A",
-   "line": "-",
-   "why": "a meeting screen, not a Talk screen; voice rule 5 holds at about 3.2 : 1 and check.py is GREEN",
+   "line": "\u2014",
+   "why": "Not a Talk screen in a person's menu; a meeting/step screen.",
    "cause": null,
-   "screen_hash": "641173334639bd65",
+   "screen_hash": "148d1bc08acf279e",
    "row_hash": "13a70c920d120f51",
-   "carried": true
+   "carried": false
+  },
+  {
+   "row": "C596",
+   "screen": "cafe_hire.both",
+   "verdict": "N/A",
+   "line": "\u2014",
+   "why": "Not a Talk screen in a person's menu; a meeting/step screen.",
+   "cause": null,
+   "screen_hash": "86e14e5a8ea04e28",
+   "row_hash": "13a70c920d120f51",
+   "carried": false
+  },
+  {
+   "row": "C596",
+   "screen": "cafe_hire.sign",
+   "verdict": "N/A",
+   "line": "\u2014",
+   "why": "Not a Talk screen in a person's menu; a meeting/step screen.",
+   "cause": null,
+   "screen_hash": "3df42923d5534123",
+   "row_hash": "13a70c920d120f51",
+   "carried": false
   },
   {
    "row": "C601",
    "screen": "cafe_first_shift.start",
    "verdict": "PASS",
-   "line": "He looks you over like he's pricing you. ... He watches you notice.",
-   "why": "leak on his eyes, she sees it; he doesn't live with her, so no cover owed",
+   "line": "A guy in his twenties is at the machine, a pencil behind his ear. He looks you over like he's pricing you.",
+   "why": "On his body, seen; not a housemate.",
    "cause": null,
-   "screen_hash": "641173334639bd65",
+   "screen_hash": "148d1bc08acf279e",
    "row_hash": "c73aabbce8afa4bc",
-   "carried": true
+   "carried": false
   },
   {
    "row": "C601",
@@ -2182,22 +3645,22 @@
    "screen": "cafe_hire.both",
    "verdict": "PASS",
    "line": "His eyes go to your mouth when you smile, then down to the till, fast.",
-   "why": "Leak and cover.",
+   "why": "On his body, seen, and he pulls his eyes away fast.",
    "cause": null,
-   "screen_hash": "6c687f2a2add5c32",
+   "screen_hash": "86e14e5a8ea04e28",
    "row_hash": "c73aabbce8afa4bc",
-   "carried": true
+   "carried": false
   },
   {
    "row": "C601",
    "screen": "cafe_hire.sign",
    "verdict": "PASS",
    "line": "He looks you over once, the way you'd check a used car.",
-   "why": "On his body, she sees it.",
+   "why": "His leak on his body (his eyes), she sees it; not a man she lives with, no cover needed.",
    "cause": null,
-   "screen_hash": "2c7079252f8ae4c5",
+   "screen_hash": "3df42923d5534123",
    "row_hash": "c73aabbce8afa4bc",
-   "carried": true
+   "carried": false
   },
   {
    "row": "C613",
@@ -2214,12 +3677,23 @@
    "row": "C613",
    "screen": "cafe_first_shift.start",
    "verdict": "PASS",
-   "line": "He looks you over like he's pricing you.",
-   "why": "his want on his body before the brush",
+   "line": "A guy in his twenties is at the machine, a pencil behind his ear. He looks you over like he's pricing you.",
+   "why": "\"pricing you\" comes before the brush; first-canvas lowest rung (C286).",
    "cause": null,
-   "screen_hash": "641173334639bd65",
+   "screen_hash": "148d1bc08acf279e",
    "row_hash": "6f777b1fcd750dd1",
-   "carried": true
+   "carried": false
+  },
+  {
+   "row": "C613",
+   "screen": "cafe_hire.both",
+   "verdict": "PASS",
+   "line": "His eyes go to your mouth when you smile, then down to the till, fast.",
+   "why": "His want on his body, seen, before he speaks.",
+   "cause": null,
+   "screen_hash": "86e14e5a8ea04e28",
+   "row_hash": "6f777b1fcd750dd1",
+   "carried": false
   },
   {
    "row": "C618",
@@ -2235,13 +3709,35 @@
   {
    "row": "C618",
    "screen": "cafe_first_shift.start",
-   "verdict": "N/A",
-   "line": "-",
-   "why": "Chris has no hub in this piece (his menu is out of scope)",
+   "verdict": "PASS",
+   "line": "So you're the new girl. Tom's giving you my afternoons.",
+   "why": "Chris is met here; met_chris set on leaving; no hub before.",
    "cause": null,
-   "screen_hash": "641173334639bd65",
+   "screen_hash": "148d1bc08acf279e",
    "row_hash": "1c4287c56499c374",
-   "carried": true
+   "carried": false
+  },
+  {
+   "row": "C618",
+   "screen": "cafe_hire.both",
+   "verdict": "PASS",
+   "line": "Good answer. I'm Tom. I run the place. Four-hour shifts, five an hour, plus whatever lands in the tip jar. Call it twenty-two a shift.",
+   "why": "Tom is met here, by name; met_tom set on Done; no hub before.",
+   "cause": null,
+   "screen_hash": "86e14e5a8ea04e28",
+   "row_hash": "1c4287c56499c374",
+   "carried": false
+  },
+  {
+   "row": "C618",
+   "screen": "cafe_hire.sign",
+   "verdict": "PASS",
+   "line": "Good answer. I'm Tom. I run the place. Four-hour shifts, five an hour, plus whatever lands in the tip jar. Call it twenty-two a shift.",
+   "why": "Tom is met here, by name; met_tom set on Done; no hub before.",
+   "cause": null,
+   "screen_hash": "3df42923d5534123",
+   "row_hash": "1c4287c56499c374",
+   "carried": false
   },
   {
    "row": "C619",
@@ -2258,12 +3754,34 @@
    "row": "C619",
    "screen": "cafe_first_shift.start",
    "verdict": "PASS",
-   "line": "flagEffects met_chris on 'Work the shift'",
-   "why": "a met flag, set in his meeting, not at turn one",
+   "line": "So you're the new girl. Tom's giving you my afternoons.",
+   "why": "Chris is met here; met_chris set on leaving; no hub before.",
    "cause": null,
-   "screen_hash": "641173334639bd65",
+   "screen_hash": "148d1bc08acf279e",
    "row_hash": "052d4eaafc2196f3",
-   "carried": true
+   "carried": false
+  },
+  {
+   "row": "C619",
+   "screen": "cafe_hire.both",
+   "verdict": "PASS",
+   "line": "Good answer. I'm Tom. I run the place. Four-hour shifts, five an hour, plus whatever lands in the tip jar. Call it twenty-two a shift.",
+   "why": "Tom is met here, by name; met_tom set on Done; no hub before.",
+   "cause": null,
+   "screen_hash": "86e14e5a8ea04e28",
+   "row_hash": "052d4eaafc2196f3",
+   "carried": false
+  },
+  {
+   "row": "C619",
+   "screen": "cafe_hire.sign",
+   "verdict": "PASS",
+   "line": "Good answer. I'm Tom. I run the place. Four-hour shifts, five an hour, plus whatever lands in the tip jar. Call it twenty-two a shift.",
+   "why": "Tom is met here, by name; met_tom set on Done; no hub before.",
+   "cause": null,
+   "screen_hash": "3df42923d5534123",
+   "row_hash": "052d4eaafc2196f3",
+   "carried": false
   },
   {
    "row": "C620",
@@ -2275,6 +3793,28 @@
    "screen_hash": "f54fc2669ff97376",
    "row_hash": "76250e48ada2b843",
    "carried": true
+  },
+  {
+   "row": "C620",
+   "screen": "cafe_hire.both",
+   "verdict": "PASS",
+   "line": "The caf\u00e9 across from campus: the coffee machine hissing, a long counter, a tip jar by the till. A sign on the door says it's open from 7am to 9pm.",
+   "why": "No face or presence line lists Tom or Chris at the Caf\u00e9 (no npc trigger); People page waits for met flags.",
+   "cause": null,
+   "screen_hash": "86e14e5a8ea04e28",
+   "row_hash": "76250e48ada2b843",
+   "carried": false
+  },
+  {
+   "row": "C620",
+   "screen": "cafe_hire.sign",
+   "verdict": "PASS",
+   "line": "The caf\u00e9 across from campus: the coffee machine hissing, a long counter, a tip jar by the till. A sign on the door says it's open from 7am to 9pm.",
+   "why": "No face or presence line lists Tom or Chris at the Caf\u00e9 (no npc trigger); People page waits for met flags.",
+   "cause": null,
+   "screen_hash": "3df42923d5534123",
+   "row_hash": "76250e48ada2b843",
+   "carried": false
   },
   {
    "row": "C622",
@@ -2290,13 +3830,35 @@
   {
    "row": "C622",
    "screen": "cafe_first_shift.start",
-   "verdict": "N/A",
-   "line": "-",
-   "why": "no hub for Chris yet",
+   "verdict": "PASS",
+   "line": "So you're the new girl. Tom's giving you my afternoons.",
+   "why": "Chris is met here; met_chris set on leaving; no hub before.",
    "cause": null,
-   "screen_hash": "641173334639bd65",
+   "screen_hash": "148d1bc08acf279e",
    "row_hash": "78d959e99c156550",
-   "carried": true
+   "carried": false
+  },
+  {
+   "row": "C622",
+   "screen": "cafe_hire.both",
+   "verdict": "PASS",
+   "line": "Good answer. I'm Tom. I run the place. Four-hour shifts, five an hour, plus whatever lands in the tip jar. Call it twenty-two a shift.",
+   "why": "Tom is met here, by name; met_tom set on Done; no hub before.",
+   "cause": null,
+   "screen_hash": "86e14e5a8ea04e28",
+   "row_hash": "78d959e99c156550",
+   "carried": false
+  },
+  {
+   "row": "C622",
+   "screen": "cafe_hire.sign",
+   "verdict": "PASS",
+   "line": "Good answer. I'm Tom. I run the place. Four-hour shifts, five an hour, plus whatever lands in the tip jar. Call it twenty-two a shift.",
+   "why": "Tom is met here, by name; met_tom set on Done; no hub before.",
+   "cause": null,
+   "screen_hash": "3df42923d5534123",
+   "row_hash": "78d959e99c156550",
+   "carried": false
   },
   {
    "row": "C625",
@@ -2313,12 +3875,34 @@
    "row": "C625",
    "screen": "cafe_first_shift.start",
    "verdict": "PASS",
-   "line": "A guy in his twenties is at the machine",
-   "why": "role first, name after (the label and Tom's 'Chris.')",
+   "line": "A guy in his twenties is at the machine, a pencil behind his ear. He looks you over like he's pricing you.",
+   "why": "Role (\"a guy in his twenties at the machine\") before his name.",
    "cause": null,
-   "screen_hash": "641173334639bd65",
+   "screen_hash": "148d1bc08acf279e",
    "row_hash": "dc9a1fd9dbf3fb87",
-   "carried": true
+   "carried": false
+  },
+  {
+   "row": "C625",
+   "screen": "cafe_hire.both",
+   "verdict": "PASS",
+   "line": "Cute. I'm Tom. I run the place.",
+   "why": "Role (\"the guy behind the counter\") first, the name in the meeting.",
+   "cause": null,
+   "screen_hash": "86e14e5a8ea04e28",
+   "row_hash": "dc9a1fd9dbf3fb87",
+   "carried": false
+  },
+  {
+   "row": "C625",
+   "screen": "cafe_hire.sign",
+   "verdict": "PASS",
+   "line": "Cute. I'm Tom. I run the place.",
+   "why": "Role (\"the guy behind the counter\") first, the name in the meeting.",
+   "cause": null,
+   "screen_hash": "3df42923d5534123",
+   "row_hash": "dc9a1fd9dbf3fb87",
+   "carried": false
   },
   {
    "row": "C626",
@@ -2335,12 +3919,34 @@
    "row": "C626",
    "screen": "cafe_first_shift.start",
    "verdict": "PASS",
-   "line": "Chris steps back.",
-   "why": "named in narration only after Tom says his name",
+   "line": "He / Chris steps back.",
+   "why": "No description repeated after the name is given.",
    "cause": null,
-   "screen_hash": "641173334639bd65",
+   "screen_hash": "148d1bc08acf279e",
    "row_hash": "8e507f7b235acc25",
-   "carried": true
+   "carried": false
+  },
+  {
+   "row": "C626",
+   "screen": "cafe_hire.both",
+   "verdict": "PASS",
+   "line": "He / Chris steps back.",
+   "why": "No description repeated after the name is given.",
+   "cause": null,
+   "screen_hash": "86e14e5a8ea04e28",
+   "row_hash": "8e507f7b235acc25",
+   "carried": false
+  },
+  {
+   "row": "C626",
+   "screen": "cafe_hire.sign",
+   "verdict": "PASS",
+   "line": "He / Chris steps back.",
+   "why": "No description repeated after the name is given.",
+   "cause": null,
+   "screen_hash": "3df42923d5534123",
+   "row_hash": "8e507f7b235acc25",
+   "carried": false
   },
   {
    "row": "C627",
@@ -2357,12 +3963,34 @@
    "row": "C627",
    "screen": "cafe_first_shift.start",
    "verdict": "PASS",
-   "line": "Chris. Customers.",
-   "why": "the once-played scene that sets met_chris names him",
+   "line": "Tom, from the till: \"Chris. Customers.\" / Chris steps back.",
+   "why": "The scene that sets met_chris names him.",
    "cause": null,
-   "screen_hash": "641173334639bd65",
+   "screen_hash": "148d1bc08acf279e",
    "row_hash": "4b5c8f8f6ef1b7f0",
-   "carried": true
+   "carried": false
+  },
+  {
+   "row": "C627",
+   "screen": "cafe_hire.both",
+   "verdict": "PASS",
+   "line": "Cute. I'm Tom. I run the place.",
+   "why": "The scene that sets met_tom names him.",
+   "cause": null,
+   "screen_hash": "86e14e5a8ea04e28",
+   "row_hash": "4b5c8f8f6ef1b7f0",
+   "carried": false
+  },
+  {
+   "row": "C627",
+   "screen": "cafe_hire.sign",
+   "verdict": "PASS",
+   "line": "Cute. I'm Tom. I run the place.",
+   "why": "The scene that sets met_tom names him.",
+   "cause": null,
+   "screen_hash": "3df42923d5534123",
+   "row_hash": "4b5c8f8f6ef1b7f0",
+   "carried": false
   },
   {
    "row": "C630",
@@ -2379,12 +4007,34 @@
    "row": "C630",
    "screen": "cafe_first_shift.start",
    "verdict": "PASS",
-   "line": "Chris \u00b7 Barista",
-   "why": "name and relation both on his first line",
+   "line": "So you're the new girl. Tom's giving you my afternoons. / Chris. Customers.",
+   "why": "Name (Tom says it) and relation (the barista whose afternoons she takes).",
    "cause": null,
-   "screen_hash": "641173334639bd65",
+   "screen_hash": "148d1bc08acf279e",
    "row_hash": "5a85503d3ef5a0fb",
-   "carried": true
+   "carried": false
+  },
+  {
+   "row": "C630",
+   "screen": "cafe_hire.both",
+   "verdict": "PASS",
+   "line": "Cute. I'm Tom. I run the place.",
+   "why": "Name and relation (runs the place, her boss) together.",
+   "cause": null,
+   "screen_hash": "86e14e5a8ea04e28",
+   "row_hash": "5a85503d3ef5a0fb",
+   "carried": false
+  },
+  {
+   "row": "C630",
+   "screen": "cafe_hire.sign",
+   "verdict": "PASS",
+   "line": "Cute. I'm Tom. I run the place.",
+   "why": "Name and relation (runs the place, her boss) together.",
+   "cause": null,
+   "screen_hash": "3df42923d5534123",
+   "row_hash": "5a85503d3ef5a0fb",
+   "carried": false
   },
   {
    "row": "C632",
@@ -2401,12 +4051,34 @@
    "row": "C632",
    "screen": "cafe_first_shift.start",
    "verdict": "PASS",
-   "line": "role = \"Barista\"",
-   "why": "says who he is",
+   "line": "role = \"Caf\u00e9 manager\" / \"Barista\"",
+   "why": "Role labels say who they are.",
    "cause": null,
-   "screen_hash": "641173334639bd65",
+   "screen_hash": "148d1bc08acf279e",
    "row_hash": "146e6806c6c566e3",
-   "carried": true
+   "carried": false
+  },
+  {
+   "row": "C632",
+   "screen": "cafe_hire.both",
+   "verdict": "PASS",
+   "line": "role = \"Caf\u00e9 manager\" / \"Barista\"",
+   "why": "Role labels say who they are.",
+   "cause": null,
+   "screen_hash": "86e14e5a8ea04e28",
+   "row_hash": "146e6806c6c566e3",
+   "carried": false
+  },
+  {
+   "row": "C632",
+   "screen": "cafe_hire.sign",
+   "verdict": "PASS",
+   "line": "role = \"Caf\u00e9 manager\" / \"Barista\"",
+   "why": "Role labels say who they are.",
+   "cause": null,
+   "screen_hash": "3df42923d5534123",
+   "row_hash": "146e6806c6c566e3",
+   "carried": false
   },
   {
    "row": "C639",
@@ -2445,12 +4117,34 @@
    "row": "C644",
    "screen": "cafe_first_shift.start",
    "verdict": "PASS",
-   "line": "Tom's giving you my afternoons.",
-   "why": "his own subject: his shifts",
+   "line": "So you're the new girl. Tom's giving you my afternoons.",
+   "why": "Chris's corner: the machine, his afternoons.",
    "cause": null,
-   "screen_hash": "641173334639bd65",
+   "screen_hash": "148d1bc08acf279e",
    "row_hash": "f5e1d79f3251dbab",
-   "carried": true
+   "carried": false
+  },
+  {
+   "row": "C644",
+   "screen": "cafe_hire.both",
+   "verdict": "PASS",
+   "line": "He taps the shift board by the till: weekdays 2pm\u20136pm, Saturday and Sunday 10am\u20132pm and 3pm\u20137pm.",
+   "why": "Tom's corner: the till, the shift board, the tip jar.",
+   "cause": null,
+   "screen_hash": "86e14e5a8ea04e28",
+   "row_hash": "f5e1d79f3251dbab",
+   "carried": false
+  },
+  {
+   "row": "C644",
+   "screen": "cafe_hire.sign",
+   "verdict": "PASS",
+   "line": "He taps the shift board by the till: weekdays 2pm\u20136pm, Saturday and Sunday 10am\u20132pm and 3pm\u20137pm.",
+   "why": "Tom's corner: the till, the shift board, the tip jar.",
+   "cause": null,
+   "screen_hash": "3df42923d5534123",
+   "row_hash": "f5e1d79f3251dbab",
+   "carried": false
   },
   {
    "row": "C758",
@@ -2464,6 +4158,28 @@
    "carried": true
   },
   {
+   "row": "C758",
+   "screen": "cafe_hire.both",
+   "verdict": "PASS",
+   "line": "Done",
+   "why": "Short label.",
+   "cause": null,
+   "screen_hash": "86e14e5a8ea04e28",
+   "row_hash": "e158aaf055cb61d6",
+   "carried": false
+  },
+  {
+   "row": "C758",
+   "screen": "cafe_hire.sign",
+   "verdict": "PASS",
+   "line": "Done",
+   "why": "Short label.",
+   "cause": null,
+   "screen_hash": "3df42923d5534123",
+   "row_hash": "e158aaf055cb61d6",
+   "carried": false
+  },
+  {
    "row": "C762",
    "screen": "*",
    "verdict": "PASS",
@@ -2473,6 +4189,28 @@
    "screen_hash": "f54fc2669ff97376",
    "row_hash": "40e85f1ae92f1e71",
    "carried": true
+  },
+  {
+   "row": "C762",
+   "screen": "cafe_hire.both",
+   "verdict": "PASS",
+   "line": "The caf\u00e9 across from campus: the coffee machine hissing, a long counter, a tip jar by the till. A sign on the door says it's open from 7am to 9pm.",
+   "why": "No \"Nothing happens\".",
+   "cause": null,
+   "screen_hash": "86e14e5a8ea04e28",
+   "row_hash": "40e85f1ae92f1e71",
+   "carried": false
+  },
+  {
+   "row": "C762",
+   "screen": "cafe_hire.sign",
+   "verdict": "PASS",
+   "line": "The caf\u00e9 across from campus: the coffee machine hissing, a long counter, a tip jar by the till. A sign on the door says it's open from 7am to 9pm.",
+   "why": "No \"Nothing happens\".",
+   "cause": null,
+   "screen_hash": "3df42923d5534123",
+   "row_hash": "40e85f1ae92f1e71",
+   "carried": false
   },
   {
    "row": "C769",
@@ -2486,6 +4224,28 @@
    "carried": true
   },
   {
+   "row": "C769",
+   "screen": "cafe_hire.both",
+   "verdict": "PASS",
+   "line": "The caf\u00e9 across from campus: the coffee machine hissing, a long counter, a tip jar by the till. A sign on the door says it's open from 7am to 9pm.",
+   "why": "Says what it is and what happens there.",
+   "cause": null,
+   "screen_hash": "86e14e5a8ea04e28",
+   "row_hash": "f6b6f78a8f2e5ed7",
+   "carried": false
+  },
+  {
+   "row": "C769",
+   "screen": "cafe_hire.sign",
+   "verdict": "PASS",
+   "line": "The caf\u00e9 across from campus: the coffee machine hissing, a long counter, a tip jar by the till. A sign on the door says it's open from 7am to 9pm.",
+   "why": "Says what it is and what happens there.",
+   "cause": null,
+   "screen_hash": "3df42923d5534123",
+   "row_hash": "f6b6f78a8f2e5ed7",
+   "carried": false
+  },
+  {
    "row": "C770",
    "screen": "*",
    "verdict": "PASS",
@@ -2495,6 +4255,28 @@
    "screen_hash": "f54fc2669ff97376",
    "row_hash": "ff9aa31c11e5d50f",
    "carried": true
+  },
+  {
+   "row": "C770",
+   "screen": "cafe_hire.both",
+   "verdict": "PASS",
+   "line": "The caf\u00e9 across from campus: the coffee machine hissing, a long counter, a tip jar by the till. A sign on the door says it's open from 7am to 9pm.",
+   "why": "Short room screen.",
+   "cause": null,
+   "screen_hash": "86e14e5a8ea04e28",
+   "row_hash": "ff9aa31c11e5d50f",
+   "carried": false
+  },
+  {
+   "row": "C770",
+   "screen": "cafe_hire.sign",
+   "verdict": "PASS",
+   "line": "The caf\u00e9 across from campus: the coffee machine hissing, a long counter, a tip jar by the till. A sign on the door says it's open from 7am to 9pm.",
+   "why": "Short room screen.",
+   "cause": null,
+   "screen_hash": "3df42923d5534123",
+   "row_hash": "ff9aa31c11e5d50f",
+   "carried": false
   },
   {
    "row": "C771",
@@ -2508,6 +4290,28 @@
    "carried": true
   },
   {
+   "row": "C771",
+   "screen": "cafe_hire.both",
+   "verdict": "PASS",
+   "line": "The caf\u00e9 across from campus: the coffee machine hissing, a long counter, a tip jar by the till. A sign on the door says it's open from 7am to 9pm.",
+   "why": "No first-visit screen.",
+   "cause": null,
+   "screen_hash": "86e14e5a8ea04e28",
+   "row_hash": "563e3d25c3219dd0",
+   "carried": false
+  },
+  {
+   "row": "C771",
+   "screen": "cafe_hire.sign",
+   "verdict": "PASS",
+   "line": "The caf\u00e9 across from campus: the coffee machine hissing, a long counter, a tip jar by the till. A sign on the door says it's open from 7am to 9pm.",
+   "why": "No first-visit screen.",
+   "cause": null,
+   "screen_hash": "3df42923d5534123",
+   "row_hash": "563e3d25c3219dd0",
+   "carried": false
+  },
+  {
    "row": "C773",
    "screen": "*",
    "verdict": "PASS",
@@ -2517,6 +4321,28 @@
    "screen_hash": "f54fc2669ff97376",
    "row_hash": "599aac6293908bc4",
    "carried": true
+  },
+  {
+   "row": "C773",
+   "screen": "cafe_hire.both",
+   "verdict": "PASS",
+   "line": "Ask about the Help Wanted sign (5 min) / Work your first shift (4 hours, 15 energy)",
+   "why": "Work buttons, no browse list.",
+   "cause": null,
+   "screen_hash": "86e14e5a8ea04e28",
+   "row_hash": "599aac6293908bc4",
+   "carried": false
+  },
+  {
+   "row": "C773",
+   "screen": "cafe_hire.sign",
+   "verdict": "PASS",
+   "line": "Ask about the Help Wanted sign (5 min) / Work your first shift (4 hours, 15 energy)",
+   "why": "Work buttons, no browse list.",
+   "cause": null,
+   "screen_hash": "3df42923d5534123",
+   "row_hash": "599aac6293908bc4",
+   "carried": false
   },
   {
    "row": "C776",
@@ -2530,6 +4356,28 @@
    "carried": true
   },
   {
+   "row": "C776",
+   "screen": "cafe_hire.both",
+   "verdict": "PASS",
+   "line": "Ask about the Help Wanted sign (5 min) / Work your first shift (4 hours, 15 energy)",
+   "why": "The job (a system); Tom is unmet and has no face (C620); clock.md's worked example puts the ask on the caf\u00e9's buttons.",
+   "cause": null,
+   "screen_hash": "86e14e5a8ea04e28",
+   "row_hash": "4141d9e5e24362c3",
+   "carried": false
+  },
+  {
+   "row": "C776",
+   "screen": "cafe_hire.sign",
+   "verdict": "PASS",
+   "line": "Ask about the Help Wanted sign (5 min) / Work your first shift (4 hours, 15 energy)",
+   "why": "The job (a system); Tom is unmet and has no face (C620); clock.md's worked example puts the ask on the caf\u00e9's buttons.",
+   "cause": null,
+   "screen_hash": "3df42923d5534123",
+   "row_hash": "4141d9e5e24362c3",
+   "carried": false
+  },
+  {
    "row": "C777",
    "screen": "*",
    "verdict": "PASS",
@@ -2539,6 +4387,28 @@
    "screen_hash": "f54fc2669ff97376",
    "row_hash": "b56360a1040688cf",
    "carried": true
+  },
+  {
+   "row": "C777",
+   "screen": "cafe_hire.both",
+   "verdict": "PASS",
+   "line": "Ask about the Help Wanted sign (5 min)",
+   "why": "Nothing else on the menu.",
+   "cause": null,
+   "screen_hash": "86e14e5a8ea04e28",
+   "row_hash": "b56360a1040688cf",
+   "carried": false
+  },
+  {
+   "row": "C777",
+   "screen": "cafe_hire.sign",
+   "verdict": "PASS",
+   "line": "Ask about the Help Wanted sign (5 min)",
+   "why": "Nothing else on the menu.",
+   "cause": null,
+   "screen_hash": "3df42923d5534123",
+   "row_hash": "b56360a1040688cf",
+   "carried": false
   },
   {
    "row": "C794",
@@ -2552,6 +4422,28 @@
    "carried": true
   },
   {
+   "row": "C794",
+   "screen": "cafe_hire.both",
+   "verdict": "PASS",
+   "line": "The caf\u00e9 across from campus: the coffee machine hissing, a long counter, a tip jar by the till. A sign on the door says it's open from 7am to 9pm.",
+   "why": "Identity sentence the same in the base and the Help Wanted variant.",
+   "cause": null,
+   "screen_hash": "86e14e5a8ea04e28",
+   "row_hash": "bad76e5963432385",
+   "carried": false
+  },
+  {
+   "row": "C794",
+   "screen": "cafe_hire.sign",
+   "verdict": "PASS",
+   "line": "The caf\u00e9 across from campus: the coffee machine hissing, a long counter, a tip jar by the till. A sign on the door says it's open from 7am to 9pm.",
+   "why": "Identity sentence the same in the base and the Help Wanted variant.",
+   "cause": null,
+   "screen_hash": "3df42923d5534123",
+   "row_hash": "bad76e5963432385",
+   "carried": false
+  },
+  {
    "row": "C795",
    "screen": "cafe_first_shift.end",
    "verdict": "WAIVED",
@@ -2566,12 +4458,12 @@
    "row": "C795",
    "screen": "cafe_hire.both",
    "verdict": "WAIVED",
-   "line": "The caf\u00e9 across from campus: the coffee machine hissing, a long counter, a tip jar by the till.",
-   "why": "no presence line for Tom or Chris on near_cafe; waived: NOTES.md 2026-11-24, ENI for LO (delegated): \"C804/C795 on the Caf\u00e9: presence lines for Tom and Chris (met and unmet) come with P31.\"",
+   "line": "The caf\u00e9 across from campus: the coffee machine hissing, a long counter, a tip jar by the till. A sign on the door says it's open from 7am to 9pm.",
+   "why": "No presence line for Tom or Chris at the Caf\u00e9. LO waived it in NOTES.md (2026-11-24, ENI for LO, delegated): \"C804/C795 on the Caf\u00e9: presence lines for Tom and Chris (met and unmet) come with P31.\"",
    "cause": null,
-   "screen_hash": "6c687f2a2add5c32",
+   "screen_hash": "86e14e5a8ea04e28",
    "row_hash": "6c9eb17d99266791",
-   "carried": true
+   "carried": false
   },
   {
    "row": "C795",
@@ -2588,12 +4480,12 @@
    "row": "C795",
    "screen": "cafe_hire.sign",
    "verdict": "WAIVED",
-   "line": "The caf\u00e9 across from campus: the coffee machine hissing, a long counter, a tip jar by the till.",
-   "why": "no presence line for Tom or Chris on near_cafe; waived: NOTES.md 2026-11-24, ENI for LO (delegated): \"C804/C795 on the Caf\u00e9: presence lines for Tom and Chris (met and unmet) come with P31.\"",
+   "line": "The caf\u00e9 across from campus: the coffee machine hissing, a long counter, a tip jar by the till. A sign on the door says it's open from 7am to 9pm.",
+   "why": "No presence line for Tom or Chris at the Caf\u00e9. LO waived it in NOTES.md (2026-11-24, ENI for LO, delegated): \"C804/C795 on the Caf\u00e9: presence lines for Tom and Chris (met and unmet) come with P31.\"",
    "cause": null,
-   "screen_hash": "2c7079252f8ae4c5",
+   "screen_hash": "3df42923d5534123",
    "row_hash": "6c9eb17d99266791",
-   "carried": true
+   "carried": false
   },
   {
    "row": "C804",
@@ -2610,12 +4502,12 @@
    "row": "C804",
    "screen": "cafe_hire.both",
    "verdict": "WAIVED",
-   "line": "The caf\u00e9 across from campus: the coffee machine hissing, a long counter, a tip jar by the till.",
-   "why": "no presence line for Tom or Chris on near_cafe; waived: NOTES.md 2026-11-24, ENI for LO (delegated): \"C804/C795 on the Caf\u00e9: presence lines for Tom and Chris (met and unmet) come with P31.\"",
+   "line": "The caf\u00e9 across from campus: the coffee machine hissing, a long counter, a tip jar by the till. A sign on the door says it's open from 7am to 9pm.",
+   "why": "No presence line for Tom or Chris at the Caf\u00e9. LO waived it in NOTES.md (2026-11-24, ENI for LO, delegated): \"C804/C795 on the Caf\u00e9: presence lines for Tom and Chris (met and unmet) come with P31.\"",
    "cause": null,
-   "screen_hash": "6c687f2a2add5c32",
+   "screen_hash": "86e14e5a8ea04e28",
    "row_hash": "810ef8e803cb09dd",
-   "carried": true
+   "carried": false
   },
   {
    "row": "C804",
@@ -2632,12 +4524,12 @@
    "row": "C804",
    "screen": "cafe_hire.sign",
    "verdict": "WAIVED",
-   "line": "The caf\u00e9 across from campus: the coffee machine hissing, a long counter, a tip jar by the till.",
-   "why": "no presence line for Tom or Chris on near_cafe; waived: NOTES.md 2026-11-24, ENI for LO (delegated): \"C804/C795 on the Caf\u00e9: presence lines for Tom and Chris (met and unmet) come with P31.\"",
+   "line": "The caf\u00e9 across from campus: the coffee machine hissing, a long counter, a tip jar by the till. A sign on the door says it's open from 7am to 9pm.",
+   "why": "No presence line for Tom or Chris at the Caf\u00e9. LO waived it in NOTES.md (2026-11-24, ENI for LO, delegated): \"C804/C795 on the Caf\u00e9: presence lines for Tom and Chris (met and unmet) come with P31.\"",
    "cause": null,
-   "screen_hash": "2c7079252f8ae4c5",
+   "screen_hash": "3df42923d5534123",
    "row_hash": "810ef8e803cb09dd",
-   "carried": true
+   "carried": false
   },
   {
    "row": "C889",
@@ -2655,11 +4547,33 @@
    "screen": "cafe_first_shift.start",
    "verdict": "PASS",
    "line": "Work your first shift (4 hours, 15 energy)",
-   "why": "duration, equal to the 240 minutes spent",
+   "why": "4 hours on the door = 0 + 240 + 0.",
    "cause": null,
-   "screen_hash": "641173334639bd65",
+   "screen_hash": "148d1bc08acf279e",
    "row_hash": "1b724e2dcfbf028b",
-   "carried": true
+   "carried": false
+  },
+  {
+   "row": "C889",
+   "screen": "cafe_hire.both",
+   "verdict": "PASS",
+   "line": "Ask about the Help Wanted sign (5 min)",
+   "why": "Duration on the door (5 min) equals the spend: 5 + 0.",
+   "cause": null,
+   "screen_hash": "86e14e5a8ea04e28",
+   "row_hash": "1b724e2dcfbf028b",
+   "carried": false
+  },
+  {
+   "row": "C889",
+   "screen": "cafe_hire.sign",
+   "verdict": "PASS",
+   "line": "Ask about the Help Wanted sign (5 min)",
+   "why": "Duration on the door (5 min) equals the spend: 5 + 0.",
+   "cause": null,
+   "screen_hash": "3df42923d5534123",
+   "row_hash": "1b724e2dcfbf028b",
+   "carried": false
   },
   {
    "row": "C892",
@@ -2676,12 +4590,34 @@
    "row": "C892",
    "screen": "cafe_first_shift.start",
    "verdict": "PASS",
-   "line": "it starts at 2pm on a weekday.",
-   "why": "the hour is on the door, not in the act",
+   "line": "Work your first shift (4 hours, 15 energy)",
+   "why": "The hour goes on the door (cooldown), not the act.",
    "cause": null,
-   "screen_hash": "641173334639bd65",
+   "screen_hash": "148d1bc08acf279e",
    "row_hash": "5c890033f6ac38b8",
-   "carried": true
+   "carried": false
+  },
+  {
+   "row": "C892",
+   "screen": "cafe_hire.both",
+   "verdict": "PASS",
+   "line": "He taps the shift board by the till: weekdays 2pm\u20136pm, Saturday and Sunday 10am\u20132pm and 3pm\u20137pm.",
+   "why": "Hours on the board, not the act.",
+   "cause": null,
+   "screen_hash": "86e14e5a8ea04e28",
+   "row_hash": "5c890033f6ac38b8",
+   "carried": false
+  },
+  {
+   "row": "C892",
+   "screen": "cafe_hire.sign",
+   "verdict": "PASS",
+   "line": "He taps the shift board by the till: weekdays 2pm\u20136pm, Saturday and Sunday 10am\u20132pm and 3pm\u20137pm.",
+   "why": "Hours on the board, not the act.",
+   "cause": null,
+   "screen_hash": "3df42923d5534123",
+   "row_hash": "5c890033f6ac38b8",
+   "carried": false
   },
   {
    "row": "C897",
@@ -2697,13 +4633,35 @@
   {
    "row": "C897",
    "screen": "cafe_first_shift.start",
-   "verdict": "N/A",
-   "line": "-",
-   "why": "no travel on this screen",
+   "verdict": "PASS",
+   "line": "Work the shift (240 min; sets met_chris)",
+   "why": "No travel time on rooms.",
    "cause": null,
-   "screen_hash": "641173334639bd65",
+   "screen_hash": "148d1bc08acf279e",
    "row_hash": "265ece64add83676",
-   "carried": true
+   "carried": false
+  },
+  {
+   "row": "C897",
+   "screen": "cafe_hire.both",
+   "verdict": "PASS",
+   "line": "Done (0 min; sets met_tom, cafe_hired)",
+   "why": "No time on an in-room move.",
+   "cause": null,
+   "screen_hash": "86e14e5a8ea04e28",
+   "row_hash": "265ece64add83676",
+   "carried": false
+  },
+  {
+   "row": "C897",
+   "screen": "cafe_hire.sign",
+   "verdict": "PASS",
+   "line": "Done (0 min; sets met_tom, cafe_hired)",
+   "why": "No time on an in-room move.",
+   "cause": null,
+   "screen_hash": "3df42923d5534123",
+   "row_hash": "265ece64add83676",
+   "carried": false
   },
   {
    "row": "C900",
@@ -2720,12 +4678,34 @@
    "row": "C900",
    "screen": "cafe_first_shift.start",
    "verdict": "PASS",
-   "line": "whole screen",
-   "why": "no clock time in the prose",
+   "line": "So you're the new girl. Tom's giving you my afternoons.",
+   "why": "No time said in the beat.",
    "cause": null,
-   "screen_hash": "641173334639bd65",
+   "screen_hash": "148d1bc08acf279e",
    "row_hash": "6372efb027eb2034",
-   "carried": true
+   "carried": false
+  },
+  {
+   "row": "C900",
+   "screen": "cafe_hire.both",
+   "verdict": "PASS",
+   "line": "He taps the shift board by the till: weekdays 2pm\u20136pm, Saturday and Sunday 10am\u20132pm and 3pm\u20137pm.",
+   "why": "Times only as a rule on a board.",
+   "cause": null,
+   "screen_hash": "86e14e5a8ea04e28",
+   "row_hash": "6372efb027eb2034",
+   "carried": false
+  },
+  {
+   "row": "C900",
+   "screen": "cafe_hire.sign",
+   "verdict": "PASS",
+   "line": "He taps the shift board by the till: weekdays 2pm\u20136pm, Saturday and Sunday 10am\u20132pm and 3pm\u20137pm.",
+   "why": "Times only as a rule on a board.",
+   "cause": null,
+   "screen_hash": "3df42923d5534123",
+   "row_hash": "6372efb027eb2034",
+   "carried": false
   },
   {
    "row": "C902",
@@ -2742,34 +4722,78 @@
    "row": "C902",
    "screen": "cafe_first_shift.start",
    "verdict": "PASS",
-   "line": "Tom's giving you my afternoons.",
-   "why": "true at 14:59; Chris is there until 15:00",
+   "line": "So you're the new girl. Tom's giving you my afternoons.",
+   "why": "At 14:59: Chris (to 15:00) and Tom still there.",
    "cause": null,
-   "screen_hash": "641173334639bd65",
+   "screen_hash": "148d1bc08acf279e",
    "row_hash": "df5ed7a36dbc74e4",
-   "carried": true
+   "carried": false
+  },
+  {
+   "row": "C902",
+   "screen": "cafe_hire.both",
+   "verdict": "PASS",
+   "line": "Your first one's a weekday afternoon. Chris'll show you the machine. Don't be late, rookie.",
+   "why": "At 20:59 Saturday: Tom still in, the line still true.",
+   "cause": null,
+   "screen_hash": "86e14e5a8ea04e28",
+   "row_hash": "df5ed7a36dbc74e4",
+   "carried": false
+  },
+  {
+   "row": "C902",
+   "screen": "cafe_hire.sign",
+   "verdict": "PASS",
+   "line": "Your first one's a weekday afternoon. Chris'll show you the machine. Don't be late, rookie.",
+   "why": "At 20:59 Saturday: Tom still in, the line still true.",
+   "cause": null,
+   "screen_hash": "3df42923d5534123",
+   "row_hash": "df5ed7a36dbc74e4",
+   "carried": false
   },
   {
    "row": "C903",
    "screen": "*",
    "verdict": "PASS",
-   "line": "He taps the shift board by the till: weekdays 2pm\u20136pm, Saturday and Sunday 10am\u20132pm and 3pm\u20137pm.",
-   "why": "Durations on labels; hours only on a sign and in greyed rows; windows end-exclusive inside the rows.",
+   "line": "cooldown: \"the manager's in from 10am, Monday to Saturday.\" / end: \"Same again tomorrow, rookie, if you want it.\"",
+   "why": "Every weekday named on the 5 screens is a standing rule, true on any visit; no relative weekday (ask, sign, both, start, end).",
    "cause": null,
-   "screen_hash": "f54fc2669ff97376",
-   "row_hash": "5e42a6ca2c00ded3",
-   "carried": true
+   "screen_hash": "6fa40bc231649c1d",
+   "row_hash": "4f83b0b5eb45f71b",
+   "carried": false
   },
   {
    "row": "C903",
    "screen": "cafe_first_shift.start",
    "verdict": "PASS",
-   "line": "whole screen",
-   "why": "no weekday named",
+   "line": "So you're the new girl. Tom's giving you my afternoons.",
+   "why": "No weekday named.",
    "cause": null,
-   "screen_hash": "641173334639bd65",
-   "row_hash": "5e42a6ca2c00ded3",
-   "carried": true
+   "screen_hash": "148d1bc08acf279e",
+   "row_hash": "4f83b0b5eb45f71b",
+   "carried": false
+  },
+  {
+   "row": "C903",
+   "screen": "cafe_hire.both",
+   "verdict": "PASS",
+   "line": "He taps the shift board by the till: weekdays 2pm\u20136pm, Saturday and Sunday 10am\u20132pm and 3pm\u20137pm. / Your first one's a weekday afternoon. Chris'll show you the machine. Don't be late, rookie.",
+   "why": "The weekdays are a standing rule on the board, true on every visit; no relative day (\"see you Monday\"); trigger is Mon\u2013Sat.",
+   "cause": null,
+   "screen_hash": "86e14e5a8ea04e28",
+   "row_hash": "4f83b0b5eb45f71b",
+   "carried": false
+  },
+  {
+   "row": "C903",
+   "screen": "cafe_hire.sign",
+   "verdict": "PASS",
+   "line": "He taps the shift board by the till: weekdays 2pm\u20136pm, Saturday and Sunday 10am\u20132pm and 3pm\u20137pm. / Your first one's a weekday afternoon. Chris'll show you the machine. Don't be late, rookie.",
+   "why": "The weekdays are a standing rule on the board, true on every visit; no relative day (\"see you Monday\"); trigger is Mon\u2013Sat.",
+   "cause": null,
+   "screen_hash": "3df42923d5534123",
+   "row_hash": "4f83b0b5eb45f71b",
+   "carried": false
   },
   {
    "row": "C906",
@@ -2786,12 +4810,34 @@
    "row": "C906",
    "screen": "cafe_first_shift.start",
    "verdict": "PASS",
-   "line": "4 hours",
-   "why": "a duration, never 'till 6'",
+   "line": "Work your first shift (4 hours, 15 energy)",
+   "why": "No \"till\".",
    "cause": null,
-   "screen_hash": "641173334639bd65",
+   "screen_hash": "148d1bc08acf279e",
    "row_hash": "ce3b42a8c86da5b8",
-   "carried": true
+   "carried": false
+  },
+  {
+   "row": "C906",
+   "screen": "cafe_hire.both",
+   "verdict": "PASS",
+   "line": "Ask about the Help Wanted sign (5 min)",
+   "why": "No \"till\".",
+   "cause": null,
+   "screen_hash": "86e14e5a8ea04e28",
+   "row_hash": "ce3b42a8c86da5b8",
+   "carried": false
+  },
+  {
+   "row": "C906",
+   "screen": "cafe_hire.sign",
+   "verdict": "PASS",
+   "line": "Ask about the Help Wanted sign (5 min)",
+   "why": "No \"till\".",
+   "cause": null,
+   "screen_hash": "3df42923d5534123",
+   "row_hash": "ce3b42a8c86da5b8",
+   "carried": false
   },
   {
    "row": "C910",
@@ -2808,12 +4854,34 @@
    "row": "C910",
    "screen": "cafe_first_shift.start",
    "verdict": "PASS",
-   "line": "Work your first shift (4 hours, 15 energy) / Work the shift",
-   "why": "the door she chose says 4 hours; the only button after it spends exactly that, same form as cafe_hire's (5 min)",
+   "line": "Work your first shift (4 hours, 15 energy) / Work the shift (240 min; sets met_chris)",
+   "why": "The door states 4 hours, the spend the inner button carries.",
    "cause": null,
-   "screen_hash": "641173334639bd65",
+   "screen_hash": "148d1bc08acf279e",
    "row_hash": "be1c18ee466455f6",
-   "carried": true
+   "carried": false
+  },
+  {
+   "row": "C910",
+   "screen": "cafe_hire.both",
+   "verdict": "PASS",
+   "line": "Ask about the Help Wanted sign (5 min)",
+   "why": "The door states its time; Done spends 0.",
+   "cause": null,
+   "screen_hash": "86e14e5a8ea04e28",
+   "row_hash": "be1c18ee466455f6",
+   "carried": false
+  },
+  {
+   "row": "C910",
+   "screen": "cafe_hire.sign",
+   "verdict": "PASS",
+   "line": "Ask about the Help Wanted sign (5 min)",
+   "why": "The door states its time; Done spends 0.",
+   "cause": null,
+   "screen_hash": "3df42923d5534123",
+   "row_hash": "be1c18ee466455f6",
+   "carried": false
   },
   {
    "row": "C913",
@@ -2831,11 +4899,33 @@
    "screen": "cafe_first_shift.start",
    "verdict": "PASS",
    "line": "it starts at 2pm on a weekday.",
-   "why": "shut, it stays a dimmed line",
+   "why": "Dimmed with its hours.",
    "cause": null,
-   "screen_hash": "641173334639bd65",
+   "screen_hash": "148d1bc08acf279e",
    "row_hash": "c750f9b6ab4ace14",
-   "carried": true
+   "carried": false
+  },
+  {
+   "row": "C913",
+   "screen": "cafe_hire.both",
+   "verdict": "PASS",
+   "line": "show_when_blocked + \"the manager's in from 10am, Monday to Saturday.\"",
+   "why": "Dimmed with its hours when shut.",
+   "cause": null,
+   "screen_hash": "86e14e5a8ea04e28",
+   "row_hash": "c750f9b6ab4ace14",
+   "carried": false
+  },
+  {
+   "row": "C913",
+   "screen": "cafe_hire.sign",
+   "verdict": "PASS",
+   "line": "show_when_blocked + \"the manager's in from 10am, Monday to Saturday.\"",
+   "why": "Dimmed with its hours when shut.",
+   "cause": null,
+   "screen_hash": "3df42923d5534123",
+   "row_hash": "c750f9b6ab4ace14",
+   "carried": false
   },
   {
    "row": "C914",
@@ -2852,12 +4942,34 @@
    "row": "C914",
    "screen": "cafe_first_shift.start",
    "verdict": "PASS",
-   "line": "cooldown_message",
-   "why": "hours show when the clock alone shuts it; flags hide it",
+   "line": "it starts at 2pm on a weekday.",
+   "why": "Hours only when the clock shuts it.",
    "cause": null,
-   "screen_hash": "641173334639bd65",
+   "screen_hash": "148d1bc08acf279e",
    "row_hash": "bd07273d5822f34f",
-   "carried": true
+   "carried": false
+  },
+  {
+   "row": "C914",
+   "screen": "cafe_hire.both",
+   "verdict": "PASS",
+   "line": "the manager's in from 10am, Monday to Saturday.",
+   "why": "Hours only when the clock shuts it; hidden by cafe_hired / parked.",
+   "cause": null,
+   "screen_hash": "86e14e5a8ea04e28",
+   "row_hash": "bd07273d5822f34f",
+   "carried": false
+  },
+  {
+   "row": "C914",
+   "screen": "cafe_hire.sign",
+   "verdict": "PASS",
+   "line": "the manager's in from 10am, Monday to Saturday.",
+   "why": "Hours only when the clock shuts it; hidden by cafe_hired / parked.",
+   "cause": null,
+   "screen_hash": "3df42923d5534123",
+   "row_hash": "bd07273d5822f34f",
+   "carried": false
   },
   {
    "row": "C916",
@@ -2874,12 +4986,34 @@
    "row": "C916",
    "screen": "cafe_first_shift.start",
    "verdict": "PASS",
-   "line": "Work your first shift",
-   "why": "her choice, so its hours show",
+   "line": "Work your first shift (4 hours, 15 energy)",
+   "why": "A chosen button.",
    "cause": null,
-   "screen_hash": "641173334639bd65",
+   "screen_hash": "148d1bc08acf279e",
    "row_hash": "7b2bb0dfdbcfe946",
-   "carried": true
+   "carried": false
+  },
+  {
+   "row": "C916",
+   "screen": "cafe_hire.both",
+   "verdict": "PASS",
+   "line": "Ask about the Help Wanted sign (5 min)",
+   "why": "A chosen button shows its hours.",
+   "cause": null,
+   "screen_hash": "86e14e5a8ea04e28",
+   "row_hash": "7b2bb0dfdbcfe946",
+   "carried": false
+  },
+  {
+   "row": "C916",
+   "screen": "cafe_hire.sign",
+   "verdict": "PASS",
+   "line": "Ask about the Help Wanted sign (5 min)",
+   "why": "A chosen button shows its hours.",
+   "cause": null,
+   "screen_hash": "3df42923d5534123",
+   "row_hash": "7b2bb0dfdbcfe946",
+   "carried": false
   },
   {
    "row": "C920",
@@ -2895,13 +5029,35 @@
   {
    "row": "C920",
    "screen": "cafe_first_shift.start",
-   "verdict": "N/A",
-   "line": "-",
-   "why": "not a move",
+   "verdict": "PASS",
+   "line": "Work the shift (240 min; sets met_chris)",
+   "why": "No move.",
    "cause": null,
-   "screen_hash": "641173334639bd65",
+   "screen_hash": "148d1bc08acf279e",
    "row_hash": "695dc5d9d0e5e749",
-   "carried": true
+   "carried": false
+  },
+  {
+   "row": "C920",
+   "screen": "cafe_hire.both",
+   "verdict": "PASS",
+   "line": "Done (0 min; sets met_tom, cafe_hired)",
+   "why": "Back to the Caf\u00e9 is re-entry, 0 min.",
+   "cause": null,
+   "screen_hash": "86e14e5a8ea04e28",
+   "row_hash": "695dc5d9d0e5e749",
+   "carried": false
+  },
+  {
+   "row": "C920",
+   "screen": "cafe_hire.sign",
+   "verdict": "PASS",
+   "line": "Done (0 min; sets met_tom, cafe_hired)",
+   "why": "Back to the Caf\u00e9 is re-entry, 0 min.",
+   "cause": null,
+   "screen_hash": "3df42923d5534123",
+   "row_hash": "695dc5d9d0e5e749",
+   "carried": false
   },
   {
    "row": "C924",
@@ -2917,13 +5073,35 @@
   {
    "row": "C924",
    "screen": "cafe_first_shift.start",
-   "verdict": "N/A",
-   "line": "-",
-   "why": "no travel",
+   "verdict": "PASS",
+   "line": "Work your first shift (4 hours, 15 energy)",
+   "why": "The 2\u20133pm start is what clashes with office hours (PLAN 9b).",
    "cause": null,
-   "screen_hash": "641173334639bd65",
+   "screen_hash": "148d1bc08acf279e",
    "row_hash": "791cd173e23fb130",
-   "carried": true
+   "carried": false
+  },
+  {
+   "row": "C924",
+   "screen": "cafe_hire.both",
+   "verdict": "PASS",
+   "line": "He taps the shift board by the till: weekdays 2pm\u20136pm, Saturday and Sunday 10am\u20132pm and 3pm\u20137pm.",
+   "why": "The shifts sit in the week's afternoons, against class and people (PLAN 9b).",
+   "cause": null,
+   "screen_hash": "86e14e5a8ea04e28",
+   "row_hash": "791cd173e23fb130",
+   "carried": false
+  },
+  {
+   "row": "C924",
+   "screen": "cafe_hire.sign",
+   "verdict": "PASS",
+   "line": "He taps the shift board by the till: weekdays 2pm\u20136pm, Saturday and Sunday 10am\u20132pm and 3pm\u20137pm.",
+   "why": "The shifts sit in the week's afternoons, against class and people (PLAN 9b).",
+   "cause": null,
+   "screen_hash": "3df42923d5534123",
+   "row_hash": "791cd173e23fb130",
+   "carried": false
   },
   {
    "row": "C926",
@@ -2940,12 +5118,34 @@
    "row": "C926",
    "screen": "cafe_first_shift.start",
    "verdict": "PASS",
-   "line": "time_progression_minutes = 240",
-   "why": "minutes only",
+   "line": "Work the shift (240 min; sets met_chris)",
+   "why": "240 minutes added.",
    "cause": null,
-   "screen_hash": "641173334639bd65",
+   "screen_hash": "148d1bc08acf279e",
    "row_hash": "177d1e1776fac74b",
-   "carried": true
+   "carried": false
+  },
+  {
+   "row": "C926",
+   "screen": "cafe_hire.both",
+   "verdict": "PASS",
+   "line": "Done (0 min; sets met_tom, cafe_hired)",
+   "why": "Only minutes added.",
+   "cause": null,
+   "screen_hash": "86e14e5a8ea04e28",
+   "row_hash": "177d1e1776fac74b",
+   "carried": false
+  },
+  {
+   "row": "C926",
+   "screen": "cafe_hire.sign",
+   "verdict": "PASS",
+   "line": "Done (0 min; sets met_tom, cafe_hired)",
+   "why": "Only minutes added.",
+   "cause": null,
+   "screen_hash": "3df42923d5534123",
+   "row_hash": "177d1e1776fac74b",
+   "carried": false
   },
   {
    "row": "C927",
@@ -2962,12 +5162,34 @@
    "row": "C927",
    "screen": "cafe_first_shift.start",
    "verdict": "PASS",
-   "line": "time_progression_minutes = 240",
-   "why": "the exit has a time",
+   "line": "Work the shift (240 min; sets met_chris)",
+   "why": "Explicit time.",
    "cause": null,
-   "screen_hash": "641173334639bd65",
+   "screen_hash": "148d1bc08acf279e",
    "row_hash": "4e86d143688ba8e5",
-   "carried": true
+   "carried": false
+  },
+  {
+   "row": "C927",
+   "screen": "cafe_hire.both",
+   "verdict": "PASS",
+   "line": "Done (0 min; sets met_tom, cafe_hired)",
+   "why": "Every exit has an explicit time.",
+   "cause": null,
+   "screen_hash": "86e14e5a8ea04e28",
+   "row_hash": "4e86d143688ba8e5",
+   "carried": false
+  },
+  {
+   "row": "C927",
+   "screen": "cafe_hire.sign",
+   "verdict": "PASS",
+   "line": "Done (0 min; sets met_tom, cafe_hired)",
+   "why": "Every exit has an explicit time.",
+   "cause": null,
+   "screen_hash": "3df42923d5534123",
+   "row_hash": "4e86d143688ba8e5",
+   "carried": false
   },
   {
    "row": "C928",
@@ -2984,12 +5206,34 @@
    "row": "C928",
    "screen": "cafe_first_shift.start",
    "verdict": "PASS",
-   "line": "whole screen",
-   "why": "no clock in prose",
+   "line": "So you're the new girl. Tom's giving you my afternoons.",
+   "why": "No clock in prose.",
    "cause": null,
-   "screen_hash": "641173334639bd65",
+   "screen_hash": "148d1bc08acf279e",
    "row_hash": "2c3ccc6bd9929d7f",
-   "carried": true
+   "carried": false
+  },
+  {
+   "row": "C928",
+   "screen": "cafe_hire.both",
+   "verdict": "PASS",
+   "line": "He peels the sign off the window and drops it under the counter. Your face goes warm. You've got a job.",
+   "why": "No clock printed into prose.",
+   "cause": null,
+   "screen_hash": "86e14e5a8ea04e28",
+   "row_hash": "2c3ccc6bd9929d7f",
+   "carried": false
+  },
+  {
+   "row": "C928",
+   "screen": "cafe_hire.sign",
+   "verdict": "PASS",
+   "line": "He peels the sign off the window and drops it under the counter. Your face goes warm. You've got a job.",
+   "why": "No clock printed into prose.",
+   "cause": null,
+   "screen_hash": "3df42923d5534123",
+   "row_hash": "2c3ccc6bd9929d7f",
+   "carried": false
   },
   {
    "row": "C929",
@@ -3007,11 +5251,33 @@
    "screen": "cafe_first_shift.start",
    "verdict": "PASS",
    "line": "Work your first shift (4 hours, 15 energy)",
-   "why": "the activity's label carries its time",
+   "why": "On the label.",
    "cause": null,
-   "screen_hash": "641173334639bd65",
+   "screen_hash": "148d1bc08acf279e",
    "row_hash": "e20b027bad88ca8c",
-   "carried": true
+   "carried": false
+  },
+  {
+   "row": "C929",
+   "screen": "cafe_hire.both",
+   "verdict": "PASS",
+   "line": "Ask about the Help Wanted sign (5 min)",
+   "why": "Activity's time on the label.",
+   "cause": null,
+   "screen_hash": "86e14e5a8ea04e28",
+   "row_hash": "e20b027bad88ca8c",
+   "carried": false
+  },
+  {
+   "row": "C929",
+   "screen": "cafe_hire.sign",
+   "verdict": "PASS",
+   "line": "Ask about the Help Wanted sign (5 min)",
+   "why": "Activity's time on the label.",
+   "cause": null,
+   "screen_hash": "3df42923d5534123",
+   "row_hash": "e20b027bad88ca8c",
+   "carried": false
   },
   {
    "row": "C930",
@@ -3029,11 +5295,33 @@
    "screen": "cafe_first_shift.start",
    "verdict": "PASS",
    "line": "show_when_blocked = true",
-   "why": "windowed work stays visible",
+   "why": "Set.",
    "cause": null,
-   "screen_hash": "641173334639bd65",
+   "screen_hash": "148d1bc08acf279e",
    "row_hash": "beb57cd46fe906bf",
-   "carried": true
+   "carried": false
+  },
+  {
+   "row": "C930",
+   "screen": "cafe_hire.both",
+   "verdict": "PASS",
+   "line": "show_when_blocked = true",
+   "why": "Set.",
+   "cause": null,
+   "screen_hash": "86e14e5a8ea04e28",
+   "row_hash": "beb57cd46fe906bf",
+   "carried": false
+  },
+  {
+   "row": "C930",
+   "screen": "cafe_hire.sign",
+   "verdict": "PASS",
+   "line": "show_when_blocked = true",
+   "why": "Set.",
+   "cause": null,
+   "screen_hash": "3df42923d5534123",
+   "row_hash": "beb57cd46fe906bf",
+   "carried": false
   },
   {
    "row": "C931",
@@ -3050,12 +5338,34 @@
    "row": "C931",
    "screen": "cafe_first_shift.start",
    "verdict": "PASS",
-   "line": "start_time 14:00, end_time 15:00",
-   "why": "end exclusive: last start 14:59, Chris's row ends 15:00",
+   "line": "time_of_day 14:00\u201315:00",
+   "why": "End exclusive matches Chris's row ending 15:00.",
    "cause": null,
-   "screen_hash": "641173334639bd65",
+   "screen_hash": "148d1bc08acf279e",
    "row_hash": "1aadffd96e76381c",
-   "carried": true
+   "carried": false
+  },
+  {
+   "row": "C931",
+   "screen": "cafe_hire.both",
+   "verdict": "PASS",
+   "line": "time_of_day 10:00\u201320:55",
+   "why": "Inside Tom's 10:00\u201321:00 row, end exclusive.",
+   "cause": null,
+   "screen_hash": "86e14e5a8ea04e28",
+   "row_hash": "1aadffd96e76381c",
+   "carried": false
+  },
+  {
+   "row": "C931",
+   "screen": "cafe_hire.sign",
+   "verdict": "PASS",
+   "line": "time_of_day 10:00\u201320:55",
+   "why": "Inside Tom's 10:00\u201321:00 row, end exclusive.",
+   "cause": null,
+   "screen_hash": "3df42923d5534123",
+   "row_hash": "1aadffd96e76381c",
+   "carried": false
   },
   {
    "row": "C951",
@@ -3069,6 +5379,28 @@
    "carried": true
   },
   {
+   "row": "C951",
+   "screen": "cafe_hire.both",
+   "verdict": "PASS",
+   "line": "Four-hour shifts, five an hour, plus whatever lands in the tip jar. Call it twenty-two a shift.",
+   "why": "The amount is in the prose.",
+   "cause": null,
+   "screen_hash": "86e14e5a8ea04e28",
+   "row_hash": "fe3b305ad0c265a7",
+   "carried": false
+  },
+  {
+   "row": "C951",
+   "screen": "cafe_hire.sign",
+   "verdict": "PASS",
+   "line": "Four-hour shifts, five an hour, plus whatever lands in the tip jar. Call it twenty-two a shift.",
+   "why": "The amount is in the prose.",
+   "cause": null,
+   "screen_hash": "3df42923d5534123",
+   "row_hash": "fe3b305ad0c265a7",
+   "carried": false
+  },
+  {
    "row": "C952",
    "screen": "*",
    "verdict": "PASS",
@@ -3078,6 +5410,28 @@
    "screen_hash": "f54fc2669ff97376",
    "row_hash": "2f7d1a6bf6a93ca9",
    "carried": true
+  },
+  {
+   "row": "C952",
+   "screen": "cafe_hire.both",
+   "verdict": "PASS",
+   "line": "Four-hour shifts, five an hour, plus whatever lands in the tip jar. Call it twenty-two a shift. / He taps the shift board by the till: weekdays 2pm\u20136pm, Saturday and Sunday 10am\u20132pm and 3pm\u20137pm.",
+   "why": "Agrees with PLAN \u00a78c and the shift table.",
+   "cause": null,
+   "screen_hash": "86e14e5a8ea04e28",
+   "row_hash": "2f7d1a6bf6a93ca9",
+   "carried": false
+  },
+  {
+   "row": "C952",
+   "screen": "cafe_hire.sign",
+   "verdict": "PASS",
+   "line": "Four-hour shifts, five an hour, plus whatever lands in the tip jar. Call it twenty-two a shift. / He taps the shift board by the till: weekdays 2pm\u20136pm, Saturday and Sunday 10am\u20132pm and 3pm\u20137pm.",
+   "why": "Agrees with PLAN \u00a78c and the shift table.",
+   "cause": null,
+   "screen_hash": "3df42923d5534123",
+   "row_hash": "2f7d1a6bf6a93ca9",
+   "carried": false
   },
   {
    "row": "C953",
@@ -3091,6 +5445,28 @@
    "carried": true
   },
   {
+   "row": "C953",
+   "screen": "cafe_hire.both",
+   "verdict": "PASS",
+   "line": "Done (0 min; sets met_tom, cafe_hired)",
+   "why": "\"Done\" costs nothing (re-entry is free); the door said (5 min).",
+   "cause": null,
+   "screen_hash": "86e14e5a8ea04e28",
+   "row_hash": "8d1306a15c51370a",
+   "carried": false
+  },
+  {
+   "row": "C953",
+   "screen": "cafe_hire.sign",
+   "verdict": "PASS",
+   "line": "Done (0 min; sets met_tom, cafe_hired)",
+   "why": "\"Done\" costs nothing (re-entry is free); the door said (5 min).",
+   "cause": null,
+   "screen_hash": "3df42923d5534123",
+   "row_hash": "8d1306a15c51370a",
+   "carried": false
+  },
+  {
    "row": "C954",
    "screen": "*",
    "verdict": "PASS",
@@ -3100,6 +5476,28 @@
    "screen_hash": "f54fc2669ff97376",
    "row_hash": "c8001b93946f6f80",
    "carried": true
+  },
+  {
+   "row": "C954",
+   "screen": "cafe_hire.both",
+   "verdict": "PASS",
+   "line": "Four-hour shifts, five an hour, plus whatever lands in the tip jar. Call it twenty-two a shift.",
+   "why": "Pay said in the scene, never on the button.",
+   "cause": null,
+   "screen_hash": "86e14e5a8ea04e28",
+   "row_hash": "c8001b93946f6f80",
+   "carried": false
+  },
+  {
+   "row": "C954",
+   "screen": "cafe_hire.sign",
+   "verdict": "PASS",
+   "line": "Four-hour shifts, five an hour, plus whatever lands in the tip jar. Call it twenty-two a shift.",
+   "why": "Pay said in the scene, never on the button.",
+   "cause": null,
+   "screen_hash": "3df42923d5534123",
+   "row_hash": "c8001b93946f6f80",
+   "carried": false
   },
   {
    "row": "L106",
@@ -3116,12 +5514,34 @@
    "row": "L106",
    "screen": "cafe_first_shift.start",
    "verdict": "PASS",
-   "line": "Tom, from the till:",
-   "why": "Tom 10\u201321 and Chris 07\u201315 cover the whole window (who_is_where)",
+   "line": "Chris. Customers.",
+   "why": "Tom (10\u201321) and Chris (07\u201315) are both there weekdays 14:00\u201315:00.",
    "cause": null,
-   "screen_hash": "641173334639bd65",
+   "screen_hash": "148d1bc08acf279e",
    "row_hash": "13a714429d15f3b2",
-   "carried": true
+   "carried": false
+  },
+  {
+   "row": "L106",
+   "screen": "cafe_hire.both",
+   "verdict": "PASS",
+   "line": "Your first one's a weekday afternoon. Chris'll show you the machine. Don't be late, rookie.",
+   "why": "No line puts anyone at the Caf\u00e9 who isn't there; Tom is in (Mon\u2013Sat 10\u201321).",
+   "cause": null,
+   "screen_hash": "86e14e5a8ea04e28",
+   "row_hash": "13a714429d15f3b2",
+   "carried": false
+  },
+  {
+   "row": "L106",
+   "screen": "cafe_hire.sign",
+   "verdict": "PASS",
+   "line": "Your first one's a weekday afternoon. Chris'll show you the machine. Don't be late, rookie.",
+   "why": "No line puts anyone at the Caf\u00e9 who isn't there; Tom is in (Mon\u2013Sat 10\u201321).",
+   "cause": null,
+   "screen_hash": "3df42923d5534123",
+   "row_hash": "13a714429d15f3b2",
+   "carried": false
   },
   {
    "row": "L119",
@@ -3138,12 +5558,12 @@
    "row": "L119",
    "screen": "cafe_first_shift.start",
    "verdict": "PASS",
-   "line": "pool = 1",
-   "why": "pool written, 1",
+   "line": "Seen from behind the counter: a woman of 18 at a caf\u00e9 espresso machine, steam rising, her face flushed. No man in frame. (pool_dir look/chris_wand_t3, pool 1)",
+   "why": "pool written as 1.",
    "cause": null,
-   "screen_hash": "641173334639bd65",
+   "screen_hash": "148d1bc08acf279e",
    "row_hash": "faf4c46f7b59480a",
-   "carried": true
+   "carried": false
   },
   {
    "row": "L120",
@@ -3160,12 +5580,12 @@
    "row": "L120",
    "screen": "cafe_first_shift.start",
    "verdict": "PASS",
-   "line": "No man in frame.",
-   "why": "one-person frame",
+   "line": "Seen from behind the counter: a woman of 18 at a caf\u00e9 espresso machine, steam rising, her face flushed. No man in frame. (pool_dir look/chris_wand_t3, pool 1)",
+   "why": "No man in frame.",
    "cause": null,
-   "screen_hash": "641173334639bd65",
+   "screen_hash": "148d1bc08acf279e",
    "row_hash": "4b62583ae03681c7",
-   "carried": true
+   "carried": false
   },
   {
    "row": "L121",
@@ -3182,12 +5602,12 @@
    "row": "L121",
    "screen": "cafe_first_shift.start",
    "verdict": "PASS",
-   "line": "Seen from behind the counter: a woman of 18 at a caf\u00e9 espresso machine, steam rising, her face flushed. No man in frame.",
-   "why": "one picture for the scene's body moment",
+   "line": "Seen from behind the counter: a woman of 18 at a caf\u00e9 espresso machine, steam rising, her face flushed. No man in frame. (pool_dir look/chris_wand_t3, pool 1)",
+   "why": "One picture for the scene's look; none on the number screen.",
    "cause": null,
-   "screen_hash": "641173334639bd65",
+   "screen_hash": "148d1bc08acf279e",
    "row_hash": "45842b25d0708a15",
-   "carried": true
+   "carried": false
   },
   {
    "row": "L125",
@@ -3204,12 +5624,12 @@
    "row": "L125",
    "screen": "cafe_first_shift.start",
    "verdict": "PASS",
-   "line": "He watches you notice. [picture]",
-   "why": "mid-screen, after the payoff, not opening it",
+   "line": "Seen from behind the counter: a woman of 18 at a caf\u00e9 espresso machine, steam rising, her face flushed. No man in frame. (pool_dir look/chris_wand_t3, pool 1)",
+   "why": "Mid-screen, after the line, not opening the screen.",
    "cause": null,
-   "screen_hash": "641173334639bd65",
+   "screen_hash": "148d1bc08acf279e",
    "row_hash": "1fca3bfe1d0c2419",
-   "carried": true
+   "carried": false
   },
   {
    "row": "L71",
@@ -3226,12 +5646,23 @@
    "row": "L71",
    "screen": "cafe_first_shift.start",
    "verdict": "PASS",
-   "line": "You step out from his reach.",
-   "why": "it happens to her; she pulls away, she doesn't let him",
+   "line": "Your face burns. You step out from his reach. / \"I've got it.\"",
+   "why": "It happens to her; she steps away.",
    "cause": null,
-   "screen_hash": "641173334639bd65",
+   "screen_hash": "148d1bc08acf279e",
    "row_hash": "412fb4816f34d294",
-   "carried": true
+   "carried": false
+  },
+  {
+   "row": "L71",
+   "screen": "cafe_hire.both",
+   "verdict": "PASS",
+   "line": "His eyes go to your mouth when you smile, then down to the till, fast.",
+   "why": "It happens to her; she doesn't let him.",
+   "cause": null,
+   "screen_hash": "86e14e5a8ea04e28",
+   "row_hash": "412fb4816f34d294",
+   "carried": false
   }
  ],
  "causes": []
