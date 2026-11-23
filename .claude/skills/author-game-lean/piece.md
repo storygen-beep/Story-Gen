@@ -15,6 +15,6 @@
    - **"Yes, but change X"**, "change …", "keep A, drop B": edit the card, then show only the changed lines, as before and after. LO has seen the rest. The old yes does not carry over; the new yes is recorded against the new file's hash.
    - **Drop:** remove the row from STATE.md; add a NOTES.md line in LO's words.
    - **Silence, "sounds good", an answer about something else:** not a yes. Ask again.
-7. **Never build in the reply that shows the card.**
+7. **Never build in the reply that shows the card.** **One piece built at a time.** While the reader runs on a piece, the next piece may be carded, checked (step 3) and approved, but not built. The reader reads the built game, and a build under it changes what it reads. If the current piece's fixes change a fact the next card uses (a schedule row, a flag, a price), re-check that card and take a new yes (LO, relayed 2026-11-24).
 
 **Done when.** `approvals.json` holds this card's current hash, and STATE.md marks the piece approved.
