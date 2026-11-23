@@ -423,7 +423,7 @@ weekdays 12–6.
 Weekdays:
 | time | Laura | Mark | Ryan |
 |---|---|---|---|
-| 7–8 | Kitchen (breakfast) | Kitchen, leaves 7:30 | his room 7–7:25, Bathroom 7:25–7:45 (LO "yes" 2026-11-21), then his room |
+| 7–8 | Kitchen (breakfast) | Kitchen, leaves 7:30 | his room 7–7:12, the hall 7:12–7:25 waiting for the bathroom, Bathroom 7:25–7:45 (LO "yes" 2026-11-21; the hall row LO "Yes" 2026-11-23), then his room |
 | 8–12 | at work | at work | his room |
 | 12–5 | at work | at work, home 4:30 | at the repair shop |
 | 5–7 | Kitchen (dinner) | Living Room (his chair) | home 6, Kitchen |

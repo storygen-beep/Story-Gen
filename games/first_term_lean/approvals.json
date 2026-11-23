@@ -132,6 +132,84 @@
       "sha256": "aab337f357c5fb641d42523f7c63a10cf5eb42600586ef6942aed64ee1d3fff1",
       "words": "Yes to both",
       "date": "2026-11-23"
+    },
+    {
+      "card": "P01",
+      "sha256": "e6b4d6cd6a9d9f713d70f4075d73ada3e630e73a62fc1816aba63635f54df834",
+      "words": "Yes go ahead",
+      "date": "2026-11-23"
+    },
+    {
+      "card": "P13",
+      "sha256": "3e939ad39cee5b84870625426854b4d3199b063811e478c40e8e6297cdb92692",
+      "words": "Yes go ahead",
+      "date": "2026-11-23"
+    },
+    {
+      "card": "P13",
+      "sha256": "e072f56fcb36a275f67fed3a56ea65bae85d0bc012b69c990fef037da49c4448",
+      "words": "Yes go ahead",
+      "date": "2026-11-23"
+    },
+    {
+      "card": "P06",
+      "sha256": "6bab2f23e3b25ddda27fd0af10c30aee39f3c7c49c659aa2fc708fa78a357ed1",
+      "words": "Yes go ahead",
+      "date": "2026-11-23"
+    },
+    {
+      "card": "P42",
+      "sha256": "fcca98ce85f00d08e28db3289fcf8673d63a67a9bcefa69a09d3fcbf7da43a63",
+      "words": "Yes go ahead",
+      "date": "2026-11-23"
+    },
+    {
+      "card": "P13",
+      "sha256": "682652d51c432e4b967c3bcdec701fb75022f40ea059ddd68493dda360b96e51",
+      "words": "Yes go ahead",
+      "date": "2026-11-23"
+    },
+    {
+      "card": "P07",
+      "sha256": "48563bcddd91c4fd28269c543a375ce5c9bc68e20c2f5fc899f9949e5f873647",
+      "words": "Yes go ahead",
+      "date": "2026-11-23"
+    },
+    {
+      "card": "P13",
+      "sha256": "ad7e0acb960f43c6ea619adc3304876a2824d75cd68795295a3cf545b24b5447",
+      "words": "Yes go ahead",
+      "date": "2026-11-23"
+    },
+    {
+      "card": "P43",
+      "sha256": "15d05605b187da3009c8d9a1f61dc1eb3568639e26c3e6aa8b9e7ad943a4dba7",
+      "words": "Yes go ahead",
+      "date": "2026-11-23"
+    },
+    {
+      "card": "P13",
+      "sha256": "0b6ae2630782e2059594e5d92d9a308435ad1ca9820bbe6a64f7683c366ca325",
+      "words": "Go",
+      "date": "2026-11-23"
+    },
+    {
+      "card": "P13",
+      "sha256": "4c6dc67a05ed2202f05284cbe94a7bf085722a5bb318fa5ac2df7ddfc24a8ac9",
+      "words": "Yes",
+      "date": "2026-11-23"
+    },
+    {
+      "card": "P13",
+      "sha256": "0d7c8734f878ac2dbc18b8fa58084ffaf70223514dd65745a688f7ae2aa5603f",
+      "words": "Yes and play",
+      "date": "2026-11-23"
+    },
+    {
+      "card": "P43",
+      "sha256": "9271531aff0072ca330dca8177092bdb47a0bafbd3c5033a1bc65464169410a8",
+      "words": "Yes and play",
+      "date": "2026-11-23"
     }
   ]
 }

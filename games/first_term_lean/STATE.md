@@ -3,7 +3,7 @@
 ## Built
 
 - Game plan approved 2026-11-20 (`PLAN.md`, NOTES decisions).
-- the frame (P01): Monday week 1, 07:00; sidebar shows Energy bar, Money, Corruption and Exhibitionism words; nothing moves them. The start is P13's opening (ft_start removed).
+- the frame (P01): Monday week 1, 07:00; sidebar shows Energy bar, Money, Corruption and Exhibitionism words; nothing moves them. The start is P13's opening (ft_start removed). Re-checked 2026-11-23 (systems, meters, returning player): card only; title and trait keys fixed from now on (LO "Yes go ahead").
 - Home (P02): an area, the hall its hub, six rooms off it with "Leave <room>"; second person; 7 room pictures wired, no files. 
 - Neighbourhood (P03): her street the hub; The House Next Door, Corner Shop, Park, Gym (with hours and closed lines), Home. The hall's "Exit Home" goes to the street. Nothing to do yet at any of them (P33).
 - Campus (P04): the quad the hub; Lecture Hall (Women's Bathroom off it), Library, Cafeteria, Faculty Offices, Theatre, with hours. Only way in or out: bus ($2, 20 min) or walk (10 energy, 45 min), from her street and the quad. Played live headless 2026-11-20: walk costs and times right, bus dimmed at $0, closed places greyed.
@@ -24,7 +24,7 @@ friends; Zoe staying over and Jake at the door (release 2); short arcs for named
 
 | piece | what | approved | built | checked | played |
 |---|---|---|---|---|---|
-| P13 | the opening, re-carded from craft/opening.md as one piece: Mom on screen, breakfast with Laura and Mark, Mark's rent line ($75 every Sunday), goal 1's card, Ryan's look per LO's B, hand-over on a hook; check.py --card, the reader, then LO plays | 2026-11-21 | 2026-11-21 | 2026-11-21 | |
+| P13 | the opening, re-checked 2026-11-23: getting out of bed and the knot (3 screens) as body moments, no italic thoughts, her noticing Ryan, goal 1's card with ✅ and place and time, Ryan's/Mom's/Mark's where-and-when lines on the People page. Played headless, three paths; the reader ran ten passes, LO played after pass 10's fixes ("Yes and play") | 2026-11-23 | 2026-11-23 | 2026-11-23 | |
 | P02 | Home: re-checked 2026-11-23 (places, clock, voice, media): no "Nothing to do", menus named by piece, pictures of her, none on the hall | 2026-11-23 | 2026-11-23 | 2026-11-23 | |
 | P03 | Neighbourhood: re-checked 2026-11-23: hours on signs, no "phone credit", the house next door hidden until met_vance (P24), pictures of her, none on the street; the clothes shop's link comes with P35 | 2026-11-23 | 2026-11-23 | 2026-11-23 | |
 | P04 | Campus: re-checked 2026-11-23: hours on signs, no "Nothing to do", menus named by piece, pictures of her, none on the quad; the bus packed weekdays 7–10am with her body line, half empty otherwise; the walk home costs no energy; Faculty Offices hidden until met_walsh (P16). Played headless | 2026-11-23 | 2026-11-23 | 2026-11-23 | |
@@ -69,12 +69,13 @@ friends; Zoe staying over and Jake at the door (release 2); short arcs for named
 
 - On the portal as "First Term (Lean)"; output/ is a dev + debug build of the re-carded opening, pushed to main 2026-11-22 (LO: "rebuild with dev and debug, commit, merge and push").
 
-- Body moments, relayed from LO by the ENI session 2026-11-22 (craft/body-moments.md, read): the P02–P06 re-check also carries, each shown to LO as a card: the opening's shower (done in P43, 2026-11-23); the slipping knot (:164, :241) paid off on her body with a picture, Ryan still looks away (B); the towel off and the dressing (done in P07, 2026-11-23); getting out of bed on the opening's first screen ("in the single bed you had at twelve"), one line on her body, maybe a picture (P13's re-check; LO 2026-11-23); going to sleep (done in P06's re-check, 2026-11-23); P06's daily shower (done in P06's re-check, 2026-11-23); the opening's pictures pool 1 each (LO); her body on the packed bus (done in P04's re-check, 2026-11-23); one line for her noticing Ryan shirtless (:159). No meter moves.
+- Body moments, relayed from LO by the ENI session 2026-11-22 (craft/body-moments.md, read): the P02–P06 re-check also carries, each shown to LO as a card: the opening's shower (done in P43, 2026-11-23); the slipping knot (done in P13's re-check, 2026-11-23); the towel off and the dressing (done in P07, 2026-11-23); getting out of bed (done in P13's re-check, 2026-11-23); going to sleep (done in P06's re-check, 2026-11-23); P06's daily shower (done in P06's re-check, 2026-11-23); the opening's pictures pool 1 each (LO); her body on the packed bus (done in P04's re-check, 2026-11-23); her noticing Ryan shirtless (done in P13's re-check, 2026-11-23). No meter moves.
 - Walk-ins are in release 1 (P38–P41), both kinds (LO, 2026-11-23). P07 (clothes) goes before the opening's re-check, so "Back in your room, dressed" equips her clothes (LO, 2026-11-23); clothes has no craft file yet, so craft/clothes.md comes first (piece.md step 1).
+- After LO plays the opening: re-card its start choice as Mom asking about her past (a memory, craft/opening.md rule 3, craft/want.md rule 2), same three flags; LO's waiver holds until then.
 - P32 adds the rows for everyone outside the house; Laura, Mark and Ryan have their week from P13.
 - P20 must set `zoe_place_known` (from P05), so P27 can reach Zoe's.
 - P24 must set `met_vance` (from P03), on her street with him on his porch; then the house next door opens.
 - P16 must set `met_walsh` (from P04), so the Faculty Offices open.
 - Piece list approved 2026-11-20, with LO's three changes (NOTES).
 
-Next step: play — LO plays the opening, the places, Mom's menu, the clothes, campus and the daily loop (output_dev/); then piece — P01 and P13 re-checks (P13 needs arc and returning player files), then P34
+Next step: play — LO plays everything built (output/); then piece — the start choice re-carded as Mom's memory question, then P34

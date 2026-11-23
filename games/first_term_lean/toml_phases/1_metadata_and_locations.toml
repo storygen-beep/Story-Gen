@@ -344,8 +344,16 @@ core_traits = { want = 0, warmth = 0 }
 location = "home_ryans_room"
 weekdays = [0, 1, 2, 3, 4]
 start_time = "07:00"
-end_time = "07:25"
+end_time = "07:12"
 activity = "in his room"
+
+# P13 re-check (reader v5): he waits in the hall for the bathroom, so the opening's hall is true (C460, L97).
+[[npcs.schedules]]
+location = "home_hall"
+weekdays = [0, 1, 2, 3, 4]
+start_time = "07:12"
+end_time = "07:25"
+activity = "waiting for the bathroom"
 
 [[npcs.schedules]]
 location = "home_bathroom"
