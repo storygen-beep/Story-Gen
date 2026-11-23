@@ -154,8 +154,8 @@ def test_every_build_writes_the_output_folder(game, monkeypatch):
     build.package(game)
     build.package(game, release=True)
     dev, rel = cmds
-    assert dev[dev.index("--output") + 1].endswith("/output") and "--dev" in dev
-    assert rel[rel.index("--output") + 1].endswith("/output") and "--dev" not in rel
+    assert dev[dev.index("--output") + 1].endswith("/output") and "--dev" in dev and "--debug" in dev
+    assert rel[rel.index("--output") + 1].endswith("/output") and "--dev" not in rel and "--debug" not in rel
 
 
 # ── change 6 (2026-11-20): places, people and sidebar items need an approved card too ──────────────────────
