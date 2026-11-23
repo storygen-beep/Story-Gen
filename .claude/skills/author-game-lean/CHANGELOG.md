@@ -271,3 +271,22 @@
 - Every v2.py cite in `craft/*.md` moved with the engine change. The diff adds 6 lines after old line 6690 and 6 more after old line 15173, so I shifted old lines over 6690 by 6 and over 15173 by 12, by script. Spot-checked 19 targets against the new file: advanceTime at 7010, the exit default at 17936, show_when_blocked read at 15104-15108, the render at 6740-6748, locClosedReason at 11772, closed_text at 11444, SchedulePage at 24399, checkAndSubstituteCanvas at 6921, the group's failed slot at 6986, Pattern A at 6993, max_triggers_per_day at 15066, chance at 15092, substitution_only at 15110, exclusive_group at 14684, npc_id at 15086, the daily_tick hook at 7162, the media pool at 16365 and the meter cap at 7377. Each one is the line cited. `lists/COVERAGE.md` and `lists/LESSONS.md` keep their source cites as written, since those record where each idea came from, not a current claim.
 - **Approval: LO's own yes, typed in the main-lean session and relayed:** fix how `craft/clothes.md` describes a dress code's ClothingBlock. Found by the game session building P07: at the front door, the block showed only "Go back".
 - `craft/clothes.md`: the C1220 row, the engine bullet, rule 6 and example B said both "Change clothes" and "Go back" always show. With `wardrobe_anywhere = false`, "Change clothes" is wrapped in `<<if setup.canChangeClothesHere()>>` (v2.py:21003-21009), which is true only in a `wardrobe_location` room (v2.py:2234-2238). So at a door away from her wardrobe, only "Go back" shows. All four now say so. Example B shows "Go back" only, for this game's shape (changing in her bedroom only). Verified by reading both v2.py ranges. Tests below.
+- **Approval: LO's own words, typed in the main-lean session and relayed (ENI for LO, standing authorization, 2026-11-20):** "confirm system rules files with the top games and CoT".
+- Created `craft/systems.md`, the systems area's file. It covers energy, daily limits, and the activities she repeats. Money points to `craft/economy.md` and meters to `craft/meters.md`; neither is restated.
+  - Must read, 21 rows: C1446, C1386, C1303, C1337, C1431, C1432, C1438, C1342, C1433, C1434, C1313, C1428, C1345, C1423, C1425, C1427, C1360, C1421, C1441, C1369 and C1403. The failure column cites L45 (the stranded player) and L80 (grind).
+  - An engine section, measures from CoT and the field, ten rules, a worked example in roles (eat capped at 3 with its TOML, sleep never capped, a run with a clothes gate, a shift greyed by energy), and six "Not this" lines.
+  - Each rule says whether CoT and the field agree or split. They split in two places: CoT's needs decay by the hour while IHOH's and SD's are spent, and CoT limits eating by the need while SD counts actions. In both places the file marks our choice as LO's.
+- Engine, read today in v2.py:
+  - costs on the trigger (`template_import.py:2593`) and taken on entry (v2.py:6168-6175);
+  - the cost-blocked row and its dimmed cost tag (v2.py:6706-6707, 6724-6738), and the "Requires … (you have …)" message (v2.py:6183-6197);
+  - `max_triggers_per_day` (v2.py:15066, 5590) and the greyed capped row (v2.py:6700-6703);
+  - the day key and midnight turn (v2.py:5426-5433, 7021-7022, 7058-7060);
+  - daily_tick (v2.py:7162-7164).
+  
+  A grep finds no special handling of energy, so it moves only by costs and effects, and the file says so.
+- CoT, read today:
+  - `QuickieBurger.txt`: Work's `<<dtime 60>>` and Rest −20; "You really don't feel like working." at line 6; the `lastdayworked` day stamp at line 18; the first-shift scene at lines 15-17;
+  - `BlodgettGymInterior.txt`, lines 34, 43 and 52: each workout's time and need costs;
+  - "You really aren't that hungry right now." in `ChamberlainHallInterior.txt`, line 20.
+- The field rows come from `round8/ROUND8_REPORT.md` §2.5 and key points, and `round9b/ROUND9B_REPORT.md` §2.1, §2.6, §3 and §4, read today; their numbers were not re-run.
+- `SKILL.md`: the area table gives systems its file.
