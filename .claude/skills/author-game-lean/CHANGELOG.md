@@ -306,3 +306,22 @@
 - Kept to `plan.md` §9 and L91: the plan holds only the arc's scaffold, and each release designs its own steps. My first draft said to plan the whole arc up front. I caught that against plan.md before sending, and fixed it.
 - `SKILL.md`: the area table gives arc its file.
 - `plan.md` §9 (line 98) and `templates/PLAN.md` (line 46): the arc scaffold's "first third" now reads "the opening (the steps before the first sex)", so it matches `craft/arc.md`, which drops COVERAGE's C156 because the field's first sex falls at a median 43% of an arc (0–85%). LO's yes, relayed by ENI (2026-11-23: "yes, change the wording and commit it"). Verified by grep: the only "first third" left in the skill is in the lists (LESSONS L83 and L91, COVERAGE C156 and C184), which record sources and stay as they are, and arc.md's note on C156.
+- **Approval: LO, typed here, 2026-11-23:** "Go ahead", after the returning-player study sent to the main-lean session (study only, no files changed then).
+- Created `craft/returning-player.md`, the returning player area's file.
+  - Must read, 21 rows: C1651, C1652, C1653, C1675, C1654, C1655, C1656, C1657, C1658, C1659, C1660, C1661, C1649, C1662, C1663, C1667, C1680, C1681, C1664, C1666 and C1647. The failure column cites L49, L101 and L138.
+  - An engine section, measures from CoT and from player comments, twelve rules each saying where CoT, the field and the engine agree or split, a worked example in roles (a release-2 card's `Earlier releases:` line, and the tips-page save line), and five "Not this" lines.
+- Engine, read today in v2.py: the backfill (20494-20538, run at 20645), `onLoad` (4018-4038), the version stamps (1700-1702, 20650-20653), `saves.id` (3990), `addToWardrobe` (1736-1745), set_day (4983-4988) and the footer (20812-20820). In SugarCube 2.30's `format.js`: browser storage is keyed by `Story.domId`, a load throws on a saves-id mismatch, and the export label is "Save to Disk…".
+- CoT, read today:
+  - `update_vars`, 64 cases (`_cot_js.txt`, lines 139889-140850);
+  - the hand repair of a misspelt key (139982-139986);
+  - `is_prepoint8_save` (136209-136220);
+  - `vars.versions` (140833-140834);
+  - the legacy passage (round2 CoT passages, line 2401).
+- The field: save comments in `round2/comments_text`, from CoT and New Life Project, at the lines cited in the file.
+- The study's corrections to COVERAGE are written into the file, not the rows:
+  - the backfill also fills `$player.core_traits`, and an existing person's `core_traits` and `flags`, where C1676 says "top level only";
+  - CoT renames keys by hand in its update code, which our engine can't, so rule 3 (never rename) holds for us.
+- Left out, because they belong to other areas: C1650 (first hour), C1668-C1673 (voice, places, body moments) and C1674 (lostness: `craft/arc.md`, `craft/clock.md`). C1645 and C1648 were also left out: stated, with nothing to check.
+- New from the study, rule 12: tell the player how to save to disk. Lost browser saves are the commonest save complaint in the comments.
+- `LATER.md`: a new item, "A save check before release 2". The lean skill has no save check; v2's is `saves_mode`.
+- `SKILL.md`: the area table gives returning player its file. Only phone has no file now.
