@@ -241,13 +241,9 @@ def check_length(game, dev=()):
 # ── presence ──────────────────────────────────────────────────────────────────────────────────────────────
 
 def fire_slots(trig):
-    """The (day, minute) slots a scene's trigger can show at, from its top-level time_of_day items."""
-    slots = set(who_is_where.SLOTS)
-    for i in items(trig.get("conditions")):
-        if i.get("type") == "time_of_day":
-            slots &= {(d, m) for d, m in who_is_where.SLOTS
-                      if who_is_where.in_window(m, i.get("start_time"), i.get("end_time"))}
-    return slots
+    """The (day, minute) slots a scene's trigger can show at, by its clock conditions (who_is_where.when_slots,
+    shared with sheet.py so the two can't drift)."""
+    return who_is_where.when_slots(trig.get("conditions"))
 
 
 def check_presence(game, dev=()):

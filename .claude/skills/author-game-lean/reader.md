@@ -24,7 +24,7 @@ How three rows are read (the false-red test on the old first_term opening, 2026-
 
 **B · The scene** (from `v2-reader`'s tests, plus test 13; `PLAN.md` stands in for WANT.md and the v2 ledger):
 
-1. **want:** the person visibly wants something here. On a sexual step, an earlier canvas already showed him wanting it. Name the canvases you checked.
+1. **want:** the person visibly wants something here. On a sexual step, an earlier canvas already showed him wanting it. Name the canvases you checked. **On a person's first canvas** there is no earlier canvas, so his want shown on the same screen, before the act, on his body and seen by her (C613), satisfies this, but only when the act is an accident or his brush, the lowest rung (C286). A deliberate touch, a grope, or anything above that rung still needs an earlier canvas. (P21 reader pass B, 2026-11-24: Chris's brush at the machine came after "He looks you over like he's pricing you." on the same screen, and could never pass.)
 2. **next step:** something goes one step further than the last scene with this person.
 3. **hook:** the scene points at what comes next: a line, a promise, a choice that names it.
 4. **her voice at her level:** her reaction matches her meter: pushback at a low level, appetite at a high one, on her body and in what she says, never in an italic thought (`craft/voice.md`). At stage 0–1 she reacts; it never chooses an act her stage hasn't opened (L71).

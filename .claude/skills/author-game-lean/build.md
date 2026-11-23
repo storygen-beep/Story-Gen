@@ -16,7 +16,7 @@ Build exactly what the approved card says, nothing more. Then three judges, in o
 
 - **merge, reach, approvals, builds:** the build is whole, every kept scene can be reached, and everything built is on an approved card.
 - **talk, length, presence, creation, saves, speakers, goals:** the measured scene checks.
-- **sheet:** the card's `Sheet:` against the clock, place, who, clothes and flags worked out from the build.
+- **sheet:** the card's `Sheet:` against the clock, place, who, clothes and flags worked out from the build, by meaning. A red row is never fixed by pasting `sheet.py`'s value. Per row, say which it is: (a) format only, (b) the story was wrong (fix the story, then the row), or (c) the script is wrong (stop and report). Record (b) and (c) in NOTES.md.
 - **does:** the guard. What a script can see each screen do is named on its `Does:` line.
 
 INCOMPLETE names what wasn't checked; it is never green. A card with an explicit beat also runs `check.py --beat`. Fix red in the card first, show LO the changed lines, take his yes, and rebuild. A red never goes away by editing the TOML past the card.

@@ -504,3 +504,55 @@ Why for all of these: P13's reader found new FAILs on every pass, v5 to v11 (99 
     - On a copy of `reader/P13.json` in the scratchpad: the same 93. After a simulated pass on those 93, the work list is empty.
     - Tests: `test_rules.py` has four new ones on the tiny game: a `*` PASS is asked again only on the changed screen and carries for the other; only the scene-wide tests go back on `*`; a `*` PASS survives a new verdict on one screen; a `*` FAIL is refused.
     - `reader.md` and `reading.py`'s docstring say so.
+- `craft/arc.md`, a gap the P21 card found (ENI for LO, standing authorization, 2026-11-24).
+  - **The failure:** P21's card as first written made Tom's hire and Chris's first shift one-time canvases with `consume_on`, meant as buttons. In v2 a one-time canvas at a place fires by itself on entry (v2.py:5895-5915, 6511-6522), and buttons and a person's menu list only repeatables (v2.py:5925-5944, 5958-5975). The writer found it only from the engine, before any build.
+  - **The fix:**
+    - A new engine bullet, "How a step reaches her", says how a step reaches her and that self-firing doesn't check the person is there (v2.py:6083-6086, with the played zoe_00 case, `.claude/skills/author-game-v2/CHANGELOG.md:690`). A step that fires on arrival and needs a person gates on `npc_at_location` or their hours. A step she chooses from a menu is a repeatable row: a done flag, a parked flag cleared by `[engine.daily_tick]`, presence and hours, and `show_when_blocked` with a `cooldown_message`.
+    - `consume_on` stays for a step that happens on arrival.
+    - Rule 7's "In the engine:" sentence now names both.
+  - **`rules.py`'s guard** is now red when `Does:` names "a person's arc step" and "a no is possible" on a screen of a one-time canvas at a place (not the starting canvas) whose trigger has no `npc_at_location` (is_present) or `time_of_day`. Two tests cover the red, a presence gate, and an arrival step with no "no".
+  - **Not done:** an engine test pinning both filters is an engine edit, put to LO.
+- Presence and the scene sheet now read weekday items (ENI for LO, standing authorization, 2026-11-24).
+  - **The failure:** P21's build. `fire_slots` in `scenes.py` and `window` in `sheet.py` read only `time_of_day` items, so a trigger's `{ type = "weekday", weekdays = [0..5] }` (v2.py:5203-5207) was ignored. That gave 7 presence reds ("Tom isn't there Sun 10:00" on a scene that can't show on Sunday) and 6 "(part)" reds on the sheet.
+  - **The fix: one shared helper,** `who_is_where.when_slots(conditions)` with `item_slots(item)`, used by both `scenes.fire_slots` and the sheet, so they can't drift.
+    - **Which items count:** `time_of_day` (its window) and `weekday` (its days; an empty list never holds). These are the only clock items the engine reads by the week. Every other item counts as every slot.
+    - **AND and OR:** an AND block intersects its items. An OR block is the union of its items, so an OR holding any non-clock item stays every slot. This can't make a false green: a wider set of slots only asks more of presence, and on the sheet only marks someone "(part)", never present. A block without version "1.0" is every slot, as in the engine (v2.py:5028-5035).
+    - **Nested blocks:** the engine's evaluator reads a flat item list; an item with its own `items` is read the same way here, defensively. The old `items()` flattened every item and intersected them, so an OR would have narrowed wrongly. It is no longer used for the clock.
+    - **The sheet's clock column** now names the days: "07:00–09:00 +0 · Mon Tue Wed Thu Fri Sat".
+  - **Two more fixes, found on P21 the same pass:**
+    - **Who is there is read at the minute a screen shows,** not across the time its choice spends. A "4 hours" shift button marked Chris "(part)" because he leaves mid-shift.
+    - **Order doesn't matter in a set column:** the sheet's who, wearing and flags columns are compared as sets ("npc_tom, npc_chris" equals "npc_chris, npc_tom").
+  - **Tests:** 7 new:
+    - a Mon–Sat scene has no Sunday red, and a planted every-day scene with Mom off on Sunday stays red;
+    - an OR of two windows covers both, and goes red when the evening window loses Mom;
+    - an OR with a flag item never narrows;
+    - an empty weekday list never holds;
+    - the sheet reads the weekday;
+    - order in a set column doesn't matter.
+  - **Verified read-only on first_term_lean:** presence is green, where it had 7 reds. The sheet's 16 remaining P21 reds are the card's own wording: clocks written as "Mon–Sat 10:00–20:55, any minute", Chris written "by the hour as above" where the sheet says "npc_chris (part)", and flags set by other canvases (met_tom) or negatives ("not cafe_hired"), which the flags column doesn't model. It holds flags set on the path plus flags the trigger checks `is_true`.
+- The sheet check keeps its teeth (ENI for LO, standing authorization, 2026-11-24).
+  - **The hole:** my own advice on P21 was to paste `sheet.py`'s rows into the card. A pasted row agrees with the build by definition, so the check stops checking. P21's card now holds pasted rows.
+  - **The fix:**
+    - `piece.md` step 2 and `build.md` step 2 say a red sheet row is never fixed by pasting the script's value. The writer says per row whether it is (a) format only, (b) a wrong story (fix the story, then the row), or (c) a wrong script (stop and report), and records (b) and (c) in NOTES.md.
+    - To make (a) rare, `sheet.py` compares the clock by meaning (`clock_meaning`). A hand-written clock becomes the (day, minute) slots the screen shows at:
+      - days: "weekdays", "weekends", "daily", "Mon–Sat", or day names; no days means every day;
+      - the window, with an optional "+N"; with none, the window is already the screen's;
+      - "any", and "while <id> is there";
+      - the opening's "07:20–07:23" compared as exact in and out minutes, with the leading zero optional.
+      
+      Who, wearing and flags were already compared as sets.
+    - `templates/piece-card.md` lists the accepted hand forms, so a row can be written before any build.
+  - **Tests:** 11 new in `test_sheet.py`:
+    - four hand forms equal to the build's "10:00–20:55 +5 · Mon Tue Wed Thu Fri Sat" (among them "Mon–Sat 10:05–21:00" and "weekdays and Sat 10:05–21:00");
+    - four that differ in meaning (Sunday added, a wider window, weekdays only, a double shift);
+    - "weekdays" equal to "Mon Tue Wed Thu Fri";
+    - the opening's exact clock green by hand and red when a minute is off.
+  - `piece.md` also says `sheet.py` prints the build's rows for reading a red, never for pasting.
+  - **Verified read-only:** on first_term_lean's P21, the one red left is a flag (met_chris on cafe_first_shift.end, which the build doesn't set before that screen). The game session judges it as (a), (b) or (c).
+- `craft/arc.md`, "How a step reaches her": the bullet now cites `apps/game_generation/tests/test_step_shapes.py`, the engine test LO approved and ENI added on 2026-11-24. Its 5 tests check that auto-fire takes only non-repeatables, that entry fires the auto-fire pick and marks it, that the room list and a person's menu take only repeatables, and that `is_repeatable` reaches the payload both ways. With it, the craft line's v2.py cites can't drift silently. Verified: the test file runs green (5 passed), and the skill's cites and pointer tests pass.
+- `reader.md`, scene test B1 (ENI for LO, standing authorization, 2026-11-24).
+  - **The failure:** P21 reader pass B. B1 failed on Chris's brush at the machine (`cafe_first_shift.start`), his first canvas, although his want was on the same screen before the act ("He looks you over like he's pricing you."). B1 had no first-meeting exception, so no line could make a brush on a first meeting pass.
+  - **The change:** on a person's first canvas, his want shown on the same screen, before the act, on his body and seen by her (C613), satisfies B1, but only when the act is an accident or his brush, the lowest rung (C286). A deliberate touch, a grope, or anything above that rung still needs an earlier canvas. It is worded like part A's C109 exception, and it points at C613 and C286 in `craft/people.md` and `craft/heat.md` rather than copying them.
+  - **Shared wording checked:** no craft row states B1's "an earlier canvas showed him wanting it". C613 and C109 are related and unchanged.
+  - **Narrower than C286:** C286's stage 1 lists "his brush or grope"; the grope is left out on purpose, per the instruction.
+  - **Verified:** B1's text changed, so `reading.py` re-asks B1 on its next pass (its row hash covers the text).

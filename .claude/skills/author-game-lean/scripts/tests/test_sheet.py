@@ -152,3 +152,35 @@ def test_an_upstream_equip_change_reopens_the_later_screen(game):
     p.write_text(p.read_text().replace('wardrobeEffects = [{ action = "equip", item_id = "jeans" }]', ""))
     screens = {i["screen"] for i in reading.work_list(game, "p1")["items"]}
     assert "start.b" in screens  # b's own text didn't change; what she wears there did
+
+
+def test_order_in_a_set_column_does_not_matter(game):
+    card(game, SHEET.replace("jeans, pyjamas | met_mom", "pyjamas, jeans | met_mom"))
+    assert red_rows(game) == ("green", [])
+
+
+# ── a card row written by hand, before any build, compares by meaning (ENI for LO, 2026-11-24) ──
+
+BUILD = "10:00–20:55 +5 · Mon Tue Wed Thu Fri Sat"
+
+
+@pytest.mark.parametrize("hand", ["Mon–Sat 10:05–21:00", "Mon-Sat 10:05-21:00, any minute", "mon tue wed thu fri sat 10:00–20:55 +5",
+                                  "weekdays and Sat 10:05–21:00"])
+def test_a_hand_written_clock_that_means_the_same_is_equal(hand):
+    assert sheet.norm("clock", hand) == sheet.norm("clock", BUILD)
+
+
+@pytest.mark.parametrize("hand", ["Mon–Sun 10:05–21:00", "Mon–Sat 10:00–21:00", "weekdays 10:05–21:00", "Mon–Sat 10:05–21:00 +5"])
+def test_a_hand_written_clock_that_means_something_else_differs(hand):
+    assert sheet.norm("clock", hand) != sheet.norm("clock", BUILD)
+
+
+def test_weekdays_and_a_range_mean_the_same():
+    assert sheet.norm("clock", "weekdays 14:00–15:00") == sheet.norm("clock", "14:00–15:00 +0 · Mon Tue Wed Thu Fri")
+
+
+def test_the_opening_clock_is_exact_and_hand_times_may_drop_the_zero(game):
+    card(game, SHEET.replace("start.a | 07:00–07:05", "start.a | 7:00–7:05"))
+    assert red_rows(game) == ("green", [])
+    card(game, SHEET.replace("start.a | 07:00–07:05", "start.a | 7:00–7:06"))
+    assert red_rows(game)[0] == "red"

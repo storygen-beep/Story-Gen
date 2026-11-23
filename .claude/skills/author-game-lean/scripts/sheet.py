@@ -16,8 +16,9 @@ How each column is worked out (LO, relayed 2026-11-24: "Commit and continue", th
            worked out over the minutes that person's rows put them at the place.
   place    the canvas trigger's location. A screen of a canvas with no location (the opening) has no place the
            engine knows: the place is the card's, marked "(card)", and who is there is worked out at it.
-  who      people whose schedule rows (who_is_where.where) put them at the place at every five-minute slot of
-           the screen; "<id> (part)" when only at some; the scene's bound person (trigger npc / requires_npc) is
+  who      people whose schedule rows (who_is_where.where) put them at the place at every five-minute slot the
+           screen can show at (its first minute, on every day and time the scene can start; not the time its choice
+           then spends); "<id> (part)" when only at some; the scene's bound person (trigger npc / requires_npc) is
            always there. "nobody" when no one is.
   wearing  on the starting canvas: the `initial` garments, equipped in file order (v2.py:1213-1235), then each
            wardrobeEffects equip / unequip / remove on the path, with the dress rule of setup.equipItem
@@ -174,6 +175,34 @@ def window(trig):
     return None
 
 
+def days_text(trig):
+    days = [i.get("weekdays") for i in items(trig.get("conditions")) if i.get("type") == "weekday"]
+    if not days:
+        return ""
+    names = who_is_where.DAYS
+    return " · " + " / ".join(" ".join(names[d] for d in sorted(set(ds or [])) if 0 <= d < 7) or "no day" for ds in days)
+
+
+def clock_text(trig, win, bound, place, minute):
+    if win and win[0] is not None:
+        s, e = win
+        e = s + 60 if e is None else (e if e > s else e + 1440)
+        head = f"{hhmm(s)}–{hhmm(e)} +{minute}"
+    elif bound and place:
+        head = f"while {sorted(bound)[0]} is there +{minute}"
+    else:
+        head = f"any +{minute}"
+    return head + days_text(trig)
+
+
+def shifted(starts, minute, until):
+    """The slots a screen is on, from the slots its scene can start at: from start + minute to start + until."""
+    out = set()
+    for d, m in starts:
+        out.update(slots_between(d, m + minute, m + until))
+    return out
+
+
 def fmt_flags(per_path):
     if not per_path:
         return "?"
@@ -220,22 +249,17 @@ def compute(game, canvas_ids, card_places=None):
                 row["place"] = place_txt or "?"
                 if is_start:
                     row["clock"].append(f"{hhmm(start_min + minute)}–{hhmm(start_min + out_m)}")
-                    slots = slots_between(start_day, start_min + minute, start_min + out_m)
-                elif win and win[0] is not None:
-                    s, e = win
-                    e = s + 60 if e is None else (e if e > s else e + 1440)
-                    row["clock"].append(f"{hhmm(s)}–{hhmm(e)} +{minute}")
-                    last = e - who_is_where.STEP  # the last minute the scene can start
-                    slots = [sl for d in range(7) for sl in slots_between(d, s + minute, last + max(out_m, minute + 5))]
-                elif bound and place:
-                    # A scene bound to a person shows only while they're there (requires_npc).
-                    pid = sorted(bound)[0]
-                    row["clock"].append(f"while {pid} is there +{minute}")
-                    table = where.get(pid, {})
-                    slots = [s for s in who_is_where.SLOTS if place in {p for p, _ in table.get(s, ())}]
+                    # Who is there is read at the minute the screen shows, not across the time its choice spends
+                    # (a "Work a shift (4 hours)" button would otherwise mark everyone who leaves mid-shift "(part)").
+                    slots = slots_between(start_day, start_min + minute, start_min + minute)
                 else:
-                    row["clock"].append(f"any +{minute}")
-                    slots = list(who_is_where.SLOTS)
+                    starts = who_is_where.when_slots(trig.get("conditions"))
+                    if bound and place:
+                        # A scene bound to a person shows only while they're there (requires_npc).
+                        table = where.get(sorted(bound)[0], {})
+                        starts = {s for s in starts if place in {p for p, _ in table.get(s, ())}}
+                    row["clock"].append(clock_text(trig, win, bound, place, minute))
+                    slots = shifted(starts, minute, minute + who_is_where.STEP)
                 row["who"].append(", ".join(present(where, place, slots, bound)) if place else "?")
                 if eq is not None:
                     worn = sorted(v for v in eq.values() if v)
@@ -298,6 +322,67 @@ def for_card(game, game_dir, card_id):
     return mine, compute(game, canvases, places_from(mine))
 
 
+DAY_NAMES = ("mon", "tue", "wed", "thu", "fri", "sat", "sun")
+DAY_WORDS = {"weekdays": range(0, 5), "weekends": range(5, 7), "weekend": range(5, 7), "daily": range(7),
+             "every day": range(7)}
+TIMES = re.compile(r"(\d{1,2}):(\d{2})\s*[–-]\s*(\d{1,2}):(\d{2})")
+
+
+def parse_days(text):
+    """The days a clock cell names, 0 = Monday, or None when it names none (every day)."""
+    low = text.lower()
+    days = set()
+    for word, rng in DAY_WORDS.items():
+        if re.search(rf"\b{word}\b", low):
+            days |= set(rng)
+    for a, b in re.findall(r"\b(mon|tue|wed|thu|fri|sat|sun)\w*\s*[–-]\s*(mon|tue|wed|thu|fri|sat|sun)\w*", low):
+        i, j = DAY_NAMES.index(a), DAY_NAMES.index(b)
+        days |= set(range(i, j + 1)) if i <= j else set(range(i, 7)) | set(range(0, j + 1))
+    low = re.sub(r"\b(mon|tue|wed|thu|fri|sat|sun)\w*\s*[–-]\s*(mon|tue|wed|thu|fri|sat|sun)\w*", "", low)
+    days |= {DAY_NAMES.index(d) for d in re.findall(r"\b(mon|tue|wed|thu|fri|sat|sun)\w*", low)}
+    return days or None
+
+
+def clock_meaning(text, exact):
+    """What a clock cell means, so a card written by hand compares with the build by meaning, not by text.
+    exact (the starting canvas): the in and out minutes. Otherwise: the (day, minute) slots the screen shows at,
+    the window shifted by "+N" (none means the window is already the screen's), on the days named (none: every day).
+    "while <id> is there" and "any" keep their words. A cell it can't read compares as text."""
+    low = text.lower().replace("any minute", "")
+    m = TIMES.search(low)
+    off = re.search(r"\+\s*(\d+)", low)
+    n = int(off.group(1)) if off else 0
+    if "while" in low:
+        return ("while", re.sub(r"\s+", " ", low.split("+")[0].strip()), n, frozenset(parse_days(low) or range(7)))
+    if exact:
+        return ("exact", tuple(int(x) for x in m.groups())) if m else ("text", low.strip())
+    if m:
+        s = int(m.group(1)) * 60 + int(m.group(2))
+        e = int(m.group(3)) * 60 + int(m.group(4))
+        e = e if e > s else e + 1440
+    elif re.search(r"\bany\b", low):
+        s, e = 0, 1440
+    else:
+        return ("text", low.strip())
+    days = parse_days(low) or set(range(7))
+    step = who_is_where.STEP
+    return ("slots", frozenset(((d + (k // 1440)) % 7, k % 1440) for d in days for k in range(s + n, e + n, step)))
+
+
+def norm(col, text, exact=False):
+    if col == "clock":
+        return clock_meaning(text, exact)
+    """A cell as the sheet means it: the clock by its slots (clock_meaning); who, wearing and flags as sets, so their
+    order on the card doesn't matter."""
+    if col not in ("who", "wearing", "flags"):
+        return text.strip()
+    head, _, by_path = text.partition("; by path:")
+    def sets(s):
+        alts = {tuple(sorted(x.strip() for x in alt.split(",") if x.strip())) for alt in s.split(" / ")}
+        return tuple(sorted(alts))
+    return sets(head), sets(by_path)
+
+
 def compare(mine, computed):
     """(red rows, incomplete rows)."""
     red, inc = [], []
@@ -307,12 +392,13 @@ def compare(mine, computed):
         red.append(f"{s} is on the card's Sheet: but not built")
     for s in sorted(set(mine) & set(computed)):
         got, want = computed[s], mine[s]
+        exact = "+" not in got["clock"] and "while" not in got["clock"] and "any" not in got["clock"]
         for col in COLUMNS[1:]:
             if got[col] == "?":
                 inc.append(f"{s} · {col}: the sheet can't work it out")
             elif col == "place" and got[col].endswith("(card)"):
                 continue  # the card's own place: who is there is checked at it
-            elif got[col] != want[col]:
+            elif norm(col, got[col], exact) != norm(col, want[col], exact):
                 red.append(f"{s} · {col}: the card says \"{want[col]}\", the build says \"{got[col]}\"")
     return red, inc
 

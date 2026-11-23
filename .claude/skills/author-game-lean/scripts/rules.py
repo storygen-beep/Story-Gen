@@ -205,6 +205,24 @@ def guard(does, game):
             continue
         rows += [f"{screen} does `{t}` in the build, and its Does: line doesn't name it" for t in sorted(got)
                  if t not in trig]
+    # A step she can say no to, on a one-time canvas at a place, fires by itself on entry and doesn't check the
+    # person is there (v2.py:5895-5915, 6083-6086): it must gate on presence or hours in its own conditions.
+    by_id = {c.get("id"): c for c in game.get("canvases") or []}
+    start = (game.get("project") or {}).get("starting_canvas")
+    for screen, trig in sorted(does.items()):
+        c = by_id.get(screen.split(".")[0]) or {}
+        t = c.get("trigger") or {}
+        if (c.get("id") == start or not t.get("location") or str(t.get("is_repeatable", "true")).lower() != "false"
+                or not {"a person's arc step", "a no is possible"} <= set(trig)):
+            continue
+        import scenes
+        gated = any(i.get("type") == "time_of_day" or (i.get("type") == "npc_at_location"
+                                                         and i.get("operator", "is_present") == "is_present")
+                    for i in scenes.items(t.get("conditions")))
+        if not gated:
+            rows.append(f"{screen}: a one-time step she can say no to fires by itself on arrival, without checking "
+                        f"the person is there; gate it on npc_at_location or their hours, or make it a repeatable "
+                        f"row in their menu (craft/arc.md, How a step reaches her)")
     for src, dst, flag in meetings(game):
         if src in does and not any("a first meeting" in does.get(x, ()) for x in (src, dst) if x):
             rows.append(f"{src} sets {flag}: name `a first meeting` on it or on {dst or 'the screen she meets them'}")

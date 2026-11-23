@@ -7,7 +7,11 @@ What the player sees:
   Screen 2: <...>
 Variants: <n>. A, <name>: <what differs, when it shows>. B, <...>
 Sheet:
-  <canvas>.<node> | <clock in>–<clock out> | <place> | <who is there, npc ids, or nobody> | <garment ids she wears, or any> | <flags set before it; by path: …>
+  <canvas>.<node> | <clock> | <place> | <who is there, npc ids, or nobody; "<id> (part)" if only some of the time> | <garment ids she wears, or any> | <flags set before it; by path: …>
+  (Written by hand, before the build, as what the story means. Clock forms: the opening "07:20–07:23" (in–out);
+  a repeatable "<days> HH:MM–HH:MM", the window the screen shows in, or the scene's window and "+N" minutes into it;
+  days as "weekdays", "weekends", "daily", "Mon–Sat", or names "Mon Wed Fri"; no days means every day; "any" for
+  no window; "while <npc_id> is there". Who, wearing and flags are sets: order doesn't matter.)
 Does:
   <canvas>.<node> | <what the screen does, from SKILL.md's Rule labels, comma-separated; never "always">
 Changes: <flags set, traits moved, items, doors opened — by name>

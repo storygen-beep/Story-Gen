@@ -159,3 +159,40 @@ def test_a_star_fail_is_refused(game):
     with pytest.raises(ValueError, match="never"):
         reading.record(game, "p1", {"verdicts": [dict(item, verdict="FAIL", cause="c1")],
                                     "causes": [{"id": "c1", "what": "x"}]})
+
+
+# ── a one-time step she can say no to fires on arrival (P21's card, 2026-11-24) ──
+
+AUTOFIRE = MERGED + """
+[[canvases]]
+id = "hire"
+[canvases.trigger]
+location = "home"
+is_repeatable = false
+[[canvases.nodes]]
+id = "ask"
+blocks = [{ type = "paragraph", content = "Mom looks up from the counter." }]
+"""
+
+
+def autofire_game(game, conditions=""):
+    (game / "toml_phases" / "7_final_game.toml").write_text(AUTOFIRE + conditions)
+    return check.load_merged(game)
+
+
+def test_a_one_time_step_with_a_no_and_no_presence_gate_is_red(game):
+    g = autofire_game(game)
+    rows = rules.guard({"hire.ask": ["a person's arc step", "a no is possible"]}, g)
+    assert any("fires by itself on arrival" in r for r in rows)
+
+
+def test_a_presence_gate_or_a_repeatable_row_is_not_red(game):
+    g = autofire_game(game, """[canvases.trigger.conditions]
+version = "1.0"
+items = [{ type = "npc_at_location", npc_id = "npc_mom", location_id = "home", operator = "is_present" }]
+""")
+    rows = rules.guard({"hire.ask": ["a person's arc step", "a no is possible"]}, g)
+    assert not any("fires by itself" in r for r in rows)
+    g = autofire_game(game)
+    rows = rules.guard({"hire.ask": ["a person's arc step"]}, g)  # no "no" here: an arrival scene she can't refuse
+    assert not any("fires by itself" in r for r in rows)

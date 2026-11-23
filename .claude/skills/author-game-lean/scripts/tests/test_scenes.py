@@ -220,3 +220,57 @@ def test_planted_goal_that_reads_wrong_is_red(goal):
     g = copy.deepcopy(clean())
     g["quest_cards"][0]["goals"] = [goal]
     assert scenes.check_goals(g)[0] == RED
+
+
+# ── clock conditions: weekday and OR (P21's build, 2026-11-24: 13 false reds from ignored weekday items) ──
+
+import who_is_where  # noqa: E402
+
+MON_SAT = list(range(6))
+
+
+def weekday_game(scene_days=MON_SAT, mom_days=MON_SAT):
+    g = clean()
+    g["npcs"][0]["schedules"][0]["weekdays"] = mom_days
+    g["canvases"][0]["trigger"]["conditions"]["items"].append({"type": "weekday", "weekdays": scene_days})
+    return g
+
+
+def test_a_weekday_gated_scene_has_no_sunday_presence_red():
+    assert scenes.check_presence(weekday_game()) == (GREEN, [])
+
+
+def test_a_planted_sunday_scene_with_mom_off_on_sunday_stays_red():
+    status, rows = scenes.check_presence(weekday_game(scene_days=list(range(7))))
+    assert status == RED and "Sun" in rows[0]
+
+
+def test_an_or_of_two_windows_covers_both():
+    g = clean()
+    g["npcs"][0]["schedules"].append({"location": "kitchen", "start_time": "18:00", "end_time": "19:00"})
+    g["canvases"][0]["trigger"]["conditions"] = {"version": "1.0", "logic": "OR", "items": [
+        {"type": "time_of_day", "start_time": "07:00", "end_time": "09:00"},
+        {"type": "time_of_day", "start_time": "18:00", "end_time": "19:00"}]}
+    slots = scenes.fire_slots(g["canvases"][0]["trigger"])
+    assert (0, 7 * 60) in slots and (0, 18 * 60) in slots and (0, 12 * 60) not in slots
+    assert scenes.check_presence(g) == (GREEN, [])
+    g["npcs"][0]["schedules"].pop()  # Mom gone in the evening: the evening window is red
+    assert scenes.check_presence(g)[0] == RED
+
+
+def test_an_or_with_a_non_clock_item_never_narrows():
+    cond = {"version": "1.0", "logic": "OR", "items": [
+        {"type": "time_of_day", "start_time": "07:00", "end_time": "09:00"},
+        {"type": "flag", "flag_key": "x", "operator": "is_true"}]}
+    assert who_is_where.when_slots(cond) == set(who_is_where.SLOTS)
+
+
+def test_an_empty_weekday_list_never_holds():
+    assert who_is_where.item_slots({"type": "weekday", "weekdays": []}) == set()
+
+
+def test_the_sheet_reads_the_weekday_too():
+    import sheet
+    g = weekday_game()
+    row = sheet.compute(g, {"breakfast"})["breakfast.a"]
+    assert row["who"] == "npc_mom" and row["clock"] == "07:00–09:00 +0 · Mon Tue Wed Thu Fri Sat"
