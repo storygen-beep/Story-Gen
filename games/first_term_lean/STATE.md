@@ -42,7 +42,7 @@ friends; Zoe staying over and Jake at the door (release 2); short arcs for named
 | P08 | the phone: chat only, a text after each meeting (PLAN 8e) | | | | |
 | P36 | reputation: the meter (still), the Sunday board on the quad, overheard lines at the mirror and the next table (PLAN 8g) | | | | |
 | P37 | Zoe's Saturday party: one fixed dare, her no (PLAN 8h) | | | | |
-| P32 | schedules: everyone's rows from PLAN 9a–9d; run who_is_where.py |  | | | |
+| P32 | schedules: everyone's rows from PLAN 9a–9d; run who_is_where.py. Tom's and Chris's rows are already in, with P21 (ENI for LO, delegated 2026-11-24) |  | | | |
 | P38 | walk-ins, home (PLAN 10a), from craft/walk-ins.md | | | | |
 | P39 | walk-ins, neighbourhood: at least the park couple (bite to come) | | | | |
 | P40 | walk-ins, campus: at least the library back stacks (bite to come) | | | | |
@@ -53,7 +53,7 @@ friends; Zoe staying over and Jake at the door (release 2); short arcs for named
 | P18 | Ms. Ivy Holt, the library | | | | |
 | P19 | Rosa Diaz, the cafeteria | | | | |
 | P20 | Zoe on the quad, week one; sets zoe_place_known | | | | |
-| P21 | Tom hires her; Chris on her first shift; opens Work a shift | | | | |
+| P21 | Tom hires her (the ask, Mon–Sat 10am–8:55pm, greyed when he's out; "Not today." parks it a day); Chris on her first shift (his brush, her pushback, +$22); Tom's and Chris's rows; opens P10. Reader: 3 passes, work list empty (ENI for LO, delegated) | 2026-11-24 | 2026-11-24 | 2026-11-24 | |
 | P22 | Frank and Danny, the corner shop | | | | |
 | P23 | Marco, the gym | | | | |
 | P24 | Mr. Vance, her first Sunday | | | | |
@@ -63,7 +63,7 @@ friends; Zoe staying over and Jake at the door (release 2); short arcs for named
 | P28 | everyday at home: who's in which room, a short line pool each | | | | |
 | P29 | everyday in the neighbourhood: faces, crowds, the noticing line only (truth rule) | | | | |
 | P30 | everyday on campus: the same | | | | |
-| P31 | everyday near campus: the same | | | | |
+| P31 | everyday near campus: the same; must add the Café's presence lines for Tom and Chris, met and unmet (C804/C795, waived from P21, ENI for LO 2026-11-24) | | | | |
 
 ## Open
 
@@ -79,4 +79,4 @@ friends; Zoe staying over and Jake at the door (release 2); short arcs for named
 - P16 must set `met_walsh` (from P04), so the Faculty Offices open.
 - Piece list approved 2026-11-20, with LO's three changes (NOTES).
 
-Next step: on hold, the trial is done (P13 re-carded in the new form, check GREEN, reader work list empty after 2 passes). On resume, when ENI or LO says: piece — P21, then P10, P11
+Next step: piece — P10 (the repeat shift; ENI: someone must be there to pay her on Sunday, Tom is off), then P11

@@ -347,7 +347,7 @@ blocks = [
   { type = "paragraph", content = "Last week there was a Help Wanted sign in the window of the café across from campus. And Mark said \"one way or another\" like he'd already picked one." },
   { type = "paragraph", content = "<strong>Pay your own way.</strong> Pay Mark your share every Sunday." },
   { type = "paragraph", content = "✅ Mark told you the rent" },
-  { type = "paragraph", content = "➜ Ask about the Help Wanted sign at the café across from campus. It's open from 7am to 9pm." },
+  { type = "paragraph", content = "➜ Ask about the Help Wanted sign at the café across from campus. The manager's in Monday to Saturday, from 10am." },
   { type = "paragraph", content = "➜ Pay Mark on Sunday morning, at the kitchen table ($75 this week)." },
   { type = "paragraph", content = "You need money. Take shifts, or find another way. People are in different places at different hours. What you say changes how they treat you." },
 ]
@@ -693,6 +693,169 @@ locationId = "home_ryans_room"
 time_progression_minutes = 5
 wardrobeEffects = [{ action = "add", item_id = "ryan_hoodie" }]
 
+# ── P21 · the café job. Both are repeatable rows that switch themselves off by flag: a one-time canvas at a
+# place auto-fires on entry (v2.py:5895-5911); room buttons are repeatable (v2.py:5955-5975). The clock alone
+# greys a row with its cooldown_message; a flag hides it (no locked_text) (v2.py:6684-6696). ──
+
+[[canvases]]
+id = "cafe_hire"
+name = "Ask about the Help Wanted sign (5 min)"
+
+[canvases.trigger]
+location = "near_cafe"
+trigger_mode = "manual"
+is_repeatable = true
+show_when_blocked = true
+cooldown_message = "the manager's in from 10am, Monday to Saturday."
+conditions = { version = "1.0", logic = "AND", items = [{ type = "flag", subject = "player", flag_key = "cafe_hired", operator = "is_false" }, { type = "flag", subject = "player", flag_key = "cafe_ask_parked", operator = "is_false" }, { type = "weekday", weekdays = [0, 1, 2, 3, 4, 5] }, { type = "time_of_day", start_time = "10:00", end_time = "20:55" }] }
+
+[[canvases.nodes]]
+id = "ask"
+name = "The counter"
+blocks = [
+  { type = "paragraph", content = "A man in his thirties is behind the counter, sleeves rolled up, wiping a spot that's already clean. The Help Wanted sign is taped to the window behind him." },
+  { type = "paragraph", content = "The guy behind the counter looks up. \"You here about the sign, or the coffee?\"" },
+  { type = "image", props = { description = "A man of 31 behind a small café counter, sleeves rolled up, a rag in his hand, looking up.", search_queries = ["man 31 behind cafe counter sleeves rolled up rag", "cafe manager wiping counter looking up"], pool_dir = "people/tom_counter_t0", pool = 1 } },
+]
+
+[canvases.nodes.exit_block]
+type = "choices"
+
+[[canvases.nodes.exit_block.choices]]
+text = "The sign. I need the work."
+targetType = "node"
+nodeId = "sign"
+time_progression_minutes = 5
+
+[[canvases.nodes.exit_block.choices]]
+text = "Both?"
+targetType = "node"
+nodeId = "both"
+time_progression_minutes = 5
+
+[[canvases.nodes.exit_block.choices]]
+text = "Not today."
+targetType = "node"
+nodeId = "no"
+time_progression_minutes = 5
+
+[[canvases.nodes]]
+id = "sign"
+name = "The sign"
+blocks = [
+  { type = "paragraph", content = "He looks you over once, the way you'd check a used car." },
+  { type = "dialog", content = "Good answer. I'm Tom. I run the place. Four-hour shifts, five an hour, plus whatever lands in the tip jar. Call it twenty-two a shift.", props = { speaker = "npc", npcId = "npc_tom" } },
+  { type = "paragraph", content = "He taps the shift board by the till: weekdays 2pm–6pm, Saturday and Sunday 10am–2pm and 3pm–7pm." },
+  { type = "dialog", content = "Your first one's a weekday afternoon. Chris'll show you the machine. Don't be late, rookie.", props = { speaker = "npc", npcId = "npc_tom" } },
+  { type = "paragraph", content = "He peels the sign off the window and drops it under the counter. Your face goes warm. You've got a job." },
+]
+
+[canvases.nodes.exit_block]
+type = "choices"
+
+[[canvases.nodes.exit_block.choices]]
+text = "Done"
+targetType = "location"
+locationId = "near_cafe"
+time_progression_minutes = 0
+flagEffects = [{ flag = "met_tom", op = "set" }, { flag = "cafe_hired", op = "set" }]
+[[canvases.nodes]]
+id = "both"
+name = "Both"
+blocks = [
+  { type = "paragraph", content = "His eyes go to your mouth when you smile, then down to the till, fast." },
+  { type = "dialog", content = "Cute. I'm Tom. I run the place.", props = { speaker = "npc", npcId = "npc_tom" } },
+  { type = "dialog", content = "Four-hour shifts, five an hour, plus whatever lands in the tip jar. Call it twenty-two a shift.", props = { speaker = "npc", npcId = "npc_tom" } },
+  { type = "paragraph", content = "He taps the shift board by the till: weekdays 2pm–6pm, Saturday and Sunday 10am–2pm and 3pm–7pm." },
+  { type = "dialog", content = "Your first one's a weekday afternoon. Chris'll show you the machine. Don't be late, rookie.", props = { speaker = "npc", npcId = "npc_tom" } },
+  { type = "paragraph", content = "He peels the sign off the window and drops it under the counter. Your face goes warm. You've got a job." },
+]
+
+[canvases.nodes.exit_block]
+type = "choices"
+
+[[canvases.nodes.exit_block.choices]]
+text = "Done"
+targetType = "location"
+locationId = "near_cafe"
+time_progression_minutes = 0
+flagEffects = [{ flag = "met_tom", op = "set" }, { flag = "cafe_hired", op = "set" }]
+[[canvases.nodes]]
+id = "no"
+name = "Not today"
+blocks = [
+  { type = "paragraph", content = "He shrugs and goes back to the clean spot on the counter." },
+  { type = "paragraph", content = "\"Suit yourself. Sign stays up.\"" },
+]
+
+[canvases.nodes.exit_block]
+type = "choices"
+
+[[canvases.nodes.exit_block.choices]]
+text = "Done"
+targetType = "location"
+locationId = "near_cafe"
+time_progression_minutes = 0
+flagEffects = [{ flag = "cafe_ask_parked", op = "set" }]
+[[canvases]]
+id = "cafe_first_shift"
+name = "Work your first shift (4 hours, 15 energy)"
+
+[canvases.trigger]
+location = "near_cafe"
+trigger_mode = "manual"
+is_repeatable = true
+costs = [{ trait = "energy", value = 15 }]
+show_when_blocked = true
+cooldown_message = "it starts at 2pm on a weekday."
+conditions = { version = "1.0", logic = "AND", items = [{ type = "flag", subject = "player", flag_key = "cafe_hired", operator = "is_true" }, { type = "flag", subject = "player", flag_key = "cafe_first_shift_done", operator = "is_false" }, { type = "weekday", weekdays = [0, 1, 2, 3, 4] }, { type = "time_of_day", start_time = "14:00", end_time = "15:00" }] }
+
+[[canvases.nodes]]
+id = "start"
+name = "Behind the counter"
+blocks = [
+  { type = "paragraph", content = "A guy in his twenties is at the machine, a pencil behind his ear. He looks you over like he's pricing you." },
+  { type = "dialog", content = "So you're the new girl. Tom's giving you my afternoons.", props = { speaker = "npc", npcId = "npc_chris" } },
+  { type = "paragraph", content = "He shows you the grinder, the milk jugs, the till. Reaching past you for a jug, his arm drags across your chest. He doesn't say sorry. He watches you notice." },
+  { type = "image", props = { description = "Seen from behind the counter: a woman of 18 at a café espresso machine, steam rising, her face flushed. No man in frame.", search_queries = ["woman 18 cafe espresso machine steam wand gif", "girl barista steaming milk flushed gif"], pool_dir = "look/chris_wand_t3", pool = 1 } },
+  { type = "paragraph", content = "Your face burns. You step out from his reach." },
+  { type = "dialog", content = "I've got it.", props = { speaker = "player" } },
+  { type = "dialog", content = "Sure you do.", props = { speaker = "npc", npcId = "npc_chris" } },
+  { type = "paragraph", content = "Tom, from the till:" },
+  { type = "dialog", content = "Chris. Customers.", props = { speaker = "npc", npcId = "npc_tom" } },
+  { type = "paragraph", content = "Chris steps back." },
+  { type = "dialog", content = "Later, new girl.", props = { speaker = "npc", npcId = "npc_chris" } },
+]
+
+[canvases.nodes.exit_block]
+type = "choices"
+
+[[canvases.nodes.exit_block.choices]]
+text = "Work the shift"
+targetType = "node"
+nodeId = "end"
+time_progression_minutes = 240
+flagEffects = [{ flag = "met_chris", op = "set" }]
+
+[[canvases.nodes]]
+id = "end"
+name = "Closing up"
+blocks = [
+  { type = "paragraph", content = "Four hours of coffee, crumbs and regulars who look everywhere but your face. When it's done, Tom counts the till and puts twenty-two in your hand." },
+  { type = "dialog", content = "Same again tomorrow, rookie, if you want it.", props = { speaker = "npc", npcId = "npc_tom" } },
+  { type = "paragraph", content = "You made $22." },
+]
+
+[canvases.nodes.exit_block]
+type = "choices"
+
+[[canvases.nodes.exit_block.choices]]
+text = "Done"
+targetType = "location"
+locationId = "near_cafe"
+time_progression_minutes = 0
+flagEffects = [{ flag = "cafe_first_shift_done", op = "set" }]
+effects = [{ trait = "money", op = "add", value = 22 }]
 # ── P04 · travel: four one-screen canvases. A canvas's costs are checked and taken on entry, and an
 # unaffordable one shows dimmed with its cost (v2.py:6700-6732); the choice spends the minutes. ──
 

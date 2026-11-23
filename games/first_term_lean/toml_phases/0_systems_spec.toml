@@ -146,12 +146,27 @@ text = "Pay your own way. Pay Mark your share every Sunday."
 tip = "You need money. Take shifts, or find another way. People are in different places at different hours. What you say changes how they treat you."
 goals = [
   { flag = "met_mark", op = "is_true", label = "Mark told you the rent" },
-  { flag = "cafe_hired", op = "is_true", label = "Ask about the Help Wanted sign at the café across from campus. It's open from 7am to 9pm." },
+  { flag = "cafe_hired", op = "is_true", label = "Ask about the Help Wanted sign at the café across from campus. The manager's in Monday to Saturday, from 10am." },
   { flag = "rent_paid_once", op = "is_true", label = "Pay Mark on Sunday morning, at the kitchen table ($75 this week)." },
 ]
+
+# P21 — Tom and Chris on the People page once met, with where and when.
+[[quest_cards]]
+npc_id = "npc_tom"
+when = [{ flag = "met_tom", op = "is_true" }]
+text = "Tom, 31. He runs the café across from campus, and now he's your boss."
+tip = "He's behind the counter Monday to Saturday, from 10am to 9pm."
+
+[[quest_cards]]
+npc_id = "npc_chris"
+when = [{ flag = "met_chris", op = "is_true" }]
+text = "Chris, 24. The café's barista. Tom gave you his afternoons."
+tip = "He has the counter weekday mornings until 3pm, and weekends until 7pm."
 
 # P42 — the day turn clears the once-a-day talk flags (v2.py:1269-1277, v2.py:7158).
 [engine.daily_tick]
 flagEffects = [
   { targetType = "player", flag = "talked_mom_today", op = "unset" },
+  # P21 — "Not today." at the café parks the ask until the next day
+  { targetType = "player", flag = "cafe_ask_parked", op = "unset" },
 ]
