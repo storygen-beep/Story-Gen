@@ -202,8 +202,10 @@ logs/
 !.claude/skills/**
 
 # ============================================================
-# DEV BUILDS — never committed, because this repo is PUBLIC and
-# games/<slug>/output/ is what the GitHub Pages portal serves.
+# DEV BUILDS — games/<slug>/output_dev/ is legacy. The portal is LO's
+# own phone play channel, not a public release (LO, 2026-11-02), and
+# author-game-lean builds every build into output/ (LO, 2026-11-23).
+# The note below is the old reason, kept for the other skills.
 # A --dev build arms dev_mode_enabled at StoryInit, which renders the
 # <<devJumps>> sidebar (skip to any chapter) plus the stat-adjustment
 # controls. Publishing one hands every player the whole game at once.

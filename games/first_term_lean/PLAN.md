@@ -221,7 +221,7 @@ Energy is the one body need. Sources: sleep (to 100), a meal (+15), a shower (+5
 | place | alone | with a person |
 |---|---|---|
 | Your Bedroom | Sleep (built) | none |
-| Bathroom | Shower (built) | the shared bathroom; walk-ins later (release 2) |
+| Bathroom | Shower (built) | the shared bathroom; walk-ins in release 1 (P38, §10a) |
 | Living Room | Watch TV (+5) | (home life) |
 | Park | Go for a run (45 min, 15 energy): the run on screen, and who looks | none in release 1 |
 | Gym | Work out (1 hour, 20 energy, $5 day pass) | Marco, at his meeting |
@@ -423,7 +423,7 @@ weekdays 12–6.
 Weekdays:
 | time | Laura | Mark | Ryan |
 |---|---|---|---|
-| 7–8 | Kitchen (breakfast) | Kitchen, leaves 7:30 | his room 7–7:25, Bathroom 7:25–7:45 (LO "yes" 2026-11-21), then his room |
+| 7–8 | Kitchen (breakfast) | Kitchen, leaves 7:30 | his room 7–7:12, the hall 7:12–7:25 waiting for the bathroom, Bathroom 7:25–7:45 (LO "yes" 2026-11-21; the hall row LO "Yes" 2026-11-23), then his room |
 | 8–12 | at work | at work | his room |
 | 12–5 | at work | at work, home 4:30 | at the repair shop |
 | 5–7 | Kitchen (dinner) | Living Room (his chair) | home 6, Kitchen |

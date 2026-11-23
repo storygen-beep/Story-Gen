@@ -46,11 +46,11 @@ The front door. It always loads. It holds the loop, the rules, and where everyth
 
 Every command runs from the repo root with `venv/bin/python` (3.12). Plain `python3` here is 3.10, and the scripts need `tomllib` (3.11+). In the tables, skill files are named relative to `.claude/skills/author-game-lean/`.
 
-Dev build, while authoring (keeps `6_dev_shortcuts.toml`; goes to `output_dev/`, never the public `output/`, `.gitignore:204-214`):
+Dev build, while authoring (keeps `6_dev_shortcuts.toml`; goes to `output/`, the folder LO plays from on his phone through the portal, which is his own play channel, not a public release; LO, 2026-11-23):
 
     venv/bin/python scripts/merge_toml_phases.py games/<slug>
     venv/bin/python manage.py package_from_toml --file games/<slug>/toml_phases/7_final_game.toml \
-        --output games/<slug>/output_dev --gen-version v2 --dev
+        --output games/<slug>/output --gen-version v2 --dev
 
 Release build (drops it):
 
@@ -95,7 +95,11 @@ The dev file is dropped only on `--no-dev` (`scripts/merge_toml_phases.py:80`). 
 | economy | `craft/economy.md` |
 | want | `craft/want.md` |
 | heat | `craft/heat.md` |
-| arc, phone, clothes, systems, returning player | none yet: `craft/<area>.md`, with spaces as hyphens |
+| clothes | `craft/clothes.md` |
+| systems | `craft/systems.md` |
+| arc | `craft/arc.md` |
+| returning player | `craft/returning-player.md` |
+| phone | none yet: `craft/<area>.md`, with spaces as hyphens |
 
 Never read a list in `lists/` whole. Grep the area you're porting.
 

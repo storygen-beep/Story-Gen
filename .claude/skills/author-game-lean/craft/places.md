@@ -37,7 +37,7 @@ CoT's 126 passages tagged `location` in `/Users/a0000/Documents/Player_Legibilit
 | words a screen, markup stripped | median 64.5, p75 112 (field median 82, C770) |
 | button labels | 285 read; median 3 words ("Grab a coffee", "Study", "Do a yoga routine") |
 | a cost shown (`<<dtime>>`, `<<dalterneed>>`) | 97 of 126 |
-| people offered (`<<godate>>`, `<<opportunities>>`) | 62 of 126 |
+| a planned date or an opportunity can start here (`<<godate>>`, `<<opportunities>>`) | 62 of 126 |
 | the crowd read (`$peopleatlocation`) | 19 of 126 |
 | an activity draws an event pool (`setup.Events.passage`) | 29 of 126 |
 | a clothes check at the door (`clothes_ok`) | 22 of 126 |
@@ -49,7 +49,7 @@ Each rule is marked **measured** or **LO's choice**.
 
 1. **The identity line is the same every visit.** It says what the place is and who uses it. *Measured:* CoT's BangCoffee opens "You're inside BangCoffee: a preppy coffeehouse that serves baked goods, desserts and overpriced coffee. Some students like to study here, preferring the atmosphere here to their dorms or the library." (C769, C794)
 2. **One presence line per person there, read from their rows,** and the crowd changes it. *Measured:* BangCoffee's "A barista commands the counter," ends "checking their phone." with fewer than 8 people there and "looking harried." otherwise (C795, C804). Every line names only who `scripts/who_is_where.py` puts there at that minute (L106). An empty room has its own line.
-3. **The menu holds only needs, systems and people** (C776, C777). *Measured:* BangCoffee's menu is coffee and "Use restroom" (needs; `<<bathroom>>`, defined in `GlobalWidgets.txt`), "Study" and "Use laptop" (systems), and its people button (`<<godate>>`); 62 of 126 CoT places offer people. Never a browse list of objects (C773).
+3. **The menu holds only needs and systems; a person is their face on the screen** (C776, C777). A person's actions are not room buttons: they sit in that person's own menu, behind their face (`craft/people.md` rule 10). *Measured:* BangCoffee's menu is coffee and "Use restroom" (needs; `<<bathroom>>`, defined in `GlobalWidgets.txt`), "Study" and "Use laptop" (systems). Its `<<godate>>` starts a date she planned earlier (`HangoutWidgets.txt`, lines 1-26); it is not a talk button. CoT's people come from the People Here list (`StoryCaption.txt`, lines 585-596), then the person's card with "Talk to her" (`DisplayNPCWidgets.txt`, lines 33-68). Never a browse list of objects (C773). *LO's choice* for faces, not buttons (relayed 2026-11-23).
 4. **Short labels, with the cost shown:** time, energy, money (C758, C953). Pay she earns stays off the button (C954). *Measured:* median 3 words; a cost shown in 97 of 126.
 5. **"Not now" says why.** A button that can't be used says what's missing: "You really aren't that thirsty right now." (CoT, BangCoffee). Never "Nothing to do here" (C762). *Measured* in CoT; *LO's choice* for the rest.
 6. **Every open place has one thing she can do alone** (`plan.md` §6). This is stricter than C738, which allows "nothing to do here right now" in an open empty room. *LO's choice* (L147).
@@ -71,7 +71,7 @@ Presence, one line per person there, from their rows:
 - Step-father, by his rows: "Your step-father's at the table with his phone. He doesn't look up."
 - Nobody: "Nobody's here. The fridge hums."
 
-Buttons: Eat something (20 min, +15 energy) · Do the dishes (15 min) · Talk to Mom (when she's here) · Leave the kitchen.
+Buttons: Eat something (20 min, +15 energy) · Do the dishes (15 min) · Leave the kitchen. When Mom is here, her face is on the screen, and it opens her menu (`craft/people.md`).
 After three meals, Eat something says: "You're not hungry right now."
 
 ## Not this
@@ -79,4 +79,5 @@ After three meals, Eat something says: "You're not hungry right now."
 - "Nothing to do here right now." Every open place has one thing she can do alone (L147; first_term_lean).
 - A presence line naming someone whose rows don't put them there (L106).
 - A browse list of objects: "Look at the fridge", "Look at the window" (C773).
+- A Talk button per person on the room menu. The person is their face; Talk is inside their menu (`craft/people.md` rule 10).
 - A label with no cost: "Eat something" with no time or energy on it (C953).

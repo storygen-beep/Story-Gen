@@ -96,6 +96,120 @@
       "sha256": "af5f73abe742929e4425def2d25a67742b4e437db833a9976e1bcc285358f48f",
       "words": "Yes go ahead",
       "date": "2026-11-23"
+    },
+    {
+      "card": "P42",
+      "sha256": "93f0f4bb50e4dc1b36e3b1069494c18df13b0fe711cd9f0d853af5d12d94dfe0",
+      "words": "Yes",
+      "date": "2026-11-23"
+    },
+    {
+      "card": "P42",
+      "sha256": "7281d81df467430f01769cf1da242e41300e5eb5986ca2104eab0a8d8a93a05e",
+      "words": "Yes",
+      "date": "2026-11-23"
+    },
+    {
+      "card": "P43",
+      "sha256": "b51c854607387d743678ffada5d4f9f644c097688e363d82623b5ae3ed54fda7",
+      "words": "Yes",
+      "date": "2026-11-23"
+    },
+    {
+      "card": "P07",
+      "sha256": "cb390b6b783e0214d68f31aa6a791f3ab3e59f450da8fbce421b839a62203691",
+      "words": "Yes, and add both to STATE",
+      "date": "2026-11-23"
+    },
+    {
+      "card": "P04",
+      "sha256": "87905185921ca81a08b1bd52e09415ccb8c49d985da5ecb9db0b318875f53df1",
+      "words": "Yes to both",
+      "date": "2026-11-23"
+    },
+    {
+      "card": "P06",
+      "sha256": "aab337f357c5fb641d42523f7c63a10cf5eb42600586ef6942aed64ee1d3fff1",
+      "words": "Yes to both",
+      "date": "2026-11-23"
+    },
+    {
+      "card": "P01",
+      "sha256": "e6b4d6cd6a9d9f713d70f4075d73ada3e630e73a62fc1816aba63635f54df834",
+      "words": "Yes go ahead",
+      "date": "2026-11-23"
+    },
+    {
+      "card": "P13",
+      "sha256": "3e939ad39cee5b84870625426854b4d3199b063811e478c40e8e6297cdb92692",
+      "words": "Yes go ahead",
+      "date": "2026-11-23"
+    },
+    {
+      "card": "P13",
+      "sha256": "e072f56fcb36a275f67fed3a56ea65bae85d0bc012b69c990fef037da49c4448",
+      "words": "Yes go ahead",
+      "date": "2026-11-23"
+    },
+    {
+      "card": "P06",
+      "sha256": "6bab2f23e3b25ddda27fd0af10c30aee39f3c7c49c659aa2fc708fa78a357ed1",
+      "words": "Yes go ahead",
+      "date": "2026-11-23"
+    },
+    {
+      "card": "P42",
+      "sha256": "fcca98ce85f00d08e28db3289fcf8673d63a67a9bcefa69a09d3fcbf7da43a63",
+      "words": "Yes go ahead",
+      "date": "2026-11-23"
+    },
+    {
+      "card": "P13",
+      "sha256": "682652d51c432e4b967c3bcdec701fb75022f40ea059ddd68493dda360b96e51",
+      "words": "Yes go ahead",
+      "date": "2026-11-23"
+    },
+    {
+      "card": "P07",
+      "sha256": "48563bcddd91c4fd28269c543a375ce5c9bc68e20c2f5fc899f9949e5f873647",
+      "words": "Yes go ahead",
+      "date": "2026-11-23"
+    },
+    {
+      "card": "P13",
+      "sha256": "ad7e0acb960f43c6ea619adc3304876a2824d75cd68795295a3cf545b24b5447",
+      "words": "Yes go ahead",
+      "date": "2026-11-23"
+    },
+    {
+      "card": "P43",
+      "sha256": "15d05605b187da3009c8d9a1f61dc1eb3568639e26c3e6aa8b9e7ad943a4dba7",
+      "words": "Yes go ahead",
+      "date": "2026-11-23"
+    },
+    {
+      "card": "P13",
+      "sha256": "0b6ae2630782e2059594e5d92d9a308435ad1ca9820bbe6a64f7683c366ca325",
+      "words": "Go",
+      "date": "2026-11-23"
+    },
+    {
+      "card": "P13",
+      "sha256": "4c6dc67a05ed2202f05284cbe94a7bf085722a5bb318fa5ac2df7ddfc24a8ac9",
+      "words": "Yes",
+      "date": "2026-11-23"
+    },
+    {
+      "card": "P13",
+      "sha256": "0d7c8734f878ac2dbc18b8fa58084ffaf70223514dd65745a688f7ae2aa5603f",
+      "words": "Yes and play",
+      "date": "2026-11-23"
+    },
+    {
+      "card": "P43",
+      "sha256": "9271531aff0072ca330dca8177092bdb47a0bafbd3c5033a1bc65464169410a8",
+      "words": "Yes and play",
+      "date": "2026-11-23"
     }
   ]
 }

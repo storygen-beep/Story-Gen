@@ -14,41 +14,45 @@ name = "First Day"
 id = "wake"
 name = "Screen 1: your bedroom"
 blocks = [
-  { type = "paragraph", content = "Monday, seven in the morning. Today you start college." },
-  { type = "paragraph", content = "You're eighteen, in the single bed you had at twelve, and you've never had a dollar that wasn't your mom's. Four people, one bathroom. The only thing in this house that's yours is the old key in your bedroom door." },
-  { type = "paragraph", content = "*College. Finally. Something that's mine.*" },
+  { type = "paragraph", content = "Monday morning. Today you start college." },
+  { type = "paragraph", content = "You kick off the sheet. Your pyjama top has ridden up in the night, and the cold air on your stomach makes your nipples go tight under it." },
+  { type = "image", props = { description = "A woman of 18 in a single bed in her small bedroom, the sheet kicked off, a thin pyjama top ridden up over her stomach, morning light. Alone.", search_queries = ["woman 18 single bed sheet kicked off pyjama top ridden up morning", "girl waking up in a narrow bed, morning light"], pool_dir = "body/opening_wake_t3", pool = 1 } },
+  { type = "paragraph", content = "You're eighteen, in the single bed you had at twelve, and you've never had money that wasn't your mom's. Four people, one bathroom. The only thing in this house that's yours is the old key in your bedroom door." },
+  { type = "paragraph", content = "College. Finally, something that's yours." },
 ]
 
 [canvases.nodes.exit_block]
 type = "choices"
 
 [[canvases.nodes.exit_block.choices]]
-text = "Go down to the kitchen"
+text = "Go down to the kitchen (5 min)"
 targetType = "node"
 nodeId = "kitchen_rent"
 time_progression_minutes = 5
-flagEffects = [{ flag = "met_laura", op = "set" }, { flag = "met_mark", op = "set" }]
+flagEffects = [{ flag = "met_laura", op = "set" }]
 
 [[canvases.nodes]]
 id = "kitchen_rent"
 name = "Screen 2: the kitchen, the rent"
 blocks = [
-  { type = "paragraph", content = "Mark's at the table with his coffee, like he's been waiting for you. Mom's at the stove." },
-  { type = "dialog", content = "Morning. Seventy-five a week, starting Sunday. Your share of the rent. You're an adult now.", props = { speaker = "npc", npcId = "npc_mark" } },
+  { type = "paragraph", content = "Mark, your step-father, is at the table with his coffee, like he's been waiting for you. Mom's at the stove." },
+  { type = "dialog", content = "Morning, kid. Seventy-five a week, starting Sunday. Your share of the rent. You're an adult now.", props = { speaker = "npc", npcId = "npc_mark" } },
   { type = "paragraph", content = "He takes a sip." },
-  { type = "dialog", content = "One way or another.", props = { speaker = "npc", npcId = "npc_mark" } },
+  { type = "dialog", content = "One way or another. Your mother thinks I'm joking. I'm not.", props = { speaker = "npc", npcId = "npc_mark" } },
   { type = "paragraph", content = "Mom keeps her back to you. The pan hisses. She doesn't turn round." },
-  { type = "paragraph", content = "*Seventy-five. I have nothing. And she already knew.*" },
+  { type = "paragraph", content = "Your stomach drops. Seventy-five, and you have nothing. And she already knew." },
 ]
 
 [canvases.nodes.exit_block]
 type = "choices"
 
 [[canvases.nodes.exit_block.choices]]
-text = "Look at Mom"
+text = "Look at Mom (2 min)"
 targetType = "node"
 nodeId = "kitchen_ask"
 time_progression_minutes = 2
+# P13 (reader v6, C217): the rent step's flag, on its way out.
+flagEffects = [{ flag = "met_mark", op = "set" }]
 
 [[canvases.nodes]]
 id = "kitchen_ask"
@@ -63,21 +67,21 @@ blocks = [
 type = "choices"
 
 [[canvases.nodes.exit_block.choices]]
-text = "Good grades. I'll make you proud."
+text = "Good grades. I'll make you proud. (3 min)"
 targetType = "node"
 nodeId = "bath_grades"
 time_progression_minutes = 3
 flagEffects = [{ flag = "start_grades", op = "set" }]
 
 [[canvases.nodes.exit_block.choices]]
-text = "Fun. I've waited eighteen years."
+text = "Fun. I've waited eighteen years. (3 min)"
 targetType = "node"
 nodeId = "bath_fun"
 time_progression_minutes = 3
 flagEffects = [{ flag = "start_fun", op = "set" }]
 
 [[canvases.nodes.exit_block.choices]]
-text = "Freedom. Anywhere that isn't here."
+text = "Freedom. Anywhere that isn't here. (3 min)"
 targetType = "node"
 nodeId = "bath_freedom"
 time_progression_minutes = 3
@@ -85,164 +89,259 @@ flagEffects = [{ flag = "start_freedom", op = "set" }]
 
 [[canvases.nodes]]
 id = "bath_grades"
-name = "Screen 4: the bathroom (grades)"
+name = "Screen 4a: the reaction (grades)"
 blocks = [
   { type = "dialog", content = "Good. Make it count.", props = { speaker = "npc", npcId = "npc_laura" } },
   { type = "paragraph", content = "She squeezes your arm." },
   { type = "dialog", content = "Grades don't pay rent.", props = { speaker = "npc", npcId = "npc_mark" } },
-  { type = "paragraph", content = "Upstairs, you get the bathroom first. The bolt hasn't held in years, and the water takes forever to run hot. You give yourself five minutes." },
-  { type = "paragraph", content = "Then a fist on the door." },
-  { type = "dialog", content = "@player.nickname. Some of us need that too.", props = { speaker = "npc", npcId = "npc_ryan" } },
-  { type = "paragraph", content = "You grab the towel off the rail. It's the small one." },
 ]
 
 [canvases.nodes.exit_block]
 type = "choices"
 
 [[canvases.nodes.exit_block.choices]]
-text = "Open the door"
+text = "Go upstairs (2 min)"
 targetType = "node"
-nodeId = "hall"
-time_progression_minutes = 10
-flagEffects = [{ flag = "met_ryan", op = "set" }, { flag = "ryan_hall_seen", op = "set" }]
+nodeId = "bath"
+time_progression_minutes = 2
 
 [[canvases.nodes]]
 id = "bath_fun"
-name = "Screen 4: the bathroom (fun)"
+name = "Screen 4a: the reaction (fun)"
 blocks = [
   { type = "paragraph", content = "Mom laughs, and it comes out nervous." },
   { type = "dialog", content = "Just don't tell me about it.", props = { speaker = "npc", npcId = "npc_laura" } },
   { type = "paragraph", content = "Mark doesn't laugh." },
-  { type = "paragraph", content = "Upstairs, you get the bathroom first. The bolt hasn't held in years, and the water takes forever to run hot. You give yourself five minutes." },
-  { type = "paragraph", content = "Then a fist on the door." },
-  { type = "dialog", content = "@player.nickname. Some of us need that too.", props = { speaker = "npc", npcId = "npc_ryan" } },
-  { type = "paragraph", content = "You grab the towel off the rail. It's the small one." },
 ]
 
 [canvases.nodes.exit_block]
 type = "choices"
 
 [[canvases.nodes.exit_block.choices]]
-text = "Open the door"
+text = "Go upstairs (2 min)"
 targetType = "node"
-nodeId = "hall"
-time_progression_minutes = 10
-flagEffects = [{ flag = "met_ryan", op = "set" }, { flag = "ryan_hall_seen", op = "set" }]
+nodeId = "bath"
+time_progression_minutes = 2
 
 [[canvases.nodes]]
 id = "bath_freedom"
-name = "Screen 4: the bathroom (freedom)"
+name = "Screen 4a: the reaction (freedom)"
 blocks = [
   { type = "paragraph", content = "Mom's smile goes stiff." },
   { type = "dialog", content = "This is your home, baby.", props = { speaker = "npc", npcId = "npc_laura" } },
   { type = "dialog", content = "Then pay for it.", props = { speaker = "npc", npcId = "npc_mark" } },
-  { type = "paragraph", content = "Upstairs, you get the bathroom first. The bolt hasn't held in years, and the water takes forever to run hot. You give yourself five minutes." },
-  { type = "paragraph", content = "Then a fist on the door." },
-  { type = "dialog", content = "@player.nickname. Some of us need that too.", props = { speaker = "npc", npcId = "npc_ryan" } },
-  { type = "paragraph", content = "You grab the towel off the rail. It's the small one." },
 ]
 
 [canvases.nodes.exit_block]
 type = "choices"
 
 [[canvases.nodes.exit_block.choices]]
-text = "Open the door"
+text = "Go upstairs (2 min)"
+targetType = "node"
+nodeId = "bath"
+time_progression_minutes = 2
+
+# P13 re-check (reader v5) — screen 4b, one bathroom screen for all three answers: P43's shower and its
+# one picture block (C1255), then Ryan's fist.
+[[canvases.nodes]]
+id = "bath"
+name = "Screen 4b: the bathroom"
+blocks = [
+  { type = "paragraph", content = "Upstairs, you get the bathroom a second before Ryan, your step-brother, opens his door. The bolt hasn't held in years, and the water takes forever to run hot." },
+  { type = "paragraph", content = "You strip and step in before it's warm. It hits your nipples cold, and they go hard. Then the heat comes. You stand under it with your eyes shut and let it run down your neck, over your tits, down your stomach and between your thighs. Your shoulders drop for the first time all morning." },
+  { type = "image", props = { description = "A woman of 18 in a small family bathroom shower, water running down her bare body, eyes shut, head tipped back. No one else in frame.", search_queries = ["woman 18 shower water running down body gif", "girl in a small bathroom shower eyes closed gif"], pool_dir = "body/opening_shower_t4", pool = 1 } },
+  { type = "paragraph", content = "Then a fist bangs on the door." },
+  { type = "dialog", content = "@player.nickname. Some of us need that too.", props = { speaker = "npc", npcId = "npc_ryan" } },
+  { type = "dialog", content = "Come on, I'm dying out here.", props = { speaker = "npc", npcId = "npc_ryan" } },
+  { type = "paragraph", content = "Your heart jumps. You grab the towel off the rail. It's the small one." },
+]
+
+[canvases.nodes.exit_block]
+type = "choices"
+
+[[canvases.nodes.exit_block.choices]]
+text = "Open the door (8 min)"
 targetType = "node"
 nodeId = "hall"
-time_progression_minutes = 10
+time_progression_minutes = 8
 flagEffects = [{ flag = "met_ryan", op = "set" }, { flag = "ryan_hall_seen", op = "set" }]
 
 [[canvases.nodes]]
 id = "hall"
 name = "Screen 5: the hall"
 blocks = [
-  { type = "paragraph", content = "Steam rolls out into the hall. Ryan's leaning on the wall opposite, shirtless, half asleep, a towel over his shoulder." },
-  { type = "paragraph", content = "His eyes drop to the towel, to where it ends on your wet thighs. One second." },
+  { type = "paragraph", content = "Steam rolls out into the hall. Ryan's on the wall opposite, shirtless, a towel over his shoulder. He's broader than you remember." },
+  { type = "paragraph", content = "His eyes drop to where the towel ends on your wet thighs. One second." },
   { type = "image", props = { description = "Seen from across a narrow upstairs hall: a woman of 18 in a small white towel in a bathroom doorway, steam rolling out around her, legs wet. No man in frame.", search_queries = ["woman 18 small towel steamy bathroom doorway gif", "steam rolling out bathroom door towel gif"], pool_dir = "look/hall_towel_t3", pool = 1 } },
-  { type = "paragraph", content = "Then he catches it. He looks at the ceiling, the wall, anywhere but you, and his ears go red." },
+  { type = "paragraph", content = "Then he catches it. He stares at the ceiling, and his ears go red." },
   { type = "dialog", content = "Shit. Sorry. First day, huh?", props = { speaker = "npc", npcId = "npc_ryan" } },
+  { type = "paragraph", content = "He jerks his chin at the bathroom." },
+  { type = "dialog", content = "I'll wait. Go.", props = { speaker = "npc", npcId = "npc_ryan" } },
+  { type = "paragraph", content = "Your face goes hot. He just looked at you the way a guy looks at a girl. Your nipples are hard against the towel." },
   { type = "paragraph", content = "The knot at your chest is slipping." },
-  { type = "paragraph", content = "*Did he just... no. Ryan doesn't look at me like that. Does he?*" },
 ]
 
 [canvases.nodes.exit_block]
 type = "choices"
 
 [[canvases.nodes.exit_block.choices]]
-text = "Hold the towel and squeeze past him"
+text = "Hold the towel and squeeze past him (3 min)"
 targetType = "node"
 nodeId = "room_past"
 time_progression_minutes = 3
 flagEffects = [{ flag = "ryan_hall_past", op = "set" }, { flag = "goal1_shown", op = "set" }]
 
 [[canvases.nodes.exit_block.choices]]
-text = "\"All yours.\""
+text = "\"All yours.\" (3 min)"
 targetType = "node"
 nodeId = "room_spoke"
 time_progression_minutes = 3
 flagEffects = [{ flag = "ryan_hall_spoke", op = "set" }, { flag = "goal1_shown", op = "set" }]
 
 [[canvases.nodes.exit_block.choices]]
-text = "Fix the knot first"
+text = "Fix the knot first (3 min)"
 targetType = "node"
 nodeId = "room_waited"
 time_progression_minutes = 3
 flagEffects = [{ flag = "ryan_hall_waited", op = "set" }, { flag = "goal1_shown", op = "set" }]
 
+# P13 re-check — screen 6, the knot, by her answer (node ids kept; craft/returning-player.md rule 3).
 [[canvases.nodes]]
 id = "room_past"
-name = "Screen 6: your room (squeezed past)"
+name = "Screen 6: the hall, the knot (squeezed past)"
 blocks = [
-  { type = "paragraph", content = "Ryan flattens himself against the wall so nothing touches." },
+  { type = "paragraph", content = "Ryan flattens himself against the wall so nothing touches. Halfway past him, the knot gives. The towel drops off your tits, and for one second you're bare in the hall before you catch it against you." },
+  { type = "image", props = { description = "A woman of 18 in a narrow upstairs hall, a small white towel dropping off her bare chest as she catches it, wet hair. No man in frame.", search_queries = ["woman 18 towel drops off chest hallway gif", "girl catching falling towel wet hair gif"], pool_dir = "body/hall_knot_past_t4", pool = 1 } },
+  { type = "paragraph", content = "Ryan's eyes are on the ceiling, and they stay there." },
   { type = "dialog", content = "Sorry.", props = { speaker = "npc", npcId = "npc_ryan" } },
-  { type = "paragraph", content = "He says it to the floor." },
-  { type = "paragraph", content = "Back in your room, dressed, hair still wet, you sit on the bed and do the sums." },
-  { type = "paragraph", content = "Seventy-five by Sunday. You have nothing." },
-  { type = "paragraph", content = "Last week there was a Help Wanted sign in the window of the café across from campus. And Mark said \"one way or another\" like he'd already picked one." },
-  { type = "paragraph", content = "**Pay your own way.** Pay Mark your share every Sunday. This week: seventy-five. · Ask about work at the café across from campus · Pay Mark on Sunday" },
-  { type = "paragraph", content = "You need money. Take shifts, or find another way. People are in different places at different hours. What you say changes how they treat you." },
+  { type = "paragraph", content = "He says it to the ceiling." },
+  { type = "paragraph", content = "You run for your room. The bathroom bolt hasn't held in years, and everyone in this house knows it." },
 ]
 
 [canvases.nodes.exit_block]
 type = "choices"
 
 [[canvases.nodes.exit_block.choices]]
-text = "Go back down"
+text = "Go to your room (2 min)"
 targetType = "node"
-nodeId = "handover"
-time_progression_minutes = 15
+nodeId = "room"
+time_progression_minutes = 2
 
 [[canvases.nodes]]
 id = "room_spoke"
-name = "Screen 6: your room (all yours)"
+name = "Screen 6: the hall, the knot (spoke)"
 blocks = [
-  { type = "dialog", content = "Thanks.", props = { speaker = "npc", npcId = "npc_ryan" } },
-  { type = "paragraph", content = "He goes in sideways, eyes on the sink, and shuts the door fast." },
-  { type = "paragraph", content = "Back in your room, dressed, hair still wet, you sit on the bed and do the sums." },
-  { type = "paragraph", content = "Seventy-five by Sunday. You have nothing." },
-  { type = "paragraph", content = "Last week there was a Help Wanted sign in the window of the café across from campus. And Mark said \"one way or another\" like he'd already picked one." },
-  { type = "paragraph", content = "**Pay your own way.** Pay Mark your share every Sunday. This week: seventy-five. · Ask about work at the café across from campus · Pay Mark on Sunday" },
-  { type = "paragraph", content = "You need money. Take shifts, or find another way. People are in different places at different hours. What you say changes how they treat you." },
+  { type = "dialog", content = "Thanks. Go get dressed.", props = { speaker = "npc", npcId = "npc_ryan" } },
+  { type = "paragraph", content = "He goes in sideways, eyes on the sink. The door bangs shut, and the knot gives. The towel slides to your waist, and you stand bare in the hall, your nipples tight in the cold, before you yank it up." },
+  { type = "image", props = { description = "A woman of 18 alone in a narrow upstairs hall, a small white towel slid to her waist, bare from the waist up, wet hair.", search_queries = ["woman 18 towel slips to waist hallway gif", "girl towel falls in hall wet hair gif"], pool_dir = "body/hall_knot_spoke_t4", pool = 1 } },
+  { type = "paragraph", content = "You run for your room. The bathroom bolt hasn't held in years, and everyone in this house knows it." },
 ]
 
 [canvases.nodes.exit_block]
 type = "choices"
 
 [[canvases.nodes.exit_block.choices]]
-text = "Go back down"
+text = "Go to your room (2 min)"
 targetType = "node"
-nodeId = "handover"
-time_progression_minutes = 15
+nodeId = "room"
+time_progression_minutes = 2
 
 [[canvases.nodes]]
 id = "room_waited"
-name = "Screen 6: your room (fixed the knot)"
+name = "Screen 6: the hall, the knot (fixed it)"
 blocks = [
-  { type = "paragraph", content = "You stand there and tie it again. Ryan stares hard at the light switch the whole time." },
-  { type = "paragraph", content = "Back in your room, dressed, hair still wet, you sit on the bed and do the sums." },
+  { type = "paragraph", content = "Ryan's eyes go straight to the light switch. You stand there and tie it again. To pull it tight you have to open it first, and for a second the towel hangs open on your tits." },
+  { type = "image", props = { description = "A woman of 18 in a narrow upstairs hall, opening a small white towel to re-tie it at her chest, wet hair. No man in frame.", search_queries = ["woman 18 retying towel at chest gif", "girl opening towel to retie it hallway gif"], pool_dir = "body/hall_knot_fix_t4", pool = 1 } },
+  { type = "paragraph", content = "He doesn't look once." },
+  { type = "paragraph", content = "He says it to the switch:" },
+  { type = "dialog", content = "Take your time.", props = { speaker = "npc", npcId = "npc_ryan" } },
+  { type = "paragraph", content = "You run for your room. The bathroom bolt hasn't held in years, and everyone in this house knows it." },
+]
+
+[canvases.nodes.exit_block]
+type = "choices"
+
+[[canvases.nodes.exit_block.choices]]
+text = "Go to your room (2 min)"
+targetType = "node"
+nodeId = "room"
+time_progression_minutes = 2
+
+# P13 re-check — screen 7, her room: P07's dressing, the sums, goal 1's card, P07's three outfits.
+[[canvases.nodes]]
+id = "room"
+name = "Screen 7: your room, dressing"
+blocks = [
+  { type = "paragraph", content = "Back in your room, you shut the door and let the towel drop. The air's cold on your wet skin, and your nipples go tight. You pull a plain bra and panties from the drawer, then your jeans, a T-shirt and sneakers. Your usual." },
+  { type = "image", props = { description = "A woman of 18 in a small bedroom, a towel on the floor, stepping into jeans, wet hair. Alone.", search_queries = ["woman 18 bedroom towel on floor stepping into jeans gif", "girl getting dressed after shower wet hair bedroom gif"], pool_dir = "body/opening_dressing_t4", pool = 1 } },
+]
+
+[canvases.nodes.exit_block]
+type = "choices"
+
+[[canvases.nodes.exit_block.choices]]
+text = "Keep your usual (5 min)"
+targetType = "node"
+nodeId = "sums"
+time_progression_minutes = 5
+# P07 (reader v6): her clothes go on where she dresses (v2.py:18219-18250).
+wardrobeEffects = [
+  { action = "add", item_id = "sundress" },
+  { action = "add", item_id = "leggings" },
+  { action = "add", item_id = "sports_top" },
+  { action = "add", item_id = "jeans" },
+  { action = "add", item_id = "tshirt" },
+  { action = "equip", item_id = "plain_bra" },
+  { action = "equip", item_id = "plain_panties" },
+  { action = "equip", item_id = "jeans" },
+  { action = "equip", item_id = "tshirt" },
+  { action = "equip", item_id = "sneakers" },
+]
+
+[[canvases.nodes.exit_block.choices]]
+text = "Wear the sundress instead (5 min)"
+targetType = "node"
+nodeId = "sums"
+time_progression_minutes = 5
+wardrobeEffects = [
+  { action = "add", item_id = "sundress" },
+  { action = "add", item_id = "leggings" },
+  { action = "add", item_id = "sports_top" },
+  { action = "add", item_id = "jeans" },
+  { action = "add", item_id = "tshirt" },
+  { action = "equip", item_id = "plain_bra" },
+  { action = "equip", item_id = "plain_panties" },
+  { action = "equip", item_id = "sundress" },
+  { action = "equip", item_id = "sneakers" },
+]
+
+[[canvases.nodes.exit_block.choices]]
+text = "Wear the leggings and sports top instead (5 min)"
+targetType = "node"
+nodeId = "sums"
+time_progression_minutes = 5
+wardrobeEffects = [
+  { action = "add", item_id = "sundress" },
+  { action = "add", item_id = "leggings" },
+  { action = "add", item_id = "sports_top" },
+  { action = "add", item_id = "jeans" },
+  { action = "add", item_id = "tshirt" },
+  { action = "equip", item_id = "plain_bra" },
+  { action = "equip", item_id = "plain_panties" },
+  { action = "equip", item_id = "leggings" },
+  { action = "equip", item_id = "sports_top" },
+  { action = "equip", item_id = "sneakers" },
+]
+
+# P13 re-check (reader v5) — screen 8, the sums and goal 1's card, its own screen (C519).
+[[canvases.nodes]]
+id = "sums"
+name = "Screen 8: your room, the sums"
+blocks = [
+  { type = "paragraph", content = "Hair still wet, you sit on the bed and do the sums." },
   { type = "paragraph", content = "Seventy-five by Sunday. You have nothing." },
   { type = "paragraph", content = "Last week there was a Help Wanted sign in the window of the café across from campus. And Mark said \"one way or another\" like he'd already picked one." },
-  { type = "paragraph", content = "**Pay your own way.** Pay Mark your share every Sunday. This week: seventy-five. · Ask about work at the café across from campus · Pay Mark on Sunday" },
+  { type = "paragraph", content = "**Pay your own way.** Pay Mark your share every Sunday. · ✅ Mark told you the rent · ➜ Ask about the Help Wanted sign at the café across from campus. It's open from 7am to 9pm. · ➜ Pay Mark on Sunday morning, at the kitchen table ($75 this week)." },
   { type = "paragraph", content = "You need money. Take shifts, or find another way. People are in different places at different hours. What you say changes how they treat you." },
 ]
 
@@ -250,10 +349,10 @@ blocks = [
 type = "choices"
 
 [[canvases.nodes.exit_block.choices]]
-text = "Go back down"
+text = "Go down to the kitchen (5 min)"
 targetType = "node"
 nodeId = "handover"
-time_progression_minutes = 15
+time_progression_minutes = 5
 
 [[canvases.nodes]]
 id = "handover"
@@ -263,7 +362,7 @@ blocks = [
   { type = "dialog", content = "He means it, baby. I tried.", props = { speaker = "npc", npcId = "npc_laura" } },
   { type = "paragraph", content = "She dries the same plate twice." },
   { type = "dialog", content = "There's toast. Eat before you go looking.", props = { speaker = "npc", npcId = "npc_laura" } },
-  { type = "paragraph", content = "*Tried what? What did she say to him?*" },
+  { type = "paragraph", content = "Your throat goes tight. Tried what?" },
 ]
 
 [canvases.nodes.exit_block]
@@ -285,9 +384,9 @@ time_progression_minutes = 5
 id = "sit_with_mom"
 name = "Screen 8: the kitchen, with Mom"
 blocks = [
-  { type = "paragraph", content = "You eat toast at the counter while she does the dishes. She talks about the weather, your classes, anything but Mark. Then she stops, a plate in her hands." },
+  { type = "paragraph", content = "Mom smiles, small, and slides the toast over. You eat it at the counter while she does the dishes. She talks about the weather, your classes, anything but Mark. Then she stops, a plate in her hands." },
   { type = "dialog", content = "If Mark says anything to you about the money, you tell me first. Okay?", props = { speaker = "npc", npcId = "npc_laura" } },
-  { type = "paragraph", content = "*Tell her what?*" },
+  { type = "paragraph", content = "You nod, and your stomach knots. Tell her what?" },
 ]
 
 [canvases.nodes.exit_block]
@@ -306,8 +405,7 @@ name = "Screen 8b: the kitchen, what she tried"
 blocks = [
   { type = "paragraph", content = "She won't look at you." },
   { type = "dialog", content = "Doesn't matter. Eat.", props = { speaker = "npc", npcId = "npc_laura" } },
-  { type = "paragraph", content = "She pushes the toast across the counter and turns the tap on hard." },
-  { type = "paragraph", content = "*Then why won't she look at me?*" },
+  { type = "paragraph", content = "She pushes the toast across the counter and turns the tap on hard. She still won't look at you." },
 ]
 
 [canvases.nodes.exit_block]
@@ -320,34 +418,213 @@ targetType = "location"
 locationId = "home_kitchen"
 time_progression_minutes = 0
 
-# ── P13 · Talk to Mom: in the Kitchen while her rows put her there (requires_npc obeys the rows on
-# the manual lane, template_import.py:882-911), once a day. P34 grows it. ──
+# ── P42 · Mom: her face and her menu. `npc` on the trigger makes each canvas her card on the room
+# screen, not a room button (template_import.py:2581, v2.py:15080-15082, v2.py:5925-5948). One canvas
+# per room her rows put her in awake. Talk is once a day by talked_mom_today, which the day turn
+# clears ([engine.daily_tick], v2.py:7158); the menu itself never locks. ──
 
 [[canvases]]
 id = "talk_mom"
-name = "Talk to Mom (5 min)"
+name = "Mom"
 
 [canvases.trigger]
 location = "home_kitchen"
 trigger_mode = "manual"
 is_repeatable = true
-max_triggers_per_day = 1
+npc = "npc_laura"
 requires_npc = "npc_laura"
 
-# Her line asks about Mark, so it shows only while his rows keep him out of the Kitchen (v2.py:5384-5401).
 [canvases.trigger.conditions]
 version = "1.0"
 logic = "AND"
-items = [{ type = "npc_at_location", npc_id = "npc_mark", location_id = "home_kitchen", operator = "is_absent" }]
+items = [{ type = "flag", subject = "player", flag_key = "met_laura", operator = "is_true" }]
+
+[[canvases.nodes]]
+id = "hub"
+name = "Mom"
+blocks = [
+  { type = "group", props = { conditions = { version = "1.0", logic = "AND", items = [{ type = "npc_at_location", npc_id = "npc_mark", location_id = "home_kitchen", operator = "is_absent" }] } }, blocks = [
+    { type = "paragraph", content = "Mom's in the kitchen. She looks up when you come in, and her face goes soft." },
+  ] },
+  { type = "group", props = { conditions = { version = "1.0", logic = "AND", items = [{ type = "npc_at_location", npc_id = "npc_mark", location_id = "home_kitchen", operator = "is_present" }] } }, blocks = [
+    { type = "paragraph", content = "Mom's in the kitchen. Mark's at the table. She looks up at you, then at him." },
+  ] },
+  { type = "image", props = { description = "A woman of 41 in a cardigan over a blouse, at a kitchen counter with a mug, looking up.", search_queries = ["woman 41 cardigan kitchen counter mug", "mother in a cardigan in a small kitchen"], pool_dir = "everyday/mom_kitchen_t0", pool = 1 } },
+  { type = "group", props = { conditions = { version = "1.0", logic = "AND", items = [{ type = "clothing_item", item_id = "mom_short_skirt", operator = "equipped" }] } }, blocks = [
+    { type = "paragraph", content = "Mom's eyes drop to the skirt. \"Is that mine?\" She doesn't wait for an answer." },
+  ] },
+  { type = "group", props = { conditions = { version = "1.0", logic = "AND", items = [{ type = "clothing_item", item_id = "mom_lowcut_top", operator = "equipped" }] } }, blocks = [
+    { type = "paragraph", content = "Mom's eyes drop to the top. \"Is that mine?\" She doesn't wait for an answer." },
+  ] },
+  { type = "group", props = { conditions = { version = "1.0", logic = "AND", items = [{ type = "clothing_item", item_id = "mom_heels", operator = "equipped" }] } }, blocks = [
+    { type = "paragraph", content = "Mom looks down at your feet. \"Are those my heels?\" She doesn't wait for an answer." },
+  ] },
+]
+
+[canvases.nodes.exit_block]
+type = "choices"
+
+[[canvases.nodes.exit_block.choices]]
+text = "Talk (5 min)"
+targetType = "node"
+nodeId = "talk"
+show_when_locked = true
+locked_text = "You've already talked today."
+conditions = { version = "1.0", logic = "AND", items = [{ type = "flag", subject = "player", flag_key = "talked_mom_today", operator = "is_false" }] }
+flagEffects = [{ flag = "talked_mom_today", op = "set" }]
+time_progression_minutes = 5
+
+[[canvases.nodes.exit_block.choices]]
+text = "Leave"
+targetType = "location"
+locationId = "home_kitchen"
+time_progression_minutes = 0
 
 [[canvases.nodes]]
 id = "talk"
 name = "Talk to Mom"
 blocks = [
-  { type = "image", props = { description = "A woman of 41 in a cardigan over a blouse, at a kitchen counter with a mug, watching, seen from across the kitchen.", search_queries = ["woman 40s kitchen counter holding mug watching", "mother at kitchen counter coffee mug worried"], pool_dir = "everyday/talk_mom_t0", pool = 1 } },
-  { type = "dialog", content = "Did Mark say anything else? About the rent?", props = { speaker = "npc", npcId = "npc_laura" } },
-  { type = "paragraph", content = "She watches your face while you shake your head." },
-  { type = "paragraph", content = "*What does she think he's going to say to me?*" },
+  { type = "group", props = { conditions = { version = "1.0", logic = "AND", items = [{ type = "npc_at_location", npc_id = "npc_mark", location_id = "home_kitchen", operator = "is_absent" }] } }, blocks = [
+    { type = "dialog", content = "Did Mark say anything else? About the rent?", props = { speaker = "npc", npcId = "npc_laura" } },
+    { type = "paragraph", content = "She watches your face while you shake your head. Your stomach tightens. She's waiting for something, and she won't say what." },
+  ] },
+  { type = "group", props = { conditions = { version = "1.0", logic = "AND", items = [{ type = "npc_at_location", npc_id = "npc_mark", location_id = "home_kitchen", operator = "is_present" }] } }, blocks = [
+    { type = "dialog", content = "Did you eat, baby?", props = { speaker = "npc", npcId = "npc_laura" } },
+    { type = "paragraph", content = "She doesn't look at Mark while she asks. Mark turns a page and doesn't look at either of you." },
+  ] },
+]
+
+[canvases.nodes.exit_block]
+type = "choices"
+
+[[canvases.nodes.exit_block.choices]]
+text = "Done"
+targetType = "node"
+nodeId = "hub"
+time_progression_minutes = 0
+
+[[canvases]]
+id = "mom_living_room"
+name = "Mom"
+
+[canvases.trigger]
+location = "home_living_room"
+trigger_mode = "manual"
+is_repeatable = true
+npc = "npc_laura"
+requires_npc = "npc_laura"
+
+[canvases.trigger.conditions]
+version = "1.0"
+logic = "AND"
+items = [{ type = "flag", subject = "player", flag_key = "met_laura", operator = "is_true" }]
+
+[[canvases.nodes]]
+id = "hub"
+name = "Mom"
+blocks = [
+  { type = "group", props = { conditions = { version = "1.0", logic = "AND", items = [{ type = "npc_at_location", npc_id = "npc_mark", location_id = "home_living_room", operator = "is_absent" }] } }, blocks = [
+    { type = "paragraph", content = "Mom's on the couch with her feet under her, the TV on low. She moves over to make room." },
+  ] },
+  { type = "group", props = { conditions = { version = "1.0", logic = "AND", items = [{ type = "npc_at_location", npc_id = "npc_mark", location_id = "home_living_room", operator = "is_present" }] } }, blocks = [
+    { type = "paragraph", content = "Mom's on the couch. Mark's in his chair, the remote on his knee. She smiles at you and doesn't move over." },
+  ] },
+  { type = "image", props = { description = "A woman of 41 in a cardigan on a living room couch, her feet under her, TV light on her face.", search_queries = ["woman 41 cardigan on couch watching TV", "mother on a sofa at night with the TV on"], pool_dir = "everyday/mom_living_t0", pool = 1 } },
+  { type = "group", props = { conditions = { version = "1.0", logic = "AND", items = [{ type = "clothing_item", item_id = "mom_short_skirt", operator = "equipped" }] } }, blocks = [
+    { type = "paragraph", content = "Mom's eyes drop to the skirt. \"Is that mine?\" She doesn't wait for an answer." },
+  ] },
+  { type = "group", props = { conditions = { version = "1.0", logic = "AND", items = [{ type = "clothing_item", item_id = "mom_lowcut_top", operator = "equipped" }] } }, blocks = [
+    { type = "paragraph", content = "Mom's eyes drop to the top. \"Is that mine?\" She doesn't wait for an answer." },
+  ] },
+  { type = "group", props = { conditions = { version = "1.0", logic = "AND", items = [{ type = "clothing_item", item_id = "mom_heels", operator = "equipped" }] } }, blocks = [
+    { type = "paragraph", content = "Mom looks down at your feet. \"Are those my heels?\" She doesn't wait for an answer." },
+  ] },
+]
+
+[canvases.nodes.exit_block]
+type = "choices"
+
+[[canvases.nodes.exit_block.choices]]
+text = "Talk (5 min)"
+targetType = "node"
+nodeId = "talk"
+show_when_locked = true
+locked_text = "You've already talked today."
+conditions = { version = "1.0", logic = "AND", items = [{ type = "flag", subject = "player", flag_key = "talked_mom_today", operator = "is_false" }] }
+flagEffects = [{ flag = "talked_mom_today", op = "set" }]
+time_progression_minutes = 5
+
+[[canvases.nodes.exit_block.choices]]
+text = "Leave"
+targetType = "location"
+locationId = "home_living_room"
+time_progression_minutes = 0
+
+[[canvases.nodes]]
+id = "talk"
+name = "Talk to Mom"
+blocks = [
+  { type = "group", props = { conditions = { version = "1.0", logic = "AND", items = [{ type = "npc_at_location", npc_id = "npc_mark", location_id = "home_living_room", operator = "is_absent" }, { type = "flag", subject = "player", flag_key = "start_grades", operator = "is_true" }] } }, blocks = [
+    { type = "dialog", content = "Sit with me a minute, baby.", props = { speaker = "npc", npcId = "npc_laura" } },
+    { type = "paragraph", content = "She pats the couch." },
+    { type = "dialog", content = "How are your classes? Tell me everything.", props = { speaker = "npc", npcId = "npc_laura" } },
+    { type = "paragraph", content = "You sit. She listens to all of it, and her shoulders come down for the first time all day." },
+  ] },
+  { type = "group", props = { conditions = { version = "1.0", logic = "AND", items = [{ type = "npc_at_location", npc_id = "npc_mark", location_id = "home_living_room", operator = "is_absent" }, { type = "flag", subject = "player", flag_key = "start_freedom", operator = "is_true" }] } }, blocks = [
+    { type = "dialog", content = "Sit with me a minute, baby. Or do you have somewhere better to be?", props = { speaker = "npc", npcId = "npc_laura" } },
+    { type = "paragraph", content = "She says it light, but she's watching your face." },
+    { type = "paragraph", content = "You sit. She talks about nothing, and her hand stays on your knee the whole time." },
+  ] },
+  { type = "group", props = { conditions = { version = "1.0", logic = "AND", items = [{ type = "npc_at_location", npc_id = "npc_mark", location_id = "home_living_room", operator = "is_absent" }, { type = "flag", subject = "player", flag_key = "start_grades", operator = "is_false" }, { type = "flag", subject = "player", flag_key = "start_freedom", operator = "is_false" }] } }, blocks = [
+    { type = "dialog", content = "Sit with me a minute, baby.", props = { speaker = "npc", npcId = "npc_laura" } },
+    { type = "paragraph", content = "She pats the couch." },
+    { type = "dialog", content = "Tell me one good thing. Just one.", props = { speaker = "npc", npcId = "npc_laura" } },
+    { type = "paragraph", content = "You sit. She listens to all of it, and her shoulders come down for the first time all day." },
+  ] },
+  { type = "group", props = { conditions = { version = "1.0", logic = "AND", items = [{ type = "npc_at_location", npc_id = "npc_mark", location_id = "home_living_room", operator = "is_present" }] } }, blocks = [
+    { type = "dialog", content = "Did you eat, baby?", props = { speaker = "npc", npcId = "npc_laura" } },
+    { type = "paragraph", content = "She doesn't look at Mark while she asks. Mark turns the TV up and doesn't look at either of you." },
+  ] },
+]
+
+[canvases.nodes.exit_block]
+type = "choices"
+
+[[canvases.nodes.exit_block.choices]]
+text = "Done"
+targetType = "node"
+nodeId = "hub"
+time_progression_minutes = 0
+
+# ── P07 · borrowing: one click adds the garments (wardrobeEffects add is a no-op on what she owns).
+# Greyed with locked_text while the room's people are in it (craft/clothes.md rule 7). ──
+
+[[canvases]]
+id = "borrow_mom"
+name = "Borrow Mom's things (5 min)"
+
+[canvases.trigger]
+location = "home_master_bedroom"
+trigger_mode = "manual"
+is_repeatable = true
+show_when_blocked = true
+locked_text = "Not while they're in here."
+
+[canvases.trigger.conditions]
+version = "1.0"
+logic = "AND"
+items = [{ type = "npc_at_location", npc_id = "npc_laura", location_id = "home_master_bedroom", operator = "is_absent" }, { type = "npc_at_location", npc_id = "npc_mark", location_id = "home_master_bedroom", operator = "is_absent" }]
+
+[[canvases.nodes]]
+id = "take"
+name = "Borrow Mom's things (5 min)"
+blocks = [
+  { type = "group", props = { conditions = { version = "1.0", logic = "AND", items = [{ type = "clothing_item", item_id = "mom_short_skirt", operator = "not_owned" }] } }, blocks = [
+    { type = "paragraph", content = "Her side of the wardrobe smells like her perfume. You take a short skirt, a low-cut top and the heels she never wears, and carry them back to your room." },
+  ] },
+  { type = "group", props = { conditions = { version = "1.0", logic = "AND", items = [{ type = "clothing_item", item_id = "mom_short_skirt", operator = "owned" }] } }, blocks = [
+    { type = "paragraph", content = "Her things are already on your chair." },
+  ] },
 ]
 
 [canvases.nodes.exit_block]
@@ -356,8 +633,47 @@ type = "choices"
 [[canvases.nodes.exit_block.choices]]
 text = "Done"
 targetType = "location"
-locationId = "home_kitchen"
+locationId = "home_master_bedroom"
 time_progression_minutes = 5
+wardrobeEffects = [{ action = "add", item_id = "mom_short_skirt" }, { action = "add", item_id = "mom_lowcut_top" }, { action = "add", item_id = "mom_heels" }]
+
+[[canvases]]
+id = "borrow_hoodie"
+name = "Borrow one of his hoodies (5 min)"
+
+[canvases.trigger]
+location = "home_ryans_room"
+trigger_mode = "manual"
+is_repeatable = true
+show_when_blocked = true
+locked_text = "Not while Ryan's in here."
+
+[canvases.trigger.conditions]
+version = "1.0"
+logic = "AND"
+items = [{ type = "npc_at_location", npc_id = "npc_ryan", location_id = "home_ryans_room", operator = "is_absent" }]
+
+[[canvases.nodes]]
+id = "take"
+name = "Borrow one of his hoodies (5 min)"
+blocks = [
+  { type = "group", props = { conditions = { version = "1.0", logic = "AND", items = [{ type = "clothing_item", item_id = "ryan_hoodie", operator = "not_owned" }] } }, blocks = [
+    { type = "paragraph", content = "You pick the grey one up off his floor. It's huge on you, and it smells like him." },
+  ] },
+  { type = "group", props = { conditions = { version = "1.0", logic = "AND", items = [{ type = "clothing_item", item_id = "ryan_hoodie", operator = "owned" }] } }, blocks = [
+    { type = "paragraph", content = "You've already got one of his." },
+  ] },
+]
+
+[canvases.nodes.exit_block]
+type = "choices"
+
+[[canvases.nodes.exit_block.choices]]
+text = "Done"
+targetType = "location"
+locationId = "home_ryans_room"
+time_progression_minutes = 5
+wardrobeEffects = [{ action = "add", item_id = "ryan_hoodie" }]
 
 # ── P04 · travel: four one-screen canvases. A canvas's costs are checked and taken on entry, and an
 # unaffordable one shows dimmed with its cost (v2.py:6700-6732); the choice spends the minutes. ──
@@ -376,7 +692,12 @@ costs = [{ trait = "money", value = 2 }]
 id = "ride"
 name = "Take the bus to campus ($2, 20 min)"
 blocks = [
-  { type = "paragraph", content = "The bus is packed. You stand the whole way, pressed between strangers, and step off at the campus gates." },
+  { type = "group", props = { conditions = { version = "1.0", logic = "AND", items = [{ type = "weekday", weekdays = [0, 1, 2, 3, 4] }, { type = "time_of_day", start_time = "07:00", end_time = "10:00" }] } }, blocks = [
+    { type = "paragraph", content = "The bus is packed. You stand the whole way, pressed between strangers. Every time it brakes, a man's hips press into your ass, and he doesn't step back. Your face burns. You step off at the campus gates." },
+  ] },
+  { type = "group", props = { conditions = { version = "1.0", logic = "OR", items = [{ type = "weekday", weekdays = [5, 6] }, { type = "time_of_day", start_time = "10:00", end_time = "07:00" }] } }, blocks = [
+    { type = "paragraph", content = "The bus is half empty. You get a seat by the window and step off at the campus gates." },
+  ] },
 ]
 
 [canvases.nodes.exit_block]
@@ -390,7 +711,7 @@ time_progression_minutes = 20
 
 [[canvases]]
 id = "travel_walk_to_campus"
-name = "Walk to campus (45 min)"
+name = "Walk to campus (45 min, 10 energy)"
 
 [canvases.trigger]
 location = "hood_street"
@@ -400,7 +721,7 @@ costs = [{ trait = "energy", value = 10 }]
 
 [[canvases.nodes]]
 id = "ride"
-name = "Walk to campus (45 min)"
+name = "Walk to campus (45 min, 10 energy)"
 blocks = [
   { type = "paragraph", content = "It's a long walk: past the park, over the bridge, along the main road. By the campus gates your feet ache." },
 ]
@@ -448,7 +769,7 @@ name = "Walk home (45 min)"
 location = "campus_quad"
 trigger_mode = "manual"
 is_repeatable = true
-costs = [{ trait = "energy", value = 10 }]
+# P04 re-check: no energy, so she can always get home (craft/systems.md rule 2).
 
 [[canvases.nodes]]
 id = "ride"
@@ -472,7 +793,7 @@ time_progression_minutes = 45
 
 [[canvases]]
 id = "loop_sleep"
-name = "Sleep (8 hours)"
+name = "Sleep (8 hours, energy to full)"
 
 [canvases.trigger]
 location = "home_her_room"
@@ -484,10 +805,11 @@ conditions = { version = "1.0", logic = "AND", items = [{ type = "time_of_day", 
 
 [[canvases.nodes]]
 id = "do"
-name = "Sleep (8 hours)"
+name = "Sleep (8 hours, energy to full)"
 blocks = [
-  { type = "image", props = { file = "loop/sleep.jpg" } },
-  { type = "paragraph", content = "You crawl into the single bed, and you're gone before you've finished thinking about tomorrow." },
+  { type = "paragraph", content = "You get out of your clothes and into your pyjamas: the thin top and the little shorts. The sheet is cool on your bare legs, and your nipples tighten against the thin top." },
+  { type = "image", props = { description = "A woman of 18 in a single bed under a thin sheet, in a thin pyjama top and shorts, lights off. Alone.", search_queries = ["woman 18 single bed thin sheet pyjama shorts night", "girl lying in bed in a thin top and shorts, lights off"], pool_dir = "body/sleep_t3", pool = 2 } },
+  { type = "paragraph", content = "You're gone before you've finished thinking about tomorrow." },
 ]
 
 [canvases.nodes.exit_block]
@@ -498,11 +820,13 @@ text = "Wake up"
 targetType = "location"
 locationId = "home_her_room"
 time_progression_minutes = 480
+# P06 re-check — a save from before P07 gets her clothes; a no-op on what she owns (v2.py:1736-1745).
+wardrobeEffects = [{ action = "add", item_id = "plain_bra" }, { action = "add", item_id = "plain_panties" }, { action = "add", item_id = "jeans" }, { action = "add", item_id = "tshirt" }, { action = "add", item_id = "sundress" }, { action = "add", item_id = "sneakers" }, { action = "add", item_id = "leggings" }, { action = "add", item_id = "sports_top" }]
 effects = [{ trait = "energy", op = "set", value = 100 }]
 
 [[canvases]]
 id = "loop_eat"
-name = "Eat something (20 min)"
+name = "Eat something (20 min, +15 energy)"
 
 [canvases.trigger]
 location = "home_kitchen"
@@ -510,13 +834,12 @@ trigger_mode = "manual"
 is_repeatable = true
 max_triggers_per_day = 3
 show_when_blocked = true
-cooldown_message = "you've eaten enough today."
+cooldown_message = "you're not hungry right now."
 
 [[canvases.nodes]]
 id = "do"
-name = "Eat something (20 min)"
+name = "Eat something (20 min, +15 energy)"
 blocks = [
-  { type = "image", props = { file = "loop/eat.jpg" } },
   { type = "paragraph", content = "You eat standing at the counter: toast, whatever's in the fridge, coffee from the pot." },
 ]
 
@@ -532,19 +855,24 @@ effects = [{ trait = "energy", op = "add", value = 15, clamp = true }]
 
 [[canvases]]
 id = "loop_shower"
-name = "Shower (15 min)"
+name = "Shower (15 min, +5 energy)"
 
 [canvases.trigger]
 location = "home_bathroom"
 trigger_mode = "manual"
 is_repeatable = true
+# P06 re-check: two a day, greyed in her voice (craft/systems.md rule 5).
+max_triggers_per_day = 2
+show_when_blocked = true
+cooldown_message = "you've showered enough for one day."
 
 [[canvases.nodes]]
 id = "do"
-name = "Shower (15 min)"
+name = "Shower (15 min, +5 energy)"
 blocks = [
-  { type = "image", props = { file = "loop/shower.jpg" } },
-  { type = "paragraph", content = "The water takes forever to run hot. You stand under it until it does, and you come out pink and awake." },
+  { type = "paragraph", content = "The water takes forever to run hot. You strip and step in anyway. It hits your nipples cold, and they go hard. Then it warms, and runs down your belly and between your legs, and you tip your head back and let it." },
+  { type = "image", props = { description = "A woman of 18 in a small family bathroom shower, water running down her bare body, head tipped back. Alone.", search_queries = ["woman 18 shower water running down body gif", "girl in a small home shower head tipped back gif"], pool_dir = "body/daily_shower_t4", pool = 4 } },
+  { type = "paragraph", content = "You towel off and get dressed again." },
 ]
 
 [canvases.nodes.exit_block]

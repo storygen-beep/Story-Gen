@@ -95,7 +95,7 @@ Why: the plan asked who notices her (§5) and what she can do (§6), but nothing
 
 ## 9 · The arcs
 
-Per person who has one, the arc's scaffold: its shape, its direction, its first third and its ending. Steps are designed one release at a time, in that release's pieces, never all at once here. A housemate is reached through accidents first (C297). Every release ends on an opening: each arc's last card says where it stops and what comes next (C140).
+Per person who has one, the arc's scaffold: its shape, its direction, its opening (the steps before the first sex) and its ending. Steps are designed one release at a time, in that release's pieces, never all at once here. A housemate is reached through accidents first (C297). Every release ends on an opening: each arc's last card says where it stops and what comes next (C140).
 
 Must read: C74, C129, C140, C297, L91.
 Why: designing every step of every ladder before anything was confirmed made no sense, and LO cut the plan back to a scaffold (L91).

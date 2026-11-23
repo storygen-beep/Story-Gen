@@ -11,6 +11,10 @@ starting_canvas = "opening"
 # P02 — second person, declared once for the whole game (C503, C548; validated at template_import.py:4108).
 [settings]
 narration_person = "second"
+# P07 — clothes on; the full wardrobe only in her bedroom (v2.py:1190-1198).
+clothing_enabled = true
+wardrobe_location = "home_her_room"
+wardrobe_anywhere = false
 
 # The game starts on her first day of college: Monday, week 1, 07:00 (template_import.py:2319-2325).
 [time]
@@ -119,26 +123,35 @@ warmth = [
 npc_id = "npc_ryan"
 when = [{ flag = "met_ryan", op = "is_true" }]
 text = "Your step-brother, 22. He shares the hall and the bathroom with you."
+tip = "He's in the shower around half past seven on weekday mornings, and on the couch most evenings from seven."
 
 # P13 — Laura and Mark on the People page once met.
 [[quest_cards]]
 npc_id = "npc_laura"
 when = [{ flag = "met_laura", op = "is_true" }]
 text = "Your mom, 41. She married Mark three years ago."
+tip = "She's in the kitchen in the mornings and from five, and on the couch in the evenings."
 
 [[quest_cards]]
 npc_id = "npc_mark"
 when = [{ flag = "met_mark", op = "is_true" }]
 text = "Your step-father, 46. He collects the rent."
+tip = "He's at the kitchen table on Sunday mornings. That's when he collects."
 
 # P13 — goal 1's card, armed by the opening (C1604). P11 adds the Sundays count.
 [[quest_cards]]
 group = "story_goals"
 when = [{ flag = "goal1_shown", op = "is_true" }]
-text = "Pay your own way. Pay Mark your share every Sunday. This week: seventy-five."
+text = "Pay your own way. Pay Mark your share every Sunday."
 tip = "You need money. Take shifts, or find another way. People are in different places at different hours. What you say changes how they treat you."
 goals = [
-  { flag = "cafe_hired", op = "is_true", label = "Ask about work at the café across from campus" },
-  { flag = "rent_paid_once", op = "is_true", label = "Pay Mark on Sunday" },
+  { flag = "met_mark", op = "is_true", label = "Mark told you the rent" },
+  { flag = "cafe_hired", op = "is_true", label = "Ask about the Help Wanted sign at the café across from campus. It's open from 7am to 9pm." },
+  { flag = "rent_paid_once", op = "is_true", label = "Pay Mark on Sunday morning, at the kitchen table ($75 this week)." },
 ]
 
+# P42 — the day turn clears the once-a-day talk flags (v2.py:1269-1277, v2.py:7158).
+[engine.daily_tick]
+flagEffects = [
+  { targetType = "player", flag = "talked_mom_today", op = "unset" },
+]

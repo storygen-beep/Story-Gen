@@ -32,7 +32,7 @@ The card's `Craft:` line cites each one, or says in one line why it skips it.
 
 1. **Setup.** Who she is, where she is, what she has, in her voice.
 2. **The problem, carried by a person.** Someone says the hold out loud: an amount, a day, a condition. Someone who could help says nothing, and the screen says what that silence means.
-3. **The start choice, asked by a person.** A person on screen asks what she wants. Each answer costs or earns something with that person: a reaction line, and a flag only on the one that matters later.
+3. **The start choice, asked by a person.** A person on screen asks about her past, and her answer is a memory of who she already is, not a wish (`craft/want.md` rule 2, C44; CoT's "Think back..."). The person asks because of something happening right then (the bill just said, the first day, a worry), never out of nowhere; a question about her past with no reason in the scene reads as random. Each answer costs or earns something with that person: a reaction line, and a flag only on the one that matters later.
 4. **The build-up.** The room works against her (a lock, thin walls, one towel), then the interruption.
 5. **The temptation, at her stage.** It happens to her. The screen stays on her body and his reaction: a named part of her, his eyes on it, his leak, and (a man she lives with) his cover. His spoken line can be about anything; the screen around it is about her body. There's a price or a "not yet" (the towel slipping). She reacts on her body (her face, her breath, her nipples), never in an italic thought (`craft/voice.md`). No button is a final no; staying a beat is allowed.
 6. **Objective and card.** The hold becomes the first quest card with goal steps, with plain tutorial lines under it.
@@ -52,17 +52,17 @@ Roles, not a world: a rented room, a landlord, his wife, another lodger. Word co
 > His wife is at the stove behind him. She doesn't turn round.
 > Your face goes hot. You have forty. She heard it.
 
-**3 · The start choice, asked by a person** (37 words)
+**3 · The start choice, asked by a person** (39 words)
 > He doesn't move off the bottom step.
-> "So what are you here for, anyway? School? A boyfriend? Running from somebody?"
+> "Last girl in that room left owing me three weeks. What makes you any different?"
 > He asks like your answer decides how much slack you get on Friday.
 > Your mouth goes dry.
 
 | button | the first line after the click |
 |---|---|
-| "Work. You'll have it Friday." | *He nods once. "We'll see."* |
-| "That's my business." | *His mouth goes thin. He writes something on the calendar by the phone.* · sets `landlord_crossed` |
-| "Starting over." | *He snorts, but he steps aside.* |
+| "I've worked every summer since I was fourteen. You'll have it Friday." | *He nods once. "We'll see."* |
+| "I've talked my way out of worse than you." | *His mouth goes thin. He writes something on the calendar by the phone.* · sets `landlord_crossed` |
+| "I left worse than this behind." | *He snorts, but he steps aside.* |
 
 **4 · The build-up** (54 words)
 > The bathroom at the end of the landing is shared, and the bolt only goes in halfway. The radio comes up through the floor. You get the water hot and give yourself one minute.

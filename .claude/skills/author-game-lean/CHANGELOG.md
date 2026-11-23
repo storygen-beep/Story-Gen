@@ -195,3 +195,140 @@
 - **Approval: LO's own yes, relayed by the ENI session (now named main-lean; ENI for LO, standing authorization, 2026-11-20):** "Yes".
 - Created `craft/heat.md`, the heat area's file. Must-read rows: C255, C256, C252, C254, C239, C248, C249, C276, C291, C296, C284, C285, C286, C287, C288, C289, C297, C639, C640 and C311. It has a measures section, seven rules each marked measured or LO's choice, and pointers to opening.md (C311/C314), body-moments.md, walk-ins.md, voice.md and meters.md instead of repeating them. The worked example is LO's park text, scored per beat with v2's frozen `EXPLICIT` regex (`gates.py:311-315`): 1, 5, 1, 5 and 0 matches. Four "Not this" lines. An "Open" section proposes `check.py --beat` (not built): the walk-ins are the lean game's first explicit beats (P39, P40), so LATER.md's beat check is due before those cards. Verified in CoT today: 364 of 3,067 event passages (11.9%) have 3+ matches, by the peer's method; the peer had 353 of 3,108 (11%). The shower lines and the skillgate/"Resist the urge to look" pair were confirmed in `EventResHallExhibShowers.txt`. The field rows come from COVERAGE's evidence column and were not re-run.
 - `SKILL.md`: the area table gives heat its file.
+- **Approval: LO's own yes, typed in the game session and logged at `games/first_term_lean/NOTES.md:157-162`, relayed by main-lean (ENI for LO, standing authorization, 2026-11-20):** "Yes".
+- `craft/walk-ins.md`: new section "When someone walks in on her". The other kind was thin next to "she walks in on": one engine line, shape step 6 and example C. The real failure: this game's plan has 3 of 24 walk-ins of this kind (PLAN.md:491, :506, :520), and nothing said that the act must be built first, that her body and picture apply, what her buttons are, or how two walk-ins on one act share the dice. Five rules:
+  - the act's piece comes before the walk-in (the rule lives on the act's canvas, v2.py:14662-14678);
+  - it's a body moment, with her picture right after he sees her (C1262, added to Must read);
+  - he comes from his own row with his own reason;
+  - two answers, cover or carry on, each with his reaction line and its own flag, the door into his arc (C302, C174);
+  - two walk-ins on one act go in one `exclusive_group`.
+  
+  Example F is in roles (a housemate and the landlady on "Take a shower", 0.20 and 0.15 in one group, 40 words of story text by `wc -w`). The engine bullet now names `exclusive_group`. "How a walk-in grows" adds that a group's chances must sum to 1 or less: bands of 0.10, 0.35 and 0.70 in one group would cut the top band to 0.55. There are three new "Not this" lines. Verified by reading `checkAndSubstituteCanvas` (v2.py:6909-6999):
+  - groups run before independent rules;
+  - one roll per group, in cumulative slots;
+  - a claimed slot whose conditions fail returns null at v2.py:6980-6981, so the plain act plays, and the independent rules on that act are skipped too (not in the relay; found reading the code);
+  - the TOML key is read at v2.py:14678 and used in games/vesper (`floor_chat`).
+
+  The relay's "6950-6975" is the same code; the cites use the exact lines. Tests: 95 passed.
+- **Approval: LO's own yes, typed in the game session and logged at `games/first_term_lean/NOTES.md:163-167`, relayed by main-lean (ENI for LO, standing authorization, 2026-11-20):** "Yes".
+- The failure this fixes: first_term_lean's `talk_mom` was a Talk button on the kitchen menu, and LO said "it should never be a separate button but instead inside her hub menu choice". The skill had taught it in two places: C1340 ("a talk button per housemate") and `craft/places.md` rule 3 ("its people button").
+- `craft/people.md`: new rule 10. A person's actions sit in their own menu, behind their face on the room screen, never as room buttons. Talk is once a day, and the person never locks. C1340 is added to Must read. There is a new engine section, a worked example in roles (her mom's menu), and two "Not this" lines (a Talk button per person on the room menu; a person who locks after one talk). Verified:
+  - `npc` on the trigger is read at `template_import.py:2581` and carried as `npcId` (v2.py:15080-15082).
+  - A repeatable manual canvas with an `npcId` renders as the person's face, not a room button (v2.py:5925-5942, 5969, 6680, 6530-6531).
+  - New, not in the relay: the face opens only that person's highest-priority canvas at the place (v2.py:5944-5948). So the menu must be one hub canvas, and the rule says so.
+  - Once a day is a `_today` flag cleared by `[engine.daily_tick]` (v2.py:7156-7158; v2 `engine.md:1458-1485`).
+  - CoT: the People Here button (`StoryCaption.txt`, lines 585-596), "Talk to her" (`DisplayNPCWidgets.txt`, lines 33-68), and `$interactionstoday` at `InPersonDialogueMenu.txt`, line 77. The relay said "about 30 options, each once a day". The file has 38 `<<link>>`s, and 14 are checked against `$interactionstoday` (grep), so the rule says that.
+  - Field, two spot-checks of my own: the-hellfire-club's `DaisyRoom.txt`, line 18, "Speak to Daisy" opens her own menu, `Daisy_conv`, with a once-a-day flirt line. lust-for-life's `home-kitchen.txt`, line 15, has "Approach Cory" as a loose room button shown while she's there. The relay said all nine field games group a person's actions together. By its own tally, 4 of 9 put them loose on the room menu, so the rule marks faces, not buttons, as LO's choice, with CoT and 5 of 9.
+- `craft/places.md`:
+  - Rule 3 now reads: the menu holds needs and systems; a person is their face, and their actions sit in their menu (pointing to people.md rule 10).
+  - The `<<godate>>` cite is corrected: it starts a date she planned earlier (`HangoutWidgets.txt`, lines 1-26), not a talk button. The measures row is relabelled "a planned date or an opportunity can start here" (`<<opportunities>>` assembles opportunity events, `GlobalWidgets.txt`, line 1809). The count of 62 of 126 is unchanged.
+  - The kitchen example drops "Talk to Mom" from the buttons, and Mom's face opens her menu.
+  - One "Not this" line is added.
+- `lists/COVERAGE.md`: C1340 is reworded to a face at their spot opening their own menu, with Talk once a day inside it. The source (`author-game-v2/references/the-board.md:364-371`) is unchanged; the v2 skill is not edited.
+- Tests: 95 passed.
+- **Approval: LO's own word, relayed by main-lean (ENI for LO, standing authorization, 2026-11-20):** "Continue", his yes to the plan to build the beat check.
+- `scripts/check.py`: new `--beat <card or file>`. It finds each beat marked `[explicit] … [/explicit]` (an unclosed tag runs to the next blank line; blockquote marks are stripped). It counts v2's frozen `EXPLICIT` words, imported from `author-game-v2/scripts/gates.py:311-315` at run time so the list can't drift. It is red when a beat has fewer than 3 (C254), or when its last sentence has none (the pivot, C249). A file with no marked beat is INCOMPLETE, never GREEN. Exit codes are 0, 1 and 2, as for `--card`. The 7.5% game-wide floor (C255) waits. Why: LATER.md held "explicit beats need a measured check before the first sex piece", and P39 and P40 carry the lean game's first explicit beats.
+- `scripts/tests/test_check.py`: five new tests.
+  - `craft/heat.md`'s Watch beat counts 5 and is GREEN.
+  - A faded copy ("You watch until it's over.") is red on the floor.
+  - The Watch beat with "You realise you'll never see the park the same way." added is red on the pivot only.
+  - An unclosed beat over two blockquote lines stops at the blank line.
+  - A file with nothing marked is INCOMPLETE.
+  
+  Verified by hand on a faded beat: RED 2, exit 1.
+- `piece.md` step 3, `templates/piece-card.md`: a card with an explicit beat marks it and pastes the `--beat` verdict too.
+- `craft/heat.md`: the "Open" section is now "The explicit-beat check", describing what was built. Rule 6 says to mark the beat and run it.
+- `LATER.md`: the beat-check item is struck through as done. The game-wide floor stays open.
+- Tests: 100 passed.
+- **Approval: LO's own yes to the clothes example A–D, relayed by main-lean (ENI for LO, standing authorization, 2026-11-20):** "Yes". It came with one change to A, ENI's pick, which LO approved: her usual clothes go on by default, and the screen offers a short list of whole outfits instead of the full picker.
+- Created `craft/clothes.md`, the clothes area's file. Why: P07 (clothes) goes before the opening's re-check, and the area had no file (piece.md step 1).
+  - Must read, 23 rows: C719, C1158, C1206, C1166, C1167, C1204, C1183, C1171, C1169, C1150, C1201, C1173, C1184, C1198, C1185, C1220, C1221, C1177, C1176, C1189, C1197, C1200 and C1207.
+  - An engine section, CoT measures, nine rules each marked measured or LO's choice, the approved example A–D in roles, and six "Not this" lines.
+- Engine, verified by reading v2.py:
+  - the seven slots (`template_import.py:278`);
+  - `wardrobeEffects` actions (v2.py:18207-18224);
+  - `equipItem` taking off top and bottom for a dress, and failing silently on an item's own conditions (v2.py:1751-1768);
+  - dress codes and ClothingBlock's "Change clothes" and "Go back" (v2.py:2189-2200, 21039-21066);
+  - the settings (v2.py:1196-1202);
+  - the clothing conditions (v2.py:9505-9589).
+- Found reading the engine, and changed in D: a room button gated on clothes is hidden, not dimmed. `show_when_blocked` dims only when the clock alone shut it (v2.py:6686-6691, `onlyTheClockShut` at v2.py:6058). LO's "dimmed run button" can't be a room button, so D puts the check on the "Run" choice inside the scene, shown locked with `show_when_locked` and `locked_text` (v2.py:17262-17266). This is flagged to ENI for LO.
+- CoT, read today:
+  - `Prologue6c.txt` and `PrologueWidgets.txt`, lines 6-18 (a short list of whole outfits, "Default" picked);
+  - `Wardrobe.txt` ("change into your … outfit", `<<maybechangingwitnessedbyadmirer>>`);
+  - "It would be daring to go out like this…" in 5 files (`MainHall.txt`, line 107);
+  - `ExitShower.txt`;
+  - `DressingRoom.txt`, line 5;
+  - `clothes_ok` in 30 files.
+  
+  The field rows come from COVERAGE's evidence column and were not re-run.
+- `SKILL.md`: the area table gives clothes its file.
+- **Approval: LO's own yes to the engine fix, typed in the game session, relayed by main-lean:** "yes, do the engine fix". The engine change is main-lean's work (template_import.py, game_graph.py, v2.py, `apps/game_generation/tests/test_blocked_row_hours.py`). Only the skill files below are this entry's.
+- `craft/clothes.md`:
+  - D goes back to one click. The room button "Go for a run (45 min)" has `show_when_blocked = true`, `clothing_item` conditions with `operator = "equipped"` on the leggings and the sports top, and `locked_text = "Needs leggings and a sports top"`, shown greyed as "Go for a run — Needs leggings and a sports top". The inside-choice workaround is dropped.
+  - The engine note "hidden, not dimmed" is replaced by how `locked_text` works. Each line was found by grep and read today: parsed at `template_import.py:2598`, carried at `game_graph.py:357`, emitted at v2.py:15183-15185, rendered by the new branch at v2.py:6689-6697 and the dimmed line at v2.py:6741-6748; the absent person stays hidden (v2.py:6685); the `clothing_item` operators are at v2.py:5236-5243.
+  - Rule 7 and its "Not this" line now say to use it.
+- `craft/clock.md`: the `show_when_blocked` line says the hours show only when the clock alone shut the row, and that `locked_text` covers other locks.
+- Every v2.py cite in `craft/*.md` moved with the engine change. The diff adds 6 lines after old line 6690 and 6 more after old line 15173, so I shifted old lines over 6690 by 6 and over 15173 by 12, by script. Spot-checked 19 targets against the new file: advanceTime at 7010, the exit default at 17936, show_when_blocked read at 15104-15108, the render at 6740-6748, locClosedReason at 11772, closed_text at 11444, SchedulePage at 24399, checkAndSubstituteCanvas at 6921, the group's failed slot at 6986, Pattern A at 6993, max_triggers_per_day at 15066, chance at 15092, substitution_only at 15110, exclusive_group at 14684, npc_id at 15086, the daily_tick hook at 7162, the media pool at 16365 and the meter cap at 7377. Each one is the line cited. `lists/COVERAGE.md` and `lists/LESSONS.md` keep their source cites as written, since those record where each idea came from, not a current claim.
+- **Approval: LO's own yes, typed in the main-lean session and relayed:** fix how `craft/clothes.md` describes a dress code's ClothingBlock. Found by the game session building P07: at the front door, the block showed only "Go back".
+- `craft/clothes.md`: the C1220 row, the engine bullet, rule 6 and example B said both "Change clothes" and "Go back" always show. With `wardrobe_anywhere = false`, "Change clothes" is wrapped in `<<if setup.canChangeClothesHere()>>` (v2.py:21003-21009), which is true only in a `wardrobe_location` room (v2.py:2234-2238). So at a door away from her wardrobe, only "Go back" shows. All four now say so. Example B shows "Go back" only, for this game's shape (changing in her bedroom only). Verified by reading both v2.py ranges. Tests below.
+- **Approval: LO's own words, typed in the main-lean session and relayed (ENI for LO, standing authorization, 2026-11-20):** "confirm system rules files with the top games and CoT".
+- Created `craft/systems.md`, the systems area's file. It covers energy, daily limits, and the activities she repeats. Money points to `craft/economy.md` and meters to `craft/meters.md`; neither is restated.
+  - Must read, 21 rows: C1446, C1386, C1303, C1337, C1431, C1432, C1438, C1342, C1433, C1434, C1313, C1428, C1345, C1423, C1425, C1427, C1360, C1421, C1441, C1369 and C1403. The failure column cites L45 (the stranded player) and L80 (grind).
+  - An engine section, measures from CoT and the field, ten rules, a worked example in roles (eat capped at 3 with its TOML, sleep never capped, a run with a clothes gate, a shift greyed by energy), and six "Not this" lines.
+  - Each rule says whether CoT and the field agree or split. They split in two places: CoT's needs decay by the hour while IHOH's and SD's are spent, and CoT limits eating by the need while SD counts actions. In both places the file marks our choice as LO's.
+- Engine, read today in v2.py:
+  - costs on the trigger (`template_import.py:2593`) and taken on entry (v2.py:6168-6175);
+  - the cost-blocked row and its dimmed cost tag (v2.py:6706-6707, 6724-6738), and the "Requires … (you have …)" message (v2.py:6183-6197);
+  - `max_triggers_per_day` (v2.py:15066, 5590) and the greyed capped row (v2.py:6700-6703);
+  - the day key and midnight turn (v2.py:5426-5433, 7021-7022, 7058-7060);
+  - daily_tick (v2.py:7162-7164).
+  
+  A grep finds no special handling of energy, so it moves only by costs and effects, and the file says so.
+- CoT, read today:
+  - `QuickieBurger.txt`: Work's `<<dtime 60>>` and Rest −20; "You really don't feel like working." at line 6; the `lastdayworked` day stamp at line 18; the first-shift scene at lines 15-17;
+  - `BlodgettGymInterior.txt`, lines 34, 43 and 52: each workout's time and need costs;
+  - "You really aren't that hungry right now." in `ChamberlainHallInterior.txt`, line 20.
+- The field rows come from `round8/ROUND8_REPORT.md` §2.5 and key points, and `round9b/ROUND9B_REPORT.md` §2.1, §2.6, §3 and §4, read today; their numbers were not re-run.
+- `SKILL.md`: the area table gives systems its file.
+- **Approval: LO's own words, typed in the main-lean session and relayed (ENI for LO, standing authorization, 2026-11-20):** "Confirm it with top games and CoT."
+- Created `craft/arc.md`, the arc area's file: one person's story from meeting to where it stops in a release. The meeting, the goal card, heat and meters point to their own files and aren't restated.
+  - Must read, 24 rows: C180, C160, C120, C109, C115, C162, C146, C151, C148, C149, C198, C131, C174, C212, C124, C164, C165, C166, C121, C127, C140, C215, C217 and C171. The failure column cites L18 and L80.
+  - An engine section, measures, ten rules each saying whether CoT and the field agree or split, a worked example in roles (a housemate's step table), and six "Not this" lines.
+  - The one split is rule 3: CoT's own dice and day floor against its players' "making this take months". The rule follows the players.
+- Engine, read today:
+  - one-time is `is_repeatable = false` (v2.py:15065; `template_import.py:833`);
+  - `days_since_flag` (v2.py:5167-5180);
+  - `consume_on`, `final` and `retry_after_days` (v2.py:5436-5445; `template_import.py:924-931`);
+  - the quest card's `terminal_text` (v2.py:19970-19974; `template_import.py:1405-1411`).
+- CoT, read today in the quest log (`_cot_js.txt`, lines 83664, 83665 and 83669): the place-and-hour hint, the wait paired with a thing to do, and the open last line. Also `StoryHintWidgets.txt`, line 123.
+- The field comes from `ARC_CRAFT_STUDY.md`. Ten of its cites were re-opened in `round2/passages`, and all ten say what the study says: CoT 43682, 45271, 65940 and 43690; IHOH 9556, 5667, 15597 and 12219; CW 1231. CoT 136570 was opened too; it is one line of the condition, and the study's range covers the rest.
+- Not used, and said so in the file: COVERAGE's C156 ("the first third has no sex"), because the field's median is 43%, ranging from 0% to 85%.
+- Kept to `plan.md` §9 and L91: the plan holds only the arc's scaffold, and each release designs its own steps. My first draft said to plan the whole arc up front. I caught that against plan.md before sending, and fixed it.
+- `SKILL.md`: the area table gives arc its file.
+- `plan.md` §9 (line 98) and `templates/PLAN.md` (line 46): the arc scaffold's "first third" now reads "the opening (the steps before the first sex)", so it matches `craft/arc.md`, which drops COVERAGE's C156 because the field's first sex falls at a median 43% of an arc (0–85%). LO's yes, relayed by ENI (2026-11-23: "yes, change the wording and commit it"). Verified by grep: the only "first third" left in the skill is in the lists (LESSONS L83 and L91, COVERAGE C156 and C184), which record sources and stay as they are, and arc.md's note on C156.
+- **Approval: LO, typed here, 2026-11-23:** "Go ahead", after the returning-player study sent to the main-lean session (study only, no files changed then).
+- Created `craft/returning-player.md`, the returning player area's file.
+  - Must read, 21 rows: C1651, C1652, C1653, C1675, C1654, C1655, C1656, C1657, C1658, C1659, C1660, C1661, C1649, C1662, C1663, C1667, C1680, C1681, C1664, C1666 and C1647. The failure column cites L49, L101 and L138.
+  - An engine section, measures from CoT and from player comments, twelve rules each saying where CoT, the field and the engine agree or split, a worked example in roles (a release-2 card's `Earlier releases:` line, and the tips-page save line), and five "Not this" lines.
+- Engine, read today in v2.py: the backfill (20494-20538, run at 20645), `onLoad` (4018-4038), the version stamps (1700-1702, 20650-20653), `saves.id` (3990), `addToWardrobe` (1736-1745), set_day (4983-4988) and the footer (20812-20820). In SugarCube 2.30's `format.js`: browser storage is keyed by `Story.domId`, a load throws on a saves-id mismatch, and the export label is "Save to Disk…".
+- CoT, read today:
+  - `update_vars`, 64 cases (`_cot_js.txt`, lines 139889-140850);
+  - the hand repair of a misspelt key (139982-139986);
+  - `is_prepoint8_save` (136209-136220);
+  - `vars.versions` (140833-140834);
+  - the legacy passage (round2 CoT passages, line 2401).
+- The field: save comments in `round2/comments_text`, from CoT and New Life Project, at the lines cited in the file.
+- The study's corrections to COVERAGE are written into the file, not the rows:
+  - the backfill also fills `$player.core_traits`, and an existing person's `core_traits` and `flags`, where C1676 says "top level only";
+  - CoT renames keys by hand in its update code, which our engine can't, so rule 3 (never rename) holds for us.
+- Left out, because they belong to other areas: C1650 (first hour), C1668-C1673 (voice, places, body moments) and C1674 (lostness: `craft/arc.md`, `craft/clock.md`). C1645 and C1648 were also left out: stated, with nothing to check.
+- New from the study, rule 12: tell the player how to save to disk. Lost browser saves are the commonest save complaint in the comments.
+- `LATER.md`: a new item, "A save check before release 2". The lean skill has no save check; v2's is `saves_mode`.
+- `SKILL.md`: the area table gives returning player its file. Only phone has no file now.
+
+## 2026-11-23 (start choice)
+
+- `craft/opening.md` rule 3 and its example, and `craft/want.md` rule 2: the two files disagreed. want.md (C44, measured on CoT's "Think back..." and its `<<pickstartingtrait>>` picks) said the start choice is a memory; opening.md said a person asks "what she wants", a wish. The P13 reader failed every opening on one or the other (games/first_term_lean NOTES, reader pass 7). Now both say the same: a person on screen asks about her past, and the answer is a memory of who she already is. Rule 3 also gains a line: the person asks because of something happening right then, never out of nowhere (LO: a past question with no reason in the scene "look like sense less"). The worked example's question becomes the landlord's "Last girl in that room left owing me three weeks. What makes you any different?" (39 words, was 37), and its three buttons become memories: worked every summer since fourteen, talked her way out of worse, left worse behind. LO's yeses, relayed by ENI (2026-11-23: "yes, go ahead"; "yes, fix the example and add the line"). Verified: lean scripts tests 100 passed.
+- `craft/clothes.md` and `craft/body-moments.md`, the C1158 rows: the short rows said prose names a garment only behind a condition or an earlier equip, while clothes.md rule 4 lets the beat that equips her name it. The P13 reader (pass 8) failed the opening's dressing line on the row and passed it on rule 4. Both rows now add "or the beat that equips her", matching rule 4, and cite that failure. LO's yes, relayed by ENI (2026-11-23: "Yes go ahead").
+- `craft/people.md` rule 8 and its C660 row: "one meter per person" becomes "one or two meters per person, each shown with its word, each with its own job". One is the field's common case (C660, 9 of 13 games); CoT gives every person two, friendship and lust (`<<friendship>>` 936 calls and `<<lust>>` 833 in round2/passages/course-of-temptation.txt, counted today). first_term_lean's PLAN §3 gives Ryan, Mark and others "want + power", which the P13 reader had flagged against the old rule. LO's yes, relayed by ENI (2026-11-23: "Yes go ahead").
+- Every build goes to `games/<slug>/output/` now, the folder LO plays from: `SKILL.md`'s dev build command, `scripts/build.py` (`package()` and the docstring), and the test, renamed `test_every_build_writes_the_output_folder`. Why: dev builds kept landing in `output_dev/`, which LO doesn't play (LO, 2026-11-23: "it keeps building the game in output_dev when it should build the game in output"). The old reason, that `output/` is a public portal (`.gitignore:204-214`), doesn't hold: the portal is LO's own phone play channel (LO, 2026-11-02), and he had a dev build pushed to `output/` on 2026-11-22. The `.gitignore` note now says so. LO's yes, relayed by ENI (2026-11-23: "Yes").

@@ -43,7 +43,7 @@ Count: <n> scenes, <n> everyday, <n> name someone she knows.
 
 ## 9. Arcs (scaffold only)
 ### <person>
-Shape · direction · the first third · the ending. Steps come one release at a time.
+Shape · direction · the opening (the steps before the first sex) · the ending. Steps come one release at a time.
 
 ## 10. What each release adds
 | release | adds | in / later / cut, and what the player loses |

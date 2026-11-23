@@ -148,13 +148,13 @@ def test_build_packages_when_everything_is_approved(game, capsys, monkeypatch):
     assert build.main([str(game), "--release"]) == 2 and called[-1][1] is True
 
 
-def test_dev_build_never_writes_the_public_output_folder(game, monkeypatch):
+def test_every_build_writes_the_output_folder(game, monkeypatch):
     cmds = []
     monkeypatch.setattr(build.subprocess, "run", lambda cmd, cwd=None: cmds.append(cmd) or type("P", (), {"returncode": 0}))
     build.package(game)
     build.package(game, release=True)
     dev, rel = cmds
-    assert dev[dev.index("--output") + 1].endswith("output_dev") and "--dev" in dev
+    assert dev[dev.index("--output") + 1].endswith("/output") and "--dev" in dev
     assert rel[rel.index("--output") + 1].endswith("/output") and "--dev" not in rel
 
 
@@ -288,3 +288,47 @@ def test_first_hour_maps_to_the_opening_and_topics_to_their_files():
     assert check.area_file("body moments") == "craft/body-moments.md"
     for name in ("first hour", "media", "meters", "walk-ins", "body moments"):
         assert (check.SKILL / check.area_file(name)).is_file(), name
+
+
+# ── --beat: explicit beats (C254, C249). The Watch beat is craft/heat.md's worked example. ─────────────────
+
+WATCH = ("You stay behind the bush. He grabs her hips and fucks her harder. She moans into her own arm. "
+         "He pulls out and cums across her ass in thick white strings. "
+         "Your pussy is wet, and your thighs are pressed tight together.")
+
+
+def beat_file(tmp_path, body):
+    f = tmp_path / "card.md"
+    f.write_text(f"PIECE P99 · test\n\nWhat the player sees:\n  [explicit] {body} [/explicit]\n  Choices: \"Leave\"\n")
+    return f
+
+
+def test_beat_watch_passes_with_five(tmp_path, capsys):
+    words = check.explicit_words()
+    assert len(words.findall(WATCH)) == 5
+    assert check.main(["--beat", str(beat_file(tmp_path, WATCH))]) == 0
+    assert capsys.readouterr().out.startswith("GREEN")
+
+
+def test_planted_faded_beat_is_red(tmp_path):
+    status, rows = check.check_beats(beat_file(tmp_path, "You stay behind the bush. You watch until it's over."))
+    assert status == check.RED and any("needs 3" in r for r in rows)
+
+
+def test_planted_pivoted_beat_is_red(tmp_path):
+    pivot = WATCH + " You realise you'll never see the park the same way."
+    status, rows = check.check_beats(beat_file(tmp_path, pivot))
+    assert status == check.RED and len(rows) == 1 and "pivot" in rows[0]
+
+
+def test_beat_runs_to_blank_line_and_strips_quotes(tmp_path):
+    f = tmp_path / "beats.md"
+    head, tail = WATCH.split(" She moans", 1)
+    f.write_text(f"[explicit]\n> {head}\n> She moans{tail}\n\nYou realise nothing at all, ever.\n")
+    assert check.check_beats(f)[0] == check.GREEN
+
+
+def test_file_with_no_marked_beat_is_incomplete(tmp_path):
+    f = tmp_path / "plain.md"
+    f.write_text(WATCH + "\n")
+    assert check.main(["--beat", str(f)]) == 2

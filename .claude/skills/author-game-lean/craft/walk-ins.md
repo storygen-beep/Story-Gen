@@ -24,6 +24,7 @@ The card's `Craft:` line cites each one, or says in one line why it skips it.
 | C1864 | band with a rule's `conditions`; in an exclusive group, append a new rule last | — |
 | C792 | a walk-in is two screens: the moment, and one answer screen per choice; a third screen is the defect | — |
 | C302 | peek or catch: an option is added each stage, and being caught becomes a door | — |
+| C1262 | a body moment always gets a clip or still right after the line that says it (`craft/body-moments.md`) | first_term_lean's shower had no body and an empty picture |
 | C212 | a story beat is never left to luck: it fires the first time it can | — |
 | C174 | a person's next arc step comes before any dice | — |
 | L97 | a walk-in only fires where the walker's rows put them, and it shows what they were already doing | first_term's walk-ins almost never fired; a TV walk-in swapped her film for its own |
@@ -34,9 +35,9 @@ The card's `Craft:` line cites each one, or says in one line why it skips it.
 
 ## The engine (cited; `v2.py` is `apps/game_generation/twee_comprehensive/generators/v2.py`)
 
-- **A scene she walks into** is a canvas whose `trigger.location` is the place. It shows as a button there. `max_triggers_per_day = 1` makes it once a day (read at v2.py:15060).
-- **A scene behind a chance** sets `trigger_mode = "random"` and `chance` on its trigger (read at v2.py:15086-15089). The engine rolls each time the place's list is built, and on a miss the button is not there (v2.py:6404-6410).
-- **Someone walks in on her** is a rule on the act she is doing: `[[canvases.trigger.substitutions]]` with `target_canvas_id`, `chance` and conditions (v2.py:14662-14672). `setup.checkAndSubstituteCanvas` (v2.py:6915) runs it when she starts the act; each rule rolls its own dice and the first that hits wins (v2.py:6987-6994). An `npc_at_location` condition reads the person's rows: `scripts/who_is_where.py` shows where the rows put them.
+- **A scene she walks into** is a canvas whose `trigger.location` is the place. It shows as a button there. `max_triggers_per_day = 1` makes it once a day (read at v2.py:15066).
+- **A scene behind a chance** sets `trigger_mode = "random"` and `chance` on its trigger (read at v2.py:15092-15095). The engine rolls each time the place's list is built, and on a miss the button is not there (v2.py:6404-6410).
+- **Someone walks in on her** is a rule on the act she is doing: `[[canvases.trigger.substitutions]]` with `target_canvas_id`, `chance` and conditions (v2.py:14668-14678). `setup.checkAndSubstituteCanvas` (v2.py:6921) runs it when she starts the act; each rule rolls its own dice and the first that hits wins (v2.py:6993-7000). Rules that share an `exclusive_group` (read at v2.py:14684) share one roll instead, and groups go before the independent rules (v2.py:6915-6920, 6967-6991). An `npc_at_location` condition reads the person's rows: `scripts/who_is_where.py` shows where the rows put them.
 
 ## The shape
 
@@ -124,14 +125,62 @@ The area's count, on the card: A is everyday, B and C are not; two of three name
 | "Watch" | *He comes into his fist with a grunt and drops the phone on his chest.* · sets `saw_housemate_alone` |
 | "Back away" | *You ease back down the landing, and the floorboard doesn't give you away.* |
 
+## When someone walks in on her
+
+The other kind needs more than a place and a window: it rides on an act she is doing, it lands on her body, and two of them on one act compete for the same moment.
+
+1. **The act comes first.** The walk-in is a rule on the act's own canvas (`[[canvases.trigger.substitutions]]`, v2.py:14668-14684), so the act's piece is built before the walk-in's card. The card names that act and the piece that built it. If the act isn't built, the walk-in waits.
+2. **Her body at the interruption.** She is mid-act: wet in the shower, half into a dress. That makes it a body moment too, so `craft/body-moments.md` applies in full. Her picture goes right after the line where he sees her, and it is her, at her tier, pool 4 on a repeat (C1262, C1280).
+3. **He comes from his own row, still doing it** (L97, shape step 6). He has a reason to open the door that is about him: his razor, the bin, a towel. At the start of his arc the look is an accident; what it means to him moves only with his arc (shape step 13).
+4. **Her buttons: two answers, cover or carry on.** One keeps her covered ("Cover up", "Pull it shut"), and one carries on with the act ("Keep washing", "Finish changing"). Each has its own line of his reaction after the click, and each sets its own flag, so a later step of his arc can tell them apart. That flag is the door: being caught opens his next step when that step exists (C302), and never skips past it (C174). In release 1 the flags are all it pays.
+5. **Two walk-ins on one act share one roll.** Independent rules roll in order, and the first hit wins (v2.py:6993-7000), so the first rule shadows the second, and the order on the page decides who shows up. Put two walk-ins on one act in one `exclusive_group`: one roll, each walk-in keeps its own chance, and the chances add up to the total. If the roll lands on a walk-in whose conditions fail (he isn't in his room), the act plays plain, and the other walk-in doesn't get that roll (v2.py:6986-6987). A failed group slot also skips any independent rules on the same act, because the check returns there. Keep the group's sum at or under 1.
+
+**F · Someone walks in on her, two walkers on one act** (40 words). Roles: a housemate and the landlady, both on her act "Take a shower" in the shared bathroom. The housemate comes from his bedroom row, mornings; the landlady from her landing row, with clean towels. One group: 0.20 for him, 0.15 for her, so the shower plays plain at least 65% of the time (more when one of them is out of their row).
+
+```toml
+[[canvases.trigger.substitutions]]
+target_canvas_id = "shower_housemate_razor"
+chance = 0.20
+exclusive_group = "shower_walk_ins"
+
+[canvases.trigger.substitutions.conditions]
+version = "1.0"
+logic = "AND"
+
+[[canvases.trigger.substitutions.conditions.items]]
+type = "npc_at_location"
+location_id = "housemate_bedroom"
+npc_id = "npc_housemate"
+operator = "is_present"
+
+[[canvases.trigger.substitutions]]
+target_canvas_id = "shower_landlady_towels"
+chance = 0.15
+exclusive_group = "shower_walk_ins"
+# its own npc_at_location condition, for the landing
+```
+
+> You're under the water with your eyes shut, soap sliding down your tits, when the door bangs open. The housemate, toothbrush in his mouth, half asleep.
+
+Picture: *Her, 19, in a small shared bathroom shower, wet and bare, turning toward the door. gif.* `_t4`, pool 4.
+
+> He stares one second. Then he looks hard at the sink. "Shit. My razor."
+
+| button | the first line after the click |
+|---|---|
+| "Cover up" | *You cross an arm over your tits and turn to the tiles. "Sorry. Sorry." The door clicks shut.* · sets `housemate_razor_covered` |
+| "Keep washing" | *You tip your head back and let the water run. He grabs the razor without looking up and pulls the door shut hard.* · sets `housemate_razor_kept_washing` |
+
+Two screens: the moment, then the answer (C792). No meter moves.
+
 ## How a walk-in grows
 
 (LO, relayed 2026-11-22: "does walkins progresses?? like she can do more in those walkins as things rises?? In the release 1 it stays basic obv. But how does top games do it??")
 
 Engine, cited:
-- A substitution rule's `conditions` are checked before its own dice: `_tryRule` first, then `Math.random() < chance` (v2.py:6987-6994). Rules with disjoint meter ranges are bands, each with its own chance.
-- Rules sharing an `exclusive_group` share one roll in cumulative slots, and a claimed slot whose conditions fail falls to the plain act, not to the next rule (v2.py:6909-6914, 6962-6981). So bands go as independent rules; when an act already has a group, a new rule goes last in it (C1864).
-- `substitution_only = true` keeps the branch canvas out of the place's buttons (v2.py:15104-15107). The payoff canvas must have a `trigger.location`: `setup.getCanvasById` finds only canvases listed under a location (v2.py:4118-4131), so a payoff with none never fires and nothing says so (`.claude/skills/author-game-v2/references/the-surfaces.md:282-285`).
+- A substitution rule's `conditions` are checked before its own dice: `_tryRule` first, then `Math.random() < chance` (v2.py:6993-7000). Rules with disjoint meter ranges are bands, each with its own chance.
+- Rules sharing an `exclusive_group` share one roll in cumulative slots, and a claimed slot whose conditions fail falls to the plain act, not to the next rule (v2.py:6915-6920, 6968-6987). So bands go as independent rules; when an act already has a group, a new rule goes last in it (C1864). The chances in one group share one roll, so together they must stay at or under 1: bands of 0.10, 0.35 and 0.70 in one group add up to 1.15, and the last band gets only 0.55.
+- `substitution_only = true` keeps the branch canvas out of the place's buttons (v2.py:15110-15113). The payoff canvas must have a `trigger.location`: `setup.getCanvasById` finds only canvases listed under a location (v2.py:4118-4131), so a payoff with none never fires and nothing says so (`.claude/skills/author-game-v2/references/the-surfaces.md:282-285`).
 
 1. **Two sides grow.** His version moves with his arc (shape step 13). What she can do moves with her meter, up the kind's ladder (`.claude/skills/author-game-v2/references/the-heat-ladder.md` H3): overhearing goes hear, listen, look, touch, one button per rung; peek or catch adds an option each stage; an accident becomes her choice.
 2. **One canvas, banded on her meter.** The bottom band is release 1. Build release 1's walk-in as that one canvas with its one band, so a later release adds a band and never rewrites the scene (C1820, C1821).
@@ -180,5 +229,8 @@ A later release appends the 0.35 and 0.70 rules with their ranges and adds their
 - A walk-in rewritten each release. It's one canvas; a release adds a band (C1820).
 - The same chance at every meter level. The odds climb with the content (C724).
 - A third screen after the answer (C792).
+- A walk-in on an act that isn't built yet. The act's piece comes first.
+- Someone walks in on her and the picture is the door, the steam or him. The picture is her, right after he sees her (C1262).
+- Two walk-ins on one act as independent rules. The first one shadows the second; put them in one `exclusive_group`.
 - A housemate who wants her in his first walk-in because his end want says so. His first one is about him, not her; she comes into it only as his arc moves (LO, 2026-11-21).
 - Walk-ins found only by going place by place. Ask what each person does when alone, too, or the best ones turn up only by luck.

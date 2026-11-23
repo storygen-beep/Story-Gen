@@ -6688,6 +6688,12 @@ setup.renderSoloActivities = function(locationId) {{
                 // clock shut it: a row short on a meter or a flag has no hours that open it.
                 if (c.showWhenBlocked && setup.onlyTheClockShut(c)) {{
                     soloCooldownBlocked.push(c);
+                }} else if (c.showWhenBlocked && c.lockedText) {{
+                    // Shut by something waiting can't open (clothes, money, a meter, a flag).
+                    // The hours would lie here, so it greys out only with the author's own
+                    // line saying what's missing; without one it stays hidden.
+                    soloCooldownBlocked.push({{ displayName: c.displayName, name: c.name,
+                        cooldownMessage: c.lockedText }});
                 }}
                 continue;
             }}
@@ -15171,6 +15177,12 @@ document.addEventListener("click", function (ev) {
                 # falsy exactly as it must for a save written before this shipped.
                 if hidden_from_location:
                     location_canvas_list[-1]["hiddenFromLocation"] = True
+                # A greyed row's line for a row that waiting can't open (clothes, money, a
+                # meter, a flag). Added ONLY when set, so a game that authors none emits a
+                # byte-identical payload, and a missing key reads as "hide the row" (H67).
+                _locked_text = (trigger.metadata or {}).get("locked_text") if trigger else None
+                if _locked_text:
+                    location_canvas_list[-1]["lockedText"] = str(_locked_text)
                 # EN1 — a one-time step used up on its "yes". Added ONLY when set, for
                 # the same reason as hiddenFromLocation: a game that authors none emits
                 # a byte-identical payload, and a missing key reads as "not opted in".

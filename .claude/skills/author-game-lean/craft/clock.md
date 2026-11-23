@@ -34,13 +34,13 @@ The card's `Craft:` line cites each one, or says in one line why it skips it.
 
 ## The engine (cited; `v2.py` is `apps/game_generation/twee_comprehensive/generators/v2.py`)
 
-- `window.advanceTime(minutes)` is the only way the clock moves (v2.py:7004). Nothing sets an hour (C926), so "till close" can't be kept.
-- An exit's time is `time_progression_minutes`, and 3 when it's left out (v2.py:17924) (C927).
+- `window.advanceTime(minutes)` is the only way the clock moves (v2.py:7010). Nothing sets an hour (C926), so "till close" can't be kept.
+- An exit's time is `time_progression_minutes`, and 3 when it's left out (v2.py:17936) (C927).
 - `setup.isCurrentTimeSlot` handles windows past midnight, and an end time left out is start + 60 minutes (v2.py:4770-4790) (C921). A `time_of_day` condition uses the same function (v2.py:5283-5285) (C931).
 - Entering a place spends its `time` cost (`setup.deductLocationCosts`, v2.py:6226-6233), and the nav card shows it as a tag like "30m · 10 Energy" (`setup.getLocationCostTag`, v2.py:6236) (C929). A button's own time shows nowhere unless the label says it.
-- `show_when_blocked` with `cooldown_message` keeps a shut activity on screen as a dimmed line with its message (read at v2.py:15098-15102, drawn at v2.py:6734-6742) (C913, C930).
-- A place shut by its hours says "Closed. Opens at …" (`setup.locClosedReason`, v2.py:11766-11773), and its `closed_text` shows at the door (v2.py:11438-11441).
-- People's hours have their own Schedules page (`:: SchedulePage`, v2.py:24387) (C915).
+- `show_when_blocked` with `cooldown_message` keeps a shut activity on screen as a dimmed line with its message (read at v2.py:15104-15108, drawn at v2.py:6740-6748) (C913, C930). That's only when the clock alone shut it. A row shut by something waiting can't fix (clothes, money, a meter, a flag) greys out with its `locked_text` instead, or stays hidden without one (v2.py:6689-6697; `craft/clothes.md`).
+- A place shut by its hours says "Closed. Opens at …" (`setup.locClosedReason`, v2.py:11772-11779), and its `closed_text` shows at the door (v2.py:11444-11447).
+- People's hours have their own Schedules page (`:: SchedulePage`, v2.py:24399) (C915).
 - No token prints the current time into prose (C928): a grep of v2.py for `@time` finds none.
 
 ## The measures (re-run 2026-11-22)

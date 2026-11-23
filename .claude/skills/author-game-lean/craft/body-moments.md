@@ -15,7 +15,7 @@ The card's `Craft:` line cites each one, or says in one line why it skips it.
 | C1277 | name the place the scene is named for in every picture | — |
 | C1279 | a mirror picture says "No phone", or the search writes "selfie" | L123 |
 | C782 | a solo act is a choice inside the moment's own screen, not a second link | L151 |
-| C1158 | the clothes the prose names are backed by a condition or an equip; undressing in an act is backed by the act | — |
+| C1158 | the clothes the prose names are backed by a condition, an earlier equip, or the beat that equips her; undressing in an act is backed by the act | the opening's dressing line (P13 reader pass 8) |
 | C719 | a button does something: "get dressed" moves a garment | the opening skipped the towel and the dressing with "Back in your room, dressed" |
 
 ## The shape

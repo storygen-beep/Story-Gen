@@ -3,7 +3,7 @@
 ## Built
 
 - Game plan approved 2026-11-20 (`PLAN.md`, NOTES decisions).
-- the frame (P01): Monday week 1, 07:00; sidebar shows Energy bar, Money, Corruption and Exhibitionism words; nothing moves them. The start is P13's opening (ft_start removed).
+- the frame (P01): Monday week 1, 07:00; sidebar shows Energy bar, Money, Corruption and Exhibitionism words; nothing moves them. The start is P13's opening (ft_start removed). Re-checked 2026-11-23 (systems, meters, returning player): card only; title and trait keys fixed from now on (LO "Yes go ahead").
 - Home (P02): an area, the hall its hub, six rooms off it with "Leave <room>"; second person; 7 room pictures wired, no files. 
 - Neighbourhood (P03): her street the hub; The House Next Door, Corner Shop, Park, Gym (with hours and closed lines), Home. The hall's "Exit Home" goes to the street. Nothing to do yet at any of them (P33).
 - Campus (P04): the quad the hub; Lecture Hall (Women's Bathroom off it), Library, Cafeteria, Faculty Offices, Theatre, with hours. Only way in or out: bus ($2, 20 min) or walk (10 energy, 45 min), from her street and the quad. Played live headless 2026-11-20: walk costs and times right, bus dimmed at $0, closed places greyed.
@@ -24,15 +24,17 @@ friends; Zoe staying over and Jake at the door (release 2); short arcs for named
 
 | piece | what | approved | built | checked | played |
 |---|---|---|---|---|---|
-| P13 | the opening, re-carded from craft/opening.md as one piece: Mom on screen, breakfast with Laura and Mark, Mark's rent line ($75 every Sunday), goal 1's card, Ryan's look per LO's B, hand-over on a hook; check.py --card, the reader, then LO plays | 2026-11-21 | 2026-11-21 | 2026-11-21 | |
+| P13 | the opening, re-checked 2026-11-23: getting out of bed and the knot (3 screens) as body moments, no italic thoughts, her noticing Ryan, goal 1's card with ✅ and place and time, Ryan's/Mom's/Mark's where-and-when lines on the People page. Played headless, three paths; the reader ran ten passes, LO played after pass 10's fixes ("Yes and play") | 2026-11-23 | 2026-11-23 | 2026-11-23 | |
 | P02 | Home: re-checked 2026-11-23 (places, clock, voice, media): no "Nothing to do", menus named by piece, pictures of her, none on the hall | 2026-11-23 | 2026-11-23 | 2026-11-23 | |
 | P03 | Neighbourhood: re-checked 2026-11-23: hours on signs, no "phone credit", the house next door hidden until met_vance (P24), pictures of her, none on the street; the clothes shop's link comes with P35 | 2026-11-23 | 2026-11-23 | 2026-11-23 | |
-| P04 | Campus: re-check | 2026-11-20 | 2026-11-20 | 2026-11-20 | |
+| P04 | Campus: re-checked 2026-11-23: hours on signs, no "Nothing to do", menus named by piece, pictures of her, none on the quad; the bus packed weekdays 7–10am with her body line, half empty otherwise; the walk home costs no energy; Faculty Offices hidden until met_walsh (P16). Played headless | 2026-11-23 | 2026-11-23 | 2026-11-23 | |
 | P05 | Near campus: re-checked 2026-11-23: the café's sign, the Help Wanted line until cafe_hired, Zoe's line true when she's out, "Knock on Zoe's door" (P27) | 2026-11-23 | 2026-11-23 | 2026-11-23 | |
-| P06 | the daily loop: re-check | 2026-11-20 | 2026-11-20 | 2026-11-20 | |
+| P06 | the daily loop: re-checked 2026-11-23 against craft/systems.md: energy on every label, eat 3 a day and shower 2 a day greyed in her voice, sleep free; going to sleep and the daily shower as body moments (pools 2 and 4); the meal's picture off. Played headless | 2026-11-23 | 2026-11-23 | 2026-11-23 | |
+| P42 | Mom: her face and her menu (Kitchen, Living Room), Talk once a day, the Kitchen's "Talk to Mom" button gone; same shape for Mark and Ryan in P34 (LO 2026-11-23). Played headless 2026-11-23: card shows, both rooms, Mark there and not, Talk greys after one, midnight clears it. Living Room line fixed to "Mark turns the TV up" (LO "Yes", 2026-11-23) | 2026-11-23 | 2026-11-23 | 2026-11-23 | |
+| P43 | the opening's shower: her body under the water and a gif before Ryan's fist (body moment, pool 1), all three bath nodes (LO 2026-11-23). Played headless: the beat shows on all three screens, no errors; picture wired, no file yet | 2026-11-23 | 2026-11-23 | 2026-11-23 | |
 | P34 | home life: talk to each housemate, Wait, the dishes, meals with the family, lock your door, Watch TV (PLAN 8a) | | | | |
 | P33 | body care: Go for a run, Work out ($5), hair and make-up, a snack ($2), a coffee ($3), lunch ($4), sit on the grass (PLAN 8b) | | | | |
-| P07 | clothes: her wardrobe and the picker, Laura's wardrobe, Ryan's hoodie, the leave-the-house rule, the run/workout rule, noticing lines (PLAN 8d) | | | | |
+| P07 | clothes: 12 garments (hers, Mom's three, Ryan's hoodie), the opening's dressing beat with three outfits, Change clothes in her bedroom only, the leave rule on her street, Borrow Mom's things and one of Ryan's hoodies (greyed while they're in), Mom's "Is that mine?" on her menu, the neighbour's line on her street. Played headless 2026-11-23: all cases right, no errors. The run/workout gates moved to P33 | 2026-11-23 | 2026-11-23 | 2026-11-23 | |
 | P35 | the clothes shop and Nina: place, stock in four levels, trait and money locks, clothes_layout = room (PLAN 8d) | | | | |
 | P09 | college: the timetable, Go to class, Study, drama, practise on the stage, Grades shown, still (PLAN 8f) | | | | |
 | P10 | the café job: shifts every day, $22 a shift, behind P21 (PLAN 8f) | | | | |
@@ -67,11 +69,13 @@ friends; Zoe staying over and Jake at the door (release 2); short arcs for named
 
 - On the portal as "First Term (Lean)"; output/ is a dev + debug build of the re-carded opening, pushed to main 2026-11-22 (LO: "rebuild with dev and debug, commit, merge and push").
 
-- Body moments, relayed from LO by the ENI session 2026-11-22 (craft/body-moments.md, read): the P02–P06 re-check also carries, each shown to LO as a card: the opening's shower (5_scenes.toml:93/116/139, "You give yourself five minutes."), a beat on her body and a gif before Ryan's fist; the slipping knot (:164, :241) paid off on her body with a picture, Ryan still looks away (B); "Back in your room, dressed" (:199/221/242) becomes the towel off and the dressing, clothes equipped (C719; needs P07's wardrobe or a piece of it first); P06's daily shower (:546-547), her under the water, pool 4 (LO 2026-11-22); the opening's pictures pool 1 each (LO); one line each for her body on the packed bus (:379) and her noticing Ryan shirtless (:159). No meter moves.
+- Body moments, relayed from LO by the ENI session 2026-11-22 (craft/body-moments.md, read): the P02–P06 re-check also carries, each shown to LO as a card: the opening's shower (done in P43, 2026-11-23); the slipping knot (done in P13's re-check, 2026-11-23); the towel off and the dressing (done in P07, 2026-11-23); getting out of bed (done in P13's re-check, 2026-11-23); going to sleep (done in P06's re-check, 2026-11-23); P06's daily shower (done in P06's re-check, 2026-11-23); the opening's pictures pool 1 each (LO); her body on the packed bus (done in P04's re-check, 2026-11-23); her noticing Ryan shirtless (done in P13's re-check, 2026-11-23). No meter moves.
+- Walk-ins are in release 1 (P38–P41), both kinds (LO, 2026-11-23). P07 (clothes) goes before the opening's re-check, so "Back in your room, dressed" equips her clothes (LO, 2026-11-23); clothes has no craft file yet, so craft/clothes.md comes first (piece.md step 1).
+- After LO plays the opening: re-card its start choice as Mom asking about her past (a memory, craft/opening.md rule 3, craft/want.md rule 2), same three flags; LO's waiver holds until then.
 - P32 adds the rows for everyone outside the house; Laura, Mark and Ryan have their week from P13.
 - P20 must set `zoe_place_known` (from P05), so P27 can reach Zoe's.
 - P24 must set `met_vance` (from P03), on her street with him on his porch; then the house next door opens.
-- P04's six campus places still say "Nothing to do here right now."; they go with P04's re-check.
+- P16 must set `met_walsh` (from P04), so the Faculty Offices open.
 - Piece list approved 2026-11-20, with LO's three changes (NOTES).
 
-Next step: play — LO plays the opening and the re-checked Home, Neighbourhood and Near campus (output_dev/); then piece — P04, P06, P01, P13 re-checked once craft/heat.md and craft/systems.md are in
+Next step: play — LO plays everything built (output/); then piece — the start choice re-carded as Mom's memory question, then P34

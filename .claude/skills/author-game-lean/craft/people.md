@@ -29,8 +29,9 @@ The card's `Craft:` line cites each one, or says in one line why it skips it.
 | C644 | each person owns a corner of the world: their own subject, their own people offscreen | — |
 | C596 | the talk screen: about 55 words, two-thirds spoken, one picture, one exit | — |
 | C656 | a per-person meter is short: median 3 steps | — |
-| C660 | each person's meter is shown, one word for it across the cast | — |
+| C660 | each person's meter (one or two) is shown, each meter's word the same across the cast | — |
 | C448 | obvious on arrival: who they are, what they want, how they feel about her | — |
+| C1340 | the household loop: each housemate is their face at their spot, Talk inside their menu, +1 a click | first_term_lean's `talk_mom`, a Talk button on the kitchen menu |
 
 ## The measures
 
@@ -54,8 +55,16 @@ Each rule is marked **measured** or **LO's choice**.
 5. **An offer has three to five graded answers,** eager to refusing, every one written. A no lands somewhere: a reply, a return later, a cost (C639, C640). Her no never raises a meter (C961). *Measured:* CoT's `BusGrope` and "That certainly backfired."
 6. **Each person has their own manner, their own subject and their own name for her** (C447, C593, C644). *Measured* for C593 and C644; C447 is *LO's choice.*
 7. **A talk screen is about 55 words, two-thirds spoken, one picture, one exit** (C596). *Measured in the field.*
-8. **One meter per person, shown, with few steps** (C656, C660). In release 1 it is shown and doesn't move. *Measured in the field;* release 1 is *LO's choice.*
+8. **One or two meters per person, each shown with its word, each with its own job, with few steps** (C656, C660). One is the field's common case (9 of 13 games); CoT gives every person two, friendship and lust (`<<friendship>>` 936 calls, `<<lust>>` 833 in round2/passages/course-of-temptation.txt): how close she is to him, and how much he wants her. In release 1 they are shown and don't move. *Measured in the field and in CoT;* two, and release 1, are *LO's choice.*
 9. **Obvious on arrival** (C448). *LO's rule, not measured.*
+10. **A person's actions are in their own menu, behind their face** (C1340). On the room screen the person is their face. Clicking it opens their menu: Talk, and whatever else she can do with them. None of it is a room button. Talk is once a day, and the person never locks: after Talk is used, the face still opens the menu, and the other options are still there. *Measured:* CoT's People Here list (`StoryCaption.txt`, lines 585-596) opens the person's card with "Talk to her" (`DisplayNPCWidgets.txt`, lines 33-68), and her own menu has 38 `<<link>>`s, 14 of them checked once a day against `$interactionstoday` (one at `InPersonDialogueMenu.txt`, line 77). Of 9 other top games, 5 put a person's actions behind the person: click the person (family-ties), one room button into her own menu (3, such as the-hellfire-club's "Speak to Daisy" in `DaisyRoom.txt`, line 18, into `Daisy_conv`), or her room is her menu (degrees-of-lewdity). The other 4 put each action loose on the room menu, shown while the person is there (lust-for-life's kitchen: "Approach Cory", `home-kitchen.txt`, line 15). Faces, not buttons, is *LO's choice* (relayed 2026-11-23: "Yes"), with CoT.
+
+## The engine (cited; `v2.py` is `apps/game_generation/twee_comprehensive/generators/v2.py`)
+
+- `npc = "npc_<x>"` on a canvas's trigger is read at `apps/projects/services/template_import.py:2581` and carried as the canvas's `npcId` (v2.py:15086-15088).
+- A repeatable, manual canvas with an `npcId` shows as the person's face, not as a room button (v2.py:5925-5942; room buttons skip it at v2.py:5969 and 6680; the faces are drawn at v2.py:6530-6531).
+- **One canvas per person per place.** The face opens the highest-`priority` canvas of that person there (v2.py:5944-5948). Two canvases for the same person in one room give one face, and the lower one never shows. So the person's menu is one hub canvas, and Talk and the rest are choices inside it.
+- **Once a day, by a flag.** A choice sets a `_today` flag in its `flagEffects` and is shown only while that flag is false; `[engine.daily_tick]` clears it when the day rolls (v2.py:7162-7164; `.claude/skills/author-game-v2/references/engine.md:1458-1485`). The menu itself has no daily cap, so the person never locks.
 
 ## Worked example
 
@@ -80,8 +89,21 @@ This sets his met flag. He appears on the People page, and the shift button open
 
 No met flag is set, and she can ask again.
 
+**A person's menu** (rule 10). Roles: her mom, in the kitchen by her rows. The lines are filler, in roles.
+
+On the kitchen screen: Mom's face, and the presence line "Mom's at the stove, humming." No "Talk to Mom" button among the room's.
+
+Her menu, on a click:
+> Mom looks up from the pan. "Hungry, or just here to steal bacon?"
+
+Buttons: Talk (5 min, once a day) · Help her cook (15 min) · Leave her to it.
+
+After Talk today, the face still opens the menu. Talk is gone until tomorrow, and Help her cook and Leave her to it are still there. The `talked_mom_today` flag clears at the day turn.
+
 ## Not this
 
+- A Talk button per person on the room menu. The person is their face, and Talk is inside their menu (rule 10; C1340).
+- A person who locks after one talk. Talk is once a day; the face and the rest of the menu stay (rule 10).
 - A person named before the meeting. Until then, the guy behind the counter (C625).
 - A meeting with one answer. Three to five, eager to refusing (C639).
 - A no that returns to an unchanged menu. It lands somewhere (C640).
