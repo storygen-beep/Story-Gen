@@ -120,6 +120,18 @@
       "sha256": "cb390b6b783e0214d68f31aa6a791f3ab3e59f450da8fbce421b839a62203691",
       "words": "Yes, and add both to STATE",
       "date": "2026-11-23"
+    },
+    {
+      "card": "P04",
+      "sha256": "87905185921ca81a08b1bd52e09415ccb8c49d985da5ecb9db0b318875f53df1",
+      "words": "Yes to both",
+      "date": "2026-11-23"
+    },
+    {
+      "card": "P06",
+      "sha256": "aab337f357c5fb641d42523f7c63a10cf5eb42600586ef6942aed64ee1d3fff1",
+      "words": "Yes to both",
+      "date": "2026-11-23"
     }
   ]
 }

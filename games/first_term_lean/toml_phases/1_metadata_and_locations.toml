@@ -10,6 +10,8 @@ flag_keys = [
   "zoe_place_known",
   # P03 re-check: the house next door opens once she has met him (P24 sets it)
   "met_vance",
+  # P04 re-check: the faculty corridor opens once her advisor asks to see her (P16 sets it)
+  "met_walsh",
   # P13 — the opening
   "start_grades", "start_fun", "start_freedom",
   "met_laura", "met_mark",
@@ -208,15 +210,16 @@ name = "The Quad"
 description = "The quad. Paths cut across the grass to every building on campus."
 parent = "campus"
 kind = "thoroughfare"
-image = "locations/campus_quad.jpg"
+# P04 re-check: no picture, the quad only routes (craft/media.md, C1265).
 
 [[locations]]
 id = "campus_lecture_hall"
 name = "Lecture Hall"
-description = "The lecture hall: rows of seats rising to the back, a screen, a lectern at the bottom. Your classes are here. Nothing to do here right now."
+description = "The lecture hall: rows of seats rising to the back, a screen, a lectern at the bottom. Your classes are here. A sign by the door says it's open weekdays from 8am to 6pm."
 parent = "campus"
 kind = "destination"
-image = "locations/campus_lecture_hall.jpg"
+image = "locations/campus_lecture_hall_t0.jpg"
+image_search_queries = ["woman of 18 sitting in a tiered college lecture hall with a notebook", "young woman in a lecture theatre seat"]
 entry_from = "campus_quad"
 hours = [{ weekdays = [0, 1, 2, 3, 4], open = "08:00", close = "18:00" }]
 closed_text = "The lecture hall is locked. It opens at 8am on weekdays."
@@ -224,10 +227,11 @@ closed_text = "The lecture hall is locked. It opens at 8am on weekdays."
 [[locations]]
 id = "campus_bathroom"
 name = "Women's Bathroom"
-description = "The women's bathroom off the lecture-hall corridor: three stalls and one long mirror. Nothing to do here right now."
+description = "The women's bathroom off the lecture-hall corridor: three stalls and one long mirror."
 parent = "campus"
 kind = "destination"
-image = "locations/campus_bathroom.jpg"
+image = "locations/campus_bathroom_t0.jpg"
+image_search_queries = ["woman of 18 washing her hands at a long college bathroom mirror, no phone", "young woman at a row of sinks in a campus restroom, no phone"]
 entry_from = "campus_lecture_hall"
 hours = [{ weekdays = [0, 1, 2, 3, 4], open = "08:00", close = "18:00" }]
 closed_text = "The bathroom is locked with the lecture hall."
@@ -235,10 +239,11 @@ closed_text = "The bathroom is locked with the lecture hall."
 [[locations]]
 id = "campus_library"
 name = "Library"
-description = "The library: long tables, quiet floors, and the desk by the door. Nothing to do here right now."
+description = "The library: long tables, quiet floors, and the desk by the door. A sign on the door says it's open from 8am to 10pm."
 parent = "campus"
 kind = "destination"
-image = "locations/campus_library.jpg"
+image = "locations/campus_library_t0.jpg"
+image_search_queries = ["woman of 18 at a long library table with books", "young woman studying in a quiet college library"]
 entry_from = "campus_quad"
 hours = [{ weekdays = [], open = "08:00", close = "22:00" }]
 closed_text = "The library is closed. It opens at 8am."
@@ -246,10 +251,11 @@ closed_text = "The library is closed. It opens at 8am."
 [[locations]]
 id = "campus_cafeteria"
 name = "Cafeteria"
-description = "The cafeteria: trays, long tables, the lunch counter. Nothing to do here right now."
+description = "The cafeteria: trays, long tables, the lunch counter. A sign says it's open weekdays from 8am to 4pm."
 parent = "campus"
 kind = "destination"
-image = "locations/campus_cafeteria.jpg"
+image = "locations/campus_cafeteria_t0.jpg"
+image_search_queries = ["woman of 18 with a tray in a college cafeteria", "young woman eating lunch at a long cafeteria table"]
 entry_from = "campus_quad"
 hours = [{ weekdays = [0, 1, 2, 3, 4], open = "08:00", close = "16:00" }]
 closed_text = "The cafeteria is closed. It's open weekdays, 8am to 4pm."
@@ -257,10 +263,13 @@ closed_text = "The cafeteria is closed. It's open weekdays, 8am to 4pm."
 [[locations]]
 id = "campus_offices"
 name = "Faculty Offices"
-description = "The faculty corridor: a row of office doors with name plates, and the dean's office at the end. Nothing to do here right now."
+description = "The faculty corridor: a row of office doors with name plates, and the dean's office at the end. A sign says it's open weekdays from 8am to 6pm."
 parent = "campus"
 kind = "destination"
-image = "locations/campus_offices.jpg"
+image = "locations/campus_offices_t0.jpg"
+image_search_queries = ["woman of 18 in a college corridor of office doors", "young woman waiting outside a professor's office"]
+# P04 re-check: hidden until her advisor asks to see her (P16 sets met_walsh).
+hidden_until = { flag = "met_walsh" }
 entry_from = "campus_quad"
 hours = [{ weekdays = [0, 1, 2, 3, 4], open = "08:00", close = "18:00" }]
 closed_text = "The faculty corridor is locked. It opens at 8am on weekdays."
@@ -268,10 +277,11 @@ closed_text = "The faculty corridor is locked. It opens at 8am on weekdays."
 [[locations]]
 id = "campus_theatre"
 name = "Theatre"
-description = "The theatre: a black stage, rows of folding seats, and the lights rigged overhead. Nothing to do here right now."
+description = "The theatre: a black stage, rows of folding seats, and the lights rigged overhead. A sign says it's open weekdays from 9am to 9pm."
 parent = "campus"
 kind = "destination"
-image = "locations/campus_theatre.jpg"
+image = "locations/campus_theatre_t0.jpg"
+image_search_queries = ["woman of 18 standing on an empty black stage under lights", "young woman on a small college theatre stage"]
 entry_from = "campus_quad"
 hours = [{ weekdays = [0, 1, 2, 3, 4], open = "09:00", close = "21:00" }]
 closed_text = "The theatre is dark. It's open weekdays, 9am to 9pm."

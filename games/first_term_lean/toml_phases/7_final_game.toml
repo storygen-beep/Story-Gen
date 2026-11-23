@@ -176,6 +176,8 @@ flag_keys = [
   "zoe_place_known",
   # P03 re-check: the house next door opens once she has met him (P24 sets it)
   "met_vance",
+  # P04 re-check: the faculty corridor opens once her advisor asks to see her (P16 sets it)
+  "met_walsh",
   # P13 — the opening
   "start_grades", "start_fun", "start_freedom",
   "met_laura", "met_mark",
@@ -374,15 +376,16 @@ name = "The Quad"
 description = "The quad. Paths cut across the grass to every building on campus."
 parent = "campus"
 kind = "thoroughfare"
-image = "locations/campus_quad.jpg"
+# P04 re-check: no picture, the quad only routes (craft/media.md, C1265).
 
 [[locations]]
 id = "campus_lecture_hall"
 name = "Lecture Hall"
-description = "The lecture hall: rows of seats rising to the back, a screen, a lectern at the bottom. Your classes are here. Nothing to do here right now."
+description = "The lecture hall: rows of seats rising to the back, a screen, a lectern at the bottom. Your classes are here. A sign by the door says it's open weekdays from 8am to 6pm."
 parent = "campus"
 kind = "destination"
-image = "locations/campus_lecture_hall.jpg"
+image = "locations/campus_lecture_hall_t0.jpg"
+image_search_queries = ["woman of 18 sitting in a tiered college lecture hall with a notebook", "young woman in a lecture theatre seat"]
 entry_from = "campus_quad"
 hours = [{ weekdays = [0, 1, 2, 3, 4], open = "08:00", close = "18:00" }]
 closed_text = "The lecture hall is locked. It opens at 8am on weekdays."
@@ -390,10 +393,11 @@ closed_text = "The lecture hall is locked. It opens at 8am on weekdays."
 [[locations]]
 id = "campus_bathroom"
 name = "Women's Bathroom"
-description = "The women's bathroom off the lecture-hall corridor: three stalls and one long mirror. Nothing to do here right now."
+description = "The women's bathroom off the lecture-hall corridor: three stalls and one long mirror."
 parent = "campus"
 kind = "destination"
-image = "locations/campus_bathroom.jpg"
+image = "locations/campus_bathroom_t0.jpg"
+image_search_queries = ["woman of 18 washing her hands at a long college bathroom mirror, no phone", "young woman at a row of sinks in a campus restroom, no phone"]
 entry_from = "campus_lecture_hall"
 hours = [{ weekdays = [0, 1, 2, 3, 4], open = "08:00", close = "18:00" }]
 closed_text = "The bathroom is locked with the lecture hall."
@@ -401,10 +405,11 @@ closed_text = "The bathroom is locked with the lecture hall."
 [[locations]]
 id = "campus_library"
 name = "Library"
-description = "The library: long tables, quiet floors, and the desk by the door. Nothing to do here right now."
+description = "The library: long tables, quiet floors, and the desk by the door. A sign on the door says it's open from 8am to 10pm."
 parent = "campus"
 kind = "destination"
-image = "locations/campus_library.jpg"
+image = "locations/campus_library_t0.jpg"
+image_search_queries = ["woman of 18 at a long library table with books", "young woman studying in a quiet college library"]
 entry_from = "campus_quad"
 hours = [{ weekdays = [], open = "08:00", close = "22:00" }]
 closed_text = "The library is closed. It opens at 8am."
@@ -412,10 +417,11 @@ closed_text = "The library is closed. It opens at 8am."
 [[locations]]
 id = "campus_cafeteria"
 name = "Cafeteria"
-description = "The cafeteria: trays, long tables, the lunch counter. Nothing to do here right now."
+description = "The cafeteria: trays, long tables, the lunch counter. A sign says it's open weekdays from 8am to 4pm."
 parent = "campus"
 kind = "destination"
-image = "locations/campus_cafeteria.jpg"
+image = "locations/campus_cafeteria_t0.jpg"
+image_search_queries = ["woman of 18 with a tray in a college cafeteria", "young woman eating lunch at a long cafeteria table"]
 entry_from = "campus_quad"
 hours = [{ weekdays = [0, 1, 2, 3, 4], open = "08:00", close = "16:00" }]
 closed_text = "The cafeteria is closed. It's open weekdays, 8am to 4pm."
@@ -423,10 +429,13 @@ closed_text = "The cafeteria is closed. It's open weekdays, 8am to 4pm."
 [[locations]]
 id = "campus_offices"
 name = "Faculty Offices"
-description = "The faculty corridor: a row of office doors with name plates, and the dean's office at the end. Nothing to do here right now."
+description = "The faculty corridor: a row of office doors with name plates, and the dean's office at the end. A sign says it's open weekdays from 8am to 6pm."
 parent = "campus"
 kind = "destination"
-image = "locations/campus_offices.jpg"
+image = "locations/campus_offices_t0.jpg"
+image_search_queries = ["woman of 18 in a college corridor of office doors", "young woman waiting outside a professor's office"]
+# P04 re-check: hidden until her advisor asks to see her (P16 sets met_walsh).
+hidden_until = { flag = "met_walsh" }
 entry_from = "campus_quad"
 hours = [{ weekdays = [0, 1, 2, 3, 4], open = "08:00", close = "18:00" }]
 closed_text = "The faculty corridor is locked. It opens at 8am on weekdays."
@@ -434,10 +443,11 @@ closed_text = "The faculty corridor is locked. It opens at 8am on weekdays."
 [[locations]]
 id = "campus_theatre"
 name = "Theatre"
-description = "The theatre: a black stage, rows of folding seats, and the lights rigged overhead. Nothing to do here right now."
+description = "The theatre: a black stage, rows of folding seats, and the lights rigged overhead. A sign says it's open weekdays from 9am to 9pm."
 parent = "campus"
 kind = "destination"
-image = "locations/campus_theatre.jpg"
+image = "locations/campus_theatre_t0.jpg"
+image_search_queries = ["woman of 18 standing on an empty black stage under lights", "young woman on a small college theatre stage"]
 entry_from = "campus_quad"
 hours = [{ weekdays = [0, 1, 2, 3, 4], open = "09:00", close = "21:00" }]
 closed_text = "The theatre is dark. It's open weekdays, 9am to 9pm."
@@ -1455,7 +1465,12 @@ costs = [{ trait = "money", value = 2 }]
 id = "ride"
 name = "Take the bus to campus ($2, 20 min)"
 blocks = [
-  { type = "paragraph", content = "The bus is packed. You stand the whole way, pressed between strangers, and step off at the campus gates." },
+  { type = "group", props = { conditions = { version = "1.0", logic = "AND", items = [{ type = "weekday", weekdays = [0, 1, 2, 3, 4] }, { type = "time_of_day", start_time = "07:00", end_time = "10:00" }] } }, blocks = [
+    { type = "paragraph", content = "The bus is packed. You stand the whole way, pressed between strangers. Every time it brakes, a man's hips press into your ass, and he doesn't step back. Your face burns. You step off at the campus gates." },
+  ] },
+  { type = "group", props = { conditions = { version = "1.0", logic = "OR", items = [{ type = "weekday", weekdays = [5, 6] }, { type = "time_of_day", start_time = "10:00", end_time = "07:00" }] } }, blocks = [
+    { type = "paragraph", content = "The bus is half empty. You get a seat by the window and step off at the campus gates." },
+  ] },
 ]
 
 [canvases.nodes.exit_block]
@@ -1469,7 +1484,7 @@ time_progression_minutes = 20
 
 [[canvases]]
 id = "travel_walk_to_campus"
-name = "Walk to campus (45 min)"
+name = "Walk to campus (45 min, 10 energy)"
 
 [canvases.trigger]
 location = "hood_street"
@@ -1479,7 +1494,7 @@ costs = [{ trait = "energy", value = 10 }]
 
 [[canvases.nodes]]
 id = "ride"
-name = "Walk to campus (45 min)"
+name = "Walk to campus (45 min, 10 energy)"
 blocks = [
   { type = "paragraph", content = "It's a long walk: past the park, over the bridge, along the main road. By the campus gates your feet ache." },
 ]
@@ -1527,7 +1542,7 @@ name = "Walk home (45 min)"
 location = "campus_quad"
 trigger_mode = "manual"
 is_repeatable = true
-costs = [{ trait = "energy", value = 10 }]
+# P04 re-check: no energy, so she can always get home (craft/systems.md rule 2).
 
 [[canvases.nodes]]
 id = "ride"
@@ -1551,7 +1566,7 @@ time_progression_minutes = 45
 
 [[canvases]]
 id = "loop_sleep"
-name = "Sleep (8 hours)"
+name = "Sleep (8 hours, energy to full)"
 
 [canvases.trigger]
 location = "home_her_room"
@@ -1563,10 +1578,11 @@ conditions = { version = "1.0", logic = "AND", items = [{ type = "time_of_day", 
 
 [[canvases.nodes]]
 id = "do"
-name = "Sleep (8 hours)"
+name = "Sleep (8 hours, energy to full)"
 blocks = [
-  { type = "image", props = { file = "loop/sleep.jpg" } },
-  { type = "paragraph", content = "You crawl into the single bed, and you're gone before you've finished thinking about tomorrow." },
+  { type = "paragraph", content = "You get out of your clothes and into your pyjamas: the thin top and the little shorts. The sheet is cool on your bare legs, and your nipples tighten against the thin top." },
+  { type = "image", props = { description = "A woman of 18 in a single bed under a thin sheet, in a thin pyjama top and shorts, lights off. Alone.", search_queries = ["woman 18 single bed thin sheet pyjama shorts night", "girl lying in bed in a thin top and shorts, lights off"], pool_dir = "body/sleep_t3", pool = 2 } },
+  { type = "paragraph", content = "You're gone before you've finished thinking about tomorrow." },
 ]
 
 [canvases.nodes.exit_block]
@@ -1581,7 +1597,7 @@ effects = [{ trait = "energy", op = "set", value = 100 }]
 
 [[canvases]]
 id = "loop_eat"
-name = "Eat something (20 min)"
+name = "Eat something (20 min, +15 energy)"
 
 [canvases.trigger]
 location = "home_kitchen"
@@ -1589,13 +1605,12 @@ trigger_mode = "manual"
 is_repeatable = true
 max_triggers_per_day = 3
 show_when_blocked = true
-cooldown_message = "you've eaten enough today."
+cooldown_message = "you're not hungry right now."
 
 [[canvases.nodes]]
 id = "do"
-name = "Eat something (20 min)"
+name = "Eat something (20 min, +15 energy)"
 blocks = [
-  { type = "image", props = { file = "loop/eat.jpg" } },
   { type = "paragraph", content = "You eat standing at the counter: toast, whatever's in the fridge, coffee from the pot." },
 ]
 
@@ -1611,19 +1626,24 @@ effects = [{ trait = "energy", op = "add", value = 15, clamp = true }]
 
 [[canvases]]
 id = "loop_shower"
-name = "Shower (15 min)"
+name = "Shower (15 min, +5 energy)"
 
 [canvases.trigger]
 location = "home_bathroom"
 trigger_mode = "manual"
 is_repeatable = true
+# P06 re-check: two a day, greyed in her voice (craft/systems.md rule 5).
+max_triggers_per_day = 2
+show_when_blocked = true
+cooldown_message = "you've showered enough for one day."
 
 [[canvases.nodes]]
 id = "do"
-name = "Shower (15 min)"
+name = "Shower (15 min, +5 energy)"
 blocks = [
-  { type = "image", props = { file = "loop/shower.jpg" } },
-  { type = "paragraph", content = "The water takes forever to run hot. You stand under it until it does, and you come out pink and awake." },
+  { type = "paragraph", content = "The water takes forever to run hot. You strip and step in anyway. It hits your nipples cold, and they go hard. Then it warms, and runs down your belly and between your legs, and you tip your head back and let it." },
+  { type = "image", props = { description = "A woman of 18 in a small family bathroom shower, water running down her bare body, head tipped back. Alone.", search_queries = ["woman 18 shower water running down body gif", "girl in a small home shower head tipped back gif"], pool_dir = "body/daily_shower_t4", pool = 4 } },
+  { type = "paragraph", content = "You towel off and get dressed again." },
 ]
 
 [canvases.nodes.exit_block]
