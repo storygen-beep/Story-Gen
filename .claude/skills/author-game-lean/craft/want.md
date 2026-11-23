@@ -55,7 +55,7 @@ Field-measured, from `lists/COVERAGE.md`'s evidence column and not re-run today:
 Each rule is marked **measured** or **LO's choice**.
 
 1. **A concrete situation at minute zero, and the problem has a face** (C54; the face is `plan.md` §2 and C1003). *Measured:* CoT's acceptance letter and "on your own"; *LO's choice* for the face.
-2. **A start choice that's a memory, read later** (C43, C44, C46). A flag nobody reads is fake freedom. *Measured:* CoT's "Think back..." and its four `<<pickstartingtrait>>` picks.
+2. **A start choice that's a memory, read later** (C43, C44, C46). A person on screen asks it, about her past (`craft/opening.md` rule 3); the answer is who she already is, not what she hopes for. A flag nobody reads is fake freedom. *Measured:* CoT's "Think back..." and its four `<<pickstartingtrait>>` picks.
 3. **The first objective arrives in the story, not in a lecture** (C1619, C1628). *Measured:* CoT's "maybe finding out who's hiring"; its own systems lecture is the "not this".
 4. **The goal card shows done steps with ✅ and the next step plainly** (C1619, C430), naming only people she has met (C598). *Measured:* CoT's story hints.
 5. **Every amount agrees with the ledger** (C952), and **the goal has no date** (C34). A bill that falls due every Sunday is a repeat, not a deadline. *LO's choice.*

@@ -325,3 +325,7 @@
 - New from the study, rule 12: tell the player how to save to disk. Lost browser saves are the commonest save complaint in the comments.
 - `LATER.md`: a new item, "A save check before release 2". The lean skill has no save check; v2's is `saves_mode`.
 - `SKILL.md`: the area table gives returning player its file. Only phone has no file now.
+
+## 2026-11-23 (start choice)
+
+- `craft/opening.md` rule 3 and its example, and `craft/want.md` rule 2: the two files disagreed. want.md (C44, measured on CoT's "Think back..." and its `<<pickstartingtrait>>` picks) said the start choice is a memory; opening.md said a person asks "what she wants", a wish. The P13 reader failed every opening on one or the other (games/first_term_lean NOTES, reader pass 7). Now both say the same: a person on screen asks about her past, and the answer is a memory of who she already is. Rule 3 also gains a line: the person asks because of something happening right then, never out of nowhere (LO: a past question with no reason in the scene "look like sense less"). The worked example's question becomes the landlord's "Last girl in that room left owing me three weeks. What makes you any different?" (39 words, was 37), and its three buttons become memories: worked every summer since fourteen, talked her way out of worse, left worse behind. LO's yeses, relayed by ENI (2026-11-23: "yes, go ahead"; "yes, fix the example and add the line"). Verified: lean scripts tests 100 passed.
