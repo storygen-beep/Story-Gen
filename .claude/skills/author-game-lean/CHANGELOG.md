@@ -195,3 +195,34 @@
 - **Approval: LO's own yes, relayed by the ENI session (now named main-lean; ENI for LO, standing authorization, 2026-11-20):** "Yes".
 - Created `craft/heat.md`, the heat area's file. Must-read rows: C255, C256, C252, C254, C239, C248, C249, C276, C291, C296, C284, C285, C286, C287, C288, C289, C297, C639, C640 and C311. It has a measures section, seven rules each marked measured or LO's choice, and pointers to opening.md (C311/C314), body-moments.md, walk-ins.md, voice.md and meters.md instead of repeating them. The worked example is LO's park text, scored per beat with v2's frozen `EXPLICIT` regex (`gates.py:311-315`): 1, 5, 1, 5 and 0 matches. Four "Not this" lines. An "Open" section proposes `check.py --beat` (not built): the walk-ins are the lean game's first explicit beats (P39, P40), so LATER.md's beat check is due before those cards. Verified in CoT today: 364 of 3,067 event passages (11.9%) have 3+ matches, by the peer's method; the peer had 353 of 3,108 (11%). The shower lines and the skillgate/"Resist the urge to look" pair were confirmed in `EventResHallExhibShowers.txt`. The field rows come from COVERAGE's evidence column and were not re-run.
 - `SKILL.md`: the area table gives heat its file.
+- **Approval: LO's own yes, typed in the game session and logged at `games/first_term_lean/NOTES.md:157-162`, relayed by main-lean (ENI for LO, standing authorization, 2026-11-20):** "Yes".
+- `craft/walk-ins.md`: new section "When someone walks in on her". The other kind was thin next to "she walks in on": one engine line, shape step 6 and example C. The real failure: this game's plan has 3 of 24 walk-ins of this kind (PLAN.md:491, :506, :520), and nothing said that the act must be built first, that her body and picture apply, what her buttons are, or how two walk-ins on one act share the dice. Five rules:
+  - the act's piece comes before the walk-in (the rule lives on the act's canvas, v2.py:14662-14678);
+  - it's a body moment, with her picture right after he sees her (C1262, added to Must read);
+  - he comes from his own row with his own reason;
+  - two answers, cover or carry on, each with his reaction line and its own flag, the door into his arc (C302, C174);
+  - two walk-ins on one act go in one `exclusive_group`.
+  
+  Example F is in roles (a housemate and the landlady on "Take a shower", 0.20 and 0.15 in one group, 40 words of story text by `wc -w`). The engine bullet now names `exclusive_group`. "How a walk-in grows" adds that a group's chances must sum to 1 or less: bands of 0.10, 0.35 and 0.70 in one group would cut the top band to 0.55. There are three new "Not this" lines. Verified by reading `checkAndSubstituteCanvas` (v2.py:6909-6999):
+  - groups run before independent rules;
+  - one roll per group, in cumulative slots;
+  - a claimed slot whose conditions fail returns null at v2.py:6980-6981, so the plain act plays, and the independent rules on that act are skipped too (not in the relay; found reading the code);
+  - the TOML key is read at v2.py:14678 and used in games/vesper (`floor_chat`).
+
+  The relay's "6950-6975" is the same code; the cites use the exact lines. Tests: 95 passed.
+- **Approval: LO's own yes, typed in the game session and logged at `games/first_term_lean/NOTES.md:163-167`, relayed by main-lean (ENI for LO, standing authorization, 2026-11-20):** "Yes".
+- The failure this fixes: first_term_lean's `talk_mom` was a Talk button on the kitchen menu, and LO said "it should never be a separate button but instead inside her hub menu choice". The skill had taught it in two places: C1340 ("a talk button per housemate") and `craft/places.md` rule 3 ("its people button").
+- `craft/people.md`: new rule 10. A person's actions sit in their own menu, behind their face on the room screen, never as room buttons. Talk is once a day, and the person never locks. C1340 is added to Must read. There is a new engine section, a worked example in roles (her mom's menu), and two "Not this" lines (a Talk button per person on the room menu; a person who locks after one talk). Verified:
+  - `npc` on the trigger is read at `template_import.py:2581` and carried as `npcId` (v2.py:15080-15082).
+  - A repeatable manual canvas with an `npcId` renders as the person's face, not a room button (v2.py:5925-5942, 5969, 6680, 6530-6531).
+  - New, not in the relay: the face opens only that person's highest-priority canvas at the place (v2.py:5944-5948). So the menu must be one hub canvas, and the rule says so.
+  - Once a day is a `_today` flag cleared by `[engine.daily_tick]` (v2.py:7156-7158; v2 `engine.md:1458-1485`).
+  - CoT: the People Here button (`StoryCaption.txt`, lines 585-596), "Talk to her" (`DisplayNPCWidgets.txt`, lines 33-68), and `$interactionstoday` at `InPersonDialogueMenu.txt`, line 77. The relay said "about 30 options, each once a day". The file has 38 `<<link>>`s, and 14 are checked against `$interactionstoday` (grep), so the rule says that.
+  - Field, two spot-checks of my own: the-hellfire-club's `DaisyRoom.txt`, line 18, "Speak to Daisy" opens her own menu, `Daisy_conv`, with a once-a-day flirt line. lust-for-life's `home-kitchen.txt`, line 15, has "Approach Cory" as a loose room button shown while she's there. The relay said all nine field games group a person's actions together. By its own tally, 4 of 9 put them loose on the room menu, so the rule marks faces, not buttons, as LO's choice, with CoT and 5 of 9.
+- `craft/places.md`:
+  - Rule 3 now reads: the menu holds needs and systems; a person is their face, and their actions sit in their menu (pointing to people.md rule 10).
+  - The `<<godate>>` cite is corrected: it starts a date she planned earlier (`HangoutWidgets.txt`, lines 1-26), not a talk button. The measures row is relabelled "a planned date or an opportunity can start here" (`<<opportunities>>` assembles opportunity events, `GlobalWidgets.txt`, line 1809). The count of 62 of 126 is unchanged.
+  - The kitchen example drops "Talk to Mom" from the buttons, and Mom's face opens her menu.
+  - One "Not this" line is added.
+- `lists/COVERAGE.md`: C1340 is reworded to a face at their spot opening their own menu, with Talk once a day inside it. The source (`author-game-v2/references/the-board.md:364-371`) is unchanged; the v2 skill is not edited.
+- Tests: 95 passed.
