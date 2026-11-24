@@ -357,3 +357,36 @@ def test_a_fail_on_a_changed_screen_stays_per_screen_either_way(game):
         rewrite(game, n)
         items = reading.work_list(game, "p1")["items"]
         assert any(i["row"] == "C460" and i["screen"] == "big.s1" for i in items), n
+
+
+# ── disjoint batches of one pass, recorded in any order (P34, 2026-11-24) ──
+
+@pytest.mark.parametrize("order", [(0, 1, 2), (2, 0, 1), (1, 2, 0)])
+def test_three_disjoint_batches_land_in_any_order_and_a_late_fail_is_kept(game, order):
+    card(game)
+    rows = [i["row"] for i in reading.work_list(game, "p1")["items"]]
+    x, y = rows[0], rows[1]
+    batches = [
+        [dict(row=x, screen="start.a", verdict="PASS")] + [dict(row=r, screen="*", verdict="PASS") for r in rows[2::3]],
+        [dict(row=x, screen="start.b", verdict="PASS")] + [dict(row=r, screen="*", verdict="PASS") for r in rows[3::3]],
+        [dict(row=y, screen="start.b", verdict="FAIL", cause="c1")] + [dict(row=r, screen="*", verdict="PASS")
+                                                                       for r in rows[4::3]],
+    ]
+    for i in order:
+        rec = reading.record(game, "p1", {"verdicts": batches[i], "causes": [{"id": "c1", "what": "y"}]})
+    got = {(v["row"], v["screen"]): v["verdict"] for v in rec["verdicts"]}
+    assert got[(x, "start.a")] == "PASS" and got[(x, "start.b")] == "PASS"
+    assert got[(y, "start.b")] == "FAIL"
+    assert rec["pending"] == [] and rec["pass"] == 1
+
+
+def test_a_fail_no_longer_owed_is_kept_and_reported(game):
+    _passed(game)  # a full pass: nothing is owed now
+    reader = _rows_on_a("reader")[0]
+    rec = reading.record(game, "p1", {"verdicts": [dict(row=reader, screen="start.a", verdict="FAIL", cause="c1")],
+                                      "causes": [{"id": "c1", "what": "late"}]})
+    assert [reader, "start.a"] in rec["unowed"]
+    assert any(v["row"] == reader and v["verdict"] == "FAIL" for v in rec["verdicts"])
+    other = _rows_on_a("reader")[1]
+    with pytest.raises(ValueError, match="work list"):  # a PASS no longer owed is still refused
+        reading.record(game, "p1", {"verdicts": [dict(row=other, screen="start.a", verdict="PASS")]})

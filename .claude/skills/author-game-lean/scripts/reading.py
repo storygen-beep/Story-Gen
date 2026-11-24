@@ -303,6 +303,13 @@ def record(game_dir, card_id, reader_out, skill=SKILL, game=None):
     work = work_list(game_dir, card_id, skill=skill, game=game)
     asked = {(i["row"], i["screen"]) for i in work["items"]}
     rec = load_record(game_dir, card_id) or {}
+    # The work list as it stood when this pass began. A pass recorded in disjoint batches checks every batch against
+    # it, not against today's shrunken list: a "*" item answered on one screen in batch 1 leaves the live list, and
+    # batch 2's verdict for the same row on another screen must still land (P34, 2026-11-24).
+    pass_items = rec.get("pass_items") if rec.get("pending") and rec.get("pass_items") else work["items"]
+    began = {(i["row"], i["screen"]) for i in pass_items}
+    unowed = []
+    this_pass = rec.get("pass", 0) if rec.get("pending") else rec.get("pass", 0) + 1
     table = rules.table(skill)
     notes_on = row_screens(game_dir, card_id, skill) is not None  # labels apply to a card with Does:
     new = []
@@ -310,8 +317,11 @@ def record(game_dir, card_id, reader_out, skill=SKILL, game=None):
         if v.get("verdict") not in VERDICTS:
             raise ValueError(f"{v.get('row')} on {v.get('screen')}: verdict must be one of {VERDICTS}")
         key = (v.get("row"), v.get("screen", WHOLE))
-        if key not in asked and not (key[1] != WHOLE and (key[0], WHOLE) in asked):
-            raise ValueError(f"{key[0]} on {key[1]} was not on the work list")
+        owed = lambda keys: key in keys or (key[1] != WHOLE and (key[0], WHOLE) in keys)
+        if not owed(asked) and not owed(began):
+            if v.get("verdict") != "FAIL":
+                raise ValueError(f"{key[0]} on {key[1]} was not on the work list")
+            unowed.append(key)  # never drop a FAIL: it is recorded and reported
         note = notes_on and table.get(key[0], {}).get("judge") == "note"
         if v["verdict"] == "FAIL" and not v.get("cause") and not note:
             raise ValueError(f"{key[0]} on {key[1]}: a FAIL names its cause")
@@ -320,12 +330,15 @@ def record(game_dir, card_id, reader_out, skill=SKILL, game=None):
         new.append({"row": key[0], "screen": key[1], "verdict": v["verdict"], "line": v.get("line", ""),
                     "why": v.get("why", ""), "cause": None if note else v.get("cause"), "note": note,
                     "screen_hash": work["screens"].get(key[1]), "row_hash": work["rows"].get(key[0]),
-                    "carried": False})
+                    "carried": False, "pass": rec.get("pass", 0) if rec.get("pending") else rec.get("pass", 0) + 1})
     answered = {(v["row"], v["screen"]) for v in new}
     # An item asked on "*" and answered on screens counts as answered.
     answered |= {(r, WHOLE) for r, _ in answered}
     # A batch may be partial (a pass can die mid-way): the items it doesn't answer stay pending, and the next
     # work list asks them again whatever the hashes say (LO, relayed 2026-11-24).
+    # A verdict an earlier batch of this same pass gave is an answer too: a FAIL from batch 1 shows on the live list
+    # as "failed last pass", but this pass has already judged it.
+    answered |= {(v["row"], v["screen"]) for v in rec.get("verdicts", []) if v.get("pass") == this_pass}
     pending = [i for i in work["items"] if (i["row"], i["screen"]) not in answered]
     unanswered = {(i["row"], i["screen"]) for i in pending}
     # A carried verdict is replaced only by a new verdict on the same screen, or when its row was asked on "*"
@@ -334,7 +347,11 @@ def record(game_dir, card_id, reader_out, skill=SKILL, game=None):
     redone = {(v["row"], v["screen"]) for v in new}
     whole_again = {r for r, s in asked if s == WHOLE and (r, s) in answered}
     kept = [v for v in work["carried"] if (v["row"], v["screen"]) not in redone and v["row"] not in whole_again]
-    kept += [dict(v, carried=True) for v in rec.get("verdicts", []) if (v["row"], v["screen"]) in unanswered]
+    # A verdict on an item still on the live list (not yet asked again, or given by an earlier batch of this pass)
+    # is kept until a new verdict on the same item replaces it: no batch can drop another batch's FAIL.
+    kept += [dict(v, carried=v.get("pass") != this_pass) for v in rec.get("verdicts", [])
+             if (v["row"], v["screen"]) in asked and (v["row"], v["screen"]) not in redone
+             and v["row"] not in whole_again]
     causes = reader_out.get("causes", [])
     # A later batch of the same pass may name a cause an earlier batch gave.
     old_causes = {c.get("id"): c for c in rec.get("causes", [])} if rec.get("pending") else {}
@@ -346,7 +363,8 @@ def record(game_dir, card_id, reader_out, skill=SKILL, game=None):
     out = {"piece": card_id, "pass": rec.get("pass", 0) + (0 if rec.get("pending") else 1),
            "screens": work["screens"], "rows": work["rows"],
            "verdicts": sorted(kept + new, key=lambda v: (v["row"], v["screen"])), "causes": causes,
-           "pending": pending, "asked": len(work["items"]), "answered": len(work["items"]) - len(pending)}
+           "pending": pending, "asked": len(work["items"]), "answered": len(work["items"]) - len(pending),
+           "pass_items": pass_items if pending else [], "unowed": [list(k) for k in unowed]}
     path = record_path(game_dir, card_id)
     path.parent.mkdir(parents=True, exist_ok=True)
     path.write_text(json.dumps(out, indent=1) + "\n", encoding="utf-8")
@@ -380,6 +398,8 @@ def main(argv=None):
         rec = record(a.game_dir, a.card_id, json.loads(Path(a.verdicts).read_text(encoding="utf-8")))
         fails = sum(1 for v in rec["verdicts"] if v["verdict"] == "FAIL" and not v.get("note"))
         print(f"recorded {rec['answered']} of {rec['asked']}; {len(rec['pending'])} still to ask")
+        for row, screen in rec.get("unowed", []):
+            print(f"  kept a FAIL that was no longer on the work list: {row} on {screen}")
         print(f"pass {rec['pass']}: {len(rec['verdicts'])} verdicts, {fails} FAIL that hold")
         print("\n".join(by_cause(rec)))
         return 1 if fails else 0

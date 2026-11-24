@@ -639,3 +639,14 @@ Why for all of these: P13's reader found new FAILs on every pass, v5 to v11 (99 
     - `reader.md` says so.
   - **Tests:** three new on a ten-screen canvas: one changed screen still asks per screen; eight changed asks each row once on `*`; a FAIL on a changed screen stays on its screen with one change and with eight.
   - **Verified read-only against the live record:** P34's work list goes from 1,986 to 245 items. 137 are on `*`, 78 are on the screens of canvases under half changed, and 30 are FAILs on their screens.
+- `scripts/reading.py`: disjoint batches of one pass all land, and no batch drops a FAIL (ENI for LO, standing authorization, 2026-11-24).
+  - **The failure:** P34's reader split a pass into disjoint batches and recorded each as it landed. A later batch's verdicts were refused ("was not on the work list"), so the game session filtered batches to the live list, which can silently drop a verdict, a FAIL included.
+  - **Why the list shrank (reproduced):** a `*` item answered on one screen in batch 1 counts as answered, so it leaves the live list, and batch 2's verdict for the same row on another screen was refused.
+  - **Found while testing:** a FAIL recorded in an early batch was dropped by a later batch of the same pass. The later batch kept only verdicts of items it was carrying or hadn't been asked, and the FAIL showed as "failed last pass" on the live list.
+  - **The fix:**
+    - The first batch of a pass stores the work list as the pass began (`pass_items`), and every later batch is checked against it as well as the live list.
+    - A FAIL owed to neither is recorded anyway, listed in `unowed` and printed ("kept a FAIL that was no longer on the work list"). An off-list PASS is still refused.
+    - Each verdict is stamped with its pass. Verdicts an earlier batch of the same pass gave count as answered, so a FAIL from batch 1 isn't left pending in the same pass.
+    - Every prior verdict on an item still on the live list is kept until a new verdict on the same item replaces it.
+  - **Tests:** three disjoint batches recorded in three orders all land, a FAIL in any of them is kept, and the pass ends with nothing pending. A FAIL no longer owed is kept and reported, while an off-list PASS is still refused.
+  - **Verified read-only:** the live records' work lists still compute.
