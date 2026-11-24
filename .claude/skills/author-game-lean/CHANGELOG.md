@@ -744,3 +744,8 @@ Why for all of these: P13's reader found new FAILs on every pass, v5 to v11 (99 
   - **Verified read-only:**
     - P07 is 0, P42 0, P34 3, P13 1, P06 0 and P11 1. The rows left on P34, P13 and P11 are "never judged": rule ids added since their last pass.
     - P04 is 209, a first pass, since it has no record yet.
+- `scripts/approve.py` and `piece.md` step 6: an approval is refused on a card `check.py --card` calls RED (ENI for LO, standing authorization, 2026-11-24).
+  - **The failure:** P04 and P42 were approved while `--card` was RED (missing L166 and L167 skips), though `piece.md` says to fix red before asking.
+  - **The fix:** `approve()` runs `check.check_card` first. On anything but GREEN it refuses with the red lines and writes nothing. There is no override flag. Approvals recorded before stay as they are.
+  - **Fixtures:** the record itself is now `record_approval()`. The test fixtures, whose placeholder cards aren't real cards, call it directly: `tiny_game.make_game` and two `test_check.py` tests.
+  - **Tests:** `test_approve.py`'s card is now a minimal GREEN card, with one `Does:` line. Two new tests: a RED card is refused with its red lines and nothing is written; a GREEN card is recorded as before.

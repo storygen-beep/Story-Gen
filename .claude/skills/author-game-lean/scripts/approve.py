@@ -60,13 +60,26 @@ def status(game_dir, card_id):
 
 
 def approve(game_dir, card_id, words, date=None):
-    """Append one approval record. Returns a one-line message; raises SystemExit on refusal."""
+    """Append one approval record. Returns a one-line message; raises SystemExit on refusal.
+    A card `check.py --card` calls RED is refused, with its red lines, and nothing is written: piece.md says fix red
+    before asking (P04 and P42 were approved RED, 2026-11-24). There is no override."""
     words = (words or "").strip()
     if not words:
         raise SystemExit("refused: LO's words are empty. Copy his exact reply.")
     current = card_hash(game_dir, card_id)
     if current is None:
         raise SystemExit(f"refused: no card at {card_path(game_dir, card_id)}")
+    import check  # here, not at the top: check.py imports this module
+    status, rows = check.check_card(game_dir, card_id)
+    if status != check.GREEN:
+        raise SystemExit("refused: check.py --card is RED for this card; fix it, show LO, then ask again\n"
+                         + "\n".join(f"  {r}" for r in rows))
+    return record_approval(game_dir, card_id, words, date, current)
+
+
+def record_approval(game_dir, card_id, words, date=None, current=None):
+    """Write the record. approve() calls it after the card check; the test fixtures call it directly."""
+    current = current or card_hash(game_dir, card_id)
     record = latest(game_dir, card_id)
     if record is not None and record["sha256"] == current:
         return f"no change: {card_id} is already approved at this exact text"
