@@ -23,6 +23,8 @@ narration_person = "second"
 clothing_enabled = true
 wardrobe_location = "home_her_room"
 wardrobe_anywhere = false
+# P35 — the clothes shop: "Browse Clothes" on its screen (template_import.py:3158, v2.py:11386).
+shop_location = "hood_clothes"
 
 # The game starts on her first day of college: Monday, week 1, 07:00 (template_import.py:2319-2325).
 [time]
@@ -89,6 +91,7 @@ bands = [
   { min = 80, max = 100, text = "On Display" },
 ]
 
+
 # P11 — goal 1's count and the rent total, internal (not on the sidebar).
 [[traits.labels]]
 key = "sundays_paid"
@@ -107,6 +110,7 @@ key = "meals_today"
 label = "Meals today"
 hidden = true
 toast = false
+
 
 [[traits.labels]]
 key = "want"
@@ -192,6 +196,12 @@ when = [{ flag = "met_chris", op = "is_true" }]
 text = "Chris, 24. The café's barista. Tom gave you his afternoons."
 tip = "He has the counter weekday mornings until 3pm, and weekends until 8pm."
 
+[[quest_cards]]
+npc_id = "npc_nina"
+when = [{ flag = "met_nina", op = "is_true" }]
+text = "Nina, 26. She runs the clothes shop on your street."
+tip = "Behind the till Monday to Saturday, 10am to 7pm."
+
 # P42 — the day turn clears the once-a-day talk flags (v2.py:1269-1277, v2.py:7158).
 [engine.daily_tick]
 flagEffects = [
@@ -212,6 +222,214 @@ traitEffects = [
   # P34 — meals: one count a day
   { targetType = "player", trait = "meals_today", op = "set", value = 0 },
 ]
+
+# P35 — the room layout, since the table layout's tiers read corruption only (PLAN §8d).
+[ui]
+clothes_layout = "room"
+
+# ── P08 · the phone: Messages only (PLAN §8e). One text from each person some hours after she meets
+# them, one reply round, a line back. No reply moves a meter or sets a flag. Each trigger's
+# conditions sit one level down (trigger.conditions), or the thread fires unconditionally. ──
+[phone]
+enabled = true
+
+[[phone.apps]]
+id = "messages"
+type = "chat"
+label = "Messages"
+
+[[phone.conversations]]
+id = "text_laura"
+app = "messages"
+npc = "npc_laura"
+notify = "📱 New message"
+[phone.conversations.trigger]
+conditions = { version = "1.0", logic = "AND", items = [{ type = "hours_since_flag", subject = "player", flag_key = "met_laura", operator = "gte", value = 4 }] }
+[[phone.conversations.blocks]]
+type = "message"
+sender = "npc"
+content = "How's the first day, baby? Did you eat?"
+[[phone.conversations.blocks]]
+type = "reply"
+round = 1
+choices = [
+  { text = "It's fine, Mom. I ate." },
+  { text = "It's a lot." },
+  { text = "Stop worrying." },
+]
+[[phone.conversations.blocks]]
+type = "message"
+sender = "npc"
+after_round = 1
+after_choice = 0
+content = "Good. Proud of you. ❤️"
+[[phone.conversations.blocks]]
+type = "message"
+sender = "npc"
+after_round = 1
+after_choice = 1
+content = "It gets easier. Tell me everything tonight."
+[[phone.conversations.blocks]]
+type = "message"
+sender = "npc"
+after_round = 1
+after_choice = 2
+content = "Never. That's my job."
+
+[[phone.conversations]]
+id = "text_ryan"
+app = "messages"
+npc = "npc_ryan"
+notify = "📱 New message"
+[phone.conversations.trigger]
+conditions = { version = "1.0", logic = "AND", items = [{ type = "hours_since_flag", subject = "player", flag_key = "met_ryan", operator = "gte", value = 6 }] }
+[[phone.conversations.blocks]]
+type = "message"
+sender = "npc"
+content = "mark's in a mood. stay out of the living room tonight"
+[[phone.conversations.blocks]]
+type = "reply"
+round = 1
+choices = [
+  { text = "Thanks for the warning" },
+  { text = "Why are you telling me?" },
+]
+[[phone.conversations.blocks]]
+type = "message"
+sender = "npc"
+after_round = 1
+after_choice = 0
+content = "np"
+[[phone.conversations.blocks]]
+type = "message"
+sender = "npc"
+after_round = 1
+after_choice = 1
+content = "dunno. figured you'd want to know"
+
+[[phone.conversations]]
+id = "text_mark"
+app = "messages"
+npc = "npc_mark"
+notify = "📱 New message"
+[phone.conversations.trigger]
+conditions = { version = "1.0", logic = "AND", items = [{ type = "hours_since_flag", subject = "player", flag_key = "met_mark", operator = "gte", value = 10 }] }
+[[phone.conversations.blocks]]
+type = "message"
+sender = "npc"
+content = "Sunday. Seventy-five. Don't make me ask twice."
+[[phone.conversations.blocks]]
+type = "reply"
+round = 1
+choices = [
+  { text = "I know." },
+  { text = "I'm working on it." },
+]
+[[phone.conversations.blocks]]
+type = "message"
+sender = "npc"
+after_round = 1
+after_choice = 0
+content = "Good."
+[[phone.conversations.blocks]]
+type = "message"
+sender = "npc"
+after_round = 1
+after_choice = 1
+content = "Work faster, kid."
+
+[[phone.conversations]]
+id = "text_tom"
+app = "messages"
+npc = "npc_tom"
+notify = "📱 New message"
+[phone.conversations.trigger]
+conditions = { version = "1.0", logic = "AND", items = [{ type = "hours_since_flag", subject = "player", flag_key = "met_tom", operator = "gte", value = 3 }] }
+[[phone.conversations.blocks]]
+type = "message"
+sender = "npc"
+content = "Tom from the café. Come in when you want, as long as one of us is here till you're done."
+[[phone.conversations.blocks]]
+type = "reply"
+round = 1
+choices = [
+  { text = "I won't." },
+  { text = "Yes, boss." },
+]
+[[phone.conversations.blocks]]
+type = "message"
+sender = "npc"
+after_round = 1
+after_choice = 0
+content = "We'll see."
+[[phone.conversations.blocks]]
+type = "message"
+sender = "npc"
+after_round = 1
+after_choice = 1
+content = "I like the sound of that."
+
+[[phone.conversations]]
+id = "text_chris"
+app = "messages"
+npc = "npc_chris"
+notify = "📱 New message"
+[phone.conversations.trigger]
+conditions = { version = "1.0", logic = "AND", items = [{ type = "hours_since_flag", subject = "player", flag_key = "cafe_first_shift_done", operator = "gte", value = 3 }] }
+[[phone.conversations.blocks]]
+type = "message"
+sender = "npc"
+content = "it's chris. you still owe me for showing you the machine, new girl"
+[[phone.conversations.blocks]]
+type = "reply"
+round = 1
+choices = [
+  { text = "I owe you nothing." },
+  { text = "What do you want?" },
+]
+[[phone.conversations.blocks]]
+type = "message"
+sender = "npc"
+after_round = 1
+after_choice = 0
+content = "we'll see about that"
+[[phone.conversations.blocks]]
+type = "message"
+sender = "npc"
+after_round = 1
+after_choice = 1
+content = "you'll find out 😏"
+
+[[phone.conversations]]
+id = "text_nina"
+app = "messages"
+npc = "npc_nina"
+notify = "📱 New message"
+[phone.conversations.trigger]
+conditions = { version = "1.0", logic = "AND", items = [{ type = "hours_since_flag", subject = "player", flag_key = "met_nina", operator = "gte", value = 4 }] }
+[[phone.conversations.blocks]]
+type = "message"
+sender = "npc"
+content = "It's Nina, from the shop. Come back when you're feeling brave. The back rail misses you."
+[[phone.conversations.blocks]]
+type = "reply"
+round = 1
+choices = [
+  { text = "Maybe." },
+  { text = "What's on the back rail?" },
+]
+[[phone.conversations.blocks]]
+type = "message"
+sender = "npc"
+after_round = 1
+after_choice = 0
+content = "That's a yes, then."
+[[phone.conversations.blocks]]
+type = "message"
+sender = "npc"
+after_round = 1
+after_choice = 1
+content = "Come and see. Bring your nerve."
 
 # ══════════════════════════════════════════════════════════════════
 # Phase: 1_metadata_and_locations.toml
@@ -249,6 +467,8 @@ flag_keys = [
   "ate_with_mom_today",
   # P33 — the run, first time
   "ran_once",
+  # P35 — the clothes shop
+  "met_nina",
 ]
 # P13 — the name screen (template_import.py:2332-2357). "name" writes $player.name; any other id
 # becomes $player.<id> (v2.py:1569-1573). Printed with @player / @player.nickname (v2.py:18598-18629).
@@ -414,6 +634,22 @@ image_search_queries = ["woman of 18 sitting on a park bench by a pond", "young 
 entry_from = "hood_street"
 hours = [{ weekdays = [], open = "06:00", close = "21:00" }]
 closed_text = "The park gates are locked. They open at 6am."
+
+# P35 — the clothes shop, off Your Street, Mon–Sat 10am–7pm (PLAN §3, §8d).
+[[locations]]
+id = "hood_clothes"
+name = "Clothes Shop"
+description = "The clothes shop: two narrow aisles of rails, a curtained fitting room at the back, a mirror by the till."
+description_variants = [
+  { conditions = { version = "1.0", logic = "AND", items = [{ type = "flag", subject = "player", flag_key = "met_nina", operator = "is_true" }, { type = "npc_at_location", npc_id = "npc_nina", location_id = "hood_clothes", operator = "is_present" }] }, text = "The clothes shop: two narrow aisles of rails, a curtained fitting room at the back, a mirror by the till. Nina looks up from the till. \"Find anything you're brave enough for?\"" },
+]
+parent = "neighbourhood"
+kind = "destination"
+image = "locations/hood_clothes_t0.jpg"
+image_search_queries = ["woman 18 browsing clothes rail small boutique interior", "girl shopping inside tiny clothes shop rails fitting room"]
+entry_from = "hood_street"
+hours = [{ weekdays = [0, 1, 2, 3, 4, 5], open = "10:00", close = "19:00" }]
+closed_text = "The clothes shop is shut. It opens at 10am, Monday to Saturday."
 
 [[locations]]
 id = "hood_gym"
@@ -845,6 +1081,240 @@ name = "Sports top"
 slot = "top"
 type = "fitness"
 
+# P35 — the shop's stock, four levels per slot (PLAN §8d). Above normal needs the trait at 20/40/60;
+# the same conditions gate wearing, so only normal can be bought in release 1.
+
+[[clothing]]
+id = "shop_plain_tee"
+name = "Plain tee"
+slot = "top"
+price = 10
+description = "A plain cotton tee."
+
+[[clothing]]
+id = "shop_crop_top"
+name = "Crop top"
+slot = "top"
+price = 12
+description = "Shows your stomach when you lift your arms."
+conditions = { version = "1.0", logic = "AND", items = [{ type = "trait", subject = "player", trait_key = "exhibitionism", operator = "gte", value = 20 }] }
+
+[[clothing]]
+id = "shop_lowcut_tank"
+name = "Low-cut tank"
+slot = "top"
+price = 20
+exposure = 1
+description = "Cut low enough that your bra won't stay hidden."
+conditions = { version = "1.0", logic = "AND", items = [{ type = "trait", subject = "player", trait_key = "exhibitionism", operator = "gte", value = 40 }] }
+
+[[clothing]]
+id = "shop_mesh_top"
+name = "Sheer mesh top"
+slot = "top"
+price = 30
+exposure = 2
+description = "You can see straight through it."
+conditions = { version = "1.0", logic = "AND", items = [{ type = "trait", subject = "player", trait_key = "exhibitionism", operator = "gte", value = 60 }] }
+
+[[clothing]]
+id = "shop_jeans"
+name = "Blue jeans"
+slot = "bottom"
+price = 25
+description = "Plain blue jeans."
+
+[[clothing]]
+id = "shop_denim_shorts"
+name = "Denim shorts"
+slot = "bottom"
+price = 15
+description = "Short enough to show your legs."
+conditions = { version = "1.0", logic = "AND", items = [{ type = "trait", subject = "player", trait_key = "exhibitionism", operator = "gte", value = 20 }] }
+
+[[clothing]]
+id = "shop_mini_skirt"
+name = "Tight mini skirt"
+slot = "bottom"
+price = 25
+exposure = 1
+description = "Rides up when you sit."
+conditions = { version = "1.0", logic = "AND", items = [{ type = "trait", subject = "player", trait_key = "exhibitionism", operator = "gte", value = 40 }] }
+
+[[clothing]]
+id = "shop_micro_skirt"
+name = "Micro skirt"
+slot = "bottom"
+price = 30
+exposure = 1
+description = "Barely covers your ass."
+conditions = { version = "1.0", logic = "AND", items = [{ type = "trait", subject = "player", trait_key = "exhibitionism", operator = "gte", value = 60 }] }
+
+[[clothing]]
+id = "shop_summer_dress"
+name = "Summer dress"
+slot = "dress"
+price = 25
+description = "A light dress to the knee."
+
+[[clothing]]
+id = "shop_black_dress"
+name = "Tight black dress"
+slot = "dress"
+price = 30
+description = "Hugs every curve."
+conditions = { version = "1.0", logic = "AND", items = [{ type = "trait", subject = "player", trait_key = "exhibitionism", operator = "gte", value = 20 }] }
+
+[[clothing]]
+id = "shop_backless_dress"
+name = "Backless mini dress"
+slot = "dress"
+price = 45
+exposure = 1
+description = "Bare from the neck to the small of your back."
+conditions = { version = "1.0", logic = "AND", items = [{ type = "trait", subject = "player", trait_key = "exhibitionism", operator = "gte", value = 40 }] }
+
+[[clothing]]
+id = "shop_cutout_dress"
+name = "Cut-out bodycon dress"
+slot = "dress"
+price = 60
+exposure = 1
+description = "More cut out than dress."
+conditions = { version = "1.0", logic = "AND", items = [{ type = "trait", subject = "player", trait_key = "exhibitionism", operator = "gte", value = 60 }] }
+
+[[clothing]]
+id = "shop_cotton_bra"
+name = "Cotton bra"
+slot = "bra"
+price = 8
+description = "Plain and comfortable."
+
+[[clothing]]
+id = "shop_lace_bra"
+name = "Lace bra"
+slot = "bra"
+price = 12
+description = "Thin lace, pretty."
+conditions = { version = "1.0", logic = "AND", items = [{ type = "trait", subject = "player", trait_key = "corruption", operator = "gte", value = 20 }] }
+
+[[clothing]]
+id = "shop_pushup_bra"
+exposure = 1
+name = "Push-up bra"
+slot = "bra"
+price = 20
+description = "Lifts everything."
+conditions = { version = "1.0", logic = "AND", items = [{ type = "trait", subject = "player", trait_key = "corruption", operator = "gte", value = 40 }] }
+
+[[clothing]]
+id = "shop_sheer_bra"
+name = "Sheer bra"
+slot = "bra"
+price = 25
+exposure = 1
+description = "Hides nothing."
+conditions = { version = "1.0", logic = "AND", items = [{ type = "trait", subject = "player", trait_key = "corruption", operator = "gte", value = 60 }] }
+
+[[clothing]]
+id = "shop_cotton_briefs"
+name = "Cotton briefs"
+slot = "underwear"
+price = 5
+description = "Plain cotton."
+
+[[clothing]]
+id = "shop_lace_panties"
+name = "Lace panties"
+slot = "underwear"
+price = 8
+description = "Thin lace."
+conditions = { version = "1.0", logic = "AND", items = [{ type = "trait", subject = "player", trait_key = "corruption", operator = "gte", value = 20 }] }
+
+[[clothing]]
+id = "shop_thong"
+exposure = 1
+name = "Thong"
+slot = "underwear"
+price = 12
+description = "Leaves your ass bare."
+conditions = { version = "1.0", logic = "AND", items = [{ type = "trait", subject = "player", trait_key = "corruption", operator = "gte", value = 40 }] }
+
+[[clothing]]
+id = "shop_crotchless"
+name = "Crotchless panties"
+slot = "underwear"
+price = 20
+exposure = 2
+description = "Open where it counts."
+conditions = { version = "1.0", logic = "AND", items = [{ type = "trait", subject = "player", trait_key = "corruption", operator = "gte", value = 60 }] }
+
+[[clothing]]
+id = "shop_tights"
+name = "Tights"
+slot = "legwear"
+price = 6
+description = "Plain black tights."
+
+[[clothing]]
+id = "shop_thigh_highs"
+name = "Thigh-high socks"
+slot = "legwear"
+price = 10
+description = "Up to mid-thigh."
+conditions = { version = "1.0", logic = "AND", items = [{ type = "trait", subject = "player", trait_key = "exhibitionism", operator = "gte", value = 20 }] }
+
+[[clothing]]
+id = "shop_fishnets"
+name = "Fishnets"
+slot = "legwear"
+price = 15
+exposure = 1
+description = "Fishnet tights."
+conditions = { version = "1.0", logic = "AND", items = [{ type = "trait", subject = "player", trait_key = "exhibitionism", operator = "gte", value = 40 }] }
+
+[[clothing]]
+id = "shop_stockings"
+name = "Stockings and garter belt"
+slot = "legwear"
+price = 25
+exposure = 1
+description = "Stockings held up by a garter belt."
+conditions = { version = "1.0", logic = "AND", items = [{ type = "trait", subject = "player", trait_key = "exhibitionism", operator = "gte", value = 60 }] }
+
+[[clothing]]
+id = "shop_flats"
+name = "Flats"
+slot = "shoes"
+price = 15
+description = "Plain flats."
+
+[[clothing]]
+id = "shop_ankle_boots"
+name = "Ankle boots"
+slot = "shoes"
+price = 25
+description = "Short heeled boots."
+conditions = { version = "1.0", logic = "AND", items = [{ type = "trait", subject = "player", trait_key = "exhibitionism", operator = "gte", value = 20 }] }
+
+[[clothing]]
+id = "shop_heels"
+exposure = 1
+name = "Heels"
+slot = "shoes"
+price = 35
+description = "Tall heels."
+conditions = { version = "1.0", logic = "AND", items = [{ type = "trait", subject = "player", trait_key = "exhibitionism", operator = "gte", value = 40 }] }
+
+[[clothing]]
+id = "shop_platforms"
+exposure = 1
+name = "Platform heels"
+slot = "shoes"
+price = 45
+description = "Platform heels you'll have to learn to walk in."
+conditions = { version = "1.0", logic = "AND", items = [{ type = "trait", subject = "player", trait_key = "exhibitionism", operator = "gte", value = 60 }] }
+
 [[clothing]]
 id = "mom_short_skirt"
 name = "Mom's short skirt"
@@ -883,6 +1353,20 @@ weekdays = [0, 1, 2, 3, 4, 5]
 start_time = "10:00"
 end_time = "21:00"
 activity = "behind the counter"
+
+[[npcs]]
+id = "npc_nina"
+name = "Nina"
+role = "Clothes shop owner"
+relationship = "Nina, 26. She runs the clothes shop on your street."
+description = "The clothes shop owner, 26."
+
+[[npcs.schedules]]
+location = "hood_clothes"
+weekdays = [0, 1, 2, 3, 4, 5]
+start_time = "10:00"
+end_time = "19:00"
+activity = "behind the till"
 
 [[npcs]]
 id = "npc_chris"
@@ -3095,6 +3579,76 @@ targetType = "location"
 locationId = "campus_quad"
 time_progression_minutes = 30
 effects = [{ trait = "energy", op = "add", value = 5, clamp = true }]
+
+# ── P35 · the clothes shop: Nina's meeting (once, by itself on entry, gated on her being there) and the
+# fitting room. "Browse Clothes" is the engine's shop on the room. ──
+
+[[canvases]]
+id = "shop_meet_nina"
+name = "Nina"
+
+[canvases.trigger]
+location = "hood_clothes"
+trigger_mode = "manual"
+is_repeatable = false
+conditions = { version = "1.0", logic = "AND", items = [{ type = "npc_at_location", npc_id = "npc_nina", location_id = "hood_clothes", operator = "is_present" }] }
+
+[[canvases.nodes]]
+id = "meet"
+name = "Nina"
+blocks = [
+  { type = "paragraph", content = "A woman in her twenties is behind the till in a black dress two sizes too confident for a shop this small. She looks you up and down, slowly, and doesn't hide it." },
+  { type = "image", props = { description = "A woman of 26 in a tight black dress behind a boutique till, looking at the camera.", search_queries = ["woman 26 tight black dress behind boutique counter", "shop owner woman at till looking at camera"], pool_dir = "people/nina_till_t0", pool = 1 } },
+  { type = "dialog", content = "Hi, sweetie. I'm Nina. It's my shop. The good stuff's at the back, and it isn't for everyone.", props = { speaker = "npc", npcId = "npc_nina" } },
+  { type = "paragraph", content = "She smiles like she already knows which rail you'll end up at." },
+  { type = "dialog", content = "Just looking.", props = { speaker = "player" } },
+  { type = "dialog", content = "Everyone says that.", props = { speaker = "npc", npcId = "npc_nina" } },
+]
+
+[canvases.nodes.exit_block]
+type = "choices"
+
+[[canvases.nodes.exit_block.choices]]
+text = "Done"
+targetType = "location"
+locationId = "hood_clothes"
+time_progression_minutes = 5
+flagEffects = [{ flag = "met_nina", op = "set" }]
+
+[[canvases]]
+id = "shop_try_on"
+name = "Try something on (15 min)"
+
+[canvases.trigger]
+location = "hood_clothes"
+trigger_mode = "manual"
+is_repeatable = true
+show_when_blocked = true
+cooldown_message = "the fitting room closes at 6:45pm."
+conditions = { version = "1.0", logic = "AND", items = [{ type = "flag", subject = "player", flag_key = "met_nina", operator = "is_true" }, { type = "time_of_day", start_time = "10:00", end_time = "18:45" }] }
+
+[[canvases.nodes]]
+id = "try"
+name = "The fitting room"
+blocks = [
+  { type = "paragraph", content = "You take an armful into the fitting room and pull the curtain. In the mirror you try them one by one: a skirt that stops high on your thighs, a top cut lower than anything you own. You turn and look at your ass in the skirt longer than you mean to." },
+  { type = "image", props = { description = "A woman of 18 in a fitting-room mirror in a short skirt, looking over her shoulder at her own ass. Alone. No phone, not a selfie.", search_queries = ["woman 18 fitting room mirror short skirt looking over shoulder no phone", "girl trying on skirt changing room mirror back view"], pool_dir = "body/fitting_room_t3", pool = 2 } },
+  { type = "group", props = { conditions = { version = "1.0", logic = "AND", items = [{ type = "npc_at_location", npc_id = "npc_nina", location_id = "hood_clothes", operator = "is_present" }] } }, blocks = [
+    { type = "dialog", content = "Let me see. Come on, I won't tell.", props = { speaker = "npc", npcId = "npc_nina" } },
+    { type = "dialog", content = "Not a chance.", props = { speaker = "player" } },
+    { type = "dialog", content = "Your loss, sweetie. Next time, then.", props = { speaker = "npc", npcId = "npc_nina" } },
+  ] },
+  { type = "paragraph", content = "You put your own clothes back on, your face hot, and hang the skirt where you'll find it next time." },
+]
+
+[canvases.nodes.exit_block]
+type = "choices"
+
+[[canvases.nodes.exit_block.choices]]
+text = "Done"
+targetType = "location"
+locationId = "hood_clothes"
+time_progression_minutes = 15
 
 # ── P04 · travel: four one-screen canvases. A canvas's costs are checked and taken on entry, and an
 # unaffordable one shows dimmed with its cost (v2.py:6700-6732); the choice spends the minutes. ──

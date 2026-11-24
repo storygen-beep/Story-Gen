@@ -15,6 +15,8 @@ narration_person = "second"
 clothing_enabled = true
 wardrobe_location = "home_her_room"
 wardrobe_anywhere = false
+# P35 — the clothes shop: "Browse Clothes" on its screen (template_import.py:3158, v2.py:11386).
+shop_location = "hood_clothes"
 
 # The game starts on her first day of college: Monday, week 1, 07:00 (template_import.py:2319-2325).
 [time]
@@ -81,6 +83,7 @@ bands = [
   { min = 80, max = 100, text = "On Display" },
 ]
 
+
 # P11 — goal 1's count and the rent total, internal (not on the sidebar).
 [[traits.labels]]
 key = "sundays_paid"
@@ -99,6 +102,7 @@ key = "meals_today"
 label = "Meals today"
 hidden = true
 toast = false
+
 
 [[traits.labels]]
 key = "want"
@@ -184,6 +188,12 @@ when = [{ flag = "met_chris", op = "is_true" }]
 text = "Chris, 24. The café's barista. Tom gave you his afternoons."
 tip = "He has the counter weekday mornings until 3pm, and weekends until 8pm."
 
+[[quest_cards]]
+npc_id = "npc_nina"
+when = [{ flag = "met_nina", op = "is_true" }]
+text = "Nina, 26. She runs the clothes shop on your street."
+tip = "Behind the till Monday to Saturday, 10am to 7pm."
+
 # P42 — the day turn clears the once-a-day talk flags (v2.py:1269-1277, v2.py:7158).
 [engine.daily_tick]
 flagEffects = [
@@ -204,3 +214,211 @@ traitEffects = [
   # P34 — meals: one count a day
   { targetType = "player", trait = "meals_today", op = "set", value = 0 },
 ]
+
+# P35 — the room layout, since the table layout's tiers read corruption only (PLAN §8d).
+[ui]
+clothes_layout = "room"
+
+# ── P08 · the phone: Messages only (PLAN §8e). One text from each person some hours after she meets
+# them, one reply round, a line back. No reply moves a meter or sets a flag. Each trigger's
+# conditions sit one level down (trigger.conditions), or the thread fires unconditionally. ──
+[phone]
+enabled = true
+
+[[phone.apps]]
+id = "messages"
+type = "chat"
+label = "Messages"
+
+[[phone.conversations]]
+id = "text_laura"
+app = "messages"
+npc = "npc_laura"
+notify = "📱 New message"
+[phone.conversations.trigger]
+conditions = { version = "1.0", logic = "AND", items = [{ type = "hours_since_flag", subject = "player", flag_key = "met_laura", operator = "gte", value = 4 }] }
+[[phone.conversations.blocks]]
+type = "message"
+sender = "npc"
+content = "How's the first day, baby? Did you eat?"
+[[phone.conversations.blocks]]
+type = "reply"
+round = 1
+choices = [
+  { text = "It's fine, Mom. I ate." },
+  { text = "It's a lot." },
+  { text = "Stop worrying." },
+]
+[[phone.conversations.blocks]]
+type = "message"
+sender = "npc"
+after_round = 1
+after_choice = 0
+content = "Good. Proud of you. ❤️"
+[[phone.conversations.blocks]]
+type = "message"
+sender = "npc"
+after_round = 1
+after_choice = 1
+content = "It gets easier. Tell me everything tonight."
+[[phone.conversations.blocks]]
+type = "message"
+sender = "npc"
+after_round = 1
+after_choice = 2
+content = "Never. That's my job."
+
+[[phone.conversations]]
+id = "text_ryan"
+app = "messages"
+npc = "npc_ryan"
+notify = "📱 New message"
+[phone.conversations.trigger]
+conditions = { version = "1.0", logic = "AND", items = [{ type = "hours_since_flag", subject = "player", flag_key = "met_ryan", operator = "gte", value = 6 }] }
+[[phone.conversations.blocks]]
+type = "message"
+sender = "npc"
+content = "mark's in a mood. stay out of the living room tonight"
+[[phone.conversations.blocks]]
+type = "reply"
+round = 1
+choices = [
+  { text = "Thanks for the warning" },
+  { text = "Why are you telling me?" },
+]
+[[phone.conversations.blocks]]
+type = "message"
+sender = "npc"
+after_round = 1
+after_choice = 0
+content = "np"
+[[phone.conversations.blocks]]
+type = "message"
+sender = "npc"
+after_round = 1
+after_choice = 1
+content = "dunno. figured you'd want to know"
+
+[[phone.conversations]]
+id = "text_mark"
+app = "messages"
+npc = "npc_mark"
+notify = "📱 New message"
+[phone.conversations.trigger]
+conditions = { version = "1.0", logic = "AND", items = [{ type = "hours_since_flag", subject = "player", flag_key = "met_mark", operator = "gte", value = 10 }] }
+[[phone.conversations.blocks]]
+type = "message"
+sender = "npc"
+content = "Sunday. Seventy-five. Don't make me ask twice."
+[[phone.conversations.blocks]]
+type = "reply"
+round = 1
+choices = [
+  { text = "I know." },
+  { text = "I'm working on it." },
+]
+[[phone.conversations.blocks]]
+type = "message"
+sender = "npc"
+after_round = 1
+after_choice = 0
+content = "Good."
+[[phone.conversations.blocks]]
+type = "message"
+sender = "npc"
+after_round = 1
+after_choice = 1
+content = "Work faster, kid."
+
+[[phone.conversations]]
+id = "text_tom"
+app = "messages"
+npc = "npc_tom"
+notify = "📱 New message"
+[phone.conversations.trigger]
+conditions = { version = "1.0", logic = "AND", items = [{ type = "hours_since_flag", subject = "player", flag_key = "met_tom", operator = "gte", value = 3 }] }
+[[phone.conversations.blocks]]
+type = "message"
+sender = "npc"
+content = "Tom from the café. Come in when you want, as long as one of us is here till you're done."
+[[phone.conversations.blocks]]
+type = "reply"
+round = 1
+choices = [
+  { text = "I won't." },
+  { text = "Yes, boss." },
+]
+[[phone.conversations.blocks]]
+type = "message"
+sender = "npc"
+after_round = 1
+after_choice = 0
+content = "We'll see."
+[[phone.conversations.blocks]]
+type = "message"
+sender = "npc"
+after_round = 1
+after_choice = 1
+content = "I like the sound of that."
+
+[[phone.conversations]]
+id = "text_chris"
+app = "messages"
+npc = "npc_chris"
+notify = "📱 New message"
+[phone.conversations.trigger]
+conditions = { version = "1.0", logic = "AND", items = [{ type = "hours_since_flag", subject = "player", flag_key = "cafe_first_shift_done", operator = "gte", value = 3 }] }
+[[phone.conversations.blocks]]
+type = "message"
+sender = "npc"
+content = "it's chris. you still owe me for showing you the machine, new girl"
+[[phone.conversations.blocks]]
+type = "reply"
+round = 1
+choices = [
+  { text = "I owe you nothing." },
+  { text = "What do you want?" },
+]
+[[phone.conversations.blocks]]
+type = "message"
+sender = "npc"
+after_round = 1
+after_choice = 0
+content = "we'll see about that"
+[[phone.conversations.blocks]]
+type = "message"
+sender = "npc"
+after_round = 1
+after_choice = 1
+content = "you'll find out 😏"
+
+[[phone.conversations]]
+id = "text_nina"
+app = "messages"
+npc = "npc_nina"
+notify = "📱 New message"
+[phone.conversations.trigger]
+conditions = { version = "1.0", logic = "AND", items = [{ type = "hours_since_flag", subject = "player", flag_key = "met_nina", operator = "gte", value = 4 }] }
+[[phone.conversations.blocks]]
+type = "message"
+sender = "npc"
+content = "It's Nina, from the shop. Come back when you're feeling brave. The back rail misses you."
+[[phone.conversations.blocks]]
+type = "reply"
+round = 1
+choices = [
+  { text = "Maybe." },
+  { text = "What's on the back rail?" },
+]
+[[phone.conversations.blocks]]
+type = "message"
+sender = "npc"
+after_round = 1
+after_choice = 0
+content = "That's a yes, then."
+[[phone.conversations.blocks]]
+type = "message"
+sender = "npc"
+after_round = 1
+after_choice = 1
+content = "Come and see. Bring your nerve."

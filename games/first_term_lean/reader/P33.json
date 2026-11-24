@@ -1,6 +1,6 @@
 {
  "piece": "P33",
- "pass": 3,
+ "pass": 5,
  "screens": {
   "body_run.run": {
    "text": "30c91aa93a1f5b0b",
@@ -8,9 +8,9 @@
    "all": "b184641b5e03737b"
   },
   "body_workout.lift": {
-   "text": "b2f3329ba1e60bd4",
+   "text": "b0c43c3aa325a5e3",
    "facts": "c6185ad809e8ab04",
-   "all": "ffb3fd3c58f72638"
+   "all": "6bca8b39dd459470"
   },
   "body_mirror.fix": {
    "text": "eecca1bddbdeb214",
@@ -33,11 +33,11 @@
    "all": "4eaa84db61bed537"
   },
   "body_grass.sit": {
-   "text": "b710a047201cbacf",
+   "text": "762aaf6daecff423",
    "facts": "9df05c3a3b8296d2",
-   "all": "036e04be833bc4da"
+   "all": "f9166a6788183351"
   },
-  "*": "2f58a697731569d5"
+  "*": "55959d0c31ac212b"
  },
  "rows": {
   "B1": "5276068df1ca6fa9",
@@ -327,25 +327,25 @@
     "all": "78169f3a60359c09"
    },
    "row_hash": "c1c0e2ac2588a579",
-   "carried": false,
+   "carried": true,
    "pass": 3
   },
   {
    "row": "B10",
    "screen": "body_grass.sit",
    "verdict": "PASS",
-   "line": "You lie back on the grass with your bag under your head and stare up at the sky until your head clears.",
-   "why": "texture only, true at 8am and 8pm and on repeat",
+   "line": "When you sit up, you're already thinking about money again.",
+   "why": "no person, no past behind a flag; 'again' is true from the opening's rent on every visit, any hour (the sky line holds at night too)",
    "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "b710a047201cbacf",
+    "text": "762aaf6daecff423",
     "facts": "9df05c3a3b8296d2",
-    "all": "036e04be833bc4da"
+    "all": "f9166a6788183351"
    },
    "row_hash": "c1c0e2ac2588a579",
-   "carried": false,
-   "pass": 3
+   "carried": true,
+   "pass": 4
   },
   {
    "row": "B10",
@@ -361,7 +361,7 @@
     "all": "4eaa84db61bed537"
    },
    "row_hash": "c1c0e2ac2588a579",
-   "carried": false,
+   "carried": true,
    "pass": 3
   },
   {
@@ -420,17 +420,17 @@
    "screen": "body_workout.lift",
    "verdict": "PASS",
    "line": "Two guys at the rack stop talking when you bend for the kettlebell.",
-   "why": "strangers only, any gym hour, nothing past or first-time claimed; true on first, last minute and repeat",
+   "why": "anonymous texture that fits any open hour 06:00-22:00; the day pass matches the $5 cost on every visit; 'Next time you'll know where to stand' is her resolve and holds on a repeat",
    "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "b2f3329ba1e60bd4",
+    "text": "b0c43c3aa325a5e3",
     "facts": "c6185ad809e8ab04",
-    "all": "ffb3fd3c58f72638"
+    "all": "6bca8b39dd459470"
    },
    "row_hash": "c1c0e2ac2588a579",
-   "carried": false,
-   "pass": 3
+   "carried": true,
+   "pass": 4
   },
   {
    "row": "B11",
@@ -816,25 +816,25 @@
     "all": "78169f3a60359c09"
    },
    "row_hash": "4d1fce1c4523b5d4",
-   "carried": false,
+   "carried": true,
    "pass": 3
   },
   {
    "row": "B3",
    "screen": "body_grass.sit",
-   "verdict": "FAIL",
-   "line": "When you sit up, you know what you're doing next.",
-   "why": "claims a next step but names none; the hook points at nothing",
-   "cause": "P33c1-1",
+   "verdict": "PASS",
+   "line": "When you sit up, you're already thinking about money again.",
+   "why": "the last line now names where she goes next: money, the rent and the work that pays it",
+   "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "b710a047201cbacf",
+    "text": "762aaf6daecff423",
     "facts": "9df05c3a3b8296d2",
-    "all": "036e04be833bc4da"
+    "all": "f9166a6788183351"
    },
    "row_hash": "4d1fce1c4523b5d4",
-   "carried": false,
-   "pass": 3
+   "carried": true,
+   "pass": 4
   },
   {
    "row": "B3",
@@ -850,7 +850,7 @@
     "all": "4eaa84db61bed537"
    },
    "row_hash": "4d1fce1c4523b5d4",
-   "carried": false,
+   "carried": true,
    "pass": 3
   },
   {
@@ -918,7 +918,7 @@
     "all": "ffb3fd3c58f72638"
    },
    "row_hash": "4d1fce1c4523b5d4",
-   "carried": false,
+   "carried": true,
    "pass": 3
   },
   {
@@ -1212,7 +1212,7 @@
     "all": "78169f3a60359c09"
    },
    "row_hash": "80d415cf08e0ebfe",
-   "carried": false,
+   "carried": true,
    "pass": 3
   },
   {
@@ -1220,17 +1220,17 @@
    "screen": "body_grass.sit",
    "verdict": "PASS",
    "line": "Sit on the grass (30 min, +5 energy)",
-   "why": "matches effects and PLAN line 356; no garment",
+   "why": "30 min, +5 energy clamped, 2 a day match the card and the built trigger; no garment named",
    "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "b710a047201cbacf",
+    "text": "762aaf6daecff423",
     "facts": "9df05c3a3b8296d2",
-    "all": "036e04be833bc4da"
+    "all": "f9166a6788183351"
    },
    "row_hash": "80d415cf08e0ebfe",
-   "carried": false,
-   "pass": 3
+   "carried": true,
+   "pass": 4
   },
   {
    "row": "B8",
@@ -1246,7 +1246,7 @@
     "all": "4eaa84db61bed537"
    },
    "row_hash": "80d415cf08e0ebfe",
-   "carried": false,
+   "carried": true,
    "pass": 3
   },
   {
@@ -1305,17 +1305,17 @@
    "screen": "body_workout.lift",
    "verdict": "PASS",
    "line": "Work out ($5, 1 hour, 20 energy)",
-   "why": "costs money 5, energy 20, 60 min = PLAN \u00a78 ($5 day pass, 1 hour, 20 energy); no garment named",
+   "why": "costs money 5 and energy 20, Done spends 60 min, as the card says; prose names no garment, the clothes are a condition",
    "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "b2f3329ba1e60bd4",
+    "text": "b0c43c3aa325a5e3",
     "facts": "c6185ad809e8ab04",
-    "all": "ffb3fd3c58f72638"
+    "all": "6bca8b39dd459470"
    },
    "row_hash": "80d415cf08e0ebfe",
-   "carried": false,
-   "pass": 3
+   "carried": true,
+   "pass": 4
   },
   {
    "row": "B9",
@@ -1429,18 +1429,18 @@
    "row": "C1158",
    "screen": "body_workout.lift",
    "verdict": "PASS",
-   "line": "Two guys at the rack stop talking when you bend for the kettlebell.",
-   "why": "names no garment; row is gated on leggings + sports_top equipped anyway",
+   "line": "You feel it on the back of your thighs.",
+   "why": "the prose names no garment now; leggings and sports_top are backed by the trigger's clothing_item conditions",
    "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "b2f3329ba1e60bd4",
+    "text": "b0c43c3aa325a5e3",
     "facts": "c6185ad809e8ab04",
-    "all": "ffb3fd3c58f72638"
+    "all": "6bca8b39dd459470"
    },
    "row_hash": "f40f51a0fd6cfd10",
-   "carried": false,
-   "pass": 3
+   "carried": true,
+   "pass": 4
   },
   {
    "row": "C1173",
@@ -1567,18 +1567,18 @@
    "row": "C1206",
    "screen": "body_workout.lift",
    "verdict": "PASS",
-   "line": "Two guys at the rack stop talking when you bend for the kettlebell.",
-   "why": "no garment named on screen",
+   "line": "You finish the set with your back to them.",
+   "why": "no garment named; the only garment text is locked_text 'Needs leggings and a sports top', shown when she lacks them, which is true",
    "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "b2f3329ba1e60bd4",
+    "text": "b0c43c3aa325a5e3",
     "facts": "c6185ad809e8ab04",
-    "all": "ffb3fd3c58f72638"
+    "all": "6bca8b39dd459470"
    },
    "row_hash": "bfff76edbee583de",
-   "carried": false,
-   "pass": 3
+   "carried": true,
+   "pass": 4
   },
   {
    "row": "C1220",
@@ -1956,17 +1956,17 @@
    "screen": "body_workout.lift",
    "verdict": "FAIL",
    "line": "Work out ($5, 1 hour, 20 energy) (5 Money)",
-   "why": "greyed tag is always costs[0] (v2.py:6747); with $5+ but under 20 energy it prints '(5 Money)', not the energy need",
+   "why": "note row: the greyed tag is always costs[0] (v2.py:6746-6749); with $5+ but under 20 energy it still prints '(5 Money)'; unchanged as built",
    "cause": null,
    "note": true,
    "screen_hash": {
-    "text": "b2f3329ba1e60bd4",
+    "text": "b0c43c3aa325a5e3",
     "facts": "c6185ad809e8ab04",
-    "all": "ffb3fd3c58f72638"
+    "all": "6bca8b39dd459470"
    },
    "row_hash": "8c9dc844365f81a5",
-   "carried": false,
-   "pass": 3
+   "carried": true,
+   "pass": 4
   },
   {
    "row": "C1421",
@@ -2007,17 +2007,17 @@
    "screen": "body_workout.lift",
    "verdict": "FAIL",
    "line": "(5 Money)",
-   "why": "energy-short only, the told requirement is money, not energy (v2.py:6746-6749)",
+   "why": "note row: energy-short only, the told requirement is money, not energy (v2.py:6746-6749); unchanged as built",
    "cause": null,
    "note": true,
    "screen_hash": {
-    "text": "b2f3329ba1e60bd4",
+    "text": "b0c43c3aa325a5e3",
     "facts": "c6185ad809e8ab04",
-    "all": "ffb3fd3c58f72638"
+    "all": "6bca8b39dd459470"
    },
    "row_hash": "ef34ee4a51e65d00",
-   "carried": false,
-   "pass": 3
+   "carried": true,
+   "pass": 4
   },
   {
    "row": "C1423",
@@ -2180,25 +2180,25 @@
     "all": "78169f3a60359c09"
    },
    "row_hash": "b8cdd5b1ce3f89ea",
-   "carried": false,
+   "carried": true,
    "pass": 3
   },
   {
    "row": "C149",
    "screen": "body_grass.sit",
-   "verdict": "FAIL",
-   "line": "When you sit up, you know what you're doing next.",
-   "why": "claims a next step but names none; the hook points at nothing",
-   "cause": "P33c1-1",
+   "verdict": "PASS",
+   "line": "When you sit up, you're already thinking about money again.",
+   "why": "points at what comes next: earning the rent",
+   "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "b710a047201cbacf",
+    "text": "762aaf6daecff423",
     "facts": "9df05c3a3b8296d2",
-    "all": "036e04be833bc4da"
+    "all": "f9166a6788183351"
    },
    "row_hash": "b8cdd5b1ce3f89ea",
-   "carried": false,
-   "pass": 3
+   "carried": true,
+   "pass": 4
   },
   {
    "row": "C149",
@@ -2214,7 +2214,7 @@
     "all": "4eaa84db61bed537"
    },
    "row_hash": "b8cdd5b1ce3f89ea",
-   "carried": false,
+   "carried": true,
    "pass": 3
   },
   {
@@ -2282,7 +2282,7 @@
     "all": "ffb3fd3c58f72638"
    },
    "row_hash": "b8cdd5b1ce3f89ea",
-   "carried": false,
+   "carried": true,
    "pass": 3
   },
   {
@@ -2456,19 +2456,19 @@
   {
    "row": "C311",
    "screen": "body_workout.lift",
-   "verdict": "FAIL",
-   "line": "You feel it on the back of your thighs, and you finish the set anyway.",
-   "why": "body part and their reaction are there, and a hook now; no 'not yet' and no price to her: she just finishes the set",
-   "cause": "P33c1-2",
+   "verdict": "PASS",
+   "line": "You feel it on the back of your thighs. You finish the set with your back to them. Next time you'll know where to stand.",
+   "why": "her body (back of her thighs), their reaction (they stop talking), a not-yet (she turns her back on them this time), and a hook (next time, where she stands)",
+   "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "b2f3329ba1e60bd4",
+    "text": "b0c43c3aa325a5e3",
     "facts": "c6185ad809e8ab04",
-    "all": "ffb3fd3c58f72638"
+    "all": "6bca8b39dd459470"
    },
    "row_hash": "bad20c9f078e8b87",
-   "carried": false,
-   "pass": 3
+   "carried": true,
+   "pass": 4
   },
   {
    "row": "C314",
@@ -2613,25 +2613,25 @@
     "all": "78169f3a60359c09"
    },
    "row_hash": "b01ad555668aba2d",
-   "carried": false,
+   "carried": true,
    "pass": 3
   },
   {
    "row": "C450",
    "screen": "body_grass.sit",
-   "verdict": "FAIL",
-   "line": "When you sit up, you know what you're doing next.",
-   "why": "claims a next step but names none; the hook points at nothing",
-   "cause": "P33c1-1",
+   "verdict": "PASS",
+   "line": "When you sit up, you're already thinking about money again.",
+   "why": "ends on a hook toward the money she has to make",
+   "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "b710a047201cbacf",
+    "text": "762aaf6daecff423",
     "facts": "9df05c3a3b8296d2",
-    "all": "036e04be833bc4da"
+    "all": "f9166a6788183351"
    },
    "row_hash": "b01ad555668aba2d",
-   "carried": false,
-   "pass": 3
+   "carried": true,
+   "pass": 4
   },
   {
    "row": "C450",
@@ -2647,7 +2647,7 @@
     "all": "4eaa84db61bed537"
    },
    "row_hash": "b01ad555668aba2d",
-   "carried": false,
+   "carried": true,
    "pass": 3
   },
   {
@@ -2715,7 +2715,7 @@
     "all": "ffb3fd3c58f72638"
    },
    "row_hash": "b01ad555668aba2d",
-   "carried": false,
+   "carried": true,
    "pass": 3
   },
   {
@@ -2745,7 +2745,7 @@
     "all": "78169f3a60359c09"
    },
    "row_hash": "67e48e60d5053a2e",
-   "carried": false,
+   "carried": true,
    "pass": 3
   },
   {
@@ -2753,17 +2753,17 @@
    "screen": "body_grass.sit",
    "verdict": "PASS",
    "line": "You lie back on the grass with your bag under your head and stare up at the sky until your head clears.",
-   "why": "every claim holds at every reachable minute and on repeat (as B10)",
+   "why": "no claim that can clash at any hour (the quad has no hours) or on a repeat",
    "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "b710a047201cbacf",
+    "text": "762aaf6daecff423",
     "facts": "9df05c3a3b8296d2",
-    "all": "036e04be833bc4da"
+    "all": "f9166a6788183351"
    },
    "row_hash": "67e48e60d5053a2e",
-   "carried": false,
-   "pass": 3
+   "carried": true,
+   "pass": 4
   },
   {
    "row": "C460",
@@ -2779,7 +2779,7 @@
     "all": "4eaa84db61bed537"
    },
    "row_hash": "67e48e60d5053a2e",
-   "carried": false,
+   "carried": true,
    "pass": 3
   },
   {
@@ -2837,18 +2837,18 @@
    "row": "C460",
    "screen": "body_workout.lift",
    "verdict": "PASS",
-   "line": "Two guys at the rack stop talking when you bend for the kettlebell.",
-   "why": "every claim holds at every reachable minute and on repeat (as B10)",
+   "line": "You pay at the desk for a day pass and find a bench by the mirrors.",
+   "why": "paying matches the $5 cost each visit; the mirrors are in the gym's description; the two guys are anonymous and fit any open hour",
    "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "b2f3329ba1e60bd4",
+    "text": "b0c43c3aa325a5e3",
     "facts": "c6185ad809e8ab04",
-    "all": "ffb3fd3c58f72638"
+    "all": "6bca8b39dd459470"
    },
    "row_hash": "67e48e60d5053a2e",
-   "carried": false,
-   "pass": 3
+   "carried": true,
+   "pass": 4
   },
   {
    "row": "C461",
@@ -2877,25 +2877,25 @@
     "all": "78169f3a60359c09"
    },
    "row_hash": "310706ee076318f2",
-   "carried": false,
+   "carried": true,
    "pass": 3
   },
   {
    "row": "C461",
    "screen": "body_grass.sit",
    "verdict": "PASS",
-   "line": "You lie back on the grass with your bag under your head and stare up at the sky until your head clears.",
-   "why": "texture that can't clash",
+   "line": "you're already thinking about money again.",
+   "why": "texture and her own concern; nothing that can clash",
    "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "b710a047201cbacf",
+    "text": "762aaf6daecff423",
     "facts": "9df05c3a3b8296d2",
-    "all": "036e04be833bc4da"
+    "all": "f9166a6788183351"
    },
    "row_hash": "310706ee076318f2",
-   "carried": false,
-   "pass": 3
+   "carried": true,
+   "pass": 4
   },
   {
    "row": "C461",
@@ -2911,7 +2911,7 @@
     "all": "4eaa84db61bed537"
    },
    "row_hash": "310706ee076318f2",
-   "carried": false,
+   "carried": true,
    "pass": 3
   },
   {
@@ -2969,18 +2969,18 @@
    "row": "C461",
    "screen": "body_workout.lift",
    "verdict": "PASS",
-   "line": "Two guys at the rack stop talking when you bend for the kettlebell.",
-   "why": "texture that can't clash",
+   "line": "Next time you'll know where to stand.",
+   "why": "her opinion and anonymous texture, allowed under the truth rule",
    "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "b2f3329ba1e60bd4",
+    "text": "b0c43c3aa325a5e3",
     "facts": "c6185ad809e8ab04",
-    "all": "ffb3fd3c58f72638"
+    "all": "6bca8b39dd459470"
    },
    "row_hash": "310706ee076318f2",
-   "carried": false,
-   "pass": 3
+   "carried": true,
+   "pass": 4
   },
   {
    "row": "C519",
@@ -2998,10 +2998,10 @@
   {
    "row": "C541",
    "screen": "body_lunch.eat",
-   "verdict": "FAIL",
-   "line": "Done: meals_today +1",
-   "why": "meals_today is hidden (traits.labels hidden = true), but no toast = false in the built TOML and setup.noToastTraits = [] in output/index.html, so '+1 Meals today' prints for a stat never shown",
-   "cause": "P33c1-3",
+   "verdict": "PASS",
+   "line": "effects = [{ trait = \"energy\", op = \"add\", value = 15, clamp = true }, { trait = \"meals_today\", op = \"add\", value = 1 }]",
+   "why": "meals_today now carries toast = false (0_systems_spec.toml:101); build has setup.noToastTraits = [\"sundays_paid\", \"rent_paid_total\", \"meals_today\"] and the toast loop skips those traits (v2.py:7674, same code in output/index.html), so Done prints only '+15 Energy' for the shown Energy stat; solo screen, no reaction line owed",
+   "cause": null,
    "note": false,
    "screen_hash": {
     "text": "00b85db49e628bf5",
@@ -3010,7 +3010,7 @@
    },
    "row_hash": "880eaf1315fbaa0b",
    "carried": false,
-   "pass": 3
+   "pass": 5
   },
   {
    "row": "C593",
@@ -3112,7 +3112,7 @@
     "all": "78169f3a60359c09"
    },
    "row_hash": "dc9a1fd9dbf3fb87",
-   "carried": false,
+   "carried": true,
    "pass": 3
   },
   {
@@ -3129,7 +3129,7 @@
     "all": "78169f3a60359c09"
    },
    "row_hash": "8e507f7b235acc25",
-   "carried": false,
+   "carried": true,
    "pass": 3
   },
   {
@@ -3146,7 +3146,7 @@
     "all": "78169f3a60359c09"
    },
    "row_hash": "5a85503d3ef5a0fb",
-   "carried": false,
+   "carried": true,
    "pass": 3
   },
   {
@@ -3879,25 +3879,25 @@
     "all": "78169f3a60359c09"
    },
    "row_hash": "4e86d143688ba8e5",
-   "carried": false,
+   "carried": true,
    "pass": 3
   },
   {
    "row": "C927",
    "screen": "body_grass.sit",
    "verdict": "PASS",
-   "line": "Done",
-   "why": "the Done exit carries its own time_progression_minutes (10/30/20/60)",
+   "line": "time_progression_minutes = 30",
+   "why": "the exit carries its own 30 minutes",
    "cause": null,
    "note": true,
    "screen_hash": {
-    "text": "b710a047201cbacf",
+    "text": "762aaf6daecff423",
     "facts": "9df05c3a3b8296d2",
-    "all": "036e04be833bc4da"
+    "all": "f9166a6788183351"
    },
    "row_hash": "4e86d143688ba8e5",
-   "carried": false,
-   "pass": 3
+   "carried": true,
+   "pass": 4
   },
   {
    "row": "C927",
@@ -3913,7 +3913,7 @@
     "all": "4eaa84db61bed537"
    },
    "row_hash": "4e86d143688ba8e5",
-   "carried": false,
+   "carried": true,
    "pass": 3
   },
   {
@@ -3971,18 +3971,18 @@
    "row": "C927",
    "screen": "body_workout.lift",
    "verdict": "PASS",
-   "line": "Done",
-   "why": "the Done exit carries its own time_progression_minutes (10/30/20/60)",
+   "line": "time_progression_minutes = 60",
+   "why": "the exit carries its own 60 minutes",
    "cause": null,
    "note": true,
    "screen_hash": {
-    "text": "b2f3329ba1e60bd4",
+    "text": "b0c43c3aa325a5e3",
     "facts": "c6185ad809e8ab04",
-    "all": "ffb3fd3c58f72638"
+    "all": "6bca8b39dd459470"
    },
    "row_hash": "4e86d143688ba8e5",
-   "carried": false,
-   "pass": 3
+   "carried": true,
+   "pass": 4
   },
   {
    "row": "C928",
@@ -4050,25 +4050,25 @@
     "all": "78169f3a60359c09"
    },
    "row_hash": "1aadffd96e76381c",
-   "carried": false,
+   "carried": true,
    "pass": 3
   },
   {
    "row": "C931",
    "screen": "body_grass.sit",
    "verdict": "N/A",
-   "line": "\u2014",
-   "why": "no time_of_day condition on this row",
+   "line": "conditions: none",
+   "why": "no time_of_day condition on this row (the quad has no hours)",
    "cause": null,
    "note": true,
    "screen_hash": {
-    "text": "b710a047201cbacf",
+    "text": "762aaf6daecff423",
     "facts": "9df05c3a3b8296d2",
-    "all": "036e04be833bc4da"
+    "all": "f9166a6788183351"
    },
    "row_hash": "1aadffd96e76381c",
-   "carried": false,
-   "pass": 3
+   "carried": true,
+   "pass": 4
   },
   {
    "row": "C931",
@@ -4084,7 +4084,7 @@
     "all": "4eaa84db61bed537"
    },
    "row_hash": "1aadffd96e76381c",
-   "carried": false,
+   "carried": true,
    "pass": 3
   },
   {
@@ -4142,18 +4142,18 @@
    "row": "C931",
    "screen": "body_workout.lift",
    "verdict": "N/A",
-   "line": "\u2014",
-   "why": "no time_of_day condition on this row",
+   "line": "conditions: clothing_item leggings, sports_top",
+   "why": "no time_of_day condition; the gym's location hours gate it",
    "cause": null,
    "note": true,
    "screen_hash": {
-    "text": "b2f3329ba1e60bd4",
+    "text": "b0c43c3aa325a5e3",
     "facts": "c6185ad809e8ab04",
-    "all": "ffb3fd3c58f72638"
+    "all": "6bca8b39dd459470"
    },
    "row_hash": "1aadffd96e76381c",
-   "carried": false,
-   "pass": 3
+   "carried": true,
+   "pass": 4
   },
   {
    "row": "C951",
@@ -4251,25 +4251,25 @@
     "all": "78169f3a60359c09"
    },
    "row_hash": "13a714429d15f3b2",
-   "carried": false,
+   "carried": true,
    "pass": 3
   },
   {
    "row": "L106",
    "screen": "body_grass.sit",
    "verdict": "PASS",
-   "line": "You lie back on the grass with your bag under your head and stare up at the sky until your head clears.",
-   "why": "names no person with rows; strangers only",
+   "line": "You lie back on the grass",
+   "why": "nobody is named or claimed present",
    "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "b710a047201cbacf",
+    "text": "762aaf6daecff423",
     "facts": "9df05c3a3b8296d2",
-    "all": "036e04be833bc4da"
+    "all": "f9166a6788183351"
    },
    "row_hash": "13a714429d15f3b2",
-   "carried": false,
-   "pass": 3
+   "carried": true,
+   "pass": 4
   },
   {
    "row": "L106",
@@ -4285,7 +4285,7 @@
     "all": "4eaa84db61bed537"
    },
    "row_hash": "13a714429d15f3b2",
-   "carried": false,
+   "carried": true,
    "pass": 3
   },
   {
@@ -4343,18 +4343,18 @@
    "row": "L106",
    "screen": "body_workout.lift",
    "verdict": "PASS",
-   "line": "Two guys at the rack stop talking when you bend for the kettlebell.",
-   "why": "names no person with rows; strangers only",
+   "line": "Two guys at the rack",
+   "why": "anonymous gym-goers, no cast member claimed; nobody on the sheet and none named",
    "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "b2f3329ba1e60bd4",
+    "text": "b0c43c3aa325a5e3",
     "facts": "c6185ad809e8ab04",
-    "all": "ffb3fd3c58f72638"
+    "all": "6bca8b39dd459470"
    },
    "row_hash": "13a714429d15f3b2",
-   "carried": false,
-   "pass": 3
+   "carried": true,
+   "pass": 4
   },
   {
    "row": "L116",
@@ -4465,25 +4465,25 @@
     "all": "78169f3a60359c09"
    },
    "row_hash": "e64ce2672d85d2d8",
-   "carried": false,
+   "carried": true,
    "pass": 3
   },
   {
    "row": "L167",
    "screen": "body_grass.sit",
    "verdict": "PASS",
-   "line": "\u2014",
-   "why": "one row; no different hours on different days of its own",
+   "line": "max_triggers_per_day = 2, cooldown_message = \"you've lazed enough for one day.\"",
+   "why": "one row, same hours every day; no day-kind split",
    "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "b710a047201cbacf",
+    "text": "762aaf6daecff423",
     "facts": "9df05c3a3b8296d2",
-    "all": "036e04be833bc4da"
+    "all": "f9166a6788183351"
    },
    "row_hash": "e64ce2672d85d2d8",
-   "carried": false,
-   "pass": 3
+   "carried": true,
+   "pass": 4
   },
   {
    "row": "L167",
@@ -4499,7 +4499,7 @@
     "all": "4eaa84db61bed537"
    },
    "row_hash": "e64ce2672d85d2d8",
-   "carried": false,
+   "carried": true,
    "pass": 3
   },
   {
@@ -4557,18 +4557,18 @@
    "row": "L167",
    "screen": "body_workout.lift",
    "verdict": "PASS",
-   "line": "\u2014",
-   "why": "one row; no different hours on different days of its own",
+   "line": "location = \"hood_gym\"",
+   "why": "one row; the gym's 06:00-22:00 are the same every day, no day-kind split",
    "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "b2f3329ba1e60bd4",
+    "text": "b0c43c3aa325a5e3",
     "facts": "c6185ad809e8ab04",
-    "all": "ffb3fd3c58f72638"
+    "all": "6bca8b39dd459470"
    },
    "row_hash": "e64ce2672d85d2d8",
-   "carried": false,
-   "pass": 3
+   "carried": true,
+   "pass": 4
   },
   {
    "row": "L70",
@@ -4597,23 +4597,10 @@
    "pass": 1
   }
  ],
- "causes": [
-  {
-   "id": "P33c1-1",
-   "what": "body_grass ends on 'you know what you're doing next', a hook that names nothing ahead"
-  },
-  {
-   "id": "P33c1-2",
-   "what": "body_workout's look has no 'not yet' and no price: she finishes the set and nothing is held back or paid"
-  },
-  {
-   "id": "P33c1-3",
-   "what": "lunch's Done toasts '+1 Meals today' for the hidden meals_today count (toast = false not in the built game)"
-  }
- ],
+ "causes": [],
  "pending": [],
- "asked": 53,
- "answered": 53,
+ "asked": 1,
+ "answered": 1,
  "pass_items": [],
  "unowed": []
 }

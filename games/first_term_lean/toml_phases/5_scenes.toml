@@ -2185,6 +2185,76 @@ locationId = "campus_quad"
 time_progression_minutes = 30
 effects = [{ trait = "energy", op = "add", value = 5, clamp = true }]
 
+# ── P35 · the clothes shop: Nina's meeting (once, by itself on entry, gated on her being there) and the
+# fitting room. "Browse Clothes" is the engine's shop on the room. ──
+
+[[canvases]]
+id = "shop_meet_nina"
+name = "Nina"
+
+[canvases.trigger]
+location = "hood_clothes"
+trigger_mode = "manual"
+is_repeatable = false
+conditions = { version = "1.0", logic = "AND", items = [{ type = "npc_at_location", npc_id = "npc_nina", location_id = "hood_clothes", operator = "is_present" }] }
+
+[[canvases.nodes]]
+id = "meet"
+name = "Nina"
+blocks = [
+  { type = "paragraph", content = "A woman in her twenties is behind the till in a black dress two sizes too confident for a shop this small. She looks you up and down, slowly, and doesn't hide it." },
+  { type = "image", props = { description = "A woman of 26 in a tight black dress behind a boutique till, looking at the camera.", search_queries = ["woman 26 tight black dress behind boutique counter", "shop owner woman at till looking at camera"], pool_dir = "people/nina_till_t0", pool = 1 } },
+  { type = "dialog", content = "Hi, sweetie. I'm Nina. It's my shop. The good stuff's at the back, and it isn't for everyone.", props = { speaker = "npc", npcId = "npc_nina" } },
+  { type = "paragraph", content = "She smiles like she already knows which rail you'll end up at." },
+  { type = "dialog", content = "Just looking.", props = { speaker = "player" } },
+  { type = "dialog", content = "Everyone says that.", props = { speaker = "npc", npcId = "npc_nina" } },
+]
+
+[canvases.nodes.exit_block]
+type = "choices"
+
+[[canvases.nodes.exit_block.choices]]
+text = "Done"
+targetType = "location"
+locationId = "hood_clothes"
+time_progression_minutes = 5
+flagEffects = [{ flag = "met_nina", op = "set" }]
+
+[[canvases]]
+id = "shop_try_on"
+name = "Try something on (15 min)"
+
+[canvases.trigger]
+location = "hood_clothes"
+trigger_mode = "manual"
+is_repeatable = true
+show_when_blocked = true
+cooldown_message = "the fitting room closes at 6:45pm."
+conditions = { version = "1.0", logic = "AND", items = [{ type = "flag", subject = "player", flag_key = "met_nina", operator = "is_true" }, { type = "time_of_day", start_time = "10:00", end_time = "18:45" }] }
+
+[[canvases.nodes]]
+id = "try"
+name = "The fitting room"
+blocks = [
+  { type = "paragraph", content = "You take an armful into the fitting room and pull the curtain. In the mirror you try them one by one: a skirt that stops high on your thighs, a top cut lower than anything you own. You turn and look at your ass in the skirt longer than you mean to." },
+  { type = "image", props = { description = "A woman of 18 in a fitting-room mirror in a short skirt, looking over her shoulder at her own ass. Alone. No phone, not a selfie.", search_queries = ["woman 18 fitting room mirror short skirt looking over shoulder no phone", "girl trying on skirt changing room mirror back view"], pool_dir = "body/fitting_room_t3", pool = 2 } },
+  { type = "group", props = { conditions = { version = "1.0", logic = "AND", items = [{ type = "npc_at_location", npc_id = "npc_nina", location_id = "hood_clothes", operator = "is_present" }] } }, blocks = [
+    { type = "dialog", content = "Let me see. Come on, I won't tell.", props = { speaker = "npc", npcId = "npc_nina" } },
+    { type = "dialog", content = "Not a chance.", props = { speaker = "player" } },
+    { type = "dialog", content = "Your loss, sweetie. Next time, then.", props = { speaker = "npc", npcId = "npc_nina" } },
+  ] },
+  { type = "paragraph", content = "You put your own clothes back on, your face hot, and hang the skirt where you'll find it next time." },
+]
+
+[canvases.nodes.exit_block]
+type = "choices"
+
+[[canvases.nodes.exit_block.choices]]
+text = "Done"
+targetType = "location"
+locationId = "hood_clothes"
+time_progression_minutes = 15
+
 # ── P04 · travel: four one-screen canvases. A canvas's costs are checked and taken on entry, and an
 # unaffordable one shows dimmed with its cost (v2.py:6700-6732); the choice spends the minutes. ──
 

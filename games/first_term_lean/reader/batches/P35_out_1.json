@@ -1,0 +1,194 @@
+{
+ "verdicts": [
+  {
+   "row": "B10",
+   "screen": "shop_meet_nina.meet",
+   "verdict": "PASS",
+   "line": "She looks you up and down, slowly, and doesn't hide it.",
+   "why": "No garment of hers named; the canvas gates on npc_at_location npc_nina is_present, so 'behind the till' is true at every minute it can fire (her row Mon-Sat 10:00-19:00, activity 'behind the till'); one-time, no second visit."
+  },
+  {
+   "row": "B10",
+   "screen": "shop_try_on.try",
+   "verdict": "PASS",
+   "line": "You put your own clothes back on, your face hot, and hang the skirt where you'll find it next time.",
+   "why": "Bra line gone; Nina's lines sit in an is_present group and the window 10:00-18:45 lies inside her row. On a visit in Mom's borrowed top/skirt (wearable outside, Your Street reads mom_lowcut_top), 'your own clothes' still reads as the clothes she came in, against the shop's stock; 'lower than anything you own' names an unspecified shop top and can't clash with Mom's low-cut top. Second visit: 'take an armful' doesn't contradict the hung skirt."
+  },
+  {
+   "row": "B8",
+   "screen": "shop_meet_nina.meet",
+   "verdict": "PASS",
+   "line": "A woman in her twenties ... I'm Nina.",
+   "why": "Shoes line gone, no garment of hers named; Nina 26 matches npc_nina and the card; no number on screen."
+  },
+  {
+   "row": "B8",
+   "screen": "shop_try_on.try",
+   "verdict": "PASS",
+   "line": "a skirt that stops high on your thighs, a top cut lower than anything you own",
+   "why": "The only garments named are the shop's, backed by the act; the 28 prices and levels match the card, exposure now 1 on push-up bra, thong, heels, platform heels (and every 40/60 item, 2 on mesh top and crotchless), 0 on normal and sexy, as the card says; 15 min on the button and on Done."
+  },
+  {
+   "row": "C1158",
+   "screen": "shop_try_on.try",
+   "verdict": "PASS",
+   "line": "a skirt that stops high on your thighs, a top cut lower than anything you own",
+   "why": "Skirt and top are the shop's, backed by the act of trying on; 'your own clothes' is backed by Your Street's top+bottom (or dress) rule, the only way in."
+  },
+  {
+   "row": "C1206",
+   "screen": "shop_try_on.try",
+   "verdict": "PASS",
+   "line": "You put your own clothes back on",
+   "why": "No garment of hers she may not be wearing is named; the bra line is cut."
+  },
+  {
+   "row": "C1234",
+   "screen": "shop_meet_nina.meet",
+   "verdict": "PASS",
+   "line": "She looks you up and down, slowly, and doesn't hide it. [picture: Nina at the till]",
+   "why": "Nina's picture now sits right after her look."
+  },
+  {
+   "row": "C1234",
+   "screen": "shop_try_on.try",
+   "verdict": "PASS",
+   "line": "You turn and look at your ass in the skirt longer than you mean to. [picture]",
+   "why": "The mirror picture sits right after the line it shows, before she dresses again."
+  },
+  {
+   "row": "C1238",
+   "screen": "shop_try_on.try",
+   "verdict": "PASS",
+   "line": "A woman of 18 in a fitting-room mirror in a short skirt, looking over her shoulder at her own ass.",
+   "why": "Matches its line on every visit; pool 2 shares one description, and the picture now comes before 'own clothes back on'."
+  },
+  {
+   "row": "C1262",
+   "screen": "shop_try_on.try",
+   "verdict": "PASS",
+   "line": "You turn and look at your ass in the skirt longer than you mean to.",
+   "why": "The still is the next block after the body line."
+  },
+  {
+   "row": "C1279",
+   "screen": "shop_try_on.try",
+   "verdict": "PASS",
+   "line": "Alone. No phone, not a selfie.",
+   "why": "Mirror picture's description says 'No phone' and the first search adds 'no phone'."
+  },
+  {
+   "row": "C151",
+   "screen": "shop_try_on.try",
+   "verdict": "FAIL",
+   "line": "Let me see. Come on, I won't tell. / Not a chance. / Your loss, sweetie. Next time, then.",
+   "why": "Note: the repeatable still carries two Nina lines plus hers, not one spoken line (the half-price line is cut, so one fewer)."
+  },
+  {
+   "row": "C450",
+   "screen": "shop_try_on.try",
+   "verdict": "PASS",
+   "line": "and hang the skirt where you'll find it next time.",
+   "why": "The last line now points at the next visit, with Nina's 'Next time, then.' just before it."
+  },
+  {
+   "row": "C460",
+   "screen": "shop_meet_nina.meet",
+   "verdict": "PASS",
+   "line": "A woman in her twenties is behind the till",
+   "why": "Every claim holds: Nina gated present, no garment of hers named, 'the good stuff's at the back, and it isn't for everyone' true (upper levels locked by trait)."
+  },
+  {
+   "row": "C460",
+   "screen": "shop_try_on.try",
+   "verdict": "PASS",
+   "line": "a top cut lower than anything you own",
+   "why": "The half-price promise is cut; nothing promised the game doesn't build; the top is unspecified, so it can be lower than Mom's low-cut top too."
+  },
+  {
+   "row": "C461",
+   "screen": "shop_meet_nina.meet",
+   "verdict": "PASS",
+   "line": "She smiles like she already knows which rail you'll end up at.",
+   "why": "Texture and dialogue that fit Nina's cast entry (shop owner, 26); nothing that can clash."
+  },
+  {
+   "row": "C461",
+   "screen": "shop_try_on.try",
+   "verdict": "PASS",
+   "line": "Let me see. Come on, I won't tell.",
+   "why": "Fits her: the owner teasing through the curtain; her refusal is her opinion."
+  },
+  {
+   "row": "C593",
+   "screen": "shop_meet_nina.meet",
+   "verdict": "PASS",
+   "line": "Hi, sweetie. I'm Nina.",
+   "why": "Nina's term 'sweetie'; grep finds it only in her two lines, nobody else uses it."
+  },
+  {
+   "row": "C593",
+   "screen": "shop_try_on.try",
+   "verdict": "PASS",
+   "line": "Your loss, sweetie. Next time, then.",
+   "why": "Same term, hers alone."
+  },
+  {
+   "row": "C913",
+   "screen": "shop_try_on.try",
+   "verdict": "PASS",
+   "line": "cooldown_message = \"the fitting room closes at 6:45pm.\"",
+   "why": "show_when_blocked plus cooldown_message: from 18:45 it stays as 'Try something on (15 min) \u2014 the fitting room closes at 6:45pm.' (drawn at v2.py:6751-6759)."
+  },
+  {
+   "row": "C916",
+   "screen": "shop_try_on.try",
+   "verdict": "PASS",
+   "line": "Try something on (15 min)",
+   "why": "Something she chooses, and its hours are published on the dimmed line."
+  },
+  {
+   "row": "C927",
+   "screen": "shop_try_on.try",
+   "verdict": "PASS",
+   "line": "time_progression_minutes = 15",
+   "why": "Done spends 15 minutes, as the button says."
+  },
+  {
+   "row": "C930",
+   "screen": "shop_try_on.try",
+   "verdict": "PASS",
+   "line": "show_when_blocked = true",
+   "why": "No longer vanishes 18:45-19:00; it greys. met_nina can't be false while she stands in the open shop (the meeting fires on entry), so only the clock shuts it."
+  },
+  {
+   "row": "C931",
+   "screen": "shop_try_on.try",
+   "verdict": "PASS",
+   "line": "{ type = \"time_of_day\", start_time = \"10:00\", end_time = \"18:45\" }",
+   "why": "End exclusive: last start 18:44, done by 18:59 inside the shop's 19:00 close; greys at 18:45, matching '6:45pm'."
+  },
+  {
+   "row": "L106",
+   "screen": "shop_meet_nina.meet",
+   "verdict": "PASS",
+   "line": "A woman in her twenties is behind the till",
+   "why": "Gated on Nina is_present; who_is_where puts her behind the till Mon-Sat 10:00-19:00."
+  },
+  {
+   "row": "L106",
+   "screen": "shop_try_on.try",
+   "verdict": "PASS",
+   "line": "Nina, through the curtain (group on npc_at_location is_present)",
+   "why": "Her lines show only while her row has her there; the window lies inside it."
+  },
+  {
+   "row": "L167",
+   "screen": "shop_try_on.try",
+   "verdict": "PASS",
+   "line": "the fitting room closes at 6:45pm.",
+   "why": "One row, one window on every open day (the shop is shut Sunday, so no second day kind); greys with show_when_blocked and a cooldown_message naming when it shuts; before 10:00 the place itself is shut."
+  }
+ ],
+ "causes": []
+}

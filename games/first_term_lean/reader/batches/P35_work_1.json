@@ -1,0 +1,139 @@
+{
+ "items": [
+  {
+   "row": "B10",
+   "screen": "shop_meet_nina.meet",
+   "why": "screen changed: truth row"
+  },
+  {
+   "row": "B10",
+   "screen": "shop_try_on.try",
+   "why": "screen changed: truth row"
+  },
+  {
+   "row": "B8",
+   "screen": "shop_meet_nina.meet",
+   "why": "screen changed: truth row"
+  },
+  {
+   "row": "B8",
+   "screen": "shop_try_on.try",
+   "why": "screen changed: truth row"
+  },
+  {
+   "row": "C1158",
+   "screen": "shop_try_on.try",
+   "why": "screen changed: truth row"
+  },
+  {
+   "row": "C1206",
+   "screen": "shop_try_on.try",
+   "why": "screen changed: truth row"
+  },
+  {
+   "row": "C1234",
+   "screen": "shop_meet_nina.meet",
+   "why": "failed last pass"
+  },
+  {
+   "row": "C1234",
+   "screen": "shop_try_on.try",
+   "why": "failed last pass"
+  },
+  {
+   "row": "C1238",
+   "screen": "shop_try_on.try",
+   "why": "failed last pass"
+  },
+  {
+   "row": "C1262",
+   "screen": "shop_try_on.try",
+   "why": "failed last pass"
+  },
+  {
+   "row": "C1279",
+   "screen": "shop_try_on.try",
+   "why": "failed last pass"
+  },
+  {
+   "row": "C151",
+   "screen": "shop_try_on.try",
+   "why": "failed last pass (a note), its screen changed"
+  },
+  {
+   "row": "C450",
+   "screen": "shop_try_on.try",
+   "why": "failed last pass"
+  },
+  {
+   "row": "C460",
+   "screen": "shop_meet_nina.meet",
+   "why": "screen changed: truth row"
+  },
+  {
+   "row": "C460",
+   "screen": "shop_try_on.try",
+   "why": "screen changed: truth row"
+  },
+  {
+   "row": "C461",
+   "screen": "shop_meet_nina.meet",
+   "why": "screen changed: truth row"
+  },
+  {
+   "row": "C461",
+   "screen": "shop_try_on.try",
+   "why": "screen changed: truth row"
+  },
+  {
+   "row": "C593",
+   "screen": "shop_meet_nina.meet",
+   "why": "failed last pass"
+  },
+  {
+   "row": "C593",
+   "screen": "shop_try_on.try",
+   "why": "failed last pass"
+  },
+  {
+   "row": "C913",
+   "screen": "shop_try_on.try",
+   "why": "failed last pass"
+  },
+  {
+   "row": "C916",
+   "screen": "shop_try_on.try",
+   "why": "failed last pass"
+  },
+  {
+   "row": "C927",
+   "screen": "shop_try_on.try",
+   "why": "screen changed: truth row"
+  },
+  {
+   "row": "C930",
+   "screen": "shop_try_on.try",
+   "why": "failed last pass (a note), its screen changed"
+  },
+  {
+   "row": "C931",
+   "screen": "shop_try_on.try",
+   "why": "screen changed: truth row"
+  },
+  {
+   "row": "L106",
+   "screen": "shop_meet_nina.meet",
+   "why": "screen changed: truth row"
+  },
+  {
+   "row": "L106",
+   "screen": "shop_try_on.try",
+   "why": "screen changed: truth row"
+  },
+  {
+   "row": "L167",
+   "screen": "shop_try_on.try",
+   "why": "screen changed: truth row"
+  }
+ ]
+}

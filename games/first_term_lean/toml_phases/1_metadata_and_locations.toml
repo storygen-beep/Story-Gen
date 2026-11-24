@@ -30,6 +30,8 @@ flag_keys = [
   "ate_with_mom_today",
   # P33 — the run, first time
   "ran_once",
+  # P35 — the clothes shop
+  "met_nina",
 ]
 # P13 — the name screen (template_import.py:2332-2357). "name" writes $player.name; any other id
 # becomes $player.<id> (v2.py:1569-1573). Printed with @player / @player.nickname (v2.py:18598-18629).
@@ -195,6 +197,22 @@ image_search_queries = ["woman of 18 sitting on a park bench by a pond", "young 
 entry_from = "hood_street"
 hours = [{ weekdays = [], open = "06:00", close = "21:00" }]
 closed_text = "The park gates are locked. They open at 6am."
+
+# P35 — the clothes shop, off Your Street, Mon–Sat 10am–7pm (PLAN §3, §8d).
+[[locations]]
+id = "hood_clothes"
+name = "Clothes Shop"
+description = "The clothes shop: two narrow aisles of rails, a curtained fitting room at the back, a mirror by the till."
+description_variants = [
+  { conditions = { version = "1.0", logic = "AND", items = [{ type = "flag", subject = "player", flag_key = "met_nina", operator = "is_true" }, { type = "npc_at_location", npc_id = "npc_nina", location_id = "hood_clothes", operator = "is_present" }] }, text = "The clothes shop: two narrow aisles of rails, a curtained fitting room at the back, a mirror by the till. Nina looks up from the till. \"Find anything you're brave enough for?\"" },
+]
+parent = "neighbourhood"
+kind = "destination"
+image = "locations/hood_clothes_t0.jpg"
+image_search_queries = ["woman 18 browsing clothes rail small boutique interior", "girl shopping inside tiny clothes shop rails fitting room"]
+entry_from = "hood_street"
+hours = [{ weekdays = [0, 1, 2, 3, 4, 5], open = "10:00", close = "19:00" }]
+closed_text = "The clothes shop is shut. It opens at 10am, Monday to Saturday."
 
 [[locations]]
 id = "hood_gym"
@@ -626,6 +644,240 @@ name = "Sports top"
 slot = "top"
 type = "fitness"
 
+# P35 — the shop's stock, four levels per slot (PLAN §8d). Above normal needs the trait at 20/40/60;
+# the same conditions gate wearing, so only normal can be bought in release 1.
+
+[[clothing]]
+id = "shop_plain_tee"
+name = "Plain tee"
+slot = "top"
+price = 10
+description = "A plain cotton tee."
+
+[[clothing]]
+id = "shop_crop_top"
+name = "Crop top"
+slot = "top"
+price = 12
+description = "Shows your stomach when you lift your arms."
+conditions = { version = "1.0", logic = "AND", items = [{ type = "trait", subject = "player", trait_key = "exhibitionism", operator = "gte", value = 20 }] }
+
+[[clothing]]
+id = "shop_lowcut_tank"
+name = "Low-cut tank"
+slot = "top"
+price = 20
+exposure = 1
+description = "Cut low enough that your bra won't stay hidden."
+conditions = { version = "1.0", logic = "AND", items = [{ type = "trait", subject = "player", trait_key = "exhibitionism", operator = "gte", value = 40 }] }
+
+[[clothing]]
+id = "shop_mesh_top"
+name = "Sheer mesh top"
+slot = "top"
+price = 30
+exposure = 2
+description = "You can see straight through it."
+conditions = { version = "1.0", logic = "AND", items = [{ type = "trait", subject = "player", trait_key = "exhibitionism", operator = "gte", value = 60 }] }
+
+[[clothing]]
+id = "shop_jeans"
+name = "Blue jeans"
+slot = "bottom"
+price = 25
+description = "Plain blue jeans."
+
+[[clothing]]
+id = "shop_denim_shorts"
+name = "Denim shorts"
+slot = "bottom"
+price = 15
+description = "Short enough to show your legs."
+conditions = { version = "1.0", logic = "AND", items = [{ type = "trait", subject = "player", trait_key = "exhibitionism", operator = "gte", value = 20 }] }
+
+[[clothing]]
+id = "shop_mini_skirt"
+name = "Tight mini skirt"
+slot = "bottom"
+price = 25
+exposure = 1
+description = "Rides up when you sit."
+conditions = { version = "1.0", logic = "AND", items = [{ type = "trait", subject = "player", trait_key = "exhibitionism", operator = "gte", value = 40 }] }
+
+[[clothing]]
+id = "shop_micro_skirt"
+name = "Micro skirt"
+slot = "bottom"
+price = 30
+exposure = 1
+description = "Barely covers your ass."
+conditions = { version = "1.0", logic = "AND", items = [{ type = "trait", subject = "player", trait_key = "exhibitionism", operator = "gte", value = 60 }] }
+
+[[clothing]]
+id = "shop_summer_dress"
+name = "Summer dress"
+slot = "dress"
+price = 25
+description = "A light dress to the knee."
+
+[[clothing]]
+id = "shop_black_dress"
+name = "Tight black dress"
+slot = "dress"
+price = 30
+description = "Hugs every curve."
+conditions = { version = "1.0", logic = "AND", items = [{ type = "trait", subject = "player", trait_key = "exhibitionism", operator = "gte", value = 20 }] }
+
+[[clothing]]
+id = "shop_backless_dress"
+name = "Backless mini dress"
+slot = "dress"
+price = 45
+exposure = 1
+description = "Bare from the neck to the small of your back."
+conditions = { version = "1.0", logic = "AND", items = [{ type = "trait", subject = "player", trait_key = "exhibitionism", operator = "gte", value = 40 }] }
+
+[[clothing]]
+id = "shop_cutout_dress"
+name = "Cut-out bodycon dress"
+slot = "dress"
+price = 60
+exposure = 1
+description = "More cut out than dress."
+conditions = { version = "1.0", logic = "AND", items = [{ type = "trait", subject = "player", trait_key = "exhibitionism", operator = "gte", value = 60 }] }
+
+[[clothing]]
+id = "shop_cotton_bra"
+name = "Cotton bra"
+slot = "bra"
+price = 8
+description = "Plain and comfortable."
+
+[[clothing]]
+id = "shop_lace_bra"
+name = "Lace bra"
+slot = "bra"
+price = 12
+description = "Thin lace, pretty."
+conditions = { version = "1.0", logic = "AND", items = [{ type = "trait", subject = "player", trait_key = "corruption", operator = "gte", value = 20 }] }
+
+[[clothing]]
+id = "shop_pushup_bra"
+exposure = 1
+name = "Push-up bra"
+slot = "bra"
+price = 20
+description = "Lifts everything."
+conditions = { version = "1.0", logic = "AND", items = [{ type = "trait", subject = "player", trait_key = "corruption", operator = "gte", value = 40 }] }
+
+[[clothing]]
+id = "shop_sheer_bra"
+name = "Sheer bra"
+slot = "bra"
+price = 25
+exposure = 1
+description = "Hides nothing."
+conditions = { version = "1.0", logic = "AND", items = [{ type = "trait", subject = "player", trait_key = "corruption", operator = "gte", value = 60 }] }
+
+[[clothing]]
+id = "shop_cotton_briefs"
+name = "Cotton briefs"
+slot = "underwear"
+price = 5
+description = "Plain cotton."
+
+[[clothing]]
+id = "shop_lace_panties"
+name = "Lace panties"
+slot = "underwear"
+price = 8
+description = "Thin lace."
+conditions = { version = "1.0", logic = "AND", items = [{ type = "trait", subject = "player", trait_key = "corruption", operator = "gte", value = 20 }] }
+
+[[clothing]]
+id = "shop_thong"
+exposure = 1
+name = "Thong"
+slot = "underwear"
+price = 12
+description = "Leaves your ass bare."
+conditions = { version = "1.0", logic = "AND", items = [{ type = "trait", subject = "player", trait_key = "corruption", operator = "gte", value = 40 }] }
+
+[[clothing]]
+id = "shop_crotchless"
+name = "Crotchless panties"
+slot = "underwear"
+price = 20
+exposure = 2
+description = "Open where it counts."
+conditions = { version = "1.0", logic = "AND", items = [{ type = "trait", subject = "player", trait_key = "corruption", operator = "gte", value = 60 }] }
+
+[[clothing]]
+id = "shop_tights"
+name = "Tights"
+slot = "legwear"
+price = 6
+description = "Plain black tights."
+
+[[clothing]]
+id = "shop_thigh_highs"
+name = "Thigh-high socks"
+slot = "legwear"
+price = 10
+description = "Up to mid-thigh."
+conditions = { version = "1.0", logic = "AND", items = [{ type = "trait", subject = "player", trait_key = "exhibitionism", operator = "gte", value = 20 }] }
+
+[[clothing]]
+id = "shop_fishnets"
+name = "Fishnets"
+slot = "legwear"
+price = 15
+exposure = 1
+description = "Fishnet tights."
+conditions = { version = "1.0", logic = "AND", items = [{ type = "trait", subject = "player", trait_key = "exhibitionism", operator = "gte", value = 40 }] }
+
+[[clothing]]
+id = "shop_stockings"
+name = "Stockings and garter belt"
+slot = "legwear"
+price = 25
+exposure = 1
+description = "Stockings held up by a garter belt."
+conditions = { version = "1.0", logic = "AND", items = [{ type = "trait", subject = "player", trait_key = "exhibitionism", operator = "gte", value = 60 }] }
+
+[[clothing]]
+id = "shop_flats"
+name = "Flats"
+slot = "shoes"
+price = 15
+description = "Plain flats."
+
+[[clothing]]
+id = "shop_ankle_boots"
+name = "Ankle boots"
+slot = "shoes"
+price = 25
+description = "Short heeled boots."
+conditions = { version = "1.0", logic = "AND", items = [{ type = "trait", subject = "player", trait_key = "exhibitionism", operator = "gte", value = 20 }] }
+
+[[clothing]]
+id = "shop_heels"
+exposure = 1
+name = "Heels"
+slot = "shoes"
+price = 35
+description = "Tall heels."
+conditions = { version = "1.0", logic = "AND", items = [{ type = "trait", subject = "player", trait_key = "exhibitionism", operator = "gte", value = 40 }] }
+
+[[clothing]]
+id = "shop_platforms"
+exposure = 1
+name = "Platform heels"
+slot = "shoes"
+price = 45
+description = "Platform heels you'll have to learn to walk in."
+conditions = { version = "1.0", logic = "AND", items = [{ type = "trait", subject = "player", trait_key = "exhibitionism", operator = "gte", value = 60 }] }
+
 [[clothing]]
 id = "mom_short_skirt"
 name = "Mom's short skirt"
@@ -664,6 +916,20 @@ weekdays = [0, 1, 2, 3, 4, 5]
 start_time = "10:00"
 end_time = "21:00"
 activity = "behind the counter"
+
+[[npcs]]
+id = "npc_nina"
+name = "Nina"
+role = "Clothes shop owner"
+relationship = "Nina, 26. She runs the clothes shop on your street."
+description = "The clothes shop owner, 26."
+
+[[npcs.schedules]]
+location = "hood_clothes"
+weekdays = [0, 1, 2, 3, 4, 5]
+start_time = "10:00"
+end_time = "19:00"
+activity = "behind the till"
 
 [[npcs]]
 id = "npc_chris"

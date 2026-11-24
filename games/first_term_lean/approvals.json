@@ -780,6 +780,48 @@
       "sha256": "87bea8cb8182dbea7dfd847adbeab7dda276b6424fb9e7182bc6a198ceeb8267",
       "words": "ENI for LO (delegated 2026-11-24): \"Yes, lunch shares the meal count, and the run says her body\" (re-recorded after reader fixes that only follow the rules: the grass hook names money; the workout's not-yet, her back to them)",
       "date": "2026-11-24"
+    },
+    {
+      "card": "P35",
+      "sha256": "65634828db2d8e4cc6c8e67d3a24954065d9ba89f604a9bc592847f9faadf35b",
+      "words": "ENI for LO (delegated 2026-11-24): \"Yes, with Nina's meeting gated on her being there\" (re-recorded at build: her one line is a description variant on the shop, since no canvas puts her face on the room; a quest card gated on met_nina keeps her off the Schedules page)",
+      "date": "2026-11-24"
+    },
+    {
+      "card": "P35",
+      "sha256": "c0e49ab11eb8ae31bf5a88b7fce174be27fa293e1eed745c5088378509241fc4",
+      "words": "ENI for LO (delegated 2026-11-24): \"Yes, with Nina's meeting gated on her being there\" (re-recorded at build: her line as a description variant; the fitting room gains her no and Nina's answer for the talk ratio; Sheet synced)",
+      "date": "2026-11-24"
+    },
+    {
+      "card": "P34",
+      "sha256": "a41c3334507b4f3473dfc034342d99e1e47f858cde59050396ca894318d5b7d9",
+      "words": "ENI for LO (delegated 2026-11-24): \"Yes to the pass fixes\" (re-recorded: Does names \"a garment is named\" on Mom's menu, from P07's reworded clothes lines)",
+      "date": "2026-11-24"
+    },
+    {
+      "card": "P35",
+      "sha256": "13fcfb7349e4329d039bd4ff4ec828fc1c4b604bf264d33a1eff0503c188e3b9",
+      "words": "ENI for LO (delegated 2026-11-24): \"Yes, with Nina's meeting gated on her being there\" (re-recorded after reader fixes that only follow the rules: no garment of hers named, no discount the game lacks, pictures after the moment they show, no phone in the mirror, Nina calls her sweetie, the fitting room greys at 6:45pm and ends on a hook, super sexy exposure on four garments, her in the place picture)",
+      "date": "2026-11-24"
+    },
+    {
+      "card": "P35",
+      "sha256": "9ad3f4e90989b06519ac983312ab0948182ec553f09f7eede5bfee07eaf6c98b",
+      "words": "ENI for LO (delegated 2026-11-24): \"Yes, with Nina's meeting gated on her being there\" (re-recorded after reader fixes that only follow the rules, and the talk ratio: Nina's two lines lengthened, one narration line cut)",
+      "date": "2026-11-24"
+    },
+    {
+      "card": "P09",
+      "sha256": "c8cb306043df97fbc7566b7a9ca5d38a57ce512dbe560d8fa36d5cabe707fe31",
+      "words": "ENI for LO (delegated 2026-11-24): \"Yes go ahead\" to building the waiting pieces in order (re-recorded at build: the timetable line keeps Psychology's own name, since a greyed row shows its name, v2.py:6757)",
+      "date": "2026-11-24"
+    },
+    {
+      "card": "P09",
+      "sha256": "9a36321587bba77e1b7c9e81837534f0e8cd12aa628eb8c8705edd03cb11c7af",
+      "words": "ENI for LO (delegated 2026-11-24): \"Yes go ahead\" to building the waiting pieces in order (re-recorded at build: the timetable line keeps Psychology's own name, v2.py:6757; Builds names the Grades sidebar line)",
+      "date": "2026-11-24"
     }
   ]
 }
