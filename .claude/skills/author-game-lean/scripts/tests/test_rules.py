@@ -304,3 +304,56 @@ def test_a_partly_built_card_is_judged_and_its_missing_screen_is_red(game):
     g = check.load_merged(game)
     assert any("start.c is on the card's Sheet: but not built" in r for r in check.check_sheet(game, g)[1])
     assert any("start.c is not built" in r for r in check.check_does(game, g)[1])
+
+
+# ── a mostly rewritten canvas is asked on "*" once (P34, 2026-11-24: 1,986 items after talk lines on 22 screens) ──
+
+def ten_screens(game):
+    nodes = "".join(f'\n[[canvases.nodes]]\nid = "s{i}"\nblocks = [{{ type = "paragraph", content = "Line {i}." }}]\n'
+                    for i in range(10))
+    (game / "toml_phases" / "7_final_game.toml").write_text(
+        '[[locations]]\nid = "home"\n\n[[canvases]]\nid = "big"\n[canvases.trigger]\nlocation = "home"\n' + nodes)
+    does = "Does:\n" + "".join(f"  big.s{i} | a repeatable, the clock moves\n" for i in range(10))
+    (game / "cards" / "p1.md").write_text("PIECE p1\n" + does + "Builds: big, home\n")
+    work = reading.work_list(game, "p1")
+    reading.record(game, "p1", {"verdicts": [dict(row=i["row"], screen="*", verdict="PASS") for i in work["items"]]})
+
+
+def rewrite(game, n):
+    p = game / "toml_phases" / "7_final_game.toml"
+    t = p.read_text()
+    for i in range(n):
+        t = t.replace(f"Line {i}.", f"Line {i}, rewritten.")
+    p.write_text(t)
+
+
+def test_one_changed_screen_of_ten_still_asks_per_screen(game):
+    ten_screens(game)
+    rewrite(game, 1)
+    items = reading.work_list(game, "p1")["items"]
+    assert items and {i["screen"] for i in items} <= {"big.s0", "*"}
+    assert any(i["screen"] == "big.s0" for i in items)
+    assert all(i["screen"] != "*" or i["row"] in reading.SCENE_WIDE for i in items)
+
+
+def test_eight_of_ten_changed_asks_on_star_once(game):
+    ten_screens(game)
+    rewrite(game, 8)
+    items = reading.work_list(game, "p1")["items"]
+    assert items and all(i["screen"] == "*" for i in items)
+    assert len(items) == len({i["row"] for i in items})  # each row once
+    assert any(i["why"].startswith("most of big changed (8 of 10") for i in items)
+
+
+def test_a_fail_on_a_changed_screen_stays_per_screen_either_way(game):
+    ten_screens(game)
+    work = reading.work_list(game, "p1")
+    rec = reading.load_record(game, "p1")
+    rec["verdicts"] = [dict(v, verdict="FAIL", screen="big.s1", cause="c1") if v["row"] == "C460" else v
+                       for v in rec["verdicts"]]
+    rec["causes"] = [{"id": "c1", "what": "x"}]
+    reading.record_path(game, "p1").write_text(__import__("json").dumps(rec))
+    for n in (1, 8):
+        rewrite(game, n)
+        items = reading.work_list(game, "p1")["items"]
+        assert any(i["row"] == "C460" and i["screen"] == "big.s1" for i in items), n

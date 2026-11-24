@@ -241,7 +241,25 @@ def work_list(game_dir, card_id, everything=False, skill=SKILL, game=None):
     def want(row, screen, why):
         wanted.setdefault((row, screen), why)
 
+    # A mostly rewritten canvas (more than half its screens changed text) is read again like a first pass: each row
+    # that fires on one of its changed screens is asked once on "*", not once per screen. Half, because past it a
+    # per-screen list costs more than a first pass and finds nothing a "*" read wouldn't (P34, 2026-11-24: talk lines
+    # on 22 screens made 1,986 items). A FAIL is still asked on its own screen (the verdict loop below).
+    per_canvas, text_changed = {}, {}
+    for s in sc:
+        if s != WHOLE:
+            per_canvas.setdefault(s.split(".", 1)[0], set()).add(s)
+    for s in changed:
+        if kind[s] == "text":
+            text_changed.setdefault(s.split(".", 1)[0], set()).add(s)
+    rewritten = {cv for cv, ss in text_changed.items() if where is not None and len(ss) * 2 > len(per_canvas[cv])}
+    for cv in sorted(rewritten):
+        for r in sorted(rows):
+            if where.get(r, set()) & text_changed[cv]:
+                want(r, WHOLE, f"most of {cv} changed ({len(text_changed[cv])} of {len(per_canvas[cv])} screens)")
     for s in sorted(changed):
+        if kind[s] == "text" and s.split(".", 1)[0] in rewritten:
+            continue
         for r in sorted(rows):
             if where is None or s in where.get(r, ()):
                 if kind[s] == "facts" and where is not None and not reads_facts(r, table):

@@ -630,3 +630,12 @@ Why for all of these: P13's reader found new FAILs on every pass, v5 to v11 (99 
   - **The failure:** under the overlap rule, cards for P08, P09, P33 and P35 were carded before being built, and the read-only check above showed 22 "is on the card's Sheet: but not built" reds and 22 matching `Does:` reds for them. A built piece with a missing screen still goes red: P10 kept its 5.
   - **Why not STATE.md's built date:** a first version skipped cards STATE lists as unbuilt. That would have skipped a new piece during its own build check, because STATE's built date is written when the piece closes. The rule is now: a card none of whose `Sheet:` or `Does:` screens exist is not judged, and a card with some built is judged in full.
   - **Tests:** an unbuilt card isn't judged; a partly built card is judged, and its missing screen is red on both checks.
+- `scripts/reading.py`: a mostly rewritten canvas is asked once on `*` (ENI for LO, standing authorization, 2026-11-24).
+  - **The failure:** P34's pass-1 fixes touched talk lines on 22 screens, so its next work list was 1,986 items: every rule asked once per changed screen, where pass 1 asked its 99 rules once on `*`.
+  - **The fix:** per canvas, when more than half of its screens changed text, each row that fires on one of its changed screens is asked once on `*` ("most of <canvas> changed (n of m screens)"). The threshold is half because past it a per-screen list costs more than a first pass and finds nothing a `*` read wouldn't, while one or two changed screens are still asked per screen.
+    - A FAIL from last pass is still asked on its own screen.
+    - Fact-only changes are unchanged.
+    - A card without `Does:` keeps the old behaviour.
+    - `reader.md` says so.
+  - **Tests:** three new on a ten-screen canvas: one changed screen still asks per screen; eight changed asks each row once on `*`; a FAIL on a changed screen stays on its screen with one change and with eight.
+  - **Verified read-only against the live record:** P34's work list goes from 1,986 to 245 items. 137 are on `*`, 78 are on the screens of canvases under half changed, and 30 are FAILs on their screens.
