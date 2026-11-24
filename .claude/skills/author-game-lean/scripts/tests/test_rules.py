@@ -288,3 +288,19 @@ def test_a_partial_batch_still_refuses_a_star_fail_and_an_off_list_verdict(game)
         reading.record(game, "p1", {"verdicts": [dict(item, verdict="FAIL", cause="c1")], "causes": [{"id": "c1"}]})
     with pytest.raises(ValueError, match="work list"):
         reading.record(game, "p1", {"verdicts": [{"row": "C99999", "screen": "start.a", "verdict": "PASS"}]})
+
+
+def test_a_card_not_built_yet_is_not_judged_by_sheet_or_does(game):
+    # the overlap rule: the next piece is carded and approved while the reader runs, and built later
+    (game / "cards" / "p2.md").write_text("PIECE p2\nSheet:\n  later.a | 09:00–09:05 | home | nobody | any | none\n"
+                                          "Does:\n  later.a | the clock moves\nBuilds: later\n")
+    g = check.load_merged(game)
+    assert not any(r.startswith("p2:") for r in check.check_sheet(game, g)[1] + check.check_does(game, g)[1])
+
+
+def test_a_partly_built_card_is_judged_and_its_missing_screen_is_red(game):
+    card(game, DOES + "  start.c | the clock moves\n",
+         SHEET + "  start.c | 07:15–07:20 | hall | nobody | jeans, pyjamas | met_mom\n")
+    g = check.load_merged(game)
+    assert any("start.c is on the card's Sheet: but not built" in r for r in check.check_sheet(game, g)[1])
+    assert any("start.c is not built" in r for r in check.check_does(game, g)[1])

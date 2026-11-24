@@ -618,3 +618,15 @@ Why for all of these: P13's reader found new FAILs on every pass, v5 to v11 (99 
     - The worked example's café button says it's open whenever the café is open and the manager is there, not at a set hour.
     - **Checked against neighbours:** C1427 and rule 4 ("sized against the window") agree, because the window is the place's open hours. C1446 stays the note it was, and rule 7 cites it.
     - **`plan.md` §6:** one line, "Don't schedule activities around each other."
+- `scripts/sheet.py`, `scripts/scenes.py`: a choice's own clock condition narrows the screens after it (ENI for LO, standing authorization, 2026-11-24).
+  - **The failure:** P34. Rent sits inside Mark's Kitchen menu, which is open whenever he's there, but the choice "Pay the rent (5 min)" carries its own conditions (Sunday, 08:00–11:55). The sheet read only the trigger, so the rent screens said "while npc_mark is there" and missed the Sunday window. The writer copied that wider wording, which weakened the sheet.
+  - **The fix:**
+    - **The sheet:** along each path, the scene-start slots are narrowed by every choice's clock conditions (`choice_narrow`: `when_slots` of the choice's conditions, checked at the minute it's taken). A narrowed screen's clock is written from its slots (`fmt_slots`: "08:00–11:55 · Sun", or one part per day joined " / ").
+    - **A screen reached by several choices:** the union of its paths. `clock_meaning` now reads " / " parts as a union of slots, except on the opening's exact clock, which is unchanged.
+    - **Presence:** `scenes.check_presence` did not narrow by choices before. It now uses the same `sheet.node_starts` (the union over paths), intersected with the groups around the line as before.
+  - **Tests:** three new: an all-week menu with a Sunday-only choice gives its screen a Sunday row; two choices with different days give the union; presence goes green on a Sunday-only line and red once the choice loses its condition.
+  - **Verified read-only:** `mark_kitchen.rent` now reads "08:00–11:55 · Sun". The P11 and P34 card rows that say "while npc_mark is there" are now red, rightly; the game session updates them. Presence is green.
+- `scripts/check.py`: the sheet and `Does:` checks skip a card none of whose screens exist in the build yet (ENI for LO, standing authorization, 2026-11-24).
+  - **The failure:** under the overlap rule, cards for P08, P09, P33 and P35 were carded before being built, and the read-only check above showed 22 "is on the card's Sheet: but not built" reds and 22 matching `Does:` reds for them. A built piece with a missing screen still goes red: P10 kept its 5.
+  - **Why not STATE.md's built date:** a first version skipped cards STATE lists as unbuilt. That would have skipped a new piece during its own build check, because STATE's built date is written when the piece closes. The rule is now: a card none of whose `Sheet:` or `Does:` screens exist is not judged, and a card with some built is judged in full.
+  - **Tests:** an unbuilt card isn't judged; a partly built card is judged, and its missing screen is red on both checks.

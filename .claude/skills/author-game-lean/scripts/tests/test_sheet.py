@@ -8,6 +8,7 @@ sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
 import check  # noqa: E402
 import reading  # noqa: E402
 import sheet  # noqa: E402
+import scenes  # noqa: E402
 from tiny_game import make_game  # noqa: E402
 
 MERGED = """

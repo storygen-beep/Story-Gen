@@ -353,6 +353,15 @@ def check_release(game_dir, game):
     return (RED, rows) if rows else (GREEN, [])
 
 
+def not_built_yet(screens, game):
+    """True when none of a card's Sheet:/Does: screens exist in the build. The overlap rule lets the next piece be
+    carded and approved while the reader runs, so its rows describe screens that don't exist yet; it is judged from
+    its first build on. (STATE.md's built date can't decide this: it is written when the piece closes, after the
+    build's own check.) A card with some screens built and others missing is judged, and its missing ones are red."""
+    built = {f"{c.get('id')}.{n.get('id')}" for c in game.get("canvases") or [] for n in c.get("nodes") or []}
+    return bool(screens) and not (set(screens) & built)
+
+
 def check_does(game_dir, game):
     """Each card's Does: against what the build shows. Cards without a Does: block are not judged."""
     if game is None:
@@ -360,7 +369,7 @@ def check_does(game_dir, game):
     red = []
     for path in sorted((Path(game_dir) / "cards").glob("*.md")):
         does = rules.card_does(path.read_text(encoding="utf-8"))
-        if does is not None:
+        if does is not None and not not_built_yet(does, game):
             red += [f"{path.stem}: {r}" for r in rules.guard(does, game)]
     return (RED, red) if red else (GREEN, [])
 
@@ -372,7 +381,7 @@ def check_sheet(game_dir, game):
     red, inc = [], []
     for path in sorted((Path(game_dir) / "cards").glob("*.md")):
         mine, computed = sheet.for_card(game, game_dir, path.stem)
-        if mine is None:
+        if mine is None or not_built_yet(mine, game):
             continue
         r, i = sheet.compare(mine, computed)
         red += [f"{path.stem}: {x}" for x in r]
