@@ -244,3 +244,47 @@ def test_a_fact_only_change_asks_only_the_rows_that_read_facts(game):
     assert items and all(i["why"] == "a fact changed" for i in items)
     assert all(reading.reads_facts(i["row"], table) for i in items)
     assert {"C460", "B10"} <= {i["row"] for i in items}
+
+
+# ── a partial batch (a reader pass that dies mid-way can be saved in parts, 2026-11-24) ──
+
+def test_a_partial_record_keeps_the_unanswered_items_on_the_next_list(game):
+    card(game)
+    items = reading.work_list(game, "p1")["items"]
+    half = items[: len(items) // 2]
+    rec = reading.record(game, "p1", {"verdicts": [dict(row=i["row"], screen="*", verdict="PASS") for i in half]})
+    assert rec["answered"] == len(half) and len(rec["pending"]) == len(items) - len(half) and rec["pass"] == 1
+    nxt = reading.work_list(game, "p1")["items"]
+    assert {(i["row"], i["screen"]) for i in nxt} == {(i["row"], i["screen"]) for i in items[len(half):]}
+    assert all(i["why"].startswith("still to ask") or i["why"] == "never judged" for i in nxt)
+    rec = reading.record(game, "p1", {"verdicts": [dict(row=i["row"], screen="*", verdict="PASS") for i in nxt]})
+    assert rec["pending"] == [] and rec["pass"] == 1  # the same pass, finished in two batches
+    assert reading.work_list(game, "p1")["items"] == []
+
+
+def test_a_pending_changed_screen_row_survives_the_new_hashes(game):
+    _passed(game)
+    p = game / "toml_phases" / "7_final_game.toml"
+    p.write_text(p.read_text().replace("You pull your jeans on.", "You pull your jeans on, fast."))
+    items = reading.work_list(game, "p1")["items"]
+    first, rest = items[:1], items[1:]
+    reading.record(game, "p1", {"verdicts": [dict(row=i["row"], screen=i["screen"], verdict="PASS") for i in first]})
+    assert {(i["row"], i["screen"]) for i in reading.work_list(game, "p1")["items"]} == {(i["row"], i["screen"]) for i in rest}
+
+
+def test_an_unanswered_fail_stays_a_fail(game):
+    reader = _rows_on_a("reader")[0]
+    _passed(game, lambda r: "FAIL" if r == reader else "PASS")
+    reading.record(game, "p1", {"verdicts": []})  # an empty batch
+    rec = reading.load_record(game, "p1")
+    assert any(v["row"] == reader and v["verdict"] == "FAIL" for v in rec["verdicts"])
+    assert any(i["row"] == reader for i in reading.work_list(game, "p1")["items"])
+
+
+def test_a_partial_batch_still_refuses_a_star_fail_and_an_off_list_verdict(game):
+    card(game)
+    item = reading.work_list(game, "p1")["items"][0]
+    with pytest.raises(ValueError, match="never"):
+        reading.record(game, "p1", {"verdicts": [dict(item, verdict="FAIL", cause="c1")], "causes": [{"id": "c1"}]})
+    with pytest.raises(ValueError, match="work list"):
+        reading.record(game, "p1", {"verdicts": [{"row": "C99999", "screen": "start.a", "verdict": "PASS"}]})

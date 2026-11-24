@@ -588,3 +588,21 @@ Why for all of these: P13's reader found new FAILs on every pass, v5 to v11 (99 
     - many of those come from "a person is on screen" rows, such as C447, C593 and C625, which judge how a person sounds or is named, not where they are. Narrowing that trigger out of the fact list would cut it further, which is LO's call.
 - `scripts/reading.py` and `reader.md`: "a person is on screen" is no longer a trigger that marks a rule as reading facts (LO, relayed 2026-11-24: "yes"). Those rows judge how a person sounds or is named, not where they are. Still re-asked when only a fact moves: C460 and C461, B8 and B10, rows judged `+ presence` or `+ sheet` (L106 among them), and rows whose `when` is "the clock moves", "a garment is named" or "she dresses or undresses". Verified on the scratchpad P21 replay of Chris's weekend row move: 72 items, 24 rules (C460, C461, B8, B10, L106 and 19 clock rows), on the 3 screens that name him. Before this change it was 102 items, and the pass B count was 349. The full suite runs green.
 - `piece.md` step 7 and `build.md` step 1: the overlap rule (LO's yes, relayed by ENI 2026-11-24). While the reader runs on a piece, the next piece may be carded, checked and approved, but not built. Only one piece is built at a time, because the reader reads the built game, and a build under it changes what it reads. If the current piece's fixes change a fact the next card uses (a schedule row, a flag, a price), that card is re-checked and takes a new yes. Why: the game session builds release 1's remaining pieces back to back tonight. Verified: the suite runs green, and the size caps hold.
+- `scripts/reading.py` and `reader.md`: `--record` takes a partial batch (ENI for LO, standing authorization, 2026-11-24).
+  - **The failure:** reader passes take more than 10 minutes and died with each of the day's machine restarts. `record()` refused any batch missing a verdict ("work-list item(s) have no verdict"), so a pass couldn't be saved in parts.
+  - **The fix:** a batch records the verdicts it gives. The items it doesn't answer are kept in the record as `pending`, and the next work list asks them again ("still to ask: …"), whatever the hashes say. Without that, the new screen hashes would hide a changed screen's unanswered rows.
+    - An unanswered item keeps the verdict it had, so a FAIL not yet asked again is still a FAIL.
+    - A carried verdict is dropped for a `*` re-ask only when that re-ask was answered.
+    - Causes add up across a pass's batches, and a later batch may name an earlier batch's cause.
+    - The pass number moves on only when the last pass had nothing pending.
+    - It still refuses a `*` FAIL, a FAIL with no cause on a reader row, and a verdict not on the work list.
+    - It prints "recorded N of M; M−N still to ask".
+    - `reader.md` says to record every ~40 items.
+  - **Tests:** four new:
+    - a partial record keeps exactly the unanswered items on the next list, and a second batch finishes the same pass with an empty list;
+    - a pending row of a changed screen survives the new hashes;
+    - an unanswered FAIL stays a FAIL and is asked again;
+    - a partial batch still refuses a `*` FAIL and an off-list verdict.
+    
+    A full record behaves as before: every earlier test passes unchanged.
+  - **Verified read-only:** the live records under `games/first_term_lean/reader/` are written in the old format, without `pending`, and still give their work lists. I didn't touch `batches/`.
