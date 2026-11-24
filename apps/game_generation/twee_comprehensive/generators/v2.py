@@ -5402,6 +5402,16 @@ setup.triggerConditionsSatisfied = function(conditions) {{
                 continue;
             }}
 
+            // A nested group: its own items under its own logic, e.g. "(weekdays AND 7-20) OR (weekends AND 10-20)"
+            // on one row. Fails closed: empty, malformed or deeper than 3 levels is false, never true.
+            if (type === 'group') {{
+                var gDepth = (Number(arguments[1]) || 0) + 1;  // depth rides as a second argument
+                var gItems = Array.isArray(it.items) ? it.items : [];
+                results.push(gDepth <= 3 && gItems.length > 0 && setup.triggerConditionsSatisfied(
+                    {{ version: '1.0', logic: it.logic === 'OR' ? 'OR' : 'AND', items: gItems }}, gDepth));
+                continue;
+            }}
+
             // Unknown type
             results.push(false);
         }}
@@ -6063,6 +6073,7 @@ setup.onlyTheClockShut = function(c) {{
         var isClock = function(it) {{
             if (!it) return false;
             if (it.type === 'time_of_day' || it.type === 'weekday') return true;
+            if (it.type === 'group') return Array.isArray(it.items) && it.items.length > 0 && it.items.every(isClock);
             if (it.operator !== 'gte' && it.operator !== 'gt') return false;
             if (it.type === 'hours_since_flag') return setup.hoursSinceFlag(it) !== null;
             if (it.type === 'days_since_flag') {{

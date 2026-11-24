@@ -1849,12 +1849,38 @@ def _validate_condition_block_schema(block: Any, ctx: str) -> List[str]:
     items = block.get("items", [])
     if not isinstance(items, list):
         return errors + [f"{ctx}.items: must be a list, got {type(items).__name__}"]
+    return errors + _validate_condition_items(items, ctx, depth=0)
+
+
+# A nested `group` item has the shape of a conditions table without `version`; the engine
+# evaluates it recursively and fails closed past this depth (triggerConditionsSatisfied).
+_COND_GROUP_MAX_DEPTH = 3
+
+
+def _validate_condition_items(items: List[Any], ctx: str, depth: int) -> List[str]:
+    errors: List[str] = []
     for ii, item in enumerate(items):
         ictx = f"{ctx}.items[{ii}]"
         if not isinstance(item, dict):
             errors.append(f"{ictx}: must be a table, got {type(item).__name__}")
             continue
         ctype = item.get("type")
+        if ctype == "group":
+            for k in sorted(set(item) - {"type", "logic", "items"}):
+                errors.append(f"{ictx}: unknown key `{k}` on a `group` condition "
+                              f"(allowed: logic, items)")
+            if "logic" in item and item["logic"] not in ("AND", "OR"):
+                errors.append(f"{ictx}: logic must be \"AND\" or \"OR\", got {item['logic']!r}")
+            gitems = item.get("items")
+            if not isinstance(gitems, list) or not gitems:
+                errors.append(f"{ictx}: a `group` condition needs items = [ ... ], at least one "
+                              f"(an empty group is false at run time)")
+            elif depth + 1 > _COND_GROUP_MAX_DEPTH:
+                errors.append(f"{ictx}: groups nest at most {_COND_GROUP_MAX_DEPTH} deep "
+                              f"(deeper is false at run time)")
+            else:
+                errors.extend(_validate_condition_items(gitems, ictx, depth + 1))
+            continue
         if ctype not in CONDITION_SCHEMA:
             errors.append(f"{ictx}: unknown condition type {ctype!r} (known: "
                           f"{', '.join(sorted(CONDITION_SCHEMA))})")
