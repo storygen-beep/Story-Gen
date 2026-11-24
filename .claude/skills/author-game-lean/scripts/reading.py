@@ -252,10 +252,11 @@ def work_list(game_dir, card_id, everything=False, skill=SKILL, game=None):
     for s in changed:
         if kind[s] == "text":
             text_changed.setdefault(s.split(".", 1)[0], set()).add(s)
-    rewritten = {cv for cv, ss in text_changed.items() if where is not None and len(ss) * 2 > len(per_canvas[cv])}
+    # A card without Does: (its rows fire on every screen) is read the same way, with the old path's row set.
+    rewritten = {cv for cv, ss in text_changed.items() if len(ss) * 2 > len(per_canvas[cv])}
     for cv in sorted(rewritten):
         for r in sorted(rows):
-            if where.get(r, set()) & text_changed[cv]:
+            if where is None or where.get(r, set()) & text_changed[cv]:
                 want(r, WHOLE, f"most of {cv} changed ({len(text_changed[cv])} of {len(per_canvas[cv])} screens)")
     for s in sorted(changed):
         if kind[s] == "text" and s.split(".", 1)[0] in rewritten:

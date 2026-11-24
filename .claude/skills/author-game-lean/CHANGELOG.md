@@ -655,3 +655,8 @@ Why for all of these: P13's reader found new FAILs on every pass, v5 to v11 (99 
   - **The ruling:** a person's menu, opened from their face, is her screen with that person, and it gets that person's one picture after the presence line. The talk screen under it gets none unless it's a new moment. "A menu gets no spot" means room and system menus: a place's buttons, the wardrobe, a shop list.
   - **One home each:** C1265 says which menus get no spot and points to C596. C596 says where a person's one picture goes and points back to C1265. media rule 3, people rule 7 and the people menu example say the same in one line each.
   - **Verified:** the full suite runs green. Both rows' text changed, so `reading.py` re-asks them on pieces that carry them.
+- `scripts/reading.py`: the mostly-rewritten-canvas rule now covers old-format cards too (ENI for LO, standing authorization, 2026-11-24).
+  - **The failure:** after card text edits, P06's next work list was 996 items and P42's was 734. Both are cards without a `Does:` line, and the rule skipped any such card, so they fell back to once per screen.
+  - **The fix:** when more than half of a canvas's screens changed text, a card without `Does:` also has its rows asked once on `*`, using the old path's row set (every row, every screen). A FAIL from last pass is still asked on its own screen.
+  - **Tests:** three new in `test_reading.py` on an old-format card: both screens changed asks each row once on `*`; half changed still asks per screen; a FAIL stays on its screen when the canvas is rewritten.
+  - **Verified read-only against the live records:** P06 goes from 996 to 261 (253 on `*`, 8 FAILs) and P42 from 734 to 169 (149 on `*`, 20 FAILs).

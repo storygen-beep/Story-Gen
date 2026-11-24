@@ -131,3 +131,28 @@ def test_record_is_written_under_reader(game):
     first_pass(game)
     rec = json.loads((game / "reader" / "p1.json").read_text())
     assert rec["pass"] == 1 and rec["screens"]["start.a"]
+
+
+def test_an_old_format_card_mostly_rewritten_is_asked_on_star(game):
+    # the card has no Does: line (P06, P42); both of start's two screens change text
+    first_pass(game)
+    edit(game, "Mom is at the stove.", "Mom is at the stove, humming.")
+    edit(game, "You eat alone.", "You eat alone, fast.")
+    items = reading.work_list(game, "p1")["items"]
+    assert items and all(i["screen"] == "*" for i in items)
+    assert len(items) == len({i["row"] for i in items})
+    assert any(i["why"].startswith("most of start changed (2 of 2") for i in items)
+
+
+def test_an_old_format_card_with_half_changed_still_asks_per_screen(game):
+    first_pass(game)
+    edit(game, "You eat alone.", "You eat alone, fast.")
+    assert {i["screen"] for i in reading.work_list(game, "p1")["items"]} == {"start.b"}
+
+
+def test_an_old_format_fail_stays_on_its_screen_when_rewritten(game):
+    first_pass(game, verdict="FAIL")
+    edit(game, "Mom is at the stove.", "Mom is at the stove, humming.")
+    edit(game, "You eat alone.", "You eat alone, fast.")
+    items = reading.work_list(game, "p1")["items"]
+    assert any(i["screen"] == "start.a" and i["why"] == "failed last pass" for i in items)
