@@ -174,6 +174,16 @@ FACT_WHEN = ("the clock moves", "a garment is named", "she dresses or undresses"
 FACT_CHECKS = ("presence", "sheet")
 
 
+TRUTH_ROWS = ("C460", "C461", "B8", "B10")
+
+
+def reads_truth(rid, table):
+    """The rows a changed screen is asked again after the first reading (LO's stop rule): the truth rule and B8/B10,
+    and rows a fact-check script helps judge (`+ presence`, `+ sheet`)."""
+    r = table.get(rid)
+    return rid in TRUTH_ROWS or (bool(r) and bool(set(r["checks"]) & set(FACT_CHECKS)))
+
+
 def reads_facts(rid, table):
     if rid in FACT_ROWS:
         return True
@@ -241,32 +251,36 @@ def work_list(game_dir, card_id, everything=False, skill=SKILL, game=None):
     def want(row, screen, why):
         wanted.setdefault((row, screen), why)
 
-    # A mostly rewritten canvas (more than half its screens changed text) is read again like a first pass: each row
-    # that fires on one of its changed screens is asked once on "*", not once per screen. Half, because past it a
-    # per-screen list costs more than a first pass and finds nothing a "*" read wouldn't (P34, 2026-11-24: talk lines
-    # on 22 screens made 1,986 items). A FAIL is still asked on its own screen (the verdict loop below).
-    per_canvas, text_changed = {}, {}
+    # LO's stop rule (2026-11-24): after a piece's first reading, a screen whose text changed is asked again only for
+    # its last FAILs (the verdict loop below) and the truth rows on it (TRUTH_ROWS, `+ presence`, `+ sheet`), never
+    # every row: each small fix used to re-open about 100 rows, so the lists grew instead of shrinking (P34 560,
+    # P42 451, P07 448). A screen the record has never seen is asked in full, and a canvas that is mostly new screens
+    # is asked once on "*". The scripts (check.py) still run in full on every build. --all asks everything.
+    per_canvas, new_by_canvas = {}, {}
     for s in sc:
         if s != WHOLE:
             per_canvas.setdefault(s.split(".", 1)[0], set()).add(s)
     for s in changed:
-        if kind[s] == "text":
-            text_changed.setdefault(s.split(".", 1)[0], set()).add(s)
-    # A card without Does: (its rows fire on every screen) is read the same way, with the old path's row set.
-    rewritten = {cv for cv, ss in text_changed.items() if len(ss) * 2 > len(per_canvas[cv])}
+        if s not in old_sc:
+            new_by_canvas.setdefault(s.split(".", 1)[0], set()).add(s)
+    # A canvas that is mostly new screens (more than half) is read like a first pass, once on "*" (P34, 1,986 items).
+    rewritten = {cv for cv, ss in new_by_canvas.items() if len(ss) * 2 > len(per_canvas[cv])}
     for cv in sorted(rewritten):
         for r in sorted(rows):
-            if where is None or where.get(r, set()) & text_changed[cv]:
-                want(r, WHOLE, f"most of {cv} changed ({len(text_changed[cv])} of {len(per_canvas[cv])} screens)")
+            if where is None or where.get(r, set()) & new_by_canvas[cv]:
+                want(r, WHOLE, f"most of {cv} is new ({len(new_by_canvas[cv])} of {len(per_canvas[cv])} screens)")
     for s in sorted(changed):
-        if kind[s] == "text" and s.split(".", 1)[0] in rewritten:
+        if s not in old_sc and s.split(".", 1)[0] in rewritten:
             continue
         for r in sorted(rows):
             if where is None or s in where.get(r, ()):
-                if kind[s] == "facts" and where is not None and not reads_facts(r, table):
-                    continue  # only a fact moved (a schedule, the sheet): this row doesn't read facts
-                why = "screen is new" if s not in old_sc else ("screen changed" if kind[s] == "text" else "a fact changed")
-                want(r, s, why)
+                if s not in old_sc:
+                    want(r, s, "screen is new")
+                elif kind[s] == "text":
+                    if reads_truth(r, table):
+                        want(r, s, "screen changed: truth row")
+                elif where is None or reads_facts(r, table):
+                    want(r, s, "a fact changed")
     judged = set()
     for v in rec.get("verdicts", []):
         r, s = v["row"], v["screen"]
@@ -276,9 +290,11 @@ def work_list(game_dir, card_id, everything=False, skill=SKILL, game=None):
         note = table.get(r, {}).get("judge") == "note"  # from the row's judge column, Does: or not
         if v["verdict"] == "FAIL" and not note:
             want(r, s, "failed last pass")
+        elif v["verdict"] == "FAIL" and kind.get(s) == "text":
+            want(r, s, "failed last pass (a note), its screen changed")  # check whether the fix took
         elif r in rows and old_rows.get(r) != rows[r]:
             want(r, s, "its rule's text changed")
-        elif s == WHOLE and any(k == "text" for k in kind.values()) and (r in SCENE_WIDE or where is None):
+        elif s == WHOLE and any(x not in old_sc for x in changed) and (r in SCENE_WIDE or where is None):
             want(r, s, "a screen of the scene changed")
         elif (r, s) not in wanted:
             # A note's FAIL is shown in the notes and never holds (reader.md, build.md): it carries like a PASS and
@@ -287,7 +303,13 @@ def work_list(game_dir, card_id, everything=False, skill=SKILL, game=None):
             carried.append(dict(v, carried=True))
     for i in rec.get("pending", []):
         if (i["screen"] == WHOLE or i["screen"] in sc) and i["row"] in rows:
-            want(i["row"], i["screen"], "still to ask: " + i["why"].replace("still to ask: ", ""))
+            why = i["why"].replace("still to ask: ", "")
+            # Pending items saved before LO's stop rule were owed because a known screen's text changed; under the
+            # stop rule only the truth rows on it are owed, so the rest carry (P34, P07, 2026-11-24).
+            stale = (why == "screen changed" or (why.startswith("most of ") and " changed (" in why)) \
+                and not reads_truth(i["row"], table)
+            if not stale:
+                want(i["row"], i["screen"], "still to ask: " + why)
     for r in sorted(set(rows) - judged):
         want(r, WHOLE, "never judged")
     items = [{"row": r, "screen": s, "why": w} for (r, s), w in sorted(wanted.items())]

@@ -133,21 +133,21 @@ def test_record_is_written_under_reader(game):
     assert rec["pass"] == 1 and rec["screens"]["start.a"]
 
 
-def test_an_old_format_card_mostly_rewritten_is_asked_on_star(game):
-    # the card has no Does: line (P06, P42); both of start's two screens change text
+def test_an_old_format_card_rewritten_after_its_first_reading_asks_only_truth_rows(game):
+    # LO's stop rule (2026-11-24): both of start's screens change text after pass 1; a card without Does: (P06, P42)
     first_pass(game)
     edit(game, "Mom is at the stove.", "Mom is at the stove, humming.")
     edit(game, "You eat alone.", "You eat alone, fast.")
     items = reading.work_list(game, "p1")["items"]
-    assert items and all(i["screen"] == "*" for i in items)
-    assert len(items) == len({i["row"] for i in items})
-    assert any(i["why"].startswith("most of start changed (2 of 2") for i in items)
+    assert items and {i["row"] for i in items} <= set(reading.TRUTH_ROWS)
+    assert {i["screen"] for i in items} == {"start.a", "start.b"}
 
 
-def test_an_old_format_card_with_half_changed_still_asks_per_screen(game):
+def test_an_old_format_card_with_one_screen_changed_asks_only_there(game):
     first_pass(game)
     edit(game, "You eat alone.", "You eat alone, fast.")
-    assert {i["screen"] for i in reading.work_list(game, "p1")["items"]} == {"start.b"}
+    items = reading.work_list(game, "p1")["items"]
+    assert {i["screen"] for i in items} == {"start.b"} and {i["row"] for i in items} <= set(reading.TRUTH_ROWS)
 
 
 def test_an_old_format_fail_stays_on_its_screen_when_rewritten(game):

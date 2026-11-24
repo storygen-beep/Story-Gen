@@ -704,3 +704,22 @@ Why for all of these: P13's reader found new FAILs on every pass, v5 to v11 (99 
   - **The fix:** the note-or-reader decision comes from the row's `judge` column for every card, in both `work_list` and `record`.
   - **Test:** on an old-format card naming `craft/systems.md`, FAILs on C1313 and C1434 are recorded with no cause, carried, and not asked again, while a reader row's FAIL (C442) still needs a cause.
   - **Verified read-only:** P06's work list is empty. It was checked with `reading.work_list` alone; no merge and no `run_all`.
+- `scripts/reading.py`, `reader.md` (After), `build.md` (Done when): LO's stop rule (LO, relayed 2026-11-24: "Yes go ahead").
+  - **The failure:** after a piece's first full reading, every small fix re-opened its screen and about 100 rows were asked again. P34's list was 560, P42's 451 and P07's 448: the lists grew instead of shrinking, and each pass found smaller things.
+  - **The rule:** a first reading is unchanged. After it, a screen whose text changed is asked again only for:
+    - its FAILs from last pass. A note's FAIL counts too, to check the fix took;
+    - its truth rows: C460, C461, B8, B10, and rows judged `+ presence` or `+ sheet` (`TRUTH_ROWS`, `reads_truth`);
+    - every row on a screen the record has never seen.
+    
+    Everything else carries.
+  - **Unchanged by it:**
+    - A canvas that is mostly new screens is asked once on `*`; the rewrite rule now counts new screens, not changed ones.
+    - The scene-wide tests B1, B2 and B9 go back on `*` only when a screen is new.
+    - A fact-only change still asks the fact rows, and a rule whose text changed is still asked where it fires.
+    - `--all` still asks everything.
+    - The scripts run in full on every build.
+  - **Pending items** saved by partial batches before the rule, owed only because a known screen's text changed, are re-judged by the rule: only their truth rows stay owed.
+  - **Tests:**
+    - six existing tests that pinned the old behaviour (every row re-asked on a changed screen, a text rewrite asked on `*`, B1/B2/B9 back on `*`) were updated to the rule;
+    - four new ones: after pass 1, a one-line change asks only its FAIL and the truth rows; a new screen is asked in full; `--all` asks everything; pre-rule pending items are re-judged.
+  - **Verified read-only** (`reading.work_list` only, no merge): P34 is now 42, P42 37, P07 44 and P21 35.

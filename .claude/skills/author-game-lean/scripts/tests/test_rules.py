@@ -105,18 +105,16 @@ def test_rules_cli_prints_the_list(game, capsys):
     assert out.startswith("p1: ") and "reader (" in out and "C460" in out
 
 
-def test_a_changed_screen_asks_only_the_rows_its_triggers_fire(game):
+def test_a_changed_screen_asks_only_its_truth_rows_after_the_first_reading(game):
     card(game)
     work = reading.work_list(game, "p1")
     reading.record(game, "p1", {"verdicts": [dict(row=i["row"], screen="start.a", verdict="PASS") for i in work["items"]]})
     p = game / "toml_phases" / "7_final_game.toml"
     p.write_text(p.read_text().replace("You pull your jeans on.", "You pull your jeans on, fast."))
-    asked = {i["row"] for i in reading.work_list(game, "p1")["items"]}
-    on_b = set(rules.rule_list(rules.card_does(DOES + "\n")).keys())
-    b_only = {r for r, on in rules.rule_list(rules.card_does(DOES)).items() if on == ["start.b"]}
-    a_only = {r for r, on in rules.rule_list(rules.card_does(DOES)).items() if on == ["start.a"]}
-    assert asked and b_only <= asked and not (a_only & asked) and asked <= on_b | set(reading.scene_tests())
-
+    items = reading.work_list(game, "p1")["items"]
+    table = rules.table()
+    assert items and all(i["screen"] == "start.b" and reading.reads_truth(i["row"], table) for i in items)
+    assert {"C460", "B10"} <= {i["row"] for i in items}
 
 # ── "*" verdicts after one screen changes (P13 live trial, 2026-11-24: one changed line re-asked 229 of 260) ──
 
@@ -131,19 +129,16 @@ def scene_wide_pass(game):
 
 def test_a_star_pass_is_asked_again_only_on_the_changed_screen(game):
     work = scene_wide_pass(game)
+    table = rules.table()
+    assert work["items"] and all(i["screen"] == "start.b" and reading.reads_truth(i["row"], table)
+                                 for i in work["items"])
     lst = rules.rule_list(rules.card_does(DOES))
-    on_b = {r for r, on in lst.items() if "start.b" in on} | set(reading.scene_tests())
-    rows_b = {i["row"] for i in work["items"] if i["screen"] == "start.b"}
-    assert rows_b == on_b - set(reading.SCENE_WIDE)
-    assert not any(i["screen"] == "start.a" for i in work["items"])
     a_only = {r for r, on in lst.items() if on == ["start.a"]}
     assert a_only and a_only <= {v["row"] for v in work["carried"]}  # carried, not asked
 
-
-def test_only_the_scene_wide_tests_go_back_on_star(game):
+def test_a_changed_screen_sends_nothing_back_on_star(game):
     work = scene_wide_pass(game)
-    assert {i["row"] for i in work["items"] if i["screen"] == "*"} == set(reading.SCENE_WIDE)
-
+    assert not any(i["screen"] == "*" for i in work["items"])  # B1, B2, B9 carry unless a screen is new
 
 def test_a_star_pass_survives_a_new_verdict_on_one_screen(game):
     work = scene_wide_pass(game)
@@ -336,14 +331,18 @@ def test_one_changed_screen_of_ten_still_asks_per_screen(game):
     assert all(i["screen"] != "*" or i["row"] in reading.SCENE_WIDE for i in items)
 
 
-def test_eight_of_ten_changed_asks_on_star_once(game):
+def test_a_canvas_of_mostly_new_screens_asks_on_star_once(game):
     ten_screens(game)
-    rewrite(game, 8)
+    p = game / "toml_phases" / "7_final_game.toml"
+    p.write_text(p.read_text() + "".join(f'\n[[canvases.nodes]]\nid = "n{i}"\nblocks = [{{ type = "paragraph", content = "New {i}." }}]\n'
+                                         for i in range(11)))
+    does = "Does:\n" + "".join(f"  big.s{i} | a repeatable, the clock moves\n" for i in range(10)) + \
+        "".join(f"  big.n{i} | a repeatable, the clock moves\n" for i in range(11))
+    (game / "cards" / "p1.md").write_text("PIECE p1\n" + does + "Builds: big, home\n")
     items = reading.work_list(game, "p1")["items"]
     assert items and all(i["screen"] == "*" for i in items)
-    assert len(items) == len({i["row"] for i in items})  # each row once
-    assert any(i["why"].startswith("most of big changed (8 of 10") for i in items)
-
+    assert len(items) == len({i["row"] for i in items})
+    assert any(i["why"].startswith("most of big is new (11 of 21") for i in items)
 
 def test_a_fail_on_a_changed_screen_stays_per_screen_either_way(game):
     ten_screens(game)
@@ -390,3 +389,50 @@ def test_a_fail_no_longer_owed_is_kept_and_reported(game):
     other = _rows_on_a("reader")[1]
     with pytest.raises(ValueError, match="work list"):  # a PASS no longer owed is still refused
         reading.record(game, "p1", {"verdicts": [dict(row=other, screen="start.a", verdict="PASS")]})
+
+
+# ── LO's stop rule (2026-11-24): after the first reading, a fix re-asks its FAILs and the truth rows, not every row ──
+
+def test_after_pass_one_a_one_line_change_asks_only_its_fails_and_truth_rows(game):
+    reader = _rows_on_a("reader")[0]
+    _passed(game, lambda r: "FAIL" if r == reader else "PASS")
+    p = game / "toml_phases" / "7_final_game.toml"
+    p.write_text(p.read_text().replace("Mom is at the stove.", "Mom is at the stove, humming."))
+    items = reading.work_list(game, "p1")["items"]
+    table = rules.table()
+    assert (reader, "start.a") in {(i["row"], i["screen"]) for i in items}  # the FAIL, to verify the fix
+    assert all(i["row"] == reader or reading.reads_truth(i["row"], table) for i in items)
+    assert len(items) < len(rules.rule_list(rules.card_does(DOES)))
+
+
+def test_a_new_screen_is_asked_in_full(game):
+    _passed(game)
+    p = game / "toml_phases" / "7_final_game.toml"
+    p.write_text(p.read_text() + '\n[[canvases.nodes]]\nid = "c"\nblocks = [{ type = "paragraph", content = "New." }]\n')
+    (game / "cards" / "p1.md").write_text("PIECE p1\nWhat the player sees:\n  Screen 1: Mom.\n" + SHEET +
+                                          DOES + "  start.c | the opening, a one-time step, the clock moves\n" +
+                                          "Builds: start, home\n")
+    on_c = {r for r, on in rules.rule_list(rules.card_does(DOES + "  start.c | the opening, a one-time step, "
+                                                                  "the clock moves\n")).items() if "start.c" in on}
+    asked_c = {i["row"] for i in reading.work_list(game, "p1")["items"] if i["screen"] == "start.c"}
+    assert on_c and on_c <= asked_c
+
+
+def test_all_still_asks_everything(game):
+    _passed(game)
+    every = reading.work_list(game, "p1", everything=True)["items"]
+    assert {i["row"] for i in every} == set(reading.work_list(game, "p1", everything=True)["rows"])
+
+
+def test_pending_items_saved_before_the_stop_rule_are_rejudged_by_it(game):
+    _passed(game)
+    rec = reading.load_record(game, "p1")
+    table = rules.table()
+    non_truth = next(r for r in rules.rule_list(rules.card_does(DOES)) if not reading.reads_truth(r, table))
+    rec["pending"] = [{"row": non_truth, "screen": "start.a", "why": "screen changed"},
+                      {"row": "C460", "screen": "start.a", "why": "screen changed"},
+                      {"row": non_truth, "screen": "start.b", "why": "screen is new"}]
+    reading.record_path(game, "p1").write_text(__import__("json").dumps(rec))
+    asked = {(i["row"], i["screen"]) for i in reading.work_list(game, "p1")["items"]}
+    assert (non_truth, "start.a") not in asked  # owed only because the text changed: carries now
+    assert ("C460", "start.a") in asked and (non_truth, "start.b") in asked

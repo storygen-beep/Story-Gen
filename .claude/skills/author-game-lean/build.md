@@ -57,6 +57,6 @@ Every few pieces LO plays the dev build in `output/`: "this should happen. Does 
 
 **Done when.**
 - `build.py` ran, and `check.py games/<slug>` is green (not INCOMPLETE).
-- On a scene piece, the reader's work list is empty, or every FAIL left is waived.
+- On a scene piece, the reader's work list is empty, or every FAIL left is waived. Notes are carried and shown, never holding. This is LO's stop rule (2026-11-24): after the first reading, a fix re-asks only its FAILs, the truth rows on the changed screen and any new screen (`reader.md`, After), so the list shrinks to empty.
 - `STATE.md` marks the piece built and checked, with a new `Next step:`.
 - LO saw the reader's table and this piece's rulings.
