@@ -1122,6 +1122,198 @@
       "sha256": "1452978c8f3c93b123ff078c849150141597d7ccf969517655f4c3f6de66005b",
       "words": "ENI for LO (delegated 2026-11-24): re-recorded: the card says a hop on her street costs nothing (clock.md C920), as built",
       "date": "2026-11-24"
+    },
+    {
+      "card": "P18",
+      "sha256": "61fd5eebc755eaefec6ad5ee5908d37dd4dd759a47ab98cbe41e9da5f7532434",
+      "words": "ENI for LO (delegated 2026-11-24): \"P18 yes, as carded. It matches PLAN 136 and 179 (met and is there, no arc). The romance-novel hook ties into P41 properly, and hon being hers alone is good.\"",
+      "date": "2026-11-24"
+    },
+    {
+      "card": "P18",
+      "sha256": "c9bca1376c5613b7accf53ee58ce186c588827c825325d64dfac03869acdcff9",
+      "words": "ENI for LO (delegated 2026-11-24): \"P18 yes, as carded.\" (re-recorded at build: a trimmed intro and a line of hers on each path, for the talk ratio; Sheet synced)",
+      "date": "2026-11-24"
+    },
+    {
+      "card": "P19",
+      "sha256": "685cc88a21416cfe00defa702ea0c77bd17c695ae11859590ffbe8a93744aa9e",
+      "words": "ENI for LO (delegated 2026-11-24): \"P19 yes, with one truth fix\" (no tray before she buys: \"She looks you over\", \"Here, take a roll.\", the roll pressed into her hand)",
+      "date": "2026-11-24"
+    },
+    {
+      "card": "P19",
+      "sha256": "d926e95bbb0ee1fe60e8ae26401bef159b8af812901833f5d501585d072d2b0f",
+      "words": "ENI for LO (delegated 2026-11-24): \"P19 yes, with one truth fix\" (no tray before she buys: \"She looks you over\", \"Here, take a roll.\", the roll pressed into her hand; Sheet synced)",
+      "date": "2026-11-24"
+    },
+    {
+      "card": "P20",
+      "sha256": "793aefe21f6f042d44c8d4563fa53f1253e6f689305fcb3d4c5a3c32ed3f6e97",
+      "words": "ENI for LO (delegated 2026-11-24): \"yes once the window is fixed to weekdays 13:00–15:00 on the quad. The scene is good\" (rows from PLAN §9d as restored; the Tue/Thu cafeteria hour comes out of the quad's)",
+      "date": "2026-11-24"
+    },
+    {
+      "card": "P19",
+      "sha256": "dbdc7da3d5db7c77f4d51f78c1ff5acbdad16c741adafb943038492d0339e942",
+      "words": "ENI for LO (delegated 2026-11-24): re-recorded: Sheet synced after P20 put Zoe on the quad (Mon/Wed/Fri 13–15, Tue/Thu 14–15) and in the cafeteria (Tue/Thu 13–14), PLAN §9d",
+      "date": "2026-11-24"
+    },
+    {
+      "card": "P20",
+      "sha256": "d3310a07ef0d75c126eef75c375215d5eebf0d9be3b8f0341d316bdfc92f770c",
+      "words": "ENI for LO (delegated 2026-11-24): re-recorded: Sheet synced after P20 put Zoe on the quad (Mon/Wed/Fri 13–15, Tue/Thu 14–15) and in the cafeteria (Tue/Thu 13–14), PLAN §9d",
+      "date": "2026-11-24"
+    },
+    {
+      "card": "P33",
+      "sha256": "a7658b7a5873057e64fdac5d880a120c9200082b0faf863c63c826e5f00fbd51",
+      "words": "ENI for LO (delegated 2026-11-24): re-recorded: Sheet synced after P20 put Zoe on the quad (Mon/Wed/Fri 13–15, Tue/Thu 14–15) and in the cafeteria (Tue/Thu 13–14), PLAN §9d",
+      "date": "2026-11-24"
+    },
+    {
+      "card": "P20",
+      "sha256": "fc1597edbe55f06886c6d9cc4a191b77f7f2611362a0dce083ef1ea0db02f4b6",
+      "words": "ENI for LO (delegated 2026-11-24): \"yes once the window is fixed to weekdays 13:00–15:00 on the quad. The scene is good\" (rows from PLAN §9d as restored; Sheet and Does synced)",
+      "date": "2026-11-24"
+    },
+    {
+      "card": "P19",
+      "sha256": "dafd9144f689405c17452553b3830c57d5c0a39b3896d1caa36893e45f7203ee",
+      "words": "ENI for LO (delegated 2026-11-24): \"P19 yes, with one truth fix\" (re-recorded after a reader fix: the picture with the roll moves to the meet screen, where she holds it)",
+      "date": "2026-11-24"
+    },
+    {
+      "card": "P20",
+      "sha256": "1f4436cd23fbd342d1f39f2852830c087ea07faf82ada33ff4b2d7e5ab647c57",
+      "words": "ENI for LO (delegated 2026-11-24): \"yes once the window is fixed to weekdays 13:00–15:00 on the quad\" (re-recorded: the picture with two coffees moves to the first screen, where she holds both)",
+      "date": "2026-11-24"
+    },
+    {
+      "card": "P19",
+      "sha256": "71f7c33464d70fe3b67bd0e29aca2630737650305f69a6f3c21a1eadb3869bd5",
+      "words": "ENI for LO (delegated 2026-11-24): \"P19 yes, with one truth fix\" (re-recorded after a reader fix: the picture with the roll moves to the meet screen; Does synced)",
+      "date": "2026-11-24"
+    },
+    {
+      "card": "P20",
+      "sha256": "4c6755d25c7aa40e0f2eb459805df42ef8c136b155042b91810d3014daa28e05",
+      "words": "ENI for LO (delegated 2026-11-24): \"yes once the window is fixed to weekdays 13:00–15:00 on the quad\" (re-recorded: the picture moves to the first screen; Does synced)",
+      "date": "2026-11-24"
+    },
+    {
+      "card": "P18",
+      "sha256": "82a0e1f2f7804f3963df826ec1ef21511eaec757589c486f13d30938a1ae3e57",
+      "words": "ENI for LO (delegated 2026-11-24): \"P18: yes. Move the picture to the meet screen, after Quiet floor's upstairs, hon…, and change its description to looking at the camera over her reading glasses.\"",
+      "date": "2026-11-24"
+    },
+    {
+      "card": "P09",
+      "sha256": "6eed6a5a4f07ba86defcb3f321e7a87124cff65c3ba9d7f81e18117dafa72d04",
+      "words": "ENI for LO (delegated 2026-11-24): \"(a) for the lecture hall. Add Study in an empty row (1 hour, 5 energy), sharing the library's study count, open whenever the hall is open, with nothing about class in its text.\"",
+      "date": "2026-11-24"
+    },
+    {
+      "card": "P09",
+      "sha256": "7f544edd2cd735d40e9426d063cfa60627888d2b7022a315242edd491c06e840",
+      "words": "ENI for LO (delegated 2026-11-24): \"(a) for the lecture hall. Add Study in an empty row (1 hour, 5 energy), sharing the library's study count, open whenever the hall is open, with nothing about class in its text.\" (Sheet and Does synced)",
+      "date": "2026-11-24"
+    },
+    {
+      "card": "P22",
+      "sha256": "268ca08cd94f8b7af57c2cd72d9a249b4e64021e02790e83f60a003eb7cb152e",
+      "words": "ENI for LO (delegated 2026-11-24): \"P22 yes, with Hey, gorgeous. in place of Evening, for the Sunday-morning reason you gave.\"",
+      "date": "2026-11-24"
+    },
+    {
+      "card": "P22",
+      "sha256": "c68cd791218b84522c9bb5498337276f2869e8139dc7f47b0fe2731ea81ad49b",
+      "words": "ENI for LO (delegated 2026-11-24): \"P22 yes, with Hey, gorgeous. in place of Evening\" (re-recorded at build: Danny's intro and ending trimmed and \"Quiet type. I like that.\" on the quiet path, for the talk ratio; Sheet synced)",
+      "date": "2026-11-24"
+    },
+    {
+      "card": "P23",
+      "sha256": "62de2e170887441bf94c60015034119c9f0d25163c907232b9fcb55ebc6a468c",
+      "words": "ENI for LO (delegated 2026-11-24): \"P23 yes, as carded.\"",
+      "date": "2026-11-24"
+    },
+    {
+      "card": "P23",
+      "sha256": "33aad59dbd85445d032311f08d9eefd417593fdf41e65b7a73dd7c7419c509e6",
+      "words": "ENI for LO (delegated 2026-11-24): \"P23 yes, as carded.\" (Sheet synced; the gym is open 6am–10pm every day, so his Sat 8–2 row is inside its hours)",
+      "date": "2026-11-24"
+    },
+    {
+      "card": "P04",
+      "sha256": "b8c727e4f38bca0f05e69e1235829c4db5b921dc66bb9aab96886a5ee07626de",
+      "words": "ENI for LO (delegated 2026-11-24), LO's rule: \"Beside choice i dont want to show time and energy show money if needed.\" / \"Room buttons too\" (labels only; costs, effects and greyed lines unchanged)",
+      "date": "2026-11-24"
+    },
+    {
+      "card": "P07",
+      "sha256": "3a5789df4870297dbea7aa47a28f9d181300dc99cdab4d0196960a7353c63795",
+      "words": "ENI for LO (delegated 2026-11-24), LO's rule: \"Beside choice i dont want to show time and energy show money if needed.\" / \"Room buttons too\" (labels only; costs, effects and greyed lines unchanged)",
+      "date": "2026-11-24"
+    },
+    {
+      "card": "P09",
+      "sha256": "d3a9af7ddee7fd58e47e59235b5258718bfcfec806815d84be81c284cd32a1df",
+      "words": "ENI for LO (delegated 2026-11-24), LO's rule: \"Beside choice i dont want to show time and energy show money if needed.\" / \"Room buttons too\" (labels only; costs, effects and greyed lines unchanged)",
+      "date": "2026-11-24"
+    },
+    {
+      "card": "P10",
+      "sha256": "60ff672a11c8959944f2868d4a7ff732e8c0bc420859dcd39c5e2a402ff9d7c4",
+      "words": "ENI for LO (delegated 2026-11-24), LO's rule: \"Beside choice i dont want to show time and energy show money if needed.\" / \"Room buttons too\" (labels only; costs, effects and greyed lines unchanged)",
+      "date": "2026-11-24"
+    },
+    {
+      "card": "P11",
+      "sha256": "7a1161a6bdabef6e41581f27b03825dd9bd3dfcbae9a212a42bb27d7ad36f80b",
+      "words": "ENI for LO (delegated 2026-11-24), LO's rule: \"Beside choice i dont want to show time and energy show money if needed.\" / \"Room buttons too\" (labels only; costs, effects and greyed lines unchanged)",
+      "date": "2026-11-24"
+    },
+    {
+      "card": "P13",
+      "sha256": "3dd66823a3f6c971f145ee7257d7356ab6e60872a0928ab3c409f9bcb5f8c56a",
+      "words": "ENI for LO (delegated 2026-11-24), LO's rule: \"Beside choice i dont want to show time and energy show money if needed.\" / \"Room buttons too\" (labels only; costs, effects and greyed lines unchanged)",
+      "date": "2026-11-24"
+    },
+    {
+      "card": "P21",
+      "sha256": "0bd410740684388531620cbeaa7afc85352f0d963e19655efac2eedbac08e202",
+      "words": "ENI for LO (delegated 2026-11-24), LO's rule: \"Beside choice i dont want to show time and energy show money if needed.\" / \"Room buttons too\" (labels only; costs, effects and greyed lines unchanged)",
+      "date": "2026-11-24"
+    },
+    {
+      "card": "P33",
+      "sha256": "2a0b592fec359d8da4bcd761552f63edeaec23c6a92bcfef5501ac3ce8ddecad",
+      "words": "ENI for LO (delegated 2026-11-24), LO's rule: \"Beside choice i dont want to show time and energy show money if needed.\" / \"Room buttons too\" (labels only; costs, effects and greyed lines unchanged)",
+      "date": "2026-11-24"
+    },
+    {
+      "card": "P34",
+      "sha256": "2b39be82c33c6c46ed5429dd9d27d57728884cbcbb60530882485097e288f755",
+      "words": "ENI for LO (delegated 2026-11-24), LO's rule: \"Beside choice i dont want to show time and energy show money if needed.\" / \"Room buttons too\" (labels only; costs, effects and greyed lines unchanged)",
+      "date": "2026-11-24"
+    },
+    {
+      "card": "P35",
+      "sha256": "06d9179dfd367c5a9bdfdc4e140d7866a35dd68147ec89944b988f2210370e16",
+      "words": "ENI for LO (delegated 2026-11-24), LO's rule: \"Beside choice i dont want to show time and energy show money if needed.\" / \"Room buttons too\" (labels only; costs, effects and greyed lines unchanged)",
+      "date": "2026-11-24"
+    },
+    {
+      "card": "P42",
+      "sha256": "4b68839cd125040bf0fab1c08a914eea46f44167b632797ba15dc5704cc8086c",
+      "words": "ENI for LO (delegated 2026-11-24), LO's rule: \"Beside choice i dont want to show time and energy show money if needed.\" / \"Room buttons too\" (labels only; costs, effects and greyed lines unchanged)",
+      "date": "2026-11-24"
+    },
+    {
+      "card": "P06",
+      "sha256": "34d0965be48e2b3fb3d9519634bd9f5a1d58a5f53e3bc1bb9d1602134259bc71",
+      "words": "ENI for LO (delegated 2026-11-24), LO's rule: \"Beside choice i dont want to show time and energy show money if needed.\" / \"Room buttons too\" (labels only; L167 skipped, no row with day-varying hours)",
+      "date": "2026-11-24"
     }
   ]
 }

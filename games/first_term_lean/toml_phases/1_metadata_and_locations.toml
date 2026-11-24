@@ -38,6 +38,18 @@ flag_keys = [
   "walsh_maam", "walsh_no_advisor", "walsh_silent", "walsh_stayed",
   # P17 — memory flags from her answers
   "cross_said_it", "cross_asked", "cross_shouted",
+  # P18 — memory flags from her answer
+  "holt_got_it", "holt_noise", "holt_silent",
+  # P19 — memory flags from her answer
+  "rosa_thanks", "rosa_no", "rosa_silent",
+  # P20 — Zoe
+  "met_zoe", "zoe_coffee_yes", "zoe_coffee_no", "zoe_coffee_asked",
+  # P22F — memory flags from her answer
+  "frank_say_hi", "frank_small_world", "frank_silent",
+  # P22D — memory flags from her answer
+  "danny_snack", "danny_everyone", "danny_silent",
+  # P23 — memory flags from her answer
+  "marco_looking", "marco_tips", "marco_silent",
   # P35 — the clothes shop
   "met_nina",
 ]
@@ -1163,6 +1175,42 @@ weekdays = [5]
 start_time = "08:00"
 end_time = "14:00"
 activity = "training"
+
+# P20 — Zoe (PLAN §9d; the Tue/Thu cafeteria hour comes out of the quad's). No meter in release 1.
+[[npcs]]
+id = "npc_zoe"
+name = "Zoe"
+role = "College friend"
+relationship = "Zoe, 19. She found you on the quad."
+description = "College friend, 19."
+
+[[npcs.schedules]]
+location = "campus_quad"
+weekdays = [0, 2, 4]
+start_time = "13:00"
+end_time = "15:00"
+activity = "on the grass"
+
+[[npcs.schedules]]
+location = "campus_quad"
+weekdays = [1, 3]
+start_time = "14:00"
+end_time = "15:00"
+activity = "on the grass"
+
+[[npcs.schedules]]
+location = "campus_cafeteria"
+weekdays = [1, 3]
+start_time = "13:00"
+end_time = "14:00"
+activity = "at lunch"
+
+[[npcs.schedules]]
+location = "near_zoe_apartment"
+weekdays = [0, 1, 2, 3, 4, 5, 6]
+start_time = "18:00"
+end_time = "23:00"
+activity = "at home"
 
 [[npcs]]
 id = "npc_nina"

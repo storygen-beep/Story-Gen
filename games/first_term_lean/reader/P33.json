@@ -1,43 +1,50 @@
 {
  "piece": "P33",
- "pass": 6,
+ "pass": 7,
  "screens": {
   "body_run.run": {
    "text": "30c91aa93a1f5b0b",
    "facts": "45173fb43c5513f5",
+   "facts2": "45173fb43c5513f5",
    "all": "b184641b5e03737b"
   },
   "body_workout.lift": {
    "text": "b0c43c3aa325a5e3",
    "facts": "c4485366da85d0a9",
+   "facts2": "c4485366da85d0a9",
    "all": "2caea444a4dc620d"
   },
   "body_mirror.fix": {
    "text": "eecca1bddbdeb214",
    "facts": "06ce3e0e808b3228",
+   "facts2": "06ce3e0e808b3228",
    "all": "53654a4496dc76c3"
   },
   "body_snack.eat": {
    "text": "28ae2143b3c8a2ae",
    "facts": "fb7389f7fdd9b7e8",
+   "facts2": "fb7389f7fdd9b7e8",
    "all": "37438349bb3dee9c"
   },
   "body_coffee.drink": {
    "text": "e594dcddd110c9d7",
    "facts": "3d15ca8d6434585e",
+   "facts2": "889defec3931010e",
    "all": "78169f3a60359c09"
   },
   "body_lunch.eat": {
    "text": "00b85db49e628bf5",
-   "facts": "3c7fa927521bb8d1",
-   "all": "9d4339762cdd8960"
+   "facts": "f0aaa3201cfb8ef5",
+   "facts2": "f0aaa3201cfb8ef5",
+   "all": "a68b14bbbf1a24f5"
   },
   "body_grass.sit": {
    "text": "762aaf6daecff423",
-   "facts": "9df05c3a3b8296d2",
-   "all": "f9166a6788183351"
+   "facts": "5d90976a96216451",
+   "facts2": "5d90976a96216451",
+   "all": "41772c245a388c03"
   },
-  "*": "64a8d1701205d1a0"
+  "*": "897b7347c2fa1b52"
  },
  "rows": {
   "B1": "5276068df1ca6fa9",
@@ -59,18 +66,18 @@
   "C1262": "32f015030465e92f",
   "C1279": "534032f000706830",
   "C782": "3ac6936d80e97921",
-  "C889": "1b724e2dcfbf028b",
-  "C906": "ce3b42a8c86da5b8",
+  "C889": "def1348d483d0c40",
+  "C906": "71713a7e7ae739e7",
   "C926": "177d1e1776fac74b",
   "C900": "6372efb027eb2034",
   "C902": "df5ed7a36dbc74e4",
   "C903": "4f83b0b5eb45f71b",
   "C892": "5c890033f6ac38b8",
-  "C910": "be1c18ee466455f6",
-  "C929": "e20b027bad88ca8c",
+  "C910": "d5a109f1ef88419a",
+  "C929": "18b0ecdf6d7fc901",
   "C897": "265ece64add83676",
   "C924": "791cd173e23fb130",
-  "C920": "695dc5d9d0e5e749",
+  "C920": "513927dd127fca04",
   "C913": "c750f9b6ab4ace14",
   "C930": "beb57cd46fe906bf",
   "L167": "e64ce2672d85d2d8",
@@ -111,7 +118,7 @@
   "C1267": "f0db81b801577bf2",
   "C1249": "a843f9b57e43a020",
   "C1250": "fde578d75b0d3620",
-  "C1265": "447179d04e01ff5d",
+  "C1265": "64b72c778e96e443",
   "C1234": "1b2a2d5f05b10331",
   "L121": "45842b25d0708a15",
   "L125": "1fca3bfe1d0c2419",
@@ -161,7 +168,7 @@
   "C777": "b56360a1040688cf",
   "C773": "599aac6293908bc4",
   "C758": "e158aaf055cb61d6",
-  "C953": "8d1306a15c51370a",
+  "C953": "826bf82fe26afd13",
   "C762": "40e85f1ae92f1e71",
   "C770": "ff9aa31c11e5d50f",
   "C771": "563e3d25c3219dd0",
@@ -361,7 +368,7 @@
     "all": "9d4339762cdd8960"
    },
    "row_hash": "c1c0e2ac2588a579",
-   "carried": false,
+   "carried": true,
    "pass": 6
   },
   {
@@ -412,7 +419,7 @@
     "all": "37438349bb3dee9c"
    },
    "row_hash": "c1c0e2ac2588a579",
-   "carried": false,
+   "carried": true,
    "pass": 6
   },
   {
@@ -429,7 +436,7 @@
     "all": "2caea444a4dc620d"
    },
    "row_hash": "c1c0e2ac2588a579",
-   "carried": false,
+   "carried": true,
    "pass": 6
   },
   {
@@ -1246,7 +1253,7 @@
     "all": "9d4339762cdd8960"
    },
    "row_hash": "80d415cf08e0ebfe",
-   "carried": false,
+   "carried": true,
    "pass": 6
   },
   {
@@ -1297,7 +1304,7 @@
     "all": "37438349bb3dee9c"
    },
    "row_hash": "80d415cf08e0ebfe",
-   "carried": false,
+   "carried": true,
    "pass": 6
   },
   {
@@ -1314,7 +1321,7 @@
     "all": "2caea444a4dc620d"
    },
    "row_hash": "80d415cf08e0ebfe",
-   "carried": false,
+   "carried": true,
    "pass": 6
   },
   {
@@ -1439,7 +1446,7 @@
     "all": "2caea444a4dc620d"
    },
    "row_hash": "f40f51a0fd6cfd10",
-   "carried": false,
+   "carried": true,
    "pass": 6
   },
   {
@@ -1495,7 +1502,7 @@
     "all": "2caea444a4dc620d"
    },
    "row_hash": "ef9bbbe96651efc7",
-   "carried": false,
+   "carried": true,
    "pass": 6
   },
   {
@@ -1594,7 +1601,7 @@
     "all": "2caea444a4dc620d"
    },
    "row_hash": "bfff76edbee583de",
-   "carried": false,
+   "carried": true,
    "pass": 6
   },
   {
@@ -1723,13 +1730,13 @@
    "screen": "*",
    "verdict": "PASS",
    "line": "\u2014",
-   "why": "snack, coffee, lunch, grass carry no spot",
+   "why": "the two spots are the run (a look, a repeat) and the mirror (a body moment); the snack, lunch, coffee, workout and grass screens carry none",
    "cause": null,
    "note": false,
-   "screen_hash": "443df94f1f7eb1cf",
-   "row_hash": "447179d04e01ff5d",
-   "carried": true,
-   "pass": 1
+   "screen_hash": "897b7347c2fa1b52",
+   "row_hash": "64b72c778e96e443",
+   "carried": false,
+   "pass": 7
   },
   {
    "row": "C1267",
@@ -2796,7 +2803,7 @@
     "all": "9d4339762cdd8960"
    },
    "row_hash": "67e48e60d5053a2e",
-   "carried": false,
+   "carried": true,
    "pass": 6
   },
   {
@@ -2847,7 +2854,7 @@
     "all": "37438349bb3dee9c"
    },
    "row_hash": "67e48e60d5053a2e",
-   "carried": false,
+   "carried": true,
    "pass": 6
   },
   {
@@ -2864,7 +2871,7 @@
     "all": "2caea444a4dc620d"
    },
    "row_hash": "67e48e60d5053a2e",
-   "carried": false,
+   "carried": true,
    "pass": 6
   },
   {
@@ -2928,7 +2935,7 @@
     "all": "9d4339762cdd8960"
    },
    "row_hash": "310706ee076318f2",
-   "carried": false,
+   "carried": true,
    "pass": 6
   },
   {
@@ -2979,7 +2986,7 @@
     "all": "37438349bb3dee9c"
    },
    "row_hash": "310706ee076318f2",
-   "carried": false,
+   "carried": true,
    "pass": 6
   },
   {
@@ -2996,7 +3003,7 @@
     "all": "2caea444a4dc620d"
    },
    "row_hash": "310706ee076318f2",
-   "carried": false,
+   "carried": true,
    "pass": 6
   },
   {
@@ -3502,7 +3509,7 @@
     "all": "9d4339762cdd8960"
    },
    "row_hash": "1b724e2dcfbf028b",
-   "carried": false,
+   "carried": true,
    "pass": 6
   },
   {
@@ -3519,7 +3526,7 @@
     "all": "37438349bb3dee9c"
    },
    "row_hash": "1b724e2dcfbf028b",
-   "carried": false,
+   "carried": true,
    "pass": 6
   },
   {
@@ -3536,7 +3543,7 @@
     "all": "2caea444a4dc620d"
    },
    "row_hash": "1b724e2dcfbf028b",
-   "carried": false,
+   "carried": true,
    "pass": 6
   },
   {
@@ -3566,7 +3573,7 @@
     "all": "9d4339762cdd8960"
    },
    "row_hash": "5c890033f6ac38b8",
-   "carried": false,
+   "carried": true,
    "pass": 6
   },
   {
@@ -3583,7 +3590,7 @@
     "all": "37438349bb3dee9c"
    },
    "row_hash": "5c890033f6ac38b8",
-   "carried": false,
+   "carried": true,
    "pass": 6
   },
   {
@@ -3600,7 +3607,7 @@
     "all": "2caea444a4dc620d"
    },
    "row_hash": "5c890033f6ac38b8",
-   "carried": false,
+   "carried": true,
    "pass": 6
   },
   {
@@ -3630,7 +3637,7 @@
     "all": "9d4339762cdd8960"
    },
    "row_hash": "265ece64add83676",
-   "carried": false,
+   "carried": true,
    "pass": 6
   },
   {
@@ -3647,7 +3654,7 @@
     "all": "37438349bb3dee9c"
    },
    "row_hash": "265ece64add83676",
-   "carried": false,
+   "carried": true,
    "pass": 6
   },
   {
@@ -3664,7 +3671,7 @@
     "all": "2caea444a4dc620d"
    },
    "row_hash": "265ece64add83676",
-   "carried": false,
+   "carried": true,
    "pass": 6
   },
   {
@@ -3694,7 +3701,7 @@
     "all": "9d4339762cdd8960"
    },
    "row_hash": "6372efb027eb2034",
-   "carried": false,
+   "carried": true,
    "pass": 6
   },
   {
@@ -3711,7 +3718,7 @@
     "all": "37438349bb3dee9c"
    },
    "row_hash": "6372efb027eb2034",
-   "carried": false,
+   "carried": true,
    "pass": 6
   },
   {
@@ -3728,7 +3735,7 @@
     "all": "2caea444a4dc620d"
    },
    "row_hash": "6372efb027eb2034",
-   "carried": false,
+   "carried": true,
    "pass": 6
   },
   {
@@ -3758,7 +3765,7 @@
     "all": "9d4339762cdd8960"
    },
    "row_hash": "df5ed7a36dbc74e4",
-   "carried": false,
+   "carried": true,
    "pass": 6
   },
   {
@@ -3775,7 +3782,7 @@
     "all": "37438349bb3dee9c"
    },
    "row_hash": "df5ed7a36dbc74e4",
-   "carried": false,
+   "carried": true,
    "pass": 6
   },
   {
@@ -3792,7 +3799,7 @@
     "all": "2caea444a4dc620d"
    },
    "row_hash": "df5ed7a36dbc74e4",
-   "carried": false,
+   "carried": true,
    "pass": 6
   },
   {
@@ -3822,7 +3829,7 @@
     "all": "9d4339762cdd8960"
    },
    "row_hash": "4f83b0b5eb45f71b",
-   "carried": false,
+   "carried": true,
    "pass": 6
   },
   {
@@ -3839,7 +3846,7 @@
     "all": "37438349bb3dee9c"
    },
    "row_hash": "4f83b0b5eb45f71b",
-   "carried": false,
+   "carried": true,
    "pass": 6
   },
   {
@@ -3856,7 +3863,7 @@
     "all": "2caea444a4dc620d"
    },
    "row_hash": "4f83b0b5eb45f71b",
-   "carried": false,
+   "carried": true,
    "pass": 6
   },
   {
@@ -3886,7 +3893,7 @@
     "all": "9d4339762cdd8960"
    },
    "row_hash": "ce3b42a8c86da5b8",
-   "carried": false,
+   "carried": true,
    "pass": 6
   },
   {
@@ -3903,7 +3910,7 @@
     "all": "37438349bb3dee9c"
    },
    "row_hash": "ce3b42a8c86da5b8",
-   "carried": false,
+   "carried": true,
    "pass": 6
   },
   {
@@ -3920,7 +3927,7 @@
     "all": "2caea444a4dc620d"
    },
    "row_hash": "ce3b42a8c86da5b8",
-   "carried": false,
+   "carried": true,
    "pass": 6
   },
   {
@@ -3950,7 +3957,7 @@
     "all": "9d4339762cdd8960"
    },
    "row_hash": "be1c18ee466455f6",
-   "carried": false,
+   "carried": true,
    "pass": 6
   },
   {
@@ -3967,7 +3974,7 @@
     "all": "37438349bb3dee9c"
    },
    "row_hash": "be1c18ee466455f6",
-   "carried": false,
+   "carried": true,
    "pass": 6
   },
   {
@@ -3984,7 +3991,7 @@
     "all": "2caea444a4dc620d"
    },
    "row_hash": "be1c18ee466455f6",
-   "carried": false,
+   "carried": true,
    "pass": 6
   },
   {
@@ -4035,7 +4042,7 @@
     "all": "9d4339762cdd8960"
    },
    "row_hash": "c750f9b6ab4ace14",
-   "carried": false,
+   "carried": true,
    "pass": 6
   },
   {
@@ -4086,7 +4093,7 @@
     "all": "37438349bb3dee9c"
    },
    "row_hash": "c750f9b6ab4ace14",
-   "carried": false,
+   "carried": true,
    "pass": 6
   },
   {
@@ -4103,7 +4110,7 @@
     "all": "2caea444a4dc620d"
    },
    "row_hash": "c750f9b6ab4ace14",
-   "carried": false,
+   "carried": true,
    "pass": 6
   },
   {
@@ -4154,7 +4161,7 @@
     "all": "9d4339762cdd8960"
    },
    "row_hash": "bd07273d5822f34f",
-   "carried": false,
+   "carried": true,
    "pass": 6
   },
   {
@@ -4205,7 +4212,7 @@
     "all": "37438349bb3dee9c"
    },
    "row_hash": "bd07273d5822f34f",
-   "carried": false,
+   "carried": true,
    "pass": 6
   },
   {
@@ -4222,7 +4229,7 @@
     "all": "2caea444a4dc620d"
    },
    "row_hash": "bd07273d5822f34f",
-   "carried": false,
+   "carried": true,
    "pass": 6
   },
   {
@@ -4252,7 +4259,7 @@
     "all": "9d4339762cdd8960"
    },
    "row_hash": "7b2bb0dfdbcfe946",
-   "carried": false,
+   "carried": true,
    "pass": 6
   },
   {
@@ -4269,7 +4276,7 @@
     "all": "37438349bb3dee9c"
    },
    "row_hash": "7b2bb0dfdbcfe946",
-   "carried": false,
+   "carried": true,
    "pass": 6
   },
   {
@@ -4286,72 +4293,75 @@
     "all": "2caea444a4dc620d"
    },
    "row_hash": "7b2bb0dfdbcfe946",
-   "carried": false,
+   "carried": true,
    "pass": 6
   },
   {
    "row": "C920",
    "screen": "*",
-   "verdict": "N/A",
+   "verdict": "PASS",
    "line": "Done",
-   "why": "no move between places; Done returns to the same room",
+   "why": "every row's Done returns to the same place, so no hop is charged; the minutes are the activity's own, on its label",
    "cause": null,
    "note": false,
-   "screen_hash": "443df94f1f7eb1cf",
-   "row_hash": "695dc5d9d0e5e749",
-   "carried": true,
-   "pass": 1
+   "screen_hash": "897b7347c2fa1b52",
+   "row_hash": "513927dd127fca04",
+   "carried": false,
+   "pass": 7
   },
   {
    "row": "C920",
    "screen": "body_lunch.eat",
-   "verdict": "N/A",
-   "line": "Done",
-   "why": "No move or exit on this screen: Done returns to the same room with its own time.",
+   "verdict": "PASS",
+   "line": "Done (back to the Cafeteria, 20 min)",
+   "why": "20 minutes is lunch, on the label; no hop; Zoe's Tue/Thu 13\u201314 cafeteria row adds no claim to the line",
    "cause": null,
    "note": false,
    "screen_hash": {
     "text": "00b85db49e628bf5",
-    "facts": "3c7fa927521bb8d1",
-    "all": "9d4339762cdd8960"
+    "facts": "f0aaa3201cfb8ef5",
+    "facts2": "f0aaa3201cfb8ef5",
+    "all": "a68b14bbbf1a24f5"
    },
-   "row_hash": "695dc5d9d0e5e749",
+   "row_hash": "513927dd127fca04",
    "carried": false,
-   "pass": 6
+   "pass": 7
   },
   {
    "row": "C920",
    "screen": "body_snack.eat",
-   "verdict": "N/A",
-   "line": "Done",
-   "why": "No move or exit on this screen: Done returns to the same room with its own time.",
+   "verdict": "PASS",
+   "line": "Done (back to the Corner Shop, 5 min)",
+   "why": "5 minutes is the snack, on the label; no hop",
    "cause": null,
    "note": false,
    "screen_hash": {
     "text": "28ae2143b3c8a2ae",
     "facts": "fb7389f7fdd9b7e8",
+    "facts2": "fb7389f7fdd9b7e8",
     "all": "37438349bb3dee9c"
    },
-   "row_hash": "695dc5d9d0e5e749",
+   "row_hash": "513927dd127fca04",
    "carried": false,
-   "pass": 6
+   "pass": 7
   },
   {
    "row": "C920",
    "screen": "body_workout.lift",
-   "verdict": "N/A",
-   "line": "Done",
-   "why": "No move or exit on this screen: Done returns to the same room with its own time.",
+   "verdict": "PASS",
+   "line": "Done (back to the Gym, 60 min)",
+   "why": "1 hour is the workout, on the label; no hop",
    "cause": null,
    "note": false,
    "screen_hash": {
     "text": "b0c43c3aa325a5e3",
     "facts": "c4485366da85d0a9",
+    "facts2": "c4485366da85d0a9",
     "all": "2caea444a4dc620d"
    },
-   "row_hash": "695dc5d9d0e5e749",
+   "row_hash": "513927dd127fca04",
    "carried": false,
-   "pass": 6
+   "pass": 7
   },
   {
    "row": "C924",
@@ -4380,7 +4390,7 @@
     "all": "9d4339762cdd8960"
    },
    "row_hash": "791cd173e23fb130",
-   "carried": false,
+   "carried": true,
    "pass": 6
   },
   {
@@ -4397,7 +4407,7 @@
     "all": "37438349bb3dee9c"
    },
    "row_hash": "791cd173e23fb130",
-   "carried": false,
+   "carried": true,
    "pass": 6
   },
   {
@@ -4414,7 +4424,7 @@
     "all": "2caea444a4dc620d"
    },
    "row_hash": "791cd173e23fb130",
-   "carried": false,
+   "carried": true,
    "pass": 6
   },
   {
@@ -4444,7 +4454,7 @@
     "all": "9d4339762cdd8960"
    },
    "row_hash": "177d1e1776fac74b",
-   "carried": false,
+   "carried": true,
    "pass": 6
   },
   {
@@ -4461,7 +4471,7 @@
     "all": "37438349bb3dee9c"
    },
    "row_hash": "177d1e1776fac74b",
-   "carried": false,
+   "carried": true,
    "pass": 6
   },
   {
@@ -4478,7 +4488,7 @@
     "all": "2caea444a4dc620d"
    },
    "row_hash": "177d1e1776fac74b",
-   "carried": false,
+   "carried": true,
    "pass": 6
   },
   {
@@ -4542,7 +4552,7 @@
     "all": "9d4339762cdd8960"
    },
    "row_hash": "4e86d143688ba8e5",
-   "carried": false,
+   "carried": true,
    "pass": 6
   },
   {
@@ -4593,7 +4603,7 @@
     "all": "37438349bb3dee9c"
    },
    "row_hash": "4e86d143688ba8e5",
-   "carried": false,
+   "carried": true,
    "pass": 6
   },
   {
@@ -4610,7 +4620,7 @@
     "all": "2caea444a4dc620d"
    },
    "row_hash": "4e86d143688ba8e5",
-   "carried": false,
+   "carried": true,
    "pass": 6
   },
   {
@@ -4640,7 +4650,7 @@
     "all": "9d4339762cdd8960"
    },
    "row_hash": "2c3ccc6bd9929d7f",
-   "carried": false,
+   "carried": true,
    "pass": 6
   },
   {
@@ -4657,7 +4667,7 @@
     "all": "37438349bb3dee9c"
    },
    "row_hash": "2c3ccc6bd9929d7f",
-   "carried": false,
+   "carried": true,
    "pass": 6
   },
   {
@@ -4674,7 +4684,7 @@
     "all": "2caea444a4dc620d"
    },
    "row_hash": "2c3ccc6bd9929d7f",
-   "carried": false,
+   "carried": true,
    "pass": 6
   },
   {
@@ -4704,7 +4714,7 @@
     "all": "9d4339762cdd8960"
    },
    "row_hash": "e20b027bad88ca8c",
-   "carried": false,
+   "carried": true,
    "pass": 6
   },
   {
@@ -4721,7 +4731,7 @@
     "all": "37438349bb3dee9c"
    },
    "row_hash": "e20b027bad88ca8c",
-   "carried": false,
+   "carried": true,
    "pass": 6
   },
   {
@@ -4738,7 +4748,7 @@
     "all": "2caea444a4dc620d"
    },
    "row_hash": "e20b027bad88ca8c",
-   "carried": false,
+   "carried": true,
    "pass": 6
   },
   {
@@ -4768,7 +4778,7 @@
     "all": "9d4339762cdd8960"
    },
    "row_hash": "beb57cd46fe906bf",
-   "carried": false,
+   "carried": true,
    "pass": 6
   },
   {
@@ -4785,7 +4795,7 @@
     "all": "37438349bb3dee9c"
    },
    "row_hash": "beb57cd46fe906bf",
-   "carried": false,
+   "carried": true,
    "pass": 6
   },
   {
@@ -4802,7 +4812,7 @@
     "all": "2caea444a4dc620d"
    },
    "row_hash": "beb57cd46fe906bf",
-   "carried": false,
+   "carried": true,
    "pass": 6
   },
   {
@@ -4866,7 +4876,7 @@
     "all": "9d4339762cdd8960"
    },
    "row_hash": "1aadffd96e76381c",
-   "carried": false,
+   "carried": true,
    "pass": 6
   },
   {
@@ -4917,7 +4927,7 @@
     "all": "37438349bb3dee9c"
    },
    "row_hash": "1aadffd96e76381c",
-   "carried": false,
+   "carried": true,
    "pass": 6
   },
   {
@@ -4934,7 +4944,7 @@
     "all": "2caea444a4dc620d"
    },
    "row_hash": "1aadffd96e76381c",
-   "carried": false,
+   "carried": true,
    "pass": 6
   },
   {
@@ -5067,7 +5077,7 @@
     "all": "9d4339762cdd8960"
    },
    "row_hash": "13a714429d15f3b2",
-   "carried": false,
+   "carried": true,
    "pass": 6
   },
   {
@@ -5118,7 +5128,7 @@
     "all": "37438349bb3dee9c"
    },
    "row_hash": "13a714429d15f3b2",
-   "carried": false,
+   "carried": true,
    "pass": 6
   },
   {
@@ -5135,7 +5145,7 @@
     "all": "2caea444a4dc620d"
    },
    "row_hash": "13a714429d15f3b2",
-   "carried": false,
+   "carried": true,
    "pass": 6
   },
   {
@@ -5281,7 +5291,7 @@
     "all": "9d4339762cdd8960"
    },
    "row_hash": "e64ce2672d85d2d8",
-   "carried": false,
+   "carried": true,
    "pass": 6
   },
   {
@@ -5332,7 +5342,7 @@
     "all": "37438349bb3dee9c"
    },
    "row_hash": "e64ce2672d85d2d8",
-   "carried": false,
+   "carried": true,
    "pass": 6
   },
   {
@@ -5349,7 +5359,7 @@
     "all": "2caea444a4dc620d"
    },
    "row_hash": "e64ce2672d85d2d8",
-   "carried": false,
+   "carried": true,
    "pass": 6
   },
   {
@@ -5380,9 +5390,206 @@
   }
  ],
  "causes": [],
- "pending": [],
- "asked": 78,
- "answered": 78,
- "pass_items": [],
+ "pending": [
+  {
+   "row": "C889",
+   "screen": "*",
+   "why": "its rule's text changed"
+  },
+  {
+   "row": "C889",
+   "screen": "body_lunch.eat",
+   "why": "its rule's text changed"
+  },
+  {
+   "row": "C889",
+   "screen": "body_snack.eat",
+   "why": "its rule's text changed"
+  },
+  {
+   "row": "C889",
+   "screen": "body_workout.lift",
+   "why": "its rule's text changed"
+  },
+  {
+   "row": "C906",
+   "screen": "*",
+   "why": "its rule's text changed"
+  },
+  {
+   "row": "C906",
+   "screen": "body_lunch.eat",
+   "why": "its rule's text changed"
+  },
+  {
+   "row": "C906",
+   "screen": "body_snack.eat",
+   "why": "its rule's text changed"
+  },
+  {
+   "row": "C906",
+   "screen": "body_workout.lift",
+   "why": "its rule's text changed"
+  },
+  {
+   "row": "C910",
+   "screen": "*",
+   "why": "its rule's text changed"
+  },
+  {
+   "row": "C910",
+   "screen": "body_lunch.eat",
+   "why": "its rule's text changed"
+  },
+  {
+   "row": "C910",
+   "screen": "body_snack.eat",
+   "why": "its rule's text changed"
+  },
+  {
+   "row": "C910",
+   "screen": "body_workout.lift",
+   "why": "its rule's text changed"
+  },
+  {
+   "row": "C929",
+   "screen": "*",
+   "why": "its rule's text changed"
+  },
+  {
+   "row": "C929",
+   "screen": "body_lunch.eat",
+   "why": "its rule's text changed"
+  },
+  {
+   "row": "C929",
+   "screen": "body_snack.eat",
+   "why": "its rule's text changed"
+  },
+  {
+   "row": "C929",
+   "screen": "body_workout.lift",
+   "why": "its rule's text changed"
+  },
+  {
+   "row": "C953",
+   "screen": "*",
+   "why": "its rule's text changed"
+  }
+ ],
+ "asked": 22,
+ "answered": 5,
+ "pass_items": [
+  {
+   "row": "C1265",
+   "screen": "*",
+   "why": "its rule's text changed"
+  },
+  {
+   "row": "C889",
+   "screen": "*",
+   "why": "its rule's text changed"
+  },
+  {
+   "row": "C889",
+   "screen": "body_lunch.eat",
+   "why": "its rule's text changed"
+  },
+  {
+   "row": "C889",
+   "screen": "body_snack.eat",
+   "why": "its rule's text changed"
+  },
+  {
+   "row": "C889",
+   "screen": "body_workout.lift",
+   "why": "its rule's text changed"
+  },
+  {
+   "row": "C906",
+   "screen": "*",
+   "why": "its rule's text changed"
+  },
+  {
+   "row": "C906",
+   "screen": "body_lunch.eat",
+   "why": "its rule's text changed"
+  },
+  {
+   "row": "C906",
+   "screen": "body_snack.eat",
+   "why": "its rule's text changed"
+  },
+  {
+   "row": "C906",
+   "screen": "body_workout.lift",
+   "why": "its rule's text changed"
+  },
+  {
+   "row": "C910",
+   "screen": "*",
+   "why": "its rule's text changed"
+  },
+  {
+   "row": "C910",
+   "screen": "body_lunch.eat",
+   "why": "its rule's text changed"
+  },
+  {
+   "row": "C910",
+   "screen": "body_snack.eat",
+   "why": "its rule's text changed"
+  },
+  {
+   "row": "C910",
+   "screen": "body_workout.lift",
+   "why": "its rule's text changed"
+  },
+  {
+   "row": "C920",
+   "screen": "*",
+   "why": "its rule's text changed"
+  },
+  {
+   "row": "C920",
+   "screen": "body_lunch.eat",
+   "why": "its rule's text changed"
+  },
+  {
+   "row": "C920",
+   "screen": "body_snack.eat",
+   "why": "its rule's text changed"
+  },
+  {
+   "row": "C920",
+   "screen": "body_workout.lift",
+   "why": "its rule's text changed"
+  },
+  {
+   "row": "C929",
+   "screen": "*",
+   "why": "its rule's text changed"
+  },
+  {
+   "row": "C929",
+   "screen": "body_lunch.eat",
+   "why": "its rule's text changed"
+  },
+  {
+   "row": "C929",
+   "screen": "body_snack.eat",
+   "why": "its rule's text changed"
+  },
+  {
+   "row": "C929",
+   "screen": "body_workout.lift",
+   "why": "its rule's text changed"
+  },
+  {
+   "row": "C953",
+   "screen": "*",
+   "why": "its rule's text changed"
+  }
+ ],
  "unowed": []
 }

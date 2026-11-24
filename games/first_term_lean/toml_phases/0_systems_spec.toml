@@ -280,6 +280,12 @@ text = "Marco, 29. A trainer at the gym."
 tip = "Weekdays 6 to 10am and 5 to 9pm, and Saturday 8am to 2pm."
 
 [[quest_cards]]
+npc_id = "npc_zoe"
+when = [{ flag = "met_zoe", op = "is_true" }]
+text = "Zoe, 19. She found you on the quad."
+tip = "On the quad weekday afternoons, 1 to 3 (2 to 3 on Tuesday and Thursday, after lunch in the cafeteria); at home every evening, 6 to 11, two streets from campus."
+
+[[quest_cards]]
 npc_id = "npc_nina"
 when = [{ flag = "met_nina", op = "is_true" }]
 text = "Nina, 26. She runs the clothes shop on your street."

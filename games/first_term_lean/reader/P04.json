@@ -1,12 +1,12 @@
 {
  "piece": "P04",
- "pass": 3,
+ "pass": 4,
  "screens": {
   "travel_bus_to_campus.ride": {
-   "text": "98713ee301dfd03b",
+   "text": "698e72348f4324c4",
    "facts": "4bec7b370aee14bb",
    "facts2": "4bec7b370aee14bb",
-   "all": "144f95579bff818c"
+   "all": "7466fbb9245615b0"
   },
   "travel_bus_to_campus.packed_no": {
    "text": "9fe19f6fb3f7aeaf",
@@ -21,24 +21,24 @@
    "all": "f472faad1449db1f"
   },
   "travel_walk_to_campus.ride": {
-   "text": "95899aa068cb2109",
+   "text": "d660ec2dfd9834c8",
    "facts": "4bec7b370aee14bb",
    "facts2": "4bec7b370aee14bb",
-   "all": "93b098588465b315"
+   "all": "4ee027c9ffd2e7fb"
   },
   "travel_bus_home.ride": {
-   "text": "7690b0308f800bed",
-   "facts": "9df05c3a3b8296d2",
-   "facts2": "9df05c3a3b8296d2",
-   "all": "bc984cb9bcef04d1"
+   "text": "78ac51a56f017852",
+   "facts": "5d90976a96216451",
+   "facts2": "5d90976a96216451",
+   "all": "a4c199ff3a84cf16"
   },
   "travel_walk_home.ride": {
-   "text": "d5d79456225ea4de",
-   "facts": "9df05c3a3b8296d2",
-   "facts2": "9df05c3a3b8296d2",
-   "all": "c2c014942b4fd5e8"
+   "text": "174378e0c284c707",
+   "facts": "5d90976a96216451",
+   "facts2": "5d90976a96216451",
+   "all": "528247f11444ef92"
   },
-  "*": "d3e09853ea2f6bae"
+  "*": "ba2e9a43b5cc50a7"
  },
  "rows": {
   "B1": "5276068df1ca6fa9",
@@ -54,19 +54,19 @@
   "B11": "1e252efd0904a971",
   "B12": "fd109745c67b71d7",
   "B13": "aaf6518b64dcce55",
-  "C889": "37967c45d79163fc",
-  "C906": "c257bba6d15edc3f",
+  "C889": "cebb147317e10c05",
+  "C906": "b8d0e5793dd14e95",
   "C926": "8cd1b7e3576dc7b5",
   "C900": "a4ef8ce78f554d6b",
   "C902": "66462bdbadae0c77",
   "C903": "263890a884329d60",
   "C904": "999816c6ed6cc232",
   "C892": "1d8d188451bcb51e",
-  "C910": "c86548143d50a17d",
-  "C929": "33a2ca367c2aac5b",
+  "C910": "19dcf805483efc88",
+  "C929": "b628ac285ac9c529",
   "C897": "16b066aee3c1a937",
   "C924": "ce540d1e01b7c301",
-  "C920": "3b568acb10d6806b",
+  "C920": "e7485c9faee24e77",
   "C913": "48bd82911a86ecbd",
   "C930": "97d54d350dd4ee77",
   "L167": "adf7bb3f8b632ac3",
@@ -78,12 +78,12 @@
   "C928": "799e1dd153166b6d",
   "C931": "1b8984f52b99537e",
   "C890": "3d716de4269fbd6c",
-  "clock#1": "cd89df2f76a7be89",
-  "clock#2": "1a52b17c19333377",
+  "clock#1": "b093ed58ec403b3c",
+  "clock#2": "e393ecafc7ab9a6c",
   "clock#3": "aae8f146c8ec933d",
   "clock#4": "c33118361d16b379",
   "clock#5": "95c5edec9e714e7b",
-  "clock#6": "31fd30fb07702bc9",
+  "clock#6": "bdedeec28a16e36f",
   "clock#7": "313c48a91780f62b",
   "clock#8": "f0c2400d02519978",
   "clock#9": "5d697f6bcd9f82de",
@@ -147,7 +147,7 @@
   "C1267": "6bafcadf3d586d5a",
   "C1249": "604706399d2f1194",
   "C1250": "8384cc6bcbd67c07",
-  "C1265": "cbf803b180c4fbdd",
+  "C1265": "00b79725344762be",
   "C1262": "2946d2fe0b7dc28f",
   "C1234": "7dc492e03732757e",
   "L121": "cddfa55c18e5c7b7",
@@ -165,7 +165,7 @@
   "C1255": "d81893b9077b4b53",
   "L97": "2bfb9527e76ad93b",
   "media#1": "3641bf707d9adfce",
-  "media#2": "6fbfd98c2bfee006",
+  "media#2": "01ba7fa1cec4bc7a",
   "media#3": "8c75b0d488b188e2",
   "media#4": "03599fc0722690b6",
   "media#5": "2cf5e3607ccecd4a",
@@ -180,7 +180,7 @@
   "C777": "38b483431fa177b0",
   "C773": "0825e8443f9180d0",
   "C758": "6329db1ec04ec3da",
-  "C953": "26f84fb90a0ef795",
+  "C953": "7ab90b4c71f3d98a",
   "C738": "976cd3e099c13e51",
   "C762": "877801c22bdade00",
   "L147": "5dea5707be5e7e0a",
@@ -192,7 +192,7 @@
   "places#1": "18252966b4327f58",
   "places#2": "3ab79adc34668b04",
   "places#3": "56d056c80da49bb6",
-  "places#4": "ada53ed66015c980",
+  "places#4": "ae3ba300e1045c9f",
   "places#5": "90ec575adee9bf74",
   "places#6": "f2bc5f0f10c64c4b",
   "places#7": "2a095bf54f175e5e",
@@ -223,7 +223,7 @@
   "systems#1": "11a025871bd91561",
   "systems#2": "08602a299af77b30",
   "systems#3": "2d317a22b4b850f2",
-  "systems#4": "8bf41d5847343d42",
+  "systems#4": "671b614cf229df83",
   "systems#5": "94a3bd2b1d063362",
   "systems#6": "c3246ca0c2177dd6",
   "systems#7": "f862f66e0c4425a8",
@@ -262,7 +262,7 @@
    "note": false,
    "screen_hash": "d3e09853ea2f6bae",
    "row_hash": "5276068df1ca6fa9",
-   "carried": false,
+   "carried": true,
    "pass": 3
   },
   {
@@ -275,8 +275,26 @@
    "note": false,
    "screen_hash": "d3e09853ea2f6bae",
    "row_hash": "c1c0e2ac2588a579",
-   "carried": false,
+   "carried": true,
    "pass": 3
+  },
+  {
+   "row": "B10",
+   "screen": "travel_bus_home.ride",
+   "verdict": "PASS",
+   "line": "The bus home is half empty. You get the back seat and watch campus go.",
+   "why": "repeatable from the quad at any hour (no conditions); names nobody, no past, no first time; true on every visit",
+   "cause": "",
+   "note": false,
+   "screen_hash": {
+    "text": "78ac51a56f017852",
+    "facts": "5d90976a96216451",
+    "facts2": "5d90976a96216451",
+    "all": "a4c199ff3a84cf16"
+   },
+   "row_hash": "c1c0e2ac2588a579",
+   "carried": false,
+   "pass": 4
   },
   {
    "row": "B10",
@@ -293,8 +311,26 @@
     "all": "144f95579bff818c"
    },
    "row_hash": "c1c0e2ac2588a579",
-   "carried": false,
+   "carried": true,
    "pass": 3
+  },
+  {
+   "row": "B10",
+   "screen": "travel_walk_home.ride",
+   "verdict": "PASS",
+   "line": "The walk home takes forever. Your street, finally.",
+   "why": "repeatable from the quad at any hour (no conditions); names nobody, no past, no first time; true on every visit",
+   "cause": "",
+   "note": false,
+   "screen_hash": {
+    "text": "174378e0c284c707",
+    "facts": "5d90976a96216451",
+    "facts2": "5d90976a96216451",
+    "all": "528247f11444ef92"
+   },
+   "row_hash": "c1c0e2ac2588a579",
+   "carried": false,
+   "pass": 4
   },
   {
    "row": "B11",
@@ -306,7 +342,7 @@
    "note": false,
    "screen_hash": "d3e09853ea2f6bae",
    "row_hash": "1e252efd0904a971",
-   "carried": false,
+   "carried": true,
    "pass": 3
   },
   {
@@ -319,7 +355,7 @@
    "note": false,
    "screen_hash": "d3e09853ea2f6bae",
    "row_hash": "fd109745c67b71d7",
-   "carried": false,
+   "carried": true,
    "pass": 3
   },
   {
@@ -332,7 +368,7 @@
    "note": false,
    "screen_hash": "d3e09853ea2f6bae",
    "row_hash": "aaf6518b64dcce55",
-   "carried": false,
+   "carried": true,
    "pass": 3
   },
   {
@@ -345,7 +381,7 @@
    "note": false,
    "screen_hash": "d3e09853ea2f6bae",
    "row_hash": "4d9f2ebbce9a39cc",
-   "carried": false,
+   "carried": true,
    "pass": 3
   },
   {
@@ -358,7 +394,7 @@
    "note": false,
    "screen_hash": "d3e09853ea2f6bae",
    "row_hash": "4d1fce1c4523b5d4",
-   "carried": false,
+   "carried": true,
    "pass": 3
   },
   {
@@ -371,7 +407,7 @@
    "note": false,
    "screen_hash": "d3e09853ea2f6bae",
    "row_hash": "ced37cb0de6e7202",
-   "carried": false,
+   "carried": true,
    "pass": 3
   },
   {
@@ -384,7 +420,7 @@
    "note": false,
    "screen_hash": "d3e09853ea2f6bae",
    "row_hash": "efcbd1ac6a95e2f2",
-   "carried": false,
+   "carried": true,
    "pass": 3
   },
   {
@@ -397,7 +433,7 @@
    "note": false,
    "screen_hash": "d3e09853ea2f6bae",
    "row_hash": "0e32092e9fe64f2c",
-   "carried": false,
+   "carried": true,
    "pass": 3
   },
   {
@@ -410,7 +446,7 @@
    "note": false,
    "screen_hash": "d3e09853ea2f6bae",
    "row_hash": "cef53154cc971fef",
-   "carried": false,
+   "carried": true,
    "pass": 3
   },
   {
@@ -423,8 +459,26 @@
    "note": false,
    "screen_hash": "d3e09853ea2f6bae",
    "row_hash": "80d415cf08e0ebfe",
-   "carried": false,
+   "carried": true,
    "pass": 3
+  },
+  {
+   "row": "B8",
+   "screen": "travel_bus_home.ride",
+   "verdict": "PASS",
+   "line": "Take the bus home ($2, 20 min)",
+   "why": "$2 cost, 20 minutes on 'Get off on your street'; agrees with PLAN 8c and card P04; no garment named",
+   "cause": "",
+   "note": false,
+   "screen_hash": {
+    "text": "78ac51a56f017852",
+    "facts": "5d90976a96216451",
+    "facts2": "5d90976a96216451",
+    "all": "a4c199ff3a84cf16"
+   },
+   "row_hash": "80d415cf08e0ebfe",
+   "carried": false,
+   "pass": 4
   },
   {
    "row": "B8",
@@ -441,8 +495,26 @@
     "all": "144f95579bff818c"
    },
    "row_hash": "80d415cf08e0ebfe",
-   "carried": false,
+   "carried": true,
    "pass": 3
+  },
+  {
+   "row": "B8",
+   "screen": "travel_walk_home.ride",
+   "verdict": "PASS",
+   "line": "Walk home (45 min)",
+   "why": "no cost, 45 minutes on 'Walk up your street'; agrees with PLAN 8c and card P04; no garment named",
+   "cause": "",
+   "note": false,
+   "screen_hash": {
+    "text": "174378e0c284c707",
+    "facts": "5d90976a96216451",
+    "facts2": "5d90976a96216451",
+    "all": "528247f11444ef92"
+   },
+   "row_hash": "80d415cf08e0ebfe",
+   "carried": false,
+   "pass": 4
   },
   {
    "row": "B9",
@@ -454,7 +526,7 @@
    "note": false,
    "screen_hash": "d3e09853ea2f6bae",
    "row_hash": "3b1fcdf549bcc558",
-   "carried": false,
+   "carried": true,
    "pass": 3
   },
   {
@@ -467,7 +539,7 @@
    "note": true,
    "screen_hash": "d3e09853ea2f6bae",
    "row_hash": "954cc22e7ba9fafa",
-   "carried": false,
+   "carried": true,
    "pass": 3
   },
   {
@@ -480,7 +552,7 @@
    "note": true,
    "screen_hash": "d3e09853ea2f6bae",
    "row_hash": "873aca603709c89d",
-   "carried": false,
+   "carried": true,
    "pass": 3
   },
   {
@@ -493,7 +565,7 @@
    "note": true,
    "screen_hash": "d3e09853ea2f6bae",
    "row_hash": "529731c34f717060",
-   "carried": false,
+   "carried": true,
    "pass": 3
   },
   {
@@ -506,7 +578,7 @@
    "note": true,
    "screen_hash": "d3e09853ea2f6bae",
    "row_hash": "03f537ef62449273",
-   "carried": false,
+   "carried": true,
    "pass": 3
   },
   {
@@ -519,7 +591,7 @@
    "note": true,
    "screen_hash": "d3e09853ea2f6bae",
    "row_hash": "c0dab6a7f5cc12d1",
-   "carried": false,
+   "carried": true,
    "pass": 3
   },
   {
@@ -532,7 +604,7 @@
    "note": true,
    "screen_hash": "d3e09853ea2f6bae",
    "row_hash": "2808c51942d70644",
-   "carried": false,
+   "carried": true,
    "pass": 3
   },
   {
@@ -545,7 +617,7 @@
    "note": true,
    "screen_hash": "d3e09853ea2f6bae",
    "row_hash": "814e70bd8ea2f4c2",
-   "carried": false,
+   "carried": true,
    "pass": 3
   },
   {
@@ -558,7 +630,7 @@
    "note": false,
    "screen_hash": "d3e09853ea2f6bae",
    "row_hash": "23cc2ae07c40ae69",
-   "carried": false,
+   "carried": true,
    "pass": 3
   },
   {
@@ -571,7 +643,7 @@
    "note": false,
    "screen_hash": "d3e09853ea2f6bae",
    "row_hash": "660f205bfa998913",
-   "carried": false,
+   "carried": true,
    "pass": 3
   },
   {
@@ -584,7 +656,7 @@
    "note": true,
    "screen_hash": "d3e09853ea2f6bae",
    "row_hash": "5d4c8ea691a41cea",
-   "carried": false,
+   "carried": true,
    "pass": 3
   },
   {
@@ -597,7 +669,7 @@
    "note": true,
    "screen_hash": "d3e09853ea2f6bae",
    "row_hash": "729853e4b616d8dd",
-   "carried": false,
+   "carried": true,
    "pass": 3
   },
   {
@@ -610,7 +682,7 @@
    "note": false,
    "screen_hash": "d3e09853ea2f6bae",
    "row_hash": "a0fd538d352dfedb",
-   "carried": false,
+   "carried": true,
    "pass": 3
   },
   {
@@ -623,7 +695,7 @@
    "note": true,
    "screen_hash": "d3e09853ea2f6bae",
    "row_hash": "2344627a8d464a08",
-   "carried": false,
+   "carried": true,
    "pass": 3
   },
   {
@@ -636,7 +708,7 @@
    "note": false,
    "screen_hash": "d3e09853ea2f6bae",
    "row_hash": "7dc492e03732757e",
-   "carried": false,
+   "carried": true,
    "pass": 3
   },
   {
@@ -649,7 +721,7 @@
    "note": false,
    "screen_hash": "d3e09853ea2f6bae",
    "row_hash": "af95eb45b0bdc9db",
-   "carried": false,
+   "carried": true,
    "pass": 3
   },
   {
@@ -662,7 +734,7 @@
    "note": true,
    "screen_hash": "d3e09853ea2f6bae",
    "row_hash": "604706399d2f1194",
-   "carried": false,
+   "carried": true,
    "pass": 3
   },
   {
@@ -675,7 +747,7 @@
    "note": false,
    "screen_hash": "d3e09853ea2f6bae",
    "row_hash": "8384cc6bcbd67c07",
-   "carried": false,
+   "carried": true,
    "pass": 3
   },
   {
@@ -688,7 +760,7 @@
    "note": false,
    "screen_hash": "d3e09853ea2f6bae",
    "row_hash": "d81893b9077b4b53",
-   "carried": false,
+   "carried": true,
    "pass": 3
   },
   {
@@ -701,7 +773,7 @@
    "note": false,
    "screen_hash": "d3e09853ea2f6bae",
    "row_hash": "6a661c60639de8be",
-   "carried": false,
+   "carried": true,
    "pass": 3
   },
   {
@@ -714,21 +786,21 @@
    "note": false,
    "screen_hash": "d3e09853ea2f6bae",
    "row_hash": "2946d2fe0b7dc28f",
-   "carried": false,
+   "carried": true,
    "pass": 3
   },
   {
    "row": "C1265",
    "screen": "*",
    "verdict": "PASS",
-   "line": "\u2014",
-   "why": "no spot on doors, travel screens (packed paths included) or the routing quad",
+   "line": "image = \"locations/campus_library_t0.jpg\" on the [[locations]] row; quad and travel screens carry none",
+   "why": "Place images are nav cards, not spots of this kind; the quad (routes only), the travel screens and the place menus have no spot.",
    "cause": null,
    "note": false,
-   "screen_hash": "d3e09853ea2f6bae",
-   "row_hash": "cbf803b180c4fbdd",
-   "carried": false,
-   "pass": 3
+   "screen_hash": "e2a4a0e66257bc3f",
+   "row_hash": "00b79725344762be",
+   "carried": true,
+   "pass": 4
   },
   {
    "row": "C1267",
@@ -740,7 +812,7 @@
    "note": false,
    "screen_hash": "d3e09853ea2f6bae",
    "row_hash": "6bafcadf3d586d5a",
-   "carried": false,
+   "carried": true,
    "pass": 3
   },
   {
@@ -753,7 +825,7 @@
    "note": true,
    "screen_hash": "d3e09853ea2f6bae",
    "row_hash": "ca72df83c67acc75",
-   "carried": false,
+   "carried": true,
    "pass": 3
   },
   {
@@ -766,7 +838,7 @@
    "note": false,
    "screen_hash": "d3e09853ea2f6bae",
    "row_hash": "5c2a05d547732e4b",
-   "carried": false,
+   "carried": true,
    "pass": 3
   },
   {
@@ -779,7 +851,7 @@
    "note": false,
    "screen_hash": "d3e09853ea2f6bae",
    "row_hash": "2b934524a49c49e9",
-   "carried": false,
+   "carried": true,
    "pass": 3
   },
   {
@@ -792,7 +864,7 @@
    "note": false,
    "screen_hash": "d3e09853ea2f6bae",
    "row_hash": "a511d81564cef526",
-   "carried": false,
+   "carried": true,
    "pass": 3
   },
   {
@@ -805,7 +877,7 @@
    "note": false,
    "screen_hash": "d3e09853ea2f6bae",
    "row_hash": "a1ce22b0640c6eeb",
-   "carried": false,
+   "carried": true,
    "pass": 3
   },
   {
@@ -818,7 +890,7 @@
    "note": false,
    "screen_hash": "d3e09853ea2f6bae",
    "row_hash": "f0ab213c3075f906",
-   "carried": false,
+   "carried": true,
    "pass": 3
   },
   {
@@ -831,7 +903,7 @@
    "note": false,
    "screen_hash": "d3e09853ea2f6bae",
    "row_hash": "d631d4c69f1d3b74",
-   "carried": false,
+   "carried": true,
    "pass": 3
   },
   {
@@ -844,7 +916,7 @@
    "note": true,
    "screen_hash": "d3e09853ea2f6bae",
    "row_hash": "374ef1ff39ed683f",
-   "carried": false,
+   "carried": true,
    "pass": 3
   },
   {
@@ -857,7 +929,7 @@
    "note": true,
    "screen_hash": "d3e09853ea2f6bae",
    "row_hash": "1102503d50722e90",
-   "carried": false,
+   "carried": true,
    "pass": 3
   },
   {
@@ -870,7 +942,7 @@
    "note": true,
    "screen_hash": "d3e09853ea2f6bae",
    "row_hash": "54d313af889ee445",
-   "carried": false,
+   "carried": true,
    "pass": 3
   },
   {
@@ -883,7 +955,7 @@
    "note": false,
    "screen_hash": "d3e09853ea2f6bae",
    "row_hash": "93f6f78fa5d01006",
-   "carried": false,
+   "carried": true,
    "pass": 3
   },
   {
@@ -896,7 +968,7 @@
    "note": true,
    "screen_hash": "d3e09853ea2f6bae",
    "row_hash": "70c31c4c8f168968",
-   "carried": false,
+   "carried": true,
    "pass": 3
   },
   {
@@ -909,7 +981,7 @@
    "note": true,
    "screen_hash": "d3e09853ea2f6bae",
    "row_hash": "d38926e545c247d9",
-   "carried": false,
+   "carried": true,
    "pass": 3
   },
   {
@@ -922,7 +994,7 @@
    "note": true,
    "screen_hash": "d3e09853ea2f6bae",
    "row_hash": "35d5552632b315d7",
-   "carried": false,
+   "carried": true,
    "pass": 3
   },
   {
@@ -935,7 +1007,7 @@
    "note": true,
    "screen_hash": "d3e09853ea2f6bae",
    "row_hash": "4a3df70ba62ff0c1",
-   "carried": false,
+   "carried": true,
    "pass": 3
   },
   {
@@ -948,7 +1020,7 @@
    "note": false,
    "screen_hash": "d3e09853ea2f6bae",
    "row_hash": "4772eb5bc3a0625c",
-   "carried": false,
+   "carried": true,
    "pass": 3
   },
   {
@@ -961,7 +1033,7 @@
    "note": true,
    "screen_hash": "d3e09853ea2f6bae",
    "row_hash": "9dc51ff2fc8fffe8",
-   "carried": false,
+   "carried": true,
    "pass": 3
   },
   {
@@ -974,7 +1046,7 @@
    "note": true,
    "screen_hash": "d3e09853ea2f6bae",
    "row_hash": "a3292ce9b375de61",
-   "carried": false,
+   "carried": true,
    "pass": 3
   },
   {
@@ -987,7 +1059,7 @@
    "note": true,
    "screen_hash": "d3e09853ea2f6bae",
    "row_hash": "3fdc7ab766d9eed9",
-   "carried": false,
+   "carried": true,
    "pass": 3
   },
   {
@@ -1000,7 +1072,7 @@
    "note": true,
    "screen_hash": "d3e09853ea2f6bae",
    "row_hash": "37396aa479e7c52a",
-   "carried": false,
+   "carried": true,
    "pass": 3
   },
   {
@@ -1013,7 +1085,7 @@
    "note": false,
    "screen_hash": "d3e09853ea2f6bae",
    "row_hash": "d8f2ffe787064036",
-   "carried": false,
+   "carried": true,
    "pass": 3
   },
   {
@@ -1026,7 +1098,7 @@
    "note": false,
    "screen_hash": "d3e09853ea2f6bae",
    "row_hash": "d3067a37085f7cb6",
-   "carried": false,
+   "carried": true,
    "pass": 3
   },
   {
@@ -1039,7 +1111,7 @@
    "note": false,
    "screen_hash": "d3e09853ea2f6bae",
    "row_hash": "1a2f952203e75b84",
-   "carried": false,
+   "carried": true,
    "pass": 3
   },
   {
@@ -1052,7 +1124,7 @@
    "note": true,
    "screen_hash": "d3e09853ea2f6bae",
    "row_hash": "bda90c8e06bef173",
-   "carried": false,
+   "carried": true,
    "pass": 3
   },
   {
@@ -1065,7 +1137,7 @@
    "note": true,
    "screen_hash": "d3e09853ea2f6bae",
    "row_hash": "1990815abef56d49",
-   "carried": false,
+   "carried": true,
    "pass": 3
   },
   {
@@ -1078,7 +1150,7 @@
    "note": false,
    "screen_hash": "d3e09853ea2f6bae",
    "row_hash": "6160f6f4d03614ba",
-   "carried": false,
+   "carried": true,
    "pass": 3
   },
   {
@@ -1091,7 +1163,7 @@
    "note": true,
    "screen_hash": "d3e09853ea2f6bae",
    "row_hash": "d0678c728ad9faf0",
-   "carried": false,
+   "carried": true,
    "pass": 3
   },
   {
@@ -1104,7 +1176,7 @@
    "note": true,
    "screen_hash": "d3e09853ea2f6bae",
    "row_hash": "bb31891410f03faf",
-   "carried": false,
+   "carried": true,
    "pass": 3
   },
   {
@@ -1117,7 +1189,7 @@
    "note": false,
    "screen_hash": "d3e09853ea2f6bae",
    "row_hash": "0031533ec82c4401",
-   "carried": false,
+   "carried": true,
    "pass": 3
   },
   {
@@ -1130,7 +1202,7 @@
    "note": false,
    "screen_hash": "d3e09853ea2f6bae",
    "row_hash": "78aa710fc99207b5",
-   "carried": false,
+   "carried": true,
    "pass": 3
   },
   {
@@ -1143,7 +1215,7 @@
    "note": false,
    "screen_hash": "d3e09853ea2f6bae",
    "row_hash": "1e789c98e52ef448",
-   "carried": false,
+   "carried": true,
    "pass": 3
   },
   {
@@ -1156,7 +1228,7 @@
    "note": false,
    "screen_hash": "d3e09853ea2f6bae",
    "row_hash": "aa35910e35e29b2d",
-   "carried": false,
+   "carried": true,
    "pass": 3
   },
   {
@@ -1169,7 +1241,7 @@
    "note": false,
    "screen_hash": "d3e09853ea2f6bae",
    "row_hash": "2d3aa3b699bb3a78",
-   "carried": false,
+   "carried": true,
    "pass": 3
   },
   {
@@ -1182,7 +1254,7 @@
    "note": false,
    "screen_hash": "d3e09853ea2f6bae",
    "row_hash": "41543c0b01047eb6",
-   "carried": false,
+   "carried": true,
    "pass": 3
   },
   {
@@ -1195,7 +1267,7 @@
    "note": false,
    "screen_hash": "d3e09853ea2f6bae",
    "row_hash": "39401d1f8b2ac714",
-   "carried": false,
+   "carried": true,
    "pass": 3
   },
   {
@@ -1208,7 +1280,7 @@
    "note": false,
    "screen_hash": "d3e09853ea2f6bae",
    "row_hash": "803a558113f90fbd",
-   "carried": false,
+   "carried": true,
    "pass": 3
   },
   {
@@ -1221,7 +1293,7 @@
    "note": false,
    "screen_hash": "d3e09853ea2f6bae",
    "row_hash": "69d227fcb6314994",
-   "carried": false,
+   "carried": true,
    "pass": 3
   },
   {
@@ -1234,7 +1306,7 @@
    "note": true,
    "screen_hash": "d3e09853ea2f6bae",
    "row_hash": "a28a84cd5f58df59",
-   "carried": false,
+   "carried": true,
    "pass": 3
   },
   {
@@ -1247,7 +1319,7 @@
    "note": true,
    "screen_hash": "d3e09853ea2f6bae",
    "row_hash": "04450056a0da072c",
-   "carried": false,
+   "carried": true,
    "pass": 3
   },
   {
@@ -1260,7 +1332,7 @@
    "note": true,
    "screen_hash": "d3e09853ea2f6bae",
    "row_hash": "33f0b998a82d37de",
-   "carried": false,
+   "carried": true,
    "pass": 3
   },
   {
@@ -1273,7 +1345,7 @@
    "note": true,
    "screen_hash": "d3e09853ea2f6bae",
    "row_hash": "820920d70a5f860a",
-   "carried": false,
+   "carried": true,
    "pass": 3
   },
   {
@@ -1286,7 +1358,7 @@
    "note": false,
    "screen_hash": "d3e09853ea2f6bae",
    "row_hash": "b49633d1ad76857e",
-   "carried": false,
+   "carried": true,
    "pass": 3
   },
   {
@@ -1299,7 +1371,7 @@
    "note": true,
    "screen_hash": "d3e09853ea2f6bae",
    "row_hash": "1345b94e89dfc2dc",
-   "carried": false,
+   "carried": true,
    "pass": 3
   },
   {
@@ -1312,7 +1384,7 @@
    "note": true,
    "screen_hash": "d3e09853ea2f6bae",
    "row_hash": "39b97c524d1d887d",
-   "carried": false,
+   "carried": true,
    "pass": 3
   },
   {
@@ -1325,7 +1397,7 @@
    "note": true,
    "screen_hash": "d3e09853ea2f6bae",
    "row_hash": "f4d1f119d6f2bea9",
-   "carried": false,
+   "carried": true,
    "pass": 3
   },
   {
@@ -1338,7 +1410,7 @@
    "note": false,
    "screen_hash": "d3e09853ea2f6bae",
    "row_hash": "54826844d637c5b4",
-   "carried": false,
+   "carried": true,
    "pass": 3
   },
   {
@@ -1351,7 +1423,7 @@
    "note": false,
    "screen_hash": "d3e09853ea2f6bae",
    "row_hash": "8933f85010afbef7",
-   "carried": false,
+   "carried": true,
    "pass": 3
   },
   {
@@ -1364,7 +1436,7 @@
    "note": false,
    "screen_hash": "d3e09853ea2f6bae",
    "row_hash": "a2b07f40e1a9e908",
-   "carried": false,
+   "carried": true,
    "pass": 3
   },
   {
@@ -1377,7 +1449,7 @@
    "note": false,
    "screen_hash": "d3e09853ea2f6bae",
    "row_hash": "e3ca01ba145f4580",
-   "carried": false,
+   "carried": true,
    "pass": 3
   },
   {
@@ -1390,7 +1462,7 @@
    "note": false,
    "screen_hash": "d3e09853ea2f6bae",
    "row_hash": "584dada6c379e3d8",
-   "carried": false,
+   "carried": true,
    "pass": 3
   },
   {
@@ -1403,7 +1475,7 @@
    "note": false,
    "screen_hash": "d3e09853ea2f6bae",
    "row_hash": "ac5932d70cd775a1",
-   "carried": false,
+   "carried": true,
    "pass": 3
   },
   {
@@ -1416,7 +1488,7 @@
    "note": false,
    "screen_hash": "d3e09853ea2f6bae",
    "row_hash": "3eb18b4cefbe49d3",
-   "carried": false,
+   "carried": true,
    "pass": 3
   },
   {
@@ -1429,7 +1501,7 @@
    "note": false,
    "screen_hash": "d3e09853ea2f6bae",
    "row_hash": "6b0fd679047fc9b8",
-   "carried": false,
+   "carried": true,
    "pass": 3
   },
   {
@@ -1442,8 +1514,26 @@
    "note": false,
    "screen_hash": "d3e09853ea2f6bae",
    "row_hash": "beb5a109bde77305",
-   "carried": false,
+   "carried": true,
    "pass": 3
+  },
+  {
+   "row": "C460",
+   "screen": "travel_bus_home.ride",
+   "verdict": "PASS",
+   "line": "The bus home is half empty. You get the back seat and watch campus go.",
+   "why": "true at any minute; the quad is always open and the trip has no window",
+   "cause": "",
+   "note": false,
+   "screen_hash": {
+    "text": "78ac51a56f017852",
+    "facts": "5d90976a96216451",
+    "facts2": "5d90976a96216451",
+    "all": "a4c199ff3a84cf16"
+   },
+   "row_hash": "beb5a109bde77305",
+   "carried": false,
+   "pass": 4
   },
   {
    "row": "C460",
@@ -1460,8 +1550,26 @@
     "all": "144f95579bff818c"
    },
    "row_hash": "beb5a109bde77305",
-   "carried": false,
+   "carried": true,
    "pass": 3
+  },
+  {
+   "row": "C460",
+   "screen": "travel_walk_home.ride",
+   "verdict": "PASS",
+   "line": "The walk home takes forever. Your street, finally.",
+   "why": "true at any minute; the quad is always open and the trip has no window",
+   "cause": "",
+   "note": false,
+   "screen_hash": {
+    "text": "174378e0c284c707",
+    "facts": "5d90976a96216451",
+    "facts2": "5d90976a96216451",
+    "all": "528247f11444ef92"
+   },
+   "row_hash": "beb5a109bde77305",
+   "carried": false,
+   "pass": 4
   },
   {
    "row": "C461",
@@ -1473,8 +1581,26 @@
    "note": false,
    "screen_hash": "d3e09853ea2f6bae",
    "row_hash": "153b0804e686abae",
-   "carried": false,
+   "carried": true,
    "pass": 3
+  },
+  {
+   "row": "C461",
+   "screen": "travel_bus_home.ride",
+   "verdict": "PASS",
+   "line": "The bus home is half empty. You get the back seat and watch campus go.",
+   "why": "texture that can't clash",
+   "cause": "",
+   "note": false,
+   "screen_hash": {
+    "text": "78ac51a56f017852",
+    "facts": "5d90976a96216451",
+    "facts2": "5d90976a96216451",
+    "all": "a4c199ff3a84cf16"
+   },
+   "row_hash": "153b0804e686abae",
+   "carried": false,
+   "pass": 4
   },
   {
    "row": "C461",
@@ -1491,8 +1617,26 @@
     "all": "144f95579bff818c"
    },
    "row_hash": "153b0804e686abae",
-   "carried": false,
+   "carried": true,
    "pass": 3
+  },
+  {
+   "row": "C461",
+   "screen": "travel_walk_home.ride",
+   "verdict": "PASS",
+   "line": "The walk home takes forever. Your street, finally.",
+   "why": "texture that can't clash",
+   "cause": "",
+   "note": false,
+   "screen_hash": {
+    "text": "174378e0c284c707",
+    "facts": "5d90976a96216451",
+    "facts2": "5d90976a96216451",
+    "all": "528247f11444ef92"
+   },
+   "row_hash": "153b0804e686abae",
+   "carried": false,
+   "pass": 4
   },
   {
    "row": "C593",
@@ -1504,7 +1648,7 @@
    "note": false,
    "screen_hash": "d3e09853ea2f6bae",
    "row_hash": "52e42cdd69c8f10e",
-   "carried": false,
+   "carried": true,
    "pass": 3
   },
   {
@@ -1517,7 +1661,7 @@
    "note": true,
    "screen_hash": "d3e09853ea2f6bae",
    "row_hash": "a69f9998e41865b6",
-   "carried": false,
+   "carried": true,
    "pass": 3
   },
   {
@@ -1530,7 +1674,7 @@
    "note": true,
    "screen_hash": "d3e09853ea2f6bae",
    "row_hash": "6f4e735e01b53e5c",
-   "carried": false,
+   "carried": true,
    "pass": 3
   },
   {
@@ -1543,7 +1687,7 @@
    "note": true,
    "screen_hash": "d3e09853ea2f6bae",
    "row_hash": "e2898bd02a9e4730",
-   "carried": false,
+   "carried": true,
    "pass": 3
   },
   {
@@ -1556,7 +1700,7 @@
    "note": false,
    "screen_hash": "d3e09853ea2f6bae",
    "row_hash": "976cd3e099c13e51",
-   "carried": false,
+   "carried": true,
    "pass": 3
   },
   {
@@ -1569,7 +1713,7 @@
    "note": true,
    "screen_hash": "d3e09853ea2f6bae",
    "row_hash": "6329db1ec04ec3da",
-   "carried": false,
+   "carried": true,
    "pass": 3
   },
   {
@@ -1582,7 +1726,7 @@
    "note": false,
    "screen_hash": "d3e09853ea2f6bae",
    "row_hash": "877801c22bdade00",
-   "carried": false,
+   "carried": true,
    "pass": 3
   },
   {
@@ -1595,7 +1739,7 @@
    "note": true,
    "screen_hash": "d3e09853ea2f6bae",
    "row_hash": "cf7d7a82afabcbbb",
-   "carried": false,
+   "carried": true,
    "pass": 3
   },
   {
@@ -1608,7 +1752,7 @@
    "note": true,
    "screen_hash": "d3e09853ea2f6bae",
    "row_hash": "dcc6bbe6fde09083",
-   "carried": false,
+   "carried": true,
    "pass": 3
   },
   {
@@ -1621,7 +1765,7 @@
    "note": true,
    "screen_hash": "d3e09853ea2f6bae",
    "row_hash": "d941995a226da2b4",
-   "carried": false,
+   "carried": true,
    "pass": 3
   },
   {
@@ -1634,7 +1778,7 @@
    "note": false,
    "screen_hash": "d3e09853ea2f6bae",
    "row_hash": "0825e8443f9180d0",
-   "carried": false,
+   "carried": true,
    "pass": 3
   },
   {
@@ -1647,7 +1791,7 @@
    "note": false,
    "screen_hash": "d3e09853ea2f6bae",
    "row_hash": "6088d5531ecff698",
-   "carried": false,
+   "carried": true,
    "pass": 3
   },
   {
@@ -1660,7 +1804,7 @@
    "note": false,
    "screen_hash": "d3e09853ea2f6bae",
    "row_hash": "38b483431fa177b0",
-   "carried": false,
+   "carried": true,
    "pass": 3
   },
   {
@@ -1673,7 +1817,7 @@
    "note": true,
    "screen_hash": "d3e09853ea2f6bae",
    "row_hash": "3281d513b7f90d6e",
-   "carried": false,
+   "carried": true,
    "pass": 3
   },
   {
@@ -1686,7 +1830,7 @@
    "note": true,
    "screen_hash": "d3e09853ea2f6bae",
    "row_hash": "84d5bfb2a701bf90",
-   "carried": false,
+   "carried": true,
    "pass": 3
   },
   {
@@ -1699,60 +1843,60 @@
    "note": false,
    "screen_hash": "d3e09853ea2f6bae",
    "row_hash": "2aa951544edb45db",
-   "carried": false,
+   "carried": true,
    "pass": 3
   },
   {
    "row": "C804",
    "screen": "campus_cafeteria",
    "verdict": "FAIL",
-   "line": "The cafeteria: trays, long tables, the lunch counter.",
-   "why": "Rosa and Nadia have rows here; the text never changes with who is there; deferred to P30, unchanged",
-   "cause": "P04c1-c1",
+   "line": "The cafeteria: trays, long tables, the lunch counter. A sign says it's open weekdays from 8am to 4pm.",
+   "why": "held to P30, judged as built: the place's text is the same whoever is there (Rosa, Nadia, Zoe have rows here); no description_variants or presence line",
+   "cause": "P04e1-c1",
    "note": false,
    "screen_hash": null,
    "row_hash": "2aa951544edb45db",
    "carried": false,
-   "pass": 3
+   "pass": 4
   },
   {
    "row": "C804",
    "screen": "campus_lecture_hall",
    "verdict": "FAIL",
-   "line": "The lecture hall: rows of seats rising to the back, a screen, a lectern at the bottom.",
-   "why": "Hale, Pratt, Walsh, Nadia have rows here; text never changes with who is there; deferred to P30, unchanged",
-   "cause": "P04c1-c1",
+   "line": "The lecture hall: rows of seats rising to the back, a screen, a lectern at the bottom. Most of your classes are here.",
+   "why": "held to P30, judged as built: the place's text is the same whoever is there (Hale, Pratt, Walsh, Nadia have rows here); no description_variants or presence line",
+   "cause": "P04e1-c1",
    "note": false,
    "screen_hash": null,
    "row_hash": "2aa951544edb45db",
    "carried": false,
-   "pass": 3
+   "pass": 4
   },
   {
    "row": "C804",
    "screen": "campus_library",
    "verdict": "FAIL",
    "line": "The library: long tables, quiet floors, and the desk by the door.",
-   "why": "Holt and Nadia have rows here; text never changes with who is there; deferred to P30, unchanged",
-   "cause": "P04c1-c1",
+   "why": "held to P30, judged as built: the place's text is the same whoever is there (Holt, Nadia have rows here); no description_variants or presence line",
+   "cause": "P04e1-c1",
    "note": false,
    "screen_hash": null,
    "row_hash": "2aa951544edb45db",
    "carried": false,
-   "pass": 3
+   "pass": 4
   },
   {
    "row": "C804",
    "screen": "campus_theatre",
    "verdict": "FAIL",
    "line": "The theatre: a black stage, rows of folding seats, and the lights rigged overhead.",
-   "why": "Cross has rows here; text never changes with who is there; deferred to P30, unchanged",
-   "cause": "P04c1-c1",
+   "why": "held to P30, judged as built: the place's text is the same whoever is there (Cross has rows here); no description_variants or presence line",
+   "cause": "P04e1-c1",
    "note": false,
    "screen_hash": null,
    "row_hash": "2aa951544edb45db",
    "carried": false,
-   "pass": 3
+   "pass": 4
   },
   {
    "row": "C808",
@@ -1764,7 +1908,7 @@
    "note": true,
    "screen_hash": "d3e09853ea2f6bae",
    "row_hash": "73aff7401d6970a5",
-   "carried": false,
+   "carried": true,
    "pass": 3
   },
   {
@@ -1777,21 +1921,44 @@
    "note": true,
    "screen_hash": "d3e09853ea2f6bae",
    "row_hash": "ded1858e52e3be3a",
-   "carried": false,
+   "carried": true,
    "pass": 3
   },
   {
    "row": "C889",
-   "screen": "*",
-   "verdict": "PASS",
-   "line": "advanceTime(45) on 'Walk through the gates'; advanceTime(20) on 'Get off at campus'",
-   "why": "the choice spends the labelled minutes; the packed paths change nothing it reads",
+   "screen": "travel_bus_home.ride",
+   "verdict": "FAIL",
+   "line": "Take the bus home ($2, 20 min)",
+   "why": "note: the label states a duration; the row now says a label states no duration (LO 2026-11-24, clock.md:11)",
    "cause": null,
    "note": true,
-   "screen_hash": "d3e09853ea2f6bae",
-   "row_hash": "37967c45d79163fc",
+   "screen_hash": {
+    "text": "78ac51a56f017852",
+    "facts": "5d90976a96216451",
+    "facts2": "5d90976a96216451",
+    "all": "a4c199ff3a84cf16"
+   },
+   "row_hash": "cebb147317e10c05",
    "carried": false,
-   "pass": 3
+   "pass": 4
+  },
+  {
+   "row": "C889",
+   "screen": "travel_walk_home.ride",
+   "verdict": "FAIL",
+   "line": "Walk home (45 min)",
+   "why": "note: the label states a duration; the row now says a label states no duration (LO 2026-11-24, clock.md:11)",
+   "cause": null,
+   "note": true,
+   "screen_hash": {
+    "text": "174378e0c284c707",
+    "facts": "5d90976a96216451",
+    "facts2": "5d90976a96216451",
+    "all": "528247f11444ef92"
+   },
+   "row_hash": "cebb147317e10c05",
+   "carried": false,
+   "pass": 4
   },
   {
    "row": "C890",
@@ -1803,7 +1970,7 @@
    "note": false,
    "screen_hash": "d3e09853ea2f6bae",
    "row_hash": "3d716de4269fbd6c",
-   "carried": false,
+   "carried": true,
    "pass": 3
   },
   {
@@ -1816,8 +1983,44 @@
    "note": true,
    "screen_hash": "d3e09853ea2f6bae",
    "row_hash": "1d8d188451bcb51e",
-   "carried": false,
+   "carried": true,
    "pass": 3
+  },
+  {
+   "row": "C892",
+   "screen": "travel_bus_home.ride",
+   "verdict": "PASS",
+   "line": "The bus home is half empty. You get the back seat and watch campus go.",
+   "why": "no hour in the act",
+   "cause": null,
+   "note": true,
+   "screen_hash": {
+    "text": "78ac51a56f017852",
+    "facts": "5d90976a96216451",
+    "facts2": "5d90976a96216451",
+    "all": "a4c199ff3a84cf16"
+   },
+   "row_hash": "1d8d188451bcb51e",
+   "carried": false,
+   "pass": 4
+  },
+  {
+   "row": "C892",
+   "screen": "travel_walk_home.ride",
+   "verdict": "PASS",
+   "line": "The walk home takes forever. Your street, finally.",
+   "why": "no hour in the act",
+   "cause": null,
+   "note": true,
+   "screen_hash": {
+    "text": "174378e0c284c707",
+    "facts": "5d90976a96216451",
+    "facts2": "5d90976a96216451",
+    "all": "528247f11444ef92"
+   },
+   "row_hash": "1d8d188451bcb51e",
+   "carried": false,
+   "pass": 4
   },
   {
    "row": "C897",
@@ -1829,8 +2032,44 @@
    "note": true,
    "screen_hash": "d3e09853ea2f6bae",
    "row_hash": "16b066aee3c1a937",
-   "carried": false,
+   "carried": true,
    "pass": 3
+  },
+  {
+   "row": "C897",
+   "screen": "travel_bus_home.ride",
+   "verdict": "PASS",
+   "line": "Take the bus home ($2, 20 min)",
+   "why": "time sits on crossing between areas (campus to home), not on a room",
+   "cause": null,
+   "note": true,
+   "screen_hash": {
+    "text": "78ac51a56f017852",
+    "facts": "5d90976a96216451",
+    "facts2": "5d90976a96216451",
+    "all": "a4c199ff3a84cf16"
+   },
+   "row_hash": "16b066aee3c1a937",
+   "carried": false,
+   "pass": 4
+  },
+  {
+   "row": "C897",
+   "screen": "travel_walk_home.ride",
+   "verdict": "PASS",
+   "line": "Walk home (45 min)",
+   "why": "time sits on crossing between areas (campus to home), not on a room",
+   "cause": null,
+   "note": true,
+   "screen_hash": {
+    "text": "174378e0c284c707",
+    "facts": "5d90976a96216451",
+    "facts2": "5d90976a96216451",
+    "all": "528247f11444ef92"
+   },
+   "row_hash": "16b066aee3c1a937",
+   "carried": false,
+   "pass": 4
   },
   {
    "row": "C900",
@@ -1842,8 +2081,44 @@
    "note": false,
    "screen_hash": "d3e09853ea2f6bae",
    "row_hash": "a4ef8ce78f554d6b",
-   "carried": false,
+   "carried": true,
    "pass": 3
+  },
+  {
+   "row": "C900",
+   "screen": "travel_bus_home.ride",
+   "verdict": "PASS",
+   "line": "The bus home is half empty. You get the back seat and watch campus go.",
+   "why": "no time of day said",
+   "cause": "",
+   "note": false,
+   "screen_hash": {
+    "text": "78ac51a56f017852",
+    "facts": "5d90976a96216451",
+    "facts2": "5d90976a96216451",
+    "all": "a4c199ff3a84cf16"
+   },
+   "row_hash": "a4ef8ce78f554d6b",
+   "carried": false,
+   "pass": 4
+  },
+  {
+   "row": "C900",
+   "screen": "travel_walk_home.ride",
+   "verdict": "PASS",
+   "line": "The walk home takes forever. Your street, finally.",
+   "why": "no time of day said",
+   "cause": "",
+   "note": false,
+   "screen_hash": {
+    "text": "174378e0c284c707",
+    "facts": "5d90976a96216451",
+    "facts2": "5d90976a96216451",
+    "all": "528247f11444ef92"
+   },
+   "row_hash": "a4ef8ce78f554d6b",
+   "carried": false,
+   "pass": 4
   },
   {
    "row": "C902",
@@ -1855,8 +2130,44 @@
    "note": true,
    "screen_hash": "d3e09853ea2f6bae",
    "row_hash": "66462bdbadae0c77",
-   "carried": false,
+   "carried": true,
    "pass": 3
+  },
+  {
+   "row": "C902",
+   "screen": "travel_bus_home.ride",
+   "verdict": "PASS",
+   "line": "The bus home is half empty. You get the back seat and watch campus go.",
+   "why": "no window; the line holds at any minute",
+   "cause": null,
+   "note": true,
+   "screen_hash": {
+    "text": "78ac51a56f017852",
+    "facts": "5d90976a96216451",
+    "facts2": "5d90976a96216451",
+    "all": "a4c199ff3a84cf16"
+   },
+   "row_hash": "66462bdbadae0c77",
+   "carried": false,
+   "pass": 4
+  },
+  {
+   "row": "C902",
+   "screen": "travel_walk_home.ride",
+   "verdict": "PASS",
+   "line": "The walk home takes forever. Your street, finally.",
+   "why": "no window; the line holds at any minute",
+   "cause": null,
+   "note": true,
+   "screen_hash": {
+    "text": "174378e0c284c707",
+    "facts": "5d90976a96216451",
+    "facts2": "5d90976a96216451",
+    "all": "528247f11444ef92"
+   },
+   "row_hash": "66462bdbadae0c77",
+   "carried": false,
+   "pass": 4
   },
   {
    "row": "C903",
@@ -1868,8 +2179,44 @@
    "note": false,
    "screen_hash": "d3e09853ea2f6bae",
    "row_hash": "263890a884329d60",
-   "carried": false,
+   "carried": true,
    "pass": 3
+  },
+  {
+   "row": "C903",
+   "screen": "travel_bus_home.ride",
+   "verdict": "PASS",
+   "line": "The bus home is half empty. You get the back seat and watch campus go.",
+   "why": "no weekday named",
+   "cause": "",
+   "note": false,
+   "screen_hash": {
+    "text": "78ac51a56f017852",
+    "facts": "5d90976a96216451",
+    "facts2": "5d90976a96216451",
+    "all": "a4c199ff3a84cf16"
+   },
+   "row_hash": "263890a884329d60",
+   "carried": false,
+   "pass": 4
+  },
+  {
+   "row": "C903",
+   "screen": "travel_walk_home.ride",
+   "verdict": "PASS",
+   "line": "The walk home takes forever. Your street, finally.",
+   "why": "no weekday named",
+   "cause": "",
+   "note": false,
+   "screen_hash": {
+    "text": "174378e0c284c707",
+    "facts": "5d90976a96216451",
+    "facts2": "5d90976a96216451",
+    "all": "528247f11444ef92"
+   },
+   "row_hash": "263890a884329d60",
+   "carried": false,
+   "pass": 4
   },
   {
    "row": "C904",
@@ -1881,34 +2228,80 @@
    "note": true,
    "screen_hash": "d3e09853ea2f6bae",
    "row_hash": "999816c6ed6cc232",
-   "carried": false,
+   "carried": true,
    "pass": 3
   },
   {
    "row": "C906",
-   "screen": "*",
+   "screen": "travel_bus_home.ride",
    "verdict": "PASS",
-   "line": "(45 min)",
-   "why": "durations only; the packed paths change nothing it reads",
+   "line": "The bus home is half empty. You get the back seat and watch campus go.",
+   "why": "no clock promise",
    "cause": null,
    "note": true,
-   "screen_hash": "d3e09853ea2f6bae",
-   "row_hash": "c257bba6d15edc3f",
+   "screen_hash": {
+    "text": "78ac51a56f017852",
+    "facts": "5d90976a96216451",
+    "facts2": "5d90976a96216451",
+    "all": "a4c199ff3a84cf16"
+   },
+   "row_hash": "b8d0e5793dd14e95",
    "carried": false,
-   "pass": 3
+   "pass": 4
+  },
+  {
+   "row": "C906",
+   "screen": "travel_walk_home.ride",
+   "verdict": "PASS",
+   "line": "The walk home takes forever. Your street, finally.",
+   "why": "no clock promise",
+   "cause": null,
+   "note": true,
+   "screen_hash": {
+    "text": "174378e0c284c707",
+    "facts": "5d90976a96216451",
+    "facts2": "5d90976a96216451",
+    "all": "528247f11444ef92"
+   },
+   "row_hash": "b8d0e5793dd14e95",
+   "carried": false,
+   "pass": 4
   },
   {
    "row": "C910",
-   "screen": "*",
-   "verdict": "PASS",
-   "line": "(20 min) \u00b7 (45 min)",
-   "why": "one form; the packed paths change nothing it reads",
+   "screen": "travel_bus_home.ride",
+   "verdict": "FAIL",
+   "line": "Take the bus home ($2, 20 min)",
+   "why": "note: the button says its time; the row now says a button says no time and no energy, money only (LO 2026-11-24, clock.md:19)",
    "cause": null,
    "note": true,
-   "screen_hash": "d3e09853ea2f6bae",
-   "row_hash": "c86548143d50a17d",
+   "screen_hash": {
+    "text": "78ac51a56f017852",
+    "facts": "5d90976a96216451",
+    "facts2": "5d90976a96216451",
+    "all": "a4c199ff3a84cf16"
+   },
+   "row_hash": "19dcf805483efc88",
    "carried": false,
-   "pass": 3
+   "pass": 4
+  },
+  {
+   "row": "C910",
+   "screen": "travel_walk_home.ride",
+   "verdict": "FAIL",
+   "line": "Walk home (45 min)",
+   "why": "note: the button says its time; the row now says a button says no time and no energy, money only (LO 2026-11-24, clock.md:19)",
+   "cause": null,
+   "note": true,
+   "screen_hash": {
+    "text": "174378e0c284c707",
+    "facts": "5d90976a96216451",
+    "facts2": "5d90976a96216451",
+    "all": "528247f11444ef92"
+   },
+   "row_hash": "19dcf805483efc88",
+   "carried": false,
+   "pass": 4
   },
   {
    "row": "C913",
@@ -1920,8 +2313,44 @@
    "note": false,
    "screen_hash": "d3e09853ea2f6bae",
    "row_hash": "48bd82911a86ecbd",
-   "carried": false,
+   "carried": true,
    "pass": 3
+  },
+  {
+   "row": "C913",
+   "screen": "travel_bus_home.ride",
+   "verdict": "N/A",
+   "line": "",
+   "why": "the trip has no hours",
+   "cause": "",
+   "note": false,
+   "screen_hash": {
+    "text": "78ac51a56f017852",
+    "facts": "5d90976a96216451",
+    "facts2": "5d90976a96216451",
+    "all": "a4c199ff3a84cf16"
+   },
+   "row_hash": "48bd82911a86ecbd",
+   "carried": false,
+   "pass": 4
+  },
+  {
+   "row": "C913",
+   "screen": "travel_walk_home.ride",
+   "verdict": "N/A",
+   "line": "",
+   "why": "the trip has no hours",
+   "cause": "",
+   "note": false,
+   "screen_hash": {
+    "text": "174378e0c284c707",
+    "facts": "5d90976a96216451",
+    "facts2": "5d90976a96216451",
+    "all": "528247f11444ef92"
+   },
+   "row_hash": "48bd82911a86ecbd",
+   "carried": false,
+   "pass": 4
   },
   {
    "row": "C914",
@@ -1933,8 +2362,44 @@
    "note": false,
    "screen_hash": "d3e09853ea2f6bae",
    "row_hash": "5a326c2d5d8a0abd",
-   "carried": false,
+   "carried": true,
    "pass": 3
+  },
+  {
+   "row": "C914",
+   "screen": "travel_bus_home.ride",
+   "verdict": "N/A",
+   "line": "",
+   "why": "no hours to show",
+   "cause": "",
+   "note": false,
+   "screen_hash": {
+    "text": "78ac51a56f017852",
+    "facts": "5d90976a96216451",
+    "facts2": "5d90976a96216451",
+    "all": "a4c199ff3a84cf16"
+   },
+   "row_hash": "5a326c2d5d8a0abd",
+   "carried": false,
+   "pass": 4
+  },
+  {
+   "row": "C914",
+   "screen": "travel_walk_home.ride",
+   "verdict": "N/A",
+   "line": "",
+   "why": "no hours to show",
+   "cause": "",
+   "note": false,
+   "screen_hash": {
+    "text": "174378e0c284c707",
+    "facts": "5d90976a96216451",
+    "facts2": "5d90976a96216451",
+    "all": "528247f11444ef92"
+   },
+   "row_hash": "5a326c2d5d8a0abd",
+   "carried": false,
+   "pass": 4
   },
   {
    "row": "C915",
@@ -1946,7 +2411,7 @@
    "note": true,
    "screen_hash": "d3e09853ea2f6bae",
    "row_hash": "46d8f12824d16c8b",
-   "carried": false,
+   "carried": true,
    "pass": 3
   },
   {
@@ -1959,21 +2424,93 @@
    "note": false,
    "screen_hash": "d3e09853ea2f6bae",
    "row_hash": "06706eb2d5bad3b5",
-   "carried": false,
+   "carried": true,
    "pass": 3
+  },
+  {
+   "row": "C916",
+   "screen": "travel_bus_home.ride",
+   "verdict": "PASS",
+   "line": "Take the bus home ($2, 20 min)",
+   "why": "a choice she makes, always open",
+   "cause": "",
+   "note": false,
+   "screen_hash": {
+    "text": "78ac51a56f017852",
+    "facts": "5d90976a96216451",
+    "facts2": "5d90976a96216451",
+    "all": "a4c199ff3a84cf16"
+   },
+   "row_hash": "06706eb2d5bad3b5",
+   "carried": false,
+   "pass": 4
+  },
+  {
+   "row": "C916",
+   "screen": "travel_walk_home.ride",
+   "verdict": "PASS",
+   "line": "Walk home (45 min)",
+   "why": "a choice she makes, always open",
+   "cause": "",
+   "note": false,
+   "screen_hash": {
+    "text": "174378e0c284c707",
+    "facts": "5d90976a96216451",
+    "facts2": "5d90976a96216451",
+    "all": "528247f11444ef92"
+   },
+   "row_hash": "06706eb2d5bad3b5",
+   "carried": false,
+   "pass": 4
   },
   {
    "row": "C920",
    "screen": "*",
    "verdict": "PASS",
-   "line": "($2, 20 min)",
-   "why": "a bus is 20; the packed paths change nothing it reads",
+   "line": "campus places: entry_from = \"campus_quad\", no entry cost; bus 20 min, walk 45 min",
+   "why": "Hops inside campus are free; time is spent only on the bus and walk between areas.",
    "cause": null,
    "note": false,
-   "screen_hash": "d3e09853ea2f6bae",
-   "row_hash": "3b568acb10d6806b",
+   "screen_hash": "e2a4a0e66257bc3f",
+   "row_hash": "e7485c9faee24e77",
+   "carried": true,
+   "pass": 4
+  },
+  {
+   "row": "C920",
+   "screen": "travel_bus_home.ride",
+   "verdict": "PASS",
+   "line": "Take the bus home ($2, 20 min)",
+   "why": "time spent on the move between areas, not on a hop",
+   "cause": "",
+   "note": false,
+   "screen_hash": {
+    "text": "78ac51a56f017852",
+    "facts": "5d90976a96216451",
+    "facts2": "5d90976a96216451",
+    "all": "a4c199ff3a84cf16"
+   },
+   "row_hash": "e7485c9faee24e77",
    "carried": false,
-   "pass": 3
+   "pass": 4
+  },
+  {
+   "row": "C920",
+   "screen": "travel_walk_home.ride",
+   "verdict": "PASS",
+   "line": "Walk home (45 min)",
+   "why": "time spent on the move between areas, not on a hop",
+   "cause": "",
+   "note": false,
+   "screen_hash": {
+    "text": "174378e0c284c707",
+    "facts": "5d90976a96216451",
+    "facts2": "5d90976a96216451",
+    "all": "528247f11444ef92"
+   },
+   "row_hash": "e7485c9faee24e77",
+   "carried": false,
+   "pass": 4
   },
   {
    "row": "C921",
@@ -1985,8 +2522,26 @@
    "note": true,
    "screen_hash": "d3e09853ea2f6bae",
    "row_hash": "19da817e808ac3d6",
-   "carried": false,
+   "carried": true,
    "pass": 3
+  },
+  {
+   "row": "C921",
+   "screen": "travel_bus_home.ride",
+   "verdict": "N/A",
+   "line": "",
+   "why": "no window",
+   "cause": null,
+   "note": true,
+   "screen_hash": {
+    "text": "78ac51a56f017852",
+    "facts": "5d90976a96216451",
+    "facts2": "5d90976a96216451",
+    "all": "a4c199ff3a84cf16"
+   },
+   "row_hash": "19da817e808ac3d6",
+   "carried": false,
+   "pass": 4
   },
   {
    "row": "C921",
@@ -2003,8 +2558,26 @@
     "all": "144f95579bff818c"
    },
    "row_hash": "19da817e808ac3d6",
-   "carried": false,
+   "carried": true,
    "pass": 3
+  },
+  {
+   "row": "C921",
+   "screen": "travel_walk_home.ride",
+   "verdict": "N/A",
+   "line": "",
+   "why": "no window",
+   "cause": null,
+   "note": true,
+   "screen_hash": {
+    "text": "174378e0c284c707",
+    "facts": "5d90976a96216451",
+    "facts2": "5d90976a96216451",
+    "all": "528247f11444ef92"
+   },
+   "row_hash": "19da817e808ac3d6",
+   "carried": false,
+   "pass": 4
   },
   {
    "row": "C924",
@@ -2016,8 +2589,44 @@
    "note": true,
    "screen_hash": "d3e09853ea2f6bae",
    "row_hash": "ce540d1e01b7c301",
-   "carried": false,
+   "carried": true,
    "pass": 3
+  },
+  {
+   "row": "C924",
+   "screen": "travel_bus_home.ride",
+   "verdict": "PASS",
+   "line": "The bus home is half empty. You get the back seat and watch campus go.",
+   "why": "travel cost (time, $2) makes the schedule matter",
+   "cause": null,
+   "note": true,
+   "screen_hash": {
+    "text": "78ac51a56f017852",
+    "facts": "5d90976a96216451",
+    "facts2": "5d90976a96216451",
+    "all": "a4c199ff3a84cf16"
+   },
+   "row_hash": "ce540d1e01b7c301",
+   "carried": false,
+   "pass": 4
+  },
+  {
+   "row": "C924",
+   "screen": "travel_walk_home.ride",
+   "verdict": "PASS",
+   "line": "The walk home takes forever. Your street, finally.",
+   "why": "travel cost (time, $2) makes the schedule matter",
+   "cause": null,
+   "note": true,
+   "screen_hash": {
+    "text": "174378e0c284c707",
+    "facts": "5d90976a96216451",
+    "facts2": "5d90976a96216451",
+    "all": "528247f11444ef92"
+   },
+   "row_hash": "ce540d1e01b7c301",
+   "carried": false,
+   "pass": 4
   },
   {
    "row": "C926",
@@ -2029,8 +2638,44 @@
    "note": true,
    "screen_hash": "d3e09853ea2f6bae",
    "row_hash": "8cd1b7e3576dc7b5",
-   "carried": false,
+   "carried": true,
    "pass": 3
+  },
+  {
+   "row": "C926",
+   "screen": "travel_bus_home.ride",
+   "verdict": "PASS",
+   "line": "The bus home is half empty. You get the back seat and watch campus go.",
+   "why": "clock moves by minutes only",
+   "cause": null,
+   "note": true,
+   "screen_hash": {
+    "text": "78ac51a56f017852",
+    "facts": "5d90976a96216451",
+    "facts2": "5d90976a96216451",
+    "all": "a4c199ff3a84cf16"
+   },
+   "row_hash": "8cd1b7e3576dc7b5",
+   "carried": false,
+   "pass": 4
+  },
+  {
+   "row": "C926",
+   "screen": "travel_walk_home.ride",
+   "verdict": "PASS",
+   "line": "The walk home takes forever. Your street, finally.",
+   "why": "clock moves by minutes only",
+   "cause": null,
+   "note": true,
+   "screen_hash": {
+    "text": "174378e0c284c707",
+    "facts": "5d90976a96216451",
+    "facts2": "5d90976a96216451",
+    "all": "528247f11444ef92"
+   },
+   "row_hash": "8cd1b7e3576dc7b5",
+   "carried": false,
+   "pass": 4
   },
   {
    "row": "C927",
@@ -2042,8 +2687,26 @@
    "note": true,
    "screen_hash": "d3e09853ea2f6bae",
    "row_hash": "1e009d83817fb566",
-   "carried": false,
+   "carried": true,
    "pass": 3
+  },
+  {
+   "row": "C927",
+   "screen": "travel_bus_home.ride",
+   "verdict": "PASS",
+   "line": "The bus home is half empty. You get the back seat and watch campus go.",
+   "why": "the exit sets its time; not left to the 3-minute default",
+   "cause": null,
+   "note": true,
+   "screen_hash": {
+    "text": "78ac51a56f017852",
+    "facts": "5d90976a96216451",
+    "facts2": "5d90976a96216451",
+    "all": "a4c199ff3a84cf16"
+   },
+   "row_hash": "1e009d83817fb566",
+   "carried": false,
+   "pass": 4
   },
   {
    "row": "C927",
@@ -2060,8 +2723,26 @@
     "all": "144f95579bff818c"
    },
    "row_hash": "1e009d83817fb566",
-   "carried": false,
+   "carried": true,
    "pass": 3
+  },
+  {
+   "row": "C927",
+   "screen": "travel_walk_home.ride",
+   "verdict": "PASS",
+   "line": "The walk home takes forever. Your street, finally.",
+   "why": "the exit sets its time; not left to the 3-minute default",
+   "cause": null,
+   "note": true,
+   "screen_hash": {
+    "text": "174378e0c284c707",
+    "facts": "5d90976a96216451",
+    "facts2": "5d90976a96216451",
+    "all": "528247f11444ef92"
+   },
+   "row_hash": "1e009d83817fb566",
+   "carried": false,
+   "pass": 4
   },
   {
    "row": "C928",
@@ -2073,21 +2754,80 @@
    "note": false,
    "screen_hash": "d3e09853ea2f6bae",
    "row_hash": "799e1dd153166b6d",
-   "carried": false,
+   "carried": true,
    "pass": 3
   },
   {
-   "row": "C929",
-   "screen": "*",
+   "row": "C928",
+   "screen": "travel_bus_home.ride",
    "verdict": "PASS",
-   "line": "travel labels carry their time",
-   "why": "holds on every screen it fires on; the packed paths change nothing it reads",
+   "line": "The bus home is half empty. You get the back seat and watch campus go.",
+   "why": "no clock printed in prose",
+   "cause": "",
+   "note": false,
+   "screen_hash": {
+    "text": "78ac51a56f017852",
+    "facts": "5d90976a96216451",
+    "facts2": "5d90976a96216451",
+    "all": "a4c199ff3a84cf16"
+   },
+   "row_hash": "799e1dd153166b6d",
+   "carried": false,
+   "pass": 4
+  },
+  {
+   "row": "C928",
+   "screen": "travel_walk_home.ride",
+   "verdict": "PASS",
+   "line": "The walk home takes forever. Your street, finally.",
+   "why": "no clock printed in prose",
+   "cause": "",
+   "note": false,
+   "screen_hash": {
+    "text": "174378e0c284c707",
+    "facts": "5d90976a96216451",
+    "facts2": "5d90976a96216451",
+    "all": "528247f11444ef92"
+   },
+   "row_hash": "799e1dd153166b6d",
+   "carried": false,
+   "pass": 4
+  },
+  {
+   "row": "C929",
+   "screen": "travel_bus_home.ride",
+   "verdict": "FAIL",
+   "line": "Take the bus home ($2, 20 min)",
+   "why": "note: the label carries the activity's time; the row now says it doesn't (LO 2026-11-24, clock.md:20)",
    "cause": null,
    "note": true,
-   "screen_hash": "d3e09853ea2f6bae",
-   "row_hash": "33a2ca367c2aac5b",
+   "screen_hash": {
+    "text": "78ac51a56f017852",
+    "facts": "5d90976a96216451",
+    "facts2": "5d90976a96216451",
+    "all": "a4c199ff3a84cf16"
+   },
+   "row_hash": "b628ac285ac9c529",
    "carried": false,
-   "pass": 3
+   "pass": 4
+  },
+  {
+   "row": "C929",
+   "screen": "travel_walk_home.ride",
+   "verdict": "FAIL",
+   "line": "Walk home (45 min)",
+   "why": "note: the label carries the activity's time; the row now says it doesn't (LO 2026-11-24, clock.md:20)",
+   "cause": null,
+   "note": true,
+   "screen_hash": {
+    "text": "174378e0c284c707",
+    "facts": "5d90976a96216451",
+    "facts2": "5d90976a96216451",
+    "all": "528247f11444ef92"
+   },
+   "row_hash": "b628ac285ac9c529",
+   "carried": false,
+   "pass": 4
   },
   {
    "row": "C930",
@@ -2099,8 +2839,44 @@
    "note": true,
    "screen_hash": "d3e09853ea2f6bae",
    "row_hash": "97d54d350dd4ee77",
-   "carried": false,
+   "carried": true,
    "pass": 3
+  },
+  {
+   "row": "C930",
+   "screen": "travel_bus_home.ride",
+   "verdict": "N/A",
+   "line": "",
+   "why": "no windowed activity",
+   "cause": null,
+   "note": true,
+   "screen_hash": {
+    "text": "78ac51a56f017852",
+    "facts": "5d90976a96216451",
+    "facts2": "5d90976a96216451",
+    "all": "a4c199ff3a84cf16"
+   },
+   "row_hash": "97d54d350dd4ee77",
+   "carried": false,
+   "pass": 4
+  },
+  {
+   "row": "C930",
+   "screen": "travel_walk_home.ride",
+   "verdict": "N/A",
+   "line": "",
+   "why": "no windowed activity",
+   "cause": null,
+   "note": true,
+   "screen_hash": {
+    "text": "174378e0c284c707",
+    "facts": "5d90976a96216451",
+    "facts2": "5d90976a96216451",
+    "all": "528247f11444ef92"
+   },
+   "row_hash": "97d54d350dd4ee77",
+   "carried": false,
+   "pass": 4
   },
   {
    "row": "C931",
@@ -2112,8 +2888,26 @@
    "note": true,
    "screen_hash": "d3e09853ea2f6bae",
    "row_hash": "1b8984f52b99537e",
-   "carried": false,
+   "carried": true,
    "pass": 3
+  },
+  {
+   "row": "C931",
+   "screen": "travel_bus_home.ride",
+   "verdict": "N/A",
+   "line": "",
+   "why": "no time_of_day condition",
+   "cause": null,
+   "note": true,
+   "screen_hash": {
+    "text": "78ac51a56f017852",
+    "facts": "5d90976a96216451",
+    "facts2": "5d90976a96216451",
+    "all": "a4c199ff3a84cf16"
+   },
+   "row_hash": "1b8984f52b99537e",
+   "carried": false,
+   "pass": 4
   },
   {
    "row": "C931",
@@ -2130,8 +2924,26 @@
     "all": "144f95579bff818c"
    },
    "row_hash": "1b8984f52b99537e",
-   "carried": false,
+   "carried": true,
    "pass": 3
+  },
+  {
+   "row": "C931",
+   "screen": "travel_walk_home.ride",
+   "verdict": "N/A",
+   "line": "",
+   "why": "no time_of_day condition",
+   "cause": null,
+   "note": true,
+   "screen_hash": {
+    "text": "174378e0c284c707",
+    "facts": "5d90976a96216451",
+    "facts2": "5d90976a96216451",
+    "all": "528247f11444ef92"
+   },
+   "row_hash": "1b8984f52b99537e",
+   "carried": false,
+   "pass": 4
   },
   {
    "row": "C951",
@@ -2143,7 +2955,7 @@
    "note": false,
    "screen_hash": "d3e09853ea2f6bae",
    "row_hash": "a91fce0d99af3de3",
-   "carried": false,
+   "carried": true,
    "pass": 3
   },
   {
@@ -2156,7 +2968,7 @@
    "note": false,
    "screen_hash": "d3e09853ea2f6bae",
    "row_hash": "f1b5a1ea9d237702",
-   "carried": false,
+   "carried": true,
    "pass": 3
   },
   {
@@ -2169,7 +2981,7 @@
    "note": true,
    "screen_hash": "d3e09853ea2f6bae",
    "row_hash": "26f84fb90a0ef795",
-   "carried": false,
+   "carried": true,
    "pass": 3
   },
   {
@@ -2182,7 +2994,7 @@
    "note": true,
    "screen_hash": "d3e09853ea2f6bae",
    "row_hash": "a4837b8af6d54bb1",
-   "carried": false,
+   "carried": true,
    "pass": 3
   },
   {
@@ -2195,7 +3007,7 @@
    "note": true,
    "screen_hash": "d3e09853ea2f6bae",
    "row_hash": "801de8f07da9dc5b",
-   "carried": false,
+   "carried": true,
    "pass": 3
   },
   {
@@ -2208,7 +3020,7 @@
    "note": false,
    "screen_hash": "d3e09853ea2f6bae",
    "row_hash": "e1c6c01fec93f506",
-   "carried": false,
+   "carried": true,
    "pass": 3
   },
   {
@@ -2221,7 +3033,7 @@
    "note": false,
    "screen_hash": "d3e09853ea2f6bae",
    "row_hash": "15827455cd5e6620",
-   "carried": false,
+   "carried": true,
    "pass": 3
   },
   {
@@ -2234,7 +3046,7 @@
    "note": true,
    "screen_hash": "d3e09853ea2f6bae",
    "row_hash": "02e29cf84feb0732",
-   "carried": false,
+   "carried": true,
    "pass": 3
   },
   {
@@ -2247,8 +3059,26 @@
    "note": false,
    "screen_hash": "d3e09853ea2f6bae",
    "row_hash": "759e6667d7fc3183",
-   "carried": false,
+   "carried": true,
    "pass": 3
+  },
+  {
+   "row": "L106",
+   "screen": "travel_bus_home.ride",
+   "verdict": "PASS",
+   "line": "The bus home is half empty. You get the back seat and watch campus go.",
+   "why": "names nobody; 'half empty' claims no person",
+   "cause": "",
+   "note": false,
+   "screen_hash": {
+    "text": "78ac51a56f017852",
+    "facts": "5d90976a96216451",
+    "facts2": "5d90976a96216451",
+    "all": "a4c199ff3a84cf16"
+   },
+   "row_hash": "759e6667d7fc3183",
+   "carried": false,
+   "pass": 4
   },
   {
    "row": "L106",
@@ -2265,8 +3095,26 @@
     "all": "144f95579bff818c"
    },
    "row_hash": "759e6667d7fc3183",
-   "carried": false,
+   "carried": true,
    "pass": 3
+  },
+  {
+   "row": "L106",
+   "screen": "travel_walk_home.ride",
+   "verdict": "PASS",
+   "line": "The walk home takes forever. Your street, finally.",
+   "why": "names nobody; 'half empty' claims no person",
+   "cause": "",
+   "note": false,
+   "screen_hash": {
+    "text": "174378e0c284c707",
+    "facts": "5d90976a96216451",
+    "facts2": "5d90976a96216451",
+    "all": "528247f11444ef92"
+   },
+   "row_hash": "759e6667d7fc3183",
+   "carried": false,
+   "pass": 4
   },
   {
    "row": "L119",
@@ -2278,7 +3126,7 @@
    "note": false,
    "screen_hash": "d3e09853ea2f6bae",
    "row_hash": "18ef41501e0b23c3",
-   "carried": false,
+   "carried": true,
    "pass": 3
   },
   {
@@ -2291,7 +3139,7 @@
    "note": false,
    "screen_hash": "d3e09853ea2f6bae",
    "row_hash": "22461386046b4605",
-   "carried": false,
+   "carried": true,
    "pass": 3
   },
   {
@@ -2304,7 +3152,7 @@
    "note": false,
    "screen_hash": "d3e09853ea2f6bae",
    "row_hash": "cddfa55c18e5c7b7",
-   "carried": false,
+   "carried": true,
    "pass": 3
   },
   {
@@ -2317,7 +3165,7 @@
    "note": false,
    "screen_hash": "d3e09853ea2f6bae",
    "row_hash": "259dda0a0553e751",
-   "carried": false,
+   "carried": true,
    "pass": 3
   },
   {
@@ -2330,7 +3178,7 @@
    "note": false,
    "screen_hash": "d3e09853ea2f6bae",
    "row_hash": "5dea5707be5e7e0a",
-   "carried": false,
+   "carried": true,
    "pass": 3
   },
   {
@@ -2343,7 +3191,7 @@
    "note": false,
    "screen_hash": "d3e09853ea2f6bae",
    "row_hash": "00a617ab9b4e9cd4",
-   "carried": false,
+   "carried": true,
    "pass": 3
   },
   {
@@ -2356,7 +3204,7 @@
    "note": false,
    "screen_hash": "d3e09853ea2f6bae",
    "row_hash": "4e530707de7da850",
-   "carried": false,
+   "carried": true,
    "pass": 3
   },
   {
@@ -2369,8 +3217,26 @@
    "note": false,
    "screen_hash": "d3e09853ea2f6bae",
    "row_hash": "adf7bb3f8b632ac3",
-   "carried": false,
+   "carried": true,
    "pass": 3
+  },
+  {
+   "row": "L167",
+   "screen": "travel_bus_home.ride",
+   "verdict": "N/A",
+   "line": "",
+   "why": "no hours that differ by day",
+   "cause": "",
+   "note": false,
+   "screen_hash": {
+    "text": "78ac51a56f017852",
+    "facts": "5d90976a96216451",
+    "facts2": "5d90976a96216451",
+    "all": "a4c199ff3a84cf16"
+   },
+   "row_hash": "adf7bb3f8b632ac3",
+   "carried": false,
+   "pass": 4
   },
   {
    "row": "L167",
@@ -2387,8 +3253,26 @@
     "all": "144f95579bff818c"
    },
    "row_hash": "adf7bb3f8b632ac3",
-   "carried": false,
+   "carried": true,
    "pass": 3
+  },
+  {
+   "row": "L167",
+   "screen": "travel_walk_home.ride",
+   "verdict": "N/A",
+   "line": "",
+   "why": "no hours that differ by day",
+   "cause": "",
+   "note": false,
+   "screen_hash": {
+    "text": "174378e0c284c707",
+    "facts": "5d90976a96216451",
+    "facts2": "5d90976a96216451",
+    "all": "528247f11444ef92"
+   },
+   "row_hash": "adf7bb3f8b632ac3",
+   "carried": false,
+   "pass": 4
   },
   {
    "row": "L97",
@@ -2400,7 +3284,7 @@
    "note": false,
    "screen_hash": "d3e09853ea2f6bae",
    "row_hash": "2bfb9527e76ad93b",
-   "carried": false,
+   "carried": true,
    "pass": 3
   },
   {
@@ -2413,21 +3297,21 @@
    "note": false,
    "screen_hash": "d3e09853ea2f6bae",
    "row_hash": "cd89df2f76a7be89",
-   "carried": false,
+   "carried": true,
    "pass": 3
   },
   {
    "row": "clock#2",
    "screen": "*",
    "verdict": "PASS",
-   "line": "20/45 min between areas",
-   "why": "holds on every screen it fires on; the packed paths change nothing it reads",
+   "line": "\"Take the bus to campus ($2, 20 min)\" \u00b7 \"Walk to campus (45 min, 10 energy)\"; no place on campus has an entry cost",
+   "why": "Time is on the crossing between areas; hops are free both ways.",
    "cause": null,
    "note": false,
-   "screen_hash": "d3e09853ea2f6bae",
-   "row_hash": "1a52b17c19333377",
-   "carried": false,
-   "pass": 3
+   "screen_hash": "e2a4a0e66257bc3f",
+   "row_hash": "e393ecafc7ab9a6c",
+   "carried": true,
+   "pass": 4
   },
   {
    "row": "clock#3",
@@ -2439,7 +3323,7 @@
    "note": false,
    "screen_hash": "d3e09853ea2f6bae",
    "row_hash": "aae8f146c8ec933d",
-   "carried": false,
+   "carried": true,
    "pass": 3
   },
   {
@@ -2452,7 +3336,7 @@
    "note": false,
    "screen_hash": "d3e09853ea2f6bae",
    "row_hash": "c33118361d16b379",
-   "carried": false,
+   "carried": true,
    "pass": 3
   },
   {
@@ -2465,7 +3349,7 @@
    "note": false,
    "screen_hash": "d3e09853ea2f6bae",
    "row_hash": "95c5edec9e714e7b",
-   "carried": false,
+   "carried": true,
    "pass": 3
   },
   {
@@ -2478,7 +3362,7 @@
    "note": false,
    "screen_hash": "d3e09853ea2f6bae",
    "row_hash": "31fd30fb07702bc9",
-   "carried": false,
+   "carried": true,
    "pass": 3
   },
   {
@@ -2491,7 +3375,7 @@
    "note": false,
    "screen_hash": "d3e09853ea2f6bae",
    "row_hash": "313c48a91780f62b",
-   "carried": false,
+   "carried": true,
    "pass": 3
   },
   {
@@ -2504,7 +3388,7 @@
    "note": false,
    "screen_hash": "d3e09853ea2f6bae",
    "row_hash": "f0c2400d02519978",
-   "carried": false,
+   "carried": true,
    "pass": 3
   },
   {
@@ -2517,7 +3401,7 @@
    "note": false,
    "screen_hash": "d3e09853ea2f6bae",
    "row_hash": "5d697f6bcd9f82de",
-   "carried": false,
+   "carried": true,
    "pass": 3
   },
   {
@@ -2530,7 +3414,7 @@
    "note": false,
    "screen_hash": "d3e09853ea2f6bae",
    "row_hash": "7e0e9cac0c7ec835",
-   "carried": false,
+   "carried": true,
    "pass": 3
   },
   {
@@ -2543,7 +3427,7 @@
    "note": false,
    "screen_hash": "d3e09853ea2f6bae",
    "row_hash": "0a33384ffe67d1bf",
-   "carried": false,
+   "carried": true,
    "pass": 3
   },
   {
@@ -2556,7 +3440,7 @@
    "note": false,
    "screen_hash": "d3e09853ea2f6bae",
    "row_hash": "e9d01e866022fc3d",
-   "carried": false,
+   "carried": true,
    "pass": 3
   },
   {
@@ -2569,7 +3453,7 @@
    "note": false,
    "screen_hash": "d3e09853ea2f6bae",
    "row_hash": "45aafb7d29fcdde3",
-   "carried": false,
+   "carried": true,
    "pass": 3
   },
   {
@@ -2582,7 +3466,7 @@
    "note": false,
    "screen_hash": "d3e09853ea2f6bae",
    "row_hash": "288e67bc30cff285",
-   "carried": false,
+   "carried": true,
    "pass": 3
   },
   {
@@ -2595,7 +3479,7 @@
    "note": false,
    "screen_hash": "d3e09853ea2f6bae",
    "row_hash": "f551184edd7bddfa",
-   "carried": false,
+   "carried": true,
    "pass": 3
   },
   {
@@ -2608,7 +3492,7 @@
    "note": false,
    "screen_hash": "d3e09853ea2f6bae",
    "row_hash": "fb554bd9b0b05714",
-   "carried": false,
+   "carried": true,
    "pass": 3
   },
   {
@@ -2621,7 +3505,7 @@
    "note": false,
    "screen_hash": "d3e09853ea2f6bae",
    "row_hash": "8566e893cebb0186",
-   "carried": false,
+   "carried": true,
    "pass": 3
   },
   {
@@ -2634,7 +3518,7 @@
    "note": false,
    "screen_hash": "d3e09853ea2f6bae",
    "row_hash": "cb0ada4b2d3e024c",
-   "carried": false,
+   "carried": true,
    "pass": 3
   },
   {
@@ -2647,7 +3531,7 @@
    "note": false,
    "screen_hash": "d3e09853ea2f6bae",
    "row_hash": "a9d1b7304239e330",
-   "carried": false,
+   "carried": true,
    "pass": 3
   },
   {
@@ -2660,7 +3544,7 @@
    "note": false,
    "screen_hash": "d3e09853ea2f6bae",
    "row_hash": "e686b407357d5dfe",
-   "carried": false,
+   "carried": true,
    "pass": 3
   },
   {
@@ -2673,7 +3557,7 @@
    "note": false,
    "screen_hash": "d3e09853ea2f6bae",
    "row_hash": "51c788f9cf88c547",
-   "carried": false,
+   "carried": true,
    "pass": 3
   },
   {
@@ -2691,7 +3575,7 @@
     "all": "144f95579bff818c"
    },
    "row_hash": "51c788f9cf88c547",
-   "carried": false,
+   "carried": true,
    "pass": 3
   },
   {
@@ -2704,7 +3588,7 @@
    "note": false,
    "screen_hash": "d3e09853ea2f6bae",
    "row_hash": "02f78ddf483ec147",
-   "carried": false,
+   "carried": true,
    "pass": 3
   },
   {
@@ -2717,7 +3601,7 @@
    "note": false,
    "screen_hash": "d3e09853ea2f6bae",
    "row_hash": "b3e99b6034510032",
-   "carried": false,
+   "carried": true,
    "pass": 3
   },
   {
@@ -2730,7 +3614,7 @@
    "note": false,
    "screen_hash": "d3e09853ea2f6bae",
    "row_hash": "a97dfd91d1cd6aae",
-   "carried": false,
+   "carried": true,
    "pass": 3
   },
   {
@@ -2743,7 +3627,7 @@
    "note": false,
    "screen_hash": "d3e09853ea2f6bae",
    "row_hash": "f75e08aaaa6bb543",
-   "carried": false,
+   "carried": true,
    "pass": 3
   },
   {
@@ -2756,21 +3640,21 @@
    "note": false,
    "screen_hash": "d3e09853ea2f6bae",
    "row_hash": "3641bf707d9adfce",
-   "carried": false,
+   "carried": true,
    "pass": 3
   },
   {
    "row": "media#2",
    "screen": "*",
    "verdict": "PASS",
-   "line": "one _t0 still with her in it per destination",
-   "why": "never the empty room; the packed paths change nothing it reads",
+   "line": "image_search_queries: \"woman of 18 at a long library table with books\" (each place one _t0 file with her in it)",
+   "why": "Each of the six places has at most one picture, tier 0, with her; the quad none; never the empty room.",
    "cause": null,
    "note": false,
-   "screen_hash": "d3e09853ea2f6bae",
-   "row_hash": "6fbfd98c2bfee006",
-   "carried": false,
-   "pass": 3
+   "screen_hash": "e2a4a0e66257bc3f",
+   "row_hash": "01ba7fa1cec4bc7a",
+   "carried": true,
+   "pass": 4
   },
   {
    "row": "media#3",
@@ -2782,7 +3666,7 @@
    "note": false,
    "screen_hash": "d3e09853ea2f6bae",
    "row_hash": "8c75b0d488b188e2",
-   "carried": false,
+   "carried": true,
    "pass": 3
   },
   {
@@ -2795,7 +3679,7 @@
    "note": false,
    "screen_hash": "d3e09853ea2f6bae",
    "row_hash": "03599fc0722690b6",
-   "carried": false,
+   "carried": true,
    "pass": 3
   },
   {
@@ -2808,7 +3692,7 @@
    "note": false,
    "screen_hash": "d3e09853ea2f6bae",
    "row_hash": "2cf5e3607ccecd4a",
-   "carried": false,
+   "carried": true,
    "pass": 3
   },
   {
@@ -2821,7 +3705,7 @@
    "note": false,
    "screen_hash": "d3e09853ea2f6bae",
    "row_hash": "3016751837a9b0a0",
-   "carried": false,
+   "carried": true,
    "pass": 3
   },
   {
@@ -2834,7 +3718,7 @@
    "note": false,
    "screen_hash": "d3e09853ea2f6bae",
    "row_hash": "eff6dc1369755c34",
-   "carried": false,
+   "carried": true,
    "pass": 3
   },
   {
@@ -2847,7 +3731,7 @@
    "note": false,
    "screen_hash": "d3e09853ea2f6bae",
    "row_hash": "18252966b4327f58",
-   "carried": false,
+   "carried": true,
    "pass": 3
   },
   {
@@ -2860,60 +3744,60 @@
    "note": false,
    "screen_hash": "d3e09853ea2f6bae",
    "row_hash": "3ab79adc34668b04",
-   "carried": false,
+   "carried": true,
    "pass": 3
   },
   {
    "row": "places#2",
    "screen": "campus_cafeteria",
    "verdict": "FAIL",
-   "line": "The cafeteria: trays, long tables, the lunch counter.",
-   "why": "no presence line per person and no empty-room line; deferred to P30, unchanged",
-   "cause": "P04c1-c1",
+   "line": "The cafeteria: trays, long tables, the lunch counter. A sign says it's open weekdays from 8am to 4pm.",
+   "why": "held to P30, judged as built: no presence line per person there, no empty-room line (Rosa, Nadia, Zoe have rows here)",
+   "cause": "P04e1-c1",
    "note": false,
    "screen_hash": null,
    "row_hash": "3ab79adc34668b04",
    "carried": false,
-   "pass": 3
+   "pass": 4
   },
   {
    "row": "places#2",
    "screen": "campus_lecture_hall",
    "verdict": "FAIL",
-   "line": "The lecture hall: rows of seats rising to the back, a screen, a lectern at the bottom.",
-   "why": "no presence line per person and no empty-room line; deferred to P30, unchanged",
-   "cause": "P04c1-c1",
+   "line": "The lecture hall: rows of seats rising to the back, a screen, a lectern at the bottom. Most of your classes are here.",
+   "why": "held to P30, judged as built: no presence line per person there, no empty-room line (Hale, Pratt, Walsh, Nadia have rows here)",
+   "cause": "P04e1-c1",
    "note": false,
    "screen_hash": null,
    "row_hash": "3ab79adc34668b04",
    "carried": false,
-   "pass": 3
+   "pass": 4
   },
   {
    "row": "places#2",
    "screen": "campus_library",
    "verdict": "FAIL",
    "line": "The library: long tables, quiet floors, and the desk by the door.",
-   "why": "no presence line per person and no empty-room line; deferred to P30, unchanged",
-   "cause": "P04c1-c1",
+   "why": "held to P30, judged as built: no presence line per person there, no empty-room line (Holt, Nadia have rows here)",
+   "cause": "P04e1-c1",
    "note": false,
    "screen_hash": null,
    "row_hash": "3ab79adc34668b04",
    "carried": false,
-   "pass": 3
+   "pass": 4
   },
   {
    "row": "places#2",
    "screen": "campus_theatre",
    "verdict": "FAIL",
    "line": "The theatre: a black stage, rows of folding seats, and the lights rigged overhead.",
-   "why": "no presence line per person and no empty-room line; deferred to P30, unchanged",
-   "cause": "P04c1-c1",
+   "why": "held to P30, judged as built: no presence line per person there, no empty-room line (Cross has rows here)",
+   "cause": "P04e1-c1",
    "note": false,
    "screen_hash": null,
    "row_hash": "3ab79adc34668b04",
    "carried": false,
-   "pass": 3
+   "pass": 4
   },
   {
    "row": "places#3",
@@ -2925,7 +3809,7 @@
    "note": false,
    "screen_hash": "d3e09853ea2f6bae",
    "row_hash": "56d056c80da49bb6",
-   "carried": false,
+   "carried": true,
    "pass": 3
   },
   {
@@ -2938,7 +3822,7 @@
    "note": false,
    "screen_hash": "d3e09853ea2f6bae",
    "row_hash": "ada53ed66015c980",
-   "carried": false,
+   "carried": true,
    "pass": 3
   },
   {
@@ -2951,7 +3835,7 @@
    "note": false,
    "screen_hash": "d3e09853ea2f6bae",
    "row_hash": "90ec575adee9bf74",
-   "carried": false,
+   "carried": true,
    "pass": 3
   },
   {
@@ -2964,47 +3848,47 @@
    "note": false,
    "screen_hash": "d3e09853ea2f6bae",
    "row_hash": "f2bc5f0f10c64c4b",
-   "carried": false,
+   "carried": true,
    "pass": 3
   },
   {
    "row": "places#6",
    "screen": "campus_lecture_hall",
-   "verdict": "FAIL",
-   "line": "The lecture hall: rows of seats rising to the back",
-   "why": "open weekdays 8-6; only the one-time first classes, nothing repeatable to do alone; class is P09",
-   "cause": "P04c1-c2",
+   "verdict": "PASS",
+   "line": "Study in an empty row (1 hour, 5 energy)",
+   "why": "study_hall is open whenever the hall is (no clock conditions), so the open hall always has a thing to do alone; after the shared 3-a-day cap it greys with its reason, the cap is pacing (C1425)",
+   "cause": "",
    "note": false,
    "screen_hash": null,
    "row_hash": "f2bc5f0f10c64c4b",
    "carried": false,
-   "pass": 3
+   "pass": 4
   },
   {
    "row": "places#6",
    "screen": "campus_library",
-   "verdict": "FAIL",
-   "line": "The library: long tables, quiet floors, and the desk by the door.",
-   "why": "open 8am-10pm with no canvas at all; Study is P09, Ms. Holt P18",
-   "cause": "P04c1-c2",
+   "verdict": "PASS",
+   "line": "\"Study (1 hour, 5 energy)\" (study_library, any hour the library is open; greys with \"you can't take in another page today.\" after 3)",
+   "why": "Something to do alone at every open hour; its daily cap says why.",
+   "cause": null,
    "note": false,
    "screen_hash": null,
    "row_hash": "f2bc5f0f10c64c4b",
-   "carried": false,
-   "pass": 3
+   "carried": true,
+   "pass": 4
   },
   {
    "row": "places#6",
    "screen": "campus_theatre",
    "verdict": "FAIL",
-   "line": "The theatre: a black stage, rows of folding seats",
-   "why": "open weekdays 9-9 with no canvas; drama and practise are P09/P17",
-   "cause": "P04c1-c2",
+   "line": "Practise on the empty stage (30 min) \u2014 someone has the stage.",
+   "why": "held to P41/P26, no waiver, judged as built: while Cross is in (Tue/Thu 11-13 and 14-18, Fri 14-18) outside drama's 11:00-11:30 start, the open theatre's only alone row is greyed, so there is nothing she can do alone",
+   "cause": "P04e1-c2",
    "note": false,
    "screen_hash": null,
    "row_hash": "f2bc5f0f10c64c4b",
    "carried": false,
-   "pass": 3
+   "pass": 4
   },
   {
    "row": "places#7",
@@ -3016,7 +3900,7 @@
    "note": false,
    "screen_hash": "d3e09853ea2f6bae",
    "row_hash": "2a095bf54f175e5e",
-   "carried": false,
+   "carried": true,
    "pass": 3
   },
   {
@@ -3029,7 +3913,7 @@
    "note": false,
    "screen_hash": "d3e09853ea2f6bae",
    "row_hash": "c3ea8d01465e7298",
-   "carried": false,
+   "carried": true,
    "pass": 3
   },
   {
@@ -3042,7 +3926,7 @@
    "note": false,
    "screen_hash": "d3e09853ea2f6bae",
    "row_hash": "f4cd9ab5f62bc6fc",
-   "carried": false,
+   "carried": true,
    "pass": 3
   },
   {
@@ -3055,7 +3939,7 @@
    "note": false,
    "screen_hash": "d3e09853ea2f6bae",
    "row_hash": "11a025871bd91561",
-   "carried": false,
+   "carried": true,
    "pass": 3
   },
   {
@@ -3068,7 +3952,7 @@
    "note": false,
    "screen_hash": "d3e09853ea2f6bae",
    "row_hash": "d1df5ca64fd54c4b",
-   "carried": false,
+   "carried": true,
    "pass": 3
   },
   {
@@ -3081,7 +3965,7 @@
    "note": false,
    "screen_hash": "d3e09853ea2f6bae",
    "row_hash": "27d05f8558ba0bb1",
-   "carried": false,
+   "carried": true,
    "pass": 3
   },
   {
@@ -3094,7 +3978,7 @@
    "note": false,
    "screen_hash": "d3e09853ea2f6bae",
    "row_hash": "08602a299af77b30",
-   "carried": false,
+   "carried": true,
    "pass": 3
   },
   {
@@ -3107,7 +3991,7 @@
    "note": false,
    "screen_hash": "d3e09853ea2f6bae",
    "row_hash": "2d317a22b4b850f2",
-   "carried": false,
+   "carried": true,
    "pass": 3
   },
   {
@@ -3120,7 +4004,7 @@
    "note": false,
    "screen_hash": "d3e09853ea2f6bae",
    "row_hash": "8bf41d5847343d42",
-   "carried": false,
+   "carried": true,
    "pass": 3
   },
   {
@@ -3133,7 +4017,7 @@
    "note": false,
    "screen_hash": "d3e09853ea2f6bae",
    "row_hash": "94a3bd2b1d063362",
-   "carried": false,
+   "carried": true,
    "pass": 3
   },
   {
@@ -3146,7 +4030,7 @@
    "note": false,
    "screen_hash": "d3e09853ea2f6bae",
    "row_hash": "c3246ca0c2177dd6",
-   "carried": false,
+   "carried": true,
    "pass": 3
   },
   {
@@ -3159,7 +4043,7 @@
    "note": false,
    "screen_hash": "d3e09853ea2f6bae",
    "row_hash": "f862f66e0c4425a8",
-   "carried": false,
+   "carried": true,
    "pass": 3
   },
   {
@@ -3172,7 +4056,7 @@
    "note": false,
    "screen_hash": "d3e09853ea2f6bae",
    "row_hash": "b1d7f42dfb70bf0d",
-   "carried": false,
+   "carried": true,
    "pass": 3
   },
   {
@@ -3185,7 +4069,7 @@
    "note": false,
    "screen_hash": "d3e09853ea2f6bae",
    "row_hash": "5002f2dbd27d6463",
-   "carried": false,
+   "carried": true,
    "pass": 3
   },
   {
@@ -3198,7 +4082,7 @@
    "note": false,
    "screen_hash": "d3e09853ea2f6bae",
    "row_hash": "b8e8afcb32208b40",
-   "carried": false,
+   "carried": true,
    "pass": 3
   },
   {
@@ -3211,7 +4095,7 @@
    "note": false,
    "screen_hash": "d3e09853ea2f6bae",
    "row_hash": "a40d4073409a2705",
-   "carried": false,
+   "carried": true,
    "pass": 3
   },
   {
@@ -3224,7 +4108,7 @@
    "note": false,
    "screen_hash": "d3e09853ea2f6bae",
    "row_hash": "4777d2c1251214c2",
-   "carried": false,
+   "carried": true,
    "pass": 3
   },
   {
@@ -3237,7 +4121,7 @@
    "note": false,
    "screen_hash": "d3e09853ea2f6bae",
    "row_hash": "ac2fdd7245f436db",
-   "carried": false,
+   "carried": true,
    "pass": 3
   },
   {
@@ -3250,7 +4134,7 @@
    "note": false,
    "screen_hash": "d3e09853ea2f6bae",
    "row_hash": "7bbdd4290054e601",
-   "carried": false,
+   "carried": true,
    "pass": 3
   },
   {
@@ -3268,7 +4152,7 @@
     "all": "144f95579bff818c"
    },
    "row_hash": "7bbdd4290054e601",
-   "carried": false,
+   "carried": true,
    "pass": 3
   },
   {
@@ -3281,7 +4165,7 @@
    "note": false,
    "screen_hash": "d3e09853ea2f6bae",
    "row_hash": "df1f5dc8b6d21538",
-   "carried": false,
+   "carried": true,
    "pass": 3
   },
   {
@@ -3294,7 +4178,7 @@
    "note": false,
    "screen_hash": "d3e09853ea2f6bae",
    "row_hash": "321cc76cff93aadb",
-   "carried": false,
+   "carried": true,
    "pass": 3
   },
   {
@@ -3307,23 +4191,487 @@
    "note": false,
    "screen_hash": "d3e09853ea2f6bae",
    "row_hash": "4362249fb5f9616e",
-   "carried": false,
+   "carried": true,
    "pass": 3
   }
  ],
  "causes": [
   {
-   "id": "P04c1-c1",
-   "what": "No campus place has a presence line or an empty-room line, though P32's rows put Hale, Pratt, Walsh, Nadia, Holt, Rosa and Cross there; the card defers it to P30."
+   "id": "P04d1-c1",
+   "what": "The campus places have no presence line: the screen reads the same whoever who_is_where puts there (held to P30, no waiver)."
   },
   {
-   "id": "P04c1-c2",
-   "what": "The Library, Theatre and Lecture Hall open with nothing she can do alone (the Lecture Hall has only its one-time first classes); the card defers Study, drama and class to P09/P17/P18."
+   "id": "P04d1-c2",
+   "what": "The Lecture Hall has nothing to do alone for most of its open hours: its class rows open only in 30-minute start windows (09:00\u201309:30, 11:00\u201311:30), only Psychology greys out of hours, and every row needs its teacher's met flag."
+  },
+  {
+   "id": "P04d1-c3",
+   "what": "The Theatre has nothing to do alone while Mr. Cross is in (Tue/Thu 11:30\u201313:00, Tue/Thu/Fri 14:00\u201318:00): the stage greys to \"someone has the stage.\" and drama opens only 11:00\u201311:30."
+  },
+  {
+   "id": "P04e1-c1",
+   "what": "the campus places carry no presence lines: their text never changes with who their rows put there (held to P30, no waiver)"
+  },
+  {
+   "id": "P04e1-c2",
+   "what": "the theatre has nothing to do alone while Cross is in outside drama's start window (held to P41/P26, no waiver)"
   }
  ],
- "pending": [],
- "asked": 231,
- "answered": 231,
- "pass_items": [],
+ "pending": [
+  {
+   "row": "B10",
+   "screen": "travel_bus_to_campus.ride",
+   "why": "screen changed: truth row"
+  },
+  {
+   "row": "B10",
+   "screen": "travel_walk_to_campus.ride",
+   "why": "screen changed: truth row"
+  },
+  {
+   "row": "B8",
+   "screen": "travel_bus_to_campus.ride",
+   "why": "screen changed: truth row"
+  },
+  {
+   "row": "B8",
+   "screen": "travel_walk_to_campus.ride",
+   "why": "screen changed: truth row"
+  },
+  {
+   "row": "C460",
+   "screen": "travel_bus_to_campus.ride",
+   "why": "screen changed: truth row"
+  },
+  {
+   "row": "C460",
+   "screen": "travel_walk_to_campus.ride",
+   "why": "screen changed: truth row"
+  },
+  {
+   "row": "C461",
+   "screen": "travel_bus_to_campus.ride",
+   "why": "screen changed: truth row"
+  },
+  {
+   "row": "C461",
+   "screen": "travel_walk_to_campus.ride",
+   "why": "screen changed: truth row"
+  },
+  {
+   "row": "C921",
+   "screen": "travel_bus_to_campus.ride",
+   "why": "screen changed: truth row"
+  },
+  {
+   "row": "C921",
+   "screen": "travel_walk_to_campus.ride",
+   "why": "screen changed: truth row"
+  },
+  {
+   "row": "C927",
+   "screen": "travel_bus_to_campus.ride",
+   "why": "screen changed: truth row"
+  },
+  {
+   "row": "C927",
+   "screen": "travel_walk_to_campus.ride",
+   "why": "screen changed: truth row"
+  },
+  {
+   "row": "C931",
+   "screen": "travel_bus_to_campus.ride",
+   "why": "screen changed: truth row"
+  },
+  {
+   "row": "C931",
+   "screen": "travel_walk_to_campus.ride",
+   "why": "screen changed: truth row"
+  },
+  {
+   "row": "C953",
+   "screen": "*",
+   "why": "its rule's text changed"
+  },
+  {
+   "row": "L106",
+   "screen": "travel_bus_to_campus.ride",
+   "why": "screen changed: truth row"
+  },
+  {
+   "row": "L106",
+   "screen": "travel_walk_to_campus.ride",
+   "why": "screen changed: truth row"
+  },
+  {
+   "row": "L167",
+   "screen": "travel_bus_to_campus.ride",
+   "why": "screen changed: truth row"
+  },
+  {
+   "row": "L167",
+   "screen": "travel_walk_to_campus.ride",
+   "why": "screen changed: truth row"
+  },
+  {
+   "row": "clock#1",
+   "screen": "*",
+   "why": "its rule's text changed"
+  },
+  {
+   "row": "clock#6",
+   "screen": "*",
+   "why": "its rule's text changed"
+  },
+  {
+   "row": "places#4",
+   "screen": "*",
+   "why": "its rule's text changed"
+  },
+  {
+   "row": "systems#4",
+   "screen": "*",
+   "why": "its rule's text changed"
+  }
+ ],
+ "asked": 89,
+ "answered": 66,
+ "pass_items": [
+  {
+   "row": "B10",
+   "screen": "travel_bus_home.ride",
+   "why": "a fact changed"
+  },
+  {
+   "row": "B10",
+   "screen": "travel_walk_home.ride",
+   "why": "a fact changed"
+  },
+  {
+   "row": "B8",
+   "screen": "travel_bus_home.ride",
+   "why": "a fact changed"
+  },
+  {
+   "row": "B8",
+   "screen": "travel_walk_home.ride",
+   "why": "a fact changed"
+  },
+  {
+   "row": "C1265",
+   "screen": "*",
+   "why": "its rule's text changed"
+  },
+  {
+   "row": "C460",
+   "screen": "travel_bus_home.ride",
+   "why": "a fact changed"
+  },
+  {
+   "row": "C460",
+   "screen": "travel_walk_home.ride",
+   "why": "a fact changed"
+  },
+  {
+   "row": "C461",
+   "screen": "travel_bus_home.ride",
+   "why": "a fact changed"
+  },
+  {
+   "row": "C461",
+   "screen": "travel_walk_home.ride",
+   "why": "a fact changed"
+  },
+  {
+   "row": "C804",
+   "screen": "campus_cafeteria",
+   "why": "failed last pass"
+  },
+  {
+   "row": "C804",
+   "screen": "campus_lecture_hall",
+   "why": "failed last pass"
+  },
+  {
+   "row": "C804",
+   "screen": "campus_library",
+   "why": "failed last pass"
+  },
+  {
+   "row": "C804",
+   "screen": "campus_theatre",
+   "why": "failed last pass"
+  },
+  {
+   "row": "C889",
+   "screen": "travel_bus_home.ride",
+   "why": "a fact changed"
+  },
+  {
+   "row": "C889",
+   "screen": "travel_walk_home.ride",
+   "why": "a fact changed"
+  },
+  {
+   "row": "C892",
+   "screen": "travel_bus_home.ride",
+   "why": "a fact changed"
+  },
+  {
+   "row": "C892",
+   "screen": "travel_walk_home.ride",
+   "why": "a fact changed"
+  },
+  {
+   "row": "C897",
+   "screen": "travel_bus_home.ride",
+   "why": "a fact changed"
+  },
+  {
+   "row": "C897",
+   "screen": "travel_walk_home.ride",
+   "why": "a fact changed"
+  },
+  {
+   "row": "C900",
+   "screen": "travel_bus_home.ride",
+   "why": "a fact changed"
+  },
+  {
+   "row": "C900",
+   "screen": "travel_walk_home.ride",
+   "why": "a fact changed"
+  },
+  {
+   "row": "C902",
+   "screen": "travel_bus_home.ride",
+   "why": "a fact changed"
+  },
+  {
+   "row": "C902",
+   "screen": "travel_walk_home.ride",
+   "why": "a fact changed"
+  },
+  {
+   "row": "C903",
+   "screen": "travel_bus_home.ride",
+   "why": "a fact changed"
+  },
+  {
+   "row": "C903",
+   "screen": "travel_walk_home.ride",
+   "why": "a fact changed"
+  },
+  {
+   "row": "C906",
+   "screen": "travel_bus_home.ride",
+   "why": "a fact changed"
+  },
+  {
+   "row": "C906",
+   "screen": "travel_walk_home.ride",
+   "why": "a fact changed"
+  },
+  {
+   "row": "C910",
+   "screen": "travel_bus_home.ride",
+   "why": "a fact changed"
+  },
+  {
+   "row": "C910",
+   "screen": "travel_walk_home.ride",
+   "why": "a fact changed"
+  },
+  {
+   "row": "C913",
+   "screen": "travel_bus_home.ride",
+   "why": "a fact changed"
+  },
+  {
+   "row": "C913",
+   "screen": "travel_walk_home.ride",
+   "why": "a fact changed"
+  },
+  {
+   "row": "C914",
+   "screen": "travel_bus_home.ride",
+   "why": "a fact changed"
+  },
+  {
+   "row": "C914",
+   "screen": "travel_walk_home.ride",
+   "why": "a fact changed"
+  },
+  {
+   "row": "C916",
+   "screen": "travel_bus_home.ride",
+   "why": "a fact changed"
+  },
+  {
+   "row": "C916",
+   "screen": "travel_walk_home.ride",
+   "why": "a fact changed"
+  },
+  {
+   "row": "C920",
+   "screen": "*",
+   "why": "its rule's text changed"
+  },
+  {
+   "row": "C920",
+   "screen": "travel_bus_home.ride",
+   "why": "a fact changed"
+  },
+  {
+   "row": "C920",
+   "screen": "travel_walk_home.ride",
+   "why": "a fact changed"
+  },
+  {
+   "row": "C921",
+   "screen": "travel_bus_home.ride",
+   "why": "a fact changed"
+  },
+  {
+   "row": "C921",
+   "screen": "travel_walk_home.ride",
+   "why": "a fact changed"
+  },
+  {
+   "row": "C924",
+   "screen": "travel_bus_home.ride",
+   "why": "a fact changed"
+  },
+  {
+   "row": "C924",
+   "screen": "travel_walk_home.ride",
+   "why": "a fact changed"
+  },
+  {
+   "row": "C926",
+   "screen": "travel_bus_home.ride",
+   "why": "a fact changed"
+  },
+  {
+   "row": "C926",
+   "screen": "travel_walk_home.ride",
+   "why": "a fact changed"
+  },
+  {
+   "row": "C927",
+   "screen": "travel_bus_home.ride",
+   "why": "a fact changed"
+  },
+  {
+   "row": "C927",
+   "screen": "travel_walk_home.ride",
+   "why": "a fact changed"
+  },
+  {
+   "row": "C928",
+   "screen": "travel_bus_home.ride",
+   "why": "a fact changed"
+  },
+  {
+   "row": "C928",
+   "screen": "travel_walk_home.ride",
+   "why": "a fact changed"
+  },
+  {
+   "row": "C929",
+   "screen": "travel_bus_home.ride",
+   "why": "a fact changed"
+  },
+  {
+   "row": "C929",
+   "screen": "travel_walk_home.ride",
+   "why": "a fact changed"
+  },
+  {
+   "row": "C930",
+   "screen": "travel_bus_home.ride",
+   "why": "a fact changed"
+  },
+  {
+   "row": "C930",
+   "screen": "travel_walk_home.ride",
+   "why": "a fact changed"
+  },
+  {
+   "row": "C931",
+   "screen": "travel_bus_home.ride",
+   "why": "a fact changed"
+  },
+  {
+   "row": "C931",
+   "screen": "travel_walk_home.ride",
+   "why": "a fact changed"
+  },
+  {
+   "row": "L106",
+   "screen": "travel_bus_home.ride",
+   "why": "a fact changed"
+  },
+  {
+   "row": "L106",
+   "screen": "travel_walk_home.ride",
+   "why": "a fact changed"
+  },
+  {
+   "row": "L167",
+   "screen": "travel_bus_home.ride",
+   "why": "a fact changed"
+  },
+  {
+   "row": "L167",
+   "screen": "travel_walk_home.ride",
+   "why": "a fact changed"
+  },
+  {
+   "row": "clock#2",
+   "screen": "*",
+   "why": "its rule's text changed"
+  },
+  {
+   "row": "media#2",
+   "screen": "*",
+   "why": "its rule's text changed"
+  },
+  {
+   "row": "places#2",
+   "screen": "campus_cafeteria",
+   "why": "failed last pass"
+  },
+  {
+   "row": "places#2",
+   "screen": "campus_lecture_hall",
+   "why": "failed last pass"
+  },
+  {
+   "row": "places#2",
+   "screen": "campus_library",
+   "why": "failed last pass"
+  },
+  {
+   "row": "places#2",
+   "screen": "campus_theatre",
+   "why": "failed last pass"
+  },
+  {
+   "row": "places#6",
+   "screen": "campus_lecture_hall",
+   "why": "failed last pass"
+  },
+  {
+   "row": "places#6",
+   "screen": "campus_library",
+   "why": "failed last pass"
+  },
+  {
+   "row": "places#6",
+   "screen": "campus_theatre",
+   "why": "failed last pass"
+  }
+ ],
  "unowed": []
 }

@@ -1,384 +1,489 @@
 {
  "items": [
   {
-   "row": "B10",
-   "screen": "class_drama.class",
-   "why": "screen changed: truth row"
+   "row": "B1",
+   "screen": "*",
+   "why": "a screen of the scene changed"
   },
   {
    "row": "B10",
-   "screen": "class_english.class",
-   "why": "screen changed: truth row"
+   "screen": "*",
+   "why": "most of study_hall is new (1 of 1 screens)"
   },
   {
-   "row": "B10",
-   "screen": "class_psych.class",
-   "why": "screen changed: truth row"
+   "row": "B11",
+   "screen": "*",
+   "why": "most of study_hall is new (1 of 1 screens)"
   },
   {
-   "row": "B10",
-   "screen": "class_stats.class",
-   "why": "screen changed: truth row"
+   "row": "B12",
+   "screen": "*",
+   "why": "most of study_hall is new (1 of 1 screens)"
   },
   {
-   "row": "B10",
-   "screen": "stage_practise.practise",
-   "why": "screen changed: truth row"
+   "row": "B13",
+   "screen": "*",
+   "why": "most of study_hall is new (1 of 1 screens)"
   },
   {
-   "row": "B10",
-   "screen": "study_library.study",
-   "why": "screen changed: truth row"
-  },
-  {
-   "row": "B10",
-   "screen": "study_room.study",
-   "why": "screen changed: truth row"
+   "row": "B2",
+   "screen": "*",
+   "why": "a screen of the scene changed"
   },
   {
    "row": "B3",
-   "screen": "class_drama.class",
-   "why": "failed last pass"
+   "screen": "*",
+   "why": "most of study_hall is new (1 of 1 screens)"
   },
   {
-   "row": "B3",
-   "screen": "class_english.class",
-   "why": "failed last pass"
+   "row": "B4",
+   "screen": "*",
+   "why": "most of study_hall is new (1 of 1 screens)"
   },
   {
-   "row": "B3",
-   "screen": "class_stats.class",
-   "why": "failed last pass"
+   "row": "B5",
+   "screen": "*",
+   "why": "most of study_hall is new (1 of 1 screens)"
   },
   {
-   "row": "B3",
-   "screen": "study_library.study",
-   "why": "failed last pass"
+   "row": "B6",
+   "screen": "*",
+   "why": "most of study_hall is new (1 of 1 screens)"
   },
   {
-   "row": "B3",
-   "screen": "study_room.study",
-   "why": "failed last pass"
-  },
-  {
-   "row": "B8",
-   "screen": "class_drama.class",
-   "why": "screen changed: truth row"
+   "row": "B7",
+   "screen": "*",
+   "why": "most of study_hall is new (1 of 1 screens)"
   },
   {
    "row": "B8",
-   "screen": "class_english.class",
-   "why": "screen changed: truth row"
+   "screen": "*",
+   "why": "most of study_hall is new (1 of 1 screens)"
   },
   {
-   "row": "B8",
-   "screen": "class_psych.class",
-   "why": "screen changed: truth row"
+   "row": "B9",
+   "screen": "*",
+   "why": "a screen of the scene changed"
   },
   {
-   "row": "B8",
-   "screen": "class_stats.class",
-   "why": "screen changed: truth row"
+   "row": "C1002",
+   "screen": "*",
+   "why": "most of study_hall is new (1 of 1 screens)"
   },
   {
-   "row": "B8",
-   "screen": "stage_practise.practise",
-   "why": "screen changed: truth row"
+   "row": "C1173",
+   "screen": "*",
+   "why": "most of study_hall is new (1 of 1 screens)"
   },
   {
-   "row": "B8",
-   "screen": "study_library.study",
-   "why": "screen changed: truth row"
+   "row": "C1184",
+   "screen": "*",
+   "why": "most of study_hall is new (1 of 1 screens)"
   },
   {
-   "row": "B8",
-   "screen": "study_room.study",
-   "why": "screen changed: truth row"
+   "row": "C1185",
+   "screen": "*",
+   "why": "most of study_hall is new (1 of 1 screens)"
+  },
+  {
+   "row": "C1198",
+   "screen": "*",
+   "why": "most of study_hall is new (1 of 1 screens)"
+  },
+  {
+   "row": "C1200",
+   "screen": "*",
+   "why": "most of study_hall is new (1 of 1 screens)"
+  },
+  {
+   "row": "C1220",
+   "screen": "*",
+   "why": "most of study_hall is new (1 of 1 screens)"
+  },
+  {
+   "row": "C1221",
+   "screen": "*",
+   "why": "most of study_hall is new (1 of 1 screens)"
+  },
+  {
+   "row": "C1250",
+   "screen": "*",
+   "why": "most of study_hall is new (1 of 1 screens)"
+  },
+  {
+   "row": "C1303",
+   "screen": "*",
+   "why": "most of study_hall is new (1 of 1 screens)"
+  },
+  {
+   "row": "C1313",
+   "screen": "*",
+   "why": "most of study_hall is new (1 of 1 screens)"
+  },
+  {
+   "row": "C1337",
+   "screen": "*",
+   "why": "most of study_hall is new (1 of 1 screens)"
+  },
+  {
+   "row": "C1340",
+   "screen": "*",
+   "why": "most of study_hall is new (1 of 1 screens)"
+  },
+  {
+   "row": "C1342",
+   "screen": "*",
+   "why": "most of study_hall is new (1 of 1 screens)"
+  },
+  {
+   "row": "C1345",
+   "screen": "*",
+   "why": "most of study_hall is new (1 of 1 screens)"
+  },
+  {
+   "row": "C1360",
+   "screen": "*",
+   "why": "most of study_hall is new (1 of 1 screens)"
+  },
+  {
+   "row": "C1421",
+   "screen": "*",
+   "why": "most of study_hall is new (1 of 1 screens)"
+  },
+  {
+   "row": "C1423",
+   "screen": "*",
+   "why": "most of study_hall is new (1 of 1 screens)"
+  },
+  {
+   "row": "C1425",
+   "screen": "*",
+   "why": "most of study_hall is new (1 of 1 screens)"
   },
   {
    "row": "C1427",
-   "screen": "stage_practise.practise",
-   "why": "failed last pass (a note), its screen changed"
+   "screen": "*",
+   "why": "most of study_hall is new (1 of 1 screens)"
   },
   {
-   "row": "C1427",
-   "screen": "study_library.study",
-   "why": "failed last pass (a note), its screen changed"
+   "row": "C1428",
+   "screen": "*",
+   "why": "most of study_hall is new (1 of 1 screens)"
+  },
+  {
+   "row": "C1431",
+   "screen": "*",
+   "why": "most of study_hall is new (1 of 1 screens)"
+  },
+  {
+   "row": "C1432",
+   "screen": "*",
+   "why": "most of study_hall is new (1 of 1 screens)"
+  },
+  {
+   "row": "C1433",
+   "screen": "*",
+   "why": "most of study_hall is new (1 of 1 screens)"
+  },
+  {
+   "row": "C1434",
+   "screen": "*",
+   "why": "most of study_hall is new (1 of 1 screens)"
+  },
+  {
+   "row": "C1438",
+   "screen": "*",
+   "why": "most of study_hall is new (1 of 1 screens)"
+  },
+  {
+   "row": "C1441",
+   "screen": "*",
+   "why": "most of study_hall is new (1 of 1 screens)"
+  },
+  {
+   "row": "C146",
+   "screen": "*",
+   "why": "most of study_hall is new (1 of 1 screens)"
   },
   {
    "row": "C149",
-   "screen": "class_drama.class",
-   "why": "failed last pass"
+   "screen": "*",
+   "why": "most of study_hall is new (1 of 1 screens)"
   },
   {
-   "row": "C149",
-   "screen": "class_english.class",
-   "why": "failed last pass"
+   "row": "C151",
+   "screen": "*",
+   "why": "most of study_hall is new (1 of 1 screens)"
   },
   {
-   "row": "C149",
-   "screen": "class_stats.class",
-   "why": "failed last pass"
+   "row": "C188",
+   "screen": "*",
+   "why": "most of study_hall is new (1 of 1 screens)"
   },
   {
-   "row": "C149",
-   "screen": "study_library.study",
-   "why": "failed last pass"
+   "row": "C210",
+   "screen": "*",
+   "why": "most of study_hall is new (1 of 1 screens)"
   },
   {
-   "row": "C149",
-   "screen": "study_room.study",
-   "why": "failed last pass"
+   "row": "C295",
+   "screen": "*",
+   "why": "most of study_hall is new (1 of 1 screens)"
+  },
+  {
+   "row": "C330",
+   "screen": "*",
+   "why": "most of study_hall is new (1 of 1 screens)"
+  },
+  {
+   "row": "C338",
+   "screen": "*",
+   "why": "most of study_hall is new (1 of 1 screens)"
+  },
+  {
+   "row": "C381",
+   "screen": "*",
+   "why": "most of study_hall is new (1 of 1 screens)"
+  },
+  {
+   "row": "C388",
+   "screen": "*",
+   "why": "most of study_hall is new (1 of 1 screens)"
+  },
+  {
+   "row": "C422",
+   "screen": "*",
+   "why": "most of study_hall is new (1 of 1 screens)"
+  },
+  {
+   "row": "C442",
+   "screen": "*",
+   "why": "most of study_hall is new (1 of 1 screens)"
   },
   {
    "row": "C450",
-   "screen": "class_drama.class",
-   "why": "failed last pass"
+   "screen": "*",
+   "why": "most of study_hall is new (1 of 1 screens)"
   },
   {
-   "row": "C450",
-   "screen": "class_english.class",
-   "why": "failed last pass"
-  },
-  {
-   "row": "C450",
-   "screen": "class_stats.class",
-   "why": "failed last pass"
-  },
-  {
-   "row": "C450",
-   "screen": "study_library.study",
-   "why": "failed last pass"
-  },
-  {
-   "row": "C450",
-   "screen": "study_room.study",
-   "why": "failed last pass"
+   "row": "C451",
+   "screen": "*",
+   "why": "most of study_hall is new (1 of 1 screens)"
   },
   {
    "row": "C460",
-   "screen": "class_drama.class",
-   "why": "screen changed: truth row"
-  },
-  {
-   "row": "C460",
-   "screen": "class_english.class",
-   "why": "screen changed: truth row"
-  },
-  {
-   "row": "C460",
-   "screen": "class_psych.class",
-   "why": "screen changed: truth row"
-  },
-  {
-   "row": "C460",
-   "screen": "class_stats.class",
-   "why": "screen changed: truth row"
-  },
-  {
-   "row": "C460",
-   "screen": "stage_practise.practise",
-   "why": "screen changed: truth row"
-  },
-  {
-   "row": "C460",
-   "screen": "study_library.study",
-   "why": "screen changed: truth row"
-  },
-  {
-   "row": "C460",
-   "screen": "study_room.study",
-   "why": "screen changed: truth row"
+   "screen": "*",
+   "why": "most of study_hall is new (1 of 1 screens)"
   },
   {
    "row": "C461",
-   "screen": "class_drama.class",
-   "why": "screen changed: truth row"
+   "screen": "*",
+   "why": "most of study_hall is new (1 of 1 screens)"
   },
   {
-   "row": "C461",
-   "screen": "class_english.class",
-   "why": "screen changed: truth row"
+   "row": "C519",
+   "screen": "*",
+   "why": "most of study_hall is new (1 of 1 screens)"
   },
   {
-   "row": "C461",
-   "screen": "class_psych.class",
-   "why": "screen changed: truth row"
+   "row": "C541",
+   "screen": "*",
+   "why": "most of study_hall is new (1 of 1 screens)"
   },
   {
-   "row": "C461",
-   "screen": "class_stats.class",
-   "why": "screen changed: truth row"
+   "row": "C620",
+   "screen": "*",
+   "why": "most of study_hall is new (1 of 1 screens)"
   },
   {
-   "row": "C461",
-   "screen": "stage_practise.practise",
-   "why": "screen changed: truth row"
+   "row": "C660",
+   "screen": "*",
+   "why": "most of study_hall is new (1 of 1 screens)"
   },
   {
-   "row": "C461",
-   "screen": "study_library.study",
-   "why": "screen changed: truth row"
+   "row": "C758",
+   "screen": "*",
+   "why": "most of study_hall is new (1 of 1 screens)"
   },
   {
-   "row": "C461",
-   "screen": "study_room.study",
-   "why": "screen changed: truth row"
+   "row": "C762",
+   "screen": "*",
+   "why": "most of study_hall is new (1 of 1 screens)"
+  },
+  {
+   "row": "C769",
+   "screen": "*",
+   "why": "most of study_hall is new (1 of 1 screens)"
+  },
+  {
+   "row": "C770",
+   "screen": "*",
+   "why": "most of study_hall is new (1 of 1 screens)"
+  },
+  {
+   "row": "C771",
+   "screen": "*",
+   "why": "most of study_hall is new (1 of 1 screens)"
+  },
+  {
+   "row": "C773",
+   "screen": "*",
+   "why": "most of study_hall is new (1 of 1 screens)"
+  },
+  {
+   "row": "C776",
+   "screen": "*",
+   "why": "most of study_hall is new (1 of 1 screens)"
+  },
+  {
+   "row": "C777",
+   "screen": "*",
+   "why": "most of study_hall is new (1 of 1 screens)"
+  },
+  {
+   "row": "C794",
+   "screen": "*",
+   "why": "most of study_hall is new (1 of 1 screens)"
+  },
+  {
+   "row": "C795",
+   "screen": "*",
+   "why": "most of study_hall is new (1 of 1 screens)"
   },
   {
    "row": "C804",
-   "screen": "study_room.study",
-   "why": "failed last pass"
+   "screen": "*",
+   "why": "most of study_hall is new (1 of 1 screens)"
+  },
+  {
+   "row": "C889",
+   "screen": "*",
+   "why": "most of study_hall is new (1 of 1 screens)"
+  },
+  {
+   "row": "C892",
+   "screen": "*",
+   "why": "most of study_hall is new (1 of 1 screens)"
+  },
+  {
+   "row": "C897",
+   "screen": "*",
+   "why": "most of study_hall is new (1 of 1 screens)"
+  },
+  {
+   "row": "C900",
+   "screen": "*",
+   "why": "most of study_hall is new (1 of 1 screens)"
+  },
+  {
+   "row": "C902",
+   "screen": "*",
+   "why": "most of study_hall is new (1 of 1 screens)"
+  },
+  {
+   "row": "C903",
+   "screen": "*",
+   "why": "most of study_hall is new (1 of 1 screens)"
+  },
+  {
+   "row": "C906",
+   "screen": "*",
+   "why": "most of study_hall is new (1 of 1 screens)"
+  },
+  {
+   "row": "C910",
+   "screen": "*",
+   "why": "most of study_hall is new (1 of 1 screens)"
   },
   {
    "row": "C913",
-   "screen": "class_drama.class",
-   "why": "failed last pass"
+   "screen": "*",
+   "why": "most of study_hall is new (1 of 1 screens)"
+  },
+  {
+   "row": "C914",
+   "screen": "*",
+   "why": "most of study_hall is new (1 of 1 screens)"
   },
   {
    "row": "C916",
-   "screen": "class_drama.class",
-   "why": "failed last pass"
+   "screen": "*",
+   "why": "most of study_hall is new (1 of 1 screens)"
+  },
+  {
+   "row": "C920",
+   "screen": "*",
+   "why": "most of study_hall is new (1 of 1 screens)"
+  },
+  {
+   "row": "C924",
+   "screen": "*",
+   "why": "most of study_hall is new (1 of 1 screens)"
+  },
+  {
+   "row": "C926",
+   "screen": "*",
+   "why": "most of study_hall is new (1 of 1 screens)"
   },
   {
    "row": "C927",
-   "screen": "class_drama.class",
-   "why": "screen changed: truth row"
+   "screen": "*",
+   "why": "most of study_hall is new (1 of 1 screens)"
   },
   {
-   "row": "C927",
-   "screen": "class_english.class",
-   "why": "screen changed: truth row"
+   "row": "C928",
+   "screen": "*",
+   "why": "most of study_hall is new (1 of 1 screens)"
   },
   {
-   "row": "C927",
-   "screen": "class_psych.class",
-   "why": "screen changed: truth row"
+   "row": "C929",
+   "screen": "*",
+   "why": "most of study_hall is new (1 of 1 screens)"
   },
   {
-   "row": "C927",
-   "screen": "class_stats.class",
-   "why": "screen changed: truth row"
-  },
-  {
-   "row": "C927",
-   "screen": "stage_practise.practise",
-   "why": "screen changed: truth row"
-  },
-  {
-   "row": "C927",
-   "screen": "study_library.study",
-   "why": "screen changed: truth row"
-  },
-  {
-   "row": "C927",
-   "screen": "study_room.study",
-   "why": "screen changed: truth row"
+   "row": "C930",
+   "screen": "*",
+   "why": "most of study_hall is new (1 of 1 screens)"
   },
   {
    "row": "C931",
-   "screen": "class_drama.class",
-   "why": "screen changed: truth row"
+   "screen": "*",
+   "why": "most of study_hall is new (1 of 1 screens)"
   },
   {
-   "row": "C931",
-   "screen": "class_english.class",
-   "why": "screen changed: truth row"
+   "row": "C953",
+   "screen": "*",
+   "why": "most of study_hall is new (1 of 1 screens)"
   },
   {
-   "row": "C931",
-   "screen": "class_psych.class",
-   "why": "screen changed: truth row"
-  },
-  {
-   "row": "C931",
-   "screen": "class_stats.class",
-   "why": "screen changed: truth row"
-  },
-  {
-   "row": "C931",
-   "screen": "stage_practise.practise",
-   "why": "screen changed: truth row"
-  },
-  {
-   "row": "C931",
-   "screen": "study_library.study",
-   "why": "screen changed: truth row"
-  },
-  {
-   "row": "C931",
-   "screen": "study_room.study",
-   "why": "screen changed: truth row"
+   "row": "C961",
+   "screen": "*",
+   "why": "most of study_hall is new (1 of 1 screens)"
   },
   {
    "row": "L106",
-   "screen": "class_drama.class",
-   "why": "screen changed: truth row"
+   "screen": "*",
+   "why": "most of study_hall is new (1 of 1 screens)"
   },
   {
-   "row": "L106",
-   "screen": "class_english.class",
-   "why": "screen changed: truth row"
+   "row": "L116",
+   "screen": "*",
+   "why": "most of study_hall is new (1 of 1 screens)"
   },
   {
-   "row": "L106",
-   "screen": "class_psych.class",
-   "why": "screen changed: truth row"
-  },
-  {
-   "row": "L106",
-   "screen": "class_stats.class",
-   "why": "screen changed: truth row"
-  },
-  {
-   "row": "L106",
-   "screen": "stage_practise.practise",
-   "why": "screen changed: truth row"
-  },
-  {
-   "row": "L106",
-   "screen": "study_library.study",
-   "why": "screen changed: truth row"
-  },
-  {
-   "row": "L106",
-   "screen": "study_room.study",
-   "why": "screen changed: truth row"
+   "row": "L166",
+   "screen": "*",
+   "why": "most of study_hall is new (1 of 1 screens)"
   },
   {
    "row": "L167",
-   "screen": "class_drama.class",
-   "why": "screen changed: truth row"
+   "screen": "*",
+   "why": "most of study_hall is new (1 of 1 screens)"
   },
   {
-   "row": "L167",
-   "screen": "class_english.class",
-   "why": "screen changed: truth row"
-  },
-  {
-   "row": "L167",
-   "screen": "class_psych.class",
-   "why": "screen changed: truth row"
-  },
-  {
-   "row": "L167",
-   "screen": "class_stats.class",
-   "why": "screen changed: truth row"
-  },
-  {
-   "row": "L167",
-   "screen": "stage_practise.practise",
-   "why": "screen changed: truth row"
-  },
-  {
-   "row": "L167",
-   "screen": "study_library.study",
-   "why": "screen changed: truth row"
-  },
-  {
-   "row": "L167",
-   "screen": "study_room.study",
-   "why": "screen changed: truth row"
+   "row": "L70",
+   "screen": "*",
+   "why": "most of study_hall is new (1 of 1 screens)"
   }
  ]
 }
