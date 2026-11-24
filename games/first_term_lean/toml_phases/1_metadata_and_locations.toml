@@ -50,6 +50,8 @@ flag_keys = [
   "danny_snack", "danny_everyone", "danny_silent",
   # P23 — memory flags from her answer
   "marco_looking", "marco_tips", "marco_silent",
+  # P24 — her answer to Vance
+  "vance_went_over", "vance_waved", "vance_silent",
   # P35 — the clothes shop
   "met_nina",
 ]

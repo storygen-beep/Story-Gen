@@ -325,6 +325,8 @@ traitEffects = [
 [ui]
 # LO 2026-11-24: "All npc presents in a location should show their portraits." Met people only; a click reads their row.
 present_faces = true
+# LO 2026-11-24: "Add the clock in the left top when the sidebar is closed. It was is in the old first term."
+phone_clock = true
 clothes_layout = "room"
 
 # LO 2026-11-24, "yes hide popups": bookkeeping flags don't toast; flags the player should notice still do.
@@ -684,6 +686,8 @@ flag_keys = [
   "danny_snack", "danny_everyone", "danny_silent",
   # P23 — memory flags from her answer
   "marco_looking", "marco_tips", "marco_silent",
+  # P24 — her answer to Vance
+  "vance_went_over", "vance_waved", "vance_silent",
   # P35 — the clothes shop
   "met_nina",
 ]
@@ -4733,7 +4737,20 @@ conditions = { version = "1.0", logic = "AND", items = [{ type = "trait", subjec
 id = "study"
 name = "Study"
 blocks = [
-  { type = "paragraph", content = "You find an empty row near the back, spread your notes along the seats and work through them until your neck aches. There's always more of it waiting." },
+  { type = "paragraph", content = "You take an empty row near the back and work through your notes." },
+  { type = "group", props = { conditions = { version = "1.0", logic = "AND", items = [{ type = "npc_at_location", npc_id = "npc_hale", location_id = "campus_lecture_hall", operator = "is_present" }] } }, blocks = [
+    { type = "paragraph", content = "Down at the front, a lecture goes on without you." },
+    { type = "dialog", content = "Eyes on me, all of you. Not on the clock.", props = { speaker = "npc", npcId = "npc_hale" } },
+  ] },
+  { type = "group", props = { conditions = { version = "1.0", logic = "AND", items = [{ type = "npc_at_location", npc_id = "npc_pratt", location_id = "campus_lecture_hall", operator = "is_present" }] } }, blocks = [
+    { type = "paragraph", content = "Down at the front, a lecture goes on without you." },
+    { type = "dialog", content = "Page forty-one. Nobody's lost yet, I hope.", props = { speaker = "npc", npcId = "npc_pratt" } },
+  ] },
+  { type = "group", props = { conditions = { version = "1.0", logic = "AND", items = [{ type = "npc_at_location", npc_id = "npc_walsh", location_id = "campus_lecture_hall", operator = "is_present" }] } }, blocks = [
+    { type = "paragraph", content = "Down at the front, a lecture goes on without you." },
+    { type = "dialog", content = "Again. Slower. Make me believe it.", props = { speaker = "npc", npcId = "npc_walsh" } },
+  ] },
+  { type = "paragraph", content = "There's always more of it waiting." },
 ]
 
 [canvases.nodes.exit_block]
@@ -4942,10 +4959,10 @@ conditions = { version = "1.0", logic = "AND", items = [{ type = "npc_at_locatio
 id = "coffee"
 name = "Zoe"
 blocks = [
-  { type = "paragraph", content = "A girl drops onto the grass next to you without asking: sunglasses pushed up into a mess of blonde hair, a coffee in each hand, a crop top that shows off her stomach and doesn't care who looks." },
+  { type = "paragraph", content = "A girl falls into step beside you on the path without asking: sunglasses pushed up into a mess of blonde hair, a coffee in each hand, a crop top that shows off her stomach." },
   { type = "dialog", content = "You look like you need this more than I do, babe. I'm Zoe. You're new.", props = { speaker = "npc", npcId = "npc_zoe" } },
   { type = "paragraph", content = "She holds one cup out and waits." },
-  { type = "image", props = { description = "Her view from the grass (she is 18, out of frame): a woman of 19 with sunglasses pushed up into messy blonde hair and a crop top, sitting cross-legged on a campus lawn with two coffees, grinning at the camera.", search_queries = ["blonde woman 19 sunglasses on head crop top sitting on campus grass two coffees smiling at camera", "college girl on the quad holding two coffee cups"], pool_dir = "people/zoe_quad_t0", pool = 1 } },
+  { type = "image", props = { description = "Her view on the path (she is 18, out of frame): a woman of 19 with sunglasses pushed up into messy blonde hair and a crop top, walking beside the camera on a campus path with two coffees, grinning.", search_queries = ["blonde woman 19 sunglasses on head crop top walking on campus path two coffees smiling at camera", "college girl on the quad holding two coffee cups"], pool_dir = "people/zoe_quad_t0", pool = 1 } },
 ]
 
 [canvases.nodes.exit_block]
@@ -5092,8 +5109,9 @@ conditions = { version = "1.0", logic = "AND", items = [{ type = "npc_at_locatio
 id = "meet"
 name = "Danny"
 blocks = [
-  { type = "paragraph", content = "A guy in his early twenties leans on the counter with his phone, hood up. His eyes do the walking instead of him, slow, all the way down and back up. You feel it on your skin." },
-  { type = "dialog", content = "Hey, gorgeous. You're new on this street. I'd remember.", props = { speaker = "npc", npcId = "npc_danny" } },
+  { type = "paragraph", content = "A guy in his early twenties with the shop's name badge leans behind the counter with his phone, hood up. His eyes do the walking instead of him, slow, all the way down and back up. You feel it on your skin." },
+  { type = "dialog", content = "Hey, gorgeous. Laura's kid, right? You grew up.", props = { speaker = "npc", npcId = "npc_danny" } },
+  { type = "image", props = { description = "Her view from the door (she is 18, out of frame): a man of 23 in a hoodie with a name badge behind a shop counter, phone in hand, looking at the camera with a slow smile.", search_queries = ["young man 23 hoodie leaning on convenience store counter phone looking at camera", "night shift shop clerk at the till smirking"], pool_dir = "people/danny_counter_t0", pool = 1 } },
 ]
 
 [canvases.nodes.exit_block]
@@ -5134,8 +5152,8 @@ blocks = [
     { type = "paragraph", content = "He grins, like the silence was an answer." },
     { type = "dialog", content = "Quiet type. I like that.", props = { speaker = "npc", npcId = "npc_danny" } },
   ] },
-  { type = "paragraph", content = "When you turn to the shelves you can feel him watching your ass." },
-  { type = "image", props = { description = "Her view from the door (she is 18, out of frame): a man of 23 in a hoodie leaning on a shop counter with his phone, looking the camera up and down.", search_queries = ["young man 23 hoodie leaning on convenience store counter phone looking at camera", "night shift shop clerk at the till smirking"], pool_dir = "people/danny_counter_t0", pool = 1 } },
+  { type = "paragraph", content = "When you turn to the shelves you can feel him watching your ass. You don't turn round. At the till his fingers brush yours." },
+  { type = "dialog", content = "I'm here every evening, gorgeous.", props = { speaker = "npc", npcId = "npc_danny" } },
 ]
 
 [canvases.nodes.exit_block]
@@ -5167,7 +5185,7 @@ name = "Marco"
 blocks = [
   { type = "paragraph", content = "A man in his late twenties with a whistle he never uses is spotting someone on the bench. He looks up when you come in and keeps looking: your legs, your ass, then your face, like he's measuring you for a programme. Heat climbs up your neck." },
   { type = "dialog", content = "Haven't seen you in here. Good. I'm Marco. I train people. You've got the build for it, champ.", props = { speaker = "npc", npcId = "npc_marco" } },
-  { type = "image", props = { description = "Her view from the door (she is 18, out of frame): a man of 29 in a gym vest with a whistle round his neck, beside a weight bench, looking the camera over.", search_queries = ["personal trainer man 29 gym vest whistle beside weight bench looking at camera", "gym trainer checking someone out mirror"], pool_dir = "people/marco_gym_t0", pool = 1 } },
+  { type = "image", props = { description = "Her view from the door (she is 18, out of frame): a man of 29 in a gym vest with a whistle round his neck, beside a weight bench, looking the camera over.", search_queries = ["personal trainer man 29 gym vest whistle beside weight bench looking at camera", "gym trainer looking at camera across the weights room"], pool_dir = "people/marco_gym_t0", pool = 1 } },
 ]
 
 [canvases.nodes.exit_block]
@@ -5209,6 +5227,8 @@ blocks = [
     { type = "dialog", content = "Shy. That wears off in here.", props = { speaker = "npc", npcId = "npc_marco" } },
   ] },
   { type = "paragraph", content = "He goes back to the bench, but in the mirror his eyes find you again before you've reached the weights." },
+  { type = "dialog", content = "You'll be back.", props = { speaker = "npc", npcId = "npc_marco" } },
+  { type = "paragraph", content = "He says it to the mirror, not to you." },
 ]
 
 [canvases.nodes.exit_block]
@@ -5220,6 +5240,83 @@ targetType = "location"
 locationId = "hood_gym"
 time_progression_minutes = 5
 flagEffects = [{ flag = "met_marco", op = "set" }]
+
+# ── P24 · Mr. Vance, step 1: her first Sunday, the man on the porch. Once, by itself on entry to her street on a
+# Sunday while his porch row has him there; "Done" sets met_vance (P03: the house next door opens). ──
+
+[[canvases]]
+id = "street_meet_vance"
+name = "Mr. Vance"
+
+[canvases.trigger]
+location = "hood_street"
+trigger_mode = "manual"
+is_repeatable = false
+conditions = { version = "1.0", logic = "AND", items = [{ type = "npc_at_location", npc_id = "npc_vance", location_id = "hood_street", operator = "is_present" }, { type = "weekday", weekdays = [6] }] }
+
+[[canvases.nodes]]
+id = "porch"
+name = "Mr. Vance"
+blocks = [
+  { type = "paragraph", content = "The man next door is in the one chair on his porch, a mug on the rail, like every Sunday. Today he puts the mug down when you come out, and his eyes follow you from your front door to the pavement, slow, taking his time over your legs. Your skin prickles." },
+  { type = "dialog", content = "Laura's girl. All grown up. Come here a minute, little lady.", props = { speaker = "npc", npcId = "npc_vance" } },
+]
+
+[canvases.nodes.exit_block]
+type = "choices"
+
+[[canvases.nodes.exit_block.choices]]
+text = "Go over"
+targetType = "node"
+nodeId = "after"
+time_progression_minutes = 0
+flagEffects = [{ flag = "vance_went_over", op = "set" }]
+
+[[canvases.nodes.exit_block.choices]]
+text = "Wave and keep walking"
+targetType = "node"
+nodeId = "after"
+time_progression_minutes = 0
+flagEffects = [{ flag = "vance_waved", op = "set" }]
+
+[[canvases.nodes.exit_block.choices]]
+text = "Say nothing"
+targetType = "node"
+nodeId = "after"
+time_progression_minutes = 0
+flagEffects = [{ flag = "vance_silent", op = "set" }]
+
+[[canvases.nodes]]
+id = "after"
+name = "Mr. Vance"
+blocks = [
+  { type = "group", props = { conditions = { version = "1.0", logic = "AND", items = [{ type = "flag", subject = "player", flag_key = "vance_went_over", operator = "is_true" }] } }, blocks = [
+    { type = "paragraph", content = "You stop at the bottom of his steps. He doesn't get up." },
+    { type = "dialog", content = "Vance. I own the house you live in. Your stepdad pays me, and when he doesn't, I'm the one who knocks.", props = { speaker = "npc", npcId = "npc_vance" } },
+    { type = "dialog", content = "He pays you.", props = { speaker = "player" } },
+    { type = "dialog", content = "He does. So far.", props = { speaker = "npc", npcId = "npc_vance" } },
+  ] },
+  { type = "group", props = { conditions = { version = "1.0", logic = "AND", items = [{ type = "flag", subject = "player", flag_key = "vance_waved", operator = "is_true" }] } }, blocks = [
+    { type = "dialog", content = "That's it, keep walking. I'll be right here.", props = { speaker = "npc", npcId = "npc_vance" } },
+    { type = "paragraph", content = "You feel his eyes all the way down the street." },
+  ] },
+  { type = "group", props = { conditions = { version = "1.0", logic = "AND", items = [{ type = "flag", subject = "player", flag_key = "vance_silent", operator = "is_true" }] } }, blocks = [
+    { type = "paragraph", content = "You keep your eyes on the pavement. He laughs, low, like you've told him something." },
+    { type = "dialog", content = "Shy. I'll see you next Sunday, little lady.", props = { speaker = "npc", npcId = "npc_vance" } },
+  ] },
+  { type = "paragraph", content = "You don't look back at the porch. You don't have to: you know he's still watching, and you know he'll be there next week." },
+  { type = "image", props = { description = "Her view from the pavement (she is 18, out of frame): a man of 54 in a chair on a small front porch, a mug on the rail, watching the camera.", search_queries = ["man 54 sitting on front porch chair mug watching camera suburban street", "older man on porch looking at the street"], pool_dir = "people/vance_porch_t0", pool = 1 } },
+]
+
+[canvases.nodes.exit_block]
+type = "choices"
+
+[[canvases.nodes.exit_block.choices]]
+text = "Done"
+targetType = "location"
+locationId = "hood_street"
+time_progression_minutes = 5
+flagEffects = [{ flag = "met_vance", op = "set" }]
 
 # ── P04 · travel: four one-screen canvases. A canvas's costs are checked and taken on entry, and an
 # unaffordable one shows dimmed with its cost (v2.py:6700-6732); the choice spends the minutes. ──
