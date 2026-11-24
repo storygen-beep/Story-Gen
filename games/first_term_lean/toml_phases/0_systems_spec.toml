@@ -317,6 +317,8 @@ traitEffects = [
 [ui]
 # LO 2026-11-24: "All npc presents in a location should show their portraits." Met people only; a click reads their row.
 present_faces = true
+# LO 2026-11-24: "Add the clock in the left top when the sidebar is closed. It was is in the old first term."
+phone_clock = true
 clothes_layout = "room"
 
 # LO 2026-11-24, "yes hide popups": bookkeeping flags don't toast; flags the player should notice still do.

@@ -1314,6 +1314,66 @@
       "sha256": "34d0965be48e2b3fb3d9519634bd9f5a1d58a5f53e3bc1bb9d1602134259bc71",
       "words": "ENI for LO (delegated 2026-11-24), LO's rule: \"Beside choice i dont want to show time and energy show money if needed.\" / \"Room buttons too\" (labels only; L167 skipped, no row with day-varying hours)",
       "date": "2026-11-24"
+    },
+    {
+      "card": "P20",
+      "sha256": "0e2ad568f359da246d533af6d2f7fe24b3f1c70dacb3ef8fe7ab84c8c10edd8f",
+      "words": "ENI for LO (delegated 2026-11-24): \"P20 c1/c2: yes to both. She falls into step on the path, the picture is the walking view, the heat tag is dropped and doesn't care who looks comes out.\"",
+      "date": "2026-11-24"
+    },
+    {
+      "card": "P09",
+      "sha256": "795277aaf128f3a587291f1fadfe31edadeb107e9891329a697a685b7409fc07",
+      "words": "ENI for LO (delegated 2026-11-24): \"P09c1-c1: yes, the group line while a teacher is in the hall.\"",
+      "date": "2026-11-24"
+    },
+    {
+      "card": "P22",
+      "sha256": "4d5a7e57204c8dd9345fbf256df1927a8d66b264962fd27ac75d6ae32887dc70",
+      "words": "ENI for LO (delegated 2026-11-24): \"P22: yes to c6, c5 and c1/c2. For c3/c4 ... Make it: I'm here every evening, gorgeous.\"",
+      "date": "2026-11-24"
+    },
+    {
+      "card": "P23",
+      "sha256": "c335a84da67b929bc05bc40c030e391b6d2c624759d686dfb4f138f3a0062e9c",
+      "words": "ENI for LO (delegated 2026-11-24): \"P23: yes to c3. For c1/c2 use the ending that promises nothing: You'll be back, he says to the mirror, not to you.\"",
+      "date": "2026-11-24"
+    },
+    {
+      "card": "P09",
+      "sha256": "b498547b2a3ab4f150e863d5526eeffc495c5d6bfb51fb6fe8b62d6d8d7487bb",
+      "words": "ENI for LO (delegated 2026-11-24): \"P09c1-c1: yes, the group line while a teacher is in the hall.\" (re-recorded at build: each teacher gets a line of their own while they teach, for the talk ratio)",
+      "date": "2026-11-24"
+    },
+    {
+      "card": "P22",
+      "sha256": "59f8feb03fb743f0569361e7e9ac0ba972eab799daf354f32b920086993c76d8",
+      "words": "ENI for LO (delegated 2026-11-24): \"P22: yes to c6, c5 and c1/c2 ... Make it: I'm here every evening, gorgeous.\" (Does synced)",
+      "date": "2026-11-24"
+    },
+    {
+      "card": "P09",
+      "sha256": "394cc4bc50122a4207d89544722304c8ac69142f517ba79e7bcba9cfd517ea2f",
+      "words": "ENI for LO (delegated 2026-11-24): \"P09c1-c1: yes, the group line while a teacher is in the hall.\" (re-recorded at build: each teacher gets a line of their own while they teach, and one narration line cut, for the talk ratio)",
+      "date": "2026-11-24"
+    },
+    {
+      "card": "P44",
+      "sha256": "b2ad7093bbdc684d9dee7846fa7c84991e1ded3c59557ceb5c39c07b9ce3258c",
+      "words": "ENI for LO (delegated 2026-11-24), LO: \"Add the clock in the left top when the sidebar is closed. It was is in the old first term.\"",
+      "date": "2026-11-24"
+    },
+    {
+      "card": "P24",
+      "sha256": "da7fb17f862604f97c60a89aa2a37026b5a79b2186ce043e4f945f29289a6d9d",
+      "words": "ENI for LO (delegated 2026-11-24): \"P24 yes. ... Use the line that promises nothing: Your stepdad pays me, and when he doesn't, I'm the one who knocks.\"",
+      "date": "2026-11-24"
+    },
+    {
+      "card": "P24",
+      "sha256": "59d55ff1a159ab4075284c3521faee43fb1651347bb2794dc6915e89099ade9b",
+      "words": "ENI for LO (delegated 2026-11-24): \"P24 yes. ... Use the line that promises nothing\" (re-recorded at build: \"like every Sunday\" for the talk ratio; Sheet synced)",
+      "date": "2026-11-24"
     }
   ]
 }
