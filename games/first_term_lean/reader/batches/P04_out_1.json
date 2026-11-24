@@ -348,14 +348,14 @@
    "screen": "*",
    "verdict": "PASS",
    "line": "greyed with action label and '(2 Money)'",
-   "why": "holds on the travel screens and places; the packed paths change nothing it reads; the packed paths change nothing it reads"
+   "why": "holds on every screen it fires on; the packed paths change nothing it reads"
   },
   {
    "row": "C1369",
    "screen": "*",
    "verdict": "PASS",
    "line": "bus and walk on her street from day 1",
-   "why": "holds on the travel screens and places; the packed paths change nothing it reads; the packed paths change nothing it reads"
+   "why": "holds on every screen it fires on; the packed paths change nothing it reads"
   },
   {
    "row": "C1386",
@@ -383,7 +383,7 @@
    "screen": "*",
    "verdict": "PASS",
    "line": "$2 or 10 energy",
-   "why": "holds on the travel screens and places; the packed paths change nothing it reads; the packed paths change nothing it reads"
+   "why": "holds on every screen it fires on; the packed paths change nothing it reads"
   },
   {
    "row": "C1425",
@@ -397,7 +397,7 @@
    "screen": "*",
    "verdict": "PASS",
    "line": "45 min against an any-hour window",
-   "why": "holds on the travel screens and places; the packed paths change nothing it reads; the packed paths change nothing it reads"
+   "why": "holds on every screen it fires on; the packed paths change nothing it reads"
   },
   {
    "row": "C1428",
@@ -439,7 +439,7 @@
    "screen": "*",
    "verdict": "PASS",
    "line": "spent by use",
-   "why": "holds on the travel screens and places; the packed paths change nothing it reads; the packed paths change nothing it reads"
+   "why": "holds on every screen it fires on; the packed paths change nothing it reads"
   },
   {
    "row": "C1441",
@@ -453,7 +453,7 @@
    "screen": "*",
    "verdict": "PASS",
    "line": "bus/walk: repeats, costs money or energy, she chooses, has a place",
-   "why": "holds on the travel screens and places; the packed paths change nothing it reads; the packed paths change nothing it reads"
+   "why": "holds on every screen it fires on; the packed paths change nothing it reads"
   },
   {
    "row": "C239",
@@ -691,7 +691,7 @@
    "screen": "*",
    "verdict": "PASS",
    "line": "The quad routes; destinations carry hours and closed lines",
-   "why": "holds on the travel screens and places; the packed paths change nothing it reads; the packed paths change nothing it reads"
+   "why": "holds on every screen it fires on; the packed paths change nothing it reads"
   },
   {
    "row": "C758",
@@ -807,14 +807,14 @@
    "screen": "*",
    "verdict": "PASS",
    "line": "the quad and her street, outdoors",
-   "why": "holds on the travel screens and places; the packed paths change nothing it reads; the packed paths change nothing it reads"
+   "why": "holds on every screen it fires on; the packed paths change nothing it reads"
   },
   {
    "row": "C811",
    "screen": "*",
    "verdict": "PASS",
    "line": "campus area, quad hub, places off it",
-   "why": "holds on the travel screens and places; the packed paths change nothing it reads; the packed paths change nothing it reads"
+   "why": "holds on every screen it fires on; the packed paths change nothing it reads"
   },
   {
    "row": "C889",
@@ -898,14 +898,14 @@
    "screen": "*",
    "verdict": "PASS",
    "line": "hidden_until met_walsh hides the offices; hours show only for the clock",
-   "why": "holds on the travel screens and places; the packed paths change nothing it reads; the packed paths change nothing it reads"
+   "why": "holds on every screen it fires on; the packed paths change nothing it reads"
   },
   {
    "row": "C915",
    "screen": "*",
    "verdict": "PASS",
    "line": "hours on place signs; people's hours on the Schedules page",
-   "why": "holds on the travel screens and places; the packed paths change nothing it reads; the packed paths change nothing it reads"
+   "why": "holds on every screen it fires on; the packed paths change nothing it reads"
   },
   {
    "row": "C916",
@@ -975,7 +975,7 @@
    "screen": "*",
    "verdict": "PASS",
    "line": "travel labels carry their time",
-   "why": "holds on the travel screens and places; the packed paths change nothing it reads; the packed paths change nothing it reads"
+   "why": "holds on every screen it fires on; the packed paths change nothing it reads"
   },
   {
    "row": "C930",
@@ -1150,7 +1150,7 @@
    "screen": "*",
    "verdict": "PASS",
    "line": "20/45 min between areas",
-   "why": "holds on the travel screens and places; the packed paths change nothing it reads; the packed paths change nothing it reads"
+   "why": "holds on every screen it fires on; the packed paths change nothing it reads"
   },
   {
    "row": "clock#3",
@@ -1185,7 +1185,7 @@
    "screen": "*",
    "verdict": "PASS",
    "line": "weekdays, on signs",
-   "why": "holds on the travel screens and places; the packed paths change nothing it reads; the packed paths change nothing it reads"
+   "why": "holds on every screen it fires on; the packed paths change nothing it reads"
   },
   {
    "row": "clock#8",
@@ -1339,7 +1339,7 @@
    "screen": "*",
    "verdict": "PASS",
    "line": "no spot on travel, the quad or menus",
-   "why": "holds on the travel screens and places; the packed paths change nothing it reads; the packed paths change nothing it reads"
+   "why": "holds on every screen it fires on; the packed paths change nothing it reads"
   },
   {
    "row": "media#4",
@@ -1493,7 +1493,7 @@
    "screen": "*",
    "verdict": "PASS",
    "line": "walk drains 10 energy (PLAN \u00a78b)",
-   "why": "holds on the travel screens and places; the packed paths change nothing it reads; the packed paths change nothing it reads"
+   "why": "holds on every screen it fires on; the packed paths change nothing it reads"
   },
   {
    "row": "systems#10",
@@ -1528,7 +1528,7 @@
    "screen": "*",
    "verdict": "PASS",
    "line": "($2, 20 min) \u00b7 (45 min, 10 energy)",
-   "why": "holds on the travel screens and places; the packed paths change nothing it reads; the packed paths change nothing it reads"
+   "why": "holds on every screen it fires on; the packed paths change nothing it reads"
   },
   {
    "row": "systems#5",
@@ -1542,21 +1542,21 @@
    "screen": "*",
    "verdict": "PASS",
    "line": "where (street/quad), how long, cost, gate greyed, one line after",
-   "why": "holds on the travel screens and places; the packed paths change nothing it reads; the packed paths change nothing it reads"
+   "why": "holds on every screen it fires on; the packed paths change nothing it reads"
   },
   {
    "row": "systems#7",
    "screen": "*",
    "verdict": "PASS",
    "line": "no fixed hours on travel",
-   "why": "holds on the travel screens and places; the packed paths change nothing it reads; the packed paths change nothing it reads"
+   "why": "holds on every screen it fires on; the packed paths change nothing it reads"
   },
   {
    "row": "systems#8",
    "screen": "*",
    "verdict": "PASS",
    "line": "walk drains energy, bus spends money, both lead to campus people",
-   "why": "holds on the travel screens and places; the packed paths change nothing it reads; the packed paths change nothing it reads"
+   "why": "holds on every screen it fires on; the packed paths change nothing it reads"
   },
   {
    "row": "systems#9",

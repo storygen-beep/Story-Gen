@@ -1,0 +1,852 @@
+{
+ "verdicts": [
+  {
+   "row": "B1",
+   "screen": "opening.bath",
+   "verdict": "PASS",
+   "line": "Some of us need that too.",
+   "why": "Ryan wants the bathroom, said out loud; not a sexual step, so no earlier canvas needed (his first canvas is this one and the hall)"
+  },
+  {
+   "row": "B10",
+   "screen": "opening.bath",
+   "verdict": "PASS",
+   "line": "you get the bathroom a second before Ryan, your step-brother, opens his door",
+   "why": "shown once at 07:12 on all three paths; who_is_where: Ryan's room 7-7:12, the hall 7:12-7:25, so his door and his knock from the hall hold; no past claimed"
+  },
+  {
+   "row": "B11",
+   "screen": "opening.bath",
+   "verdict": "N/A",
+   "line": "Open the door (8 min)",
+   "why": "no solo button on this screen; the shower is prose inside the screen, the only button leads to the hall"
+  },
+  {
+   "row": "B12",
+   "screen": "opening.bath",
+   "verdict": "PASS",
+   "line": "It hits your nipples cold, and they go hard.",
+   "why": "her body named (nipples, tits, stomach, thighs); price/not-yet is the bolt that doesn't hold and the small towel; his reaction lands on the next screen (opening.hall), P13's"
+  },
+  {
+   "row": "B13",
+   "screen": "opening.bath",
+   "verdict": "PASS",
+   "line": "let it run down your neck, over your tits, down your stomach and between your thighs",
+   "why": "the shower stays on her body and has a picture of her right after (body/opening_shower_t4)"
+  },
+  {
+   "row": "B2",
+   "screen": "opening.bath",
+   "verdict": "PASS",
+   "line": "You strip and step in before it's warm.",
+   "why": "first canvas with Ryan; the shower goes further than the old 'You give yourself five minutes.': she is bare on screen with a picture"
+  },
+  {
+   "row": "B3",
+   "screen": "opening.bath",
+   "verdict": "PASS",
+   "line": "You grab the towel off the rail. It's the small one.",
+   "why": "points at the hall: the small towel and Ryan waiting outside"
+  },
+  {
+   "row": "B4",
+   "screen": "opening.bath",
+   "verdict": "PASS",
+   "line": "Your heart jumps.",
+   "why": "stage 0-1: things happen to her (cold water, the fist) and she reacts on her body; no act chosen, no italic thought"
+  },
+  {
+   "row": "B5",
+   "screen": "opening.bath",
+   "verdict": "PASS",
+   "line": "Then a fist bangs on the door.",
+   "why": "Ryan reacts to her taking the bathroom"
+  },
+  {
+   "row": "B6",
+   "screen": "opening.bath",
+   "verdict": "N/A",
+   "line": "Open the door (8 min)",
+   "why": "no offer on this screen; one button, no no to write"
+  },
+  {
+   "row": "B7",
+   "screen": "opening.bath",
+   "verdict": "PASS",
+   "line": "Your shoulders drop for the first time all morning.",
+   "why": "not marked explicit; the body beat's last sentence still stays on her body (her shoulders), no pivot to meaning"
+  },
+  {
+   "row": "B8",
+   "screen": "opening.bath",
+   "verdict": "PASS",
+   "line": "You strip ... You grab the towel off the rail.",
+   "why": "no numbers; undressing backed by the act; the towel is prose only by LO's waiver (NOTES 2026-11-23: 'the towel in the opening (screens 4b-6) is prose only')"
+  },
+  {
+   "row": "B9",
+   "screen": "opening.bath",
+   "verdict": "N/A",
+   "line": "Then a fist bangs on the door.",
+   "why": "PLAN declares no companion-as-rival here"
+  },
+  {
+   "row": "C109",
+   "screen": "opening.bath",
+   "verdict": "N/A",
+   "line": "Some of us need that too.",
+   "why": "Ryan's arc step and leak are the hall (screen 5), P13's; on a first scene the leak half is N/A and this screen is not where the step ends"
+  },
+  {
+   "row": "C1158",
+   "screen": "opening.bath",
+   "verdict": "PASS",
+   "line": "You strip and step in before it's warm.",
+   "why": "undressing in the act is backed by the act; no garment named; the towel is LO-waived prose only on screens 4b-6"
+  },
+  {
+   "row": "C1234",
+   "screen": "opening.bath",
+   "verdict": "PASS",
+   "line": "pool_dir = \"body/opening_shower_t4\", pool = 1",
+   "why": "the clip sits right after the shower paragraph, the beat being read"
+  },
+  {
+   "row": "C1238",
+   "screen": "opening.bath",
+   "verdict": "PASS",
+   "line": "eyes shut, head tipped back",
+   "why": "matches 'with your eyes shut and let it run down'; one visit only"
+  },
+  {
+   "row": "C1249",
+   "screen": "opening.bath",
+   "verdict": "N/A",
+   "line": "pool_dir = \"body/opening_shower_t4\", pool = 1",
+   "why": "not a place's picture"
+  },
+  {
+   "row": "C1250",
+   "screen": "opening.bath",
+   "verdict": "N/A",
+   "line": "pool_dir = \"body/opening_shower_t4\", pool = 1",
+   "why": "not a room card; a body moment"
+  },
+  {
+   "row": "C1255",
+   "screen": "opening.bath",
+   "verdict": "PASS",
+   "line": "pool_dir = \"body/opening_shower_t4\", pool = 1",
+   "why": "one block, its pool_dir used nowhere else in 7_final_game.toml (one bath node now serves all three answers)"
+  },
+  {
+   "row": "C1261",
+   "screen": "opening.bath",
+   "verdict": "PASS",
+   "line": "pool_dir = \"body/opening_shower_t4\", pool = 1",
+   "why": "spent where the player wants to look: her bare in the shower"
+  },
+  {
+   "row": "C1262",
+   "screen": "opening.bath",
+   "verdict": "PASS",
+   "line": "Your shoulders drop for the first time all morning.",
+   "why": "picture right after the line that says her body"
+  },
+  {
+   "row": "C1265",
+   "screen": "opening.bath",
+   "verdict": "PASS",
+   "line": "pool_dir = \"body/opening_shower_t4\", pool = 1",
+   "why": "a body moment, not a chore; the exception applies"
+  },
+  {
+   "row": "C1267",
+   "screen": "opening.bath",
+   "verdict": "PASS",
+   "line": "pool_dir = \"body/opening_shower_t4\", pool = 1",
+   "why": "the picture gives her bare body under water, which the words can't"
+  },
+  {
+   "row": "C1274",
+   "screen": "opening.bath",
+   "verdict": "PASS",
+   "line": "body/opening_shower_t4",
+   "why": "_t4, she's bare"
+  },
+  {
+   "row": "C1275",
+   "screen": "opening.bath",
+   "verdict": "PASS",
+   "line": "woman 18 shower water running down body gif",
+   "why": "water runs, so gif; 'gif' in both searches"
+  },
+  {
+   "row": "C1277",
+   "screen": "opening.bath",
+   "verdict": "PASS",
+   "line": "in a small family bathroom shower",
+   "why": "the place is named"
+  },
+  {
+   "row": "C1278",
+   "screen": "opening.bath",
+   "verdict": "PASS",
+   "line": "A woman of 18",
+   "why": "age given, matches 'You're eighteen'"
+  },
+  {
+   "row": "C1279",
+   "screen": "opening.bath",
+   "verdict": "N/A",
+   "line": "pool_dir = \"body/opening_shower_t4\", pool = 1",
+   "why": "no mirror"
+  },
+  {
+   "row": "C1280",
+   "screen": "opening.bath",
+   "verdict": "PASS",
+   "line": "pool = 1",
+   "why": "one-time scene, pool 1"
+  },
+  {
+   "row": "C1281",
+   "screen": "opening.bath",
+   "verdict": "N/A",
+   "line": "pool_dir = \"body/opening_shower_t4\", pool = 1",
+   "why": "not a look; she's alone"
+  },
+  {
+   "row": "C1284",
+   "screen": "opening.bath",
+   "verdict": "N/A",
+   "line": "pool_dir = \"body/opening_shower_t4\", pool = 1",
+   "why": "no walk-in"
+  },
+  {
+   "row": "C1604",
+   "screen": "opening.bath",
+   "verdict": "N/A",
+   "line": "Open the door (8 min)",
+   "why": "not the hand-over screen"
+  },
+  {
+   "row": "C1609",
+   "screen": "opening.bath",
+   "verdict": "N/A",
+   "line": "Open the door (8 min)",
+   "why": "not the hand-over screen"
+  },
+  {
+   "row": "C1621",
+   "screen": "opening.bath",
+   "verdict": "N/A",
+   "line": "Open the door (8 min)",
+   "why": "not the hand-over screen"
+  },
+  {
+   "row": "C1631",
+   "screen": "opening.bath",
+   "verdict": "N/A",
+   "line": "Open the door (8 min)",
+   "why": "not the hand-over screen"
+  },
+  {
+   "row": "C1611",
+   "screen": "opening.bath",
+   "verdict": "PASS",
+   "line": "@player.nickname. Some of us need that too.",
+   "why": "one person at a time: only Ryan, and he speaks"
+  },
+  {
+   "row": "C1613",
+   "screen": "opening.bath",
+   "verdict": "N/A",
+   "line": "Upstairs, you get the bathroom",
+   "why": "not the first screen"
+  },
+  {
+   "row": "C1626",
+   "screen": "opening.bath",
+   "verdict": "PASS",
+   "line": "(117 words)",
+   "why": "117 words, under the field's 144 and the ~150 ceiling; check.py length GREEN"
+  },
+  {
+   "row": "C1637",
+   "screen": "opening.bath",
+   "verdict": "PASS",
+   "line": "(117 words)",
+   "why": "Ryan first speaks here; 117 words, under 150"
+  },
+  {
+   "row": "C166",
+   "screen": "opening.bath",
+   "verdict": "N/A",
+   "line": "Open the door (8 min)",
+   "why": "no no possible on this screen"
+  },
+  {
+   "row": "C239",
+   "screen": "opening.bath",
+   "verdict": "N/A",
+   "line": "over your tits",
+   "why": "not an explicit beat; body named in real terms anyway (tits, nipples)"
+  },
+  {
+   "row": "C248",
+   "screen": "opening.bath",
+   "verdict": "N/A",
+   "line": "Your shoulders drop for the first time all morning.",
+   "why": "not an explicit beat (stage-1 body moment, unmarked); its last sentence still stays on her body"
+  },
+  {
+   "row": "C249",
+   "screen": "opening.bath",
+   "verdict": "N/A",
+   "line": "Your shoulders drop for the first time all morning.",
+   "why": "not an explicit beat (stage-1 body moment, unmarked); its last sentence still stays on her body"
+  },
+  {
+   "row": "C254",
+   "screen": "opening.bath",
+   "verdict": "N/A",
+   "line": "Your shoulders drop for the first time all morning.",
+   "why": "not an explicit beat (stage-1 body moment, unmarked); its last sentence still stays on her body"
+  },
+  {
+   "row": "C276",
+   "screen": "opening.bath",
+   "verdict": "N/A",
+   "line": "Your shoulders drop for the first time all morning.",
+   "why": "not an explicit beat (stage-1 body moment, unmarked); its last sentence still stays on her body"
+  },
+  {
+   "row": "C252",
+   "screen": "opening.bath",
+   "verdict": "N/A",
+   "line": "(game-wide)",
+   "why": "a game-wide share, read at release, not on one screen"
+  },
+  {
+   "row": "C255",
+   "screen": "opening.bath",
+   "verdict": "N/A",
+   "line": "(game-wide)",
+   "why": "a game-wide share, read at release, not on one screen"
+  },
+  {
+   "row": "C256",
+   "screen": "opening.bath",
+   "verdict": "N/A",
+   "line": "(game-wide)",
+   "why": "a game-wide share, read at release, not on one screen"
+  },
+  {
+   "row": "C284",
+   "screen": "opening.bath",
+   "verdict": "PASS",
+   "line": "Then a fist bangs on the door.",
+   "why": "things happen to her; nothing she chooses sexually"
+  },
+  {
+   "row": "C285",
+   "screen": "opening.bath",
+   "verdict": "N/A",
+   "line": "(the plan)",
+   "why": "note on the meter table; nothing here sets a stage"
+  },
+  {
+   "row": "C286",
+   "screen": "opening.bath",
+   "verdict": "PASS",
+   "line": "You strip and step in",
+   "why": "stage 1: her body moment and an accident-shaped interruption"
+  },
+  {
+   "row": "C287",
+   "screen": "opening.bath",
+   "verdict": "N/A",
+   "line": "(stage)",
+   "why": "release 1 sits at stage 1; nothing of this stage shows"
+  },
+  {
+   "row": "C288",
+   "screen": "opening.bath",
+   "verdict": "N/A",
+   "line": "(stage)",
+   "why": "release 1 sits at stage 1; nothing of this stage shows"
+  },
+  {
+   "row": "C289",
+   "screen": "opening.bath",
+   "verdict": "N/A",
+   "line": "(stage)",
+   "why": "release 1 sits at stage 1; nothing of this stage shows"
+  },
+  {
+   "row": "C291",
+   "screen": "opening.bath",
+   "verdict": "PASS",
+   "line": "You strip and step in before it's warm.",
+   "why": "what shows (her bare, alone) sets a low level"
+  },
+  {
+   "row": "C296",
+   "screen": "opening.bath",
+   "verdict": "PASS",
+   "line": "You strip and step in",
+   "why": "the first shower opens low: alone, no one sees"
+  },
+  {
+   "row": "C297",
+   "screen": "opening.bath",
+   "verdict": "PASS",
+   "line": "Then a fist bangs on the door.",
+   "why": "Ryan, who she lives with, reached by accident first"
+  },
+  {
+   "row": "C311",
+   "screen": "opening.bath",
+   "verdict": "PASS",
+   "line": "It hits your nipples cold, and they go hard.",
+   "why": "part of her body named; price/not-yet: the bolt that doesn't hold, the small towel; hook: the fist; his reaction is the hall's (P13)"
+  },
+  {
+   "row": "C314",
+   "screen": "opening.bath",
+   "verdict": "PASS",
+   "line": "let it run down your neck, over your tits",
+   "why": "not talk only: the screen is on her body"
+  },
+  {
+   "row": "C327",
+   "screen": "opening.bath",
+   "verdict": "PASS",
+   "line": "You stand under it with your eyes shut",
+   "why": "the bathroom is no longer one sentence; filled with her body at stage 1"
+  },
+  {
+   "row": "C422",
+   "screen": "opening.bath",
+   "verdict": "PASS",
+   "line": "Open the door (8 min)",
+   "why": "says plainly what clicking does, with minutes"
+  },
+  {
+   "row": "C442",
+   "screen": "opening.bath",
+   "verdict": "PASS",
+   "line": "You strip and step in before it's warm.",
+   "why": "says what happens plainly"
+  },
+  {
+   "row": "C447",
+   "screen": "opening.bath",
+   "verdict": "PASS",
+   "line": "Come on, I'm dying out here.",
+   "why": "Ryan's manner (complaining, casual, the nickname) held with his hall lines"
+  },
+  {
+   "row": "C448",
+   "screen": "opening.bath",
+   "verdict": "PASS",
+   "line": "Ryan, your step-brother",
+   "why": "obvious on arrival: named with his role"
+  },
+  {
+   "row": "C449",
+   "screen": "opening.bath",
+   "verdict": "PASS",
+   "line": "over your tits, down your stomach and between your thighs",
+   "why": "the body is named and the bolt plus Ryan's door set the tension up, not buried; Ryan's look is named on the hall"
+  },
+  {
+   "row": "C450",
+   "screen": "opening.bath",
+   "verdict": "N/A",
+   "line": "It's the small one.",
+   "why": "not the scene's last screen; the hall follows"
+  },
+  {
+   "row": "C451",
+   "screen": "opening.bath",
+   "verdict": "PASS",
+   "line": "The bolt hasn't held in years ... the small one",
+   "why": "concrete detail: the bolt, the slow hot water, the rail, the small towel"
+  },
+  {
+   "row": "C460",
+   "screen": "opening.bath",
+   "verdict": "PASS",
+   "line": "a second before Ryan, your step-brother, opens his door",
+   "why": "true on all three paths at 07:12: Ryan's room row ends 7:12, hall row starts 7:12; 'first time all morning' follows the rent screen on every path; no past claimed"
+  },
+  {
+   "row": "C461",
+   "screen": "opening.bath",
+   "verdict": "PASS",
+   "line": "The bolt hasn't held in years",
+   "why": "texture that can't clash; PLAN gives the bathroom no lock"
+  },
+  {
+   "row": "C519",
+   "screen": "opening.bath",
+   "verdict": "PASS",
+   "line": "(117 words)",
+   "why": "one job (the bathroom, then the interruption), under 150"
+  },
+  {
+   "row": "C520",
+   "screen": "opening.bath",
+   "verdict": "PASS",
+   "line": "(117 words)",
+   "why": "the build-up step of the staged opening, one job, under ~150"
+  },
+  {
+   "row": "C593",
+   "screen": "opening.bath",
+   "verdict": "PASS",
+   "line": "@player.nickname.",
+   "why": "Ryan's term of address, nobody else's"
+  },
+  {
+   "row": "C601",
+   "screen": "opening.bath",
+   "verdict": "N/A",
+   "line": "Then a fist bangs on the door.",
+   "why": "Ryan doesn't see her here; his leak and cover are on opening.hall"
+  },
+  {
+   "row": "C639",
+   "screen": "opening.bath",
+   "verdict": "N/A",
+   "line": "Open the door (8 min)",
+   "why": "no offer"
+  },
+  {
+   "row": "C640",
+   "screen": "opening.bath",
+   "verdict": "N/A",
+   "line": "Open the door (8 min)",
+   "why": "no offer"
+  },
+  {
+   "row": "C719",
+   "screen": "opening.bath",
+   "verdict": "PASS",
+   "line": "Open the door (8 min)",
+   "why": "no button claims to dress or undress; the strip is in the prose and backed by the act"
+  },
+  {
+   "row": "C782",
+   "screen": "opening.bath",
+   "verdict": "N/A",
+   "line": "Open the door (8 min)",
+   "why": "no solo act opens in release 1; no second link offered"
+  },
+  {
+   "row": "L119",
+   "screen": "opening.bath",
+   "verdict": "PASS",
+   "line": "pool = 1",
+   "why": "pool written, not the default 4"
+  },
+  {
+   "row": "L120",
+   "screen": "opening.bath",
+   "verdict": "N/A",
+   "line": "pool_dir = \"body/opening_shower_t4\", pool = 1",
+   "why": "no look, no two-person frame: 'No one else in frame.'"
+  },
+  {
+   "row": "L121",
+   "screen": "opening.bath",
+   "verdict": "PASS",
+   "line": "pool_dir = \"body/opening_shower_t4\", pool = 1",
+   "why": "a body moment gets its picture"
+  },
+  {
+   "row": "L125",
+   "screen": "opening.bath",
+   "verdict": "PASS",
+   "line": "pool_dir = \"body/opening_shower_t4\", pool = 1",
+   "why": "mid-screen after the body line, not at the top before the payoff"
+  },
+  {
+   "row": "L163",
+   "screen": "opening.bath",
+   "verdict": "N/A",
+   "line": "(no rule change)",
+   "why": "no voice rule removed"
+  },
+  {
+   "row": "L71",
+   "screen": "opening.bath",
+   "verdict": "PASS",
+   "line": "It hits your nipples cold, and they go hard.",
+   "why": "it happens to her; she chooses no act"
+  },
+  {
+   "row": "L97",
+   "screen": "opening.bath",
+   "verdict": "N/A",
+   "line": "Then a fist bangs on the door.",
+   "why": "not a walk-in; Ryan stays outside"
+  },
+  {
+   "row": "body-moments#1",
+   "screen": "opening.bath",
+   "verdict": "PASS",
+   "line": "Media: 1 spot, a body moment",
+   "why": "card names it a body moment"
+  },
+  {
+   "row": "body-moments#2",
+   "screen": "opening.bath",
+   "verdict": "PASS",
+   "line": "It hits your nipples cold, and they go hard.",
+   "why": "named parts (nipples, tits, stomach, thighs) and what she feels (cold, heat, shoulders drop); it happens to her"
+  },
+  {
+   "row": "body-moments#3",
+   "screen": "opening.bath",
+   "verdict": "PASS",
+   "line": "You strip and step in before it's warm.",
+   "why": "the shower is written, not skipped"
+  },
+  {
+   "row": "body-moments#4",
+   "screen": "opening.bath",
+   "verdict": "PASS",
+   "line": "pool_dir = \"body/opening_shower_t4\", pool = 1",
+   "why": "one picture of her right after the body line; gif; _t4; place named"
+  },
+  {
+   "row": "body-moments#5",
+   "screen": "opening.bath",
+   "verdict": "PASS",
+   "line": "pool = 1",
+   "why": "one-time scene, pool 1"
+  },
+  {
+   "row": "body-moments#6",
+   "screen": "opening.bath",
+   "verdict": "PASS",
+   "line": "Open the door (8 min)",
+   "why": "the button sets met_ryan and ryan_hall_seen only; no meter moves"
+  },
+  {
+   "row": "body-moments#7",
+   "screen": "opening.bath",
+   "verdict": "PASS",
+   "line": "Then a fist bangs on the door.",
+   "why": "touching and the walk-in stay out; the moment's body is written"
+  },
+  {
+   "row": "heat#1",
+   "screen": "opening.bath",
+   "verdict": "N/A",
+   "line": "(game-wide)",
+   "why": "a game-wide share, read at release"
+  },
+  {
+   "row": "heat#2",
+   "screen": "opening.bath",
+   "verdict": "PASS",
+   "line": "You strip and step in",
+   "why": "what shows (her bare, alone) sets a low level"
+  },
+  {
+   "row": "heat#3",
+   "screen": "opening.bath",
+   "verdict": "N/A",
+   "line": "Open the door (8 min)",
+   "why": "no offer, so no choice/no to write"
+  },
+  {
+   "row": "heat#4",
+   "screen": "opening.bath",
+   "verdict": "PASS",
+   "line": "Then a fist bangs on the door.",
+   "why": "stage 1 only: her body moment, nothing she does sexually, no meter"
+  },
+  {
+   "row": "heat#5",
+   "screen": "opening.bath",
+   "verdict": "PASS",
+   "line": "Then a fist bangs on the door.",
+   "why": "Ryan reached through an accident"
+  },
+  {
+   "row": "heat#6",
+   "screen": "opening.bath",
+   "verdict": "N/A",
+   "line": "Your shoulders drop for the first time all morning.",
+   "why": "no explicit beat on this screen"
+  },
+  {
+   "row": "heat#7",
+   "screen": "opening.bath",
+   "verdict": "PASS",
+   "line": "It hits your nipples cold, and they go hard.",
+   "why": "low heat on her body"
+  },
+  {
+   "row": "media#1",
+   "screen": "opening.bath",
+   "verdict": "PASS",
+   "line": "pool_dir = \"body/opening_shower_t4\", pool = 1",
+   "why": "right after the line where her body happens; the 4a reaction screens before it carry none"
+  },
+  {
+   "row": "media#2",
+   "screen": "opening.bath",
+   "verdict": "N/A",
+   "line": "pool_dir = \"body/opening_shower_t4\", pool = 1",
+   "why": "not a place picture"
+  },
+  {
+   "row": "media#3",
+   "screen": "opening.bath",
+   "verdict": "PASS",
+   "line": "pool_dir = \"body/opening_shower_t4\", pool = 1",
+   "why": "a body moment gets its picture of her"
+  },
+  {
+   "row": "media#4",
+   "screen": "opening.bath",
+   "verdict": "PASS",
+   "line": "pool = 1",
+   "why": "1 for a one-time _t4 body moment"
+  },
+  {
+   "row": "media#5",
+   "screen": "opening.bath",
+   "verdict": "N/A",
+   "line": "pool_dir = \"body/opening_shower_t4\", pool = 1",
+   "why": "not a look"
+  },
+  {
+   "row": "media#6",
+   "screen": "opening.bath",
+   "verdict": "PASS",
+   "line": "...body gif",
+   "why": "something happens, so gif"
+  },
+  {
+   "row": "media#7",
+   "screen": "opening.bath",
+   "verdict": "PASS",
+   "line": "A woman of 18 in a small family bathroom shower, water running down her bare body",
+   "why": "age, place, what she wears (nothing), two plain searches"
+  },
+  {
+   "row": "opening#1",
+   "screen": "opening.bath",
+   "verdict": "N/A",
+   "line": "Upstairs, you get the bathroom",
+   "why": "this step lives on another opening screen, P13's; the bathroom is step 4"
+  },
+  {
+   "row": "opening#2",
+   "screen": "opening.bath",
+   "verdict": "N/A",
+   "line": "Upstairs, you get the bathroom",
+   "why": "this step lives on another opening screen, P13's; the bathroom is step 4"
+  },
+  {
+   "row": "opening#3",
+   "screen": "opening.bath",
+   "verdict": "N/A",
+   "line": "Upstairs, you get the bathroom",
+   "why": "this step lives on another opening screen, P13's; the bathroom is step 4"
+  },
+  {
+   "row": "opening#5",
+   "screen": "opening.bath",
+   "verdict": "N/A",
+   "line": "Upstairs, you get the bathroom",
+   "why": "this step lives on another opening screen, P13's; the bathroom is step 4"
+  },
+  {
+   "row": "opening#6",
+   "screen": "opening.bath",
+   "verdict": "N/A",
+   "line": "Upstairs, you get the bathroom",
+   "why": "this step lives on another opening screen, P13's; the bathroom is step 4"
+  },
+  {
+   "row": "opening#7",
+   "screen": "opening.bath",
+   "verdict": "N/A",
+   "line": "Upstairs, you get the bathroom",
+   "why": "this step lives on another opening screen, P13's; the bathroom is step 4"
+  },
+  {
+   "row": "opening#4",
+   "screen": "opening.bath",
+   "verdict": "PASS",
+   "line": "The bolt hasn't held in years ... Then a fist bangs on the door. ... It's the small one.",
+   "why": "the room works against her (bolt, slow hot water, small towel), then the interruption"
+  },
+  {
+   "row": "voice#1",
+   "screen": "opening.bath",
+   "verdict": "PASS",
+   "line": "Then the heat comes.",
+   "why": "second person, short sentences"
+  },
+  {
+   "row": "voice#2",
+   "screen": "opening.bath",
+   "verdict": "PASS",
+   "line": "Your heart jumps.",
+   "why": "feelings on her body"
+  },
+  {
+   "row": "voice#3",
+   "screen": "opening.bath",
+   "verdict": "PASS",
+   "line": "It hits your nipples cold, and they go hard.",
+   "why": "what her body does is on her body"
+  },
+  {
+   "row": "voice#4",
+   "screen": "opening.bath",
+   "verdict": "PASS",
+   "line": "Your heart jumps.",
+   "why": "no italic thought"
+  },
+  {
+   "row": "voice#5",
+   "screen": "opening.bath",
+   "verdict": "PASS",
+   "line": "Come on, I'm dying out here.",
+   "why": "Ryan speaks; the path's ratio is counted by check.py talk, GREEN on the build"
+  },
+  {
+   "row": "voice#6",
+   "screen": "opening.bath",
+   "verdict": "PASS",
+   "line": "The bolt hasn't held in years",
+   "why": "plain, concrete"
+  },
+  {
+   "row": "voice#7",
+   "screen": "opening.bath",
+   "verdict": "PASS",
+   "line": "opens his door",
+   "why": "true on every path at 07:12 (who_is_where)"
+  },
+  {
+   "row": "voice#8",
+   "screen": "opening.bath",
+   "verdict": "PASS",
+   "line": "@player.nickname.",
+   "why": "Ryan sounds like himself, his own term of address"
+  }
+ ],
+ "causes": []
+}

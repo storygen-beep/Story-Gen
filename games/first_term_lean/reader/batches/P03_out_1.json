@@ -1,0 +1,142 @@
+{
+ "verdicts": [
+  {
+   "row": "C1238",
+   "screen": "hood_street",
+   "verdict": "FAIL",
+   "line": "Corner Shop card, closed: \"Closed. Opens at 7:00.\" over hood_shop_t0.jpg (\"woman of 18 picking snacks off a shelf in a small corner shop\")",
+   "why": "the closed card still draws the place image (v2.py:24830); from 23:00 to 07:00 the street shows her shopping inside a shut shop, the park card (her on a bench by the pond) after the gates lock at 9pm, the gym card after 10pm",
+   "cause": "P03c1-c1"
+  },
+  {
+   "row": "C1261",
+   "screen": "hood_clothes",
+   "verdict": "PASS",
+   "line": "image = \"locations/hood_clothes_t0.jpg\" (\"woman of 18 browsing a clothes rail in a small boutique\")",
+   "why": "the one place picture of her there, shown as the shop's card on the street where she chooses where to go (media.md step 2)",
+   "cause": null
+  },
+  {
+   "row": "C1261",
+   "screen": "hood_gym",
+   "verdict": "PASS",
+   "line": "image = \"locations/hood_gym_t0.jpg\" (\"woman of 18 with a gym bag walking past the weights in a small gym\")",
+   "why": "same: the place's one picture, with her in it, on the card she picks",
+   "cause": null
+  },
+  {
+   "row": "C1261",
+   "screen": "hood_park",
+   "verdict": "PASS",
+   "line": "image = \"locations/hood_park_t0.jpg\" (\"woman of 18 sitting on a park bench by a pond\")",
+   "why": "same",
+   "cause": null
+  },
+  {
+   "row": "C1261",
+   "screen": "hood_shop",
+   "verdict": "PASS",
+   "line": "image = \"locations/hood_shop_t0.jpg\" (\"woman of 18 picking snacks off a shelf in a small corner shop\")",
+   "why": "same",
+   "cause": null
+  },
+  {
+   "row": "C1265",
+   "screen": "hood_street",
+   "verdict": "PASS",
+   "line": "# P03 re-check: no picture, the street only routes (craft/media.md, C1265).",
+   "why": "the street carries no image of its own; its cards are the places' own pictures, not spots under C1265 (a place's image renders only as its card on the menu it is entered from (v2.py:24764); media.md step 2 says that card is the place's one picture, not a door or menu spot)",
+   "cause": null
+  },
+  {
+   "row": "C804",
+   "screen": "hood_gym",
+   "verdict": "FAIL",
+   "line": "The gym: weights, treadmills, mirrors on every wall. The same regulars every day.",
+   "why": "Marco's rows put him here weekdays 06-10 and 17-21, Saturday 08-14 (who_is_where); no line changes with him; held to P29, no waiver; judged as built",
+   "cause": "P03c1-c2"
+  },
+  {
+   "row": "C804",
+   "screen": "hood_shop",
+   "verdict": "FAIL",
+   "line": "The corner shop: snacks, cigarettes behind the counter, the till by the door. Locals in for milk, kids in for sweets.",
+   "why": "Frank (Mon-Sat 07-15) and Danny (Mon-Sat 15-23, Sun 07-23) are at the till every open minute; no line changes with them; held to P29, no waiver",
+   "cause": "P03c1-c2"
+  },
+  {
+   "row": "C804",
+   "screen": "hood_street",
+   "verdict": "FAIL",
+   "line": "Your street. The same row of houses, ... Neighbours, dog walkers, kids on bikes.",
+   "why": "Vance is on the street weekdays 17-20, weekends 09-12 and 17-20; no line shows him (the description_variants read only her clothes); held to P29, no waiver",
+   "cause": "P03c1-c2"
+  },
+  {
+   "row": "C920",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "(no entry_costs on the street, shop, park, gym, clothes shop or the house next door)",
+   "why": "every hop inside the neighbourhood, and Home to the street, costs 0 both ways; travelMoveSlug charges only entry costs and none exist (v2.py:20490-20512)",
+   "cause": null
+  },
+  {
+   "row": "clock#2",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "(neighbourhood places: no costs)",
+   "why": "rule 2: no time on any hop inside the area; time sits on the bus and walk to campus (P04's canvases), the move between areas",
+   "cause": null
+  },
+  {
+   "row": "media#2",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "hood_next_door, hood_shop, hood_park, hood_clothes, hood_gym: one image each, tier 0, \"woman of 18 ...\"",
+   "why": "each place has at most one file, tier 0, with her in it; the street has none; none is the empty place",
+   "cause": null
+  },
+  {
+   "row": "media#3",
+   "screen": "hood_street",
+   "verdict": "PASS",
+   "line": "(four place cards on the street; the House Next Door's once met_vance)",
+   "why": "step 2: a place's card picture is not a door or menu spot; the street itself carries none",
+   "cause": null
+  },
+  {
+   "row": "places#2",
+   "screen": "hood_gym",
+   "verdict": "FAIL",
+   "line": "The gym: weights, treadmills, mirrors on every wall. The same regulars every day.",
+   "why": "no presence line for Marco and no empty-room line; held to P29, no waiver",
+   "cause": "P03c1-c2"
+  },
+  {
+   "row": "places#2",
+   "screen": "hood_shop",
+   "verdict": "FAIL",
+   "line": "The corner shop: snacks, cigarettes behind the counter, the till by the door. Locals in for milk, kids in for sweets.",
+   "why": "no presence line for Frank or Danny; held to P29, no waiver",
+   "cause": "P03c1-c2"
+  },
+  {
+   "row": "places#2",
+   "screen": "hood_street",
+   "verdict": "FAIL",
+   "line": "Your street. The same row of houses, ... Neighbours, dog walkers, kids on bikes.",
+   "why": "no presence line for Vance and none for when he's gone; held to P29, no waiver",
+   "cause": "P03c1-c2"
+  }
+ ],
+ "causes": [
+  {
+   "id": "P03c1-c1",
+   "what": "A shut place's card on Your Street still shows its picture of her inside (closed card keeps img_html, v2.py:24830): her shopping in a shut corner shop, on a park bench after the gates lock, in a closed gym."
+  },
+  {
+   "id": "P03c1-c2",
+   "what": "Frank/Danny (shop), Marco (gym) and Vance (street) have rows there, but no presence line or empty line shows who is there; held to P29, no waiver."
+  }
+ ]
+}

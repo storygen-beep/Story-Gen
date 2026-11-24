@@ -1,4 +1,61 @@
-{"verdicts": [
- {"row": "L167", "screen": "*", "verdict": "N/A", "line": "Go down to the kitchen (5 min)", "why": "No row on any opening screen is gated by the clock or the day (no time_of_day or weekday condition, no show_when_locked). Every exit is a plain story choice.", "cause": null}
-],
-"causes": []}
+{
+ "verdicts": [
+  {
+   "row": "B10",
+   "screen": "opening.wake",
+   "verdict": "PASS",
+   "line": "Your saves live in this browser. Use Saves, then Save to Disk…, to keep one.",
+   "why": "true at every visit: the Saves menu and 'Save to Disk…' exist under those labels in output/index.html; no person named on screen; the rest of the screen unchanged",
+   "cause": ""
+  },
+  {
+   "row": "B8",
+   "screen": "opening.wake",
+   "verdict": "PASS",
+   "line": "You're eighteen, in the single bed you had at twelve",
+   "why": "numbers unchanged and agree with PLAN/P02; the pyjama top is prose only, LO's waiver (NOTES 179: \"Yes to all ten, waive 9\")",
+   "cause": ""
+  },
+  {
+   "row": "C460",
+   "screen": "opening.wake",
+   "verdict": "PASS",
+   "line": "Your saves live in this browser. Use Saves, then Save to Disk…, to keep one.",
+   "why": "the new line is true on every playthrough; labels match the built UI",
+   "cause": ""
+  },
+  {
+   "row": "C461",
+   "screen": "opening.wake",
+   "verdict": "PASS",
+   "line": "College. Finally, something that's yours.",
+   "why": "her opinion; no clash",
+   "cause": ""
+  },
+  {
+   "row": "C927",
+   "screen": "opening.wake",
+   "verdict": "PASS",
+   "line": "Go down to the kitchen (5 min)",
+   "why": "the one exit states its time (time_progression_minutes = 5)",
+   "cause": ""
+  },
+  {
+   "row": "C931",
+   "screen": "opening.wake",
+   "verdict": "N/A",
+   "line": "(no time_of_day condition on wake)",
+   "why": "nothing on the screen reads time_of_day",
+   "cause": ""
+  },
+  {
+   "row": "L167",
+   "screen": "opening.wake",
+   "verdict": "N/A",
+   "line": "(no hours on wake)",
+   "why": "one-time opening screen, no hours, no greyed row",
+   "cause": ""
+  }
+ ],
+ "causes": []
+}

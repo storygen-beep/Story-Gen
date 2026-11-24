@@ -1,9 +1,39 @@
 {
  "items": [
   {
+   "row": "B10",
+   "screen": "opening.wake",
+   "why": "screen changed: truth row"
+  },
+  {
+   "row": "B8",
+   "screen": "opening.wake",
+   "why": "screen changed: truth row"
+  },
+  {
+   "row": "C460",
+   "screen": "opening.wake",
+   "why": "screen changed: truth row"
+  },
+  {
+   "row": "C461",
+   "screen": "opening.wake",
+   "why": "screen changed: truth row"
+  },
+  {
+   "row": "C927",
+   "screen": "opening.wake",
+   "why": "screen changed: truth row"
+  },
+  {
+   "row": "C931",
+   "screen": "opening.wake",
+   "why": "screen changed: truth row"
+  },
+  {
    "row": "L167",
-   "screen": "*",
-   "why": "never judged"
+   "screen": "opening.wake",
+   "why": "screen changed: truth row"
   }
  ]
 }

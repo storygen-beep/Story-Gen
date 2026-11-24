@@ -1,0 +1,537 @@
+{
+ "verdicts": [
+  {
+   "row": "B10",
+   "screen": "class_drama.class",
+   "verdict": "PASS",
+   "line": "Again. Louder, new face. Make them look at you. / Like this? / Closer. Next time, I'll show you.",
+   "why": "Cross in the Theatre Tue/Thu 11-13; 'Next time' is a future promise, not a past; 'new face' true while met_cross is the gate"
+  },
+  {
+   "row": "B10",
+   "screen": "class_english.class",
+   "verdict": "PASS",
+   "line": "Read that back to me, dear. Slower. / Like that? / Better. Bring me the next one.",
+   "why": "asks her to read back what she just wrote ('You write until your wrist hurts'); no earlier essay claimed; Walsh in the hall Tue/Thu 9-11; no grade moves"
+  },
+  {
+   "row": "B10",
+   "screen": "class_psych.class",
+   "verdict": "PASS",
+   "line": "Monday and Wednesday at 9am. Statistics is 11am the same days; English is 9am on Tuesday and Thursday, and drama 11am in the theatre.",
+   "why": "timetable matches every class row's weekday and window (psych Mon/Wed 9, stats Mon/Wed 11, english Tue/Thu 9, drama Tue/Thu 11 Theatre); Hale and Nadia are in the hall 9-11 Mon/Wed; no past claimed"
+  },
+  {
+   "row": "B10",
+   "screen": "class_stats.class",
+   "verdict": "PASS",
+   "line": "Miss @player. Keep up. / I am. / We'll see.",
+   "why": "Pratt learned her name at P16's attendance (met_pratt gates the row); Pratt in the hall Mon/Wed 11-13; no past or grade claimed"
+  },
+  {
+   "row": "B10",
+   "screen": "stage_practise.practise",
+   "verdict": "PASS",
+   "line": "say whatever comes into your head to the dark",
+   "why": "no longer claims lines she has before her first drama class; 'The seats are empty' holds: row needs npc_cross is_absent and who_is_where puts no one else in campus_theatre"
+  },
+  {
+   "row": "B10",
+   "screen": "study_library.study",
+   "verdict": "PASS",
+   "line": "There's always more of it waiting.",
+   "why": "claims nobody present and no past; true at any open hour"
+  },
+  {
+   "row": "B10",
+   "screen": "study_room.study",
+   "verdict": "PASS",
+   "line": "shut the door, and work through them. There's always another chapter.",
+   "why": "names no one in the house; true at any hour (house-noise line gone)"
+  },
+  {
+   "row": "B3",
+   "screen": "class_drama.class",
+   "verdict": "PASS",
+   "line": "Closer. Next time, I'll show you.",
+   "why": "Cross's 'Next time, I'll show you.' names the next class and what he'll do"
+  },
+  {
+   "row": "B3",
+   "screen": "class_english.class",
+   "verdict": "PASS",
+   "line": "Better. Bring me the next one.",
+   "why": "'Bring me the next one.' asks for her next piece: points forward"
+  },
+  {
+   "row": "B3",
+   "screen": "class_stats.class",
+   "verdict": "PASS",
+   "line": "Next time, you'll have to prove it.",
+   "why": "Pratt's 'We'll see.' and 'Next time, you'll have to prove it.' point at the next class"
+  },
+  {
+   "row": "B3",
+   "screen": "study_library.study",
+   "verdict": "PASS",
+   "line": "work through the reading until the words swim. There's always more of it waiting.",
+   "why": "'There's always more of it waiting.' points at the next session"
+  },
+  {
+   "row": "B3",
+   "screen": "study_room.study",
+   "verdict": "PASS",
+   "line": "You spread your notes across the bed, shut the door, and work through them. There's always another chapter.",
+   "why": "'There's always another chapter.' points at the next session"
+  },
+  {
+   "row": "B8",
+   "screen": "class_drama.class",
+   "verdict": "PASS",
+   "line": "Closer. Next time, I'll show you.",
+   "why": "label '2 hours, 10 energy' = costs energy 10 and Done 120 min; no garment named"
+  },
+  {
+   "row": "B8",
+   "screen": "class_english.class",
+   "verdict": "PASS",
+   "line": "Better. Bring me the next one.",
+   "why": "label '2 hours, 10 energy' = costs energy 10 and Done 120 min; no garment named"
+  },
+  {
+   "row": "B8",
+   "screen": "class_psych.class",
+   "verdict": "PASS",
+   "line": "Eyes up here, young lady. You'll miss the good part.",
+   "why": "label '2 hours, 10 energy' = costs energy 10 and Done 120 min; no garment named; no grade moves"
+  },
+  {
+   "row": "B8",
+   "screen": "class_stats.class",
+   "verdict": "PASS",
+   "line": "Next time, you'll have to prove it.",
+   "why": "label '2 hours, 10 energy' = costs energy 10 and Done 120 min; no garment named"
+  },
+  {
+   "row": "B8",
+   "screen": "stage_practise.practise",
+   "verdict": "PASS",
+   "line": "The seats are empty. You stand under the work light and say whatever comes into your head to the dark",
+   "why": "label '30 min' = Done 30 min; max 2 a day as the card says; no garment named"
+  },
+  {
+   "row": "B8",
+   "screen": "study_library.study",
+   "verdict": "PASS",
+   "line": "work through the reading until the words swim. There's always more of it waiting.",
+   "why": "label '1 hour, 5 energy' = costs 5, Done 60 min, study_today lt 3 shared count; no garment named"
+  },
+  {
+   "row": "B8",
+   "screen": "study_room.study",
+   "verdict": "PASS",
+   "line": "You spread your notes across the bed, shut the door, and work through them. There's always another chapter.",
+   "why": "label '1 hour, 5 energy' = costs 5, Done 60 min, same study_today count; no garment named; 'the bed' is furniture"
+  },
+  {
+   "row": "C1427",
+   "screen": "stage_practise.practise",
+   "verdict": "FAIL",
+   "line": "weekday + npc_cross is_absent (no end time)",
+   "why": "a 30-min practise started at 20:59 ends 21:29, after the theatre's 21:00 close (note row, no cause)"
+  },
+  {
+   "row": "C1427",
+   "screen": "study_library.study",
+   "verdict": "FAIL",
+   "line": "conditions = study_today lt 3 (no time window)",
+   "why": "a 1-hour study started at 21:59 ends 22:59, after the library's 22:00 close (note row, no cause)"
+  },
+  {
+   "row": "C149",
+   "screen": "class_drama.class",
+   "verdict": "PASS",
+   "line": "Closer. Next time, I'll show you.",
+   "why": "Cross's 'Next time, I'll show you.' names the next class and what he'll do"
+  },
+  {
+   "row": "C149",
+   "screen": "class_english.class",
+   "verdict": "PASS",
+   "line": "Better. Bring me the next one.",
+   "why": "'Bring me the next one.' asks for her next piece: points forward"
+  },
+  {
+   "row": "C149",
+   "screen": "class_stats.class",
+   "verdict": "PASS",
+   "line": "Next time, you'll have to prove it.",
+   "why": "Pratt's 'We'll see.' and 'Next time, you'll have to prove it.' point at the next class"
+  },
+  {
+   "row": "C149",
+   "screen": "study_library.study",
+   "verdict": "PASS",
+   "line": "work through the reading until the words swim. There's always more of it waiting.",
+   "why": "'There's always more of it waiting.' points at the next session"
+  },
+  {
+   "row": "C149",
+   "screen": "study_room.study",
+   "verdict": "PASS",
+   "line": "You spread your notes across the bed, shut the door, and work through them. There's always another chapter.",
+   "why": "'There's always another chapter.' points at the next session"
+  },
+  {
+   "row": "C450",
+   "screen": "class_drama.class",
+   "verdict": "PASS",
+   "line": "Closer. Next time, I'll show you.",
+   "why": "Cross's 'Next time, I'll show you.' names the next class and what he'll do"
+  },
+  {
+   "row": "C450",
+   "screen": "class_english.class",
+   "verdict": "PASS",
+   "line": "Better. Bring me the next one.",
+   "why": "'Bring me the next one.' asks for her next piece: points forward"
+  },
+  {
+   "row": "C450",
+   "screen": "class_stats.class",
+   "verdict": "PASS",
+   "line": "Next time, you'll have to prove it.",
+   "why": "Pratt's 'We'll see.' and 'Next time, you'll have to prove it.' point at the next class"
+  },
+  {
+   "row": "C450",
+   "screen": "study_library.study",
+   "verdict": "PASS",
+   "line": "work through the reading until the words swim. There's always more of it waiting.",
+   "why": "'There's always more of it waiting.' points at the next session"
+  },
+  {
+   "row": "C450",
+   "screen": "study_room.study",
+   "verdict": "PASS",
+   "line": "You spread your notes across the bed, shut the door, and work through them. There's always another chapter.",
+   "why": "'There's always another chapter.' points at the next session"
+  },
+  {
+   "row": "C460",
+   "screen": "class_drama.class",
+   "verdict": "PASS",
+   "line": "Again. Louder, new face. Make them look at you. / Like this? / Closer. Next time, I'll show you.",
+   "why": "Cross in the Theatre Tue/Thu 11-13; 'Next time' is a future promise, not a past; 'new face' true while met_cross is the gate"
+  },
+  {
+   "row": "C460",
+   "screen": "class_english.class",
+   "verdict": "PASS",
+   "line": "Read that back to me, dear. Slower. / Like that? / Better. Bring me the next one.",
+   "why": "asks her to read back what she just wrote ('You write until your wrist hurts'); no earlier essay claimed; Walsh in the hall Tue/Thu 9-11; no grade moves"
+  },
+  {
+   "row": "C460",
+   "screen": "class_psych.class",
+   "verdict": "PASS",
+   "line": "Monday and Wednesday at 9am. Statistics is 11am the same days; English is 9am on Tuesday and Thursday, and drama 11am in the theatre.",
+   "why": "timetable matches every class row's weekday and window (psych Mon/Wed 9, stats Mon/Wed 11, english Tue/Thu 9, drama Tue/Thu 11 Theatre); Hale and Nadia are in the hall 9-11 Mon/Wed; no past claimed"
+  },
+  {
+   "row": "C460",
+   "screen": "class_stats.class",
+   "verdict": "PASS",
+   "line": "Miss @player. Keep up. / I am. / We'll see.",
+   "why": "Pratt learned her name at P16's attendance (met_pratt gates the row); Pratt in the hall Mon/Wed 11-13; no past or grade claimed"
+  },
+  {
+   "row": "C460",
+   "screen": "stage_practise.practise",
+   "verdict": "PASS",
+   "line": "say whatever comes into your head to the dark",
+   "why": "no longer claims lines she has before her first drama class; 'The seats are empty' holds: row needs npc_cross is_absent and who_is_where puts no one else in campus_theatre"
+  },
+  {
+   "row": "C460",
+   "screen": "study_library.study",
+   "verdict": "PASS",
+   "line": "There's always more of it waiting.",
+   "why": "claims nobody present and no past; true at any open hour"
+  },
+  {
+   "row": "C460",
+   "screen": "study_room.study",
+   "verdict": "PASS",
+   "line": "shut the door, and work through them. There's always another chapter.",
+   "why": "names no one in the house; true at any hour (house-noise line gone)"
+  },
+  {
+   "row": "C461",
+   "screen": "class_drama.class",
+   "verdict": "PASS",
+   "line": "Closer. Next time, I'll show you.",
+   "why": "texture names no one and nothing that can clash with the clock, the cast or the flags"
+  },
+  {
+   "row": "C461",
+   "screen": "class_english.class",
+   "verdict": "PASS",
+   "line": "Better. Bring me the next one.",
+   "why": "texture names no one and nothing that can clash with the clock, the cast or the flags"
+  },
+  {
+   "row": "C461",
+   "screen": "class_psych.class",
+   "verdict": "PASS",
+   "line": "Eyes up here, young lady. You'll miss the good part.",
+   "why": "texture names no one and nothing that can clash with the clock, the cast or the flags"
+  },
+  {
+   "row": "C461",
+   "screen": "class_stats.class",
+   "verdict": "PASS",
+   "line": "Next time, you'll have to prove it.",
+   "why": "texture names no one and nothing that can clash with the clock, the cast or the flags"
+  },
+  {
+   "row": "C461",
+   "screen": "stage_practise.practise",
+   "verdict": "PASS",
+   "line": "The seats are empty. You stand under the work light and say whatever comes into your head to the dark",
+   "why": "texture names no one and nothing that can clash with the clock, the cast or the flags"
+  },
+  {
+   "row": "C461",
+   "screen": "study_library.study",
+   "verdict": "PASS",
+   "line": "work through the reading until the words swim. There's always more of it waiting.",
+   "why": "texture names no one and nothing that can clash with the clock, the cast or the flags"
+  },
+  {
+   "row": "C461",
+   "screen": "study_room.study",
+   "verdict": "PASS",
+   "line": "You spread your notes across the bed, shut the door, and work through them. There's always another chapter.",
+   "why": "texture names no one and nothing that can clash with the clock, the cast or the flags"
+  },
+  {
+   "row": "C804",
+   "screen": "study_room.study",
+   "verdict": "PASS",
+   "line": "You spread your notes across the bed, shut the door, and work through them. There's always another chapter.",
+   "why": "her bedroom has nobody on its sheet and the text now claims no one; nothing to vary by"
+  },
+  {
+   "row": "C913",
+   "screen": "class_drama.class",
+   "verdict": "PASS",
+   "line": "Monday and Wednesday at 9am. ... English is 9am on Tuesday and Thursday, and drama 11am in the theatre.",
+   "why": "drama's hours are now on the greyed timetable line, the same way Statistics and English (also hidden out of slot) publish theirs"
+  },
+  {
+   "row": "C916",
+   "screen": "class_drama.class",
+   "verdict": "PASS",
+   "line": "Monday and Wednesday at 9am. ... English is 9am on Tuesday and Thursday, and drama 11am in the theatre.",
+   "why": "drama's hours are now on the greyed timetable line, the same way Statistics and English (also hidden out of slot) publish theirs"
+  },
+  {
+   "row": "C927",
+   "screen": "class_drama.class",
+   "verdict": "PASS",
+   "line": "time_progression_minutes = 120",
+   "why": "Done spends a stated time; no zero-time exit"
+  },
+  {
+   "row": "C927",
+   "screen": "class_english.class",
+   "verdict": "PASS",
+   "line": "time_progression_minutes = 120",
+   "why": "Done spends a stated time; no zero-time exit"
+  },
+  {
+   "row": "C927",
+   "screen": "class_psych.class",
+   "verdict": "PASS",
+   "line": "time_progression_minutes = 120",
+   "why": "Done spends a stated time; no zero-time exit"
+  },
+  {
+   "row": "C927",
+   "screen": "class_stats.class",
+   "verdict": "PASS",
+   "line": "time_progression_minutes = 120",
+   "why": "Done spends a stated time; no zero-time exit"
+  },
+  {
+   "row": "C927",
+   "screen": "stage_practise.practise",
+   "verdict": "PASS",
+   "line": "time_progression_minutes = 30",
+   "why": "Done spends a stated time; no zero-time exit"
+  },
+  {
+   "row": "C927",
+   "screen": "study_library.study",
+   "verdict": "PASS",
+   "line": "time_progression_minutes = 60",
+   "why": "Done spends a stated time; no zero-time exit"
+  },
+  {
+   "row": "C927",
+   "screen": "study_room.study",
+   "verdict": "PASS",
+   "line": "time_progression_minutes = 60",
+   "why": "Done spends a stated time; no zero-time exit"
+  },
+  {
+   "row": "C931",
+   "screen": "class_drama.class",
+   "verdict": "PASS",
+   "line": "Closer. Next time, I'll show you.",
+   "why": "11:00-11:30 end exclusive"
+  },
+  {
+   "row": "C931",
+   "screen": "class_english.class",
+   "verdict": "PASS",
+   "line": "Better. Bring me the next one.",
+   "why": "09:00-09:30 end exclusive"
+  },
+  {
+   "row": "C931",
+   "screen": "class_psych.class",
+   "verdict": "PASS",
+   "line": "Eyes up here, young lady. You'll miss the good part.",
+   "why": "09:00-09:30 end exclusive, last start 09:29"
+  },
+  {
+   "row": "C931",
+   "screen": "class_stats.class",
+   "verdict": "PASS",
+   "line": "Next time, you'll have to prove it.",
+   "why": "11:00-11:30 end exclusive"
+  },
+  {
+   "row": "C931",
+   "screen": "stage_practise.practise",
+   "verdict": "N/A",
+   "line": "The seats are empty. You stand under the work light and say whatever comes into your head to the dark",
+   "why": "no time_of_day item on this row; nothing to misread"
+  },
+  {
+   "row": "C931",
+   "screen": "study_library.study",
+   "verdict": "N/A",
+   "line": "work through the reading until the words swim. There's always more of it waiting.",
+   "why": "no time_of_day item on this row; nothing to misread"
+  },
+  {
+   "row": "C931",
+   "screen": "study_room.study",
+   "verdict": "N/A",
+   "line": "You spread your notes across the bed, shut the door, and work through them. There's always another chapter.",
+   "why": "no time_of_day item on this row; nothing to misread"
+  },
+  {
+   "row": "L106",
+   "screen": "class_drama.class",
+   "verdict": "PASS",
+   "line": "Closer. Next time, I'll show you.",
+   "why": "only the teacher on screen is named, and their row puts them here in the class window"
+  },
+  {
+   "row": "L106",
+   "screen": "class_english.class",
+   "verdict": "PASS",
+   "line": "Better. Bring me the next one.",
+   "why": "only the teacher on screen is named, and their row puts them here in the class window"
+  },
+  {
+   "row": "L106",
+   "screen": "class_psych.class",
+   "verdict": "PASS",
+   "line": "Eyes up here, young lady. You'll miss the good part.",
+   "why": "only the teacher on screen is named, and their row puts them here in the class window"
+  },
+  {
+   "row": "L106",
+   "screen": "class_stats.class",
+   "verdict": "PASS",
+   "line": "Next time, you'll have to prove it.",
+   "why": "only the teacher on screen is named, and their row puts them here in the class window"
+  },
+  {
+   "row": "L106",
+   "screen": "stage_practise.practise",
+   "verdict": "PASS",
+   "line": "The seats are empty. You stand under the work light and say whatever comes into your head to the dark",
+   "why": "'The seats are empty' while the row's npc_cross is_absent holds and no other row puts anyone in campus_theatre"
+  },
+  {
+   "row": "L106",
+   "screen": "study_library.study",
+   "verdict": "PASS",
+   "line": "work through the reading until the words swim. There's always more of it waiting.",
+   "why": "only the teacher on screen is named, and their row puts them here in the class window"
+  },
+  {
+   "row": "L106",
+   "screen": "study_room.study",
+   "verdict": "PASS",
+   "line": "You spread your notes across the bed, shut the door, and work through them. There's always another chapter.",
+   "why": "names no one; nobody has a row in home_her_room"
+  },
+  {
+   "row": "L167",
+   "screen": "class_drama.class",
+   "verdict": "N/A",
+   "line": "Closer. Next time, I'll show you.",
+   "why": "no activity here has different hours on different days split across rows"
+  },
+  {
+   "row": "L167",
+   "screen": "class_english.class",
+   "verdict": "N/A",
+   "line": "Better. Bring me the next one.",
+   "why": "no activity here has different hours on different days split across rows"
+  },
+  {
+   "row": "L167",
+   "screen": "class_psych.class",
+   "verdict": "PASS",
+   "line": "Eyes up here, young lady. You'll miss the good part.",
+   "why": "one row, one day set; greys with show_when_blocked and a cooldown_message naming the full timetable"
+  },
+  {
+   "row": "L167",
+   "screen": "class_stats.class",
+   "verdict": "N/A",
+   "line": "Next time, you'll have to prove it.",
+   "why": "no activity here has different hours on different days split across rows"
+  },
+  {
+   "row": "L167",
+   "screen": "stage_practise.practise",
+   "verdict": "N/A",
+   "line": "The seats are empty. You stand under the work light and say whatever comes into your head to the dark",
+   "why": "no activity here has different hours on different days split across rows"
+  },
+  {
+   "row": "L167",
+   "screen": "study_library.study",
+   "verdict": "N/A",
+   "line": "work through the reading until the words swim. There's always more of it waiting.",
+   "why": "no activity here has different hours on different days split across rows"
+  },
+  {
+   "row": "L167",
+   "screen": "study_room.study",
+   "verdict": "N/A",
+   "line": "You spread your notes across the bed, shut the door, and work through them. There's always another chapter.",
+   "why": "no activity here has different hours on different days split across rows"
+  }
+ ],
+ "causes": []
+}

@@ -1,0 +1,2412 @@
+{
+ "piece": "P43",
+ "pass": 1,
+ "screens": {
+  "opening.wake": {
+   "text": "4dee8035ba2ae97c",
+   "facts": "8211a28bc952c9a8",
+   "facts2": "8211a28bc952c9a8",
+   "all": "9b8ba86cc7773a60"
+  },
+  "opening.kitchen_rent": {
+   "text": "58683dab2944f811",
+   "facts": "d67a624028c5b05d",
+   "facts2": "5efb877198b39a22",
+   "all": "7776c9c8490d17c7"
+  },
+  "opening.kitchen_ask": {
+   "text": "493b3c80469ab308",
+   "facts": "ee1bc1dd17e61be6",
+   "facts2": "8cd96ad59f8ddcf2",
+   "all": "0dfe702c68ba7ba8"
+  },
+  "opening.bath_grades": {
+   "text": "ddc4c8196a699ac4",
+   "facts": "b57daee6ba666adb",
+   "facts2": "f9a77c341399b681",
+   "all": "edcc378907254801"
+  },
+  "opening.bath_fun": {
+   "text": "a91d550d5f7ef222",
+   "facts": "0c866b7b81fabb92",
+   "facts2": "21119a8ff2ace21b",
+   "all": "37ceddabe1ea6fc1"
+  },
+  "opening.bath_freedom": {
+   "text": "eba7beacc0939787",
+   "facts": "61cb3075b2310e3e",
+   "facts2": "490755434b158e5c",
+   "all": "be11bda5589f6d43"
+  },
+  "opening.bath": {
+   "text": "65cecb4204fd2e05",
+   "facts": "ce853fd7984435f8",
+   "facts2": "be2a909e75218e29",
+   "all": "ce9a81f32f95986e"
+  },
+  "opening.hall": {
+   "text": "983cd29f6ea9d4b6",
+   "facts": "09e8ced1901b051f",
+   "facts2": "75755dc73b53bef1",
+   "all": "99494d9d61944547"
+  },
+  "opening.room_past": {
+   "text": "6dffcc94554269ed",
+   "facts": "7bb69c836c0f9af1",
+   "facts2": "3a804269641a46d4",
+   "all": "702cc9a7b5e52421"
+  },
+  "opening.room_spoke": {
+   "text": "645c8c4f9b10b927",
+   "facts": "027da689d8c616d3",
+   "facts2": "889a4db3e07102f1",
+   "all": "2857313db3dc165e"
+  },
+  "opening.room_waited": {
+   "text": "2d9cc753aafef247",
+   "facts": "d491a4f107dd91c5",
+   "facts2": "78871837b7d5b8f6",
+   "all": "651dba35eea4e79a"
+  },
+  "opening.room": {
+   "text": "5aa193b86273e353",
+   "facts": "7f5851883cb8d732",
+   "facts2": "7f5851883cb8d732",
+   "all": "2267c6fc177cf08c"
+  },
+  "opening.sums": {
+   "text": "a541a1c36e0d9cff",
+   "facts": "6d7d97983de08473",
+   "facts2": "082ee3476f8039c1",
+   "all": "30f3d7e487e39eed"
+  },
+  "opening.handover": {
+   "text": "4fe187a129483ea0",
+   "facts": "6e935eee995a04ed",
+   "facts2": "45b56beb963109af",
+   "all": "63f1a016f2345cf3"
+  },
+  "opening.sit_with_mom": {
+   "text": "edb4bbda96fbbc4a",
+   "facts": "d758570159c7c9cd",
+   "facts2": "4ea3fce0bdaa25eb",
+   "all": "14075e28920de5f4"
+  },
+  "opening.ask_mom": {
+   "text": "bd9877d6df12da4c",
+   "facts": "93cfbea4e03a4820",
+   "facts2": "e47de6f844b3583d",
+   "all": "4945061e71c576d6"
+  },
+  "*": "aa74816e2dd6b286"
+ },
+ "rows": {
+  "B1": "5276068df1ca6fa9",
+  "B2": "4d9f2ebbce9a39cc",
+  "B3": "4d1fce1c4523b5d4",
+  "B4": "ced37cb0de6e7202",
+  "B5": "efcbd1ac6a95e2f2",
+  "B6": "0e32092e9fe64f2c",
+  "B7": "cef53154cc971fef",
+  "B8": "80d415cf08e0ebfe",
+  "B9": "3b1fcdf549bcc558",
+  "B10": "c1c0e2ac2588a579",
+  "B11": "1e252efd0904a971",
+  "B12": "fd109745c67b71d7",
+  "B13": "aaf6518b64dcce55",
+  "C1262": "2946d2fe0b7dc28f",
+  "C1275": "5c2a05d547732e4b",
+  "C1274": "ca72df83c67acc75",
+  "C1280": "a1ce22b0640c6eeb",
+  "C1277": "2b934524a49c49e9",
+  "C1279": "9705ac6acfdcce30",
+  "C782": "4c4d4a94c717f70f",
+  "C1158": "67a384f4d08cf884",
+  "C719": "6ccb2b21fcd775af",
+  "body-moments#1": "eccc0ab561a445d0",
+  "body-moments#2": "3d0e66c4ff2e35e8",
+  "body-moments#3": "31555e41e42a56f4",
+  "body-moments#4": "777373934b40b8fe",
+  "body-moments#5": "57bdf33c1e490daf",
+  "body-moments#6": "61af55b717f75400",
+  "body-moments#7": "a541004c4012d217",
+  "C255": "41543c0b01047eb6",
+  "C256": "39401d1f8b2ac714",
+  "C252": "aa35910e35e29b2d",
+  "C254": "2d3aa3b699bb3a78",
+  "C239": "0031533ec82c4401",
+  "C248": "78aa710fc99207b5",
+  "C249": "1e789c98e52ef448",
+  "C276": "803a558113f90fbd",
+  "C291": "1345b94e89dfc2dc",
+  "C296": "39b97c524d1d887d",
+  "C284": "69d227fcb6314994",
+  "C285": "a28a84cd5f58df59",
+  "C286": "04450056a0da072c",
+  "C287": "33f0b998a82d37de",
+  "C288": "820920d70a5f860a",
+  "C289": "b49633d1ad76857e",
+  "C297": "f4d1f119d6f2bea9",
+  "C639": "a69f9998e41865b6",
+  "C640": "6f4e735e01b53e5c",
+  "C311": "0df85bbf34aa1cdf",
+  "heat#1": "a9d1b7304239e330",
+  "heat#2": "e686b407357d5dfe",
+  "heat#3": "51c788f9cf88c547",
+  "heat#4": "02f78ddf483ec147",
+  "heat#5": "b3e99b6034510032",
+  "heat#6": "a97dfd91d1cd6aae",
+  "heat#7": "f75e08aaaa6bb543",
+  "C1261": "6a661c60639de8be",
+  "C1267": "6bafcadf3d586d5a",
+  "C1249": "604706399d2f1194",
+  "C1250": "8384cc6bcbd67c07",
+  "C1265": "00b79725344762be",
+  "C1234": "7dc492e03732757e",
+  "L121": "cddfa55c18e5c7b7",
+  "L125": "259dda0a0553e751",
+  "L119": "18ef41501e0b23c3",
+  "C1281": "f0ab213c3075f906",
+  "C1284": "d631d4c69f1d3b74",
+  "L120": "22461386046b4605",
+  "C1278": "a511d81564cef526",
+  "C1238": "af95eb45b0bdc9db",
+  "C1255": "d81893b9077b4b53",
+  "L97": "2bfb9527e76ad93b",
+  "media#1": "3641bf707d9adfce",
+  "media#2": "01ba7fa1cec4bc7a",
+  "media#3": "8c75b0d488b188e2",
+  "media#4": "03599fc0722690b6",
+  "media#5": "2cf5e3607ccecd4a",
+  "media#6": "3016751837a9b0a0",
+  "media#7": "eff6dc1369755c34",
+  "C520": "59faa2198bb751e1",
+  "C519": "ff5e8d6189f0899a",
+  "C1626": "e2077b8b174e635b",
+  "C1637": "22f779094c1d6cc4",
+  "C1611": "112c4a73c594ab87",
+  "C1613": "b50de590bf483f0a",
+  "C327": "94cf3f1c37d54c7b",
+  "C314": "47808896707b87ec",
+  "C601": "390111b08f596c8d",
+  "C109": "49d3511959e39479",
+  "C166": "8630b1e1337d63f3",
+  "L71": "20d25a1f144ab051",
+  "C1604": "a4feff5e25645274",
+  "C1609": "add0504418933607",
+  "C1621": "11b24e4fe2da4e05",
+  "C1631": "45d1f77e233e111c",
+  "opening#1": "88267cd95a4d6da5",
+  "opening#2": "16087c5ccde09fbf",
+  "opening#3": "5a60297b0e998c5c",
+  "opening#4": "3847f3dafe2643d2",
+  "opening#5": "8b7d05eb7bf07424",
+  "opening#6": "9042830eeab286c8",
+  "opening#7": "001a96630041e1b1",
+  "C442": "a2b07f40e1a9e908",
+  "C449": "ac5932d70cd775a1",
+  "C451": "6b0fd679047fc9b8",
+  "C447": "e3ca01ba145f4580",
+  "C593": "52e42cdd69c8f10e",
+  "C448": "584dada6c379e3d8",
+  "C450": "3eb18b4cefbe49d3",
+  "C422": "8933f85010afbef7",
+  "C460": "beb5a109bde77305",
+  "C461": "153b0804e686abae",
+  "L163": "00a617ab9b4e9cd4",
+  "voice#1": "b8e8afcb32208b40",
+  "voice#2": "a40d4073409a2705",
+  "voice#3": "4777d2c1251214c2",
+  "voice#4": "ac2fdd7245f436db",
+  "voice#5": "7bbdd4290054e601",
+  "voice#6": "df1f5dc8b6d21538",
+  "voice#7": "321cc76cff93aadb",
+  "voice#8": "4362249fb5f9616e"
+ },
+ "verdicts": [
+  {
+   "row": "B1",
+   "screen": "opening.bath",
+   "verdict": "PASS",
+   "line": "Some of us need that too.",
+   "why": "Ryan wants the bathroom, said out loud; not a sexual step, so no earlier canvas needed (his first canvas is this one and the hall)",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "65cecb4204fd2e05",
+    "facts": "ce853fd7984435f8",
+    "facts2": "be2a909e75218e29",
+    "all": "ce9a81f32f95986e"
+   },
+   "row_hash": "5276068df1ca6fa9",
+   "carried": false,
+   "pass": 1
+  },
+  {
+   "row": "B10",
+   "screen": "opening.bath",
+   "verdict": "PASS",
+   "line": "you get the bathroom a second before Ryan, your step-brother, opens his door",
+   "why": "shown once at 07:12 on all three paths; who_is_where: Ryan's room 7-7:12, the hall 7:12-7:25, so his door and his knock from the hall hold; no past claimed",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "65cecb4204fd2e05",
+    "facts": "ce853fd7984435f8",
+    "facts2": "be2a909e75218e29",
+    "all": "ce9a81f32f95986e"
+   },
+   "row_hash": "c1c0e2ac2588a579",
+   "carried": false,
+   "pass": 1
+  },
+  {
+   "row": "B11",
+   "screen": "opening.bath",
+   "verdict": "N/A",
+   "line": "Open the door (8 min)",
+   "why": "no solo button on this screen; the shower is prose inside the screen, the only button leads to the hall",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "65cecb4204fd2e05",
+    "facts": "ce853fd7984435f8",
+    "facts2": "be2a909e75218e29",
+    "all": "ce9a81f32f95986e"
+   },
+   "row_hash": "1e252efd0904a971",
+   "carried": false,
+   "pass": 1
+  },
+  {
+   "row": "B12",
+   "screen": "opening.bath",
+   "verdict": "PASS",
+   "line": "It hits your nipples cold, and they go hard.",
+   "why": "her body named (nipples, tits, stomach, thighs); price/not-yet is the bolt that doesn't hold and the small towel; his reaction lands on the next screen (opening.hall), P13's",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "65cecb4204fd2e05",
+    "facts": "ce853fd7984435f8",
+    "facts2": "be2a909e75218e29",
+    "all": "ce9a81f32f95986e"
+   },
+   "row_hash": "fd109745c67b71d7",
+   "carried": false,
+   "pass": 1
+  },
+  {
+   "row": "B13",
+   "screen": "opening.bath",
+   "verdict": "PASS",
+   "line": "let it run down your neck, over your tits, down your stomach and between your thighs",
+   "why": "the shower stays on her body and has a picture of her right after (body/opening_shower_t4)",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "65cecb4204fd2e05",
+    "facts": "ce853fd7984435f8",
+    "facts2": "be2a909e75218e29",
+    "all": "ce9a81f32f95986e"
+   },
+   "row_hash": "aaf6518b64dcce55",
+   "carried": false,
+   "pass": 1
+  },
+  {
+   "row": "B2",
+   "screen": "opening.bath",
+   "verdict": "PASS",
+   "line": "You strip and step in before it's warm.",
+   "why": "first canvas with Ryan; the shower goes further than the old 'You give yourself five minutes.': she is bare on screen with a picture",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "65cecb4204fd2e05",
+    "facts": "ce853fd7984435f8",
+    "facts2": "be2a909e75218e29",
+    "all": "ce9a81f32f95986e"
+   },
+   "row_hash": "4d9f2ebbce9a39cc",
+   "carried": false,
+   "pass": 1
+  },
+  {
+   "row": "B3",
+   "screen": "opening.bath",
+   "verdict": "PASS",
+   "line": "You grab the towel off the rail. It's the small one.",
+   "why": "points at the hall: the small towel and Ryan waiting outside",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "65cecb4204fd2e05",
+    "facts": "ce853fd7984435f8",
+    "facts2": "be2a909e75218e29",
+    "all": "ce9a81f32f95986e"
+   },
+   "row_hash": "4d1fce1c4523b5d4",
+   "carried": false,
+   "pass": 1
+  },
+  {
+   "row": "B4",
+   "screen": "opening.bath",
+   "verdict": "PASS",
+   "line": "Your heart jumps.",
+   "why": "stage 0-1: things happen to her (cold water, the fist) and she reacts on her body; no act chosen, no italic thought",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "65cecb4204fd2e05",
+    "facts": "ce853fd7984435f8",
+    "facts2": "be2a909e75218e29",
+    "all": "ce9a81f32f95986e"
+   },
+   "row_hash": "ced37cb0de6e7202",
+   "carried": false,
+   "pass": 1
+  },
+  {
+   "row": "B5",
+   "screen": "opening.bath",
+   "verdict": "PASS",
+   "line": "Then a fist bangs on the door.",
+   "why": "Ryan reacts to her taking the bathroom",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "65cecb4204fd2e05",
+    "facts": "ce853fd7984435f8",
+    "facts2": "be2a909e75218e29",
+    "all": "ce9a81f32f95986e"
+   },
+   "row_hash": "efcbd1ac6a95e2f2",
+   "carried": false,
+   "pass": 1
+  },
+  {
+   "row": "B6",
+   "screen": "opening.bath",
+   "verdict": "N/A",
+   "line": "Open the door (8 min)",
+   "why": "no offer on this screen; one button, no no to write",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "65cecb4204fd2e05",
+    "facts": "ce853fd7984435f8",
+    "facts2": "be2a909e75218e29",
+    "all": "ce9a81f32f95986e"
+   },
+   "row_hash": "0e32092e9fe64f2c",
+   "carried": false,
+   "pass": 1
+  },
+  {
+   "row": "B7",
+   "screen": "opening.bath",
+   "verdict": "PASS",
+   "line": "Your shoulders drop for the first time all morning.",
+   "why": "not marked explicit; the body beat's last sentence still stays on her body (her shoulders), no pivot to meaning",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "65cecb4204fd2e05",
+    "facts": "ce853fd7984435f8",
+    "facts2": "be2a909e75218e29",
+    "all": "ce9a81f32f95986e"
+   },
+   "row_hash": "cef53154cc971fef",
+   "carried": false,
+   "pass": 1
+  },
+  {
+   "row": "B8",
+   "screen": "opening.bath",
+   "verdict": "PASS",
+   "line": "You strip ... You grab the towel off the rail.",
+   "why": "no numbers; undressing backed by the act; the towel is prose only by LO's waiver (NOTES 2026-11-23: 'the towel in the opening (screens 4b-6) is prose only')",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "65cecb4204fd2e05",
+    "facts": "ce853fd7984435f8",
+    "facts2": "be2a909e75218e29",
+    "all": "ce9a81f32f95986e"
+   },
+   "row_hash": "80d415cf08e0ebfe",
+   "carried": false,
+   "pass": 1
+  },
+  {
+   "row": "B9",
+   "screen": "opening.bath",
+   "verdict": "N/A",
+   "line": "Then a fist bangs on the door.",
+   "why": "PLAN declares no companion-as-rival here",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "65cecb4204fd2e05",
+    "facts": "ce853fd7984435f8",
+    "facts2": "be2a909e75218e29",
+    "all": "ce9a81f32f95986e"
+   },
+   "row_hash": "3b1fcdf549bcc558",
+   "carried": false,
+   "pass": 1
+  },
+  {
+   "row": "C109",
+   "screen": "opening.bath",
+   "verdict": "N/A",
+   "line": "Some of us need that too.",
+   "why": "Ryan's arc step and leak are the hall (screen 5), P13's; on a first scene the leak half is N/A and this screen is not where the step ends",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "65cecb4204fd2e05",
+    "facts": "ce853fd7984435f8",
+    "facts2": "be2a909e75218e29",
+    "all": "ce9a81f32f95986e"
+   },
+   "row_hash": "49d3511959e39479",
+   "carried": false,
+   "pass": 1
+  },
+  {
+   "row": "C1158",
+   "screen": "opening.bath",
+   "verdict": "PASS",
+   "line": "You strip and step in before it's warm.",
+   "why": "undressing in the act is backed by the act; no garment named; the towel is LO-waived prose only on screens 4b-6",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "65cecb4204fd2e05",
+    "facts": "ce853fd7984435f8",
+    "facts2": "be2a909e75218e29",
+    "all": "ce9a81f32f95986e"
+   },
+   "row_hash": "67a384f4d08cf884",
+   "carried": false,
+   "pass": 1
+  },
+  {
+   "row": "C1234",
+   "screen": "opening.bath",
+   "verdict": "PASS",
+   "line": "pool_dir = \"body/opening_shower_t4\", pool = 1",
+   "why": "the clip sits right after the shower paragraph, the beat being read",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "65cecb4204fd2e05",
+    "facts": "ce853fd7984435f8",
+    "facts2": "be2a909e75218e29",
+    "all": "ce9a81f32f95986e"
+   },
+   "row_hash": "7dc492e03732757e",
+   "carried": false,
+   "pass": 1
+  },
+  {
+   "row": "C1238",
+   "screen": "opening.bath",
+   "verdict": "PASS",
+   "line": "eyes shut, head tipped back",
+   "why": "matches 'with your eyes shut and let it run down'; one visit only",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "65cecb4204fd2e05",
+    "facts": "ce853fd7984435f8",
+    "facts2": "be2a909e75218e29",
+    "all": "ce9a81f32f95986e"
+   },
+   "row_hash": "af95eb45b0bdc9db",
+   "carried": false,
+   "pass": 1
+  },
+  {
+   "row": "C1249",
+   "screen": "opening.bath",
+   "verdict": "N/A",
+   "line": "pool_dir = \"body/opening_shower_t4\", pool = 1",
+   "why": "not a place's picture",
+   "cause": null,
+   "note": true,
+   "screen_hash": {
+    "text": "65cecb4204fd2e05",
+    "facts": "ce853fd7984435f8",
+    "facts2": "be2a909e75218e29",
+    "all": "ce9a81f32f95986e"
+   },
+   "row_hash": "604706399d2f1194",
+   "carried": false,
+   "pass": 1
+  },
+  {
+   "row": "C1250",
+   "screen": "opening.bath",
+   "verdict": "N/A",
+   "line": "pool_dir = \"body/opening_shower_t4\", pool = 1",
+   "why": "not a room card; a body moment",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "65cecb4204fd2e05",
+    "facts": "ce853fd7984435f8",
+    "facts2": "be2a909e75218e29",
+    "all": "ce9a81f32f95986e"
+   },
+   "row_hash": "8384cc6bcbd67c07",
+   "carried": false,
+   "pass": 1
+  },
+  {
+   "row": "C1255",
+   "screen": "opening.bath",
+   "verdict": "PASS",
+   "line": "pool_dir = \"body/opening_shower_t4\", pool = 1",
+   "why": "one block, its pool_dir used nowhere else in 7_final_game.toml (one bath node now serves all three answers)",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "65cecb4204fd2e05",
+    "facts": "ce853fd7984435f8",
+    "facts2": "be2a909e75218e29",
+    "all": "ce9a81f32f95986e"
+   },
+   "row_hash": "d81893b9077b4b53",
+   "carried": false,
+   "pass": 1
+  },
+  {
+   "row": "C1261",
+   "screen": "opening.bath",
+   "verdict": "PASS",
+   "line": "pool_dir = \"body/opening_shower_t4\", pool = 1",
+   "why": "spent where the player wants to look: her bare in the shower",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "65cecb4204fd2e05",
+    "facts": "ce853fd7984435f8",
+    "facts2": "be2a909e75218e29",
+    "all": "ce9a81f32f95986e"
+   },
+   "row_hash": "6a661c60639de8be",
+   "carried": false,
+   "pass": 1
+  },
+  {
+   "row": "C1262",
+   "screen": "opening.bath",
+   "verdict": "PASS",
+   "line": "Your shoulders drop for the first time all morning.",
+   "why": "picture right after the line that says her body",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "65cecb4204fd2e05",
+    "facts": "ce853fd7984435f8",
+    "facts2": "be2a909e75218e29",
+    "all": "ce9a81f32f95986e"
+   },
+   "row_hash": "2946d2fe0b7dc28f",
+   "carried": false,
+   "pass": 1
+  },
+  {
+   "row": "C1265",
+   "screen": "opening.bath",
+   "verdict": "PASS",
+   "line": "pool_dir = \"body/opening_shower_t4\", pool = 1",
+   "why": "a body moment, not a chore; the exception applies",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "65cecb4204fd2e05",
+    "facts": "ce853fd7984435f8",
+    "facts2": "be2a909e75218e29",
+    "all": "ce9a81f32f95986e"
+   },
+   "row_hash": "00b79725344762be",
+   "carried": false,
+   "pass": 1
+  },
+  {
+   "row": "C1267",
+   "screen": "opening.bath",
+   "verdict": "PASS",
+   "line": "pool_dir = \"body/opening_shower_t4\", pool = 1",
+   "why": "the picture gives her bare body under water, which the words can't",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "65cecb4204fd2e05",
+    "facts": "ce853fd7984435f8",
+    "facts2": "be2a909e75218e29",
+    "all": "ce9a81f32f95986e"
+   },
+   "row_hash": "6bafcadf3d586d5a",
+   "carried": false,
+   "pass": 1
+  },
+  {
+   "row": "C1274",
+   "screen": "opening.bath",
+   "verdict": "PASS",
+   "line": "body/opening_shower_t4",
+   "why": "_t4, she's bare",
+   "cause": null,
+   "note": true,
+   "screen_hash": {
+    "text": "65cecb4204fd2e05",
+    "facts": "ce853fd7984435f8",
+    "facts2": "be2a909e75218e29",
+    "all": "ce9a81f32f95986e"
+   },
+   "row_hash": "ca72df83c67acc75",
+   "carried": false,
+   "pass": 1
+  },
+  {
+   "row": "C1275",
+   "screen": "opening.bath",
+   "verdict": "PASS",
+   "line": "woman 18 shower water running down body gif",
+   "why": "water runs, so gif; 'gif' in both searches",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "65cecb4204fd2e05",
+    "facts": "ce853fd7984435f8",
+    "facts2": "be2a909e75218e29",
+    "all": "ce9a81f32f95986e"
+   },
+   "row_hash": "5c2a05d547732e4b",
+   "carried": false,
+   "pass": 1
+  },
+  {
+   "row": "C1277",
+   "screen": "opening.bath",
+   "verdict": "PASS",
+   "line": "in a small family bathroom shower",
+   "why": "the place is named",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "65cecb4204fd2e05",
+    "facts": "ce853fd7984435f8",
+    "facts2": "be2a909e75218e29",
+    "all": "ce9a81f32f95986e"
+   },
+   "row_hash": "2b934524a49c49e9",
+   "carried": false,
+   "pass": 1
+  },
+  {
+   "row": "C1278",
+   "screen": "opening.bath",
+   "verdict": "PASS",
+   "line": "A woman of 18",
+   "why": "age given, matches 'You're eighteen'",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "65cecb4204fd2e05",
+    "facts": "ce853fd7984435f8",
+    "facts2": "be2a909e75218e29",
+    "all": "ce9a81f32f95986e"
+   },
+   "row_hash": "a511d81564cef526",
+   "carried": false,
+   "pass": 1
+  },
+  {
+   "row": "C1279",
+   "screen": "opening.bath",
+   "verdict": "N/A",
+   "line": "pool_dir = \"body/opening_shower_t4\", pool = 1",
+   "why": "no mirror",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "65cecb4204fd2e05",
+    "facts": "ce853fd7984435f8",
+    "facts2": "be2a909e75218e29",
+    "all": "ce9a81f32f95986e"
+   },
+   "row_hash": "9705ac6acfdcce30",
+   "carried": false,
+   "pass": 1
+  },
+  {
+   "row": "C1280",
+   "screen": "opening.bath",
+   "verdict": "PASS",
+   "line": "pool = 1",
+   "why": "one-time scene, pool 1",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "65cecb4204fd2e05",
+    "facts": "ce853fd7984435f8",
+    "facts2": "be2a909e75218e29",
+    "all": "ce9a81f32f95986e"
+   },
+   "row_hash": "a1ce22b0640c6eeb",
+   "carried": false,
+   "pass": 1
+  },
+  {
+   "row": "C1281",
+   "screen": "opening.bath",
+   "verdict": "N/A",
+   "line": "pool_dir = \"body/opening_shower_t4\", pool = 1",
+   "why": "not a look; she's alone",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "65cecb4204fd2e05",
+    "facts": "ce853fd7984435f8",
+    "facts2": "be2a909e75218e29",
+    "all": "ce9a81f32f95986e"
+   },
+   "row_hash": "f0ab213c3075f906",
+   "carried": false,
+   "pass": 1
+  },
+  {
+   "row": "C1284",
+   "screen": "opening.bath",
+   "verdict": "N/A",
+   "line": "pool_dir = \"body/opening_shower_t4\", pool = 1",
+   "why": "no walk-in",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "65cecb4204fd2e05",
+    "facts": "ce853fd7984435f8",
+    "facts2": "be2a909e75218e29",
+    "all": "ce9a81f32f95986e"
+   },
+   "row_hash": "d631d4c69f1d3b74",
+   "carried": false,
+   "pass": 1
+  },
+  {
+   "row": "C1604",
+   "screen": "opening.bath",
+   "verdict": "N/A",
+   "line": "Open the door (8 min)",
+   "why": "not the hand-over screen",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "65cecb4204fd2e05",
+    "facts": "ce853fd7984435f8",
+    "facts2": "be2a909e75218e29",
+    "all": "ce9a81f32f95986e"
+   },
+   "row_hash": "a4feff5e25645274",
+   "carried": false,
+   "pass": 1
+  },
+  {
+   "row": "C1609",
+   "screen": "opening.bath",
+   "verdict": "N/A",
+   "line": "Open the door (8 min)",
+   "why": "not the hand-over screen",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "65cecb4204fd2e05",
+    "facts": "ce853fd7984435f8",
+    "facts2": "be2a909e75218e29",
+    "all": "ce9a81f32f95986e"
+   },
+   "row_hash": "add0504418933607",
+   "carried": false,
+   "pass": 1
+  },
+  {
+   "row": "C1611",
+   "screen": "opening.bath",
+   "verdict": "PASS",
+   "line": "@player.nickname. Some of us need that too.",
+   "why": "one person at a time: only Ryan, and he speaks",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "65cecb4204fd2e05",
+    "facts": "ce853fd7984435f8",
+    "facts2": "be2a909e75218e29",
+    "all": "ce9a81f32f95986e"
+   },
+   "row_hash": "112c4a73c594ab87",
+   "carried": false,
+   "pass": 1
+  },
+  {
+   "row": "C1613",
+   "screen": "opening.bath",
+   "verdict": "N/A",
+   "line": "Upstairs, you get the bathroom",
+   "why": "not the first screen",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "65cecb4204fd2e05",
+    "facts": "ce853fd7984435f8",
+    "facts2": "be2a909e75218e29",
+    "all": "ce9a81f32f95986e"
+   },
+   "row_hash": "b50de590bf483f0a",
+   "carried": false,
+   "pass": 1
+  },
+  {
+   "row": "C1621",
+   "screen": "opening.bath",
+   "verdict": "N/A",
+   "line": "Open the door (8 min)",
+   "why": "not the hand-over screen",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "65cecb4204fd2e05",
+    "facts": "ce853fd7984435f8",
+    "facts2": "be2a909e75218e29",
+    "all": "ce9a81f32f95986e"
+   },
+   "row_hash": "11b24e4fe2da4e05",
+   "carried": false,
+   "pass": 1
+  },
+  {
+   "row": "C1626",
+   "screen": "opening.bath",
+   "verdict": "PASS",
+   "line": "(117 words)",
+   "why": "117 words, under the field's 144 and the ~150 ceiling; check.py length GREEN",
+   "cause": null,
+   "note": true,
+   "screen_hash": {
+    "text": "65cecb4204fd2e05",
+    "facts": "ce853fd7984435f8",
+    "facts2": "be2a909e75218e29",
+    "all": "ce9a81f32f95986e"
+   },
+   "row_hash": "e2077b8b174e635b",
+   "carried": false,
+   "pass": 1
+  },
+  {
+   "row": "C1631",
+   "screen": "opening.bath",
+   "verdict": "N/A",
+   "line": "Open the door (8 min)",
+   "why": "not the hand-over screen",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "65cecb4204fd2e05",
+    "facts": "ce853fd7984435f8",
+    "facts2": "be2a909e75218e29",
+    "all": "ce9a81f32f95986e"
+   },
+   "row_hash": "45d1f77e233e111c",
+   "carried": false,
+   "pass": 1
+  },
+  {
+   "row": "C1637",
+   "screen": "opening.bath",
+   "verdict": "PASS",
+   "line": "(117 words)",
+   "why": "Ryan first speaks here; 117 words, under 150",
+   "cause": null,
+   "note": true,
+   "screen_hash": {
+    "text": "65cecb4204fd2e05",
+    "facts": "ce853fd7984435f8",
+    "facts2": "be2a909e75218e29",
+    "all": "ce9a81f32f95986e"
+   },
+   "row_hash": "22f779094c1d6cc4",
+   "carried": false,
+   "pass": 1
+  },
+  {
+   "row": "C166",
+   "screen": "opening.bath",
+   "verdict": "N/A",
+   "line": "Open the door (8 min)",
+   "why": "no no possible on this screen",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "65cecb4204fd2e05",
+    "facts": "ce853fd7984435f8",
+    "facts2": "be2a909e75218e29",
+    "all": "ce9a81f32f95986e"
+   },
+   "row_hash": "8630b1e1337d63f3",
+   "carried": false,
+   "pass": 1
+  },
+  {
+   "row": "C239",
+   "screen": "opening.bath",
+   "verdict": "N/A",
+   "line": "over your tits",
+   "why": "not an explicit beat; body named in real terms anyway (tits, nipples)",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "65cecb4204fd2e05",
+    "facts": "ce853fd7984435f8",
+    "facts2": "be2a909e75218e29",
+    "all": "ce9a81f32f95986e"
+   },
+   "row_hash": "0031533ec82c4401",
+   "carried": false,
+   "pass": 1
+  },
+  {
+   "row": "C248",
+   "screen": "opening.bath",
+   "verdict": "N/A",
+   "line": "Your shoulders drop for the first time all morning.",
+   "why": "not an explicit beat (stage-1 body moment, unmarked); its last sentence still stays on her body",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "65cecb4204fd2e05",
+    "facts": "ce853fd7984435f8",
+    "facts2": "be2a909e75218e29",
+    "all": "ce9a81f32f95986e"
+   },
+   "row_hash": "78aa710fc99207b5",
+   "carried": false,
+   "pass": 1
+  },
+  {
+   "row": "C249",
+   "screen": "opening.bath",
+   "verdict": "N/A",
+   "line": "Your shoulders drop for the first time all morning.",
+   "why": "not an explicit beat (stage-1 body moment, unmarked); its last sentence still stays on her body",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "65cecb4204fd2e05",
+    "facts": "ce853fd7984435f8",
+    "facts2": "be2a909e75218e29",
+    "all": "ce9a81f32f95986e"
+   },
+   "row_hash": "1e789c98e52ef448",
+   "carried": false,
+   "pass": 1
+  },
+  {
+   "row": "C252",
+   "screen": "opening.bath",
+   "verdict": "N/A",
+   "line": "(game-wide)",
+   "why": "a game-wide share, read at release, not on one screen",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "65cecb4204fd2e05",
+    "facts": "ce853fd7984435f8",
+    "facts2": "be2a909e75218e29",
+    "all": "ce9a81f32f95986e"
+   },
+   "row_hash": "aa35910e35e29b2d",
+   "carried": false,
+   "pass": 1
+  },
+  {
+   "row": "C254",
+   "screen": "opening.bath",
+   "verdict": "N/A",
+   "line": "Your shoulders drop for the first time all morning.",
+   "why": "not an explicit beat (stage-1 body moment, unmarked); its last sentence still stays on her body",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "65cecb4204fd2e05",
+    "facts": "ce853fd7984435f8",
+    "facts2": "be2a909e75218e29",
+    "all": "ce9a81f32f95986e"
+   },
+   "row_hash": "2d3aa3b699bb3a78",
+   "carried": false,
+   "pass": 1
+  },
+  {
+   "row": "C255",
+   "screen": "opening.bath",
+   "verdict": "N/A",
+   "line": "(game-wide)",
+   "why": "a game-wide share, read at release, not on one screen",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "65cecb4204fd2e05",
+    "facts": "ce853fd7984435f8",
+    "facts2": "be2a909e75218e29",
+    "all": "ce9a81f32f95986e"
+   },
+   "row_hash": "41543c0b01047eb6",
+   "carried": false,
+   "pass": 1
+  },
+  {
+   "row": "C256",
+   "screen": "opening.bath",
+   "verdict": "N/A",
+   "line": "(game-wide)",
+   "why": "a game-wide share, read at release, not on one screen",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "65cecb4204fd2e05",
+    "facts": "ce853fd7984435f8",
+    "facts2": "be2a909e75218e29",
+    "all": "ce9a81f32f95986e"
+   },
+   "row_hash": "39401d1f8b2ac714",
+   "carried": false,
+   "pass": 1
+  },
+  {
+   "row": "C276",
+   "screen": "opening.bath",
+   "verdict": "N/A",
+   "line": "Your shoulders drop for the first time all morning.",
+   "why": "not an explicit beat (stage-1 body moment, unmarked); its last sentence still stays on her body",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "65cecb4204fd2e05",
+    "facts": "ce853fd7984435f8",
+    "facts2": "be2a909e75218e29",
+    "all": "ce9a81f32f95986e"
+   },
+   "row_hash": "803a558113f90fbd",
+   "carried": false,
+   "pass": 1
+  },
+  {
+   "row": "C284",
+   "screen": "opening.bath",
+   "verdict": "PASS",
+   "line": "Then a fist bangs on the door.",
+   "why": "things happen to her; nothing she chooses sexually",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "65cecb4204fd2e05",
+    "facts": "ce853fd7984435f8",
+    "facts2": "be2a909e75218e29",
+    "all": "ce9a81f32f95986e"
+   },
+   "row_hash": "69d227fcb6314994",
+   "carried": false,
+   "pass": 1
+  },
+  {
+   "row": "C285",
+   "screen": "opening.bath",
+   "verdict": "N/A",
+   "line": "(the plan)",
+   "why": "note on the meter table; nothing here sets a stage",
+   "cause": null,
+   "note": true,
+   "screen_hash": {
+    "text": "65cecb4204fd2e05",
+    "facts": "ce853fd7984435f8",
+    "facts2": "be2a909e75218e29",
+    "all": "ce9a81f32f95986e"
+   },
+   "row_hash": "a28a84cd5f58df59",
+   "carried": false,
+   "pass": 1
+  },
+  {
+   "row": "C286",
+   "screen": "opening.bath",
+   "verdict": "PASS",
+   "line": "You strip and step in",
+   "why": "stage 1: her body moment and an accident-shaped interruption",
+   "cause": null,
+   "note": true,
+   "screen_hash": {
+    "text": "65cecb4204fd2e05",
+    "facts": "ce853fd7984435f8",
+    "facts2": "be2a909e75218e29",
+    "all": "ce9a81f32f95986e"
+   },
+   "row_hash": "04450056a0da072c",
+   "carried": false,
+   "pass": 1
+  },
+  {
+   "row": "C287",
+   "screen": "opening.bath",
+   "verdict": "N/A",
+   "line": "(stage)",
+   "why": "release 1 sits at stage 1; nothing of this stage shows",
+   "cause": null,
+   "note": true,
+   "screen_hash": {
+    "text": "65cecb4204fd2e05",
+    "facts": "ce853fd7984435f8",
+    "facts2": "be2a909e75218e29",
+    "all": "ce9a81f32f95986e"
+   },
+   "row_hash": "33f0b998a82d37de",
+   "carried": false,
+   "pass": 1
+  },
+  {
+   "row": "C288",
+   "screen": "opening.bath",
+   "verdict": "N/A",
+   "line": "(stage)",
+   "why": "release 1 sits at stage 1; nothing of this stage shows",
+   "cause": null,
+   "note": true,
+   "screen_hash": {
+    "text": "65cecb4204fd2e05",
+    "facts": "ce853fd7984435f8",
+    "facts2": "be2a909e75218e29",
+    "all": "ce9a81f32f95986e"
+   },
+   "row_hash": "820920d70a5f860a",
+   "carried": false,
+   "pass": 1
+  },
+  {
+   "row": "C289",
+   "screen": "opening.bath",
+   "verdict": "N/A",
+   "line": "(stage)",
+   "why": "release 1 sits at stage 1; nothing of this stage shows",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "65cecb4204fd2e05",
+    "facts": "ce853fd7984435f8",
+    "facts2": "be2a909e75218e29",
+    "all": "ce9a81f32f95986e"
+   },
+   "row_hash": "b49633d1ad76857e",
+   "carried": false,
+   "pass": 1
+  },
+  {
+   "row": "C291",
+   "screen": "opening.bath",
+   "verdict": "PASS",
+   "line": "You strip and step in before it's warm.",
+   "why": "what shows (her bare, alone) sets a low level",
+   "cause": null,
+   "note": true,
+   "screen_hash": {
+    "text": "65cecb4204fd2e05",
+    "facts": "ce853fd7984435f8",
+    "facts2": "be2a909e75218e29",
+    "all": "ce9a81f32f95986e"
+   },
+   "row_hash": "1345b94e89dfc2dc",
+   "carried": false,
+   "pass": 1
+  },
+  {
+   "row": "C296",
+   "screen": "opening.bath",
+   "verdict": "PASS",
+   "line": "You strip and step in",
+   "why": "the first shower opens low: alone, no one sees",
+   "cause": null,
+   "note": true,
+   "screen_hash": {
+    "text": "65cecb4204fd2e05",
+    "facts": "ce853fd7984435f8",
+    "facts2": "be2a909e75218e29",
+    "all": "ce9a81f32f95986e"
+   },
+   "row_hash": "39b97c524d1d887d",
+   "carried": false,
+   "pass": 1
+  },
+  {
+   "row": "C297",
+   "screen": "opening.bath",
+   "verdict": "PASS",
+   "line": "Then a fist bangs on the door.",
+   "why": "Ryan, who she lives with, reached by accident first",
+   "cause": null,
+   "note": true,
+   "screen_hash": {
+    "text": "65cecb4204fd2e05",
+    "facts": "ce853fd7984435f8",
+    "facts2": "be2a909e75218e29",
+    "all": "ce9a81f32f95986e"
+   },
+   "row_hash": "f4d1f119d6f2bea9",
+   "carried": false,
+   "pass": 1
+  },
+  {
+   "row": "C311",
+   "screen": "opening.bath",
+   "verdict": "PASS",
+   "line": "It hits your nipples cold, and they go hard.",
+   "why": "part of her body named; price/not-yet: the bolt that doesn't hold, the small towel; hook: the fist; his reaction is the hall's (P13)",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "65cecb4204fd2e05",
+    "facts": "ce853fd7984435f8",
+    "facts2": "be2a909e75218e29",
+    "all": "ce9a81f32f95986e"
+   },
+   "row_hash": "0df85bbf34aa1cdf",
+   "carried": false,
+   "pass": 1
+  },
+  {
+   "row": "C314",
+   "screen": "opening.bath",
+   "verdict": "PASS",
+   "line": "let it run down your neck, over your tits",
+   "why": "not talk only: the screen is on her body",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "65cecb4204fd2e05",
+    "facts": "ce853fd7984435f8",
+    "facts2": "be2a909e75218e29",
+    "all": "ce9a81f32f95986e"
+   },
+   "row_hash": "47808896707b87ec",
+   "carried": false,
+   "pass": 1
+  },
+  {
+   "row": "C327",
+   "screen": "opening.bath",
+   "verdict": "PASS",
+   "line": "You stand under it with your eyes shut",
+   "why": "the bathroom is no longer one sentence; filled with her body at stage 1",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "65cecb4204fd2e05",
+    "facts": "ce853fd7984435f8",
+    "facts2": "be2a909e75218e29",
+    "all": "ce9a81f32f95986e"
+   },
+   "row_hash": "94cf3f1c37d54c7b",
+   "carried": false,
+   "pass": 1
+  },
+  {
+   "row": "C422",
+   "screen": "opening.bath",
+   "verdict": "PASS",
+   "line": "Open the door (8 min)",
+   "why": "says plainly what clicking does, with minutes",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "65cecb4204fd2e05",
+    "facts": "ce853fd7984435f8",
+    "facts2": "be2a909e75218e29",
+    "all": "ce9a81f32f95986e"
+   },
+   "row_hash": "8933f85010afbef7",
+   "carried": false,
+   "pass": 1
+  },
+  {
+   "row": "C442",
+   "screen": "opening.bath",
+   "verdict": "PASS",
+   "line": "You strip and step in before it's warm.",
+   "why": "says what happens plainly",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "65cecb4204fd2e05",
+    "facts": "ce853fd7984435f8",
+    "facts2": "be2a909e75218e29",
+    "all": "ce9a81f32f95986e"
+   },
+   "row_hash": "a2b07f40e1a9e908",
+   "carried": false,
+   "pass": 1
+  },
+  {
+   "row": "C447",
+   "screen": "opening.bath",
+   "verdict": "PASS",
+   "line": "Come on, I'm dying out here.",
+   "why": "Ryan's manner (complaining, casual, the nickname) held with his hall lines",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "65cecb4204fd2e05",
+    "facts": "ce853fd7984435f8",
+    "facts2": "be2a909e75218e29",
+    "all": "ce9a81f32f95986e"
+   },
+   "row_hash": "e3ca01ba145f4580",
+   "carried": false,
+   "pass": 1
+  },
+  {
+   "row": "C448",
+   "screen": "opening.bath",
+   "verdict": "PASS",
+   "line": "Ryan, your step-brother",
+   "why": "obvious on arrival: named with his role",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "65cecb4204fd2e05",
+    "facts": "ce853fd7984435f8",
+    "facts2": "be2a909e75218e29",
+    "all": "ce9a81f32f95986e"
+   },
+   "row_hash": "584dada6c379e3d8",
+   "carried": false,
+   "pass": 1
+  },
+  {
+   "row": "C449",
+   "screen": "opening.bath",
+   "verdict": "PASS",
+   "line": "over your tits, down your stomach and between your thighs",
+   "why": "the body is named and the bolt plus Ryan's door set the tension up, not buried; Ryan's look is named on the hall",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "65cecb4204fd2e05",
+    "facts": "ce853fd7984435f8",
+    "facts2": "be2a909e75218e29",
+    "all": "ce9a81f32f95986e"
+   },
+   "row_hash": "ac5932d70cd775a1",
+   "carried": false,
+   "pass": 1
+  },
+  {
+   "row": "C450",
+   "screen": "opening.bath",
+   "verdict": "N/A",
+   "line": "It's the small one.",
+   "why": "not the scene's last screen; the hall follows",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "65cecb4204fd2e05",
+    "facts": "ce853fd7984435f8",
+    "facts2": "be2a909e75218e29",
+    "all": "ce9a81f32f95986e"
+   },
+   "row_hash": "3eb18b4cefbe49d3",
+   "carried": false,
+   "pass": 1
+  },
+  {
+   "row": "C451",
+   "screen": "opening.bath",
+   "verdict": "PASS",
+   "line": "The bolt hasn't held in years ... the small one",
+   "why": "concrete detail: the bolt, the slow hot water, the rail, the small towel",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "65cecb4204fd2e05",
+    "facts": "ce853fd7984435f8",
+    "facts2": "be2a909e75218e29",
+    "all": "ce9a81f32f95986e"
+   },
+   "row_hash": "6b0fd679047fc9b8",
+   "carried": false,
+   "pass": 1
+  },
+  {
+   "row": "C460",
+   "screen": "opening.bath",
+   "verdict": "PASS",
+   "line": "a second before Ryan, your step-brother, opens his door",
+   "why": "true on all three paths at 07:12: Ryan's room row ends 7:12, hall row starts 7:12; 'first time all morning' follows the rent screen on every path; no past claimed",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "65cecb4204fd2e05",
+    "facts": "ce853fd7984435f8",
+    "facts2": "be2a909e75218e29",
+    "all": "ce9a81f32f95986e"
+   },
+   "row_hash": "beb5a109bde77305",
+   "carried": false,
+   "pass": 1
+  },
+  {
+   "row": "C461",
+   "screen": "opening.bath",
+   "verdict": "PASS",
+   "line": "The bolt hasn't held in years",
+   "why": "texture that can't clash; PLAN gives the bathroom no lock",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "65cecb4204fd2e05",
+    "facts": "ce853fd7984435f8",
+    "facts2": "be2a909e75218e29",
+    "all": "ce9a81f32f95986e"
+   },
+   "row_hash": "153b0804e686abae",
+   "carried": false,
+   "pass": 1
+  },
+  {
+   "row": "C519",
+   "screen": "opening.bath",
+   "verdict": "PASS",
+   "line": "(117 words)",
+   "why": "one job (the bathroom, then the interruption), under 150",
+   "cause": null,
+   "note": true,
+   "screen_hash": {
+    "text": "65cecb4204fd2e05",
+    "facts": "ce853fd7984435f8",
+    "facts2": "be2a909e75218e29",
+    "all": "ce9a81f32f95986e"
+   },
+   "row_hash": "ff5e8d6189f0899a",
+   "carried": false,
+   "pass": 1
+  },
+  {
+   "row": "C520",
+   "screen": "opening.bath",
+   "verdict": "PASS",
+   "line": "(117 words)",
+   "why": "the build-up step of the staged opening, one job, under ~150",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "65cecb4204fd2e05",
+    "facts": "ce853fd7984435f8",
+    "facts2": "be2a909e75218e29",
+    "all": "ce9a81f32f95986e"
+   },
+   "row_hash": "59faa2198bb751e1",
+   "carried": false,
+   "pass": 1
+  },
+  {
+   "row": "C593",
+   "screen": "opening.bath",
+   "verdict": "PASS",
+   "line": "@player.nickname.",
+   "why": "Ryan's term of address, nobody else's",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "65cecb4204fd2e05",
+    "facts": "ce853fd7984435f8",
+    "facts2": "be2a909e75218e29",
+    "all": "ce9a81f32f95986e"
+   },
+   "row_hash": "52e42cdd69c8f10e",
+   "carried": false,
+   "pass": 1
+  },
+  {
+   "row": "C601",
+   "screen": "opening.bath",
+   "verdict": "N/A",
+   "line": "Then a fist bangs on the door.",
+   "why": "Ryan doesn't see her here; his leak and cover are on opening.hall",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "65cecb4204fd2e05",
+    "facts": "ce853fd7984435f8",
+    "facts2": "be2a909e75218e29",
+    "all": "ce9a81f32f95986e"
+   },
+   "row_hash": "390111b08f596c8d",
+   "carried": false,
+   "pass": 1
+  },
+  {
+   "row": "C639",
+   "screen": "opening.bath",
+   "verdict": "N/A",
+   "line": "Open the door (8 min)",
+   "why": "no offer",
+   "cause": null,
+   "note": true,
+   "screen_hash": {
+    "text": "65cecb4204fd2e05",
+    "facts": "ce853fd7984435f8",
+    "facts2": "be2a909e75218e29",
+    "all": "ce9a81f32f95986e"
+   },
+   "row_hash": "a69f9998e41865b6",
+   "carried": false,
+   "pass": 1
+  },
+  {
+   "row": "C640",
+   "screen": "opening.bath",
+   "verdict": "N/A",
+   "line": "Open the door (8 min)",
+   "why": "no offer",
+   "cause": null,
+   "note": true,
+   "screen_hash": {
+    "text": "65cecb4204fd2e05",
+    "facts": "ce853fd7984435f8",
+    "facts2": "be2a909e75218e29",
+    "all": "ce9a81f32f95986e"
+   },
+   "row_hash": "6f4e735e01b53e5c",
+   "carried": false,
+   "pass": 1
+  },
+  {
+   "row": "C719",
+   "screen": "opening.bath",
+   "verdict": "PASS",
+   "line": "Open the door (8 min)",
+   "why": "no button claims to dress or undress; the strip is in the prose and backed by the act",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "65cecb4204fd2e05",
+    "facts": "ce853fd7984435f8",
+    "facts2": "be2a909e75218e29",
+    "all": "ce9a81f32f95986e"
+   },
+   "row_hash": "6ccb2b21fcd775af",
+   "carried": false,
+   "pass": 1
+  },
+  {
+   "row": "C782",
+   "screen": "opening.bath",
+   "verdict": "N/A",
+   "line": "Open the door (8 min)",
+   "why": "no solo act opens in release 1; no second link offered",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "65cecb4204fd2e05",
+    "facts": "ce853fd7984435f8",
+    "facts2": "be2a909e75218e29",
+    "all": "ce9a81f32f95986e"
+   },
+   "row_hash": "4c4d4a94c717f70f",
+   "carried": false,
+   "pass": 1
+  },
+  {
+   "row": "L119",
+   "screen": "opening.bath",
+   "verdict": "PASS",
+   "line": "pool = 1",
+   "why": "pool written, not the default 4",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "65cecb4204fd2e05",
+    "facts": "ce853fd7984435f8",
+    "facts2": "be2a909e75218e29",
+    "all": "ce9a81f32f95986e"
+   },
+   "row_hash": "18ef41501e0b23c3",
+   "carried": false,
+   "pass": 1
+  },
+  {
+   "row": "L120",
+   "screen": "opening.bath",
+   "verdict": "N/A",
+   "line": "pool_dir = \"body/opening_shower_t4\", pool = 1",
+   "why": "no look, no two-person frame: 'No one else in frame.'",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "65cecb4204fd2e05",
+    "facts": "ce853fd7984435f8",
+    "facts2": "be2a909e75218e29",
+    "all": "ce9a81f32f95986e"
+   },
+   "row_hash": "22461386046b4605",
+   "carried": false,
+   "pass": 1
+  },
+  {
+   "row": "L121",
+   "screen": "opening.bath",
+   "verdict": "PASS",
+   "line": "pool_dir = \"body/opening_shower_t4\", pool = 1",
+   "why": "a body moment gets its picture",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "65cecb4204fd2e05",
+    "facts": "ce853fd7984435f8",
+    "facts2": "be2a909e75218e29",
+    "all": "ce9a81f32f95986e"
+   },
+   "row_hash": "cddfa55c18e5c7b7",
+   "carried": false,
+   "pass": 1
+  },
+  {
+   "row": "L125",
+   "screen": "opening.bath",
+   "verdict": "PASS",
+   "line": "pool_dir = \"body/opening_shower_t4\", pool = 1",
+   "why": "mid-screen after the body line, not at the top before the payoff",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "65cecb4204fd2e05",
+    "facts": "ce853fd7984435f8",
+    "facts2": "be2a909e75218e29",
+    "all": "ce9a81f32f95986e"
+   },
+   "row_hash": "259dda0a0553e751",
+   "carried": false,
+   "pass": 1
+  },
+  {
+   "row": "L163",
+   "screen": "opening.bath",
+   "verdict": "N/A",
+   "line": "(no rule change)",
+   "why": "no voice rule removed",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "65cecb4204fd2e05",
+    "facts": "ce853fd7984435f8",
+    "facts2": "be2a909e75218e29",
+    "all": "ce9a81f32f95986e"
+   },
+   "row_hash": "00a617ab9b4e9cd4",
+   "carried": false,
+   "pass": 1
+  },
+  {
+   "row": "L71",
+   "screen": "opening.bath",
+   "verdict": "PASS",
+   "line": "It hits your nipples cold, and they go hard.",
+   "why": "it happens to her; she chooses no act",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "65cecb4204fd2e05",
+    "facts": "ce853fd7984435f8",
+    "facts2": "be2a909e75218e29",
+    "all": "ce9a81f32f95986e"
+   },
+   "row_hash": "20d25a1f144ab051",
+   "carried": false,
+   "pass": 1
+  },
+  {
+   "row": "L97",
+   "screen": "opening.bath",
+   "verdict": "N/A",
+   "line": "Then a fist bangs on the door.",
+   "why": "not a walk-in; Ryan stays outside",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "65cecb4204fd2e05",
+    "facts": "ce853fd7984435f8",
+    "facts2": "be2a909e75218e29",
+    "all": "ce9a81f32f95986e"
+   },
+   "row_hash": "2bfb9527e76ad93b",
+   "carried": false,
+   "pass": 1
+  },
+  {
+   "row": "body-moments#1",
+   "screen": "opening.bath",
+   "verdict": "PASS",
+   "line": "Media: 1 spot, a body moment",
+   "why": "card names it a body moment",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "65cecb4204fd2e05",
+    "facts": "ce853fd7984435f8",
+    "facts2": "be2a909e75218e29",
+    "all": "ce9a81f32f95986e"
+   },
+   "row_hash": "eccc0ab561a445d0",
+   "carried": false,
+   "pass": 1
+  },
+  {
+   "row": "body-moments#2",
+   "screen": "opening.bath",
+   "verdict": "PASS",
+   "line": "It hits your nipples cold, and they go hard.",
+   "why": "named parts (nipples, tits, stomach, thighs) and what she feels (cold, heat, shoulders drop); it happens to her",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "65cecb4204fd2e05",
+    "facts": "ce853fd7984435f8",
+    "facts2": "be2a909e75218e29",
+    "all": "ce9a81f32f95986e"
+   },
+   "row_hash": "3d0e66c4ff2e35e8",
+   "carried": false,
+   "pass": 1
+  },
+  {
+   "row": "body-moments#3",
+   "screen": "opening.bath",
+   "verdict": "PASS",
+   "line": "You strip and step in before it's warm.",
+   "why": "the shower is written, not skipped",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "65cecb4204fd2e05",
+    "facts": "ce853fd7984435f8",
+    "facts2": "be2a909e75218e29",
+    "all": "ce9a81f32f95986e"
+   },
+   "row_hash": "31555e41e42a56f4",
+   "carried": false,
+   "pass": 1
+  },
+  {
+   "row": "body-moments#4",
+   "screen": "opening.bath",
+   "verdict": "PASS",
+   "line": "pool_dir = \"body/opening_shower_t4\", pool = 1",
+   "why": "one picture of her right after the body line; gif; _t4; place named",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "65cecb4204fd2e05",
+    "facts": "ce853fd7984435f8",
+    "facts2": "be2a909e75218e29",
+    "all": "ce9a81f32f95986e"
+   },
+   "row_hash": "777373934b40b8fe",
+   "carried": false,
+   "pass": 1
+  },
+  {
+   "row": "body-moments#5",
+   "screen": "opening.bath",
+   "verdict": "PASS",
+   "line": "pool = 1",
+   "why": "one-time scene, pool 1",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "65cecb4204fd2e05",
+    "facts": "ce853fd7984435f8",
+    "facts2": "be2a909e75218e29",
+    "all": "ce9a81f32f95986e"
+   },
+   "row_hash": "57bdf33c1e490daf",
+   "carried": false,
+   "pass": 1
+  },
+  {
+   "row": "body-moments#6",
+   "screen": "opening.bath",
+   "verdict": "PASS",
+   "line": "Open the door (8 min)",
+   "why": "the button sets met_ryan and ryan_hall_seen only; no meter moves",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "65cecb4204fd2e05",
+    "facts": "ce853fd7984435f8",
+    "facts2": "be2a909e75218e29",
+    "all": "ce9a81f32f95986e"
+   },
+   "row_hash": "61af55b717f75400",
+   "carried": false,
+   "pass": 1
+  },
+  {
+   "row": "body-moments#7",
+   "screen": "opening.bath",
+   "verdict": "PASS",
+   "line": "Then a fist bangs on the door.",
+   "why": "touching and the walk-in stay out; the moment's body is written",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "65cecb4204fd2e05",
+    "facts": "ce853fd7984435f8",
+    "facts2": "be2a909e75218e29",
+    "all": "ce9a81f32f95986e"
+   },
+   "row_hash": "a541004c4012d217",
+   "carried": false,
+   "pass": 1
+  },
+  {
+   "row": "heat#1",
+   "screen": "opening.bath",
+   "verdict": "N/A",
+   "line": "(game-wide)",
+   "why": "a game-wide share, read at release",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "65cecb4204fd2e05",
+    "facts": "ce853fd7984435f8",
+    "facts2": "be2a909e75218e29",
+    "all": "ce9a81f32f95986e"
+   },
+   "row_hash": "a9d1b7304239e330",
+   "carried": false,
+   "pass": 1
+  },
+  {
+   "row": "heat#2",
+   "screen": "opening.bath",
+   "verdict": "PASS",
+   "line": "You strip and step in",
+   "why": "what shows (her bare, alone) sets a low level",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "65cecb4204fd2e05",
+    "facts": "ce853fd7984435f8",
+    "facts2": "be2a909e75218e29",
+    "all": "ce9a81f32f95986e"
+   },
+   "row_hash": "e686b407357d5dfe",
+   "carried": false,
+   "pass": 1
+  },
+  {
+   "row": "heat#3",
+   "screen": "opening.bath",
+   "verdict": "N/A",
+   "line": "Open the door (8 min)",
+   "why": "no offer, so no choice/no to write",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "65cecb4204fd2e05",
+    "facts": "ce853fd7984435f8",
+    "facts2": "be2a909e75218e29",
+    "all": "ce9a81f32f95986e"
+   },
+   "row_hash": "51c788f9cf88c547",
+   "carried": false,
+   "pass": 1
+  },
+  {
+   "row": "heat#4",
+   "screen": "opening.bath",
+   "verdict": "PASS",
+   "line": "Then a fist bangs on the door.",
+   "why": "stage 1 only: her body moment, nothing she does sexually, no meter",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "65cecb4204fd2e05",
+    "facts": "ce853fd7984435f8",
+    "facts2": "be2a909e75218e29",
+    "all": "ce9a81f32f95986e"
+   },
+   "row_hash": "02f78ddf483ec147",
+   "carried": false,
+   "pass": 1
+  },
+  {
+   "row": "heat#5",
+   "screen": "opening.bath",
+   "verdict": "PASS",
+   "line": "Then a fist bangs on the door.",
+   "why": "Ryan reached through an accident",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "65cecb4204fd2e05",
+    "facts": "ce853fd7984435f8",
+    "facts2": "be2a909e75218e29",
+    "all": "ce9a81f32f95986e"
+   },
+   "row_hash": "b3e99b6034510032",
+   "carried": false,
+   "pass": 1
+  },
+  {
+   "row": "heat#6",
+   "screen": "opening.bath",
+   "verdict": "N/A",
+   "line": "Your shoulders drop for the first time all morning.",
+   "why": "no explicit beat on this screen",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "65cecb4204fd2e05",
+    "facts": "ce853fd7984435f8",
+    "facts2": "be2a909e75218e29",
+    "all": "ce9a81f32f95986e"
+   },
+   "row_hash": "a97dfd91d1cd6aae",
+   "carried": false,
+   "pass": 1
+  },
+  {
+   "row": "heat#7",
+   "screen": "opening.bath",
+   "verdict": "PASS",
+   "line": "It hits your nipples cold, and they go hard.",
+   "why": "low heat on her body",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "65cecb4204fd2e05",
+    "facts": "ce853fd7984435f8",
+    "facts2": "be2a909e75218e29",
+    "all": "ce9a81f32f95986e"
+   },
+   "row_hash": "f75e08aaaa6bb543",
+   "carried": false,
+   "pass": 1
+  },
+  {
+   "row": "media#1",
+   "screen": "opening.bath",
+   "verdict": "PASS",
+   "line": "pool_dir = \"body/opening_shower_t4\", pool = 1",
+   "why": "right after the line where her body happens; the 4a reaction screens before it carry none",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "65cecb4204fd2e05",
+    "facts": "ce853fd7984435f8",
+    "facts2": "be2a909e75218e29",
+    "all": "ce9a81f32f95986e"
+   },
+   "row_hash": "3641bf707d9adfce",
+   "carried": false,
+   "pass": 1
+  },
+  {
+   "row": "media#2",
+   "screen": "opening.bath",
+   "verdict": "N/A",
+   "line": "pool_dir = \"body/opening_shower_t4\", pool = 1",
+   "why": "not a place picture",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "65cecb4204fd2e05",
+    "facts": "ce853fd7984435f8",
+    "facts2": "be2a909e75218e29",
+    "all": "ce9a81f32f95986e"
+   },
+   "row_hash": "01ba7fa1cec4bc7a",
+   "carried": false,
+   "pass": 1
+  },
+  {
+   "row": "media#3",
+   "screen": "opening.bath",
+   "verdict": "PASS",
+   "line": "pool_dir = \"body/opening_shower_t4\", pool = 1",
+   "why": "a body moment gets its picture of her",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "65cecb4204fd2e05",
+    "facts": "ce853fd7984435f8",
+    "facts2": "be2a909e75218e29",
+    "all": "ce9a81f32f95986e"
+   },
+   "row_hash": "8c75b0d488b188e2",
+   "carried": false,
+   "pass": 1
+  },
+  {
+   "row": "media#4",
+   "screen": "opening.bath",
+   "verdict": "PASS",
+   "line": "pool = 1",
+   "why": "1 for a one-time _t4 body moment",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "65cecb4204fd2e05",
+    "facts": "ce853fd7984435f8",
+    "facts2": "be2a909e75218e29",
+    "all": "ce9a81f32f95986e"
+   },
+   "row_hash": "03599fc0722690b6",
+   "carried": false,
+   "pass": 1
+  },
+  {
+   "row": "media#5",
+   "screen": "opening.bath",
+   "verdict": "N/A",
+   "line": "pool_dir = \"body/opening_shower_t4\", pool = 1",
+   "why": "not a look",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "65cecb4204fd2e05",
+    "facts": "ce853fd7984435f8",
+    "facts2": "be2a909e75218e29",
+    "all": "ce9a81f32f95986e"
+   },
+   "row_hash": "2cf5e3607ccecd4a",
+   "carried": false,
+   "pass": 1
+  },
+  {
+   "row": "media#6",
+   "screen": "opening.bath",
+   "verdict": "PASS",
+   "line": "...body gif",
+   "why": "something happens, so gif",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "65cecb4204fd2e05",
+    "facts": "ce853fd7984435f8",
+    "facts2": "be2a909e75218e29",
+    "all": "ce9a81f32f95986e"
+   },
+   "row_hash": "3016751837a9b0a0",
+   "carried": false,
+   "pass": 1
+  },
+  {
+   "row": "media#7",
+   "screen": "opening.bath",
+   "verdict": "PASS",
+   "line": "A woman of 18 in a small family bathroom shower, water running down her bare body",
+   "why": "age, place, what she wears (nothing), two plain searches",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "65cecb4204fd2e05",
+    "facts": "ce853fd7984435f8",
+    "facts2": "be2a909e75218e29",
+    "all": "ce9a81f32f95986e"
+   },
+   "row_hash": "eff6dc1369755c34",
+   "carried": false,
+   "pass": 1
+  },
+  {
+   "row": "opening#1",
+   "screen": "opening.bath",
+   "verdict": "N/A",
+   "line": "Upstairs, you get the bathroom",
+   "why": "this step lives on another opening screen, P13's; the bathroom is step 4",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "65cecb4204fd2e05",
+    "facts": "ce853fd7984435f8",
+    "facts2": "be2a909e75218e29",
+    "all": "ce9a81f32f95986e"
+   },
+   "row_hash": "88267cd95a4d6da5",
+   "carried": false,
+   "pass": 1
+  },
+  {
+   "row": "opening#2",
+   "screen": "opening.bath",
+   "verdict": "N/A",
+   "line": "Upstairs, you get the bathroom",
+   "why": "this step lives on another opening screen, P13's; the bathroom is step 4",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "65cecb4204fd2e05",
+    "facts": "ce853fd7984435f8",
+    "facts2": "be2a909e75218e29",
+    "all": "ce9a81f32f95986e"
+   },
+   "row_hash": "16087c5ccde09fbf",
+   "carried": false,
+   "pass": 1
+  },
+  {
+   "row": "opening#3",
+   "screen": "opening.bath",
+   "verdict": "N/A",
+   "line": "Upstairs, you get the bathroom",
+   "why": "this step lives on another opening screen, P13's; the bathroom is step 4",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "65cecb4204fd2e05",
+    "facts": "ce853fd7984435f8",
+    "facts2": "be2a909e75218e29",
+    "all": "ce9a81f32f95986e"
+   },
+   "row_hash": "5a60297b0e998c5c",
+   "carried": false,
+   "pass": 1
+  },
+  {
+   "row": "opening#4",
+   "screen": "opening.bath",
+   "verdict": "PASS",
+   "line": "The bolt hasn't held in years ... Then a fist bangs on the door. ... It's the small one.",
+   "why": "the room works against her (bolt, slow hot water, small towel), then the interruption",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "65cecb4204fd2e05",
+    "facts": "ce853fd7984435f8",
+    "facts2": "be2a909e75218e29",
+    "all": "ce9a81f32f95986e"
+   },
+   "row_hash": "3847f3dafe2643d2",
+   "carried": false,
+   "pass": 1
+  },
+  {
+   "row": "opening#5",
+   "screen": "opening.bath",
+   "verdict": "N/A",
+   "line": "Upstairs, you get the bathroom",
+   "why": "this step lives on another opening screen, P13's; the bathroom is step 4",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "65cecb4204fd2e05",
+    "facts": "ce853fd7984435f8",
+    "facts2": "be2a909e75218e29",
+    "all": "ce9a81f32f95986e"
+   },
+   "row_hash": "8b7d05eb7bf07424",
+   "carried": false,
+   "pass": 1
+  },
+  {
+   "row": "opening#6",
+   "screen": "opening.bath",
+   "verdict": "N/A",
+   "line": "Upstairs, you get the bathroom",
+   "why": "this step lives on another opening screen, P13's; the bathroom is step 4",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "65cecb4204fd2e05",
+    "facts": "ce853fd7984435f8",
+    "facts2": "be2a909e75218e29",
+    "all": "ce9a81f32f95986e"
+   },
+   "row_hash": "9042830eeab286c8",
+   "carried": false,
+   "pass": 1
+  },
+  {
+   "row": "opening#7",
+   "screen": "opening.bath",
+   "verdict": "N/A",
+   "line": "Upstairs, you get the bathroom",
+   "why": "this step lives on another opening screen, P13's; the bathroom is step 4",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "65cecb4204fd2e05",
+    "facts": "ce853fd7984435f8",
+    "facts2": "be2a909e75218e29",
+    "all": "ce9a81f32f95986e"
+   },
+   "row_hash": "001a96630041e1b1",
+   "carried": false,
+   "pass": 1
+  },
+  {
+   "row": "voice#1",
+   "screen": "opening.bath",
+   "verdict": "PASS",
+   "line": "Then the heat comes.",
+   "why": "second person, short sentences",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "65cecb4204fd2e05",
+    "facts": "ce853fd7984435f8",
+    "facts2": "be2a909e75218e29",
+    "all": "ce9a81f32f95986e"
+   },
+   "row_hash": "b8e8afcb32208b40",
+   "carried": false,
+   "pass": 1
+  },
+  {
+   "row": "voice#2",
+   "screen": "opening.bath",
+   "verdict": "PASS",
+   "line": "Your heart jumps.",
+   "why": "feelings on her body",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "65cecb4204fd2e05",
+    "facts": "ce853fd7984435f8",
+    "facts2": "be2a909e75218e29",
+    "all": "ce9a81f32f95986e"
+   },
+   "row_hash": "a40d4073409a2705",
+   "carried": false,
+   "pass": 1
+  },
+  {
+   "row": "voice#3",
+   "screen": "opening.bath",
+   "verdict": "PASS",
+   "line": "It hits your nipples cold, and they go hard.",
+   "why": "what her body does is on her body",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "65cecb4204fd2e05",
+    "facts": "ce853fd7984435f8",
+    "facts2": "be2a909e75218e29",
+    "all": "ce9a81f32f95986e"
+   },
+   "row_hash": "4777d2c1251214c2",
+   "carried": false,
+   "pass": 1
+  },
+  {
+   "row": "voice#4",
+   "screen": "opening.bath",
+   "verdict": "PASS",
+   "line": "Your heart jumps.",
+   "why": "no italic thought",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "65cecb4204fd2e05",
+    "facts": "ce853fd7984435f8",
+    "facts2": "be2a909e75218e29",
+    "all": "ce9a81f32f95986e"
+   },
+   "row_hash": "ac2fdd7245f436db",
+   "carried": false,
+   "pass": 1
+  },
+  {
+   "row": "voice#5",
+   "screen": "opening.bath",
+   "verdict": "PASS",
+   "line": "Come on, I'm dying out here.",
+   "why": "Ryan speaks; the path's ratio is counted by check.py talk, GREEN on the build",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "65cecb4204fd2e05",
+    "facts": "ce853fd7984435f8",
+    "facts2": "be2a909e75218e29",
+    "all": "ce9a81f32f95986e"
+   },
+   "row_hash": "7bbdd4290054e601",
+   "carried": false,
+   "pass": 1
+  },
+  {
+   "row": "voice#6",
+   "screen": "opening.bath",
+   "verdict": "PASS",
+   "line": "The bolt hasn't held in years",
+   "why": "plain, concrete",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "65cecb4204fd2e05",
+    "facts": "ce853fd7984435f8",
+    "facts2": "be2a909e75218e29",
+    "all": "ce9a81f32f95986e"
+   },
+   "row_hash": "df1f5dc8b6d21538",
+   "carried": false,
+   "pass": 1
+  },
+  {
+   "row": "voice#7",
+   "screen": "opening.bath",
+   "verdict": "PASS",
+   "line": "opens his door",
+   "why": "true on every path at 07:12 (who_is_where)",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "65cecb4204fd2e05",
+    "facts": "ce853fd7984435f8",
+    "facts2": "be2a909e75218e29",
+    "all": "ce9a81f32f95986e"
+   },
+   "row_hash": "321cc76cff93aadb",
+   "carried": false,
+   "pass": 1
+  },
+  {
+   "row": "voice#8",
+   "screen": "opening.bath",
+   "verdict": "PASS",
+   "line": "@player.nickname.",
+   "why": "Ryan sounds like himself, his own term of address",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "65cecb4204fd2e05",
+    "facts": "ce853fd7984435f8",
+    "facts2": "be2a909e75218e29",
+    "all": "ce9a81f32f95986e"
+   },
+   "row_hash": "4362249fb5f9616e",
+   "carried": false,
+   "pass": 1
+  }
+ ],
+ "causes": [],
+ "pending": [],
+ "asked": 121,
+ "answered": 121,
+ "pass_items": [],
+ "unowed": []
+}

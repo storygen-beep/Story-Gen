@@ -14,6 +14,7 @@ name = "First Day"
 id = "wake"
 name = "Screen 1: your bedroom"
 blocks = [
+  { type = "paragraph", content = "Your saves live in this browser. Use Saves, then Save to Disk…, to keep one." },
   { type = "paragraph", content = "Monday morning. Today you start college." },
   { type = "paragraph", content = "You kick off the sheet. Your pyjama top has ridden up in the night, and the cold air on your stomach makes your nipples go tight under it." },
   { type = "image", props = { description = "A woman of 18 in a single bed in her small bedroom, the sheet kicked off, a thin pyjama top ridden up over her stomach, morning light. Alone.", search_queries = ["woman 18 single bed sheet kicked off pyjama top ridden up morning", "girl waking up in a narrow bed, morning light"], pool_dir = "body/opening_wake_t3", pool = 1 } },
@@ -699,8 +700,6 @@ name = "Borrow Mom's things (5 min)"
 location = "home_master_bedroom"
 trigger_mode = "manual"
 is_repeatable = true
-show_when_blocked = true
-locked_text = "Only once, and not while they're in here."
 
 [canvases.trigger.conditions]
 version = "1.0"
@@ -734,8 +733,6 @@ name = "Borrow one of his hoodies (5 min)"
 location = "home_ryans_room"
 trigger_mode = "manual"
 is_repeatable = true
-show_when_blocked = true
-locked_text = "Only once, and not while Ryan's in here."
 
 [canvases.trigger.conditions]
 version = "1.0"
@@ -747,7 +744,7 @@ id = "take"
 name = "Borrow one of his hoodies (5 min)"
 blocks = [
   { type = "group", props = { conditions = { version = "1.0", logic = "AND", items = [{ type = "clothing_item", item_id = "ryan_hoodie", operator = "not_owned" }] } }, blocks = [
-    { type = "paragraph", content = "You pick the grey one up off his floor. It smells like him. You wonder if he'll notice it's gone." },
+    { type = "paragraph", content = "You take the grey one. It smells like him. You wonder if he'll notice it's gone." },
   ] },
 ]
 
@@ -760,6 +757,62 @@ targetType = "location"
 locationId = "home_ryans_room"
 time_progression_minutes = 5
 wardrobeEffects = [{ action = "add", item_id = "ryan_hoodie" }]
+
+# P07 (ENI for LO, 2026-11-24, P02 c1): each borrow can be put back and borrowed again, so each room keeps
+# something to do alone. Both rows hide while the owner is in the room.
+[[canvases]]
+id = "return_hoodie"
+name = "Put his hoodie back (5 min)"
+
+[canvases.trigger]
+location = "home_ryans_room"
+trigger_mode = "manual"
+is_repeatable = true
+conditions = { version = "1.0", logic = "AND", items = [{ type = "clothing_item", item_id = "ryan_hoodie", operator = "owned" }, { type = "clothing_item", item_id = "ryan_hoodie", operator = "unequipped" }, { type = "npc_at_location", npc_id = "npc_ryan", location_id = "home_ryans_room", operator = "is_absent" }] }
+
+[[canvases.nodes]]
+id = "return"
+name = "Put his hoodie back (5 min)"
+blocks = [
+  { type = "paragraph", content = "You fold the grey hoodie and leave it on his chair. Next time you want it, you know where it is." },
+]
+
+[canvases.nodes.exit_block]
+type = "choices"
+
+[[canvases.nodes.exit_block.choices]]
+text = "Done"
+targetType = "location"
+locationId = "home_ryans_room"
+time_progression_minutes = 5
+wardrobeEffects = [{ action = "remove", item_id = "ryan_hoodie" }]
+
+[[canvases]]
+id = "return_mom"
+name = "Put Mom's things back (5 min)"
+
+[canvases.trigger]
+location = "home_master_bedroom"
+trigger_mode = "manual"
+is_repeatable = true
+conditions = { version = "1.0", logic = "AND", items = [{ type = "clothing_item", item_id = "mom_short_skirt", operator = "owned" }, { type = "clothing_item", item_id = "mom_short_skirt", operator = "unequipped" }, { type = "clothing_item", item_id = "mom_lowcut_top", operator = "unequipped" }, { type = "clothing_item", item_id = "mom_heels", operator = "unequipped" }, { type = "npc_at_location", npc_id = "npc_laura", location_id = "home_master_bedroom", operator = "is_absent" }, { type = "npc_at_location", npc_id = "npc_mark", location_id = "home_master_bedroom", operator = "is_absent" }] }
+
+[[canvases.nodes]]
+id = "return"
+name = "Put Mom's things back (5 min)"
+blocks = [
+  { type = "paragraph", content = "You hang the skirt and the top back on her side of the wardrobe and set the heels where they were. Next time, you'll know where to find them." },
+]
+
+[canvases.nodes.exit_block]
+type = "choices"
+
+[[canvases.nodes.exit_block.choices]]
+text = "Done"
+targetType = "location"
+locationId = "home_master_bedroom"
+time_progression_minutes = 5
+wardrobeEffects = [{ action = "remove", item_id = "mom_short_skirt" }, { action = "remove", item_id = "mom_lowcut_top" }, { action = "remove", item_id = "mom_heels" }]
 
 # ── P21 · the café job. Both are repeatable rows that switch themselves off by flag: a one-time canvas at a
 # place auto-fires on entry (v2.py:5895-5911); room buttons are repeatable (v2.py:5955-5975). The clock alone
@@ -1937,8 +1990,10 @@ time_progression_minutes = 15
 id = "home_wait"
 name = "Wait (30 min)"
 
+# ENI for LO, 2026-11-24 (P02 c4): moved from the hall to her bedroom, so the hall stays routes only
+# (PLAN 205); the id stays, so old saves still match.
 [canvases.trigger]
-location = "home_hall"
+location = "home_her_room"
 trigger_mode = "manual"
 is_repeatable = true
 
@@ -1946,12 +2001,8 @@ is_repeatable = true
 id = "wait"
 name = "Wait"
 blocks = [
-  { type = "paragraph", content = "You sit on the bottom stair with your phone for half an hour and let the house go on around you." },
-  { type = "group", props = { conditions = { version = "1.0", logic = "AND", items = [{ type = "npc_at_location", npc_id = "npc_ryan", location_id = "home_hall", operator = "is_present" }] } }, blocks = [
-    { type = "paragraph", content = "Ryan's on the top step." },
-    { type = "dialog", content = "Don't even think about it. I'm next for the bathroom.", props = { speaker = "npc", npcId = "npc_ryan" } },
-  ] },
-  { type = "paragraph", content = "Then you get up. Somewhere out there is money, and you're not making it on the stairs." },
+  { type = "paragraph", content = "You lie on your bed with your phone for half an hour and let the house go on around you." },
+  { type = "paragraph", content = "Then you get up. Somewhere out there is money, and you're not making it lying here." },
 ]
 
 [canvases.nodes.exit_block]
@@ -1960,7 +2011,7 @@ type = "choices"
 [[canvases.nodes.exit_block.choices]]
 text = "Done"
 targetType = "location"
-locationId = "home_hall"
+locationId = "home_her_room"
 time_progression_minutes = 30
 
 # ── P33 · body care: the run, the workout, the mirror, and paying for energy (PLAN §8b). Solo rows; every
@@ -2421,9 +2472,9 @@ id = "sheet"
 name = "The sheet"
 blocks = [
   { type = "paragraph", content = "A woman in her late forties, reading glasses pushed up into grey-streaked hair, walks the front row handing out a single sheet to each of you." },
-  { type = "dialog", content = "Walsh. English Composition. One essay a week, and I read every word of it.", props = { speaker = "npc", npcId = "npc_walsh" } },
-  { type = "paragraph", content = "She gets to you last and holds the sheet a second longer than she needs to, reading your face instead of the page." },
-  { type = "dialog", content = "@player. I'm your advisor this year, so you're stuck with me twice.", props = { speaker = "npc", npcId = "npc_walsh" } },
+  { type = "dialog", content = "One essay a week, and I read every word of it. Some of you will learn to hate me for that.", props = { speaker = "npc", npcId = "npc_walsh" } },
+  { type = "paragraph", content = "She gets to you last and holds the sheet a second longer than she needs to, reading your face instead of the page. Your cheeks go warm under it." },
+  { type = "dialog", content = "@player, isn't it? I'm your advisor this year, dear, so you're stuck with me twice.", props = { speaker = "npc", npcId = "npc_walsh" } },
 ]
 
 [canvases.nodes.exit_block]
@@ -2456,7 +2507,7 @@ name = "English Composition"
 blocks = [
   { type = "group", props = { conditions = { version = "1.0", logic = "AND", items = [{ type = "flag", subject = "player", flag_key = "walsh_maam", operator = "is_true" }] } }, blocks = [
     { type = "dialog", content = "Ma'am. Your mother raised you properly.", props = { speaker = "npc", npcId = "npc_walsh" } },
-    { type = "paragraph", content = "Two girls behind you giggle." },
+    { type = "paragraph", content = "Two girls behind you giggle, and your ears burn." },
   ] },
   { type = "group", props = { conditions = { version = "1.0", logic = "AND", items = [{ type = "flag", subject = "player", flag_key = "walsh_no_advisor", operator = "is_true" }] } }, blocks = [
     { type = "dialog", content = "Everyone does. Most of you never come and find me.", props = { speaker = "npc", npcId = "npc_walsh" } },
@@ -2467,7 +2518,7 @@ blocks = [
   { type = "paragraph", content = "For the rest of the class she takes essays apart line by line, reading the worst sentences out loud while their owners go red. You write until your wrist hurts." },
   { type = "image", props = { description = "Her view from her seat (she is 18, out of frame): a woman of 48 with reading glasses pushed up into grey-streaked hair, at the front of a lecture hall holding an essay, looking at the camera.", search_queries = ["female professor 48 reading glasses lecture hall holding paper looking at camera", "older woman teacher front of lecture hall"], pool_dir = "people/walsh_front_t0", pool = 1 } },
   { type = "paragraph", content = "At the end she taps your desk on her way past." },
-  { type = "dialog", content = "Stay a minute, @player.", props = { speaker = "npc", npcId = "npc_walsh" } },
+  { type = "dialog", content = "Stay a minute, dear.", props = { speaker = "npc", npcId = "npc_walsh" } },
 ]
 
 [canvases.nodes.exit_block]
@@ -2510,8 +2561,301 @@ type = "choices"
 text = "Done"
 targetType = "location"
 locationId = "campus_lecture_hall"
-time_progression_minutes = 125
+time_progression_minutes = 120
 flagEffects = [{ flag = "met_walsh", op = "set" }]
+
+# ── P17 · her first drama class: Mr. Cross. Plays once by itself on entry while he is there. ──
+
+[[canvases]]
+id = "drama_first"
+name = "Drama"
+
+[canvases.trigger]
+location = "campus_theatre"
+trigger_mode = "manual"
+is_repeatable = false
+conditions = { version = "1.0", logic = "AND", items = [{ type = "npc_at_location", npc_id = "npc_cross", location_id = "campus_theatre", operator = "is_present" }, { type = "weekday", weekdays = [1, 3] }, { type = "time_of_day", start_time = "11:00", end_time = "11:30" }] }
+
+[[canvases.nodes]]
+id = "name"
+name = "Your name"
+blocks = [
+  { type = "paragraph", content = "The theatre is a black box: tiered seats on three sides and a stage at floor level. The man on the edge of it is in his late thirties, in a black shirt, watching the room." },
+  { type = "dialog", content = "Phones away. Up on the stage with the others.", props = { speaker = "npc", npcId = "npc_cross" } },
+  { type = "paragraph", content = "He watches you walk down the steps, all the way, and doesn't pretend he isn't. Your skin prickles under it." },
+  { type = "dialog", content = "You. New face. Name?", props = { speaker = "npc", npcId = "npc_cross" } },
+]
+
+[canvases.nodes.exit_block]
+type = "choices"
+
+[[canvases.nodes.exit_block.choices]]
+text = "@player."
+targetType = "node"
+nodeId = "class"
+time_progression_minutes = 0
+flagEffects = [{ flag = "cross_said_it", op = "set" }]
+
+[[canvases.nodes.exit_block.choices]]
+text = "Do I have to?"
+targetType = "node"
+nodeId = "class"
+time_progression_minutes = 0
+flagEffects = [{ flag = "cross_asked", op = "set" }]
+
+[[canvases.nodes.exit_block.choices]]
+text = "Shout it"
+targetType = "node"
+nodeId = "class"
+time_progression_minutes = 0
+flagEffects = [{ flag = "cross_shouted", op = "set" }]
+
+[[canvases.nodes]]
+id = "class"
+name = "Drama"
+blocks = [
+  { type = "group", props = { conditions = { version = "1.0", logic = "AND", items = [{ type = "flag", subject = "player", flag_key = "cross_said_it", operator = "is_true" }] } }, blocks = [
+    { type = "dialog", content = "Louder. They can't hear you at the back.", props = { speaker = "npc", npcId = "npc_cross" } },
+    { type = "paragraph", content = "You say it again. Your face goes hot." },
+  ] },
+  { type = "group", props = { conditions = { version = "1.0", logic = "AND", items = [{ type = "flag", subject = "player", flag_key = "cross_asked", operator = "is_true" }] } }, blocks = [
+    { type = "dialog", content = "Yes. That's the whole class, new face.", props = { speaker = "npc", npcId = "npc_cross" } },
+  ] },
+  { type = "group", props = { conditions = { version = "1.0", logic = "AND", items = [{ type = "flag", subject = "player", flag_key = "cross_shouted", operator = "is_true" }] } }, blocks = [
+    { type = "paragraph", content = "Your name bounces off the back wall. Somebody laughs. He doesn't." },
+    { type = "dialog", content = "Good. That's how loud I want everything.", props = { speaker = "npc", npcId = "npc_cross" } },
+  ] },
+  { type = "paragraph", content = "For the rest of the class he has you all walking, stopping, saying one line to the empty seats. Every time it's your turn, his eyes stay on you after you've finished, down your body and back up. Your nipples go hard, and you fold your arms over your chest before anyone sees." },
+  { type = "image", props = { description = "Her view from the stage (she is 18, out of frame): a man of 38 in a black shirt sitting on the edge of a black-box stage, watching the camera.", search_queries = ["man 38 black shirt sitting edge of stage black box theatre looking at camera", "drama teacher theatre stage watching"], pool_dir = "people/cross_stage_t0", pool = 1 } },
+  { type = "dialog", content = "New face. You've got a voice. Let's find out what else you've got.", props = { speaker = "npc", npcId = "npc_cross" } },
+  { type = "dialog", content = "Is that a compliment?", props = { speaker = "player" } },
+  { type = "dialog", content = "It's homework.", props = { speaker = "npc", npcId = "npc_cross" } },
+  { type = "paragraph", content = "Rehearsals are Tuesday, Thursday and Friday afternoons. He tells the whole room, but he's looking at you." },
+]
+
+[canvases.nodes.exit_block]
+type = "choices"
+
+[[canvases.nodes.exit_block.choices]]
+text = "Done"
+targetType = "location"
+locationId = "campus_theatre"
+time_progression_minutes = 120
+flagEffects = [{ flag = "met_cross", op = "set" }]
+
+# ── P09 · college: the four classes (each hidden until its teacher is met; Psychology's row alone greys
+# with the timetable), the empty stage, and Study (one shared count, study_today). Grades don't move. ──
+
+[[canvases]]
+id = "class_psych"
+name = "Go to class: Intro to Psychology (2 hours, 10 energy)"
+
+[canvases.trigger]
+location = "campus_lecture_hall"
+trigger_mode = "manual"
+is_repeatable = true
+costs = [{ trait = "energy", value = 10 }]
+show_when_blocked = true
+cooldown_message = "Monday and Wednesday at 9am. Statistics is 11am the same days; English is 9am on Tuesday and Thursday, and drama 11am in the theatre."
+conditions = { version = "1.0", logic = "AND", items = [{ type = "weekday", weekdays = [0, 2] }, { type = "time_of_day", start_time = "09:00", end_time = "09:30" }, { type = "flag", subject = "player", flag_key = "met_hale", operator = "is_true" }] }
+
+[[canvases.nodes]]
+id = "class"
+name = "Go to class: Intro to Psychology"
+blocks = [
+  { type = "paragraph", content = "Dr. Hale lectures from the bottom of the hall without notes, and every time he looks up, it's at your row. You take notes until your hand aches. For the rest of the lecture you keep your knees together and your eyes on the page." },
+  { type = "dialog", content = "Eyes up here, young lady. You'll miss the good part.", props = { speaker = "npc", npcId = "npc_hale" } },
+]
+
+[canvases.nodes.exit_block]
+type = "choices"
+
+[[canvases.nodes.exit_block.choices]]
+text = "Done"
+targetType = "location"
+locationId = "campus_lecture_hall"
+time_progression_minutes = 120
+
+[[canvases]]
+id = "class_stats"
+name = "Go to class: Statistics (2 hours, 10 energy)"
+
+[canvases.trigger]
+location = "campus_lecture_hall"
+trigger_mode = "manual"
+is_repeatable = true
+costs = [{ trait = "energy", value = 10 }]
+conditions = { version = "1.0", logic = "AND", items = [{ type = "weekday", weekdays = [0, 2] }, { type = "time_of_day", start_time = "11:00", end_time = "11:30" }, { type = "flag", subject = "player", flag_key = "met_pratt", operator = "is_true" }] }
+
+[[canvases.nodes]]
+id = "class"
+name = "Go to class: Statistics"
+blocks = [
+  { type = "paragraph", content = "Mr. Pratt fills three whiteboards with numbers and never once turns round. You copy every line and understand about half of them." },
+  { type = "dialog", content = "Miss @player. Keep up.", props = { speaker = "npc", npcId = "npc_pratt" } },
+  { type = "dialog", content = "I am.", props = { speaker = "player" } },
+  { type = "dialog", content = "We'll see.", props = { speaker = "npc", npcId = "npc_pratt" } },
+  { type = "paragraph", content = "Next time, you'll have to prove it." },
+]
+
+[canvases.nodes.exit_block]
+type = "choices"
+
+[[canvases.nodes.exit_block.choices]]
+text = "Done"
+targetType = "location"
+locationId = "campus_lecture_hall"
+time_progression_minutes = 120
+
+[[canvases]]
+id = "class_english"
+name = "Go to class: English Composition (2 hours, 10 energy)"
+
+[canvases.trigger]
+location = "campus_lecture_hall"
+trigger_mode = "manual"
+is_repeatable = true
+costs = [{ trait = "energy", value = 10 }]
+conditions = { version = "1.0", logic = "AND", items = [{ type = "weekday", weekdays = [1, 3] }, { type = "time_of_day", start_time = "09:00", end_time = "09:30" }, { type = "flag", subject = "player", flag_key = "met_walsh", operator = "is_true" }] }
+
+[[canvases.nodes]]
+id = "class"
+name = "Go to class: English Composition"
+blocks = [
+  { type = "paragraph", content = "Prof. Walsh reads a paragraph aloud from someone's essay and takes it apart, line by line, while its owner goes red two rows down. You write until your wrist hurts." },
+  { type = "dialog", content = "Read that back to me, dear. Slower.", props = { speaker = "npc", npcId = "npc_walsh" } },
+  { type = "dialog", content = "Like that?", props = { speaker = "player" } },
+  { type = "dialog", content = "Better. Bring me the next one.", props = { speaker = "npc", npcId = "npc_walsh" } },
+]
+
+[canvases.nodes.exit_block]
+type = "choices"
+
+[[canvases.nodes.exit_block.choices]]
+text = "Done"
+targetType = "location"
+locationId = "campus_lecture_hall"
+time_progression_minutes = 120
+
+[[canvases]]
+id = "class_drama"
+name = "Go to drama (2 hours, 10 energy)"
+
+[canvases.trigger]
+location = "campus_theatre"
+trigger_mode = "manual"
+is_repeatable = true
+costs = [{ trait = "energy", value = 10 }]
+conditions = { version = "1.0", logic = "AND", items = [{ type = "weekday", weekdays = [1, 3] }, { type = "time_of_day", start_time = "11:00", end_time = "11:30" }, { type = "flag", subject = "player", flag_key = "met_cross", operator = "is_true" }] }
+
+[[canvases.nodes]]
+id = "class"
+name = "Go to drama"
+blocks = [
+  { type = "paragraph", content = "Mr. Cross has you all on the stage in a line, then one by one at the front. When it's your turn, he makes you say the line three times, louder each time, until your voice fills the room and your face is burning. Everyone's watching. That's the point, he says." },
+  { type = "dialog", content = "Again. Louder, new face. Make them look at you.", props = { speaker = "npc", npcId = "npc_cross" } },
+  { type = "dialog", content = "Like this?", props = { speaker = "player" } },
+  { type = "dialog", content = "Closer. Next time, I'll show you.", props = { speaker = "npc", npcId = "npc_cross" } },
+]
+
+[canvases.nodes.exit_block]
+type = "choices"
+
+[[canvases.nodes.exit_block.choices]]
+text = "Done"
+targetType = "location"
+locationId = "campus_theatre"
+time_progression_minutes = 120
+
+[[canvases]]
+id = "stage_practise"
+name = "Practise on the empty stage (30 min)"
+
+[canvases.trigger]
+location = "campus_theatre"
+trigger_mode = "manual"
+is_repeatable = true
+max_triggers_per_day = 2
+show_when_blocked = true
+cooldown_message = "your voice is gone for today."
+locked_text = "someone has the stage."
+conditions = { version = "1.0", logic = "AND", items = [{ type = "weekday", weekdays = [0, 1, 2, 3, 4] }, { type = "npc_at_location", npc_id = "npc_cross", location_id = "campus_theatre", operator = "is_absent" }] }
+
+[[canvases.nodes]]
+id = "practise"
+name = "Practise on the empty stage"
+blocks = [
+  { type = "paragraph", content = "The seats are empty. You stand under the work light and say whatever comes into your head to the dark, louder than you'd ever dare with anyone there." },
+]
+
+[canvases.nodes.exit_block]
+type = "choices"
+
+[[canvases.nodes.exit_block.choices]]
+text = "Done"
+targetType = "location"
+locationId = "campus_theatre"
+time_progression_minutes = 30
+
+[[canvases]]
+id = "study_library"
+name = "Study (1 hour, 5 energy)"
+
+[canvases.trigger]
+location = "campus_library"
+trigger_mode = "manual"
+is_repeatable = true
+costs = [{ trait = "energy", value = 5 }]
+show_when_blocked = true
+locked_text = "you can't take in another page today."
+conditions = { version = "1.0", logic = "AND", items = [{ type = "trait", subject = "player", trait_key = "study_today", operator = "lt", value = 3 }] }
+
+[[canvases.nodes]]
+id = "study"
+name = "Study"
+blocks = [
+  { type = "paragraph", content = "You take a table on the quiet floor and work through the reading until the words swim. There's always more of it waiting." },
+]
+
+[canvases.nodes.exit_block]
+type = "choices"
+
+[[canvases.nodes.exit_block.choices]]
+text = "Done"
+targetType = "location"
+locationId = "campus_library"
+time_progression_minutes = 60
+effects = [{ trait = "study_today", op = "add", value = 1, clamp = false }]
+
+[[canvases]]
+id = "study_room"
+name = "Study (1 hour, 5 energy)"
+
+[canvases.trigger]
+location = "home_her_room"
+trigger_mode = "manual"
+is_repeatable = true
+costs = [{ trait = "energy", value = 5 }]
+show_when_blocked = true
+locked_text = "you can't take in another page today."
+conditions = { version = "1.0", logic = "AND", items = [{ type = "trait", subject = "player", trait_key = "study_today", operator = "lt", value = 3 }] }
+
+[[canvases.nodes]]
+id = "study"
+name = "Study"
+blocks = [
+  { type = "paragraph", content = "You spread your notes across the bed, shut the door, and work through them. There's always another chapter." },
+]
+
+[canvases.nodes.exit_block]
+type = "choices"
+
+[[canvases.nodes.exit_block.choices]]
+text = "Done"
+targetType = "location"
+locationId = "home_her_room"
+time_progression_minutes = 60
+effects = [{ trait = "study_today", op = "add", value = 1, clamp = false }]
 
 # ── P04 · travel: four one-screen canvases. A canvas's costs are checked and taken on entry, and an
 # unaffordable one shows dimmed with its cost (v2.py:6700-6732); the choice spends the minutes. ──
