@@ -89,6 +89,22 @@ bands = [
   { min = 80, max = 100, text = "On Display" },
 ]
 
+# P11 — goal 1's count and the rent total, internal (not on the sidebar).
+[[traits.labels]]
+key = "sundays_paid"
+label = "Sundays paid"
+hidden = true
+
+[[traits.labels]]
+key = "rent_paid_total"
+label = "Rent paid"
+hidden = true
+
+[[traits.labels]]
+key = "meals_today"
+label = "Meals today"
+hidden = true
+
 [[traits.labels]]
 key = "want"
 label = "Want"
@@ -151,11 +167,13 @@ tip = "He's at the kitchen table on Sunday mornings. That's when he collects."
 group = "story_goals"
 when = [{ flag = "goal1_shown", op = "is_true" }]
 text = "Pay your own way. Pay Mark your share every Sunday."
+ready_text = "Done. You pay your own way. Next: your name on campus, in a later release."
 tip = "You need money. Take shifts, or find another way. People are in different places at different hours. What you say changes how they treat you."
 goals = [
   { flag = "met_mark", op = "is_true", label = "Mark told you the rent" },
   { flag = "cafe_hired", op = "is_true", label = "Ask about the Help Wanted sign at the café across from campus. The manager's in Monday to Saturday, from 10am." },
-  { flag = "rent_paid_once", op = "is_true", label = "Pay Mark on Sunday morning, at the kitchen table ($75 this week)." },
+  { flag = "rent_paid_once", op = "is_true", label = "Pay Mark on Sunday morning, at the kitchen table." },
+  { trait = "sundays_paid", subject = "player", op = "gte", value = 4, label = "Pay Mark in full four Sundays in a row" },
 ]
 
 # P21 — Tom and Chris on the People page once met, with where and when.
@@ -175,8 +193,21 @@ tip = "He has the counter weekday mornings until 3pm, and weekends until 8pm."
 [engine.daily_tick]
 flagEffects = [
   { targetType = "player", flag = "talked_mom_today", op = "unset" },
+  { targetType = "player", flag = "talked_mark_today", op = "unset" },
+  { targetType = "player", flag = "talked_ryan_today", op = "unset" },
+  { targetType = "player", flag = "ate_with_mom_today", op = "unset" },
   # P21 — "Not today." at the café parks the ask until the next day
   { targetType = "player", flag = "cafe_ask_parked", op = "unset" },
+  # P11 — the rent week: cleared on Tuesday, after Monday's check has read it
+  { targetType = "player", flag = "rent_handled_this_week", op = "unset", conditions = { version = "1.0", logic = "AND", items = [{ type = "weekday", weekdays = [1] }] } },
+  # P11 — four Sundays in a row: goal 1 done (PLAN §2, §8i)
+  { targetType = "player", flag = "pays_her_own_way", op = "set", conditions = { version = "1.0", logic = "AND", items = [{ type = "trait", subject = "player", trait_key = "sundays_paid", operator = "gte", value = 4 }] } },
+]
+# P11 — on Monday, a Sunday with no payment breaks the run
+traitEffects = [
+  { targetType = "player", trait = "sundays_paid", op = "set", value = 0, conditions = { version = "1.0", logic = "AND", items = [{ type = "weekday", weekdays = [0] }, { type = "flag", subject = "player", flag_key = "rent_handled_this_week", operator = "is_false" }, { type = "flag", subject = "player", flag_key = "pays_her_own_way", operator = "is_false" }] } },
+  # P34 — meals: one count a day
+  { targetType = "player", trait = "meals_today", op = "set", value = 0 },
 ]
 
 # ══════════════════════════════════════════════════════════════════
@@ -189,7 +220,7 @@ flagEffects = [
 id = "player"
 name = "Ella"
 # money is not a 0-100 meter: every money effect must set clamp = false (v2.py:7361-7364).
-core_traits = { energy = 100, money = 0, corruption = 0, exhibitionism = 0 }
+core_traits = { energy = 100, money = 0, corruption = 0, exhibitionism = 0, sundays_paid = 0, rent_paid_total = 0, meals_today = 0 }
 # Every player flag is declared here. P05: zoe_place_known (set by P20) reveals Zoe's Apartment.
 flag_keys = [
   "zoe_place_known",
@@ -207,6 +238,12 @@ flag_keys = [
   "met_ryan", "ryan_hall_seen", "ryan_hall_past", "ryan_hall_spoke", "ryan_hall_waited", "goal1_shown",
   # Goal 1's card reads these; P21 sets cafe_hired, P11 sets rent_paid_once.
   "cafe_hired", "rent_paid_once",
+  # P11 — Sunday rent
+  "rent_handled_this_week", "pays_her_own_way",
+  # P34 — Mark's and Ryan's Talk, once a day each; the day turn clears them
+  "talked_mark_today", "talked_ryan_today",
+  # P34 — Eat with her, once a day; the day turn clears it
+  "ate_with_mom_today",
 ]
 # P13 — the name screen (template_import.py:2332-2357). "name" writes $player.name; any other id
 # becomes $player.<id> (v2.py:1569-1573). Printed with @player / @player.nickname (v2.py:18598-18629).
@@ -484,12 +521,15 @@ is_container = true
 [[locations]]
 id = "near_cafe"
 name = "Café"
-description = "The café across from campus: the coffee machine hissing, a long counter, a tip jar by the till. A sign on the door says it's open from 7am to 9pm."
+description = "The café across from campus: the coffee machine hissing, a long counter, a tip jar by the till. A sign on the door says it's open from 7am to 9pm. Tom or Chris is behind the counter weekdays from 7am and weekends from 10am; you can take an hour or a whole shift, as long as one of them is in till you're done."
 # P05 re-check: the Help Wanted line shows until P21 sets cafe_hired (first match, v2.py:11775-11819).
 description_variants = [
   { conditions = { version = "1.0", logic = "AND", items = [
       { type = "flag", subject = "player", flag_key = "cafe_hired", operator = "is_false" },
     ] }, text = "The café across from campus: the coffee machine hissing, a long counter, a tip jar by the till. A sign on the door says it's open from 7am to 9pm. A Help Wanted sign is taped in the window." },
+  { conditions = { version = "1.0", logic = "AND", items = [
+      { type = "flag", subject = "player", flag_key = "cafe_first_shift_done", operator = "is_false" },
+    ] }, text = "The café across from campus: the coffee machine hissing, a long counter, a tip jar by the till. A sign on the door says it's open from 7am to 9pm. Your first shift is a weekday between 10am and 3pm, when Tom and Chris are both in." },
 ]
 parent = "near_campus"
 entry_from = "campus_quad"
@@ -1204,13 +1244,14 @@ wardrobeEffects = [
 id = "sums"
 name = "Screen 8: your room, the sums"
 blocks = [
-  { type = "paragraph", content = "Hair still wet, you sit on the bed and do the sums." },
+  { type = "paragraph", content = "Hair still wet, you sit down and do the sums." },
   { type = "paragraph", content = "Seventy-five by Sunday. You have nothing." },
-  { type = "paragraph", content = "Last week there was a Help Wanted sign in the window of the café across from campus. And Mark said \"one way or another\" like he'd already picked one." },
+  { type = "paragraph", content = "There's a Help Wanted sign in the café window across from campus. And Mark said \"one way or another\" like he'd already picked one." },
   { type = "paragraph", content = "<strong>Pay your own way.</strong> Pay Mark your share every Sunday." },
   { type = "paragraph", content = "✅ Mark told you the rent" },
   { type = "paragraph", content = "➜ Ask about the Help Wanted sign at the café across from campus. The manager's in Monday to Saturday, from 10am." },
-  { type = "paragraph", content = "➜ Pay Mark on Sunday morning, at the kitchen table ($75 this week)." },
+  { type = "paragraph", content = "➜ Pay Mark on Sunday morning, at the kitchen table." },
+  { type = "paragraph", content = "➜ Pay Mark in full four Sundays in a row." },
   { type = "paragraph", content = "You need money. Take shifts, or find another way. People are in different places at different hours. What you say changes how they treat you." },
 ]
 
@@ -1320,13 +1361,13 @@ blocks = [
   ] },
   { type = "image", props = { description = "A woman of 41 in a cardigan over a blouse, at a kitchen counter with a mug, looking up.", search_queries = ["woman 41 cardigan kitchen counter mug", "mother in a cardigan in a small kitchen"], pool_dir = "everyday/mom_kitchen_t0", pool = 1 } },
   { type = "group", props = { conditions = { version = "1.0", logic = "AND", items = [{ type = "clothing_item", item_id = "mom_short_skirt", operator = "equipped" }] } }, blocks = [
-    { type = "paragraph", content = "Mom's eyes drop to the skirt. \"Is that mine?\" She doesn't wait for an answer." },
+    { type = "paragraph", content = "Mom's eyes drop to the skirt. Her skirt. Her mouth goes tight, and she says nothing." },
   ] },
   { type = "group", props = { conditions = { version = "1.0", logic = "AND", items = [{ type = "clothing_item", item_id = "mom_lowcut_top", operator = "equipped" }] } }, blocks = [
-    { type = "paragraph", content = "Mom's eyes drop to the top. \"Is that mine?\" She doesn't wait for an answer." },
+    { type = "paragraph", content = "Mom's eyes drop to the top. Her top. Her mouth goes tight, and she says nothing." },
   ] },
   { type = "group", props = { conditions = { version = "1.0", logic = "AND", items = [{ type = "clothing_item", item_id = "mom_heels", operator = "equipped" }] } }, blocks = [
-    { type = "paragraph", content = "Mom looks down at your feet. \"Are those my heels?\" She doesn't wait for an answer." },
+    { type = "paragraph", content = "Mom looks down at your feet. Her heels. Her mouth goes tight, and she says nothing." },
   ] },
 ]
 
@@ -1338,10 +1379,20 @@ text = "Talk (5 min)"
 targetType = "node"
 nodeId = "talk"
 show_when_locked = true
-locked_text = "You've already talked today."
+locked_text = "Talk (5 min) — you've already talked today."
 conditions = { version = "1.0", logic = "AND", items = [{ type = "flag", subject = "player", flag_key = "talked_mom_today", operator = "is_false" }] }
 flagEffects = [{ flag = "talked_mom_today", op = "set" }]
-time_progression_minutes = 5
+time_progression_minutes = 0
+
+[[canvases.nodes.exit_block.choices]]
+text = "Eat with her (20 min, +15 energy)"
+targetType = "node"
+nodeId = "eat"
+show_when_locked = true
+locked_text = "Eat with her (20 min, +15 energy) — you're not hungry right now."
+conditions = { version = "1.0", logic = "AND", items = [{ type = "trait", subject = "player", trait_key = "meals_today", operator = "lt", value = 3 }, { type = "flag", subject = "player", flag_key = "ate_with_mom_today", operator = "is_false" }] }
+flagEffects = [{ flag = "ate_with_mom_today", op = "set" }]
+time_progression_minutes = 0
 
 [[canvases.nodes.exit_block.choices]]
 text = "Leave"
@@ -1353,16 +1404,25 @@ time_progression_minutes = 0
 id = "talk"
 name = "Talk to Mom"
 blocks = [
-  { type = "group", props = { conditions = { version = "1.0", logic = "AND", items = [{ type = "npc_at_location", npc_id = "npc_mark", location_id = "home_kitchen", operator = "is_absent" }] } }, blocks = [
+  { type = "group", props = { conditions = { version = "1.0", logic = "AND", items = [{ type = "npc_at_location", npc_id = "npc_mark", location_id = "home_kitchen", operator = "is_absent" }, { type = "npc_at_location", npc_id = "npc_ryan", location_id = "home_kitchen", operator = "is_absent" }] } }, blocks = [
     { type = "dialog", content = "Did Mark say anything else? About the rent?", props = { speaker = "npc", npcId = "npc_laura" } },
-    { type = "paragraph", content = "She watches your face while you shake your head." },
+    { type = "paragraph", content = "She watches your face while you answer." },
+    { type = "dialog", content = "Just the usual, Mom.", props = { speaker = "player" } },
     { type = "dialog", content = "If he does, you come to me first. Not him. Me. Promise?", props = { speaker = "npc", npcId = "npc_laura" } },
+    { type = "dialog", content = "I promise, Mom.", props = { speaker = "player" } },
     { type = "paragraph", content = "Your stomach tightens. She's waiting for something, and she won't say what." },
   ] },
   { type = "group", props = { conditions = { version = "1.0", logic = "AND", items = [{ type = "npc_at_location", npc_id = "npc_mark", location_id = "home_kitchen", operator = "is_present" }] } }, blocks = [
-    { type = "dialog", content = "Did you eat, baby? Sit. I'll make you a plate.", props = { speaker = "npc", npcId = "npc_laura" } },
+    { type = "dialog", content = "Sit with me a minute, baby. Just a minute.", props = { speaker = "npc", npcId = "npc_laura" } },
     { type = "paragraph", content = "She doesn't look at Mark while she asks. Mark turns a page and doesn't look at either of you." },
-    { type = "dialog", content = "Take an apple for later. Go on.", props = { speaker = "npc", npcId = "npc_laura" } },
+    { type = "dialog", content = "I'll come find you.", props = { speaker = "player" } },
+    { type = "dialog", content = "Tomorrow, when he's gone, you tell me everything.", props = { speaker = "npc", npcId = "npc_laura" } },
+  ] },
+  { type = "group", props = { conditions = { version = "1.0", logic = "AND", items = [{ type = "npc_at_location", npc_id = "npc_ryan", location_id = "home_kitchen", operator = "is_present" }] } }, blocks = [
+    { type = "dialog", content = "Sit with me a minute, baby. Ryan, plates.", props = { speaker = "npc", npcId = "npc_laura" } },
+    { type = "paragraph", content = "Ryan rolls his eyes and gets them down anyway. Mom pulls out the chair next to hers for you." },
+    { type = "dialog", content = "Only if there's dessert.", props = { speaker = "player" } },
+    { type = "dialog", content = "Later, when it's quiet, you tell me about your week.", props = { speaker = "npc", npcId = "npc_laura" } },
   ] },
 ]
 
@@ -1371,9 +1431,46 @@ type = "choices"
 
 [[canvases.nodes.exit_block.choices]]
 text = "Done"
-targetType = "node"
-nodeId = "hub"
-time_progression_minutes = 0
+targetType = "location"
+locationId = "home_kitchen"
+time_progression_minutes = 5
+
+[[canvases.nodes]]
+id = "eat"
+name = "Eat with Mom"
+blocks = [
+  { type = "group", props = { conditions = { version = "1.0", logic = "AND", items = [{ type = "time_of_day", start_time = "00:00", end_time = "12:00" }] } }, blocks = [
+    { type = "paragraph", content = "Mom puts a plate of eggs in front of you and sits down with her coffee." },
+  ] },
+  { type = "group", props = { conditions = { version = "1.0", logic = "AND", items = [{ type = "time_of_day", start_time = "12:00", end_time = "23:59" }] } }, blocks = [
+    { type = "paragraph", content = "Mom dishes up two plates of dinner and sits across from you." },
+  ] },
+  { type = "dialog", content = "Eat. You're too thin.", props = { speaker = "npc", npcId = "npc_laura" } },
+  { type = "paragraph", content = "She watches you take the first bite." },
+  { type = "dialog", content = "And don't tell me you ate already. I know you.", props = { speaker = "npc", npcId = "npc_laura" } },
+  { type = "dialog", content = "I'm eating, Mom. See?", props = { speaker = "player" } },
+  { type = "paragraph", content = "Your throat goes tight. You eat every bite." },
+  { type = "group", props = { conditions = { version = "1.0", logic = "AND", items = [{ type = "npc_at_location", npc_id = "npc_mark", location_id = "home_kitchen", operator = "is_present" }, { type = "npc_at_location", npc_id = "npc_ryan", location_id = "home_kitchen", operator = "is_present" }] } }, blocks = [
+    { type = "paragraph", content = "Mark eats without looking up from his paper. Ryan eats standing at the counter." },
+  ] },
+  { type = "group", props = { conditions = { version = "1.0", logic = "AND", items = [{ type = "npc_at_location", npc_id = "npc_mark", location_id = "home_kitchen", operator = "is_present" }] } }, blocks = [
+    { type = "paragraph", content = "Mark eats without looking up from his paper." },
+  ] },
+  { type = "group", props = { conditions = { version = "1.0", logic = "AND", items = [{ type = "npc_at_location", npc_id = "npc_ryan", location_id = "home_kitchen", operator = "is_present" }] } }, blocks = [
+    { type = "paragraph", content = "Ryan eats standing at the counter." },
+  ] },
+  { type = "dialog", content = "Tonight you tell me everything. Deal?", props = { speaker = "npc", npcId = "npc_laura" } },
+]
+
+[canvases.nodes.exit_block]
+type = "choices"
+
+[[canvases.nodes.exit_block.choices]]
+text = "Done"
+targetType = "location"
+locationId = "home_kitchen"
+time_progression_minutes = 20
+effects = [{ trait = "energy", op = "add", value = 15, clamp = true }, { trait = "meals_today", op = "add", value = 1 }]
 
 [[canvases]]
 id = "mom_living_room"
@@ -1403,13 +1500,13 @@ blocks = [
   ] },
   { type = "image", props = { description = "A woman of 41 in a cardigan on a living room couch, her feet under her, TV light on her face.", search_queries = ["woman 41 cardigan on couch watching TV", "mother on a sofa at night with the TV on"], pool_dir = "everyday/mom_living_t0", pool = 1 } },
   { type = "group", props = { conditions = { version = "1.0", logic = "AND", items = [{ type = "clothing_item", item_id = "mom_short_skirt", operator = "equipped" }] } }, blocks = [
-    { type = "paragraph", content = "Mom's eyes drop to the skirt. \"Is that mine?\" She doesn't wait for an answer." },
+    { type = "paragraph", content = "Mom's eyes drop to the skirt. Her skirt. Her mouth goes tight, and she says nothing." },
   ] },
   { type = "group", props = { conditions = { version = "1.0", logic = "AND", items = [{ type = "clothing_item", item_id = "mom_lowcut_top", operator = "equipped" }] } }, blocks = [
-    { type = "paragraph", content = "Mom's eyes drop to the top. \"Is that mine?\" She doesn't wait for an answer." },
+    { type = "paragraph", content = "Mom's eyes drop to the top. Her top. Her mouth goes tight, and she says nothing." },
   ] },
   { type = "group", props = { conditions = { version = "1.0", logic = "AND", items = [{ type = "clothing_item", item_id = "mom_heels", operator = "equipped" }] } }, blocks = [
-    { type = "paragraph", content = "Mom looks down at your feet. \"Are those my heels?\" She doesn't wait for an answer." },
+    { type = "paragraph", content = "Mom looks down at your feet. Her heels. Her mouth goes tight, and she says nothing." },
   ] },
 ]
 
@@ -1421,10 +1518,10 @@ text = "Talk (5 min)"
 targetType = "node"
 nodeId = "talk"
 show_when_locked = true
-locked_text = "You've already talked today."
+locked_text = "Talk (5 min) — you've already talked today."
 conditions = { version = "1.0", logic = "AND", items = [{ type = "flag", subject = "player", flag_key = "talked_mom_today", operator = "is_false" }] }
 flagEffects = [{ flag = "talked_mom_today", op = "set" }]
-time_progression_minutes = 5
+time_progression_minutes = 0
 
 [[canvases.nodes.exit_block.choices]]
 text = "Leave"
@@ -1440,30 +1537,39 @@ blocks = [
     { type = "dialog", content = "Sit with me a minute, baby.", props = { speaker = "npc", npcId = "npc_laura" } },
     { type = "paragraph", content = "She pats the couch." },
     { type = "dialog", content = "How are your classes? Tell me everything. Your teachers won't know what hit them.", props = { speaker = "npc", npcId = "npc_laura" } },
-    { type = "paragraph", content = "You sit. She listens to all of it, and her shoulders come down for the first time all day." },
+    { type = "dialog", content = "They're fine, Mom. Really. Mostly.", props = { speaker = "player" } },
+    { type = "paragraph", content = "You sit. She listens to all of it, and her shoulders come down." },
+    { type = "dialog", content = "Next Saturday, you tell me the next part.", props = { speaker = "npc", npcId = "npc_laura" } },
   ] },
   { type = "group", props = { conditions = { version = "1.0", logic = "AND", items = [{ type = "npc_at_location", npc_id = "npc_mark", location_id = "home_living_room", operator = "is_absent" }, { type = "flag", subject = "player", flag_key = "start_freedom", operator = "is_true" }] } }, blocks = [
     { type = "dialog", content = "Sit with me a minute, baby. Or do you have somewhere better to be?", props = { speaker = "npc", npcId = "npc_laura" } },
     { type = "paragraph", content = "She says it light, but she's watching your face." },
     { type = "dialog", content = "Stay in tonight. Just tonight. For me.", props = { speaker = "npc", npcId = "npc_laura" } },
+    { type = "dialog", content = "Just tonight, then.", props = { speaker = "player" } },
     { type = "paragraph", content = "You sit. She talks about nothing, and her hand stays on your knee the whole time." },
+    { type = "dialog", content = "Be home tomorrow night too. Promise me.", props = { speaker = "npc", npcId = "npc_laura" } },
   ] },
   { type = "group", props = { conditions = { version = "1.0", logic = "AND", items = [{ type = "npc_at_location", npc_id = "npc_mark", location_id = "home_living_room", operator = "is_absent" }, { type = "flag", subject = "player", flag_key = "start_fun", operator = "is_true" }] } }, blocks = [
     { type = "dialog", content = "Sit with me a minute, baby.", props = { speaker = "npc", npcId = "npc_laura" } },
     { type = "paragraph", content = "She pats the couch." },
     { type = "dialog", content = "And tell me you're behaving. I was eighteen once, you know. I remember.", props = { speaker = "npc", npcId = "npc_laura" } },
-    { type = "paragraph", content = "You sit. She laughs at your answer, but she's watching your face." },
+    { type = "dialog", content = "Always, Mom.", props = { speaker = "player" } },
+    { type = "paragraph", content = "You sit. She laughs, but she's watching your face." },
+    { type = "dialog", content = "Whatever you're up to, you tell me first.", props = { speaker = "npc", npcId = "npc_laura" } },
   ] },
   { type = "group", props = { conditions = { version = "1.0", logic = "AND", items = [{ type = "npc_at_location", npc_id = "npc_mark", location_id = "home_living_room", operator = "is_absent" }, { type = "flag", subject = "player", flag_key = "start_grades", operator = "is_false" }, { type = "flag", subject = "player", flag_key = "start_freedom", operator = "is_false" }, { type = "flag", subject = "player", flag_key = "start_fun", operator = "is_false" }] } }, blocks = [
     { type = "dialog", content = "Sit with me a minute, baby.", props = { speaker = "npc", npcId = "npc_laura" } },
     { type = "paragraph", content = "She pats the couch." },
     { type = "dialog", content = "Tell me one good thing. Just one. Even a small one counts.", props = { speaker = "npc", npcId = "npc_laura" } },
-    { type = "paragraph", content = "You sit. She listens to all of it, and her shoulders come down for the first time all day." },
+    { type = "dialog", content = "They're fine, Mom. Really. Mostly.", props = { speaker = "player" } },
+    { type = "paragraph", content = "You sit. She listens to all of it, and her shoulders come down." },
+    { type = "dialog", content = "Next Saturday, you tell me the next part.", props = { speaker = "npc", npcId = "npc_laura" } },
   ] },
   { type = "group", props = { conditions = { version = "1.0", logic = "AND", items = [{ type = "npc_at_location", npc_id = "npc_mark", location_id = "home_living_room", operator = "is_present" }] } }, blocks = [
-    { type = "dialog", content = "Did you eat, baby? There's a plate for you in the oven.", props = { speaker = "npc", npcId = "npc_laura" } },
+    { type = "dialog", content = "Come sit by me, baby. Just for a minute.", props = { speaker = "npc", npcId = "npc_laura" } },
     { type = "paragraph", content = "She doesn't look at Mark while she asks. Mark turns the TV up and doesn't look at either of you." },
-    { type = "dialog", content = "Go on, then. Don't let it get cold.", props = { speaker = "npc", npcId = "npc_laura" } },
+    { type = "dialog", content = "Tomorrow, Mom. Promise.", props = { speaker = "player" } },
+    { type = "dialog", content = "Tomorrow, when it's just us, you tell me everything.", props = { speaker = "npc", npcId = "npc_laura" } },
   ] },
 ]
 
@@ -1472,9 +1578,9 @@ type = "choices"
 
 [[canvases.nodes.exit_block.choices]]
 text = "Done"
-targetType = "node"
-nodeId = "hub"
-time_progression_minutes = 0
+targetType = "location"
+locationId = "home_living_room"
+time_progression_minutes = 5
 
 # ── P07 · borrowing: one click adds the garments (wardrobeEffects add is a no-op on what she owns).
 # Greyed with locked_text while the room's people are in it (craft/clothes.md rule 7). ──
@@ -1605,10 +1711,10 @@ time_progression_minutes = 5
 id = "sign"
 name = "The sign"
 blocks = [
-  { type = "paragraph", content = "He looks you over once, the way you'd check a used car." },
+  { type = "paragraph", content = "He looks you over once, from your face down to your legs and back, the way you'd check a used car. Then he catches himself and taps the board." },
   { type = "dialog", content = "Good answer. I'm Tom. I run the place. Four-hour shifts, five an hour, plus whatever lands in the tip jar. Call it twenty-two a shift.", props = { speaker = "npc", npcId = "npc_tom" } },
-  { type = "paragraph", content = "He taps the shift board by the till: weekdays 2pm–6pm, Saturday and Sunday 10am–2pm and 3pm–7pm." },
-  { type = "dialog", content = "Your first one's a weekday afternoon. Chris'll show you the machine. Don't be late, rookie.", props = { speaker = "npc", npcId = "npc_tom" } },
+  { type = "dialog", content = "Come in when you want. An hour or a whole shift, as long as one of us is here till you're done.", props = { speaker = "npc", npcId = "npc_tom" } },
+  { type = "dialog", content = "Your first one's a weekday, when Chris is on to show you the machine. Don't be late, rookie.", props = { speaker = "npc", npcId = "npc_tom" } },
   { type = "paragraph", content = "He peels the sign off the window and drops it under the counter. Your face goes warm. You've got a job." },
 ]
 
@@ -1625,11 +1731,11 @@ flagEffects = [{ flag = "met_tom", op = "set" }, { flag = "cafe_hired", op = "se
 id = "both"
 name = "Both"
 blocks = [
-  { type = "paragraph", content = "His eyes go to your mouth when you smile, then down to the till, fast." },
-  { type = "dialog", content = "Cute. I'm Tom. I run the place.", props = { speaker = "npc", npcId = "npc_tom" } },
+  { type = "paragraph", content = "His eyes go to your mouth anyway, then down to the till, fast." },
+  { type = "dialog", content = "Funny. I'm Tom. I run the place.", props = { speaker = "npc", npcId = "npc_tom" } },
   { type = "dialog", content = "Four-hour shifts, five an hour, plus whatever lands in the tip jar. Call it twenty-two a shift.", props = { speaker = "npc", npcId = "npc_tom" } },
-  { type = "paragraph", content = "He taps the shift board by the till: weekdays 2pm–6pm, Saturday and Sunday 10am–2pm and 3pm–7pm." },
-  { type = "dialog", content = "Your first one's a weekday afternoon. Chris'll show you the machine. Don't be late, rookie.", props = { speaker = "npc", npcId = "npc_tom" } },
+  { type = "dialog", content = "Come in when you want. An hour or a whole shift, as long as one of us is here till you're done.", props = { speaker = "npc", npcId = "npc_tom" } },
+  { type = "dialog", content = "Your first one's a weekday, when Chris is on to show you the machine. Don't be late, rookie.", props = { speaker = "npc", npcId = "npc_tom" } },
   { type = "paragraph", content = "He peels the sign off the window and drops it under the counter. Your face goes warm. You've got a job." },
 ]
 
@@ -1669,15 +1775,15 @@ trigger_mode = "manual"
 is_repeatable = true
 costs = [{ trait = "energy", value = 15 }]
 show_when_blocked = true
-cooldown_message = "it starts at 2pm on a weekday."
-conditions = { version = "1.0", logic = "AND", items = [{ type = "flag", subject = "player", flag_key = "cafe_hired", operator = "is_true" }, { type = "flag", subject = "player", flag_key = "cafe_first_shift_done", operator = "is_false" }, { type = "weekday", weekdays = [0, 1, 2, 3, 4] }, { type = "time_of_day", start_time = "14:00", end_time = "15:00" }] }
+cooldown_message = "Tom and Chris are both in from 10am to 3pm on weekdays."
+conditions = { version = "1.0", logic = "AND", items = [{ type = "flag", subject = "player", flag_key = "cafe_hired", operator = "is_true" }, { type = "flag", subject = "player", flag_key = "cafe_first_shift_done", operator = "is_false" }, { type = "weekday", weekdays = [0, 1, 2, 3, 4] }, { type = "time_of_day", start_time = "10:00", end_time = "14:56" }] }
 
 [[canvases.nodes]]
 id = "start"
 name = "Behind the counter"
 blocks = [
   { type = "paragraph", content = "A guy in his twenties is at the machine, a pencil behind his ear. He looks you over like he's pricing you." },
-  { type = "dialog", content = "So you're the new girl. Tom's giving you my afternoons.", props = { speaker = "npc", npcId = "npc_chris" } },
+  { type = "dialog", content = "So you're the new girl. Tom says you're mine to train.", props = { speaker = "npc", npcId = "npc_chris" } },
   { type = "paragraph", content = "He shows you the grinder, the milk jugs, the till. Reaching past you for a jug, his arm drags across your chest. He doesn't say sorry. He watches you notice." },
   { type = "image", props = { description = "Seen from behind the counter: a woman of 18 at a café espresso machine, steam rising, her face flushed. No man in frame.", search_queries = ["woman 18 cafe espresso machine steam wand gif", "girl barista steaming milk flushed gif"], pool_dir = "look/chris_wand_t3", pool = 1 } },
   { type = "paragraph", content = "Your face burns. You step out from his reach." },
@@ -1718,8 +1824,110 @@ locationId = "near_cafe"
 time_progression_minutes = 0
 flagEffects = [{ flag = "cafe_first_shift_done", op = "set" }]
 effects = [{ trait = "money", op = "add", value = 22 }]
-# ── P10 · the repeat shift, three rows: the engine has no nested condition block (v2.py:5028-5035), and only
-# time_of_day and weekday count as the clock for greying (setup.onlyTheClockShut). Sunday: Chris pays (PLAN.md:476). ──
+# ── P10 · ids cafe_shift_weekend_am (Saturday) and cafe_shift_weekend_pm (Sunday) are kept from the slot build LO
+# played, so a dev save keeps its scene (C1656).
+# ── P10 · café work, any hour Tom or Chris is behind the counter (LO 2026-11-24, relayed by ENI: "shifts are
+# independent of the classes"). Six rows: one AND/OR level can't hold the windows (v2.py:5028-5035). Starts end
+# while the one who pays is still in: Tom to 20:59, Chris to 14:59 weekdays and 19:59 weekends. ──
+
+[[canvases]]
+id = "cafe_hour_weekday"
+name = "Work an hour (1 hour, 4 energy)"
+
+[canvases.trigger]
+location = "near_cafe"
+trigger_mode = "manual"
+is_repeatable = true
+costs = [{ trait = "energy", value = 4 }]
+conditions = { version = "1.0", logic = "AND", items = [{ type = "flag", subject = "player", flag_key = "cafe_first_shift_done", operator = "is_true" }, { type = "weekday", weekdays = [0, 1, 2, 3, 4] }, { type = "time_of_day", start_time = "07:00", end_time = "19:56" }] }
+
+[[canvases.nodes]]
+id = "work"
+name = "Work an hour"
+blocks = [
+  { type = "group", props = { conditions = { version = "1.0", logic = "AND", items = [{ type = "time_of_day", start_time = "07:00", end_time = "10:00" }] } }, blocks = [
+    { type = "paragraph", content = "An hour of orders before the rush, the milk jug never empty for long." },
+    { type = "dialog", content = "Five, new girl. Don't spend it all at once.", props = { speaker = "npc", npcId = "npc_chris" } },
+    { type = "paragraph", content = "He counts it into your hand without looking up from his phone. You made $5." },
+  ] },
+  { type = "group", props = { conditions = { version = "1.0", logic = "AND", items = [{ type = "time_of_day", start_time = "10:00", end_time = "19:56" }] } }, blocks = [
+    { type = "paragraph", content = "An hour of orders and steam. Every time you bend for the milk, Tom's eyes drop to your ass and stay there." },
+  { type = "paragraph", content = "You straighten up fast, your face hot. He doesn't look away." },
+    { type = "dialog", content = "Five, rookie. Not bad. Come back when you want more.", props = { speaker = "npc", npcId = "npc_tom" } },
+    { type = "paragraph", content = "He counts it into your hand. You made $5." },
+  ] },
+]
+
+[canvases.nodes.exit_block]
+type = "choices"
+
+[[canvases.nodes.exit_block.choices]]
+text = "Done"
+targetType = "location"
+locationId = "near_cafe"
+time_progression_minutes = 60
+effects = [{ trait = "money", op = "add", value = 5 }]
+
+[[canvases]]
+id = "cafe_hour_saturday"
+name = "Work an hour (1 hour, 4 energy)"
+
+[canvases.trigger]
+location = "near_cafe"
+trigger_mode = "manual"
+is_repeatable = true
+costs = [{ trait = "energy", value = 4 }]
+conditions = { version = "1.0", logic = "AND", items = [{ type = "flag", subject = "player", flag_key = "cafe_first_shift_done", operator = "is_true" }, { type = "weekday", weekdays = [5] }, { type = "time_of_day", start_time = "10:00", end_time = "19:56" }] }
+
+[[canvases.nodes]]
+id = "work"
+name = "Work an hour"
+blocks = [
+  { type = "paragraph", content = "An hour of orders and steam. Every time you bend for the milk, Tom's eyes drop to your ass and stay there." },
+  { type = "paragraph", content = "You straighten up fast, your face hot. He doesn't look away." },
+  { type = "dialog", content = "Five, rookie. Not bad. Come back when you want more.", props = { speaker = "npc", npcId = "npc_tom" } },
+  { type = "paragraph", content = "He counts it into your hand. You made $5." },
+]
+
+[canvases.nodes.exit_block]
+type = "choices"
+
+[[canvases.nodes.exit_block.choices]]
+text = "Done"
+targetType = "location"
+locationId = "near_cafe"
+time_progression_minutes = 60
+effects = [{ trait = "money", op = "add", value = 5 }]
+
+[[canvases]]
+id = "cafe_hour_sunday"
+name = "Work an hour (1 hour, 4 energy)"
+
+[canvases.trigger]
+location = "near_cafe"
+trigger_mode = "manual"
+is_repeatable = true
+costs = [{ trait = "energy", value = 4 }]
+conditions = { version = "1.0", logic = "AND", items = [{ type = "flag", subject = "player", flag_key = "cafe_first_shift_done", operator = "is_true" }, { type = "weekday", weekdays = [6] }, { type = "time_of_day", start_time = "10:00", end_time = "18:56" }] }
+
+[[canvases.nodes]]
+id = "work"
+name = "Work an hour"
+blocks = [
+  { type = "paragraph", content = "Sundays it's you and Chris. He watches your chest when you reach for the cups." },
+  { type = "dialog", content = "Slow day, new girl. Entertain me. Go on, I'm bored.", props = { speaker = "npc", npcId = "npc_chris" } },
+  { type = "paragraph", content = "He grins and doesn't move. You run the counter for an hour, and he counts five out of the till into your hand. You made $5." },
+]
+
+[canvases.nodes.exit_block]
+type = "choices"
+
+[[canvases.nodes.exit_block.choices]]
+text = "Done"
+targetType = "location"
+locationId = "near_cafe"
+time_progression_minutes = 60
+effects = [{ trait = "money", op = "add", value = 5 }]
 
 [[canvases]]
 id = "cafe_shift_weekday"
@@ -1730,19 +1938,36 @@ location = "near_cafe"
 trigger_mode = "manual"
 is_repeatable = true
 costs = [{ trait = "energy", value = 15 }]
-show_when_blocked = true
-cooldown_message = "shifts start at 2pm on weekdays, and at 10am and 3pm on weekends."
-conditions = { version = "1.0", logic = "AND", items = [{ type = "flag", subject = "player", flag_key = "cafe_first_shift_done", operator = "is_true" }, { type = "weekday", weekdays = [0, 1, 2, 3, 4] }, { type = "time_of_day", start_time = "14:00", end_time = "15:00" }] }
+conditions = { version = "1.0", logic = "AND", items = [{ type = "flag", subject = "player", flag_key = "cafe_first_shift_done", operator = "is_true" }, { type = "weekday", weekdays = [0, 1, 2, 3, 4] }, { type = "time_of_day", start_time = "07:00", end_time = "16:56" }] }
 
 [[canvases.nodes]]
 id = "shift"
-name = "A shift"
+name = "Work a shift"
 blocks = [
-  { type = "paragraph", content = "Chris hands you the counter." },
-  { type = "dialog", content = "Don't break anything, new girl.", props = { speaker = "npc", npcId = "npc_chris" } },
-  { type = "paragraph", content = "He's gone within the hour, with a wink you don't return. Then it's four hours of orders, steam and crumbs." },
-  { type = "dialog", content = "Twenty-two, rookie. Good work. Same again tomorrow?", props = { speaker = "npc", npcId = "npc_tom" } },
-  { type = "paragraph", content = "He counts it into your hand. You made $22." },
+  { type = "group", props = { conditions = { version = "1.0", logic = "AND", items = [{ type = "time_of_day", start_time = "07:00", end_time = "10:00" }] } }, blocks = [
+    { type = "paragraph", content = "Four hours behind the counter with Chris. He takes the machine and leaves you the till and the crumbs." },
+    { type = "dialog", content = "Don't break anything, new girl.", props = { speaker = "npc", npcId = "npc_chris" } },
+    { type = "dialog", content = "Twenty-two, new girl. Don't spend it all at once.", props = { speaker = "npc", npcId = "npc_chris" } },
+    { type = "paragraph", content = "He counts it out of the till into your hand. You made $22." },
+  ] },
+  { type = "group", props = { conditions = { version = "1.0", logic = "AND", items = [{ type = "time_of_day", start_time = "10:00", end_time = "11:00" }] } }, blocks = [
+    { type = "paragraph", content = "Four hours behind the counter with Chris. He takes the machine and leaves you the till and the crumbs." },
+    { type = "dialog", content = "Don't break anything, new girl.", props = { speaker = "npc", npcId = "npc_chris" } },
+    { type = "dialog", content = "Twenty-two, rookie. Good work. Same again tomorrow?", props = { speaker = "npc", npcId = "npc_tom" } },
+    { type = "paragraph", content = "He counts it into your hand. You made $22." },
+  ] },
+  { type = "group", props = { conditions = { version = "1.0", logic = "AND", items = [{ type = "time_of_day", start_time = "11:00", end_time = "15:00" }] } }, blocks = [
+    { type = "paragraph", content = "Chris hands you the counter." },
+    { type = "dialog", content = "Don't break anything, new girl.", props = { speaker = "npc", npcId = "npc_chris" } },
+    { type = "paragraph", content = "He's gone at three, with a wink you don't return. Then it's orders, steam and crumbs." },
+    { type = "dialog", content = "Twenty-two, rookie. Good work. Same again tomorrow?", props = { speaker = "npc", npcId = "npc_tom" } },
+    { type = "paragraph", content = "He counts it into your hand. You made $22." },
+  ] },
+  { type = "group", props = { conditions = { version = "1.0", logic = "AND", items = [{ type = "time_of_day", start_time = "15:00", end_time = "16:56" }] } }, blocks = [
+    { type = "paragraph", content = "Tom has you on the till. Four hours of orders, steam and crumbs." },
+    { type = "dialog", content = "Twenty-two, rookie. Good work. Same again tomorrow?", props = { speaker = "npc", npcId = "npc_tom" } },
+    { type = "paragraph", content = "He counts it into your hand. You made $22." },
+  ] },
 ]
 
 [canvases.nodes.exit_block]
@@ -1764,26 +1989,17 @@ location = "near_cafe"
 trigger_mode = "manual"
 is_repeatable = true
 costs = [{ trait = "energy", value = 15 }]
-conditions = { version = "1.0", logic = "AND", items = [{ type = "flag", subject = "player", flag_key = "cafe_first_shift_done", operator = "is_true" }, { type = "weekday", weekdays = [5, 6] }, { type = "time_of_day", start_time = "10:00", end_time = "11:00" }] }
+conditions = { version = "1.0", logic = "AND", items = [{ type = "flag", subject = "player", flag_key = "cafe_first_shift_done", operator = "is_true" }, { type = "weekday", weekdays = [5] }, { type = "time_of_day", start_time = "10:00", end_time = "16:56" }] }
 
 [[canvases.nodes]]
 id = "shift"
-name = "A shift"
+name = "Work a shift"
 blocks = [
-  { type = "group", props = { conditions = { version = "1.0", logic = "AND", items = [{ type = "weekday", weekdays = [5] }] } }, blocks = [
-    { type = "paragraph", content = "Saturdays the café is loud. Tom works the till, Chris works the machine, and you work everything else for four hours. Every time you bend for the milk, Tom's eyes drop to your ass and stay there. You straighten up fast, your face hot." },
-    { type = "dialog", content = "Behind you, new girl.", props = { speaker = "npc", npcId = "npc_chris" } },
-    { type = "dialog", content = "Twenty-two. Good Saturday, rookie. Chris has you tomorrow.", props = { speaker = "npc", npcId = "npc_tom" } },
-    { type = "paragraph", content = "He counts it into your hand. You made $22." },
-  ] },
-  { type = "group", props = { conditions = { version = "1.0", logic = "AND", items = [{ type = "weekday", weekdays = [6] }] } }, blocks = [
-    { type = "paragraph", content = "Sundays it's you and Chris. He spends half of it on his phone and the other half watching your chest when you reach for the cups." },
-    { type = "dialog", content = "Slow day, new girl. Entertain me.", props = { speaker = "npc", npcId = "npc_chris" } },
-    { type = "dialog", content = "Grab a cloth, then.", props = { speaker = "player" } },
-    { type = "paragraph", content = "He grins and doesn't move. You run the counter for four hours." },
-    { type = "dialog", content = "Twenty-two, new girl. Next Sunday you're entertaining me.", props = { speaker = "npc", npcId = "npc_chris" } },
-    { type = "paragraph", content = "He counts it out of the till into your hand. You made $22." },
-  ] },
+  { type = "paragraph", content = "Saturdays the café is loud. Tom works the till, Chris works the machine, and you work everything else for four hours. Every time you bend for the milk, Tom's eyes drop to your ass and stay there. You straighten up fast, your face hot." },
+  { type = "paragraph", content = "Chris, from the machine:" },
+  { type = "dialog", content = "Behind you, new girl.", props = { speaker = "npc", npcId = "npc_chris" } },
+  { type = "dialog", content = "Twenty-two. Good Saturday, rookie. Chris has you tomorrow.", props = { speaker = "npc", npcId = "npc_tom" } },
+  { type = "paragraph", content = "He counts it into your hand. You made $22." },
 ]
 
 [canvases.nodes.exit_block]
@@ -1805,26 +2021,18 @@ location = "near_cafe"
 trigger_mode = "manual"
 is_repeatable = true
 costs = [{ trait = "energy", value = 15 }]
-conditions = { version = "1.0", logic = "AND", items = [{ type = "flag", subject = "player", flag_key = "cafe_first_shift_done", operator = "is_true" }, { type = "weekday", weekdays = [5, 6] }, { type = "time_of_day", start_time = "15:00", end_time = "16:00" }] }
+conditions = { version = "1.0", logic = "AND", items = [{ type = "flag", subject = "player", flag_key = "cafe_first_shift_done", operator = "is_true" }, { type = "weekday", weekdays = [6] }, { type = "time_of_day", start_time = "10:00", end_time = "15:56" }] }
 
 [[canvases.nodes]]
 id = "shift"
-name = "A shift"
+name = "Work a shift"
 blocks = [
-  { type = "group", props = { conditions = { version = "1.0", logic = "AND", items = [{ type = "weekday", weekdays = [5] }] } }, blocks = [
-    { type = "paragraph", content = "Saturdays the café is loud. Tom works the till, Chris works the machine, and you work everything else for four hours. Every time you bend for the milk, Tom's eyes drop to your ass and stay there. You straighten up fast, your face hot." },
-    { type = "dialog", content = "Behind you, new girl.", props = { speaker = "npc", npcId = "npc_chris" } },
-    { type = "dialog", content = "Twenty-two. Good Saturday, rookie. Chris has you tomorrow.", props = { speaker = "npc", npcId = "npc_tom" } },
-    { type = "paragraph", content = "He counts it into your hand. You made $22." },
-  ] },
-  { type = "group", props = { conditions = { version = "1.0", logic = "AND", items = [{ type = "weekday", weekdays = [6] }] } }, blocks = [
-    { type = "paragraph", content = "Sundays it's you and Chris. He spends half of it on his phone and the other half watching your chest when you reach for the cups." },
-    { type = "dialog", content = "Slow day, new girl. Entertain me.", props = { speaker = "npc", npcId = "npc_chris" } },
-    { type = "dialog", content = "Grab a cloth, then.", props = { speaker = "player" } },
-    { type = "paragraph", content = "He grins and doesn't move. You run the counter for four hours." },
-    { type = "dialog", content = "Twenty-two, new girl. Next Sunday you're entertaining me.", props = { speaker = "npc", npcId = "npc_chris" } },
-    { type = "paragraph", content = "He counts it out of the till into your hand. You made $22." },
-  ] },
+  { type = "paragraph", content = "Sundays it's you and Chris. He spends half of it on his phone and the other half watching your chest when you reach for the cups." },
+  { type = "dialog", content = "Slow day, new girl. Entertain me.", props = { speaker = "npc", npcId = "npc_chris" } },
+  { type = "dialog", content = "Grab a cloth, then.", props = { speaker = "player" } },
+  { type = "paragraph", content = "He grins and doesn't move. You run the counter for four hours." },
+  { type = "dialog", content = "Twenty-two, new girl. Next Sunday you're entertaining me.", props = { speaker = "npc", npcId = "npc_chris" } },
+  { type = "paragraph", content = "He counts it out of the till into your hand. You made $22." },
 ]
 
 [canvases.nodes.exit_block]
@@ -1836,6 +2044,674 @@ targetType = "location"
 locationId = "near_cafe"
 time_progression_minutes = 240
 effects = [{ trait = "money", op = "add", value = 22 }]
+
+# ── P34 · home life: Mark's and Ryan's menus behind their faces (people.md rule 10, the P42 shape),
+# the solo rows (TV, dishes, Wait). P11's rent lives in Mark's Kitchen menu (nodes rent, pay75/90/100, short).
+# Talk spends its 5 minutes on Done, so the talk screen shows while the person is still there (C902). ──
+
+[[canvases]]
+id = "mark_kitchen"
+name = "Mark"
+
+[canvases.trigger]
+location = "home_kitchen"
+trigger_mode = "manual"
+is_repeatable = true
+npc = "npc_mark"
+requires_npc = "npc_mark"
+conditions = { version = "1.0", logic = "AND", items = [{ type = "flag", subject = "player", flag_key = "met_mark", operator = "is_true" }] }
+
+[[canvases.nodes]]
+id = "hub"
+name = "Mark"
+blocks = [
+  { type = "paragraph", content = "Mark's at the table with his coffee. He looks at you over the rim." },
+  { type = "image", props = { description = "A man of 46 at a kitchen table with a coffee mug, looking up over it.", search_queries = ["man 46 kitchen table coffee mug looking up", "stepfather at breakfast table with coffee"], pool_dir = "people/mark_kitchen_t0", pool = 1 } },
+]
+
+[canvases.nodes.exit_block]
+type = "choices"
+
+[[canvases.nodes.exit_block.choices]]
+text = "Talk (5 min)"
+targetType = "node"
+nodeId = "talk"
+show_when_locked = true
+locked_text = "Talk (5 min) — you've already talked today."
+conditions = { version = "1.0", logic = "AND", items = [{ type = "flag", subject = "player", flag_key = "talked_mark_today", operator = "is_false" }] }
+flagEffects = [{ flag = "talked_mark_today", op = "set" }]
+time_progression_minutes = 0
+
+[[canvases.nodes.exit_block.choices]]
+text = "Pay the rent (5 min)"
+targetType = "node"
+nodeId = "rent"
+show_when_locked = true
+locked_text = "Pay the rent (5 min) — Mark collects on Sunday morning, at the kitchen table."
+conditions = { version = "1.0", logic = "AND", items = [{ type = "weekday", weekdays = [6] }, { type = "time_of_day", start_time = "08:00", end_time = "11:55" }] }
+time_progression_minutes = 0
+
+[[canvases.nodes.exit_block.choices]]
+text = "Leave"
+targetType = "location"
+locationId = "home_kitchen"
+time_progression_minutes = 0
+
+[[canvases.nodes]]
+id = "talk"
+name = "Talk to Mark"
+blocks = [
+  { type = "dialog", content = "You working, kid? Rent doesn't wait. And don't spend it all on coffee.", props = { speaker = "npc", npcId = "npc_mark" } },
+  { type = "dialog", content = "I'm trying, Mark. I'll have it.", props = { speaker = "player" } },
+  { type = "paragraph", content = "Your face goes hot. He's already back to his coffee." },
+  { type = "paragraph", content = "Whatever you say, he'll want the money again." },
+]
+
+[canvases.nodes.exit_block]
+type = "choices"
+
+[[canvases.nodes.exit_block.choices]]
+text = "Done"
+targetType = "location"
+locationId = "home_kitchen"
+time_progression_minutes = 5
+
+[[canvases.nodes]]
+id = "rent"
+name = "The rent"
+blocks = [
+  { type = "group", props = { conditions = { version = "1.0", logic = "AND", items = [{ type = "flag", subject = "player", flag_key = "rent_handled_this_week", operator = "is_true" }] } }, blocks = [
+    { type = "paragraph", content = "Mark doesn't look up from the paper." },
+    { type = "dialog", content = "That's this week done, kid. Next Sunday.", props = { speaker = "npc", npcId = "npc_mark" } },
+  ] },
+  { type = "group", props = { conditions = { version = "1.0", logic = "AND", items = [{ type = "flag", subject = "player", flag_key = "rent_handled_this_week", operator = "is_false" }, { type = "trait", subject = "player", trait_key = "rent_paid_total", operator = "lt", value = 300 }, { type = "trait", subject = "player", trait_key = "money", operator = "lt", value = 75 }] } }, blocks = [
+    { type = "paragraph", content = "Mark folds the paper down and holds out his hand." },
+    { type = "dialog", content = "Count it out where I can see it.", props = { speaker = "npc", npcId = "npc_mark" } },
+    { type = "dialog", content = "Seventy-five, kid.", props = { speaker = "npc", npcId = "npc_mark" } },
+    { type = "paragraph", content = "You don't have it. He waits anyway, his hand still out." },
+  ] },
+  { type = "group", props = { conditions = { version = "1.0", logic = "AND", items = [{ type = "flag", subject = "player", flag_key = "rent_handled_this_week", operator = "is_false" }, { type = "trait", subject = "player", trait_key = "rent_paid_total", operator = "lt", value = 300 }] } }, blocks = [
+    { type = "paragraph", content = "Mark folds the paper down and holds out his hand." },
+    { type = "dialog", content = "Count it out where I can see it.", props = { speaker = "npc", npcId = "npc_mark" } },
+    { type = "dialog", content = "Seventy-five, kid.", props = { speaker = "npc", npcId = "npc_mark" } },
+  ] },
+  { type = "group", props = { conditions = { version = "1.0", logic = "AND", items = [{ type = "flag", subject = "player", flag_key = "rent_handled_this_week", operator = "is_false" }, { type = "trait", subject = "player", trait_key = "rent_paid_total", operator = "gte", value = 300 }, { type = "trait", subject = "player", trait_key = "rent_paid_total", operator = "lt", value = 900 }, { type = "trait", subject = "player", trait_key = "money", operator = "lt", value = 90 }] } }, blocks = [
+    { type = "paragraph", content = "Mark folds the paper down and holds out his hand." },
+    { type = "dialog", content = "Count it out where I can see it.", props = { speaker = "npc", npcId = "npc_mark" } },
+    { type = "dialog", content = "Ninety, kid.", props = { speaker = "npc", npcId = "npc_mark" } },
+    { type = "paragraph", content = "You don't have it. He waits anyway, his hand still out." },
+  ] },
+  { type = "group", props = { conditions = { version = "1.0", logic = "AND", items = [{ type = "flag", subject = "player", flag_key = "rent_handled_this_week", operator = "is_false" }, { type = "trait", subject = "player", trait_key = "rent_paid_total", operator = "gte", value = 300 }, { type = "trait", subject = "player", trait_key = "rent_paid_total", operator = "lt", value = 900 }] } }, blocks = [
+    { type = "paragraph", content = "Mark folds the paper down and holds out his hand." },
+    { type = "dialog", content = "Count it out where I can see it.", props = { speaker = "npc", npcId = "npc_mark" } },
+    { type = "dialog", content = "Ninety, kid.", props = { speaker = "npc", npcId = "npc_mark" } },
+  ] },
+  { type = "group", props = { conditions = { version = "1.0", logic = "AND", items = [{ type = "flag", subject = "player", flag_key = "rent_handled_this_week", operator = "is_false" }, { type = "trait", subject = "player", trait_key = "rent_paid_total", operator = "gte", value = 900 }, { type = "trait", subject = "player", trait_key = "money", operator = "lt", value = 100 }] } }, blocks = [
+    { type = "paragraph", content = "Mark folds the paper down and holds out his hand." },
+    { type = "dialog", content = "Count it out where I can see it.", props = { speaker = "npc", npcId = "npc_mark" } },
+    { type = "dialog", content = "A hundred, kid.", props = { speaker = "npc", npcId = "npc_mark" } },
+    { type = "paragraph", content = "You don't have it. He waits anyway, his hand still out." },
+  ] },
+  { type = "group", props = { conditions = { version = "1.0", logic = "AND", items = [{ type = "flag", subject = "player", flag_key = "rent_handled_this_week", operator = "is_false" }, { type = "trait", subject = "player", trait_key = "rent_paid_total", operator = "gte", value = 900 }] } }, blocks = [
+    { type = "paragraph", content = "Mark folds the paper down and holds out his hand." },
+    { type = "dialog", content = "Count it out where I can see it.", props = { speaker = "npc", npcId = "npc_mark" } },
+    { type = "dialog", content = "A hundred, kid.", props = { speaker = "npc", npcId = "npc_mark" } },
+  ] },
+]
+
+[canvases.nodes.exit_block]
+type = "choices"
+
+[[canvases.nodes.exit_block.choices]]
+text = "Hand it over ($75)"
+targetType = "node"
+nodeId = "pay75"
+conditions = { version = "1.0", logic = "AND", items = [{ type = "flag", subject = "player", flag_key = "rent_handled_this_week", operator = "is_false" }, { type = "trait", subject = "player", trait_key = "rent_paid_total", operator = "lt", value = 300 }, { type = "trait", subject = "player", trait_key = "money", operator = "gte", value = 75 }] }
+time_progression_minutes = 0
+
+[[canvases.nodes.exit_block.choices]]
+text = "Hand it over ($90)"
+targetType = "node"
+nodeId = "pay90"
+conditions = { version = "1.0", logic = "AND", items = [{ type = "flag", subject = "player", flag_key = "rent_handled_this_week", operator = "is_false" }, { type = "trait", subject = "player", trait_key = "rent_paid_total", operator = "gte", value = 300 }, { type = "trait", subject = "player", trait_key = "rent_paid_total", operator = "lt", value = 900 }, { type = "trait", subject = "player", trait_key = "money", operator = "gte", value = 90 }] }
+time_progression_minutes = 0
+
+[[canvases.nodes.exit_block.choices]]
+text = "Hand it over ($100)"
+targetType = "node"
+nodeId = "pay100"
+conditions = { version = "1.0", logic = "AND", items = [{ type = "flag", subject = "player", flag_key = "rent_handled_this_week", operator = "is_false" }, { type = "trait", subject = "player", trait_key = "rent_paid_total", operator = "gte", value = 900 }, { type = "trait", subject = "player", trait_key = "money", operator = "gte", value = 100 }] }
+time_progression_minutes = 0
+
+[[canvases.nodes.exit_block.choices]]
+text = "Tell him you can't pay"
+targetType = "node"
+nodeId = "short"
+conditions = { version = "1.0", logic = "AND", items = [{ type = "flag", subject = "player", flag_key = "rent_handled_this_week", operator = "is_false" }] }
+time_progression_minutes = 0
+
+[[canvases.nodes.exit_block.choices]]
+text = "Leave"
+targetType = "location"
+locationId = "home_kitchen"
+time_progression_minutes = 5
+
+[[canvases.nodes]]
+id = "pay75"
+name = "The rent, paid"
+blocks = [
+  { type = "paragraph", content = "You count it out on the table. He makes you stand there while he counts it again. Your stomach knots while he does." },
+  { type = "dialog", content = "All there. Same time next Sunday.", props = { speaker = "npc", npcId = "npc_mark" } },
+  { type = "group", props = { conditions = { version = "1.0", logic = "AND", items = [{ type = "flag", subject = "player", flag_key = "rent_paid_once", operator = "is_false" }] } }, blocks = [
+    { type = "dialog", content = "It goes to ninety once you've paid three hundred. Four Sundays straight, kid, and maybe I'll believe you can do this.", props = { speaker = "npc", npcId = "npc_mark" } },
+  ] },
+  { type = "group", props = { conditions = { version = "1.0", logic = "AND", items = [{ type = "trait", subject = "player", trait_key = "rent_paid_total", operator = "gte", value = 225 }] } }, blocks = [
+    { type = "dialog", content = "Ninety from next week. You're doing well enough.", props = { speaker = "npc", npcId = "npc_mark" } },
+    { type = "paragraph", content = "You keep your face still. It's more." },
+  ] },
+  { type = "paragraph", content = "He pockets it and goes back to the paper." },
+]
+
+[canvases.nodes.exit_block]
+type = "choices"
+
+[[canvases.nodes.exit_block.choices]]
+text = "Done"
+targetType = "location"
+locationId = "home_kitchen"
+time_progression_minutes = 5
+flagEffects = [{ flag = "rent_paid_once", op = "set" }, { flag = "rent_handled_this_week", op = "set" }]
+effects = [{ trait = "money", op = "add", value = -75 }, { trait = "rent_paid_total", op = "add", value = 75 }, { trait = "sundays_paid", op = "add", value = 1, cap = 4 }]
+
+[[canvases.nodes]]
+id = "pay90"
+name = "The rent, paid"
+blocks = [
+  { type = "paragraph", content = "You count it out on the table. He makes you stand there while he counts it again. Your stomach knots while he does." },
+  { type = "dialog", content = "All there. Same time next Sunday.", props = { speaker = "npc", npcId = "npc_mark" } },
+  { type = "group", props = { conditions = { version = "1.0", logic = "AND", items = [{ type = "trait", subject = "player", trait_key = "rent_paid_total", operator = "gte", value = 810 }] } }, blocks = [
+    { type = "dialog", content = "A hundred from next week.", props = { speaker = "npc", npcId = "npc_mark" } },
+    { type = "paragraph", content = "You keep your face still. It's more." },
+  ] },
+  { type = "paragraph", content = "He pockets it and goes back to the paper." },
+]
+
+[canvases.nodes.exit_block]
+type = "choices"
+
+[[canvases.nodes.exit_block.choices]]
+text = "Done"
+targetType = "location"
+locationId = "home_kitchen"
+time_progression_minutes = 5
+flagEffects = [{ flag = "rent_paid_once", op = "set" }, { flag = "rent_handled_this_week", op = "set" }]
+effects = [{ trait = "money", op = "add", value = -90 }, { trait = "rent_paid_total", op = "add", value = 90 }, { trait = "sundays_paid", op = "add", value = 1, cap = 4 }]
+
+[[canvases.nodes]]
+id = "pay100"
+name = "The rent, paid"
+blocks = [
+  { type = "paragraph", content = "You count it out on the table. He makes you stand there while he counts it again. Your stomach knots while he does." },
+  { type = "dialog", content = "All there. Same time next Sunday.", props = { speaker = "npc", npcId = "npc_mark" } },
+  { type = "paragraph", content = "He pockets it and goes back to the paper." },
+]
+
+[canvases.nodes.exit_block]
+type = "choices"
+
+[[canvases.nodes.exit_block.choices]]
+text = "Done"
+targetType = "location"
+locationId = "home_kitchen"
+time_progression_minutes = 5
+flagEffects = [{ flag = "rent_paid_once", op = "set" }, { flag = "rent_handled_this_week", op = "set" }]
+effects = [{ trait = "money", op = "add", value = -100 }, { trait = "rent_paid_total", op = "add", value = 100 }, { trait = "sundays_paid", op = "add", value = 1, cap = 4 }]
+
+[[canvases.nodes]]
+id = "short"
+name = "Short"
+blocks = [
+  { type = "paragraph", content = "Mark lets his hand drop and picks the paper back up." },
+  { type = "dialog", content = "Short. Next Sunday, then. Don't make it a habit, kid.", props = { speaker = "npc", npcId = "npc_mark" } },
+  { type = "paragraph", content = "Your face goes hot. You don't move until he turns the page." },
+  { type = "paragraph", content = "Mom's cup stops halfway to her mouth, then keeps going." },
+]
+
+[canvases.nodes.exit_block]
+type = "choices"
+
+[[canvases.nodes.exit_block.choices]]
+text = "Done"
+targetType = "location"
+locationId = "home_kitchen"
+time_progression_minutes = 5
+flagEffects = [{ flag = "rent_handled_this_week", op = "set" }]
+effects = [{ trait = "sundays_paid", op = "set", value = 0 }]
+conditions = { version = "1.0", logic = "AND", items = [{ type = "flag", subject = "player", flag_key = "pays_her_own_way", operator = "is_false" }] }
+
+[[canvases.nodes.exit_block.choices]]
+text = "Done"
+targetType = "location"
+locationId = "home_kitchen"
+time_progression_minutes = 5
+flagEffects = [{ flag = "rent_handled_this_week", op = "set" }]
+conditions = { version = "1.0", logic = "AND", items = [{ type = "flag", subject = "player", flag_key = "pays_her_own_way", operator = "is_true" }] }
+
+[[canvases]]
+id = "mark_living_room"
+name = "Mark"
+
+[canvases.trigger]
+location = "home_living_room"
+trigger_mode = "manual"
+is_repeatable = true
+npc = "npc_mark"
+requires_npc = "npc_mark"
+conditions = { version = "1.0", logic = "AND", items = [{ type = "flag", subject = "player", flag_key = "met_mark", operator = "is_true" }] }
+
+[[canvases.nodes]]
+id = "hub"
+name = "Mark"
+blocks = [
+  { type = "paragraph", content = "Mark's in his chair, the remote on his knee. The chair's his; everyone knows it." },
+  { type = "image", props = { description = "A man of 46 in an armchair in a living room, remote on his knee, TV light on him.", search_queries = ["man 46 armchair living room remote tv light", "middle aged man in recliner in living room watching tv"], pool_dir = "people/mark_chair_t0", pool = 1 } },
+]
+
+[canvases.nodes.exit_block]
+type = "choices"
+
+[[canvases.nodes.exit_block.choices]]
+text = "Talk (5 min)"
+targetType = "node"
+nodeId = "talk"
+show_when_locked = true
+locked_text = "Talk (5 min) — you've already talked today."
+conditions = { version = "1.0", logic = "AND", items = [{ type = "flag", subject = "player", flag_key = "talked_mark_today", operator = "is_false" }] }
+flagEffects = [{ flag = "talked_mark_today", op = "set" }]
+time_progression_minutes = 0
+
+[[canvases.nodes.exit_block.choices]]
+text = "Leave"
+targetType = "location"
+locationId = "home_living_room"
+time_progression_minutes = 0
+
+[[canvases.nodes]]
+id = "talk"
+name = "Talk to Mark"
+blocks = [
+  { type = "dialog", content = "You're standing in my light, kid.", props = { speaker = "npc", npcId = "npc_mark" } },
+  { type = "paragraph", content = "He doesn't look away from the screen until you move." },
+  { type = "dialog", content = "Better. Stay there.", props = { speaker = "npc", npcId = "npc_mark" } },
+  { type = "dialog", content = "There's a whole room, Mark.", props = { speaker = "player" } },
+  { type = "paragraph", content = "Your cheeks burn. You sit where he can't see you." },
+  { type = "paragraph", content = "When you glance back, he's watching you instead of the screen." },
+]
+
+[canvases.nodes.exit_block]
+type = "choices"
+
+[[canvases.nodes.exit_block.choices]]
+text = "Done"
+targetType = "location"
+locationId = "home_living_room"
+time_progression_minutes = 5
+
+[[canvases]]
+id = "ryan_room"
+name = "Ryan"
+
+[canvases.trigger]
+location = "home_ryans_room"
+trigger_mode = "manual"
+is_repeatable = true
+npc = "npc_ryan"
+requires_npc = "npc_ryan"
+conditions = { version = "1.0", logic = "AND", items = [{ type = "flag", subject = "player", flag_key = "met_ryan", operator = "is_true" }, { type = "weekday", weekdays = [0, 1, 2, 3, 4] }, { type = "time_of_day", start_time = "07:00", end_time = "23:00" }] }
+
+[[canvases.nodes]]
+id = "hub"
+name = "Ryan"
+blocks = [
+  { type = "paragraph", content = "Ryan's on his bed with a controller, headphones round his neck." },
+  { type = "image", props = { description = "A man of 22 on an unmade bed with a game controller, headphones round his neck, curtains shut.", search_queries = ["man 22 bed game controller headphones bedroom", "young man gaming on bed curtains shut"], pool_dir = "people/ryan_room_t0", pool = 1 } },
+]
+
+[canvases.nodes.exit_block]
+type = "choices"
+
+[[canvases.nodes.exit_block.choices]]
+text = "Talk (5 min)"
+targetType = "node"
+nodeId = "talk"
+show_when_locked = true
+locked_text = "Talk (5 min) — you've already talked today."
+conditions = { version = "1.0", logic = "AND", items = [{ type = "flag", subject = "player", flag_key = "talked_ryan_today", operator = "is_false" }] }
+flagEffects = [{ flag = "talked_ryan_today", op = "set" }]
+time_progression_minutes = 0
+
+[[canvases.nodes.exit_block.choices]]
+text = "Leave"
+targetType = "location"
+locationId = "home_ryans_room"
+time_progression_minutes = 0
+
+[[canvases.nodes]]
+id = "talk"
+name = "Talk to Ryan"
+blocks = [
+  { type = "dialog", content = "Hey, @player.nickname. You need the bathroom or something?", props = { speaker = "npc", npcId = "npc_ryan" } },
+  { type = "paragraph", content = "His eyes flick to your chest and straight back to the screen. His ears go pink." },
+  { type = "dialog", content = "It's free. I checked.", props = { speaker = "npc", npcId = "npc_ryan" } },
+  { type = "dialog", content = "Thanks. I'll be quick.", props = { speaker = "player" } },
+  { type = "paragraph", content = "Your face warms. Neither of you says anything about where he looked." },
+]
+
+[canvases.nodes.exit_block]
+type = "choices"
+
+[[canvases.nodes.exit_block.choices]]
+text = "Done"
+targetType = "location"
+locationId = "home_ryans_room"
+time_progression_minutes = 5
+
+[[canvases]]
+id = "ryan_room_weekend"
+name = "Ryan"
+
+[canvases.trigger]
+location = "home_ryans_room"
+trigger_mode = "manual"
+is_repeatable = true
+npc = "npc_ryan"
+requires_npc = "npc_ryan"
+conditions = { version = "1.0", logic = "AND", items = [{ type = "flag", subject = "player", flag_key = "met_ryan", operator = "is_true" }, { type = "weekday", weekdays = [5, 6] }, { type = "time_of_day", start_time = "10:30", end_time = "23:00" }] }
+
+[[canvases.nodes]]
+id = "hub"
+name = "Ryan"
+blocks = [
+  { type = "paragraph", content = "Ryan's on his bed with a controller, headphones round his neck." },
+  { type = "image", props = { description = "A man of 22 on an unmade bed with a game controller, headphones round his neck, a weekend's mess of clothes on the floor.", search_queries = ["man 22 unmade bed game controller messy bedroom", "young man gaming on bed headphones clothes on floor"], pool_dir = "people/ryan_room_weekend_t0", pool = 1 } },
+]
+
+[canvases.nodes.exit_block]
+type = "choices"
+
+[[canvases.nodes.exit_block.choices]]
+text = "Talk (5 min)"
+targetType = "node"
+nodeId = "talk"
+show_when_locked = true
+locked_text = "Talk (5 min) — you've already talked today."
+conditions = { version = "1.0", logic = "AND", items = [{ type = "flag", subject = "player", flag_key = "talked_ryan_today", operator = "is_false" }] }
+flagEffects = [{ flag = "talked_ryan_today", op = "set" }]
+time_progression_minutes = 0
+
+[[canvases.nodes.exit_block.choices]]
+text = "Leave"
+targetType = "location"
+locationId = "home_ryans_room"
+time_progression_minutes = 0
+
+[[canvases.nodes]]
+id = "talk"
+name = "Talk to Ryan"
+blocks = [
+  { type = "dialog", content = "Hey, @player.nickname. You need the bathroom or something?", props = { speaker = "npc", npcId = "npc_ryan" } },
+  { type = "paragraph", content = "His eyes flick to your chest and straight back to the screen. His ears go pink." },
+  { type = "dialog", content = "It's free. I checked.", props = { speaker = "npc", npcId = "npc_ryan" } },
+  { type = "dialog", content = "Thanks. I'll be quick.", props = { speaker = "player" } },
+  { type = "paragraph", content = "Your face warms. Neither of you says anything about where he looked." },
+]
+
+[canvases.nodes.exit_block]
+type = "choices"
+
+[[canvases.nodes.exit_block.choices]]
+text = "Done"
+targetType = "location"
+locationId = "home_ryans_room"
+time_progression_minutes = 5
+
+[[canvases]]
+id = "ryan_kitchen"
+name = "Ryan"
+
+[canvases.trigger]
+location = "home_kitchen"
+trigger_mode = "manual"
+is_repeatable = true
+npc = "npc_ryan"
+requires_npc = "npc_ryan"
+conditions = { version = "1.0", logic = "AND", items = [{ type = "flag", subject = "player", flag_key = "met_ryan", operator = "is_true" }] }
+
+[[canvases.nodes]]
+id = "hub"
+name = "Ryan"
+blocks = [
+  { type = "paragraph", content = "Ryan's eating standing up at the counter, straight out of the pan." },
+  { type = "image", props = { description = "A man of 22 eating out of a frying pan at a kitchen counter.", search_queries = ["young man eating from frying pan kitchen counter", "man 22 standing eating at counter"], pool_dir = "people/ryan_kitchen_t0", pool = 1 } },
+]
+
+[canvases.nodes.exit_block]
+type = "choices"
+
+[[canvases.nodes.exit_block.choices]]
+text = "Talk (5 min)"
+targetType = "node"
+nodeId = "talk"
+show_when_locked = true
+locked_text = "Talk (5 min) — you've already talked today."
+conditions = { version = "1.0", logic = "AND", items = [{ type = "flag", subject = "player", flag_key = "talked_ryan_today", operator = "is_false" }] }
+flagEffects = [{ flag = "talked_ryan_today", op = "set" }]
+time_progression_minutes = 0
+
+[[canvases.nodes.exit_block.choices]]
+text = "Leave"
+targetType = "location"
+locationId = "home_kitchen"
+time_progression_minutes = 0
+
+[[canvases.nodes]]
+id = "talk"
+name = "Talk to Ryan"
+blocks = [
+  { type = "dialog", content = "There's more in the pan. Don't tell Mark I made it.", props = { speaker = "npc", npcId = "npc_ryan" } },
+  { type = "paragraph", content = "He hands you a fork without looking at you." },
+  { type = "dialog", content = "Your secret's safe. Give me that.", props = { speaker = "player" } },
+  { type = "paragraph", content = "You grin, take the fork and eat out of the pan beside him." },
+  { type = "paragraph", content = "He says he'll make more tomorrow, if you're home." },
+]
+
+[canvases.nodes.exit_block]
+type = "choices"
+
+[[canvases.nodes.exit_block.choices]]
+text = "Done"
+targetType = "location"
+locationId = "home_kitchen"
+time_progression_minutes = 5
+
+[[canvases]]
+id = "ryan_living_room"
+name = "Ryan"
+
+[canvases.trigger]
+location = "home_living_room"
+trigger_mode = "manual"
+is_repeatable = true
+npc = "npc_ryan"
+requires_npc = "npc_ryan"
+conditions = { version = "1.0", logic = "AND", items = [{ type = "flag", subject = "player", flag_key = "met_ryan", operator = "is_true" }] }
+
+[[canvases.nodes]]
+id = "hub"
+name = "Ryan"
+blocks = [
+  { type = "paragraph", content = "Ryan's sprawled on the couch with the TV on." },
+  { type = "image", props = { description = "A man of 22 sprawled on a couch in a living room with the TV on.", search_queries = ["young man sprawled on couch living room watching tv", "man 22 lying on sofa in living room tv"], pool_dir = "people/ryan_couch_t0", pool = 1 } },
+]
+
+[canvases.nodes.exit_block]
+type = "choices"
+
+[[canvases.nodes.exit_block.choices]]
+text = "Talk (5 min)"
+targetType = "node"
+nodeId = "talk"
+show_when_locked = true
+locked_text = "Talk (5 min) — you've already talked today."
+conditions = { version = "1.0", logic = "AND", items = [{ type = "flag", subject = "player", flag_key = "talked_ryan_today", operator = "is_false" }] }
+flagEffects = [{ flag = "talked_ryan_today", op = "set" }]
+time_progression_minutes = 0
+
+[[canvases.nodes.exit_block.choices]]
+text = "Leave"
+targetType = "location"
+locationId = "home_living_room"
+time_progression_minutes = 0
+
+[[canvases.nodes]]
+id = "talk"
+name = "Talk to Ryan"
+blocks = [
+  { type = "dialog", content = "Sit, if you want. It's a rerun.", props = { speaker = "npc", npcId = "npc_ryan" } },
+  { type = "paragraph", content = "He pulls his feet in so you can." },
+  { type = "dialog", content = "Mark's got the remote. Don't even ask.", props = { speaker = "npc", npcId = "npc_ryan" } },
+  { type = "dialog", content = "Like I'd ask him.", props = { speaker = "player" } },
+  { type = "paragraph", content = "You sink into the couch next to him, and your shoulders come down." },
+  { type = "paragraph", content = "He says he'll save you the good end of the couch next time." },
+]
+
+[canvases.nodes.exit_block]
+type = "choices"
+
+[[canvases.nodes.exit_block.choices]]
+text = "Done"
+targetType = "location"
+locationId = "home_living_room"
+time_progression_minutes = 5
+
+[[canvases]]
+id = "home_tv"
+name = "Watch TV (1 hour, +5 energy)"
+
+[canvases.trigger]
+location = "home_living_room"
+trigger_mode = "manual"
+is_repeatable = true
+max_triggers_per_day = 2
+show_when_blocked = true
+cooldown_message = "you've watched enough TV for one day."
+
+[[canvases.nodes]]
+id = "watch"
+name = "Watch TV"
+blocks = [
+  { type = "paragraph", content = "You curl up at the end of the couch and let an hour of TV wash over you." },
+  { type = "group", props = { conditions = { version = "1.0", logic = "AND", items = [{ type = "npc_at_location", npc_id = "npc_mark", location_id = "home_living_room", operator = "is_present" }, { type = "npc_at_location", npc_id = "npc_ryan", location_id = "home_living_room", operator = "is_present" }] } }, blocks = [
+    { type = "paragraph", content = "Mark changes the channel twice without asking. Ryan laughs at the same parts you do." },
+    { type = "dialog", content = "Don't touch the remote, kid. I'm watching this one.", props = { speaker = "npc", npcId = "npc_mark" } },
+    { type = "dialog", content = "Told you this bit was good. Wait for it. Here it comes.", props = { speaker = "npc", npcId = "npc_ryan" } },
+  ] },
+  { type = "group", props = { conditions = { version = "1.0", logic = "AND", items = [{ type = "npc_at_location", npc_id = "npc_mark", location_id = "home_living_room", operator = "is_present" }] } }, blocks = [
+    { type = "paragraph", content = "Mark changes the channel twice without asking." },
+    { type = "dialog", content = "Don't touch the remote, kid. I'm watching this one.", props = { speaker = "npc", npcId = "npc_mark" } },
+  ] },
+  { type = "group", props = { conditions = { version = "1.0", logic = "AND", items = [{ type = "npc_at_location", npc_id = "npc_ryan", location_id = "home_living_room", operator = "is_present" }] } }, blocks = [
+    { type = "paragraph", content = "Ryan laughs at the same parts you do." },
+    { type = "dialog", content = "Told you this bit was good. Wait for it.", props = { speaker = "npc", npcId = "npc_ryan" } },
+  ] },
+  { type = "paragraph", content = "When it's over, you pull out your phone and count what you've got, and what it'll take." },
+]
+
+[canvases.nodes.exit_block]
+type = "choices"
+
+[[canvases.nodes.exit_block.choices]]
+text = "Done"
+targetType = "location"
+locationId = "home_living_room"
+time_progression_minutes = 60
+effects = [{ trait = "energy", op = "add", value = 5, clamp = true }]
+
+[[canvases]]
+id = "home_dishes"
+name = "Do the dishes (15 min)"
+
+[canvases.trigger]
+location = "home_kitchen"
+trigger_mode = "manual"
+is_repeatable = true
+max_triggers_per_day = 1
+show_when_blocked = true
+cooldown_message = "the sink's empty."
+
+[[canvases.nodes]]
+id = "do"
+name = "The dishes"
+blocks = [
+  { type = "paragraph", content = "You run the water hot and work through the pile in the sink: plates, mugs, the pan nobody wants to scrub." },
+  { type = "group", props = { conditions = { version = "1.0", logic = "AND", items = [{ type = "npc_at_location", npc_id = "npc_laura", location_id = "home_kitchen", operator = "is_present" }, { type = "npc_at_location", npc_id = "npc_mark", location_id = "home_kitchen", operator = "is_present" }] } }, blocks = [
+    { type = "paragraph", content = "Mom picks up a towel and dries beside you." },
+    { type = "dialog", content = "Thank you, baby. Really. You don't have to do this.", props = { speaker = "npc", npcId = "npc_laura" } },
+  { type = "dialog", content = "It's fine, Mom. Go sit down.", props = { speaker = "player" } },
+    { type = "paragraph", content = "Mark watches you over his coffee and doesn't offer to help." },
+  ] },
+  { type = "group", props = { conditions = { version = "1.0", logic = "AND", items = [{ type = "npc_at_location", npc_id = "npc_laura", location_id = "home_kitchen", operator = "is_present" }, { type = "npc_at_location", npc_id = "npc_ryan", location_id = "home_kitchen", operator = "is_present" }] } }, blocks = [
+    { type = "paragraph", content = "Mom picks up a towel and dries beside you." },
+    { type = "dialog", content = "Thank you, baby. Really. You don't have to do this.", props = { speaker = "npc", npcId = "npc_laura" } },
+  { type = "dialog", content = "It's fine, Mom. Go sit down.", props = { speaker = "player" } },
+    { type = "paragraph", content = "Ryan leans on the counter eating, and hands you his plate." },
+  ] },
+  { type = "group", props = { conditions = { version = "1.0", logic = "AND", items = [{ type = "npc_at_location", npc_id = "npc_laura", location_id = "home_kitchen", operator = "is_present" }] } }, blocks = [
+    { type = "paragraph", content = "Mom picks up a towel and dries beside you." },
+    { type = "dialog", content = "Thank you, baby. Really. You don't have to do this.", props = { speaker = "npc", npcId = "npc_laura" } },
+  { type = "dialog", content = "It's fine, Mom. Go sit down.", props = { speaker = "player" } },
+  ] },
+  { type = "paragraph", content = "When the last pan's on the rack, you dry your hands and count what's in your purse against the rent." },
+]
+
+[canvases.nodes.exit_block]
+type = "choices"
+
+[[canvases.nodes.exit_block.choices]]
+text = "Done"
+targetType = "location"
+locationId = "home_kitchen"
+time_progression_minutes = 15
+
+[[canvases]]
+id = "home_wait"
+name = "Wait (30 min)"
+
+[canvases.trigger]
+location = "home_hall"
+trigger_mode = "manual"
+is_repeatable = true
+
+[[canvases.nodes]]
+id = "wait"
+name = "Wait"
+blocks = [
+  { type = "paragraph", content = "You sit on the bottom stair with your phone for half an hour and let the house go on around you." },
+  { type = "group", props = { conditions = { version = "1.0", logic = "AND", items = [{ type = "npc_at_location", npc_id = "npc_ryan", location_id = "home_hall", operator = "is_present" }] } }, blocks = [
+    { type = "paragraph", content = "Ryan's on the top step." },
+    { type = "dialog", content = "Don't even think about it. I'm next for the bathroom.", props = { speaker = "npc", npcId = "npc_ryan" } },
+  ] },
+  { type = "paragraph", content = "Then you get up. Somewhere out there is money, and you're not making it on the stairs." },
+]
+
+[canvases.nodes.exit_block]
+type = "choices"
+
+[[canvases.nodes.exit_block.choices]]
+text = "Done"
+targetType = "location"
+locationId = "home_hall"
+time_progression_minutes = 30
 
 # ── P04 · travel: four one-screen canvases. A canvas's costs are checked and taken on entry, and an
 # unaffordable one shows dimmed with its cost (v2.py:6700-6732); the choice spends the minutes. ──
@@ -1962,14 +2838,14 @@ location = "home_her_room"
 trigger_mode = "manual"
 is_repeatable = true
 show_when_blocked = true
-cooldown_message = "you're not tired enough yet. From 9pm."
+cooldown_message = "not until 9pm."
 conditions = { version = "1.0", logic = "AND", items = [{ type = "time_of_day", start_time = "21:00", end_time = "03:00" }] }
 
 [[canvases.nodes]]
 id = "do"
 name = "Sleep (8 hours, energy to full)"
 blocks = [
-  { type = "paragraph", content = "You get out of your clothes and into your pyjamas: the thin top and the little shorts. The sheet is cool on your bare legs, and your nipples tighten against the thin top." },
+  { type = "paragraph", content = "You pull on your pyjamas: the thin top and the little shorts. The sheet is cool on your bare legs, and your nipples tighten against the thin top." },
   { type = "image", props = { description = "A woman of 18 in a single bed under a thin sheet, in a thin pyjama top and shorts, lights off. Alone.", search_queries = ["woman 18 single bed thin sheet pyjama shorts night", "girl lying in bed in a thin top and shorts, lights off"], pool_dir = "body/sleep_t3", pool = 2 } },
   { type = "paragraph", content = "You're gone before you've finished thinking about tomorrow." },
 ]
@@ -1994,15 +2870,44 @@ name = "Eat something (20 min, +15 energy)"
 location = "home_kitchen"
 trigger_mode = "manual"
 is_repeatable = true
-max_triggers_per_day = 3
 show_when_blocked = true
-cooldown_message = "you're not hungry right now."
+locked_text = "you're not hungry right now."
+# P34 — one count for every meal, shared with Mom's "Eat with her" and lunch (v2.py:5590 keys the
+# per-day limit by canvas name, so it can't be shared); the day turn sets it to 0.
+conditions = { version = "1.0", logic = "AND", items = [{ type = "trait", subject = "player", trait_key = "meals_today", operator = "lt", value = 3 }] }
 
 [[canvases.nodes]]
 id = "do"
 name = "Eat something (20 min, +15 energy)"
 blocks = [
   { type = "paragraph", content = "You eat standing at the counter: toast, whatever's in the fridge, coffee from the pot." },
+  { type = "group", props = { conditions = { version = "1.0", logic = "AND", items = [{ type = "npc_at_location", npc_id = "npc_laura", location_id = "home_kitchen", operator = "is_present" }, { type = "npc_at_location", npc_id = "npc_mark", location_id = "home_kitchen", operator = "is_present" }] } }, blocks = [
+    { type = "paragraph", content = "Mom slides the butter across." },
+    { type = "dialog", content = "Sit down to eat, baby. You're not a horse.", props = { speaker = "npc", npcId = "npc_laura" } },
+    { type = "dialog", content = "Okay, okay. I'm sitting.", props = { speaker = "player" } },
+    { type = "paragraph", content = "Your face warms, and you hide it in your plate." },
+    { type = "paragraph", content = "Mark watches you over his coffee." },
+    { type = "dialog", content = "Some of us paid for that bread, kid.", props = { speaker = "npc", npcId = "npc_mark" } },
+    { type = "dialog", content = "I'll pay you back, Mark.", props = { speaker = "player" } },
+    { type = "paragraph", content = "Your face warms, and you hide it in your plate." },
+  ] },
+  { type = "group", props = { conditions = { version = "1.0", logic = "AND", items = [{ type = "npc_at_location", npc_id = "npc_laura", location_id = "home_kitchen", operator = "is_present" }, { type = "npc_at_location", npc_id = "npc_ryan", location_id = "home_kitchen", operator = "is_present" }] } }, blocks = [
+    { type = "paragraph", content = "Mom slides the butter across." },
+    { type = "dialog", content = "Sit down to eat, baby. You're not a horse.", props = { speaker = "npc", npcId = "npc_laura" } },
+    { type = "dialog", content = "Okay, okay. I'm sitting.", props = { speaker = "player" } },
+    { type = "paragraph", content = "Your face warms, and you hide it in your plate." },
+    { type = "paragraph", content = "Ryan steals a corner of your toast." },
+    { type = "dialog", content = "Kitchen tax. You'd do the same to me.", props = { speaker = "npc", npcId = "npc_ryan" } },
+    { type = "dialog", content = "Hands off, Ryan.", props = { speaker = "player" } },
+    { type = "paragraph", content = "Your face warms, and you hide it in your plate." },
+  ] },
+  { type = "group", props = { conditions = { version = "1.0", logic = "AND", items = [{ type = "npc_at_location", npc_id = "npc_laura", location_id = "home_kitchen", operator = "is_present" }] } }, blocks = [
+    { type = "paragraph", content = "Mom slides the butter across." },
+    { type = "dialog", content = "Sit down to eat, baby. You're not a horse.", props = { speaker = "npc", npcId = "npc_laura" } },
+    { type = "dialog", content = "Okay, okay. I'm sitting.", props = { speaker = "player" } },
+    { type = "paragraph", content = "Your face warms, and you hide it in your plate." },
+  ] },
+  { type = "paragraph", content = "You rinse the plate and think about where the next dollar comes from." },
 ]
 
 [canvases.nodes.exit_block]
@@ -2013,7 +2918,7 @@ text = "Done"
 targetType = "location"
 locationId = "home_kitchen"
 time_progression_minutes = 20
-effects = [{ trait = "energy", op = "add", value = 15, clamp = true }]
+effects = [{ trait = "energy", op = "add", value = 15, clamp = true }, { trait = "meals_today", op = "add", value = 1 }]
 
 [[canvases]]
 id = "loop_shower"
@@ -2026,15 +2931,17 @@ is_repeatable = true
 # P06 re-check: two a day, greyed in her voice (craft/systems.md rule 5).
 max_triggers_per_day = 2
 show_when_blocked = true
+locked_text = "Ryan's in the shower."
+conditions = { version = "1.0", logic = "AND", items = [{ type = "npc_at_location", npc_id = "npc_ryan", location_id = "home_bathroom", operator = "is_absent" }] }
 cooldown_message = "you've showered enough for one day."
 
 [[canvases.nodes]]
 id = "do"
 name = "Shower (15 min, +5 energy)"
 blocks = [
-  { type = "paragraph", content = "The water takes forever to run hot. You strip and step in anyway. It hits your nipples cold, and they go hard. Then it warms, and runs down your belly and between your legs, and you tip your head back and let it." },
+  { type = "paragraph", content = "The water takes forever to run hot. You step in anyway. It hits your nipples cold, and they go hard. Then it warms, and runs down your belly and between your legs, and you tip your head back and let it." },
   { type = "image", props = { description = "A woman of 18 in a small family bathroom shower, water running down her bare body, head tipped back. Alone.", search_queries = ["woman 18 shower water running down body gif", "girl in a small home shower head tipped back gif"], pool_dir = "body/daily_shower_t4", pool = 4 } },
-  { type = "paragraph", content = "You towel off and get dressed again." },
+  { type = "paragraph", content = "You towel off. Out there, the rent isn't paying itself." },
 ]
 
 [canvases.nodes.exit_block]

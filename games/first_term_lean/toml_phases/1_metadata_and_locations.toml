@@ -4,7 +4,7 @@
 id = "player"
 name = "Ella"
 # money is not a 0-100 meter: every money effect must set clamp = false (v2.py:7361-7364).
-core_traits = { energy = 100, money = 0, corruption = 0, exhibitionism = 0 }
+core_traits = { energy = 100, money = 0, corruption = 0, exhibitionism = 0, sundays_paid = 0, rent_paid_total = 0, meals_today = 0 }
 # Every player flag is declared here. P05: zoe_place_known (set by P20) reveals Zoe's Apartment.
 flag_keys = [
   "zoe_place_known",
@@ -22,6 +22,12 @@ flag_keys = [
   "met_ryan", "ryan_hall_seen", "ryan_hall_past", "ryan_hall_spoke", "ryan_hall_waited", "goal1_shown",
   # Goal 1's card reads these; P21 sets cafe_hired, P11 sets rent_paid_once.
   "cafe_hired", "rent_paid_once",
+  # P11 — Sunday rent
+  "rent_handled_this_week", "pays_her_own_way",
+  # P34 — Mark's and Ryan's Talk, once a day each; the day turn clears them
+  "talked_mark_today", "talked_ryan_today",
+  # P34 — Eat with her, once a day; the day turn clears it
+  "ate_with_mom_today",
 ]
 # P13 — the name screen (template_import.py:2332-2357). "name" writes $player.name; any other id
 # becomes $player.<id> (v2.py:1569-1573). Printed with @player / @player.nickname (v2.py:18598-18629).
@@ -299,12 +305,15 @@ is_container = true
 [[locations]]
 id = "near_cafe"
 name = "Café"
-description = "The café across from campus: the coffee machine hissing, a long counter, a tip jar by the till. A sign on the door says it's open from 7am to 9pm."
+description = "The café across from campus: the coffee machine hissing, a long counter, a tip jar by the till. A sign on the door says it's open from 7am to 9pm. Tom or Chris is behind the counter weekdays from 7am and weekends from 10am; you can take an hour or a whole shift, as long as one of them is in till you're done."
 # P05 re-check: the Help Wanted line shows until P21 sets cafe_hired (first match, v2.py:11775-11819).
 description_variants = [
   { conditions = { version = "1.0", logic = "AND", items = [
       { type = "flag", subject = "player", flag_key = "cafe_hired", operator = "is_false" },
     ] }, text = "The café across from campus: the coffee machine hissing, a long counter, a tip jar by the till. A sign on the door says it's open from 7am to 9pm. A Help Wanted sign is taped in the window." },
+  { conditions = { version = "1.0", logic = "AND", items = [
+      { type = "flag", subject = "player", flag_key = "cafe_first_shift_done", operator = "is_false" },
+    ] }, text = "The café across from campus: the coffee machine hissing, a long counter, a tip jar by the till. A sign on the door says it's open from 7am to 9pm. Your first shift is a weekday between 10am and 3pm, when Tom and Chris are both in." },
 ]
 parent = "near_campus"
 entry_from = "campus_quad"

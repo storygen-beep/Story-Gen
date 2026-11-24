@@ -1,0 +1,574 @@
+{
+ "items": [
+  {
+   "row": "B10",
+   "screen": "cafe_hire.sign",
+   "why": "screen changed"
+  },
+  {
+   "row": "B11",
+   "screen": "cafe_hire.sign",
+   "why": "screen changed"
+  },
+  {
+   "row": "B12",
+   "screen": "cafe_hire.sign",
+   "why": "screen changed"
+  },
+  {
+   "row": "B13",
+   "screen": "cafe_hire.sign",
+   "why": "screen changed"
+  },
+  {
+   "row": "B2",
+   "screen": "*",
+   "why": "a screen of the scene changed"
+  },
+  {
+   "row": "B3",
+   "screen": "cafe_hire.sign",
+   "why": "screen changed"
+  },
+  {
+   "row": "B4",
+   "screen": "cafe_hire.sign",
+   "why": "screen changed"
+  },
+  {
+   "row": "B5",
+   "screen": "cafe_hire.sign",
+   "why": "screen changed"
+  },
+  {
+   "row": "B6",
+   "screen": "cafe_hire.sign",
+   "why": "screen changed"
+  },
+  {
+   "row": "B7",
+   "screen": "cafe_hire.sign",
+   "why": "screen changed"
+  },
+  {
+   "row": "B8",
+   "screen": "cafe_hire.sign",
+   "why": "screen changed"
+  },
+  {
+   "row": "B9",
+   "screen": "*",
+   "why": "a screen of the scene changed"
+  },
+  {
+   "row": "C1002",
+   "screen": "cafe_hire.sign",
+   "why": "screen changed"
+  },
+  {
+   "row": "C1008",
+   "screen": "cafe_hire.sign",
+   "why": "screen changed"
+  },
+  {
+   "row": "C1013",
+   "screen": "cafe_hire.sign",
+   "why": "screen changed"
+  },
+  {
+   "row": "C1021",
+   "screen": "cafe_hire.sign",
+   "why": "screen changed"
+  },
+  {
+   "row": "C1022",
+   "screen": "cafe_hire.sign",
+   "why": "screen changed"
+  },
+  {
+   "row": "C1033",
+   "screen": "cafe_hire.sign",
+   "why": "screen changed"
+  },
+  {
+   "row": "C109",
+   "screen": "cafe_hire.sign",
+   "why": "screen changed"
+  },
+  {
+   "row": "C115",
+   "screen": "cafe_hire.sign",
+   "why": "screen changed"
+  },
+  {
+   "row": "C1173",
+   "screen": "cafe_hire.sign",
+   "why": "screen changed"
+  },
+  {
+   "row": "C1184",
+   "screen": "cafe_hire.sign",
+   "why": "screen changed"
+  },
+  {
+   "row": "C1185",
+   "screen": "cafe_hire.sign",
+   "why": "screen changed"
+  },
+  {
+   "row": "C1189",
+   "screen": "cafe_hire.sign",
+   "why": "screen changed"
+  },
+  {
+   "row": "C1198",
+   "screen": "cafe_hire.sign",
+   "why": "screen changed"
+  },
+  {
+   "row": "C120",
+   "screen": "cafe_hire.sign",
+   "why": "screen changed"
+  },
+  {
+   "row": "C1200",
+   "screen": "cafe_hire.sign",
+   "why": "screen changed"
+  },
+  {
+   "row": "C1220",
+   "screen": "cafe_hire.sign",
+   "why": "screen changed"
+  },
+  {
+   "row": "C1221",
+   "screen": "cafe_hire.sign",
+   "why": "screen changed"
+  },
+  {
+   "row": "C1250",
+   "screen": "cafe_hire.sign",
+   "why": "screen changed"
+  },
+  {
+   "row": "C1303",
+   "screen": "cafe_hire.sign",
+   "why": "screen changed"
+  },
+  {
+   "row": "C1313",
+   "screen": "cafe_hire.sign",
+   "why": "screen changed"
+  },
+  {
+   "row": "C1337",
+   "screen": "cafe_hire.sign",
+   "why": "screen changed"
+  },
+  {
+   "row": "C1340",
+   "screen": "cafe_hire.sign",
+   "why": "screen changed"
+  },
+  {
+   "row": "C1342",
+   "screen": "cafe_hire.sign",
+   "why": "screen changed"
+  },
+  {
+   "row": "C1345",
+   "screen": "cafe_hire.sign",
+   "why": "screen changed"
+  },
+  {
+   "row": "C1360",
+   "screen": "cafe_hire.sign",
+   "why": "screen changed"
+  },
+  {
+   "row": "C1421",
+   "screen": "cafe_hire.sign",
+   "why": "screen changed"
+  },
+  {
+   "row": "C1423",
+   "screen": "cafe_hire.sign",
+   "why": "screen changed"
+  },
+  {
+   "row": "C1425",
+   "screen": "cafe_hire.sign",
+   "why": "screen changed"
+  },
+  {
+   "row": "C1427",
+   "screen": "cafe_hire.sign",
+   "why": "screen changed"
+  },
+  {
+   "row": "C1428",
+   "screen": "cafe_hire.sign",
+   "why": "screen changed"
+  },
+  {
+   "row": "C1431",
+   "screen": "cafe_hire.sign",
+   "why": "screen changed"
+  },
+  {
+   "row": "C1432",
+   "screen": "cafe_hire.sign",
+   "why": "screen changed"
+  },
+  {
+   "row": "C1433",
+   "screen": "cafe_hire.sign",
+   "why": "screen changed"
+  },
+  {
+   "row": "C1434",
+   "screen": "cafe_hire.sign",
+   "why": "screen changed"
+  },
+  {
+   "row": "C1438",
+   "screen": "cafe_hire.sign",
+   "why": "screen changed"
+  },
+  {
+   "row": "C1441",
+   "screen": "cafe_hire.sign",
+   "why": "screen changed"
+  },
+  {
+   "row": "C146",
+   "screen": "cafe_hire.sign",
+   "why": "screen changed"
+  },
+  {
+   "row": "C148",
+   "screen": "cafe_hire.sign",
+   "why": "screen changed"
+  },
+  {
+   "row": "C149",
+   "screen": "cafe_hire.sign",
+   "why": "screen changed"
+  },
+  {
+   "row": "C151",
+   "screen": "cafe_hire.sign",
+   "why": "screen changed"
+  },
+  {
+   "row": "C162",
+   "screen": "cafe_hire.sign",
+   "why": "screen changed"
+  },
+  {
+   "row": "C1637",
+   "screen": "cafe_hire.sign",
+   "why": "screen changed"
+  },
+  {
+   "row": "C180",
+   "screen": "cafe_hire.sign",
+   "why": "screen changed"
+  },
+  {
+   "row": "C330",
+   "screen": "cafe_hire.sign",
+   "why": "screen changed"
+  },
+  {
+   "row": "C422",
+   "screen": "cafe_hire.sign",
+   "why": "screen changed"
+  },
+  {
+   "row": "C442",
+   "screen": "cafe_hire.sign",
+   "why": "screen changed"
+  },
+  {
+   "row": "C447",
+   "screen": "cafe_hire.sign",
+   "why": "screen changed"
+  },
+  {
+   "row": "C448",
+   "screen": "cafe_hire.sign",
+   "why": "screen changed"
+  },
+  {
+   "row": "C450",
+   "screen": "cafe_hire.sign",
+   "why": "screen changed"
+  },
+  {
+   "row": "C451",
+   "screen": "cafe_hire.sign",
+   "why": "screen changed"
+  },
+  {
+   "row": "C460",
+   "screen": "cafe_hire.sign",
+   "why": "screen changed"
+  },
+  {
+   "row": "C461",
+   "screen": "cafe_hire.sign",
+   "why": "screen changed"
+  },
+  {
+   "row": "C519",
+   "screen": "cafe_hire.sign",
+   "why": "screen changed"
+  },
+  {
+   "row": "C593",
+   "screen": "cafe_hire.sign",
+   "why": "screen changed"
+  },
+  {
+   "row": "C596",
+   "screen": "cafe_hire.sign",
+   "why": "screen changed"
+  },
+  {
+   "row": "C601",
+   "screen": "cafe_hire.sign",
+   "why": "screen changed"
+  },
+  {
+   "row": "C618",
+   "screen": "cafe_hire.sign",
+   "why": "screen changed"
+  },
+  {
+   "row": "C619",
+   "screen": "cafe_hire.sign",
+   "why": "screen changed"
+  },
+  {
+   "row": "C620",
+   "screen": "cafe_hire.sign",
+   "why": "screen changed"
+  },
+  {
+   "row": "C622",
+   "screen": "cafe_hire.sign",
+   "why": "screen changed"
+  },
+  {
+   "row": "C625",
+   "screen": "cafe_hire.sign",
+   "why": "screen changed"
+  },
+  {
+   "row": "C626",
+   "screen": "cafe_hire.sign",
+   "why": "screen changed"
+  },
+  {
+   "row": "C627",
+   "screen": "cafe_hire.sign",
+   "why": "screen changed"
+  },
+  {
+   "row": "C630",
+   "screen": "cafe_hire.sign",
+   "why": "screen changed"
+  },
+  {
+   "row": "C632",
+   "screen": "cafe_hire.sign",
+   "why": "screen changed"
+  },
+  {
+   "row": "C644",
+   "screen": "cafe_hire.sign",
+   "why": "screen changed"
+  },
+  {
+   "row": "C758",
+   "screen": "cafe_hire.sign",
+   "why": "screen changed"
+  },
+  {
+   "row": "C762",
+   "screen": "cafe_hire.sign",
+   "why": "screen changed"
+  },
+  {
+   "row": "C769",
+   "screen": "cafe_hire.sign",
+   "why": "screen changed"
+  },
+  {
+   "row": "C770",
+   "screen": "cafe_hire.sign",
+   "why": "screen changed"
+  },
+  {
+   "row": "C771",
+   "screen": "cafe_hire.sign",
+   "why": "screen changed"
+  },
+  {
+   "row": "C773",
+   "screen": "cafe_hire.sign",
+   "why": "screen changed"
+  },
+  {
+   "row": "C776",
+   "screen": "cafe_hire.sign",
+   "why": "screen changed"
+  },
+  {
+   "row": "C777",
+   "screen": "cafe_hire.sign",
+   "why": "screen changed"
+  },
+  {
+   "row": "C794",
+   "screen": "cafe_hire.sign",
+   "why": "screen changed"
+  },
+  {
+   "row": "C795",
+   "screen": "cafe_hire.sign",
+   "why": "screen changed"
+  },
+  {
+   "row": "C804",
+   "screen": "cafe_hire.sign",
+   "why": "screen changed"
+  },
+  {
+   "row": "C889",
+   "screen": "cafe_hire.sign",
+   "why": "screen changed"
+  },
+  {
+   "row": "C892",
+   "screen": "cafe_hire.sign",
+   "why": "screen changed"
+  },
+  {
+   "row": "C897",
+   "screen": "cafe_hire.sign",
+   "why": "screen changed"
+  },
+  {
+   "row": "C900",
+   "screen": "cafe_hire.sign",
+   "why": "screen changed"
+  },
+  {
+   "row": "C902",
+   "screen": "cafe_hire.sign",
+   "why": "screen changed"
+  },
+  {
+   "row": "C903",
+   "screen": "cafe_hire.sign",
+   "why": "screen changed"
+  },
+  {
+   "row": "C906",
+   "screen": "cafe_hire.sign",
+   "why": "screen changed"
+  },
+  {
+   "row": "C910",
+   "screen": "cafe_hire.sign",
+   "why": "screen changed"
+  },
+  {
+   "row": "C913",
+   "screen": "cafe_hire.sign",
+   "why": "screen changed"
+  },
+  {
+   "row": "C914",
+   "screen": "cafe_hire.sign",
+   "why": "screen changed"
+  },
+  {
+   "row": "C916",
+   "screen": "cafe_hire.sign",
+   "why": "screen changed"
+  },
+  {
+   "row": "C920",
+   "screen": "cafe_hire.sign",
+   "why": "screen changed"
+  },
+  {
+   "row": "C924",
+   "screen": "cafe_hire.sign",
+   "why": "screen changed"
+  },
+  {
+   "row": "C926",
+   "screen": "cafe_hire.sign",
+   "why": "screen changed"
+  },
+  {
+   "row": "C927",
+   "screen": "cafe_hire.sign",
+   "why": "screen changed"
+  },
+  {
+   "row": "C928",
+   "screen": "cafe_hire.sign",
+   "why": "screen changed"
+  },
+  {
+   "row": "C929",
+   "screen": "cafe_hire.sign",
+   "why": "screen changed"
+  },
+  {
+   "row": "C930",
+   "screen": "cafe_hire.sign",
+   "why": "screen changed"
+  },
+  {
+   "row": "C931",
+   "screen": "cafe_hire.sign",
+   "why": "screen changed"
+  },
+  {
+   "row": "C951",
+   "screen": "cafe_hire.sign",
+   "why": "screen changed"
+  },
+  {
+   "row": "C952",
+   "screen": "cafe_hire.sign",
+   "why": "screen changed"
+  },
+  {
+   "row": "C953",
+   "screen": "cafe_hire.sign",
+   "why": "screen changed"
+  },
+  {
+   "row": "C954",
+   "screen": "cafe_hire.sign",
+   "why": "screen changed"
+  },
+  {
+   "row": "L106",
+   "screen": "cafe_hire.sign",
+   "why": "screen changed"
+  },
+  {
+   "row": "L166",
+   "screen": "cafe_hire.sign",
+   "why": "screen changed"
+  }
+ ]
+}

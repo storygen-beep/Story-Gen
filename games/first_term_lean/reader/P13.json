@@ -1,6 +1,6 @@
 {
  "piece": "P13",
- "pass": 5,
+ "pass": 8,
  "screens": {
   "opening.wake": {
    "text": "e151e2a47117a98b",
@@ -63,9 +63,9 @@
    "all": "999e67fa1c2205c6"
   },
   "opening.sums": {
-   "text": "5a86ece0192c9eb7",
+   "text": "a541a1c36e0d9cff",
    "facts": "1bb55a6bea468407",
-   "all": "5a7f9f7e34f7e280"
+   "all": "51e02ac85027cfa7"
   },
   "opening.handover": {
    "text": "4fe187a129483ea0",
@@ -82,7 +82,7 @@
    "facts": "cbbdbf31101f41e2",
    "all": "f8efb229048f40a2"
   },
-  "*": "d817bff4bc185950"
+  "*": "4370e8177f2cdda3"
  },
  "rows": {
   "B1": "5276068df1ca6fa9",
@@ -167,7 +167,7 @@
   "C1267": "f0db81b801577bf2",
   "C1249": "a843f9b57e43a020",
   "C1250": "fde578d75b0d3620",
-  "C1265": "aa7b2f3c1d2b81da",
+  "C1265": "447179d04e01ff5d",
   "C1234": "1b2a2d5f05b10331",
   "L121": "45842b25d0708a15",
   "L125": "1fca3bfe1d0c2419",
@@ -210,7 +210,7 @@
   "C620": "76250e48ada2b843",
   "C613": "6f777b1fcd750dd1",
   "C644": "f5e1d79f3251dbab",
-  "C596": "13a70c920d120f51",
+  "C596": "6d9bba989a2b9666",
   "C448": "b86596f1a02766de",
   "C1340": "b76a6583ae88c60f",
   "C769": "f6b6f78a8f2e5ed7",
@@ -362,10 +362,15 @@
    "row": "B10",
    "screen": "opening.sums",
    "verdict": "PASS",
-   "line": "\u279c Ask about the Help Wanted sign at the caf\u00e9 across from campus. The manager's in Monday to Saturday, from 10am.",
-   "why": "One-time screen at 07:30\u201307:35 Mon wk1; on every path she showered (hair wet), Mark said the line (kitchen_rent), money is 0. who_is_where: Tom Mon\u2013Sat 10\u201321 near_cafe, Mark Sun 08\u201312 kitchen; cafe_hire opens Mon\u2013Sat 10:00\u201320:55. The caf\u00e9 description shows the Help Wanted sign until cafe_hired.",
+   "line": "Seventy-five by Sunday. You have nothing.",
+   "why": "one-time 7:30-7:35; money starts 0 (core_traits), first rent is $75 (PLAN \u00a72), Mark said \"one way or another\" on kitchen_rent on every path, she showered at 4b so hair wet holds; caf\u00e9 window has the sign (near_cafe text)",
    "cause": null,
-   "screen_hash": "5a7f9f7e34f7e280",
+   "note": false,
+   "screen_hash": {
+    "text": "a541a1c36e0d9cff",
+    "facts": "1bb55a6bea468407",
+    "all": "51e02ac85027cfa7"
+   },
    "row_hash": "c1c0e2ac2588a579",
    "carried": true
   },
@@ -396,9 +401,14 @@
    "screen": "opening.sums",
    "verdict": "N/A",
    "line": "Go down to the kitchen (5 min)",
-   "why": "The only button is a move, not a solo act.",
+   "why": "the only button is a move, not a solo act",
    "cause": null,
-   "screen_hash": "5a7f9f7e34f7e280",
+   "note": false,
+   "screen_hash": {
+    "text": "a541a1c36e0d9cff",
+    "facts": "1bb55a6bea468407",
+    "all": "51e02ac85027cfa7"
+   },
    "row_hash": "1e252efd0904a971",
    "carried": true
   },
@@ -428,10 +438,15 @@
    "row": "B12",
    "screen": "opening.sums",
    "verdict": "N/A",
-   "line": "",
-   "why": "Not a charged scene.",
+   "line": "Hair still wet, you sit down and do the sums.",
+   "why": "not a charged scene: the objective screen, nobody on it",
    "cause": null,
-   "screen_hash": "5a7f9f7e34f7e280",
+   "note": false,
+   "screen_hash": {
+    "text": "a541a1c36e0d9cff",
+    "facts": "1bb55a6bea468407",
+    "all": "51e02ac85027cfa7"
+   },
    "row_hash": "fd109745c67b71d7",
    "carried": true
   },
@@ -461,10 +476,15 @@
    "row": "B13",
    "screen": "opening.sums",
    "verdict": "N/A",
-   "line": "Hair still wet, you sit on the bed and do the sums.",
-   "why": "She's dressed; the body moment is screen 7 (room), not this screen.",
+   "line": "Hair still wet, you sit down and do the sums.",
+   "why": "not a moment alone with her body: she is dressed (screen 7 equips), doing sums; the dressing is screen 7's body moment",
    "cause": null,
-   "screen_hash": "5a7f9f7e34f7e280",
+   "note": false,
+   "screen_hash": {
+    "text": "a541a1c36e0d9cff",
+    "facts": "1bb55a6bea468407",
+    "all": "51e02ac85027cfa7"
+   },
    "row_hash": "aaf6518b64dcce55",
    "carried": true
   },
@@ -472,10 +492,11 @@
    "row": "B2",
    "screen": "*",
    "verdict": "PASS",
-   "line": "His eyes drop to where the towel ends on your wet thighs. One second.",
-   "why": "Every person's step 1: each goes from nothing to a first want or demand; no earlier scene with them to repeat.",
+   "line": "\"If Mark says anything to you about the money, you tell me first. Okay?\"",
+   "why": "first scene for Mark, Ryan and Mom: each gets a first step (rent line, the hall look, Mom's ask at the hand-over); nothing earlier to exceed",
    "cause": null,
-   "screen_hash": "4e2fe2f55f322f1f",
+   "note": false,
+   "screen_hash": "4370e8177f2cdda3",
    "row_hash": "4d9f2ebbce9a39cc",
    "carried": true
   },
@@ -505,10 +526,15 @@
    "row": "B3",
    "screen": "opening.sums",
    "verdict": "PASS",
-   "line": "\u279c Ask about the Help Wanted sign at the caf\u00e9 across from campus. The manager's in Monday to Saturday, from 10am.",
-   "why": "Points at the next step with a place and hours, and at Sunday's table; Mark 'like he'd already picked one' adds the threat.",
+   "line": "And Mark said \"one way or another\" like he'd already picked one.",
+   "why": "points at the caf\u00e9 sign and at Mark's other way; the card names the next steps",
    "cause": null,
-   "screen_hash": "5a7f9f7e34f7e280",
+   "note": false,
+   "screen_hash": {
+    "text": "a541a1c36e0d9cff",
+    "facts": "1bb55a6bea468407",
+    "all": "51e02ac85027cfa7"
+   },
    "row_hash": "4d1fce1c4523b5d4",
    "carried": true
   },
@@ -539,9 +565,14 @@
    "screen": "opening.sums",
    "verdict": "PASS",
    "line": "Seventy-five by Sunday. You have nothing.",
-   "why": "No sexual content on this screen; her reaction is in narration, no italic thought.",
+   "why": "stage 0: she reacts to the bill, in narration, no italic thought, chooses no act",
    "cause": null,
-   "screen_hash": "5a7f9f7e34f7e280",
+   "note": false,
+   "screen_hash": {
+    "text": "a541a1c36e0d9cff",
+    "facts": "1bb55a6bea468407",
+    "all": "51e02ac85027cfa7"
+   },
    "row_hash": "ced37cb0de6e7202",
    "carried": true
   },
@@ -571,10 +602,15 @@
    "row": "B5",
    "screen": "opening.sums",
    "verdict": "N/A",
-   "line": "Hair still wet, you sit on the bed and do the sums.",
-   "why": "She is alone (sheet: nobody); nothing she does is there to be seen.",
+   "line": "Hair still wet, you sit down and do the sums.",
+   "why": "she does nothing on this screen anyone could react to; nobody is there",
    "cause": null,
-   "screen_hash": "5a7f9f7e34f7e280",
+   "note": false,
+   "screen_hash": {
+    "text": "a541a1c36e0d9cff",
+    "facts": "1bb55a6bea468407",
+    "all": "51e02ac85027cfa7"
+   },
    "row_hash": "efcbd1ac6a95e2f2",
    "carried": true
   },
@@ -604,10 +640,15 @@
    "row": "B6",
    "screen": "opening.sums",
    "verdict": "N/A",
-   "line": "",
-   "why": "No offer on this screen.",
+   "line": "Go down to the kitchen (5 min)",
+   "why": "no offer on this screen",
    "cause": null,
-   "screen_hash": "5a7f9f7e34f7e280",
+   "note": false,
+   "screen_hash": {
+    "text": "a541a1c36e0d9cff",
+    "facts": "1bb55a6bea468407",
+    "all": "51e02ac85027cfa7"
+   },
    "row_hash": "0e32092e9fe64f2c",
    "carried": true
   },
@@ -637,10 +678,15 @@
    "row": "B7",
    "screen": "opening.sums",
    "verdict": "N/A",
-   "line": "",
-   "why": "No explicit beat on this screen.",
+   "line": "Seventy-five by Sunday. You have nothing.",
+   "why": "no explicit beat",
    "cause": null,
-   "screen_hash": "5a7f9f7e34f7e280",
+   "note": false,
+   "screen_hash": {
+    "text": "a541a1c36e0d9cff",
+    "facts": "1bb55a6bea468407",
+    "all": "51e02ac85027cfa7"
+   },
    "row_hash": "cef53154cc971fef",
    "carried": true
   },
@@ -725,10 +771,15 @@
    "row": "B8",
    "screen": "opening.sums",
    "verdict": "PASS",
-   "line": "\u279c Pay Mark on Sunday morning, at the kitchen table ($75 this week).",
-   "why": "$75 and Sunday match PLAN \u00a72/\u00a78; the manager's Mon\u2013Sat from 10am matches PLAN \u00a79c and Tom's row (near_cafe, weekdays 0\u20135, 10:00\u201321:00). No garment named.",
+   "line": "\u279c Pay Mark in full four Sundays in a row.",
+   "why": "$75 and four Sundays in a row agree with PLAN \u00a72 and \u00a78i and P11's pay nodes; manager Mon-Sat from 10am matches cafe_hire (weekdays 0-5, 10:00); no garment named",
    "cause": null,
-   "screen_hash": "5a7f9f7e34f7e280",
+   "note": false,
+   "screen_hash": {
+    "text": "a541a1c36e0d9cff",
+    "facts": "1bb55a6bea468407",
+    "all": "51e02ac85027cfa7"
+   },
    "row_hash": "80d415cf08e0ebfe",
    "carried": true
   },
@@ -746,11 +797,12 @@
   {
    "row": "B9",
    "screen": "*",
-   "verdict": "N/A",
-   "line": "",
-   "why": "PLAN.md:56/171: the companion is Zoe, the rival a classmate; neither is in the opening.",
+   "verdict": "PASS",
+   "line": "\"Keep your usual (5 min)\"",
+   "why": "solo buttons in the scene change state or show the act: the outfit buttons equip, the knot choices show the towel, sit with her shows the toast",
    "cause": null,
-   "screen_hash": "4e2fe2f55f322f1f",
+   "note": false,
+   "screen_hash": "4370e8177f2cdda3",
    "row_hash": "3b1fcdf549bcc558",
    "carried": true
   },
@@ -780,10 +832,15 @@
    "row": "C1008",
    "screen": "opening.sums",
    "verdict": "N/A",
-   "line": "",
-   "why": "No payment on this screen; the rise is P11's.",
+   "line": "Pay Mark your share every Sunday.",
+   "why": "no payment on this screen; the rise is said at payment in P11's pay75",
    "cause": null,
-   "screen_hash": "5a7f9f7e34f7e280",
+   "note": true,
+   "screen_hash": {
+    "text": "a541a1c36e0d9cff",
+    "facts": "1bb55a6bea468407",
+    "all": "51e02ac85027cfa7"
+   },
    "row_hash": "7a86c32012a0b1d3",
    "carried": true
   },
@@ -802,10 +859,15 @@
    "row": "C1013",
    "screen": "opening.sums",
    "verdict": "N/A",
-   "line": "",
-   "why": "No collection here.",
+   "line": "\u279c Pay Mark in full four Sundays in a row.",
+   "why": "no short week on this screen; NOTES keeps C1013 a note for P11",
    "cause": null,
-   "screen_hash": "5a7f9f7e34f7e280",
+   "note": true,
+   "screen_hash": {
+    "text": "a541a1c36e0d9cff",
+    "facts": "1bb55a6bea468407",
+    "all": "51e02ac85027cfa7"
+   },
    "row_hash": "bb1069aa828de0f6",
    "carried": true
   },
@@ -823,11 +885,16 @@
   {
    "row": "C1021",
    "screen": "opening.sums",
-   "verdict": "PASS",
-   "line": "\u279c Pay Mark on Sunday morning, at the kitchen table ($75 this week).",
-   "why": "The amount is a figure, $75.",
+   "verdict": "N/A",
+   "line": "Go down to the kitchen (5 min)",
+   "why": "no button carries a price",
    "cause": null,
-   "screen_hash": "5a7f9f7e34f7e280",
+   "note": true,
+   "screen_hash": {
+    "text": "a541a1c36e0d9cff",
+    "facts": "1bb55a6bea468407",
+    "all": "51e02ac85027cfa7"
+   },
    "row_hash": "ba42f7c2cf26a19a",
    "carried": true
   },
@@ -846,10 +913,15 @@
    "row": "C1022",
    "screen": "opening.sums",
    "verdict": "PASS",
-   "line": "\u279c Pay Mark on Sunday morning, at the kitchen table ($75 this week).",
-   "why": "`$` only; no real-world currency named.",
+   "line": "Seventy-five by Sunday.",
+   "why": "amount in words, no real-world currency named",
    "cause": null,
-   "screen_hash": "5a7f9f7e34f7e280",
+   "note": false,
+   "screen_hash": {
+    "text": "a541a1c36e0d9cff",
+    "facts": "1bb55a6bea468407",
+    "all": "51e02ac85027cfa7"
+   },
    "row_hash": "c800d0d9acba0592",
    "carried": true
   },
@@ -868,10 +940,15 @@
    "row": "C1033",
    "screen": "opening.sums",
    "verdict": "N/A",
-   "line": "",
-   "why": "The first collection is P11's.",
+   "line": "Pay Mark on Sunday morning, at the kitchen table.",
+   "why": "not the collection; that's P11",
    "cause": null,
-   "screen_hash": "5a7f9f7e34f7e280",
+   "note": true,
+   "screen_hash": {
+    "text": "a541a1c36e0d9cff",
+    "facts": "1bb55a6bea468407",
+    "all": "51e02ac85027cfa7"
+   },
    "row_hash": "9daf075fd3c2e30e",
    "carried": true
   },
@@ -1033,10 +1110,15 @@
    "row": "C1189",
    "screen": "opening.sums",
    "verdict": "N/A",
-   "line": "",
-   "why": "Nobody on screen to notice her.",
+   "line": "Hair still wet, you sit down and do the sums.",
+   "why": "nobody on screen to notice",
    "cause": null,
-   "screen_hash": "5a7f9f7e34f7e280",
+   "note": true,
+   "screen_hash": {
+    "text": "a541a1c36e0d9cff",
+    "facts": "1bb55a6bea468407",
+    "all": "51e02ac85027cfa7"
+   },
    "row_hash": "2afadc6bbe1996bd",
    "carried": true
   },
@@ -1188,9 +1270,14 @@
    "screen": "opening.sums",
    "verdict": "PASS",
    "line": "\u279c Ask about the Help Wanted sign at the caf\u00e9 across from campus. The manager's in Monday to Saturday, from 10am.",
-   "why": "The card says what to do, where and when; she isn't lost.",
+   "why": "the card says what to do, where and when",
    "cause": null,
-   "screen_hash": "5a7f9f7e34f7e280",
+   "note": false,
+   "screen_hash": {
+    "text": "a541a1c36e0d9cff",
+    "facts": "1bb55a6bea468407",
+    "all": "51e02ac85027cfa7"
+   },
    "row_hash": "6eb13e48e8502791",
    "carried": true
   },
@@ -1297,23 +1384,31 @@
    "row": "C1265",
    "screen": "*",
    "verdict": "PASS",
-   "line": "\u2014",
-   "why": "No spot on the kitchen, the start choice, the sums or the hand-over.",
-   "cause": null,
-   "screen_hash": "2553ececd707bf70",
-   "row_hash": "aa7b2f3c1d2b81da",
-   "carried": true
+   "line": "the opening's 7 spots: wake, bath, hall, room_past, room_spoke, room_waited, room",
+   "why": "every spot sits on a body moment (bed, shower, towel, dressing) or the hall look where something happens; no chore, one-liner, notice, door, room or system menu carries one, and sums (the card screen) has none",
+   "cause": "",
+   "note": false,
+   "screen_hash": "4370e8177f2cdda3",
+   "row_hash": "447179d04e01ff5d",
+   "carried": false,
+   "pass": 8
   },
   {
    "row": "C1265",
    "screen": "opening.room_spoke",
    "verdict": "PASS",
-   "line": "image: \"A woman of 18 alone in a narrow upstairs hall, a small white towel slid to her waist, bare from the waist up, wet hair.\" pool_dir body/hall_knot_spoke_t4, pool 1",
-   "why": "Not a chore, door, notice or menu: the towel dropping.",
-   "cause": null,
-   "screen_hash": "286b0d733d65a436",
-   "row_hash": "aa7b2f3c1d2b81da",
-   "carried": true
+   "line": "The towel slides to your waist, and you stand bare in the hall, your nipples tight in the cold, before you yank it up.",
+   "why": "a towel body moment, which media.md rule 3 names as not a chore; the picture of her sits right after the line that says it",
+   "cause": "",
+   "note": false,
+   "screen_hash": {
+    "text": "645c8c4f9b10b927",
+    "facts": "b68c8b8504981c73",
+    "all": "286b0d733d65a436"
+   },
+   "row_hash": "447179d04e01ff5d",
+   "carried": false,
+   "pass": 8
   },
   {
    "row": "C1267",
@@ -1539,10 +1634,15 @@
    "row": "C1340",
    "screen": "opening.sums",
    "verdict": "N/A",
-   "line": "",
-   "why": "Not a repeatable and no housemate's menu here.",
+   "line": "Go down to the kitchen (5 min)",
+   "why": "no housemate on this screen; not a loop screen",
    "cause": null,
-   "screen_hash": "5a7f9f7e34f7e280",
+   "note": false,
+   "screen_hash": {
+    "text": "a541a1c36e0d9cff",
+    "facts": "1bb55a6bea468407",
+    "all": "51e02ac85027cfa7"
+   },
    "row_hash": "b76a6583ae88c60f",
    "carried": true
   },
@@ -1550,21 +1650,31 @@
    "row": "C1366",
    "screen": "opening.sums",
    "verdict": "PASS",
-   "line": "\u279c Ask about the Help Wanted sign at the caf\u00e9 across from campus. The manager's in Monday to Saturday, from 10am.",
-   "why": "The caf\u00e9 is open to her at stage 0 (cafe_hire gates on flags, weekday and hours only, no meter) and pays $22 a shift; the kitchen table is where she pays, gated by nothing she lacks.",
+   "line": "\u279c Pay Mark on Sunday morning, at the kitchen table.",
+   "why": "the card names the caf\u00e9 (pays at stage 0 after hire, P21) and the kitchen table (rent); nothing that doesn't pay",
    "cause": null,
-   "screen_hash": "5a7f9f7e34f7e280",
+   "note": false,
+   "screen_hash": {
+    "text": "a541a1c36e0d9cff",
+    "facts": "1bb55a6bea468407",
+    "all": "51e02ac85027cfa7"
+   },
    "row_hash": "6c2faedceab35a43",
    "carried": true
   },
   {
    "row": "C140",
    "screen": "opening.sums",
-   "verdict": "N/A",
-   "line": "",
-   "why": "NOTES.md 2026-11-24, ENI for LO (delegated): \"The goal card's end rows (C35, C37, C433, C140, C215) are N/A until P11.\"",
+   "verdict": "PASS",
+   "line": "<strong>Pay your own way.</strong> Pay Mark your share every Sunday.",
+   "why": "goal 1 is not ending here; its ready_text says where it stops and names goal 2 \"in a later release\", true per PLAN \u00a78i",
    "cause": null,
-   "screen_hash": "5a7f9f7e34f7e280",
+   "note": true,
+   "screen_hash": {
+    "text": "a541a1c36e0d9cff",
+    "facts": "1bb55a6bea468407",
+    "all": "51e02ac85027cfa7"
+   },
    "row_hash": "b83b93c2f7e2d41f",
    "carried": true
   },
@@ -1649,10 +1759,15 @@
    "row": "C1611",
    "screen": "opening.sums",
    "verdict": "PASS",
-   "line": "Hair still wet, you sit on the bed and do the sums.",
-   "why": "The objective screen (opening rule 6) stands alone; nobody else is on it, so no two people share the stage.",
+   "line": "Hair still wet, you sit down and do the sums.",
+   "why": "no crowd: she's alone with the objective after one-person screens",
    "cause": null,
-   "screen_hash": "5a7f9f7e34f7e280",
+   "note": false,
+   "screen_hash": {
+    "text": "a541a1c36e0d9cff",
+    "facts": "1bb55a6bea468407",
+    "all": "51e02ac85027cfa7"
+   },
    "row_hash": "b398108d4c5989a3",
    "carried": true
   },
@@ -1672,9 +1787,14 @@
    "screen": "opening.sums",
    "verdict": "PASS",
    "line": "\u2705 Mark told you the rent",
-   "why": "A card with steps: one done with \u2705, two next with \u279c, each its own block, title in bold.",
+   "why": "a quest card with steps: one done, three next, each its own line, title bold",
    "cause": null,
-   "screen_hash": "5a7f9f7e34f7e280",
+   "note": false,
+   "screen_hash": {
+    "text": "a541a1c36e0d9cff",
+    "facts": "1bb55a6bea468407",
+    "all": "51e02ac85027cfa7"
+   },
    "row_hash": "8277665ed46397f9",
    "carried": true
   },
@@ -1780,11 +1900,16 @@
   {
    "row": "C215",
    "screen": "opening.sums",
-   "verdict": "N/A",
-   "line": "",
-   "why": "NOTES.md 2026-11-24, ENI for LO (delegated): \"The goal card's end rows (C35, C37, C433, C140, C215) are N/A until P11.\"",
+   "verdict": "PASS",
+   "line": "Pay your own way. Pay Mark your share every Sunday.",
+   "why": "no \"Arc complete\"; ready_text says the next goal is in a later release",
    "cause": null,
-   "screen_hash": "5a7f9f7e34f7e280",
+   "note": true,
+   "screen_hash": {
+    "text": "a541a1c36e0d9cff",
+    "facts": "1bb55a6bea468407",
+    "all": "51e02ac85027cfa7"
+   },
    "row_hash": "3b13472a8f7c42da",
    "carried": true
   },
@@ -1793,9 +1918,14 @@
    "screen": "opening.sums",
    "verdict": "PASS",
    "line": "\u2705 Mark told you the rent",
-   "why": "met_mark is set on 'Look at Mom', on the way out of the rent screen; cafe_hired is set on the ask's 'Done' exits (cafe_hire sign/both).",
+   "why": "reads met_mark, set on \"Look at Mom (2 min)\", the rent step's way out (7_final_game.toml:946-951)",
    "cause": null,
-   "screen_hash": "5a7f9f7e34f7e280",
+   "note": false,
+   "screen_hash": {
+    "text": "a541a1c36e0d9cff",
+    "facts": "1bb55a6bea468407",
+    "all": "51e02ac85027cfa7"
+   },
    "row_hash": "7bb70ca4ff31e145",
    "carried": true
   },
@@ -2024,9 +2154,14 @@
    "screen": "opening.sums",
    "verdict": "PASS",
    "line": "Seventy-five by Sunday. You have nothing.",
-   "why": "Not talk: the objective and its card, the job opening rule 6 gives this screen.",
+   "why": "not talk: the objective screen of an opening whose body screens are 1, 4b, 5, 6, 7",
    "cause": null,
-   "screen_hash": "5a7f9f7e34f7e280",
+   "note": false,
+   "screen_hash": {
+    "text": "a541a1c36e0d9cff",
+    "facts": "1bb55a6bea468407",
+    "all": "51e02ac85027cfa7"
+   },
    "row_hash": "5ef1a49ea48dc0c6",
    "carried": true
   },
@@ -2034,21 +2169,31 @@
    "row": "C34",
    "screen": "opening.sums",
    "verdict": "PASS",
-   "line": "Pay your own way. Pay Mark your share every Sunday.",
-   "why": "A weekly repeat, no deadline date.",
+   "line": "<strong>Pay your own way.</strong> Pay Mark your share every Sunday.",
+   "why": "the goal has no date; Sunday is the recurring due day",
    "cause": null,
-   "screen_hash": "5a7f9f7e34f7e280",
+   "note": false,
+   "screen_hash": {
+    "text": "a541a1c36e0d9cff",
+    "facts": "1bb55a6bea468407",
+    "all": "51e02ac85027cfa7"
+   },
    "row_hash": "ba026f3c4badeca2",
    "carried": true
   },
   {
    "row": "C35",
    "screen": "opening.sums",
-   "verdict": "N/A",
-   "line": "",
-   "why": "NOTES.md 2026-11-24, ENI for LO (delegated): \"The goal card's end rows (C35, C37, C433, C140, C215) are N/A until P11.\"",
+   "verdict": "PASS",
+   "line": "Pay your own way.",
+   "why": "the card's ready_text names goal 2 as next",
    "cause": null,
-   "screen_hash": "5a7f9f7e34f7e280",
+   "note": false,
+   "screen_hash": {
+    "text": "a541a1c36e0d9cff",
+    "facts": "1bb55a6bea468407",
+    "all": "51e02ac85027cfa7"
+   },
    "row_hash": "4fe71dee68944f61",
    "carried": true
   },
@@ -2056,21 +2201,31 @@
    "row": "C36",
    "screen": "opening.sums",
    "verdict": "PASS",
-   "line": "\u279c Ask about the Help Wanted sign at the caf\u00e9 across from campus. The manager's in Monday to Saturday, from 10am.",
-   "why": "Each step names its flag in the card (met_mark, cafe_hired, rent_paid_once); the goal's end flag pays_her_own_way is in PLAN.md:29.",
+   "line": "\u279c Pay Mark in full four Sundays in a row.",
+   "why": "each step reads a flag or the sundays_paid counter; the goal's own flag pays_her_own_way is set by the daily tick at 4 (7_final_game.toml:203)",
    "cause": null,
-   "screen_hash": "5a7f9f7e34f7e280",
+   "note": false,
+   "screen_hash": {
+    "text": "a541a1c36e0d9cff",
+    "facts": "1bb55a6bea468407",
+    "all": "51e02ac85027cfa7"
+   },
    "row_hash": "ccf2da275f59cae3",
    "carried": true
   },
   {
    "row": "C37",
    "screen": "opening.sums",
-   "verdict": "N/A",
-   "line": "",
-   "why": "NOTES.md 2026-11-24, ENI for LO (delegated): \"The goal card's end rows (C35, C37, C433, C140, C215) are N/A until P11.\"",
+   "verdict": "PASS",
+   "line": "\u279c Pay Mark in full four Sundays in a row.",
+   "why": "goal 1 ends in this release per PLAN \u00a78i (\"It counts in release 1\") and the built tick; note PLAN's release table (line 191) still says release 4, a plan-internal conflict, not a screen line",
    "cause": null,
-   "screen_hash": "5a7f9f7e34f7e280",
+   "note": false,
+   "screen_hash": {
+    "text": "a541a1c36e0d9cff",
+    "facts": "1bb55a6bea468407",
+    "all": "51e02ac85027cfa7"
+   },
    "row_hash": "cee89ca03f857080",
    "carried": true
   },
@@ -2101,9 +2256,14 @@
    "screen": "opening.sums",
    "verdict": "PASS",
    "line": "Go down to the kitchen (5 min)",
-   "why": "The button and the card lines say plainly what to do.",
+   "why": "the button says what it does and its time",
    "cause": null,
-   "screen_hash": "5a7f9f7e34f7e280",
+   "note": false,
+   "screen_hash": {
+    "text": "a541a1c36e0d9cff",
+    "facts": "1bb55a6bea468407",
+    "all": "51e02ac85027cfa7"
+   },
    "row_hash": "7e128897077ecee6",
    "carried": true
   },
@@ -2122,21 +2282,31 @@
    "row": "C430",
    "screen": "opening.sums",
    "verdict": "PASS",
-   "line": "\u279c Ask about the Help Wanted sign at the caf\u00e9 across from campus. The manager's in Monday to Saturday, from 10am.",
-   "why": "The next step says where (the caf\u00e9 across from campus) and when (Mon\u2013Sat from 10am); the pay step says where and when too.",
+   "line": "The manager's in Monday to Saturday, from 10am.",
+   "why": "each next step says where and when: caf\u00e9 hours, Sunday morning at the kitchen table",
    "cause": null,
-   "screen_hash": "5a7f9f7e34f7e280",
+   "note": false,
+   "screen_hash": {
+    "text": "a541a1c36e0d9cff",
+    "facts": "1bb55a6bea468407",
+    "all": "51e02ac85027cfa7"
+   },
    "row_hash": "83f6356d6b638ebf",
    "carried": true
   },
   {
    "row": "C433",
    "screen": "opening.sums",
-   "verdict": "N/A",
-   "line": "",
-   "why": "NOTES.md 2026-11-24, ENI for LO (delegated): \"The goal card's end rows (C35, C37, C433, C140, C215) are N/A until P11.\"",
+   "verdict": "PASS",
+   "line": "Pay your own way.",
+   "why": "no ceiling stated on this screen to misstate; the card's ready_text says the next goal is in a later release",
    "cause": null,
-   "screen_hash": "5a7f9f7e34f7e280",
+   "note": false,
+   "screen_hash": {
+    "text": "a541a1c36e0d9cff",
+    "facts": "1bb55a6bea468407",
+    "all": "51e02ac85027cfa7"
+   },
    "row_hash": "d0461c156ea1bc3f",
    "carried": true
   },
@@ -2178,9 +2348,14 @@
    "screen": "opening.sums",
    "verdict": "PASS",
    "line": "Seventy-five by Sunday. You have nothing.",
-   "why": "Said plainly.",
+   "why": "says it plainly",
    "cause": null,
-   "screen_hash": "5a7f9f7e34f7e280",
+   "note": false,
+   "screen_hash": {
+    "text": "a541a1c36e0d9cff",
+    "facts": "1bb55a6bea468407",
+    "all": "51e02ac85027cfa7"
+   },
    "row_hash": "59b8d8d24f0c7c38",
    "carried": true
   },
@@ -2209,11 +2384,16 @@
   {
    "row": "C447",
    "screen": "opening.sums",
-   "verdict": "N/A",
-   "line": "",
-   "why": "Nobody speaks on this screen; Mark's quoted words are his own from kitchen_rent.",
+   "verdict": "PASS",
+   "line": "And Mark said \"one way or another\"",
+   "why": "Mark's only words here are his own quoted line, in his manner",
    "cause": null,
-   "screen_hash": "5a7f9f7e34f7e280",
+   "note": false,
+   "screen_hash": {
+    "text": "a541a1c36e0d9cff",
+    "facts": "1bb55a6bea468407",
+    "all": "51e02ac85027cfa7"
+   },
    "row_hash": "5f664198d19facd8",
    "carried": true
   },
@@ -2287,10 +2467,15 @@
    "row": "C451",
    "screen": "opening.sums",
    "verdict": "PASS",
-   "line": "\u279c Ask about the Help Wanted sign at the caf\u00e9 across from campus. The manager's in Monday to Saturday, from 10am.",
-   "why": "Concrete: the sign, the caf\u00e9 across from campus, Mon\u2013Sat, 10am, $75, Sunday morning, the kitchen table.",
+   "line": "There's a Help Wanted sign in the caf\u00e9 window across from campus.",
+   "why": "concrete: the amount, the day, the place, the hours",
    "cause": null,
-   "screen_hash": "5a7f9f7e34f7e280",
+   "note": false,
+   "screen_hash": {
+    "text": "a541a1c36e0d9cff",
+    "facts": "1bb55a6bea468407",
+    "all": "51e02ac85027cfa7"
+   },
    "row_hash": "50dbf74577a813c7",
    "carried": true
   },
@@ -2320,10 +2505,15 @@
    "row": "C460",
    "screen": "opening.sums",
    "verdict": "PASS",
-   "line": "The manager's in Monday to Saturday, from 10am.",
-   "why": "Tom ('Caf\u00e9 manager', npcs) is at near_cafe weekdays 0\u20135 (0 = Monday, v2.py:5203) from 10:00; the ask opens 10:00\u201320:55 Mon\u2013Sat; true on the Quests page on every later visit too, before and after the \u2705.",
+   "line": "There's a Help Wanted sign in the caf\u00e9 window across from campus.",
+   "why": "true on every path: sign in near_cafe text, money 0, $75 first rent, Mark's quote on kitchen_rent, hours match cafe_hire, \"in a row\" matches the Monday reset (7_final_game.toml:207)",
    "cause": null,
-   "screen_hash": "5a7f9f7e34f7e280",
+   "note": false,
+   "screen_hash": {
+    "text": "a541a1c36e0d9cff",
+    "facts": "1bb55a6bea468407",
+    "all": "51e02ac85027cfa7"
+   },
    "row_hash": "67e48e60d5053a2e",
    "carried": true
   },
@@ -2353,10 +2543,15 @@
    "row": "C461",
    "screen": "opening.sums",
    "verdict": "PASS",
-   "line": "And Mark said \"one way or another\" like he'd already picked one.",
-   "why": "Her opinion in narration, on a line every path saw said.",
+   "line": "like he'd already picked one.",
+   "why": "her opinion of Mark's line, can't clash",
    "cause": null,
-   "screen_hash": "5a7f9f7e34f7e280",
+   "note": false,
+   "screen_hash": {
+    "text": "a541a1c36e0d9cff",
+    "facts": "1bb55a6bea468407",
+    "all": "51e02ac85027cfa7"
+   },
    "row_hash": "310706ee076318f2",
    "carried": true
   },
@@ -2386,10 +2581,15 @@
    "row": "C519",
    "screen": "opening.sums",
    "verdict": "PASS",
-   "line": "\u279c Ask about the Help Wanted sign at the caf\u00e9 across from campus. The manager's in Monday to Saturday, from 10am.",
-   "why": "One job (the objective and its card); 122 words with the card, 47 of story text, under ~150.",
+   "line": "Hair still wet, you sit down and do the sums.",
+   "why": "one job (the objective and its card), 122 words, under 150",
    "cause": null,
-   "screen_hash": "5a7f9f7e34f7e280",
+   "note": true,
+   "screen_hash": {
+    "text": "a541a1c36e0d9cff",
+    "facts": "1bb55a6bea468407",
+    "all": "51e02ac85027cfa7"
+   },
    "row_hash": "e78502f7aa28746d",
    "carried": true
   },
@@ -2419,10 +2619,15 @@
    "row": "C520",
    "screen": "opening.sums",
    "verdict": "PASS",
-   "line": "Last week there was a Help Wanted sign in the window of the caf\u00e9 across from campus.",
-   "why": "Step 6, objective and card, in its own screen; 47 story words, inside the target.",
+   "line": "\u279c Pay Mark in full four Sundays in a row.",
+   "why": "the staged opening's objective and its card, on its own screen",
    "cause": null,
-   "screen_hash": "5a7f9f7e34f7e280",
+   "note": false,
+   "screen_hash": {
+    "text": "a541a1c36e0d9cff",
+    "facts": "1bb55a6bea468407",
+    "all": "51e02ac85027cfa7"
+   },
    "row_hash": "34947f7e290656f0",
    "carried": true
   },
@@ -2463,10 +2668,15 @@
    "row": "C593",
    "screen": "opening.sums",
    "verdict": "N/A",
-   "line": "",
-   "why": "Nobody addresses her on this screen.",
+   "line": "And Mark said \"one way or another\"",
+   "why": "nobody addresses her on this screen",
    "cause": null,
-   "screen_hash": "5a7f9f7e34f7e280",
+   "note": false,
+   "screen_hash": {
+    "text": "a541a1c36e0d9cff",
+    "facts": "1bb55a6bea468407",
+    "all": "51e02ac85027cfa7"
+   },
    "row_hash": "370371a278b9f182",
    "carried": true
   },
@@ -2474,43 +2684,62 @@
    "row": "C596",
    "screen": "*",
    "verdict": "N/A",
-   "line": "\u2014",
-   "why": "No screen in the opening is a person's talk screen; Talk is in Mom's menu (P42).",
+   "line": "no screen of the opening canvas is opened from a person's face or reached from their menu",
+   "why": "the opening is a straight-run scene with no person's menu and no talk screen; the screens with a person and a picture (bath, hall, room_*) are new moments, which the rule allows; Mom's menu after the hand-over is P42's canvas, not this one",
    "cause": null,
-   "screen_hash": "2553ececd707bf70",
-   "row_hash": "13a70c920d120f51",
-   "carried": true
+   "note": true,
+   "screen_hash": "4370e8177f2cdda3",
+   "row_hash": "6d9bba989a2b9666",
+   "carried": false,
+   "pass": 8
   },
   {
    "row": "C596",
    "screen": "opening.room_spoke",
-   "verdict": "N/A",
-   "line": "\"Thanks. Go get dressed.\"",
-   "why": "Not a talk screen: one-time scene screen; check.py's talk count judges the path.",
+   "verdict": "PASS",
+   "line": "His eyes never leave the door.",
+   "why": "not a talk screen or a menu; Ryan is on screen and its one picture is a new moment (the towel slipping), which C596 allows",
    "cause": null,
-   "screen_hash": "286b0d733d65a436",
-   "row_hash": "13a70c920d120f51",
-   "carried": true
+   "note": true,
+   "screen_hash": {
+    "text": "645c8c4f9b10b927",
+    "facts": "b68c8b8504981c73",
+    "all": "286b0d733d65a436"
+   },
+   "row_hash": "6d9bba989a2b9666",
+   "carried": false,
+   "pass": 8
   },
   {
    "row": "C596",
    "screen": "opening.sums",
    "verdict": "N/A",
-   "line": "",
-   "why": "Not a talk screen.",
+   "line": "Hair still wet, you sit down and do the sums.",
+   "why": "nobody is present (sheet: nobody) and it is neither a talk screen nor a person's menu; Mark is only named, so the talk and picture-placement rule has nothing to judge here",
    "cause": null,
-   "screen_hash": "5a7f9f7e34f7e280",
-   "row_hash": "13a70c920d120f51",
-   "carried": true
+   "note": true,
+   "screen_hash": {
+    "text": "a541a1c36e0d9cff",
+    "facts": "1bb55a6bea468407",
+    "all": "51e02ac85027cfa7"
+   },
+   "row_hash": "6d9bba989a2b9666",
+   "carried": false,
+   "pass": 8
   },
   {
    "row": "C598",
    "screen": "opening.sums",
    "verdict": "PASS",
-   "line": "\u279c Ask about the Help Wanted sign at the caf\u00e9 across from campus. The manager's in Monday to Saturday, from 10am.",
-   "why": "Names only Mark (met on kitchen_rent); the caf\u00e9's manager is a role, unnamed, as people.md rule 2 has an unmet person be. Tom isn't named.",
+   "line": "\u2705 Mark told you the rent",
+   "why": "names only Mark (met); the caf\u00e9 manager is unnamed",
    "cause": null,
-   "screen_hash": "5a7f9f7e34f7e280",
+   "note": false,
+   "screen_hash": {
+    "text": "a541a1c36e0d9cff",
+    "facts": "1bb55a6bea468407",
+    "all": "51e02ac85027cfa7"
+   },
    "row_hash": "56c1e6a836c774b1",
    "carried": true
   },
@@ -2628,10 +2857,15 @@
    "row": "C625",
    "screen": "opening.sums",
    "verdict": "PASS",
-   "line": "\u279c Ask about the Help Wanted sign at the caf\u00e9 across from campus. The manager's in Monday to Saturday, from 10am.",
-   "why": "Unmet Tom appears as 'the manager', role before name.",
+   "line": "And Mark said",
+   "why": "Mark was introduced relation-first on kitchen_rent (\"Mark, your step-father\")",
    "cause": null,
-   "screen_hash": "5a7f9f7e34f7e280",
+   "note": true,
+   "screen_hash": {
+    "text": "a541a1c36e0d9cff",
+    "facts": "1bb55a6bea468407",
+    "all": "51e02ac85027cfa7"
+   },
    "row_hash": "dc9a1fd9dbf3fb87",
    "carried": true
   },
@@ -2661,10 +2895,15 @@
    "row": "C626",
    "screen": "opening.sums",
    "verdict": "PASS",
-   "line": "Pay Mark your share every Sunday.",
-   "why": "Mark, met, is named.",
+   "line": "And Mark said",
+   "why": "met, so the name",
    "cause": null,
-   "screen_hash": "5a7f9f7e34f7e280",
+   "note": true,
+   "screen_hash": {
+    "text": "a541a1c36e0d9cff",
+    "facts": "1bb55a6bea468407",
+    "all": "51e02ac85027cfa7"
+   },
    "row_hash": "8e507f7b235acc25",
    "carried": true
   },
@@ -2705,10 +2944,15 @@
    "row": "C630",
    "screen": "opening.sums",
    "verdict": "PASS",
-   "line": "Pay Mark your share every Sunday.",
-   "why": "Mark's relation was given with his name on kitchen_rent ('Mark, your step-father'); this screen uses the name after it.",
+   "line": "And Mark said",
+   "why": "name and relation both given on kitchen_rent; here the name after meeting",
    "cause": null,
-   "screen_hash": "5a7f9f7e34f7e280",
+   "note": false,
+   "screen_hash": {
+    "text": "a541a1c36e0d9cff",
+    "facts": "1bb55a6bea468407",
+    "all": "51e02ac85027cfa7"
+   },
    "row_hash": "5a85503d3ef5a0fb",
    "carried": true
   },
@@ -2737,11 +2981,16 @@
   {
    "row": "C632",
    "screen": "opening.sums",
-   "verdict": "PASS",
-   "line": "\u279c Ask about the Help Wanted sign at the caf\u00e9 across from campus. The manager's in Monday to Saturday, from 10am.",
-   "why": "'the manager' says who he is.",
+   "verdict": "N/A",
+   "line": "And Mark said",
+   "why": "no role label on this screen",
    "cause": null,
-   "screen_hash": "5a7f9f7e34f7e280",
+   "note": true,
+   "screen_hash": {
+    "text": "a541a1c36e0d9cff",
+    "facts": "1bb55a6bea468407",
+    "all": "51e02ac85027cfa7"
+   },
    "row_hash": "146e6806c6c566e3",
    "carried": true
   },
@@ -2771,10 +3020,15 @@
    "row": "C644",
    "screen": "opening.sums",
    "verdict": "N/A",
-   "line": "",
-   "why": "No person on screen.",
+   "line": "And Mark said",
+   "why": "no person on screen to own a corner",
    "cause": null,
-   "screen_hash": "5a7f9f7e34f7e280",
+   "note": true,
+   "screen_hash": {
+    "text": "a541a1c36e0d9cff",
+    "facts": "1bb55a6bea468407",
+    "all": "51e02ac85027cfa7"
+   },
    "row_hash": "f5e1d79f3251dbab",
    "carried": true
   },
@@ -2959,9 +3213,14 @@
    "screen": "opening.sums",
    "verdict": "PASS",
    "line": "Go down to the kitchen (5 min)",
-   "why": "Duration, equal to the spend (time_progression_minutes = 5).",
+   "why": "duration, not a clock time",
    "cause": null,
-   "screen_hash": "5a7f9f7e34f7e280",
+   "note": true,
+   "screen_hash": {
+    "text": "a541a1c36e0d9cff",
+    "facts": "1bb55a6bea468407",
+    "all": "51e02ac85027cfa7"
+   },
    "row_hash": "1b724e2dcfbf028b",
    "carried": true
   },
@@ -2991,10 +3250,15 @@
    "row": "C892",
    "screen": "opening.sums",
    "verdict": "PASS",
-   "line": "\u279c Ask about the Help Wanted sign at the caf\u00e9 across from campus. The manager's in Monday to Saturday, from 10am.",
-   "why": "The hour is a rule on the card (arc.md rule 5: a place and a time), not in an act.",
+   "line": "The manager's in Monday to Saturday, from 10am.",
+   "why": "the hours sit on the caf\u00e9 step (the door), not in an act",
    "cause": null,
-   "screen_hash": "5a7f9f7e34f7e280",
+   "note": true,
+   "screen_hash": {
+    "text": "a541a1c36e0d9cff",
+    "facts": "1bb55a6bea468407",
+    "all": "51e02ac85027cfa7"
+   },
    "row_hash": "5c890033f6ac38b8",
    "carried": true
   },
@@ -3023,11 +3287,16 @@
   {
    "row": "C897",
    "screen": "opening.sums",
-   "verdict": "PASS",
+   "verdict": "N/A",
    "line": "Go down to the kitchen (5 min)",
-   "why": "Five minutes from her room to the kitchen, the same as screen 1's move.",
+   "why": "in-house move, matches screen 1's same move",
    "cause": null,
-   "screen_hash": "5a7f9f7e34f7e280",
+   "note": true,
+   "screen_hash": {
+    "text": "a541a1c36e0d9cff",
+    "facts": "1bb55a6bea468407",
+    "all": "51e02ac85027cfa7"
+   },
    "row_hash": "265ece64add83676",
    "carried": true
   },
@@ -3057,10 +3326,15 @@
    "row": "C900",
    "screen": "opening.sums",
    "verdict": "PASS",
-   "line": "\u279c Ask about the Help Wanted sign at the caf\u00e9 across from campus. The manager's in Monday to Saturday, from 10am.",
-   "why": "States a rule (the manager's hours), not what time it is now.",
+   "line": "Seventy-five by Sunday.",
+   "why": "no current time stated; the caf\u00e9 hours are a rule on a card, which the row allows",
    "cause": null,
-   "screen_hash": "5a7f9f7e34f7e280",
+   "note": false,
+   "screen_hash": {
+    "text": "a541a1c36e0d9cff",
+    "facts": "1bb55a6bea468407",
+    "all": "51e02ac85027cfa7"
+   },
    "row_hash": "6372efb027eb2034",
    "carried": true
   },
@@ -3090,10 +3364,15 @@
    "row": "C902",
    "screen": "opening.sums",
    "verdict": "PASS",
-   "line": "Hair still wet, you sit on the bed and do the sums.",
-   "why": "True at 07:35, the last minute of the screen's window.",
+   "line": "Hair still wet, you sit down and do the sums.",
+   "why": "true at 7:35 as at 7:30",
    "cause": null,
-   "screen_hash": "5a7f9f7e34f7e280",
+   "note": true,
+   "screen_hash": {
+    "text": "a541a1c36e0d9cff",
+    "facts": "1bb55a6bea468407",
+    "all": "51e02ac85027cfa7"
+   },
    "row_hash": "df5ed7a36dbc74e4",
    "carried": true
   },
@@ -3107,7 +3386,7 @@
    "note": false,
    "screen_hash": "d817bff4bc185950",
    "row_hash": "4f83b0b5eb45f71b",
-   "carried": false
+   "carried": true
   },
   {
    "row": "C903",
@@ -3123,23 +3402,23 @@
     "all": "286b0d733d65a436"
    },
    "row_hash": "4f83b0b5eb45f71b",
-   "carried": false
+   "carried": true
   },
   {
    "row": "C903",
    "screen": "opening.sums",
    "verdict": "PASS",
-   "line": "The manager's in Monday to Saturday, from 10am. / Pay Mark on Sunday morning",
-   "why": "A once screen of the opening, reached only on Monday week 1 at about 07:30, so it is not a repeatable. Its weekdays are a standing hours rule and the next rent day, both true on that visit.",
+   "line": "Seventy-five by Sunday.",
+   "why": "one-time screen, not a repeatable; Sunday is the due day",
    "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "5a86ece0192c9eb7",
+    "text": "a541a1c36e0d9cff",
     "facts": "1bb55a6bea468407",
-    "all": "5a7f9f7e34f7e280"
+    "all": "51e02ac85027cfa7"
    },
    "row_hash": "4f83b0b5eb45f71b",
-   "carried": false
+   "carried": true
   },
   {
    "row": "C906",
@@ -3166,11 +3445,16 @@
   {
    "row": "C906",
    "screen": "opening.sums",
-   "verdict": "PASS",
+   "verdict": "N/A",
    "line": "Go down to the kitchen (5 min)",
-   "why": "No 'till X'.",
+   "why": "no \"till\" promise",
    "cause": null,
-   "screen_hash": "5a7f9f7e34f7e280",
+   "note": true,
+   "screen_hash": {
+    "text": "a541a1c36e0d9cff",
+    "facts": "1bb55a6bea468407",
+    "all": "51e02ac85027cfa7"
+   },
    "row_hash": "ce3b42a8c86da5b8",
    "carried": true
   },
@@ -3201,9 +3485,14 @@
    "screen": "opening.sums",
    "verdict": "PASS",
    "line": "Go down to the kitchen (5 min)",
-   "why": "Shows its minutes in the game's one form.",
+   "why": "the button shows its minutes, same form",
    "cause": null,
-   "screen_hash": "5a7f9f7e34f7e280",
+   "note": true,
+   "screen_hash": {
+    "text": "a541a1c36e0d9cff",
+    "facts": "1bb55a6bea468407",
+    "all": "51e02ac85027cfa7"
+   },
    "row_hash": "be1c18ee466455f6",
    "carried": true
   },
@@ -3233,10 +3522,15 @@
    "row": "C913",
    "screen": "opening.sums",
    "verdict": "PASS",
-   "line": "\u279c Ask about the Help Wanted sign at the caf\u00e9 across from campus. The manager's in Monday to Saturday, from 10am.",
-   "why": "The ask has hours, and the card publishes them; the row itself greys with its cooldown_message (cafe_hire show_when_blocked).",
+   "line": "The manager's in Monday to Saturday, from 10am.",
+   "why": "the caf\u00e9 ask publishes its hours",
    "cause": null,
-   "screen_hash": "5a7f9f7e34f7e280",
+   "note": false,
+   "screen_hash": {
+    "text": "a541a1c36e0d9cff",
+    "facts": "1bb55a6bea468407",
+    "all": "51e02ac85027cfa7"
+   },
    "row_hash": "c750f9b6ab4ace14",
    "carried": true
   },
@@ -3266,10 +3560,15 @@
    "row": "C914",
    "screen": "opening.sums",
    "verdict": "N/A",
-   "line": "",
-   "why": "No row on this screen.",
+   "line": "Go down to the kitchen (5 min)",
+   "why": "no menu row on this screen",
    "cause": null,
-   "screen_hash": "5a7f9f7e34f7e280",
+   "note": false,
+   "screen_hash": {
+    "text": "a541a1c36e0d9cff",
+    "facts": "1bb55a6bea468407",
+    "all": "51e02ac85027cfa7"
+   },
    "row_hash": "bd07273d5822f34f",
    "carried": true
   },
@@ -3298,11 +3597,16 @@
   {
    "row": "C916",
    "screen": "opening.sums",
-   "verdict": "N/A",
-   "line": "",
-   "why": "No event or row with hours on this screen.",
+   "verdict": "PASS",
+   "line": "The manager's in Monday to Saturday, from 10am.",
+   "why": "hours go on the ask she chooses",
    "cause": null,
-   "screen_hash": "5a7f9f7e34f7e280",
+   "note": false,
+   "screen_hash": {
+    "text": "a541a1c36e0d9cff",
+    "facts": "1bb55a6bea468407",
+    "all": "51e02ac85027cfa7"
+   },
    "row_hash": "7b2bb0dfdbcfe946",
    "carried": true
   },
@@ -3333,9 +3637,14 @@
    "screen": "opening.sums",
    "verdict": "PASS",
    "line": "Go down to the kitchen (5 min)",
-   "why": "A move inside the house, 5 min, as elsewhere in the opening.",
+   "why": "same in-house move as screen 1, same 5 min",
    "cause": null,
-   "screen_hash": "5a7f9f7e34f7e280",
+   "note": false,
+   "screen_hash": {
+    "text": "a541a1c36e0d9cff",
+    "facts": "1bb55a6bea468407",
+    "all": "51e02ac85027cfa7"
+   },
    "row_hash": "695dc5d9d0e5e749",
    "carried": true
   },
@@ -3365,10 +3674,15 @@
    "row": "C924",
    "screen": "opening.sums",
    "verdict": "N/A",
-   "line": "",
-   "why": "No travel between areas here.",
+   "line": "Go down to the kitchen (5 min)",
+   "why": "no travel on this screen",
    "cause": null,
-   "screen_hash": "5a7f9f7e34f7e280",
+   "note": true,
+   "screen_hash": {
+    "text": "a541a1c36e0d9cff",
+    "facts": "1bb55a6bea468407",
+    "all": "51e02ac85027cfa7"
+   },
    "row_hash": "791cd173e23fb130",
    "carried": true
   },
@@ -3399,9 +3713,14 @@
    "screen": "opening.sums",
    "verdict": "PASS",
    "line": "Go down to the kitchen (5 min)",
-   "why": "Moves by minutes only.",
+   "why": "the clock moves by minutes",
    "cause": null,
-   "screen_hash": "5a7f9f7e34f7e280",
+   "note": true,
+   "screen_hash": {
+    "text": "a541a1c36e0d9cff",
+    "facts": "1bb55a6bea468407",
+    "all": "51e02ac85027cfa7"
+   },
    "row_hash": "177d1e1776fac74b",
    "carried": true
   },
@@ -3430,11 +3749,16 @@
   {
    "row": "C927",
    "screen": "opening.sums",
-   "verdict": "PASS",
+   "verdict": "N/A",
    "line": "Go down to the kitchen (5 min)",
-   "why": "The exit carries its own time (5).",
+   "why": "the exit has a time",
    "cause": null,
-   "screen_hash": "5a7f9f7e34f7e280",
+   "note": true,
+   "screen_hash": {
+    "text": "a541a1c36e0d9cff",
+    "facts": "1bb55a6bea468407",
+    "all": "51e02ac85027cfa7"
+   },
    "row_hash": "4e86d143688ba8e5",
    "carried": true
   },
@@ -3464,10 +3788,15 @@
    "row": "C928",
    "screen": "opening.sums",
    "verdict": "PASS",
-   "line": "\u279c Ask about the Help Wanted sign at the caf\u00e9 across from campus. The manager's in Monday to Saturday, from 10am.",
-   "why": "No current clock time printed; '10am' is the manager's hours as a rule.",
+   "line": "Hair still wet, you sit down and do the sums.",
+   "why": "no clock in prose",
    "cause": null,
-   "screen_hash": "5a7f9f7e34f7e280",
+   "note": false,
+   "screen_hash": {
+    "text": "a541a1c36e0d9cff",
+    "facts": "1bb55a6bea468407",
+    "all": "51e02ac85027cfa7"
+   },
    "row_hash": "2c3ccc6bd9929d7f",
    "carried": true
   },
@@ -3496,11 +3825,16 @@
   {
    "row": "C929",
    "screen": "opening.sums",
-   "verdict": "PASS",
+   "verdict": "N/A",
    "line": "Go down to the kitchen (5 min)",
-   "why": "The label carries the time.",
+   "why": "no nav card here",
    "cause": null,
-   "screen_hash": "5a7f9f7e34f7e280",
+   "note": true,
+   "screen_hash": {
+    "text": "a541a1c36e0d9cff",
+    "facts": "1bb55a6bea468407",
+    "all": "51e02ac85027cfa7"
+   },
    "row_hash": "e20b027bad88ca8c",
    "carried": true
   },
@@ -3530,10 +3864,15 @@
    "row": "C930",
    "screen": "opening.sums",
    "verdict": "N/A",
-   "line": "",
-   "why": "No windowed work on this screen.",
+   "line": "Go down to the kitchen (5 min)",
+   "why": "no windowed work here; cafe_hire has show_when_blocked",
    "cause": null,
-   "screen_hash": "5a7f9f7e34f7e280",
+   "note": true,
+   "screen_hash": {
+    "text": "a541a1c36e0d9cff",
+    "facts": "1bb55a6bea468407",
+    "all": "51e02ac85027cfa7"
+   },
    "row_hash": "beb57cd46fe906bf",
    "carried": true
   },
@@ -3563,10 +3902,15 @@
    "row": "C931",
    "screen": "opening.sums",
    "verdict": "N/A",
-   "line": "",
-   "why": "No time_of_day condition on this screen.",
+   "line": "Go down to the kitchen (5 min)",
+   "why": "no time_of_day condition on this screen",
    "cause": null,
-   "screen_hash": "5a7f9f7e34f7e280",
+   "note": true,
+   "screen_hash": {
+    "text": "a541a1c36e0d9cff",
+    "facts": "1bb55a6bea468407",
+    "all": "51e02ac85027cfa7"
+   },
    "row_hash": "1aadffd96e76381c",
    "carried": true
   },
@@ -3585,10 +3929,15 @@
    "row": "C951",
    "screen": "opening.sums",
    "verdict": "PASS",
-   "line": "Seventy-five by Sunday. You have nothing.",
-   "why": "The amount is in prose.",
+   "line": "Seventy-five by Sunday.",
+   "why": "the amount is in prose",
    "cause": null,
-   "screen_hash": "5a7f9f7e34f7e280",
+   "note": false,
+   "screen_hash": {
+    "text": "a541a1c36e0d9cff",
+    "facts": "1bb55a6bea468407",
+    "all": "51e02ac85027cfa7"
+   },
    "row_hash": "fe3b305ad0c265a7",
    "carried": true
   },
@@ -3607,10 +3956,15 @@
    "row": "C952",
    "screen": "opening.sums",
    "verdict": "PASS",
-   "line": "\u279c Pay Mark on Sunday morning, at the kitchen table ($75 this week).",
-   "why": "$75 agrees with PLAN.md:27 and :250 and Mark's line on kitchen_rent.",
+   "line": "Seventy-five by Sunday.",
+   "why": "$75 weekly and four Sundays agree with PLAN \u00a72/\u00a78i and P11's nodes",
    "cause": null,
-   "screen_hash": "5a7f9f7e34f7e280",
+   "note": false,
+   "screen_hash": {
+    "text": "a541a1c36e0d9cff",
+    "facts": "1bb55a6bea468407",
+    "all": "51e02ac85027cfa7"
+   },
    "row_hash": "2f7d1a6bf6a93ca9",
    "carried": true
   },
@@ -3630,9 +3984,14 @@
    "screen": "opening.sums",
    "verdict": "PASS",
    "line": "Go down to the kitchen (5 min)",
-   "why": "The label carries its time.",
+   "why": "the cost is on the label",
    "cause": null,
-   "screen_hash": "5a7f9f7e34f7e280",
+   "note": true,
+   "screen_hash": {
+    "text": "a541a1c36e0d9cff",
+    "facts": "1bb55a6bea468407",
+    "all": "51e02ac85027cfa7"
+   },
    "row_hash": "8d1306a15c51370a",
    "carried": true
   },
@@ -3650,11 +4009,16 @@
   {
    "row": "C954",
    "screen": "opening.sums",
-   "verdict": "PASS",
+   "verdict": "N/A",
    "line": "Go down to the kitchen (5 min)",
-   "why": "No pay on any button.",
+   "why": "no spend or pay on this screen",
    "cause": null,
-   "screen_hash": "5a7f9f7e34f7e280",
+   "note": true,
+   "screen_hash": {
+    "text": "a541a1c36e0d9cff",
+    "facts": "1bb55a6bea468407",
+    "all": "51e02ac85027cfa7"
+   },
    "row_hash": "c8001b93946f6f80",
    "carried": true
   },
@@ -3684,10 +4048,15 @@
    "row": "L106",
    "screen": "opening.sums",
    "verdict": "PASS",
-   "line": "\u279c Ask about the Help Wanted sign at the caf\u00e9 across from campus. The manager's in Monday to Saturday, from 10am.",
-   "why": "Claims the manager at the caf\u00e9 Mon\u2013Sat from 10am; Tom's row: near_cafe Mon\u2013Sat 10\u201321 (who_is_where). Mark at the kitchen table Sunday morning: Sun 08\u201312 home_kitchen.",
+   "line": "And Mark said \"one way or another\"",
+   "why": "names nobody as present; Mark is past tense",
    "cause": null,
-   "screen_hash": "5a7f9f7e34f7e280",
+   "note": false,
+   "screen_hash": {
+    "text": "a541a1c36e0d9cff",
+    "facts": "1bb55a6bea468407",
+    "all": "51e02ac85027cfa7"
+   },
    "row_hash": "13a714429d15f3b2",
    "carried": true
   },
@@ -3802,5 +4171,10 @@
    "carried": true
   }
  ],
- "causes": []
+ "causes": [],
+ "pending": [],
+ "asked": 5,
+ "answered": 5,
+ "pass_items": [],
+ "unowed": []
 }

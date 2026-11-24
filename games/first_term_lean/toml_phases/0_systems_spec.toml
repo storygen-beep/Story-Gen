@@ -81,6 +81,22 @@ bands = [
   { min = 80, max = 100, text = "On Display" },
 ]
 
+# P11 — goal 1's count and the rent total, internal (not on the sidebar).
+[[traits.labels]]
+key = "sundays_paid"
+label = "Sundays paid"
+hidden = true
+
+[[traits.labels]]
+key = "rent_paid_total"
+label = "Rent paid"
+hidden = true
+
+[[traits.labels]]
+key = "meals_today"
+label = "Meals today"
+hidden = true
+
 [[traits.labels]]
 key = "want"
 label = "Want"
@@ -143,11 +159,13 @@ tip = "He's at the kitchen table on Sunday mornings. That's when he collects."
 group = "story_goals"
 when = [{ flag = "goal1_shown", op = "is_true" }]
 text = "Pay your own way. Pay Mark your share every Sunday."
+ready_text = "Done. You pay your own way. Next: your name on campus, in a later release."
 tip = "You need money. Take shifts, or find another way. People are in different places at different hours. What you say changes how they treat you."
 goals = [
   { flag = "met_mark", op = "is_true", label = "Mark told you the rent" },
   { flag = "cafe_hired", op = "is_true", label = "Ask about the Help Wanted sign at the café across from campus. The manager's in Monday to Saturday, from 10am." },
-  { flag = "rent_paid_once", op = "is_true", label = "Pay Mark on Sunday morning, at the kitchen table ($75 this week)." },
+  { flag = "rent_paid_once", op = "is_true", label = "Pay Mark on Sunday morning, at the kitchen table." },
+  { trait = "sundays_paid", subject = "player", op = "gte", value = 4, label = "Pay Mark in full four Sundays in a row" },
 ]
 
 # P21 — Tom and Chris on the People page once met, with where and when.
@@ -167,6 +185,19 @@ tip = "He has the counter weekday mornings until 3pm, and weekends until 8pm."
 [engine.daily_tick]
 flagEffects = [
   { targetType = "player", flag = "talked_mom_today", op = "unset" },
+  { targetType = "player", flag = "talked_mark_today", op = "unset" },
+  { targetType = "player", flag = "talked_ryan_today", op = "unset" },
+  { targetType = "player", flag = "ate_with_mom_today", op = "unset" },
   # P21 — "Not today." at the café parks the ask until the next day
   { targetType = "player", flag = "cafe_ask_parked", op = "unset" },
+  # P11 — the rent week: cleared on Tuesday, after Monday's check has read it
+  { targetType = "player", flag = "rent_handled_this_week", op = "unset", conditions = { version = "1.0", logic = "AND", items = [{ type = "weekday", weekdays = [1] }] } },
+  # P11 — four Sundays in a row: goal 1 done (PLAN §2, §8i)
+  { targetType = "player", flag = "pays_her_own_way", op = "set", conditions = { version = "1.0", logic = "AND", items = [{ type = "trait", subject = "player", trait_key = "sundays_paid", operator = "gte", value = 4 }] } },
+]
+# P11 — on Monday, a Sunday with no payment breaks the run
+traitEffects = [
+  { targetType = "player", trait = "sundays_paid", op = "set", value = 0, conditions = { version = "1.0", logic = "AND", items = [{ type = "weekday", weekdays = [0] }, { type = "flag", subject = "player", flag_key = "rent_handled_this_week", operator = "is_false" }, { type = "flag", subject = "player", flag_key = "pays_her_own_way", operator = "is_false" }] } },
+  # P34 — meals: one count a day
+  { targetType = "player", trait = "meals_today", op = "set", value = 0 },
 ]

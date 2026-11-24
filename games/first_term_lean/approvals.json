@@ -300,6 +300,318 @@
       "sha256": "4d2df36779fb57778c554f526b168a8ddd67f8f93c339345f0794bb954004b92",
       "words": "ENI for LO (delegated 2026-11-24): \"Yes to c1 (Chris to 8pm on weekends), c2 and c3\"",
       "date": "2026-11-24"
+    },
+    {
+      "card": "P11",
+      "sha256": "8caae9e277b41aca3529c8bf67255abc8be35a96139b3ac503d998b06b1389e3",
+      "words": "ENI for LO (delegated 2026-11-24): \"Yes, the window 8–11:55 and the goal line without the amount\"",
+      "date": "2026-11-24"
+    },
+    {
+      "card": "P13",
+      "sha256": "d7a1225a11cc9accd1aabdef4aab7df2d08467971e478917d2243d478174834c",
+      "words": "ENI for LO (delegated 2026-11-24): \"Yes, the window 8–11:55 and the goal line without the amount\"",
+      "date": "2026-11-24"
+    },
+    {
+      "card": "P06",
+      "sha256": "2c73030c4398598e53b4f038f2080c77e0532c8dfe576d46c58ff9c39aab02e0",
+      "words": "ENI for LO (delegated 2026-11-24): \"Yes, with meals sharing the three-a-day cap\"",
+      "date": "2026-11-24"
+    },
+    {
+      "card": "P34",
+      "sha256": "d5836b261a893f6676d8366e594e19882bc9e05fc4a825ac2d5fc3d368e929f3",
+      "words": "ENI for LO (delegated 2026-11-24): \"Yes, with meals sharing the three-a-day cap\"",
+      "date": "2026-11-24"
+    },
+    {
+      "card": "P33",
+      "sha256": "57d0e50a5ac9f32d69e672ae34dc3b0fcf6effa5291165a558a065b3097def9a",
+      "words": "ENI for LO (delegated 2026-11-24): \"Yes, lunch shares the meal count, and the run says her body\"",
+      "date": "2026-11-24"
+    },
+    {
+      "card": "P35",
+      "sha256": "d7473bf7a1c3bcf182095fb52da5e7dd83a188b384926b8e1e0161b6bd8a1fed",
+      "words": "ENI for LO (delegated 2026-11-24): \"Yes, with Nina's meeting gated on her being there\"",
+      "date": "2026-11-24"
+    },
+    {
+      "card": "P01",
+      "sha256": "47875eb857760e4d59eb82baa46b696ac1d817be6884384f606d5fbb6053c890",
+      "words": "ENI for LO (delegated 2026-11-24): \"Yes, classes behind each teacher's meeting, grades still\"",
+      "date": "2026-11-24"
+    },
+    {
+      "card": "P09",
+      "sha256": "d9dffd5847ec721d7066331e69907bd87dbd2149c38d51e2ee5f547cd7806d2f",
+      "words": "ENI for LO (delegated 2026-11-24): \"Yes, classes behind each teacher's meeting, grades still\"",
+      "date": "2026-11-24"
+    },
+    {
+      "card": "P08",
+      "sha256": "b729e681baa655801d6a35b40e7eafc47eb8cd2fc34ea0a65a4ebf26ed9c61c0",
+      "words": "ENI for LO (delegated 2026-11-24): \"Yes, with Ryan's line and Mom's 'tonight'\"",
+      "date": "2026-11-24"
+    },
+    {
+      "card": "P11",
+      "sha256": "87de8d9140de67f5ecd23de71e88a5bbd5e1251baf33c80efe3ab03c99edea2c",
+      "words": "ENI for LO (delegated 2026-11-24): \"Yes: rent in Mark's Kitchen menu, her reactions, and Mark explains the rise on the first payment\"",
+      "date": "2026-11-24"
+    },
+    {
+      "card": "P13",
+      "sha256": "3b2e938ed895996488de9badbf86efdf70d849cc5dbd40bfb484125de0b1fc7e",
+      "words": "ENI for LO (delegated 2026-11-24): \"Yes: rent in Mark's Kitchen menu, her reactions, and Mark explains the rise on the first payment\"",
+      "date": "2026-11-24"
+    },
+    {
+      "card": "P34",
+      "sha256": "9dae10fbbab75ffdd6ccd687fdc114f48fff662bd9c7671575142e4eb0ea7e87",
+      "words": "ENI for LO (delegated 2026-11-24): \"Yes: rent in Mark's Kitchen menu, her reactions, and Mark explains the rise on the first payment\"",
+      "date": "2026-11-24"
+    },
+    {
+      "card": "P11",
+      "sha256": "b51279d6403df8ec71c84ed12a12d97b784631ecb6526cad8220a81fb465982c",
+      "words": "ENI for LO (delegated 2026-11-24): \"Yes: rent in Mark's Kitchen menu, her reactions, and Mark explains the rise on the first payment\" (re-recorded after the build: Sheet/Does synced to sheet.py, talk-ratio lines added)",
+      "date": "2026-11-24"
+    },
+    {
+      "card": "P13",
+      "sha256": "199554be157b036631542ecbc5d62603ec198866664678e665fba685442fd10c",
+      "words": "ENI for LO (delegated 2026-11-24): \"Yes: rent in Mark's Kitchen menu, her reactions, and Mark explains the rise on the first payment\" (re-recorded after the build: Sheet/Does synced to sheet.py, talk-ratio lines added)",
+      "date": "2026-11-24"
+    },
+    {
+      "card": "P34",
+      "sha256": "a01379745be5006107110a56046ead493ef04028d2f69ef232572a5dfca2c3b8",
+      "words": "ENI for LO (delegated 2026-11-24): \"Yes: rent in Mark's Kitchen menu, her reactions, and Mark explains the rise on the first payment\" (re-recorded after the build: Sheet/Does synced to sheet.py, talk-ratio lines added)",
+      "date": "2026-11-24"
+    },
+    {
+      "card": "P10",
+      "sha256": "243ad951c818c90c45288df8b3c812daa8807fc23968a710b5b0384df2aef330",
+      "words": "ENI for LO (delegated 2026-11-24): \"Yes, any-hour work: an hour or a shift whenever Tom or Chris is behind the counter\"",
+      "date": "2026-11-24"
+    },
+    {
+      "card": "P21",
+      "sha256": "cf09a7f17153d43af7eeed68a073e88ce5d709a273d7c0f98ac7c90b929b847a",
+      "words": "ENI for LO (delegated 2026-11-24): \"Yes, any-hour work: an hour or a shift whenever Tom or Chris is behind the counter\"",
+      "date": "2026-11-24"
+    },
+    {
+      "card": "P08",
+      "sha256": "b987759479e49f7cd92cd4f649dd42517ae45f4e7f38ed4ea401c75912ee201b",
+      "words": "ENI for LO (delegated 2026-11-24): \"Yes, any-hour work: an hour or a shift whenever Tom or Chris is behind the counter\"",
+      "date": "2026-11-24"
+    },
+    {
+      "card": "P11",
+      "sha256": "35f1104facfeb4f5db12948e014fd49f2e5285beedc7f37cca00266117b0e3ec",
+      "words": "ENI for LO (delegated 2026-11-24): \"Yes: rent in Mark's Kitchen menu, her reactions, and Mark explains the rise on the first payment\" (re-recorded after reader pass 2 fixes that only follow the rules, per LO's overnight instruction relayed by ENI: fix them and send the changed lines)",
+      "date": "2026-11-24"
+    },
+    {
+      "card": "P34",
+      "sha256": "faf10af2cdac74a4f455be8d989b878bf15a4e65dd99a62a99b514054e7543df",
+      "words": "ENI for LO (delegated 2026-11-24): \"Yes: rent in Mark's Kitchen menu, her reactions, and Mark explains the rise on the first payment\" (re-recorded after reader pass 2 fixes that only follow the rules, per LO's overnight instruction relayed by ENI: fix them and send the changed lines)",
+      "date": "2026-11-24"
+    },
+    {
+      "card": "P10",
+      "sha256": "e85265e54af4f031803a52d1ca01f5e7aceb8e94d75c570281c8a2efaa4ad3b3",
+      "words": "ENI for LO (delegated 2026-11-24): \"Yes, any-hour work: an hour or a shift whenever Tom or Chris is behind the counter\" (re-recorded after build fixes that only follow the rules: talk ratio, Chris pays weekday shifts before 10, kept save ids)",
+      "date": "2026-11-24"
+    },
+    {
+      "card": "P21",
+      "sha256": "05da9b0cd6657d7d49b61978f4a74b0c7f4ffa74f43530086680b8fc7ec1f97f",
+      "words": "ENI for LO (delegated 2026-11-24): \"Yes, any-hour work: an hour or a shift whenever Tom or Chris is behind the counter\" (re-recorded after build fixes that only follow the rules: talk ratio, Chris pays weekday shifts before 10, kept save ids)",
+      "date": "2026-11-24"
+    },
+    {
+      "card": "P34",
+      "sha256": "47064fbefddf369e8ac736cd12c9786a3af0eadc5a741afbf5a6af71fc51db9e",
+      "words": "ENI for LO (delegated 2026-11-24): \"Yes: rent in Mark's Kitchen menu, her reactions, and Mark explains the rise on the first payment\" (re-recorded after reader pass 2 fixes that only follow the rules, per LO's overnight instruction relayed by ENI)",
+      "date": "2026-11-24"
+    },
+    {
+      "card": "P32",
+      "sha256": "1815d56a0fc90a6d2d8bd69717f1935f56600be8fb9e48f4d9b6a80bebd57f12",
+      "words": "ENI for LO (delegated 2026-11-24): \"Yes, eleven people's rows, Vance's porch on her street, Chris's line for any-hour work\"",
+      "date": "2026-11-24"
+    },
+    {
+      "card": "P11",
+      "sha256": "2ad87b2286bc0974be3bf951d993a585d29a890af5c8b34e734df48f47dc848e",
+      "words": "ENI for LO (delegated 2026-11-24): \"Yes: rent in Mark's Kitchen menu, her reactions, and Mark explains the rise on the first payment\" (re-recorded after reader pass 2 fixes that only follow the rules, per LO's overnight instruction relayed by ENI)",
+      "date": "2026-11-24"
+    },
+    {
+      "card": "P34",
+      "sha256": "9fea1706b706063dabd8ee7a4b3e0560f083f5606e75b07019d7e86941994fb0",
+      "words": "ENI for LO (delegated 2026-11-24): \"Yes: rent in Mark's Kitchen menu, her reactions, and Mark explains the rise on the first payment\" (re-recorded after reader pass 2 fixes that only follow the rules, per LO's overnight instruction relayed by ENI)",
+      "date": "2026-11-24"
+    },
+    {
+      "card": "P11",
+      "sha256": "2146c9e0766004a8d5aafc829c5e5cb50a986dae82d1cdc42a7b3b87e67f0a76",
+      "words": "ENI for LO (delegated 2026-11-24): \"Yes: rent in Mark's Kitchen menu, her reactions, and Mark explains the rise on the first payment\" (re-recorded after reader pass 2 fixes that only follow the rules, per LO's overnight instruction relayed by ENI)",
+      "date": "2026-11-24"
+    },
+    {
+      "card": "P34",
+      "sha256": "39f1b3b8f6b8195a92133f2725b5f355b5ae03447ad993e61714b064d5f75593",
+      "words": "ENI for LO (delegated 2026-11-24): \"Yes: rent in Mark's Kitchen menu, her reactions, and Mark explains the rise on the first payment\" (re-recorded after reader pass 2 fixes that only follow the rules, per LO's overnight instruction relayed by ENI)",
+      "date": "2026-11-24"
+    },
+    {
+      "card": "P11",
+      "sha256": "c58ffec8942ae8f5c5d4921a9377c9054fab666fac9eaf407583605cd485c941",
+      "words": "ENI for LO (delegated 2026-11-24): \"Yes: rent in Mark's Kitchen menu, her reactions, and Mark explains the rise on the first payment\" (re-recorded after reader pass 2 fixes that only follow the rules, per LO's overnight instruction relayed by ENI)",
+      "date": "2026-11-24"
+    },
+    {
+      "card": "P34",
+      "sha256": "48822a49c9ed7559496df4e95298b645503069c6d952f1e3971b9240e3b150b2",
+      "words": "ENI for LO (delegated 2026-11-24): \"Yes: rent in Mark's Kitchen menu, her reactions, and Mark explains the rise on the first payment\" (re-recorded after reader pass 2 fixes that only follow the rules, per LO's overnight instruction relayed by ENI)",
+      "date": "2026-11-24"
+    },
+    {
+      "card": "P10",
+      "sha256": "c2a397ca5679418b83c06c0fe0563ee87f5853c82a6e92bdd487da49c20becec",
+      "words": "ENI for LO (delegated 2026-11-24): \"Yes to the pass fixes: her reaction, :56 ends, the Café's hours line, the rent hook\"",
+      "date": "2026-11-24"
+    },
+    {
+      "card": "P11",
+      "sha256": "daae949635b6b7b4977f9344ea5d4b3384234b48d1d9a93d8b0e7d73699fabad",
+      "words": "ENI for LO (delegated 2026-11-24): \"Yes to the pass fixes: her reaction, :56 ends, the Café's hours line, the rent hook\"",
+      "date": "2026-11-24"
+    },
+    {
+      "card": "P21",
+      "sha256": "998d717f951e86ab4f9ec5cb98f540845899a334513f2f83fbed7a00df10919e",
+      "words": "ENI for LO (delegated 2026-11-24): \"Yes to the pass fixes: her reaction, :56 ends, the Café's hours line, the rent hook\"",
+      "date": "2026-11-24"
+    },
+    {
+      "card": "P34",
+      "sha256": "40a16234800ca1ba7ba4f05639db7c4bf61deec4ebac10f6c54350787bcf00ff",
+      "words": "ENI for LO (delegated 2026-11-24): \"Yes to the pass fixes: her reaction, :56 ends, the Café's hours line, the rent hook\"",
+      "date": "2026-11-24"
+    },
+    {
+      "card": "P34",
+      "sha256": "9e7b863395af737ddda4a5307778d06faaebe79d3864f25a02ad574a40740084",
+      "words": "ENI for LO (delegated 2026-11-24): \"Yes to the pass fixes: her reaction, :56 ends, the Café's hours line, the rent hook\" (re-recorded after reader fixes that only follow the rules: her true line to Mark, the talk hooks)",
+      "date": "2026-11-24"
+    },
+    {
+      "card": "P06",
+      "sha256": "da812f6e225d357b6ce1fa502308828f280f758bebec9f43be5d4f1d015adc1f",
+      "words": "ENI for LO (delegated 2026-11-24): \"Yes to the pass fixes: her reaction, :56 ends, the Café's hours line, the rent hook\" (re-recorded after reader fixes that only follow the rules, per LO's overnight instruction relayed by ENI)",
+      "date": "2026-11-24"
+    },
+    {
+      "card": "P34",
+      "sha256": "ec8c0ed275970ed9fff60f04c9269eb786a5c224f930cbe6211d54d667369f08",
+      "words": "ENI for LO (delegated 2026-11-24): \"Yes to the pass fixes: her reaction, :56 ends, the Café's hours line, the rent hook\" (re-recorded after reader fixes that only follow the rules, per LO's overnight instruction relayed by ENI)",
+      "date": "2026-11-24"
+    },
+    {
+      "card": "P42",
+      "sha256": "2c10fc1c3ca0d022d13ae1e42c46abb9400e0797a0b50c6e00c0981821f250a6",
+      "words": "ENI for LO (delegated 2026-11-24): \"Yes to the pass fixes: her reaction, :56 ends, the Café's hours line, the rent hook\" (re-recorded after reader fixes that only follow the rules, per LO's overnight instruction relayed by ENI)",
+      "date": "2026-11-24"
+    },
+    {
+      "card": "P21",
+      "sha256": "8f0acb3ab3d92054f6397f317fe7ba929934d4388155bbd7370b3ad674e13710",
+      "words": "ENI for LO (delegated 2026-11-24): \"Yes: Tom looks, she doesn't flirt; the first-shift line; Ryan's couch hook and his weekend picture\" · \"Yes, 'as long as one of us is here till you're done'\"",
+      "date": "2026-11-24"
+    },
+    {
+      "card": "P34",
+      "sha256": "38457f248d84a533c2317855b40e5007e7c7ca00c664858d6765f4e66d22c23f",
+      "words": "ENI for LO (delegated 2026-11-24): \"Yes: Tom looks, she doesn't flirt; the first-shift line; Ryan's couch hook and his weekend picture\" · \"Yes, 'as long as one of us is here till you're done'\"",
+      "date": "2026-11-24"
+    },
+    {
+      "card": "P10",
+      "sha256": "ed21e8880f0d931ed1bbb22af940e575def94da1cf5a3e7a33b73412f61af181",
+      "words": "ENI for LO (delegated 2026-11-24): \"Yes: Tom looks, she doesn't flirt; the first-shift line; Ryan's couch hook and his weekend picture\" · \"Yes, 'as long as one of us is here till you're done'\"",
+      "date": "2026-11-24"
+    },
+    {
+      "card": "P08",
+      "sha256": "da4994389ab8f3b5204cdc10a3d4055c44c3389fa232b39499a5a2031ba6abbf",
+      "words": "ENI for LO (delegated 2026-11-24): \"Yes: Tom looks, she doesn't flirt; the first-shift line; Ryan's couch hook and his weekend picture\" · \"Yes, 'as long as one of us is here till you're done'\"",
+      "date": "2026-11-24"
+    },
+    {
+      "card": "P34",
+      "sha256": "7fe1988b8361a7125e8bafc9627234f2dd7ddb7005cb1ffb5486a9b74dd3d36a",
+      "words": "ENI for LO (delegated 2026-11-24): \"Yes: Tom looks, she doesn't flirt; the first-shift line; Ryan's couch hook and his weekend picture\" · \"Yes, 'as long as one of us is here till you're done'\"",
+      "date": "2026-11-24"
+    },
+    {
+      "card": "P42",
+      "sha256": "ebc31d152377a8c597e4ca68f55be56d24e216952ffbae04358f2e80483df675",
+      "words": "ENI for LO (delegated 2026-11-24): \"Yes to the pass fixes: her reaction, :56 ends, the Café's hours line, the rent hook\" (re-recorded after reader fixes that only follow the rules, per LO's overnight instruction relayed by ENI: her reaction on Mom's Mark-there talks; Eat with her returns to the Kitchen)",
+      "date": "2026-11-24"
+    },
+    {
+      "card": "P34",
+      "sha256": "b1fdbc20fc4d050fdc34a7c5e5f3d1e07f5f210f9317c856fbe497bd98f031bb",
+      "words": "ENI for LO (delegated 2026-11-24): \"Yes to the pass fixes: her reaction, :56 ends, the Café's hours line, the rent hook\" (re-recorded after reader fixes that only follow the rules, per LO's overnight instruction relayed by ENI: her reaction on Mom's Mark-there talks; Eat with her returns to the Kitchen)",
+      "date": "2026-11-24"
+    },
+    {
+      "card": "P34",
+      "sha256": "68ccb8ca5f9d043e2beb75bc2c6f0f8cff9e20a9c7f1c75dc39fa6299347339d",
+      "words": "ENI for LO (delegated 2026-11-24): \"Yes to the pass fixes: her reaction, :56 ends, the Café's hours line, the rent hook\" (re-recorded after reader fixes that only follow the rules, per LO's overnight instruction relayed by ENI: her reaction on Mom's Mark-there talks; Eat with her returns to the Kitchen)",
+      "date": "2026-11-24"
+    },
+    {
+      "card": "P06",
+      "sha256": "329709cb1be4dd1d4d97676ec193dd34a3cdb7fe7069f7d8930a912255d0523f",
+      "words": "ENI for LO (delegated 2026-11-24): \"Yes to the pass fixes: her reaction, :56 ends, the Café's hours line, the rent hook\" (re-recorded after reader fixes that only follow the rules, per LO's overnight instruction relayed by ENI: no undressing claim without a clothes condition; the shower's hook)",
+      "date": "2026-11-24"
+    },
+    {
+      "card": "P06",
+      "sha256": "1fc80dc3812d88eeee6e0e9a11c42f631a42d6d8b999f6b80f7e65d272b28800",
+      "words": "ENI for LO (delegated 2026-11-24): \"Yes to the pass fixes: her reaction, :56 ends, the Café's hours line, the rent hook\" (re-recorded after reader fixes that only follow the rules, per LO's overnight instruction relayed by ENI: her spoken answers, truth on repeat visits, hooks)",
+      "date": "2026-11-24"
+    },
+    {
+      "card": "P07",
+      "sha256": "94c542b34248386ee4b0ddd46dad5d92bda5e3c8a29e5129971f49922e4854c2",
+      "words": "ENI for LO (delegated 2026-11-24): \"Yes to the pass fixes: her reaction, :56 ends, the Café's hours line, the rent hook\" (re-recorded after reader fixes that only follow the rules, per LO's overnight instruction relayed by ENI: her spoken answers, truth on repeat visits, hooks)",
+      "date": "2026-11-24"
+    },
+    {
+      "card": "P21",
+      "sha256": "00f75f970b2d3aab5cfec39684e16735d6c0ab90378f8aebc965cadff968c013",
+      "words": "ENI for LO (delegated 2026-11-24): \"Yes to the pass fixes: her reaction, :56 ends, the Café's hours line, the rent hook\" (re-recorded after reader fixes that only follow the rules, per LO's overnight instruction relayed by ENI: her spoken answers, truth on repeat visits, hooks)",
+      "date": "2026-11-24"
+    },
+    {
+      "card": "P34",
+      "sha256": "76e47858f5770fe7ffb02ed87f78b52cb2a346e7b29a44c04cfc2d9b014b9030",
+      "words": "ENI for LO (delegated 2026-11-24): \"Yes to the pass fixes: her reaction, :56 ends, the Café's hours line, the rent hook\" (re-recorded after reader fixes that only follow the rules, per LO's overnight instruction relayed by ENI: her spoken answers, truth on repeat visits, hooks)",
+      "date": "2026-11-24"
+    },
+    {
+      "card": "P42",
+      "sha256": "8c8047e4b6e7461d1e2afe3e9789aad3929a129411579251f25b7150a3a25b8e",
+      "words": "ENI for LO (delegated 2026-11-24): \"Yes to the pass fixes: her reaction, :56 ends, the Café's hours line, the rent hook\" (re-recorded after reader fixes that only follow the rules, per LO's overnight instruction relayed by ENI: her spoken answers, truth on repeat visits, hooks)",
+      "date": "2026-11-24"
     }
   ]
 }
