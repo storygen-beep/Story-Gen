@@ -9,7 +9,7 @@ Read this before you write a card that costs or refills energy, caps how often s
 
 ## Must read
 
-The card's `Craft:` line cites each one, or says in one line why it skips it. `when` and `judge` are the labels in `SKILL.md`, "Rule labels".
+On a card with a `Does:` block (every card from 2026-11-24 on), the rows that apply come from `check.py --rules`, which lists each with its craft file; the card has no `Craft:` line (`piece.md` step 2). On a card from before 2026-11-24, the `Craft:` line cites each one, or says in one line why it skips it. `when` and `judge` are the labels in `SKILL.md`, "Rule labels".
 
 | id | what it asks | the failure it stops | when | judge |
 |---|---|---|---|---|
@@ -71,7 +71,7 @@ Each rule says what CoT and the field do, then whether it's **measured** or **LO
 1. **Each need is declared in full: what drains it, what refills it, what it costs, what it shuts** (C1431, C1432, C1438). A need is spent by use (energy here) or decays over time; it is never neither. *CoT and the field split:* CoT's needs decay by the hour (20–36 h); IHOH's energy and SD's actions are spent. Spent is *LO's choice* for energy, because the engine moves it only by costs and effects.
 2. **Empty shuts work, says why, and never strands her** (C1433, C1342, C1421). A row she can't afford greys with its cost, and a click says what's needed. Her refill (sleep) costs nothing, so it's always open. *CoT and the field agree:* CoT's "You really don't feel like working."; 5 of CoT's needs block work. *Measured;* L45 is the stranded failure.
 3. **The refill sends her somewhere something happens** (C1434, C1313). The kitchen has the family; the shower has the walk-in. *CoT and the field agree:* CoT's code says so, and its refill places always roll an event. *Measured.*
-4. **Every repeat button shows its cost: time and energy, and money when it's a spend** (C1427; `craft/clock.md`; `craft/economy.md`). The cost is sized against the window: a 60-minute shift in a 4-hour opening can run 4 times; a 5-minute act in an all-day window is farmable. *CoT and the field agree:* CoT's buttons print `<<dtime>>` and `<<dalterneed>>`. *Measured.*
+4. **Every repeat has a real cost, sized against its window, and its button shows only money, when it's a spend** (C1427; `craft/clock.md`; `craft/economy.md`): never time or energy. A 60-minute shift in a 4-hour opening can run 4 times; a 5-minute act in an all-day window is farmable. The clock and the energy bar show the spend, and a greyed row shows the engine's "(15 Energy)". *Measured:* CoT and the field print the cost on the button (`<<dtime>>`, `<<dalterneed>>`). Leaving time and energy off is *LO's choice* (LO, 2026-11-24: "Beside choice i dont want to show time and energy show money if needed"; "Room buttons too").
 5. **The brake goes on the way in** (C1345, C1423, C1425). Pick one per activity, and name it on the card:
    - **by the need:** greyed by energy, as rule 2;
    - **by a count:** `max_triggers_per_day` with `show_when_blocked` and a `cooldown_message` in her voice ("You're not hungry right now.");
@@ -98,7 +98,7 @@ Each rule says what CoT and the field do, then whether it's **measured** or **LO
 Roles, not a world: her bedroom, the kitchen, the park, the café. The numbers show the shape and are filler (C992); the game's own come from its plan.
 
 **Kitchen: eat, capped by count**
-- Button: "Eat something (20 min, +15 energy)". Three a day; after the third, greyed: "Eat something — You're not hungry right now."
+- Button: "Eat something" (20 minutes, +15 energy, neither on the label). Three a day; after the third, greyed: "Eat something — You're not hungry right now."
 
 ```toml
 [canvases.trigger]
@@ -108,14 +108,14 @@ cooldown_message = "You're not hungry right now."
 ```
 
 **Her bedroom: the refill, never capped**
-- Button: "Sleep (8 hours)", which fills energy to the top. No cost, so it's always there.
+- Button: "Sleep" (8 hours), which fills energy to the top. No cost, so it's always there.
 
 **Park: a run, a repeat with a clothes gate**
-- Button: "Go for a run (45 min, −15 energy)". Without her running clothes it greys: "Go for a run — Needs leggings and a sports top" (`craft/clothes.md`). With energy under 15 it greys with "(15 Energy)".
+- Button: "Go for a run" (45 minutes, −15 energy, neither on the label). Without her running clothes it greys: "Go for a run — Needs leggings and a sports top" (`craft/clothes.md`). With energy under 15 it greys with "(15 Energy)".
 - The first run is its own scene: her body, her breath, someone on the path. After that, one short line per run from a pool, and she comes home needing a shower.
 
 **Café: a shift, energy and pay**
-- Button: "Work a shift (4 hours, −30 energy)", open whenever the café is open and the manager is there, not at a set hour (rule 7). The pay is said in the scene that offered the job, never on the button (`craft/economy.md`). After a shift, one number line: what she earned. With energy under 30, it greys with "(30 Energy)", and a click says "Requires 30 Energy (you have 12)".
+- Button: "Work a shift" (4 hours, −30 energy, neither on the label), open whenever the café is open and the manager is there, not at a set hour (rule 7). The pay is said in the scene that offered the job, never on the button (`craft/economy.md`). After a shift, one number line: what she earned. With energy under 30, it greys with "(30 Energy)", and a click says "Requires 30 Energy (you have 12)".
 
 What links: the run and the shift drain energy, and the kitchen and the bed refill it, where the family is. The run sends her to the shower, and the shower has the walk-in. The shift pays the Sunday bill.
 

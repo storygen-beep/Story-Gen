@@ -768,3 +768,27 @@ Why for all of these: P13's reader found new FAILs on every pass, v5 to v11 (99 
     - Two stale cites are re-pointed: `deductLocationCosts` from 6237-6244 to 6248-6256, and `getLocationCostTag` from 6247 to 6259.
   - **Left as it is:** `lists/COVERAGE.md`'s C920 row, which records the v2 source's claim ("A move costs a few minutes (3, 2 by bike)…"), not this skill's rule.
   - **Verified:** the suite runs green, and every new cite was read at its line in `v2.py`.
+- The 16 craft files' "Must read" intro, and `reader.md`'s input list: the `Craft:` wording is scoped to cards from before 2026-11-24 (ENI for LO, delegated 2026-11-24). This changes wording only, not behaviour.
+  - **The failure:** cards P15–P20 in first_term_lean have a `Does:` block and, by the 2026-11-24 rule, no `Craft:` line (`piece.md` step 2; `check.py:239-241`). The craft files still said "The card's `Craft:` line cites each one". `reader.md`'s input list counted a craft file the card left out, or an area missing from `Areas:`, as a FAIL. Both read as if every card needed a `Craft:` line, and main-lean asked for a RED check on it, which would have undone LO's rule. That request was dropped.
+  - **The fix:**
+    - Each craft file's intro now says that on a `Does:` card the applying rows come from `check.py --rules`, with no `Craft:` line, and that on an older card the `Craft:` line cites each row or skips it with a reason.
+    - `reader.md` lists the craft files from the rule list for a `Does:` card, and keeps the `Craft:`/`Areas:` FAILs for older cards only.
+  - **Verified:** the suite is green, no script parses the changed sentences, and `check.py` was not touched.
+- Button labels and replies say no time and no energy; they state money only when the act costs money. This is LO's rule, typed in the main-lean session on 2026-11-24: "Beside choice i dont want to show time and energy show money if needed". Asked whether it covers room buttons, he answered: "Room buttons too".
+  - **`craft/clock.md`:**
+    - C889: no clock time and no duration on a label; the real spend still equals the costs.
+    - C906: leave the time off the label.
+    - C910: no time or energy on a button or reply; money only when the act costs it.
+    - C929: the label doesn't carry an activity's time; the clock and the energy bar show it.
+    - The engine bullet, shape rules 1 and 6, the café and "Work an hour" examples, and two "Not this" lines were changed to match.
+  - **`craft/places.md`:** C953 and rule 4 now say money for a spend, never time or energy. The kitchen example and the "Not this" line were changed to match.
+  - **`craft/systems.md`:** rule 4 now says the cost is real and sized to its window, but only money shows on the button. The eat, sleep, run and shift examples carry their costs in parentheses after the label, not in it.
+  - **Examples:** `craft/people.md` (the kitchen's Talk and cook buttons) and `craft/clothes.md` (the bedroom's kitchen button, and the run).
+  - **Unchanged on purpose:**
+    - The engine's own tags: a greyed row's "(15 Energy)" and the nav card's "45m · 10 Energy".
+    - C954, in `craft/economy.md`: pay she earns stays off the button and is said in the scene. LO's "money if needed" is read as a price she pays.
+    - The measured CoT facts in `craft/systems.md` and `craft/economy.md`, which say CoT shows costs. Each rule now says this is LO's choice and that CoT differs.
+  - **Verified:**
+    - No script checks label wording.
+    - A grep of `craft/`, `templates/`, `piece.md`, `reader.md`, `SKILL.md` and `build.md` finds no example label left with a time or energy cost.
+    - The suite is green.

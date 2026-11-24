@@ -9,7 +9,7 @@ Read this before you write a card with anything sexual in it: something that sho
 
 ## Must read
 
-The card's `Craft:` line cites each one, or says in one line why it skips it. `when` and `judge` are the labels in `SKILL.md`, "Rule labels".
+On a card with a `Does:` block (every card from 2026-11-24 on), the rows that apply come from `check.py --rules`, which lists each with its craft file; the card has no `Craft:` line (`piece.md` step 2). On a card from before 2026-11-24, the `Craft:` line cites each one, or says in one line why it skips it. `when` and `judge` are the labels in `SKILL.md`, "Rule labels".
 
 | id | what it asks | the failure it stops | when | judge |
 |---|---|---|---|---|
