@@ -164,3 +164,17 @@ def test_a_retired_canvas_has_no_rows_on_the_work_list(game):
     assert reading.current(game, "p1")[0] == {"*": reading.whole_hash({})}
     p.write_text(p.read_text().replace("is_active = false\n", "", 1))
     assert "start.a" in reading.current(game, "p1")[0]
+
+
+def test_a_note_fail_on_an_old_format_card_is_recorded_without_a_cause_and_carried(game):
+    # P06: an old-format card (no Does:) with FAILs on C1313 and C1434, both `note` in craft/systems.md
+    (game / "cards" / "p1.md").write_text("PIECE p1\nBuilds: start\nCraft: craft/voice.md, craft/systems.md · cites C442\n")
+    work = reading.work_list(game, "p1")
+    assert {"C1313", "C1434"} <= {i["row"] for i in work["items"]}
+    out = [dict(row=i["row"], screen="start.a", verdict="FAIL" if i["row"] in ("C1313", "C1434") else "PASS")
+           for i in work["items"]]
+    rec = reading.record(game, "p1", {"verdicts": out})  # no causes given: notes need none
+    assert all(v["cause"] is None and v["note"] for v in rec["verdicts"] if v["row"] in ("C1313", "C1434"))
+    assert reading.work_list(game, "p1")["items"] == []  # carried, not asked again
+    with pytest.raises(ValueError, match="cause"):  # a reader row's FAIL still needs a cause
+        reading.record(game, "p1", {"verdicts": [{"row": "C442", "screen": "start.a", "verdict": "FAIL"}]})

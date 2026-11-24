@@ -273,7 +273,7 @@ def work_list(game_dir, card_id, everything=False, skill=SKILL, game=None):
         judged.add(r)
         if s in gone or (r not in rows and r not in old_rows):
             continue
-        note = where is not None and table.get(r, {}).get("judge") == "note"
+        note = table.get(r, {}).get("judge") == "note"  # from the row's judge column, Does: or not
         if v["verdict"] == "FAIL" and not note:
             want(r, s, "failed last pass")
         elif r in rows and old_rows.get(r) != rows[r]:
@@ -312,7 +312,6 @@ def record(game_dir, card_id, reader_out, skill=SKILL, game=None):
     unowed = []
     this_pass = rec.get("pass", 0) if rec.get("pending") else rec.get("pass", 0) + 1
     table = rules.table(skill)
-    notes_on = row_screens(game_dir, card_id, skill) is not None  # labels apply to a card with Does:
     new = []
     for v in reader_out.get("verdicts", []):
         if v.get("verdict") not in VERDICTS:
@@ -323,7 +322,7 @@ def record(game_dir, card_id, reader_out, skill=SKILL, game=None):
             if v.get("verdict") != "FAIL":
                 raise ValueError(f"{key[0]} on {key[1]} was not on the work list")
             unowed.append(key)  # never drop a FAIL: it is recorded and reported
-        note = notes_on and table.get(key[0], {}).get("judge") == "note"
+        note = table.get(key[0], {}).get("judge") == "note"  # the judge column decides, for every card
         if v["verdict"] == "FAIL" and not v.get("cause") and not note:
             raise ValueError(f"{key[0]} on {key[1]}: a FAIL names its cause")
         if v["verdict"] == "FAIL" and key[1] == WHOLE:

@@ -699,3 +699,8 @@ Why for all of these: P13's reader found new FAILs on every pass, v5 to v11 (99 
     - a retired canvas has no screens in the reader's work list, and un-retiring it brings them back;
     - one earlier test's expected clock moved from "21:00" to the real "20:56".
   - **Verified read-only on first_term_lean:** reach, sheet and does are green. P10 prints "07:00–19:56 · Mon Tue Wed Thu Fri / 10:00–19:56 · Sat / 10:00–18:56 · Sun".
+- `scripts/reading.py`: a `note` row's FAIL carries on every card, Does: or not (ENI for LO, standing authorization, 2026-11-24).
+  - **The failure:** P06, an old-format card with no `Does:` line. It had 3 FAILs on C1313 and C1434, both labelled `note` in `craft/systems.md`, but `--record` refused them without a cause and the work list kept asking them, as if they were reader rows. The note test was gated on the card having `Does:`.
+  - **The fix:** the note-or-reader decision comes from the row's `judge` column for every card, in both `work_list` and `record`.
+  - **Test:** on an old-format card naming `craft/systems.md`, FAILs on C1313 and C1434 are recorded with no cause, carried, and not asked again, while a reader row's FAIL (C442) still needs a cause.
+  - **Verified read-only:** P06's work list is empty. It was checked with `reading.work_list` alone; no merge and no `run_all`.
