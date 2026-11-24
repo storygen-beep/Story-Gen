@@ -723,3 +723,11 @@ Why for all of these: P13's reader found new FAILs on every pass, v5 to v11 (99 
     - six existing tests that pinned the old behaviour (every row re-asked on a changed screen, a text rewrite asked on `*`, B1/B2/B9 back on `*`) were updated to the rule;
     - four new ones: after pass 1, a one-line change asks only its FAIL and the truth rows; a new screen is asked in full; `--all` asks everything; pre-rule pending items are re-judged.
   - **Verified read-only** (`reading.work_list` only, no merge): P34 is now 42, P42 37, P07 44 and P21 35.
+- `scripts/reading.py` and `reader.md`: `--waive`, a held FAIL waived in LO's words (ENI for LO, standing authorization, 2026-11-24).
+  - **The failure:** P07. LO waived its release-2 deferrals in his own words in the main-lean session ("…hotter will stay locked in for the release one as they require higher traits and traits are capped to 0 in the release one."). `--record` can only stamp rows on the current work list, so four held FAILs from an earlier pass stayed FAIL: C1167 and C1204 on borrow_mom.take, C1171 on hood_street and C1197 on home_her_room.
+  - **The fix:** `reading.py games/<slug> <id> --waive <row> <screen> --words "<LO's words>" --source "<where typed, date>"`.
+    - It turns the held FAIL into WAIVED, keeping the words and the source, and drops it from pending. It prints the line for NOTES.md.
+    - It refuses a row that isn't a held FAIL, empty words and an empty source.
+    - A waived row carries, and re-opens when its screen's text changes ("waived, its screen changed") or its rule's text changes.
+    - `reader.md` says waivers are recorded this way, in LO's own words, with the same line in NOTES.md.
+  - **Tests:** four new: a waive turns the FAIL to WAIVED and it carries; non-FAIL rows, empty words and an empty source are refused; a waived row re-opens when its screen changes; the CLI prints the NOTES line.

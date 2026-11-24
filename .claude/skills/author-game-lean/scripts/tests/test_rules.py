@@ -436,3 +436,48 @@ def test_pending_items_saved_before_the_stop_rule_are_rejudged_by_it(game):
     asked = {(i["row"], i["screen"]) for i in reading.work_list(game, "p1")["items"]}
     assert (non_truth, "start.a") not in asked  # owed only because the text changed: carries now
     assert ("C460", "start.a") in asked and (non_truth, "start.b") in asked
+
+
+# ── --waive: a held FAIL waived in LO's words (P07, 2026-11-24) ──
+
+WORDS = "hotter will stay locked in for the release one"
+
+
+def _held_fail(game):
+    reader = _rows_on_a("reader")[0]
+    _passed(game, lambda r: "FAIL" if r == reader else "PASS")
+    return reader
+
+
+def test_waive_turns_a_held_fail_into_waived_and_it_carries(game):
+    reader = _held_fail(game)
+    reading.waive(game, "p1", reader, "start.a", WORDS, "main-lean session, 2026-11-24")
+    v = next(v for v in reading.load_record(game, "p1")["verdicts"] if v["row"] == reader)
+    assert v["verdict"] == "WAIVED" and v["waived_words"] == WORDS and "2026-11-24" in v["waived_source"]
+    assert not any(i["row"] == reader for i in reading.work_list(game, "p1")["items"])
+
+
+def test_waive_refuses_a_row_that_is_not_a_held_fail_and_empty_words(game):
+    reader = _held_fail(game)
+    other = _rows_on_a("reader")[1]
+    with pytest.raises(ValueError, match="held FAIL"):
+        reading.waive(game, "p1", other, "start.a", WORDS, "chat")
+    with pytest.raises(ValueError, match="own words"):
+        reading.waive(game, "p1", reader, "start.a", "  ", "chat")
+    with pytest.raises(ValueError, match="where and when"):
+        reading.waive(game, "p1", reader, "start.a", WORDS, "")
+
+
+def test_a_waived_row_reopens_when_its_screen_changes(game):
+    reader = _held_fail(game)
+    reading.waive(game, "p1", reader, "start.a", WORDS, "chat, 2026-11-24")
+    p = game / "toml_phases" / "7_final_game.toml"
+    p.write_text(p.read_text().replace("Mom is at the stove.", "Mom is at the stove, humming."))
+    assert any(i["row"] == reader and i["why"] == "waived, its screen changed"
+               for i in reading.work_list(game, "p1")["items"])
+
+
+def test_waive_cli(game, capsys):
+    reader = _held_fail(game)
+    assert reading.main([str(game), "p1", "--waive", reader, "start.a", "--words", WORDS, "--source", "chat"]) == 0
+    assert "NOTES.md: Waived:" in capsys.readouterr().out

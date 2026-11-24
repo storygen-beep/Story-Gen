@@ -292,6 +292,8 @@ def work_list(game_dir, card_id, everything=False, skill=SKILL, game=None):
             want(r, s, "failed last pass")
         elif v["verdict"] == "FAIL" and kind.get(s) == "text":
             want(r, s, "failed last pass (a note), its screen changed")  # check whether the fix took
+        elif v["verdict"] == "WAIVED" and kind.get(s) == "text":
+            want(r, s, "waived, its screen changed")  # LO waived the line he read; a new line needs a new look
         elif r in rows and old_rows.get(r) != rows[r]:
             want(r, s, "its rule's text changed")
         elif s == WHOLE and any(x not in old_sc for x in changed) and (r in SCENE_WIDE or where is None):
@@ -393,6 +395,28 @@ def record(game_dir, card_id, reader_out, skill=SKILL, game=None):
     return out
 
 
+def waive(game_dir, card_id, row, screen, words, source):
+    """Turn a held FAIL into WAIVED, in LO's words, with where and when he typed them. Refuses a row that isn't a
+    held FAIL and empty words. A waived row carries, and re-opens only when its screen's text or its rule's text
+    changes (work_list). Why: LO waived P07's release-2 deferrals in chat (2026-11-24), and --record can only stamp
+    rows on the current work list, so four held FAILs stayed FAIL."""
+    if not str(words or "").strip():
+        raise ValueError("a waiver needs LO's own words")
+    if not str(source or "").strip():
+        raise ValueError("a waiver says where and when LO typed it")
+    rec = load_record(game_dir, card_id)
+    held = [v for v in (rec or {}).get("verdicts", []) if v["row"] == row and v["screen"] == screen
+            and v["verdict"] == "FAIL"]
+    if not held:
+        raise ValueError(f"{row} on {screen} is not a held FAIL in {record_path(game_dir, card_id)}")
+    for v in held:
+        v.update(verdict="WAIVED", waived_words=words.strip(), waived_source=source.strip(),
+                 why=f"waived by LO: \"{words.strip()}\" ({source.strip()})")
+    rec["pending"] = [i for i in rec.get("pending", []) if not (i["row"] == row and i["screen"] == screen)]
+    record_path(game_dir, card_id).write_text(json.dumps(rec, indent=1) + "\n", encoding="utf-8")
+    return held[0]
+
+
 def by_cause(rec):
     """Lines of the FAIL table grouped by cause: one head line per cause, then the rows it breaks."""
     lines = []
@@ -411,6 +435,18 @@ def by_cause(rec):
 
 def main(argv=None):
     argv = list(sys.argv[1:] if argv is None else argv)
+    if "--waive" in argv:
+        ap = argparse.ArgumentParser(description="Waive a held FAIL in LO's words.")
+        ap.add_argument("game_dir")
+        ap.add_argument("card_id")
+        ap.add_argument("--waive", nargs=2, metavar=("ROW", "SCREEN"), required=True)
+        ap.add_argument("--words", required=True)
+        ap.add_argument("--source", required=True)
+        a = ap.parse_args(argv)
+        v = waive(a.game_dir, a.card_id, a.waive[0], a.waive[1], a.words, a.source)
+        print(f"waived {v['row']} on {v['screen']}: {v['why']}")
+        print(f"NOTES.md: Waived: {v['row']} on {v['screen']} · LO: \"{a.words.strip()}\" ({a.source.strip()})")
+        return 0
     if argv[:1] == ["--record"]:
         ap = argparse.ArgumentParser(description="Record one reader pass.")
         ap.add_argument("game_dir")
