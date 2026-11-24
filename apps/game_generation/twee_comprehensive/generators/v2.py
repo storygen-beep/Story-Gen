@@ -24420,6 +24420,13 @@ if (clothingMsg) {
 <h2>📅 Weekly Schedule</h2>
 <p class="current-time">Today is <<print _currentDay>> · <<print setup.formatTime($game_state.time_state.current_hour, $game_state.time_state.current_minute)>></p>
 <<set _npcsWithSchedules to setup.getNpcsWithSchedules()>>
+/* MET-AWARENESS (2026-11-24). Who is named here is the quest cards' decision, as on CastPage (setup.castRoster):
+   an NPC with any [[quest_cards]] entry is listed only while one of those cards' `when` holds, and a card with
+   `heading` (somebody she hasn't met) lists the heading, not the name. An NPC with no quest card is listed as
+   before. Without this the page named every NPC with rows from minute one: first_term_lean listed Tom and Chris
+   before she met them, against its plan's "no one is named before she meets them". Done on the page, not in
+   getNpcsWithSchedules, because the rows must stay live for presence (a meeting needs its person there). */
+<<set _npcsWithSchedules to _npcsWithSchedules.filter(function (n) { var map = setup.npc_slug_map || {}, slug = null; for (var s in map) { if (map[s] === n.id) { slug = s; break; } } if (!slug) { return true; } var cards = setup.quests_cards || []; var hasCard = cards.some(function (c) { return c && c.npc_id === slug; }); if (!hasCard) { return true; } var card = setup.pickQuestsCard(slug); if (!card) { return false; } if (card.heading) { n.name = card.heading; } return true; })>>
 <<if _npcsWithSchedules.length === 0>>
 <p><em>No NPCs have schedules defined.</em></p>
 <<else>>
