@@ -1305,6 +1305,8 @@ class TweeComprehensiveGeneratorV2:
         # EN5 — what the sidebar's auto Traits dump skips: every hidden key plus every
         # `in_dump = false` key. Only the dump reads it; the Stats page and npc_panel keep
         # hiddenTraits, so a banded meter kept out of the dump is still named elsewhere.
+        # A `toast = false` key is never named in the effect toast (a bookkeeping count).
+        self.no_toast_keys = [k for k, v in self.trait_labels.items() if isinstance(v, dict) and v.get("toast") is False]
         self.dump_skip_keys = [
             k for k, v in self.trait_labels.items()
             if isinstance(v, dict) and (v.get("hidden") or v.get("in_dump") is False)
@@ -4094,7 +4096,7 @@ setup.flag_labels = {json.dumps(self.flag_labels)};
 // in [[traits.labels]]. Every player/NPC trait-dump loop skips these via
 // <<continue>>, so internal stage/pregnancy/awareness traits never surface.
 setup.hiddenTraits = {json.dumps(self.hidden_trait_keys)};
-setup.dumpSkipTraits = {json.dumps(self.dump_skip_keys)};
+setup.dumpSkipTraits = {json.dumps(self.dump_skip_keys)}; setup.noToastTraits = {json.dumps(self.no_toast_keys)};
 setup.stage_setter_canvases = {json.dumps(self.stage_setter_canvases)};
 setup.flag_setter_canvases = {json.dumps(self.flag_setter_canvases)};
 // Sub-menu parent index (2026-05-09) — child_canvas_id → parent_menu_canvas_id
@@ -7669,6 +7671,7 @@ setup.showEffectNotification = function() {{
   for (var i = 0; i < effects.length; i++) {{
     var eff = effects[i];
     if (eff.type === 'trait') {{
+      if ((setup.noToastTraits || []).indexOf(eff.trait) !== -1) continue;  // `toast = false`: a bookkeeping count
       var sign = eff.delta > 0 ? '+' : '';
       var traitDisplay = setup.traitLabel(eff.trait);  // EN5; never filtered by hiddenTraits (D1b)
       var prefix = eff.name ? (eff.name + "'s ") : '';

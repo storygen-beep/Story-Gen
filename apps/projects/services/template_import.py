@@ -660,6 +660,9 @@ class TemplateTraitLabel:
     # shows on the Stats page and in every toast. For a banded meter whose words already
     # sit in [[sidebar_items]]. `hidden` above keeps its meaning: a secret trait.
     in_dump: Any = True
+    # False keeps the trait out of the effect toast ("+1 Meals today"): for a bookkeeping
+    # count the player never needs to see move. Everything else about the trait is unchanged.
+    toast: Any = True
 
 
 @dataclass
@@ -3804,6 +3807,7 @@ def normalize(data: Dict[str, Any]) -> GameTemplate:
                     unit=_require_str(tl_raw, "unit", ""),
                     hidden=bool(tl_raw.get("hidden", False)),
                     in_dump=tl_raw.get("in_dump", True),
+                    toast=tl_raw.get("toast", True),
                 )
             )
 
@@ -6849,6 +6853,8 @@ def validate(template: GameTemplate) -> List[str]:
         # tidied key ("crowd_standing" -> "Crowd standing").
         if not isinstance(tl.in_dump, bool):
             errors.append(f"traits.labels[{tl.key}] in_dump must be true or false, got {tl.in_dump!r}")
+        if not isinstance(tl.toast, bool):
+            errors.append(f"traits.labels[{tl.key}] toast must be true or false, got {tl.toast!r}")
         if not tl.label and not tl.hidden and tl.in_dump is not False:
             errors.append(f"traits.labels[{tl.key}] missing required `label` field")
         if tl.hidden and tl.key not in _all_core_trait_keys and warnings is not None:
@@ -8932,7 +8938,8 @@ def _assemble_project_metadata(project, template):
         project.metadata["trait_labels"] = {
             tl.key: {"label": tl.label, "verb": tl.verb, "unit": tl.unit, "hidden": tl.hidden,
                      # EN5 — written only when false, so an existing game's labels are unchanged.
-                     **({"in_dump": False} if tl.in_dump is False else {})}
+                     **({"in_dump": False} if tl.in_dump is False else {}),
+                     **({"toast": False} if tl.toast is False else {})}
             for tl in template.trait_labels
         }
     if template.flag_labels:
