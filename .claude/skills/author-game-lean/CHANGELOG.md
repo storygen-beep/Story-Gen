@@ -749,3 +749,22 @@ Why for all of these: P13's reader found new FAILs on every pass, v5 to v11 (99 
   - **The fix:** `approve()` runs `check.check_card` first. On anything but GREEN it refuses with the red lines and writes nothing. There is no override flag. Approvals recorded before stay as they are.
   - **Fixtures:** the record itself is now `record_approval()`. The test fixtures, whose placeholder cards aren't real cards, call it directly: `tiny_game.make_game` and two `test_check.py` tests.
   - **Tests:** `test_approve.py`'s card is now a minimal GREEN card, with one `Does:` line. Two new tests: a RED card is refused with its red lines and nothing is written; a GREEN card is recorded as before.
+- `craft/media.md`: a place's `image` is its card on the menu it is entered from, not a door or menu spot (ENI for LO, standing authorization, 2026-11-24; relayed by the main-lean session).
+  - **The failure:** P02b1-c1. home_hall FAILED C1265, media#2 and media#3 because the hall's six room cards carry the six room pictures.
+  - **The engine:** `_render_location_nav_card_body` (`v2.py:24754`) is the only reader of `location_images` (`v2.py:24764`). The place's own screen never shows its `image`.
+  - **The fix:**
+    - The C1265 row says a place's `image` is not a spot of that kind and adds P02b1-c1 as a failure.
+    - "The engine" gains the card fact.
+    - Shape step 2 says the card is the place's one picture, with her in it; a picture of her on the place's own screen is a media block in a scene there.
+    - Two worked-example lines no longer say the kitchen hand-over and the café screen show their place picture.
+- `craft/clock.md`: a hop inside an area costs nothing; time is spent on the moves between areas (ENI for LO, standing authorization, 2026-11-24; relayed by the main-lean session).
+  - **The failures:** P05a1-c1, the one-way café walk (quad to Café 5 minutes, Café to quad 0), and P02b1-c2, where the free house moves FAILED C920's old wording.
+  - **The engine:** `setup.travelMoveSlug` (`v2.py:20490`) returns the destination of a real move, and only that destination's entry cost is charged (`v2.py:20512`, through `setup.deductLocationCosts`, `v2.py:6248-6256`).
+  - **The fix:**
+    - C920 is reworded from "a move costs a few minutes" to: a hop inside an area (between rooms, or to a place next door) costs nothing, and the moves between areas carry the time.
+    - Shape rule 2 says the same and gives the one-way charge as the reason.
+    - "The engine" says only the destination's cost is charged.
+    - The worked example's café exit is now free.
+    - Two stale cites are re-pointed: `deductLocationCosts` from 6237-6244 to 6248-6256, and `getLocationCostTag` from 6247 to 6259.
+  - **Left as it is:** `lists/COVERAGE.md`'s C920 row, which records the v2 source's claim ("A move costs a few minutes (3, 2 by bike)…"), not this skill's rule.
+  - **Verified:** the suite runs green, and every new cite was read at its line in `v2.py`.

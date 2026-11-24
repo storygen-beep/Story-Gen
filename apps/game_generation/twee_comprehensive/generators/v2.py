@@ -11563,10 +11563,8 @@ jQuery(document).on('click', '.trait-modal-close', function(e) {{
         # so the door and the card can never disagree about who is behind it.
         presence = (
             f'<<nobr>><div class="location-card-indicators">'
-            f'<<for _npc range setup.getNpcsPresentAtLocation("{location.id}")>>'
-            f'<<if _npc.portrait>><img @src="\'{video_path}/\' + _npc.portrait" '
-            f'class="nav-npc-badge" @alt="_npc.name"><</if>><</for>>'
-            f'</div><</nobr>>'
+            + self._nav_face_badges(f'setup.getNpcsPresentAtLocation("{location.id}")', video_path, "nav-npc-badge")
+            + f'</div><</nobr>>'
         )
         # Raw name, as every other <h2>{location.name}</h2> site does — a room and its
         # door must render their heading identically.
@@ -12305,6 +12303,19 @@ setup.presentFaceLine = function (slug) {
     var at = slug ? setup.getNpcLocation(slug) : null;
     var act = (at && at.activity) ? String(at.activity).trim() : '';
     return act ? (name + ' is ' + act + '.') : (name + ' is busy right now.');
+};
+// The nav cards' badges keep only people she has met, by the rule above. The list holds uuids,
+// and npc_slug_map maps both a slug and its short name to one uuid, so every slug is checked.
+setup.navFacesMet = function (list) {
+    var map = setup.npc_slug_map || {}, cards = setup.quests_cards || [];
+    return (list || []).filter(function (npc) {
+        for (var slug in map) {
+            if (map[slug] !== npc.id) continue;
+            var hasCard = cards.some(function (c) { return c && c.npc_id === slug; });
+            if (hasCard && !setup.pickQuestsCard(slug)) return false;
+        }
+        return true;
+    });
 };
 """.replace("PREFIX", prefix)
 
@@ -24732,6 +24743,28 @@ window.applyTraitEffect = function(targetType, npcId, trait, op, val, clampFlag,
         arr = json.dumps(ids).replace('"', "'")
         return (f'setup.locationsHaveNewCanvases({arr})', f'setup.getNpcsPresentAtLocations({arr})')
 
+    def _nav_face_badges(self, npcs_call, video_path, css_class, lead=""):
+        """The presence badges on a nav card, a text-mode nav line, or a door. By default a badge
+        is drawn only for a person with a portrait file, the output every game had before.
+        With [ui] present_faces, a person without one gets a circle with their first letter in
+        the same place, and only people she has met are listed (setup.navFacesMet, the same rule
+        as the faces inside a room), so a card never shows someone she hasn't met."""
+        img = (f'{lead}<img @src="\'{video_path}/\' + _npc.portrait" class="{css_class}" '
+               f'@alt="_npc.name">')
+        if not self.present_faces:
+            return f'<<for _npc range {npcs_call}>><<if _npc.portrait>>{img}<</if>><</for>>'
+        size = 24 if css_class == "nav-npc-portrait" else 20
+        initial = (
+            f'{lead}<span class="{css_class} nav-npc-initial" @title="_npc.name" '
+            f'style="display:inline-flex;align-items:center;justify-content:center;'
+            f'width:{size}px;height:{size}px;box-sizing:border-box;border-radius:50%;'
+            f'font-size:{size // 2}px;font-weight:bold;vertical-align:middle;'
+            f'background:var(--theme-border, #444);color:var(--theme-text, #fff)">'
+            f'<<= String(_npc.name || "?").charAt(0).toUpperCase()>></span>'
+        )
+        return (f'<<for _npc range setup.navFacesMet({npcs_call})>>'
+                f'<<if _npc.portrait>>{img}<<else>>{initial}<</if>><</for>>')
+
     def _location_nav_slug(self, loc):
         """The runtime slug a location is keyed by in setup.locations (mirror of the
         locations_map build): properties['slug'] or a loc_<id> fallback."""
@@ -24770,8 +24803,8 @@ window.applyTraitEffect = function(targetType, npcId, trait, op, val, clampFlag,
         indicators = (
             f'<div class="location-card-indicators">'
             f'<<if {new_call}>><span class="nav-new-badge">NEW</span><</if>>'
-            f'<<for _npc range {npcs_call}>><<if _npc.portrait>><img @src="\'{video_path}/\' + _npc.portrait" class="nav-npc-badge" @alt="_npc.name"><</if>><</for>>'
-            f'</div>'
+            + self._nav_face_badges(npcs_call, video_path, "nav-npc-badge")
+            + f'</div>'
         )
         cost_tag = f'<<if setup.getLocationCostTag("{slug}")>><span class="nav-cost-tag"><<= setup.getLocationCostTag("{slug}")>></span><</if>>'
         open_card = (
@@ -24812,8 +24845,8 @@ window.applyTraitEffect = function(targetType, npcId, trait, op, val, clampFlag,
         open_link = (
             f'[[{loc.name}->{link_name}]]'
             f'<<if {new_call}>> <span class="nav-new">!</span><</if>>'
-            f'<<for _npc range {npcs_call}>><<if _npc.portrait>> <img @src="\'{video_path}/\' + _npc.portrait" class="nav-npc-portrait" @alt="_npc.name"><</if>><</for>>'
-            f'{cost_tag}'
+            + self._nav_face_badges(npcs_call, video_path, "nav-npc-portrait", lead=" ")
+            + f'{cost_tag}'
         )
         locked_link = f'<span class="nav-link-locked">{html.escape(loc.name)} — <<= setup.navDestBlockedReason("{slug}")>></span>'
         # Text-mode sibling of the door branch in _render_location_nav_card.

@@ -20,7 +20,7 @@ The card's `Craft:` line cites each one, or says in one line why it skips it. `w
 | C929 | travel time is tagged on the nav card; an activity's time is tagged nowhere, so the label carries it | — | the clock moves | note |
 | C897 | put time on crossing an area, never on every room | — | the clock moves | note |
 | C924 | travel cost is what makes a schedule matter | — | the clock moves | note |
-| C920 | a move costs a few minutes; a bus to town 20 | P13 reader pass 7: the same move inside the house was "(10 min)" on one screen and "(5 min)" on another | the clock moves | reader |
+| C920 | a hop inside an area (between rooms, or to a place next door) costs nothing; time is spent on the moves between areas, like a bus to town at 20 minutes. The engine charges only the destination's entry cost, so a cost on a hop is charged one way only | P13 reader pass 7: the same move inside the house was "(10 min)" on one screen and "(5 min)" on another; P05a1-c1: quad to Café 5 minutes, Café to quad 0; P02b1-c2: the free house moves FAILED the old wording | the clock moves | reader |
 | C913 | a thing with hours publishes them: a shut activity stays as a dimmed line | — · kept blocking: LO's choice (2026-11-24) | the clock moves | reader |
 | C930 | without `show_when_blocked`, windowed work vanishes out of hours | — | the clock moves | note |
 | L167 | different hours on different days are one row with a `group` condition, never one row per day kind; it greys with `show_when_blocked` and a `cooldown_message` naming the full hours | first_term_lean P10: six café rows, and the weekday row greyed beside the live weekend row | the clock moves | reader + sheet |
@@ -38,7 +38,7 @@ The card's `Craft:` line cites each one, or says in one line why it skips it. `w
 - `window.advanceTime(minutes)` is the only way the clock moves (v2.py:7021). Nothing sets an hour (C926), so "till close" can't be kept.
 - An exit's time is `time_progression_minutes`, and 3 when it's left out (v2.py:17947) (C927).
 - `setup.isCurrentTimeSlot` handles windows past midnight, and an end time left out is start + 60 minutes (v2.py:4770-4790) (C921). A `time_of_day` condition uses the same function (v2.py:5283-5285) (C931).
-- Entering a place spends its `time` cost (`setup.deductLocationCosts`, v2.py:6237-6244), and the nav card shows it as a tag like "30m · 10 Energy" (`setup.getLocationCostTag`, v2.py:6247) (C929). A button's own time shows nowhere unless the label says it.
+- Entering a place spends its `time` cost (`setup.deductLocationCosts`, v2.py:6248-6256), and the nav card shows it as a tag like "30m · 10 Energy" (`setup.getLocationCostTag`, v2.py:6259) (C929). Only the destination's cost is charged, on a real move into a different place (`setup.travelMoveSlug`, v2.py:20490-20497; charged at v2.py:20512), so leaving a place costs nothing (C920). A button's own time shows nowhere unless the label says it.
 - `show_when_blocked` with `cooldown_message` keeps a shut activity on screen as a dimmed line with its message (read at v2.py:15115-15119, drawn at v2.py:6751-6759) (C913, C930). That's only when the clock alone shut it. A row shut by something waiting can't fix (clothes, money, a meter, a flag) greys out with its `locked_text` instead, or stays hidden without one (v2.py:6700-6708; `craft/clothes.md`).
 - A place shut by its hours says "Closed. Opens at …" (`setup.locClosedReason`, v2.py:11783-11790), and its `closed_text` shows at the door (v2.py:11455-11458).
 - **A condition item can be a group:** `{ type = "group", logic = "AND"|"OR", items = [...] }`, read with its own logic, recursively; an empty group, or one nested deeper than 3, is false (v2.py:5405-5413). A group made only of clock items counts as the clock, so its row greys with its `cooldown_message` instead of hiding (`setup.onlyTheClockShut`, v2.py:6076). Tests: `apps/game_generation/tests/test_condition_groups.py`.
@@ -65,7 +65,7 @@ Every option prints its time with `<<dtime N>>` after the link. The bus back to 
 Each rule is marked **measured** or **LO's choice**.
 
 1. **Every button shows its time cost** (C910, C929). *Measured:* CoT prints `<<dtime>>` on its options; the commonest costs are 1, 5, 20 and 60 minutes.
-2. **Time is spent on travel between areas; moving inside an area is cheap** (C897, C924, C920). *Measured:* CoT's bus is 20 minutes; going into a building is 1.
+2. **Time is spent on travel between areas; a hop inside an area costs nothing** (C897, C924, C920). A hop is a move between rooms, or to a place next door; a bus or a walk across town is a move between areas. The engine charges only the destination's entry cost (`setup.travelMoveSlug`, `v2.py:20490`; charged at `v2.py:20512`), so a cost on a hop inside an area is charged one way only: quad to Café 5 minutes, Café to quad 0. Put cost only on the moves between areas. *Measured:* CoT's bus is 20 minutes; going into a building is 1.
 3. **No clock times in story text.** An hour that matters goes on a sign, as a rule: "A sign says it's open between 7am and 9pm" (C900). The test is the last minute of the window (C902). *Measured:* CoT 0.61 per 10,000 words, the field 1.1 (C904).
 4. **A closed place stays visible, dimmed, and says when it opens** (C913, C914). An event that happens to her stays hidden when shut (C916). *LO's choice,* and our engine does it ("Closed. Opens at …").
 5. **People's hours go on their page** (C915). *Measured:* CoT's "Nightlife Schedule"; our engine's Schedules page.
@@ -83,7 +83,7 @@ Roles: the café owner. LO approved these words, with the name swapped for a rol
 
 Presence, from his rows: "The owner's behind the counter, wiping the same spot."
 
-Buttons: Buy a coffee ($3, 10 min) · Ask about the Help Wanted sign (once) · Walk to the quad (5 min).
+Buttons: Buy a coffee ($3, 10 min) · Ask about the Help Wanted sign (once) · Walk to the quad (free: the quad is next door, a hop inside the area).
 
 Closed, seen from the street: "Café", dimmed, "Opens at 7am".
 
