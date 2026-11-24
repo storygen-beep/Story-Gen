@@ -32,7 +32,7 @@ The card's `Craft:` line cites each one, or says in one line why it skips it. `w
 
 ## The engine (cited; `v2.py` is `apps/game_generation/twee_comprehensive/generators/v2.py`)
 
-- **Fill in what's missing, never overwrite.** `setup.backfillStateDefaults` (v2.py:20494-20538) runs on every passage (v2.py:20645). It fills:
+- **Fill in what's missing, never overwrite.** `setup.backfillStateDefaults` (v2.py:20505-20549) runs on every passage (v2.py:20656). It fills:
   - missing `$flags` keys;
   - `$player`'s top-level keys and `core_traits`;
   - `$game_state` one level into each sub-map;
@@ -40,11 +40,11 @@ The card's `Craft:` line cites each one, or says in one line why it skips it. `w
   
   It can't follow a rename, notice a removal, or reread a number whose meaning changed (C1677).
 - **A save is never refused.** `Config.saves.onLoad` notes the schema mismatch in the console and never throws (v2.py:4018-4038).
-- **Version stamps.** `origin_version` is written once at the start (v2.py:1700-1702). `last_version` and `last_schema` are restamped when the build changes (v2.py:20650-20653).
+- **Version stamps.** `origin_version` is written once at the start (v2.py:1700-1702). `last_version` and `last_schema` are restamped when the build changes (v2.py:20661-20664).
 - **The title.** SugarCube 2.30 files browser save slots under `Story.domId`, which comes from the title (`storage=SimpleStore.create(Story.domId, …)` in `~/bin/storyformats/sugarcube-2/format.js`). `Config.saves.id` is pinned to the game's slug (v2.py:3990), so an exported save still loads after a title change; a load throws on an id mismatch (`errorSaveIdMismatch`, same file). Browser slots don't survive a title change.
 - **Granting again is safe.** `setup.addToWardrobe` returns early if she already owns the item (v2.py:1736-1745).
 - **Old waits.** A flag with only `set_day` reads as set at the start of that day (v2.py:4983-4988).
-- **The footer** shows the version and the release (v2.py:20812-20820).
+- **The footer** shows the version and the release (v2.py:20823-20831).
 - **The save check** is `check.py`'s `saves` (`scripts/scenes.py`), adapted from v2's `saves_mode` (`.claude/skills/author-game-v2/scripts/gates.py:10603`). It reads the merged TOML at the last commit of `output/index.html` (the build LO played), or `--against <git ref>`, and is red on a removed id or key, a meter whose range or bands changed, or a flag now set only by different choices (unless NOTES.md says `Same meaning: <flag>` with LO's yes). It can't tell a reworded button from a changed meaning, so it asks.
 
 ## The measures

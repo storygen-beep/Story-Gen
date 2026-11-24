@@ -71,6 +71,28 @@ def items(conditions):
     return out
 
 
+def guaranteed(conditions, kind="npc_at_location", key="npc_id", operator="is_present"):
+    """The ids a condition block is sure to check (`<kind>` with `<operator>` on `<key>`): through AND every item's,
+    through OR (the block's or a `group` item's) only those every branch checks. So a presence check inside one
+    branch of an OR doesn't count as checked."""
+    if not isinstance(conditions, dict):
+        return set()
+    items = [i for i in conditions.get("items") or [] if isinstance(i, dict)]
+    sets = []
+    for i in items:
+        if i.get("type") == "group" or isinstance(i.get("items"), list):
+            sets.append(guaranteed(i, kind, key, operator))
+        elif i.get("type") == kind and i.get("operator", operator) == operator and i.get(key):
+            sets.append({i[key]})
+        else:
+            sets.append(set())
+    if not sets:
+        return set()
+    if conditions.get("logic") == "OR":
+        return set.intersection(*sets)
+    return set().union(*sets)
+
+
 def canvases(game, dev=()):
     return [c for c in game.get("canvases") or [] if isinstance(c, dict) and c.get("id") and c["id"] not in dev]
 
@@ -256,7 +278,7 @@ def check_presence(game, dev=()):
         if not place or str(trig.get("is_repeatable", "true")).lower() == "false":
             continue
         bound = {trig.get("npc"), trig.get("requires_npc")}
-        checked = {i.get("npc_id") for i in items(trig.get("conditions")) if i.get("type") == "npc_at_location"}
+        checked = guaranteed(trig.get("conditions")) | guaranteed(trig.get("conditions"), operator="is_absent")
         slots = fire_slots(trig)
         # A choice that carries its own clock condition narrows the screens after it (P34: "Pay the rent" only on
         # Sunday mornings, from a menu open all week); a screen reached by several choices takes the union.
@@ -268,7 +290,7 @@ def check_presence(game, dev=()):
                 pid = props.get("npcId")
                 if b.get("type") != "dialog" or props.get("speaker") != "npc" or pid in bound or pid in checked:
                     continue
-                if any(i.get("type") == "npc_at_location" and i.get("npc_id") == pid for i in items(list(cond))):
+                if any(pid in guaranteed(gc) | guaranteed(gc, operator="is_absent") for gc in cond):
                     continue
                 # A line inside a group shows only when its groups' conditions hold too, so its slots are the
                 # trigger's narrowed by each enclosing group's clock conditions (the same when_slots, OR widened).
@@ -296,7 +318,7 @@ def check_creation(game):
     rows = []
     for f in fields:
         fid = f.get("id")
-        # @player alone prints the name; @player.<id> prints a field (`_resolve_at_references`, v2.py:18608-18653)
+        # @player alone prints the name; @player.<id> prints a field (`_resolve_at_references`, v2.py:18619-18664)
         pat = r"@player(?!\w|\.\w)|@player\.name\b" if fid == "name" else rf"@player\.{re.escape(str(fid))}\b"
         if fid and not re.search(pat, shown):
             rows.append(f"creation field `{fid}` (\"{f.get('label', '')}\") is asked and never printed back (C48)")

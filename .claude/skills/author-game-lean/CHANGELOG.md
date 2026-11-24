@@ -660,3 +660,27 @@ Why for all of these: P13's reader found new FAILs on every pass, v5 to v11 (99 
   - **The fix:** when more than half of a canvas's screens changed text, a card without `Does:` also has its rows asked once on `*`, using the old path's row set (every row, every screen). A FAIL from last pass is still asked on its own screen.
   - **Tests:** three new in `test_reading.py` on an old-format card: both screens changed asks each row once on `*`; half changed still asks per screen; a FAIL stays on its screen when the canvas is rewritten.
   - **Verified read-only against the live records:** P06 goes from 996 to 261 (253 on `*`, 8 FAILs) and P42 from 734 to 169 (149 on `*`, 20 FAILs).
+- Part 2 of the nested-condition-groups plan (`~/.claude/plans/nested-condition-groups.md`; LO relayed 2026-11-24: "Go ahead implement the plan"). The scripts read the engine's new `group` condition item (`{ type = "group", logic, items }`, v2.py:5405-5413) the way the engine does.
+  - **The failure:** P10. Different hours on different days took six café rows, and the weekday row greyed beside the live weekend row, so each button showed twice. The scripts would have misread a group: `when_slots` ignored it, because a group has no `version`. `scenes.items()` flattened it, so a presence check on one OR branch counted as checked. The sheet read its first time window only. `reach.py` treated it as "may hold", which hid a gate behind a dead flag.
+  - **`who_is_where.item_slots`:** a `group` combines its items by its own logic, recursively, and an empty group or one deeper than 3 never holds, as in the engine. Presence and the sheet use it.
+  - **`scenes.guaranteed(conditions, kind, key, operator)`:** the ids a block is sure to check. AND takes every item's; OR, the block's own or a group's, takes only those every branch checks. It is used for presence (`check_presence`'s trigger and group checks), for the sheet's flags (is_true) and clothes (equipped), and for the guard's presence gate.
+  - **The sheet:** a trigger whose clock is a group is written from its slots, part by part. `fmt_slots` now prints days with the same hours together: "07:00–21:00 · Mon Tue Wed Thu Fri / 10:00–21:00 · Sat Sun". `clock_meaning` reads the hand form "weekdays 07:00–20:56 / weekends 10:00–20:56" as the same slots.
+  - **The guard (`rules.py`):** "gated" is now the trigger's `when_slots` narrower than the week, or a presence check every branch makes.
+  - **`reach.py`:**
+    - A `group` item is judged recursively. AND is dead if any item is; OR only if every item is. An empty group, or one deeper than 3, is dead.
+    - `_holds` and `_has_cloth` look inside groups.
+  - **Craft:**
+    - A new lesson **L167** in `lists/LESSONS.md`.
+    - A new must-read row **L167** in `craft/clock.md` (`when` the clock moves, `reader + sheet`).
+    - An engine bullet on the `group` item and `onlyTheClockShut` (v2.py:6076; tests in `apps/game_generation/tests/test_condition_groups.py`).
+    - Shape rule 9, with a worked example in roles and TOML, and a "Not this" line.
+    - `craft/systems.md` rule 7 points to it.
+  - **Tests:** `scripts/tests/test_condition_groups_lean.py`, 12 tests, each part with a planted break:
+    - groups by logic, AND, empty and too deep;
+    - flattening would lose Monday 8am;
+    - presence on every branch is checked, and on one branch is not;
+    - the sheet prints the parts, the hand form matches, and a wrong weekend hour differs;
+    - flags and clothes count only what every branch checks;
+    - the guard reads a clock group as a gate, and an OR with a bare flag as no gate;
+    - reach finds a dead flag inside a group, keeps an OR open when one branch can hold, and an empty group never opens.
+  - **ENI's moved v2.py cites checked:** 26 were spot-checked against their content (selectAutoFire 5905, getStoryCanvasRedirect 6521, the requiresNpc comment 6093, the selectors 5935 and 5968, `_npcPresentForCanvas` 6039, the presence guard 6696, onlyTheClockShut 6068, isCanvasSelectable 6061, is_repeatable 15077, lockedText 15194, terminal_text 19981, backfill 20505, version restamp 20661, canChangeClothesHere 21014, `_resolve_at_references` 18619, default_time 17755, consume_on 5446, canTriggerActivity 5600, daily_tick 7173, clothing_slot 9522, the blocked-row drawing 6749, set_day 5179, the Schedules page 24410, closed_text 11455, and the dress-rule loop 14679). All land on what they cite. The cites before line 5405 (1282, 1700, 2189, 2234, 4118) weren't moved; they share an edited line with a later cite.

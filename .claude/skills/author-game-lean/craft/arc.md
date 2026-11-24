@@ -40,8 +40,8 @@ The card's `Craft:` line cites each one, or says in one line why it skips it. `w
 
 ## The engine (cited; `v2.py` is `apps/game_generation/twee_comprehensive/generators/v2.py`)
 
-- **A step is a one-time canvas.** A canvas is repeatable unless it says `is_repeatable = false` (read at v2.py:15065; `apps/projects/services/template_import.py:833`).
-- **How a step reaches her.** A one-time canvas at a place fires by itself when she walks in: the highest-priority one whose conditions hold (`setup.selectAutoFireCanvasForLocation`, v2.py:5895-5915, called on entry at v2.py:6511-6522). It doesn't check the person is there: `requires_npc` isn't read on that path (v2.py:6083-6086; played on first_term, where `zoe_00_quad_meeting` opened with Zoe placed nowhere, `.claude/skills/author-game-v2/CHANGELOG.md:690`). So a step that fires on arrival and needs a person gates on that person being there in its own conditions: `npc_at_location`, or the hours of their rows. A button in the room, or in a person's menu, is only ever a repeatable canvas (v2.py:5925-5944, 5958-5975). Both filters, and the entry that fires the auto-fire pick, are pinned by `apps/game_generation/tests/test_step_shapes.py`. So a step she chooses from a menu ("Ask about the job") is a repeatable row in the person's menu, with:
+- **A step is a one-time canvas.** A canvas is repeatable unless it says `is_repeatable = false` (read at v2.py:15076; `apps/projects/services/template_import.py:833`).
+- **How a step reaches her.** A one-time canvas at a place fires by itself when she walks in: the highest-priority one whose conditions hold (`setup.selectAutoFireCanvasForLocation`, v2.py:5905-5925, called on entry at v2.py:6522-6533). It doesn't check the person is there: `requires_npc` isn't read on that path (v2.py:6094-6097; played on first_term, where `zoe_00_quad_meeting` opened with Zoe placed nowhere, `.claude/skills/author-game-v2/CHANGELOG.md:690`). So a step that fires on arrival and needs a person gates on that person being there in its own conditions: `npc_at_location`, or the hours of their rows. A button in the room, or in a person's menu, is only ever a repeatable canvas (v2.py:5935-5954, 5958-5975). Both filters, and the entry that fires the auto-fire pick, are pinned by `apps/game_generation/tests/test_step_shapes.py`. So a step she chooses from a menu ("Ask about the job") is a repeatable row in the person's menu, with:
   - its done flag `is_false`;
   - a parked flag her no sets, cleared by `[engine.daily_tick]` (or a `days_since_flag` for a longer wait);
   - the person's presence and hours;
@@ -49,8 +49,8 @@ The card's `Craft:` line cites each one, or says in one line why it skips it. `w
   
   `consume_on` and `retry_after_days` are for a step that happens to her when she arrives. Failure: P21's card as first written made Tom's hire and Chris's first shift one-time canvases with `consume_on`, meant as buttons; the writer found it only from the engine, before any build (2026-11-24).
 - **What opens the next step** is the step's own conditions: the last step's flag, a window, money, a meter. A gap in days is a `days_since_flag` condition, counted from the day the flag was set (v2.py:5167-5180).
-- **The no:** `consume_on = "exit"` on a one-time step uses it up only on the yes (`consumes`). A warned no (`final`) closes it and sets `<canvas>_closed`. A `retry_after_days` choice parks it for N days, and leaving mid-scene parks it for 1 (v2.py:5436-5445; `apps/projects/services/template_import.py:924-931`).
-- **The card's end:** a quest card with `terminal = true` reads "Arc complete" unless `terminal_text` says otherwise (v2.py:19970-19974; `apps/projects/services/template_import.py:1405-1411`). An arc that stops at the build's edge sets `terminal_text`.
+- **The no:** `consume_on = "exit"` on a one-time step uses it up only on the yes (`consumes`). A warned no (`final`) closes it and sets `<canvas>_closed`. A `retry_after_days` choice parks it for N days, and leaving mid-scene parks it for 1 (v2.py:5446-5455; `apps/projects/services/template_import.py:924-931`).
+- **The card's end:** a quest card with `terminal = true` reads "Arc complete" unless `terminal_text` says otherwise (v2.py:19981-19985; `apps/projects/services/template_import.py:1405-1411`). An arc that stops at the build's edge sets `terminal_text`.
 
 ## The measures
 

@@ -10,7 +10,7 @@ One row per screen, every path into it merged:
 How each column is worked out (LO, relayed 2026-11-24: "Commit and continue", the plan's Part C):
   clock    the starting canvas starts at [time] starting_day / starting_hour, minute 0 (v2.py:1592-1593); a
            repeatable starts in its trigger's time_of_day window ("07:00–09:00"), or "any" with none. Each choice adds
-           its time_progression_minutes, 3 when it has none (v2.py:17744, 17758). In and out are the screen's first
+           its time_progression_minutes, 3 when it has none (v2.py:17755, 17758). In and out are the screen's first
            minute and the minute its choice leaves it; a repeatable's are written "+<n>" from the scene's start.
            A repeatable bound to a person with no window reads "while <id> is there": who else is there is
            worked out over the minutes that person's rows put them at the place.
@@ -37,9 +37,10 @@ from pathlib import Path
 HERE = Path(__file__).resolve().parent
 sys.path.insert(0, str(HERE))
 import who_is_where  # noqa: E402
+from scenes import guaranteed  # noqa: E402
 
 DAYS = ("Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday")
-DEFAULT_MINUTES = 3  # v2.py:17744
+DEFAULT_MINUTES = 3  # v2.py:17755
 SLOTS_OF = ("bra", "underwear", "top", "bottom", "dress", "legwear", "shoes")
 COLUMNS = ("screen", "clock", "place", "who", "wearing", "flags")
 
@@ -249,13 +250,14 @@ def fmt_slots(slots):
                 s = None
         if parts:
             runs[d] = tuple(parts)
-    shapes = set(runs.values())
     names = who_is_where.DAYS
-    if len(shapes) == 1:
-        (shape,) = shapes
-        days = " ".join(names[d] for d in sorted(runs))
-        return " / ".join(f"{hhmm(a)}–{hhmm(b)} · {days}" for a, b in shape)
-    return " / ".join(f"{names[d]} {hhmm(a)}–{hhmm(b)}" for d in sorted(runs) for a, b in runs[d])
+    by_shape = {}
+    for d in sorted(runs):
+        by_shape.setdefault(runs[d], []).append(d)  # days with the same hours print together
+    parts = []
+    for shape, days in sorted(by_shape.items(), key=lambda x: x[1][0]):
+        parts += [f"{hhmm(a)}–{hhmm(b)} · {' '.join(names[d] for d in days)}" for a, b in shape]
+    return " / ".join(parts)
 
 
 def fmt_flags(per_path):
@@ -296,11 +298,14 @@ def compute(game, canvas_ids, card_places=None):
                 # A scene bound to a person shows only while they're there (requires_npc).
                 table = where.get(sorted(bound)[0], {})
                 base = {s for s in base if trig.get("location") in {p for p, _ in table.get(s, ())}}
+        grouped = not is_start and any(i.get("type") == "group" for i in (trig.get("conditions") or {}).get("items") or []
+                                         if isinstance(i, dict)) and base is not None and len(base) < len(who_is_where.SLOTS)
         for path in walks(c):
             eq = start_outfit(game) if is_start else None
-            starts, narrowed = base, False  # a choice's own clock conditions narrow the screens after it (P34)
-            flags = {i.get("flag_key") for i in items(trig.get("conditions"))
-                     if i.get("type") == "flag" and i.get("operator") == "is_true"} - {None}
+            # a choice's own clock conditions narrow the screens after it (P34); a trigger whose clock is a group
+            # ("weekdays 7-21 OR weekends 10-21") is written from its slots, part by part, from the first screen
+            starts, narrowed = base, grouped
+            flags = guaranteed(trig.get("conditions"), "flag", "flag_key", "is_true")
             for nid, minute, ch in path:
                 key = f"{cid}.{nid}"
                 row = acc.setdefault(key, {"clock": [], "who": [], "wearing": [], "flags": [], "place": None})
@@ -323,8 +328,7 @@ def compute(game, canvas_ids, card_places=None):
                     worn = sorted(v for v in eq.values() if v)
                     row["wearing"].append(", ".join(worn) or "none")
                 else:
-                    checked = sorted({i.get("item_id") for i in items(trig.get("conditions"))
-                                      if i.get("type") == "clothing_item" and i.get("operator") == "equipped"} - {None})
+                    checked = sorted(guaranteed(trig.get("conditions"), "clothing_item", "item_id", "equipped"))
                     row["wearing"].append(", ".join(checked) or "any")
                 row["flags"].append(set(flags))
                 if eq is not None:

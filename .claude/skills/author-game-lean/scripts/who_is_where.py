@@ -45,12 +45,27 @@ def in_window(m, start, end):
     return (m >= s or m < e) if e < s else (s <= m < e)
 
 
-def item_slots(item):
+GROUP_DEPTH = 3  # v2.py:5407-5413: a group deeper than 3, or empty, is false
+
+
+def item_slots(item, depth=0):
     """The (day, minute) slots one condition item allows by the clock. A time_of_day item is its window
     (`in_window`); a weekday item is its days, 0 = Monday, and an empty list never holds (v2.py:5203-5207);
-    an item with its own `items` is a block, read the same way; any other item can hold at any time."""
+    a `group` item combines its own items by its own logic, recursively, and an empty group or one deeper than 3
+    never holds, as in the engine (v2.py:5405-5413); any other item can hold at any time."""
     if not isinstance(item, dict):
         return set(SLOTS)
+    if item.get("type") == "group":
+        items = [i for i in item.get("items") or [] if isinstance(i, dict)]
+        if depth + 1 > GROUP_DEPTH or not items:
+            return set()
+        parts = [item_slots(i, depth + 1) for i in items]
+        if item.get("logic") == "OR":
+            return set().union(*parts)
+        out = set(SLOTS)
+        for s in parts:
+            out &= s
+        return out
     if isinstance(item.get("items"), list):
         return when_slots(item)
     if item.get("type") == "time_of_day":

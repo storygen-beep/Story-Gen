@@ -61,10 +61,10 @@ Each rule is marked **measured** or **LO's choice**.
 
 ## The engine (cited; `v2.py` is `apps/game_generation/twee_comprehensive/generators/v2.py`)
 
-- `npc = "npc_<x>"` on a canvas's trigger is read at `apps/projects/services/template_import.py:2581` and carried as the canvas's `npcId` (v2.py:15086-15088).
-- A repeatable, manual canvas with an `npcId` shows as the person's face, not as a room button (v2.py:5925-5942; room buttons skip it at v2.py:5969 and 6680; the faces are drawn at v2.py:6530-6531).
-- **One canvas per person per place.** The face opens the highest-`priority` canvas of that person there (v2.py:5944-5948). Two canvases for the same person in one room give one face, and the lower one never shows. So the person's menu is one hub canvas, and Talk and the rest are choices inside it.
-- **Once a day, by a flag.** A choice sets a `_today` flag in its `flagEffects` and is shown only while that flag is false; `[engine.daily_tick]` clears it when the day rolls (v2.py:7162-7164; `.claude/skills/author-game-v2/references/engine.md:1458-1485`). The menu itself has no daily cap, so the person never locks.
+- `npc = "npc_<x>"` on a canvas's trigger is read at `apps/projects/services/template_import.py:2581` and carried as the canvas's `npcId` (v2.py:15097-15099).
+- A repeatable, manual canvas with an `npcId` shows as the person's face, not as a room button (v2.py:5935-5952; room buttons skip it at v2.py:5979 and 6680; the faces are drawn at v2.py:6541-6542).
+- **One canvas per person per place.** The face opens the highest-`priority` canvas of that person there (v2.py:5954-5958). Two canvases for the same person in one room give one face, and the lower one never shows. So the person's menu is one hub canvas, and Talk and the rest are choices inside it.
+- **Once a day, by a flag.** A choice sets a `_today` flag in its `flagEffects` and is shown only while that flag is false; `[engine.daily_tick]` clears it when the day rolls (v2.py:7173-7175; `.claude/skills/author-game-v2/references/engine.md:1458-1485`). The menu itself has no daily cap, so the person never locks.
 
 ## Worked example
 

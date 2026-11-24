@@ -2,7 +2,7 @@
 
 author-game-lean copy. Copied from author-game-v2/scripts/reach.py (frozen at ea8f6465) on 2026-11-19, with one
 fix (LO, 2026-11-19): a live screen's exit_block.config effects (flagEffects, effects, wardrobeEffects) now count,
-whatever the exit type, as the engine applies them (v2.py:17940-17960, v2.py:18043). v2 walked only
+whatever the exit type, as the engine applies them (v2.py:17951-17971, v2.py:18054). v2 walked only
 exit_block.choices, so a flag set on a one-way "location" exit read as "nothing sets it" (the exam fixture
 billable_hours showed 49 false reds from `opening_boot`). v2's frozen copy still has this bug; first_term has no
 such exits, so its result stands.
@@ -108,7 +108,7 @@ class _World:
                     continue
                 _walk(n.get("blocks"), eff)
                 # The engine applies a screen's exit_block.config effects whatever the exit type: flagEffects and
-                # effects (v2.py:17940-17960, _get_flag_effects_for_node), wardrobeEffects (v2.py:18043).
+                # effects (v2.py:17951-17971, _get_flag_effects_for_node), wardrobeEffects (v2.py:18054).
                 _walk((n.get("exit_block") or {}).get("config"), eff)
                 for i, ch in enumerate((n.get("exit_block") or {}).get("choices") or []):
                     if live_place(cid, n.get("id"), i):
@@ -148,11 +148,21 @@ class _World:
         self.types = {clothes[i].get("type") for i in self.wear}
 
     # ---- conditions with no outfit in hand ----
-    def item(self, it):
+    def item(self, it, depth=0):
         """(False, why) when this item can never hold; (None, None) otherwise."""
         if not isinstance(it, dict):
             return None, None
         t, op = it.get("type"), it.get("operator") or it.get("op")
+        if t == "group":
+            # a nested group (v2.py:5405-5413): its items under its own logic; empty or deeper than 3 never holds
+            items = [i for i in it.get("items") or [] if isinstance(i, dict)]
+            if depth + 1 > 3 or not items:
+                return False, "an empty group, or one nested deeper than 3"
+            got = [self.item(i, depth + 1) for i in items]
+            dead = [w for v, w in got if v is False]
+            if str(it.get("logic") or "AND").upper() == "OR":
+                return (False, " and ".join(dead)) if len(dead) == len(got) else (None, None)
+            return (False, dead[0]) if dead else (None, None)
         if t in ("flag", "days_since_flag", "hours_since_flag"):
             f = it.get("flag_key") or it.get("flag")
             if f and f not in self.flags and not (ENGINE_FLAGS.match(f) and not (
@@ -272,6 +282,10 @@ def _holds(w, cond, eq):
         return True
     vs = []
     for it in cond["items"]:
+        if it.get("type") == "group":
+            sub = {"version": "1.0", "logic": it.get("logic") or "AND", "items": it.get("items") or []}
+            vs.append(bool(it.get("items")) and _holds(w, sub, eq))
+            continue
         if it.get("type") in CLOTH:
             v = _cloth(w, it, eq)
             vs.append(True if v is None else v)
@@ -281,7 +295,8 @@ def _holds(w, cond, eq):
 
 
 def _has_cloth(cond):
-    return isinstance(cond, dict) and any(isinstance(i, dict) and i.get("type") in CLOTH for i in cond.get("items") or [])
+    return isinstance(cond, dict) and any(isinstance(i, dict) and (i.get("type") in CLOTH or (
+        i.get("type") == "group" and _has_cloth(i))) for i in cond.get("items") or [])
 
 
 def _dress_possible(w, outfits, loc, conds):
