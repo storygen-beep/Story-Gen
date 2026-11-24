@@ -731,3 +731,16 @@ Why for all of these: P13's reader found new FAILs on every pass, v5 to v11 (99 
     - A waived row carries, and re-opens when its screen's text changes ("waived, its screen changed") or its rule's text changes.
     - `reader.md` says waivers are recorded this way, in LO's own words, with the same line in NOTES.md.
   - **Tests:** four new: a waive turns the FAIL to WAIVED and it carries; non-FAIL rows, empty words and an empty source are refused; a waived row re-opens when its screen changes; the CLI prints the NOTES line.
+- `scripts/reading.py`: a reworded schedule `activity` re-opens nothing, and a fact-only change asks only fact rows on every card (ENI for LO, standing authorization, 2026-11-24).
+  - **The failure:** the game session reworded six schedule `activity` strings and moved no hours or places, yet about 8,000 items re-opened: P07 4,800, P42 755, P34 536, and more. Two causes:
+    - A screen's facts hash took in the whole schedule row of everyone it names, `activity` included, and Laura, Mark and Ryan are named almost everywhere.
+    - On a card without `Does:`, a fact-only change re-asked every row (P07: 240 a screen).
+  - **The fix:**
+    - **`facts2`:** the people part of the facts hash now holds only `location`, `weekdays`, `start_time`, `end_time` and `when`.
+    - **Why `activity` is safe to leave out:** it prints only on script-built pages, never on a canvas screen. Checked in v2.py: the activity hint (9705), the people and presence lines (12099-12117, 12306) and the Schedules page (24441-24463). A screen that quotes an activity has it in its text hash.
+    - **Old records:** a record written before `facts2` reads as facts-unchanged once, and the next record stores `facts2`. The cost: a row that really moved in that gap is caught only by `--all`.
+    - **Every card:** a fact-only change asks only the fact rows (`reads_facts`), with or without `Does:`.
+  - **Tests:** three new in `test_reading.py`: a reworded activity re-opens nothing while a real hour move still does; an old-format card's fact change asks only fact rows; a record from before `facts2` reads as unchanged once.
+  - **Verified read-only:**
+    - P07 is 0, P42 0, P34 3, P13 1, P06 0 and P11 1. The rows left on P34, P13 and P11 are "never judged": rule ids added since their last pass.
+    - P04 is 209, a first pass, since it has no record yet.

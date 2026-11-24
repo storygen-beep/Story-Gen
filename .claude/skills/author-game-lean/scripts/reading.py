@@ -156,9 +156,15 @@ def screens(game, canvas_ids, sheet_rows=None):
             named |= set(re.findall(r'"npcId": "([\w-]+)"', blob))
             named |= {trig.get("npc"), trig.get("requires_npc")} - {None}
             facts = {p: rows_of.get(p, []) for p in sorted(named)}
+            # When and where they are, not what the row calls it: `activity` prints only on script-built pages (the
+            # people page, the Schedules page, the hint), never on a canvas screen, and a screen that quotes it has
+            # it in its text hash (P07 etc., 2026-11-24: six reworded activities re-opened about 8,000 items).
+            where_when = {p: [{k: r.get(k) for k in ("location", "weekdays", "start_time", "end_time", "when")}
+                              for r in rows_of.get(p, []) if isinstance(r, dict)] for p in sorted(named)}
             key = f"{c['id']}.{node.get('id')}"
             out[key] = {"text": digest({"node": node, "trigger": trig}),
                         "facts": digest({"facts": facts, "sheet": sheet_rows.get(key)}),
+                        "facts2": digest({"facts": where_when, "sheet": sheet_rows.get(key)}),
                         # the single hash records written before 2026-11-24 hold, to read them as they are
                         "all": digest({"node": node, "trigger": trig, "facts": facts, "sheet": sheet_rows.get(key)})}
     return out
@@ -200,7 +206,11 @@ def screen_change(old, new):
         return None if old == new["all"] else "text"
     if old.get("text") != new["text"]:
         return "text"
-    return "facts" if old.get("facts") != new["facts"] else None
+    if "facts2" not in old:
+        # A record written before facts2 (2026-11-24) can't tell a reworded activity from a moved row; it reads as
+        # unchanged once, and the next record stores facts2. A row that really moved in that gap is caught by --all.
+        return None
+    return "facts" if old.get("facts2") != new["facts2"] else None
 
 
 def whole_hash(screen_hashes):
@@ -279,7 +289,7 @@ def work_list(game_dir, card_id, everything=False, skill=SKILL, game=None):
                 elif kind[s] == "text":
                     if reads_truth(r, table):
                         want(r, s, "screen changed: truth row")
-                elif where is None or reads_facts(r, table):
+                elif reads_facts(r, table):  # every card: a fact change asks only the fact rows
                     want(r, s, "a fact changed")
     judged = set()
     for v in rec.get("verdicts", []):

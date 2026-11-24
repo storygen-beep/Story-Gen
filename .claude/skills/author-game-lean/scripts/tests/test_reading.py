@@ -178,3 +178,34 @@ def test_a_note_fail_on_an_old_format_card_is_recorded_without_a_cause_and_carri
     assert reading.work_list(game, "p1")["items"] == []  # carried, not asked again
     with pytest.raises(ValueError, match="cause"):  # a reader row's FAIL still needs a cause
         reading.record(game, "p1", {"verdicts": [{"row": "C442", "screen": "start.a", "verdict": "FAIL"}]})
+
+
+def test_a_reworded_activity_reopens_nothing(game):
+    # P07 and others, 2026-11-24: six schedule activities reworded, no hour or place moved
+    p = game / "toml_phases" / "7_final_game.toml"
+    p.write_text(p.read_text().replace('end_time = "09:00"', 'end_time = "09:00"\nactivity = "at the stove"'))
+    first_pass(game)
+    p.write_text(p.read_text().replace('activity = "at the stove"', 'activity = "making eggs"'))
+    assert reading.work_list(game, "p1")["items"] == []
+    p.write_text(p.read_text().replace('end_time = "09:00"', 'end_time = "08:00"'))  # a real move still counts
+    assert reading.work_list(game, "p1")["items"]
+
+
+def test_an_old_format_card_fact_change_asks_only_fact_rows(game):
+    first_pass(game)
+    edit(game, 'end_time = "09:00"', 'end_time = "08:00"')  # Mom's row moves; the text doesn't
+    items = reading.work_list(game, "p1")["items"]
+    assert items and all(reading.reads_facts(i["row"], reading.rules.table()) for i in items)
+    assert all(i["why"] == "a fact changed" for i in items)
+
+
+def test_a_record_from_before_facts2_reads_as_unchanged_once(game):
+    first_pass(game)
+    path = reading.record_path(game, "p1")
+    rec = json.loads(path.read_text())
+    for v in rec["screens"].values():
+        if isinstance(v, dict):
+            v.pop("facts2", None)
+    path.write_text(json.dumps(rec))
+    edit(game, 'end_time = "09:00"', 'end_time = "08:00"')
+    assert reading.work_list(game, "p1")["items"] == []
