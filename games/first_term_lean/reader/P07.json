@@ -1,0 +1,7825 @@
+{
+ "piece": "P07",
+ "pass": 2,
+ "screens": {
+  "opening.wake": {
+   "text": "e151e2a47117a98b",
+   "facts": "8211a28bc952c9a8",
+   "all": "d8a807b756d7b6cc"
+  },
+  "opening.kitchen_rent": {
+   "text": "58683dab2944f811",
+   "facts": "589ea58a08a8e5b2",
+   "all": "619382d2136f0659"
+  },
+  "opening.kitchen_ask": {
+   "text": "493b3c80469ab308",
+   "facts": "eb037b202d0f6f75",
+   "all": "cf9e61cbe8b929c0"
+  },
+  "opening.bath_grades": {
+   "text": "ddc4c8196a699ac4",
+   "facts": "f12528f3f7d5bc6c",
+   "all": "6bc4203c74bd6dd6"
+  },
+  "opening.bath_fun": {
+   "text": "a91d550d5f7ef222",
+   "facts": "e91f84c8419bb444",
+   "all": "20d281e37a3170f3"
+  },
+  "opening.bath_freedom": {
+   "text": "eba7beacc0939787",
+   "facts": "fe0b3ef8b31d21c4",
+   "all": "1e59a41e2f75d218"
+  },
+  "opening.bath": {
+   "text": "65cecb4204fd2e05",
+   "facts": "69c76ef362183ea8",
+   "all": "94613efd247ed3c8"
+  },
+  "opening.hall": {
+   "text": "983cd29f6ea9d4b6",
+   "facts": "23f74a937feab3dc",
+   "all": "446c2bcaf3d0f5c1"
+  },
+  "opening.room_past": {
+   "text": "6dffcc94554269ed",
+   "facts": "53686d504f6df368",
+   "all": "10f9b46da59914ba"
+  },
+  "opening.room_spoke": {
+   "text": "645c8c4f9b10b927",
+   "facts": "21375e89dd5a7049",
+   "all": "ce38743110e19276"
+  },
+  "opening.room_waited": {
+   "text": "2d9cc753aafef247",
+   "facts": "ac1ef7f692784b12",
+   "all": "3eea78b110c2371f"
+  },
+  "opening.room": {
+   "text": "5aa193b86273e353",
+   "facts": "7f5851883cb8d732",
+   "all": "2267c6fc177cf08c"
+  },
+  "opening.sums": {
+   "text": "a541a1c36e0d9cff",
+   "facts": "948f9c11285ba2f9",
+   "all": "6058a350418e59c0"
+  },
+  "opening.handover": {
+   "text": "4fe187a129483ea0",
+   "facts": "9da55a41bd9a5cab",
+   "all": "2b40636cb33de48d"
+  },
+  "opening.sit_with_mom": {
+   "text": "edb4bbda96fbbc4a",
+   "facts": "497d334b1e900b85",
+   "all": "e203ac5f2d9e4454"
+  },
+  "opening.ask_mom": {
+   "text": "bd9877d6df12da4c",
+   "facts": "93f65a5994a6096a",
+   "all": "5055c107991617e4"
+  },
+  "talk_mom.hub": {
+   "text": "a23b0bbfce94db7a",
+   "facts": "da371d87f63ca5a9",
+   "all": "d4256b778c156637"
+  },
+  "talk_mom.talk": {
+   "text": "feb79fad5e3d8649",
+   "facts": "2c74fede91c39514",
+   "all": "989d6f996d9fc275"
+  },
+  "talk_mom.eat": {
+   "text": "cb5b4b6d73033d19",
+   "facts": "a78c81253b9ba872",
+   "all": "1870367b704cb91d"
+  },
+  "mom_living_room.hub": {
+   "text": "2142bb1af79cf4dd",
+   "facts": "7b286d6913c4449b",
+   "all": "7f19adc289b6a802"
+  },
+  "mom_living_room.talk": {
+   "text": "bea6a579cecdd65d",
+   "facts": "cfda3d7c96f6f167",
+   "all": "8019d2454bae538d"
+  },
+  "borrow_mom.take": {
+   "text": "99e09af6839ccfd3",
+   "facts": "8a73da8b0cd3be62",
+   "all": "1e82341acbaa70b9"
+  },
+  "borrow_hoodie.take": {
+   "text": "61a77c7fa2715c60",
+   "facts": "77447b04892972f0",
+   "all": "cec3a034e3ac0cb9"
+  },
+  "*": "5718fc76f9905ff7"
+ },
+ "rows": {
+  "B1": "5276068df1ca6fa9",
+  "B2": "4d9f2ebbce9a39cc",
+  "B3": "4d1fce1c4523b5d4",
+  "B4": "ced37cb0de6e7202",
+  "B5": "efcbd1ac6a95e2f2",
+  "B6": "0e32092e9fe64f2c",
+  "B7": "cef53154cc971fef",
+  "B8": "80d415cf08e0ebfe",
+  "B9": "3b1fcdf549bcc558",
+  "B10": "c1c0e2ac2588a579",
+  "B11": "1e252efd0904a971",
+  "B12": "fd109745c67b71d7",
+  "B13": "aaf6518b64dcce55",
+  "C1262": "2946d2fe0b7dc28f",
+  "C1275": "5c2a05d547732e4b",
+  "C1274": "ca72df83c67acc75",
+  "C1280": "a1ce22b0640c6eeb",
+  "C1277": "2b934524a49c49e9",
+  "C1279": "9705ac6acfdcce30",
+  "C782": "4c4d4a94c717f70f",
+  "C1158": "212d17eda04f2799",
+  "C719": "d7c4f9c8542d0090",
+  "body-moments#1": "eccc0ab561a445d0",
+  "body-moments#2": "3d0e66c4ff2e35e8",
+  "body-moments#3": "31555e41e42a56f4",
+  "body-moments#4": "777373934b40b8fe",
+  "body-moments#5": "57bdf33c1e490daf",
+  "body-moments#6": "61af55b717f75400",
+  "body-moments#7": "a541004c4012d217",
+  "C889": "37967c45d79163fc",
+  "C906": "c257bba6d15edc3f",
+  "C926": "8cd1b7e3576dc7b5",
+  "C900": "a4ef8ce78f554d6b",
+  "C902": "66462bdbadae0c77",
+  "C903": "263890a884329d60",
+  "C904": "999816c6ed6cc232",
+  "C892": "1d8d188451bcb51e",
+  "C910": "c86548143d50a17d",
+  "C929": "33a2ca367c2aac5b",
+  "C897": "16b066aee3c1a937",
+  "C924": "ce540d1e01b7c301",
+  "C920": "3b568acb10d6806b",
+  "C913": "48bd82911a86ecbd",
+  "C930": "97d54d350dd4ee77",
+  "L167": "adf7bb3f8b632ac3",
+  "C914": "5a326c2d5d8a0abd",
+  "C916": "06706eb2d5bad3b5",
+  "C915": "46d8f12824d16c8b",
+  "C921": "19da817e808ac3d6",
+  "C927": "1e009d83817fb566",
+  "C928": "799e1dd153166b6d",
+  "C931": "1b8984f52b99537e",
+  "C890": "3d716de4269fbd6c",
+  "clock#1": "cd89df2f76a7be89",
+  "clock#2": "1a52b17c19333377",
+  "clock#3": "aae8f146c8ec933d",
+  "clock#4": "c33118361d16b379",
+  "clock#5": "95c5edec9e714e7b",
+  "clock#6": "31fd30fb07702bc9",
+  "clock#7": "313c48a91780f62b",
+  "clock#8": "f0c2400d02519978",
+  "clock#9": "5d697f6bcd9f82de",
+  "C1206": "6b4e6ea1fe51ab17",
+  "C1166": "c5509dae0642ac9f",
+  "C1167": "6fbed55f60b39ebd",
+  "C1204": "4fec6fc9a8793a0f",
+  "C1183": "8ce5e31dbee654c8",
+  "C1171": "49328c800821e97e",
+  "C1169": "43c95698cbc835c1",
+  "C1150": "44d22fea404612e3",
+  "C1201": "0ad4d41eb864e8bb",
+  "C1173": "a65e6d44d95e1ed7",
+  "C1184": "86c8748d488db055",
+  "C1198": "495e5eb9452b4926",
+  "C1185": "46254ea16cee2229",
+  "C1220": "e706f55f84a94a84",
+  "C1221": "90572c3a26b59fc7",
+  "C1177": "9002e505d1fabe59",
+  "C1176": "78d766628b4d73c2",
+  "C1189": "add9e8d3fbfb9105",
+  "C1197": "b4f0f994f2657396",
+  "C1200": "766f516b6b8e329c",
+  "C1207": "cf1ca9ef0e675be5",
+  "clothes#1": "468c4283220dd743",
+  "clothes#2": "78af3a222a96ceef",
+  "clothes#3": "afe7079cb8699d23",
+  "clothes#4": "7c2dc2ddee173de4",
+  "clothes#5": "58e88b96e1566182",
+  "clothes#6": "a704975690f5df41",
+  "clothes#7": "bb14def6ad6b8f84",
+  "clothes#8": "e75be85fc8419181",
+  "clothes#9": "fa33eaefa120f48c",
+  "C255": "41543c0b01047eb6",
+  "C256": "39401d1f8b2ac714",
+  "C252": "aa35910e35e29b2d",
+  "C254": "2d3aa3b699bb3a78",
+  "C239": "0031533ec82c4401",
+  "C248": "78aa710fc99207b5",
+  "C249": "1e789c98e52ef448",
+  "C276": "803a558113f90fbd",
+  "C291": "1345b94e89dfc2dc",
+  "C296": "39b97c524d1d887d",
+  "C284": "69d227fcb6314994",
+  "C285": "a28a84cd5f58df59",
+  "C286": "04450056a0da072c",
+  "C287": "33f0b998a82d37de",
+  "C288": "820920d70a5f860a",
+  "C289": "b49633d1ad76857e",
+  "C297": "f4d1f119d6f2bea9",
+  "C639": "e4a6334699a304b9",
+  "C640": "fec816e8221cb56c",
+  "C311": "0df85bbf34aa1cdf",
+  "heat#1": "a9d1b7304239e330",
+  "heat#2": "e686b407357d5dfe",
+  "heat#3": "51c788f9cf88c547",
+  "heat#4": "02f78ddf483ec147",
+  "heat#5": "b3e99b6034510032",
+  "heat#6": "a97dfd91d1cd6aae",
+  "heat#7": "f75e08aaaa6bb543",
+  "C1261": "6a661c60639de8be",
+  "C1267": "6bafcadf3d586d5a",
+  "C1249": "604706399d2f1194",
+  "C1250": "8384cc6bcbd67c07",
+  "C1265": "cbf803b180c4fbdd",
+  "C1234": "7dc492e03732757e",
+  "L121": "cddfa55c18e5c7b7",
+  "L125": "259dda0a0553e751",
+  "L119": "18ef41501e0b23c3",
+  "C1281": "f0ab213c3075f906",
+  "C1284": "d631d4c69f1d3b74",
+  "L120": "22461386046b4605",
+  "C1278": "a511d81564cef526",
+  "C1238": "af95eb45b0bdc9db",
+  "C1255": "d81893b9077b4b53",
+  "L97": "2bfb9527e76ad93b",
+  "media#1": "3641bf707d9adfce",
+  "media#2": "6fbfd98c2bfee006",
+  "media#3": "8c75b0d488b188e2",
+  "media#4": "03599fc0722690b6",
+  "media#5": "2cf5e3607ccecd4a",
+  "media#6": "3016751837a9b0a0",
+  "media#7": "eff6dc1369755c34",
+  "C520": "59faa2198bb751e1",
+  "C519": "ff5e8d6189f0899a",
+  "C1626": "e2077b8b174e635b",
+  "C1637": "22f779094c1d6cc4",
+  "C1611": "112c4a73c594ab87",
+  "C1613": "b50de590bf483f0a",
+  "C327": "94cf3f1c37d54c7b",
+  "C314": "47808896707b87ec",
+  "C601": "390111b08f596c8d",
+  "C109": "49d3511959e39479",
+  "C166": "8630b1e1337d63f3",
+  "L71": "20d25a1f144ab051",
+  "C1604": "a4feff5e25645274",
+  "C1609": "add0504418933607",
+  "C1621": "11b24e4fe2da4e05",
+  "C1631": "45d1f77e233e111c",
+  "opening#1": "88267cd95a4d6da5",
+  "opening#2": "16087c5ccde09fbf",
+  "opening#3": "5a60297b0e998c5c",
+  "opening#4": "3847f3dafe2643d2",
+  "opening#5": "8b7d05eb7bf07424",
+  "opening#6": "9042830eeab286c8",
+  "opening#7": "001a96630041e1b1",
+  "C618": "cf04982ff36d5fee",
+  "C619": "9abaf79b00480069",
+  "C622": "3a5a94bef3bdb5d2",
+  "C627": "d48908c2e401d9d8",
+  "C625": "6e8364367065f3af",
+  "C626": "9f83b62a4e07e30a",
+  "C630": "eb333b3116c028f2",
+  "C632": "27f3481ce4c3e30c",
+  "C598": "586f13891dfb3b93",
+  "C620": "34fca4a974682444",
+  "C690": "d130cdc296b140e8",
+  "C613": "e449f2e1c7454d6b",
+  "C961": "623576cc5d249369",
+  "C954": "a4837b8af6d54bb1",
+  "C447": "e3ca01ba145f4580",
+  "C593": "52e42cdd69c8f10e",
+  "C644": "045102ba2f0a9453",
+  "C596": "217e3c5b84d1e838",
+  "C656": "41c869f069a2b028",
+  "C660": "70b5022d4a858fa1",
+  "C448": "584dada6c379e3d8",
+  "C1340": "a335a4d228798817",
+  "people#1": "3ca322fe98f5dab6",
+  "people#2": "77207820edd1c3a4",
+  "people#3": "5f60eac9fd509c6c",
+  "people#4": "3f52fa27dd3a5bfa",
+  "people#5": "1326d7ac8cba5298",
+  "people#6": "0b522d7eb38d75bb",
+  "people#7": "b03ec1f9649681a0",
+  "people#8": "ba17b4df73559422",
+  "people#9": "a73dd8f1e77941ca",
+  "people#10": "4a994154015ae37d",
+  "C769": "cf7d7a82afabcbbb",
+  "C794": "3281d513b7f90d6e",
+  "C795": "84d5bfb2a701bf90",
+  "C804": "2aa951544edb45db",
+  "L106": "759e6667d7fc3183",
+  "C776": "6088d5531ecff698",
+  "C777": "38b483431fa177b0",
+  "C773": "0825e8443f9180d0",
+  "C758": "6329db1ec04ec3da",
+  "C953": "26f84fb90a0ef795",
+  "C738": "976cd3e099c13e51",
+  "C762": "877801c22bdade00",
+  "L147": "5dea5707be5e7e0a",
+  "C808": "73aff7401d6970a5",
+  "C811": "ded1858e52e3be3a",
+  "C770": "dcc6bbe6fde09083",
+  "C771": "d941995a226da2b4",
+  "C707": "e2898bd02a9e4730",
+  "places#1": "18252966b4327f58",
+  "places#2": "3ab79adc34668b04",
+  "places#3": "56d056c80da49bb6",
+  "places#4": "ada53ed66015c980",
+  "places#5": "90ec575adee9bf74",
+  "places#6": "f2bc5f0f10c64c4b",
+  "places#7": "2a095bf54f175e5e",
+  "places#8": "c3ea8d01465e7298",
+  "places#9": "f4cd9ab5f62bc6fc",
+  "C442": "a2b07f40e1a9e908",
+  "C449": "ac5932d70cd775a1",
+  "C451": "6b0fd679047fc9b8",
+  "C450": "3eb18b4cefbe49d3",
+  "C422": "8933f85010afbef7",
+  "C460": "beb5a109bde77305",
+  "C461": "153b0804e686abae",
+  "L163": "00a617ab9b4e9cd4",
+  "voice#1": "b8e8afcb32208b40",
+  "voice#2": "a40d4073409a2705",
+  "voice#3": "4777d2c1251214c2",
+  "voice#4": "ac2fdd7245f436db",
+  "voice#5": "7bbdd4290054e601",
+  "voice#6": "df1f5dc8b6d21538",
+  "voice#7": "321cc76cff93aadb",
+  "voice#8": "4362249fb5f9616e"
+ },
+ "verdicts": [
+  {
+   "row": "B1",
+   "screen": "borrow_hoodie.take",
+   "verdict": "N/A",
+   "line": "You pick the grey one up off his floor.",
+   "why": "no person on screen (borrowing is gated on Ryan absent); no sexual step",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "6616917f78b1aa8d",
+    "facts": "77447b04892972f0",
+    "all": "9cd111531ca2b2f2"
+   },
+   "row_hash": "5276068df1ca6fa9",
+   "carried": true,
+   "pass": 2
+  },
+  {
+   "row": "B1",
+   "screen": "mom_living_room.talk",
+   "verdict": "PASS",
+   "line": "Stay in tonight. Just tonight. For me.",
+   "why": "she wants her near, in every version",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "e38ff3dafa65755f",
+    "facts": "cfda3d7c96f6f167",
+    "all": "dd5c534f9a55bb61"
+   },
+   "row_hash": "5276068df1ca6fa9",
+   "carried": true,
+   "pass": 2
+  },
+  {
+   "row": "B10",
+   "screen": "borrow_hoodie.take",
+   "verdict": "PASS",
+   "line": "You pick the grey one up off his floor. It smells like him. You wonder if he'll notice it's gone.",
+   "why": "shows only while the hoodie isn't owned and Ryan is out of his room (trigger + group); no claim she wears it; second visit is greyed",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "61a77c7fa2715c60",
+    "facts": "77447b04892972f0",
+    "all": "cec3a034e3ac0cb9"
+   },
+   "row_hash": "c1c0e2ac2588a579",
+   "carried": false,
+   "pass": 2
+  },
+  {
+   "row": "B10",
+   "screen": "borrow_mom.take",
+   "verdict": "PASS",
+   "line": "Her side of the wardrobe smells like her perfume.",
+   "why": "once only (skirt not_owned), only while Mom and Mark are absent",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "99e09af6839ccfd3",
+    "facts": "8a73da8b0cd3be62",
+    "all": "1e82341acbaa70b9"
+   },
+   "row_hash": "c1c0e2ac2588a579",
+   "carried": true,
+   "pass": 2
+  },
+  {
+   "row": "B10",
+   "screen": "hood_street",
+   "verdict": "PASS",
+   "line": "Across the road, a neighbour's eyes drop to your bare skin and stay there. Your face goes hot, and you walk faster.",
+   "why": "shows only at worn_exposure >= 1 (Mom's skirt or top; she can't leave without a top and bottom) and 07:00-21:00; skin is bare on each",
+   "cause": null,
+   "note": false,
+   "screen_hash": null,
+   "row_hash": "c1c0e2ac2588a579",
+   "carried": true,
+   "pass": 2
+  },
+  {
+   "row": "B10",
+   "screen": "mom_living_room.talk",
+   "verdict": "PASS",
+   "line": "She pats the couch.",
+   "why": "Mark-absent versions show only Saturday 19:00-23:00, when Mom is alone on the couch (who_is_where: Mark at the bar, Ryan in his room); the Mark-there version claims only Mark",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "e38ff3dafa65755f",
+    "facts": "cfda3d7c96f6f167",
+    "all": "dd5c534f9a55bb61"
+   },
+   "row_hash": "c1c0e2ac2588a579",
+   "carried": false,
+   "pass": 2
+  },
+  {
+   "row": "B11",
+   "screen": "borrow_hoodie.take",
+   "verdict": "PASS",
+   "line": "wardrobeEffects add ryan_hoodie",
+   "why": "adds a garment she can wear, read by the leave rule (a top) and Ryan's talks",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "6616917f78b1aa8d",
+    "facts": "77447b04892972f0",
+    "all": "9cd111531ca2b2f2"
+   },
+   "row_hash": "1e252efd0904a971",
+   "carried": true,
+   "pass": 2
+  },
+  {
+   "row": "B11",
+   "screen": "borrow_mom.take",
+   "verdict": "PASS",
+   "line": "wardrobeEffects add skirt, top, heels",
+   "why": "adds three garments read by Mom's two menus and the street",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "99e09af6839ccfd3",
+    "facts": "8a73da8b0cd3be62",
+    "all": "1e82341acbaa70b9"
+   },
+   "row_hash": "1e252efd0904a971",
+   "carried": true,
+   "pass": 2
+  },
+  {
+   "row": "B11",
+   "screen": "mom_living_room.talk",
+   "verdict": "N/A",
+   "line": "",
+   "why": "not solo, not charged, no body moment",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "e38ff3dafa65755f",
+    "facts": "cfda3d7c96f6f167",
+    "all": "dd5c534f9a55bb61"
+   },
+   "row_hash": "1e252efd0904a971",
+   "carried": true,
+   "pass": 2
+  },
+  {
+   "row": "B12",
+   "screen": "borrow_hoodie.take",
+   "verdict": "N/A",
+   "line": "It's huge on you, and it smells like him.",
+   "why": "no sexual charge written on this screen; not a charged scene",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "6616917f78b1aa8d",
+    "facts": "77447b04892972f0",
+    "all": "9cd111531ca2b2f2"
+   },
+   "row_hash": "fd109745c67b71d7",
+   "carried": true,
+   "pass": 2
+  },
+  {
+   "row": "B12",
+   "screen": "hood_street",
+   "verdict": "PASS",
+   "line": "a neighbour's eyes drop to your chest in Mom's top and stay there. Your face goes hot. You walk faster, and you can feel him still watching.",
+   "why": "names her chest (or bare legs), writes his look holding, her body answers, and the not-yet is him still watching as she goes",
+   "cause": null,
+   "note": false,
+   "screen_hash": null,
+   "row_hash": "fd109745c67b71d7",
+   "carried": false,
+   "pass": 2
+  },
+  {
+   "row": "B12",
+   "screen": "mom_living_room.talk",
+   "verdict": "N/A",
+   "line": "",
+   "why": "not solo, not charged, no body moment",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "e38ff3dafa65755f",
+    "facts": "cfda3d7c96f6f167",
+    "all": "dd5c534f9a55bb61"
+   },
+   "row_hash": "fd109745c67b71d7",
+   "carried": true,
+   "pass": 2
+  },
+  {
+   "row": "B13",
+   "screen": "borrow_hoodie.take",
+   "verdict": "N/A",
+   "line": "It's huge on you, and it smells like him.",
+   "why": "not a dressing moment in the build (no equip); the worn claim is judged at B8/C1158",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "6616917f78b1aa8d",
+    "facts": "77447b04892972f0",
+    "all": "9cd111531ca2b2f2"
+   },
+   "row_hash": "aaf6518b64dcce55",
+   "carried": true,
+   "pass": 2
+  },
+  {
+   "row": "B13",
+   "screen": "mom_living_room.talk",
+   "verdict": "N/A",
+   "line": "",
+   "why": "not solo, not charged, no body moment",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "e38ff3dafa65755f",
+    "facts": "cfda3d7c96f6f167",
+    "all": "dd5c534f9a55bb61"
+   },
+   "row_hash": "aaf6518b64dcce55",
+   "carried": true,
+   "pass": 2
+  },
+  {
+   "row": "B2",
+   "screen": "borrow_hoodie.take",
+   "verdict": "N/A",
+   "line": "You pick the grey one up off his floor.",
+   "why": "a solo room action, not a step with a person",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "6616917f78b1aa8d",
+    "facts": "77447b04892972f0",
+    "all": "9cd111531ca2b2f2"
+   },
+   "row_hash": "4d9f2ebbce9a39cc",
+   "carried": true,
+   "pass": 2
+  },
+  {
+   "row": "B2",
+   "screen": "mom_living_room.talk",
+   "verdict": "N/A",
+   "line": "Next Saturday, you tell me the next part.",
+   "why": "a once-a-day repeatable talk; release 1 moves nothing with Mom, no arc step",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "e38ff3dafa65755f",
+    "facts": "cfda3d7c96f6f167",
+    "all": "dd5c534f9a55bb61"
+   },
+   "row_hash": "4d9f2ebbce9a39cc",
+   "carried": true,
+   "pass": 2
+  },
+  {
+   "row": "B3",
+   "screen": "borrow_hoodie.take",
+   "verdict": "PASS",
+   "line": "You wonder if he'll notice it's gone.",
+   "why": "points at Ryan noticing; his four talks pay it, behind ryan_hoodie equipped: \"That's my hoodie.\"",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "6616917f78b1aa8d",
+    "facts": "77447b04892972f0",
+    "all": "9cd111531ca2b2f2"
+   },
+   "row_hash": "4d1fce1c4523b5d4",
+   "carried": true,
+   "pass": 2
+  },
+  {
+   "row": "B3",
+   "screen": "borrow_mom.take",
+   "verdict": "PASS",
+   "line": "If she sees them on you, she'll know.",
+   "why": "points at Mom noticing, paid on talk_mom.hub and mom_living_room.hub",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "99e09af6839ccfd3",
+    "facts": "8a73da8b0cd3be62",
+    "all": "1e82341acbaa70b9"
+   },
+   "row_hash": "4d1fce1c4523b5d4",
+   "carried": true,
+   "pass": 2
+  },
+  {
+   "row": "B3",
+   "screen": "hood_street",
+   "verdict": "PASS",
+   "line": "You walk faster, and you can feel him still watching.",
+   "why": "ends on his look still on her, an open thread, not on walking away",
+   "cause": null,
+   "note": false,
+   "screen_hash": null,
+   "row_hash": "4d1fce1c4523b5d4",
+   "carried": false,
+   "pass": 2
+  },
+  {
+   "row": "B3",
+   "screen": "mom_living_room.talk",
+   "verdict": "PASS",
+   "line": "Next Saturday, you tell me the next part.",
+   "why": "every version ends on a hook: \"Be home tomorrow night too.\", \"you tell me first.\", \"When it's just us, you tell me everything.\"",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "e38ff3dafa65755f",
+    "facts": "cfda3d7c96f6f167",
+    "all": "dd5c534f9a55bb61"
+   },
+   "row_hash": "4d1fce1c4523b5d4",
+   "carried": true,
+   "pass": 2
+  },
+  {
+   "row": "B4",
+   "screen": "borrow_hoodie.take",
+   "verdict": "PASS",
+   "line": "You wonder if he'll notice it's gone.",
+   "why": "stage 0-1: she reacts, chooses no act her stage hasn't opened; no italic thought",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "6616917f78b1aa8d",
+    "facts": "77447b04892972f0",
+    "all": "9cd111531ca2b2f2"
+   },
+   "row_hash": "ced37cb0de6e7202",
+   "carried": true,
+   "pass": 2
+  },
+  {
+   "row": "B4",
+   "screen": "hood_street",
+   "verdict": "PASS",
+   "line": "Your face goes hot, and you walk faster.",
+   "why": "pushback at a low level, on her body",
+   "cause": null,
+   "note": false,
+   "screen_hash": null,
+   "row_hash": "ced37cb0de6e7202",
+   "carried": true,
+   "pass": 2
+  },
+  {
+   "row": "B4",
+   "screen": "mom_living_room.talk",
+   "verdict": "PASS",
+   "line": "Tomorrow, Mom. Promise.",
+   "why": "her lines at stage 0-1, plain and out loud",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "e38ff3dafa65755f",
+    "facts": "cfda3d7c96f6f167",
+    "all": "dd5c534f9a55bb61"
+   },
+   "row_hash": "ced37cb0de6e7202",
+   "carried": true,
+   "pass": 2
+  },
+  {
+   "row": "B5",
+   "screen": "borrow_hoodie.take",
+   "verdict": "PASS",
+   "line": "That's my hoodie. / He doesn't ask for it back.",
+   "why": "Ryan reacts on ryan_room, ryan_room_weekend, ryan_kitchen, ryan_living_room talks while she wears it",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "6616917f78b1aa8d",
+    "facts": "77447b04892972f0",
+    "all": "9cd111531ca2b2f2"
+   },
+   "row_hash": "efcbd1ac6a95e2f2",
+   "carried": true,
+   "pass": 2
+  },
+  {
+   "row": "B5",
+   "screen": "mom_living_room.talk",
+   "verdict": "PASS",
+   "line": "She listens to all of it, and her shoulders come down.",
+   "why": "Mom reacts",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "e38ff3dafa65755f",
+    "facts": "cfda3d7c96f6f167",
+    "all": "dd5c534f9a55bb61"
+   },
+   "row_hash": "efcbd1ac6a95e2f2",
+   "carried": true,
+   "pass": 2
+  },
+  {
+   "row": "B6",
+   "screen": "borrow_hoodie.take",
+   "verdict": "N/A",
+   "line": "",
+   "why": "no offer on this screen",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "6616917f78b1aa8d",
+    "facts": "77447b04892972f0",
+    "all": "9cd111531ca2b2f2"
+   },
+   "row_hash": "0e32092e9fe64f2c",
+   "carried": true,
+   "pass": 2
+  },
+  {
+   "row": "B6",
+   "screen": "mom_living_room.talk",
+   "verdict": "N/A",
+   "line": "",
+   "why": "no offer of an act",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "e38ff3dafa65755f",
+    "facts": "cfda3d7c96f6f167",
+    "all": "dd5c534f9a55bb61"
+   },
+   "row_hash": "0e32092e9fe64f2c",
+   "carried": true,
+   "pass": 2
+  },
+  {
+   "row": "B7",
+   "screen": "borrow_hoodie.take",
+   "verdict": "N/A",
+   "line": "",
+   "why": "no explicit beat",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "6616917f78b1aa8d",
+    "facts": "77447b04892972f0",
+    "all": "9cd111531ca2b2f2"
+   },
+   "row_hash": "cef53154cc971fef",
+   "carried": true,
+   "pass": 2
+  },
+  {
+   "row": "B7",
+   "screen": "mom_living_room.talk",
+   "verdict": "N/A",
+   "line": "",
+   "why": "no explicit beat",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "e38ff3dafa65755f",
+    "facts": "cfda3d7c96f6f167",
+    "all": "dd5c534f9a55bb61"
+   },
+   "row_hash": "cef53154cc971fef",
+   "carried": true,
+   "pass": 2
+  },
+  {
+   "row": "B8",
+   "screen": "borrow_hoodie.take",
+   "verdict": "PASS",
+   "line": "You pick the grey one up off his floor. It smells like him.",
+   "why": "the hoodie is named only as picked up, backed by Done's wardrobeEffects add; no longer put on her",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "61a77c7fa2715c60",
+    "facts": "77447b04892972f0",
+    "all": "cec3a034e3ac0cb9"
+   },
+   "row_hash": "80d415cf08e0ebfe",
+   "carried": false,
+   "pass": 2
+  },
+  {
+   "row": "B8",
+   "screen": "borrow_mom.take",
+   "verdict": "PASS",
+   "line": "You take a short skirt, a low-cut top and the heels she never wears.",
+   "why": "names garments taken, not worn; the add on Done backs it; 5 min matches",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "99e09af6839ccfd3",
+    "facts": "8a73da8b0cd3be62",
+    "all": "1e82341acbaa70b9"
+   },
+   "row_hash": "80d415cf08e0ebfe",
+   "carried": true,
+   "pass": 2
+  },
+  {
+   "row": "B8",
+   "screen": "mom_living_room.talk",
+   "verdict": "PASS",
+   "line": "Talk (5 min) / Done 5",
+   "why": "the 5 minutes agree; no garment named",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "e38ff3dafa65755f",
+    "facts": "cfda3d7c96f6f167",
+    "all": "dd5c534f9a55bb61"
+   },
+   "row_hash": "80d415cf08e0ebfe",
+   "carried": false,
+   "pass": 2
+  },
+  {
+   "row": "B9",
+   "screen": "borrow_hoodie.take",
+   "verdict": "N/A",
+   "line": "",
+   "why": "PLAN declares no companion-rival here",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "6616917f78b1aa8d",
+    "facts": "77447b04892972f0",
+    "all": "9cd111531ca2b2f2"
+   },
+   "row_hash": "3b1fcdf549bcc558",
+   "carried": true,
+   "pass": 2
+  },
+  {
+   "row": "B9",
+   "screen": "mom_living_room.talk",
+   "verdict": "N/A",
+   "line": "",
+   "why": "no companion-rival",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "e38ff3dafa65755f",
+    "facts": "cfda3d7c96f6f167",
+    "all": "dd5c534f9a55bb61"
+   },
+   "row_hash": "3b1fcdf549bcc558",
+   "carried": true,
+   "pass": 2
+  },
+  {
+   "row": "C109",
+   "screen": "borrow_hoodie.take",
+   "verdict": "N/A",
+   "line": "",
+   "why": "not a person's arc step",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "6616917f78b1aa8d",
+    "facts": "77447b04892972f0",
+    "all": "9cd111531ca2b2f2"
+   },
+   "row_hash": "49d3511959e39479",
+   "carried": true,
+   "pass": 2
+  },
+  {
+   "row": "C109",
+   "screen": "mom_living_room.talk",
+   "verdict": "N/A",
+   "line": "",
+   "why": "a repeatable talk, not an arc step",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "e38ff3dafa65755f",
+    "facts": "cfda3d7c96f6f167",
+    "all": "dd5c534f9a55bb61"
+   },
+   "row_hash": "49d3511959e39479",
+   "carried": true,
+   "pass": 2
+  },
+  {
+   "row": "C1150",
+   "screen": "borrow_hoodie.take",
+   "verdict": "PASS",
+   "line": "wardrobeEffects = [{ action = \"add\", item_id = \"ryan_hoodie\" }]",
+   "why": "the hoodie's way in is an add",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "6616917f78b1aa8d",
+    "facts": "77447b04892972f0",
+    "all": "9cd111531ca2b2f2"
+   },
+   "row_hash": "44d22fea404612e3",
+   "carried": true,
+   "pass": 2
+  },
+  {
+   "row": "C1150",
+   "screen": "mom_living_room.talk",
+   "verdict": "N/A",
+   "line": "",
+   "why": "no garment, place entry, dressing or plan item on Mom's talk screen; the row doesn't fire here",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "e38ff3dafa65755f",
+    "facts": "cfda3d7c96f6f167",
+    "all": "dd5c534f9a55bb61"
+   },
+   "row_hash": "44d22fea404612e3",
+   "carried": true,
+   "pass": 2
+  },
+  {
+   "row": "C1158",
+   "screen": "borrow_hoodie.take",
+   "verdict": "PASS",
+   "line": "You pick the grey one up off his floor.",
+   "why": "garment named only by the beat that adds it; not claimed worn",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "61a77c7fa2715c60",
+    "facts": "77447b04892972f0",
+    "all": "cec3a034e3ac0cb9"
+   },
+   "row_hash": "212d17eda04f2799",
+   "carried": false,
+   "pass": 2
+  },
+  {
+   "row": "C1158",
+   "screen": "borrow_mom.take",
+   "verdict": "PASS",
+   "line": "You take a short skirt, a low-cut top and the heels she never wears.",
+   "why": "taking, not wearing; the add backs it",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "99e09af6839ccfd3",
+    "facts": "8a73da8b0cd3be62",
+    "all": "1e82341acbaa70b9"
+   },
+   "row_hash": "212d17eda04f2799",
+   "carried": true,
+   "pass": 2
+  },
+  {
+   "row": "C1158",
+   "screen": "mom_living_room.talk",
+   "verdict": "N/A",
+   "line": "",
+   "why": "no garment, place entry, dressing or plan item on Mom's talk screen; the row doesn't fire here",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "e38ff3dafa65755f",
+    "facts": "cfda3d7c96f6f167",
+    "all": "dd5c534f9a55bb61"
+   },
+   "row_hash": "212d17eda04f2799",
+   "carried": false,
+   "pass": 2
+  },
+  {
+   "row": "C1166",
+   "screen": "borrow_hoodie.take",
+   "verdict": "N/A",
+   "line": "",
+   "why": "not the opening",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "6616917f78b1aa8d",
+    "facts": "77447b04892972f0",
+    "all": "9cd111531ca2b2f2"
+   },
+   "row_hash": "c5509dae0642ac9f",
+   "carried": true,
+   "pass": 2
+  },
+  {
+   "row": "C1166",
+   "screen": "mom_living_room.talk",
+   "verdict": "N/A",
+   "line": "",
+   "why": "no garment, place entry, dressing or plan item on Mom's talk screen; the row doesn't fire here",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "e38ff3dafa65755f",
+    "facts": "cfda3d7c96f6f167",
+    "all": "dd5c534f9a55bb61"
+   },
+   "row_hash": "c5509dae0642ac9f",
+   "carried": true,
+   "pass": 2
+  },
+  {
+   "row": "C1167",
+   "screen": "borrow_hoodie.take",
+   "verdict": "FAIL",
+   "line": "",
+   "why": "release 1's minimum still lacks one clothing event (no event reads clothes in 7_final_game.toml); ENI's release-2 deferral (NOTES 241) is not a waiver; note row",
+   "cause": null,
+   "note": true,
+   "screen_hash": {
+    "text": "61a77c7fa2715c60",
+    "facts": "77447b04892972f0",
+    "all": "cec3a034e3ac0cb9"
+   },
+   "row_hash": "6fbed55f60b39ebd",
+   "carried": false,
+   "pass": 2
+  },
+  {
+   "row": "C1167",
+   "screen": "borrow_mom.take",
+   "verdict": "FAIL",
+   "line": "",
+   "why": "no clothing event in release 1 (ENI's deferral to release 2, not a waiver)",
+   "cause": "P07j1-c2",
+   "note": false,
+   "screen_hash": {
+    "text": "99e09af6839ccfd3",
+    "facts": "8a73da8b0cd3be62",
+    "all": "1e82341acbaa70b9"
+   },
+   "row_hash": "6fbed55f60b39ebd",
+   "carried": true,
+   "pass": 2
+  },
+  {
+   "row": "C1167",
+   "screen": "mom_living_room.talk",
+   "verdict": "N/A",
+   "line": "",
+   "why": "no garment, place entry, dressing or plan item on Mom's talk screen; the row doesn't fire here",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "e38ff3dafa65755f",
+    "facts": "cfda3d7c96f6f167",
+    "all": "dd5c534f9a55bb61"
+   },
+   "row_hash": "6fbed55f60b39ebd",
+   "carried": true,
+   "pass": 2
+  },
+  {
+   "row": "C1169",
+   "screen": "borrow_hoodie.take",
+   "verdict": "PASS",
+   "line": "clothing_item ryan_hoodie equipped (Ryan's talks)",
+   "why": "the read is satisfied by a garment she can get here",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "6616917f78b1aa8d",
+    "facts": "77447b04892972f0",
+    "all": "9cd111531ca2b2f2"
+   },
+   "row_hash": "43c95698cbc835c1",
+   "carried": true,
+   "pass": 2
+  },
+  {
+   "row": "C1169",
+   "screen": "mom_living_room.talk",
+   "verdict": "N/A",
+   "line": "",
+   "why": "no garment, place entry, dressing or plan item on Mom's talk screen; the row doesn't fire here",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "e38ff3dafa65755f",
+    "facts": "cfda3d7c96f6f167",
+    "all": "dd5c534f9a55bb61"
+   },
+   "row_hash": "43c95698cbc835c1",
+   "carried": true,
+   "pass": 2
+  },
+  {
+   "row": "C1171",
+   "screen": "borrow_hoodie.take",
+   "verdict": "PASS",
+   "line": "",
+   "why": "the hoodie is read in 5 places: the street's top slot and Ryan's four talks",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "6616917f78b1aa8d",
+    "facts": "77447b04892972f0",
+    "all": "9cd111531ca2b2f2"
+   },
+   "row_hash": "49328c800821e97e",
+   "carried": true,
+   "pass": 2
+  },
+  {
+   "row": "C1171",
+   "screen": "hood_street",
+   "verdict": "FAIL",
+   "line": "Across the road, a neighbour's eyes drop to your bare skin and stay there. Your face goes hot, and you walk faster.",
+   "why": "worn_exposure, release 1's one number, is read in one place, this line (and Mom's heels in two, her two menus)",
+   "cause": "P07j1-c5",
+   "note": false,
+   "screen_hash": null,
+   "row_hash": "49328c800821e97e",
+   "carried": true,
+   "pass": 2
+  },
+  {
+   "row": "C1171",
+   "screen": "mom_living_room.talk",
+   "verdict": "N/A",
+   "line": "",
+   "why": "no garment, place entry, dressing or plan item on Mom's talk screen; the row doesn't fire here",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "e38ff3dafa65755f",
+    "facts": "cfda3d7c96f6f167",
+    "all": "dd5c534f9a55bb61"
+   },
+   "row_hash": "49328c800821e97e",
+   "carried": true,
+   "pass": 2
+  },
+  {
+   "row": "C1173",
+   "screen": "hood_street",
+   "verdict": "PASS",
+   "line": "Go back up to your room and put on a top and a bottom, or a dress.",
+   "why": "gate at the door, says why, says where to change; \"Go back\" is the way out (wardrobe_anywhere = false)",
+   "cause": null,
+   "note": false,
+   "screen_hash": null,
+   "row_hash": "a65e6d44d95e1ed7",
+   "carried": true,
+   "pass": 2
+  },
+  {
+   "row": "C1173",
+   "screen": "mom_living_room.talk",
+   "verdict": "N/A",
+   "line": "",
+   "why": "no garment, place entry, dressing or plan item on Mom's talk screen; the row doesn't fire here",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "e38ff3dafa65755f",
+    "facts": "cfda3d7c96f6f167",
+    "all": "dd5c534f9a55bb61"
+   },
+   "row_hash": "a65e6d44d95e1ed7",
+   "carried": true,
+   "pass": 2
+  },
+  {
+   "row": "C1176",
+   "screen": "borrow_hoodie.take",
+   "verdict": "N/A",
+   "line": "",
+   "why": "nothing sexual shows",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "6616917f78b1aa8d",
+    "facts": "77447b04892972f0",
+    "all": "9cd111531ca2b2f2"
+   },
+   "row_hash": "78d766628b4d73c2",
+   "carried": true,
+   "pass": 2
+  },
+  {
+   "row": "C1176",
+   "screen": "mom_living_room.talk",
+   "verdict": "N/A",
+   "line": "",
+   "why": "no garment, place entry, dressing or plan item on Mom's talk screen; the row doesn't fire here",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "e38ff3dafa65755f",
+    "facts": "cfda3d7c96f6f167",
+    "all": "dd5c534f9a55bb61"
+   },
+   "row_hash": "78d766628b4d73c2",
+   "carried": true,
+   "pass": 2
+  },
+  {
+   "row": "C1177",
+   "screen": "borrow_hoodie.take",
+   "verdict": "N/A",
+   "line": "",
+   "why": "no exposure on this screen",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "6616917f78b1aa8d",
+    "facts": "77447b04892972f0",
+    "all": "9cd111531ca2b2f2"
+   },
+   "row_hash": "9002e505d1fabe59",
+   "carried": true,
+   "pass": 2
+  },
+  {
+   "row": "C1177",
+   "screen": "mom_living_room.talk",
+   "verdict": "N/A",
+   "line": "",
+   "why": "no garment, place entry, dressing or plan item on Mom's talk screen; the row doesn't fire here",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "e38ff3dafa65755f",
+    "facts": "cfda3d7c96f6f167",
+    "all": "dd5c534f9a55bb61"
+   },
+   "row_hash": "9002e505d1fabe59",
+   "carried": true,
+   "pass": 2
+  },
+  {
+   "row": "C1183",
+   "screen": "borrow_hoodie.take",
+   "verdict": "PASS",
+   "line": "",
+   "why": "the hoodie moves a state the world reads (top covered, leave rule) rather than standing as a loose item",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "6616917f78b1aa8d",
+    "facts": "77447b04892972f0",
+    "all": "9cd111531ca2b2f2"
+   },
+   "row_hash": "8ce5e31dbee654c8",
+   "carried": true,
+   "pass": 2
+  },
+  {
+   "row": "C1183",
+   "screen": "mom_living_room.talk",
+   "verdict": "N/A",
+   "line": "",
+   "why": "no garment, place entry, dressing or plan item on Mom's talk screen; the row doesn't fire here",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "e38ff3dafa65755f",
+    "facts": "cfda3d7c96f6f167",
+    "all": "dd5c534f9a55bb61"
+   },
+   "row_hash": "8ce5e31dbee654c8",
+   "carried": true,
+   "pass": 2
+  },
+  {
+   "row": "C1184",
+   "screen": "hood_street",
+   "verdict": "PASS",
+   "line": "You're not going out like this. Go back up to your room and put on a top and a bottom, or a dress.",
+   "why": "says what's missing, in her voice",
+   "cause": null,
+   "note": false,
+   "screen_hash": null,
+   "row_hash": "86c8748d488db055",
+   "carried": true,
+   "pass": 2
+  },
+  {
+   "row": "C1184",
+   "screen": "mom_living_room.talk",
+   "verdict": "N/A",
+   "line": "",
+   "why": "no garment, place entry, dressing or plan item on Mom's talk screen; the row doesn't fire here",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "e38ff3dafa65755f",
+    "facts": "cfda3d7c96f6f167",
+    "all": "dd5c534f9a55bb61"
+   },
+   "row_hash": "86c8748d488db055",
+   "carried": true,
+   "pass": 2
+  },
+  {
+   "row": "C1185",
+   "screen": "hood_street",
+   "verdict": "PASS",
+   "line": "slots_required = [\"top\", \"bottom\"]",
+   "why": "checks coverage, not style",
+   "cause": null,
+   "note": false,
+   "screen_hash": null,
+   "row_hash": "46254ea16cee2229",
+   "carried": true,
+   "pass": 2
+  },
+  {
+   "row": "C1185",
+   "screen": "mom_living_room.talk",
+   "verdict": "N/A",
+   "line": "",
+   "why": "no garment, place entry, dressing or plan item on Mom's talk screen; the row doesn't fire here",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "e38ff3dafa65755f",
+    "facts": "cfda3d7c96f6f167",
+    "all": "dd5c534f9a55bb61"
+   },
+   "row_hash": "46254ea16cee2229",
+   "carried": true,
+   "pass": 2
+  },
+  {
+   "row": "C1189",
+   "screen": "borrow_hoodie.take",
+   "verdict": "PASS",
+   "line": "That's my hoodie.",
+   "why": "one line per state, each in its person's manner (Ryan here, Mom's on her menus)",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "6616917f78b1aa8d",
+    "facts": "77447b04892972f0",
+    "all": "9cd111531ca2b2f2"
+   },
+   "row_hash": "add9e8d3fbfb9105",
+   "carried": true,
+   "pass": 2
+  },
+  {
+   "row": "C1189",
+   "screen": "mom_living_room.talk",
+   "verdict": "N/A",
+   "line": "",
+   "why": "no garment, place entry, dressing or plan item on Mom's talk screen; the row doesn't fire here",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "e38ff3dafa65755f",
+    "facts": "cfda3d7c96f6f167",
+    "all": "dd5c534f9a55bb61"
+   },
+   "row_hash": "add9e8d3fbfb9105",
+   "carried": true,
+   "pass": 2
+  },
+  {
+   "row": "C1197",
+   "screen": "home_her_room",
+   "verdict": "FAIL",
+   "line": "Change clothes (engine wardrobe page)",
+   "why": "after the opening there is no whole-outfit change: saved_outfits is off, so the wardrobe is item by item (Mom's three things take three clicks)",
+   "cause": "P07j1-c3",
+   "note": false,
+   "screen_hash": null,
+   "row_hash": "b4f0f994f2657396",
+   "carried": true,
+   "pass": 2
+  },
+  {
+   "row": "C1197",
+   "screen": "mom_living_room.talk",
+   "verdict": "N/A",
+   "line": "",
+   "why": "no garment, place entry, dressing or plan item on Mom's talk screen; the row doesn't fire here",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "e38ff3dafa65755f",
+    "facts": "cfda3d7c96f6f167",
+    "all": "dd5c534f9a55bb61"
+   },
+   "row_hash": "b4f0f994f2657396",
+   "carried": true,
+   "pass": 2
+  },
+  {
+   "row": "C1198",
+   "screen": "hood_street",
+   "verdict": "PASS",
+   "line": "Go back up to your room...",
+   "why": "the refusal offers the way out (ClothingBlock \"Go back\", v2.py:21071) and names where to change",
+   "cause": null,
+   "note": false,
+   "screen_hash": null,
+   "row_hash": "495e5eb9452b4926",
+   "carried": true,
+   "pass": 2
+  },
+  {
+   "row": "C1198",
+   "screen": "mom_living_room.talk",
+   "verdict": "N/A",
+   "line": "",
+   "why": "no garment, place entry, dressing or plan item on Mom's talk screen; the row doesn't fire here",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "e38ff3dafa65755f",
+    "facts": "cfda3d7c96f6f167",
+    "all": "dd5c534f9a55bb61"
+   },
+   "row_hash": "495e5eb9452b4926",
+   "carried": true,
+   "pass": 2
+  },
+  {
+   "row": "C1200",
+   "screen": "borrow_hoodie.take",
+   "verdict": "N/A",
+   "line": "",
+   "why": "no clothing-gated button here",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "6616917f78b1aa8d",
+    "facts": "77447b04892972f0",
+    "all": "9cd111531ca2b2f2"
+   },
+   "row_hash": "766f516b6b8e329c",
+   "carried": true,
+   "pass": 2
+  },
+  {
+   "row": "C1200",
+   "screen": "mom_living_room.talk",
+   "verdict": "N/A",
+   "line": "",
+   "why": "no garment, place entry, dressing or plan item on Mom's talk screen; the row doesn't fire here",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "e38ff3dafa65755f",
+    "facts": "cfda3d7c96f6f167",
+    "all": "dd5c534f9a55bb61"
+   },
+   "row_hash": "766f516b6b8e329c",
+   "carried": true,
+   "pass": 2
+  },
+  {
+   "row": "C1201",
+   "screen": "borrow_hoodie.take",
+   "verdict": "PASS",
+   "line": "",
+   "why": "the hoodie is read (leave rule, Ryan's four talks)",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "6616917f78b1aa8d",
+    "facts": "77447b04892972f0",
+    "all": "9cd111531ca2b2f2"
+   },
+   "row_hash": "0ad4d41eb864e8bb",
+   "carried": true,
+   "pass": 2
+  },
+  {
+   "row": "C1201",
+   "screen": "mom_living_room.talk",
+   "verdict": "N/A",
+   "line": "",
+   "why": "no garment, place entry, dressing or plan item on Mom's talk screen; the row doesn't fire here",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "e38ff3dafa65755f",
+    "facts": "cfda3d7c96f6f167",
+    "all": "dd5c534f9a55bb61"
+   },
+   "row_hash": "0ad4d41eb864e8bb",
+   "carried": true,
+   "pass": 2
+  },
+  {
+   "row": "C1204",
+   "screen": "borrow_hoodie.take",
+   "verdict": "FAIL",
+   "line": "",
+   "why": "same: no clothing event in release 1; deferral, not a waiver; note row",
+   "cause": null,
+   "note": true,
+   "screen_hash": {
+    "text": "61a77c7fa2715c60",
+    "facts": "77447b04892972f0",
+    "all": "cec3a034e3ac0cb9"
+   },
+   "row_hash": "4fec6fc9a8793a0f",
+   "carried": false,
+   "pass": 2
+  },
+  {
+   "row": "C1204",
+   "screen": "borrow_mom.take",
+   "verdict": "FAIL",
+   "line": "",
+   "why": "same: no clothing event",
+   "cause": "P07j1-c2",
+   "note": false,
+   "screen_hash": {
+    "text": "99e09af6839ccfd3",
+    "facts": "8a73da8b0cd3be62",
+    "all": "1e82341acbaa70b9"
+   },
+   "row_hash": "4fec6fc9a8793a0f",
+   "carried": true,
+   "pass": 2
+  },
+  {
+   "row": "C1204",
+   "screen": "mom_living_room.talk",
+   "verdict": "N/A",
+   "line": "",
+   "why": "no garment, place entry, dressing or plan item on Mom's talk screen; the row doesn't fire here",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "e38ff3dafa65755f",
+    "facts": "cfda3d7c96f6f167",
+    "all": "dd5c534f9a55bb61"
+   },
+   "row_hash": "4fec6fc9a8793a0f",
+   "carried": true,
+   "pass": 2
+  },
+  {
+   "row": "C1206",
+   "screen": "borrow_hoodie.take",
+   "verdict": "PASS",
+   "line": "It smells like him.",
+   "why": "no garment named as worn that she may not be wearing",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "61a77c7fa2715c60",
+    "facts": "77447b04892972f0",
+    "all": "cec3a034e3ac0cb9"
+   },
+   "row_hash": "6b4e6ea1fe51ab17",
+   "carried": false,
+   "pass": 2
+  },
+  {
+   "row": "C1206",
+   "screen": "mom_living_room.talk",
+   "verdict": "N/A",
+   "line": "",
+   "why": "no garment, place entry, dressing or plan item on Mom's talk screen; the row doesn't fire here",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "e38ff3dafa65755f",
+    "facts": "cfda3d7c96f6f167",
+    "all": "dd5c534f9a55bb61"
+   },
+   "row_hash": "6b4e6ea1fe51ab17",
+   "carried": false,
+   "pass": 2
+  },
+  {
+   "row": "C1207",
+   "screen": "borrow_hoodie.take",
+   "verdict": "N/A",
+   "line": "",
+   "why": "engine's wardrobe page, not authored here",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "6616917f78b1aa8d",
+    "facts": "77447b04892972f0",
+    "all": "9cd111531ca2b2f2"
+   },
+   "row_hash": "cf1ca9ef0e675be5",
+   "carried": true,
+   "pass": 2
+  },
+  {
+   "row": "C1207",
+   "screen": "mom_living_room.talk",
+   "verdict": "N/A",
+   "line": "",
+   "why": "no garment, place entry, dressing or plan item on Mom's talk screen; the row doesn't fire here",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "e38ff3dafa65755f",
+    "facts": "cfda3d7c96f6f167",
+    "all": "dd5c534f9a55bb61"
+   },
+   "row_hash": "cf1ca9ef0e675be5",
+   "carried": true,
+   "pass": 2
+  },
+  {
+   "row": "C1220",
+   "screen": "hood_street",
+   "verdict": "PASS",
+   "line": "Not Dressed for This / Go back",
+   "why": "breach plays ClothingBlock; Change clothes hidden away from her room",
+   "cause": null,
+   "note": false,
+   "screen_hash": null,
+   "row_hash": "e706f55f84a94a84",
+   "carried": true,
+   "pass": 2
+  },
+  {
+   "row": "C1220",
+   "screen": "mom_living_room.talk",
+   "verdict": "N/A",
+   "line": "",
+   "why": "no garment, place entry, dressing or plan item on Mom's talk screen; the row doesn't fire here",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "e38ff3dafa65755f",
+    "facts": "cfda3d7c96f6f167",
+    "all": "dd5c534f9a55bb61"
+   },
+   "row_hash": "e706f55f84a94a84",
+   "carried": true,
+   "pass": 2
+  },
+  {
+   "row": "C1221",
+   "screen": "hood_street",
+   "verdict": "N/A",
+   "line": "",
+   "why": "no dress-code exception",
+   "cause": null,
+   "note": false,
+   "screen_hash": null,
+   "row_hash": "90572c3a26b59fc7",
+   "carried": true,
+   "pass": 2
+  },
+  {
+   "row": "C1221",
+   "screen": "mom_living_room.talk",
+   "verdict": "N/A",
+   "line": "",
+   "why": "no garment, place entry, dressing or plan item on Mom's talk screen; the row doesn't fire here",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "e38ff3dafa65755f",
+    "facts": "cfda3d7c96f6f167",
+    "all": "dd5c534f9a55bb61"
+   },
+   "row_hash": "90572c3a26b59fc7",
+   "carried": true,
+   "pass": 2
+  },
+  {
+   "row": "C1234",
+   "screen": "borrow_hoodie.take",
+   "verdict": "N/A",
+   "line": "",
+   "why": "no media spot on this screen",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "6616917f78b1aa8d",
+    "facts": "77447b04892972f0",
+    "all": "9cd111531ca2b2f2"
+   },
+   "row_hash": "7dc492e03732757e",
+   "carried": true,
+   "pass": 2
+  },
+  {
+   "row": "C1234",
+   "screen": "mom_living_room.talk",
+   "verdict": "N/A",
+   "line": "",
+   "why": "no media spot on Mom's talk screen",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "e38ff3dafa65755f",
+    "facts": "cfda3d7c96f6f167",
+    "all": "dd5c534f9a55bb61"
+   },
+   "row_hash": "7dc492e03732757e",
+   "carried": true,
+   "pass": 2
+  },
+  {
+   "row": "C1238",
+   "screen": "borrow_hoodie.take",
+   "verdict": "N/A",
+   "line": "",
+   "why": "no media spot on this screen",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "6616917f78b1aa8d",
+    "facts": "77447b04892972f0",
+    "all": "9cd111531ca2b2f2"
+   },
+   "row_hash": "af95eb45b0bdc9db",
+   "carried": true,
+   "pass": 2
+  },
+  {
+   "row": "C1238",
+   "screen": "mom_living_room.talk",
+   "verdict": "N/A",
+   "line": "",
+   "why": "no media spot on Mom's talk screen",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "e38ff3dafa65755f",
+    "facts": "cfda3d7c96f6f167",
+    "all": "dd5c534f9a55bb61"
+   },
+   "row_hash": "af95eb45b0bdc9db",
+   "carried": true,
+   "pass": 2
+  },
+  {
+   "row": "C1249",
+   "screen": "borrow_hoodie.take",
+   "verdict": "N/A",
+   "line": "",
+   "why": "no media spot on this screen",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "6616917f78b1aa8d",
+    "facts": "77447b04892972f0",
+    "all": "9cd111531ca2b2f2"
+   },
+   "row_hash": "604706399d2f1194",
+   "carried": true,
+   "pass": 2
+  },
+  {
+   "row": "C1249",
+   "screen": "mom_living_room.talk",
+   "verdict": "N/A",
+   "line": "",
+   "why": "no media spot on Mom's talk screen",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "e38ff3dafa65755f",
+    "facts": "cfda3d7c96f6f167",
+    "all": "dd5c534f9a55bb61"
+   },
+   "row_hash": "604706399d2f1194",
+   "carried": true,
+   "pass": 2
+  },
+  {
+   "row": "C1250",
+   "screen": "borrow_hoodie.take",
+   "verdict": "N/A",
+   "line": "",
+   "why": "not a place screen",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "6616917f78b1aa8d",
+    "facts": "77447b04892972f0",
+    "all": "9cd111531ca2b2f2"
+   },
+   "row_hash": "8384cc6bcbd67c07",
+   "carried": true,
+   "pass": 2
+  },
+  {
+   "row": "C1250",
+   "screen": "mom_living_room.talk",
+   "verdict": "N/A",
+   "line": "",
+   "why": "no garment, place entry, dressing or plan item on Mom's talk screen; the row doesn't fire here",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "e38ff3dafa65755f",
+    "facts": "cfda3d7c96f6f167",
+    "all": "dd5c534f9a55bb61"
+   },
+   "row_hash": "8384cc6bcbd67c07",
+   "carried": true,
+   "pass": 2
+  },
+  {
+   "row": "C1255",
+   "screen": "borrow_hoodie.take",
+   "verdict": "N/A",
+   "line": "",
+   "why": "no media spot on this screen",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "6616917f78b1aa8d",
+    "facts": "77447b04892972f0",
+    "all": "9cd111531ca2b2f2"
+   },
+   "row_hash": "d81893b9077b4b53",
+   "carried": true,
+   "pass": 2
+  },
+  {
+   "row": "C1255",
+   "screen": "mom_living_room.talk",
+   "verdict": "N/A",
+   "line": "",
+   "why": "no media spot on Mom's talk screen",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "e38ff3dafa65755f",
+    "facts": "cfda3d7c96f6f167",
+    "all": "dd5c534f9a55bb61"
+   },
+   "row_hash": "d81893b9077b4b53",
+   "carried": true,
+   "pass": 2
+  },
+  {
+   "row": "C1261",
+   "screen": "borrow_hoodie.take",
+   "verdict": "N/A",
+   "line": "",
+   "why": "no media spot on this screen",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "6616917f78b1aa8d",
+    "facts": "77447b04892972f0",
+    "all": "9cd111531ca2b2f2"
+   },
+   "row_hash": "6a661c60639de8be",
+   "carried": true,
+   "pass": 2
+  },
+  {
+   "row": "C1261",
+   "screen": "mom_living_room.talk",
+   "verdict": "N/A",
+   "line": "",
+   "why": "no media spot on Mom's talk screen",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "e38ff3dafa65755f",
+    "facts": "cfda3d7c96f6f167",
+    "all": "dd5c534f9a55bb61"
+   },
+   "row_hash": "6a661c60639de8be",
+   "carried": true,
+   "pass": 2
+  },
+  {
+   "row": "C1262",
+   "screen": "mom_living_room.talk",
+   "verdict": "N/A",
+   "line": "",
+   "why": "no media spot on Mom's talk screen",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "e38ff3dafa65755f",
+    "facts": "cfda3d7c96f6f167",
+    "all": "dd5c534f9a55bb61"
+   },
+   "row_hash": "2946d2fe0b7dc28f",
+   "carried": true,
+   "pass": 2
+  },
+  {
+   "row": "C1265",
+   "screen": "borrow_hoodie.take",
+   "verdict": "PASS",
+   "line": "",
+   "why": "a chore-like solo action with no spot, as the row asks",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "6616917f78b1aa8d",
+    "facts": "77447b04892972f0",
+    "all": "9cd111531ca2b2f2"
+   },
+   "row_hash": "cbf803b180c4fbdd",
+   "carried": true,
+   "pass": 2
+  },
+  {
+   "row": "C1265",
+   "screen": "mom_living_room.talk",
+   "verdict": "N/A",
+   "line": "",
+   "why": "no media spot on Mom's talk screen",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "e38ff3dafa65755f",
+    "facts": "cfda3d7c96f6f167",
+    "all": "dd5c534f9a55bb61"
+   },
+   "row_hash": "cbf803b180c4fbdd",
+   "carried": true,
+   "pass": 2
+  },
+  {
+   "row": "C1267",
+   "screen": "borrow_hoodie.take",
+   "verdict": "PASS",
+   "line": "",
+   "why": "nothing the words can't give; no spot",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "6616917f78b1aa8d",
+    "facts": "77447b04892972f0",
+    "all": "9cd111531ca2b2f2"
+   },
+   "row_hash": "6bafcadf3d586d5a",
+   "carried": true,
+   "pass": 2
+  },
+  {
+   "row": "C1267",
+   "screen": "mom_living_room.talk",
+   "verdict": "N/A",
+   "line": "",
+   "why": "no media spot on Mom's talk screen",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "e38ff3dafa65755f",
+    "facts": "cfda3d7c96f6f167",
+    "all": "dd5c534f9a55bb61"
+   },
+   "row_hash": "6bafcadf3d586d5a",
+   "carried": true,
+   "pass": 2
+  },
+  {
+   "row": "C1274",
+   "screen": "borrow_hoodie.take",
+   "verdict": "N/A",
+   "line": "",
+   "why": "no media spot on this screen",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "6616917f78b1aa8d",
+    "facts": "77447b04892972f0",
+    "all": "9cd111531ca2b2f2"
+   },
+   "row_hash": "ca72df83c67acc75",
+   "carried": true,
+   "pass": 2
+  },
+  {
+   "row": "C1274",
+   "screen": "mom_living_room.talk",
+   "verdict": "N/A",
+   "line": "",
+   "why": "no media spot on Mom's talk screen",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "e38ff3dafa65755f",
+    "facts": "cfda3d7c96f6f167",
+    "all": "dd5c534f9a55bb61"
+   },
+   "row_hash": "ca72df83c67acc75",
+   "carried": true,
+   "pass": 2
+  },
+  {
+   "row": "C1275",
+   "screen": "borrow_hoodie.take",
+   "verdict": "N/A",
+   "line": "",
+   "why": "no media spot on this screen",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "6616917f78b1aa8d",
+    "facts": "77447b04892972f0",
+    "all": "9cd111531ca2b2f2"
+   },
+   "row_hash": "5c2a05d547732e4b",
+   "carried": true,
+   "pass": 2
+  },
+  {
+   "row": "C1275",
+   "screen": "mom_living_room.talk",
+   "verdict": "N/A",
+   "line": "",
+   "why": "no media spot on Mom's talk screen",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "e38ff3dafa65755f",
+    "facts": "cfda3d7c96f6f167",
+    "all": "dd5c534f9a55bb61"
+   },
+   "row_hash": "5c2a05d547732e4b",
+   "carried": true,
+   "pass": 2
+  },
+  {
+   "row": "C1277",
+   "screen": "borrow_hoodie.take",
+   "verdict": "N/A",
+   "line": "",
+   "why": "no media spot on this screen",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "6616917f78b1aa8d",
+    "facts": "77447b04892972f0",
+    "all": "9cd111531ca2b2f2"
+   },
+   "row_hash": "2b934524a49c49e9",
+   "carried": true,
+   "pass": 2
+  },
+  {
+   "row": "C1277",
+   "screen": "mom_living_room.talk",
+   "verdict": "N/A",
+   "line": "",
+   "why": "no media spot on Mom's talk screen",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "e38ff3dafa65755f",
+    "facts": "cfda3d7c96f6f167",
+    "all": "dd5c534f9a55bb61"
+   },
+   "row_hash": "2b934524a49c49e9",
+   "carried": true,
+   "pass": 2
+  },
+  {
+   "row": "C1278",
+   "screen": "borrow_hoodie.take",
+   "verdict": "N/A",
+   "line": "",
+   "why": "no media spot on this screen",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "6616917f78b1aa8d",
+    "facts": "77447b04892972f0",
+    "all": "9cd111531ca2b2f2"
+   },
+   "row_hash": "a511d81564cef526",
+   "carried": true,
+   "pass": 2
+  },
+  {
+   "row": "C1278",
+   "screen": "mom_living_room.talk",
+   "verdict": "N/A",
+   "line": "",
+   "why": "no media spot on Mom's talk screen",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "e38ff3dafa65755f",
+    "facts": "cfda3d7c96f6f167",
+    "all": "dd5c534f9a55bb61"
+   },
+   "row_hash": "a511d81564cef526",
+   "carried": true,
+   "pass": 2
+  },
+  {
+   "row": "C1279",
+   "screen": "borrow_hoodie.take",
+   "verdict": "N/A",
+   "line": "",
+   "why": "no media spot on this screen",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "6616917f78b1aa8d",
+    "facts": "77447b04892972f0",
+    "all": "9cd111531ca2b2f2"
+   },
+   "row_hash": "9705ac6acfdcce30",
+   "carried": true,
+   "pass": 2
+  },
+  {
+   "row": "C1279",
+   "screen": "mom_living_room.talk",
+   "verdict": "N/A",
+   "line": "",
+   "why": "no media spot on Mom's talk screen",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "e38ff3dafa65755f",
+    "facts": "cfda3d7c96f6f167",
+    "all": "dd5c534f9a55bb61"
+   },
+   "row_hash": "9705ac6acfdcce30",
+   "carried": true,
+   "pass": 2
+  },
+  {
+   "row": "C1280",
+   "screen": "borrow_hoodie.take",
+   "verdict": "N/A",
+   "line": "",
+   "why": "no media spot on this screen",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "6616917f78b1aa8d",
+    "facts": "77447b04892972f0",
+    "all": "9cd111531ca2b2f2"
+   },
+   "row_hash": "a1ce22b0640c6eeb",
+   "carried": true,
+   "pass": 2
+  },
+  {
+   "row": "C1280",
+   "screen": "mom_living_room.talk",
+   "verdict": "N/A",
+   "line": "",
+   "why": "no media spot on Mom's talk screen",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "e38ff3dafa65755f",
+    "facts": "cfda3d7c96f6f167",
+    "all": "dd5c534f9a55bb61"
+   },
+   "row_hash": "a1ce22b0640c6eeb",
+   "carried": true,
+   "pass": 2
+  },
+  {
+   "row": "C1281",
+   "screen": "borrow_hoodie.take",
+   "verdict": "N/A",
+   "line": "",
+   "why": "no media spot on this screen",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "6616917f78b1aa8d",
+    "facts": "77447b04892972f0",
+    "all": "9cd111531ca2b2f2"
+   },
+   "row_hash": "f0ab213c3075f906",
+   "carried": true,
+   "pass": 2
+  },
+  {
+   "row": "C1281",
+   "screen": "mom_living_room.talk",
+   "verdict": "N/A",
+   "line": "",
+   "why": "no media spot on Mom's talk screen",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "e38ff3dafa65755f",
+    "facts": "cfda3d7c96f6f167",
+    "all": "dd5c534f9a55bb61"
+   },
+   "row_hash": "f0ab213c3075f906",
+   "carried": true,
+   "pass": 2
+  },
+  {
+   "row": "C1284",
+   "screen": "borrow_hoodie.take",
+   "verdict": "N/A",
+   "line": "",
+   "why": "no media spot on this screen",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "6616917f78b1aa8d",
+    "facts": "77447b04892972f0",
+    "all": "9cd111531ca2b2f2"
+   },
+   "row_hash": "d631d4c69f1d3b74",
+   "carried": true,
+   "pass": 2
+  },
+  {
+   "row": "C1284",
+   "screen": "mom_living_room.talk",
+   "verdict": "N/A",
+   "line": "",
+   "why": "no media spot on Mom's talk screen",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "e38ff3dafa65755f",
+    "facts": "cfda3d7c96f6f167",
+    "all": "dd5c534f9a55bb61"
+   },
+   "row_hash": "d631d4c69f1d3b74",
+   "carried": true,
+   "pass": 2
+  },
+  {
+   "row": "C1340",
+   "screen": "borrow_hoodie.take",
+   "verdict": "N/A",
+   "line": "",
+   "why": "no person on screen; a room action, not a person's menu",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "6616917f78b1aa8d",
+    "facts": "77447b04892972f0",
+    "all": "9cd111531ca2b2f2"
+   },
+   "row_hash": "a335a4d228798817",
+   "carried": true,
+   "pass": 2
+  },
+  {
+   "row": "C1340",
+   "screen": "mom_living_room.talk",
+   "verdict": "PASS",
+   "line": "Done -> home_living_room, 5 min",
+   "why": "Talk inside her menu, once a day, returns to the room; the face still opens the menu after",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "e38ff3dafa65755f",
+    "facts": "cfda3d7c96f6f167",
+    "all": "dd5c534f9a55bb61"
+   },
+   "row_hash": "a335a4d228798817",
+   "carried": true,
+   "pass": 2
+  },
+  {
+   "row": "C1604",
+   "screen": "borrow_hoodie.take",
+   "verdict": "N/A",
+   "line": "",
+   "why": "no hand-over here",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "6616917f78b1aa8d",
+    "facts": "77447b04892972f0",
+    "all": "9cd111531ca2b2f2"
+   },
+   "row_hash": "a4feff5e25645274",
+   "carried": true,
+   "pass": 2
+  },
+  {
+   "row": "C1609",
+   "screen": "*",
+   "verdict": "N/A",
+   "line": "",
+   "why": "Same.",
+   "cause": null,
+   "note": false,
+   "screen_hash": "159f428bf367ae15",
+   "row_hash": "add0504418933607",
+   "carried": true,
+   "pass": 1
+  },
+  {
+   "row": "C1611",
+   "screen": "*",
+   "verdict": "N/A",
+   "line": "",
+   "why": "People on the opening are P13's; room screen has none.",
+   "cause": null,
+   "note": false,
+   "screen_hash": "159f428bf367ae15",
+   "row_hash": "112c4a73c594ab87",
+   "carried": true,
+   "pass": 1
+  },
+  {
+   "row": "C1613",
+   "screen": "*",
+   "verdict": "N/A",
+   "line": "",
+   "why": "Same.",
+   "cause": null,
+   "note": false,
+   "screen_hash": "159f428bf367ae15",
+   "row_hash": "b50de590bf483f0a",
+   "carried": true,
+   "pass": 1
+  },
+  {
+   "row": "C1621",
+   "screen": "*",
+   "verdict": "N/A",
+   "line": "",
+   "why": "Hand-over is P13's.",
+   "cause": null,
+   "note": false,
+   "screen_hash": "159f428bf367ae15",
+   "row_hash": "11b24e4fe2da4e05",
+   "carried": true,
+   "pass": 1
+  },
+  {
+   "row": "C1626",
+   "screen": "*",
+   "verdict": "N/A",
+   "line": "",
+   "why": "First screen unchanged by P07.",
+   "cause": null,
+   "note": false,
+   "screen_hash": "159f428bf367ae15",
+   "row_hash": "e2077b8b174e635b",
+   "carried": true,
+   "pass": 1
+  },
+  {
+   "row": "C1631",
+   "screen": "*",
+   "verdict": "N/A",
+   "line": "",
+   "why": "no hand-over on P07's screens; the opening's hand-over is P13's",
+   "cause": null,
+   "note": false,
+   "screen_hash": "5718fc76f9905ff7",
+   "row_hash": "45d1f77e233e111c",
+   "carried": false,
+   "pass": 2
+  },
+  {
+   "row": "C1631",
+   "screen": "borrow_hoodie.take",
+   "verdict": "N/A",
+   "line": "",
+   "why": "not a hand-over screen",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "61a77c7fa2715c60",
+    "facts": "77447b04892972f0",
+    "all": "cec3a034e3ac0cb9"
+   },
+   "row_hash": "45d1f77e233e111c",
+   "carried": false,
+   "pass": 2
+  },
+  {
+   "row": "C1631",
+   "screen": "mom_living_room.talk",
+   "verdict": "N/A",
+   "line": "",
+   "why": "not a hand-over screen",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "bea6a579cecdd65d",
+    "facts": "cfda3d7c96f6f167",
+    "all": "8019d2454bae538d"
+   },
+   "row_hash": "45d1f77e233e111c",
+   "carried": false,
+   "pass": 2
+  },
+  {
+   "row": "C1637",
+   "screen": "*",
+   "verdict": "N/A",
+   "line": "",
+   "why": "No meeting.",
+   "cause": null,
+   "note": false,
+   "screen_hash": "159f428bf367ae15",
+   "row_hash": "22f779094c1d6cc4",
+   "carried": true,
+   "pass": 1
+  },
+  {
+   "row": "C166",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "",
+   "why": "No final no anywhere in P07.",
+   "cause": null,
+   "note": false,
+   "screen_hash": "159f428bf367ae15",
+   "row_hash": "8630b1e1337d63f3",
+   "carried": true,
+   "pass": 1
+  },
+  {
+   "row": "C239",
+   "screen": "*",
+   "verdict": "N/A",
+   "line": "",
+   "why": "No explicit beat.",
+   "cause": null,
+   "note": false,
+   "screen_hash": "159f428bf367ae15",
+   "row_hash": "0031533ec82c4401",
+   "carried": true,
+   "pass": 1
+  },
+  {
+   "row": "C248",
+   "screen": "*",
+   "verdict": "N/A",
+   "line": "",
+   "why": "No explicit beat.",
+   "cause": null,
+   "note": false,
+   "screen_hash": "159f428bf367ae15",
+   "row_hash": "78aa710fc99207b5",
+   "carried": true,
+   "pass": 1
+  },
+  {
+   "row": "C249",
+   "screen": "*",
+   "verdict": "N/A",
+   "line": "",
+   "why": "No explicit beat.",
+   "cause": null,
+   "note": false,
+   "screen_hash": "159f428bf367ae15",
+   "row_hash": "1e789c98e52ef448",
+   "carried": true,
+   "pass": 1
+  },
+  {
+   "row": "C252",
+   "screen": "*",
+   "verdict": "N/A",
+   "line": "",
+   "why": "Game-wide share, read at release.",
+   "cause": null,
+   "note": false,
+   "screen_hash": "159f428bf367ae15",
+   "row_hash": "aa35910e35e29b2d",
+   "carried": true,
+   "pass": 1
+  },
+  {
+   "row": "C254",
+   "screen": "*",
+   "verdict": "N/A",
+   "line": "",
+   "why": "No explicit beat.",
+   "cause": null,
+   "note": false,
+   "screen_hash": "159f428bf367ae15",
+   "row_hash": "2d3aa3b699bb3a78",
+   "carried": true,
+   "pass": 1
+  },
+  {
+   "row": "C255",
+   "screen": "*",
+   "verdict": "N/A",
+   "line": "",
+   "why": "Game-wide share, read at release.",
+   "cause": null,
+   "note": false,
+   "screen_hash": "159f428bf367ae15",
+   "row_hash": "41543c0b01047eb6",
+   "carried": true,
+   "pass": 1
+  },
+  {
+   "row": "C256",
+   "screen": "*",
+   "verdict": "N/A",
+   "line": "",
+   "why": "Game-wide share, read at release.",
+   "cause": null,
+   "note": false,
+   "screen_hash": "159f428bf367ae15",
+   "row_hash": "39401d1f8b2ac714",
+   "carried": true,
+   "pass": 1
+  },
+  {
+   "row": "C276",
+   "screen": "*",
+   "verdict": "N/A",
+   "line": "",
+   "why": "No explicit beat.",
+   "cause": null,
+   "note": false,
+   "screen_hash": "159f428bf367ae15",
+   "row_hash": "803a558113f90fbd",
+   "carried": true,
+   "pass": 1
+  },
+  {
+   "row": "C284",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "",
+   "why": "Nothing she does sexually; things happen to her.",
+   "cause": null,
+   "note": false,
+   "screen_hash": "159f428bf367ae15",
+   "row_hash": "69d227fcb6314994",
+   "carried": true,
+   "pass": 1
+  },
+  {
+   "row": "C285",
+   "screen": "*",
+   "verdict": "N/A",
+   "line": "",
+   "why": "No stage or meter.",
+   "cause": null,
+   "note": false,
+   "screen_hash": "159f428bf367ae15",
+   "row_hash": "a28a84cd5f58df59",
+   "carried": true,
+   "pass": 1
+  },
+  {
+   "row": "C286",
+   "screen": "hood_street",
+   "verdict": "PASS",
+   "line": "a neighbour ... watches you",
+   "why": "A stage-1 look.",
+   "cause": null,
+   "note": false,
+   "screen_hash": null,
+   "row_hash": "04450056a0da072c",
+   "carried": true,
+   "pass": 1
+  },
+  {
+   "row": "C287",
+   "screen": "*",
+   "verdict": "N/A",
+   "line": "",
+   "why": "Release 1 sits at stage 1; no such content.",
+   "cause": null,
+   "note": false,
+   "screen_hash": "159f428bf367ae15",
+   "row_hash": "33f0b998a82d37de",
+   "carried": true,
+   "pass": 1
+  },
+  {
+   "row": "C288",
+   "screen": "*",
+   "verdict": "N/A",
+   "line": "",
+   "why": "Release 1 sits at stage 1; no such content.",
+   "cause": null,
+   "note": false,
+   "screen_hash": "159f428bf367ae15",
+   "row_hash": "820920d70a5f860a",
+   "carried": true,
+   "pass": 1
+  },
+  {
+   "row": "C289",
+   "screen": "*",
+   "verdict": "N/A",
+   "line": "",
+   "why": "Release 1 sits at stage 1; no such content.",
+   "cause": null,
+   "note": false,
+   "screen_hash": "159f428bf367ae15",
+   "row_hash": "b49633d1ad76857e",
+   "carried": true,
+   "pass": 1
+  },
+  {
+   "row": "C291",
+   "screen": "hood_street",
+   "verdict": "PASS",
+   "line": "worn_exposure gte 1",
+   "why": "What shows sets the line.",
+   "cause": null,
+   "note": false,
+   "screen_hash": null,
+   "row_hash": "1345b94e89dfc2dc",
+   "carried": true,
+   "pass": 1
+  },
+  {
+   "row": "C296",
+   "screen": "*",
+   "verdict": "N/A",
+   "line": "",
+   "why": "Release 1 sits at stage 1; no such content.",
+   "cause": null,
+   "note": false,
+   "screen_hash": "159f428bf367ae15",
+   "row_hash": "39b97c524d1d887d",
+   "carried": true,
+   "pass": 1
+  },
+  {
+   "row": "C297",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "",
+   "why": "Nothing sexual with Mom or Ryan.",
+   "cause": null,
+   "note": false,
+   "screen_hash": "159f428bf367ae15",
+   "row_hash": "f4d1f119d6f2bea9",
+   "carried": true,
+   "pass": 1
+  },
+  {
+   "row": "C311",
+   "screen": "hood_street",
+   "verdict": "PASS",
+   "line": "a neighbour's eyes drop to your bare legs and stay there. Your face goes hot. You walk faster, and you can feel him still watching.",
+   "why": "part of her body named, his reaction written, a not-yet held (he keeps watching), and the line leaves on that open look",
+   "cause": null,
+   "note": false,
+   "screen_hash": null,
+   "row_hash": "0df85bbf34aa1cdf",
+   "carried": false,
+   "pass": 2
+  },
+  {
+   "row": "C311",
+   "screen": "opening.room",
+   "verdict": "PASS",
+   "line": "your nipples go tight",
+   "why": "On her body.",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "5aa193b86273e353",
+    "facts": "7f5851883cb8d732",
+    "all": "2267c6fc177cf08c"
+   },
+   "row_hash": "0df85bbf34aa1cdf",
+   "carried": true,
+   "pass": 1
+  },
+  {
+   "row": "C314",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "",
+   "why": "Nothing is talk only.",
+   "cause": null,
+   "note": false,
+   "screen_hash": "159f428bf367ae15",
+   "row_hash": "47808896707b87ec",
+   "carried": true,
+   "pass": 1
+  },
+  {
+   "row": "C327",
+   "screen": "opening.room",
+   "verdict": "PASS",
+   "line": "",
+   "why": "Room screen filled with her body, not talk.",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "5aa193b86273e353",
+    "facts": "7f5851883cb8d732",
+    "all": "2267c6fc177cf08c"
+   },
+   "row_hash": "94cf3f1c37d54c7b",
+   "carried": true,
+   "pass": 1
+  },
+  {
+   "row": "C422",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "Borrow Mom's things (5 min)",
+   "why": "Labels say what clicking does, with cost.",
+   "cause": null,
+   "note": false,
+   "screen_hash": "159f428bf367ae15",
+   "row_hash": "8933f85010afbef7",
+   "carried": true,
+   "pass": 1
+  },
+  {
+   "row": "C442",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "Her skirt.",
+   "why": "Said plainly.",
+   "cause": null,
+   "note": false,
+   "screen_hash": "159f428bf367ae15",
+   "row_hash": "a2b07f40e1a9e908",
+   "carried": true,
+   "pass": 1
+  },
+  {
+   "row": "C447",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "Her mouth goes tight, and she says nothing.",
+   "why": "Mom holds her manner: sees it, keeps quiet (as at the stove).",
+   "cause": null,
+   "note": false,
+   "screen_hash": "159f428bf367ae15",
+   "row_hash": "e3ca01ba145f4580",
+   "carried": true,
+   "pass": 1
+  },
+  {
+   "row": "C448",
+   "screen": "*",
+   "verdict": "N/A",
+   "line": "",
+   "why": "No first meeting.",
+   "cause": null,
+   "note": false,
+   "screen_hash": "159f428bf367ae15",
+   "row_hash": "584dada6c379e3d8",
+   "carried": true,
+   "pass": 1
+  },
+  {
+   "row": "C449",
+   "screen": "hood_street",
+   "verdict": "PASS",
+   "line": "eyes drop to your chest in Mom's top and stay there",
+   "why": "the sexual look is named on her chest/legs, not buried",
+   "cause": null,
+   "note": false,
+   "screen_hash": null,
+   "row_hash": "ac5932d70cd775a1",
+   "carried": false,
+   "pass": 2
+  },
+  {
+   "row": "C450",
+   "screen": "borrow_hoodie.take",
+   "verdict": "PASS",
+   "line": "You wonder if he'll notice it's gone.",
+   "why": "points at Ryan noticing, which his talks build (\"That's my hoodie.\" behind ryan_hoodie equipped)",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "61a77c7fa2715c60",
+    "facts": "77447b04892972f0",
+    "all": "cec3a034e3ac0cb9"
+   },
+   "row_hash": "3eb18b4cefbe49d3",
+   "carried": false,
+   "pass": 2
+  },
+  {
+   "row": "C450",
+   "screen": "borrow_mom.take",
+   "verdict": "PASS",
+   "line": "If she sees them on you, she'll know.",
+   "why": "points at Mom noticing, built on her two menus by garment",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "99e09af6839ccfd3",
+    "facts": "8a73da8b0cd3be62",
+    "all": "1e82341acbaa70b9"
+   },
+   "row_hash": "3eb18b4cefbe49d3",
+   "carried": false,
+   "pass": 2
+  },
+  {
+   "row": "C451",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "Her side of the wardrobe smells like her perfume.",
+   "why": "Concrete detail.",
+   "cause": null,
+   "note": false,
+   "screen_hash": "159f428bf367ae15",
+   "row_hash": "6b0fd679047fc9b8",
+   "carried": true,
+   "pass": 1
+  },
+  {
+   "row": "C460",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "",
+   "why": "each claim on borrow_hoodie's one screen is behind its condition (not owned, Ryan absent)",
+   "cause": null,
+   "note": false,
+   "screen_hash": "5718fc76f9905ff7",
+   "row_hash": "beb5a109bde77305",
+   "carried": false,
+   "pass": 2
+  },
+  {
+   "row": "C460",
+   "screen": "borrow_hoodie.take",
+   "verdict": "PASS",
+   "line": "You pick the grey one up off his floor. It smells like him.",
+   "why": "true on the one visit it can show; no worn claim",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "61a77c7fa2715c60",
+    "facts": "77447b04892972f0",
+    "all": "cec3a034e3ac0cb9"
+   },
+   "row_hash": "beb5a109bde77305",
+   "carried": false,
+   "pass": 2
+  },
+  {
+   "row": "C460",
+   "screen": "borrow_mom.take",
+   "verdict": "PASS",
+   "line": "Her side of the wardrobe smells like her perfume. You take a short skirt, a low-cut top and the heels she never wears.",
+   "why": "only group left is behind mom_short_skirt not_owned, with Laura and Mark absent; the old 'already on your chair' line is gone",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "99e09af6839ccfd3",
+    "facts": "8a73da8b0cd3be62",
+    "all": "1e82341acbaa70b9"
+   },
+   "row_hash": "beb5a109bde77305",
+   "carried": false,
+   "pass": 2
+  },
+  {
+   "row": "C460",
+   "screen": "hood_street",
+   "verdict": "PASS",
+   "line": "\u2026eyes drop to your chest in Mom's top\u2026 / \u2026your bare legs\u2026",
+   "why": "first-match chain (v2.py:11816-11838): top line behind mom_lowcut_top equipped; else exposure \u22651 on the street can only be Mom's skirt (leave rule fills top/bottom, getWornExposure v2.py:1910-1941), so bare legs is true; 'walk faster' fits arrivals both ways",
+   "cause": null,
+   "note": false,
+   "screen_hash": null,
+   "row_hash": "beb5a109bde77305",
+   "carried": false,
+   "pass": 2
+  },
+  {
+   "row": "C460",
+   "screen": "mom_living_room.talk",
+   "verdict": "PASS",
+   "line": "Stay in tonight. Just tonight. For me.",
+   "why": "talk shows only 19-23 (Laura's living-room rows); Mark lines behind Mark presence groups; no unflagged past",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "bea6a579cecdd65d",
+    "facts": "cfda3d7c96f6f167",
+    "all": "8019d2454bae538d"
+   },
+   "row_hash": "beb5a109bde77305",
+   "carried": false,
+   "pass": 2
+  },
+  {
+   "row": "C461",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "",
+   "why": "texture and her opinion only (his floor, his smell, her wondering in narration)",
+   "cause": null,
+   "note": false,
+   "screen_hash": "5718fc76f9905ff7",
+   "row_hash": "153b0804e686abae",
+   "carried": false,
+   "pass": 2
+  },
+  {
+   "row": "C461",
+   "screen": "borrow_hoodie.take",
+   "verdict": "PASS",
+   "line": "You wonder if he'll notice it's gone.",
+   "why": "her opinion in narration, not italic",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "61a77c7fa2715c60",
+    "facts": "77447b04892972f0",
+    "all": "cec3a034e3ac0cb9"
+   },
+   "row_hash": "153b0804e686abae",
+   "carried": false,
+   "pass": 2
+  },
+  {
+   "row": "C461",
+   "screen": "mom_living_room.talk",
+   "verdict": "PASS",
+   "line": "Sit with me a minute, baby.",
+   "why": "dialogue fits Mom's entry; her answers fit her",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "bea6a579cecdd65d",
+    "facts": "cfda3d7c96f6f167",
+    "all": "8019d2454bae538d"
+   },
+   "row_hash": "153b0804e686abae",
+   "carried": false,
+   "pass": 2
+  },
+  {
+   "row": "C519",
+   "screen": "opening.room",
+   "verdict": "PASS",
+   "line": "",
+   "why": "One job (dressing), about 45 words; sums on its own screen.",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "5aa193b86273e353",
+    "facts": "7f5851883cb8d732",
+    "all": "2267c6fc177cf08c"
+   },
+   "row_hash": "ff5e8d6189f0899a",
+   "carried": true,
+   "pass": 1
+  },
+  {
+   "row": "C520",
+   "screen": "opening.room",
+   "verdict": "PASS",
+   "line": "",
+   "why": "Within 34-57 target.",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "5aa193b86273e353",
+    "facts": "7f5851883cb8d732",
+    "all": "2267c6fc177cf08c"
+   },
+   "row_hash": "59faa2198bb751e1",
+   "carried": true,
+   "pass": 1
+  },
+  {
+   "row": "C593",
+   "screen": "*",
+   "verdict": "N/A",
+   "line": "",
+   "why": "No new term of address; Mom's lines carry none.",
+   "cause": null,
+   "note": false,
+   "screen_hash": "159f428bf367ae15",
+   "row_hash": "52e42cdd69c8f10e",
+   "carried": true,
+   "pass": 1
+  },
+  {
+   "row": "C596",
+   "screen": "*",
+   "verdict": "N/A",
+   "line": "",
+   "why": "Mom's menus are P42's.",
+   "cause": null,
+   "note": false,
+   "screen_hash": "159f428bf367ae15",
+   "row_hash": "217e3c5b84d1e838",
+   "carried": true,
+   "pass": 1
+  },
+  {
+   "row": "C598",
+   "screen": "*",
+   "verdict": "N/A",
+   "line": "",
+   "why": "No card.",
+   "cause": null,
+   "note": false,
+   "screen_hash": "159f428bf367ae15",
+   "row_hash": "586f13891dfb3b93",
+   "carried": true,
+   "pass": 1
+  },
+  {
+   "row": "C601",
+   "screen": "*",
+   "verdict": "N/A",
+   "line": "",
+   "why": "Ryan's leak is P13's.",
+   "cause": null,
+   "note": false,
+   "screen_hash": "159f428bf367ae15",
+   "row_hash": "390111b08f596c8d",
+   "carried": true,
+   "pass": 1
+  },
+  {
+   "row": "C613",
+   "screen": "*",
+   "verdict": "N/A",
+   "line": "",
+   "why": "No one acts on a want.",
+   "cause": null,
+   "note": false,
+   "screen_hash": "159f428bf367ae15",
+   "row_hash": "e449f2e1c7454d6b",
+   "carried": true,
+   "pass": 1
+  },
+  {
+   "row": "C618",
+   "screen": "*",
+   "verdict": "N/A",
+   "line": "",
+   "why": "No meeting.",
+   "cause": null,
+   "note": false,
+   "screen_hash": "159f428bf367ae15",
+   "row_hash": "cf04982ff36d5fee",
+   "carried": true,
+   "pass": 1
+  },
+  {
+   "row": "C619",
+   "screen": "*",
+   "verdict": "N/A",
+   "line": "",
+   "why": "No meeting.",
+   "cause": null,
+   "note": false,
+   "screen_hash": "159f428bf367ae15",
+   "row_hash": "9abaf79b00480069",
+   "carried": true,
+   "pass": 1
+  },
+  {
+   "row": "C620",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "",
+   "why": "No unmet person listed at a place.",
+   "cause": null,
+   "note": false,
+   "screen_hash": "159f428bf367ae15",
+   "row_hash": "34fca4a974682444",
+   "carried": true,
+   "pass": 1
+  },
+  {
+   "row": "C622",
+   "screen": "*",
+   "verdict": "N/A",
+   "line": "",
+   "why": "No meeting.",
+   "cause": null,
+   "note": false,
+   "screen_hash": "159f428bf367ae15",
+   "row_hash": "3a5a94bef3bdb5d2",
+   "carried": true,
+   "pass": 1
+  },
+  {
+   "row": "C625",
+   "screen": "hood_street",
+   "verdict": "PASS",
+   "line": "a neighbour",
+   "why": "Unmet, so a role.",
+   "cause": null,
+   "note": false,
+   "screen_hash": null,
+   "row_hash": "6e8364367065f3af",
+   "carried": true,
+   "pass": 1
+  },
+  {
+   "row": "C626",
+   "screen": "*",
+   "verdict": "N/A",
+   "line": "",
+   "why": "No meeting.",
+   "cause": null,
+   "note": false,
+   "screen_hash": "159f428bf367ae15",
+   "row_hash": "9f83b62a4e07e30a",
+   "carried": true,
+   "pass": 1
+  },
+  {
+   "row": "C627",
+   "screen": "*",
+   "verdict": "N/A",
+   "line": "",
+   "why": "No meeting.",
+   "cause": null,
+   "note": false,
+   "screen_hash": "159f428bf367ae15",
+   "row_hash": "d48908c2e401d9d8",
+   "carried": true,
+   "pass": 1
+  },
+  {
+   "row": "C630",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "Not while Ryan's in here.",
+   "why": "Ryan's relation given on his first screen (P13); no screen swaps one for the other.",
+   "cause": null,
+   "note": false,
+   "screen_hash": "159f428bf367ae15",
+   "row_hash": "eb333b3116c028f2",
+   "carried": true,
+   "pass": 1
+  },
+  {
+   "row": "C632",
+   "screen": "*",
+   "verdict": "N/A",
+   "line": "",
+   "why": "No role label.",
+   "cause": null,
+   "note": false,
+   "screen_hash": "159f428bf367ae15",
+   "row_hash": "27f3481ce4c3e30c",
+   "carried": true,
+   "pass": 1
+  },
+  {
+   "row": "C639",
+   "screen": "*",
+   "verdict": "N/A",
+   "line": "",
+   "why": "No offer.",
+   "cause": null,
+   "note": false,
+   "screen_hash": "159f428bf367ae15",
+   "row_hash": "e4a6334699a304b9",
+   "carried": true,
+   "pass": 1
+  },
+  {
+   "row": "C640",
+   "screen": "*",
+   "verdict": "N/A",
+   "line": "",
+   "why": "No offer.",
+   "cause": null,
+   "note": false,
+   "screen_hash": "159f428bf367ae15",
+   "row_hash": "fec816e8221cb56c",
+   "carried": true,
+   "pass": 1
+  },
+  {
+   "row": "C644",
+   "screen": "*",
+   "verdict": "N/A",
+   "line": "",
+   "why": "Mom's corner is P42's.",
+   "cause": null,
+   "note": false,
+   "screen_hash": "159f428bf367ae15",
+   "row_hash": "045102ba2f0a9453",
+   "carried": true,
+   "pass": 1
+  },
+  {
+   "row": "C656",
+   "screen": "*",
+   "verdict": "N/A",
+   "line": "",
+   "why": "No meter.",
+   "cause": null,
+   "note": false,
+   "screen_hash": "159f428bf367ae15",
+   "row_hash": "41c869f069a2b028",
+   "carried": true,
+   "pass": 1
+  },
+  {
+   "row": "C660",
+   "screen": "*",
+   "verdict": "N/A",
+   "line": "",
+   "why": "No meter.",
+   "cause": null,
+   "note": false,
+   "screen_hash": "159f428bf367ae15",
+   "row_hash": "70b5022d4a858fa1",
+   "carried": true,
+   "pass": 1
+  },
+  {
+   "row": "C690",
+   "screen": "*",
+   "verdict": "N/A",
+   "line": "",
+   "why": "No People page change.",
+   "cause": null,
+   "note": false,
+   "screen_hash": "159f428bf367ae15",
+   "row_hash": "d130cdc296b140e8",
+   "carried": true,
+   "pass": 1
+  },
+  {
+   "row": "C707",
+   "screen": "*",
+   "verdict": "N/A",
+   "line": "",
+   "why": "No place prose but one line.",
+   "cause": null,
+   "note": false,
+   "screen_hash": "159f428bf367ae15",
+   "row_hash": "e2898bd02a9e4730",
+   "carried": true,
+   "pass": 1
+  },
+  {
+   "row": "C719",
+   "screen": "opening.room",
+   "verdict": "PASS",
+   "line": "Keep your usual (5 min)",
+   "why": "Each outfit button equips a whole outfit by wardrobeEffects.",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "5aa193b86273e353",
+    "facts": "7f5851883cb8d732",
+    "all": "2267c6fc177cf08c"
+   },
+   "row_hash": "d7c4f9c8542d0090",
+   "carried": true,
+   "pass": 1
+  },
+  {
+   "row": "C738",
+   "screen": "hood_street",
+   "verdict": "PASS",
+   "line": "",
+   "why": "Street stays a thoroughfare; one notice line only.",
+   "cause": null,
+   "note": false,
+   "screen_hash": null,
+   "row_hash": "976cd3e099c13e51",
+   "carried": true,
+   "pass": 1
+  },
+  {
+   "row": "C758",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "Borrow Mom's things (5 min)",
+   "why": "Short labels; median near 3.",
+   "cause": null,
+   "note": false,
+   "screen_hash": "159f428bf367ae15",
+   "row_hash": "6329db1ec04ec3da",
+   "carried": true,
+   "pass": 1
+  },
+  {
+   "row": "C762",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "",
+   "why": "No \"Nothing happens\".",
+   "cause": null,
+   "note": false,
+   "screen_hash": "159f428bf367ae15",
+   "row_hash": "877801c22bdade00",
+   "carried": true,
+   "pass": 1
+  },
+  {
+   "row": "C769",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "Your mom and Mark's room. The big bed, her wardrobe, and the feeling you shouldn't be in here.",
+   "why": "Master Bedroom, Ryan's Room, street and her room each say what they are in their own description.",
+   "cause": null,
+   "note": false,
+   "screen_hash": "159f428bf367ae15",
+   "row_hash": "cf7d7a82afabcbbb",
+   "carried": true,
+   "pass": 1
+  },
+  {
+   "row": "C770",
+   "screen": "*",
+   "verdict": "N/A",
+   "line": "",
+   "why": "note row; P07 adds one line to room screens, none reaches length.",
+   "cause": null,
+   "note": false,
+   "screen_hash": "159f428bf367ae15",
+   "row_hash": "dcc6bbe6fde09083",
+   "carried": true,
+   "pass": 1
+  },
+  {
+   "row": "C771",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "",
+   "why": "no first-visit screen added; borrow first-time is a group inside the repeatable, not a place intro.",
+   "cause": null,
+   "note": false,
+   "screen_hash": "159f428bf367ae15",
+   "row_hash": "d941995a226da2b4",
+   "carried": true,
+   "pass": 1
+  },
+  {
+   "row": "C773",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "Borrow Mom's things (5 min)",
+   "why": "room buttons are a dress system (borrow, change clothes), not a browse list.",
+   "cause": null,
+   "note": false,
+   "screen_hash": "159f428bf367ae15",
+   "row_hash": "0825e8443f9180d0",
+   "carried": true,
+   "pass": 1
+  },
+  {
+   "row": "C776",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "Borrow one of his hoodies (5 min)",
+   "why": "borrow rows are a system (wardrobe); Mom's lines sit in her menu, not as room buttons.",
+   "cause": null,
+   "note": false,
+   "screen_hash": "159f428bf367ae15",
+   "row_hash": "6088d5531ecff698",
+   "carried": true,
+   "pass": 1
+  },
+  {
+   "row": "C777",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "Mom's eyes drop to the skirt. Her skirt.",
+   "why": "noticing lives inside Mom's menu screen and the street description, nothing loose on a menu.",
+   "cause": null,
+   "note": false,
+   "screen_hash": "159f428bf367ae15",
+   "row_hash": "38b483431fa177b0",
+   "carried": true,
+   "pass": 1
+  },
+  {
+   "row": "C782",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "Keep your usual (5 min) \u00b7 Wear the sundress instead (5 min) \u00b7 Wear the leggings and sports top instead (5 min)",
+   "why": "the outfit choice is inside the dressing screen itself (opening.room), not a second link.",
+   "cause": null,
+   "note": false,
+   "screen_hash": "159f428bf367ae15",
+   "row_hash": "4c4d4a94c717f70f",
+   "carried": true,
+   "pass": 1
+  },
+  {
+   "row": "C794",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "Your street. The same row of houses, ... and a bus stop. Across the road, a neighbour stops...",
+   "why": "the street's variant repeats the identity sentence verbatim and appends the noticing line.",
+   "cause": null,
+   "note": false,
+   "screen_hash": "159f428bf367ae15",
+   "row_hash": "3281d513b7f90d6e",
+   "carried": true,
+   "pass": 1
+  },
+  {
+   "row": "C795",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "Across the road, a neighbour stops what he's doing and watches you all the way to the corner.",
+   "why": "re-entry change on the street is one event-style line by her clothes and the hour.",
+   "cause": null,
+   "note": false,
+   "screen_hash": "159f428bf367ae15",
+   "row_hash": "84d5bfb2a701bf90",
+   "carried": true,
+   "pass": 1
+  },
+  {
+   "row": "C804",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "Not while they're in here.",
+   "why": "Master Bedroom and Ryan's Room change with who is there (borrow greys while the room's people are in it); presence lines are P02's.",
+   "cause": null,
+   "note": false,
+   "screen_hash": "159f428bf367ae15",
+   "row_hash": "2aa951544edb45db",
+   "carried": true,
+   "pass": 1
+  },
+  {
+   "row": "C808",
+   "screen": "*",
+   "verdict": "N/A",
+   "line": "",
+   "why": "no map change in P07 (card skip).",
+   "cause": null,
+   "note": false,
+   "screen_hash": "159f428bf367ae15",
+   "row_hash": "73aff7401d6970a5",
+   "carried": true,
+   "pass": 1
+  },
+  {
+   "row": "C811",
+   "screen": "*",
+   "verdict": "N/A",
+   "line": "",
+   "why": "no map change in P07 (card skip).",
+   "cause": null,
+   "note": false,
+   "screen_hash": "159f428bf367ae15",
+   "row_hash": "ded1858e52e3be3a",
+   "carried": true,
+   "pass": 1
+  },
+  {
+   "row": "C889",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "Borrow Mom's things (5 min) / Done: time_progression_minutes = 5",
+   "why": "labels state durations equal to the spend; no clock time promised.",
+   "cause": null,
+   "note": false,
+   "screen_hash": "159f428bf367ae15",
+   "row_hash": "37967c45d79163fc",
+   "carried": true,
+   "pass": 1
+  },
+  {
+   "row": "C890",
+   "screen": "*",
+   "verdict": "N/A",
+   "line": "",
+   "why": "no repeating bill or count in P07.",
+   "cause": null,
+   "note": false,
+   "screen_hash": "159f428bf367ae15",
+   "row_hash": "3d716de4269fbd6c",
+   "carried": true,
+   "pass": 1
+  },
+  {
+   "row": "C892",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "{ type = \"time_of_day\", start_time = \"07:00\", end_time = \"21:00\" }",
+   "why": "the street line's hours are a condition, never written into the line.",
+   "cause": null,
+   "note": false,
+   "screen_hash": "159f428bf367ae15",
+   "row_hash": "1d8d188451bcb51e",
+   "carried": true,
+   "pass": 1
+  },
+  {
+   "row": "C897",
+   "screen": "*",
+   "verdict": "N/A",
+   "line": "",
+   "why": "no travel changed.",
+   "cause": null,
+   "note": false,
+   "screen_hash": "159f428bf367ae15",
+   "row_hash": "16b066aee3c1a937",
+   "carried": true,
+   "pass": 1
+  },
+  {
+   "row": "C900",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "Back in your room, you shut the door and let the towel drop.",
+   "why": "no P07 line says what time it is.",
+   "cause": null,
+   "note": false,
+   "screen_hash": "159f428bf367ae15",
+   "row_hash": "a4ef8ce78f554d6b",
+   "carried": true,
+   "pass": 1
+  },
+  {
+   "row": "C902",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "Across the road, a neighbour stops what he's doing and watches you all the way to the corner.",
+   "why": "at 20:59 (last minute, end exclusive) the line is still true: no light or hour named.",
+   "cause": null,
+   "note": false,
+   "screen_hash": "159f428bf367ae15",
+   "row_hash": "66462bdbadae0c77",
+   "carried": true,
+   "pass": 1
+  },
+  {
+   "row": "C903",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "",
+   "why": "no weekday named in any P07 line.",
+   "cause": null,
+   "note": false,
+   "screen_hash": "159f428bf367ae15",
+   "row_hash": "263890a884329d60",
+   "carried": true,
+   "pass": 1
+  },
+  {
+   "row": "C904",
+   "screen": "*",
+   "verdict": "N/A",
+   "line": "",
+   "why": "note row; P07 prints no clock time.",
+   "cause": null,
+   "note": false,
+   "screen_hash": "159f428bf367ae15",
+   "row_hash": "999816c6ed6cc232",
+   "carried": true,
+   "pass": 1
+  },
+  {
+   "row": "C906",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "",
+   "why": "no 'till X' label.",
+   "cause": null,
+   "note": false,
+   "screen_hash": "159f428bf367ae15",
+   "row_hash": "c257bba6d15edc3f",
+   "carried": true,
+   "pass": 1
+  },
+  {
+   "row": "C910",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "Keep your usual (5 min)",
+   "why": "every P07 button that spends time says so in the one '(N min)' form; 'Done' spends the 5 min the row label already named.",
+   "cause": null,
+   "note": false,
+   "screen_hash": "159f428bf367ae15",
+   "row_hash": "c86548143d50a17d",
+   "carried": true,
+   "pass": 1
+  },
+  {
+   "row": "C913",
+   "screen": "*",
+   "verdict": "N/A",
+   "line": "",
+   "why": "nothing in P07 is shut by its hours.",
+   "cause": null,
+   "note": false,
+   "screen_hash": "159f428bf367ae15",
+   "row_hash": "48bd82911a86ecbd",
+   "carried": true,
+   "pass": 1
+  },
+  {
+   "row": "C914",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "Borrow Mom's things (5 min) \u2014 Not while they're in here.",
+   "why": "borrow rows are shut by people, not the clock, so they grey with locked_text and show no hours, as the row asks.",
+   "cause": null,
+   "note": false,
+   "screen_hash": "159f428bf367ae15",
+   "row_hash": "5a326c2d5d8a0abd",
+   "carried": true,
+   "pass": 1
+  },
+  {
+   "row": "C915",
+   "screen": "*",
+   "verdict": "N/A",
+   "line": "",
+   "why": "no person's hours added.",
+   "cause": null,
+   "note": false,
+   "screen_hash": "159f428bf367ae15",
+   "row_hash": "46d8f12824d16c8b",
+   "carried": true,
+   "pass": 1
+  },
+  {
+   "row": "C916",
+   "screen": "*",
+   "verdict": "N/A",
+   "line": "",
+   "why": "no event that happens to her has hours here.",
+   "cause": null,
+   "note": false,
+   "screen_hash": "159f428bf367ae15",
+   "row_hash": "06706eb2d5bad3b5",
+   "carried": true,
+   "pass": 1
+  },
+  {
+   "row": "C920",
+   "screen": "*",
+   "verdict": "N/A",
+   "line": "",
+   "why": "no move added; P07's buttons are activities, not moves.",
+   "cause": null,
+   "note": false,
+   "screen_hash": "159f428bf367ae15",
+   "row_hash": "3b568acb10d6806b",
+   "carried": true,
+   "pass": 1
+  },
+  {
+   "row": "C921",
+   "screen": "*",
+   "verdict": "N/A",
+   "line": "",
+   "why": "no schedule window on borrow_hoodie",
+   "cause": null,
+   "note": true,
+   "screen_hash": "5718fc76f9905ff7",
+   "row_hash": "19da817e808ac3d6",
+   "carried": false,
+   "pass": 2
+  },
+  {
+   "row": "C921",
+   "screen": "borrow_hoodie.take",
+   "verdict": "N/A",
+   "line": "",
+   "why": "no window",
+   "cause": null,
+   "note": true,
+   "screen_hash": {
+    "text": "61a77c7fa2715c60",
+    "facts": "77447b04892972f0",
+    "all": "cec3a034e3ac0cb9"
+   },
+   "row_hash": "19da817e808ac3d6",
+   "carried": false,
+   "pass": 2
+  },
+  {
+   "row": "C921",
+   "screen": "mom_living_room.talk",
+   "verdict": "N/A",
+   "line": "",
+   "why": "no window on the talk screen",
+   "cause": null,
+   "note": true,
+   "screen_hash": {
+    "text": "bea6a579cecdd65d",
+    "facts": "cfda3d7c96f6f167",
+    "all": "8019d2454bae538d"
+   },
+   "row_hash": "19da817e808ac3d6",
+   "carried": false,
+   "pass": 2
+  },
+  {
+   "row": "C924",
+   "screen": "*",
+   "verdict": "N/A",
+   "line": "",
+   "why": "no travel changed.",
+   "cause": null,
+   "note": false,
+   "screen_hash": "159f428bf367ae15",
+   "row_hash": "ce540d1e01b7c301",
+   "carried": true,
+   "pass": 1
+  },
+  {
+   "row": "C926",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "",
+   "why": "clock moves only by minutes (5 min choices).",
+   "cause": null,
+   "note": false,
+   "screen_hash": "159f428bf367ae15",
+   "row_hash": "8cd1b7e3576dc7b5",
+   "carried": true,
+   "pass": 1
+  },
+  {
+   "row": "C927",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "time_progression_minutes = 5",
+   "why": "every exit declares its time",
+   "cause": null,
+   "note": true,
+   "screen_hash": "5718fc76f9905ff7",
+   "row_hash": "1e009d83817fb566",
+   "carried": false,
+   "pass": 2
+  },
+  {
+   "row": "C927",
+   "screen": "borrow_hoodie.take",
+   "verdict": "PASS",
+   "line": "Done, time_progression_minutes = 5",
+   "why": "time declared",
+   "cause": null,
+   "note": true,
+   "screen_hash": {
+    "text": "61a77c7fa2715c60",
+    "facts": "77447b04892972f0",
+    "all": "cec3a034e3ac0cb9"
+   },
+   "row_hash": "1e009d83817fb566",
+   "carried": false,
+   "pass": 2
+  },
+  {
+   "row": "C927",
+   "screen": "mom_living_room.talk",
+   "verdict": "PASS",
+   "line": "Done, time_progression_minutes = 5",
+   "why": "time declared",
+   "cause": null,
+   "note": true,
+   "screen_hash": {
+    "text": "bea6a579cecdd65d",
+    "facts": "cfda3d7c96f6f167",
+    "all": "8019d2454bae538d"
+   },
+   "row_hash": "1e009d83817fb566",
+   "carried": false,
+   "pass": 2
+  },
+  {
+   "row": "C928",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "",
+   "why": "no time printed into prose.",
+   "cause": null,
+   "note": false,
+   "screen_hash": "159f428bf367ae15",
+   "row_hash": "799e1dd153166b6d",
+   "carried": true,
+   "pass": 1
+  },
+  {
+   "row": "C929",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "Wear the sundress instead (5 min)",
+   "why": "activity time is on the label.",
+   "cause": null,
+   "note": false,
+   "screen_hash": "159f428bf367ae15",
+   "row_hash": "33a2ca367c2aac5b",
+   "carried": true,
+   "pass": 1
+  },
+  {
+   "row": "C930",
+   "screen": "*",
+   "verdict": "N/A",
+   "line": "",
+   "why": "no windowed work in P07.",
+   "cause": null,
+   "note": false,
+   "screen_hash": "159f428bf367ae15",
+   "row_hash": "97d54d350dd4ee77",
+   "carried": true,
+   "pass": 1
+  },
+  {
+   "row": "C931",
+   "screen": "*",
+   "verdict": "N/A",
+   "line": "",
+   "why": "no time_of_day on borrow_hoodie",
+   "cause": null,
+   "note": true,
+   "screen_hash": "5718fc76f9905ff7",
+   "row_hash": "1b8984f52b99537e",
+   "carried": false,
+   "pass": 2
+  },
+  {
+   "row": "C931",
+   "screen": "borrow_hoodie.take",
+   "verdict": "N/A",
+   "line": "",
+   "why": "no time_of_day",
+   "cause": null,
+   "note": true,
+   "screen_hash": {
+    "text": "61a77c7fa2715c60",
+    "facts": "77447b04892972f0",
+    "all": "cec3a034e3ac0cb9"
+   },
+   "row_hash": "1b8984f52b99537e",
+   "carried": false,
+   "pass": 2
+  },
+  {
+   "row": "C931",
+   "screen": "mom_living_room.talk",
+   "verdict": "N/A",
+   "line": "",
+   "why": "no time_of_day",
+   "cause": null,
+   "note": true,
+   "screen_hash": {
+    "text": "bea6a579cecdd65d",
+    "facts": "cfda3d7c96f6f167",
+    "all": "8019d2454bae538d"
+   },
+   "row_hash": "1b8984f52b99537e",
+   "carried": false,
+   "pass": 2
+  },
+  {
+   "row": "C953",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "Borrow one of his hoodies (5 min)",
+   "why": "label carries its time cost before the click.",
+   "cause": null,
+   "note": false,
+   "screen_hash": "159f428bf367ae15",
+   "row_hash": "26f84fb90a0ef795",
+   "carried": true,
+   "pass": 1
+  },
+  {
+   "row": "C954",
+   "screen": "*",
+   "verdict": "N/A",
+   "line": "",
+   "why": "no pay.",
+   "cause": null,
+   "note": false,
+   "screen_hash": "159f428bf367ae15",
+   "row_hash": "a4837b8af6d54bb1",
+   "carried": true,
+   "pass": 1
+  },
+  {
+   "row": "C961",
+   "screen": "*",
+   "verdict": "N/A",
+   "line": "",
+   "why": "no meter, no no.",
+   "cause": null,
+   "note": false,
+   "screen_hash": "159f428bf367ae15",
+   "row_hash": "623576cc5d249369",
+   "carried": true,
+   "pass": 1
+  },
+  {
+   "row": "L106",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "",
+   "why": "no presence claim on borrow_hoodie; Ryan absent by trigger",
+   "cause": null,
+   "note": false,
+   "screen_hash": "5718fc76f9905ff7",
+   "row_hash": "759e6667d7fc3183",
+   "carried": false,
+   "pass": 2
+  },
+  {
+   "row": "L106",
+   "screen": "borrow_hoodie.take",
+   "verdict": "PASS",
+   "line": "You pick the grey one up off his floor.",
+   "why": "claims no one there; trigger requires Ryan absent",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "61a77c7fa2715c60",
+    "facts": "77447b04892972f0",
+    "all": "cec3a034e3ac0cb9"
+   },
+   "row_hash": "759e6667d7fc3183",
+   "carried": false,
+   "pass": 2
+  },
+  {
+   "row": "L106",
+   "screen": "mom_living_room.talk",
+   "verdict": "PASS",
+   "line": "She doesn't look at Mark.",
+   "why": "Mark named only in the npc_mark is_present group; Mom required by requires_npc",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "bea6a579cecdd65d",
+    "facts": "cfda3d7c96f6f167",
+    "all": "8019d2454bae538d"
+   },
+   "row_hash": "759e6667d7fc3183",
+   "carried": false,
+   "pass": 2
+  },
+  {
+   "row": "L119",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "pool_dir = \"body/opening_dressing_t4\", pool = 1",
+   "why": "pool written, 1 for a one-time spot.",
+   "cause": null,
+   "note": false,
+   "screen_hash": "159f428bf367ae15",
+   "row_hash": "18ef41501e0b23c3",
+   "carried": true,
+   "pass": 1
+  },
+  {
+   "row": "L120",
+   "screen": "*",
+   "verdict": "N/A",
+   "line": "",
+   "why": "no look picture.",
+   "cause": null,
+   "note": false,
+   "screen_hash": "159f428bf367ae15",
+   "row_hash": "22461386046b4605",
+   "carried": true,
+   "pass": 1
+  },
+  {
+   "row": "L121",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "",
+   "why": "the body moment has its picture; borrow screens (chores) and the street notice get none.",
+   "cause": null,
+   "note": false,
+   "screen_hash": "159f428bf367ae15",
+   "row_hash": "cddfa55c18e5c7b7",
+   "carried": true,
+   "pass": 1
+  },
+  {
+   "row": "L125",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "",
+   "why": "the clip follows the towel/dressing paragraph; it doesn't open the screen.",
+   "cause": null,
+   "note": false,
+   "screen_hash": "159f428bf367ae15",
+   "row_hash": "259dda0a0553e751",
+   "carried": true,
+   "pass": 1
+  },
+  {
+   "row": "L147",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "Borrow Mom's things (5 min)",
+   "why": "Master Bedroom and Ryan's Room each gain one thing she can do alone; when blocked it says why.",
+   "cause": null,
+   "note": false,
+   "screen_hash": "159f428bf367ae15",
+   "row_hash": "5dea5707be5e7e0a",
+   "carried": true,
+   "pass": 1
+  },
+  {
+   "row": "L163",
+   "screen": "*",
+   "verdict": "N/A",
+   "line": "",
+   "why": "no rule removed.",
+   "cause": null,
+   "note": false,
+   "screen_hash": "159f428bf367ae15",
+   "row_hash": "00a617ab9b4e9cd4",
+   "carried": true,
+   "pass": 1
+  },
+  {
+   "row": "L167",
+   "screen": "*",
+   "verdict": "N/A",
+   "line": "",
+   "why": "no row here has hours that differ by day",
+   "cause": null,
+   "note": false,
+   "screen_hash": "5718fc76f9905ff7",
+   "row_hash": "adf7bb3f8b632ac3",
+   "carried": false,
+   "pass": 2
+  },
+  {
+   "row": "L167",
+   "screen": "borrow_hoodie.take",
+   "verdict": "N/A",
+   "line": "",
+   "why": "no hours",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "61a77c7fa2715c60",
+    "facts": "77447b04892972f0",
+    "all": "cec3a034e3ac0cb9"
+   },
+   "row_hash": "adf7bb3f8b632ac3",
+   "carried": false,
+   "pass": 2
+  },
+  {
+   "row": "L167",
+   "screen": "mom_living_room.talk",
+   "verdict": "N/A",
+   "line": "",
+   "why": "no hours",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "bea6a579cecdd65d",
+    "facts": "cfda3d7c96f6f167",
+    "all": "8019d2454bae538d"
+   },
+   "row_hash": "adf7bb3f8b632ac3",
+   "carried": false,
+   "pass": 2
+  },
+  {
+   "row": "L71",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "The air's cold on your wet skin, and your nipples go tight.",
+   "why": "the body moment happens to her; she chooses only clothes, no sexual act.",
+   "cause": null,
+   "note": false,
+   "screen_hash": "159f428bf367ae15",
+   "row_hash": "20d25a1f144ab051",
+   "carried": true,
+   "pass": 1
+  },
+  {
+   "row": "L97",
+   "screen": "*",
+   "verdict": "N/A",
+   "line": "",
+   "why": "no walk-in.",
+   "cause": null,
+   "note": false,
+   "screen_hash": "159f428bf367ae15",
+   "row_hash": "2bfb9527e76ad93b",
+   "carried": true,
+   "pass": 1
+  },
+  {
+   "row": "body-moments#1",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "Media: 1 spot, a body moment",
+   "why": "card names the dressing as a body moment.",
+   "cause": null,
+   "note": false,
+   "screen_hash": "159f428bf367ae15",
+   "row_hash": "eccc0ab561a445d0",
+   "carried": true,
+   "pass": 1
+  },
+  {
+   "row": "body-moments#2",
+   "screen": "opening.room",
+   "verdict": "PASS",
+   "line": "you shut the door and let the towel drop. The air's cold on your wet skin, and your nipples go tight.",
+   "why": "on her body, at stage 1, happening to her.",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "5aa193b86273e353",
+    "facts": "7f5851883cb8d732",
+    "all": "2267c6fc177cf08c"
+   },
+   "row_hash": "3d0e66c4ff2e35e8",
+   "carried": true,
+   "pass": 1
+  },
+  {
+   "row": "body-moments#3",
+   "screen": "opening.room",
+   "verdict": "PASS",
+   "line": "Back in your room, you shut the door and let the towel drop.",
+   "why": "the dressing is written, not skipped, and garments move on its buttons.",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "5aa193b86273e353",
+    "facts": "7f5851883cb8d732",
+    "all": "2267c6fc177cf08c"
+   },
+   "row_hash": "31555e41e42a56f4",
+   "carried": true,
+   "pass": 1
+  },
+  {
+   "row": "body-moments#4",
+   "screen": "opening.room",
+   "verdict": "PASS",
+   "line": "A woman of 18 in a small bedroom, a towel on the floor, stepping into jeans, wet hair. Alone.",
+   "why": "one picture of her after the body paragraph, _t4, gif with 'gif' in search, place named.",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "5aa193b86273e353",
+    "facts": "7f5851883cb8d732",
+    "all": "2267c6fc177cf08c"
+   },
+   "row_hash": "777373934b40b8fe",
+   "carried": true,
+   "pass": 1
+  },
+  {
+   "row": "body-moments#5",
+   "screen": "opening.room",
+   "verdict": "PASS",
+   "line": "pool = 1",
+   "why": "one-time scene, pool 1.",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "5aa193b86273e353",
+    "facts": "7f5851883cb8d732",
+    "all": "2267c6fc177cf08c"
+   },
+   "row_hash": "57bdf33c1e490daf",
+   "carried": true,
+   "pass": 1
+  },
+  {
+   "row": "body-moments#6",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "",
+   "why": "no meter moves.",
+   "cause": null,
+   "note": false,
+   "screen_hash": "159f428bf367ae15",
+   "row_hash": "61af55b717f75400",
+   "carried": true,
+   "pass": 1
+  },
+  {
+   "row": "body-moments#7",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "",
+   "why": "no touch or walk-in scoped in; the moment's body is kept.",
+   "cause": null,
+   "note": false,
+   "screen_hash": "159f428bf367ae15",
+   "row_hash": "a541004c4012d217",
+   "carried": true,
+   "pass": 1
+  },
+  {
+   "row": "clock#1",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "Borrow Mom's things (5 min)",
+   "why": "every P07 button shows its time.",
+   "cause": null,
+   "note": false,
+   "screen_hash": "159f428bf367ae15",
+   "row_hash": "cd89df2f76a7be89",
+   "carried": true,
+   "pass": 1
+  },
+  {
+   "row": "clock#2",
+   "screen": "*",
+   "verdict": "N/A",
+   "line": "",
+   "why": "no travel.",
+   "cause": null,
+   "note": false,
+   "screen_hash": "159f428bf367ae15",
+   "row_hash": "1a52b17c19333377",
+   "carried": true,
+   "pass": 1
+  },
+  {
+   "row": "clock#3",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "",
+   "why": "no clock time in story text; street hours are a condition.",
+   "cause": null,
+   "note": false,
+   "screen_hash": "159f428bf367ae15",
+   "row_hash": "aae8f146c8ec933d",
+   "carried": true,
+   "pass": 1
+  },
+  {
+   "row": "clock#4",
+   "screen": "*",
+   "verdict": "N/A",
+   "line": "",
+   "why": "no place with hours.",
+   "cause": null,
+   "note": false,
+   "screen_hash": "159f428bf367ae15",
+   "row_hash": "c33118361d16b379",
+   "carried": true,
+   "pass": 1
+  },
+  {
+   "row": "clock#5",
+   "screen": "*",
+   "verdict": "N/A",
+   "line": "",
+   "why": "no person's hours.",
+   "cause": null,
+   "note": false,
+   "screen_hash": "159f428bf367ae15",
+   "row_hash": "95c5edec9e714e7b",
+   "carried": true,
+   "pass": 1
+  },
+  {
+   "row": "clock#6",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "",
+   "why": "durations only.",
+   "cause": null,
+   "note": false,
+   "screen_hash": "159f428bf367ae15",
+   "row_hash": "31fd30fb07702bc9",
+   "carried": true,
+   "pass": 1
+  },
+  {
+   "row": "clock#7",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "",
+   "why": "no weekday named.",
+   "cause": null,
+   "note": false,
+   "screen_hash": "159f428bf367ae15",
+   "row_hash": "313c48a91780f62b",
+   "carried": true,
+   "pass": 1
+  },
+  {
+   "row": "clock#8",
+   "screen": "*",
+   "verdict": "N/A",
+   "line": "",
+   "why": "no repeating bill or count.",
+   "cause": null,
+   "note": false,
+   "screen_hash": "159f428bf367ae15",
+   "row_hash": "f0c2400d02519978",
+   "carried": true,
+   "pass": 1
+  },
+  {
+   "row": "clock#9",
+   "screen": "*",
+   "verdict": "N/A",
+   "line": "",
+   "why": "no P07 activity has different hours on different days (street line 07:00-21:00 every day)",
+   "cause": null,
+   "note": false,
+   "screen_hash": "5718fc76f9905ff7",
+   "row_hash": "5d697f6bcd9f82de",
+   "carried": false,
+   "pass": 2
+  },
+  {
+   "row": "clothes#1",
+   "screen": "hood_street",
+   "verdict": "FAIL",
+   "line": "{ type = \"worn_exposure\", operator = \"gte\", value = 1 }",
+   "why": "worn_exposure is still read once in 7_final_game.toml (line 371); step 1 asks 3 readers (door, line, event); ENI's deferral is not a waiver",
+   "cause": "P07n1-c1",
+   "note": false,
+   "screen_hash": null,
+   "row_hash": "468c4283220dd743",
+   "carried": false,
+   "pass": 2
+  },
+  {
+   "row": "clothes#2",
+   "screen": "borrow_hoodie.take",
+   "verdict": "PASS",
+   "line": "wardrobeEffects = [{ action = \"add\", item_id = \"ryan_hoodie\" }]",
+   "why": "way in is the add; now read by Ryan's talks (ryan_hoodie equipped: \"That's my hoodie.\")",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "61a77c7fa2715c60",
+    "facts": "77447b04892972f0",
+    "all": "cec3a034e3ac0cb9"
+   },
+   "row_hash": "78af3a222a96ceef",
+   "carried": false,
+   "pass": 2
+  },
+  {
+   "row": "clothes#3",
+   "screen": "opening.room",
+   "verdict": "PASS",
+   "line": "Keep your usual \u00b7 Wear the sundress instead \u00b7 Wear the leggings and sports top instead",
+   "why": "her clothes go on by wardrobeEffects at the dressing beat, 3 whole outfits, full wardrobe only in her bedroom.",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "5aa193b86273e353",
+    "facts": "7f5851883cb8d732",
+    "all": "2267c6fc177cf08c"
+   },
+   "row_hash": "afe7079cb8699d23",
+   "carried": true,
+   "pass": 1
+  },
+  {
+   "row": "clothes#4",
+   "screen": "borrow_mom.take",
+   "verdict": "PASS",
+   "line": "You take a short skirt, a low-cut top and the heels she never wears.",
+   "why": "the beat that adds them names them as taken, not worn; the old ungated 'on your chair' line is gone",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "99e09af6839ccfd3",
+    "facts": "8a73da8b0cd3be62",
+    "all": "1e82341acbaa70b9"
+   },
+   "row_hash": "7c2dc2ddee173de4",
+   "carried": false,
+   "pass": 2
+  },
+  {
+   "row": "clothes#5",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "",
+   "why": "opening offers whole outfits in one click; the bedroom wardrobe page (saved_outfits off) takes 1\u20133 item clicks per change (sundress 1, leggings+top 2, Mom's three 3).",
+   "cause": null,
+   "note": false,
+   "screen_hash": "159f428bf367ae15",
+   "row_hash": "58e88b96e1566182",
+   "carried": true,
+   "pass": 1
+  },
+  {
+   "row": "clothes#6",
+   "screen": "hood_street",
+   "verdict": "PASS",
+   "line": "You're not going out like this. Go back up to your room and put on a top and a bottom, or a dress.",
+   "why": "says what's missing in her voice and where to change; way out is Go back (wardrobe_anywhere false)",
+   "cause": null,
+   "note": false,
+   "screen_hash": null,
+   "row_hash": "a704975690f5df41",
+   "carried": false,
+   "pass": 2
+  },
+  {
+   "row": "clothes#7",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "Borrow Mom's things (5 min) \u2014 Not while they're in here.",
+   "why": "blocked rows grey with locked_text, never vanish; no clothes-gated button in P07 (run/workout are P33).",
+   "cause": null,
+   "note": false,
+   "screen_hash": "159f428bf367ae15",
+   "row_hash": "bb14def6ad6b8f84",
+   "carried": true,
+   "pass": 1
+  },
+  {
+   "row": "clothes#8",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "Mom's eyes drop to the skirt. Her skirt. Her mouth goes tight, and she says nothing.",
+   "why": "one line per noticed state, in Mom's manner and the street's; no meter moves.",
+   "cause": null,
+   "note": false,
+   "screen_hash": "159f428bf367ae15",
+   "row_hash": "e75be85fc8419181",
+   "carried": true,
+   "pass": 1
+  },
+  {
+   "row": "clothes#9",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "Mom's short skirt / Her skirt.",
+   "why": "borrowed garments stay Mom's in name and text.",
+   "cause": null,
+   "note": false,
+   "screen_hash": "159f428bf367ae15",
+   "row_hash": "fa33eaefa120f48c",
+   "carried": true,
+   "pass": 1
+  },
+  {
+   "row": "heat#1",
+   "screen": "*",
+   "verdict": "N/A",
+   "line": "",
+   "why": "game-wide share, read at release.",
+   "cause": null,
+   "note": false,
+   "screen_hash": "159f428bf367ae15",
+   "row_hash": "a9d1b7304239e330",
+   "carried": true,
+   "pass": 1
+  },
+  {
+   "row": "heat#2",
+   "screen": "opening.room",
+   "verdict": "PASS",
+   "line": "let the towel drop ... your nipples go tight",
+   "why": "what shows (bare, alone) sets a low stage-1 level.",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "5aa193b86273e353",
+    "facts": "7f5851883cb8d732",
+    "all": "2267c6fc177cf08c"
+   },
+   "row_hash": "e686b407357d5dfe",
+   "carried": true,
+   "pass": 1
+  },
+  {
+   "row": "heat#3",
+   "screen": "*",
+   "verdict": "N/A",
+   "line": "",
+   "why": "no offer in P07.",
+   "cause": null,
+   "note": false,
+   "screen_hash": "159f428bf367ae15",
+   "row_hash": "51c788f9cf88c547",
+   "carried": true,
+   "pass": 1
+  },
+  {
+   "row": "heat#4",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "",
+   "why": "stage 1 only: a body moment that happens to her; nothing sexual she does.",
+   "cause": null,
+   "note": false,
+   "screen_hash": "159f428bf367ae15",
+   "row_hash": "02f78ddf483ec147",
+   "carried": true,
+   "pass": 1
+  },
+  {
+   "row": "heat#5",
+   "screen": "*",
+   "verdict": "N/A",
+   "line": "",
+   "why": "no accident with a housemate in P07.",
+   "cause": null,
+   "note": false,
+   "screen_hash": "159f428bf367ae15",
+   "row_hash": "b3e99b6034510032",
+   "carried": true,
+   "pass": 1
+  },
+  {
+   "row": "heat#6",
+   "screen": "*",
+   "verdict": "N/A",
+   "line": "",
+   "why": "no explicit beat.",
+   "cause": null,
+   "note": false,
+   "screen_hash": "159f428bf367ae15",
+   "row_hash": "a97dfd91d1cd6aae",
+   "carried": true,
+   "pass": 1
+  },
+  {
+   "row": "heat#7",
+   "screen": "*",
+   "verdict": "N/A",
+   "line": "",
+   "why": "no charged scene with another person in P07; the dressing is a solo body moment (B13).",
+   "cause": null,
+   "note": false,
+   "screen_hash": "159f428bf367ae15",
+   "row_hash": "f75e08aaaa6bb543",
+   "carried": true,
+   "pass": 1
+  },
+  {
+   "row": "media#1",
+   "screen": "opening.room",
+   "verdict": "PASS",
+   "line": "...and your nipples go tight. ... Your usual. [picture]",
+   "why": "the spot sits on the body paragraph; the hall screen before has its own spot (P13's).",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "5aa193b86273e353",
+    "facts": "7f5851883cb8d732",
+    "all": "2267c6fc177cf08c"
+   },
+   "row_hash": "3641bf707d9adfce",
+   "carried": true,
+   "pass": 1
+  },
+  {
+   "row": "media#2",
+   "screen": "*",
+   "verdict": "N/A",
+   "line": "",
+   "why": "no place picture changed.",
+   "cause": null,
+   "note": false,
+   "screen_hash": "159f428bf367ae15",
+   "row_hash": "6fbfd98c2bfee006",
+   "carried": true,
+   "pass": 1
+  },
+  {
+   "row": "media#3",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "",
+   "why": "borrow screens and the street line (chores, notices) get no spot.",
+   "cause": null,
+   "note": false,
+   "screen_hash": "159f428bf367ae15",
+   "row_hash": "8c75b0d488b188e2",
+   "carried": true,
+   "pass": 1
+  },
+  {
+   "row": "media#4",
+   "screen": "opening.room",
+   "verdict": "PASS",
+   "line": "pool = 1",
+   "why": "one-time, 1.",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "5aa193b86273e353",
+    "facts": "7f5851883cb8d732",
+    "all": "2267c6fc177cf08c"
+   },
+   "row_hash": "03599fc0722690b6",
+   "carried": true,
+   "pass": 1
+  },
+  {
+   "row": "media#5",
+   "screen": "*",
+   "verdict": "N/A",
+   "line": "",
+   "why": "no look.",
+   "cause": null,
+   "note": false,
+   "screen_hash": "159f428bf367ae15",
+   "row_hash": "2cf5e3607ccecd4a",
+   "carried": true,
+   "pass": 1
+  },
+  {
+   "row": "media#6",
+   "screen": "opening.room",
+   "verdict": "PASS",
+   "line": "woman 18 bedroom towel on floor stepping into jeans gif",
+   "why": "something happens, so a gif with 'gif' in the search.",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "5aa193b86273e353",
+    "facts": "7f5851883cb8d732",
+    "all": "2267c6fc177cf08c"
+   },
+   "row_hash": "3016751837a9b0a0",
+   "carried": true,
+   "pass": 1
+  },
+  {
+   "row": "media#7",
+   "screen": "opening.room",
+   "verdict": "PASS",
+   "line": "A woman of 18 in a small bedroom, a towel on the floor, stepping into jeans, wet hair.",
+   "why": "age, place, what she wears on that visit, two plain searches.",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "5aa193b86273e353",
+    "facts": "7f5851883cb8d732",
+    "all": "2267c6fc177cf08c"
+   },
+   "row_hash": "eff6dc1369755c34",
+   "carried": true,
+   "pass": 1
+  },
+  {
+   "row": "opening#1",
+   "screen": "*",
+   "verdict": "N/A",
+   "line": "",
+   "why": "P13's screens; P07 changed only screen 7's opening line and its buttons.",
+   "cause": null,
+   "note": false,
+   "screen_hash": "159f428bf367ae15",
+   "row_hash": "88267cd95a4d6da5",
+   "carried": true,
+   "pass": 1
+  },
+  {
+   "row": "opening#2",
+   "screen": "*",
+   "verdict": "N/A",
+   "line": "",
+   "why": "P13's screens; P07 changed only screen 7's opening line and its buttons.",
+   "cause": null,
+   "note": false,
+   "screen_hash": "159f428bf367ae15",
+   "row_hash": "16087c5ccde09fbf",
+   "carried": true,
+   "pass": 1
+  },
+  {
+   "row": "opening#3",
+   "screen": "*",
+   "verdict": "N/A",
+   "line": "",
+   "why": "P13's screens; P07 changed only screen 7's opening line and its buttons.",
+   "cause": null,
+   "note": false,
+   "screen_hash": "159f428bf367ae15",
+   "row_hash": "5a60297b0e998c5c",
+   "carried": true,
+   "pass": 1
+  },
+  {
+   "row": "opening#4",
+   "screen": "*",
+   "verdict": "N/A",
+   "line": "",
+   "why": "P13's screens; P07 changed only screen 7's opening line and its buttons.",
+   "cause": null,
+   "note": false,
+   "screen_hash": "159f428bf367ae15",
+   "row_hash": "3847f3dafe2643d2",
+   "carried": true,
+   "pass": 1
+  },
+  {
+   "row": "opening#5",
+   "screen": "*",
+   "verdict": "N/A",
+   "line": "",
+   "why": "P13's screens; P07 changed only screen 7's opening line and its buttons.",
+   "cause": null,
+   "note": false,
+   "screen_hash": "159f428bf367ae15",
+   "row_hash": "8b7d05eb7bf07424",
+   "carried": true,
+   "pass": 1
+  },
+  {
+   "row": "opening#6",
+   "screen": "opening.sums",
+   "verdict": "PASS",
+   "line": "<strong>Pay your own way.</strong> Pay Mark your share every Sunday.",
+   "why": "the dressing hands to the sums screen with the card and plain lines (P13's, unchanged by P07).",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "a541a1c36e0d9cff",
+    "facts": "948f9c11285ba2f9",
+    "all": "6058a350418e59c0"
+   },
+   "row_hash": "9042830eeab286c8",
+   "carried": true,
+   "pass": 1
+  },
+  {
+   "row": "opening#7",
+   "screen": "*",
+   "verdict": "N/A",
+   "line": "",
+   "why": "the hand-over is P13's.",
+   "cause": null,
+   "note": false,
+   "screen_hash": "159f428bf367ae15",
+   "row_hash": "001a96630041e1b1",
+   "carried": true,
+   "pass": 1
+  },
+  {
+   "row": "people#1",
+   "screen": "*",
+   "verdict": "N/A",
+   "line": "",
+   "why": "no meeting.",
+   "cause": null,
+   "note": false,
+   "screen_hash": "159f428bf367ae15",
+   "row_hash": "3ca322fe98f5dab6",
+   "carried": true,
+   "pass": 1
+  },
+  {
+   "row": "people#10",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "",
+   "why": "borrowing is a room system, not a person's action; Mom's notice is inside her menu.",
+   "cause": null,
+   "note": false,
+   "screen_hash": "159f428bf367ae15",
+   "row_hash": "4a994154015ae37d",
+   "carried": true,
+   "pass": 1
+  },
+  {
+   "row": "people#2",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "Your mom and Mark's room.",
+   "why": "relation and name both where Mark and Mom are named.",
+   "cause": null,
+   "note": false,
+   "screen_hash": "159f428bf367ae15",
+   "row_hash": "77207820edd1c3a4",
+   "carried": true,
+   "pass": 1
+  },
+  {
+   "row": "people#3",
+   "screen": "*",
+   "verdict": "N/A",
+   "line": "",
+   "why": "no unmet person on P07 screens; the neighbour is an unnamed role.",
+   "cause": null,
+   "note": false,
+   "screen_hash": "159f428bf367ae15",
+   "row_hash": "5f60eac9fd509c6c",
+   "carried": true,
+   "pass": 1
+  },
+  {
+   "row": "people#4",
+   "screen": "*",
+   "verdict": "N/A",
+   "line": "",
+   "why": "nobody acts on her.",
+   "cause": null,
+   "note": false,
+   "screen_hash": "159f428bf367ae15",
+   "row_hash": "3f52fa27dd3a5bfa",
+   "carried": true,
+   "pass": 1
+  },
+  {
+   "row": "people#5",
+   "screen": "*",
+   "verdict": "N/A",
+   "line": "",
+   "why": "no offer.",
+   "cause": null,
+   "note": false,
+   "screen_hash": "159f428bf367ae15",
+   "row_hash": "1326d7ac8cba5298",
+   "carried": true,
+   "pass": 1
+  },
+  {
+   "row": "people#6",
+   "screen": "talk_mom.hub",
+   "verdict": "PASS",
+   "line": "Her mouth goes tight, and she says nothing.",
+   "why": "Mom's notice is her own manner: silent, tight-mouthed.",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "e91be15be4ce7f52",
+    "facts": "da371d87f63ca5a9",
+    "all": "326a8bd75817c3c0"
+   },
+   "row_hash": "0b522d7eb38d75bb",
+   "carried": true,
+   "pass": 1
+  },
+  {
+   "row": "people#7",
+   "screen": "talk_mom.hub",
+   "verdict": "PASS",
+   "line": "[picture] then Mom's eyes drop to the skirt.",
+   "why": "the garment line sits under her presence line and her one picture; talk screens unchanged.",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "e91be15be4ce7f52",
+    "facts": "da371d87f63ca5a9",
+    "all": "326a8bd75817c3c0"
+   },
+   "row_hash": "b03ec1f9649681a0",
+   "carried": true,
+   "pass": 1
+  },
+  {
+   "row": "people#8",
+   "screen": "*",
+   "verdict": "N/A",
+   "line": "",
+   "why": "no meter.",
+   "cause": null,
+   "note": false,
+   "screen_hash": "159f428bf367ae15",
+   "row_hash": "ba17b4df73559422",
+   "carried": true,
+   "pass": 1
+  },
+  {
+   "row": "people#9",
+   "screen": "*",
+   "verdict": "N/A",
+   "line": "",
+   "why": "no arrival.",
+   "cause": null,
+   "note": false,
+   "screen_hash": "159f428bf367ae15",
+   "row_hash": "a73dd8f1e77941ca",
+   "carried": true,
+   "pass": 1
+  },
+  {
+   "row": "places#1",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "Ryan's room. Clothes on the floor, the curtains shut, and it smells like him.",
+   "why": "identity lines unchanged by P07 except the street, whose variant keeps it.",
+   "cause": null,
+   "note": false,
+   "screen_hash": "159f428bf367ae15",
+   "row_hash": "18252966b4327f58",
+   "carried": true,
+   "pass": 1
+  },
+  {
+   "row": "places#2",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "",
+   "why": "no presence line added; borrow greys by the room's people per their rows.",
+   "cause": null,
+   "note": false,
+   "screen_hash": "159f428bf367ae15",
+   "row_hash": "3ab79adc34668b04",
+   "carried": true,
+   "pass": 1
+  },
+  {
+   "row": "places#3",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "",
+   "why": "menus gain only a system row (borrow).",
+   "cause": null,
+   "note": false,
+   "screen_hash": "159f428bf367ae15",
+   "row_hash": "56d056c80da49bb6",
+   "carried": true,
+   "pass": 1
+  },
+  {
+   "row": "places#4",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "Borrow one of his hoodies (5 min)",
+   "why": "short labels with cost.",
+   "cause": null,
+   "note": false,
+   "screen_hash": "159f428bf367ae15",
+   "row_hash": "ada53ed66015c980",
+   "carried": true,
+   "pass": 1
+  },
+  {
+   "row": "places#5",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "Not while Ryan's in here.",
+   "why": "not-now says why.",
+   "cause": null,
+   "note": false,
+   "screen_hash": "159f428bf367ae15",
+   "row_hash": "90ec575adee9bf74",
+   "carried": true,
+   "pass": 1
+  },
+  {
+   "row": "places#6",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "",
+   "why": "Master Bedroom and Ryan's Room each now hold one solo thing.",
+   "cause": null,
+   "note": false,
+   "screen_hash": "159f428bf367ae15",
+   "row_hash": "f2bc5f0f10c64c4b",
+   "carried": true,
+   "pass": 1
+  },
+  {
+   "row": "places#7",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "",
+   "why": "street stays a thoroughfare; its line only notices.",
+   "cause": null,
+   "note": false,
+   "screen_hash": "159f428bf367ae15",
+   "row_hash": "2a095bf54f175e5e",
+   "carried": true,
+   "pass": 1
+  },
+  {
+   "row": "places#8",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "",
+   "why": "borrow screens are one or two sentences.",
+   "cause": null,
+   "note": false,
+   "screen_hash": "159f428bf367ae15",
+   "row_hash": "c3ea8d01465e7298",
+   "carried": true,
+   "pass": 1
+  },
+  {
+   "row": "places#9",
+   "screen": "*",
+   "verdict": "N/A",
+   "line": "",
+   "why": "no first-visit screen or anchor change.",
+   "cause": null,
+   "note": false,
+   "screen_hash": "159f428bf367ae15",
+   "row_hash": "f4cd9ab5f62bc6fc",
+   "carried": true,
+   "pass": 1
+  },
+  {
+   "row": "voice#1",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "You pick the grey one up off his floor. It's huge on you, and it smells like him.",
+   "why": "second person, short sentences.",
+   "cause": null,
+   "note": false,
+   "screen_hash": "159f428bf367ae15",
+   "row_hash": "b8e8afcb32208b40",
+   "carried": true,
+   "pass": 1
+  },
+  {
+   "row": "voice#2",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "Her mouth goes tight",
+   "why": "feelings on the body.",
+   "cause": null,
+   "note": false,
+   "screen_hash": "159f428bf367ae15",
+   "row_hash": "a40d4073409a2705",
+   "carried": true,
+   "pass": 1
+  },
+  {
+   "row": "voice#3",
+   "screen": "opening.room",
+   "verdict": "PASS",
+   "line": "your nipples go tight",
+   "why": "arousal on her body.",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "5aa193b86273e353",
+    "facts": "7f5851883cb8d732",
+    "all": "2267c6fc177cf08c"
+   },
+   "row_hash": "4777d2c1251214c2",
+   "carried": true,
+   "pass": 1
+  },
+  {
+   "row": "voice#4",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "",
+   "why": "no italics.",
+   "cause": null,
+   "note": false,
+   "screen_hash": "159f428bf367ae15",
+   "row_hash": "ac2fdd7245f436db",
+   "carried": true,
+   "pass": 1
+  },
+  {
+   "row": "voice#5",
+   "screen": "*",
+   "verdict": "N/A",
+   "line": "",
+   "why": "P07's lines are solo or a deliberate silent notice; Mom's talk screens are P42's.",
+   "cause": null,
+   "note": false,
+   "screen_hash": "159f428bf367ae15",
+   "row_hash": "7bbdd4290054e601",
+   "carried": true,
+   "pass": 1
+  },
+  {
+   "row": "voice#6",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "You take a short skirt, a low-cut top and the heels she never wears",
+   "why": "plain and concrete.",
+   "cause": null,
+   "note": false,
+   "screen_hash": "159f428bf367ae15",
+   "row_hash": "df1f5dc8b6d21538",
+   "carried": true,
+   "pass": 1
+  },
+  {
+   "row": "voice#7",
+   "screen": "borrow_mom.take",
+   "verdict": "PASS",
+   "line": "If she sees them on you, she'll know.",
+   "why": "no longer claims she carries them to her room; Done returns to the Master Bedroom, nothing contradicts it",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "99e09af6839ccfd3",
+    "facts": "8a73da8b0cd3be62",
+    "all": "1e82341acbaa70b9"
+   },
+   "row_hash": "321cc76cff93aadb",
+   "carried": false,
+   "pass": 2
+  },
+  {
+   "row": "voice#8",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "Her skirt. Her mouth goes tight",
+   "why": "Mom sounds like Mom; the neighbour is a silent role.",
+   "cause": null,
+   "note": false,
+   "screen_hash": "159f428bf367ae15",
+   "row_hash": "4362249fb5f9616e",
+   "carried": true,
+   "pass": 1
+  }
+ ],
+ "causes": [
+  {
+   "id": "P07j1-c1",
+   "what": "borrow_hoodie.take says \"It's huge on you\" but Done only adds the hoodie, never equips it: the prose puts on her a garment she isn't wearing"
+  },
+  {
+   "id": "P07j1-c2",
+   "what": "release 1 has no clothing event (C1167/C1204 minimum); ENI deferred it to release 2 (NOTES 241), not waived"
+  },
+  {
+   "id": "P07j1-c3",
+   "what": "no whole-outfit change after the opening: saved_outfits off, wardrobe is item by item (ENI's release-2 deferral, not waived)"
+  },
+  {
+   "id": "P07j1-c4",
+   "what": "the street's neighbour line names no part of her and ends on walking away: no price, no \"not yet\", no hook"
+  },
+  {
+   "id": "P07j1-c5",
+   "what": "worn_exposure is read in one place (the street line), and Mom's heels in two; C1171 asks 3+ (ENI's release-2 deferral, not waived)"
+  },
+  {
+   "id": "P07n1-c1",
+   "what": "worn_exposure, release 1's one clothing number, has one reader (the street's skirt line); no door or event reads it (ENI's release-2 deferral, NOTES 241, not a waiver)"
+  }
+ ],
+ "pending": [
+  {
+   "row": "B10",
+   "screen": "talk_mom.talk",
+   "why": "screen changed: truth row"
+  },
+  {
+   "row": "B8",
+   "screen": "talk_mom.talk",
+   "why": "screen changed: truth row"
+  },
+  {
+   "row": "C1158",
+   "screen": "talk_mom.talk",
+   "why": "screen changed: truth row"
+  },
+  {
+   "row": "C1206",
+   "screen": "talk_mom.talk",
+   "why": "screen changed: truth row"
+  },
+  {
+   "row": "C1631",
+   "screen": "talk_mom.talk",
+   "why": "screen changed: truth row"
+  },
+  {
+   "row": "C460",
+   "screen": "talk_mom.talk",
+   "why": "screen changed: truth row"
+  },
+  {
+   "row": "C461",
+   "screen": "talk_mom.talk",
+   "why": "screen changed: truth row"
+  },
+  {
+   "row": "C921",
+   "screen": "talk_mom.talk",
+   "why": "screen changed: truth row"
+  },
+  {
+   "row": "C927",
+   "screen": "talk_mom.talk",
+   "why": "screen changed: truth row"
+  },
+  {
+   "row": "C931",
+   "screen": "talk_mom.talk",
+   "why": "screen changed: truth row"
+  },
+  {
+   "row": "L106",
+   "screen": "talk_mom.talk",
+   "why": "screen changed: truth row"
+  },
+  {
+   "row": "L167",
+   "screen": "talk_mom.talk",
+   "why": "screen changed: truth row"
+  }
+ ],
+ "asked": 60,
+ "answered": 48,
+ "pass_items": [
+  {
+   "row": "B1",
+   "screen": "*",
+   "why": "most of borrow_hoodie changed (1 of 1 screens)"
+  },
+  {
+   "row": "B1",
+   "screen": "mom_living_room.talk",
+   "why": "screen changed"
+  },
+  {
+   "row": "B10",
+   "screen": "*",
+   "why": "most of borrow_hoodie changed (1 of 1 screens)"
+  },
+  {
+   "row": "B10",
+   "screen": "borrow_mom.take",
+   "why": "failed last pass"
+  },
+  {
+   "row": "B10",
+   "screen": "hood_street",
+   "why": "failed last pass"
+  },
+  {
+   "row": "B10",
+   "screen": "mom_living_room.talk",
+   "why": "screen changed"
+  },
+  {
+   "row": "B11",
+   "screen": "*",
+   "why": "most of borrow_hoodie changed (1 of 1 screens)"
+  },
+  {
+   "row": "B11",
+   "screen": "borrow_hoodie.take",
+   "why": "failed last pass"
+  },
+  {
+   "row": "B11",
+   "screen": "borrow_mom.take",
+   "why": "failed last pass"
+  },
+  {
+   "row": "B11",
+   "screen": "mom_living_room.talk",
+   "why": "screen changed"
+  },
+  {
+   "row": "B12",
+   "screen": "*",
+   "why": "most of borrow_hoodie changed (1 of 1 screens)"
+  },
+  {
+   "row": "B12",
+   "screen": "hood_street",
+   "why": "failed last pass"
+  },
+  {
+   "row": "B12",
+   "screen": "mom_living_room.talk",
+   "why": "screen changed"
+  },
+  {
+   "row": "B13",
+   "screen": "*",
+   "why": "most of borrow_hoodie changed (1 of 1 screens)"
+  },
+  {
+   "row": "B13",
+   "screen": "mom_living_room.talk",
+   "why": "screen changed"
+  },
+  {
+   "row": "B2",
+   "screen": "*",
+   "why": "most of borrow_hoodie changed (1 of 1 screens)"
+  },
+  {
+   "row": "B2",
+   "screen": "mom_living_room.talk",
+   "why": "screen changed"
+  },
+  {
+   "row": "B3",
+   "screen": "*",
+   "why": "most of borrow_hoodie changed (1 of 1 screens)"
+  },
+  {
+   "row": "B3",
+   "screen": "borrow_hoodie.take",
+   "why": "failed last pass"
+  },
+  {
+   "row": "B3",
+   "screen": "borrow_mom.take",
+   "why": "failed last pass"
+  },
+  {
+   "row": "B3",
+   "screen": "hood_street",
+   "why": "failed last pass"
+  },
+  {
+   "row": "B3",
+   "screen": "mom_living_room.talk",
+   "why": "screen changed"
+  },
+  {
+   "row": "B4",
+   "screen": "*",
+   "why": "most of borrow_hoodie changed (1 of 1 screens)"
+  },
+  {
+   "row": "B4",
+   "screen": "hood_street",
+   "why": "failed last pass"
+  },
+  {
+   "row": "B4",
+   "screen": "mom_living_room.talk",
+   "why": "screen changed"
+  },
+  {
+   "row": "B5",
+   "screen": "*",
+   "why": "most of borrow_hoodie changed (1 of 1 screens)"
+  },
+  {
+   "row": "B5",
+   "screen": "mom_living_room.talk",
+   "why": "screen changed"
+  },
+  {
+   "row": "B6",
+   "screen": "*",
+   "why": "most of borrow_hoodie changed (1 of 1 screens)"
+  },
+  {
+   "row": "B6",
+   "screen": "mom_living_room.talk",
+   "why": "screen changed"
+  },
+  {
+   "row": "B7",
+   "screen": "*",
+   "why": "most of borrow_hoodie changed (1 of 1 screens)"
+  },
+  {
+   "row": "B7",
+   "screen": "mom_living_room.talk",
+   "why": "screen changed"
+  },
+  {
+   "row": "B8",
+   "screen": "*",
+   "why": "most of borrow_hoodie changed (1 of 1 screens)"
+  },
+  {
+   "row": "B8",
+   "screen": "borrow_mom.take",
+   "why": "failed last pass"
+  },
+  {
+   "row": "B8",
+   "screen": "mom_living_room.talk",
+   "why": "screen changed"
+  },
+  {
+   "row": "B9",
+   "screen": "*",
+   "why": "most of borrow_hoodie changed (1 of 1 screens)"
+  },
+  {
+   "row": "B9",
+   "screen": "mom_living_room.talk",
+   "why": "screen changed"
+  },
+  {
+   "row": "C109",
+   "screen": "*",
+   "why": "most of borrow_hoodie changed (1 of 1 screens)"
+  },
+  {
+   "row": "C109",
+   "screen": "mom_living_room.talk",
+   "why": "screen changed"
+  },
+  {
+   "row": "C1150",
+   "screen": "*",
+   "why": "most of borrow_hoodie changed (1 of 1 screens)"
+  },
+  {
+   "row": "C1150",
+   "screen": "mom_living_room.talk",
+   "why": "screen changed"
+  },
+  {
+   "row": "C1158",
+   "screen": "*",
+   "why": "most of borrow_hoodie changed (1 of 1 screens)"
+  },
+  {
+   "row": "C1158",
+   "screen": "borrow_mom.take",
+   "why": "failed last pass"
+  },
+  {
+   "row": "C1158",
+   "screen": "mom_living_room.talk",
+   "why": "screen changed"
+  },
+  {
+   "row": "C1166",
+   "screen": "*",
+   "why": "most of borrow_hoodie changed (1 of 1 screens)"
+  },
+  {
+   "row": "C1166",
+   "screen": "mom_living_room.talk",
+   "why": "screen changed"
+  },
+  {
+   "row": "C1167",
+   "screen": "*",
+   "why": "most of borrow_hoodie changed (1 of 1 screens)"
+  },
+  {
+   "row": "C1167",
+   "screen": "borrow_mom.take",
+   "why": "failed last pass"
+  },
+  {
+   "row": "C1167",
+   "screen": "mom_living_room.talk",
+   "why": "screen changed"
+  },
+  {
+   "row": "C1169",
+   "screen": "*",
+   "why": "most of borrow_hoodie changed (1 of 1 screens)"
+  },
+  {
+   "row": "C1169",
+   "screen": "mom_living_room.talk",
+   "why": "screen changed"
+  },
+  {
+   "row": "C1171",
+   "screen": "*",
+   "why": "most of borrow_hoodie changed (1 of 1 screens)"
+  },
+  {
+   "row": "C1171",
+   "screen": "hood_street",
+   "why": "failed last pass"
+  },
+  {
+   "row": "C1171",
+   "screen": "mom_living_room.talk",
+   "why": "screen changed"
+  },
+  {
+   "row": "C1173",
+   "screen": "*",
+   "why": "most of borrow_hoodie changed (1 of 1 screens)"
+  },
+  {
+   "row": "C1173",
+   "screen": "hood_street",
+   "why": "failed last pass"
+  },
+  {
+   "row": "C1173",
+   "screen": "mom_living_room.talk",
+   "why": "screen changed"
+  },
+  {
+   "row": "C1176",
+   "screen": "*",
+   "why": "most of borrow_hoodie changed (1 of 1 screens)"
+  },
+  {
+   "row": "C1176",
+   "screen": "mom_living_room.talk",
+   "why": "screen changed"
+  },
+  {
+   "row": "C1177",
+   "screen": "*",
+   "why": "most of borrow_hoodie changed (1 of 1 screens)"
+  },
+  {
+   "row": "C1177",
+   "screen": "mom_living_room.talk",
+   "why": "screen changed"
+  },
+  {
+   "row": "C1183",
+   "screen": "*",
+   "why": "most of borrow_hoodie changed (1 of 1 screens)"
+  },
+  {
+   "row": "C1183",
+   "screen": "mom_living_room.talk",
+   "why": "screen changed"
+  },
+  {
+   "row": "C1184",
+   "screen": "*",
+   "why": "most of borrow_hoodie changed (1 of 1 screens)"
+  },
+  {
+   "row": "C1184",
+   "screen": "mom_living_room.talk",
+   "why": "screen changed"
+  },
+  {
+   "row": "C1185",
+   "screen": "*",
+   "why": "most of borrow_hoodie changed (1 of 1 screens)"
+  },
+  {
+   "row": "C1185",
+   "screen": "mom_living_room.talk",
+   "why": "screen changed"
+  },
+  {
+   "row": "C1189",
+   "screen": "*",
+   "why": "most of borrow_hoodie changed (1 of 1 screens)"
+  },
+  {
+   "row": "C1189",
+   "screen": "mom_living_room.talk",
+   "why": "screen changed"
+  },
+  {
+   "row": "C1197",
+   "screen": "*",
+   "why": "most of borrow_hoodie changed (1 of 1 screens)"
+  },
+  {
+   "row": "C1197",
+   "screen": "home_her_room",
+   "why": "failed last pass"
+  },
+  {
+   "row": "C1197",
+   "screen": "mom_living_room.talk",
+   "why": "screen changed"
+  },
+  {
+   "row": "C1198",
+   "screen": "*",
+   "why": "most of borrow_hoodie changed (1 of 1 screens)"
+  },
+  {
+   "row": "C1198",
+   "screen": "hood_street",
+   "why": "failed last pass"
+  },
+  {
+   "row": "C1198",
+   "screen": "mom_living_room.talk",
+   "why": "screen changed"
+  },
+  {
+   "row": "C1200",
+   "screen": "*",
+   "why": "most of borrow_hoodie changed (1 of 1 screens)"
+  },
+  {
+   "row": "C1200",
+   "screen": "mom_living_room.talk",
+   "why": "screen changed"
+  },
+  {
+   "row": "C1201",
+   "screen": "*",
+   "why": "most of borrow_hoodie changed (1 of 1 screens)"
+  },
+  {
+   "row": "C1201",
+   "screen": "borrow_hoodie.take",
+   "why": "failed last pass"
+  },
+  {
+   "row": "C1201",
+   "screen": "mom_living_room.talk",
+   "why": "screen changed"
+  },
+  {
+   "row": "C1204",
+   "screen": "*",
+   "why": "most of borrow_hoodie changed (1 of 1 screens)"
+  },
+  {
+   "row": "C1204",
+   "screen": "borrow_mom.take",
+   "why": "failed last pass"
+  },
+  {
+   "row": "C1204",
+   "screen": "mom_living_room.talk",
+   "why": "screen changed"
+  },
+  {
+   "row": "C1206",
+   "screen": "*",
+   "why": "most of borrow_hoodie changed (1 of 1 screens)"
+  },
+  {
+   "row": "C1206",
+   "screen": "mom_living_room.talk",
+   "why": "screen changed"
+  },
+  {
+   "row": "C1207",
+   "screen": "*",
+   "why": "most of borrow_hoodie changed (1 of 1 screens)"
+  },
+  {
+   "row": "C1207",
+   "screen": "mom_living_room.talk",
+   "why": "screen changed"
+  },
+  {
+   "row": "C1220",
+   "screen": "*",
+   "why": "most of borrow_hoodie changed (1 of 1 screens)"
+  },
+  {
+   "row": "C1220",
+   "screen": "mom_living_room.talk",
+   "why": "screen changed"
+  },
+  {
+   "row": "C1221",
+   "screen": "*",
+   "why": "most of borrow_hoodie changed (1 of 1 screens)"
+  },
+  {
+   "row": "C1221",
+   "screen": "mom_living_room.talk",
+   "why": "screen changed"
+  },
+  {
+   "row": "C1234",
+   "screen": "*",
+   "why": "most of borrow_hoodie changed (1 of 1 screens)"
+  },
+  {
+   "row": "C1234",
+   "screen": "mom_living_room.talk",
+   "why": "screen changed"
+  },
+  {
+   "row": "C1238",
+   "screen": "*",
+   "why": "most of borrow_hoodie changed (1 of 1 screens)"
+  },
+  {
+   "row": "C1238",
+   "screen": "mom_living_room.talk",
+   "why": "screen changed"
+  },
+  {
+   "row": "C1249",
+   "screen": "*",
+   "why": "most of borrow_hoodie changed (1 of 1 screens)"
+  },
+  {
+   "row": "C1249",
+   "screen": "mom_living_room.talk",
+   "why": "screen changed"
+  },
+  {
+   "row": "C1250",
+   "screen": "*",
+   "why": "most of borrow_hoodie changed (1 of 1 screens)"
+  },
+  {
+   "row": "C1250",
+   "screen": "mom_living_room.talk",
+   "why": "screen changed"
+  },
+  {
+   "row": "C1255",
+   "screen": "*",
+   "why": "most of borrow_hoodie changed (1 of 1 screens)"
+  },
+  {
+   "row": "C1255",
+   "screen": "mom_living_room.talk",
+   "why": "screen changed"
+  },
+  {
+   "row": "C1261",
+   "screen": "*",
+   "why": "most of borrow_hoodie changed (1 of 1 screens)"
+  },
+  {
+   "row": "C1261",
+   "screen": "mom_living_room.talk",
+   "why": "screen changed"
+  },
+  {
+   "row": "C1262",
+   "screen": "*",
+   "why": "most of borrow_hoodie changed (1 of 1 screens)"
+  },
+  {
+   "row": "C1262",
+   "screen": "mom_living_room.talk",
+   "why": "screen changed"
+  },
+  {
+   "row": "C1265",
+   "screen": "*",
+   "why": "most of borrow_hoodie changed (1 of 1 screens)"
+  },
+  {
+   "row": "C1265",
+   "screen": "mom_living_room.talk",
+   "why": "screen changed"
+  },
+  {
+   "row": "C1267",
+   "screen": "*",
+   "why": "most of borrow_hoodie changed (1 of 1 screens)"
+  },
+  {
+   "row": "C1267",
+   "screen": "mom_living_room.talk",
+   "why": "screen changed"
+  },
+  {
+   "row": "C1274",
+   "screen": "*",
+   "why": "most of borrow_hoodie changed (1 of 1 screens)"
+  },
+  {
+   "row": "C1274",
+   "screen": "mom_living_room.talk",
+   "why": "screen changed"
+  },
+  {
+   "row": "C1275",
+   "screen": "*",
+   "why": "most of borrow_hoodie changed (1 of 1 screens)"
+  },
+  {
+   "row": "C1275",
+   "screen": "mom_living_room.talk",
+   "why": "screen changed"
+  },
+  {
+   "row": "C1277",
+   "screen": "*",
+   "why": "most of borrow_hoodie changed (1 of 1 screens)"
+  },
+  {
+   "row": "C1277",
+   "screen": "mom_living_room.talk",
+   "why": "screen changed"
+  },
+  {
+   "row": "C1278",
+   "screen": "*",
+   "why": "most of borrow_hoodie changed (1 of 1 screens)"
+  },
+  {
+   "row": "C1278",
+   "screen": "mom_living_room.talk",
+   "why": "screen changed"
+  },
+  {
+   "row": "C1279",
+   "screen": "*",
+   "why": "most of borrow_hoodie changed (1 of 1 screens)"
+  },
+  {
+   "row": "C1279",
+   "screen": "mom_living_room.talk",
+   "why": "screen changed"
+  },
+  {
+   "row": "C1280",
+   "screen": "*",
+   "why": "most of borrow_hoodie changed (1 of 1 screens)"
+  },
+  {
+   "row": "C1280",
+   "screen": "mom_living_room.talk",
+   "why": "screen changed"
+  },
+  {
+   "row": "C1281",
+   "screen": "*",
+   "why": "most of borrow_hoodie changed (1 of 1 screens)"
+  },
+  {
+   "row": "C1281",
+   "screen": "mom_living_room.talk",
+   "why": "screen changed"
+  },
+  {
+   "row": "C1284",
+   "screen": "*",
+   "why": "most of borrow_hoodie changed (1 of 1 screens)"
+  },
+  {
+   "row": "C1284",
+   "screen": "mom_living_room.talk",
+   "why": "screen changed"
+  },
+  {
+   "row": "C1340",
+   "screen": "*",
+   "why": "most of borrow_hoodie changed (1 of 1 screens)"
+  },
+  {
+   "row": "C1340",
+   "screen": "mom_living_room.talk",
+   "why": "screen changed"
+  },
+  {
+   "row": "C1604",
+   "screen": "*",
+   "why": "most of borrow_hoodie changed (1 of 1 screens)"
+  },
+  {
+   "row": "C1604",
+   "screen": "mom_living_room.talk",
+   "why": "screen changed"
+  },
+  {
+   "row": "C1609",
+   "screen": "*",
+   "why": "most of borrow_hoodie changed (1 of 1 screens)"
+  },
+  {
+   "row": "C1609",
+   "screen": "mom_living_room.talk",
+   "why": "screen changed"
+  },
+  {
+   "row": "C1611",
+   "screen": "*",
+   "why": "most of borrow_hoodie changed (1 of 1 screens)"
+  },
+  {
+   "row": "C1611",
+   "screen": "mom_living_room.talk",
+   "why": "screen changed"
+  },
+  {
+   "row": "C1613",
+   "screen": "*",
+   "why": "most of borrow_hoodie changed (1 of 1 screens)"
+  },
+  {
+   "row": "C1613",
+   "screen": "mom_living_room.talk",
+   "why": "screen changed"
+  },
+  {
+   "row": "C1621",
+   "screen": "*",
+   "why": "most of borrow_hoodie changed (1 of 1 screens)"
+  },
+  {
+   "row": "C1621",
+   "screen": "mom_living_room.talk",
+   "why": "screen changed"
+  },
+  {
+   "row": "C1626",
+   "screen": "*",
+   "why": "most of borrow_hoodie changed (1 of 1 screens)"
+  },
+  {
+   "row": "C1626",
+   "screen": "mom_living_room.talk",
+   "why": "screen changed"
+  },
+  {
+   "row": "C1631",
+   "screen": "*",
+   "why": "most of borrow_hoodie changed (1 of 1 screens)"
+  },
+  {
+   "row": "C1631",
+   "screen": "mom_living_room.talk",
+   "why": "screen changed"
+  },
+  {
+   "row": "C1637",
+   "screen": "*",
+   "why": "most of borrow_hoodie changed (1 of 1 screens)"
+  },
+  {
+   "row": "C1637",
+   "screen": "mom_living_room.talk",
+   "why": "screen changed"
+  },
+  {
+   "row": "C166",
+   "screen": "*",
+   "why": "most of borrow_hoodie changed (1 of 1 screens)"
+  },
+  {
+   "row": "C166",
+   "screen": "mom_living_room.talk",
+   "why": "screen changed"
+  },
+  {
+   "row": "C239",
+   "screen": "*",
+   "why": "most of borrow_hoodie changed (1 of 1 screens)"
+  },
+  {
+   "row": "C239",
+   "screen": "mom_living_room.talk",
+   "why": "screen changed"
+  },
+  {
+   "row": "C248",
+   "screen": "*",
+   "why": "most of borrow_hoodie changed (1 of 1 screens)"
+  },
+  {
+   "row": "C248",
+   "screen": "mom_living_room.talk",
+   "why": "screen changed"
+  },
+  {
+   "row": "C249",
+   "screen": "*",
+   "why": "most of borrow_hoodie changed (1 of 1 screens)"
+  },
+  {
+   "row": "C249",
+   "screen": "mom_living_room.talk",
+   "why": "screen changed"
+  },
+  {
+   "row": "C252",
+   "screen": "*",
+   "why": "most of borrow_hoodie changed (1 of 1 screens)"
+  },
+  {
+   "row": "C252",
+   "screen": "mom_living_room.talk",
+   "why": "screen changed"
+  },
+  {
+   "row": "C254",
+   "screen": "*",
+   "why": "most of borrow_hoodie changed (1 of 1 screens)"
+  },
+  {
+   "row": "C254",
+   "screen": "mom_living_room.talk",
+   "why": "screen changed"
+  },
+  {
+   "row": "C255",
+   "screen": "*",
+   "why": "most of borrow_hoodie changed (1 of 1 screens)"
+  },
+  {
+   "row": "C255",
+   "screen": "mom_living_room.talk",
+   "why": "screen changed"
+  },
+  {
+   "row": "C256",
+   "screen": "*",
+   "why": "most of borrow_hoodie changed (1 of 1 screens)"
+  },
+  {
+   "row": "C256",
+   "screen": "mom_living_room.talk",
+   "why": "screen changed"
+  },
+  {
+   "row": "C276",
+   "screen": "*",
+   "why": "most of borrow_hoodie changed (1 of 1 screens)"
+  },
+  {
+   "row": "C276",
+   "screen": "mom_living_room.talk",
+   "why": "screen changed"
+  },
+  {
+   "row": "C284",
+   "screen": "*",
+   "why": "most of borrow_hoodie changed (1 of 1 screens)"
+  },
+  {
+   "row": "C284",
+   "screen": "mom_living_room.talk",
+   "why": "screen changed"
+  },
+  {
+   "row": "C285",
+   "screen": "*",
+   "why": "most of borrow_hoodie changed (1 of 1 screens)"
+  },
+  {
+   "row": "C285",
+   "screen": "mom_living_room.talk",
+   "why": "screen changed"
+  },
+  {
+   "row": "C286",
+   "screen": "*",
+   "why": "most of borrow_hoodie changed (1 of 1 screens)"
+  },
+  {
+   "row": "C286",
+   "screen": "mom_living_room.talk",
+   "why": "screen changed"
+  },
+  {
+   "row": "C287",
+   "screen": "*",
+   "why": "most of borrow_hoodie changed (1 of 1 screens)"
+  },
+  {
+   "row": "C287",
+   "screen": "mom_living_room.talk",
+   "why": "screen changed"
+  },
+  {
+   "row": "C288",
+   "screen": "*",
+   "why": "most of borrow_hoodie changed (1 of 1 screens)"
+  },
+  {
+   "row": "C288",
+   "screen": "mom_living_room.talk",
+   "why": "screen changed"
+  },
+  {
+   "row": "C289",
+   "screen": "*",
+   "why": "most of borrow_hoodie changed (1 of 1 screens)"
+  },
+  {
+   "row": "C289",
+   "screen": "mom_living_room.talk",
+   "why": "screen changed"
+  },
+  {
+   "row": "C291",
+   "screen": "*",
+   "why": "most of borrow_hoodie changed (1 of 1 screens)"
+  },
+  {
+   "row": "C291",
+   "screen": "mom_living_room.talk",
+   "why": "screen changed"
+  },
+  {
+   "row": "C296",
+   "screen": "*",
+   "why": "most of borrow_hoodie changed (1 of 1 screens)"
+  },
+  {
+   "row": "C296",
+   "screen": "mom_living_room.talk",
+   "why": "screen changed"
+  },
+  {
+   "row": "C297",
+   "screen": "*",
+   "why": "most of borrow_hoodie changed (1 of 1 screens)"
+  },
+  {
+   "row": "C297",
+   "screen": "mom_living_room.talk",
+   "why": "screen changed"
+  },
+  {
+   "row": "C311",
+   "screen": "*",
+   "why": "most of borrow_hoodie changed (1 of 1 screens)"
+  },
+  {
+   "row": "C311",
+   "screen": "hood_street",
+   "why": "failed last pass"
+  },
+  {
+   "row": "C311",
+   "screen": "mom_living_room.talk",
+   "why": "screen changed"
+  },
+  {
+   "row": "C314",
+   "screen": "*",
+   "why": "most of borrow_hoodie changed (1 of 1 screens)"
+  },
+  {
+   "row": "C314",
+   "screen": "mom_living_room.talk",
+   "why": "screen changed"
+  },
+  {
+   "row": "C327",
+   "screen": "*",
+   "why": "most of borrow_hoodie changed (1 of 1 screens)"
+  },
+  {
+   "row": "C327",
+   "screen": "mom_living_room.talk",
+   "why": "screen changed"
+  },
+  {
+   "row": "C422",
+   "screen": "*",
+   "why": "most of borrow_hoodie changed (1 of 1 screens)"
+  },
+  {
+   "row": "C422",
+   "screen": "mom_living_room.talk",
+   "why": "screen changed"
+  },
+  {
+   "row": "C442",
+   "screen": "*",
+   "why": "most of borrow_hoodie changed (1 of 1 screens)"
+  },
+  {
+   "row": "C442",
+   "screen": "mom_living_room.talk",
+   "why": "screen changed"
+  },
+  {
+   "row": "C447",
+   "screen": "*",
+   "why": "most of borrow_hoodie changed (1 of 1 screens)"
+  },
+  {
+   "row": "C447",
+   "screen": "mom_living_room.talk",
+   "why": "screen changed"
+  },
+  {
+   "row": "C448",
+   "screen": "*",
+   "why": "most of borrow_hoodie changed (1 of 1 screens)"
+  },
+  {
+   "row": "C448",
+   "screen": "mom_living_room.talk",
+   "why": "screen changed"
+  },
+  {
+   "row": "C449",
+   "screen": "*",
+   "why": "most of borrow_hoodie changed (1 of 1 screens)"
+  },
+  {
+   "row": "C449",
+   "screen": "hood_street",
+   "why": "failed last pass"
+  },
+  {
+   "row": "C449",
+   "screen": "mom_living_room.talk",
+   "why": "screen changed"
+  },
+  {
+   "row": "C450",
+   "screen": "*",
+   "why": "most of borrow_hoodie changed (1 of 1 screens)"
+  },
+  {
+   "row": "C450",
+   "screen": "borrow_hoodie.take",
+   "why": "failed last pass"
+  },
+  {
+   "row": "C450",
+   "screen": "borrow_mom.take",
+   "why": "failed last pass"
+  },
+  {
+   "row": "C450",
+   "screen": "mom_living_room.talk",
+   "why": "screen changed"
+  },
+  {
+   "row": "C451",
+   "screen": "*",
+   "why": "most of borrow_hoodie changed (1 of 1 screens)"
+  },
+  {
+   "row": "C451",
+   "screen": "mom_living_room.talk",
+   "why": "screen changed"
+  },
+  {
+   "row": "C460",
+   "screen": "*",
+   "why": "most of borrow_hoodie changed (1 of 1 screens)"
+  },
+  {
+   "row": "C460",
+   "screen": "borrow_mom.take",
+   "why": "failed last pass"
+  },
+  {
+   "row": "C460",
+   "screen": "hood_street",
+   "why": "failed last pass"
+  },
+  {
+   "row": "C460",
+   "screen": "mom_living_room.talk",
+   "why": "screen changed"
+  },
+  {
+   "row": "C461",
+   "screen": "*",
+   "why": "most of borrow_hoodie changed (1 of 1 screens)"
+  },
+  {
+   "row": "C461",
+   "screen": "mom_living_room.talk",
+   "why": "screen changed"
+  },
+  {
+   "row": "C519",
+   "screen": "*",
+   "why": "most of borrow_hoodie changed (1 of 1 screens)"
+  },
+  {
+   "row": "C519",
+   "screen": "mom_living_room.talk",
+   "why": "screen changed"
+  },
+  {
+   "row": "C520",
+   "screen": "*",
+   "why": "most of borrow_hoodie changed (1 of 1 screens)"
+  },
+  {
+   "row": "C520",
+   "screen": "mom_living_room.talk",
+   "why": "screen changed"
+  },
+  {
+   "row": "C593",
+   "screen": "*",
+   "why": "most of borrow_hoodie changed (1 of 1 screens)"
+  },
+  {
+   "row": "C593",
+   "screen": "mom_living_room.talk",
+   "why": "screen changed"
+  },
+  {
+   "row": "C596",
+   "screen": "*",
+   "why": "most of borrow_hoodie changed (1 of 1 screens)"
+  },
+  {
+   "row": "C596",
+   "screen": "mom_living_room.talk",
+   "why": "screen changed"
+  },
+  {
+   "row": "C598",
+   "screen": "*",
+   "why": "most of borrow_hoodie changed (1 of 1 screens)"
+  },
+  {
+   "row": "C598",
+   "screen": "mom_living_room.talk",
+   "why": "screen changed"
+  },
+  {
+   "row": "C601",
+   "screen": "*",
+   "why": "most of borrow_hoodie changed (1 of 1 screens)"
+  },
+  {
+   "row": "C601",
+   "screen": "mom_living_room.talk",
+   "why": "screen changed"
+  },
+  {
+   "row": "C613",
+   "screen": "*",
+   "why": "most of borrow_hoodie changed (1 of 1 screens)"
+  },
+  {
+   "row": "C613",
+   "screen": "mom_living_room.talk",
+   "why": "screen changed"
+  },
+  {
+   "row": "C618",
+   "screen": "*",
+   "why": "most of borrow_hoodie changed (1 of 1 screens)"
+  },
+  {
+   "row": "C618",
+   "screen": "mom_living_room.talk",
+   "why": "screen changed"
+  },
+  {
+   "row": "C619",
+   "screen": "*",
+   "why": "most of borrow_hoodie changed (1 of 1 screens)"
+  },
+  {
+   "row": "C619",
+   "screen": "mom_living_room.talk",
+   "why": "screen changed"
+  },
+  {
+   "row": "C620",
+   "screen": "*",
+   "why": "most of borrow_hoodie changed (1 of 1 screens)"
+  },
+  {
+   "row": "C620",
+   "screen": "mom_living_room.talk",
+   "why": "screen changed"
+  },
+  {
+   "row": "C622",
+   "screen": "*",
+   "why": "most of borrow_hoodie changed (1 of 1 screens)"
+  },
+  {
+   "row": "C622",
+   "screen": "mom_living_room.talk",
+   "why": "screen changed"
+  },
+  {
+   "row": "C625",
+   "screen": "*",
+   "why": "most of borrow_hoodie changed (1 of 1 screens)"
+  },
+  {
+   "row": "C625",
+   "screen": "mom_living_room.talk",
+   "why": "screen changed"
+  },
+  {
+   "row": "C626",
+   "screen": "*",
+   "why": "most of borrow_hoodie changed (1 of 1 screens)"
+  },
+  {
+   "row": "C626",
+   "screen": "mom_living_room.talk",
+   "why": "screen changed"
+  },
+  {
+   "row": "C627",
+   "screen": "*",
+   "why": "most of borrow_hoodie changed (1 of 1 screens)"
+  },
+  {
+   "row": "C627",
+   "screen": "mom_living_room.talk",
+   "why": "screen changed"
+  },
+  {
+   "row": "C630",
+   "screen": "*",
+   "why": "most of borrow_hoodie changed (1 of 1 screens)"
+  },
+  {
+   "row": "C630",
+   "screen": "mom_living_room.talk",
+   "why": "screen changed"
+  },
+  {
+   "row": "C632",
+   "screen": "*",
+   "why": "most of borrow_hoodie changed (1 of 1 screens)"
+  },
+  {
+   "row": "C632",
+   "screen": "mom_living_room.talk",
+   "why": "screen changed"
+  },
+  {
+   "row": "C639",
+   "screen": "*",
+   "why": "most of borrow_hoodie changed (1 of 1 screens)"
+  },
+  {
+   "row": "C639",
+   "screen": "mom_living_room.talk",
+   "why": "screen changed"
+  },
+  {
+   "row": "C640",
+   "screen": "*",
+   "why": "most of borrow_hoodie changed (1 of 1 screens)"
+  },
+  {
+   "row": "C640",
+   "screen": "mom_living_room.talk",
+   "why": "screen changed"
+  },
+  {
+   "row": "C644",
+   "screen": "*",
+   "why": "most of borrow_hoodie changed (1 of 1 screens)"
+  },
+  {
+   "row": "C644",
+   "screen": "mom_living_room.talk",
+   "why": "screen changed"
+  },
+  {
+   "row": "C656",
+   "screen": "*",
+   "why": "most of borrow_hoodie changed (1 of 1 screens)"
+  },
+  {
+   "row": "C656",
+   "screen": "mom_living_room.talk",
+   "why": "screen changed"
+  },
+  {
+   "row": "C660",
+   "screen": "*",
+   "why": "most of borrow_hoodie changed (1 of 1 screens)"
+  },
+  {
+   "row": "C660",
+   "screen": "mom_living_room.talk",
+   "why": "screen changed"
+  },
+  {
+   "row": "C690",
+   "screen": "*",
+   "why": "most of borrow_hoodie changed (1 of 1 screens)"
+  },
+  {
+   "row": "C690",
+   "screen": "mom_living_room.talk",
+   "why": "screen changed"
+  },
+  {
+   "row": "C707",
+   "screen": "*",
+   "why": "most of borrow_hoodie changed (1 of 1 screens)"
+  },
+  {
+   "row": "C707",
+   "screen": "mom_living_room.talk",
+   "why": "screen changed"
+  },
+  {
+   "row": "C719",
+   "screen": "*",
+   "why": "most of borrow_hoodie changed (1 of 1 screens)"
+  },
+  {
+   "row": "C719",
+   "screen": "mom_living_room.talk",
+   "why": "screen changed"
+  },
+  {
+   "row": "C738",
+   "screen": "*",
+   "why": "most of borrow_hoodie changed (1 of 1 screens)"
+  },
+  {
+   "row": "C738",
+   "screen": "mom_living_room.talk",
+   "why": "screen changed"
+  },
+  {
+   "row": "C758",
+   "screen": "*",
+   "why": "most of borrow_hoodie changed (1 of 1 screens)"
+  },
+  {
+   "row": "C758",
+   "screen": "mom_living_room.talk",
+   "why": "screen changed"
+  },
+  {
+   "row": "C762",
+   "screen": "*",
+   "why": "most of borrow_hoodie changed (1 of 1 screens)"
+  },
+  {
+   "row": "C762",
+   "screen": "mom_living_room.talk",
+   "why": "screen changed"
+  },
+  {
+   "row": "C769",
+   "screen": "*",
+   "why": "most of borrow_hoodie changed (1 of 1 screens)"
+  },
+  {
+   "row": "C769",
+   "screen": "mom_living_room.talk",
+   "why": "screen changed"
+  },
+  {
+   "row": "C770",
+   "screen": "*",
+   "why": "most of borrow_hoodie changed (1 of 1 screens)"
+  },
+  {
+   "row": "C770",
+   "screen": "mom_living_room.talk",
+   "why": "screen changed"
+  },
+  {
+   "row": "C771",
+   "screen": "*",
+   "why": "most of borrow_hoodie changed (1 of 1 screens)"
+  },
+  {
+   "row": "C771",
+   "screen": "mom_living_room.talk",
+   "why": "screen changed"
+  },
+  {
+   "row": "C773",
+   "screen": "*",
+   "why": "most of borrow_hoodie changed (1 of 1 screens)"
+  },
+  {
+   "row": "C773",
+   "screen": "mom_living_room.talk",
+   "why": "screen changed"
+  },
+  {
+   "row": "C776",
+   "screen": "*",
+   "why": "most of borrow_hoodie changed (1 of 1 screens)"
+  },
+  {
+   "row": "C776",
+   "screen": "mom_living_room.talk",
+   "why": "screen changed"
+  },
+  {
+   "row": "C777",
+   "screen": "*",
+   "why": "most of borrow_hoodie changed (1 of 1 screens)"
+  },
+  {
+   "row": "C777",
+   "screen": "mom_living_room.talk",
+   "why": "screen changed"
+  },
+  {
+   "row": "C782",
+   "screen": "*",
+   "why": "most of borrow_hoodie changed (1 of 1 screens)"
+  },
+  {
+   "row": "C782",
+   "screen": "mom_living_room.talk",
+   "why": "screen changed"
+  },
+  {
+   "row": "C794",
+   "screen": "*",
+   "why": "most of borrow_hoodie changed (1 of 1 screens)"
+  },
+  {
+   "row": "C794",
+   "screen": "mom_living_room.talk",
+   "why": "screen changed"
+  },
+  {
+   "row": "C795",
+   "screen": "*",
+   "why": "most of borrow_hoodie changed (1 of 1 screens)"
+  },
+  {
+   "row": "C795",
+   "screen": "mom_living_room.talk",
+   "why": "screen changed"
+  },
+  {
+   "row": "C804",
+   "screen": "*",
+   "why": "most of borrow_hoodie changed (1 of 1 screens)"
+  },
+  {
+   "row": "C804",
+   "screen": "mom_living_room.talk",
+   "why": "screen changed"
+  },
+  {
+   "row": "C808",
+   "screen": "*",
+   "why": "most of borrow_hoodie changed (1 of 1 screens)"
+  },
+  {
+   "row": "C808",
+   "screen": "mom_living_room.talk",
+   "why": "screen changed"
+  },
+  {
+   "row": "C811",
+   "screen": "*",
+   "why": "most of borrow_hoodie changed (1 of 1 screens)"
+  },
+  {
+   "row": "C811",
+   "screen": "mom_living_room.talk",
+   "why": "screen changed"
+  },
+  {
+   "row": "C889",
+   "screen": "*",
+   "why": "most of borrow_hoodie changed (1 of 1 screens)"
+  },
+  {
+   "row": "C889",
+   "screen": "mom_living_room.talk",
+   "why": "screen changed"
+  },
+  {
+   "row": "C890",
+   "screen": "*",
+   "why": "most of borrow_hoodie changed (1 of 1 screens)"
+  },
+  {
+   "row": "C890",
+   "screen": "mom_living_room.talk",
+   "why": "screen changed"
+  },
+  {
+   "row": "C892",
+   "screen": "*",
+   "why": "most of borrow_hoodie changed (1 of 1 screens)"
+  },
+  {
+   "row": "C892",
+   "screen": "mom_living_room.talk",
+   "why": "screen changed"
+  },
+  {
+   "row": "C897",
+   "screen": "*",
+   "why": "most of borrow_hoodie changed (1 of 1 screens)"
+  },
+  {
+   "row": "C897",
+   "screen": "mom_living_room.talk",
+   "why": "screen changed"
+  },
+  {
+   "row": "C900",
+   "screen": "*",
+   "why": "most of borrow_hoodie changed (1 of 1 screens)"
+  },
+  {
+   "row": "C900",
+   "screen": "mom_living_room.talk",
+   "why": "screen changed"
+  },
+  {
+   "row": "C902",
+   "screen": "*",
+   "why": "most of borrow_hoodie changed (1 of 1 screens)"
+  },
+  {
+   "row": "C902",
+   "screen": "mom_living_room.talk",
+   "why": "screen changed"
+  },
+  {
+   "row": "C903",
+   "screen": "*",
+   "why": "most of borrow_hoodie changed (1 of 1 screens)"
+  },
+  {
+   "row": "C903",
+   "screen": "mom_living_room.talk",
+   "why": "screen changed"
+  },
+  {
+   "row": "C904",
+   "screen": "*",
+   "why": "most of borrow_hoodie changed (1 of 1 screens)"
+  },
+  {
+   "row": "C904",
+   "screen": "mom_living_room.talk",
+   "why": "screen changed"
+  },
+  {
+   "row": "C906",
+   "screen": "*",
+   "why": "most of borrow_hoodie changed (1 of 1 screens)"
+  },
+  {
+   "row": "C906",
+   "screen": "mom_living_room.talk",
+   "why": "screen changed"
+  },
+  {
+   "row": "C910",
+   "screen": "*",
+   "why": "most of borrow_hoodie changed (1 of 1 screens)"
+  },
+  {
+   "row": "C910",
+   "screen": "mom_living_room.talk",
+   "why": "screen changed"
+  },
+  {
+   "row": "C913",
+   "screen": "*",
+   "why": "most of borrow_hoodie changed (1 of 1 screens)"
+  },
+  {
+   "row": "C913",
+   "screen": "mom_living_room.talk",
+   "why": "screen changed"
+  },
+  {
+   "row": "C914",
+   "screen": "*",
+   "why": "most of borrow_hoodie changed (1 of 1 screens)"
+  },
+  {
+   "row": "C914",
+   "screen": "mom_living_room.talk",
+   "why": "screen changed"
+  },
+  {
+   "row": "C915",
+   "screen": "*",
+   "why": "most of borrow_hoodie changed (1 of 1 screens)"
+  },
+  {
+   "row": "C915",
+   "screen": "mom_living_room.talk",
+   "why": "screen changed"
+  },
+  {
+   "row": "C916",
+   "screen": "*",
+   "why": "most of borrow_hoodie changed (1 of 1 screens)"
+  },
+  {
+   "row": "C916",
+   "screen": "mom_living_room.talk",
+   "why": "screen changed"
+  },
+  {
+   "row": "C920",
+   "screen": "*",
+   "why": "most of borrow_hoodie changed (1 of 1 screens)"
+  },
+  {
+   "row": "C920",
+   "screen": "mom_living_room.talk",
+   "why": "screen changed"
+  },
+  {
+   "row": "C921",
+   "screen": "*",
+   "why": "most of borrow_hoodie changed (1 of 1 screens)"
+  },
+  {
+   "row": "C921",
+   "screen": "mom_living_room.talk",
+   "why": "screen changed"
+  },
+  {
+   "row": "C924",
+   "screen": "*",
+   "why": "most of borrow_hoodie changed (1 of 1 screens)"
+  },
+  {
+   "row": "C924",
+   "screen": "mom_living_room.talk",
+   "why": "screen changed"
+  },
+  {
+   "row": "C926",
+   "screen": "*",
+   "why": "most of borrow_hoodie changed (1 of 1 screens)"
+  },
+  {
+   "row": "C926",
+   "screen": "mom_living_room.talk",
+   "why": "screen changed"
+  },
+  {
+   "row": "C927",
+   "screen": "*",
+   "why": "most of borrow_hoodie changed (1 of 1 screens)"
+  },
+  {
+   "row": "C927",
+   "screen": "mom_living_room.talk",
+   "why": "screen changed"
+  },
+  {
+   "row": "C928",
+   "screen": "*",
+   "why": "most of borrow_hoodie changed (1 of 1 screens)"
+  },
+  {
+   "row": "C928",
+   "screen": "mom_living_room.talk",
+   "why": "screen changed"
+  },
+  {
+   "row": "C929",
+   "screen": "*",
+   "why": "most of borrow_hoodie changed (1 of 1 screens)"
+  },
+  {
+   "row": "C929",
+   "screen": "mom_living_room.talk",
+   "why": "screen changed"
+  },
+  {
+   "row": "C930",
+   "screen": "*",
+   "why": "most of borrow_hoodie changed (1 of 1 screens)"
+  },
+  {
+   "row": "C930",
+   "screen": "mom_living_room.talk",
+   "why": "screen changed"
+  },
+  {
+   "row": "C931",
+   "screen": "*",
+   "why": "most of borrow_hoodie changed (1 of 1 screens)"
+  },
+  {
+   "row": "C931",
+   "screen": "mom_living_room.talk",
+   "why": "screen changed"
+  },
+  {
+   "row": "C953",
+   "screen": "*",
+   "why": "most of borrow_hoodie changed (1 of 1 screens)"
+  },
+  {
+   "row": "C953",
+   "screen": "mom_living_room.talk",
+   "why": "screen changed"
+  },
+  {
+   "row": "C954",
+   "screen": "*",
+   "why": "most of borrow_hoodie changed (1 of 1 screens)"
+  },
+  {
+   "row": "C954",
+   "screen": "mom_living_room.talk",
+   "why": "screen changed"
+  },
+  {
+   "row": "C961",
+   "screen": "*",
+   "why": "most of borrow_hoodie changed (1 of 1 screens)"
+  },
+  {
+   "row": "C961",
+   "screen": "mom_living_room.talk",
+   "why": "screen changed"
+  },
+  {
+   "row": "L106",
+   "screen": "*",
+   "why": "most of borrow_hoodie changed (1 of 1 screens)"
+  },
+  {
+   "row": "L106",
+   "screen": "mom_living_room.talk",
+   "why": "screen changed"
+  },
+  {
+   "row": "L119",
+   "screen": "*",
+   "why": "most of borrow_hoodie changed (1 of 1 screens)"
+  },
+  {
+   "row": "L119",
+   "screen": "mom_living_room.talk",
+   "why": "screen changed"
+  },
+  {
+   "row": "L120",
+   "screen": "*",
+   "why": "most of borrow_hoodie changed (1 of 1 screens)"
+  },
+  {
+   "row": "L120",
+   "screen": "mom_living_room.talk",
+   "why": "screen changed"
+  },
+  {
+   "row": "L121",
+   "screen": "*",
+   "why": "most of borrow_hoodie changed (1 of 1 screens)"
+  },
+  {
+   "row": "L121",
+   "screen": "mom_living_room.talk",
+   "why": "screen changed"
+  },
+  {
+   "row": "L125",
+   "screen": "*",
+   "why": "most of borrow_hoodie changed (1 of 1 screens)"
+  },
+  {
+   "row": "L125",
+   "screen": "mom_living_room.talk",
+   "why": "screen changed"
+  },
+  {
+   "row": "L147",
+   "screen": "*",
+   "why": "most of borrow_hoodie changed (1 of 1 screens)"
+  },
+  {
+   "row": "L147",
+   "screen": "mom_living_room.talk",
+   "why": "screen changed"
+  },
+  {
+   "row": "L163",
+   "screen": "*",
+   "why": "most of borrow_hoodie changed (1 of 1 screens)"
+  },
+  {
+   "row": "L163",
+   "screen": "mom_living_room.talk",
+   "why": "screen changed"
+  },
+  {
+   "row": "L167",
+   "screen": "*",
+   "why": "most of borrow_hoodie changed (1 of 1 screens)"
+  },
+  {
+   "row": "L167",
+   "screen": "mom_living_room.talk",
+   "why": "screen changed"
+  },
+  {
+   "row": "L71",
+   "screen": "*",
+   "why": "most of borrow_hoodie changed (1 of 1 screens)"
+  },
+  {
+   "row": "L71",
+   "screen": "mom_living_room.talk",
+   "why": "screen changed"
+  },
+  {
+   "row": "L97",
+   "screen": "*",
+   "why": "most of borrow_hoodie changed (1 of 1 screens)"
+  },
+  {
+   "row": "L97",
+   "screen": "mom_living_room.talk",
+   "why": "screen changed"
+  },
+  {
+   "row": "body-moments#1",
+   "screen": "*",
+   "why": "most of borrow_hoodie changed (1 of 1 screens)"
+  },
+  {
+   "row": "body-moments#1",
+   "screen": "mom_living_room.talk",
+   "why": "screen changed"
+  },
+  {
+   "row": "body-moments#2",
+   "screen": "*",
+   "why": "most of borrow_hoodie changed (1 of 1 screens)"
+  },
+  {
+   "row": "body-moments#2",
+   "screen": "mom_living_room.talk",
+   "why": "screen changed"
+  },
+  {
+   "row": "body-moments#3",
+   "screen": "*",
+   "why": "most of borrow_hoodie changed (1 of 1 screens)"
+  },
+  {
+   "row": "body-moments#3",
+   "screen": "mom_living_room.talk",
+   "why": "screen changed"
+  },
+  {
+   "row": "body-moments#4",
+   "screen": "*",
+   "why": "most of borrow_hoodie changed (1 of 1 screens)"
+  },
+  {
+   "row": "body-moments#4",
+   "screen": "mom_living_room.talk",
+   "why": "screen changed"
+  },
+  {
+   "row": "body-moments#5",
+   "screen": "*",
+   "why": "most of borrow_hoodie changed (1 of 1 screens)"
+  },
+  {
+   "row": "body-moments#5",
+   "screen": "mom_living_room.talk",
+   "why": "screen changed"
+  },
+  {
+   "row": "body-moments#6",
+   "screen": "*",
+   "why": "most of borrow_hoodie changed (1 of 1 screens)"
+  },
+  {
+   "row": "body-moments#6",
+   "screen": "mom_living_room.talk",
+   "why": "screen changed"
+  },
+  {
+   "row": "body-moments#7",
+   "screen": "*",
+   "why": "most of borrow_hoodie changed (1 of 1 screens)"
+  },
+  {
+   "row": "body-moments#7",
+   "screen": "mom_living_room.talk",
+   "why": "screen changed"
+  },
+  {
+   "row": "clock#1",
+   "screen": "*",
+   "why": "most of borrow_hoodie changed (1 of 1 screens)"
+  },
+  {
+   "row": "clock#1",
+   "screen": "mom_living_room.talk",
+   "why": "screen changed"
+  },
+  {
+   "row": "clock#2",
+   "screen": "*",
+   "why": "most of borrow_hoodie changed (1 of 1 screens)"
+  },
+  {
+   "row": "clock#2",
+   "screen": "mom_living_room.talk",
+   "why": "screen changed"
+  },
+  {
+   "row": "clock#3",
+   "screen": "*",
+   "why": "most of borrow_hoodie changed (1 of 1 screens)"
+  },
+  {
+   "row": "clock#3",
+   "screen": "mom_living_room.talk",
+   "why": "screen changed"
+  },
+  {
+   "row": "clock#4",
+   "screen": "*",
+   "why": "most of borrow_hoodie changed (1 of 1 screens)"
+  },
+  {
+   "row": "clock#4",
+   "screen": "mom_living_room.talk",
+   "why": "screen changed"
+  },
+  {
+   "row": "clock#5",
+   "screen": "*",
+   "why": "most of borrow_hoodie changed (1 of 1 screens)"
+  },
+  {
+   "row": "clock#5",
+   "screen": "mom_living_room.talk",
+   "why": "screen changed"
+  },
+  {
+   "row": "clock#6",
+   "screen": "*",
+   "why": "most of borrow_hoodie changed (1 of 1 screens)"
+  },
+  {
+   "row": "clock#6",
+   "screen": "mom_living_room.talk",
+   "why": "screen changed"
+  },
+  {
+   "row": "clock#7",
+   "screen": "*",
+   "why": "most of borrow_hoodie changed (1 of 1 screens)"
+  },
+  {
+   "row": "clock#7",
+   "screen": "mom_living_room.talk",
+   "why": "screen changed"
+  },
+  {
+   "row": "clock#8",
+   "screen": "*",
+   "why": "most of borrow_hoodie changed (1 of 1 screens)"
+  },
+  {
+   "row": "clock#8",
+   "screen": "mom_living_room.talk",
+   "why": "screen changed"
+  },
+  {
+   "row": "clock#9",
+   "screen": "*",
+   "why": "most of borrow_hoodie changed (1 of 1 screens)"
+  },
+  {
+   "row": "clock#9",
+   "screen": "mom_living_room.talk",
+   "why": "screen changed"
+  },
+  {
+   "row": "clothes#1",
+   "screen": "*",
+   "why": "most of borrow_hoodie changed (1 of 1 screens)"
+  },
+  {
+   "row": "clothes#1",
+   "screen": "hood_street",
+   "why": "failed last pass"
+  },
+  {
+   "row": "clothes#1",
+   "screen": "mom_living_room.talk",
+   "why": "screen changed"
+  },
+  {
+   "row": "clothes#2",
+   "screen": "*",
+   "why": "most of borrow_hoodie changed (1 of 1 screens)"
+  },
+  {
+   "row": "clothes#2",
+   "screen": "borrow_hoodie.take",
+   "why": "failed last pass"
+  },
+  {
+   "row": "clothes#2",
+   "screen": "mom_living_room.talk",
+   "why": "screen changed"
+  },
+  {
+   "row": "clothes#3",
+   "screen": "*",
+   "why": "most of borrow_hoodie changed (1 of 1 screens)"
+  },
+  {
+   "row": "clothes#3",
+   "screen": "mom_living_room.talk",
+   "why": "screen changed"
+  },
+  {
+   "row": "clothes#4",
+   "screen": "*",
+   "why": "most of borrow_hoodie changed (1 of 1 screens)"
+  },
+  {
+   "row": "clothes#4",
+   "screen": "borrow_mom.take",
+   "why": "failed last pass"
+  },
+  {
+   "row": "clothes#4",
+   "screen": "mom_living_room.talk",
+   "why": "screen changed"
+  },
+  {
+   "row": "clothes#5",
+   "screen": "*",
+   "why": "most of borrow_hoodie changed (1 of 1 screens)"
+  },
+  {
+   "row": "clothes#5",
+   "screen": "mom_living_room.talk",
+   "why": "screen changed"
+  },
+  {
+   "row": "clothes#6",
+   "screen": "*",
+   "why": "most of borrow_hoodie changed (1 of 1 screens)"
+  },
+  {
+   "row": "clothes#6",
+   "screen": "hood_street",
+   "why": "failed last pass"
+  },
+  {
+   "row": "clothes#6",
+   "screen": "mom_living_room.talk",
+   "why": "screen changed"
+  },
+  {
+   "row": "clothes#7",
+   "screen": "*",
+   "why": "most of borrow_hoodie changed (1 of 1 screens)"
+  },
+  {
+   "row": "clothes#7",
+   "screen": "mom_living_room.talk",
+   "why": "screen changed"
+  },
+  {
+   "row": "clothes#8",
+   "screen": "*",
+   "why": "most of borrow_hoodie changed (1 of 1 screens)"
+  },
+  {
+   "row": "clothes#8",
+   "screen": "mom_living_room.talk",
+   "why": "screen changed"
+  },
+  {
+   "row": "clothes#9",
+   "screen": "*",
+   "why": "most of borrow_hoodie changed (1 of 1 screens)"
+  },
+  {
+   "row": "clothes#9",
+   "screen": "mom_living_room.talk",
+   "why": "screen changed"
+  },
+  {
+   "row": "heat#1",
+   "screen": "*",
+   "why": "most of borrow_hoodie changed (1 of 1 screens)"
+  },
+  {
+   "row": "heat#1",
+   "screen": "mom_living_room.talk",
+   "why": "screen changed"
+  },
+  {
+   "row": "heat#2",
+   "screen": "*",
+   "why": "most of borrow_hoodie changed (1 of 1 screens)"
+  },
+  {
+   "row": "heat#2",
+   "screen": "mom_living_room.talk",
+   "why": "screen changed"
+  },
+  {
+   "row": "heat#3",
+   "screen": "*",
+   "why": "most of borrow_hoodie changed (1 of 1 screens)"
+  },
+  {
+   "row": "heat#3",
+   "screen": "mom_living_room.talk",
+   "why": "screen changed"
+  },
+  {
+   "row": "heat#4",
+   "screen": "*",
+   "why": "most of borrow_hoodie changed (1 of 1 screens)"
+  },
+  {
+   "row": "heat#4",
+   "screen": "mom_living_room.talk",
+   "why": "screen changed"
+  },
+  {
+   "row": "heat#5",
+   "screen": "*",
+   "why": "most of borrow_hoodie changed (1 of 1 screens)"
+  },
+  {
+   "row": "heat#5",
+   "screen": "mom_living_room.talk",
+   "why": "screen changed"
+  },
+  {
+   "row": "heat#6",
+   "screen": "*",
+   "why": "most of borrow_hoodie changed (1 of 1 screens)"
+  },
+  {
+   "row": "heat#6",
+   "screen": "mom_living_room.talk",
+   "why": "screen changed"
+  },
+  {
+   "row": "heat#7",
+   "screen": "*",
+   "why": "most of borrow_hoodie changed (1 of 1 screens)"
+  },
+  {
+   "row": "heat#7",
+   "screen": "mom_living_room.talk",
+   "why": "screen changed"
+  },
+  {
+   "row": "media#1",
+   "screen": "*",
+   "why": "most of borrow_hoodie changed (1 of 1 screens)"
+  },
+  {
+   "row": "media#1",
+   "screen": "mom_living_room.talk",
+   "why": "screen changed"
+  },
+  {
+   "row": "media#2",
+   "screen": "*",
+   "why": "most of borrow_hoodie changed (1 of 1 screens)"
+  },
+  {
+   "row": "media#2",
+   "screen": "mom_living_room.talk",
+   "why": "screen changed"
+  },
+  {
+   "row": "media#3",
+   "screen": "*",
+   "why": "most of borrow_hoodie changed (1 of 1 screens)"
+  },
+  {
+   "row": "media#3",
+   "screen": "mom_living_room.talk",
+   "why": "screen changed"
+  },
+  {
+   "row": "media#4",
+   "screen": "*",
+   "why": "most of borrow_hoodie changed (1 of 1 screens)"
+  },
+  {
+   "row": "media#4",
+   "screen": "mom_living_room.talk",
+   "why": "screen changed"
+  },
+  {
+   "row": "media#5",
+   "screen": "*",
+   "why": "most of borrow_hoodie changed (1 of 1 screens)"
+  },
+  {
+   "row": "media#5",
+   "screen": "mom_living_room.talk",
+   "why": "screen changed"
+  },
+  {
+   "row": "media#6",
+   "screen": "*",
+   "why": "most of borrow_hoodie changed (1 of 1 screens)"
+  },
+  {
+   "row": "media#6",
+   "screen": "mom_living_room.talk",
+   "why": "screen changed"
+  },
+  {
+   "row": "media#7",
+   "screen": "*",
+   "why": "most of borrow_hoodie changed (1 of 1 screens)"
+  },
+  {
+   "row": "media#7",
+   "screen": "mom_living_room.talk",
+   "why": "screen changed"
+  },
+  {
+   "row": "opening#1",
+   "screen": "*",
+   "why": "most of borrow_hoodie changed (1 of 1 screens)"
+  },
+  {
+   "row": "opening#1",
+   "screen": "mom_living_room.talk",
+   "why": "screen changed"
+  },
+  {
+   "row": "opening#2",
+   "screen": "*",
+   "why": "most of borrow_hoodie changed (1 of 1 screens)"
+  },
+  {
+   "row": "opening#2",
+   "screen": "mom_living_room.talk",
+   "why": "screen changed"
+  },
+  {
+   "row": "opening#3",
+   "screen": "*",
+   "why": "most of borrow_hoodie changed (1 of 1 screens)"
+  },
+  {
+   "row": "opening#3",
+   "screen": "mom_living_room.talk",
+   "why": "screen changed"
+  },
+  {
+   "row": "opening#4",
+   "screen": "*",
+   "why": "most of borrow_hoodie changed (1 of 1 screens)"
+  },
+  {
+   "row": "opening#4",
+   "screen": "mom_living_room.talk",
+   "why": "screen changed"
+  },
+  {
+   "row": "opening#5",
+   "screen": "*",
+   "why": "most of borrow_hoodie changed (1 of 1 screens)"
+  },
+  {
+   "row": "opening#5",
+   "screen": "mom_living_room.talk",
+   "why": "screen changed"
+  },
+  {
+   "row": "opening#6",
+   "screen": "*",
+   "why": "most of borrow_hoodie changed (1 of 1 screens)"
+  },
+  {
+   "row": "opening#6",
+   "screen": "mom_living_room.talk",
+   "why": "screen changed"
+  },
+  {
+   "row": "opening#7",
+   "screen": "*",
+   "why": "most of borrow_hoodie changed (1 of 1 screens)"
+  },
+  {
+   "row": "opening#7",
+   "screen": "mom_living_room.talk",
+   "why": "screen changed"
+  },
+  {
+   "row": "people#1",
+   "screen": "*",
+   "why": "most of borrow_hoodie changed (1 of 1 screens)"
+  },
+  {
+   "row": "people#1",
+   "screen": "mom_living_room.talk",
+   "why": "screen changed"
+  },
+  {
+   "row": "people#10",
+   "screen": "*",
+   "why": "most of borrow_hoodie changed (1 of 1 screens)"
+  },
+  {
+   "row": "people#10",
+   "screen": "mom_living_room.talk",
+   "why": "screen changed"
+  },
+  {
+   "row": "people#2",
+   "screen": "*",
+   "why": "most of borrow_hoodie changed (1 of 1 screens)"
+  },
+  {
+   "row": "people#2",
+   "screen": "mom_living_room.talk",
+   "why": "screen changed"
+  },
+  {
+   "row": "people#3",
+   "screen": "*",
+   "why": "most of borrow_hoodie changed (1 of 1 screens)"
+  },
+  {
+   "row": "people#3",
+   "screen": "mom_living_room.talk",
+   "why": "screen changed"
+  },
+  {
+   "row": "people#4",
+   "screen": "*",
+   "why": "most of borrow_hoodie changed (1 of 1 screens)"
+  },
+  {
+   "row": "people#4",
+   "screen": "mom_living_room.talk",
+   "why": "screen changed"
+  },
+  {
+   "row": "people#5",
+   "screen": "*",
+   "why": "most of borrow_hoodie changed (1 of 1 screens)"
+  },
+  {
+   "row": "people#5",
+   "screen": "mom_living_room.talk",
+   "why": "screen changed"
+  },
+  {
+   "row": "people#6",
+   "screen": "*",
+   "why": "most of borrow_hoodie changed (1 of 1 screens)"
+  },
+  {
+   "row": "people#6",
+   "screen": "mom_living_room.talk",
+   "why": "screen changed"
+  },
+  {
+   "row": "people#7",
+   "screen": "*",
+   "why": "most of borrow_hoodie changed (1 of 1 screens)"
+  },
+  {
+   "row": "people#7",
+   "screen": "mom_living_room.talk",
+   "why": "screen changed"
+  },
+  {
+   "row": "people#8",
+   "screen": "*",
+   "why": "most of borrow_hoodie changed (1 of 1 screens)"
+  },
+  {
+   "row": "people#8",
+   "screen": "mom_living_room.talk",
+   "why": "screen changed"
+  },
+  {
+   "row": "people#9",
+   "screen": "*",
+   "why": "most of borrow_hoodie changed (1 of 1 screens)"
+  },
+  {
+   "row": "people#9",
+   "screen": "mom_living_room.talk",
+   "why": "screen changed"
+  },
+  {
+   "row": "places#1",
+   "screen": "*",
+   "why": "most of borrow_hoodie changed (1 of 1 screens)"
+  },
+  {
+   "row": "places#1",
+   "screen": "mom_living_room.talk",
+   "why": "screen changed"
+  },
+  {
+   "row": "places#2",
+   "screen": "*",
+   "why": "most of borrow_hoodie changed (1 of 1 screens)"
+  },
+  {
+   "row": "places#2",
+   "screen": "mom_living_room.talk",
+   "why": "screen changed"
+  },
+  {
+   "row": "places#3",
+   "screen": "*",
+   "why": "most of borrow_hoodie changed (1 of 1 screens)"
+  },
+  {
+   "row": "places#3",
+   "screen": "mom_living_room.talk",
+   "why": "screen changed"
+  },
+  {
+   "row": "places#4",
+   "screen": "*",
+   "why": "most of borrow_hoodie changed (1 of 1 screens)"
+  },
+  {
+   "row": "places#4",
+   "screen": "mom_living_room.talk",
+   "why": "screen changed"
+  },
+  {
+   "row": "places#5",
+   "screen": "*",
+   "why": "most of borrow_hoodie changed (1 of 1 screens)"
+  },
+  {
+   "row": "places#5",
+   "screen": "mom_living_room.talk",
+   "why": "screen changed"
+  },
+  {
+   "row": "places#6",
+   "screen": "*",
+   "why": "most of borrow_hoodie changed (1 of 1 screens)"
+  },
+  {
+   "row": "places#6",
+   "screen": "mom_living_room.talk",
+   "why": "screen changed"
+  },
+  {
+   "row": "places#7",
+   "screen": "*",
+   "why": "most of borrow_hoodie changed (1 of 1 screens)"
+  },
+  {
+   "row": "places#7",
+   "screen": "mom_living_room.talk",
+   "why": "screen changed"
+  },
+  {
+   "row": "places#8",
+   "screen": "*",
+   "why": "most of borrow_hoodie changed (1 of 1 screens)"
+  },
+  {
+   "row": "places#8",
+   "screen": "mom_living_room.talk",
+   "why": "screen changed"
+  },
+  {
+   "row": "places#9",
+   "screen": "*",
+   "why": "most of borrow_hoodie changed (1 of 1 screens)"
+  },
+  {
+   "row": "places#9",
+   "screen": "mom_living_room.talk",
+   "why": "screen changed"
+  },
+  {
+   "row": "voice#1",
+   "screen": "*",
+   "why": "most of borrow_hoodie changed (1 of 1 screens)"
+  },
+  {
+   "row": "voice#1",
+   "screen": "mom_living_room.talk",
+   "why": "screen changed"
+  },
+  {
+   "row": "voice#2",
+   "screen": "*",
+   "why": "most of borrow_hoodie changed (1 of 1 screens)"
+  },
+  {
+   "row": "voice#2",
+   "screen": "mom_living_room.talk",
+   "why": "screen changed"
+  },
+  {
+   "row": "voice#3",
+   "screen": "*",
+   "why": "most of borrow_hoodie changed (1 of 1 screens)"
+  },
+  {
+   "row": "voice#3",
+   "screen": "mom_living_room.talk",
+   "why": "screen changed"
+  },
+  {
+   "row": "voice#4",
+   "screen": "*",
+   "why": "most of borrow_hoodie changed (1 of 1 screens)"
+  },
+  {
+   "row": "voice#4",
+   "screen": "mom_living_room.talk",
+   "why": "screen changed"
+  },
+  {
+   "row": "voice#5",
+   "screen": "*",
+   "why": "most of borrow_hoodie changed (1 of 1 screens)"
+  },
+  {
+   "row": "voice#5",
+   "screen": "mom_living_room.talk",
+   "why": "screen changed"
+  },
+  {
+   "row": "voice#6",
+   "screen": "*",
+   "why": "most of borrow_hoodie changed (1 of 1 screens)"
+  },
+  {
+   "row": "voice#6",
+   "screen": "mom_living_room.talk",
+   "why": "screen changed"
+  },
+  {
+   "row": "voice#7",
+   "screen": "*",
+   "why": "most of borrow_hoodie changed (1 of 1 screens)"
+  },
+  {
+   "row": "voice#7",
+   "screen": "borrow_mom.take",
+   "why": "failed last pass"
+  },
+  {
+   "row": "voice#7",
+   "screen": "mom_living_room.talk",
+   "why": "screen changed"
+  },
+  {
+   "row": "voice#8",
+   "screen": "*",
+   "why": "most of borrow_hoodie changed (1 of 1 screens)"
+  },
+  {
+   "row": "voice#8",
+   "screen": "mom_living_room.talk",
+   "why": "screen changed"
+  }
+ ],
+ "unowed": []
+}

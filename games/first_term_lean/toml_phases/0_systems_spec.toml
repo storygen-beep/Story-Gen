@@ -86,16 +86,19 @@ bands = [
 key = "sundays_paid"
 label = "Sundays paid"
 hidden = true
+toast = false
 
 [[traits.labels]]
 key = "rent_paid_total"
 label = "Rent paid"
 hidden = true
+toast = false
 
 [[traits.labels]]
 key = "meals_today"
 label = "Meals today"
 hidden = true
+toast = false
 
 [[traits.labels]]
 key = "want"

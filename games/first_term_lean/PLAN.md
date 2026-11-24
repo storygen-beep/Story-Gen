@@ -339,8 +339,8 @@ Café work (after P21), every day, any hour Tom or Chris is behind the counter (
 relayed by ENI: "shifts are independent of the classes, she can choose between things, its players
 freedom"; was weekdays 2–6pm and weekend slots, LO 2026-11-21): "Work an hour" (1 hour, 4 energy,
 $5) or "Work a shift" (4 hours, 15 energy, $22). Starts: an hour, weekdays 7am–7:55pm, Saturday
-10am–7:55pm, Sunday 10am–6:55pm; a shift, weekdays 7am–4:55pm, Saturday 10am–4:55pm, Sunday
-10am–3:55pm. LO 2026-11-24: shifts are independent of classes.
+10am–7:55pm, Sunday 10am–6:55pm; a shift, weekdays 7am–4:55pm, Saturday and Sunday 10am–3:55pm
+(Chris's weekend row ends at 8pm). LO 2026-11-24: shifts are independent of classes.
 Pay (LO "A", 2026-11-21): $5 an hour plus $2 tips, $22 a shift, said in Tom's scene.
 Four shifts, or fifteen single hours, cover the $75 rent (any hour, 8f). A missed shift costs only its
 pay in release 1.
@@ -354,7 +354,7 @@ pay in release 1.
 | Faculty Offices | none alone | See your advisor (Walsh, office hours, after P16) |
 | Cafeteria | Buy lunch ($4, 20 min, +15 energy) | Rosa at the counter |
 | The Quad | Sit on the grass (30 min, +5 energy) | Zoe (P20), Jake (P25) |
-| Café | Work a shift (in its slot) | Tom; Chris behind the counter |
+| Café | Work an hour or a shift (any hour Tom or Chris is in) | Tom; Chris behind the counter |
 
 ### 8g. Reputation and talk
 

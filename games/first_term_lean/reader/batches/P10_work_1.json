@@ -1,14 +1,94 @@
 {
  "items": [
   {
-   "row": "C913",
-   "screen": "cafe_hour_saturday.work",
+   "row": "B10",
+   "screen": "cafe_work_hour.work",
+   "why": "screen changed: truth row"
+  },
+  {
+   "row": "B10",
+   "screen": "cafe_work_shift.shift",
+   "why": "screen changed: truth row"
+  },
+  {
+   "row": "B8",
+   "screen": "cafe_work_hour.work",
+   "why": "screen changed: truth row"
+  },
+  {
+   "row": "B8",
+   "screen": "cafe_work_shift.shift",
+   "why": "screen changed: truth row"
+  },
+  {
+   "row": "C151",
+   "screen": "cafe_work_shift.shift",
+   "why": "failed last pass (a note), its screen changed"
+  },
+  {
+   "row": "C460",
+   "screen": "cafe_work_hour.work",
+   "why": "screen changed: truth row"
+  },
+  {
+   "row": "C460",
+   "screen": "cafe_work_shift.shift",
+   "why": "screen changed: truth row"
+  },
+  {
+   "row": "C461",
+   "screen": "cafe_work_hour.work",
+   "why": "screen changed: truth row"
+  },
+  {
+   "row": "C461",
+   "screen": "cafe_work_shift.shift",
+   "why": "screen changed: truth row"
+  },
+  {
+   "row": "C927",
+   "screen": "cafe_work_hour.work",
+   "why": "screen changed: truth row"
+  },
+  {
+   "row": "C927",
+   "screen": "cafe_work_shift.shift",
+   "why": "screen changed: truth row"
+  },
+  {
+   "row": "C931",
+   "screen": "cafe_work_hour.work",
+   "why": "screen changed: truth row"
+  },
+  {
+   "row": "C931",
+   "screen": "cafe_work_shift.shift",
+   "why": "screen changed: truth row"
+  },
+  {
+   "row": "C952",
+   "screen": "cafe_work_shift.shift",
    "why": "failed last pass"
   },
   {
-   "row": "C916",
-   "screen": "cafe_hour_saturday.work",
-   "why": "failed last pass"
+   "row": "L106",
+   "screen": "cafe_work_hour.work",
+   "why": "screen changed: truth row"
+  },
+  {
+   "row": "L106",
+   "screen": "cafe_work_shift.shift",
+   "why": "screen changed: truth row"
+  },
+  {
+   "row": "L167",
+   "screen": "cafe_work_hour.work",
+   "why": "screen changed: truth row"
+  },
+  {
+   "row": "L167",
+   "screen": "cafe_work_shift.shift",
+   "why": "screen changed: truth row"
   }
  ]
 }

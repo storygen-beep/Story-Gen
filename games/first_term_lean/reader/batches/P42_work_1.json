@@ -1,414 +1,114 @@
 {
  "items": [
   {
-   "row": "B1",
-   "screen": "*",
-   "why": "most of mom_living_room changed (2 of 2 screens)"
-  },
-  {
    "row": "B10",
-   "screen": "*",
-   "why": "most of mom_living_room changed (2 of 2 screens)"
-  },
-  {
-   "row": "B10",
-   "screen": "talk_mom.eat",
-   "why": "failed last pass"
-  },
-  {
-   "row": "B10",
-   "screen": "talk_mom.hub",
-   "why": "failed last pass"
-  },
-  {
-   "row": "B11",
-   "screen": "*",
-   "why": "most of mom_living_room changed (2 of 2 screens)"
-  },
-  {
-   "row": "B12",
-   "screen": "*",
-   "why": "most of mom_living_room changed (2 of 2 screens)"
-  },
-  {
-   "row": "B13",
-   "screen": "*",
-   "why": "most of mom_living_room changed (2 of 2 screens)"
-  },
-  {
-   "row": "B2",
-   "screen": "*",
-   "why": "most of mom_living_room changed (2 of 2 screens)"
-  },
-  {
-   "row": "B3",
-   "screen": "*",
-   "why": "most of mom_living_room changed (2 of 2 screens)"
-  },
-  {
-   "row": "B4",
-   "screen": "*",
-   "why": "most of mom_living_room changed (2 of 2 screens)"
-  },
-  {
-   "row": "B4",
    "screen": "mom_living_room.talk",
-   "why": "failed last pass"
+   "why": "screen changed: truth row"
   },
   {
-   "row": "B4",
+   "row": "B10",
    "screen": "talk_mom.talk",
-   "why": "failed last pass"
-  },
-  {
-   "row": "B5",
-   "screen": "*",
-   "why": "most of mom_living_room changed (2 of 2 screens)"
-  },
-  {
-   "row": "B6",
-   "screen": "*",
-   "why": "most of mom_living_room changed (2 of 2 screens)"
-  },
-  {
-   "row": "B7",
-   "screen": "*",
-   "why": "most of mom_living_room changed (2 of 2 screens)"
+   "why": "screen changed: truth row"
   },
   {
    "row": "B8",
-   "screen": "*",
-   "why": "most of mom_living_room changed (2 of 2 screens)"
-  },
-  {
-   "row": "B9",
-   "screen": "*",
-   "why": "most of mom_living_room changed (2 of 2 screens)"
-  },
-  {
-   "row": "C1234",
-   "screen": "*",
-   "why": "most of mom_living_room changed (2 of 2 screens)"
-  },
-  {
-   "row": "C1238",
-   "screen": "*",
-   "why": "most of mom_living_room changed (2 of 2 screens)"
-  },
-  {
-   "row": "C1249",
-   "screen": "*",
-   "why": "most of mom_living_room changed (2 of 2 screens)"
-  },
-  {
-   "row": "C1250",
-   "screen": "*",
-   "why": "most of mom_living_room changed (2 of 2 screens)"
-  },
-  {
-   "row": "C1255",
-   "screen": "*",
-   "why": "most of mom_living_room changed (2 of 2 screens)"
-  },
-  {
-   "row": "C1261",
-   "screen": "*",
-   "why": "most of mom_living_room changed (2 of 2 screens)"
-  },
-  {
-   "row": "C1262",
-   "screen": "*",
-   "why": "most of mom_living_room changed (2 of 2 screens)"
-  },
-  {
-   "row": "C1265",
-   "screen": "*",
-   "why": "most of mom_living_room changed (2 of 2 screens)"
-  },
-  {
-   "row": "C1267",
-   "screen": "*",
-   "why": "most of mom_living_room changed (2 of 2 screens)"
-  },
-  {
-   "row": "C1274",
-   "screen": "*",
-   "why": "most of mom_living_room changed (2 of 2 screens)"
-  },
-  {
-   "row": "C1275",
-   "screen": "*",
-   "why": "most of mom_living_room changed (2 of 2 screens)"
-  },
-  {
-   "row": "C1277",
-   "screen": "*",
-   "why": "most of mom_living_room changed (2 of 2 screens)"
-  },
-  {
-   "row": "C1278",
-   "screen": "*",
-   "why": "most of mom_living_room changed (2 of 2 screens)"
-  },
-  {
-   "row": "C1280",
-   "screen": "*",
-   "why": "most of mom_living_room changed (2 of 2 screens)"
-  },
-  {
-   "row": "C1281",
-   "screen": "*",
-   "why": "most of mom_living_room changed (2 of 2 screens)"
-  },
-  {
-   "row": "C1284",
-   "screen": "*",
-   "why": "most of mom_living_room changed (2 of 2 screens)"
-  },
-  {
-   "row": "C1340",
-   "screen": "*",
-   "why": "most of mom_living_room changed (2 of 2 screens)"
-  },
-  {
-   "row": "C422",
-   "screen": "*",
-   "why": "most of mom_living_room changed (2 of 2 screens)"
-  },
-  {
-   "row": "C442",
-   "screen": "*",
-   "why": "most of mom_living_room changed (2 of 2 screens)"
-  },
-  {
-   "row": "C442",
    "screen": "mom_living_room.talk",
-   "why": "failed last pass"
+   "why": "screen changed: truth row"
   },
   {
-   "row": "C447",
-   "screen": "*",
-   "why": "most of mom_living_room changed (2 of 2 screens)"
-  },
-  {
-   "row": "C448",
-   "screen": "*",
-   "why": "most of mom_living_room changed (2 of 2 screens)"
-  },
-  {
-   "row": "C449",
-   "screen": "*",
-   "why": "most of mom_living_room changed (2 of 2 screens)"
-  },
-  {
-   "row": "C450",
-   "screen": "*",
-   "why": "most of mom_living_room changed (2 of 2 screens)"
-  },
-  {
-   "row": "C450",
-   "screen": "talk_mom.eat",
-   "why": "failed last pass"
-  },
-  {
-   "row": "C451",
-   "screen": "*",
-   "why": "most of mom_living_room changed (2 of 2 screens)"
+   "row": "B8",
+   "screen": "talk_mom.talk",
+   "why": "screen changed: truth row"
   },
   {
    "row": "C460",
-   "screen": "*",
-   "why": "most of mom_living_room changed (2 of 2 screens)"
+   "screen": "mom_living_room.talk",
+   "why": "screen changed: truth row"
   },
   {
    "row": "C460",
-   "screen": "talk_mom.eat",
-   "why": "failed last pass"
-  },
-  {
-   "row": "C460",
-   "screen": "talk_mom.hub",
-   "why": "failed last pass"
+   "screen": "talk_mom.talk",
+   "why": "screen changed: truth row"
   },
   {
    "row": "C461",
-   "screen": "*",
-   "why": "most of mom_living_room changed (2 of 2 screens)"
+   "screen": "mom_living_room.talk",
+   "why": "screen changed: truth row"
   },
   {
-   "row": "C593",
-   "screen": "*",
-   "why": "most of mom_living_room changed (2 of 2 screens)"
-  },
-  {
-   "row": "C596",
-   "screen": "*",
-   "why": "most of mom_living_room changed (2 of 2 screens)"
+   "row": "C461",
+   "screen": "talk_mom.talk",
+   "why": "screen changed: truth row"
   },
   {
    "row": "C596",
    "screen": "mom_living_room.talk",
-   "why": "failed last pass"
+   "why": "failed last pass (a note), its screen changed"
   },
   {
    "row": "C596",
    "screen": "talk_mom.talk",
+   "why": "failed last pass (a note), its screen changed"
+  },
+  {
+   "row": "C921",
+   "screen": "mom_living_room.talk",
+   "why": "screen changed: truth row"
+  },
+  {
+   "row": "C921",
+   "screen": "talk_mom.talk",
+   "why": "screen changed: truth row"
+  },
+  {
+   "row": "C927",
+   "screen": "mom_living_room.talk",
+   "why": "screen changed: truth row"
+  },
+  {
+   "row": "C927",
+   "screen": "talk_mom.talk",
+   "why": "screen changed: truth row"
+  },
+  {
+   "row": "C931",
+   "screen": "mom_living_room.talk",
+   "why": "screen changed: truth row"
+  },
+  {
+   "row": "C931",
+   "screen": "talk_mom.talk",
+   "why": "screen changed: truth row"
+  },
+  {
+   "row": "L106",
+   "screen": "mom_living_room.talk",
+   "why": "screen changed: truth row"
+  },
+  {
+   "row": "L106",
+   "screen": "talk_mom.talk",
+   "why": "screen changed: truth row"
+  },
+  {
+   "row": "L167",
+   "screen": "mom_living_room.talk",
+   "why": "screen changed: truth row"
+  },
+  {
+   "row": "L167",
+   "screen": "talk_mom.talk",
+   "why": "screen changed: truth row"
+  },
+  {
+   "row": "people#7",
+   "screen": "mom_living_room.talk",
    "why": "failed last pass"
   },
   {
-   "row": "C598",
-   "screen": "*",
-   "why": "most of mom_living_room changed (2 of 2 screens)"
-  },
-  {
-   "row": "C613",
-   "screen": "*",
-   "why": "most of mom_living_room changed (2 of 2 screens)"
-  },
-  {
-   "row": "C618",
-   "screen": "*",
-   "why": "most of mom_living_room changed (2 of 2 screens)"
-  },
-  {
-   "row": "C619",
-   "screen": "*",
-   "why": "most of mom_living_room changed (2 of 2 screens)"
-  },
-  {
-   "row": "C620",
-   "screen": "*",
-   "why": "most of mom_living_room changed (2 of 2 screens)"
-  },
-  {
-   "row": "C622",
-   "screen": "*",
-   "why": "most of mom_living_room changed (2 of 2 screens)"
-  },
-  {
-   "row": "C625",
-   "screen": "*",
-   "why": "most of mom_living_room changed (2 of 2 screens)"
-  },
-  {
-   "row": "C626",
-   "screen": "*",
-   "why": "most of mom_living_room changed (2 of 2 screens)"
-  },
-  {
-   "row": "C627",
-   "screen": "*",
-   "why": "most of mom_living_room changed (2 of 2 screens)"
-  },
-  {
-   "row": "C630",
-   "screen": "*",
-   "why": "most of mom_living_room changed (2 of 2 screens)"
-  },
-  {
-   "row": "C632",
-   "screen": "*",
-   "why": "most of mom_living_room changed (2 of 2 screens)"
-  },
-  {
-   "row": "C639",
-   "screen": "*",
-   "why": "most of mom_living_room changed (2 of 2 screens)"
-  },
-  {
-   "row": "C640",
-   "screen": "*",
-   "why": "most of mom_living_room changed (2 of 2 screens)"
-  },
-  {
-   "row": "C644",
-   "screen": "*",
-   "why": "most of mom_living_room changed (2 of 2 screens)"
-  },
-  {
-   "row": "C656",
-   "screen": "*",
-   "why": "most of mom_living_room changed (2 of 2 screens)"
-  },
-  {
-   "row": "C660",
-   "screen": "*",
-   "why": "most of mom_living_room changed (2 of 2 screens)"
-  },
-  {
-   "row": "C690",
-   "screen": "*",
-   "why": "most of mom_living_room changed (2 of 2 screens)"
-  },
-  {
-   "row": "C707",
-   "screen": "*",
-   "why": "most of mom_living_room changed (2 of 2 screens)"
-  },
-  {
-   "row": "C738",
-   "screen": "*",
-   "why": "most of mom_living_room changed (2 of 2 screens)"
-  },
-  {
-   "row": "C758",
-   "screen": "*",
-   "why": "most of mom_living_room changed (2 of 2 screens)"
-  },
-  {
-   "row": "C762",
-   "screen": "*",
-   "why": "most of mom_living_room changed (2 of 2 screens)"
-  },
-  {
-   "row": "C769",
-   "screen": "*",
-   "why": "most of mom_living_room changed (2 of 2 screens)"
-  },
-  {
-   "row": "C770",
-   "screen": "*",
-   "why": "most of mom_living_room changed (2 of 2 screens)"
-  },
-  {
-   "row": "C771",
-   "screen": "*",
-   "why": "most of mom_living_room changed (2 of 2 screens)"
-  },
-  {
-   "row": "C773",
-   "screen": "*",
-   "why": "most of mom_living_room changed (2 of 2 screens)"
-  },
-  {
-   "row": "C776",
-   "screen": "*",
-   "why": "most of mom_living_room changed (2 of 2 screens)"
-  },
-  {
-   "row": "C777",
-   "screen": "*",
-   "why": "most of mom_living_room changed (2 of 2 screens)"
-  },
-  {
-   "row": "C794",
-   "screen": "*",
-   "why": "most of mom_living_room changed (2 of 2 screens)"
-  },
-  {
-   "row": "C795",
-   "screen": "*",
-   "why": "most of mom_living_room changed (2 of 2 screens)"
-  },
-  {
-   "row": "C804",
-   "screen": "*",
-   "why": "most of mom_living_room changed (2 of 2 screens)"
-  },
-  {
-   "row": "C808",
-   "screen": "*",
-   "why": "most of mom_living_room changed (2 of 2 screens)"
+   "row": "people#7",
+   "screen": "talk_mom.talk",
+   "why": "failed last pass"
   }
  ]
 }

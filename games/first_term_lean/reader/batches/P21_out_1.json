@@ -1,0 +1,250 @@
+{
+ "verdicts": [
+  {
+   "row": "B10",
+   "screen": "cafe_hire.ask",
+   "verdict": "PASS",
+   "line": "A man in his thirties is behind the counter, sleeves rolled up",
+   "why": "Tom's rows put him at near_cafe Mon-Sat 10-21; the ask opens Mon-Sat 10:00-20:54 (end exclusive), +5 ends by 20:59; the sign line is behind cafe_hired false; he's unnamed, so a return after 'Not today' still reads true"
+  },
+  {
+   "row": "B10",
+   "screen": "cafe_hire.both",
+   "verdict": "PASS",
+   "line": "Funny. I'm Tom. I run the place.",
+   "why": "Tom's rows put him at near_cafe Mon-Sat 10-21; the ask opens Mon-Sat 10:00-20:54 (end exclusive), +5 ends by 20:59; pay and Chris-on-weekdays lines match P10 rows and Chris's weekday 7-15 row"
+  },
+  {
+   "row": "B10",
+   "screen": "cafe_hire.no",
+   "verdict": "PASS",
+   "line": "He shrugs and goes back to the clean spot on the counter.",
+   "why": "Tom's rows put him at near_cafe Mon-Sat 10-21; the ask opens Mon-Sat 10:00-20:54 (end exclusive), +5 ends by 20:59; the sign does stay up (Help Wanted line on the Caf\u00e9 until cafe_hired)"
+  },
+  {
+   "row": "B10",
+   "screen": "cafe_hire.sign",
+   "verdict": "PASS",
+   "line": "Come in when you want. An hour or a whole shift, as long as one of us is here till you're done.",
+   "why": "P10's hour and shift rows (P10 windows) fit 'one of us is here till you're done'; 'Your first one's a weekday, when Chris is on' matches cafe_first_shift Mon-Fri 10:00-14:55 inside Chris's 7-15 row"
+  },
+  {
+   "row": "B4",
+   "screen": "cafe_hire.both",
+   "verdict": "PASS",
+   "line": "Your lips burn where he looked, and you look away first.",
+   "why": "stage 0: his look happens to her, she reacts on her body (lips burn) and pushes back by looking away first; no chosen flirt"
+  },
+  {
+   "row": "B8",
+   "screen": "cafe_hire.ask",
+   "verdict": "PASS",
+   "line": "\"You here about the sign, or the coffee?\"",
+   "why": "no number and no garment named"
+  },
+  {
+   "row": "B8",
+   "screen": "cafe_hire.both",
+   "verdict": "PASS",
+   "line": "Four-hour shifts, five an hour, plus whatever lands in the tip jar. Call it twenty-two a shift.",
+   "why": "matches PLAN.md:239-240,344 ($5 an hour, $22 a shift); no garment named"
+  },
+  {
+   "row": "B8",
+   "screen": "cafe_hire.no",
+   "verdict": "PASS",
+   "line": "\"Suit yourself. Sign stays up.\"",
+   "why": "no number and no garment named"
+  },
+  {
+   "row": "B8",
+   "screen": "cafe_hire.sign",
+   "verdict": "PASS",
+   "line": "Four-hour shifts, five an hour, plus whatever lands in the tip jar. Call it twenty-two a shift.",
+   "why": "matches PLAN.md:239-240,344; 'your legs' names her body, not a garment"
+  },
+  {
+   "row": "C1421",
+   "screen": "cafe_hire.no",
+   "verdict": "FAIL",
+   "line": "\"Suit yourself. Sign stays up.\"",
+   "why": "after Not today the ask hides for the day (cafe_ask_parked, no locked_text) while the sign stays up; nothing tells her the ask comes back tomorrow (note row)"
+  },
+  {
+   "row": "C287",
+   "screen": "cafe_hire.both",
+   "verdict": "PASS",
+   "line": "Your lips burn where he looked, and you look away first.",
+   "why": "'Both?' reads as a joke Tom answers 'Funny.'; she looks away first rather than watching by choice, so no stage-2 flirt (note row)"
+  },
+  {
+   "row": "C442",
+   "screen": "cafe_hire.both",
+   "verdict": "PASS",
+   "line": "His eyes go to your mouth, then down to the till, fast.",
+   "why": "says plainly where he looks and what it does to her ('Your lips burn where he looked')"
+  },
+  {
+   "row": "C449",
+   "screen": "cafe_hire.both",
+   "verdict": "PASS",
+   "line": "Your lips burn where he looked, and you look away first.",
+   "why": "the tension is named on her body: his look on her mouth, her lips burn, she breaks the look"
+  },
+  {
+   "row": "C460",
+   "screen": "cafe_hire.ask",
+   "verdict": "PASS",
+   "line": "A man in his thirties is behind the counter, sleeves rolled up",
+   "why": "every claim true on every reach: Tom in, sign up until hired, pay and hours match P10 and PLAN"
+  },
+  {
+   "row": "C461",
+   "screen": "cafe_hire.ask",
+   "verdict": "PASS",
+   "line": "A man in his thirties is behind the counter, sleeves rolled up",
+   "why": "texture (clean spot, sleeves, till) can't clash; Tom's dialogue fits a caf\u00e9 manager of 31"
+  },
+  {
+   "row": "C460",
+   "screen": "cafe_hire.both",
+   "verdict": "PASS",
+   "line": "Funny. I'm Tom. I run the place.",
+   "why": "every claim true on every reach: Tom in, sign up until hired, pay and hours match P10 and PLAN"
+  },
+  {
+   "row": "C461",
+   "screen": "cafe_hire.both",
+   "verdict": "PASS",
+   "line": "Funny. I'm Tom. I run the place.",
+   "why": "texture (clean spot, sleeves, till) can't clash; Tom's dialogue fits a caf\u00e9 manager of 31"
+  },
+  {
+   "row": "C460",
+   "screen": "cafe_hire.no",
+   "verdict": "PASS",
+   "line": "\"Suit yourself. Sign stays up.\"",
+   "why": "every claim true on every reach: Tom in, sign up until hired, pay and hours match P10 and PLAN"
+  },
+  {
+   "row": "C461",
+   "screen": "cafe_hire.no",
+   "verdict": "PASS",
+   "line": "\"Suit yourself. Sign stays up.\"",
+   "why": "texture (clean spot, sleeves, till) can't clash; Tom's dialogue fits a caf\u00e9 manager of 31"
+  },
+  {
+   "row": "C460",
+   "screen": "cafe_hire.sign",
+   "verdict": "PASS",
+   "line": "Come in when you want. An hour or a whole shift, as long as one of us is here till you're done.",
+   "why": "every claim true on every reach: Tom in, sign up until hired, pay and hours match P10 and PLAN"
+  },
+  {
+   "row": "C461",
+   "screen": "cafe_hire.sign",
+   "verdict": "PASS",
+   "line": "Come in when you want. An hour or a whole shift, as long as one of us is here till you're done.",
+   "why": "texture (clean spot, sleeves, till) can't clash; Tom's dialogue fits a caf\u00e9 manager of 31"
+  },
+  {
+   "row": "C927",
+   "screen": "cafe_hire.ask",
+   "verdict": "PASS",
+   "line": "time_progression_minutes = 5",
+   "why": "every exit states its time; none falls to the 3-minute default (note row)"
+  },
+  {
+   "row": "C927",
+   "screen": "cafe_hire.both",
+   "verdict": "PASS",
+   "line": "\"Done\" time_progression_minutes = 0",
+   "why": "every exit states its time; none falls to the 3-minute default (note row)"
+  },
+  {
+   "row": "C927",
+   "screen": "cafe_hire.sign",
+   "verdict": "PASS",
+   "line": "\"Done\" time_progression_minutes = 0",
+   "why": "every exit states its time; none falls to the 3-minute default (note row)"
+  },
+  {
+   "row": "C931",
+   "screen": "cafe_hire.ask",
+   "verdict": "PASS",
+   "line": "time_of_day 10:00-20:55",
+   "why": "end exclusive: last start 20:54, +5 ends 20:59 inside Tom's row; the cooldown's '8:55pm' agrees (note row)"
+  },
+  {
+   "row": "C931",
+   "screen": "cafe_hire.both",
+   "verdict": "PASS",
+   "line": "time_of_day 10:00-20:55",
+   "why": "end exclusive: last start 20:54, +5 ends 20:59 inside Tom's row; the cooldown's '8:55pm' agrees (note row)"
+  },
+  {
+   "row": "C931",
+   "screen": "cafe_hire.sign",
+   "verdict": "PASS",
+   "line": "time_of_day 10:00-20:55",
+   "why": "end exclusive: last start 20:54, +5 ends 20:59 inside Tom's row; the cooldown's '8:55pm' agrees (note row)"
+  },
+  {
+   "row": "L106",
+   "screen": "cafe_hire.ask",
+   "verdict": "PASS",
+   "line": "A man in his thirties is behind the counter, sleeves rolled up",
+   "why": "only Tom is placed on screen (Chris named only as future); who_is_where puts Tom at near_cafe Mon-Sat 10-21"
+  },
+  {
+   "row": "L106",
+   "screen": "cafe_hire.both",
+   "verdict": "PASS",
+   "line": "His eyes go to your mouth, then down to the till, fast.",
+   "why": "only Tom is placed on screen (Chris named only as future); who_is_where puts Tom at near_cafe Mon-Sat 10-21"
+  },
+  {
+   "row": "L106",
+   "screen": "cafe_hire.no",
+   "verdict": "PASS",
+   "line": "He shrugs and goes back to the clean spot on the counter.",
+   "why": "only Tom is placed on screen (Chris named only as future); who_is_where puts Tom at near_cafe Mon-Sat 10-21"
+  },
+  {
+   "row": "L106",
+   "screen": "cafe_hire.sign",
+   "verdict": "PASS",
+   "line": "He peels the sign off the window and drops it under the counter.",
+   "why": "only Tom is placed on screen (Chris named only as future); who_is_where puts Tom at near_cafe Mon-Sat 10-21"
+  },
+  {
+   "row": "L167",
+   "screen": "cafe_hire.ask",
+   "verdict": "PASS",
+   "line": "ask the manager between 10am and 8:55pm, Monday to Saturday.",
+   "why": "one row, same hours every open day (no group needed); greys with show_when_blocked and a cooldown_message naming the full hours and days"
+  },
+  {
+   "row": "L167",
+   "screen": "cafe_hire.both",
+   "verdict": "PASS",
+   "line": "ask the manager between 10am and 8:55pm, Monday to Saturday.",
+   "why": "one row, same hours every open day (no group needed); greys with show_when_blocked and a cooldown_message naming the full hours and days"
+  },
+  {
+   "row": "L167",
+   "screen": "cafe_hire.sign",
+   "verdict": "PASS",
+   "line": "ask the manager between 10am and 8:55pm, Monday to Saturday.",
+   "why": "one row, same hours every open day (no group needed); greys with show_when_blocked and a cooldown_message naming the full hours and days"
+  },
+  {
+   "row": "L71",
+   "screen": "cafe_hire.both",
+   "verdict": "PASS",
+   "line": "Your lips burn where he looked, and you look away first.",
+   "why": "stage 0: it happens to her (his look), she reacts on her body and looks away; she doesn't choose to let him"
+  }
+ ],
+ "causes": []
+}

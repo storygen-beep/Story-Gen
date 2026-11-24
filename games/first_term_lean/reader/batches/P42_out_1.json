@@ -1,0 +1,159 @@
+{
+ "verdicts": [
+  {
+   "row": "B10",
+   "screen": "talk_mom.talk",
+   "verdict": "PASS",
+   "line": "Mark: \"She's got somewhere to be, Laura.\" / \"Mark turns a page, louder than he needs to.\"",
+   "why": "Mark version only under npc_mark is_present (weekdays 7-8 some days, Sat 8-10, Sun 8-12, Mom there too); Ryan version only while Ryan is in the Kitchen (weekdays 18-19, weekends 17-19, Mom there); Mark and Ryan never share the Kitchen per who_is_where, so one version shows; \"Did Mark say anything else? About the rent?\" true on every path, since kitchen_rent follows the met_laura choice; his paper is set up on his own Kitchen menu (\"Mark doesn't look up from the paper.\")"
+  },
+  {
+   "row": "B10",
+   "screen": "mom_living_room.talk",
+   "verdict": "PASS",
+   "line": "Mark: \"Some of us are trying to watch this.\" / \"Mark turns the volume up.\"",
+   "why": "Mark version only under npc_mark is_present (weekdays 19-23, Sun 19-23); his hub line has the remote on his knee, so the TV is on. Mark-absent versions show only Saturday 19-23, so \"Next Saturday, you tell me the next part.\" and \"Stay in tonight\" are true when they show; the game starts Monday, so \"They're fine, Mom\" about classes follows real classes. On weekdays Ryan is also in the room, and no line says he isn't."
+  },
+  {
+   "row": "B8",
+   "screen": "talk_mom.talk",
+   "verdict": "PASS",
+   "line": "Done: time_progression_minutes = 5",
+   "why": "\"Talk (5 min)\" on the hub, and the 5 minutes are spent on Done; no garment is named on the talk screen."
+  },
+  {
+   "row": "B8",
+   "screen": "mom_living_room.talk",
+   "verdict": "PASS",
+   "line": "Done: time_progression_minutes = 5",
+   "why": "Same: 5 min on Done matches the label; no garment named."
+  },
+  {
+   "row": "C460",
+   "screen": "talk_mom.talk",
+   "verdict": "PASS",
+   "line": "Laura: \"Then she's got a minute first.\"",
+   "why": "Every claim is true on every minute it can show (see B10): who is there is gated by npc_at_location and matches the rows; the rent past comes from the opening on every path."
+  },
+  {
+   "row": "C460",
+   "screen": "mom_living_room.talk",
+   "verdict": "PASS",
+   "line": "Laura: \"Then watch it, Mark.\"",
+   "why": "Every claim is true on every visit (see B10); the Saturday-only versions carry the Saturday and tonight lines."
+  },
+  {
+   "row": "C461",
+   "screen": "talk_mom.talk",
+   "verdict": "PASS",
+   "line": "Ryan: \"I'm getting them. I'm getting them.\" / Laura: \"There's always dessert for you.\"",
+   "why": "Texture that can't clash (plates, dessert, a page turned) and dialogue that fits the plan: Laura wants her close, Mark is about her money and wants her out of the way."
+  },
+  {
+   "row": "C461",
+   "screen": "mom_living_room.talk",
+   "verdict": "PASS",
+   "line": "Mark: \"Some of us are trying to watch this.\"",
+   "why": "Mark grumbling at the TV and Laura pushing back fit their plan entries (Laura: to be close; Mark at the TV in his chair)."
+  },
+  {
+   "row": "C596",
+   "screen": "talk_mom.talk",
+   "verdict": "PASS",
+   "line": "hub: presence line, then image pool everyday/mom_kitchen_t0; talk: 40-48 words, 59-82% spoken, Done only",
+   "why": "Her one picture sits on her menu right after the presence line; the talk screen has no picture; the three Kitchen talks run 46/48/40 words, 59%/71%/82% spoken, one exit: about 55 words, about two-thirds spoken."
+  },
+  {
+   "row": "C596",
+   "screen": "mom_living_room.talk",
+   "verdict": "PASS",
+   "line": "hub: presence line, then image pool everyday/mom_living_t0; talk: 42-51 words, 61-76% spoken, Done only",
+   "why": "Picture on the menu after the presence line, none on the talk; five Living Room talks run 50/51/42/47/42 words, 61-76% spoken, one exit."
+  },
+  {
+   "row": "C921",
+   "screen": "talk_mom.talk",
+   "verdict": "N/A",
+   "line": "—",
+   "why": "The talk screen writes no schedule window; Laura, Mark and Ryan rows have end times and none wraps past midnight."
+  },
+  {
+   "row": "C921",
+   "screen": "mom_living_room.talk",
+   "verdict": "N/A",
+   "line": "—",
+   "why": "Same: no window written on this screen."
+  },
+  {
+   "row": "C927",
+   "screen": "talk_mom.talk",
+   "verdict": "PASS",
+   "line": "Done: time_progression_minutes = 5",
+   "why": "The only exit states its time; nothing falls back to 3 minutes."
+  },
+  {
+   "row": "C927",
+   "screen": "mom_living_room.talk",
+   "verdict": "PASS",
+   "line": "Done: time_progression_minutes = 5",
+   "why": "Same."
+  },
+  {
+   "row": "C931",
+   "screen": "talk_mom.talk",
+   "verdict": "N/A",
+   "line": "—",
+   "why": "No time_of_day condition on the talk screen; its groups read npc_at_location only."
+  },
+  {
+   "row": "C931",
+   "screen": "mom_living_room.talk",
+   "verdict": "N/A",
+   "line": "—",
+   "why": "No time_of_day condition; groups read npc_at_location and start flags."
+  },
+  {
+   "row": "L106",
+   "screen": "talk_mom.talk",
+   "verdict": "PASS",
+   "line": "\"Mark turns a page\" (npc_mark is_present) / \"Ryan rolls his eyes\" (npc_ryan is_present)",
+   "why": "Each person a line puts in the Kitchen is behind their own is_present condition, matching who_is_where."
+  },
+  {
+   "row": "L106",
+   "screen": "mom_living_room.talk",
+   "verdict": "PASS",
+   "line": "\"Mark turns the volume up.\" (npc_mark is_present)",
+   "why": "Mark is named only under his is_present condition; Ryan, who is there on weekdays, is never claimed absent."
+  },
+  {
+   "row": "L167",
+   "screen": "talk_mom.talk",
+   "verdict": "N/A",
+   "line": "—",
+   "why": "No activity row with hours on this screen."
+  },
+  {
+   "row": "L167",
+   "screen": "mom_living_room.talk",
+   "verdict": "N/A",
+   "line": "—",
+   "why": "Same."
+  },
+  {
+   "row": "people#7",
+   "screen": "talk_mom.talk",
+   "verdict": "PASS",
+   "line": "Mark: \"She's got somewhere to be, Laura.\" / Laura: \"Then she's got a minute first.\" / Her: \"I'll come find you, Mom. Later.\"",
+   "why": "Lengthened toward the shape: 46/48/40 words, 59%/71%/82% spoken, one exit (Done). The 40-word Ryan version is within the 34-57 target that reader.md sets for length."
+  },
+  {
+   "row": "people#7",
+   "screen": "mom_living_room.talk",
+   "verdict": "PASS",
+   "line": "Mark: \"Some of us are trying to watch this.\" / Laura: \"Then watch it, Mark.\"",
+   "why": "50/51/42/47/42 words, 61-76% spoken, one exit: about 55 words, about two-thirds spoken."
+  }
+ ],
+ "causes": []
+}

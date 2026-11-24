@@ -1,589 +1,124 @@
 {
  "items": [
   {
-   "row": "B1",
-   "screen": "*",
-   "why": "a screen of the scene changed"
+   "row": "B10",
+   "screen": "ryan_room.hub",
+   "why": "screen changed: truth row"
   },
   {
    "row": "B10",
-   "screen": "*",
-   "why": "most of loop_eat changed (1 of 1 screens)"
+   "screen": "ryan_room.talk",
+   "why": "screen changed: truth row"
   },
   {
    "row": "B10",
-   "screen": "ryan_room_weekend.hub",
-   "why": "screen changed"
-  },
-  {
-   "row": "B11",
-   "screen": "*",
-   "why": "most of loop_eat changed (1 of 1 screens)"
-  },
-  {
-   "row": "B11",
-   "screen": "ryan_room_weekend.hub",
-   "why": "screen changed"
-  },
-  {
-   "row": "B12",
-   "screen": "*",
-   "why": "most of loop_eat changed (1 of 1 screens)"
-  },
-  {
-   "row": "B12",
-   "screen": "ryan_room_weekend.hub",
-   "why": "screen changed"
-  },
-  {
-   "row": "B13",
-   "screen": "*",
-   "why": "most of loop_eat changed (1 of 1 screens)"
-  },
-  {
-   "row": "B13",
-   "screen": "ryan_room_weekend.hub",
-   "why": "screen changed"
-  },
-  {
-   "row": "B2",
-   "screen": "*",
-   "why": "a screen of the scene changed"
-  },
-  {
-   "row": "B3",
-   "screen": "*",
-   "why": "most of loop_eat changed (1 of 1 screens)"
-  },
-  {
-   "row": "B3",
-   "screen": "ryan_room_weekend.hub",
-   "why": "screen changed"
-  },
-  {
-   "row": "B4",
-   "screen": "*",
-   "why": "most of loop_eat changed (1 of 1 screens)"
-  },
-  {
-   "row": "B4",
-   "screen": "loop_eat.do",
-   "why": "failed last pass"
-  },
-  {
-   "row": "B4",
-   "screen": "ryan_room_weekend.hub",
-   "why": "screen changed"
-  },
-  {
-   "row": "B5",
-   "screen": "*",
-   "why": "most of loop_eat changed (1 of 1 screens)"
-  },
-  {
-   "row": "B5",
-   "screen": "ryan_room_weekend.hub",
-   "why": "screen changed"
-  },
-  {
-   "row": "B6",
-   "screen": "*",
-   "why": "most of loop_eat changed (1 of 1 screens)"
-  },
-  {
-   "row": "B6",
-   "screen": "ryan_room_weekend.hub",
-   "why": "screen changed"
-  },
-  {
-   "row": "B7",
-   "screen": "*",
-   "why": "most of loop_eat changed (1 of 1 screens)"
-  },
-  {
-   "row": "B7",
-   "screen": "ryan_room_weekend.hub",
-   "why": "screen changed"
+   "screen": "talk_mom.talk",
+   "why": "screen changed: truth row"
   },
   {
    "row": "B8",
-   "screen": "*",
-   "why": "most of loop_eat changed (1 of 1 screens)"
+   "screen": "ryan_room.hub",
+   "why": "screen changed: truth row"
   },
   {
    "row": "B8",
-   "screen": "loop_eat.do",
-   "why": "failed last pass"
+   "screen": "ryan_room.talk",
+   "why": "screen changed: truth row"
   },
   {
    "row": "B8",
-   "screen": "ryan_room_weekend.hub",
-   "why": "screen changed"
+   "screen": "talk_mom.talk",
+   "why": "screen changed: truth row"
   },
   {
-   "row": "B9",
-   "screen": "*",
-   "why": "a screen of the scene changed"
+   "row": "C460",
+   "screen": "ryan_room.hub",
+   "why": "screen changed: truth row"
   },
   {
-   "row": "C1002",
-   "screen": "*",
-   "why": "most of loop_eat changed (1 of 1 screens)"
+   "row": "C460",
+   "screen": "ryan_room.talk",
+   "why": "screen changed: truth row"
   },
   {
-   "row": "C1002",
-   "screen": "ryan_room_weekend.hub",
-   "why": "screen changed"
+   "row": "C460",
+   "screen": "talk_mom.talk",
+   "why": "screen changed: truth row"
   },
   {
-   "row": "C1173",
-   "screen": "*",
-   "why": "most of loop_eat changed (1 of 1 screens)"
+   "row": "C461",
+   "screen": "ryan_room.hub",
+   "why": "screen changed: truth row"
   },
   {
-   "row": "C1173",
-   "screen": "ryan_room_weekend.hub",
-   "why": "screen changed"
+   "row": "C461",
+   "screen": "ryan_room.talk",
+   "why": "screen changed: truth row"
   },
   {
-   "row": "C1184",
-   "screen": "*",
-   "why": "most of loop_eat changed (1 of 1 screens)"
+   "row": "C461",
+   "screen": "talk_mom.talk",
+   "why": "screen changed: truth row"
   },
   {
-   "row": "C1184",
-   "screen": "ryan_room_weekend.hub",
-   "why": "screen changed"
+   "row": "C927",
+   "screen": "ryan_room.hub",
+   "why": "screen changed: truth row"
   },
   {
-   "row": "C1185",
-   "screen": "*",
-   "why": "most of loop_eat changed (1 of 1 screens)"
+   "row": "C927",
+   "screen": "ryan_room.talk",
+   "why": "screen changed: truth row"
   },
   {
-   "row": "C1185",
-   "screen": "ryan_room_weekend.hub",
-   "why": "screen changed"
+   "row": "C927",
+   "screen": "talk_mom.talk",
+   "why": "screen changed: truth row"
   },
   {
-   "row": "C1189",
-   "screen": "*",
-   "why": "most of loop_eat changed (1 of 1 screens)"
+   "row": "C931",
+   "screen": "ryan_room.hub",
+   "why": "screen changed: truth row"
   },
   {
-   "row": "C1189",
-   "screen": "ryan_room_weekend.hub",
-   "why": "screen changed"
+   "row": "C931",
+   "screen": "ryan_room.talk",
+   "why": "screen changed: truth row"
   },
   {
-   "row": "C1198",
-   "screen": "*",
-   "why": "most of loop_eat changed (1 of 1 screens)"
+   "row": "C931",
+   "screen": "talk_mom.talk",
+   "why": "screen changed: truth row"
   },
   {
-   "row": "C1198",
-   "screen": "ryan_room_weekend.hub",
-   "why": "screen changed"
+   "row": "L106",
+   "screen": "ryan_room.hub",
+   "why": "screen changed: truth row"
   },
   {
-   "row": "C1200",
-   "screen": "*",
-   "why": "most of loop_eat changed (1 of 1 screens)"
+   "row": "L106",
+   "screen": "ryan_room.talk",
+   "why": "screen changed: truth row"
   },
   {
-   "row": "C1200",
-   "screen": "ryan_room_weekend.hub",
-   "why": "screen changed"
+   "row": "L106",
+   "screen": "talk_mom.talk",
+   "why": "screen changed: truth row"
   },
   {
-   "row": "C1220",
-   "screen": "*",
-   "why": "most of loop_eat changed (1 of 1 screens)"
+   "row": "L167",
+   "screen": "ryan_room.hub",
+   "why": "screen changed: truth row"
   },
   {
-   "row": "C1220",
-   "screen": "ryan_room_weekend.hub",
-   "why": "screen changed"
+   "row": "L167",
+   "screen": "ryan_room.talk",
+   "why": "screen changed: truth row"
   },
   {
-   "row": "C1221",
-   "screen": "*",
-   "why": "most of loop_eat changed (1 of 1 screens)"
-  },
-  {
-   "row": "C1221",
-   "screen": "ryan_room_weekend.hub",
-   "why": "screen changed"
-  },
-  {
-   "row": "C1234",
-   "screen": "*",
-   "why": "most of talk_mom changed (3 of 3 screens)"
-  },
-  {
-   "row": "C1234",
-   "screen": "ryan_room_weekend.hub",
-   "why": "screen changed"
-  },
-  {
-   "row": "C1238",
-   "screen": "*",
-   "why": "most of talk_mom changed (3 of 3 screens)"
-  },
-  {
-   "row": "C1238",
-   "screen": "ryan_room_weekend.hub",
-   "why": "screen changed"
-  },
-  {
-   "row": "C1249",
-   "screen": "*",
-   "why": "most of talk_mom changed (3 of 3 screens)"
-  },
-  {
-   "row": "C1249",
-   "screen": "ryan_room_weekend.hub",
-   "why": "screen changed"
-  },
-  {
-   "row": "C1250",
-   "screen": "*",
-   "why": "most of loop_eat changed (1 of 1 screens)"
-  },
-  {
-   "row": "C1250",
-   "screen": "ryan_room_weekend.hub",
-   "why": "screen changed"
-  },
-  {
-   "row": "C1255",
-   "screen": "*",
-   "why": "most of talk_mom changed (3 of 3 screens)"
-  },
-  {
-   "row": "C1255",
-   "screen": "ryan_room_weekend.hub",
-   "why": "screen changed"
-  },
-  {
-   "row": "C1261",
-   "screen": "*",
-   "why": "most of talk_mom changed (3 of 3 screens)"
-  },
-  {
-   "row": "C1261",
-   "screen": "ryan_room_weekend.hub",
-   "why": "screen changed"
-  },
-  {
-   "row": "C1265",
-   "screen": "*",
-   "why": "most of talk_mom changed (3 of 3 screens)"
-  },
-  {
-   "row": "C1265",
-   "screen": "ryan_room_weekend.hub",
-   "why": "screen changed"
-  },
-  {
-   "row": "C1267",
-   "screen": "*",
-   "why": "most of talk_mom changed (3 of 3 screens)"
-  },
-  {
-   "row": "C1267",
-   "screen": "ryan_room_weekend.hub",
-   "why": "screen changed"
-  },
-  {
-   "row": "C1274",
-   "screen": "*",
-   "why": "most of talk_mom changed (3 of 3 screens)"
-  },
-  {
-   "row": "C1274",
-   "screen": "ryan_room_weekend.hub",
-   "why": "screen changed"
-  },
-  {
-   "row": "C1275",
-   "screen": "*",
-   "why": "most of talk_mom changed (3 of 3 screens)"
-  },
-  {
-   "row": "C1275",
-   "screen": "ryan_room_weekend.hub",
-   "why": "screen changed"
-  },
-  {
-   "row": "C1277",
-   "screen": "*",
-   "why": "most of talk_mom changed (3 of 3 screens)"
-  },
-  {
-   "row": "C1277",
-   "screen": "ryan_room_weekend.hub",
-   "why": "screen changed"
-  },
-  {
-   "row": "C1278",
-   "screen": "*",
-   "why": "most of talk_mom changed (3 of 3 screens)"
-  },
-  {
-   "row": "C1278",
-   "screen": "ryan_room_weekend.hub",
-   "why": "screen changed"
-  },
-  {
-   "row": "C1279",
-   "screen": "*",
-   "why": "most of talk_mom changed (3 of 3 screens)"
-  },
-  {
-   "row": "C1279",
-   "screen": "ryan_room_weekend.hub",
-   "why": "screen changed"
-  },
-  {
-   "row": "C1280",
-   "screen": "*",
-   "why": "most of talk_mom changed (3 of 3 screens)"
-  },
-  {
-   "row": "C1280",
-   "screen": "ryan_room_weekend.hub",
-   "why": "screen changed"
-  },
-  {
-   "row": "C1281",
-   "screen": "*",
-   "why": "most of talk_mom changed (3 of 3 screens)"
-  },
-  {
-   "row": "C1281",
-   "screen": "ryan_room_weekend.hub",
-   "why": "screen changed"
-  },
-  {
-   "row": "C1284",
-   "screen": "*",
-   "why": "most of talk_mom changed (3 of 3 screens)"
-  },
-  {
-   "row": "C1284",
-   "screen": "ryan_room_weekend.hub",
-   "why": "screen changed"
-  },
-  {
-   "row": "C1303",
-   "screen": "*",
-   "why": "most of loop_eat changed (1 of 1 screens)"
-  },
-  {
-   "row": "C1303",
-   "screen": "ryan_room_weekend.hub",
-   "why": "screen changed"
-  },
-  {
-   "row": "C1313",
-   "screen": "*",
-   "why": "most of loop_eat changed (1 of 1 screens)"
-  },
-  {
-   "row": "C1313",
-   "screen": "ryan_room_weekend.hub",
-   "why": "screen changed"
-  },
-  {
-   "row": "C1337",
-   "screen": "*",
-   "why": "most of loop_eat changed (1 of 1 screens)"
-  },
-  {
-   "row": "C1337",
-   "screen": "ryan_room_weekend.hub",
-   "why": "screen changed"
-  },
-  {
-   "row": "C1340",
-   "screen": "*",
-   "why": "most of loop_eat changed (1 of 1 screens)"
-  },
-  {
-   "row": "C1340",
-   "screen": "ryan_room_weekend.hub",
-   "why": "screen changed"
-  },
-  {
-   "row": "C1342",
-   "screen": "*",
-   "why": "most of loop_eat changed (1 of 1 screens)"
-  },
-  {
-   "row": "C1342",
-   "screen": "ryan_room_weekend.hub",
-   "why": "screen changed"
-  },
-  {
-   "row": "C1345",
-   "screen": "*",
-   "why": "most of loop_eat changed (1 of 1 screens)"
-  },
-  {
-   "row": "C1345",
-   "screen": "ryan_room_weekend.hub",
-   "why": "screen changed"
-  },
-  {
-   "row": "C1360",
-   "screen": "*",
-   "why": "most of loop_eat changed (1 of 1 screens)"
-  },
-  {
-   "row": "C1360",
-   "screen": "ryan_room_weekend.hub",
-   "why": "screen changed"
-  },
-  {
-   "row": "C1421",
-   "screen": "*",
-   "why": "most of loop_eat changed (1 of 1 screens)"
-  },
-  {
-   "row": "C1421",
-   "screen": "ryan_room_weekend.hub",
-   "why": "screen changed"
-  },
-  {
-   "row": "C1423",
-   "screen": "*",
-   "why": "most of loop_eat changed (1 of 1 screens)"
-  },
-  {
-   "row": "C1423",
-   "screen": "ryan_room_weekend.hub",
-   "why": "screen changed"
-  },
-  {
-   "row": "C1425",
-   "screen": "*",
-   "why": "most of loop_eat changed (1 of 1 screens)"
-  },
-  {
-   "row": "C1425",
-   "screen": "ryan_room_weekend.hub",
-   "why": "screen changed"
-  },
-  {
-   "row": "C1427",
-   "screen": "*",
-   "why": "most of loop_eat changed (1 of 1 screens)"
-  },
-  {
-   "row": "C1427",
-   "screen": "ryan_room_weekend.hub",
-   "why": "screen changed"
-  },
-  {
-   "row": "C1428",
-   "screen": "*",
-   "why": "most of loop_eat changed (1 of 1 screens)"
-  },
-  {
-   "row": "C1428",
-   "screen": "ryan_room_weekend.hub",
-   "why": "screen changed"
-  },
-  {
-   "row": "C1431",
-   "screen": "*",
-   "why": "most of loop_eat changed (1 of 1 screens)"
-  },
-  {
-   "row": "C1431",
-   "screen": "ryan_room_weekend.hub",
-   "why": "screen changed"
-  },
-  {
-   "row": "C1432",
-   "screen": "*",
-   "why": "most of loop_eat changed (1 of 1 screens)"
-  },
-  {
-   "row": "C1432",
-   "screen": "ryan_room_weekend.hub",
-   "why": "screen changed"
-  },
-  {
-   "row": "C1433",
-   "screen": "*",
-   "why": "most of loop_eat changed (1 of 1 screens)"
-  },
-  {
-   "row": "C1433",
-   "screen": "ryan_room_weekend.hub",
-   "why": "screen changed"
-  },
-  {
-   "row": "C1434",
-   "screen": "*",
-   "why": "most of loop_eat changed (1 of 1 screens)"
-  },
-  {
-   "row": "C1434",
-   "screen": "ryan_room_weekend.hub",
-   "why": "screen changed"
-  },
-  {
-   "row": "C1438",
-   "screen": "*",
-   "why": "most of loop_eat changed (1 of 1 screens)"
-  },
-  {
-   "row": "C1438",
-   "screen": "ryan_room_weekend.hub",
-   "why": "screen changed"
-  },
-  {
-   "row": "C1441",
-   "screen": "*",
-   "why": "most of loop_eat changed (1 of 1 screens)"
-  },
-  {
-   "row": "C1441",
-   "screen": "ryan_room_weekend.hub",
-   "why": "screen changed"
-  },
-  {
-   "row": "C146",
-   "screen": "*",
-   "why": "most of loop_eat changed (1 of 1 screens)"
-  },
-  {
-   "row": "C146",
-   "screen": "ryan_room_weekend.hub",
-   "why": "screen changed"
-  },
-  {
-   "row": "C149",
-   "screen": "*",
-   "why": "most of loop_eat changed (1 of 1 screens)"
-  },
-  {
-   "row": "C151",
-   "screen": "*",
-   "why": "most of loop_eat changed (1 of 1 screens)"
-  },
-  {
-   "row": "C151",
-   "screen": "ryan_room_weekend.hub",
-   "why": "screen changed"
-  },
-  {
-   "row": "C188",
-   "screen": "*",
-   "why": "most of loop_eat changed (1 of 1 screens)"
+   "row": "L167",
+   "screen": "talk_mom.talk",
+   "why": "screen changed: truth row"
   }
  ]
 }
