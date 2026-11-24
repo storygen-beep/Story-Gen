@@ -1,0 +1,149 @@
+{
+ "verdicts": [
+  {
+   "row": "B10",
+   "screen": "library_meet_holt.after",
+   "verdict": "PASS",
+   "line": "She goes back to her book: a romance novel inside a library-science cover.",
+   "why": "one-time, plays only while her row has her at the desk (trigger npc_at_location; who_is_where Mon-Fri 08-16, Sat 10-16); each answer line behind its own flag set by the choice that leads here",
+   "cause": ""
+  },
+  {
+   "row": "B10",
+   "screen": "library_meet_holt.meet",
+   "verdict": "PASS",
+   "line": "A woman of about thirty sits behind the desk ... She reads your student card",
+   "why": "first visit only (is_repeatable false), Holt present by the trigger at every minute it can fire; no past named, no 'first time' claim",
+   "cause": ""
+  },
+  {
+   "row": "B8",
+   "screen": "library_meet_holt.after",
+   "verdict": "PASS",
+   "line": "She hands the card back.",
+   "why": "no number, no garment of hers named; nothing to disagree with PLAN",
+   "cause": ""
+  },
+  {
+   "row": "B8",
+   "screen": "library_meet_holt.meet",
+   "verdict": "PASS",
+   "line": "a woman of 31 in a buttoned cardigan ... (she is 18, out of frame)",
+   "why": "31 matches PLAN \u00a76 'Ms. Ivy Holt (31, librarian)'; 'about thirty' agrees; the cardigan is Holt's, none of hers named",
+   "cause": ""
+  },
+  {
+   "row": "C1234",
+   "screen": "library_meet_holt.after",
+   "verdict": "PASS",
+   "line": "(no picture on after)",
+   "why": "the picture moved to meet, right after the line it shows ('Quiet floor's upstairs, hon...'); after carries no media now",
+   "cause": ""
+  },
+  {
+   "row": "C1238",
+   "screen": "library_meet_holt.after",
+   "verdict": "PASS",
+   "line": "(no picture on after)",
+   "why": "after no longer shows the picture, so no answer line can clash with it; on meet 'looking at the camera over her reading glasses' fits the look-over and her line on its one visit",
+   "cause": ""
+  },
+  {
+   "row": "C460",
+   "screen": "library_meet_holt.after",
+   "verdict": "PASS",
+   "line": "Good. Upstairs, then. / Nobody's ever found out. / Suit yourself.",
+   "why": "each line behind the flag its own choice set; Holt is there at every minute (trigger)",
+   "cause": ""
+  },
+  {
+   "row": "C460",
+   "screen": "library_meet_holt.meet",
+   "verdict": "PASS",
+   "line": "Quiet floor's upstairs, hon. No food, no phones, no noise.",
+   "why": "desk, Holt and her rules true on the single visit it can fire, any day or hour of her row",
+   "cause": ""
+  },
+  {
+   "row": "C461",
+   "screen": "library_meet_holt.after",
+   "verdict": "PASS",
+   "line": "She doesn't smile, but her mouth wants to.",
+   "why": "texture and dialogue fitting the cast entry (librarian, romance novel hook PLAN \u00a710)",
+   "cause": ""
+  },
+  {
+   "row": "C461",
+   "screen": "library_meet_holt.meet",
+   "verdict": "PASS",
+   "line": "cardigan buttoned to the throat, reading glasses on a chain",
+   "why": "texture that can't clash; student card is plain college texture",
+   "cause": ""
+  },
+  {
+   "row": "C910",
+   "screen": "library_meet_holt.after",
+   "verdict": "PASS",
+   "line": "Done",
+   "why": "'Done' says no time and no energy and costs no money, as the row now asks (LO 2026-11-24, clock.md:19-20, places.md:20); the 5 minutes show on the clock",
+   "cause": ""
+  },
+  {
+   "row": "C927",
+   "screen": "library_meet_holt.after",
+   "verdict": "PASS",
+   "line": "Done (time_progression_minutes = 5)",
+   "why": "every exit sets its time; meet's three answers set 0, Done sets 5; none left to the 3-minute default",
+   "cause": ""
+  },
+  {
+   "row": "C929",
+   "screen": "library_meet_holt.after",
+   "verdict": "PASS",
+   "line": "Done",
+   "why": "'Done' says no time and no energy and costs no money, as the row now asks (LO 2026-11-24, clock.md:19-20, places.md:20); the 5 minutes show on the clock",
+   "cause": ""
+  },
+  {
+   "row": "C931",
+   "screen": "library_meet_holt.after",
+   "verdict": "N/A",
+   "line": "",
+   "why": "no time_of_day condition on this canvas; it gates on npc_at_location",
+   "cause": ""
+  },
+  {
+   "row": "C953",
+   "screen": "library_meet_holt.after",
+   "verdict": "PASS",
+   "line": "Done",
+   "why": "'Done' says no time and no energy and costs no money, as the row now asks (LO 2026-11-24, clock.md:19-20, places.md:20); the 5 minutes show on the clock",
+   "cause": ""
+  },
+  {
+   "row": "L106",
+   "screen": "library_meet_holt.after",
+   "verdict": "PASS",
+   "line": "She goes back to her book",
+   "why": "Holt only; trigger requires npc_holt is_present at campus_library; Nadia not named",
+   "cause": ""
+  },
+  {
+   "row": "L106",
+   "screen": "library_meet_holt.meet",
+   "verdict": "PASS",
+   "line": "A woman of about thirty sits behind the desk",
+   "why": "only Holt claimed; her row puts her there whenever the canvas can fire",
+   "cause": ""
+  },
+  {
+   "row": "L167",
+   "screen": "library_meet_holt.after",
+   "verdict": "N/A",
+   "line": "",
+   "why": "no windowed row on this canvas; Holt's different Saturday hours live in her schedule, and the canvas gates on presence, not per-day rows",
+   "cause": ""
+  }
+ ],
+ "causes": []
+}

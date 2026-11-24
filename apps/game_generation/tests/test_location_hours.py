@@ -201,6 +201,20 @@ def test_the_travel_card_greys_when_closed():
     assert '<<elseif setup.navDestUnlocked("loc_shop")>><a class="location-card' in card
 
 
+def test_a_closed_card_drops_the_place_picture():
+    """LO 2026-11-24 ("A"): a place's picture shows it open, with people in it, so a shut place's card
+    shows the placeholder instead; the open card keeps the picture."""
+    graph = _graph(_raw())
+    gen = TweeComprehensiveGeneratorV2()
+    gen.generate(graph.project, {}, graph=graph)
+    shop = next(l for l in gen.locations if l.properties["slug"] == "loc_shop")
+    gen.location_images[str(shop.id)] = "locations/shop_t0.jpg"
+    card = gen._render_location_nav_card(shop, "./media")
+    closed, rest = card.split("<<elseif", 1)
+    assert "shop_t0.jpg" not in closed and "location-card-placeholder" in closed
+    assert "shop_t0.jpg" in rest
+
+
 # ── 4. behaviour, in the real engine ─────────────────────────────────────────
 
 

@@ -6,8 +6,8 @@
 
 ## Reads
 
-- `games/<slug>/cards/<id>.md`: what the card promised, its `Builds:` and its `Craft:` lines.
-- Every craft file the `Craft:` line names (`.claude/skills/author-game-lean/craft/*.md`), and the craft file for any area the piece touches that the card left out (`craft/opening.md` for the opening, `craft/meters.md` for a meter or an act that pays one, `craft/media.md` for any media spot, `craft/walk-ins.md` for a scene she walks into or someone walking in on her, `craft/body-moments.md` for a moment alone with her body). A craft file the card should have named and didn't is itself a FAIL, and so is an area the scene touches that the card's `Areas:` line doesn't name.
+- `games/<slug>/cards/<id>.md`: what the card promised, its `Builds:` line, and its `Does:` block (or, on a card from before 2026-11-24, its `Craft:` line).
+- On a card with a `Does:` block (from 2026-11-24 on), every craft file its rule list names (`check.py --rules`, see **Input**). On a card from before 2026-11-24: every craft file the `Craft:` line names (`.claude/skills/author-game-lean/craft/*.md`), and the craft file for any area the piece touches that the card left out (`craft/opening.md` for the opening, `craft/meters.md` for a meter or an act that pays one, `craft/media.md` for any media spot, `craft/walk-ins.md` for a scene she walks into or someone walking in on her, `craft/body-moments.md` for a moment alone with her body). On those older cards, a craft file the card should have named and didn't is itself a FAIL, and so is an area the scene touches that the card's `Areas:` line doesn't name. A `Does:` card has neither line, so neither is a FAIL there.
 - `craft/voice.md` for the voice and "The truth rule", on every scene piece. The writer reads the same text (`piece.md` step 3).
 - The canvases in `Builds:`, from `games/<slug>/toml_phases/7_final_game.toml`.
 - `games/<slug>/PLAN.md` and `games/<slug>/NOTES.md`.

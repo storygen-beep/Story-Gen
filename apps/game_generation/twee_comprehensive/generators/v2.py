@@ -24825,9 +24825,10 @@ window.applyTraitEffect = function(targetType, npcId, trait, op, val, clampFlag,
             return open_card.replace(f'data-passage="{passage_name}"',
                                      f'data-passage="{self._location_entry_passage(loc)}"')
         if (getattr(loc, 'properties', None) or {}).get('hours'):
-            # EN3 — closed comes first: a shut place is greyed with when it opens.
+            # EN3 — closed comes first: a shut place is greyed with when it opens. Its picture is dropped for the
+            # placeholder: a place's picture shows it open, with people in it (LO 2026-11-24, "A").
             closed_card = (
-                f'<div class="location-card location-card-locked location-card-closed">{img_html}'
+                f'<div class="location-card location-card-locked location-card-closed"><div class="location-card-image location-card-placeholder">{self._get_location_placeholder_svg()}</div>'
                 f'<div class="location-card-content"><span class="location-card-name">{safe_name}</span>'
                 f'<span class="nav-locked-reason"><<= setup.locClosedReason("{slug}")>></span></div></div>'
             )

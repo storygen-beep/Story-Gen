@@ -4,7 +4,7 @@ Read this before you write a card that dresses her, gives or sells her a garment
 
 ## Must read
 
-The card's `Craft:` line cites each one, or says in one line why it skips it. `when` and `judge` are the labels in `SKILL.md`, "Rule labels".
+On a card with a `Does:` block (every card from 2026-11-24 on), the rows that apply come from `check.py --rules`, which lists each with its craft file; the card has no `Craft:` line (`piece.md` step 2). On a card from before 2026-11-24, the `Craft:` line cites each one, or says in one line why it skips it. `when` and `judge` are the labels in `SKILL.md`, "Rule labels".
 
 | id | what it asks | the failure it stops | when | judge |
 |---|---|---|---|---|
@@ -76,7 +76,7 @@ Roles: her mom; her bedroom; the hall. LO approved these words (relayed 2026-11-
 
 Picture, right after the towel drops: *Her, 18, in a small bedroom, towel on the floor, stepping into jeans. still.* `_t4`, pool 1 (`craft/body-moments.md`).
 
-Buttons: Go down to the kitchen (5 min) · Wear the sundress instead · Wear the leggings and sports top instead. Each "instead" equips every slot of that outfit, then goes down.
+Buttons: Go down to the kitchen · Wear the sundress instead · Wear the leggings and sports top instead. Each "instead" equips every slot of that outfit, then goes down.
 
 **B · Leaving the house without a top and a bottom, or a dress.** A dress code on her street.
 > You're not going out like this. You need a top and a bottom, or a dress.
@@ -88,7 +88,7 @@ Buttons: Go back. (This game changes in her bedroom only, `wardrobe_anywhere = f
 
 Sets a flag only.
 
-**D · The run, one click.** The room button "Go for a run (45 min)" needs her leggings and sports top. Without them it shows greyed: "Go for a run — Needs leggings and a sports top".
+**D · The run, one click.** The room button "Go for a run" needs her leggings and sports top. Without them it shows greyed: "Go for a run — Needs leggings and a sports top".
 
 ```toml
 [canvases.trigger]

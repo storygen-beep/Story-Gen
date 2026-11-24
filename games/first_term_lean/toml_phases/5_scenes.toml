@@ -26,7 +26,7 @@ blocks = [
 type = "choices"
 
 [[canvases.nodes.exit_block.choices]]
-text = "Go down to the kitchen (5 min)"
+text = "Go down to the kitchen"
 targetType = "node"
 nodeId = "kitchen_rent"
 time_progression_minutes = 5
@@ -48,7 +48,7 @@ blocks = [
 type = "choices"
 
 [[canvases.nodes.exit_block.choices]]
-text = "Look at Mom (2 min)"
+text = "Look at Mom"
 targetType = "node"
 nodeId = "kitchen_ask"
 time_progression_minutes = 2
@@ -70,21 +70,21 @@ blocks = [
 type = "choices"
 
 [[canvases.nodes.exit_block.choices]]
-text = "I was the good girl, Mom. Straight A's. Same girl. (3 min)"
+text = "I was the good girl, Mom. Straight A's. Same girl."
 targetType = "node"
 nodeId = "bath_grades"
 time_progression_minutes = 3
 flagEffects = [{ flag = "start_grades", op = "set" }]
 
 [[canvases.nodes.exit_block.choices]]
-text = "The girl at all those parties? I can't promise she's gone. (3 min)"
+text = "The girl at all those parties? I can't promise she's gone."
 targetType = "node"
 nodeId = "bath_fun"
 time_progression_minutes = 3
 flagEffects = [{ flag = "start_fun", op = "set" }]
 
 [[canvases.nodes.exit_block.choices]]
-text = "The girl who spent four years planning how to get out of here? She's still here. (3 min)"
+text = "The girl who spent four years planning how to get out of here? She's still here."
 targetType = "node"
 nodeId = "bath_freedom"
 time_progression_minutes = 3
@@ -103,7 +103,7 @@ blocks = [
 type = "choices"
 
 [[canvases.nodes.exit_block.choices]]
-text = "Go upstairs (2 min)"
+text = "Go upstairs"
 targetType = "node"
 nodeId = "bath"
 time_progression_minutes = 2
@@ -122,7 +122,7 @@ blocks = [
 type = "choices"
 
 [[canvases.nodes.exit_block.choices]]
-text = "Go upstairs (2 min)"
+text = "Go upstairs"
 targetType = "node"
 nodeId = "bath"
 time_progression_minutes = 2
@@ -140,7 +140,7 @@ blocks = [
 type = "choices"
 
 [[canvases.nodes.exit_block.choices]]
-text = "Go upstairs (2 min)"
+text = "Go upstairs"
 targetType = "node"
 nodeId = "bath"
 time_progression_minutes = 2
@@ -164,7 +164,7 @@ blocks = [
 type = "choices"
 
 [[canvases.nodes.exit_block.choices]]
-text = "Open the door (8 min)"
+text = "Open the door"
 targetType = "node"
 nodeId = "hall"
 time_progression_minutes = 8
@@ -189,21 +189,21 @@ blocks = [
 type = "choices"
 
 [[canvases.nodes.exit_block.choices]]
-text = "Hold the towel and squeeze past him (3 min)"
+text = "Hold the towel and squeeze past him"
 targetType = "node"
 nodeId = "room_past"
 time_progression_minutes = 3
 flagEffects = [{ flag = "ryan_hall_past", op = "set" }, { flag = "goal1_shown", op = "set" }]
 
 [[canvases.nodes.exit_block.choices]]
-text = "\"All yours.\" (3 min)"
+text = "\"All yours.\""
 targetType = "node"
 nodeId = "room_spoke"
 time_progression_minutes = 3
 flagEffects = [{ flag = "ryan_hall_spoke", op = "set" }, { flag = "goal1_shown", op = "set" }]
 
 [[canvases.nodes.exit_block.choices]]
-text = "Fix the knot first (3 min)"
+text = "Fix the knot first"
 targetType = "node"
 nodeId = "room_waited"
 time_progression_minutes = 3
@@ -226,7 +226,7 @@ blocks = [
 type = "choices"
 
 [[canvases.nodes.exit_block.choices]]
-text = "Go to your room (2 min)"
+text = "Go to your room"
 targetType = "node"
 nodeId = "room"
 time_progression_minutes = 2
@@ -246,7 +246,7 @@ blocks = [
 type = "choices"
 
 [[canvases.nodes.exit_block.choices]]
-text = "Go to your room (2 min)"
+text = "Go to your room"
 targetType = "node"
 nodeId = "room"
 time_progression_minutes = 2
@@ -267,7 +267,7 @@ blocks = [
 type = "choices"
 
 [[canvases.nodes.exit_block.choices]]
-text = "Go to your room (2 min)"
+text = "Go to your room"
 targetType = "node"
 nodeId = "room"
 time_progression_minutes = 2
@@ -285,7 +285,7 @@ blocks = [
 type = "choices"
 
 [[canvases.nodes.exit_block.choices]]
-text = "Keep your usual (5 min)"
+text = "Keep your usual"
 targetType = "node"
 nodeId = "sums"
 time_progression_minutes = 5
@@ -304,7 +304,7 @@ wardrobeEffects = [
 ]
 
 [[canvases.nodes.exit_block.choices]]
-text = "Wear the sundress instead (5 min)"
+text = "Wear the sundress instead"
 targetType = "node"
 nodeId = "sums"
 time_progression_minutes = 5
@@ -321,7 +321,7 @@ wardrobeEffects = [
 ]
 
 [[canvases.nodes.exit_block.choices]]
-text = "Wear the leggings and sports top instead (5 min)"
+text = "Wear the leggings and sports top instead"
 targetType = "node"
 nodeId = "sums"
 time_progression_minutes = 5
@@ -358,7 +358,7 @@ blocks = [
 type = "choices"
 
 [[canvases.nodes.exit_block.choices]]
-text = "Go down to the kitchen (5 min)"
+text = "Go down to the kitchen"
 targetType = "node"
 nodeId = "handover"
 time_progression_minutes = 5
@@ -378,13 +378,13 @@ blocks = [
 type = "choices"
 
 [[canvases.nodes.exit_block.choices]]
-text = "Sit with her (15 min)"
+text = "Sit with her"
 targetType = "node"
 nodeId = "sit_with_mom"
 time_progression_minutes = 15
 
 [[canvases.nodes.exit_block.choices]]
-text = "Ask what she tried (5 min)"
+text = "Ask what she tried"
 targetType = "node"
 nodeId = "ask_mom"
 time_progression_minutes = 5
@@ -474,21 +474,21 @@ blocks = [
 type = "choices"
 
 [[canvases.nodes.exit_block.choices]]
-text = "Talk (5 min)"
+text = "Talk"
 targetType = "node"
 nodeId = "talk"
 show_when_locked = true
-locked_text = "Talk (5 min) — you've already talked today."
+locked_text = "Talk — you've already talked today."
 conditions = { version = "1.0", logic = "AND", items = [{ type = "flag", subject = "player", flag_key = "talked_mom_today", operator = "is_false" }] }
 flagEffects = [{ flag = "talked_mom_today", op = "set" }]
 time_progression_minutes = 0
 
 [[canvases.nodes.exit_block.choices]]
-text = "Eat with her (20 min, +15 energy)"
+text = "Eat with her"
 targetType = "node"
 nodeId = "eat"
 show_when_locked = true
-locked_text = "Eat with her (20 min, +15 energy) — not again today."
+locked_text = "Eat with her — not again today."
 conditions = { version = "1.0", logic = "AND", items = [{ type = "trait", subject = "player", trait_key = "meals_today", operator = "lt", value = 3 }, { type = "flag", subject = "player", flag_key = "ate_with_mom_today", operator = "is_false" }] }
 flagEffects = [{ flag = "ate_with_mom_today", op = "set" }]
 time_progression_minutes = 0
@@ -618,11 +618,11 @@ blocks = [
 type = "choices"
 
 [[canvases.nodes.exit_block.choices]]
-text = "Talk (5 min)"
+text = "Talk"
 targetType = "node"
 nodeId = "talk"
 show_when_locked = true
-locked_text = "Talk (5 min) — you've already talked today."
+locked_text = "Talk — you've already talked today."
 conditions = { version = "1.0", logic = "AND", items = [{ type = "flag", subject = "player", flag_key = "talked_mom_today", operator = "is_false" }] }
 flagEffects = [{ flag = "talked_mom_today", op = "set" }]
 time_progression_minutes = 0
@@ -694,7 +694,7 @@ time_progression_minutes = 5
 
 [[canvases]]
 id = "borrow_mom"
-name = "Borrow Mom's things (5 min)"
+name = "Borrow Mom's things"
 
 [canvases.trigger]
 location = "home_master_bedroom"
@@ -708,7 +708,7 @@ items = [{ type = "clothing_item", item_id = "mom_short_skirt", operator = "not_
 
 [[canvases.nodes]]
 id = "take"
-name = "Borrow Mom's things (5 min)"
+name = "Borrow Mom's things"
 blocks = [
   { type = "group", props = { conditions = { version = "1.0", logic = "AND", items = [{ type = "clothing_item", item_id = "mom_short_skirt", operator = "not_owned" }] } }, blocks = [
     { type = "paragraph", content = "Her side of the wardrobe smells like her perfume. You take a short skirt, a low-cut top and the heels she never wears. If she sees them on you, she'll know." },
@@ -727,7 +727,7 @@ wardrobeEffects = [{ action = "add", item_id = "mom_short_skirt" }, { action = "
 
 [[canvases]]
 id = "borrow_hoodie"
-name = "Borrow one of his hoodies (5 min)"
+name = "Borrow one of his hoodies"
 
 [canvases.trigger]
 location = "home_ryans_room"
@@ -741,7 +741,7 @@ items = [{ type = "clothing_item", item_id = "ryan_hoodie", operator = "not_owne
 
 [[canvases.nodes]]
 id = "take"
-name = "Borrow one of his hoodies (5 min)"
+name = "Borrow one of his hoodies"
 blocks = [
   { type = "group", props = { conditions = { version = "1.0", logic = "AND", items = [{ type = "clothing_item", item_id = "ryan_hoodie", operator = "not_owned" }] } }, blocks = [
     { type = "paragraph", content = "You take the grey one. It smells like him. You wonder if he'll notice it's gone." },
@@ -762,7 +762,7 @@ wardrobeEffects = [{ action = "add", item_id = "ryan_hoodie" }]
 # something to do alone. Both rows hide while the owner is in the room.
 [[canvases]]
 id = "return_hoodie"
-name = "Put his hoodie back (5 min)"
+name = "Put his hoodie back"
 
 [canvases.trigger]
 location = "home_ryans_room"
@@ -772,7 +772,7 @@ conditions = { version = "1.0", logic = "AND", items = [{ type = "clothing_item"
 
 [[canvases.nodes]]
 id = "return"
-name = "Put his hoodie back (5 min)"
+name = "Put his hoodie back"
 blocks = [
   { type = "paragraph", content = "You fold the grey hoodie and leave it on his chair. Next time you want it, you know where it is." },
 ]
@@ -789,7 +789,7 @@ wardrobeEffects = [{ action = "remove", item_id = "ryan_hoodie" }]
 
 [[canvases]]
 id = "return_mom"
-name = "Put Mom's things back (5 min)"
+name = "Put Mom's things back"
 
 [canvases.trigger]
 location = "home_master_bedroom"
@@ -799,7 +799,7 @@ conditions = { version = "1.0", logic = "AND", items = [{ type = "clothing_item"
 
 [[canvases.nodes]]
 id = "return"
-name = "Put Mom's things back (5 min)"
+name = "Put Mom's things back"
 blocks = [
   { type = "paragraph", content = "You hang the skirt and the top back on her side of the wardrobe and set the heels where they were. Next time, you'll know where to find them." },
 ]
@@ -820,7 +820,7 @@ wardrobeEffects = [{ action = "remove", item_id = "mom_short_skirt" }, { action 
 
 [[canvases]]
 id = "cafe_hire"
-name = "Ask about the Help Wanted sign (5 min)"
+name = "Ask about the Help Wanted sign"
 
 [canvases.trigger]
 location = "near_cafe"
@@ -921,7 +921,7 @@ time_progression_minutes = 0
 flagEffects = [{ flag = "cafe_ask_parked", op = "set" }]
 [[canvases]]
 id = "cafe_first_shift"
-name = "Work your first shift (4 hours, 15 energy)"
+name = "Work your first shift"
 
 [canvases.trigger]
 location = "near_cafe"
@@ -983,7 +983,7 @@ effects = [{ trait = "money", op = "add", value = 22 }]
 
 [[canvases]]
 id = "cafe_work_hour"
-name = "Work an hour (1 hour, 4 energy)"
+name = "Work an hour"
 
 [canvases.trigger]
 location = "near_cafe"
@@ -1035,7 +1035,7 @@ effects = [{ trait = "money", op = "add", value = 5 }]
 
 [[canvases]]
 id = "cafe_work_shift"
-name = "Work a shift (4 hours, 15 energy)"
+name = "Work a shift"
 
 [canvases.trigger]
 location = "near_cafe"
@@ -1111,7 +1111,7 @@ effects = [{ trait = "money", op = "add", value = 22 }]
 
 [[canvases]]
 id = "cafe_hour_weekday"
-name = "Work an hour (1 hour, 4 energy)"
+name = "Work an hour"
 
 [canvases.trigger]
 location = "near_cafe"
@@ -1150,7 +1150,7 @@ effects = [{ trait = "money", op = "add", value = 5 }]
 
 [[canvases]]
 id = "cafe_hour_saturday"
-name = "Work an hour (1 hour, 4 energy)"
+name = "Work an hour"
 
 [canvases.trigger]
 location = "near_cafe"
@@ -1182,7 +1182,7 @@ effects = [{ trait = "money", op = "add", value = 5 }]
 
 [[canvases]]
 id = "cafe_hour_sunday"
-name = "Work an hour (1 hour, 4 energy)"
+name = "Work an hour"
 
 [canvases.trigger]
 location = "near_cafe"
@@ -1213,7 +1213,7 @@ effects = [{ trait = "money", op = "add", value = 5 }]
 
 [[canvases]]
 id = "cafe_shift_weekday"
-name = "Work a shift (4 hours, 15 energy)"
+name = "Work a shift"
 
 [canvases.trigger]
 location = "near_cafe"
@@ -1265,7 +1265,7 @@ effects = [{ trait = "money", op = "add", value = 22 }]
 
 [[canvases]]
 id = "cafe_shift_weekend_am"
-name = "Work a shift (4 hours, 15 energy)"
+name = "Work a shift"
 
 [canvases.trigger]
 location = "near_cafe"
@@ -1298,7 +1298,7 @@ effects = [{ trait = "money", op = "add", value = 22 }]
 
 [[canvases]]
 id = "cafe_shift_weekend_pm"
-name = "Work a shift (4 hours, 15 energy)"
+name = "Work a shift"
 
 [canvases.trigger]
 location = "near_cafe"
@@ -1358,21 +1358,21 @@ blocks = [
 type = "choices"
 
 [[canvases.nodes.exit_block.choices]]
-text = "Talk (5 min)"
+text = "Talk"
 targetType = "node"
 nodeId = "talk"
 show_when_locked = true
-locked_text = "Talk (5 min) — you've already talked today."
+locked_text = "Talk — you've already talked today."
 conditions = { version = "1.0", logic = "AND", items = [{ type = "flag", subject = "player", flag_key = "talked_mark_today", operator = "is_false" }] }
 flagEffects = [{ flag = "talked_mark_today", op = "set" }]
 time_progression_minutes = 0
 
 [[canvases.nodes.exit_block.choices]]
-text = "Pay the rent (5 min)"
+text = "Pay the rent"
 targetType = "node"
 nodeId = "rent"
 show_when_locked = true
-locked_text = "Pay the rent (5 min) — Mark collects on Sundays, 8 to 11:55am, at the kitchen table."
+locked_text = "Pay the rent — Mark collects on Sundays, 8 to 11:55am, at the kitchen table."
 conditions = { version = "1.0", logic = "AND", items = [{ type = "weekday", weekdays = [6] }, { type = "time_of_day", start_time = "08:00", end_time = "11:55" }] }
 time_progression_minutes = 0
 
@@ -1606,11 +1606,11 @@ blocks = [
 type = "choices"
 
 [[canvases.nodes.exit_block.choices]]
-text = "Talk (5 min)"
+text = "Talk"
 targetType = "node"
 nodeId = "talk"
 show_when_locked = true
-locked_text = "Talk (5 min) — you've already talked today."
+locked_text = "Talk — you've already talked today."
 conditions = { version = "1.0", logic = "AND", items = [{ type = "flag", subject = "player", flag_key = "talked_mark_today", operator = "is_false" }] }
 flagEffects = [{ flag = "talked_mark_today", op = "set" }]
 time_progression_minutes = 0
@@ -1666,11 +1666,11 @@ blocks = [
 type = "choices"
 
 [[canvases.nodes.exit_block.choices]]
-text = "Talk (5 min)"
+text = "Talk"
 targetType = "node"
 nodeId = "talk"
 show_when_locked = true
-locked_text = "Talk (5 min) — you've already talked today."
+locked_text = "Talk — you've already talked today."
 conditions = { version = "1.0", logic = "AND", items = [{ type = "flag", subject = "player", flag_key = "talked_ryan_today", operator = "is_false" }] }
 flagEffects = [{ flag = "talked_ryan_today", op = "set" }]
 time_progression_minutes = 0
@@ -1731,11 +1731,11 @@ blocks = [
 type = "choices"
 
 [[canvases.nodes.exit_block.choices]]
-text = "Talk (5 min)"
+text = "Talk"
 targetType = "node"
 nodeId = "talk"
 show_when_locked = true
-locked_text = "Talk (5 min) — you've already talked today."
+locked_text = "Talk — you've already talked today."
 conditions = { version = "1.0", logic = "AND", items = [{ type = "flag", subject = "player", flag_key = "talked_ryan_today", operator = "is_false" }] }
 flagEffects = [{ flag = "talked_ryan_today", op = "set" }]
 time_progression_minutes = 0
@@ -1794,11 +1794,11 @@ blocks = [
 type = "choices"
 
 [[canvases.nodes.exit_block.choices]]
-text = "Talk (5 min)"
+text = "Talk"
 targetType = "node"
 nodeId = "talk"
 show_when_locked = true
-locked_text = "Talk (5 min) — you've already talked today."
+locked_text = "Talk — you've already talked today."
 conditions = { version = "1.0", logic = "AND", items = [{ type = "flag", subject = "player", flag_key = "talked_ryan_today", operator = "is_false" }] }
 flagEffects = [{ flag = "talked_ryan_today", op = "set" }]
 time_progression_minutes = 0
@@ -1857,11 +1857,11 @@ blocks = [
 type = "choices"
 
 [[canvases.nodes.exit_block.choices]]
-text = "Talk (5 min)"
+text = "Talk"
 targetType = "node"
 nodeId = "talk"
 show_when_locked = true
-locked_text = "Talk (5 min) — you've already talked today."
+locked_text = "Talk — you've already talked today."
 conditions = { version = "1.0", logic = "AND", items = [{ type = "flag", subject = "player", flag_key = "talked_ryan_today", operator = "is_false" }] }
 flagEffects = [{ flag = "talked_ryan_today", op = "set" }]
 time_progression_minutes = 0
@@ -1899,7 +1899,7 @@ time_progression_minutes = 5
 
 [[canvases]]
 id = "home_tv"
-name = "Watch TV (1 hour, +5 energy)"
+name = "Watch TV"
 
 [canvases.trigger]
 location = "home_living_room"
@@ -1942,7 +1942,7 @@ effects = [{ trait = "energy", op = "add", value = 5, clamp = true }]
 
 [[canvases]]
 id = "home_dishes"
-name = "Do the dishes (15 min)"
+name = "Do the dishes"
 
 [canvases.trigger]
 location = "home_kitchen"
@@ -1988,7 +1988,7 @@ time_progression_minutes = 15
 
 [[canvases]]
 id = "home_wait"
-name = "Wait (30 min)"
+name = "Wait"
 
 # ENI for LO, 2026-11-24 (P02 c4): moved from the hall to her bedroom, so the hall stays routes only
 # (PLAN 205); the id stays, so old saves still match.
@@ -2019,7 +2019,7 @@ time_progression_minutes = 30
 
 [[canvases]]
 id = "body_run"
-name = "Go for a run (45 min, 15 energy)"
+name = "Go for a run"
 
 [canvases.trigger]
 location = "hood_park"
@@ -2055,7 +2055,7 @@ flagEffects = [{ flag = "ran_once", op = "set" }]
 
 [[canvases]]
 id = "body_workout"
-name = "Work out ($5, 1 hour, 20 energy)"
+name = "Work out ($5)"
 
 [canvases.trigger]
 location = "hood_gym"
@@ -2084,7 +2084,7 @@ time_progression_minutes = 60
 
 [[canvases]]
 id = "body_mirror"
-name = "Fix your hair and make-up (10 min)"
+name = "Fix your hair and make-up"
 
 [canvases.trigger]
 location = "campus_bathroom"
@@ -2110,7 +2110,7 @@ time_progression_minutes = 10
 
 [[canvases]]
 id = "body_snack"
-name = "Buy a snack ($2, 5 min, +10 energy)"
+name = "Buy a snack ($2)"
 
 [canvases.trigger]
 location = "hood_shop"
@@ -2140,7 +2140,7 @@ effects = [{ trait = "energy", op = "add", value = 10, clamp = true }]
 
 [[canvases]]
 id = "body_coffee"
-name = "Buy a coffee ($3, 10 min, +10 energy)"
+name = "Buy a coffee ($3)"
 
 [canvases.trigger]
 location = "near_cafe"
@@ -2178,7 +2178,7 @@ effects = [{ trait = "energy", op = "add", value = 10, clamp = true }]
 
 [[canvases]]
 id = "body_lunch"
-name = "Buy lunch ($4, 20 min, +15 energy)"
+name = "Buy lunch ($4)"
 
 [canvases.trigger]
 location = "campus_cafeteria"
@@ -2209,7 +2209,7 @@ effects = [{ trait = "energy", op = "add", value = 15, clamp = true }, { trait =
 
 [[canvases]]
 id = "body_grass"
-name = "Sit on the grass (30 min, +5 energy)"
+name = "Sit on the grass"
 
 [canvases.trigger]
 location = "campus_quad"
@@ -2273,7 +2273,7 @@ flagEffects = [{ flag = "met_nina", op = "set" }]
 
 [[canvases]]
 id = "shop_try_on"
-name = "Try something on (15 min)"
+name = "Try something on"
 
 [canvases.trigger]
 location = "hood_clothes"
@@ -2648,7 +2648,7 @@ flagEffects = [{ flag = "met_cross", op = "set" }]
 
 [[canvases]]
 id = "class_psych"
-name = "Go to class: Intro to Psychology (2 hours, 10 energy)"
+name = "Go to class: Intro to Psychology"
 
 [canvases.trigger]
 location = "campus_lecture_hall"
@@ -2678,7 +2678,7 @@ time_progression_minutes = 120
 
 [[canvases]]
 id = "class_stats"
-name = "Go to class: Statistics (2 hours, 10 energy)"
+name = "Go to class: Statistics"
 
 [canvases.trigger]
 location = "campus_lecture_hall"
@@ -2709,7 +2709,7 @@ time_progression_minutes = 120
 
 [[canvases]]
 id = "class_english"
-name = "Go to class: English Composition (2 hours, 10 energy)"
+name = "Go to class: English Composition"
 
 [canvases.trigger]
 location = "campus_lecture_hall"
@@ -2739,7 +2739,7 @@ time_progression_minutes = 120
 
 [[canvases]]
 id = "class_drama"
-name = "Go to drama (2 hours, 10 energy)"
+name = "Go to drama"
 
 [canvases.trigger]
 location = "campus_theatre"
@@ -2769,7 +2769,7 @@ time_progression_minutes = 120
 
 [[canvases]]
 id = "stage_practise"
-name = "Practise on the empty stage (30 min)"
+name = "Practise on the empty stage"
 
 [canvases.trigger]
 location = "campus_theatre"
@@ -2799,7 +2799,7 @@ time_progression_minutes = 30
 
 [[canvases]]
 id = "study_library"
-name = "Study (1 hour, 5 energy)"
+name = "Study"
 
 [canvases.trigger]
 location = "campus_library"
@@ -2827,9 +2827,41 @@ locationId = "campus_library"
 time_progression_minutes = 60
 effects = [{ trait = "study_today", op = "add", value = 1, clamp = false }]
 
+# P09 (ENI for LO, 2026-11-24, P04d1-c2): something to do alone in the lecture hall whenever it's open;
+# it shares the library's study count.
+[[canvases]]
+id = "study_hall"
+name = "Study in an empty row"
+
+[canvases.trigger]
+location = "campus_lecture_hall"
+trigger_mode = "manual"
+is_repeatable = true
+costs = [{ trait = "energy", value = 5 }]
+show_when_blocked = true
+locked_text = "you can't take in another page today."
+conditions = { version = "1.0", logic = "AND", items = [{ type = "trait", subject = "player", trait_key = "study_today", operator = "lt", value = 3 }] }
+
+[[canvases.nodes]]
+id = "study"
+name = "Study"
+blocks = [
+  { type = "paragraph", content = "You find an empty row near the back, spread your notes along the seats and work through them until your neck aches. There's always more of it waiting." },
+]
+
+[canvases.nodes.exit_block]
+type = "choices"
+
+[[canvases.nodes.exit_block.choices]]
+text = "Done"
+targetType = "location"
+locationId = "campus_lecture_hall"
+time_progression_minutes = 60
+effects = [{ trait = "study_today", op = "add", value = 1, clamp = false }]
+
 [[canvases]]
 id = "study_room"
-name = "Study (1 hour, 5 energy)"
+name = "Study"
 
 [canvases.trigger]
 location = "home_her_room"
@@ -2857,12 +2889,457 @@ locationId = "home_her_room"
 time_progression_minutes = 60
 effects = [{ trait = "study_today", op = "add", value = 1, clamp = false }]
 
+# ── P18 · Ms. Holt: met, and there (PLAN §6, no arc in release 1). Once, by itself on entry, while her row has
+# her there; "Done" sets met_holt. ──
+
+[[canvases]]
+id = "library_meet_holt"
+name = "Ms. Holt"
+
+[canvases.trigger]
+location = "campus_library"
+trigger_mode = "manual"
+is_repeatable = false
+conditions = { version = "1.0", logic = "AND", items = [{ type = "npc_at_location", npc_id = "npc_holt", location_id = "campus_library", operator = "is_present" }] }
+
+[[canvases.nodes]]
+id = "meet"
+name = "Ms. Holt"
+blocks = [
+  { type = "paragraph", content = "A woman of about thirty sits behind the desk, cardigan buttoned to the throat, reading glasses on a chain. She reads your student card for longer than a card needs, then looks you up and down. Your ears go warm." },
+  { type = "dialog", content = "Quiet floor's upstairs, hon. No food, no phones, no noise.", props = { speaker = "npc", npcId = "npc_holt" } },
+  { type = "image", props = { description = "Her view across the desk (she is 18, out of frame): a woman of 31 in a buttoned cardigan with reading glasses on a chain, behind a library desk, looking at the camera over her reading glasses.", search_queries = ["librarian woman 31 cardigan reading glasses chain behind library desk looking at camera", "woman behind library counter looking up from book"], pool_dir = "people/holt_desk_t0", pool = 1 } },
+]
+
+[canvases.nodes.exit_block]
+type = "choices"
+
+[[canvases.nodes.exit_block.choices]]
+text = "Got it."
+targetType = "node"
+nodeId = "after"
+time_progression_minutes = 0
+flagEffects = [{ flag = "holt_got_it", op = "set" }]
+
+[[canvases.nodes.exit_block.choices]]
+text = "What happens if I make noise?"
+targetType = "node"
+nodeId = "after"
+time_progression_minutes = 0
+flagEffects = [{ flag = "holt_noise", op = "set" }]
+
+[[canvases.nodes.exit_block.choices]]
+text = "Say nothing"
+targetType = "node"
+nodeId = "after"
+time_progression_minutes = 0
+flagEffects = [{ flag = "holt_silent", op = "set" }]
+
+[[canvases.nodes]]
+id = "after"
+name = "Ms. Holt"
+blocks = [
+  { type = "group", props = { conditions = { version = "1.0", logic = "AND", items = [{ type = "flag", subject = "player", flag_key = "holt_got_it", operator = "is_true" }] } }, blocks = [
+    { type = "dialog", content = "Good. Upstairs, then.", props = { speaker = "npc", npcId = "npc_holt" } },
+    { type = "paragraph", content = "She hands the card back." },
+  ] },
+  { type = "group", props = { conditions = { version = "1.0", logic = "AND", items = [{ type = "flag", subject = "player", flag_key = "holt_noise", operator = "is_true" }] } }, blocks = [
+    { type = "dialog", content = "Nobody's ever found out.", props = { speaker = "npc", npcId = "npc_holt" } },
+    { type = "paragraph", content = "She doesn't smile, but her mouth wants to." },
+  ] },
+  { type = "group", props = { conditions = { version = "1.0", logic = "AND", items = [{ type = "flag", subject = "player", flag_key = "holt_silent", operator = "is_true" }] } }, blocks = [
+    { type = "paragraph", content = "She waits. You don't fill it." },
+    { type = "dialog", content = "Suit yourself.", props = { speaker = "npc", npcId = "npc_holt" } },
+  ] },
+  { type = "paragraph", content = "She goes back to her book: a romance novel inside a library-science cover." },
+]
+
+[canvases.nodes.exit_block]
+type = "choices"
+
+[[canvases.nodes.exit_block.choices]]
+text = "Done"
+targetType = "location"
+locationId = "campus_library"
+time_progression_minutes = 5
+flagEffects = [{ flag = "met_holt", op = "set" }]
+
+# ── P19 · Rosa: met, and there (PLAN §6, no arc in release 1). Once, by itself on entry, while her row has
+# her there; "Done" sets met_rosa. ──
+
+[[canvases]]
+id = "cafeteria_meet_rosa"
+name = "Rosa"
+
+[canvases.trigger]
+location = "campus_cafeteria"
+trigger_mode = "manual"
+is_repeatable = false
+conditions = { version = "1.0", logic = "AND", items = [{ type = "npc_at_location", npc_id = "npc_rosa", location_id = "campus_cafeteria", operator = "is_present" }] }
+
+[[canvases.nodes]]
+id = "meet"
+name = "Rosa"
+blocks = [
+  { type = "paragraph", content = "A woman in her forties runs the counter, hairnet on, forearms like a baker's. She looks you over, the way a mother checks a coat. Your stomach growls loud enough for her to hear it." },
+  { type = "dialog", content = "Listen to that. You're too skinny for this place, mija. Here, take a roll.", props = { speaker = "npc", npcId = "npc_rosa" } },
+  { type = "image", props = { description = "Her view across the lunch counter (she is 18, out of frame): a woman of 45 in a hairnet behind a cafeteria counter holding a bread roll, looking at the camera.", search_queries = ["cafeteria lunch lady 45 hairnet behind counter looking at camera", "school canteen server woman holding bread roll"], pool_dir = "people/rosa_counter_t0", pool = 1 } },
+]
+
+[canvases.nodes.exit_block]
+type = "choices"
+
+[[canvases.nodes.exit_block.choices]]
+text = "Thanks."
+targetType = "node"
+nodeId = "after"
+time_progression_minutes = 0
+flagEffects = [{ flag = "rosa_thanks", op = "set" }]
+
+[[canvases.nodes.exit_block.choices]]
+text = "I'm fine, really."
+targetType = "node"
+nodeId = "after"
+time_progression_minutes = 0
+flagEffects = [{ flag = "rosa_no", op = "set" }]
+
+[[canvases.nodes.exit_block.choices]]
+text = "Say nothing"
+targetType = "node"
+nodeId = "after"
+time_progression_minutes = 0
+flagEffects = [{ flag = "rosa_silent", op = "set" }]
+
+[[canvases.nodes]]
+id = "after"
+name = "Rosa"
+blocks = [
+  { type = "group", props = { conditions = { version = "1.0", logic = "AND", items = [{ type = "flag", subject = "player", flag_key = "rosa_thanks", operator = "is_true" }] } }, blocks = [
+    { type = "dialog", content = "Eat all of it. I'll know.", props = { speaker = "npc", npcId = "npc_rosa" } },
+    { type = "paragraph", content = "She presses the roll into your hand." },
+  ] },
+  { type = "group", props = { conditions = { version = "1.0", logic = "AND", items = [{ type = "flag", subject = "player", flag_key = "rosa_no", operator = "is_true" }] } }, blocks = [
+    { type = "dialog", content = "Your loss.", props = { speaker = "npc", npcId = "npc_rosa" } },
+    { type = "paragraph", content = "She puts the roll back with a shrug." },
+  ] },
+  { type = "group", props = { conditions = { version = "1.0", logic = "AND", items = [{ type = "flag", subject = "player", flag_key = "rosa_silent", operator = "is_true" }] } }, blocks = [
+    { type = "paragraph", content = "She presses the roll into your hand anyway." },
+  ] },
+  { type = "paragraph", content = "She's already looking past you at the next tray, but she'll know your face next time." },
+]
+
+[canvases.nodes.exit_block]
+type = "choices"
+
+[[canvases.nodes.exit_block.choices]]
+text = "Done"
+targetType = "location"
+locationId = "campus_cafeteria"
+time_progression_minutes = 5
+flagEffects = [{ flag = "met_rosa", op = "set" }]
+
+# ── P20 · Zoe, step 1: the quad. Once, by itself on entry, while her row has her on the grass; "Done" sets
+# met_zoe and zoe_place_known (P05: Zoe's Apartment opens). ──
+
+[[canvases]]
+id = "quad_meet_zoe"
+name = "Zoe"
+
+[canvases.trigger]
+location = "campus_quad"
+trigger_mode = "manual"
+is_repeatable = false
+conditions = { version = "1.0", logic = "AND", items = [{ type = "npc_at_location", npc_id = "npc_zoe", location_id = "campus_quad", operator = "is_present" }] }
+
+[[canvases.nodes]]
+id = "coffee"
+name = "Zoe"
+blocks = [
+  { type = "paragraph", content = "A girl drops onto the grass next to you without asking: sunglasses pushed up into a mess of blonde hair, a coffee in each hand, a crop top that shows off her stomach and doesn't care who looks." },
+  { type = "dialog", content = "You look like you need this more than I do, babe. I'm Zoe. You're new.", props = { speaker = "npc", npcId = "npc_zoe" } },
+  { type = "paragraph", content = "She holds one cup out and waits." },
+  { type = "image", props = { description = "Her view from the grass (she is 18, out of frame): a woman of 19 with sunglasses pushed up into messy blonde hair and a crop top, sitting cross-legged on a campus lawn with two coffees, grinning at the camera.", search_queries = ["blonde woman 19 sunglasses on head crop top sitting on campus grass two coffees smiling at camera", "college girl on the quad holding two coffee cups"], pool_dir = "people/zoe_quad_t0", pool = 1 } },
+]
+
+[canvases.nodes.exit_block]
+type = "choices"
+
+[[canvases.nodes.exit_block.choices]]
+text = "Take the coffee"
+targetType = "node"
+nodeId = "talk"
+time_progression_minutes = 0
+flagEffects = [{ flag = "zoe_coffee_yes", op = "set" }]
+
+[[canvases.nodes.exit_block.choices]]
+text = "I'm fine, thanks."
+targetType = "node"
+nodeId = "talk"
+time_progression_minutes = 0
+flagEffects = [{ flag = "zoe_coffee_no", op = "set" }]
+
+[[canvases.nodes.exit_block.choices]]
+text = "Do you always do this?"
+targetType = "node"
+nodeId = "talk"
+time_progression_minutes = 0
+flagEffects = [{ flag = "zoe_coffee_asked", op = "set" }]
+
+[[canvases.nodes]]
+id = "talk"
+name = "Zoe"
+blocks = [
+  { type = "group", props = { conditions = { version = "1.0", logic = "AND", items = [{ type = "flag", subject = "player", flag_key = "zoe_coffee_yes", operator = "is_true" }] } }, blocks = [
+    { type = "paragraph", content = "You take it. It's sweet enough to make your teeth ache, and she watches you drink it like it's a test you're passing." },
+  ] },
+  { type = "group", props = { conditions = { version = "1.0", logic = "AND", items = [{ type = "flag", subject = "player", flag_key = "zoe_coffee_no", operator = "is_true" }] } }, blocks = [
+    { type = "dialog", content = "More for me, then.", props = { speaker = "npc", npcId = "npc_zoe" } },
+    { type = "paragraph", content = "She drinks from both." },
+  ] },
+  { type = "group", props = { conditions = { version = "1.0", logic = "AND", items = [{ type = "flag", subject = "player", flag_key = "zoe_coffee_asked", operator = "is_true" }] } }, blocks = [
+    { type = "dialog", content = "Only with the interesting ones.", props = { speaker = "npc", npcId = "npc_zoe" } },
+    { type = "paragraph", content = "You laugh before you can stop it." },
+  ] },
+  { type = "dialog", content = "Everyone here's so boring. You look like you're about to stop being boring.", props = { speaker = "npc", npcId = "npc_zoe" } },
+  { type = "dialog", content = "I'm really not.", props = { speaker = "player" } },
+  { type = "dialog", content = "We'll see. I live two streets that way, the green door. Come find me.", props = { speaker = "npc", npcId = "npc_zoe" } },
+  { type = "paragraph", content = "She's halfway across the quad before you've said yes, waving over her shoulder without looking back. You know exactly where the green door is." },
+]
+
+[canvases.nodes.exit_block]
+type = "choices"
+
+[[canvases.nodes.exit_block.choices]]
+text = "Done"
+targetType = "location"
+locationId = "campus_quad"
+time_progression_minutes = 10
+flagEffects = [{ flag = "met_zoe", op = "set" }, { flag = "zoe_place_known", op = "set" }]
+
+# ── P22F · Frank: met, and there (PLAN §6, no arc in release 1). Once, by itself on entry, while her row has
+# her there; "Done" sets met_frank. ──
+
+[[canvases]]
+id = "shop_meet_frank"
+name = "Frank"
+
+[canvases.trigger]
+location = "hood_shop"
+trigger_mode = "manual"
+is_repeatable = false
+conditions = { version = "1.0", logic = "AND", items = [{ type = "npc_at_location", npc_id = "npc_frank", location_id = "hood_shop", operator = "is_present" }] }
+
+[[canvases.nodes]]
+id = "meet"
+name = "Frank"
+blocks = [
+  { type = "paragraph", content = "A heavy man in his fifties sits behind the till with the paper spread over the counter. He looks at you over it, then at the shelves you came in for, like he's adding up a bill." },
+  { type = "dialog", content = "You're Laura's girl. Mark's new one. I know your stepdad, girlie. We go back.", props = { speaker = "npc", npcId = "npc_frank" } },
+]
+
+[canvases.nodes.exit_block]
+type = "choices"
+
+[[canvases.nodes.exit_block.choices]]
+text = "Say hi to him for me."
+targetType = "node"
+nodeId = "after"
+time_progression_minutes = 0
+flagEffects = [{ flag = "frank_say_hi", op = "set" }]
+
+[[canvases.nodes.exit_block.choices]]
+text = "Small world."
+targetType = "node"
+nodeId = "after"
+time_progression_minutes = 0
+flagEffects = [{ flag = "frank_small_world", op = "set" }]
+
+[[canvases.nodes.exit_block.choices]]
+text = "Say nothing"
+targetType = "node"
+nodeId = "after"
+time_progression_minutes = 0
+flagEffects = [{ flag = "frank_silent", op = "set" }]
+
+[[canvases.nodes]]
+id = "after"
+name = "Frank"
+blocks = [
+  { type = "group", props = { conditions = { version = "1.0", logic = "AND", items = [{ type = "flag", subject = "player", flag_key = "frank_say_hi", operator = "is_true" }] } }, blocks = [
+    { type = "dialog", content = "Oh, I'll tell him you were in.", props = { speaker = "npc", npcId = "npc_frank" } },
+  ] },
+  { type = "group", props = { conditions = { version = "1.0", logic = "AND", items = [{ type = "flag", subject = "player", flag_key = "frank_small_world", operator = "is_true" }] } }, blocks = [
+    { type = "dialog", content = "Small street. Everybody knows what everybody buys.", props = { speaker = "npc", npcId = "npc_frank" } },
+  ] },
+  { type = "group", props = { conditions = { version = "1.0", logic = "AND", items = [{ type = "flag", subject = "player", flag_key = "frank_silent", operator = "is_true" }] } }, blocks = [
+    { type = "paragraph", content = "He goes back to his paper, but he doesn't turn the page." },
+  ] },
+  { type = "paragraph", content = "Whatever you buy in here, Mark's going to hear about it. Your face goes warm before you've picked anything up." },
+  { type = "image", props = { description = "Her view across the counter (she is 18, out of frame): a heavy man of 52 behind a corner-shop till with a newspaper spread out, looking at the camera over it.", search_queries = ["heavy man 52 behind convenience store counter newspaper looking at camera", "corner shop owner at the till"], pool_dir = "people/frank_till_t0", pool = 1 } },
+]
+
+[canvases.nodes.exit_block]
+type = "choices"
+
+[[canvases.nodes.exit_block.choices]]
+text = "Done"
+targetType = "location"
+locationId = "hood_shop"
+time_progression_minutes = 5
+flagEffects = [{ flag = "met_frank", op = "set" }]
+
+# ── P22D · Danny: met, and there (PLAN §6, no arc in release 1). Once, by itself on entry, while her row has
+# her there; "Done" sets met_danny. ──
+
+[[canvases]]
+id = "shop_meet_danny"
+name = "Danny"
+
+[canvases.trigger]
+location = "hood_shop"
+trigger_mode = "manual"
+is_repeatable = false
+conditions = { version = "1.0", logic = "AND", items = [{ type = "npc_at_location", npc_id = "npc_danny", location_id = "hood_shop", operator = "is_present" }] }
+
+[[canvases.nodes]]
+id = "meet"
+name = "Danny"
+blocks = [
+  { type = "paragraph", content = "A guy in his early twenties leans on the counter with his phone, hood up. His eyes do the walking instead of him, slow, all the way down and back up. You feel it on your skin." },
+  { type = "dialog", content = "Hey, gorgeous. You're new on this street. I'd remember.", props = { speaker = "npc", npcId = "npc_danny" } },
+]
+
+[canvases.nodes.exit_block]
+type = "choices"
+
+[[canvases.nodes.exit_block.choices]]
+text = "Just here for a snack."
+targetType = "node"
+nodeId = "after"
+time_progression_minutes = 0
+flagEffects = [{ flag = "danny_snack", op = "set" }]
+
+[[canvases.nodes.exit_block.choices]]
+text = "Do you say that to everyone?"
+targetType = "node"
+nodeId = "after"
+time_progression_minutes = 0
+flagEffects = [{ flag = "danny_everyone", op = "set" }]
+
+[[canvases.nodes.exit_block.choices]]
+text = "Say nothing"
+targetType = "node"
+nodeId = "after"
+time_progression_minutes = 0
+flagEffects = [{ flag = "danny_silent", op = "set" }]
+
+[[canvases.nodes]]
+id = "after"
+name = "Danny"
+blocks = [
+  { type = "group", props = { conditions = { version = "1.0", logic = "AND", items = [{ type = "flag", subject = "player", flag_key = "danny_snack", operator = "is_true" }] } }, blocks = [
+    { type = "dialog", content = "Sure. Take your time.", props = { speaker = "npc", npcId = "npc_danny" } },
+  ] },
+  { type = "group", props = { conditions = { version = "1.0", logic = "AND", items = [{ type = "flag", subject = "player", flag_key = "danny_everyone", operator = "is_true" }] } }, blocks = [
+    { type = "dialog", content = "Only the ones who come back.", props = { speaker = "npc", npcId = "npc_danny" } },
+  ] },
+  { type = "group", props = { conditions = { version = "1.0", logic = "AND", items = [{ type = "flag", subject = "player", flag_key = "danny_silent", operator = "is_true" }] } }, blocks = [
+    { type = "paragraph", content = "He grins, like the silence was an answer." },
+    { type = "dialog", content = "Quiet type. I like that.", props = { speaker = "npc", npcId = "npc_danny" } },
+  ] },
+  { type = "paragraph", content = "When you turn to the shelves you can feel him watching your ass." },
+  { type = "image", props = { description = "Her view from the door (she is 18, out of frame): a man of 23 in a hoodie leaning on a shop counter with his phone, looking the camera up and down.", search_queries = ["young man 23 hoodie leaning on convenience store counter phone looking at camera", "night shift shop clerk at the till smirking"], pool_dir = "people/danny_counter_t0", pool = 1 } },
+]
+
+[canvases.nodes.exit_block]
+type = "choices"
+
+[[canvases.nodes.exit_block.choices]]
+text = "Done"
+targetType = "location"
+locationId = "hood_shop"
+time_progression_minutes = 5
+flagEffects = [{ flag = "met_danny", op = "set" }]
+
+# ── P23 · Marco: met, and there (PLAN §6, no arc in release 1). Once, by itself on entry, while her row has
+# her there; "Done" sets met_marco. ──
+
+[[canvases]]
+id = "gym_meet_marco"
+name = "Marco"
+
+[canvases.trigger]
+location = "hood_gym"
+trigger_mode = "manual"
+is_repeatable = false
+conditions = { version = "1.0", logic = "AND", items = [{ type = "npc_at_location", npc_id = "npc_marco", location_id = "hood_gym", operator = "is_present" }] }
+
+[[canvases.nodes]]
+id = "meet"
+name = "Marco"
+blocks = [
+  { type = "paragraph", content = "A man in his late twenties with a whistle he never uses is spotting someone on the bench. He looks up when you come in and keeps looking: your legs, your ass, then your face, like he's measuring you for a programme. Heat climbs up your neck." },
+  { type = "dialog", content = "Haven't seen you in here. Good. I'm Marco. I train people. You've got the build for it, champ.", props = { speaker = "npc", npcId = "npc_marco" } },
+  { type = "image", props = { description = "Her view from the door (she is 18, out of frame): a man of 29 in a gym vest with a whistle round his neck, beside a weight bench, looking the camera over.", search_queries = ["personal trainer man 29 gym vest whistle beside weight bench looking at camera", "gym trainer checking someone out mirror"], pool_dir = "people/marco_gym_t0", pool = 1 } },
+]
+
+[canvases.nodes.exit_block]
+type = "choices"
+
+[[canvases.nodes.exit_block.choices]]
+text = "Just looking around."
+targetType = "node"
+nodeId = "after"
+time_progression_minutes = 0
+flagEffects = [{ flag = "marco_looking", op = "set" }]
+
+[[canvases.nodes.exit_block.choices]]
+text = "Got any tips?"
+targetType = "node"
+nodeId = "after"
+time_progression_minutes = 0
+flagEffects = [{ flag = "marco_tips", op = "set" }]
+
+[[canvases.nodes.exit_block.choices]]
+text = "Say nothing"
+targetType = "node"
+nodeId = "after"
+time_progression_minutes = 0
+flagEffects = [{ flag = "marco_silent", op = "set" }]
+
+[[canvases.nodes]]
+id = "after"
+name = "Marco"
+blocks = [
+  { type = "group", props = { conditions = { version = "1.0", logic = "AND", items = [{ type = "flag", subject = "player", flag_key = "marco_looking", operator = "is_true" }] } }, blocks = [
+    { type = "dialog", content = "Look all you want. Everyone does.", props = { speaker = "npc", npcId = "npc_marco" } },
+  ] },
+  { type = "group", props = { conditions = { version = "1.0", logic = "AND", items = [{ type = "flag", subject = "player", flag_key = "marco_tips", operator = "is_true" }] } }, blocks = [
+    { type = "dialog", content = "Squats. Lots of squats. You'll thank me.", props = { speaker = "npc", npcId = "npc_marco" } },
+    { type = "paragraph", content = "He says it to your ass, not your face." },
+  ] },
+  { type = "group", props = { conditions = { version = "1.0", logic = "AND", items = [{ type = "flag", subject = "player", flag_key = "marco_silent", operator = "is_true" }] } }, blocks = [
+    { type = "dialog", content = "Shy. That wears off in here.", props = { speaker = "npc", npcId = "npc_marco" } },
+  ] },
+  { type = "paragraph", content = "He goes back to the bench, but in the mirror his eyes find you again before you've reached the weights." },
+]
+
+[canvases.nodes.exit_block]
+type = "choices"
+
+[[canvases.nodes.exit_block.choices]]
+text = "Done"
+targetType = "location"
+locationId = "hood_gym"
+time_progression_minutes = 5
+flagEffects = [{ flag = "met_marco", op = "set" }]
+
 # ── P04 · travel: four one-screen canvases. A canvas's costs are checked and taken on entry, and an
 # unaffordable one shows dimmed with its cost (v2.py:6700-6732); the choice spends the minutes. ──
 
 [[canvases]]
 id = "travel_bus_to_campus"
-name = "Take the bus to campus ($2, 20 min)"
+name = "Take the bus to campus ($2)"
 
 [canvases.trigger]
 location = "hood_street"
@@ -2872,7 +3349,7 @@ costs = [{ trait = "money", value = 2 }]
 
 [[canvases.nodes]]
 id = "ride"
-name = "Take the bus to campus ($2, 20 min)"
+name = "Take the bus to campus ($2)"
 blocks = [
   { type = "group", props = { conditions = { version = "1.0", logic = "AND", items = [{ type = "weekday", weekdays = [0, 1, 2, 3, 4] }, { type = "time_of_day", start_time = "07:00", end_time = "10:00" }] } }, blocks = [
     { type = "paragraph", content = "The bus is packed. Every time it brakes, a man's hips press into your ass, and he doesn't step back. You feel him getting hard against you, and your nipples go tight." },
@@ -2945,7 +3422,7 @@ time_progression_minutes = 20
 
 [[canvases]]
 id = "travel_walk_to_campus"
-name = "Walk to campus (45 min, 10 energy)"
+name = "Walk to campus"
 
 [canvases.trigger]
 location = "hood_street"
@@ -2955,7 +3432,7 @@ costs = [{ trait = "energy", value = 10 }]
 
 [[canvases.nodes]]
 id = "ride"
-name = "Walk to campus (45 min, 10 energy)"
+name = "Walk to campus"
 blocks = [
   { type = "paragraph", content = "It's a long walk: past the park, over the bridge, along the main road. By the campus gates your feet ache." },
 ]
@@ -2971,7 +3448,7 @@ time_progression_minutes = 45
 
 [[canvases]]
 id = "travel_bus_home"
-name = "Take the bus home ($2, 20 min)"
+name = "Take the bus home ($2)"
 
 [canvases.trigger]
 location = "campus_quad"
@@ -2981,7 +3458,7 @@ costs = [{ trait = "money", value = 2 }]
 
 [[canvases.nodes]]
 id = "ride"
-name = "Take the bus home ($2, 20 min)"
+name = "Take the bus home ($2)"
 blocks = [
   { type = "paragraph", content = "The bus home is half empty. You get the back seat and watch campus go." },
 ]
@@ -2997,7 +3474,7 @@ time_progression_minutes = 20
 
 [[canvases]]
 id = "travel_walk_home"
-name = "Walk home (45 min)"
+name = "Walk home"
 
 [canvases.trigger]
 location = "campus_quad"
@@ -3007,7 +3484,7 @@ is_repeatable = true
 
 [[canvases.nodes]]
 id = "ride"
-name = "Walk home (45 min)"
+name = "Walk home"
 blocks = [
   { type = "paragraph", content = "The walk home takes forever. Your street, finally." },
 ]
@@ -3027,7 +3504,7 @@ time_progression_minutes = 45
 
 [[canvases]]
 id = "loop_sleep"
-name = "Sleep (8 hours, energy to full)"
+name = "Sleep"
 
 [canvases.trigger]
 location = "home_her_room"
@@ -3039,7 +3516,7 @@ conditions = { version = "1.0", logic = "AND", items = [{ type = "time_of_day", 
 
 [[canvases.nodes]]
 id = "do"
-name = "Sleep (8 hours, energy to full)"
+name = "Sleep"
 blocks = [
   { type = "paragraph", content = "You pull on your pyjamas: the thin top and the little shorts. The sheet is cool on your bare legs, and your nipples tighten against the thin top." },
   { type = "image", props = { description = "A woman of 18 in a single bed under a thin sheet, in a thin pyjama top and shorts, lights off. Alone.", search_queries = ["woman 18 single bed thin sheet pyjama shorts night", "girl lying in bed in a thin top and shorts, lights off"], pool_dir = "body/sleep_t3", pool = 2 } },
@@ -3060,7 +3537,7 @@ effects = [{ trait = "energy", op = "set", value = 100 }]
 
 [[canvases]]
 id = "loop_eat"
-name = "Eat something (20 min, +15 energy)"
+name = "Eat something"
 
 [canvases.trigger]
 location = "home_kitchen"
@@ -3074,7 +3551,7 @@ conditions = { version = "1.0", logic = "AND", items = [{ type = "trait", subjec
 
 [[canvases.nodes]]
 id = "do"
-name = "Eat something (20 min, +15 energy)"
+name = "Eat something"
 blocks = [
   { type = "paragraph", content = "You eat standing at the counter: toast, whatever's in the fridge, coffee from the pot." },
   { type = "group", props = { conditions = { version = "1.0", logic = "AND", items = [{ type = "npc_at_location", npc_id = "npc_laura", location_id = "home_kitchen", operator = "is_present" }, { type = "npc_at_location", npc_id = "npc_mark", location_id = "home_kitchen", operator = "is_present" }] } }, blocks = [
@@ -3115,7 +3592,7 @@ effects = [{ trait = "energy", op = "add", value = 15, clamp = true }, { trait =
 
 [[canvases]]
 id = "loop_shower"
-name = "Shower (15 min, +5 energy)"
+name = "Shower"
 
 [canvases.trigger]
 location = "home_bathroom"
@@ -3130,7 +3607,7 @@ cooldown_message = "you've showered enough for one day."
 
 [[canvases.nodes]]
 id = "do"
-name = "Shower (15 min, +5 energy)"
+name = "Shower"
 blocks = [
   { type = "paragraph", content = "The water takes forever to run hot. You step in anyway. It hits your nipples cold, and they go hard. Then it warms, and runs down your belly and between your legs, and you tip your head back and let it." },
   { type = "image", props = { description = "A woman of 18 in a small family bathroom shower, water running down her bare body, head tipped back. Alone.", search_queries = ["woman 18 shower water running down body gif", "girl in a small home shower head tipped back gif"], pool_dir = "body/daily_shower_t4", pool = 4 } },

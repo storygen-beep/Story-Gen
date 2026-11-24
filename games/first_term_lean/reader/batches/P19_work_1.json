@@ -1,0 +1,79 @@
+{
+ "items": [
+  {
+   "row": "B10",
+   "screen": "cafeteria_meet_rosa.after",
+   "why": "screen changed: truth row"
+  },
+  {
+   "row": "B10",
+   "screen": "cafeteria_meet_rosa.meet",
+   "why": "screen changed: truth row"
+  },
+  {
+   "row": "B8",
+   "screen": "cafeteria_meet_rosa.after",
+   "why": "screen changed: truth row"
+  },
+  {
+   "row": "B8",
+   "screen": "cafeteria_meet_rosa.meet",
+   "why": "screen changed: truth row"
+  },
+  {
+   "row": "C1234",
+   "screen": "cafeteria_meet_rosa.after",
+   "why": "failed last pass"
+  },
+  {
+   "row": "C1238",
+   "screen": "cafeteria_meet_rosa.after",
+   "why": "failed last pass"
+  },
+  {
+   "row": "C460",
+   "screen": "cafeteria_meet_rosa.after",
+   "why": "screen changed: truth row"
+  },
+  {
+   "row": "C460",
+   "screen": "cafeteria_meet_rosa.meet",
+   "why": "screen changed: truth row"
+  },
+  {
+   "row": "C461",
+   "screen": "cafeteria_meet_rosa.after",
+   "why": "screen changed: truth row"
+  },
+  {
+   "row": "C461",
+   "screen": "cafeteria_meet_rosa.meet",
+   "why": "screen changed: truth row"
+  },
+  {
+   "row": "C927",
+   "screen": "cafeteria_meet_rosa.after",
+   "why": "screen changed: truth row"
+  },
+  {
+   "row": "C931",
+   "screen": "cafeteria_meet_rosa.after",
+   "why": "screen changed: truth row"
+  },
+  {
+   "row": "L106",
+   "screen": "cafeteria_meet_rosa.after",
+   "why": "screen changed: truth row"
+  },
+  {
+   "row": "L106",
+   "screen": "cafeteria_meet_rosa.meet",
+   "why": "screen changed: truth row"
+  },
+  {
+   "row": "L167",
+   "screen": "cafeteria_meet_rosa.after",
+   "why": "screen changed: truth row"
+  }
+ ]
+}

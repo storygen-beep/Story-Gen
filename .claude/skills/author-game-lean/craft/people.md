@@ -4,7 +4,7 @@ Read this before you write a card that brings in a person, or a scene with someo
 
 ## Must read
 
-The card's `Craft:` line cites each one, or says in one line why it skips it. `when` and `judge` are the labels in `SKILL.md`, "Rule labels".
+On a card with a `Does:` block (every card from 2026-11-24 on), the rows that apply come from `check.py --rules`, which lists each with its craft file; the card has no `Craft:` line (`piece.md` step 2). On a card from before 2026-11-24, the `Craft:` line cites each one, or says in one line why it skips it. `when` and `judge` are the labels in `SKILL.md`, "Rule labels".
 
 | id | what it asks | the failure it stops | when | judge |
 |---|---|---|---|---|
@@ -98,7 +98,7 @@ Her menu, on a click:
 
 Picture, right after that line: her mom at the stove, looking up. Her one picture; the Talk screen under it has none (C596).
 
-Buttons: Talk (5 min, once a day) · Help her cook (15 min) · Leave her to it.
+Buttons: Talk (once a day) · Help her cook · Leave her to it. (Talk spends 5 minutes and cooking 15; the labels say neither.)
 
 After Talk today, the face still opens the menu. Talk is gone until tomorrow, and Help her cook and Leave her to it are still there. The `talked_mom_today` flag clears at the day turn.
 

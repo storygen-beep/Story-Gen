@@ -4,7 +4,7 @@ Read this before you write a card that builds or changes a place: its descriptio
 
 ## Must read
 
-The card's `Craft:` line cites each one, or says in one line why it skips it. `when` and `judge` are the labels in `SKILL.md`, "Rule labels".
+On a card with a `Does:` block (every card from 2026-11-24 on), the rows that apply come from `check.py --rules`, which lists each with its craft file; the card has no `Craft:` line (`piece.md` step 2). On a card from before 2026-11-24, the `Craft:` line cites each one, or says in one line why it skips it. `when` and `judge` are the labels in `SKILL.md`, "Rule labels".
 
 | id | what it asks | the failure it stops | when | judge |
 |---|---|---|---|---|
@@ -17,7 +17,7 @@ The card's `Craft:` line cites each one, or says in one line why it skips it. `w
 | C777 | anything else goes inside a beat, not on the menu | — · kept blocking: LO's choice (2026-11-24) | a place is entered | reader |
 | C773 | top games' room buttons are sleep, work, dress, eat, wash; never a browse list of objects | — · kept blocking: LO's choice (2026-11-24) | a place is entered | reader |
 | C758 | labels run short: median 3 words | — | a place is entered | note |
-| C953 | the label carries its cost before the click: time, money, energy | — | a place is entered, a price or pay is shown | note |
+| C953 | the label carries a money cost before the click, and never time or energy (LO, 2026-11-24: "Beside choice i dont want to show time and energy show money if needed"; "Room buttons too") | — | a place is entered, a price or pay is shown | note |
 | C954 | see `craft/economy.md` |  |  |  |
 | C738 | a thoroughfare only routes; a destination has one thing to do alone, or hours and a closed line | — · kept blocking: LO's choice (2026-11-24) | the plan | reader |
 | C762 | "Nothing happens." is banned | L150; first_term_lean: 15 places said "Nothing to do here right now" | a place is entered | reader |
@@ -50,7 +50,7 @@ Each rule is marked **measured** or **LO's choice**.
 1. **The identity line is the same every visit.** It says what the place is and who uses it. *Measured:* CoT's BangCoffee opens "You're inside BangCoffee: a preppy coffeehouse that serves baked goods, desserts and overpriced coffee. Some students like to study here, preferring the atmosphere here to their dorms or the library." (C769, C794)
 2. **One presence line per person there, read from their rows,** and the crowd changes it. *Measured:* BangCoffee's "A barista commands the counter," ends "checking their phone." with fewer than 8 people there and "looking harried." otherwise (C795, C804). Every line names only who `scripts/who_is_where.py` puts there at that minute (L106). An empty room has its own line.
 3. **The menu holds only needs and systems; a person is their face on the screen** (C776, C777). A person's actions are not room buttons: they sit in that person's own menu, behind their face (`craft/people.md` rule 10). *Measured:* BangCoffee's menu is coffee and "Use restroom" (needs; `<<bathroom>>`, defined in `GlobalWidgets.txt`), "Study" and "Use laptop" (systems). Its `<<godate>>` starts a date she planned earlier (`HangoutWidgets.txt`, lines 1-26); it is not a talk button. CoT's people come from the People Here list (`StoryCaption.txt`, lines 585-596), then the person's card with "Talk to her" (`DisplayNPCWidgets.txt`, lines 33-68). Never a browse list of objects (C773). *LO's choice* for faces, not buttons (relayed 2026-11-23).
-4. **Short labels, with the cost shown:** time, energy, money (C758, C953). Pay she earns stays off the button (C954). *Measured:* median 3 words; a cost shown in 97 of 126.
+4. **Short labels; money shown when it's a spend, never time or energy** (C758, C953). Pay she earns stays off the button (C954). *Measured:* median 3 words; CoT shows a cost in 97 of 126, time included. Leaving time and energy off is *LO's choice* (LO, 2026-11-24: "Beside choice i dont want to show time and energy show money if needed"; "Room buttons too").
 5. **"Not now" says why.** A button that can't be used says what's missing: "You really aren't that thirsty right now." (CoT, BangCoffee). Never "Nothing to do here" (C762). *Measured* in CoT; *LO's choice* for the rest.
 6. **Every open place has one thing she can do alone** (`plan.md` §6). This is stricter than C738, which allows "nothing to do here right now" in an open empty room. *LO's choice* (L147).
 7. **Streets or quads are hubs; places sit off them,** and a thoroughfare only routes (C738, C808, C811). *Measured:* CoT's streets are places of their own ("You are on Emerson Road. A large academic building is here…"), and the buildings open off them (Emerson Road, Bancroft Lane, Hallowell Road).
@@ -71,7 +71,7 @@ Presence, one line per person there, from their rows:
 - Step-father, by his rows: "Your step-father's at the table with his phone. He doesn't look up."
 - Nobody: "Nobody's here. The fridge hums."
 
-Buttons: Eat something (20 min, +15 energy) · Do the dishes (15 min) · Leave the kitchen. When Mom is here, her face is on the screen, and it opens her menu (`craft/people.md`).
+Buttons: Eat something · Do the dishes · Leave the kitchen. (Eating still takes 20 minutes and gives 15 energy; the label says neither.) When Mom is here, her face is on the screen, and it opens her menu (`craft/people.md`).
 After three meals, Eat something says: "You're not hungry right now."
 
 ## Not this
@@ -80,4 +80,4 @@ After three meals, Eat something says: "You're not hungry right now."
 - A presence line naming someone whose rows don't put them there (L106).
 - A browse list of objects: "Look at the fridge", "Look at the window" (C773).
 - A Talk button per person on the room menu. The person is their face; Talk is inside their menu (`craft/people.md` rule 10).
-- A label with no cost: "Eat something" with no time or energy on it (C953).
+- A label that prints time or energy: "Eat something (20 min, +15 energy)" (C953; LO, 2026-11-24).

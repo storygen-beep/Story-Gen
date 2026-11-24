@@ -347,7 +347,7 @@ pay in release 1.
 
 | place | alone | with a person |
 |---|---|---|
-| Lecture Hall | Go to class (2 hours, 10 energy, in its slot) | Hale or Pratt teaching; Nadia saves her a seat |
+| Lecture Hall | Go to class (2 hours, 10 energy, in its slot) · Study in an empty row (1 hour, 5 energy; added by ENI for LO, 2026-11-24) | Hale or Pratt teaching; Nadia saves her a seat |
 | Theatre | Go to drama (2 hours, in its slot) · Practise on the empty stage (30 min) | Cross; Brooke |
 | Library | Study (1 hour, 5 energy) | Ms. Holt at the desk; Nadia studying |
 | Your Bedroom | Study (1 hour, 5 energy) | none |
@@ -479,6 +479,16 @@ week (C159), e.g. Mon–Thu 5–8.
 
 Vance's porch hours are when she comes home. Sunday shifts are Chris alone. Chris hands the counter
 over to her at 2pm on weekdays.
+
+### 9d. Zoe, Jake, Brooke, Kayla, Tess, Sam (LO "yes", 2026-11-21)
+
+| person | where and when | rough hours a week she can reach them |
+|---|---|---|
+| Zoe | Quad, weekdays 1–3 · Cafeteria Tue/Thu 1–2 · her apartment, every evening 6–11 · her party, Saturday 9pm–1am | 40 |
+| Jake | Cafeteria, weekdays 12–2 · Quad, weekdays 2–4 | 20 |
+| Brooke | Lecture Hall Mon/Wed 9–11 (Hale's class) · Theatre Tue/Thu 11–1 and rehearsals Tue/Thu/Fri 2–6 · Women's Bathroom mirror, weekdays 8–9 and 1–2 · Zoe's party, Saturday | 35 |
+| Kayla and Tess | with Brooke: the bathroom mirror, weekdays 8–9 and 1–2 · Cafeteria, weekdays 12–1 · Zoe's party, Saturday | 19 |
+| Sam | Zoe's apartment, every day 12pm–2am (he's always home) | 98 |
 
 ## 10. What she walks into
 

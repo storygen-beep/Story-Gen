@@ -1,0 +1,110 @@
+{
+ "verdicts": [
+  {
+   "row": "B10",
+   "screen": "cafeteria_meet_rosa.meet",
+   "verdict": "PASS",
+   "line": "A woman in her forties runs the counter",
+   "why": "gated on npc_rosa present; who_is_where has her at the counter weekdays 08–16; no one else is claimed (Nadia, Zoe unnamed)"
+  },
+  {
+   "row": "B10",
+   "screen": "cafeteria_meet_rosa.after",
+   "verdict": "PASS",
+   "line": "She's already looking past you at the next tray",
+   "why": "0 minutes after meet, Rosa still there; each path's first lines follow its own answer"
+  },
+  {
+   "row": "B8",
+   "screen": "cafeteria_meet_rosa.meet",
+   "verdict": "PASS",
+   "line": "A woman in her forties ... hairnet on",
+   "why": "45 per PLAN §5; the only garment named is Rosa's"
+  },
+  {
+   "row": "B8",
+   "screen": "cafeteria_meet_rosa.after",
+   "verdict": "PASS",
+   "line": "She presses the roll into your hand.",
+   "why": "no number or garment of Ella's"
+  },
+  {
+   "row": "C1234",
+   "screen": "cafeteria_meet_rosa.after",
+   "verdict": "PASS",
+   "line": "She puts the roll back with a shrug.",
+   "why": "fixed: no picture on this screen now; the still sits on meet right after 'Here, take a roll.'"
+  },
+  {
+   "row": "C1238",
+   "screen": "cafeteria_meet_rosa.after",
+   "verdict": "PASS",
+   "line": "She puts the roll back with a shrug.",
+   "why": "fixed: the roll-in-hand picture no longer shows on the 'I'm fine' path; on meet it matches its line on every path, since every path passes 'Here, take a roll.'"
+  },
+  {
+   "row": "C460",
+   "screen": "cafeteria_meet_rosa.meet",
+   "verdict": "PASS",
+   "line": "Listen to that. You're too skinny for this place, mija. Here, take a roll.",
+   "why": "Rosa there by her gate; the picture (her holding a roll) is true on its one visit"
+  },
+  {
+   "row": "C460",
+   "screen": "cafeteria_meet_rosa.after",
+   "verdict": "PASS",
+   "line": "She's already looking past you at the next tray, but she'll know your face next time.",
+   "why": "true on all three paths; the roll lines are behind their flags"
+  },
+  {
+   "row": "C461",
+   "screen": "cafeteria_meet_rosa.meet",
+   "verdict": "PASS",
+   "line": "mija",
+   "why": "fits her plan entry (45, lunch lady)"
+  },
+  {
+   "row": "C461",
+   "screen": "cafeteria_meet_rosa.after",
+   "verdict": "PASS",
+   "line": "Eat all of it. I'll know.",
+   "why": "fits her manner"
+  },
+  {
+   "row": "C927",
+   "screen": "cafeteria_meet_rosa.after",
+   "verdict": "PASS",
+   "line": "time_progression_minutes = 5",
+   "why": "Done states its time"
+  },
+  {
+   "row": "C931",
+   "screen": "cafeteria_meet_rosa.after",
+   "verdict": "N/A",
+   "line": "—",
+   "why": "no time_of_day condition on the screen"
+  },
+  {
+   "row": "L106",
+   "screen": "cafeteria_meet_rosa.meet",
+   "verdict": "PASS",
+   "line": "A woman in her forties runs the counter",
+   "why": "her rows put her there at every minute the gate opens"
+  },
+  {
+   "row": "L106",
+   "screen": "cafeteria_meet_rosa.after",
+   "verdict": "PASS",
+   "line": "She's already looking past you at the next tray",
+   "why": "still there; no one else named"
+  },
+  {
+   "row": "L167",
+   "screen": "cafeteria_meet_rosa.after",
+   "verdict": "N/A",
+   "line": "—",
+   "why": "no windowed row or button with hours on this screen"
+  }
+ ],
+ "causes": []
+}
