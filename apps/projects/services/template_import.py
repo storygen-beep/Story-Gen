@@ -606,6 +606,10 @@ class GameTemplate:
     # [ui] phone_clock — a small clock in the top-left corner while the sidebar is
     # closed on a narrow screen, so the time is readable without opening it.
     phone_clock: bool = False
+    # [ui] present_faces — a person whose schedule puts them at a place shows their face
+    # there even with nothing to do with them now; a click says what they're doing ("Ryan
+    # is asleep."). Off by default: a face is drawn only where a canvas offers something.
+    present_faces: bool = False
     # [ui] quests_layout — "cards" (default, one card per person in file order) or
     # "list" (short tap-to-open rows, ready first). Kept raw; validate() checks it.
     quests_layout: Any = "cards"
@@ -670,6 +674,9 @@ class TemplateFlagLabel:
     """Player-facing label for a flag key (Pattern 2)."""
     key: str
     label: str
+    # False keeps this flag out of the effect toast ("🔓 Rent handled this week"): for a
+    # bookkeeping marker the player never needs to see set. The flag itself is unchanged.
+    toast: Any = True
 
 
 @dataclass
@@ -3680,6 +3687,7 @@ def normalize(data: Dict[str, Any]) -> GameTemplate:
     # Sidebar chrome: buttons left out, and the phone clock. Plain [ui] keys.
     sidebar_hide_raw: Any = []
     phone_clock = False
+    present_faces = False
     quests_layout_raw: Any = "cards"
     clothes_layout_raw: Any = "table"
     clothes_door_raw: Any = ""
@@ -3688,6 +3696,7 @@ def normalize(data: Dict[str, Any]) -> GameTemplate:
     if isinstance(ui_raw, dict):
         sidebar_hide_raw = ui_raw.get("sidebar_hide") or []
         phone_clock = ui_raw.get("phone_clock") is True
+        present_faces = ui_raw.get("present_faces") is True
         quests_layout_raw = ui_raw.get("quests_layout", "cards")
         clothes_layout_raw = ui_raw.get("clothes_layout", "table")
         clothes_door_raw = ui_raw.get("clothes_door", "")
@@ -3821,6 +3830,7 @@ def normalize(data: Dict[str, Any]) -> GameTemplate:
                 TemplateFlagLabel(
                     key=_require_str(fl_raw, "key", ""),
                     label=_require_str(fl_raw, "label", ""),
+                    toast=fl_raw.get("toast", True),
                 )
             )
 
@@ -3886,6 +3896,7 @@ def normalize(data: Dict[str, Any]) -> GameTemplate:
         cast_page=cast_page_obj,
         sidebar_hide=sidebar_hide_raw,
         phone_clock=phone_clock,
+        present_faces=present_faces,
         quests_layout=quests_layout_raw,
         clothes_layout=clothes_layout_raw,
         clothes_door=clothes_door_raw,
@@ -6873,6 +6884,8 @@ def validate(template: GameTemplate) -> List[str]:
             continue
         if not fl.label:
             errors.append(f"flags.labels[{fl.key}] missing required `label` field")
+        if not isinstance(fl.toast, bool):
+            errors.append(f"flags.labels[{fl.key}] toast must be true or false, got {fl.toast!r}")
         if fl.key in seen_flag_label_keys:
             errors.append(f"flags.labels duplicate key '{fl.key}'")
         seen_flag_label_keys.add(fl.key)
@@ -8944,7 +8957,7 @@ def _assemble_project_metadata(project, template):
         }
     if template.flag_labels:
         project.metadata["flag_labels"] = {
-            fl.key: {"label": fl.label}
+            fl.key: {"label": fl.label, **({"toast": False} if fl.toast is False else {})}
             for fl in template.flag_labels
         }
     # Tips page (game-level mechanics surface).
@@ -8972,6 +8985,8 @@ def _assemble_project_metadata(project, template):
         project.metadata["sidebar_hide"] = list(template.sidebar_hide)
     if template.phone_clock:
         project.metadata["phone_clock"] = True
+    if template.present_faces:
+        project.metadata["present_faces"] = True
     if template.quests_layout == "list":
         project.metadata["quests_layout"] = "list"
     if template.clothes_layout == "room":

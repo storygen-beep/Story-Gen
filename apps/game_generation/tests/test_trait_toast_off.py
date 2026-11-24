@@ -65,3 +65,20 @@ def test_nothing_is_written_when_toast_is_left_alone():
     with open("apps/projects/services/template_import.py", encoding="utf-8") as fh:
         src = fh.read()
     assert '**({"toast": False} if tl.toast is False else {})' in src
+
+
+@needs_browser
+def test_a_toast_off_flag_is_not_named(html):
+    """The same opt-in on [[flags.labels]]: a bookkeeping marker's "🔓" line is skipped."""
+    with open_game(html) as g:
+        text = g.js(
+            """() => { document.querySelectorAll('.effect-toast').forEach(e => e.remove());
+                SugarCube.setup.flag_labels = Object.assign({}, SugarCube.setup.flag_labels,
+                    { quiet_marker: { label: "Quiet", toast: false } });
+                SugarCube.setup.pendingEffects = [{ type: 'flag', flag: 'quiet_marker' },
+                                                   { type: 'flag', flag: 'loud_marker' }];
+                SugarCube.setup.showEffectNotification();
+                const e = document.querySelector('.effect-toast'); return e ? e.textContent : null; }"""
+        )
+        assert text and "Loud marker" in text and "Quiet" not in text, text
+        assert g.errors == []

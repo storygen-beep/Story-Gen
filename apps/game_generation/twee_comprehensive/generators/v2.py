@@ -224,6 +224,12 @@ class TweeComprehensiveGeneratorV2:
 
         # Add missing media page (always generated, but button only shows in debug mode)
         twee_sections.append(self._generate_missing_media_page())
+        if self.present_faces:
+            # [ui] present_faces: where a face with nothing to do leads.
+            twee_sections.append(
+                ':: NpcBusyPage\n<<nobr>><p><<print setup.presentFaceLine($npc_busy_slug)>></p>'
+                '<p><<link "← Back">><<run setup.smartBack()>><</link>></p><</nobr>>\n'
+            )
 
         # Player cheat page + its sidebar button widget. Emitted as its OWN section,
         # deliberately not inside _generate_time_system() — that section is only
@@ -1345,6 +1351,9 @@ class TweeComprehensiveGeneratorV2:
         self.sidebar_hide = set((self.project.metadata or {}).get("sidebar_hide") or [])
         # [ui] phone_clock — the floating clock while the sidebar is closed on a phone.
         self.phone_clock = bool((self.project.metadata or {}).get("phone_clock"))
+        # [ui] present_faces — every person present at a place shows a face; with nothing to do,
+        # a click says what they're doing. Off unless the game asks.
+        self.present_faces = bool((self.project.metadata or {}).get("present_faces"))
         # [[ui.timetable]] — her classes, drawn by setup.timetableHtml; [ui]
         # timetable_button adds the sidebar button. Empty = nothing emitted.
         self.timetable = list((self.project.metadata or {}).get("timetable") or [])
@@ -4141,7 +4150,7 @@ setup.tips_page = {json.dumps(self.tips_page or {})};
 setup.npc_arc_stages = {json.dumps(self.npc_arc_stages_map)};
 // G: per-NPC cast-card tag line, slug-keyed. Empty object = no NPC declares
 // `tags` and the cast card renders no tag row (existing TOMLs unaffected).
-setup.npc_tags = {json.dumps(self.npc_tags_map)};{self._cast_page_js()}{self._cast_traits_js()}{self._phone_clock_js()}{self._timetable_js()}
+setup.npc_tags = {json.dumps(self.npc_tags_map)};{self._cast_page_js()}{self._cast_traits_js()}{self._phone_clock_js()}{self._present_faces_js()}{self._timetable_js()}
 setup.phone_enabled = {"true" if self.phone_enabled else "false"};
 setup.phone_purchase_flag = {json.dumps(self.phone_purchase_flag)};
 setup.phone_data = {phone_data_json};
@@ -6616,7 +6625,9 @@ setup.renderNpcPortraits = function(locationId) {{
             }}
         }});
 
-        if (allSlugs.length === 0) return '';
+        // [ui] present_faces: people here with nothing to do now (setup.presentFaceSlugs, absent otherwise).
+        var idleSlugs = setup.presentFaceSlugs ? setup.presentFaceSlugs(locationId, allSlugs) : [];
+        if (allSlugs.length === 0 && idleSlugs.length === 0) return '';
 
         var html = '<div class="location-npcs">';
         for (var n = 0; n < allSlugs.length; n++) {{
@@ -6662,6 +6673,7 @@ setup.renderNpcPortraits = function(locationId) {{
             html += '</a>';
             html += '</div>';
         }}
+        if (idleSlugs.length) html += setup.presentFacesHtml(idleSlugs);
         html += '</div>';
 
         return html;
@@ -7677,6 +7689,7 @@ setup.showEffectNotification = function() {{
       var prefix = eff.name ? (eff.name + "'s ") : '';
       lines.push(sign + eff.delta + ' ' + prefix + traitDisplay);
     }} else if (eff.type === 'flag') {{
+      if (((setup.flag_labels || {{}})[eff.flag] || {{}}).toast === false) continue;  // `toast = false`: a bookkeeping marker
       var flagDisplay = eff.flag.replace(/_/g, ' ');
       flagDisplay = flagDisplay.charAt(0).toUpperCase() + flagDisplay.slice(1);
       lines.push('🔓 ' + flagDisplay);
@@ -12249,6 +12262,51 @@ jQuery(document).on("click", ".tt .tt-day", function () {
 .tt-row.is-over { opacity: 0.45; }
 .tt-none { padding: 9px 8px; color: var(--theme-text-muted, #8a8a8a); }
 """
+
+    def _present_faces_js(self) -> str:
+        """[ui] present_faces — a person whose schedule puts them at this place now shows a face
+        here even when no canvas offers anything with them; a click opens NpcBusyPage, which says
+        what their row says they're doing ("Ryan is asleep."). Named only once met: a person with
+        any quest card shows only while one of those cards' `when` holds, as on the Schedules page
+        and CastPage. Empty unless the game asks for it."""
+        if not self.present_faces:
+            return ""
+        prefix = (getattr(self, "video_path", "") or "./media").rstrip("/") + "/"  # as renderNpcPortraits
+        return """
+// [ui] present_faces. Faces for people here with nothing to do with them right now.
+setup.presentFaceSlugs = function (locationId, taken) {
+    var out = [], sched = setup.npcSchedules || {}, cards = setup.quests_cards || [];
+    for (var slug in sched) {
+        if (taken.indexOf(slug) !== -1 || !sched[slug] || !sched[slug].length) continue;
+        var at = setup.getNpcLocation(slug);
+        if (!at || at.location !== locationId) continue;
+        var hasCard = cards.some(function (c) { return c && c.npc_id === slug; });
+        if (hasCard && !setup.pickQuestsCard(slug)) continue;
+        out.push(slug);
+    }
+    return out;
+};
+setup.presentFacesHtml = function (slugs) {
+    var sv = State.variables, html = '';
+    for (var i = 0; i < slugs.length; i++) {
+        var slug = slugs[i], uuid = (setup.npc_slug_map || {})[slug], npc = uuid ? (sv.npcs || {})[uuid] : null;
+        var name = npc ? (npc.name || slug) : slug, portrait = npc ? (npc.portrait || '') : '';
+        html += '<div class="npc-portrait-card npc-portrait-idle"><a class="npc-portrait-link link-internal" data-passage="NpcBusyPage"'
+              + ' onclick="SugarCube.State.variables.npc_busy_slug=\\'' + slug + '\\'">';
+        html += portrait ? '<img class="npc-portrait-img" src="PREFIX' + portrait + '" alt="' + name + '">'
+                         : '<div class="npc-portrait-placeholder">' + name.charAt(0).toUpperCase() + '</div>';
+        html += '<span class="npc-portrait-name">' + name + '</span></a></div>';
+    }
+    return html;
+};
+setup.presentFaceLine = function (slug) {
+    var uuid = (setup.npc_slug_map || {})[slug], npc = uuid ? (State.variables.npcs || {})[uuid] : null;
+    var name = npc ? (npc.name || slug) : (slug || 'They');
+    var at = slug ? setup.getNpcLocation(slug) : null;
+    var act = (at && at.activity) ? String(at.activity).trim() : '';
+    return act ? (name + ' is ' + act + '.') : (name + ' is busy right now.');
+};
+""".replace("PREFIX", prefix)
 
     def _phone_clock_js(self) -> str:
         """[ui] phone_clock — a small clock pinned top-left while the sidebar is stowed on a
@@ -20473,6 +20531,8 @@ setup.travelMoveSlug = function (psg) {
             info_pages_list += ', "CastPage"'
         if self.cheat_page:
             info_pages_list += ', "CheatPage"'
+        if self.present_faces:
+            info_pages_list += ', "NpcBusyPage"'
         if self.dev_mode:
             info_pages_list += ', "DevPage"'
         info_pages_list += ']'
