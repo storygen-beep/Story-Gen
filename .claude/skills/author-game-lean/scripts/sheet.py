@@ -203,6 +203,61 @@ def shifted(starts, minute, until):
     return out
 
 
+def shift_slot(slot, minutes):
+    d, m = slot
+    k = m + minutes
+    return ((d + k // 1440) % 7, (k % 1440) // who_is_where.STEP * who_is_where.STEP)
+
+
+def choice_narrow(starts, minute, ch):
+    """The scene-start slots left after a choice whose own conditions read the clock (a weekday, a time_of_day),
+    checked at the minute the choice is taken. A choice with no clock condition leaves them as they were."""
+    allowed = who_is_where.when_slots(ch.get("conditions"))
+    if len(allowed) == len(who_is_where.SLOTS):
+        return starts
+    return {s for s in starts if shift_slot(s, minute) in allowed}
+
+
+def node_starts(c, base):
+    """{node id: the scene-start slots it can show at}: the union over every path into it of `base` narrowed by each
+    choice's clock conditions on the way (choice_narrow). Shared with scenes.check_presence."""
+    out = {}
+    for path in walks(c):
+        starts = set(base)
+        for nid, minute, ch in path:
+            out.setdefault(nid, set()).update(starts)
+            if ch:
+                starts = choice_narrow(starts, minute, ch)
+    return out
+
+
+def fmt_slots(slots):
+    """A clock cell for a narrowed screen, from the slots it shows at: "08:05–12:00 · Sun", or one part per day,
+    joined " / ", when the days differ."""
+    if not slots:
+        return "never"
+    step = who_is_where.STEP
+    runs = {}
+    for d in range(7):
+        mins = sorted(m for dd, m in slots if dd == d)
+        parts, s = [], None
+        for i, m in enumerate(mins):
+            if s is None:
+                s = m
+            if i + 1 == len(mins) or mins[i + 1] != m + step:
+                parts.append((s, m + step))
+                s = None
+        if parts:
+            runs[d] = tuple(parts)
+    shapes = set(runs.values())
+    names = who_is_where.DAYS
+    if len(shapes) == 1:
+        (shape,) = shapes
+        days = " ".join(names[d] for d in sorted(runs))
+        return " / ".join(f"{hhmm(a)}–{hhmm(b)} · {days}" for a, b in shape)
+    return " / ".join(f"{names[d]} {hhmm(a)}–{hhmm(b)}" for d in sorted(runs) for a, b in runs[d])
+
+
 def fmt_flags(per_path):
     if not per_path:
         return "?"
@@ -234,8 +289,16 @@ def compute(game, canvas_ids, card_places=None):
         bound = {trig.get("npc"), trig.get("requires_npc")} - {None}
         win = None if is_start else window(trig)
         acc = {}
+        base = None
+        if not is_start:
+            base = who_is_where.when_slots(trig.get("conditions"))
+            if bound and trig.get("location"):
+                # A scene bound to a person shows only while they're there (requires_npc).
+                table = where.get(sorted(bound)[0], {})
+                base = {s for s in base if trig.get("location") in {p for p, _ in table.get(s, ())}}
         for path in walks(c):
             eq = start_outfit(game) if is_start else None
+            starts, narrowed = base, False  # a choice's own clock conditions narrow the screens after it (P34)
             flags = {i.get("flag_key") for i in items(trig.get("conditions"))
                      if i.get("type") == "flag" and i.get("operator") == "is_true"} - {None}
             for nid, minute, ch in path:
@@ -253,13 +316,8 @@ def compute(game, canvas_ids, card_places=None):
                     # (a "Work a shift (4 hours)" button would otherwise mark everyone who leaves mid-shift "(part)").
                     slots = slots_between(start_day, start_min + minute, start_min + minute)
                 else:
-                    starts = who_is_where.when_slots(trig.get("conditions"))
-                    if bound and place:
-                        # A scene bound to a person shows only while they're there (requires_npc).
-                        table = where.get(sorted(bound)[0], {})
-                        starts = {s for s in starts if place in {p for p, _ in table.get(s, ())}}
-                    row["clock"].append(clock_text(trig, win, bound, place, minute))
                     slots = shifted(starts, minute, minute + who_is_where.STEP)
+                    row["clock"].append(fmt_slots(slots) if narrowed else clock_text(trig, win, bound, place, minute))
                 row["who"].append(", ".join(present(where, place, slots, bound)) if place else "?")
                 if eq is not None:
                     worn = sorted(v for v in eq.values() if v)
@@ -272,6 +330,9 @@ def compute(game, canvas_ids, card_places=None):
                 if eq is not None:
                     apply_wardrobe(eq, ch, game)
                 set_flags(flags, ch)
+                if starts is not None and ch:
+                    after = choice_narrow(starts, minute, ch)
+                    narrowed, starts = narrowed or after != starts, after
         for node in c.get("nodes") or []:
             key = f"{cid}.{node.get('id')}"
             r = acc.get(key)
@@ -349,6 +410,11 @@ def clock_meaning(text, exact):
     the window shifted by "+N" (none means the window is already the screen's), on the days named (none: every day).
     "while <id> is there" and "any" keep their words. A cell it can't read compares as text."""
     low = text.lower().replace("any minute", "")
+    if " / " in low and not exact:
+        # several parts (paths, or days with different hours): the union of their slots
+        parts = [clock_meaning(x, exact) for x in low.split(" / ")]
+        if all(p[0] == "slots" for p in parts):
+            return ("slots", frozenset().union(*(p[1] for p in parts)))
     m = TIMES.search(low)
     off = re.search(r"\+\s*(\d+)", low)
     n = int(off.group(1)) if off else 0

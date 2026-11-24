@@ -606,3 +606,15 @@ Why for all of these: P13's reader found new FAILs on every pass, v5 to v11 (99 
     
     A full record behaves as before: every earlier test passes unchanged.
   - **Verified read-only:** the live records under `games/first_term_lean/reader/` are written in the old format, without `pending`, and still give their work lists. I didn't touch `batches/`.
+- `craft/systems.md`, `plan.md`, `lists/LESSONS.md`: repeat activities aren't scheduled around each other (LO, relayed by ENI 2026-11-24: "yes, do both").
+  - **The failure:** first_term_lean's café shifts (P10) were locked to fixed slots: weekdays at 2pm, placed after the 9–1 lectures so they would never clash, and weekends at 10am and 3pm. The plan did it, and no rule stopped it. Rule 6's "where and when" invited it, and C1446's "she chooses it" is only a note.
+  - **The fix:**
+    - New lesson **L166** in `lists/LESSONS.md`, under Other.
+    - New must-read row **L166** in `craft/systems.md`: `when` = a repeatable, judged by the reader, blocking on the P10 failure.
+    - **New shape rule 7:** a repeat activity is open whenever its place is open and its people are there. Fixed times only when the activity really happens at a time (a class, a party), and the card says why. Never place one activity around another to avoid a clash; when two compete for the same hours, that's the player's choice.
+    - **Measured in CoT:** the "Work" link in `QuickieBurger.txt` (lines 4-30) checks the job, her need and how she looks, and no hour. It costs one hour a click (`<<dtime 60>>`), and only her need stops it ("You really don't feel like working."). Classes, checked in `_cot_js.txt` by ENI and re-read here: they run in scheduled blocks (`setup.School.current_class`, lines 126098-126104), she attends by being at the class's place in its block (`is_pc_at_class`, 126175-126181), and attendance is counted per course (`$classesattended`, 126249-126264). She attends by going; nothing makes her go. What skipping costs was not found, and isn't claimed. (Replaces an earlier unverified line, "Classes run at their times and can be skipped", in rule 7.)
+    - Old rules 7–10 are now 8–11, and the one internal reference ("rule 7", now "rule 8") was updated; no other file cites systems.md rule numbers (checked with grep).
+    - Rule 6's "where and when" now points at rule 7.
+    - The worked example's café button says it's open whenever the café is open and the manager is there, not at a set hour.
+    - **Checked against neighbours:** C1427 and rule 4 ("sized against the window") agree, because the window is the place's open hours. C1446 stays the note it was, and rule 7 cites it.
+    - **`plan.md` §6:** one line, "Don't schedule activities around each other."

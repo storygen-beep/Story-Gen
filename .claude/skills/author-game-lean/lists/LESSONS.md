@@ -236,6 +236,7 @@ Line numbers are `cat -n` line numbers. `FT:134 (row 135)` means file line 134, 
 | L159 | The exact-needed two-root map "felt utilitarian, not a living world", and LO rejected it | [D83] VA:4672 | One living city of three districts, NPCs on schedules, a world that remembers | C814 | |
 | L160 | The schedule table was too much: "In one table it shows everything. It becomes a lot confusing." | [D84] FT:88 (row 96) | One day at a time, with day chips and a "Now:" line | C915; new: the schedule page shows one day at a time | |
 | L161 | A rule that counts hours invited filler rows (Hale's office row was added only to make it his most-hours place). It recurred the day after an audit cut it, and then LO corrected the over-correction: office rows show where a person is | [N54] SC:315-318 (B13); SC:409-417 (B23) | Rule: "a row needs a reason the player can see … never a reason only a metric sees" (SC:415-417) | C2031; new: a schedule row needs a reason the player can see | |
+| L166 | Repeat activities were locked to fixed slots: first_term_lean's café shifts (P10) ran weekdays at 2pm, placed after the 9–1 lectures so they'd never clash, and weekends at 10am and 3pm. The plan did it, and no rule stopped it. LO: shifts are independent of classes; that is the player's freedom | first_term_lean P10 (2026-11-24); LO, relayed by ENI: "yes, do both" | `craft/systems.md` rule 7 and C1446: a repeat activity is open whenever its place is open and its people are there; `plan.md` §6 | systems | 2026-11-24 LO: yes |
 
 ---
 

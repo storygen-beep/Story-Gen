@@ -258,6 +258,10 @@ def check_presence(game, dev=()):
         bound = {trig.get("npc"), trig.get("requires_npc")}
         checked = {i.get("npc_id") for i in items(trig.get("conditions")) if i.get("type") == "npc_at_location"}
         slots = fire_slots(trig)
+        # A choice that carries its own clock condition narrows the screens after it (P34: "Pay the rent" only on
+        # Sunday mornings, from a menu open all week); a screen reached by several choices takes the union.
+        import sheet
+        by_node = sheet.node_starts(c, slots)
         for n in c.get("nodes") or []:
             for b, cond in walk(n.get("blocks")):
                 props = b.get("props") or {}
@@ -271,7 +275,7 @@ def check_presence(game, dev=()):
                 # Adjacent groups merge into one if/elseif chain, so a later group also needs the earlier ones to
                 # fail; that isn't modelled. Its own conditions are a superset of when it really shows, so this can
                 # only keep a red too long, never hide one.
-                line_slots = set(slots)
+                line_slots = set(by_node.get(n.get("id"), slots))
                 for gc in cond:
                     line_slots &= who_is_where.when_slots(gc)
                 table = where.get(pid)
