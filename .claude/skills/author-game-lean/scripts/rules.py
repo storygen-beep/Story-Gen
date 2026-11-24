@@ -135,6 +135,8 @@ def seen(game):
     garments = [g for g in garments if len(g) >= 4]
     out = {}
     for c in game.get("canvases") or []:
+        if scenes.retired(c):
+            continue  # switched off, kept for old saves (scenes.retired)
         cid, trig = c.get("id"), c.get("trigger") or {}
         nodes, nxt, _ = scenes.graph(c)
         # The starting canvas plays once, at the start; any other canvas is repeatable unless it says
@@ -182,7 +184,10 @@ def seen(game):
 def meetings(game):
     """[(screen the met flag is set leaving, screen it leads to or None, flag)]: a first meeting shows on one of them."""
     out = []
+    import scenes
     for c in game.get("canvases") or []:
+        if scenes.retired(c):
+            continue
         ids = {n.get("id") for n in c.get("nodes") or []}
         for node in c.get("nodes") or []:
             for ch in (node.get("exit_block") or {}).get("choices") or []:

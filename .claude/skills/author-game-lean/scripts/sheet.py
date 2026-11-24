@@ -26,6 +26,8 @@ How each column is worked out (LO, relayed 2026-11-24: "Commit and continue", th
   flags    flags set by choices on the path before the screen, plus flags the trigger checks is_true. Flags set on
            only some paths come after "by path:".
 
+A retired canvas (`is_active = false`, kept only for old saves) has no rows (scenes.retired).
+
 A screen it can't model (a canvas with no place the engine knows and no card place, or one no path reaches) is
 "?" in that column, and check.py's `sheet` is INCOMPLETE for it, never green.
 """
@@ -232,6 +234,57 @@ def node_starts(c, base):
     return out
 
 
+ALL_DAYS = frozenset(range(7))
+
+
+def clock_terms(item):
+    """[(days, (start, end))] a clock condition holds on, read from its items, so a grouped clock prints its real
+    minutes ("07:00–19:56", not the 5-minute grid's "20:00"). None when it can't be written that way (two windows in
+    one AND, a part with no window)."""
+    if not isinstance(item, dict):
+        return [(ALL_DAYS, None)]
+    if item.get("type") == "group" or isinstance(item.get("items"), list):
+        subs = [clock_terms(i) for i in item.get("items") or [] if isinstance(i, dict)]
+        if any(s is None for s in subs):
+            return None
+        if item.get("logic") == "OR":
+            return [x for s in subs for x in s]
+        acc = [(ALL_DAYS, None)]
+        for s in subs:
+            nxt = []
+            for d1, w1 in acc:
+                for d2, w2 in s:
+                    if w1 and w2:
+                        return None
+                    if d1 & d2:
+                        nxt.append((d1 & d2, w1 or w2))
+            acc = nxt
+        return acc
+    if item.get("type") == "weekday":
+        return [(frozenset(item.get("weekdays") or []), None)]
+    if item.get("type") == "time_of_day":
+        s, e = who_is_where.minutes(item.get("start_time")), who_is_where.minutes(item.get("end_time"))
+        return None if s is None else [(ALL_DAYS, (s, s + 60 if e is None else e))]
+    return [(ALL_DAYS, None)]
+
+
+def fmt_terms(conditions, minute=0):
+    """A grouped clock cell from its terms: "07:00–19:56 · Mon Tue Wed Thu Fri / 10:00–19:56 · Sat", or None."""
+    terms = clock_terms(dict(conditions or {}, type="group"))
+    if not terms or any(w is None for _, w in terms):
+        return None
+    by_window = {}
+    for days, w in terms:
+        by_window.setdefault(w, set()).update(days)
+    names = who_is_where.DAYS
+    shift = f" +{minute}" if minute else ""
+    parts = []
+    for (s, e), days in sorted(by_window.items(), key=lambda x: min(x[1])):
+        day_txt = "" if days == set(ALL_DAYS) else " · " + " ".join(names[d] for d in sorted(days))
+        parts.append(f"{hhmm(s)}–{hhmm(e)}{shift}{day_txt}")
+    return " / ".join(parts)
+
+
 def fmt_slots(slots):
     """A clock cell for a narrowed screen, from the slots it shows at: "08:05–12:00 · Sun", or one part per day,
     joined " / ", when the days differ."""
@@ -281,11 +334,12 @@ def compute(game, canvas_ids, card_places=None):
     t = game.get("time") or {}
     start_day = DAYS.index(t.get("starting_day", "Monday")) if t.get("starting_day", "Monday") in DAYS else 0
     start_min = int(t.get("starting_hour", 0) or 0) * 60
+    import scenes
     out = {}
     for c in game.get("canvases") or []:
         cid = c.get("id")
-        if cid not in canvas_ids:
-            continue
+        if cid not in canvas_ids or scenes.retired(c):
+            continue  # a retired canvas (is_active = false) is never offered: no sheet row
         trig = c.get("trigger") or {}
         is_start = cid == start_id
         bound = {trig.get("npc"), trig.get("requires_npc")} - {None}
@@ -322,7 +376,11 @@ def compute(game, canvas_ids, card_places=None):
                     slots = slots_between(start_day, start_min + minute, start_min + minute)
                 else:
                     slots = shifted(starts, minute, minute + who_is_where.STEP)
-                    row["clock"].append(fmt_slots(slots) if narrowed else clock_text(trig, win, bound, place, minute))
+                    if narrowed and grouped and starts == base and base == who_is_where.when_slots(trig.get("conditions")):
+                        text = fmt_terms(trig.get("conditions"), minute) or fmt_slots(slots)  # the real minutes
+                    else:
+                        text = fmt_slots(slots) if narrowed else clock_text(trig, win, bound, place, minute)
+                    row["clock"].append(text)
                 row["who"].append(", ".join(present(where, place, slots, bound)) if place else "?")
                 if eq is not None:
                     worn = sorted(v for v in eq.values() if v)
@@ -414,9 +472,11 @@ def clock_meaning(text, exact):
     the window shifted by "+N" (none means the window is already the screen's), on the days named (none: every day).
     "while <id> is there" and "any" keep their words. A cell it can't read compares as text."""
     low = text.lower().replace("any minute", "")
-    if " / " in low and not exact:
-        # several parts (paths, or days with different hours): the union of their slots
-        parts = [clock_meaning(x, exact) for x in low.split(" / ")]
+    split = re.split(r"\s*/\s*|,\s*(?=[^,]*\d{1,2}:\d{2})", low)
+    if len(split) > 1 and not exact:
+        # several parts (paths, or days with different hours), joined " / " or listed with commas
+        # ("weekdays 07:00–19:56, Sat 10:00–19:56"): the union of their slots
+        parts = [clock_meaning(x, exact) for x in split if x.strip()]
         if all(p[0] == "slots" for p in parts):
             return ("slots", frozenset().union(*(p[1] for p in parts)))
     m = TIMES.search(low)

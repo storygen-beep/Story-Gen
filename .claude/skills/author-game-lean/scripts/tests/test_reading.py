@@ -156,3 +156,11 @@ def test_an_old_format_fail_stays_on_its_screen_when_rewritten(game):
     edit(game, "You eat alone.", "You eat alone, fast.")
     items = reading.work_list(game, "p1")["items"]
     assert any(i["screen"] == "start.a" and i["why"] == "failed last pass" for i in items)
+
+
+def test_a_retired_canvas_has_no_rows_on_the_work_list(game):
+    p = game / "toml_phases" / "7_final_game.toml"
+    p.write_text(p.read_text().replace('[canvases.trigger]\nlocation = "home"', '[canvases.trigger]\nlocation = "home"\nis_active = false', 1))
+    assert reading.current(game, "p1")[0] == {"*": reading.whole_hash({})}
+    p.write_text(p.read_text().replace("is_active = false\n", "", 1))
+    assert "start.a" in reading.current(game, "p1")[0]

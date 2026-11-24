@@ -93,6 +93,17 @@ def guaranteed(conditions, kind="npc_at_location", key="npc_id", operator="is_pr
     return set().union(*sets)
 
 
+def retired(c):
+    """A canvas switched off on purpose (`is_active = false` on its trigger or itself): the engine never offers it
+    (v2.py:3753, 4309), and it stays in the TOML only so an old save still points at something
+    (`craft/returning-player.md`). reach, the sheet, the Does: guard and the reader's work list skip it; the saves
+    check still sees it, since it is kept for saves."""
+    if not isinstance(c, dict):
+        return False
+    return any(str(v).lower() == "false" for v in (c.get("is_active"), (c.get("trigger") or {}).get("is_active"))
+               if v is not None)
+
+
 def canvases(game, dev=()):
     return [c for c in game.get("canvases") or [] if isinstance(c, dict) and c.get("id") and c["id"] not in dev]
 

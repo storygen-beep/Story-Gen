@@ -147,8 +147,8 @@ def screens(game, canvas_ids, sheet_rows=None):
     rows_of = {n.get("id"): n.get("schedules") or [] for n in game.get("npcs") or []}
     out = {}
     for c in game.get("canvases") or []:
-        if c.get("id") not in canvas_ids:
-            continue
+        if c.get("id") not in canvas_ids or scenes.retired(c):
+            continue  # a retired canvas (is_active = false) is never offered: no rows to read
         trig = c.get("trigger") or {}
         for node in c.get("nodes") or []:
             blob = json.dumps(node, sort_keys=True, default=str)

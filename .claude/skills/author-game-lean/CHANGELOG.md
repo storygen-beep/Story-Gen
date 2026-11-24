@@ -684,3 +684,18 @@ Why for all of these: P13's reader found new FAILs on every pass, v5 to v11 (99 
     - the guard reads a clock group as a gate, and an OR with a bare flag as no gate;
     - reach finds a dead flag inside a group, keeps an OR open when one branch can hold, and an empty group never opens.
   - **ENI's moved v2.py cites checked:** 26 were spot-checked against their content (selectAutoFire 5905, getStoryCanvasRedirect 6521, the requiresNpc comment 6093, the selectors 5935 and 5968, `_npcPresentForCanvas` 6039, the presence guard 6696, onlyTheClockShut 6068, isCanvasSelectable 6061, is_repeatable 15077, lockedText 15194, terminal_text 19981, backfill 20505, version restamp 20661, canChangeClothesHere 21014, `_resolve_at_references` 18619, default_time 17755, consume_on 5446, canTriggerActivity 5600, daily_tick 7173, clothing_slot 9522, the blocked-row drawing 6749, set_day 5179, the Schedules page 24410, closed_text 11455, and the dress-rule loop 14679). All land on what they cite. The cites before line 5405 (1282, 1700, 2189, 2234, 4118) weren't moved; they share an edited line with a later cite.
+- Two false reds from P10's rebuild on condition groups, 14 in all (ENI for LO, standing authorization, 2026-11-24).
+  - **(1) Retired canvases.** P10's six old rows stay in the TOML with `is_active = false` on their triggers, so LO's dev save still points at them (`craft/returning-player.md`). `reach.py` said they "can never open", and the sheet said they were "built but not on the card's Sheet:", which made 12 reds.
+    - **Fix:** a new `scenes.retired(c)` treats `is_active = false`, on the trigger or the canvas, as switched off on purpose; the engine never offers it (v2.py:3753, 4309).
+    - Skipped by `reach.check`, `sheet.compute`, the `Does:` guard (`rules.seen`, `rules.meetings`) and the reader's screens (`reading.screens`), each with a note.
+    - The saves check still sees retired canvases, since they're kept for saves.
+  - **(2) Grouped clocks were rounded, and the card's comma form wasn't read.** The build has weekdays 07:00–19:56, Sat 10:00–19:56 and Sun 10:00–18:56, but `fmt_slots` printed the 5-minute grid's "20:00". The card wrote "weekdays 07:00–19:56, Sat 10:00–19:56, Sun 10:00–18:56 +0", with commas, which `clock_meaning` didn't split. That made 2 reds.
+    - **Fix:** `clock_terms` reads a grouped clock's terms from its items: days with a window, through AND and OR, giving up on two windows in one AND. `fmt_terms` prints them with their real minutes, days with the same window together: "07:00–19:56 · Mon Tue Wed Thu Fri / 10:00–19:56 · Sat / 10:00–18:56 · Sun". A screen later in the scene adds "+N".
+    - A choice-narrowed or person-bound clock still prints from slots.
+    - `clock_meaning` splits parts on " / " or on a comma before a part with a time.
+  - **Tests:**
+    - the :56 case prints exactly, the card's comma form matches, and a wrong Sunday end differs;
+    - a retired canvas raises nothing in reach, the sheet or the guard, and un-retiring it brings all three back;
+    - a retired canvas has no screens in the reader's work list, and un-retiring it brings them back;
+    - one earlier test's expected clock moved from "21:00" to the real "20:56".
+  - **Verified read-only on first_term_lean:** reach, sheet and does are green. P10 prints "07:00–19:56 · Mon Tue Wed Thu Fri / 10:00–19:56 · Sat / 10:00–18:56 · Sun".

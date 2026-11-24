@@ -349,6 +349,9 @@ def _doors(game):
 
 
 def check(game):
+    # A retired canvas (is_active = false) is never offered and is kept only for old saves: not judged (scenes.retired).
+    import scenes
+    game = dict(game, canvases=[c for c in game.get("canvases") or [] if not scenes.retired(c)])
     canv = {c.get("id"): c for c in game.get("canvases") or [] if isinstance(c, dict)}
     locs = {l.get("id"): l for l in game.get("locations") or [] if isinstance(l, dict)}
     doors = _doors(game)

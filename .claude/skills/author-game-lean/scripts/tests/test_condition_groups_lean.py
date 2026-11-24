@@ -88,7 +88,7 @@ def cafe_game():
 
 def test_the_sheet_prints_a_grouped_clock_part_by_part():
     row = sheet.compute(cafe_game(), {"work"})["work.a"]
-    assert row["clock"] == "07:00–21:00 · Mon Tue Wed Thu Fri / 10:00–21:00 · Sat Sun"
+    assert row["clock"] == "07:00–20:56 · Mon Tue Wed Thu Fri / 10:00–20:56 · Sat Sun"  # the real minutes
     assert row["who"] == "npc_tom"  # Tom is there every minute the row can show, on each kind of day
     hand = "weekdays 07:00–20:56 / weekends 10:00–20:56"
     assert sheet.norm("clock", hand) == sheet.norm("clock", row["clock"])
@@ -139,3 +139,32 @@ def test_reach_keeps_an_or_group_open_when_one_branch_can_hold():
 def test_reach_an_empty_group_never_opens():
     r = reach.check(_game(_scene("start"), _scene("gate", cond=_cond({"type": "group", "logic": "AND", "items": []}))))
     assert "gate" in r["scenes"]
+
+
+# ── a grouped clock prints its real minutes (P10, 2026-11-24: "19:56" printed as "20:00") ──
+
+P10_HOUR = {"type": "group", "logic": "OR", "items": [clock([0, 1, 2, 3, 4], "07:00", "19:56"), clock([5], "10:00", "19:56"),
+                                                      clock([6], "10:00", "18:56")]}
+
+
+def test_a_grouped_clock_prints_its_real_minutes():
+    g = cafe_game()
+    g["canvases"][0]["trigger"]["conditions"] = {"version": "1.0", "items": [P10_HOUR]}
+    row = sheet.compute(g, {"work"})["work.a"]
+    assert row["clock"] == "07:00–19:56 · Mon Tue Wed Thu Fri / 10:00–19:56 · Sat / 10:00–18:56 · Sun"
+    hand = "weekdays 07:00–19:56, Sat 10:00–19:56, Sun 10:00–18:56 +0"  # the card's comma form
+    assert sheet.norm("clock", hand) == sheet.norm("clock", row["clock"])
+    assert sheet.norm("clock", "weekdays 07:00–19:56, Sat 10:00–19:56, Sun 10:00–19:56") != sheet.norm("clock", row["clock"])
+
+
+# ── a retired canvas (is_active = false, kept for old saves) is skipped (P10's six old rows) ──
+
+def test_a_retired_canvas_raises_nothing_and_unretiring_brings_its_checks_back():
+    old = _scene("old_row", cond=_cond({"type": "flag", "flag_key": "never_set", "operator": "is_true"}), is_active=False)
+    g = _game(_scene("start"), old)
+    assert "old_row" not in reach.check(g)["scenes"]
+    assert scenes.retired(old) and sheet.compute(g, {"old_row"}) == {}
+    assert "old_row.a" not in rules.seen(g)
+    old["trigger"]["is_active"] = True
+    assert "old_row" in reach.check(g)["scenes"] and "old_row.a" in sheet.compute(g, {"old_row"})
+    assert "old_row.a" in rules.seen(g)
