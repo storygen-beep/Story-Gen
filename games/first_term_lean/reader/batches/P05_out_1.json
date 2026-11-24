@@ -1,0 +1,62 @@
+{
+ "verdicts": [
+  {
+   "row": "C1265",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "image = \"locations/near_cafe_t0.jpg\"; image = \"locations/near_zoe_apartment_t0.jpg\"",
+   "why": "the café's and Zoe's pictures render only as their cards on The Quad, which carries no image of its own; C1265 now says a place's card is not a spot of this kind",
+   "cause": null
+  },
+  {
+   "row": "C804",
+   "screen": "near_cafe",
+   "verdict": "FAIL",
+   "line": "The café across from campus: the coffee machine hissing, a long counter, a tip jar by the till. A sign on the door says it's open from 7am to 9pm.",
+   "why": "Tom (Mon-Sat 10-21) and Chris (weekdays 07-15, weekends 10-20) are here by who_is_where; no line changes with who is in; held to P31, no waiver; judged as built",
+   "cause": "P05c1-c1"
+  },
+  {
+   "row": "L147",
+   "screen": "near_cafe",
+   "verdict": "FAIL",
+   "line": "Leave Café",
+   "why": "the open café is empty with nothing to do at Sat/Sun 07-10 and Sun 19:00-21:00 after her first shift (no one in, coffee needs Tom or Chris, the work rows grey), on Sundays and before 10am before she's hired, and outside weekdays 10-14:56 before her first shift; held to P31, no waiver",
+   "cause": "P05c1-c2"
+  },
+  {
+   "row": "media#2",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "\"woman of 18 at a cafe window table with a coffee\"; \"woman of 18 on a messy sofa in a student apartment, clothes on the chairs\"",
+   "why": "one file per place, tier 0, with her in it, no outfit named; the quad has none",
+   "cause": null
+  },
+  {
+   "row": "places#2",
+   "screen": "near_cafe",
+   "verdict": "FAIL",
+   "line": "The café across from campus: ... A sign on the door says it's open from 7am to 9pm.",
+   "why": "no presence line for Tom or Chris, and no empty line (Sat/Sun 07-10 and Sun 20-21 nobody is in); held to P31, no waiver",
+   "cause": "P05c1-c1"
+  },
+  {
+   "row": "places#6",
+   "screen": "near_cafe",
+   "verdict": "FAIL",
+   "line": "Leave Café",
+   "why": "before cafe_hired only the hire row (greyed Sundays and before 10am, hidden the rest of the day after \"Not today.\"); before the first shift only that shift (weekdays 10:00-14:56); after it, coffee shows only while Tom or Chris is in and work starts from 10 at weekends and ends 18:56 Sundays, so Sat/Sun 07-10 and Sun 19-21 nothing can be done; held to P31, no waiver",
+   "cause": "P05c1-c2"
+  }
+ ],
+ "causes": [
+  {
+   "id": "P05c1-c1",
+   "what": "No presence line on the Café for Tom and Chris (met or unmet) and no empty line; held to P31, no waiver."
+  },
+  {
+   "id": "P05c1-c2",
+   "what": "The open Café has hours with nothing she can do alone: before hire (Sundays, before 10am, after \"Not today.\"), before her first shift (outside weekdays 10-15), and after it Sat/Sun 07-10 and Sun 19-21; held to P31, no waiver."
+  }
+ ]
+}

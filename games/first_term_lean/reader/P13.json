@@ -1,12 +1,12 @@
 {
  "piece": "P13",
- "pass": 9,
+ "pass": 10,
  "screens": {
   "opening.wake": {
-   "text": "e151e2a47117a98b",
+   "text": "4dee8035ba2ae97c",
    "facts": "e0c40fd7cb43a940",
    "facts2": "e0c40fd7cb43a940",
-   "all": "6c71d8498e93d426"
+   "all": "174f9a425ceb36aa"
   },
   "opening.kitchen_rent": {
    "text": "58683dab2944f811",
@@ -98,7 +98,7 @@
    "facts2": "e3c64fae82d5d691",
    "all": "60b36543d130caee"
   },
-  "*": "3bed659f292567f1"
+  "*": "e6294c50b8d50bd3"
  },
  "rows": {
   "B1": "5276068df1ca6fa9",
@@ -390,6 +390,24 @@
    },
    "row_hash": "c1c0e2ac2588a579",
    "carried": true
+  },
+  {
+   "row": "B10",
+   "screen": "opening.wake",
+   "verdict": "PASS",
+   "line": "Your saves live in this browser. Use Saves, then Save to Disk\u2026, to keep one.",
+   "why": "true at every visit: the Saves menu and 'Save to Disk\u2026' exist under those labels in output/index.html; no person named on screen; the rest of the screen unchanged",
+   "cause": "",
+   "note": false,
+   "screen_hash": {
+    "text": "4dee8035ba2ae97c",
+    "facts": "e0c40fd7cb43a940",
+    "facts2": "e0c40fd7cb43a940",
+    "all": "174f9a425ceb36aa"
+   },
+   "row_hash": "c1c0e2ac2588a579",
+   "carried": false,
+   "pass": 10
   },
   {
    "row": "B11",
@@ -803,13 +821,20 @@
   {
    "row": "B8",
    "screen": "opening.wake",
-   "verdict": "WAIVED",
-   "line": "\"Your pyjama top has ridden up in the night\"",
-   "why": "The pyjama top is named with nothing worn. LO, NOTES 2026-11-23: \"Yes to all ten, waive 9\" \u2014 the pyjama top on screen 1 is prose only, not a garment",
-   "cause": null,
-   "screen_hash": "6c71d8498e93d426",
+   "verdict": "PASS",
+   "line": "You're eighteen, in the single bed you had at twelve",
+   "why": "numbers unchanged and agree with PLAN/P02; the pyjama top is prose only, LO's waiver (NOTES 179: \"Yes to all ten, waive 9\")",
+   "cause": "",
+   "note": false,
+   "screen_hash": {
+    "text": "4dee8035ba2ae97c",
+    "facts": "e0c40fd7cb43a940",
+    "facts2": "e0c40fd7cb43a940",
+    "all": "174f9a425ceb36aa"
+   },
    "row_hash": "80d415cf08e0ebfe",
-   "carried": true
+   "carried": false,
+   "pass": 10
   },
   {
    "row": "B9",
@@ -2535,6 +2560,24 @@
    "carried": true
   },
   {
+   "row": "C460",
+   "screen": "opening.wake",
+   "verdict": "PASS",
+   "line": "Your saves live in this browser. Use Saves, then Save to Disk\u2026, to keep one.",
+   "why": "the new line is true on every playthrough; labels match the built UI",
+   "cause": "",
+   "note": false,
+   "screen_hash": {
+    "text": "4dee8035ba2ae97c",
+    "facts": "e0c40fd7cb43a940",
+    "facts2": "e0c40fd7cb43a940",
+    "all": "174f9a425ceb36aa"
+   },
+   "row_hash": "67e48e60d5053a2e",
+   "carried": false,
+   "pass": 10
+  },
+  {
    "row": "C461",
    "screen": "*",
    "verdict": "PASS",
@@ -2571,6 +2614,24 @@
    },
    "row_hash": "310706ee076318f2",
    "carried": true
+  },
+  {
+   "row": "C461",
+   "screen": "opening.wake",
+   "verdict": "PASS",
+   "line": "College. Finally, something that's yours.",
+   "why": "her opinion; no clash",
+   "cause": "",
+   "note": false,
+   "screen_hash": {
+    "text": "4dee8035ba2ae97c",
+    "facts": "e0c40fd7cb43a940",
+    "facts2": "e0c40fd7cb43a940",
+    "all": "174f9a425ceb36aa"
+   },
+   "row_hash": "310706ee076318f2",
+   "carried": false,
+   "pass": 10
   },
   {
    "row": "C519",
@@ -3780,6 +3841,24 @@
    "carried": true
   },
   {
+   "row": "C927",
+   "screen": "opening.wake",
+   "verdict": "PASS",
+   "line": "Go down to the kitchen (5 min)",
+   "why": "the one exit states its time (time_progression_minutes = 5)",
+   "cause": null,
+   "note": true,
+   "screen_hash": {
+    "text": "4dee8035ba2ae97c",
+    "facts": "e0c40fd7cb43a940",
+    "facts2": "e0c40fd7cb43a940",
+    "all": "174f9a425ceb36aa"
+   },
+   "row_hash": "4e86d143688ba8e5",
+   "carried": false,
+   "pass": 10
+  },
+  {
    "row": "C928",
    "screen": "*",
    "verdict": "PASS",
@@ -3930,6 +4009,24 @@
    },
    "row_hash": "1aadffd96e76381c",
    "carried": true
+  },
+  {
+   "row": "C931",
+   "screen": "opening.wake",
+   "verdict": "N/A",
+   "line": "(no time_of_day condition on wake)",
+   "why": "nothing on the screen reads time_of_day",
+   "cause": null,
+   "note": true,
+   "screen_hash": {
+    "text": "4dee8035ba2ae97c",
+    "facts": "e0c40fd7cb43a940",
+    "facts2": "e0c40fd7cb43a940",
+    "all": "174f9a425ceb36aa"
+   },
+   "row_hash": "1aadffd96e76381c",
+   "carried": false,
+   "pass": 10
   },
   {
    "row": "C951",
@@ -4175,8 +4272,26 @@
    "note": false,
    "screen_hash": "3bed659f292567f1",
    "row_hash": "e64ce2672d85d2d8",
-   "carried": false,
+   "carried": true,
    "pass": 9
+  },
+  {
+   "row": "L167",
+   "screen": "opening.wake",
+   "verdict": "N/A",
+   "line": "(no hours on wake)",
+   "why": "one-time opening screen, no hours, no greyed row",
+   "cause": "",
+   "note": false,
+   "screen_hash": {
+    "text": "4dee8035ba2ae97c",
+    "facts": "e0c40fd7cb43a940",
+    "facts2": "e0c40fd7cb43a940",
+    "all": "174f9a425ceb36aa"
+   },
+   "row_hash": "e64ce2672d85d2d8",
+   "carried": false,
+   "pass": 10
   },
   {
    "row": "L71",
@@ -4203,8 +4318,8 @@
  ],
  "causes": [],
  "pending": [],
- "asked": 1,
- "answered": 1,
+ "asked": 7,
+ "answered": 7,
  "pass_items": [],
  "unowed": []
 }

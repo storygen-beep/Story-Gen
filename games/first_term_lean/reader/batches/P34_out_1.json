@@ -1,11 +1,69 @@
-{"verdicts": [
- {"row": "B10", "screen": "mark_kitchen.hub", "verdict": "PASS", "line": "Pay the rent (5 min) — Mark collects on Sundays, 8 to 11:55am, at the kitchen table.", "why": "Hub exists only while Mark is in the Kitchen (requires_npc; who_is_where: weekdays 07:00-07:30, Sat 08-10, Sun 08-12); the locked text shows only outside Sun 08:00-11:55 and is a standing rule, true on first, last and second visit; 'at the table with his coffee' true in every kitchen slot."},
- {"row": "B8", "screen": "mark_kitchen.hub", "verdict": "PASS", "line": "Pay the rent (5 min) — Mark collects on Sundays, 8 to 11:55am, at the kitchen table.", "why": "Hours match the condition (weekday 6, 08:00-11:55), P11 card and NOTES 230; (5 min) matches the 5 spent on rent's Leave/Done; Talk (5 min) matches Done 5; no garment named."},
- {"row": "C460", "screen": "mark_kitchen.hub", "verdict": "PASS", "line": "Mark's at the table with his coffee. He looks at you over the rim.", "why": "Every claim holds on every reachable visit: Mark present by his rows, the rent sign states the real window, nothing names a past or a first time."},
- {"row": "C461", "screen": "mark_kitchen.hub", "verdict": "PASS", "line": "Mark's at the table with his coffee.", "why": "Coffee and the look over the rim are texture that can't clash in any of his kitchen slots; fits his cast entry (pressure, money)."},
- {"row": "C927", "screen": "mark_kitchen.hub", "verdict": "PASS", "line": "Leave (time_progression_minutes = 0)", "why": "Every exit sets its time explicitly (Talk 0 then Done 5, rent 0 then Leave/Done 5, Leave 0), so no silent 3-minute default."},
- {"row": "C931", "screen": "mark_kitchen.hub", "verdict": "PASS", "line": "time_of_day start_time = \"08:00\", end_time = \"11:55\"", "why": "End exclusive: open 08:00 until 11:55, greyed from 11:55 while Mark sits till 12:00; the sign's '8 to 11:55am' reads as the closing minute, consistent with what she sees at 11:55. Re-read each visit via the choice condition."},
- {"row": "L106", "screen": "mark_kitchen.hub", "verdict": "PASS", "line": "Mark's at the table with his coffee.", "why": "Only Mark is claimed present, and requires_npc = npc_mark puts him there; Laura is not named on this screen."},
- {"row": "L167", "screen": "mark_kitchen.hub", "verdict": "PASS", "line": "Pay the rent (5 min) — Mark collects on Sundays, 8 to 11:55am, at the kitchen table.", "why": "One row, one condition (no per-day duplicates); shut by the clock alone, it stays dimmed (show_when_locked, the choice-level form) with text naming the full hours."}
-],
-"causes": []}
+{
+ "verdicts": [
+  {
+   "row": "B10",
+   "screen": "home_wait.wait",
+   "verdict": "PASS",
+   "line": "You lie on your bed with your phone for half an hour and let the house go on around you.",
+   "why": "trigger location home_her_room, so 'your bed' is where she is; who_is_where puts nobody in home_her_room at any hour, and the line names nobody; 'the house go on around you' is texture that holds at 3am too",
+   "cause": ""
+  },
+  {
+   "row": "B8",
+   "screen": "home_wait.wait",
+   "verdict": "PASS",
+   "line": "half an hour",
+   "why": "Done charges time_progression_minutes = 30, matching the label 'Wait (30 min)' and PLAN:213 'pass 30 minutes'; no garment named",
+   "cause": ""
+  },
+  {
+   "row": "C460",
+   "screen": "home_wait.wait",
+   "verdict": "PASS",
+   "line": "Then you get up. Somewhere out there is money, and you're not making it lying here.",
+   "why": "true on every visit: she has no money-making act here; nothing claims a past or a person",
+   "cause": ""
+  },
+  {
+   "row": "C461",
+   "screen": "home_wait.wait",
+   "verdict": "PASS",
+   "line": "Then you get up. Somewhere out there is money, and you're not making it lying here.",
+   "why": "her opinion, can't clash",
+   "cause": ""
+  },
+  {
+   "row": "C927",
+   "screen": "home_wait.wait",
+   "verdict": "PASS",
+   "line": "Done",
+   "why": "exit states 30 minutes, back to home_her_room",
+   "cause": ""
+  },
+  {
+   "row": "C931",
+   "screen": "home_wait.wait",
+   "verdict": "N/A",
+   "line": "(no time_of_day condition)",
+   "why": "the row has no clock condition",
+   "cause": ""
+  },
+  {
+   "row": "L106",
+   "screen": "home_wait.wait",
+   "verdict": "PASS",
+   "line": "You lie on your bed with your phone for half an hour and let the house go on around you.",
+   "why": "names nobody as present",
+   "cause": ""
+  },
+  {
+   "row": "L167",
+   "screen": "home_wait.wait",
+   "verdict": "N/A",
+   "line": "(no hours)",
+   "why": "open at every hour, no greyed state",
+   "cause": ""
+  }
+ ],
+ "causes": []
+}

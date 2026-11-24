@@ -1,20 +1,404 @@
 {
  "verdicts": [
-  {"row": "B10", "screen": "talk_mom.talk", "verdict": "PASS", "line": "Did Mark say anything else? About the rent?", "why": "talk_mom needs met_laura, set on the opening choice into kitchen_rent where Mark names the rent (toml 941-950), so 'anything else' is true from the first visit; the three groups merge into one chain (both away / Mark there / Ryan there) and who_is_where never puts Mark and Ryan in the Kitchen together; daily repeat stays true"},
-  {"row": "B8", "screen": "talk_mom.talk", "verdict": "PASS", "line": "Talk (5 min) ... Done: time_progression_minutes = 5", "why": "the only number is the 5 min, spent on Done as the label says; no garment named on this screen"},
-  {"row": "C1158", "screen": "talk_mom.talk", "verdict": "PASS", "line": "Sit with me a minute, baby. Just a minute.", "why": "no garment named in any of the three versions; Mom's clothing lines sit on the hub, behind clothing_item equipped"},
-  {"row": "C1206", "screen": "talk_mom.talk", "verdict": "PASS", "line": "Your stomach tightens. She's waiting for something, and she won't say what.", "why": "no garment named on talk_mom.talk"},
-  {"row": "C1631", "screen": "talk_mom.talk", "verdict": "N/A", "line": "", "why": "talk_mom.talk is not the hand-over; the opening's Done into the Kitchen (P13) is"},
-  {"row": "C460", "screen": "talk_mom.talk", "verdict": "PASS", "line": "She's got somewhere to be, Laura.", "why": "Mark-there version only while his rows put him in the Kitchen (weekday 7-8, Sat 8-10, Sun 8-12, mornings, where his line is his own opinion); Ryan-there version only 17/18-19, dinner, so 'Ryan, plates.' and dessert fit; private version names only Mom; every claim holds at first and last minute"},
-  {"row": "C461", "screen": "talk_mom.talk", "verdict": "PASS", "line": "When he's gone, you tell me everything.", "why": "what's beyond fact is dialogue that fits the cast (Mom protective, Mark curt, Ryan grudging) and her own reactions"},
-  {"row": "C921", "screen": "talk_mom.talk", "verdict": "PASS", "line": "", "why": "note row: no window here wraps; Mom's night is two rows (23-24, 00-07/08) per who_is_where"},
-  {"row": "C927", "screen": "talk_mom.talk", "verdict": "PASS", "line": "Done: time_progression_minutes = 5", "why": "note row: the only exit names its time"},
-  {"row": "C931", "screen": "talk_mom.talk", "verdict": "N/A", "line": "", "why": "no time_of_day condition on talk_mom.talk; versions are by presence"},
-  {"row": "L106", "screen": "talk_mom.talk", "verdict": "PASS", "line": "Mark turns a page, louder than he needs to. / Ryan rolls his eyes and gets them.", "why": "each person's line is behind npc_at_location is_present for home_kitchen; Mom guaranteed by requires_npc; who_is_where never has Mark and Ryan in the Kitchen at once, so the chain's first match never drops a present person's required line"},
-  {"row": "L167", "screen": "talk_mom.talk", "verdict": "PASS", "line": "Talk (5 min)", "why": "one Talk row with no hours; no per-day-kind duplicate rows"},
-  {"row": "clothes#1", "screen": "hood_street", "verdict": "FAIL", "line": "{ type = \"worn_exposure\", operator = \"gte\", value = 1 }", "why": "worn_exposure, release 1's one number, is still read in one place in 7_final_game.toml (line 371, the street line); step 1 asks 3+ readers (a door, a line, an event); ENI's release-2 deferral (NOTES 241) is not LO's waiver", "cause": "P07o1-c1"}
+  {
+   "row": "B10",
+   "screen": "borrow_hoodie.take",
+   "verdict": "PASS",
+   "line": "You take the grey one. It smells like him. You wonder if he'll notice it's gone.",
+   "why": "shows only while not_owned and Ryan is_absent; 'take the grey one' is true on a first borrow and on a re-borrow from his chair; no presence or past claimed"
+  },
+  {
+   "row": "B10",
+   "screen": "return_hoodie.return",
+   "verdict": "PASS",
+   "line": "You fold the grey hoodie and leave it on his chair. Next time you want it, you know where it is.",
+   "why": "trigger now owned AND unequipped (v2.py:5255-5260), so she is never wearing it; folding it onto his chair is true; the next borrow reads 'take the grey one', consistent"
+  },
+  {
+   "row": "B10",
+   "screen": "return_mom.return",
+   "verdict": "PASS",
+   "line": "You hang the skirt and the top back on her side of the wardrobe and set the heels where they were. Next time, you'll know where to find them.",
+   "why": "trigger now skirt owned AND skirt, top, heels all unequipped; the remove strips nothing she wears; true on every visit"
+  },
+  {
+   "row": "B13",
+   "screen": "return_hoodie.return",
+   "verdict": "N/A",
+   "line": "You fold the grey hoodie and leave it on his chair. Next time you want it, you know where it is.",
+   "why": "no longer a body moment: the hoodie is unequipped by trigger, so she neither dresses nor undresses here; the P07p1-c1 skipped undressing is gone"
+  },
+  {
+   "row": "B13",
+   "screen": "return_mom.return",
+   "verdict": "N/A",
+   "line": "You hang the skirt and the top back on her side of the wardrobe and set the heels where they were. Next time, you'll know where to find them.",
+   "why": "no longer a body moment: all three garments unequipped by trigger; she changes only in her bedroom (wardrobe_anywhere = false)"
+  },
+  {
+   "row": "B3",
+   "screen": "return_hoodie.return",
+   "verdict": "PASS",
+   "line": "You fold the grey hoodie and leave it on his chair. Next time you want it, you know where it is.",
+   "why": "ends on a built next step: the borrow row comes back once it's on his chair (borrow_hoodie not_owned); the P07p1-c3 shrug is gone"
+  },
+  {
+   "row": "B8",
+   "screen": "borrow_hoodie.take",
+   "verdict": "PASS",
+   "line": "You take the grey one. It smells like him. You wonder if he'll notice it's gone.",
+   "why": "names only 'the grey one', backed by the add of ryan_hoodie on Done; no number"
+  },
+  {
+   "row": "B8",
+   "screen": "return_hoodie.return",
+   "verdict": "PASS",
+   "line": "You fold the grey hoodie and leave it on his chair. Next time you want it, you know where it is.",
+   "why": "names the hoodie behind owned+unequipped; it's not on her, matching the line"
+  },
+  {
+   "row": "B8",
+   "screen": "return_mom.return",
+   "verdict": "PASS",
+   "line": "You hang the skirt and the top back on her side of the wardrobe and set the heels where they were. Next time, you'll know where to find them.",
+   "why": "names skirt, top, heels behind owned+unequipped conditions; none on her, matching the line"
+  },
+  {
+   "row": "C1158",
+   "screen": "borrow_hoodie.take",
+   "verdict": "PASS",
+   "line": "You take the grey one. It smells like him. You wonder if he'll notice it's gone.",
+   "why": "the hoodie named is the one the screen's Done adds"
+  },
+  {
+   "row": "C1158",
+   "screen": "return_hoodie.return",
+   "verdict": "PASS",
+   "line": "You fold the grey hoodie and leave it on his chair. Next time you want it, you know where it is.",
+   "why": "garment named is backed by owned+unequipped; the line never claims she wears it"
+  },
+  {
+   "row": "C1158",
+   "screen": "return_mom.return",
+   "verdict": "PASS",
+   "line": "You hang the skirt and the top back on her side of the wardrobe and set the heels where they were. Next time, you'll know where to find them.",
+   "why": "garments named are backed by owned+unequipped; the line never claims she wears them"
+  },
+  {
+   "row": "C1167",
+   "screen": "borrow_hoodie.take",
+   "verdict": "WAIVED",
+   "line": "You take the grey one. It smells like him. You wonder if he'll notice it's gone.",
+   "why": "LO, NOTES 2026-11-24 (main-lean session): \"for the release one system i think we have clothing shop and change clothing. She can change to basic clothing but hotter will stay locked in for the release one as they require higher traits and traits are capped to 0 in the release one.\" Release 1 still has no clothing event and one reader of worn_exposure; LO's words defer that."
+  },
+  {
+   "row": "C1167",
+   "screen": "return_hoodie.return",
+   "verdict": "WAIVED",
+   "line": "You fold the grey hoodie and leave it on his chair. Next time you want it, you know where it is.",
+   "why": "LO, NOTES 2026-11-24 (main-lean session): \"for the release one system i think we have clothing shop and change clothing. She can change to basic clothing but hotter will stay locked in for the release one as they require higher traits and traits are capped to 0 in the release one.\" Release 1 still has no clothing event and one reader of worn_exposure; LO's words defer that."
+  },
+  {
+   "row": "C1167",
+   "screen": "return_mom.return",
+   "verdict": "WAIVED",
+   "line": "You hang the skirt and the top back on her side of the wardrobe and set the heels where they were. Next time, you'll know where to find them.",
+   "why": "LO, NOTES 2026-11-24 (main-lean session): \"for the release one system i think we have clothing shop and change clothing. She can change to basic clothing but hotter will stay locked in for the release one as they require higher traits and traits are capped to 0 in the release one.\" Release 1 still has no clothing event and one reader of worn_exposure; LO's words defer that."
+  },
+  {
+   "row": "C1204",
+   "screen": "borrow_hoodie.take",
+   "verdict": "WAIVED",
+   "line": "You take the grey one. It smells like him. You wonder if he'll notice it's gone.",
+   "why": "LO, NOTES 2026-11-24 (main-lean session): \"for the release one system i think we have clothing shop and change clothing. She can change to basic clothing but hotter will stay locked in for the release one as they require higher traits and traits are capped to 0 in the release one.\" Release 1 still has no clothing event and one reader of worn_exposure; LO's words defer that."
+  },
+  {
+   "row": "C1204",
+   "screen": "return_hoodie.return",
+   "verdict": "WAIVED",
+   "line": "You fold the grey hoodie and leave it on his chair. Next time you want it, you know where it is.",
+   "why": "LO, NOTES 2026-11-24 (main-lean session): \"for the release one system i think we have clothing shop and change clothing. She can change to basic clothing but hotter will stay locked in for the release one as they require higher traits and traits are capped to 0 in the release one.\" Release 1 still has no clothing event and one reader of worn_exposure; LO's words defer that."
+  },
+  {
+   "row": "C1204",
+   "screen": "return_mom.return",
+   "verdict": "WAIVED",
+   "line": "You hang the skirt and the top back on her side of the wardrobe and set the heels where they were. Next time, you'll know where to find them.",
+   "why": "LO, NOTES 2026-11-24 (main-lean session): \"for the release one system i think we have clothing shop and change clothing. She can change to basic clothing but hotter will stay locked in for the release one as they require higher traits and traits are capped to 0 in the release one.\" Release 1 still has no clothing event and one reader of worn_exposure; LO's words defer that."
+  },
+  {
+   "row": "C1206",
+   "screen": "borrow_hoodie.take",
+   "verdict": "PASS",
+   "line": "You take the grey one. It smells like him. You wonder if he'll notice it's gone.",
+   "why": "names no garment she might be wearing"
+  },
+  {
+   "row": "C1206",
+   "screen": "return_hoodie.return",
+   "verdict": "PASS",
+   "line": "You fold the grey hoodie and leave it on his chair. Next time you want it, you know where it is.",
+   "why": "the hoodie is guaranteed not worn by the trigger, and the line doesn't put it on her"
+  },
+  {
+   "row": "C1206",
+   "screen": "return_mom.return",
+   "verdict": "PASS",
+   "line": "You hang the skirt and the top back on her side of the wardrobe and set the heels where they were. Next time, you'll know where to find them.",
+   "why": "skirt, top, heels guaranteed not worn by the trigger; the line doesn't put them on her"
+  },
+  {
+   "row": "C1265",
+   "screen": "borrow_hoodie.take",
+   "verdict": "PASS",
+   "line": "You take the grey one. It smells like him. You wonder if he'll notice it's gone.",
+   "why": "a solo room-row chore; it has no media spot, as the row asks"
+  },
+  {
+   "row": "C1265",
+   "screen": "mom_living_room.talk",
+   "verdict": "PASS",
+   "line": "Sit with me a minute, baby.",
+   "why": "her one picture sits on the hub (her menu, after the presence line); the talk screen under it has no media block"
+  },
+  {
+   "row": "C1631",
+   "screen": "borrow_hoodie.take",
+   "verdict": "N/A",
+   "line": "You take the grey one. It smells like him. You wonder if he'll notice it's gone.",
+   "why": "not the opening's hand-over"
+  },
+  {
+   "row": "C1631",
+   "screen": "return_hoodie.return",
+   "verdict": "N/A",
+   "line": "You fold the grey hoodie and leave it on his chair. Next time you want it, you know where it is.",
+   "why": "not the opening's hand-over"
+  },
+  {
+   "row": "C1631",
+   "screen": "return_mom.return",
+   "verdict": "N/A",
+   "line": "You hang the skirt and the top back on her side of the wardrobe and set the heels where they were. Next time, you'll know where to find them.",
+   "why": "not the opening's hand-over"
+  },
+  {
+   "row": "C450",
+   "screen": "return_hoodie.return",
+   "verdict": "PASS",
+   "line": "You fold the grey hoodie and leave it on his chair. Next time you want it, you know where it is.",
+   "why": "ends on a hook to a built step: she can take it again from his chair (borrow_hoodie reappears)"
+  },
+  {
+   "row": "C460",
+   "screen": "borrow_hoodie.take",
+   "verdict": "PASS",
+   "line": "You take the grey one. It smells like him. You wonder if he'll notice it's gone.",
+   "why": "true at first borrow and on a re-borrow after the put-back ('take', not 'off his floor'); P07p1-c2 fixed"
+  },
+  {
+   "row": "C460",
+   "screen": "return_hoodie.return",
+   "verdict": "PASS",
+   "line": "You fold the grey hoodie and leave it on his chair. Next time you want it, you know where it is.",
+   "why": "true on every visit: she's never wearing it here (unequipped in trigger); P07p1-c1 fixed"
+  },
+  {
+   "row": "C460",
+   "screen": "return_mom.return",
+   "verdict": "PASS",
+   "line": "You hang the skirt and the top back on her side of the wardrobe and set the heels where they were. Next time, you'll know where to find them.",
+   "why": "true on every visit: none of the three is worn here (unequipped in trigger); P07p1-c1 fixed"
+  },
+  {
+   "row": "C461",
+   "screen": "borrow_hoodie.take",
+   "verdict": "PASS",
+   "line": "You take the grey one. It smells like him. You wonder if he'll notice it's gone.",
+   "why": "'It smells like him' and the wondering are texture and her opinion; can't clash"
+  },
+  {
+   "row": "C461",
+   "screen": "return_hoodie.return",
+   "verdict": "PASS",
+   "line": "You fold the grey hoodie and leave it on his chair. Next time you want it, you know where it is.",
+   "why": "his chair is texture; 'you know where it is' is her knowledge, true"
+  },
+  {
+   "row": "C461",
+   "screen": "return_mom.return",
+   "verdict": "PASS",
+   "line": "You hang the skirt and the top back on her side of the wardrobe and set the heels where they were. Next time, you'll know where to find them.",
+   "why": "texture only: her side of the wardrobe, where the heels were"
+  },
+  {
+   "row": "C921",
+   "screen": "borrow_hoodie.take",
+   "verdict": "N/A",
+   "line": "You take the grey one. It smells like him. You wonder if he'll notice it's gone.",
+   "why": "no schedule window on this screen"
+  },
+  {
+   "row": "C921",
+   "screen": "return_hoodie.return",
+   "verdict": "N/A",
+   "line": "You fold the grey hoodie and leave it on his chair. Next time you want it, you know where it is.",
+   "why": "no schedule window on this screen"
+  },
+  {
+   "row": "C921",
+   "screen": "return_mom.return",
+   "verdict": "N/A",
+   "line": "You hang the skirt and the top back on her side of the wardrobe and set the heels where they were. Next time, you'll know where to find them.",
+   "why": "no schedule window on this screen"
+  },
+  {
+   "row": "C927",
+   "screen": "borrow_hoodie.take",
+   "verdict": "PASS",
+   "line": "You take the grey one. It smells like him. You wonder if he'll notice it's gone.",
+   "why": "Done costs time_progression_minutes = 5, as the label says"
+  },
+  {
+   "row": "C927",
+   "screen": "return_hoodie.return",
+   "verdict": "PASS",
+   "line": "You fold the grey hoodie and leave it on his chair. Next time you want it, you know where it is.",
+   "why": "Done costs 5, as the label says"
+  },
+  {
+   "row": "C927",
+   "screen": "return_mom.return",
+   "verdict": "PASS",
+   "line": "You hang the skirt and the top back on her side of the wardrobe and set the heels where they were. Next time, you'll know where to find them.",
+   "why": "Done costs 5, as the label says"
+  },
+  {
+   "row": "C931",
+   "screen": "borrow_hoodie.take",
+   "verdict": "N/A",
+   "line": "You take the grey one. It smells like him. You wonder if he'll notice it's gone.",
+   "why": "no time_of_day condition here"
+  },
+  {
+   "row": "C931",
+   "screen": "return_hoodie.return",
+   "verdict": "N/A",
+   "line": "You fold the grey hoodie and leave it on his chair. Next time you want it, you know where it is.",
+   "why": "no time_of_day condition here"
+  },
+  {
+   "row": "C931",
+   "screen": "return_mom.return",
+   "verdict": "N/A",
+   "line": "You hang the skirt and the top back on her side of the wardrobe and set the heels where they were. Next time, you'll know where to find them.",
+   "why": "no time_of_day condition here"
+  },
+  {
+   "row": "L106",
+   "screen": "borrow_hoodie.take",
+   "verdict": "PASS",
+   "line": "You take the grey one. It smells like him. You wonder if he'll notice it's gone.",
+   "why": "no presence line; the row hides while Ryan's row puts him in the room (is_absent)"
+  },
+  {
+   "row": "L106",
+   "screen": "return_hoodie.return",
+   "verdict": "PASS",
+   "line": "You fold the grey hoodie and leave it on his chair. Next time you want it, you know where it is.",
+   "why": "no presence line; the row hides while Ryan is in"
+  },
+  {
+   "row": "L106",
+   "screen": "return_mom.return",
+   "verdict": "PASS",
+   "line": "You hang the skirt and the top back on her side of the wardrobe and set the heels where they were. Next time, you'll know where to find them.",
+   "why": "no presence line; the row hides while Laura or Mark is in"
+  },
+  {
+   "row": "L167",
+   "screen": "borrow_hoodie.take",
+   "verdict": "N/A",
+   "line": "You take the grey one. It smells like him. You wonder if he'll notice it's gone.",
+   "why": "no hours on this row"
+  },
+  {
+   "row": "L167",
+   "screen": "return_hoodie.return",
+   "verdict": "N/A",
+   "line": "You fold the grey hoodie and leave it on his chair. Next time you want it, you know where it is.",
+   "why": "no hours on this row"
+  },
+  {
+   "row": "L167",
+   "screen": "return_mom.return",
+   "verdict": "N/A",
+   "line": "You hang the skirt and the top back on her side of the wardrobe and set the heels where they were. Next time, you'll know where to find them.",
+   "why": "no hours on this row"
+  },
+  {
+   "row": "body-moments#1",
+   "screen": "return_hoodie.return",
+   "verdict": "N/A",
+   "line": "You fold the grey hoodie and leave it on his chair. Next time you want it, you know where it is.",
+   "why": "not a body moment any more: she isn't wearing the hoodie (trigger unequipped), so nothing to name"
+  },
+  {
+   "row": "body-moments#1",
+   "screen": "return_mom.return",
+   "verdict": "N/A",
+   "line": "You hang the skirt and the top back on her side of the wardrobe and set the heels where they were. Next time, you'll know where to find them.",
+   "why": "not a body moment any more: none of the three is worn (trigger unequipped)"
+  },
+  {
+   "row": "body-moments#3",
+   "screen": "return_hoodie.return",
+   "verdict": "N/A",
+   "line": "You fold the grey hoodie and leave it on his chair. Next time you want it, you know where it is.",
+   "why": "no undressing to skip: the hoodie is off before the row shows"
+  },
+  {
+   "row": "body-moments#3",
+   "screen": "return_mom.return",
+   "verdict": "N/A",
+   "line": "You hang the skirt and the top back on her side of the wardrobe and set the heels where they were. Next time, you'll know where to find them.",
+   "why": "no undressing to skip: she changes in her bedroom first"
+  },
+  {
+   "row": "clothes#1",
+   "screen": "return_hoodie.return",
+   "verdict": "WAIVED",
+   "line": "You fold the grey hoodie and leave it on his chair. Next time you want it, you know where it is.",
+   "why": "LO, NOTES 2026-11-24 (main-lean session): \"for the release one system i think we have clothing shop and change clothing. She can change to basic clothing but hotter will stay locked in for the release one as they require higher traits and traits are capped to 0 in the release one.\" Release 1 still has no clothing event and one reader of worn_exposure; LO's words defer that."
+  },
+  {
+   "row": "clothes#1",
+   "screen": "return_mom.return",
+   "verdict": "WAIVED",
+   "line": "You hang the skirt and the top back on her side of the wardrobe and set the heels where they were. Next time, you'll know where to find them.",
+   "why": "LO, NOTES 2026-11-24 (main-lean session): \"for the release one system i think we have clothing shop and change clothing. She can change to basic clothing but hotter will stay locked in for the release one as they require higher traits and traits are capped to 0 in the release one.\" Release 1 still has no clothing event and one reader of worn_exposure; LO's words defer that."
+  },
+  {
+   "row": "voice#7",
+   "screen": "return_hoodie.return",
+   "verdict": "PASS",
+   "line": "You fold the grey hoodie and leave it on his chair. Next time you want it, you know where it is.",
+   "why": "true on every visit (see C460)"
+  },
+  {
+   "row": "voice#7",
+   "screen": "return_mom.return",
+   "verdict": "PASS",
+   "line": "You hang the skirt and the top back on her side of the wardrobe and set the heels where they were. Next time, you'll know where to find them.",
+   "why": "true on every visit (see C460)"
+  },
+  {
+   "row": "voice#8",
+   "screen": "return_hoodie.return",
+   "verdict": "PASS",
+   "line": "You fold the grey hoodie and leave it on his chair. Next time you want it, you know where it is.",
+   "why": "ends on a hook to the re-borrow, which is built"
+  }
  ],
- "causes": [
-  {"id": "P07o1-c1", "what": "worn_exposure has one reader (hood_street's skin line); no door or event reads it, so the clothing state lacks its 3 readers (deferred by ENI to release 2, not waived)"}
- ]
+ "causes": []
 }

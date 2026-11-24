@@ -1,6 +1,6 @@
 {
  "piece": "P34",
- "pass": 9,
+ "pass": 10,
  "screens": {
   "talk_mom.hub": {
    "text": "a23b0bbfce94db7a",
@@ -123,10 +123,10 @@
    "all": "13810fe741af455e"
   },
   "home_wait.wait": {
-   "text": "017692af715004b3",
-   "facts": "c2db61fdc4768e83",
-   "facts2": "e48dfa79fe8e9b2c",
-   "all": "a5a5c332220ff804"
+   "text": "6df902dbd12d0ff2",
+   "facts": "815b79e9e60fe573",
+   "facts2": "815b79e9e60fe573",
+   "all": "681db92365af55c1"
   },
   "loop_eat.do": {
    "text": "8e42ecd7e00ebc31",
@@ -134,7 +134,7 @@
    "facts2": "54c3094a6c55be3e",
    "all": "6578680ee6d9904f"
   },
-  "*": "9b94ba1b21e1763f"
+  "*": "15495b3f443d755b"
  },
  "rows": {
   "B1": "5276068df1ca6fa9",
@@ -295,6 +295,24 @@
   },
   {
    "row": "B10",
+   "screen": "home_wait.wait",
+   "verdict": "PASS",
+   "line": "You lie on your bed with your phone for half an hour and let the house go on around you.",
+   "why": "trigger location home_her_room, so 'your bed' is where she is; who_is_where puts nobody in home_her_room at any hour, and the line names nobody; 'the house go on around you' is texture that holds at 3am too",
+   "cause": "",
+   "note": false,
+   "screen_hash": {
+    "text": "6df902dbd12d0ff2",
+    "facts": "815b79e9e60fe573",
+    "facts2": "815b79e9e60fe573",
+    "all": "681db92365af55c1"
+   },
+   "row_hash": "c1c0e2ac2588a579",
+   "carried": false,
+   "pass": 10
+  },
+  {
+   "row": "B10",
    "screen": "loop_eat.do",
    "verdict": "PASS",
    "line": "Some of us paid for that bread, kid.",
@@ -325,7 +343,7 @@
     "all": "e74f73f06946b013"
    },
    "row_hash": "c1c0e2ac2588a579",
-   "carried": false,
+   "carried": true,
    "pass": 9
   },
   {
@@ -1125,6 +1143,24 @@
   },
   {
    "row": "B8",
+   "screen": "home_wait.wait",
+   "verdict": "PASS",
+   "line": "half an hour",
+   "why": "Done charges time_progression_minutes = 30, matching the label 'Wait (30 min)' and PLAN:213 'pass 30 minutes'; no garment named",
+   "cause": "",
+   "note": false,
+   "screen_hash": {
+    "text": "6df902dbd12d0ff2",
+    "facts": "815b79e9e60fe573",
+    "facts2": "815b79e9e60fe573",
+    "all": "681db92365af55c1"
+   },
+   "row_hash": "80d415cf08e0ebfe",
+   "carried": false,
+   "pass": 10
+  },
+  {
+   "row": "B8",
    "screen": "loop_eat.do",
    "verdict": "PASS",
    "line": "Eat something (20 min, +15 energy)",
@@ -1155,7 +1191,7 @@
     "all": "e74f73f06946b013"
    },
    "row_hash": "80d415cf08e0ebfe",
-   "carried": false,
+   "carried": true,
    "pass": 9
   },
   {
@@ -3552,6 +3588,24 @@
   },
   {
    "row": "C460",
+   "screen": "home_wait.wait",
+   "verdict": "PASS",
+   "line": "Then you get up. Somewhere out there is money, and you're not making it lying here.",
+   "why": "true on every visit: she has no money-making act here; nothing claims a past or a person",
+   "cause": "",
+   "note": false,
+   "screen_hash": {
+    "text": "6df902dbd12d0ff2",
+    "facts": "815b79e9e60fe573",
+    "facts2": "815b79e9e60fe573",
+    "all": "681db92365af55c1"
+   },
+   "row_hash": "67e48e60d5053a2e",
+   "carried": false,
+   "pass": 10
+  },
+  {
+   "row": "C460",
    "screen": "loop_eat.do",
    "verdict": "PASS",
    "line": "Mark watches you over his coffee.",
@@ -3582,7 +3636,7 @@
     "all": "e74f73f06946b013"
    },
    "row_hash": "67e48e60d5053a2e",
-   "carried": false,
+   "carried": true,
    "pass": 9
   },
   {
@@ -3702,6 +3756,24 @@
   },
   {
    "row": "C461",
+   "screen": "home_wait.wait",
+   "verdict": "PASS",
+   "line": "Then you get up. Somewhere out there is money, and you're not making it lying here.",
+   "why": "her opinion, can't clash",
+   "cause": "",
+   "note": false,
+   "screen_hash": {
+    "text": "6df902dbd12d0ff2",
+    "facts": "815b79e9e60fe573",
+    "facts2": "815b79e9e60fe573",
+    "all": "681db92365af55c1"
+   },
+   "row_hash": "310706ee076318f2",
+   "carried": false,
+   "pass": 10
+  },
+  {
+   "row": "C461",
    "screen": "loop_eat.do",
    "verdict": "PASS",
    "line": "toast, whatever's in the fridge, coffee from the pot.",
@@ -3732,7 +3804,7 @@
     "all": "e74f73f06946b013"
    },
    "row_hash": "310706ee076318f2",
-   "carried": false,
+   "carried": true,
    "pass": 9
   },
   {
@@ -4856,6 +4928,24 @@
   },
   {
    "row": "C927",
+   "screen": "home_wait.wait",
+   "verdict": "PASS",
+   "line": "Done",
+   "why": "exit states 30 minutes, back to home_her_room",
+   "cause": null,
+   "note": true,
+   "screen_hash": {
+    "text": "6df902dbd12d0ff2",
+    "facts": "815b79e9e60fe573",
+    "facts2": "815b79e9e60fe573",
+    "all": "681db92365af55c1"
+   },
+   "row_hash": "4e86d143688ba8e5",
+   "carried": false,
+   "pass": 10
+  },
+  {
+   "row": "C927",
    "screen": "loop_eat.do",
    "verdict": "PASS",
    "line": "Done",
@@ -4886,7 +4976,7 @@
     "all": "e74f73f06946b013"
    },
    "row_hash": "4e86d143688ba8e5",
-   "carried": false,
+   "carried": true,
    "pass": 9
   },
   {
@@ -5084,6 +5174,24 @@
   },
   {
    "row": "C931",
+   "screen": "home_wait.wait",
+   "verdict": "N/A",
+   "line": "(no time_of_day condition)",
+   "why": "the row has no clock condition",
+   "cause": null,
+   "note": true,
+   "screen_hash": {
+    "text": "6df902dbd12d0ff2",
+    "facts": "815b79e9e60fe573",
+    "facts2": "815b79e9e60fe573",
+    "all": "681db92365af55c1"
+   },
+   "row_hash": "1aadffd96e76381c",
+   "carried": false,
+   "pass": 10
+  },
+  {
+   "row": "C931",
    "screen": "loop_eat.do",
    "verdict": "N/A",
    "line": "Eat something (20 min, +15 energy)",
@@ -5114,7 +5222,7 @@
     "all": "e74f73f06946b013"
    },
    "row_hash": "1aadffd96e76381c",
-   "carried": false,
+   "carried": true,
    "pass": 9
   },
   {
@@ -5490,6 +5598,24 @@
   },
   {
    "row": "L106",
+   "screen": "home_wait.wait",
+   "verdict": "PASS",
+   "line": "You lie on your bed with your phone for half an hour and let the house go on around you.",
+   "why": "names nobody as present",
+   "cause": "",
+   "note": false,
+   "screen_hash": {
+    "text": "6df902dbd12d0ff2",
+    "facts": "815b79e9e60fe573",
+    "facts2": "815b79e9e60fe573",
+    "all": "681db92365af55c1"
+   },
+   "row_hash": "13a714429d15f3b2",
+   "carried": false,
+   "pass": 10
+  },
+  {
+   "row": "L106",
    "screen": "loop_eat.do",
    "verdict": "PASS",
    "line": "Mark watches you over his coffee.",
@@ -5520,7 +5646,7 @@
     "all": "e74f73f06946b013"
    },
    "row_hash": "13a714429d15f3b2",
-   "carried": false,
+   "carried": true,
    "pass": 9
   },
   {
@@ -5796,6 +5922,24 @@
   },
   {
    "row": "L167",
+   "screen": "home_wait.wait",
+   "verdict": "N/A",
+   "line": "(no hours)",
+   "why": "open at every hour, no greyed state",
+   "cause": "",
+   "note": false,
+   "screen_hash": {
+    "text": "6df902dbd12d0ff2",
+    "facts": "815b79e9e60fe573",
+    "facts2": "815b79e9e60fe573",
+    "all": "681db92365af55c1"
+   },
+   "row_hash": "e64ce2672d85d2d8",
+   "carried": false,
+   "pass": 10
+  },
+  {
+   "row": "L167",
    "screen": "loop_eat.do",
    "verdict": "PASS",
    "line": "you're not hungry right now.",
@@ -5826,7 +5970,7 @@
     "all": "e74f73f06946b013"
    },
    "row_hash": "e64ce2672d85d2d8",
-   "carried": false,
+   "carried": true,
    "pass": 9
   },
   {

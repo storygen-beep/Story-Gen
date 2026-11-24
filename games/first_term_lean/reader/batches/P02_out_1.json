@@ -1,0 +1,45 @@
+{
+ "verdicts": [
+  {
+   "row": "C1265",
+   "screen": "home_hall",
+   "verdict": "PASS",
+   "line": "# P02 re-check: no picture, the hall only routes (craft/media.md, C1265).",
+   "why": "the hall has no image of its own; its six cards carry the six rooms' own place pictures, which C1265 now says are not a spot of this kind (a place's image renders only as its card on the menu it is entered from (v2.py:24764); media.md step 2 says that card is the place's one picture, not a door or menu spot)",
+   "cause": null
+  },
+  {
+   "row": "C920",
+   "screen": "home_hall",
+   "verdict": "PASS",
+   "line": "(door cards and \"Leave <room>\": no entry_costs on any home room)",
+   "why": "no location in the game has entry_costs, so the travel charge (setup.travelMoveSlug, v2.py:20490-20512) is never emitted; every hop inside Home costs 0 both ways, as C920 now asks",
+   "cause": null
+  },
+  {
+   "row": "clock#2",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "(home, home_hall and the six rooms: no costs; Exit Home to Your Street: no costs)",
+   "why": "rule 2: a hop inside an area costs nothing; room-to-room and the front door to her own street (next door) are free in both directions",
+   "cause": null
+  },
+  {
+   "row": "media#2",
+   "screen": "home_hall",
+   "verdict": "PASS",
+   "line": "image_search_queries = [\"woman of 18 eating toast at a small family kitchen counter\", ...]",
+   "why": "each of the six rooms has one tier-0 file with her in it (every query names a woman of 18 or a young woman); none is the empty room; the hall has none",
+   "cause": null
+  },
+  {
+   "row": "media#3",
+   "screen": "home_hall",
+   "verdict": "PASS",
+   "line": "(six room cards on the hall)",
+   "why": "step 2 now says a place's card picture is not a door or menu spot under C1265; the hall itself carries no picture",
+   "cause": null
+  }
+ ],
+ "causes": []
+}

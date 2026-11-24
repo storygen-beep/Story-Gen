@@ -1,0 +1,34 @@
+{
+ "items": [
+  {
+   "row": "B10",
+   "screen": "drama_first.name",
+   "why": "screen changed: truth row"
+  },
+  {
+   "row": "B8",
+   "screen": "drama_first.name",
+   "why": "screen changed: truth row"
+  },
+  {
+   "row": "C460",
+   "screen": "drama_first.name",
+   "why": "screen changed: truth row"
+  },
+  {
+   "row": "C461",
+   "screen": "drama_first.name",
+   "why": "screen changed: truth row"
+  },
+  {
+   "row": "C902",
+   "screen": "drama_first.name",
+   "why": "failed last pass (a note), its screen changed"
+  },
+  {
+   "row": "L106",
+   "screen": "drama_first.name",
+   "why": "screen changed: truth row"
+  }
+ ]
+}

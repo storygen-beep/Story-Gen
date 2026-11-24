@@ -251,7 +251,7 @@ Sinks (what money is for):
 | the bus | $2 each way | 25 minutes of her day back, and no energy spent |
 | the gym day pass | $5 | Marco, and the workout |
 | a snack, corner shop | $2 | +10 energy; Frank or Danny at the till |
-| a coffee, café | $3 | +10 energy; Tom or Chris behind the counter |
+| a coffee, café | $3 | +10 energy; Tom or Chris behind the counter, once she's worked her first shift and met both (P33 reader fix, ENI for LO 2026-11-24) |
 | lunch, cafeteria | $4 | +15 energy; Rosa at the counter |
 | clothes, the clothes shop | $10 to $30 | what she can wear where, and who notices |
 

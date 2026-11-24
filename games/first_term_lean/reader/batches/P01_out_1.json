@@ -1,0 +1,29 @@
+{
+ "verdicts": [
+  {
+   "row": "C1022",
+   "screen": "opening.wake",
+   "verdict": "PASS",
+   "line": "Money ($): 0",
+   "why": "sidebar label 'Money ($)', band text '' so it prints 'Money ($): 0' (v2.py:21496-21505; index.html setup.sidebar_items); matches the card; no prose on wake names a currency ('money that wasn't your mom's')",
+   "cause": ""
+  },
+  {
+   "row": "economy#5",
+   "screen": "opening.wake",
+   "verdict": "PASS",
+   "line": "Money ($): 0",
+   "why": "one currency, $, shown where she reads her money",
+   "cause": ""
+  },
+  {
+   "row": "returning-player#12",
+   "screen": "opening.wake",
+   "verdict": "PASS",
+   "line": "Your saves live in this browser. Use Saves, then Save to Disk…, to keep one.",
+   "why": "one line, first paragraph of the first screen, says saves live in the browser and how to save to disk; labels match the build (savesTitle 'Saves', savesLabelExport 'Save to Disk…' in output/index.html); no tips page exists, so the opening carries it (P13 card lines 9-10)",
+   "cause": ""
+  }
+ ],
+ "causes": []
+}
