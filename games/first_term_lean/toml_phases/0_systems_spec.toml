@@ -15,6 +15,8 @@ narration_person = "second"
 clothing_enabled = true
 wardrobe_location = "home_her_room"
 wardrobe_anywhere = false
+# P35 — the clothes shop: "Browse Clothes" on its screen (template_import.py:3158, v2.py:11386).
+shop_location = "hood_clothes"
 
 # The game starts on her first day of college: Monday, week 1, 07:00 (template_import.py:2319-2325).
 [time]
@@ -81,6 +83,27 @@ bands = [
   { min = 80, max = 100, text = "On Display" },
 ]
 
+
+# P11 — goal 1's count and the rent total, internal (not on the sidebar).
+[[traits.labels]]
+key = "sundays_paid"
+label = "Sundays paid"
+hidden = true
+toast = false
+
+[[traits.labels]]
+key = "rent_paid_total"
+label = "Rent paid"
+hidden = true
+toast = false
+
+[[traits.labels]]
+key = "meals_today"
+label = "Meals today"
+hidden = true
+toast = false
+
+
 [[traits.labels]]
 key = "want"
 label = "Want"
@@ -143,11 +166,13 @@ tip = "He's at the kitchen table on Sunday mornings. That's when he collects."
 group = "story_goals"
 when = [{ flag = "goal1_shown", op = "is_true" }]
 text = "Pay your own way. Pay Mark your share every Sunday."
+ready_text = "Done. You pay your own way. Next: your name on campus, in a later release."
 tip = "You need money. Take shifts, or find another way. People are in different places at different hours. What you say changes how they treat you."
 goals = [
   { flag = "met_mark", op = "is_true", label = "Mark told you the rent" },
   { flag = "cafe_hired", op = "is_true", label = "Ask about the Help Wanted sign at the café across from campus. The manager's in Monday to Saturday, from 10am." },
-  { flag = "rent_paid_once", op = "is_true", label = "Pay Mark on Sunday morning, at the kitchen table ($75 this week)." },
+  { flag = "rent_paid_once", op = "is_true", label = "Pay Mark on Sunday morning, at the kitchen table." },
+  { trait = "sundays_paid", subject = "player", op = "gte", value = 4, label = "Pay Mark in full four Sundays in a row" },
 ]
 
 # P21 — Tom and Chris on the People page once met, with where and when.
@@ -160,13 +185,406 @@ tip = "He's behind the counter Monday to Saturday, from 10am to 9pm."
 [[quest_cards]]
 npc_id = "npc_chris"
 when = [{ flag = "met_chris", op = "is_true" }]
-text = "Chris, 24. The café's barista. Tom gave you his afternoons."
+text = "Chris, 24. The café's barista. He keeps the machine to himself."
 tip = "He has the counter weekday mornings until 3pm, and weekends until 8pm."
+
+# P32 — a card per person, gated on meeting them, so the Schedules and People pages name no stranger.
+[[quest_cards]]
+npc_id = "npc_hale"
+when = [{ flag = "met_hale", op = "is_true" }]
+text = "Dr. Hale, 39. Your psychology professor."
+tip = "He lectures Monday and Wednesday, 9 to 11am, in the lecture hall. His office hours are Monday and Wednesday, 2 to 5pm."
+
+[[quest_cards]]
+npc_id = "npc_pratt"
+when = [{ flag = "met_pratt", op = "is_true" }]
+text = "Mr. Pratt, 44. Your statistics teacher."
+tip = "Monday and Wednesday, 11am to 1pm, in the lecture hall. His office, Monday and Wednesday, 1 to 3pm."
+
+[[quest_cards]]
+npc_id = "npc_walsh"
+when = [{ flag = "met_walsh", op = "is_true" }]
+text = "Prof. Walsh, 48. Your English professor, and your advisor."
+tip = "Tuesday and Thursday, 9 to 11am, in the lecture hall. Advisor hours, Tuesday and Thursday, 2 to 4pm."
+
+[[quest_cards]]
+npc_id = "npc_cross"
+when = [{ flag = "met_cross", op = "is_true" }]
+text = "Mr. Cross, 38. He teaches drama."
+tip = "Class Tuesday and Thursday, 11am to 1pm, in the theatre. Rehearsals Tuesday, Thursday and Friday, 2 to 6pm."
+
+[[quest_cards]]
+npc_id = "npc_nadia"
+when = [{ flag = "met_nadia", op = "is_true" }]
+text = "Nadia, 20. A second-year, retaking Dr. Hale's course."
+tip = "Psychology on Monday and Wednesday mornings, the cafeteria Monday and Wednesday at 1pm, and the library weekday afternoons, 2 to 6pm."
+
+[[quest_cards]]
+npc_id = "npc_holt"
+when = [{ flag = "met_holt", op = "is_true" }]
+text = "Ms. Holt, 31. The librarian."
+tip = "At the library desk weekdays 8am to 4pm, and Saturday 10am to 4pm."
+
+[[quest_cards]]
+npc_id = "npc_rosa"
+when = [{ flag = "met_rosa", op = "is_true" }]
+text = "Rosa, 45. She runs the cafeteria counter."
+tip = "Weekdays, 8am to 4pm."
+
+[[quest_cards]]
+npc_id = "npc_vance"
+when = [{ flag = "met_vance", op = "is_true" }]
+text = "Mr. Vance, 54. He owns your house, and lives next door."
+tip = "On his porch weekdays 5 to 8pm, and weekends 9am to noon and 5 to 8pm."
+
+[[quest_cards]]
+npc_id = "npc_frank"
+when = [{ flag = "met_frank", op = "is_true" }]
+text = "Frank, 52. He owns the corner shop, and he knows Mark."
+tip = "Behind the till Monday to Saturday, 7am to 3pm."
+
+[[quest_cards]]
+npc_id = "npc_danny"
+when = [{ flag = "met_danny", op = "is_true" }]
+text = "Danny, 23. The corner shop's night clerk."
+tip = "Every day from 3 to 11pm, and all day Sunday."
+
+[[quest_cards]]
+npc_id = "npc_marco"
+when = [{ flag = "met_marco", op = "is_true" }]
+text = "Marco, 29. A trainer at the gym."
+tip = "Weekdays 6 to 10am and 5 to 9pm, and Saturday 8am to 2pm."
+
+[[quest_cards]]
+npc_id = "npc_nina"
+when = [{ flag = "met_nina", op = "is_true" }]
+text = "Nina, 26. She runs the clothes shop on your street."
+tip = "Behind the till Monday to Saturday, 10am to 7pm."
 
 # P42 — the day turn clears the once-a-day talk flags (v2.py:1269-1277, v2.py:7158).
 [engine.daily_tick]
 flagEffects = [
   { targetType = "player", flag = "talked_mom_today", op = "unset" },
+  { targetType = "player", flag = "talked_mark_today", op = "unset" },
+  { targetType = "player", flag = "talked_ryan_today", op = "unset" },
+  { targetType = "player", flag = "ate_with_mom_today", op = "unset" },
   # P21 — "Not today." at the café parks the ask until the next day
   { targetType = "player", flag = "cafe_ask_parked", op = "unset" },
+  # P11 — the rent week: cleared on Tuesday, after Monday's check has read it
+  { targetType = "player", flag = "rent_handled_this_week", op = "unset", conditions = { version = "1.0", logic = "AND", items = [{ type = "weekday", weekdays = [1] }] } },
+  # P11 — four Sundays in a row: goal 1 done (PLAN §2, §8i)
+  { targetType = "player", flag = "pays_her_own_way", op = "set", conditions = { version = "1.0", logic = "AND", items = [{ type = "trait", subject = "player", trait_key = "sundays_paid", operator = "gte", value = 4 }] } },
 ]
+# P11 — on Monday, a Sunday with no payment breaks the run
+traitEffects = [
+  { targetType = "player", trait = "sundays_paid", op = "set", value = 0, conditions = { version = "1.0", logic = "AND", items = [{ type = "weekday", weekdays = [0] }, { type = "flag", subject = "player", flag_key = "rent_handled_this_week", operator = "is_false" }, { type = "flag", subject = "player", flag_key = "pays_her_own_way", operator = "is_false" }] } },
+  # P34 — meals: one count a day
+  { targetType = "player", trait = "meals_today", op = "set", value = 0 },
+]
+
+# P35 — the room layout, since the table layout's tiers read corruption only (PLAN §8d).
+[ui]
+# LO 2026-11-24: "All npc presents in a location should show their portraits." Met people only; a click reads their row.
+present_faces = true
+clothes_layout = "room"
+
+# LO 2026-11-24, "yes hide popups": bookkeeping flags don't toast; flags the player should notice still do.
+[[flags.labels]]
+key = "rent_handled_this_week"
+label = "Rent handled this week"
+toast = false
+
+[[flags.labels]]
+key = "goal1_shown"
+label = "Goal1 shown"
+toast = false
+
+[[flags.labels]]
+key = "talked_mom_today"
+label = "Talked mom today"
+toast = false
+
+[[flags.labels]]
+key = "talked_mark_today"
+label = "Talked mark today"
+toast = false
+
+[[flags.labels]]
+key = "talked_ryan_today"
+label = "Talked ryan today"
+toast = false
+
+[[flags.labels]]
+key = "ate_with_mom_today"
+label = "Ate with mom today"
+toast = false
+
+[[flags.labels]]
+key = "ran_once"
+label = "Ran once"
+toast = false
+
+[[flags.labels]]
+key = "cafe_ask_parked"
+label = "Cafe ask parked"
+toast = false
+
+[[flags.labels]]
+key = "ryan_hall_seen"
+label = "Ryan hall seen"
+toast = false
+
+[[flags.labels]]
+key = "ryan_hall_past"
+label = "Ryan hall past"
+toast = false
+
+[[flags.labels]]
+key = "ryan_hall_spoke"
+label = "Ryan hall spoke"
+toast = false
+
+[[flags.labels]]
+key = "ryan_hall_waited"
+label = "Ryan hall waited"
+toast = false
+
+[[flags.labels]]
+key = "rent_paid_once"
+label = "Rent paid once"
+toast = false
+
+
+# ── P08 · the phone: Messages only (PLAN §8e). One text from each person some hours after she meets
+# them, one reply round, a line back. No reply moves a meter or sets a flag. Each trigger's
+# conditions sit one level down (trigger.conditions), or the thread fires unconditionally. ──
+[phone]
+enabled = true
+
+[[phone.apps]]
+id = "messages"
+type = "chat"
+label = "Messages"
+
+[[phone.conversations]]
+id = "text_laura"
+app = "messages"
+npc = "npc_laura"
+notify = "📱 New message"
+[phone.conversations.trigger]
+conditions = { version = "1.0", logic = "AND", items = [{ type = "hours_since_flag", subject = "player", flag_key = "met_laura", operator = "gte", value = 4 }] }
+[[phone.conversations.blocks]]
+type = "message"
+sender = "npc"
+content = "How's the first day, baby? Did you eat?"
+[[phone.conversations.blocks]]
+type = "reply"
+round = 1
+choices = [
+  { text = "It's fine, Mom. I ate." },
+  { text = "It's a lot." },
+  { text = "Stop worrying." },
+]
+[[phone.conversations.blocks]]
+type = "message"
+sender = "npc"
+after_round = 1
+after_choice = 0
+content = "Good. Proud of you. ❤️ Tell me all of it tonight."
+[[phone.conversations.blocks]]
+type = "message"
+sender = "npc"
+after_round = 1
+after_choice = 1
+content = "It gets easier. Tell me everything tonight."
+[[phone.conversations.blocks]]
+type = "message"
+sender = "npc"
+after_round = 1
+after_choice = 2
+content = "Never. That's my job. Tonight you're telling me everything."
+[[phone.conversations]]
+id = "text_ryan"
+app = "messages"
+npc = "npc_ryan"
+notify = "📱 New message"
+[phone.conversations.trigger]
+conditions = { version = "1.0", logic = "AND", items = [{ type = "hours_since_flag", subject = "player", flag_key = "met_ryan", operator = "gte", value = 6 }] }
+[[phone.conversations.blocks]]
+type = "message"
+sender = "npc"
+content = "mark's in a mood. stay out of the living room tonight"
+[[phone.conversations.blocks]]
+type = "reply"
+round = 1
+choices = [
+  { text = "Thanks for the warning" },
+  { text = "Why are you telling me?" },
+  { text = "Mind your own business." },
+]
+[[phone.conversations.blocks]]
+type = "message"
+sender = "npc"
+after_round = 1
+after_choice = 0
+content = "np"
+[[phone.conversations.blocks]]
+type = "message"
+sender = "npc"
+after_round = 1
+after_choice = 1
+content = "dunno. figured you'd want to know"
+[[phone.conversations.blocks]]
+type = "message"
+sender = "npc"
+after_round = 1
+after_choice = 2
+content = "fine. your funeral"
+[[phone.conversations]]
+id = "text_mark"
+app = "messages"
+npc = "npc_mark"
+notify = "📱 New message"
+[phone.conversations.trigger]
+conditions = { version = "1.0", logic = "AND", items = [{ type = "hours_since_flag", subject = "player", flag_key = "met_mark", operator = "gte", value = 10 }] }
+[[phone.conversations.blocks]]
+type = "message"
+sender = "npc"
+content = "Sunday. Seventy-five. Don't make me ask twice."
+[[phone.conversations.blocks]]
+type = "reply"
+round = 1
+choices = [
+  { text = "I know." },
+  { text = "I'm working on it." },
+  { text = "Or what?" },
+]
+[[phone.conversations.blocks]]
+type = "message"
+sender = "npc"
+after_round = 1
+after_choice = 0
+content = "Good."
+[[phone.conversations.blocks]]
+type = "message"
+sender = "npc"
+after_round = 1
+after_choice = 1
+content = "Work faster, kid."
+[[phone.conversations.blocks]]
+type = "message"
+sender = "npc"
+after_round = 1
+after_choice = 2
+content = "Or you find somewhere else to sleep. Sunday."
+[[phone.conversations]]
+id = "text_tom"
+app = "messages"
+npc = "npc_tom"
+notify = "📱 New message"
+[phone.conversations.trigger]
+conditions = { version = "1.0", logic = "AND", items = [{ type = "hours_since_flag", subject = "player", flag_key = "met_tom", operator = "gte", value = 3 }] }
+[[phone.conversations.blocks]]
+type = "message"
+sender = "npc"
+content = "Tom from the café. Come in when you want, as long as one of us is here till you're done."
+[[phone.conversations.blocks]]
+type = "reply"
+round = 1
+choices = [
+  { text = "Yes, boss." },
+  { text = "I'll be in." },
+  { text = "Don't hold your breath." },
+]
+[[phone.conversations.blocks]]
+type = "message"
+sender = "npc"
+after_round = 1
+after_choice = 0
+content = "I like the sound of that."
+[[phone.conversations.blocks]]
+type = "message"
+sender = "npc"
+after_round = 1
+after_choice = 1
+content = "We'll see."
+[[phone.conversations.blocks]]
+type = "message"
+sender = "npc"
+after_round = 1
+after_choice = 2
+content = "Rent says you will, rookie."
+[[phone.conversations]]
+id = "text_chris"
+app = "messages"
+npc = "npc_chris"
+notify = "📱 New message"
+[phone.conversations.trigger]
+conditions = { version = "1.0", logic = "AND", items = [{ type = "hours_since_flag", subject = "player", flag_key = "cafe_first_shift_done", operator = "gte", value = 3 }] }
+[[phone.conversations.blocks]]
+type = "message"
+sender = "npc"
+content = "it's chris. couldn't stop looking at your ass, new girl. you noticed."
+[[phone.conversations.blocks]]
+type = "reply"
+round = 1
+choices = [
+  { text = "Creep." },
+  { text = "Maybe I did." },
+  { text = "Who gave you my number?" },
+]
+[[phone.conversations.blocks]]
+type = "message"
+sender = "npc"
+after_round = 1
+after_choice = 0
+content = "you're smiling though. one day you'll let me look properly"
+[[phone.conversations.blocks]]
+type = "message"
+sender = "npc"
+after_round = 1
+after_choice = 1
+content = "knew it 😏 next shift i'm not pretending"
+[[phone.conversations.blocks]]
+type = "message"
+sender = "npc"
+after_round = 1
+after_choice = 2
+content = "tom. don't tell him i used it. you'll owe me for that"
+[[phone.conversations]]
+id = "text_nina"
+app = "messages"
+npc = "npc_nina"
+notify = "📱 New message"
+[phone.conversations.trigger]
+conditions = { version = "1.0", logic = "AND", items = [{ type = "hours_since_flag", subject = "player", flag_key = "met_nina", operator = "gte", value = 4 }] }
+[[phone.conversations.blocks]]
+type = "message"
+sender = "npc"
+content = "It's Nina, from the shop. Come back when you're feeling brave. The back rail misses you."
+[[phone.conversations.blocks]]
+type = "reply"
+round = 1
+choices = [
+  { text = "Maybe." },
+  { text = "What's on the back rail?" },
+  { text = "Not my style." },
+]
+[[phone.conversations.blocks]]
+type = "message"
+sender = "npc"
+after_round = 1
+after_choice = 0
+content = "That's a yes, then."
+[[phone.conversations.blocks]]
+type = "message"
+sender = "npc"
+after_round = 1
+after_choice = 1
+content = "Come and see. Bring your nerve."
+[[phone.conversations.blocks]]
+type = "message"
+sender = "npc"
+after_round = 1
+after_choice = 2
+content = "That's what they all say, sweetie."

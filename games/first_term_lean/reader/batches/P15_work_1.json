@@ -1,0 +1,139 @@
+{
+ "items": [
+  {
+   "row": "B10",
+   "screen": "psych_first.lecture",
+   "why": "screen changed: truth row"
+  },
+  {
+   "row": "B10",
+   "screen": "psych_first.seat",
+   "why": "screen changed: truth row"
+  },
+  {
+   "row": "B10",
+   "screen": "stats_first.class",
+   "why": "screen changed: truth row"
+  },
+  {
+   "row": "B8",
+   "screen": "psych_first.lecture",
+   "why": "screen changed: truth row"
+  },
+  {
+   "row": "B8",
+   "screen": "psych_first.seat",
+   "why": "screen changed: truth row"
+  },
+  {
+   "row": "B8",
+   "screen": "stats_first.class",
+   "why": "screen changed: truth row"
+  },
+  {
+   "row": "C1238",
+   "screen": "psych_first.lecture",
+   "why": "failed last pass"
+  },
+  {
+   "row": "C460",
+   "screen": "psych_first.lecture",
+   "why": "screen changed: truth row"
+  },
+  {
+   "row": "C460",
+   "screen": "psych_first.seat",
+   "why": "screen changed: truth row"
+  },
+  {
+   "row": "C460",
+   "screen": "stats_first.class",
+   "why": "screen changed: truth row"
+  },
+  {
+   "row": "C461",
+   "screen": "psych_first.lecture",
+   "why": "screen changed: truth row"
+  },
+  {
+   "row": "C461",
+   "screen": "psych_first.seat",
+   "why": "screen changed: truth row"
+  },
+  {
+   "row": "C461",
+   "screen": "stats_first.class",
+   "why": "screen changed: truth row"
+  },
+  {
+   "row": "C593",
+   "screen": "psych_first.lecture",
+   "why": "failed last pass"
+  },
+  {
+   "row": "C593",
+   "screen": "stats_first.class",
+   "why": "failed last pass"
+  },
+  {
+   "row": "C639",
+   "screen": "stats_first.class",
+   "why": "failed last pass (a note), its screen changed"
+  },
+  {
+   "row": "C889",
+   "screen": "psych_first.lecture",
+   "why": "failed last pass (a note), its screen changed"
+  },
+  {
+   "row": "C892",
+   "screen": "psych_first.lecture",
+   "why": "failed last pass (a note), its screen changed"
+  },
+  {
+   "row": "C910",
+   "screen": "psych_first.lecture",
+   "why": "failed last pass (a note), its screen changed"
+  },
+  {
+   "row": "C927",
+   "screen": "psych_first.lecture",
+   "why": "screen changed: truth row"
+  },
+  {
+   "row": "C929",
+   "screen": "psych_first.lecture",
+   "why": "failed last pass (a note), its screen changed"
+  },
+  {
+   "row": "C931",
+   "screen": "psych_first.lecture",
+   "why": "screen changed: truth row"
+  },
+  {
+   "row": "C953",
+   "screen": "psych_first.lecture",
+   "why": "failed last pass (a note), its screen changed"
+  },
+  {
+   "row": "L106",
+   "screen": "psych_first.lecture",
+   "why": "screen changed: truth row"
+  },
+  {
+   "row": "L106",
+   "screen": "psych_first.seat",
+   "why": "screen changed: truth row"
+  },
+  {
+   "row": "L106",
+   "screen": "stats_first.class",
+   "why": "screen changed: truth row"
+  },
+  {
+   "row": "L167",
+   "screen": "psych_first.lecture",
+   "why": "screen changed: truth row"
+  }
+ ]
+}

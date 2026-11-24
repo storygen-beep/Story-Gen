@@ -4,7 +4,7 @@
 id = "player"
 name = "Ella"
 # money is not a 0-100 meter: every money effect must set clamp = false (v2.py:7361-7364).
-core_traits = { energy = 100, money = 0, corruption = 0, exhibitionism = 0 }
+core_traits = { energy = 100, money = 0, corruption = 0, exhibitionism = 0, sundays_paid = 0, rent_paid_total = 0, meals_today = 0 }
 # Every player flag is declared here. P05: zoe_place_known (set by P20) reveals Zoe's Apartment.
 flag_keys = [
   "zoe_place_known",
@@ -22,6 +22,22 @@ flag_keys = [
   "met_ryan", "ryan_hall_seen", "ryan_hall_past", "ryan_hall_spoke", "ryan_hall_waited", "goal1_shown",
   # Goal 1's card reads these; P21 sets cafe_hired, P11 sets rent_paid_once.
   "cafe_hired", "rent_paid_once",
+  # P11 — Sunday rent
+  "rent_handled_this_week", "pays_her_own_way",
+  # P34 — Mark's and Ryan's Talk, once a day each; the day turn clears them
+  "talked_mark_today", "talked_ryan_today",
+  # P34 — Eat with her, once a day; the day turn clears it
+  "ate_with_mom_today",
+  # P33 — the run, first time
+  "ran_once",
+  # P32 — met flags for the people P32 schedules (their meetings set them)
+  "met_hale", "met_pratt", "met_cross", "met_nadia", "met_holt", "met_rosa", "met_frank", "met_danny", "met_marco",
+  # P15 — memory flags from her answers
+  "nadia_sat_with", "nadia_front_row", "nadia_asked", "pratt_silent",
+  # P16 — memory flags from her answers
+  "walsh_maam", "walsh_no_advisor", "walsh_silent", "walsh_stayed",
+  # P35 — the clothes shop
+  "met_nina",
 ]
 # P13 — the name screen (template_import.py:2332-2357). "name" writes $player.name; any other id
 # becomes $player.<id> (v2.py:1569-1573). Printed with @player / @player.nickname (v2.py:18598-18629).
@@ -135,14 +151,18 @@ name = "Your Street"
 description = "Your street. The same row of houses, the corner shop at the end, the park across the road, the gym over the laundromat, and a bus stop."
 # P07 — the leave rule: a top and a bottom, or a dress (a dress counts for both, v2.py:2219).
 clothing_rules = [
-  { slots_required = ["top", "bottom"], message = "You're not going out like this. You need a top and a bottom, or a dress." },
+  { slots_required = ["top", "bottom"], message = "You're not going out like this. Go back up to your room and put on a top and a bottom, or a dress." },
 ]
 # P07 — the street notices skin, in daylight hours (worn_exposure, v2.py:5264-5272).
 description_variants = [
   { conditions = { version = "1.0", logic = "AND", items = [
+      { type = "clothing_item", item_id = "mom_lowcut_top", operator = "equipped" },
+      { type = "time_of_day", start_time = "07:00", end_time = "21:00" },
+    ] }, text = "Your street. The same row of houses, the corner shop at the end, the park across the road, the gym over the laundromat, and a bus stop. Across the road, a neighbour's eyes drop to your chest in Mom's top and stay there. Your face goes hot. You walk faster, and you can feel him still watching." },
+  { conditions = { version = "1.0", logic = "AND", items = [
       { type = "worn_exposure", operator = "gte", value = 1 },
       { type = "time_of_day", start_time = "07:00", end_time = "21:00" },
-    ] }, text = "Your street. The same row of houses, the corner shop at the end, the park across the road, the gym over the laundromat, and a bus stop. Across the road, a neighbour stops what he's doing and watches you all the way to the corner." },
+    ] }, text = "Your street. The same row of houses, the corner shop at the end, the park across the road, the gym over the laundromat, and a bus stop. Across the road, a neighbour's eyes drop to your bare legs and stay there. Your face goes hot. You walk faster, and you can feel him still watching." },
 ]
 parent = "neighbourhood"
 kind = "thoroughfare"
@@ -184,6 +204,22 @@ entry_from = "hood_street"
 hours = [{ weekdays = [], open = "06:00", close = "21:00" }]
 closed_text = "The park gates are locked. They open at 6am."
 
+# P35 — the clothes shop, off Your Street, Mon–Sat 10am–7pm (PLAN §3, §8d).
+[[locations]]
+id = "hood_clothes"
+name = "Clothes Shop"
+description = "The clothes shop: two narrow aisles of rails, a curtained fitting room at the back, a mirror by the till."
+description_variants = [
+  { conditions = { version = "1.0", logic = "AND", items = [{ type = "flag", subject = "player", flag_key = "met_nina", operator = "is_true" }, { type = "npc_at_location", npc_id = "npc_nina", location_id = "hood_clothes", operator = "is_present" }] }, text = "The clothes shop: two narrow aisles of rails, a curtained fitting room at the back, a mirror by the till. Nina looks up from the till. \"Find anything you're brave enough for?\"" },
+]
+parent = "neighbourhood"
+kind = "destination"
+image = "locations/hood_clothes_t0.jpg"
+image_search_queries = ["woman 18 browsing clothes rail small boutique interior", "girl shopping inside tiny clothes shop rails fitting room"]
+entry_from = "hood_street"
+hours = [{ weekdays = [0, 1, 2, 3, 4, 5], open = "10:00", close = "19:00" }]
+closed_text = "The clothes shop is shut. It opens at 10am, Monday to Saturday."
+
 [[locations]]
 id = "hood_gym"
 name = "Gym"
@@ -217,7 +253,7 @@ kind = "thoroughfare"
 [[locations]]
 id = "campus_lecture_hall"
 name = "Lecture Hall"
-description = "The lecture hall: rows of seats rising to the back, a screen, a lectern at the bottom. Your classes are here. A sign by the door says it's open weekdays from 8am to 6pm."
+description = "The lecture hall: rows of seats rising to the back, a screen, a lectern at the bottom. Most of your classes are here. A sign by the door says it's open weekdays from 8am to 6pm."
 parent = "campus"
 kind = "destination"
 image = "locations/campus_lecture_hall_t0.jpg"
@@ -305,6 +341,9 @@ description_variants = [
   { conditions = { version = "1.0", logic = "AND", items = [
       { type = "flag", subject = "player", flag_key = "cafe_hired", operator = "is_false" },
     ] }, text = "The café across from campus: the coffee machine hissing, a long counter, a tip jar by the till. A sign on the door says it's open from 7am to 9pm. A Help Wanted sign is taped in the window." },
+  { conditions = { version = "1.0", logic = "AND", items = [
+      { type = "flag", subject = "player", flag_key = "cafe_first_shift_done", operator = "is_false" },
+    ] }, text = "The café across from campus: the coffee machine hissing, a long counter, a tip jar by the till. A sign on the door says it's open from 7am to 9pm. Your first shift starts on a weekday, between 10am and 3pm, while Tom and Chris are both in." },
 ]
 parent = "near_campus"
 entry_from = "campus_quad"
@@ -390,7 +429,7 @@ location = "home_ryans_room"
 weekdays = [0, 1, 2, 3, 4]
 start_time = "23:00"
 end_time = "07:00"
-activity = "in his room"
+activity = "asleep"
 
 [[npcs.schedules]]
 location = "home_ryans_room"
@@ -477,7 +516,7 @@ location = "home_kitchen"
 weekdays = [5, 6]
 start_time = "08:00"
 end_time = "12:00"
-activity = "a slow breakfast"
+activity = "having a slow breakfast"
 
 [[npcs.schedules]]
 location = "home_kitchen"
@@ -515,7 +554,7 @@ location = "home_kitchen"
 weekdays = [0, 1, 2, 3, 4]
 start_time = "07:00"
 end_time = "07:30"
-activity = "coffee before work"
+activity = "having coffee before work"
 
 [[npcs.schedules]]
 location = "home_living_room"
@@ -536,7 +575,7 @@ location = "home_kitchen"
 weekdays = [5, 6]
 start_time = "08:00"
 end_time = "10:00"
-activity = "breakfast"
+activity = "having breakfast"
 
 [[npcs.schedules]]
 location = "home_living_room"
@@ -550,7 +589,7 @@ location = "home_kitchen"
 weekdays = [6]
 start_time = "10:00"
 end_time = "12:00"
-activity = "at the table, Sunday"
+activity = "at the kitchen table"
 
 [[npcs.schedules]]
 location = "home_living_room"
@@ -611,6 +650,240 @@ name = "Sports top"
 slot = "top"
 type = "fitness"
 
+# P35 — the shop's stock, four levels per slot (PLAN §8d). Above normal needs the trait at 20/40/60;
+# the same conditions gate wearing, so only normal can be bought in release 1.
+
+[[clothing]]
+id = "shop_plain_tee"
+name = "Plain tee"
+slot = "top"
+price = 10
+description = "A plain cotton tee."
+
+[[clothing]]
+id = "shop_crop_top"
+name = "Crop top"
+slot = "top"
+price = 12
+description = "Shows your stomach when you lift your arms."
+conditions = { version = "1.0", logic = "AND", items = [{ type = "trait", subject = "player", trait_key = "exhibitionism", operator = "gte", value = 20 }] }
+
+[[clothing]]
+id = "shop_lowcut_tank"
+name = "Low-cut tank"
+slot = "top"
+price = 20
+exposure = 1
+description = "Cut low enough that your bra won't stay hidden."
+conditions = { version = "1.0", logic = "AND", items = [{ type = "trait", subject = "player", trait_key = "exhibitionism", operator = "gte", value = 40 }] }
+
+[[clothing]]
+id = "shop_mesh_top"
+name = "Sheer mesh top"
+slot = "top"
+price = 30
+exposure = 2
+description = "You can see straight through it."
+conditions = { version = "1.0", logic = "AND", items = [{ type = "trait", subject = "player", trait_key = "exhibitionism", operator = "gte", value = 60 }] }
+
+[[clothing]]
+id = "shop_jeans"
+name = "Blue jeans"
+slot = "bottom"
+price = 25
+description = "Plain blue jeans."
+
+[[clothing]]
+id = "shop_denim_shorts"
+name = "Denim shorts"
+slot = "bottom"
+price = 15
+description = "Short enough to show your legs."
+conditions = { version = "1.0", logic = "AND", items = [{ type = "trait", subject = "player", trait_key = "exhibitionism", operator = "gte", value = 20 }] }
+
+[[clothing]]
+id = "shop_mini_skirt"
+name = "Tight mini skirt"
+slot = "bottom"
+price = 25
+exposure = 1
+description = "Rides up when you sit."
+conditions = { version = "1.0", logic = "AND", items = [{ type = "trait", subject = "player", trait_key = "exhibitionism", operator = "gte", value = 40 }] }
+
+[[clothing]]
+id = "shop_micro_skirt"
+name = "Micro skirt"
+slot = "bottom"
+price = 30
+exposure = 1
+description = "Barely covers your ass."
+conditions = { version = "1.0", logic = "AND", items = [{ type = "trait", subject = "player", trait_key = "exhibitionism", operator = "gte", value = 60 }] }
+
+[[clothing]]
+id = "shop_summer_dress"
+name = "Summer dress"
+slot = "dress"
+price = 25
+description = "A light dress to the knee."
+
+[[clothing]]
+id = "shop_black_dress"
+name = "Tight black dress"
+slot = "dress"
+price = 30
+description = "Hugs every curve."
+conditions = { version = "1.0", logic = "AND", items = [{ type = "trait", subject = "player", trait_key = "exhibitionism", operator = "gte", value = 20 }] }
+
+[[clothing]]
+id = "shop_backless_dress"
+name = "Backless mini dress"
+slot = "dress"
+price = 45
+exposure = 1
+description = "Bare from the neck to the small of your back."
+conditions = { version = "1.0", logic = "AND", items = [{ type = "trait", subject = "player", trait_key = "exhibitionism", operator = "gte", value = 40 }] }
+
+[[clothing]]
+id = "shop_cutout_dress"
+name = "Cut-out bodycon dress"
+slot = "dress"
+price = 60
+exposure = 1
+description = "More cut out than dress."
+conditions = { version = "1.0", logic = "AND", items = [{ type = "trait", subject = "player", trait_key = "exhibitionism", operator = "gte", value = 60 }] }
+
+[[clothing]]
+id = "shop_cotton_bra"
+name = "Cotton bra"
+slot = "bra"
+price = 8
+description = "Plain and comfortable."
+
+[[clothing]]
+id = "shop_lace_bra"
+name = "Lace bra"
+slot = "bra"
+price = 12
+description = "Thin lace, pretty."
+conditions = { version = "1.0", logic = "AND", items = [{ type = "trait", subject = "player", trait_key = "corruption", operator = "gte", value = 20 }] }
+
+[[clothing]]
+id = "shop_pushup_bra"
+exposure = 1
+name = "Push-up bra"
+slot = "bra"
+price = 20
+description = "Lifts everything."
+conditions = { version = "1.0", logic = "AND", items = [{ type = "trait", subject = "player", trait_key = "corruption", operator = "gte", value = 40 }] }
+
+[[clothing]]
+id = "shop_sheer_bra"
+name = "Sheer bra"
+slot = "bra"
+price = 25
+exposure = 1
+description = "Hides nothing."
+conditions = { version = "1.0", logic = "AND", items = [{ type = "trait", subject = "player", trait_key = "corruption", operator = "gte", value = 60 }] }
+
+[[clothing]]
+id = "shop_cotton_briefs"
+name = "Cotton briefs"
+slot = "underwear"
+price = 5
+description = "Plain cotton."
+
+[[clothing]]
+id = "shop_lace_panties"
+name = "Lace panties"
+slot = "underwear"
+price = 8
+description = "Thin lace."
+conditions = { version = "1.0", logic = "AND", items = [{ type = "trait", subject = "player", trait_key = "corruption", operator = "gte", value = 20 }] }
+
+[[clothing]]
+id = "shop_thong"
+exposure = 1
+name = "Thong"
+slot = "underwear"
+price = 12
+description = "Leaves your ass bare."
+conditions = { version = "1.0", logic = "AND", items = [{ type = "trait", subject = "player", trait_key = "corruption", operator = "gte", value = 40 }] }
+
+[[clothing]]
+id = "shop_crotchless"
+name = "Crotchless panties"
+slot = "underwear"
+price = 20
+exposure = 2
+description = "Open where it counts."
+conditions = { version = "1.0", logic = "AND", items = [{ type = "trait", subject = "player", trait_key = "corruption", operator = "gte", value = 60 }] }
+
+[[clothing]]
+id = "shop_tights"
+name = "Tights"
+slot = "legwear"
+price = 6
+description = "Plain black tights."
+
+[[clothing]]
+id = "shop_thigh_highs"
+name = "Thigh-high socks"
+slot = "legwear"
+price = 10
+description = "Up to mid-thigh."
+conditions = { version = "1.0", logic = "AND", items = [{ type = "trait", subject = "player", trait_key = "exhibitionism", operator = "gte", value = 20 }] }
+
+[[clothing]]
+id = "shop_fishnets"
+name = "Fishnets"
+slot = "legwear"
+price = 15
+exposure = 1
+description = "Fishnet tights."
+conditions = { version = "1.0", logic = "AND", items = [{ type = "trait", subject = "player", trait_key = "exhibitionism", operator = "gte", value = 40 }] }
+
+[[clothing]]
+id = "shop_stockings"
+name = "Stockings and garter belt"
+slot = "legwear"
+price = 25
+exposure = 1
+description = "Stockings held up by a garter belt."
+conditions = { version = "1.0", logic = "AND", items = [{ type = "trait", subject = "player", trait_key = "exhibitionism", operator = "gte", value = 60 }] }
+
+[[clothing]]
+id = "shop_flats"
+name = "Flats"
+slot = "shoes"
+price = 15
+description = "Plain flats."
+
+[[clothing]]
+id = "shop_ankle_boots"
+name = "Ankle boots"
+slot = "shoes"
+price = 25
+description = "Short heeled boots."
+conditions = { version = "1.0", logic = "AND", items = [{ type = "trait", subject = "player", trait_key = "exhibitionism", operator = "gte", value = 20 }] }
+
+[[clothing]]
+id = "shop_heels"
+exposure = 1
+name = "Heels"
+slot = "shoes"
+price = 35
+description = "Tall heels."
+conditions = { version = "1.0", logic = "AND", items = [{ type = "trait", subject = "player", trait_key = "exhibitionism", operator = "gte", value = 40 }] }
+
+[[clothing]]
+id = "shop_platforms"
+exposure = 1
+name = "Platform heels"
+slot = "shoes"
+price = 45
+description = "Platform heels you'll have to learn to walk in."
+conditions = { version = "1.0", logic = "AND", items = [{ type = "trait", subject = "player", trait_key = "exhibitionism", operator = "gte", value = 60 }] }
+
 [[clothing]]
 id = "mom_short_skirt"
 name = "Mom's short skirt"
@@ -650,11 +923,265 @@ start_time = "10:00"
 end_time = "21:00"
 activity = "behind the counter"
 
+# P32 — everyone release 1 meets on campus and in the neighbourhood, by PLAN §9b/§9c. No meter in
+# release 1; their meetings (P15–P19, P22–P24) set their met flags.
+[[npcs]]
+id = "npc_hale"
+name = "Dr. Hale"
+role = "Professor"
+relationship = "Dr. Hale, 39. Your psychology professor."
+description = "Professor, 39."
+
+[[npcs.schedules]]
+location = "campus_lecture_hall"
+weekdays = [0, 2]
+start_time = "09:00"
+end_time = "11:00"
+activity = "lecturing"
+
+[[npcs.schedules]]
+location = "campus_offices"
+weekdays = [0, 2]
+start_time = "14:00"
+end_time = "17:00"
+activity = "in his office hours"
+
+[[npcs]]
+id = "npc_pratt"
+name = "Mr. Pratt"
+role = "Statistics teacher"
+relationship = "Mr. Pratt, 44. Your statistics teacher."
+description = "Statistics teacher, 44."
+
+[[npcs.schedules]]
+location = "campus_lecture_hall"
+weekdays = [0, 2]
+start_time = "11:00"
+end_time = "13:00"
+activity = "teaching"
+
+[[npcs.schedules]]
+location = "campus_offices"
+weekdays = [0, 2]
+start_time = "13:00"
+end_time = "15:00"
+activity = "in his office"
+
+[[npcs]]
+id = "npc_walsh"
+name = "Prof. Walsh"
+role = "English professor and advisor"
+relationship = "Prof. Walsh, 48. Your English professor, and your advisor."
+description = "English professor and advisor, 48."
+
+[[npcs.schedules]]
+location = "campus_lecture_hall"
+weekdays = [1, 3]
+start_time = "09:00"
+end_time = "11:00"
+activity = "teaching"
+
+[[npcs.schedules]]
+location = "campus_offices"
+weekdays = [1, 3]
+start_time = "14:00"
+end_time = "16:00"
+activity = "in her advisor hours"
+
+[[npcs]]
+id = "npc_cross"
+name = "Mr. Cross"
+role = "Drama teacher"
+relationship = "Mr. Cross, 38. He teaches drama."
+description = "Drama teacher, 38."
+
+[[npcs.schedules]]
+location = "campus_theatre"
+weekdays = [1, 3]
+start_time = "11:00"
+end_time = "13:00"
+activity = "teaching drama"
+
+[[npcs.schedules]]
+location = "campus_theatre"
+weekdays = [1, 3, 4]
+start_time = "14:00"
+end_time = "18:00"
+activity = "running rehearsals"
+
+[[npcs]]
+id = "npc_nadia"
+name = "Nadia"
+role = "Student"
+relationship = "Nadia, 20. A second-year, retaking Dr. Hale's course."
+description = "Student, 20."
+
+[[npcs.schedules]]
+location = "campus_lecture_hall"
+weekdays = [0, 2]
+start_time = "09:00"
+end_time = "11:00"
+activity = "in psychology"
+
+[[npcs.schedules]]
+location = "campus_cafeteria"
+weekdays = [0, 2]
+start_time = "13:00"
+end_time = "14:00"
+activity = "at lunch"
+
+[[npcs.schedules]]
+location = "campus_library"
+weekdays = [0, 1, 2, 3, 4]
+start_time = "14:00"
+end_time = "18:00"
+activity = "studying"
+
+[[npcs]]
+id = "npc_holt"
+name = "Ms. Holt"
+role = "Librarian"
+relationship = "Ms. Holt, 31. The librarian."
+description = "Librarian, 31."
+
+[[npcs.schedules]]
+location = "campus_library"
+weekdays = [0, 1, 2, 3, 4]
+start_time = "08:00"
+end_time = "16:00"
+activity = "at the desk"
+
+[[npcs.schedules]]
+location = "campus_library"
+weekdays = [5]
+start_time = "10:00"
+end_time = "16:00"
+activity = "at the desk"
+
+[[npcs]]
+id = "npc_rosa"
+name = "Rosa"
+role = "Cafeteria counter"
+relationship = "Rosa, 45. She runs the cafeteria counter."
+description = "Cafeteria counter, 45."
+
+[[npcs.schedules]]
+location = "campus_cafeteria"
+weekdays = [0, 1, 2, 3, 4]
+start_time = "08:00"
+end_time = "16:00"
+activity = "at the counter"
+
+[[npcs]]
+id = "npc_vance"
+name = "Mr. Vance"
+role = "Landlord"
+relationship = "Mr. Vance, 54. He owns your house, and lives next door."
+description = "Landlord, 54."
+
+[[npcs.schedules]]
+location = "hood_street"
+weekdays = [0, 1, 2, 3, 4]
+start_time = "17:00"
+end_time = "20:00"
+activity = "on his porch"
+
+[[npcs.schedules]]
+location = "hood_street"
+weekdays = [5, 6]
+start_time = "09:00"
+end_time = "12:00"
+activity = "on his porch"
+
+[[npcs.schedules]]
+location = "hood_street"
+weekdays = [5, 6]
+start_time = "17:00"
+end_time = "20:00"
+activity = "on his porch"
+
+[[npcs]]
+id = "npc_frank"
+name = "Frank"
+role = "Corner shop owner"
+relationship = "Frank, 52. He owns the corner shop, and he knows Mark."
+description = "Corner shop owner, 52."
+
+[[npcs.schedules]]
+location = "hood_shop"
+weekdays = [0, 1, 2, 3, 4, 5]
+start_time = "07:00"
+end_time = "15:00"
+activity = "behind the till"
+
+[[npcs]]
+id = "npc_danny"
+name = "Danny"
+role = "Night clerk"
+relationship = "Danny, 23. The corner shop's night clerk."
+description = "Night clerk, 23."
+
+[[npcs.schedules]]
+location = "hood_shop"
+weekdays = [0, 1, 2, 3, 4, 5]
+start_time = "15:00"
+end_time = "23:00"
+activity = "behind the till"
+
+[[npcs.schedules]]
+location = "hood_shop"
+weekdays = [6]
+start_time = "07:00"
+end_time = "23:00"
+activity = "behind the till"
+
+[[npcs]]
+id = "npc_marco"
+name = "Marco"
+role = "Trainer"
+relationship = "Marco, 29. A trainer at the gym."
+description = "Trainer, 29."
+
+[[npcs.schedules]]
+location = "hood_gym"
+weekdays = [0, 1, 2, 3, 4]
+start_time = "06:00"
+end_time = "10:00"
+activity = "training"
+
+[[npcs.schedules]]
+location = "hood_gym"
+weekdays = [0, 1, 2, 3, 4]
+start_time = "17:00"
+end_time = "21:00"
+activity = "training"
+
+[[npcs.schedules]]
+location = "hood_gym"
+weekdays = [5]
+start_time = "08:00"
+end_time = "14:00"
+activity = "training"
+
+[[npcs]]
+id = "npc_nina"
+name = "Nina"
+role = "Clothes shop owner"
+relationship = "Nina, 26. She runs the clothes shop on your street."
+description = "The clothes shop owner, 26."
+
+[[npcs.schedules]]
+location = "hood_clothes"
+weekdays = [0, 1, 2, 3, 4, 5]
+start_time = "10:00"
+end_time = "19:00"
+activity = "behind the till"
+
 [[npcs]]
 id = "npc_chris"
 name = "Chris"
 role = "Barista"
-relationship = "Chris, 24. The café's barista. Tom gave you his afternoons."
+relationship = "Chris, 24. The café's barista. He keeps the machine to himself."
 description = "The café's barista, 24."
 
 [[npcs.schedules]]

@@ -1,0 +1,4 @@
+{"verdicts": [
+ {"row": "L167", "screen": "*", "verdict": "N/A", "line": "Go down to the kitchen (5 min)", "why": "No row on any opening screen is gated by the clock or the day (no time_of_day or weekday condition, no show_when_locked). Every exit is a plain story choice.", "cause": null}
+],
+"causes": []}

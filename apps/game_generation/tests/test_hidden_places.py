@@ -234,6 +234,9 @@ def test_the_name_is_withheld_until_found(html):
         name = "() => SugarCube.setup._locNameFromUuid('loc_attic')"
         assert g.js(name) == HIDDEN
         assert g.js("() => SugarCube.setup._locNameFromUuid('loc_bar')") == "Bar"
+        # The Schedules page names only people whose quest card holds (2026-11-24,
+        # test_schedule_page_met.py); this fixture's cards wait for `started`.
+        g.js("() => { SugarCube.State.variables.flags.started = true; }")
         g.play("SchedulePage")
         assert HIDDEN in _text(g) and "Attic" not in _text(g)
         _find(g)

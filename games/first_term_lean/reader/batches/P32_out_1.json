@@ -1,0 +1,4 @@
+{"verdicts": [
+ {"row": "B10", "screen": "cafe_first_shift.start", "verdict": "PASS", "line": "Chris, 24. The café's barista. He keeps the machine to himself.", "why": "Card (toml:194-197) and relationship (toml:1783) go live on met_chris, set by this screen's 'Work the shift'. Every later Chris scene keeps him on the machine and her off it: 'Next time I'll let you near the machine.' (cafe_work_hour.work), 'He takes the machine and leaves you the till and the crumbs.', Saturday 'Chris works the machine'. The first shift's training ('He shows you the grinder, the milk jugs, the till', 'I've got it.' / 'Sure you do.') fits a man who guards it. No past claim; age 24 matches description. True from the first minute (end screen) on.", "cause": null}
+],
+"causes": []}

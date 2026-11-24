@@ -8,7 +8,7 @@ import pytest
 sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
 import approve  # noqa: E402
 
-CARD = "PIECE p1 · <person>, step 1: <name>\nBuilds: canvas_a\n"
+CARD = "PIECE p1 · <person>, step 1: <name>\nDoes:\n  canvas_a.a | the clock moves\nBuilds: canvas_a\n"  # GREEN on --card
 
 
 @pytest.fixture
@@ -74,3 +74,16 @@ def test_deleted_card_is_missing(game):
     approve.approve(game, "p1", "yes")
     (game / "cards" / "p1.md").unlink()
     assert approve.status(game, "p1") == "missing"
+
+
+def test_a_red_card_is_refused_and_nothing_is_written(game):
+    (game / "cards" / "p1.md").write_text("PIECE p1\nWhat the player sees:\n  Screen 1: x\nBuilds: canvas_a\n")
+    with pytest.raises(SystemExit, match="RED") as e:
+        approve.approve(game, "p1", "yes")
+    assert "no Does: block" in str(e.value)
+    assert not (game / "approvals.json").exists() and approve.status(game, "p1") == "missing"
+
+
+def test_a_green_card_is_recorded_as_before(game):
+    assert approve.approve(game, "p1", "yes").startswith("approved: p1")
+    assert approve.status(game, "p1") == "approved"

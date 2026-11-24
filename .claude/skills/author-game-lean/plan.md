@@ -51,6 +51,8 @@ Walk every place and every part of her day: morning, class or work, afternoon, e
 - what she can do here alone;
 - what she can do here with a person.
 
+**Don't schedule activities around each other.** A repeat activity (a shift, a workout, study) is open whenever its place is open and its people are there; only something that really happens at a time (a class, a party) gets fixed hours. When two compete for the same hours, that's the player's choice (`craft/systems.md` rule 7; L166).
+
 Ask about every area, one per bite:
 - home life (meals, chores, the people she lives with);
 - body care (energy, sleep, washing);

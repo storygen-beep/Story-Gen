@@ -587,3 +587,165 @@ Why for all of these: P13's reader found new FAILs on every pass, v5 to v11 (99 
     - after one simulated pass, replaying Chris's weekend row move re-asks 102 items, 34 rules, against the 349 seen;
     - many of those come from "a person is on screen" rows, such as C447, C593 and C625, which judge how a person sounds or is named, not where they are. Narrowing that trigger out of the fact list would cut it further, which is LO's call.
 - `scripts/reading.py` and `reader.md`: "a person is on screen" is no longer a trigger that marks a rule as reading facts (LO, relayed 2026-11-24: "yes"). Those rows judge how a person sounds or is named, not where they are. Still re-asked when only a fact moves: C460 and C461, B8 and B10, rows judged `+ presence` or `+ sheet` (L106 among them), and rows whose `when` is "the clock moves", "a garment is named" or "she dresses or undresses". Verified on the scratchpad P21 replay of Chris's weekend row move: 72 items, 24 rules (C460, C461, B8, B10, L106 and 19 clock rows), on the 3 screens that name him. Before this change it was 102 items, and the pass B count was 349. The full suite runs green.
+- `piece.md` step 7 and `build.md` step 1: the overlap rule (LO's yes, relayed by ENI 2026-11-24). While the reader runs on a piece, the next piece may be carded, checked and approved, but not built. Only one piece is built at a time, because the reader reads the built game, and a build under it changes what it reads. If the current piece's fixes change a fact the next card uses (a schedule row, a flag, a price), that card is re-checked and takes a new yes. Why: the game session builds release 1's remaining pieces back to back tonight. Verified: the suite runs green, and the size caps hold.
+- `scripts/reading.py` and `reader.md`: `--record` takes a partial batch (ENI for LO, standing authorization, 2026-11-24).
+  - **The failure:** reader passes take more than 10 minutes and died with each of the day's machine restarts. `record()` refused any batch missing a verdict ("work-list item(s) have no verdict"), so a pass couldn't be saved in parts.
+  - **The fix:** a batch records the verdicts it gives. The items it doesn't answer are kept in the record as `pending`, and the next work list asks them again ("still to ask: …"), whatever the hashes say. Without that, the new screen hashes would hide a changed screen's unanswered rows.
+    - An unanswered item keeps the verdict it had, so a FAIL not yet asked again is still a FAIL.
+    - A carried verdict is dropped for a `*` re-ask only when that re-ask was answered.
+    - Causes add up across a pass's batches, and a later batch may name an earlier batch's cause.
+    - The pass number moves on only when the last pass had nothing pending.
+    - It still refuses a `*` FAIL, a FAIL with no cause on a reader row, and a verdict not on the work list.
+    - It prints "recorded N of M; M−N still to ask".
+    - `reader.md` says to record every ~40 items.
+  - **Tests:** four new:
+    - a partial record keeps exactly the unanswered items on the next list, and a second batch finishes the same pass with an empty list;
+    - a pending row of a changed screen survives the new hashes;
+    - an unanswered FAIL stays a FAIL and is asked again;
+    - a partial batch still refuses a `*` FAIL and an off-list verdict.
+    
+    A full record behaves as before: every earlier test passes unchanged.
+  - **Verified read-only:** the live records under `games/first_term_lean/reader/` are written in the old format, without `pending`, and still give their work lists. I didn't touch `batches/`.
+- `craft/systems.md`, `plan.md`, `lists/LESSONS.md`: repeat activities aren't scheduled around each other (LO, relayed by ENI 2026-11-24: "yes, do both").
+  - **The failure:** first_term_lean's café shifts (P10) were locked to fixed slots: weekdays at 2pm, placed after the 9–1 lectures so they would never clash, and weekends at 10am and 3pm. The plan did it, and no rule stopped it. Rule 6's "where and when" invited it, and C1446's "she chooses it" is only a note.
+  - **The fix:**
+    - New lesson **L166** in `lists/LESSONS.md`, under Other.
+    - New must-read row **L166** in `craft/systems.md`: `when` = a repeatable, judged by the reader, blocking on the P10 failure.
+    - **New shape rule 7:** a repeat activity is open whenever its place is open and its people are there. Fixed times only when the activity really happens at a time (a class, a party), and the card says why. Never place one activity around another to avoid a clash; when two compete for the same hours, that's the player's choice.
+    - **Measured in CoT:** the "Work" link in `QuickieBurger.txt` (lines 4-30) checks the job, her need and how she looks, and no hour. It costs one hour a click (`<<dtime 60>>`), and only her need stops it ("You really don't feel like working."). Classes, checked in `_cot_js.txt` by ENI and re-read here: they run in scheduled blocks (`setup.School.current_class`, lines 126098-126104), she attends by being at the class's place in its block (`is_pc_at_class`, 126175-126181), and attendance is counted per course (`$classesattended`, 126249-126264). She attends by going; nothing makes her go. What skipping costs was not found, and isn't claimed. (Replaces an earlier unverified line, "Classes run at their times and can be skipped", in rule 7.)
+    - Old rules 7–10 are now 8–11, and the one internal reference ("rule 7", now "rule 8") was updated; no other file cites systems.md rule numbers (checked with grep).
+    - Rule 6's "where and when" now points at rule 7.
+    - The worked example's café button says it's open whenever the café is open and the manager is there, not at a set hour.
+    - **Checked against neighbours:** C1427 and rule 4 ("sized against the window") agree, because the window is the place's open hours. C1446 stays the note it was, and rule 7 cites it.
+    - **`plan.md` §6:** one line, "Don't schedule activities around each other."
+- `scripts/sheet.py`, `scripts/scenes.py`: a choice's own clock condition narrows the screens after it (ENI for LO, standing authorization, 2026-11-24).
+  - **The failure:** P34. Rent sits inside Mark's Kitchen menu, which is open whenever he's there, but the choice "Pay the rent (5 min)" carries its own conditions (Sunday, 08:00–11:55). The sheet read only the trigger, so the rent screens said "while npc_mark is there" and missed the Sunday window. The writer copied that wider wording, which weakened the sheet.
+  - **The fix:**
+    - **The sheet:** along each path, the scene-start slots are narrowed by every choice's clock conditions (`choice_narrow`: `when_slots` of the choice's conditions, checked at the minute it's taken). A narrowed screen's clock is written from its slots (`fmt_slots`: "08:00–11:55 · Sun", or one part per day joined " / ").
+    - **A screen reached by several choices:** the union of its paths. `clock_meaning` now reads " / " parts as a union of slots, except on the opening's exact clock, which is unchanged.
+    - **Presence:** `scenes.check_presence` did not narrow by choices before. It now uses the same `sheet.node_starts` (the union over paths), intersected with the groups around the line as before.
+  - **Tests:** three new: an all-week menu with a Sunday-only choice gives its screen a Sunday row; two choices with different days give the union; presence goes green on a Sunday-only line and red once the choice loses its condition.
+  - **Verified read-only:** `mark_kitchen.rent` now reads "08:00–11:55 · Sun". The P11 and P34 card rows that say "while npc_mark is there" are now red, rightly; the game session updates them. Presence is green.
+- `scripts/check.py`: the sheet and `Does:` checks skip a card none of whose screens exist in the build yet (ENI for LO, standing authorization, 2026-11-24).
+  - **The failure:** under the overlap rule, cards for P08, P09, P33 and P35 were carded before being built, and the read-only check above showed 22 "is on the card's Sheet: but not built" reds and 22 matching `Does:` reds for them. A built piece with a missing screen still goes red: P10 kept its 5.
+  - **Why not STATE.md's built date:** a first version skipped cards STATE lists as unbuilt. That would have skipped a new piece during its own build check, because STATE's built date is written when the piece closes. The rule is now: a card none of whose `Sheet:` or `Does:` screens exist is not judged, and a card with some built is judged in full.
+  - **Tests:** an unbuilt card isn't judged; a partly built card is judged, and its missing screen is red on both checks.
+- `scripts/reading.py`: a mostly rewritten canvas is asked once on `*` (ENI for LO, standing authorization, 2026-11-24).
+  - **The failure:** P34's pass-1 fixes touched talk lines on 22 screens, so its next work list was 1,986 items: every rule asked once per changed screen, where pass 1 asked its 99 rules once on `*`.
+  - **The fix:** per canvas, when more than half of its screens changed text, each row that fires on one of its changed screens is asked once on `*` ("most of <canvas> changed (n of m screens)"). The threshold is half because past it a per-screen list costs more than a first pass and finds nothing a `*` read wouldn't, while one or two changed screens are still asked per screen.
+    - A FAIL from last pass is still asked on its own screen.
+    - Fact-only changes are unchanged.
+    - A card without `Does:` keeps the old behaviour.
+    - `reader.md` says so.
+  - **Tests:** three new on a ten-screen canvas: one changed screen still asks per screen; eight changed asks each row once on `*`; a FAIL on a changed screen stays on its screen with one change and with eight.
+  - **Verified read-only against the live record:** P34's work list goes from 1,986 to 245 items. 137 are on `*`, 78 are on the screens of canvases under half changed, and 30 are FAILs on their screens.
+- `scripts/reading.py`: disjoint batches of one pass all land, and no batch drops a FAIL (ENI for LO, standing authorization, 2026-11-24).
+  - **The failure:** P34's reader split a pass into disjoint batches and recorded each as it landed. A later batch's verdicts were refused ("was not on the work list"), so the game session filtered batches to the live list, which can silently drop a verdict, a FAIL included.
+  - **Why the list shrank (reproduced):** a `*` item answered on one screen in batch 1 counts as answered, so it leaves the live list, and batch 2's verdict for the same row on another screen was refused.
+  - **Found while testing:** a FAIL recorded in an early batch was dropped by a later batch of the same pass. The later batch kept only verdicts of items it was carrying or hadn't been asked, and the FAIL showed as "failed last pass" on the live list.
+  - **The fix:**
+    - The first batch of a pass stores the work list as the pass began (`pass_items`), and every later batch is checked against it as well as the live list.
+    - A FAIL owed to neither is recorded anyway, listed in `unowed` and printed ("kept a FAIL that was no longer on the work list"). An off-list PASS is still refused.
+    - Each verdict is stamped with its pass. Verdicts an earlier batch of the same pass gave count as answered, so a FAIL from batch 1 isn't left pending in the same pass.
+    - Every prior verdict on an item still on the live list is kept until a new verdict on the same item replaces it.
+  - **Tests:** three disjoint batches recorded in three orders all land, a FAIL in any of them is kept, and the pass ends with nothing pending. A FAIL no longer owed is kept and reported, while an off-list PASS is still refused.
+  - **Verified read-only:** the live records' work lists still compute.
+- `craft/media.md` C1265 and rule 3, and `craft/people.md` C596, rule 7 and the menu example: where a person's picture goes (ENI's ruling for LO, standing authorization, 2026-11-24).
+  - **The failure:** P34's two readers split on the same screens. One failed Mom's menu picture under C1265 ("a menu gets no spot"); the other passed it under C596 ("the talk screen … one picture"). As built and played in P42 (LO-approved), Mom's picture sits on her menu, right after her presence line, and her Talk screen has none (`games/first_term_lean/toml_phases/5_scenes.toml`, the `talk_mom` hub and talk nodes).
+  - **The ruling:** a person's menu, opened from their face, is her screen with that person, and it gets that person's one picture after the presence line. The talk screen under it gets none unless it's a new moment. "A menu gets no spot" means room and system menus: a place's buttons, the wardrobe, a shop list.
+  - **One home each:** C1265 says which menus get no spot and points to C596. C596 says where a person's one picture goes and points back to C1265. media rule 3, people rule 7 and the people menu example say the same in one line each.
+  - **Verified:** the full suite runs green. Both rows' text changed, so `reading.py` re-asks them on pieces that carry them.
+- `scripts/reading.py`: the mostly-rewritten-canvas rule now covers old-format cards too (ENI for LO, standing authorization, 2026-11-24).
+  - **The failure:** after card text edits, P06's next work list was 996 items and P42's was 734. Both are cards without a `Does:` line, and the rule skipped any such card, so they fell back to once per screen.
+  - **The fix:** when more than half of a canvas's screens changed text, a card without `Does:` also has its rows asked once on `*`, using the old path's row set (every row, every screen). A FAIL from last pass is still asked on its own screen.
+  - **Tests:** three new in `test_reading.py` on an old-format card: both screens changed asks each row once on `*`; half changed still asks per screen; a FAIL stays on its screen when the canvas is rewritten.
+  - **Verified read-only against the live records:** P06 goes from 996 to 261 (253 on `*`, 8 FAILs) and P42 from 734 to 169 (149 on `*`, 20 FAILs).
+- Part 2 of the nested-condition-groups plan (`~/.claude/plans/nested-condition-groups.md`; LO relayed 2026-11-24: "Go ahead implement the plan"). The scripts read the engine's new `group` condition item (`{ type = "group", logic, items }`, v2.py:5405-5413) the way the engine does.
+  - **The failure:** P10. Different hours on different days took six café rows, and the weekday row greyed beside the live weekend row, so each button showed twice. The scripts would have misread a group: `when_slots` ignored it, because a group has no `version`. `scenes.items()` flattened it, so a presence check on one OR branch counted as checked. The sheet read its first time window only. `reach.py` treated it as "may hold", which hid a gate behind a dead flag.
+  - **`who_is_where.item_slots`:** a `group` combines its items by its own logic, recursively, and an empty group or one deeper than 3 never holds, as in the engine. Presence and the sheet use it.
+  - **`scenes.guaranteed(conditions, kind, key, operator)`:** the ids a block is sure to check. AND takes every item's; OR, the block's own or a group's, takes only those every branch checks. It is used for presence (`check_presence`'s trigger and group checks), for the sheet's flags (is_true) and clothes (equipped), and for the guard's presence gate.
+  - **The sheet:** a trigger whose clock is a group is written from its slots, part by part. `fmt_slots` now prints days with the same hours together: "07:00–21:00 · Mon Tue Wed Thu Fri / 10:00–21:00 · Sat Sun". `clock_meaning` reads the hand form "weekdays 07:00–20:56 / weekends 10:00–20:56" as the same slots.
+  - **The guard (`rules.py`):** "gated" is now the trigger's `when_slots` narrower than the week, or a presence check every branch makes.
+  - **`reach.py`:**
+    - A `group` item is judged recursively. AND is dead if any item is; OR only if every item is. An empty group, or one deeper than 3, is dead.
+    - `_holds` and `_has_cloth` look inside groups.
+  - **Craft:**
+    - A new lesson **L167** in `lists/LESSONS.md`.
+    - A new must-read row **L167** in `craft/clock.md` (`when` the clock moves, `reader + sheet`).
+    - An engine bullet on the `group` item and `onlyTheClockShut` (v2.py:6076; tests in `apps/game_generation/tests/test_condition_groups.py`).
+    - Shape rule 9, with a worked example in roles and TOML, and a "Not this" line.
+    - `craft/systems.md` rule 7 points to it.
+  - **Tests:** `scripts/tests/test_condition_groups_lean.py`, 12 tests, each part with a planted break:
+    - groups by logic, AND, empty and too deep;
+    - flattening would lose Monday 8am;
+    - presence on every branch is checked, and on one branch is not;
+    - the sheet prints the parts, the hand form matches, and a wrong weekend hour differs;
+    - flags and clothes count only what every branch checks;
+    - the guard reads a clock group as a gate, and an OR with a bare flag as no gate;
+    - reach finds a dead flag inside a group, keeps an OR open when one branch can hold, and an empty group never opens.
+  - **ENI's moved v2.py cites checked:** 26 were spot-checked against their content (selectAutoFire 5905, getStoryCanvasRedirect 6521, the requiresNpc comment 6093, the selectors 5935 and 5968, `_npcPresentForCanvas` 6039, the presence guard 6696, onlyTheClockShut 6068, isCanvasSelectable 6061, is_repeatable 15077, lockedText 15194, terminal_text 19981, backfill 20505, version restamp 20661, canChangeClothesHere 21014, `_resolve_at_references` 18619, default_time 17755, consume_on 5446, canTriggerActivity 5600, daily_tick 7173, clothing_slot 9522, the blocked-row drawing 6749, set_day 5179, the Schedules page 24410, closed_text 11455, and the dress-rule loop 14679). All land on what they cite. The cites before line 5405 (1282, 1700, 2189, 2234, 4118) weren't moved; they share an edited line with a later cite.
+- Two false reds from P10's rebuild on condition groups, 14 in all (ENI for LO, standing authorization, 2026-11-24).
+  - **(1) Retired canvases.** P10's six old rows stay in the TOML with `is_active = false` on their triggers, so LO's dev save still points at them (`craft/returning-player.md`). `reach.py` said they "can never open", and the sheet said they were "built but not on the card's Sheet:", which made 12 reds.
+    - **Fix:** a new `scenes.retired(c)` treats `is_active = false`, on the trigger or the canvas, as switched off on purpose; the engine never offers it (v2.py:3753, 4309).
+    - Skipped by `reach.check`, `sheet.compute`, the `Does:` guard (`rules.seen`, `rules.meetings`) and the reader's screens (`reading.screens`), each with a note.
+    - The saves check still sees retired canvases, since they're kept for saves.
+  - **(2) Grouped clocks were rounded, and the card's comma form wasn't read.** The build has weekdays 07:00–19:56, Sat 10:00–19:56 and Sun 10:00–18:56, but `fmt_slots` printed the 5-minute grid's "20:00". The card wrote "weekdays 07:00–19:56, Sat 10:00–19:56, Sun 10:00–18:56 +0", with commas, which `clock_meaning` didn't split. That made 2 reds.
+    - **Fix:** `clock_terms` reads a grouped clock's terms from its items: days with a window, through AND and OR, giving up on two windows in one AND. `fmt_terms` prints them with their real minutes, days with the same window together: "07:00–19:56 · Mon Tue Wed Thu Fri / 10:00–19:56 · Sat / 10:00–18:56 · Sun". A screen later in the scene adds "+N".
+    - A choice-narrowed or person-bound clock still prints from slots.
+    - `clock_meaning` splits parts on " / " or on a comma before a part with a time.
+  - **Tests:**
+    - the :56 case prints exactly, the card's comma form matches, and a wrong Sunday end differs;
+    - a retired canvas raises nothing in reach, the sheet or the guard, and un-retiring it brings all three back;
+    - a retired canvas has no screens in the reader's work list, and un-retiring it brings them back;
+    - one earlier test's expected clock moved from "21:00" to the real "20:56".
+  - **Verified read-only on first_term_lean:** reach, sheet and does are green. P10 prints "07:00–19:56 · Mon Tue Wed Thu Fri / 10:00–19:56 · Sat / 10:00–18:56 · Sun".
+- `scripts/reading.py`: a `note` row's FAIL carries on every card, Does: or not (ENI for LO, standing authorization, 2026-11-24).
+  - **The failure:** P06, an old-format card with no `Does:` line. It had 3 FAILs on C1313 and C1434, both labelled `note` in `craft/systems.md`, but `--record` refused them without a cause and the work list kept asking them, as if they were reader rows. The note test was gated on the card having `Does:`.
+  - **The fix:** the note-or-reader decision comes from the row's `judge` column for every card, in both `work_list` and `record`.
+  - **Test:** on an old-format card naming `craft/systems.md`, FAILs on C1313 and C1434 are recorded with no cause, carried, and not asked again, while a reader row's FAIL (C442) still needs a cause.
+  - **Verified read-only:** P06's work list is empty. It was checked with `reading.work_list` alone; no merge and no `run_all`.
+- `scripts/reading.py`, `reader.md` (After), `build.md` (Done when): LO's stop rule (LO, relayed 2026-11-24: "Yes go ahead").
+  - **The failure:** after a piece's first full reading, every small fix re-opened its screen and about 100 rows were asked again. P34's list was 560, P42's 451 and P07's 448: the lists grew instead of shrinking, and each pass found smaller things.
+  - **The rule:** a first reading is unchanged. After it, a screen whose text changed is asked again only for:
+    - its FAILs from last pass. A note's FAIL counts too, to check the fix took;
+    - its truth rows: C460, C461, B8, B10, and rows judged `+ presence` or `+ sheet` (`TRUTH_ROWS`, `reads_truth`);
+    - every row on a screen the record has never seen.
+    
+    Everything else carries.
+  - **Unchanged by it:**
+    - A canvas that is mostly new screens is asked once on `*`; the rewrite rule now counts new screens, not changed ones.
+    - The scene-wide tests B1, B2 and B9 go back on `*` only when a screen is new.
+    - A fact-only change still asks the fact rows, and a rule whose text changed is still asked where it fires.
+    - `--all` still asks everything.
+    - The scripts run in full on every build.
+  - **Pending items** saved by partial batches before the rule, owed only because a known screen's text changed, are re-judged by the rule: only their truth rows stay owed.
+  - **Tests:**
+    - six existing tests that pinned the old behaviour (every row re-asked on a changed screen, a text rewrite asked on `*`, B1/B2/B9 back on `*`) were updated to the rule;
+    - four new ones: after pass 1, a one-line change asks only its FAIL and the truth rows; a new screen is asked in full; `--all` asks everything; pre-rule pending items are re-judged.
+  - **Verified read-only** (`reading.work_list` only, no merge): P34 is now 42, P42 37, P07 44 and P21 35.
+- `scripts/reading.py` and `reader.md`: `--waive`, a held FAIL waived in LO's words (ENI for LO, standing authorization, 2026-11-24).
+  - **The failure:** P07. LO waived its release-2 deferrals in his own words in the main-lean session ("…hotter will stay locked in for the release one as they require higher traits and traits are capped to 0 in the release one."). `--record` can only stamp rows on the current work list, so four held FAILs from an earlier pass stayed FAIL: C1167 and C1204 on borrow_mom.take, C1171 on hood_street and C1197 on home_her_room.
+  - **The fix:** `reading.py games/<slug> <id> --waive <row> <screen> --words "<LO's words>" --source "<where typed, date>"`.
+    - It turns the held FAIL into WAIVED, keeping the words and the source, and drops it from pending. It prints the line for NOTES.md.
+    - It refuses a row that isn't a held FAIL, empty words and an empty source.
+    - A waived row carries, and re-opens when its screen's text changes ("waived, its screen changed") or its rule's text changes.
+    - `reader.md` says waivers are recorded this way, in LO's own words, with the same line in NOTES.md.
+  - **Tests:** four new: a waive turns the FAIL to WAIVED and it carries; non-FAIL rows, empty words and an empty source are refused; a waived row re-opens when its screen changes; the CLI prints the NOTES line.
+- `scripts/reading.py`: a reworded schedule `activity` re-opens nothing, and a fact-only change asks only fact rows on every card (ENI for LO, standing authorization, 2026-11-24).
+  - **The failure:** the game session reworded six schedule `activity` strings and moved no hours or places, yet about 8,000 items re-opened: P07 4,800, P42 755, P34 536, and more. Two causes:
+    - A screen's facts hash took in the whole schedule row of everyone it names, `activity` included, and Laura, Mark and Ryan are named almost everywhere.
+    - On a card without `Does:`, a fact-only change re-asked every row (P07: 240 a screen).
+  - **The fix:**
+    - **`facts2`:** the people part of the facts hash now holds only `location`, `weekdays`, `start_time`, `end_time` and `when`.
+    - **Why `activity` is safe to leave out:** it prints only on script-built pages, never on a canvas screen. Checked in v2.py: the activity hint (9705), the people and presence lines (12099-12117, 12306) and the Schedules page (24441-24463). A screen that quotes an activity has it in its text hash.
+    - **Old records:** a record written before `facts2` reads as facts-unchanged once, and the next record stores `facts2`. The cost: a row that really moved in that gap is caught only by `--all`.
+    - **Every card:** a fact-only change asks only the fact rows (`reads_facts`), with or without `Does:`.
+  - **Tests:** three new in `test_reading.py`: a reworded activity re-opens nothing while a real hour move still does; an old-format card's fact change asks only fact rows; a record from before `facts2` reads as unchanged once.
+  - **Verified read-only:**
+    - P07 is 0, P42 0, P34 3, P13 1, P06 0 and P11 1. The rows left on P34, P13 and P11 are "never judged": rule ids added since their last pass.
+    - P04 is 209, a first pass, since it has no record yet.
+- `scripts/approve.py` and `piece.md` step 6: an approval is refused on a card `check.py --card` calls RED (ENI for LO, standing authorization, 2026-11-24).
+  - **The failure:** P04 and P42 were approved while `--card` was RED (missing L166 and L167 skips), though `piece.md` says to fix red before asking.
+  - **The fix:** `approve()` runs `check.check_card` first. On anything but GREEN it refuses with the red lines and writes nothing. There is no override flag. Approvals recorded before stay as they are.
+  - **Fixtures:** the record itself is now `record_approval()`. The test fixtures, whose placeholder cards aren't real cards, call it directly: `tiny_game.make_game` and two `test_check.py` tests.
+  - **Tests:** `test_approve.py`'s card is now a minimal GREEN card, with one `Does:` line. Two new tests: a RED card is refused with its red lines and nothing is written; a GREEN card is recorded as before.

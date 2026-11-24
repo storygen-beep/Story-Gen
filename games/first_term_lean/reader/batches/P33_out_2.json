@@ -1,0 +1,765 @@
+{
+ "verdicts": [
+  {
+   "row": "C288",
+   "screen": "*",
+   "verdict": "N/A",
+   "line": "Two guys at the rack stop talking when you bend for the kettlebell.",
+   "why": "no private contact with anyone she knows on any screen"
+  },
+  {
+   "row": "C289",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "Your tits bounce in the sports top",
+   "why": "she is dressed in leggings and a sports top before strangers: a look, stage 1, not her bare body"
+  },
+  {
+   "row": "C291",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "Your tits bounce in the sports top however tight you pulled it",
+   "why": "what shows (clothed body in sports kit) sets the level; strangers add no level"
+  },
+  {
+   "row": "C295",
+   "screen": "*",
+   "verdict": "N/A",
+   "line": "Buy lunch ($4, 20 min, +15 energy)",
+   "why": "no climb meter on any screen; meals_today is a daily count, not a meter with rungs"
+  },
+  {
+   "row": "C296",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "A dog walker's eyes follow your ass round the pond.",
+   "why": "the look kind opens low: a stranger's eyes, nothing more"
+  },
+  {
+   "row": "C297",
+   "screen": "*",
+   "verdict": "N/A",
+   "line": "a guy coming the other way turns his head",
+   "why": "no one she lives with is on these screens"
+  },
+  {
+   "row": "C311",
+   "screen": "body_run.run",
+   "verdict": "FAIL",
+   "line": "You pick up the pace and don't look back.",
+   "why": "body named (tits/ass) and his reaction written, but neither the first-time nor the repeat line ends on a hook",
+   "cause": "P33a2-c1"
+  },
+  {
+   "row": "C311",
+   "screen": "body_workout.lift",
+   "verdict": "FAIL",
+   "line": "You feel it on the back of your thighs, and you finish the set anyway.",
+   "why": "body and their reaction are there; no hook toward what comes next",
+   "cause": "P33a2-c1"
+  },
+  {
+   "row": "C314",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "Two guys at the rack stop talking when you bend for the kettlebell.",
+   "why": "not talk only: body named and men react on both charged screens"
+  },
+  {
+   "row": "C330",
+   "screen": "*",
+   "verdict": "N/A",
+   "line": "Go for a run (45 min, 15 energy)",
+   "why": "no repeatable here pays a climb meter; only energy, money and the meals count move"
+  },
+  {
+   "row": "C338",
+   "screen": "body_lunch.eat",
+   "verdict": "N/A",
+   "line": "Buy lunch ($4, 20 min, +15 energy)",
+   "why": "no accident, no going further; only the meals count and energy move"
+  },
+  {
+   "row": "C381",
+   "screen": "body_lunch.eat",
+   "verdict": "N/A",
+   "line": "Buy lunch ($4, 20 min, +15 energy)",
+   "why": "no rung to preview; not a climb meter"
+  },
+  {
+   "row": "C388",
+   "screen": "body_lunch.eat",
+   "verdict": "PASS",
+   "line": "You're not hungry right now.",
+   "why": "the meals lock carries locked_text, played headless; the clock lock shows its hours"
+  },
+  {
+   "row": "C422",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "Fix your hair and make-up (10 min)",
+   "why": "every label says plainly what clicking does, with its costs"
+  },
+  {
+   "row": "C442",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "Two guys at the rack stop talking when you bend for the kettlebell.",
+   "why": "each screen says what happens; the stare is shown in their silence and on her thighs"
+  },
+  {
+   "row": "C449",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "Your tits bounce in the sports top ... a guy coming the other way turns his head and keeps it turned",
+   "why": "the sexual tension is named on the run and the workout, not buried"
+  },
+  {
+   "row": "C450",
+   "screen": "body_run.run",
+   "verdict": "FAIL",
+   "line": "You pick up the pace and don't look back. / You keep your eyes on the path.",
+   "why": "the scene's last screen ends on a closing image; nothing points at what happens next",
+   "cause": "P33a2-c1"
+  },
+  {
+   "row": "C450",
+   "screen": "body_workout.lift",
+   "verdict": "FAIL",
+   "line": "you finish the set anyway.",
+   "why": "the scene's last screen ends on a closing image; nothing points at what happens next",
+   "cause": "P33a2-c1"
+  },
+  {
+   "row": "C450",
+   "screen": "body_mirror.fix",
+   "verdict": "FAIL",
+   "line": "The girl in the mirror looks older than she did this morning.",
+   "why": "the scene's last screen ends on a closing image; nothing points at what happens next",
+   "cause": "P33a2-c1"
+  },
+  {
+   "row": "C450",
+   "screen": "body_snack.eat",
+   "verdict": "FAIL",
+   "line": "You eat the bar outside, standing in the doorway.",
+   "why": "the scene's last screen ends on a closing image; nothing points at what happens next",
+   "cause": "P33a2-c1"
+  },
+  {
+   "row": "C450",
+   "screen": "body_coffee.drink",
+   "verdict": "FAIL",
+   "line": "You buy a coffee at the counter and drink it by the window, watching the street.",
+   "why": "the scene's last screen ends on a closing image; nothing points at what happens next",
+   "cause": "P33a2-c1"
+  },
+  {
+   "row": "C450",
+   "screen": "body_lunch.eat",
+   "verdict": "FAIL",
+   "line": "You eat at the end of a long table.",
+   "why": "the scene's last screen ends on a closing image; nothing points at what happens next",
+   "cause": "P33a2-c1"
+  },
+  {
+   "row": "C450",
+   "screen": "body_grass.sit",
+   "verdict": "FAIL",
+   "line": "watch people cut across the quad.",
+   "why": "the scene's last screen ends on a closing image; nothing points at what happens next",
+   "cause": "P33a2-c1"
+  },
+  {
+   "row": "C451",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "pasta, a roll, a carton of milk",
+   "why": "concrete detail held: the loop, the pond, the kettlebell, the till, the tray"
+  },
+  {
+   "row": "C460",
+   "screen": "body_run.run",
+   "verdict": "PASS",
+   "line": "Your tits bounce in the sports top",
+   "why": "backed by the leggings + sports_top equipped condition; first-time line behind ran_once is_false"
+  },
+  {
+   "row": "C460",
+   "screen": "body_workout.lift",
+   "verdict": "PASS",
+   "line": "You pay at the desk for a day pass and find a bench by the mirrors.",
+   "why": "the $5 cost and the gym's mirrors (its description) back it; clothes gated"
+  },
+  {
+   "row": "C460",
+   "screen": "body_mirror.fix",
+   "verdict": "PASS",
+   "line": "The girl in the mirror looks older than she did this morning.",
+   "why": "her opinion; bathroom open weekdays 8–6, so 'this morning' is never in the future"
+  },
+  {
+   "row": "C460",
+   "screen": "body_snack.eat",
+   "verdict": "PASS",
+   "line": "You grab a candy bar and a soda and pay at the till.",
+   "why": "texture that can't clash; nobody named"
+  },
+  {
+   "row": "C460",
+   "screen": "body_coffee.drink",
+   "verdict": "PASS",
+   "line": "You buy a coffee at the counter",
+   "why": "the row shows only while Tom (10–21) or Chris is in; nobody misnamed"
+  },
+  {
+   "row": "C460",
+   "screen": "body_lunch.eat",
+   "verdict": "PASS",
+   "line": "You take a tray down the line",
+   "why": "texture; weekdays 11–2 only"
+  },
+  {
+   "row": "C460",
+   "screen": "body_grass.sit",
+   "verdict": "FAIL",
+   "line": "Sit on the grass (30 min, +5 energy) — you've lazed enough for one day.",
+   "why": "the Quad has no hours, so before 8am or from 8pm the clock alone shuts the row and the engine greys it with its cooldown_message (v2.py onlyTheClockShut path): it says she's lazed enough on a day she never sat",
+   "cause": "P33a2-c2"
+  },
+  {
+   "row": "C461",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "The girl in the mirror looks older than she did this morning.",
+   "why": "texture and her opinion only"
+  },
+  {
+   "row": "C519",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "You take a tray down the line: pasta, a roll, a carton of milk. You eat at the end of a long table.",
+   "why": "every screen is one job, well under 150 words"
+  },
+  {
+   "row": "C541",
+   "screen": "body_lunch.eat",
+   "verdict": "FAIL",
+   "line": "effects meals_today +1 on Done",
+   "why": "the toast prints every trait effect unfiltered by hiddenTraits (v2.py:7673), so Done shows '+1 Meals today' for a count the label marks hidden",
+   "cause": "P33a2-c4"
+  },
+  {
+   "row": "C601",
+   "screen": "body_run.run",
+   "verdict": "PASS",
+   "line": "a guy coming the other way turns his head and keeps it turned until he's past you",
+   "why": "his leak on his body, she sees it; a stranger, so no cover owed"
+  },
+  {
+   "row": "C601",
+   "screen": "body_workout.lift",
+   "verdict": "PASS",
+   "line": "Two guys at the rack stop talking when you bend for the kettlebell.",
+   "why": "their leak shows, she feels it; strangers"
+  },
+  {
+   "row": "C613",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "turns his head and keeps it turned",
+   "why": "the men only look; their wanting is on their bodies and they act on nothing"
+  },
+  {
+   "row": "C620",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "You buy a coffee at the counter",
+   "why": "no person is listed or named on any of the seven screens"
+  },
+  {
+   "row": "C660",
+   "screen": "body_lunch.eat",
+   "verdict": "N/A",
+   "line": "Buy lunch ($4, 20 min, +15 energy)",
+   "why": "no person's meter on this screen"
+  },
+  {
+   "row": "C758",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "Buy a coffee ($3, 10 min, +10 energy)",
+   "why": "labels are 3–4 words before the cost tag"
+  },
+  {
+   "row": "C762",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "Sit on the grass (30 min, +5 energy)",
+   "why": "no 'Nothing happens.'; every row has a screen"
+  },
+  {
+   "row": "C769",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "The park: a running loop, benches, the pond.",
+   "why": "each place's description says what it is and what's there"
+  },
+  {
+   "row": "C770",
+   "screen": "*",
+   "verdict": "N/A",
+   "line": "You buy a coffee at the counter and drink it by the window, watching the street.",
+   "why": "these are activity screens, not room screens"
+  },
+  {
+   "row": "C771",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "You start slow round the loop",
+   "why": "the run's first-time line is a variant of a repeatable, not a place's only introduction"
+  },
+  {
+   "row": "C773",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "Buy lunch / Go for a run / Fix your hair and make-up",
+   "why": "eat, exercise, wash-kind rows; no browse list of objects"
+  },
+  {
+   "row": "C776",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "Buy a snack ($2, 5 min, +10 energy)",
+   "why": "energy refills and sinks (the need) and body care; no person on the menu"
+  },
+  {
+   "row": "C777",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "Fix your hair and make-up (10 min)",
+   "why": "nothing on these menus that belongs inside a beat"
+  },
+  {
+   "row": "C782",
+   "screen": "body_mirror.fix",
+   "verdict": "PASS",
+   "line": "Fix your hair and make-up (10 min)",
+   "why": "the button is the act itself, the screen shows it; no second link"
+  },
+  {
+   "row": "C794",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "The cafeteria: trays, long tables, the lunch counter.",
+   "why": "place descriptions unchanged by these rows"
+  },
+  {
+   "row": "C795",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "You buy a coffee at the counter",
+   "why": "re-entry changes come from the menu rows; nothing else added"
+  },
+  {
+   "row": "C804",
+   "screen": "body_run.run",
+   "verdict": "PASS",
+   "line": "a guy coming the other way turns his head",
+   "why": "strangers or nobody; the people who will staff these places (Frank, Danny, Rosa, Marco) have no rows until P32, said on the card"
+  },
+  {
+   "row": "C804",
+   "screen": "body_workout.lift",
+   "verdict": "PASS",
+   "line": "Two guys at the rack",
+   "why": "strangers or nobody; the people who will staff these places (Frank, Danny, Rosa, Marco) have no rows until P32, said on the card"
+  },
+  {
+   "row": "C804",
+   "screen": "body_mirror.fix",
+   "verdict": "PASS",
+   "line": "You lean into the long mirror",
+   "why": "strangers or nobody; the people who will staff these places (Frank, Danny, Rosa, Marco) have no rows until P32, said on the card"
+  },
+  {
+   "row": "C804",
+   "screen": "body_snack.eat",
+   "verdict": "PASS",
+   "line": "pay at the till",
+   "why": "strangers or nobody; the people who will staff these places (Frank, Danny, Rosa, Marco) have no rows until P32, said on the card"
+  },
+  {
+   "row": "C804",
+   "screen": "body_lunch.eat",
+   "verdict": "PASS",
+   "line": "You eat at the end of a long table.",
+   "why": "strangers or nobody; the people who will staff these places (Frank, Danny, Rosa, Marco) have no rows until P32, said on the card"
+  },
+  {
+   "row": "C804",
+   "screen": "body_grass.sit",
+   "verdict": "PASS",
+   "line": "watch people cut across the quad.",
+   "why": "strangers or nobody; the people who will staff these places (Frank, Danny, Rosa, Marco) have no rows until P32, said on the card"
+  },
+  {
+   "row": "C804",
+   "screen": "body_coffee.drink",
+   "verdict": "FAIL",
+   "line": "You buy a coffee at the counter and drink it by the window, watching the street.",
+   "why": "the row exists only while Tom or Chris is behind the counter (its OR condition; PLAN §8c: 'Tom or Chris behind the counter'), yet nobody serves her and the line is the same whoever is in",
+   "cause": "P33a2-c3"
+  },
+  {
+   "row": "C889",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "Work out ($5, 1 hour, 20 energy)",
+   "why": "every label's duration equals its Done's time_progression_minutes (45, 60, 10, 5, 10, 20, 30)"
+  },
+  {
+   "row": "C892",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "Buy lunch ($4, 20 min, +15 energy) — lunch is 11am to 2pm on weekdays.",
+   "why": "hours on the door, none in the act"
+  },
+  {
+   "row": "C897",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "Done (45 min)",
+   "why": "no room-crossing time added; time is on the activity"
+  },
+  {
+   "row": "C900",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "The girl in the mirror looks older than she did this morning.",
+   "why": "no beat says what time it is"
+  },
+  {
+   "row": "C902",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "Two laps of the loop, your breath loud in your ears.",
+   "why": "each line holds at the last minute of its window (seen: a 21:59 workout ends 22:59 in a shut gym, which shows its closed_text, true)"
+  },
+  {
+   "row": "C903",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "lunch is 11am to 2pm on weekdays.",
+   "why": "the only weekday named sits on the sign, behind the weekday condition; no prose names a day"
+  },
+  {
+   "row": "C906",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "Sit on the grass (30 min, +5 energy)",
+   "why": "only durations, no 'till' promises"
+  },
+  {
+   "row": "C910",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "($4, 20 min, +15 energy)",
+   "why": "the game's one form: '(N min'/'(1 hour', cost first"
+  },
+  {
+   "row": "C913",
+   "screen": "body_lunch.eat",
+   "verdict": "PASS",
+   "line": "Buy lunch ($4, 20 min, +15 energy) — lunch is 11am to 2pm on weekdays.",
+   "why": "shut by the clock it stays dimmed with its hours (played headless)"
+  },
+  {
+   "row": "C913",
+   "screen": "body_grass.sit",
+   "verdict": "FAIL",
+   "line": "Sit on the grass (30 min, +5 energy) — you've lazed enough for one day.",
+   "why": "shut by its 8am–8pm window it greys with the day-cap line, so its hours are never published",
+   "cause": "P33a2-c2"
+  },
+  {
+   "row": "C913",
+   "screen": "body_run.run",
+   "verdict": "PASS",
+   "line": "Fix your hair and make-up (10 min)",
+   "why": "this row's hours are its room's hours, on the room's sign"
+  },
+  {
+   "row": "C913",
+   "screen": "body_workout.lift",
+   "verdict": "PASS",
+   "line": "Fix your hair and make-up (10 min)",
+   "why": "this row's hours are its room's hours, on the room's sign"
+  },
+  {
+   "row": "C913",
+   "screen": "body_mirror.fix",
+   "verdict": "PASS",
+   "line": "Fix your hair and make-up (10 min)",
+   "why": "this row's hours are its room's hours, on the room's sign"
+  },
+  {
+   "row": "C913",
+   "screen": "body_snack.eat",
+   "verdict": "PASS",
+   "line": "Fix your hair and make-up (10 min)",
+   "why": "this row's hours are its room's hours, on the room's sign"
+  },
+  {
+   "row": "C913",
+   "screen": "body_coffee.drink",
+   "verdict": "PASS",
+   "line": "Fix your hair and make-up (10 min)",
+   "why": "this row's hours are its room's hours, on the room's sign"
+  },
+  {
+   "row": "C914",
+   "screen": "body_lunch.eat",
+   "verdict": "FAIL",
+   "line": "Buy lunch ($4, 20 min, +15 energy) — lunch is 11am to 2pm on weekdays.",
+   "why": "one cooldown_message serves the once-a-day cap too: after lunch at 11:30 on a Monday the row greys with its hours, though the clock didn't shut it",
+   "cause": "P33a2-c2"
+  },
+  {
+   "row": "C914",
+   "screen": "body_grass.sit",
+   "verdict": "FAIL",
+   "line": "Sit on the grass (30 min, +5 energy) — you've lazed enough for one day.",
+   "why": "the reverse: shut by the clock alone, it shows the cap line instead of its hours",
+   "cause": "P33a2-c2"
+  },
+  {
+   "row": "C914",
+   "screen": "body_run.run",
+   "verdict": "PASS",
+   "line": "Buy a coffee ($3, 10 min, +10 energy) — any more and you'll shake.",
+   "why": "no clock condition on this row; any greyed line is the count's, clothes' or cost's"
+  },
+  {
+   "row": "C914",
+   "screen": "body_workout.lift",
+   "verdict": "PASS",
+   "line": "Buy a coffee ($3, 10 min, +10 energy) — any more and you'll shake.",
+   "why": "no clock condition on this row; any greyed line is the count's, clothes' or cost's"
+  },
+  {
+   "row": "C914",
+   "screen": "body_mirror.fix",
+   "verdict": "PASS",
+   "line": "Buy a coffee ($3, 10 min, +10 energy) — any more and you'll shake.",
+   "why": "no clock condition on this row; any greyed line is the count's, clothes' or cost's"
+  },
+  {
+   "row": "C914",
+   "screen": "body_snack.eat",
+   "verdict": "PASS",
+   "line": "Buy a coffee ($3, 10 min, +10 energy) — any more and you'll shake.",
+   "why": "no clock condition on this row; any greyed line is the count's, clothes' or cost's"
+  },
+  {
+   "row": "C914",
+   "screen": "body_coffee.drink",
+   "verdict": "PASS",
+   "line": "Buy a coffee ($3, 10 min, +10 energy) — any more and you'll shake.",
+   "why": "no clock condition on this row; any greyed line is the count's, clothes' or cost's"
+  },
+  {
+   "row": "C916",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "lunch is 11am to 2pm on weekdays.",
+   "why": "all seven are her choices; no event"
+  },
+  {
+   "row": "C920",
+   "screen": "*",
+   "verdict": "N/A",
+   "line": "Done",
+   "why": "no move between places; Done returns to the same room"
+  },
+  {
+   "row": "C924",
+   "screen": "*",
+   "verdict": "N/A",
+   "line": "Go for a run (45 min, 15 energy)",
+   "why": "no travel on these screens"
+  },
+  {
+   "row": "C926",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "Done",
+   "why": "the clock moves only by minutes"
+  },
+  {
+   "row": "C927",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "Done",
+   "why": "every Done carries its minutes"
+  },
+  {
+   "row": "C928",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "You eat at the end of a long table.",
+   "why": "no clock in prose"
+  },
+  {
+   "row": "C929",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "Fix your hair and make-up (10 min)",
+   "why": "activity time is on the label"
+  },
+  {
+   "row": "C930",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "show_when_blocked = true",
+   "why": "both windowed rows (lunch, grass) set show_when_blocked"
+  },
+  {
+   "row": "C931",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "time_of_day 11:00–14:00",
+   "why": "end exclusive: last lunch start 13:59, done by 14:19 with the cafeteria open to 4pm; grass 08:00–20:00 likewise"
+  },
+  {
+   "row": "C951",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "You pay at the desk for a day pass",
+   "why": "the spend amount is on the button ($5, $2, $3, $4) per economy rule 6; no prose amount disagrees"
+  },
+  {
+   "row": "C952",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "Buy lunch ($4, 20 min, +15 energy)",
+   "why": "PLAN §8b/§8c agree: snack $2 +10, coffee $3 +10, lunch $4 +15, gym $5 20 energy, run 15 energy; grass +5 (PLAN:356)"
+  },
+  {
+   "row": "C953",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "Buy a snack ($2, 5 min, +10 energy)",
+   "why": "each label carries time, money, energy before the click"
+  },
+  {
+   "row": "C954",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "Work out ($5, 1 hour, 20 energy)",
+   "why": "spend prices on the buttons; no earnings here"
+  },
+  {
+   "row": "C961",
+   "screen": "body_lunch.eat",
+   "verdict": "N/A",
+   "line": "Buy lunch",
+   "why": "no no, no meter"
+  },
+  {
+   "row": "L106",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "You buy a coffee at the counter",
+   "why": "no line names anyone the rows don't put there (who_is_where: Tom 10–21 Mon–Sat, Chris 07–15 weekdays, 10–20 weekends)"
+  },
+  {
+   "row": "L116",
+   "screen": "body_lunch.eat",
+   "verdict": "PASS",
+   "line": "You're not hungry right now.",
+   "why": "a story lock in plain words; no stage word; the hidden count isn't named because it isn't shown"
+  },
+  {
+   "row": "L119",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "pool = 2",
+   "why": "both spots are _t3 repeats with pool 2, stated, not the default"
+  },
+  {
+   "row": "L120",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "No man in frame.",
+   "why": "the run is the looker's view with no man; the mirror is her alone"
+  },
+  {
+   "row": "L121",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "Seen from the path: a woman of 18 running toward the camera",
+   "why": "the body moment (mirror) and the look (run) get pictures; the chores get none"
+  },
+  {
+   "row": "L125",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "image block after the paragraph",
+   "why": "both pictures follow their line; no payoff opens the screen"
+  },
+  {
+   "row": "L166",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "Buy a coffee ($3, 10 min, +10 energy)",
+   "why": "rows open with their places (and the coffee with its people); lunch's and the grass's fixed hours are said on the card"
+  },
+  {
+   "row": "L167",
+   "screen": "body_lunch.eat",
+   "verdict": "PASS",
+   "line": "conditions weekday [0-4] + time_of_day 11:00–14:00",
+   "why": "one row for weekday-only hours, greyed with show_when_blocked and a cooldown_message naming the full hours"
+  },
+  {
+   "row": "L167",
+   "screen": "*",
+   "verdict": "N/A",
+   "line": "Sit on the grass (30 min, +5 energy)",
+   "why": "no other row has different hours on different days"
+  },
+  {
+   "row": "L70",
+   "screen": "*",
+   "verdict": "N/A",
+   "line": "Buy lunch",
+   "why": "no climb meter"
+  },
+  {
+   "row": "L71",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "a guy coming the other way turns his head and keeps it turned until he's past you. Your face burns.",
+   "why": "things happen to her; she reacts on her body and chooses nothing"
+  }
+ ],
+ "causes": [
+  {
+   "id": "P33a2-c1",
+   "what": "none of the seven solo screens ends on a hook: each closes on an image (\"don't look back\", \"finish the set anyway\", \"watching the street\") instead of pointing at what comes next"
+  },
+  {
+   "id": "P33a2-c2",
+   "what": "one cooldown_message serves both the day cap and the clock on lunch and the grass, so one of them lies: lunch's cap shows its hours, and the grass shut by its 8am–8pm window shows \"you've lazed enough for one day.\""
+  },
+  {
+   "id": "P33a2-c3",
+   "what": "the coffee row shows only while Tom or Chris is behind the counter, but its screen names no one serving her and doesn't change with who's in"
+  },
+  {
+   "id": "P33a2-c4",
+   "what": "lunch's Done adds 1 to the hidden meals_today, and the engine toast prints every trait effect unfiltered (v2.py:7673), so the player sees \"+1 Meals today\" for a stat that isn't shown"
+  }
+ ]
+}

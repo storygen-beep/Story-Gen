@@ -71,6 +71,39 @@ def items(conditions):
     return out
 
 
+def guaranteed(conditions, kind="npc_at_location", key="npc_id", operator="is_present"):
+    """The ids a condition block is sure to check (`<kind>` with `<operator>` on `<key>`): through AND every item's,
+    through OR (the block's or a `group` item's) only those every branch checks. So a presence check inside one
+    branch of an OR doesn't count as checked."""
+    if not isinstance(conditions, dict):
+        return set()
+    items = [i for i in conditions.get("items") or [] if isinstance(i, dict)]
+    sets = []
+    for i in items:
+        if i.get("type") == "group" or isinstance(i.get("items"), list):
+            sets.append(guaranteed(i, kind, key, operator))
+        elif i.get("type") == kind and i.get("operator", operator) == operator and i.get(key):
+            sets.append({i[key]})
+        else:
+            sets.append(set())
+    if not sets:
+        return set()
+    if conditions.get("logic") == "OR":
+        return set.intersection(*sets)
+    return set().union(*sets)
+
+
+def retired(c):
+    """A canvas switched off on purpose (`is_active = false` on its trigger or itself): the engine never offers it
+    (v2.py:3753, 4309), and it stays in the TOML only so an old save still points at something
+    (`craft/returning-player.md`). reach, the sheet, the Does: guard and the reader's work list skip it; the saves
+    check still sees it, since it is kept for saves."""
+    if not isinstance(c, dict):
+        return False
+    return any(str(v).lower() == "false" for v in (c.get("is_active"), (c.get("trigger") or {}).get("is_active"))
+               if v is not None)
+
+
 def canvases(game, dev=()):
     return [c for c in game.get("canvases") or [] if isinstance(c, dict) and c.get("id") and c["id"] not in dev]
 
@@ -256,22 +289,26 @@ def check_presence(game, dev=()):
         if not place or str(trig.get("is_repeatable", "true")).lower() == "false":
             continue
         bound = {trig.get("npc"), trig.get("requires_npc")}
-        checked = {i.get("npc_id") for i in items(trig.get("conditions")) if i.get("type") == "npc_at_location"}
+        checked = guaranteed(trig.get("conditions")) | guaranteed(trig.get("conditions"), operator="is_absent")
         slots = fire_slots(trig)
+        # A choice that carries its own clock condition narrows the screens after it (P34: "Pay the rent" only on
+        # Sunday mornings, from a menu open all week); a screen reached by several choices takes the union.
+        import sheet
+        by_node = sheet.node_starts(c, slots)
         for n in c.get("nodes") or []:
             for b, cond in walk(n.get("blocks")):
                 props = b.get("props") or {}
                 pid = props.get("npcId")
                 if b.get("type") != "dialog" or props.get("speaker") != "npc" or pid in bound or pid in checked:
                     continue
-                if any(i.get("type") == "npc_at_location" and i.get("npc_id") == pid for i in items(list(cond))):
+                if any(pid in guaranteed(gc) | guaranteed(gc, operator="is_absent") for gc in cond):
                     continue
                 # A line inside a group shows only when its groups' conditions hold too, so its slots are the
                 # trigger's narrowed by each enclosing group's clock conditions (the same when_slots, OR widened).
                 # Adjacent groups merge into one if/elseif chain, so a later group also needs the earlier ones to
                 # fail; that isn't modelled. Its own conditions are a superset of when it really shows, so this can
                 # only keep a red too long, never hide one.
-                line_slots = set(slots)
+                line_slots = set(by_node.get(n.get("id"), slots))
                 for gc in cond:
                     line_slots &= who_is_where.when_slots(gc)
                 table = where.get(pid)
@@ -292,7 +329,7 @@ def check_creation(game):
     rows = []
     for f in fields:
         fid = f.get("id")
-        # @player alone prints the name; @player.<id> prints a field (`_resolve_at_references`, v2.py:18608-18653)
+        # @player alone prints the name; @player.<id> prints a field (`_resolve_at_references`, v2.py:18619-18664)
         pat = r"@player(?!\w|\.\w)|@player\.name\b" if fid == "name" else rf"@player\.{re.escape(str(fid))}\b"
         if fid and not re.search(pat, shown):
             rows.append(f"creation field `{fid}` (\"{f.get('label', '')}\") is asked and never printed back (C48)")

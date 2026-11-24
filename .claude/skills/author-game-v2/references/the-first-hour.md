@@ -264,7 +264,7 @@ describing the second screen and calling it the first.
 `CustomizeCharacters` passage **and repoints the age gate at it** (`v2.py:1130`, `v2.py:10033`). Its
 headings and button are hard-coded — *"Customize Characters"*, *"Personalize the characters in your
 story"*, *"Continue to Game"*. The only authored
-text on it is `player_description` (`v2.py:868`); an author who does not know that ships the
+text on it is `player_description` (`v2.py:874`); an author who does not know that ships the
 default, in a product voice, as the second thing a player reads.
 
 **3 · One node is one screen.** The engine plays a node chain back one screen at a time (F2 above,
@@ -605,7 +605,7 @@ work. What is never correct is a hub with **no conditions at all**: it puts that
 portrait on a location screen from turn one, however well the first hub is gated.
 
 A non-repeatable canvas renders **no portrait** — `selectNpcPortraitCanvasesForLocation` skips
-`if (!c.isRepeatable) continue` (`v2.py:5933`) — so the meeting cannot leak onto the location
+`if (!c.isRepeatable) continue` (`v2.py:5954`) — so the meeting cannot leak onto the location
 screen as a face, and the hub cannot appear before the meeting has fired.
 
 > ### ⚠️ `requires_npc` does NOT gate the auto-fire path. This corrects v1.
@@ -620,7 +620,7 @@ screen as a face, and the hub cannot appear before the meeting has fired.
 >        checks: schedules · conditions · repeatability.  requiresNpc is never read.
 > ```
 >
-> `requiresNpc` is emitted at `v2.py:15171` and read on the random-encounter selector
+> `requiresNpc` is emitted at `v2.py:15243` and read on the random-encounter selector
 > (`v2.py:6782`), the substitution rules (`v2.py:6861`), and — through `setup._npcPresentForCanvas`
 > (`v2.py:5889`) — the solo lane (`v2.py:5830`, `:6479`) and the launcher (`v2.py:3663`).
 > **None of them is auto-fire.**

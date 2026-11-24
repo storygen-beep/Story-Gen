@@ -1,0 +1,131 @@
+{
+ "verdicts": [
+  {
+   "row": "B10",
+   "screen": "cafe_work_hour.work",
+   "verdict": "PASS",
+   "line": "Sundays it's you and Chris. He watches your chest when you reach for the cups.",
+   "why": "Each text group names only who who_is_where puts there for the whole hour: Chris weekdays 07:00-09:55 (in 07-15), Tom weekdays from 10:00 and Saturday (in 10-21, last end 20:55), Chris Sunday (in 10-20, last end 19:55); groups cover every start the trigger allows; no past or first-time claim; repeat lines are dialogue that holds on every visit."
+  },
+  {
+   "row": "B10",
+   "screen": "cafe_work_shift.shift",
+   "verdict": "PASS",
+   "line": "He leaves before your shift's done, with a wink you don't return.",
+   "why": "Weekday 07:00-09:55 Chris pays (ends by 13:55, he's in to 15); 10:00-10:55 Chris all shift, Tom pays at end; 11:00-14:55 Chris leaves at 15:00 (exclusive end), at latest as the shift ends, Tom pays; 15:00-16:55 Tom only, ends by 20:55; Saturday both in to 19:55; Sunday Chris in to 19:55. 'Chris has you tomorrow' holds: Chris works Sunday."
+  },
+  {
+   "row": "B8",
+   "screen": "cafe_work_hour.work",
+   "verdict": "PASS",
+   "line": "He counts it into your hand. You made $5.",
+   "why": "$5, 4 energy, 60 minutes agree with PLAN.md:340-344 and the Done effect (+5, 60 min); no garment named."
+  },
+  {
+   "row": "B8",
+   "screen": "cafe_work_shift.shift",
+   "verdict": "PASS",
+   "line": "Twenty-two, rookie. Good work. Same again tomorrow?",
+   "why": "$22, 15 energy, 240 minutes agree with PLAN.md:340-344 ($5 an hour plus $2 tips) and the Done effect (+22, 240 min); no garment named."
+  },
+  {
+   "row": "C151",
+   "screen": "cafe_work_shift.shift",
+   "verdict": "FAIL",
+   "line": "Slow day, new girl. Entertain me. / Grab a cloth, then. / Twenty-two, new girl. Next Sunday you're entertaining me.",
+   "why": "Note row: most versions carry two or three spoken lines (Sunday three, Saturday and weekday 07:00-14:55 two), not one; recorded as a note, no cause."
+  },
+  {
+   "row": "C460",
+   "screen": "cafe_work_hour.work",
+   "verdict": "PASS",
+   "line": "start between 7am and 7:55pm on weekdays, 10am and 7:55pm on Saturdays, 10am and 6:55pm on Sundays.",
+   "why": "Greyed line matches the trigger windows (07:00-19:56 Mon-Fri, 10:00-19:56 Sat, 10:00-18:56 Sun, end exclusive v2.py:4785-4790); every prose claim true on every reachable minute (see B10)."
+  },
+  {
+   "row": "C460",
+   "screen": "cafe_work_shift.shift",
+   "verdict": "PASS",
+   "line": "start between 7am and 4:55pm on weekdays, 10am and 3:55pm at weekends.",
+   "why": "Greyed line matches the trigger windows (07:00-16:56 Mon-Fri, 10:00-15:56 Sat and Sun); prose true at every reachable start (see B10)."
+  },
+  {
+   "row": "C461",
+   "screen": "cafe_work_hour.work",
+   "verdict": "PASS",
+   "line": "Five, new girl. Next time I'll let you near the machine.",
+   "why": "Texture (milk jug, steam) can't clash; Tom's 'rookie' and Chris's 'new girl' fit the cast; her 'Not a chance.' is her opinion."
+  },
+  {
+   "row": "C461",
+   "screen": "cafe_work_shift.shift",
+   "verdict": "PASS",
+   "line": "Saturdays the café is loud.",
+   "why": "Texture and dialogue fit the cast entries; no invented fact."
+  },
+  {
+   "row": "C927",
+   "screen": "cafe_work_hour.work",
+   "verdict": "PASS",
+   "line": "Done (time_progression_minutes = 60)",
+   "why": "The only exit states its time."
+  },
+  {
+   "row": "C927",
+   "screen": "cafe_work_shift.shift",
+   "verdict": "PASS",
+   "line": "Done (time_progression_minutes = 240)",
+   "why": "The only exit states its time."
+  },
+  {
+   "row": "C931",
+   "screen": "cafe_work_hour.work",
+   "verdict": "PASS",
+   "line": "time_of_day 07:00-10:00 / 10:00-19:56",
+   "why": "Ends exclusive: trigger ends :56 for last start :55; text groups split at 10:00 with no gap or overlap."
+  },
+  {
+   "row": "C931",
+   "screen": "cafe_work_shift.shift",
+   "verdict": "PASS",
+   "line": "time_of_day 07:00-10:00 / 10:00-11:00 / 11:00-15:00 / 15:00-16:56",
+   "why": "Contiguous exclusive-end windows cover the weekday trigger 07:00-16:56 exactly."
+  },
+  {
+   "row": "C952",
+   "screen": "cafe_work_shift.shift",
+   "verdict": "PASS",
+   "line": "You made $22.",
+   "why": "$22 a shift, 15 energy, 4 hours and the start hours (weekdays 7am-4:55pm, Saturday and Sunday 10am-3:55pm) agree with PLAN.md:340-344, the card, and the Done effect; four shifts cover the $75 rent (PLAN.md:241)."
+  },
+  {
+   "row": "L106",
+   "screen": "cafe_work_hour.work",
+   "verdict": "PASS",
+   "line": "Every time you bend for the milk, Tom's eyes drop to your ass and stay there.",
+   "why": "Tom named only weekdays from 10:00 and Saturday, inside his 10-21 row; Chris only where his row has him (weekdays 07-15, Sunday 10-20)."
+  },
+  {
+   "row": "L106",
+   "screen": "cafe_work_shift.shift",
+   "verdict": "PASS",
+   "line": "Tom works the till, Chris works the machine",
+   "why": "Saturday both in (Tom 10-21, Chris 10-20); weekday 15:00+ names Tom only, Chris gone at 15; Sunday names Chris only."
+  },
+  {
+   "row": "L167",
+   "screen": "cafe_work_hour.work",
+   "verdict": "PASS",
+   "line": "Work an hour (1 hour, 4 energy) — start between 7am and 7:55pm on weekdays, 10am and 7:55pm on Saturdays, 10am and 6:55pm on Sundays.",
+   "why": "One row with a nested OR group of weekday+time_of_day; show_when_blocked + cooldown_message naming the full hours; group is clock-only so it greys once (onlyTheClockShut, v2.py:6068-6088); the six old rows are is_active = false with no show_when_blocked."
+  },
+  {
+   "row": "L167",
+   "screen": "cafe_work_shift.shift",
+   "verdict": "PASS",
+   "line": "Work a shift (4 hours, 15 energy) — start between 7am and 4:55pm on weekdays, 10am and 3:55pm at weekends.",
+   "why": "One row, nested group, show_when_blocked with cooldown_message naming the full hours; greys once."
+  }
+ ],
+ "causes": []
+}

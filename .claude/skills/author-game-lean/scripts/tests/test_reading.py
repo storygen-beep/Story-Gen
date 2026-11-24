@@ -131,3 +131,81 @@ def test_record_is_written_under_reader(game):
     first_pass(game)
     rec = json.loads((game / "reader" / "p1.json").read_text())
     assert rec["pass"] == 1 and rec["screens"]["start.a"]
+
+
+def test_an_old_format_card_rewritten_after_its_first_reading_asks_only_truth_rows(game):
+    # LO's stop rule (2026-11-24): both of start's screens change text after pass 1; a card without Does: (P06, P42)
+    first_pass(game)
+    edit(game, "Mom is at the stove.", "Mom is at the stove, humming.")
+    edit(game, "You eat alone.", "You eat alone, fast.")
+    items = reading.work_list(game, "p1")["items"]
+    assert items and {i["row"] for i in items} <= set(reading.TRUTH_ROWS)
+    assert {i["screen"] for i in items} == {"start.a", "start.b"}
+
+
+def test_an_old_format_card_with_one_screen_changed_asks_only_there(game):
+    first_pass(game)
+    edit(game, "You eat alone.", "You eat alone, fast.")
+    items = reading.work_list(game, "p1")["items"]
+    assert {i["screen"] for i in items} == {"start.b"} and {i["row"] for i in items} <= set(reading.TRUTH_ROWS)
+
+
+def test_an_old_format_fail_stays_on_its_screen_when_rewritten(game):
+    first_pass(game, verdict="FAIL")
+    edit(game, "Mom is at the stove.", "Mom is at the stove, humming.")
+    edit(game, "You eat alone.", "You eat alone, fast.")
+    items = reading.work_list(game, "p1")["items"]
+    assert any(i["screen"] == "start.a" and i["why"] == "failed last pass" for i in items)
+
+
+def test_a_retired_canvas_has_no_rows_on_the_work_list(game):
+    p = game / "toml_phases" / "7_final_game.toml"
+    p.write_text(p.read_text().replace('[canvases.trigger]\nlocation = "home"', '[canvases.trigger]\nlocation = "home"\nis_active = false', 1))
+    assert reading.current(game, "p1")[0] == {"*": reading.whole_hash({})}
+    p.write_text(p.read_text().replace("is_active = false\n", "", 1))
+    assert "start.a" in reading.current(game, "p1")[0]
+
+
+def test_a_note_fail_on_an_old_format_card_is_recorded_without_a_cause_and_carried(game):
+    # P06: an old-format card (no Does:) with FAILs on C1313 and C1434, both `note` in craft/systems.md
+    (game / "cards" / "p1.md").write_text("PIECE p1\nBuilds: start\nCraft: craft/voice.md, craft/systems.md · cites C442\n")
+    work = reading.work_list(game, "p1")
+    assert {"C1313", "C1434"} <= {i["row"] for i in work["items"]}
+    out = [dict(row=i["row"], screen="start.a", verdict="FAIL" if i["row"] in ("C1313", "C1434") else "PASS")
+           for i in work["items"]]
+    rec = reading.record(game, "p1", {"verdicts": out})  # no causes given: notes need none
+    assert all(v["cause"] is None and v["note"] for v in rec["verdicts"] if v["row"] in ("C1313", "C1434"))
+    assert reading.work_list(game, "p1")["items"] == []  # carried, not asked again
+    with pytest.raises(ValueError, match="cause"):  # a reader row's FAIL still needs a cause
+        reading.record(game, "p1", {"verdicts": [{"row": "C442", "screen": "start.a", "verdict": "FAIL"}]})
+
+
+def test_a_reworded_activity_reopens_nothing(game):
+    # P07 and others, 2026-11-24: six schedule activities reworded, no hour or place moved
+    p = game / "toml_phases" / "7_final_game.toml"
+    p.write_text(p.read_text().replace('end_time = "09:00"', 'end_time = "09:00"\nactivity = "at the stove"'))
+    first_pass(game)
+    p.write_text(p.read_text().replace('activity = "at the stove"', 'activity = "making eggs"'))
+    assert reading.work_list(game, "p1")["items"] == []
+    p.write_text(p.read_text().replace('end_time = "09:00"', 'end_time = "08:00"'))  # a real move still counts
+    assert reading.work_list(game, "p1")["items"]
+
+
+def test_an_old_format_card_fact_change_asks_only_fact_rows(game):
+    first_pass(game)
+    edit(game, 'end_time = "09:00"', 'end_time = "08:00"')  # Mom's row moves; the text doesn't
+    items = reading.work_list(game, "p1")["items"]
+    assert items and all(reading.reads_facts(i["row"], reading.rules.table()) for i in items)
+    assert all(i["why"] == "a fact changed" for i in items)
+
+
+def test_a_record_from_before_facts2_reads_as_unchanged_once(game):
+    first_pass(game)
+    path = reading.record_path(game, "p1")
+    rec = json.loads(path.read_text())
+    for v in rec["screens"].values():
+        if isinstance(v, dict):
+            v.pop("facts2", None)
+    path.write_text(json.dumps(rec))
+    edit(game, 'end_time = "09:00"', 'end_time = "08:00"')
+    assert reading.work_list(game, "p1")["items"] == []

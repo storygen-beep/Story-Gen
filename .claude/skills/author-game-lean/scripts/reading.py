@@ -147,8 +147,8 @@ def screens(game, canvas_ids, sheet_rows=None):
     rows_of = {n.get("id"): n.get("schedules") or [] for n in game.get("npcs") or []}
     out = {}
     for c in game.get("canvases") or []:
-        if c.get("id") not in canvas_ids:
-            continue
+        if c.get("id") not in canvas_ids or scenes.retired(c):
+            continue  # a retired canvas (is_active = false) is never offered: no rows to read
         trig = c.get("trigger") or {}
         for node in c.get("nodes") or []:
             blob = json.dumps(node, sort_keys=True, default=str)
@@ -156,9 +156,15 @@ def screens(game, canvas_ids, sheet_rows=None):
             named |= set(re.findall(r'"npcId": "([\w-]+)"', blob))
             named |= {trig.get("npc"), trig.get("requires_npc")} - {None}
             facts = {p: rows_of.get(p, []) for p in sorted(named)}
+            # When and where they are, not what the row calls it: `activity` prints only on script-built pages (the
+            # people page, the Schedules page, the hint), never on a canvas screen, and a screen that quotes it has
+            # it in its text hash (P07 etc., 2026-11-24: six reworded activities re-opened about 8,000 items).
+            where_when = {p: [{k: r.get(k) for k in ("location", "weekdays", "start_time", "end_time", "when")}
+                              for r in rows_of.get(p, []) if isinstance(r, dict)] for p in sorted(named)}
             key = f"{c['id']}.{node.get('id')}"
             out[key] = {"text": digest({"node": node, "trigger": trig}),
                         "facts": digest({"facts": facts, "sheet": sheet_rows.get(key)}),
+                        "facts2": digest({"facts": where_when, "sheet": sheet_rows.get(key)}),
                         # the single hash records written before 2026-11-24 hold, to read them as they are
                         "all": digest({"node": node, "trigger": trig, "facts": facts, "sheet": sheet_rows.get(key)})}
     return out
@@ -172,6 +178,16 @@ FACT_ROWS = ("C460", "C461", "B8", "B10")
 FACT_WHEN = ("the clock moves", "a garment is named", "she dresses or undresses")  # not "a person is on screen":
 # those rows judge how a person sounds or is named, not where they are (LO, relayed 2026-11-24)
 FACT_CHECKS = ("presence", "sheet")
+
+
+TRUTH_ROWS = ("C460", "C461", "B8", "B10")
+
+
+def reads_truth(rid, table):
+    """The rows a changed screen is asked again after the first reading (LO's stop rule): the truth rule and B8/B10,
+    and rows a fact-check script helps judge (`+ presence`, `+ sheet`)."""
+    r = table.get(rid)
+    return rid in TRUTH_ROWS or (bool(r) and bool(set(r["checks"]) & set(FACT_CHECKS)))
 
 
 def reads_facts(rid, table):
@@ -190,7 +206,11 @@ def screen_change(old, new):
         return None if old == new["all"] else "text"
     if old.get("text") != new["text"]:
         return "text"
-    return "facts" if old.get("facts") != new["facts"] else None
+    if "facts2" not in old:
+        # A record written before facts2 (2026-11-24) can't tell a reworded activity from a moved row; it reads as
+        # unchanged once, and the next record stores facts2. A row that really moved in that gap is caught by --all.
+        return None
+    return "facts" if old.get("facts2") != new["facts2"] else None
 
 
 def whole_hash(screen_hashes):
@@ -241,31 +261,67 @@ def work_list(game_dir, card_id, everything=False, skill=SKILL, game=None):
     def want(row, screen, why):
         wanted.setdefault((row, screen), why)
 
+    # LO's stop rule (2026-11-24): after a piece's first reading, a screen whose text changed is asked again only for
+    # its last FAILs (the verdict loop below) and the truth rows on it (TRUTH_ROWS, `+ presence`, `+ sheet`), never
+    # every row: each small fix used to re-open about 100 rows, so the lists grew instead of shrinking (P34 560,
+    # P42 451, P07 448). A screen the record has never seen is asked in full, and a canvas that is mostly new screens
+    # is asked once on "*". The scripts (check.py) still run in full on every build. --all asks everything.
+    per_canvas, new_by_canvas = {}, {}
+    for s in sc:
+        if s != WHOLE:
+            per_canvas.setdefault(s.split(".", 1)[0], set()).add(s)
+    for s in changed:
+        if s not in old_sc:
+            new_by_canvas.setdefault(s.split(".", 1)[0], set()).add(s)
+    # A canvas that is mostly new screens (more than half) is read like a first pass, once on "*" (P34, 1,986 items).
+    rewritten = {cv for cv, ss in new_by_canvas.items() if len(ss) * 2 > len(per_canvas[cv])}
+    for cv in sorted(rewritten):
+        for r in sorted(rows):
+            if where is None or where.get(r, set()) & new_by_canvas[cv]:
+                want(r, WHOLE, f"most of {cv} is new ({len(new_by_canvas[cv])} of {len(per_canvas[cv])} screens)")
     for s in sorted(changed):
+        if s not in old_sc and s.split(".", 1)[0] in rewritten:
+            continue
         for r in sorted(rows):
             if where is None or s in where.get(r, ()):
-                if kind[s] == "facts" and where is not None and not reads_facts(r, table):
-                    continue  # only a fact moved (a schedule, the sheet): this row doesn't read facts
-                why = "screen is new" if s not in old_sc else ("screen changed" if kind[s] == "text" else "a fact changed")
-                want(r, s, why)
+                if s not in old_sc:
+                    want(r, s, "screen is new")
+                elif kind[s] == "text":
+                    if reads_truth(r, table):
+                        want(r, s, "screen changed: truth row")
+                elif reads_facts(r, table):  # every card: a fact change asks only the fact rows
+                    want(r, s, "a fact changed")
     judged = set()
     for v in rec.get("verdicts", []):
         r, s = v["row"], v["screen"]
         judged.add(r)
         if s in gone or (r not in rows and r not in old_rows):
             continue
-        note = where is not None and table.get(r, {}).get("judge") == "note"
+        note = table.get(r, {}).get("judge") == "note"  # from the row's judge column, Does: or not
         if v["verdict"] == "FAIL" and not note:
             want(r, s, "failed last pass")
+        elif v["verdict"] == "FAIL" and kind.get(s) == "text":
+            want(r, s, "failed last pass (a note), its screen changed")  # check whether the fix took
+        elif v["verdict"] == "WAIVED" and kind.get(s) == "text":
+            want(r, s, "waived, its screen changed")  # LO waived the line he read; a new line needs a new look
         elif r in rows and old_rows.get(r) != rows[r]:
             want(r, s, "its rule's text changed")
-        elif s == WHOLE and any(k == "text" for k in kind.values()) and (r in SCENE_WIDE or where is None):
+        elif s == WHOLE and any(x not in old_sc for x in changed) and (r in SCENE_WIDE or where is None):
             want(r, s, "a screen of the scene changed")
         elif (r, s) not in wanted:
             # A note's FAIL is shown in the notes and never holds (reader.md, build.md): it carries like a PASS and
             # comes back only when its screen or its rule changes. A "*" PASS holds on every screen the row fires on. A changed screen it fires on is already asked
             # above, for that screen only; the "*" verdict carries for the rest.
             carried.append(dict(v, carried=True))
+    for i in rec.get("pending", []):
+        if (i["screen"] == WHOLE or i["screen"] in sc) and i["row"] in rows:
+            why = i["why"].replace("still to ask: ", "")
+            # Pending items saved before LO's stop rule were owed because a known screen's text changed; under the
+            # stop rule only the truth rows on it are owed, so the rest carry (P34, P07, 2026-11-24).
+            stale = (why == "screen changed" or (why.startswith("most of ") and " changed (" in why)) \
+                and not reads_truth(i["row"], table)
+            if not stale:
+                want(i["row"], i["screen"], "still to ask: " + why)
     for r in sorted(set(rows) - judged):
         want(r, WHOLE, "never judged")
     items = [{"row": r, "screen": s, "why": w} for (r, s), w in sorted(wanted.items())]
@@ -275,21 +331,32 @@ def work_list(game_dir, card_id, everything=False, skill=SKILL, game=None):
 # ── recording a pass ──────────────────────────────────────────────────────────────────────────────────────
 
 def record(game_dir, card_id, reader_out, skill=SKILL, game=None):
-    """Merge one pass's verdicts into the record. reader_out is {"verdicts": [...], "causes": [...]}.
-    Returns the new record. A verdict not on the work list is refused, so the record can't drift."""
+    """Merge one batch of verdicts into the record. reader_out is {"verdicts": [...], "causes": [...]}.
+    Returns the new record. A verdict not on the work list is refused, so the record can't drift. The batch may be
+    partial: what it doesn't answer is kept as `pending` and asked again next time; the pass number moves on only
+    when the last pass had nothing pending."""
     work = work_list(game_dir, card_id, skill=skill, game=game)
     asked = {(i["row"], i["screen"]) for i in work["items"]}
     rec = load_record(game_dir, card_id) or {}
+    # The work list as it stood when this pass began. A pass recorded in disjoint batches checks every batch against
+    # it, not against today's shrunken list: a "*" item answered on one screen in batch 1 leaves the live list, and
+    # batch 2's verdict for the same row on another screen must still land (P34, 2026-11-24).
+    pass_items = rec.get("pass_items") if rec.get("pending") and rec.get("pass_items") else work["items"]
+    began = {(i["row"], i["screen"]) for i in pass_items}
+    unowed = []
+    this_pass = rec.get("pass", 0) if rec.get("pending") else rec.get("pass", 0) + 1
     table = rules.table(skill)
-    notes_on = row_screens(game_dir, card_id, skill) is not None  # labels apply to a card with Does:
     new = []
     for v in reader_out.get("verdicts", []):
         if v.get("verdict") not in VERDICTS:
             raise ValueError(f"{v.get('row')} on {v.get('screen')}: verdict must be one of {VERDICTS}")
         key = (v.get("row"), v.get("screen", WHOLE))
-        if key not in asked and not (key[1] != WHOLE and (key[0], WHOLE) in asked):
-            raise ValueError(f"{key[0]} on {key[1]} was not on the work list")
-        note = notes_on and table.get(key[0], {}).get("judge") == "note"
+        owed = lambda keys: key in keys or (key[1] != WHOLE and (key[0], WHOLE) in keys)
+        if not owed(asked) and not owed(began):
+            if v.get("verdict") != "FAIL":
+                raise ValueError(f"{key[0]} on {key[1]} was not on the work list")
+            unowed.append(key)  # never drop a FAIL: it is recorded and reported
+        note = table.get(key[0], {}).get("judge") == "note"  # the judge column decides, for every card
         if v["verdict"] == "FAIL" and not v.get("cause") and not note:
             raise ValueError(f"{key[0]} on {key[1]}: a FAIL names its cause")
         if v["verdict"] == "FAIL" and key[1] == WHOLE:
@@ -297,29 +364,67 @@ def record(game_dir, card_id, reader_out, skill=SKILL, game=None):
         new.append({"row": key[0], "screen": key[1], "verdict": v["verdict"], "line": v.get("line", ""),
                     "why": v.get("why", ""), "cause": None if note else v.get("cause"), "note": note,
                     "screen_hash": work["screens"].get(key[1]), "row_hash": work["rows"].get(key[0]),
-                    "carried": False})
+                    "carried": False, "pass": rec.get("pass", 0) if rec.get("pending") else rec.get("pass", 0) + 1})
     answered = {(v["row"], v["screen"]) for v in new}
     # An item asked on "*" and answered on screens counts as answered.
     answered |= {(r, WHOLE) for r, _ in answered}
-    missing = sorted(asked - answered)
-    if missing:
-        raise ValueError(f"{len(missing)} work-list item(s) have no verdict, first: {missing[0]}")
+    # A batch may be partial (a pass can die mid-way): the items it doesn't answer stay pending, and the next
+    # work list asks them again whatever the hashes say (LO, relayed 2026-11-24).
+    # A verdict an earlier batch of this same pass gave is an answer too: a FAIL from batch 1 shows on the live list
+    # as "failed last pass", but this pass has already judged it.
+    answered |= {(v["row"], v["screen"]) for v in rec.get("verdicts", []) if v.get("pass") == this_pass}
+    pending = [i for i in work["items"] if (i["row"], i["screen"]) not in answered]
+    unanswered = {(i["row"], i["screen"]) for i in pending}
     # A carried verdict is replaced only by a new verdict on the same screen, or when its row was asked on "*"
-    # again (then the new verdicts are the whole answer). A "*" PASS survives a new verdict on one screen.
+    # again and answered (then the new verdicts are the whole answer). A "*" PASS survives a new verdict on one
+    # screen. An unanswered item keeps the verdict it had, so a FAIL not yet asked again is still a FAIL.
     redone = {(v["row"], v["screen"]) for v in new}
-    whole_again = {r for r, s in asked if s == WHOLE}
+    whole_again = {r for r, s in asked if s == WHOLE and (r, s) in answered}
     kept = [v for v in work["carried"] if (v["row"], v["screen"]) not in redone and v["row"] not in whole_again]
+    # A verdict on an item still on the live list (not yet asked again, or given by an earlier batch of this pass)
+    # is kept until a new verdict on the same item replaces it: no batch can drop another batch's FAIL.
+    kept += [dict(v, carried=v.get("pass") != this_pass) for v in rec.get("verdicts", [])
+             if (v["row"], v["screen"]) in asked and (v["row"], v["screen"]) not in redone
+             and v["row"] not in whole_again]
     causes = reader_out.get("causes", [])
-    known = {c.get("id") for c in causes}
+    # A later batch of the same pass may name a cause an earlier batch gave.
+    old_causes = {c.get("id"): c for c in rec.get("causes", [])} if rec.get("pending") else {}
+    known = {c.get("id") for c in causes} | set(old_causes)
     for v in new:
         if v["verdict"] == "FAIL" and not v["note"] and v["cause"] not in known:
             raise ValueError(f"cause `{v['cause']}` is not in causes")
-    out = {"piece": card_id, "pass": rec.get("pass", 0) + 1, "screens": work["screens"], "rows": work["rows"],
-           "verdicts": sorted(kept + new, key=lambda v: (v["row"], v["screen"])), "causes": causes}
+    causes = list({**old_causes, **{c.get("id"): c for c in causes}}.values())  # a batch adds to its pass's causes
+    out = {"piece": card_id, "pass": rec.get("pass", 0) + (0 if rec.get("pending") else 1),
+           "screens": work["screens"], "rows": work["rows"],
+           "verdicts": sorted(kept + new, key=lambda v: (v["row"], v["screen"])), "causes": causes,
+           "pending": pending, "asked": len(work["items"]), "answered": len(work["items"]) - len(pending),
+           "pass_items": pass_items if pending else [], "unowed": [list(k) for k in unowed]}
     path = record_path(game_dir, card_id)
     path.parent.mkdir(parents=True, exist_ok=True)
     path.write_text(json.dumps(out, indent=1) + "\n", encoding="utf-8")
     return out
+
+
+def waive(game_dir, card_id, row, screen, words, source):
+    """Turn a held FAIL into WAIVED, in LO's words, with where and when he typed them. Refuses a row that isn't a
+    held FAIL and empty words. A waived row carries, and re-opens only when its screen's text or its rule's text
+    changes (work_list). Why: LO waived P07's release-2 deferrals in chat (2026-11-24), and --record can only stamp
+    rows on the current work list, so four held FAILs stayed FAIL."""
+    if not str(words or "").strip():
+        raise ValueError("a waiver needs LO's own words")
+    if not str(source or "").strip():
+        raise ValueError("a waiver says where and when LO typed it")
+    rec = load_record(game_dir, card_id)
+    held = [v for v in (rec or {}).get("verdicts", []) if v["row"] == row and v["screen"] == screen
+            and v["verdict"] == "FAIL"]
+    if not held:
+        raise ValueError(f"{row} on {screen} is not a held FAIL in {record_path(game_dir, card_id)}")
+    for v in held:
+        v.update(verdict="WAIVED", waived_words=words.strip(), waived_source=source.strip(),
+                 why=f"waived by LO: \"{words.strip()}\" ({source.strip()})")
+    rec["pending"] = [i for i in rec.get("pending", []) if not (i["row"] == row and i["screen"] == screen)]
+    record_path(game_dir, card_id).write_text(json.dumps(rec, indent=1) + "\n", encoding="utf-8")
+    return held[0]
 
 
 def by_cause(rec):
@@ -340,6 +445,18 @@ def by_cause(rec):
 
 def main(argv=None):
     argv = list(sys.argv[1:] if argv is None else argv)
+    if "--waive" in argv:
+        ap = argparse.ArgumentParser(description="Waive a held FAIL in LO's words.")
+        ap.add_argument("game_dir")
+        ap.add_argument("card_id")
+        ap.add_argument("--waive", nargs=2, metavar=("ROW", "SCREEN"), required=True)
+        ap.add_argument("--words", required=True)
+        ap.add_argument("--source", required=True)
+        a = ap.parse_args(argv)
+        v = waive(a.game_dir, a.card_id, a.waive[0], a.waive[1], a.words, a.source)
+        print(f"waived {v['row']} on {v['screen']}: {v['why']}")
+        print(f"NOTES.md: Waived: {v['row']} on {v['screen']} · LO: \"{a.words.strip()}\" ({a.source.strip()})")
+        return 0
     if argv[:1] == ["--record"]:
         ap = argparse.ArgumentParser(description="Record one reader pass.")
         ap.add_argument("game_dir")
@@ -348,6 +465,9 @@ def main(argv=None):
         a = ap.parse_args(argv[1:])
         rec = record(a.game_dir, a.card_id, json.loads(Path(a.verdicts).read_text(encoding="utf-8")))
         fails = sum(1 for v in rec["verdicts"] if v["verdict"] == "FAIL" and not v.get("note"))
+        print(f"recorded {rec['answered']} of {rec['asked']}; {len(rec['pending'])} still to ask")
+        for row, screen in rec.get("unowed", []):
+            print(f"  kept a FAIL that was no longer on the work list: {row} on {screen}")
         print(f"pass {rec['pass']}: {len(rec['verdicts'])} verdicts, {fails} FAIL that hold")
         print("\n".join(by_cause(rec)))
         return 1 if fails else 0

@@ -23,6 +23,7 @@ The card's `Craft:` line cites each one, or says in one line why it skips it. `w
 | C920 | a move costs a few minutes; a bus to town 20 | P13 reader pass 7: the same move inside the house was "(10 min)" on one screen and "(5 min)" on another | the clock moves | reader |
 | C913 | a thing with hours publishes them: a shut activity stays as a dimmed line | — · kept blocking: LO's choice (2026-11-24) | the clock moves | reader |
 | C930 | without `show_when_blocked`, windowed work vanishes out of hours | — | the clock moves | note |
+| L167 | different hours on different days are one row with a `group` condition, never one row per day kind; it greys with `show_when_blocked` and a `cooldown_message` naming the full hours | first_term_lean P10: six café rows, and the weekday row greyed beside the live weekend row | the clock moves | reader + sheet |
 | C914 | a row shows its hours only when the clock alone shut it | — · kept blocking: LO's choice (2026-11-24) | the clock moves | reader |
 | C916 | hours go on what she chooses; an event that happens to her stays hidden when shut | — · kept blocking: LO's choice (2026-11-24) | the clock moves | reader |
 | C915 | people's hours go on the schedule page; places with hours get closed text | — | the plan | note |
@@ -34,13 +35,14 @@ The card's `Craft:` line cites each one, or says in one line why it skips it. `w
 
 ## The engine (cited; `v2.py` is `apps/game_generation/twee_comprehensive/generators/v2.py`)
 
-- `window.advanceTime(minutes)` is the only way the clock moves (v2.py:7010). Nothing sets an hour (C926), so "till close" can't be kept.
-- An exit's time is `time_progression_minutes`, and 3 when it's left out (v2.py:17936) (C927).
+- `window.advanceTime(minutes)` is the only way the clock moves (v2.py:7021). Nothing sets an hour (C926), so "till close" can't be kept.
+- An exit's time is `time_progression_minutes`, and 3 when it's left out (v2.py:17947) (C927).
 - `setup.isCurrentTimeSlot` handles windows past midnight, and an end time left out is start + 60 minutes (v2.py:4770-4790) (C921). A `time_of_day` condition uses the same function (v2.py:5283-5285) (C931).
-- Entering a place spends its `time` cost (`setup.deductLocationCosts`, v2.py:6226-6233), and the nav card shows it as a tag like "30m · 10 Energy" (`setup.getLocationCostTag`, v2.py:6236) (C929). A button's own time shows nowhere unless the label says it.
-- `show_when_blocked` with `cooldown_message` keeps a shut activity on screen as a dimmed line with its message (read at v2.py:15104-15108, drawn at v2.py:6740-6748) (C913, C930). That's only when the clock alone shut it. A row shut by something waiting can't fix (clothes, money, a meter, a flag) greys out with its `locked_text` instead, or stays hidden without one (v2.py:6689-6697; `craft/clothes.md`).
-- A place shut by its hours says "Closed. Opens at …" (`setup.locClosedReason`, v2.py:11772-11779), and its `closed_text` shows at the door (v2.py:11444-11447).
-- People's hours have their own Schedules page (`:: SchedulePage`, v2.py:24399) (C915).
+- Entering a place spends its `time` cost (`setup.deductLocationCosts`, v2.py:6237-6244), and the nav card shows it as a tag like "30m · 10 Energy" (`setup.getLocationCostTag`, v2.py:6247) (C929). A button's own time shows nowhere unless the label says it.
+- `show_when_blocked` with `cooldown_message` keeps a shut activity on screen as a dimmed line with its message (read at v2.py:15115-15119, drawn at v2.py:6751-6759) (C913, C930). That's only when the clock alone shut it. A row shut by something waiting can't fix (clothes, money, a meter, a flag) greys out with its `locked_text` instead, or stays hidden without one (v2.py:6700-6708; `craft/clothes.md`).
+- A place shut by its hours says "Closed. Opens at …" (`setup.locClosedReason`, v2.py:11783-11790), and its `closed_text` shows at the door (v2.py:11455-11458).
+- **A condition item can be a group:** `{ type = "group", logic = "AND"|"OR", items = [...] }`, read with its own logic, recursively; an empty group, or one nested deeper than 3, is false (v2.py:5405-5413). A group made only of clock items counts as the clock, so its row greys with its `cooldown_message` instead of hiding (`setup.onlyTheClockShut`, v2.py:6076). Tests: `apps/game_generation/tests/test_condition_groups.py`.
+- People's hours have their own Schedules page (`:: SchedulePage`, v2.py:24410) (C915).
 - No token prints the current time into prose (C928): a grep of v2.py for `@time` finds none.
 
 ## The measures (re-run 2026-11-22)
@@ -70,6 +72,7 @@ Each rule is marked **measured** or **LO's choice**.
 6. **Durations, never "till X"** (C889, C906, C926). *Measured in the field:* 24 of 84,009 labels name a clock time (C906); the engine only adds minutes.
 7. **A repeatable names a weekday only where a weekday condition makes it true** (C903): "Saturdays" inside a Saturday group is fine; "See you Monday" on a screen any day reaches is not. *LO's choice;* CoT names a weekday 1.43 times per 10,000 words.
 8. **The clock repeats** (C890): a weekly bill, a weekly count, not a deadline. *LO's choice, stated.*
+9. **Different hours on different days are one row with a group** (L167): never one row per day kind. Out of hours it greys once, with `show_when_blocked` and a `cooldown_message` that names the full hours. *The failure:* P10's six café rows, and the weekday row greyed beside the live weekend one, so each button showed twice.
 
 ## Worked example
 
@@ -84,9 +87,33 @@ Buttons: Buy a coffee ($3, 10 min) · Ask about the Help Wanted sign (once) · W
 
 Closed, seen from the street: "Café", dimmed, "Opens at 7am".
 
+**One row, two kinds of day** (rule 9). Roles: the café, its manager. The hours are filler.
+- Button: "Work an hour (60 min, −10 energy)". Weekdays 7am–9pm, weekends 10am–9pm. Out of hours it shows once, greyed: "Work an hour — The manager's behind the counter weekdays from 7am, weekends from 10am."
+
+```toml
+[canvases.trigger]
+show_when_blocked = true
+cooldown_message = "The manager's behind the counter weekdays from 7am, weekends from 10am."
+
+[canvases.trigger.conditions]
+version = "1.0"
+logic = "AND"
+items = [
+  { type = "flag", subject = "player", flag_key = "<hired flag>", operator = "is_true" },
+  { type = "group", logic = "OR", items = [
+    { type = "group", logic = "AND", items = [{ type = "weekday", weekdays = [0, 1, 2, 3, 4] },
+                                              { type = "time_of_day", start_time = "07:00", end_time = "21:00" }] },
+    { type = "group", logic = "AND", items = [{ type = "weekday", weekdays = [5, 6] },
+                                              { type = "time_of_day", start_time = "10:00", end_time = "21:00" }] } ] },
+]
+```
+
+Before she's hired the flag shuts it and it hides; once hired, only the clock can shut it, so it greys. Its sheet row: "weekdays 07:00–21:00 / weekends 10:00–21:00".
+
 ## Not this
 
 - "It's nine in the morning and the café is quiet." A repeatable screen shows at any minute of its window (C900, C902).
 - "Work till close." The engine only adds minutes. Write "Work a shift (4 hours)" (C889, C926).
 - A button with no time on it (C929).
 - A shut place that just disappears. It stays, dimmed, with when it opens (C913, C930).
+- One row per kind of day for the same activity: a weekday "Work an hour" greyed on Saturday beside the live Saturday one (L167). One row, a group.

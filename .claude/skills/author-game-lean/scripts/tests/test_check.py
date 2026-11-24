@@ -45,7 +45,7 @@ def test_planted_scene_nothing_opens_is_red_reach(game):
     p = game / "toml_phases" / "5_scenes.toml"
     p.write_text(p.read_text() + "\n" + canvas("peek", substitution_only="true"))
     (game / "cards" / "p1.md").write_text("PIECE p1\nBuilds: start, kitchen, home, peek\n")
-    approve.approve(game, "p1", "yes")
+    approve.record_approval(game, "p1", "yes")  # a fixture card: not about the card check
     r = results(game)
     assert r["reach"][0] == check.RED and "`peek`" in r["reach"][1][0]
 
@@ -185,7 +185,7 @@ def test_a_card_that_lists_place_person_and_sidebar_is_green(game):
     add_phase(game, '[[locations]]\nid = "gym"\n\n[[npcs]]\nid = "npc_x"\nname = "X"\n\n'
                     '[[sidebar_items]]\ntype = "trait_bar"\ntrait = "energy"\n')
     (game / "cards" / "p1.md").write_text("PIECE p1\nBuilds: start, kitchen, home, gym, npc_x, sidebar:energy\n")
-    approve.approve(game, "p1", "yes")
+    approve.record_approval(game, "p1", "yes")  # a fixture card: not about the card check
     assert results(game)["builds"] == (check.GREEN, [])
 
 

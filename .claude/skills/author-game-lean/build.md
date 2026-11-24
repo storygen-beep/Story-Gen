@@ -8,6 +8,8 @@ Build exactly what the approved card says, nothing more. Then three judges, in o
 
 ## 1 · Build
 
+**One piece built at a time.** While the reader runs on a piece, the next piece may be carded, checked (step 3) and approved, but not built. The reader reads the built game, and a build under it changes what it reads. If the current piece's fixes change a fact the next card uses (a schedule row, a flag, a price), re-check that card and take a new yes (LO, relayed 2026-11-24).
+
 `venv/bin/python .claude/skills/author-game-lean/scripts/build.py games/<slug>`. It refuses a piece with no approval, or whose card changed after the yes (`approvals.json`). It merges, packages the dev build (`--dev --debug`, into `output/`) and runs `check.py` itself. A small call the card didn't make goes in NOTES.md as a ruling, listed to LO at the end.
 
 ## 2 · The scripts (blocking)
@@ -55,6 +57,6 @@ Every few pieces LO plays the dev build in `output/`: "this should happen. Does 
 
 **Done when.**
 - `build.py` ran, and `check.py games/<slug>` is green (not INCOMPLETE).
-- On a scene piece, the reader's work list is empty, or every FAIL left is waived.
+- On a scene piece, the reader's work list is empty, or every FAIL left is waived. Notes are carried and shown, never holding. This is LO's stop rule (2026-11-24): after the first reading, a fix re-asks only its FAILs, the truth rows on the changed screen and any new screen (`reader.md`, After), so the list shrinks to empty.
 - `STATE.md` marks the piece built and checked, with a new `Next step:`.
 - LO saw the reader's table and this piece's rulings.

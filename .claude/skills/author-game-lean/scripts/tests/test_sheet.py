@@ -8,6 +8,7 @@ sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
 import check  # noqa: E402
 import reading  # noqa: E402
 import sheet  # noqa: E402
+import scenes  # noqa: E402
 from tiny_game import make_game  # noqa: E402
 
 MERGED = """
@@ -184,3 +185,47 @@ def test_the_opening_clock_is_exact_and_hand_times_may_drop_the_zero(game):
     assert red_rows(game) == ("green", [])
     card(game, SHEET.replace("start.a | 07:00–07:05", "start.a | 7:00–7:06"))
     assert red_rows(game)[0] == "red"
+
+
+# ── a choice's own clock condition narrows the screens after it (P34: rent inside Mark's menu, 2026-11-24) ──
+
+def menu_game(choices):
+    """A kitchen menu open all week; each choice leads to `rent` with its own conditions."""
+    return {
+        "npcs": [{"id": "npc_mark", "name": "Mark", "schedules": [{"location": "kitchen", "start_time": "00:00",
+                                                                    "end_time": "23:55"}]}],
+        "canvases": [{"id": "menu", "trigger": {"location": "kitchen", "is_repeatable": True},
+                      "nodes": [{"id": "hub", "blocks": [], "exit_block": {"type": "choices", "choices": [
+                          {"text": f"Pay ({i})", "targetType": "node", "nodeId": "rent",
+                           "time_progression_minutes": 5, "conditions": cond} for i, cond in enumerate(choices)]}},
+                                {"id": "rent", "blocks": [{"type": "dialog", "content": "Seventy-five.",
+                                                           "props": {"speaker": "npc", "npcId": "npc_mark"}}]}]}],
+    }
+
+
+SUNDAY_MORNING = {"version": "1.0", "items": [{"type": "weekday", "weekdays": [6]},
+                                              {"type": "time_of_day", "start_time": "08:00", "end_time": "12:00"}]}
+SATURDAY = {"version": "1.0", "items": [{"type": "weekday", "weekdays": [5]},
+                                        {"type": "time_of_day", "start_time": "08:00", "end_time": "12:00"}]}
+
+
+def test_a_sunday_only_choice_gives_its_screen_a_sunday_row():
+    rows = sheet.compute(menu_game([SUNDAY_MORNING]), {"menu"})
+    assert rows["menu.hub"]["clock"] == "any +0"
+    assert rows["menu.rent"]["clock"] == "08:05–12:05 · Sun"
+    assert sheet.norm("clock", "Sun 08:05–12:05") == sheet.norm("clock", rows["menu.rent"]["clock"])
+
+
+def test_two_choices_into_one_screen_give_the_union():
+    clock = sheet.compute(menu_game([SUNDAY_MORNING, SATURDAY]), {"menu"})["menu.rent"]["clock"]
+    want = sheet.norm("clock", "Sat Sun 08:05–12:05")
+    assert sheet.norm("clock", clock) == want
+    assert sheet.norm("clock", "Sun 08:05–12:05") != want
+
+
+def test_presence_narrows_by_the_choice_too():
+    g = menu_game([SUNDAY_MORNING])
+    g["npcs"][0]["schedules"] = [{"location": "kitchen", "weekdays": [6], "start_time": "07:00", "end_time": "13:00"}]
+    assert scenes.check_presence(g) == ("green", [])  # Mark is only there Sunday mornings: the rent line is true
+    g["canvases"][0]["nodes"][0]["exit_block"]["choices"][0]["conditions"] = {}
+    assert scenes.check_presence(g)[0] == "red"  # with no choice condition the line could show any day

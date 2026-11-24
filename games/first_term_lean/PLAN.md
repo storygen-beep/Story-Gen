@@ -188,7 +188,7 @@ Releases add steps, events and people at places that already exist, not new plac
 | 1, the skeleton | every person, place and system; the daily loop; each person's first meeting, in waves; meters shown, none move yet |
 | 2, the house | Ryan, Mark and Laura's next steps; Sunday rent with real costs when short; the meters start moving |
 | 3, college and work | Hale and Nadia; Tom and tips; Zoe's first party; Jake's dates |
-| 4, the street | Vance; goal 1 can end (four Sundays, or Mark's chair) |
+| 4, the street | Vance; goal 1's body route (Mark's chair); the four-Sundays end counts from release 1 (§8i; ENI's call, for LO to review, 2026-11-24) |
 | 5, her name on campus | goal 2 opens; Brooke's threat; the drama part |
 | later | goal 3 (the man at Sunday dinner); short arcs for the named faces; past the top stages, who she does it in front of (WANT, release 41) |
 
@@ -238,7 +238,7 @@ One currency, dollars ($). She starts at $0. No allowance: Laura's money stopped
 
 Income, release 1: the café only, after Tom hires her (P21). Shifts every day (8f): $5 an hour
 plus a flat $2 tips, $22 a shift, said in the scene that offers the work, never on the button (C954).
-A full week (9 shifts) is $198; four or five shifts cover the rent.
+Four shifts, or fifteen single hours, cover the $75 rent (any hour, 8f).
 
 The bill: rent to Mark, every Sunday, on the rent page: $75, then $90 after $300 paid, then $100
 after $900. Each week she trades shifts against class, study and people. What keeps it from going
@@ -335,10 +335,14 @@ Grades: one meter, Grades, 0–100, shown as a letter (F under 40, D, C, B, A fr
 Grades do not move in release 1 (LO 2026-11-21: "nope grades dont move in thius release"). Class
 and study still show the act on screen (reader test 11); no line claims a grade changed.
 
-Café shifts (after P21), every day (LO 2026-11-21: "all week days, weekends can have more
-shifts"): weekdays 2–6pm; Saturday and Sunday 10am–2pm and 3–7pm. 4 hours, 15 energy each.
+Café work (after P21), every day, any hour Tom or Chris is behind the counter (LO 2026-11-24,
+relayed by ENI: "shifts are independent of the classes, she can choose between things, its players
+freedom"; was weekdays 2–6pm and weekend slots, LO 2026-11-21): "Work an hour" (1 hour, 4 energy,
+$5) or "Work a shift" (4 hours, 15 energy, $22). Starts: an hour, weekdays 7am–7:55pm, Saturday
+10am–7:55pm, Sunday 10am–6:55pm; a shift, weekdays 7am–4:55pm, Saturday and Sunday 10am–3:55pm
+(Chris's weekend row ends at 8pm). LO 2026-11-24: shifts are independent of classes.
 Pay (LO "A", 2026-11-21): $5 an hour plus $2 tips, $22 a shift, said in Tom's scene.
-A full week (9 shifts) is $198; four or five shifts cover the rent. A missed shift costs only its
+Four shifts, or fifteen single hours, cover the $75 rent (any hour, 8f). A missed shift costs only its
 pay in release 1.
 
 | place | alone | with a person |
@@ -350,7 +354,7 @@ pay in release 1.
 | Faculty Offices | none alone | See your advisor (Walsh, office hours, after P16) |
 | Cafeteria | Buy lunch ($4, 20 min, +15 energy) | Rosa at the counter |
 | The Quad | Sit on the grass (30 min, +5 energy) | Zoe (P20), Jake (P25) |
-| Café | Work a shift (in its slot) | Tom; Chris behind the counter |
+| Café | Work an hour or a shift (any hour Tom or Chris is in) | Tom; Chris behind the counter |
 
 ### 8g. Reputation and talk
 
@@ -457,7 +461,7 @@ house: weekday mornings 8–12 (Friday has no lectures).
 | Rosa Diaz | Cafeteria counter weekdays 8–4 | 40 |
 | Dean Sterling | faculty corridor weekdays 9–5, behind his closed door | 0 (release 5) |
 
-Her café shifts (weekdays 2–6) clash with office hours, rehearsals and Nadia in the library: money
+Her café hours (any hour, 8f) clash with classes, office hours, rehearsals and Nadia in the library: money
 or people, every weekday afternoon. Hale's later loop (his office after hours) must open 18+ hours a
 week (C159), e.g. Mon–Thu 5–8.
 

@@ -1,0 +1,6205 @@
+{
+ "piece": "P42",
+ "pass": 6,
+ "screens": {
+  "talk_mom.hub": {
+   "text": "a23b0bbfce94db7a",
+   "facts": "da371d87f63ca5a9",
+   "all": "d4256b778c156637"
+  },
+  "talk_mom.talk": {
+   "text": "feb79fad5e3d8649",
+   "facts": "2c74fede91c39514",
+   "all": "989d6f996d9fc275"
+  },
+  "talk_mom.eat": {
+   "text": "cb5b4b6d73033d19",
+   "facts": "a78c81253b9ba872",
+   "all": "1870367b704cb91d"
+  },
+  "mom_living_room.hub": {
+   "text": "2142bb1af79cf4dd",
+   "facts": "7b286d6913c4449b",
+   "all": "7f19adc289b6a802"
+  },
+  "mom_living_room.talk": {
+   "text": "bea6a579cecdd65d",
+   "facts": "cfda3d7c96f6f167",
+   "all": "8019d2454bae538d"
+  },
+  "*": "e93341004e131e5f"
+ },
+ "rows": {
+  "B1": "5276068df1ca6fa9",
+  "B2": "4d9f2ebbce9a39cc",
+  "B3": "4d1fce1c4523b5d4",
+  "B4": "ced37cb0de6e7202",
+  "B5": "efcbd1ac6a95e2f2",
+  "B6": "0e32092e9fe64f2c",
+  "B7": "cef53154cc971fef",
+  "B8": "80d415cf08e0ebfe",
+  "B9": "3b1fcdf549bcc558",
+  "B10": "c1c0e2ac2588a579",
+  "B11": "1e252efd0904a971",
+  "B12": "fd109745c67b71d7",
+  "B13": "aaf6518b64dcce55",
+  "C889": "37967c45d79163fc",
+  "C906": "c257bba6d15edc3f",
+  "C926": "8cd1b7e3576dc7b5",
+  "C900": "a4ef8ce78f554d6b",
+  "C902": "66462bdbadae0c77",
+  "C903": "263890a884329d60",
+  "C904": "999816c6ed6cc232",
+  "C892": "1d8d188451bcb51e",
+  "C910": "c86548143d50a17d",
+  "C929": "33a2ca367c2aac5b",
+  "C897": "16b066aee3c1a937",
+  "C924": "ce540d1e01b7c301",
+  "C920": "3b568acb10d6806b",
+  "C913": "48bd82911a86ecbd",
+  "C930": "97d54d350dd4ee77",
+  "L167": "adf7bb3f8b632ac3",
+  "C914": "5a326c2d5d8a0abd",
+  "C916": "06706eb2d5bad3b5",
+  "C915": "46d8f12824d16c8b",
+  "C921": "19da817e808ac3d6",
+  "C927": "1e009d83817fb566",
+  "C928": "799e1dd153166b6d",
+  "C931": "1b8984f52b99537e",
+  "C890": "3d716de4269fbd6c",
+  "clock#1": "cd89df2f76a7be89",
+  "clock#2": "1a52b17c19333377",
+  "clock#3": "aae8f146c8ec933d",
+  "clock#4": "c33118361d16b379",
+  "clock#5": "95c5edec9e714e7b",
+  "clock#6": "31fd30fb07702bc9",
+  "clock#7": "313c48a91780f62b",
+  "clock#8": "f0c2400d02519978",
+  "clock#9": "5d697f6bcd9f82de",
+  "C1261": "6a661c60639de8be",
+  "C1267": "6bafcadf3d586d5a",
+  "C1249": "604706399d2f1194",
+  "C1250": "8384cc6bcbd67c07",
+  "C1265": "cbf803b180c4fbdd",
+  "C1262": "2946d2fe0b7dc28f",
+  "C1234": "7dc492e03732757e",
+  "L121": "cddfa55c18e5c7b7",
+  "L125": "259dda0a0553e751",
+  "C1280": "a1ce22b0640c6eeb",
+  "L119": "18ef41501e0b23c3",
+  "C1281": "f0ab213c3075f906",
+  "C1284": "d631d4c69f1d3b74",
+  "L120": "22461386046b4605",
+  "C1275": "5c2a05d547732e4b",
+  "C1274": "ca72df83c67acc75",
+  "C1278": "a511d81564cef526",
+  "C1277": "2b934524a49c49e9",
+  "C1238": "af95eb45b0bdc9db",
+  "C1255": "d81893b9077b4b53",
+  "L97": "2bfb9527e76ad93b",
+  "media#1": "3641bf707d9adfce",
+  "media#2": "6fbfd98c2bfee006",
+  "media#3": "8c75b0d488b188e2",
+  "media#4": "03599fc0722690b6",
+  "media#5": "2cf5e3607ccecd4a",
+  "media#6": "3016751837a9b0a0",
+  "media#7": "eff6dc1369755c34",
+  "C618": "cf04982ff36d5fee",
+  "C619": "9abaf79b00480069",
+  "C622": "3a5a94bef3bdb5d2",
+  "C627": "d48908c2e401d9d8",
+  "C625": "6e8364367065f3af",
+  "C626": "9f83b62a4e07e30a",
+  "C630": "eb333b3116c028f2",
+  "C632": "27f3481ce4c3e30c",
+  "C598": "586f13891dfb3b93",
+  "C620": "34fca4a974682444",
+  "C690": "d130cdc296b140e8",
+  "C613": "e449f2e1c7454d6b",
+  "C639": "e4a6334699a304b9",
+  "C640": "fec816e8221cb56c",
+  "C961": "623576cc5d249369",
+  "C954": "a4837b8af6d54bb1",
+  "C447": "e3ca01ba145f4580",
+  "C593": "52e42cdd69c8f10e",
+  "C644": "045102ba2f0a9453",
+  "C596": "217e3c5b84d1e838",
+  "C656": "41c869f069a2b028",
+  "C660": "70b5022d4a858fa1",
+  "C448": "584dada6c379e3d8",
+  "C1340": "a335a4d228798817",
+  "people#1": "3ca322fe98f5dab6",
+  "people#2": "77207820edd1c3a4",
+  "people#3": "5f60eac9fd509c6c",
+  "people#4": "3f52fa27dd3a5bfa",
+  "people#5": "1326d7ac8cba5298",
+  "people#6": "0b522d7eb38d75bb",
+  "people#7": "b03ec1f9649681a0",
+  "people#8": "ba17b4df73559422",
+  "people#9": "a73dd8f1e77941ca",
+  "people#10": "4a994154015ae37d",
+  "C769": "cf7d7a82afabcbbb",
+  "C794": "3281d513b7f90d6e",
+  "C795": "84d5bfb2a701bf90",
+  "C804": "2aa951544edb45db",
+  "L106": "759e6667d7fc3183",
+  "C776": "6088d5531ecff698",
+  "C777": "38b483431fa177b0",
+  "C773": "0825e8443f9180d0",
+  "C758": "6329db1ec04ec3da",
+  "C953": "26f84fb90a0ef795",
+  "C738": "976cd3e099c13e51",
+  "C762": "877801c22bdade00",
+  "L147": "5dea5707be5e7e0a",
+  "C808": "73aff7401d6970a5",
+  "C811": "ded1858e52e3be3a",
+  "C770": "dcc6bbe6fde09083",
+  "C771": "d941995a226da2b4",
+  "C707": "e2898bd02a9e4730",
+  "places#1": "18252966b4327f58",
+  "places#2": "3ab79adc34668b04",
+  "places#3": "56d056c80da49bb6",
+  "places#4": "ada53ed66015c980",
+  "places#5": "90ec575adee9bf74",
+  "places#6": "f2bc5f0f10c64c4b",
+  "places#7": "2a095bf54f175e5e",
+  "places#8": "c3ea8d01465e7298",
+  "places#9": "f4cd9ab5f62bc6fc",
+  "C442": "a2b07f40e1a9e908",
+  "C449": "ac5932d70cd775a1",
+  "C451": "6b0fd679047fc9b8",
+  "C450": "3eb18b4cefbe49d3",
+  "C422": "8933f85010afbef7",
+  "C460": "beb5a109bde77305",
+  "C461": "153b0804e686abae",
+  "L163": "00a617ab9b4e9cd4",
+  "voice#1": "b8e8afcb32208b40",
+  "voice#2": "a40d4073409a2705",
+  "voice#3": "4777d2c1251214c2",
+  "voice#4": "ac2fdd7245f436db",
+  "voice#5": "7bbdd4290054e601",
+  "voice#6": "df1f5dc8b6d21538",
+  "voice#7": "321cc76cff93aadb",
+  "voice#8": "4362249fb5f9616e"
+ },
+ "verdicts": [
+  {
+   "row": "B1",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "Stay in tonight. Just tonight. For me.",
+   "why": "Mom wants her close and told first on every version of her menu (PLAN: to tell her everything, to be close); checked talk_mom, mom_living_room, opening breakfast.",
+   "cause": null,
+   "note": false,
+   "screen_hash": "ad3f6be4b295a67a",
+   "row_hash": "5276068df1ca6fa9",
+   "carried": true,
+   "pass": 5
+  },
+  {
+   "row": "B1",
+   "screen": "mom_living_room.talk",
+   "verdict": "PASS",
+   "line": "Stay in tonight. Just tonight. For me.",
+   "why": "each version has her want: tell me everything, stay in, tell me first.",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "e38ff3dafa65755f",
+    "facts": "cfda3d7c96f6f167",
+    "all": "dd5c534f9a55bb61"
+   },
+   "row_hash": "5276068df1ca6fa9",
+   "carried": true,
+   "pass": 5
+  },
+  {
+   "row": "B1",
+   "screen": "talk_mom.eat",
+   "verdict": "PASS",
+   "line": "Eat. You're too thin.",
+   "why": "she wants to feed her and keep her at the table.",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "cb5b4b6d73033d19",
+    "facts": "a78c81253b9ba872",
+    "all": "1870367b704cb91d"
+   },
+   "row_hash": "5276068df1ca6fa9",
+   "carried": true,
+   "pass": 5
+  },
+  {
+   "row": "B10",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "Mom's in the kitchen. Mark's at the table.",
+   "why": "presence lines by npc_at_location; who_is_where: Mom Kitchen wd 7-8/17-19, we 8-12/17-19, Living Room 19-23.",
+   "cause": null,
+   "note": false,
+   "screen_hash": "ad3f6be4b295a67a",
+   "row_hash": "c1c0e2ac2588a579",
+   "carried": true,
+   "pass": 5
+  },
+  {
+   "row": "B10",
+   "screen": "mom_living_room.talk",
+   "verdict": "PASS",
+   "line": "Mark: \"Some of us are trying to watch this.\" / \"Mark turns the volume up.\"",
+   "why": "Mark version only under npc_mark is_present (weekdays 19-23, Sun 19-23); his hub line has the remote on his knee, so the TV is on. Mark-absent versions show only Saturday 19-23, so \"Next Saturday, you tell me the next part.\" and \"Stay in tonight\" are true when they show; the game starts Monday, so \"They're fine, Mom\" about classes follows real classes. On weekdays Ryan is also in the room, and no line says he isn't.",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "bea6a579cecdd65d",
+    "facts": "cfda3d7c96f6f167",
+    "all": "8019d2454bae538d"
+   },
+   "row_hash": "c1c0e2ac2588a579",
+   "carried": false,
+   "pass": 6
+  },
+  {
+   "row": "B10",
+   "screen": "talk_mom.eat",
+   "verdict": "PASS",
+   "line": "Mom puts a plate of eggs in front of you and sits down with her coffee.",
+   "why": "eggs before 12:00, dinner after; Mark only in the Kitchen mornings, Ryan only evenings, never together; each line behind its presence check.",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "cb5b4b6d73033d19",
+    "facts": "a78c81253b9ba872",
+    "all": "1870367b704cb91d"
+   },
+   "row_hash": "c1c0e2ac2588a579",
+   "carried": true,
+   "pass": 5
+  },
+  {
+   "row": "B10",
+   "screen": "talk_mom.talk",
+   "verdict": "PASS",
+   "line": "Mark: \"She's got somewhere to be, Laura.\" / \"Mark turns a page, louder than he needs to.\"",
+   "why": "Mark version only under npc_mark is_present (weekdays 7-8 some days, Sat 8-10, Sun 8-12, Mom there too); Ryan version only while Ryan is in the Kitchen (weekdays 18-19, weekends 17-19, Mom there); Mark and Ryan never share the Kitchen per who_is_where, so one version shows; \"Did Mark say anything else? About the rent?\" true on every path, since kitchen_rent follows the met_laura choice; his paper is set up on his own Kitchen menu (\"Mark doesn't look up from the paper.\")",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "feb79fad5e3d8649",
+    "facts": "2c74fede91c39514",
+    "all": "989d6f996d9fc275"
+   },
+   "row_hash": "c1c0e2ac2588a579",
+   "carried": false,
+   "pass": 6
+  },
+  {
+   "row": "B11",
+   "screen": "*",
+   "verdict": "N/A",
+   "line": "\u2014",
+   "why": "not a solo button: Mom is on every screen.",
+   "cause": null,
+   "note": false,
+   "screen_hash": "ad3f6be4b295a67a",
+   "row_hash": "1e252efd0904a971",
+   "carried": true,
+   "pass": 5
+  },
+  {
+   "row": "B11",
+   "screen": "mom_living_room.talk",
+   "verdict": "N/A",
+   "line": "\u2014",
+   "why": "not a solo button: Mom is on every screen.",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "e38ff3dafa65755f",
+    "facts": "cfda3d7c96f6f167",
+    "all": "dd5c534f9a55bb61"
+   },
+   "row_hash": "1e252efd0904a971",
+   "carried": true,
+   "pass": 5
+  },
+  {
+   "row": "B11",
+   "screen": "talk_mom.eat",
+   "verdict": "N/A",
+   "line": "\u2014",
+   "why": "not a solo button: Mom is on every screen.",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "cb5b4b6d73033d19",
+    "facts": "a78c81253b9ba872",
+    "all": "1870367b704cb91d"
+   },
+   "row_hash": "1e252efd0904a971",
+   "carried": true,
+   "pass": 5
+  },
+  {
+   "row": "B12",
+   "screen": "*",
+   "verdict": "N/A",
+   "line": "\u2014",
+   "why": "not a charged scene; release 1 gives Laura warmth only (PLAN \u00a77).",
+   "cause": null,
+   "note": false,
+   "screen_hash": "ad3f6be4b295a67a",
+   "row_hash": "fd109745c67b71d7",
+   "carried": true,
+   "pass": 5
+  },
+  {
+   "row": "B12",
+   "screen": "mom_living_room.talk",
+   "verdict": "N/A",
+   "line": "\u2014",
+   "why": "not a charged scene; release 1 gives Laura warmth only (PLAN \u00a77).",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "e38ff3dafa65755f",
+    "facts": "cfda3d7c96f6f167",
+    "all": "dd5c534f9a55bb61"
+   },
+   "row_hash": "fd109745c67b71d7",
+   "carried": true,
+   "pass": 5
+  },
+  {
+   "row": "B12",
+   "screen": "talk_mom.eat",
+   "verdict": "N/A",
+   "line": "\u2014",
+   "why": "not a charged scene; release 1 gives Laura warmth only (PLAN \u00a77).",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "cb5b4b6d73033d19",
+    "facts": "a78c81253b9ba872",
+    "all": "1870367b704cb91d"
+   },
+   "row_hash": "fd109745c67b71d7",
+   "carried": true,
+   "pass": 5
+  },
+  {
+   "row": "B13",
+   "screen": "*",
+   "verdict": "N/A",
+   "line": "\u2014",
+   "why": "no shower, dressing, towel, bed or mirror.",
+   "cause": null,
+   "note": false,
+   "screen_hash": "ad3f6be4b295a67a",
+   "row_hash": "aaf6518b64dcce55",
+   "carried": true,
+   "pass": 5
+  },
+  {
+   "row": "B13",
+   "screen": "mom_living_room.talk",
+   "verdict": "N/A",
+   "line": "\u2014",
+   "why": "no shower, dressing, towel, bed or mirror.",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "e38ff3dafa65755f",
+    "facts": "cfda3d7c96f6f167",
+    "all": "dd5c534f9a55bb61"
+   },
+   "row_hash": "aaf6518b64dcce55",
+   "carried": true,
+   "pass": 5
+  },
+  {
+   "row": "B13",
+   "screen": "talk_mom.eat",
+   "verdict": "N/A",
+   "line": "\u2014",
+   "why": "no shower, dressing, towel, bed or mirror.",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "cb5b4b6d73033d19",
+    "facts": "a78c81253b9ba872",
+    "all": "1870367b704cb91d"
+   },
+   "row_hash": "aaf6518b64dcce55",
+   "carried": true,
+   "pass": 5
+  },
+  {
+   "row": "B2",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "When he's gone, you tell me everything.",
+   "why": "one step past the opening's 'you tell me first': now she sits her down, asks for confidences, asks her to stay in.",
+   "cause": null,
+   "note": false,
+   "screen_hash": "ad3f6be4b295a67a",
+   "row_hash": "4d9f2ebbce9a39cc",
+   "carried": true,
+   "pass": 5
+  },
+  {
+   "row": "B2",
+   "screen": "mom_living_room.talk",
+   "verdict": "PASS",
+   "line": "You sit. She talks about nothing, and her hand stays on your knee the whole time.",
+   "why": "goes past the opening's breakfast: she sits her down on the couch and holds her there.",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "e38ff3dafa65755f",
+    "facts": "cfda3d7c96f6f167",
+    "all": "dd5c534f9a55bb61"
+   },
+   "row_hash": "4d9f2ebbce9a39cc",
+   "carried": true,
+   "pass": 5
+  },
+  {
+   "row": "B2",
+   "screen": "talk_mom.eat",
+   "verdict": "PASS",
+   "line": "She squeezes your hand under the table, like she's saving something for later.",
+   "why": "a sit-down meal with her, a touch past the opening's 'There's toast'.",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "cb5b4b6d73033d19",
+    "facts": "a78c81253b9ba872",
+    "all": "1870367b704cb91d"
+   },
+   "row_hash": "4d9f2ebbce9a39cc",
+   "carried": true,
+   "pass": 5
+  },
+  {
+   "row": "B3",
+   "screen": "mom_living_room.talk",
+   "verdict": "PASS",
+   "line": "Next Saturday, you tell me the next part. / Be home tomorrow night too. Promise me. / Whatever you're up to, you tell me first. / When it's just us, you tell me everything.",
+   "why": "every version ends on a line pointing forward; Mark-free private talk exists (kitchen weekdays 17-18), so 'just us' is reachable.",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "e38ff3dafa65755f",
+    "facts": "cfda3d7c96f6f167",
+    "all": "dd5c534f9a55bb61"
+   },
+   "row_hash": "4d1fce1c4523b5d4",
+   "carried": true,
+   "pass": 5
+  },
+  {
+   "row": "B3",
+   "screen": "talk_mom.eat",
+   "verdict": "PASS",
+   "line": "She squeezes your hand under the table, like she's saving something for later.",
+   "why": "last line points at a later moment with her (PLAN: secrets both ways).",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "cb5b4b6d73033d19",
+    "facts": "a78c81253b9ba872",
+    "all": "1870367b704cb91d"
+   },
+   "row_hash": "4d1fce1c4523b5d4",
+   "carried": true,
+   "pass": 5
+  },
+  {
+   "row": "B3",
+   "screen": "talk_mom.hub",
+   "verdict": "PASS",
+   "line": "Talk (5 min) \u00b7 Eat with her (20 min, +15 energy) \u00b7 Leave",
+   "why": "Menu names what comes next.",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "a23b0bbfce94db7a",
+    "facts": "da371d87f63ca5a9",
+    "all": "d4256b778c156637"
+   },
+   "row_hash": "4d1fce1c4523b5d4",
+   "carried": true,
+   "pass": 5
+  },
+  {
+   "row": "B3",
+   "screen": "talk_mom.talk",
+   "verdict": "PASS",
+   "line": "When he's gone, you tell me everything.",
+   "why": "Every kitchen talk version ends pointing ahead (come to me first / when he's gone / later, when it's quiet).",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "76c2b753ca02bdf9",
+    "facts": "2c74fede91c39514",
+    "all": "32a7ed94d018e53c"
+   },
+   "row_hash": "4d1fce1c4523b5d4",
+   "carried": true,
+   "pass": 5
+  },
+  {
+   "row": "B4",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "I promise, Mom. / Just tonight, then.",
+   "why": "her spoken answers at stage 0 on every version; feelings on her body; no italics.",
+   "cause": null,
+   "note": false,
+   "screen_hash": "ad3f6be4b295a67a",
+   "row_hash": "ced37cb0de6e7202",
+   "carried": true,
+   "pass": 5
+  },
+  {
+   "row": "B4",
+   "screen": "mom_living_room.talk",
+   "verdict": "PASS",
+   "line": "They're fine, Mom. Really. Mostly. / Tomorrow, Mom. Promise.",
+   "why": "stage-0 reactions, spoken aloud and on the body; no act chosen; no italics.",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "e38ff3dafa65755f",
+    "facts": "cfda3d7c96f6f167",
+    "all": "dd5c534f9a55bb61"
+   },
+   "row_hash": "ced37cb0de6e7202",
+   "carried": true,
+   "pass": 5
+  },
+  {
+   "row": "B4",
+   "screen": "talk_mom.eat",
+   "verdict": "PASS",
+   "line": "I'm eating, Mom. See? ... Your throat goes tight.",
+   "why": "her answer spoken, her feeling on her body.",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "cb5b4b6d73033d19",
+    "facts": "a78c81253b9ba872",
+    "all": "1870367b704cb91d"
+   },
+   "row_hash": "ced37cb0de6e7202",
+   "carried": true,
+   "pass": 5
+  },
+  {
+   "row": "B5",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "She listens to all of it, and her shoulders come down.",
+   "why": "Mom reacts to her on every screen.",
+   "cause": null,
+   "note": false,
+   "screen_hash": "ad3f6be4b295a67a",
+   "row_hash": "efcbd1ac6a95e2f2",
+   "carried": true,
+   "pass": 5
+  },
+  {
+   "row": "B5",
+   "screen": "mom_living_room.talk",
+   "verdict": "PASS",
+   "line": "She laughs, but she's watching your face.",
+   "why": "Mom reacts to what she says.",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "e38ff3dafa65755f",
+    "facts": "cfda3d7c96f6f167",
+    "all": "dd5c534f9a55bb61"
+   },
+   "row_hash": "efcbd1ac6a95e2f2",
+   "carried": true,
+   "pass": 5
+  },
+  {
+   "row": "B5",
+   "screen": "talk_mom.eat",
+   "verdict": "PASS",
+   "line": "She watches you take the first bite.",
+   "why": "Mom watches; Mark and Ryan get their own line when there.",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "cb5b4b6d73033d19",
+    "facts": "a78c81253b9ba872",
+    "all": "1870367b704cb91d"
+   },
+   "row_hash": "efcbd1ac6a95e2f2",
+   "carried": true,
+   "pass": 5
+  },
+  {
+   "row": "B6",
+   "screen": "*",
+   "verdict": "N/A",
+   "line": "Done",
+   "why": "no offer on these screens: one exit, a talk and a meal; the menu's Leave is the way out.",
+   "cause": null,
+   "note": false,
+   "screen_hash": "ad3f6be4b295a67a",
+   "row_hash": "0e32092e9fe64f2c",
+   "carried": true,
+   "pass": 5
+  },
+  {
+   "row": "B6",
+   "screen": "mom_living_room.talk",
+   "verdict": "N/A",
+   "line": "Done",
+   "why": "no offer on these screens: one exit, a talk and a meal; the menu's Leave is the way out.",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "e38ff3dafa65755f",
+    "facts": "cfda3d7c96f6f167",
+    "all": "dd5c534f9a55bb61"
+   },
+   "row_hash": "0e32092e9fe64f2c",
+   "carried": true,
+   "pass": 5
+  },
+  {
+   "row": "B6",
+   "screen": "talk_mom.eat",
+   "verdict": "N/A",
+   "line": "Done",
+   "why": "no offer on these screens: one exit, a talk and a meal; the menu's Leave is the way out.",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "cb5b4b6d73033d19",
+    "facts": "a78c81253b9ba872",
+    "all": "1870367b704cb91d"
+   },
+   "row_hash": "0e32092e9fe64f2c",
+   "carried": true,
+   "pass": 5
+  },
+  {
+   "row": "B7",
+   "screen": "*",
+   "verdict": "N/A",
+   "line": "\u2014",
+   "why": "no explicit beat.",
+   "cause": null,
+   "note": false,
+   "screen_hash": "ad3f6be4b295a67a",
+   "row_hash": "cef53154cc971fef",
+   "carried": true,
+   "pass": 5
+  },
+  {
+   "row": "B7",
+   "screen": "mom_living_room.talk",
+   "verdict": "N/A",
+   "line": "\u2014",
+   "why": "no explicit beat.",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "e38ff3dafa65755f",
+    "facts": "cfda3d7c96f6f167",
+    "all": "dd5c534f9a55bb61"
+   },
+   "row_hash": "cef53154cc971fef",
+   "carried": true,
+   "pass": 5
+  },
+  {
+   "row": "B7",
+   "screen": "talk_mom.eat",
+   "verdict": "N/A",
+   "line": "\u2014",
+   "why": "no explicit beat.",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "cb5b4b6d73033d19",
+    "facts": "a78c81253b9ba872",
+    "all": "1870367b704cb91d"
+   },
+   "row_hash": "cef53154cc971fef",
+   "carried": true,
+   "pass": 5
+  },
+  {
+   "row": "B8",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "Eat with her (20 min, +15 energy)",
+   "why": "+15 a meal matches PLAN \u00a78b; 20 min and meals_today shared with loop_eat; Talk 5 min on Done; no garment named in talk/eat prose; borrowed-clothes lines on the hub sit behind equipped conditions.",
+   "cause": null,
+   "note": false,
+   "screen_hash": "ad3f6be4b295a67a",
+   "row_hash": "80d415cf08e0ebfe",
+   "carried": true,
+   "pass": 5
+  },
+  {
+   "row": "B8",
+   "screen": "mom_living_room.talk",
+   "verdict": "PASS",
+   "line": "Done: time_progression_minutes = 5",
+   "why": "Same: 5 min on Done matches the label; no garment named.",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "bea6a579cecdd65d",
+    "facts": "cfda3d7c96f6f167",
+    "all": "8019d2454bae538d"
+   },
+   "row_hash": "80d415cf08e0ebfe",
+   "carried": false,
+   "pass": 6
+  },
+  {
+   "row": "B8",
+   "screen": "talk_mom.eat",
+   "verdict": "PASS",
+   "line": "Eat with her (20 min, +15 energy)",
+   "why": "Done: +15 energy (clamp), meals_today +1, 20 min \u2014 matches the label and PLAN.",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "cb5b4b6d73033d19",
+    "facts": "a78c81253b9ba872",
+    "all": "1870367b704cb91d"
+   },
+   "row_hash": "80d415cf08e0ebfe",
+   "carried": true,
+   "pass": 5
+  },
+  {
+   "row": "B8",
+   "screen": "talk_mom.talk",
+   "verdict": "PASS",
+   "line": "Done: time_progression_minutes = 5",
+   "why": "\"Talk (5 min)\" on the hub, and the 5 minutes are spent on Done; no garment is named on the talk screen.",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "feb79fad5e3d8649",
+    "facts": "2c74fede91c39514",
+    "all": "989d6f996d9fc275"
+   },
+   "row_hash": "80d415cf08e0ebfe",
+   "carried": false,
+   "pass": 6
+  },
+  {
+   "row": "B9",
+   "screen": "*",
+   "verdict": "N/A",
+   "line": "\u2014",
+   "why": "PLAN's companion is Zoe and rival the classmate; Mom is neither.",
+   "cause": null,
+   "note": false,
+   "screen_hash": "ad3f6be4b295a67a",
+   "row_hash": "3b1fcdf549bcc558",
+   "carried": true,
+   "pass": 5
+  },
+  {
+   "row": "B9",
+   "screen": "mom_living_room.talk",
+   "verdict": "N/A",
+   "line": "\u2014",
+   "why": "PLAN's companion is Zoe and rival the classmate; Mom is neither.",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "e38ff3dafa65755f",
+    "facts": "cfda3d7c96f6f167",
+    "all": "dd5c534f9a55bb61"
+   },
+   "row_hash": "3b1fcdf549bcc558",
+   "carried": true,
+   "pass": 5
+  },
+  {
+   "row": "B9",
+   "screen": "talk_mom.eat",
+   "verdict": "N/A",
+   "line": "\u2014",
+   "why": "PLAN's companion is Zoe and rival the classmate; Mom is neither.",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "cb5b4b6d73033d19",
+    "facts": "a78c81253b9ba872",
+    "all": "1870367b704cb91d"
+   },
+   "row_hash": "3b1fcdf549bcc558",
+   "carried": true,
+   "pass": 5
+  },
+  {
+   "row": "C1234",
+   "screen": "*",
+   "verdict": "N/A",
+   "line": "\u2014",
+   "why": "no clip anywhere in the two canvases; the two hub pictures are stills.",
+   "cause": null,
+   "note": false,
+   "screen_hash": "ad3f6be4b295a67a",
+   "row_hash": "7dc492e03732757e",
+   "carried": true,
+   "pass": 5
+  },
+  {
+   "row": "C1234",
+   "screen": "mom_living_room.talk",
+   "verdict": "N/A",
+   "line": "\u2014",
+   "why": "no media on this screen.",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "e38ff3dafa65755f",
+    "facts": "cfda3d7c96f6f167",
+    "all": "dd5c534f9a55bb61"
+   },
+   "row_hash": "7dc492e03732757e",
+   "carried": true,
+   "pass": 5
+  },
+  {
+   "row": "C1234",
+   "screen": "talk_mom.eat",
+   "verdict": "N/A",
+   "line": "\u2014",
+   "why": "no media on this screen.",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "cb5b4b6d73033d19",
+    "facts": "a78c81253b9ba872",
+    "all": "1870367b704cb91d"
+   },
+   "row_hash": "7dc492e03732757e",
+   "carried": true,
+   "pass": 5
+  },
+  {
+   "row": "C1238",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "A woman of 41 in a cardigan over a blouse, at a kitchen counter with a mug, looking up.",
+   "why": "matches 'She looks up at you' in both kitchen presence lines; the couch picture fits both living-room lines.",
+   "cause": null,
+   "note": false,
+   "screen_hash": "ad3f6be4b295a67a",
+   "row_hash": "af95eb45b0bdc9db",
+   "carried": true,
+   "pass": 5
+  },
+  {
+   "row": "C1238",
+   "screen": "mom_living_room.talk",
+   "verdict": "N/A",
+   "line": "\u2014",
+   "why": "no picture on the talk screen.",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "e38ff3dafa65755f",
+    "facts": "cfda3d7c96f6f167",
+    "all": "dd5c534f9a55bb61"
+   },
+   "row_hash": "af95eb45b0bdc9db",
+   "carried": true,
+   "pass": 5
+  },
+  {
+   "row": "C1238",
+   "screen": "talk_mom.eat",
+   "verdict": "N/A",
+   "line": "\u2014",
+   "why": "no picture on the eat screen.",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "cb5b4b6d73033d19",
+    "facts": "a78c81253b9ba872",
+    "all": "1870367b704cb91d"
+   },
+   "row_hash": "af95eb45b0bdc9db",
+   "carried": true,
+   "pass": 5
+  },
+  {
+   "row": "C1249",
+   "screen": "*",
+   "verdict": "N/A",
+   "line": "\u2014",
+   "why": "note row; no place picture here.",
+   "cause": null,
+   "note": false,
+   "screen_hash": "ad3f6be4b295a67a",
+   "row_hash": "604706399d2f1194",
+   "carried": true,
+   "pass": 5
+  },
+  {
+   "row": "C1249",
+   "screen": "mom_living_room.talk",
+   "verdict": "N/A",
+   "line": "\u2014",
+   "why": "note row; no place picture here.",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "e38ff3dafa65755f",
+    "facts": "cfda3d7c96f6f167",
+    "all": "dd5c534f9a55bb61"
+   },
+   "row_hash": "604706399d2f1194",
+   "carried": true,
+   "pass": 5
+  },
+  {
+   "row": "C1249",
+   "screen": "talk_mom.eat",
+   "verdict": "N/A",
+   "line": "\u2014",
+   "why": "note row; no place picture here.",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "cb5b4b6d73033d19",
+    "facts": "a78c81253b9ba872",
+    "all": "1870367b704cb91d"
+   },
+   "row_hash": "604706399d2f1194",
+   "carried": true,
+   "pass": 5
+  },
+  {
+   "row": "C1250",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "Mom's on the couch with her feet under her, the TV on low.",
+   "why": "her lines and picture are on her own menu, not the room card.",
+   "cause": null,
+   "note": false,
+   "screen_hash": "ad3f6be4b295a67a",
+   "row_hash": "8384cc6bcbd67c07",
+   "carried": true,
+   "pass": 5
+  },
+  {
+   "row": "C1250",
+   "screen": "mom_living_room.talk",
+   "verdict": "PASS",
+   "line": "Done",
+   "why": "talk screen carries talk, no room text.",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "e38ff3dafa65755f",
+    "facts": "cfda3d7c96f6f167",
+    "all": "dd5c534f9a55bb61"
+   },
+   "row_hash": "8384cc6bcbd67c07",
+   "carried": true,
+   "pass": 5
+  },
+  {
+   "row": "C1250",
+   "screen": "talk_mom.eat",
+   "verdict": "PASS",
+   "line": "Mom dishes up two plates of dinner and sits across from you.",
+   "why": "on her menu, not the room card.",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "cb5b4b6d73033d19",
+    "facts": "a78c81253b9ba872",
+    "all": "1870367b704cb91d"
+   },
+   "row_hash": "8384cc6bcbd67c07",
+   "carried": true,
+   "pass": 5
+  },
+  {
+   "row": "C1255",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "pool_dir = everyday/mom_kitchen_t0 / everyday/mom_living_t0",
+   "why": "each pool_dir used by one block only (grep).",
+   "cause": null,
+   "note": false,
+   "screen_hash": "ad3f6be4b295a67a",
+   "row_hash": "d81893b9077b4b53",
+   "carried": true,
+   "pass": 5
+  },
+  {
+   "row": "C1255",
+   "screen": "mom_living_room.talk",
+   "verdict": "N/A",
+   "line": "\u2014",
+   "why": "no media on this screen.",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "e38ff3dafa65755f",
+    "facts": "cfda3d7c96f6f167",
+    "all": "dd5c534f9a55bb61"
+   },
+   "row_hash": "d81893b9077b4b53",
+   "carried": true,
+   "pass": 5
+  },
+  {
+   "row": "C1255",
+   "screen": "talk_mom.eat",
+   "verdict": "N/A",
+   "line": "\u2014",
+   "why": "no media on this screen.",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "cb5b4b6d73033d19",
+    "facts": "a78c81253b9ba872",
+    "all": "1870367b704cb91d"
+   },
+   "row_hash": "d81893b9077b4b53",
+   "carried": true,
+   "pass": 5
+  },
+  {
+   "row": "C1261",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "A woman of 41 in a cardigan on a living room couch",
+   "why": "the person's one picture on her menu, where the player looks at her.",
+   "cause": null,
+   "note": false,
+   "screen_hash": "ad3f6be4b295a67a",
+   "row_hash": "6a661c60639de8be",
+   "carried": true,
+   "pass": 5
+  },
+  {
+   "row": "C1261",
+   "screen": "mom_living_room.talk",
+   "verdict": "PASS",
+   "line": "\u2014",
+   "why": "no spot spent on the talk screen.",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "e38ff3dafa65755f",
+    "facts": "cfda3d7c96f6f167",
+    "all": "dd5c534f9a55bb61"
+   },
+   "row_hash": "6a661c60639de8be",
+   "carried": true,
+   "pass": 5
+  },
+  {
+   "row": "C1261",
+   "screen": "talk_mom.eat",
+   "verdict": "PASS",
+   "line": "\u2014",
+   "why": "no spot spent on the meal.",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "cb5b4b6d73033d19",
+    "facts": "a78c81253b9ba872",
+    "all": "1870367b704cb91d"
+   },
+   "row_hash": "6a661c60639de8be",
+   "carried": true,
+   "pass": 5
+  },
+  {
+   "row": "C1262",
+   "screen": "*",
+   "verdict": "N/A",
+   "line": "\u2014",
+   "why": "no body moment.",
+   "cause": null,
+   "note": false,
+   "screen_hash": "ad3f6be4b295a67a",
+   "row_hash": "2946d2fe0b7dc28f",
+   "carried": true,
+   "pass": 5
+  },
+  {
+   "row": "C1262",
+   "screen": "mom_living_room.talk",
+   "verdict": "N/A",
+   "line": "\u2014",
+   "why": "no body moment.",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "e38ff3dafa65755f",
+    "facts": "cfda3d7c96f6f167",
+    "all": "dd5c534f9a55bb61"
+   },
+   "row_hash": "2946d2fe0b7dc28f",
+   "carried": true,
+   "pass": 5
+  },
+  {
+   "row": "C1262",
+   "screen": "talk_mom.eat",
+   "verdict": "N/A",
+   "line": "\u2014",
+   "why": "no body moment.",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "cb5b4b6d73033d19",
+    "facts": "a78c81253b9ba872",
+    "all": "1870367b704cb91d"
+   },
+   "row_hash": "2946d2fe0b7dc28f",
+   "carried": true,
+   "pass": 5
+  },
+  {
+   "row": "C1265",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "\u2014",
+   "why": "picture on her menu only (C596 exception); talk and eat screens none.",
+   "cause": null,
+   "note": false,
+   "screen_hash": "ad3f6be4b295a67a",
+   "row_hash": "cbf803b180c4fbdd",
+   "carried": true,
+   "pass": 5
+  },
+  {
+   "row": "C1265",
+   "screen": "mom_living_room.talk",
+   "verdict": "PASS",
+   "line": "\u2014",
+   "why": "talk screen under her menu has none, not a new moment.",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "e38ff3dafa65755f",
+    "facts": "cfda3d7c96f6f167",
+    "all": "dd5c534f9a55bb61"
+   },
+   "row_hash": "cbf803b180c4fbdd",
+   "carried": true,
+   "pass": 5
+  },
+  {
+   "row": "C1265",
+   "screen": "talk_mom.eat",
+   "verdict": "PASS",
+   "line": "\u2014",
+   "why": "meal under her menu has none.",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "cb5b4b6d73033d19",
+    "facts": "a78c81253b9ba872",
+    "all": "1870367b704cb91d"
+   },
+   "row_hash": "cbf803b180c4fbdd",
+   "carried": true,
+   "pass": 5
+  },
+  {
+   "row": "C1267",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "\u2014",
+   "why": "one picture, of her, where the words can't show her face.",
+   "cause": null,
+   "note": false,
+   "screen_hash": "ad3f6be4b295a67a",
+   "row_hash": "6bafcadf3d586d5a",
+   "carried": true,
+   "pass": 5
+  },
+  {
+   "row": "C1267",
+   "screen": "mom_living_room.talk",
+   "verdict": "PASS",
+   "line": "\u2014",
+   "why": "nothing to see the words don't give; no spot.",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "e38ff3dafa65755f",
+    "facts": "cfda3d7c96f6f167",
+    "all": "dd5c534f9a55bb61"
+   },
+   "row_hash": "6bafcadf3d586d5a",
+   "carried": true,
+   "pass": 5
+  },
+  {
+   "row": "C1267",
+   "screen": "talk_mom.eat",
+   "verdict": "PASS",
+   "line": "\u2014",
+   "why": "same; no spot.",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "cb5b4b6d73033d19",
+    "facts": "a78c81253b9ba872",
+    "all": "1870367b704cb91d"
+   },
+   "row_hash": "6bafcadf3d586d5a",
+   "carried": true,
+   "pass": 5
+  },
+  {
+   "row": "C1274",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "everyday/mom_kitchen_t0",
+   "why": "_t0 everyday, still.",
+   "cause": null,
+   "note": false,
+   "screen_hash": "ad3f6be4b295a67a",
+   "row_hash": "ca72df83c67acc75",
+   "carried": true,
+   "pass": 5
+  },
+  {
+   "row": "C1274",
+   "screen": "mom_living_room.talk",
+   "verdict": "N/A",
+   "line": "\u2014",
+   "why": "no media.",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "e38ff3dafa65755f",
+    "facts": "cfda3d7c96f6f167",
+    "all": "dd5c534f9a55bb61"
+   },
+   "row_hash": "ca72df83c67acc75",
+   "carried": true,
+   "pass": 5
+  },
+  {
+   "row": "C1274",
+   "screen": "talk_mom.eat",
+   "verdict": "N/A",
+   "line": "\u2014",
+   "why": "no media.",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "cb5b4b6d73033d19",
+    "facts": "a78c81253b9ba872",
+    "all": "1870367b704cb91d"
+   },
+   "row_hash": "ca72df83c67acc75",
+   "carried": true,
+   "pass": 5
+  },
+  {
+   "row": "C1275",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "looking up / feet under her",
+   "why": "held poses, stills, no gif.",
+   "cause": null,
+   "note": false,
+   "screen_hash": "ad3f6be4b295a67a",
+   "row_hash": "5c2a05d547732e4b",
+   "carried": true,
+   "pass": 5
+  },
+  {
+   "row": "C1275",
+   "screen": "mom_living_room.talk",
+   "verdict": "N/A",
+   "line": "\u2014",
+   "why": "no media.",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "e38ff3dafa65755f",
+    "facts": "cfda3d7c96f6f167",
+    "all": "dd5c534f9a55bb61"
+   },
+   "row_hash": "5c2a05d547732e4b",
+   "carried": true,
+   "pass": 5
+  },
+  {
+   "row": "C1275",
+   "screen": "talk_mom.eat",
+   "verdict": "N/A",
+   "line": "\u2014",
+   "why": "no media.",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "cb5b4b6d73033d19",
+    "facts": "a78c81253b9ba872",
+    "all": "1870367b704cb91d"
+   },
+   "row_hash": "5c2a05d547732e4b",
+   "carried": true,
+   "pass": 5
+  },
+  {
+   "row": "C1277",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "at a kitchen counter / on a living room couch",
+   "why": "the place is named in each picture.",
+   "cause": null,
+   "note": false,
+   "screen_hash": "ad3f6be4b295a67a",
+   "row_hash": "2b934524a49c49e9",
+   "carried": true,
+   "pass": 5
+  },
+  {
+   "row": "C1277",
+   "screen": "mom_living_room.talk",
+   "verdict": "N/A",
+   "line": "\u2014",
+   "why": "no media.",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "e38ff3dafa65755f",
+    "facts": "cfda3d7c96f6f167",
+    "all": "dd5c534f9a55bb61"
+   },
+   "row_hash": "2b934524a49c49e9",
+   "carried": true,
+   "pass": 5
+  },
+  {
+   "row": "C1277",
+   "screen": "talk_mom.eat",
+   "verdict": "N/A",
+   "line": "\u2014",
+   "why": "no media.",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "cb5b4b6d73033d19",
+    "facts": "a78c81253b9ba872",
+    "all": "1870367b704cb91d"
+   },
+   "row_hash": "2b934524a49c49e9",
+   "carried": true,
+   "pass": 5
+  },
+  {
+   "row": "C1278",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "A woman of 41",
+   "why": "age given; matches PLAN.",
+   "cause": null,
+   "note": false,
+   "screen_hash": "ad3f6be4b295a67a",
+   "row_hash": "a511d81564cef526",
+   "carried": true,
+   "pass": 5
+  },
+  {
+   "row": "C1278",
+   "screen": "mom_living_room.talk",
+   "verdict": "N/A",
+   "line": "\u2014",
+   "why": "no media.",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "e38ff3dafa65755f",
+    "facts": "cfda3d7c96f6f167",
+    "all": "dd5c534f9a55bb61"
+   },
+   "row_hash": "a511d81564cef526",
+   "carried": true,
+   "pass": 5
+  },
+  {
+   "row": "C1278",
+   "screen": "talk_mom.eat",
+   "verdict": "N/A",
+   "line": "\u2014",
+   "why": "no media.",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "cb5b4b6d73033d19",
+    "facts": "a78c81253b9ba872",
+    "all": "1870367b704cb91d"
+   },
+   "row_hash": "a511d81564cef526",
+   "carried": true,
+   "pass": 5
+  },
+  {
+   "row": "C1280",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "pool = 1",
+   "why": "a person's everyday picture: 1.",
+   "cause": null,
+   "note": false,
+   "screen_hash": "ad3f6be4b295a67a",
+   "row_hash": "a1ce22b0640c6eeb",
+   "carried": true,
+   "pass": 5
+  },
+  {
+   "row": "C1280",
+   "screen": "mom_living_room.talk",
+   "verdict": "N/A",
+   "line": "\u2014",
+   "why": "no media.",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "e38ff3dafa65755f",
+    "facts": "cfda3d7c96f6f167",
+    "all": "dd5c534f9a55bb61"
+   },
+   "row_hash": "a1ce22b0640c6eeb",
+   "carried": true,
+   "pass": 5
+  },
+  {
+   "row": "C1280",
+   "screen": "talk_mom.eat",
+   "verdict": "N/A",
+   "line": "\u2014",
+   "why": "no media.",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "cb5b4b6d73033d19",
+    "facts": "a78c81253b9ba872",
+    "all": "1870367b704cb91d"
+   },
+   "row_hash": "a1ce22b0640c6eeb",
+   "carried": true,
+   "pass": 5
+  },
+  {
+   "row": "C1281",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "A woman of 41 ... looking up.",
+   "why": "her alone, nobody looking at her in the frame.",
+   "cause": null,
+   "note": false,
+   "screen_hash": "ad3f6be4b295a67a",
+   "row_hash": "f0ab213c3075f906",
+   "carried": true,
+   "pass": 5
+  },
+  {
+   "row": "C1281",
+   "screen": "mom_living_room.talk",
+   "verdict": "N/A",
+   "line": "\u2014",
+   "why": "no media.",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "e38ff3dafa65755f",
+    "facts": "cfda3d7c96f6f167",
+    "all": "dd5c534f9a55bb61"
+   },
+   "row_hash": "f0ab213c3075f906",
+   "carried": true,
+   "pass": 5
+  },
+  {
+   "row": "C1281",
+   "screen": "talk_mom.eat",
+   "verdict": "N/A",
+   "line": "\u2014",
+   "why": "no media.",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "cb5b4b6d73033d19",
+    "facts": "a78c81253b9ba872",
+    "all": "1870367b704cb91d"
+   },
+   "row_hash": "f0ab213c3075f906",
+   "carried": true,
+   "pass": 5
+  },
+  {
+   "row": "C1284",
+   "screen": "*",
+   "verdict": "N/A",
+   "line": "\u2014",
+   "why": "no walk-in.",
+   "cause": null,
+   "note": false,
+   "screen_hash": "ad3f6be4b295a67a",
+   "row_hash": "d631d4c69f1d3b74",
+   "carried": true,
+   "pass": 5
+  },
+  {
+   "row": "C1284",
+   "screen": "mom_living_room.talk",
+   "verdict": "N/A",
+   "line": "\u2014",
+   "why": "no walk-in.",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "e38ff3dafa65755f",
+    "facts": "cfda3d7c96f6f167",
+    "all": "dd5c534f9a55bb61"
+   },
+   "row_hash": "d631d4c69f1d3b74",
+   "carried": true,
+   "pass": 5
+  },
+  {
+   "row": "C1284",
+   "screen": "talk_mom.eat",
+   "verdict": "N/A",
+   "line": "\u2014",
+   "why": "no walk-in.",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "cb5b4b6d73033d19",
+    "facts": "a78c81253b9ba872",
+    "all": "1870367b704cb91d"
+   },
+   "row_hash": "d631d4c69f1d3b74",
+   "carried": true,
+   "pass": 5
+  },
+  {
+   "row": "C1340",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "Talk (5 min) \u2014 you've already talked today.",
+   "why": "her face opens her menu in both rooms; Talk and Eat inside it, once a day by flags; menu never locks; no room button; no +1 by LO's release-1 call (PLAN \u00a78a).",
+   "cause": null,
+   "note": false,
+   "screen_hash": "ad3f6be4b295a67a",
+   "row_hash": "a335a4d228798817",
+   "carried": true,
+   "pass": 5
+  },
+  {
+   "row": "C1340",
+   "screen": "mom_living_room.talk",
+   "verdict": "PASS",
+   "line": "Done",
+   "why": "Talk lives inside her living-room menu and returns to the room.",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "e38ff3dafa65755f",
+    "facts": "cfda3d7c96f6f167",
+    "all": "dd5c534f9a55bb61"
+   },
+   "row_hash": "a335a4d228798817",
+   "carried": true,
+   "pass": 5
+  },
+  {
+   "row": "C1340",
+   "screen": "talk_mom.eat",
+   "verdict": "PASS",
+   "line": "Eat with her (20 min, +15 energy)",
+   "why": "the meal with her is inside her menu, not a room button.",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "cb5b4b6d73033d19",
+    "facts": "a78c81253b9ba872",
+    "all": "1870367b704cb91d"
+   },
+   "row_hash": "a335a4d228798817",
+   "carried": true,
+   "pass": 5
+  },
+  {
+   "row": "C422",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "Talk (5 min) \u00b7 Eat with her (20 min, +15 energy) \u00b7 Leave",
+   "why": "labels say what clicking does and costs.",
+   "cause": null,
+   "note": false,
+   "screen_hash": "ad3f6be4b295a67a",
+   "row_hash": "8933f85010afbef7",
+   "carried": true,
+   "pass": 5
+  },
+  {
+   "row": "C422",
+   "screen": "mom_living_room.talk",
+   "verdict": "PASS",
+   "line": "Done",
+   "why": "plain.",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "e38ff3dafa65755f",
+    "facts": "cfda3d7c96f6f167",
+    "all": "dd5c534f9a55bb61"
+   },
+   "row_hash": "8933f85010afbef7",
+   "carried": true,
+   "pass": 5
+  },
+  {
+   "row": "C422",
+   "screen": "talk_mom.eat",
+   "verdict": "PASS",
+   "line": "Eat with her (20 min, +15 energy) \u2014 not again today.",
+   "why": "plain label and plain greyed reason.",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "cb5b4b6d73033d19",
+    "facts": "a78c81253b9ba872",
+    "all": "1870367b704cb91d"
+   },
+   "row_hash": "8933f85010afbef7",
+   "carried": true,
+   "pass": 5
+  },
+  {
+   "row": "C442",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "She looks up at you, then at him.",
+   "why": "says what happens.",
+   "cause": null,
+   "note": false,
+   "screen_hash": "ad3f6be4b295a67a",
+   "row_hash": "a2b07f40e1a9e908",
+   "carried": true,
+   "pass": 5
+  },
+  {
+   "row": "C442",
+   "screen": "mom_living_room.talk",
+   "verdict": "PASS",
+   "line": "her hand stays on your knee the whole time",
+   "why": "plain.",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "e38ff3dafa65755f",
+    "facts": "cfda3d7c96f6f167",
+    "all": "dd5c534f9a55bb61"
+   },
+   "row_hash": "a2b07f40e1a9e908",
+   "carried": true,
+   "pass": 5
+  },
+  {
+   "row": "C442",
+   "screen": "talk_mom.eat",
+   "verdict": "PASS",
+   "line": "She squeezes your hand under the table",
+   "why": "the act is said plainly; the simile is her read of it, not a stand-in.",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "cb5b4b6d73033d19",
+    "facts": "a78c81253b9ba872",
+    "all": "1870367b704cb91d"
+   },
+   "row_hash": "a2b07f40e1a9e908",
+   "carried": true,
+   "pass": 5
+  },
+  {
+   "row": "C447",
+   "screen": "mom_living_room.talk",
+   "verdict": "PASS",
+   "line": "Sit with me a minute, baby.",
+   "why": "Mom's manner (baby, asks to be told) held.",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "e38ff3dafa65755f",
+    "facts": "cfda3d7c96f6f167",
+    "all": "dd5c534f9a55bb61"
+   },
+   "row_hash": "e3ca01ba145f4580",
+   "carried": true,
+   "pass": 5
+  },
+  {
+   "row": "C447",
+   "screen": "talk_mom.eat",
+   "verdict": "PASS",
+   "line": "And don't tell me you ate already. I know you.",
+   "why": "her fussing warmth held.",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "cb5b4b6d73033d19",
+    "facts": "a78c81253b9ba872",
+    "all": "1870367b704cb91d"
+   },
+   "row_hash": "e3ca01ba145f4580",
+   "carried": true,
+   "pass": 5
+  },
+  {
+   "row": "C447",
+   "screen": "talk_mom.hub",
+   "verdict": "PASS",
+   "line": "She looks up at you, then at him.",
+   "why": "Soft, watchful, wary of Mark.",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "a23b0bbfce94db7a",
+    "facts": "da371d87f63ca5a9",
+    "all": "d4256b778c156637"
+   },
+   "row_hash": "e3ca01ba145f4580",
+   "carried": true,
+   "pass": 5
+  },
+  {
+   "row": "C447",
+   "screen": "talk_mom.talk",
+   "verdict": "PASS",
+   "line": "Sit with me a minute, baby. Just a minute.",
+   "why": "Manner held: protective, waits till Mark's gone.",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "76c2b753ca02bdf9",
+    "facts": "2c74fede91c39514",
+    "all": "32a7ed94d018e53c"
+   },
+   "row_hash": "e3ca01ba145f4580",
+   "carried": true,
+   "pass": 5
+  },
+  {
+   "row": "C448",
+   "screen": "*",
+   "verdict": "N/A",
+   "line": "\u2014",
+   "why": "not a first meeting: Mom is met in the opening.",
+   "cause": null,
+   "note": false,
+   "screen_hash": "ad3f6be4b295a67a",
+   "row_hash": "584dada6c379e3d8",
+   "carried": true,
+   "pass": 5
+  },
+  {
+   "row": "C448",
+   "screen": "mom_living_room.talk",
+   "verdict": "N/A",
+   "line": "\u2014",
+   "why": "not a first meeting: Mom is met in the opening.",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "e38ff3dafa65755f",
+    "facts": "cfda3d7c96f6f167",
+    "all": "dd5c534f9a55bb61"
+   },
+   "row_hash": "584dada6c379e3d8",
+   "carried": true,
+   "pass": 5
+  },
+  {
+   "row": "C448",
+   "screen": "talk_mom.eat",
+   "verdict": "N/A",
+   "line": "\u2014",
+   "why": "not a first meeting: Mom is met in the opening.",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "cb5b4b6d73033d19",
+    "facts": "a78c81253b9ba872",
+    "all": "1870367b704cb91d"
+   },
+   "row_hash": "584dada6c379e3d8",
+   "carried": true,
+   "pass": 5
+  },
+  {
+   "row": "C449",
+   "screen": "*",
+   "verdict": "N/A",
+   "line": "\u2014",
+   "why": "nothing sexual shows.",
+   "cause": null,
+   "note": false,
+   "screen_hash": "ad3f6be4b295a67a",
+   "row_hash": "ac5932d70cd775a1",
+   "carried": true,
+   "pass": 5
+  },
+  {
+   "row": "C449",
+   "screen": "mom_living_room.talk",
+   "verdict": "N/A",
+   "line": "\u2014",
+   "why": "nothing sexual shows.",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "e38ff3dafa65755f",
+    "facts": "cfda3d7c96f6f167",
+    "all": "dd5c534f9a55bb61"
+   },
+   "row_hash": "ac5932d70cd775a1",
+   "carried": true,
+   "pass": 5
+  },
+  {
+   "row": "C449",
+   "screen": "talk_mom.eat",
+   "verdict": "N/A",
+   "line": "\u2014",
+   "why": "nothing sexual shows.",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "cb5b4b6d73033d19",
+    "facts": "a78c81253b9ba872",
+    "all": "1870367b704cb91d"
+   },
+   "row_hash": "ac5932d70cd775a1",
+   "carried": true,
+   "pass": 5
+  },
+  {
+   "row": "C450",
+   "screen": "mom_living_room.talk",
+   "verdict": "PASS",
+   "line": "Be home tomorrow night too. Promise me.",
+   "why": "each version ends on a hook.",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "e38ff3dafa65755f",
+    "facts": "cfda3d7c96f6f167",
+    "all": "dd5c534f9a55bb61"
+   },
+   "row_hash": "3eb18b4cefbe49d3",
+   "carried": true,
+   "pass": 5
+  },
+  {
+   "row": "C450",
+   "screen": "talk_mom.eat",
+   "verdict": "PASS",
+   "line": "like she's saving something for later.",
+   "why": "ends pointing at later.",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "cb5b4b6d73033d19",
+    "facts": "a78c81253b9ba872",
+    "all": "1870367b704cb91d"
+   },
+   "row_hash": "3eb18b4cefbe49d3",
+   "carried": true,
+   "pass": 5
+  },
+  {
+   "row": "C450",
+   "screen": "talk_mom.talk",
+   "verdict": "PASS",
+   "line": "Later, when it's quiet, you tell me about your week.",
+   "why": "Each version ends forward.",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "76c2b753ca02bdf9",
+    "facts": "2c74fede91c39514",
+    "all": "32a7ed94d018e53c"
+   },
+   "row_hash": "3eb18b4cefbe49d3",
+   "carried": true,
+   "pass": 5
+  },
+  {
+   "row": "C451",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "Mark's in his chair, the remote on his knee.",
+   "why": "concrete detail.",
+   "cause": null,
+   "note": false,
+   "screen_hash": "ad3f6be4b295a67a",
+   "row_hash": "6b0fd679047fc9b8",
+   "carried": true,
+   "pass": 5
+  },
+  {
+   "row": "C451",
+   "screen": "mom_living_room.talk",
+   "verdict": "PASS",
+   "line": "She pats the couch.",
+   "why": "concrete.",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "e38ff3dafa65755f",
+    "facts": "cfda3d7c96f6f167",
+    "all": "dd5c534f9a55bb61"
+   },
+   "row_hash": "6b0fd679047fc9b8",
+   "carried": true,
+   "pass": 5
+  },
+  {
+   "row": "C451",
+   "screen": "talk_mom.eat",
+   "verdict": "PASS",
+   "line": "a plate of eggs ... her coffee ... his paper ... the counter",
+   "why": "concrete.",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "cb5b4b6d73033d19",
+    "facts": "a78c81253b9ba872",
+    "all": "1870367b704cb91d"
+   },
+   "row_hash": "6b0fd679047fc9b8",
+   "carried": true,
+   "pass": 5
+  },
+  {
+   "row": "C460",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "Mom's on the couch. Mark's in his chair",
+   "why": "each presence claim behind npc_at_location; who_is_where agrees.",
+   "cause": null,
+   "note": false,
+   "screen_hash": "ad3f6be4b295a67a",
+   "row_hash": "beb5a109bde77305",
+   "carried": true,
+   "pass": 5
+  },
+  {
+   "row": "C460",
+   "screen": "mom_living_room.talk",
+   "verdict": "PASS",
+   "line": "Laura: \"Then watch it, Mark.\"",
+   "why": "Every claim is true on every visit (see B10); the Saturday-only versions carry the Saturday and tonight lines.",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "bea6a579cecdd65d",
+    "facts": "cfda3d7c96f6f167",
+    "all": "8019d2454bae538d"
+   },
+   "row_hash": "beb5a109bde77305",
+   "carried": false,
+   "pass": 6
+  },
+  {
+   "row": "C460",
+   "screen": "talk_mom.eat",
+   "verdict": "PASS",
+   "line": "Mark eats without looking up from his paper.",
+   "why": "Mark only mornings (wd 7-8, we 8-12), Ryan only evenings; time groups split eggs/dinner; no past claimed.",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "cb5b4b6d73033d19",
+    "facts": "a78c81253b9ba872",
+    "all": "1870367b704cb91d"
+   },
+   "row_hash": "beb5a109bde77305",
+   "carried": true,
+   "pass": 5
+  },
+  {
+   "row": "C460",
+   "screen": "talk_mom.talk",
+   "verdict": "PASS",
+   "line": "Laura: \"Then she's got a minute first.\"",
+   "why": "Every claim is true on every minute it can show (see B10): who is there is gated by npc_at_location and matches the rows; the rent past comes from the opening on every path.",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "feb79fad5e3d8649",
+    "facts": "2c74fede91c39514",
+    "all": "989d6f996d9fc275"
+   },
+   "row_hash": "beb5a109bde77305",
+   "carried": false,
+   "pass": 6
+  },
+  {
+   "row": "C461",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "I was eighteen once, you know. I remember.",
+   "why": "dialogue fits Laura's entry (warmth, wants her nearer).",
+   "cause": null,
+   "note": false,
+   "screen_hash": "ad3f6be4b295a67a",
+   "row_hash": "153b0804e686abae",
+   "carried": true,
+   "pass": 5
+  },
+  {
+   "row": "C461",
+   "screen": "mom_living_room.talk",
+   "verdict": "PASS",
+   "line": "Mark: \"Some of us are trying to watch this.\"",
+   "why": "Mark grumbling at the TV and Laura pushing back fit their plan entries (Laura: to be close; Mark at the TV in his chair).",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "bea6a579cecdd65d",
+    "facts": "cfda3d7c96f6f167",
+    "all": "8019d2454bae538d"
+   },
+   "row_hash": "153b0804e686abae",
+   "carried": false,
+   "pass": 6
+  },
+  {
+   "row": "C461",
+   "screen": "talk_mom.eat",
+   "verdict": "PASS",
+   "line": "Mark eats without looking up from his paper.",
+   "why": "texture that can't clash (eggs, coffee, his paper, the counter); Mom's 'You're too thin' fits her warmth entry (PLAN \u00a73)",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "cb5b4b6d73033d19",
+    "facts": "a78c81253b9ba872",
+    "all": "1870367b704cb91d"
+   },
+   "row_hash": "153b0804e686abae",
+   "carried": true,
+   "pass": 5
+  },
+  {
+   "row": "C461",
+   "screen": "talk_mom.talk",
+   "verdict": "PASS",
+   "line": "Ryan: \"I'm getting them. I'm getting them.\" / Laura: \"There's always dessert for you.\"",
+   "why": "Texture that can't clash (plates, dessert, a page turned) and dialogue that fits the plan: Laura wants her close, Mark is about her money and wants her out of the way.",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "feb79fad5e3d8649",
+    "facts": "2c74fede91c39514",
+    "all": "989d6f996d9fc275"
+   },
+   "row_hash": "153b0804e686abae",
+   "carried": false,
+   "pass": 6
+  },
+  {
+   "row": "C593",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "Sit with me a minute, baby.",
+   "why": "'baby' is Mom's alone across the TOML (grep: only npc_laura lines); Mark has 'kid'",
+   "cause": null,
+   "note": false,
+   "screen_hash": "ad3f6be4b295a67a",
+   "row_hash": "52e42cdd69c8f10e",
+   "carried": true,
+   "pass": 5
+  },
+  {
+   "row": "C593",
+   "screen": "talk_mom.eat",
+   "verdict": "PASS",
+   "line": "Eat. You're too thin.",
+   "why": "no other person's term of address on the meal; Mom's 'baby' held elsewhere on her menu and not borrowed by anyone",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "cb5b4b6d73033d19",
+    "facts": "a78c81253b9ba872",
+    "all": "1870367b704cb91d"
+   },
+   "row_hash": "52e42cdd69c8f10e",
+   "carried": true,
+   "pass": 5
+  },
+  {
+   "row": "C596",
+   "screen": "mom_living_room.talk",
+   "verdict": "PASS",
+   "line": "hub: presence line, then image pool everyday/mom_living_t0; talk: 42-51 words, 61-76% spoken, Done only",
+   "why": "Picture on the menu after the presence line, none on the talk; five Living Room talks run 50/51/42/47/42 words, 61-76% spoken, one exit.",
+   "cause": null,
+   "note": true,
+   "screen_hash": {
+    "text": "bea6a579cecdd65d",
+    "facts": "cfda3d7c96f6f167",
+    "all": "8019d2454bae538d"
+   },
+   "row_hash": "217e3c5b84d1e838",
+   "carried": false,
+   "pass": 6
+  },
+  {
+   "row": "C596",
+   "screen": "talk_mom.eat",
+   "verdict": "PASS",
+   "line": "Mom puts a plate of eggs in front of you and sits down with her coffee.",
+   "why": "no picture under the menu (her one picture is on the hub, after the presence line), one exit (Done); the meal is not the Talk screen, so the 55-word/two-thirds target doesn't bind it",
+   "cause": null,
+   "note": true,
+   "screen_hash": {
+    "text": "cb5b4b6d73033d19",
+    "facts": "a78c81253b9ba872",
+    "all": "1870367b704cb91d"
+   },
+   "row_hash": "217e3c5b84d1e838",
+   "carried": true,
+   "pass": 5
+  },
+  {
+   "row": "C596",
+   "screen": "talk_mom.hub",
+   "verdict": "PASS",
+   "line": "everyday/mom_kitchen_t0",
+   "why": "Her one picture right after the presence line on her menu.",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "a23b0bbfce94db7a",
+    "facts": "da371d87f63ca5a9",
+    "all": "d4256b778c156637"
+   },
+   "row_hash": "217e3c5b84d1e838",
+   "carried": true,
+   "pass": 5
+  },
+  {
+   "row": "C596",
+   "screen": "talk_mom.talk",
+   "verdict": "PASS",
+   "line": "hub: presence line, then image pool everyday/mom_kitchen_t0; talk: 40-48 words, 59-82% spoken, Done only",
+   "why": "Her one picture sits on her menu right after the presence line; the talk screen has no picture; the three Kitchen talks run 46/48/40 words, 59%/71%/82% spoken, one exit: about 55 words, about two-thirds spoken.",
+   "cause": null,
+   "note": true,
+   "screen_hash": {
+    "text": "feb79fad5e3d8649",
+    "facts": "2c74fede91c39514",
+    "all": "989d6f996d9fc275"
+   },
+   "row_hash": "217e3c5b84d1e838",
+   "carried": false,
+   "pass": 6
+  },
+  {
+   "row": "C598",
+   "screen": "*",
+   "verdict": "N/A",
+   "line": "\u2014",
+   "why": "no goal card shows on talk_mom or mom_living_room",
+   "cause": null,
+   "note": false,
+   "screen_hash": "ad3f6be4b295a67a",
+   "row_hash": "586f13891dfb3b93",
+   "carried": true,
+   "pass": 5
+  },
+  {
+   "row": "C598",
+   "screen": "talk_mom.eat",
+   "verdict": "N/A",
+   "line": "\u2014",
+   "why": "no goal card on the meal screen",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "cb5b4b6d73033d19",
+    "facts": "a78c81253b9ba872",
+    "all": "1870367b704cb91d"
+   },
+   "row_hash": "586f13891dfb3b93",
+   "carried": true,
+   "pass": 5
+  },
+  {
+   "row": "C613",
+   "screen": "*",
+   "verdict": "N/A",
+   "line": "\u2014",
+   "why": "nothing sexual shows on Mom's menus",
+   "cause": null,
+   "note": true,
+   "screen_hash": "ad3f6be4b295a67a",
+   "row_hash": "e449f2e1c7454d6b",
+   "carried": true,
+   "pass": 5
+  },
+  {
+   "row": "C613",
+   "screen": "talk_mom.eat",
+   "verdict": "N/A",
+   "line": "\u2014",
+   "why": "nothing sexual on the meal",
+   "cause": null,
+   "note": true,
+   "screen_hash": {
+    "text": "cb5b4b6d73033d19",
+    "facts": "a78c81253b9ba872",
+    "all": "1870367b704cb91d"
+   },
+   "row_hash": "e449f2e1c7454d6b",
+   "carried": true,
+   "pass": 5
+  },
+  {
+   "row": "C618",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "items = [{ ... flag_key = \"met_laura\", operator = \"is_true\" }]",
+   "why": "both hubs sit behind met_laura, set by the opening's meeting (every opening path sets it)",
+   "cause": null,
+   "note": true,
+   "screen_hash": "ad3f6be4b295a67a",
+   "row_hash": "cf04982ff36d5fee",
+   "carried": true,
+   "pass": 5
+  },
+  {
+   "row": "C618",
+   "screen": "talk_mom.eat",
+   "verdict": "PASS",
+   "line": "Eat with her (20 min, +15 energy)",
+   "why": "reached only from the hub behind met_laura",
+   "cause": null,
+   "note": true,
+   "screen_hash": {
+    "text": "cb5b4b6d73033d19",
+    "facts": "a78c81253b9ba872",
+    "all": "1870367b704cb91d"
+   },
+   "row_hash": "cf04982ff36d5fee",
+   "carried": true,
+   "pass": 5
+  },
+  {
+   "row": "C619",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "flagEffects = [{ flag = \"met_laura\", op = \"set\" }]",
+   "why": "per-person met flag; Laura is someone she lives with, the rule's own exception to 'nobody met at turn one'",
+   "cause": null,
+   "note": true,
+   "screen_hash": "ad3f6be4b295a67a",
+   "row_hash": "9abaf79b00480069",
+   "carried": true,
+   "pass": 5
+  },
+  {
+   "row": "C619",
+   "screen": "talk_mom.eat",
+   "verdict": "PASS",
+   "line": "Eat with her (20 min, +15 energy)",
+   "why": "same met flag gates the meal",
+   "cause": null,
+   "note": true,
+   "screen_hash": {
+    "text": "cb5b4b6d73033d19",
+    "facts": "a78c81253b9ba872",
+    "all": "1870367b704cb91d"
+   },
+   "row_hash": "9abaf79b00480069",
+   "carried": true,
+   "pass": 5
+  },
+  {
+   "row": "C620",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "Mom's in the kitchen. Mark's at the table.",
+   "why": "her face needs met_laura and requires_npc; Mark and Ryan are named only inside npc_at_location is_present groups, and both are met on every opening path before met_laura can matter",
+   "cause": null,
+   "note": true,
+   "screen_hash": "ad3f6be4b295a67a",
+   "row_hash": "34fca4a974682444",
+   "carried": true,
+   "pass": 5
+  },
+  {
+   "row": "C620",
+   "screen": "talk_mom.eat",
+   "verdict": "PASS",
+   "line": "Ryan eats standing at the counter.",
+   "why": "Mark and Ryan named only behind is_present for home_kitchen; who_is_where puts Ryan there weekdays 18-19, weekends 17-19, Mark weekday 7-8, Sat 8-10, Sun 8-12",
+   "cause": null,
+   "note": true,
+   "screen_hash": {
+    "text": "cb5b4b6d73033d19",
+    "facts": "a78c81253b9ba872",
+    "all": "1870367b704cb91d"
+   },
+   "row_hash": "34fca4a974682444",
+   "carried": true,
+   "pass": 5
+  },
+  {
+   "row": "C622",
+   "screen": "*",
+   "verdict": "N/A",
+   "line": "\u2014",
+   "why": "the meeting is the opening's (P13); these hubs hold no first contact",
+   "cause": null,
+   "note": true,
+   "screen_hash": "ad3f6be4b295a67a",
+   "row_hash": "3a5a94bef3bdb5d2",
+   "carried": true,
+   "pass": 5
+  },
+  {
+   "row": "C622",
+   "screen": "talk_mom.eat",
+   "verdict": "N/A",
+   "line": "\u2014",
+   "why": "same",
+   "cause": null,
+   "note": true,
+   "screen_hash": {
+    "text": "cb5b4b6d73033d19",
+    "facts": "a78c81253b9ba872",
+    "all": "1870367b704cb91d"
+   },
+   "row_hash": "3a5a94bef3bdb5d2",
+   "carried": true,
+   "pass": 5
+  },
+  {
+   "row": "C625",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "Mom's on the couch with her feet under her, the TV on low.",
+   "why": "everyone on these screens is met before they show; relation 'Mom' throughout",
+   "cause": null,
+   "note": true,
+   "screen_hash": "ad3f6be4b295a67a",
+   "row_hash": "6e8364367065f3af",
+   "carried": true,
+   "pass": 5
+  },
+  {
+   "row": "C625",
+   "screen": "mom_living_room.talk",
+   "verdict": "PASS",
+   "line": "Come sit by me, baby. Just for a minute.",
+   "why": "Mom and Mark both met before the canvas can show",
+   "cause": null,
+   "note": true,
+   "screen_hash": {
+    "text": "e38ff3dafa65755f",
+    "facts": "cfda3d7c96f6f167",
+    "all": "dd5c534f9a55bb61"
+   },
+   "row_hash": "6e8364367065f3af",
+   "carried": true,
+   "pass": 5
+  },
+  {
+   "row": "C625",
+   "screen": "talk_mom.eat",
+   "verdict": "PASS",
+   "line": "Mark eats without looking up from his paper.",
+   "why": "Mark and Ryan named after their meetings",
+   "cause": null,
+   "note": true,
+   "screen_hash": {
+    "text": "cb5b4b6d73033d19",
+    "facts": "a78c81253b9ba872",
+    "all": "1870367b704cb91d"
+   },
+   "row_hash": "6e8364367065f3af",
+   "carried": true,
+   "pass": 5
+  },
+  {
+   "row": "C626",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "Mom's in the kitchen.",
+   "why": "met before any of these screens; names used",
+   "cause": null,
+   "note": true,
+   "screen_hash": "ad3f6be4b295a67a",
+   "row_hash": "9f83b62a4e07e30a",
+   "carried": true,
+   "pass": 5
+  },
+  {
+   "row": "C626",
+   "screen": "mom_living_room.talk",
+   "verdict": "PASS",
+   "line": "She doesn't look at Mark.",
+   "why": "named, met",
+   "cause": null,
+   "note": true,
+   "screen_hash": {
+    "text": "e38ff3dafa65755f",
+    "facts": "cfda3d7c96f6f167",
+    "all": "dd5c534f9a55bb61"
+   },
+   "row_hash": "9f83b62a4e07e30a",
+   "carried": true,
+   "pass": 5
+  },
+  {
+   "row": "C626",
+   "screen": "talk_mom.eat",
+   "verdict": "PASS",
+   "line": "Ryan eats standing at the counter.",
+   "why": "named, met",
+   "cause": null,
+   "note": true,
+   "screen_hash": {
+    "text": "cb5b4b6d73033d19",
+    "facts": "a78c81253b9ba872",
+    "all": "1870367b704cb91d"
+   },
+   "row_hash": "9f83b62a4e07e30a",
+   "carried": true,
+   "pass": 5
+  },
+  {
+   "row": "C627",
+   "screen": "*",
+   "verdict": "N/A",
+   "line": "\u2014",
+   "why": "no met flag is set on these canvases; met_laura is P13's",
+   "cause": null,
+   "note": true,
+   "screen_hash": "ad3f6be4b295a67a",
+   "row_hash": "d48908c2e401d9d8",
+   "carried": true,
+   "pass": 5
+  },
+  {
+   "row": "C627",
+   "screen": "mom_living_room.talk",
+   "verdict": "N/A",
+   "line": "\u2014",
+   "why": "no met flag set here",
+   "cause": null,
+   "note": true,
+   "screen_hash": {
+    "text": "e38ff3dafa65755f",
+    "facts": "cfda3d7c96f6f167",
+    "all": "dd5c534f9a55bb61"
+   },
+   "row_hash": "d48908c2e401d9d8",
+   "carried": true,
+   "pass": 5
+  },
+  {
+   "row": "C627",
+   "screen": "talk_mom.eat",
+   "verdict": "N/A",
+   "line": "\u2014",
+   "why": "no met flag set here",
+   "cause": null,
+   "note": true,
+   "screen_hash": {
+    "text": "cb5b4b6d73033d19",
+    "facts": "a78c81253b9ba872",
+    "all": "1870367b704cb91d"
+   },
+   "row_hash": "d48908c2e401d9d8",
+   "carried": true,
+   "pass": 5
+  },
+  {
+   "row": "C630",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "name = \"Mom\" / text = \"Your mom, 41. She married Mark three years ago.\"",
+   "why": "her face reads Laura and the prose says Mom; Mark and Ryan carry 'step-father'/'step-brother' on the People page and in the opening",
+   "cause": null,
+   "note": false,
+   "screen_hash": "ad3f6be4b295a67a",
+   "row_hash": "eb333b3116c028f2",
+   "carried": true,
+   "pass": 5
+  },
+  {
+   "row": "C630",
+   "screen": "mom_living_room.talk",
+   "verdict": "PASS",
+   "line": "Tomorrow, Mom. Promise.",
+   "why": "Laura as speaker, Mom in the prose: both",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "e38ff3dafa65755f",
+    "facts": "cfda3d7c96f6f167",
+    "all": "dd5c534f9a55bb61"
+   },
+   "row_hash": "eb333b3116c028f2",
+   "carried": true,
+   "pass": 5
+  },
+  {
+   "row": "C630",
+   "screen": "talk_mom.eat",
+   "verdict": "PASS",
+   "line": "Eat. You're too thin.",
+   "why": "Laura as speaker, Mom in the prose",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "cb5b4b6d73033d19",
+    "facts": "a78c81253b9ba872",
+    "all": "1870367b704cb91d"
+   },
+   "row_hash": "eb333b3116c028f2",
+   "carried": true,
+   "pass": 5
+  },
+  {
+   "row": "C632",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "Your mom, 41. She married Mark three years ago.",
+   "why": "her label says who she is, not a plot job",
+   "cause": null,
+   "note": true,
+   "screen_hash": "ad3f6be4b295a67a",
+   "row_hash": "27f3481ce4c3e30c",
+   "carried": true,
+   "pass": 5
+  },
+  {
+   "row": "C632",
+   "screen": "mom_living_room.talk",
+   "verdict": "PASS",
+   "line": "Your mom, 41.",
+   "why": "no plot role label on the talk",
+   "cause": null,
+   "note": true,
+   "screen_hash": {
+    "text": "e38ff3dafa65755f",
+    "facts": "cfda3d7c96f6f167",
+    "all": "dd5c534f9a55bb61"
+   },
+   "row_hash": "27f3481ce4c3e30c",
+   "carried": true,
+   "pass": 5
+  },
+  {
+   "row": "C632",
+   "screen": "talk_mom.eat",
+   "verdict": "PASS",
+   "line": "Your mom, 41.",
+   "why": "no plot role label on the meal",
+   "cause": null,
+   "note": true,
+   "screen_hash": {
+    "text": "cb5b4b6d73033d19",
+    "facts": "a78c81253b9ba872",
+    "all": "1870367b704cb91d"
+   },
+   "row_hash": "27f3481ce4c3e30c",
+   "carried": true,
+   "pass": 5
+  },
+  {
+   "row": "C639",
+   "screen": "*",
+   "verdict": "N/A",
+   "line": "\u2014",
+   "why": "no offer of an act on her menus; she asks for promises inside a talk with one exit",
+   "cause": null,
+   "note": true,
+   "screen_hash": "ad3f6be4b295a67a",
+   "row_hash": "e4a6334699a304b9",
+   "carried": true,
+   "pass": 5
+  },
+  {
+   "row": "C639",
+   "screen": "mom_living_room.talk",
+   "verdict": "N/A",
+   "line": "\u2014",
+   "why": "'Stay in tonight. Just tonight.' is a request inside a talk, not an offer",
+   "cause": null,
+   "note": true,
+   "screen_hash": {
+    "text": "e38ff3dafa65755f",
+    "facts": "cfda3d7c96f6f167",
+    "all": "dd5c534f9a55bb61"
+   },
+   "row_hash": "e4a6334699a304b9",
+   "carried": true,
+   "pass": 5
+  },
+  {
+   "row": "C639",
+   "screen": "talk_mom.eat",
+   "verdict": "N/A",
+   "line": "\u2014",
+   "why": "the meal is the player's own choice; no offer",
+   "cause": null,
+   "note": true,
+   "screen_hash": {
+    "text": "cb5b4b6d73033d19",
+    "facts": "a78c81253b9ba872",
+    "all": "1870367b704cb91d"
+   },
+   "row_hash": "e4a6334699a304b9",
+   "carried": true,
+   "pass": 5
+  },
+  {
+   "row": "C640",
+   "screen": "*",
+   "verdict": "N/A",
+   "line": "\u2014",
+   "why": "no offer, so no no",
+   "cause": null,
+   "note": true,
+   "screen_hash": "ad3f6be4b295a67a",
+   "row_hash": "fec816e8221cb56c",
+   "carried": true,
+   "pass": 5
+  },
+  {
+   "row": "C640",
+   "screen": "mom_living_room.talk",
+   "verdict": "N/A",
+   "line": "\u2014",
+   "why": "same",
+   "cause": null,
+   "note": true,
+   "screen_hash": {
+    "text": "e38ff3dafa65755f",
+    "facts": "cfda3d7c96f6f167",
+    "all": "dd5c534f9a55bb61"
+   },
+   "row_hash": "fec816e8221cb56c",
+   "carried": true,
+   "pass": 5
+  },
+  {
+   "row": "C640",
+   "screen": "talk_mom.eat",
+   "verdict": "N/A",
+   "line": "\u2014",
+   "why": "same",
+   "cause": null,
+   "note": true,
+   "screen_hash": {
+    "text": "cb5b4b6d73033d19",
+    "facts": "a78c81253b9ba872",
+    "all": "1870367b704cb91d"
+   },
+   "row_hash": "fec816e8221cb56c",
+   "carried": true,
+   "pass": 5
+  },
+  {
+   "row": "C644",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "Did Mark say anything else? About the rent?",
+   "why": "her subject is her daughter's life and the house's money and Mark; it is hers alone",
+   "cause": null,
+   "note": true,
+   "screen_hash": "ad3f6be4b295a67a",
+   "row_hash": "045102ba2f0a9453",
+   "carried": true,
+   "pass": 5
+  },
+  {
+   "row": "C644",
+   "screen": "mom_living_room.talk",
+   "verdict": "PASS",
+   "line": "How are your classes? Tell me everything.",
+   "why": "her corner held: classes, behaving, being home",
+   "cause": null,
+   "note": true,
+   "screen_hash": {
+    "text": "e38ff3dafa65755f",
+    "facts": "cfda3d7c96f6f167",
+    "all": "dd5c534f9a55bb61"
+   },
+   "row_hash": "045102ba2f0a9453",
+   "carried": true,
+   "pass": 5
+  },
+  {
+   "row": "C644",
+   "screen": "talk_mom.eat",
+   "verdict": "PASS",
+   "line": "Eat. You're too thin.",
+   "why": "feeding her, Mom's corner",
+   "cause": null,
+   "note": true,
+   "screen_hash": {
+    "text": "cb5b4b6d73033d19",
+    "facts": "a78c81253b9ba872",
+    "all": "1870367b704cb91d"
+   },
+   "row_hash": "045102ba2f0a9453",
+   "carried": true,
+   "pass": 5
+  },
+  {
+   "row": "C656",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "{ min = 75, max = 100, text = \"Close\" }",
+   "why": "Laura's warmth has 4 short bands; P42 moves no meter",
+   "cause": null,
+   "note": false,
+   "screen_hash": "ad3f6be4b295a67a",
+   "row_hash": "41c869f069a2b028",
+   "carried": true,
+   "pass": 5
+  },
+  {
+   "row": "C656",
+   "screen": "mom_living_room.talk",
+   "verdict": "PASS",
+   "line": "\u2014",
+   "why": "no meter moves on the talk",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "e38ff3dafa65755f",
+    "facts": "cfda3d7c96f6f167",
+    "all": "dd5c534f9a55bb61"
+   },
+   "row_hash": "41c869f069a2b028",
+   "carried": true,
+   "pass": 5
+  },
+  {
+   "row": "C656",
+   "screen": "talk_mom.eat",
+   "verdict": "PASS",
+   "line": "effects = [{ trait = \"energy\" ... }, { trait = \"meals_today\" ... }]",
+   "why": "no person meter moves on the meal",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "cb5b4b6d73033d19",
+    "facts": "a78c81253b9ba872",
+    "all": "1870367b704cb91d"
+   },
+   "row_hash": "41c869f069a2b028",
+   "carried": true,
+   "pass": 5
+  },
+  {
+   "row": "C660",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "label = \"Warmth\"",
+   "why": "warmth shown on the People page with one word across the cast",
+   "cause": null,
+   "note": false,
+   "screen_hash": "ad3f6be4b295a67a",
+   "row_hash": "70b5022d4a858fa1",
+   "carried": true,
+   "pass": 5
+  },
+  {
+   "row": "C660",
+   "screen": "mom_living_room.talk",
+   "verdict": "PASS",
+   "line": "show_traits = [\"want\", \"warmth\", \"power\"]",
+   "why": "same words cast-wide",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "e38ff3dafa65755f",
+    "facts": "cfda3d7c96f6f167",
+    "all": "dd5c534f9a55bb61"
+   },
+   "row_hash": "70b5022d4a858fa1",
+   "carried": true,
+   "pass": 5
+  },
+  {
+   "row": "C660",
+   "screen": "talk_mom.eat",
+   "verdict": "PASS",
+   "line": "show_traits = [\"want\", \"warmth\", \"power\"]",
+   "why": "same; the meal pays no person meter",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "cb5b4b6d73033d19",
+    "facts": "a78c81253b9ba872",
+    "all": "1870367b704cb91d"
+   },
+   "row_hash": "70b5022d4a858fa1",
+   "carried": true,
+   "pass": 5
+  },
+  {
+   "row": "C690",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "when = [{ flag = \"met_laura\", op = \"is_true\" }]",
+   "why": "Laura's People card waits on met_laura",
+   "cause": null,
+   "note": true,
+   "screen_hash": "ad3f6be4b295a67a",
+   "row_hash": "d130cdc296b140e8",
+   "carried": true,
+   "pass": 5
+  },
+  {
+   "row": "C690",
+   "screen": "mom_living_room.talk",
+   "verdict": "PASS",
+   "line": "when = [{ flag = \"met_laura\", ... }]",
+   "why": "same",
+   "cause": null,
+   "note": true,
+   "screen_hash": {
+    "text": "e38ff3dafa65755f",
+    "facts": "cfda3d7c96f6f167",
+    "all": "dd5c534f9a55bb61"
+   },
+   "row_hash": "d130cdc296b140e8",
+   "carried": true,
+   "pass": 5
+  },
+  {
+   "row": "C690",
+   "screen": "talk_mom.eat",
+   "verdict": "PASS",
+   "line": "when = [{ flag = \"met_laura\", ... }]",
+   "why": "same",
+   "cause": null,
+   "note": true,
+   "screen_hash": {
+    "text": "cb5b4b6d73033d19",
+    "facts": "a78c81253b9ba872",
+    "all": "1870367b704cb91d"
+   },
+   "row_hash": "d130cdc296b140e8",
+   "carried": true,
+   "pass": 5
+  },
+  {
+   "row": "C707",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "Home | ... | anchor",
+   "why": "PLAN \u00a74 names Home the anchor; these canvases add person prose, not place prose",
+   "cause": null,
+   "note": true,
+   "screen_hash": "ad3f6be4b295a67a",
+   "row_hash": "e2898bd02a9e4730",
+   "carried": true,
+   "pass": 5
+  },
+  {
+   "row": "C707",
+   "screen": "mom_living_room.talk",
+   "verdict": "N/A",
+   "line": "\u2014",
+   "why": "no place prose on the talk",
+   "cause": null,
+   "note": true,
+   "screen_hash": {
+    "text": "e38ff3dafa65755f",
+    "facts": "cfda3d7c96f6f167",
+    "all": "dd5c534f9a55bb61"
+   },
+   "row_hash": "e2898bd02a9e4730",
+   "carried": true,
+   "pass": 5
+  },
+  {
+   "row": "C707",
+   "screen": "talk_mom.eat",
+   "verdict": "N/A",
+   "line": "\u2014",
+   "why": "no place prose on the meal",
+   "cause": null,
+   "note": true,
+   "screen_hash": {
+    "text": "cb5b4b6d73033d19",
+    "facts": "a78c81253b9ba872",
+    "all": "1870367b704cb91d"
+   },
+   "row_hash": "e2898bd02a9e4730",
+   "carried": true,
+   "pass": 5
+  },
+  {
+   "row": "C738",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "kind = \"destination\"",
+   "why": "Kitchen and Living Room are destinations with an alone act (Eat something, Watch TV); Mom's menu adds nothing to the hall",
+   "cause": null,
+   "note": false,
+   "screen_hash": "ad3f6be4b295a67a",
+   "row_hash": "976cd3e099c13e51",
+   "carried": true,
+   "pass": 5
+  },
+  {
+   "row": "C738",
+   "screen": "mom_living_room.talk",
+   "verdict": "PASS",
+   "line": "kind = \"destination\"",
+   "why": "Living Room is a destination",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "e38ff3dafa65755f",
+    "facts": "cfda3d7c96f6f167",
+    "all": "dd5c534f9a55bb61"
+   },
+   "row_hash": "976cd3e099c13e51",
+   "carried": true,
+   "pass": 5
+  },
+  {
+   "row": "C738",
+   "screen": "talk_mom.eat",
+   "verdict": "PASS",
+   "line": "kind = \"destination\"",
+   "why": "Kitchen is a destination",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "cb5b4b6d73033d19",
+    "facts": "a78c81253b9ba872",
+    "all": "1870367b704cb91d"
+   },
+   "row_hash": "976cd3e099c13e51",
+   "carried": true,
+   "pass": 5
+  },
+  {
+   "row": "C758",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "Talk (5 min) \u00b7 Leave",
+   "why": "labels short with the cost shown",
+   "cause": null,
+   "note": true,
+   "screen_hash": "ad3f6be4b295a67a",
+   "row_hash": "6329db1ec04ec3da",
+   "carried": true,
+   "pass": 5
+  },
+  {
+   "row": "C758",
+   "screen": "mom_living_room.talk",
+   "verdict": "PASS",
+   "line": "Done",
+   "why": "one-word exit",
+   "cause": null,
+   "note": true,
+   "screen_hash": {
+    "text": "e38ff3dafa65755f",
+    "facts": "cfda3d7c96f6f167",
+    "all": "dd5c534f9a55bb61"
+   },
+   "row_hash": "6329db1ec04ec3da",
+   "carried": true,
+   "pass": 5
+  },
+  {
+   "row": "C758",
+   "screen": "talk_mom.eat",
+   "verdict": "PASS",
+   "line": "Eat with her (20 min, +15 energy)",
+   "why": "short, cost shown",
+   "cause": null,
+   "note": true,
+   "screen_hash": {
+    "text": "cb5b4b6d73033d19",
+    "facts": "a78c81253b9ba872",
+    "all": "1870367b704cb91d"
+   },
+   "row_hash": "6329db1ec04ec3da",
+   "carried": true,
+   "pass": 5
+  },
+  {
+   "row": "C762",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "Talk (5 min) \u2014 you've already talked today.",
+   "why": "no 'Nothing happens'; the greyed button says why",
+   "cause": null,
+   "note": false,
+   "screen_hash": "ad3f6be4b295a67a",
+   "row_hash": "877801c22bdade00",
+   "carried": true,
+   "pass": 5
+  },
+  {
+   "row": "C762",
+   "screen": "mom_living_room.talk",
+   "verdict": "PASS",
+   "line": "Done",
+   "why": "no banned line",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "e38ff3dafa65755f",
+    "facts": "cfda3d7c96f6f167",
+    "all": "dd5c534f9a55bb61"
+   },
+   "row_hash": "877801c22bdade00",
+   "carried": true,
+   "pass": 5
+  },
+  {
+   "row": "C762",
+   "screen": "talk_mom.eat",
+   "verdict": "PASS",
+   "line": "Eat with her (20 min, +15 energy) \u2014 not again today.",
+   "why": "says why it's greyed",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "cb5b4b6d73033d19",
+    "facts": "a78c81253b9ba872",
+    "all": "1870367b704cb91d"
+   },
+   "row_hash": "877801c22bdade00",
+   "carried": true,
+   "pass": 5
+  },
+  {
+   "row": "C769",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "The kitchen: the table where the family eats, the fridge, a coffee pot that's always on.",
+   "why": "both rooms carry their own description; P42 doesn't touch it",
+   "cause": null,
+   "note": true,
+   "screen_hash": "ad3f6be4b295a67a",
+   "row_hash": "cf7d7a82afabcbbb",
+   "carried": true,
+   "pass": 5
+  },
+  {
+   "row": "C769",
+   "screen": "mom_living_room.talk",
+   "verdict": "N/A",
+   "line": "\u2014",
+   "why": "a person's talk screen, not a place screen",
+   "cause": null,
+   "note": true,
+   "screen_hash": {
+    "text": "e38ff3dafa65755f",
+    "facts": "cfda3d7c96f6f167",
+    "all": "dd5c534f9a55bb61"
+   },
+   "row_hash": "cf7d7a82afabcbbb",
+   "carried": true,
+   "pass": 5
+  },
+  {
+   "row": "C769",
+   "screen": "talk_mom.eat",
+   "verdict": "N/A",
+   "line": "\u2014",
+   "why": "a person's meal screen, not a place screen",
+   "cause": null,
+   "note": true,
+   "screen_hash": {
+    "text": "cb5b4b6d73033d19",
+    "facts": "a78c81253b9ba872",
+    "all": "1870367b704cb91d"
+   },
+   "row_hash": "cf7d7a82afabcbbb",
+   "carried": true,
+   "pass": 5
+  },
+  {
+   "row": "C770",
+   "screen": "*",
+   "verdict": "N/A",
+   "line": "\u2014",
+   "why": "no room screen on these canvases; they are her menus",
+   "cause": null,
+   "note": true,
+   "screen_hash": "ad3f6be4b295a67a",
+   "row_hash": "dcc6bbe6fde09083",
+   "carried": true,
+   "pass": 5
+  },
+  {
+   "row": "C770",
+   "screen": "mom_living_room.talk",
+   "verdict": "N/A",
+   "line": "\u2014",
+   "why": "not a room screen",
+   "cause": null,
+   "note": true,
+   "screen_hash": {
+    "text": "e38ff3dafa65755f",
+    "facts": "cfda3d7c96f6f167",
+    "all": "dd5c534f9a55bb61"
+   },
+   "row_hash": "dcc6bbe6fde09083",
+   "carried": true,
+   "pass": 5
+  },
+  {
+   "row": "C770",
+   "screen": "talk_mom.eat",
+   "verdict": "N/A",
+   "line": "\u2014",
+   "why": "not a room screen",
+   "cause": null,
+   "note": true,
+   "screen_hash": {
+    "text": "cb5b4b6d73033d19",
+    "facts": "a78c81253b9ba872",
+    "all": "1870367b704cb91d"
+   },
+   "row_hash": "dcc6bbe6fde09083",
+   "carried": true,
+   "pass": 5
+  },
+  {
+   "row": "C771",
+   "screen": "*",
+   "verdict": "N/A",
+   "line": "\u2014",
+   "why": "no first-visit screen",
+   "cause": null,
+   "note": true,
+   "screen_hash": "ad3f6be4b295a67a",
+   "row_hash": "d941995a226da2b4",
+   "carried": true,
+   "pass": 5
+  },
+  {
+   "row": "C771",
+   "screen": "mom_living_room.talk",
+   "verdict": "N/A",
+   "line": "\u2014",
+   "why": "no first-visit screen",
+   "cause": null,
+   "note": true,
+   "screen_hash": {
+    "text": "e38ff3dafa65755f",
+    "facts": "cfda3d7c96f6f167",
+    "all": "dd5c534f9a55bb61"
+   },
+   "row_hash": "d941995a226da2b4",
+   "carried": true,
+   "pass": 5
+  },
+  {
+   "row": "C771",
+   "screen": "talk_mom.eat",
+   "verdict": "N/A",
+   "line": "\u2014",
+   "why": "no first-visit screen",
+   "cause": null,
+   "note": true,
+   "screen_hash": {
+    "text": "cb5b4b6d73033d19",
+    "facts": "a78c81253b9ba872",
+    "all": "1870367b704cb91d"
+   },
+   "row_hash": "d941995a226da2b4",
+   "carried": true,
+   "pass": 5
+  },
+  {
+   "row": "C773",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "Talk (5 min) \u00b7 Eat with her (20 min, +15 energy) \u00b7 Leave",
+   "why": "her menu, not a browse list of objects",
+   "cause": null,
+   "note": false,
+   "screen_hash": "ad3f6be4b295a67a",
+   "row_hash": "0825e8443f9180d0",
+   "carried": true,
+   "pass": 5
+  },
+  {
+   "row": "C773",
+   "screen": "mom_living_room.talk",
+   "verdict": "PASS",
+   "line": "Done",
+   "why": "no object list",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "e38ff3dafa65755f",
+    "facts": "cfda3d7c96f6f167",
+    "all": "dd5c534f9a55bb61"
+   },
+   "row_hash": "0825e8443f9180d0",
+   "carried": true,
+   "pass": 5
+  },
+  {
+   "row": "C773",
+   "screen": "talk_mom.eat",
+   "verdict": "PASS",
+   "line": "Done",
+   "why": "no object list",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "cb5b4b6d73033d19",
+    "facts": "a78c81253b9ba872",
+    "all": "1870367b704cb91d"
+   },
+   "row_hash": "0825e8443f9180d0",
+   "carried": true,
+   "pass": 5
+  },
+  {
+   "row": "C776",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "npc = \"npc_laura\"",
+   "why": "Mom is a face on the room; her actions live in her menu",
+   "cause": null,
+   "note": false,
+   "screen_hash": "ad3f6be4b295a67a",
+   "row_hash": "6088d5531ecff698",
+   "carried": true,
+   "pass": 5
+  },
+  {
+   "row": "C776",
+   "screen": "mom_living_room.talk",
+   "verdict": "PASS",
+   "line": "npc = \"npc_laura\"",
+   "why": "the talk is inside her menu, not a room button",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "e38ff3dafa65755f",
+    "facts": "cfda3d7c96f6f167",
+    "all": "dd5c534f9a55bb61"
+   },
+   "row_hash": "6088d5531ecff698",
+   "carried": true,
+   "pass": 5
+  },
+  {
+   "row": "C776",
+   "screen": "talk_mom.eat",
+   "verdict": "PASS",
+   "line": "Eat with her (20 min, +15 energy)",
+   "why": "the meal with her sits on her menu, not the room's",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "cb5b4b6d73033d19",
+    "facts": "a78c81253b9ba872",
+    "all": "1870367b704cb91d"
+   },
+   "row_hash": "6088d5531ecff698",
+   "carried": true,
+   "pass": 5
+  },
+  {
+   "row": "C777",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "Talk (5 min)",
+   "why": "everything else is in the talk beats",
+   "cause": null,
+   "note": false,
+   "screen_hash": "ad3f6be4b295a67a",
+   "row_hash": "38b483431fa177b0",
+   "carried": true,
+   "pass": 5
+  },
+  {
+   "row": "C777",
+   "screen": "mom_living_room.talk",
+   "verdict": "PASS",
+   "line": "Done",
+   "why": "nothing extra on a menu",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "e38ff3dafa65755f",
+    "facts": "cfda3d7c96f6f167",
+    "all": "dd5c534f9a55bb61"
+   },
+   "row_hash": "38b483431fa177b0",
+   "carried": true,
+   "pass": 5
+  },
+  {
+   "row": "C777",
+   "screen": "talk_mom.eat",
+   "verdict": "PASS",
+   "line": "Done",
+   "why": "nothing extra on a menu",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "cb5b4b6d73033d19",
+    "facts": "a78c81253b9ba872",
+    "all": "1870367b704cb91d"
+   },
+   "row_hash": "38b483431fa177b0",
+   "carried": true,
+   "pass": 5
+  },
+  {
+   "row": "C794",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "The living room: the couch, the TV, and the big armchair nobody else sits in.",
+   "why": "the rooms' identity sentences are fixed descriptions",
+   "cause": null,
+   "note": true,
+   "screen_hash": "ad3f6be4b295a67a",
+   "row_hash": "3281d513b7f90d6e",
+   "carried": true,
+   "pass": 5
+  },
+  {
+   "row": "C794",
+   "screen": "mom_living_room.talk",
+   "verdict": "N/A",
+   "line": "\u2014",
+   "why": "not a place screen",
+   "cause": null,
+   "note": true,
+   "screen_hash": {
+    "text": "e38ff3dafa65755f",
+    "facts": "cfda3d7c96f6f167",
+    "all": "dd5c534f9a55bb61"
+   },
+   "row_hash": "3281d513b7f90d6e",
+   "carried": true,
+   "pass": 5
+  },
+  {
+   "row": "C794",
+   "screen": "talk_mom.eat",
+   "verdict": "N/A",
+   "line": "\u2014",
+   "why": "not a place screen",
+   "cause": null,
+   "note": true,
+   "screen_hash": {
+    "text": "cb5b4b6d73033d19",
+    "facts": "a78c81253b9ba872",
+    "all": "1870367b704cb91d"
+   },
+   "row_hash": "3281d513b7f90d6e",
+   "carried": true,
+   "pass": 5
+  },
+  {
+   "row": "C795",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "Mom's on the couch. Mark's in his chair, the remote on his knee.",
+   "why": "one presence line by who's there, read from Mark's rows",
+   "cause": null,
+   "note": true,
+   "screen_hash": "ad3f6be4b295a67a",
+   "row_hash": "84d5bfb2a701bf90",
+   "carried": true,
+   "pass": 5
+  },
+  {
+   "row": "C795",
+   "screen": "mom_living_room.talk",
+   "verdict": "PASS",
+   "line": "She doesn't look at Mark.",
+   "why": "Mark's version only behind his is_present",
+   "cause": null,
+   "note": true,
+   "screen_hash": {
+    "text": "e38ff3dafa65755f",
+    "facts": "cfda3d7c96f6f167",
+    "all": "dd5c534f9a55bb61"
+   },
+   "row_hash": "84d5bfb2a701bf90",
+   "carried": true,
+   "pass": 5
+  },
+  {
+   "row": "C795",
+   "screen": "talk_mom.eat",
+   "verdict": "PASS",
+   "line": "Mark eats without looking up from his paper.",
+   "why": "one line per person present, by combo; Mark+Ryan never coincide by who_is_where, so the combo group is dead but harmless",
+   "cause": null,
+   "note": true,
+   "screen_hash": {
+    "text": "cb5b4b6d73033d19",
+    "facts": "a78c81253b9ba872",
+    "all": "1870367b704cb91d"
+   },
+   "row_hash": "84d5bfb2a701bf90",
+   "carried": true,
+   "pass": 5
+  },
+  {
+   "row": "C804",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "Mom's in the kitchen. Mark's at the table. She looks up at you, then at him.",
+   "why": "text changes with who is there",
+   "cause": null,
+   "note": false,
+   "screen_hash": "ad3f6be4b295a67a",
+   "row_hash": "2aa951544edb45db",
+   "carried": true,
+   "pass": 5
+  },
+  {
+   "row": "C804",
+   "screen": "mom_living_room.talk",
+   "verdict": "PASS",
+   "line": "Come sit by me, baby. Just for a minute.",
+   "why": "Mark-there and Mark-absent versions differ",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "e38ff3dafa65755f",
+    "facts": "cfda3d7c96f6f167",
+    "all": "dd5c534f9a55bb61"
+   },
+   "row_hash": "2aa951544edb45db",
+   "carried": true,
+   "pass": 5
+  },
+  {
+   "row": "C804",
+   "screen": "talk_mom.eat",
+   "verdict": "PASS",
+   "line": "Ryan eats standing at the counter.",
+   "why": "changes with who is there",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "cb5b4b6d73033d19",
+    "facts": "a78c81253b9ba872",
+    "all": "1870367b704cb91d"
+   },
+   "row_hash": "2aa951544edb45db",
+   "carried": true,
+   "pass": 5
+  },
+  {
+   "row": "C808",
+   "screen": "*",
+   "verdict": "N/A",
+   "line": "\u2014",
+   "why": "indoors; a plan rule P42 doesn't touch",
+   "cause": null,
+   "note": true,
+   "screen_hash": "ad3f6be4b295a67a",
+   "row_hash": "73aff7401d6970a5",
+   "carried": true,
+   "pass": 5
+  },
+  {
+   "row": "C808",
+   "screen": "mom_living_room.talk",
+   "verdict": "N/A",
+   "line": "\u2014",
+   "why": "indoors",
+   "cause": null,
+   "note": true,
+   "screen_hash": {
+    "text": "e38ff3dafa65755f",
+    "facts": "cfda3d7c96f6f167",
+    "all": "dd5c534f9a55bb61"
+   },
+   "row_hash": "73aff7401d6970a5",
+   "carried": true,
+   "pass": 5
+  },
+  {
+   "row": "C808",
+   "screen": "talk_mom.eat",
+   "verdict": "N/A",
+   "line": "\u2014",
+   "why": "indoors",
+   "cause": null,
+   "note": true,
+   "screen_hash": {
+    "text": "cb5b4b6d73033d19",
+    "facts": "a78c81253b9ba872",
+    "all": "1870367b704cb91d"
+   },
+   "row_hash": "73aff7401d6970a5",
+   "carried": true,
+   "pass": 5
+  },
+  {
+   "row": "C811",
+   "screen": "*",
+   "verdict": "N/A",
+   "line": "\u2014",
+   "why": "no map change",
+   "cause": null,
+   "note": true,
+   "screen_hash": "ad3f6be4b295a67a",
+   "row_hash": "ded1858e52e3be3a",
+   "carried": true,
+   "pass": 5
+  },
+  {
+   "row": "C811",
+   "screen": "mom_living_room.talk",
+   "verdict": "N/A",
+   "line": "\u2014",
+   "why": "no map change",
+   "cause": null,
+   "note": true,
+   "screen_hash": {
+    "text": "e38ff3dafa65755f",
+    "facts": "cfda3d7c96f6f167",
+    "all": "dd5c534f9a55bb61"
+   },
+   "row_hash": "ded1858e52e3be3a",
+   "carried": true,
+   "pass": 5
+  },
+  {
+   "row": "C811",
+   "screen": "talk_mom.eat",
+   "verdict": "N/A",
+   "line": "\u2014",
+   "why": "no map change",
+   "cause": null,
+   "note": true,
+   "screen_hash": {
+    "text": "cb5b4b6d73033d19",
+    "facts": "a78c81253b9ba872",
+    "all": "1870367b704cb91d"
+   },
+   "row_hash": "ded1858e52e3be3a",
+   "carried": true,
+   "pass": 5
+  },
+  {
+   "row": "C889",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "Talk (5 min)",
+   "why": "5 min spent on Done; total equals the label",
+   "cause": null,
+   "note": true,
+   "screen_hash": "ad3f6be4b295a67a",
+   "row_hash": "37967c45d79163fc",
+   "carried": true,
+   "pass": 5
+  },
+  {
+   "row": "C889",
+   "screen": "mom_living_room.talk",
+   "verdict": "PASS",
+   "line": "time_progression_minutes = 5",
+   "why": "Done spends the talk's 5 min",
+   "cause": null,
+   "note": true,
+   "screen_hash": {
+    "text": "e38ff3dafa65755f",
+    "facts": "cfda3d7c96f6f167",
+    "all": "dd5c534f9a55bb61"
+   },
+   "row_hash": "37967c45d79163fc",
+   "carried": true,
+   "pass": 5
+  },
+  {
+   "row": "C889",
+   "screen": "talk_mom.eat",
+   "verdict": "PASS",
+   "line": "Eat with her (20 min, +15 energy)",
+   "why": "Done spends 20 min and adds 15 energy (clamped) and one meal",
+   "cause": null,
+   "note": true,
+   "screen_hash": {
+    "text": "cb5b4b6d73033d19",
+    "facts": "a78c81253b9ba872",
+    "all": "1870367b704cb91d"
+   },
+   "row_hash": "37967c45d79163fc",
+   "carried": true,
+   "pass": 5
+  },
+  {
+   "row": "C890",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "talked_mom_today ... op = \"unset\"",
+   "why": "once a day, cleared at the day turn: a repeat, not a deadline",
+   "cause": null,
+   "note": false,
+   "screen_hash": "ad3f6be4b295a67a",
+   "row_hash": "3d716de4269fbd6c",
+   "carried": true,
+   "pass": 5
+  },
+  {
+   "row": "C890",
+   "screen": "mom_living_room.talk",
+   "verdict": "PASS",
+   "line": "Next Saturday, you tell me the next part.",
+   "why": "a weekly repeat, not a deadline",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "e38ff3dafa65755f",
+    "facts": "cfda3d7c96f6f167",
+    "all": "dd5c534f9a55bb61"
+   },
+   "row_hash": "3d716de4269fbd6c",
+   "carried": true,
+   "pass": 5
+  },
+  {
+   "row": "C890",
+   "screen": "talk_mom.eat",
+   "verdict": "PASS",
+   "line": "ate_with_mom_today ... op = \"unset\"",
+   "why": "daily repeat",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "cb5b4b6d73033d19",
+    "facts": "a78c81253b9ba872",
+    "all": "1870367b704cb91d"
+   },
+   "row_hash": "3d716de4269fbd6c",
+   "carried": true,
+   "pass": 5
+  },
+  {
+   "row": "C892",
+   "screen": "*",
+   "verdict": "N/A",
+   "line": "\u2014",
+   "why": "Mom has rows, no hours on a door",
+   "cause": null,
+   "note": true,
+   "screen_hash": "ad3f6be4b295a67a",
+   "row_hash": "1d8d188451bcb51e",
+   "carried": true,
+   "pass": 5
+  },
+  {
+   "row": "C892",
+   "screen": "mom_living_room.talk",
+   "verdict": "N/A",
+   "line": "\u2014",
+   "why": "no hours printed",
+   "cause": null,
+   "note": true,
+   "screen_hash": {
+    "text": "e38ff3dafa65755f",
+    "facts": "cfda3d7c96f6f167",
+    "all": "dd5c534f9a55bb61"
+   },
+   "row_hash": "1d8d188451bcb51e",
+   "carried": true,
+   "pass": 5
+  },
+  {
+   "row": "C892",
+   "screen": "talk_mom.eat",
+   "verdict": "N/A",
+   "line": "\u2014",
+   "why": "no hours printed",
+   "cause": null,
+   "note": true,
+   "screen_hash": {
+    "text": "cb5b4b6d73033d19",
+    "facts": "a78c81253b9ba872",
+    "all": "1870367b704cb91d"
+   },
+   "row_hash": "1d8d188451bcb51e",
+   "carried": true,
+   "pass": 5
+  },
+  {
+   "row": "C897",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "Leave \u00b7 time_progression_minutes = 0",
+   "why": "no time on moving between rooms; time only on acts",
+   "cause": null,
+   "note": true,
+   "screen_hash": "ad3f6be4b295a67a",
+   "row_hash": "16b066aee3c1a937",
+   "carried": true,
+   "pass": 5
+  },
+  {
+   "row": "C897",
+   "screen": "mom_living_room.talk",
+   "verdict": "PASS",
+   "line": "Done",
+   "why": "the 5 min is the talk, not a room crossing",
+   "cause": null,
+   "note": true,
+   "screen_hash": {
+    "text": "e38ff3dafa65755f",
+    "facts": "cfda3d7c96f6f167",
+    "all": "dd5c534f9a55bb61"
+   },
+   "row_hash": "16b066aee3c1a937",
+   "carried": true,
+   "pass": 5
+  },
+  {
+   "row": "C897",
+   "screen": "talk_mom.eat",
+   "verdict": "PASS",
+   "line": "Done",
+   "why": "the 20 min is the meal, not a crossing",
+   "cause": null,
+   "note": true,
+   "screen_hash": {
+    "text": "cb5b4b6d73033d19",
+    "facts": "a78c81253b9ba872",
+    "all": "1870367b704cb91d"
+   },
+   "row_hash": "16b066aee3c1a937",
+   "carried": true,
+   "pass": 5
+  },
+  {
+   "row": "C900",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "Stay in tonight. Just tonight. For me.",
+   "why": "no clock time in any line; 'tonight' only in the Living Room, 19-23",
+   "cause": null,
+   "note": false,
+   "screen_hash": "ad3f6be4b295a67a",
+   "row_hash": "a4ef8ce78f554d6b",
+   "carried": true,
+   "pass": 5
+  },
+  {
+   "row": "C900",
+   "screen": "mom_living_room.talk",
+   "verdict": "PASS",
+   "line": "Next Saturday, you tell me the next part.",
+   "why": "a day, not a time; the alone version can only show Saturday 19-23 (Mark's bar night), so it holds",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "e38ff3dafa65755f",
+    "facts": "cfda3d7c96f6f167",
+    "all": "dd5c534f9a55bb61"
+   },
+   "row_hash": "a4ef8ce78f554d6b",
+   "carried": true,
+   "pass": 5
+  },
+  {
+   "row": "C900",
+   "screen": "talk_mom.eat",
+   "verdict": "PASS",
+   "line": "Mom puts a plate of eggs in front of you and sits down with her coffee.",
+   "why": "breakfast/dinner chosen by time_of_day groups (00:00-12:00, 12:00-23:59); no time printed; her kitchen rows are 7-8/8-12 and 17-19",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "cb5b4b6d73033d19",
+    "facts": "a78c81253b9ba872",
+    "all": "1870367b704cb91d"
+   },
+   "row_hash": "a4ef8ce78f554d6b",
+   "carried": true,
+   "pass": 5
+  },
+  {
+   "row": "C902",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "(both canvases)",
+   "why": "No line on talk_mom or mom_living_room goes false at the last minute of its window.",
+   "cause": null,
+   "note": true,
+   "screen_hash": "ad3f6be4b295a67a",
+   "row_hash": "66462bdbadae0c77",
+   "carried": true,
+   "pass": 5
+  },
+  {
+   "row": "C902",
+   "screen": "mom_living_room.talk",
+   "verdict": "PASS",
+   "line": "Stay in tonight. Just tonight. For me.",
+   "why": "At 22:55, the last minute of her 19-23 Living Room row, 'tonight' and 'tomorrow night' still hold; no clock claim.",
+   "cause": null,
+   "note": true,
+   "screen_hash": {
+    "text": "e38ff3dafa65755f",
+    "facts": "cfda3d7c96f6f167",
+    "all": "dd5c534f9a55bb61"
+   },
+   "row_hash": "66462bdbadae0c77",
+   "carried": true,
+   "pass": 5
+  },
+  {
+   "row": "C902",
+   "screen": "talk_mom.eat",
+   "verdict": "PASS",
+   "line": "Mom puts a plate of eggs in front of you",
+   "why": "Breakfast line is behind time_of_day 00:00-12:00, dinner behind 12:00-23:59; at 07:55/11:55 eggs and at 18:55 dinner are still true.",
+   "cause": null,
+   "note": true,
+   "screen_hash": {
+    "text": "cb5b4b6d73033d19",
+    "facts": "a78c81253b9ba872",
+    "all": "1870367b704cb91d"
+   },
+   "row_hash": "66462bdbadae0c77",
+   "carried": true,
+   "pass": 5
+  },
+  {
+   "row": "C903",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "Next Saturday, you tell me the next part.",
+   "why": "The only weekday on either canvas; it renders only on Saturdays (Mark's rows) and is a forward promise, true on every visit.",
+   "cause": null,
+   "note": false,
+   "screen_hash": "ad3f6be4b295a67a",
+   "row_hash": "263890a884329d60",
+   "carried": true,
+   "pass": 5
+  },
+  {
+   "row": "C903",
+   "screen": "mom_living_room.talk",
+   "verdict": "PASS",
+   "line": "Next Saturday, you tell me the next part.",
+   "why": "Only the Mark-absent groups carry it, and Mark's rows leave the Living Room only Saturday 19-23 (who_is_where), so it renders only on Saturdays; 'next Saturday' is a forward promise true on any day anyway.",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "e38ff3dafa65755f",
+    "facts": "cfda3d7c96f6f167",
+    "all": "dd5c534f9a55bb61"
+   },
+   "row_hash": "263890a884329d60",
+   "carried": true,
+   "pass": 5
+  },
+  {
+   "row": "C903",
+   "screen": "talk_mom.eat",
+   "verdict": "PASS",
+   "line": "Eat. You're too thin.",
+   "why": "No weekday named on the meal screen.",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "cb5b4b6d73033d19",
+    "facts": "a78c81253b9ba872",
+    "all": "1870367b704cb91d"
+   },
+   "row_hash": "263890a884329d60",
+   "carried": true,
+   "pass": 5
+  },
+  {
+   "row": "C904",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "(both canvases)",
+   "why": "No clock time anywhere on either canvas.",
+   "cause": null,
+   "note": true,
+   "screen_hash": "ad3f6be4b295a67a",
+   "row_hash": "999816c6ed6cc232",
+   "carried": true,
+   "pass": 5
+  },
+  {
+   "row": "C904",
+   "screen": "mom_living_room.talk",
+   "verdict": "PASS",
+   "line": "They're fine, Mom. Really. Mostly.",
+   "why": "No clock time in any line.",
+   "cause": null,
+   "note": true,
+   "screen_hash": {
+    "text": "e38ff3dafa65755f",
+    "facts": "cfda3d7c96f6f167",
+    "all": "dd5c534f9a55bb61"
+   },
+   "row_hash": "999816c6ed6cc232",
+   "carried": true,
+   "pass": 5
+  },
+  {
+   "row": "C904",
+   "screen": "talk_mom.eat",
+   "verdict": "PASS",
+   "line": "Mom dishes up two plates of dinner",
+   "why": "No clock time in any line.",
+   "cause": null,
+   "note": true,
+   "screen_hash": {
+    "text": "cb5b4b6d73033d19",
+    "facts": "a78c81253b9ba872",
+    "all": "1870367b704cb91d"
+   },
+   "row_hash": "999816c6ed6cc232",
+   "carried": true,
+   "pass": 5
+  },
+  {
+   "row": "C906",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "(both canvases)",
+   "why": "No label promises a clock time.",
+   "cause": null,
+   "note": true,
+   "screen_hash": "ad3f6be4b295a67a",
+   "row_hash": "c257bba6d15edc3f",
+   "carried": true,
+   "pass": 5
+  },
+  {
+   "row": "C906",
+   "screen": "mom_living_room.talk",
+   "verdict": "PASS",
+   "line": "Done",
+   "why": "Labels state no 'till X'; Talk's duration is on 'Talk (5 min)'.",
+   "cause": null,
+   "note": true,
+   "screen_hash": {
+    "text": "e38ff3dafa65755f",
+    "facts": "cfda3d7c96f6f167",
+    "all": "dd5c534f9a55bb61"
+   },
+   "row_hash": "c257bba6d15edc3f",
+   "carried": true,
+   "pass": 5
+  },
+  {
+   "row": "C906",
+   "screen": "talk_mom.eat",
+   "verdict": "PASS",
+   "line": "Eat with her (20 min, +15 energy)",
+   "why": "Duration only, equal to Done's 20-minute spend.",
+   "cause": null,
+   "note": true,
+   "screen_hash": {
+    "text": "cb5b4b6d73033d19",
+    "facts": "a78c81253b9ba872",
+    "all": "1870367b704cb91d"
+   },
+   "row_hash": "c257bba6d15edc3f",
+   "carried": true,
+   "pass": 5
+  },
+  {
+   "row": "C910",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "(both canvases)",
+   "why": "Every time spend is stated before the click in the '(N min)' form.",
+   "cause": null,
+   "note": true,
+   "screen_hash": "ad3f6be4b295a67a",
+   "row_hash": "c86548143d50a17d",
+   "carried": true,
+   "pass": 5
+  },
+  {
+   "row": "C910",
+   "screen": "mom_living_room.talk",
+   "verdict": "PASS",
+   "line": "Talk (5 min)",
+   "why": "The 5 minutes spent on Done were printed on the Talk button that opens this screen, same '(N min)' form as the game.",
+   "cause": null,
+   "note": true,
+   "screen_hash": {
+    "text": "e38ff3dafa65755f",
+    "facts": "cfda3d7c96f6f167",
+    "all": "dd5c534f9a55bb61"
+   },
+   "row_hash": "c86548143d50a17d",
+   "carried": true,
+   "pass": 5
+  },
+  {
+   "row": "C910",
+   "screen": "talk_mom.eat",
+   "verdict": "PASS",
+   "line": "Eat with her (20 min, +15 energy)",
+   "why": "The 20 minutes Done spends were printed on the button that opens the meal, same form.",
+   "cause": null,
+   "note": true,
+   "screen_hash": {
+    "text": "cb5b4b6d73033d19",
+    "facts": "a78c81253b9ba872",
+    "all": "1870367b704cb91d"
+   },
+   "row_hash": "c86548143d50a17d",
+   "carried": true,
+   "pass": 5
+  },
+  {
+   "row": "C913",
+   "screen": "*",
+   "verdict": "N/A",
+   "line": "(both canvases)",
+   "why": "Neither canvas has a clock-gated row; her presence gates them (requires_npc) and Talk/Eat grey by flag with locked_text.",
+   "cause": null,
+   "note": false,
+   "screen_hash": "ad3f6be4b295a67a",
+   "row_hash": "48bd82911a86ecbd",
+   "carried": true,
+   "pass": 5
+  },
+  {
+   "row": "C913",
+   "screen": "mom_living_room.talk",
+   "verdict": "N/A",
+   "line": "Done",
+   "why": "No windowed activity on this screen; nothing here is shut by the clock.",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "e38ff3dafa65755f",
+    "facts": "cfda3d7c96f6f167",
+    "all": "dd5c534f9a55bb61"
+   },
+   "row_hash": "48bd82911a86ecbd",
+   "carried": true,
+   "pass": 5
+  },
+  {
+   "row": "C913",
+   "screen": "talk_mom.eat",
+   "verdict": "N/A",
+   "line": "Done",
+   "why": "No windowed activity on this screen.",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "cb5b4b6d73033d19",
+    "facts": "a78c81253b9ba872",
+    "all": "1870367b704cb91d"
+   },
+   "row_hash": "48bd82911a86ecbd",
+   "carried": true,
+   "pass": 5
+  },
+  {
+   "row": "C914",
+   "screen": "*",
+   "verdict": "N/A",
+   "line": "(both canvases)",
+   "why": "No clock-shut row on either canvas.",
+   "cause": null,
+   "note": false,
+   "screen_hash": "ad3f6be4b295a67a",
+   "row_hash": "5a326c2d5d8a0abd",
+   "carried": true,
+   "pass": 5
+  },
+  {
+   "row": "C914",
+   "screen": "mom_living_room.talk",
+   "verdict": "N/A",
+   "line": "Done",
+   "why": "No row here is shut by the clock.",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "e38ff3dafa65755f",
+    "facts": "cfda3d7c96f6f167",
+    "all": "dd5c534f9a55bb61"
+   },
+   "row_hash": "5a326c2d5d8a0abd",
+   "carried": true,
+   "pass": 5
+  },
+  {
+   "row": "C914",
+   "screen": "talk_mom.eat",
+   "verdict": "N/A",
+   "line": "Done",
+   "why": "No row here is shut by the clock.",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "cb5b4b6d73033d19",
+    "facts": "a78c81253b9ba872",
+    "all": "1870367b704cb91d"
+   },
+   "row_hash": "5a326c2d5d8a0abd",
+   "carried": true,
+   "pass": 5
+  },
+  {
+   "row": "C915",
+   "screen": "*",
+   "verdict": "N/A",
+   "line": "(both canvases)",
+   "why": "Her hours are her rows on the Schedules page; nothing here publishes hours.",
+   "cause": null,
+   "note": true,
+   "screen_hash": "ad3f6be4b295a67a",
+   "row_hash": "46d8f12824d16c8b",
+   "carried": true,
+   "pass": 5
+  },
+  {
+   "row": "C915",
+   "screen": "mom_living_room.talk",
+   "verdict": "N/A",
+   "line": "Done",
+   "why": "No hours written on the screen; her hours live in her schedule rows.",
+   "cause": null,
+   "note": true,
+   "screen_hash": {
+    "text": "e38ff3dafa65755f",
+    "facts": "cfda3d7c96f6f167",
+    "all": "dd5c534f9a55bb61"
+   },
+   "row_hash": "46d8f12824d16c8b",
+   "carried": true,
+   "pass": 5
+  },
+  {
+   "row": "C915",
+   "screen": "talk_mom.eat",
+   "verdict": "N/A",
+   "line": "Done",
+   "why": "Same.",
+   "cause": null,
+   "note": true,
+   "screen_hash": {
+    "text": "cb5b4b6d73033d19",
+    "facts": "a78c81253b9ba872",
+    "all": "1870367b704cb91d"
+   },
+   "row_hash": "46d8f12824d16c8b",
+   "carried": true,
+   "pass": 5
+  },
+  {
+   "row": "C916",
+   "screen": "*",
+   "verdict": "N/A",
+   "line": "(both canvases)",
+   "why": "Both are menus she chooses; no event.",
+   "cause": null,
+   "note": false,
+   "screen_hash": "ad3f6be4b295a67a",
+   "row_hash": "06706eb2d5bad3b5",
+   "carried": true,
+   "pass": 5
+  },
+  {
+   "row": "C916",
+   "screen": "mom_living_room.talk",
+   "verdict": "N/A",
+   "line": "Done",
+   "why": "No event happens to her here.",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "e38ff3dafa65755f",
+    "facts": "cfda3d7c96f6f167",
+    "all": "dd5c534f9a55bb61"
+   },
+   "row_hash": "06706eb2d5bad3b5",
+   "carried": true,
+   "pass": 5
+  },
+  {
+   "row": "C916",
+   "screen": "talk_mom.eat",
+   "verdict": "N/A",
+   "line": "Done",
+   "why": "No event happens to her here.",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "cb5b4b6d73033d19",
+    "facts": "a78c81253b9ba872",
+    "all": "1870367b704cb91d"
+   },
+   "row_hash": "06706eb2d5bad3b5",
+   "carried": true,
+   "pass": 5
+  },
+  {
+   "row": "C920",
+   "screen": "*",
+   "verdict": "N/A",
+   "line": "(both canvases)",
+   "why": "No move between places on either canvas.",
+   "cause": null,
+   "note": false,
+   "screen_hash": "ad3f6be4b295a67a",
+   "row_hash": "3b568acb10d6806b",
+   "carried": true,
+   "pass": 5
+  },
+  {
+   "row": "C920",
+   "screen": "mom_living_room.talk",
+   "verdict": "N/A",
+   "line": "Done",
+   "why": "Done returns to the same room; no move between places.",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "e38ff3dafa65755f",
+    "facts": "cfda3d7c96f6f167",
+    "all": "dd5c534f9a55bb61"
+   },
+   "row_hash": "3b568acb10d6806b",
+   "carried": true,
+   "pass": 5
+  },
+  {
+   "row": "C920",
+   "screen": "talk_mom.eat",
+   "verdict": "N/A",
+   "line": "Done",
+   "why": "Done returns to home_kitchen, the room she's in; the 20 min is the meal.",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "cb5b4b6d73033d19",
+    "facts": "a78c81253b9ba872",
+    "all": "1870367b704cb91d"
+   },
+   "row_hash": "3b568acb10d6806b",
+   "carried": true,
+   "pass": 5
+  },
+  {
+   "row": "C921",
+   "screen": "*",
+   "verdict": "N/A",
+   "line": "(both canvases)",
+   "why": "No schedule window written by these canvases.",
+   "cause": null,
+   "note": true,
+   "screen_hash": "ad3f6be4b295a67a",
+   "row_hash": "19da817e808ac3d6",
+   "carried": true,
+   "pass": 5
+  },
+  {
+   "row": "C921",
+   "screen": "mom_living_room.talk",
+   "verdict": "N/A",
+   "line": "\u2014",
+   "why": "Same: no window written on this screen.",
+   "cause": null,
+   "note": true,
+   "screen_hash": {
+    "text": "bea6a579cecdd65d",
+    "facts": "cfda3d7c96f6f167",
+    "all": "8019d2454bae538d"
+   },
+   "row_hash": "19da817e808ac3d6",
+   "carried": false,
+   "pass": 6
+  },
+  {
+   "row": "C921",
+   "screen": "talk_mom.eat",
+   "verdict": "N/A",
+   "line": "Mom puts a plate of eggs in front of you",
+   "why": "No schedule window here; the time_of_day groups are prose picks.",
+   "cause": null,
+   "note": true,
+   "screen_hash": {
+    "text": "cb5b4b6d73033d19",
+    "facts": "a78c81253b9ba872",
+    "all": "1870367b704cb91d"
+   },
+   "row_hash": "19da817e808ac3d6",
+   "carried": true,
+   "pass": 5
+  },
+  {
+   "row": "C921",
+   "screen": "talk_mom.talk",
+   "verdict": "N/A",
+   "line": "\u2014",
+   "why": "The talk screen writes no schedule window; Laura, Mark and Ryan rows have end times and none wraps past midnight.",
+   "cause": null,
+   "note": true,
+   "screen_hash": {
+    "text": "feb79fad5e3d8649",
+    "facts": "2c74fede91c39514",
+    "all": "989d6f996d9fc275"
+   },
+   "row_hash": "19da817e808ac3d6",
+   "carried": false,
+   "pass": 6
+  },
+  {
+   "row": "C924",
+   "screen": "*",
+   "verdict": "N/A",
+   "line": "(both canvases)",
+   "why": "No travel.",
+   "cause": null,
+   "note": true,
+   "screen_hash": "ad3f6be4b295a67a",
+   "row_hash": "ce540d1e01b7c301",
+   "carried": true,
+   "pass": 5
+  },
+  {
+   "row": "C924",
+   "screen": "mom_living_room.talk",
+   "verdict": "N/A",
+   "line": "Done",
+   "why": "No travel.",
+   "cause": null,
+   "note": true,
+   "screen_hash": {
+    "text": "e38ff3dafa65755f",
+    "facts": "cfda3d7c96f6f167",
+    "all": "dd5c534f9a55bb61"
+   },
+   "row_hash": "ce540d1e01b7c301",
+   "carried": true,
+   "pass": 5
+  },
+  {
+   "row": "C924",
+   "screen": "talk_mom.eat",
+   "verdict": "N/A",
+   "line": "Done",
+   "why": "No travel.",
+   "cause": null,
+   "note": true,
+   "screen_hash": {
+    "text": "cb5b4b6d73033d19",
+    "facts": "a78c81253b9ba872",
+    "all": "1870367b704cb91d"
+   },
+   "row_hash": "ce540d1e01b7c301",
+   "carried": true,
+   "pass": 5
+  },
+  {
+   "row": "C926",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "(both canvases)",
+   "why": "The clock moves only by minutes; no named hour.",
+   "cause": null,
+   "note": true,
+   "screen_hash": "ad3f6be4b295a67a",
+   "row_hash": "8cd1b7e3576dc7b5",
+   "carried": true,
+   "pass": 5
+  },
+  {
+   "row": "C926",
+   "screen": "mom_living_room.talk",
+   "verdict": "PASS",
+   "line": "Done",
+   "why": "time_progression_minutes = 5; minutes only.",
+   "cause": null,
+   "note": true,
+   "screen_hash": {
+    "text": "e38ff3dafa65755f",
+    "facts": "cfda3d7c96f6f167",
+    "all": "dd5c534f9a55bb61"
+   },
+   "row_hash": "8cd1b7e3576dc7b5",
+   "carried": true,
+   "pass": 5
+  },
+  {
+   "row": "C926",
+   "screen": "talk_mom.eat",
+   "verdict": "PASS",
+   "line": "Done",
+   "why": "time_progression_minutes = 20; minutes only.",
+   "cause": null,
+   "note": true,
+   "screen_hash": {
+    "text": "cb5b4b6d73033d19",
+    "facts": "a78c81253b9ba872",
+    "all": "1870367b704cb91d"
+   },
+   "row_hash": "8cd1b7e3576dc7b5",
+   "carried": true,
+   "pass": 5
+  },
+  {
+   "row": "C927",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "(both canvases)",
+   "why": "Every location choice states its time explicitly.",
+   "cause": null,
+   "note": true,
+   "screen_hash": "ad3f6be4b295a67a",
+   "row_hash": "1e009d83817fb566",
+   "carried": true,
+   "pass": 5
+  },
+  {
+   "row": "C927",
+   "screen": "mom_living_room.talk",
+   "verdict": "PASS",
+   "line": "Done: time_progression_minutes = 5",
+   "why": "Same.",
+   "cause": null,
+   "note": true,
+   "screen_hash": {
+    "text": "bea6a579cecdd65d",
+    "facts": "cfda3d7c96f6f167",
+    "all": "8019d2454bae538d"
+   },
+   "row_hash": "1e009d83817fb566",
+   "carried": false,
+   "pass": 6
+  },
+  {
+   "row": "C927",
+   "screen": "talk_mom.eat",
+   "verdict": "PASS",
+   "line": "Done",
+   "why": "Its time is explicit (20).",
+   "cause": null,
+   "note": true,
+   "screen_hash": {
+    "text": "cb5b4b6d73033d19",
+    "facts": "a78c81253b9ba872",
+    "all": "1870367b704cb91d"
+   },
+   "row_hash": "1e009d83817fb566",
+   "carried": true,
+   "pass": 5
+  },
+  {
+   "row": "C927",
+   "screen": "talk_mom.talk",
+   "verdict": "PASS",
+   "line": "Done: time_progression_minutes = 5",
+   "why": "The only exit states its time; nothing falls back to 3 minutes.",
+   "cause": null,
+   "note": true,
+   "screen_hash": {
+    "text": "feb79fad5e3d8649",
+    "facts": "2c74fede91c39514",
+    "all": "989d6f996d9fc275"
+   },
+   "row_hash": "1e009d83817fb566",
+   "carried": false,
+   "pass": 6
+  },
+  {
+   "row": "C928",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "(both canvases)",
+   "why": "No clock in prose.",
+   "cause": null,
+   "note": false,
+   "screen_hash": "ad3f6be4b295a67a",
+   "row_hash": "799e1dd153166b6d",
+   "carried": true,
+   "pass": 5
+  },
+  {
+   "row": "C928",
+   "screen": "mom_living_room.talk",
+   "verdict": "PASS",
+   "line": "Stay in tonight. Just tonight. For me.",
+   "why": "No clock printed into prose.",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "e38ff3dafa65755f",
+    "facts": "cfda3d7c96f6f167",
+    "all": "dd5c534f9a55bb61"
+   },
+   "row_hash": "799e1dd153166b6d",
+   "carried": true,
+   "pass": 5
+  },
+  {
+   "row": "C928",
+   "screen": "talk_mom.eat",
+   "verdict": "PASS",
+   "line": "Mom puts a plate of eggs in front of you",
+   "why": "No clock printed into prose; breakfast/dinner chosen by time_of_day.",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "cb5b4b6d73033d19",
+    "facts": "a78c81253b9ba872",
+    "all": "1870367b704cb91d"
+   },
+   "row_hash": "799e1dd153166b6d",
+   "carried": true,
+   "pass": 5
+  },
+  {
+   "row": "C929",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "(both canvases)",
+   "why": "Activity times are on the labels.",
+   "cause": null,
+   "note": true,
+   "screen_hash": "ad3f6be4b295a67a",
+   "row_hash": "33a2ca367c2aac5b",
+   "carried": true,
+   "pass": 5
+  },
+  {
+   "row": "C929",
+   "screen": "mom_living_room.talk",
+   "verdict": "PASS",
+   "line": "Talk (5 min)",
+   "why": "The activity's time is carried on its label.",
+   "cause": null,
+   "note": true,
+   "screen_hash": {
+    "text": "e38ff3dafa65755f",
+    "facts": "cfda3d7c96f6f167",
+    "all": "dd5c534f9a55bb61"
+   },
+   "row_hash": "33a2ca367c2aac5b",
+   "carried": true,
+   "pass": 5
+  },
+  {
+   "row": "C929",
+   "screen": "talk_mom.eat",
+   "verdict": "PASS",
+   "line": "Eat with her (20 min, +15 energy)",
+   "why": "Carried on its label.",
+   "cause": null,
+   "note": true,
+   "screen_hash": {
+    "text": "cb5b4b6d73033d19",
+    "facts": "a78c81253b9ba872",
+    "all": "1870367b704cb91d"
+   },
+   "row_hash": "33a2ca367c2aac5b",
+   "carried": true,
+   "pass": 5
+  },
+  {
+   "row": "C930",
+   "screen": "*",
+   "verdict": "N/A",
+   "line": "(both canvases)",
+   "why": "No windowed work.",
+   "cause": null,
+   "note": true,
+   "screen_hash": "ad3f6be4b295a67a",
+   "row_hash": "97d54d350dd4ee77",
+   "carried": true,
+   "pass": 5
+  },
+  {
+   "row": "C930",
+   "screen": "mom_living_room.talk",
+   "verdict": "N/A",
+   "line": "Done",
+   "why": "No windowed work here.",
+   "cause": null,
+   "note": true,
+   "screen_hash": {
+    "text": "e38ff3dafa65755f",
+    "facts": "cfda3d7c96f6f167",
+    "all": "dd5c534f9a55bb61"
+   },
+   "row_hash": "97d54d350dd4ee77",
+   "carried": true,
+   "pass": 5
+  },
+  {
+   "row": "C930",
+   "screen": "talk_mom.eat",
+   "verdict": "N/A",
+   "line": "Done",
+   "why": "No windowed work here.",
+   "cause": null,
+   "note": true,
+   "screen_hash": {
+    "text": "cb5b4b6d73033d19",
+    "facts": "a78c81253b9ba872",
+    "all": "1870367b704cb91d"
+   },
+   "row_hash": "97d54d350dd4ee77",
+   "carried": true,
+   "pass": 5
+  },
+  {
+   "row": "C931",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "(both canvases)",
+   "why": "The only time_of_day reads (talk_mom.eat) behave end-exclusive with no gap she can reach.",
+   "cause": null,
+   "note": true,
+   "screen_hash": "ad3f6be4b295a67a",
+   "row_hash": "1b8984f52b99537e",
+   "carried": true,
+   "pass": 5
+  },
+  {
+   "row": "C931",
+   "screen": "mom_living_room.talk",
+   "verdict": "N/A",
+   "line": "\u2014",
+   "why": "No time_of_day condition; groups read npc_at_location and start flags.",
+   "cause": null,
+   "note": true,
+   "screen_hash": {
+    "text": "bea6a579cecdd65d",
+    "facts": "cfda3d7c96f6f167",
+    "all": "8019d2454bae538d"
+   },
+   "row_hash": "1b8984f52b99537e",
+   "carried": false,
+   "pass": 6
+  },
+  {
+   "row": "C931",
+   "screen": "talk_mom.eat",
+   "verdict": "PASS",
+   "line": "{ type = \"time_of_day\", start_time = \"12:00\", end_time = \"23:59\" }",
+   "why": "End exclusive: at 12:00 the eggs group is false and dinner is true; her Kitchen rows end at 12 and resume at 17, so no gap or overlap renders.",
+   "cause": null,
+   "note": true,
+   "screen_hash": {
+    "text": "cb5b4b6d73033d19",
+    "facts": "a78c81253b9ba872",
+    "all": "1870367b704cb91d"
+   },
+   "row_hash": "1b8984f52b99537e",
+   "carried": true,
+   "pass": 5
+  },
+  {
+   "row": "C931",
+   "screen": "talk_mom.talk",
+   "verdict": "N/A",
+   "line": "\u2014",
+   "why": "No time_of_day condition on the talk screen; its groups read npc_at_location only.",
+   "cause": null,
+   "note": true,
+   "screen_hash": {
+    "text": "feb79fad5e3d8649",
+    "facts": "2c74fede91c39514",
+    "all": "989d6f996d9fc275"
+   },
+   "row_hash": "1b8984f52b99537e",
+   "carried": false,
+   "pass": 6
+  },
+  {
+   "row": "C953",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "(both canvases)",
+   "why": "Every cost is on its label.",
+   "cause": null,
+   "note": true,
+   "screen_hash": "ad3f6be4b295a67a",
+   "row_hash": "26f84fb90a0ef795",
+   "carried": true,
+   "pass": 5
+  },
+  {
+   "row": "C953",
+   "screen": "mom_living_room.talk",
+   "verdict": "PASS",
+   "line": "Talk (5 min)",
+   "why": "Cost shown on the label before the click.",
+   "cause": null,
+   "note": true,
+   "screen_hash": {
+    "text": "e38ff3dafa65755f",
+    "facts": "cfda3d7c96f6f167",
+    "all": "dd5c534f9a55bb61"
+   },
+   "row_hash": "26f84fb90a0ef795",
+   "carried": true,
+   "pass": 5
+  },
+  {
+   "row": "C953",
+   "screen": "talk_mom.eat",
+   "verdict": "PASS",
+   "line": "Eat with her (20 min, +15 energy)",
+   "why": "Time and energy shown before the click.",
+   "cause": null,
+   "note": true,
+   "screen_hash": {
+    "text": "cb5b4b6d73033d19",
+    "facts": "a78c81253b9ba872",
+    "all": "1870367b704cb91d"
+   },
+   "row_hash": "26f84fb90a0ef795",
+   "carried": true,
+   "pass": 5
+  },
+  {
+   "row": "C954",
+   "screen": "*",
+   "verdict": "N/A",
+   "line": "(both canvases)",
+   "why": "No price or pay.",
+   "cause": null,
+   "note": true,
+   "screen_hash": "ad3f6be4b295a67a",
+   "row_hash": "a4837b8af6d54bb1",
+   "carried": true,
+   "pass": 5
+  },
+  {
+   "row": "C954",
+   "screen": "mom_living_room.talk",
+   "verdict": "N/A",
+   "line": "Done",
+   "why": "No pay or price here.",
+   "cause": null,
+   "note": true,
+   "screen_hash": {
+    "text": "e38ff3dafa65755f",
+    "facts": "cfda3d7c96f6f167",
+    "all": "dd5c534f9a55bb61"
+   },
+   "row_hash": "a4837b8af6d54bb1",
+   "carried": true,
+   "pass": 5
+  },
+  {
+   "row": "C954",
+   "screen": "talk_mom.eat",
+   "verdict": "N/A",
+   "line": "Done",
+   "why": "No pay or price; the meal is free.",
+   "cause": null,
+   "note": true,
+   "screen_hash": {
+    "text": "cb5b4b6d73033d19",
+    "facts": "a78c81253b9ba872",
+    "all": "1870367b704cb91d"
+   },
+   "row_hash": "a4837b8af6d54bb1",
+   "carried": true,
+   "pass": 5
+  },
+  {
+   "row": "C961",
+   "screen": "*",
+   "verdict": "N/A",
+   "line": "(both canvases)",
+   "why": "No meter moves on either canvas.",
+   "cause": null,
+   "note": true,
+   "screen_hash": "ad3f6be4b295a67a",
+   "row_hash": "623576cc5d249369",
+   "carried": true,
+   "pass": 5
+  },
+  {
+   "row": "C961",
+   "screen": "mom_living_room.talk",
+   "verdict": "N/A",
+   "line": "Just tonight, then.",
+   "why": "No offer and no meter here.",
+   "cause": null,
+   "note": true,
+   "screen_hash": {
+    "text": "e38ff3dafa65755f",
+    "facts": "cfda3d7c96f6f167",
+    "all": "dd5c534f9a55bb61"
+   },
+   "row_hash": "623576cc5d249369",
+   "carried": true,
+   "pass": 5
+  },
+  {
+   "row": "C961",
+   "screen": "talk_mom.eat",
+   "verdict": "N/A",
+   "line": "I'm eating, Mom. See?",
+   "why": "No offer and no meter here.",
+   "cause": null,
+   "note": true,
+   "screen_hash": {
+    "text": "cb5b4b6d73033d19",
+    "facts": "a78c81253b9ba872",
+    "all": "1870367b704cb91d"
+   },
+   "row_hash": "623576cc5d249369",
+   "carried": true,
+   "pass": 5
+  },
+  {
+   "row": "L106",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "(both canvases)",
+   "why": "Every person a line names is behind a presence check that matches who_is_where.",
+   "cause": null,
+   "note": false,
+   "screen_hash": "ad3f6be4b295a67a",
+   "row_hash": "759e6667d7fc3183",
+   "carried": true,
+   "pass": 5
+  },
+  {
+   "row": "L106",
+   "screen": "mom_living_room.talk",
+   "verdict": "PASS",
+   "line": "\"Mark turns the volume up.\" (npc_mark is_present)",
+   "why": "Mark is named only under his is_present condition; Ryan, who is there on weekdays, is never claimed absent.",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "bea6a579cecdd65d",
+    "facts": "cfda3d7c96f6f167",
+    "all": "8019d2454bae538d"
+   },
+   "row_hash": "759e6667d7fc3183",
+   "carried": false,
+   "pass": 6
+  },
+  {
+   "row": "L106",
+   "screen": "talk_mom.eat",
+   "verdict": "PASS",
+   "line": "Ryan eats standing at the counter.",
+   "why": "Each person line is behind his own npc_at_location is_present; Mark and Ryan are never in the Kitchen together while Mom is (who_is_where), and the both-there line comes first in the merged chain.",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "cb5b4b6d73033d19",
+    "facts": "a78c81253b9ba872",
+    "all": "1870367b704cb91d"
+   },
+   "row_hash": "759e6667d7fc3183",
+   "carried": true,
+   "pass": 5
+  },
+  {
+   "row": "L106",
+   "screen": "talk_mom.talk",
+   "verdict": "PASS",
+   "line": "\"Mark turns a page\" (npc_mark is_present) / \"Ryan rolls his eyes\" (npc_ryan is_present)",
+   "why": "Each person a line puts in the Kitchen is behind their own is_present condition, matching who_is_where.",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "feb79fad5e3d8649",
+    "facts": "2c74fede91c39514",
+    "all": "989d6f996d9fc275"
+   },
+   "row_hash": "759e6667d7fc3183",
+   "carried": false,
+   "pass": 6
+  },
+  {
+   "row": "L119",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "pool_dir = \"everyday/mom_kitchen_t0\", pool = 1",
+   "why": "Both canvases' hub pictures write pool = 1, the everyday size.",
+   "cause": null,
+   "note": false,
+   "screen_hash": "ad3f6be4b295a67a",
+   "row_hash": "18ef41501e0b23c3",
+   "carried": true,
+   "pass": 5
+  },
+  {
+   "row": "L119",
+   "screen": "mom_living_room.talk",
+   "verdict": "N/A",
+   "line": "Done",
+   "why": "No media spot on this screen.",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "e38ff3dafa65755f",
+    "facts": "cfda3d7c96f6f167",
+    "all": "dd5c534f9a55bb61"
+   },
+   "row_hash": "18ef41501e0b23c3",
+   "carried": true,
+   "pass": 5
+  },
+  {
+   "row": "L119",
+   "screen": "talk_mom.eat",
+   "verdict": "N/A",
+   "line": "Done",
+   "why": "No media spot on this screen.",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "cb5b4b6d73033d19",
+    "facts": "a78c81253b9ba872",
+    "all": "1870367b704cb91d"
+   },
+   "row_hash": "18ef41501e0b23c3",
+   "carried": true,
+   "pass": 5
+  },
+  {
+   "row": "L120",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "A woman of 41 in a cardigan on a living room couch",
+   "why": "Both pictures are her alone; no looker in frame.",
+   "cause": null,
+   "note": false,
+   "screen_hash": "ad3f6be4b295a67a",
+   "row_hash": "22461386046b4605",
+   "carried": true,
+   "pass": 5
+  },
+  {
+   "row": "L120",
+   "screen": "mom_living_room.talk",
+   "verdict": "N/A",
+   "line": "Done",
+   "why": "No media spot on this screen.",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "e38ff3dafa65755f",
+    "facts": "cfda3d7c96f6f167",
+    "all": "dd5c534f9a55bb61"
+   },
+   "row_hash": "22461386046b4605",
+   "carried": true,
+   "pass": 5
+  },
+  {
+   "row": "L120",
+   "screen": "talk_mom.eat",
+   "verdict": "N/A",
+   "line": "Done",
+   "why": "No media spot on this screen.",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "cb5b4b6d73033d19",
+    "facts": "a78c81253b9ba872",
+    "all": "1870367b704cb91d"
+   },
+   "row_hash": "22461386046b4605",
+   "carried": true,
+   "pass": 5
+  },
+  {
+   "row": "L121",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "(both canvases)",
+   "why": "One everyday picture per canvas, on the hub.",
+   "cause": null,
+   "note": false,
+   "screen_hash": "ad3f6be4b295a67a",
+   "row_hash": "cddfa55c18e5c7b7",
+   "carried": true,
+   "pass": 5
+  },
+  {
+   "row": "L121",
+   "screen": "mom_living_room.talk",
+   "verdict": "PASS",
+   "line": "Talk to Mom",
+   "why": "The scene's one everyday picture is on its hub; the talk screen adds none, which is the rule.",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "e38ff3dafa65755f",
+    "facts": "cfda3d7c96f6f167",
+    "all": "dd5c534f9a55bb61"
+   },
+   "row_hash": "cddfa55c18e5c7b7",
+   "carried": true,
+   "pass": 5
+  },
+  {
+   "row": "L121",
+   "screen": "talk_mom.eat",
+   "verdict": "PASS",
+   "line": "Eat with Mom",
+   "why": "The canvas's one everyday picture is on its hub; the meal screen adds none and is not a body moment.",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "cb5b4b6d73033d19",
+    "facts": "a78c81253b9ba872",
+    "all": "1870367b704cb91d"
+   },
+   "row_hash": "cddfa55c18e5c7b7",
+   "carried": true,
+   "pass": 5
+  },
+  {
+   "row": "L125",
+   "screen": "*",
+   "verdict": "N/A",
+   "line": "(both canvases)",
+   "why": "Both spots are stills; no clip.",
+   "cause": null,
+   "note": false,
+   "screen_hash": "ad3f6be4b295a67a",
+   "row_hash": "259dda0a0553e751",
+   "carried": true,
+   "pass": 5
+  },
+  {
+   "row": "L125",
+   "screen": "mom_living_room.talk",
+   "verdict": "N/A",
+   "line": "Done",
+   "why": "No clip.",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "e38ff3dafa65755f",
+    "facts": "cfda3d7c96f6f167",
+    "all": "dd5c534f9a55bb61"
+   },
+   "row_hash": "259dda0a0553e751",
+   "carried": true,
+   "pass": 5
+  },
+  {
+   "row": "L125",
+   "screen": "talk_mom.eat",
+   "verdict": "N/A",
+   "line": "Done",
+   "why": "No clip.",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "cb5b4b6d73033d19",
+    "facts": "a78c81253b9ba872",
+    "all": "1870367b704cb91d"
+   },
+   "row_hash": "259dda0a0553e751",
+   "carried": true,
+   "pass": 5
+  },
+  {
+   "row": "L147",
+   "screen": "*",
+   "verdict": "N/A",
+   "line": "(both canvases)",
+   "why": "Neither canvas is a place screen or a walk-in.",
+   "cause": null,
+   "note": false,
+   "screen_hash": "ad3f6be4b295a67a",
+   "row_hash": "5dea5707be5e7e0a",
+   "carried": true,
+   "pass": 5
+  },
+  {
+   "row": "L147",
+   "screen": "mom_living_room.talk",
+   "verdict": "N/A",
+   "line": "Done",
+   "why": "A person's menu, not a place; the Living Room's solo row lives on the room.",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "e38ff3dafa65755f",
+    "facts": "cfda3d7c96f6f167",
+    "all": "dd5c534f9a55bb61"
+   },
+   "row_hash": "5dea5707be5e7e0a",
+   "carried": true,
+   "pass": 5
+  },
+  {
+   "row": "L147",
+   "screen": "talk_mom.eat",
+   "verdict": "N/A",
+   "line": "Done",
+   "why": "A person's menu, not a place.",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "cb5b4b6d73033d19",
+    "facts": "a78c81253b9ba872",
+    "all": "1870367b704cb91d"
+   },
+   "row_hash": "5dea5707be5e7e0a",
+   "carried": true,
+   "pass": 5
+  },
+  {
+   "row": "L163",
+   "screen": "*",
+   "verdict": "N/A",
+   "line": "(both canvases)",
+   "why": "No rule changed by a screen.",
+   "cause": null,
+   "note": false,
+   "screen_hash": "ad3f6be4b295a67a",
+   "row_hash": "00a617ab9b4e9cd4",
+   "carried": true,
+   "pass": 5
+  },
+  {
+   "row": "L163",
+   "screen": "mom_living_room.talk",
+   "verdict": "N/A",
+   "line": "Done",
+   "why": "No rule removed.",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "e38ff3dafa65755f",
+    "facts": "cfda3d7c96f6f167",
+    "all": "dd5c534f9a55bb61"
+   },
+   "row_hash": "00a617ab9b4e9cd4",
+   "carried": true,
+   "pass": 5
+  },
+  {
+   "row": "L163",
+   "screen": "talk_mom.eat",
+   "verdict": "N/A",
+   "line": "Done",
+   "why": "No rule removed.",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "cb5b4b6d73033d19",
+    "facts": "a78c81253b9ba872",
+    "all": "1870367b704cb91d"
+   },
+   "row_hash": "00a617ab9b4e9cd4",
+   "carried": true,
+   "pass": 5
+  },
+  {
+   "row": "L167",
+   "screen": "*",
+   "verdict": "N/A",
+   "line": "(both canvases)",
+   "why": "No row on either canvas has hours; one canvas per room, gated by her presence.",
+   "cause": null,
+   "note": false,
+   "screen_hash": "ad3f6be4b295a67a",
+   "row_hash": "adf7bb3f8b632ac3",
+   "carried": true,
+   "pass": 5
+  },
+  {
+   "row": "L167",
+   "screen": "mom_living_room.talk",
+   "verdict": "N/A",
+   "line": "\u2014",
+   "why": "Same.",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "bea6a579cecdd65d",
+    "facts": "cfda3d7c96f6f167",
+    "all": "8019d2454bae538d"
+   },
+   "row_hash": "adf7bb3f8b632ac3",
+   "carried": false,
+   "pass": 6
+  },
+  {
+   "row": "L167",
+   "screen": "talk_mom.eat",
+   "verdict": "N/A",
+   "line": "Eat with her (20 min, +15 energy)",
+   "why": "No hours on any row; the time_of_day groups pick prose, not rows.",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "cb5b4b6d73033d19",
+    "facts": "a78c81253b9ba872",
+    "all": "1870367b704cb91d"
+   },
+   "row_hash": "adf7bb3f8b632ac3",
+   "carried": true,
+   "pass": 5
+  },
+  {
+   "row": "L167",
+   "screen": "talk_mom.talk",
+   "verdict": "N/A",
+   "line": "\u2014",
+   "why": "No activity row with hours on this screen.",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "feb79fad5e3d8649",
+    "facts": "2c74fede91c39514",
+    "all": "989d6f996d9fc275"
+   },
+   "row_hash": "adf7bb3f8b632ac3",
+   "carried": false,
+   "pass": 6
+  },
+  {
+   "row": "L97",
+   "screen": "*",
+   "verdict": "N/A",
+   "line": "(both canvases)",
+   "why": "No walk-in.",
+   "cause": null,
+   "note": false,
+   "screen_hash": "ad3f6be4b295a67a",
+   "row_hash": "2bfb9527e76ad93b",
+   "carried": true,
+   "pass": 5
+  },
+  {
+   "row": "L97",
+   "screen": "mom_living_room.talk",
+   "verdict": "N/A",
+   "line": "Done",
+   "why": "No walk-in.",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "e38ff3dafa65755f",
+    "facts": "cfda3d7c96f6f167",
+    "all": "dd5c534f9a55bb61"
+   },
+   "row_hash": "2bfb9527e76ad93b",
+   "carried": true,
+   "pass": 5
+  },
+  {
+   "row": "L97",
+   "screen": "talk_mom.eat",
+   "verdict": "N/A",
+   "line": "Done",
+   "why": "No walk-in.",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "cb5b4b6d73033d19",
+    "facts": "a78c81253b9ba872",
+    "all": "1870367b704cb91d"
+   },
+   "row_hash": "2bfb9527e76ad93b",
+   "carried": true,
+   "pass": 5
+  },
+  {
+   "row": "clock#1",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "(both canvases)",
+   "why": "Every button that leads to a spend shows it.",
+   "cause": null,
+   "note": false,
+   "screen_hash": "ad3f6be4b295a67a",
+   "row_hash": "cd89df2f76a7be89",
+   "carried": true,
+   "pass": 5
+  },
+  {
+   "row": "clock#1",
+   "screen": "mom_living_room.talk",
+   "verdict": "PASS",
+   "line": "Talk (5 min)",
+   "why": "Every time spend is printed before the click on the button that opens the screen; Leave costs 0.",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "e38ff3dafa65755f",
+    "facts": "cfda3d7c96f6f167",
+    "all": "dd5c534f9a55bb61"
+   },
+   "row_hash": "cd89df2f76a7be89",
+   "carried": true,
+   "pass": 5
+  },
+  {
+   "row": "clock#1",
+   "screen": "talk_mom.eat",
+   "verdict": "PASS",
+   "line": "Eat with her (20 min, +15 energy)",
+   "why": "The meal's 20 minutes are on the opening button.",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "cb5b4b6d73033d19",
+    "facts": "a78c81253b9ba872",
+    "all": "1870367b704cb91d"
+   },
+   "row_hash": "cd89df2f76a7be89",
+   "carried": true,
+   "pass": 5
+  },
+  {
+   "row": "clock#2",
+   "screen": "*",
+   "verdict": "N/A",
+   "line": "(both canvases)",
+   "why": "No travel.",
+   "cause": null,
+   "note": false,
+   "screen_hash": "ad3f6be4b295a67a",
+   "row_hash": "1a52b17c19333377",
+   "carried": true,
+   "pass": 5
+  },
+  {
+   "row": "clock#2",
+   "screen": "mom_living_room.talk",
+   "verdict": "N/A",
+   "line": "Done",
+   "why": "No move between areas.",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "e38ff3dafa65755f",
+    "facts": "cfda3d7c96f6f167",
+    "all": "dd5c534f9a55bb61"
+   },
+   "row_hash": "1a52b17c19333377",
+   "carried": true,
+   "pass": 5
+  },
+  {
+   "row": "clock#2",
+   "screen": "talk_mom.eat",
+   "verdict": "N/A",
+   "line": "Done",
+   "why": "No move between areas.",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "cb5b4b6d73033d19",
+    "facts": "a78c81253b9ba872",
+    "all": "1870367b704cb91d"
+   },
+   "row_hash": "1a52b17c19333377",
+   "carried": true,
+   "pass": 5
+  },
+  {
+   "row": "clock#3",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "(both canvases)",
+   "why": "No clock time in story text.",
+   "cause": null,
+   "note": false,
+   "screen_hash": "ad3f6be4b295a67a",
+   "row_hash": "aae8f146c8ec933d",
+   "carried": true,
+   "pass": 5
+  },
+  {
+   "row": "clock#3",
+   "screen": "mom_living_room.talk",
+   "verdict": "PASS",
+   "line": "Be home tomorrow night too. Promise me.",
+   "why": "No clock time in story text.",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "e38ff3dafa65755f",
+    "facts": "cfda3d7c96f6f167",
+    "all": "dd5c534f9a55bb61"
+   },
+   "row_hash": "aae8f146c8ec933d",
+   "carried": true,
+   "pass": 5
+  },
+  {
+   "row": "clock#3",
+   "screen": "talk_mom.eat",
+   "verdict": "PASS",
+   "line": "Mom dishes up two plates of dinner",
+   "why": "No clock time; meal named by time_of_day.",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "cb5b4b6d73033d19",
+    "facts": "a78c81253b9ba872",
+    "all": "1870367b704cb91d"
+   },
+   "row_hash": "aae8f146c8ec933d",
+   "carried": true,
+   "pass": 5
+  },
+  {
+   "row": "clock#4",
+   "screen": "*",
+   "verdict": "N/A",
+   "line": "(both canvases)",
+   "why": "No closed place.",
+   "cause": null,
+   "note": false,
+   "screen_hash": "ad3f6be4b295a67a",
+   "row_hash": "c33118361d16b379",
+   "carried": true,
+   "pass": 5
+  },
+  {
+   "row": "clock#4",
+   "screen": "mom_living_room.talk",
+   "verdict": "N/A",
+   "line": "Done",
+   "why": "No closed place here.",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "e38ff3dafa65755f",
+    "facts": "cfda3d7c96f6f167",
+    "all": "dd5c534f9a55bb61"
+   },
+   "row_hash": "c33118361d16b379",
+   "carried": true,
+   "pass": 5
+  },
+  {
+   "row": "clock#4",
+   "screen": "talk_mom.eat",
+   "verdict": "N/A",
+   "line": "Done",
+   "why": "No closed place here.",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "cb5b4b6d73033d19",
+    "facts": "a78c81253b9ba872",
+    "all": "1870367b704cb91d"
+   },
+   "row_hash": "c33118361d16b379",
+   "carried": true,
+   "pass": 5
+  },
+  {
+   "row": "clock#5",
+   "screen": "*",
+   "verdict": "N/A",
+   "line": "(both canvases)",
+   "why": "Her hours are her rows.",
+   "cause": null,
+   "note": false,
+   "screen_hash": "ad3f6be4b295a67a",
+   "row_hash": "95c5edec9e714e7b",
+   "carried": true,
+   "pass": 5
+  },
+  {
+   "row": "clock#5",
+   "screen": "mom_living_room.talk",
+   "verdict": "N/A",
+   "line": "Done",
+   "why": "No hours published here.",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "e38ff3dafa65755f",
+    "facts": "cfda3d7c96f6f167",
+    "all": "dd5c534f9a55bb61"
+   },
+   "row_hash": "95c5edec9e714e7b",
+   "carried": true,
+   "pass": 5
+  },
+  {
+   "row": "clock#5",
+   "screen": "talk_mom.eat",
+   "verdict": "N/A",
+   "line": "Done",
+   "why": "Same.",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "cb5b4b6d73033d19",
+    "facts": "a78c81253b9ba872",
+    "all": "1870367b704cb91d"
+   },
+   "row_hash": "95c5edec9e714e7b",
+   "carried": true,
+   "pass": 5
+  },
+  {
+   "row": "clock#6",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "(both canvases)",
+   "why": "Durations, never 'till X'.",
+   "cause": null,
+   "note": false,
+   "screen_hash": "ad3f6be4b295a67a",
+   "row_hash": "31fd30fb07702bc9",
+   "carried": true,
+   "pass": 5
+  },
+  {
+   "row": "clock#6",
+   "screen": "mom_living_room.talk",
+   "verdict": "PASS",
+   "line": "Talk (5 min)",
+   "why": "Duration only.",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "e38ff3dafa65755f",
+    "facts": "cfda3d7c96f6f167",
+    "all": "dd5c534f9a55bb61"
+   },
+   "row_hash": "31fd30fb07702bc9",
+   "carried": true,
+   "pass": 5
+  },
+  {
+   "row": "clock#6",
+   "screen": "talk_mom.eat",
+   "verdict": "PASS",
+   "line": "Eat with her (20 min, +15 energy)",
+   "why": "Duration only.",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "cb5b4b6d73033d19",
+    "facts": "a78c81253b9ba872",
+    "all": "1870367b704cb91d"
+   },
+   "row_hash": "31fd30fb07702bc9",
+   "carried": true,
+   "pass": 5
+  },
+  {
+   "row": "clock#7",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "(both canvases)",
+   "why": "The only weekday named is true on every visit it can render on.",
+   "cause": null,
+   "note": false,
+   "screen_hash": "ad3f6be4b295a67a",
+   "row_hash": "313c48a91780f62b",
+   "carried": true,
+   "pass": 5
+  },
+  {
+   "row": "clock#7",
+   "screen": "mom_living_room.talk",
+   "verdict": "PASS",
+   "line": "Next Saturday, you tell me the next part.",
+   "why": "Renders only on Saturday (Mark's rows put him in the Living Room every other evening) and is a forward promise true on any visit.",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "e38ff3dafa65755f",
+    "facts": "cfda3d7c96f6f167",
+    "all": "dd5c534f9a55bb61"
+   },
+   "row_hash": "313c48a91780f62b",
+   "carried": true,
+   "pass": 5
+  },
+  {
+   "row": "clock#7",
+   "screen": "talk_mom.eat",
+   "verdict": "PASS",
+   "line": "Eat. You're too thin.",
+   "why": "No weekday named.",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "cb5b4b6d73033d19",
+    "facts": "a78c81253b9ba872",
+    "all": "1870367b704cb91d"
+   },
+   "row_hash": "313c48a91780f62b",
+   "carried": true,
+   "pass": 5
+  },
+  {
+   "row": "clock#8",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "Next Saturday, you tell me the next part.",
+   "why": "Everything repeats: Talk once a day (talked_mom_today, daily tick), Eat once a day (ate_with_mom_today), the Saturday promise weekly; no deadline.",
+   "cause": null,
+   "note": false,
+   "screen_hash": "ad3f6be4b295a67a",
+   "row_hash": "f0c2400d02519978",
+   "carried": true,
+   "pass": 5
+  },
+  {
+   "row": "clock#9",
+   "screen": "*",
+   "verdict": "N/A",
+   "line": "Talk (5 min) \u00b7 Eat with her (20 min, +15 energy) \u00b7 Leave",
+   "why": "No button on either menu has hours; both canvases are gated by her presence (requires_npc), not by a windowed row, so there is no row per day kind to judge.",
+   "cause": null,
+   "note": false,
+   "screen_hash": "ad3f6be4b295a67a",
+   "row_hash": "5d697f6bcd9f82de",
+   "carried": true,
+   "pass": 5
+  },
+  {
+   "row": "media#1",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "Mom's in the kitchen. She looks up at you, and her face goes soft. [picture]",
+   "why": "Each menu's one picture sits right after her presence line; talk and eat carry none.",
+   "cause": null,
+   "note": false,
+   "screen_hash": "ad3f6be4b295a67a",
+   "row_hash": "3641bf707d9adfce",
+   "carried": true,
+   "pass": 5
+  },
+  {
+   "row": "media#2",
+   "screen": "*",
+   "verdict": "N/A",
+   "line": "everyday/mom_kitchen_t0",
+   "why": "A person's menu picture, not a place's picture.",
+   "cause": null,
+   "note": false,
+   "screen_hash": "ad3f6be4b295a67a",
+   "row_hash": "6fbfd98c2bfee006",
+   "carried": true,
+   "pass": 5
+  },
+  {
+   "row": "media#3",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "everyday/mom_living_t0",
+   "why": "Her menu gets her one picture; talk screens and the Eat screen (no new moment) get none.",
+   "cause": null,
+   "note": false,
+   "screen_hash": "ad3f6be4b295a67a",
+   "row_hash": "8c75b0d488b188e2",
+   "carried": true,
+   "pass": 5
+  },
+  {
+   "row": "media#4",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "pool = 1",
+   "why": "Tier 0 everyday person picture, pool 1 on both.",
+   "cause": null,
+   "note": false,
+   "screen_hash": "ad3f6be4b295a67a",
+   "row_hash": "03599fc0722690b6",
+   "carried": true,
+   "pass": 5
+  },
+  {
+   "row": "media#5",
+   "screen": "*",
+   "verdict": "N/A",
+   "line": "-",
+   "why": "No look on these screens.",
+   "cause": null,
+   "note": false,
+   "screen_hash": "ad3f6be4b295a67a",
+   "row_hash": "2cf5e3607ccecd4a",
+   "carried": true,
+   "pass": 5
+  },
+  {
+   "row": "media#6",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "at a kitchen counter with a mug, looking up.",
+   "why": "Nothing happens in either picture; both are stills, no gif in the search words.",
+   "cause": null,
+   "note": false,
+   "screen_hash": "ad3f6be4b295a67a",
+   "row_hash": "3016751837a9b0a0",
+   "carried": true,
+   "pass": 5
+  },
+  {
+   "row": "media#7",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "A woman of 41 in a cardigan on a living room couch, her feet under her, TV light on her face.",
+   "why": "Age, the room, what she wears, two plain search phrases on each spot.",
+   "cause": null,
+   "note": false,
+   "screen_hash": "ad3f6be4b295a67a",
+   "row_hash": "eff6dc1369755c34",
+   "carried": true,
+   "pass": 5
+  },
+  {
+   "row": "people#1",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "flag_key = \"met_laura\"",
+   "why": "She lives with her; both triggers need met_laura, set by the opening.",
+   "cause": null,
+   "note": false,
+   "screen_hash": "ad3f6be4b295a67a",
+   "row_hash": "3ca322fe98f5dab6",
+   "carried": true,
+   "pass": 5
+  },
+  {
+   "row": "people#10",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "Talk (5 min) \u2014 you've already talked today.",
+   "why": "Her face opens her menu; Talk once a day, greyed with a reason; Eat and Leave stay usable; nothing is a room button.",
+   "cause": null,
+   "note": false,
+   "screen_hash": "ad3f6be4b295a67a",
+   "row_hash": "4a994154015ae37d",
+   "carried": true,
+   "pass": 5
+  },
+  {
+   "row": "people#2",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "Mom's in the kitchen.",
+   "why": "Relation 'Mom' in the prose, name Laura on her card after the meeting.",
+   "cause": null,
+   "note": false,
+   "screen_hash": "ad3f6be4b295a67a",
+   "row_hash": "77207820edd1c3a4",
+   "carried": true,
+   "pass": 5
+  },
+  {
+   "row": "people#3",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "met_laura is_true",
+   "why": "Her card and menu are hidden until met.",
+   "cause": null,
+   "note": false,
+   "screen_hash": "ad3f6be4b295a67a",
+   "row_hash": "5f60eac9fd509c6c",
+   "carried": true,
+   "pass": 5
+  },
+  {
+   "row": "people#4",
+   "screen": "*",
+   "verdict": "N/A",
+   "line": "-",
+   "why": "Nothing sexual here; no wanting to show before an act.",
+   "cause": null,
+   "note": false,
+   "screen_hash": "ad3f6be4b295a67a",
+   "row_hash": "3f52fa27dd3a5bfa",
+   "carried": true,
+   "pass": 5
+  },
+  {
+   "row": "people#5",
+   "screen": "*",
+   "verdict": "N/A",
+   "line": "Stay in tonight. Just tonight. For me.",
+   "why": "A scripted talk with one exit (Done), not an offer with a mechanic.",
+   "cause": null,
+   "note": false,
+   "screen_hash": "ad3f6be4b295a67a",
+   "row_hash": "1326d7ac8cba5298",
+   "carried": true,
+   "pass": 5
+  },
+  {
+   "row": "people#6",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "Sit with me a minute, baby.",
+   "why": "Her manner (worry, wants her close, wants to be told first), her subjects (rent, classes, staying in), 'baby' used by nobody else (Mark says 'kid').",
+   "cause": null,
+   "note": false,
+   "screen_hash": "ad3f6be4b295a67a",
+   "row_hash": "0b522d7eb38d75bb",
+   "carried": true,
+   "pass": 5
+  },
+  {
+   "row": "people#7",
+   "screen": "mom_living_room.hub",
+   "verdict": "PASS",
+   "line": "Mom's on the couch with her feet under her... [picture]",
+   "why": "her one picture sits right after the presence line on her menu",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "2142bb1af79cf4dd",
+    "facts": "7b286d6913c4449b",
+    "all": "7f19adc289b6a802"
+   },
+   "row_hash": "b03ec1f9649681a0",
+   "carried": true,
+   "pass": 4
+  },
+  {
+   "row": "people#7",
+   "screen": "mom_living_room.talk",
+   "verdict": "PASS",
+   "line": "Mark: \"Some of us are trying to watch this.\" / Laura: \"Then watch it, Mark.\"",
+   "why": "50/51/42/47/42 words, 61-76% spoken, one exit: about 55 words, about two-thirds spoken.",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "bea6a579cecdd65d",
+    "facts": "cfda3d7c96f6f167",
+    "all": "8019d2454bae538d"
+   },
+   "row_hash": "b03ec1f9649681a0",
+   "carried": false,
+   "pass": 6
+  },
+  {
+   "row": "people#7",
+   "screen": "talk_mom.talk",
+   "verdict": "PASS",
+   "line": "Mark: \"She's got somewhere to be, Laura.\" / Laura: \"Then she's got a minute first.\" / Her: \"I'll come find you, Mom. Later.\"",
+   "why": "Lengthened toward the shape: 46/48/40 words, 59%/71%/82% spoken, one exit (Done). The 40-word Ryan version is within the 34-57 target that reader.md sets for length.",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "feb79fad5e3d8649",
+    "facts": "2c74fede91c39514",
+    "all": "989d6f996d9fc275"
+   },
+   "row_hash": "b03ec1f9649681a0",
+   "carried": false,
+   "pass": 6
+  },
+  {
+   "row": "people#8",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "-",
+   "why": "No meter moves here; release 1 shows meters still.",
+   "cause": null,
+   "note": false,
+   "screen_hash": "ad3f6be4b295a67a",
+   "row_hash": "ba17b4df73559422",
+   "carried": true,
+   "pass": 5
+  },
+  {
+   "row": "people#9",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "She moves over to make room.",
+   "why": "Who she is and that she wants her close show in the first line of each menu.",
+   "cause": null,
+   "note": false,
+   "screen_hash": "ad3f6be4b295a67a",
+   "row_hash": "a73dd8f1e77941ca",
+   "carried": true,
+   "pass": 5
+  },
+  {
+   "row": "places#1",
+   "screen": "*",
+   "verdict": "N/A",
+   "line": "Mom's in the kitchen.",
+   "why": "Her menu is a person screen, not a place screen; the room's identity line lives on the location.",
+   "cause": null,
+   "note": false,
+   "screen_hash": "ad3f6be4b295a67a",
+   "row_hash": "18252966b4327f58",
+   "carried": true,
+   "pass": 5
+  },
+  {
+   "row": "places#2",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "Mom's on the couch. Mark's in his chair, the remote on his knee.",
+   "why": "Presence follows the rows: Mark-absent Living Room only on Saturday 19-23 (Ryan in his room then); Kitchen talk/eat combos match Mark's and Ryan's Kitchen rows, which never overlap; Ryan is never claimed absent.",
+   "cause": null,
+   "note": false,
+   "screen_hash": "ad3f6be4b295a67a",
+   "row_hash": "3ab79adc34668b04",
+   "carried": true,
+   "pass": 5
+  },
+  {
+   "row": "places#3",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "Talk (5 min) \u00b7 Eat with her (20 min, +15 energy) \u00b7 Leave",
+   "why": "Her actions sit in her menu behind her face, none on the room.",
+   "cause": null,
+   "note": false,
+   "screen_hash": "ad3f6be4b295a67a",
+   "row_hash": "56d056c80da49bb6",
+   "carried": true,
+   "pass": 5
+  },
+  {
+   "row": "places#4",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "Eat with her (20 min, +15 energy)",
+   "why": "Short labels with time and energy shown.",
+   "cause": null,
+   "note": false,
+   "screen_hash": "ad3f6be4b295a67a",
+   "row_hash": "ada53ed66015c980",
+   "carried": true,
+   "pass": 5
+  },
+  {
+   "row": "places#5",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "Eat with her (20 min, +15 energy) \u2014 not again today.",
+   "why": "Both greyed buttons say why.",
+   "cause": null,
+   "note": false,
+   "screen_hash": "ad3f6be4b295a67a",
+   "row_hash": "90ec575adee9bf74",
+   "carried": true,
+   "pass": 5
+  },
+  {
+   "row": "places#6",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "-",
+   "why": "Kitchen and Living Room keep their own solo acts (Eat something, Watch TV); her menu takes none of them.",
+   "cause": null,
+   "note": false,
+   "screen_hash": "ad3f6be4b295a67a",
+   "row_hash": "f2bc5f0f10c64c4b",
+   "carried": true,
+   "pass": 5
+  },
+  {
+   "row": "places#7",
+   "screen": "*",
+   "verdict": "N/A",
+   "line": "-",
+   "why": "No street or quad here.",
+   "cause": null,
+   "note": false,
+   "screen_hash": "ad3f6be4b295a67a",
+   "row_hash": "2a095bf54f175e5e",
+   "carried": true,
+   "pass": 5
+  },
+  {
+   "row": "places#8",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "-",
+   "why": "Hub about 15-35 words, talks 24-51, eat about 60; all short.",
+   "cause": null,
+   "note": false,
+   "screen_hash": "ad3f6be4b295a67a",
+   "row_hash": "c3ea8d01465e7298",
+   "carried": true,
+   "pass": 5
+  },
+  {
+   "row": "places#9",
+   "screen": "*",
+   "verdict": "N/A",
+   "line": "-",
+   "why": "No first-visit screen or anchor-prose question here.",
+   "cause": null,
+   "note": false,
+   "screen_hash": "ad3f6be4b295a67a",
+   "row_hash": "f4cd9ab5f62bc6fc",
+   "carried": true,
+   "pass": 5
+  },
+  {
+   "row": "voice#1",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "You sit. She listens to all of it, and her shoulders come down.",
+   "why": "Second person, short sentences.",
+   "cause": null,
+   "note": false,
+   "screen_hash": "ad3f6be4b295a67a",
+   "row_hash": "b8e8afcb32208b40",
+   "carried": true,
+   "pass": 5
+  },
+  {
+   "row": "voice#2",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "Your throat goes tight. You eat every bite.",
+   "why": "Feelings on the body (stomach tightens, shoulders come down, hand on your knee); none named.",
+   "cause": null,
+   "note": false,
+   "screen_hash": "ad3f6be4b295a67a",
+   "row_hash": "a40d4073409a2705",
+   "carried": true,
+   "pass": 5
+  },
+  {
+   "row": "voice#3",
+   "screen": "*",
+   "verdict": "N/A",
+   "line": "-",
+   "why": "No arousal on these screens.",
+   "cause": null,
+   "note": false,
+   "screen_hash": "ad3f6be4b295a67a",
+   "row_hash": "4777d2c1251214c2",
+   "carried": true,
+   "pass": 5
+  },
+  {
+   "row": "voice#4",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "-",
+   "why": "No italic thoughts; her answers are spoken.",
+   "cause": null,
+   "note": false,
+   "screen_hash": "ad3f6be4b295a67a",
+   "row_hash": "ac2fdd7245f436db",
+   "carried": true,
+   "pass": 5
+  },
+  {
+   "row": "voice#5",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "Mark eats without looking up from his paper. Ryan eats standing at the counter.",
+   "why": "Every path speaks; heaviest path (hub + eat with both men) about 4.3:1, under 5:1.",
+   "cause": null,
+   "note": false,
+   "screen_hash": "ad3f6be4b295a67a",
+   "row_hash": "7bbdd4290054e601",
+   "carried": true,
+   "pass": 5
+  },
+  {
+   "row": "voice#6",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "Mark's in his chair, the remote on his knee.",
+   "why": "Plain, concrete detail; nothing sexual to name.",
+   "cause": null,
+   "note": false,
+   "screen_hash": "ad3f6be4b295a67a",
+   "row_hash": "df1f5dc8b6d21538",
+   "carried": true,
+   "pass": 5
+  },
+  {
+   "row": "voice#7",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "Next Saturday, you tell me the next part.",
+   "why": "Read at first/last minute: 'tonight' and 'Next Saturday' render only Saturday 19-23; 'Ryan, plates' only in his Kitchen rows; eggs before 12:00, dinner after; Mark at the table only behind his Kitchen row; rent question true (Mark sets it in the opening on every path).",
+   "cause": null,
+   "note": false,
+   "screen_hash": "ad3f6be4b295a67a",
+   "row_hash": "321cc76cff93aadb",
+   "carried": true,
+   "pass": 5
+  },
+  {
+   "row": "voice#8",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "When he's gone, you tell me everything.",
+   "why": "Her own term 'baby', her manner; every talk version and the meal end on a hook; labels plain.",
+   "cause": null,
+   "note": false,
+   "screen_hash": "ad3f6be4b295a67a",
+   "row_hash": "4362249fb5f9616e",
+   "carried": true,
+   "pass": 5
+  }
+ ],
+ "causes": [],
+ "pending": [],
+ "asked": 22,
+ "answered": 22,
+ "pass_items": [],
+ "unowed": []
+}

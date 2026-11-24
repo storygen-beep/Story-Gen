@@ -1,0 +1,179 @@
+{
+ "items": [
+  {
+   "row": "B10",
+   "screen": "cafe_hire.ask",
+   "why": "screen changed: truth row"
+  },
+  {
+   "row": "B10",
+   "screen": "cafe_hire.both",
+   "why": "screen changed: truth row"
+  },
+  {
+   "row": "B10",
+   "screen": "cafe_hire.no",
+   "why": "screen changed: truth row"
+  },
+  {
+   "row": "B10",
+   "screen": "cafe_hire.sign",
+   "why": "screen changed: truth row"
+  },
+  {
+   "row": "B4",
+   "screen": "cafe_hire.both",
+   "why": "failed last pass"
+  },
+  {
+   "row": "B8",
+   "screen": "cafe_hire.ask",
+   "why": "screen changed: truth row"
+  },
+  {
+   "row": "B8",
+   "screen": "cafe_hire.both",
+   "why": "screen changed: truth row"
+  },
+  {
+   "row": "B8",
+   "screen": "cafe_hire.no",
+   "why": "screen changed: truth row"
+  },
+  {
+   "row": "B8",
+   "screen": "cafe_hire.sign",
+   "why": "screen changed: truth row"
+  },
+  {
+   "row": "C1421",
+   "screen": "cafe_hire.no",
+   "why": "failed last pass (a note), its screen changed"
+  },
+  {
+   "row": "C287",
+   "screen": "cafe_hire.both",
+   "why": "failed last pass (a note), its screen changed"
+  },
+  {
+   "row": "C442",
+   "screen": "cafe_hire.both",
+   "why": "failed last pass"
+  },
+  {
+   "row": "C449",
+   "screen": "cafe_hire.both",
+   "why": "failed last pass"
+  },
+  {
+   "row": "C460",
+   "screen": "cafe_hire.ask",
+   "why": "screen changed: truth row"
+  },
+  {
+   "row": "C460",
+   "screen": "cafe_hire.both",
+   "why": "screen changed: truth row"
+  },
+  {
+   "row": "C460",
+   "screen": "cafe_hire.no",
+   "why": "screen changed: truth row"
+  },
+  {
+   "row": "C460",
+   "screen": "cafe_hire.sign",
+   "why": "screen changed: truth row"
+  },
+  {
+   "row": "C461",
+   "screen": "cafe_hire.ask",
+   "why": "screen changed: truth row"
+  },
+  {
+   "row": "C461",
+   "screen": "cafe_hire.both",
+   "why": "screen changed: truth row"
+  },
+  {
+   "row": "C461",
+   "screen": "cafe_hire.no",
+   "why": "screen changed: truth row"
+  },
+  {
+   "row": "C461",
+   "screen": "cafe_hire.sign",
+   "why": "screen changed: truth row"
+  },
+  {
+   "row": "C927",
+   "screen": "cafe_hire.ask",
+   "why": "screen changed: truth row"
+  },
+  {
+   "row": "C927",
+   "screen": "cafe_hire.both",
+   "why": "screen changed: truth row"
+  },
+  {
+   "row": "C927",
+   "screen": "cafe_hire.sign",
+   "why": "screen changed: truth row"
+  },
+  {
+   "row": "C931",
+   "screen": "cafe_hire.ask",
+   "why": "screen changed: truth row"
+  },
+  {
+   "row": "C931",
+   "screen": "cafe_hire.both",
+   "why": "screen changed: truth row"
+  },
+  {
+   "row": "C931",
+   "screen": "cafe_hire.sign",
+   "why": "screen changed: truth row"
+  },
+  {
+   "row": "L106",
+   "screen": "cafe_hire.ask",
+   "why": "screen changed: truth row"
+  },
+  {
+   "row": "L106",
+   "screen": "cafe_hire.both",
+   "why": "screen changed: truth row"
+  },
+  {
+   "row": "L106",
+   "screen": "cafe_hire.no",
+   "why": "screen changed: truth row"
+  },
+  {
+   "row": "L106",
+   "screen": "cafe_hire.sign",
+   "why": "screen changed: truth row"
+  },
+  {
+   "row": "L167",
+   "screen": "cafe_hire.ask",
+   "why": "screen changed: truth row"
+  },
+  {
+   "row": "L167",
+   "screen": "cafe_hire.both",
+   "why": "screen changed: truth row"
+  },
+  {
+   "row": "L167",
+   "screen": "cafe_hire.sign",
+   "why": "screen changed: truth row"
+  },
+  {
+   "row": "L71",
+   "screen": "cafe_hire.both",
+   "why": "failed last pass"
+  }
+ ]
+}
