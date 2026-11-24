@@ -1,0 +1,33 @@
+{
+ "verdicts": [
+  {
+   "row": "B10",
+   "screen": "phone:text_chris",
+   "verdict": "PASS",
+   "line": "it's chris. couldn't stop looking at your ass, new girl. you noticed.",
+   "why": "'all shift' is gone; the claim needs him there only for the training scene, which opens the shift (cafe_first_shift.start: he is at the machine; who_is_where has him near_cafe weekdays 07-15 and the shift starts 10:00-14:55); 'you noticed' rests on 'He watches you notice.'; 'tom' as the number source holds (Tom texted her after the hire, before the first shift); the thread is one-time, so there is no second visit; 'next shift' holds whenever she reads it"
+  },
+  {
+   "row": "B12",
+   "screen": "phone:text_chris",
+   "verdict": "PASS",
+   "line": "couldn't stop looking at your ass · one day you'll let me look properly · next shift i'm not pretending · you'll owe me for that",
+   "why": "her body is named (her ass), his reaction is written (he couldn't stop looking), and every back holds a 'not yet' or a price that points forward: 'one day' (not yet), 'next shift' (held off until then), 'you'll owe me' (a price)"
+  },
+  {
+   "row": "C311",
+   "screen": "phone:text_chris",
+   "verdict": "PASS",
+   "line": "one day you'll let me look properly / knew it 😏 next shift i'm not pretending / tom. don't tell him i used it. you'll owe me for that",
+   "why": "body part plus his reaction in the opening text; each of the three backs carries a not-yet or a price and a hook to a later time ('one day', 'next shift', the debt she owes him)"
+  },
+  {
+   "row": "C460",
+   "screen": "phone:text_chris",
+   "verdict": "PASS",
+   "line": "couldn't stop looking at your ass, new girl. you noticed.",
+   "why": "no presence claim is left that a late start breaks: him looking is true in the shift's opening scene on every start time; 'you noticed' matches 'He watches you notice.'; 'new girl' is his term on that screen; Tom as the number source fits (Tom has her number from the hire)"
+  }
+ ],
+ "causes": []
+}

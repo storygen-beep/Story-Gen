@@ -30,6 +30,12 @@ flag_keys = [
   "ate_with_mom_today",
   # P33 — the run, first time
   "ran_once",
+  # P32 — met flags for the people P32 schedules (their meetings set them)
+  "met_hale", "met_pratt", "met_cross", "met_nadia", "met_holt", "met_rosa", "met_frank", "met_danny", "met_marco",
+  # P15 — memory flags from her answers
+  "nadia_sat_with", "nadia_front_row", "nadia_asked", "pratt_silent",
+  # P16 — memory flags from her answers
+  "walsh_maam", "walsh_no_advisor", "walsh_silent", "walsh_stayed",
   # P35 — the clothes shop
   "met_nina",
 ]
@@ -247,7 +253,7 @@ kind = "thoroughfare"
 [[locations]]
 id = "campus_lecture_hall"
 name = "Lecture Hall"
-description = "The lecture hall: rows of seats rising to the back, a screen, a lectern at the bottom. Your classes are here. A sign by the door says it's open weekdays from 8am to 6pm."
+description = "The lecture hall: rows of seats rising to the back, a screen, a lectern at the bottom. Most of your classes are here. A sign by the door says it's open weekdays from 8am to 6pm."
 parent = "campus"
 kind = "destination"
 image = "locations/campus_lecture_hall_t0.jpg"
@@ -423,7 +429,7 @@ location = "home_ryans_room"
 weekdays = [0, 1, 2, 3, 4]
 start_time = "23:00"
 end_time = "07:00"
-activity = "in his room"
+activity = "asleep"
 
 [[npcs.schedules]]
 location = "home_ryans_room"
@@ -510,7 +516,7 @@ location = "home_kitchen"
 weekdays = [5, 6]
 start_time = "08:00"
 end_time = "12:00"
-activity = "a slow breakfast"
+activity = "having a slow breakfast"
 
 [[npcs.schedules]]
 location = "home_kitchen"
@@ -548,7 +554,7 @@ location = "home_kitchen"
 weekdays = [0, 1, 2, 3, 4]
 start_time = "07:00"
 end_time = "07:30"
-activity = "coffee before work"
+activity = "having coffee before work"
 
 [[npcs.schedules]]
 location = "home_living_room"
@@ -569,7 +575,7 @@ location = "home_kitchen"
 weekdays = [5, 6]
 start_time = "08:00"
 end_time = "10:00"
-activity = "breakfast"
+activity = "having breakfast"
 
 [[npcs.schedules]]
 location = "home_living_room"
@@ -583,7 +589,7 @@ location = "home_kitchen"
 weekdays = [6]
 start_time = "10:00"
 end_time = "12:00"
-activity = "at the table, Sunday"
+activity = "at the kitchen table"
 
 [[npcs.schedules]]
 location = "home_living_room"
@@ -917,6 +923,246 @@ start_time = "10:00"
 end_time = "21:00"
 activity = "behind the counter"
 
+# P32 — everyone release 1 meets on campus and in the neighbourhood, by PLAN §9b/§9c. No meter in
+# release 1; their meetings (P15–P19, P22–P24) set their met flags.
+[[npcs]]
+id = "npc_hale"
+name = "Dr. Hale"
+role = "Professor"
+relationship = "Dr. Hale, 39. Your psychology professor."
+description = "Professor, 39."
+
+[[npcs.schedules]]
+location = "campus_lecture_hall"
+weekdays = [0, 2]
+start_time = "09:00"
+end_time = "11:00"
+activity = "lecturing"
+
+[[npcs.schedules]]
+location = "campus_offices"
+weekdays = [0, 2]
+start_time = "14:00"
+end_time = "17:00"
+activity = "in his office hours"
+
+[[npcs]]
+id = "npc_pratt"
+name = "Mr. Pratt"
+role = "Statistics teacher"
+relationship = "Mr. Pratt, 44. Your statistics teacher."
+description = "Statistics teacher, 44."
+
+[[npcs.schedules]]
+location = "campus_lecture_hall"
+weekdays = [0, 2]
+start_time = "11:00"
+end_time = "13:00"
+activity = "teaching"
+
+[[npcs.schedules]]
+location = "campus_offices"
+weekdays = [0, 2]
+start_time = "13:00"
+end_time = "15:00"
+activity = "in his office"
+
+[[npcs]]
+id = "npc_walsh"
+name = "Prof. Walsh"
+role = "English professor and advisor"
+relationship = "Prof. Walsh, 48. Your English professor, and your advisor."
+description = "English professor and advisor, 48."
+
+[[npcs.schedules]]
+location = "campus_lecture_hall"
+weekdays = [1, 3]
+start_time = "09:00"
+end_time = "11:00"
+activity = "teaching"
+
+[[npcs.schedules]]
+location = "campus_offices"
+weekdays = [1, 3]
+start_time = "14:00"
+end_time = "16:00"
+activity = "in her advisor hours"
+
+[[npcs]]
+id = "npc_cross"
+name = "Mr. Cross"
+role = "Drama teacher"
+relationship = "Mr. Cross, 38. He teaches drama."
+description = "Drama teacher, 38."
+
+[[npcs.schedules]]
+location = "campus_theatre"
+weekdays = [1, 3]
+start_time = "11:00"
+end_time = "13:00"
+activity = "teaching drama"
+
+[[npcs.schedules]]
+location = "campus_theatre"
+weekdays = [1, 3, 4]
+start_time = "14:00"
+end_time = "18:00"
+activity = "running rehearsals"
+
+[[npcs]]
+id = "npc_nadia"
+name = "Nadia"
+role = "Student"
+relationship = "Nadia, 20. A second-year, retaking Dr. Hale's course."
+description = "Student, 20."
+
+[[npcs.schedules]]
+location = "campus_lecture_hall"
+weekdays = [0, 2]
+start_time = "09:00"
+end_time = "11:00"
+activity = "in psychology"
+
+[[npcs.schedules]]
+location = "campus_cafeteria"
+weekdays = [0, 2]
+start_time = "13:00"
+end_time = "14:00"
+activity = "at lunch"
+
+[[npcs.schedules]]
+location = "campus_library"
+weekdays = [0, 1, 2, 3, 4]
+start_time = "14:00"
+end_time = "18:00"
+activity = "studying"
+
+[[npcs]]
+id = "npc_holt"
+name = "Ms. Holt"
+role = "Librarian"
+relationship = "Ms. Holt, 31. The librarian."
+description = "Librarian, 31."
+
+[[npcs.schedules]]
+location = "campus_library"
+weekdays = [0, 1, 2, 3, 4]
+start_time = "08:00"
+end_time = "16:00"
+activity = "at the desk"
+
+[[npcs.schedules]]
+location = "campus_library"
+weekdays = [5]
+start_time = "10:00"
+end_time = "16:00"
+activity = "at the desk"
+
+[[npcs]]
+id = "npc_rosa"
+name = "Rosa"
+role = "Cafeteria counter"
+relationship = "Rosa, 45. She runs the cafeteria counter."
+description = "Cafeteria counter, 45."
+
+[[npcs.schedules]]
+location = "campus_cafeteria"
+weekdays = [0, 1, 2, 3, 4]
+start_time = "08:00"
+end_time = "16:00"
+activity = "at the counter"
+
+[[npcs]]
+id = "npc_vance"
+name = "Mr. Vance"
+role = "Landlord"
+relationship = "Mr. Vance, 54. He owns your house, and lives next door."
+description = "Landlord, 54."
+
+[[npcs.schedules]]
+location = "hood_street"
+weekdays = [0, 1, 2, 3, 4]
+start_time = "17:00"
+end_time = "20:00"
+activity = "on his porch"
+
+[[npcs.schedules]]
+location = "hood_street"
+weekdays = [5, 6]
+start_time = "09:00"
+end_time = "12:00"
+activity = "on his porch"
+
+[[npcs.schedules]]
+location = "hood_street"
+weekdays = [5, 6]
+start_time = "17:00"
+end_time = "20:00"
+activity = "on his porch"
+
+[[npcs]]
+id = "npc_frank"
+name = "Frank"
+role = "Corner shop owner"
+relationship = "Frank, 52. He owns the corner shop, and he knows Mark."
+description = "Corner shop owner, 52."
+
+[[npcs.schedules]]
+location = "hood_shop"
+weekdays = [0, 1, 2, 3, 4, 5]
+start_time = "07:00"
+end_time = "15:00"
+activity = "behind the till"
+
+[[npcs]]
+id = "npc_danny"
+name = "Danny"
+role = "Night clerk"
+relationship = "Danny, 23. The corner shop's night clerk."
+description = "Night clerk, 23."
+
+[[npcs.schedules]]
+location = "hood_shop"
+weekdays = [0, 1, 2, 3, 4, 5]
+start_time = "15:00"
+end_time = "23:00"
+activity = "behind the till"
+
+[[npcs.schedules]]
+location = "hood_shop"
+weekdays = [6]
+start_time = "07:00"
+end_time = "23:00"
+activity = "behind the till"
+
+[[npcs]]
+id = "npc_marco"
+name = "Marco"
+role = "Trainer"
+relationship = "Marco, 29. A trainer at the gym."
+description = "Trainer, 29."
+
+[[npcs.schedules]]
+location = "hood_gym"
+weekdays = [0, 1, 2, 3, 4]
+start_time = "06:00"
+end_time = "10:00"
+activity = "training"
+
+[[npcs.schedules]]
+location = "hood_gym"
+weekdays = [0, 1, 2, 3, 4]
+start_time = "17:00"
+end_time = "21:00"
+activity = "training"
+
+[[npcs.schedules]]
+location = "hood_gym"
+weekdays = [5]
+start_time = "08:00"
+end_time = "14:00"
+activity = "training"
+
 [[npcs]]
 id = "npc_nina"
 name = "Nina"
@@ -935,7 +1181,7 @@ activity = "behind the till"
 id = "npc_chris"
 name = "Chris"
 role = "Barista"
-relationship = "Chris, 24. The café's barista. Tom gave you his afternoons."
+relationship = "Chris, 24. The café's barista. He keeps the machine to himself."
 description = "The café's barista, 24."
 
 [[npcs.schedules]]

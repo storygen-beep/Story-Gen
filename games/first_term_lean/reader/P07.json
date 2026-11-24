@@ -1,6 +1,6 @@
 {
  "piece": "P07",
- "pass": 2,
+ "pass": 3,
  "screens": {
   "opening.wake": {
    "text": "e151e2a47117a98b",
@@ -474,7 +474,7 @@
     "all": "989d6f996d9fc275"
    },
    "row_hash": "c1c0e2ac2588a579",
-   "carried": false,
+   "carried": true,
    "pass": 2
   },
   {
@@ -921,7 +921,7 @@
     "all": "989d6f996d9fc275"
    },
    "row_hash": "80d415cf08e0ebfe",
-   "carried": false,
+   "carried": true,
    "pass": 2
   },
   {
@@ -1091,7 +1091,7 @@
     "all": "989d6f996d9fc275"
    },
    "row_hash": "212d17eda04f2799",
-   "carried": false,
+   "carried": true,
    "pass": 2
   },
   {
@@ -1131,9 +1131,9 @@
   {
    "row": "C1167",
    "screen": "borrow_hoodie.take",
-   "verdict": "FAIL",
+   "verdict": "WAIVED",
    "line": "",
-   "why": "release 1's minimum still lacks one clothing event (no event reads clothes in 7_final_game.toml); ENI's release-2 deferral (NOTES 241) is not a waiver; note row",
+   "why": "waived by LO: \"for the release one system i think we have clothing shop and change clothing. She can change to basic clothing but hotter will stay locked in for the release one as they require higher traits and traits are capped to 0 in the release one.\" (main-lean session, 2026-11-24)",
    "cause": null,
    "note": true,
    "screen_hash": {
@@ -1143,14 +1143,16 @@
    },
    "row_hash": "6fbed55f60b39ebd",
    "carried": true,
-   "pass": 2
+   "pass": 2,
+   "waived_words": "for the release one system i think we have clothing shop and change clothing. She can change to basic clothing but hotter will stay locked in for the release one as they require higher traits and traits are capped to 0 in the release one.",
+   "waived_source": "main-lean session, 2026-11-24"
   },
   {
    "row": "C1167",
    "screen": "borrow_mom.take",
-   "verdict": "FAIL",
+   "verdict": "WAIVED",
    "line": "",
-   "why": "no clothing event in release 1 (ENI's deferral to release 2, not a waiver)",
+   "why": "waived by LO: \"for the release one system i think we have clothing shop and change clothing. She can change to basic clothing but hotter will stay locked in for the release one as they require higher traits and traits are capped to 0 in the release one.\" (main-lean session, 2026-11-24)",
    "cause": "P07j1-c2",
    "note": false,
    "screen_hash": {
@@ -1160,7 +1162,9 @@
    },
    "row_hash": "6fbed55f60b39ebd",
    "carried": true,
-   "pass": 2
+   "pass": 2,
+   "waived_words": "for the release one system i think we have clothing shop and change clothing. She can change to basic clothing but hotter will stay locked in for the release one as they require higher traits and traits are capped to 0 in the release one.",
+   "waived_source": "main-lean session, 2026-11-24"
   },
   {
    "row": "C1167",
@@ -1233,15 +1237,17 @@
   {
    "row": "C1171",
    "screen": "hood_street",
-   "verdict": "FAIL",
+   "verdict": "WAIVED",
    "line": "Across the road, a neighbour's eyes drop to your bare skin and stay there. Your face goes hot, and you walk faster.",
-   "why": "worn_exposure, release 1's one number, is read in one place, this line (and Mom's heels in two, her two menus)",
+   "why": "waived by LO: \"for the release one system i think we have clothing shop and change clothing. She can change to basic clothing but hotter will stay locked in for the release one as they require higher traits and traits are capped to 0 in the release one.\" (main-lean session, 2026-11-24)",
    "cause": "P07j1-c5",
    "note": false,
    "screen_hash": null,
    "row_hash": "49328c800821e97e",
    "carried": true,
-   "pass": 2
+   "pass": 2,
+   "waived_words": "for the release one system i think we have clothing shop and change clothing. She can change to basic clothing but hotter will stay locked in for the release one as they require higher traits and traits are capped to 0 in the release one.",
+   "waived_source": "main-lean session, 2026-11-24"
   },
   {
    "row": "C1171",
@@ -1489,15 +1495,17 @@
   {
    "row": "C1197",
    "screen": "home_her_room",
-   "verdict": "FAIL",
+   "verdict": "WAIVED",
    "line": "Change clothes (engine wardrobe page)",
-   "why": "after the opening there is no whole-outfit change: saved_outfits is off, so the wardrobe is item by item (Mom's three things take three clicks)",
+   "why": "waived by LO: \"for the release one system i think we have clothing shop and change clothing. She can change to basic clothing but hotter will stay locked in for the release one as they require higher traits and traits are capped to 0 in the release one.\" (main-lean session, 2026-11-24)",
    "cause": "P07j1-c3",
    "note": false,
    "screen_hash": null,
    "row_hash": "b4f0f994f2657396",
    "carried": true,
-   "pass": 2
+   "pass": 2,
+   "waived_words": "for the release one system i think we have clothing shop and change clothing. She can change to basic clothing but hotter will stay locked in for the release one as they require higher traits and traits are capped to 0 in the release one.",
+   "waived_source": "main-lean session, 2026-11-24"
   },
   {
    "row": "C1197",
@@ -1617,9 +1625,9 @@
   {
    "row": "C1204",
    "screen": "borrow_hoodie.take",
-   "verdict": "FAIL",
+   "verdict": "WAIVED",
    "line": "",
-   "why": "same: no clothing event in release 1; deferral, not a waiver; note row",
+   "why": "waived by LO: \"for the release one system i think we have clothing shop and change clothing. She can change to basic clothing but hotter will stay locked in for the release one as they require higher traits and traits are capped to 0 in the release one.\" (main-lean session, 2026-11-24)",
    "cause": null,
    "note": true,
    "screen_hash": {
@@ -1629,14 +1637,16 @@
    },
    "row_hash": "4fec6fc9a8793a0f",
    "carried": true,
-   "pass": 2
+   "pass": 2,
+   "waived_words": "for the release one system i think we have clothing shop and change clothing. She can change to basic clothing but hotter will stay locked in for the release one as they require higher traits and traits are capped to 0 in the release one.",
+   "waived_source": "main-lean session, 2026-11-24"
   },
   {
    "row": "C1204",
    "screen": "borrow_mom.take",
-   "verdict": "FAIL",
+   "verdict": "WAIVED",
    "line": "",
-   "why": "same: no clothing event",
+   "why": "waived by LO: \"for the release one system i think we have clothing shop and change clothing. She can change to basic clothing but hotter will stay locked in for the release one as they require higher traits and traits are capped to 0 in the release one.\" (main-lean session, 2026-11-24)",
    "cause": "P07j1-c2",
    "note": false,
    "screen_hash": {
@@ -1646,7 +1656,9 @@
    },
    "row_hash": "4fec6fc9a8793a0f",
    "carried": true,
-   "pass": 2
+   "pass": 2,
+   "waived_words": "for the release one system i think we have clothing shop and change clothing. She can change to basic clothing but hotter will stay locked in for the release one as they require higher traits and traits are capped to 0 in the release one.",
+   "waived_source": "main-lean session, 2026-11-24"
   },
   {
    "row": "C1204",
@@ -1713,7 +1725,7 @@
     "all": "989d6f996d9fc275"
    },
    "row_hash": "6b4e6ea1fe51ab17",
-   "carried": false,
+   "carried": true,
    "pass": 2
   },
   {
@@ -2548,7 +2560,7 @@
     "all": "989d6f996d9fc275"
    },
    "row_hash": "45d1f77e233e111c",
-   "carried": false,
+   "carried": true,
    "pass": 2
   },
   {
@@ -3061,7 +3073,7 @@
     "all": "989d6f996d9fc275"
    },
    "row_hash": "beb5a109bde77305",
-   "carried": false,
+   "carried": true,
    "pass": 2
   },
   {
@@ -3125,7 +3137,7 @@
     "all": "989d6f996d9fc275"
    },
    "row_hash": "153b0804e686abae",
-   "carried": false,
+   "carried": true,
    "pass": 2
   },
   {
@@ -3903,7 +3915,7 @@
     "all": "989d6f996d9fc275"
    },
    "row_hash": "19da817e808ac3d6",
-   "carried": false,
+   "carried": true,
    "pass": 2
   },
   {
@@ -3993,7 +4005,7 @@
     "all": "989d6f996d9fc275"
    },
    "row_hash": "1e009d83817fb566",
-   "carried": false,
+   "carried": true,
    "pass": 2
   },
   {
@@ -4096,7 +4108,7 @@
     "all": "989d6f996d9fc275"
    },
    "row_hash": "1b8984f52b99537e",
-   "carried": false,
+   "carried": true,
    "pass": 2
   },
   {
@@ -4199,7 +4211,7 @@
     "all": "989d6f996d9fc275"
    },
    "row_hash": "759e6667d7fc3183",
-   "carried": false,
+   "carried": true,
    "pass": 2
   },
   {
@@ -4341,7 +4353,7 @@
     "all": "989d6f996d9fc275"
    },
    "row_hash": "adf7bb3f8b632ac3",
-   "carried": false,
+   "carried": true,
    "pass": 2
   },
   {
@@ -4597,15 +4609,15 @@
   {
    "row": "clothes#1",
    "screen": "hood_street",
-   "verdict": "FAIL",
+   "verdict": "WAIVED",
    "line": "{ type = \"worn_exposure\", operator = \"gte\", value = 1 }",
-   "why": "worn_exposure, release 1's one number, is still read in one place in 7_final_game.toml (line 371, the street line); step 1 asks 3+ readers (a door, a line, an event); ENI's release-2 deferral (NOTES 241) is not LO's waiver",
-   "cause": "P07o1-c1",
+   "why": "LO waived in NOTES.md, 2026-11-24: \"for the release one system i think we have clothing shop and change clothing. She can change to basic clothing but hotter will stay locked in for the release one as they require higher traits and traits are capped to 0 in the release one.\"",
+   "cause": null,
    "note": false,
    "screen_hash": null,
    "row_hash": "468c4283220dd743",
    "carried": false,
-   "pass": 2
+   "pass": 3
   },
   {
    "row": "clothes#2",
@@ -5388,39 +5400,10 @@
    "pass": 1
   }
  ],
- "causes": [
-  {
-   "id": "P07j1-c1",
-   "what": "borrow_hoodie.take says \"It's huge on you\" but Done only adds the hoodie, never equips it: the prose puts on her a garment she isn't wearing"
-  },
-  {
-   "id": "P07j1-c2",
-   "what": "release 1 has no clothing event (C1167/C1204 minimum); ENI deferred it to release 2 (NOTES 241), not waived"
-  },
-  {
-   "id": "P07j1-c3",
-   "what": "no whole-outfit change after the opening: saved_outfits off, wardrobe is item by item (ENI's release-2 deferral, not waived)"
-  },
-  {
-   "id": "P07j1-c4",
-   "what": "the street's neighbour line names no part of her and ends on walking away: no price, no \"not yet\", no hook"
-  },
-  {
-   "id": "P07j1-c5",
-   "what": "worn_exposure is read in one place (the street line), and Mom's heels in two; C1171 asks 3+ (ENI's release-2 deferral, not waived)"
-  },
-  {
-   "id": "P07n1-c1",
-   "what": "worn_exposure, release 1's one clothing number, has one reader (the street's skirt line); no door or event reads it (ENI's release-2 deferral, NOTES 241, not a waiver)"
-  },
-  {
-   "id": "P07o1-c1",
-   "what": "worn_exposure has one reader (hood_street's skin line); no door or event reads it, so the clothing state lacks its 3 readers (deferred by ENI to release 2, not waived)"
-  }
- ],
+ "causes": [],
  "pending": [],
- "asked": 13,
- "answered": 13,
+ "asked": 1,
+ "answered": 1,
  "pass_items": [],
  "unowed": []
 }

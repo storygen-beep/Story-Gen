@@ -1,0 +1,1642 @@
+{
+ "verdicts": [
+  {
+   "row": "B1",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "Every time it brakes, a man's hips press into your ass, and he doesn't step back.",
+   "why": "the bus stranger is the only person on these screens, on his first and only canvas; the brake press is the accident rung (C286), and his want (won't step back, getting hard) is on his body and felt by her before he speaks"
+  },
+  {
+   "row": "B10",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "You step off at the gates with your face burning. Next time, you'll stand by the doors.",
+   "why": "packed_no and packed_quiet are reached only from the packed window; no line names a cast member, a past behind no flag, or a first time; signs and closed lines match their hours rows"
+  },
+  {
+   "row": "B10",
+   "screen": "travel_bus_to_campus.ride",
+   "verdict": "PASS",
+   "line": "\"The bus is packed. Every time it brakes, a man's hips press into your ass, and he doesn't step back.\"",
+   "why": "packed text and both packed choices only weekdays 07:00-09:59 (weekday 0-4 AND time_of_day 07:00-10:00, end exclusive); the OR group (weekend, or 10:00-07:00) is its exact complement, so one variant and its matching exits show at every minute; the man is an unnamed stranger"
+  },
+  {
+   "row": "B11",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "Walk to campus (45 min, 10 energy)",
+   "why": "each travel button moves her and spends time, money or energy; the two packed choices each lead to their own written screen"
+  },
+  {
+   "row": "B12",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "You feel him getting hard against you, and your nipples go tight.",
+   "why": "names her ass and nipples, his reaction (hard, won't step back, his lines), a not-yet (\"He shifts half an inch and no further\") or a price (legs shaking, face burning), and a hook"
+  },
+  {
+   "row": "B13",
+   "screen": "*",
+   "verdict": "N/A",
+   "line": "\u2014",
+   "why": "no moment alone with her body on these screens"
+  },
+  {
+   "row": "B2",
+   "screen": "*",
+   "verdict": "N/A",
+   "line": "Packed in tight today, huh? Don't mind me.",
+   "why": "no person with an arc; the stranger has no earlier scene to go a step past"
+  },
+  {
+   "row": "B3",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "Good girl. I'll look for you on this bus.",
+   "why": "each packed path ends pointing at the next weekday ride (his line; \"Next time, you'll stand by the doors.\"); the other travel screens are one-line transits whose button names the arrival"
+  },
+  {
+   "row": "B4",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "Back off. I mean it.",
+   "why": "stage 1: it happens to her; she pushes back or stays quiet, on her body (nipples tight, legs shaking, face burning); she never chooses an act"
+  },
+  {
+   "row": "B5",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "Relax, sweetheart. It's a bus.",
+   "why": "the stranger answers what she does on both paths (\"Relax, sweetheart\" to the no, \"Good girl\" to the silence); the places and other travel screens have nobody to notice (P30/P36)"
+  },
+  {
+   "row": "B6",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "Tell him to back off",
+   "why": "the refusal is a button, written (\"Back off. I mean it.\"), and lands: \"He shifts half an inch and no further\"; not a final no, the next packed ride comes again"
+  },
+  {
+   "row": "B7",
+   "screen": "*",
+   "verdict": "N/A",
+   "line": "You feel him getting hard against you, and your nipples go tight.",
+   "why": "no explicit beat: the ride paragraph has 2 frozen-list words (ass, nipple); its last sentence is on the body anyway"
+  },
+  {
+   "row": "B8",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "Take the bus to campus ($2, 20 min)",
+   "why": "$2 each way, 20 min, 45 min and 10 energy agree with PLAN 89 and 8c; the packed screens name her body, no garment"
+  },
+  {
+   "row": "B8",
+   "screen": "travel_bus_to_campus.ride",
+   "verdict": "PASS",
+   "line": "Take the bus to campus ($2, 20 min)",
+   "why": "$2 trigger cost; 0 min on the packed choices plus 20 on their exits, 20 on the off-peak exit: 20 either way (headless 08:00 to 08:20, 13:00 to 13:20); no garment named"
+  },
+  {
+   "row": "B9",
+   "screen": "*",
+   "verdict": "N/A",
+   "line": "\u2014",
+   "why": "PLAN declares no companion who is the rival here"
+  },
+  {
+   "row": "C1001",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "the bus fare",
+   "why": "a spend, no earn; the packed paths change nothing it reads"
+  },
+  {
+   "row": "C1002",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "travel_bus_to_campus trigger at hood_street",
+   "why": "the fare is paid at the bus stop; the packed paths change nothing it reads"
+  },
+  {
+   "row": "C1003",
+   "screen": "*",
+   "verdict": "N/A",
+   "line": "\u2014",
+   "why": "the bill is P11's; nothing here collects it; the packed paths change nothing it reads"
+  },
+  {
+   "row": "C1004",
+   "screen": "*",
+   "verdict": "N/A",
+   "line": "\u2014",
+   "why": "the bill is P11's; nothing here collects it; the packed paths change nothing it reads"
+  },
+  {
+   "row": "C1008",
+   "screen": "*",
+   "verdict": "N/A",
+   "line": "\u2014",
+   "why": "the bill is P11's; nothing here collects it; the packed paths change nothing it reads"
+  },
+  {
+   "row": "C1013",
+   "screen": "*",
+   "verdict": "N/A",
+   "line": "\u2014",
+   "why": "the bill is P11's; nothing here collects it; the packed paths change nothing it reads"
+  },
+  {
+   "row": "C1014",
+   "screen": "*",
+   "verdict": "N/A",
+   "line": "\u2014",
+   "why": "the bill is P11's; nothing here collects it; the packed paths change nothing it reads"
+  },
+  {
+   "row": "C1016",
+   "screen": "*",
+   "verdict": "N/A",
+   "line": "\u2014",
+   "why": "the bill is P11's; nothing here collects it; the packed paths change nothing it reads"
+  },
+  {
+   "row": "C1017",
+   "screen": "*",
+   "verdict": "N/A",
+   "line": "\u2014",
+   "why": "no shameful money route here; the packed paths change nothing it reads"
+  },
+  {
+   "row": "C1020",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "($2)",
+   "why": "one currency, $; the packed paths change nothing it reads"
+  },
+  {
+   "row": "C1021",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "Take the bus to campus ($2, 20 min)",
+   "why": "the price is a figure; the packed paths change nothing it reads"
+  },
+  {
+   "row": "C1022",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "($2, 20 min)",
+   "why": "$ on the buttons; no prose names a real-world currency; the packed paths change nothing it reads"
+  },
+  {
+   "row": "C1033",
+   "screen": "*",
+   "verdict": "N/A",
+   "line": "\u2014",
+   "why": "the bill is P11's; nothing here collects it; the packed paths change nothing it reads"
+  },
+  {
+   "row": "C1234",
+   "screen": "*",
+   "verdict": "N/A",
+   "line": "\u2014",
+   "why": "no clip; the packed paths change nothing it reads"
+  },
+  {
+   "row": "C1238",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "\"woman of 18 washing her hands at a long college bathroom mirror\"",
+   "why": "matches 'three stalls and one long mirror'; no outfit named, so true on every visit; the packed paths change nothing it reads"
+  },
+  {
+   "row": "C1249",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "six place pictures",
+   "why": "within the field's room-picture share; the packed paths change nothing it reads"
+  },
+  {
+   "row": "C1250",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "The library: long tables, quiet floors, and the desk by the door. \u2026",
+   "why": "place text stays bare; the picture is the row's image; the packed paths change nothing it reads"
+  },
+  {
+   "row": "C1255",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "six distinct files",
+   "why": "one asset, one block; the packed paths change nothing it reads"
+  },
+  {
+   "row": "C1261",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "locations/campus_library_t0.jpg",
+   "why": "one place picture of her per destination; none on the quad or travel; the packed paths change nothing it reads"
+  },
+  {
+   "row": "C1262",
+   "screen": "*",
+   "verdict": "N/A",
+   "line": "\u2014",
+   "why": "no body moment here; the packed paths change nothing it reads"
+  },
+  {
+   "row": "C1265",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "\u2014",
+   "why": "no spot on doors, travel screens (packed paths included) or the routing quad"
+  },
+  {
+   "row": "C1267",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "campus_theatre_t0.jpg: 'woman of 18 standing on an empty black stage under lights'",
+   "why": "her in the place is what the words can't give; the packed paths change nothing it reads"
+  },
+  {
+   "row": "C1274",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "_t0",
+   "why": "everyday tier for everyday places; the packed paths change nothing it reads"
+  },
+  {
+   "row": "C1275",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "all six are .jpg stills",
+   "why": "nothing happens in a place picture; the packed paths change nothing it reads"
+  },
+  {
+   "row": "C1277",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "\"\u2026in a college cafeteria\", \"\u2026in a tiered college lecture hall\u2026\"",
+   "why": "each names its place; the packed paths change nothing it reads"
+  },
+  {
+   "row": "C1278",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "\"woman of 18 at a long library table with books\"",
+   "why": "each place's first search phrase gives her age; the packed paths change nothing it reads"
+  },
+  {
+   "row": "C1280",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "image = \"locations/campus_library_t0.jpg\"",
+   "why": "one file per place, pool of 1; the packed paths change nothing it reads"
+  },
+  {
+   "row": "C1281",
+   "screen": "*",
+   "verdict": "N/A",
+   "line": "\u2014",
+   "why": "no look picture; the packed paths change nothing it reads"
+  },
+  {
+   "row": "C1284",
+   "screen": "*",
+   "verdict": "N/A",
+   "line": "\u2014",
+   "why": "no walk-in; the packed paths change nothing it reads"
+  },
+  {
+   "row": "C1303",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "Walk to campus costs energy 10",
+   "why": "energy is read; the packed paths change nothing it reads"
+  },
+  {
+   "row": "C1313",
+   "screen": "*",
+   "verdict": "N/A",
+   "line": "\u2014",
+   "why": "refill places are P06's; the packed paths change nothing it reads"
+  },
+  {
+   "row": "C1337",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "\u2014",
+   "why": "energy spent by the walk; the packed paths change nothing it reads"
+  },
+  {
+   "row": "C1342",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "Get off at campus",
+   "why": "every packed path ends at the quad; the walk home costs no energy, so she is never stranded"
+  },
+  {
+   "row": "C1345",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "costs on the trigger",
+   "why": "brake on the way in; the packed paths change nothing it reads"
+  },
+  {
+   "row": "C1360",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "greyed with action label and '(2 Money)'",
+   "why": "holds on the travel screens and places; the packed paths change nothing it reads; the packed paths change nothing it reads"
+  },
+  {
+   "row": "C1369",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "bus and walk on her street from day 1",
+   "why": "holds on the travel screens and places; the packed paths change nothing it reads; the packed paths change nothing it reads"
+  },
+  {
+   "row": "C1386",
+   "screen": "*",
+   "verdict": "N/A",
+   "line": "\u2014",
+   "why": "the energy meter is P01/P06's; the packed paths change nothing it reads"
+  },
+  {
+   "row": "C1403",
+   "screen": "*",
+   "verdict": "N/A",
+   "line": "\u2014",
+   "why": "no job here; the packed paths change nothing it reads"
+  },
+  {
+   "row": "C1421",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "getCostBlockedMessage",
+   "why": "the requirement is told; the packed paths change nothing it reads"
+  },
+  {
+   "row": "C1423",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "$2 or 10 energy",
+   "why": "holds on the travel screens and places; the packed paths change nothing it reads; the packed paths change nothing it reads"
+  },
+  {
+   "row": "C1425",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "\u2014",
+   "why": "time plus resource cost; the packed paths change nothing it reads"
+  },
+  {
+   "row": "C1427",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "45 min against an any-hour window",
+   "why": "holds on the travel screens and places; the packed paths change nothing it reads; the packed paths change nothing it reads"
+  },
+  {
+   "row": "C1428",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "\u2014",
+   "why": "energy locks travel, never a person; the packed paths change nothing it reads"
+  },
+  {
+   "row": "C1431",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "walk greys under 10 energy",
+   "why": "empty shuts something; the packed paths change nothing it reads"
+  },
+  {
+   "row": "C1432",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "PLAN \u00a78b sinks: the walk to campus (10)",
+   "why": "declared; the packed paths change nothing it reads"
+  },
+  {
+   "row": "C1433",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "\u2014",
+   "why": "walk shut while empty; the packed paths change nothing it reads"
+  },
+  {
+   "row": "C1434",
+   "screen": "*",
+   "verdict": "N/A",
+   "line": "\u2014",
+   "why": "refill places are P06's; the packed paths change nothing it reads"
+  },
+  {
+   "row": "C1438",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "spent by use",
+   "why": "holds on the travel screens and places; the packed paths change nothing it reads; the packed paths change nothing it reads"
+  },
+  {
+   "row": "C1441",
+   "screen": "*",
+   "verdict": "N/A",
+   "line": "\u2014",
+   "why": "no result screen; the packed paths change nothing it reads"
+  },
+  {
+   "row": "C1446",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "bus/walk: repeats, costs money or energy, she chooses, has a place",
+   "why": "holds on the travel screens and places; the packed paths change nothing it reads; the packed paths change nothing it reads"
+  },
+  {
+   "row": "C239",
+   "screen": "*",
+   "verdict": "N/A",
+   "line": "\u2014",
+   "why": "no explicit beat; the packed paths change nothing it reads"
+  },
+  {
+   "row": "C248",
+   "screen": "*",
+   "verdict": "N/A",
+   "line": "\u2014",
+   "why": "no explicit beat; the packed paths change nothing it reads"
+  },
+  {
+   "row": "C249",
+   "screen": "*",
+   "verdict": "N/A",
+   "line": "\u2014",
+   "why": "no explicit beat; the packed paths change nothing it reads"
+  },
+  {
+   "row": "C252",
+   "screen": "*",
+   "verdict": "N/A",
+   "line": "\u2014",
+   "why": "a game-wide share, read at release; the packed paths change nothing it reads"
+  },
+  {
+   "row": "C254",
+   "screen": "*",
+   "verdict": "N/A",
+   "line": "\u2014",
+   "why": "no explicit beat; the packed paths change nothing it reads"
+  },
+  {
+   "row": "C255",
+   "screen": "*",
+   "verdict": "N/A",
+   "line": "\u2014",
+   "why": "a game-wide share, read at release; the packed paths change nothing it reads"
+  },
+  {
+   "row": "C256",
+   "screen": "*",
+   "verdict": "N/A",
+   "line": "\u2014",
+   "why": "a game-wide share, read at release; the packed paths change nothing it reads"
+  },
+  {
+   "row": "C276",
+   "screen": "*",
+   "verdict": "N/A",
+   "line": "\u2014",
+   "why": "no explicit beat; the packed paths change nothing it reads"
+  },
+  {
+   "row": "C284",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "a man's hips press into your ass",
+   "why": "it happens to her first; her only acts are a no or silence"
+  },
+  {
+   "row": "C285",
+   "screen": "*",
+   "verdict": "N/A",
+   "line": "\u2014",
+   "why": "release 1 sits at stage 1; the packed paths change nothing it reads"
+  },
+  {
+   "row": "C286",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "Every time it brakes, a man's hips press into your ass",
+   "why": "stage 1: an accident he turns into a grope"
+  },
+  {
+   "row": "C287",
+   "screen": "*",
+   "verdict": "N/A",
+   "line": "\u2014",
+   "why": "release 1 sits at stage 1; the packed paths change nothing it reads"
+  },
+  {
+   "row": "C288",
+   "screen": "*",
+   "verdict": "N/A",
+   "line": "\u2014",
+   "why": "release 1 sits at stage 1; the packed paths change nothing it reads"
+  },
+  {
+   "row": "C289",
+   "screen": "*",
+   "verdict": "N/A",
+   "line": "\u2014",
+   "why": "no stage 4; the packed paths change nothing it reads"
+  },
+  {
+   "row": "C291",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "press into your ass",
+   "why": "a clothed press: a low level"
+  },
+  {
+   "row": "C296",
+   "screen": "*",
+   "verdict": "N/A",
+   "line": "\u2014",
+   "why": "no kind climbs here yet; the packed paths change nothing it reads"
+  },
+  {
+   "row": "C297",
+   "screen": "*",
+   "verdict": "N/A",
+   "line": "\u2014",
+   "why": "strangers, not people she lives with; the packed paths change nothing it reads"
+  },
+  {
+   "row": "C311",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "He shifts half an inch and no further.",
+   "why": "ride + either path: her body (ass, nipples, neck), his reaction, a not-yet/price, a hook; no other screen is charged"
+  },
+  {
+   "row": "C422",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "Tell him to back off",
+   "why": "labels say what clicking does"
+  },
+  {
+   "row": "C442",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "he doesn't step back",
+   "why": "said plainly"
+  },
+  {
+   "row": "C447",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "Relax, sweetheart. It's a bus.",
+   "why": "the stranger keeps one manner across his three lines: easy, sleazy, dismissive of her"
+  },
+  {
+   "row": "C448",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "a man's hips press into your ass, and he doesn't step back",
+   "why": "obvious on arrival: a man on the bus, what he wants (pressed hard against her), how he takes her (his \"Don't mind me\")"
+  },
+  {
+   "row": "C449",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "You feel him getting hard against you",
+   "why": "the tension named, on both bodies"
+  },
+  {
+   "row": "C450",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "Next time, you'll stand by the doors.",
+   "why": "both packed paths end on the next ride; the other travel screens are doors whose buttons name the arrival; places are not scenes"
+  },
+  {
+   "row": "C451",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "You step off at the campus gates",
+   "why": "concrete: the brakes, the gates, the doors, $2"
+  },
+  {
+   "row": "C460",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "Good girl. I'll look for you on this bus.",
+   "why": "packed_no and packed_quiet are reachable only through the packed window, so their packed-bus claims hold; his line is his intent, and every packed ride brings a man again; hours, fares and signs agree"
+  },
+  {
+   "row": "C460",
+   "screen": "travel_bus_to_campus.ride",
+   "verdict": "PASS",
+   "line": "\"The bus is packed. Every time it brakes, a man's hips press into your ass, and he doesn't step back.\"",
+   "why": "gated to weekday rush hour, groups complement at 07:00 and 10:00; the off-peak \"half empty\" line is true at any other minute; no person or past claimed"
+  },
+  {
+   "row": "C461",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "Next time, you'll stand by the doors.",
+   "why": "her own resolve, said on the page, and texture (the gates, the doors) that can't clash"
+  },
+  {
+   "row": "C461",
+   "screen": "travel_bus_to_campus.ride",
+   "verdict": "PASS",
+   "line": "Packed in tight today, huh? Don't mind me.",
+   "why": "texture that can't clash (brakes, a stranger, \"today\" true on every visit) and a stranger's line no plan entry rules out"
+  },
+  {
+   "row": "C593",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "Relax, sweetheart.",
+   "why": "\"sweetheart\" is his alone (grep: no one else in the game says it); \"Good girl\" is praise on the other path, not a second address"
+  },
+  {
+   "row": "C639",
+   "screen": "*",
+   "verdict": "N/A",
+   "line": "Tell him to back off \u00b7 Say nothing",
+   "why": "no offer: he gropes, she answers; the choice is heat shape 3, not an offer ladder"
+  },
+  {
+   "row": "C640",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "He shifts half an inch and no further.",
+   "why": "the no is content: its own screen, his answer, her shaking legs; it does not return to an unchanged menu"
+  },
+  {
+   "row": "C707",
+   "screen": "*",
+   "verdict": "N/A",
+   "line": "\u2014",
+   "why": "Home is the anchor (P02); the packed paths change nothing it reads"
+  },
+  {
+   "row": "C738",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "The quad routes; destinations carry hours and closed lines",
+   "why": "holds on the travel screens and places; the packed paths change nothing it reads; the packed paths change nothing it reads"
+  },
+  {
+   "row": "C758",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "Walk home (45 min)",
+   "why": "short labels; the packed paths change nothing it reads"
+  },
+  {
+   "row": "C762",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "Location_campus_library: no 'Nothing to do' line",
+   "why": "removed from all six; the engine prints nothing on an empty menu; the packed paths change nothing it reads"
+  },
+  {
+   "row": "C769",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "The lecture hall: rows of seats \u2026, a screen, a lectern at the bottom. Your classes are here.",
+   "why": "each place says what it is; the packed paths change nothing it reads"
+  },
+  {
+   "row": "C770",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "quad 11 words, places 18\u201330",
+   "why": "short; the packed paths change nothing it reads"
+  },
+  {
+   "row": "C771",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "\u2014",
+   "why": "no first-visit screen; the packed paths change nothing it reads"
+  },
+  {
+   "row": "C773",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "\u2014",
+   "why": "no browse list; the packed paths change nothing it reads"
+  },
+  {
+   "row": "C776",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "bathroom: Fix your hair; cafeteria: Buy lunch; quad: Sit on the grass",
+   "why": "needs and systems only; the packed paths change nothing it reads"
+  },
+  {
+   "row": "C777",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "\u2014",
+   "why": "nothing else on a menu; the packed paths change nothing it reads"
+  },
+  {
+   "row": "C794",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "description, no variants on campus",
+   "why": "same every visit; the packed paths change nothing it reads"
+  },
+  {
+   "row": "C795",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "\u2014",
+   "why": "no campus re-entry change comes from anywhere else; the packed paths change nothing it reads"
+  },
+  {
+   "row": "C804",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "\u2014",
+   "why": "the travel screens and the quad route only; the four places with rows FAIL on their own screens"
+  },
+  {
+   "row": "C804",
+   "screen": "campus_cafeteria",
+   "verdict": "FAIL",
+   "line": "The cafeteria: trays, long tables, the lunch counter.",
+   "why": "Rosa and Nadia have rows here; the text never changes with who is there; deferred to P30, unchanged",
+   "cause": "P04c1-c1"
+  },
+  {
+   "row": "C804",
+   "screen": "campus_lecture_hall",
+   "verdict": "FAIL",
+   "line": "The lecture hall: rows of seats rising to the back, a screen, a lectern at the bottom.",
+   "why": "Hale, Pratt, Walsh, Nadia have rows here; text never changes with who is there; deferred to P30, unchanged",
+   "cause": "P04c1-c1"
+  },
+  {
+   "row": "C804",
+   "screen": "campus_library",
+   "verdict": "FAIL",
+   "line": "The library: long tables, quiet floors, and the desk by the door.",
+   "why": "Holt and Nadia have rows here; text never changes with who is there; deferred to P30, unchanged",
+   "cause": "P04c1-c1"
+  },
+  {
+   "row": "C804",
+   "screen": "campus_theatre",
+   "verdict": "FAIL",
+   "line": "The theatre: a black stage, rows of folding seats, and the lights rigged overhead.",
+   "why": "Cross has rows here; text never changes with who is there; deferred to P30, unchanged",
+   "cause": "P04c1-c1"
+  },
+  {
+   "row": "C808",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "the quad and her street, outdoors",
+   "why": "holds on the travel screens and places; the packed paths change nothing it reads; the packed paths change nothing it reads"
+  },
+  {
+   "row": "C811",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "campus area, quad hub, places off it",
+   "why": "holds on the travel screens and places; the packed paths change nothing it reads; the packed paths change nothing it reads"
+  },
+  {
+   "row": "C889",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "advanceTime(45) on 'Walk through the gates'; advanceTime(20) on 'Get off at campus'",
+   "why": "the choice spends the labelled minutes; the packed paths change nothing it reads"
+  },
+  {
+   "row": "C890",
+   "screen": "*",
+   "verdict": "N/A",
+   "line": "\u2014",
+   "why": "no repeating bill here; the packed paths change nothing it reads"
+  },
+  {
+   "row": "C892",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "hours on signs and closed lines",
+   "why": "on the door; the packed paths change nothing it reads"
+  },
+  {
+   "row": "C897",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "20 / 45 min to cross; moves inside campus are the engine's default",
+   "why": "time on crossing the area; the packed paths change nothing it reads"
+  },
+  {
+   "row": "C900",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "The bus is half empty. You get a seat by the window \u2026",
+   "why": "no beat says the time; the packed paths change nothing it reads"
+  },
+  {
+   "row": "C902",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "packed line at 09:59",
+   "why": "still true at its window's last minute; the packed paths change nothing it reads"
+  },
+  {
+   "row": "C903",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "A sign says it's open weekdays from 8am to 6pm.",
+   "why": "'weekdays' only as a rule on a sign, true every visit; the packed paths change nothing it reads"
+  },
+  {
+   "row": "C904",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "hours on six signs only",
+   "why": "no clock time in story text; the packed paths change nothing it reads"
+  },
+  {
+   "row": "C906",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "(45 min)",
+   "why": "durations only; the packed paths change nothing it reads"
+  },
+  {
+   "row": "C910",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "(20 min) \u00b7 (45 min)",
+   "why": "one form; the packed paths change nothing it reads"
+  },
+  {
+   "row": "C913",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "nav card 'Closed. Opens at \u2026' (setup.locClosedReason)",
+   "why": "shut places stay visible, dimmed; the packed paths change nothing it reads"
+  },
+  {
+   "row": "C914",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "hidden_until met_walsh hides the offices; hours show only for the clock",
+   "why": "holds on the travel screens and places; the packed paths change nothing it reads; the packed paths change nothing it reads"
+  },
+  {
+   "row": "C915",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "hours on place signs; people's hours on the Schedules page",
+   "why": "holds on the travel screens and places; the packed paths change nothing it reads; the packed paths change nothing it reads"
+  },
+  {
+   "row": "C916",
+   "screen": "*",
+   "verdict": "N/A",
+   "line": "\u2014",
+   "why": "no event here; the packed paths change nothing it reads"
+  },
+  {
+   "row": "C920",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "($2, 20 min)",
+   "why": "a bus is 20; the packed paths change nothing it reads"
+  },
+  {
+   "row": "C921",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "time_of_day 10:00\u201307:00",
+   "why": "the half-empty window wraps past midnight correctly; the packed paths change nothing it reads"
+  },
+  {
+   "row": "C921",
+   "screen": "travel_bus_to_campus.ride",
+   "verdict": "PASS",
+   "line": "The bus is half empty.",
+   "why": "the 10:00-07:00 window wraps past midnight; isCurrentTimeSlot handles the wrap"
+  },
+  {
+   "row": "C924",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "the 20/45-minute trip",
+   "why": "travel cost makes the schedule matter; the packed paths change nothing it reads"
+  },
+  {
+   "row": "C926",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "advanceTime",
+   "why": "only minutes; the packed paths change nothing it reads"
+  },
+  {
+   "row": "C927",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "Leave <place> inside campus",
+   "why": "exits with no time cost the default 3; the packed paths change nothing it reads"
+  },
+  {
+   "row": "C927",
+   "screen": "travel_bus_to_campus.ride",
+   "verdict": "PASS",
+   "line": "Tell him to back off",
+   "why": "the packed choices carry an explicit 0 and their exits 20; the off-peak exit 20; none falls to the default 3 (headless 08:00 to 08:20)"
+  },
+  {
+   "row": "C928",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "\u2014",
+   "why": "no time printed in prose; the packed paths change nothing it reads"
+  },
+  {
+   "row": "C929",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "travel labels carry their time",
+   "why": "holds on the travel screens and places; the packed paths change nothing it reads; the packed paths change nothing it reads"
+  },
+  {
+   "row": "C930",
+   "screen": "*",
+   "verdict": "N/A",
+   "line": "\u2014",
+   "why": "no windowed activity in this piece; the packed paths change nothing it reads"
+  },
+  {
+   "row": "C931",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "07:00\u201310:00 / 10:00\u201307:00",
+   "why": "end exclusive, wrap handled; the two bus lines tile the day; the packed paths change nothing it reads"
+  },
+  {
+   "row": "C931",
+   "screen": "travel_bus_to_campus.ride",
+   "verdict": "PASS",
+   "line": "The bus is packed.",
+   "why": "end exclusive and wrap make the two groups exact complements on weekdays, on the text and on the choices alike"
+  },
+  {
+   "row": "C951",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "($2, 20 min)",
+   "why": "the amount is on screen; the packed paths change nothing it reads"
+  },
+  {
+   "row": "C952",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "$2",
+   "why": "agrees with PLAN \u00a78c; the packed paths change nothing it reads"
+  },
+  {
+   "row": "C953",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "($2, 20 min) \u00b7 (45 min, 10 energy)",
+   "why": "costs on labels; the packed paths change nothing it reads"
+  },
+  {
+   "row": "C954",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "Take the bus home ($2, 20 min)",
+   "why": "spend price on the button; no pay here; the packed paths change nothing it reads"
+  },
+  {
+   "row": "C967",
+   "screen": "*",
+   "verdict": "N/A",
+   "line": "\u2014",
+   "why": "no paid sex in this piece; the packed paths change nothing it reads"
+  },
+  {
+   "row": "C989",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "Take the bus \u2026 ($2, 20 min) \u00b7 Walk \u2026 (45 min, 10 energy)",
+   "why": "bus vs walk trades $2 against 25 minutes and 10 energy; the packed paths change nothing it reads"
+  },
+  {
+   "row": "C990",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "costs = [{ trait = \"money\", value = 2 }]",
+   "why": "the fare greys the bus when she has under $2; the packed paths change nothing it reads"
+  },
+  {
+   "row": "C992",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "$2",
+   "why": "PLAN's number, not filler; the packed paths change nothing it reads"
+  },
+  {
+   "row": "L106",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "\u2014",
+   "why": "no line names a cast member; the stranger is unnamed"
+  },
+  {
+   "row": "L106",
+   "screen": "travel_bus_to_campus.ride",
+   "verdict": "PASS",
+   "line": "a man's hips press into your ass",
+   "why": "names only an unnamed stranger; no cast member claimed present"
+  },
+  {
+   "row": "L119",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "single files",
+   "why": "no default pools; the packed paths change nothing it reads"
+  },
+  {
+   "row": "L120",
+   "screen": "*",
+   "verdict": "N/A",
+   "line": "\u2014",
+   "why": "no look picture; the packed paths change nothing it reads"
+  },
+  {
+   "row": "L121",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "one still per destination",
+   "why": "no every-screen overshoot; the packed paths change nothing it reads"
+  },
+  {
+   "row": "L125",
+   "screen": "*",
+   "verdict": "N/A",
+   "line": "\u2014",
+   "why": "no clip; the packed paths change nothing it reads"
+  },
+  {
+   "row": "L147",
+   "screen": "*",
+   "verdict": "N/A",
+   "line": "\u2014",
+   "why": "no random scene in this piece; the packed paths change nothing it reads"
+  },
+  {
+   "row": "L163",
+   "screen": "*",
+   "verdict": "N/A",
+   "line": "\u2014",
+   "why": "no rule removed; the packed paths change nothing it reads"
+  },
+  {
+   "row": "L166",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "travel triggers have no clock condition",
+   "why": "open whenever; the packed paths change nothing it reads"
+  },
+  {
+   "row": "L167",
+   "screen": "*",
+   "verdict": "N/A",
+   "line": "\u2014",
+   "why": "no row with different hours by day in this piece; the packed paths change nothing it reads"
+  },
+  {
+   "row": "L167",
+   "screen": "travel_bus_to_campus.ride",
+   "verdict": "PASS",
+   "line": "Get off at campus",
+   "why": "one row; the hour changes only its text and its exits via groups, no second row per day kind"
+  },
+  {
+   "row": "L97",
+   "screen": "*",
+   "verdict": "N/A",
+   "line": "\u2014",
+   "why": "no walk-in; the packed paths change nothing it reads"
+  },
+  {
+   "row": "clock#1",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "Take the bus to campus ($2, 20 min) \u00b7 Walk home (45 min)",
+   "why": "every travel button shows its time; the packed paths change nothing it reads"
+  },
+  {
+   "row": "clock#2",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "20/45 min between areas",
+   "why": "holds on the travel screens and places; the packed paths change nothing it reads; the packed paths change nothing it reads"
+  },
+  {
+   "row": "clock#3",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "A sign says it's open weekdays from 9am to 9pm.",
+   "why": "hours only on signs; the packed paths change nothing it reads"
+  },
+  {
+   "row": "clock#4",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "The theatre is dark. It's open weekdays, 9am to 9pm.",
+   "why": "closed places dimmed, with when they open; the packed paths change nothing it reads"
+  },
+  {
+   "row": "clock#5",
+   "screen": "*",
+   "verdict": "N/A",
+   "line": "\u2014",
+   "why": "no person's hours on these screens; the packed paths change nothing it reads"
+  },
+  {
+   "row": "clock#6",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "(45 min)",
+   "why": "durations; the packed paths change nothing it reads"
+  },
+  {
+   "row": "clock#7",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "weekdays, on signs",
+   "why": "holds on the travel screens and places; the packed paths change nothing it reads; the packed paths change nothing it reads"
+  },
+  {
+   "row": "clock#8",
+   "screen": "*",
+   "verdict": "N/A",
+   "line": "\u2014",
+   "why": "no bill; the packed paths change nothing it reads"
+  },
+  {
+   "row": "clock#9",
+   "screen": "*",
+   "verdict": "N/A",
+   "line": "\u2014",
+   "why": "no row with day-kind hours; the packed paths change nothing it reads"
+  },
+  {
+   "row": "economy#1",
+   "screen": "*",
+   "verdict": "N/A",
+   "line": "\u2014",
+   "why": "no bill on these screens; the packed paths change nothing it reads"
+  },
+  {
+   "row": "economy#2",
+   "screen": "*",
+   "verdict": "N/A",
+   "line": "\u2014",
+   "why": "no bill on these screens; the packed paths change nothing it reads"
+  },
+  {
+   "row": "economy#3",
+   "screen": "*",
+   "verdict": "N/A",
+   "line": "\u2014",
+   "why": "no bill on these screens; the packed paths change nothing it reads"
+  },
+  {
+   "row": "economy#4",
+   "screen": "*",
+   "verdict": "N/A",
+   "line": "\u2014",
+   "why": "no bill on these screens; the packed paths change nothing it reads"
+  },
+  {
+   "row": "economy#5",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "($2, 20 min)",
+   "why": "$, a figure on the button; the packed paths change nothing it reads"
+  },
+  {
+   "row": "economy#6",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "Take the bus home ($2, 20 min)",
+   "why": "no pay on any button; the packed paths change nothing it reads"
+  },
+  {
+   "row": "economy#7",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "the fare at the bus stop",
+   "why": "a spend, where the bus is; the packed paths change nothing it reads"
+  },
+  {
+   "row": "economy#8",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "costs money 2",
+   "why": "money gates the bus; every amount agrees with PLAN; the packed paths change nothing it reads"
+  },
+  {
+   "row": "economy#9",
+   "screen": "*",
+   "verdict": "N/A",
+   "line": "\u2014",
+   "why": "no rent here; the packed paths change nothing it reads"
+  },
+  {
+   "row": "heat#1",
+   "screen": "*",
+   "verdict": "N/A",
+   "line": "\u2014",
+   "why": "game-wide share, read at release; the packed paths change nothing it reads"
+  },
+  {
+   "row": "heat#2",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "press into your ass",
+   "why": "clothed, accidental: low"
+  },
+  {
+   "row": "heat#3",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "Say nothing",
+   "why": "the only charged screen gives her a choice with the no written; nothing else here is sexual"
+  },
+  {
+   "row": "heat#3",
+   "screen": "travel_bus_to_campus.ride",
+   "verdict": "PASS",
+   "line": "Tell him to back off \u00b7 Say nothing",
+   "why": "she now gets a choice in the packed window, and the no is written and lands (\"Relax, sweetheart. It's a bus.\" / \"He shifts half an inch and no further.\")"
+  },
+  {
+   "row": "heat#4",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "Say nothing",
+   "why": "stage 1 only; nothing she does sexually; no meter moves on either path"
+  },
+  {
+   "row": "heat#5",
+   "screen": "*",
+   "verdict": "N/A",
+   "line": "\u2014",
+   "why": "strangers; the packed paths change nothing it reads"
+  },
+  {
+   "row": "heat#6",
+   "screen": "*",
+   "verdict": "N/A",
+   "line": "\u2014",
+   "why": "no explicit beat; the packed paths change nothing it reads"
+  },
+  {
+   "row": "heat#7",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "You feel him getting hard against you, and your nipples go tight.",
+   "why": "as C311: on her body, his reaction, not-yet/price, hook"
+  },
+  {
+   "row": "media#1",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "place stills",
+   "why": "a place picture sits on the place row; no spot before a payoff; the packed paths change nothing it reads"
+  },
+  {
+   "row": "media#2",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "one _t0 still with her in it per destination",
+   "why": "never the empty room; the packed paths change nothing it reads"
+  },
+  {
+   "row": "media#3",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "no spot on travel, the quad or menus",
+   "why": "holds on the travel screens and places; the packed paths change nothing it reads; the packed paths change nothing it reads"
+  },
+  {
+   "row": "media#4",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "one file each",
+   "why": "pool 1; the packed paths change nothing it reads"
+  },
+  {
+   "row": "media#5",
+   "screen": "*",
+   "verdict": "N/A",
+   "line": "\u2014",
+   "why": "no look; the packed paths change nothing it reads"
+  },
+  {
+   "row": "media#6",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": ".jpg",
+   "why": "nothing moves: stills; the packed paths change nothing it reads"
+  },
+  {
+   "row": "media#7",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "\"woman of 18 in a college corridor of office doors\"",
+   "why": "age, place, plain phrases; clothes left out because they change by visit (C1238); the packed paths change nothing it reads"
+  },
+  {
+   "row": "places#1",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "The quad. Paths cut across the grass to every building on campus.",
+   "why": "identity lines fixed; the packed paths change nothing it reads"
+  },
+  {
+   "row": "places#2",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "\u2014",
+   "why": "travel screens and the quad are not places with people; the four campus places FAIL on their own screens"
+  },
+  {
+   "row": "places#2",
+   "screen": "campus_cafeteria",
+   "verdict": "FAIL",
+   "line": "The cafeteria: trays, long tables, the lunch counter.",
+   "why": "no presence line per person and no empty-room line; deferred to P30, unchanged",
+   "cause": "P04c1-c1"
+  },
+  {
+   "row": "places#2",
+   "screen": "campus_lecture_hall",
+   "verdict": "FAIL",
+   "line": "The lecture hall: rows of seats rising to the back, a screen, a lectern at the bottom.",
+   "why": "no presence line per person and no empty-room line; deferred to P30, unchanged",
+   "cause": "P04c1-c1"
+  },
+  {
+   "row": "places#2",
+   "screen": "campus_library",
+   "verdict": "FAIL",
+   "line": "The library: long tables, quiet floors, and the desk by the door.",
+   "why": "no presence line per person and no empty-room line; deferred to P30, unchanged",
+   "cause": "P04c1-c1"
+  },
+  {
+   "row": "places#2",
+   "screen": "campus_theatre",
+   "verdict": "FAIL",
+   "line": "The theatre: a black stage, rows of folding seats, and the lights rigged overhead.",
+   "why": "no presence line per person and no empty-room line; deferred to P30, unchanged",
+   "cause": "P04c1-c1"
+  },
+  {
+   "row": "places#3",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "\u2014",
+   "why": "menus hold needs/systems; people as faces; the packed paths change nothing it reads"
+  },
+  {
+   "row": "places#4",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "Take the bus to campus ($2, 20 min)",
+   "why": "short with cost; the packed paths change nothing it reads"
+  },
+  {
+   "row": "places#5",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "greyed '(2 Money)' / '(10 Energy)'; closed 'Opens at'",
+   "why": "not-now says why; the packed paths change nothing it reads"
+  },
+  {
+   "row": "places#6",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "\u2014",
+   "why": "the quad routes; the bathroom, cafeteria and offices have their acts or stay hidden; three places FAIL on their own screens"
+  },
+  {
+   "row": "places#6",
+   "screen": "campus_lecture_hall",
+   "verdict": "FAIL",
+   "line": "The lecture hall: rows of seats rising to the back",
+   "why": "open weekdays 8-6; only the one-time first classes, nothing repeatable to do alone; class is P09",
+   "cause": "P04c1-c2"
+  },
+  {
+   "row": "places#6",
+   "screen": "campus_library",
+   "verdict": "FAIL",
+   "line": "The library: long tables, quiet floors, and the desk by the door.",
+   "why": "open 8am-10pm with no canvas at all; Study is P09, Ms. Holt P18",
+   "cause": "P04c1-c2"
+  },
+  {
+   "row": "places#6",
+   "screen": "campus_theatre",
+   "verdict": "FAIL",
+   "line": "The theatre: a black stage, rows of folding seats",
+   "why": "open weekdays 9-9 with no canvas; drama and practise are P09/P17",
+   "cause": "P04c1-c2"
+  },
+  {
+   "row": "places#7",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "The Quad: Cafeteria \u00b7 Lecture Hall \u00b7 Library \u00b7 Theatre \u00b7 Caf\u00e9",
+   "why": "quad is the hub, places off it; the packed paths change nothing it reads"
+  },
+  {
+   "row": "places#8",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "\u2014",
+   "why": "all screens well under 65 words; the packed paths change nothing it reads"
+  },
+  {
+   "row": "places#9",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "\u2014",
+   "why": "no first-visit screens; the packed paths change nothing it reads"
+  },
+  {
+   "row": "systems#1",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "walk drains 10 energy (PLAN \u00a78b)",
+   "why": "holds on the travel screens and places; the packed paths change nothing it reads; the packed paths change nothing it reads"
+  },
+  {
+   "row": "systems#10",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "\u2014",
+   "why": "open day 1; the packed paths change nothing it reads"
+  },
+  {
+   "row": "systems#11",
+   "screen": "*",
+   "verdict": "N/A",
+   "line": "\u2014",
+   "why": "no job; the packed paths change nothing it reads"
+  },
+  {
+   "row": "systems#2",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "Walk home (45 min), no cost",
+   "why": "greys with cost, never strands; the packed paths change nothing it reads"
+  },
+  {
+   "row": "systems#3",
+   "screen": "*",
+   "verdict": "N/A",
+   "line": "\u2014",
+   "why": "no refill here; the packed paths change nothing it reads"
+  },
+  {
+   "row": "systems#4",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "($2, 20 min) \u00b7 (45 min, 10 energy)",
+   "why": "holds on the travel screens and places; the packed paths change nothing it reads; the packed paths change nothing it reads"
+  },
+  {
+   "row": "systems#5",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "costs on the trigger",
+   "why": "brake by the need/money; the packed paths change nothing it reads"
+  },
+  {
+   "row": "systems#6",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "where (street/quad), how long, cost, gate greyed, one line after",
+   "why": "holds on the travel screens and places; the packed paths change nothing it reads; the packed paths change nothing it reads"
+  },
+  {
+   "row": "systems#7",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "no fixed hours on travel",
+   "why": "holds on the travel screens and places; the packed paths change nothing it reads; the packed paths change nothing it reads"
+  },
+  {
+   "row": "systems#8",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "walk drains energy, bus spends money, both lead to campus people",
+   "why": "holds on the travel screens and places; the packed paths change nothing it reads; the packed paths change nothing it reads"
+  },
+  {
+   "row": "systems#9",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "\u2014",
+   "why": "energy throttles travel, never a person; the packed paths change nothing it reads"
+  },
+  {
+   "row": "voice#1",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "You get a seat by the window and step off at the campus gates.",
+   "why": "second person, short; the packed paths change nothing it reads"
+  },
+  {
+   "row": "voice#2",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "You step off at the campus gates with your legs shaking.",
+   "why": "feelings on the body: legs shaking, face burning"
+  },
+  {
+   "row": "voice#3",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "your nipples go tight",
+   "why": "arousal on her body"
+  },
+  {
+   "row": "voice#4",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "\u2014",
+   "why": "no italics; the packed paths change nothing it reads"
+  },
+  {
+   "row": "voice#5",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "Good girl. I'll look for you on this bus.",
+   "why": "packed_no 26 : 10 and packed_quiet 26 : 9; the other screens have no one in them"
+  },
+  {
+   "row": "voice#5",
+   "screen": "travel_bus_to_campus.ride",
+   "verdict": "PASS",
+   "line": "Packed in tight today, huh? Don't mind me.",
+   "why": "ride 32 narration : 8 spoken (4 : 1); path via packed_no 58 : 18 (3.2 : 1), via packed_quiet 58 : 17 (3.4 : 1); all under 5 : 1"
+  },
+  {
+   "row": "voice#6",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "a man's hips press into your ass",
+   "why": "plain, tension named, concrete; the packed paths change nothing it reads"
+  },
+  {
+   "row": "voice#7",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "\u2014",
+   "why": "as C460: every line true on every visit it can show"
+  },
+  {
+   "row": "voice#8",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "Relax, sweetheart.",
+   "why": "the stranger keeps one manner and one address of his own"
+  }
+ ],
+ "causes": [
+  {
+   "id": "P04c1-c1",
+   "what": "No campus place has a presence line or an empty-room line, though P32's rows put Hale, Pratt, Walsh, Nadia, Holt, Rosa and Cross there; the card defers it to P30."
+  },
+  {
+   "id": "P04c1-c2",
+   "what": "The Library, Theatre and Lecture Hall open with nothing she can do alone (the Lecture Hall has only its one-time first classes); the card defers Study, drama and class to P09/P17/P18."
+  }
+ ]
+}

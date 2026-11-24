@@ -1,0 +1,32 @@
+{
+ "verdicts": [
+  {"row": "B10", "screen": "psych_first.lecture", "verdict": "PASS", "line": "He looks over the rows until he finds you ... At the end, the girl catches you on the way out.", "why": "True on all three paths, front row included (rows rise to the back, lectern at the bottom: scanning over them finds her anywhere). Hale and Nadia there Mon/Wed 09-11, trigger 09:00-09:29; 'already at the lectern' true at 09:00 and 09:29; one-time, so no second visit."},
+  {"row": "B10", "screen": "psych_first.seat", "verdict": "PASS", "line": "A dark-haired girl in the third row ... \"Sit here, freshman.\" (Stranger)", "why": "Nadia's row puts her there 09:00-11:00 Mon/Wed; 'freshman' true on day one or any later first lecture of her first term; unnamed until she names herself."},
+  {"row": "B10", "screen": "stats_first.class", "verdict": "PASS", "line": "A man in a grey cardigan is already filling the whiteboard ... Miss @player?", "why": "Pratt's row 11:00-13:00 Mon/Wed; 'already' true at 11:00, at 11:29 and straight after psychology's Done."},
+  {"row": "B8", "screen": "psych_first.lecture", "verdict": "PASS", "line": "A man in his late thirties ... You cross your legs ... press your thighs together under the desk.", "why": "Hale is 39 in PLAN; no garment of hers named; Done's 120 min is the 2-hour class."},
+  {"row": "B8", "screen": "psych_first.seat", "verdict": "PASS", "line": "A dark-haired girl in the third row moves her bag off the seat", "why": "No number, no garment of hers."},
+  {"row": "B8", "screen": "stats_first.class", "verdict": "PASS", "line": "A man in a grey cardigan", "why": "His garment, texture; no garment of hers, no number against PLAN."},
+  {"row": "C1238", "screen": "psych_first.lecture", "verdict": "PASS", "line": "Her view from her seat (she is 18, out of frame): a man of 39 ... looking across the rows at the camera.", "why": "Fixed: 'across the rows' holds from the front row and from the third; matches 'He looks over the rows until he finds you' on every path."},
+  {"row": "C460", "screen": "psych_first.lecture", "verdict": "PASS", "line": "Behind you, the girl sighs ... the girl catches you on the way out.", "why": "Every claim true on each path and at both ends of the window; Nadia's past ('Last spring it was me.') fits her PLAN entry."},
+  {"row": "C460", "screen": "psych_first.seat", "verdict": "PASS", "line": "Sit here, freshman. Not the front. Trust me.", "why": "Nadia there every trigger minute; she is a first-term student."},
+  {"row": "C460", "screen": "stats_first.class", "verdict": "PASS", "line": "He turns round long enough to read names off a sheet.", "why": "True at every minute of 11:00-11:29; she is on his list."},
+  {"row": "C461", "screen": "psych_first.lecture", "verdict": "PASS", "line": "Some of you will surprise me. Won't you, young lady?", "why": "Fits Hale's cast entry (wants to see how far she'll go)."},
+  {"row": "C461", "screen": "psych_first.seat", "verdict": "PASS", "line": "Not the front. Trust me.", "why": "Fits Nadia's entry: she knows Hale's history."},
+  {"row": "C461", "screen": "stats_first.class", "verdict": "PASS", "line": "I take attendance, and I notice who isn't here. / Miss @player?", "why": "Fits PLAN: Pratt notices if she's missing; formal roll-call address fits his manner."},
+  {"row": "C593", "screen": "psych_first.lecture", "verdict": "PASS", "line": "Won't you, young lady?", "why": "Fixed: Hale's 'young lady' is used by nobody else in 7_final_game.toml (grep: only line 4123); Nadia's 'freshman' is hers alone (only line 4081), no longer Chris's 'new girl'."},
+  {"row": "C593", "screen": "stats_first.class", "verdict": "PASS", "line": "Miss @player?", "why": "Fixed: 'Miss' appears nowhere else in the built TOML (grep: only line 4161); distinct from Laura's plain @player."},
+  {"row": "C639", "screen": "stats_first.class", "verdict": "FAIL", "line": "Here. · Present. · Say nothing", "why": "Note row. 'Here.' and 'Present.' are one grade with the same outcome (no flag, same text); two grades, not three."},
+  {"row": "C889", "screen": "psych_first.lecture", "verdict": "FAIL", "line": "Done", "why": "Note row. Spends 120 minutes and states no duration."},
+  {"row": "C892", "screen": "psych_first.lecture", "verdict": "FAIL", "line": "A sign by the door says it's open weekdays from 8am to 6pm.", "why": "Note row. The lecture's own hours (Mon/Wed 9-11) are on no door or sign."},
+  {"row": "C910", "screen": "psych_first.lecture", "verdict": "FAIL", "line": "Done", "why": "Note row. Spends 120 minutes and doesn't say how much."},
+  {"row": "C927", "screen": "psych_first.lecture", "verdict": "PASS", "line": "time_progression_minutes = 0 / 120", "why": "Every exit sets its time; no 3-minute default."},
+  {"row": "C929", "screen": "psych_first.lecture", "verdict": "FAIL", "line": "Done", "why": "Note row. The activity's time is tagged nowhere, and the label doesn't carry it."},
+  {"row": "C931", "screen": "psych_first.lecture", "verdict": "PASS", "line": "time_of_day 09:00-09:30", "why": "End exclusive: last start 09:29, inside Hale's and Nadia's rows; matches the sheet."},
+  {"row": "C953", "screen": "psych_first.lecture", "verdict": "FAIL", "line": "Done", "why": "Note row. The 2-hour cost isn't on the label."},
+  {"row": "L106", "screen": "psych_first.lecture", "verdict": "PASS", "line": "A man in his late thirties is already at the lectern ... the girl catches you on the way out.", "why": "Hale's and Nadia's rows put them in the Lecture Hall at every trigger minute."},
+  {"row": "L106", "screen": "psych_first.seat", "verdict": "PASS", "line": "A dark-haired girl in the third row", "why": "Nadia's row: Lecture Hall Mon/Wed 09-11."},
+  {"row": "L106", "screen": "stats_first.class", "verdict": "PASS", "line": "A man in a grey cardigan is already filling the whiteboard", "why": "Pratt's row: Lecture Hall Mon/Wed 11-13."},
+  {"row": "L167", "screen": "psych_first.lecture", "verdict": "PASS", "line": "weekday [0, 2] + time_of_day 09:00-09:30", "why": "One trigger covers both days with the same hours; no row per day kind."}
+ ],
+ "causes": []
+}

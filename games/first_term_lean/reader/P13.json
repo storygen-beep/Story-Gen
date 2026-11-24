@@ -1,88 +1,104 @@
 {
  "piece": "P13",
- "pass": 8,
+ "pass": 9,
  "screens": {
   "opening.wake": {
    "text": "e151e2a47117a98b",
    "facts": "e0c40fd7cb43a940",
+   "facts2": "e0c40fd7cb43a940",
    "all": "6c71d8498e93d426"
   },
   "opening.kitchen_rent": {
    "text": "58683dab2944f811",
-   "facts": "74b6fedff22531d4",
-   "all": "0bae8381ecb42a76"
+   "facts": "602a13698343827d",
+   "facts2": "863ad67adb1a1752",
+   "all": "5a22d694247b071a"
   },
   "opening.kitchen_ask": {
    "text": "493b3c80469ab308",
-   "facts": "7dd448ed98d06f8c",
-   "all": "34c604add195cb91"
+   "facts": "2f8c42ae8fee31c3",
+   "facts2": "15fd43d61930e157",
+   "all": "a3c1f1199d2f6e58"
   },
   "opening.bath_grades": {
    "text": "ddc4c8196a699ac4",
-   "facts": "d24845c8cc44c34f",
-   "all": "f516801a9b5f39a6"
+   "facts": "00ff1506c30079d3",
+   "facts2": "da20d71cd5f3396f",
+   "all": "ca6c4aa53860c485"
   },
   "opening.bath_fun": {
    "text": "a91d550d5f7ef222",
-   "facts": "8efbfd3a047efce0",
-   "all": "89049cc2ee22b17e"
+   "facts": "74bb2426725b84d6",
+   "facts2": "bb9aa841845fd7fc",
+   "all": "df0371f74bcda477"
   },
   "opening.bath_freedom": {
    "text": "eba7beacc0939787",
-   "facts": "228bbf3b47ce67a9",
-   "all": "27be67ce74770c09"
+   "facts": "c8504eb7289796f1",
+   "facts2": "b5e1bc346a558f82",
+   "all": "acdfe92ffe494a3f"
   },
   "opening.bath": {
    "text": "65cecb4204fd2e05",
-   "facts": "e1ee538ce6c86a3e",
-   "all": "22c6afbdda9dd0ba"
+   "facts": "a60eaae69f259eb4",
+   "facts2": "e63565788353908e",
+   "all": "23b1bb7f9381193c"
   },
   "opening.hall": {
    "text": "983cd29f6ea9d4b6",
-   "facts": "37d02972975bc8ed",
-   "all": "d8d773b7b9f14049"
+   "facts": "b66cf844d5af3126",
+   "facts2": "a1af47e073cbae19",
+   "all": "91869c40b1e9344d"
   },
   "opening.room_past": {
    "text": "6dffcc94554269ed",
-   "facts": "f8646ff6d2f4e652",
-   "all": "630fec82e8ffca1a"
+   "facts": "d1f68f60f57ba02e",
+   "facts2": "a5a30511507348bf",
+   "all": "f60f860d5adeabe5"
   },
   "opening.room_spoke": {
    "text": "645c8c4f9b10b927",
-   "facts": "b68c8b8504981c73",
-   "all": "286b0d733d65a436"
+   "facts": "0d6a8f37de12c900",
+   "facts2": "fbfa59d6b56f09a6",
+   "all": "70fb47774819a7b4"
   },
   "opening.room_waited": {
    "text": "2d9cc753aafef247",
-   "facts": "aec99f4041209f8c",
-   "all": "032357d9e2feb7e2"
+   "facts": "13303df2a1ab7b23",
+   "facts2": "bf462322aa1063e9",
+   "all": "0d813193f6b32e2c"
   },
   "opening.room": {
    "text": "5aa193b86273e353",
    "facts": "23b2193f30810469",
+   "facts2": "23b2193f30810469",
    "all": "999e67fa1c2205c6"
   },
   "opening.sums": {
    "text": "a541a1c36e0d9cff",
-   "facts": "1bb55a6bea468407",
-   "all": "51e02ac85027cfa7"
+   "facts": "44c77a13ad58de80",
+   "facts2": "bd38d133dc81b84c",
+   "all": "4481863faaf69d5a"
   },
   "opening.handover": {
    "text": "4fe187a129483ea0",
-   "facts": "336a86197feb1b71",
-   "all": "7c705ec20d93af5a"
+   "facts": "a8553518a51be563",
+   "facts2": "1cee29b57fb95a51",
+   "all": "211f7c42d395f625"
   },
   "opening.sit_with_mom": {
    "text": "edb4bbda96fbbc4a",
-   "facts": "2ea39687654a300e",
-   "all": "606038a4efcfa402"
+   "facts": "72b5a70cd84f33d5",
+   "facts2": "92a17d071c9b6c88",
+   "all": "47cd452218278b1b"
   },
   "opening.ask_mom": {
    "text": "bd9877d6df12da4c",
-   "facts": "cbbdbf31101f41e2",
-   "all": "f8efb229048f40a2"
+   "facts": "3545ed08579ff274",
+   "facts2": "e3c64fae82d5d691",
+   "all": "60b36543d130caee"
   },
-  "*": "4370e8177f2cdda3"
+  "*": "3bed659f292567f1"
  },
  "rows": {
   "B1": "5276068df1ca6fa9",
@@ -126,6 +142,7 @@
   "C920": "695dc5d9d0e5e749",
   "C913": "c750f9b6ab4ace14",
   "C930": "beb57cd46fe906bf",
+  "L167": "e64ce2672d85d2d8",
   "C914": "bd07273d5822f34f",
   "C916": "7b2bb0dfdbcfe946",
   "C927": "4e86d143688ba8e5",
@@ -1390,7 +1407,7 @@
    "note": false,
    "screen_hash": "4370e8177f2cdda3",
    "row_hash": "447179d04e01ff5d",
-   "carried": false,
+   "carried": true,
    "pass": 8
   },
   {
@@ -1407,7 +1424,7 @@
     "all": "286b0d733d65a436"
    },
    "row_hash": "447179d04e01ff5d",
-   "carried": false,
+   "carried": true,
    "pass": 8
   },
   {
@@ -2690,7 +2707,7 @@
    "note": true,
    "screen_hash": "4370e8177f2cdda3",
    "row_hash": "6d9bba989a2b9666",
-   "carried": false,
+   "carried": true,
    "pass": 8
   },
   {
@@ -2707,7 +2724,7 @@
     "all": "286b0d733d65a436"
    },
    "row_hash": "6d9bba989a2b9666",
-   "carried": false,
+   "carried": true,
    "pass": 8
   },
   {
@@ -2724,7 +2741,7 @@
     "all": "51e02ac85027cfa7"
    },
    "row_hash": "6d9bba989a2b9666",
-   "carried": false,
+   "carried": true,
    "pass": 8
   },
   {
@@ -4149,6 +4166,19 @@
    "carried": true
   },
   {
+   "row": "L167",
+   "screen": "*",
+   "verdict": "N/A",
+   "line": "Go down to the kitchen (5 min)",
+   "why": "No row on any opening screen is gated by the clock or the day (no time_of_day or weekday condition, no show_when_locked). Every exit is a plain story choice.",
+   "cause": null,
+   "note": false,
+   "screen_hash": "3bed659f292567f1",
+   "row_hash": "e64ce2672d85d2d8",
+   "carried": false,
+   "pass": 9
+  },
+  {
    "row": "L71",
    "screen": "*",
    "verdict": "PASS",
@@ -4173,8 +4203,8 @@
  ],
  "causes": [],
  "pending": [],
- "asked": 5,
- "answered": 5,
+ "asked": 1,
+ "answered": 1,
  "pass_items": [],
  "unowed": []
 }

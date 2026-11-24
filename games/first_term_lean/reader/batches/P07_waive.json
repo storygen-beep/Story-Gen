@@ -1,0 +1,12 @@
+{
+ "verdicts": [
+  {
+   "row": "clothes#1",
+   "screen": "hood_street",
+   "verdict": "WAIVED",
+   "line": "{ type = \"worn_exposure\", operator = \"gte\", value = 1 }",
+   "why": "LO waived in NOTES.md, 2026-11-24: \"for the release one system i think we have clothing shop and change clothing. She can change to basic clothing but hotter will stay locked in for the release one as they require higher traits and traits are capped to 0 in the release one.\""
+  }
+ ],
+ "causes": []
+}

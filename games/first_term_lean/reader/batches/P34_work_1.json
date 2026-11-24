@@ -2,122 +2,42 @@
  "items": [
   {
    "row": "B10",
-   "screen": "ryan_room.hub",
-   "why": "screen changed: truth row"
-  },
-  {
-   "row": "B10",
-   "screen": "ryan_room.talk",
-   "why": "screen changed: truth row"
-  },
-  {
-   "row": "B10",
-   "screen": "talk_mom.talk",
+   "screen": "mark_kitchen.hub",
    "why": "screen changed: truth row"
   },
   {
    "row": "B8",
-   "screen": "ryan_room.hub",
-   "why": "screen changed: truth row"
-  },
-  {
-   "row": "B8",
-   "screen": "ryan_room.talk",
-   "why": "screen changed: truth row"
-  },
-  {
-   "row": "B8",
-   "screen": "talk_mom.talk",
+   "screen": "mark_kitchen.hub",
    "why": "screen changed: truth row"
   },
   {
    "row": "C460",
-   "screen": "ryan_room.hub",
-   "why": "screen changed: truth row"
-  },
-  {
-   "row": "C460",
-   "screen": "ryan_room.talk",
-   "why": "screen changed: truth row"
-  },
-  {
-   "row": "C460",
-   "screen": "talk_mom.talk",
+   "screen": "mark_kitchen.hub",
    "why": "screen changed: truth row"
   },
   {
    "row": "C461",
-   "screen": "ryan_room.hub",
-   "why": "screen changed: truth row"
-  },
-  {
-   "row": "C461",
-   "screen": "ryan_room.talk",
-   "why": "screen changed: truth row"
-  },
-  {
-   "row": "C461",
-   "screen": "talk_mom.talk",
+   "screen": "mark_kitchen.hub",
    "why": "screen changed: truth row"
   },
   {
    "row": "C927",
-   "screen": "ryan_room.hub",
-   "why": "screen changed: truth row"
-  },
-  {
-   "row": "C927",
-   "screen": "ryan_room.talk",
-   "why": "screen changed: truth row"
-  },
-  {
-   "row": "C927",
-   "screen": "talk_mom.talk",
+   "screen": "mark_kitchen.hub",
    "why": "screen changed: truth row"
   },
   {
    "row": "C931",
-   "screen": "ryan_room.hub",
-   "why": "screen changed: truth row"
-  },
-  {
-   "row": "C931",
-   "screen": "ryan_room.talk",
-   "why": "screen changed: truth row"
-  },
-  {
-   "row": "C931",
-   "screen": "talk_mom.talk",
+   "screen": "mark_kitchen.hub",
    "why": "screen changed: truth row"
   },
   {
    "row": "L106",
-   "screen": "ryan_room.hub",
-   "why": "screen changed: truth row"
-  },
-  {
-   "row": "L106",
-   "screen": "ryan_room.talk",
-   "why": "screen changed: truth row"
-  },
-  {
-   "row": "L106",
-   "screen": "talk_mom.talk",
+   "screen": "mark_kitchen.hub",
    "why": "screen changed: truth row"
   },
   {
    "row": "L167",
-   "screen": "ryan_room.hub",
-   "why": "screen changed: truth row"
-  },
-  {
-   "row": "L167",
-   "screen": "ryan_room.talk",
-   "why": "screen changed: truth row"
-  },
-  {
-   "row": "L167",
-   "screen": "talk_mom.talk",
+   "screen": "mark_kitchen.hub",
    "why": "screen changed: truth row"
   }
  ]

@@ -1319,7 +1319,7 @@ text = "Pay the rent (5 min)"
 targetType = "node"
 nodeId = "rent"
 show_when_locked = true
-locked_text = "Pay the rent (5 min) — Mark collects on Sunday morning, at the kitchen table."
+locked_text = "Pay the rent (5 min) — Mark collects on Sundays, 8 to 11:55am, at the kitchen table."
 conditions = { version = "1.0", logic = "AND", items = [{ type = "weekday", weekdays = [6] }, { type = "time_of_day", start_time = "08:00", end_time = "11:55" }] }
 time_progression_minutes = 0
 
@@ -2255,6 +2255,264 @@ targetType = "location"
 locationId = "hood_clothes"
 time_progression_minutes = 15
 
+# ── P15 · her first lectures: Hale and Nadia (psychology), Pratt (statistics). Each plays once by itself on
+# entry, while its people are there (craft/arc.md). Psychology ends at 11:00, so statistics can play next. ──
+
+[[canvases]]
+id = "psych_first"
+name = "Intro to Psychology"
+
+[canvases.trigger]
+location = "campus_lecture_hall"
+trigger_mode = "manual"
+is_repeatable = false
+conditions = { version = "1.0", logic = "AND", items = [{ type = "npc_at_location", npc_id = "npc_hale", location_id = "campus_lecture_hall", operator = "is_present" }, { type = "npc_at_location", npc_id = "npc_nadia", location_id = "campus_lecture_hall", operator = "is_present" }, { type = "weekday", weekdays = [0, 2] }, { type = "time_of_day", start_time = "09:00", end_time = "09:30" }] }
+
+[[canvases.nodes]]
+id = "seat"
+name = "The seat"
+blocks = [
+  { type = "paragraph", content = "The lecture hall is half full and loud. A dark-haired girl in the third row moves her bag off the seat beside her and looks straight at you." },
+  { type = "dialog", content = "Sit here, freshman. Not the front. Trust me.", props = { speaker = "unknown" } },
+]
+
+[canvases.nodes.exit_block]
+type = "choices"
+
+[[canvases.nodes.exit_block.choices]]
+text = "Sit with her"
+targetType = "node"
+nodeId = "lecture"
+time_progression_minutes = 0
+flagEffects = [{ flag = "nadia_sat_with", op = "set" }]
+
+[[canvases.nodes.exit_block.choices]]
+text = "Take the front row anyway"
+targetType = "node"
+nodeId = "lecture"
+time_progression_minutes = 0
+flagEffects = [{ flag = "nadia_front_row", op = "set" }]
+
+[[canvases.nodes.exit_block.choices]]
+text = "Ask her why"
+targetType = "node"
+nodeId = "lecture"
+time_progression_minutes = 0
+flagEffects = [{ flag = "nadia_asked", op = "set" }]
+
+[[canvases.nodes]]
+id = "lecture"
+name = "The lecture"
+blocks = [
+  { type = "group", props = { conditions = { version = "1.0", logic = "AND", items = [{ type = "flag", subject = "player", flag_key = "nadia_sat_with", operator = "is_true" }] } }, blocks = [
+    { type = "paragraph", content = "You sit. She doesn't say her name yet, and you don't ask." },
+  ] },
+  { type = "group", props = { conditions = { version = "1.0", logic = "AND", items = [{ type = "flag", subject = "player", flag_key = "nadia_front_row", operator = "is_true" }] } }, blocks = [
+    { type = "paragraph", content = "You take the front row. Behind you, the girl sighs loud enough to hear." },
+  ] },
+  { type = "group", props = { conditions = { version = "1.0", logic = "AND", items = [{ type = "flag", subject = "player", flag_key = "nadia_asked", operator = "is_true" }] } }, blocks = [
+    { type = "dialog", content = "You'll see. I'm Nadia. I'm doing this course twice.", props = { speaker = "npc", npcId = "npc_nadia" } },
+    { type = "paragraph", content = "She says it like a warning." },
+  ] },
+  { type = "paragraph", content = "A man in his late thirties is already at the lectern, no notes, his coffee beside him. He looks over the rows until he finds you, and keeps looking. You cross your legs, and his eyes go there, then back to your face, unhurried. Heat climbs your neck, and you press your thighs together under the desk." },
+  { type = "dialog", content = "Dr. Hale. Intro to Psychology. Most of you will pass. Some of you will surprise me. Won't you, young lady?", props = { speaker = "npc", npcId = "npc_hale" } },
+  { type = "image", props = { description = "Her view from her seat (she is 18, out of frame): a man of 39 at a lecture-hall lectern with a coffee, no notes, looking across the rows at the camera.", search_queries = ["professor 39 lectern lecture hall looking at camera coffee", "male lecturer looking up at students lecture hall"], pool_dir = "people/hale_lectern_t0", pool = 1 } },
+  { type = "paragraph", content = "For the rest of the lecture his eyes keep coming back to you. At the end, the girl catches you on the way out." },
+  { type = "group", props = { conditions = { version = "1.0", logic = "AND", items = [{ type = "flag", subject = "player", flag_key = "nadia_asked", operator = "is_true" }] } }, blocks = [
+    { type = "dialog", content = "Last spring it was me.", props = { speaker = "npc", npcId = "npc_nadia" } },
+  ] },
+  { type = "group", props = { conditions = { version = "1.0", logic = "AND", items = [{ type = "flag", subject = "player", flag_key = "nadia_asked", operator = "is_false" }] } }, blocks = [
+    { type = "dialog", content = "I'm Nadia. Last spring it was me.", props = { speaker = "npc", npcId = "npc_nadia" } },
+  ] },
+  { type = "paragraph", content = "She's gone before you can ask what she means. Your stomach turns over, and between your legs you're warm, and you hate that you are." },
+]
+
+[canvases.nodes.exit_block]
+type = "choices"
+
+[[canvases.nodes.exit_block.choices]]
+text = "Done"
+targetType = "location"
+locationId = "campus_lecture_hall"
+time_progression_minutes = 120
+flagEffects = [{ flag = "met_hale", op = "set" }, { flag = "met_nadia", op = "set" }]
+
+[[canvases]]
+id = "stats_first"
+name = "Statistics"
+
+[canvases.trigger]
+location = "campus_lecture_hall"
+trigger_mode = "manual"
+is_repeatable = false
+conditions = { version = "1.0", logic = "AND", items = [{ type = "npc_at_location", npc_id = "npc_pratt", location_id = "campus_lecture_hall", operator = "is_present" }, { type = "weekday", weekdays = [0, 2] }, { type = "time_of_day", start_time = "11:00", end_time = "11:30" }] }
+
+[[canvases.nodes]]
+id = "class"
+name = "Attendance"
+blocks = [
+  { type = "paragraph", content = "A man in a grey cardigan is already filling the whiteboard with numbers. He turns round long enough to read names off a sheet." },
+  { type = "dialog", content = "Pratt. Statistics. I take attendance, and I notice who isn't here.", props = { speaker = "npc", npcId = "npc_pratt" } },
+  { type = "dialog", content = "Miss @player?", props = { speaker = "npc", npcId = "npc_pratt" } },
+]
+
+[canvases.nodes.exit_block]
+type = "choices"
+
+[[canvases.nodes.exit_block.choices]]
+text = "Here."
+targetType = "node"
+nodeId = "after"
+time_progression_minutes = 0
+
+[[canvases.nodes.exit_block.choices]]
+text = "Present."
+targetType = "node"
+nodeId = "after"
+time_progression_minutes = 0
+
+[[canvases.nodes.exit_block.choices]]
+text = "Say nothing"
+targetType = "node"
+nodeId = "after"
+time_progression_minutes = 0
+flagEffects = [{ flag = "pratt_silent", op = "set" }]
+
+[[canvases.nodes]]
+id = "after"
+name = "Statistics"
+blocks = [
+  { type = "group", props = { conditions = { version = "1.0", logic = "AND", items = [{ type = "flag", subject = "player", flag_key = "pratt_silent", operator = "is_false" }] } }, blocks = [
+    { type = "paragraph", content = "He ticks you off without looking up." },
+    { type = "dialog", content = "Thank you. Sit where I can see you.", props = { speaker = "npc", npcId = "npc_pratt" } },
+  ] },
+  { type = "group", props = { conditions = { version = "1.0", logic = "AND", items = [{ type = "flag", subject = "player", flag_key = "pratt_silent", operator = "is_true" }] } }, blocks = [
+    { type = "dialog", content = "I'll take that as a yes.", props = { speaker = "npc", npcId = "npc_pratt" } },
+    { type = "paragraph", content = "Two girls behind you snigger. Your face goes hot." },
+  ] },
+  { type = "paragraph", content = "He turns back to the board and doesn't look at the room again for the rest of the class. You copy every line and understand about half. On the way out he says your name once more, like he's filing it." },
+]
+
+[canvases.nodes.exit_block]
+type = "choices"
+
+[[canvases.nodes.exit_block.choices]]
+text = "Done"
+targetType = "location"
+locationId = "campus_lecture_hall"
+time_progression_minutes = 120
+flagEffects = [{ flag = "met_pratt", op = "set" }]
+
+# ── P16 · her first English class: Prof. Walsh, then Walsh asks to see her, as her advisor (LO, NOTES 42).
+# Plays once by itself on entry while Walsh is there. "Done" sets met_walsh, which opens the Faculty Offices. ──
+
+[[canvases]]
+id = "english_first"
+name = "English Composition"
+
+[canvases.trigger]
+location = "campus_lecture_hall"
+trigger_mode = "manual"
+is_repeatable = false
+conditions = { version = "1.0", logic = "AND", items = [{ type = "npc_at_location", npc_id = "npc_walsh", location_id = "campus_lecture_hall", operator = "is_present" }, { type = "weekday", weekdays = [1, 3] }, { type = "time_of_day", start_time = "09:00", end_time = "09:30" }] }
+
+[[canvases.nodes]]
+id = "sheet"
+name = "The sheet"
+blocks = [
+  { type = "paragraph", content = "A woman in her late forties, reading glasses pushed up into grey-streaked hair, walks the front row handing out a single sheet to each of you." },
+  { type = "dialog", content = "Walsh. English Composition. One essay a week, and I read every word of it.", props = { speaker = "npc", npcId = "npc_walsh" } },
+  { type = "paragraph", content = "She gets to you last and holds the sheet a second longer than she needs to, reading your face instead of the page." },
+  { type = "dialog", content = "@player. I'm your advisor this year, so you're stuck with me twice.", props = { speaker = "npc", npcId = "npc_walsh" } },
+]
+
+[canvases.nodes.exit_block]
+type = "choices"
+
+[[canvases.nodes.exit_block.choices]]
+text = "Yes, ma'am."
+targetType = "node"
+nodeId = "class"
+time_progression_minutes = 0
+flagEffects = [{ flag = "walsh_maam", op = "set" }]
+
+[[canvases.nodes.exit_block.choices]]
+text = "I didn't know I had one."
+targetType = "node"
+nodeId = "class"
+time_progression_minutes = 0
+flagEffects = [{ flag = "walsh_no_advisor", op = "set" }]
+
+[[canvases.nodes.exit_block.choices]]
+text = "Say nothing"
+targetType = "node"
+nodeId = "class"
+time_progression_minutes = 0
+flagEffects = [{ flag = "walsh_silent", op = "set" }]
+
+[[canvases.nodes]]
+id = "class"
+name = "English Composition"
+blocks = [
+  { type = "group", props = { conditions = { version = "1.0", logic = "AND", items = [{ type = "flag", subject = "player", flag_key = "walsh_maam", operator = "is_true" }] } }, blocks = [
+    { type = "dialog", content = "Ma'am. Your mother raised you properly.", props = { speaker = "npc", npcId = "npc_walsh" } },
+    { type = "paragraph", content = "Two girls behind you giggle." },
+  ] },
+  { type = "group", props = { conditions = { version = "1.0", logic = "AND", items = [{ type = "flag", subject = "player", flag_key = "walsh_no_advisor", operator = "is_true" }] } }, blocks = [
+    { type = "dialog", content = "Everyone does. Most of you never come and find me.", props = { speaker = "npc", npcId = "npc_walsh" } },
+  ] },
+  { type = "group", props = { conditions = { version = "1.0", logic = "AND", items = [{ type = "flag", subject = "player", flag_key = "walsh_silent", operator = "is_true" }] } }, blocks = [
+    { type = "paragraph", content = "She waits. You don't fill it. She smiles, just a little, and moves on." },
+  ] },
+  { type = "paragraph", content = "For the rest of the class she takes essays apart line by line, reading the worst sentences out loud while their owners go red. You write until your wrist hurts." },
+  { type = "image", props = { description = "Her view from her seat (she is 18, out of frame): a woman of 48 with reading glasses pushed up into grey-streaked hair, at the front of a lecture hall holding an essay, looking at the camera.", search_queries = ["female professor 48 reading glasses lecture hall holding paper looking at camera", "older woman teacher front of lecture hall"], pool_dir = "people/walsh_front_t0", pool = 1 } },
+  { type = "paragraph", content = "At the end she taps your desk on her way past." },
+  { type = "dialog", content = "Stay a minute, @player.", props = { speaker = "npc", npcId = "npc_walsh" } },
+]
+
+[canvases.nodes.exit_block]
+type = "choices"
+
+[[canvases.nodes.exit_block.choices]]
+text = "Stay"
+targetType = "node"
+nodeId = "after"
+time_progression_minutes = 0
+flagEffects = [{ flag = "walsh_stayed", op = "set" }]
+
+[[canvases.nodes.exit_block.choices]]
+text = "I've got somewhere to be"
+targetType = "node"
+nodeId = "after"
+time_progression_minutes = 0
+
+[[canvases.nodes]]
+id = "after"
+name = "Walsh"
+blocks = [
+  { type = "group", props = { conditions = { version = "1.0", logic = "AND", items = [{ type = "flag", subject = "player", flag_key = "walsh_stayed", operator = "is_true" }] } }, blocks = [
+    { type = "paragraph", content = "The room empties around you. She sits on the edge of the desk in front of yours." },
+    { type = "dialog", content = "I see every first-year once. I'd rather hear how you're doing from you than from your grades. My office, Tuesday and Thursday afternoons, two to four.", props = { speaker = "npc", npcId = "npc_walsh" } },
+    { type = "dialog", content = "Is that a rule?", props = { speaker = "player" } },
+    { type = "dialog", content = "It's a favour. To both of us.", props = { speaker = "npc", npcId = "npc_walsh" } },
+  ] },
+  { type = "group", props = { conditions = { version = "1.0", logic = "AND", items = [{ type = "flag", subject = "player", flag_key = "walsh_stayed", operator = "is_false" }] } }, blocks = [
+    { type = "dialog", content = "Then come to my office instead. Tuesday or Thursday, two to four. Don't make me chase you.", props = { speaker = "npc", npcId = "npc_walsh" } },
+    { type = "dialog", content = "I won't.", props = { speaker = "player" } },
+  ] },
+  { type = "paragraph", content = "The faculty offices are off the quad. You already know you'll be knocking on her door." },
+]
+
+[canvases.nodes.exit_block]
+type = "choices"
+
+[[canvases.nodes.exit_block.choices]]
+text = "Done"
+targetType = "location"
+locationId = "campus_lecture_hall"
+time_progression_minutes = 125
+flagEffects = [{ flag = "met_walsh", op = "set" }]
+
 # ── P04 · travel: four one-screen canvases. A canvas's costs are checked and taken on entry, and an
 # unaffordable one shows dimmed with its cost (v2.py:6700-6732); the choice spends the minutes. ──
 
@@ -2273,11 +2531,63 @@ id = "ride"
 name = "Take the bus to campus ($2, 20 min)"
 blocks = [
   { type = "group", props = { conditions = { version = "1.0", logic = "AND", items = [{ type = "weekday", weekdays = [0, 1, 2, 3, 4] }, { type = "time_of_day", start_time = "07:00", end_time = "10:00" }] } }, blocks = [
-    { type = "paragraph", content = "The bus is packed. You stand the whole way, pressed between strangers. Every time it brakes, a man's hips press into your ass, and he doesn't step back. Your face burns. You step off at the campus gates." },
+    { type = "paragraph", content = "The bus is packed. Every time it brakes, a man's hips press into your ass, and he doesn't step back. You feel him getting hard against you, and your nipples go tight." },
+    { type = "dialog", content = "Packed in tight today, huh? Don't mind me.", props = { speaker = "unknown" } },
   ] },
   { type = "group", props = { conditions = { version = "1.0", logic = "OR", items = [{ type = "weekday", weekdays = [5, 6] }, { type = "time_of_day", start_time = "10:00", end_time = "07:00" }] } }, blocks = [
     { type = "paragraph", content = "The bus is half empty. You get a seat by the window and step off at the campus gates." },
   ] },
+]
+
+[canvases.nodes.exit_block]
+type = "choices"
+
+[[canvases.nodes.exit_block.choices]]
+text = "Tell him to back off"
+targetType = "node"
+nodeId = "packed_no"
+time_progression_minutes = 0
+conditions = { version = "1.0", logic = "AND", items = [{ type = "weekday", weekdays = [0, 1, 2, 3, 4] }, { type = "time_of_day", start_time = "07:00", end_time = "10:00" }] }
+
+[[canvases.nodes.exit_block.choices]]
+text = "Say nothing"
+targetType = "node"
+nodeId = "packed_quiet"
+time_progression_minutes = 0
+conditions = { version = "1.0", logic = "AND", items = [{ type = "weekday", weekdays = [0, 1, 2, 3, 4] }, { type = "time_of_day", start_time = "07:00", end_time = "10:00" }] }
+
+[[canvases.nodes.exit_block.choices]]
+text = "Get off at campus"
+targetType = "location"
+locationId = "campus_quad"
+time_progression_minutes = 20
+conditions = { version = "1.0", logic = "OR", items = [{ type = "weekday", weekdays = [5, 6] }, { type = "time_of_day", start_time = "10:00", end_time = "07:00" }] }
+
+[[canvases.nodes]]
+id = "packed_no"
+name = "Bus to campus"
+blocks = [
+  { type = "dialog", content = "Back off. I mean it.", props = { speaker = "player" } },
+  { type = "dialog", content = "Relax, sweetheart. It's a bus.", props = { speaker = "unknown" } },
+  { type = "paragraph", content = "He shifts half an inch and no further. You step off at the campus gates with your legs shaking. Next time, you'll stand by the doors." },
+]
+
+[canvases.nodes.exit_block]
+type = "choices"
+
+[[canvases.nodes.exit_block.choices]]
+text = "Get off at campus"
+targetType = "location"
+locationId = "campus_quad"
+time_progression_minutes = 20
+
+[[canvases.nodes]]
+id = "packed_quiet"
+name = "Bus to campus"
+blocks = [
+  { type = "paragraph", content = "You say nothing, and he breathes against your neck." },
+  { type = "dialog", content = "Good girl. I'll look for you on this bus.", props = { speaker = "unknown" } },
+  { type = "paragraph", content = "You step off at the gates with your face burning. Next time, you'll stand by the doors." },
 ]
 
 [canvases.nodes.exit_block]
