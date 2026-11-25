@@ -1,0 +1,1013 @@
+{
+ "verdicts": [
+  {
+   "row": "B1",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "Again. Slower. Like you want it. Again. / You. Up here next time, not hiding.",
+   "why": "Cross visibly wants something on both people screens (Brooke to mean it; her up front); not a sexual step. sit_seats has no person. Checked drama_first, class_drama, walk_cross_brooke."
+  },
+  {
+   "row": "B2",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "The blonde finds you in the dark between lines and smiles like she's won something. Your thighs press together. You want him to make you say it like that.",
+   "why": "The rehearsal adds her wanting him to direct her, past class_drama's 'Next time, I'll show you'; the back row adds his calling her out. sit_seats has no person."
+  },
+  {
+   "row": "B3",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "You. Up here next time, not hiding. I mean it.",
+   "why": "Passes on the two people screens; sit_seats asked on its own screen."
+  },
+  {
+   "row": "B3",
+   "screen": "sit_seats.sit",
+   "verdict": "FAIL",
+   "line": "You sit in the dark seats and look at the empty stage. The work light hums.",
+   "why": "The screen ends on the light, and nothing in it points at what comes next.",
+   "cause": "P30r11-c1"
+  },
+  {
+   "row": "B3",
+   "screen": "watch_class.watch",
+   "verdict": "PASS",
+   "line": "You. Up here next time, not hiding. I mean it. / Your face goes hot all the way down your neck.",
+   "why": "'Up here next time' is a promise, and her reaction to it closes the scene."
+  },
+  {
+   "row": "B3",
+   "screen": "watch_rehearsal.watch",
+   "verdict": "PASS",
+   "line": "The blonde finds you in the dark between lines and smiles like she's won something. Your thighs press together. You want him to make you say it like that.",
+   "why": "Ends on her wanting him to make her say it, which points at Cross directing her."
+  },
+  {
+   "row": "B4",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "The blonde finds you in the dark between lines and smiles like she's won something. Your thighs press together. You want him to make you say it like that.",
+   "why": "She reacts on her body (face, neck, thighs) and chooses no act; nothing is offered for her to push back on."
+  },
+  {
+   "row": "B4",
+   "screen": "watch_rehearsal.watch",
+   "verdict": "PASS",
+   "line": "Your thighs press together. You want him to make you say it like that.",
+   "why": "On her body, no italic thought. A want is a reaction, not an act her stage hasn't opened (L71)."
+  },
+  {
+   "row": "B5",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "Cross finds you in the back row.",
+   "why": "Passes on the two people screens; sit_seats asked on its own screen."
+  },
+  {
+   "row": "B5",
+   "screen": "sit_seats.sit",
+   "verdict": "FAIL",
+   "line": "You sit in the dark seats and look at the empty stage. The work light hums.",
+   "why": "Nobody reacts to her, and PLAN.md's theatre row (line 141: 'Cross: her under the lights') doesn't declare that nobody does.",
+   "cause": "P30r11-c2"
+  },
+  {
+   "row": "B5",
+   "screen": "watch_class.watch",
+   "verdict": "PASS",
+   "line": "Cross finds you in the back row. / The drama teacher finds you in the back row.",
+   "why": "Cross reacts to her sitting at the back."
+  },
+  {
+   "row": "B5",
+   "screen": "watch_rehearsal.watch",
+   "verdict": "PASS",
+   "line": "The blonde finds you in the dark between lines and smiles like she's won something.",
+   "why": "Brooke reacts to her."
+  },
+  {
+   "row": "B6",
+   "screen": "*",
+   "verdict": "N/A",
+   "line": "You. Up here next time, not hiding. I mean it.",
+   "why": "No screen makes her an offer to refuse."
+  },
+  {
+   "row": "B7",
+   "screen": "*",
+   "verdict": "N/A",
+   "line": "The blonde finds you in the dark between lines and smiles like she's won something. Your thighs press together. You want him to make you say it like that.",
+   "why": "No explicit beat on any of the three screens."
+  },
+  {
+   "row": "B8",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "+5 energy, 30 minutes, 2 a day",
+   "why": "sit_seats matches card item 7; no garment named on any screen."
+  },
+  {
+   "row": "B8",
+   "screen": "watch_class.watch",
+   "verdict": "PASS",
+   "line": "Done: 30 minutes",
+   "why": "Matches the card (30 minutes, Tue/Thu 11:00-13:00); no garment named."
+  },
+  {
+   "row": "B8",
+   "screen": "watch_rehearsal.watch",
+   "verdict": "PASS",
+   "line": "Done: 30 minutes",
+   "why": "Matches the card (Tue/Thu/Fri 14:00-18:00, 30 minutes); no garment named."
+  },
+  {
+   "row": "B9",
+   "screen": "*",
+   "verdict": "N/A",
+   "line": "",
+   "why": "PLAN.md declares Zoe the companion and Brooke the rival; not the same person."
+  },
+  {
+   "row": "B10",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "You sit in the dark seats and look at the empty stage. The work light hums.",
+   "why": "sit_seats needs Cross absent; Brooke is only at the theatre while he is (who_is_where), so the stage is empty at 09:00 and 20:59 and on a second visit; 'work light' matches the place's own variant."
+  },
+  {
+   "row": "B10",
+   "screen": "watch_class.watch",
+   "verdict": "PASS",
+   "line": "The class is in a line on the stage, saying their line louder each time.",
+   "why": "Cross's row (teaching drama) and Brooke's (in drama) fill Tue/Thu 11-13, so the class runs at 11:00 and 12:55; met/unmet chain names him by met_cross; a second visit reads true."
+  },
+  {
+   "row": "B10",
+   "screen": "watch_rehearsal.watch",
+   "verdict": "PASS",
+   "line": "In the dark at the back: Cross makes a blonde girl run the same four lines",
+   "why": "Four-way first-match chain covers all four met_cross/met_brooke cases; both rows fill Tue/Thu/Fri 14-18; Brooke is blonde (bathroom mirror, line 5795)."
+  },
+  {
+   "row": "B11",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "effects = energy +5",
+   "why": "sit_seats changes the energy bar; the two watch rows show the act they name."
+  },
+  {
+   "row": "B12",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "Your face goes hot all the way down your neck.",
+   "why": "Class: her face and neck, his line at her, 'next time' as the not yet. sit_seats isn't charged."
+  },
+  {
+   "row": "B12",
+   "screen": "watch_rehearsal.watch",
+   "verdict": "PASS",
+   "line": "Your thighs press together. You want him to make you say it like that.",
+   "why": "Her thighs, Brooke's smile at her as the reaction, the unmet want as the not yet."
+  },
+  {
+   "row": "B13",
+   "screen": "*",
+   "verdict": "N/A",
+   "line": "You sit in the dark seats and look at the empty stage. The work light hums.",
+   "why": "No shower, dressing, towel, bed or mirror moment."
+  },
+  {
+   "row": "C1173",
+   "screen": "*",
+   "verdict": "N/A",
+   "line": "",
+   "why": "campus_theatre has no dress code and none of the three screens names a garment."
+  },
+  {
+   "row": "C1184",
+   "screen": "*",
+   "verdict": "N/A",
+   "line": "",
+   "why": "campus_theatre has no dress code and none of the three screens names a garment."
+  },
+  {
+   "row": "C1185",
+   "screen": "*",
+   "verdict": "N/A",
+   "line": "",
+   "why": "campus_theatre has no dress code and none of the three screens names a garment."
+  },
+  {
+   "row": "C1198",
+   "screen": "*",
+   "verdict": "N/A",
+   "line": "",
+   "why": "campus_theatre has no dress code and none of the three screens names a garment."
+  },
+  {
+   "row": "C1200",
+   "screen": "*",
+   "verdict": "N/A",
+   "line": "",
+   "why": "campus_theatre has no dress code and none of the three screens names a garment."
+  },
+  {
+   "row": "C1220",
+   "screen": "*",
+   "verdict": "N/A",
+   "line": "",
+   "why": "campus_theatre has no dress code and none of the three screens names a garment."
+  },
+  {
+   "row": "C1221",
+   "screen": "*",
+   "verdict": "N/A",
+   "line": "",
+   "why": "campus_theatre has no dress code and none of the three screens names a garment."
+  },
+  {
+   "row": "C1002",
+   "screen": "*",
+   "verdict": "N/A",
+   "line": "",
+   "why": "No spend on any of the three screens."
+  },
+  {
+   "row": "C1250",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "You sit in the dark seats and look at the empty stage. The work light hums.",
+   "why": "No media on the room card or the repeats (plain repeats, C1265)."
+  },
+  {
+   "row": "C1303",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "effects = energy +5",
+   "why": "Energy is read by costs elsewhere (class_drama's 10 energy)."
+  },
+  {
+   "row": "C1313",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "walk_cross_brooke, walk_cross_seats at campus_theatre",
+   "why": "sit_seats' room holds events."
+  },
+  {
+   "row": "C1337",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "energy +5",
+   "why": "Energy moves both ways and is read by costs."
+  },
+  {
+   "row": "C1340",
+   "screen": "*",
+   "verdict": "N/A",
+   "line": "",
+   "why": "Not the household; no housemate."
+  },
+  {
+   "row": "C1342",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "energy +5",
+   "why": "sit_seats is one more energy refill on a room's list."
+  },
+  {
+   "row": "C1345",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "max_triggers_per_day = 2",
+   "why": "sit_seats' brake is a daily cap on the way in."
+  },
+  {
+   "row": "C1360",
+   "screen": "*",
+   "verdict": "N/A",
+   "line": "",
+   "why": "Answered on each screen."
+  },
+  {
+   "row": "C1360",
+   "screen": "sit_seats.sit",
+   "verdict": "FAIL",
+   "line": "max_triggers_per_day = 2, no show_when_blocked",
+   "why": "After two uses the row is gone, not greyed; the clock-plus-count exception (clock.md rule 10) doesn't cover it: it has no clock window."
+  },
+  {
+   "row": "C1360",
+   "screen": "watch_class.watch",
+   "verdict": "FAIL",
+   "line": "no show_when_blocked",
+   "why": "Out of hours the row is hidden, not greyed."
+  },
+  {
+   "row": "C1360",
+   "screen": "watch_rehearsal.watch",
+   "verdict": "FAIL",
+   "line": "no show_when_blocked",
+   "why": "Out of hours the row is hidden, not greyed."
+  },
+  {
+   "row": "C1421",
+   "screen": "*",
+   "verdict": "N/A",
+   "line": "",
+   "why": "Answered on each screen."
+  },
+  {
+   "row": "C1421",
+   "screen": "sit_seats.sit",
+   "verdict": "FAIL",
+   "line": "max_triggers_per_day = 2, no show_when_blocked",
+   "why": "Once used twice it vanishes and nothing says why; systems.md rule 5's count brake carries a cooldown_message."
+  },
+  {
+   "row": "C1421",
+   "screen": "watch_class.watch",
+   "verdict": "FAIL",
+   "line": "no show_when_blocked",
+   "why": "Out of hours nothing tells her when the class is (Go to drama's greyed line does, only once met_cross)."
+  },
+  {
+   "row": "C1421",
+   "screen": "watch_rehearsal.watch",
+   "verdict": "FAIL",
+   "line": "no show_when_blocked",
+   "why": "Out of hours nothing tells her when rehearsals are."
+  },
+  {
+   "row": "C1423",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "max_triggers_per_day = 2, 30 minutes",
+   "why": "A cap and real time."
+  },
+  {
+   "row": "C1425",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "max_triggers_per_day = 2, 30 minutes, +5",
+   "why": "Time cost and a daily cap together."
+  },
+  {
+   "row": "C1427",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "2 x 30 minutes",
+   "why": "Capped, so the 30 minutes can't be farmed across the 12-hour opening."
+  },
+  {
+   "row": "C1428",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "",
+   "why": "No energy lock on any row with a person."
+  },
+  {
+   "row": "C1431",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "energy +5",
+   "why": "Energy falls by costs, refills here and elsewhere, and shuts costed rows when low."
+  },
+  {
+   "row": "C1432",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "energy +5, 30 minutes, theatre",
+   "why": "The card names the refill's place, minutes and gain; energy's drains and walls are declared on P06."
+  },
+  {
+   "row": "C1433",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "",
+   "why": "Energy greys costed rows while short (engine)."
+  },
+  {
+   "row": "C1434",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "walk_cross_seats, walk_cross_brooke",
+   "why": "The theatre has things happen."
+  },
+  {
+   "row": "C1438",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "",
+   "why": "Energy is spent by use."
+  },
+  {
+   "row": "C1441",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "You sit in the dark seats and look at the empty stage. The work light hums.",
+   "why": "A refill with a line, not a step about a person or her body."
+  },
+  {
+   "row": "C146",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "",
+   "why": "No big moment on a repeatable."
+  },
+  {
+   "row": "C149",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "You. Up here next time, not hiding. I mean it.",
+   "why": "Passes on the two people screens; sit_seats asked on its own screen."
+  },
+  {
+   "row": "C149",
+   "screen": "sit_seats.sit",
+   "verdict": "FAIL",
+   "line": "You sit in the dark seats and look at the empty stage. The work light hums.",
+   "why": "Points at nothing next.",
+   "cause": "P30r11-c1"
+  },
+  {
+   "row": "C149",
+   "screen": "watch_class.watch",
+   "verdict": "PASS",
+   "line": "You. Up here next time, not hiding. I mean it.",
+   "why": "'Next time' points ahead."
+  },
+  {
+   "row": "C149",
+   "screen": "watch_rehearsal.watch",
+   "verdict": "PASS",
+   "line": "You want him to make you say it like that.",
+   "why": "Points at Cross directing her."
+  },
+  {
+   "row": "C151",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "Again. Slower. Like you want it. Again.",
+   "why": "Each repeat is short; Cross's line is the rehearsal's one spoken line, Brooke's is the line being run."
+  },
+  {
+   "row": "C188",
+   "screen": "*",
+   "verdict": "N/A",
+   "line": "effects = energy +5",
+   "why": "Energy is not a person's or a climb meter; no meter step, rung, lock or offer here."
+  },
+  {
+   "row": "C210",
+   "screen": "*",
+   "verdict": "N/A",
+   "line": "effects = energy +5",
+   "why": "Energy is not a person's or a climb meter; no meter step, rung, lock or offer here."
+  },
+  {
+   "row": "C295",
+   "screen": "*",
+   "verdict": "N/A",
+   "line": "effects = energy +5",
+   "why": "Energy is not a person's or a climb meter; no meter step, rung, lock or offer here."
+  },
+  {
+   "row": "C338",
+   "screen": "*",
+   "verdict": "N/A",
+   "line": "effects = energy +5",
+   "why": "Energy is not a person's or a climb meter; no meter step, rung, lock or offer here."
+  },
+  {
+   "row": "C381",
+   "screen": "*",
+   "verdict": "N/A",
+   "line": "effects = energy +5",
+   "why": "Energy is not a person's or a climb meter; no meter step, rung, lock or offer here."
+  },
+  {
+   "row": "L116",
+   "screen": "*",
+   "verdict": "N/A",
+   "line": "effects = energy +5",
+   "why": "Energy is not a person's or a climb meter; no meter step, rung, lock or offer here."
+  },
+  {
+   "row": "L70",
+   "screen": "*",
+   "verdict": "N/A",
+   "line": "effects = energy +5",
+   "why": "Energy is not a person's or a climb meter; no meter step, rung, lock or offer here."
+  },
+  {
+   "row": "C660",
+   "screen": "*",
+   "verdict": "N/A",
+   "line": "effects = energy +5",
+   "why": "Energy is not a person's or a climb meter; no meter step, rung, lock or offer here."
+  },
+  {
+   "row": "C961",
+   "screen": "*",
+   "verdict": "N/A",
+   "line": "effects = energy +5",
+   "why": "Energy is not a person's or a climb meter; no meter step, rung, lock or offer here."
+  },
+  {
+   "row": "C388",
+   "screen": "*",
+   "verdict": "N/A",
+   "line": "",
+   "why": "No meter or story lock on sit_seats."
+  },
+  {
+   "row": "C330",
+   "screen": "*",
+   "verdict": "N/A",
+   "line": "",
+   "why": "No repeatable pays a climb meter."
+  },
+  {
+   "row": "C541",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "effects = energy +5",
+   "why": "No +X printed; the engine's toast stays; energy is shown."
+  },
+  {
+   "row": "C422",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "Sit in the empty seats \u00b7 Sit at the back of drama \u00b7 Sit in on the rehearsal \u00b7 Done",
+   "why": "Each says what clicking does."
+  },
+  {
+   "row": "C442",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "Your thighs press together.",
+   "why": "Says it plainly."
+  },
+  {
+   "row": "C450",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "You want him to make you say it like that.",
+   "why": "Passes on the two people screens; sit_seats asked on its own screen."
+  },
+  {
+   "row": "C450",
+   "screen": "sit_seats.sit",
+   "verdict": "FAIL",
+   "line": "You sit in the dark seats and look at the empty stage. The work light hums.",
+   "why": "The scene ends on the work light, not a hook.",
+   "cause": "P30r11-c1"
+  },
+  {
+   "row": "C450",
+   "screen": "watch_class.watch",
+   "verdict": "PASS",
+   "line": "You. Up here next time, not hiding. I mean it. / Your face goes hot all the way down your neck.",
+   "why": "Ends on his promise and her body's answer to it."
+  },
+  {
+   "row": "C450",
+   "screen": "watch_rehearsal.watch",
+   "verdict": "PASS",
+   "line": "The blonde finds you in the dark between lines and smiles like she's won something. Your thighs press together. You want him to make you say it like that.",
+   "why": "Ends on a want that points at him."
+  },
+  {
+   "row": "C451",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "the dark seats \u00b7 the work light \u00b7 the same four lines",
+   "why": "Concrete detail kept."
+  },
+  {
+   "row": "C460",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "You sit in the dark seats and look at the empty stage. The work light hums.",
+   "why": "True on every visit sit_seats can show (Cross absent, stage empty by rows)."
+  },
+  {
+   "row": "C461",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "You sit in the dark seats and look at the empty stage. The work light hums.",
+   "why": "Texture that can't clash; dialogue fits the cast entries."
+  },
+  {
+   "row": "C460",
+   "screen": "watch_class.watch",
+   "verdict": "PASS",
+   "line": "Cross finds you in the back row.",
+   "why": "True at 11:00 and 12:55 Tue/Thu, met and unmet."
+  },
+  {
+   "row": "C461",
+   "screen": "watch_class.watch",
+   "verdict": "PASS",
+   "line": "Cross finds you in the back row.",
+   "why": "Texture that can't clash; dialogue fits the cast entries."
+  },
+  {
+   "row": "C460",
+   "screen": "watch_rehearsal.watch",
+   "verdict": "PASS",
+   "line": "In the dark at the back: Cross makes Brooke run the same four lines",
+   "why": "Each person named by their own flag; both there by rows."
+  },
+  {
+   "row": "C461",
+   "screen": "watch_rehearsal.watch",
+   "verdict": "PASS",
+   "line": "In the dark at the back: Cross makes Brooke run the same four lines",
+   "why": "Texture that can't clash; dialogue fits the cast entries."
+  },
+  {
+   "row": "C519",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "You sit in the dark seats and look at the empty stage. The work light hums.",
+   "why": "One job per screen, all well under 150 words."
+  },
+  {
+   "row": "C620",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "",
+   "why": "Faces come from the engine: met and there."
+  },
+  {
+   "row": "C626",
+   "screen": "watch_rehearsal.watch",
+   "verdict": "FAIL",
+   "line": "The blonde finds you in the dark between lines",
+   "why": "The shared last line keeps 'The blonde' after met_brooke, where the chain above has just named her Brooke."
+  },
+  {
+   "row": "C630",
+   "screen": "watch_rehearsal.watch",
+   "verdict": "PASS",
+   "line": "Cross makes Brooke run the same four lines",
+   "why": "Named only once met; each met by her meeting, where their relation was given; unmet, each is a relation ('the drama teacher', 'a blonde girl')."
+  },
+  {
+   "row": "C758",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "Sit in the empty seats",
+   "why": "4 words."
+  },
+  {
+   "row": "C762",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "",
+   "why": "No 'Nothing happens.'"
+  },
+  {
+   "row": "C769",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "The theatre: a black stage, rows of folding seats",
+   "why": "Says what the place is."
+  },
+  {
+   "row": "C770",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "",
+   "why": "Short screens."
+  },
+  {
+   "row": "C771",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "",
+   "why": "No first-visit screen."
+  },
+  {
+   "row": "C773",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "Sit in the empty seats",
+   "why": "No browse list of objects."
+  },
+  {
+   "row": "C776",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "Go to drama \u00b7 Practise \u00b7 Sit in the empty seats \u00b7 Sit at the back of drama \u00b7 Sit in on the rehearsal",
+   "why": "Needs and systems; Cross is his face."
+  },
+  {
+   "row": "C777",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "",
+   "why": "Nothing loose on the menu."
+  },
+  {
+   "row": "C794",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "The theatre: a black stage, rows of folding seats, and the lights rigged overhead.",
+   "why": "Identity sentence kept in the variant."
+  },
+  {
+   "row": "C795",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "Nobody's on the stage. The work light's on.",
+   "why": "No line per person."
+  },
+  {
+   "row": "C804",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "Nobody's on the stage. The work light's on.",
+   "why": "People are faces; the empty line says why."
+  },
+  {
+   "row": "L106",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "You sit in the dark seats and look at the empty stage. The work light hums.",
+   "why": "Names nobody; the empty stage is true by rows."
+  },
+  {
+   "row": "L106",
+   "screen": "watch_class.watch",
+   "verdict": "PASS",
+   "line": "Cross finds you in the back row.",
+   "why": "Gated on Cross present; his row has him there."
+  },
+  {
+   "row": "L106",
+   "screen": "watch_rehearsal.watch",
+   "verdict": "PASS",
+   "line": "Cross makes Brooke run",
+   "why": "Both gated present; both rows have them there."
+  },
+  {
+   "row": "C889",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "Sit in the empty seats \u00b7 Done",
+   "why": "No clock time or duration on a label."
+  },
+  {
+   "row": "C892",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "Sit in the empty seats \u00b7 Done",
+   "why": "No hour in the acts."
+  },
+  {
+   "row": "C897",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "Sit in the empty seats \u00b7 Done",
+   "why": "No time on a hop."
+  },
+  {
+   "row": "C900",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "Sit in the empty seats \u00b7 Done",
+   "why": "No beat says the time."
+  },
+  {
+   "row": "C902",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "Sit in the empty seats \u00b7 Done",
+   "why": "Each line read at its window's last minute is still true."
+  },
+  {
+   "row": "C903",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "Sit in the empty seats \u00b7 Done",
+   "why": "No weekday named."
+  },
+  {
+   "row": "C906",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "Sit in the empty seats \u00b7 Done",
+   "why": "No 'till X'."
+  },
+  {
+   "row": "C910",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "Sit in the empty seats \u00b7 Done",
+   "why": "No time or energy on a button or reply."
+  },
+  {
+   "row": "C920",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "Sit in the empty seats \u00b7 Done",
+   "why": "No hop cost added."
+  },
+  {
+   "row": "C924",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "Sit in the empty seats \u00b7 Done",
+   "why": "Travel costs untouched."
+  },
+  {
+   "row": "C926",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "Sit in the empty seats \u00b7 Done",
+   "why": "Clock moves by minutes only."
+  },
+  {
+   "row": "C928",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "Sit in the empty seats \u00b7 Done",
+   "why": "No time in prose."
+  },
+  {
+   "row": "C929",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "Sit in the empty seats \u00b7 Done",
+   "why": "No activity time on a label."
+  },
+  {
+   "row": "C953",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "Sit in the empty seats \u00b7 Done",
+   "why": "No money cost here; no time or energy on the label."
+  },
+  {
+   "row": "C913",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "",
+   "why": "sit_seats has no hours of its own; the theatre's closed_text publishes them. The two watch rows asked on their screens."
+  },
+  {
+   "row": "C913",
+   "screen": "watch_class.watch",
+   "verdict": "FAIL",
+   "line": "conditions: weekday [1,3], 11:00-13:00, npc_cross is_present; no show_when_blocked",
+   "why": "Something she chooses, with hours, vanishes out of hours instead of staying as a dimmed line.",
+   "cause": "P30r11-c3"
+  },
+  {
+   "row": "C913",
+   "screen": "watch_rehearsal.watch",
+   "verdict": "FAIL",
+   "line": "conditions: weekday [1,3,4], 14:00-18:00, npc_cross and npc_brooke is_present; no show_when_blocked",
+   "why": "Same: hidden out of hours, not dimmed with its hours.",
+   "cause": "P30r11-c3"
+  },
+  {
+   "row": "C914",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "",
+   "why": "No row shows hours when more than the clock shuts it."
+  },
+  {
+   "row": "C916",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "",
+   "why": "sit_seats has no hours."
+  },
+  {
+   "row": "C916",
+   "screen": "watch_class.watch",
+   "verdict": "FAIL",
+   "line": "Sit at the back of drama",
+   "why": "She chooses it; its hours should be on it, and it hides.",
+   "cause": "P30r11-c3"
+  },
+  {
+   "row": "C916",
+   "screen": "watch_rehearsal.watch",
+   "verdict": "FAIL",
+   "line": "Sit in on the rehearsal",
+   "why": "She chooses it; its hours should be on it, and it hides.",
+   "cause": "P30r11-c3"
+  },
+  {
+   "row": "C927",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "Done: time_progression_minutes = 30",
+   "why": "Explicit 30 minutes."
+  },
+  {
+   "row": "C931",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "time_of_day end exclusive",
+   "why": "sit_seats has no time_of_day; class ends 13:00 (last start 12:55), rehearsal 18:00 (17:55), both inside the people's rows."
+  },
+  {
+   "row": "L167",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "one row each",
+   "why": "Same hours on each of its days, so one row; no row per day kind."
+  },
+  {
+   "row": "C927",
+   "screen": "watch_class.watch",
+   "verdict": "PASS",
+   "line": "Done: time_progression_minutes = 30",
+   "why": "Explicit 30 minutes."
+  },
+  {
+   "row": "C931",
+   "screen": "watch_class.watch",
+   "verdict": "PASS",
+   "line": "time_of_day end exclusive",
+   "why": "sit_seats has no time_of_day; class ends 13:00 (last start 12:55), rehearsal 18:00 (17:55), both inside the people's rows."
+  },
+  {
+   "row": "L167",
+   "screen": "watch_class.watch",
+   "verdict": "PASS",
+   "line": "one row each",
+   "why": "Same hours on each of its days, so one row; no row per day kind."
+  },
+  {
+   "row": "C927",
+   "screen": "watch_rehearsal.watch",
+   "verdict": "PASS",
+   "line": "Done: time_progression_minutes = 30",
+   "why": "Explicit 30 minutes."
+  },
+  {
+   "row": "C931",
+   "screen": "watch_rehearsal.watch",
+   "verdict": "PASS",
+   "line": "time_of_day end exclusive",
+   "why": "sit_seats has no time_of_day; class ends 13:00 (last start 12:55), rehearsal 18:00 (17:55), both inside the people's rows."
+  },
+  {
+   "row": "L167",
+   "screen": "watch_rehearsal.watch",
+   "verdict": "PASS",
+   "line": "one row each",
+   "why": "Same hours on each of its days, so one row; no row per day kind."
+  },
+  {
+   "row": "C930",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "",
+   "why": "Consistent with the engine; the cost of it is judged at C913."
+  },
+  {
+   "row": "L166",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "sit_seats: npc_cross is_absent, theatre hours",
+   "why": "Open whenever the theatre is open and Cross is away."
+  },
+  {
+   "row": "L166",
+   "screen": "campus_theatre",
+   "verdict": "PASS",
+   "line": "Sit at the back of drama 11:00-13:00 \u00b7 Go to drama 11:00-11:30",
+   "why": "The back row now runs the whole class and overlaps Go to drama; fixed times only for the class and rehearsals, which happen at a time (card items 5 and 6)."
+  },
+  {
+   "row": "L166",
+   "screen": "watch_class.watch",
+   "verdict": "PASS",
+   "line": "weekday [1,3], 11:00-13:00",
+   "why": "The whole class, not placed around Go to drama."
+  }
+ ],
+ "causes": [
+  {
+   "id": "P30r11-c1",
+   "what": "sit_seats ends 'The work light hums.' and points at nothing next."
+  },
+  {
+   "id": "P30r11-c2",
+   "what": "Nobody reacts to her on sit_seats, and PLAN.md doesn't declare that nobody does."
+  },
+  {
+   "id": "P30r11-c3",
+   "what": "watch_class and watch_rehearsal hide out of hours instead of greying with their hours: their triggers add npc_cross (and npc_brooke) is_present on top of a clock window those people's rows already fill exactly (who_is_where: Cross Tue/Thu 11-13 and Tue/Thu/Fri 14-18, Brooke the same), so setup.onlyTheClockShut (v2.py:6079-6096) is false. The hiding is the trigger's choice, not the engine's."
+  }
+ ]
+}

@@ -1,39 +1,68 @@
 {
  "verdicts": [
   {
-   "row": "C1265",
-   "screen": "*",
+   "row": "B10",
+   "screen": "body_mirror.fix",
    "verdict": "PASS",
-   "line": "—",
-   "why": "the two spots are the run (a look, a repeat) and the mirror (a body moment); the snack, lunch, coffee, workout and grass screens carry none"
+   "line": "A woman of 18 at a long campus restroom mirror putting on lip gloss, no phone.",
+   "why": "'alone' is gone; the prose claims no one absent or present, so it holds at 08-09 and 13-14 when Brooke, Kayla and Tess are at the mirror and at every other open minute.",
+   "cause": null
   },
   {
-   "row": "C920",
-   "screen": "*",
+   "row": "B8",
+   "screen": "body_mirror.fix",
    "verdict": "PASS",
-   "line": "Done",
-   "why": "every row's Done returns to the same place, so no hop is charged; the minutes are the activity's own, on its label"
+   "line": "a little mascara, lip gloss, your hair pulled back and let down again",
+   "why": "No garment named.",
+   "cause": null
   },
   {
-   "row": "C920",
-   "screen": "body_lunch.eat",
+   "row": "C460",
+   "screen": "body_mirror.fix",
    "verdict": "PASS",
-   "line": "Done (back to the Cafeteria, 20 min)",
-   "why": "20 minutes is lunch, on the label; no hop; Zoe's Tue/Thu 13–14 cafeteria row adds no claim to the line"
+   "line": "A woman of 18 at a long campus restroom mirror putting on lip gloss, no phone.",
+   "why": "No claim about who else is there; true on every visit in the bathroom's hours.",
+   "cause": null
   },
   {
-   "row": "C920",
-   "screen": "body_snack.eat",
+   "row": "C461",
+   "screen": "body_mirror.fix",
    "verdict": "PASS",
-   "line": "Done (back to the Corner Shop, 5 min)",
-   "why": "5 minutes is the snack, on the label; no hop"
+   "line": "The girl in the mirror looks older, and ready for whoever looks at her next.",
+   "why": "Her opinion on her body; texture that can't clash.",
+   "cause": null
   },
   {
-   "row": "C920",
-   "screen": "body_workout.lift",
+   "row": "C927",
+   "screen": "body_mirror.fix",
    "verdict": "PASS",
-   "line": "Done (back to the Gym, 60 min)",
-   "why": "1 hour is the workout, on the label; no hop"
+   "line": "Done (time_progression_minutes = 10)",
+   "why": "Exit states its time.",
+   "cause": null
+  },
+  {
+   "row": "C931",
+   "screen": "body_mirror.fix",
+   "verdict": "N/A",
+   "line": "(no time_of_day; the bathroom's location hours 08:00-18:00 weekdays)",
+   "why": "No time_of_day on the canvas.",
+   "cause": null
+  },
+  {
+   "row": "L106",
+   "screen": "body_mirror.fix",
+   "verdict": "PASS",
+   "line": "You lean into the long mirror and fix your face",
+   "why": "Names nobody else at the mirror.",
+   "cause": null
+  },
+  {
+   "row": "L167",
+   "screen": "body_mirror.fix",
+   "verdict": "N/A",
+   "line": "(no trigger conditions)",
+   "why": "No hours row of its own; the place's hours shut it.",
+   "cause": null
   }
  ],
  "causes": []

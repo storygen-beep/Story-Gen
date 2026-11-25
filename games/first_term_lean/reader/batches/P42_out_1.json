@@ -2,157 +2,353 @@
  "verdicts": [
   {
    "row": "B10",
-   "screen": "talk_mom.talk",
+   "screen": "mom_living_room.hub",
    "verdict": "PASS",
-   "line": "Mark: \"She's got somewhere to be, Laura.\" / \"Mark turns a page, louder than he needs to.\"",
-   "why": "Mark version only under npc_mark is_present (weekdays 7-8 some days, Sat 8-10, Sun 8-12, Mom there too); Ryan version only while Ryan is in the Kitchen (weekdays 18-19, weekends 17-19, Mom there); Mark and Ryan never share the Kitchen per who_is_where, so one version shows; \"Did Mark say anything else? About the rent?\" true on every path, since kitchen_rent follows the met_laura choice; his paper is set up on his own Kitchen menu (\"Mark doesn't look up from the paper.\")"
+   "line": "Mom's on the couch with her feet under her, the TV on low. She moves over to make room.",
+   "why": "The night rows moved Mom to her bedroom only from 23:00; she is on the living-room couch 19:00-23:00 every day, the canvas needs her (requires_npc). Mark is named only behind his presence: weekdays 16:30-23:00, Sun 12:00-23:00, Sat 10:00-19:00, so Saturday 19:00-23:00 is the Mark-absent version. No past claimed."
   },
   {
    "row": "B10",
-   "screen": "mom_living_room.talk",
+   "screen": "talk_mom.hub",
    "verdict": "PASS",
-   "line": "Mark: \"Some of us are trying to watch this.\" / \"Mark turns the volume up.\"",
-   "why": "Mark version only under npc_mark is_present (weekdays 19-23, Sun 19-23); his hub line has the remote on his knee, so the TV is on. Mark-absent versions show only Saturday 19-23, so \"Next Saturday, you tell me the next part.\" and \"Stay in tonight\" are true when they show; the game starts Monday, so \"They're fine, Mom\" about classes follows real classes. On weekdays Ryan is also in the room, and no line says he isn't."
+   "line": "Mom's in the kitchen. Mark's at the table. She looks up at you, then at him.",
+   "why": "Mom is in the Kitchen weekdays 07-08 and 17-19, weekends 08-12 and 17-19; the night rows don't touch these hours. Mark is named only behind presence (weekdays 07:00-07:30, weekends 08-10, Sun 10-12, always with Mom). The greyed 'not again today' is true after Eat with her, and after three meals elsewhere she has eaten today, so 'again' holds."
   },
   {
    "row": "B8",
-   "screen": "talk_mom.talk",
+   "screen": "mom_living_room.hub",
    "verdict": "PASS",
-   "line": "Done: time_progression_minutes = 5",
-   "why": "\"Talk (5 min)\" on the hub, and the 5 minutes are spent on Done; no garment is named on the talk screen."
+   "line": "Mom's eyes drop to the skirt. Her skirt.",
+   "why": "No number printed; her borrowed skirt, top and heels are each named only behind a clothing_item equipped condition; Mom's cardigan in the picture is Mom's."
   },
   {
    "row": "B8",
+   "screen": "talk_mom.hub",
+   "verdict": "PASS",
+   "line": "Mom's eyes drop to the skirt. Her skirt.",
+   "why": "No number printed; her borrowed skirt, top and heels are each named only behind a clothing_item equipped condition; Mom's cardigan in the picture is Mom's."
+  },
+  {
+   "row": "C1265",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "image on mom_living_room.hub / talk_mom.hub only",
+   "why": "Mom's menus carry her one picture each (a person's menu, C596 exception); the talk and eat screens under them carry none."
+  },
+  {
+   "row": "C1265",
    "screen": "mom_living_room.talk",
    "verdict": "PASS",
-   "line": "Done: time_progression_minutes = 5",
-   "why": "Same: 5 min on Done matches the label; no garment named."
+   "line": "\u2014",
+   "why": "No media block on the talk screen."
+  },
+  {
+   "row": "C1265",
+   "screen": "talk_mom.eat",
+   "verdict": "PASS",
+   "line": "\u2014",
+   "why": "No media block on Eat with her (a meal, no new moment)."
   },
   {
    "row": "C460",
-   "screen": "talk_mom.talk",
+   "screen": "mom_living_room.hub",
    "verdict": "PASS",
-   "line": "Laura: \"Then she's got a minute first.\"",
-   "why": "Every claim is true on every minute it can show (see B10): who is there is gated by npc_at_location and matches the rows; the rent past comes from the opening on every path."
+   "line": "Mom's on the couch with her feet under her, the TV on low. She moves over to make room.",
+   "why": "The night rows moved Mom to her bedroom only from 23:00; she is on the living-room couch 19:00-23:00 every day, the canvas needs her (requires_npc). Mark is named only behind his presence: weekdays 16:30-23:00, Sun 12:00-23:00, Sat 10:00-19:00, so Saturday 19:00-23:00 is the Mark-absent version. No past claimed."
   },
   {
    "row": "C460",
-   "screen": "mom_living_room.talk",
+   "screen": "talk_mom.hub",
    "verdict": "PASS",
-   "line": "Laura: \"Then watch it, Mark.\"",
-   "why": "Every claim is true on every visit (see B10); the Saturday-only versions carry the Saturday and tonight lines."
+   "line": "Mom's in the kitchen. Mark's at the table. She looks up at you, then at him.",
+   "why": "Mom is in the Kitchen weekdays 07-08 and 17-19, weekends 08-12 and 17-19; the night rows don't touch these hours. Mark is named only behind presence (weekdays 07:00-07:30, weekends 08-10, Sun 10-12, always with Mom). The greyed 'not again today' is true after Eat with her, and after three meals elsewhere she has eaten today, so 'again' holds."
   },
   {
    "row": "C461",
-   "screen": "talk_mom.talk",
+   "screen": "mom_living_room.hub",
    "verdict": "PASS",
-   "line": "Ryan: \"I'm getting them. I'm getting them.\" / Laura: \"There's always dessert for you.\"",
-   "why": "Texture that can't clash (plates, dessert, a page turned) and dialogue that fits the plan: Laura wants her close, Mark is about her money and wants her out of the way."
+   "line": "Mom's on the couch with her feet under her, the TV on low. She moves over to make room.",
+   "why": "Texture that can't clash; Mom's soft face and Mark's chair fit their plan entries."
   },
   {
    "row": "C461",
-   "screen": "mom_living_room.talk",
+   "screen": "talk_mom.hub",
    "verdict": "PASS",
-   "line": "Mark: \"Some of us are trying to watch this.\"",
-   "why": "Mark grumbling at the TV and Laura pushing back fit their plan entries (Laura: to be close; Mark at the TV in his chair)."
+   "line": "Mom's in the kitchen. Mark's at the table. She looks up at you, then at him.",
+   "why": "Texture that can't clash; Mom's soft face and Mark's chair fit their plan entries."
   },
   {
-   "row": "C596",
-   "screen": "talk_mom.talk",
+   "row": "C889",
+   "screen": "*",
    "verdict": "PASS",
-   "line": "hub: presence line, then image pool everyday/mom_kitchen_t0; talk: 40-48 words, 59-82% spoken, Done only",
-   "why": "Her one picture sits on her menu right after the presence line; the talk screen has no picture; the three Kitchen talks run 46/48/40 words, 59%/71%/82% spoken, one exit: about 55 words, about two-thirds spoken."
+   "line": "Talk \u00b7 Eat with her \u00b7 Leave \u00b7 Done; greyed 'Talk \u2014 you've already talked today.' / 'Eat with her \u2014 not again today.'",
+   "why": "Note row. No label names a clock time or a duration."
   },
   {
-   "row": "C596",
+   "row": "C889",
    "screen": "mom_living_room.talk",
    "verdict": "PASS",
-   "line": "hub: presence line, then image pool everyday/mom_living_t0; talk: 42-51 words, 61-76% spoken, Done only",
-   "why": "Picture on the menu after the presence line, none on the talk; five Living Room talks run 50/51/42/47/42 words, 61-76% spoken, one exit."
+   "line": "Done (to home_living_room, 5 min)",
+   "why": "Note row. No label names a clock time or a duration."
+  },
+  {
+   "row": "C889",
+   "screen": "talk_mom.eat",
+   "verdict": "PASS",
+   "line": "Done (to home_kitchen, 20 min)",
+   "why": "Note row. No label names a clock time or a duration."
+  },
+  {
+   "row": "C906",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "Talk \u00b7 Eat with her \u00b7 Leave \u00b7 Done; greyed 'Talk \u2014 you've already talked today.' / 'Eat with her \u2014 not again today.'",
+   "why": "Note row. No 'till X'."
+  },
+  {
+   "row": "C906",
+   "screen": "mom_living_room.talk",
+   "verdict": "PASS",
+   "line": "Done (to home_living_room, 5 min)",
+   "why": "Note row. No 'till X'."
+  },
+  {
+   "row": "C906",
+   "screen": "talk_mom.eat",
+   "verdict": "PASS",
+   "line": "Done (to home_kitchen, 20 min)",
+   "why": "Note row. No 'till X'."
+  },
+  {
+   "row": "C910",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "Talk \u00b7 Eat with her \u00b7 Leave \u00b7 Done; greyed 'Talk \u2014 you've already talked today.' / 'Eat with her \u2014 not again today.'",
+   "why": "Note row. No time, energy or money on any button or reply; nothing here costs money."
+  },
+  {
+   "row": "C910",
+   "screen": "mom_living_room.talk",
+   "verdict": "PASS",
+   "line": "Done (to home_living_room, 5 min)",
+   "why": "Note row. No time, energy or money on any button or reply; nothing here costs money."
+  },
+  {
+   "row": "C910",
+   "screen": "talk_mom.eat",
+   "verdict": "PASS",
+   "line": "Done (to home_kitchen, 20 min)",
+   "why": "Note row. No time, energy or money on any button or reply; nothing here costs money."
+  },
+  {
+   "row": "C920",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "Talk \u00b7 Eat with her \u00b7 Leave \u00b7 Done; greyed 'Talk \u2014 you've already talked today.' / 'Eat with her \u2014 not again today.'",
+   "why": "Menu hops (Talk, Eat with her, Leave) cost 0; the 5 and 20 minutes on Done are the talk's and the meal's own time, not a move between rooms."
+  },
+  {
+   "row": "C920",
+   "screen": "mom_living_room.talk",
+   "verdict": "PASS",
+   "line": "Done (to home_living_room, 5 min)",
+   "why": "Menu hops (Talk, Eat with her, Leave) cost 0; the 5 and 20 minutes on Done are the talk's and the meal's own time, not a move between rooms."
+  },
+  {
+   "row": "C920",
+   "screen": "talk_mom.eat",
+   "verdict": "PASS",
+   "line": "Done (to home_kitchen, 20 min)",
+   "why": "Menu hops (Talk, Eat with her, Leave) cost 0; the 5 and 20 minutes on Done are the talk's and the meal's own time, not a move between rooms."
   },
   {
    "row": "C921",
-   "screen": "talk_mom.talk",
-   "verdict": "N/A",
-   "line": "—",
-   "why": "The talk screen writes no schedule window; Laura, Mark and Ryan rows have end times and none wraps past midnight."
+   "screen": "mom_living_room.hub",
+   "verdict": "PASS",
+   "line": "Mom: 23:00-01:00 in bed, 01:00-07:00 asleep, every day",
+   "why": "Note row. Her new night rows wrap past midnight on all seven days, so the wrap reads the same on either side of it; both have an end time."
   },
   {
    "row": "C921",
-   "screen": "mom_living_room.talk",
-   "verdict": "N/A",
-   "line": "—",
-   "why": "Same: no window written on this screen."
+   "screen": "talk_mom.hub",
+   "verdict": "PASS",
+   "line": "Mom: 23:00-01:00 in bed, 01:00-07:00 asleep, every day",
+   "why": "Note row. Her new night rows wrap past midnight on all seven days, so the wrap reads the same on either side of it; both have an end time."
   },
   {
    "row": "C927",
-   "screen": "talk_mom.talk",
+   "screen": "mom_living_room.hub",
    "verdict": "PASS",
-   "line": "Done: time_progression_minutes = 5",
-   "why": "The only exit states its time; nothing falls back to 3 minutes."
+   "line": "Talk (0) \u00b7 Eat with her (0) \u00b7 Leave (0)",
+   "why": "Note row. Every exit states its minutes; the menu hops are 0 on purpose, the activity's minutes sit on Done."
   },
   {
    "row": "C927",
+   "screen": "talk_mom.hub",
+   "verdict": "PASS",
+   "line": "Talk (0) \u00b7 Eat with her (0) \u00b7 Leave (0)",
+   "why": "Note row. Every exit states its minutes; the menu hops are 0 on purpose, the activity's minutes sit on Done."
+  },
+  {
+   "row": "C929",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "Talk \u00b7 Eat with her \u00b7 Leave \u00b7 Done; greyed 'Talk \u2014 you've already talked today.' / 'Eat with her \u2014 not again today.'",
+   "why": "Note row. The activity's time is on no label."
+  },
+  {
+   "row": "C929",
    "screen": "mom_living_room.talk",
    "verdict": "PASS",
-   "line": "Done: time_progression_minutes = 5",
-   "why": "Same."
+   "line": "Done (to home_living_room, 5 min)",
+   "why": "Note row. The activity's time is on no label."
+  },
+  {
+   "row": "C929",
+   "screen": "talk_mom.eat",
+   "verdict": "PASS",
+   "line": "Done (to home_kitchen, 20 min)",
+   "why": "Note row. The activity's time is on no label."
   },
   {
    "row": "C931",
-   "screen": "talk_mom.talk",
+   "screen": "mom_living_room.hub",
    "verdict": "N/A",
-   "line": "—",
-   "why": "No time_of_day condition on the talk screen; its groups read npc_at_location only."
+   "line": "\u2014",
+   "why": "Note row. No time_of_day on this canvas."
   },
   {
    "row": "C931",
+   "screen": "talk_mom.hub",
+   "verdict": "PASS",
+   "line": "Eat with her: time_of_day 00:00-12:00 / 12:00-23:59",
+   "why": "Note row. The eat screen's two groups are end exclusive; 23:59 falls in neither, but Mom is never in the Kitchen after 19:00, so no visit lands there."
+  },
+  {
+   "row": "C953",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "Talk \u00b7 Eat with her \u00b7 Leave \u00b7 Done; greyed 'Talk \u2014 you've already talked today.' / 'Eat with her \u2014 not again today.'",
+   "why": "Note row. No money spent, so none shown; no time or energy."
+  },
+  {
+   "row": "C953",
    "screen": "mom_living_room.talk",
-   "verdict": "N/A",
-   "line": "—",
-   "why": "No time_of_day condition; groups read npc_at_location and start flags."
+   "verdict": "PASS",
+   "line": "Done (to home_living_room, 5 min)",
+   "why": "Note row. No money spent, so none shown; no time or energy."
+  },
+  {
+   "row": "C953",
+   "screen": "talk_mom.eat",
+   "verdict": "PASS",
+   "line": "Done (to home_kitchen, 20 min)",
+   "why": "Note row. No money spent, so none shown; no time or energy."
   },
   {
    "row": "L106",
-   "screen": "talk_mom.talk",
+   "screen": "mom_living_room.hub",
    "verdict": "PASS",
-   "line": "\"Mark turns a page\" (npc_mark is_present) / \"Ryan rolls his eyes\" (npc_ryan is_present)",
-   "why": "Each person a line puts in the Kitchen is behind their own is_present condition, matching who_is_where."
+   "line": "Mom's on the couch with her feet under her, the TV on low. She moves over to make room.",
+   "why": "Mom present by requires_npc; Mark named only inside an npc_at_location group, both versions written."
   },
   {
    "row": "L106",
-   "screen": "mom_living_room.talk",
+   "screen": "talk_mom.hub",
    "verdict": "PASS",
-   "line": "\"Mark turns the volume up.\" (npc_mark is_present)",
-   "why": "Mark is named only under his is_present condition; Ryan, who is there on weekdays, is never claimed absent."
+   "line": "Mom's in the kitchen. Mark's at the table. She looks up at you, then at him.",
+   "why": "Mom present by requires_npc; Mark named only inside an npc_at_location group, both versions written."
   },
   {
    "row": "L167",
-   "screen": "talk_mom.talk",
+   "screen": "mom_living_room.hub",
    "verdict": "N/A",
-   "line": "—",
-   "why": "No activity row with hours on this screen."
+   "line": "\u2014",
+   "why": "The menu has no hours; it opens wherever her rows put her."
   },
   {
    "row": "L167",
-   "screen": "mom_living_room.talk",
+   "screen": "talk_mom.hub",
    "verdict": "N/A",
-   "line": "—",
-   "why": "Same."
+   "line": "\u2014",
+   "why": "The menu has no hours; it opens wherever her rows put her."
   },
   {
-   "row": "people#7",
-   "screen": "talk_mom.talk",
+   "row": "clock#1",
+   "screen": "*",
    "verdict": "PASS",
-   "line": "Mark: \"She's got somewhere to be, Laura.\" / Laura: \"Then she's got a minute first.\" / Her: \"I'll come find you, Mom. Later.\"",
-   "why": "Lengthened toward the shape: 46/48/40 words, 59%/71%/82% spoken, one exit (Done). The 40-word Ryan version is within the 34-57 target that reader.md sets for length."
+   "line": "Talk \u00b7 Eat with her \u00b7 Leave \u00b7 Done; greyed 'Talk \u2014 you've already talked today.' / 'Eat with her \u2014 not again today.'",
+   "why": "Shape step 1: no time or energy on any button."
   },
   {
-   "row": "people#7",
+   "row": "clock#1",
    "screen": "mom_living_room.talk",
    "verdict": "PASS",
-   "line": "Mark: \"Some of us are trying to watch this.\" / Laura: \"Then watch it, Mark.\"",
-   "why": "50/51/42/47/42 words, 61-76% spoken, one exit: about 55 words, about two-thirds spoken."
+   "line": "Done (to home_living_room, 5 min)",
+   "why": "Shape step 1: no time or energy on any button."
+  },
+  {
+   "row": "clock#1",
+   "screen": "talk_mom.eat",
+   "verdict": "PASS",
+   "line": "Done (to home_kitchen, 20 min)",
+   "why": "Shape step 1: no time or energy on any button."
+  },
+  {
+   "row": "clock#2",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "Talk \u00b7 Eat with her \u00b7 Leave \u00b7 Done; greyed 'Talk \u2014 you've already talked today.' / 'Eat with her \u2014 not again today.'",
+   "why": "Menu hops (Talk, Eat with her, Leave) cost 0; the 5 and 20 minutes on Done are the talk's and the meal's own time, not a move between rooms."
+  },
+  {
+   "row": "clock#2",
+   "screen": "mom_living_room.talk",
+   "verdict": "PASS",
+   "line": "Done (to home_living_room, 5 min)",
+   "why": "Menu hops (Talk, Eat with her, Leave) cost 0; the 5 and 20 minutes on Done are the talk's and the meal's own time, not a move between rooms."
+  },
+  {
+   "row": "clock#2",
+   "screen": "talk_mom.eat",
+   "verdict": "PASS",
+   "line": "Done (to home_kitchen, 20 min)",
+   "why": "Menu hops (Talk, Eat with her, Leave) cost 0; the 5 and 20 minutes on Done are the talk's and the meal's own time, not a move between rooms."
+  },
+  {
+   "row": "clock#6",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "Talk \u00b7 Eat with her \u00b7 Leave \u00b7 Done; greyed 'Talk \u2014 you've already talked today.' / 'Eat with her \u2014 not again today.'",
+   "why": "Shape step 6: no 'till X'."
+  },
+  {
+   "row": "clock#6",
+   "screen": "mom_living_room.talk",
+   "verdict": "PASS",
+   "line": "Done (to home_living_room, 5 min)",
+   "why": "Shape step 6: no 'till X'."
+  },
+  {
+   "row": "clock#6",
+   "screen": "talk_mom.eat",
+   "verdict": "PASS",
+   "line": "Done (to home_kitchen, 20 min)",
+   "why": "Shape step 6: no 'till X'."
+  },
+  {
+   "row": "media#2",
+   "screen": "*",
+   "verdict": "N/A",
+   "line": "\u2014",
+   "why": "Shape step 2 is a place's picture; P42 builds a person's menus, not a place."
+  },
+  {
+   "row": "places#4",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "Talk \u00b7 Eat with her \u00b7 Leave \u00b7 Done; greyed 'Talk \u2014 you've already talked today.' / 'Eat with her \u2014 not again today.'",
+   "why": "Shape step 4: short labels, no time or energy, no spend."
   }
  ],
  "causes": []

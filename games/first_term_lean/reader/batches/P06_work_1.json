@@ -1,0 +1,249 @@
+{
+ "items": [
+  {
+   "row": "B10",
+   "screen": "loop_eat.do",
+   "why": "screen changed: truth row"
+  },
+  {
+   "row": "B10",
+   "screen": "loop_shower.do",
+   "why": "screen changed: truth row"
+  },
+  {
+   "row": "B10",
+   "screen": "loop_sleep.do",
+   "why": "screen changed: truth row"
+  },
+  {
+   "row": "B8",
+   "screen": "loop_eat.do",
+   "why": "screen changed: truth row"
+  },
+  {
+   "row": "B8",
+   "screen": "loop_shower.do",
+   "why": "screen changed: truth row"
+  },
+  {
+   "row": "B8",
+   "screen": "loop_sleep.do",
+   "why": "screen changed: truth row"
+  },
+  {
+   "row": "C1158",
+   "screen": "loop_eat.do",
+   "why": "screen changed: truth row"
+  },
+  {
+   "row": "C1158",
+   "screen": "loop_shower.do",
+   "why": "screen changed: truth row"
+  },
+  {
+   "row": "C1158",
+   "screen": "loop_sleep.do",
+   "why": "screen changed: truth row"
+  },
+  {
+   "row": "C1206",
+   "screen": "loop_eat.do",
+   "why": "screen changed: truth row"
+  },
+  {
+   "row": "C1206",
+   "screen": "loop_shower.do",
+   "why": "screen changed: truth row"
+  },
+  {
+   "row": "C1206",
+   "screen": "loop_sleep.do",
+   "why": "screen changed: truth row"
+  },
+  {
+   "row": "C1265",
+   "screen": "*",
+   "why": "its rule's text changed"
+  },
+  {
+   "row": "C1313",
+   "screen": "loop_shower.do",
+   "why": "failed last pass (a note), its screen changed"
+  },
+  {
+   "row": "C1313",
+   "screen": "loop_sleep.do",
+   "why": "failed last pass (a note), its screen changed"
+  },
+  {
+   "row": "C1434",
+   "screen": "loop_sleep.do",
+   "why": "failed last pass (a note), its screen changed"
+  },
+  {
+   "row": "C460",
+   "screen": "loop_eat.do",
+   "why": "screen changed: truth row"
+  },
+  {
+   "row": "C460",
+   "screen": "loop_shower.do",
+   "why": "screen changed: truth row"
+  },
+  {
+   "row": "C460",
+   "screen": "loop_sleep.do",
+   "why": "screen changed: truth row"
+  },
+  {
+   "row": "C461",
+   "screen": "loop_eat.do",
+   "why": "screen changed: truth row"
+  },
+  {
+   "row": "C461",
+   "screen": "loop_shower.do",
+   "why": "screen changed: truth row"
+  },
+  {
+   "row": "C461",
+   "screen": "loop_sleep.do",
+   "why": "screen changed: truth row"
+  },
+  {
+   "row": "C889",
+   "screen": "*",
+   "why": "its rule's text changed"
+  },
+  {
+   "row": "C906",
+   "screen": "*",
+   "why": "its rule's text changed"
+  },
+  {
+   "row": "C910",
+   "screen": "*",
+   "why": "its rule's text changed"
+  },
+  {
+   "row": "C920",
+   "screen": "*",
+   "why": "its rule's text changed"
+  },
+  {
+   "row": "C921",
+   "screen": "loop_eat.do",
+   "why": "screen changed: truth row"
+  },
+  {
+   "row": "C921",
+   "screen": "loop_shower.do",
+   "why": "screen changed: truth row"
+  },
+  {
+   "row": "C921",
+   "screen": "loop_sleep.do",
+   "why": "screen changed: truth row"
+  },
+  {
+   "row": "C927",
+   "screen": "loop_eat.do",
+   "why": "screen changed: truth row"
+  },
+  {
+   "row": "C927",
+   "screen": "loop_shower.do",
+   "why": "screen changed: truth row"
+  },
+  {
+   "row": "C927",
+   "screen": "loop_sleep.do",
+   "why": "screen changed: truth row"
+  },
+  {
+   "row": "C929",
+   "screen": "*",
+   "why": "its rule's text changed"
+  },
+  {
+   "row": "C931",
+   "screen": "loop_eat.do",
+   "why": "screen changed: truth row"
+  },
+  {
+   "row": "C931",
+   "screen": "loop_shower.do",
+   "why": "screen changed: truth row"
+  },
+  {
+   "row": "C931",
+   "screen": "loop_sleep.do",
+   "why": "screen changed: truth row"
+  },
+  {
+   "row": "C953",
+   "screen": "*",
+   "why": "its rule's text changed"
+  },
+  {
+   "row": "L106",
+   "screen": "loop_eat.do",
+   "why": "screen changed: truth row"
+  },
+  {
+   "row": "L106",
+   "screen": "loop_shower.do",
+   "why": "screen changed: truth row"
+  },
+  {
+   "row": "L106",
+   "screen": "loop_sleep.do",
+   "why": "screen changed: truth row"
+  },
+  {
+   "row": "L167",
+   "screen": "loop_eat.do",
+   "why": "screen changed: truth row"
+  },
+  {
+   "row": "L167",
+   "screen": "loop_shower.do",
+   "why": "screen changed: truth row"
+  },
+  {
+   "row": "L167",
+   "screen": "loop_sleep.do",
+   "why": "screen changed: truth row"
+  },
+  {
+   "row": "clock#1",
+   "screen": "*",
+   "why": "its rule's text changed"
+  },
+  {
+   "row": "clock#2",
+   "screen": "*",
+   "why": "its rule's text changed"
+  },
+  {
+   "row": "clock#6",
+   "screen": "*",
+   "why": "its rule's text changed"
+  },
+  {
+   "row": "media#2",
+   "screen": "*",
+   "why": "its rule's text changed"
+  },
+  {
+   "row": "places#4",
+   "screen": "*",
+   "why": "its rule's text changed"
+  },
+  {
+   "row": "systems#4",
+   "screen": "*",
+   "why": "its rule's text changed"
+  }
+ ]
+}

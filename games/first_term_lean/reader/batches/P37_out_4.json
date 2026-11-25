@@ -1,0 +1,12 @@
+{
+ "verdicts": [
+  {
+   "row": "L170",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "Zoe lives in town, two streets off the high street. Knock in the afternoon, or come to her party on a Saturday, 9pm to 1am.",
+   "why": "Zoe's Apartment is hidden_until zoe_place_known, set on the same choice as met_zoe (quad_meet_zoe); met_zoe is the when of a Someone on the Quad step, whose first step points at the quad weekdays 2 to 3 (Zoe's row 13/14-15)"
+  }
+ ],
+ "causes": []
+}

@@ -1,0 +1,13 @@
+{
+ "verdicts": [
+  {
+   "row": "clock#10",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "talk_mom / mom_living_room triggers: no time_of_day, no max_triggers_per_day",
+   "why": "Mom's menus have neither a clock window nor a daily count; Talk's daily flag greys a choice with a true line",
+   "cause": null
+  }
+ ],
+ "causes": []
+}

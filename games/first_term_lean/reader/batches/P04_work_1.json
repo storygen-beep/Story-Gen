@@ -3,42 +3,82 @@
   {
    "row": "B10",
    "screen": "travel_bus_home.ride",
-   "why": "still to ask: a fact changed"
+   "why": "a fact changed"
+  },
+  {
+   "row": "B10",
+   "screen": "travel_bus_to_campus.ride",
+   "why": "still to ask: screen changed: truth row"
   },
   {
    "row": "B10",
    "screen": "travel_walk_home.ride",
-   "why": "still to ask: a fact changed"
+   "why": "a fact changed"
+  },
+  {
+   "row": "B10",
+   "screen": "travel_walk_to_campus.ride",
+   "why": "still to ask: screen changed: truth row"
   },
   {
    "row": "B8",
    "screen": "travel_bus_home.ride",
-   "why": "still to ask: a fact changed"
+   "why": "a fact changed"
+  },
+  {
+   "row": "B8",
+   "screen": "travel_bus_to_campus.ride",
+   "why": "still to ask: screen changed: truth row"
   },
   {
    "row": "B8",
    "screen": "travel_walk_home.ride",
-   "why": "still to ask: a fact changed"
+   "why": "a fact changed"
+  },
+  {
+   "row": "B8",
+   "screen": "travel_walk_to_campus.ride",
+   "why": "still to ask: screen changed: truth row"
   },
   {
    "row": "C460",
    "screen": "travel_bus_home.ride",
-   "why": "still to ask: a fact changed"
+   "why": "a fact changed"
+  },
+  {
+   "row": "C460",
+   "screen": "travel_bus_to_campus.ride",
+   "why": "still to ask: screen changed: truth row"
   },
   {
    "row": "C460",
    "screen": "travel_walk_home.ride",
-   "why": "still to ask: a fact changed"
+   "why": "a fact changed"
+  },
+  {
+   "row": "C460",
+   "screen": "travel_walk_to_campus.ride",
+   "why": "still to ask: screen changed: truth row"
   },
   {
    "row": "C461",
    "screen": "travel_bus_home.ride",
-   "why": "still to ask: a fact changed"
+   "why": "a fact changed"
+  },
+  {
+   "row": "C461",
+   "screen": "travel_bus_to_campus.ride",
+   "why": "still to ask: screen changed: truth row"
   },
   {
    "row": "C461",
    "screen": "travel_walk_home.ride",
-   "why": "still to ask: a fact changed"
+   "why": "a fact changed"
+  },
+  {
+   "row": "C461",
+   "screen": "travel_walk_to_campus.ride",
+   "why": "still to ask: screen changed: truth row"
   },
   {
    "row": "C804",
@@ -63,222 +103,287 @@
   {
    "row": "C889",
    "screen": "travel_bus_home.ride",
-   "why": "still to ask: a fact changed"
+   "why": "a fact changed"
   },
   {
    "row": "C889",
    "screen": "travel_walk_home.ride",
-   "why": "still to ask: a fact changed"
+   "why": "a fact changed"
   },
   {
    "row": "C892",
    "screen": "travel_bus_home.ride",
-   "why": "still to ask: a fact changed"
+   "why": "a fact changed"
   },
   {
    "row": "C892",
    "screen": "travel_walk_home.ride",
-   "why": "still to ask: a fact changed"
+   "why": "a fact changed"
   },
   {
    "row": "C897",
    "screen": "travel_bus_home.ride",
-   "why": "still to ask: a fact changed"
+   "why": "a fact changed"
   },
   {
    "row": "C897",
    "screen": "travel_walk_home.ride",
-   "why": "still to ask: a fact changed"
+   "why": "a fact changed"
   },
   {
    "row": "C900",
    "screen": "travel_bus_home.ride",
-   "why": "still to ask: a fact changed"
+   "why": "a fact changed"
   },
   {
    "row": "C900",
    "screen": "travel_walk_home.ride",
-   "why": "still to ask: a fact changed"
+   "why": "a fact changed"
   },
   {
    "row": "C902",
    "screen": "travel_bus_home.ride",
-   "why": "still to ask: a fact changed"
+   "why": "a fact changed"
   },
   {
    "row": "C902",
    "screen": "travel_walk_home.ride",
-   "why": "still to ask: a fact changed"
+   "why": "a fact changed"
   },
   {
    "row": "C903",
    "screen": "travel_bus_home.ride",
-   "why": "still to ask: a fact changed"
+   "why": "a fact changed"
   },
   {
    "row": "C903",
    "screen": "travel_walk_home.ride",
-   "why": "still to ask: a fact changed"
+   "why": "a fact changed"
   },
   {
    "row": "C906",
    "screen": "travel_bus_home.ride",
-   "why": "still to ask: a fact changed"
+   "why": "a fact changed"
   },
   {
    "row": "C906",
    "screen": "travel_walk_home.ride",
-   "why": "still to ask: a fact changed"
+   "why": "a fact changed"
   },
   {
    "row": "C910",
    "screen": "travel_bus_home.ride",
-   "why": "still to ask: a fact changed"
+   "why": "a fact changed"
   },
   {
    "row": "C910",
    "screen": "travel_walk_home.ride",
-   "why": "still to ask: a fact changed"
+   "why": "a fact changed"
   },
   {
    "row": "C913",
    "screen": "travel_bus_home.ride",
-   "why": "still to ask: a fact changed"
+   "why": "a fact changed"
   },
   {
    "row": "C913",
    "screen": "travel_walk_home.ride",
-   "why": "still to ask: a fact changed"
+   "why": "a fact changed"
   },
   {
    "row": "C914",
    "screen": "travel_bus_home.ride",
-   "why": "still to ask: a fact changed"
+   "why": "a fact changed"
   },
   {
    "row": "C914",
    "screen": "travel_walk_home.ride",
-   "why": "still to ask: a fact changed"
+   "why": "a fact changed"
   },
   {
    "row": "C916",
    "screen": "travel_bus_home.ride",
-   "why": "still to ask: a fact changed"
+   "why": "a fact changed"
   },
   {
    "row": "C916",
    "screen": "travel_walk_home.ride",
-   "why": "still to ask: a fact changed"
+   "why": "a fact changed"
   },
   {
    "row": "C920",
    "screen": "travel_bus_home.ride",
-   "why": "still to ask: a fact changed"
+   "why": "a fact changed"
   },
   {
    "row": "C920",
    "screen": "travel_walk_home.ride",
-   "why": "still to ask: a fact changed"
+   "why": "a fact changed"
   },
   {
    "row": "C921",
    "screen": "travel_bus_home.ride",
-   "why": "still to ask: a fact changed"
+   "why": "a fact changed"
+  },
+  {
+   "row": "C921",
+   "screen": "travel_bus_to_campus.ride",
+   "why": "still to ask: screen changed: truth row"
   },
   {
    "row": "C921",
    "screen": "travel_walk_home.ride",
-   "why": "still to ask: a fact changed"
+   "why": "a fact changed"
+  },
+  {
+   "row": "C921",
+   "screen": "travel_walk_to_campus.ride",
+   "why": "still to ask: screen changed: truth row"
   },
   {
    "row": "C924",
    "screen": "travel_bus_home.ride",
-   "why": "still to ask: a fact changed"
+   "why": "a fact changed"
   },
   {
    "row": "C924",
    "screen": "travel_walk_home.ride",
-   "why": "still to ask: a fact changed"
+   "why": "a fact changed"
   },
   {
    "row": "C926",
    "screen": "travel_bus_home.ride",
-   "why": "still to ask: a fact changed"
+   "why": "a fact changed"
   },
   {
    "row": "C926",
    "screen": "travel_walk_home.ride",
-   "why": "still to ask: a fact changed"
+   "why": "a fact changed"
   },
   {
    "row": "C927",
    "screen": "travel_bus_home.ride",
-   "why": "still to ask: a fact changed"
+   "why": "a fact changed"
+  },
+  {
+   "row": "C927",
+   "screen": "travel_bus_to_campus.ride",
+   "why": "still to ask: screen changed: truth row"
   },
   {
    "row": "C927",
    "screen": "travel_walk_home.ride",
-   "why": "still to ask: a fact changed"
+   "why": "a fact changed"
+  },
+  {
+   "row": "C927",
+   "screen": "travel_walk_to_campus.ride",
+   "why": "still to ask: screen changed: truth row"
   },
   {
    "row": "C928",
    "screen": "travel_bus_home.ride",
-   "why": "still to ask: a fact changed"
+   "why": "a fact changed"
   },
   {
    "row": "C928",
    "screen": "travel_walk_home.ride",
-   "why": "still to ask: a fact changed"
+   "why": "a fact changed"
   },
   {
    "row": "C929",
    "screen": "travel_bus_home.ride",
-   "why": "still to ask: a fact changed"
+   "why": "a fact changed"
   },
   {
    "row": "C929",
    "screen": "travel_walk_home.ride",
-   "why": "still to ask: a fact changed"
+   "why": "a fact changed"
   },
   {
    "row": "C930",
    "screen": "travel_bus_home.ride",
-   "why": "still to ask: a fact changed"
+   "why": "a fact changed"
   },
   {
    "row": "C930",
    "screen": "travel_walk_home.ride",
-   "why": "still to ask: a fact changed"
+   "why": "a fact changed"
   },
   {
    "row": "C931",
    "screen": "travel_bus_home.ride",
-   "why": "still to ask: a fact changed"
+   "why": "a fact changed"
+  },
+  {
+   "row": "C931",
+   "screen": "travel_bus_to_campus.ride",
+   "why": "still to ask: screen changed: truth row"
   },
   {
    "row": "C931",
    "screen": "travel_walk_home.ride",
-   "why": "still to ask: a fact changed"
+   "why": "a fact changed"
+  },
+  {
+   "row": "C931",
+   "screen": "travel_walk_to_campus.ride",
+   "why": "still to ask: screen changed: truth row"
+  },
+  {
+   "row": "C953",
+   "screen": "*",
+   "why": "still to ask: its rule's text changed"
   },
   {
    "row": "L106",
    "screen": "travel_bus_home.ride",
-   "why": "still to ask: a fact changed"
+   "why": "a fact changed"
+  },
+  {
+   "row": "L106",
+   "screen": "travel_bus_to_campus.ride",
+   "why": "still to ask: screen changed: truth row"
   },
   {
    "row": "L106",
    "screen": "travel_walk_home.ride",
-   "why": "still to ask: a fact changed"
+   "why": "a fact changed"
+  },
+  {
+   "row": "L106",
+   "screen": "travel_walk_to_campus.ride",
+   "why": "still to ask: screen changed: truth row"
   },
   {
    "row": "L167",
    "screen": "travel_bus_home.ride",
-   "why": "still to ask: a fact changed"
+   "why": "a fact changed"
+  },
+  {
+   "row": "L167",
+   "screen": "travel_bus_to_campus.ride",
+   "why": "still to ask: screen changed: truth row"
   },
   {
    "row": "L167",
    "screen": "travel_walk_home.ride",
-   "why": "still to ask: a fact changed"
+   "why": "a fact changed"
+  },
+  {
+   "row": "L167",
+   "screen": "travel_walk_to_campus.ride",
+   "why": "still to ask: screen changed: truth row"
+  },
+  {
+   "row": "clock#1",
+   "screen": "*",
+   "why": "still to ask: its rule's text changed"
+  },
+  {
+   "row": "clock#6",
+   "screen": "*",
+   "why": "still to ask: its rule's text changed"
   },
   {
    "row": "places#2",
@@ -301,14 +406,19 @@
    "why": "failed last pass"
   },
   {
-   "row": "places#6",
-   "screen": "campus_lecture_hall",
-   "why": "failed last pass"
+   "row": "places#4",
+   "screen": "*",
+   "why": "still to ask: its rule's text changed"
   },
   {
    "row": "places#6",
    "screen": "campus_theatre",
    "why": "failed last pass"
+  },
+  {
+   "row": "systems#4",
+   "screen": "*",
+   "why": "still to ask: its rule's text changed"
   }
  ]
 }

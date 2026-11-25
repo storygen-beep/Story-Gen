@@ -1,18 +1,20 @@
 {
  "piece": "P35",
- "pass": 2,
+ "pass": 6,
  "screens": {
   "shop_meet_nina.meet": {
-   "text": "a59f6f0625f7683b",
-   "facts": "e3e3f324aaa85751",
-   "all": "b08b23e5dafe517f"
+   "text": "ea4eb3bb92b30114",
+   "facts": "754ef4fb7dffe814",
+   "facts2": "598a0f6135f4e548",
+   "all": "dbb4266ea86f2d20"
   },
   "shop_try_on.try": {
-   "text": "385a1ae04de61fd1",
-   "facts": "748a690297ebac40",
-   "all": "8d3756e6319fe7b8"
+   "text": "bda7f715eddbba10",
+   "facts": "861abe73330f8e00",
+   "facts2": "6fe90f26ec6d12ed",
+   "all": "6442aa25e1b725eb"
   },
-  "*": "e56580aaab23813a"
+  "*": "8f3b8a1cfc9561b7"
  },
  "rows": {
   "B1": "5276068df1ca6fa9",
@@ -40,18 +42,18 @@
   "C1262": "32f015030465e92f",
   "C1279": "534032f000706830",
   "C782": "3ac6936d80e97921",
-  "C889": "1b724e2dcfbf028b",
-  "C906": "ce3b42a8c86da5b8",
+  "C889": "def1348d483d0c40",
+  "C906": "71713a7e7ae739e7",
   "C926": "177d1e1776fac74b",
   "C900": "6372efb027eb2034",
   "C902": "df5ed7a36dbc74e4",
   "C903": "4f83b0b5eb45f71b",
   "C892": "5c890033f6ac38b8",
-  "C910": "be1c18ee466455f6",
-  "C929": "e20b027bad88ca8c",
+  "C910": "d5a109f1ef88419a",
+  "C929": "18b0ecdf6d7fc901",
   "C897": "265ece64add83676",
   "C924": "791cd173e23fb130",
-  "C920": "695dc5d9d0e5e749",
+  "C920": "513927dd127fca04",
   "C913": "c750f9b6ab4ace14",
   "C930": "beb57cd46fe906bf",
   "L167": "e64ce2672d85d2d8",
@@ -88,7 +90,7 @@
   "C1267": "f0db81b801577bf2",
   "C1249": "a843f9b57e43a020",
   "C1250": "fde578d75b0d3620",
-  "C1265": "447179d04e01ff5d",
+  "C1265": "64b72c778e96e443",
   "C1234": "1b2a2d5f05b10331",
   "L121": "45842b25d0708a15",
   "L125": "1fca3bfe1d0c2419",
@@ -121,20 +123,23 @@
   "C620": "76250e48ada2b843",
   "C613": "6f777b1fcd750dd1",
   "C644": "f5e1d79f3251dbab",
-  "C596": "6d9bba989a2b9666",
+  "C596": "e5f7e6cf2d01613d",
   "C448": "b86596f1a02766de",
+  "L168": "444c44970dc284f2",
+  "L169": "59defccfc63b0454",
   "C1340": "b76a6583ae88c60f",
   "C769": "f6b6f78a8f2e5ed7",
   "C794": "bad76e5963432385",
-  "C795": "6c9eb17d99266791",
-  "C804": "810ef8e803cb09dd",
+  "C795": "34139e6a6914e171",
+  "C804": "5358489178bff0a4",
   "L106": "13a714429d15f3b2",
   "C776": "4141d9e5e24362c3",
   "C777": "b56360a1040688cf",
   "C773": "599aac6293908bc4",
   "C758": "e158aaf055cb61d6",
-  "C953": "8d1306a15c51370a",
+  "C953": "826bf82fe26afd13",
   "C762": "40e85f1ae92f1e71",
+  "L170": "c3599cd09637a240",
   "C770": "ff9aa31c11e5d50f",
   "C771": "563e3d25c3219dd0",
   "L166": "c12d10588197fbaf",
@@ -183,35 +188,37 @@
    "row": "B10",
    "screen": "shop_meet_nina.meet",
    "verdict": "PASS",
-   "line": "She looks you up and down, slowly, and doesn't hide it.",
-   "why": "No garment of hers named; the canvas gates on npc_at_location npc_nina is_present, so 'behind the till' is true at every minute it can fire (her row Mon-Sat 10:00-19:00, activity 'behind the till'); one-time, no second visit.",
+   "line": "A woman in her twenties is behind the till in a black dress two sizes too confident for a shop this small.",
+   "why": "trigger 10:00-18:45 with Nina present; her row has her behind the till exactly 10:00-18:45, Mon-Sat",
    "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "a59f6f0625f7683b",
-    "facts": "e3e3f324aaa85751",
-    "all": "b08b23e5dafe517f"
+    "text": "ea4eb3bb92b30114",
+    "facts": "754ef4fb7dffe814",
+    "facts2": "598a0f6135f4e548",
+    "all": "dbb4266ea86f2d20"
    },
    "row_hash": "c1c0e2ac2588a579",
-   "carried": false,
-   "pass": 2
+   "carried": true,
+   "pass": 5
   },
   {
    "row": "B10",
    "screen": "shop_try_on.try",
    "verdict": "PASS",
-   "line": "You put your own clothes back on, your face hot, and hang the skirt where you'll find it next time.",
-   "why": "Bra line gone; Nina's lines sit in an is_present group and the window 10:00-18:45 lies inside her row. On a visit in Mom's borrowed top/skirt (wearable outside, Your Street reads mom_lowcut_top), 'your own clothes' still reads as the clothes she came in, against the shop's stock; 'lower than anything you own' names an unspecified shop top and can't clash with Mom's low-cut top. Second visit: 'take an armful' doesn't contradict the hung skirt.",
+   "line": "Let me see. Come on, I won't tell.",
+   "why": "window 10:00-18:45 equals her till row; her lines sit in a group on her presence; her fitting-room row starts when the try-on closes",
    "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "385a1ae04de61fd1",
-    "facts": "748a690297ebac40",
-    "all": "8d3756e6319fe7b8"
+    "text": "bda7f715eddbba10",
+    "facts": "861abe73330f8e00",
+    "facts2": "6fe90f26ec6d12ed",
+    "all": "6442aa25e1b725eb"
    },
    "row_hash": "c1c0e2ac2588a579",
-   "carried": false,
-   "pass": 2
+   "carried": true,
+   "pass": 4
   },
   {
    "row": "B11",
@@ -346,35 +353,37 @@
    "row": "B8",
    "screen": "shop_meet_nina.meet",
    "verdict": "PASS",
-   "line": "A woman in her twenties ... I'm Nina.",
-   "why": "Shoes line gone, no garment of hers named; Nina 26 matches npc_nina and the card; no number on screen.",
+   "line": "A woman in her twenties is behind the till in a black dress two sizes too confident for a shop this small.",
+   "why": "the black dress is Nina's; no garment of hers named, no number",
    "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "a59f6f0625f7683b",
-    "facts": "e3e3f324aaa85751",
-    "all": "b08b23e5dafe517f"
+    "text": "ea4eb3bb92b30114",
+    "facts": "754ef4fb7dffe814",
+    "facts2": "598a0f6135f4e548",
+    "all": "dbb4266ea86f2d20"
    },
    "row_hash": "80d415cf08e0ebfe",
-   "carried": false,
-   "pass": 2
+   "carried": true,
+   "pass": 5
   },
   {
    "row": "B8",
    "screen": "shop_try_on.try",
    "verdict": "PASS",
-   "line": "a skirt that stops high on your thighs, a top cut lower than anything you own",
-   "why": "The only garments named are the shop's, backed by the act; the 28 prices and levels match the card, exposure now 1 on push-up bra, thong, heels, platform heels (and every 40/60 item, 2 on mesh top and crotchless), 0 on normal and sexy, as the card says; 15 min on the button and on Done.",
+   "line": "cooldown_message = \"the fitting room closes at 6:45pm.\"",
+   "why": "6:45pm agrees with her tip ('10am to 6:45pm'), her till row end 18:45 and the trigger end",
    "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "385a1ae04de61fd1",
-    "facts": "748a690297ebac40",
-    "all": "8d3756e6319fe7b8"
+    "text": "bda7f715eddbba10",
+    "facts": "861abe73330f8e00",
+    "facts2": "6fe90f26ec6d12ed",
+    "all": "6442aa25e1b725eb"
    },
    "row_hash": "80d415cf08e0ebfe",
-   "carried": false,
-   "pass": 2
+   "carried": true,
+   "pass": 4
   },
   {
    "row": "B9",
@@ -441,34 +450,36 @@
    "screen": "shop_try_on.try",
    "verdict": "PASS",
    "line": "a skirt that stops high on your thighs, a top cut lower than anything you own",
-   "why": "Skirt and top are the shop's, backed by the act of trying on; 'your own clothes' is backed by Your Street's top+bottom (or dress) rule, the only way in.",
+   "why": "the garments named are the stock she tries on in the act; 'your own clothes' names nothing she may not wear",
    "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "385a1ae04de61fd1",
-    "facts": "748a690297ebac40",
-    "all": "8d3756e6319fe7b8"
+    "text": "bda7f715eddbba10",
+    "facts": "861abe73330f8e00",
+    "facts2": "6fe90f26ec6d12ed",
+    "all": "6442aa25e1b725eb"
    },
    "row_hash": "f40f51a0fd6cfd10",
-   "carried": false,
-   "pass": 2
+   "carried": true,
+   "pass": 4
   },
   {
    "row": "C1166",
    "screen": "shop_try_on.try",
    "verdict": "N/A",
-   "line": "",
-   "why": "Not the opening.",
+   "line": "You take an armful into the fitting room and pull the curtain.",
+   "why": "not the opening",
    "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "e66d70a5469f20bc",
-    "facts": "748a690297ebac40",
-    "all": "2f1c0969bf3cf205"
+    "text": "bda7f715eddbba10",
+    "facts": "861abe73330f8e00",
+    "facts2": "6fe90f26ec6d12ed",
+    "all": "6442aa25e1b725eb"
    },
    "row_hash": "c0459dfe7b483f62",
    "carried": true,
-   "pass": 1
+   "pass": 4
   },
   {
    "row": "C1173",
@@ -504,18 +515,19 @@
    "row": "C1177",
    "screen": "shop_try_on.try",
    "verdict": "PASS",
-   "line": "You don't open the curtain.",
-   "why": "Private fitting room, nobody sees; nothing claimed as exposure.",
+   "line": "pull the curtain",
+   "why": "bare behind a curtain, Nina only through it: low exposure, written low",
    "cause": null,
    "note": true,
    "screen_hash": {
-    "text": "e66d70a5469f20bc",
-    "facts": "748a690297ebac40",
-    "all": "2f1c0969bf3cf205"
+    "text": "bda7f715eddbba10",
+    "facts": "861abe73330f8e00",
+    "facts2": "6fe90f26ec6d12ed",
+    "all": "6442aa25e1b725eb"
    },
    "row_hash": "ef9bbbe96651efc7",
    "carried": true,
-   "pass": 1
+   "pass": 4
   },
   {
    "row": "C1184",
@@ -560,18 +572,19 @@
    "row": "C1197",
    "screen": "shop_try_on.try",
    "verdict": "N/A",
-   "line": "",
-   "why": "No change of her outfit here; the wardrobe is in her room.",
+   "line": "You take an armful into the fitting room and pull the curtain.",
+   "why": "no outfit change happens; she ends in her own clothes",
    "cause": null,
    "note": true,
    "screen_hash": {
-    "text": "e66d70a5469f20bc",
-    "facts": "748a690297ebac40",
-    "all": "2f1c0969bf3cf205"
+    "text": "bda7f715eddbba10",
+    "facts": "861abe73330f8e00",
+    "facts2": "6fe90f26ec6d12ed",
+    "all": "6442aa25e1b725eb"
    },
    "row_hash": "d1aceeae8b5daeea",
    "carried": true,
-   "pass": 1
+   "pass": 4
   },
   {
    "row": "C1198",
@@ -621,34 +634,36 @@
    "screen": "shop_try_on.try",
    "verdict": "PASS",
    "line": "You put your own clothes back on",
-   "why": "No garment of hers she may not be wearing is named; the bra line is cut.",
+   "why": "no garment named she may not be wearing",
    "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "385a1ae04de61fd1",
-    "facts": "748a690297ebac40",
-    "all": "8d3756e6319fe7b8"
+    "text": "bda7f715eddbba10",
+    "facts": "861abe73330f8e00",
+    "facts2": "6fe90f26ec6d12ed",
+    "all": "6442aa25e1b725eb"
    },
    "row_hash": "bfff76edbee583de",
-   "carried": false,
-   "pass": 2
+   "carried": true,
+   "pass": 4
   },
   {
    "row": "C1207",
    "screen": "shop_try_on.try",
    "verdict": "N/A",
-   "line": "",
-   "why": "Store/wardrobe layout not visible on these canvases; can't quote a line.",
+   "line": "You take an armful into the fitting room and pull the curtain.",
+   "why": "no wardrobe screen here",
    "cause": null,
    "note": true,
    "screen_hash": {
-    "text": "e66d70a5469f20bc",
-    "facts": "748a690297ebac40",
-    "all": "2f1c0969bf3cf205"
+    "text": "bda7f715eddbba10",
+    "facts": "861abe73330f8e00",
+    "facts2": "6fe90f26ec6d12ed",
+    "all": "6442aa25e1b725eb"
    },
    "row_hash": "661f0c7d993e5975",
    "carried": true,
-   "pass": 1
+   "pass": 4
   },
   {
    "row": "C1220",
@@ -690,7 +705,7 @@
     "all": "b08b23e5dafe517f"
    },
    "row_hash": "1b2a2d5f05b10331",
-   "carried": false,
+   "carried": true,
    "pass": 2
   },
   {
@@ -707,7 +722,7 @@
     "all": "8d3756e6319fe7b8"
    },
    "row_hash": "1b2a2d5f05b10331",
-   "carried": false,
+   "carried": true,
    "pass": 2
   },
   {
@@ -741,7 +756,7 @@
     "all": "8d3756e6319fe7b8"
    },
    "row_hash": "6fd430204e984124",
-   "carried": false,
+   "carried": true,
    "pass": 2
   },
   {
@@ -810,21 +825,21 @@
     "all": "8d3756e6319fe7b8"
    },
    "row_hash": "32f015030465e92f",
-   "carried": false,
+   "carried": true,
    "pass": 2
   },
   {
    "row": "C1265",
    "screen": "*",
    "verdict": "PASS",
-   "line": "",
-   "why": "A meeting and a body moment; no spot on a chore, door or menu.",
+   "line": "nina_till_t0 (meeting), fitting_room_t3 (body moment)",
+   "why": "no picture on a chore or the room's menu; the place image is its card",
    "cause": null,
    "note": false,
-   "screen_hash": "0f86ce5804d020f4",
-   "row_hash": "447179d04e01ff5d",
+   "screen_hash": "252974e1462d79a0",
+   "row_hash": "64b72c778e96e443",
    "carried": true,
-   "pass": 1
+   "pass": 3
   },
   {
    "row": "C1267",
@@ -922,7 +937,7 @@
     "all": "8d3756e6319fe7b8"
    },
    "row_hash": "534032f000706830",
-   "carried": false,
+   "carried": true,
    "pass": 2
   },
   {
@@ -1317,18 +1332,19 @@
    "row": "C151",
    "screen": "shop_try_on.try",
    "verdict": "FAIL",
-   "line": "Let me see. Come on, I won't tell. / Not a chance. / Your loss, sweetie. Next time, then.",
-   "why": "Note: the repeatable still carries two Nina lines plus hers, not one spoken line (the half-price line is cut, so one fewer).",
+   "line": "\"Let me see. Come on, I won't tell.\" / \"Not a chance.\" / \"Your loss, sweetie. Next time, then.\"",
+   "why": "a repeatable with three spoken lines, two of them Nina's; the row asks one spoken line",
    "cause": null,
    "note": true,
    "screen_hash": {
-    "text": "385a1ae04de61fd1",
-    "facts": "748a690297ebac40",
-    "all": "8d3756e6319fe7b8"
+    "text": "bda7f715eddbba10",
+    "facts": "d69c45c67c7bfa15",
+    "facts2": "91b87aa28c22cf2b",
+    "all": "9e6a902163a18fdb"
    },
    "row_hash": "d5758757a709b1af",
-   "carried": false,
-   "pass": 2
+   "carried": true,
+   "pass": 3
   },
   {
    "row": "C162",
@@ -1655,7 +1671,7 @@
     "all": "8d3756e6319fe7b8"
    },
    "row_hash": "b01ad555668aba2d",
-   "carried": false,
+   "carried": true,
    "pass": 2
   },
   {
@@ -1675,35 +1691,37 @@
    "row": "C460",
    "screen": "shop_meet_nina.meet",
    "verdict": "PASS",
-   "line": "A woman in her twenties is behind the till",
-   "why": "Every claim holds: Nina gated present, no garment of hers named, 'the good stuff's at the back, and it isn't for everyone' true (upper levels locked by trait).",
+   "line": "A woman in her twenties is behind the till in a black dress two sizes too confident for a shop this small.",
+   "why": "trigger 10:00-18:45 with Nina present; her row has her behind the till exactly 10:00-18:45, Mon-Sat",
    "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "a59f6f0625f7683b",
-    "facts": "e3e3f324aaa85751",
-    "all": "b08b23e5dafe517f"
+    "text": "ea4eb3bb92b30114",
+    "facts": "754ef4fb7dffe814",
+    "facts2": "598a0f6135f4e548",
+    "all": "dbb4266ea86f2d20"
    },
    "row_hash": "67e48e60d5053a2e",
-   "carried": false,
-   "pass": 2
+   "carried": true,
+   "pass": 5
   },
   {
    "row": "C460",
    "screen": "shop_try_on.try",
    "verdict": "PASS",
-   "line": "a top cut lower than anything you own",
-   "why": "The half-price promise is cut; nothing promised the game doesn't build; the top is unspecified, so it can be lower than Mom's low-cut top too.",
+   "line": "You take an armful into the fitting room and pull the curtain.",
+   "why": "each claim holds 10:00-18:44 Mon-Sat; Nina present for her lines",
    "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "385a1ae04de61fd1",
-    "facts": "748a690297ebac40",
-    "all": "8d3756e6319fe7b8"
+    "text": "bda7f715eddbba10",
+    "facts": "861abe73330f8e00",
+    "facts2": "6fe90f26ec6d12ed",
+    "all": "6442aa25e1b725eb"
    },
    "row_hash": "67e48e60d5053a2e",
-   "carried": false,
-   "pass": 2
+   "carried": true,
+   "pass": 4
   },
   {
    "row": "C461",
@@ -1722,35 +1740,37 @@
    "row": "C461",
    "screen": "shop_meet_nina.meet",
    "verdict": "PASS",
-   "line": "She smiles like she already knows which rail you'll end up at.",
-   "why": "Texture and dialogue that fit Nina's cast entry (shop owner, 26); nothing that can clash.",
+   "line": "A woman in her twenties is behind the till in a black dress two sizes too confident for a shop this small.",
+   "why": "texture and dialogue that fit the cast entries; no past or fact assumed",
    "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "a59f6f0625f7683b",
-    "facts": "e3e3f324aaa85751",
-    "all": "b08b23e5dafe517f"
+    "text": "ea4eb3bb92b30114",
+    "facts": "754ef4fb7dffe814",
+    "facts2": "598a0f6135f4e548",
+    "all": "dbb4266ea86f2d20"
    },
    "row_hash": "310706ee076318f2",
-   "carried": false,
-   "pass": 2
+   "carried": true,
+   "pass": 5
   },
   {
    "row": "C461",
    "screen": "shop_try_on.try",
    "verdict": "PASS",
-   "line": "Let me see. Come on, I won't tell.",
-   "why": "Fits her: the owner teasing through the curtain; her refusal is her opinion.",
+   "line": "Your loss, sweetie. Next time, then.",
+   "why": "fits her entry",
    "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "385a1ae04de61fd1",
-    "facts": "748a690297ebac40",
-    "all": "8d3756e6319fe7b8"
+    "text": "bda7f715eddbba10",
+    "facts": "861abe73330f8e00",
+    "facts2": "6fe90f26ec6d12ed",
+    "all": "6442aa25e1b725eb"
    },
    "row_hash": "310706ee076318f2",
-   "carried": false,
-   "pass": 2
+   "carried": true,
+   "pass": 4
   },
   {
    "row": "C519",
@@ -1779,7 +1799,7 @@
     "all": "b08b23e5dafe517f"
    },
    "row_hash": "370371a278b9f182",
-   "carried": false,
+   "carried": true,
    "pass": 2
   },
   {
@@ -1796,21 +1816,21 @@
     "all": "8d3756e6319fe7b8"
    },
    "row_hash": "370371a278b9f182",
-   "carried": false,
+   "carried": true,
    "pass": 2
   },
   {
    "row": "C596",
    "screen": "*",
-   "verdict": "N/A",
-   "line": "",
-   "why": "No talk screen or menu for Nina in release 1.",
+   "verdict": "PASS",
+   "line": "shop_meet_nina.meet: first line then people/nina_till_t0",
+   "why": "picture right after the meeting's first line; no repeat talk screen",
    "cause": null,
    "note": true,
-   "screen_hash": "0f86ce5804d020f4",
-   "row_hash": "6d9bba989a2b9666",
+   "screen_hash": "252974e1462d79a0",
+   "row_hash": "e5f7e6cf2d01613d",
    "carried": true,
-   "pass": 1
+   "pass": 3
   },
   {
    "row": "C601",
@@ -2017,18 +2037,19 @@
    "row": "C719",
    "screen": "shop_try_on.try",
    "verdict": "PASS",
-   "line": "",
-   "why": "Claims no dressing that moves no garment; she tries shop stock, puts her own back on.",
+   "line": "You put your own clothes back on",
+   "why": "the button shows the act it names; nothing claims a garment moved",
    "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "e66d70a5469f20bc",
-    "facts": "748a690297ebac40",
-    "all": "2f1c0969bf3cf205"
+    "text": "bda7f715eddbba10",
+    "facts": "861abe73330f8e00",
+    "facts2": "6fe90f26ec6d12ed",
+    "all": "6442aa25e1b725eb"
    },
    "row_hash": "694949840372b91a",
    "carried": true,
-   "pass": 1
+   "pass": 4
   },
   {
    "row": "C758",
@@ -2166,365 +2187,384 @@
   },
   {
    "row": "C795",
-   "screen": "*",
-   "verdict": "PASS",
-   "line": "Nina looks up from the till.",
-   "why": "Re-entry change is her presence line.",
+   "screen": "hood_clothes",
+   "verdict": "FAIL",
+   "line": "Nina looks up from the till. \"Find anything you're brave enough for?\"",
+   "why": "a re-entry change written as a room-text line for one person",
    "cause": null,
    "note": true,
-   "screen_hash": "0f86ce5804d020f4",
-   "row_hash": "6c9eb17d99266791",
+   "screen_hash": null,
+   "row_hash": "34139e6a6914e171",
    "carried": true,
-   "pass": 1
+   "pass": 3
   },
   {
    "row": "C804",
-   "screen": "*",
+   "screen": "hood_clothes",
    "verdict": "PASS",
-   "line": "",
-   "why": "Room text changes with Nina there.",
+   "line": "Girls from campus browse the rails in pairs.",
+   "why": "her till line is gone; Nina shows as her face; the only people line is an unnamed crowd",
    "cause": null,
    "note": false,
-   "screen_hash": "0f86ce5804d020f4",
-   "row_hash": "810ef8e803cb09dd",
+   "screen_hash": null,
+   "row_hash": "5358489178bff0a4",
    "carried": true,
-   "pass": 1
+   "pass": 4
   },
   {
    "row": "C889",
    "screen": "shop_try_on.try",
    "verdict": "PASS",
-   "line": "(15 min)",
-   "why": "Duration, equal to the spend.",
+   "line": "Try something on / Done",
+   "why": "no clock time, no duration on the labels",
    "cause": null,
    "note": true,
    "screen_hash": {
-    "text": "e66d70a5469f20bc",
-    "facts": "748a690297ebac40",
-    "all": "2f1c0969bf3cf205"
+    "text": "bda7f715eddbba10",
+    "facts": "861abe73330f8e00",
+    "facts2": "6fe90f26ec6d12ed",
+    "all": "6442aa25e1b725eb"
    },
-   "row_hash": "1b724e2dcfbf028b",
+   "row_hash": "def1348d483d0c40",
    "carried": true,
-   "pass": 1
+   "pass": 4
   },
   {
    "row": "C892",
    "screen": "shop_try_on.try",
    "verdict": "PASS",
-   "line": "",
-   "why": "Hours on the door and card, not in the act.",
+   "line": "the fitting room closes at 6:45pm.",
+   "why": "the hour is on the greyed row, not in the act",
    "cause": null,
    "note": true,
    "screen_hash": {
-    "text": "e66d70a5469f20bc",
-    "facts": "748a690297ebac40",
-    "all": "2f1c0969bf3cf205"
+    "text": "bda7f715eddbba10",
+    "facts": "861abe73330f8e00",
+    "facts2": "6fe90f26ec6d12ed",
+    "all": "6442aa25e1b725eb"
    },
    "row_hash": "5c890033f6ac38b8",
    "carried": true,
-   "pass": 1
+   "pass": 4
   },
   {
    "row": "C897",
    "screen": "shop_try_on.try",
-   "verdict": "PASS",
-   "line": "",
-   "why": "",
+   "verdict": "N/A",
+   "line": "Done -> hood_clothes",
+   "why": "no travel",
    "cause": null,
    "note": true,
    "screen_hash": {
-    "text": "e66d70a5469f20bc",
-    "facts": "748a690297ebac40",
-    "all": "2f1c0969bf3cf205"
+    "text": "bda7f715eddbba10",
+    "facts": "861abe73330f8e00",
+    "facts2": "6fe90f26ec6d12ed",
+    "all": "6442aa25e1b725eb"
    },
    "row_hash": "265ece64add83676",
    "carried": true,
-   "pass": 1
+   "pass": 4
   },
   {
    "row": "C900",
    "screen": "shop_try_on.try",
    "verdict": "PASS",
-   "line": "",
-   "why": "No time in the beat.",
+   "line": "You take an armful into the fitting room and pull the curtain.",
+   "why": "no time named in the beat",
    "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "e66d70a5469f20bc",
-    "facts": "748a690297ebac40",
-    "all": "2f1c0969bf3cf205"
+    "text": "bda7f715eddbba10",
+    "facts": "861abe73330f8e00",
+    "facts2": "6fe90f26ec6d12ed",
+    "all": "6442aa25e1b725eb"
    },
    "row_hash": "6372efb027eb2034",
    "carried": true,
-   "pass": 1
+   "pass": 4
   },
   {
    "row": "C902",
    "screen": "shop_try_on.try",
    "verdict": "PASS",
-   "line": "",
-   "why": "True at 18:44 (Nina there till 19:00).",
+   "line": "You take an armful into the fitting room and pull the curtain.",
+   "why": "true at 18:44: shop open, Nina at the till",
    "cause": null,
    "note": true,
    "screen_hash": {
-    "text": "e66d70a5469f20bc",
-    "facts": "748a690297ebac40",
-    "all": "2f1c0969bf3cf205"
+    "text": "bda7f715eddbba10",
+    "facts": "861abe73330f8e00",
+    "facts2": "6fe90f26ec6d12ed",
+    "all": "6442aa25e1b725eb"
    },
    "row_hash": "df5ed7a36dbc74e4",
    "carried": true,
-   "pass": 1
+   "pass": 4
   },
   {
    "row": "C903",
    "screen": "shop_try_on.try",
    "verdict": "PASS",
-   "line": "",
-   "why": "Names no weekday.",
+   "line": "You take an armful into the fitting room and pull the curtain.",
+   "why": "no weekday named",
    "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "e66d70a5469f20bc",
-    "facts": "748a690297ebac40",
-    "all": "2f1c0969bf3cf205"
+    "text": "bda7f715eddbba10",
+    "facts": "861abe73330f8e00",
+    "facts2": "6fe90f26ec6d12ed",
+    "all": "6442aa25e1b725eb"
    },
    "row_hash": "4f83b0b5eb45f71b",
    "carried": true,
-   "pass": 1
+   "pass": 4
   },
   {
    "row": "C906",
    "screen": "shop_try_on.try",
    "verdict": "PASS",
-   "line": "",
-   "why": "No 'till'.",
+   "line": "Try something on",
+   "why": "no 'till' on the label",
    "cause": null,
    "note": true,
    "screen_hash": {
-    "text": "e66d70a5469f20bc",
-    "facts": "748a690297ebac40",
-    "all": "2f1c0969bf3cf205"
+    "text": "bda7f715eddbba10",
+    "facts": "861abe73330f8e00",
+    "facts2": "6fe90f26ec6d12ed",
+    "all": "6442aa25e1b725eb"
    },
-   "row_hash": "ce3b42a8c86da5b8",
+   "row_hash": "71713a7e7ae739e7",
    "carried": true,
-   "pass": 1
+   "pass": 4
   },
   {
    "row": "C910",
    "screen": "shop_try_on.try",
    "verdict": "PASS",
-   "line": "(15 min)",
-   "why": "Same form as the game.",
+   "line": "Try something on / Done",
+   "why": "no time, energy or money (none spent)",
    "cause": null,
    "note": true,
    "screen_hash": {
-    "text": "e66d70a5469f20bc",
-    "facts": "748a690297ebac40",
-    "all": "2f1c0969bf3cf205"
+    "text": "bda7f715eddbba10",
+    "facts": "861abe73330f8e00",
+    "facts2": "6fe90f26ec6d12ed",
+    "all": "6442aa25e1b725eb"
    },
-   "row_hash": "be1c18ee466455f6",
+   "row_hash": "d5a109f1ef88419a",
    "carried": true,
-   "pass": 1
+   "pass": 4
   },
   {
    "row": "C913",
    "screen": "shop_try_on.try",
    "verdict": "PASS",
-   "line": "cooldown_message = \"the fitting room closes at 6:45pm.\"",
-   "why": "show_when_blocked plus cooldown_message: from 18:45 it stays as 'Try something on (15 min) \u2014 the fitting room closes at 6:45pm.' (drawn at v2.py:6751-6759).",
+   "line": "show_when_blocked = true",
+   "why": "shut by the clock 18:45-19:00 while the shop is open, it stays as a dimmed line with its message",
    "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "385a1ae04de61fd1",
-    "facts": "748a690297ebac40",
-    "all": "8d3756e6319fe7b8"
+    "text": "bda7f715eddbba10",
+    "facts": "861abe73330f8e00",
+    "facts2": "6fe90f26ec6d12ed",
+    "all": "6442aa25e1b725eb"
    },
    "row_hash": "c750f9b6ab4ace14",
-   "carried": false,
-   "pass": 2
+   "carried": true,
+   "pass": 4
   },
   {
    "row": "C914",
    "screen": "shop_try_on.try",
    "verdict": "PASS",
-   "line": "",
-   "why": "Never shows hours wrongly (it shows none; that's C913).",
+   "line": "cooldown_message = \"the fitting room closes at 6:45pm.\"",
+   "why": "before met_nina the flag shuts it and it hides; after, only the clock shuts it, so the hours show only then",
    "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "e66d70a5469f20bc",
-    "facts": "748a690297ebac40",
-    "all": "2f1c0969bf3cf205"
+    "text": "bda7f715eddbba10",
+    "facts": "861abe73330f8e00",
+    "facts2": "6fe90f26ec6d12ed",
+    "all": "6442aa25e1b725eb"
    },
    "row_hash": "bd07273d5822f34f",
    "carried": true,
-   "pass": 1
+   "pass": 4
   },
   {
    "row": "C916",
    "screen": "shop_try_on.try",
    "verdict": "PASS",
-   "line": "Try something on (15 min)",
-   "why": "Something she chooses, and its hours are published on the dimmed line.",
+   "line": "Try something on",
+   "why": "her choice; hours shown on it",
    "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "385a1ae04de61fd1",
-    "facts": "748a690297ebac40",
-    "all": "8d3756e6319fe7b8"
+    "text": "bda7f715eddbba10",
+    "facts": "861abe73330f8e00",
+    "facts2": "6fe90f26ec6d12ed",
+    "all": "6442aa25e1b725eb"
    },
    "row_hash": "7b2bb0dfdbcfe946",
-   "carried": false,
-   "pass": 2
+   "carried": true,
+   "pass": 4
   },
   {
    "row": "C920",
    "screen": "shop_try_on.try",
    "verdict": "PASS",
-   "line": "",
-   "why": "Activity 15, meeting Done 5.",
+   "line": "Done, 15 min, back to hood_clothes",
+   "why": "the 15 minutes is the act, not a hop",
    "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "e66d70a5469f20bc",
-    "facts": "748a690297ebac40",
-    "all": "2f1c0969bf3cf205"
+    "text": "bda7f715eddbba10",
+    "facts": "861abe73330f8e00",
+    "facts2": "6fe90f26ec6d12ed",
+    "all": "6442aa25e1b725eb"
    },
-   "row_hash": "695dc5d9d0e5e749",
+   "row_hash": "513927dd127fca04",
    "carried": true,
-   "pass": 1
+   "pass": 4
   },
   {
    "row": "C924",
    "screen": "shop_try_on.try",
-   "verdict": "PASS",
-   "line": "",
-   "why": "",
+   "verdict": "N/A",
+   "line": "Done -> hood_clothes",
+   "why": "no travel",
    "cause": null,
    "note": true,
    "screen_hash": {
-    "text": "e66d70a5469f20bc",
-    "facts": "748a690297ebac40",
-    "all": "2f1c0969bf3cf205"
+    "text": "bda7f715eddbba10",
+    "facts": "861abe73330f8e00",
+    "facts2": "6fe90f26ec6d12ed",
+    "all": "6442aa25e1b725eb"
    },
    "row_hash": "791cd173e23fb130",
    "carried": true,
-   "pass": 1
+   "pass": 4
   },
   {
    "row": "C926",
    "screen": "shop_try_on.try",
    "verdict": "PASS",
-   "line": "",
-   "why": "",
+   "line": "time_progression_minutes = 15",
+   "why": "minutes only",
    "cause": null,
    "note": true,
    "screen_hash": {
-    "text": "e66d70a5469f20bc",
-    "facts": "748a690297ebac40",
-    "all": "2f1c0969bf3cf205"
+    "text": "bda7f715eddbba10",
+    "facts": "861abe73330f8e00",
+    "facts2": "6fe90f26ec6d12ed",
+    "all": "6442aa25e1b725eb"
    },
    "row_hash": "177d1e1776fac74b",
    "carried": true,
-   "pass": 1
+   "pass": 4
   },
   {
    "row": "C927",
    "screen": "shop_try_on.try",
    "verdict": "PASS",
    "line": "time_progression_minutes = 15",
-   "why": "Done spends 15 minutes, as the button says.",
+   "why": "exit time set",
    "cause": null,
    "note": true,
    "screen_hash": {
-    "text": "385a1ae04de61fd1",
-    "facts": "748a690297ebac40",
-    "all": "8d3756e6319fe7b8"
+    "text": "bda7f715eddbba10",
+    "facts": "861abe73330f8e00",
+    "facts2": "6fe90f26ec6d12ed",
+    "all": "6442aa25e1b725eb"
    },
    "row_hash": "4e86d143688ba8e5",
-   "carried": false,
-   "pass": 2
+   "carried": true,
+   "pass": 4
   },
   {
    "row": "C928",
    "screen": "shop_try_on.try",
    "verdict": "PASS",
-   "line": "",
-   "why": "No clock in prose.",
+   "line": "You take an armful into the fitting room and pull the curtain.",
+   "why": "no clock in prose",
    "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "e66d70a5469f20bc",
-    "facts": "748a690297ebac40",
-    "all": "2f1c0969bf3cf205"
+    "text": "bda7f715eddbba10",
+    "facts": "861abe73330f8e00",
+    "facts2": "6fe90f26ec6d12ed",
+    "all": "6442aa25e1b725eb"
    },
    "row_hash": "2c3ccc6bd9929d7f",
    "carried": true,
-   "pass": 1
+   "pass": 4
   },
   {
    "row": "C929",
    "screen": "shop_try_on.try",
    "verdict": "PASS",
-   "line": "(15 min)",
-   "why": "Label carries it.",
+   "line": "Try something on",
+   "why": "label carries no time",
    "cause": null,
    "note": true,
    "screen_hash": {
-    "text": "e66d70a5469f20bc",
-    "facts": "748a690297ebac40",
-    "all": "2f1c0969bf3cf205"
+    "text": "bda7f715eddbba10",
+    "facts": "861abe73330f8e00",
+    "facts2": "6fe90f26ec6d12ed",
+    "all": "6442aa25e1b725eb"
    },
-   "row_hash": "e20b027bad88ca8c",
+   "row_hash": "18b0ecdf6d7fc901",
    "carried": true,
-   "pass": 1
+   "pass": 4
   },
   {
    "row": "C930",
    "screen": "shop_try_on.try",
    "verdict": "PASS",
    "line": "show_when_blocked = true",
-   "why": "No longer vanishes 18:45-19:00; it greys. met_nina can't be false while she stands in the open shop (the meeting fires on entry), so only the clock shuts it.",
+   "why": "windowed, does not vanish out of hours while the shop is open",
    "cause": null,
    "note": true,
    "screen_hash": {
-    "text": "385a1ae04de61fd1",
-    "facts": "748a690297ebac40",
-    "all": "8d3756e6319fe7b8"
+    "text": "bda7f715eddbba10",
+    "facts": "861abe73330f8e00",
+    "facts2": "6fe90f26ec6d12ed",
+    "all": "6442aa25e1b725eb"
    },
    "row_hash": "beb57cd46fe906bf",
-   "carried": false,
-   "pass": 2
+   "carried": true,
+   "pass": 4
   },
   {
    "row": "C931",
    "screen": "shop_try_on.try",
    "verdict": "PASS",
-   "line": "{ type = \"time_of_day\", start_time = \"10:00\", end_time = \"18:45\" }",
-   "why": "End exclusive: last start 18:44, done by 18:59 inside the shop's 19:00 close; greys at 18:45, matching '6:45pm'.",
+   "line": "end_time = \"18:45\"",
+   "why": "end exclusive: last start 18:44, and 18:45 is where her fitting-room row starts; no gap, no overlap",
    "cause": null,
    "note": true,
    "screen_hash": {
-    "text": "385a1ae04de61fd1",
-    "facts": "748a690297ebac40",
-    "all": "8d3756e6319fe7b8"
+    "text": "bda7f715eddbba10",
+    "facts": "861abe73330f8e00",
+    "facts2": "6fe90f26ec6d12ed",
+    "all": "6442aa25e1b725eb"
    },
    "row_hash": "1aadffd96e76381c",
-   "carried": false,
-   "pass": 2
+   "carried": true,
+   "pass": 4
   },
   {
    "row": "C953",
    "screen": "*",
    "verdict": "PASS",
-   "line": "(15 min)",
-   "why": "Cost on the label.",
+   "line": "\"Try something on\"",
+   "why": "no cost, no time or energy on the label",
    "cause": null,
    "note": true,
-   "screen_hash": "0f86ce5804d020f4",
-   "row_hash": "8d1306a15c51370a",
+   "screen_hash": "252974e1462d79a0",
+   "row_hash": "826bf82fe26afd13",
    "carried": true,
-   "pass": 1
+   "pass": 3
   },
   {
    "row": "L106",
@@ -2543,35 +2583,37 @@
    "row": "L106",
    "screen": "shop_meet_nina.meet",
    "verdict": "PASS",
-   "line": "A woman in her twenties is behind the till",
-   "why": "Gated on Nina is_present; who_is_where puts her behind the till Mon-Sat 10:00-19:00.",
+   "line": "A woman in her twenties is behind the till in a black dress two sizes too confident for a shop this small.",
+   "why": "trigger 10:00-18:45 with Nina present; her row has her behind the till exactly 10:00-18:45, Mon-Sat",
    "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "a59f6f0625f7683b",
-    "facts": "e3e3f324aaa85751",
-    "all": "b08b23e5dafe517f"
+    "text": "ea4eb3bb92b30114",
+    "facts": "754ef4fb7dffe814",
+    "facts2": "598a0f6135f4e548",
+    "all": "dbb4266ea86f2d20"
    },
    "row_hash": "13a714429d15f3b2",
-   "carried": false,
-   "pass": 2
+   "carried": true,
+   "pass": 5
   },
   {
    "row": "L106",
    "screen": "shop_try_on.try",
    "verdict": "PASS",
-   "line": "Nina, through the curtain (group on npc_at_location is_present)",
-   "why": "Her lines show only while her row has her there; the window lies inside it.",
+   "line": "Let me see.",
+   "why": "her lines only inside her presence group",
    "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "385a1ae04de61fd1",
-    "facts": "748a690297ebac40",
-    "all": "8d3756e6319fe7b8"
+    "text": "bda7f715eddbba10",
+    "facts": "861abe73330f8e00",
+    "facts2": "6fe90f26ec6d12ed",
+    "all": "6442aa25e1b725eb"
    },
    "row_hash": "13a714429d15f3b2",
-   "carried": false,
-   "pass": 2
+   "carried": true,
+   "pass": 4
   },
   {
    "row": "L119",
@@ -2646,18 +2688,58 @@
    "row": "L167",
    "screen": "shop_try_on.try",
    "verdict": "PASS",
-   "line": "the fitting room closes at 6:45pm.",
-   "why": "One row, one window on every open day (the shop is shut Sunday, so no second day kind); greys with show_when_blocked and a cooldown_message naming when it shuts; before 10:00 the place itself is shut.",
+   "line": "one row, 10:00-18:45 every open day",
+   "why": "same hours every day; one row, greys with a message",
    "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "385a1ae04de61fd1",
-    "facts": "748a690297ebac40",
-    "all": "8d3756e6319fe7b8"
+    "text": "bda7f715eddbba10",
+    "facts": "861abe73330f8e00",
+    "facts2": "6fe90f26ec6d12ed",
+    "all": "6442aa25e1b725eb"
    },
    "row_hash": "e64ce2672d85d2d8",
+   "carried": true,
+   "pass": 4
+  },
+  {
+   "row": "L168",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "The clothes shop in your neighbourhood is open Monday to Saturday, 10am to 7pm.",
+   "why": "Nina's rows are the shop's hours exactly; met_nina is the end step's when",
+   "cause": null,
+   "note": false,
+   "screen_hash": "8f3b8a1cfc9561b7",
+   "row_hash": "444c44970dc284f2",
    "carried": false,
-   "pass": 2
+   "pass": 6
+  },
+  {
+   "row": "L169",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "The clothes shop in your neighbourhood is open Monday to Saturday, 10am to 7pm.",
+   "why": "shop_meet_nina runs 10:00-18:45 every open day; the hint names the shop's day window, and only the closing quarter-hour has her there without the meeting, so it is never missed for good",
+   "cause": null,
+   "note": false,
+   "screen_hash": "8f3b8a1cfc9561b7",
+   "row_hash": "59defccfc63b0454",
+   "carried": false,
+   "pass": 6
+  },
+  {
+   "row": "L170",
+   "screen": "*",
+   "verdict": "N/A",
+   "line": "",
+   "why": "no place on this piece's screens is hidden_until a flag",
+   "cause": null,
+   "note": false,
+   "screen_hash": "8f3b8a1cfc9561b7",
+   "row_hash": "c3599cd09637a240",
+   "carried": false,
+   "pass": 6
   },
   {
    "row": "L71",
@@ -2679,8 +2761,8 @@
  ],
  "causes": [],
  "pending": [],
- "asked": 27,
- "answered": 27,
+ "asked": 3,
+ "answered": 3,
  "pass_items": [],
  "unowed": []
 }

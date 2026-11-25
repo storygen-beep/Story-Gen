@@ -1,0 +1,2231 @@
+{
+ "verdicts": [
+  {
+   "row": "B1",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "\"If Mark says anything to you about the money, you tell me first. Okay? Promise me.\"",
+   "why": "Mom wants her promise (sit_with_mom) and wants her out of the kitchen before more questions (ask_mom); Mark wants the money (kitchen_rent). The added Quests line changes neither."
+  },
+  {
+   "row": "B2",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "\"Doesn't matter, baby. Eat something. You'll be late. Go on.\"",
+   "why": "Each screen goes a step past the one before: Mark's demand, Ryan's look in the hall, then Mom's warning or her refusal to say what she tried."
+  },
+  {
+   "row": "B9",
+   "screen": "*",
+   "verdict": "N/A",
+   "line": "",
+   "why": "PLAN.md declares no companion-rival in the opening."
+  },
+  {
+   "row": "C1008",
+   "screen": "*",
+   "verdict": "N/A",
+   "line": "Mark wants $75 every Sunday morning.",
+   "why": "Release 1 has no rise; the walkthrough states the flat $75."
+  },
+  {
+   "row": "C1013",
+   "screen": "*",
+   "verdict": "N/A",
+   "line": "Pay Mark in full four Sundays in a row.",
+   "why": "The walkthrough doesn't show a short week; NOTES.md keeps C1013 a note."
+  },
+  {
+   "row": "C1021",
+   "screen": "*",
+   "verdict": "N/A",
+   "line": "An hour at the café pays $5; a four-hour shift pays $22.",
+   "why": "No button on the walkthrough; its figures are written with $."
+  },
+  {
+   "row": "C1022",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "An hour at the café pays $5; a four-hour shift pays $22.",
+   "why": "Every amount is in $; no real-world currency is named."
+  },
+  {
+   "row": "C1033",
+   "screen": "*",
+   "verdict": "N/A",
+   "line": "Mark told you the rent.",
+   "why": "The first collection is the rent screen (P11), not this page."
+  },
+  {
+   "row": "C1189",
+   "screen": "npcs.npc_ryan.stranger_name",
+   "verdict": "N/A",
+   "line": "guy with a crooked grin",
+   "why": "Not a line of noticing; a People-page name."
+  },
+  {
+   "row": "C124",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "(all hint entries)",
+   "why": "The step names a place and its hours, so she has something to do."
+  },
+  {
+   "row": "C124",
+   "screen": "story_hints.classes",
+   "verdict": "PASS",
+   "line": "You know someone in psychology now. Statistics is Monday and Wednesday at 11am, English Tuesday and Thursday at 9am, both in the Lecture Hall.",
+   "why": "The step names a place and its hours, so she has something to do."
+  },
+  {
+   "row": "C124",
+   "screen": "story_hints.lunch",
+   "verdict": "PASS",
+   "line": "The cafeteria serves lunch weekdays, 11am to 2pm. The woman at the counter is in weekdays 8am to 4pm.",
+   "why": "The step names a place and its hours, so she has something to do."
+  },
+  {
+   "row": "C124",
+   "screen": "story_hints.staying_in_shape",
+   "verdict": "PASS",
+   "line": "Marco trains people at the gym weekdays 6 to 10am and 5 to 9pm, and Saturday 8am to 2pm.",
+   "why": "The step names a place and its hours, so she has something to do."
+  },
+  {
+   "row": "C124",
+   "screen": "story_hints.the_cafe_job",
+   "verdict": "PASS",
+   "line": "Work your first shift at the Café: a weekday between 10am and 3pm, while Tom and the barista are both in.",
+   "why": "The step names a place and its hours, so she has something to do."
+  },
+  {
+   "row": "C124",
+   "screen": "story_hints.the_corner_shop",
+   "verdict": "PASS",
+   "line": "The owner works the till Monday to Saturday, 7am to 3pm; the night clerk has it after 3pm and all day Sunday.",
+   "why": "The step names a place and its hours, so she has something to do."
+  },
+  {
+   "row": "C124",
+   "screen": "story_hints.the_library",
+   "verdict": "PASS",
+   "line": "The librarian's at the desk weekdays 8am to 4pm, and Saturday 10am to 4pm.",
+   "why": "The step names a place and its hours, so she has something to do."
+  },
+  {
+   "row": "C1340",
+   "screen": "npcs.npc_ryan.stranger_name",
+   "verdict": "N/A",
+   "line": "guy with a crooked grin",
+   "why": "A stranger name is not the household loop's face or menu."
+  },
+  {
+   "row": "C1366",
+   "screen": "*",
+   "verdict": "N/A",
+   "line": "",
+   "why": "Release 1 moves no meter (PLAN.md:190, 'meters shown, none move yet'); no hint is a meter's storyline step."
+  },
+  {
+   "row": "C1366",
+   "screen": "story_hints.classes",
+   "verdict": "N/A",
+   "line": "You know someone in psychology now. Statistics is Monday and Wednesday at 11am, English Tuesday and Thursday at 9am, both in the Lecture Hall.",
+   "why": "Release 1 moves no meter (PLAN.md:190, 'meters shown, none move yet'); no hint is a meter's storyline step."
+  },
+  {
+   "row": "C1366",
+   "screen": "story_hints.lunch",
+   "verdict": "N/A",
+   "line": "The cafeteria serves lunch weekdays, 11am to 2pm. The woman at the counter is in weekdays 8am to 4pm.",
+   "why": "Release 1 moves no meter (PLAN.md:190, 'meters shown, none move yet'); no hint is a meter's storyline step."
+  },
+  {
+   "row": "C1366",
+   "screen": "story_hints.staying_in_shape",
+   "verdict": "N/A",
+   "line": "Marco trains people at the gym weekdays 6 to 10am and 5 to 9pm, and Saturday 8am to 2pm.",
+   "why": "Release 1 moves no meter (PLAN.md:190, 'meters shown, none move yet'); no hint is a meter's storyline step."
+  },
+  {
+   "row": "C1366",
+   "screen": "story_hints.the_cafe_job",
+   "verdict": "N/A",
+   "line": "Work your first shift at the Café: a weekday between 10am and 3pm, while Tom and the barista are both in.",
+   "why": "Release 1 moves no meter (PLAN.md:190, 'meters shown, none move yet'); no hint is a meter's storyline step."
+  },
+  {
+   "row": "C1366",
+   "screen": "story_hints.the_corner_shop",
+   "verdict": "N/A",
+   "line": "The owner works the till Monday to Saturday, 7am to 3pm; the night clerk has it after 3pm and all day Sunday.",
+   "why": "Release 1 moves no meter (PLAN.md:190, 'meters shown, none move yet'); no hint is a meter's storyline step."
+  },
+  {
+   "row": "C1366",
+   "screen": "story_hints.the_library",
+   "verdict": "N/A",
+   "line": "The librarian's at the desk weekdays 8am to 4pm, and Saturday 10am to 4pm.",
+   "why": "Release 1 moves no meter (PLAN.md:190, 'meters shown, none move yet'); no hint is a meter's storyline step."
+  },
+  {
+   "row": "C140",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "(all hint entries)",
+   "why": "The end step prints CoT's \"for now! But there may still be recurring events.\""
+  },
+  {
+   "row": "C140",
+   "screen": "story_hints.classes",
+   "verdict": "PASS",
+   "line": "You know someone in psychology now. Statistics is Monday and Wednesday at 11am, English Tuesday and Thursday at 9am, both in the Lecture Hall.",
+   "why": "The end step prints CoT's \"for now! But there may still be recurring events.\""
+  },
+  {
+   "row": "C140",
+   "screen": "story_hints.lunch",
+   "verdict": "PASS",
+   "line": "The cafeteria serves lunch weekdays, 11am to 2pm. The woman at the counter is in weekdays 8am to 4pm.",
+   "why": "The end step prints CoT's \"for now! But there may still be recurring events.\""
+  },
+  {
+   "row": "C140",
+   "screen": "story_hints.staying_in_shape",
+   "verdict": "PASS",
+   "line": "Marco trains people at the gym weekdays 6 to 10am and 5 to 9pm, and Saturday 8am to 2pm.",
+   "why": "The end step prints CoT's \"for now! But there may still be recurring events.\""
+  },
+  {
+   "row": "C140",
+   "screen": "story_hints.the_cafe_job",
+   "verdict": "PASS",
+   "line": "Work your first shift at the Café: a weekday between 10am and 3pm, while Tom and the barista are both in.",
+   "why": "The end step prints CoT's \"for now! But there may still be recurring events.\""
+  },
+  {
+   "row": "C140",
+   "screen": "story_hints.the_corner_shop",
+   "verdict": "PASS",
+   "line": "The owner works the till Monday to Saturday, 7am to 3pm; the night clerk has it after 3pm and all day Sunday.",
+   "why": "The end step prints CoT's \"for now! But there may still be recurring events.\""
+  },
+  {
+   "row": "C140",
+   "screen": "story_hints.the_library",
+   "verdict": "PASS",
+   "line": "The librarian's at the desk weekdays 8am to 4pm, and Saturday 10am to 4pm.",
+   "why": "The end step prints CoT's \"for now! But there may still be recurring events.\""
+  },
+  {
+   "row": "C1619",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "(all hint entries)",
+   "why": "A storyline with steps: the last passed step shows after \"Hint:\"."
+  },
+  {
+   "row": "C1619",
+   "screen": "story_hints.classes",
+   "verdict": "PASS",
+   "line": "You know someone in psychology now. Statistics is Monday and Wednesday at 11am, English Tuesday and Thursday at 9am, both in the Lecture Hall.",
+   "why": "A storyline with steps: the last passed step shows after \"Hint:\"."
+  },
+  {
+   "row": "C1619",
+   "screen": "story_hints.lunch",
+   "verdict": "PASS",
+   "line": "The cafeteria serves lunch weekdays, 11am to 2pm. The woman at the counter is in weekdays 8am to 4pm.",
+   "why": "A storyline with steps: the last passed step shows after \"Hint:\"."
+  },
+  {
+   "row": "C1619",
+   "screen": "story_hints.staying_in_shape",
+   "verdict": "PASS",
+   "line": "Marco trains people at the gym weekdays 6 to 10am and 5 to 9pm, and Saturday 8am to 2pm.",
+   "why": "A storyline with steps: the last passed step shows after \"Hint:\"."
+  },
+  {
+   "row": "C1619",
+   "screen": "story_hints.the_cafe_job",
+   "verdict": "PASS",
+   "line": "Work your first shift at the Café: a weekday between 10am and 3pm, while Tom and the barista are both in.",
+   "why": "A storyline with steps: the last passed step shows after \"Hint:\"."
+  },
+  {
+   "row": "C1619",
+   "screen": "story_hints.the_corner_shop",
+   "verdict": "PASS",
+   "line": "The owner works the till Monday to Saturday, 7am to 3pm; the night clerk has it after 3pm and all day Sunday.",
+   "why": "A storyline with steps: the last passed step shows after \"Hint:\"."
+  },
+  {
+   "row": "C1619",
+   "screen": "story_hints.the_library",
+   "verdict": "PASS",
+   "line": "The librarian's at the desk weekdays 8am to 4pm, and Saturday 10am to 4pm.",
+   "why": "A storyline with steps: the last passed step shows after \"Hint:\"."
+  },
+  {
+   "row": "C215",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "(all hint entries)",
+   "why": "Its end is CoT's \"for now\" line, never \"complete\"."
+  },
+  {
+   "row": "C215",
+   "screen": "story_hints.classes",
+   "verdict": "PASS",
+   "line": "You know someone in psychology now. Statistics is Monday and Wednesday at 11am, English Tuesday and Thursday at 9am, both in the Lecture Hall.",
+   "why": "Its end is CoT's \"for now\" line, never \"complete\"."
+  },
+  {
+   "row": "C215",
+   "screen": "story_hints.lunch",
+   "verdict": "PASS",
+   "line": "The cafeteria serves lunch weekdays, 11am to 2pm. The woman at the counter is in weekdays 8am to 4pm.",
+   "why": "Its end is CoT's \"for now\" line, never \"complete\"."
+  },
+  {
+   "row": "C215",
+   "screen": "story_hints.staying_in_shape",
+   "verdict": "PASS",
+   "line": "Marco trains people at the gym weekdays 6 to 10am and 5 to 9pm, and Saturday 8am to 2pm.",
+   "why": "Its end is CoT's \"for now\" line, never \"complete\"."
+  },
+  {
+   "row": "C215",
+   "screen": "story_hints.the_cafe_job",
+   "verdict": "PASS",
+   "line": "Work your first shift at the Café: a weekday between 10am and 3pm, while Tom and the barista are both in.",
+   "why": "Its end is CoT's \"for now\" line, never \"complete\"."
+  },
+  {
+   "row": "C215",
+   "screen": "story_hints.the_corner_shop",
+   "verdict": "PASS",
+   "line": "The owner works the till Monday to Saturday, 7am to 3pm; the night clerk has it after 3pm and all day Sunday.",
+   "why": "Its end is CoT's \"for now\" line, never \"complete\"."
+  },
+  {
+   "row": "C215",
+   "screen": "story_hints.the_library",
+   "verdict": "PASS",
+   "line": "The librarian's at the desk weekdays 8am to 4pm, and Saturday 10am to 4pm.",
+   "why": "Its end is CoT's \"for now\" line, never \"complete\"."
+  },
+  {
+   "row": "C217",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "(all hint entries)",
+   "why": "Each step passes on the flag its own pointed-at meeting sets on its way out. Except story_hints.staying_in_shape, answered on its own screen."
+  },
+  {
+   "row": "C217",
+   "screen": "story_hints.classes",
+   "verdict": "PASS",
+   "line": "You know someone in psychology now. Statistics is Monday and Wednesday at 11am, English Tuesday and Thursday at 9am, both in the Lecture Hall.",
+   "why": "Each step passes on the flag its own pointed-at meeting sets on its way out."
+  },
+  {
+   "row": "C217",
+   "screen": "story_hints.lunch",
+   "verdict": "PASS",
+   "line": "The cafeteria serves lunch weekdays, 11am to 2pm. The woman at the counter is in weekdays 8am to 4pm.",
+   "why": "Each step passes on the flag its own pointed-at meeting sets on its way out."
+  },
+  {
+   "row": "C217",
+   "screen": "story_hints.staying_in_shape",
+   "verdict": "FAIL",
+   "line": "In your leggings and sports top, go for a run in the park, 6am to 9pm, or work out at the gym, 6am to 10pm.",
+   "why": "Step 1 names a run or any gym hour, but it passes only on met_marco; the run it names sets ran_once, not met_marco, and a gym visit outside Marco's hours sets nothing, so the step stays after she did what it said.",
+   "cause": "P46r4-c1"
+  },
+  {
+   "row": "C217",
+   "screen": "story_hints.the_cafe_job",
+   "verdict": "PASS",
+   "line": "Work your first shift at the Café: a weekday between 10am and 3pm, while Tom and the barista are both in.",
+   "why": "Each step passes on the flag its own pointed-at meeting sets on its way out."
+  },
+  {
+   "row": "C217",
+   "screen": "story_hints.the_corner_shop",
+   "verdict": "PASS",
+   "line": "The owner works the till Monday to Saturday, 7am to 3pm; the night clerk has it after 3pm and all day Sunday.",
+   "why": "The one end step reads met_frank and met_danny, so either order of meeting ends it (AND list, hintState stops at the first failing step)."
+  },
+  {
+   "row": "C217",
+   "screen": "story_hints.the_library",
+   "verdict": "PASS",
+   "line": "The librarian's at the desk weekdays 8am to 4pm, and Saturday 10am to 4pm.",
+   "why": "Each step passes on the flag its own pointed-at meeting sets on its way out."
+  },
+  {
+   "row": "C2176",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "met_frank, met_danny, met_holt, met_rosa, met_nadia, met_marco",
+   "why": "Every flag a hint step reads has a setter (shop_meet_frank, shop_meet_danny, library_meet_holt, cafeteria_meet_rosa, psych_first, gym_meet_marco…); check.py GREEN."
+  },
+  {
+   "row": "C2176",
+   "screen": "story_hints.classes",
+   "verdict": "PASS",
+   "line": "You know someone in psychology now. Statistics is Monday and Wednesday at 11am, English Tuesday and Thursday at 9am, both in the Lecture Hall.",
+   "why": "Its step flags all have a setter; check.py GREEN."
+  },
+  {
+   "row": "C2176",
+   "screen": "story_hints.lunch",
+   "verdict": "PASS",
+   "line": "The cafeteria serves lunch weekdays, 11am to 2pm. The woman at the counter is in weekdays 8am to 4pm.",
+   "why": "Its step flags all have a setter; check.py GREEN."
+  },
+  {
+   "row": "C2176",
+   "screen": "story_hints.staying_in_shape",
+   "verdict": "PASS",
+   "line": "Marco trains people at the gym weekdays 6 to 10am and 5 to 9pm, and Saturday 8am to 2pm.",
+   "why": "Its step flags all have a setter; check.py GREEN."
+  },
+  {
+   "row": "C2176",
+   "screen": "story_hints.the_cafe_job",
+   "verdict": "PASS",
+   "line": "Work your first shift at the Café: a weekday between 10am and 3pm, while Tom and the barista are both in.",
+   "why": "Its step flags all have a setter; check.py GREEN."
+  },
+  {
+   "row": "C2176",
+   "screen": "story_hints.the_corner_shop",
+   "verdict": "PASS",
+   "line": "The owner works the till Monday to Saturday, 7am to 3pm; the night clerk has it after 3pm and all day Sunday.",
+   "why": "Its step flags all have a setter; check.py GREEN."
+  },
+  {
+   "row": "C2176",
+   "screen": "story_hints.the_library",
+   "verdict": "PASS",
+   "line": "The librarian's at the desk weekdays 8am to 4pm, and Saturday 10am to 4pm.",
+   "why": "Its step flags all have a setter; check.py GREEN."
+  },
+  {
+   "row": "C34",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "(all hint entries)",
+   "why": "No date; only weekly hours."
+  },
+  {
+   "row": "C34",
+   "screen": "story_hints.classes",
+   "verdict": "PASS",
+   "line": "You know someone in psychology now. Statistics is Monday and Wednesday at 11am, English Tuesday and Thursday at 9am, both in the Lecture Hall.",
+   "why": "No date; only weekly hours."
+  },
+  {
+   "row": "C34",
+   "screen": "story_hints.lunch",
+   "verdict": "PASS",
+   "line": "The cafeteria serves lunch weekdays, 11am to 2pm. The woman at the counter is in weekdays 8am to 4pm.",
+   "why": "No date; only weekly hours."
+  },
+  {
+   "row": "C34",
+   "screen": "story_hints.staying_in_shape",
+   "verdict": "PASS",
+   "line": "Marco trains people at the gym weekdays 6 to 10am and 5 to 9pm, and Saturday 8am to 2pm.",
+   "why": "No date; only weekly hours."
+  },
+  {
+   "row": "C34",
+   "screen": "story_hints.the_cafe_job",
+   "verdict": "PASS",
+   "line": "Work your first shift at the Café: a weekday between 10am and 3pm, while Tom and the barista are both in.",
+   "why": "No date; only weekly hours."
+  },
+  {
+   "row": "C34",
+   "screen": "story_hints.the_corner_shop",
+   "verdict": "PASS",
+   "line": "The owner works the till Monday to Saturday, 7am to 3pm; the night clerk has it after 3pm and all day Sunday.",
+   "why": "No date; only weekly hours."
+  },
+  {
+   "row": "C34",
+   "screen": "story_hints.the_library",
+   "verdict": "PASS",
+   "line": "The librarian's at the desk weekdays 8am to 4pm, and Saturday 10am to 4pm.",
+   "why": "No date; only weekly hours."
+  },
+  {
+   "row": "C35",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "(all hint entries)",
+   "why": "The end step points at what continues (\"recurring events\"), with the person's own scenes there."
+  },
+  {
+   "row": "C35",
+   "screen": "story_hints.classes",
+   "verdict": "PASS",
+   "line": "You know someone in psychology now. Statistics is Monday and Wednesday at 11am, English Tuesday and Thursday at 9am, both in the Lecture Hall.",
+   "why": "The end step points at what continues (\"recurring events\"), with the person's own scenes there."
+  },
+  {
+   "row": "C35",
+   "screen": "story_hints.lunch",
+   "verdict": "PASS",
+   "line": "The cafeteria serves lunch weekdays, 11am to 2pm. The woman at the counter is in weekdays 8am to 4pm.",
+   "why": "The end step points at what continues (\"recurring events\"), with the person's own scenes there."
+  },
+  {
+   "row": "C35",
+   "screen": "story_hints.staying_in_shape",
+   "verdict": "PASS",
+   "line": "Marco trains people at the gym weekdays 6 to 10am and 5 to 9pm, and Saturday 8am to 2pm.",
+   "why": "The end step points at what continues (\"recurring events\"), with the person's own scenes there."
+  },
+  {
+   "row": "C35",
+   "screen": "story_hints.the_cafe_job",
+   "verdict": "PASS",
+   "line": "Work your first shift at the Café: a weekday between 10am and 3pm, while Tom and the barista are both in.",
+   "why": "The end step points at what continues (\"recurring events\"), with the person's own scenes there."
+  },
+  {
+   "row": "C35",
+   "screen": "story_hints.the_corner_shop",
+   "verdict": "PASS",
+   "line": "The owner works the till Monday to Saturday, 7am to 3pm; the night clerk has it after 3pm and all day Sunday.",
+   "why": "The end step points at what continues (\"recurring events\"), with the person's own scenes there."
+  },
+  {
+   "row": "C35",
+   "screen": "story_hints.the_library",
+   "verdict": "PASS",
+   "line": "The librarian's at the desk weekdays 8am to 4pm, and Saturday 10am to 4pm.",
+   "why": "The end step points at what continues (\"recurring events\"), with the person's own scenes there."
+  },
+  {
+   "row": "C36",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "(all hint entries)",
+   "why": "Each step's when is the met flag of the meeting it points at."
+  },
+  {
+   "row": "C36",
+   "screen": "story_hints.classes",
+   "verdict": "PASS",
+   "line": "You know someone in psychology now. Statistics is Monday and Wednesday at 11am, English Tuesday and Thursday at 9am, both in the Lecture Hall.",
+   "why": "Each step's when is the met flag of the meeting it points at."
+  },
+  {
+   "row": "C36",
+   "screen": "story_hints.lunch",
+   "verdict": "PASS",
+   "line": "The cafeteria serves lunch weekdays, 11am to 2pm. The woman at the counter is in weekdays 8am to 4pm.",
+   "why": "Each step's when is the met flag of the meeting it points at."
+  },
+  {
+   "row": "C36",
+   "screen": "story_hints.staying_in_shape",
+   "verdict": "PASS",
+   "line": "Marco trains people at the gym weekdays 6 to 10am and 5 to 9pm, and Saturday 8am to 2pm.",
+   "why": "Each step's when is the met flag of the meeting it points at."
+  },
+  {
+   "row": "C36",
+   "screen": "story_hints.the_cafe_job",
+   "verdict": "PASS",
+   "line": "Work your first shift at the Café: a weekday between 10am and 3pm, while Tom and the barista are both in.",
+   "why": "Each step's when is the met flag of the meeting it points at."
+  },
+  {
+   "row": "C36",
+   "screen": "story_hints.the_corner_shop",
+   "verdict": "PASS",
+   "line": "The owner works the till Monday to Saturday, 7am to 3pm; the night clerk has it after 3pm and all day Sunday.",
+   "why": "Each step's when is the met flag of the meeting it points at."
+  },
+  {
+   "row": "C36",
+   "screen": "story_hints.the_library",
+   "verdict": "PASS",
+   "line": "The librarian's at the desk weekdays 8am to 4pm, and Saturday 10am to 4pm.",
+   "why": "Each step's when is the met flag of the meeting it points at."
+  },
+  {
+   "row": "C37",
+   "screen": "*",
+   "verdict": "N/A",
+   "line": "(all hint entries)",
+   "why": "Every storyline ends inside release 1."
+  },
+  {
+   "row": "C37",
+   "screen": "story_hints.classes",
+   "verdict": "N/A",
+   "line": "You know someone in psychology now. Statistics is Monday and Wednesday at 11am, English Tuesday and Thursday at 9am, both in the Lecture Hall.",
+   "why": "Every storyline ends inside release 1."
+  },
+  {
+   "row": "C37",
+   "screen": "story_hints.lunch",
+   "verdict": "N/A",
+   "line": "The cafeteria serves lunch weekdays, 11am to 2pm. The woman at the counter is in weekdays 8am to 4pm.",
+   "why": "Every storyline ends inside release 1."
+  },
+  {
+   "row": "C37",
+   "screen": "story_hints.staying_in_shape",
+   "verdict": "N/A",
+   "line": "Marco trains people at the gym weekdays 6 to 10am and 5 to 9pm, and Saturday 8am to 2pm.",
+   "why": "Every storyline ends inside release 1."
+  },
+  {
+   "row": "C37",
+   "screen": "story_hints.the_cafe_job",
+   "verdict": "N/A",
+   "line": "Work your first shift at the Café: a weekday between 10am and 3pm, while Tom and the barista are both in.",
+   "why": "Every storyline ends inside release 1."
+  },
+  {
+   "row": "C37",
+   "screen": "story_hints.the_corner_shop",
+   "verdict": "N/A",
+   "line": "The owner works the till Monday to Saturday, 7am to 3pm; the night clerk has it after 3pm and all day Sunday.",
+   "why": "Every storyline ends inside release 1."
+  },
+  {
+   "row": "C37",
+   "screen": "story_hints.the_library",
+   "verdict": "N/A",
+   "line": "The librarian's at the desk weekdays 8am to 4pm, and Saturday 10am to 4pm.",
+   "why": "Every storyline ends inside release 1."
+  },
+  {
+   "row": "C422",
+   "screen": "npcs.npc_ryan.stranger_name",
+   "verdict": "PASS",
+   "line": "guy with a crooked grin",
+   "why": "A plain description under People Here."
+  },
+  {
+   "row": "C422",
+   "screen": "story_hints.classes",
+   "verdict": "PASS",
+   "line": "You know someone in psychology now. Statistics is Monday and Wednesday at 11am, English Tuesday and Thursday at 9am, both in the Lecture Hall.",
+   "why": "Says plainly where to go and when."
+  },
+  {
+   "row": "C422",
+   "screen": "story_hints.lunch",
+   "verdict": "PASS",
+   "line": "The cafeteria serves lunch weekdays, 11am to 2pm. The woman at the counter is in weekdays 8am to 4pm.",
+   "why": "Says plainly where to go and when."
+  },
+  {
+   "row": "C422",
+   "screen": "story_hints.staying_in_shape",
+   "verdict": "PASS",
+   "line": "Marco trains people at the gym weekdays 6 to 10am and 5 to 9pm, and Saturday 8am to 2pm.",
+   "why": "Says plainly where to go and when."
+  },
+  {
+   "row": "C422",
+   "screen": "story_hints.the_cafe_job",
+   "verdict": "PASS",
+   "line": "Work your first shift at the Café: a weekday between 10am and 3pm, while Tom and the barista are both in.",
+   "why": "Says plainly where to go and when."
+  },
+  {
+   "row": "C422",
+   "screen": "story_hints.the_corner_shop",
+   "verdict": "PASS",
+   "line": "The owner works the till Monday to Saturday, 7am to 3pm; the night clerk has it after 3pm and all day Sunday.",
+   "why": "Says plainly where to go and when."
+  },
+  {
+   "row": "C422",
+   "screen": "story_hints.the_library",
+   "verdict": "PASS",
+   "line": "The librarian's at the desk weekdays 8am to 4pm, and Saturday 10am to 4pm.",
+   "why": "Says plainly where to go and when."
+  },
+  {
+   "row": "C430",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "(all hint entries)",
+   "why": "The step names the place and the hours of the next meeting or act. Except story_hints.staying_in_shape, answered on its own screen."
+  },
+  {
+   "row": "C430",
+   "screen": "story_hints.classes",
+   "verdict": "PASS",
+   "line": "You know someone in psychology now. Statistics is Monday and Wednesday at 11am, English Tuesday and Thursday at 9am, both in the Lecture Hall.",
+   "why": "After psychology it names the two other classes, their days, hours and hall (people.md 12: the window is named)."
+  },
+  {
+   "row": "C430",
+   "screen": "story_hints.lunch",
+   "verdict": "PASS",
+   "line": "The cafeteria serves lunch weekdays, 11am to 2pm. The woman at the counter is in weekdays 8am to 4pm.",
+   "why": "The step names the place and the hours of the next meeting or act."
+  },
+  {
+   "row": "C430",
+   "screen": "story_hints.staying_in_shape",
+   "verdict": "FAIL",
+   "line": "Marco trains people at the gym weekdays 6 to 10am and 5 to 9pm, and Saturday 8am to 2pm.",
+   "why": "The next step is ran_once (a run in the park), and this step never names the run; she can meet Marco, never run, and never be told what ends it.",
+   "cause": "P46r4-c1"
+  },
+  {
+   "row": "C430",
+   "screen": "story_hints.the_cafe_job",
+   "verdict": "PASS",
+   "line": "Work your first shift at the Café: a weekday between 10am and 3pm, while Tom and the barista are both in.",
+   "why": "The step names the place and the hours of the next meeting or act."
+  },
+  {
+   "row": "C430",
+   "screen": "story_hints.the_corner_shop",
+   "verdict": "PASS",
+   "line": "The owner works the till Monday to Saturday, 7am to 3pm; the night clerk has it after 3pm and all day Sunday.",
+   "why": "The step names the place and the hours of the next meeting or act."
+  },
+  {
+   "row": "C430",
+   "screen": "story_hints.the_library",
+   "verdict": "PASS",
+   "line": "The librarian's at the desk weekdays 8am to 4pm, and Saturday 10am to 4pm.",
+   "why": "The step names the place and the hours of the next meeting or act."
+  },
+  {
+   "row": "C433",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "(all hint entries)",
+   "why": "The end is CoT's \"for now!\""
+  },
+  {
+   "row": "C433",
+   "screen": "story_hints.classes",
+   "verdict": "PASS",
+   "line": "You know someone in psychology now. Statistics is Monday and Wednesday at 11am, English Tuesday and Thursday at 9am, both in the Lecture Hall.",
+   "why": "The end is CoT's \"for now!\""
+  },
+  {
+   "row": "C433",
+   "screen": "story_hints.lunch",
+   "verdict": "PASS",
+   "line": "The cafeteria serves lunch weekdays, 11am to 2pm. The woman at the counter is in weekdays 8am to 4pm.",
+   "why": "The end is CoT's \"for now!\""
+  },
+  {
+   "row": "C433",
+   "screen": "story_hints.staying_in_shape",
+   "verdict": "PASS",
+   "line": "Marco trains people at the gym weekdays 6 to 10am and 5 to 9pm, and Saturday 8am to 2pm.",
+   "why": "The end is CoT's \"for now!\""
+  },
+  {
+   "row": "C433",
+   "screen": "story_hints.the_cafe_job",
+   "verdict": "PASS",
+   "line": "Work your first shift at the Café: a weekday between 10am and 3pm, while Tom and the barista are both in.",
+   "why": "The end is CoT's \"for now!\""
+  },
+  {
+   "row": "C433",
+   "screen": "story_hints.the_corner_shop",
+   "verdict": "PASS",
+   "line": "The owner works the till Monday to Saturday, 7am to 3pm; the night clerk has it after 3pm and all day Sunday.",
+   "why": "The end is CoT's \"for now!\""
+  },
+  {
+   "row": "C433",
+   "screen": "story_hints.the_library",
+   "verdict": "PASS",
+   "line": "The librarian's at the desk weekdays 8am to 4pm, and Saturday 10am to 4pm.",
+   "why": "The end is CoT's \"for now!\""
+  },
+  {
+   "row": "C442",
+   "screen": "npcs.npc_ryan.stranger_name",
+   "verdict": "PASS",
+   "line": "guy with a crooked grin",
+   "why": "Says what she sees: a body feature."
+  },
+  {
+   "row": "C442",
+   "screen": "story_hints.classes",
+   "verdict": "PASS",
+   "line": "You know someone in psychology now. Statistics is Monday and Wednesday at 11am, English Tuesday and Thursday at 9am, both in the Lecture Hall.",
+   "why": "States the place, the person by role and the hours outright."
+  },
+  {
+   "row": "C442",
+   "screen": "story_hints.lunch",
+   "verdict": "PASS",
+   "line": "The cafeteria serves lunch weekdays, 11am to 2pm. The woman at the counter is in weekdays 8am to 4pm.",
+   "why": "States the place, the person by role and the hours outright."
+  },
+  {
+   "row": "C442",
+   "screen": "story_hints.staying_in_shape",
+   "verdict": "PASS",
+   "line": "Marco trains people at the gym weekdays 6 to 10am and 5 to 9pm, and Saturday 8am to 2pm.",
+   "why": "States the place, the person by role and the hours outright."
+  },
+  {
+   "row": "C442",
+   "screen": "story_hints.the_cafe_job",
+   "verdict": "PASS",
+   "line": "Work your first shift at the Café: a weekday between 10am and 3pm, while Tom and the barista are both in.",
+   "why": "States the place, the person by role and the hours outright."
+  },
+  {
+   "row": "C442",
+   "screen": "story_hints.the_corner_shop",
+   "verdict": "PASS",
+   "line": "The owner works the till Monday to Saturday, 7am to 3pm; the night clerk has it after 3pm and all day Sunday.",
+   "why": "States the place, the person by role and the hours outright."
+  },
+  {
+   "row": "C442",
+   "screen": "story_hints.the_library",
+   "verdict": "PASS",
+   "line": "The librarian's at the desk weekdays 8am to 4pm, and Saturday 10am to 4pm.",
+   "why": "States the place, the person by role and the hours outright."
+  },
+  {
+   "row": "C447",
+   "screen": "npcs.npc_ryan.stranger_name",
+   "verdict": "N/A",
+   "line": "guy with a crooked grin",
+   "why": "No speech."
+  },
+  {
+   "row": "C451",
+   "screen": "npcs.npc_ryan.stranger_name",
+   "verdict": "PASS",
+   "line": "guy with a crooked grin",
+   "why": "A concrete body feature."
+  },
+  {
+   "row": "C451",
+   "screen": "story_hints.classes",
+   "verdict": "PASS",
+   "line": "You know someone in psychology now. Statistics is Monday and Wednesday at 11am, English Tuesday and Thursday at 9am, both in the Lecture Hall.",
+   "why": "Places, days and hours are concrete."
+  },
+  {
+   "row": "C451",
+   "screen": "story_hints.lunch",
+   "verdict": "PASS",
+   "line": "The cafeteria serves lunch weekdays, 11am to 2pm. The woman at the counter is in weekdays 8am to 4pm.",
+   "why": "Places, days and hours are concrete."
+  },
+  {
+   "row": "C451",
+   "screen": "story_hints.staying_in_shape",
+   "verdict": "PASS",
+   "line": "Marco trains people at the gym weekdays 6 to 10am and 5 to 9pm, and Saturday 8am to 2pm.",
+   "why": "Places, days and hours are concrete."
+  },
+  {
+   "row": "C451",
+   "screen": "story_hints.the_cafe_job",
+   "verdict": "PASS",
+   "line": "Work your first shift at the Café: a weekday between 10am and 3pm, while Tom and the barista are both in.",
+   "why": "Places, days and hours are concrete."
+  },
+  {
+   "row": "C451",
+   "screen": "story_hints.the_corner_shop",
+   "verdict": "PASS",
+   "line": "The owner works the till Monday to Saturday, 7am to 3pm; the night clerk has it after 3pm and all day Sunday.",
+   "why": "Places, days and hours are concrete."
+  },
+  {
+   "row": "C451",
+   "screen": "story_hints.the_library",
+   "verdict": "PASS",
+   "line": "The librarian's at the desk weekdays 8am to 4pm, and Saturday 10am to 4pm.",
+   "why": "Places, days and hours are concrete."
+  },
+  {
+   "row": "C460",
+   "screen": "npcs.npc_ryan.stranger_name",
+   "verdict": "PASS",
+   "line": "guy with a crooked grin",
+   "why": "A permanent body feature, shown only before met_ryan (set leaving opening.bath); no line shows him otherwise. Not in his meeting text, but nothing contradicts it."
+  },
+  {
+   "row": "C460",
+   "screen": "story_hints.classes",
+   "verdict": "PASS",
+   "line": "You know someone in psychology now. Statistics is Monday and Wednesday at 11am, English Tuesday and Thursday at 9am, both in the Lecture Hall.",
+   "why": "met_nadia is set with met_hale on psych_first; stats_first is Mon/Wed 11:00-11:30, english_first Tue/Thu 09:00-09:30 in campus_lecture_hall."
+  },
+  {
+   "row": "C460",
+   "screen": "story_hints.lunch",
+   "verdict": "PASS",
+   "line": "The cafeteria serves lunch weekdays, 11am to 2pm. The woman at the counter is in weekdays 8am to 4pm.",
+   "why": "body_lunch weekdays 11:00-14:00; Rosa at campus_cafeteria weekdays 08-16."
+  },
+  {
+   "row": "C460",
+   "screen": "story_hints.staying_in_shape",
+   "verdict": "PASS",
+   "line": "Marco trains people at the gym weekdays 6 to 10am and 5 to 9pm, and Saturday 8am to 2pm.",
+   "why": "Marco at hood_gym weekdays 06-10 and 17-21, Saturday 08-14; park 06-21, gym 06-22; body_run and body_workout need leggings and sports_top."
+  },
+  {
+   "row": "C460",
+   "screen": "story_hints.the_cafe_job",
+   "verdict": "PASS",
+   "line": "Work your first shift at the Café: a weekday between 10am and 3pm, while Tom and the barista are both in.",
+   "why": "cafe_first_shift is weekdays 10:00-14:56; Tom is at near_cafe 10-21, Chris 07-15 on weekdays."
+  },
+  {
+   "row": "C460",
+   "screen": "story_hints.the_corner_shop",
+   "verdict": "PASS",
+   "line": "The owner works the till Monday to Saturday, 7am to 3pm; the night clerk has it after 3pm and all day Sunday.",
+   "why": "hood_shop 07:00-23:00; Frank Mon-Sat 07-15; Danny Mon-Sat 15-23 and Sunday 07-23."
+  },
+  {
+   "row": "C460",
+   "screen": "story_hints.the_library",
+   "verdict": "PASS",
+   "line": "The librarian's at the desk weekdays 8am to 4pm, and Saturday 10am to 4pm.",
+   "why": "campus_library 08:00-22:00 every day; Holt weekdays 08-16, Saturday 10-16."
+  },
+  {
+   "row": "C461",
+   "screen": "npcs.npc_ryan.stranger_name",
+   "verdict": "PASS",
+   "line": "guy with a crooked grin",
+   "why": "Texture that can't clash: no screen describes his mouth or smile."
+  },
+  {
+   "row": "C461",
+   "screen": "story_hints.classes",
+   "verdict": "PASS",
+   "line": "You know someone in psychology now. Statistics is Monday and Wednesday at 11am, English Tuesday and Thursday at 9am, both in the Lecture Hall.",
+   "why": "No texture that can clash."
+  },
+  {
+   "row": "C461",
+   "screen": "story_hints.lunch",
+   "verdict": "PASS",
+   "line": "The cafeteria serves lunch weekdays, 11am to 2pm. The woman at the counter is in weekdays 8am to 4pm.",
+   "why": "No texture that can clash."
+  },
+  {
+   "row": "C461",
+   "screen": "story_hints.staying_in_shape",
+   "verdict": "PASS",
+   "line": "Marco trains people at the gym weekdays 6 to 10am and 5 to 9pm, and Saturday 8am to 2pm.",
+   "why": "No texture that can clash."
+  },
+  {
+   "row": "C461",
+   "screen": "story_hints.the_cafe_job",
+   "verdict": "PASS",
+   "line": "Work your first shift at the Café: a weekday between 10am and 3pm, while Tom and the barista are both in.",
+   "why": "No texture that can clash."
+  },
+  {
+   "row": "C461",
+   "screen": "story_hints.the_corner_shop",
+   "verdict": "PASS",
+   "line": "The owner works the till Monday to Saturday, 7am to 3pm; the night clerk has it after 3pm and all day Sunday.",
+   "why": "No texture that can clash."
+  },
+  {
+   "row": "C461",
+   "screen": "story_hints.the_library",
+   "verdict": "PASS",
+   "line": "The librarian's at the desk weekdays 8am to 4pm, and Saturday 10am to 4pm.",
+   "why": "No texture that can clash."
+  },
+  {
+   "row": "C519",
+   "screen": "npcs.npc_ryan.stranger_name",
+   "verdict": "PASS",
+   "line": "guy with a crooked grin",
+   "why": "Five words."
+  },
+  {
+   "row": "C519",
+   "screen": "story_hints.classes",
+   "verdict": "PASS",
+   "line": "You know someone in psychology now. Statistics is Monday and Wednesday at 11am, English Tuesday and Thursday at 9am, both in the Lecture Hall.",
+   "why": "One job, under 40 words."
+  },
+  {
+   "row": "C519",
+   "screen": "story_hints.lunch",
+   "verdict": "PASS",
+   "line": "The cafeteria serves lunch weekdays, 11am to 2pm. The woman at the counter is in weekdays 8am to 4pm.",
+   "why": "One job, under 40 words."
+  },
+  {
+   "row": "C519",
+   "screen": "story_hints.staying_in_shape",
+   "verdict": "PASS",
+   "line": "Marco trains people at the gym weekdays 6 to 10am and 5 to 9pm, and Saturday 8am to 2pm.",
+   "why": "One job, under 40 words."
+  },
+  {
+   "row": "C519",
+   "screen": "story_hints.the_cafe_job",
+   "verdict": "PASS",
+   "line": "Work your first shift at the Café: a weekday between 10am and 3pm, while Tom and the barista are both in.",
+   "why": "One job, under 40 words."
+  },
+  {
+   "row": "C519",
+   "screen": "story_hints.the_corner_shop",
+   "verdict": "PASS",
+   "line": "The owner works the till Monday to Saturday, 7am to 3pm; the night clerk has it after 3pm and all day Sunday.",
+   "why": "One job, under 40 words."
+  },
+  {
+   "row": "C519",
+   "screen": "story_hints.the_library",
+   "verdict": "PASS",
+   "line": "The librarian's at the desk weekdays 8am to 4pm, and Saturday 10am to 4pm.",
+   "why": "One job, under 40 words."
+  },
+  {
+   "row": "C593",
+   "screen": "npcs.npc_ryan.stranger_name",
+   "verdict": "N/A",
+   "line": "guy with a crooked grin",
+   "why": "No address."
+  },
+  {
+   "row": "C596",
+   "screen": "npcs.npc_ryan.stranger_name",
+   "verdict": "N/A",
+   "line": "guy with a crooked grin",
+   "why": "Not a talk screen."
+  },
+  {
+   "row": "C598",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "(all hint entries)",
+   "why": "Names only met people; others by role."
+  },
+  {
+   "row": "C598",
+   "screen": "story_hints.classes",
+   "verdict": "PASS",
+   "line": "You know someone in psychology now. Statistics is Monday and Wednesday at 11am, English Tuesday and Thursday at 9am, both in the Lecture Hall.",
+   "why": "\"someone in psychology\": Nadia is met (met_nadia) but not named; the professors are unnamed."
+  },
+  {
+   "row": "C598",
+   "screen": "story_hints.lunch",
+   "verdict": "PASS",
+   "line": "The cafeteria serves lunch weekdays, 11am to 2pm. The woman at the counter is in weekdays 8am to 4pm.",
+   "why": "Names only met people; others by role."
+  },
+  {
+   "row": "C598",
+   "screen": "story_hints.staying_in_shape",
+   "verdict": "PASS",
+   "line": "Marco trains people at the gym weekdays 6 to 10am and 5 to 9pm, and Saturday 8am to 2pm.",
+   "why": "Names only met people; others by role."
+  },
+  {
+   "row": "C598",
+   "screen": "story_hints.the_cafe_job",
+   "verdict": "PASS",
+   "line": "Work your first shift at the Café: a weekday between 10am and 3pm, while Tom and the barista are both in.",
+   "why": "Tom is met (met_tom, set on the hire); Chris, unmet until the shift, is \"the barista\"."
+  },
+  {
+   "row": "C598",
+   "screen": "story_hints.the_corner_shop",
+   "verdict": "PASS",
+   "line": "The owner works the till Monday to Saturday, 7am to 3pm; the night clerk has it after 3pm and all day Sunday.",
+   "why": "Names only met people; others by role."
+  },
+  {
+   "row": "C598",
+   "screen": "story_hints.the_library",
+   "verdict": "PASS",
+   "line": "The librarian's at the desk weekdays 8am to 4pm, and Saturday 10am to 4pm.",
+   "why": "Names only met people; others by role."
+  },
+  {
+   "row": "C625",
+   "screen": "npcs.npc_ryan.stranger_name",
+   "verdict": "PASS",
+   "line": "guy with a crooked grin",
+   "why": "A description before the meeting; the engine shows his name once met_ryan holds."
+  },
+  {
+   "row": "C626",
+   "screen": "npcs.npc_ryan.stranger_name",
+   "verdict": "PASS",
+   "line": "guy with a crooked grin",
+   "why": "peopleShownName swaps to the name when his card's when (met_ryan) holds."
+  },
+  {
+   "row": "C630",
+   "screen": "npcs.npc_ryan.stranger_name",
+   "verdict": "PASS",
+   "line": "guy with a crooked grin",
+   "why": "After met_ryan the view shows name and role 'Step-brother'; the stranger name stands only before."
+  },
+  {
+   "row": "C632",
+   "screen": "npcs.npc_ryan.stranger_name",
+   "verdict": "N/A",
+   "line": "guy with a crooked grin",
+   "why": "Not a role label."
+  },
+  {
+   "row": "C644",
+   "screen": "npcs.npc_ryan.stranger_name",
+   "verdict": "N/A",
+   "line": "guy with a crooked grin",
+   "why": "A name field, no subject."
+  },
+  {
+   "row": "C889",
+   "screen": "*",
+   "verdict": "N/A",
+   "line": "(all hint entries)",
+   "why": "Not a label."
+  },
+  {
+   "row": "C889",
+   "screen": "story_hints.classes",
+   "verdict": "N/A",
+   "line": "You know someone in psychology now. Statistics is Monday and Wednesday at 11am, English Tuesday and Thursday at 9am, both in the Lecture Hall.",
+   "why": "Not a label."
+  },
+  {
+   "row": "C889",
+   "screen": "story_hints.lunch",
+   "verdict": "N/A",
+   "line": "The cafeteria serves lunch weekdays, 11am to 2pm. The woman at the counter is in weekdays 8am to 4pm.",
+   "why": "Not a label."
+  },
+  {
+   "row": "C889",
+   "screen": "story_hints.staying_in_shape",
+   "verdict": "N/A",
+   "line": "Marco trains people at the gym weekdays 6 to 10am and 5 to 9pm, and Saturday 8am to 2pm.",
+   "why": "Not a label."
+  },
+  {
+   "row": "C889",
+   "screen": "story_hints.the_cafe_job",
+   "verdict": "N/A",
+   "line": "Work your first shift at the Café: a weekday between 10am and 3pm, while Tom and the barista are both in.",
+   "why": "Not a label."
+  },
+  {
+   "row": "C889",
+   "screen": "story_hints.the_corner_shop",
+   "verdict": "N/A",
+   "line": "The owner works the till Monday to Saturday, 7am to 3pm; the night clerk has it after 3pm and all day Sunday.",
+   "why": "Not a label."
+  },
+  {
+   "row": "C889",
+   "screen": "story_hints.the_library",
+   "verdict": "N/A",
+   "line": "The librarian's at the desk weekdays 8am to 4pm, and Saturday 10am to 4pm.",
+   "why": "Not a label."
+  },
+  {
+   "row": "C892",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "(all hint entries)",
+   "why": "Hours are on the place and the person, not an act."
+  },
+  {
+   "row": "C892",
+   "screen": "story_hints.classes",
+   "verdict": "PASS",
+   "line": "You know someone in psychology now. Statistics is Monday and Wednesday at 11am, English Tuesday and Thursday at 9am, both in the Lecture Hall.",
+   "why": "Hours are on the place and the person, not an act."
+  },
+  {
+   "row": "C892",
+   "screen": "story_hints.lunch",
+   "verdict": "PASS",
+   "line": "The cafeteria serves lunch weekdays, 11am to 2pm. The woman at the counter is in weekdays 8am to 4pm.",
+   "why": "Hours are on the place and the person, not an act."
+  },
+  {
+   "row": "C892",
+   "screen": "story_hints.staying_in_shape",
+   "verdict": "PASS",
+   "line": "Marco trains people at the gym weekdays 6 to 10am and 5 to 9pm, and Saturday 8am to 2pm.",
+   "why": "Hours are on the place and the person, not an act."
+  },
+  {
+   "row": "C892",
+   "screen": "story_hints.the_cafe_job",
+   "verdict": "PASS",
+   "line": "Work your first shift at the Café: a weekday between 10am and 3pm, while Tom and the barista are both in.",
+   "why": "Hours are on the place and the person, not an act."
+  },
+  {
+   "row": "C892",
+   "screen": "story_hints.the_corner_shop",
+   "verdict": "PASS",
+   "line": "The owner works the till Monday to Saturday, 7am to 3pm; the night clerk has it after 3pm and all day Sunday.",
+   "why": "Hours are on the place and the person, not an act."
+  },
+  {
+   "row": "C892",
+   "screen": "story_hints.the_library",
+   "verdict": "PASS",
+   "line": "The librarian's at the desk weekdays 8am to 4pm, and Saturday 10am to 4pm.",
+   "why": "Hours are on the place and the person, not an act."
+  },
+  {
+   "row": "C897",
+   "screen": "*",
+   "verdict": "N/A",
+   "line": "(all hint entries)",
+   "why": "No travel cost on a hint."
+  },
+  {
+   "row": "C897",
+   "screen": "story_hints.classes",
+   "verdict": "N/A",
+   "line": "You know someone in psychology now. Statistics is Monday and Wednesday at 11am, English Tuesday and Thursday at 9am, both in the Lecture Hall.",
+   "why": "No travel cost on a hint."
+  },
+  {
+   "row": "C897",
+   "screen": "story_hints.lunch",
+   "verdict": "N/A",
+   "line": "The cafeteria serves lunch weekdays, 11am to 2pm. The woman at the counter is in weekdays 8am to 4pm.",
+   "why": "No travel cost on a hint."
+  },
+  {
+   "row": "C897",
+   "screen": "story_hints.staying_in_shape",
+   "verdict": "N/A",
+   "line": "Marco trains people at the gym weekdays 6 to 10am and 5 to 9pm, and Saturday 8am to 2pm.",
+   "why": "No travel cost on a hint."
+  },
+  {
+   "row": "C897",
+   "screen": "story_hints.the_cafe_job",
+   "verdict": "N/A",
+   "line": "Work your first shift at the Café: a weekday between 10am and 3pm, while Tom and the barista are both in.",
+   "why": "No travel cost on a hint."
+  },
+  {
+   "row": "C897",
+   "screen": "story_hints.the_corner_shop",
+   "verdict": "N/A",
+   "line": "The owner works the till Monday to Saturday, 7am to 3pm; the night clerk has it after 3pm and all day Sunday.",
+   "why": "No travel cost on a hint."
+  },
+  {
+   "row": "C897",
+   "screen": "story_hints.the_library",
+   "verdict": "N/A",
+   "line": "The librarian's at the desk weekdays 8am to 4pm, and Saturday 10am to 4pm.",
+   "why": "No travel cost on a hint."
+  },
+  {
+   "row": "C900",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "(all hint entries)",
+   "why": "Hours are given as a rule, never as 'now'."
+  },
+  {
+   "row": "C900",
+   "screen": "story_hints.classes",
+   "verdict": "PASS",
+   "line": "You know someone in psychology now. Statistics is Monday and Wednesday at 11am, English Tuesday and Thursday at 9am, both in the Lecture Hall.",
+   "why": "Hours are given as a rule, never as 'now'."
+  },
+  {
+   "row": "C900",
+   "screen": "story_hints.lunch",
+   "verdict": "PASS",
+   "line": "The cafeteria serves lunch weekdays, 11am to 2pm. The woman at the counter is in weekdays 8am to 4pm.",
+   "why": "Hours are given as a rule, never as 'now'."
+  },
+  {
+   "row": "C900",
+   "screen": "story_hints.staying_in_shape",
+   "verdict": "PASS",
+   "line": "Marco trains people at the gym weekdays 6 to 10am and 5 to 9pm, and Saturday 8am to 2pm.",
+   "why": "Hours are given as a rule, never as 'now'."
+  },
+  {
+   "row": "C900",
+   "screen": "story_hints.the_cafe_job",
+   "verdict": "PASS",
+   "line": "Work your first shift at the Café: a weekday between 10am and 3pm, while Tom and the barista are both in.",
+   "why": "Hours are given as a rule, never as 'now'."
+  },
+  {
+   "row": "C900",
+   "screen": "story_hints.the_corner_shop",
+   "verdict": "PASS",
+   "line": "The owner works the till Monday to Saturday, 7am to 3pm; the night clerk has it after 3pm and all day Sunday.",
+   "why": "Hours are given as a rule, never as 'now'."
+  },
+  {
+   "row": "C900",
+   "screen": "story_hints.the_library",
+   "verdict": "PASS",
+   "line": "The librarian's at the desk weekdays 8am to 4pm, and Saturday 10am to 4pm.",
+   "why": "Hours are given as a rule, never as 'now'."
+  },
+  {
+   "row": "C902",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "(all hint entries)",
+   "why": "True at the last minute of every window (end exclusive)."
+  },
+  {
+   "row": "C902",
+   "screen": "story_hints.classes",
+   "verdict": "PASS",
+   "line": "You know someone in psychology now. Statistics is Monday and Wednesday at 11am, English Tuesday and Thursday at 9am, both in the Lecture Hall.",
+   "why": "True at the last minute of every window (end exclusive)."
+  },
+  {
+   "row": "C902",
+   "screen": "story_hints.lunch",
+   "verdict": "PASS",
+   "line": "The cafeteria serves lunch weekdays, 11am to 2pm. The woman at the counter is in weekdays 8am to 4pm.",
+   "why": "True at the last minute of every window (end exclusive)."
+  },
+  {
+   "row": "C902",
+   "screen": "story_hints.staying_in_shape",
+   "verdict": "PASS",
+   "line": "Marco trains people at the gym weekdays 6 to 10am and 5 to 9pm, and Saturday 8am to 2pm.",
+   "why": "True at the last minute of every window (end exclusive)."
+  },
+  {
+   "row": "C902",
+   "screen": "story_hints.the_cafe_job",
+   "verdict": "PASS",
+   "line": "Work your first shift at the Café: a weekday between 10am and 3pm, while Tom and the barista are both in.",
+   "why": "True at the last minute of every window (end exclusive)."
+  },
+  {
+   "row": "C902",
+   "screen": "story_hints.the_corner_shop",
+   "verdict": "PASS",
+   "line": "The owner works the till Monday to Saturday, 7am to 3pm; the night clerk has it after 3pm and all day Sunday.",
+   "why": "True at the last minute of every window (end exclusive)."
+  },
+  {
+   "row": "C902",
+   "screen": "story_hints.the_library",
+   "verdict": "PASS",
+   "line": "The librarian's at the desk weekdays 8am to 4pm, and Saturday 10am to 4pm.",
+   "why": "True at the last minute of every window (end exclusive)."
+  },
+  {
+   "row": "C903",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "(all hint entries)",
+   "why": "Weekdays are named as a schedule, true on every visit; not a repeatable's beat."
+  },
+  {
+   "row": "C903",
+   "screen": "story_hints.classes",
+   "verdict": "PASS",
+   "line": "You know someone in psychology now. Statistics is Monday and Wednesday at 11am, English Tuesday and Thursday at 9am, both in the Lecture Hall.",
+   "why": "Weekdays are named as a schedule, true on every visit; not a repeatable's beat."
+  },
+  {
+   "row": "C903",
+   "screen": "story_hints.lunch",
+   "verdict": "PASS",
+   "line": "The cafeteria serves lunch weekdays, 11am to 2pm. The woman at the counter is in weekdays 8am to 4pm.",
+   "why": "Weekdays are named as a schedule, true on every visit; not a repeatable's beat."
+  },
+  {
+   "row": "C903",
+   "screen": "story_hints.staying_in_shape",
+   "verdict": "PASS",
+   "line": "Marco trains people at the gym weekdays 6 to 10am and 5 to 9pm, and Saturday 8am to 2pm.",
+   "why": "Weekdays are named as a schedule, true on every visit; not a repeatable's beat."
+  },
+  {
+   "row": "C903",
+   "screen": "story_hints.the_cafe_job",
+   "verdict": "PASS",
+   "line": "Work your first shift at the Café: a weekday between 10am and 3pm, while Tom and the barista are both in.",
+   "why": "Weekdays are named as a schedule, true on every visit; not a repeatable's beat."
+  },
+  {
+   "row": "C903",
+   "screen": "story_hints.the_corner_shop",
+   "verdict": "PASS",
+   "line": "The owner works the till Monday to Saturday, 7am to 3pm; the night clerk has it after 3pm and all day Sunday.",
+   "why": "Weekdays are named as a schedule, true on every visit; not a repeatable's beat."
+  },
+  {
+   "row": "C903",
+   "screen": "story_hints.the_library",
+   "verdict": "PASS",
+   "line": "The librarian's at the desk weekdays 8am to 4pm, and Saturday 10am to 4pm.",
+   "why": "Weekdays are named as a schedule, true on every visit; not a repeatable's beat."
+  },
+  {
+   "row": "C906",
+   "screen": "*",
+   "verdict": "N/A",
+   "line": "(all hint entries)",
+   "why": "No label."
+  },
+  {
+   "row": "C906",
+   "screen": "story_hints.classes",
+   "verdict": "N/A",
+   "line": "You know someone in psychology now. Statistics is Monday and Wednesday at 11am, English Tuesday and Thursday at 9am, both in the Lecture Hall.",
+   "why": "No label."
+  },
+  {
+   "row": "C906",
+   "screen": "story_hints.lunch",
+   "verdict": "N/A",
+   "line": "The cafeteria serves lunch weekdays, 11am to 2pm. The woman at the counter is in weekdays 8am to 4pm.",
+   "why": "No label."
+  },
+  {
+   "row": "C906",
+   "screen": "story_hints.staying_in_shape",
+   "verdict": "N/A",
+   "line": "Marco trains people at the gym weekdays 6 to 10am and 5 to 9pm, and Saturday 8am to 2pm.",
+   "why": "No label."
+  },
+  {
+   "row": "C906",
+   "screen": "story_hints.the_cafe_job",
+   "verdict": "N/A",
+   "line": "Work your first shift at the Café: a weekday between 10am and 3pm, while Tom and the barista are both in.",
+   "why": "No label."
+  },
+  {
+   "row": "C906",
+   "screen": "story_hints.the_corner_shop",
+   "verdict": "N/A",
+   "line": "The owner works the till Monday to Saturday, 7am to 3pm; the night clerk has it after 3pm and all day Sunday.",
+   "why": "No label."
+  },
+  {
+   "row": "C906",
+   "screen": "story_hints.the_library",
+   "verdict": "N/A",
+   "line": "The librarian's at the desk weekdays 8am to 4pm, and Saturday 10am to 4pm.",
+   "why": "No label."
+  },
+  {
+   "row": "C910",
+   "screen": "*",
+   "verdict": "N/A",
+   "line": "(all hint entries)",
+   "why": "Not a button or a reply."
+  },
+  {
+   "row": "C910",
+   "screen": "story_hints.classes",
+   "verdict": "N/A",
+   "line": "You know someone in psychology now. Statistics is Monday and Wednesday at 11am, English Tuesday and Thursday at 9am, both in the Lecture Hall.",
+   "why": "Not a button or a reply."
+  },
+  {
+   "row": "C910",
+   "screen": "story_hints.lunch",
+   "verdict": "N/A",
+   "line": "The cafeteria serves lunch weekdays, 11am to 2pm. The woman at the counter is in weekdays 8am to 4pm.",
+   "why": "Not a button or a reply."
+  },
+  {
+   "row": "C910",
+   "screen": "story_hints.staying_in_shape",
+   "verdict": "N/A",
+   "line": "Marco trains people at the gym weekdays 6 to 10am and 5 to 9pm, and Saturday 8am to 2pm.",
+   "why": "Not a button or a reply."
+  },
+  {
+   "row": "C910",
+   "screen": "story_hints.the_cafe_job",
+   "verdict": "N/A",
+   "line": "Work your first shift at the Café: a weekday between 10am and 3pm, while Tom and the barista are both in.",
+   "why": "Not a button or a reply."
+  },
+  {
+   "row": "C910",
+   "screen": "story_hints.the_corner_shop",
+   "verdict": "N/A",
+   "line": "The owner works the till Monday to Saturday, 7am to 3pm; the night clerk has it after 3pm and all day Sunday.",
+   "why": "Not a button or a reply."
+  },
+  {
+   "row": "C910",
+   "screen": "story_hints.the_library",
+   "verdict": "N/A",
+   "line": "The librarian's at the desk weekdays 8am to 4pm, and Saturday 10am to 4pm.",
+   "why": "Not a button or a reply."
+  },
+  {
+   "row": "C913",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "(all hint entries)",
+   "why": "Publishes the hours of the place and the person."
+  },
+  {
+   "row": "C913",
+   "screen": "story_hints.classes",
+   "verdict": "PASS",
+   "line": "You know someone in psychology now. Statistics is Monday and Wednesday at 11am, English Tuesday and Thursday at 9am, both in the Lecture Hall.",
+   "why": "Publishes the hours of the place and the person."
+  },
+  {
+   "row": "C913",
+   "screen": "story_hints.lunch",
+   "verdict": "PASS",
+   "line": "The cafeteria serves lunch weekdays, 11am to 2pm. The woman at the counter is in weekdays 8am to 4pm.",
+   "why": "Publishes the hours of the place and the person."
+  },
+  {
+   "row": "C913",
+   "screen": "story_hints.staying_in_shape",
+   "verdict": "PASS",
+   "line": "Marco trains people at the gym weekdays 6 to 10am and 5 to 9pm, and Saturday 8am to 2pm.",
+   "why": "Publishes the hours of the place and the person."
+  },
+  {
+   "row": "C913",
+   "screen": "story_hints.the_cafe_job",
+   "verdict": "PASS",
+   "line": "Work your first shift at the Café: a weekday between 10am and 3pm, while Tom and the barista are both in.",
+   "why": "Publishes the hours of the place and the person."
+  },
+  {
+   "row": "C913",
+   "screen": "story_hints.the_corner_shop",
+   "verdict": "PASS",
+   "line": "The owner works the till Monday to Saturday, 7am to 3pm; the night clerk has it after 3pm and all day Sunday.",
+   "why": "Publishes the hours of the place and the person."
+  },
+  {
+   "row": "C913",
+   "screen": "story_hints.the_library",
+   "verdict": "PASS",
+   "line": "The librarian's at the desk weekdays 8am to 4pm, and Saturday 10am to 4pm.",
+   "why": "Publishes the hours of the place and the person."
+  },
+  {
+   "row": "C914",
+   "screen": "*",
+   "verdict": "N/A",
+   "line": "(all hint entries)",
+   "why": "Not a row."
+  },
+  {
+   "row": "C914",
+   "screen": "story_hints.classes",
+   "verdict": "N/A",
+   "line": "You know someone in psychology now. Statistics is Monday and Wednesday at 11am, English Tuesday and Thursday at 9am, both in the Lecture Hall.",
+   "why": "Not a row."
+  },
+  {
+   "row": "C914",
+   "screen": "story_hints.lunch",
+   "verdict": "N/A",
+   "line": "The cafeteria serves lunch weekdays, 11am to 2pm. The woman at the counter is in weekdays 8am to 4pm.",
+   "why": "Not a row."
+  },
+  {
+   "row": "C914",
+   "screen": "story_hints.staying_in_shape",
+   "verdict": "N/A",
+   "line": "Marco trains people at the gym weekdays 6 to 10am and 5 to 9pm, and Saturday 8am to 2pm.",
+   "why": "Not a row."
+  },
+  {
+   "row": "C914",
+   "screen": "story_hints.the_cafe_job",
+   "verdict": "N/A",
+   "line": "Work your first shift at the Café: a weekday between 10am and 3pm, while Tom and the barista are both in.",
+   "why": "Not a row."
+  },
+  {
+   "row": "C914",
+   "screen": "story_hints.the_corner_shop",
+   "verdict": "N/A",
+   "line": "The owner works the till Monday to Saturday, 7am to 3pm; the night clerk has it after 3pm and all day Sunday.",
+   "why": "Not a row."
+  },
+  {
+   "row": "C914",
+   "screen": "story_hints.the_library",
+   "verdict": "N/A",
+   "line": "The librarian's at the desk weekdays 8am to 4pm, and Saturday 10am to 4pm.",
+   "why": "Not a row."
+  },
+  {
+   "row": "C916",
+   "screen": "*",
+   "verdict": "N/A",
+   "line": "(all hint entries)",
+   "why": "Not a row or event."
+  },
+  {
+   "row": "C916",
+   "screen": "story_hints.classes",
+   "verdict": "N/A",
+   "line": "You know someone in psychology now. Statistics is Monday and Wednesday at 11am, English Tuesday and Thursday at 9am, both in the Lecture Hall.",
+   "why": "Not a row or event."
+  },
+  {
+   "row": "C916",
+   "screen": "story_hints.lunch",
+   "verdict": "N/A",
+   "line": "The cafeteria serves lunch weekdays, 11am to 2pm. The woman at the counter is in weekdays 8am to 4pm.",
+   "why": "Not a row or event."
+  },
+  {
+   "row": "C916",
+   "screen": "story_hints.staying_in_shape",
+   "verdict": "N/A",
+   "line": "Marco trains people at the gym weekdays 6 to 10am and 5 to 9pm, and Saturday 8am to 2pm.",
+   "why": "Not a row or event."
+  },
+  {
+   "row": "C916",
+   "screen": "story_hints.the_cafe_job",
+   "verdict": "N/A",
+   "line": "Work your first shift at the Café: a weekday between 10am and 3pm, while Tom and the barista are both in.",
+   "why": "Not a row or event."
+  },
+  {
+   "row": "C916",
+   "screen": "story_hints.the_corner_shop",
+   "verdict": "N/A",
+   "line": "The owner works the till Monday to Saturday, 7am to 3pm; the night clerk has it after 3pm and all day Sunday.",
+   "why": "Not a row or event."
+  },
+  {
+   "row": "C916",
+   "screen": "story_hints.the_library",
+   "verdict": "N/A",
+   "line": "The librarian's at the desk weekdays 8am to 4pm, and Saturday 10am to 4pm.",
+   "why": "Not a row or event."
+  },
+  {
+   "row": "C920",
+   "screen": "*",
+   "verdict": "N/A",
+   "line": "(all hint entries)",
+   "why": "No hop."
+  },
+  {
+   "row": "C920",
+   "screen": "story_hints.classes",
+   "verdict": "N/A",
+   "line": "You know someone in psychology now. Statistics is Monday and Wednesday at 11am, English Tuesday and Thursday at 9am, both in the Lecture Hall.",
+   "why": "No hop."
+  },
+  {
+   "row": "C920",
+   "screen": "story_hints.lunch",
+   "verdict": "N/A",
+   "line": "The cafeteria serves lunch weekdays, 11am to 2pm. The woman at the counter is in weekdays 8am to 4pm.",
+   "why": "No hop."
+  },
+  {
+   "row": "C920",
+   "screen": "story_hints.staying_in_shape",
+   "verdict": "N/A",
+   "line": "Marco trains people at the gym weekdays 6 to 10am and 5 to 9pm, and Saturday 8am to 2pm.",
+   "why": "No hop."
+  },
+  {
+   "row": "C920",
+   "screen": "story_hints.the_cafe_job",
+   "verdict": "N/A",
+   "line": "Work your first shift at the Café: a weekday between 10am and 3pm, while Tom and the barista are both in.",
+   "why": "No hop."
+  },
+  {
+   "row": "C920",
+   "screen": "story_hints.the_corner_shop",
+   "verdict": "N/A",
+   "line": "The owner works the till Monday to Saturday, 7am to 3pm; the night clerk has it after 3pm and all day Sunday.",
+   "why": "No hop."
+  },
+  {
+   "row": "C920",
+   "screen": "story_hints.the_library",
+   "verdict": "N/A",
+   "line": "The librarian's at the desk weekdays 8am to 4pm, and Saturday 10am to 4pm.",
+   "why": "No hop."
+  },
+  {
+   "row": "C924",
+   "screen": "*",
+   "verdict": "N/A",
+   "line": "(all hint entries)",
+   "why": "No travel."
+  },
+  {
+   "row": "C924",
+   "screen": "story_hints.classes",
+   "verdict": "N/A",
+   "line": "You know someone in psychology now. Statistics is Monday and Wednesday at 11am, English Tuesday and Thursday at 9am, both in the Lecture Hall.",
+   "why": "No travel."
+  },
+  {
+   "row": "C924",
+   "screen": "story_hints.lunch",
+   "verdict": "N/A",
+   "line": "The cafeteria serves lunch weekdays, 11am to 2pm. The woman at the counter is in weekdays 8am to 4pm.",
+   "why": "No travel."
+  },
+  {
+   "row": "C924",
+   "screen": "story_hints.staying_in_shape",
+   "verdict": "N/A",
+   "line": "Marco trains people at the gym weekdays 6 to 10am and 5 to 9pm, and Saturday 8am to 2pm.",
+   "why": "No travel."
+  },
+  {
+   "row": "C924",
+   "screen": "story_hints.the_cafe_job",
+   "verdict": "N/A",
+   "line": "Work your first shift at the Café: a weekday between 10am and 3pm, while Tom and the barista are both in.",
+   "why": "No travel."
+  },
+  {
+   "row": "C924",
+   "screen": "story_hints.the_corner_shop",
+   "verdict": "N/A",
+   "line": "The owner works the till Monday to Saturday, 7am to 3pm; the night clerk has it after 3pm and all day Sunday.",
+   "why": "No travel."
+  },
+  {
+   "row": "C924",
+   "screen": "story_hints.the_library",
+   "verdict": "N/A",
+   "line": "The librarian's at the desk weekdays 8am to 4pm, and Saturday 10am to 4pm.",
+   "why": "No travel."
+  },
+  {
+   "row": "C926",
+   "screen": "*",
+   "verdict": "N/A",
+   "line": "(all hint entries)",
+   "why": "Moves no clock."
+  },
+  {
+   "row": "C926",
+   "screen": "story_hints.classes",
+   "verdict": "N/A",
+   "line": "You know someone in psychology now. Statistics is Monday and Wednesday at 11am, English Tuesday and Thursday at 9am, both in the Lecture Hall.",
+   "why": "Moves no clock."
+  },
+  {
+   "row": "C926",
+   "screen": "story_hints.lunch",
+   "verdict": "N/A",
+   "line": "The cafeteria serves lunch weekdays, 11am to 2pm. The woman at the counter is in weekdays 8am to 4pm.",
+   "why": "Moves no clock."
+  },
+  {
+   "row": "C926",
+   "screen": "story_hints.staying_in_shape",
+   "verdict": "N/A",
+   "line": "Marco trains people at the gym weekdays 6 to 10am and 5 to 9pm, and Saturday 8am to 2pm.",
+   "why": "Moves no clock."
+  },
+  {
+   "row": "C926",
+   "screen": "story_hints.the_cafe_job",
+   "verdict": "N/A",
+   "line": "Work your first shift at the Café: a weekday between 10am and 3pm, while Tom and the barista are both in.",
+   "why": "Moves no clock."
+  },
+  {
+   "row": "C926",
+   "screen": "story_hints.the_corner_shop",
+   "verdict": "N/A",
+   "line": "The owner works the till Monday to Saturday, 7am to 3pm; the night clerk has it after 3pm and all day Sunday.",
+   "why": "Moves no clock."
+  },
+  {
+   "row": "C926",
+   "screen": "story_hints.the_library",
+   "verdict": "N/A",
+   "line": "The librarian's at the desk weekdays 8am to 4pm, and Saturday 10am to 4pm.",
+   "why": "Moves no clock."
+  },
+  {
+   "row": "C927",
+   "screen": "*",
+   "verdict": "N/A",
+   "line": "(all hint entries)",
+   "why": "No exit."
+  },
+  {
+   "row": "C927",
+   "screen": "story_hints.classes",
+   "verdict": "N/A",
+   "line": "You know someone in psychology now. Statistics is Monday and Wednesday at 11am, English Tuesday and Thursday at 9am, both in the Lecture Hall.",
+   "why": "No exit."
+  },
+  {
+   "row": "C927",
+   "screen": "story_hints.lunch",
+   "verdict": "N/A",
+   "line": "The cafeteria serves lunch weekdays, 11am to 2pm. The woman at the counter is in weekdays 8am to 4pm.",
+   "why": "No exit."
+  },
+  {
+   "row": "C927",
+   "screen": "story_hints.staying_in_shape",
+   "verdict": "N/A",
+   "line": "Marco trains people at the gym weekdays 6 to 10am and 5 to 9pm, and Saturday 8am to 2pm.",
+   "why": "No exit."
+  },
+  {
+   "row": "C927",
+   "screen": "story_hints.the_cafe_job",
+   "verdict": "N/A",
+   "line": "Work your first shift at the Café: a weekday between 10am and 3pm, while Tom and the barista are both in.",
+   "why": "No exit."
+  },
+  {
+   "row": "C927",
+   "screen": "story_hints.the_corner_shop",
+   "verdict": "N/A",
+   "line": "The owner works the till Monday to Saturday, 7am to 3pm; the night clerk has it after 3pm and all day Sunday.",
+   "why": "No exit."
+  },
+  {
+   "row": "C927",
+   "screen": "story_hints.the_library",
+   "verdict": "N/A",
+   "line": "The librarian's at the desk weekdays 8am to 4pm, and Saturday 10am to 4pm.",
+   "why": "No exit."
+  },
+  {
+   "row": "C928",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "(all hint entries)",
+   "why": "States opening hours, not the current time."
+  },
+  {
+   "row": "C928",
+   "screen": "story_hints.classes",
+   "verdict": "PASS",
+   "line": "You know someone in psychology now. Statistics is Monday and Wednesday at 11am, English Tuesday and Thursday at 9am, both in the Lecture Hall.",
+   "why": "States opening hours, not the current time."
+  },
+  {
+   "row": "C928",
+   "screen": "story_hints.lunch",
+   "verdict": "PASS",
+   "line": "The cafeteria serves lunch weekdays, 11am to 2pm. The woman at the counter is in weekdays 8am to 4pm.",
+   "why": "States opening hours, not the current time."
+  },
+  {
+   "row": "C928",
+   "screen": "story_hints.staying_in_shape",
+   "verdict": "PASS",
+   "line": "Marco trains people at the gym weekdays 6 to 10am and 5 to 9pm, and Saturday 8am to 2pm.",
+   "why": "States opening hours, not the current time."
+  },
+  {
+   "row": "C928",
+   "screen": "story_hints.the_cafe_job",
+   "verdict": "PASS",
+   "line": "Work your first shift at the Café: a weekday between 10am and 3pm, while Tom and the barista are both in.",
+   "why": "States opening hours, not the current time."
+  },
+  {
+   "row": "C928",
+   "screen": "story_hints.the_corner_shop",
+   "verdict": "PASS",
+   "line": "The owner works the till Monday to Saturday, 7am to 3pm; the night clerk has it after 3pm and all day Sunday.",
+   "why": "States opening hours, not the current time."
+  },
+  {
+   "row": "C928",
+   "screen": "story_hints.the_library",
+   "verdict": "PASS",
+   "line": "The librarian's at the desk weekdays 8am to 4pm, and Saturday 10am to 4pm.",
+   "why": "States opening hours, not the current time."
+  },
+  {
+   "row": "C929",
+   "screen": "*",
+   "verdict": "N/A",
+   "line": "(all hint entries)",
+   "why": "Not an activity label."
+  },
+  {
+   "row": "C929",
+   "screen": "story_hints.classes",
+   "verdict": "N/A",
+   "line": "You know someone in psychology now. Statistics is Monday and Wednesday at 11am, English Tuesday and Thursday at 9am, both in the Lecture Hall.",
+   "why": "Not an activity label."
+  },
+  {
+   "row": "C929",
+   "screen": "story_hints.lunch",
+   "verdict": "N/A",
+   "line": "The cafeteria serves lunch weekdays, 11am to 2pm. The woman at the counter is in weekdays 8am to 4pm.",
+   "why": "Not an activity label."
+  },
+  {
+   "row": "C929",
+   "screen": "story_hints.staying_in_shape",
+   "verdict": "N/A",
+   "line": "Marco trains people at the gym weekdays 6 to 10am and 5 to 9pm, and Saturday 8am to 2pm.",
+   "why": "Not an activity label."
+  },
+  {
+   "row": "C929",
+   "screen": "story_hints.the_cafe_job",
+   "verdict": "N/A",
+   "line": "Work your first shift at the Café: a weekday between 10am and 3pm, while Tom and the barista are both in.",
+   "why": "Not an activity label."
+  },
+  {
+   "row": "C929",
+   "screen": "story_hints.the_corner_shop",
+   "verdict": "N/A",
+   "line": "The owner works the till Monday to Saturday, 7am to 3pm; the night clerk has it after 3pm and all day Sunday.",
+   "why": "Not an activity label."
+  },
+  {
+   "row": "C929",
+   "screen": "story_hints.the_library",
+   "verdict": "N/A",
+   "line": "The librarian's at the desk weekdays 8am to 4pm, and Saturday 10am to 4pm.",
+   "why": "Not an activity label."
+  },
+  {
+   "row": "C930",
+   "screen": "*",
+   "verdict": "N/A",
+   "line": "(all hint entries)",
+   "why": "Not a row."
+  },
+  {
+   "row": "C930",
+   "screen": "story_hints.classes",
+   "verdict": "N/A",
+   "line": "You know someone in psychology now. Statistics is Monday and Wednesday at 11am, English Tuesday and Thursday at 9am, both in the Lecture Hall.",
+   "why": "Not a row."
+  },
+  {
+   "row": "C930",
+   "screen": "story_hints.lunch",
+   "verdict": "N/A",
+   "line": "The cafeteria serves lunch weekdays, 11am to 2pm. The woman at the counter is in weekdays 8am to 4pm.",
+   "why": "Not a row."
+  },
+  {
+   "row": "C930",
+   "screen": "story_hints.staying_in_shape",
+   "verdict": "N/A",
+   "line": "Marco trains people at the gym weekdays 6 to 10am and 5 to 9pm, and Saturday 8am to 2pm.",
+   "why": "Not a row."
+  },
+  {
+   "row": "C930",
+   "screen": "story_hints.the_cafe_job",
+   "verdict": "N/A",
+   "line": "Work your first shift at the Café: a weekday between 10am and 3pm, while Tom and the barista are both in.",
+   "why": "Not a row."
+  },
+  {
+   "row": "C930",
+   "screen": "story_hints.the_corner_shop",
+   "verdict": "N/A",
+   "line": "The owner works the till Monday to Saturday, 7am to 3pm; the night clerk has it after 3pm and all day Sunday.",
+   "why": "Not a row."
+  },
+  {
+   "row": "C930",
+   "screen": "story_hints.the_library",
+   "verdict": "N/A",
+   "line": "The librarian's at the desk weekdays 8am to 4pm, and Saturday 10am to 4pm.",
+   "why": "Not a row."
+  },
+  {
+   "row": "C931",
+   "screen": "*",
+   "verdict": "N/A",
+   "line": "(all hint entries)",
+   "why": "No time_of_day condition on the page."
+  },
+  {
+   "row": "C931",
+   "screen": "story_hints.classes",
+   "verdict": "N/A",
+   "line": "You know someone in psychology now. Statistics is Monday and Wednesday at 11am, English Tuesday and Thursday at 9am, both in the Lecture Hall.",
+   "why": "No time_of_day condition on the page."
+  },
+  {
+   "row": "C931",
+   "screen": "story_hints.lunch",
+   "verdict": "N/A",
+   "line": "The cafeteria serves lunch weekdays, 11am to 2pm. The woman at the counter is in weekdays 8am to 4pm.",
+   "why": "No time_of_day condition on the page."
+  },
+  {
+   "row": "C931",
+   "screen": "story_hints.staying_in_shape",
+   "verdict": "N/A",
+   "line": "Marco trains people at the gym weekdays 6 to 10am and 5 to 9pm, and Saturday 8am to 2pm.",
+   "why": "No time_of_day condition on the page."
+  },
+  {
+   "row": "C931",
+   "screen": "story_hints.the_cafe_job",
+   "verdict": "N/A",
+   "line": "Work your first shift at the Café: a weekday between 10am and 3pm, while Tom and the barista are both in.",
+   "why": "No time_of_day condition on the page."
+  },
+  {
+   "row": "C931",
+   "screen": "story_hints.the_corner_shop",
+   "verdict": "N/A",
+   "line": "The owner works the till Monday to Saturday, 7am to 3pm; the night clerk has it after 3pm and all day Sunday.",
+   "why": "No time_of_day condition on the page."
+  },
+  {
+   "row": "C931",
+   "screen": "story_hints.the_library",
+   "verdict": "N/A",
+   "line": "The librarian's at the desk weekdays 8am to 4pm, and Saturday 10am to 4pm.",
+   "why": "No time_of_day condition on the page."
+  },
+  {
+   "row": "C951",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "Mark wants $75 every Sunday morning.",
+   "why": "The amount is in the text, and $5/$22 match Tom's pay line (\"five an hour… Call it twenty-two a shift\")."
+  },
+  {
+   "row": "C952",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "(all hint entries)",
+   "why": "Every number agrees with the rows, the place hours and the plan."
+  },
+  {
+   "row": "C952",
+   "screen": "story_hints.classes",
+   "verdict": "PASS",
+   "line": "You know someone in psychology now. Statistics is Monday and Wednesday at 11am, English Tuesday and Thursday at 9am, both in the Lecture Hall.",
+   "why": "Every number agrees with the rows, the place hours and the plan."
+  },
+  {
+   "row": "C952",
+   "screen": "story_hints.lunch",
+   "verdict": "PASS",
+   "line": "The cafeteria serves lunch weekdays, 11am to 2pm. The woman at the counter is in weekdays 8am to 4pm.",
+   "why": "Every number agrees with the rows, the place hours and the plan."
+  },
+  {
+   "row": "C952",
+   "screen": "story_hints.staying_in_shape",
+   "verdict": "PASS",
+   "line": "Marco trains people at the gym weekdays 6 to 10am and 5 to 9pm, and Saturday 8am to 2pm.",
+   "why": "Every number agrees with the rows, the place hours and the plan."
+  },
+  {
+   "row": "C952",
+   "screen": "story_hints.the_cafe_job",
+   "verdict": "PASS",
+   "line": "Work your first shift at the Café: a weekday between 10am and 3pm, while Tom and the barista are both in.",
+   "why": "Every number agrees with the rows, the place hours and the plan."
+  },
+  {
+   "row": "C952",
+   "screen": "story_hints.the_corner_shop",
+   "verdict": "PASS",
+   "line": "The owner works the till Monday to Saturday, 7am to 3pm; the night clerk has it after 3pm and all day Sunday.",
+   "why": "Every number agrees with the rows, the place hours and the plan."
+  },
+  {
+   "row": "C952",
+   "screen": "story_hints.the_library",
+   "verdict": "PASS",
+   "line": "The librarian's at the desk weekdays 8am to 4pm, and Saturday 10am to 4pm.",
+   "why": "Every number agrees with the rows, the place hours and the plan."
+  },
+  {
+   "row": "C954",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "An hour at the café pays $5; a four-hour shift pays $22.",
+   "why": "Pay is stated on the Quests page, never on a button."
+  },
+  {
+   "row": "L106",
+   "screen": "npcs.npc_ryan.stranger_name",
+   "verdict": "PASS",
+   "line": "guy with a crooked grin",
+   "why": "People Here reads his rows (getNpcsAtLocation); the name claims no place."
+  },
+  {
+   "row": "L167",
+   "screen": "*",
+   "verdict": "N/A",
+   "line": "",
+   "why": "Hint entries are not rows; no row is built here."
+  },
+  {
+   "row": "L167",
+   "screen": "story_hints.classes",
+   "verdict": "N/A",
+   "line": "You know someone in psychology now. Statistics is Monday and Wednesday at 11am, English Tuesday and Thursday at 9am, both in the Lecture Hall.",
+   "why": "Hint entries are not rows; no row is built here."
+  },
+  {
+   "row": "L167",
+   "screen": "story_hints.lunch",
+   "verdict": "N/A",
+   "line": "The cafeteria serves lunch weekdays, 11am to 2pm. The woman at the counter is in weekdays 8am to 4pm.",
+   "why": "Hint entries are not rows; no row is built here."
+  },
+  {
+   "row": "L167",
+   "screen": "story_hints.staying_in_shape",
+   "verdict": "N/A",
+   "line": "Marco trains people at the gym weekdays 6 to 10am and 5 to 9pm, and Saturday 8am to 2pm.",
+   "why": "Hint entries are not rows; no row is built here."
+  },
+  {
+   "row": "L167",
+   "screen": "story_hints.the_cafe_job",
+   "verdict": "N/A",
+   "line": "Work your first shift at the Café: a weekday between 10am and 3pm, while Tom and the barista are both in.",
+   "why": "Hint entries are not rows; no row is built here."
+  },
+  {
+   "row": "L167",
+   "screen": "story_hints.the_corner_shop",
+   "verdict": "N/A",
+   "line": "The owner works the till Monday to Saturday, 7am to 3pm; the night clerk has it after 3pm and all day Sunday.",
+   "why": "Hint entries are not rows; no row is built here."
+  },
+  {
+   "row": "L167",
+   "screen": "story_hints.the_library",
+   "verdict": "N/A",
+   "line": "The librarian's at the desk weekdays 8am to 4pm, and Saturday 10am to 4pm.",
+   "why": "Hint entries are not rows; no row is built here."
+  },
+  {
+   "row": "L170",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "met_walsh / met_zoe",
+   "why": "Faculty Offices (hidden_until met_walsh) and Zoe's place (zoe_place_known, set with met_zoe) each have a hint step whose when reads that flag; check.py pages is GREEN."
+  },
+  {
+   "row": "L171",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "Monday morning. Today you start college.",
+   "why": "The game starts Monday 07:00; Classes' first step names psychology Monday 9am in the Lecture Hall."
+  },
+  {
+   "row": "L172",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "story_hints.the_corner_shop | a goal card is shown",
+   "why": "All 13 hints and paying_wt are on P46's Does:."
+  },
+  {
+   "row": "L172",
+   "screen": "story_hints.classes",
+   "verdict": "PASS",
+   "line": "You know someone in psychology now. Statistics is Monday and Wednesday at 11am, English Tuesday and Thursday at 9am, both in the Lecture Hall.",
+   "why": "On P46's Does: with 'a goal card is shown'."
+  },
+  {
+   "row": "L172",
+   "screen": "story_hints.lunch",
+   "verdict": "PASS",
+   "line": "The cafeteria serves lunch weekdays, 11am to 2pm. The woman at the counter is in weekdays 8am to 4pm.",
+   "why": "On P46's Does: with 'a goal card is shown'."
+  },
+  {
+   "row": "L172",
+   "screen": "story_hints.staying_in_shape",
+   "verdict": "PASS",
+   "line": "Marco trains people at the gym weekdays 6 to 10am and 5 to 9pm, and Saturday 8am to 2pm.",
+   "why": "On P46's Does: with 'a goal card is shown'."
+  },
+  {
+   "row": "L172",
+   "screen": "story_hints.the_cafe_job",
+   "verdict": "PASS",
+   "line": "Work your first shift at the Café: a weekday between 10am and 3pm, while Tom and the barista are both in.",
+   "why": "On P46's Does: with 'a goal card is shown'."
+  },
+  {
+   "row": "L172",
+   "screen": "story_hints.the_corner_shop",
+   "verdict": "PASS",
+   "line": "The owner works the till Monday to Saturday, 7am to 3pm; the night clerk has it after 3pm and all day Sunday.",
+   "why": "On P46's Does: with 'a goal card is shown'."
+  },
+  {
+   "row": "L172",
+   "screen": "story_hints.the_library",
+   "verdict": "PASS",
+   "line": "The librarian's at the desk weekdays 8am to 4pm, and Saturday 10am to 4pm.",
+   "why": "On P46's Does: with 'a goal card is shown'."
+  }
+ ],
+ "causes": [
+  {
+   "id": "P46r4-c1",
+   "what": "Staying in Shape's ladder: step 1 names a run or any gym hour but passes only on met_marco, and the met_marco step never names the run (ran_once) that ends it."
+  }
+ ]
+}

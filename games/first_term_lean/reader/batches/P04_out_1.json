@@ -5,506 +5,607 @@
    "screen": "travel_bus_home.ride",
    "verdict": "PASS",
    "line": "The bus home is half empty. You get the back seat and watch campus go.",
-   "why": "repeatable from the quad at any hour (no conditions); names nobody, no past, no first time; true on every visit",
-   "cause": ""
+   "why": "every line holds at the first and last minute and on a second visit; no person named (the new rows put no one on a travel screen)"
   },
   {
-   "row": "B8",
-   "screen": "travel_bus_home.ride",
+   "row": "B10",
+   "screen": "travel_bus_to_campus.ride",
    "verdict": "PASS",
-   "line": "Take the bus home ($2, 20 min)",
-   "why": "$2 cost, 20 minutes on 'Get off on your street'; agrees with PLAN 8c and card P04; no garment named",
-   "cause": ""
-  },
-  {
-   "row": "C460",
-   "screen": "travel_bus_home.ride",
-   "verdict": "PASS",
-   "line": "The bus home is half empty. You get the back seat and watch campus go.",
-   "why": "true at any minute; the quad is always open and the trip has no window",
-   "cause": ""
-  },
-  {
-   "row": "C461",
-   "screen": "travel_bus_home.ride",
-   "verdict": "PASS",
-   "line": "The bus home is half empty. You get the back seat and watch campus go.",
-   "why": "texture that can't clash",
-   "cause": ""
-  },
-  {
-   "row": "C889",
-   "screen": "travel_bus_home.ride",
-   "verdict": "FAIL",
-   "line": "Take the bus home ($2, 20 min)",
-   "why": "note: the label states a duration; the row now says a label states no duration (LO 2026-11-24, clock.md:11)",
-   "cause": ""
-  },
-  {
-   "row": "C892",
-   "screen": "travel_bus_home.ride",
-   "verdict": "PASS",
-   "line": "The bus home is half empty. You get the back seat and watch campus go.",
-   "why": "no hour in the act",
-   "cause": ""
-  },
-  {
-   "row": "C897",
-   "screen": "travel_bus_home.ride",
-   "verdict": "PASS",
-   "line": "Take the bus home ($2, 20 min)",
-   "why": "time sits on crossing between areas (campus to home), not on a room",
-   "cause": ""
-  },
-  {
-   "row": "C900",
-   "screen": "travel_bus_home.ride",
-   "verdict": "PASS",
-   "line": "The bus home is half empty. You get the back seat and watch campus go.",
-   "why": "no time of day said",
-   "cause": ""
-  },
-  {
-   "row": "C902",
-   "screen": "travel_bus_home.ride",
-   "verdict": "PASS",
-   "line": "The bus home is half empty. You get the back seat and watch campus go.",
-   "why": "no window; the line holds at any minute",
-   "cause": ""
-  },
-  {
-   "row": "C903",
-   "screen": "travel_bus_home.ride",
-   "verdict": "PASS",
-   "line": "The bus home is half empty. You get the back seat and watch campus go.",
-   "why": "no weekday named",
-   "cause": ""
-  },
-  {
-   "row": "C906",
-   "screen": "travel_bus_home.ride",
-   "verdict": "PASS",
-   "line": "The bus home is half empty. You get the back seat and watch campus go.",
-   "why": "no clock promise",
-   "cause": ""
-  },
-  {
-   "row": "C910",
-   "screen": "travel_bus_home.ride",
-   "verdict": "FAIL",
-   "line": "Take the bus home ($2, 20 min)",
-   "why": "note: the button says its time; the row now says a button says no time and no energy, money only (LO 2026-11-24, clock.md:19)",
-   "cause": ""
-  },
-  {
-   "row": "C913",
-   "screen": "travel_bus_home.ride",
-   "verdict": "N/A",
-   "line": "",
-   "why": "the trip has no hours",
-   "cause": ""
-  },
-  {
-   "row": "C914",
-   "screen": "travel_bus_home.ride",
-   "verdict": "N/A",
-   "line": "",
-   "why": "no hours to show",
-   "cause": ""
-  },
-  {
-   "row": "C916",
-   "screen": "travel_bus_home.ride",
-   "verdict": "PASS",
-   "line": "Take the bus home ($2, 20 min)",
-   "why": "a choice she makes, always open",
-   "cause": ""
-  },
-  {
-   "row": "C920",
-   "screen": "travel_bus_home.ride",
-   "verdict": "PASS",
-   "line": "Take the bus home ($2, 20 min)",
-   "why": "time spent on the move between areas, not on a hop",
-   "cause": ""
-  },
-  {
-   "row": "C921",
-   "screen": "travel_bus_home.ride",
-   "verdict": "N/A",
-   "line": "",
-   "why": "no window",
-   "cause": ""
-  },
-  {
-   "row": "C924",
-   "screen": "travel_bus_home.ride",
-   "verdict": "PASS",
-   "line": "The bus home is half empty. You get the back seat and watch campus go.",
-   "why": "travel cost (time, $2) makes the schedule matter",
-   "cause": ""
-  },
-  {
-   "row": "C926",
-   "screen": "travel_bus_home.ride",
-   "verdict": "PASS",
-   "line": "The bus home is half empty. You get the back seat and watch campus go.",
-   "why": "clock moves by minutes only",
-   "cause": ""
-  },
-  {
-   "row": "C927",
-   "screen": "travel_bus_home.ride",
-   "verdict": "PASS",
-   "line": "The bus home is half empty. You get the back seat and watch campus go.",
-   "why": "the exit sets its time; not left to the 3-minute default",
-   "cause": ""
-  },
-  {
-   "row": "C928",
-   "screen": "travel_bus_home.ride",
-   "verdict": "PASS",
-   "line": "The bus home is half empty. You get the back seat and watch campus go.",
-   "why": "no clock printed in prose",
-   "cause": ""
-  },
-  {
-   "row": "C929",
-   "screen": "travel_bus_home.ride",
-   "verdict": "FAIL",
-   "line": "Take the bus home ($2, 20 min)",
-   "why": "note: the label carries the activity's time; the row now says it doesn't (LO 2026-11-24, clock.md:20)",
-   "cause": ""
-  },
-  {
-   "row": "C930",
-   "screen": "travel_bus_home.ride",
-   "verdict": "N/A",
-   "line": "",
-   "why": "no windowed activity",
-   "cause": ""
-  },
-  {
-   "row": "C931",
-   "screen": "travel_bus_home.ride",
-   "verdict": "N/A",
-   "line": "",
-   "why": "no time_of_day condition",
-   "cause": ""
-  },
-  {
-   "row": "L106",
-   "screen": "travel_bus_home.ride",
-   "verdict": "PASS",
-   "line": "The bus home is half empty. You get the back seat and watch campus go.",
-   "why": "names nobody; 'half empty' claims no person",
-   "cause": ""
-  },
-  {
-   "row": "L167",
-   "screen": "travel_bus_home.ride",
-   "verdict": "N/A",
-   "line": "",
-   "why": "no hours that differ by day",
-   "cause": ""
+   "line": "The bus is packed. Every time it brakes, a man's hips press into your ass",
+   "why": "every line holds at the first and last minute and on a second visit; no person named (the man is an unnamed stranger, weekdays 07:00-10:00 only; the half-empty line covers every other minute)"
   },
   {
    "row": "B10",
    "screen": "travel_walk_home.ride",
    "verdict": "PASS",
    "line": "The walk home takes forever. Your street, finally.",
-   "why": "repeatable from the quad at any hour (no conditions); names nobody, no past, no first time; true on every visit",
-   "cause": ""
+   "why": "every line holds at the first and last minute and on a second visit; no person named (the new rows put no one on a travel screen)"
+  },
+  {
+   "row": "B10",
+   "screen": "travel_walk_to_campus.ride",
+   "verdict": "PASS",
+   "line": "It's a long walk: past the park, over the bridge, along the main road.",
+   "why": "every line holds at the first and last minute and on a second visit; no person named (the new rows put no one on a travel screen)"
+  },
+  {
+   "row": "B8",
+   "screen": "travel_bus_home.ride",
+   "verdict": "PASS",
+   "line": "The bus home is half empty. You get the back seat and watch campus go.",
+   "why": "no garment of hers named; no number that disagrees with PLAN"
+  },
+  {
+   "row": "B8",
+   "screen": "travel_bus_to_campus.ride",
+   "verdict": "PASS",
+   "line": "The bus is packed. Every time it brakes, a man's hips press into your ass",
+   "why": "no garment of hers named; no number that disagrees with PLAN"
   },
   {
    "row": "B8",
    "screen": "travel_walk_home.ride",
    "verdict": "PASS",
-   "line": "Walk home (45 min)",
-   "why": "no cost, 45 minutes on 'Walk up your street'; agrees with PLAN 8c and card P04; no garment named",
-   "cause": ""
+   "line": "The walk home takes forever. Your street, finally.",
+   "why": "no garment of hers named; no number that disagrees with PLAN"
+  },
+  {
+   "row": "B8",
+   "screen": "travel_walk_to_campus.ride",
+   "verdict": "PASS",
+   "line": "It's a long walk: past the park, over the bridge, along the main road.",
+   "why": "no garment of hers named; no number that disagrees with PLAN"
+  },
+  {
+   "row": "C460",
+   "screen": "travel_bus_home.ride",
+   "verdict": "PASS",
+   "line": "The bus home is half empty. You get the back seat and watch campus go.",
+   "why": "no claim about who is there, the clock, her past or her clothes that can be false (the new rows put no one on a travel screen)"
+  },
+  {
+   "row": "C460",
+   "screen": "travel_bus_to_campus.ride",
+   "verdict": "PASS",
+   "line": "The bus is packed. Every time it brakes, a man's hips press into your ass",
+   "why": "no claim about who is there, the clock, her past or her clothes that can be false (the man is an unnamed stranger, weekdays 07:00-10:00 only; the half-empty line covers every other minute)"
   },
   {
    "row": "C460",
    "screen": "travel_walk_home.ride",
    "verdict": "PASS",
    "line": "The walk home takes forever. Your street, finally.",
-   "why": "true at any minute; the quad is always open and the trip has no window",
-   "cause": ""
+   "why": "no claim about who is there, the clock, her past or her clothes that can be false (the new rows put no one on a travel screen)"
+  },
+  {
+   "row": "C460",
+   "screen": "travel_walk_to_campus.ride",
+   "verdict": "PASS",
+   "line": "It's a long walk: past the park, over the bridge, along the main road.",
+   "why": "no claim about who is there, the clock, her past or her clothes that can be false (the new rows put no one on a travel screen)"
+  },
+  {
+   "row": "C461",
+   "screen": "travel_bus_home.ride",
+   "verdict": "PASS",
+   "line": "The bus home is half empty. You get the back seat and watch campus go.",
+   "why": "texture only, and dialogue that fits the cast entry"
+  },
+  {
+   "row": "C461",
+   "screen": "travel_bus_to_campus.ride",
+   "verdict": "PASS",
+   "line": "The bus is packed. Every time it brakes, a man's hips press into your ass",
+   "why": "texture only, and dialogue that fits the cast entry"
   },
   {
    "row": "C461",
    "screen": "travel_walk_home.ride",
    "verdict": "PASS",
    "line": "The walk home takes forever. Your street, finally.",
-   "why": "texture that can't clash",
-   "cause": ""
+   "why": "texture only, and dialogue that fits the cast entry"
+  },
+  {
+   "row": "C461",
+   "screen": "travel_walk_to_campus.ride",
+   "verdict": "PASS",
+   "line": "It's a long walk: past the park, over the bridge, along the main road.",
+   "why": "texture only, and dialogue that fits the cast entry"
+  },
+  {
+   "row": "C804",
+   "screen": "campus_cafeteria",
+   "verdict": "FAIL",
+   "line": "The cafeteria: trays, long tables, the lunch counter. A sign says it's open weekdays from 8am to 4pm.",
+   "why": "no text changes with who is there: Rosa 8-16, Kayla and Tess 12-13, Jake 12-14, Zoe Tue/Thu 13-14 and Nadia Mon/Wed 13-14 are there by their rows; the screen never changes; only met faces show",
+   "cause": "P04r2-c1"
+  },
+  {
+   "row": "C804",
+   "screen": "campus_lecture_hall",
+   "verdict": "FAIL",
+   "line": "The lecture hall: rows of seats rising to the back, a screen, a lectern at the bottom. Most of your classes are here.",
+   "why": "no text changes with who is there: Hale, Pratt, Walsh, Nadia and Brooke (Mon/Wed 9-11) are there by their rows; the screen never changes; only met faces show",
+   "cause": "P04r2-c1"
+  },
+  {
+   "row": "C804",
+   "screen": "campus_library",
+   "verdict": "FAIL",
+   "line": "The library: long tables, quiet floors, and the desk by the door.",
+   "why": "no text changes with who is there: Holt 8-16 and Nadia 14-18 are there by their rows; the screen never changes; only met faces show",
+   "cause": "P04r2-c1"
+  },
+  {
+   "row": "C804",
+   "screen": "campus_theatre",
+   "verdict": "FAIL",
+   "line": "The theatre: a black stage, rows of folding seats, and the lights rigged overhead.",
+   "why": "no text changes with who is there: Cross and Brooke (Tue/Thu 11-13, Tue/Thu/Fri 14-18) are there by their rows; the screen never changes; only met faces show",
+   "cause": "P04r2-c1"
+  },
+  {
+   "row": "C889",
+   "screen": "travel_bus_home.ride",
+   "verdict": "PASS",
+   "line": "The bus home is half empty. You get the back seat and watch campus go.",
+   "why": "labels name no clock time and no duration"
   },
   {
    "row": "C889",
    "screen": "travel_walk_home.ride",
-   "verdict": "FAIL",
-   "line": "Walk home (45 min)",
-   "why": "note: the label states a duration; the row now says a label states no duration (LO 2026-11-24, clock.md:11)",
-   "cause": ""
+   "verdict": "PASS",
+   "line": "The walk home takes forever. Your street, finally.",
+   "why": "labels name no clock time and no duration"
+  },
+  {
+   "row": "C892",
+   "screen": "travel_bus_home.ride",
+   "verdict": "PASS",
+   "line": "The bus home is half empty. You get the back seat and watch campus go.",
+   "why": "no hour in the act"
   },
   {
    "row": "C892",
    "screen": "travel_walk_home.ride",
    "verdict": "PASS",
    "line": "The walk home takes forever. Your street, finally.",
-   "why": "no hour in the act",
-   "cause": ""
+   "why": "no hour in the act"
+  },
+  {
+   "row": "C897",
+   "screen": "travel_bus_home.ride",
+   "verdict": "PASS",
+   "line": "The bus home is half empty. You get the back seat and watch campus go.",
+   "why": "time sits on the move or the act, not on every room"
   },
   {
    "row": "C897",
    "screen": "travel_walk_home.ride",
    "verdict": "PASS",
-   "line": "Walk home (45 min)",
-   "why": "time sits on crossing between areas (campus to home), not on a room",
-   "cause": ""
+   "line": "The walk home takes forever. Your street, finally.",
+   "why": "time sits on the move or the act, not on every room"
+  },
+  {
+   "row": "C900",
+   "screen": "travel_bus_home.ride",
+   "verdict": "PASS",
+   "line": "The bus home is half empty. You get the back seat and watch campus go.",
+   "why": "no beat says what time it is"
   },
   {
    "row": "C900",
    "screen": "travel_walk_home.ride",
    "verdict": "PASS",
    "line": "The walk home takes forever. Your street, finally.",
-   "why": "no time of day said",
-   "cause": ""
+   "why": "no beat says what time it is"
+  },
+  {
+   "row": "C902",
+   "screen": "travel_bus_home.ride",
+   "verdict": "PASS",
+   "line": "The bus home is half empty. You get the back seat and watch campus go.",
+   "why": "read at the last minute of the window, still true"
   },
   {
    "row": "C902",
    "screen": "travel_walk_home.ride",
    "verdict": "PASS",
    "line": "The walk home takes forever. Your street, finally.",
-   "why": "no window; the line holds at any minute",
-   "cause": ""
+   "why": "read at the last minute of the window, still true"
+  },
+  {
+   "row": "C903",
+   "screen": "travel_bus_home.ride",
+   "verdict": "PASS",
+   "line": "The bus home is half empty. You get the back seat and watch campus go.",
+   "why": "no weekday named in a beat"
   },
   {
    "row": "C903",
    "screen": "travel_walk_home.ride",
    "verdict": "PASS",
    "line": "The walk home takes forever. Your street, finally.",
-   "why": "no weekday named",
-   "cause": ""
+   "why": "no weekday named in a beat"
+  },
+  {
+   "row": "C906",
+   "screen": "travel_bus_home.ride",
+   "verdict": "PASS",
+   "line": "The bus home is half empty. You get the back seat and watch campus go.",
+   "why": "no 'till X' on any label"
   },
   {
    "row": "C906",
    "screen": "travel_walk_home.ride",
    "verdict": "PASS",
    "line": "The walk home takes forever. Your street, finally.",
-   "why": "no clock promise",
-   "cause": ""
+   "why": "no 'till X' on any label"
+  },
+  {
+   "row": "C910",
+   "screen": "travel_bus_home.ride",
+   "verdict": "PASS",
+   "line": "The bus home is half empty. You get the back seat and watch campus go.",
+   "why": "buttons say no time and no energy; money only where the act costs money"
   },
   {
    "row": "C910",
    "screen": "travel_walk_home.ride",
-   "verdict": "FAIL",
-   "line": "Walk home (45 min)",
-   "why": "note: the button says its time; the row now says a button says no time and no energy, money only (LO 2026-11-24, clock.md:19)",
-   "cause": ""
+   "verdict": "PASS",
+   "line": "The walk home takes forever. Your street, finally.",
+   "why": "buttons say no time and no energy; money only where the act costs money"
+  },
+  {
+   "row": "C913",
+   "screen": "travel_bus_home.ride",
+   "verdict": "N/A",
+   "line": "The bus home is half empty. You get the back seat and watch campus go.",
+   "why": "no row on this screen has hours or a window"
   },
   {
    "row": "C913",
    "screen": "travel_walk_home.ride",
    "verdict": "N/A",
-   "line": "",
-   "why": "the trip has no hours",
-   "cause": ""
+   "line": "The walk home takes forever. Your street, finally.",
+   "why": "no row on this screen has hours or a window"
+  },
+  {
+   "row": "C914",
+   "screen": "travel_bus_home.ride",
+   "verdict": "N/A",
+   "line": "The bus home is half empty. You get the back seat and watch campus go.",
+   "why": "no row on this screen has hours or a window"
   },
   {
    "row": "C914",
    "screen": "travel_walk_home.ride",
    "verdict": "N/A",
+   "line": "The walk home takes forever. Your street, finally.",
+   "why": "no row on this screen has hours or a window"
+  },
+  {
+   "row": "C916",
+   "screen": "travel_bus_home.ride",
+   "verdict": "N/A",
    "line": "",
-   "why": "no hours to show",
-   "cause": ""
+   "why": "a chosen trip with no hours; no event here"
   },
   {
    "row": "C916",
    "screen": "travel_walk_home.ride",
+   "verdict": "N/A",
+   "line": "",
+   "why": "a chosen trip with no hours; no event here"
+  },
+  {
+   "row": "C920",
+   "screen": "travel_bus_home.ride",
    "verdict": "PASS",
-   "line": "Walk home (45 min)",
-   "why": "a choice she makes, always open",
-   "cause": ""
+   "line": "The bus home is half empty. You get the back seat and watch campus go.",
+   "why": "Done returns to the same place; its minutes are the act's, not a hop"
   },
   {
    "row": "C920",
    "screen": "travel_walk_home.ride",
    "verdict": "PASS",
-   "line": "Walk home (45 min)",
-   "why": "time spent on the move between areas, not on a hop",
-   "cause": ""
+   "line": "The walk home takes forever. Your street, finally.",
+   "why": "Done returns to the same place; its minutes are the act's, not a hop"
+  },
+  {
+   "row": "C921",
+   "screen": "travel_bus_home.ride",
+   "verdict": "N/A",
+   "line": "The bus home is half empty. You get the back seat and watch campus go.",
+   "why": "no row on this screen has hours or a window"
+  },
+  {
+   "row": "C921",
+   "screen": "travel_bus_to_campus.ride",
+   "verdict": "PASS",
+   "line": "time_of_day 10:00-07:00",
+   "why": "the off-peak window wraps past midnight and is the exact complement of weekdays 07:00-10:00"
   },
   {
    "row": "C921",
    "screen": "travel_walk_home.ride",
    "verdict": "N/A",
+   "line": "The walk home takes forever. Your street, finally.",
+   "why": "no row on this screen has hours or a window"
+  },
+  {
+   "row": "C921",
+   "screen": "travel_walk_to_campus.ride",
+   "verdict": "N/A",
    "line": "",
-   "why": "no window",
-   "cause": ""
+   "why": "no window"
+  },
+  {
+   "row": "C924",
+   "screen": "travel_bus_home.ride",
+   "verdict": "PASS",
+   "line": "The bus home is half empty. You get the back seat and watch campus go.",
+   "why": "the minutes spent make the schedule matter"
   },
   {
    "row": "C924",
    "screen": "travel_walk_home.ride",
    "verdict": "PASS",
    "line": "The walk home takes forever. Your street, finally.",
-   "why": "travel cost (time, $2) makes the schedule matter",
-   "cause": ""
+   "why": "the minutes spent make the schedule matter"
+  },
+  {
+   "row": "C926",
+   "screen": "travel_bus_home.ride",
+   "verdict": "PASS",
+   "line": "The bus home is half empty. You get the back seat and watch campus go.",
+   "why": "nothing sends the clock to a named hour"
   },
   {
    "row": "C926",
    "screen": "travel_walk_home.ride",
    "verdict": "PASS",
    "line": "The walk home takes forever. Your street, finally.",
-   "why": "clock moves by minutes only",
-   "cause": ""
+   "why": "nothing sends the clock to a named hour"
+  },
+  {
+   "row": "C927",
+   "screen": "travel_bus_home.ride",
+   "verdict": "PASS",
+   "line": "The bus home is half empty. You get the back seat and watch campus go.",
+   "why": "every exit carries its own minutes"
+  },
+  {
+   "row": "C927",
+   "screen": "travel_bus_to_campus.ride",
+   "verdict": "PASS",
+   "line": "The bus is packed. Every time it brakes, a man's hips press into your ass",
+   "why": "every exit carries its own minutes"
   },
   {
    "row": "C927",
    "screen": "travel_walk_home.ride",
    "verdict": "PASS",
    "line": "The walk home takes forever. Your street, finally.",
-   "why": "the exit sets its time; not left to the 3-minute default",
-   "cause": ""
+   "why": "every exit carries its own minutes"
+  },
+  {
+   "row": "C927",
+   "screen": "travel_walk_to_campus.ride",
+   "verdict": "PASS",
+   "line": "It's a long walk: past the park, over the bridge, along the main road.",
+   "why": "every exit carries its own minutes"
+  },
+  {
+   "row": "C928",
+   "screen": "travel_bus_home.ride",
+   "verdict": "PASS",
+   "line": "The bus home is half empty. You get the back seat and watch campus go.",
+   "why": "no clock printed into prose"
   },
   {
    "row": "C928",
    "screen": "travel_walk_home.ride",
    "verdict": "PASS",
    "line": "The walk home takes forever. Your street, finally.",
-   "why": "no clock printed in prose",
-   "cause": ""
+   "why": "no clock printed into prose"
+  },
+  {
+   "row": "C929",
+   "screen": "travel_bus_home.ride",
+   "verdict": "PASS",
+   "line": "The bus home is half empty. You get the back seat and watch campus go.",
+   "why": "the activity's time is on no label"
   },
   {
    "row": "C929",
    "screen": "travel_walk_home.ride",
-   "verdict": "FAIL",
-   "line": "Walk home (45 min)",
-   "why": "note: the label carries the activity's time; the row now says it doesn't (LO 2026-11-24, clock.md:20)",
-   "cause": ""
+   "verdict": "PASS",
+   "line": "The walk home takes forever. Your street, finally.",
+   "why": "the activity's time is on no label"
+  },
+  {
+   "row": "C930",
+   "screen": "travel_bus_home.ride",
+   "verdict": "N/A",
+   "line": "The bus home is half empty. You get the back seat and watch campus go.",
+   "why": "no row on this screen has hours or a window"
   },
   {
    "row": "C930",
    "screen": "travel_walk_home.ride",
    "verdict": "N/A",
+   "line": "The walk home takes forever. Your street, finally.",
+   "why": "no row on this screen has hours or a window"
+  },
+  {
+   "row": "C931",
+   "screen": "travel_bus_home.ride",
+   "verdict": "N/A",
    "line": "",
-   "why": "no windowed activity",
-   "cause": ""
+   "why": "no time_of_day on this screen"
+  },
+  {
+   "row": "C931",
+   "screen": "travel_bus_to_campus.ride",
+   "verdict": "PASS",
+   "line": "07:00-10:00 / 10:00-07:00",
+   "why": "end exclusive: at 10:00 only the half-empty line shows, and the choices read the same conditions"
   },
   {
    "row": "C931",
    "screen": "travel_walk_home.ride",
    "verdict": "N/A",
    "line": "",
-   "why": "no time_of_day condition",
-   "cause": ""
+   "why": "no time_of_day on this screen"
+  },
+  {
+   "row": "C931",
+   "screen": "travel_walk_to_campus.ride",
+   "verdict": "N/A",
+   "line": "",
+   "why": "no time_of_day on this screen"
+  },
+  {
+   "row": "C953",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "Take the bus to campus ($2) \u00b7 Walk to campus \u00b7 Get off at campus",
+   "why": "money on the fare, no time or energy on any label"
+  },
+  {
+   "row": "L106",
+   "screen": "travel_bus_home.ride",
+   "verdict": "PASS",
+   "line": "The bus home is half empty. You get the back seat and watch campus go.",
+   "why": "no line names a person whose rows don't put them there (the new rows put no one on a travel screen)"
+  },
+  {
+   "row": "L106",
+   "screen": "travel_bus_to_campus.ride",
+   "verdict": "PASS",
+   "line": "The bus is packed. Every time it brakes, a man's hips press into your ass",
+   "why": "no line names a person whose rows don't put them there (the man is an unnamed stranger, weekdays 07:00-10:00 only; the half-empty line covers every other minute)"
   },
   {
    "row": "L106",
    "screen": "travel_walk_home.ride",
    "verdict": "PASS",
    "line": "The walk home takes forever. Your street, finally.",
-   "why": "names nobody; 'half empty' claims no person",
-   "cause": ""
+   "why": "no line names a person whose rows don't put them there (the new rows put no one on a travel screen)"
+  },
+  {
+   "row": "L106",
+   "screen": "travel_walk_to_campus.ride",
+   "verdict": "PASS",
+   "line": "It's a long walk: past the park, over the bridge, along the main road.",
+   "why": "no line names a person whose rows don't put them there (the new rows put no one on a travel screen)"
+  },
+  {
+   "row": "L167",
+   "screen": "travel_bus_home.ride",
+   "verdict": "N/A",
+   "line": "The bus home is half empty. You get the back seat and watch campus go.",
+   "why": "no row on this screen has hours or a window"
+  },
+  {
+   "row": "L167",
+   "screen": "travel_bus_to_campus.ride",
+   "verdict": "N/A",
+   "line": "The bus is packed. Every time it brakes, a man's hips press into your ass",
+   "why": "no row on this screen has hours or a window"
   },
   {
    "row": "L167",
    "screen": "travel_walk_home.ride",
    "verdict": "N/A",
-   "line": "",
-   "why": "no hours that differ by day",
-   "cause": ""
+   "line": "The walk home takes forever. Your street, finally.",
+   "why": "no row on this screen has hours or a window"
   },
   {
-   "row": "C804",
-   "screen": "campus_cafeteria",
-   "verdict": "FAIL",
-   "line": "The cafeteria: trays, long tables, the lunch counter. A sign says it's open weekdays from 8am to 4pm.",
-   "why": "held to P30, judged as built: the place's text is the same whoever is there (Rosa, Nadia, Zoe have rows here); no description_variants or presence line",
-   "cause": "P04e1-c1"
+   "row": "L167",
+   "screen": "travel_walk_to_campus.ride",
+   "verdict": "N/A",
+   "line": "It's a long walk: past the park, over the bridge, along the main road.",
+   "why": "no row on this screen has hours or a window"
   },
   {
-   "row": "places#2",
-   "screen": "campus_cafeteria",
-   "verdict": "FAIL",
-   "line": "The cafeteria: trays, long tables, the lunch counter. A sign says it's open weekdays from 8am to 4pm.",
-   "why": "held to P30, judged as built: no presence line per person there, no empty-room line (Rosa, Nadia, Zoe have rows here)",
-   "cause": "P04e1-c1"
-  },
-  {
-   "row": "C804",
-   "screen": "campus_lecture_hall",
-   "verdict": "FAIL",
-   "line": "The lecture hall: rows of seats rising to the back, a screen, a lectern at the bottom. Most of your classes are here.",
-   "why": "held to P30, judged as built: the place's text is the same whoever is there (Hale, Pratt, Walsh, Nadia have rows here); no description_variants or presence line",
-   "cause": "P04e1-c1"
-  },
-  {
-   "row": "places#2",
-   "screen": "campus_lecture_hall",
-   "verdict": "FAIL",
-   "line": "The lecture hall: rows of seats rising to the back, a screen, a lectern at the bottom. Most of your classes are here.",
-   "why": "held to P30, judged as built: no presence line per person there, no empty-room line (Hale, Pratt, Walsh, Nadia have rows here)",
-   "cause": "P04e1-c1"
-  },
-  {
-   "row": "C804",
-   "screen": "campus_library",
-   "verdict": "FAIL",
-   "line": "The library: long tables, quiet floors, and the desk by the door.",
-   "why": "held to P30, judged as built: the place's text is the same whoever is there (Holt, Nadia have rows here); no description_variants or presence line",
-   "cause": "P04e1-c1"
-  },
-  {
-   "row": "places#2",
-   "screen": "campus_library",
-   "verdict": "FAIL",
-   "line": "The library: long tables, quiet floors, and the desk by the door.",
-   "why": "held to P30, judged as built: no presence line per person there, no empty-room line (Holt, Nadia have rows here)",
-   "cause": "P04e1-c1"
-  },
-  {
-   "row": "C804",
-   "screen": "campus_theatre",
-   "verdict": "FAIL",
-   "line": "The theatre: a black stage, rows of folding seats, and the lights rigged overhead.",
-   "why": "held to P30, judged as built: the place's text is the same whoever is there (Cross has rows here); no description_variants or presence line",
-   "cause": "P04e1-c1"
-  },
-  {
-   "row": "places#2",
-   "screen": "campus_theatre",
-   "verdict": "FAIL",
-   "line": "The theatre: a black stage, rows of folding seats, and the lights rigged overhead.",
-   "why": "held to P30, judged as built: no presence line per person there, no empty-room line (Cross has rows here)",
-   "cause": "P04e1-c1"
-  },
-  {
-   "row": "places#6",
-   "screen": "campus_lecture_hall",
+   "row": "clock#1",
+   "screen": "*",
    "verdict": "PASS",
-   "line": "Study in an empty row (1 hour, 5 energy)",
-   "why": "study_hall is open whenever the hall is (no clock conditions), so the open hall always has a thing to do alone; after the shared 3-a-day cap it greys with its reason, the cap is pacing (C1425)",
-   "cause": ""
+   "line": "Take the bus to campus ($2) \u00b7 Walk home",
+   "why": "the bus shows its $2; the walk's 10 energy and every 20/45 minutes are in the costs only"
+  },
+  {
+   "row": "clock#6",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "It opens at 8am on weekdays.",
+   "why": "no 'till X' anywhere; hours sit on signs and closed lines"
+  },
+  {
+   "row": "places#2",
+   "screen": "campus_cafeteria",
+   "verdict": "FAIL",
+   "line": "The cafeteria: trays, long tables, the lunch counter. A sign says it's open weekdays from 8am to 4pm.",
+   "why": "no presence line per person from their rows and no empty-room line: Rosa 8-16, Kayla and Tess 12-13, Jake 12-14, Zoe Tue/Thu 13-14 and Nadia Mon/Wed 13-14 are there by their rows; the screen never changes",
+   "cause": "P04r2-c1"
+  },
+  {
+   "row": "places#2",
+   "screen": "campus_lecture_hall",
+   "verdict": "FAIL",
+   "line": "The lecture hall: rows of seats rising to the back, a screen, a lectern at the bottom. Most of your classes are here.",
+   "why": "no presence line per person from their rows and no empty-room line: Hale, Pratt, Walsh, Nadia and Brooke (Mon/Wed 9-11) are there by their rows; the screen never changes",
+   "cause": "P04r2-c1"
+  },
+  {
+   "row": "places#2",
+   "screen": "campus_library",
+   "verdict": "FAIL",
+   "line": "The library: long tables, quiet floors, and the desk by the door.",
+   "why": "no presence line per person from their rows and no empty-room line: Holt 8-16 and Nadia 14-18 are there by their rows; the screen never changes",
+   "cause": "P04r2-c1"
+  },
+  {
+   "row": "places#2",
+   "screen": "campus_theatre",
+   "verdict": "FAIL",
+   "line": "The theatre: a black stage, rows of folding seats, and the lights rigged overhead.",
+   "why": "no presence line per person from their rows and no empty-room line: Cross and Brooke (Tue/Thu 11-13, Tue/Thu/Fri 14-18) are there by their rows; the screen never changes",
+   "cause": "P04r2-c1"
+  },
+  {
+   "row": "places#4",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "Get off on your street \u00b7 Walk up your street",
+   "why": "short labels, money only on the fare"
   },
   {
    "row": "places#6",
    "screen": "campus_theatre",
    "verdict": "FAIL",
-   "line": "Practise on the empty stage (30 min) \u2014 someone has the stage.",
-   "why": "held to P41/P26, no waiver, judged as built: while Cross is in (Tue/Thu 11-13 and 14-18, Fri 14-18) outside drama's 11:00-11:30 start, the open theatre's only alone row is greyed, so there is nothing she can do alone",
-   "cause": "P04e1-c2"
+   "line": "stage_practise: npc_cross is_absent",
+   "why": "Tue 14:00-18:00, Cross in: drama is over (11:00-11:30 only) and Practise is shut, so the open theatre has nothing she can do alone",
+   "cause": "P04r2-c2"
+  },
+  {
+   "row": "systems#4",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "Take the bus home ($2) \u00b7 Walk home",
+   "why": "each trip costs $2 or 10 energy plus 20/45 minutes; only the money is on the button"
   }
  ],
  "causes": [
   {
-   "id": "P04e1-c1",
-   "what": "the campus places carry no presence lines: their text never changes with who their rows put there (held to P30, no waiver)"
+   "id": "P04r2-c1",
+   "what": "the campus places carry no presence line: each screen is its fixed identity line whoever is there (Rosa, Jake, Kayla, Tess, Zoe, Nadia, Holt, the teachers, Brooke), and an empty room has no line of its own; held to P30, not waived"
   },
   {
-   "id": "P04e1-c2",
-   "what": "the theatre has nothing to do alone while Cross is in outside drama's start window (held to P41/P26, no waiver)"
+   "id": "P04r2-c2",
+   "what": "the theatre is open weekdays 9am-9pm but with Mr. Cross in (Tue/Thu 11:30-13:00 after drama starts, Tue/Thu/Fri 14:00-18:00) stage_practise is shut (npc_cross is_absent) and nothing else is hers to do alone; held to P41/P26, not waived"
   }
  ]
 }

@@ -1,0 +1,89 @@
+{
+ "verdicts": [
+  {
+   "row": "B10",
+   "screen": "opening.ask_mom",
+   "verdict": "PASS",
+   "line": "And go and see the dean first. They make every new student check in before their first class. His office is on the faculty corridor.",
+   "why": "Monday 07:40, one-time opening, one visit: Mom is in the Kitchen (row Mon 07-08); the dean's row is campus_offices weekdays 08-17 and dean_first fires on her first weekday corridor visit 8-17, so 'see the dean first' and 'his office is on the faculty corridor' hold; the corridor is on the menu from goal1_shown, set before this screen."
+  },
+  {
+   "row": "B10",
+   "screen": "opening.sit_with_mom",
+   "verdict": "PASS",
+   "line": "And go and see the dean first, baby. They make every new student check in before their first class. His office is on the faculty corridor.",
+   "why": "Monday 07:50, one-time opening, one visit: Mom is in the Kitchen (row Mon 07-08); the dean's row is campus_offices weekdays 08-17 and dean_first fires on her first weekday corridor visit 8-17, so 'see the dean first' and 'his office is on the faculty corridor' hold; the corridor is on the menu from goal1_shown, set before this screen."
+  },
+  {
+   "row": "B8",
+   "screen": "opening.ask_mom",
+   "verdict": "PASS",
+   "line": "And go and see the dean first. They make every new student check in before their first class. His office is on the faculty corridor.",
+   "why": "No number and no garment on the screen; the three outfit paths all reach it with nothing named."
+  },
+  {
+   "row": "B8",
+   "screen": "opening.sit_with_mom",
+   "verdict": "PASS",
+   "line": "And go and see the dean first, baby. They make every new student check in before their first class. His office is on the faculty corridor.",
+   "why": "No number and no garment on the screen; the three outfit paths all reach it with nothing named."
+  },
+  {
+   "row": "C1631",
+   "screen": "opening.ask_mom",
+   "verdict": "PASS",
+   "line": "And go and see the dean first. They make every new student check in before their first class. His office is on the faculty corridor.",
+   "why": "Lands in home_kitchen at 07:40; Laura's Kitchen row runs to 08:00, so her face and Talk are live; the dean she's sent to is in from 08:00."
+  },
+  {
+   "row": "C1631",
+   "screen": "opening.sit_with_mom",
+   "verdict": "PASS",
+   "line": "And go and see the dean first, baby. They make every new student check in before their first class. His office is on the faculty corridor.",
+   "why": "Lands in home_kitchen at 07:50; Laura's Kitchen row runs to 08:00, so her face and Talk are live; the dean she's sent to is in from 08:00."
+  },
+  {
+   "row": "C460",
+   "screen": "opening.ask_mom",
+   "verdict": "PASS",
+   "line": "And go and see the dean first. They make every new student check in before their first class. His office is on the faculty corridor.",
+   "why": "Every claim true at 07:40 Monday on all three start paths: Mom's there, Mark's gone, the Faculty Offices (described as 'The faculty corridor ... the dean's office at the end') is visible from goal1_shown, and npc_dean is there weekdays 8-5 before psychology at 9."
+  },
+  {
+   "row": "C460",
+   "screen": "opening.sit_with_mom",
+   "verdict": "PASS",
+   "line": "And go and see the dean first, baby. They make every new student check in before their first class. His office is on the faculty corridor.",
+   "why": "Every claim true at 07:50 Monday on all three start paths: Mom's there, Mark's gone, the Faculty Offices (described as 'The faculty corridor ... the dean's office at the end') is visible from goal1_shown, and npc_dean is there weekdays 8-5 before psychology at 9."
+  },
+  {
+   "row": "C461",
+   "screen": "opening.ask_mom",
+   "verdict": "PASS",
+   "line": "And go and see the dean first. They make every new student check in before their first class. His office is on the faculty corridor.",
+   "why": "'They make every new student check in' is Mom's word, not enforced by the game; dialogue that fits her cast entry (the worried mother), and the dean scene backs it."
+  },
+  {
+   "row": "C461",
+   "screen": "opening.sit_with_mom",
+   "verdict": "PASS",
+   "line": "And go and see the dean first, baby. They make every new student check in before their first class. His office is on the faculty corridor.",
+   "why": "'They make every new student check in' is Mom's word, not enforced by the game; dialogue that fits her cast entry (the worried mother), and the dean scene backs it."
+  },
+  {
+   "row": "L106",
+   "screen": "opening.ask_mom",
+   "verdict": "PASS",
+   "line": "And go and see the dean first. They make every new student check in before their first class. His office is on the faculty corridor.",
+   "why": "Only Mom is said to be there; who_is_where puts npc_laura in home_kitchen Mon 07-08. The dean is named as somewhere else (his office), true from 08:00."
+  },
+  {
+   "row": "L106",
+   "screen": "opening.sit_with_mom",
+   "verdict": "PASS",
+   "line": "And go and see the dean first, baby. They make every new student check in before their first class. His office is on the faculty corridor.",
+   "why": "Only Mom is said to be there; who_is_where puts npc_laura in home_kitchen Mon 07-08. The dean is named as somewhere else (his office), true from 08:00."
+  }
+ ],
+ "causes": []
+}

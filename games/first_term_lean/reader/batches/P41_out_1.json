@@ -1,0 +1,1866 @@
+{
+ "verdicts": [
+  {
+   "row": "B1",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "Which one says I don't care, babe? / Be honest, sunshine. Was that a song? / Five minutes. Then the shop.",
+   "why": "Each person wants their own thing on screen (Zoe a verdict, Sam a verdict, Tom his cut, Zoe/Sam and Chris each other); no sexual step toward her, so no earlier-canvas want needed. Checked P20 zoe meeting, P27 zoe_door_sam, P21 cafe_hire/cafe_first_shift",
+   "cause": ""
+  },
+  {
+   "row": "B2",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "Liar. I like you. / two of the bills fold into his own shirt pocket",
+   "why": "Each goes one step past the person's meeting (P20, P27, P21): Sam warms to her, Zoe in her underwear asks her, Tom's theft, Chris with a regular, Zoe and Sam together",
+   "cause": ""
+  },
+  {
+   "row": "B3",
+   "screen": "walk_zoe_sam.out",
+   "verdict": "PASS",
+   "line": "She'll know you were there. Zoe always knows.",
+   "why": "Ends on a pull at what comes next (truth of the pull judged at C460/B10)",
+   "cause": ""
+  },
+  {
+   "row": "B3",
+   "screen": "walk_sam_guitar.truth",
+   "verdict": "PASS",
+   "line": "Brutal. Correct. Again tomorrow.",
+   "why": "Ends on a pull at what comes next (truth of the pull judged at C460/B10)",
+   "cause": ""
+  },
+  {
+   "row": "B3",
+   "screen": "walk_sam_guitar.lie",
+   "verdict": "PASS",
+   "line": "He'll want your verdict again tomorrow.",
+   "why": "Ends on a pull at what comes next (truth of the pull judged at C460/B10)",
+   "cause": ""
+  },
+  {
+   "row": "B3",
+   "screen": "walk_zoe_outfits.pick",
+   "verdict": "PASS",
+   "line": "Next time she'll make you pick for yourself.",
+   "why": "Ends on a pull at what comes next (truth of the pull judged at C460/B10)",
+   "cause": ""
+  },
+  {
+   "row": "B3",
+   "screen": "walk_zoe_outfits.wearing",
+   "verdict": "PASS",
+   "line": "Next time she'll make you pick for yourself.",
+   "why": "Ends on a pull at what comes next (truth of the pull judged at C460/B10)",
+   "cause": ""
+  },
+  {
+   "row": "B3",
+   "screen": "walk_tom_tips.tips",
+   "verdict": "PASS",
+   "line": "You'll be counting the jar next time.",
+   "why": "Ends on a pull at what comes next (truth of the pull judged at C460/B10)",
+   "cause": ""
+  },
+  {
+   "row": "B3",
+   "screen": "walk_chris_store.out",
+   "verdict": "PASS",
+   "line": "He'll do it again next weekend.",
+   "why": "Ends on a pull at what comes next (truth of the pull judged at C460/B10)",
+   "cause": ""
+  },
+  {
+   "row": "B3",
+   "screen": "walk_party_bathroom.watch",
+   "verdict": "PASS",
+   "line": "Next Saturday you'll know that door.",
+   "why": "Ends on a pull at what comes next (truth of the pull judged at C460/B10)",
+   "cause": ""
+  },
+  {
+   "row": "B3",
+   "screen": "walk_party_bathroom.shut",
+   "verdict": "PASS",
+   "line": "Next Saturday you'll know that door.",
+   "why": "Ends on a pull at what comes next (truth of the pull judged at C460/B10)",
+   "cause": ""
+  },
+  {
+   "row": "B3",
+   "screen": "walk_zoe_sam.watch",
+   "verdict": "PASS",
+   "line": "She'll ask what you thought next time. She'll know.",
+   "why": "Ends on a pull at what comes next (truth of the pull judged at C460/B10)",
+   "cause": ""
+  },
+  {
+   "row": "B3",
+   "screen": "walk_tom_tips.nothing",
+   "verdict": "FAIL",
+   "line": "You say nothing. He knows you saw. Now you both know.",
+   "why": "Ends on a state, a shared secret; nothing points at what comes next",
+   "cause": "P41a1-c3"
+  },
+  {
+   "row": "B3",
+   "screen": "walk_chris_store.watch",
+   "verdict": "FAIL",
+   "line": "You're back out front before they come out.",
+   "why": "Ends on her escape this minute; no pull at a next time (the out path has one, this doesn't)",
+   "cause": "P41a1-c3"
+  },
+  {
+   "row": "C149",
+   "screen": "walk_tom_tips.nothing",
+   "verdict": "FAIL",
+   "line": "You say nothing. He knows you saw. Now you both know.",
+   "why": "Ends on a state, a shared secret; nothing points at what comes next",
+   "cause": "P41a1-c3"
+  },
+  {
+   "row": "C149",
+   "screen": "walk_chris_store.watch",
+   "verdict": "FAIL",
+   "line": "You're back out front before they come out.",
+   "why": "Ends on her escape this minute; no pull at a next time (the out path has one, this doesn't)",
+   "cause": "P41a1-c3"
+  },
+  {
+   "row": "C450",
+   "screen": "walk_tom_tips.nothing",
+   "verdict": "FAIL",
+   "line": "You say nothing. He knows you saw. Now you both know.",
+   "why": "Ends on a state, a shared secret; nothing points at what comes next",
+   "cause": "P41a1-c3"
+  },
+  {
+   "row": "C450",
+   "screen": "walk_chris_store.watch",
+   "verdict": "FAIL",
+   "line": "You're back out front before they come out.",
+   "why": "Ends on her escape this minute; no pull at a next time (the out path has one, this doesn't)",
+   "cause": "P41a1-c3"
+  },
+  {
+   "row": "C149",
+   "screen": "walk_zoe_sam.out",
+   "verdict": "PASS",
+   "line": "Zoe always knows.",
+   "why": "Last screen ends on a hook (truth of the hook judged at C460/B10)",
+   "cause": ""
+  },
+  {
+   "row": "C149",
+   "screen": "walk_sam_guitar.truth",
+   "verdict": "PASS",
+   "line": "Again tomorrow.",
+   "why": "Last screen ends on a hook (truth of the hook judged at C460/B10)",
+   "cause": ""
+  },
+  {
+   "row": "C149",
+   "screen": "walk_sam_guitar.lie",
+   "verdict": "PASS",
+   "line": "He'll want your verdict again tomorrow.",
+   "why": "Last screen ends on a hook (truth of the hook judged at C460/B10)",
+   "cause": ""
+  },
+  {
+   "row": "C149",
+   "screen": "walk_zoe_outfits.pick",
+   "verdict": "PASS",
+   "line": "Next time she'll make you pick for yourself.",
+   "why": "Last screen ends on a hook (truth of the hook judged at C460/B10)",
+   "cause": ""
+  },
+  {
+   "row": "C149",
+   "screen": "walk_zoe_outfits.wearing",
+   "verdict": "PASS",
+   "line": "Next time she'll make you pick for yourself.",
+   "why": "Last screen ends on a hook (truth of the hook judged at C460/B10)",
+   "cause": ""
+  },
+  {
+   "row": "C149",
+   "screen": "walk_tom_tips.tips",
+   "verdict": "PASS",
+   "line": "You'll be counting the jar next time.",
+   "why": "Last screen ends on a hook (truth of the hook judged at C460/B10)",
+   "cause": ""
+  },
+  {
+   "row": "C149",
+   "screen": "walk_chris_store.out",
+   "verdict": "PASS",
+   "line": "He'll do it again next weekend.",
+   "why": "Last screen ends on a hook (truth of the hook judged at C460/B10)",
+   "cause": ""
+  },
+  {
+   "row": "C149",
+   "screen": "walk_party_bathroom.watch",
+   "verdict": "PASS",
+   "line": "Next Saturday you'll know that door.",
+   "why": "Last screen ends on a hook (truth of the hook judged at C460/B10)",
+   "cause": ""
+  },
+  {
+   "row": "C149",
+   "screen": "walk_party_bathroom.shut",
+   "verdict": "PASS",
+   "line": "Next Saturday you'll know that door.",
+   "why": "Last screen ends on a hook (truth of the hook judged at C460/B10)",
+   "cause": ""
+  },
+  {
+   "row": "C149",
+   "screen": "walk_zoe_sam.watch",
+   "verdict": "PASS",
+   "line": "She'll ask what you thought next time.",
+   "why": "Last screen ends on a hook (truth of the hook judged at C460/B10)",
+   "cause": ""
+  },
+  {
+   "row": "C450",
+   "screen": "walk_zoe_sam.out",
+   "verdict": "PASS",
+   "line": "Zoe always knows.",
+   "why": "Last screen ends on a hook (truth of the hook judged at C460/B10)",
+   "cause": ""
+  },
+  {
+   "row": "C450",
+   "screen": "walk_sam_guitar.truth",
+   "verdict": "PASS",
+   "line": "Again tomorrow.",
+   "why": "Last screen ends on a hook (truth of the hook judged at C460/B10)",
+   "cause": ""
+  },
+  {
+   "row": "C450",
+   "screen": "walk_sam_guitar.lie",
+   "verdict": "PASS",
+   "line": "He'll want your verdict again tomorrow.",
+   "why": "Last screen ends on a hook (truth of the hook judged at C460/B10)",
+   "cause": ""
+  },
+  {
+   "row": "C450",
+   "screen": "walk_zoe_outfits.pick",
+   "verdict": "PASS",
+   "line": "Next time she'll make you pick for yourself.",
+   "why": "Last screen ends on a hook (truth of the hook judged at C460/B10)",
+   "cause": ""
+  },
+  {
+   "row": "C450",
+   "screen": "walk_zoe_outfits.wearing",
+   "verdict": "PASS",
+   "line": "Next time she'll make you pick for yourself.",
+   "why": "Last screen ends on a hook (truth of the hook judged at C460/B10)",
+   "cause": ""
+  },
+  {
+   "row": "C450",
+   "screen": "walk_tom_tips.tips",
+   "verdict": "PASS",
+   "line": "You'll be counting the jar next time.",
+   "why": "Last screen ends on a hook (truth of the hook judged at C460/B10)",
+   "cause": ""
+  },
+  {
+   "row": "C450",
+   "screen": "walk_chris_store.out",
+   "verdict": "PASS",
+   "line": "He'll do it again next weekend.",
+   "why": "Last screen ends on a hook (truth of the hook judged at C460/B10)",
+   "cause": ""
+  },
+  {
+   "row": "C450",
+   "screen": "walk_party_bathroom.watch",
+   "verdict": "PASS",
+   "line": "Next Saturday you'll know that door.",
+   "why": "Last screen ends on a hook (truth of the hook judged at C460/B10)",
+   "cause": ""
+  },
+  {
+   "row": "C450",
+   "screen": "walk_party_bathroom.shut",
+   "verdict": "PASS",
+   "line": "Next Saturday you'll know that door.",
+   "why": "Last screen ends on a hook (truth of the hook judged at C460/B10)",
+   "cause": ""
+  },
+  {
+   "row": "C450",
+   "screen": "walk_zoe_sam.watch",
+   "verdict": "PASS",
+   "line": "She'll ask what you thought next time.",
+   "why": "Last screen ends on a hook (truth of the hook judged at C460/B10)",
+   "cause": ""
+  },
+  {
+   "row": "B4",
+   "screen": "walk_zoe_sam.moment",
+   "verdict": "FAIL",
+   "line": "Through the half-open hall door: Zoe on top of Sam on the sofa, her top off, his hands full of her tits, her hips grinding down on his cock.",
+   "why": "The moment shows the act with no reaction of hers on her body (no face, breath, nipples), so on the leave path (out/shut) her body is never in the scene; voice.md rule 3, and both canonical sex walk-ins (walk-ins.md B, heat.md) put it on the moment",
+   "cause": "P41a1-c2"
+  },
+  {
+   "row": "B4",
+   "screen": "walk_chris_store.moment",
+   "verdict": "FAIL",
+   "line": "Chris has a regular pinned against the shelves, her skirt up round her waist, his hand down the front of her knickers, working.",
+   "why": "The moment shows the act with no reaction of hers on her body (no face, breath, nipples), so on the leave path (out/shut) her body is never in the scene; voice.md rule 3, and both canonical sex walk-ins (walk-ins.md B, heat.md) put it on the moment",
+   "cause": "P41a1-c2"
+  },
+  {
+   "row": "B4",
+   "screen": "walk_party_bathroom.moment",
+   "verdict": "FAIL",
+   "line": "A couple is on the edge of the bath, her dress round her waist, his face between her thighs.",
+   "why": "The moment shows the act with no reaction of hers on her body (no face, breath, nipples), so on the leave path (out/shut) her body is never in the scene; voice.md rule 3, and both canonical sex walk-ins (walk-ins.md B, heat.md) put it on the moment",
+   "cause": "P41a1-c2"
+  },
+  {
+   "row": "B4",
+   "screen": "walk_sam_guitar.lie",
+   "verdict": "PASS",
+   "line": "\"It was beautiful.\"",
+   "why": "Everyday scenes: her spoken answers fit stage 0 (a joke, a lie, a verdict); watch screens keep her to reaction on her body (thighs, nipples, wet), no act of hers",
+   "cause": ""
+  },
+  {
+   "row": "B5",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "Zoe's laugh carries through it. / Liar. I like you. / Ha. Bitch. You're right.",
+   "why": "Someone reacts in each everyday scene; in the sex walk-ins nobody sees her, which the card declares (being caught watching is out of scope, later; PLAN \u00a710d seen, not heard)",
+   "cause": ""
+  },
+  {
+   "row": "B6",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "Back out the door \u00b7 Lie \u00b7 Tell her the one she's wearing \u00b7 Say nothing \u00b7 Back out \u00b7 Shut the door",
+   "why": "Every scene has a leave or other answer with its own written line and flag; no final no",
+   "cause": ""
+  },
+  {
+   "row": "B7",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "he comes up into her with a groan. / she comes on his hand. / comes over the music.",
+   "why": "Each act beat ends on the body; reaction gets its own paragraph after",
+   "cause": ""
+  },
+  {
+   "row": "B8",
+   "screen": "walk_chris_store.watch",
+   "verdict": "FAIL",
+   "line": "Your nipples are hard under your top.",
+   "why": "She can be in a dress (slot dress items exist, sheet says 'any'); no clothing condition backs 'top'",
+   "cause": "P41a1-c6"
+  },
+  {
+   "row": "B8",
+   "screen": "walk_zoe_sam.moment",
+   "verdict": "PASS",
+   "line": "her top off",
+   "why": "Garments named are Zoe's, the regular's and the stranger's, not hers; no numbers on any screen",
+   "cause": ""
+  },
+  {
+   "row": "B9",
+   "screen": "*",
+   "verdict": "N/A",
+   "line": "",
+   "why": "PLAN names Brooke as rival and Zoe as companion; the companion is not the rival, and Brooke is not on screen",
+   "cause": ""
+  },
+  {
+   "row": "B10",
+   "screen": "walk_zoe_sam.watch",
+   "verdict": "FAIL",
+   "line": "She'll ask what you thought next time. She'll know.",
+   "why": "A future promise nothing builds: no canvas reads saw_zoe_sam, and next visit Zoe asks nothing",
+   "cause": "P41a1-c4"
+  },
+  {
+   "row": "B10",
+   "screen": "walk_zoe_outfits.pick",
+   "verdict": "FAIL",
+   "line": "Next time she'll make you pick for yourself.",
+   "why": "Next visit replays the same moment (she asks which one); no canvas reads zoe_outfit",
+   "cause": "P41a1-c4"
+  },
+  {
+   "row": "B10",
+   "screen": "walk_zoe_outfits.wearing",
+   "verdict": "FAIL",
+   "line": "Next time she'll make you pick for yourself.",
+   "why": "Same unbuilt promise",
+   "cause": "P41a1-c4"
+  },
+  {
+   "row": "B10",
+   "screen": "walk_party_bathroom.moment",
+   "verdict": "FAIL",
+   "line": "The bathroom door isn't locked. A couple is on the edge of the bath",
+   "why": "Second visit the same night: per-day count resets at midnight (getCurrentDayKey week:day), so after a Sat 21-23:59 visit it shows again Sun 00:00-00:59, the same couple starting over",
+   "cause": "P41a1-c5"
+  },
+  {
+   "row": "B10",
+   "screen": "walk_party_bathroom.watch",
+   "verdict": "FAIL",
+   "line": "Next Saturday you'll know that door.",
+   "why": "Within the hour 'Find the bathroom' is back (Sun 00:00-01:00 is a new day key), so 'next Saturday' is false that night",
+   "cause": "P41a1-c5"
+  },
+  {
+   "row": "B10",
+   "screen": "walk_party_bathroom.shut",
+   "verdict": "FAIL",
+   "line": "Next Saturday you'll know that door.",
+   "why": "Same: the scene returns after midnight the same night",
+   "cause": "P41a1-c5"
+  },
+  {
+   "row": "B10",
+   "screen": "walk_chris_store.out",
+   "verdict": "FAIL",
+   "line": "He'll do it again next weekend.",
+   "why": "Window is Sat and Sun, once a day: seen Saturday, it is there again Sunday, not next weekend",
+   "cause": "P41a1-c7"
+  },
+  {
+   "row": "B10",
+   "screen": "walk_chris_store.watch",
+   "verdict": "FAIL",
+   "line": "Your nipples are hard under your top.",
+   "why": "Garment she may not wear (dress)",
+   "cause": "P41a1-c6"
+  },
+  {
+   "row": "B10",
+   "screen": "walk_sam_guitar.moment",
+   "verdict": "PASS",
+   "line": "Sam's alone on the sofa",
+   "why": "Rows: Sam home 12-02 daily, Zoe away 12-18 except Mon/Wed/Fri 13-15 elsewhere and gated is_absent; Brooke/Kayla/Tess only Sat 21-01; 'alone' true at 12:00 and 17:59",
+   "cause": ""
+  },
+  {
+   "row": "B10",
+   "screen": "walk_tom_tips.moment",
+   "verdict": "PASS",
+   "line": "Tom's counting the tip jar before close",
+   "why": "Mon-Sat 20:00-21:00, Tom's row 10-21, caf\u00e9 closes 21:00: true at first and last minute; 'Long week' on a Monday is his gripe, fits him",
+   "cause": ""
+  },
+  {
+   "row": "B10",
+   "screen": "walk_zoe_sam.moment",
+   "verdict": "PASS",
+   "line": "Zoe on top of Sam on the sofa",
+   "why": "Sun-Fri 19-23 and Sat 19-21, both rows put them home and the trigger checks both present; Sat ends before the party row (21:00)",
+   "cause": ""
+  },
+  {
+   "row": "B10",
+   "screen": "walk_zoe_outfits.moment",
+   "verdict": "PASS",
+   "line": "Zoe's at the mirror in her underwear",
+   "why": "18-19 daily, Zoe's row home from 18:00 every day; Sam is home too and isn't named",
+   "cause": ""
+  },
+  {
+   "row": "B11",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "Tell him the truth / Lie / Pick one",
+   "why": "Every button shows the act it names and sets its flag (sam_guitar, zoe_outfit, saw_tom_tips...)",
+   "cause": ""
+  },
+  {
+   "row": "B12",
+   "screen": "*",
+   "verdict": "N/A",
+   "line": "",
+   "why": "The sex walk-ins are explicit acts she sees, not a low-heat charged scene; her missing body on the moment is judged at B4 (P41a1-c2)",
+   "cause": ""
+  },
+  {
+   "row": "B13",
+   "screen": "*",
+   "verdict": "N/A",
+   "line": "",
+   "why": "No screen is a moment alone with her body",
+   "cause": ""
+  },
+  {
+   "row": "C1002",
+   "screen": "*",
+   "verdict": "N/A",
+   "line": "",
+   "why": "No collection, rise, spend or button price in these walk-ins; Tom's pocketed bills are his",
+   "cause": ""
+  },
+  {
+   "row": "C1008",
+   "screen": "*",
+   "verdict": "N/A",
+   "line": "",
+   "why": "No collection, rise, spend or button price in these walk-ins; Tom's pocketed bills are his",
+   "cause": ""
+  },
+  {
+   "row": "C1013",
+   "screen": "*",
+   "verdict": "N/A",
+   "line": "",
+   "why": "No collection, rise, spend or button price in these walk-ins; Tom's pocketed bills are his",
+   "cause": ""
+  },
+  {
+   "row": "C1021",
+   "screen": "*",
+   "verdict": "N/A",
+   "line": "",
+   "why": "No collection, rise, spend or button price in these walk-ins; Tom's pocketed bills are his",
+   "cause": ""
+  },
+  {
+   "row": "C1033",
+   "screen": "*",
+   "verdict": "N/A",
+   "line": "",
+   "why": "No collection, rise, spend or button price in these walk-ins; Tom's pocketed bills are his",
+   "cause": ""
+  },
+  {
+   "row": "C1022",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "two of the bills fold into his own shirt pocket",
+   "why": "No currency named",
+   "cause": ""
+  },
+  {
+   "row": "C1158",
+   "screen": "walk_zoe_outfits.moment",
+   "verdict": "PASS",
+   "line": "Zoe's at the mirror in her underwear",
+   "why": "Garment is Zoe's, not hers",
+   "cause": ""
+  },
+  {
+   "row": "C1158",
+   "screen": "walk_party_bathroom.moment",
+   "verdict": "PASS",
+   "line": "her dress round her waist",
+   "why": "The stranger's dress",
+   "cause": ""
+  },
+  {
+   "row": "C1158",
+   "screen": "walk_chris_store.watch",
+   "verdict": "FAIL",
+   "line": "Your nipples are hard under your top.",
+   "why": "Her 'top' named with no clothing condition or equip; she may wear a dress",
+   "cause": "P41a1-c6"
+  },
+  {
+   "row": "C1206",
+   "screen": "walk_chris_store.watch",
+   "verdict": "FAIL",
+   "line": "Your nipples are hard under your top.",
+   "why": "Names a garment she may not be wearing",
+   "cause": "P41a1-c6"
+  },
+  {
+   "row": "C1206",
+   "screen": "walk_chris_store.moment",
+   "verdict": "PASS",
+   "line": "her skirt up round her waist",
+   "why": "The regular's skirt, not hers",
+   "cause": ""
+  },
+  {
+   "row": "C1173",
+   "screen": "*",
+   "verdict": "N/A",
+   "line": "",
+   "why": "No clothing door here",
+   "cause": ""
+  },
+  {
+   "row": "C1176",
+   "screen": "*",
+   "verdict": "N/A",
+   "line": "",
+   "why": "No clothing read on any sex screen",
+   "cause": ""
+  },
+  {
+   "row": "C1177",
+   "screen": "*",
+   "verdict": "N/A",
+   "line": "",
+   "why": "No exposure of hers",
+   "cause": ""
+  },
+  {
+   "row": "C1184",
+   "screen": "*",
+   "verdict": "N/A",
+   "line": "",
+   "why": "No refusal",
+   "cause": ""
+  },
+  {
+   "row": "C1185",
+   "screen": "*",
+   "verdict": "N/A",
+   "line": "",
+   "why": "No dress code",
+   "cause": ""
+  },
+  {
+   "row": "C1189",
+   "screen": "*",
+   "verdict": "N/A",
+   "line": "",
+   "why": "No state of hers noticed",
+   "cause": ""
+  },
+  {
+   "row": "C1198",
+   "screen": "*",
+   "verdict": "N/A",
+   "line": "",
+   "why": "No refusal",
+   "cause": ""
+  },
+  {
+   "row": "C1200",
+   "screen": "*",
+   "verdict": "N/A",
+   "line": "",
+   "why": "No place clothes asked",
+   "cause": ""
+  },
+  {
+   "row": "C1220",
+   "screen": "*",
+   "verdict": "N/A",
+   "line": "",
+   "why": "No dress code at either place on these screens",
+   "cause": ""
+  },
+  {
+   "row": "C1221",
+   "screen": "*",
+   "verdict": "N/A",
+   "line": "",
+   "why": "No dress-code exception",
+   "cause": ""
+  },
+  {
+   "row": "C1234",
+   "screen": "walk_zoe_sam.moment",
+   "verdict": "PASS",
+   "line": "image right after the moment's act line",
+   "why": "The clip sits on the line it shows",
+   "cause": ""
+  },
+  {
+   "row": "C1238",
+   "screen": "walk_zoe_sam.moment",
+   "verdict": "PASS",
+   "line": "riding... topless, his hands on her breasts / going down on... edge of a bathtub",
+   "why": "Each pool picture is the act the line names, every visit",
+   "cause": ""
+  },
+  {
+   "row": "C1255",
+   "screen": "walk_zoe_sam.moment",
+   "verdict": "PASS",
+   "line": "pool_dir sex/zoe_sam_sofa_t5 / sex/party_bathroom_t5",
+   "why": "Each pool_dir appears once in the game",
+   "cause": ""
+  },
+  {
+   "row": "C1261",
+   "screen": "walk_zoe_sam.moment",
+   "verdict": "PASS",
+   "line": "",
+   "why": "Spot is the sex she watches, where the player wants to look",
+   "cause": ""
+  },
+  {
+   "row": "C1265",
+   "screen": "walk_zoe_sam.moment",
+   "verdict": "PASS",
+   "line": "",
+   "why": "Not a chore, door or menu",
+   "cause": ""
+  },
+  {
+   "row": "C1267",
+   "screen": "walk_zoe_sam.moment",
+   "verdict": "PASS",
+   "line": "",
+   "why": "The act is what words can't give",
+   "cause": ""
+  },
+  {
+   "row": "C1275",
+   "screen": "walk_zoe_sam.moment",
+   "verdict": "PASS",
+   "line": "gif in both search phrases",
+   "why": "Something happens: gif",
+   "cause": ""
+  },
+  {
+   "row": "C1277",
+   "screen": "walk_zoe_sam.moment",
+   "verdict": "PASS",
+   "line": "Seen through a half-open door / on the edge of a bathtub at a party",
+   "why": "Names what the scene is named for (the hall door; the bathroom)",
+   "cause": ""
+  },
+  {
+   "row": "C1278",
+   "screen": "walk_zoe_sam.moment",
+   "verdict": "PASS",
+   "line": "a woman of 19 riding a man of 22 / a man in his twenties ... a woman in her twenties",
+   "why": "Ages given for everyone in frame; she is not in frame",
+   "cause": ""
+  },
+  {
+   "row": "C1280",
+   "screen": "walk_zoe_sam.moment",
+   "verdict": "PASS",
+   "line": "pool = 4",
+   "why": "Explicit spot on a repeat: 4",
+   "cause": ""
+  },
+  {
+   "row": "C1281",
+   "screen": "walk_zoe_sam.moment",
+   "verdict": "PASS",
+   "line": "Nobody looking at the camera.",
+   "why": "No one looking at her in frame",
+   "cause": ""
+  },
+  {
+   "row": "L119",
+   "screen": "walk_zoe_sam.moment",
+   "verdict": "PASS",
+   "line": "pool = 4",
+   "why": "Pool written, sized by tier",
+   "cause": ""
+  },
+  {
+   "row": "L120",
+   "screen": "walk_zoe_sam.moment",
+   "verdict": "PASS",
+   "line": "",
+   "why": "No 'man looking at her' frame; a two-person sex frame is the subject and the searches say it plainly",
+   "cause": ""
+  },
+  {
+   "row": "L121",
+   "screen": "walk_zoe_sam.moment",
+   "verdict": "PASS",
+   "line": "",
+   "why": "Spot only on the sex screens; everyday scenes get none",
+   "cause": ""
+  },
+  {
+   "row": "L125",
+   "screen": "walk_zoe_sam.moment",
+   "verdict": "PASS",
+   "line": "",
+   "why": "Clip shows the act on the moment; the climax (payoff) is the watch screen and has no clip",
+   "cause": ""
+  },
+  {
+   "row": "C1234",
+   "screen": "walk_party_bathroom.moment",
+   "verdict": "PASS",
+   "line": "image right after the moment's act line",
+   "why": "The clip sits on the line it shows",
+   "cause": ""
+  },
+  {
+   "row": "C1238",
+   "screen": "walk_party_bathroom.moment",
+   "verdict": "PASS",
+   "line": "riding... topless, his hands on her breasts / going down on... edge of a bathtub",
+   "why": "Each pool picture is the act the line names, every visit",
+   "cause": ""
+  },
+  {
+   "row": "C1255",
+   "screen": "walk_party_bathroom.moment",
+   "verdict": "PASS",
+   "line": "pool_dir sex/zoe_sam_sofa_t5 / sex/party_bathroom_t5",
+   "why": "Each pool_dir appears once in the game",
+   "cause": ""
+  },
+  {
+   "row": "C1261",
+   "screen": "walk_party_bathroom.moment",
+   "verdict": "PASS",
+   "line": "",
+   "why": "Spot is the sex she watches, where the player wants to look",
+   "cause": ""
+  },
+  {
+   "row": "C1265",
+   "screen": "walk_party_bathroom.moment",
+   "verdict": "PASS",
+   "line": "",
+   "why": "Not a chore, door or menu",
+   "cause": ""
+  },
+  {
+   "row": "C1267",
+   "screen": "walk_party_bathroom.moment",
+   "verdict": "PASS",
+   "line": "",
+   "why": "The act is what words can't give",
+   "cause": ""
+  },
+  {
+   "row": "C1275",
+   "screen": "walk_party_bathroom.moment",
+   "verdict": "PASS",
+   "line": "gif in both search phrases",
+   "why": "Something happens: gif",
+   "cause": ""
+  },
+  {
+   "row": "C1277",
+   "screen": "walk_party_bathroom.moment",
+   "verdict": "PASS",
+   "line": "Seen through a half-open door / on the edge of a bathtub at a party",
+   "why": "Names what the scene is named for (the hall door; the bathroom)",
+   "cause": ""
+  },
+  {
+   "row": "C1278",
+   "screen": "walk_party_bathroom.moment",
+   "verdict": "PASS",
+   "line": "a woman of 19 riding a man of 22 / a man in his twenties ... a woman in her twenties",
+   "why": "Ages given for everyone in frame; she is not in frame",
+   "cause": ""
+  },
+  {
+   "row": "C1280",
+   "screen": "walk_party_bathroom.moment",
+   "verdict": "PASS",
+   "line": "pool = 4",
+   "why": "Explicit spot on a repeat: 4",
+   "cause": ""
+  },
+  {
+   "row": "C1281",
+   "screen": "walk_party_bathroom.moment",
+   "verdict": "PASS",
+   "line": "Nobody looking at the camera.",
+   "why": "No one looking at her in frame",
+   "cause": ""
+  },
+  {
+   "row": "L119",
+   "screen": "walk_party_bathroom.moment",
+   "verdict": "PASS",
+   "line": "pool = 4",
+   "why": "Pool written, sized by tier",
+   "cause": ""
+  },
+  {
+   "row": "L120",
+   "screen": "walk_party_bathroom.moment",
+   "verdict": "PASS",
+   "line": "",
+   "why": "No 'man looking at her' frame; a two-person sex frame is the subject and the searches say it plainly",
+   "cause": ""
+  },
+  {
+   "row": "L121",
+   "screen": "walk_party_bathroom.moment",
+   "verdict": "PASS",
+   "line": "",
+   "why": "Spot only on the sex screens; everyday scenes get none",
+   "cause": ""
+  },
+  {
+   "row": "L125",
+   "screen": "walk_party_bathroom.moment",
+   "verdict": "PASS",
+   "line": "",
+   "why": "Clip shows the act on the moment; the climax (payoff) is the watch screen and has no clip",
+   "cause": ""
+  },
+  {
+   "row": "C1249",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "",
+   "why": "Note: two spots, both on sex screens",
+   "cause": ""
+  },
+  {
+   "row": "C1274",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "_t5, gif",
+   "why": "Sex, animated",
+   "cause": ""
+  },
+  {
+   "row": "C1250",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "",
+   "why": "No room text added; both places' descriptions untouched",
+   "cause": ""
+  },
+  {
+   "row": "C1279",
+   "screen": "*",
+   "verdict": "N/A",
+   "line": "",
+   "why": "No mirror picture (Zoe's mirror scene has no spot)",
+   "cause": ""
+  },
+  {
+   "row": "C1284",
+   "screen": "walk_zoe_sam.moment",
+   "verdict": "PASS",
+   "line": "Seen through a half-open door: ...",
+   "why": "What she sees from the door",
+   "cause": ""
+  },
+  {
+   "row": "C1284",
+   "screen": "walk_party_bathroom.moment",
+   "verdict": "FAIL",
+   "line": "A man in his twenties going down on a woman in her twenties on the edge of a bathtub at a party",
+   "why": "Not written as what she sees from the bathroom doorway (no 'Seen from a bathroom doorway:'), unlike the sofa spot",
+   "cause": "P41a1-c8"
+  },
+  {
+   "row": "C1303",
+   "screen": "*",
+   "verdict": "N/A",
+   "line": "",
+   "why": "No need, lock or refill on these screens",
+   "cause": ""
+  },
+  {
+   "row": "C1313",
+   "screen": "*",
+   "verdict": "N/A",
+   "line": "",
+   "why": "No need, lock or refill on these screens",
+   "cause": ""
+  },
+  {
+   "row": "C1337",
+   "screen": "*",
+   "verdict": "N/A",
+   "line": "",
+   "why": "No need, lock or refill on these screens",
+   "cause": ""
+  },
+  {
+   "row": "C1360",
+   "screen": "*",
+   "verdict": "N/A",
+   "line": "",
+   "why": "No need, lock or refill on these screens",
+   "cause": ""
+  },
+  {
+   "row": "C1421",
+   "screen": "*",
+   "verdict": "N/A",
+   "line": "",
+   "why": "No need, lock or refill on these screens",
+   "cause": ""
+  },
+  {
+   "row": "C1423",
+   "screen": "*",
+   "verdict": "N/A",
+   "line": "",
+   "why": "No need, lock or refill on these screens",
+   "cause": ""
+  },
+  {
+   "row": "C1425",
+   "screen": "*",
+   "verdict": "N/A",
+   "line": "",
+   "why": "No need, lock or refill on these screens",
+   "cause": ""
+  },
+  {
+   "row": "C1427",
+   "screen": "*",
+   "verdict": "N/A",
+   "line": "",
+   "why": "No need, lock or refill on these screens",
+   "cause": ""
+  },
+  {
+   "row": "C1433",
+   "screen": "*",
+   "verdict": "N/A",
+   "line": "",
+   "why": "No need, lock or refill on these screens",
+   "cause": ""
+  },
+  {
+   "row": "C1434",
+   "screen": "*",
+   "verdict": "N/A",
+   "line": "",
+   "why": "No need, lock or refill on these screens",
+   "cause": ""
+  },
+  {
+   "row": "C1441",
+   "screen": "*",
+   "verdict": "N/A",
+   "line": "",
+   "why": "No need, lock or refill on these screens",
+   "cause": ""
+  },
+  {
+   "row": "C1342",
+   "screen": "*",
+   "verdict": "N/A",
+   "line": "",
+   "why": "No need touched; walk-ins move no need",
+   "cause": ""
+  },
+  {
+   "row": "C1431",
+   "screen": "*",
+   "verdict": "N/A",
+   "line": "",
+   "why": "No need touched; walk-ins move no need",
+   "cause": ""
+  },
+  {
+   "row": "C1432",
+   "screen": "*",
+   "verdict": "N/A",
+   "line": "",
+   "why": "No need touched; walk-ins move no need",
+   "cause": ""
+  },
+  {
+   "row": "C1438",
+   "screen": "*",
+   "verdict": "N/A",
+   "line": "",
+   "why": "No need touched; walk-ins move no need",
+   "cause": ""
+  },
+  {
+   "row": "C1428",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "",
+   "why": "No energy cost on any person's scene",
+   "cause": ""
+  },
+  {
+   "row": "C1340",
+   "screen": "*",
+   "verdict": "N/A",
+   "line": "",
+   "why": "Note: no housemate here; walk-ins are events, not Talk buttons",
+   "cause": ""
+  },
+  {
+   "row": "C1345",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "max_triggers_per_day = 1",
+   "why": "Once a day on every canvas",
+   "cause": ""
+  },
+  {
+   "row": "C146",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "",
+   "why": "Note: walk-ins are repeatable by design (walk-ins.md step 7); none carries a reveal",
+   "cause": ""
+  },
+  {
+   "row": "C151",
+   "screen": "walk_zoe_sam.moment",
+   "verdict": "FAIL",
+   "line": "Don't you dare come yet. Don't you dare. / Then stop doing that. Fuck.",
+   "why": "note row: two spoken lines on a repeatable",
+   "cause": ""
+  },
+  {
+   "row": "C151",
+   "screen": "walk_chris_store.moment",
+   "verdict": "FAIL",
+   "line": "Chris. The shop. / Five minutes. Then the shop.",
+   "why": "note row: two spoken lines on a repeatable",
+   "cause": ""
+  },
+  {
+   "row": "C151",
+   "screen": "walk_sam_guitar.moment",
+   "verdict": "PASS",
+   "line": "Be honest, sunshine. Was that a song?",
+   "why": "One spoken line",
+   "cause": ""
+  },
+  {
+   "row": "C164",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "Back out the door \u00b7 Lie \u00b7 Say nothing \u00b7 Back out \u00b7 Shut the door",
+   "why": "Each no parks: the scene returns next day/window; no final no anywhere",
+   "cause": ""
+  },
+  {
+   "row": "C165",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "Back out the door \u00b7 Lie \u00b7 Say nothing \u00b7 Back out \u00b7 Shut the door",
+   "why": "Each no parks: the scene returns next day/window; no final no anywhere",
+   "cause": ""
+  },
+  {
+   "row": "C166",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "Back out the door \u00b7 Lie \u00b7 Say nothing \u00b7 Back out \u00b7 Shut the door",
+   "why": "Each no parks: the scene returns next day/window; no final no anywhere",
+   "cause": ""
+  },
+  {
+   "row": "C286",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "Watch / Back out",
+   "why": "Note: sex she sees, allowed in release 1 (heat.md shape 4); no act of hers, no housemate",
+   "cause": ""
+  },
+  {
+   "row": "C287",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "Watch / Back out",
+   "why": "Note: sex she sees, allowed in release 1 (heat.md shape 4); no act of hers, no housemate",
+   "cause": ""
+  },
+  {
+   "row": "C288",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "Watch / Back out",
+   "why": "Note: sex she sees, allowed in release 1 (heat.md shape 4); no act of hers, no housemate",
+   "cause": ""
+  },
+  {
+   "row": "C291",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "Watch / Back out",
+   "why": "Note: sex she sees, allowed in release 1 (heat.md shape 4); no act of hers, no housemate",
+   "cause": ""
+  },
+  {
+   "row": "C296",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "Watch / Back out",
+   "why": "Note: sex she sees, allowed in release 1 (heat.md shape 4); no act of hers, no housemate",
+   "cause": ""
+  },
+  {
+   "row": "C297",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "Watch / Back out",
+   "why": "Note: sex she sees, allowed in release 1 (heat.md shape 4); no act of hers, no housemate",
+   "cause": ""
+  },
+  {
+   "row": "C289",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "Your thighs are pressed together",
+   "why": "Her body stays covered and does nothing; she watches, release 1's cut",
+   "cause": ""
+  },
+  {
+   "row": "C311",
+   "screen": "*",
+   "verdict": "N/A",
+   "line": "",
+   "why": "No low-heat scene with a man reacting to her body; the sex she watches is judged at C442/B4",
+   "cause": ""
+  },
+  {
+   "row": "C314",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "",
+   "why": "Not talk only: the acts are on screen",
+   "cause": ""
+  },
+  {
+   "row": "C330",
+   "screen": "*",
+   "verdict": "N/A",
+   "line": "",
+   "why": "No meter moves",
+   "cause": ""
+  },
+  {
+   "row": "C422",
+   "screen": "walk_zoe_sam.moment",
+   "verdict": "PASS",
+   "line": "Through the hall door / Sam's got his guitar / Tom's at the tip jar / The storeroom door / Find the bathroom",
+   "why": "Each says what she walks into",
+   "cause": ""
+  },
+  {
+   "row": "C422",
+   "screen": "walk_zoe_outfits.moment",
+   "verdict": "FAIL",
+   "line": "Zoe's choosing",
+   "why": "Label doesn't say what clicking does or what Zoe is choosing; the player can't tell it's her outfits at the mirror",
+   "cause": "P41a1-c9"
+  },
+  {
+   "row": "C442",
+   "screen": "walk_party_bathroom.moment",
+   "verdict": "FAIL",
+   "line": "his face between her thighs",
+   "why": "Hints the act instead of saying it: 'between her thighs' is the euphemism heat.md bans; no part named (0 frozen-list words on this beat)",
+   "cause": "P41a1-c1"
+  },
+  {
+   "row": "C442",
+   "screen": "walk_party_bathroom.watch",
+   "verdict": "FAIL",
+   "line": "His tongue works her until she pulls his hair and comes over the music.",
+   "why": "Hints the act instead of saying it: 'between her thighs' is the euphemism heat.md bans; no part named (0 frozen-list words on this beat)",
+   "cause": "P41a1-c1"
+  },
+  {
+   "row": "C442",
+   "screen": "walk_chris_store.moment",
+   "verdict": "FAIL",
+   "line": "his hand down the front of her knickers, working",
+   "why": "Hints the act instead of saying it: 'between her thighs' is the euphemism heat.md bans; no part named (0 frozen-list words on this beat)",
+   "cause": "P41a1-c1"
+  },
+  {
+   "row": "C442",
+   "screen": "walk_chris_store.watch",
+   "verdict": "FAIL",
+   "line": "He works her faster, two fingers inside her, until her knees buckle and she comes on his hand.",
+   "why": "Hints the act instead of saying it: 'between her thighs' is the euphemism heat.md bans; no part named (0 frozen-list words on this beat)",
+   "cause": "P41a1-c1"
+  },
+  {
+   "row": "C442",
+   "screen": "walk_zoe_sam.moment",
+   "verdict": "PASS",
+   "line": "her hips grinding down on his cock",
+   "why": "Says it plainly",
+   "cause": ""
+  },
+  {
+   "row": "C442",
+   "screen": "walk_sam_guitar.moment",
+   "verdict": "PASS",
+   "line": "Sam's alone on the sofa with a guitar he can't play",
+   "why": "Everyday screens say what happens",
+   "cause": ""
+  },
+  {
+   "row": "C447",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "babe / sunshine / Long day. Long week. / Five minutes. Then the shop.",
+   "why": "Each holds their manner from their meetings",
+   "cause": ""
+  },
+  {
+   "row": "C449",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "Your thighs are pressed together and your face is on fire. / You're wet.",
+   "why": "Sexual tension named on the watch screens (her missing reaction on moments is c2 at B4)",
+   "cause": ""
+  },
+  {
+   "row": "C451",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "tip jar, shirt pocket, three outfits, the black one, edge of the bath, the shelves",
+   "why": "Concrete detail kept",
+   "cause": ""
+  },
+  {
+   "row": "C460",
+   "screen": "walk_zoe_sam.watch",
+   "verdict": "FAIL",
+   "line": "She'll ask what you thought next time.",
+   "why": "Unbuilt future promise (nothing reads saw_zoe_sam)",
+   "cause": "P41a1-c4"
+  },
+  {
+   "row": "C460",
+   "screen": "walk_zoe_outfits.pick",
+   "verdict": "FAIL",
+   "line": "Next time she'll make you pick for yourself.",
+   "why": "Unbuilt future promise (nothing reads zoe_outfit)",
+   "cause": "P41a1-c4"
+  },
+  {
+   "row": "C460",
+   "screen": "walk_zoe_outfits.wearing",
+   "verdict": "FAIL",
+   "line": "Next time she'll make you pick for yourself.",
+   "why": "Unbuilt future promise",
+   "cause": "P41a1-c4"
+  },
+  {
+   "row": "C460",
+   "screen": "walk_party_bathroom.watch",
+   "verdict": "FAIL",
+   "line": "Next Saturday you'll know that door.",
+   "why": "Shows again after midnight the same night",
+   "cause": "P41a1-c5"
+  },
+  {
+   "row": "C460",
+   "screen": "walk_party_bathroom.shut",
+   "verdict": "FAIL",
+   "line": "Next Saturday you'll know that door.",
+   "why": "Shows again after midnight the same night",
+   "cause": "P41a1-c5"
+  },
+  {
+   "row": "C460",
+   "screen": "walk_chris_store.out",
+   "verdict": "FAIL",
+   "line": "He'll do it again next weekend.",
+   "why": "Shows again the next day (Sun) inside the same weekend",
+   "cause": "P41a1-c7"
+  },
+  {
+   "row": "C460",
+   "screen": "walk_chris_store.watch",
+   "verdict": "FAIL",
+   "line": "Your nipples are hard under your top.",
+   "why": "Garment she may not be wearing",
+   "cause": "P41a1-c6"
+  },
+  {
+   "row": "C460",
+   "screen": "walk_tom_tips.tips",
+   "verdict": "PASS",
+   "line": "You'll be counting the jar next time.",
+   "why": "met_tom is set only with cafe_hired (cafe_hire sign/both), so she works there whenever this shows",
+   "cause": ""
+  },
+  {
+   "row": "C460",
+   "screen": "walk_chris_store.out",
+   "verdict": "PASS",
+   "line": "You back out into the caf\u00e9.",
+   "why": "Storeroom lines hold hired or not: she's in the caf\u00e9, the door is open a crack",
+   "cause": ""
+  },
+  {
+   "row": "C460",
+   "screen": "walk_sam_guitar.truth",
+   "verdict": "PASS",
+   "line": "Again tomorrow.",
+   "why": "Built: the guitar scene is daily 12-18 with Sam home and Zoe out",
+   "cause": ""
+  },
+  {
+   "row": "C461",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "Zoe always knows. / Ha. Bitch. You're right.",
+   "why": "Opinions and dialogue that fit the cast entries",
+   "cause": ""
+  },
+  {
+   "row": "C519",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "",
+   "why": "Note: every screen one job, under 40 words",
+   "cause": ""
+  },
+  {
+   "row": "C593",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "babe (Zoe) / sunshine (Sam)",
+   "why": "Terms of address are each person's own; Tom and Chris use none here",
+   "cause": ""
+  },
+  {
+   "row": "C601",
+   "screen": "*",
+   "verdict": "N/A",
+   "line": "",
+   "why": "Not a first meeting, no man's leak toward her",
+   "cause": ""
+  },
+  {
+   "row": "C613",
+   "screen": "*",
+   "verdict": "N/A",
+   "line": "",
+   "why": "No man acts toward her",
+   "cause": ""
+  },
+  {
+   "row": "C620",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "",
+   "why": "Note: people shown by faces from rows; met-gated",
+   "cause": ""
+  },
+  {
+   "row": "C625",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "a regular / A couple",
+   "why": "Note: strangers by role; named people only after met flags",
+   "cause": ""
+  },
+  {
+   "row": "C626",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "",
+   "why": "Note: names after met_sam/met_tom/met_chris/zoe_place_known",
+   "cause": ""
+  },
+  {
+   "row": "C630",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "Zoe / Sam / Tom / Chris",
+   "why": "Names on screen after each meeting gave name and relation; their faces carry role (Zoe's roommate, Caf\u00e9 manager, Barista)",
+   "cause": ""
+  },
+  {
+   "row": "C632",
+   "screen": "*",
+   "verdict": "N/A",
+   "line": "",
+   "why": "No role label written here",
+   "cause": ""
+  },
+  {
+   "row": "C639",
+   "screen": "*",
+   "verdict": "N/A",
+   "line": "",
+   "why": "No offer from a person; walk-ins are two answers by design (C792)",
+   "cause": ""
+  },
+  {
+   "row": "C640",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "He doesn't put them back. / Zoe's laugh carries through it.",
+   "why": "Note: every no lands on its own line and flag",
+   "cause": ""
+  },
+  {
+   "row": "C644",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "guitar / tip jar / storeroom",
+   "why": "Note: each person's own corner",
+   "cause": ""
+  },
+  {
+   "row": "C758",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "Watch \u00b7 Lie \u00b7 Pick one \u00b7 Say nothing",
+   "why": "Note: short labels",
+   "cause": ""
+  },
+  {
+   "row": "C762",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "",
+   "why": "No 'Nothing happens'; Sam's guitar fills the empty afternoon at Zoe's (P27 places#6)",
+   "cause": ""
+  },
+  {
+   "row": "C769",
+   "screen": "*",
+   "verdict": "N/A",
+   "line": "",
+   "why": "No place description changed",
+   "cause": ""
+  },
+  {
+   "row": "C770",
+   "screen": "*",
+   "verdict": "N/A",
+   "line": "",
+   "why": "No room screen here",
+   "cause": ""
+  },
+  {
+   "row": "C771",
+   "screen": "*",
+   "verdict": "N/A",
+   "line": "",
+   "why": "No first-visit screen",
+   "cause": ""
+  },
+  {
+   "row": "C773",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "",
+   "why": "Buttons are scenes, not a browse list of objects",
+   "cause": ""
+  },
+  {
+   "row": "C776",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "",
+   "why": "Walk-in buttons are owned by walk-ins.md (a canvas with trigger.location shows as a button there; places.md line 3), not a person's actions on the menu",
+   "cause": ""
+  },
+  {
+   "row": "C777",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "",
+   "why": "Same: walk-ins are events at the place, each a beat behind its button",
+   "cause": ""
+  },
+  {
+   "row": "C794",
+   "screen": "*",
+   "verdict": "N/A",
+   "line": "",
+   "why": "No identity sentence changed",
+   "cause": ""
+  },
+  {
+   "row": "C795",
+   "screen": "*",
+   "verdict": "N/A",
+   "line": "",
+   "why": "No re-entry change",
+   "cause": ""
+  },
+  {
+   "row": "C804",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "",
+   "why": "No per-person room line added",
+   "cause": ""
+  },
+  {
+   "row": "C889",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "Watch / Done",
+   "why": "Note: no time or energy on labels",
+   "cause": ""
+  },
+  {
+   "row": "C892",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "",
+   "why": "Note: hours on the trigger, not in the act",
+   "cause": ""
+  },
+  {
+   "row": "C897",
+   "screen": "*",
+   "verdict": "N/A",
+   "line": "",
+   "why": "No travel",
+   "cause": ""
+  },
+  {
+   "row": "C900",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "before close",
+   "why": "Relative and true across Tom's 20-21 window; no clock time in a beat",
+   "cause": ""
+  },
+  {
+   "row": "C902",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "Tom's counting the tip jar before close",
+   "why": "Note: true at 20:59",
+   "cause": ""
+  },
+  {
+   "row": "C903",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "next weekend / Next Saturday",
+   "why": "Only on canvases behind weekday conditions (Sat/Sun)",
+   "cause": ""
+  },
+  {
+   "row": "C906",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "",
+   "why": "No 'till' promise",
+   "cause": ""
+  },
+  {
+   "row": "C910",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "Done / Watch / Back out",
+   "why": "No time, energy or money on any button",
+   "cause": ""
+  },
+  {
+   "row": "C929",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "Done / Watch / Back out",
+   "why": "No time, energy or money on any button",
+   "cause": ""
+  },
+  {
+   "row": "C953",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "Done / Watch / Back out",
+   "why": "No time, energy or money on any button",
+   "cause": ""
+  },
+  {
+   "row": "C913",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "",
+   "why": "Walk-ins are events that happen to her; they stay hidden when shut (C916)",
+   "cause": ""
+  },
+  {
+   "row": "C914",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "",
+   "why": "No hours shown",
+   "cause": ""
+  },
+  {
+   "row": "C916",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "",
+   "why": "Each is an event she walks into, hidden out of window",
+   "cause": ""
+  },
+  {
+   "row": "C920",
+   "screen": "*",
+   "verdict": "N/A",
+   "line": "",
+   "why": "No hop",
+   "cause": ""
+  },
+  {
+   "row": "C924",
+   "screen": "*",
+   "verdict": "N/A",
+   "line": "",
+   "why": "No travel",
+   "cause": ""
+  },
+  {
+   "row": "C926",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "time_progression_minutes = 5",
+   "why": "Only minutes",
+   "cause": ""
+  },
+  {
+   "row": "C927",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "Done (5 min)",
+   "why": "Every exit 5 minutes",
+   "cause": ""
+  },
+  {
+   "row": "C928",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "",
+   "why": "No clock in prose",
+   "cause": ""
+  },
+  {
+   "row": "C930",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "",
+   "why": "Note: no show_when_blocked, they vanish by design",
+   "cause": ""
+  },
+  {
+   "row": "C931",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "21:00-00:00 (Sat) / 00:00-01:00 (Sun) / 23:00 / 19:00-21:00",
+   "why": "End exclusive and wraps; windows match the card",
+   "cause": ""
+  },
+  {
+   "row": "C951",
+   "screen": "*",
+   "verdict": "N/A",
+   "line": "",
+   "why": "No amount she pays or earns on screen",
+   "cause": ""
+  },
+  {
+   "row": "C952",
+   "screen": "*",
+   "verdict": "N/A",
+   "line": "",
+   "why": "No amount she pays or earns on screen",
+   "cause": ""
+  },
+  {
+   "row": "C954",
+   "screen": "*",
+   "verdict": "N/A",
+   "line": "",
+   "why": "No amount she pays or earns on screen",
+   "cause": ""
+  },
+  {
+   "row": "L106",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "Zoe / Sam / Tom / Chris / Sam's alone",
+   "why": "Every named person is present by rows and checked by npc_at_location; Sam 'alone' matches (Zoe is_absent, no one else's row there 12-18)",
+   "cause": ""
+  },
+  {
+   "row": "L166",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "",
+   "why": "Walk-ins are events, not her repeat activities; their fixed windows are said on the card with reasons (party at 21:00, Zoe dressing before the evening)",
+   "cause": ""
+  },
+  {
+   "row": "L167",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "weekday group OR on walk_zoe_sam and walk_party_bathroom",
+   "why": "Different hours on different days are one canvas with a group condition; events hidden when shut, so no greying asked (C916)",
+   "cause": ""
+  },
+  {
+   "row": "L71",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "Watch",
+   "why": "She watches; nothing is done to or by her body; no letting him",
+   "cause": ""
+  },
+  {
+   "row": "C596",
+   "screen": "*",
+   "verdict": "N/A",
+   "line": "",
+   "why": "No talk screen or person's menu among these walk-ins",
+   "cause": ""
+  }
+ ],
+ "causes": [
+  {
+   "id": "P41a1-c1",
+   "what": "The party bathroom and the storeroom write the act soft: 'his face between her thighs', 'his hand down the front of her knickers, working', 'His tongue works her', 'two fingers inside her' name no part (0 frozen-list words per beat; Zoe/Sam's watch beat has 0 too and its moment 2). The card's Does: never tags these screens 'an explicit beat', so C239/C254 (3+ words, crude, no euphemism) were never asked"
+  },
+  {
+   "id": "P41a1-c2",
+   "what": "On the three sex walk-ins the moment screen shows the act with no reaction of hers on her body, so the Back out / Shut the door path never puts her body in the scene (voice.md rule 3; walk-ins.md B and heat.md put 'Your face burns' on the moment)"
+  },
+  {
+   "id": "P41a1-c3",
+   "what": "Two answer screens end with no pull: Tom's 'Now you both know.' and Chris's watch 'You're back out front before they come out.'"
+  },
+  {
+   "id": "P41a1-c4",
+   "what": "Zoe's pulls promise what nothing builds: 'She'll ask what you thought next time' and 'Next time she'll make you pick for yourself' (no canvas reads saw_zoe_sam or zoe_outfit; the next visit replays the same scene)"
+  },
+  {
+   "id": "P41a1-c5",
+   "what": "The party bathroom's once a night is a per-day count, so it fires again Sun 00:00-01:00 after a Saturday 21:00-23:59 visit; 'Next Saturday you'll know that door.' is false within the hour"
+  },
+  {
+   "id": "P41a1-c6",
+   "what": "'Your nipples are hard under your top.' names a top she may not be wearing (dresses exist, sheet 'any')"
+  },
+  {
+   "id": "P41a1-c7",
+   "what": "Chris's storeroom runs Sat and Sun, once a day, so 'He'll do it again next weekend.' is false on a Saturday: it's there again Sunday"
+  },
+  {
+   "id": "P41a1-c8",
+   "what": "The party bathroom's picture description isn't written as what she sees from the doorway ('Seen from a bathroom doorway: ...'), unlike the sofa spot"
+  },
+  {
+   "id": "P41a1-c9",
+   "what": "The label 'Zoe's choosing' doesn't say what clicking does (Zoe choosing outfits at the mirror)"
+  }
+ ]
+}

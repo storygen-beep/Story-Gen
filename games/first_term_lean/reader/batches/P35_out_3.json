@@ -1,0 +1,279 @@
+{
+ "verdicts": [
+  {
+   "row": "B10",
+   "screen": "shop_meet_nina.meet",
+   "verdict": "FAIL",
+   "line": "A woman in her twenties is behind the till in a black dress",
+   "why": "the trigger needs only Nina at hood_clothes (npc_at_location reads location, v2.py:5405-5407); her new row has her 'in the fitting room' 18:45-19:00 there, so a first visit at 18:50 opens on her behind the till",
+   "cause": "P35r8-c1"
+  },
+  {
+   "row": "C460",
+   "screen": "shop_meet_nina.meet",
+   "verdict": "FAIL",
+   "line": "A woman in her twenties is behind the till in a black dress",
+   "why": "same: false on a first visit 18:45-18:59 Mon-Sat",
+   "cause": "P35r8-c1"
+  },
+  {
+   "row": "C461",
+   "screen": "shop_meet_nina.meet",
+   "verdict": "FAIL",
+   "line": "A woman in her twenties is behind the till in a black dress",
+   "why": "a where-she-is claim, not texture; clashes with her fitting-room row",
+   "cause": "P35r8-c1"
+  },
+  {
+   "row": "B8",
+   "screen": "shop_meet_nina.meet",
+   "verdict": "PASS",
+   "line": "A woman in her twenties",
+   "why": "Nina is 26; no garment of hers named"
+  },
+  {
+   "row": "L106",
+   "screen": "shop_meet_nina.meet",
+   "verdict": "PASS",
+   "line": "behind the till",
+   "why": "she is at hood_clothes on every minute the trigger opens (presence holds; the activity is the C460 fail)"
+  },
+  {
+   "row": "B10",
+   "screen": "shop_try_on.try",
+   "verdict": "PASS",
+   "line": "Let me see. Come on, I won't tell.",
+   "why": "window 10:00-18:45 equals her till row; her lines sit in a group on her presence; her fitting-room row starts when the try-on closes"
+  },
+  {
+   "row": "B8",
+   "screen": "shop_try_on.try",
+   "verdict": "PASS",
+   "line": "cooldown_message = \"the fitting room closes at 6:45pm.\"",
+   "why": "6:45pm agrees with her tip ('10am to 6:45pm'), her till row end 18:45 and the trigger end"
+  },
+  {
+   "row": "C1158",
+   "screen": "shop_try_on.try",
+   "verdict": "PASS",
+   "line": "a skirt that stops high on your thighs, a top cut lower than anything you own",
+   "why": "the garments named are the stock she tries on in the act; 'your own clothes' names nothing she may not wear"
+  },
+  {
+   "row": "C1166",
+   "screen": "shop_try_on.try",
+   "verdict": "N/A",
+   "line": "You take an armful into the fitting room and pull the curtain.",
+   "why": "not the opening"
+  },
+  {
+   "row": "C1177",
+   "screen": "shop_try_on.try",
+   "verdict": "PASS",
+   "line": "pull the curtain",
+   "why": "bare behind a curtain, Nina only through it: low exposure, written low"
+  },
+  {
+   "row": "C1197",
+   "screen": "shop_try_on.try",
+   "verdict": "N/A",
+   "line": "You take an armful into the fitting room and pull the curtain.",
+   "why": "no outfit change happens; she ends in her own clothes"
+  },
+  {
+   "row": "C1206",
+   "screen": "shop_try_on.try",
+   "verdict": "PASS",
+   "line": "You put your own clothes back on",
+   "why": "no garment named she may not be wearing"
+  },
+  {
+   "row": "C1207",
+   "screen": "shop_try_on.try",
+   "verdict": "N/A",
+   "line": "You take an armful into the fitting room and pull the curtain.",
+   "why": "no wardrobe screen here"
+  },
+  {
+   "row": "C460",
+   "screen": "shop_try_on.try",
+   "verdict": "PASS",
+   "line": "You take an armful into the fitting room and pull the curtain.",
+   "why": "each claim holds 10:00-18:44 Mon-Sat; Nina present for her lines"
+  },
+  {
+   "row": "C461",
+   "screen": "shop_try_on.try",
+   "verdict": "PASS",
+   "line": "Your loss, sweetie. Next time, then.",
+   "why": "fits her entry"
+  },
+  {
+   "row": "C719",
+   "screen": "shop_try_on.try",
+   "verdict": "PASS",
+   "line": "You put your own clothes back on",
+   "why": "the button shows the act it names; nothing claims a garment moved"
+  },
+  {
+   "row": "C889",
+   "screen": "shop_try_on.try",
+   "verdict": "PASS",
+   "line": "Try something on / Done",
+   "why": "no clock time, no duration on the labels"
+  },
+  {
+   "row": "C892",
+   "screen": "shop_try_on.try",
+   "verdict": "PASS",
+   "line": "the fitting room closes at 6:45pm.",
+   "why": "the hour is on the greyed row, not in the act"
+  },
+  {
+   "row": "C897",
+   "screen": "shop_try_on.try",
+   "verdict": "N/A",
+   "line": "Done -> hood_clothes",
+   "why": "no travel"
+  },
+  {
+   "row": "C900",
+   "screen": "shop_try_on.try",
+   "verdict": "PASS",
+   "line": "You take an armful into the fitting room and pull the curtain.",
+   "why": "no time named in the beat"
+  },
+  {
+   "row": "C902",
+   "screen": "shop_try_on.try",
+   "verdict": "PASS",
+   "line": "You take an armful into the fitting room and pull the curtain.",
+   "why": "true at 18:44: shop open, Nina at the till"
+  },
+  {
+   "row": "C903",
+   "screen": "shop_try_on.try",
+   "verdict": "PASS",
+   "line": "You take an armful into the fitting room and pull the curtain.",
+   "why": "no weekday named"
+  },
+  {
+   "row": "C906",
+   "screen": "shop_try_on.try",
+   "verdict": "PASS",
+   "line": "Try something on",
+   "why": "no 'till' on the label"
+  },
+  {
+   "row": "C910",
+   "screen": "shop_try_on.try",
+   "verdict": "PASS",
+   "line": "Try something on / Done",
+   "why": "no time, energy or money (none spent)"
+  },
+  {
+   "row": "C913",
+   "screen": "shop_try_on.try",
+   "verdict": "PASS",
+   "line": "show_when_blocked = true",
+   "why": "shut by the clock 18:45-19:00 while the shop is open, it stays as a dimmed line with its message"
+  },
+  {
+   "row": "C914",
+   "screen": "shop_try_on.try",
+   "verdict": "PASS",
+   "line": "cooldown_message = \"the fitting room closes at 6:45pm.\"",
+   "why": "before met_nina the flag shuts it and it hides; after, only the clock shuts it, so the hours show only then"
+  },
+  {
+   "row": "C916",
+   "screen": "shop_try_on.try",
+   "verdict": "PASS",
+   "line": "Try something on",
+   "why": "her choice; hours shown on it"
+  },
+  {
+   "row": "C920",
+   "screen": "shop_try_on.try",
+   "verdict": "PASS",
+   "line": "Done, 15 min, back to hood_clothes",
+   "why": "the 15 minutes is the act, not a hop"
+  },
+  {
+   "row": "C924",
+   "screen": "shop_try_on.try",
+   "verdict": "N/A",
+   "line": "Done -> hood_clothes",
+   "why": "no travel"
+  },
+  {
+   "row": "C926",
+   "screen": "shop_try_on.try",
+   "verdict": "PASS",
+   "line": "time_progression_minutes = 15",
+   "why": "minutes only"
+  },
+  {
+   "row": "C927",
+   "screen": "shop_try_on.try",
+   "verdict": "PASS",
+   "line": "time_progression_minutes = 15",
+   "why": "exit time set"
+  },
+  {
+   "row": "C928",
+   "screen": "shop_try_on.try",
+   "verdict": "PASS",
+   "line": "You take an armful into the fitting room and pull the curtain.",
+   "why": "no clock in prose"
+  },
+  {
+   "row": "C929",
+   "screen": "shop_try_on.try",
+   "verdict": "PASS",
+   "line": "Try something on",
+   "why": "label carries no time"
+  },
+  {
+   "row": "C930",
+   "screen": "shop_try_on.try",
+   "verdict": "PASS",
+   "line": "show_when_blocked = true",
+   "why": "windowed, does not vanish out of hours while the shop is open"
+  },
+  {
+   "row": "C931",
+   "screen": "shop_try_on.try",
+   "verdict": "PASS",
+   "line": "end_time = \"18:45\"",
+   "why": "end exclusive: last start 18:44, and 18:45 is where her fitting-room row starts; no gap, no overlap"
+  },
+  {
+   "row": "L106",
+   "screen": "shop_try_on.try",
+   "verdict": "PASS",
+   "line": "Let me see.",
+   "why": "her lines only inside her presence group"
+  },
+  {
+   "row": "L167",
+   "screen": "shop_try_on.try",
+   "verdict": "PASS",
+   "line": "one row, 10:00-18:45 every open day",
+   "why": "same hours every day; one row, greys with a message"
+  },
+  {
+   "row": "C804",
+   "screen": "hood_clothes",
+   "verdict": "PASS",
+   "line": "Girls from campus browse the rails in pairs.",
+   "why": "her till line is gone; Nina shows as her face; the only people line is an unnamed crowd"
+  }
+ ],
+ "causes": [
+  {
+   "id": "P35r8-c1",
+   "what": "shop_meet_nina's trigger only needs Nina at the shop, which now includes her 18:45-19:00 fitting-room row, so a first visit then opens with her 'behind the till'"
+  }
+ ]
+}

@@ -1,0 +1,44 @@
+{
+ "items": [
+  {
+   "row": "B10",
+   "screen": "stage_practise.practise",
+   "why": "screen changed: truth row"
+  },
+  {
+   "row": "B8",
+   "screen": "stage_practise.practise",
+   "why": "screen changed: truth row"
+  },
+  {
+   "row": "C460",
+   "screen": "stage_practise.practise",
+   "why": "screen changed: truth row"
+  },
+  {
+   "row": "C461",
+   "screen": "stage_practise.practise",
+   "why": "screen changed: truth row"
+  },
+  {
+   "row": "C927",
+   "screen": "stage_practise.practise",
+   "why": "screen changed: truth row"
+  },
+  {
+   "row": "C931",
+   "screen": "stage_practise.practise",
+   "why": "screen changed: truth row"
+  },
+  {
+   "row": "L106",
+   "screen": "stage_practise.practise",
+   "why": "screen changed: truth row"
+  },
+  {
+   "row": "L167",
+   "screen": "stage_practise.practise",
+   "why": "screen changed: truth row"
+  }
+ ]
+}

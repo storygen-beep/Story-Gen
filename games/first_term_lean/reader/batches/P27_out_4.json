@@ -1,0 +1,26 @@
+{
+ "verdicts": [
+  {
+   "row": "L170",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "Zoe lives in town, two streets off the high street. Knock in the afternoon, or come to her party on a Saturday, 9pm to 1am.",
+   "why": "Zoe's Apartment is hidden_until zoe_place_known, set on the same choice as met_zoe (quad_meet_zoe); met_zoe is the when of a Someone on the Quad step, whose first step points at the quad weekdays 2 to 3 (Zoe's row 13/14-15)"
+  },
+  {
+   "row": "L168",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "Zoe lives in town, two streets off the high street. Knock in the afternoon, or come to her party on a Saturday, 9pm to 1am.",
+   "why": "Sam is home 12-02 and Zoe's out 12-18; 'Knock in the afternoon' points at the door unnamed; met_sam is the end step's when"
+  },
+  {
+   "row": "L169",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "Zoe lives in town, two streets off the high street. Knock in the afternoon, or come to her party on a Saturday, 9pm to 1am.",
+   "why": "zoe_door_sam is 12:00-18:00 while Zoe's out; the hint names the afternoon"
+  }
+ ],
+ "causes": []
+}

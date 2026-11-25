@@ -1,0 +1,76 @@
+{
+ "verdicts": [
+  {
+   "row": "C795",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "\"The kitchen: the table where the family eats, the fridge, a coffee pot that's always on.\"",
+   "why": "no room has a line per person; Mom, Mark and Ryan show as faces by their rows"
+  },
+  {
+   "row": "C804",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "\"The living room: the couch, the TV, and Mark's big armchair.\"",
+   "why": "Mark's chair is furniture, not a presence line; who is there is their faces"
+  },
+  {
+   "row": "places#2",
+   "screen": "home_kitchen",
+   "verdict": "FAIL",
+   "line": "\"The kitchen: the table where the family eats, the fridge, a coffee pot that's always on.\"",
+   "why": "open and empty weekdays 8am-5pm and after 7pm (who_is_where: Laura 7-8, 17-19; Ryan 18-19); no line says nobody's here, as the rule and its worked example (\"Nobody's here. The fridge hums.\") ask",
+   "cause": "P02r6-c1"
+  },
+  {
+   "row": "places#2",
+   "screen": "home_living_room",
+   "verdict": "FAIL",
+   "line": "\"The living room: the couch, the TV, and Mark's big armchair.\"",
+   "why": "empty weekdays until 4-5pm and Saturday 7-11pm (Mark 17-23, Laura 19-23, Ryan 19-23 weekdays); nothing says nobody's here",
+   "cause": "P02r6-c1"
+  },
+  {
+   "row": "places#2",
+   "screen": "home_ryans_room",
+   "verdict": "FAIL",
+   "line": "\"Ryan's room. Clothes on the floor, the curtains shut, and it smells like him.\"",
+   "why": "Ryan is out weekdays 12-6pm (his rows: '-'); the room never says he isn't there",
+   "cause": "P02r6-c1"
+  },
+  {
+   "row": "places#2",
+   "screen": "home_hall",
+   "verdict": "PASS",
+   "line": "\"The hall. Every room in the house opens off it.\"",
+   "why": "a thoroughfare; nobody is expected there, no one is named"
+  },
+  {
+   "row": "places#2",
+   "screen": "home_her_room",
+   "verdict": "PASS",
+   "line": "\"Your bedroom. The same single bed since you were twelve...\"",
+   "why": "her own room; nobody else is expected, no one named"
+  },
+  {
+   "row": "places#2",
+   "screen": "home_bathroom",
+   "verdict": "PASS",
+   "line": "\"...One shower, a lock that sticks, and four people sharing it.\"",
+   "why": "no one named; nobody is expected in a bathroom; Ryan shows as his face 7-8am"
+  },
+  {
+   "row": "places#2",
+   "screen": "home_master_bedroom",
+   "verdict": "PASS",
+   "line": "\"Your mom and Mark's room. The big bed, her wardrobe, and the feeling you shouldn't be in here.\"",
+   "why": "their rows put them here only asleep; the line reads true empty, and names whose room it is, not who is there"
+  }
+ ],
+ "causes": [
+  {
+   "id": "P02r6-c1",
+   "what": "Home rooms people come and go from (kitchen, living room, Ryan's room) are open with nobody there for hours, and the room text never says so (places.md rule 2: an open place with nobody there still says why)"
+  }
+ ]
+}

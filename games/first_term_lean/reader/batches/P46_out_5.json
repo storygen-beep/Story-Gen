@@ -1,0 +1,656 @@
+{
+ "verdicts": [
+  {
+   "row": "C1189",
+   "screen": "npcs.npc_dean.people_tab",
+   "verdict": "N/A",
+   "line": "",
+   "why": "No clothing state on a People field."
+  },
+  {
+   "row": "C1189",
+   "screen": "npcs.npc_dean.stranger_name",
+   "verdict": "N/A",
+   "line": "",
+   "why": "No clothing state on a People field."
+  },
+  {
+   "row": "C1189",
+   "screen": "npcs.npc_dean.tip",
+   "verdict": "N/A",
+   "line": "",
+   "why": "No clothing state on a People field."
+  },
+  {
+   "row": "C124",
+   "screen": "story_hints.staying_in_shape",
+   "verdict": "PASS",
+   "line": "In your leggings and sports top, work out at the gym, 6am to 10pm. The trainer's in weekdays 6 to 10am and 5 to 9pm, and Saturday 8am to 2pm.",
+   "why": "Each step says where, when and in what; nobody is left lost."
+  },
+  {
+   "row": "C1340",
+   "screen": "npcs.npc_dean.people_tab",
+   "verdict": "N/A",
+   "line": "",
+   "why": "Not a housemate."
+  },
+  {
+   "row": "C1340",
+   "screen": "npcs.npc_dean.stranger_name",
+   "verdict": "N/A",
+   "line": "",
+   "why": "Not a housemate."
+  },
+  {
+   "row": "C1340",
+   "screen": "npcs.npc_dean.tip",
+   "verdict": "N/A",
+   "line": "",
+   "why": "Not a housemate."
+  },
+  {
+   "row": "C1366",
+   "screen": "story_hints.staying_in_shape",
+   "verdict": "PASS",
+   "line": "In your leggings and sports top, work out at the gym, 6am to 10pm. The trainer's in weekdays 6 to 10am and 5 to 9pm, and Saturday 8am to 2pm.",
+   "why": "Gym (workout, Marco, walk-ins) and park (the run) both have live acts at her stage."
+  },
+  {
+   "row": "C140",
+   "screen": "story_hints.staying_in_shape",
+   "verdict": "PASS",
+   "line": "end",
+   "why": "Ends on CoT's \"for now!\" line; the run and workout stay repeatable."
+  },
+  {
+   "row": "C1619",
+   "screen": "story_hints.staying_in_shape",
+   "verdict": "PASS",
+   "line": "In your leggings and sports top, work out at the gym, 6am to 10pm. The trainer's in weekdays 6 to 10am and 5 to 9pm, and Saturday 8am to 2pm.",
+   "why": "A ladder with steps: gym first, then the run, then end."
+  },
+  {
+   "row": "C215",
+   "screen": "story_hints.staying_in_shape",
+   "verdict": "PASS",
+   "line": "end",
+   "why": "\"for now\", never \"Arc complete\"."
+  },
+  {
+   "row": "C217",
+   "screen": "story_hints.staying_in_shape",
+   "verdict": "PASS",
+   "line": "Now go for a run in the park, 6am to 9pm, in the same leggings and top.",
+   "why": "met_marco is set on gym_meet_marco's exits; ran_once on body_run's Done."
+  },
+  {
+   "row": "C2176",
+   "screen": "story_hints.staying_in_shape",
+   "verdict": "PASS",
+   "line": "Now go for a run in the park, 6am to 9pm, in the same leggings and top.",
+   "why": "met_marco and ran_once are both set by canvases."
+  },
+  {
+   "row": "C34",
+   "screen": "story_hints.staying_in_shape",
+   "verdict": "PASS",
+   "line": "In your leggings and sports top, work out at the gym, 6am to 10pm. The trainer's in weekdays 6 to 10am and 5 to 9pm, and Saturday 8am to 2pm.",
+   "why": "No date."
+  },
+  {
+   "row": "C35",
+   "screen": "story_hints.staying_in_shape",
+   "verdict": "PASS",
+   "line": "end",
+   "why": "Ends on the engine's end line, as the skill's own worked example does; the gym and run recur."
+  },
+  {
+   "row": "C36",
+   "screen": "story_hints.staying_in_shape",
+   "verdict": "PASS",
+   "line": "Now go for a run in the park, 6am to 9pm, in the same leggings and top.",
+   "why": "The end step's when is ran_once."
+  },
+  {
+   "row": "C37",
+   "screen": "story_hints.staying_in_shape",
+   "verdict": "N/A",
+   "line": "",
+   "why": "The storyline ends inside release 1."
+  },
+  {
+   "row": "C422",
+   "screen": "npcs.npc_dean.people_tab",
+   "verdict": "PASS",
+   "line": "faculty",
+   "why": "Plain."
+  },
+  {
+   "row": "C422",
+   "screen": "npcs.npc_dean.stranger_name",
+   "verdict": "PASS",
+   "line": "silver-haired man",
+   "why": "Plain."
+  },
+  {
+   "row": "C422",
+   "screen": "npcs.npc_dean.tip",
+   "verdict": "PASS",
+   "line": "In his office on the faculty corridor, weekdays 8am to 5pm.",
+   "why": "Plain."
+  },
+  {
+   "row": "C422",
+   "screen": "story_hints.staying_in_shape",
+   "verdict": "PASS",
+   "line": "In your leggings and sports top, work out at the gym, 6am to 10pm. The trainer's in weekdays 6 to 10am and 5 to 9pm, and Saturday 8am to 2pm.",
+   "why": "Says plainly what to do."
+  },
+  {
+   "row": "C430",
+   "screen": "story_hints.staying_in_shape",
+   "verdict": "PASS",
+   "line": "In your leggings and sports top, work out at the gym, 6am to 10pm. The trainer's in weekdays 6 to 10am and 5 to 9pm, and Saturday 8am to 2pm.",
+   "why": "Step 1 names the gym, its hours and the trainer's (meeting him passes it); step 2 names the park, its hours and the clothes."
+  },
+  {
+   "row": "C433",
+   "screen": "story_hints.staying_in_shape",
+   "verdict": "PASS",
+   "line": "end",
+   "why": "Honest \"for now\"."
+  },
+  {
+   "row": "C442",
+   "screen": "npcs.npc_dean.people_tab",
+   "verdict": "PASS",
+   "line": "faculty",
+   "why": "Says it."
+  },
+  {
+   "row": "C442",
+   "screen": "npcs.npc_dean.stranger_name",
+   "verdict": "PASS",
+   "line": "silver-haired man",
+   "why": "Says it."
+  },
+  {
+   "row": "C442",
+   "screen": "npcs.npc_dean.tip",
+   "verdict": "PASS",
+   "line": "In his office on the faculty corridor, weekdays 8am to 5pm.",
+   "why": "Says it."
+  },
+  {
+   "row": "C442",
+   "screen": "story_hints.staying_in_shape",
+   "verdict": "PASS",
+   "line": "Now go for a run in the park, 6am to 9pm, in the same leggings and top.",
+   "why": "Says it."
+  },
+  {
+   "row": "C447",
+   "screen": "npcs.npc_dean.people_tab",
+   "verdict": "N/A",
+   "line": "",
+   "why": "Not his speech."
+  },
+  {
+   "row": "C447",
+   "screen": "npcs.npc_dean.stranger_name",
+   "verdict": "N/A",
+   "line": "",
+   "why": "Not his speech."
+  },
+  {
+   "row": "C447",
+   "screen": "npcs.npc_dean.tip",
+   "verdict": "N/A",
+   "line": "",
+   "why": "Not his speech."
+  },
+  {
+   "row": "C451",
+   "screen": "npcs.npc_dean.people_tab",
+   "verdict": "PASS",
+   "line": "faculty",
+   "why": "Concrete."
+  },
+  {
+   "row": "C451",
+   "screen": "npcs.npc_dean.stranger_name",
+   "verdict": "PASS",
+   "line": "silver-haired man",
+   "why": "Concrete."
+  },
+  {
+   "row": "C451",
+   "screen": "npcs.npc_dean.tip",
+   "verdict": "PASS",
+   "line": "In his office on the faculty corridor, weekdays 8am to 5pm.",
+   "why": "Concrete."
+  },
+  {
+   "row": "C451",
+   "screen": "story_hints.staying_in_shape",
+   "verdict": "PASS",
+   "line": "In your leggings and sports top, work out at the gym, 6am to 10pm. The trainer's in weekdays 6 to 10am and 5 to 9pm, and Saturday 8am to 2pm.",
+   "why": "Places, hours, clothes."
+  },
+  {
+   "row": "C460",
+   "screen": "npcs.npc_dean.people_tab",
+   "verdict": "PASS",
+   "line": "faculty",
+   "why": "A dean is faculty; nothing moves him between tabs."
+  },
+  {
+   "row": "C460",
+   "screen": "npcs.npc_dean.stranger_name",
+   "verdict": "PASS",
+   "line": "silver-haired man",
+   "why": "A body feature true on every visit, from his picture notes (\"a silver-haired man of 58\"); no other stranger name is alike."
+  },
+  {
+   "row": "C460",
+   "screen": "npcs.npc_dean.tip",
+   "verdict": "PASS",
+   "line": "In his office on the faculty corridor, weekdays 8am to 5pm.",
+   "why": "His row: campus_offices, weekdays 08:00-17:00."
+  },
+  {
+   "row": "C460",
+   "screen": "story_hints.staying_in_shape",
+   "verdict": "PASS",
+   "line": "In your leggings and sports top, work out at the gym, 6am to 10pm. The trainer's in weekdays 6 to 10am and 5 to 9pm, and Saturday 8am to 2pm.",
+   "why": "Gym 6-22 every day, park 6-21 (hours, PLAN 91); Marco's rows weekdays 06-10 and 17-21, Saturday 08-14; leggings and sports top are hers from the opening and needed by both acts. Step 1 stays true if she ran before meeting him."
+  },
+  {
+   "row": "C461",
+   "screen": "npcs.npc_dean.people_tab",
+   "verdict": "PASS",
+   "line": "faculty",
+   "why": ""
+  },
+  {
+   "row": "C461",
+   "screen": "npcs.npc_dean.stranger_name",
+   "verdict": "PASS",
+   "line": "silver-haired man",
+   "why": ""
+  },
+  {
+   "row": "C461",
+   "screen": "npcs.npc_dean.tip",
+   "verdict": "PASS",
+   "line": "In his office on the faculty corridor, weekdays 8am to 5pm.",
+   "why": ""
+  },
+  {
+   "row": "C461",
+   "screen": "story_hints.staying_in_shape",
+   "verdict": "PASS",
+   "line": "Now go for a run in the park, 6am to 9pm, in the same leggings and top.",
+   "why": ""
+  },
+  {
+   "row": "C519",
+   "screen": "npcs.npc_dean.people_tab",
+   "verdict": "PASS",
+   "line": "faculty",
+   "why": "Short."
+  },
+  {
+   "row": "C519",
+   "screen": "npcs.npc_dean.stranger_name",
+   "verdict": "PASS",
+   "line": "silver-haired man",
+   "why": "Short."
+  },
+  {
+   "row": "C519",
+   "screen": "npcs.npc_dean.tip",
+   "verdict": "PASS",
+   "line": "In his office on the faculty corridor, weekdays 8am to 5pm.",
+   "why": "Short."
+  },
+  {
+   "row": "C519",
+   "screen": "story_hints.staying_in_shape",
+   "verdict": "PASS",
+   "line": "In your leggings and sports top, work out at the gym, 6am to 10pm. The trainer's in weekdays 6 to 10am and 5 to 9pm, and Saturday 8am to 2pm.",
+   "why": "Two short lines."
+  },
+  {
+   "row": "C593",
+   "screen": "npcs.npc_dean.people_tab",
+   "verdict": "N/A",
+   "line": "",
+   "why": "No address on a People field."
+  },
+  {
+   "row": "C593",
+   "screen": "npcs.npc_dean.stranger_name",
+   "verdict": "N/A",
+   "line": "",
+   "why": "No address on a People field."
+  },
+  {
+   "row": "C593",
+   "screen": "npcs.npc_dean.tip",
+   "verdict": "N/A",
+   "line": "",
+   "why": "No address on a People field."
+  },
+  {
+   "row": "C596",
+   "screen": "npcs.npc_dean.people_tab",
+   "verdict": "N/A",
+   "line": "",
+   "why": "Not a talk screen."
+  },
+  {
+   "row": "C596",
+   "screen": "npcs.npc_dean.stranger_name",
+   "verdict": "N/A",
+   "line": "",
+   "why": "Not a talk screen."
+  },
+  {
+   "row": "C596",
+   "screen": "npcs.npc_dean.tip",
+   "verdict": "N/A",
+   "line": "",
+   "why": "Not a talk screen."
+  },
+  {
+   "row": "C598",
+   "screen": "story_hints.staying_in_shape",
+   "verdict": "PASS",
+   "line": "In your leggings and sports top, work out at the gym, 6am to 10pm. The trainer's in weekdays 6 to 10am and 5 to 9pm, and Saturday 8am to 2pm.",
+   "why": "\"The trainer\", unnamed until met; step 2 names nobody."
+  },
+  {
+   "row": "C625",
+   "screen": "npcs.npc_dean.people_tab",
+   "verdict": "PASS",
+   "line": "faculty",
+   "why": ""
+  },
+  {
+   "row": "C625",
+   "screen": "npcs.npc_dean.stranger_name",
+   "verdict": "PASS",
+   "line": "silver-haired man",
+   "why": "A description before the meeting."
+  },
+  {
+   "row": "C625",
+   "screen": "npcs.npc_dean.tip",
+   "verdict": "PASS",
+   "line": "In his office on the faculty corridor, weekdays 8am to 5pm.",
+   "why": "Shown only once met."
+  },
+  {
+   "row": "C626",
+   "screen": "npcs.npc_dean.people_tab",
+   "verdict": "PASS",
+   "line": "faculty",
+   "why": "The engine swaps \"???\"/stranger name for his name once met_dean is set."
+  },
+  {
+   "row": "C626",
+   "screen": "npcs.npc_dean.stranger_name",
+   "verdict": "PASS",
+   "line": "silver-haired man",
+   "why": "The engine swaps \"???\"/stranger name for his name once met_dean is set."
+  },
+  {
+   "row": "C626",
+   "screen": "npcs.npc_dean.tip",
+   "verdict": "PASS",
+   "line": "In his office on the faculty corridor, weekdays 8am to 5pm.",
+   "why": "The engine swaps \"???\"/stranger name for his name once met_dean is set."
+  },
+  {
+   "row": "C630",
+   "screen": "npcs.npc_dean.people_tab",
+   "verdict": "PASS",
+   "line": "faculty",
+   "why": "The view gives name with role and relation (\"Dean\", \"Dean Sterling, 58. He runs the college.\"); the stranger name stands before the meeting by design."
+  },
+  {
+   "row": "C630",
+   "screen": "npcs.npc_dean.stranger_name",
+   "verdict": "PASS",
+   "line": "silver-haired man",
+   "why": "The view gives name with role and relation (\"Dean\", \"Dean Sterling, 58. He runs the college.\"); the stranger name stands before the meeting by design."
+  },
+  {
+   "row": "C630",
+   "screen": "npcs.npc_dean.tip",
+   "verdict": "PASS",
+   "line": "In his office on the faculty corridor, weekdays 8am to 5pm.",
+   "why": "The view gives name with role and relation (\"Dean\", \"Dean Sterling, 58. He runs the college.\"); the stranger name stands before the meeting by design."
+  },
+  {
+   "row": "C632",
+   "screen": "npcs.npc_dean.people_tab",
+   "verdict": "PASS",
+   "line": "faculty",
+   "why": "Says who he is."
+  },
+  {
+   "row": "C632",
+   "screen": "npcs.npc_dean.stranger_name",
+   "verdict": "PASS",
+   "line": "silver-haired man",
+   "why": "Says who he is."
+  },
+  {
+   "row": "C632",
+   "screen": "npcs.npc_dean.tip",
+   "verdict": "PASS",
+   "line": "In his office on the faculty corridor, weekdays 8am to 5pm.",
+   "why": "Says who he is."
+  },
+  {
+   "row": "C644",
+   "screen": "npcs.npc_dean.people_tab",
+   "verdict": "PASS",
+   "line": "faculty",
+   "why": "His corner, the college office, shows in his card."
+  },
+  {
+   "row": "C644",
+   "screen": "npcs.npc_dean.stranger_name",
+   "verdict": "PASS",
+   "line": "silver-haired man",
+   "why": "His corner, the college office, shows in his card."
+  },
+  {
+   "row": "C644",
+   "screen": "npcs.npc_dean.tip",
+   "verdict": "PASS",
+   "line": "In his office on the faculty corridor, weekdays 8am to 5pm.",
+   "why": "His corner, the college office, shows in his card."
+  },
+  {
+   "row": "C889",
+   "screen": "story_hints.staying_in_shape",
+   "verdict": "PASS",
+   "line": "In your leggings and sports top, work out at the gym, 6am to 10pm. The trainer's in weekdays 6 to 10am and 5 to 9pm, and Saturday 8am to 2pm.",
+   "why": "No label; hours given as a rule."
+  },
+  {
+   "row": "C892",
+   "screen": "story_hints.staying_in_shape",
+   "verdict": "PASS",
+   "line": "In your leggings and sports top, work out at the gym, 6am to 10pm. The trainer's in weekdays 6 to 10am and 5 to 9pm, and Saturday 8am to 2pm.",
+   "why": "Hours on the place, not the act."
+  },
+  {
+   "row": "C897",
+   "screen": "story_hints.staying_in_shape",
+   "verdict": "PASS",
+   "line": "",
+   "why": ""
+  },
+  {
+   "row": "C900",
+   "screen": "story_hints.staying_in_shape",
+   "verdict": "PASS",
+   "line": "In your leggings and sports top, work out at the gym, 6am to 10pm. The trainer's in weekdays 6 to 10am and 5 to 9pm, and Saturday 8am to 2pm.",
+   "why": "Hours as a rule, not the time now."
+  },
+  {
+   "row": "C902",
+   "screen": "story_hints.staying_in_shape",
+   "verdict": "PASS",
+   "line": "In your leggings and sports top, work out at the gym, 6am to 10pm. The trainer's in weekdays 6 to 10am and 5 to 9pm, and Saturday 8am to 2pm.",
+   "why": "True at every minute."
+  },
+  {
+   "row": "C903",
+   "screen": "story_hints.staying_in_shape",
+   "verdict": "PASS",
+   "line": "In your leggings and sports top, work out at the gym, 6am to 10pm. The trainer's in weekdays 6 to 10am and 5 to 9pm, and Saturday 8am to 2pm.",
+   "why": "\"weekdays\", \"Saturday\" are true of the rows on every view."
+  },
+  {
+   "row": "C906",
+   "screen": "story_hints.staying_in_shape",
+   "verdict": "PASS",
+   "line": "In your leggings and sports top, work out at the gym, 6am to 10pm. The trainer's in weekdays 6 to 10am and 5 to 9pm, and Saturday 8am to 2pm.",
+   "why": "No \"till\"."
+  },
+  {
+   "row": "C910",
+   "screen": "story_hints.staying_in_shape",
+   "verdict": "PASS",
+   "line": "In your leggings and sports top, work out at the gym, 6am to 10pm. The trainer's in weekdays 6 to 10am and 5 to 9pm, and Saturday 8am to 2pm.",
+   "why": "No time or energy cost stated."
+  },
+  {
+   "row": "C913",
+   "screen": "story_hints.staying_in_shape",
+   "verdict": "PASS",
+   "line": "In your leggings and sports top, work out at the gym, 6am to 10pm. The trainer's in weekdays 6 to 10am and 5 to 9pm, and Saturday 8am to 2pm.",
+   "why": "Publishes the gym's, park's and trainer's hours."
+  },
+  {
+   "row": "C914",
+   "screen": "story_hints.staying_in_shape",
+   "verdict": "N/A",
+   "line": "",
+   "why": "Not a row."
+  },
+  {
+   "row": "C916",
+   "screen": "story_hints.staying_in_shape",
+   "verdict": "PASS",
+   "line": "In your leggings and sports top, work out at the gym, 6am to 10pm. The trainer's in weekdays 6 to 10am and 5 to 9pm, and Saturday 8am to 2pm.",
+   "why": "Hours on what she chooses."
+  },
+  {
+   "row": "C920",
+   "screen": "story_hints.staying_in_shape",
+   "verdict": "N/A",
+   "line": "",
+   "why": "No move charged."
+  },
+  {
+   "row": "C924",
+   "screen": "story_hints.staying_in_shape",
+   "verdict": "PASS",
+   "line": "In your leggings and sports top, work out at the gym, 6am to 10pm. The trainer's in weekdays 6 to 10am and 5 to 9pm, and Saturday 8am to 2pm.",
+   "why": "The trainer's hours make the trip's timing matter."
+  },
+  {
+   "row": "C926",
+   "screen": "story_hints.staying_in_shape",
+   "verdict": "PASS",
+   "line": "",
+   "why": ""
+  },
+  {
+   "row": "C927",
+   "screen": "story_hints.staying_in_shape",
+   "verdict": "N/A",
+   "line": "",
+   "why": "No exit on a hint entry."
+  },
+  {
+   "row": "C928",
+   "screen": "story_hints.staying_in_shape",
+   "verdict": "PASS",
+   "line": "In your leggings and sports top, work out at the gym, 6am to 10pm. The trainer's in weekdays 6 to 10am and 5 to 9pm, and Saturday 8am to 2pm.",
+   "why": "Hours as a rule, the clock not printed."
+  },
+  {
+   "row": "C929",
+   "screen": "story_hints.staying_in_shape",
+   "verdict": "PASS",
+   "line": "In your leggings and sports top, work out at the gym, 6am to 10pm. The trainer's in weekdays 6 to 10am and 5 to 9pm, and Saturday 8am to 2pm.",
+   "why": "No time tag."
+  },
+  {
+   "row": "C930",
+   "screen": "story_hints.staying_in_shape",
+   "verdict": "N/A",
+   "line": "",
+   "why": "Not a row."
+  },
+  {
+   "row": "C931",
+   "screen": "story_hints.staying_in_shape",
+   "verdict": "N/A",
+   "line": "",
+   "why": "No time_of_day on a hint entry."
+  },
+  {
+   "row": "C952",
+   "screen": "story_hints.staying_in_shape",
+   "verdict": "PASS",
+   "line": "In your leggings and sports top, work out at the gym, 6am to 10pm. The trainer's in weekdays 6 to 10am and 5 to 9pm, and Saturday 8am to 2pm.",
+   "why": "Hours match PLAN 91 and the rows; no price stated."
+  },
+  {
+   "row": "L106",
+   "screen": "npcs.npc_dean.people_tab",
+   "verdict": "PASS",
+   "line": "faculty",
+   "why": ""
+  },
+  {
+   "row": "L106",
+   "screen": "npcs.npc_dean.stranger_name",
+   "verdict": "PASS",
+   "line": "silver-haired man",
+   "why": "People Here lists him only where his row puts him."
+  },
+  {
+   "row": "L106",
+   "screen": "npcs.npc_dean.tip",
+   "verdict": "PASS",
+   "line": "In his office on the faculty corridor, weekdays 8am to 5pm.",
+   "why": "Matches who_is_where."
+  },
+  {
+   "row": "L167",
+   "screen": "story_hints.staying_in_shape",
+   "verdict": "N/A",
+   "line": "",
+   "why": "Not a row."
+  },
+  {
+   "row": "L172",
+   "screen": "story_hints.staying_in_shape",
+   "verdict": "PASS",
+   "line": "story_hints.staying_in_shape | a goal card is shown, the clock moves",
+   "why": "On P46's Does:."
+  }
+ ],
+ "causes": []
+}

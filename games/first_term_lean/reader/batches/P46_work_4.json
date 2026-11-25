@@ -1,0 +1,1589 @@
+{
+ "items": [
+  {
+   "row": "B1",
+   "screen": "*",
+   "why": "a screen of the scene changed"
+  },
+  {
+   "row": "B2",
+   "screen": "*",
+   "why": "a screen of the scene changed"
+  },
+  {
+   "row": "B9",
+   "screen": "*",
+   "why": "a screen of the scene changed"
+  },
+  {
+   "row": "C1008",
+   "screen": "*",
+   "why": "never judged"
+  },
+  {
+   "row": "C1013",
+   "screen": "*",
+   "why": "never judged"
+  },
+  {
+   "row": "C1021",
+   "screen": "*",
+   "why": "never judged"
+  },
+  {
+   "row": "C1022",
+   "screen": "*",
+   "why": "never judged"
+  },
+  {
+   "row": "C1033",
+   "screen": "*",
+   "why": "never judged"
+  },
+  {
+   "row": "C1189",
+   "screen": "npcs.npc_ryan.stranger_name",
+   "why": "a page entry changed"
+  },
+  {
+   "row": "C124",
+   "screen": "*",
+   "why": "never judged"
+  },
+  {
+   "row": "C124",
+   "screen": "story_hints.classes",
+   "why": "a page entry changed"
+  },
+  {
+   "row": "C124",
+   "screen": "story_hints.lunch",
+   "why": "screen is new"
+  },
+  {
+   "row": "C124",
+   "screen": "story_hints.staying_in_shape",
+   "why": "a page entry changed"
+  },
+  {
+   "row": "C124",
+   "screen": "story_hints.the_cafe_job",
+   "why": "a page entry changed"
+  },
+  {
+   "row": "C124",
+   "screen": "story_hints.the_corner_shop",
+   "why": "screen is new"
+  },
+  {
+   "row": "C124",
+   "screen": "story_hints.the_library",
+   "why": "screen is new"
+  },
+  {
+   "row": "C1340",
+   "screen": "npcs.npc_ryan.stranger_name",
+   "why": "a page entry changed"
+  },
+  {
+   "row": "C1366",
+   "screen": "*",
+   "why": "never judged"
+  },
+  {
+   "row": "C1366",
+   "screen": "story_hints.classes",
+   "why": "a page entry changed"
+  },
+  {
+   "row": "C1366",
+   "screen": "story_hints.lunch",
+   "why": "screen is new"
+  },
+  {
+   "row": "C1366",
+   "screen": "story_hints.staying_in_shape",
+   "why": "a page entry changed"
+  },
+  {
+   "row": "C1366",
+   "screen": "story_hints.the_cafe_job",
+   "why": "a page entry changed"
+  },
+  {
+   "row": "C1366",
+   "screen": "story_hints.the_corner_shop",
+   "why": "screen is new"
+  },
+  {
+   "row": "C1366",
+   "screen": "story_hints.the_library",
+   "why": "screen is new"
+  },
+  {
+   "row": "C140",
+   "screen": "*",
+   "why": "never judged"
+  },
+  {
+   "row": "C140",
+   "screen": "story_hints.classes",
+   "why": "a page entry changed"
+  },
+  {
+   "row": "C140",
+   "screen": "story_hints.lunch",
+   "why": "screen is new"
+  },
+  {
+   "row": "C140",
+   "screen": "story_hints.staying_in_shape",
+   "why": "a page entry changed"
+  },
+  {
+   "row": "C140",
+   "screen": "story_hints.the_cafe_job",
+   "why": "a page entry changed"
+  },
+  {
+   "row": "C140",
+   "screen": "story_hints.the_corner_shop",
+   "why": "screen is new"
+  },
+  {
+   "row": "C140",
+   "screen": "story_hints.the_library",
+   "why": "screen is new"
+  },
+  {
+   "row": "C1619",
+   "screen": "*",
+   "why": "never judged"
+  },
+  {
+   "row": "C1619",
+   "screen": "story_hints.classes",
+   "why": "a page entry changed"
+  },
+  {
+   "row": "C1619",
+   "screen": "story_hints.lunch",
+   "why": "screen is new"
+  },
+  {
+   "row": "C1619",
+   "screen": "story_hints.staying_in_shape",
+   "why": "a page entry changed"
+  },
+  {
+   "row": "C1619",
+   "screen": "story_hints.the_cafe_job",
+   "why": "a page entry changed"
+  },
+  {
+   "row": "C1619",
+   "screen": "story_hints.the_corner_shop",
+   "why": "screen is new"
+  },
+  {
+   "row": "C1619",
+   "screen": "story_hints.the_library",
+   "why": "screen is new"
+  },
+  {
+   "row": "C215",
+   "screen": "*",
+   "why": "never judged"
+  },
+  {
+   "row": "C215",
+   "screen": "story_hints.classes",
+   "why": "a page entry changed"
+  },
+  {
+   "row": "C215",
+   "screen": "story_hints.lunch",
+   "why": "screen is new"
+  },
+  {
+   "row": "C215",
+   "screen": "story_hints.staying_in_shape",
+   "why": "a page entry changed"
+  },
+  {
+   "row": "C215",
+   "screen": "story_hints.the_cafe_job",
+   "why": "a page entry changed"
+  },
+  {
+   "row": "C215",
+   "screen": "story_hints.the_corner_shop",
+   "why": "screen is new"
+  },
+  {
+   "row": "C215",
+   "screen": "story_hints.the_library",
+   "why": "screen is new"
+  },
+  {
+   "row": "C217",
+   "screen": "*",
+   "why": "never judged"
+  },
+  {
+   "row": "C217",
+   "screen": "story_hints.classes",
+   "why": "a page entry changed"
+  },
+  {
+   "row": "C217",
+   "screen": "story_hints.lunch",
+   "why": "screen is new"
+  },
+  {
+   "row": "C217",
+   "screen": "story_hints.staying_in_shape",
+   "why": "a page entry changed"
+  },
+  {
+   "row": "C217",
+   "screen": "story_hints.the_cafe_job",
+   "why": "a page entry changed"
+  },
+  {
+   "row": "C217",
+   "screen": "story_hints.the_corner_shop",
+   "why": "screen is new"
+  },
+  {
+   "row": "C217",
+   "screen": "story_hints.the_library",
+   "why": "screen is new"
+  },
+  {
+   "row": "C2176",
+   "screen": "*",
+   "why": "never judged"
+  },
+  {
+   "row": "C2176",
+   "screen": "story_hints.classes",
+   "why": "a page entry changed"
+  },
+  {
+   "row": "C2176",
+   "screen": "story_hints.lunch",
+   "why": "screen is new"
+  },
+  {
+   "row": "C2176",
+   "screen": "story_hints.staying_in_shape",
+   "why": "a page entry changed"
+  },
+  {
+   "row": "C2176",
+   "screen": "story_hints.the_cafe_job",
+   "why": "a page entry changed"
+  },
+  {
+   "row": "C2176",
+   "screen": "story_hints.the_corner_shop",
+   "why": "screen is new"
+  },
+  {
+   "row": "C2176",
+   "screen": "story_hints.the_library",
+   "why": "screen is new"
+  },
+  {
+   "row": "C34",
+   "screen": "*",
+   "why": "never judged"
+  },
+  {
+   "row": "C34",
+   "screen": "story_hints.classes",
+   "why": "a page entry changed"
+  },
+  {
+   "row": "C34",
+   "screen": "story_hints.lunch",
+   "why": "screen is new"
+  },
+  {
+   "row": "C34",
+   "screen": "story_hints.staying_in_shape",
+   "why": "a page entry changed"
+  },
+  {
+   "row": "C34",
+   "screen": "story_hints.the_cafe_job",
+   "why": "a page entry changed"
+  },
+  {
+   "row": "C34",
+   "screen": "story_hints.the_corner_shop",
+   "why": "screen is new"
+  },
+  {
+   "row": "C34",
+   "screen": "story_hints.the_library",
+   "why": "screen is new"
+  },
+  {
+   "row": "C35",
+   "screen": "*",
+   "why": "never judged"
+  },
+  {
+   "row": "C35",
+   "screen": "story_hints.classes",
+   "why": "a page entry changed"
+  },
+  {
+   "row": "C35",
+   "screen": "story_hints.lunch",
+   "why": "screen is new"
+  },
+  {
+   "row": "C35",
+   "screen": "story_hints.staying_in_shape",
+   "why": "a page entry changed"
+  },
+  {
+   "row": "C35",
+   "screen": "story_hints.the_cafe_job",
+   "why": "a page entry changed"
+  },
+  {
+   "row": "C35",
+   "screen": "story_hints.the_corner_shop",
+   "why": "screen is new"
+  },
+  {
+   "row": "C35",
+   "screen": "story_hints.the_library",
+   "why": "screen is new"
+  },
+  {
+   "row": "C36",
+   "screen": "*",
+   "why": "never judged"
+  },
+  {
+   "row": "C36",
+   "screen": "story_hints.classes",
+   "why": "a page entry changed"
+  },
+  {
+   "row": "C36",
+   "screen": "story_hints.lunch",
+   "why": "screen is new"
+  },
+  {
+   "row": "C36",
+   "screen": "story_hints.staying_in_shape",
+   "why": "a page entry changed"
+  },
+  {
+   "row": "C36",
+   "screen": "story_hints.the_cafe_job",
+   "why": "a page entry changed"
+  },
+  {
+   "row": "C36",
+   "screen": "story_hints.the_corner_shop",
+   "why": "screen is new"
+  },
+  {
+   "row": "C36",
+   "screen": "story_hints.the_library",
+   "why": "screen is new"
+  },
+  {
+   "row": "C37",
+   "screen": "*",
+   "why": "never judged"
+  },
+  {
+   "row": "C37",
+   "screen": "story_hints.classes",
+   "why": "a page entry changed"
+  },
+  {
+   "row": "C37",
+   "screen": "story_hints.lunch",
+   "why": "screen is new"
+  },
+  {
+   "row": "C37",
+   "screen": "story_hints.staying_in_shape",
+   "why": "a page entry changed"
+  },
+  {
+   "row": "C37",
+   "screen": "story_hints.the_cafe_job",
+   "why": "a page entry changed"
+  },
+  {
+   "row": "C37",
+   "screen": "story_hints.the_corner_shop",
+   "why": "screen is new"
+  },
+  {
+   "row": "C37",
+   "screen": "story_hints.the_library",
+   "why": "screen is new"
+  },
+  {
+   "row": "C422",
+   "screen": "npcs.npc_ryan.stranger_name",
+   "why": "a page entry changed"
+  },
+  {
+   "row": "C422",
+   "screen": "story_hints.classes",
+   "why": "a page entry changed"
+  },
+  {
+   "row": "C422",
+   "screen": "story_hints.lunch",
+   "why": "screen is new"
+  },
+  {
+   "row": "C422",
+   "screen": "story_hints.staying_in_shape",
+   "why": "a page entry changed"
+  },
+  {
+   "row": "C422",
+   "screen": "story_hints.the_cafe_job",
+   "why": "a page entry changed"
+  },
+  {
+   "row": "C422",
+   "screen": "story_hints.the_corner_shop",
+   "why": "screen is new"
+  },
+  {
+   "row": "C422",
+   "screen": "story_hints.the_library",
+   "why": "screen is new"
+  },
+  {
+   "row": "C430",
+   "screen": "*",
+   "why": "never judged"
+  },
+  {
+   "row": "C430",
+   "screen": "story_hints.classes",
+   "why": "a page entry changed"
+  },
+  {
+   "row": "C430",
+   "screen": "story_hints.lunch",
+   "why": "screen is new"
+  },
+  {
+   "row": "C430",
+   "screen": "story_hints.staying_in_shape",
+   "why": "a page entry changed"
+  },
+  {
+   "row": "C430",
+   "screen": "story_hints.the_cafe_job",
+   "why": "a page entry changed"
+  },
+  {
+   "row": "C430",
+   "screen": "story_hints.the_corner_shop",
+   "why": "screen is new"
+  },
+  {
+   "row": "C430",
+   "screen": "story_hints.the_library",
+   "why": "screen is new"
+  },
+  {
+   "row": "C433",
+   "screen": "*",
+   "why": "never judged"
+  },
+  {
+   "row": "C433",
+   "screen": "story_hints.classes",
+   "why": "a page entry changed"
+  },
+  {
+   "row": "C433",
+   "screen": "story_hints.lunch",
+   "why": "screen is new"
+  },
+  {
+   "row": "C433",
+   "screen": "story_hints.staying_in_shape",
+   "why": "a page entry changed"
+  },
+  {
+   "row": "C433",
+   "screen": "story_hints.the_cafe_job",
+   "why": "a page entry changed"
+  },
+  {
+   "row": "C433",
+   "screen": "story_hints.the_corner_shop",
+   "why": "screen is new"
+  },
+  {
+   "row": "C433",
+   "screen": "story_hints.the_library",
+   "why": "screen is new"
+  },
+  {
+   "row": "C442",
+   "screen": "npcs.npc_ryan.stranger_name",
+   "why": "a page entry changed"
+  },
+  {
+   "row": "C442",
+   "screen": "story_hints.classes",
+   "why": "a page entry changed"
+  },
+  {
+   "row": "C442",
+   "screen": "story_hints.lunch",
+   "why": "screen is new"
+  },
+  {
+   "row": "C442",
+   "screen": "story_hints.staying_in_shape",
+   "why": "a page entry changed"
+  },
+  {
+   "row": "C442",
+   "screen": "story_hints.the_cafe_job",
+   "why": "a page entry changed"
+  },
+  {
+   "row": "C442",
+   "screen": "story_hints.the_corner_shop",
+   "why": "screen is new"
+  },
+  {
+   "row": "C442",
+   "screen": "story_hints.the_library",
+   "why": "screen is new"
+  },
+  {
+   "row": "C447",
+   "screen": "npcs.npc_ryan.stranger_name",
+   "why": "a page entry changed"
+  },
+  {
+   "row": "C451",
+   "screen": "npcs.npc_ryan.stranger_name",
+   "why": "a page entry changed"
+  },
+  {
+   "row": "C451",
+   "screen": "story_hints.classes",
+   "why": "a page entry changed"
+  },
+  {
+   "row": "C451",
+   "screen": "story_hints.lunch",
+   "why": "screen is new"
+  },
+  {
+   "row": "C451",
+   "screen": "story_hints.staying_in_shape",
+   "why": "a page entry changed"
+  },
+  {
+   "row": "C451",
+   "screen": "story_hints.the_cafe_job",
+   "why": "a page entry changed"
+  },
+  {
+   "row": "C451",
+   "screen": "story_hints.the_corner_shop",
+   "why": "screen is new"
+  },
+  {
+   "row": "C451",
+   "screen": "story_hints.the_library",
+   "why": "screen is new"
+  },
+  {
+   "row": "C460",
+   "screen": "npcs.npc_ryan.stranger_name",
+   "why": "screen changed: truth row"
+  },
+  {
+   "row": "C460",
+   "screen": "story_hints.classes",
+   "why": "screen changed: truth row"
+  },
+  {
+   "row": "C460",
+   "screen": "story_hints.lunch",
+   "why": "screen is new"
+  },
+  {
+   "row": "C460",
+   "screen": "story_hints.staying_in_shape",
+   "why": "screen changed: truth row"
+  },
+  {
+   "row": "C460",
+   "screen": "story_hints.the_cafe_job",
+   "why": "screen changed: truth row"
+  },
+  {
+   "row": "C460",
+   "screen": "story_hints.the_corner_shop",
+   "why": "screen is new"
+  },
+  {
+   "row": "C460",
+   "screen": "story_hints.the_library",
+   "why": "screen is new"
+  },
+  {
+   "row": "C461",
+   "screen": "npcs.npc_ryan.stranger_name",
+   "why": "screen changed: truth row"
+  },
+  {
+   "row": "C461",
+   "screen": "story_hints.classes",
+   "why": "screen changed: truth row"
+  },
+  {
+   "row": "C461",
+   "screen": "story_hints.lunch",
+   "why": "screen is new"
+  },
+  {
+   "row": "C461",
+   "screen": "story_hints.staying_in_shape",
+   "why": "screen changed: truth row"
+  },
+  {
+   "row": "C461",
+   "screen": "story_hints.the_cafe_job",
+   "why": "screen changed: truth row"
+  },
+  {
+   "row": "C461",
+   "screen": "story_hints.the_corner_shop",
+   "why": "screen is new"
+  },
+  {
+   "row": "C461",
+   "screen": "story_hints.the_library",
+   "why": "screen is new"
+  },
+  {
+   "row": "C519",
+   "screen": "npcs.npc_ryan.stranger_name",
+   "why": "a page entry changed"
+  },
+  {
+   "row": "C519",
+   "screen": "story_hints.classes",
+   "why": "a page entry changed"
+  },
+  {
+   "row": "C519",
+   "screen": "story_hints.lunch",
+   "why": "screen is new"
+  },
+  {
+   "row": "C519",
+   "screen": "story_hints.staying_in_shape",
+   "why": "a page entry changed"
+  },
+  {
+   "row": "C519",
+   "screen": "story_hints.the_cafe_job",
+   "why": "a page entry changed"
+  },
+  {
+   "row": "C519",
+   "screen": "story_hints.the_corner_shop",
+   "why": "screen is new"
+  },
+  {
+   "row": "C519",
+   "screen": "story_hints.the_library",
+   "why": "screen is new"
+  },
+  {
+   "row": "C593",
+   "screen": "npcs.npc_ryan.stranger_name",
+   "why": "a page entry changed"
+  },
+  {
+   "row": "C596",
+   "screen": "npcs.npc_ryan.stranger_name",
+   "why": "a page entry changed"
+  },
+  {
+   "row": "C598",
+   "screen": "*",
+   "why": "never judged"
+  },
+  {
+   "row": "C598",
+   "screen": "story_hints.classes",
+   "why": "a page entry changed"
+  },
+  {
+   "row": "C598",
+   "screen": "story_hints.lunch",
+   "why": "screen is new"
+  },
+  {
+   "row": "C598",
+   "screen": "story_hints.staying_in_shape",
+   "why": "a page entry changed"
+  },
+  {
+   "row": "C598",
+   "screen": "story_hints.the_cafe_job",
+   "why": "a page entry changed"
+  },
+  {
+   "row": "C598",
+   "screen": "story_hints.the_corner_shop",
+   "why": "screen is new"
+  },
+  {
+   "row": "C598",
+   "screen": "story_hints.the_library",
+   "why": "screen is new"
+  },
+  {
+   "row": "C625",
+   "screen": "npcs.npc_ryan.stranger_name",
+   "why": "a page entry changed"
+  },
+  {
+   "row": "C626",
+   "screen": "npcs.npc_ryan.stranger_name",
+   "why": "a page entry changed"
+  },
+  {
+   "row": "C630",
+   "screen": "npcs.npc_ryan.stranger_name",
+   "why": "a page entry changed"
+  },
+  {
+   "row": "C632",
+   "screen": "npcs.npc_ryan.stranger_name",
+   "why": "a page entry changed"
+  },
+  {
+   "row": "C644",
+   "screen": "npcs.npc_ryan.stranger_name",
+   "why": "a page entry changed"
+  },
+  {
+   "row": "C889",
+   "screen": "*",
+   "why": "never judged"
+  },
+  {
+   "row": "C889",
+   "screen": "story_hints.classes",
+   "why": "a page entry changed"
+  },
+  {
+   "row": "C889",
+   "screen": "story_hints.lunch",
+   "why": "screen is new"
+  },
+  {
+   "row": "C889",
+   "screen": "story_hints.staying_in_shape",
+   "why": "a page entry changed"
+  },
+  {
+   "row": "C889",
+   "screen": "story_hints.the_cafe_job",
+   "why": "a page entry changed"
+  },
+  {
+   "row": "C889",
+   "screen": "story_hints.the_corner_shop",
+   "why": "screen is new"
+  },
+  {
+   "row": "C889",
+   "screen": "story_hints.the_library",
+   "why": "screen is new"
+  },
+  {
+   "row": "C892",
+   "screen": "*",
+   "why": "never judged"
+  },
+  {
+   "row": "C892",
+   "screen": "story_hints.classes",
+   "why": "a page entry changed"
+  },
+  {
+   "row": "C892",
+   "screen": "story_hints.lunch",
+   "why": "screen is new"
+  },
+  {
+   "row": "C892",
+   "screen": "story_hints.staying_in_shape",
+   "why": "a page entry changed"
+  },
+  {
+   "row": "C892",
+   "screen": "story_hints.the_cafe_job",
+   "why": "a page entry changed"
+  },
+  {
+   "row": "C892",
+   "screen": "story_hints.the_corner_shop",
+   "why": "screen is new"
+  },
+  {
+   "row": "C892",
+   "screen": "story_hints.the_library",
+   "why": "screen is new"
+  },
+  {
+   "row": "C897",
+   "screen": "*",
+   "why": "never judged"
+  },
+  {
+   "row": "C897",
+   "screen": "story_hints.classes",
+   "why": "a page entry changed"
+  },
+  {
+   "row": "C897",
+   "screen": "story_hints.lunch",
+   "why": "screen is new"
+  },
+  {
+   "row": "C897",
+   "screen": "story_hints.staying_in_shape",
+   "why": "a page entry changed"
+  },
+  {
+   "row": "C897",
+   "screen": "story_hints.the_cafe_job",
+   "why": "a page entry changed"
+  },
+  {
+   "row": "C897",
+   "screen": "story_hints.the_corner_shop",
+   "why": "screen is new"
+  },
+  {
+   "row": "C897",
+   "screen": "story_hints.the_library",
+   "why": "screen is new"
+  },
+  {
+   "row": "C900",
+   "screen": "*",
+   "why": "never judged"
+  },
+  {
+   "row": "C900",
+   "screen": "story_hints.classes",
+   "why": "a page entry changed"
+  },
+  {
+   "row": "C900",
+   "screen": "story_hints.lunch",
+   "why": "screen is new"
+  },
+  {
+   "row": "C900",
+   "screen": "story_hints.staying_in_shape",
+   "why": "a page entry changed"
+  },
+  {
+   "row": "C900",
+   "screen": "story_hints.the_cafe_job",
+   "why": "a page entry changed"
+  },
+  {
+   "row": "C900",
+   "screen": "story_hints.the_corner_shop",
+   "why": "screen is new"
+  },
+  {
+   "row": "C900",
+   "screen": "story_hints.the_library",
+   "why": "screen is new"
+  },
+  {
+   "row": "C902",
+   "screen": "*",
+   "why": "never judged"
+  },
+  {
+   "row": "C902",
+   "screen": "story_hints.classes",
+   "why": "a page entry changed"
+  },
+  {
+   "row": "C902",
+   "screen": "story_hints.lunch",
+   "why": "screen is new"
+  },
+  {
+   "row": "C902",
+   "screen": "story_hints.staying_in_shape",
+   "why": "a page entry changed"
+  },
+  {
+   "row": "C902",
+   "screen": "story_hints.the_cafe_job",
+   "why": "a page entry changed"
+  },
+  {
+   "row": "C902",
+   "screen": "story_hints.the_corner_shop",
+   "why": "screen is new"
+  },
+  {
+   "row": "C902",
+   "screen": "story_hints.the_library",
+   "why": "screen is new"
+  },
+  {
+   "row": "C903",
+   "screen": "*",
+   "why": "never judged"
+  },
+  {
+   "row": "C903",
+   "screen": "story_hints.classes",
+   "why": "a page entry changed"
+  },
+  {
+   "row": "C903",
+   "screen": "story_hints.lunch",
+   "why": "screen is new"
+  },
+  {
+   "row": "C903",
+   "screen": "story_hints.staying_in_shape",
+   "why": "a page entry changed"
+  },
+  {
+   "row": "C903",
+   "screen": "story_hints.the_cafe_job",
+   "why": "a page entry changed"
+  },
+  {
+   "row": "C903",
+   "screen": "story_hints.the_corner_shop",
+   "why": "screen is new"
+  },
+  {
+   "row": "C903",
+   "screen": "story_hints.the_library",
+   "why": "screen is new"
+  },
+  {
+   "row": "C906",
+   "screen": "*",
+   "why": "never judged"
+  },
+  {
+   "row": "C906",
+   "screen": "story_hints.classes",
+   "why": "a page entry changed"
+  },
+  {
+   "row": "C906",
+   "screen": "story_hints.lunch",
+   "why": "screen is new"
+  },
+  {
+   "row": "C906",
+   "screen": "story_hints.staying_in_shape",
+   "why": "a page entry changed"
+  },
+  {
+   "row": "C906",
+   "screen": "story_hints.the_cafe_job",
+   "why": "a page entry changed"
+  },
+  {
+   "row": "C906",
+   "screen": "story_hints.the_corner_shop",
+   "why": "screen is new"
+  },
+  {
+   "row": "C906",
+   "screen": "story_hints.the_library",
+   "why": "screen is new"
+  },
+  {
+   "row": "C910",
+   "screen": "*",
+   "why": "never judged"
+  },
+  {
+   "row": "C910",
+   "screen": "story_hints.classes",
+   "why": "a page entry changed"
+  },
+  {
+   "row": "C910",
+   "screen": "story_hints.lunch",
+   "why": "screen is new"
+  },
+  {
+   "row": "C910",
+   "screen": "story_hints.staying_in_shape",
+   "why": "a page entry changed"
+  },
+  {
+   "row": "C910",
+   "screen": "story_hints.the_cafe_job",
+   "why": "a page entry changed"
+  },
+  {
+   "row": "C910",
+   "screen": "story_hints.the_corner_shop",
+   "why": "screen is new"
+  },
+  {
+   "row": "C910",
+   "screen": "story_hints.the_library",
+   "why": "screen is new"
+  },
+  {
+   "row": "C913",
+   "screen": "*",
+   "why": "never judged"
+  },
+  {
+   "row": "C913",
+   "screen": "story_hints.classes",
+   "why": "a page entry changed"
+  },
+  {
+   "row": "C913",
+   "screen": "story_hints.lunch",
+   "why": "screen is new"
+  },
+  {
+   "row": "C913",
+   "screen": "story_hints.staying_in_shape",
+   "why": "a page entry changed"
+  },
+  {
+   "row": "C913",
+   "screen": "story_hints.the_cafe_job",
+   "why": "a page entry changed"
+  },
+  {
+   "row": "C913",
+   "screen": "story_hints.the_corner_shop",
+   "why": "screen is new"
+  },
+  {
+   "row": "C913",
+   "screen": "story_hints.the_library",
+   "why": "screen is new"
+  },
+  {
+   "row": "C914",
+   "screen": "*",
+   "why": "never judged"
+  },
+  {
+   "row": "C914",
+   "screen": "story_hints.classes",
+   "why": "a page entry changed"
+  },
+  {
+   "row": "C914",
+   "screen": "story_hints.lunch",
+   "why": "screen is new"
+  },
+  {
+   "row": "C914",
+   "screen": "story_hints.staying_in_shape",
+   "why": "a page entry changed"
+  },
+  {
+   "row": "C914",
+   "screen": "story_hints.the_cafe_job",
+   "why": "a page entry changed"
+  },
+  {
+   "row": "C914",
+   "screen": "story_hints.the_corner_shop",
+   "why": "screen is new"
+  },
+  {
+   "row": "C914",
+   "screen": "story_hints.the_library",
+   "why": "screen is new"
+  },
+  {
+   "row": "C916",
+   "screen": "*",
+   "why": "never judged"
+  },
+  {
+   "row": "C916",
+   "screen": "story_hints.classes",
+   "why": "a page entry changed"
+  },
+  {
+   "row": "C916",
+   "screen": "story_hints.lunch",
+   "why": "screen is new"
+  },
+  {
+   "row": "C916",
+   "screen": "story_hints.staying_in_shape",
+   "why": "a page entry changed"
+  },
+  {
+   "row": "C916",
+   "screen": "story_hints.the_cafe_job",
+   "why": "a page entry changed"
+  },
+  {
+   "row": "C916",
+   "screen": "story_hints.the_corner_shop",
+   "why": "screen is new"
+  },
+  {
+   "row": "C916",
+   "screen": "story_hints.the_library",
+   "why": "screen is new"
+  },
+  {
+   "row": "C920",
+   "screen": "*",
+   "why": "never judged"
+  },
+  {
+   "row": "C920",
+   "screen": "story_hints.classes",
+   "why": "a page entry changed"
+  },
+  {
+   "row": "C920",
+   "screen": "story_hints.lunch",
+   "why": "screen is new"
+  },
+  {
+   "row": "C920",
+   "screen": "story_hints.staying_in_shape",
+   "why": "a page entry changed"
+  },
+  {
+   "row": "C920",
+   "screen": "story_hints.the_cafe_job",
+   "why": "a page entry changed"
+  },
+  {
+   "row": "C920",
+   "screen": "story_hints.the_corner_shop",
+   "why": "screen is new"
+  },
+  {
+   "row": "C920",
+   "screen": "story_hints.the_library",
+   "why": "screen is new"
+  },
+  {
+   "row": "C924",
+   "screen": "*",
+   "why": "never judged"
+  },
+  {
+   "row": "C924",
+   "screen": "story_hints.classes",
+   "why": "a page entry changed"
+  },
+  {
+   "row": "C924",
+   "screen": "story_hints.lunch",
+   "why": "screen is new"
+  },
+  {
+   "row": "C924",
+   "screen": "story_hints.staying_in_shape",
+   "why": "a page entry changed"
+  },
+  {
+   "row": "C924",
+   "screen": "story_hints.the_cafe_job",
+   "why": "a page entry changed"
+  },
+  {
+   "row": "C924",
+   "screen": "story_hints.the_corner_shop",
+   "why": "screen is new"
+  },
+  {
+   "row": "C924",
+   "screen": "story_hints.the_library",
+   "why": "screen is new"
+  },
+  {
+   "row": "C926",
+   "screen": "*",
+   "why": "never judged"
+  },
+  {
+   "row": "C926",
+   "screen": "story_hints.classes",
+   "why": "a page entry changed"
+  },
+  {
+   "row": "C926",
+   "screen": "story_hints.lunch",
+   "why": "screen is new"
+  },
+  {
+   "row": "C926",
+   "screen": "story_hints.staying_in_shape",
+   "why": "a page entry changed"
+  },
+  {
+   "row": "C926",
+   "screen": "story_hints.the_cafe_job",
+   "why": "a page entry changed"
+  },
+  {
+   "row": "C926",
+   "screen": "story_hints.the_corner_shop",
+   "why": "screen is new"
+  },
+  {
+   "row": "C926",
+   "screen": "story_hints.the_library",
+   "why": "screen is new"
+  },
+  {
+   "row": "C927",
+   "screen": "*",
+   "why": "never judged"
+  },
+  {
+   "row": "C927",
+   "screen": "story_hints.classes",
+   "why": "screen changed: truth row"
+  },
+  {
+   "row": "C927",
+   "screen": "story_hints.lunch",
+   "why": "screen is new"
+  },
+  {
+   "row": "C927",
+   "screen": "story_hints.staying_in_shape",
+   "why": "screen changed: truth row"
+  },
+  {
+   "row": "C927",
+   "screen": "story_hints.the_cafe_job",
+   "why": "screen changed: truth row"
+  },
+  {
+   "row": "C927",
+   "screen": "story_hints.the_corner_shop",
+   "why": "screen is new"
+  },
+  {
+   "row": "C927",
+   "screen": "story_hints.the_library",
+   "why": "screen is new"
+  },
+  {
+   "row": "C928",
+   "screen": "*",
+   "why": "never judged"
+  },
+  {
+   "row": "C928",
+   "screen": "story_hints.classes",
+   "why": "a page entry changed"
+  },
+  {
+   "row": "C928",
+   "screen": "story_hints.lunch",
+   "why": "screen is new"
+  },
+  {
+   "row": "C928",
+   "screen": "story_hints.staying_in_shape",
+   "why": "a page entry changed"
+  },
+  {
+   "row": "C928",
+   "screen": "story_hints.the_cafe_job",
+   "why": "a page entry changed"
+  },
+  {
+   "row": "C928",
+   "screen": "story_hints.the_corner_shop",
+   "why": "screen is new"
+  },
+  {
+   "row": "C928",
+   "screen": "story_hints.the_library",
+   "why": "screen is new"
+  },
+  {
+   "row": "C929",
+   "screen": "*",
+   "why": "never judged"
+  },
+  {
+   "row": "C929",
+   "screen": "story_hints.classes",
+   "why": "a page entry changed"
+  },
+  {
+   "row": "C929",
+   "screen": "story_hints.lunch",
+   "why": "screen is new"
+  },
+  {
+   "row": "C929",
+   "screen": "story_hints.staying_in_shape",
+   "why": "a page entry changed"
+  },
+  {
+   "row": "C929",
+   "screen": "story_hints.the_cafe_job",
+   "why": "a page entry changed"
+  },
+  {
+   "row": "C929",
+   "screen": "story_hints.the_corner_shop",
+   "why": "screen is new"
+  },
+  {
+   "row": "C929",
+   "screen": "story_hints.the_library",
+   "why": "screen is new"
+  },
+  {
+   "row": "C930",
+   "screen": "*",
+   "why": "never judged"
+  },
+  {
+   "row": "C930",
+   "screen": "story_hints.classes",
+   "why": "a page entry changed"
+  },
+  {
+   "row": "C930",
+   "screen": "story_hints.lunch",
+   "why": "screen is new"
+  },
+  {
+   "row": "C930",
+   "screen": "story_hints.staying_in_shape",
+   "why": "a page entry changed"
+  },
+  {
+   "row": "C930",
+   "screen": "story_hints.the_cafe_job",
+   "why": "a page entry changed"
+  },
+  {
+   "row": "C930",
+   "screen": "story_hints.the_corner_shop",
+   "why": "screen is new"
+  },
+  {
+   "row": "C930",
+   "screen": "story_hints.the_library",
+   "why": "screen is new"
+  },
+  {
+   "row": "C931",
+   "screen": "*",
+   "why": "never judged"
+  },
+  {
+   "row": "C931",
+   "screen": "story_hints.classes",
+   "why": "screen changed: truth row"
+  },
+  {
+   "row": "C931",
+   "screen": "story_hints.lunch",
+   "why": "screen is new"
+  },
+  {
+   "row": "C931",
+   "screen": "story_hints.staying_in_shape",
+   "why": "screen changed: truth row"
+  },
+  {
+   "row": "C931",
+   "screen": "story_hints.the_cafe_job",
+   "why": "screen changed: truth row"
+  },
+  {
+   "row": "C931",
+   "screen": "story_hints.the_corner_shop",
+   "why": "screen is new"
+  },
+  {
+   "row": "C931",
+   "screen": "story_hints.the_library",
+   "why": "screen is new"
+  },
+  {
+   "row": "C951",
+   "screen": "*",
+   "why": "never judged"
+  },
+  {
+   "row": "C952",
+   "screen": "*",
+   "why": "never judged"
+  },
+  {
+   "row": "C952",
+   "screen": "story_hints.classes",
+   "why": "a page entry changed"
+  },
+  {
+   "row": "C952",
+   "screen": "story_hints.lunch",
+   "why": "screen is new"
+  },
+  {
+   "row": "C952",
+   "screen": "story_hints.staying_in_shape",
+   "why": "a page entry changed"
+  },
+  {
+   "row": "C952",
+   "screen": "story_hints.the_cafe_job",
+   "why": "a page entry changed"
+  },
+  {
+   "row": "C952",
+   "screen": "story_hints.the_corner_shop",
+   "why": "screen is new"
+  },
+  {
+   "row": "C952",
+   "screen": "story_hints.the_library",
+   "why": "screen is new"
+  },
+  {
+   "row": "C954",
+   "screen": "*",
+   "why": "never judged"
+  },
+  {
+   "row": "L106",
+   "screen": "npcs.npc_ryan.stranger_name",
+   "why": "screen changed: truth row"
+  },
+  {
+   "row": "L167",
+   "screen": "*",
+   "why": "never judged"
+  },
+  {
+   "row": "L167",
+   "screen": "story_hints.classes",
+   "why": "screen changed: truth row"
+  },
+  {
+   "row": "L167",
+   "screen": "story_hints.lunch",
+   "why": "screen is new"
+  },
+  {
+   "row": "L167",
+   "screen": "story_hints.staying_in_shape",
+   "why": "screen changed: truth row"
+  },
+  {
+   "row": "L167",
+   "screen": "story_hints.the_cafe_job",
+   "why": "screen changed: truth row"
+  },
+  {
+   "row": "L167",
+   "screen": "story_hints.the_corner_shop",
+   "why": "screen is new"
+  },
+  {
+   "row": "L167",
+   "screen": "story_hints.the_library",
+   "why": "screen is new"
+  },
+  {
+   "row": "L170",
+   "screen": "*",
+   "why": "still to ask: never judged"
+  },
+  {
+   "row": "L171",
+   "screen": "*",
+   "why": "still to ask: never judged"
+  },
+  {
+   "row": "L172",
+   "screen": "*",
+   "why": "never judged"
+  },
+  {
+   "row": "L172",
+   "screen": "story_hints.classes",
+   "why": "a page entry changed"
+  },
+  {
+   "row": "L172",
+   "screen": "story_hints.lunch",
+   "why": "screen is new"
+  },
+  {
+   "row": "L172",
+   "screen": "story_hints.staying_in_shape",
+   "why": "a page entry changed"
+  },
+  {
+   "row": "L172",
+   "screen": "story_hints.the_cafe_job",
+   "why": "a page entry changed"
+  },
+  {
+   "row": "L172",
+   "screen": "story_hints.the_corner_shop",
+   "why": "screen is new"
+  },
+  {
+   "row": "L172",
+   "screen": "story_hints.the_library",
+   "why": "screen is new"
+  }
+ ]
+}

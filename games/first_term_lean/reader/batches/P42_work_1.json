@@ -2,113 +2,253 @@
  "items": [
   {
    "row": "B10",
-   "screen": "mom_living_room.talk",
+   "screen": "mom_living_room.hub",
    "why": "screen changed: truth row"
   },
   {
    "row": "B10",
-   "screen": "talk_mom.talk",
+   "screen": "talk_mom.hub",
    "why": "screen changed: truth row"
   },
   {
    "row": "B8",
-   "screen": "mom_living_room.talk",
+   "screen": "mom_living_room.hub",
    "why": "screen changed: truth row"
   },
   {
    "row": "B8",
-   "screen": "talk_mom.talk",
+   "screen": "talk_mom.hub",
+   "why": "screen changed: truth row"
+  },
+  {
+   "row": "C1265",
+   "screen": "*",
+   "why": "its rule's text changed"
+  },
+  {
+   "row": "C1265",
+   "screen": "mom_living_room.talk",
+   "why": "its rule's text changed"
+  },
+  {
+   "row": "C1265",
+   "screen": "talk_mom.eat",
+   "why": "its rule's text changed"
+  },
+  {
+   "row": "C460",
+   "screen": "mom_living_room.hub",
    "why": "screen changed: truth row"
   },
   {
    "row": "C460",
-   "screen": "mom_living_room.talk",
-   "why": "screen changed: truth row"
-  },
-  {
-   "row": "C460",
-   "screen": "talk_mom.talk",
+   "screen": "talk_mom.hub",
    "why": "screen changed: truth row"
   },
   {
    "row": "C461",
-   "screen": "mom_living_room.talk",
+   "screen": "mom_living_room.hub",
    "why": "screen changed: truth row"
   },
   {
    "row": "C461",
-   "screen": "talk_mom.talk",
+   "screen": "talk_mom.hub",
    "why": "screen changed: truth row"
   },
   {
-   "row": "C596",
-   "screen": "mom_living_room.talk",
-   "why": "failed last pass (a note), its screen changed"
+   "row": "C889",
+   "screen": "*",
+   "why": "its rule's text changed"
   },
   {
-   "row": "C596",
-   "screen": "talk_mom.talk",
-   "why": "failed last pass (a note), its screen changed"
+   "row": "C889",
+   "screen": "mom_living_room.talk",
+   "why": "its rule's text changed"
+  },
+  {
+   "row": "C889",
+   "screen": "talk_mom.eat",
+   "why": "its rule's text changed"
+  },
+  {
+   "row": "C906",
+   "screen": "*",
+   "why": "its rule's text changed"
+  },
+  {
+   "row": "C906",
+   "screen": "mom_living_room.talk",
+   "why": "its rule's text changed"
+  },
+  {
+   "row": "C906",
+   "screen": "talk_mom.eat",
+   "why": "its rule's text changed"
+  },
+  {
+   "row": "C910",
+   "screen": "*",
+   "why": "its rule's text changed"
+  },
+  {
+   "row": "C910",
+   "screen": "mom_living_room.talk",
+   "why": "its rule's text changed"
+  },
+  {
+   "row": "C910",
+   "screen": "talk_mom.eat",
+   "why": "its rule's text changed"
+  },
+  {
+   "row": "C920",
+   "screen": "*",
+   "why": "its rule's text changed"
+  },
+  {
+   "row": "C920",
+   "screen": "mom_living_room.talk",
+   "why": "its rule's text changed"
+  },
+  {
+   "row": "C920",
+   "screen": "talk_mom.eat",
+   "why": "its rule's text changed"
   },
   {
    "row": "C921",
-   "screen": "mom_living_room.talk",
+   "screen": "mom_living_room.hub",
    "why": "screen changed: truth row"
   },
   {
    "row": "C921",
-   "screen": "talk_mom.talk",
+   "screen": "talk_mom.hub",
    "why": "screen changed: truth row"
   },
   {
    "row": "C927",
-   "screen": "mom_living_room.talk",
+   "screen": "mom_living_room.hub",
    "why": "screen changed: truth row"
   },
   {
    "row": "C927",
-   "screen": "talk_mom.talk",
+   "screen": "talk_mom.hub",
+   "why": "screen changed: truth row"
+  },
+  {
+   "row": "C929",
+   "screen": "*",
+   "why": "its rule's text changed"
+  },
+  {
+   "row": "C929",
+   "screen": "mom_living_room.talk",
+   "why": "its rule's text changed"
+  },
+  {
+   "row": "C929",
+   "screen": "talk_mom.eat",
+   "why": "its rule's text changed"
+  },
+  {
+   "row": "C931",
+   "screen": "mom_living_room.hub",
    "why": "screen changed: truth row"
   },
   {
    "row": "C931",
-   "screen": "mom_living_room.talk",
+   "screen": "talk_mom.hub",
    "why": "screen changed: truth row"
   },
   {
-   "row": "C931",
-   "screen": "talk_mom.talk",
+   "row": "C953",
+   "screen": "*",
+   "why": "its rule's text changed"
+  },
+  {
+   "row": "C953",
+   "screen": "mom_living_room.talk",
+   "why": "its rule's text changed"
+  },
+  {
+   "row": "C953",
+   "screen": "talk_mom.eat",
+   "why": "its rule's text changed"
+  },
+  {
+   "row": "L106",
+   "screen": "mom_living_room.hub",
    "why": "screen changed: truth row"
   },
   {
    "row": "L106",
-   "screen": "mom_living_room.talk",
-   "why": "screen changed: truth row"
-  },
-  {
-   "row": "L106",
-   "screen": "talk_mom.talk",
+   "screen": "talk_mom.hub",
    "why": "screen changed: truth row"
   },
   {
    "row": "L167",
-   "screen": "mom_living_room.talk",
+   "screen": "mom_living_room.hub",
    "why": "screen changed: truth row"
   },
   {
    "row": "L167",
-   "screen": "talk_mom.talk",
+   "screen": "talk_mom.hub",
    "why": "screen changed: truth row"
   },
   {
-   "row": "people#7",
-   "screen": "mom_living_room.talk",
-   "why": "failed last pass"
+   "row": "clock#1",
+   "screen": "*",
+   "why": "its rule's text changed"
   },
   {
-   "row": "people#7",
-   "screen": "talk_mom.talk",
-   "why": "failed last pass"
+   "row": "clock#1",
+   "screen": "mom_living_room.talk",
+   "why": "its rule's text changed"
+  },
+  {
+   "row": "clock#1",
+   "screen": "talk_mom.eat",
+   "why": "its rule's text changed"
+  },
+  {
+   "row": "clock#2",
+   "screen": "*",
+   "why": "its rule's text changed"
+  },
+  {
+   "row": "clock#2",
+   "screen": "mom_living_room.talk",
+   "why": "its rule's text changed"
+  },
+  {
+   "row": "clock#2",
+   "screen": "talk_mom.eat",
+   "why": "its rule's text changed"
+  },
+  {
+   "row": "clock#6",
+   "screen": "*",
+   "why": "its rule's text changed"
+  },
+  {
+   "row": "clock#6",
+   "screen": "mom_living_room.talk",
+   "why": "its rule's text changed"
+  },
+  {
+   "row": "clock#6",
+   "screen": "talk_mom.eat",
+   "why": "its rule's text changed"
+  },
+  {
+   "row": "media#2",
+   "screen": "*",
+   "why": "its rule's text changed"
+  },
+  {
+   "row": "places#4",
+   "screen": "*",
+   "why": "its rule's text changed"
   }
  ]
 }

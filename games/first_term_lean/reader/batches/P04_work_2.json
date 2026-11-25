@@ -1,0 +1,64 @@
+{
+ "items": [
+  {
+   "row": "C795",
+   "screen": "*",
+   "why": "its rule's text changed"
+  },
+  {
+   "row": "C804",
+   "screen": "*",
+   "why": "its rule's text changed"
+  },
+  {
+   "row": "C804",
+   "screen": "campus_cafeteria",
+   "why": "failed last pass"
+  },
+  {
+   "row": "C804",
+   "screen": "campus_lecture_hall",
+   "why": "failed last pass"
+  },
+  {
+   "row": "C804",
+   "screen": "campus_library",
+   "why": "failed last pass"
+  },
+  {
+   "row": "C804",
+   "screen": "campus_theatre",
+   "why": "failed last pass"
+  },
+  {
+   "row": "places#2",
+   "screen": "*",
+   "why": "its rule's text changed"
+  },
+  {
+   "row": "places#2",
+   "screen": "campus_cafeteria",
+   "why": "failed last pass"
+  },
+  {
+   "row": "places#2",
+   "screen": "campus_lecture_hall",
+   "why": "failed last pass"
+  },
+  {
+   "row": "places#2",
+   "screen": "campus_library",
+   "why": "failed last pass"
+  },
+  {
+   "row": "places#2",
+   "screen": "campus_theatre",
+   "why": "failed last pass"
+  },
+  {
+   "row": "places#6",
+   "screen": "campus_theatre",
+   "why": "failed last pass"
+  }
+ ]
+}

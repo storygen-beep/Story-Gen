@@ -1,0 +1,26 @@
+{
+ "verdicts": [
+  {
+   "row": "L170",
+   "screen": "*",
+   "verdict": "N/A",
+   "line": "",
+   "why": "no place on this piece's screens is hidden_until a flag"
+  },
+  {
+   "row": "L168",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "The clothes shop in your neighbourhood is open Monday to Saturday, 10am to 7pm.",
+   "why": "Nina's rows are the shop's hours exactly; met_nina is the end step's when"
+  },
+  {
+   "row": "L169",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "The clothes shop in your neighbourhood is open Monday to Saturday, 10am to 7pm.",
+   "why": "shop_meet_nina runs 10:00-18:45 every open day; the hint names the shop's day window, and only the closing quarter-hour has her there without the meeting, so it is never missed for good"
+  }
+ ],
+ "causes": []
+}

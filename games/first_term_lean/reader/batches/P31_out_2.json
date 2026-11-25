@@ -1,0 +1,173 @@
+{
+ "verdicts": [
+  {
+   "row": "B10",
+   "screen": "cafe_window.sit",
+   "verdict": "PASS",
+   "line": "Nobody hurries you out. You could get used to this table.",
+   "why": "07:00-20:29 every day; each reaction group reads met flag + is_present (Chris 7-15 wkdy/10-20 wknd, Tom 10-21 Mon-Sat); nobody-in windows (wknd 7-10, Sun 20-20:29) show no line; true on repeat."
+  },
+  {
+   "row": "B3",
+   "screen": "cafe_window.sit",
+   "verdict": "PASS",
+   "line": "You could get used to this table.",
+   "why": "Ends pointing at her coming back; Chris's branch adds 'Stay as long as you like'."
+  },
+  {
+   "row": "B5",
+   "screen": "cafe_window.sit",
+   "verdict": "PASS",
+   "line": "Tom glances over from the till and lets you be.",
+   "why": "Whoever is in reacts (first match); nobody in, nobody there to react."
+  },
+  {
+   "row": "B8",
+   "screen": "cafe_window.sit",
+   "verdict": "PASS",
+   "line": "energy +5, 30 minutes",
+   "why": "Matches the card; no garment named."
+  },
+  {
+   "row": "C1189",
+   "screen": "*",
+   "verdict": "N/A",
+   "line": "",
+   "why": "No clothing state on screen."
+  },
+  {
+   "row": "C1345",
+   "screen": "cafe_window.sit",
+   "verdict": "FAIL",
+   "line": "trigger has no costs, no max_triggers_per_day",
+   "why": "A +5 energy repeat with no brake on the way in (note)."
+  },
+  {
+   "row": "C1425",
+   "screen": "cafe_window.sit",
+   "verdict": "FAIL",
+   "line": "time_progression_minutes = 30 only",
+   "why": "Only the time cost paces it (note)."
+  },
+  {
+   "row": "C149",
+   "screen": "cafe_window.sit",
+   "verdict": "PASS",
+   "line": "You could get used to this table.",
+   "why": "Points at coming back."
+  },
+  {
+   "row": "C447",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "On the house. Don't tell Tom. Stay as long as you like.",
+   "why": "Chris flirty and conspiratorial, Tom brisk; the unmet line is a neutral stranger's."
+  },
+  {
+   "row": "C450",
+   "screen": "cafe_window.sit",
+   "verdict": "PASS",
+   "line": "You could get used to this table.",
+   "why": "Ends on a forward pull."
+  },
+  {
+   "row": "C460",
+   "screen": "cafe_window.sit",
+   "verdict": "PASS",
+   "line": "Table's yours till close.",
+   "why": "Tom is in to 21:00 = close; the window ends 20:30 so the 30 minutes end by close; every presence line gated."
+  },
+  {
+   "row": "C461",
+   "screen": "cafe_window.sit",
+   "verdict": "PASS",
+   "line": "Chris tops up your water without being asked, and looks a second too long.",
+   "why": "Fits Chris's entry (wants her)."
+  },
+  {
+   "row": "C593",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "",
+   "why": "No term of address used; none borrowed."
+  },
+  {
+   "row": "C596",
+   "screen": "*",
+   "verdict": "N/A",
+   "line": "",
+   "why": "Not a talk screen."
+  },
+  {
+   "row": "C625",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "The guy behind the counter leaves you alone.",
+   "why": "Role before the meeting."
+  },
+  {
+   "row": "C626",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "Chris tops up your water",
+   "why": "Name only behind met_chris / met_tom."
+  },
+  {
+   "row": "C630",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "Tom glances over from the till",
+   "why": "Behind met flags; the till and 'Don't tell Tom' carry the caf\u00e9 relation."
+  },
+  {
+   "row": "C632",
+   "screen": "*",
+   "verdict": "N/A",
+   "line": "",
+   "why": "No role label."
+  },
+  {
+   "row": "C644",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "Don't tell Tom.",
+   "why": "Chris's own corner (the caf\u00e9, Tom)."
+  },
+  {
+   "row": "C902",
+   "screen": "cafe_window.sit",
+   "verdict": "PASS",
+   "line": "Table's yours till close.",
+   "why": "At 20:29 the 30 minutes end 20:59, before 21:00; true."
+  },
+  {
+   "row": "C927",
+   "screen": "cafe_window.sit",
+   "verdict": "PASS",
+   "line": "time_progression_minutes = 30",
+   "why": "Exit has its time."
+  },
+  {
+   "row": "C931",
+   "screen": "cafe_window.sit",
+   "verdict": "PASS",
+   "line": "07:00-20:30",
+   "why": "End exclusive; last start 20:29."
+  },
+  {
+   "row": "L106",
+   "screen": "cafe_window.sit",
+   "verdict": "PASS",
+   "line": "Tom glances over from the till",
+   "why": "Every presence line gated on is_present at near_cafe."
+  },
+  {
+   "row": "L167",
+   "screen": "cafe_window.sit",
+   "verdict": "PASS",
+   "line": "time_of_day 07:00-20:30",
+   "why": "One row, same hours every day."
+  }
+ ],
+ "causes": []
+}

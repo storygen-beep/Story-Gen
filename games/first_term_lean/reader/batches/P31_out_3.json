@@ -1,0 +1,75 @@
+{
+ "verdicts": [
+  {
+   "row": "B10",
+   "screen": "cafe_window.sit",
+   "verdict": "PASS",
+   "line": "Chris tops up your water ... / Tom glances over from the till ... / The guy behind the counter leaves you alone.",
+   "why": "First-match chain: each line gated on that man present (and met where named); nobody in, no line. At 07:00 weekdays Chris is in and Tom isn't; at 20:25 Tom's in Mon-Sat, nobody Sunday. Second visit true."
+  },
+  {
+   "row": "B8",
+   "screen": "cafe_window.sit",
+   "verdict": "PASS",
+   "line": "max_triggers_per_day = 2, 30 minutes, +5 energy, 07:00-20:30",
+   "why": "Matches the card; no garment named."
+  },
+  {
+   "row": "C1345",
+   "screen": "cafe_window.sit",
+   "verdict": "PASS",
+   "line": "max_triggers_per_day = 2",
+   "why": "The brake is a daily cap on the way in."
+  },
+  {
+   "row": "C1425",
+   "screen": "cafe_window.sit",
+   "verdict": "PASS",
+   "line": "2 a day, 30 minutes, 07:00-20:30",
+   "why": "Time cost and a daily cap together; hidden once used by LO's 11-24 call (clock.md rule 10)."
+  },
+  {
+   "row": "C460",
+   "screen": "cafe_window.sit",
+   "verdict": "PASS",
+   "line": "Take your time. Table's yours till close.",
+   "why": "Caf\u00e9 open to 21:00; last start 20:25 ends 20:55; Tom's and Chris's lines only while each is in."
+  },
+  {
+   "row": "C461",
+   "screen": "cafe_window.sit",
+   "verdict": "PASS",
+   "line": "On the house. Don't tell Tom. Stay as long as you like.",
+   "why": "Fits Chris's cast entry; met_chris is set on the first shift, after Tom's hire."
+  },
+  {
+   "row": "C927",
+   "screen": "cafe_window.sit",
+   "verdict": "PASS",
+   "line": "Done: time_progression_minutes = 30",
+   "why": "Explicit 30 minutes."
+  },
+  {
+   "row": "C931",
+   "screen": "cafe_window.sit",
+   "verdict": "PASS",
+   "line": "time_of_day 07:00-20:30",
+   "why": "End exclusive: last start 20:25, so the 30 minutes end by close."
+  },
+  {
+   "row": "L106",
+   "screen": "cafe_window.sit",
+   "verdict": "PASS",
+   "line": "Tom glances over from the till",
+   "why": "Each named line is gated on that man present at near_cafe."
+  },
+  {
+   "row": "L167",
+   "screen": "cafe_window.sit",
+   "verdict": "PASS",
+   "line": "one row, 07:00-20:30 every day",
+   "why": "Same hours every day; one row. No show_when_blocked by clock.md rule 10 (clock plus count)."
+  }
+ ],
+ "causes": []
+}

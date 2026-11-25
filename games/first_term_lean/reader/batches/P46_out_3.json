@@ -1,0 +1,286 @@
+{
+ "verdicts": [
+  {
+   "row": "B1",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "If Mark says anything to you about the money, you tell me first. Okay? Promise me. / Doesn't matter, baby. Eat something. You'll be late. Go on.",
+   "why": "Mom visibly wants something on both last screens: to stand first between her and Mark (sit_with_mom), to keep what she tried hidden and get her out the door (ask_mom). Not a sexual step, so no earlier canvas needed; Mark's want (the rent) is shown on opening.kitchen_rent."
+  },
+  {
+   "row": "B2",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "Then she stops, a plate in her hands. / She pushes the toast across the counter and turns the tap on hard.",
+   "why": "Each path goes one step past opening.handover's \"I tried.\": she asks for a promise against Mark (sit_with_mom), or she shuts the subject outright and sends her off (ask_mom). The Quests line and the trims leave both steps intact."
+  },
+  {
+   "row": "B9",
+   "screen": "*",
+   "verdict": "N/A",
+   "line": "",
+   "why": "PLAN.md declares Zoe the companion and Brooke the rival, two different people; companion-is-rival isn't declared, and neither appears on these screens."
+  }
+ ],
+ "extra": [
+  {
+   "row": "C460",
+   "screen": "npcs.npc_laura.stranger_name",
+   "verdict": "PASS",
+   "line": "woman with tired eyes",
+   "why": "No text or picture describes her eyes or contradicts it (talk_mom.hub, mom_living_room.hub pictures: woman of 41 in a cardigan); a body feature, no clothes, holds on every visit."
+  },
+  {
+   "row": "B10",
+   "screen": "npcs.npc_laura.stranger_name",
+   "verdict": "PASS",
+   "line": "woman with tired eyes",
+   "why": "A body feature with no presence or past claim; People Here lists the stranger only where getNpcsAtLocation puts them (cot_pages.py:365-370), so every pre-meeting row (who_is_where) shows a true line; also shown after meeting as the anon line (cot_pages.py:545), still true."
+  },
+  {
+   "row": "C460",
+   "screen": "npcs.npc_mark.stranger_name",
+   "verdict": "PASS",
+   "line": "broad man with a heavy jaw",
+   "why": "Nothing contradicts it (mark_kitchen.hub, mark_living_room.hub pictures: man of 46); body feature only."
+  },
+  {
+   "row": "B10",
+   "screen": "npcs.npc_mark.stranger_name",
+   "verdict": "PASS",
+   "line": "broad man with a heavy jaw",
+   "why": "A body feature with no presence or past claim; People Here lists the stranger only where getNpcsAtLocation puts them (cot_pages.py:365-370), so every pre-meeting row (who_is_where) shows a true line; also shown after meeting as the anon line (cot_pages.py:545), still true."
+  },
+  {
+   "row": "C460",
+   "screen": "npcs.npc_ryan.stranger_name",
+   "verdict": "FAIL",
+   "line": "lanky guy with a crooked grin",
+   "why": "His one body line in the game, opening.hall, reads \"He's broader than you remember.\" (shirtless); \"lanky\" picks the opposite build. The grin holds (walk_ryan_game.notnow \"He grins\").",
+   "cause": "P46r3-c1"
+  },
+  {
+   "row": "B10",
+   "screen": "npcs.npc_ryan.stranger_name",
+   "verdict": "PASS",
+   "line": "lanky guy with a crooked grin",
+   "why": "No presence or past claim; the build clash is judged at C460."
+  },
+  {
+   "row": "C460",
+   "screen": "npcs.npc_tom.stranger_name",
+   "verdict": "PASS",
+   "line": "wiry man in his thirties",
+   "why": "Matches cafe_hire.ask \"A man in his thirties is behind the counter, sleeves rolled up\" and his age 31; wiry clashes with nothing."
+  },
+  {
+   "row": "B10",
+   "screen": "npcs.npc_tom.stranger_name",
+   "verdict": "PASS",
+   "line": "wiry man in his thirties",
+   "why": "A body feature with no presence or past claim; People Here lists the stranger only where getNpcsAtLocation puts them (cot_pages.py:365-370), so every pre-meeting row (who_is_where) shows a true line; also shown after meeting as the anon line (cot_pages.py:545), still true."
+  },
+  {
+   "row": "C460",
+   "screen": "npcs.npc_chris.stranger_name",
+   "verdict": "PASS",
+   "line": "dark-eyed guy",
+   "why": "cafe_first_shift.start gives \"A guy in his twenties\"; nothing names his eyes otherwise; no picture of him."
+  },
+  {
+   "row": "B10",
+   "screen": "npcs.npc_chris.stranger_name",
+   "verdict": "PASS",
+   "line": "dark-eyed guy",
+   "why": "A body feature with no presence or past claim; People Here lists the stranger only where getNpcsAtLocation puts them (cot_pages.py:365-370), so every pre-meeting row (who_is_where) shows a true line; also shown after meeting as the anon line (cot_pages.py:545), still true."
+  },
+  {
+   "row": "C460",
+   "screen": "npcs.npc_pratt.stranger_name",
+   "verdict": "PASS",
+   "line": "man with a flat, quiet voice",
+   "why": "Fits his clipped lines (stats_first: \"Pratt. Statistics. I take attendance...\"); no text gives him a loud voice."
+  },
+  {
+   "row": "B10",
+   "screen": "npcs.npc_pratt.stranger_name",
+   "verdict": "PASS",
+   "line": "man with a flat, quiet voice",
+   "why": "A body feature with no presence or past claim; People Here lists the stranger only where getNpcsAtLocation puts them (cot_pages.py:365-370), so every pre-meeting row (who_is_where) shows a true line; also shown after meeting as the anon line (cot_pages.py:545), still true."
+  },
+  {
+   "row": "C460",
+   "screen": "npcs.npc_walsh.stranger_name",
+   "verdict": "PASS",
+   "line": "woman with grey-streaked hair",
+   "why": "english_first.sheet and its picture: \"reading glasses pushed up into grey-streaked hair\"."
+  },
+  {
+   "row": "B10",
+   "screen": "npcs.npc_walsh.stranger_name",
+   "verdict": "PASS",
+   "line": "woman with grey-streaked hair",
+   "why": "A body feature with no presence or past claim; People Here lists the stranger only where getNpcsAtLocation puts them (cot_pages.py:365-370), so every pre-meeting row (who_is_where) shows a true line; also shown after meeting as the anon line (cot_pages.py:545), still true."
+  },
+  {
+   "row": "C460",
+   "screen": "npcs.npc_cross.stranger_name",
+   "verdict": "PASS",
+   "line": "man with a voice that carries",
+   "why": "drama_first is a black-box theatre, \"Your name bounces off the back wall\"; nothing contradicts."
+  },
+  {
+   "row": "B10",
+   "screen": "npcs.npc_cross.stranger_name",
+   "verdict": "PASS",
+   "line": "man with a voice that carries",
+   "why": "A body feature with no presence or past claim; People Here lists the stranger only where getNpcsAtLocation puts them (cot_pages.py:365-370), so every pre-meeting row (who_is_where) shows a true line; also shown after meeting as the anon line (cot_pages.py:545), still true."
+  },
+  {
+   "row": "C460",
+   "screen": "npcs.npc_holt.stranger_name",
+   "verdict": "PASS",
+   "line": "woman with a long, cool look",
+   "why": "library_meet_holt.meet: \"reads your student card for longer than a card needs, then looks you up and down\"; \"She doesn't smile\"."
+  },
+  {
+   "row": "B10",
+   "screen": "npcs.npc_holt.stranger_name",
+   "verdict": "PASS",
+   "line": "woman with a long, cool look",
+   "why": "A body feature with no presence or past claim; People Here lists the stranger only where getNpcsAtLocation puts them (cot_pages.py:365-370), so every pre-meeting row (who_is_where) shows a true line; also shown after meeting as the anon line (cot_pages.py:545), still true."
+  },
+  {
+   "row": "C460",
+   "screen": "npcs.npc_rosa.stranger_name",
+   "verdict": "PASS",
+   "line": "woman with forearms like a baker's",
+   "why": "cafeteria_meet_rosa.meet: \"forearms like a baker's\"."
+  },
+  {
+   "row": "B10",
+   "screen": "npcs.npc_rosa.stranger_name",
+   "verdict": "PASS",
+   "line": "woman with forearms like a baker's",
+   "why": "A body feature with no presence or past claim; People Here lists the stranger only where getNpcsAtLocation puts them (cot_pages.py:365-370), so every pre-meeting row (who_is_where) shows a true line; also shown after meeting as the anon line (cot_pages.py:545), still true."
+  },
+  {
+   "row": "C460",
+   "screen": "npcs.npc_nadia.stranger_name",
+   "verdict": "PASS",
+   "line": "dark-haired girl",
+   "why": "psych_first.seat: \"A dark-haired girl in the third row\"."
+  },
+  {
+   "row": "B10",
+   "screen": "npcs.npc_nadia.stranger_name",
+   "verdict": "PASS",
+   "line": "dark-haired girl",
+   "why": "A body feature with no presence or past claim; People Here lists the stranger only where getNpcsAtLocation puts them (cot_pages.py:365-370), so every pre-meeting row (who_is_where) shows a true line; also shown after meeting as the anon line (cot_pages.py:545), still true."
+  },
+  {
+   "row": "C460",
+   "screen": "npcs.npc_sam.stranger_name",
+   "verdict": "PASS",
+   "line": "sleepy-eyed guy",
+   "why": "zoe_door_sam.door: barefoot, \"a T-shirt he's clearly slept in\", \"Always home\"; consistent, and his pictures (man of 22) don't contradict."
+  },
+  {
+   "row": "B10",
+   "screen": "npcs.npc_sam.stranger_name",
+   "verdict": "PASS",
+   "line": "sleepy-eyed guy",
+   "why": "A body feature with no presence or past claim; People Here lists the stranger only where getNpcsAtLocation puts them (cot_pages.py:365-370), so every pre-meeting row (who_is_where) shows a true line; also shown after meeting as the anon line (cot_pages.py:545), still true."
+  },
+  {
+   "row": "C460",
+   "screen": "npcs.npc_kayla.stranger_name",
+   "verdict": "PASS",
+   "line": "girl with a loud laugh",
+   "why": "mirror_meet_brooke.mirror: \"Kayla laughs. Tess doesn't\"; relationship \"She laughs first.\" Distinct from Brooke (blonde) and Tess (redhead) in the picture."
+  },
+  {
+   "row": "B10",
+   "screen": "npcs.npc_kayla.stranger_name",
+   "verdict": "PASS",
+   "line": "girl with a loud laugh",
+   "why": "A body feature with no presence or past claim; People Here lists the stranger only where getNpcsAtLocation puts them (cot_pages.py:365-370), so every pre-meeting row (who_is_where) shows a true line; also shown after meeting as the anon line (cot_pages.py:545), still true."
+  },
+  {
+   "row": "C460",
+   "screen": "npcs.npc_vance.stranger_name",
+   "verdict": "PASS",
+   "line": "slow-eyed man in his fifties",
+   "why": "street_meet_vance.porch: \"his eyes follow you down the pavement, taking their time\"; age 54."
+  },
+  {
+   "row": "B10",
+   "screen": "npcs.npc_vance.stranger_name",
+   "verdict": "PASS",
+   "line": "slow-eyed man in his fifties",
+   "why": "A body feature with no presence or past claim; People Here lists the stranger only where getNpcsAtLocation puts them (cot_pages.py:365-370), so every pre-meeting row (who_is_where) shows a true line; also shown after meeting as the anon line (cot_pages.py:545), still true."
+  },
+  {
+   "row": "C460",
+   "screen": "npcs.npc_frank.stranger_name",
+   "verdict": "PASS",
+   "line": "heavyset man in his fifties",
+   "why": "shop_meet_frank.meet and picture: \"A heavy man in his fifties\" / \"heavy man of 52\"."
+  },
+  {
+   "row": "B10",
+   "screen": "npcs.npc_frank.stranger_name",
+   "verdict": "PASS",
+   "line": "heavyset man in his fifties",
+   "why": "A body feature with no presence or past claim; People Here lists the stranger only where getNpcsAtLocation puts them (cot_pages.py:365-370), so every pre-meeting row (who_is_where) shows a true line; also shown after meeting as the anon line (cot_pages.py:545), still true."
+  },
+  {
+   "row": "C460",
+   "screen": "npcs.npc_danny.stranger_name",
+   "verdict": "PASS",
+   "line": "guy with a slow smile",
+   "why": "shop_meet_danny.meet picture: \"looking at the camera with a slow smile\"; age 23."
+  },
+  {
+   "row": "B10",
+   "screen": "npcs.npc_danny.stranger_name",
+   "verdict": "PASS",
+   "line": "guy with a slow smile",
+   "why": "A body feature with no presence or past claim; People Here lists the stranger only where getNpcsAtLocation puts them (cot_pages.py:365-370), so every pre-meeting row (who_is_where) shows a true line; also shown after meeting as the anon line (cot_pages.py:545), still true."
+  },
+  {
+   "row": "C460",
+   "screen": "npcs.npc_marco.stranger_name",
+   "verdict": "PASS",
+   "line": "heavily muscled man",
+   "why": "gym trainer, picture \"a man of 29 in a gym vest\"; nothing contradicts."
+  },
+  {
+   "row": "B10",
+   "screen": "npcs.npc_marco.stranger_name",
+   "verdict": "PASS",
+   "line": "heavily muscled man",
+   "why": "A body feature with no presence or past claim; People Here lists the stranger only where getNpcsAtLocation puts them (cot_pages.py:365-370), so every pre-meeting row (who_is_where) shows a true line; also shown after meeting as the anon line (cot_pages.py:545), still true."
+  },
+  {
+   "row": "C460",
+   "screen": "npcs.npc_nina.stranger_name",
+   "verdict": "PASS",
+   "line": "woman with a knowing smile",
+   "why": "shop_meet_nina.meet: \"She smiles like she already knows which rail you'll end up at.\""
+  },
+  {
+   "row": "B10",
+   "screen": "npcs.npc_nina.stranger_name",
+   "verdict": "PASS",
+   "line": "woman with a knowing smile",
+   "why": "A body feature with no presence or past claim; People Here lists the stranger only where getNpcsAtLocation puts them (cot_pages.py:365-370), so every pre-meeting row (who_is_where) shows a true line; also shown after meeting as the anon line (cot_pages.py:545), still true."
+  }
+ ],
+ "causes": [
+  {
+   "id": "P46r3-c1",
+   "what": "Ryan's stranger name \"lanky\" contradicts opening.hall's \"He's broader than you remember.\""
+  }
+ ]
+}

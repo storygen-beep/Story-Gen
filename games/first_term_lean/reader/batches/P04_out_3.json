@@ -1,0 +1,62 @@
+{
+ "verdicts": [
+  {
+   "row": "places#2",
+   "screen": "campus_lecture_hall",
+   "verdict": "PASS",
+   "line": "No class right now. The screen's dark.",
+   "why": "the variant fires when Hale, Pratt and Walsh are all out; Nadia and Brooke are only there with Hale",
+   "cause": null
+  },
+  {
+   "row": "places#2",
+   "screen": "campus_library",
+   "verdict": "PASS",
+   "line": "The desk by the door is empty. Nobody's checking cards.",
+   "why": "fires whenever Holt's out (weekdays from 16:00, Sat outside 10-16, all Sunday); true even while Nadia studies 16-18",
+   "cause": null
+  },
+  {
+   "row": "places#2",
+   "screen": "campus_offices",
+   "verdict": "PASS",
+   "line": "Every door on the corridor is shut. Nobody's in office hours.",
+   "why": "fires when all three lecturers are out",
+   "cause": null
+  },
+  {
+   "row": "places#2",
+   "screen": "campus_theatre",
+   "verdict": "PASS",
+   "line": "Nobody's on the stage. The work light's on.",
+   "why": "fires when Cross is out; Brooke's theatre rows match his, so nobody's there",
+   "cause": null
+  },
+  {
+   "row": "places#6",
+   "screen": "campus_theatre",
+   "verdict": "FAIL",
+   "line": "stage_practise: npc_cross is_absent (hidden while he's in); class_drama 11:00-11:30 only; walk_cross_brooke Tue/Thu/Fri 14:00-18:00, once a day, needs met_brooke",
+   "why": "Tue and Thu 11:30-13:00 (Cross teaching) the theatre is open with nothing she can do alone; the same 14:00-18:00 before met_brooke or after the day's rehearsal walk-in",
+   "cause": "P04r9-c2"
+  },
+  {
+   "row": "clock#10",
+   "screen": "campus_cafeteria",
+   "verdict": "FAIL",
+   "line": "body_lunch: weekdays 11:00-14:00, meals_today lt 3, show_when_blocked, cooldown \"lunch is 11am to 2pm on weekdays.\", locked_text \"You're not hungry right now.\"",
+   "why": "a row with a clock window and a daily count (meals_today) still sets show_when_blocked: it greys out of hours and after the meals are spent; rule 10 and its worked example (\"Buy lunch ($4)\") say it is gone. rep_table and stage_practise now hide",
+   "cause": "P04r9-c1"
+  }
+ ],
+ "causes": [
+  {
+   "id": "P04r9-c1",
+   "what": "body_lunch (P33, on the cafeteria) has a weekday 11-14 window and the meals_today daily count but keeps show_when_blocked, so it greys instead of being gone (clock rule 10, LO's 'button completely gone'); NOTES 282 applied the call only to rep_table, zoe_party and stage_practise"
+  },
+  {
+   "id": "P04r9-c2",
+   "what": "the theatre still has open hours with nothing she can do alone: Tue/Thu 11:30-13:00 while Cross teaches, and Tue/Thu/Fri 14-18 before met_brooke or after the one daily rehearsal walk-in (stage_practise now hides while Cross is in)"
+  }
+ ]
+}

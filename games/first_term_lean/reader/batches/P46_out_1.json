@@ -1,0 +1,681 @@
+{
+ "verdicts": [
+  {
+   "row": "B1",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "Mom: \"If Mark says anything to you about the money, you tell me first.\"",
+   "why": "Mom wants something on both last screens (the promise on sit, the subject dropped on ask), shown on her body and voice; no sexual step. Checked opening.handover, sit_with_mom, ask_mom."
+  },
+  {
+   "row": "B2",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "\"Okay? Promise me.\" / \"Doesn't matter, baby... Go on.\"",
+   "why": "Each path goes past the hand-over: she asks for a promise, or she shuts the question down."
+  },
+  {
+   "row": "B3",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "\"You nod, and your stomach knots. Tell her what?\" / \"turns the tap on hard.\"",
+   "why": "Both end on Mom's mystery, then the Quests line points at what to do next."
+  },
+  {
+   "row": "B4",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "\"You nod, and your stomach knots.\"",
+   "why": "Her reaction is on her body, no italic thought, no act above stage 0."
+  },
+  {
+   "row": "B5",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "\"She pushes the toast across the counter and turns the tap on hard.\"",
+   "why": "Mom reacts to what she asks or does."
+  },
+  {
+   "row": "C109",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "\"Okay? Promise me.\"",
+   "why": "Mom's want leaked on the hand-over (\"He means it... I tried.\"); each screen ends on a promise/mystery."
+  },
+  {
+   "row": "C120",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "\"you tell me first. Okay? Promise me.\"",
+   "why": "The last step adds a new kind of ask (a secret kept from Mark)."
+  },
+  {
+   "row": "C1340",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "Done -> home_kitchen, 07:40/07:50",
+   "why": "Lands in the Kitchen where Mom's face is and Talk sits in her menu (Laura home_kitchen 07-08)."
+  },
+  {
+   "row": "C148",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "\"Promise me.\"",
+   "why": "Goes one step past the hand-over."
+  },
+  {
+   "row": "C149",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "\"If you want some hints on what to do next, try the Quests button.\"",
+   "why": "Points at what comes next on both screens."
+  },
+  {
+   "row": "C1604",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "Quests: \"Paying Your Way\" Hint: \"Mark collects the rent at the kitchen table on Sunday mornings, 8am to noon...\"",
+   "why": "At the hand-over the Quests page carries goal 1's hint and the walkthrough's steps (shown once goal1_shown, set at the hall)."
+  },
+  {
+   "row": "C1609",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "\"If you want some hints on what to do next, try the Quests button.\"",
+   "why": "A plain tutorial line on the last screens, as allowed."
+  },
+  {
+   "row": "C1611",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "Mom alone, speaking",
+   "why": "One person on screen, speaking."
+  },
+  {
+   "row": "C1621",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "\"Tell her what?\" + the Quests line",
+   "why": "Ends on a mystery (what she tried) and the objective pointer."
+  },
+  {
+   "row": "C1631",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "Done -> home_kitchen at about 07:50 (sit) / 07:40 (ask)",
+   "why": "Start 07:00 + 50/40 min; Laura's kitchen row 07:00-08:00, so Mom and her Talk are live there."
+  },
+  {
+   "row": "C180",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "\"He means it, @player. I tried.\" -> \"Promise me.\"",
+   "why": "Pays the hand-over's \"Tried what?\" and opens Mom's line."
+  },
+  {
+   "row": "C327",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "toast, the plate, the tap",
+   "why": "The opening as a whole has body and act; these screens carry objects and her body, not talk alone."
+  },
+  {
+   "row": "C422",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "Done; \"try the Quests button\"",
+   "why": "The line names the button the sidebar shows (Quests); Done plainly returns to the room."
+  },
+  {
+   "row": "C442",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "\"She talks about the weather, your classes, anything but Mark.\"",
+   "why": "Says plainly what is happening."
+  },
+  {
+   "row": "C447",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "\"Doesn't matter, baby. Eat something. You'll be late. Go on.\"",
+   "why": "Mom's anxious, deflecting manner holds."
+  },
+  {
+   "row": "C450",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "\"Tell her what?\"",
+   "why": "Ends on a hook."
+  },
+  {
+   "row": "C451",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "toast, the counter, a plate, the tap",
+   "why": "Concrete detail kept."
+  },
+  {
+   "row": "C461",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "\"Doesn't matter, baby. Eat something. You'll be late. Go on.\"",
+   "why": "Texture and dialogue fit Mom's plan entry."
+  },
+  {
+   "row": "C519",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "sit_with_mom ~70 words, ask_mom ~40 words",
+   "why": "One job each, under 150."
+  },
+  {
+   "row": "C520",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "sit ~70 / ask ~40 words",
+   "why": "Hand-over stage present; length within the ceiling (34-57 is a target)."
+  },
+  {
+   "row": "C593",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "\"baby\"",
+   "why": "Mom's term of address, nobody else's."
+  },
+  {
+   "row": "C626",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "People: stranger_name until the met card's when holds, then the name",
+   "why": "The People page swaps the description for the name on the met flag (headless: Frank's met view shows his name)."
+  },
+  {
+   "row": "C630",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "People view: name, role · relationship",
+   "why": "Met view gives both name and relation; Mom and Mark named with relation earlier in the opening."
+  },
+  {
+   "row": "C632",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "Laura role \"Mom\", Mark \"Step-father\"",
+   "why": "Role labels say who the person is."
+  },
+  {
+   "row": "C644",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "Mom's subject: Mark, the money",
+   "why": "Her own corner held."
+  },
+  {
+   "row": "C758",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "Done",
+   "why": "Short label."
+  },
+  {
+   "row": "C762",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "no \"Nothing happens.\"",
+   "why": "grep finds none on these screens."
+  },
+  {
+   "row": "C804",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "lands in the Kitchen: Mom's face",
+   "why": "Who is there shows as faces, no per-person room line."
+  },
+  {
+   "row": "C953",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "Done",
+   "why": "No time or energy on the label; no money cost."
+  },
+  {
+   "row": "B6",
+   "screen": "*",
+   "verdict": "N/A",
+   "line": "",
+   "why": "No offer on either screen; Mom's ask is not an offer with a refusal path."
+  },
+  {
+   "row": "B7",
+   "screen": "*",
+   "verdict": "N/A",
+   "line": "",
+   "why": "No explicit beat."
+  },
+  {
+   "row": "B9",
+   "screen": "*",
+   "verdict": "N/A",
+   "line": "",
+   "why": "PLAN declares no companion-rival here."
+  },
+  {
+   "row": "B11",
+   "screen": "*",
+   "verdict": "N/A",
+   "line": "",
+   "why": "No solo button on these screens."
+  },
+  {
+   "row": "B12",
+   "screen": "*",
+   "verdict": "N/A",
+   "line": "",
+   "why": "Not a charged scene."
+  },
+  {
+   "row": "B13",
+   "screen": "*",
+   "verdict": "N/A",
+   "line": "",
+   "why": "No moment alone with her body."
+  },
+  {
+   "row": "C1002",
+   "screen": "*",
+   "verdict": "N/A",
+   "line": "",
+   "why": "No spend on these screens."
+  },
+  {
+   "row": "C115",
+   "screen": "*",
+   "verdict": "N/A",
+   "line": "",
+   "why": "Mom's move is shown (the promise); no man's move here."
+  },
+  {
+   "row": "C1173",
+   "screen": "*",
+   "verdict": "N/A",
+   "line": "",
+   "why": "No clothing door."
+  },
+  {
+   "row": "C1184",
+   "screen": "*",
+   "verdict": "N/A",
+   "line": "",
+   "why": "No clothing refusal."
+  },
+  {
+   "row": "C1185",
+   "screen": "*",
+   "verdict": "N/A",
+   "line": "",
+   "why": "No dress code."
+  },
+  {
+   "row": "C1189",
+   "screen": "*",
+   "verdict": "N/A",
+   "line": "",
+   "why": "No clothing state noticed here."
+  },
+  {
+   "row": "C1198",
+   "screen": "*",
+   "verdict": "N/A",
+   "line": "",
+   "why": "No refusal."
+  },
+  {
+   "row": "C1200",
+   "screen": "*",
+   "verdict": "N/A",
+   "line": "",
+   "why": "No place clothes."
+  },
+  {
+   "row": "C1220",
+   "screen": "*",
+   "verdict": "N/A",
+   "line": "",
+   "why": "No dress code breach."
+  },
+  {
+   "row": "C1221",
+   "screen": "*",
+   "verdict": "N/A",
+   "line": "",
+   "why": "No dress-code exception."
+  },
+  {
+   "row": "C1250",
+   "screen": "*",
+   "verdict": "N/A",
+   "line": "",
+   "why": "No room card on these screens."
+  },
+  {
+   "row": "C162",
+   "screen": "*",
+   "verdict": "N/A",
+   "line": "",
+   "why": "No information step here."
+  },
+  {
+   "row": "C596",
+   "screen": "*",
+   "verdict": "N/A",
+   "line": "",
+   "why": "Not a talk screen."
+  },
+  {
+   "row": "C769",
+   "screen": "*",
+   "verdict": "N/A",
+   "line": "",
+   "why": "No place description changed."
+  },
+  {
+   "row": "C770",
+   "screen": "*",
+   "verdict": "N/A",
+   "line": "",
+   "why": "No room screen."
+  },
+  {
+   "row": "C771",
+   "screen": "*",
+   "verdict": "N/A",
+   "line": "",
+   "why": "No first-visit screen."
+  },
+  {
+   "row": "C794",
+   "screen": "*",
+   "verdict": "N/A",
+   "line": "",
+   "why": "No identity sentence here."
+  },
+  {
+   "row": "C795",
+   "screen": "*",
+   "verdict": "N/A",
+   "line": "",
+   "why": "No re-entry text here."
+  },
+  {
+   "row": "C773",
+   "screen": "*",
+   "verdict": "N/A",
+   "line": "",
+   "why": "No room buttons on these screens."
+  },
+  {
+   "row": "C776",
+   "screen": "*",
+   "verdict": "N/A",
+   "line": "",
+   "why": "No menu on these screens."
+  },
+  {
+   "row": "C777",
+   "screen": "*",
+   "verdict": "N/A",
+   "line": "",
+   "why": "No menu on these screens."
+  },
+  {
+   "row": "B8",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "no garment or number on either screen; hints' $75/$5/$22 match rows",
+   "why": "Walkthrough overview $75 = Mark's line; $5 an hour (cafe_work_hour) and $22 a shift (cafe_work_shift, cafe_first_shift) match the rows."
+  },
+  {
+   "row": "L106",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "\"while Tom and Chris are both in\"; \"The man next door sits on his porch... Sunday, 9am to noon or 5 to 8pm\"",
+   "why": "Every hint that puts a person somewhere matches who_is_where (Tom 10-21, Chris 07-15 weekdays; Vance Sun 09-12/17-20; Jake quad 14-16; the three girls bathroom 08-09/13-14; Mom in kitchen 07-08 at the landing)."
+  },
+  {
+   "row": "C620",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "People Here lists strangers by stranger_name; faces and tabs met only",
+   "why": "Per people.md rule 3 as now written."
+  },
+  {
+   "row": "C625",
+   "screen": "story_hints.Zoe",
+   "verdict": "FAIL",
+   "line": "Zoe · Relationship 🥰 · \"A girl on the quad who decided you're interesting.\"",
+   "why": "The hint has no `when`, so its title names her from day one, before the meeting that gives the name."
+  },
+  {
+   "row": "C625",
+   "screen": "story_hints.Jake",
+   "verdict": "FAIL",
+   "line": "Jake · Relationship 🥰 · \"A guy on the quad.\"",
+   "why": "The hint has no `when`, so its title names her from day one, before the meeting that gives the name."
+  },
+  {
+   "row": "C625",
+   "screen": "story_hints.Brooke",
+   "verdict": "FAIL",
+   "line": "Brooke · Campus Life 🏫 · \"The girl who owns the bathroom mirror.\"",
+   "why": "The hint has no `when`, so its title names her from day one, before the meeting that gives the name."
+  },
+  {
+   "row": "C460",
+   "screen": "story_hints.Zoe",
+   "verdict": "FAIL",
+   "line": "Zoe · \"A girl on the quad who decided you're interesting.\"",
+   "why": "Shown from day one (no `when`); names a person before met_zoe; and claims a meeting that hasn't happened (\"decided you're interesting\").",
+   "cause": "P46a1-c1"
+  },
+  {
+   "row": "B10",
+   "screen": "story_hints.Zoe",
+   "verdict": "FAIL",
+   "line": "Zoe · \"A girl on the quad who decided you're interesting.\"",
+   "why": "Shown from day one (no `when`); names a person before met_zoe; and claims a meeting that hasn't happened (\"decided you're interesting\").",
+   "cause": "P46a1-c1"
+  },
+  {
+   "row": "C460",
+   "screen": "story_hints.Jake",
+   "verdict": "FAIL",
+   "line": "Jake · \"A guy on the quad.\"",
+   "why": "Shown from day one (no `when`); names a person before met_jake.",
+   "cause": "P46a1-c1"
+  },
+  {
+   "row": "B10",
+   "screen": "story_hints.Jake",
+   "verdict": "FAIL",
+   "line": "Jake · \"A guy on the quad.\"",
+   "why": "Shown from day one (no `when`); names a person before met_jake.",
+   "cause": "P46a1-c1"
+  },
+  {
+   "row": "C460",
+   "screen": "story_hints.Brooke",
+   "verdict": "FAIL",
+   "line": "Brooke · \"The girl who owns the bathroom mirror.\"",
+   "why": "Shown from day one (no `when`); names a person before met_brooke.",
+   "cause": "P46a1-c1"
+  },
+  {
+   "row": "B10",
+   "screen": "story_hints.Brooke",
+   "verdict": "FAIL",
+   "line": "Brooke · \"The girl who owns the bathroom mirror.\"",
+   "why": "Shown from day one (no `when`); names a person before met_brooke.",
+   "cause": "P46a1-c1"
+  },
+  {
+   "row": "C460",
+   "screen": "npcs.npc_jake.stranger_name",
+   "verdict": "FAIL",
+   "line": "\"A guy on the quad.\" in the Cafeteria",
+   "why": "Jake's cafeteria row weekdays 12-14, and he can't be met before day 8 (quad_meet_jake days_since_flag met_laura gte 7): all of week 1 People Here in the Cafeteria calls him a guy on the quad.",
+   "cause": "P46a1-c2"
+  },
+  {
+   "row": "B10",
+   "screen": "npcs.npc_jake.stranger_name",
+   "verdict": "FAIL",
+   "line": "\"A guy on the quad.\" in the Cafeteria",
+   "why": "Jake's cafeteria row weekdays 12-14, and he can't be met before day 8 (quad_meet_jake days_since_flag met_laura gte 7): all of week 1 People Here in the Cafeteria calls him a guy on the quad.",
+   "cause": "P46a1-c2"
+  },
+  {
+   "row": "C460",
+   "screen": "npcs.npc_brooke.stranger_name",
+   "verdict": "FAIL",
+   "line": "\"A blonde girl at the mirror.\" in the Lecture Hall / Theatre",
+   "why": "Brooke's rows put her in the Lecture Hall Mon/Wed 9-11 and the Theatre Tue/Thu/Fri from day 1, and at Zoe's Saturday party; she's met only at the mirror from day 8.",
+   "cause": "P46a1-c2"
+  },
+  {
+   "row": "B10",
+   "screen": "npcs.npc_brooke.stranger_name",
+   "verdict": "FAIL",
+   "line": "\"A blonde girl at the mirror.\" in the Lecture Hall / Theatre",
+   "why": "Brooke's rows put her in the Lecture Hall Mon/Wed 9-11 and the Theatre Tue/Thu/Fri from day 1, and at Zoe's Saturday party; she's met only at the mirror from day 8.",
+   "cause": "P46a1-c2"
+  },
+  {
+   "row": "C460",
+   "screen": "npcs.npc_tess.stranger_name",
+   "verdict": "FAIL",
+   "line": "\"A girl doing the lashes.\" in the Cafeteria",
+   "why": "Tess's cafeteria row weekdays 12-13 and the Saturday party, unmet until mirror_meet_brooke (day 8+).",
+   "cause": "P46a1-c2"
+  },
+  {
+   "row": "B10",
+   "screen": "npcs.npc_tess.stranger_name",
+   "verdict": "FAIL",
+   "line": "\"A girl doing the lashes.\" in the Cafeteria",
+   "why": "Tess's cafeteria row weekdays 12-13 and the Saturday party, unmet until mirror_meet_brooke (day 8+).",
+   "cause": "P46a1-c2"
+  },
+  {
+   "row": "C460",
+   "screen": "npcs.npc_hale.stranger_name",
+   "verdict": "FAIL",
+   "line": "\"A professor at the lectern.\" in the Faculty Offices",
+   "why": "Hale's office row Mon/Wed 14-17; offices open on met_walsh (Tue), so skipping both 9:00-9:30 psych windows puts an unmet Hale in his office under this name.",
+   "cause": "P46a1-c2"
+  },
+  {
+   "row": "B10",
+   "screen": "npcs.npc_hale.stranger_name",
+   "verdict": "FAIL",
+   "line": "\"A professor at the lectern.\" in the Faculty Offices",
+   "why": "Hale's office row Mon/Wed 14-17; offices open on met_walsh (Tue), so skipping both 9:00-9:30 psych windows puts an unmet Hale in his office under this name.",
+   "cause": "P46a1-c2"
+  },
+  {
+   "row": "C460",
+   "screen": "npcs.npc_zoe.stranger_name",
+   "verdict": "FAIL",
+   "line": "\"A blonde girl with two coffees.\" in the Cafeteria",
+   "why": "Zoe's cafeteria row Tue/Thu 13-14 before met_zoe; the two coffees are her meeting scene's (quad_meet_zoe 'coffee'), not a fact of every visit.",
+   "cause": "P46a1-c2"
+  },
+  {
+   "row": "B10",
+   "screen": "npcs.npc_zoe.stranger_name",
+   "verdict": "FAIL",
+   "line": "\"A blonde girl with two coffees.\" in the Cafeteria",
+   "why": "Zoe's cafeteria row Tue/Thu 13-14 before met_zoe; the two coffees are her meeting scene's (quad_meet_zoe 'coffee'), not a fact of every visit.",
+   "cause": "P46a1-c2"
+  },
+  {
+   "row": "C460",
+   "screen": "opening.sit_with_mom",
+   "verdict": "PASS",
+   "line": "\"If you want some hints on what to do next, try the Quests button.\"",
+   "why": "Quests button exists and glows on day one (headless); the rest of the screen unchanged and true at 07:40/07:50."
+  },
+  {
+   "row": "C460",
+   "screen": "opening.ask_mom",
+   "verdict": "PASS",
+   "line": "\"If you want some hints on what to do next, try the Quests button.\"",
+   "why": "Quests button exists and glows on day one (headless); the rest of the screen unchanged and true at 07:40/07:50."
+  },
+  {
+   "row": "C460",
+   "screen": "story_hints",
+   "verdict": "PASS",
+   "line": "Paying Your Way / The Café Job / Classes / Drama / The Man Next Door / The Clothes Shop / Staying in Shape, and Zoe's and the others' step texts",
+   "why": "Every place and hour matches the rows and triggers: rent Sun 08:00-11:55, Mark kitchen 08-12; cafe_hire Mon-Sat 10:00-20:55; cafe_first_shift weekdays 10:00-14:56 and Tom names Chris at the hire; psych/stats Mon/Wed 9/11, English Tue/Thu 9, drama Tue/Thu 11; stage_practise Cross absent, watch_rehearsal Tue/Thu/Fri 14-18; quad Zoe 14-15 every weekday; zoe_door_sam 12-18, party Sat 21-01, apartment 'two streets off the high street' in Town; Jake/Brooke day 8+; Vance Sundays; shop hours Mon-Sat 10-19; body_run/body_workout need leggings and sports top; café is in Town (near_campus 'Town')."
+  },
+  {
+   "row": "C460",
+   "screen": "walkthrough.paying_wt",
+   "verdict": "PASS",
+   "line": "\"✅ Mark told you the rent.\" / \"An hour at the café pays $5; a four-hour shift pays $22.\"",
+   "why": "Guard met_mark set in the opening; pay matches cafe_work_hour/$5 60 min and cafe_work_shift/$22 240 min; money added on finishing."
+  },
+  {
+   "row": "C460",
+   "screen": "npcs.stranger_name",
+   "verdict": "PASS",
+   "line": "Tom, Chris, Holt, Rosa, Vance, Frank, Danny, Marco, Nina, Sam, Pratt, Walsh, Cross, Nadia, Kayla; Laura, Mark, Ryan",
+   "why": "True wherever their rows put them before the meeting (Laura, Mark, Ryan are met in the opening). people_tab per card; Romantic/Sexual tabs empty and hidden."
+  },
+  {
+   "row": "B10",
+   "screen": "opening.sit_with_mom",
+   "verdict": "PASS",
+   "line": "\"If you want some hints on what to do next, try the Quests button.\"",
+   "why": "Quests button exists and glows on day one (headless); the rest of the screen unchanged and true at 07:40/07:50."
+  },
+  {
+   "row": "B10",
+   "screen": "opening.ask_mom",
+   "verdict": "PASS",
+   "line": "\"If you want some hints on what to do next, try the Quests button.\"",
+   "why": "Quests button exists and glows on day one (headless); the rest of the screen unchanged and true at 07:40/07:50."
+  },
+  {
+   "row": "B10",
+   "screen": "story_hints",
+   "verdict": "PASS",
+   "line": "Paying Your Way / The Café Job / Classes / Drama / The Man Next Door / The Clothes Shop / Staying in Shape, and Zoe's and the others' step texts",
+   "why": "Every place and hour matches the rows and triggers: rent Sun 08:00-11:55, Mark kitchen 08-12; cafe_hire Mon-Sat 10:00-20:55; cafe_first_shift weekdays 10:00-14:56 and Tom names Chris at the hire; psych/stats Mon/Wed 9/11, English Tue/Thu 9, drama Tue/Thu 11; stage_practise Cross absent, watch_rehearsal Tue/Thu/Fri 14-18; quad Zoe 14-15 every weekday; zoe_door_sam 12-18, party Sat 21-01, apartment 'two streets off the high street' in Town; Jake/Brooke day 8+; Vance Sundays; shop hours Mon-Sat 10-19; body_run/body_workout need leggings and sports top; café is in Town (near_campus 'Town')."
+  },
+  {
+   "row": "B10",
+   "screen": "walkthrough.paying_wt",
+   "verdict": "PASS",
+   "line": "\"✅ Mark told you the rent.\" / \"An hour at the café pays $5; a four-hour shift pays $22.\"",
+   "why": "Guard met_mark set in the opening; pay matches cafe_work_hour/$5 60 min and cafe_work_shift/$22 240 min; money added on finishing."
+  },
+  {
+   "row": "B10",
+   "screen": "npcs.stranger_name",
+   "verdict": "PASS",
+   "line": "Tom, Chris, Holt, Rosa, Vance, Frank, Danny, Marco, Nina, Sam, Pratt, Walsh, Cross, Nadia, Kayla; Laura, Mark, Ryan",
+   "why": "True wherever their rows put them before the meeting (Laura, Mark, Ryan are met in the opening). people_tab per card; Romantic/Sexual tabs empty and hidden."
+  }
+ ],
+ "causes": [
+  {
+   "id": "P46a1-c1",
+   "what": "The Zoe, Jake and Brooke hints have no `when`, so from day one the Quests page names three people she hasn't met (and says Zoe already 'decided you're interesting')."
+  },
+  {
+   "id": "P46a1-c2",
+   "what": "Stranger names tied to one place or moment (Jake 'on the quad', Brooke 'at the mirror', Tess 'doing the lashes', Hale 'at the lectern', Zoe 'with two coffees') show in People Here at other places their rows put them before the meeting."
+  }
+ ]
+}

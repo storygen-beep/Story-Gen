@@ -1,0 +1,109 @@
+{
+ "items": [
+  {
+   "row": "B10",
+   "screen": "shop_try_on.try",
+   "why": "screen changed: truth row"
+  },
+  {
+   "row": "B8",
+   "screen": "shop_try_on.try",
+   "why": "screen changed: truth row"
+  },
+  {
+   "row": "C1158",
+   "screen": "shop_try_on.try",
+   "why": "screen changed: truth row"
+  },
+  {
+   "row": "C1206",
+   "screen": "shop_try_on.try",
+   "why": "screen changed: truth row"
+  },
+  {
+   "row": "C1265",
+   "screen": "*",
+   "why": "its rule's text changed"
+  },
+  {
+   "row": "C151",
+   "screen": "shop_try_on.try",
+   "why": "failed last pass (a note), its screen changed"
+  },
+  {
+   "row": "C460",
+   "screen": "shop_try_on.try",
+   "why": "screen changed: truth row"
+  },
+  {
+   "row": "C461",
+   "screen": "shop_try_on.try",
+   "why": "screen changed: truth row"
+  },
+  {
+   "row": "C596",
+   "screen": "*",
+   "why": "its rule's text changed"
+  },
+  {
+   "row": "C795",
+   "screen": "*",
+   "why": "its rule's text changed"
+  },
+  {
+   "row": "C804",
+   "screen": "*",
+   "why": "its rule's text changed"
+  },
+  {
+   "row": "C889",
+   "screen": "shop_try_on.try",
+   "why": "its rule's text changed"
+  },
+  {
+   "row": "C906",
+   "screen": "shop_try_on.try",
+   "why": "its rule's text changed"
+  },
+  {
+   "row": "C910",
+   "screen": "shop_try_on.try",
+   "why": "its rule's text changed"
+  },
+  {
+   "row": "C920",
+   "screen": "shop_try_on.try",
+   "why": "its rule's text changed"
+  },
+  {
+   "row": "C927",
+   "screen": "shop_try_on.try",
+   "why": "screen changed: truth row"
+  },
+  {
+   "row": "C929",
+   "screen": "shop_try_on.try",
+   "why": "its rule's text changed"
+  },
+  {
+   "row": "C931",
+   "screen": "shop_try_on.try",
+   "why": "screen changed: truth row"
+  },
+  {
+   "row": "C953",
+   "screen": "*",
+   "why": "its rule's text changed"
+  },
+  {
+   "row": "L106",
+   "screen": "shop_try_on.try",
+   "why": "screen changed: truth row"
+  },
+  {
+   "row": "L167",
+   "screen": "shop_try_on.try",
+   "why": "screen changed: truth row"
+  }
+ ]
+}

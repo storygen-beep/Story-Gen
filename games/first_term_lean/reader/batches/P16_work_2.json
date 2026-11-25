@@ -1,0 +1,54 @@
+{
+ "items": [
+  {
+   "row": "C1265",
+   "screen": "english_first.class",
+   "why": "its rule's text changed"
+  },
+  {
+   "row": "C596",
+   "screen": "*",
+   "why": "its rule's text changed"
+  },
+  {
+   "row": "C795",
+   "screen": "*",
+   "why": "its rule's text changed"
+  },
+  {
+   "row": "C804",
+   "screen": "*",
+   "why": "its rule's text changed"
+  },
+  {
+   "row": "C889",
+   "screen": "english_first.after",
+   "why": "its rule's text changed"
+  },
+  {
+   "row": "C906",
+   "screen": "english_first.after",
+   "why": "its rule's text changed"
+  },
+  {
+   "row": "C910",
+   "screen": "english_first.after",
+   "why": "its rule's text changed"
+  },
+  {
+   "row": "C920",
+   "screen": "english_first.after",
+   "why": "its rule's text changed"
+  },
+  {
+   "row": "C929",
+   "screen": "english_first.after",
+   "why": "its rule's text changed"
+  },
+  {
+   "row": "C953",
+   "screen": "english_first.after",
+   "why": "its rule's text changed"
+  }
+ ]
+}

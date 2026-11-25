@@ -1,0 +1,26 @@
+{
+ "verdicts": [
+  {
+   "row": "L170",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "The man next door sits on his porch. Walk down your street on a Sunday, 9am to noon or 5 to 8pm.",
+   "why": "street_meet_vance sets met_vance, which opens The House Next Door; The House Next Door is hidden_until met_vance; met_vance is the when of The Man Next Door's end step, and the step before it matches Vance's Sunday rows 9-12 and 17-20"
+  },
+  {
+   "row": "L168",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "The man next door sits on his porch. Walk down your street on a Sunday, 9am to noon or 5 to 8pm.",
+   "why": "matches Vance's Sunday rows; met_vance is the end step's when"
+  },
+  {
+   "row": "L169",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "The man next door sits on his porch. Walk down your street on a Sunday, 9am to noon or 5 to 8pm.",
+   "why": "street_meet_vance is Sunday only though he's on the street weekdays 17-20; the hint names the Sunday window"
+  }
+ ],
+ "causes": []
+}

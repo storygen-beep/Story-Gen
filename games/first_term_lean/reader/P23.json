@@ -1,20 +1,20 @@
 {
  "piece": "P23",
- "pass": 1,
+ "pass": 4,
  "screens": {
   "gym_meet_marco.meet": {
-   "text": "76981bacace9fdc5",
+   "text": "e94048ae6551a6c3",
    "facts": "23eb50d0d96dba03",
    "facts2": "b2f1ee65de80c8ee",
-   "all": "604fa272bfe0d04d"
+   "all": "060facc282a036da"
   },
   "gym_meet_marco.after": {
-   "text": "bfbee30015c90e8b",
+   "text": "1dc0c41a6d91f102",
    "facts": "9e1d6875ab4b64e0",
    "facts2": "dd789fc2dc0ff6bf",
-   "all": "24dbdc186ee8d5f9"
+   "all": "e3bad999ee0118bd"
   },
-  "*": "7d3288f4c33e4497"
+  "*": "b2111400bebab05c"
  },
  "rows": {
   "B1": "5276068df1ca6fa9",
@@ -116,13 +116,15 @@
   "C639": "be0ad7093b24bc46",
   "C640": "728d95d9964ccf25",
   "C644": "f5e1d79f3251dbab",
-  "C596": "6d9bba989a2b9666",
+  "C596": "e5f7e6cf2d01613d",
   "C448": "b86596f1a02766de",
+  "L168": "444c44970dc284f2",
+  "L169": "59defccfc63b0454",
   "C1340": "b76a6583ae88c60f",
   "C769": "f6b6f78a8f2e5ed7",
   "C794": "bad76e5963432385",
-  "C795": "6c9eb17d99266791",
-  "C804": "810ef8e803cb09dd",
+  "C795": "34139e6a6914e171",
+  "C804": "5358489178bff0a4",
   "L106": "13a714429d15f3b2",
   "C776": "4141d9e5e24362c3",
   "C777": "b56360a1040688cf",
@@ -130,6 +132,7 @@
   "C758": "e158aaf055cb61d6",
   "C953": "826bf82fe26afd13",
   "C762": "40e85f1ae92f1e71",
+  "L170": "c3599cd09637a240",
   "C770": "ff9aa31c11e5d50f",
   "C771": "563e3d25c3219dd0",
   "C442": "59b8d8d24f0c7c38",
@@ -153,7 +156,7 @@
    "note": false,
    "screen_hash": "7d3288f4c33e4497",
    "row_hash": "5276068df1ca6fa9",
-   "carried": false,
+   "carried": true,
    "pass": 1
   },
   {
@@ -166,8 +169,44 @@
    "note": false,
    "screen_hash": "7d3288f4c33e4497",
    "row_hash": "c1c0e2ac2588a579",
-   "carried": false,
+   "carried": true,
    "pass": 1
+  },
+  {
+   "row": "B10",
+   "screen": "gym_meet_marco.after",
+   "verdict": "PASS",
+   "line": "He goes back to the bench, but in the mirror his eyes find you again before you've reached the weights.",
+   "why": "Each answer's line sits behind its own flag; the shared lines claim nothing that depends on day, hour or path.",
+   "cause": "",
+   "note": false,
+   "screen_hash": {
+    "text": "1dc0c41a6d91f102",
+    "facts": "9e1d6875ab4b64e0",
+    "facts2": "dd789fc2dc0ff6bf",
+    "all": "e3bad999ee0118bd"
+   },
+   "row_hash": "c1c0e2ac2588a579",
+   "carried": true,
+   "pass": 2
+  },
+  {
+   "row": "B10",
+   "screen": "gym_meet_marco.meet",
+   "verdict": "PASS",
+   "line": "Haven't seen you in here. Good. I'm Marco.",
+   "why": "One-time, gated on Marco present (who_is_where: weekdays 06-10 and 17-21, Sat 08-14); 'Haven't seen you' holds on her first visit while he's there; he names himself in his own first line.",
+   "cause": "",
+   "note": false,
+   "screen_hash": {
+    "text": "e94048ae6551a6c3",
+    "facts": "23eb50d0d96dba03",
+    "facts2": "b2f1ee65de80c8ee",
+    "all": "060facc282a036da"
+   },
+   "row_hash": "c1c0e2ac2588a579",
+   "carried": true,
+   "pass": 2
   },
   {
    "row": "B11",
@@ -179,26 +218,26 @@
    "note": false,
    "screen_hash": "7d3288f4c33e4497",
    "row_hash": "1e252efd0904a971",
-   "carried": false,
+   "carried": true,
    "pass": 1
   },
   {
    "row": "B12",
    "screen": "gym_meet_marco.after",
-   "verdict": "FAIL",
-   "line": "He goes back to the bench, but in the mirror his eyes find you again before you've reached the weights.",
-   "why": "charged (legs, ass, neck heat, his look) but on the looking and tips paths nothing holds a not-yet or a price; only the silent path's 'Shy. That wears off in here.' does",
-   "cause": "P23a1-c2",
+   "verdict": "PASS",
+   "line": "in the mirror his eyes find you again before you've reached the weights.",
+   "why": "Low heat on the body, not talk only: his eyes on her, her body named in the scene, a held distance.",
+   "cause": "",
    "note": false,
    "screen_hash": {
-    "text": "bfbee30015c90e8b",
+    "text": "1dc0c41a6d91f102",
     "facts": "9e1d6875ab4b64e0",
     "facts2": "dd789fc2dc0ff6bf",
-    "all": "24dbdc186ee8d5f9"
+    "all": "e3bad999ee0118bd"
    },
    "row_hash": "fd109745c67b71d7",
-   "carried": false,
-   "pass": 1
+   "carried": true,
+   "pass": 2
   },
   {
    "row": "B13",
@@ -210,7 +249,7 @@
    "note": false,
    "screen_hash": "7d3288f4c33e4497",
    "row_hash": "aaf6518b64dcce55",
-   "carried": false,
+   "carried": true,
    "pass": 1
   },
   {
@@ -223,26 +262,26 @@
    "note": false,
    "screen_hash": "7d3288f4c33e4497",
    "row_hash": "4d9f2ebbce9a39cc",
-   "carried": false,
+   "carried": true,
    "pass": 1
   },
   {
    "row": "B3",
    "screen": "gym_meet_marco.after",
-   "verdict": "FAIL",
-   "line": "He goes back to the bench, but in the mirror his eyes find you again before you've reached the weights.",
-   "why": "every path ends on his eyes in the mirror again: it repeats the look and names nothing that comes next (no programme, no next visit)",
-   "cause": "P23a1-c1",
+   "verdict": "PASS",
+   "line": "You'll be back.",
+   "why": "Points at what comes next: her coming back to the gym, to him.",
+   "cause": "",
    "note": false,
    "screen_hash": {
-    "text": "bfbee30015c90e8b",
+    "text": "1dc0c41a6d91f102",
     "facts": "9e1d6875ab4b64e0",
     "facts2": "dd789fc2dc0ff6bf",
-    "all": "24dbdc186ee8d5f9"
+    "all": "e3bad999ee0118bd"
    },
    "row_hash": "4d1fce1c4523b5d4",
-   "carried": false,
-   "pass": 1
+   "carried": true,
+   "pass": 2
   },
   {
    "row": "B4",
@@ -254,7 +293,7 @@
    "note": false,
    "screen_hash": "7d3288f4c33e4497",
    "row_hash": "ced37cb0de6e7202",
-   "carried": false,
+   "carried": true,
    "pass": 1
   },
   {
@@ -267,7 +306,7 @@
    "note": false,
    "screen_hash": "7d3288f4c33e4497",
    "row_hash": "efcbd1ac6a95e2f2",
-   "carried": false,
+   "carried": true,
    "pass": 1
   },
   {
@@ -280,7 +319,7 @@
    "note": false,
    "screen_hash": "7d3288f4c33e4497",
    "row_hash": "0e32092e9fe64f2c",
-   "carried": false,
+   "carried": true,
    "pass": 1
   },
   {
@@ -293,7 +332,7 @@
    "note": false,
    "screen_hash": "7d3288f4c33e4497",
    "row_hash": "cef53154cc971fef",
-   "carried": false,
+   "carried": true,
    "pass": 1
   },
   {
@@ -306,8 +345,44 @@
    "note": false,
    "screen_hash": "7d3288f4c33e4497",
    "row_hash": "80d415cf08e0ebfe",
-   "carried": false,
+   "carried": true,
    "pass": 1
+  },
+  {
+   "row": "B8",
+   "screen": "gym_meet_marco.after",
+   "verdict": "PASS",
+   "line": "He says it to your ass, not your face.",
+   "why": "No garment named; Done's 5 minutes match the card's Changes.",
+   "cause": "",
+   "note": false,
+   "screen_hash": {
+    "text": "1dc0c41a6d91f102",
+    "facts": "9e1d6875ab4b64e0",
+    "facts2": "dd789fc2dc0ff6bf",
+    "all": "e3bad999ee0118bd"
+   },
+   "row_hash": "80d415cf08e0ebfe",
+   "carried": true,
+   "pass": 2
+  },
+  {
+   "row": "B8",
+   "screen": "gym_meet_marco.meet",
+   "verdict": "PASS",
+   "line": "your legs, your ass, then your face",
+   "why": "No garment of hers named (the card: the meeting fires whatever she wears); 'late twenties' agrees with 29; picture's vest and whistle agree with the prose.",
+   "cause": "",
+   "note": false,
+   "screen_hash": {
+    "text": "e94048ae6551a6c3",
+    "facts": "23eb50d0d96dba03",
+    "facts2": "b2f1ee65de80c8ee",
+    "all": "060facc282a036da"
+   },
+   "row_hash": "80d415cf08e0ebfe",
+   "carried": true,
+   "pass": 2
   },
   {
    "row": "B9",
@@ -319,7 +394,7 @@
    "note": false,
    "screen_hash": "7d3288f4c33e4497",
    "row_hash": "3b1fcdf549bcc558",
-   "carried": false,
+   "carried": true,
    "pass": 1
   },
   {
@@ -332,26 +407,26 @@
    "note": true,
    "screen_hash": "7d3288f4c33e4497",
    "row_hash": "657248766e62061f",
-   "carried": false,
+   "carried": true,
    "pass": 1
   },
   {
    "row": "C109",
    "screen": "gym_meet_marco.after",
-   "verdict": "FAIL",
-   "line": "He goes back to the bench, but in the mirror his eyes find you again before you've reached the weights.",
-   "why": "first scene, so the leak half is N/A; the promise it ends on is only his look again, no promise",
-   "cause": "P23a1-c1",
+   "verdict": "PASS",
+   "line": "You'll be back.",
+   "why": "His first scene: leak half N/A; the promise it ends on is real (he's there every weekday morning and evening, Saturday mornings).",
+   "cause": "",
    "note": false,
    "screen_hash": {
-    "text": "bfbee30015c90e8b",
+    "text": "1dc0c41a6d91f102",
     "facts": "9e1d6875ab4b64e0",
     "facts2": "dd789fc2dc0ff6bf",
-    "all": "24dbdc186ee8d5f9"
+    "all": "e3bad999ee0118bd"
    },
    "row_hash": "61500f5337c3614a",
-   "carried": false,
-   "pass": 1
+   "carried": true,
+   "pass": 2
   },
   {
    "row": "C115",
@@ -363,7 +438,7 @@
    "note": true,
    "screen_hash": "7d3288f4c33e4497",
    "row_hash": "4200139d2b8f5464",
-   "carried": false,
+   "carried": true,
    "pass": 1
   },
   {
@@ -376,7 +451,7 @@
    "note": true,
    "screen_hash": "7d3288f4c33e4497",
    "row_hash": "541a03815a8d19c4",
-   "carried": false,
+   "carried": true,
    "pass": 1
   },
   {
@@ -389,7 +464,7 @@
    "note": true,
    "screen_hash": "7d3288f4c33e4497",
    "row_hash": "7632b28c693a43a4",
-   "carried": false,
+   "carried": true,
    "pass": 1
   },
   {
@@ -402,7 +477,7 @@
    "note": true,
    "screen_hash": "7d3288f4c33e4497",
    "row_hash": "71c57d9a2f8fdca7",
-   "carried": false,
+   "carried": true,
    "pass": 1
   },
   {
@@ -415,7 +490,7 @@
    "note": true,
    "screen_hash": "7d3288f4c33e4497",
    "row_hash": "db808998ed69c649",
-   "carried": false,
+   "carried": true,
    "pass": 1
   },
   {
@@ -428,7 +503,7 @@
    "note": true,
    "screen_hash": "7d3288f4c33e4497",
    "row_hash": "2afadc6bbe1996bd",
-   "carried": false,
+   "carried": true,
    "pass": 1
   },
   {
@@ -441,7 +516,7 @@
    "note": true,
    "screen_hash": "7d3288f4c33e4497",
    "row_hash": "48eae9ceae06ae00",
-   "carried": false,
+   "carried": true,
    "pass": 1
   },
   {
@@ -454,7 +529,7 @@
    "note": false,
    "screen_hash": "7d3288f4c33e4497",
    "row_hash": "35e706c759372357",
-   "carried": false,
+   "carried": true,
    "pass": 1
   },
   {
@@ -467,7 +542,7 @@
    "note": false,
    "screen_hash": "7d3288f4c33e4497",
    "row_hash": "65e6616cd17c7eb3",
-   "carried": false,
+   "carried": true,
    "pass": 1
   },
   {
@@ -480,7 +555,7 @@
    "note": false,
    "screen_hash": "7d3288f4c33e4497",
    "row_hash": "18d85534582def9d",
-   "carried": false,
+   "carried": true,
    "pass": 1
   },
   {
@@ -493,7 +568,7 @@
    "note": false,
    "screen_hash": "7d3288f4c33e4497",
    "row_hash": "3835fed23cc316c7",
-   "carried": false,
+   "carried": true,
    "pass": 1
   },
   {
@@ -511,7 +586,7 @@
     "all": "604fa272bfe0d04d"
    },
    "row_hash": "1b2a2d5f05b10331",
-   "carried": false,
+   "carried": true,
    "pass": 1
   },
   {
@@ -529,7 +604,7 @@
     "all": "604fa272bfe0d04d"
    },
    "row_hash": "6fd430204e984124",
-   "carried": false,
+   "carried": true,
    "pass": 1
   },
   {
@@ -542,7 +617,7 @@
    "note": true,
    "screen_hash": "7d3288f4c33e4497",
    "row_hash": "a843f9b57e43a020",
-   "carried": false,
+   "carried": true,
    "pass": 1
   },
   {
@@ -555,7 +630,7 @@
    "note": false,
    "screen_hash": "7d3288f4c33e4497",
    "row_hash": "fde578d75b0d3620",
-   "carried": false,
+   "carried": true,
    "pass": 1
   },
   {
@@ -573,7 +648,7 @@
     "all": "604fa272bfe0d04d"
    },
    "row_hash": "803b4c46f1e9d7c7",
-   "carried": false,
+   "carried": true,
    "pass": 1
   },
   {
@@ -591,7 +666,7 @@
     "all": "604fa272bfe0d04d"
    },
    "row_hash": "536e26b5fdc76194",
-   "carried": false,
+   "carried": true,
    "pass": 1
   },
   {
@@ -609,7 +684,7 @@
     "all": "604fa272bfe0d04d"
    },
    "row_hash": "64b72c778e96e443",
-   "carried": false,
+   "carried": true,
    "pass": 1
   },
   {
@@ -627,7 +702,7 @@
     "all": "604fa272bfe0d04d"
    },
    "row_hash": "f0db81b801577bf2",
-   "carried": false,
+   "carried": true,
    "pass": 1
   },
   {
@@ -640,7 +715,7 @@
    "note": true,
    "screen_hash": "7d3288f4c33e4497",
    "row_hash": "f44d59a3bd6bb921",
-   "carried": false,
+   "carried": true,
    "pass": 1
   },
   {
@@ -653,7 +728,7 @@
    "note": false,
    "screen_hash": "7d3288f4c33e4497",
    "row_hash": "ef82ef3fdf215191",
-   "carried": false,
+   "carried": true,
    "pass": 1
   },
   {
@@ -671,7 +746,7 @@
     "all": "604fa272bfe0d04d"
    },
    "row_hash": "ee51917c5fb43c13",
-   "carried": false,
+   "carried": true,
    "pass": 1
   },
   {
@@ -689,7 +764,7 @@
     "all": "604fa272bfe0d04d"
    },
    "row_hash": "4d23ccfdc4e41cd9",
-   "carried": false,
+   "carried": true,
    "pass": 1
   },
   {
@@ -707,7 +782,7 @@
     "all": "604fa272bfe0d04d"
    },
    "row_hash": "534032f000706830",
-   "carried": false,
+   "carried": true,
    "pass": 1
   },
   {
@@ -725,26 +800,26 @@
     "all": "604fa272bfe0d04d"
    },
    "row_hash": "a709f257162373b0",
-   "carried": false,
+   "carried": true,
    "pass": 1
   },
   {
    "row": "C1281",
    "screen": "gym_meet_marco.meet",
-   "verdict": "FAIL",
-   "line": "gym trainer checking someone out mirror",
-   "why": "second search asks for a frame with someone being checked out in it, a two-person look, not what the looker sees",
-   "cause": "P23a1-c3",
+   "verdict": "PASS",
+   "line": "Her view from the door (she is 18, out of frame): a man of 29 in a gym vest with a whistle round his neck, beside a weight bench, looking the camera over.",
+   "why": "Written as what the looker sees: him alone, looking at the camera; she is out of frame.",
+   "cause": "",
    "note": false,
    "screen_hash": {
-    "text": "76981bacace9fdc5",
+    "text": "e94048ae6551a6c3",
     "facts": "23eb50d0d96dba03",
     "facts2": "b2f1ee65de80c8ee",
-    "all": "604fa272bfe0d04d"
+    "all": "060facc282a036da"
    },
    "row_hash": "4e5683077291be1f",
-   "carried": false,
-   "pass": 1
+   "carried": true,
+   "pass": 2
   },
   {
    "row": "C1284",
@@ -761,7 +836,7 @@
     "all": "604fa272bfe0d04d"
    },
    "row_hash": "c3025295db7bb1d6",
-   "carried": false,
+   "carried": true,
    "pass": 1
   },
   {
@@ -774,7 +849,7 @@
    "note": false,
    "screen_hash": "7d3288f4c33e4497",
    "row_hash": "b76a6583ae88c60f",
-   "carried": false,
+   "carried": true,
    "pass": 1
   },
   {
@@ -787,26 +862,26 @@
    "note": true,
    "screen_hash": "7d3288f4c33e4497",
    "row_hash": "d2b40c16ae543d86",
-   "carried": false,
+   "carried": true,
    "pass": 1
   },
   {
    "row": "C149",
    "screen": "gym_meet_marco.after",
-   "verdict": "FAIL",
-   "line": "He goes back to the bench, but in the mirror his eyes find you again before you've reached the weights.",
-   "why": "the scene points at nothing that comes next",
-   "cause": "P23a1-c1",
+   "verdict": "PASS",
+   "line": "You'll be back.",
+   "why": "The scene's last lines point at the next visit.",
+   "cause": "",
    "note": false,
    "screen_hash": {
-    "text": "bfbee30015c90e8b",
+    "text": "1dc0c41a6d91f102",
     "facts": "9e1d6875ab4b64e0",
     "facts2": "dd789fc2dc0ff6bf",
-    "all": "24dbdc186ee8d5f9"
+    "all": "e3bad999ee0118bd"
    },
    "row_hash": "b8cdd5b1ce3f89ea",
-   "carried": false,
-   "pass": 1
+   "carried": true,
+   "pass": 2
   },
   {
    "row": "C162",
@@ -818,7 +893,7 @@
    "note": true,
    "screen_hash": "7d3288f4c33e4497",
    "row_hash": "408df581d2b341b6",
-   "carried": false,
+   "carried": true,
    "pass": 1
   },
   {
@@ -831,7 +906,7 @@
    "note": true,
    "screen_hash": "7d3288f4c33e4497",
    "row_hash": "72923a871f0435e6",
-   "carried": false,
+   "carried": true,
    "pass": 1
   },
   {
@@ -849,7 +924,7 @@
     "all": "604fa272bfe0d04d"
    },
    "row_hash": "b24792899ae3ac28",
-   "carried": false,
+   "carried": true,
    "pass": 1
   },
   {
@@ -867,7 +942,7 @@
     "all": "604fa272bfe0d04d"
    },
    "row_hash": "59fe434fa706bff6",
-   "carried": false,
+   "carried": true,
    "pass": 1
   },
   {
@@ -885,26 +960,26 @@
     "all": "604fa272bfe0d04d"
    },
    "row_hash": "d9199efed36f9625",
-   "carried": false,
+   "carried": true,
    "pass": 1
   },
   {
    "row": "C180",
    "screen": "gym_meet_marco.after",
-   "verdict": "FAIL",
-   "line": "He goes back to the bench, but in the mirror his eyes find you again before you've reached the weights.",
-   "why": "opens nothing after and the text doesn't say what comes next",
-   "cause": "P23a1-c1",
+   "verdict": "PASS",
+   "line": "You'll be back.",
+   "why": "First step: opens the next (him at the gym when she returns; his People card on met_marco) and the text says so.",
+   "cause": "",
    "note": false,
    "screen_hash": {
-    "text": "bfbee30015c90e8b",
+    "text": "1dc0c41a6d91f102",
     "facts": "9e1d6875ab4b64e0",
     "facts2": "dd789fc2dc0ff6bf",
-    "all": "24dbdc186ee8d5f9"
+    "all": "e3bad999ee0118bd"
    },
    "row_hash": "d1b589361cb96867",
-   "carried": false,
-   "pass": 1
+   "carried": true,
+   "pass": 2
   },
   {
    "row": "C286",
@@ -916,7 +991,7 @@
    "note": true,
    "screen_hash": "7d3288f4c33e4497",
    "row_hash": "23fc75bfc032d31c",
-   "carried": false,
+   "carried": true,
    "pass": 1
   },
   {
@@ -929,7 +1004,7 @@
    "note": true,
    "screen_hash": "7d3288f4c33e4497",
    "row_hash": "480f7e9a025db5b0",
-   "carried": false,
+   "carried": true,
    "pass": 1
   },
   {
@@ -942,7 +1017,7 @@
    "note": true,
    "screen_hash": "7d3288f4c33e4497",
    "row_hash": "7b5399adec567cd4",
-   "carried": false,
+   "carried": true,
    "pass": 1
   },
   {
@@ -955,7 +1030,7 @@
    "note": false,
    "screen_hash": "7d3288f4c33e4497",
    "row_hash": "3952eba1e2267f12",
-   "carried": false,
+   "carried": true,
    "pass": 1
   },
   {
@@ -968,7 +1043,7 @@
    "note": true,
    "screen_hash": "7d3288f4c33e4497",
    "row_hash": "53bd56cf597f7ee3",
-   "carried": false,
+   "carried": true,
    "pass": 1
   },
   {
@@ -981,7 +1056,7 @@
    "note": true,
    "screen_hash": "7d3288f4c33e4497",
    "row_hash": "d702aa9200d2154d",
-   "carried": false,
+   "carried": true,
    "pass": 1
   },
   {
@@ -994,44 +1069,44 @@
    "note": true,
    "screen_hash": "7d3288f4c33e4497",
    "row_hash": "b920ef848ab61988",
-   "carried": false,
+   "carried": true,
    "pass": 1
   },
   {
    "row": "C311",
    "screen": "gym_meet_marco.after",
-   "verdict": "FAIL",
-   "line": "He goes back to the bench, but in the mirror his eyes find you again before you've reached the weights.",
-   "why": "looking and tips paths end with no not-yet or price, and no hook",
-   "cause": "P23a1-c2",
+   "verdict": "PASS",
+   "line": "in the mirror his eyes find you again ... He says it to the mirror, not to you.",
+   "why": "Body named in the scene (legs, ass; on the tips path 'to your ass'), his reaction (eyes in the mirror), a 'not yet' (he keeps it to the mirror), and a hook ('You'll be back.').",
+   "cause": "",
    "note": false,
    "screen_hash": {
-    "text": "bfbee30015c90e8b",
+    "text": "1dc0c41a6d91f102",
     "facts": "9e1d6875ab4b64e0",
     "facts2": "dd789fc2dc0ff6bf",
-    "all": "24dbdc186ee8d5f9"
+    "all": "e3bad999ee0118bd"
    },
    "row_hash": "bad20c9f078e8b87",
-   "carried": false,
-   "pass": 1
+   "carried": true,
+   "pass": 2
   },
   {
    "row": "C311",
    "screen": "gym_meet_marco.meet",
-   "verdict": "FAIL",
-   "line": "Heat climbs up your neck.",
-   "why": "body and his reaction named, no not-yet or price on the screen",
-   "cause": "P23a1-c2",
+   "verdict": "PASS",
+   "line": "keeps looking: your legs, your ass, then your face ... Heat climbs up your neck.",
+   "why": "The scene names her legs and ass, writes his reaction and hers on her body; its 'not yet' (he keeps to the mirror, 'not to you') and hook ('You'll be back.') land on the screen every choice here leads to.",
+   "cause": "",
    "note": false,
    "screen_hash": {
-    "text": "76981bacace9fdc5",
+    "text": "e94048ae6551a6c3",
     "facts": "23eb50d0d96dba03",
     "facts2": "b2f1ee65de80c8ee",
-    "all": "604fa272bfe0d04d"
+    "all": "060facc282a036da"
    },
    "row_hash": "bad20c9f078e8b87",
-   "carried": false,
-   "pass": 1
+   "carried": true,
+   "pass": 2
   },
   {
    "row": "C314",
@@ -1043,7 +1118,7 @@
    "note": false,
    "screen_hash": "7d3288f4c33e4497",
    "row_hash": "0304731d263aed9f",
-   "carried": false,
+   "carried": true,
    "pass": 1
   },
   {
@@ -1056,7 +1131,7 @@
    "note": false,
    "screen_hash": "7d3288f4c33e4497",
    "row_hash": "7e128897077ecee6",
-   "carried": false,
+   "carried": true,
    "pass": 1
   },
   {
@@ -1069,7 +1144,7 @@
    "note": false,
    "screen_hash": "7d3288f4c33e4497",
    "row_hash": "59b8d8d24f0c7c38",
-   "carried": false,
+   "carried": true,
    "pass": 1
   },
   {
@@ -1082,7 +1157,7 @@
    "note": false,
    "screen_hash": "7d3288f4c33e4497",
    "row_hash": "5f664198d19facd8",
-   "carried": false,
+   "carried": true,
    "pass": 1
   },
   {
@@ -1095,7 +1170,7 @@
    "note": false,
    "screen_hash": "7d3288f4c33e4497",
    "row_hash": "b86596f1a02766de",
-   "carried": false,
+   "carried": true,
    "pass": 1
   },
   {
@@ -1108,26 +1183,26 @@
    "note": false,
    "screen_hash": "7d3288f4c33e4497",
    "row_hash": "e33f3e7fed17fa30",
-   "carried": false,
+   "carried": true,
    "pass": 1
   },
   {
    "row": "C450",
    "screen": "gym_meet_marco.after",
-   "verdict": "FAIL",
-   "line": "He goes back to the bench, but in the mirror his eyes find you again before you've reached the weights.",
-   "why": "scene ends on a repeat of his look, not on what happens next",
-   "cause": "P23a1-c1",
+   "verdict": "PASS",
+   "line": "You'll be back. / He says it to the mirror, not to you.",
+   "why": "Ends on his hook and its delivery, not on a chore or a meaning.",
+   "cause": "",
    "note": false,
    "screen_hash": {
-    "text": "bfbee30015c90e8b",
+    "text": "1dc0c41a6d91f102",
     "facts": "9e1d6875ab4b64e0",
     "facts2": "dd789fc2dc0ff6bf",
-    "all": "24dbdc186ee8d5f9"
+    "all": "e3bad999ee0118bd"
    },
    "row_hash": "b01ad555668aba2d",
-   "carried": false,
-   "pass": 1
+   "carried": true,
+   "pass": 2
   },
   {
    "row": "C451",
@@ -1139,7 +1214,7 @@
    "note": false,
    "screen_hash": "7d3288f4c33e4497",
    "row_hash": "50dbf74577a813c7",
-   "carried": false,
+   "carried": true,
    "pass": 1
   },
   {
@@ -1152,8 +1227,44 @@
    "note": false,
    "screen_hash": "7d3288f4c33e4497",
    "row_hash": "67e48e60d5053a2e",
-   "carried": false,
+   "carried": true,
    "pass": 1
+  },
+  {
+   "row": "C460",
+   "screen": "gym_meet_marco.after",
+   "verdict": "PASS",
+   "line": "You'll be back.",
+   "why": "A prediction in his voice, not a built promise with a date; true on every path.",
+   "cause": "",
+   "note": false,
+   "screen_hash": {
+    "text": "1dc0c41a6d91f102",
+    "facts": "9e1d6875ab4b64e0",
+    "facts2": "dd789fc2dc0ff6bf",
+    "all": "e3bad999ee0118bd"
+   },
+   "row_hash": "67e48e60d5053a2e",
+   "carried": true,
+   "pass": 2
+  },
+  {
+   "row": "C460",
+   "screen": "gym_meet_marco.meet",
+   "verdict": "PASS",
+   "line": "A man in his late twenties with a whistle he never uses is spotting someone on the bench.",
+   "why": "Age (29), place and activity hold at every minute the trigger opens; a regular on the bench is crowd texture (PLAN \u00a75: the regulars).",
+   "cause": "",
+   "note": false,
+   "screen_hash": {
+    "text": "e94048ae6551a6c3",
+    "facts": "23eb50d0d96dba03",
+    "facts2": "b2f1ee65de80c8ee",
+    "all": "060facc282a036da"
+   },
+   "row_hash": "67e48e60d5053a2e",
+   "carried": true,
+   "pass": 2
   },
   {
    "row": "C461",
@@ -1165,8 +1276,44 @@
    "note": false,
    "screen_hash": "7d3288f4c33e4497",
    "row_hash": "310706ee076318f2",
-   "carried": false,
+   "carried": true,
    "pass": 1
+  },
+  {
+   "row": "C461",
+   "screen": "gym_meet_marco.after",
+   "verdict": "PASS",
+   "line": "Squats. Lots of squats. You'll thank me.",
+   "why": "Every answer's line fits a trainer who looks her over; nothing the plan rules out.",
+   "cause": "",
+   "note": false,
+   "screen_hash": {
+    "text": "1dc0c41a6d91f102",
+    "facts": "9e1d6875ab4b64e0",
+    "facts2": "dd789fc2dc0ff6bf",
+    "all": "e3bad999ee0118bd"
+   },
+   "row_hash": "310706ee076318f2",
+   "carried": true,
+   "pass": 2
+  },
+  {
+   "row": "C461",
+   "screen": "gym_meet_marco.meet",
+   "verdict": "PASS",
+   "line": "You've got the build for it, champ.",
+   "why": "Fits his entry (trainer, 29); 'champ' is his own term of address.",
+   "cause": "",
+   "note": false,
+   "screen_hash": {
+    "text": "e94048ae6551a6c3",
+    "facts": "23eb50d0d96dba03",
+    "facts2": "b2f1ee65de80c8ee",
+    "all": "060facc282a036da"
+   },
+   "row_hash": "310706ee076318f2",
+   "carried": true,
+   "pass": 2
   },
   {
    "row": "C519",
@@ -1178,7 +1325,7 @@
    "note": true,
    "screen_hash": "7d3288f4c33e4497",
    "row_hash": "e78502f7aa28746d",
-   "carried": false,
+   "carried": true,
    "pass": 1
   },
   {
@@ -1191,21 +1338,21 @@
    "note": false,
    "screen_hash": "7d3288f4c33e4497",
    "row_hash": "370371a278b9f182",
-   "carried": false,
+   "carried": true,
    "pass": 1
   },
   {
    "row": "C596",
    "screen": "*",
-   "verdict": "N/A",
-   "line": "",
-   "why": "not a talk screen",
+   "verdict": "PASS",
+   "line": "meeting screen, picture in it",
+   "why": "a first meeting is a new moment, so its picture is allowed; no face-opened menu is built here, and no talk screen carries a picture",
    "cause": null,
    "note": true,
-   "screen_hash": "7d3288f4c33e4497",
-   "row_hash": "6d9bba989a2b9666",
-   "carried": false,
-   "pass": 1
+   "screen_hash": "b2111400bebab05c",
+   "row_hash": "e5f7e6cf2d01613d",
+   "carried": true,
+   "pass": 3
   },
   {
    "row": "C601",
@@ -1222,7 +1369,7 @@
     "all": "604fa272bfe0d04d"
    },
    "row_hash": "c73aabbce8afa4bc",
-   "carried": false,
+   "carried": true,
    "pass": 1
   },
   {
@@ -1235,7 +1382,7 @@
    "note": true,
    "screen_hash": "7d3288f4c33e4497",
    "row_hash": "6f777b1fcd750dd1",
-   "carried": false,
+   "carried": true,
    "pass": 1
   },
   {
@@ -1248,7 +1395,7 @@
    "note": true,
    "screen_hash": "7d3288f4c33e4497",
    "row_hash": "1c4287c56499c374",
-   "carried": false,
+   "carried": true,
    "pass": 1
   },
   {
@@ -1261,7 +1408,7 @@
    "note": true,
    "screen_hash": "7d3288f4c33e4497",
    "row_hash": "052d4eaafc2196f3",
-   "carried": false,
+   "carried": true,
    "pass": 1
   },
   {
@@ -1274,7 +1421,7 @@
    "note": true,
    "screen_hash": "7d3288f4c33e4497",
    "row_hash": "76250e48ada2b843",
-   "carried": false,
+   "carried": true,
    "pass": 1
   },
   {
@@ -1287,7 +1434,7 @@
    "note": true,
    "screen_hash": "7d3288f4c33e4497",
    "row_hash": "78d959e99c156550",
-   "carried": false,
+   "carried": true,
    "pass": 1
   },
   {
@@ -1300,7 +1447,7 @@
    "note": true,
    "screen_hash": "7d3288f4c33e4497",
    "row_hash": "dc9a1fd9dbf3fb87",
-   "carried": false,
+   "carried": true,
    "pass": 1
   },
   {
@@ -1313,7 +1460,7 @@
    "note": true,
    "screen_hash": "7d3288f4c33e4497",
    "row_hash": "8e507f7b235acc25",
-   "carried": false,
+   "carried": true,
    "pass": 1
   },
   {
@@ -1326,7 +1473,7 @@
    "note": true,
    "screen_hash": "7d3288f4c33e4497",
    "row_hash": "4b5c8f8f6ef1b7f0",
-   "carried": false,
+   "carried": true,
    "pass": 1
   },
   {
@@ -1339,7 +1486,7 @@
    "note": false,
    "screen_hash": "7d3288f4c33e4497",
    "row_hash": "5a85503d3ef5a0fb",
-   "carried": false,
+   "carried": true,
    "pass": 1
   },
   {
@@ -1352,7 +1499,7 @@
    "note": true,
    "screen_hash": "7d3288f4c33e4497",
    "row_hash": "146e6806c6c566e3",
-   "carried": false,
+   "carried": true,
    "pass": 1
   },
   {
@@ -1370,7 +1517,7 @@
     "all": "604fa272bfe0d04d"
    },
    "row_hash": "be0ad7093b24bc46",
-   "carried": false,
+   "carried": true,
    "pass": 1
   },
   {
@@ -1388,7 +1535,7 @@
     "all": "604fa272bfe0d04d"
    },
    "row_hash": "728d95d9964ccf25",
-   "carried": false,
+   "carried": true,
    "pass": 1
   },
   {
@@ -1401,7 +1548,7 @@
    "note": true,
    "screen_hash": "7d3288f4c33e4497",
    "row_hash": "f5e1d79f3251dbab",
-   "carried": false,
+   "carried": true,
    "pass": 1
   },
   {
@@ -1414,7 +1561,7 @@
    "note": true,
    "screen_hash": "7d3288f4c33e4497",
    "row_hash": "e158aaf055cb61d6",
-   "carried": false,
+   "carried": true,
    "pass": 1
   },
   {
@@ -1427,7 +1574,7 @@
    "note": false,
    "screen_hash": "7d3288f4c33e4497",
    "row_hash": "40e85f1ae92f1e71",
-   "carried": false,
+   "carried": true,
    "pass": 1
   },
   {
@@ -1440,7 +1587,7 @@
    "note": true,
    "screen_hash": "7d3288f4c33e4497",
    "row_hash": "f6b6f78a8f2e5ed7",
-   "carried": false,
+   "carried": true,
    "pass": 1
   },
   {
@@ -1453,7 +1600,7 @@
    "note": true,
    "screen_hash": "7d3288f4c33e4497",
    "row_hash": "ff9aa31c11e5d50f",
-   "carried": false,
+   "carried": true,
    "pass": 1
   },
   {
@@ -1466,7 +1613,7 @@
    "note": true,
    "screen_hash": "7d3288f4c33e4497",
    "row_hash": "563e3d25c3219dd0",
-   "carried": false,
+   "carried": true,
    "pass": 1
   },
   {
@@ -1479,7 +1626,7 @@
    "note": false,
    "screen_hash": "7d3288f4c33e4497",
    "row_hash": "599aac6293908bc4",
-   "carried": false,
+   "carried": true,
    "pass": 1
   },
   {
@@ -1492,7 +1639,7 @@
    "note": false,
    "screen_hash": "7d3288f4c33e4497",
    "row_hash": "4141d9e5e24362c3",
-   "carried": false,
+   "carried": true,
    "pass": 1
   },
   {
@@ -1505,7 +1652,7 @@
    "note": false,
    "screen_hash": "7d3288f4c33e4497",
    "row_hash": "b56360a1040688cf",
-   "carried": false,
+   "carried": true,
    "pass": 1
   },
   {
@@ -1518,34 +1665,34 @@
    "note": true,
    "screen_hash": "7d3288f4c33e4497",
    "row_hash": "bad76e5963432385",
-   "carried": false,
+   "carried": true,
    "pass": 1
   },
   {
    "row": "C795",
    "screen": "*",
    "verdict": "PASS",
-   "line": "",
-   "why": "re-entry change here is an event (the meeting); his presence line is P29's",
+   "line": "no room text in this piece's screens",
+   "why": "its screens are scenes, not a place's room text; no line per person is added to any room",
    "cause": null,
    "note": true,
-   "screen_hash": "7d3288f4c33e4497",
-   "row_hash": "6c9eb17d99266791",
-   "carried": false,
-   "pass": 1
+   "screen_hash": "b2111400bebab05c",
+   "row_hash": "34139e6a6914e171",
+   "carried": true,
+   "pass": 3
   },
   {
    "row": "C804",
    "screen": "*",
    "verdict": "PASS",
-   "line": "spotting someone on the bench",
-   "why": "the meeting is text that comes only with Marco there",
+   "line": "no room text in this piece's screens",
+   "why": "its screens are scenes, not a place's room text; no line per person is added to any room",
    "cause": null,
    "note": false,
-   "screen_hash": "7d3288f4c33e4497",
-   "row_hash": "810ef8e803cb09dd",
-   "carried": false,
-   "pass": 1
+   "screen_hash": "b2111400bebab05c",
+   "row_hash": "5358489178bff0a4",
+   "carried": true,
+   "pass": 3
   },
   {
    "row": "C889",
@@ -1562,7 +1709,7 @@
     "all": "24dbdc186ee8d5f9"
    },
    "row_hash": "def1348d483d0c40",
-   "carried": false,
+   "carried": true,
    "pass": 1
   },
   {
@@ -1580,7 +1727,7 @@
     "all": "24dbdc186ee8d5f9"
    },
    "row_hash": "5c890033f6ac38b8",
-   "carried": false,
+   "carried": true,
    "pass": 1
   },
   {
@@ -1598,7 +1745,7 @@
     "all": "24dbdc186ee8d5f9"
    },
    "row_hash": "265ece64add83676",
-   "carried": false,
+   "carried": true,
    "pass": 1
   },
   {
@@ -1616,7 +1763,7 @@
     "all": "24dbdc186ee8d5f9"
    },
    "row_hash": "6372efb027eb2034",
-   "carried": false,
+   "carried": true,
    "pass": 1
   },
   {
@@ -1634,7 +1781,7 @@
     "all": "24dbdc186ee8d5f9"
    },
    "row_hash": "df5ed7a36dbc74e4",
-   "carried": false,
+   "carried": true,
    "pass": 1
   },
   {
@@ -1652,7 +1799,7 @@
     "all": "24dbdc186ee8d5f9"
    },
    "row_hash": "4f83b0b5eb45f71b",
-   "carried": false,
+   "carried": true,
    "pass": 1
   },
   {
@@ -1670,7 +1817,7 @@
     "all": "24dbdc186ee8d5f9"
    },
    "row_hash": "71713a7e7ae739e7",
-   "carried": false,
+   "carried": true,
    "pass": 1
   },
   {
@@ -1688,7 +1835,7 @@
     "all": "24dbdc186ee8d5f9"
    },
    "row_hash": "d5a109f1ef88419a",
-   "carried": false,
+   "carried": true,
    "pass": 1
   },
   {
@@ -1706,7 +1853,7 @@
     "all": "24dbdc186ee8d5f9"
    },
    "row_hash": "c750f9b6ab4ace14",
-   "carried": false,
+   "carried": true,
    "pass": 1
   },
   {
@@ -1724,7 +1871,7 @@
     "all": "24dbdc186ee8d5f9"
    },
    "row_hash": "bd07273d5822f34f",
-   "carried": false,
+   "carried": true,
    "pass": 1
   },
   {
@@ -1742,7 +1889,7 @@
     "all": "24dbdc186ee8d5f9"
    },
    "row_hash": "7b2bb0dfdbcfe946",
-   "carried": false,
+   "carried": true,
    "pass": 1
   },
   {
@@ -1760,7 +1907,7 @@
     "all": "24dbdc186ee8d5f9"
    },
    "row_hash": "513927dd127fca04",
-   "carried": false,
+   "carried": true,
    "pass": 1
   },
   {
@@ -1778,7 +1925,7 @@
     "all": "24dbdc186ee8d5f9"
    },
    "row_hash": "791cd173e23fb130",
-   "carried": false,
+   "carried": true,
    "pass": 1
   },
   {
@@ -1796,26 +1943,26 @@
     "all": "24dbdc186ee8d5f9"
    },
    "row_hash": "177d1e1776fac74b",
-   "carried": false,
+   "carried": true,
    "pass": 1
   },
   {
    "row": "C927",
    "screen": "gym_meet_marco.after",
    "verdict": "PASS",
-   "line": "Done: 5 min",
-   "why": "exit costs more than 3",
+   "line": "Done (time_progression_minutes = 5)",
+   "why": "The exit spends 5 minutes.",
    "cause": null,
    "note": true,
    "screen_hash": {
-    "text": "bfbee30015c90e8b",
+    "text": "1dc0c41a6d91f102",
     "facts": "9e1d6875ab4b64e0",
     "facts2": "dd789fc2dc0ff6bf",
-    "all": "24dbdc186ee8d5f9"
+    "all": "e3bad999ee0118bd"
    },
    "row_hash": "4e86d143688ba8e5",
-   "carried": false,
-   "pass": 1
+   "carried": true,
+   "pass": 2
   },
   {
    "row": "C928",
@@ -1832,7 +1979,7 @@
     "all": "24dbdc186ee8d5f9"
    },
    "row_hash": "2c3ccc6bd9929d7f",
-   "carried": false,
+   "carried": true,
    "pass": 1
   },
   {
@@ -1850,7 +1997,7 @@
     "all": "24dbdc186ee8d5f9"
    },
    "row_hash": "18b0ecdf6d7fc901",
-   "carried": false,
+   "carried": true,
    "pass": 1
   },
   {
@@ -1868,7 +2015,7 @@
     "all": "24dbdc186ee8d5f9"
    },
    "row_hash": "beb57cd46fe906bf",
-   "carried": false,
+   "carried": true,
    "pass": 1
   },
   {
@@ -1876,18 +2023,18 @@
    "screen": "gym_meet_marco.after",
    "verdict": "N/A",
    "line": "",
-   "why": "no time_of_day condition",
+   "why": "No time_of_day condition; his schedule rows are the clock.",
    "cause": null,
    "note": true,
    "screen_hash": {
-    "text": "bfbee30015c90e8b",
+    "text": "1dc0c41a6d91f102",
     "facts": "9e1d6875ab4b64e0",
     "facts2": "dd789fc2dc0ff6bf",
-    "all": "24dbdc186ee8d5f9"
+    "all": "e3bad999ee0118bd"
    },
    "row_hash": "1aadffd96e76381c",
-   "carried": false,
-   "pass": 1
+   "carried": true,
+   "pass": 2
   },
   {
    "row": "C953",
@@ -1899,7 +2046,7 @@
    "note": true,
    "screen_hash": "7d3288f4c33e4497",
    "row_hash": "826bf82fe26afd13",
-   "carried": false,
+   "carried": true,
    "pass": 1
   },
   {
@@ -1912,8 +2059,44 @@
    "note": false,
    "screen_hash": "7d3288f4c33e4497",
    "row_hash": "13a714429d15f3b2",
-   "carried": false,
+   "carried": true,
    "pass": 1
+  },
+  {
+   "row": "L106",
+   "screen": "gym_meet_marco.after",
+   "verdict": "PASS",
+   "line": "in the mirror his eyes find you again",
+   "why": "Only Marco is claimed there, and the canvas is gated on his presence.",
+   "cause": "",
+   "note": false,
+   "screen_hash": {
+    "text": "1dc0c41a6d91f102",
+    "facts": "9e1d6875ab4b64e0",
+    "facts2": "dd789fc2dc0ff6bf",
+    "all": "e3bad999ee0118bd"
+   },
+   "row_hash": "13a714429d15f3b2",
+   "carried": true,
+   "pass": 2
+  },
+  {
+   "row": "L106",
+   "screen": "gym_meet_marco.meet",
+   "verdict": "PASS",
+   "line": "is spotting someone on the bench",
+   "why": "Canvas condition is npc_at_location npc_marco is_present at hood_gym; no other named person is claimed there.",
+   "cause": "",
+   "note": false,
+   "screen_hash": {
+    "text": "e94048ae6551a6c3",
+    "facts": "23eb50d0d96dba03",
+    "facts2": "b2f1ee65de80c8ee",
+    "all": "060facc282a036da"
+   },
+   "row_hash": "13a714429d15f3b2",
+   "carried": true,
+   "pass": 2
   },
   {
    "row": "L119",
@@ -1930,26 +2113,26 @@
     "all": "604fa272bfe0d04d"
    },
    "row_hash": "faf4c46f7b59480a",
-   "carried": false,
+   "carried": true,
    "pass": 1
   },
   {
    "row": "L120",
    "screen": "gym_meet_marco.meet",
-   "verdict": "FAIL",
-   "line": "gym trainer checking someone out mirror",
-   "why": "a two-person 'checking someone out' frame, the search shape L120 says draws wrong results",
-   "cause": "P23a1-c3",
+   "verdict": "PASS",
+   "line": "\"gym trainer looking at camera across the weights room\"",
+   "why": "Both searches ask for one man looking at the camera; no 'man looking at her' or two-person frame is searched.",
+   "cause": "",
    "note": false,
    "screen_hash": {
-    "text": "76981bacace9fdc5",
+    "text": "e94048ae6551a6c3",
     "facts": "23eb50d0d96dba03",
     "facts2": "b2f1ee65de80c8ee",
-    "all": "604fa272bfe0d04d"
+    "all": "060facc282a036da"
    },
    "row_hash": "4b62583ae03681c7",
-   "carried": false,
-   "pass": 1
+   "carried": true,
+   "pass": 2
   },
   {
    "row": "L121",
@@ -1966,7 +2149,7 @@
     "all": "604fa272bfe0d04d"
    },
    "row_hash": "45842b25d0708a15",
-   "carried": false,
+   "carried": true,
    "pass": 1
   },
   {
@@ -1984,7 +2167,7 @@
     "all": "604fa272bfe0d04d"
    },
    "row_hash": "1fca3bfe1d0c2419",
-   "carried": false,
+   "carried": true,
    "pass": 1
   },
   {
@@ -1992,18 +2175,57 @@
    "screen": "gym_meet_marco.after",
    "verdict": "N/A",
    "line": "",
-   "why": "no hours row",
-   "cause": null,
+   "why": "A one-time canvas gated on his presence, not an hours row that greys.",
+   "cause": "",
    "note": false,
    "screen_hash": {
-    "text": "bfbee30015c90e8b",
+    "text": "1dc0c41a6d91f102",
     "facts": "9e1d6875ab4b64e0",
     "facts2": "dd789fc2dc0ff6bf",
-    "all": "24dbdc186ee8d5f9"
+    "all": "e3bad999ee0118bd"
    },
    "row_hash": "e64ce2672d85d2d8",
+   "carried": true,
+   "pass": 2
+  },
+  {
+   "row": "L168",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "In your leggings and sports top, work out at the gym, 6am to 10pm. The trainer's in weekdays 6 to 10am and 5 to 9pm, and Saturday 8am to 2pm.",
+   "why": "the step (as rebuilt at 16:04) gives Marco's own hours, matching his rows; met_marco is the next step's when",
+   "cause": null,
+   "note": false,
+   "screen_hash": "b2111400bebab05c",
+   "row_hash": "444c44970dc284f2",
    "carried": false,
-   "pass": 1
+   "pass": 4
+  },
+  {
+   "row": "L169",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "In your leggings and sports top, work out at the gym, 6am to 10pm. The trainer's in weekdays 6 to 10am and 5 to 9pm, and Saturday 8am to 2pm.",
+   "why": "gym_meet_marco fires on any visit while Marco is there",
+   "cause": null,
+   "note": false,
+   "screen_hash": "b2111400bebab05c",
+   "row_hash": "59defccfc63b0454",
+   "carried": false,
+   "pass": 4
+  },
+  {
+   "row": "L170",
+   "screen": "*",
+   "verdict": "N/A",
+   "line": "",
+   "why": "no place on this piece's screens is hidden_until a flag",
+   "cause": null,
+   "note": false,
+   "screen_hash": "b2111400bebab05c",
+   "row_hash": "c3599cd09637a240",
+   "carried": false,
+   "pass": 4
   },
   {
    "row": "L71",
@@ -2015,27 +2237,14 @@
    "note": false,
    "screen_hash": "7d3288f4c33e4497",
    "row_hash": "412fb4816f34d294",
-   "carried": false,
+   "carried": true,
    "pass": 1
   }
  ],
- "causes": [
-  {
-   "id": "P23a1-c1",
-   "what": "gym_meet_marco.after ends every path on his eyes in the mirror again, which names nothing that comes next (his 'programme' is never offered or promised)."
-  },
-  {
-   "id": "P23a1-c2",
-   "what": "The charged meeting holds no not-yet or price on the looking and tips paths (only the silent path's 'That wears off in here.')."
-  },
-  {
-   "id": "P23a1-c3",
-   "what": "The picture's second search, 'gym trainer checking someone out mirror', asks for a two-person frame instead of what she sees."
-  }
- ],
+ "causes": [],
  "pending": [],
- "asked": 124,
- "answered": 124,
+ "asked": 3,
+ "answered": 3,
  "pass_items": [],
  "unowed": []
 }

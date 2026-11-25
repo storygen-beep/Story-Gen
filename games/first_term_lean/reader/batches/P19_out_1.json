@@ -2,108 +2,248 @@
  "verdicts": [
   {
    "row": "B10",
-   "screen": "cafeteria_meet_rosa.meet",
+   "screen": "cafeteria_meet_rosa.after",
    "verdict": "PASS",
-   "line": "A woman in her forties runs the counter",
-   "why": "gated on npc_rosa present; who_is_where has her at the counter weekdays 08–16; no one else is claimed (Nadia, Zoe unnamed)"
+   "line": "She's already looking past you at the next tray, but she'll know your face next time.",
+   "why": "every line holds at the first and last minute and on a second visit; no person named (it fires on entry while Rosa's row has her at the counter, weekdays 8-16; Kayla and Tess 12-13, Jake 12-14, Zoe Tue/Thu 13-14 and Nadia may be in the room unnamed, and nothing says the room is empty; 'the next tray' fits a lunch crowd)"
   },
   {
    "row": "B10",
-   "screen": "cafeteria_meet_rosa.after",
-   "verdict": "PASS",
-   "line": "She's already looking past you at the next tray",
-   "why": "0 minutes after meet, Rosa still there; each path's first lines follow its own answer"
-  },
-  {
-   "row": "B8",
    "screen": "cafeteria_meet_rosa.meet",
    "verdict": "PASS",
-   "line": "A woman in her forties ... hairnet on",
-   "why": "45 per PLAN §5; the only garment named is Rosa's"
+   "line": "A woman in her forties runs the counter, hairnet on, forearms like a baker's.",
+   "why": "every line holds at the first and last minute and on a second visit; no person named (it fires on entry while Rosa's row has her at the counter, weekdays 8-16; Kayla and Tess 12-13, Jake 12-14, Zoe Tue/Thu 13-14 and Nadia may be in the room unnamed, and nothing says the room is empty; 'the next tray' fits a lunch crowd)"
   },
   {
    "row": "B8",
    "screen": "cafeteria_meet_rosa.after",
    "verdict": "PASS",
-   "line": "She presses the roll into your hand.",
-   "why": "no number or garment of Ella's"
+   "line": "She's already looking past you at the next tray, but she'll know your face next time.",
+   "why": "no garment of hers named; no number that disagrees with PLAN"
   },
   {
-   "row": "C1234",
-   "screen": "cafeteria_meet_rosa.after",
-   "verdict": "PASS",
-   "line": "She puts the roll back with a shrug.",
-   "why": "fixed: no picture on this screen now; the still sits on meet right after 'Here, take a roll.'"
-  },
-  {
-   "row": "C1238",
-   "screen": "cafeteria_meet_rosa.after",
-   "verdict": "PASS",
-   "line": "She puts the roll back with a shrug.",
-   "why": "fixed: the roll-in-hand picture no longer shows on the 'I'm fine' path; on meet it matches its line on every path, since every path passes 'Here, take a roll.'"
-  },
-  {
-   "row": "C460",
+   "row": "B8",
    "screen": "cafeteria_meet_rosa.meet",
    "verdict": "PASS",
-   "line": "Listen to that. You're too skinny for this place, mija. Here, take a roll.",
-   "why": "Rosa there by her gate; the picture (her holding a roll) is true on its one visit"
+   "line": "A woman in her forties runs the counter, hairnet on, forearms like a baker's.",
+   "why": "no garment of hers named; no number that disagrees with PLAN"
   },
   {
    "row": "C460",
    "screen": "cafeteria_meet_rosa.after",
    "verdict": "PASS",
    "line": "She's already looking past you at the next tray, but she'll know your face next time.",
-   "why": "true on all three paths; the roll lines are behind their flags"
+   "why": "no claim about who is there, the clock, her past or her clothes that can be false (it fires on entry while Rosa's row has her at the counter, weekdays 8-16; Kayla and Tess 12-13, Jake 12-14, Zoe Tue/Thu 13-14 and Nadia may be in the room unnamed, and nothing says the room is empty; 'the next tray' fits a lunch crowd)"
   },
   {
-   "row": "C461",
+   "row": "C460",
    "screen": "cafeteria_meet_rosa.meet",
    "verdict": "PASS",
-   "line": "mija",
-   "why": "fits her plan entry (45, lunch lady)"
+   "line": "A woman in her forties runs the counter, hairnet on, forearms like a baker's.",
+   "why": "no claim about who is there, the clock, her past or her clothes that can be false (it fires on entry while Rosa's row has her at the counter, weekdays 8-16; Kayla and Tess 12-13, Jake 12-14, Zoe Tue/Thu 13-14 and Nadia may be in the room unnamed, and nothing says the room is empty; 'the next tray' fits a lunch crowd)"
   },
   {
    "row": "C461",
    "screen": "cafeteria_meet_rosa.after",
    "verdict": "PASS",
-   "line": "Eat all of it. I'll know.",
-   "why": "fits her manner"
+   "line": "She's already looking past you at the next tray, but she'll know your face next time.",
+   "why": "texture only, and dialogue that fits the cast entry"
+  },
+  {
+   "row": "C461",
+   "screen": "cafeteria_meet_rosa.meet",
+   "verdict": "PASS",
+   "line": "A woman in her forties runs the counter, hairnet on, forearms like a baker's.",
+   "why": "texture only, and dialogue that fits the cast entry"
+  },
+  {
+   "row": "C889",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "Thanks. \u00b7 I'm fine, really. \u00b7 Say nothing \u00b7 Done",
+   "why": "no label carries a clock time, a duration or energy; nothing here costs money"
+  },
+  {
+   "row": "C889",
+   "screen": "cafeteria_meet_rosa.after",
+   "verdict": "PASS",
+   "line": "She's already looking past you at the next tray, but she'll know your face next time.",
+   "why": "labels name no clock time and no duration"
+  },
+  {
+   "row": "C892",
+   "screen": "cafeteria_meet_rosa.after",
+   "verdict": "PASS",
+   "line": "She's already looking past you at the next tray, but she'll know your face next time.",
+   "why": "no hour in the act"
+  },
+  {
+   "row": "C897",
+   "screen": "cafeteria_meet_rosa.after",
+   "verdict": "PASS",
+   "line": "She's already looking past you at the next tray, but she'll know your face next time.",
+   "why": "time sits on the move or the act, not on every room"
+  },
+  {
+   "row": "C900",
+   "screen": "cafeteria_meet_rosa.after",
+   "verdict": "PASS",
+   "line": "She's already looking past you at the next tray, but she'll know your face next time.",
+   "why": "no beat says what time it is"
+  },
+  {
+   "row": "C902",
+   "screen": "cafeteria_meet_rosa.after",
+   "verdict": "PASS",
+   "line": "She's already looking past you at the next tray, but she'll know your face next time.",
+   "why": "read at the last minute of the window, still true"
+  },
+  {
+   "row": "C903",
+   "screen": "cafeteria_meet_rosa.after",
+   "verdict": "PASS",
+   "line": "She's already looking past you at the next tray, but she'll know your face next time.",
+   "why": "no weekday named in a beat"
+  },
+  {
+   "row": "C906",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "Thanks. \u00b7 I'm fine, really. \u00b7 Say nothing \u00b7 Done",
+   "why": "no label carries a clock time, a duration or energy; nothing here costs money"
+  },
+  {
+   "row": "C906",
+   "screen": "cafeteria_meet_rosa.after",
+   "verdict": "PASS",
+   "line": "She's already looking past you at the next tray, but she'll know your face next time.",
+   "why": "no 'till X' on any label"
+  },
+  {
+   "row": "C910",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "Thanks. \u00b7 I'm fine, really. \u00b7 Say nothing \u00b7 Done",
+   "why": "no label carries a clock time, a duration or energy; nothing here costs money"
+  },
+  {
+   "row": "C910",
+   "screen": "cafeteria_meet_rosa.after",
+   "verdict": "PASS",
+   "line": "She's already looking past you at the next tray, but she'll know your face next time.",
+   "why": "buttons say no time and no energy; money only where the act costs money"
+  },
+  {
+   "row": "C913",
+   "screen": "cafeteria_meet_rosa.after",
+   "verdict": "N/A",
+   "line": "She's already looking past you at the next tray, but she'll know your face next time.",
+   "why": "no row on this screen has hours or a window"
+  },
+  {
+   "row": "C914",
+   "screen": "cafeteria_meet_rosa.after",
+   "verdict": "N/A",
+   "line": "She's already looking past you at the next tray, but she'll know your face next time.",
+   "why": "no row on this screen has hours or a window"
+  },
+  {
+   "row": "C916",
+   "screen": "cafeteria_meet_rosa.after",
+   "verdict": "PASS",
+   "line": "trigger: npc_rosa is_present",
+   "why": "the meeting happens to her and stays hidden when Rosa's row is out"
+  },
+  {
+   "row": "C920",
+   "screen": "cafeteria_meet_rosa.after",
+   "verdict": "PASS",
+   "line": "She's already looking past you at the next tray, but she'll know your face next time.",
+   "why": "Done returns to the same place; its minutes are the act's, not a hop"
+  },
+  {
+   "row": "C924",
+   "screen": "cafeteria_meet_rosa.after",
+   "verdict": "PASS",
+   "line": "She's already looking past you at the next tray, but she'll know your face next time.",
+   "why": "the minutes spent make the schedule matter"
+  },
+  {
+   "row": "C926",
+   "screen": "cafeteria_meet_rosa.after",
+   "verdict": "PASS",
+   "line": "She's already looking past you at the next tray, but she'll know your face next time.",
+   "why": "nothing sends the clock to a named hour"
   },
   {
    "row": "C927",
    "screen": "cafeteria_meet_rosa.after",
    "verdict": "PASS",
-   "line": "time_progression_minutes = 5",
-   "why": "Done states its time"
+   "line": "She's already looking past you at the next tray, but she'll know your face next time.",
+   "why": "every exit carries its own minutes"
+  },
+  {
+   "row": "C928",
+   "screen": "cafeteria_meet_rosa.after",
+   "verdict": "PASS",
+   "line": "She's already looking past you at the next tray, but she'll know your face next time.",
+   "why": "no clock printed into prose"
+  },
+  {
+   "row": "C929",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "Thanks. \u00b7 I'm fine, really. \u00b7 Say nothing \u00b7 Done",
+   "why": "no label carries a clock time, a duration or energy; nothing here costs money"
+  },
+  {
+   "row": "C929",
+   "screen": "cafeteria_meet_rosa.after",
+   "verdict": "PASS",
+   "line": "She's already looking past you at the next tray, but she'll know your face next time.",
+   "why": "the activity's time is on no label"
+  },
+  {
+   "row": "C930",
+   "screen": "cafeteria_meet_rosa.after",
+   "verdict": "N/A",
+   "line": "She's already looking past you at the next tray, but she'll know your face next time.",
+   "why": "no row on this screen has hours or a window"
   },
   {
    "row": "C931",
    "screen": "cafeteria_meet_rosa.after",
    "verdict": "N/A",
-   "line": "—",
-   "why": "no time_of_day condition on the screen"
+   "line": "",
+   "why": "no time_of_day; the trigger reads Rosa's row"
+  },
+  {
+   "row": "C953",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "Thanks. \u00b7 I'm fine, really. \u00b7 Say nothing \u00b7 Done",
+   "why": "no label carries a clock time, a duration or energy; nothing here costs money"
+  },
+  {
+   "row": "L106",
+   "screen": "cafeteria_meet_rosa.after",
+   "verdict": "PASS",
+   "line": "She's already looking past you at the next tray, but she'll know your face next time.",
+   "why": "no line names a person whose rows don't put them there (it fires on entry while Rosa's row has her at the counter, weekdays 8-16; Kayla and Tess 12-13, Jake 12-14, Zoe Tue/Thu 13-14 and Nadia may be in the room unnamed, and nothing says the room is empty; 'the next tray' fits a lunch crowd)"
   },
   {
    "row": "L106",
    "screen": "cafeteria_meet_rosa.meet",
    "verdict": "PASS",
-   "line": "A woman in her forties runs the counter",
-   "why": "her rows put her there at every minute the gate opens"
-  },
-  {
-   "row": "L106",
-   "screen": "cafeteria_meet_rosa.after",
-   "verdict": "PASS",
-   "line": "She's already looking past you at the next tray",
-   "why": "still there; no one else named"
+   "line": "A woman in her forties runs the counter, hairnet on, forearms like a baker's.",
+   "why": "no line names a person whose rows don't put them there (it fires on entry while Rosa's row has her at the counter, weekdays 8-16; Kayla and Tess 12-13, Jake 12-14, Zoe Tue/Thu 13-14 and Nadia may be in the room unnamed, and nothing says the room is empty; 'the next tray' fits a lunch crowd)"
   },
   {
    "row": "L167",
    "screen": "cafeteria_meet_rosa.after",
    "verdict": "N/A",
-   "line": "—",
-   "why": "no windowed row or button with hours on this screen"
+   "line": "She's already looking past you at the next tray, but she'll know your face next time.",
+   "why": "no row on this screen has hours or a window"
   }
  ],
  "causes": []

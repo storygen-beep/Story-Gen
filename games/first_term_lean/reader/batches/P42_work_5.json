@@ -1,0 +1,24 @@
+{
+ "items": [
+  {
+   "row": "C690",
+   "screen": "*",
+   "why": "its rule's text changed"
+  },
+  {
+   "row": "C690",
+   "screen": "mom_living_room.talk",
+   "why": "its rule's text changed"
+  },
+  {
+   "row": "C690",
+   "screen": "talk_mom.eat",
+   "why": "its rule's text changed"
+  },
+  {
+   "row": "people#3",
+   "screen": "*",
+   "why": "its rule's text changed"
+  }
+ ]
+}

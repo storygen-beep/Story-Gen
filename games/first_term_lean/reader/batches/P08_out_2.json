@@ -1,0 +1,19 @@
+{
+ "verdicts": [
+  {
+   "row": "C596",
+   "screen": "*",
+   "verdict": "N/A",
+   "line": "phone texts (text_laura ... text_nina)",
+   "why": "Messages are not a talk screen or a face-opened menu; no picture"
+  },
+  {
+   "row": "C953",
+   "screen": "phone:text_mark",
+   "verdict": "PASS",
+   "line": "replies \"I know.\" / \"I'm working on it.\" / \"Or what?\"",
+   "why": "no reply is a spend; none carries time or energy"
+  }
+ ],
+ "causes": []
+}

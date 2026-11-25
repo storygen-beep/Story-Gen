@@ -40,31 +40,34 @@ friends; Zoe staying over and Jake at the door (release 2); short arcs for named
 | P10 | the café job: "Work an hour" ($5) and "Work a shift" ($22), any hour Tom or Chris is in, as two rows with one nested group each (L167), each greyed once with its full start hours; the six old rows retired (is_active = false) for saves. Reader list EMPTY (pass 9), 1 note carried (C151: shift versions have two or three spoken lines) | 2026-11-24 | 2026-11-24 | 2026-11-24 | ready |
 | P11 | Sunday rent: paid inside Mark's Kitchen menu Sunday 8–11:55 ($75, $90 after $300, $100 after $900), "can't pay" resets the count, the first payment explains the rise, goal 1's "N / 4" line and ready_text, a finished goal never resets. Reader list EMPTY (pass 4) | 2026-11-24 | 2026-11-24 | 2026-11-24 | |
 | P08 | the phone: Messages only; one text from Mom, Ryan, Mark, Tom, Chris and Nina some hours after she meets each (hours_since_flag), three replies each with a no, a line back pointing ahead; no meter or flag moves. Played headless 2026-11-24 (+4h, +6h, +10h). Reader list EMPTY (pass 3) | 2026-11-24 | 2026-11-24 | 2026-11-24 |  |
-| P36 | reputation: the meter (still), the Sunday board on the quad, overheard lines at the mirror and the next table (PLAN 8g) | | | | |
-| P37 | Zoe's Saturday party: one fixed dare, her no (PLAN 8h) | | | | |
+| P36 | reputation: the meter (still), the Sunday board on the quad, two overheard lines by strangers, names behind met flags; rep_table gone when it can't be used (LO 2026-11-24, "button completely gone"). Reader list EMPTY | 2026-11-24 | 2026-11-24 | 2026-11-24 |  |
+| P37 | Zoe's Saturday party: one fixed dare, her no; once a Saturday (partied_this_week), gone out of hours (LO's call); the hook in Zoe's meeting and tip. Reader list EMPTY (C639 note: one answer, PLAN §8h) | 2026-11-24 | 2026-11-24 | 2026-11-24 |  |
 | P32 | schedules: eleven people with rows and no meter (Hale, Pratt, Walsh, Cross, Nadia, Holt, Rosa, Vance, Frank, Danny, Marco), each one's card gated on meeting them; Chris's card "He keeps the machine to himself." Reader list EMPTY (pass 2) | 2026-11-24 | 2026-11-24 | 2026-11-24 |  |
-| P38 | walk-ins, home (PLAN 10a), from craft/walk-ins.md · note 2026-11-24 (P44 reader): she can walk into the bathroom while Ryan's row has him in the shower; his face says "Ryan is in the shower." and nothing happens (PLAN §10a's shower walk-in) |  |  |  |  |
-| P39 | walk-ins, neighbourhood: at least the park couple (bite to come) | | | | |
-| P40 | walk-ins, campus: at least the library back stacks (bite to come) | | | | |
-| P41 | walk-ins, near campus: Zoe and Sam, seen (bite to come) | | | | |
+| P38 | walk-ins, home (PLAN §10a): six, seen not heard; night rows split (in bed / on his phone until 1am); Ryan's Sunday night a school night. Reader list EMPTY | 2026-11-24 | 2026-11-24 | 2026-11-24 |  |
+| P39 | walk-ins, neighbourhood (PLAN §10b): six; a known person's walk-in waits behind their meeting, Vance excepted; Nina's fitting-room row 18:45–19:00. Reader list EMPTY | 2026-11-24 | 2026-11-25 | 2026-11-25 |  |
+| P40 | walk-ins, campus (PLAN §10c): six, incl. Cross in the dark seats (option c, a substitution on Practise 1–2pm); clears Holt's novel hook. Reader list EMPTY | 2026-11-24 | 2026-11-25 | 2026-11-25 |  |
+| P41 | walk-ins, near campus (PLAN §10d): six; Sam's guitar clears P27's Zoe's Apartment hold; every explicit beat 3+ frozen-list words. Reader list EMPTY | 2026-11-24 | 2026-11-25 | 2026-11-25 |  |
 | P15 | her first lectures: psychology (Hale at the lectern, Nadia a Stranger until she names herself, her body under his look) and statistics (Pratt, "Miss @player?"), each once on entry while its people are there; sets met_hale, met_nadia, met_pratt. Played headless 2026-11-24 (09:05 psych, 11:05 stats). Reader list EMPTY (pass 3) | 2026-11-24 | 2026-11-24 | 2026-11-24 |  |
 | P16 | her first English class: Prof. Walsh ("dear"), her advisor, asks her to stay and gives her office hours (Tue/Thu 2–4); once on entry while Walsh is there; sets met_walsh, which opens the Faculty Offices. Played headless 2026-11-24. Reader list EMPTY (pass 2) | 2026-11-24 | 2026-11-24 | 2026-11-24 |  |
 | P17 | her first drama class: Mr. Cross ("new face"), her name out loud three ways, his eyes down her body, rehearsals as the hook; once on entry while he is there (Tue/Thu 11:00–11:29); sets met_cross. Played headless 2026-11-24. Reader list EMPTY (pass 2) | 2026-11-24 | 2026-11-24 | 2026-11-24 |  |
-| P18 | Ms. Ivy Holt, the library | | | | |
-| P19 | Rosa Diaz, the cafeteria | | | | |
-| P20 | Zoe on the quad, week one; sets zoe_place_known | | | | |
+| P18 | Ms. Ivy Holt, the library: met once at the desk ("hon"); the romance novel hooks P40. Reader list EMPTY | 2026-11-24 | 2026-11-24 | 2026-11-24 |  |
+| P19 | Rosa Diaz, the cafeteria: met once at the counter ("mija"), a roll pressed into her hand. Reader list EMPTY | 2026-11-24 | 2026-11-24 | 2026-11-24 |  |
+| P20 | Zoe, step 1: she falls into step on the quad path with two coffees ("babe"), tells her the green door; sets met_zoe and zoe_place_known (Zoe's Apartment opens). Rows from PLAN §9d (restored). Reader list EMPTY | 2026-11-24 | 2026-11-24 | 2026-11-24 |  |
 | P21 | Tom hires her (the ask, Mon–Sat 10am–8:55pm, greyed when he's out; "Not today." parks it a day); Chris on her first shift (his brush, her pushback, +$22); Tom's and Chris's rows; opens P10. Reader: 3 passes, work list empty (ENI for LO, delegated). 2026-11-24: first shift any weekday 10–2:55 with Tom and Chris in; "Both?" a cheeky answer, not a flirt; Tom's look named on her body, and she looks away first; greyed lines name full hours. Reader list EMPTY (pass 8), 1 note carried (C1421: after "Not today." nothing says the ask returns tomorrow) | 2026-11-24 | 2026-11-24 | 2026-11-24 |  |
-| P22 | Frank and Danny, the corner shop | | | | |
-| P23 | Marco, the gym | | | | |
-| P24 | Mr. Vance, her first Sunday | | | | |
-| P25 | Jake on the quad, week two | | | | |
-| P26 | Brooke with Kayla and Tess, week two: one cold line | | | | |
-| P27 | Sam: she knocks at Zoe's in the afternoon and he opens; must pass reach.py | | | | |
-| P28 | everyday at home: who's in which room, a short line pool each | | | | |
-| P29 | everyday in the neighbourhood: faces, crowds, the noticing line only (truth rule) | | | | |
-| P30 | everyday on campus: the same | | | | |
-| P31 | everyday near campus: the same; must add the Café's presence lines for Tom and Chris, met and unmet (C804/C795, held from P21 and P05, no waiver) and fill the Café's empty windows with "nobody's behind the counter" lines: Sat and Sun 7–10am, Sun 8–9pm, and before she's hired (P05a1-c2, ENI for LO 2026-11-24) | | | | |
+| P22 | Frank and Danny, the corner shop: Frank ("girlie") knows Mark and says Mark will hear; Danny ("gorgeous"), the night clerk, watches her. Reader list EMPTY (pass 2) | 2026-11-24 | 2026-11-24 | 2026-11-24 |  |
+| P23 | Marco Silva, the gym: met once while he trains ("champ"); "You'll be back." Reader list EMPTY (pass 2) | 2026-11-24 | 2026-11-24 | 2026-11-24 |  |
+| P24 | Mr. Vance, step 1: her first Sunday, the man on the porch ("little lady"); "Your stepdad pays me, and when he doesn't, I'm the one who knocks."; sets met_vance (the house next door opens). Reader list EMPTY | 2026-11-24 | 2026-11-24 | 2026-11-24 |  |
+| P25 | Jake, step 1: the quad from week two; his friends dared him to ask ("trouble"); "And I'm asking again. Fair warning." No date promised (release 3). Reader list EMPTY | 2026-11-24 | 2026-11-24 | 2026-11-24 |  |
+| P26 | Brooke with Kayla (sidekick) and Tess (make-up girl), week two, at the mirror: one cold line ("princess"). Three people, rows from §9d. Reader list EMPTY | 2026-11-24 | 2026-11-24 | 2026-11-24 |  |
+| P27 | Sam Reed: Zoe's door opens 12pm–2am (his row); he answers one afternoon while Zoe's out ("sunshine"). reach.py passes. Held, no waiver: nothing to do alone in Zoe's Apartment until P40. Reader list EMPTY | 2026-11-24 | 2026-11-24 | 2026-11-24 |  |
+| P28 | everyday at home: an empty Kitchen, Living Room or Ryan's Room says so ("Nobody's here. The fridge hums."); each room already has something to do alone. Per-person room lines dropped (LO 2026-11-24). Reader list EMPTY | 2026-11-24 | 2026-11-24 | 2026-11-24 |  |
+| P29 | everyday in the neighbourhood: the crowd notices the leggings on her street, in the park and at the gym, with her reaction; nobody tells anyone in release 1 (NOTES 42). P07 already covers Mom's things. Reader list EMPTY | 2026-11-24 | 2026-11-25 | 2026-11-25 |  |
+| P30 | everyday on campus: the lecture hall, library, theatre and offices say when nobody's there; the theatre has "Sit in on the rehearsal", "Sit at the back of drama" (both grey with their hours) and "Sit in the empty seats" (2 a day). Clears P04's held places#6. Reader list EMPTY | 2026-11-24 | 2026-11-25 | 2026-11-25 |  |
+| P31 | everyday near campus: the Café's empty windows say "Nobody's behind the counter" (clears P05a1-c2/c3); "Sit by the window", 2 a day, 7am–8:30pm, who's in reacts. Reader list EMPTY | 2026-11-24 | 2026-11-25 | 2026-11-25 |  |
 | P44 | faces and popups (LO 2026-11-24): every met person present shows a face, a click says their row ("Ryan is asleep."); 13 bookkeeping flags stop toasting; six activities reworded. Played headless 2026-11-24. Reader list EMPTY (pass 1) | 2026-11-24 | 2026-11-24 | 2026-11-24 |  |
+| P45 | the Town hub (LO 2026-11-25, "New Town hub"): her street is "Neighbourhood"; walk and bus to and from Town; the Café and Zoe's Apartment off the Town hub; 5 min through the campus gates. Reader list EMPTY | 2026-11-25 | 2026-11-25 | 2026-11-25 |  |
+| P46 | the Quests and People pages as CoT's (LO 2026-11-25, "completely aligned with the cots pages"): the Hints page with ten storylines and the Paying Your Way walkthrough; the People dialog with tabs, stranger names (body features) and the person view; CoT's Quests line at the end of the opening; every met person pointed at (people.md 11). Reader list EMPTY | 2026-11-25 | 2026-11-25 | 2026-11-25 |  |
+| P47 | the dean's first day (LO 2026-11-25, "Dean on the first day"): his door on the faculty corridor, his look, his rules, the timetable, Psychology; Mom names him on the opening's last screens. Reader list EMPTY | 2026-11-25 | 2026-11-25 | 2026-11-25 |  |
 
 ## Open
 

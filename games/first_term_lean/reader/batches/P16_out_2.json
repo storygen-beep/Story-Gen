@@ -1,0 +1,75 @@
+{
+ "verdicts": [
+  {
+   "row": "C596",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "meeting screen, picture in it",
+   "why": "a first meeting is a new moment, so its picture is allowed; no face-opened menu is built here, and no talk screen carries a picture"
+  },
+  {
+   "row": "C795",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "no room text in this piece's screens",
+   "why": "its screens are scenes, not a place's room text; no line per person is added to any room"
+  },
+  {
+   "row": "C804",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "no room text in this piece's screens",
+   "why": "its screens are scenes, not a place's room text; no line per person is added to any room"
+  },
+  {
+   "row": "C1265",
+   "screen": "english_first.class",
+   "verdict": "PASS",
+   "line": "picture people/walsh_front_t0 after \"For the rest of the class she takes essays apart...\"",
+   "why": "a first class and a first meeting, not a chore, a notice or a room menu"
+  },
+  {
+   "row": "C889",
+   "screen": "english_first.after",
+   "verdict": "PASS",
+   "line": "choice \"Done\" (120 min, back to the lecture hall)",
+   "why": "the label carries no time, energy, clock time or money; the 120 minutes are the class, not a hop"
+  },
+  {
+   "row": "C906",
+   "screen": "english_first.after",
+   "verdict": "PASS",
+   "line": "choice \"Done\" (120 min, back to the lecture hall)",
+   "why": "the label carries no time, energy, clock time or money; the 120 minutes are the class, not a hop"
+  },
+  {
+   "row": "C910",
+   "screen": "english_first.after",
+   "verdict": "PASS",
+   "line": "choice \"Done\" (120 min, back to the lecture hall)",
+   "why": "the label carries no time, energy, clock time or money; the 120 minutes are the class, not a hop"
+  },
+  {
+   "row": "C920",
+   "screen": "english_first.after",
+   "verdict": "PASS",
+   "line": "choice \"Done\" (120 min, back to the lecture hall)",
+   "why": "the label carries no time, energy, clock time or money; the 120 minutes are the class, not a hop"
+  },
+  {
+   "row": "C929",
+   "screen": "english_first.after",
+   "verdict": "PASS",
+   "line": "choice \"Done\" (120 min, back to the lecture hall)",
+   "why": "the label carries no time, energy, clock time or money; the 120 minutes are the class, not a hop"
+  },
+  {
+   "row": "C953",
+   "screen": "english_first.after",
+   "verdict": "PASS",
+   "line": "choice \"Done\" (120 min, back to the lecture hall)",
+   "why": "the label carries no time, energy, clock time or money; the 120 minutes are the class, not a hop"
+  }
+ ],
+ "causes": []
+}

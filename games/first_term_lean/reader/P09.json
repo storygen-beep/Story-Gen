@@ -1,12 +1,12 @@
 {
  "piece": "P09",
- "pass": 3,
+ "pass": 8,
  "screens": {
   "class_psych.class": {
    "text": "7dc50540207a762d",
-   "facts": "599896be5ff5e7e1",
-   "facts2": "f3e35b8dff0432df",
-   "all": "b23d6439fe2ec7b7"
+   "facts": "a66a26384ca488bd",
+   "facts2": "b30fe44025af3184",
+   "all": "9a1b1c67a46bf088"
   },
   "class_stats.class": {
    "text": "205929646d084121",
@@ -21,16 +21,16 @@
    "all": "6a7b82dd4702d17b"
   },
   "class_drama.class": {
-   "text": "93fc476b832b1610",
-   "facts": "b7ce998bd15b7b39",
-   "facts2": "0cac9c246eb5d2cc",
-   "all": "ab81fcbbcab37fc7"
+   "text": "9741365e3550a76b",
+   "facts": "77c5977fffe46fc8",
+   "facts2": "30f91571176cc73e",
+   "all": "331e46e93c15eda9"
   },
   "stage_practise.practise": {
-   "text": "f8f3554a00e1d4a5",
-   "facts": "0b9a76e1db54c0af",
-   "facts2": "0b9a76e1db54c0af",
-   "all": "a346c0e9d786dabf"
+   "text": "601103fec24e1708",
+   "facts": "f3fdaee8cfb85e6d",
+   "facts2": "f3fdaee8cfb85e6d",
+   "all": "271a448474046e50"
   },
   "study_library.study": {
    "text": "73e9d3e0fb10df0e",
@@ -39,10 +39,10 @@
    "all": "97bdd08f60e3d4ea"
   },
   "study_hall.study": {
-   "text": "c1e166a2469a4da2",
-   "facts": "e55d2c2c4885f4a0",
-   "facts2": "e55d2c2c4885f4a0",
-   "all": "9f2c0299409edfd3"
+   "text": "3bdf5d62e23fc587",
+   "facts": "360934a7af72e6fd",
+   "facts2": "6460f3e4c78536c0",
+   "all": "2e507d8d99bf8962"
   },
   "study_room.study": {
    "text": "b5d9462a83e6f4cb",
@@ -50,7 +50,7 @@
    "facts2": "815b79e9e60fe573",
    "all": "cb6d7055586ca07b"
   },
-  "*": "71047d8f6bbae36e"
+  "*": "25ea9c7b82a80239"
  },
  "rows": {
   "B1": "5276068df1ca6fa9",
@@ -117,13 +117,13 @@
   "C620": "76250e48ada2b843",
   "C961": "b6cf8c9e8a8ef683",
   "C644": "f5e1d79f3251dbab",
-  "C596": "6d9bba989a2b9666",
+  "C596": "e5f7e6cf2d01613d",
   "C660": "da4c173ea0935aca",
   "C1340": "b76a6583ae88c60f",
   "C769": "f6b6f78a8f2e5ed7",
   "C794": "bad76e5963432385",
-  "C795": "6c9eb17d99266791",
-  "C804": "810ef8e803cb09dd",
+  "C795": "34139e6a6914e171",
+  "C804": "5358489178bff0a4",
   "L106": "13a714429d15f3b2",
   "C776": "4141d9e5e24362c3",
   "C777": "b56360a1040688cf",
@@ -131,6 +131,7 @@
   "C758": "e158aaf055cb61d6",
   "C953": "826bf82fe26afd13",
   "C762": "40e85f1ae92f1e71",
+  "L170": "c3599cd09637a240",
   "C770": "ff9aa31c11e5d50f",
   "C771": "563e3d25c3219dd0",
   "L166": "c12d10588197fbaf",
@@ -171,26 +172,80 @@
    "note": false,
    "screen_hash": "71047d8f6bbae36e",
    "row_hash": "5276068df1ca6fa9",
-   "carried": false,
+   "carried": true,
    "pass": 3
+  },
+  {
+   "row": "B10",
+   "screen": "class_drama.class",
+   "verdict": "PASS",
+   "line": "Mr. Cross has you all on the stage in a line ... Everyone's watching.",
+   "why": "Trigger is Tue/Thu 11:00-11:29 (weekdays [1,3], 0=Monday, v2.py:5214); who_is_where puts npc_cross (and npc_brooke) at campus_theatre Tue/Thu 11-13, so the class he runs is there at the first and last minute.",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "9741365e3550a76b",
+    "facts": "77c5977fffe46fc8",
+    "facts2": "30f91571176cc73e",
+    "all": "331e46e93c15eda9"
+   },
+   "row_hash": "c1c0e2ac2588a579",
+   "carried": true,
+   "pass": 5
+  },
+  {
+   "row": "B10",
+   "screen": "class_psych.class",
+   "verdict": "PASS",
+   "line": "Dr. Hale lectures from the bottom of the hall without notes, and every time he looks up, it's at your row.",
+   "why": "Brooke now sits in this room at this hour unnamed (lecture hall Mon/Wed 9-11, theatre Tue/Thu 11-13); the line claims only \"the hall\"/\"you all\"/\"everyone\", true with her there. Stage: Brooke's theatre rows match Cross's exactly (Tue/Thu 11-13, Tue/Thu/Fri 14-18), so whenever Cross is_absent the stage is empty.",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "7dc50540207a762d",
+    "facts": "a66a26384ca488bd",
+    "facts2": "b30fe44025af3184",
+    "all": "9a1b1c67a46bf088"
+   },
+   "row_hash": "c1c0e2ac2588a579",
+   "carried": true,
+   "pass": 4
+  },
+  {
+   "row": "B10",
+   "screen": "stage_practise.practise",
+   "verdict": "PASS",
+   "line": "The seats are empty. You stand under the work light and say whatever comes into your head to the dark",
+   "why": "trigger needs Cross absent; theatre's only rows are Cross and Brooke (Brooke 11-13/14-18 Tue/Thu/Fri, same as Cross), so with Cross out the seats are empty at every minute; work light matches the theatre's empty variant",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "601103fec24e1708",
+    "facts": "f3fdaee8cfb85e6d",
+    "facts2": "f3fdaee8cfb85e6d",
+    "all": "271a448474046e50"
+   },
+   "row_hash": "c1c0e2ac2588a579",
+   "carried": true,
+   "pass": 7
   },
   {
    "row": "B10",
    "screen": "study_hall.study",
    "verdict": "PASS",
-   "line": "You find an empty row near the back, spread your notes along the seats and work through them until your neck aches. There's always more of it waiting.",
-   "why": "open whenever the hall is (weekdays 8-18, its hours); 'an empty row' holds even mid-lecture; past 18:00 the engine shows the hall's closed lines on return (NOTES 2026-11-20 P04 ruling); no past, no first time",
-   "cause": "",
+   "line": "Back row. Either sit down properly or get out. (speaker unknown)",
+   "why": "The four groups compile to one if/elseif chain (v2.py:18424-18463, built output confirms): a teacher is named only with npc_at_location AND met_<teacher>; an unmet lecturer falls to the OR group and renders as \"Stranger\" with no role (v2.py:19280-19289). Brooke and Nadia (Mon/Wed 9-11) sit in the hall unnamed; \"an empty row\" and \"a lecture goes on\" stay true with them there.",
+   "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "c1e166a2469a4da2",
-    "facts": "e55d2c2c4885f4a0",
-    "facts2": "e55d2c2c4885f4a0",
-    "all": "9f2c0299409edfd3"
+    "text": "3bdf5d62e23fc587",
+    "facts": "360934a7af72e6fd",
+    "facts2": "6460f3e4c78536c0",
+    "all": "2e507d8d99bf8962"
    },
    "row_hash": "c1c0e2ac2588a579",
-   "carried": false,
-   "pass": 3
+   "carried": true,
+   "pass": 4
   },
   {
    "row": "B11",
@@ -207,7 +262,7 @@
     "all": "9f2c0299409edfd3"
    },
    "row_hash": "1e252efd0904a971",
-   "carried": false,
+   "carried": true,
    "pass": 3
   },
   {
@@ -225,7 +280,7 @@
     "all": "9f2c0299409edfd3"
    },
    "row_hash": "fd109745c67b71d7",
-   "carried": false,
+   "carried": true,
    "pass": 3
   },
   {
@@ -243,7 +298,7 @@
     "all": "9f2c0299409edfd3"
    },
    "row_hash": "aaf6518b64dcce55",
-   "carried": false,
+   "carried": true,
    "pass": 3
   },
   {
@@ -256,7 +311,7 @@
    "note": false,
    "screen_hash": "71047d8f6bbae36e",
    "row_hash": "4d9f2ebbce9a39cc",
-   "carried": false,
+   "carried": true,
    "pass": 3
   },
   {
@@ -274,7 +329,7 @@
     "all": "9f2c0299409edfd3"
    },
    "row_hash": "4d1fce1c4523b5d4",
-   "carried": false,
+   "carried": true,
    "pass": 3
   },
   {
@@ -292,26 +347,26 @@
     "all": "9f2c0299409edfd3"
    },
    "row_hash": "ced37cb0de6e7202",
-   "carried": false,
+   "carried": true,
    "pass": 3
   },
   {
    "row": "B5",
    "screen": "study_hall.study",
-   "verdict": "FAIL",
-   "line": "You find an empty row near the back, spread your notes along the seats",
-   "why": "the screen reads the same during a lecture (Mon/Wed Hale 9-11, Pratt 11-13, Nadia 9-11; Tue/Thu Walsh 9-11, who_is_where) as in the empty hall; PLAN \u00a75 declares 'Hale: her. Nadia: Hale looking. Pratt: if she's missing' for this room, and nobody reacts",
-   "cause": "P09c1-c1",
+   "verdict": "PASS",
+   "line": "You at the back, young lady. Either take notes or take a seat down here.",
+   "why": "Each teacher, once met, now speaks to her at the back; an unmet one does too, as \"Stranger\" (\"Back row. Either sit down properly or get out.\"); with no lecture on the hall is empty and nobody is there to notice.",
+   "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "c1e166a2469a4da2",
-    "facts": "e55d2c2c4885f4a0",
-    "facts2": "e55d2c2c4885f4a0",
-    "all": "9f2c0299409edfd3"
+    "text": "3bdf5d62e23fc587",
+    "facts": "360934a7af72e6fd",
+    "facts2": "6460f3e4c78536c0",
+    "all": "2e507d8d99bf8962"
    },
    "row_hash": "efcbd1ac6a95e2f2",
-   "carried": false,
-   "pass": 3
+   "carried": true,
+   "pass": 4
   },
   {
    "row": "B6",
@@ -328,7 +383,7 @@
     "all": "9f2c0299409edfd3"
    },
    "row_hash": "0e32092e9fe64f2c",
-   "carried": false,
+   "carried": true,
    "pass": 3
   },
   {
@@ -346,26 +401,80 @@
     "all": "9f2c0299409edfd3"
    },
    "row_hash": "cef53154cc971fef",
-   "carried": false,
+   "carried": true,
    "pass": 3
+  },
+  {
+   "row": "B8",
+   "screen": "class_drama.class",
+   "verdict": "PASS",
+   "line": "Mr. Cross has you all on the stage in a line ... Everyone's watching.",
+   "why": "No garment of hers is named on the screen.",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "9741365e3550a76b",
+    "facts": "77c5977fffe46fc8",
+    "facts2": "30f91571176cc73e",
+    "all": "331e46e93c15eda9"
+   },
+   "row_hash": "80d415cf08e0ebfe",
+   "carried": true,
+   "pass": 5
+  },
+  {
+   "row": "B8",
+   "screen": "class_psych.class",
+   "verdict": "PASS",
+   "line": "Dr. Hale lectures from the bottom of the hall without notes, and every time he looks up, it's at your row.",
+   "why": "No garment named; no number.",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "7dc50540207a762d",
+    "facts": "a66a26384ca488bd",
+    "facts2": "b30fe44025af3184",
+    "all": "9a1b1c67a46bf088"
+   },
+   "row_hash": "80d415cf08e0ebfe",
+   "carried": true,
+   "pass": 4
+  },
+  {
+   "row": "B8",
+   "screen": "stage_practise.practise",
+   "verdict": "PASS",
+   "line": "max_triggers_per_day = 2; Done 30 min",
+   "why": "no garment named; no number on screen; weekdays agree with theatre hours (weekdays 9am-9pm)",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "601103fec24e1708",
+    "facts": "f3fdaee8cfb85e6d",
+    "facts2": "f3fdaee8cfb85e6d",
+    "all": "271a448474046e50"
+   },
+   "row_hash": "80d415cf08e0ebfe",
+   "carried": true,
+   "pass": 7
   },
   {
    "row": "B8",
    "screen": "study_hall.study",
    "verdict": "PASS",
-   "line": "Study in an empty row (1 hour, 5 energy)",
-   "why": "1 hour (time_progression_minutes 60) and 5 energy (costs) match PLAN \u00a78f; no garment named",
-   "cause": "",
+   "line": "You take an empty row near the back",
+   "why": "No garment and no number named.",
+   "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "c1e166a2469a4da2",
-    "facts": "e55d2c2c4885f4a0",
-    "facts2": "e55d2c2c4885f4a0",
-    "all": "9f2c0299409edfd3"
+    "text": "3bdf5d62e23fc587",
+    "facts": "360934a7af72e6fd",
+    "facts2": "6460f3e4c78536c0",
+    "all": "2e507d8d99bf8962"
    },
    "row_hash": "80d415cf08e0ebfe",
-   "carried": false,
-   "pass": 3
+   "carried": true,
+   "pass": 4
   },
   {
    "row": "B9",
@@ -377,7 +486,7 @@
    "note": false,
    "screen_hash": "71047d8f6bbae36e",
    "row_hash": "3b1fcdf549bcc558",
-   "carried": false,
+   "carried": true,
    "pass": 3
   },
   {
@@ -395,7 +504,7 @@
     "all": "9f2c0299409edfd3"
    },
    "row_hash": "657248766e62061f",
-   "carried": false,
+   "carried": true,
    "pass": 3
   },
   {
@@ -413,7 +522,7 @@
     "all": "9f2c0299409edfd3"
    },
    "row_hash": "541a03815a8d19c4",
-   "carried": false,
+   "carried": true,
    "pass": 3
   },
   {
@@ -431,7 +540,7 @@
     "all": "9f2c0299409edfd3"
    },
    "row_hash": "71c57d9a2f8fdca7",
-   "carried": false,
+   "carried": true,
    "pass": 3
   },
   {
@@ -449,7 +558,7 @@
     "all": "9f2c0299409edfd3"
    },
    "row_hash": "db808998ed69c649",
-   "carried": false,
+   "carried": true,
    "pass": 3
   },
   {
@@ -480,7 +589,7 @@
     "all": "9f2c0299409edfd3"
    },
    "row_hash": "48eae9ceae06ae00",
-   "carried": false,
+   "carried": true,
    "pass": 3
   },
   {
@@ -498,7 +607,7 @@
     "all": "9f2c0299409edfd3"
    },
    "row_hash": "65e6616cd17c7eb3",
-   "carried": false,
+   "carried": true,
    "pass": 3
   },
   {
@@ -516,7 +625,7 @@
     "all": "9f2c0299409edfd3"
    },
    "row_hash": "18d85534582def9d",
-   "carried": false,
+   "carried": true,
    "pass": 3
   },
   {
@@ -534,7 +643,7 @@
     "all": "9f2c0299409edfd3"
    },
    "row_hash": "3835fed23cc316c7",
-   "carried": false,
+   "carried": true,
    "pass": 3
   },
   {
@@ -552,7 +661,7 @@
     "all": "9f2c0299409edfd3"
    },
    "row_hash": "fde578d75b0d3620",
-   "carried": false,
+   "carried": true,
    "pass": 3
   },
   {
@@ -570,7 +679,7 @@
     "all": "9f2c0299409edfd3"
    },
    "row_hash": "5b031a6b82899cfd",
-   "carried": false,
+   "carried": true,
    "pass": 3
   },
   {
@@ -588,7 +697,7 @@
     "all": "9f2c0299409edfd3"
    },
    "row_hash": "c26c2fb5c1443dab",
-   "carried": false,
+   "carried": true,
    "pass": 3
   },
   {
@@ -606,7 +715,7 @@
     "all": "9f2c0299409edfd3"
    },
    "row_hash": "9a1ab783f9ab6731",
-   "carried": false,
+   "carried": true,
    "pass": 3
   },
   {
@@ -624,7 +733,7 @@
     "all": "9f2c0299409edfd3"
    },
    "row_hash": "b76a6583ae88c60f",
-   "carried": false,
+   "carried": true,
    "pass": 3
   },
   {
@@ -642,7 +751,7 @@
     "all": "9f2c0299409edfd3"
    },
    "row_hash": "59e008f8733a29e2",
-   "carried": false,
+   "carried": true,
    "pass": 3
   },
   {
@@ -660,7 +769,7 @@
     "all": "9f2c0299409edfd3"
    },
    "row_hash": "823e315ef0b56f94",
-   "carried": false,
+   "carried": true,
    "pass": 3
   },
   {
@@ -678,7 +787,7 @@
     "all": "9f2c0299409edfd3"
    },
    "row_hash": "8c9dc844365f81a5",
-   "carried": false,
+   "carried": true,
    "pass": 3
   },
   {
@@ -696,7 +805,7 @@
     "all": "9f2c0299409edfd3"
    },
    "row_hash": "ef34ee4a51e65d00",
-   "carried": false,
+   "carried": true,
    "pass": 3
   },
   {
@@ -714,7 +823,7 @@
     "all": "9f2c0299409edfd3"
    },
    "row_hash": "4b77685af58632a5",
-   "carried": false,
+   "carried": true,
    "pass": 3
   },
   {
@@ -732,7 +841,7 @@
     "all": "9f2c0299409edfd3"
    },
    "row_hash": "34826508394ba8c0",
-   "carried": false,
+   "carried": true,
    "pass": 3
   },
   {
@@ -750,7 +859,7 @@
     "all": "9f2c0299409edfd3"
    },
    "row_hash": "68a94621cd19c13c",
-   "carried": false,
+   "carried": true,
    "pass": 3
   },
   {
@@ -768,7 +877,7 @@
     "all": "9f2c0299409edfd3"
    },
    "row_hash": "cf8af3e56f435107",
-   "carried": false,
+   "carried": true,
    "pass": 3
   },
   {
@@ -786,7 +895,7 @@
     "all": "9f2c0299409edfd3"
    },
    "row_hash": "aca442d29c1c8146",
-   "carried": false,
+   "carried": true,
    "pass": 3
   },
   {
@@ -804,7 +913,7 @@
     "all": "9f2c0299409edfd3"
    },
    "row_hash": "ccd7a74d85c7d7fe",
-   "carried": false,
+   "carried": true,
    "pass": 3
   },
   {
@@ -822,7 +931,7 @@
     "all": "9f2c0299409edfd3"
    },
    "row_hash": "f47fc5030774db86",
-   "carried": false,
+   "carried": true,
    "pass": 3
   },
   {
@@ -840,7 +949,7 @@
     "all": "9f2c0299409edfd3"
    },
    "row_hash": "6ac94d11992c72ec",
-   "carried": false,
+   "carried": true,
    "pass": 3
   },
   {
@@ -858,7 +967,7 @@
     "all": "9f2c0299409edfd3"
    },
    "row_hash": "e4d4d230d2bd3815",
-   "carried": false,
+   "carried": true,
    "pass": 3
   },
   {
@@ -876,7 +985,7 @@
     "all": "9f2c0299409edfd3"
    },
    "row_hash": "6b5fb464471de4c7",
-   "carried": false,
+   "carried": true,
    "pass": 3
   },
   {
@@ -894,7 +1003,7 @@
     "all": "9f2c0299409edfd3"
    },
    "row_hash": "a08ace799dcefe85",
-   "carried": false,
+   "carried": true,
    "pass": 3
   },
   {
@@ -912,7 +1021,7 @@
     "all": "9f2c0299409edfd3"
    },
    "row_hash": "b8cdd5b1ce3f89ea",
-   "carried": false,
+   "carried": true,
    "pass": 3
   },
   {
@@ -930,7 +1039,7 @@
     "all": "9f2c0299409edfd3"
    },
    "row_hash": "d5758757a709b1af",
-   "carried": false,
+   "carried": true,
    "pass": 3
   },
   {
@@ -948,7 +1057,7 @@
     "all": "9f2c0299409edfd3"
    },
    "row_hash": "657a435e4ab2ba7f",
-   "carried": false,
+   "carried": true,
    "pass": 3
   },
   {
@@ -966,7 +1075,7 @@
     "all": "9f2c0299409edfd3"
    },
    "row_hash": "0bae50d6c4d47f7c",
-   "carried": false,
+   "carried": true,
    "pass": 3
   },
   {
@@ -984,7 +1093,7 @@
     "all": "9f2c0299409edfd3"
    },
    "row_hash": "63160eb49f7bb566",
-   "carried": false,
+   "carried": true,
    "pass": 3
   },
   {
@@ -1002,7 +1111,7 @@
     "all": "9f2c0299409edfd3"
    },
    "row_hash": "923a40b5ad4048fd",
-   "carried": false,
+   "carried": true,
    "pass": 3
   },
   {
@@ -1020,7 +1129,7 @@
     "all": "9f2c0299409edfd3"
    },
    "row_hash": "3ce0dbe053c4b2c9",
-   "carried": false,
+   "carried": true,
    "pass": 3
   },
   {
@@ -1038,7 +1147,7 @@
     "all": "9f2c0299409edfd3"
    },
    "row_hash": "bcb1cf8813579ab9",
-   "carried": false,
+   "carried": true,
    "pass": 3
   },
   {
@@ -1056,7 +1165,7 @@
     "all": "9f2c0299409edfd3"
    },
    "row_hash": "1bc289f9a5b378d6",
-   "carried": false,
+   "carried": true,
    "pass": 3
   },
   {
@@ -1074,7 +1183,7 @@
     "all": "9f2c0299409edfd3"
    },
    "row_hash": "7e128897077ecee6",
-   "carried": false,
+   "carried": true,
    "pass": 3
   },
   {
@@ -1092,7 +1201,7 @@
     "all": "9f2c0299409edfd3"
    },
    "row_hash": "59b8d8d24f0c7c38",
-   "carried": false,
+   "carried": true,
    "pass": 3
   },
   {
@@ -1123,7 +1232,7 @@
     "all": "9f2c0299409edfd3"
    },
    "row_hash": "b01ad555668aba2d",
-   "carried": false,
+   "carried": true,
    "pass": 3
   },
   {
@@ -1141,44 +1250,152 @@
     "all": "9f2c0299409edfd3"
    },
    "row_hash": "50dbf74577a813c7",
-   "carried": false,
+   "carried": true,
    "pass": 3
+  },
+  {
+   "row": "C460",
+   "screen": "class_drama.class",
+   "verdict": "PASS",
+   "line": "Mr. Cross has you all on the stage in a line ... Everyone's watching.",
+   "why": "Every claim (Cross there, the room watching, the line said three times) holds on any visit in the window; 'Next time, I'll show you.' is a promise in his voice on a repeatable.",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "9741365e3550a76b",
+    "facts": "77c5977fffe46fc8",
+    "facts2": "30f91571176cc73e",
+    "all": "331e46e93c15eda9"
+   },
+   "row_hash": "67e48e60d5053a2e",
+   "carried": true,
+   "pass": 5
+  },
+  {
+   "row": "C460",
+   "screen": "class_psych.class",
+   "verdict": "PASS",
+   "line": "Dr. Hale lectures from the bottom of the hall without notes, and every time he looks up, it's at your row.",
+   "why": "True on every visit with the new rows: nobody new is named, and \"empty\" holds on the stage because Brooke is only there with Cross.",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "7dc50540207a762d",
+    "facts": "a66a26384ca488bd",
+    "facts2": "b30fe44025af3184",
+    "all": "9a1b1c67a46bf088"
+   },
+   "row_hash": "67e48e60d5053a2e",
+   "carried": true,
+   "pass": 4
+  },
+  {
+   "row": "C460",
+   "screen": "stage_practise.practise",
+   "verdict": "PASS",
+   "line": "The seats are empty. You stand under the work light and say whatever comes into your head to the dark",
+   "why": "every claim (empty seats, work light, nobody there) true on every reachable visit per who_is_where",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "601103fec24e1708",
+    "facts": "f3fdaee8cfb85e6d",
+    "facts2": "f3fdaee8cfb85e6d",
+    "all": "271a448474046e50"
+   },
+   "row_hash": "67e48e60d5053a2e",
+   "carried": true,
+   "pass": 7
   },
   {
    "row": "C460",
    "screen": "study_hall.study",
    "verdict": "PASS",
-   "line": "You find an empty row near the back, spread your notes along the seats and work through them until your neck aches. There's always more of it waiting.",
-   "why": "true at every minute the hall is open, including during a lecture (an empty row near the back)",
-   "cause": "",
+   "line": "Miss @player. The front row's free, if you're staying.",
+   "why": "No teacher's name shows before met_<teacher>; teacher hours never overlap (who_is_where: Hale Mon/Wed 9-11, Pratt Mon/Wed 11-13, Walsh Tue/Thu 9-11), so one line per lecture.",
+   "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "c1e166a2469a4da2",
-    "facts": "e55d2c2c4885f4a0",
-    "facts2": "e55d2c2c4885f4a0",
-    "all": "9f2c0299409edfd3"
+    "text": "3bdf5d62e23fc587",
+    "facts": "360934a7af72e6fd",
+    "facts2": "6460f3e4c78536c0",
+    "all": "2e507d8d99bf8962"
    },
    "row_hash": "67e48e60d5053a2e",
-   "carried": false,
-   "pass": 3
+   "carried": true,
+   "pass": 4
+  },
+  {
+   "row": "C461",
+   "screen": "class_drama.class",
+   "verdict": "PASS",
+   "line": "Again. Louder, new face. Make them look at you.",
+   "why": "Texture and Cross's own dialogue; 'new face' is his term of address, allowed under the rule.",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "9741365e3550a76b",
+    "facts": "77c5977fffe46fc8",
+    "facts2": "30f91571176cc73e",
+    "all": "331e46e93c15eda9"
+   },
+   "row_hash": "310706ee076318f2",
+   "carried": true,
+   "pass": 5
+  },
+  {
+   "row": "C461",
+   "screen": "class_psych.class",
+   "verdict": "PASS",
+   "line": "Dr. Hale lectures from the bottom of the hall without notes, and every time he looks up, it's at your row.",
+   "why": "Texture only; the teacher's line fits his cast entry.",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "7dc50540207a762d",
+    "facts": "a66a26384ca488bd",
+    "facts2": "b30fe44025af3184",
+    "all": "9a1b1c67a46bf088"
+   },
+   "row_hash": "310706ee076318f2",
+   "carried": true,
+   "pass": 4
+  },
+  {
+   "row": "C461",
+   "screen": "stage_practise.practise",
+   "verdict": "PASS",
+   "line": "louder than you'd ever dare with anyone there",
+   "why": "her opinion, on her voice; texture can't clash",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "601103fec24e1708",
+    "facts": "f3fdaee8cfb85e6d",
+    "facts2": "f3fdaee8cfb85e6d",
+    "all": "271a448474046e50"
+   },
+   "row_hash": "310706ee076318f2",
+   "carried": true,
+   "pass": 7
   },
   {
    "row": "C461",
    "screen": "study_hall.study",
    "verdict": "PASS",
-   "line": "You find an empty row near the back, spread your notes along the seats and work through them until your neck aches. There's always more of it waiting.",
-   "why": "texture that can't clash",
-   "cause": "",
+   "line": "Either join us, dear, or close the door quietly.",
+   "why": "Each line fits its cast entry: Hale's \"young lady\", Pratt's \"Miss @player\", Walsh's \"dear\", as in P15/P16.",
+   "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "c1e166a2469a4da2",
-    "facts": "e55d2c2c4885f4a0",
-    "facts2": "e55d2c2c4885f4a0",
-    "all": "9f2c0299409edfd3"
+    "text": "3bdf5d62e23fc587",
+    "facts": "360934a7af72e6fd",
+    "facts2": "6460f3e4c78536c0",
+    "all": "2e507d8d99bf8962"
    },
    "row_hash": "310706ee076318f2",
-   "carried": false,
-   "pass": 3
+   "carried": true,
+   "pass": 4
   },
   {
    "row": "C519",
@@ -1195,7 +1412,7 @@
     "all": "9f2c0299409edfd3"
    },
    "row_hash": "e78502f7aa28746d",
-   "carried": false,
+   "carried": true,
    "pass": 3
   },
   {
@@ -1213,7 +1430,7 @@
     "all": "9f2c0299409edfd3"
    },
    "row_hash": "880eaf1315fbaa0b",
-   "carried": false,
+   "carried": true,
    "pass": 3
   },
   {
@@ -1232,15 +1449,15 @@
   {
    "row": "C596",
    "screen": "*",
-   "verdict": "N/A",
-   "line": "",
-   "why": "none is a talk screen",
+   "verdict": "PASS",
+   "line": "class_*, study_*, stage_practise",
+   "why": "no person's menu or talk screen; no picture",
    "cause": null,
    "note": true,
-   "screen_hash": "04a09a4d8fcf731b",
-   "row_hash": "6d9bba989a2b9666",
+   "screen_hash": "2b5a90aa4dfe118f",
+   "row_hash": "e5f7e6cf2d01613d",
    "carried": true,
-   "pass": 1
+   "pass": 6
   },
   {
    "row": "C620",
@@ -1257,7 +1474,7 @@
     "all": "9f2c0299409edfd3"
    },
    "row_hash": "76250e48ada2b843",
-   "carried": false,
+   "carried": true,
    "pass": 3
   },
   {
@@ -1340,7 +1557,7 @@
     "all": "9f2c0299409edfd3"
    },
    "row_hash": "da4c173ea0935aca",
-   "carried": false,
+   "carried": true,
    "pass": 3
   },
   {
@@ -1358,7 +1575,7 @@
     "all": "9f2c0299409edfd3"
    },
    "row_hash": "e158aaf055cb61d6",
-   "carried": false,
+   "carried": true,
    "pass": 3
   },
   {
@@ -1376,7 +1593,7 @@
     "all": "9f2c0299409edfd3"
    },
    "row_hash": "40e85f1ae92f1e71",
-   "carried": false,
+   "carried": true,
    "pass": 3
   },
   {
@@ -1394,7 +1611,7 @@
     "all": "9f2c0299409edfd3"
    },
    "row_hash": "f6b6f78a8f2e5ed7",
-   "carried": false,
+   "carried": true,
    "pass": 3
   },
   {
@@ -1412,7 +1629,7 @@
     "all": "9f2c0299409edfd3"
    },
    "row_hash": "ff9aa31c11e5d50f",
-   "carried": false,
+   "carried": true,
    "pass": 3
   },
   {
@@ -1430,7 +1647,7 @@
     "all": "9f2c0299409edfd3"
    },
    "row_hash": "563e3d25c3219dd0",
-   "carried": false,
+   "carried": true,
    "pass": 3
   },
   {
@@ -1448,7 +1665,7 @@
     "all": "9f2c0299409edfd3"
    },
    "row_hash": "599aac6293908bc4",
-   "carried": false,
+   "carried": true,
    "pass": 3
   },
   {
@@ -1466,7 +1683,7 @@
     "all": "9f2c0299409edfd3"
    },
    "row_hash": "4141d9e5e24362c3",
-   "carried": false,
+   "carried": true,
    "pass": 3
   },
   {
@@ -1484,7 +1701,7 @@
     "all": "9f2c0299409edfd3"
    },
    "row_hash": "b56360a1040688cf",
-   "carried": false,
+   "carried": true,
    "pass": 3
   },
   {
@@ -1502,62 +1719,170 @@
     "all": "9f2c0299409edfd3"
    },
    "row_hash": "bad76e5963432385",
-   "carried": false,
+   "carried": true,
    "pass": 3
   },
   {
    "row": "C795",
    "screen": "study_hall.study",
    "verdict": "PASS",
-   "line": "You find an empty row near the back, spread your notes along the seats and work through them until your neck aches. There's always more of it waiting.",
-   "why": "row adds a menu item, no re-entry text",
+   "line": "\"Down at the front, a lecture goes on without you.\" (lecturer-present groups)",
+   "why": "a study beat, not room text; lecturers named only when present and met",
    "cause": null,
    "note": true,
    "screen_hash": {
-    "text": "c1e166a2469a4da2",
-    "facts": "e55d2c2c4885f4a0",
-    "facts2": "e55d2c2c4885f4a0",
-    "all": "9f2c0299409edfd3"
+    "text": "3bdf5d62e23fc587",
+    "facts": "360934a7af72e6fd",
+    "facts2": "6460f3e4c78536c0",
+    "all": "2e507d8d99bf8962"
    },
-   "row_hash": "6c9eb17d99266791",
-   "carried": false,
-   "pass": 3
+   "row_hash": "34139e6a6914e171",
+   "carried": true,
+   "pass": 6
   },
   {
    "row": "C804",
    "screen": "study_hall.study",
-   "verdict": "FAIL",
-   "line": "You find an empty row near the back, spread your notes along the seats and work through them until your neck aches. There's always more of it waiting.",
-   "why": "same screen whether the hall is empty or a teacher is lecturing with Nadia there; text never changes with who is there",
-   "cause": "P09c1-c1",
+   "verdict": "PASS",
+   "line": "\"You at the back, young lady...\" (Hale present + met)",
+   "why": "no room-text line per person; faces carry presence",
+   "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "c1e166a2469a4da2",
-    "facts": "e55d2c2c4885f4a0",
-    "facts2": "e55d2c2c4885f4a0",
-    "all": "9f2c0299409edfd3"
+    "text": "3bdf5d62e23fc587",
+    "facts": "360934a7af72e6fd",
+    "facts2": "6460f3e4c78536c0",
+    "all": "2e507d8d99bf8962"
    },
-   "row_hash": "810ef8e803cb09dd",
-   "carried": false,
-   "pass": 3
+   "row_hash": "5358489178bff0a4",
+   "carried": true,
+   "pass": 6
+  },
+  {
+   "row": "C889",
+   "screen": "class_drama.class",
+   "verdict": "PASS",
+   "line": "Mr. Cross has you all on the stage in a line, then one by one at the front. ... Everyone's watching.",
+   "why": "Label names no clock time and no duration.",
+   "cause": null,
+   "note": true,
+   "screen_hash": {
+    "text": "93fc476b832b1610",
+    "facts": "77c5977fffe46fc8",
+    "facts2": "30f91571176cc73e",
+    "all": "2bbe20328eb344a2"
+   },
+   "row_hash": "def1348d483d0c40",
+   "carried": true,
+   "pass": 4
+  },
+  {
+   "row": "C889",
+   "screen": "class_psych.class",
+   "verdict": "PASS",
+   "line": "Dr. Hale lectures from the bottom of the hall without notes, and every time he looks up, it's at your row.",
+   "why": "Label names no clock time and no duration.",
+   "cause": null,
+   "note": true,
+   "screen_hash": {
+    "text": "7dc50540207a762d",
+    "facts": "a66a26384ca488bd",
+    "facts2": "b30fe44025af3184",
+    "all": "9a1b1c67a46bf088"
+   },
+   "row_hash": "def1348d483d0c40",
+   "carried": true,
+   "pass": 4
+  },
+  {
+   "row": "C889",
+   "screen": "stage_practise.practise",
+   "verdict": "PASS",
+   "line": "The seats are empty. You stand under the work light and say whatever comes into your head to the dark",
+   "why": "Label names no clock time and no duration.",
+   "cause": null,
+   "note": true,
+   "screen_hash": {
+    "text": "f8f3554a00e1d4a5",
+    "facts": "f3fdaee8cfb85e6d",
+    "facts2": "f3fdaee8cfb85e6d",
+    "all": "67afabcc82d1e0e9"
+   },
+   "row_hash": "def1348d483d0c40",
+   "carried": true,
+   "pass": 4
   },
   {
    "row": "C889",
    "screen": "study_hall.study",
-   "verdict": "FAIL",
-   "line": "Study in an empty row (1 hour, 5 energy)",
-   "why": "note: the label states a duration (1 hour); the row now says it states none (LO 2026-11-24, clock.md:11)",
+   "verdict": "PASS",
+   "line": "name = \"Study in an empty row\"",
+   "why": "The label names no clock time and no duration; the real spend (60 min on Done, 5 energy cost) equals the costs.",
    "cause": null,
    "note": true,
    "screen_hash": {
-    "text": "c1e166a2469a4da2",
-    "facts": "e55d2c2c4885f4a0",
-    "facts2": "e55d2c2c4885f4a0",
-    "all": "9f2c0299409edfd3"
+    "text": "6fc0d1f63b457278",
+    "facts": "360934a7af72e6fd",
+    "facts2": "6460f3e4c78536c0",
+    "all": "28c3324ed9c2222d"
    },
    "row_hash": "def1348d483d0c40",
-   "carried": false,
-   "pass": 3
+   "carried": true,
+   "pass": 4
+  },
+  {
+   "row": "C892",
+   "screen": "class_drama.class",
+   "verdict": "PASS",
+   "line": "Mr. Cross has you all on the stage in a line, then one by one at the front. ... Everyone's watching.",
+   "why": "No hour inside the act.",
+   "cause": null,
+   "note": true,
+   "screen_hash": {
+    "text": "93fc476b832b1610",
+    "facts": "77c5977fffe46fc8",
+    "facts2": "30f91571176cc73e",
+    "all": "2bbe20328eb344a2"
+   },
+   "row_hash": "5c890033f6ac38b8",
+   "carried": true,
+   "pass": 4
+  },
+  {
+   "row": "C892",
+   "screen": "class_psych.class",
+   "verdict": "PASS",
+   "line": "Dr. Hale lectures from the bottom of the hall without notes, and every time he looks up, it's at your row.",
+   "why": "No hour inside the act.",
+   "cause": null,
+   "note": true,
+   "screen_hash": {
+    "text": "7dc50540207a762d",
+    "facts": "a66a26384ca488bd",
+    "facts2": "b30fe44025af3184",
+    "all": "9a1b1c67a46bf088"
+   },
+   "row_hash": "5c890033f6ac38b8",
+   "carried": true,
+   "pass": 4
+  },
+  {
+   "row": "C892",
+   "screen": "stage_practise.practise",
+   "verdict": "PASS",
+   "line": "The seats are empty. You stand under the work light and say whatever comes into your head to the dark",
+   "why": "No hour inside the act.",
+   "cause": null,
+   "note": true,
+   "screen_hash": {
+    "text": "f8f3554a00e1d4a5",
+    "facts": "f3fdaee8cfb85e6d",
+    "facts2": "f3fdaee8cfb85e6d",
+    "all": "67afabcc82d1e0e9"
+   },
+   "row_hash": "5c890033f6ac38b8",
+   "carried": true,
+   "pass": 4
   },
   {
    "row": "C892",
@@ -1574,8 +1899,62 @@
     "all": "9f2c0299409edfd3"
    },
    "row_hash": "5c890033f6ac38b8",
-   "carried": false,
+   "carried": true,
    "pass": 3
+  },
+  {
+   "row": "C897",
+   "screen": "class_drama.class",
+   "verdict": "PASS",
+   "line": "Mr. Cross has you all on the stage in a line, then one by one at the front. ... Everyone's watching.",
+   "why": "No time on rooms; the 120/30 minutes are the activity's own spend.",
+   "cause": null,
+   "note": true,
+   "screen_hash": {
+    "text": "93fc476b832b1610",
+    "facts": "77c5977fffe46fc8",
+    "facts2": "30f91571176cc73e",
+    "all": "2bbe20328eb344a2"
+   },
+   "row_hash": "265ece64add83676",
+   "carried": true,
+   "pass": 4
+  },
+  {
+   "row": "C897",
+   "screen": "class_psych.class",
+   "verdict": "PASS",
+   "line": "Dr. Hale lectures from the bottom of the hall without notes, and every time he looks up, it's at your row.",
+   "why": "No time on rooms; the 120/30 minutes are the activity's own spend.",
+   "cause": null,
+   "note": true,
+   "screen_hash": {
+    "text": "7dc50540207a762d",
+    "facts": "a66a26384ca488bd",
+    "facts2": "b30fe44025af3184",
+    "all": "9a1b1c67a46bf088"
+   },
+   "row_hash": "265ece64add83676",
+   "carried": true,
+   "pass": 4
+  },
+  {
+   "row": "C897",
+   "screen": "stage_practise.practise",
+   "verdict": "PASS",
+   "line": "The seats are empty. You stand under the work light and say whatever comes into your head to the dark",
+   "why": "No time on rooms; the 120/30 minutes are the activity's own spend.",
+   "cause": null,
+   "note": true,
+   "screen_hash": {
+    "text": "f8f3554a00e1d4a5",
+    "facts": "f3fdaee8cfb85e6d",
+    "facts2": "f3fdaee8cfb85e6d",
+    "all": "67afabcc82d1e0e9"
+   },
+   "row_hash": "265ece64add83676",
+   "carried": true,
+   "pass": 4
   },
   {
    "row": "C897",
@@ -1592,8 +1971,62 @@
     "all": "9f2c0299409edfd3"
    },
    "row_hash": "265ece64add83676",
-   "carried": false,
+   "carried": true,
    "pass": 3
+  },
+  {
+   "row": "C900",
+   "screen": "class_drama.class",
+   "verdict": "PASS",
+   "line": "Mr. Cross has you all on the stage in a line, then one by one at the front. ... Everyone's watching.",
+   "why": "The beat says no time.",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "93fc476b832b1610",
+    "facts": "77c5977fffe46fc8",
+    "facts2": "30f91571176cc73e",
+    "all": "2bbe20328eb344a2"
+   },
+   "row_hash": "6372efb027eb2034",
+   "carried": true,
+   "pass": 4
+  },
+  {
+   "row": "C900",
+   "screen": "class_psych.class",
+   "verdict": "PASS",
+   "line": "Dr. Hale lectures from the bottom of the hall without notes, and every time he looks up, it's at your row.",
+   "why": "The beat says no time.",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "7dc50540207a762d",
+    "facts": "a66a26384ca488bd",
+    "facts2": "b30fe44025af3184",
+    "all": "9a1b1c67a46bf088"
+   },
+   "row_hash": "6372efb027eb2034",
+   "carried": true,
+   "pass": 4
+  },
+  {
+   "row": "C900",
+   "screen": "stage_practise.practise",
+   "verdict": "PASS",
+   "line": "The seats are empty. You stand under the work light and say whatever comes into your head to the dark",
+   "why": "The beat says no time.",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "f8f3554a00e1d4a5",
+    "facts": "f3fdaee8cfb85e6d",
+    "facts2": "f3fdaee8cfb85e6d",
+    "all": "67afabcc82d1e0e9"
+   },
+   "row_hash": "6372efb027eb2034",
+   "carried": true,
+   "pass": 4
   },
   {
    "row": "C900",
@@ -1610,8 +2043,62 @@
     "all": "9f2c0299409edfd3"
    },
    "row_hash": "6372efb027eb2034",
-   "carried": false,
+   "carried": true,
    "pass": 3
+  },
+  {
+   "row": "C902",
+   "screen": "class_drama.class",
+   "verdict": "PASS",
+   "line": "Mr. Cross has you all on the stage in a line, then one by one at the front. ... Everyone's watching.",
+   "why": "Read at the last minute of its window, still true.",
+   "cause": null,
+   "note": true,
+   "screen_hash": {
+    "text": "93fc476b832b1610",
+    "facts": "77c5977fffe46fc8",
+    "facts2": "30f91571176cc73e",
+    "all": "2bbe20328eb344a2"
+   },
+   "row_hash": "df5ed7a36dbc74e4",
+   "carried": true,
+   "pass": 4
+  },
+  {
+   "row": "C902",
+   "screen": "class_psych.class",
+   "verdict": "PASS",
+   "line": "Dr. Hale lectures from the bottom of the hall without notes, and every time he looks up, it's at your row.",
+   "why": "Read at the last minute of its window, still true.",
+   "cause": null,
+   "note": true,
+   "screen_hash": {
+    "text": "7dc50540207a762d",
+    "facts": "a66a26384ca488bd",
+    "facts2": "b30fe44025af3184",
+    "all": "9a1b1c67a46bf088"
+   },
+   "row_hash": "df5ed7a36dbc74e4",
+   "carried": true,
+   "pass": 4
+  },
+  {
+   "row": "C902",
+   "screen": "stage_practise.practise",
+   "verdict": "PASS",
+   "line": "The seats are empty. You stand under the work light and say whatever comes into your head to the dark",
+   "why": "Read at the last minute of its window, still true.",
+   "cause": null,
+   "note": true,
+   "screen_hash": {
+    "text": "f8f3554a00e1d4a5",
+    "facts": "f3fdaee8cfb85e6d",
+    "facts2": "f3fdaee8cfb85e6d",
+    "all": "67afabcc82d1e0e9"
+   },
+   "row_hash": "df5ed7a36dbc74e4",
+   "carried": true,
+   "pass": 4
   },
   {
    "row": "C902",
@@ -1628,8 +2115,62 @@
     "all": "9f2c0299409edfd3"
    },
    "row_hash": "df5ed7a36dbc74e4",
-   "carried": false,
+   "carried": true,
    "pass": 3
+  },
+  {
+   "row": "C903",
+   "screen": "class_drama.class",
+   "verdict": "PASS",
+   "line": "Mr. Cross has you all on the stage in a line, then one by one at the front. ... Everyone's watching.",
+   "why": "No weekday named in the beat (Psychology's greyed line names its days as a timetable on a sign, true every visit).",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "93fc476b832b1610",
+    "facts": "77c5977fffe46fc8",
+    "facts2": "30f91571176cc73e",
+    "all": "2bbe20328eb344a2"
+   },
+   "row_hash": "4f83b0b5eb45f71b",
+   "carried": true,
+   "pass": 4
+  },
+  {
+   "row": "C903",
+   "screen": "class_psych.class",
+   "verdict": "PASS",
+   "line": "Dr. Hale lectures from the bottom of the hall without notes, and every time he looks up, it's at your row.",
+   "why": "No weekday named in the beat (Psychology's greyed line names its days as a timetable on a sign, true every visit).",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "7dc50540207a762d",
+    "facts": "a66a26384ca488bd",
+    "facts2": "b30fe44025af3184",
+    "all": "9a1b1c67a46bf088"
+   },
+   "row_hash": "4f83b0b5eb45f71b",
+   "carried": true,
+   "pass": 4
+  },
+  {
+   "row": "C903",
+   "screen": "stage_practise.practise",
+   "verdict": "PASS",
+   "line": "The seats are empty. You stand under the work light and say whatever comes into your head to the dark",
+   "why": "No weekday named in the beat (Psychology's greyed line names its days as a timetable on a sign, true every visit).",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "f8f3554a00e1d4a5",
+    "facts": "f3fdaee8cfb85e6d",
+    "facts2": "f3fdaee8cfb85e6d",
+    "all": "67afabcc82d1e0e9"
+   },
+   "row_hash": "4f83b0b5eb45f71b",
+   "carried": true,
+   "pass": 4
   },
   {
    "row": "C903",
@@ -1646,8 +2187,62 @@
     "all": "9f2c0299409edfd3"
    },
    "row_hash": "4f83b0b5eb45f71b",
-   "carried": false,
+   "carried": true,
    "pass": 3
+  },
+  {
+   "row": "C906",
+   "screen": "class_drama.class",
+   "verdict": "PASS",
+   "line": "Mr. Cross has you all on the stage in a line, then one by one at the front. ... Everyone's watching.",
+   "why": "No \"till X\" on the label.",
+   "cause": null,
+   "note": true,
+   "screen_hash": {
+    "text": "93fc476b832b1610",
+    "facts": "77c5977fffe46fc8",
+    "facts2": "30f91571176cc73e",
+    "all": "2bbe20328eb344a2"
+   },
+   "row_hash": "71713a7e7ae739e7",
+   "carried": true,
+   "pass": 4
+  },
+  {
+   "row": "C906",
+   "screen": "class_psych.class",
+   "verdict": "PASS",
+   "line": "Dr. Hale lectures from the bottom of the hall without notes, and every time he looks up, it's at your row.",
+   "why": "No \"till X\" on the label.",
+   "cause": null,
+   "note": true,
+   "screen_hash": {
+    "text": "7dc50540207a762d",
+    "facts": "a66a26384ca488bd",
+    "facts2": "b30fe44025af3184",
+    "all": "9a1b1c67a46bf088"
+   },
+   "row_hash": "71713a7e7ae739e7",
+   "carried": true,
+   "pass": 4
+  },
+  {
+   "row": "C906",
+   "screen": "stage_practise.practise",
+   "verdict": "PASS",
+   "line": "The seats are empty. You stand under the work light and say whatever comes into your head to the dark",
+   "why": "No \"till X\" on the label.",
+   "cause": null,
+   "note": true,
+   "screen_hash": {
+    "text": "f8f3554a00e1d4a5",
+    "facts": "f3fdaee8cfb85e6d",
+    "facts2": "f3fdaee8cfb85e6d",
+    "all": "67afabcc82d1e0e9"
+   },
+   "row_hash": "71713a7e7ae739e7",
+   "carried": true,
+   "pass": 4
   },
   {
    "row": "C906",
@@ -1664,26 +2259,134 @@
     "all": "9f2c0299409edfd3"
    },
    "row_hash": "71713a7e7ae739e7",
-   "carried": false,
+   "carried": true,
    "pass": 3
   },
   {
    "row": "C910",
-   "screen": "study_hall.study",
-   "verdict": "FAIL",
-   "line": "Study in an empty row (1 hour, 5 energy)",
-   "why": "note: the button says its time and energy; the row now says a button says no time and no energy, money only (LO 2026-11-24, clock.md:19)",
+   "screen": "class_drama.class",
+   "verdict": "PASS",
+   "line": "Mr. Cross has you all on the stage in a line, then one by one at the front. ... Everyone's watching.",
+   "why": "The written button says no time and no energy; a cost-blocked \"(10 Energy)\" is the engine tag clock.md rule 1 keeps.",
    "cause": null,
    "note": true,
    "screen_hash": {
-    "text": "c1e166a2469a4da2",
-    "facts": "e55d2c2c4885f4a0",
-    "facts2": "e55d2c2c4885f4a0",
-    "all": "9f2c0299409edfd3"
+    "text": "93fc476b832b1610",
+    "facts": "77c5977fffe46fc8",
+    "facts2": "30f91571176cc73e",
+    "all": "2bbe20328eb344a2"
    },
    "row_hash": "d5a109f1ef88419a",
-   "carried": false,
-   "pass": 3
+   "carried": true,
+   "pass": 4
+  },
+  {
+   "row": "C910",
+   "screen": "class_psych.class",
+   "verdict": "PASS",
+   "line": "Dr. Hale lectures from the bottom of the hall without notes, and every time he looks up, it's at your row.",
+   "why": "The written button says no time and no energy; a cost-blocked \"(10 Energy)\" is the engine tag clock.md rule 1 keeps.",
+   "cause": null,
+   "note": true,
+   "screen_hash": {
+    "text": "7dc50540207a762d",
+    "facts": "a66a26384ca488bd",
+    "facts2": "b30fe44025af3184",
+    "all": "9a1b1c67a46bf088"
+   },
+   "row_hash": "d5a109f1ef88419a",
+   "carried": true,
+   "pass": 4
+  },
+  {
+   "row": "C910",
+   "screen": "stage_practise.practise",
+   "verdict": "PASS",
+   "line": "The seats are empty. You stand under the work light and say whatever comes into your head to the dark",
+   "why": "The written button says no time and no energy; a cost-blocked \"(10 Energy)\" is the engine tag clock.md rule 1 keeps.",
+   "cause": null,
+   "note": true,
+   "screen_hash": {
+    "text": "f8f3554a00e1d4a5",
+    "facts": "f3fdaee8cfb85e6d",
+    "facts2": "f3fdaee8cfb85e6d",
+    "all": "67afabcc82d1e0e9"
+   },
+   "row_hash": "d5a109f1ef88419a",
+   "carried": true,
+   "pass": 4
+  },
+  {
+   "row": "C910",
+   "screen": "study_hall.study",
+   "verdict": "PASS",
+   "line": "Study in an empty row / Done",
+   "why": "The written labels carry no time or energy. The \"(5 Energy)\" a cost-blocked row shows is the engine's own tag, which craft/clock.md rule 1 now keeps (\"The engine's own tags stay: a greyed row's cost when she can't afford it\").",
+   "cause": null,
+   "note": true,
+   "screen_hash": {
+    "text": "3bdf5d62e23fc587",
+    "facts": "360934a7af72e6fd",
+    "facts2": "6460f3e4c78536c0",
+    "all": "2e507d8d99bf8962"
+   },
+   "row_hash": "d5a109f1ef88419a",
+   "carried": true,
+   "pass": 4
+  },
+  {
+   "row": "C913",
+   "screen": "class_drama.class",
+   "verdict": "PASS",
+   "line": "cooldown_message = \"Tuesday and Thursday at 11am.\"",
+   "why": "show_when_blocked plus cooldown_message: out of its slot the row stays on the Theatre as a dimmed line with its hours (v2.py:6716-6720, onlyTheClockShut v2.py:6079 drops the weekday and time items).",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "9741365e3550a76b",
+    "facts": "77c5977fffe46fc8",
+    "facts2": "30f91571176cc73e",
+    "all": "331e46e93c15eda9"
+   },
+   "row_hash": "c750f9b6ab4ace14",
+   "carried": true,
+   "pass": 5
+  },
+  {
+   "row": "C913",
+   "screen": "class_psych.class",
+   "verdict": "PASS",
+   "line": "Dr. Hale lectures from the bottom of the hall without notes, and every time he looks up, it's at your row.",
+   "why": "It greys out of hours: Psychology with its timetable cooldown_message; the stage with show_when_blocked and its cooldown/locked text, open whenever the theatre is.",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "7dc50540207a762d",
+    "facts": "a66a26384ca488bd",
+    "facts2": "b30fe44025af3184",
+    "all": "9a1b1c67a46bf088"
+   },
+   "row_hash": "c750f9b6ab4ace14",
+   "carried": true,
+   "pass": 4
+  },
+  {
+   "row": "C913",
+   "screen": "stage_practise.practise",
+   "verdict": "PASS",
+   "line": "The seats are empty. You stand under the work light and say whatever comes into your head to the dark",
+   "why": "It greys out of hours: Psychology with its timetable cooldown_message; the stage with show_when_blocked and its cooldown/locked text, open whenever the theatre is.",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "f8f3554a00e1d4a5",
+    "facts": "f3fdaee8cfb85e6d",
+    "facts2": "f3fdaee8cfb85e6d",
+    "all": "67afabcc82d1e0e9"
+   },
+   "row_hash": "c750f9b6ab4ace14",
+   "carried": true,
+   "pass": 4
   },
   {
    "row": "C913",
@@ -1700,8 +2403,62 @@
     "all": "9f2c0299409edfd3"
    },
    "row_hash": "c750f9b6ab4ace14",
-   "carried": false,
+   "carried": true,
    "pass": 3
+  },
+  {
+   "row": "C914",
+   "screen": "class_drama.class",
+   "verdict": "PASS",
+   "line": "Mr. Cross has you all on the stage in a line, then one by one at the front. ... Everyone's watching.",
+   "why": "It never shows hours, so it never shows them wrongly; the missing hours are C913.",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "93fc476b832b1610",
+    "facts": "77c5977fffe46fc8",
+    "facts2": "30f91571176cc73e",
+    "all": "2bbe20328eb344a2"
+   },
+   "row_hash": "bd07273d5822f34f",
+   "carried": true,
+   "pass": 4
+  },
+  {
+   "row": "C914",
+   "screen": "class_psych.class",
+   "verdict": "PASS",
+   "line": "Dr. Hale lectures from the bottom of the hall without notes, and every time he looks up, it's at your row.",
+   "why": "Hours show only when the clock alone shut it (setup.onlyTheClockShut; met_hale hides it before P15).",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "7dc50540207a762d",
+    "facts": "a66a26384ca488bd",
+    "facts2": "b30fe44025af3184",
+    "all": "9a1b1c67a46bf088"
+   },
+   "row_hash": "bd07273d5822f34f",
+   "carried": true,
+   "pass": 4
+  },
+  {
+   "row": "C914",
+   "screen": "stage_practise.practise",
+   "verdict": "PASS",
+   "line": "The seats are empty. You stand under the work light and say whatever comes into your head to the dark",
+   "why": "Hours show only when the clock alone shut it (setup.onlyTheClockShut; met_hale hides it before P15).",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "f8f3554a00e1d4a5",
+    "facts": "f3fdaee8cfb85e6d",
+    "facts2": "f3fdaee8cfb85e6d",
+    "all": "67afabcc82d1e0e9"
+   },
+   "row_hash": "bd07273d5822f34f",
+   "carried": true,
+   "pass": 4
   },
   {
    "row": "C914",
@@ -1718,8 +2475,62 @@
     "all": "9f2c0299409edfd3"
    },
    "row_hash": "bd07273d5822f34f",
-   "carried": false,
+   "carried": true,
    "pass": 3
+  },
+  {
+   "row": "C916",
+   "screen": "class_drama.class",
+   "verdict": "PASS",
+   "line": "Go to drama",
+   "why": "A class she chooses now carries its hours as a greyed line; hidden only until met_cross, which is a flag, not the clock (onlyTheClockShut returns false, no locked_text, so hidden: v2.py:6716-6727).",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "9741365e3550a76b",
+    "facts": "77c5977fffe46fc8",
+    "facts2": "30f91571176cc73e",
+    "all": "331e46e93c15eda9"
+   },
+   "row_hash": "7b2bb0dfdbcfe946",
+   "carried": true,
+   "pass": 5
+  },
+  {
+   "row": "C916",
+   "screen": "class_psych.class",
+   "verdict": "PASS",
+   "line": "Dr. Hale lectures from the bottom of the hall without notes, and every time he looks up, it's at your row.",
+   "why": "A chosen activity, greyed, not hidden.",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "7dc50540207a762d",
+    "facts": "a66a26384ca488bd",
+    "facts2": "b30fe44025af3184",
+    "all": "9a1b1c67a46bf088"
+   },
+   "row_hash": "7b2bb0dfdbcfe946",
+   "carried": true,
+   "pass": 4
+  },
+  {
+   "row": "C916",
+   "screen": "stage_practise.practise",
+   "verdict": "PASS",
+   "line": "The seats are empty. You stand under the work light and say whatever comes into your head to the dark",
+   "why": "A chosen activity, greyed, not hidden.",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "f8f3554a00e1d4a5",
+    "facts": "f3fdaee8cfb85e6d",
+    "facts2": "f3fdaee8cfb85e6d",
+    "all": "67afabcc82d1e0e9"
+   },
+   "row_hash": "7b2bb0dfdbcfe946",
+   "carried": true,
+   "pass": 4
   },
   {
    "row": "C916",
@@ -1736,8 +2547,62 @@
     "all": "9f2c0299409edfd3"
    },
    "row_hash": "7b2bb0dfdbcfe946",
-   "carried": false,
+   "carried": true,
    "pass": 3
+  },
+  {
+   "row": "C920",
+   "screen": "class_drama.class",
+   "verdict": "PASS",
+   "line": "Mr. Cross has you all on the stage in a line, then one by one at the front. ... Everyone's watching.",
+   "why": "No hop: Done returns to the same place.",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "93fc476b832b1610",
+    "facts": "77c5977fffe46fc8",
+    "facts2": "30f91571176cc73e",
+    "all": "2bbe20328eb344a2"
+   },
+   "row_hash": "513927dd127fca04",
+   "carried": true,
+   "pass": 4
+  },
+  {
+   "row": "C920",
+   "screen": "class_psych.class",
+   "verdict": "PASS",
+   "line": "Dr. Hale lectures from the bottom of the hall without notes, and every time he looks up, it's at your row.",
+   "why": "No hop: Done returns to the same place.",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "7dc50540207a762d",
+    "facts": "a66a26384ca488bd",
+    "facts2": "b30fe44025af3184",
+    "all": "9a1b1c67a46bf088"
+   },
+   "row_hash": "513927dd127fca04",
+   "carried": true,
+   "pass": 4
+  },
+  {
+   "row": "C920",
+   "screen": "stage_practise.practise",
+   "verdict": "PASS",
+   "line": "The seats are empty. You stand under the work light and say whatever comes into your head to the dark",
+   "why": "No hop: Done returns to the same place.",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "f8f3554a00e1d4a5",
+    "facts": "f3fdaee8cfb85e6d",
+    "facts2": "f3fdaee8cfb85e6d",
+    "all": "67afabcc82d1e0e9"
+   },
+   "row_hash": "513927dd127fca04",
+   "carried": true,
+   "pass": 4
   },
   {
    "row": "C920",
@@ -1754,8 +2619,62 @@
     "all": "9f2c0299409edfd3"
    },
    "row_hash": "513927dd127fca04",
-   "carried": false,
+   "carried": true,
    "pass": 3
+  },
+  {
+   "row": "C924",
+   "screen": "class_drama.class",
+   "verdict": "PASS",
+   "line": "Mr. Cross has you all on the stage in a line, then one by one at the front. ... Everyone's watching.",
+   "why": "No travel on this screen.",
+   "cause": null,
+   "note": true,
+   "screen_hash": {
+    "text": "93fc476b832b1610",
+    "facts": "77c5977fffe46fc8",
+    "facts2": "30f91571176cc73e",
+    "all": "2bbe20328eb344a2"
+   },
+   "row_hash": "791cd173e23fb130",
+   "carried": true,
+   "pass": 4
+  },
+  {
+   "row": "C924",
+   "screen": "class_psych.class",
+   "verdict": "PASS",
+   "line": "Dr. Hale lectures from the bottom of the hall without notes, and every time he looks up, it's at your row.",
+   "why": "No travel on this screen.",
+   "cause": null,
+   "note": true,
+   "screen_hash": {
+    "text": "7dc50540207a762d",
+    "facts": "a66a26384ca488bd",
+    "facts2": "b30fe44025af3184",
+    "all": "9a1b1c67a46bf088"
+   },
+   "row_hash": "791cd173e23fb130",
+   "carried": true,
+   "pass": 4
+  },
+  {
+   "row": "C924",
+   "screen": "stage_practise.practise",
+   "verdict": "PASS",
+   "line": "The seats are empty. You stand under the work light and say whatever comes into your head to the dark",
+   "why": "No travel on this screen.",
+   "cause": null,
+   "note": true,
+   "screen_hash": {
+    "text": "f8f3554a00e1d4a5",
+    "facts": "f3fdaee8cfb85e6d",
+    "facts2": "f3fdaee8cfb85e6d",
+    "all": "67afabcc82d1e0e9"
+   },
+   "row_hash": "791cd173e23fb130",
+   "carried": true,
+   "pass": 4
   },
   {
    "row": "C924",
@@ -1772,8 +2691,62 @@
     "all": "9f2c0299409edfd3"
    },
    "row_hash": "791cd173e23fb130",
-   "carried": false,
+   "carried": true,
    "pass": 3
+  },
+  {
+   "row": "C926",
+   "screen": "class_drama.class",
+   "verdict": "PASS",
+   "line": "Mr. Cross has you all on the stage in a line, then one by one at the front. ... Everyone's watching.",
+   "why": "Clock moves only by its minutes.",
+   "cause": null,
+   "note": true,
+   "screen_hash": {
+    "text": "93fc476b832b1610",
+    "facts": "77c5977fffe46fc8",
+    "facts2": "30f91571176cc73e",
+    "all": "2bbe20328eb344a2"
+   },
+   "row_hash": "177d1e1776fac74b",
+   "carried": true,
+   "pass": 4
+  },
+  {
+   "row": "C926",
+   "screen": "class_psych.class",
+   "verdict": "PASS",
+   "line": "Dr. Hale lectures from the bottom of the hall without notes, and every time he looks up, it's at your row.",
+   "why": "Clock moves only by its minutes.",
+   "cause": null,
+   "note": true,
+   "screen_hash": {
+    "text": "7dc50540207a762d",
+    "facts": "a66a26384ca488bd",
+    "facts2": "b30fe44025af3184",
+    "all": "9a1b1c67a46bf088"
+   },
+   "row_hash": "177d1e1776fac74b",
+   "carried": true,
+   "pass": 4
+  },
+  {
+   "row": "C926",
+   "screen": "stage_practise.practise",
+   "verdict": "PASS",
+   "line": "The seats are empty. You stand under the work light and say whatever comes into your head to the dark",
+   "why": "Clock moves only by its minutes.",
+   "cause": null,
+   "note": true,
+   "screen_hash": {
+    "text": "f8f3554a00e1d4a5",
+    "facts": "f3fdaee8cfb85e6d",
+    "facts2": "f3fdaee8cfb85e6d",
+    "all": "67afabcc82d1e0e9"
+   },
+   "row_hash": "177d1e1776fac74b",
+   "carried": true,
+   "pass": 4
   },
   {
    "row": "C926",
@@ -1790,26 +2763,134 @@
     "all": "9f2c0299409edfd3"
    },
    "row_hash": "177d1e1776fac74b",
-   "carried": false,
+   "carried": true,
    "pass": 3
+  },
+  {
+   "row": "C927",
+   "screen": "class_drama.class",
+   "verdict": "PASS",
+   "line": "Done (time_progression_minutes = 120)",
+   "why": "Its exit states its time; no 3-minute default applies.",
+   "cause": null,
+   "note": true,
+   "screen_hash": {
+    "text": "9741365e3550a76b",
+    "facts": "77c5977fffe46fc8",
+    "facts2": "30f91571176cc73e",
+    "all": "331e46e93c15eda9"
+   },
+   "row_hash": "4e86d143688ba8e5",
+   "carried": true,
+   "pass": 5
+  },
+  {
+   "row": "C927",
+   "screen": "class_psych.class",
+   "verdict": "PASS",
+   "line": "Dr. Hale lectures from the bottom of the hall without notes, and every time he looks up, it's at your row.",
+   "why": "Exit carries its own minutes.",
+   "cause": null,
+   "note": true,
+   "screen_hash": {
+    "text": "7dc50540207a762d",
+    "facts": "a66a26384ca488bd",
+    "facts2": "b30fe44025af3184",
+    "all": "9a1b1c67a46bf088"
+   },
+   "row_hash": "4e86d143688ba8e5",
+   "carried": true,
+   "pass": 4
+  },
+  {
+   "row": "C927",
+   "screen": "stage_practise.practise",
+   "verdict": "PASS",
+   "line": "time_progression_minutes = 30",
+   "why": "exit time set",
+   "cause": null,
+   "note": true,
+   "screen_hash": {
+    "text": "601103fec24e1708",
+    "facts": "f3fdaee8cfb85e6d",
+    "facts2": "f3fdaee8cfb85e6d",
+    "all": "271a448474046e50"
+   },
+   "row_hash": "4e86d143688ba8e5",
+   "carried": true,
+   "pass": 7
   },
   {
    "row": "C927",
    "screen": "study_hall.study",
    "verdict": "PASS",
-   "line": "You find an empty row near the back, spread your notes along the seats and work through them until your neck aches. There's always more of it waiting.",
-   "why": "Done sets 60",
+   "line": "Done (time_progression_minutes 60)",
+   "why": "Exit carries its 60 minutes.",
    "cause": null,
    "note": true,
    "screen_hash": {
-    "text": "c1e166a2469a4da2",
-    "facts": "e55d2c2c4885f4a0",
-    "facts2": "e55d2c2c4885f4a0",
-    "all": "9f2c0299409edfd3"
+    "text": "3bdf5d62e23fc587",
+    "facts": "360934a7af72e6fd",
+    "facts2": "6460f3e4c78536c0",
+    "all": "2e507d8d99bf8962"
    },
    "row_hash": "4e86d143688ba8e5",
-   "carried": false,
-   "pass": 3
+   "carried": true,
+   "pass": 4
+  },
+  {
+   "row": "C928",
+   "screen": "class_drama.class",
+   "verdict": "PASS",
+   "line": "Mr. Cross has you all on the stage in a line, then one by one at the front. ... Everyone's watching.",
+   "why": "No clock printed into prose.",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "93fc476b832b1610",
+    "facts": "77c5977fffe46fc8",
+    "facts2": "30f91571176cc73e",
+    "all": "2bbe20328eb344a2"
+   },
+   "row_hash": "2c3ccc6bd9929d7f",
+   "carried": true,
+   "pass": 4
+  },
+  {
+   "row": "C928",
+   "screen": "class_psych.class",
+   "verdict": "PASS",
+   "line": "Dr. Hale lectures from the bottom of the hall without notes, and every time he looks up, it's at your row.",
+   "why": "No clock printed into prose.",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "7dc50540207a762d",
+    "facts": "a66a26384ca488bd",
+    "facts2": "b30fe44025af3184",
+    "all": "9a1b1c67a46bf088"
+   },
+   "row_hash": "2c3ccc6bd9929d7f",
+   "carried": true,
+   "pass": 4
+  },
+  {
+   "row": "C928",
+   "screen": "stage_practise.practise",
+   "verdict": "PASS",
+   "line": "The seats are empty. You stand under the work light and say whatever comes into your head to the dark",
+   "why": "No clock printed into prose.",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "f8f3554a00e1d4a5",
+    "facts": "f3fdaee8cfb85e6d",
+    "facts2": "f3fdaee8cfb85e6d",
+    "all": "67afabcc82d1e0e9"
+   },
+   "row_hash": "2c3ccc6bd9929d7f",
+   "carried": true,
+   "pass": 4
   },
   {
    "row": "C928",
@@ -1826,26 +2907,134 @@
     "all": "9f2c0299409edfd3"
    },
    "row_hash": "2c3ccc6bd9929d7f",
-   "carried": false,
+   "carried": true,
    "pass": 3
   },
   {
    "row": "C929",
-   "screen": "study_hall.study",
-   "verdict": "FAIL",
-   "line": "Study in an empty row (1 hour, 5 energy)",
-   "why": "note: the label carries the activity's time; the row now says it doesn't, the clock and energy bar show the spend (clock.md:20)",
+   "screen": "class_drama.class",
+   "verdict": "PASS",
+   "line": "Mr. Cross has you all on the stage in a line, then one by one at the front. ... Everyone's watching.",
+   "why": "No activity time on the label.",
    "cause": null,
    "note": true,
    "screen_hash": {
-    "text": "c1e166a2469a4da2",
-    "facts": "e55d2c2c4885f4a0",
-    "facts2": "e55d2c2c4885f4a0",
-    "all": "9f2c0299409edfd3"
+    "text": "93fc476b832b1610",
+    "facts": "77c5977fffe46fc8",
+    "facts2": "30f91571176cc73e",
+    "all": "2bbe20328eb344a2"
    },
    "row_hash": "18b0ecdf6d7fc901",
-   "carried": false,
-   "pass": 3
+   "carried": true,
+   "pass": 4
+  },
+  {
+   "row": "C929",
+   "screen": "class_psych.class",
+   "verdict": "PASS",
+   "line": "Dr. Hale lectures from the bottom of the hall without notes, and every time he looks up, it's at your row.",
+   "why": "No activity time on the label.",
+   "cause": null,
+   "note": true,
+   "screen_hash": {
+    "text": "7dc50540207a762d",
+    "facts": "a66a26384ca488bd",
+    "facts2": "b30fe44025af3184",
+    "all": "9a1b1c67a46bf088"
+   },
+   "row_hash": "18b0ecdf6d7fc901",
+   "carried": true,
+   "pass": 4
+  },
+  {
+   "row": "C929",
+   "screen": "stage_practise.practise",
+   "verdict": "PASS",
+   "line": "The seats are empty. You stand under the work light and say whatever comes into your head to the dark",
+   "why": "No activity time on the label.",
+   "cause": null,
+   "note": true,
+   "screen_hash": {
+    "text": "f8f3554a00e1d4a5",
+    "facts": "f3fdaee8cfb85e6d",
+    "facts2": "f3fdaee8cfb85e6d",
+    "all": "67afabcc82d1e0e9"
+   },
+   "row_hash": "18b0ecdf6d7fc901",
+   "carried": true,
+   "pass": 4
+  },
+  {
+   "row": "C929",
+   "screen": "study_hall.study",
+   "verdict": "PASS",
+   "line": "Study in an empty row",
+   "why": "Same: the label carries nothing; the engine's cost-blocked tag is allowed by clock.md rule 1 and systems.md rule 4.",
+   "cause": null,
+   "note": true,
+   "screen_hash": {
+    "text": "3bdf5d62e23fc587",
+    "facts": "360934a7af72e6fd",
+    "facts2": "6460f3e4c78536c0",
+    "all": "2e507d8d99bf8962"
+   },
+   "row_hash": "18b0ecdf6d7fc901",
+   "carried": true,
+   "pass": 4
+  },
+  {
+   "row": "C930",
+   "screen": "class_drama.class",
+   "verdict": "PASS",
+   "line": "show_when_blocked = true",
+   "why": "Windowed work no longer vanishes out of hours once she's met Cross.",
+   "cause": null,
+   "note": true,
+   "screen_hash": {
+    "text": "9741365e3550a76b",
+    "facts": "77c5977fffe46fc8",
+    "facts2": "30f91571176cc73e",
+    "all": "331e46e93c15eda9"
+   },
+   "row_hash": "beb57cd46fe906bf",
+   "carried": true,
+   "pass": 5
+  },
+  {
+   "row": "C930",
+   "screen": "class_psych.class",
+   "verdict": "PASS",
+   "line": "Dr. Hale lectures from the bottom of the hall without notes, and every time he looks up, it's at your row.",
+   "why": "show_when_blocked with the timetable cooldown_message keeps it dimmed out of hours.",
+   "cause": null,
+   "note": true,
+   "screen_hash": {
+    "text": "7dc50540207a762d",
+    "facts": "a66a26384ca488bd",
+    "facts2": "b30fe44025af3184",
+    "all": "9a1b1c67a46bf088"
+   },
+   "row_hash": "beb57cd46fe906bf",
+   "carried": true,
+   "pass": 4
+  },
+  {
+   "row": "C930",
+   "screen": "stage_practise.practise",
+   "verdict": "PASS",
+   "line": "The seats are empty. You stand under the work light and say whatever comes into your head to the dark",
+   "why": "Has show_when_blocked, so it stays as a dimmed line.",
+   "cause": null,
+   "note": true,
+   "screen_hash": {
+    "text": "f8f3554a00e1d4a5",
+    "facts": "f3fdaee8cfb85e6d",
+    "facts2": "f3fdaee8cfb85e6d",
+    "all": "67afabcc82d1e0e9"
+   },
+   "row_hash": "beb57cd46fe906bf",
+   "carried": true,
+   "pass": 4
   },
   {
    "row": "C930",
@@ -1862,44 +3051,98 @@
     "all": "9f2c0299409edfd3"
    },
    "row_hash": "beb57cd46fe906bf",
-   "carried": false,
+   "carried": true,
    "pass": 3
   },
   {
    "row": "C931",
-   "screen": "study_hall.study",
-   "verdict": "N/A",
-   "line": "",
-   "why": "no time_of_day condition; gated by the hall's hours and study_today",
+   "screen": "class_drama.class",
+   "verdict": "PASS",
+   "line": "time_of_day 11:00-11:30",
+   "why": "End exclusive: starts 11:00-11:29, matching 'at 11am'; Cross's row runs to 13:00, so the 120-minute class ends inside his presence.",
    "cause": null,
    "note": true,
    "screen_hash": {
-    "text": "c1e166a2469a4da2",
-    "facts": "e55d2c2c4885f4a0",
-    "facts2": "e55d2c2c4885f4a0",
-    "all": "9f2c0299409edfd3"
+    "text": "9741365e3550a76b",
+    "facts": "77c5977fffe46fc8",
+    "facts2": "30f91571176cc73e",
+    "all": "331e46e93c15eda9"
    },
    "row_hash": "1aadffd96e76381c",
-   "carried": false,
-   "pass": 3
+   "carried": true,
+   "pass": 5
+  },
+  {
+   "row": "C931",
+   "screen": "class_psych.class",
+   "verdict": "PASS",
+   "line": "Dr. Hale lectures from the bottom of the hall without notes, and every time he looks up, it's at your row.",
+   "why": "time_of_day end is exclusive (09:00-09:30 or 11:00-11:30); the stage has none.",
+   "cause": null,
+   "note": true,
+   "screen_hash": {
+    "text": "7dc50540207a762d",
+    "facts": "a66a26384ca488bd",
+    "facts2": "b30fe44025af3184",
+    "all": "9a1b1c67a46bf088"
+   },
+   "row_hash": "1aadffd96e76381c",
+   "carried": true,
+   "pass": 4
+  },
+  {
+   "row": "C931",
+   "screen": "stage_practise.practise",
+   "verdict": "PASS",
+   "line": "conditions: weekday + npc_at_location only",
+   "why": "no time_of_day on the row; the clock window is the theatre's hours, so no end-exclusive gap",
+   "cause": null,
+   "note": true,
+   "screen_hash": {
+    "text": "601103fec24e1708",
+    "facts": "f3fdaee8cfb85e6d",
+    "facts2": "f3fdaee8cfb85e6d",
+    "all": "271a448474046e50"
+   },
+   "row_hash": "1aadffd96e76381c",
+   "carried": true,
+   "pass": 7
+  },
+  {
+   "row": "C931",
+   "screen": "study_hall.study",
+   "verdict": "PASS",
+   "line": "Study in an empty row",
+   "why": "No time_of_day on this row; presence is read at the minute of entry.",
+   "cause": null,
+   "note": true,
+   "screen_hash": {
+    "text": "3bdf5d62e23fc587",
+    "facts": "360934a7af72e6fd",
+    "facts2": "6460f3e4c78536c0",
+    "all": "2e507d8d99bf8962"
+   },
+   "row_hash": "1aadffd96e76381c",
+   "carried": true,
+   "pass": 4
   },
   {
    "row": "C953",
    "screen": "study_hall.study",
-   "verdict": "FAIL",
-   "line": "Study in an empty row (1 hour, 5 energy)",
-   "why": "note: the label carries time and energy; the row now says money only, never time or energy (places.md:20)",
+   "verdict": "PASS",
+   "line": "Study in an empty row",
+   "why": "No time or energy written on the label; the greyed \"(5 Energy)\" is the engine tag systems.md rule 4 keeps.",
    "cause": null,
    "note": true,
    "screen_hash": {
-    "text": "c1e166a2469a4da2",
-    "facts": "e55d2c2c4885f4a0",
-    "facts2": "e55d2c2c4885f4a0",
-    "all": "9f2c0299409edfd3"
+    "text": "3bdf5d62e23fc587",
+    "facts": "360934a7af72e6fd",
+    "facts2": "6460f3e4c78536c0",
+    "all": "2e507d8d99bf8962"
    },
    "row_hash": "826bf82fe26afd13",
-   "carried": false,
-   "pass": 3
+   "carried": true,
+   "pass": 4
   },
   {
    "row": "C961",
@@ -1916,26 +3159,80 @@
     "all": "9f2c0299409edfd3"
    },
    "row_hash": "b6cf8c9e8a8ef683",
-   "carried": false,
+   "carried": true,
    "pass": 3
+  },
+  {
+   "row": "L106",
+   "screen": "class_drama.class",
+   "verdict": "PASS",
+   "line": "Mr. Cross has you all on the stage in a line ... Everyone's watching.",
+   "why": "Cross's rows put him at campus_theatre Tue/Thu 11-13; no one else is claimed beyond the class.",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "9741365e3550a76b",
+    "facts": "77c5977fffe46fc8",
+    "facts2": "30f91571176cc73e",
+    "all": "331e46e93c15eda9"
+   },
+   "row_hash": "13a714429d15f3b2",
+   "carried": true,
+   "pass": 5
+  },
+  {
+   "row": "L106",
+   "screen": "class_psych.class",
+   "verdict": "PASS",
+   "line": "Dr. Hale lectures from the bottom of the hall without notes, and every time he looks up, it's at your row.",
+   "why": "Only the teacher the trigger gates on is named; Brooke is never claimed.",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "7dc50540207a762d",
+    "facts": "a66a26384ca488bd",
+    "facts2": "b30fe44025af3184",
+    "all": "9a1b1c67a46bf088"
+   },
+   "row_hash": "13a714429d15f3b2",
+   "carried": true,
+   "pass": 4
+  },
+  {
+   "row": "L106",
+   "screen": "stage_practise.practise",
+   "verdict": "PASS",
+   "line": "The seats are empty.",
+   "why": "claims nobody there; Cross absent by condition, Brooke's rows never put her there without Cross",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "601103fec24e1708",
+    "facts": "f3fdaee8cfb85e6d",
+    "facts2": "f3fdaee8cfb85e6d",
+    "all": "271a448474046e50"
+   },
+   "row_hash": "13a714429d15f3b2",
+   "carried": true,
+   "pass": 7
   },
   {
    "row": "L106",
    "screen": "study_hall.study",
    "verdict": "PASS",
-   "line": "You find an empty row near the back, spread your notes along the seats and work through them until your neck aches. There's always more of it waiting.",
-   "why": "claims nobody is there",
-   "cause": "",
+   "line": "Down at the front, a lecture goes on without you.",
+   "why": "Every presence line sits behind npc_at_location for its teacher; Brooke and Nadia, present Mon/Wed 9-11, are not claimed or named.",
+   "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "c1e166a2469a4da2",
-    "facts": "e55d2c2c4885f4a0",
-    "facts2": "e55d2c2c4885f4a0",
-    "all": "9f2c0299409edfd3"
+    "text": "3bdf5d62e23fc587",
+    "facts": "360934a7af72e6fd",
+    "facts2": "6460f3e4c78536c0",
+    "all": "2e507d8d99bf8962"
    },
    "row_hash": "13a714429d15f3b2",
-   "carried": false,
-   "pass": 3
+   "carried": true,
+   "pass": 4
   },
   {
    "row": "L116",
@@ -1952,7 +3249,7 @@
     "all": "9f2c0299409edfd3"
    },
    "row_hash": "7e4ac68d5328051e",
-   "carried": false,
+   "carried": true,
    "pass": 3
   },
   {
@@ -1970,26 +3267,93 @@
     "all": "9f2c0299409edfd3"
    },
    "row_hash": "c12d10588197fbaf",
-   "carried": false,
+   "carried": true,
    "pass": 3
+  },
+  {
+   "row": "L167",
+   "screen": "class_drama.class",
+   "verdict": "PASS",
+   "line": "weekdays [1, 3] + time_of_day 11:00-11:30; \"Tuesday and Thursday at 11am.\"",
+   "why": "One row for both days (same hours), greys with show_when_blocked and a cooldown_message naming the days and the hour, in the timetable form class_psych uses.",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "9741365e3550a76b",
+    "facts": "77c5977fffe46fc8",
+    "facts2": "30f91571176cc73e",
+    "all": "331e46e93c15eda9"
+   },
+   "row_hash": "e64ce2672d85d2d8",
+   "carried": true,
+   "pass": 5
+  },
+  {
+   "row": "L167",
+   "screen": "class_psych.class",
+   "verdict": "PASS",
+   "line": "Dr. Hale lectures from the bottom of the hall without notes, and every time he looks up, it's at your row.",
+   "why": "One row for its activity; no per-day duplicate rows.",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "7dc50540207a762d",
+    "facts": "a66a26384ca488bd",
+    "facts2": "b30fe44025af3184",
+    "all": "9a1b1c67a46bf088"
+   },
+   "row_hash": "e64ce2672d85d2d8",
+   "carried": true,
+   "pass": 4
+  },
+  {
+   "row": "L167",
+   "screen": "stage_practise.practise",
+   "verdict": "PASS",
+   "line": "max_triggers_per_day = 2, no show_when_blocked",
+   "why": "one row; with a daily count it sets no show_when_blocked, so it is gone when used up or shut (clock.md rule 10, LO 2026-11-24)",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "601103fec24e1708",
+    "facts": "f3fdaee8cfb85e6d",
+    "facts2": "f3fdaee8cfb85e6d",
+    "all": "271a448474046e50"
+   },
+   "row_hash": "e64ce2672d85d2d8",
+   "carried": true,
+   "pass": 7
   },
   {
    "row": "L167",
    "screen": "study_hall.study",
    "verdict": "PASS",
-   "line": "You find an empty row near the back, spread your notes along the seats and work through them until your neck aches. There's always more of it waiting.",
-   "why": "one row, no per-day rows",
-   "cause": "",
+   "line": "Study in an empty row",
+   "why": "One row for all hall hours; its only grey is the study count (locked_text).",
+   "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "c1e166a2469a4da2",
-    "facts": "e55d2c2c4885f4a0",
-    "facts2": "e55d2c2c4885f4a0",
-    "all": "9f2c0299409edfd3"
+    "text": "3bdf5d62e23fc587",
+    "facts": "360934a7af72e6fd",
+    "facts2": "6460f3e4c78536c0",
+    "all": "2e507d8d99bf8962"
    },
    "row_hash": "e64ce2672d85d2d8",
+   "carried": true,
+   "pass": 4
+  },
+  {
+   "row": "L170",
+   "screen": "*",
+   "verdict": "N/A",
+   "line": "",
+   "why": "no place on this piece's screens is hidden_until a flag",
+   "cause": null,
+   "note": false,
+   "screen_hash": "25ea9c7b82a80239",
+   "row_hash": "c3599cd09637a240",
    "carried": false,
-   "pass": 3
+   "pass": 8
   },
   {
    "row": "L70",
@@ -2006,19 +3370,14 @@
     "all": "9f2c0299409edfd3"
    },
    "row_hash": "10d904cc9f93ccc8",
-   "carried": false,
+   "carried": true,
    "pass": 3
   }
  ],
- "causes": [
-  {
-   "id": "P09c1-c1",
-   "what": "study_hall's screen ignores who is in the hall: during a lecture (Hale, Pratt or Walsh teaching, Nadia there) it reads like an empty hall, and nobody the PLAN says notices her here reacts"
-  }
- ],
+ "causes": [],
  "pending": [],
- "asked": 97,
- "answered": 97,
+ "asked": 1,
+ "answered": 1,
  "pass_items": [],
  "unowed": []
 }

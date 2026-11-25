@@ -1,0 +1,269 @@
+{
+ "verdicts": [
+  {
+   "row": "B10",
+   "screen": "mirror_meet_brooke.mirror",
+   "verdict": "PASS",
+   "line": "Nice outfit, princess. Did you get dressed in the dark?",
+   "why": "Brooke, Kayla and Tess are all gated present by the trigger (weekdays 08-09 and 13-14 at the campus bathroom); the party rows don't touch this window",
+   "cause": null
+  },
+  {
+   "row": "B8",
+   "screen": "mirror_meet_brooke.mirror",
+   "verdict": "PASS",
+   "line": "Nice outfit, princess. Did you get dressed in the dark?",
+   "why": "no number, and no garment of hers is named",
+   "cause": null
+  },
+  {
+   "row": "C1158",
+   "screen": "mirror_meet_brooke.mirror",
+   "verdict": "PASS",
+   "line": "Nice outfit, princess. Did you get dressed in the dark?",
+   "why": "a jab at whatever she wears; no garment of hers is named",
+   "cause": null
+  },
+  {
+   "row": "C1177",
+   "screen": "mirror_meet_brooke.mirror",
+   "verdict": "PASS",
+   "line": "the blonde finds you in the mirror and looks you over, slow, from your feet up",
+   "why": "a note row; no exposure, she is dressed on campus",
+   "cause": null
+  },
+  {
+   "row": "C1206",
+   "screen": "mirror_meet_brooke.mirror",
+   "verdict": "PASS",
+   "line": "Nice outfit, princess. Did you get dressed in the dark?",
+   "why": "names no garment she may not be wearing",
+   "cause": null
+  },
+  {
+   "row": "C460",
+   "screen": "mirror_meet_brooke.mirror",
+   "verdict": "PASS",
+   "line": "Nice outfit, princess. Did you get dressed in the dark?",
+   "why": "Brooke, Kayla and Tess are all gated present by the trigger (weekdays 08-09 and 13-14 at the campus bathroom); the party rows don't touch this window",
+   "cause": null
+  },
+  {
+   "row": "C461",
+   "screen": "mirror_meet_brooke.mirror",
+   "verdict": "PASS",
+   "line": "Nice outfit, princess. Did you get dressed in the dark?",
+   "why": "texture and dialogue that fit the cast entries; no past or fact assumed",
+   "cause": null
+  },
+  {
+   "row": "L106",
+   "screen": "mirror_meet_brooke.mirror",
+   "verdict": "PASS",
+   "line": "Nice outfit, princess. Did you get dressed in the dark?",
+   "why": "Brooke, Kayla and Tess are all gated present by the trigger (weekdays 08-09 and 13-14 at the campus bathroom); the party rows don't touch this window",
+   "cause": null
+  },
+  {
+   "row": "B10",
+   "screen": "mirror_meet_brooke.after",
+   "verdict": "PASS",
+   "line": "You turn back to the sink, and you can still hear them laughing behind you. You know you'll see that mirror again, and her in it.",
+   "why": "all three are still at the mirror (gated present; one-time step); 'see that mirror again' is built by rep_mirror and Brooke's weekday mirror rows",
+   "cause": null
+  },
+  {
+   "row": "B8",
+   "screen": "mirror_meet_brooke.after",
+   "verdict": "PASS",
+   "line": "You turn back to the sink, and you can still hear them laughing behind you. You know you'll see that mirror again, and her in it.",
+   "why": "no number, and no garment of hers is named",
+   "cause": null
+  },
+  {
+   "row": "C460",
+   "screen": "mirror_meet_brooke.after",
+   "verdict": "PASS",
+   "line": "You turn back to the sink, and you can still hear them laughing behind you. You know you'll see that mirror again, and her in it.",
+   "why": "all three are still at the mirror (gated present; one-time step); 'see that mirror again' is built by rep_mirror and Brooke's weekday mirror rows",
+   "cause": null
+  },
+  {
+   "row": "C461",
+   "screen": "mirror_meet_brooke.after",
+   "verdict": "PASS",
+   "line": "You turn back to the sink, and you can still hear them laughing behind you. You know you'll see that mirror again, and her in it.",
+   "why": "texture and dialogue that fit the cast entries; no past or fact assumed",
+   "cause": null
+  },
+  {
+   "row": "C927",
+   "screen": "mirror_meet_brooke.after",
+   "verdict": "PASS",
+   "line": "\"Done\" (5 min)",
+   "why": "the exit states its minutes",
+   "cause": null
+  },
+  {
+   "row": "C931",
+   "screen": "mirror_meet_brooke.after",
+   "verdict": "PASS",
+   "line": "\"Done\" (5 min)",
+   "why": "no time_of_day on this canvas; presence gates it",
+   "cause": null
+  },
+  {
+   "row": "L106",
+   "screen": "mirror_meet_brooke.after",
+   "verdict": "PASS",
+   "line": "You turn back to the sink, and you can still hear them laughing behind you. You know you'll see that mirror again, and her in it.",
+   "why": "all three are still at the mirror (gated present; one-time step); 'see that mirror again' is built by rep_mirror and Brooke's weekday mirror rows",
+   "cause": null
+  },
+  {
+   "row": "L167",
+   "screen": "mirror_meet_brooke.after",
+   "verdict": "PASS",
+   "line": "You turn back to the sink, and you can still hear them laughing behind you. You know you'll see that mirror again, and her in it.",
+   "why": "one row, one set of hours; a walk-in that hides when shut (C916), so no greyed duplicate",
+   "cause": null
+  },
+  {
+   "row": "C889",
+   "screen": "mirror_meet_brooke.after",
+   "verdict": "PASS",
+   "line": "\"Done\"",
+   "why": "labels name no clock time and no duration; the spend sits in the costs",
+   "cause": null
+  },
+  {
+   "row": "C892",
+   "screen": "mirror_meet_brooke.after",
+   "verdict": "PASS",
+   "line": "You turn back to the sink, and you can still hear them laughing behind you. You know you'll see that mirror again, and her in it.",
+   "why": "no hour in the act",
+   "cause": null
+  },
+  {
+   "row": "C897",
+   "screen": "mirror_meet_brooke.after",
+   "verdict": "PASS",
+   "line": "\"Done\"",
+   "why": "the only time here is the act's own, not a per-room charge",
+   "cause": null
+  },
+  {
+   "row": "C900",
+   "screen": "mirror_meet_brooke.after",
+   "verdict": "PASS",
+   "line": "You turn back to the sink, and you can still hear them laughing behind you. You know you'll see that mirror again, and her in it.",
+   "why": "no line says what time it is",
+   "cause": null
+  },
+  {
+   "row": "C902",
+   "screen": "mirror_meet_brooke.after",
+   "verdict": "PASS",
+   "line": "You turn back to the sink, and you can still hear them laughing behind you. You know you'll see that mirror again, and her in it.",
+   "why": "true at the last minute it can show; it names no time",
+   "cause": null
+  },
+  {
+   "row": "C903",
+   "screen": "mirror_meet_brooke.after",
+   "verdict": "PASS",
+   "line": "You turn back to the sink, and you can still hear them laughing behind you. You know you'll see that mirror again, and her in it.",
+   "why": "names no weekday",
+   "cause": null
+  },
+  {
+   "row": "C906",
+   "screen": "mirror_meet_brooke.after",
+   "verdict": "PASS",
+   "line": "\"Done\"",
+   "why": "no 'till X' anywhere",
+   "cause": null
+  },
+  {
+   "row": "C910",
+   "screen": "mirror_meet_brooke.after",
+   "verdict": "PASS",
+   "line": "\"Done\"",
+   "why": "buttons say no time and no energy, and this act costs no money",
+   "cause": null
+  },
+  {
+   "row": "C913",
+   "screen": "mirror_meet_brooke.after",
+   "verdict": "PASS",
+   "line": "\"Brooke\" (trigger)",
+   "why": "a one-time meeting gated on presence; nothing with hours",
+   "cause": null
+  },
+  {
+   "row": "C914",
+   "screen": "mirror_meet_brooke.after",
+   "verdict": "PASS",
+   "line": "\"Brooke\" (trigger)",
+   "why": "no hours printed",
+   "cause": null
+  },
+  {
+   "row": "C916",
+   "screen": "mirror_meet_brooke.after",
+   "verdict": "PASS",
+   "line": "\"Brooke\" (trigger)",
+   "why": "an event gated on who is there stays hidden when shut",
+   "cause": null
+  },
+  {
+   "row": "C920",
+   "screen": "mirror_meet_brooke.after",
+   "verdict": "PASS",
+   "line": "\"Done\" (5 min) to campus_bathroom",
+   "why": "Done stays in the bathroom; the 5 minutes are the scene",
+   "cause": null
+  },
+  {
+   "row": "C924",
+   "screen": "mirror_meet_brooke.after",
+   "verdict": "PASS",
+   "line": "\"Done\"",
+   "why": "travel cost stays on the moves between areas, not here",
+   "cause": null
+  },
+  {
+   "row": "C926",
+   "screen": "mirror_meet_brooke.after",
+   "verdict": "PASS",
+   "line": "\"Done\"",
+   "why": "the clock moves only by the choice's minutes",
+   "cause": null
+  },
+  {
+   "row": "C928",
+   "screen": "mirror_meet_brooke.after",
+   "verdict": "PASS",
+   "line": "You turn back to the sink, and you can still hear them laughing behind you. You know you'll see that mirror again, and her in it.",
+   "why": "no clock printed in the prose",
+   "cause": null
+  },
+  {
+   "row": "C929",
+   "screen": "mirror_meet_brooke.after",
+   "verdict": "PASS",
+   "line": "\"Done\"",
+   "why": "no activity time on the label",
+   "cause": null
+  },
+  {
+   "row": "C930",
+   "screen": "mirror_meet_brooke.after",
+   "verdict": "N/A",
+   "line": "\"Done\"",
+   "why": "not work",
+   "cause": null
+  }
+ ],
+ "causes": []
+}

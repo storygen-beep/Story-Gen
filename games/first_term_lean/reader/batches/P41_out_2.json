@@ -1,0 +1,866 @@
+{
+ "verdicts": [
+  {
+   "row": "B10",
+   "screen": "walk_chris_store.moment",
+   "verdict": "PASS",
+   "line": "Chris has a regular pinned against the shelves, her skirt up round her waist ... Your thighs press together.",
+   "why": "true at first and last minute and on a repeat visit: Chris at near_cafe Sat/Sun 10-20; window 10-19; the regular is unnamed"
+  },
+  {
+   "row": "B10",
+   "screen": "walk_chris_store.out",
+   "verdict": "PASS",
+   "line": "You back out into the café. The shelf rattles behind the door. It won't be the last time.",
+   "why": "true at first and last minute and on a repeat visit: Chris at near_cafe Sat/Sun 10-20; window 10-19; the regular is unnamed"
+  },
+  {
+   "row": "B10",
+   "screen": "walk_chris_store.watch",
+   "verdict": "FAIL",
+   "line": "He catches your eye later, and grins.",
+   "why": "narrates an event after the scene as fact; the game never builds it, and she may leave at Done",
+   "cause": "P41r2-c1"
+  },
+  {
+   "row": "B10",
+   "screen": "walk_party_bathroom.moment",
+   "verdict": "PASS",
+   "line": "A couple is on the edge of the bath, her dress round her waist, her tits out, his face buried in her cunt, licking. Your face burns.",
+   "why": "true at first and last minute and on a repeat visit: Sat 21-00 / Sun 00-01 matches the weekly party (zoe_party, same window); the couple are strangers"
+  },
+  {
+   "row": "B10",
+   "screen": "walk_party_bathroom.shut",
+   "verdict": "PASS",
+   "line": "You shut the door. The music sounds louder than before. You know that door now.",
+   "why": "true at first and last minute and on a repeat visit: Sat 21-00 / Sun 00-01 matches the weekly party (zoe_party, same window); the couple are strangers"
+  },
+  {
+   "row": "B10",
+   "screen": "walk_party_bathroom.watch",
+   "verdict": "PASS",
+   "line": "You're wet. You shut the door before they see you. You know that door now.",
+   "why": "true at first and last minute and on a repeat visit: Sat 21-00 / Sun 00-01 matches the weekly party (zoe_party, same window); the couple are strangers"
+  },
+  {
+   "row": "B10",
+   "screen": "walk_tom_tips.moment",
+   "verdict": "PASS",
+   "line": "Tom's counting the tip jar before close ... Long day. Don't look at me like that.",
+   "why": "true at first and last minute and on a repeat visit: Tom at near_cafe Mon-Sat 10-21; window 20:00-20:55 inside café hours 07-21, so 'before close' holds; met_tom is set only with cafe_hired, so 'next shift' is true"
+  },
+  {
+   "row": "B10",
+   "screen": "walk_tom_tips.nothing",
+   "verdict": "PASS",
+   "line": "You say nothing. He knows you saw. He'll be watching you next shift.",
+   "why": "true at first and last minute and on a repeat visit: Tom at near_cafe Mon-Sat 10-21; window 20:00-20:55 inside café hours 07-21, so 'before close' holds; met_tom is set only with cafe_hired, so 'next shift' is true"
+  },
+  {
+   "row": "B10",
+   "screen": "walk_tom_tips.tips",
+   "verdict": "PASS",
+   "line": "And I'm the one who pays the rent on this place. ... You'll be counting the jar next time.",
+   "why": "true at first and last minute and on a repeat visit: Tom at near_cafe Mon-Sat 10-21; window 20:00-20:55 inside café hours 07-21, so 'before close' holds; met_tom is set only with cafe_hired, so 'next shift' is true"
+  },
+  {
+   "row": "B10",
+   "screen": "walk_zoe_outfits.moment",
+   "verdict": "PASS",
+   "line": "Zoe's at the mirror in her underwear with three outfits on the bed behind her.",
+   "why": "true at first and last minute and on a repeat visit: Zoe at near_zoe_apartment from 18:00 every day; trigger 18:00-19:00 with Zoe present"
+  },
+  {
+   "row": "B10",
+   "screen": "walk_zoe_outfits.pick",
+   "verdict": "PASS",
+   "line": "You point at the black one. ... She'll be choosing again tomorrow.",
+   "why": "true at first and last minute and on a repeat visit: Zoe at near_zoe_apartment from 18:00 every day; trigger 18:00-19:00 with Zoe present"
+  },
+  {
+   "row": "B10",
+   "screen": "walk_zoe_outfits.wearing",
+   "verdict": "PASS",
+   "line": "She doesn't put anything on. She'll be choosing again tomorrow.",
+   "why": "true at first and last minute and on a repeat visit: Zoe at near_zoe_apartment from 18:00 every day; trigger 18:00-19:00 with Zoe present"
+  },
+  {
+   "row": "B10",
+   "screen": "walk_zoe_sam.moment",
+   "verdict": "PASS",
+   "line": "Zoe on top of Sam on the sofa, her top off ... Your nipples go hard.",
+   "why": "true at first and last minute and on a repeat visit: Zoe at near_zoe_apartment 18-23 (Sat 18-24), Sam 12-02 (who_is_where); trigger needs both, Sun-Fri 19-23, Sat 19-21"
+  },
+  {
+   "row": "B10",
+   "screen": "walk_zoe_sam.watch",
+   "verdict": "PASS",
+   "line": "Your thighs are pressed together and your face is on fire. You know what that sofa's seen now.",
+   "why": "true at first and last minute and on a repeat visit: Zoe at near_zoe_apartment 18-23 (Sat 18-24), Sam 12-02 (who_is_where); trigger needs both, Sun-Fri 19-23, Sat 19-21"
+  },
+  {
+   "row": "B3",
+   "screen": "walk_chris_store.watch",
+   "verdict": "PASS",
+   "line": "He catches your eye later, and grins.",
+   "why": "points at Chris knowing she saw (its truth is judged at C460)"
+  },
+  {
+   "row": "B3",
+   "screen": "walk_tom_tips.nothing",
+   "verdict": "PASS",
+   "line": "He'll be watching you next shift.",
+   "why": "ends on her next shift with Tom, a real shift since met_tom comes with cafe_hired"
+  },
+  {
+   "row": "B4",
+   "screen": "walk_chris_store.moment",
+   "verdict": "PASS",
+   "line": "Your thighs press together.",
+   "why": "her reaction is on her body only, stage 0, no act of her own and no touch"
+  },
+  {
+   "row": "B4",
+   "screen": "walk_party_bathroom.moment",
+   "verdict": "PASS",
+   "line": "Your face burns.",
+   "why": "her reaction is on her body only, stage 0, no act of her own and no touch"
+  },
+  {
+   "row": "B4",
+   "screen": "walk_zoe_sam.moment",
+   "verdict": "PASS",
+   "line": "Your nipples go hard.",
+   "why": "her reaction is on her body only, stage 0, no act of her own and no touch"
+  },
+  {
+   "row": "B8",
+   "screen": "walk_chris_store.moment",
+   "verdict": "PASS",
+   "line": "Chris has a regular pinned against the shelves, her skirt up round her waist ... Your thighs press together.",
+   "why": "no number on the screen; every garment named is another person's (or the try-on skirt and a grouped underwear line), none of hers unbacked"
+  },
+  {
+   "row": "B8",
+   "screen": "walk_chris_store.out",
+   "verdict": "PASS",
+   "line": "You back out into the café. The shelf rattles behind the door. It won't be the last time.",
+   "why": "no number on the screen; every garment named is another person's (or the try-on skirt and a grouped underwear line), none of hers unbacked"
+  },
+  {
+   "row": "B8",
+   "screen": "walk_chris_store.watch",
+   "verdict": "PASS",
+   "line": "Your nipples are hard. You're back out front before they come out. He catches your eye later, and grins.",
+   "why": "no number on the screen; every garment named is another person's (or the try-on skirt and a grouped underwear line), none of hers unbacked"
+  },
+  {
+   "row": "B8",
+   "screen": "walk_party_bathroom.moment",
+   "verdict": "PASS",
+   "line": "A couple is on the edge of the bath, her dress round her waist, her tits out, his face buried in her cunt, licking. Your face burns.",
+   "why": "no number on the screen; every garment named is another person's (or the try-on skirt and a grouped underwear line), none of hers unbacked"
+  },
+  {
+   "row": "B8",
+   "screen": "walk_party_bathroom.shut",
+   "verdict": "PASS",
+   "line": "You shut the door. The music sounds louder than before. You know that door now.",
+   "why": "no number on the screen; every garment named is another person's (or the try-on skirt and a grouped underwear line), none of hers unbacked"
+  },
+  {
+   "row": "B8",
+   "screen": "walk_party_bathroom.watch",
+   "verdict": "PASS",
+   "line": "You're wet. You shut the door before they see you. You know that door now.",
+   "why": "no number on the screen; every garment named is another person's (or the try-on skirt and a grouped underwear line), none of hers unbacked"
+  },
+  {
+   "row": "B8",
+   "screen": "walk_tom_tips.moment",
+   "verdict": "PASS",
+   "line": "Tom's counting the tip jar before close ... Long day. Don't look at me like that.",
+   "why": "no number on the screen; every garment named is another person's (or the try-on skirt and a grouped underwear line), none of hers unbacked"
+  },
+  {
+   "row": "B8",
+   "screen": "walk_tom_tips.nothing",
+   "verdict": "PASS",
+   "line": "You say nothing. He knows you saw. He'll be watching you next shift.",
+   "why": "no number on the screen; every garment named is another person's (or the try-on skirt and a grouped underwear line), none of hers unbacked"
+  },
+  {
+   "row": "B8",
+   "screen": "walk_tom_tips.tips",
+   "verdict": "PASS",
+   "line": "And I'm the one who pays the rent on this place. ... You'll be counting the jar next time.",
+   "why": "no number on the screen; every garment named is another person's (or the try-on skirt and a grouped underwear line), none of hers unbacked"
+  },
+  {
+   "row": "B8",
+   "screen": "walk_zoe_outfits.moment",
+   "verdict": "PASS",
+   "line": "Zoe's at the mirror in her underwear with three outfits on the bed behind her.",
+   "why": "no number on the screen; every garment named is another person's (or the try-on skirt and a grouped underwear line), none of hers unbacked"
+  },
+  {
+   "row": "B8",
+   "screen": "walk_zoe_outfits.pick",
+   "verdict": "PASS",
+   "line": "You point at the black one. ... She'll be choosing again tomorrow.",
+   "why": "no number on the screen; every garment named is another person's (or the try-on skirt and a grouped underwear line), none of hers unbacked"
+  },
+  {
+   "row": "B8",
+   "screen": "walk_zoe_outfits.wearing",
+   "verdict": "PASS",
+   "line": "She doesn't put anything on. She'll be choosing again tomorrow.",
+   "why": "no number on the screen; every garment named is another person's (or the try-on skirt and a grouped underwear line), none of hers unbacked"
+  },
+  {
+   "row": "B8",
+   "screen": "walk_zoe_sam.moment",
+   "verdict": "PASS",
+   "line": "Zoe on top of Sam on the sofa, her top off ... Your nipples go hard.",
+   "why": "no number on the screen; every garment named is another person's (or the try-on skirt and a grouped underwear line), none of hers unbacked"
+  },
+  {
+   "row": "B8",
+   "screen": "walk_zoe_sam.watch",
+   "verdict": "PASS",
+   "line": "Your thighs are pressed together and your face is on fire. You know what that sofa's seen now.",
+   "why": "no number on the screen; every garment named is another person's (or the try-on skirt and a grouped underwear line), none of hers unbacked"
+  },
+  {
+   "row": "C1158",
+   "screen": "walk_chris_store.moment",
+   "verdict": "PASS",
+   "line": "Chris has a regular pinned against the shelves, her skirt up round her waist ... Your thighs press together.",
+   "why": "the only garments named belong to the people she watches; her own body lines name no garment"
+  },
+  {
+   "row": "C1158",
+   "screen": "walk_chris_store.watch",
+   "verdict": "PASS",
+   "line": "Your nipples are hard. You're back out front before they come out. He catches your eye later, and grins.",
+   "why": "her line is now 'Your nipples are hard.': no garment of hers named"
+  },
+  {
+   "row": "C1158",
+   "screen": "walk_party_bathroom.moment",
+   "verdict": "PASS",
+   "line": "A couple is on the edge of the bath, her dress round her waist, her tits out, his face buried in her cunt, licking. Your face burns.",
+   "why": "the only garments named belong to the people she watches; her own body lines name no garment"
+  },
+  {
+   "row": "C1158",
+   "screen": "walk_zoe_outfits.moment",
+   "verdict": "PASS",
+   "line": "Zoe's at the mirror in her underwear with three outfits on the bed behind her.",
+   "why": "the only garments named belong to the people she watches; her own body lines name no garment"
+  },
+  {
+   "row": "C1206",
+   "screen": "walk_chris_store.moment",
+   "verdict": "PASS",
+   "line": "Chris has a regular pinned against the shelves, her skirt up round her waist ... Your thighs press together.",
+   "why": "the only garments named belong to the people she watches; her own body lines name no garment"
+  },
+  {
+   "row": "C1206",
+   "screen": "walk_chris_store.watch",
+   "verdict": "PASS",
+   "line": "Your nipples are hard. You're back out front before they come out. He catches your eye later, and grins.",
+   "why": "her line is now 'Your nipples are hard.': no garment of hers named"
+  },
+  {
+   "row": "C1206",
+   "screen": "walk_party_bathroom.moment",
+   "verdict": "PASS",
+   "line": "A couple is on the edge of the bath, her dress round her waist, her tits out, his face buried in her cunt, licking. Your face burns.",
+   "why": "the only garments named belong to the people she watches; her own body lines name no garment"
+  },
+  {
+   "row": "C1206",
+   "screen": "walk_zoe_outfits.moment",
+   "verdict": "PASS",
+   "line": "Zoe's at the mirror in her underwear with three outfits on the bed behind her.",
+   "why": "the only garments named belong to the people she watches; her own body lines name no garment"
+  },
+  {
+   "row": "C1284",
+   "screen": "walk_party_bathroom.moment",
+   "verdict": "PASS",
+   "line": "Seen from a bathroom doorway: a man in his twenties going down on a woman...",
+   "why": "the picture is written as her view from the doorway"
+  },
+  {
+   "row": "C149",
+   "screen": "walk_chris_store.watch",
+   "verdict": "PASS",
+   "line": "He catches your eye later, and grins.",
+   "why": "points at Chris knowing she saw (its truth is judged at C460)"
+  },
+  {
+   "row": "C149",
+   "screen": "walk_tom_tips.nothing",
+   "verdict": "PASS",
+   "line": "He'll be watching you next shift.",
+   "why": "ends on her next shift with Tom, a real shift since met_tom comes with cafe_hired"
+  },
+  {
+   "row": "C151",
+   "screen": "walk_chris_store.moment",
+   "verdict": "FAIL",
+   "line": "\"Chris. The shop. Chris.\" / \"Five minutes. Then the shop.\"",
+   "why": "a note row: the repeatable moment carries two spoken lines, not one"
+  },
+  {
+   "row": "C151",
+   "screen": "walk_zoe_sam.moment",
+   "verdict": "FAIL",
+   "line": "\"Don't you dare come yet...\" / \"Then stop doing that. Fuck.\"",
+   "why": "a note row: the repeatable moment carries two spoken lines, not one"
+  },
+  {
+   "row": "C422",
+   "screen": "walk_zoe_outfits.moment",
+   "verdict": "PASS",
+   "line": "Help Zoe choose an outfit · Pick one · Tell her the one she's wearing",
+   "why": "the label and both buttons say plainly what clicking does"
+  },
+  {
+   "row": "C442",
+   "screen": "walk_chris_store.moment",
+   "verdict": "PASS",
+   "line": "Chris has a regular pinned against the shelves, her skirt up round her waist ... Your thighs press together.",
+   "why": "says the act plainly, crude and specific, no hint"
+  },
+  {
+   "row": "C442",
+   "screen": "walk_chris_store.watch",
+   "verdict": "PASS",
+   "line": "Your nipples are hard. You're back out front before they come out. He catches your eye later, and grins.",
+   "why": "says the act plainly, crude and specific, no hint"
+  },
+  {
+   "row": "C442",
+   "screen": "walk_party_bathroom.moment",
+   "verdict": "PASS",
+   "line": "A couple is on the edge of the bath, her dress round her waist, her tits out, his face buried in her cunt, licking. Your face burns.",
+   "why": "says the act plainly, crude and specific, no hint"
+  },
+  {
+   "row": "C442",
+   "screen": "walk_party_bathroom.watch",
+   "verdict": "PASS",
+   "line": "You're wet. You shut the door before they see you. You know that door now.",
+   "why": "says the act plainly, crude and specific, no hint"
+  },
+  {
+   "row": "C450",
+   "screen": "walk_chris_store.watch",
+   "verdict": "PASS",
+   "line": "He catches your eye later, and grins.",
+   "why": "points at Chris knowing she saw (its truth is judged at C460)"
+  },
+  {
+   "row": "C450",
+   "screen": "walk_tom_tips.nothing",
+   "verdict": "PASS",
+   "line": "He'll be watching you next shift.",
+   "why": "ends on her next shift with Tom, a real shift since met_tom comes with cafe_hired"
+  },
+  {
+   "row": "C460",
+   "screen": "walk_chris_store.moment",
+   "verdict": "PASS",
+   "line": "Chris has a regular pinned against the shelves, her skirt up round her waist ... Your thighs press together.",
+   "why": "true at first and last minute and on a repeat visit: Chris at near_cafe Sat/Sun 10-20; window 10-19; the regular is unnamed"
+  },
+  {
+   "row": "C460",
+   "screen": "walk_chris_store.out",
+   "verdict": "PASS",
+   "line": "You back out into the café. The shelf rattles behind the door. It won't be the last time.",
+   "why": "true at first and last minute and on a repeat visit: Chris at near_cafe Sat/Sun 10-20; window 10-19; the regular is unnamed"
+  },
+  {
+   "row": "C460",
+   "screen": "walk_chris_store.watch",
+   "verdict": "FAIL",
+   "line": "He catches your eye later, and grins.",
+   "why": "narrates an event after the scene as fact; the game never builds it, and she may leave at Done",
+   "cause": "P41r2-c1"
+  },
+  {
+   "row": "C460",
+   "screen": "walk_party_bathroom.moment",
+   "verdict": "PASS",
+   "line": "A couple is on the edge of the bath, her dress round her waist, her tits out, his face buried in her cunt, licking. Your face burns.",
+   "why": "true at first and last minute and on a repeat visit: Sat 21-00 / Sun 00-01 matches the weekly party (zoe_party, same window); the couple are strangers"
+  },
+  {
+   "row": "C460",
+   "screen": "walk_party_bathroom.shut",
+   "verdict": "PASS",
+   "line": "You shut the door. The music sounds louder than before. You know that door now.",
+   "why": "true at first and last minute and on a repeat visit: Sat 21-00 / Sun 00-01 matches the weekly party (zoe_party, same window); the couple are strangers"
+  },
+  {
+   "row": "C460",
+   "screen": "walk_party_bathroom.watch",
+   "verdict": "PASS",
+   "line": "You're wet. You shut the door before they see you. You know that door now.",
+   "why": "true at first and last minute and on a repeat visit: Sat 21-00 / Sun 00-01 matches the weekly party (zoe_party, same window); the couple are strangers"
+  },
+  {
+   "row": "C460",
+   "screen": "walk_tom_tips.moment",
+   "verdict": "PASS",
+   "line": "Tom's counting the tip jar before close ... Long day. Don't look at me like that.",
+   "why": "true at first and last minute and on a repeat visit: Tom at near_cafe Mon-Sat 10-21; window 20:00-20:55 inside café hours 07-21, so 'before close' holds; met_tom is set only with cafe_hired, so 'next shift' is true"
+  },
+  {
+   "row": "C460",
+   "screen": "walk_tom_tips.nothing",
+   "verdict": "PASS",
+   "line": "You say nothing. He knows you saw. He'll be watching you next shift.",
+   "why": "true at first and last minute and on a repeat visit: Tom at near_cafe Mon-Sat 10-21; window 20:00-20:55 inside café hours 07-21, so 'before close' holds; met_tom is set only with cafe_hired, so 'next shift' is true"
+  },
+  {
+   "row": "C460",
+   "screen": "walk_tom_tips.tips",
+   "verdict": "PASS",
+   "line": "And I'm the one who pays the rent on this place. ... You'll be counting the jar next time.",
+   "why": "true at first and last minute and on a repeat visit: Tom at near_cafe Mon-Sat 10-21; window 20:00-20:55 inside café hours 07-21, so 'before close' holds; met_tom is set only with cafe_hired, so 'next shift' is true"
+  },
+  {
+   "row": "C460",
+   "screen": "walk_zoe_outfits.moment",
+   "verdict": "PASS",
+   "line": "Zoe's at the mirror in her underwear with three outfits on the bed behind her.",
+   "why": "true at first and last minute and on a repeat visit: Zoe at near_zoe_apartment from 18:00 every day; trigger 18:00-19:00 with Zoe present"
+  },
+  {
+   "row": "C460",
+   "screen": "walk_zoe_outfits.pick",
+   "verdict": "PASS",
+   "line": "You point at the black one. ... She'll be choosing again tomorrow.",
+   "why": "true at first and last minute and on a repeat visit: Zoe at near_zoe_apartment from 18:00 every day; trigger 18:00-19:00 with Zoe present"
+  },
+  {
+   "row": "C460",
+   "screen": "walk_zoe_outfits.wearing",
+   "verdict": "PASS",
+   "line": "She doesn't put anything on. She'll be choosing again tomorrow.",
+   "why": "true at first and last minute and on a repeat visit: Zoe at near_zoe_apartment from 18:00 every day; trigger 18:00-19:00 with Zoe present"
+  },
+  {
+   "row": "C460",
+   "screen": "walk_zoe_sam.moment",
+   "verdict": "PASS",
+   "line": "Zoe on top of Sam on the sofa, her top off ... Your nipples go hard.",
+   "why": "true at first and last minute and on a repeat visit: Zoe at near_zoe_apartment 18-23 (Sat 18-24), Sam 12-02 (who_is_where); trigger needs both, Sun-Fri 19-23, Sat 19-21"
+  },
+  {
+   "row": "C460",
+   "screen": "walk_zoe_sam.watch",
+   "verdict": "PASS",
+   "line": "Your thighs are pressed together and your face is on fire. You know what that sofa's seen now.",
+   "why": "true at first and last minute and on a repeat visit: Zoe at near_zoe_apartment 18-23 (Sat 18-24), Sam 12-02 (who_is_where); trigger needs both, Sun-Fri 19-23, Sat 19-21"
+  },
+  {
+   "row": "C461",
+   "screen": "walk_chris_store.moment",
+   "verdict": "PASS",
+   "line": "Chris has a regular pinned against the shelves, her skirt up round her waist ... Your thighs press together.",
+   "why": "texture and her reactions only; dialogue fits the cast entries (Tom runs the café, Nina owns the shop, Zoe 19, Sam 22)"
+  },
+  {
+   "row": "C461",
+   "screen": "walk_chris_store.out",
+   "verdict": "PASS",
+   "line": "You back out into the café. The shelf rattles behind the door. It won't be the last time.",
+   "why": "texture and her reactions only; dialogue fits the cast entries (Tom runs the café, Nina owns the shop, Zoe 19, Sam 22)"
+  },
+  {
+   "row": "C461",
+   "screen": "walk_chris_store.watch",
+   "verdict": "PASS",
+   "line": "Your nipples are hard. You're back out front before they come out. He catches your eye later, and grins.",
+   "why": "the dialogue fits Chris's entry; the unbuilt 'later' line is judged at C460"
+  },
+  {
+   "row": "C461",
+   "screen": "walk_party_bathroom.moment",
+   "verdict": "PASS",
+   "line": "A couple is on the edge of the bath, her dress round her waist, her tits out, his face buried in her cunt, licking. Your face burns.",
+   "why": "texture and her reactions only; dialogue fits the cast entries (Tom runs the café, Nina owns the shop, Zoe 19, Sam 22)"
+  },
+  {
+   "row": "C461",
+   "screen": "walk_party_bathroom.shut",
+   "verdict": "PASS",
+   "line": "You shut the door. The music sounds louder than before. You know that door now.",
+   "why": "texture and her reactions only; dialogue fits the cast entries (Tom runs the café, Nina owns the shop, Zoe 19, Sam 22)"
+  },
+  {
+   "row": "C461",
+   "screen": "walk_party_bathroom.watch",
+   "verdict": "PASS",
+   "line": "You're wet. You shut the door before they see you. You know that door now.",
+   "why": "texture and her reactions only; dialogue fits the cast entries (Tom runs the café, Nina owns the shop, Zoe 19, Sam 22)"
+  },
+  {
+   "row": "C461",
+   "screen": "walk_tom_tips.moment",
+   "verdict": "PASS",
+   "line": "Tom's counting the tip jar before close ... Long day. Don't look at me like that.",
+   "why": "texture and her reactions only; dialogue fits the cast entries (Tom runs the café, Nina owns the shop, Zoe 19, Sam 22)"
+  },
+  {
+   "row": "C461",
+   "screen": "walk_tom_tips.nothing",
+   "verdict": "PASS",
+   "line": "You say nothing. He knows you saw. He'll be watching you next shift.",
+   "why": "texture and her reactions only; dialogue fits the cast entries (Tom runs the café, Nina owns the shop, Zoe 19, Sam 22)"
+  },
+  {
+   "row": "C461",
+   "screen": "walk_tom_tips.tips",
+   "verdict": "PASS",
+   "line": "And I'm the one who pays the rent on this place. ... You'll be counting the jar next time.",
+   "why": "texture and her reactions only; dialogue fits the cast entries (Tom runs the café, Nina owns the shop, Zoe 19, Sam 22)"
+  },
+  {
+   "row": "C461",
+   "screen": "walk_zoe_outfits.moment",
+   "verdict": "PASS",
+   "line": "Zoe's at the mirror in her underwear with three outfits on the bed behind her.",
+   "why": "texture and her reactions only; dialogue fits the cast entries (Tom runs the café, Nina owns the shop, Zoe 19, Sam 22)"
+  },
+  {
+   "row": "C461",
+   "screen": "walk_zoe_outfits.pick",
+   "verdict": "PASS",
+   "line": "You point at the black one. ... She'll be choosing again tomorrow.",
+   "why": "texture and her reactions only; dialogue fits the cast entries (Tom runs the café, Nina owns the shop, Zoe 19, Sam 22)"
+  },
+  {
+   "row": "C461",
+   "screen": "walk_zoe_outfits.wearing",
+   "verdict": "PASS",
+   "line": "She doesn't put anything on. She'll be choosing again tomorrow.",
+   "why": "texture and her reactions only; dialogue fits the cast entries (Tom runs the café, Nina owns the shop, Zoe 19, Sam 22)"
+  },
+  {
+   "row": "C461",
+   "screen": "walk_zoe_sam.moment",
+   "verdict": "PASS",
+   "line": "Zoe on top of Sam on the sofa, her top off ... Your nipples go hard.",
+   "why": "texture and her reactions only; dialogue fits the cast entries (Tom runs the café, Nina owns the shop, Zoe 19, Sam 22)"
+  },
+  {
+   "row": "C461",
+   "screen": "walk_zoe_sam.watch",
+   "verdict": "PASS",
+   "line": "Your thighs are pressed together and your face is on fire. You know what that sofa's seen now.",
+   "why": "texture and her reactions only; dialogue fits the cast entries (Tom runs the café, Nina owns the shop, Zoe 19, Sam 22)"
+  },
+  {
+   "row": "C927",
+   "screen": "walk_chris_store.out",
+   "verdict": "PASS",
+   "line": "You back out into the café. The shelf rattles behind the door. It won't be the last time.",
+   "why": "every exit states its minutes: the choices 0, Done 5"
+  },
+  {
+   "row": "C927",
+   "screen": "walk_chris_store.watch",
+   "verdict": "PASS",
+   "line": "Your nipples are hard. You're back out front before they come out. He catches your eye later, and grins.",
+   "why": "every exit states its minutes: the choices 0, Done 5"
+  },
+  {
+   "row": "C927",
+   "screen": "walk_party_bathroom.shut",
+   "verdict": "PASS",
+   "line": "You shut the door. The music sounds louder than before. You know that door now.",
+   "why": "every exit states its minutes: the choices 0, Done 5"
+  },
+  {
+   "row": "C927",
+   "screen": "walk_party_bathroom.watch",
+   "verdict": "PASS",
+   "line": "You're wet. You shut the door before they see you. You know that door now.",
+   "why": "every exit states its minutes: the choices 0, Done 5"
+  },
+  {
+   "row": "C927",
+   "screen": "walk_tom_tips.nothing",
+   "verdict": "PASS",
+   "line": "You say nothing. He knows you saw. He'll be watching you next shift.",
+   "why": "every exit states its minutes: the choices 0, Done 5"
+  },
+  {
+   "row": "C927",
+   "screen": "walk_tom_tips.tips",
+   "verdict": "PASS",
+   "line": "And I'm the one who pays the rent on this place. ... You'll be counting the jar next time.",
+   "why": "every exit states its minutes: the choices 0, Done 5"
+  },
+  {
+   "row": "C927",
+   "screen": "walk_zoe_outfits.pick",
+   "verdict": "PASS",
+   "line": "You point at the black one. ... She'll be choosing again tomorrow.",
+   "why": "every exit states its minutes: the choices 0, Done 5"
+  },
+  {
+   "row": "C927",
+   "screen": "walk_zoe_outfits.wearing",
+   "verdict": "PASS",
+   "line": "She doesn't put anything on. She'll be choosing again tomorrow.",
+   "why": "every exit states its minutes: the choices 0, Done 5"
+  },
+  {
+   "row": "C927",
+   "screen": "walk_zoe_sam.watch",
+   "verdict": "PASS",
+   "line": "Your thighs are pressed together and your face is on fire. You know what that sofa's seen now.",
+   "why": "every exit states its minutes: the choices 0, Done 5"
+  },
+  {
+   "row": "C931",
+   "screen": "walk_chris_store.out",
+   "verdict": "PASS",
+   "line": "You back out into the café. The shelf rattles behind the door. It won't be the last time.",
+   "why": "the window ends exclusive and the answer screen costs 0 minutes, so its lines show inside the window"
+  },
+  {
+   "row": "C931",
+   "screen": "walk_chris_store.watch",
+   "verdict": "PASS",
+   "line": "Your nipples are hard. You're back out front before they come out. He catches your eye later, and grins.",
+   "why": "the window ends exclusive and the answer screen costs 0 minutes, so its lines show inside the window"
+  },
+  {
+   "row": "C931",
+   "screen": "walk_party_bathroom.shut",
+   "verdict": "PASS",
+   "line": "You shut the door. The music sounds louder than before. You know that door now.",
+   "why": "the window ends exclusive and the answer screen costs 0 minutes, so its lines show inside the window"
+  },
+  {
+   "row": "C931",
+   "screen": "walk_party_bathroom.watch",
+   "verdict": "PASS",
+   "line": "You're wet. You shut the door before they see you. You know that door now.",
+   "why": "the window ends exclusive and the answer screen costs 0 minutes, so its lines show inside the window"
+  },
+  {
+   "row": "C931",
+   "screen": "walk_tom_tips.nothing",
+   "verdict": "PASS",
+   "line": "You say nothing. He knows you saw. He'll be watching you next shift.",
+   "why": "the window ends exclusive and the answer screen costs 0 minutes, so its lines show inside the window"
+  },
+  {
+   "row": "C931",
+   "screen": "walk_tom_tips.tips",
+   "verdict": "PASS",
+   "line": "And I'm the one who pays the rent on this place. ... You'll be counting the jar next time.",
+   "why": "the window ends exclusive and the answer screen costs 0 minutes, so its lines show inside the window"
+  },
+  {
+   "row": "C931",
+   "screen": "walk_zoe_outfits.pick",
+   "verdict": "PASS",
+   "line": "You point at the black one. ... She'll be choosing again tomorrow.",
+   "why": "the window ends exclusive and the answer screen costs 0 minutes, so its lines show inside the window"
+  },
+  {
+   "row": "C931",
+   "screen": "walk_zoe_outfits.wearing",
+   "verdict": "PASS",
+   "line": "She doesn't put anything on. She'll be choosing again tomorrow.",
+   "why": "the window ends exclusive and the answer screen costs 0 minutes, so its lines show inside the window"
+  },
+  {
+   "row": "C931",
+   "screen": "walk_zoe_sam.watch",
+   "verdict": "PASS",
+   "line": "Your thighs are pressed together and your face is on fire. You know what that sofa's seen now.",
+   "why": "the window ends exclusive and the answer screen costs 0 minutes, so its lines show inside the window"
+  },
+  {
+   "row": "L106",
+   "screen": "walk_chris_store.moment",
+   "verdict": "PASS",
+   "line": "Chris has a regular pinned against the shelves, her skirt up round her waist ... Your thighs press together.",
+   "why": "every named person is where their rows put them: Chris at near_cafe Sat/Sun 10-20; window 10-19; the regular is unnamed"
+  },
+  {
+   "row": "L106",
+   "screen": "walk_chris_store.out",
+   "verdict": "PASS",
+   "line": "You back out into the café. The shelf rattles behind the door. It won't be the last time.",
+   "why": "every named person is where their rows put them: Chris at near_cafe Sat/Sun 10-20; window 10-19; the regular is unnamed"
+  },
+  {
+   "row": "L106",
+   "screen": "walk_chris_store.watch",
+   "verdict": "PASS",
+   "line": "Your nipples are hard. You're back out front before they come out. He catches your eye later, and grins.",
+   "why": "every named person is where their rows put them: Chris at near_cafe Sat/Sun 10-20; window 10-19; the regular is unnamed"
+  },
+  {
+   "row": "L106",
+   "screen": "walk_party_bathroom.moment",
+   "verdict": "PASS",
+   "line": "A couple is on the edge of the bath, her dress round her waist, her tits out, his face buried in her cunt, licking. Your face burns.",
+   "why": "every named person is where their rows put them: Sat 21-00 / Sun 00-01 matches the weekly party (zoe_party, same window); the couple are strangers"
+  },
+  {
+   "row": "L106",
+   "screen": "walk_party_bathroom.shut",
+   "verdict": "PASS",
+   "line": "You shut the door. The music sounds louder than before. You know that door now.",
+   "why": "every named person is where their rows put them: Sat 21-00 / Sun 00-01 matches the weekly party (zoe_party, same window); the couple are strangers"
+  },
+  {
+   "row": "L106",
+   "screen": "walk_party_bathroom.watch",
+   "verdict": "PASS",
+   "line": "You're wet. You shut the door before they see you. You know that door now.",
+   "why": "every named person is where their rows put them: Sat 21-00 / Sun 00-01 matches the weekly party (zoe_party, same window); the couple are strangers"
+  },
+  {
+   "row": "L106",
+   "screen": "walk_tom_tips.moment",
+   "verdict": "PASS",
+   "line": "Tom's counting the tip jar before close ... Long day. Don't look at me like that.",
+   "why": "every named person is where their rows put them: Tom at near_cafe Mon-Sat 10-21; window 20:00-20:55 inside café hours 07-21, so 'before close' holds; met_tom is set only with cafe_hired, so 'next shift' is true"
+  },
+  {
+   "row": "L106",
+   "screen": "walk_tom_tips.nothing",
+   "verdict": "PASS",
+   "line": "You say nothing. He knows you saw. He'll be watching you next shift.",
+   "why": "every named person is where their rows put them: Tom at near_cafe Mon-Sat 10-21; window 20:00-20:55 inside café hours 07-21, so 'before close' holds; met_tom is set only with cafe_hired, so 'next shift' is true"
+  },
+  {
+   "row": "L106",
+   "screen": "walk_tom_tips.tips",
+   "verdict": "PASS",
+   "line": "And I'm the one who pays the rent on this place. ... You'll be counting the jar next time.",
+   "why": "every named person is where their rows put them: Tom at near_cafe Mon-Sat 10-21; window 20:00-20:55 inside café hours 07-21, so 'before close' holds; met_tom is set only with cafe_hired, so 'next shift' is true"
+  },
+  {
+   "row": "L106",
+   "screen": "walk_zoe_outfits.moment",
+   "verdict": "PASS",
+   "line": "Zoe's at the mirror in her underwear with three outfits on the bed behind her.",
+   "why": "every named person is where their rows put them: Zoe at near_zoe_apartment from 18:00 every day; trigger 18:00-19:00 with Zoe present"
+  },
+  {
+   "row": "L106",
+   "screen": "walk_zoe_outfits.pick",
+   "verdict": "PASS",
+   "line": "You point at the black one. ... She'll be choosing again tomorrow.",
+   "why": "every named person is where their rows put them: Zoe at near_zoe_apartment from 18:00 every day; trigger 18:00-19:00 with Zoe present"
+  },
+  {
+   "row": "L106",
+   "screen": "walk_zoe_outfits.wearing",
+   "verdict": "PASS",
+   "line": "She doesn't put anything on. She'll be choosing again tomorrow.",
+   "why": "every named person is where their rows put them: Zoe at near_zoe_apartment from 18:00 every day; trigger 18:00-19:00 with Zoe present"
+  },
+  {
+   "row": "L106",
+   "screen": "walk_zoe_sam.moment",
+   "verdict": "PASS",
+   "line": "Zoe on top of Sam on the sofa, her top off ... Your nipples go hard.",
+   "why": "every named person is where their rows put them: Zoe at near_zoe_apartment 18-23 (Sat 18-24), Sam 12-02 (who_is_where); trigger needs both, Sun-Fri 19-23, Sat 19-21"
+  },
+  {
+   "row": "L106",
+   "screen": "walk_zoe_sam.watch",
+   "verdict": "PASS",
+   "line": "Your thighs are pressed together and your face is on fire. You know what that sofa's seen now.",
+   "why": "every named person is where their rows put them: Zoe at near_zoe_apartment 18-23 (Sat 18-24), Sam 12-02 (who_is_where); trigger needs both, Sun-Fri 19-23, Sat 19-21"
+  },
+  {
+   "row": "L167",
+   "screen": "walk_chris_store.out",
+   "verdict": "PASS",
+   "line": "You back out into the café. The shelf rattles behind the door. It won't be the last time.",
+   "why": "one canvas per scene; days that differ are one trigger with a group (or the same hours every open day); a walk-in hides out of its window by design (walk-ins.md, no 'nothing happens')"
+  },
+  {
+   "row": "L167",
+   "screen": "walk_chris_store.watch",
+   "verdict": "PASS",
+   "line": "Your nipples are hard. You're back out front before they come out. He catches your eye later, and grins.",
+   "why": "one canvas per scene; days that differ are one trigger with a group (or the same hours every open day); a walk-in hides out of its window by design (walk-ins.md, no 'nothing happens')"
+  },
+  {
+   "row": "L167",
+   "screen": "walk_party_bathroom.shut",
+   "verdict": "PASS",
+   "line": "You shut the door. The music sounds louder than before. You know that door now.",
+   "why": "one canvas per scene; days that differ are one trigger with a group (or the same hours every open day); a walk-in hides out of its window by design (walk-ins.md, no 'nothing happens')"
+  },
+  {
+   "row": "L167",
+   "screen": "walk_party_bathroom.watch",
+   "verdict": "PASS",
+   "line": "You're wet. You shut the door before they see you. You know that door now.",
+   "why": "one canvas per scene; days that differ are one trigger with a group (or the same hours every open day); a walk-in hides out of its window by design (walk-ins.md, no 'nothing happens')"
+  },
+  {
+   "row": "L167",
+   "screen": "walk_tom_tips.nothing",
+   "verdict": "PASS",
+   "line": "You say nothing. He knows you saw. He'll be watching you next shift.",
+   "why": "one canvas per scene; days that differ are one trigger with a group (or the same hours every open day); a walk-in hides out of its window by design (walk-ins.md, no 'nothing happens')"
+  },
+  {
+   "row": "L167",
+   "screen": "walk_tom_tips.tips",
+   "verdict": "PASS",
+   "line": "And I'm the one who pays the rent on this place. ... You'll be counting the jar next time.",
+   "why": "one canvas per scene; days that differ are one trigger with a group (or the same hours every open day); a walk-in hides out of its window by design (walk-ins.md, no 'nothing happens')"
+  },
+  {
+   "row": "L167",
+   "screen": "walk_zoe_outfits.pick",
+   "verdict": "PASS",
+   "line": "You point at the black one. ... She'll be choosing again tomorrow.",
+   "why": "one canvas per scene; days that differ are one trigger with a group (or the same hours every open day); a walk-in hides out of its window by design (walk-ins.md, no 'nothing happens')"
+  },
+  {
+   "row": "L167",
+   "screen": "walk_zoe_outfits.wearing",
+   "verdict": "PASS",
+   "line": "She doesn't put anything on. She'll be choosing again tomorrow.",
+   "why": "one canvas per scene; days that differ are one trigger with a group (or the same hours every open day); a walk-in hides out of its window by design (walk-ins.md, no 'nothing happens')"
+  },
+  {
+   "row": "L167",
+   "screen": "walk_zoe_sam.watch",
+   "verdict": "PASS",
+   "line": "Your thighs are pressed together and your face is on fire. You know what that sofa's seen now.",
+   "why": "one canvas per scene; days that differ are one trigger with a group (or the same hours every open day); a walk-in hides out of its window by design (walk-ins.md, no 'nothing happens')"
+  }
+ ],
+ "causes": [
+  {
+   "id": "P41r2-c1",
+   "what": "walk_chris_store.watch ends on an unbuilt future event narrated as fact: \"He catches your eye later, and grins.\""
+  }
+ ]
+}

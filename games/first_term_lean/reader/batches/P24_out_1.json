@@ -1,0 +1,53 @@
+{
+ "verdicts": [
+  {
+   "row": "B10",
+   "screen": "street_meet_vance.porch",
+   "verdict": "PASS",
+   "line": "The man next door is in the one chair on his porch, a mug on the rail, like every Sunday.",
+   "why": "Trigger needs npc_vance present at hood_street and Sunday; his Sunday rows are 09-12 and 17-20, so he is on the porch at every minute it can show. 'like every Sunday' is true: she grew up in the house (location description 'The house you grew up in.').",
+   "cause": null
+  },
+  {
+   "row": "B8",
+   "screen": "street_meet_vance.porch",
+   "verdict": "PASS",
+   "line": "his eyes follow you down the pavement, taking their time over your legs, like he's got all day. Your skin prickles.",
+   "why": "No garment of hers named; 'your legs' is her body.",
+   "cause": null
+  },
+  {
+   "row": "C447",
+   "screen": "street_meet_vance.porch",
+   "verdict": "PASS",
+   "line": "like he's got all day. ... Well. Look who stopped being a kid. Come here a minute, little lady.",
+   "why": "The Chris simile ('like he's pricing you', cafe_hire) is gone; the look is on her legs, unhurried, and the voice is his own: the owner's patience, 'little lady' (used nowhere else), 'I'm the one who knocks', 'So far.' The grew-up beat is shared with Danny ('You grew up.') but in Vance's words and manner, not Danny's 'gorgeous' flirt.",
+   "cause": null
+  },
+  {
+   "row": "C460",
+   "screen": "street_meet_vance.porch",
+   "verdict": "PASS",
+   "line": "his eyes follow you down the pavement, taking their time over your legs, like he's got all day. Your skin prickles.",
+   "why": "Every claim (him there, Sunday, the mug, the look) is true on every Sunday visit it can fire on; the picture matches.",
+   "cause": null
+  },
+  {
+   "row": "C461",
+   "screen": "street_meet_vance.porch",
+   "verdict": "PASS",
+   "line": "Come here a minute, little lady.",
+   "why": "Dialogue fits PLAN \u00a73 (wants her, a little more each time) and the card's term of address.",
+   "cause": null
+  },
+  {
+   "row": "L106",
+   "screen": "street_meet_vance.porch",
+   "verdict": "PASS",
+   "line": "The man next door is in the one chair on his porch",
+   "why": "His rows put him on hood_street whenever the trigger can fire (npc_at_location is_present in its conditions).",
+   "cause": null
+  }
+ ],
+ "causes": []
+}

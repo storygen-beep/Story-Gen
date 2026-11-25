@@ -1,0 +1,213 @@
+{
+ "verdicts": [
+  {
+   "row": "C1177",
+   "screen": "zoe_door_sam.door",
+   "verdict": "PASS",
+   "line": "his eyes stop on your chest long enough that your nipples tighten. You cross your arms.",
+   "why": "a note row; no garment named, she's dressed at a door, the look is the event",
+   "cause": null
+  },
+  {
+   "row": "B10",
+   "screen": "zoe_door_sam.after",
+   "verdict": "PASS",
+   "line": "Six o'clock, sunshine. Unless you get bored of waiting.",
+   "why": "Sam's row (daily 12:00-02:00) covers the whole 12:00-18:00 window; Zoe's rows put her home from 18:00 every day, Saturday included (18-21, then the party), so 'six o'clock' is true",
+   "cause": null
+  },
+  {
+   "row": "B8",
+   "screen": "zoe_door_sam.after",
+   "verdict": "PASS",
+   "line": "Six o'clock, sunshine. Unless you get bored of waiting.",
+   "why": "no number, and no garment of hers is named",
+   "cause": null
+  },
+  {
+   "row": "C460",
+   "screen": "zoe_door_sam.after",
+   "verdict": "PASS",
+   "line": "Six o'clock, sunshine. Unless you get bored of waiting.",
+   "why": "Sam's row (daily 12:00-02:00) covers the whole 12:00-18:00 window; Zoe's rows put her home from 18:00 every day, Saturday included (18-21, then the party), so 'six o'clock' is true",
+   "cause": null
+  },
+  {
+   "row": "C461",
+   "screen": "zoe_door_sam.after",
+   "verdict": "PASS",
+   "line": "Door's open whenever I'm here. Which is always.",
+   "why": "his brag, dialogue that fits the cast entry",
+   "cause": null
+  },
+  {
+   "row": "C927",
+   "screen": "zoe_door_sam.after",
+   "verdict": "PASS",
+   "line": "\"Done\" (5 min)",
+   "why": "the exit states its minutes",
+   "cause": null
+  },
+  {
+   "row": "C931",
+   "screen": "zoe_door_sam.after",
+   "verdict": "PASS",
+   "line": "Six o'clock, sunshine. Unless you get bored of waiting.",
+   "why": "time_of_day 12:00-18:00 end exclusive; at 17:59 Zoe is still out and back at six",
+   "cause": null
+  },
+  {
+   "row": "L106",
+   "screen": "zoe_door_sam.after",
+   "verdict": "PASS",
+   "line": "Six o'clock, sunshine. Unless you get bored of waiting.",
+   "why": "Sam's row (daily 12:00-02:00) covers the whole 12:00-18:00 window; Zoe's rows put her home from 18:00 every day, Saturday included (18-21, then the party), so 'six o'clock' is true",
+   "cause": null
+  },
+  {
+   "row": "L167",
+   "screen": "zoe_door_sam.after",
+   "verdict": "PASS",
+   "line": "Six o'clock, sunshine. Unless you get bored of waiting.",
+   "why": "one window, every day; no row per day kind",
+   "cause": null
+  },
+  {
+   "row": "C889",
+   "screen": "zoe_door_sam.after",
+   "verdict": "PASS",
+   "line": "\"Done\"",
+   "why": "labels name no clock time and no duration; the spend sits in the costs",
+   "cause": null
+  },
+  {
+   "row": "C892",
+   "screen": "zoe_door_sam.after",
+   "verdict": "PASS",
+   "line": "Six o'clock, sunshine. Unless you get bored of waiting.",
+   "why": "no hour in the act",
+   "cause": null
+  },
+  {
+   "row": "C897",
+   "screen": "zoe_door_sam.after",
+   "verdict": "PASS",
+   "line": "\"Done\"",
+   "why": "the only time here is the act's own, not a per-room charge",
+   "cause": null
+  },
+  {
+   "row": "C900",
+   "screen": "zoe_door_sam.after",
+   "verdict": "PASS",
+   "line": "Six o'clock, sunshine. Unless you get bored of waiting.",
+   "why": "names when Zoe is back, a rule her rows keep, not the current time",
+   "cause": null
+  },
+  {
+   "row": "C902",
+   "screen": "zoe_door_sam.after",
+   "verdict": "PASS",
+   "line": "Six o'clock, sunshine. Unless you get bored of waiting.",
+   "why": "at 17:59, the last minute of the window, Zoe is back at six",
+   "cause": null
+  },
+  {
+   "row": "C903",
+   "screen": "zoe_door_sam.after",
+   "verdict": "PASS",
+   "line": "Six o'clock, sunshine. Unless you get bored of waiting.",
+   "why": "names no weekday",
+   "cause": null
+  },
+  {
+   "row": "C906",
+   "screen": "zoe_door_sam.after",
+   "verdict": "PASS",
+   "line": "\"Done\"",
+   "why": "no 'till X' anywhere",
+   "cause": null
+  },
+  {
+   "row": "C910",
+   "screen": "zoe_door_sam.after",
+   "verdict": "PASS",
+   "line": "\"Done\"",
+   "why": "buttons say no time and no energy, and this act costs no money",
+   "cause": null
+  },
+  {
+   "row": "C913",
+   "screen": "zoe_door_sam.after",
+   "verdict": "PASS",
+   "line": "\"Sam\" (trigger, 12:00-18:00)",
+   "why": "a one-time meeting that happens to her; hidden when shut",
+   "cause": null
+  },
+  {
+   "row": "C914",
+   "screen": "zoe_door_sam.after",
+   "verdict": "PASS",
+   "line": "\"Sam\" (trigger)",
+   "why": "no hours printed",
+   "cause": null
+  },
+  {
+   "row": "C916",
+   "screen": "zoe_door_sam.after",
+   "verdict": "PASS",
+   "line": "\"Sam\" (trigger)",
+   "why": "an event stays hidden when shut",
+   "cause": null
+  },
+  {
+   "row": "C920",
+   "screen": "zoe_door_sam.after",
+   "verdict": "PASS",
+   "line": "\"Done\" (5 min) to campus_quad or the apartment",
+   "why": "the 5 minutes are the scene on both branches; the quad is a free hop from Zoe's",
+   "cause": null
+  },
+  {
+   "row": "C924",
+   "screen": "zoe_door_sam.after",
+   "verdict": "PASS",
+   "line": "\"Done\"",
+   "why": "travel cost stays on the moves between areas, not here",
+   "cause": null
+  },
+  {
+   "row": "C926",
+   "screen": "zoe_door_sam.after",
+   "verdict": "PASS",
+   "line": "\"Done\"",
+   "why": "the clock moves only by the choice's minutes",
+   "cause": null
+  },
+  {
+   "row": "C928",
+   "screen": "zoe_door_sam.after",
+   "verdict": "PASS",
+   "line": "Six o'clock, sunshine. Unless you get bored of waiting.",
+   "why": "the current clock isn't printed; 'six' is Zoe's return, true every day",
+   "cause": null
+  },
+  {
+   "row": "C929",
+   "screen": "zoe_door_sam.after",
+   "verdict": "PASS",
+   "line": "\"Done\"",
+   "why": "no activity time on the label",
+   "cause": null
+  },
+  {
+   "row": "C930",
+   "screen": "zoe_door_sam.after",
+   "verdict": "N/A",
+   "line": "\"Done\"",
+   "why": "not work",
+   "cause": null
+  }
+ ],
+ "causes": []
+}

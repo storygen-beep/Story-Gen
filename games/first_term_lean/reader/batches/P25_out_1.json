@@ -1,0 +1,103 @@
+{
+ "verdicts": [
+  {
+   "row": "B10",
+   "screen": "quad_meet_jake.after",
+   "verdict": "PASS",
+   "line": "He's three steps away before he turns and calls back over his shoulder. / Jake: \"And I'm asking again. Fair warning.\"",
+   "why": "every line holds at the first and last minute and on a second visit; no person named (fires while Jake's row has him on the quad, weekdays 14-16, from week two; his friends are unscheduled texture; Zoe 14-15 may be there unnamed and nothing claims she isn't)"
+  },
+  {
+   "row": "B3",
+   "screen": "quad_meet_jake.after",
+   "verdict": "PASS",
+   "line": "He's three steps away before he turns and calls back over his shoulder. / Jake: \"And I'm asking again. Fair warning.\"",
+   "why": "on every path the scene names what comes next: he will ask again"
+  },
+  {
+   "row": "B8",
+   "screen": "quad_meet_jake.after",
+   "verdict": "PASS",
+   "line": "He's three steps away before he turns and calls back over his shoulder. / Jake: \"And I'm asking again. Fair warning.\"",
+   "why": "no garment of hers named; no number that disagrees with PLAN"
+  },
+  {
+   "row": "C109",
+   "screen": "quad_meet_jake.after",
+   "verdict": "PASS",
+   "line": "\"And I'm asking again. Fair warning.\"",
+   "why": "his first scene, so the leak half is N/A (reader.md); the scene ends on a promise on every path"
+  },
+  {
+   "row": "C1275",
+   "screen": "quad_meet_jake.after",
+   "verdict": "PASS",
+   "line": "jogging back toward a group of friends ... looking over his shoulder at the camera with a grin; searches end \"gif\"",
+   "why": "something happens in the picture (he jogs back and looks back), so a gif, and both searches say gif"
+  },
+  {
+   "row": "C149",
+   "screen": "quad_meet_jake.after",
+   "verdict": "PASS",
+   "line": "He's three steps away before he turns and calls back over his shoulder. / Jake: \"And I'm asking again. Fair warning.\"",
+   "why": "every answer reaches his promise to ask again, the scene's last spoken line"
+  },
+  {
+   "row": "C180",
+   "screen": "quad_meet_jake.after",
+   "verdict": "PASS",
+   "line": "\"And I'm asking again. Fair warning.\"",
+   "why": "step 1, nothing before it to pay; the text opens the next step, and PLAN \u00a76/\u00a77 builds it (Jake's dates, release 3), with no date promised"
+  },
+  {
+   "row": "C450",
+   "screen": "quad_meet_jake.after",
+   "verdict": "PASS",
+   "line": "\"And I'm asking again. Fair warning.\" ... You feel them all looking at you for the rest of the way across the quad.",
+   "why": "the closing beat ends on his promise; the last paragraph is his exit and the friends' eyes on her, which keeps the hook rather than closing it"
+  },
+  {
+   "row": "C460",
+   "screen": "quad_meet_jake.after",
+   "verdict": "PASS",
+   "line": "\"And I'm asking again. Fair warning.\"",
+   "why": "his intent in his own voice; the plan has the step that reaches it (PLAN \u00a76, \u00a77); no date, no past, no one named who isn't there"
+  },
+  {
+   "row": "C461",
+   "screen": "quad_meet_jake.after",
+   "verdict": "PASS",
+   "line": "He's three steps away before he turns and calls back over his shoulder. / Jake: \"And I'm asking again. Fair warning.\"",
+   "why": "texture only, and dialogue that fits the cast entry"
+  },
+  {
+   "row": "C927",
+   "screen": "quad_meet_jake.after",
+   "verdict": "PASS",
+   "line": "He's three steps away before he turns and calls back over his shoulder. / Jake: \"And I'm asking again. Fair warning.\"",
+   "why": "every exit carries its own minutes"
+  },
+  {
+   "row": "C931",
+   "screen": "quad_meet_jake.after",
+   "verdict": "N/A",
+   "line": "",
+   "why": "no time_of_day; the trigger reads his row and days_since_flag"
+  },
+  {
+   "row": "L106",
+   "screen": "quad_meet_jake.after",
+   "verdict": "PASS",
+   "line": "He's three steps away before he turns and calls back over his shoulder. / Jake: \"And I'm asking again. Fair warning.\"",
+   "why": "no line names a person whose rows don't put them there (fires while Jake's row has him on the quad, weekdays 14-16, from week two; his friends are unscheduled texture; Zoe 14-15 may be there unnamed and nothing claims she isn't)"
+  },
+  {
+   "row": "L167",
+   "screen": "quad_meet_jake.after",
+   "verdict": "N/A",
+   "line": "He's three steps away before he turns and calls back over his shoulder. / Jake: \"And I'm asking again. Fair warning.\"",
+   "why": "no row on this screen has hours or a window"
+  }
+ ],
+ "causes": []
+}

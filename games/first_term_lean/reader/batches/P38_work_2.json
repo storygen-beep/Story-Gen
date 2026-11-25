@@ -1,0 +1,899 @@
+{
+ "items": [
+  {
+   "row": "B10",
+   "screen": "walk_mark_phone.listen",
+   "why": "screen changed: truth row"
+  },
+  {
+   "row": "B10",
+   "screen": "walk_mark_phone.moment",
+   "why": "screen changed: truth row"
+  },
+  {
+   "row": "B10",
+   "screen": "walk_mark_phone.walkin",
+   "why": "screen changed: truth row"
+  },
+  {
+   "row": "B10",
+   "screen": "walk_mom_bills.late",
+   "why": "screen changed: truth row"
+  },
+  {
+   "row": "B10",
+   "screen": "walk_mom_bills.moment",
+   "why": "screen changed: truth row"
+  },
+  {
+   "row": "B10",
+   "screen": "walk_mom_bills.sit",
+   "why": "screen changed: truth row"
+  },
+  {
+   "row": "B10",
+   "screen": "walk_parents.away",
+   "why": "screen changed: truth row"
+  },
+  {
+   "row": "B10",
+   "screen": "walk_parents.moment",
+   "why": "screen changed: truth row"
+  },
+  {
+   "row": "B10",
+   "screen": "walk_parents.watch",
+   "why": "screen changed: truth row"
+  },
+  {
+   "row": "B10",
+   "screen": "walk_ryan_game.moment",
+   "why": "a fact changed"
+  },
+  {
+   "row": "B10",
+   "screen": "walk_ryan_game.notnow",
+   "why": "screen changed: truth row"
+  },
+  {
+   "row": "B10",
+   "screen": "walk_ryan_game.play",
+   "why": "a fact changed"
+  },
+  {
+   "row": "B10",
+   "screen": "walk_ryan_phone.away",
+   "why": "screen changed: truth row"
+  },
+  {
+   "row": "B10",
+   "screen": "walk_ryan_phone.moment",
+   "why": "screen changed: truth row"
+  },
+  {
+   "row": "B10",
+   "screen": "walk_ryan_phone.watch",
+   "why": "screen changed: truth row"
+  },
+  {
+   "row": "B10",
+   "screen": "walk_ryan_shower.cover",
+   "why": "screen changed: truth row"
+  },
+  {
+   "row": "B10",
+   "screen": "walk_ryan_shower.keep",
+   "why": "screen changed: truth row"
+  },
+  {
+   "row": "B10",
+   "screen": "walk_ryan_shower.moment",
+   "why": "screen changed: truth row"
+  },
+  {
+   "row": "B13",
+   "screen": "walk_ryan_shower.moment",
+   "why": "failed last pass"
+  },
+  {
+   "row": "B3",
+   "screen": "walk_mom_bills.late",
+   "why": "failed last pass"
+  },
+  {
+   "row": "B3",
+   "screen": "walk_mom_bills.sit",
+   "why": "failed last pass"
+  },
+  {
+   "row": "B3",
+   "screen": "walk_parents.away",
+   "why": "failed last pass"
+  },
+  {
+   "row": "B3",
+   "screen": "walk_parents.watch",
+   "why": "failed last pass"
+  },
+  {
+   "row": "B3",
+   "screen": "walk_ryan_phone.away",
+   "why": "failed last pass"
+  },
+  {
+   "row": "B3",
+   "screen": "walk_ryan_phone.watch",
+   "why": "failed last pass"
+  },
+  {
+   "row": "B4",
+   "screen": "walk_ryan_phone.moment",
+   "why": "failed last pass"
+  },
+  {
+   "row": "B4",
+   "screen": "walk_ryan_shower.keep",
+   "why": "failed last pass"
+  },
+  {
+   "row": "B8",
+   "screen": "walk_mark_phone.listen",
+   "why": "screen changed: truth row"
+  },
+  {
+   "row": "B8",
+   "screen": "walk_mark_phone.moment",
+   "why": "screen changed: truth row"
+  },
+  {
+   "row": "B8",
+   "screen": "walk_mark_phone.walkin",
+   "why": "screen changed: truth row"
+  },
+  {
+   "row": "B8",
+   "screen": "walk_mom_bills.late",
+   "why": "screen changed: truth row"
+  },
+  {
+   "row": "B8",
+   "screen": "walk_mom_bills.moment",
+   "why": "screen changed: truth row"
+  },
+  {
+   "row": "B8",
+   "screen": "walk_mom_bills.sit",
+   "why": "screen changed: truth row"
+  },
+  {
+   "row": "B8",
+   "screen": "walk_parents.away",
+   "why": "screen changed: truth row"
+  },
+  {
+   "row": "B8",
+   "screen": "walk_parents.moment",
+   "why": "screen changed: truth row"
+  },
+  {
+   "row": "B8",
+   "screen": "walk_parents.watch",
+   "why": "screen changed: truth row"
+  },
+  {
+   "row": "B8",
+   "screen": "walk_ryan_game.moment",
+   "why": "a fact changed"
+  },
+  {
+   "row": "B8",
+   "screen": "walk_ryan_game.notnow",
+   "why": "screen changed: truth row"
+  },
+  {
+   "row": "B8",
+   "screen": "walk_ryan_game.play",
+   "why": "a fact changed"
+  },
+  {
+   "row": "B8",
+   "screen": "walk_ryan_phone.away",
+   "why": "screen changed: truth row"
+  },
+  {
+   "row": "B8",
+   "screen": "walk_ryan_phone.moment",
+   "why": "screen changed: truth row"
+  },
+  {
+   "row": "B8",
+   "screen": "walk_ryan_phone.watch",
+   "why": "screen changed: truth row"
+  },
+  {
+   "row": "B8",
+   "screen": "walk_ryan_shower.cover",
+   "why": "screen changed: truth row"
+  },
+  {
+   "row": "B8",
+   "screen": "walk_ryan_shower.keep",
+   "why": "screen changed: truth row"
+  },
+  {
+   "row": "B8",
+   "screen": "walk_ryan_shower.moment",
+   "why": "screen changed: truth row"
+  },
+  {
+   "row": "C1262",
+   "screen": "walk_ryan_shower.moment",
+   "why": "failed last pass"
+  },
+  {
+   "row": "C1274",
+   "screen": "walk_ryan_phone.moment",
+   "why": "failed last pass (a note), its screen changed"
+  },
+  {
+   "row": "C1280",
+   "screen": "walk_parents.moment",
+   "why": "failed last pass"
+  },
+  {
+   "row": "C1280",
+   "screen": "walk_ryan_phone.moment",
+   "why": "failed last pass"
+  },
+  {
+   "row": "C149",
+   "screen": "walk_mom_bills.late",
+   "why": "failed last pass"
+  },
+  {
+   "row": "C149",
+   "screen": "walk_mom_bills.sit",
+   "why": "failed last pass"
+  },
+  {
+   "row": "C149",
+   "screen": "walk_parents.away",
+   "why": "failed last pass"
+  },
+  {
+   "row": "C149",
+   "screen": "walk_parents.watch",
+   "why": "failed last pass"
+  },
+  {
+   "row": "C149",
+   "screen": "walk_ryan_phone.away",
+   "why": "failed last pass"
+  },
+  {
+   "row": "C149",
+   "screen": "walk_ryan_phone.watch",
+   "why": "failed last pass"
+  },
+  {
+   "row": "C151",
+   "screen": "walk_parents.moment",
+   "why": "failed last pass (a note), its screen changed"
+  },
+  {
+   "row": "C151",
+   "screen": "walk_ryan_shower.moment",
+   "why": "failed last pass (a note), its screen changed"
+  },
+  {
+   "row": "C442",
+   "screen": "walk_mark_phone.moment",
+   "why": "failed last pass"
+  },
+  {
+   "row": "C449",
+   "screen": "walk_ryan_phone.moment",
+   "why": "failed last pass"
+  },
+  {
+   "row": "C450",
+   "screen": "walk_mark_phone.listen",
+   "why": "failed last pass"
+  },
+  {
+   "row": "C450",
+   "screen": "walk_mark_phone.walkin",
+   "why": "failed last pass"
+  },
+  {
+   "row": "C450",
+   "screen": "walk_mom_bills.late",
+   "why": "failed last pass"
+  },
+  {
+   "row": "C450",
+   "screen": "walk_mom_bills.sit",
+   "why": "failed last pass"
+  },
+  {
+   "row": "C450",
+   "screen": "walk_parents.away",
+   "why": "failed last pass"
+  },
+  {
+   "row": "C450",
+   "screen": "walk_parents.watch",
+   "why": "failed last pass"
+  },
+  {
+   "row": "C450",
+   "screen": "walk_ryan_game.notnow",
+   "why": "failed last pass"
+  },
+  {
+   "row": "C450",
+   "screen": "walk_ryan_phone.away",
+   "why": "failed last pass"
+  },
+  {
+   "row": "C450",
+   "screen": "walk_ryan_phone.watch",
+   "why": "failed last pass"
+  },
+  {
+   "row": "C450",
+   "screen": "walk_ryan_shower.cover",
+   "why": "failed last pass"
+  },
+  {
+   "row": "C460",
+   "screen": "walk_mark_phone.listen",
+   "why": "screen changed: truth row"
+  },
+  {
+   "row": "C460",
+   "screen": "walk_mark_phone.moment",
+   "why": "screen changed: truth row"
+  },
+  {
+   "row": "C460",
+   "screen": "walk_mark_phone.walkin",
+   "why": "screen changed: truth row"
+  },
+  {
+   "row": "C460",
+   "screen": "walk_mom_bills.late",
+   "why": "screen changed: truth row"
+  },
+  {
+   "row": "C460",
+   "screen": "walk_mom_bills.moment",
+   "why": "screen changed: truth row"
+  },
+  {
+   "row": "C460",
+   "screen": "walk_mom_bills.sit",
+   "why": "screen changed: truth row"
+  },
+  {
+   "row": "C460",
+   "screen": "walk_parents.away",
+   "why": "screen changed: truth row"
+  },
+  {
+   "row": "C460",
+   "screen": "walk_parents.moment",
+   "why": "screen changed: truth row"
+  },
+  {
+   "row": "C460",
+   "screen": "walk_parents.watch",
+   "why": "screen changed: truth row"
+  },
+  {
+   "row": "C460",
+   "screen": "walk_ryan_game.moment",
+   "why": "a fact changed"
+  },
+  {
+   "row": "C460",
+   "screen": "walk_ryan_game.notnow",
+   "why": "screen changed: truth row"
+  },
+  {
+   "row": "C460",
+   "screen": "walk_ryan_game.play",
+   "why": "a fact changed"
+  },
+  {
+   "row": "C460",
+   "screen": "walk_ryan_phone.away",
+   "why": "screen changed: truth row"
+  },
+  {
+   "row": "C460",
+   "screen": "walk_ryan_phone.moment",
+   "why": "screen changed: truth row"
+  },
+  {
+   "row": "C460",
+   "screen": "walk_ryan_phone.watch",
+   "why": "screen changed: truth row"
+  },
+  {
+   "row": "C460",
+   "screen": "walk_ryan_shower.cover",
+   "why": "screen changed: truth row"
+  },
+  {
+   "row": "C460",
+   "screen": "walk_ryan_shower.keep",
+   "why": "screen changed: truth row"
+  },
+  {
+   "row": "C460",
+   "screen": "walk_ryan_shower.moment",
+   "why": "screen changed: truth row"
+  },
+  {
+   "row": "C461",
+   "screen": "walk_mark_phone.listen",
+   "why": "screen changed: truth row"
+  },
+  {
+   "row": "C461",
+   "screen": "walk_mark_phone.moment",
+   "why": "screen changed: truth row"
+  },
+  {
+   "row": "C461",
+   "screen": "walk_mark_phone.walkin",
+   "why": "screen changed: truth row"
+  },
+  {
+   "row": "C461",
+   "screen": "walk_mom_bills.late",
+   "why": "screen changed: truth row"
+  },
+  {
+   "row": "C461",
+   "screen": "walk_mom_bills.moment",
+   "why": "screen changed: truth row"
+  },
+  {
+   "row": "C461",
+   "screen": "walk_mom_bills.sit",
+   "why": "screen changed: truth row"
+  },
+  {
+   "row": "C461",
+   "screen": "walk_parents.away",
+   "why": "screen changed: truth row"
+  },
+  {
+   "row": "C461",
+   "screen": "walk_parents.moment",
+   "why": "screen changed: truth row"
+  },
+  {
+   "row": "C461",
+   "screen": "walk_parents.watch",
+   "why": "screen changed: truth row"
+  },
+  {
+   "row": "C461",
+   "screen": "walk_ryan_game.moment",
+   "why": "a fact changed"
+  },
+  {
+   "row": "C461",
+   "screen": "walk_ryan_game.notnow",
+   "why": "screen changed: truth row"
+  },
+  {
+   "row": "C461",
+   "screen": "walk_ryan_game.play",
+   "why": "a fact changed"
+  },
+  {
+   "row": "C461",
+   "screen": "walk_ryan_phone.away",
+   "why": "screen changed: truth row"
+  },
+  {
+   "row": "C461",
+   "screen": "walk_ryan_phone.moment",
+   "why": "screen changed: truth row"
+  },
+  {
+   "row": "C461",
+   "screen": "walk_ryan_phone.watch",
+   "why": "screen changed: truth row"
+  },
+  {
+   "row": "C461",
+   "screen": "walk_ryan_shower.cover",
+   "why": "screen changed: truth row"
+  },
+  {
+   "row": "C461",
+   "screen": "walk_ryan_shower.keep",
+   "why": "screen changed: truth row"
+  },
+  {
+   "row": "C461",
+   "screen": "walk_ryan_shower.moment",
+   "why": "screen changed: truth row"
+  },
+  {
+   "row": "C625",
+   "screen": "walk_mark_phone.moment",
+   "why": "failed last pass (a note), its screen changed"
+  },
+  {
+   "row": "C630",
+   "screen": "walk_mark_phone.moment",
+   "why": "failed last pass"
+  },
+  {
+   "row": "C889",
+   "screen": "walk_ryan_game.play",
+   "why": "a fact changed"
+  },
+  {
+   "row": "C892",
+   "screen": "walk_ryan_game.play",
+   "why": "a fact changed"
+  },
+  {
+   "row": "C897",
+   "screen": "walk_ryan_game.play",
+   "why": "a fact changed"
+  },
+  {
+   "row": "C900",
+   "screen": "walk_ryan_game.play",
+   "why": "a fact changed"
+  },
+  {
+   "row": "C902",
+   "screen": "walk_ryan_game.play",
+   "why": "a fact changed"
+  },
+  {
+   "row": "C903",
+   "screen": "walk_ryan_game.play",
+   "why": "a fact changed"
+  },
+  {
+   "row": "C906",
+   "screen": "walk_ryan_game.play",
+   "why": "a fact changed"
+  },
+  {
+   "row": "C910",
+   "screen": "walk_ryan_game.play",
+   "why": "a fact changed"
+  },
+  {
+   "row": "C913",
+   "screen": "walk_ryan_game.play",
+   "why": "a fact changed"
+  },
+  {
+   "row": "C914",
+   "screen": "walk_ryan_game.play",
+   "why": "a fact changed"
+  },
+  {
+   "row": "C916",
+   "screen": "walk_ryan_game.play",
+   "why": "a fact changed"
+  },
+  {
+   "row": "C920",
+   "screen": "walk_ryan_game.play",
+   "why": "a fact changed"
+  },
+  {
+   "row": "C924",
+   "screen": "walk_ryan_game.play",
+   "why": "a fact changed"
+  },
+  {
+   "row": "C926",
+   "screen": "walk_ryan_game.play",
+   "why": "a fact changed"
+  },
+  {
+   "row": "C927",
+   "screen": "walk_mark_phone.listen",
+   "why": "screen changed: truth row"
+  },
+  {
+   "row": "C927",
+   "screen": "walk_mark_phone.walkin",
+   "why": "screen changed: truth row"
+  },
+  {
+   "row": "C927",
+   "screen": "walk_mom_bills.late",
+   "why": "screen changed: truth row"
+  },
+  {
+   "row": "C927",
+   "screen": "walk_mom_bills.sit",
+   "why": "screen changed: truth row"
+  },
+  {
+   "row": "C927",
+   "screen": "walk_parents.away",
+   "why": "screen changed: truth row"
+  },
+  {
+   "row": "C927",
+   "screen": "walk_parents.watch",
+   "why": "screen changed: truth row"
+  },
+  {
+   "row": "C927",
+   "screen": "walk_ryan_game.notnow",
+   "why": "screen changed: truth row"
+  },
+  {
+   "row": "C927",
+   "screen": "walk_ryan_game.play",
+   "why": "a fact changed"
+  },
+  {
+   "row": "C927",
+   "screen": "walk_ryan_phone.away",
+   "why": "screen changed: truth row"
+  },
+  {
+   "row": "C927",
+   "screen": "walk_ryan_phone.watch",
+   "why": "screen changed: truth row"
+  },
+  {
+   "row": "C927",
+   "screen": "walk_ryan_shower.cover",
+   "why": "screen changed: truth row"
+  },
+  {
+   "row": "C927",
+   "screen": "walk_ryan_shower.keep",
+   "why": "screen changed: truth row"
+  },
+  {
+   "row": "C928",
+   "screen": "walk_ryan_game.play",
+   "why": "a fact changed"
+  },
+  {
+   "row": "C929",
+   "screen": "walk_ryan_game.play",
+   "why": "a fact changed"
+  },
+  {
+   "row": "C930",
+   "screen": "walk_ryan_game.play",
+   "why": "a fact changed"
+  },
+  {
+   "row": "C931",
+   "screen": "walk_mark_phone.listen",
+   "why": "screen changed: truth row"
+  },
+  {
+   "row": "C931",
+   "screen": "walk_mark_phone.walkin",
+   "why": "screen changed: truth row"
+  },
+  {
+   "row": "C931",
+   "screen": "walk_mom_bills.late",
+   "why": "screen changed: truth row"
+  },
+  {
+   "row": "C931",
+   "screen": "walk_mom_bills.sit",
+   "why": "screen changed: truth row"
+  },
+  {
+   "row": "C931",
+   "screen": "walk_parents.away",
+   "why": "screen changed: truth row"
+  },
+  {
+   "row": "C931",
+   "screen": "walk_parents.watch",
+   "why": "screen changed: truth row"
+  },
+  {
+   "row": "C931",
+   "screen": "walk_ryan_game.notnow",
+   "why": "screen changed: truth row"
+  },
+  {
+   "row": "C931",
+   "screen": "walk_ryan_game.play",
+   "why": "a fact changed"
+  },
+  {
+   "row": "C931",
+   "screen": "walk_ryan_phone.away",
+   "why": "screen changed: truth row"
+  },
+  {
+   "row": "C931",
+   "screen": "walk_ryan_phone.watch",
+   "why": "screen changed: truth row"
+  },
+  {
+   "row": "C931",
+   "screen": "walk_ryan_shower.cover",
+   "why": "screen changed: truth row"
+  },
+  {
+   "row": "C931",
+   "screen": "walk_ryan_shower.keep",
+   "why": "screen changed: truth row"
+  },
+  {
+   "row": "L106",
+   "screen": "walk_mark_phone.listen",
+   "why": "screen changed: truth row"
+  },
+  {
+   "row": "L106",
+   "screen": "walk_mark_phone.moment",
+   "why": "screen changed: truth row"
+  },
+  {
+   "row": "L106",
+   "screen": "walk_mark_phone.walkin",
+   "why": "screen changed: truth row"
+  },
+  {
+   "row": "L106",
+   "screen": "walk_mom_bills.late",
+   "why": "screen changed: truth row"
+  },
+  {
+   "row": "L106",
+   "screen": "walk_mom_bills.moment",
+   "why": "screen changed: truth row"
+  },
+  {
+   "row": "L106",
+   "screen": "walk_mom_bills.sit",
+   "why": "screen changed: truth row"
+  },
+  {
+   "row": "L106",
+   "screen": "walk_parents.away",
+   "why": "screen changed: truth row"
+  },
+  {
+   "row": "L106",
+   "screen": "walk_parents.moment",
+   "why": "screen changed: truth row"
+  },
+  {
+   "row": "L106",
+   "screen": "walk_parents.watch",
+   "why": "screen changed: truth row"
+  },
+  {
+   "row": "L106",
+   "screen": "walk_ryan_game.moment",
+   "why": "a fact changed"
+  },
+  {
+   "row": "L106",
+   "screen": "walk_ryan_game.notnow",
+   "why": "screen changed: truth row"
+  },
+  {
+   "row": "L106",
+   "screen": "walk_ryan_game.play",
+   "why": "a fact changed"
+  },
+  {
+   "row": "L106",
+   "screen": "walk_ryan_phone.away",
+   "why": "screen changed: truth row"
+  },
+  {
+   "row": "L106",
+   "screen": "walk_ryan_phone.moment",
+   "why": "screen changed: truth row"
+  },
+  {
+   "row": "L106",
+   "screen": "walk_ryan_phone.watch",
+   "why": "screen changed: truth row"
+  },
+  {
+   "row": "L106",
+   "screen": "walk_ryan_shower.cover",
+   "why": "screen changed: truth row"
+  },
+  {
+   "row": "L106",
+   "screen": "walk_ryan_shower.keep",
+   "why": "screen changed: truth row"
+  },
+  {
+   "row": "L106",
+   "screen": "walk_ryan_shower.moment",
+   "why": "screen changed: truth row"
+  },
+  {
+   "row": "L167",
+   "screen": "walk_mark_phone.listen",
+   "why": "screen changed: truth row"
+  },
+  {
+   "row": "L167",
+   "screen": "walk_mark_phone.walkin",
+   "why": "screen changed: truth row"
+  },
+  {
+   "row": "L167",
+   "screen": "walk_mom_bills.late",
+   "why": "screen changed: truth row"
+  },
+  {
+   "row": "L167",
+   "screen": "walk_mom_bills.sit",
+   "why": "screen changed: truth row"
+  },
+  {
+   "row": "L167",
+   "screen": "walk_parents.away",
+   "why": "screen changed: truth row"
+  },
+  {
+   "row": "L167",
+   "screen": "walk_parents.watch",
+   "why": "screen changed: truth row"
+  },
+  {
+   "row": "L167",
+   "screen": "walk_ryan_game.notnow",
+   "why": "screen changed: truth row"
+  },
+  {
+   "row": "L167",
+   "screen": "walk_ryan_game.play",
+   "why": "a fact changed"
+  },
+  {
+   "row": "L167",
+   "screen": "walk_ryan_phone.away",
+   "why": "screen changed: truth row"
+  },
+  {
+   "row": "L167",
+   "screen": "walk_ryan_phone.watch",
+   "why": "screen changed: truth row"
+  },
+  {
+   "row": "L167",
+   "screen": "walk_ryan_shower.cover",
+   "why": "screen changed: truth row"
+  },
+  {
+   "row": "L167",
+   "screen": "walk_ryan_shower.keep",
+   "why": "screen changed: truth row"
+  },
+  {
+   "row": "L71",
+   "screen": "walk_ryan_shower.keep",
+   "why": "failed last pass"
+  }
+ ]
+}

@@ -1,0 +1,390 @@
+{
+ "verdicts": [
+  {
+   "row": "B10",
+   "screen": "walk_hale_note.knock",
+   "verdict": "PASS",
+   "line": "Young lady. Come back with a real question, and I'll have an answer.",
+   "why": "Hale is there (trigger needs him present); 'He closes the file' true each visit; the dean's presence on the corridor touches no line."
+  },
+  {
+   "row": "B10",
+   "screen": "walk_hale_note.moment",
+   "verdict": "PASS",
+   "line": "Dr. Hale's door is ajar. He's alone with a file open on the desk, a yellow note stuck to it: 'Nadia \u2014 spring.'",
+   "why": "Trigger needs met_hale, Mon/Wed 14:00-17:00 and Hale present; at 14:00 and 16:59 Hale's row has him in campus_offices. The new fact, the dean on the corridor 8-17, doesn't break 'alone': Hale is alone in his own office, the dean is in his at the end. Second visit (once a day) the note and file still read true."
+  },
+  {
+   "row": "B10",
+   "screen": "walk_hale_note.walkon",
+   "verdict": "PASS",
+   "line": "You walk on. You don't know what the note means. You know the name on it.",
+   "why": "No one named as present; 'You know the name on it' true: met_nadia is set with met_hale (toml line 4864), and the name is on the note she just read."
+  },
+  {
+   "row": "B8",
+   "screen": "walk_hale_note.knock",
+   "verdict": "PASS",
+   "line": "Young lady. Come back with a real question, and I'll have an answer.",
+   "why": "No number and no garment on the screen."
+  },
+  {
+   "row": "B8",
+   "screen": "walk_hale_note.moment",
+   "verdict": "PASS",
+   "line": "Dr. Hale's door is ajar. He's alone with a file open on the desk, a yellow note stuck to it: 'Nadia \u2014 spring.'",
+   "why": "No number and no garment on the screen."
+  },
+  {
+   "row": "B8",
+   "screen": "walk_hale_note.walkon",
+   "verdict": "PASS",
+   "line": "You walk on. You don't know what the note means. You know the name on it.",
+   "why": "No number and no garment on the screen."
+  },
+  {
+   "row": "C460",
+   "screen": "walk_hale_note.knock",
+   "verdict": "PASS",
+   "line": "Young lady. Come back with a real question, and I'll have an answer.",
+   "why": "Every claim true at 14:00 and 16:59 Mon/Wed with the dean now on the corridor too: nothing says the corridor is empty or that Hale is the only one on it."
+  },
+  {
+   "row": "C460",
+   "screen": "walk_hale_note.moment",
+   "verdict": "PASS",
+   "line": "Dr. Hale's door is ajar. He's alone with a file open on the desk, a yellow note stuck to it: 'Nadia \u2014 spring.'",
+   "why": "Every claim true at 14:00 and 16:59 Mon/Wed with the dean now on the corridor too: nothing says the corridor is empty or that Hale is the only one on it."
+  },
+  {
+   "row": "C460",
+   "screen": "walk_hale_note.walkon",
+   "verdict": "PASS",
+   "line": "You walk on. You don't know what the note means. You know the name on it.",
+   "why": "Every claim true at 14:00 and 16:59 Mon/Wed with the dean now on the corridor too: nothing says the corridor is empty or that Hale is the only one on it."
+  },
+  {
+   "row": "C461",
+   "screen": "walk_hale_note.knock",
+   "verdict": "PASS",
+   "line": "Young lady. Come back with a real question, and I'll have an answer.",
+   "why": "Texture that can't clash (the yellow note, the file) and Hale's dry manner per his cast entry."
+  },
+  {
+   "row": "C461",
+   "screen": "walk_hale_note.moment",
+   "verdict": "PASS",
+   "line": "Dr. Hale's door is ajar. He's alone with a file open on the desk, a yellow note stuck to it: 'Nadia \u2014 spring.'",
+   "why": "Texture that can't clash (the yellow note, the file) and Hale's dry manner per his cast entry."
+  },
+  {
+   "row": "C461",
+   "screen": "walk_hale_note.walkon",
+   "verdict": "PASS",
+   "line": "You walk on. You don't know what the note means. You know the name on it.",
+   "why": "Texture that can't clash (the yellow note, the file) and Hale's dry manner per his cast entry."
+  },
+  {
+   "row": "C889",
+   "screen": "walk_hale_note.knock",
+   "verdict": "PASS",
+   "line": "Young lady. Come back with a real question, and I'll have an answer.",
+   "why": "Labels 'Knock', 'Walk on', 'Done' name no clock time and no duration; costs 0/5 min carry the spend."
+  },
+  {
+   "row": "C889",
+   "screen": "walk_hale_note.walkon",
+   "verdict": "PASS",
+   "line": "You walk on. You don't know what the note means. You know the name on it.",
+   "why": "Labels 'Knock', 'Walk on', 'Done' name no clock time and no duration; costs 0/5 min carry the spend."
+  },
+  {
+   "row": "C892",
+   "screen": "walk_hale_note.knock",
+   "verdict": "PASS",
+   "line": "Young lady. Come back with a real question, and I'll have an answer.",
+   "why": "No hour in the act; the hours are on the corridor's sign and trigger."
+  },
+  {
+   "row": "C892",
+   "screen": "walk_hale_note.walkon",
+   "verdict": "PASS",
+   "line": "You walk on. You don't know what the note means. You know the name on it.",
+   "why": "No hour in the act; the hours are on the corridor's sign and trigger."
+  },
+  {
+   "row": "C897",
+   "screen": "walk_hale_note.knock",
+   "verdict": "PASS",
+   "line": "Young lady. Come back with a real question, and I'll have an answer.",
+   "why": "No time put on the room; Done spends 5 minutes of the act, not a crossing."
+  },
+  {
+   "row": "C897",
+   "screen": "walk_hale_note.walkon",
+   "verdict": "PASS",
+   "line": "You walk on. You don't know what the note means. You know the name on it.",
+   "why": "No time put on the room; Done spends 5 minutes of the act, not a crossing."
+  },
+  {
+   "row": "C900",
+   "screen": "walk_hale_note.knock",
+   "verdict": "PASS",
+   "line": "Young lady. Come back with a real question, and I'll have an answer.",
+   "why": "No line says what time it is."
+  },
+  {
+   "row": "C900",
+   "screen": "walk_hale_note.walkon",
+   "verdict": "PASS",
+   "line": "You walk on. You don't know what the note means. You know the name on it.",
+   "why": "No line says what time it is."
+  },
+  {
+   "row": "C902",
+   "screen": "walk_hale_note.knock",
+   "verdict": "PASS",
+   "line": "Young lady. Come back with a real question, and I'll have an answer.",
+   "why": "At 16:59, last minute of the window, Hale's row still has him in (14-17), so every line holds."
+  },
+  {
+   "row": "C902",
+   "screen": "walk_hale_note.walkon",
+   "verdict": "PASS",
+   "line": "You walk on. You don't know what the note means. You know the name on it.",
+   "why": "At 16:59, last minute of the window, Hale's row still has him in (14-17), so every line holds."
+  },
+  {
+   "row": "C903",
+   "screen": "walk_hale_note.knock",
+   "verdict": "PASS",
+   "line": "Young lady. Come back with a real question, and I'll have an answer.",
+   "why": "No weekday named; the Mon/Wed weekday condition is on the trigger."
+  },
+  {
+   "row": "C903",
+   "screen": "walk_hale_note.walkon",
+   "verdict": "PASS",
+   "line": "You walk on. You don't know what the note means. You know the name on it.",
+   "why": "No weekday named; the Mon/Wed weekday condition is on the trigger."
+  },
+  {
+   "row": "C906",
+   "screen": "walk_hale_note.knock",
+   "verdict": "PASS",
+   "line": "Young lady. Come back with a real question, and I'll have an answer.",
+   "why": "No 'till X' anywhere."
+  },
+  {
+   "row": "C906",
+   "screen": "walk_hale_note.walkon",
+   "verdict": "PASS",
+   "line": "You walk on. You don't know what the note means. You know the name on it.",
+   "why": "No 'till X' anywhere."
+  },
+  {
+   "row": "C910",
+   "screen": "walk_hale_note.knock",
+   "verdict": "PASS",
+   "line": "Young lady. Come back with a real question, and I'll have an answer.",
+   "why": "Buttons say no time, no energy, no money."
+  },
+  {
+   "row": "C910",
+   "screen": "walk_hale_note.walkon",
+   "verdict": "PASS",
+   "line": "You walk on. You don't know what the note means. You know the name on it.",
+   "why": "Buttons say no time, no energy, no money."
+  },
+  {
+   "row": "C913",
+   "screen": "walk_hale_note.knock",
+   "verdict": "N/A",
+   "line": "Young lady. Come back with a real question, and I'll have an answer.",
+   "why": "N/A here: a walk-in is an event that happens to her, so C916 governs; the corridor itself publishes its hours (sign, closed_text)."
+  },
+  {
+   "row": "C913",
+   "screen": "walk_hale_note.walkon",
+   "verdict": "N/A",
+   "line": "You walk on. You don't know what the note means. You know the name on it.",
+   "why": "N/A here: a walk-in is an event that happens to her, so C916 governs; the corridor itself publishes its hours (sign, closed_text)."
+  },
+  {
+   "row": "C914",
+   "screen": "walk_hale_note.knock",
+   "verdict": "N/A",
+   "line": "Young lady. Come back with a real question, and I'll have an answer.",
+   "why": "N/A: no row on this screen shows hours; nothing is greyed."
+  },
+  {
+   "row": "C914",
+   "screen": "walk_hale_note.walkon",
+   "verdict": "N/A",
+   "line": "You walk on. You don't know what the note means. You know the name on it.",
+   "why": "N/A: no row on this screen shows hours; nothing is greyed."
+  },
+  {
+   "row": "C916",
+   "screen": "walk_hale_note.knock",
+   "verdict": "PASS",
+   "line": "Young lady. Come back with a real question, and I'll have an answer.",
+   "why": "An event that happens to her: no show_when_blocked, so it stays hidden when shut."
+  },
+  {
+   "row": "C916",
+   "screen": "walk_hale_note.walkon",
+   "verdict": "PASS",
+   "line": "You walk on. You don't know what the note means. You know the name on it.",
+   "why": "An event that happens to her: no show_when_blocked, so it stays hidden when shut."
+  },
+  {
+   "row": "C920",
+   "screen": "walk_hale_note.knock",
+   "verdict": "PASS",
+   "line": "Young lady. Come back with a real question, and I'll have an answer.",
+   "why": "Done returns to campus_offices, the same place; no hop cost charged; the 5 minutes are the act's."
+  },
+  {
+   "row": "C920",
+   "screen": "walk_hale_note.walkon",
+   "verdict": "PASS",
+   "line": "You walk on. You don't know what the note means. You know the name on it.",
+   "why": "Done returns to campus_offices, the same place; no hop cost charged; the 5 minutes are the act's."
+  },
+  {
+   "row": "C924",
+   "screen": "walk_hale_note.knock",
+   "verdict": "PASS",
+   "line": "Young lady. Come back with a real question, and I'll have an answer.",
+   "why": "No travel on this screen; nothing breaks it."
+  },
+  {
+   "row": "C924",
+   "screen": "walk_hale_note.walkon",
+   "verdict": "PASS",
+   "line": "You walk on. You don't know what the note means. You know the name on it.",
+   "why": "No travel on this screen; nothing breaks it."
+  },
+  {
+   "row": "C926",
+   "screen": "walk_hale_note.knock",
+   "verdict": "PASS",
+   "line": "Young lady. Come back with a real question, and I'll have an answer.",
+   "why": "Clock moves only by minutes (5); nothing sends it to a named hour."
+  },
+  {
+   "row": "C926",
+   "screen": "walk_hale_note.walkon",
+   "verdict": "PASS",
+   "line": "You walk on. You don't know what the note means. You know the name on it.",
+   "why": "Clock moves only by minutes (5); nothing sends it to a named hour."
+  },
+  {
+   "row": "C927",
+   "screen": "walk_hale_note.knock",
+   "verdict": "PASS",
+   "line": "Young lady. Come back with a real question, and I'll have an answer.",
+   "why": "Exit times stated (Done 5); no unstated exit."
+  },
+  {
+   "row": "C927",
+   "screen": "walk_hale_note.walkon",
+   "verdict": "PASS",
+   "line": "You walk on. You don't know what the note means. You know the name on it.",
+   "why": "Exit times stated (Done 5); no unstated exit."
+  },
+  {
+   "row": "C928",
+   "screen": "walk_hale_note.knock",
+   "verdict": "PASS",
+   "line": "Young lady. Come back with a real question, and I'll have an answer.",
+   "why": "No clock printed into prose."
+  },
+  {
+   "row": "C928",
+   "screen": "walk_hale_note.walkon",
+   "verdict": "PASS",
+   "line": "You walk on. You don't know what the note means. You know the name on it.",
+   "why": "No clock printed into prose."
+  },
+  {
+   "row": "C929",
+   "screen": "walk_hale_note.knock",
+   "verdict": "PASS",
+   "line": "Young lady. Come back with a real question, and I'll have an answer.",
+   "why": "No activity time tagged in the label."
+  },
+  {
+   "row": "C929",
+   "screen": "walk_hale_note.walkon",
+   "verdict": "PASS",
+   "line": "You walk on. You don't know what the note means. You know the name on it.",
+   "why": "No activity time tagged in the label."
+  },
+  {
+   "row": "C930",
+   "screen": "walk_hale_note.knock",
+   "verdict": "PASS",
+   "line": "Young lady. Come back with a real question, and I'll have an answer.",
+   "why": "No show_when_blocked, so the walk-in vanishes out of hours, as an event should (C916)."
+  },
+  {
+   "row": "C930",
+   "screen": "walk_hale_note.walkon",
+   "verdict": "PASS",
+   "line": "You walk on. You don't know what the note means. You know the name on it.",
+   "why": "No show_when_blocked, so the walk-in vanishes out of hours, as an event should (C916)."
+  },
+  {
+   "row": "C931",
+   "screen": "walk_hale_note.knock",
+   "verdict": "PASS",
+   "line": "Young lady. Come back with a real question, and I'll have an answer.",
+   "why": "time_of_day 14:00-17:00, end exclusive, matches Hale's 14-17 office row exactly."
+  },
+  {
+   "row": "C931",
+   "screen": "walk_hale_note.walkon",
+   "verdict": "PASS",
+   "line": "You walk on. You don't know what the note means. You know the name on it.",
+   "why": "time_of_day 14:00-17:00, end exclusive, matches Hale's 14-17 office row exactly."
+  },
+  {
+   "row": "L106",
+   "screen": "walk_hale_note.knock",
+   "verdict": "PASS",
+   "line": "Young lady. Come back with a real question, and I'll have an answer.",
+   "why": "Hale speaks; his row has him there."
+  },
+  {
+   "row": "L106",
+   "screen": "walk_hale_note.moment",
+   "verdict": "PASS",
+   "line": "Dr. Hale's door is ajar. He's alone with a file open on the desk, a yellow note stuck to it: 'Nadia \u2014 spring.'",
+   "why": "Names only Hale, whom his row puts in campus_offices Mon/Wed 14-17; the dean (also there 8-17) isn't claimed absent."
+  },
+  {
+   "row": "L106",
+   "screen": "walk_hale_note.walkon",
+   "verdict": "PASS",
+   "line": "You walk on. You don't know what the note means. You know the name on it.",
+   "why": "Names nobody as present."
+  },
+  {
+   "row": "L167",
+   "screen": "walk_hale_note.knock",
+   "verdict": "N/A",
+   "line": "Young lady. Come back with a real question, and I'll have an answer.",
+   "why": "N/A: no schedule-like row with different hours on different days here."
+  },
+  {
+   "row": "L167",
+   "screen": "walk_hale_note.walkon",
+   "verdict": "N/A",
+   "line": "You walk on. You don't know what the note means. You know the name on it.",
+   "why": "N/A: no schedule-like row with different hours on different days here."
+  }
+ ],
+ "causes": []
+}

@@ -1,0 +1,13 @@
+{
+ "verdicts": [
+  {
+   "row": "B8",
+   "screen": "travel_walk_home.ride",
+   "verdict": "PASS",
+   "line": "The walk home takes forever. Back in the neighbourhood, finally.",
+   "why": "build: trigger at town_square has no costs, exit 'Walk up your street' takes 45 minutes; P45 card 'Walk home (45 min, no energy, as before: P04)', PLAN §2 'walk 45 minutes, 10 energy there and none home', P04 'the walk home takes 45 minutes and no energy' all agree; no garment named",
+   "cause": null
+  }
+ ],
+ "causes": []
+}

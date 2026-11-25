@@ -1,0 +1,37 @@
+{
+ "verdicts": [
+  {
+   "row": "B4",
+   "screen": "location:hood_street",
+   "verdict": "PASS",
+   "line": "The guys at the bus stop go quiet as you pass in your leggings. Your face goes hot, and you walk a little faster.",
+   "why": "her reaction is on her body (face hot, walking faster): low-level pushback",
+   "cause": null
+  },
+  {
+   "row": "B4",
+   "screen": "location:hood_park",
+   "verdict": "PASS",
+   "line": "A jogger coming the other way looks at your leggings, then your face, then your leggings. You run the next stretch faster than you need to.",
+   "why": "her body answers the look: she speeds up, away from it; pushback at her level",
+   "cause": null
+  },
+  {
+   "row": "B4",
+   "screen": "location:hood_gym",
+   "verdict": "PASS",
+   "line": "Your leggings show every line of your ass. You feel their eyes on it all the way to the treadmill.",
+   "why": "the look lands on her body and she feels it there; no appetite, no act her stage hasn't opened",
+   "cause": null
+  },
+  {
+   "row": "C442",
+   "screen": "location:hood_gym",
+   "verdict": "PASS",
+   "line": "Your leggings show every line of your ass.",
+   "why": "says what shows, plainly",
+   "cause": null
+  }
+ ],
+ "causes": []
+}

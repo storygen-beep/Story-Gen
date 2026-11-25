@@ -1,32 +1,32 @@
 {
  "piece": "P22",
- "pass": 1,
+ "pass": 4,
  "screens": {
   "shop_meet_frank.meet": {
    "text": "91ac7305f8eebd82",
-   "facts": "03c16cc24658f1b6",
-   "facts2": "7e0c57f0576a8936",
-   "all": "2d07cb7d66ab3032"
+   "facts": "5f46afb0c2f96483",
+   "facts2": "e2a39cf7856df31b",
+   "all": "e40aa4939390a239"
   },
   "shop_meet_frank.after": {
    "text": "65b61978d543787e",
-   "facts": "bf1dcfa095910269",
-   "facts2": "5bb7321affa0e308",
-   "all": "54fe07da9a60d15f"
+   "facts": "94f313c9c330584f",
+   "facts2": "b0de75eb44281759",
+   "all": "0edf95153887e801"
   },
   "shop_meet_danny.meet": {
-   "text": "4f01362d47b1b437",
-   "facts": "540231d1308d7cbf",
-   "facts2": "08098995c009e7ce",
-   "all": "4f01951a68a70709"
+   "text": "ec5fbbc6a3f79840",
+   "facts": "37bac9a1e3711d03",
+   "facts2": "86d4a370b5bae7c7",
+   "all": "cf93f4681ff30feb"
   },
   "shop_meet_danny.after": {
-   "text": "bafa22381094d5a0",
+   "text": "3279d643437fae5e",
    "facts": "ab0da32714586e35",
    "facts2": "896e8f8ad26c5b50",
-   "all": "c66d09649f1c2945"
+   "all": "47bc9e90a53d753b"
   },
-  "*": "416c6dded680e60a"
+  "*": "883d0f34c9e9c17b"
  },
  "rows": {
   "B1": "5276068df1ca6fa9",
@@ -128,13 +128,15 @@
   "C639": "be0ad7093b24bc46",
   "C640": "728d95d9964ccf25",
   "C644": "f5e1d79f3251dbab",
-  "C596": "6d9bba989a2b9666",
+  "C596": "e5f7e6cf2d01613d",
   "C448": "b86596f1a02766de",
+  "L168": "444c44970dc284f2",
+  "L169": "59defccfc63b0454",
   "C1340": "b76a6583ae88c60f",
   "C769": "f6b6f78a8f2e5ed7",
   "C794": "bad76e5963432385",
-  "C795": "6c9eb17d99266791",
-  "C804": "810ef8e803cb09dd",
+  "C795": "34139e6a6914e171",
+  "C804": "5358489178bff0a4",
   "L106": "13a714429d15f3b2",
   "C776": "4141d9e5e24362c3",
   "C777": "b56360a1040688cf",
@@ -142,6 +144,7 @@
   "C758": "e158aaf055cb61d6",
   "C953": "826bf82fe26afd13",
   "C762": "40e85f1ae92f1e71",
+  "L170": "c3599cd09637a240",
   "C770": "ff9aa31c11e5d50f",
   "C771": "563e3d25c3219dd0",
   "C442": "59b8d8d24f0c7c38",
@@ -165,44 +168,80 @@
    "note": false,
    "screen_hash": "416c6dded680e60a",
    "row_hash": "5276068df1ca6fa9",
-   "carried": false,
+   "carried": true,
    "pass": 1
   },
   {
    "row": "B10",
-   "screen": "shop_meet_danny.meet",
-   "verdict": "FAIL",
-   "line": "Hey, gorgeous. You're new on this street. I'd remember.",
-   "why": "She grew up on this street: hood home is 'The house you grew up in.' (7_final_game.toml:713) and her bed is 'the same single bed since you were twelve' (:760); the line is false on every visit.",
-   "cause": "P22a1-c6",
+   "screen": "shop_meet_danny.after",
+   "verdict": "PASS",
+   "line": "I'm here every evening, gorgeous.",
+   "why": "True on every reachable visit: his rows put him at the till every evening, Mon-Sat 15-23 and Sunday 07-23; each answer's line sits behind its own flag.",
+   "cause": "",
    "note": false,
    "screen_hash": {
-    "text": "4f01362d47b1b437",
-    "facts": "540231d1308d7cbf",
-    "facts2": "08098995c009e7ce",
-    "all": "4f01951a68a70709"
+    "text": "3279d643437fae5e",
+    "facts": "ab0da32714586e35",
+    "facts2": "896e8f8ad26c5b50",
+    "all": "47bc9e90a53d753b"
    },
    "row_hash": "c1c0e2ac2588a579",
-   "carried": false,
-   "pass": 1
+   "carried": true,
+   "pass": 2
+  },
+  {
+   "row": "B10",
+   "screen": "shop_meet_danny.meet",
+   "verdict": "PASS",
+   "line": "\"A guy in his early twenties with the shop's name badge leans behind the counter...\"",
+   "why": "the trigger needs him at the shop; his rows put him behind the counter on every visit",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "ec5fbbc6a3f79840",
+    "facts": "37bac9a1e3711d03",
+    "facts2": "86d4a370b5bae7c7",
+    "all": "cf93f4681ff30feb"
+   },
+   "row_hash": "c1c0e2ac2588a579",
+   "carried": true,
+   "pass": 3
+  },
+  {
+   "row": "B10",
+   "screen": "shop_meet_frank.after",
+   "verdict": "PASS",
+   "line": "\"Whatever you buy in here, Mark's going to hear about it.\"",
+   "why": "true on every visit; Mark named as who'll hear, not as present; no number or garment",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "65b61978d543787e",
+    "facts": "94f313c9c330584f",
+    "facts2": "b0de75eb44281759",
+    "all": "0edf95153887e801"
+   },
+   "row_hash": "c1c0e2ac2588a579",
+   "carried": true,
+   "pass": 3
   },
   {
    "row": "B10",
    "screen": "shop_meet_frank.meet",
    "verdict": "PASS",
-   "line": "You're Laura's girl. Mark's new one. I know your stepdad, girlie. We go back.",
-   "why": "Gated on npc_at_location is_present; who_is_where puts Frank at hood_shop Mon-Sat 07-15; Laura married Mark three years ago (7_final_game.toml:187), so 'new one' holds as his opinion.",
+   "line": "\"A heavy man in his fifties sits behind the till with the paper spread over the counter.\"",
+   "why": "the trigger needs him at the shop; his rows put him behind the counter on every visit",
    "cause": null,
    "note": false,
    "screen_hash": {
     "text": "91ac7305f8eebd82",
-    "facts": "03c16cc24658f1b6",
-    "facts2": "7e0c57f0576a8936",
-    "all": "2d07cb7d66ab3032"
+    "facts": "5f46afb0c2f96483",
+    "facts2": "e2a39cf7856df31b",
+    "all": "e40aa4939390a239"
    },
    "row_hash": "c1c0e2ac2588a579",
-   "carried": false,
-   "pass": 1
+   "carried": true,
+   "pass": 3
   },
   {
    "row": "B11",
@@ -214,26 +253,26 @@
    "note": false,
    "screen_hash": "416c6dded680e60a",
    "row_hash": "1e252efd0904a971",
-   "carried": false,
+   "carried": true,
    "pass": 1
   },
   {
    "row": "B12",
    "screen": "shop_meet_danny.after",
-   "verdict": "FAIL",
-   "line": "When you turn to the shelves you can feel him watching your ass.",
-   "why": "Names her ass and his eyes, but holds no 'not yet' and no price; the look just ends.",
-   "cause": "P22a1-c4",
+   "verdict": "PASS",
+   "line": "you can feel him watching your ass. You don't turn round.",
+   "why": "Low heat on the body: her ass named, his reaction written, a held 'not yet'; not talk only.",
+   "cause": "",
    "note": false,
    "screen_hash": {
-    "text": "bafa22381094d5a0",
+    "text": "3279d643437fae5e",
     "facts": "ab0da32714586e35",
     "facts2": "896e8f8ad26c5b50",
-    "all": "c66d09649f1c2945"
+    "all": "47bc9e90a53d753b"
    },
    "row_hash": "fd109745c67b71d7",
-   "carried": false,
-   "pass": 1
+   "carried": true,
+   "pass": 2
   },
   {
    "row": "B12",
@@ -250,7 +289,7 @@
     "all": "2d07cb7d66ab3032"
    },
    "row_hash": "fd109745c67b71d7",
-   "carried": false,
+   "carried": true,
    "pass": 1
   },
   {
@@ -263,7 +302,7 @@
    "note": false,
    "screen_hash": "416c6dded680e60a",
    "row_hash": "aaf6518b64dcce55",
-   "carried": false,
+   "carried": true,
    "pass": 1
   },
   {
@@ -276,26 +315,26 @@
    "note": false,
    "screen_hash": "416c6dded680e60a",
    "row_hash": "4d9f2ebbce9a39cc",
-   "carried": false,
+   "carried": true,
    "pass": 1
   },
   {
    "row": "B3",
    "screen": "shop_meet_danny.after",
-   "verdict": "FAIL",
-   "line": "When you turn to the shelves you can feel him watching your ass.",
-   "why": "On the snack and silent paths nothing points at what comes next with Danny; only 'Only the ones who come back.' on one path does.",
-   "cause": "P22a1-c3",
+   "verdict": "PASS",
+   "line": "I'm here every evening, gorgeous.",
+   "why": "Ends on a hook that names what comes next: him, at the till, any evening she comes back.",
+   "cause": "",
    "note": false,
    "screen_hash": {
-    "text": "bafa22381094d5a0",
+    "text": "3279d643437fae5e",
     "facts": "ab0da32714586e35",
     "facts2": "896e8f8ad26c5b50",
-    "all": "c66d09649f1c2945"
+    "all": "47bc9e90a53d753b"
    },
    "row_hash": "4d1fce1c4523b5d4",
-   "carried": false,
-   "pass": 1
+   "carried": true,
+   "pass": 2
   },
   {
    "row": "B3",
@@ -312,7 +351,7 @@
     "all": "54fe07da9a60d15f"
    },
    "row_hash": "4d1fce1c4523b5d4",
-   "carried": false,
+   "carried": true,
    "pass": 1
   },
   {
@@ -325,7 +364,7 @@
    "note": false,
    "screen_hash": "416c6dded680e60a",
    "row_hash": "ced37cb0de6e7202",
-   "carried": false,
+   "carried": true,
    "pass": 1
   },
   {
@@ -338,7 +377,7 @@
    "note": false,
    "screen_hash": "416c6dded680e60a",
    "row_hash": "efcbd1ac6a95e2f2",
-   "carried": false,
+   "carried": true,
    "pass": 1
   },
   {
@@ -351,7 +390,7 @@
    "note": false,
    "screen_hash": "416c6dded680e60a",
    "row_hash": "0e32092e9fe64f2c",
-   "carried": false,
+   "carried": true,
    "pass": 1
   },
   {
@@ -364,7 +403,7 @@
    "note": false,
    "screen_hash": "416c6dded680e60a",
    "row_hash": "cef53154cc971fef",
-   "carried": false,
+   "carried": true,
    "pass": 1
   },
   {
@@ -377,8 +416,80 @@
    "note": false,
    "screen_hash": "416c6dded680e60a",
    "row_hash": "80d415cf08e0ebfe",
-   "carried": false,
+   "carried": true,
    "pass": 1
+  },
+  {
+   "row": "B8",
+   "screen": "shop_meet_danny.after",
+   "verdict": "PASS",
+   "line": "you can feel him watching your ass",
+   "why": "No garment named; no number on screen; Done's 5 minutes match the card.",
+   "cause": "",
+   "note": false,
+   "screen_hash": {
+    "text": "3279d643437fae5e",
+    "facts": "ab0da32714586e35",
+    "facts2": "896e8f8ad26c5b50",
+    "all": "47bc9e90a53d753b"
+   },
+   "row_hash": "80d415cf08e0ebfe",
+   "carried": true,
+   "pass": 2
+  },
+  {
+   "row": "B8",
+   "screen": "shop_meet_danny.meet",
+   "verdict": "PASS",
+   "line": "\"A guy in his early twenties with the shop's name badge leans behind the counter...\"",
+   "why": "ages match the picture (52, 23); no garment of hers named",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "ec5fbbc6a3f79840",
+    "facts": "37bac9a1e3711d03",
+    "facts2": "86d4a370b5bae7c7",
+    "all": "cf93f4681ff30feb"
+   },
+   "row_hash": "80d415cf08e0ebfe",
+   "carried": true,
+   "pass": 3
+  },
+  {
+   "row": "B8",
+   "screen": "shop_meet_frank.after",
+   "verdict": "PASS",
+   "line": "\"Whatever you buy in here, Mark's going to hear about it.\"",
+   "why": "true on every visit; Mark named as who'll hear, not as present; no number or garment",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "65b61978d543787e",
+    "facts": "94f313c9c330584f",
+    "facts2": "b0de75eb44281759",
+    "all": "0edf95153887e801"
+   },
+   "row_hash": "80d415cf08e0ebfe",
+   "carried": true,
+   "pass": 3
+  },
+  {
+   "row": "B8",
+   "screen": "shop_meet_frank.meet",
+   "verdict": "PASS",
+   "line": "\"A heavy man in his fifties sits behind the till with the paper spread over the counter.\"",
+   "why": "ages match the picture (52, 23); no garment of hers named",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "91ac7305f8eebd82",
+    "facts": "5f46afb0c2f96483",
+    "facts2": "e2a39cf7856df31b",
+    "all": "e40aa4939390a239"
+   },
+   "row_hash": "80d415cf08e0ebfe",
+   "carried": true,
+   "pass": 3
   },
   {
    "row": "B9",
@@ -390,7 +501,7 @@
    "note": false,
    "screen_hash": "416c6dded680e60a",
    "row_hash": "3b1fcdf549bcc558",
-   "carried": false,
+   "carried": true,
    "pass": 1
   },
   {
@@ -403,26 +514,26 @@
    "note": true,
    "screen_hash": "416c6dded680e60a",
    "row_hash": "657248766e62061f",
-   "carried": false,
+   "carried": true,
    "pass": 1
   },
   {
    "row": "C109",
    "screen": "shop_meet_danny.after",
-   "verdict": "FAIL",
-   "line": "When you turn to the shelves you can feel him watching your ass.",
-   "why": "First scene: the promise it ends on is missing on the snack and silent paths.",
-   "cause": "P22a1-c3",
+   "verdict": "PASS",
+   "line": "I'm here every evening, gorgeous.",
+   "why": "His first scene: the leak half is N/A; the promise it ends on is real (his rows keep him there every evening).",
+   "cause": "",
    "note": false,
    "screen_hash": {
-    "text": "bafa22381094d5a0",
+    "text": "3279d643437fae5e",
     "facts": "ab0da32714586e35",
     "facts2": "896e8f8ad26c5b50",
-    "all": "c66d09649f1c2945"
+    "all": "47bc9e90a53d753b"
    },
    "row_hash": "61500f5337c3614a",
-   "carried": false,
-   "pass": 1
+   "carried": true,
+   "pass": 2
   },
   {
    "row": "C109",
@@ -439,7 +550,7 @@
     "all": "54fe07da9a60d15f"
    },
    "row_hash": "61500f5337c3614a",
-   "carried": false,
+   "carried": true,
    "pass": 1
   },
   {
@@ -452,7 +563,7 @@
    "note": true,
    "screen_hash": "416c6dded680e60a",
    "row_hash": "4200139d2b8f5464",
-   "carried": false,
+   "carried": true,
    "pass": 1
   },
   {
@@ -465,7 +576,7 @@
    "note": true,
    "screen_hash": "416c6dded680e60a",
    "row_hash": "541a03815a8d19c4",
-   "carried": false,
+   "carried": true,
    "pass": 1
   },
   {
@@ -478,7 +589,7 @@
    "note": true,
    "screen_hash": "416c6dded680e60a",
    "row_hash": "7632b28c693a43a4",
-   "carried": false,
+   "carried": true,
    "pass": 1
   },
   {
@@ -491,7 +602,7 @@
    "note": true,
    "screen_hash": "416c6dded680e60a",
    "row_hash": "71c57d9a2f8fdca7",
-   "carried": false,
+   "carried": true,
    "pass": 1
   },
   {
@@ -504,7 +615,7 @@
    "note": true,
    "screen_hash": "416c6dded680e60a",
    "row_hash": "db808998ed69c649",
-   "carried": false,
+   "carried": true,
    "pass": 1
   },
   {
@@ -517,7 +628,7 @@
    "note": true,
    "screen_hash": "416c6dded680e60a",
    "row_hash": "2afadc6bbe1996bd",
-   "carried": false,
+   "carried": true,
    "pass": 1
   },
   {
@@ -530,7 +641,7 @@
    "note": true,
    "screen_hash": "416c6dded680e60a",
    "row_hash": "48eae9ceae06ae00",
-   "carried": false,
+   "carried": true,
    "pass": 1
   },
   {
@@ -543,7 +654,7 @@
    "note": false,
    "screen_hash": "416c6dded680e60a",
    "row_hash": "35e706c759372357",
-   "carried": false,
+   "carried": true,
    "pass": 1
   },
   {
@@ -556,7 +667,7 @@
    "note": false,
    "screen_hash": "416c6dded680e60a",
    "row_hash": "65e6616cd17c7eb3",
-   "carried": false,
+   "carried": true,
    "pass": 1
   },
   {
@@ -569,7 +680,7 @@
    "note": false,
    "screen_hash": "416c6dded680e60a",
    "row_hash": "18d85534582def9d",
-   "carried": false,
+   "carried": true,
    "pass": 1
   },
   {
@@ -582,26 +693,26 @@
    "note": false,
    "screen_hash": "416c6dded680e60a",
    "row_hash": "3835fed23cc316c7",
-   "carried": false,
+   "carried": true,
    "pass": 1
   },
   {
    "row": "C1234",
    "screen": "shop_meet_danny.after",
-   "verdict": "FAIL",
-   "line": "When you turn to the shelves you can feel him watching your ass.",
-   "why": "The picture is Danny seen from the door looking at her, but the line under it has her back to him and his eyes on her ass.",
-   "cause": "P22a1-c1",
+   "verdict": "N/A",
+   "line": "",
+   "why": "The picture moved to the meet screen; the after screen has no media spot.",
+   "cause": "",
    "note": false,
    "screen_hash": {
-    "text": "bafa22381094d5a0",
+    "text": "3279d643437fae5e",
     "facts": "ab0da32714586e35",
     "facts2": "896e8f8ad26c5b50",
-    "all": "c66d09649f1c2945"
+    "all": "47bc9e90a53d753b"
    },
    "row_hash": "1b2a2d5f05b10331",
-   "carried": false,
-   "pass": 1
+   "carried": true,
+   "pass": 2
   },
   {
    "row": "C1234",
@@ -618,26 +729,26 @@
     "all": "54fe07da9a60d15f"
    },
    "row_hash": "1b2a2d5f05b10331",
-   "carried": false,
+   "carried": true,
    "pass": 1
   },
   {
    "row": "C1238",
    "screen": "shop_meet_danny.after",
-   "verdict": "FAIL",
-   "line": "When you turn to the shelves you can feel him watching your ass.",
-   "why": "'Her view from the door... looking the camera up and down' doesn't match a line where she's turned to the shelves.",
-   "cause": "P22a1-c1",
+   "verdict": "N/A",
+   "line": "",
+   "why": "No picture on this screen now.",
+   "cause": "",
    "note": false,
    "screen_hash": {
-    "text": "bafa22381094d5a0",
+    "text": "3279d643437fae5e",
     "facts": "ab0da32714586e35",
     "facts2": "896e8f8ad26c5b50",
-    "all": "c66d09649f1c2945"
+    "all": "47bc9e90a53d753b"
    },
    "row_hash": "6fd430204e984124",
-   "carried": false,
-   "pass": 1
+   "carried": true,
+   "pass": 2
   },
   {
    "row": "C1238",
@@ -654,7 +765,7 @@
     "all": "54fe07da9a60d15f"
    },
    "row_hash": "6fd430204e984124",
-   "carried": false,
+   "carried": true,
    "pass": 1
   },
   {
@@ -667,7 +778,7 @@
    "note": true,
    "screen_hash": "416c6dded680e60a",
    "row_hash": "a843f9b57e43a020",
-   "carried": false,
+   "carried": true,
    "pass": 1
   },
   {
@@ -680,7 +791,7 @@
    "note": false,
    "screen_hash": "416c6dded680e60a",
    "row_hash": "fde578d75b0d3620",
-   "carried": false,
+   "carried": true,
    "pass": 1
   },
   {
@@ -693,7 +804,7 @@
    "note": false,
    "screen_hash": "416c6dded680e60a",
    "row_hash": "803b4c46f1e9d7c7",
-   "carried": false,
+   "carried": true,
    "pass": 1
   },
   {
@@ -706,7 +817,7 @@
    "note": false,
    "screen_hash": "416c6dded680e60a",
    "row_hash": "536e26b5fdc76194",
-   "carried": false,
+   "carried": true,
    "pass": 1
   },
   {
@@ -719,7 +830,7 @@
    "note": false,
    "screen_hash": "416c6dded680e60a",
    "row_hash": "64b72c778e96e443",
-   "carried": false,
+   "carried": true,
    "pass": 1
   },
   {
@@ -732,7 +843,7 @@
    "note": false,
    "screen_hash": "416c6dded680e60a",
    "row_hash": "f0db81b801577bf2",
-   "carried": false,
+   "carried": true,
    "pass": 1
   },
   {
@@ -745,26 +856,26 @@
    "note": true,
    "screen_hash": "416c6dded680e60a",
    "row_hash": "f44d59a3bd6bb921",
-   "carried": false,
+   "carried": true,
    "pass": 1
   },
   {
    "row": "C1275",
    "screen": "shop_meet_danny.after",
-   "verdict": "FAIL",
-   "line": "looking the camera up and down",
-   "why": "A moving look, tagged a still: no 'gif' in the search words.",
-   "cause": "P22a1-c2",
+   "verdict": "N/A",
+   "line": "",
+   "why": "No picture on this screen now.",
+   "cause": "",
    "note": false,
    "screen_hash": {
-    "text": "bafa22381094d5a0",
+    "text": "3279d643437fae5e",
     "facts": "ab0da32714586e35",
     "facts2": "896e8f8ad26c5b50",
-    "all": "c66d09649f1c2945"
+    "all": "47bc9e90a53d753b"
    },
    "row_hash": "ef82ef3fdf215191",
-   "carried": false,
-   "pass": 1
+   "carried": true,
+   "pass": 2
   },
   {
    "row": "C1275",
@@ -781,7 +892,7 @@
     "all": "54fe07da9a60d15f"
    },
    "row_hash": "ef82ef3fdf215191",
-   "carried": false,
+   "carried": true,
    "pass": 1
   },
   {
@@ -794,7 +905,7 @@
    "note": false,
    "screen_hash": "416c6dded680e60a",
    "row_hash": "ee51917c5fb43c13",
-   "carried": false,
+   "carried": true,
    "pass": 1
   },
   {
@@ -807,7 +918,7 @@
    "note": false,
    "screen_hash": "416c6dded680e60a",
    "row_hash": "4d23ccfdc4e41cd9",
-   "carried": false,
+   "carried": true,
    "pass": 1
   },
   {
@@ -820,7 +931,7 @@
    "note": false,
    "screen_hash": "416c6dded680e60a",
    "row_hash": "534032f000706830",
-   "carried": false,
+   "carried": true,
    "pass": 1
   },
   {
@@ -833,7 +944,7 @@
    "note": false,
    "screen_hash": "416c6dded680e60a",
    "row_hash": "a709f257162373b0",
-   "carried": false,
+   "carried": true,
    "pass": 1
   },
   {
@@ -846,7 +957,7 @@
    "note": false,
    "screen_hash": "416c6dded680e60a",
    "row_hash": "4e5683077291be1f",
-   "carried": false,
+   "carried": true,
    "pass": 1
   },
   {
@@ -859,7 +970,7 @@
    "note": false,
    "screen_hash": "416c6dded680e60a",
    "row_hash": "c3025295db7bb1d6",
-   "carried": false,
+   "carried": true,
    "pass": 1
   },
   {
@@ -872,7 +983,7 @@
    "note": false,
    "screen_hash": "416c6dded680e60a",
    "row_hash": "b76a6583ae88c60f",
-   "carried": false,
+   "carried": true,
    "pass": 1
   },
   {
@@ -885,26 +996,26 @@
    "note": true,
    "screen_hash": "416c6dded680e60a",
    "row_hash": "d2b40c16ae543d86",
-   "carried": false,
+   "carried": true,
    "pass": 1
   },
   {
    "row": "C149",
    "screen": "shop_meet_danny.after",
-   "verdict": "FAIL",
-   "line": "When you turn to the shelves you can feel him watching your ass.",
-   "why": "No pointer forward on the snack and silent paths.",
-   "cause": "P22a1-c3",
+   "verdict": "PASS",
+   "line": "I'm here every evening, gorgeous.",
+   "why": "The last line points at the next time: evenings at the shop.",
+   "cause": "",
    "note": false,
    "screen_hash": {
-    "text": "bafa22381094d5a0",
+    "text": "3279d643437fae5e",
     "facts": "ab0da32714586e35",
     "facts2": "896e8f8ad26c5b50",
-    "all": "c66d09649f1c2945"
+    "all": "47bc9e90a53d753b"
    },
    "row_hash": "b8cdd5b1ce3f89ea",
-   "carried": false,
-   "pass": 1
+   "carried": true,
+   "pass": 2
   },
   {
    "row": "C149",
@@ -921,7 +1032,7 @@
     "all": "54fe07da9a60d15f"
    },
    "row_hash": "b8cdd5b1ce3f89ea",
-   "carried": false,
+   "carried": true,
    "pass": 1
   },
   {
@@ -934,7 +1045,7 @@
    "note": true,
    "screen_hash": "416c6dded680e60a",
    "row_hash": "408df581d2b341b6",
-   "carried": false,
+   "carried": true,
    "pass": 1
   },
   {
@@ -947,7 +1058,7 @@
    "note": true,
    "screen_hash": "416c6dded680e60a",
    "row_hash": "72923a871f0435e6",
-   "carried": false,
+   "carried": true,
    "pass": 1
   },
   {
@@ -960,7 +1071,7 @@
    "note": false,
    "screen_hash": "416c6dded680e60a",
    "row_hash": "b24792899ae3ac28",
-   "carried": false,
+   "carried": true,
    "pass": 1
   },
   {
@@ -973,7 +1084,7 @@
    "note": false,
    "screen_hash": "416c6dded680e60a",
    "row_hash": "59fe434fa706bff6",
-   "carried": false,
+   "carried": true,
    "pass": 1
   },
   {
@@ -986,26 +1097,26 @@
    "note": false,
    "screen_hash": "416c6dded680e60a",
    "row_hash": "d9199efed36f9625",
-   "carried": false,
+   "carried": true,
    "pass": 1
   },
   {
    "row": "C180",
    "screen": "shop_meet_danny.after",
-   "verdict": "FAIL",
-   "line": "When you turn to the shelves you can feel him watching your ass.",
-   "why": "The text opens nothing after on two of three paths.",
-   "cause": "P22a1-c3",
+   "verdict": "PASS",
+   "line": "I'm here every evening, gorgeous.",
+   "why": "First step: it opens the next (him at the till every evening, his People card on met_danny) and the text says so.",
+   "cause": "",
    "note": false,
    "screen_hash": {
-    "text": "bafa22381094d5a0",
+    "text": "3279d643437fae5e",
     "facts": "ab0da32714586e35",
     "facts2": "896e8f8ad26c5b50",
-    "all": "c66d09649f1c2945"
+    "all": "47bc9e90a53d753b"
    },
    "row_hash": "d1b589361cb96867",
-   "carried": false,
-   "pass": 1
+   "carried": true,
+   "pass": 2
   },
   {
    "row": "C180",
@@ -1022,7 +1133,7 @@
     "all": "54fe07da9a60d15f"
    },
    "row_hash": "d1b589361cb96867",
-   "carried": false,
+   "carried": true,
    "pass": 1
   },
   {
@@ -1035,7 +1146,7 @@
    "note": true,
    "screen_hash": "416c6dded680e60a",
    "row_hash": "23fc75bfc032d31c",
-   "carried": false,
+   "carried": true,
    "pass": 1
   },
   {
@@ -1048,7 +1159,7 @@
    "note": true,
    "screen_hash": "416c6dded680e60a",
    "row_hash": "480f7e9a025db5b0",
-   "carried": false,
+   "carried": true,
    "pass": 1
   },
   {
@@ -1061,7 +1172,7 @@
    "note": true,
    "screen_hash": "416c6dded680e60a",
    "row_hash": "7b5399adec567cd4",
-   "carried": false,
+   "carried": true,
    "pass": 1
   },
   {
@@ -1074,7 +1185,7 @@
    "note": false,
    "screen_hash": "416c6dded680e60a",
    "row_hash": "3952eba1e2267f12",
-   "carried": false,
+   "carried": true,
    "pass": 1
   },
   {
@@ -1087,7 +1198,7 @@
    "note": true,
    "screen_hash": "416c6dded680e60a",
    "row_hash": "53bd56cf597f7ee3",
-   "carried": false,
+   "carried": true,
    "pass": 1
   },
   {
@@ -1100,7 +1211,7 @@
    "note": true,
    "screen_hash": "416c6dded680e60a",
    "row_hash": "d702aa9200d2154d",
-   "carried": false,
+   "carried": true,
    "pass": 1
   },
   {
@@ -1113,26 +1224,26 @@
    "note": true,
    "screen_hash": "416c6dded680e60a",
    "row_hash": "b920ef848ab61988",
-   "carried": false,
+   "carried": true,
    "pass": 1
   },
   {
    "row": "C311",
    "screen": "shop_meet_danny.after",
-   "verdict": "FAIL",
-   "line": "When you turn to the shelves you can feel him watching your ass.",
-   "why": "Her ass and his eyes named, but no 'not yet' and no price.",
-   "cause": "P22a1-c4",
+   "verdict": "PASS",
+   "line": "you can feel him watching your ass. You don't turn round. At the till his fingers brush yours.",
+   "why": "A part of her body (her ass), his reaction (watching, the brush), a 'not yet' (she doesn't turn round), and a hook (every evening).",
+   "cause": "",
    "note": false,
    "screen_hash": {
-    "text": "bafa22381094d5a0",
+    "text": "3279d643437fae5e",
     "facts": "ab0da32714586e35",
     "facts2": "896e8f8ad26c5b50",
-    "all": "c66d09649f1c2945"
+    "all": "47bc9e90a53d753b"
    },
    "row_hash": "bad20c9f078e8b87",
-   "carried": false,
-   "pass": 1
+   "carried": true,
+   "pass": 2
   },
   {
    "row": "C314",
@@ -1144,7 +1255,7 @@
    "note": false,
    "screen_hash": "416c6dded680e60a",
    "row_hash": "0304731d263aed9f",
-   "carried": false,
+   "carried": true,
    "pass": 1
   },
   {
@@ -1157,7 +1268,7 @@
    "note": false,
    "screen_hash": "416c6dded680e60a",
    "row_hash": "7e128897077ecee6",
-   "carried": false,
+   "carried": true,
    "pass": 1
   },
   {
@@ -1170,7 +1281,7 @@
    "note": false,
    "screen_hash": "416c6dded680e60a",
    "row_hash": "59b8d8d24f0c7c38",
-   "carried": false,
+   "carried": true,
    "pass": 1
   },
   {
@@ -1183,26 +1294,26 @@
    "note": false,
    "screen_hash": "416c6dded680e60a",
    "row_hash": "5f664198d19facd8",
-   "carried": false,
+   "carried": true,
    "pass": 1
   },
   {
    "row": "C448",
    "screen": "shop_meet_danny.meet",
-   "verdict": "FAIL",
-   "line": "A guy in his early twenties leans on the counter with his phone, hood up.",
-   "why": "Never says he works the shop's till; a guy leaning on the counter could be a customer.",
-   "cause": "P22a1-c5",
+   "verdict": "PASS",
+   "line": "His eyes do the walking instead of him, slow, all the way down and back up.",
+   "why": "In the first lines: who (the shop's clerk, name badge), what he wants (her: eyes all the way down), how he feels about her ('Hey, gorgeous').",
+   "cause": "",
    "note": false,
    "screen_hash": {
-    "text": "4f01362d47b1b437",
-    "facts": "540231d1308d7cbf",
-    "facts2": "08098995c009e7ce",
-    "all": "4f01951a68a70709"
+    "text": "ec5fbbc6a3f79840",
+    "facts": "f6b9099611445b93",
+    "facts2": "251bfb6daa82d6bf",
+    "all": "ab21938d092bd5af"
    },
    "row_hash": "b86596f1a02766de",
-   "carried": false,
-   "pass": 1
+   "carried": true,
+   "pass": 2
   },
   {
    "row": "C448",
@@ -1219,7 +1330,7 @@
     "all": "2d07cb7d66ab3032"
    },
    "row_hash": "b86596f1a02766de",
-   "carried": false,
+   "carried": true,
    "pass": 1
   },
   {
@@ -1232,26 +1343,26 @@
    "note": false,
    "screen_hash": "416c6dded680e60a",
    "row_hash": "e33f3e7fed17fa30",
-   "carried": false,
+   "carried": true,
    "pass": 1
   },
   {
    "row": "C450",
    "screen": "shop_meet_danny.after",
-   "verdict": "FAIL",
-   "line": "When you turn to the shelves you can feel him watching your ass.",
-   "why": "No hook forward on two paths.",
-   "cause": "P22a1-c3",
+   "verdict": "PASS",
+   "line": "I'm here every evening, gorgeous.",
+   "why": "Ends on his line inviting her back, not on a chore.",
+   "cause": "",
    "note": false,
    "screen_hash": {
-    "text": "bafa22381094d5a0",
+    "text": "3279d643437fae5e",
     "facts": "ab0da32714586e35",
     "facts2": "896e8f8ad26c5b50",
-    "all": "c66d09649f1c2945"
+    "all": "47bc9e90a53d753b"
    },
    "row_hash": "b01ad555668aba2d",
-   "carried": false,
-   "pass": 1
+   "carried": true,
+   "pass": 2
   },
   {
    "row": "C450",
@@ -1268,7 +1379,7 @@
     "all": "54fe07da9a60d15f"
    },
    "row_hash": "b01ad555668aba2d",
-   "carried": false,
+   "carried": true,
    "pass": 1
   },
   {
@@ -1281,44 +1392,80 @@
    "note": false,
    "screen_hash": "416c6dded680e60a",
    "row_hash": "50dbf74577a813c7",
-   "carried": false,
+   "carried": true,
    "pass": 1
   },
   {
    "row": "C460",
-   "screen": "shop_meet_danny.meet",
-   "verdict": "FAIL",
-   "line": "You're new on this street. I'd remember.",
-   "why": "She grew up in this house ('The house you grew up in.', 7_final_game.toml:713); not new on the street on any playthrough.",
-   "cause": "P22a1-c6",
+   "screen": "shop_meet_danny.after",
+   "verdict": "PASS",
+   "line": "When you turn to the shelves you can feel him watching your ass. You don't turn round. At the till his fingers brush yours.",
+   "why": "No past, no garment, no number claimed; the till moment names no purchase or price, so no money is owed by the line.",
+   "cause": "",
    "note": false,
    "screen_hash": {
-    "text": "4f01362d47b1b437",
-    "facts": "540231d1308d7cbf",
-    "facts2": "08098995c009e7ce",
-    "all": "4f01951a68a70709"
+    "text": "3279d643437fae5e",
+    "facts": "ab0da32714586e35",
+    "facts2": "896e8f8ad26c5b50",
+    "all": "47bc9e90a53d753b"
    },
    "row_hash": "67e48e60d5053a2e",
-   "carried": false,
-   "pass": 1
+   "carried": true,
+   "pass": 2
+  },
+  {
+   "row": "C460",
+   "screen": "shop_meet_danny.meet",
+   "verdict": "PASS",
+   "line": "\"A guy in his early twenties with the shop's name badge leans behind the counter...\"",
+   "why": "true on every reach",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "ec5fbbc6a3f79840",
+    "facts": "37bac9a1e3711d03",
+    "facts2": "86d4a370b5bae7c7",
+    "all": "cf93f4681ff30feb"
+   },
+   "row_hash": "67e48e60d5053a2e",
+   "carried": true,
+   "pass": 3
+  },
+  {
+   "row": "C460",
+   "screen": "shop_meet_frank.after",
+   "verdict": "PASS",
+   "line": "\"Whatever you buy in here, Mark's going to hear about it.\"",
+   "why": "true on every visit; Mark named as who'll hear, not as present; no number or garment",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "65b61978d543787e",
+    "facts": "94f313c9c330584f",
+    "facts2": "b0de75eb44281759",
+    "all": "0edf95153887e801"
+   },
+   "row_hash": "67e48e60d5053a2e",
+   "carried": true,
+   "pass": 3
   },
   {
    "row": "C460",
    "screen": "shop_meet_frank.meet",
    "verdict": "PASS",
-   "line": "You're Laura's girl. Mark's new one. I know your stepdad, girlie. We go back.",
-   "why": "Presence gated; Mark three years married fits 'new one' as his opinion; the 'Mark's going to hear' line is her reading of his threat, a promise PLAN 365 builds in release 2.",
+   "line": "\"A heavy man in his fifties sits behind the till with the paper spread over the counter.\"",
+   "why": "true on every reach",
    "cause": null,
    "note": false,
    "screen_hash": {
     "text": "91ac7305f8eebd82",
-    "facts": "03c16cc24658f1b6",
-    "facts2": "7e0c57f0576a8936",
-    "all": "2d07cb7d66ab3032"
+    "facts": "5f46afb0c2f96483",
+    "facts2": "e2a39cf7856df31b",
+    "all": "e40aa4939390a239"
    },
    "row_hash": "67e48e60d5053a2e",
-   "carried": false,
-   "pass": 1
+   "carried": true,
+   "pass": 3
   },
   {
    "row": "C461",
@@ -1330,8 +1477,80 @@
    "note": false,
    "screen_hash": "416c6dded680e60a",
    "row_hash": "310706ee076318f2",
-   "carried": false,
+   "carried": true,
    "pass": 1
+  },
+  {
+   "row": "C461",
+   "screen": "shop_meet_danny.after",
+   "verdict": "PASS",
+   "line": "Only the ones who come back.",
+   "why": "Every answer's line fits his cast entry (her, at night); 'gorgeous' stays his own.",
+   "cause": "",
+   "note": false,
+   "screen_hash": {
+    "text": "3279d643437fae5e",
+    "facts": "ab0da32714586e35",
+    "facts2": "896e8f8ad26c5b50",
+    "all": "47bc9e90a53d753b"
+   },
+   "row_hash": "310706ee076318f2",
+   "carried": true,
+   "pass": 2
+  },
+  {
+   "row": "C461",
+   "screen": "shop_meet_danny.meet",
+   "verdict": "PASS",
+   "line": "\"A guy in his early twenties with the shop's name badge leans behind the counter...\"",
+   "why": "texture and his manner; can't clash",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "ec5fbbc6a3f79840",
+    "facts": "37bac9a1e3711d03",
+    "facts2": "86d4a370b5bae7c7",
+    "all": "cf93f4681ff30feb"
+   },
+   "row_hash": "310706ee076318f2",
+   "carried": true,
+   "pass": 3
+  },
+  {
+   "row": "C461",
+   "screen": "shop_meet_frank.after",
+   "verdict": "PASS",
+   "line": "\"Whatever you buy in here, Mark's going to hear about it.\"",
+   "why": "true on every visit; Mark named as who'll hear, not as present; no number or garment",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "65b61978d543787e",
+    "facts": "94f313c9c330584f",
+    "facts2": "b0de75eb44281759",
+    "all": "0edf95153887e801"
+   },
+   "row_hash": "310706ee076318f2",
+   "carried": true,
+   "pass": 3
+  },
+  {
+   "row": "C461",
+   "screen": "shop_meet_frank.meet",
+   "verdict": "PASS",
+   "line": "\"A heavy man in his fifties sits behind the till with the paper spread over the counter.\"",
+   "why": "texture and his manner; can't clash",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "91ac7305f8eebd82",
+    "facts": "5f46afb0c2f96483",
+    "facts2": "e2a39cf7856df31b",
+    "all": "e40aa4939390a239"
+   },
+   "row_hash": "310706ee076318f2",
+   "carried": true,
+   "pass": 3
   },
   {
    "row": "C519",
@@ -1343,7 +1562,7 @@
    "note": true,
    "screen_hash": "416c6dded680e60a",
    "row_hash": "e78502f7aa28746d",
-   "carried": false,
+   "carried": true,
    "pass": 1
   },
   {
@@ -1356,21 +1575,21 @@
    "note": false,
    "screen_hash": "416c6dded680e60a",
    "row_hash": "370371a278b9f182",
-   "carried": false,
+   "carried": true,
    "pass": 1
   },
   {
    "row": "C596",
    "screen": "*",
-   "verdict": "N/A",
-   "line": "\u2014",
-   "why": "These are one-time meeting screens, not a talk screen under a person's menu.",
+   "verdict": "PASS",
+   "line": "meeting screen, picture in it",
+   "why": "a first meeting is a new moment, so its picture is allowed; no face-opened menu is built here, and no talk screen carries a picture",
    "cause": null,
    "note": true,
-   "screen_hash": "416c6dded680e60a",
-   "row_hash": "6d9bba989a2b9666",
-   "carried": false,
-   "pass": 1
+   "screen_hash": "883d0f34c9e9c17b",
+   "row_hash": "e5f7e6cf2d01613d",
+   "carried": true,
+   "pass": 3
   },
   {
    "row": "C601",
@@ -1382,7 +1601,7 @@
    "note": false,
    "screen_hash": "416c6dded680e60a",
    "row_hash": "c73aabbce8afa4bc",
-   "carried": false,
+   "carried": true,
    "pass": 1
   },
   {
@@ -1395,7 +1614,7 @@
    "note": true,
    "screen_hash": "416c6dded680e60a",
    "row_hash": "6f777b1fcd750dd1",
-   "carried": false,
+   "carried": true,
    "pass": 1
   },
   {
@@ -1408,7 +1627,7 @@
    "note": true,
    "screen_hash": "416c6dded680e60a",
    "row_hash": "1c4287c56499c374",
-   "carried": false,
+   "carried": true,
    "pass": 1
   },
   {
@@ -1421,7 +1640,7 @@
    "note": true,
    "screen_hash": "416c6dded680e60a",
    "row_hash": "052d4eaafc2196f3",
-   "carried": false,
+   "carried": true,
    "pass": 1
   },
   {
@@ -1434,7 +1653,7 @@
    "note": true,
    "screen_hash": "416c6dded680e60a",
    "row_hash": "76250e48ada2b843",
-   "carried": false,
+   "carried": true,
    "pass": 1
   },
   {
@@ -1447,7 +1666,7 @@
    "note": true,
    "screen_hash": "416c6dded680e60a",
    "row_hash": "78d959e99c156550",
-   "carried": false,
+   "carried": true,
    "pass": 1
   },
   {
@@ -1460,7 +1679,7 @@
    "note": true,
    "screen_hash": "416c6dded680e60a",
    "row_hash": "dc9a1fd9dbf3fb87",
-   "carried": false,
+   "carried": true,
    "pass": 1
   },
   {
@@ -1473,7 +1692,7 @@
    "note": true,
    "screen_hash": "416c6dded680e60a",
    "row_hash": "8e507f7b235acc25",
-   "carried": false,
+   "carried": true,
    "pass": 1
   },
   {
@@ -1486,26 +1705,26 @@
    "note": true,
    "screen_hash": "416c6dded680e60a",
    "row_hash": "4b5c8f8f6ef1b7f0",
-   "carried": false,
+   "carried": true,
    "pass": 1
   },
   {
    "row": "C630",
    "screen": "shop_meet_danny.meet",
-   "verdict": "FAIL",
-   "line": "A guy in his early twenties leans on the counter with his phone, hood up.",
-   "why": "Name by speaker label, but no relation or role on screen.",
-   "cause": "P22a1-c5",
+   "verdict": "PASS",
+   "line": "with the shop's name badge leans behind the counter",
+   "why": "Relation on screen (he works the shop's counter) and his name both: the badge, plus the dialog label 'Danny' with role 'Night clerk' (v2.py:19306-19312).",
+   "cause": "",
    "note": false,
    "screen_hash": {
-    "text": "4f01362d47b1b437",
-    "facts": "540231d1308d7cbf",
-    "facts2": "08098995c009e7ce",
-    "all": "4f01951a68a70709"
+    "text": "ec5fbbc6a3f79840",
+    "facts": "f6b9099611445b93",
+    "facts2": "251bfb6daa82d6bf",
+    "all": "ab21938d092bd5af"
    },
    "row_hash": "5a85503d3ef5a0fb",
-   "carried": false,
-   "pass": 1
+   "carried": true,
+   "pass": 2
   },
   {
    "row": "C630",
@@ -1522,7 +1741,7 @@
     "all": "2d07cb7d66ab3032"
    },
    "row_hash": "5a85503d3ef5a0fb",
-   "carried": false,
+   "carried": true,
    "pass": 1
   },
   {
@@ -1535,7 +1754,7 @@
    "note": true,
    "screen_hash": "416c6dded680e60a",
    "row_hash": "146e6806c6c566e3",
-   "carried": false,
+   "carried": true,
    "pass": 1
   },
   {
@@ -1548,7 +1767,7 @@
    "note": true,
    "screen_hash": "416c6dded680e60a",
    "row_hash": "be0ad7093b24bc46",
-   "carried": false,
+   "carried": true,
    "pass": 1
   },
   {
@@ -1561,7 +1780,7 @@
    "note": true,
    "screen_hash": "416c6dded680e60a",
    "row_hash": "728d95d9964ccf25",
-   "carried": false,
+   "carried": true,
    "pass": 1
   },
   {
@@ -1574,7 +1793,7 @@
    "note": true,
    "screen_hash": "416c6dded680e60a",
    "row_hash": "f5e1d79f3251dbab",
-   "carried": false,
+   "carried": true,
    "pass": 1
   },
   {
@@ -1587,7 +1806,7 @@
    "note": true,
    "screen_hash": "416c6dded680e60a",
    "row_hash": "e158aaf055cb61d6",
-   "carried": false,
+   "carried": true,
    "pass": 1
   },
   {
@@ -1600,7 +1819,7 @@
    "note": false,
    "screen_hash": "416c6dded680e60a",
    "row_hash": "40e85f1ae92f1e71",
-   "carried": false,
+   "carried": true,
    "pass": 1
   },
   {
@@ -1613,7 +1832,7 @@
    "note": true,
    "screen_hash": "416c6dded680e60a",
    "row_hash": "f6b6f78a8f2e5ed7",
-   "carried": false,
+   "carried": true,
    "pass": 1
   },
   {
@@ -1626,7 +1845,7 @@
    "note": true,
    "screen_hash": "416c6dded680e60a",
    "row_hash": "ff9aa31c11e5d50f",
-   "carried": false,
+   "carried": true,
    "pass": 1
   },
   {
@@ -1639,7 +1858,7 @@
    "note": true,
    "screen_hash": "416c6dded680e60a",
    "row_hash": "563e3d25c3219dd0",
-   "carried": false,
+   "carried": true,
    "pass": 1
   },
   {
@@ -1652,7 +1871,7 @@
    "note": false,
    "screen_hash": "416c6dded680e60a",
    "row_hash": "599aac6293908bc4",
-   "carried": false,
+   "carried": true,
    "pass": 1
   },
   {
@@ -1665,7 +1884,7 @@
    "note": false,
    "screen_hash": "416c6dded680e60a",
    "row_hash": "4141d9e5e24362c3",
-   "carried": false,
+   "carried": true,
    "pass": 1
   },
   {
@@ -1678,7 +1897,7 @@
    "note": false,
    "screen_hash": "416c6dded680e60a",
    "row_hash": "b56360a1040688cf",
-   "carried": false,
+   "carried": true,
    "pass": 1
   },
   {
@@ -1691,34 +1910,34 @@
    "note": true,
    "screen_hash": "416c6dded680e60a",
    "row_hash": "bad76e5963432385",
-   "carried": false,
+   "carried": true,
    "pass": 1
   },
   {
    "row": "C795",
    "screen": "*",
    "verdict": "PASS",
-   "line": "\u2014",
-   "why": "The meetings are events at the shop; they add no room text.",
+   "line": "no room text in this piece's screens",
+   "why": "its screens are scenes, not a place's room text; no line per person is added to any room",
    "cause": null,
    "note": true,
-   "screen_hash": "416c6dded680e60a",
-   "row_hash": "6c9eb17d99266791",
-   "carried": false,
-   "pass": 1
+   "screen_hash": "883d0f34c9e9c17b",
+   "row_hash": "34139e6a6914e171",
+   "carried": true,
+   "pass": 3
   },
   {
    "row": "C804",
    "screen": "*",
    "verdict": "PASS",
-   "line": "\u2014",
-   "why": "The shop has a person in it whenever it is open, and the meeting is who's there.",
+   "line": "no room text in this piece's screens",
+   "why": "its screens are scenes, not a place's room text; no line per person is added to any room",
    "cause": null,
    "note": false,
-   "screen_hash": "416c6dded680e60a",
-   "row_hash": "810ef8e803cb09dd",
-   "carried": false,
-   "pass": 1
+   "screen_hash": "883d0f34c9e9c17b",
+   "row_hash": "5358489178bff0a4",
+   "carried": true,
+   "pass": 3
   },
   {
    "row": "C889",
@@ -1730,8 +1949,26 @@
    "note": true,
    "screen_hash": "416c6dded680e60a",
    "row_hash": "def1348d483d0c40",
-   "carried": false,
+   "carried": true,
    "pass": 1
+  },
+  {
+   "row": "C889",
+   "screen": "shop_meet_frank.after",
+   "verdict": "PASS",
+   "line": "Done (5 min) back to the shop; no time in the beat",
+   "why": "no clock time, weekday or duration in prose or label; a once-only meeting gated on Frank's presence; exit spends 5 min",
+   "cause": null,
+   "note": true,
+   "screen_hash": {
+    "text": "65b61978d543787e",
+    "facts": "94f313c9c330584f",
+    "facts2": "b0de75eb44281759",
+    "all": "0edf95153887e801"
+   },
+   "row_hash": "def1348d483d0c40",
+   "carried": true,
+   "pass": 3
   },
   {
    "row": "C892",
@@ -1743,8 +1980,26 @@
    "note": true,
    "screen_hash": "416c6dded680e60a",
    "row_hash": "5c890033f6ac38b8",
-   "carried": false,
+   "carried": true,
    "pass": 1
+  },
+  {
+   "row": "C892",
+   "screen": "shop_meet_frank.after",
+   "verdict": "PASS",
+   "line": "Done (5 min) back to the shop; no time in the beat",
+   "why": "no clock time, weekday or duration in prose or label; a once-only meeting gated on Frank's presence; exit spends 5 min",
+   "cause": null,
+   "note": true,
+   "screen_hash": {
+    "text": "65b61978d543787e",
+    "facts": "94f313c9c330584f",
+    "facts2": "b0de75eb44281759",
+    "all": "0edf95153887e801"
+   },
+   "row_hash": "5c890033f6ac38b8",
+   "carried": true,
+   "pass": 3
   },
   {
    "row": "C897",
@@ -1756,8 +2011,26 @@
    "note": true,
    "screen_hash": "416c6dded680e60a",
    "row_hash": "265ece64add83676",
-   "carried": false,
+   "carried": true,
    "pass": 1
+  },
+  {
+   "row": "C897",
+   "screen": "shop_meet_frank.after",
+   "verdict": "PASS",
+   "line": "Done (5 min) back to the shop; no time in the beat",
+   "why": "no clock time, weekday or duration in prose or label; a once-only meeting gated on Frank's presence; exit spends 5 min",
+   "cause": null,
+   "note": true,
+   "screen_hash": {
+    "text": "65b61978d543787e",
+    "facts": "94f313c9c330584f",
+    "facts2": "b0de75eb44281759",
+    "all": "0edf95153887e801"
+   },
+   "row_hash": "265ece64add83676",
+   "carried": true,
+   "pass": 3
   },
   {
    "row": "C900",
@@ -1769,8 +2042,26 @@
    "note": false,
    "screen_hash": "416c6dded680e60a",
    "row_hash": "6372efb027eb2034",
-   "carried": false,
+   "carried": true,
    "pass": 1
+  },
+  {
+   "row": "C900",
+   "screen": "shop_meet_frank.after",
+   "verdict": "PASS",
+   "line": "Done (5 min) back to the shop; no time in the beat",
+   "why": "no clock time, weekday or duration in prose or label; a once-only meeting gated on Frank's presence; exit spends 5 min",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "65b61978d543787e",
+    "facts": "94f313c9c330584f",
+    "facts2": "b0de75eb44281759",
+    "all": "0edf95153887e801"
+   },
+   "row_hash": "6372efb027eb2034",
+   "carried": true,
+   "pass": 3
   },
   {
    "row": "C902",
@@ -1782,8 +2073,26 @@
    "note": true,
    "screen_hash": "416c6dded680e60a",
    "row_hash": "df5ed7a36dbc74e4",
-   "carried": false,
+   "carried": true,
    "pass": 1
+  },
+  {
+   "row": "C902",
+   "screen": "shop_meet_frank.after",
+   "verdict": "PASS",
+   "line": "Done (5 min) back to the shop; no time in the beat",
+   "why": "no clock time, weekday or duration in prose or label; a once-only meeting gated on Frank's presence; exit spends 5 min",
+   "cause": null,
+   "note": true,
+   "screen_hash": {
+    "text": "65b61978d543787e",
+    "facts": "94f313c9c330584f",
+    "facts2": "b0de75eb44281759",
+    "all": "0edf95153887e801"
+   },
+   "row_hash": "df5ed7a36dbc74e4",
+   "carried": true,
+   "pass": 3
   },
   {
    "row": "C903",
@@ -1795,8 +2104,26 @@
    "note": false,
    "screen_hash": "416c6dded680e60a",
    "row_hash": "4f83b0b5eb45f71b",
-   "carried": false,
+   "carried": true,
    "pass": 1
+  },
+  {
+   "row": "C903",
+   "screen": "shop_meet_frank.after",
+   "verdict": "PASS",
+   "line": "Done (5 min) back to the shop; no time in the beat",
+   "why": "no clock time, weekday or duration in prose or label; a once-only meeting gated on Frank's presence; exit spends 5 min",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "65b61978d543787e",
+    "facts": "94f313c9c330584f",
+    "facts2": "b0de75eb44281759",
+    "all": "0edf95153887e801"
+   },
+   "row_hash": "4f83b0b5eb45f71b",
+   "carried": true,
+   "pass": 3
   },
   {
    "row": "C906",
@@ -1808,8 +2135,26 @@
    "note": true,
    "screen_hash": "416c6dded680e60a",
    "row_hash": "71713a7e7ae739e7",
-   "carried": false,
+   "carried": true,
    "pass": 1
+  },
+  {
+   "row": "C906",
+   "screen": "shop_meet_frank.after",
+   "verdict": "PASS",
+   "line": "Done (5 min) back to the shop; no time in the beat",
+   "why": "no clock time, weekday or duration in prose or label; a once-only meeting gated on Frank's presence; exit spends 5 min",
+   "cause": null,
+   "note": true,
+   "screen_hash": {
+    "text": "65b61978d543787e",
+    "facts": "94f313c9c330584f",
+    "facts2": "b0de75eb44281759",
+    "all": "0edf95153887e801"
+   },
+   "row_hash": "71713a7e7ae739e7",
+   "carried": true,
+   "pass": 3
   },
   {
    "row": "C910",
@@ -1821,8 +2166,26 @@
    "note": true,
    "screen_hash": "416c6dded680e60a",
    "row_hash": "d5a109f1ef88419a",
-   "carried": false,
+   "carried": true,
    "pass": 1
+  },
+  {
+   "row": "C910",
+   "screen": "shop_meet_frank.after",
+   "verdict": "PASS",
+   "line": "Done (5 min) back to the shop; no time in the beat",
+   "why": "no clock time, weekday or duration in prose or label; a once-only meeting gated on Frank's presence; exit spends 5 min",
+   "cause": null,
+   "note": true,
+   "screen_hash": {
+    "text": "65b61978d543787e",
+    "facts": "94f313c9c330584f",
+    "facts2": "b0de75eb44281759",
+    "all": "0edf95153887e801"
+   },
+   "row_hash": "d5a109f1ef88419a",
+   "carried": true,
+   "pass": 3
   },
   {
    "row": "C913",
@@ -1834,8 +2197,26 @@
    "note": false,
    "screen_hash": "416c6dded680e60a",
    "row_hash": "c750f9b6ab4ace14",
-   "carried": false,
+   "carried": true,
    "pass": 1
+  },
+  {
+   "row": "C913",
+   "screen": "shop_meet_frank.after",
+   "verdict": "PASS",
+   "line": "Done (5 min) back to the shop; no time in the beat",
+   "why": "no clock time, weekday or duration in prose or label; a once-only meeting gated on Frank's presence; exit spends 5 min",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "65b61978d543787e",
+    "facts": "94f313c9c330584f",
+    "facts2": "b0de75eb44281759",
+    "all": "0edf95153887e801"
+   },
+   "row_hash": "c750f9b6ab4ace14",
+   "carried": true,
+   "pass": 3
   },
   {
    "row": "C914",
@@ -1847,8 +2228,26 @@
    "note": false,
    "screen_hash": "416c6dded680e60a",
    "row_hash": "bd07273d5822f34f",
-   "carried": false,
+   "carried": true,
    "pass": 1
+  },
+  {
+   "row": "C914",
+   "screen": "shop_meet_frank.after",
+   "verdict": "PASS",
+   "line": "Done (5 min) back to the shop; no time in the beat",
+   "why": "no clock time, weekday or duration in prose or label; a once-only meeting gated on Frank's presence; exit spends 5 min",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "65b61978d543787e",
+    "facts": "94f313c9c330584f",
+    "facts2": "b0de75eb44281759",
+    "all": "0edf95153887e801"
+   },
+   "row_hash": "bd07273d5822f34f",
+   "carried": true,
+   "pass": 3
   },
   {
    "row": "C916",
@@ -1860,8 +2259,26 @@
    "note": false,
    "screen_hash": "416c6dded680e60a",
    "row_hash": "7b2bb0dfdbcfe946",
-   "carried": false,
+   "carried": true,
    "pass": 1
+  },
+  {
+   "row": "C916",
+   "screen": "shop_meet_frank.after",
+   "verdict": "PASS",
+   "line": "Done (5 min) back to the shop; no time in the beat",
+   "why": "no clock time, weekday or duration in prose or label; a once-only meeting gated on Frank's presence; exit spends 5 min",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "65b61978d543787e",
+    "facts": "94f313c9c330584f",
+    "facts2": "b0de75eb44281759",
+    "all": "0edf95153887e801"
+   },
+   "row_hash": "7b2bb0dfdbcfe946",
+   "carried": true,
+   "pass": 3
   },
   {
    "row": "C920",
@@ -1873,8 +2290,26 @@
    "note": false,
    "screen_hash": "416c6dded680e60a",
    "row_hash": "513927dd127fca04",
-   "carried": false,
+   "carried": true,
    "pass": 1
+  },
+  {
+   "row": "C920",
+   "screen": "shop_meet_frank.after",
+   "verdict": "PASS",
+   "line": "Done (5 min) back to the shop; no time in the beat",
+   "why": "no clock time, weekday or duration in prose or label; a once-only meeting gated on Frank's presence; exit spends 5 min",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "65b61978d543787e",
+    "facts": "94f313c9c330584f",
+    "facts2": "b0de75eb44281759",
+    "all": "0edf95153887e801"
+   },
+   "row_hash": "513927dd127fca04",
+   "carried": true,
+   "pass": 3
   },
   {
    "row": "C924",
@@ -1886,8 +2321,26 @@
    "note": true,
    "screen_hash": "416c6dded680e60a",
    "row_hash": "791cd173e23fb130",
-   "carried": false,
+   "carried": true,
    "pass": 1
+  },
+  {
+   "row": "C924",
+   "screen": "shop_meet_frank.after",
+   "verdict": "PASS",
+   "line": "Done (5 min) back to the shop; no time in the beat",
+   "why": "no clock time, weekday or duration in prose or label; a once-only meeting gated on Frank's presence; exit spends 5 min",
+   "cause": null,
+   "note": true,
+   "screen_hash": {
+    "text": "65b61978d543787e",
+    "facts": "94f313c9c330584f",
+    "facts2": "b0de75eb44281759",
+    "all": "0edf95153887e801"
+   },
+   "row_hash": "791cd173e23fb130",
+   "carried": true,
+   "pass": 3
   },
   {
    "row": "C926",
@@ -1899,8 +2352,26 @@
    "note": true,
    "screen_hash": "416c6dded680e60a",
    "row_hash": "177d1e1776fac74b",
-   "carried": false,
+   "carried": true,
    "pass": 1
+  },
+  {
+   "row": "C926",
+   "screen": "shop_meet_frank.after",
+   "verdict": "PASS",
+   "line": "Done (5 min) back to the shop; no time in the beat",
+   "why": "no clock time, weekday or duration in prose or label; a once-only meeting gated on Frank's presence; exit spends 5 min",
+   "cause": null,
+   "note": true,
+   "screen_hash": {
+    "text": "65b61978d543787e",
+    "facts": "94f313c9c330584f",
+    "facts2": "b0de75eb44281759",
+    "all": "0edf95153887e801"
+   },
+   "row_hash": "177d1e1776fac74b",
+   "carried": true,
+   "pass": 3
   },
   {
    "row": "C927",
@@ -1912,8 +2383,44 @@
    "note": true,
    "screen_hash": "416c6dded680e60a",
    "row_hash": "4e86d143688ba8e5",
-   "carried": false,
+   "carried": true,
    "pass": 1
+  },
+  {
+   "row": "C927",
+   "screen": "shop_meet_danny.after",
+   "verdict": "PASS",
+   "line": "Done (time_progression_minutes = 5)",
+   "why": "The exit spends 5 minutes.",
+   "cause": null,
+   "note": true,
+   "screen_hash": {
+    "text": "3279d643437fae5e",
+    "facts": "ab0da32714586e35",
+    "facts2": "896e8f8ad26c5b50",
+    "all": "47bc9e90a53d753b"
+   },
+   "row_hash": "4e86d143688ba8e5",
+   "carried": true,
+   "pass": 2
+  },
+  {
+   "row": "C927",
+   "screen": "shop_meet_frank.after",
+   "verdict": "PASS",
+   "line": "Done (5 min) back to the shop; no time in the beat",
+   "why": "no clock time, weekday or duration in prose or label; a once-only meeting gated on Frank's presence; exit spends 5 min",
+   "cause": null,
+   "note": true,
+   "screen_hash": {
+    "text": "65b61978d543787e",
+    "facts": "94f313c9c330584f",
+    "facts2": "b0de75eb44281759",
+    "all": "0edf95153887e801"
+   },
+   "row_hash": "4e86d143688ba8e5",
+   "carried": true,
+   "pass": 3
   },
   {
    "row": "C928",
@@ -1925,8 +2432,26 @@
    "note": false,
    "screen_hash": "416c6dded680e60a",
    "row_hash": "2c3ccc6bd9929d7f",
-   "carried": false,
+   "carried": true,
    "pass": 1
+  },
+  {
+   "row": "C928",
+   "screen": "shop_meet_frank.after",
+   "verdict": "PASS",
+   "line": "Done (5 min) back to the shop; no time in the beat",
+   "why": "no clock time, weekday or duration in prose or label; a once-only meeting gated on Frank's presence; exit spends 5 min",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "65b61978d543787e",
+    "facts": "94f313c9c330584f",
+    "facts2": "b0de75eb44281759",
+    "all": "0edf95153887e801"
+   },
+   "row_hash": "2c3ccc6bd9929d7f",
+   "carried": true,
+   "pass": 3
   },
   {
    "row": "C929",
@@ -1938,8 +2463,26 @@
    "note": true,
    "screen_hash": "416c6dded680e60a",
    "row_hash": "18b0ecdf6d7fc901",
-   "carried": false,
+   "carried": true,
    "pass": 1
+  },
+  {
+   "row": "C929",
+   "screen": "shop_meet_frank.after",
+   "verdict": "PASS",
+   "line": "Done (5 min) back to the shop; no time in the beat",
+   "why": "no clock time, weekday or duration in prose or label; a once-only meeting gated on Frank's presence; exit spends 5 min",
+   "cause": null,
+   "note": true,
+   "screen_hash": {
+    "text": "65b61978d543787e",
+    "facts": "94f313c9c330584f",
+    "facts2": "b0de75eb44281759",
+    "all": "0edf95153887e801"
+   },
+   "row_hash": "18b0ecdf6d7fc901",
+   "carried": true,
+   "pass": 3
   },
   {
    "row": "C930",
@@ -1951,8 +2494,26 @@
    "note": true,
    "screen_hash": "416c6dded680e60a",
    "row_hash": "beb57cd46fe906bf",
-   "carried": false,
+   "carried": true,
    "pass": 1
+  },
+  {
+   "row": "C930",
+   "screen": "shop_meet_frank.after",
+   "verdict": "PASS",
+   "line": "Done (5 min) back to the shop; no time in the beat",
+   "why": "no clock time, weekday or duration in prose or label; a once-only meeting gated on Frank's presence; exit spends 5 min",
+   "cause": null,
+   "note": true,
+   "screen_hash": {
+    "text": "65b61978d543787e",
+    "facts": "94f313c9c330584f",
+    "facts2": "b0de75eb44281759",
+    "all": "0edf95153887e801"
+   },
+   "row_hash": "beb57cd46fe906bf",
+   "carried": true,
+   "pass": 3
   },
   {
    "row": "C931",
@@ -1964,8 +2525,44 @@
    "note": true,
    "screen_hash": "416c6dded680e60a",
    "row_hash": "1aadffd96e76381c",
-   "carried": false,
+   "carried": true,
    "pass": 1
+  },
+  {
+   "row": "C931",
+   "screen": "shop_meet_danny.after",
+   "verdict": "N/A",
+   "line": "",
+   "why": "No time_of_day condition; his schedule rows are the clock.",
+   "cause": null,
+   "note": true,
+   "screen_hash": {
+    "text": "3279d643437fae5e",
+    "facts": "ab0da32714586e35",
+    "facts2": "896e8f8ad26c5b50",
+    "all": "47bc9e90a53d753b"
+   },
+   "row_hash": "1aadffd96e76381c",
+   "carried": true,
+   "pass": 2
+  },
+  {
+   "row": "C931",
+   "screen": "shop_meet_frank.after",
+   "verdict": "PASS",
+   "line": "Done (5 min) back to the shop; no time in the beat",
+   "why": "no clock time, weekday or duration in prose or label; a once-only meeting gated on Frank's presence; exit spends 5 min",
+   "cause": null,
+   "note": true,
+   "screen_hash": {
+    "text": "65b61978d543787e",
+    "facts": "94f313c9c330584f",
+    "facts2": "b0de75eb44281759",
+    "all": "0edf95153887e801"
+   },
+   "row_hash": "1aadffd96e76381c",
+   "carried": true,
+   "pass": 3
   },
   {
    "row": "C953",
@@ -1977,7 +2574,7 @@
    "note": true,
    "screen_hash": "416c6dded680e60a",
    "row_hash": "826bf82fe26afd13",
-   "carried": false,
+   "carried": true,
    "pass": 1
   },
   {
@@ -1990,8 +2587,80 @@
    "note": false,
    "screen_hash": "416c6dded680e60a",
    "row_hash": "13a714429d15f3b2",
-   "carried": false,
+   "carried": true,
    "pass": 1
+  },
+  {
+   "row": "L106",
+   "screen": "shop_meet_danny.after",
+   "verdict": "PASS",
+   "line": "you can feel him watching your ass",
+   "why": "Only Danny is claimed there, and the canvas is gated on his presence; Frank's rows (07-15 Mon-Sat) never overlap his.",
+   "cause": "",
+   "note": false,
+   "screen_hash": {
+    "text": "3279d643437fae5e",
+    "facts": "ab0da32714586e35",
+    "facts2": "896e8f8ad26c5b50",
+    "all": "47bc9e90a53d753b"
+   },
+   "row_hash": "13a714429d15f3b2",
+   "carried": true,
+   "pass": 2
+  },
+  {
+   "row": "L106",
+   "screen": "shop_meet_danny.meet",
+   "verdict": "PASS",
+   "line": "\"A guy in his early twenties with the shop's name badge leans behind the counter...\"",
+   "why": "only he is named, and the trigger needs him present",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "ec5fbbc6a3f79840",
+    "facts": "37bac9a1e3711d03",
+    "facts2": "86d4a370b5bae7c7",
+    "all": "cf93f4681ff30feb"
+   },
+   "row_hash": "13a714429d15f3b2",
+   "carried": true,
+   "pass": 3
+  },
+  {
+   "row": "L106",
+   "screen": "shop_meet_frank.after",
+   "verdict": "PASS",
+   "line": "\"Whatever you buy in here, Mark's going to hear about it.\"",
+   "why": "true on every visit; Mark named as who'll hear, not as present; no number or garment",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "65b61978d543787e",
+    "facts": "94f313c9c330584f",
+    "facts2": "b0de75eb44281759",
+    "all": "0edf95153887e801"
+   },
+   "row_hash": "13a714429d15f3b2",
+   "carried": true,
+   "pass": 3
+  },
+  {
+   "row": "L106",
+   "screen": "shop_meet_frank.meet",
+   "verdict": "PASS",
+   "line": "\"A heavy man in his fifties sits behind the till with the paper spread over the counter.\"",
+   "why": "only he is named, and the trigger needs him present",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "91ac7305f8eebd82",
+    "facts": "5f46afb0c2f96483",
+    "facts2": "e2a39cf7856df31b",
+    "all": "e40aa4939390a239"
+   },
+   "row_hash": "13a714429d15f3b2",
+   "carried": true,
+   "pass": 3
   },
   {
    "row": "L119",
@@ -2003,7 +2672,7 @@
    "note": false,
    "screen_hash": "416c6dded680e60a",
    "row_hash": "faf4c46f7b59480a",
-   "carried": false,
+   "carried": true,
    "pass": 1
   },
   {
@@ -2016,7 +2685,7 @@
    "note": false,
    "screen_hash": "416c6dded680e60a",
    "row_hash": "4b62583ae03681c7",
-   "carried": false,
+   "carried": true,
    "pass": 1
   },
   {
@@ -2029,7 +2698,7 @@
    "note": false,
    "screen_hash": "416c6dded680e60a",
    "row_hash": "45842b25d0708a15",
-   "carried": false,
+   "carried": true,
    "pass": 1
   },
   {
@@ -2042,7 +2711,7 @@
    "note": false,
    "screen_hash": "416c6dded680e60a",
    "row_hash": "1fca3bfe1d0c2419",
-   "carried": false,
+   "carried": true,
    "pass": 1
   },
   {
@@ -2055,8 +2724,83 @@
    "note": false,
    "screen_hash": "416c6dded680e60a",
    "row_hash": "e64ce2672d85d2d8",
-   "carried": false,
+   "carried": true,
    "pass": 1
+  },
+  {
+   "row": "L167",
+   "screen": "shop_meet_danny.after",
+   "verdict": "N/A",
+   "line": "",
+   "why": "A one-time canvas gated on his presence, not an hours row that greys.",
+   "cause": "",
+   "note": false,
+   "screen_hash": {
+    "text": "3279d643437fae5e",
+    "facts": "ab0da32714586e35",
+    "facts2": "896e8f8ad26c5b50",
+    "all": "47bc9e90a53d753b"
+   },
+   "row_hash": "e64ce2672d85d2d8",
+   "carried": true,
+   "pass": 2
+  },
+  {
+   "row": "L167",
+   "screen": "shop_meet_frank.after",
+   "verdict": "PASS",
+   "line": "Done (5 min) back to the shop; no time in the beat",
+   "why": "no clock time, weekday or duration in prose or label; a once-only meeting gated on Frank's presence; exit spends 5 min",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "65b61978d543787e",
+    "facts": "94f313c9c330584f",
+    "facts2": "b0de75eb44281759",
+    "all": "0edf95153887e801"
+   },
+   "row_hash": "e64ce2672d85d2d8",
+   "carried": true,
+   "pass": 3
+  },
+  {
+   "row": "L168",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "The owner works the till Monday to Saturday, 7am to 3pm; the night clerk has it after 3pm and all day Sunday.",
+   "why": "matches Frank's and Danny's rows; met_frank and met_danny are the end step's when",
+   "cause": null,
+   "note": false,
+   "screen_hash": "883d0f34c9e9c17b",
+   "row_hash": "444c44970dc284f2",
+   "carried": false,
+   "pass": 4
+  },
+  {
+   "row": "L169",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "The owner works the till Monday to Saturday, 7am to 3pm; the night clerk has it after 3pm and all day Sunday.",
+   "why": "each meeting fires on any visit while he's at the till",
+   "cause": null,
+   "note": false,
+   "screen_hash": "883d0f34c9e9c17b",
+   "row_hash": "59defccfc63b0454",
+   "carried": false,
+   "pass": 4
+  },
+  {
+   "row": "L170",
+   "screen": "*",
+   "verdict": "N/A",
+   "line": "",
+   "why": "no place on this piece's screens is hidden_until a flag",
+   "cause": null,
+   "note": false,
+   "screen_hash": "883d0f34c9e9c17b",
+   "row_hash": "c3599cd09637a240",
+   "carried": false,
+   "pass": 4
   },
   {
    "row": "L71",
@@ -2068,39 +2812,14 @@
    "note": false,
    "screen_hash": "416c6dded680e60a",
    "row_hash": "412fb4816f34d294",
-   "carried": false,
+   "carried": true,
    "pass": 1
   }
  ],
- "causes": [
-  {
-   "id": "P22a1-c1",
-   "what": "Danny's picture is him at the counter seen from the door, but it sits under the line where she has turned to the shelves and he watches her ass."
-  },
-  {
-   "id": "P22a1-c2",
-   "what": "Danny's picture describes a moving look ('looking the camera up and down') but is a still with no 'gif' in its search words."
-  },
-  {
-   "id": "P22a1-c3",
-   "what": "Danny's meeting ends on his eyes on her ass and points at nothing next on the snack and silent paths; only 'Only the ones who come back.' is a hook."
-  },
-  {
-   "id": "P22a1-c4",
-   "what": "Danny's charged screen holds no 'not yet' and no price."
-  },
-  {
-   "id": "P22a1-c5",
-   "what": "Danny's meeting never says he works the shop's till; he is only 'a guy... leans on the counter'."
-  },
-  {
-   "id": "P22a1-c6",
-   "what": "Danny's 'You're new on this street.' contradicts the house she grew up in (7_final_game.toml:713, 760)."
-  }
- ],
+ "causes": [],
  "pending": [],
- "asked": 124,
- "answered": 124,
+ "asked": 3,
+ "answered": 3,
  "pass_items": [],
  "unowed": []
 }

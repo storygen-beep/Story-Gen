@@ -1,0 +1,19 @@
+{
+ "items": [
+  {
+   "row": "C804",
+   "screen": "hood_clothes",
+   "why": "failed last pass"
+  },
+  {
+   "row": "clock#10",
+   "screen": "*",
+   "why": "never judged"
+  },
+  {
+   "row": "places#2",
+   "screen": "hood_clothes",
+   "why": "failed last pass"
+  }
+ ]
+}

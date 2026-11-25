@@ -1,0 +1,154 @@
+{
+ "items": [
+  {
+   "row": "C1265",
+   "screen": "*",
+   "why": "its rule's text changed"
+  },
+  {
+   "row": "C1265",
+   "screen": "cafe_first_shift.start",
+   "why": "its rule's text changed"
+  },
+  {
+   "row": "C596",
+   "screen": "*",
+   "why": "its rule's text changed"
+  },
+  {
+   "row": "C596",
+   "screen": "cafe_first_shift.start",
+   "why": "its rule's text changed"
+  },
+  {
+   "row": "C596",
+   "screen": "cafe_hire.both",
+   "why": "its rule's text changed"
+  },
+  {
+   "row": "C596",
+   "screen": "cafe_hire.sign",
+   "why": "its rule's text changed"
+  },
+  {
+   "row": "C795",
+   "screen": "*",
+   "why": "its rule's text changed"
+  },
+  {
+   "row": "C795",
+   "screen": "cafe_hire.both",
+   "why": "its rule's text changed"
+  },
+  {
+   "row": "C795",
+   "screen": "cafe_hire.sign",
+   "why": "its rule's text changed"
+  },
+  {
+   "row": "C804",
+   "screen": "*",
+   "why": "its rule's text changed"
+  },
+  {
+   "row": "C804",
+   "screen": "cafe_hire.both",
+   "why": "its rule's text changed"
+  },
+  {
+   "row": "C804",
+   "screen": "cafe_hire.sign",
+   "why": "its rule's text changed"
+  },
+  {
+   "row": "C889",
+   "screen": "*",
+   "why": "its rule's text changed"
+  },
+  {
+   "row": "C889",
+   "screen": "cafe_hire.both",
+   "why": "its rule's text changed"
+  },
+  {
+   "row": "C889",
+   "screen": "cafe_hire.sign",
+   "why": "its rule's text changed"
+  },
+  {
+   "row": "C906",
+   "screen": "*",
+   "why": "its rule's text changed"
+  },
+  {
+   "row": "C906",
+   "screen": "cafe_hire.both",
+   "why": "its rule's text changed"
+  },
+  {
+   "row": "C906",
+   "screen": "cafe_hire.sign",
+   "why": "its rule's text changed"
+  },
+  {
+   "row": "C910",
+   "screen": "*",
+   "why": "its rule's text changed"
+  },
+  {
+   "row": "C910",
+   "screen": "cafe_hire.both",
+   "why": "its rule's text changed"
+  },
+  {
+   "row": "C910",
+   "screen": "cafe_hire.sign",
+   "why": "its rule's text changed"
+  },
+  {
+   "row": "C920",
+   "screen": "*",
+   "why": "its rule's text changed"
+  },
+  {
+   "row": "C920",
+   "screen": "cafe_hire.both",
+   "why": "its rule's text changed"
+  },
+  {
+   "row": "C920",
+   "screen": "cafe_hire.sign",
+   "why": "its rule's text changed"
+  },
+  {
+   "row": "C929",
+   "screen": "*",
+   "why": "its rule's text changed"
+  },
+  {
+   "row": "C929",
+   "screen": "cafe_hire.both",
+   "why": "its rule's text changed"
+  },
+  {
+   "row": "C929",
+   "screen": "cafe_hire.sign",
+   "why": "its rule's text changed"
+  },
+  {
+   "row": "C953",
+   "screen": "*",
+   "why": "its rule's text changed"
+  },
+  {
+   "row": "C953",
+   "screen": "cafe_hire.both",
+   "why": "its rule's text changed"
+  },
+  {
+   "row": "C953",
+   "screen": "cafe_hire.sign",
+   "why": "its rule's text changed"
+  }
+ ]
+}

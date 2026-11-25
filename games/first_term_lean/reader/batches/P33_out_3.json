@@ -1,0 +1,68 @@
+{
+ "verdicts": [
+  {
+   "row": "C596",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "body_* screens",
+   "why": "no person's menu or talk screen; pictures are body moments"
+  },
+  {
+   "row": "C795",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "body_* screens",
+   "why": "activity beats, not room text"
+  },
+  {
+   "row": "C804",
+   "screen": "body_coffee.drink",
+   "verdict": "PASS",
+   "line": "\"Tom pours your coffee and slides it across.\" (Tom present group)",
+   "why": "no room-text line per person; anyone else is an unnamed crowd, or named only inside a presence group"
+  },
+  {
+   "row": "C804",
+   "screen": "body_grass.sit",
+   "verdict": "PASS",
+   "line": "\"You lie back on the grass with your bag under your head...\"",
+   "why": "no room-text line per person; anyone else is an unnamed crowd, or named only inside a presence group"
+  },
+  {
+   "row": "C804",
+   "screen": "body_lunch.eat",
+   "verdict": "PASS",
+   "line": "\"half listening to a table making plans you're not part of yet\"",
+   "why": "no room-text line per person; anyone else is an unnamed crowd, or named only inside a presence group"
+  },
+  {
+   "row": "C804",
+   "screen": "body_mirror.fix",
+   "verdict": "PASS",
+   "line": "\"You lean into the long mirror and fix your face\"",
+   "why": "no room-text line per person; anyone else is an unnamed crowd, or named only inside a presence group"
+  },
+  {
+   "row": "C804",
+   "screen": "body_run.run",
+   "verdict": "PASS",
+   "line": "\"A dog walker's eyes follow your ass round the pond.\"",
+   "why": "no room-text line per person; anyone else is an unnamed crowd, or named only inside a presence group"
+  },
+  {
+   "row": "C804",
+   "screen": "body_snack.eat",
+   "verdict": "PASS",
+   "line": "\"You grab a candy bar and a soda and pay at the till.\"",
+   "why": "no room-text line per person; anyone else is an unnamed crowd, or named only inside a presence group"
+  },
+  {
+   "row": "C804",
+   "screen": "body_workout.lift",
+   "verdict": "PASS",
+   "line": "\"Two guys at the rack stop talking when you bend for the kettlebell.\"",
+   "why": "no room-text line per person; anyone else is an unnamed crowd, or named only inside a presence group"
+  }
+ ],
+ "causes": []
+}

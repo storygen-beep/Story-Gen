@@ -1,0 +1,26 @@
+{
+ "verdicts": [
+  {
+   "row": "C596",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "meeting screen, picture in it",
+   "why": "a first meeting is a new moment, so its picture is allowed; no face-opened menu is built here, and no talk screen carries a picture"
+  },
+  {
+   "row": "C795",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "no room text in this piece's screens",
+   "why": "its screens are scenes, not a place's room text; no line per person is added to any room"
+  },
+  {
+   "row": "C804",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "no room text in this piece's screens",
+   "why": "its screens are scenes, not a place's room text; no line per person is added to any room"
+  }
+ ],
+ "causes": []
+}

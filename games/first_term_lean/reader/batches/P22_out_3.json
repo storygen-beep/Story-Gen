@@ -1,0 +1,26 @@
+{
+ "verdicts": [
+  {
+   "row": "L170",
+   "screen": "*",
+   "verdict": "N/A",
+   "line": "",
+   "why": "no place on this piece's screens is hidden_until a flag"
+  },
+  {
+   "row": "L168",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "The owner works the till Monday to Saturday, 7am to 3pm; the night clerk has it after 3pm and all day Sunday.",
+   "why": "matches Frank's and Danny's rows; met_frank and met_danny are the end step's when"
+  },
+  {
+   "row": "L169",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "The owner works the till Monday to Saturday, 7am to 3pm; the night clerk has it after 3pm and all day Sunday.",
+   "why": "each meeting fires on any visit while he's at the till"
+  }
+ ],
+ "causes": []
+}

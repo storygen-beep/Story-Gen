@@ -1,0 +1,74 @@
+{
+ "items": [
+  {
+   "row": "B10",
+   "screen": "quad_meet_jake.after",
+   "why": "screen changed: truth row"
+  },
+  {
+   "row": "B3",
+   "screen": "quad_meet_jake.after",
+   "why": "failed last pass"
+  },
+  {
+   "row": "B8",
+   "screen": "quad_meet_jake.after",
+   "why": "screen changed: truth row"
+  },
+  {
+   "row": "C109",
+   "screen": "quad_meet_jake.after",
+   "why": "failed last pass"
+  },
+  {
+   "row": "C1275",
+   "screen": "quad_meet_jake.after",
+   "why": "failed last pass"
+  },
+  {
+   "row": "C149",
+   "screen": "quad_meet_jake.after",
+   "why": "failed last pass"
+  },
+  {
+   "row": "C180",
+   "screen": "quad_meet_jake.after",
+   "why": "failed last pass"
+  },
+  {
+   "row": "C450",
+   "screen": "quad_meet_jake.after",
+   "why": "failed last pass"
+  },
+  {
+   "row": "C460",
+   "screen": "quad_meet_jake.after",
+   "why": "screen changed: truth row"
+  },
+  {
+   "row": "C461",
+   "screen": "quad_meet_jake.after",
+   "why": "screen changed: truth row"
+  },
+  {
+   "row": "C927",
+   "screen": "quad_meet_jake.after",
+   "why": "screen changed: truth row"
+  },
+  {
+   "row": "C931",
+   "screen": "quad_meet_jake.after",
+   "why": "screen changed: truth row"
+  },
+  {
+   "row": "L106",
+   "screen": "quad_meet_jake.after",
+   "why": "screen changed: truth row"
+  },
+  {
+   "row": "L167",
+   "screen": "quad_meet_jake.after",
+   "why": "screen changed: truth row"
+  }
+ ]
+}

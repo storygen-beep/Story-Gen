@@ -1,0 +1,61 @@
+{
+ "verdicts": [
+  {
+   "row": "B10",
+   "screen": "body_lunch.eat",
+   "verdict": "PASS",
+   "line": "You take a tray down the line: pasta, a roll, a carton of milk.",
+   "why": "Weekdays 11:00-13:59 with meals_today < 3; Rosa at the counter 8-16 (who_is_where); the unnamed table is crowd texture; true on repeat."
+  },
+  {
+   "row": "B8",
+   "screen": "body_lunch.eat",
+   "verdict": "PASS",
+   "line": "$4, +15 energy, meals_today +1, 20 min",
+   "why": "Matches PLAN 255/355 and the card; no garment."
+  },
+  {
+   "row": "C460",
+   "screen": "body_lunch.eat",
+   "verdict": "PASS",
+   "line": "You take a tray down the line: pasta, a roll, a carton of milk.",
+   "why": "Nothing false at 11:00 or 13:59; the row hides once three meals are eaten."
+  },
+  {
+   "row": "C461",
+   "screen": "body_lunch.eat",
+   "verdict": "PASS",
+   "line": "a table making plans you're not part of yet",
+   "why": "Her opinion/texture."
+  },
+  {
+   "row": "C927",
+   "screen": "body_lunch.eat",
+   "verdict": "PASS",
+   "line": "time_progression_minutes = 20",
+   "why": "Exit has its time."
+  },
+  {
+   "row": "C931",
+   "screen": "body_lunch.eat",
+   "verdict": "PASS",
+   "line": "11:00-14:00",
+   "why": "End exclusive; 13:59 + 20 min ends inside open hours (to 16:00)."
+  },
+  {
+   "row": "L106",
+   "screen": "body_lunch.eat",
+   "verdict": "PASS",
+   "line": "You take a tray down the line: pasta, a roll, a carton of milk.",
+   "why": "Names nobody; Rosa's row covers lunch."
+  },
+  {
+   "row": "L167",
+   "screen": "body_lunch.eat",
+   "verdict": "PASS",
+   "line": "weekdays, 11:00-14:00, no show_when_blocked",
+   "why": "One row; clock plus count, so it hides (clock.md rule 10)."
+  }
+ ],
+ "causes": []
+}

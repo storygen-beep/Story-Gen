@@ -1,0 +1,1209 @@
+{
+ "verdicts": [
+  {
+   "row": "B10",
+   "screen": "mark_kitchen.hub",
+   "verdict": "PASS",
+   "line": "Mark's at the table with his coffee. He looks at you over the rim.",
+   "why": "Mark's kitchen rows: weekdays 07:00\u201307:30 (coffee before work), Sat/Sun 08:00\u201310:00 breakfast, Sun 10:00\u201312:00 at the table; the menu shows only while he's there (requires_npc). The greyed rent line \"Mark collects on Sundays, 8 to 11:55am, at the kitchen table\" matches his Sunday rows and the trigger (end exclusive)"
+  },
+  {
+   "row": "B10",
+   "screen": "mark_kitchen.pay100",
+   "verdict": "PASS",
+   "line": "All there. Same time next Sunday.",
+   "why": "Sunday only, via the hub's weekday gate"
+  },
+  {
+   "row": "B10",
+   "screen": "mark_kitchen.pay75",
+   "verdict": "PASS",
+   "line": "It goes to ninety once you've paid three hundred. Four Sundays straight, kid",
+   "why": "first-payment line behind rent_paid_once false; \"Ninety from next week\" behind rent_paid_total \u2265 225 (read before the +75), so true when the total reaches 300"
+  },
+  {
+   "row": "B10",
+   "screen": "mark_kitchen.pay90",
+   "verdict": "PASS",
+   "line": "A hundred from next week.",
+   "why": "\"A hundred from next week\" behind rent_paid_total \u2265 810, true when the +90 reaches 900"
+  },
+  {
+   "row": "B10",
+   "screen": "mark_kitchen.rent",
+   "verdict": "PASS",
+   "line": "Mark folds the paper down and holds out his hand.",
+   "why": "reached only Sunday 08:00\u201311:55 while Mark is at the table; each price group reads rent_paid_total and money, in an if/elseif chain that picks the right line"
+  },
+  {
+   "row": "B10",
+   "screen": "mark_kitchen.short",
+   "verdict": "PASS",
+   "line": "Mom's cup stops halfway to her mouth, then keeps going.",
+   "why": "Laura is in the kitchen Sunday 08:00\u201312:00 (who_is_where), at every minute the rent window can show"
+  },
+  {
+   "row": "B10",
+   "screen": "mark_kitchen.talk",
+   "verdict": "PASS",
+   "line": "You working, kid? Rent doesn't wait. And don't spend it all on coffee.",
+   "why": "true at every one of Mark's kitchen hours; \"You working\" asks, claims no job"
+  },
+  {
+   "row": "B8",
+   "screen": "mark_kitchen.hub",
+   "verdict": "PASS",
+   "line": "Mark's at the table with his coffee. He looks at you over the rim.",
+   "why": "no number or garment that disagrees"
+  },
+  {
+   "row": "B8",
+   "screen": "mark_kitchen.pay100",
+   "verdict": "PASS",
+   "line": "All there. Same time next Sunday.",
+   "why": "$75/$90/$100 and the 300/900 steps agree with PLAN \u00a72; the Done effects take the same amount"
+  },
+  {
+   "row": "B8",
+   "screen": "mark_kitchen.pay75",
+   "verdict": "PASS",
+   "line": "It goes to ninety once you've paid three hundred. Four Sundays straight, kid",
+   "why": "$75/$90/$100 and the 300/900 steps agree with PLAN \u00a72; the Done effects take the same amount"
+  },
+  {
+   "row": "B8",
+   "screen": "mark_kitchen.pay90",
+   "verdict": "PASS",
+   "line": "A hundred from next week.",
+   "why": "$75/$90/$100 and the 300/900 steps agree with PLAN \u00a72; the Done effects take the same amount"
+  },
+  {
+   "row": "B8",
+   "screen": "mark_kitchen.rent",
+   "verdict": "PASS",
+   "line": "Seventy-five, kid.",
+   "why": "each price matches its rent_paid_total band and PLAN \u00a72"
+  },
+  {
+   "row": "B8",
+   "screen": "mark_kitchen.short",
+   "verdict": "PASS",
+   "line": "Short. Next Sunday, then.",
+   "why": "no amount stated; no garment named"
+  },
+  {
+   "row": "B8",
+   "screen": "mark_kitchen.talk",
+   "verdict": "PASS",
+   "line": "You working, kid? Rent doesn't wait. And don't spend it all on coffee.",
+   "why": "no number or garment that disagrees"
+  },
+  {
+   "row": "C1265",
+   "screen": "mark_kitchen.hub",
+   "verdict": "PASS",
+   "line": "Mark's at the table with his coffee. He looks at you over the rim.",
+   "why": "a person's menu opened from his face: the exception, one picture after the first line"
+  },
+  {
+   "row": "C460",
+   "screen": "mark_kitchen.hub",
+   "verdict": "PASS",
+   "line": "Mark's at the table with his coffee. He looks at you over the rim.",
+   "why": "Mark's kitchen rows: weekdays 07:00\u201307:30 (coffee before work), Sat/Sun 08:00\u201310:00 breakfast, Sun 10:00\u201312:00 at the table; the menu shows only while he's there (requires_npc). The greyed rent line \"Mark collects on Sundays, 8 to 11:55am, at the kitchen table\" matches his Sunday rows and the trigger (end exclusive)"
+  },
+  {
+   "row": "C460",
+   "screen": "mark_kitchen.pay100",
+   "verdict": "PASS",
+   "line": "All there. Same time next Sunday.",
+   "why": "Sunday only, via the hub's weekday gate"
+  },
+  {
+   "row": "C460",
+   "screen": "mark_kitchen.pay75",
+   "verdict": "PASS",
+   "line": "It goes to ninety once you've paid three hundred. Four Sundays straight, kid",
+   "why": "first-payment line behind rent_paid_once false; \"Ninety from next week\" behind rent_paid_total \u2265 225 (read before the +75), so true when the total reaches 300"
+  },
+  {
+   "row": "C460",
+   "screen": "mark_kitchen.pay90",
+   "verdict": "PASS",
+   "line": "A hundred from next week.",
+   "why": "\"A hundred from next week\" behind rent_paid_total \u2265 810, true when the +90 reaches 900"
+  },
+  {
+   "row": "C460",
+   "screen": "mark_kitchen.rent",
+   "verdict": "PASS",
+   "line": "Mark folds the paper down and holds out his hand.",
+   "why": "reached only Sunday 08:00\u201311:55 while Mark is at the table; each price group reads rent_paid_total and money, in an if/elseif chain that picks the right line"
+  },
+  {
+   "row": "C460",
+   "screen": "mark_kitchen.short",
+   "verdict": "PASS",
+   "line": "Mom's cup stops halfway to her mouth, then keeps going.",
+   "why": "Laura is in the kitchen Sunday 08:00\u201312:00 (who_is_where), at every minute the rent window can show"
+  },
+  {
+   "row": "C460",
+   "screen": "mark_kitchen.talk",
+   "verdict": "PASS",
+   "line": "You working, kid? Rent doesn't wait. And don't spend it all on coffee.",
+   "why": "true at every one of Mark's kitchen hours; \"You working\" asks, claims no job"
+  },
+  {
+   "row": "C461",
+   "screen": "mark_kitchen.hub",
+   "verdict": "PASS",
+   "line": "Mark's at the table with his coffee. He looks at you over the rim.",
+   "why": "Mark as PLAN \u00a73 has him: control, the money, \"kid\""
+  },
+  {
+   "row": "C461",
+   "screen": "mark_kitchen.pay100",
+   "verdict": "PASS",
+   "line": "All there. Same time next Sunday.",
+   "why": "Mark as PLAN \u00a73 has him: control, the money, \"kid\""
+  },
+  {
+   "row": "C461",
+   "screen": "mark_kitchen.pay75",
+   "verdict": "PASS",
+   "line": "It goes to ninety once you've paid three hundred. Four Sundays straight, kid",
+   "why": "Mark as PLAN \u00a73 has him: control, the money, \"kid\""
+  },
+  {
+   "row": "C461",
+   "screen": "mark_kitchen.pay90",
+   "verdict": "PASS",
+   "line": "A hundred from next week.",
+   "why": "Mark as PLAN \u00a73 has him: control, the money, \"kid\""
+  },
+  {
+   "row": "C461",
+   "screen": "mark_kitchen.rent",
+   "verdict": "PASS",
+   "line": "Mark folds the paper down and holds out his hand.",
+   "why": "Mark as PLAN \u00a73 has him: control, the money, \"kid\""
+  },
+  {
+   "row": "C461",
+   "screen": "mark_kitchen.short",
+   "verdict": "PASS",
+   "line": "Mom's cup stops halfway to her mouth, then keeps going.",
+   "why": "Mark as PLAN \u00a73 has him: control, the money, \"kid\""
+  },
+  {
+   "row": "C461",
+   "screen": "mark_kitchen.talk",
+   "verdict": "PASS",
+   "line": "You working, kid? Rent doesn't wait. And don't spend it all on coffee.",
+   "why": "Mark as PLAN \u00a73 has him: control, the money, \"kid\""
+  },
+  {
+   "row": "C596",
+   "screen": "mark_kitchen.hub",
+   "verdict": "PASS",
+   "line": "Mark's at the table with his coffee. He looks at you over the rim.",
+   "why": "his one picture right after the menu's first line"
+  },
+  {
+   "row": "C596",
+   "screen": "mark_kitchen.pay100",
+   "verdict": "PASS",
+   "line": "All there. Same time next Sunday.",
+   "why": "no picture, one exit shown, short"
+  },
+  {
+   "row": "C596",
+   "screen": "mark_kitchen.pay75",
+   "verdict": "PASS",
+   "line": "It goes to ninety once you've paid three hundred. Four Sundays straight, kid",
+   "why": "no picture, one exit shown, short"
+  },
+  {
+   "row": "C596",
+   "screen": "mark_kitchen.pay90",
+   "verdict": "PASS",
+   "line": "A hundred from next week.",
+   "why": "no picture, one exit shown, short"
+  },
+  {
+   "row": "C596",
+   "screen": "mark_kitchen.rent",
+   "verdict": "N/A",
+   "line": "Mark folds the paper down and holds out his hand.",
+   "why": "the rent screen, not a talk screen"
+  },
+  {
+   "row": "C596",
+   "screen": "mark_kitchen.short",
+   "verdict": "PASS",
+   "line": "Mom's cup stops halfway to her mouth, then keeps going.",
+   "why": "no picture, one exit shown, short"
+  },
+  {
+   "row": "C596",
+   "screen": "mark_kitchen.talk",
+   "verdict": "PASS",
+   "line": "You working, kid? Rent doesn't wait. And don't spend it all on coffee.",
+   "why": "37 words, 19 spoken (51%), one exit, no picture; short of two-thirds but inside check.py's talk ceiling (note row)"
+  },
+  {
+   "row": "C795",
+   "screen": "mark_kitchen.hub",
+   "verdict": "PASS",
+   "line": "Mark's at the table with his coffee. He looks at you over the rim.",
+   "why": "Mark is his face; this is his menu, not room text, and no room text names him"
+  },
+  {
+   "row": "C795",
+   "screen": "mark_kitchen.pay100",
+   "verdict": "N/A",
+   "line": "All there. Same time next Sunday.",
+   "why": "a beat screen under his menu, not a place's room text"
+  },
+  {
+   "row": "C795",
+   "screen": "mark_kitchen.pay75",
+   "verdict": "N/A",
+   "line": "It goes to ninety once you've paid three hundred. Four Sundays straight, kid",
+   "why": "a beat screen under his menu, not a place's room text"
+  },
+  {
+   "row": "C795",
+   "screen": "mark_kitchen.pay90",
+   "verdict": "N/A",
+   "line": "A hundred from next week.",
+   "why": "a beat screen under his menu, not a place's room text"
+  },
+  {
+   "row": "C795",
+   "screen": "mark_kitchen.rent",
+   "verdict": "N/A",
+   "line": "Mark folds the paper down and holds out his hand.",
+   "why": "a beat screen under his menu, not a place's room text"
+  },
+  {
+   "row": "C795",
+   "screen": "mark_kitchen.short",
+   "verdict": "N/A",
+   "line": "Mom's cup stops halfway to her mouth, then keeps going.",
+   "why": "a beat screen under his menu, not a place's room text"
+  },
+  {
+   "row": "C795",
+   "screen": "mark_kitchen.talk",
+   "verdict": "PASS",
+   "line": "You working, kid? Rent doesn't wait. And don't spend it all on coffee.",
+   "why": "Mark is his face; this is his menu, not room text, and no room text names him"
+  },
+  {
+   "row": "C804",
+   "screen": "mark_kitchen.hub",
+   "verdict": "PASS",
+   "line": "Mark's at the table with his coffee. He looks at you over the rim.",
+   "why": "Mark is his face; this is his menu, not room text, and no room text names him"
+  },
+  {
+   "row": "C804",
+   "screen": "mark_kitchen.pay100",
+   "verdict": "N/A",
+   "line": "All there. Same time next Sunday.",
+   "why": "a beat screen under his menu, not a place's room text"
+  },
+  {
+   "row": "C804",
+   "screen": "mark_kitchen.pay75",
+   "verdict": "N/A",
+   "line": "It goes to ninety once you've paid three hundred. Four Sundays straight, kid",
+   "why": "a beat screen under his menu, not a place's room text"
+  },
+  {
+   "row": "C804",
+   "screen": "mark_kitchen.pay90",
+   "verdict": "N/A",
+   "line": "A hundred from next week.",
+   "why": "a beat screen under his menu, not a place's room text"
+  },
+  {
+   "row": "C804",
+   "screen": "mark_kitchen.rent",
+   "verdict": "N/A",
+   "line": "Mark folds the paper down and holds out his hand.",
+   "why": "a beat screen under his menu, not a place's room text"
+  },
+  {
+   "row": "C804",
+   "screen": "mark_kitchen.short",
+   "verdict": "N/A",
+   "line": "Mom's cup stops halfway to her mouth, then keeps going.",
+   "why": "a beat screen under his menu, not a place's room text"
+  },
+  {
+   "row": "C804",
+   "screen": "mark_kitchen.talk",
+   "verdict": "PASS",
+   "line": "You working, kid? Rent doesn't wait. And don't spend it all on coffee.",
+   "why": "Mark is his face; this is his menu, not room text, and no room text names him"
+  },
+  {
+   "row": "C889",
+   "screen": "mark_kitchen.hub",
+   "verdict": "PASS",
+   "line": "Pay the rent \u2014 Mark collects on Sundays, 8 to 11:55am, at the kitchen table.",
+   "why": "no duration or energy on a label; the greyed line's hours are the clock-shut row publishing them (C913)"
+  },
+  {
+   "row": "C889",
+   "screen": "mark_kitchen.pay100",
+   "verdict": "PASS",
+   "line": "Done",
+   "why": "no time, duration or energy on the label"
+  },
+  {
+   "row": "C889",
+   "screen": "mark_kitchen.pay75",
+   "verdict": "PASS",
+   "line": "Done",
+   "why": "no time, duration or energy on the label"
+  },
+  {
+   "row": "C889",
+   "screen": "mark_kitchen.pay90",
+   "verdict": "PASS",
+   "line": "Done",
+   "why": "no time, duration or energy on the label"
+  },
+  {
+   "row": "C889",
+   "screen": "mark_kitchen.short",
+   "verdict": "PASS",
+   "line": "Done",
+   "why": "no time, duration or energy on the label"
+  },
+  {
+   "row": "C889",
+   "screen": "mark_kitchen.talk",
+   "verdict": "PASS",
+   "line": "Done",
+   "why": "no time, duration or energy on the label"
+  },
+  {
+   "row": "C892",
+   "screen": "mark_kitchen.pay100",
+   "verdict": "N/A",
+   "line": "All there. Same time next Sunday.",
+   "why": "no hours or travel on this screen"
+  },
+  {
+   "row": "C892",
+   "screen": "mark_kitchen.pay75",
+   "verdict": "N/A",
+   "line": "It goes to ninety once you've paid three hundred. Four Sundays straight, kid",
+   "why": "no hours or travel on this screen"
+  },
+  {
+   "row": "C892",
+   "screen": "mark_kitchen.pay90",
+   "verdict": "N/A",
+   "line": "A hundred from next week.",
+   "why": "no hours or travel on this screen"
+  },
+  {
+   "row": "C892",
+   "screen": "mark_kitchen.short",
+   "verdict": "N/A",
+   "line": "Mom's cup stops halfway to her mouth, then keeps going.",
+   "why": "no hours or travel on this screen"
+  },
+  {
+   "row": "C892",
+   "screen": "mark_kitchen.talk",
+   "verdict": "N/A",
+   "line": "You working, kid? Rent doesn't wait. And don't spend it all on coffee.",
+   "why": "no hours or travel on this screen"
+  },
+  {
+   "row": "C897",
+   "screen": "mark_kitchen.pay100",
+   "verdict": "N/A",
+   "line": "All there. Same time next Sunday.",
+   "why": "no hours or travel on this screen"
+  },
+  {
+   "row": "C897",
+   "screen": "mark_kitchen.pay75",
+   "verdict": "N/A",
+   "line": "It goes to ninety once you've paid three hundred. Four Sundays straight, kid",
+   "why": "no hours or travel on this screen"
+  },
+  {
+   "row": "C897",
+   "screen": "mark_kitchen.pay90",
+   "verdict": "N/A",
+   "line": "A hundred from next week.",
+   "why": "no hours or travel on this screen"
+  },
+  {
+   "row": "C897",
+   "screen": "mark_kitchen.short",
+   "verdict": "N/A",
+   "line": "Mom's cup stops halfway to her mouth, then keeps going.",
+   "why": "no hours or travel on this screen"
+  },
+  {
+   "row": "C897",
+   "screen": "mark_kitchen.talk",
+   "verdict": "N/A",
+   "line": "You working, kid? Rent doesn't wait. And don't spend it all on coffee.",
+   "why": "no hours or travel on this screen"
+  },
+  {
+   "row": "C900",
+   "screen": "mark_kitchen.pay100",
+   "verdict": "PASS",
+   "line": "All there. Same time next Sunday.",
+   "why": "no clock time in the beat; \"next Sunday\" is a rule"
+  },
+  {
+   "row": "C900",
+   "screen": "mark_kitchen.pay75",
+   "verdict": "PASS",
+   "line": "It goes to ninety once you've paid three hundred. Four Sundays straight, kid",
+   "why": "no clock time in the beat; \"next Sunday\" is a rule"
+  },
+  {
+   "row": "C900",
+   "screen": "mark_kitchen.pay90",
+   "verdict": "PASS",
+   "line": "A hundred from next week.",
+   "why": "no clock time in the beat; \"next Sunday\" is a rule"
+  },
+  {
+   "row": "C900",
+   "screen": "mark_kitchen.short",
+   "verdict": "PASS",
+   "line": "Mom's cup stops halfway to her mouth, then keeps going.",
+   "why": "no clock time in the beat; \"next Sunday\" is a rule"
+  },
+  {
+   "row": "C900",
+   "screen": "mark_kitchen.talk",
+   "verdict": "PASS",
+   "line": "You working, kid? Rent doesn't wait. And don't spend it all on coffee.",
+   "why": "no clock time in the beat; \"next Sunday\" is a rule"
+  },
+  {
+   "row": "C902",
+   "screen": "mark_kitchen.pay100",
+   "verdict": "PASS",
+   "line": "All there. Same time next Sunday.",
+   "why": "true at 11:54 Sunday and at 07:29 weekdays"
+  },
+  {
+   "row": "C902",
+   "screen": "mark_kitchen.pay75",
+   "verdict": "PASS",
+   "line": "It goes to ninety once you've paid three hundred. Four Sundays straight, kid",
+   "why": "true at 11:54 Sunday and at 07:29 weekdays"
+  },
+  {
+   "row": "C902",
+   "screen": "mark_kitchen.pay90",
+   "verdict": "PASS",
+   "line": "A hundred from next week.",
+   "why": "true at 11:54 Sunday and at 07:29 weekdays"
+  },
+  {
+   "row": "C902",
+   "screen": "mark_kitchen.short",
+   "verdict": "PASS",
+   "line": "Mom's cup stops halfway to her mouth, then keeps going.",
+   "why": "true at 11:54 Sunday and at 07:29 weekdays"
+  },
+  {
+   "row": "C902",
+   "screen": "mark_kitchen.talk",
+   "verdict": "PASS",
+   "line": "You working, kid? Rent doesn't wait. And don't spend it all on coffee.",
+   "why": "true at 11:54 Sunday and at 07:29 weekdays"
+  },
+  {
+   "row": "C903",
+   "screen": "mark_kitchen.pay100",
+   "verdict": "PASS",
+   "line": "All there. Same time next Sunday.",
+   "why": "\"Sunday\" only on screens reached through the hub choice gated weekday [6]"
+  },
+  {
+   "row": "C903",
+   "screen": "mark_kitchen.pay75",
+   "verdict": "PASS",
+   "line": "It goes to ninety once you've paid three hundred. Four Sundays straight, kid",
+   "why": "\"Sunday\" only on screens reached through the hub choice gated weekday [6]"
+  },
+  {
+   "row": "C903",
+   "screen": "mark_kitchen.pay90",
+   "verdict": "PASS",
+   "line": "A hundred from next week.",
+   "why": "\"Sunday\" only on screens reached through the hub choice gated weekday [6]"
+  },
+  {
+   "row": "C903",
+   "screen": "mark_kitchen.short",
+   "verdict": "PASS",
+   "line": "Mom's cup stops halfway to her mouth, then keeps going.",
+   "why": "\"Sunday\" only on screens reached through the hub choice gated weekday [6]"
+  },
+  {
+   "row": "C903",
+   "screen": "mark_kitchen.talk",
+   "verdict": "PASS",
+   "line": "You working, kid? Rent doesn't wait. And don't spend it all on coffee.",
+   "why": "names no weekday"
+  },
+  {
+   "row": "C906",
+   "screen": "mark_kitchen.hub",
+   "verdict": "PASS",
+   "line": "Pay the rent \u2014 Mark collects on Sundays, 8 to 11:55am, at the kitchen table.",
+   "why": "no duration or energy on a label; the greyed line's hours are the clock-shut row publishing them (C913)"
+  },
+  {
+   "row": "C906",
+   "screen": "mark_kitchen.pay100",
+   "verdict": "PASS",
+   "line": "Done",
+   "why": "no time, duration or energy on the label"
+  },
+  {
+   "row": "C906",
+   "screen": "mark_kitchen.pay75",
+   "verdict": "PASS",
+   "line": "Done",
+   "why": "no time, duration or energy on the label"
+  },
+  {
+   "row": "C906",
+   "screen": "mark_kitchen.pay90",
+   "verdict": "PASS",
+   "line": "Done",
+   "why": "no time, duration or energy on the label"
+  },
+  {
+   "row": "C906",
+   "screen": "mark_kitchen.short",
+   "verdict": "PASS",
+   "line": "Done",
+   "why": "no time, duration or energy on the label"
+  },
+  {
+   "row": "C906",
+   "screen": "mark_kitchen.talk",
+   "verdict": "PASS",
+   "line": "Done",
+   "why": "no time, duration or energy on the label"
+  },
+  {
+   "row": "C910",
+   "screen": "mark_kitchen.hub",
+   "verdict": "PASS",
+   "line": "Pay the rent \u2014 Mark collects on Sundays, 8 to 11:55am, at the kitchen table.",
+   "why": "no duration or energy on a label; the greyed line's hours are the clock-shut row publishing them (C913)"
+  },
+  {
+   "row": "C910",
+   "screen": "mark_kitchen.pay100",
+   "verdict": "PASS",
+   "line": "Done",
+   "why": "no time, duration or energy on the label"
+  },
+  {
+   "row": "C910",
+   "screen": "mark_kitchen.pay75",
+   "verdict": "PASS",
+   "line": "Done",
+   "why": "no time, duration or energy on the label"
+  },
+  {
+   "row": "C910",
+   "screen": "mark_kitchen.pay90",
+   "verdict": "PASS",
+   "line": "Done",
+   "why": "no time, duration or energy on the label"
+  },
+  {
+   "row": "C910",
+   "screen": "mark_kitchen.short",
+   "verdict": "PASS",
+   "line": "Done",
+   "why": "no time, duration or energy on the label"
+  },
+  {
+   "row": "C910",
+   "screen": "mark_kitchen.talk",
+   "verdict": "PASS",
+   "line": "Done",
+   "why": "no time, duration or energy on the label"
+  },
+  {
+   "row": "C913",
+   "screen": "mark_kitchen.pay100",
+   "verdict": "N/A",
+   "line": "All there. Same time next Sunday.",
+   "why": "no hours or travel on this screen"
+  },
+  {
+   "row": "C913",
+   "screen": "mark_kitchen.pay75",
+   "verdict": "N/A",
+   "line": "It goes to ninety once you've paid three hundred. Four Sundays straight, kid",
+   "why": "no hours or travel on this screen"
+  },
+  {
+   "row": "C913",
+   "screen": "mark_kitchen.pay90",
+   "verdict": "N/A",
+   "line": "A hundred from next week.",
+   "why": "no hours or travel on this screen"
+  },
+  {
+   "row": "C913",
+   "screen": "mark_kitchen.short",
+   "verdict": "N/A",
+   "line": "Mom's cup stops halfway to her mouth, then keeps going.",
+   "why": "no hours or travel on this screen"
+  },
+  {
+   "row": "C913",
+   "screen": "mark_kitchen.talk",
+   "verdict": "N/A",
+   "line": "You working, kid? Rent doesn't wait. And don't spend it all on coffee.",
+   "why": "no hours or travel on this screen"
+  },
+  {
+   "row": "C914",
+   "screen": "mark_kitchen.pay100",
+   "verdict": "N/A",
+   "line": "All there. Same time next Sunday.",
+   "why": "no hours or travel on this screen"
+  },
+  {
+   "row": "C914",
+   "screen": "mark_kitchen.pay75",
+   "verdict": "N/A",
+   "line": "It goes to ninety once you've paid three hundred. Four Sundays straight, kid",
+   "why": "no hours or travel on this screen"
+  },
+  {
+   "row": "C914",
+   "screen": "mark_kitchen.pay90",
+   "verdict": "N/A",
+   "line": "A hundred from next week.",
+   "why": "no hours or travel on this screen"
+  },
+  {
+   "row": "C914",
+   "screen": "mark_kitchen.short",
+   "verdict": "N/A",
+   "line": "Mom's cup stops halfway to her mouth, then keeps going.",
+   "why": "no hours or travel on this screen"
+  },
+  {
+   "row": "C914",
+   "screen": "mark_kitchen.talk",
+   "verdict": "N/A",
+   "line": "You working, kid? Rent doesn't wait. And don't spend it all on coffee.",
+   "why": "no hours or travel on this screen"
+  },
+  {
+   "row": "C916",
+   "screen": "mark_kitchen.pay100",
+   "verdict": "N/A",
+   "line": "All there. Same time next Sunday.",
+   "why": "no hours or travel on this screen"
+  },
+  {
+   "row": "C916",
+   "screen": "mark_kitchen.pay75",
+   "verdict": "N/A",
+   "line": "It goes to ninety once you've paid three hundred. Four Sundays straight, kid",
+   "why": "no hours or travel on this screen"
+  },
+  {
+   "row": "C916",
+   "screen": "mark_kitchen.pay90",
+   "verdict": "N/A",
+   "line": "A hundred from next week.",
+   "why": "no hours or travel on this screen"
+  },
+  {
+   "row": "C916",
+   "screen": "mark_kitchen.short",
+   "verdict": "N/A",
+   "line": "Mom's cup stops halfway to her mouth, then keeps going.",
+   "why": "no hours or travel on this screen"
+  },
+  {
+   "row": "C916",
+   "screen": "mark_kitchen.talk",
+   "verdict": "N/A",
+   "line": "You working, kid? Rent doesn't wait. And don't spend it all on coffee.",
+   "why": "no hours or travel on this screen"
+  },
+  {
+   "row": "C920",
+   "screen": "mark_kitchen.hub",
+   "verdict": "PASS",
+   "line": "Leave",
+   "why": "no hop: Leave and Done return to the same kitchen"
+  },
+  {
+   "row": "C920",
+   "screen": "mark_kitchen.pay100",
+   "verdict": "N/A",
+   "line": "All there. Same time next Sunday.",
+   "why": "no move between places"
+  },
+  {
+   "row": "C920",
+   "screen": "mark_kitchen.pay75",
+   "verdict": "N/A",
+   "line": "It goes to ninety once you've paid three hundred. Four Sundays straight, kid",
+   "why": "no move between places"
+  },
+  {
+   "row": "C920",
+   "screen": "mark_kitchen.pay90",
+   "verdict": "N/A",
+   "line": "A hundred from next week.",
+   "why": "no move between places"
+  },
+  {
+   "row": "C920",
+   "screen": "mark_kitchen.short",
+   "verdict": "N/A",
+   "line": "Mom's cup stops halfway to her mouth, then keeps going.",
+   "why": "no move between places"
+  },
+  {
+   "row": "C920",
+   "screen": "mark_kitchen.talk",
+   "verdict": "PASS",
+   "line": "Leave",
+   "why": "no hop: Leave and Done return to the same kitchen"
+  },
+  {
+   "row": "C924",
+   "screen": "mark_kitchen.pay100",
+   "verdict": "N/A",
+   "line": "All there. Same time next Sunday.",
+   "why": "no hours or travel on this screen"
+  },
+  {
+   "row": "C924",
+   "screen": "mark_kitchen.pay75",
+   "verdict": "N/A",
+   "line": "It goes to ninety once you've paid three hundred. Four Sundays straight, kid",
+   "why": "no hours or travel on this screen"
+  },
+  {
+   "row": "C924",
+   "screen": "mark_kitchen.pay90",
+   "verdict": "N/A",
+   "line": "A hundred from next week.",
+   "why": "no hours or travel on this screen"
+  },
+  {
+   "row": "C924",
+   "screen": "mark_kitchen.short",
+   "verdict": "N/A",
+   "line": "Mom's cup stops halfway to her mouth, then keeps going.",
+   "why": "no hours or travel on this screen"
+  },
+  {
+   "row": "C924",
+   "screen": "mark_kitchen.talk",
+   "verdict": "N/A",
+   "line": "You working, kid? Rent doesn't wait. And don't spend it all on coffee.",
+   "why": "no hours or travel on this screen"
+  },
+  {
+   "row": "C926",
+   "screen": "mark_kitchen.pay100",
+   "verdict": "PASS",
+   "line": "All there. Same time next Sunday.",
+   "why": "minutes only; no clock printed"
+  },
+  {
+   "row": "C926",
+   "screen": "mark_kitchen.pay75",
+   "verdict": "PASS",
+   "line": "It goes to ninety once you've paid three hundred. Four Sundays straight, kid",
+   "why": "minutes only; no clock printed"
+  },
+  {
+   "row": "C926",
+   "screen": "mark_kitchen.pay90",
+   "verdict": "PASS",
+   "line": "A hundred from next week.",
+   "why": "minutes only; no clock printed"
+  },
+  {
+   "row": "C926",
+   "screen": "mark_kitchen.short",
+   "verdict": "PASS",
+   "line": "Mom's cup stops halfway to her mouth, then keeps going.",
+   "why": "minutes only; no clock printed"
+  },
+  {
+   "row": "C926",
+   "screen": "mark_kitchen.talk",
+   "verdict": "PASS",
+   "line": "You working, kid? Rent doesn't wait. And don't spend it all on coffee.",
+   "why": "minutes only; no clock printed"
+  },
+  {
+   "row": "C927",
+   "screen": "mark_kitchen.hub",
+   "verdict": "PASS",
+   "line": "Mark's at the table with his coffee. He looks at you over the rim.",
+   "why": "every exit carries its minutes"
+  },
+  {
+   "row": "C927",
+   "screen": "mark_kitchen.pay100",
+   "verdict": "PASS",
+   "line": "All there. Same time next Sunday.",
+   "why": "every exit carries its minutes"
+  },
+  {
+   "row": "C927",
+   "screen": "mark_kitchen.pay75",
+   "verdict": "PASS",
+   "line": "It goes to ninety once you've paid three hundred. Four Sundays straight, kid",
+   "why": "every exit carries its minutes"
+  },
+  {
+   "row": "C927",
+   "screen": "mark_kitchen.pay90",
+   "verdict": "PASS",
+   "line": "A hundred from next week.",
+   "why": "every exit carries its minutes"
+  },
+  {
+   "row": "C927",
+   "screen": "mark_kitchen.short",
+   "verdict": "PASS",
+   "line": "Mom's cup stops halfway to her mouth, then keeps going.",
+   "why": "every exit carries its minutes"
+  },
+  {
+   "row": "C927",
+   "screen": "mark_kitchen.talk",
+   "verdict": "PASS",
+   "line": "You working, kid? Rent doesn't wait. And don't spend it all on coffee.",
+   "why": "every exit carries its minutes"
+  },
+  {
+   "row": "C928",
+   "screen": "mark_kitchen.pay100",
+   "verdict": "PASS",
+   "line": "All there. Same time next Sunday.",
+   "why": "minutes only; no clock printed"
+  },
+  {
+   "row": "C928",
+   "screen": "mark_kitchen.pay75",
+   "verdict": "PASS",
+   "line": "It goes to ninety once you've paid three hundred. Four Sundays straight, kid",
+   "why": "minutes only; no clock printed"
+  },
+  {
+   "row": "C928",
+   "screen": "mark_kitchen.pay90",
+   "verdict": "PASS",
+   "line": "A hundred from next week.",
+   "why": "minutes only; no clock printed"
+  },
+  {
+   "row": "C928",
+   "screen": "mark_kitchen.short",
+   "verdict": "PASS",
+   "line": "Mom's cup stops halfway to her mouth, then keeps going.",
+   "why": "minutes only; no clock printed"
+  },
+  {
+   "row": "C928",
+   "screen": "mark_kitchen.talk",
+   "verdict": "PASS",
+   "line": "You working, kid? Rent doesn't wait. And don't spend it all on coffee.",
+   "why": "minutes only; no clock printed"
+  },
+  {
+   "row": "C929",
+   "screen": "mark_kitchen.hub",
+   "verdict": "PASS",
+   "line": "Pay the rent \u2014 Mark collects on Sundays, 8 to 11:55am, at the kitchen table.",
+   "why": "no duration or energy on a label; the greyed line's hours are the clock-shut row publishing them (C913)"
+  },
+  {
+   "row": "C929",
+   "screen": "mark_kitchen.pay100",
+   "verdict": "PASS",
+   "line": "Done",
+   "why": "no time, duration or energy on the label"
+  },
+  {
+   "row": "C929",
+   "screen": "mark_kitchen.pay75",
+   "verdict": "PASS",
+   "line": "Done",
+   "why": "no time, duration or energy on the label"
+  },
+  {
+   "row": "C929",
+   "screen": "mark_kitchen.pay90",
+   "verdict": "PASS",
+   "line": "Done",
+   "why": "no time, duration or energy on the label"
+  },
+  {
+   "row": "C929",
+   "screen": "mark_kitchen.short",
+   "verdict": "PASS",
+   "line": "Done",
+   "why": "no time, duration or energy on the label"
+  },
+  {
+   "row": "C929",
+   "screen": "mark_kitchen.talk",
+   "verdict": "PASS",
+   "line": "Done",
+   "why": "no time, duration or energy on the label"
+  },
+  {
+   "row": "C930",
+   "screen": "mark_kitchen.pay100",
+   "verdict": "N/A",
+   "line": "All there. Same time next Sunday.",
+   "why": "no hours or travel on this screen"
+  },
+  {
+   "row": "C930",
+   "screen": "mark_kitchen.pay75",
+   "verdict": "N/A",
+   "line": "It goes to ninety once you've paid three hundred. Four Sundays straight, kid",
+   "why": "no hours or travel on this screen"
+  },
+  {
+   "row": "C930",
+   "screen": "mark_kitchen.pay90",
+   "verdict": "N/A",
+   "line": "A hundred from next week.",
+   "why": "no hours or travel on this screen"
+  },
+  {
+   "row": "C930",
+   "screen": "mark_kitchen.short",
+   "verdict": "N/A",
+   "line": "Mom's cup stops halfway to her mouth, then keeps going.",
+   "why": "no hours or travel on this screen"
+  },
+  {
+   "row": "C930",
+   "screen": "mark_kitchen.talk",
+   "verdict": "N/A",
+   "line": "You working, kid? Rent doesn't wait. And don't spend it all on coffee.",
+   "why": "no hours or travel on this screen"
+  },
+  {
+   "row": "C931",
+   "screen": "mark_kitchen.hub",
+   "verdict": "PASS",
+   "line": "time_of_day 08:00\u201311:55",
+   "why": "end exclusive; the greyed line names the same window"
+  },
+  {
+   "row": "C931",
+   "screen": "mark_kitchen.pay100",
+   "verdict": "N/A",
+   "line": "All there. Same time next Sunday.",
+   "why": "no time_of_day on this screen"
+  },
+  {
+   "row": "C931",
+   "screen": "mark_kitchen.pay75",
+   "verdict": "N/A",
+   "line": "It goes to ninety once you've paid three hundred. Four Sundays straight, kid",
+   "why": "no time_of_day on this screen"
+  },
+  {
+   "row": "C931",
+   "screen": "mark_kitchen.pay90",
+   "verdict": "N/A",
+   "line": "A hundred from next week.",
+   "why": "no time_of_day on this screen"
+  },
+  {
+   "row": "C931",
+   "screen": "mark_kitchen.short",
+   "verdict": "N/A",
+   "line": "Mom's cup stops halfway to her mouth, then keeps going.",
+   "why": "no time_of_day on this screen"
+  },
+  {
+   "row": "C931",
+   "screen": "mark_kitchen.talk",
+   "verdict": "N/A",
+   "line": "You working, kid? Rent doesn't wait. And don't spend it all on coffee.",
+   "why": "no time_of_day on this screen"
+  },
+  {
+   "row": "C953",
+   "screen": "mark_kitchen.hub",
+   "verdict": "PASS",
+   "line": "Pay the rent",
+   "why": "no time or energy on Talk, Pay the rent or Leave"
+  },
+  {
+   "row": "C953",
+   "screen": "mark_kitchen.pay100",
+   "verdict": "PASS",
+   "line": "Done",
+   "why": "no time or energy on the label"
+  },
+  {
+   "row": "C953",
+   "screen": "mark_kitchen.pay75",
+   "verdict": "PASS",
+   "line": "Done",
+   "why": "no time or energy on the label"
+  },
+  {
+   "row": "C953",
+   "screen": "mark_kitchen.pay90",
+   "verdict": "PASS",
+   "line": "Done",
+   "why": "no time or energy on the label"
+  },
+  {
+   "row": "C953",
+   "screen": "mark_kitchen.rent",
+   "verdict": "PASS",
+   "line": "Hand it over ($75)",
+   "why": "money on the pay button, no time on Leave"
+  },
+  {
+   "row": "C953",
+   "screen": "mark_kitchen.short",
+   "verdict": "PASS",
+   "line": "Done",
+   "why": "no time or energy on the label"
+  },
+  {
+   "row": "C953",
+   "screen": "mark_kitchen.talk",
+   "verdict": "PASS",
+   "line": "Done",
+   "why": "no time or energy on the label"
+  },
+  {
+   "row": "L106",
+   "screen": "mark_kitchen.hub",
+   "verdict": "PASS",
+   "line": "Mark's at the table with his coffee. He looks at you over the rim.",
+   "why": "Mark's kitchen rows: weekdays 07:00\u201307:30 (coffee before work), Sat/Sun 08:00\u201310:00 breakfast, Sun 10:00\u201312:00 at the table; the menu shows only while he's there (requires_npc). The greyed rent line \"Mark collects on Sundays, 8 to 11:55am, at the kitchen table\" matches his Sunday rows and the trigger (end exclusive)"
+  },
+  {
+   "row": "L106",
+   "screen": "mark_kitchen.pay100",
+   "verdict": "PASS",
+   "line": "All there. Same time next Sunday.",
+   "why": "Sunday only, via the hub's weekday gate"
+  },
+  {
+   "row": "L106",
+   "screen": "mark_kitchen.pay75",
+   "verdict": "PASS",
+   "line": "It goes to ninety once you've paid three hundred. Four Sundays straight, kid",
+   "why": "first-payment line behind rent_paid_once false; \"Ninety from next week\" behind rent_paid_total \u2265 225 (read before the +75), so true when the total reaches 300"
+  },
+  {
+   "row": "L106",
+   "screen": "mark_kitchen.pay90",
+   "verdict": "PASS",
+   "line": "A hundred from next week.",
+   "why": "\"A hundred from next week\" behind rent_paid_total \u2265 810, true when the +90 reaches 900"
+  },
+  {
+   "row": "L106",
+   "screen": "mark_kitchen.rent",
+   "verdict": "PASS",
+   "line": "Mark folds the paper down and holds out his hand.",
+   "why": "reached only Sunday 08:00\u201311:55 while Mark is at the table; each price group reads rent_paid_total and money, in an if/elseif chain that picks the right line"
+  },
+  {
+   "row": "L106",
+   "screen": "mark_kitchen.short",
+   "verdict": "PASS",
+   "line": "Mom's cup stops halfway to her mouth, then keeps going.",
+   "why": "Laura is in the kitchen Sunday 08:00\u201312:00 (who_is_where), at every minute the rent window can show"
+  },
+  {
+   "row": "L106",
+   "screen": "mark_kitchen.talk",
+   "verdict": "PASS",
+   "line": "You working, kid? Rent doesn't wait. And don't spend it all on coffee.",
+   "why": "true at every one of Mark's kitchen hours; \"You working\" asks, claims no job"
+  },
+  {
+   "row": "L167",
+   "screen": "mark_kitchen.hub",
+   "verdict": "PASS",
+   "line": "Pay the rent",
+   "why": "one row, one day kind, greyed with its full hours"
+  },
+  {
+   "row": "L167",
+   "screen": "mark_kitchen.pay100",
+   "verdict": "N/A",
+   "line": "All there. Same time next Sunday.",
+   "why": "no hours"
+  },
+  {
+   "row": "L167",
+   "screen": "mark_kitchen.pay75",
+   "verdict": "N/A",
+   "line": "It goes to ninety once you've paid three hundred. Four Sundays straight, kid",
+   "why": "no hours"
+  },
+  {
+   "row": "L167",
+   "screen": "mark_kitchen.pay90",
+   "verdict": "N/A",
+   "line": "A hundred from next week.",
+   "why": "no hours"
+  },
+  {
+   "row": "L167",
+   "screen": "mark_kitchen.short",
+   "verdict": "N/A",
+   "line": "Mom's cup stops halfway to her mouth, then keeps going.",
+   "why": "no hours"
+  },
+  {
+   "row": "L167",
+   "screen": "mark_kitchen.talk",
+   "verdict": "N/A",
+   "line": "You working, kid? Rent doesn't wait. And don't spend it all on coffee.",
+   "why": "no hours"
+  }
+ ],
+ "causes": []
+}

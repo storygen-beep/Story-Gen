@@ -1,0 +1,12 @@
+{
+ "verdicts": [
+  {
+   "row": "L170",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "Before your first class, the dean wants to see every new student: his office is on the faculty corridor, off the Quad, weekdays 8am to 5pm.",
+   "why": "walk_hale_note sits in the Faculty Offices; Faculty Offices are now hidden_until goal1_shown, set on every hall choice of the opening (unmissable); Classes' first step points at the corridor and the dean's row (weekdays 8-17)"
+  }
+ ],
+ "causes": []
+}

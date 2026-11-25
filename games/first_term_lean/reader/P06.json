@@ -1,23 +1,26 @@
 {
  "piece": "P06",
- "pass": 4,
+ "pass": 6,
  "screens": {
   "loop_sleep.do": {
-   "text": "9c7a91b1f70ba0aa",
+   "text": "3c1f6073c033b3c9",
    "facts": "360f3049c5f88f27",
-   "all": "5c652d527df195d2"
+   "facts2": "360f3049c5f88f27",
+   "all": "72c631ead2fbd500"
   },
   "loop_eat.do": {
-   "text": "8e42ecd7e00ebc31",
-   "facts": "35258779e8e84aae",
-   "all": "79e035a3644d8418"
+   "text": "636d07a3956c340a",
+   "facts": "7e74f00e4f7f7169",
+   "facts2": "382d88df7f2e79a9",
+   "all": "4901fcc5436c3e2b"
   },
   "loop_shower.do": {
-   "text": "bd03f77f024fed1a",
+   "text": "839f0962e74c85d1",
    "facts": "875ee150348bbbd9",
-   "all": "eae1159ccec57128"
+   "facts2": "875ee150348bbbd9",
+   "all": "34137dc5a717631d"
   },
-  "*": "a3cd947a82240952"
+  "*": "0d8207e80434a90c"
  },
  "rows": {
   "B1": "5276068df1ca6fa9",
@@ -49,19 +52,19 @@
   "body-moments#5": "57bdf33c1e490daf",
   "body-moments#6": "61af55b717f75400",
   "body-moments#7": "a541004c4012d217",
-  "C889": "37967c45d79163fc",
-  "C906": "c257bba6d15edc3f",
+  "C889": "cebb147317e10c05",
+  "C906": "b8d0e5793dd14e95",
   "C926": "8cd1b7e3576dc7b5",
   "C900": "a4ef8ce78f554d6b",
   "C902": "66462bdbadae0c77",
   "C903": "263890a884329d60",
   "C904": "999816c6ed6cc232",
   "C892": "1d8d188451bcb51e",
-  "C910": "c86548143d50a17d",
-  "C929": "33a2ca367c2aac5b",
+  "C910": "19dcf805483efc88",
+  "C929": "b628ac285ac9c529",
   "C897": "16b066aee3c1a937",
   "C924": "ce540d1e01b7c301",
-  "C920": "3b568acb10d6806b",
+  "C920": "e7485c9faee24e77",
   "C913": "48bd82911a86ecbd",
   "C930": "97d54d350dd4ee77",
   "L167": "adf7bb3f8b632ac3",
@@ -73,15 +76,16 @@
   "C928": "799e1dd153166b6d",
   "C931": "1b8984f52b99537e",
   "C890": "3d716de4269fbd6c",
-  "clock#1": "cd89df2f76a7be89",
-  "clock#2": "1a52b17c19333377",
+  "clock#1": "b093ed58ec403b3c",
+  "clock#2": "e393ecafc7ab9a6c",
   "clock#3": "aae8f146c8ec933d",
   "clock#4": "c33118361d16b379",
   "clock#5": "95c5edec9e714e7b",
-  "clock#6": "31fd30fb07702bc9",
+  "clock#6": "bdedeec28a16e36f",
   "clock#7": "313c48a91780f62b",
   "clock#8": "f0c2400d02519978",
   "clock#9": "5d697f6bcd9f82de",
+  "clock#10": "2ad5e473e29b231d",
   "C1206": "6b4e6ea1fe51ab17",
   "C1166": "c5509dae0642ac9f",
   "C1167": "6fbed55f60b39ebd",
@@ -143,7 +147,7 @@
   "C1267": "6bafcadf3d586d5a",
   "C1249": "604706399d2f1194",
   "C1250": "8384cc6bcbd67c07",
-  "C1265": "cbf803b180c4fbdd",
+  "C1265": "00b79725344762be",
   "C1234": "7dc492e03732757e",
   "L121": "cddfa55c18e5c7b7",
   "L125": "259dda0a0553e751",
@@ -156,7 +160,7 @@
   "C1255": "d81893b9077b4b53",
   "L97": "2bfb9527e76ad93b",
   "media#1": "3641bf707d9adfce",
-  "media#2": "6fbfd98c2bfee006",
+  "media#2": "01ba7fa1cec4bc7a",
   "media#3": "8c75b0d488b188e2",
   "media#4": "03599fc0722690b6",
   "media#5": "2cf5e3607ccecd4a",
@@ -164,32 +168,34 @@
   "media#7": "eff6dc1369755c34",
   "C769": "cf7d7a82afabcbbb",
   "C794": "3281d513b7f90d6e",
-  "C795": "84d5bfb2a701bf90",
-  "C804": "2aa951544edb45db",
+  "C795": "a28152099697ac6a",
+  "C804": "56bf64be29d6ea48",
   "L106": "759e6667d7fc3183",
   "C776": "6088d5531ecff698",
   "C777": "38b483431fa177b0",
   "C773": "0825e8443f9180d0",
   "C758": "6329db1ec04ec3da",
-  "C953": "26f84fb90a0ef795",
+  "C953": "7ab90b4c71f3d98a",
   "C954": "a4837b8af6d54bb1",
   "C738": "976cd3e099c13e51",
   "C762": "877801c22bdade00",
   "L147": "5dea5707be5e7e0a",
+  "L170": "8f11debafcf05142",
   "C808": "73aff7401d6970a5",
   "C811": "ded1858e52e3be3a",
   "C770": "dcc6bbe6fde09083",
   "C771": "d941995a226da2b4",
   "C707": "e2898bd02a9e4730",
   "places#1": "18252966b4327f58",
-  "places#2": "3ab79adc34668b04",
+  "places#2": "e0b57720921c4523",
   "places#3": "56d056c80da49bb6",
-  "places#4": "ada53ed66015c980",
+  "places#4": "ae3ba300e1045c9f",
   "places#5": "90ec575adee9bf74",
   "places#6": "f2bc5f0f10c64c4b",
   "places#7": "2a095bf54f175e5e",
   "places#8": "c3ea8d01465e7298",
   "places#9": "f4cd9ab5f62bc6fc",
+  "places#10": "309f0141d342dc6f",
   "C1651": "1fd1d398f8ff8c05",
   "C1652": "2865863f1d3334b3",
   "C1653": "fdc77dd44dd4184f",
@@ -248,7 +254,7 @@
   "systems#1": "11a025871bd91561",
   "systems#2": "08602a299af77b30",
   "systems#3": "2d317a22b4b850f2",
-  "systems#4": "8bf41d5847343d42",
+  "systems#4": "671b614cf229df83",
   "systems#5": "94a3bd2b1d063362",
   "systems#6": "c3246ca0c2177dd6",
   "systems#7": "f862f66e0c4425a8",
@@ -287,7 +293,7 @@
    "note": false,
    "screen_hash": "a3cd947a82240952",
    "row_hash": "5276068df1ca6fa9",
-   "carried": false,
+   "carried": true,
    "pass": 4
   },
   {
@@ -300,8 +306,62 @@
    "note": false,
    "screen_hash": "a3cd947a82240952",
    "row_hash": "c1c0e2ac2588a579",
-   "carried": false,
+   "carried": true,
    "pass": 4
+  },
+  {
+   "row": "B10",
+   "screen": "loop_eat.do",
+   "verdict": "PASS",
+   "line": "You eat standing at the counter: toast, whatever's in the fridge, coffee from the pot.",
+   "why": "New night rows put nobody in the Kitchen 23:00-07:00, so the plain counter text shows alone; Mark and Ryan are only in the Kitchen while Mom is (Mark weekdays 07:00-07:30, weekends 08:00-10:00, Sun 10:00-12:00; Ryan 18:00-19:00 weekdays, 17:00-19:00 weekends), and the merged groups pick the right one. No past claimed.",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "636d07a3956c340a",
+    "facts": "c3fcf809ffed2e0d",
+    "facts2": "629dfb0d1436ad5f",
+    "all": "d6b77302eae200fd"
+   },
+   "row_hash": "c1c0e2ac2588a579",
+   "carried": true,
+   "pass": 5
+  },
+  {
+   "row": "B10",
+   "screen": "loop_shower.do",
+   "verdict": "PASS",
+   "line": "The water takes forever to run hot. You step in anyway.",
+   "why": "No one is named on the screen; the grey 'Ryan's in the shower.' is gated on his presence in the bathroom (weekdays 07:25-07:45, weekends 10:00-10:30). The razor substitution checks weekday 07:45-08:30 and Ryan in his room, where his row 07:45-12:00 puts him. True at any hour.",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "839f0962e74c85d1",
+    "facts": "875ee150348bbbd9",
+    "facts2": "875ee150348bbbd9",
+    "all": "34137dc5a717631d"
+   },
+   "row_hash": "c1c0e2ac2588a579",
+   "carried": true,
+   "pass": 5
+  },
+  {
+   "row": "B10",
+   "screen": "loop_sleep.do",
+   "verdict": "PASS",
+   "line": "You pull on your pyjamas: the thin top and the little shorts.",
+   "why": "Nobody named; no past; the line is the act. True at 21:00 and at 02:59, the window's last minute.",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "3c1f6073c033b3c9",
+    "facts": "360f3049c5f88f27",
+    "facts2": "360f3049c5f88f27",
+    "all": "72c631ead2fbd500"
+   },
+   "row_hash": "c1c0e2ac2588a579",
+   "carried": true,
+   "pass": 5
   },
   {
    "row": "B11",
@@ -313,7 +373,7 @@
    "note": false,
    "screen_hash": "a3cd947a82240952",
    "row_hash": "1e252efd0904a971",
-   "carried": false,
+   "carried": true,
    "pass": 4
   },
   {
@@ -326,7 +386,7 @@
    "note": false,
    "screen_hash": "a3cd947a82240952",
    "row_hash": "fd109745c67b71d7",
-   "carried": false,
+   "carried": true,
    "pass": 4
   },
   {
@@ -339,7 +399,7 @@
    "note": false,
    "screen_hash": "a3cd947a82240952",
    "row_hash": "aaf6518b64dcce55",
-   "carried": false,
+   "carried": true,
    "pass": 4
   },
   {
@@ -352,7 +412,7 @@
    "note": false,
    "screen_hash": "a3cd947a82240952",
    "row_hash": "4d9f2ebbce9a39cc",
-   "carried": false,
+   "carried": true,
    "pass": 4
   },
   {
@@ -365,7 +425,7 @@
    "note": false,
    "screen_hash": "a3cd947a82240952",
    "row_hash": "4d1fce1c4523b5d4",
-   "carried": false,
+   "carried": true,
    "pass": 4
   },
   {
@@ -378,7 +438,7 @@
    "note": false,
    "screen_hash": "a3cd947a82240952",
    "row_hash": "ced37cb0de6e7202",
-   "carried": false,
+   "carried": true,
    "pass": 4
   },
   {
@@ -391,7 +451,7 @@
    "note": false,
    "screen_hash": "a3cd947a82240952",
    "row_hash": "efcbd1ac6a95e2f2",
-   "carried": false,
+   "carried": true,
    "pass": 4
   },
   {
@@ -404,7 +464,7 @@
    "note": false,
    "screen_hash": "a3cd947a82240952",
    "row_hash": "0e32092e9fe64f2c",
-   "carried": false,
+   "carried": true,
    "pass": 4
   },
   {
@@ -417,7 +477,7 @@
    "note": false,
    "screen_hash": "a3cd947a82240952",
    "row_hash": "cef53154cc971fef",
-   "carried": false,
+   "carried": true,
    "pass": 4
   },
   {
@@ -430,8 +490,62 @@
    "note": false,
    "screen_hash": "a3cd947a82240952",
    "row_hash": "80d415cf08e0ebfe",
-   "carried": false,
+   "carried": true,
    "pass": 4
+  },
+  {
+   "row": "B8",
+   "screen": "loop_eat.do",
+   "verdict": "PASS",
+   "line": "You eat standing at the counter: toast, whatever's in the fridge, coffee from the pot.",
+   "why": "No number printed; no garment named.",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "636d07a3956c340a",
+    "facts": "c3fcf809ffed2e0d",
+    "facts2": "629dfb0d1436ad5f",
+    "all": "d6b77302eae200fd"
+   },
+   "row_hash": "80d415cf08e0ebfe",
+   "carried": true,
+   "pass": 5
+  },
+  {
+   "row": "B8",
+   "screen": "loop_shower.do",
+   "verdict": "PASS",
+   "line": "The water takes forever to run hot. You step in anyway.",
+   "why": "No number printed; naked by the act (undressing in an act is backed by the act).",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "839f0962e74c85d1",
+    "facts": "875ee150348bbbd9",
+    "facts2": "875ee150348bbbd9",
+    "all": "34137dc5a717631d"
+   },
+   "row_hash": "80d415cf08e0ebfe",
+   "carried": true,
+   "pass": 5
+  },
+  {
+   "row": "B8",
+   "screen": "loop_sleep.do",
+   "verdict": "PASS",
+   "line": "You pull on your pyjamas: the thin top and the little shorts.",
+   "why": "The pyjamas are named on the beat that puts them on; no number printed.",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "3c1f6073c033b3c9",
+    "facts": "360f3049c5f88f27",
+    "facts2": "360f3049c5f88f27",
+    "all": "72c631ead2fbd500"
+   },
+   "row_hash": "80d415cf08e0ebfe",
+   "carried": true,
+   "pass": 5
   },
   {
    "row": "B9",
@@ -443,7 +557,7 @@
    "note": false,
    "screen_hash": "a3cd947a82240952",
    "row_hash": "3b1fcdf549bcc558",
-   "carried": false,
+   "carried": true,
    "pass": 4
   },
   {
@@ -456,7 +570,7 @@
    "note": false,
    "screen_hash": "a3cd947a82240952",
    "row_hash": "44d22fea404612e3",
-   "carried": false,
+   "carried": true,
    "pass": 4
   },
   {
@@ -469,8 +583,62 @@
    "note": false,
    "screen_hash": "a3cd947a82240952",
    "row_hash": "212d17eda04f2799",
-   "carried": false,
+   "carried": true,
    "pass": 4
+  },
+  {
+   "row": "C1158",
+   "screen": "loop_eat.do",
+   "verdict": "N/A",
+   "line": "You eat standing at the counter: toast, whatever's in the fridge, coffee from the pot.",
+   "why": "No garment named.",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "636d07a3956c340a",
+    "facts": "c3fcf809ffed2e0d",
+    "facts2": "629dfb0d1436ad5f",
+    "all": "d6b77302eae200fd"
+   },
+   "row_hash": "212d17eda04f2799",
+   "carried": true,
+   "pass": 5
+  },
+  {
+   "row": "C1158",
+   "screen": "loop_shower.do",
+   "verdict": "PASS",
+   "line": "The water takes forever to run hot. You step in anyway.",
+   "why": "'runs down your belly and between your legs': no garment; undressing is backed by the act.",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "839f0962e74c85d1",
+    "facts": "875ee150348bbbd9",
+    "facts2": "875ee150348bbbd9",
+    "all": "34137dc5a717631d"
+   },
+   "row_hash": "212d17eda04f2799",
+   "carried": true,
+   "pass": 5
+  },
+  {
+   "row": "C1158",
+   "screen": "loop_sleep.do",
+   "verdict": "PASS",
+   "line": "You pull on your pyjamas: the thin top and the little shorts.",
+   "why": "The pyjamas are named by the beat that dresses her in them (clothes.md C1158: 'or the beat that equips her'); prose only, as the card says and NOTES 179 notes 'as with P06's sleep'.",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "3c1f6073c033b3c9",
+    "facts": "360f3049c5f88f27",
+    "facts2": "360f3049c5f88f27",
+    "all": "72c631ead2fbd500"
+   },
+   "row_hash": "212d17eda04f2799",
+   "carried": true,
+   "pass": 5
   },
   {
    "row": "C1166",
@@ -482,8 +650,26 @@
    "note": false,
    "screen_hash": "a3cd947a82240952",
    "row_hash": "c5509dae0642ac9f",
-   "carried": false,
+   "carried": true,
    "pass": 4
+  },
+  {
+   "row": "C1166",
+   "screen": "loop_eat.do",
+   "verdict": "N/A",
+   "line": "You eat standing at the counter: toast, whatever's in the fridge, coffee from the pot.",
+   "why": "not the opening, and she doesn't dress here",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "636d07a3956c340a",
+    "facts": "7e74f00e4f7f7169",
+    "facts2": "382d88df7f2e79a9",
+    "all": "4901fcc5436c3e2b"
+   },
+   "row_hash": "c5509dae0642ac9f",
+   "carried": true,
+   "pass": 5
   },
   {
    "row": "C1167",
@@ -495,7 +681,7 @@
    "note": false,
    "screen_hash": "a3cd947a82240952",
    "row_hash": "6fbed55f60b39ebd",
-   "carried": false,
+   "carried": true,
    "pass": 4
   },
   {
@@ -508,7 +694,7 @@
    "note": false,
    "screen_hash": "a3cd947a82240952",
    "row_hash": "43c95698cbc835c1",
-   "carried": false,
+   "carried": true,
    "pass": 4
   },
   {
@@ -521,7 +707,7 @@
    "note": false,
    "screen_hash": "a3cd947a82240952",
    "row_hash": "49328c800821e97e",
-   "carried": false,
+   "carried": true,
    "pass": 4
   },
   {
@@ -534,7 +720,7 @@
    "note": false,
    "screen_hash": "a3cd947a82240952",
    "row_hash": "a65e6d44d95e1ed7",
-   "carried": false,
+   "carried": true,
    "pass": 4
   },
   {
@@ -547,7 +733,7 @@
    "note": false,
    "screen_hash": "a3cd947a82240952",
    "row_hash": "78d766628b4d73c2",
-   "carried": false,
+   "carried": true,
    "pass": 4
   },
   {
@@ -560,8 +746,26 @@
    "note": false,
    "screen_hash": "a3cd947a82240952",
    "row_hash": "9002e505d1fabe59",
-   "carried": false,
+   "carried": true,
    "pass": 4
+  },
+  {
+   "row": "C1177",
+   "screen": "loop_eat.do",
+   "verdict": "N/A",
+   "line": "You eat standing at the counter: toast, whatever's in the fridge, coffee from the pot.",
+   "why": "no garment or exposure on the screen",
+   "cause": null,
+   "note": true,
+   "screen_hash": {
+    "text": "636d07a3956c340a",
+    "facts": "7e74f00e4f7f7169",
+    "facts2": "382d88df7f2e79a9",
+    "all": "4901fcc5436c3e2b"
+   },
+   "row_hash": "9002e505d1fabe59",
+   "carried": true,
+   "pass": 5
   },
   {
    "row": "C1183",
@@ -573,7 +777,7 @@
    "note": false,
    "screen_hash": "a3cd947a82240952",
    "row_hash": "8ce5e31dbee654c8",
-   "carried": false,
+   "carried": true,
    "pass": 4
   },
   {
@@ -586,7 +790,7 @@
    "note": false,
    "screen_hash": "a3cd947a82240952",
    "row_hash": "86c8748d488db055",
-   "carried": false,
+   "carried": true,
    "pass": 4
   },
   {
@@ -599,7 +803,7 @@
    "note": false,
    "screen_hash": "a3cd947a82240952",
    "row_hash": "46254ea16cee2229",
-   "carried": false,
+   "carried": true,
    "pass": 4
   },
   {
@@ -612,7 +816,7 @@
    "note": false,
    "screen_hash": "a3cd947a82240952",
    "row_hash": "add9e8d3fbfb9105",
-   "carried": false,
+   "carried": true,
    "pass": 4
   },
   {
@@ -625,8 +829,26 @@
    "note": false,
    "screen_hash": "a3cd947a82240952",
    "row_hash": "b4f0f994f2657396",
-   "carried": false,
+   "carried": true,
    "pass": 4
+  },
+  {
+   "row": "C1197",
+   "screen": "loop_eat.do",
+   "verdict": "N/A",
+   "line": "You eat standing at the counter: toast, whatever's in the fridge, coffee from the pot.",
+   "why": "no changing here",
+   "cause": null,
+   "note": true,
+   "screen_hash": {
+    "text": "636d07a3956c340a",
+    "facts": "7e74f00e4f7f7169",
+    "facts2": "382d88df7f2e79a9",
+    "all": "4901fcc5436c3e2b"
+   },
+   "row_hash": "b4f0f994f2657396",
+   "carried": true,
+   "pass": 5
   },
   {
    "row": "C1198",
@@ -638,7 +860,7 @@
    "note": false,
    "screen_hash": "a3cd947a82240952",
    "row_hash": "495e5eb9452b4926",
-   "carried": false,
+   "carried": true,
    "pass": 4
   },
   {
@@ -651,7 +873,7 @@
    "note": false,
    "screen_hash": "a3cd947a82240952",
    "row_hash": "766f516b6b8e329c",
-   "carried": false,
+   "carried": true,
    "pass": 4
   },
   {
@@ -664,7 +886,7 @@
    "note": false,
    "screen_hash": "a3cd947a82240952",
    "row_hash": "0ad4d41eb864e8bb",
-   "carried": false,
+   "carried": true,
    "pass": 4
   },
   {
@@ -677,7 +899,7 @@
    "note": false,
    "screen_hash": "a3cd947a82240952",
    "row_hash": "4fec6fc9a8793a0f",
-   "carried": false,
+   "carried": true,
    "pass": 4
   },
   {
@@ -690,8 +912,62 @@
    "note": false,
    "screen_hash": "a3cd947a82240952",
    "row_hash": "6b4e6ea1fe51ab17",
-   "carried": false,
+   "carried": true,
    "pass": 4
+  },
+  {
+   "row": "C1206",
+   "screen": "loop_eat.do",
+   "verdict": "N/A",
+   "line": "You eat standing at the counter: toast, whatever's in the fridge, coffee from the pot.",
+   "why": "No garment named.",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "636d07a3956c340a",
+    "facts": "c3fcf809ffed2e0d",
+    "facts2": "629dfb0d1436ad5f",
+    "all": "d6b77302eae200fd"
+   },
+   "row_hash": "6b4e6ea1fe51ab17",
+   "carried": true,
+   "pass": 5
+  },
+  {
+   "row": "C1206",
+   "screen": "loop_shower.do",
+   "verdict": "N/A",
+   "line": "The water takes forever to run hot. You step in anyway.",
+   "why": "No garment named.",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "839f0962e74c85d1",
+    "facts": "875ee150348bbbd9",
+    "facts2": "875ee150348bbbd9",
+    "all": "34137dc5a717631d"
+   },
+   "row_hash": "6b4e6ea1fe51ab17",
+   "carried": true,
+   "pass": 5
+  },
+  {
+   "row": "C1206",
+   "screen": "loop_sleep.do",
+   "verdict": "PASS",
+   "line": "You pull on your pyjamas: the thin top and the little shorts.",
+   "why": "She is wearing the pyjamas the line just put on her; 'the thin top' after it refers to the same.",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "3c1f6073c033b3c9",
+    "facts": "360f3049c5f88f27",
+    "facts2": "360f3049c5f88f27",
+    "all": "72c631ead2fbd500"
+   },
+   "row_hash": "6b4e6ea1fe51ab17",
+   "carried": true,
+   "pass": 5
   },
   {
    "row": "C1207",
@@ -703,8 +979,26 @@
    "note": false,
    "screen_hash": "a3cd947a82240952",
    "row_hash": "cf1ca9ef0e675be5",
-   "carried": false,
+   "carried": true,
    "pass": 4
+  },
+  {
+   "row": "C1207",
+   "screen": "loop_eat.do",
+   "verdict": "N/A",
+   "line": "You eat standing at the counter: toast, whatever's in the fridge, coffee from the pot.",
+   "why": "not the wardrobe screen",
+   "cause": null,
+   "note": true,
+   "screen_hash": {
+    "text": "636d07a3956c340a",
+    "facts": "7e74f00e4f7f7169",
+    "facts2": "382d88df7f2e79a9",
+    "all": "4901fcc5436c3e2b"
+   },
+   "row_hash": "cf1ca9ef0e675be5",
+   "carried": true,
+   "pass": 5
   },
   {
    "row": "C1220",
@@ -716,7 +1010,7 @@
    "note": false,
    "screen_hash": "a3cd947a82240952",
    "row_hash": "e706f55f84a94a84",
-   "carried": false,
+   "carried": true,
    "pass": 4
   },
   {
@@ -729,7 +1023,7 @@
    "note": false,
    "screen_hash": "a3cd947a82240952",
    "row_hash": "90572c3a26b59fc7",
-   "carried": false,
+   "carried": true,
    "pass": 4
   },
   {
@@ -742,7 +1036,7 @@
    "note": false,
    "screen_hash": "a3cd947a82240952",
    "row_hash": "7dc492e03732757e",
-   "carried": false,
+   "carried": true,
    "pass": 4
   },
   {
@@ -755,7 +1049,7 @@
    "note": false,
    "screen_hash": "a3cd947a82240952",
    "row_hash": "af95eb45b0bdc9db",
-   "carried": false,
+   "carried": true,
    "pass": 4
   },
   {
@@ -768,7 +1062,7 @@
    "note": false,
    "screen_hash": "a3cd947a82240952",
    "row_hash": "604706399d2f1194",
-   "carried": false,
+   "carried": true,
    "pass": 4
   },
   {
@@ -781,7 +1075,7 @@
    "note": false,
    "screen_hash": "a3cd947a82240952",
    "row_hash": "8384cc6bcbd67c07",
-   "carried": false,
+   "carried": true,
    "pass": 4
   },
   {
@@ -794,7 +1088,7 @@
    "note": false,
    "screen_hash": "a3cd947a82240952",
    "row_hash": "d81893b9077b4b53",
-   "carried": false,
+   "carried": true,
    "pass": 4
   },
   {
@@ -807,7 +1101,7 @@
    "note": false,
    "screen_hash": "a3cd947a82240952",
    "row_hash": "6a661c60639de8be",
-   "carried": false,
+   "carried": true,
    "pass": 4
   },
   {
@@ -820,21 +1114,21 @@
    "note": false,
    "screen_hash": "a3cd947a82240952",
    "row_hash": "2946d2fe0b7dc28f",
-   "carried": false,
+   "carried": true,
    "pass": 4
   },
   {
    "row": "C1265",
    "screen": "*",
    "verdict": "PASS",
-   "line": "(no media block)",
-   "why": "a meal is a chore; it gets no spot, and this is not a person's menu",
+   "line": "loop_eat.do: no media block; loop_shower.do and loop_sleep.do: one picture each",
+   "why": "The meal is a chore and gets no spot; the shower and bed are body moments and carry a picture of her right after the line.",
    "cause": null,
    "note": false,
-   "screen_hash": "a3cd947a82240952",
-   "row_hash": "cbf803b180c4fbdd",
-   "carried": false,
-   "pass": 4
+   "screen_hash": "bdcb590aeeb053f2",
+   "row_hash": "00b79725344762be",
+   "carried": true,
+   "pass": 5
   },
   {
    "row": "C1267",
@@ -846,7 +1140,7 @@
    "note": false,
    "screen_hash": "a3cd947a82240952",
    "row_hash": "6bafcadf3d586d5a",
-   "carried": false,
+   "carried": true,
    "pass": 4
   },
   {
@@ -859,7 +1153,7 @@
    "note": false,
    "screen_hash": "a3cd947a82240952",
    "row_hash": "ca72df83c67acc75",
-   "carried": false,
+   "carried": true,
    "pass": 4
   },
   {
@@ -872,7 +1166,7 @@
    "note": false,
    "screen_hash": "a3cd947a82240952",
    "row_hash": "5c2a05d547732e4b",
-   "carried": false,
+   "carried": true,
    "pass": 4
   },
   {
@@ -885,7 +1179,7 @@
    "note": false,
    "screen_hash": "a3cd947a82240952",
    "row_hash": "2b934524a49c49e9",
-   "carried": false,
+   "carried": true,
    "pass": 4
   },
   {
@@ -898,7 +1192,7 @@
    "note": false,
    "screen_hash": "a3cd947a82240952",
    "row_hash": "a511d81564cef526",
-   "carried": false,
+   "carried": true,
    "pass": 4
   },
   {
@@ -911,7 +1205,7 @@
    "note": false,
    "screen_hash": "a3cd947a82240952",
    "row_hash": "9705ac6acfdcce30",
-   "carried": false,
+   "carried": true,
    "pass": 4
   },
   {
@@ -924,7 +1218,7 @@
    "note": false,
    "screen_hash": "a3cd947a82240952",
    "row_hash": "a1ce22b0640c6eeb",
-   "carried": false,
+   "carried": true,
    "pass": 4
   },
   {
@@ -937,7 +1231,7 @@
    "note": false,
    "screen_hash": "a3cd947a82240952",
    "row_hash": "f0ab213c3075f906",
-   "carried": false,
+   "carried": true,
    "pass": 4
   },
   {
@@ -950,7 +1244,7 @@
    "note": false,
    "screen_hash": "a3cd947a82240952",
    "row_hash": "d631d4c69f1d3b74",
-   "carried": false,
+   "carried": true,
    "pass": 4
   },
   {
@@ -963,7 +1257,7 @@
    "note": false,
    "screen_hash": "a3cd947a82240952",
    "row_hash": "374ef1ff39ed683f",
-   "carried": false,
+   "carried": true,
    "pass": 4
   },
   {
@@ -976,42 +1270,44 @@
    "note": false,
    "screen_hash": "a3cd947a82240952",
    "row_hash": "1102503d50722e90",
-   "carried": false,
+   "carried": true,
    "pass": 4
   },
   {
    "row": "C1313",
    "screen": "loop_shower.do",
-   "verdict": "FAIL",
-   "line": "The water takes forever to run hot. You step in anyway.",
-   "why": "one text every visit, no variant; nothing else at home_bathroom fires (only Ryan's schedule rows, which grey the row); Ryan's razor walk-in (P38) isn't built",
-   "cause": "P06m1-c1",
-   "note": false,
+   "verdict": "PASS",
+   "line": "[[canvases.trigger.substitutions]] target_canvas_id = \"walk_ryan_shower\" chance = 0.25",
+   "why": "Note row. The shower now carries a substitution: Ryan's razor walk-in, weekdays 07:45-08:30, chance 0.25.",
+   "cause": null,
+   "note": true,
    "screen_hash": {
-    "text": "bd03f77f024fed1a",
+    "text": "839f0962e74c85d1",
     "facts": "875ee150348bbbd9",
-    "all": "eae1159ccec57128"
+    "facts2": "875ee150348bbbd9",
+    "all": "34137dc5a717631d"
    },
    "row_hash": "1102503d50722e90",
-   "carried": false,
-   "pass": 4
+   "carried": true,
+   "pass": 5
   },
   {
    "row": "C1313",
    "screen": "loop_sleep.do",
    "verdict": "FAIL",
    "line": "You pull on your pyjamas: the thin top and the little shorts.",
-   "why": "one text every visit, no variant; no other canvas at home_her_room, so the room holds no event",
-   "cause": "P06m1-c2",
-   "note": false,
+   "why": "Note row. Still one text every visit and no substitution; the room's other canvases (home_wait, study_room) are her own activities, not an event.",
+   "cause": null,
+   "note": true,
    "screen_hash": {
-    "text": "9c7a91b1f70ba0aa",
+    "text": "3c1f6073c033b3c9",
     "facts": "360f3049c5f88f27",
-    "all": "5c652d527df195d2"
+    "facts2": "360f3049c5f88f27",
+    "all": "72c631ead2fbd500"
    },
    "row_hash": "1102503d50722e90",
-   "carried": false,
-   "pass": 4
+   "carried": true,
+   "pass": 5
   },
   {
    "row": "C1337",
@@ -1023,7 +1319,7 @@
    "note": false,
    "screen_hash": "a3cd947a82240952",
    "row_hash": "54d313af889ee445",
-   "carried": false,
+   "carried": true,
    "pass": 4
   },
   {
@@ -1036,7 +1332,7 @@
    "note": false,
    "screen_hash": "a3cd947a82240952",
    "row_hash": "93f6f78fa5d01006",
-   "carried": false,
+   "carried": true,
    "pass": 4
   },
   {
@@ -1049,7 +1345,7 @@
    "note": false,
    "screen_hash": "a3cd947a82240952",
    "row_hash": "70c31c4c8f168968",
-   "carried": false,
+   "carried": true,
    "pass": 4
   },
   {
@@ -1062,7 +1358,7 @@
    "note": false,
    "screen_hash": "a3cd947a82240952",
    "row_hash": "d38926e545c247d9",
-   "carried": false,
+   "carried": true,
    "pass": 4
   },
   {
@@ -1075,7 +1371,7 @@
    "note": false,
    "screen_hash": "a3cd947a82240952",
    "row_hash": "35d5552632b315d7",
-   "carried": false,
+   "carried": true,
    "pass": 4
   },
   {
@@ -1088,7 +1384,7 @@
    "note": false,
    "screen_hash": "a3cd947a82240952",
    "row_hash": "4a3df70ba62ff0c1",
-   "carried": false,
+   "carried": true,
    "pass": 4
   },
   {
@@ -1101,7 +1397,7 @@
    "note": false,
    "screen_hash": "a3cd947a82240952",
    "row_hash": "4772eb5bc3a0625c",
-   "carried": false,
+   "carried": true,
    "pass": 4
   },
   {
@@ -1114,7 +1410,7 @@
    "note": false,
    "screen_hash": "a3cd947a82240952",
    "row_hash": "9dc51ff2fc8fffe8",
-   "carried": false,
+   "carried": true,
    "pass": 4
   },
   {
@@ -1127,7 +1423,7 @@
    "note": false,
    "screen_hash": "a3cd947a82240952",
    "row_hash": "a3292ce9b375de61",
-   "carried": false,
+   "carried": true,
    "pass": 4
   },
   {
@@ -1140,7 +1436,7 @@
    "note": false,
    "screen_hash": "a3cd947a82240952",
    "row_hash": "3fdc7ab766d9eed9",
-   "carried": false,
+   "carried": true,
    "pass": 4
   },
   {
@@ -1153,7 +1449,7 @@
    "note": false,
    "screen_hash": "a3cd947a82240952",
    "row_hash": "37396aa479e7c52a",
-   "carried": false,
+   "carried": true,
    "pass": 4
   },
   {
@@ -1166,7 +1462,7 @@
    "note": false,
    "screen_hash": "a3cd947a82240952",
    "row_hash": "d8f2ffe787064036",
-   "carried": false,
+   "carried": true,
    "pass": 4
   },
   {
@@ -1179,7 +1475,7 @@
    "note": false,
    "screen_hash": "a3cd947a82240952",
    "row_hash": "d3067a37085f7cb6",
-   "carried": false,
+   "carried": true,
    "pass": 4
   },
   {
@@ -1192,7 +1488,7 @@
    "note": false,
    "screen_hash": "a3cd947a82240952",
    "row_hash": "1a2f952203e75b84",
-   "carried": false,
+   "carried": true,
    "pass": 4
   },
   {
@@ -1205,7 +1501,7 @@
    "note": false,
    "screen_hash": "a3cd947a82240952",
    "row_hash": "bda90c8e06bef173",
-   "carried": false,
+   "carried": true,
    "pass": 4
   },
   {
@@ -1218,7 +1514,7 @@
    "note": false,
    "screen_hash": "a3cd947a82240952",
    "row_hash": "1990815abef56d49",
-   "carried": false,
+   "carried": true,
    "pass": 4
   },
   {
@@ -1226,17 +1522,18 @@
    "screen": "loop_sleep.do",
    "verdict": "FAIL",
    "line": "You're gone before you've finished thinking about tomorrow.",
-   "why": "her energy refill sends her to her bedroom, and nothing happens there: one fixed text, no other canvas at home_her_room",
-   "cause": "P06m1-c2",
-   "note": false,
+   "why": "Note row. The energy refill sends her to her bedroom and nothing happens there: no substitution, no event canvas.",
+   "cause": null,
+   "note": true,
    "screen_hash": {
-    "text": "9c7a91b1f70ba0aa",
+    "text": "3c1f6073c033b3c9",
     "facts": "360f3049c5f88f27",
-    "all": "5c652d527df195d2"
+    "facts2": "360f3049c5f88f27",
+    "all": "72c631ead2fbd500"
    },
    "row_hash": "1990815abef56d49",
-   "carried": false,
-   "pass": 4
+   "carried": true,
+   "pass": 5
   },
   {
    "row": "C1438",
@@ -1248,7 +1545,7 @@
    "note": false,
    "screen_hash": "a3cd947a82240952",
    "row_hash": "6160f6f4d03614ba",
-   "carried": false,
+   "carried": true,
    "pass": 4
   },
   {
@@ -1261,7 +1558,7 @@
    "note": false,
    "screen_hash": "a3cd947a82240952",
    "row_hash": "d0678c728ad9faf0",
-   "carried": false,
+   "carried": true,
    "pass": 4
   },
   {
@@ -1274,7 +1571,7 @@
    "note": false,
    "screen_hash": "a3cd947a82240952",
    "row_hash": "bb31891410f03faf",
-   "carried": false,
+   "carried": true,
    "pass": 4
   },
   {
@@ -1287,7 +1584,7 @@
    "note": false,
    "screen_hash": "a3cd947a82240952",
    "row_hash": "c8039df60cbcf1f8",
-   "carried": false,
+   "carried": true,
    "pass": 4
   },
   {
@@ -1300,7 +1597,7 @@
    "note": false,
    "screen_hash": "a3cd947a82240952",
    "row_hash": "4220f41f169da7c3",
-   "carried": false,
+   "carried": true,
    "pass": 4
   },
   {
@@ -1313,7 +1610,7 @@
    "note": false,
    "screen_hash": "a3cd947a82240952",
    "row_hash": "1fd1d398f8ff8c05",
-   "carried": false,
+   "carried": true,
    "pass": 4
   },
   {
@@ -1326,7 +1623,7 @@
    "note": false,
    "screen_hash": "a3cd947a82240952",
    "row_hash": "2865863f1d3334b3",
-   "carried": false,
+   "carried": true,
    "pass": 4
   },
   {
@@ -1339,7 +1636,7 @@
    "note": false,
    "screen_hash": "a3cd947a82240952",
    "row_hash": "fdc77dd44dd4184f",
-   "carried": false,
+   "carried": true,
    "pass": 4
   },
   {
@@ -1352,7 +1649,7 @@
    "note": false,
    "screen_hash": "a3cd947a82240952",
    "row_hash": "222ca99e5de5e42a",
-   "carried": false,
+   "carried": true,
    "pass": 4
   },
   {
@@ -1365,7 +1662,7 @@
    "note": false,
    "screen_hash": "a3cd947a82240952",
    "row_hash": "cbad9d20abcb8fb1",
-   "carried": false,
+   "carried": true,
    "pass": 4
   },
   {
@@ -1378,7 +1675,7 @@
    "note": false,
    "screen_hash": "a3cd947a82240952",
    "row_hash": "30160b6d644da00f",
-   "carried": false,
+   "carried": true,
    "pass": 4
   },
   {
@@ -1391,7 +1688,7 @@
    "note": false,
    "screen_hash": "a3cd947a82240952",
    "row_hash": "af6a877b7ddb73e9",
-   "carried": false,
+   "carried": true,
    "pass": 4
   },
   {
@@ -1404,7 +1701,7 @@
    "note": false,
    "screen_hash": "a3cd947a82240952",
    "row_hash": "ff7bec9fcd4bdc62",
-   "carried": false,
+   "carried": true,
    "pass": 4
   },
   {
@@ -1417,7 +1714,7 @@
    "note": false,
    "screen_hash": "a3cd947a82240952",
    "row_hash": "3c2db59ec07a7133",
-   "carried": false,
+   "carried": true,
    "pass": 4
   },
   {
@@ -1430,7 +1727,7 @@
    "note": false,
    "screen_hash": "a3cd947a82240952",
    "row_hash": "f748b945ae87a6ab",
-   "carried": false,
+   "carried": true,
    "pass": 4
   },
   {
@@ -1443,7 +1740,7 @@
    "note": false,
    "screen_hash": "a3cd947a82240952",
    "row_hash": "b886053a779f6a11",
-   "carried": false,
+   "carried": true,
    "pass": 4
   },
   {
@@ -1456,7 +1753,7 @@
    "note": false,
    "screen_hash": "a3cd947a82240952",
    "row_hash": "b7b218b11ff67ed7",
-   "carried": false,
+   "carried": true,
    "pass": 4
   },
   {
@@ -1469,7 +1766,7 @@
    "note": false,
    "screen_hash": "a3cd947a82240952",
    "row_hash": "f426ebb173bd731a",
-   "carried": false,
+   "carried": true,
    "pass": 4
   },
   {
@@ -1482,7 +1779,7 @@
    "note": false,
    "screen_hash": "a3cd947a82240952",
    "row_hash": "66565de58049e03a",
-   "carried": false,
+   "carried": true,
    "pass": 4
   },
   {
@@ -1495,7 +1792,7 @@
    "note": false,
    "screen_hash": "a3cd947a82240952",
    "row_hash": "35a53469bcbfeb1f",
-   "carried": false,
+   "carried": true,
    "pass": 4
   },
   {
@@ -1508,7 +1805,7 @@
    "note": false,
    "screen_hash": "a3cd947a82240952",
    "row_hash": "938088d09a052f3b",
-   "carried": false,
+   "carried": true,
    "pass": 4
   },
   {
@@ -1521,7 +1818,7 @@
    "note": false,
    "screen_hash": "a3cd947a82240952",
    "row_hash": "1ee093f39a06b394",
-   "carried": false,
+   "carried": true,
    "pass": 4
   },
   {
@@ -1534,7 +1831,7 @@
    "note": false,
    "screen_hash": "a3cd947a82240952",
    "row_hash": "c20739688fe9c5c9",
-   "carried": false,
+   "carried": true,
    "pass": 4
   },
   {
@@ -1547,7 +1844,7 @@
    "note": false,
    "screen_hash": "a3cd947a82240952",
    "row_hash": "a84bb283bdac8073",
-   "carried": false,
+   "carried": true,
    "pass": 4
   },
   {
@@ -1560,7 +1857,7 @@
    "note": false,
    "screen_hash": "a3cd947a82240952",
    "row_hash": "0031533ec82c4401",
-   "carried": false,
+   "carried": true,
    "pass": 4
   },
   {
@@ -1573,7 +1870,7 @@
    "note": false,
    "screen_hash": "a3cd947a82240952",
    "row_hash": "78aa710fc99207b5",
-   "carried": false,
+   "carried": true,
    "pass": 4
   },
   {
@@ -1586,7 +1883,7 @@
    "note": false,
    "screen_hash": "a3cd947a82240952",
    "row_hash": "1e789c98e52ef448",
-   "carried": false,
+   "carried": true,
    "pass": 4
   },
   {
@@ -1599,7 +1896,7 @@
    "note": false,
    "screen_hash": "a3cd947a82240952",
    "row_hash": "aa35910e35e29b2d",
-   "carried": false,
+   "carried": true,
    "pass": 4
   },
   {
@@ -1612,7 +1909,7 @@
    "note": false,
    "screen_hash": "a3cd947a82240952",
    "row_hash": "2d3aa3b699bb3a78",
-   "carried": false,
+   "carried": true,
    "pass": 4
   },
   {
@@ -1625,7 +1922,7 @@
    "note": false,
    "screen_hash": "a3cd947a82240952",
    "row_hash": "41543c0b01047eb6",
-   "carried": false,
+   "carried": true,
    "pass": 4
   },
   {
@@ -1638,7 +1935,7 @@
    "note": false,
    "screen_hash": "a3cd947a82240952",
    "row_hash": "39401d1f8b2ac714",
-   "carried": false,
+   "carried": true,
    "pass": 4
   },
   {
@@ -1651,7 +1948,7 @@
    "note": false,
    "screen_hash": "a3cd947a82240952",
    "row_hash": "803a558113f90fbd",
-   "carried": false,
+   "carried": true,
    "pass": 4
   },
   {
@@ -1664,7 +1961,7 @@
    "note": false,
    "screen_hash": "a3cd947a82240952",
    "row_hash": "69d227fcb6314994",
-   "carried": false,
+   "carried": true,
    "pass": 4
   },
   {
@@ -1677,7 +1974,7 @@
    "note": false,
    "screen_hash": "a3cd947a82240952",
    "row_hash": "a28a84cd5f58df59",
-   "carried": false,
+   "carried": true,
    "pass": 4
   },
   {
@@ -1690,7 +1987,7 @@
    "note": false,
    "screen_hash": "a3cd947a82240952",
    "row_hash": "04450056a0da072c",
-   "carried": false,
+   "carried": true,
    "pass": 4
   },
   {
@@ -1703,7 +2000,7 @@
    "note": false,
    "screen_hash": "a3cd947a82240952",
    "row_hash": "33f0b998a82d37de",
-   "carried": false,
+   "carried": true,
    "pass": 4
   },
   {
@@ -1716,7 +2013,7 @@
    "note": false,
    "screen_hash": "a3cd947a82240952",
    "row_hash": "820920d70a5f860a",
-   "carried": false,
+   "carried": true,
    "pass": 4
   },
   {
@@ -1729,7 +2026,7 @@
    "note": false,
    "screen_hash": "a3cd947a82240952",
    "row_hash": "b49633d1ad76857e",
-   "carried": false,
+   "carried": true,
    "pass": 4
   },
   {
@@ -1742,7 +2039,7 @@
    "note": false,
    "screen_hash": "a3cd947a82240952",
    "row_hash": "1345b94e89dfc2dc",
-   "carried": false,
+   "carried": true,
    "pass": 4
   },
   {
@@ -1755,7 +2052,7 @@
    "note": false,
    "screen_hash": "a3cd947a82240952",
    "row_hash": "39b97c524d1d887d",
-   "carried": false,
+   "carried": true,
    "pass": 4
   },
   {
@@ -1768,7 +2065,7 @@
    "note": false,
    "screen_hash": "a3cd947a82240952",
    "row_hash": "f4d1f119d6f2bea9",
-   "carried": false,
+   "carried": true,
    "pass": 4
   },
   {
@@ -1781,7 +2078,7 @@
    "note": false,
    "screen_hash": "a3cd947a82240952",
    "row_hash": "54826844d637c5b4",
-   "carried": false,
+   "carried": true,
    "pass": 4
   },
   {
@@ -1794,7 +2091,7 @@
    "note": false,
    "screen_hash": "a3cd947a82240952",
    "row_hash": "8933f85010afbef7",
-   "carried": false,
+   "carried": true,
    "pass": 4
   },
   {
@@ -1807,7 +2104,7 @@
    "note": false,
    "screen_hash": "a3cd947a82240952",
    "row_hash": "a2b07f40e1a9e908",
-   "carried": false,
+   "carried": true,
    "pass": 4
   },
   {
@@ -1824,7 +2121,7 @@
     "all": "79e035a3644d8418"
    },
    "row_hash": "a2b07f40e1a9e908",
-   "carried": false,
+   "carried": true,
    "pass": 4
   },
   {
@@ -1837,7 +2134,7 @@
    "note": false,
    "screen_hash": "a3cd947a82240952",
    "row_hash": "e3ca01ba145f4580",
-   "carried": false,
+   "carried": true,
    "pass": 4
   },
   {
@@ -1850,7 +2147,7 @@
    "note": false,
    "screen_hash": "a3cd947a82240952",
    "row_hash": "584dada6c379e3d8",
-   "carried": false,
+   "carried": true,
    "pass": 4
   },
   {
@@ -1863,7 +2160,7 @@
    "note": false,
    "screen_hash": "a3cd947a82240952",
    "row_hash": "ac5932d70cd775a1",
-   "carried": false,
+   "carried": true,
    "pass": 4
   },
   {
@@ -1876,7 +2173,7 @@
    "note": false,
    "screen_hash": "a3cd947a82240952",
    "row_hash": "3eb18b4cefbe49d3",
-   "carried": false,
+   "carried": true,
    "pass": 4
   },
   {
@@ -1889,7 +2186,7 @@
    "note": false,
    "screen_hash": "a3cd947a82240952",
    "row_hash": "6b0fd679047fc9b8",
-   "carried": false,
+   "carried": true,
    "pass": 4
   },
   {
@@ -1902,8 +2199,62 @@
    "note": false,
    "screen_hash": "a3cd947a82240952",
    "row_hash": "beb5a109bde77305",
-   "carried": false,
+   "carried": true,
    "pass": 4
+  },
+  {
+   "row": "C460",
+   "screen": "loop_eat.do",
+   "verdict": "PASS",
+   "line": "You eat standing at the counter: toast, whatever's in the fridge, coffee from the pot.",
+   "why": "New night rows put nobody in the Kitchen 23:00-07:00, so the plain counter text shows alone; Mark and Ryan are only in the Kitchen while Mom is (Mark weekdays 07:00-07:30, weekends 08:00-10:00, Sun 10:00-12:00; Ryan 18:00-19:00 weekdays, 17:00-19:00 weekends), and the merged groups pick the right one. No past claimed.",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "636d07a3956c340a",
+    "facts": "c3fcf809ffed2e0d",
+    "facts2": "629dfb0d1436ad5f",
+    "all": "d6b77302eae200fd"
+   },
+   "row_hash": "beb5a109bde77305",
+   "carried": true,
+   "pass": 5
+  },
+  {
+   "row": "C460",
+   "screen": "loop_shower.do",
+   "verdict": "PASS",
+   "line": "The water takes forever to run hot. You step in anyway.",
+   "why": "No one is named on the screen; the grey 'Ryan's in the shower.' is gated on his presence in the bathroom (weekdays 07:25-07:45, weekends 10:00-10:30). The razor substitution checks weekday 07:45-08:30 and Ryan in his room, where his row 07:45-12:00 puts him. True at any hour.",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "839f0962e74c85d1",
+    "facts": "875ee150348bbbd9",
+    "facts2": "875ee150348bbbd9",
+    "all": "34137dc5a717631d"
+   },
+   "row_hash": "beb5a109bde77305",
+   "carried": true,
+   "pass": 5
+  },
+  {
+   "row": "C460",
+   "screen": "loop_sleep.do",
+   "verdict": "PASS",
+   "line": "You pull on your pyjamas: the thin top and the little shorts.",
+   "why": "Nobody named; no past; the line is the act. True at 21:00 and at 02:59, the window's last minute.",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "3c1f6073c033b3c9",
+    "facts": "360f3049c5f88f27",
+    "facts2": "360f3049c5f88f27",
+    "all": "72c631ead2fbd500"
+   },
+   "row_hash": "beb5a109bde77305",
+   "carried": true,
+   "pass": 5
   },
   {
    "row": "C461",
@@ -1915,8 +2266,62 @@
    "note": false,
    "screen_hash": "a3cd947a82240952",
    "row_hash": "153b0804e686abae",
-   "carried": false,
+   "carried": true,
    "pass": 4
+  },
+  {
+   "row": "C461",
+   "screen": "loop_eat.do",
+   "verdict": "PASS",
+   "line": "You eat standing at the counter: toast, whatever's in the fridge, coffee from the pot.",
+   "why": "Texture that can't clash; her own act.",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "636d07a3956c340a",
+    "facts": "c3fcf809ffed2e0d",
+    "facts2": "629dfb0d1436ad5f",
+    "all": "d6b77302eae200fd"
+   },
+   "row_hash": "153b0804e686abae",
+   "carried": true,
+   "pass": 5
+  },
+  {
+   "row": "C461",
+   "screen": "loop_shower.do",
+   "verdict": "PASS",
+   "line": "The water takes forever to run hot. You step in anyway.",
+   "why": "Texture that can't clash; her own act.",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "839f0962e74c85d1",
+    "facts": "875ee150348bbbd9",
+    "facts2": "875ee150348bbbd9",
+    "all": "34137dc5a717631d"
+   },
+   "row_hash": "153b0804e686abae",
+   "carried": true,
+   "pass": 5
+  },
+  {
+   "row": "C461",
+   "screen": "loop_sleep.do",
+   "verdict": "PASS",
+   "line": "You pull on your pyjamas: the thin top and the little shorts.",
+   "why": "Texture that can't clash; her own act.",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "3c1f6073c033b3c9",
+    "facts": "360f3049c5f88f27",
+    "facts2": "360f3049c5f88f27",
+    "all": "72c631ead2fbd500"
+   },
+   "row_hash": "153b0804e686abae",
+   "carried": true,
+   "pass": 5
   },
   {
    "row": "C593",
@@ -1928,7 +2333,7 @@
    "note": false,
    "screen_hash": "a3cd947a82240952",
    "row_hash": "52e42cdd69c8f10e",
-   "carried": false,
+   "carried": true,
    "pass": 4
   },
   {
@@ -1941,7 +2346,7 @@
    "note": false,
    "screen_hash": "a3cd947a82240952",
    "row_hash": "a69f9998e41865b6",
-   "carried": false,
+   "carried": true,
    "pass": 4
   },
   {
@@ -1954,7 +2359,7 @@
    "note": false,
    "screen_hash": "a3cd947a82240952",
    "row_hash": "6f4e735e01b53e5c",
-   "carried": false,
+   "carried": true,
    "pass": 4
   },
   {
@@ -1967,7 +2372,7 @@
    "note": false,
    "screen_hash": "a3cd947a82240952",
    "row_hash": "e2898bd02a9e4730",
-   "carried": false,
+   "carried": true,
    "pass": 4
   },
   {
@@ -1980,8 +2385,26 @@
    "note": false,
    "screen_hash": "a3cd947a82240952",
    "row_hash": "d7c4f9c8542d0090",
-   "carried": false,
+   "carried": true,
    "pass": 4
+  },
+  {
+   "row": "C719",
+   "screen": "loop_eat.do",
+   "verdict": "N/A",
+   "line": "\"Eat something\" / \"Done\"",
+   "why": "no dressing button; Done spends the meal (energy +15, meals_today +1)",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "636d07a3956c340a",
+    "facts": "7e74f00e4f7f7169",
+    "facts2": "382d88df7f2e79a9",
+    "all": "4901fcc5436c3e2b"
+   },
+   "row_hash": "d7c4f9c8542d0090",
+   "carried": true,
+   "pass": 5
   },
   {
    "row": "C738",
@@ -2130,27 +2553,27 @@
    "row": "C795",
    "screen": "*",
    "verdict": "PASS",
-   "line": "Ryan steals a corner of your toast.",
-   "why": "the screen changes by who is there through presence groups (Mom, Mom+Mark, Mom+Ryan)",
+   "line": "\"Mom slides the butter across.\" (Laura present group)",
+   "why": "loop beats are scenes; who's at the table is written only inside npc_at_location groups, never room text",
    "cause": null,
-   "note": false,
-   "screen_hash": "a3cd947a82240952",
-   "row_hash": "84d5bfb2a701bf90",
+   "note": true,
+   "screen_hash": "0d8207e80434a90c",
+   "row_hash": "a28152099697ac6a",
    "carried": true,
-   "pass": 4
+   "pass": 5
   },
   {
    "row": "C804",
    "screen": "*",
    "verdict": "PASS",
-   "line": "Mark watches you over his coffee.",
-   "why": "text changes with who is there",
+   "line": "\"Ryan steals a corner of your toast.\" (Laura+Ryan present)",
+   "why": "no room-text line per person; faces carry presence",
    "cause": null,
    "note": false,
-   "screen_hash": "a3cd947a82240952",
-   "row_hash": "2aa951544edb45db",
+   "screen_hash": "0d8207e80434a90c",
+   "row_hash": "56bf64be29d6ea48",
    "carried": true,
-   "pass": 4
+   "pass": 5
   },
   {
    "row": "C808",
@@ -2182,14 +2605,32 @@
    "row": "C889",
    "screen": "*",
    "verdict": "PASS",
-   "line": "Eat something (20 min, +15 energy)",
-   "why": "states a duration, 20 min, equal to Done's time_progression_minutes = 20",
+   "line": "Sleep \u00b7 Eat something \u00b7 Shower \u00b7 Wake up \u00b7 Done",
+   "why": "Note row. No label names a clock time or a duration; the spend sits in the exits (480, 20, 15 minutes). 'not until 9pm.' is the greyed hours line, shown only when the clock alone shuts Sleep (C914).",
    "cause": null,
-   "note": false,
-   "screen_hash": "a3cd947a82240952",
-   "row_hash": "37967c45d79163fc",
+   "note": true,
+   "screen_hash": "bdcb590aeeb053f2",
+   "row_hash": "cebb147317e10c05",
    "carried": true,
-   "pass": 4
+   "pass": 5
+  },
+  {
+   "row": "C889",
+   "screen": "loop_eat.do",
+   "verdict": "PASS",
+   "line": "\"Eat something\" / \"Done\"",
+   "why": "labels name no clock time and no duration; the spend sits in the costs",
+   "cause": null,
+   "note": true,
+   "screen_hash": {
+    "text": "636d07a3956c340a",
+    "facts": "7e74f00e4f7f7169",
+    "facts2": "382d88df7f2e79a9",
+    "all": "4901fcc5436c3e2b"
+   },
+   "row_hash": "cebb147317e10c05",
+   "carried": true,
+   "pass": 5
   },
   {
    "row": "C890",
@@ -2218,6 +2659,24 @@
    "pass": 4
   },
   {
+   "row": "C892",
+   "screen": "loop_eat.do",
+   "verdict": "PASS",
+   "line": "You eat standing at the counter: toast, whatever's in the fridge, coffee from the pot.",
+   "why": "no hour in the act",
+   "cause": null,
+   "note": true,
+   "screen_hash": {
+    "text": "636d07a3956c340a",
+    "facts": "7e74f00e4f7f7169",
+    "facts2": "382d88df7f2e79a9",
+    "all": "4901fcc5436c3e2b"
+   },
+   "row_hash": "1d8d188451bcb51e",
+   "carried": true,
+   "pass": 5
+  },
+  {
    "row": "C897",
    "screen": "*",
    "verdict": "N/A",
@@ -2229,6 +2688,24 @@
    "row_hash": "16b066aee3c1a937",
    "carried": true,
    "pass": 4
+  },
+  {
+   "row": "C897",
+   "screen": "loop_eat.do",
+   "verdict": "PASS",
+   "line": "\"Eat something\" / \"Done\"",
+   "why": "the only time here is the act's own, not a per-room charge",
+   "cause": null,
+   "note": true,
+   "screen_hash": {
+    "text": "636d07a3956c340a",
+    "facts": "7e74f00e4f7f7169",
+    "facts2": "382d88df7f2e79a9",
+    "all": "4901fcc5436c3e2b"
+   },
+   "row_hash": "16b066aee3c1a937",
+   "carried": true,
+   "pass": 5
   },
   {
    "row": "C900",
@@ -2244,6 +2721,24 @@
    "pass": 4
   },
   {
+   "row": "C900",
+   "screen": "loop_eat.do",
+   "verdict": "PASS",
+   "line": "You eat standing at the counter: toast, whatever's in the fridge, coffee from the pot.",
+   "why": "no line says what time it is",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "636d07a3956c340a",
+    "facts": "7e74f00e4f7f7169",
+    "facts2": "382d88df7f2e79a9",
+    "all": "4901fcc5436c3e2b"
+   },
+   "row_hash": "a4ef8ce78f554d6b",
+   "carried": true,
+   "pass": 5
+  },
+  {
    "row": "C902",
    "screen": "*",
    "verdict": "PASS",
@@ -2257,6 +2752,24 @@
    "pass": 4
   },
   {
+   "row": "C902",
+   "screen": "loop_eat.do",
+   "verdict": "PASS",
+   "line": "You eat standing at the counter: toast, whatever's in the fridge, coffee from the pot.",
+   "why": "true at the last minute it can show; it names no time",
+   "cause": null,
+   "note": true,
+   "screen_hash": {
+    "text": "636d07a3956c340a",
+    "facts": "7e74f00e4f7f7169",
+    "facts2": "382d88df7f2e79a9",
+    "all": "4901fcc5436c3e2b"
+   },
+   "row_hash": "66462bdbadae0c77",
+   "carried": true,
+   "pass": 5
+  },
+  {
    "row": "C903",
    "screen": "*",
    "verdict": "PASS",
@@ -2268,6 +2781,24 @@
    "row_hash": "263890a884329d60",
    "carried": true,
    "pass": 4
+  },
+  {
+   "row": "C903",
+   "screen": "loop_eat.do",
+   "verdict": "PASS",
+   "line": "You eat standing at the counter: toast, whatever's in the fridge, coffee from the pot.",
+   "why": "names no weekday",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "636d07a3956c340a",
+    "facts": "7e74f00e4f7f7169",
+    "facts2": "382d88df7f2e79a9",
+    "all": "4901fcc5436c3e2b"
+   },
+   "row_hash": "263890a884329d60",
+   "carried": true,
+   "pass": 5
   },
   {
    "row": "C904",
@@ -2286,27 +2817,63 @@
    "row": "C906",
    "screen": "*",
    "verdict": "PASS",
-   "line": "Eat something (20 min, +15 energy)",
-   "why": "no 'till X'",
+   "line": "Sleep \u00b7 Eat something \u00b7 Shower \u00b7 Wake up \u00b7 Done",
+   "why": "Note row. No 'till X' on any label.",
    "cause": null,
-   "note": false,
-   "screen_hash": "a3cd947a82240952",
-   "row_hash": "c257bba6d15edc3f",
+   "note": true,
+   "screen_hash": "bdcb590aeeb053f2",
+   "row_hash": "b8d0e5793dd14e95",
    "carried": true,
-   "pass": 4
+   "pass": 5
+  },
+  {
+   "row": "C906",
+   "screen": "loop_eat.do",
+   "verdict": "PASS",
+   "line": "\"Eat something\" / \"Done\"",
+   "why": "no 'till X' anywhere",
+   "cause": null,
+   "note": true,
+   "screen_hash": {
+    "text": "636d07a3956c340a",
+    "facts": "7e74f00e4f7f7169",
+    "facts2": "382d88df7f2e79a9",
+    "all": "4901fcc5436c3e2b"
+   },
+   "row_hash": "b8d0e5793dd14e95",
+   "carried": true,
+   "pass": 5
   },
   {
    "row": "C910",
    "screen": "*",
    "verdict": "PASS",
-   "line": "Eat something (20 min, +15 energy)",
-   "why": "time shown as '(20 min, ...)', the game's form",
+   "line": "Sleep \u00b7 Eat something \u00b7 Shower \u00b7 Wake up \u00b7 Done",
+   "why": "Note row. No button states time or energy; nothing here costs money, so none states money.",
    "cause": null,
-   "note": false,
-   "screen_hash": "a3cd947a82240952",
-   "row_hash": "c86548143d50a17d",
+   "note": true,
+   "screen_hash": "bdcb590aeeb053f2",
+   "row_hash": "19dcf805483efc88",
    "carried": true,
-   "pass": 4
+   "pass": 5
+  },
+  {
+   "row": "C910",
+   "screen": "loop_eat.do",
+   "verdict": "PASS",
+   "line": "\"Eat something\" / \"Done\"",
+   "why": "buttons say no time and no energy, and this act costs no money",
+   "cause": null,
+   "note": true,
+   "screen_hash": {
+    "text": "636d07a3956c340a",
+    "facts": "7e74f00e4f7f7169",
+    "facts2": "382d88df7f2e79a9",
+    "all": "4901fcc5436c3e2b"
+   },
+   "row_hash": "19dcf805483efc88",
+   "carried": true,
+   "pass": 5
   },
   {
    "row": "C913",
@@ -2322,6 +2889,24 @@
    "pass": 4
   },
   {
+   "row": "C913",
+   "screen": "loop_eat.do",
+   "verdict": "PASS",
+   "line": "locked_text \"you're not hungry right now.\"",
+   "why": "Eat has no hours; shut by meals_today it greys with a true reason",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "636d07a3956c340a",
+    "facts": "7e74f00e4f7f7169",
+    "facts2": "382d88df7f2e79a9",
+    "all": "4901fcc5436c3e2b"
+   },
+   "row_hash": "48bd82911a86ecbd",
+   "carried": true,
+   "pass": 5
+  },
+  {
    "row": "C914",
    "screen": "*",
    "verdict": "PASS",
@@ -2333,6 +2918,24 @@
    "row_hash": "5a326c2d5d8a0abd",
    "carried": true,
    "pass": 4
+  },
+  {
+   "row": "C914",
+   "screen": "loop_eat.do",
+   "verdict": "PASS",
+   "line": "locked_text \"you're not hungry right now.\"",
+   "why": "no hours printed; the reason is the meal count",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "636d07a3956c340a",
+    "facts": "7e74f00e4f7f7169",
+    "facts2": "382d88df7f2e79a9",
+    "all": "4901fcc5436c3e2b"
+   },
+   "row_hash": "5a326c2d5d8a0abd",
+   "carried": true,
+   "pass": 5
   },
   {
    "row": "C915",
@@ -2361,17 +2964,53 @@
    "pass": 4
   },
   {
-   "row": "C920",
-   "screen": "*",
+   "row": "C916",
+   "screen": "loop_eat.do",
    "verdict": "N/A",
-   "line": "",
-   "why": "no move; Done is the activity's own 20 min",
+   "line": "\"Eat something\" / \"Done\"",
+   "why": "Eat has no hours",
    "cause": null,
    "note": false,
-   "screen_hash": "a3cd947a82240952",
-   "row_hash": "3b568acb10d6806b",
+   "screen_hash": {
+    "text": "636d07a3956c340a",
+    "facts": "7e74f00e4f7f7169",
+    "facts2": "382d88df7f2e79a9",
+    "all": "4901fcc5436c3e2b"
+   },
+   "row_hash": "06706eb2d5bad3b5",
    "carried": true,
-   "pass": 4
+   "pass": 5
+  },
+  {
+   "row": "C920",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "Wake up / Done (to the room she is in)",
+   "why": "No hop is charged: each exit returns to the same room, and the minutes are the activity's own (sleep 480, meal 20, shower 15).",
+   "cause": null,
+   "note": false,
+   "screen_hash": "bdcb590aeeb053f2",
+   "row_hash": "e7485c9faee24e77",
+   "carried": true,
+   "pass": 5
+  },
+  {
+   "row": "C920",
+   "screen": "loop_eat.do",
+   "verdict": "PASS",
+   "line": "\"Done\" (20 min) back to the Kitchen",
+   "why": "the 20 minutes are the meal, and Done stays in the Kitchen; no hop is charged",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "636d07a3956c340a",
+    "facts": "7e74f00e4f7f7169",
+    "facts2": "382d88df7f2e79a9",
+    "all": "4901fcc5436c3e2b"
+   },
+   "row_hash": "e7485c9faee24e77",
+   "carried": true,
+   "pass": 5
   },
   {
    "row": "C921",
@@ -2387,6 +3026,60 @@
    "pass": 4
   },
   {
+   "row": "C921",
+   "screen": "loop_eat.do",
+   "verdict": "PASS",
+   "line": "You eat standing at the counter: toast, whatever's in the fridge, coffee from the pot.",
+   "why": "Note row. The screen reads only presence by place. The new night rows wrap past midnight and the engine handles it (isCurrentTimeSlot). Ryan's weekdays-only 23:00-01:00 row reads the weekday against today, so Sun 23:00 'asleep' turns into Mon 00:00-01:00 'on his phone', and Fri 23:00 phone into Sat 00:00 asleep; his place stays home_ryans_room, so nothing on this screen changes.",
+   "cause": null,
+   "note": true,
+   "screen_hash": {
+    "text": "636d07a3956c340a",
+    "facts": "c3fcf809ffed2e0d",
+    "facts2": "629dfb0d1436ad5f",
+    "all": "d6b77302eae200fd"
+   },
+   "row_hash": "19da817e808ac3d6",
+   "carried": true,
+   "pass": 5
+  },
+  {
+   "row": "C921",
+   "screen": "loop_shower.do",
+   "verdict": "PASS",
+   "line": "The water takes forever to run hot. You step in anyway.",
+   "why": "Note row. The screen reads only presence by place. The new night rows wrap past midnight and the engine handles it (isCurrentTimeSlot). Ryan's weekdays-only 23:00-01:00 row reads the weekday against today, so Sun 23:00 'asleep' turns into Mon 00:00-01:00 'on his phone', and Fri 23:00 phone into Sat 00:00 asleep; his place stays home_ryans_room, so nothing on this screen changes.",
+   "cause": null,
+   "note": true,
+   "screen_hash": {
+    "text": "839f0962e74c85d1",
+    "facts": "875ee150348bbbd9",
+    "facts2": "875ee150348bbbd9",
+    "all": "34137dc5a717631d"
+   },
+   "row_hash": "19da817e808ac3d6",
+   "carried": true,
+   "pass": 5
+  },
+  {
+   "row": "C921",
+   "screen": "loop_sleep.do",
+   "verdict": "PASS",
+   "line": "You pull on your pyjamas: the thin top and the little shorts.",
+   "why": "Note row. The screen reads only presence by place. The new night rows wrap past midnight and the engine handles it (isCurrentTimeSlot). Ryan's weekdays-only 23:00-01:00 row reads the weekday against today, so Sun 23:00 'asleep' turns into Mon 00:00-01:00 'on his phone', and Fri 23:00 phone into Sat 00:00 asleep; his place stays home_ryans_room, so nothing on this screen changes.",
+   "cause": null,
+   "note": true,
+   "screen_hash": {
+    "text": "3c1f6073c033b3c9",
+    "facts": "360f3049c5f88f27",
+    "facts2": "360f3049c5f88f27",
+    "all": "72c631ead2fbd500"
+   },
+   "row_hash": "19da817e808ac3d6",
+   "carried": true,
+   "pass": 5
+  },
+  {
    "row": "C924",
    "screen": "*",
    "verdict": "N/A",
@@ -2398,6 +3091,24 @@
    "row_hash": "ce540d1e01b7c301",
    "carried": true,
    "pass": 4
+  },
+  {
+   "row": "C924",
+   "screen": "loop_eat.do",
+   "verdict": "PASS",
+   "line": "\"Eat something\" / \"Done\"",
+   "why": "travel cost stays on the moves between areas, not here",
+   "cause": null,
+   "note": true,
+   "screen_hash": {
+    "text": "636d07a3956c340a",
+    "facts": "7e74f00e4f7f7169",
+    "facts2": "382d88df7f2e79a9",
+    "all": "4901fcc5436c3e2b"
+   },
+   "row_hash": "ce540d1e01b7c301",
+   "carried": true,
+   "pass": 5
   },
   {
    "row": "C926",
@@ -2413,6 +3124,24 @@
    "pass": 4
   },
   {
+   "row": "C926",
+   "screen": "loop_eat.do",
+   "verdict": "PASS",
+   "line": "\"Eat something\" / \"Done\"",
+   "why": "the clock moves only by the choice's minutes",
+   "cause": null,
+   "note": true,
+   "screen_hash": {
+    "text": "636d07a3956c340a",
+    "facts": "7e74f00e4f7f7169",
+    "facts2": "382d88df7f2e79a9",
+    "all": "4901fcc5436c3e2b"
+   },
+   "row_hash": "8cd1b7e3576dc7b5",
+   "carried": true,
+   "pass": 5
+  },
+  {
    "row": "C927",
    "screen": "*",
    "verdict": "N/A",
@@ -2424,6 +3153,60 @@
    "row_hash": "1e009d83817fb566",
    "carried": true,
    "pass": 4
+  },
+  {
+   "row": "C927",
+   "screen": "loop_eat.do",
+   "verdict": "PASS",
+   "line": "Done (20)",
+   "why": "Note row. Every exit states its minutes.",
+   "cause": null,
+   "note": true,
+   "screen_hash": {
+    "text": "636d07a3956c340a",
+    "facts": "c3fcf809ffed2e0d",
+    "facts2": "629dfb0d1436ad5f",
+    "all": "d6b77302eae200fd"
+   },
+   "row_hash": "1e009d83817fb566",
+   "carried": true,
+   "pass": 5
+  },
+  {
+   "row": "C927",
+   "screen": "loop_shower.do",
+   "verdict": "PASS",
+   "line": "Done (15)",
+   "why": "Note row. Every exit states its minutes.",
+   "cause": null,
+   "note": true,
+   "screen_hash": {
+    "text": "839f0962e74c85d1",
+    "facts": "875ee150348bbbd9",
+    "facts2": "875ee150348bbbd9",
+    "all": "34137dc5a717631d"
+   },
+   "row_hash": "1e009d83817fb566",
+   "carried": true,
+   "pass": 5
+  },
+  {
+   "row": "C927",
+   "screen": "loop_sleep.do",
+   "verdict": "PASS",
+   "line": "Wake up (480)",
+   "why": "Note row. Every exit states its minutes.",
+   "cause": null,
+   "note": true,
+   "screen_hash": {
+    "text": "3c1f6073c033b3c9",
+    "facts": "360f3049c5f88f27",
+    "facts2": "360f3049c5f88f27",
+    "all": "72c631ead2fbd500"
+   },
+   "row_hash": "1e009d83817fb566",
+   "carried": true,
+   "pass": 5
   },
   {
    "row": "C928",
@@ -2439,17 +3222,53 @@
    "pass": 4
   },
   {
+   "row": "C928",
+   "screen": "loop_eat.do",
+   "verdict": "PASS",
+   "line": "You eat standing at the counter: toast, whatever's in the fridge, coffee from the pot.",
+   "why": "no clock printed in the prose",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "636d07a3956c340a",
+    "facts": "7e74f00e4f7f7169",
+    "facts2": "382d88df7f2e79a9",
+    "all": "4901fcc5436c3e2b"
+   },
+   "row_hash": "799e1dd153166b6d",
+   "carried": true,
+   "pass": 5
+  },
+  {
    "row": "C929",
    "screen": "*",
    "verdict": "PASS",
-   "line": "Eat something (20 min, +15 energy)",
-   "why": "the label carries the activity's time",
+   "line": "Sleep \u00b7 Eat something \u00b7 Shower \u00b7 Wake up \u00b7 Done",
+   "why": "Note row. The activity's time is on no label; the clock and the energy bar show it.",
    "cause": null,
-   "note": false,
-   "screen_hash": "a3cd947a82240952",
-   "row_hash": "33a2ca367c2aac5b",
+   "note": true,
+   "screen_hash": "bdcb590aeeb053f2",
+   "row_hash": "b628ac285ac9c529",
    "carried": true,
-   "pass": 4
+   "pass": 5
+  },
+  {
+   "row": "C929",
+   "screen": "loop_eat.do",
+   "verdict": "PASS",
+   "line": "\"Eat something\" / \"Done\"",
+   "why": "no activity time on the label",
+   "cause": null,
+   "note": true,
+   "screen_hash": {
+    "text": "636d07a3956c340a",
+    "facts": "7e74f00e4f7f7169",
+    "facts2": "382d88df7f2e79a9",
+    "all": "4901fcc5436c3e2b"
+   },
+   "row_hash": "b628ac285ac9c529",
+   "carried": true,
+   "pass": 5
   },
   {
    "row": "C930",
@@ -2465,6 +3284,24 @@
    "pass": 4
   },
   {
+   "row": "C930",
+   "screen": "loop_eat.do",
+   "verdict": "N/A",
+   "line": "\"Eat something\" / \"Done\"",
+   "why": "Eat is not windowed",
+   "cause": null,
+   "note": true,
+   "screen_hash": {
+    "text": "636d07a3956c340a",
+    "facts": "7e74f00e4f7f7169",
+    "facts2": "382d88df7f2e79a9",
+    "all": "4901fcc5436c3e2b"
+   },
+   "row_hash": "97d54d350dd4ee77",
+   "carried": true,
+   "pass": 5
+  },
+  {
    "row": "C931",
    "screen": "*",
    "verdict": "N/A",
@@ -2478,17 +3315,71 @@
    "pass": 4
   },
   {
+   "row": "C931",
+   "screen": "loop_eat.do",
+   "verdict": "N/A",
+   "line": "You eat standing at the counter: toast, whatever's in the fridge, coffee from the pot.",
+   "why": "Note row. No time_of_day here.",
+   "cause": null,
+   "note": true,
+   "screen_hash": {
+    "text": "636d07a3956c340a",
+    "facts": "c3fcf809ffed2e0d",
+    "facts2": "629dfb0d1436ad5f",
+    "all": "d6b77302eae200fd"
+   },
+   "row_hash": "1b8984f52b99537e",
+   "carried": true,
+   "pass": 5
+  },
+  {
+   "row": "C931",
+   "screen": "loop_shower.do",
+   "verdict": "PASS",
+   "line": "The water takes forever to run hot. You step in anyway.",
+   "why": "Note row. The substitution's 07:45-08:30 is end exclusive and matches Ryan's 07:45 row start.",
+   "cause": null,
+   "note": true,
+   "screen_hash": {
+    "text": "839f0962e74c85d1",
+    "facts": "875ee150348bbbd9",
+    "facts2": "875ee150348bbbd9",
+    "all": "34137dc5a717631d"
+   },
+   "row_hash": "1b8984f52b99537e",
+   "carried": true,
+   "pass": 5
+  },
+  {
+   "row": "C931",
+   "screen": "loop_sleep.do",
+   "verdict": "PASS",
+   "line": "You pull on your pyjamas: the thin top and the little shorts.",
+   "why": "Note row. 21:00-03:00 wraps, end exclusive: open 21:00-02:59; 'not until 9pm.' is true from 03:00 to 20:59.",
+   "cause": null,
+   "note": true,
+   "screen_hash": {
+    "text": "3c1f6073c033b3c9",
+    "facts": "360f3049c5f88f27",
+    "facts2": "360f3049c5f88f27",
+    "all": "72c631ead2fbd500"
+   },
+   "row_hash": "1b8984f52b99537e",
+   "carried": true,
+   "pass": 5
+  },
+  {
    "row": "C953",
    "screen": "*",
    "verdict": "PASS",
-   "line": "Eat something (20 min, +15 energy)",
-   "why": "time and energy on the label before the click",
+   "line": "Sleep \u00b7 Eat something \u00b7 Shower \u00b7 Wake up \u00b7 Done",
+   "why": "Note row. No money cost, and no time or energy on a label.",
    "cause": null,
-   "note": false,
-   "screen_hash": "a3cd947a82240952",
-   "row_hash": "26f84fb90a0ef795",
+   "note": true,
+   "screen_hash": "bdcb590aeeb053f2",
+   "row_hash": "7ab90b4c71f3d98a",
    "carried": true,
-   "pass": 4
+   "pass": 5
   },
   {
    "row": "C954",
@@ -2515,6 +3406,60 @@
    "row_hash": "759e6667d7fc3183",
    "carried": true,
    "pass": 4
+  },
+  {
+   "row": "L106",
+   "screen": "loop_eat.do",
+   "verdict": "PASS",
+   "line": "You eat standing at the counter: toast, whatever's in the fridge, coffee from the pot.",
+   "why": "Mom, Mark and Ryan are each named only inside an npc_at_location group; with the night rows nobody is named at night.",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "636d07a3956c340a",
+    "facts": "c3fcf809ffed2e0d",
+    "facts2": "629dfb0d1436ad5f",
+    "all": "d6b77302eae200fd"
+   },
+   "row_hash": "759e6667d7fc3183",
+   "carried": true,
+   "pass": 5
+  },
+  {
+   "row": "L106",
+   "screen": "loop_shower.do",
+   "verdict": "PASS",
+   "line": "The water takes forever to run hot. You step in anyway.",
+   "why": "Nobody named on the screen; the grey line is presence-gated.",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "839f0962e74c85d1",
+    "facts": "875ee150348bbbd9",
+    "facts2": "875ee150348bbbd9",
+    "all": "34137dc5a717631d"
+   },
+   "row_hash": "759e6667d7fc3183",
+   "carried": true,
+   "pass": 5
+  },
+  {
+   "row": "L106",
+   "screen": "loop_sleep.do",
+   "verdict": "PASS",
+   "line": "You pull on your pyjamas: the thin top and the little shorts.",
+   "why": "Nobody named.",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "3c1f6073c033b3c9",
+    "facts": "360f3049c5f88f27",
+    "facts2": "360f3049c5f88f27",
+    "all": "72c631ead2fbd500"
+   },
+   "row_hash": "759e6667d7fc3183",
+   "carried": true,
+   "pass": 5
   },
   {
    "row": "L119",
@@ -2619,6 +3564,73 @@
    "row_hash": "adf7bb3f8b632ac3",
    "carried": true,
    "pass": 4
+  },
+  {
+   "row": "L167",
+   "screen": "loop_eat.do",
+   "verdict": "N/A",
+   "line": "You eat standing at the counter: toast, whatever's in the fridge, coffee from the pot.",
+   "why": "No hours.",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "636d07a3956c340a",
+    "facts": "c3fcf809ffed2e0d",
+    "facts2": "629dfb0d1436ad5f",
+    "all": "d6b77302eae200fd"
+   },
+   "row_hash": "adf7bb3f8b632ac3",
+   "carried": true,
+   "pass": 5
+  },
+  {
+   "row": "L167",
+   "screen": "loop_shower.do",
+   "verdict": "N/A",
+   "line": "The water takes forever to run hot. You step in anyway.",
+   "why": "No hours.",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "839f0962e74c85d1",
+    "facts": "875ee150348bbbd9",
+    "facts2": "875ee150348bbbd9",
+    "all": "34137dc5a717631d"
+   },
+   "row_hash": "adf7bb3f8b632ac3",
+   "carried": true,
+   "pass": 5
+  },
+  {
+   "row": "L167",
+   "screen": "loop_sleep.do",
+   "verdict": "N/A",
+   "line": "You pull on your pyjamas: the thin top and the little shorts.",
+   "why": "Sleep's hours are the same every day, one row, no day kinds.",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "3c1f6073c033b3c9",
+    "facts": "360f3049c5f88f27",
+    "facts2": "360f3049c5f88f27",
+    "all": "72c631ead2fbd500"
+   },
+   "row_hash": "adf7bb3f8b632ac3",
+   "carried": true,
+   "pass": 5
+  },
+  {
+   "row": "L170",
+   "screen": "*",
+   "verdict": "N/A",
+   "line": "",
+   "why": "no place on this piece's screens is hidden_until a flag",
+   "cause": null,
+   "note": false,
+   "screen_hash": "0d8207e80434a90c",
+   "row_hash": "8f11debafcf05142",
+   "carried": false,
+   "pass": 6
   },
   {
    "row": "L97",
@@ -2728,27 +3740,40 @@
    "row": "clock#1",
    "screen": "*",
    "verdict": "PASS",
-   "line": "Eat something (20 min, +15 energy)",
-   "why": "the button shows its time cost",
+   "line": "Sleep \u00b7 Eat something \u00b7 Shower \u00b7 Wake up \u00b7 Done",
+   "why": "Shape step 1: no time, no energy on any button; no money spent.",
    "cause": null,
    "note": false,
-   "screen_hash": "a3cd947a82240952",
-   "row_hash": "cd89df2f76a7be89",
+   "screen_hash": "bdcb590aeeb053f2",
+   "row_hash": "b093ed58ec403b3c",
    "carried": true,
-   "pass": 4
+   "pass": 5
+  },
+  {
+   "row": "clock#10",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "loop_shower: max_triggers_per_day 2, show_when_blocked, no time_of_day in its conditions",
+   "why": "loop_sleep has a window and no count; loop_shower and loop_eat have a count and no clock window, so their grey lines (\"you've showered enough for one day.\", \"you're not hungry right now.\") are true",
+   "cause": null,
+   "note": false,
+   "screen_hash": "0d8207e80434a90c",
+   "row_hash": "2ad5e473e29b231d",
+   "carried": true,
+   "pass": 5
   },
   {
    "row": "clock#2",
    "screen": "*",
-   "verdict": "N/A",
-   "line": "",
-   "why": "no travel",
+   "verdict": "PASS",
+   "line": "Done \u2192 home_kitchen (20) / home_bathroom (15)",
+   "why": "Shape step 2: no time on any move inside the house; the minutes are the activity, not travel.",
    "cause": null,
    "note": false,
-   "screen_hash": "a3cd947a82240952",
-   "row_hash": "1a52b17c19333377",
+   "screen_hash": "bdcb590aeeb053f2",
+   "row_hash": "e393ecafc7ab9a6c",
    "carried": true,
-   "pass": 4
+   "pass": 5
   },
   {
    "row": "clock#3",
@@ -2793,14 +3818,14 @@
    "row": "clock#6",
    "screen": "*",
    "verdict": "PASS",
-   "line": "Eat something (20 min, +15 energy)",
-   "why": "a duration, never 'till X'",
+   "line": "cooldown_message = \"not until 9pm.\"",
+   "why": "Shape step 6: never 'till X'; sleep is 480 minutes, not 'until 7am'.",
    "cause": null,
    "note": false,
-   "screen_hash": "a3cd947a82240952",
-   "row_hash": "31fd30fb07702bc9",
+   "screen_hash": "bdcb590aeeb053f2",
+   "row_hash": "bdedeec28a16e36f",
    "carried": true,
-   "pass": 4
+   "pass": 5
   },
   {
    "row": "clock#7",
@@ -3066,14 +4091,14 @@
    "row": "media#2",
    "screen": "*",
    "verdict": "N/A",
-   "line": "",
-   "why": "the place picture is the location's, not this canvas",
+   "line": "\u2014",
+   "why": "Shape step 2 is a place's one picture; P06 builds canvases, no place image.",
    "cause": null,
    "note": false,
-   "screen_hash": "a3cd947a82240952",
-   "row_hash": "6fbfd98c2bfee006",
+   "screen_hash": "bdcb590aeeb053f2",
+   "row_hash": "01ba7fa1cec4bc7a",
    "carried": true,
-   "pass": 4
+   "pass": 5
   },
   {
    "row": "media#3",
@@ -3154,17 +4179,30 @@
    "pass": 4
   },
   {
+   "row": "places#10",
+   "screen": "*",
+   "verdict": "N/A",
+   "line": "",
+   "why": "no place on this piece's screens is hidden_until a flag",
+   "cause": null,
+   "note": false,
+   "screen_hash": "0d8207e80434a90c",
+   "row_hash": "309f0141d342dc6f",
+   "carried": false,
+   "pass": 6
+  },
+  {
    "row": "places#2",
    "screen": "*",
    "verdict": "PASS",
-   "line": "Mom slides the butter across.",
-   "why": "presence varies by who is there, each line behind its npc_at_location group; alone, only the base lines show",
+   "line": "locked_text \"Ryan's in the shower.\"; eat groups by npc_at_location",
+   "why": "every named person is behind a presence condition; no room text added",
    "cause": null,
    "note": false,
-   "screen_hash": "a3cd947a82240952",
-   "row_hash": "3ab79adc34668b04",
+   "screen_hash": "0d8207e80434a90c",
+   "row_hash": "e0b57720921c4523",
    "carried": true,
-   "pass": 4
+   "pass": 5
   },
   {
    "row": "places#3",
@@ -3183,14 +4221,14 @@
    "row": "places#4",
    "screen": "*",
    "verdict": "PASS",
-   "line": "Eat something (20 min, +15 energy)",
-   "why": "short label with time and energy",
+   "line": "Sleep \u00b7 Eat something \u00b7 Shower \u00b7 Wake up \u00b7 Done",
+   "why": "Shape step 4: short labels (1-2 words), no time or energy, no spend.",
    "cause": null,
    "note": false,
-   "screen_hash": "a3cd947a82240952",
-   "row_hash": "ada53ed66015c980",
+   "screen_hash": "bdcb590aeeb053f2",
+   "row_hash": "ae3ba300e1045c9f",
    "carried": true,
-   "pass": 4
+   "pass": 5
   },
   {
    "row": "places#5",
@@ -3482,14 +4520,14 @@
    "row": "systems#4",
    "screen": "*",
    "verdict": "PASS",
-   "line": "Eat something (20 min, +15 energy)",
-   "why": "time and energy on the button; 20 min in an all-day window, capped at 3",
+   "line": "max_triggers_per_day = 2 / meals_today lt 3 / 21:00-03:00",
+   "why": "Shape step 4: each repeat has a real cost sized to its window: sleep 8 hours in a 21:00-03:00 window can't chain; meals capped at 3, showers at 2 a day; buttons show none of it.",
    "cause": null,
    "note": false,
-   "screen_hash": "a3cd947a82240952",
-   "row_hash": "8bf41d5847343d42",
+   "screen_hash": "bdcb590aeeb053f2",
+   "row_hash": "671b614cf229df83",
    "carried": true,
-   "pass": 4
+   "pass": 5
   },
   {
    "row": "systems#5",
@@ -3661,19 +4699,10 @@
    "pass": 4
   }
  ],
- "causes": [
-  {
-   "id": "P06m1-c1",
-   "what": "the daily shower is a repeatable refill with one fixed text and no event in the Bathroom (Ryan's razor walk-in, P38, not built)"
-  },
-  {
-   "id": "P06m1-c2",
-   "what": "sleep is a repeatable refill with one fixed text and nothing ever happens in Your Bedroom"
-  }
- ],
+ "causes": [],
  "pending": [],
- "asked": 130,
- "answered": 130,
+ "asked": 2,
+ "answered": 2,
  "pass_items": [],
  "unowed": []
 }

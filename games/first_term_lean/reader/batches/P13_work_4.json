@@ -1,0 +1,64 @@
+{
+ "items": [
+  {
+   "row": "B10",
+   "screen": "opening.ask_mom",
+   "why": "screen changed: truth row"
+  },
+  {
+   "row": "B10",
+   "screen": "opening.sit_with_mom",
+   "why": "screen changed: truth row"
+  },
+  {
+   "row": "B8",
+   "screen": "opening.ask_mom",
+   "why": "screen changed: truth row"
+  },
+  {
+   "row": "B8",
+   "screen": "opening.sit_with_mom",
+   "why": "screen changed: truth row"
+  },
+  {
+   "row": "C1631",
+   "screen": "opening.ask_mom",
+   "why": "screen changed: truth row"
+  },
+  {
+   "row": "C1631",
+   "screen": "opening.sit_with_mom",
+   "why": "screen changed: truth row"
+  },
+  {
+   "row": "C460",
+   "screen": "opening.ask_mom",
+   "why": "screen changed: truth row"
+  },
+  {
+   "row": "C460",
+   "screen": "opening.sit_with_mom",
+   "why": "screen changed: truth row"
+  },
+  {
+   "row": "C461",
+   "screen": "opening.ask_mom",
+   "why": "screen changed: truth row"
+  },
+  {
+   "row": "C461",
+   "screen": "opening.sit_with_mom",
+   "why": "screen changed: truth row"
+  },
+  {
+   "row": "L106",
+   "screen": "opening.ask_mom",
+   "why": "screen changed: truth row"
+  },
+  {
+   "row": "L106",
+   "screen": "opening.sit_with_mom",
+   "why": "screen changed: truth row"
+  }
+ ]
+}

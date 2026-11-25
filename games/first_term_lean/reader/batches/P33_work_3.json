@@ -1,0 +1,49 @@
+{
+ "items": [
+  {
+   "row": "C596",
+   "screen": "*",
+   "why": "its rule's text changed"
+  },
+  {
+   "row": "C795",
+   "screen": "*",
+   "why": "its rule's text changed"
+  },
+  {
+   "row": "C804",
+   "screen": "body_coffee.drink",
+   "why": "its rule's text changed"
+  },
+  {
+   "row": "C804",
+   "screen": "body_grass.sit",
+   "why": "its rule's text changed"
+  },
+  {
+   "row": "C804",
+   "screen": "body_lunch.eat",
+   "why": "its rule's text changed"
+  },
+  {
+   "row": "C804",
+   "screen": "body_mirror.fix",
+   "why": "its rule's text changed"
+  },
+  {
+   "row": "C804",
+   "screen": "body_run.run",
+   "why": "its rule's text changed"
+  },
+  {
+   "row": "C804",
+   "screen": "body_snack.eat",
+   "why": "its rule's text changed"
+  },
+  {
+   "row": "C804",
+   "screen": "body_workout.lift",
+   "why": "its rule's text changed"
+  }
+ ]
+}

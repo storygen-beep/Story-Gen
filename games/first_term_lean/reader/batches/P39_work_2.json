@@ -1,0 +1,819 @@
+{
+ "items": [
+  {
+   "row": "B10",
+   "screen": "walk_curtain.finish",
+   "why": "screen changed: truth row"
+  },
+  {
+   "row": "B10",
+   "screen": "walk_curtain.moment",
+   "why": "screen changed: truth row"
+  },
+  {
+   "row": "B10",
+   "screen": "walk_curtain.shut",
+   "why": "screen changed: truth row"
+  },
+  {
+   "row": "B10",
+   "screen": "walk_danny_deal.ask",
+   "why": "screen changed: truth row"
+  },
+  {
+   "row": "B10",
+   "screen": "walk_danny_deal.moment",
+   "why": "screen changed: truth row"
+  },
+  {
+   "row": "B10",
+   "screen": "walk_danny_deal.pretend",
+   "why": "screen changed: truth row"
+  },
+  {
+   "row": "B10",
+   "screen": "walk_marco_squat.back",
+   "why": "screen changed: truth row"
+  },
+  {
+   "row": "B10",
+   "screen": "walk_marco_squat.moment",
+   "why": "screen changed: truth row"
+  },
+  {
+   "row": "B10",
+   "screen": "walk_marco_squat.watch",
+   "why": "screen changed: truth row"
+  },
+  {
+   "row": "B10",
+   "screen": "walk_nina_dress.browse",
+   "why": "screen changed: truth row"
+  },
+  {
+   "row": "B10",
+   "screen": "walk_nina_dress.moment",
+   "why": "screen changed: truth row"
+  },
+  {
+   "row": "B10",
+   "screen": "walk_nina_dress.suits",
+   "why": "screen changed: truth row"
+  },
+  {
+   "row": "B10",
+   "screen": "walk_park_couple.away",
+   "why": "screen changed: truth row"
+  },
+  {
+   "row": "B10",
+   "screen": "walk_park_couple.moment",
+   "why": "screen changed: truth row"
+  },
+  {
+   "row": "B10",
+   "screen": "walk_park_couple.watch",
+   "why": "screen changed: truth row"
+  },
+  {
+   "row": "B10",
+   "screen": "walk_vance_ledger.hello",
+   "why": "screen changed: truth row"
+  },
+  {
+   "row": "B10",
+   "screen": "walk_vance_ledger.moment",
+   "why": "screen changed: truth row"
+  },
+  {
+   "row": "B10",
+   "screen": "walk_vance_ledger.past",
+   "why": "screen changed: truth row"
+  },
+  {
+   "row": "B12",
+   "screen": "walk_marco_squat.moment",
+   "why": "failed last pass"
+  },
+  {
+   "row": "B13",
+   "screen": "walk_curtain.moment",
+   "why": "failed last pass"
+  },
+  {
+   "row": "B3",
+   "screen": "walk_curtain.finish",
+   "why": "failed last pass"
+  },
+  {
+   "row": "B3",
+   "screen": "walk_park_couple.watch",
+   "why": "failed last pass"
+  },
+  {
+   "row": "B8",
+   "screen": "walk_curtain.finish",
+   "why": "screen changed: truth row"
+  },
+  {
+   "row": "B8",
+   "screen": "walk_curtain.moment",
+   "why": "screen changed: truth row"
+  },
+  {
+   "row": "B8",
+   "screen": "walk_curtain.shut",
+   "why": "screen changed: truth row"
+  },
+  {
+   "row": "B8",
+   "screen": "walk_danny_deal.ask",
+   "why": "screen changed: truth row"
+  },
+  {
+   "row": "B8",
+   "screen": "walk_danny_deal.moment",
+   "why": "screen changed: truth row"
+  },
+  {
+   "row": "B8",
+   "screen": "walk_danny_deal.pretend",
+   "why": "screen changed: truth row"
+  },
+  {
+   "row": "B8",
+   "screen": "walk_marco_squat.back",
+   "why": "screen changed: truth row"
+  },
+  {
+   "row": "B8",
+   "screen": "walk_marco_squat.moment",
+   "why": "screen changed: truth row"
+  },
+  {
+   "row": "B8",
+   "screen": "walk_marco_squat.watch",
+   "why": "screen changed: truth row"
+  },
+  {
+   "row": "B8",
+   "screen": "walk_nina_dress.browse",
+   "why": "screen changed: truth row"
+  },
+  {
+   "row": "B8",
+   "screen": "walk_nina_dress.moment",
+   "why": "screen changed: truth row"
+  },
+  {
+   "row": "B8",
+   "screen": "walk_nina_dress.suits",
+   "why": "screen changed: truth row"
+  },
+  {
+   "row": "B8",
+   "screen": "walk_park_couple.away",
+   "why": "screen changed: truth row"
+  },
+  {
+   "row": "B8",
+   "screen": "walk_park_couple.moment",
+   "why": "screen changed: truth row"
+  },
+  {
+   "row": "B8",
+   "screen": "walk_park_couple.watch",
+   "why": "screen changed: truth row"
+  },
+  {
+   "row": "B8",
+   "screen": "walk_vance_ledger.hello",
+   "why": "screen changed: truth row"
+  },
+  {
+   "row": "B8",
+   "screen": "walk_vance_ledger.moment",
+   "why": "screen changed: truth row"
+  },
+  {
+   "row": "B8",
+   "screen": "walk_vance_ledger.past",
+   "why": "screen changed: truth row"
+  },
+  {
+   "row": "C1158",
+   "screen": "walk_curtain.moment",
+   "why": "screen changed: truth row"
+  },
+  {
+   "row": "C1158",
+   "screen": "walk_nina_dress.moment",
+   "why": "screen changed: truth row"
+  },
+  {
+   "row": "C1158",
+   "screen": "walk_park_couple.moment",
+   "why": "screen changed: truth row"
+  },
+  {
+   "row": "C1158",
+   "screen": "walk_park_couple.watch",
+   "why": "screen changed: truth row"
+  },
+  {
+   "row": "C1206",
+   "screen": "walk_curtain.moment",
+   "why": "screen changed: truth row"
+  },
+  {
+   "row": "C1206",
+   "screen": "walk_nina_dress.moment",
+   "why": "screen changed: truth row"
+  },
+  {
+   "row": "C1206",
+   "screen": "walk_park_couple.moment",
+   "why": "screen changed: truth row"
+  },
+  {
+   "row": "C1206",
+   "screen": "walk_park_couple.watch",
+   "why": "screen changed: truth row"
+  },
+  {
+   "row": "C1262",
+   "screen": "walk_curtain.moment",
+   "why": "failed last pass"
+  },
+  {
+   "row": "C1278",
+   "screen": "walk_park_couple.moment",
+   "why": "failed last pass"
+  },
+  {
+   "row": "C1280",
+   "screen": "walk_park_couple.moment",
+   "why": "failed last pass"
+  },
+  {
+   "row": "C149",
+   "screen": "walk_curtain.finish",
+   "why": "failed last pass"
+  },
+  {
+   "row": "C149",
+   "screen": "walk_curtain.shut",
+   "why": "failed last pass"
+  },
+  {
+   "row": "C149",
+   "screen": "walk_danny_deal.pretend",
+   "why": "failed last pass"
+  },
+  {
+   "row": "C149",
+   "screen": "walk_nina_dress.browse",
+   "why": "failed last pass"
+  },
+  {
+   "row": "C149",
+   "screen": "walk_park_couple.away",
+   "why": "failed last pass"
+  },
+  {
+   "row": "C149",
+   "screen": "walk_park_couple.watch",
+   "why": "failed last pass"
+  },
+  {
+   "row": "C149",
+   "screen": "walk_vance_ledger.past",
+   "why": "failed last pass"
+  },
+  {
+   "row": "C311",
+   "screen": "walk_marco_squat.moment",
+   "why": "failed last pass"
+  },
+  {
+   "row": "C442",
+   "screen": "walk_park_couple.watch",
+   "why": "failed last pass"
+  },
+  {
+   "row": "C449",
+   "screen": "walk_park_couple.watch",
+   "why": "failed last pass"
+  },
+  {
+   "row": "C450",
+   "screen": "walk_curtain.finish",
+   "why": "failed last pass"
+  },
+  {
+   "row": "C450",
+   "screen": "walk_curtain.shut",
+   "why": "failed last pass"
+  },
+  {
+   "row": "C450",
+   "screen": "walk_danny_deal.pretend",
+   "why": "failed last pass"
+  },
+  {
+   "row": "C450",
+   "screen": "walk_nina_dress.browse",
+   "why": "failed last pass"
+  },
+  {
+   "row": "C450",
+   "screen": "walk_park_couple.away",
+   "why": "failed last pass"
+  },
+  {
+   "row": "C450",
+   "screen": "walk_park_couple.watch",
+   "why": "failed last pass"
+  },
+  {
+   "row": "C450",
+   "screen": "walk_vance_ledger.past",
+   "why": "failed last pass"
+  },
+  {
+   "row": "C460",
+   "screen": "walk_curtain.finish",
+   "why": "screen changed: truth row"
+  },
+  {
+   "row": "C460",
+   "screen": "walk_curtain.moment",
+   "why": "screen changed: truth row"
+  },
+  {
+   "row": "C460",
+   "screen": "walk_curtain.shut",
+   "why": "screen changed: truth row"
+  },
+  {
+   "row": "C460",
+   "screen": "walk_danny_deal.ask",
+   "why": "screen changed: truth row"
+  },
+  {
+   "row": "C460",
+   "screen": "walk_danny_deal.moment",
+   "why": "screen changed: truth row"
+  },
+  {
+   "row": "C460",
+   "screen": "walk_danny_deal.pretend",
+   "why": "screen changed: truth row"
+  },
+  {
+   "row": "C460",
+   "screen": "walk_marco_squat.back",
+   "why": "screen changed: truth row"
+  },
+  {
+   "row": "C460",
+   "screen": "walk_marco_squat.moment",
+   "why": "screen changed: truth row"
+  },
+  {
+   "row": "C460",
+   "screen": "walk_marco_squat.watch",
+   "why": "screen changed: truth row"
+  },
+  {
+   "row": "C460",
+   "screen": "walk_nina_dress.browse",
+   "why": "screen changed: truth row"
+  },
+  {
+   "row": "C460",
+   "screen": "walk_nina_dress.moment",
+   "why": "screen changed: truth row"
+  },
+  {
+   "row": "C460",
+   "screen": "walk_nina_dress.suits",
+   "why": "screen changed: truth row"
+  },
+  {
+   "row": "C460",
+   "screen": "walk_park_couple.away",
+   "why": "screen changed: truth row"
+  },
+  {
+   "row": "C460",
+   "screen": "walk_park_couple.moment",
+   "why": "screen changed: truth row"
+  },
+  {
+   "row": "C460",
+   "screen": "walk_park_couple.watch",
+   "why": "screen changed: truth row"
+  },
+  {
+   "row": "C460",
+   "screen": "walk_vance_ledger.hello",
+   "why": "screen changed: truth row"
+  },
+  {
+   "row": "C460",
+   "screen": "walk_vance_ledger.moment",
+   "why": "screen changed: truth row"
+  },
+  {
+   "row": "C460",
+   "screen": "walk_vance_ledger.past",
+   "why": "screen changed: truth row"
+  },
+  {
+   "row": "C461",
+   "screen": "walk_curtain.finish",
+   "why": "screen changed: truth row"
+  },
+  {
+   "row": "C461",
+   "screen": "walk_curtain.moment",
+   "why": "screen changed: truth row"
+  },
+  {
+   "row": "C461",
+   "screen": "walk_curtain.shut",
+   "why": "screen changed: truth row"
+  },
+  {
+   "row": "C461",
+   "screen": "walk_danny_deal.ask",
+   "why": "screen changed: truth row"
+  },
+  {
+   "row": "C461",
+   "screen": "walk_danny_deal.moment",
+   "why": "screen changed: truth row"
+  },
+  {
+   "row": "C461",
+   "screen": "walk_danny_deal.pretend",
+   "why": "screen changed: truth row"
+  },
+  {
+   "row": "C461",
+   "screen": "walk_marco_squat.back",
+   "why": "screen changed: truth row"
+  },
+  {
+   "row": "C461",
+   "screen": "walk_marco_squat.moment",
+   "why": "screen changed: truth row"
+  },
+  {
+   "row": "C461",
+   "screen": "walk_marco_squat.watch",
+   "why": "screen changed: truth row"
+  },
+  {
+   "row": "C461",
+   "screen": "walk_nina_dress.browse",
+   "why": "screen changed: truth row"
+  },
+  {
+   "row": "C461",
+   "screen": "walk_nina_dress.moment",
+   "why": "screen changed: truth row"
+  },
+  {
+   "row": "C461",
+   "screen": "walk_nina_dress.suits",
+   "why": "screen changed: truth row"
+  },
+  {
+   "row": "C461",
+   "screen": "walk_park_couple.away",
+   "why": "screen changed: truth row"
+  },
+  {
+   "row": "C461",
+   "screen": "walk_park_couple.moment",
+   "why": "screen changed: truth row"
+  },
+  {
+   "row": "C461",
+   "screen": "walk_park_couple.watch",
+   "why": "screen changed: truth row"
+  },
+  {
+   "row": "C461",
+   "screen": "walk_vance_ledger.hello",
+   "why": "screen changed: truth row"
+  },
+  {
+   "row": "C461",
+   "screen": "walk_vance_ledger.moment",
+   "why": "screen changed: truth row"
+  },
+  {
+   "row": "C461",
+   "screen": "walk_vance_ledger.past",
+   "why": "screen changed: truth row"
+  },
+  {
+   "row": "C625",
+   "screen": "walk_vance_ledger.hello",
+   "why": "failed last pass (a note), its screen changed"
+  },
+  {
+   "row": "C625",
+   "screen": "walk_vance_ledger.moment",
+   "why": "failed last pass (a note), its screen changed"
+  },
+  {
+   "row": "C903",
+   "screen": "walk_danny_deal.moment",
+   "why": "failed last pass"
+  },
+  {
+   "row": "C927",
+   "screen": "walk_curtain.finish",
+   "why": "screen changed: truth row"
+  },
+  {
+   "row": "C927",
+   "screen": "walk_curtain.shut",
+   "why": "screen changed: truth row"
+  },
+  {
+   "row": "C927",
+   "screen": "walk_danny_deal.ask",
+   "why": "screen changed: truth row"
+  },
+  {
+   "row": "C927",
+   "screen": "walk_danny_deal.pretend",
+   "why": "screen changed: truth row"
+  },
+  {
+   "row": "C927",
+   "screen": "walk_marco_squat.back",
+   "why": "screen changed: truth row"
+  },
+  {
+   "row": "C927",
+   "screen": "walk_marco_squat.watch",
+   "why": "screen changed: truth row"
+  },
+  {
+   "row": "C927",
+   "screen": "walk_nina_dress.browse",
+   "why": "screen changed: truth row"
+  },
+  {
+   "row": "C927",
+   "screen": "walk_nina_dress.suits",
+   "why": "screen changed: truth row"
+  },
+  {
+   "row": "C927",
+   "screen": "walk_park_couple.away",
+   "why": "screen changed: truth row"
+  },
+  {
+   "row": "C927",
+   "screen": "walk_park_couple.watch",
+   "why": "screen changed: truth row"
+  },
+  {
+   "row": "C927",
+   "screen": "walk_vance_ledger.hello",
+   "why": "screen changed: truth row"
+  },
+  {
+   "row": "C927",
+   "screen": "walk_vance_ledger.past",
+   "why": "screen changed: truth row"
+  },
+  {
+   "row": "C931",
+   "screen": "walk_curtain.finish",
+   "why": "screen changed: truth row"
+  },
+  {
+   "row": "C931",
+   "screen": "walk_curtain.shut",
+   "why": "screen changed: truth row"
+  },
+  {
+   "row": "C931",
+   "screen": "walk_danny_deal.ask",
+   "why": "screen changed: truth row"
+  },
+  {
+   "row": "C931",
+   "screen": "walk_danny_deal.pretend",
+   "why": "screen changed: truth row"
+  },
+  {
+   "row": "C931",
+   "screen": "walk_marco_squat.back",
+   "why": "screen changed: truth row"
+  },
+  {
+   "row": "C931",
+   "screen": "walk_marco_squat.watch",
+   "why": "screen changed: truth row"
+  },
+  {
+   "row": "C931",
+   "screen": "walk_nina_dress.browse",
+   "why": "screen changed: truth row"
+  },
+  {
+   "row": "C931",
+   "screen": "walk_nina_dress.suits",
+   "why": "screen changed: truth row"
+  },
+  {
+   "row": "C931",
+   "screen": "walk_park_couple.away",
+   "why": "screen changed: truth row"
+  },
+  {
+   "row": "C931",
+   "screen": "walk_park_couple.watch",
+   "why": "screen changed: truth row"
+  },
+  {
+   "row": "C931",
+   "screen": "walk_vance_ledger.hello",
+   "why": "screen changed: truth row"
+  },
+  {
+   "row": "C931",
+   "screen": "walk_vance_ledger.past",
+   "why": "screen changed: truth row"
+  },
+  {
+   "row": "C952",
+   "screen": "walk_danny_deal.pretend",
+   "why": "failed last pass"
+  },
+  {
+   "row": "C954",
+   "screen": "walk_danny_deal.pretend",
+   "why": "failed last pass (a note), its screen changed"
+  },
+  {
+   "row": "L106",
+   "screen": "walk_curtain.finish",
+   "why": "screen changed: truth row"
+  },
+  {
+   "row": "L106",
+   "screen": "walk_curtain.moment",
+   "why": "screen changed: truth row"
+  },
+  {
+   "row": "L106",
+   "screen": "walk_curtain.shut",
+   "why": "screen changed: truth row"
+  },
+  {
+   "row": "L106",
+   "screen": "walk_danny_deal.ask",
+   "why": "screen changed: truth row"
+  },
+  {
+   "row": "L106",
+   "screen": "walk_danny_deal.moment",
+   "why": "screen changed: truth row"
+  },
+  {
+   "row": "L106",
+   "screen": "walk_danny_deal.pretend",
+   "why": "screen changed: truth row"
+  },
+  {
+   "row": "L106",
+   "screen": "walk_marco_squat.back",
+   "why": "screen changed: truth row"
+  },
+  {
+   "row": "L106",
+   "screen": "walk_marco_squat.moment",
+   "why": "screen changed: truth row"
+  },
+  {
+   "row": "L106",
+   "screen": "walk_marco_squat.watch",
+   "why": "screen changed: truth row"
+  },
+  {
+   "row": "L106",
+   "screen": "walk_nina_dress.browse",
+   "why": "screen changed: truth row"
+  },
+  {
+   "row": "L106",
+   "screen": "walk_nina_dress.moment",
+   "why": "screen changed: truth row"
+  },
+  {
+   "row": "L106",
+   "screen": "walk_nina_dress.suits",
+   "why": "screen changed: truth row"
+  },
+  {
+   "row": "L106",
+   "screen": "walk_park_couple.away",
+   "why": "screen changed: truth row"
+  },
+  {
+   "row": "L106",
+   "screen": "walk_park_couple.moment",
+   "why": "screen changed: truth row"
+  },
+  {
+   "row": "L106",
+   "screen": "walk_park_couple.watch",
+   "why": "screen changed: truth row"
+  },
+  {
+   "row": "L106",
+   "screen": "walk_vance_ledger.hello",
+   "why": "screen changed: truth row"
+  },
+  {
+   "row": "L106",
+   "screen": "walk_vance_ledger.moment",
+   "why": "screen changed: truth row"
+  },
+  {
+   "row": "L106",
+   "screen": "walk_vance_ledger.past",
+   "why": "screen changed: truth row"
+  },
+  {
+   "row": "L167",
+   "screen": "walk_curtain.finish",
+   "why": "screen changed: truth row"
+  },
+  {
+   "row": "L167",
+   "screen": "walk_curtain.shut",
+   "why": "screen changed: truth row"
+  },
+  {
+   "row": "L167",
+   "screen": "walk_danny_deal.ask",
+   "why": "screen changed: truth row"
+  },
+  {
+   "row": "L167",
+   "screen": "walk_danny_deal.pretend",
+   "why": "screen changed: truth row"
+  },
+  {
+   "row": "L167",
+   "screen": "walk_marco_squat.back",
+   "why": "screen changed: truth row"
+  },
+  {
+   "row": "L167",
+   "screen": "walk_marco_squat.watch",
+   "why": "screen changed: truth row"
+  },
+  {
+   "row": "L167",
+   "screen": "walk_nina_dress.browse",
+   "why": "screen changed: truth row"
+  },
+  {
+   "row": "L167",
+   "screen": "walk_nina_dress.suits",
+   "why": "screen changed: truth row"
+  },
+  {
+   "row": "L167",
+   "screen": "walk_park_couple.away",
+   "why": "screen changed: truth row"
+  },
+  {
+   "row": "L167",
+   "screen": "walk_park_couple.watch",
+   "why": "screen changed: truth row"
+  },
+  {
+   "row": "L167",
+   "screen": "walk_vance_ledger.hello",
+   "why": "screen changed: truth row"
+  },
+  {
+   "row": "L167",
+   "screen": "walk_vance_ledger.past",
+   "why": "screen changed: truth row"
+  }
+ ]
+}

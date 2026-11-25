@@ -1,0 +1,40 @@
+{
+ "verdicts": [
+  {
+   "row": "L170",
+   "screen": "*",
+   "verdict": "N/A",
+   "line": "",
+   "why": "no place on this piece's screens is hidden_until a flag"
+  },
+  {
+   "row": "C952",
+   "screen": "mark_kitchen.rent",
+   "verdict": "PASS",
+   "line": "\"Seventy-five, kid.\" / \"Ninety, kid.\" / \"A hundred, kid.\"",
+   "why": "each amount shows on the rent_paid_total band PLAN sets ($75, $90 from $300, $100 from $900) and matches its Hand it over ($N) choice"
+  },
+  {
+   "row": "C952",
+   "screen": "mark_kitchen.pay75",
+   "verdict": "PASS",
+   "line": "\"It goes to ninety once you've paid three hundred.\" / \"Ninety from next week.\"",
+   "why": "rise said at total >= 225, i.e. this payment reaches $300 (PLAN); money -75, rent_paid_total +75"
+  },
+  {
+   "row": "C952",
+   "screen": "mark_kitchen.pay90",
+   "verdict": "PASS",
+   "line": "\"A hundred from next week.\"",
+   "why": "shown at total >= 810, so the payment crosses $900 (300 + 90 x 7 = 930); money -90"
+  },
+  {
+   "row": "C952",
+   "screen": "mark_kitchen.pay100",
+   "verdict": "PASS",
+   "line": "\"All there. Same time next Sunday.\"",
+   "why": "no amount in prose; money -100 matches the $100 band"
+  }
+ ],
+ "causes": []
+}

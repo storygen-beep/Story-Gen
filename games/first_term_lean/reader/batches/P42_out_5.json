@@ -1,0 +1,33 @@
+{
+ "verdicts": [
+  {
+   "row": "C690",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "People (N); 📍 People Here 'man behind the shop till'; tabs from the met cards",
+   "why": "Every tab lists only people whose met card holds (every NPC has a card gated on her met flag; Kayla and Tess on met_brooke, set together); People Here shows strangers by stranger_name; on these screens only Mom, Mark and Ryan, all met in the opening."
+  },
+  {
+   "row": "C690",
+   "screen": "mom_living_room.talk",
+   "verdict": "PASS",
+   "line": "\"Next time Mark's out, you tell me the next part.\"",
+   "why": "Names only Mom and Mark, both met in the opening; People page rule holds."
+  },
+  {
+   "row": "C690",
+   "screen": "talk_mom.eat",
+   "verdict": "PASS",
+   "line": "\"Mark eats without looking up from his paper. Ryan eats standing at the counter.\"",
+   "why": "Names only met people, each behind a presence check; People page rule holds."
+  },
+  {
+   "row": "people#3",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "People Here: \"A man behind the shop till.\" / \"???\"",
+   "why": "Cards and faces leave unmet people out; tabs list met people; People Here lists everyone present, strangers by stranger_name with '???' on click (headless)."
+  }
+ ],
+ "causes": []
+}

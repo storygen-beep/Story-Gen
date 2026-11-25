@@ -1,50 +1,50 @@
 {
  "piece": "P11",
- "pass": 6,
+ "pass": 8,
  "screens": {
   "mark_kitchen.hub": {
-   "text": "22073abffbe6a4c9",
-   "facts": "b86e64e1dbfb6357",
-   "facts2": "9a97305cf61feadd",
-   "all": "e74f73f06946b013"
+   "text": "cebee1bac30c4ca9",
+   "facts": "e8065fe0f1b995c1",
+   "facts2": "8ff6682bbd8fcf1c",
+   "all": "a6f6a2b85d23b3a2"
   },
   "mark_kitchen.talk": {
    "text": "fe35e365dcfda4ec",
-   "facts": "f8abc4563418e614",
-   "facts2": "96a74a5d0613c333",
-   "all": "81b21cc26127cd25"
+   "facts": "811544dad8de125f",
+   "facts2": "57f3c2e33f3edc83",
+   "all": "49da2ec68f166d6c"
   },
   "mark_kitchen.rent": {
    "text": "9394c9809e8f86c9",
-   "facts": "27c79c8b8c1144d2",
-   "facts2": "f78d5c923bbd987a",
-   "all": "4912f7a091c6dad3"
+   "facts": "5e652ec6e4551af0",
+   "facts2": "7073f340f74f069c",
+   "all": "3bf25ce111863764"
   },
   "mark_kitchen.pay75": {
    "text": "77d42862e4942fb3",
-   "facts": "27c79c8b8c1144d2",
-   "facts2": "f78d5c923bbd987a",
-   "all": "6e36091df5f45859"
+   "facts": "5e652ec6e4551af0",
+   "facts2": "7073f340f74f069c",
+   "all": "e3c88a749be646e3"
   },
   "mark_kitchen.pay90": {
    "text": "bcecc52dc17ed0c8",
-   "facts": "27c79c8b8c1144d2",
-   "facts2": "f78d5c923bbd987a",
-   "all": "eb6acc0d7d3cdd88"
+   "facts": "5e652ec6e4551af0",
+   "facts2": "7073f340f74f069c",
+   "all": "04931744b776fc09"
   },
   "mark_kitchen.pay100": {
    "text": "9562246c2be111d9",
-   "facts": "27c79c8b8c1144d2",
-   "facts2": "f78d5c923bbd987a",
-   "all": "1f22ca65a0019ca5"
+   "facts": "5e652ec6e4551af0",
+   "facts2": "7073f340f74f069c",
+   "all": "04bd193bb19a845c"
   },
   "mark_kitchen.short": {
    "text": "8b071b6a2ddd72aa",
-   "facts": "bc11c94f9afcce4d",
-   "facts2": "4a35ce27cc9a842d",
-   "all": "994d580fea7024f7"
+   "facts": "bc7f8aaaf6a4f505",
+   "facts2": "796eee3dad582482",
+   "all": "6453ab1af862f835"
   },
-  "*": "ae413a6e0a690385"
+  "*": "791a3ce177fd78c2"
  },
  "rows": {
   "B1": "5276068df1ca6fa9",
@@ -67,18 +67,18 @@
   "C165": "59fe434fa706bff6",
   "C166": "d9199efed36f9625",
   "C1279": "534032f000706830",
-  "C889": "1b724e2dcfbf028b",
-  "C906": "ce3b42a8c86da5b8",
+  "C889": "def1348d483d0c40",
+  "C906": "71713a7e7ae739e7",
   "C926": "177d1e1776fac74b",
   "C900": "6372efb027eb2034",
   "C902": "df5ed7a36dbc74e4",
   "C903": "4f83b0b5eb45f71b",
   "C892": "5c890033f6ac38b8",
-  "C910": "be1c18ee466455f6",
-  "C929": "e20b027bad88ca8c",
+  "C910": "d5a109f1ef88419a",
+  "C929": "18b0ecdf6d7fc901",
   "C897": "265ece64add83676",
   "C924": "791cd173e23fb130",
-  "C920": "695dc5d9d0e5e749",
+  "C920": "513927dd127fca04",
   "C913": "c750f9b6ab4ace14",
   "C930": "beb57cd46fe906bf",
   "L167": "e64ce2672d85d2d8",
@@ -103,12 +103,12 @@
   "C954": "c8001b93946f6f80",
   "C1002": "657248766e62061f",
   "C951": "fe3b305ad0c265a7",
-  "C952": "2f7d1a6bf6a93ca9",
+  "C952": "0ded4fca6fc71925",
   "C1261": "536e26b5fdc76194",
   "C1267": "f0db81b801577bf2",
   "C1249": "a843f9b57e43a020",
   "C1250": "fde578d75b0d3620",
-  "C1265": "447179d04e01ff5d",
+  "C1265": "64b72c778e96e443",
   "C1234": "1b2a2d5f05b10331",
   "L121": "45842b25d0708a15",
   "L125": "1fca3bfe1d0c2419",
@@ -143,20 +143,21 @@
   "C640": "728d95d9964ccf25",
   "C961": "b6cf8c9e8a8ef683",
   "C644": "f5e1d79f3251dbab",
-  "C596": "6d9bba989a2b9666",
+  "C596": "e5f7e6cf2d01613d",
   "C660": "da4c173ea0935aca",
   "C1340": "b76a6583ae88c60f",
   "C769": "f6b6f78a8f2e5ed7",
   "C794": "bad76e5963432385",
-  "C795": "6c9eb17d99266791",
-  "C804": "810ef8e803cb09dd",
+  "C795": "34139e6a6914e171",
+  "C804": "5358489178bff0a4",
   "L106": "13a714429d15f3b2",
   "C776": "4141d9e5e24362c3",
   "C777": "b56360a1040688cf",
   "C773": "599aac6293908bc4",
   "C758": "e158aaf055cb61d6",
-  "C953": "8d1306a15c51370a",
+  "C953": "826bf82fe26afd13",
   "C762": "40e85f1ae92f1e71",
+  "L170": "c3599cd09637a240",
   "C770": "ff9aa31c11e5d50f",
   "C771": "563e3d25c3219dd0",
   "L166": "c12d10588197fbaf",
@@ -204,117 +205,127 @@
    "row": "B10",
    "screen": "mark_kitchen.hub",
    "verdict": "PASS",
-   "line": "Pay the rent (5 min) \u2014 Mark collects on Sundays, 8 to 11:55am, at the kitchen table.",
-   "why": "Greyed line shows only while Mark is in the Kitchen (requires_npc): weekdays 07:00-07:30, Sat 08:00-10:00, Sun 11:55-12:00; on each it is true, since his Sunday rows put him in home_kitchen 08:00-10:00 and 10:00-12:00 'at the kitchen table', and the weekday+time_of_day condition (weekday 6 = Sunday, v2.py:5214) opens 08:00 and shuts at 11:55 (end exclusive), exactly the hours named. 'Mark's at the table with his coffee' holds at 07:00 and 07:29 weekday coffee, Saturday/Sunday breakfast, Sunday table. Talk greys behind talked_mark_today, cleared by [engine.daily_tick].",
+   "line": "Mark's at the table with his coffee. He looks at you over the rim.",
+   "why": "Mark's kitchen rows: weekdays 07:00\u201307:30 (coffee before work), Sat/Sun 08:00\u201310:00 breakfast, Sun 10:00\u201312:00 at the table; the menu shows only while he's there (requires_npc). The greyed rent line \"Mark collects on Sundays, 8 to 11:55am, at the kitchen table\" matches his Sunday rows and the trigger (end exclusive)",
    "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "22073abffbe6a4c9",
-    "facts": "b86e64e1dbfb6357",
-    "facts2": "9a97305cf61feadd",
-    "all": "e74f73f06946b013"
+    "text": "cebee1bac30c4ca9",
+    "facts": "e8065fe0f1b995c1",
+    "facts2": "8ff6682bbd8fcf1c",
+    "all": "a6f6a2b85d23b3a2"
    },
    "row_hash": "c1c0e2ac2588a579",
-   "carried": false,
-   "pass": 6
+   "carried": true,
+   "pass": 7
   },
   {
    "row": "B10",
    "screen": "mark_kitchen.pay100",
    "verdict": "PASS",
-   "line": "\"All there. Same time next Sunday.\" / \"He pockets it and goes back to the paper.\"",
-   "why": "\"Same time next Sunday\" sits behind the Sunday-gated hub choice; first-time line behind rent_paid_once false; rise lines behind totals that cross on this payment.",
+   "line": "All there. Same time next Sunday.",
+   "why": "Sunday only, via the hub's weekday gate",
    "cause": null,
    "note": false,
    "screen_hash": {
     "text": "9562246c2be111d9",
-    "facts": "28a1c06aa45c7c10",
-    "all": "454cb66c384d356c"
+    "facts": "5e652ec6e4551af0",
+    "facts2": "7073f340f74f069c",
+    "all": "04bd193bb19a845c"
    },
    "row_hash": "c1c0e2ac2588a579",
-   "carried": true
+   "carried": true,
+   "pass": 7
   },
   {
    "row": "B10",
    "screen": "mark_kitchen.pay75",
    "verdict": "PASS",
-   "line": "You count it out on the table. He makes you stand there while he counts it again. Your stomach knots while he does.",
-   "why": "\"Same time next Sunday\" sits behind the Sunday-gated hub choice; first-time line behind rent_paid_once false; rise lines behind totals that cross on this payment.",
+   "line": "It goes to ninety once you've paid three hundred. Four Sundays straight, kid",
+   "why": "first-payment line behind rent_paid_once false; \"Ninety from next week\" behind rent_paid_total \u2265 225 (read before the +75), so true when the total reaches 300",
    "cause": null,
    "note": false,
    "screen_hash": {
     "text": "77d42862e4942fb3",
-    "facts": "28a1c06aa45c7c10",
-    "all": "14f023e2bcb15dd6"
+    "facts": "5e652ec6e4551af0",
+    "facts2": "7073f340f74f069c",
+    "all": "e3c88a749be646e3"
    },
    "row_hash": "c1c0e2ac2588a579",
-   "carried": true
+   "carried": true,
+   "pass": 7
   },
   {
    "row": "B10",
    "screen": "mark_kitchen.pay90",
    "verdict": "PASS",
-   "line": "\"A hundred from next week.\" / \"You keep your face still. It's more.\"",
-   "why": "\"Same time next Sunday\" sits behind the Sunday-gated hub choice; first-time line behind rent_paid_once false; rise lines behind totals that cross on this payment.",
+   "line": "A hundred from next week.",
+   "why": "\"A hundred from next week\" behind rent_paid_total \u2265 810, true when the +90 reaches 900",
    "cause": null,
    "note": false,
    "screen_hash": {
     "text": "bcecc52dc17ed0c8",
-    "facts": "28a1c06aa45c7c10",
-    "all": "e5615da390e01e94"
+    "facts": "5e652ec6e4551af0",
+    "facts2": "7073f340f74f069c",
+    "all": "04931744b776fc09"
    },
    "row_hash": "c1c0e2ac2588a579",
-   "carried": true
+   "carried": true,
+   "pass": 7
   },
   {
    "row": "B10",
    "screen": "mark_kitchen.rent",
    "verdict": "PASS",
    "line": "Mark folds the paper down and holds out his hand.",
-   "why": "Reachable only Sun 08:00-11:55; who_is_where has Mark in the Kitchen Sun 08-12; second visit after pay/short shows the handled group; amounts behind rent_paid_total.",
-   "cause": "",
+   "why": "reached only Sunday 08:00\u201311:55 while Mark is at the table; each price group reads rent_paid_total and money, in an if/elseif chain that picks the right line",
+   "cause": null,
    "note": false,
    "screen_hash": {
     "text": "9394c9809e8f86c9",
-    "facts": "28a1c06aa45c7c10",
-    "all": "ae9ae39af37fcef9"
+    "facts": "5e652ec6e4551af0",
+    "facts2": "7073f340f74f069c",
+    "all": "3bf25ce111863764"
    },
    "row_hash": "c1c0e2ac2588a579",
    "carried": true,
-   "pass": 3
+   "pass": 7
   },
   {
    "row": "B10",
    "screen": "mark_kitchen.short",
    "verdict": "PASS",
-   "line": "\"Short. Next Sunday, then. Don't make it a habit, kid.\" / \"Mom's cup stops halfway to her mouth, then keeps going.\"",
-   "why": "Laura in the kitchen Sun 08-12 (who_is_where), window 08:00-11:55 + 0 min choices.",
+   "line": "Mom's cup stops halfway to her mouth, then keeps going.",
+   "why": "Laura is in the kitchen Sunday 08:00\u201312:00 (who_is_where), at every minute the rent window can show",
    "cause": null,
    "note": false,
    "screen_hash": {
     "text": "8b071b6a2ddd72aa",
-    "facts": "61d8c9e46a55fe43",
-    "all": "9a5950d751ae9362"
+    "facts": "bc7f8aaaf6a4f505",
+    "facts2": "796eee3dad582482",
+    "all": "6453ab1af862f835"
    },
    "row_hash": "c1c0e2ac2588a579",
-   "carried": true
+   "carried": true,
+   "pass": 7
   },
   {
    "row": "B10",
    "screen": "mark_kitchen.talk",
    "verdict": "PASS",
-   "line": "Your face goes hot. He's already back to his coffee.",
-   "why": "Mark there by requires_npc; every kitchen row of his is coffee/breakfast/at the table (who_is_where: wkdy 07:00-07:30, Sat 08-10, Sun 08-12); Done spends the 5 min so the screen shows while he is there at the last minute; no past or first-time claim; same daily nag true on a second visit",
+   "line": "You working, kid? Rent doesn't wait. And don't spend it all on coffee.",
+   "why": "true at every one of Mark's kitchen hours; \"You working\" asks, claims no job",
    "cause": null,
    "note": false,
    "screen_hash": {
     "text": "fe35e365dcfda4ec",
-    "facts": "5c487ebd2d9b7450",
-    "all": "5ea0b30f44a52e78"
+    "facts": "811544dad8de125f",
+    "facts2": "57f3c2e33f3edc83",
+    "all": "49da2ec68f166d6c"
    },
    "row_hash": "c1c0e2ac2588a579",
    "carried": true,
-   "pass": 4
+   "pass": 7
   },
   {
    "row": "B11",
@@ -1253,117 +1264,127 @@
    "row": "B8",
    "screen": "mark_kitchen.hub",
    "verdict": "PASS",
-   "line": "Pay the rent (5 min)",
-   "why": "Hub row spends 0; every rent exit (Leave, each Done) spends 5 minutes, so the label's 5 min is what it costs; Talk (5 min) spends 5 on Done; the hours match the card and PLAN \u00a72 (Mark collects Sunday morning at the table). No garment named.",
+   "line": "Mark's at the table with his coffee. He looks at you over the rim.",
+   "why": "no number or garment that disagrees",
    "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "22073abffbe6a4c9",
-    "facts": "b86e64e1dbfb6357",
-    "facts2": "9a97305cf61feadd",
-    "all": "e74f73f06946b013"
+    "text": "cebee1bac30c4ca9",
+    "facts": "e8065fe0f1b995c1",
+    "facts2": "8ff6682bbd8fcf1c",
+    "all": "a6f6a2b85d23b3a2"
    },
    "row_hash": "80d415cf08e0ebfe",
-   "carried": false,
-   "pass": 6
+   "carried": true,
+   "pass": 7
   },
   {
    "row": "B8",
    "screen": "mark_kitchen.pay100",
    "verdict": "PASS",
-   "line": "\"All there. Same time next Sunday.\" / \"He pockets it and goes back to the paper.\"",
-   "why": "$75/$90/$100 at $300/$900 totals agree with PLAN \u00a72/\u00a78c; crossing lines at 225 (pay75) and 810 (pay90) land on 300/900 after payment; no garment named.",
+   "line": "All there. Same time next Sunday.",
+   "why": "$75/$90/$100 and the 300/900 steps agree with PLAN \u00a72; the Done effects take the same amount",
    "cause": null,
    "note": false,
    "screen_hash": {
     "text": "9562246c2be111d9",
-    "facts": "28a1c06aa45c7c10",
-    "all": "454cb66c384d356c"
+    "facts": "5e652ec6e4551af0",
+    "facts2": "7073f340f74f069c",
+    "all": "04bd193bb19a845c"
    },
    "row_hash": "80d415cf08e0ebfe",
-   "carried": true
+   "carried": true,
+   "pass": 7
   },
   {
    "row": "B8",
    "screen": "mark_kitchen.pay75",
    "verdict": "PASS",
-   "line": "You count it out on the table. He makes you stand there while he counts it again. Your stomach knots while he does.",
-   "why": "$75/$90/$100 at $300/$900 totals agree with PLAN \u00a72/\u00a78c; crossing lines at 225 (pay75) and 810 (pay90) land on 300/900 after payment; no garment named.",
+   "line": "It goes to ninety once you've paid three hundred. Four Sundays straight, kid",
+   "why": "$75/$90/$100 and the 300/900 steps agree with PLAN \u00a72; the Done effects take the same amount",
    "cause": null,
    "note": false,
    "screen_hash": {
     "text": "77d42862e4942fb3",
-    "facts": "28a1c06aa45c7c10",
-    "all": "14f023e2bcb15dd6"
+    "facts": "5e652ec6e4551af0",
+    "facts2": "7073f340f74f069c",
+    "all": "e3c88a749be646e3"
    },
    "row_hash": "80d415cf08e0ebfe",
-   "carried": true
+   "carried": true,
+   "pass": 7
   },
   {
    "row": "B8",
    "screen": "mark_kitchen.pay90",
    "verdict": "PASS",
-   "line": "\"A hundred from next week.\" / \"You keep your face still. It's more.\"",
-   "why": "$75/$90/$100 at $300/$900 totals agree with PLAN \u00a72/\u00a78c; crossing lines at 225 (pay75) and 810 (pay90) land on 300/900 after payment; no garment named.",
+   "line": "A hundred from next week.",
+   "why": "$75/$90/$100 and the 300/900 steps agree with PLAN \u00a72; the Done effects take the same amount",
    "cause": null,
    "note": false,
    "screen_hash": {
     "text": "bcecc52dc17ed0c8",
-    "facts": "28a1c06aa45c7c10",
-    "all": "e5615da390e01e94"
+    "facts": "5e652ec6e4551af0",
+    "facts2": "7073f340f74f069c",
+    "all": "04931744b776fc09"
    },
    "row_hash": "80d415cf08e0ebfe",
-   "carried": true
+   "carried": true,
+   "pass": 7
   },
   {
    "row": "B8",
    "screen": "mark_kitchen.rent",
    "verdict": "PASS",
-   "line": "Seventy-five, kid. / Ninety, kid. / A hundred, kid.",
-   "why": "$75/<300, $90/300-899, $100/>=900 by rent_paid_total match PLAN \u00a72 and the card; no garment named.",
-   "cause": "",
+   "line": "Seventy-five, kid.",
+   "why": "each price matches its rent_paid_total band and PLAN \u00a72",
+   "cause": null,
    "note": false,
    "screen_hash": {
     "text": "9394c9809e8f86c9",
-    "facts": "28a1c06aa45c7c10",
-    "all": "ae9ae39af37fcef9"
+    "facts": "5e652ec6e4551af0",
+    "facts2": "7073f340f74f069c",
+    "all": "3bf25ce111863764"
    },
    "row_hash": "80d415cf08e0ebfe",
    "carried": true,
-   "pass": 3
+   "pass": 7
   },
   {
    "row": "B8",
    "screen": "mark_kitchen.short",
    "verdict": "PASS",
-   "line": "\"Short. Next Sunday, then. Don't make it a habit, kid.\" / \"Mom's cup stops halfway to her mouth, then keeps going.\"",
-   "why": "$75/$90/$100 at $300/$900 totals agree with PLAN \u00a72/\u00a78c; crossing lines at 225 (pay75) and 810 (pay90) land on 300/900 after payment; no garment named.",
+   "line": "Short. Next Sunday, then.",
+   "why": "no amount stated; no garment named",
    "cause": null,
    "note": false,
    "screen_hash": {
     "text": "8b071b6a2ddd72aa",
-    "facts": "61d8c9e46a55fe43",
-    "all": "9a5950d751ae9362"
+    "facts": "bc7f8aaaf6a4f505",
+    "facts2": "796eee3dad582482",
+    "all": "6453ab1af862f835"
    },
    "row_hash": "80d415cf08e0ebfe",
-   "carried": true
+   "carried": true,
+   "pass": 7
   },
   {
    "row": "B8",
    "screen": "mark_kitchen.talk",
    "verdict": "PASS",
    "line": "You working, kid? Rent doesn't wait. And don't spend it all on coffee.",
-   "why": "no number, no garment named",
+   "why": "no number or garment that disagrees",
    "cause": null,
    "note": false,
    "screen_hash": {
     "text": "fe35e365dcfda4ec",
-    "facts": "5c487ebd2d9b7450",
-    "all": "5ea0b30f44a52e78"
+    "facts": "811544dad8de125f",
+    "facts2": "57f3c2e33f3edc83",
+    "all": "49da2ec68f166d6c"
    },
    "row_hash": "80d415cf08e0ebfe",
    "carried": true,
-   "pass": 4
+   "pass": 7
   },
   {
    "row": "B9",
@@ -2943,17 +2964,18 @@
    "screen": "mark_kitchen.hub",
    "verdict": "PASS",
    "line": "Mark's at the table with his coffee. He looks at you over the rim.",
-   "why": "A person's menu opened from his face: the exception that carries his one picture, right after the presence line.",
+   "why": "a person's menu opened from his face: the exception, one picture after the first line",
    "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "50e54206a4f37eae",
-    "facts": "f5ba735a7dad78d5",
-    "all": "117535292b23a443"
+    "text": "cebee1bac30c4ca9",
+    "facts": "e8065fe0f1b995c1",
+    "facts2": "8ff6682bbd8fcf1c",
+    "all": "a6f6a2b85d23b3a2"
    },
-   "row_hash": "447179d04e01ff5d",
+   "row_hash": "64b72c778e96e443",
    "carried": true,
-   "pass": 3
+   "pass": 7
   },
   {
    "row": "C1267",
@@ -6600,233 +6622,253 @@
    "row": "C460",
    "screen": "mark_kitchen.hub",
    "verdict": "PASS",
-   "line": "Mark collects on Sundays, 8 to 11:55am, at the kitchen table.",
-   "why": "Every claim on the hub is true on every reachable visit: Mark present (requires_npc), Sunday hours equal the condition window, Sunday rows place him at the kitchen table for the whole window.",
+   "line": "Mark's at the table with his coffee. He looks at you over the rim.",
+   "why": "Mark's kitchen rows: weekdays 07:00\u201307:30 (coffee before work), Sat/Sun 08:00\u201310:00 breakfast, Sun 10:00\u201312:00 at the table; the menu shows only while he's there (requires_npc). The greyed rent line \"Mark collects on Sundays, 8 to 11:55am, at the kitchen table\" matches his Sunday rows and the trigger (end exclusive)",
    "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "22073abffbe6a4c9",
-    "facts": "b86e64e1dbfb6357",
-    "facts2": "9a97305cf61feadd",
-    "all": "e74f73f06946b013"
+    "text": "cebee1bac30c4ca9",
+    "facts": "e8065fe0f1b995c1",
+    "facts2": "8ff6682bbd8fcf1c",
+    "all": "a6f6a2b85d23b3a2"
    },
    "row_hash": "67e48e60d5053a2e",
-   "carried": false,
-   "pass": 6
+   "carried": true,
+   "pass": 7
   },
   {
    "row": "C460",
    "screen": "mark_kitchen.pay100",
    "verdict": "PASS",
    "line": "All there. Same time next Sunday.",
-   "why": "Mark there Sun 08-12, screen shows by 11:55; claims hold",
+   "why": "Sunday only, via the hub's weekday gate",
    "cause": null,
    "note": false,
    "screen_hash": {
     "text": "9562246c2be111d9",
-    "facts": "28a1c06aa45c7c10",
-    "all": "454cb66c384d356c"
+    "facts": "5e652ec6e4551af0",
+    "facts2": "7073f340f74f069c",
+    "all": "04bd193bb19a845c"
    },
    "row_hash": "67e48e60d5053a2e",
-   "carried": true
+   "carried": true,
+   "pass": 7
   },
   {
    "row": "C460",
    "screen": "mark_kitchen.pay75",
    "verdict": "PASS",
-   "line": "It goes to ninety once you've paid three hundred.",
-   "why": "first-time group on rent_paid_once false, set only here; stage line at total >=225 crosses 300",
+   "line": "It goes to ninety once you've paid three hundred. Four Sundays straight, kid",
+   "why": "first-payment line behind rent_paid_once false; \"Ninety from next week\" behind rent_paid_total \u2265 225 (read before the +75), so true when the total reaches 300",
    "cause": null,
    "note": false,
    "screen_hash": {
     "text": "77d42862e4942fb3",
-    "facts": "28a1c06aa45c7c10",
-    "all": "14f023e2bcb15dd6"
+    "facts": "5e652ec6e4551af0",
+    "facts2": "7073f340f74f069c",
+    "all": "e3c88a749be646e3"
    },
    "row_hash": "67e48e60d5053a2e",
-   "carried": true
+   "carried": true,
+   "pass": 7
   },
   {
    "row": "C460",
    "screen": "mark_kitchen.pay90",
    "verdict": "PASS",
    "line": "A hundred from next week.",
-   "why": "group at >=810 fires only on the payment crossing 900 (840+90)",
+   "why": "\"A hundred from next week\" behind rent_paid_total \u2265 810, true when the +90 reaches 900",
    "cause": null,
    "note": false,
    "screen_hash": {
     "text": "bcecc52dc17ed0c8",
-    "facts": "28a1c06aa45c7c10",
-    "all": "e5615da390e01e94"
+    "facts": "5e652ec6e4551af0",
+    "facts2": "7073f340f74f069c",
+    "all": "04931744b776fc09"
    },
    "row_hash": "67e48e60d5053a2e",
-   "carried": true
+   "carried": true,
+   "pass": 7
   },
   {
    "row": "C460",
    "screen": "mark_kitchen.rent",
    "verdict": "PASS",
-   "line": "You don't have it. He waits anyway, his hand still out.",
-   "why": "each amount group gated on rent_paid_total band, short line on money < amount, handled line on rent_handled_this_week; Mark kitchen Sun 08-12 covers 08:00-11:55 (who_is_where); line names no one else",
+   "line": "Mark folds the paper down and holds out his hand.",
+   "why": "reached only Sunday 08:00\u201311:55 while Mark is at the table; each price group reads rent_paid_total and money, in an if/elseif chain that picks the right line",
    "cause": null,
    "note": false,
    "screen_hash": {
     "text": "9394c9809e8f86c9",
-    "facts": "28a1c06aa45c7c10",
-    "all": "ae9ae39af37fcef9"
+    "facts": "5e652ec6e4551af0",
+    "facts2": "7073f340f74f069c",
+    "all": "3bf25ce111863764"
    },
    "row_hash": "67e48e60d5053a2e",
    "carried": true,
-   "pass": 3
+   "pass": 7
   },
   {
    "row": "C460",
    "screen": "mark_kitchen.short",
    "verdict": "PASS",
    "line": "Mom's cup stops halfway to her mouth, then keeps going.",
-   "why": "Laura in home_kitchen Sun 08-12; short shows by 11:55",
+   "why": "Laura is in the kitchen Sunday 08:00\u201312:00 (who_is_where), at every minute the rent window can show",
    "cause": null,
    "note": false,
    "screen_hash": {
     "text": "8b071b6a2ddd72aa",
-    "facts": "61d8c9e46a55fe43",
-    "all": "9a5950d751ae9362"
+    "facts": "bc7f8aaaf6a4f505",
+    "facts2": "796eee3dad582482",
+    "all": "6453ab1af862f835"
    },
    "row_hash": "67e48e60d5053a2e",
-   "carried": true
+   "carried": true,
+   "pass": 7
   },
   {
    "row": "C460",
    "screen": "mark_kitchen.talk",
    "verdict": "PASS",
-   "line": "Your face goes hot. He's already back to his coffee.",
-   "why": "every claim true at any minute of his kitchen rows; Mom present with him but not denied",
+   "line": "You working, kid? Rent doesn't wait. And don't spend it all on coffee.",
+   "why": "true at every one of Mark's kitchen hours; \"You working\" asks, claims no job",
    "cause": null,
    "note": false,
    "screen_hash": {
     "text": "fe35e365dcfda4ec",
-    "facts": "5c487ebd2d9b7450",
-    "all": "5ea0b30f44a52e78"
+    "facts": "811544dad8de125f",
+    "facts2": "57f3c2e33f3edc83",
+    "all": "49da2ec68f166d6c"
    },
    "row_hash": "67e48e60d5053a2e",
    "carried": true,
-   "pass": 4
+   "pass": 7
   },
   {
    "row": "C461",
    "screen": "mark_kitchen.hub",
    "verdict": "PASS",
    "line": "Mark's at the table with his coffee. He looks at you over the rim.",
-   "why": "Coffee and the look over the rim are texture that can't clash with any of his Kitchen rows (coffee before work, breakfast, at the kitchen table); the locked line fits his cast entry 'He collects the rent.'",
+   "why": "Mark as PLAN \u00a73 has him: control, the money, \"kid\"",
    "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "22073abffbe6a4c9",
-    "facts": "b86e64e1dbfb6357",
-    "facts2": "9a97305cf61feadd",
-    "all": "e74f73f06946b013"
+    "text": "cebee1bac30c4ca9",
+    "facts": "e8065fe0f1b995c1",
+    "facts2": "8ff6682bbd8fcf1c",
+    "all": "a6f6a2b85d23b3a2"
    },
    "row_hash": "310706ee076318f2",
-   "carried": false,
-   "pass": 6
+   "carried": true,
+   "pass": 7
   },
   {
    "row": "C461",
    "screen": "mark_kitchen.pay100",
    "verdict": "PASS",
    "line": "All there. Same time next Sunday.",
-   "why": "texture (paper, coffee) and his lines fit his cast entry",
+   "why": "Mark as PLAN \u00a73 has him: control, the money, \"kid\"",
    "cause": null,
    "note": false,
    "screen_hash": {
     "text": "9562246c2be111d9",
-    "facts": "28a1c06aa45c7c10",
-    "all": "454cb66c384d356c"
+    "facts": "5e652ec6e4551af0",
+    "facts2": "7073f340f74f069c",
+    "all": "04bd193bb19a845c"
    },
    "row_hash": "310706ee076318f2",
-   "carried": true
+   "carried": true,
+   "pass": 7
   },
   {
    "row": "C461",
    "screen": "mark_kitchen.pay75",
    "verdict": "PASS",
-   "line": "All there. Same time next Sunday.",
-   "why": "texture (paper, coffee) and his lines fit his cast entry",
+   "line": "It goes to ninety once you've paid three hundred. Four Sundays straight, kid",
+   "why": "Mark as PLAN \u00a73 has him: control, the money, \"kid\"",
    "cause": null,
    "note": false,
    "screen_hash": {
     "text": "77d42862e4942fb3",
-    "facts": "28a1c06aa45c7c10",
-    "all": "14f023e2bcb15dd6"
+    "facts": "5e652ec6e4551af0",
+    "facts2": "7073f340f74f069c",
+    "all": "e3c88a749be646e3"
    },
    "row_hash": "310706ee076318f2",
-   "carried": true
+   "carried": true,
+   "pass": 7
   },
   {
    "row": "C461",
    "screen": "mark_kitchen.pay90",
    "verdict": "PASS",
-   "line": "All there. Same time next Sunday.",
-   "why": "texture (paper, coffee) and his lines fit his cast entry",
+   "line": "A hundred from next week.",
+   "why": "Mark as PLAN \u00a73 has him: control, the money, \"kid\"",
    "cause": null,
    "note": false,
    "screen_hash": {
     "text": "bcecc52dc17ed0c8",
-    "facts": "28a1c06aa45c7c10",
-    "all": "e5615da390e01e94"
+    "facts": "5e652ec6e4551af0",
+    "facts2": "7073f340f74f069c",
+    "all": "04931744b776fc09"
    },
    "row_hash": "310706ee076318f2",
-   "carried": true
+   "carried": true,
+   "pass": 7
   },
   {
    "row": "C461",
    "screen": "mark_kitchen.rent",
    "verdict": "PASS",
-   "line": "Count it out where I can see it.",
-   "why": "Mark's lines fit his PLAN entry (control, money)",
+   "line": "Mark folds the paper down and holds out his hand.",
+   "why": "Mark as PLAN \u00a73 has him: control, the money, \"kid\"",
    "cause": null,
    "note": false,
    "screen_hash": {
     "text": "9394c9809e8f86c9",
-    "facts": "28a1c06aa45c7c10",
-    "all": "ae9ae39af37fcef9"
+    "facts": "5e652ec6e4551af0",
+    "facts2": "7073f340f74f069c",
+    "all": "3bf25ce111863764"
    },
    "row_hash": "310706ee076318f2",
    "carried": true,
-   "pass": 3
+   "pass": 7
   },
   {
    "row": "C461",
    "screen": "mark_kitchen.short",
    "verdict": "PASS",
-   "line": "Short. Next Sunday, then. Don't make it a habit, kid.",
-   "why": "texture (paper, coffee) and his lines fit his cast entry",
+   "line": "Mom's cup stops halfway to her mouth, then keeps going.",
+   "why": "Mark as PLAN \u00a73 has him: control, the money, \"kid\"",
    "cause": null,
    "note": false,
    "screen_hash": {
     "text": "8b071b6a2ddd72aa",
-    "facts": "61d8c9e46a55fe43",
-    "all": "9a5950d751ae9362"
+    "facts": "bc7f8aaaf6a4f505",
+    "facts2": "796eee3dad582482",
+    "all": "6453ab1af862f835"
    },
    "row_hash": "310706ee076318f2",
-   "carried": true
+   "carried": true,
+   "pass": 7
   },
   {
    "row": "C461",
    "screen": "mark_kitchen.talk",
    "verdict": "PASS",
    "line": "You working, kid? Rent doesn't wait. And don't spend it all on coffee.",
-   "why": "nag fits cast entry 'He collects the rent.'",
+   "why": "Mark as PLAN \u00a73 has him: control, the money, \"kid\"",
    "cause": null,
    "note": false,
    "screen_hash": {
     "text": "fe35e365dcfda4ec",
-    "facts": "5c487ebd2d9b7450",
-    "all": "5ea0b30f44a52e78"
+    "facts": "811544dad8de125f",
+    "facts2": "57f3c2e33f3edc83",
+    "all": "49da2ec68f166d6c"
    },
    "row_hash": "310706ee076318f2",
    "carried": true,
-   "pass": 4
+   "pass": 7
   },
   {
    "row": "C519",
@@ -7127,119 +7169,126 @@
    "screen": "mark_kitchen.hub",
    "verdict": "PASS",
    "line": "Mark's at the table with his coffee. He looks at you over the rim.",
-   "why": "His one picture sits on his menu right after the presence line.",
+   "why": "his one picture right after the menu's first line",
    "cause": null,
    "note": true,
    "screen_hash": {
-    "text": "50e54206a4f37eae",
-    "facts": "f5ba735a7dad78d5",
-    "all": "117535292b23a443"
+    "text": "cebee1bac30c4ca9",
+    "facts": "e8065fe0f1b995c1",
+    "facts2": "8ff6682bbd8fcf1c",
+    "all": "a6f6a2b85d23b3a2"
    },
-   "row_hash": "6d9bba989a2b9666",
+   "row_hash": "e5f7e6cf2d01613d",
    "carried": true,
-   "pass": 3
+   "pass": 7
   },
   {
    "row": "C596",
    "screen": "mark_kitchen.pay100",
    "verdict": "PASS",
-   "line": "He pockets it and goes back to the paper.",
-   "why": "No picture, one exit, short.",
+   "line": "All there. Same time next Sunday.",
+   "why": "no picture, one exit shown, short",
    "cause": null,
    "note": true,
    "screen_hash": {
     "text": "9562246c2be111d9",
-    "facts": "28a1c06aa45c7c10",
-    "all": "454cb66c384d356c"
+    "facts": "5e652ec6e4551af0",
+    "facts2": "7073f340f74f069c",
+    "all": "04bd193bb19a845c"
    },
-   "row_hash": "6d9bba989a2b9666",
+   "row_hash": "e5f7e6cf2d01613d",
    "carried": true,
-   "pass": 3
+   "pass": 7
   },
   {
    "row": "C596",
    "screen": "mark_kitchen.pay75",
    "verdict": "PASS",
-   "line": "He pockets it and goes back to the paper.",
-   "why": "Rent screen under his menu: no picture, one exit (Done), about 57 words at most (first payment + stage line).",
+   "line": "It goes to ninety once you've paid three hundred. Four Sundays straight, kid",
+   "why": "no picture, one exit shown, short",
    "cause": null,
    "note": true,
    "screen_hash": {
     "text": "77d42862e4942fb3",
-    "facts": "28a1c06aa45c7c10",
-    "all": "14f023e2bcb15dd6"
+    "facts": "5e652ec6e4551af0",
+    "facts2": "7073f340f74f069c",
+    "all": "e3c88a749be646e3"
    },
-   "row_hash": "6d9bba989a2b9666",
+   "row_hash": "e5f7e6cf2d01613d",
    "carried": true,
-   "pass": 3
+   "pass": 7
   },
   {
    "row": "C596",
    "screen": "mark_kitchen.pay90",
    "verdict": "PASS",
-   "line": "He pockets it and goes back to the paper.",
-   "why": "No picture, one exit, short.",
+   "line": "A hundred from next week.",
+   "why": "no picture, one exit shown, short",
    "cause": null,
    "note": true,
    "screen_hash": {
     "text": "bcecc52dc17ed0c8",
-    "facts": "28a1c06aa45c7c10",
-    "all": "e5615da390e01e94"
+    "facts": "5e652ec6e4551af0",
+    "facts2": "7073f340f74f069c",
+    "all": "04931744b776fc09"
    },
-   "row_hash": "6d9bba989a2b9666",
+   "row_hash": "e5f7e6cf2d01613d",
    "carried": true,
-   "pass": 3
+   "pass": 7
   },
   {
    "row": "C596",
    "screen": "mark_kitchen.rent",
    "verdict": "N/A",
-   "line": "Seventy-five, kid.",
-   "why": "a payment system screen with a number, not the talk screen (card Media: 0 spots)",
+   "line": "Mark folds the paper down and holds out his hand.",
+   "why": "the rent screen, not a talk screen",
    "cause": null,
    "note": true,
    "screen_hash": {
     "text": "9394c9809e8f86c9",
-    "facts": "28a1c06aa45c7c10",
-    "all": "ae9ae39af37fcef9"
+    "facts": "5e652ec6e4551af0",
+    "facts2": "7073f340f74f069c",
+    "all": "3bf25ce111863764"
    },
-   "row_hash": "6d9bba989a2b9666",
+   "row_hash": "e5f7e6cf2d01613d",
    "carried": true,
-   "pass": 3
+   "pass": 7
   },
   {
    "row": "C596",
    "screen": "mark_kitchen.short",
    "verdict": "PASS",
-   "line": "Short. Next Sunday, then. Don't make it a habit, kid.",
-   "why": "No picture; two Done choices with exclusive conditions, so one exit shows; about 40 words, about a third spoken (check.py GREEN).",
+   "line": "Mom's cup stops halfway to her mouth, then keeps going.",
+   "why": "no picture, one exit shown, short",
    "cause": null,
    "note": true,
    "screen_hash": {
     "text": "8b071b6a2ddd72aa",
-    "facts": "61d8c9e46a55fe43",
-    "all": "9a5950d751ae9362"
+    "facts": "bc7f8aaaf6a4f505",
+    "facts2": "796eee3dad582482",
+    "all": "6453ab1af862f835"
    },
-   "row_hash": "6d9bba989a2b9666",
+   "row_hash": "e5f7e6cf2d01613d",
    "carried": true,
-   "pass": 3
+   "pass": 7
   },
   {
    "row": "C596",
    "screen": "mark_kitchen.talk",
    "verdict": "PASS",
    "line": "You working, kid? Rent doesn't wait. And don't spend it all on coffee.",
-   "why": "37 words in the 34-57 target, one exit, no picture; 19 of 37 spoken (51%), under two-thirds but inside check.py's talk ceiling",
+   "why": "37 words, 19 spoken (51%), one exit, no picture; short of two-thirds but inside check.py's talk ceiling (note row)",
    "cause": null,
    "note": true,
    "screen_hash": {
     "text": "fe35e365dcfda4ec",
-    "facts": "5c487ebd2d9b7450",
-    "all": "5ea0b30f44a52e78"
+    "facts": "811544dad8de125f",
+    "facts2": "57f3c2e33f3edc83",
+    "all": "49da2ec68f166d6c"
    },
-   "row_hash": "6d9bba989a2b9666",
+   "row_hash": "e5f7e6cf2d01613d",
    "carried": true,
-   "pass": 4
+   "pass": 7
   },
   {
    "row": "C620",
@@ -9069,328 +9118,360 @@
    "screen": "mark_kitchen.hub",
    "verdict": "PASS",
    "line": "Mark's at the table with his coffee. He looks at you over the rim.",
-   "why": "the menu changes by the rent's greyed/open state and rent_handled_this_week, not by a rewritten identity line",
+   "why": "Mark is his face; this is his menu, not room text, and no room text names him",
    "cause": null,
    "note": true,
    "screen_hash": {
-    "text": "50e54206a4f37eae",
-    "facts": "f5ba735a7dad78d5",
-    "all": "117535292b23a443"
+    "text": "cebee1bac30c4ca9",
+    "facts": "e8065fe0f1b995c1",
+    "facts2": "8ff6682bbd8fcf1c",
+    "all": "a6f6a2b85d23b3a2"
    },
-   "row_hash": "6c9eb17d99266791",
+   "row_hash": "34139e6a6914e171",
    "carried": true,
-   "pass": 2
+   "pass": 7
   },
   {
    "row": "C795",
    "screen": "mark_kitchen.pay100",
    "verdict": "N/A",
    "line": "All there. Same time next Sunday.",
-   "why": "a beat screen, not a room re-entry",
+   "why": "a beat screen under his menu, not a place's room text",
    "cause": null,
    "note": true,
    "screen_hash": {
     "text": "9562246c2be111d9",
-    "facts": "28a1c06aa45c7c10",
-    "all": "454cb66c384d356c"
+    "facts": "5e652ec6e4551af0",
+    "facts2": "7073f340f74f069c",
+    "all": "04bd193bb19a845c"
    },
-   "row_hash": "6c9eb17d99266791",
-   "carried": true
+   "row_hash": "34139e6a6914e171",
+   "carried": true,
+   "pass": 7
   },
   {
    "row": "C795",
    "screen": "mark_kitchen.pay75",
    "verdict": "N/A",
-   "line": "It goes to ninety once you've paid three hundred.",
-   "why": "a beat screen, not a room re-entry",
+   "line": "It goes to ninety once you've paid three hundred. Four Sundays straight, kid",
+   "why": "a beat screen under his menu, not a place's room text",
    "cause": null,
    "note": true,
    "screen_hash": {
     "text": "77d42862e4942fb3",
-    "facts": "28a1c06aa45c7c10",
-    "all": "14f023e2bcb15dd6"
+    "facts": "5e652ec6e4551af0",
+    "facts2": "7073f340f74f069c",
+    "all": "e3c88a749be646e3"
    },
-   "row_hash": "6c9eb17d99266791",
-   "carried": true
+   "row_hash": "34139e6a6914e171",
+   "carried": true,
+   "pass": 7
   },
   {
    "row": "C795",
    "screen": "mark_kitchen.pay90",
    "verdict": "N/A",
    "line": "A hundred from next week.",
-   "why": "a beat screen, not a room re-entry",
+   "why": "a beat screen under his menu, not a place's room text",
    "cause": null,
    "note": true,
    "screen_hash": {
     "text": "bcecc52dc17ed0c8",
-    "facts": "28a1c06aa45c7c10",
-    "all": "e5615da390e01e94"
+    "facts": "5e652ec6e4551af0",
+    "facts2": "7073f340f74f069c",
+    "all": "04931744b776fc09"
    },
-   "row_hash": "6c9eb17d99266791",
-   "carried": true
+   "row_hash": "34139e6a6914e171",
+   "carried": true,
+   "pass": 7
   },
   {
    "row": "C795",
    "screen": "mark_kitchen.rent",
    "verdict": "N/A",
    "line": "Mark folds the paper down and holds out his hand.",
-   "why": "not a place screen",
+   "why": "a beat screen under his menu, not a place's room text",
    "cause": null,
    "note": true,
    "screen_hash": {
     "text": "9394c9809e8f86c9",
-    "facts": "28a1c06aa45c7c10",
-    "all": "ae9ae39af37fcef9"
+    "facts": "5e652ec6e4551af0",
+    "facts2": "7073f340f74f069c",
+    "all": "3bf25ce111863764"
    },
-   "row_hash": "6c9eb17d99266791",
+   "row_hash": "34139e6a6914e171",
    "carried": true,
-   "pass": 3
+   "pass": 7
   },
   {
    "row": "C795",
    "screen": "mark_kitchen.short",
    "verdict": "N/A",
-   "line": "Short. Next Sunday, then. Don't make it a habit, kid.",
-   "why": "a beat screen, not a room re-entry",
+   "line": "Mom's cup stops halfway to her mouth, then keeps going.",
+   "why": "a beat screen under his menu, not a place's room text",
    "cause": null,
    "note": true,
    "screen_hash": {
     "text": "8b071b6a2ddd72aa",
-    "facts": "61d8c9e46a55fe43",
-    "all": "9a5950d751ae9362"
+    "facts": "bc7f8aaaf6a4f505",
+    "facts2": "796eee3dad582482",
+    "all": "6453ab1af862f835"
    },
-   "row_hash": "6c9eb17d99266791",
-   "carried": true
+   "row_hash": "34139e6a6914e171",
+   "carried": true,
+   "pass": 7
   },
   {
    "row": "C795",
    "screen": "mark_kitchen.talk",
    "verdict": "PASS",
-   "line": "",
-   "why": "re-entry via faces",
+   "line": "You working, kid? Rent doesn't wait. And don't spend it all on coffee.",
+   "why": "Mark is his face; this is his menu, not room text, and no room text names him",
    "cause": null,
    "note": true,
    "screen_hash": {
     "text": "fe35e365dcfda4ec",
-    "facts": "5c487ebd2d9b7450",
-    "all": "5ea0b30f44a52e78"
+    "facts": "811544dad8de125f",
+    "facts2": "57f3c2e33f3edc83",
+    "all": "49da2ec68f166d6c"
    },
-   "row_hash": "6c9eb17d99266791",
+   "row_hash": "34139e6a6914e171",
    "carried": true,
-   "pass": 4
+   "pass": 7
   },
   {
    "row": "C804",
    "screen": "mark_kitchen.hub",
    "verdict": "PASS",
    "line": "Mark's at the table with his coffee. He looks at you over the rim.",
-   "why": "the menu exists only while Mark is there (requires_npc), and the rent screen reads his state; Mom has her own card",
+   "why": "Mark is his face; this is his menu, not room text, and no room text names him",
    "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "50e54206a4f37eae",
-    "facts": "f5ba735a7dad78d5",
-    "all": "117535292b23a443"
+    "text": "cebee1bac30c4ca9",
+    "facts": "e8065fe0f1b995c1",
+    "facts2": "8ff6682bbd8fcf1c",
+    "all": "a6f6a2b85d23b3a2"
    },
-   "row_hash": "810ef8e803cb09dd",
+   "row_hash": "5358489178bff0a4",
    "carried": true,
-   "pass": 2
+   "pass": 7
   },
   {
    "row": "C804",
    "screen": "mark_kitchen.pay100",
    "verdict": "N/A",
    "line": "All there. Same time next Sunday.",
-   "why": "a beat screen, not a room re-entry",
+   "why": "a beat screen under his menu, not a place's room text",
    "cause": null,
    "note": false,
    "screen_hash": {
     "text": "9562246c2be111d9",
-    "facts": "28a1c06aa45c7c10",
-    "all": "454cb66c384d356c"
+    "facts": "5e652ec6e4551af0",
+    "facts2": "7073f340f74f069c",
+    "all": "04bd193bb19a845c"
    },
-   "row_hash": "810ef8e803cb09dd",
-   "carried": true
+   "row_hash": "5358489178bff0a4",
+   "carried": true,
+   "pass": 7
   },
   {
    "row": "C804",
    "screen": "mark_kitchen.pay75",
    "verdict": "N/A",
-   "line": "It goes to ninety once you've paid three hundred.",
-   "why": "a beat screen, not a room re-entry",
+   "line": "It goes to ninety once you've paid three hundred. Four Sundays straight, kid",
+   "why": "a beat screen under his menu, not a place's room text",
    "cause": null,
    "note": false,
    "screen_hash": {
     "text": "77d42862e4942fb3",
-    "facts": "28a1c06aa45c7c10",
-    "all": "14f023e2bcb15dd6"
+    "facts": "5e652ec6e4551af0",
+    "facts2": "7073f340f74f069c",
+    "all": "e3c88a749be646e3"
    },
-   "row_hash": "810ef8e803cb09dd",
-   "carried": true
+   "row_hash": "5358489178bff0a4",
+   "carried": true,
+   "pass": 7
   },
   {
    "row": "C804",
    "screen": "mark_kitchen.pay90",
    "verdict": "N/A",
    "line": "A hundred from next week.",
-   "why": "a beat screen, not a room re-entry",
+   "why": "a beat screen under his menu, not a place's room text",
    "cause": null,
    "note": false,
    "screen_hash": {
     "text": "bcecc52dc17ed0c8",
-    "facts": "28a1c06aa45c7c10",
-    "all": "e5615da390e01e94"
+    "facts": "5e652ec6e4551af0",
+    "facts2": "7073f340f74f069c",
+    "all": "04931744b776fc09"
    },
-   "row_hash": "810ef8e803cb09dd",
-   "carried": true
+   "row_hash": "5358489178bff0a4",
+   "carried": true,
+   "pass": 7
   },
   {
    "row": "C804",
    "screen": "mark_kitchen.rent",
-   "verdict": "PASS",
+   "verdict": "N/A",
    "line": "Mark folds the paper down and holds out his hand.",
-   "why": "screen exists only while Mark is there, text is his",
+   "why": "a beat screen under his menu, not a place's room text",
    "cause": null,
    "note": false,
    "screen_hash": {
     "text": "9394c9809e8f86c9",
-    "facts": "28a1c06aa45c7c10",
-    "all": "ae9ae39af37fcef9"
+    "facts": "5e652ec6e4551af0",
+    "facts2": "7073f340f74f069c",
+    "all": "3bf25ce111863764"
    },
-   "row_hash": "810ef8e803cb09dd",
+   "row_hash": "5358489178bff0a4",
    "carried": true,
-   "pass": 3
+   "pass": 7
   },
   {
    "row": "C804",
    "screen": "mark_kitchen.short",
    "verdict": "N/A",
-   "line": "Short. Next Sunday, then. Don't make it a habit, kid.",
-   "why": "a beat screen, not a room re-entry",
+   "line": "Mom's cup stops halfway to her mouth, then keeps going.",
+   "why": "a beat screen under his menu, not a place's room text",
    "cause": null,
    "note": false,
    "screen_hash": {
     "text": "8b071b6a2ddd72aa",
-    "facts": "61d8c9e46a55fe43",
-    "all": "9a5950d751ae9362"
+    "facts": "bc7f8aaaf6a4f505",
+    "facts2": "796eee3dad582482",
+    "all": "6453ab1af862f835"
    },
-   "row_hash": "810ef8e803cb09dd",
-   "carried": true
+   "row_hash": "5358489178bff0a4",
+   "carried": true,
+   "pass": 7
   },
   {
    "row": "C804",
    "screen": "mark_kitchen.talk",
    "verdict": "PASS",
-   "line": "",
-   "why": "Mark's menu exists only while he's there; Mom is with him at every one of his kitchen hours, so nothing changes to name",
+   "line": "You working, kid? Rent doesn't wait. And don't spend it all on coffee.",
+   "why": "Mark is his face; this is his menu, not room text, and no room text names him",
    "cause": null,
    "note": false,
    "screen_hash": {
     "text": "fe35e365dcfda4ec",
-    "facts": "5c487ebd2d9b7450",
-    "all": "5ea0b30f44a52e78"
+    "facts": "811544dad8de125f",
+    "facts2": "57f3c2e33f3edc83",
+    "all": "49da2ec68f166d6c"
    },
-   "row_hash": "810ef8e803cb09dd",
+   "row_hash": "5358489178bff0a4",
    "carried": true,
-   "pass": 4
+   "pass": 7
   },
   {
    "row": "C889",
    "screen": "mark_kitchen.hub",
    "verdict": "PASS",
-   "line": "Pay the rent (5 min)",
-   "why": "durations only; 5 min equals the real spend on every path (0 + 5 on Done/Leave)",
+   "line": "Pay the rent \u2014 Mark collects on Sundays, 8 to 11:55am, at the kitchen table.",
+   "why": "no duration or energy on a label; the greyed line's hours are the clock-shut row publishing them (C913)",
    "cause": null,
    "note": true,
    "screen_hash": {
-    "text": "50e54206a4f37eae",
-    "facts": "f5ba735a7dad78d5",
-    "all": "117535292b23a443"
+    "text": "cebee1bac30c4ca9",
+    "facts": "e8065fe0f1b995c1",
+    "facts2": "8ff6682bbd8fcf1c",
+    "all": "a6f6a2b85d23b3a2"
    },
-   "row_hash": "1b724e2dcfbf028b",
+   "row_hash": "def1348d483d0c40",
    "carried": true,
-   "pass": 2
+   "pass": 7
   },
   {
    "row": "C889",
    "screen": "mark_kitchen.pay100",
    "verdict": "PASS",
-   "line": "All there. Same time next Sunday.",
-   "why": "Done carries no clock promise; its 5 min is the menu label's",
+   "line": "Done",
+   "why": "no time, duration or energy on the label",
    "cause": null,
    "note": true,
    "screen_hash": {
     "text": "9562246c2be111d9",
-    "facts": "28a1c06aa45c7c10",
-    "all": "454cb66c384d356c"
+    "facts": "5e652ec6e4551af0",
+    "facts2": "7073f340f74f069c",
+    "all": "04bd193bb19a845c"
    },
-   "row_hash": "1b724e2dcfbf028b",
-   "carried": true
+   "row_hash": "def1348d483d0c40",
+   "carried": true,
+   "pass": 7
   },
   {
    "row": "C889",
    "screen": "mark_kitchen.pay75",
    "verdict": "PASS",
-   "line": "It goes to ninety once you've paid three hundred.",
-   "why": "Done carries no clock promise; its 5 min is the menu label's",
+   "line": "Done",
+   "why": "no time, duration or energy on the label",
    "cause": null,
    "note": true,
    "screen_hash": {
     "text": "77d42862e4942fb3",
-    "facts": "28a1c06aa45c7c10",
-    "all": "14f023e2bcb15dd6"
+    "facts": "5e652ec6e4551af0",
+    "facts2": "7073f340f74f069c",
+    "all": "e3c88a749be646e3"
    },
-   "row_hash": "1b724e2dcfbf028b",
-   "carried": true
+   "row_hash": "def1348d483d0c40",
+   "carried": true,
+   "pass": 7
   },
   {
    "row": "C889",
    "screen": "mark_kitchen.pay90",
    "verdict": "PASS",
-   "line": "A hundred from next week.",
-   "why": "Done carries no clock promise; its 5 min is the menu label's",
+   "line": "Done",
+   "why": "no time, duration or energy on the label",
    "cause": null,
    "note": true,
    "screen_hash": {
     "text": "bcecc52dc17ed0c8",
-    "facts": "28a1c06aa45c7c10",
-    "all": "e5615da390e01e94"
+    "facts": "5e652ec6e4551af0",
+    "facts2": "7073f340f74f069c",
+    "all": "04931744b776fc09"
    },
-   "row_hash": "1b724e2dcfbf028b",
-   "carried": true
+   "row_hash": "def1348d483d0c40",
+   "carried": true,
+   "pass": 7
   },
   {
    "row": "C889",
    "screen": "mark_kitchen.short",
    "verdict": "PASS",
-   "line": "Short. Next Sunday, then. Don't make it a habit, kid.",
-   "why": "Done carries no clock promise; its 5 min is the menu label's",
+   "line": "Done",
+   "why": "no time, duration or energy on the label",
    "cause": null,
    "note": true,
    "screen_hash": {
     "text": "8b071b6a2ddd72aa",
-    "facts": "61d8c9e46a55fe43",
-    "all": "9a5950d751ae9362"
+    "facts": "bc7f8aaaf6a4f505",
+    "facts2": "796eee3dad582482",
+    "all": "6453ab1af862f835"
    },
-   "row_hash": "1b724e2dcfbf028b",
-   "carried": true
+   "row_hash": "def1348d483d0c40",
+   "carried": true,
+   "pass": 7
   },
   {
    "row": "C889",
    "screen": "mark_kitchen.talk",
    "verdict": "PASS",
-   "line": "Talk (5 min)",
-   "why": "duration, not a clock time; equals the 5 min Done spends",
+   "line": "Done",
+   "why": "no time, duration or energy on the label",
    "cause": null,
    "note": true,
    "screen_hash": {
     "text": "fe35e365dcfda4ec",
-    "facts": "5c487ebd2d9b7450",
-    "all": "5ea0b30f44a52e78"
+    "facts": "811544dad8de125f",
+    "facts2": "57f3c2e33f3edc83",
+    "all": "49da2ec68f166d6c"
    },
-   "row_hash": "1b724e2dcfbf028b",
+   "row_hash": "def1348d483d0c40",
    "carried": true,
-   "pass": 4
+   "pass": 7
   },
   {
    "row": "C892",
@@ -9412,83 +9493,92 @@
   {
    "row": "C892",
    "screen": "mark_kitchen.pay100",
-   "verdict": "PASS",
+   "verdict": "N/A",
    "line": "All there. Same time next Sunday.",
-   "why": "hours on the door's locked_text \"Mark collects on Sunday morning\"; none in the acts",
+   "why": "no hours or travel on this screen",
    "cause": null,
    "note": true,
    "screen_hash": {
     "text": "9562246c2be111d9",
-    "facts": "28a1c06aa45c7c10",
-    "all": "454cb66c384d356c"
+    "facts": "5e652ec6e4551af0",
+    "facts2": "7073f340f74f069c",
+    "all": "04bd193bb19a845c"
    },
    "row_hash": "5c890033f6ac38b8",
-   "carried": true
+   "carried": true,
+   "pass": 7
   },
   {
    "row": "C892",
    "screen": "mark_kitchen.pay75",
-   "verdict": "PASS",
-   "line": "It goes to ninety once you've paid three hundred.",
-   "why": "hours on the door's locked_text \"Mark collects on Sunday morning\"; none in the acts",
+   "verdict": "N/A",
+   "line": "It goes to ninety once you've paid three hundred. Four Sundays straight, kid",
+   "why": "no hours or travel on this screen",
    "cause": null,
    "note": true,
    "screen_hash": {
     "text": "77d42862e4942fb3",
-    "facts": "28a1c06aa45c7c10",
-    "all": "14f023e2bcb15dd6"
+    "facts": "5e652ec6e4551af0",
+    "facts2": "7073f340f74f069c",
+    "all": "e3c88a749be646e3"
    },
    "row_hash": "5c890033f6ac38b8",
-   "carried": true
+   "carried": true,
+   "pass": 7
   },
   {
    "row": "C892",
    "screen": "mark_kitchen.pay90",
-   "verdict": "PASS",
+   "verdict": "N/A",
    "line": "A hundred from next week.",
-   "why": "hours on the door's locked_text \"Mark collects on Sunday morning\"; none in the acts",
+   "why": "no hours or travel on this screen",
    "cause": null,
    "note": true,
    "screen_hash": {
     "text": "bcecc52dc17ed0c8",
-    "facts": "28a1c06aa45c7c10",
-    "all": "e5615da390e01e94"
+    "facts": "5e652ec6e4551af0",
+    "facts2": "7073f340f74f069c",
+    "all": "04931744b776fc09"
    },
    "row_hash": "5c890033f6ac38b8",
-   "carried": true
+   "carried": true,
+   "pass": 7
   },
   {
    "row": "C892",
    "screen": "mark_kitchen.short",
-   "verdict": "PASS",
-   "line": "Short. Next Sunday, then. Don't make it a habit, kid.",
-   "why": "hours on the door's locked_text \"Mark collects on Sunday morning\"; none in the acts",
+   "verdict": "N/A",
+   "line": "Mom's cup stops halfway to her mouth, then keeps going.",
+   "why": "no hours or travel on this screen",
    "cause": null,
    "note": true,
    "screen_hash": {
     "text": "8b071b6a2ddd72aa",
-    "facts": "61d8c9e46a55fe43",
-    "all": "9a5950d751ae9362"
+    "facts": "bc7f8aaaf6a4f505",
+    "facts2": "796eee3dad582482",
+    "all": "6453ab1af862f835"
    },
    "row_hash": "5c890033f6ac38b8",
-   "carried": true
+   "carried": true,
+   "pass": 7
   },
   {
    "row": "C892",
    "screen": "mark_kitchen.talk",
-   "verdict": "PASS",
+   "verdict": "N/A",
    "line": "You working, kid? Rent doesn't wait. And don't spend it all on coffee.",
-   "why": "no hour in the act",
+   "why": "no hours or travel on this screen",
    "cause": null,
    "note": true,
    "screen_hash": {
     "text": "fe35e365dcfda4ec",
-    "facts": "5c487ebd2d9b7450",
-    "all": "5ea0b30f44a52e78"
+    "facts": "811544dad8de125f",
+    "facts2": "57f3c2e33f3edc83",
+    "all": "49da2ec68f166d6c"
    },
    "row_hash": "5c890033f6ac38b8",
    "carried": true,
-   "pass": 4
+   "pass": 7
   },
   {
    "row": "C897",
@@ -9512,81 +9602,90 @@
    "screen": "mark_kitchen.pay100",
    "verdict": "N/A",
    "line": "All there. Same time next Sunday.",
-   "why": "no crossing on this screen",
+   "why": "no hours or travel on this screen",
    "cause": null,
    "note": true,
    "screen_hash": {
     "text": "9562246c2be111d9",
-    "facts": "28a1c06aa45c7c10",
-    "all": "454cb66c384d356c"
+    "facts": "5e652ec6e4551af0",
+    "facts2": "7073f340f74f069c",
+    "all": "04bd193bb19a845c"
    },
    "row_hash": "265ece64add83676",
-   "carried": true
+   "carried": true,
+   "pass": 7
   },
   {
    "row": "C897",
    "screen": "mark_kitchen.pay75",
    "verdict": "N/A",
-   "line": "It goes to ninety once you've paid three hundred.",
-   "why": "no crossing on this screen",
+   "line": "It goes to ninety once you've paid three hundred. Four Sundays straight, kid",
+   "why": "no hours or travel on this screen",
    "cause": null,
    "note": true,
    "screen_hash": {
     "text": "77d42862e4942fb3",
-    "facts": "28a1c06aa45c7c10",
-    "all": "14f023e2bcb15dd6"
+    "facts": "5e652ec6e4551af0",
+    "facts2": "7073f340f74f069c",
+    "all": "e3c88a749be646e3"
    },
    "row_hash": "265ece64add83676",
-   "carried": true
+   "carried": true,
+   "pass": 7
   },
   {
    "row": "C897",
    "screen": "mark_kitchen.pay90",
    "verdict": "N/A",
    "line": "A hundred from next week.",
-   "why": "no crossing on this screen",
+   "why": "no hours or travel on this screen",
    "cause": null,
    "note": true,
    "screen_hash": {
     "text": "bcecc52dc17ed0c8",
-    "facts": "28a1c06aa45c7c10",
-    "all": "e5615da390e01e94"
+    "facts": "5e652ec6e4551af0",
+    "facts2": "7073f340f74f069c",
+    "all": "04931744b776fc09"
    },
    "row_hash": "265ece64add83676",
-   "carried": true
+   "carried": true,
+   "pass": 7
   },
   {
    "row": "C897",
    "screen": "mark_kitchen.short",
    "verdict": "N/A",
-   "line": "Short. Next Sunday, then. Don't make it a habit, kid.",
-   "why": "no crossing on this screen",
+   "line": "Mom's cup stops halfway to her mouth, then keeps going.",
+   "why": "no hours or travel on this screen",
    "cause": null,
    "note": true,
    "screen_hash": {
     "text": "8b071b6a2ddd72aa",
-    "facts": "61d8c9e46a55fe43",
-    "all": "9a5950d751ae9362"
+    "facts": "bc7f8aaaf6a4f505",
+    "facts2": "796eee3dad582482",
+    "all": "6453ab1af862f835"
    },
    "row_hash": "265ece64add83676",
-   "carried": true
+   "carried": true,
+   "pass": 7
   },
   {
    "row": "C897",
    "screen": "mark_kitchen.talk",
-   "verdict": "PASS",
-   "line": "",
-   "why": "no time on the room itself",
+   "verdict": "N/A",
+   "line": "You working, kid? Rent doesn't wait. And don't spend it all on coffee.",
+   "why": "no hours or travel on this screen",
    "cause": null,
    "note": true,
    "screen_hash": {
     "text": "fe35e365dcfda4ec",
-    "facts": "5c487ebd2d9b7450",
-    "all": "5ea0b30f44a52e78"
+    "facts": "811544dad8de125f",
+    "facts2": "57f3c2e33f3edc83",
+    "all": "49da2ec68f166d6c"
    },
    "row_hash": "265ece64add83676",
    "carried": true,
-   "pass": 4
+   "pass": 7
   },
   {
    "row": "C900",
@@ -9610,81 +9709,90 @@
    "screen": "mark_kitchen.pay100",
    "verdict": "PASS",
    "line": "All there. Same time next Sunday.",
-   "why": "\"next Sunday\" is a rule, not the current time; no clock time printed",
+   "why": "no clock time in the beat; \"next Sunday\" is a rule",
    "cause": null,
    "note": false,
    "screen_hash": {
     "text": "9562246c2be111d9",
-    "facts": "28a1c06aa45c7c10",
-    "all": "454cb66c384d356c"
+    "facts": "5e652ec6e4551af0",
+    "facts2": "7073f340f74f069c",
+    "all": "04bd193bb19a845c"
    },
    "row_hash": "6372efb027eb2034",
-   "carried": true
+   "carried": true,
+   "pass": 7
   },
   {
    "row": "C900",
    "screen": "mark_kitchen.pay75",
    "verdict": "PASS",
-   "line": "It goes to ninety once you've paid three hundred.",
-   "why": "\"next Sunday\" is a rule, not the current time; no clock time printed",
+   "line": "It goes to ninety once you've paid three hundred. Four Sundays straight, kid",
+   "why": "no clock time in the beat; \"next Sunday\" is a rule",
    "cause": null,
    "note": false,
    "screen_hash": {
     "text": "77d42862e4942fb3",
-    "facts": "28a1c06aa45c7c10",
-    "all": "14f023e2bcb15dd6"
+    "facts": "5e652ec6e4551af0",
+    "facts2": "7073f340f74f069c",
+    "all": "e3c88a749be646e3"
    },
    "row_hash": "6372efb027eb2034",
-   "carried": true
+   "carried": true,
+   "pass": 7
   },
   {
    "row": "C900",
    "screen": "mark_kitchen.pay90",
    "verdict": "PASS",
    "line": "A hundred from next week.",
-   "why": "\"next Sunday\" is a rule, not the current time; no clock time printed",
+   "why": "no clock time in the beat; \"next Sunday\" is a rule",
    "cause": null,
    "note": false,
    "screen_hash": {
     "text": "bcecc52dc17ed0c8",
-    "facts": "28a1c06aa45c7c10",
-    "all": "e5615da390e01e94"
+    "facts": "5e652ec6e4551af0",
+    "facts2": "7073f340f74f069c",
+    "all": "04931744b776fc09"
    },
    "row_hash": "6372efb027eb2034",
-   "carried": true
+   "carried": true,
+   "pass": 7
   },
   {
    "row": "C900",
    "screen": "mark_kitchen.short",
    "verdict": "PASS",
-   "line": "Short. Next Sunday, then. Don't make it a habit, kid.",
-   "why": "\"next Sunday\" is a rule, not the current time; no clock time printed",
+   "line": "Mom's cup stops halfway to her mouth, then keeps going.",
+   "why": "no clock time in the beat; \"next Sunday\" is a rule",
    "cause": null,
    "note": false,
    "screen_hash": {
     "text": "8b071b6a2ddd72aa",
-    "facts": "61d8c9e46a55fe43",
-    "all": "9a5950d751ae9362"
+    "facts": "bc7f8aaaf6a4f505",
+    "facts2": "796eee3dad582482",
+    "all": "6453ab1af862f835"
    },
    "row_hash": "6372efb027eb2034",
-   "carried": true
+   "carried": true,
+   "pass": 7
   },
   {
    "row": "C900",
    "screen": "mark_kitchen.talk",
    "verdict": "PASS",
    "line": "You working, kid? Rent doesn't wait. And don't spend it all on coffee.",
-   "why": "no time said in the beat",
+   "why": "no clock time in the beat; \"next Sunday\" is a rule",
    "cause": null,
    "note": false,
    "screen_hash": {
     "text": "fe35e365dcfda4ec",
-    "facts": "5c487ebd2d9b7450",
-    "all": "5ea0b30f44a52e78"
+    "facts": "811544dad8de125f",
+    "facts2": "57f3c2e33f3edc83",
+    "all": "49da2ec68f166d6c"
    },
    "row_hash": "6372efb027eb2034",
    "carried": true,
-   "pass": 4
+   "pass": 7
   },
   {
    "row": "C902",
@@ -9708,81 +9816,90 @@
    "screen": "mark_kitchen.pay100",
    "verdict": "PASS",
    "line": "All there. Same time next Sunday.",
-   "why": "rent opens until 11:54, Mark's Kitchen row runs to 12:00; true at the last minute",
+   "why": "true at 11:54 Sunday and at 07:29 weekdays",
    "cause": null,
    "note": true,
    "screen_hash": {
     "text": "9562246c2be111d9",
-    "facts": "28a1c06aa45c7c10",
-    "all": "454cb66c384d356c"
+    "facts": "5e652ec6e4551af0",
+    "facts2": "7073f340f74f069c",
+    "all": "04bd193bb19a845c"
    },
    "row_hash": "df5ed7a36dbc74e4",
-   "carried": true
+   "carried": true,
+   "pass": 7
   },
   {
    "row": "C902",
    "screen": "mark_kitchen.pay75",
    "verdict": "PASS",
-   "line": "It goes to ninety once you've paid three hundred.",
-   "why": "rent opens until 11:54, Mark's Kitchen row runs to 12:00; true at the last minute",
+   "line": "It goes to ninety once you've paid three hundred. Four Sundays straight, kid",
+   "why": "true at 11:54 Sunday and at 07:29 weekdays",
    "cause": null,
    "note": true,
    "screen_hash": {
     "text": "77d42862e4942fb3",
-    "facts": "28a1c06aa45c7c10",
-    "all": "14f023e2bcb15dd6"
+    "facts": "5e652ec6e4551af0",
+    "facts2": "7073f340f74f069c",
+    "all": "e3c88a749be646e3"
    },
    "row_hash": "df5ed7a36dbc74e4",
-   "carried": true
+   "carried": true,
+   "pass": 7
   },
   {
    "row": "C902",
    "screen": "mark_kitchen.pay90",
    "verdict": "PASS",
    "line": "A hundred from next week.",
-   "why": "rent opens until 11:54, Mark's Kitchen row runs to 12:00; true at the last minute",
+   "why": "true at 11:54 Sunday and at 07:29 weekdays",
    "cause": null,
    "note": true,
    "screen_hash": {
     "text": "bcecc52dc17ed0c8",
-    "facts": "28a1c06aa45c7c10",
-    "all": "e5615da390e01e94"
+    "facts": "5e652ec6e4551af0",
+    "facts2": "7073f340f74f069c",
+    "all": "04931744b776fc09"
    },
    "row_hash": "df5ed7a36dbc74e4",
-   "carried": true
+   "carried": true,
+   "pass": 7
   },
   {
    "row": "C902",
    "screen": "mark_kitchen.short",
    "verdict": "PASS",
    "line": "Mom's cup stops halfway to her mouth, then keeps going.",
-   "why": "last minute 11:54; Laura and Mark in the Kitchen until 12:00",
+   "why": "true at 11:54 Sunday and at 07:29 weekdays",
    "cause": null,
    "note": true,
    "screen_hash": {
     "text": "8b071b6a2ddd72aa",
-    "facts": "61d8c9e46a55fe43",
-    "all": "9a5950d751ae9362"
+    "facts": "bc7f8aaaf6a4f505",
+    "facts2": "796eee3dad582482",
+    "all": "6453ab1af862f835"
    },
    "row_hash": "df5ed7a36dbc74e4",
-   "carried": true
+   "carried": true,
+   "pass": 7
   },
   {
    "row": "C902",
    "screen": "mark_kitchen.talk",
    "verdict": "PASS",
-   "line": "Your face goes hot. He's already back to his coffee.",
-   "why": "entry spends 0 min, Done spends 5, so at 07:29 Mark is still there; true at the last minute",
+   "line": "You working, kid? Rent doesn't wait. And don't spend it all on coffee.",
+   "why": "true at 11:54 Sunday and at 07:29 weekdays",
    "cause": null,
    "note": true,
    "screen_hash": {
     "text": "fe35e365dcfda4ec",
-    "facts": "5c487ebd2d9b7450",
-    "all": "5ea0b30f44a52e78"
+    "facts": "811544dad8de125f",
+    "facts2": "57f3c2e33f3edc83",
+    "all": "49da2ec68f166d6c"
    },
    "row_hash": "df5ed7a36dbc74e4",
    "carried": true,
-   "pass": 4
+   "pass": 7
   },
   {
    "row": "C903",
@@ -9806,64 +9923,72 @@
    "screen": "mark_kitchen.pay100",
    "verdict": "PASS",
    "line": "All there. Same time next Sunday.",
-   "why": "\"Sunday\" named only on screens reached through the hub choice gated weekday [6]; on hub only in the sign's locked_text",
+   "why": "\"Sunday\" only on screens reached through the hub choice gated weekday [6]",
    "cause": null,
    "note": false,
    "screen_hash": {
     "text": "9562246c2be111d9",
-    "facts": "28a1c06aa45c7c10",
-    "all": "454cb66c384d356c"
+    "facts": "5e652ec6e4551af0",
+    "facts2": "7073f340f74f069c",
+    "all": "04bd193bb19a845c"
    },
    "row_hash": "4f83b0b5eb45f71b",
-   "carried": true
+   "carried": true,
+   "pass": 7
   },
   {
    "row": "C903",
    "screen": "mark_kitchen.pay75",
    "verdict": "PASS",
-   "line": "It goes to ninety once you've paid three hundred.",
-   "why": "\"Sunday\" named only on screens reached through the hub choice gated weekday [6]; on hub only in the sign's locked_text",
+   "line": "It goes to ninety once you've paid three hundred. Four Sundays straight, kid",
+   "why": "\"Sunday\" only on screens reached through the hub choice gated weekday [6]",
    "cause": null,
    "note": false,
    "screen_hash": {
     "text": "77d42862e4942fb3",
-    "facts": "28a1c06aa45c7c10",
-    "all": "14f023e2bcb15dd6"
+    "facts": "5e652ec6e4551af0",
+    "facts2": "7073f340f74f069c",
+    "all": "e3c88a749be646e3"
    },
    "row_hash": "4f83b0b5eb45f71b",
-   "carried": true
+   "carried": true,
+   "pass": 7
   },
   {
    "row": "C903",
    "screen": "mark_kitchen.pay90",
    "verdict": "PASS",
    "line": "A hundred from next week.",
-   "why": "\"Sunday\" named only on screens reached through the hub choice gated weekday [6]; on hub only in the sign's locked_text",
+   "why": "\"Sunday\" only on screens reached through the hub choice gated weekday [6]",
    "cause": null,
    "note": false,
    "screen_hash": {
     "text": "bcecc52dc17ed0c8",
-    "facts": "28a1c06aa45c7c10",
-    "all": "e5615da390e01e94"
+    "facts": "5e652ec6e4551af0",
+    "facts2": "7073f340f74f069c",
+    "all": "04931744b776fc09"
    },
    "row_hash": "4f83b0b5eb45f71b",
-   "carried": true
+   "carried": true,
+   "pass": 7
   },
   {
    "row": "C903",
    "screen": "mark_kitchen.short",
    "verdict": "PASS",
-   "line": "Short. Next Sunday, then. Don't make it a habit, kid.",
-   "why": "\"Sunday\" named only on screens reached through the hub choice gated weekday [6]; on hub only in the sign's locked_text",
+   "line": "Mom's cup stops halfway to her mouth, then keeps going.",
+   "why": "\"Sunday\" only on screens reached through the hub choice gated weekday [6]",
    "cause": null,
    "note": false,
    "screen_hash": {
     "text": "8b071b6a2ddd72aa",
-    "facts": "61d8c9e46a55fe43",
-    "all": "9a5950d751ae9362"
+    "facts": "bc7f8aaaf6a4f505",
+    "facts2": "796eee3dad582482",
+    "all": "6453ab1af862f835"
    },
    "row_hash": "4f83b0b5eb45f71b",
-   "carried": true
+   "carried": true,
+   "pass": 7
   },
   {
    "row": "C903",
@@ -9875,208 +10000,229 @@
    "note": false,
    "screen_hash": {
     "text": "fe35e365dcfda4ec",
-    "facts": "5c487ebd2d9b7450",
-    "all": "5ea0b30f44a52e78"
+    "facts": "811544dad8de125f",
+    "facts2": "57f3c2e33f3edc83",
+    "all": "49da2ec68f166d6c"
    },
    "row_hash": "4f83b0b5eb45f71b",
    "carried": true,
-   "pass": 4
+   "pass": 7
   },
   {
    "row": "C906",
    "screen": "mark_kitchen.hub",
    "verdict": "PASS",
-   "line": "Pay the rent (5 min)",
-   "why": "no 'till' promise",
+   "line": "Pay the rent \u2014 Mark collects on Sundays, 8 to 11:55am, at the kitchen table.",
+   "why": "no duration or energy on a label; the greyed line's hours are the clock-shut row publishing them (C913)",
    "cause": null,
    "note": true,
    "screen_hash": {
-    "text": "50e54206a4f37eae",
-    "facts": "f5ba735a7dad78d5",
-    "all": "117535292b23a443"
+    "text": "cebee1bac30c4ca9",
+    "facts": "e8065fe0f1b995c1",
+    "facts2": "8ff6682bbd8fcf1c",
+    "all": "a6f6a2b85d23b3a2"
    },
-   "row_hash": "ce3b42a8c86da5b8",
+   "row_hash": "71713a7e7ae739e7",
    "carried": true,
-   "pass": 2
+   "pass": 7
   },
   {
    "row": "C906",
    "screen": "mark_kitchen.pay100",
    "verdict": "PASS",
-   "line": "All there. Same time next Sunday.",
-   "why": "no \"till\" promise",
+   "line": "Done",
+   "why": "no time, duration or energy on the label",
    "cause": null,
    "note": true,
    "screen_hash": {
     "text": "9562246c2be111d9",
-    "facts": "28a1c06aa45c7c10",
-    "all": "454cb66c384d356c"
+    "facts": "5e652ec6e4551af0",
+    "facts2": "7073f340f74f069c",
+    "all": "04bd193bb19a845c"
    },
-   "row_hash": "ce3b42a8c86da5b8",
-   "carried": true
+   "row_hash": "71713a7e7ae739e7",
+   "carried": true,
+   "pass": 7
   },
   {
    "row": "C906",
    "screen": "mark_kitchen.pay75",
    "verdict": "PASS",
-   "line": "It goes to ninety once you've paid three hundred.",
-   "why": "no \"till\" promise",
+   "line": "Done",
+   "why": "no time, duration or energy on the label",
    "cause": null,
    "note": true,
    "screen_hash": {
     "text": "77d42862e4942fb3",
-    "facts": "28a1c06aa45c7c10",
-    "all": "14f023e2bcb15dd6"
+    "facts": "5e652ec6e4551af0",
+    "facts2": "7073f340f74f069c",
+    "all": "e3c88a749be646e3"
    },
-   "row_hash": "ce3b42a8c86da5b8",
-   "carried": true
+   "row_hash": "71713a7e7ae739e7",
+   "carried": true,
+   "pass": 7
   },
   {
    "row": "C906",
    "screen": "mark_kitchen.pay90",
    "verdict": "PASS",
-   "line": "A hundred from next week.",
-   "why": "no \"till\" promise",
+   "line": "Done",
+   "why": "no time, duration or energy on the label",
    "cause": null,
    "note": true,
    "screen_hash": {
     "text": "bcecc52dc17ed0c8",
-    "facts": "28a1c06aa45c7c10",
-    "all": "e5615da390e01e94"
+    "facts": "5e652ec6e4551af0",
+    "facts2": "7073f340f74f069c",
+    "all": "04931744b776fc09"
    },
-   "row_hash": "ce3b42a8c86da5b8",
-   "carried": true
+   "row_hash": "71713a7e7ae739e7",
+   "carried": true,
+   "pass": 7
   },
   {
    "row": "C906",
    "screen": "mark_kitchen.short",
    "verdict": "PASS",
-   "line": "Short. Next Sunday, then. Don't make it a habit, kid.",
-   "why": "no \"till\" promise",
+   "line": "Done",
+   "why": "no time, duration or energy on the label",
    "cause": null,
    "note": true,
    "screen_hash": {
     "text": "8b071b6a2ddd72aa",
-    "facts": "61d8c9e46a55fe43",
-    "all": "9a5950d751ae9362"
+    "facts": "bc7f8aaaf6a4f505",
+    "facts2": "796eee3dad582482",
+    "all": "6453ab1af862f835"
    },
-   "row_hash": "ce3b42a8c86da5b8",
-   "carried": true
+   "row_hash": "71713a7e7ae739e7",
+   "carried": true,
+   "pass": 7
   },
   {
    "row": "C906",
    "screen": "mark_kitchen.talk",
    "verdict": "PASS",
-   "line": "",
-   "why": "no 'till' promise",
+   "line": "Done",
+   "why": "no time, duration or energy on the label",
    "cause": null,
    "note": true,
    "screen_hash": {
     "text": "fe35e365dcfda4ec",
-    "facts": "5c487ebd2d9b7450",
-    "all": "5ea0b30f44a52e78"
+    "facts": "811544dad8de125f",
+    "facts2": "57f3c2e33f3edc83",
+    "all": "49da2ec68f166d6c"
    },
-   "row_hash": "ce3b42a8c86da5b8",
+   "row_hash": "71713a7e7ae739e7",
    "carried": true,
-   "pass": 4
+   "pass": 7
   },
   {
    "row": "C910",
    "screen": "mark_kitchen.hub",
    "verdict": "PASS",
-   "line": "Talk (5 min) / Pay the rent (5 min)",
-   "why": "same '(N min)' form as the rest of the game",
+   "line": "Pay the rent \u2014 Mark collects on Sundays, 8 to 11:55am, at the kitchen table.",
+   "why": "no duration or energy on a label; the greyed line's hours are the clock-shut row publishing them (C913)",
    "cause": null,
    "note": true,
    "screen_hash": {
-    "text": "50e54206a4f37eae",
-    "facts": "f5ba735a7dad78d5",
-    "all": "117535292b23a443"
+    "text": "cebee1bac30c4ca9",
+    "facts": "e8065fe0f1b995c1",
+    "facts2": "8ff6682bbd8fcf1c",
+    "all": "a6f6a2b85d23b3a2"
    },
-   "row_hash": "be1c18ee466455f6",
+   "row_hash": "d5a109f1ef88419a",
    "carried": true,
-   "pass": 2
+   "pass": 7
   },
   {
    "row": "C910",
    "screen": "mark_kitchen.pay100",
    "verdict": "PASS",
-   "line": "All there. Same time next Sunday.",
-   "why": "one form \"(5 min)\"; Done spends the menu label's 5 min",
+   "line": "Done",
+   "why": "no time, duration or energy on the label",
    "cause": null,
    "note": true,
    "screen_hash": {
     "text": "9562246c2be111d9",
-    "facts": "28a1c06aa45c7c10",
-    "all": "454cb66c384d356c"
+    "facts": "5e652ec6e4551af0",
+    "facts2": "7073f340f74f069c",
+    "all": "04bd193bb19a845c"
    },
-   "row_hash": "be1c18ee466455f6",
-   "carried": true
+   "row_hash": "d5a109f1ef88419a",
+   "carried": true,
+   "pass": 7
   },
   {
    "row": "C910",
    "screen": "mark_kitchen.pay75",
    "verdict": "PASS",
-   "line": "It goes to ninety once you've paid three hundred.",
-   "why": "one form \"(5 min)\"; Done spends the menu label's 5 min",
+   "line": "Done",
+   "why": "no time, duration or energy on the label",
    "cause": null,
    "note": true,
    "screen_hash": {
     "text": "77d42862e4942fb3",
-    "facts": "28a1c06aa45c7c10",
-    "all": "14f023e2bcb15dd6"
+    "facts": "5e652ec6e4551af0",
+    "facts2": "7073f340f74f069c",
+    "all": "e3c88a749be646e3"
    },
-   "row_hash": "be1c18ee466455f6",
-   "carried": true
+   "row_hash": "d5a109f1ef88419a",
+   "carried": true,
+   "pass": 7
   },
   {
    "row": "C910",
    "screen": "mark_kitchen.pay90",
    "verdict": "PASS",
-   "line": "A hundred from next week.",
-   "why": "one form \"(5 min)\"; Done spends the menu label's 5 min",
+   "line": "Done",
+   "why": "no time, duration or energy on the label",
    "cause": null,
    "note": true,
    "screen_hash": {
     "text": "bcecc52dc17ed0c8",
-    "facts": "28a1c06aa45c7c10",
-    "all": "e5615da390e01e94"
+    "facts": "5e652ec6e4551af0",
+    "facts2": "7073f340f74f069c",
+    "all": "04931744b776fc09"
    },
-   "row_hash": "be1c18ee466455f6",
-   "carried": true
+   "row_hash": "d5a109f1ef88419a",
+   "carried": true,
+   "pass": 7
   },
   {
    "row": "C910",
    "screen": "mark_kitchen.short",
    "verdict": "PASS",
-   "line": "Short. Next Sunday, then. Don't make it a habit, kid.",
-   "why": "one form \"(5 min)\"; Done spends the menu label's 5 min",
+   "line": "Done",
+   "why": "no time, duration or energy on the label",
    "cause": null,
    "note": true,
    "screen_hash": {
     "text": "8b071b6a2ddd72aa",
-    "facts": "61d8c9e46a55fe43",
-    "all": "9a5950d751ae9362"
+    "facts": "bc7f8aaaf6a4f505",
+    "facts2": "796eee3dad582482",
+    "all": "6453ab1af862f835"
    },
-   "row_hash": "be1c18ee466455f6",
-   "carried": true
+   "row_hash": "d5a109f1ef88419a",
+   "carried": true,
+   "pass": 7
   },
   {
    "row": "C910",
    "screen": "mark_kitchen.talk",
    "verdict": "PASS",
-   "line": "Talk (5 min)",
-   "why": "the time is said on the Talk button, same '(5 min)' form as the game; Done is the only exit",
+   "line": "Done",
+   "why": "no time, duration or energy on the label",
    "cause": null,
    "note": true,
    "screen_hash": {
     "text": "fe35e365dcfda4ec",
-    "facts": "5c487ebd2d9b7450",
-    "all": "5ea0b30f44a52e78"
+    "facts": "811544dad8de125f",
+    "facts2": "57f3c2e33f3edc83",
+    "all": "49da2ec68f166d6c"
    },
-   "row_hash": "be1c18ee466455f6",
+   "row_hash": "d5a109f1ef88419a",
    "carried": true,
-   "pass": 4
+   "pass": 7
   },
   {
    "row": "C913",
@@ -10100,81 +10246,90 @@
    "screen": "mark_kitchen.pay100",
    "verdict": "N/A",
    "line": "All there. Same time next Sunday.",
-   "why": "no row with hours on this screen",
+   "why": "no hours or travel on this screen",
    "cause": null,
    "note": false,
    "screen_hash": {
     "text": "9562246c2be111d9",
-    "facts": "28a1c06aa45c7c10",
-    "all": "454cb66c384d356c"
+    "facts": "5e652ec6e4551af0",
+    "facts2": "7073f340f74f069c",
+    "all": "04bd193bb19a845c"
    },
    "row_hash": "c750f9b6ab4ace14",
-   "carried": true
+   "carried": true,
+   "pass": 7
   },
   {
    "row": "C913",
    "screen": "mark_kitchen.pay75",
    "verdict": "N/A",
-   "line": "It goes to ninety once you've paid three hundred.",
-   "why": "no row with hours on this screen",
+   "line": "It goes to ninety once you've paid three hundred. Four Sundays straight, kid",
+   "why": "no hours or travel on this screen",
    "cause": null,
    "note": false,
    "screen_hash": {
     "text": "77d42862e4942fb3",
-    "facts": "28a1c06aa45c7c10",
-    "all": "14f023e2bcb15dd6"
+    "facts": "5e652ec6e4551af0",
+    "facts2": "7073f340f74f069c",
+    "all": "e3c88a749be646e3"
    },
    "row_hash": "c750f9b6ab4ace14",
-   "carried": true
+   "carried": true,
+   "pass": 7
   },
   {
    "row": "C913",
    "screen": "mark_kitchen.pay90",
    "verdict": "N/A",
    "line": "A hundred from next week.",
-   "why": "no row with hours on this screen",
+   "why": "no hours or travel on this screen",
    "cause": null,
    "note": false,
    "screen_hash": {
     "text": "bcecc52dc17ed0c8",
-    "facts": "28a1c06aa45c7c10",
-    "all": "e5615da390e01e94"
+    "facts": "5e652ec6e4551af0",
+    "facts2": "7073f340f74f069c",
+    "all": "04931744b776fc09"
    },
    "row_hash": "c750f9b6ab4ace14",
-   "carried": true
+   "carried": true,
+   "pass": 7
   },
   {
    "row": "C913",
    "screen": "mark_kitchen.short",
    "verdict": "N/A",
-   "line": "Short. Next Sunday, then. Don't make it a habit, kid.",
-   "why": "no row with hours on this screen",
+   "line": "Mom's cup stops halfway to her mouth, then keeps going.",
+   "why": "no hours or travel on this screen",
    "cause": null,
    "note": false,
    "screen_hash": {
     "text": "8b071b6a2ddd72aa",
-    "facts": "61d8c9e46a55fe43",
-    "all": "9a5950d751ae9362"
+    "facts": "bc7f8aaaf6a4f505",
+    "facts2": "796eee3dad582482",
+    "all": "6453ab1af862f835"
    },
    "row_hash": "c750f9b6ab4ace14",
-   "carried": true
+   "carried": true,
+   "pass": 7
   },
   {
    "row": "C913",
    "screen": "mark_kitchen.talk",
    "verdict": "N/A",
-   "line": "",
-   "why": "talk has no hours of its own; its lock is the daily flag",
+   "line": "You working, kid? Rent doesn't wait. And don't spend it all on coffee.",
+   "why": "no hours or travel on this screen",
    "cause": null,
    "note": false,
    "screen_hash": {
     "text": "fe35e365dcfda4ec",
-    "facts": "5c487ebd2d9b7450",
-    "all": "5ea0b30f44a52e78"
+    "facts": "811544dad8de125f",
+    "facts2": "57f3c2e33f3edc83",
+    "all": "49da2ec68f166d6c"
    },
    "row_hash": "c750f9b6ab4ace14",
    "carried": true,
-   "pass": 4
+   "pass": 7
   },
   {
    "row": "C914",
@@ -10198,81 +10353,90 @@
    "screen": "mark_kitchen.pay100",
    "verdict": "N/A",
    "line": "All there. Same time next Sunday.",
-   "why": "no row with hours on this screen",
+   "why": "no hours or travel on this screen",
    "cause": null,
    "note": false,
    "screen_hash": {
     "text": "9562246c2be111d9",
-    "facts": "28a1c06aa45c7c10",
-    "all": "454cb66c384d356c"
+    "facts": "5e652ec6e4551af0",
+    "facts2": "7073f340f74f069c",
+    "all": "04bd193bb19a845c"
    },
    "row_hash": "bd07273d5822f34f",
-   "carried": true
+   "carried": true,
+   "pass": 7
   },
   {
    "row": "C914",
    "screen": "mark_kitchen.pay75",
    "verdict": "N/A",
-   "line": "It goes to ninety once you've paid three hundred.",
-   "why": "no row with hours on this screen",
+   "line": "It goes to ninety once you've paid three hundred. Four Sundays straight, kid",
+   "why": "no hours or travel on this screen",
    "cause": null,
    "note": false,
    "screen_hash": {
     "text": "77d42862e4942fb3",
-    "facts": "28a1c06aa45c7c10",
-    "all": "14f023e2bcb15dd6"
+    "facts": "5e652ec6e4551af0",
+    "facts2": "7073f340f74f069c",
+    "all": "e3c88a749be646e3"
    },
    "row_hash": "bd07273d5822f34f",
-   "carried": true
+   "carried": true,
+   "pass": 7
   },
   {
    "row": "C914",
    "screen": "mark_kitchen.pay90",
    "verdict": "N/A",
    "line": "A hundred from next week.",
-   "why": "no row with hours on this screen",
+   "why": "no hours or travel on this screen",
    "cause": null,
    "note": false,
    "screen_hash": {
     "text": "bcecc52dc17ed0c8",
-    "facts": "28a1c06aa45c7c10",
-    "all": "e5615da390e01e94"
+    "facts": "5e652ec6e4551af0",
+    "facts2": "7073f340f74f069c",
+    "all": "04931744b776fc09"
    },
    "row_hash": "bd07273d5822f34f",
-   "carried": true
+   "carried": true,
+   "pass": 7
   },
   {
    "row": "C914",
    "screen": "mark_kitchen.short",
    "verdict": "N/A",
-   "line": "Short. Next Sunday, then. Don't make it a habit, kid.",
-   "why": "no row with hours on this screen",
+   "line": "Mom's cup stops halfway to her mouth, then keeps going.",
+   "why": "no hours or travel on this screen",
    "cause": null,
    "note": false,
    "screen_hash": {
     "text": "8b071b6a2ddd72aa",
-    "facts": "61d8c9e46a55fe43",
-    "all": "9a5950d751ae9362"
+    "facts": "bc7f8aaaf6a4f505",
+    "facts2": "796eee3dad582482",
+    "all": "6453ab1af862f835"
    },
    "row_hash": "bd07273d5822f34f",
-   "carried": true
+   "carried": true,
+   "pass": 7
   },
   {
    "row": "C914",
    "screen": "mark_kitchen.talk",
-   "verdict": "PASS",
-   "line": "Talk (5 min) \u2014 you've already talked today.",
-   "why": "flag lock, so no hours shown",
+   "verdict": "N/A",
+   "line": "You working, kid? Rent doesn't wait. And don't spend it all on coffee.",
+   "why": "no hours or travel on this screen",
    "cause": null,
    "note": false,
    "screen_hash": {
     "text": "fe35e365dcfda4ec",
-    "facts": "5c487ebd2d9b7450",
-    "all": "5ea0b30f44a52e78"
+    "facts": "811544dad8de125f",
+    "facts2": "57f3c2e33f3edc83",
+    "all": "49da2ec68f166d6c"
    },
    "row_hash": "bd07273d5822f34f",
    "carried": true,
-   "pass": 4
+   "pass": 7
   },
   {
    "row": "C916",
@@ -10296,179 +10460,198 @@
    "screen": "mark_kitchen.pay100",
    "verdict": "N/A",
    "line": "All there. Same time next Sunday.",
-   "why": "no row with hours on this screen",
+   "why": "no hours or travel on this screen",
    "cause": null,
    "note": false,
    "screen_hash": {
     "text": "9562246c2be111d9",
-    "facts": "28a1c06aa45c7c10",
-    "all": "454cb66c384d356c"
+    "facts": "5e652ec6e4551af0",
+    "facts2": "7073f340f74f069c",
+    "all": "04bd193bb19a845c"
    },
    "row_hash": "7b2bb0dfdbcfe946",
-   "carried": true
+   "carried": true,
+   "pass": 7
   },
   {
    "row": "C916",
    "screen": "mark_kitchen.pay75",
    "verdict": "N/A",
-   "line": "It goes to ninety once you've paid three hundred.",
-   "why": "no row with hours on this screen",
+   "line": "It goes to ninety once you've paid three hundred. Four Sundays straight, kid",
+   "why": "no hours or travel on this screen",
    "cause": null,
    "note": false,
    "screen_hash": {
     "text": "77d42862e4942fb3",
-    "facts": "28a1c06aa45c7c10",
-    "all": "14f023e2bcb15dd6"
+    "facts": "5e652ec6e4551af0",
+    "facts2": "7073f340f74f069c",
+    "all": "e3c88a749be646e3"
    },
    "row_hash": "7b2bb0dfdbcfe946",
-   "carried": true
+   "carried": true,
+   "pass": 7
   },
   {
    "row": "C916",
    "screen": "mark_kitchen.pay90",
    "verdict": "N/A",
    "line": "A hundred from next week.",
-   "why": "no row with hours on this screen",
+   "why": "no hours or travel on this screen",
    "cause": null,
    "note": false,
    "screen_hash": {
     "text": "bcecc52dc17ed0c8",
-    "facts": "28a1c06aa45c7c10",
-    "all": "e5615da390e01e94"
+    "facts": "5e652ec6e4551af0",
+    "facts2": "7073f340f74f069c",
+    "all": "04931744b776fc09"
    },
    "row_hash": "7b2bb0dfdbcfe946",
-   "carried": true
+   "carried": true,
+   "pass": 7
   },
   {
    "row": "C916",
    "screen": "mark_kitchen.short",
    "verdict": "N/A",
-   "line": "Short. Next Sunday, then. Don't make it a habit, kid.",
-   "why": "no row with hours on this screen",
+   "line": "Mom's cup stops halfway to her mouth, then keeps going.",
+   "why": "no hours or travel on this screen",
    "cause": null,
    "note": false,
    "screen_hash": {
     "text": "8b071b6a2ddd72aa",
-    "facts": "61d8c9e46a55fe43",
-    "all": "9a5950d751ae9362"
+    "facts": "bc7f8aaaf6a4f505",
+    "facts2": "796eee3dad582482",
+    "all": "6453ab1af862f835"
    },
    "row_hash": "7b2bb0dfdbcfe946",
-   "carried": true
+   "carried": true,
+   "pass": 7
   },
   {
    "row": "C916",
    "screen": "mark_kitchen.talk",
    "verdict": "N/A",
-   "line": "",
-   "why": "no event with hours here",
+   "line": "You working, kid? Rent doesn't wait. And don't spend it all on coffee.",
+   "why": "no hours or travel on this screen",
    "cause": null,
    "note": false,
    "screen_hash": {
     "text": "fe35e365dcfda4ec",
-    "facts": "5c487ebd2d9b7450",
-    "all": "5ea0b30f44a52e78"
+    "facts": "811544dad8de125f",
+    "facts2": "57f3c2e33f3edc83",
+    "all": "49da2ec68f166d6c"
    },
    "row_hash": "7b2bb0dfdbcfe946",
    "carried": true,
-   "pass": 4
+   "pass": 7
   },
   {
    "row": "C920",
    "screen": "mark_kitchen.hub",
    "verdict": "PASS",
-   "line": "Leave (0 min, back to home_kitchen)",
-   "why": "no move between rooms here; returning to the same room costs nothing extra",
+   "line": "Leave",
+   "why": "no hop: Leave and Done return to the same kitchen",
    "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "50e54206a4f37eae",
-    "facts": "f5ba735a7dad78d5",
-    "all": "117535292b23a443"
+    "text": "cebee1bac30c4ca9",
+    "facts": "e8065fe0f1b995c1",
+    "facts2": "8ff6682bbd8fcf1c",
+    "all": "a6f6a2b85d23b3a2"
    },
-   "row_hash": "695dc5d9d0e5e749",
+   "row_hash": "513927dd127fca04",
    "carried": true,
-   "pass": 2
+   "pass": 7
   },
   {
    "row": "C920",
    "screen": "mark_kitchen.pay100",
    "verdict": "N/A",
    "line": "All there. Same time next Sunday.",
-   "why": "no move between places; Leave and Done return to the same Kitchen",
+   "why": "no move between places",
    "cause": null,
    "note": false,
    "screen_hash": {
     "text": "9562246c2be111d9",
-    "facts": "28a1c06aa45c7c10",
-    "all": "454cb66c384d356c"
+    "facts": "5e652ec6e4551af0",
+    "facts2": "7073f340f74f069c",
+    "all": "04bd193bb19a845c"
    },
-   "row_hash": "695dc5d9d0e5e749",
-   "carried": true
+   "row_hash": "513927dd127fca04",
+   "carried": true,
+   "pass": 7
   },
   {
    "row": "C920",
    "screen": "mark_kitchen.pay75",
    "verdict": "N/A",
-   "line": "It goes to ninety once you've paid three hundred.",
-   "why": "no move between places; Leave and Done return to the same Kitchen",
+   "line": "It goes to ninety once you've paid three hundred. Four Sundays straight, kid",
+   "why": "no move between places",
    "cause": null,
    "note": false,
    "screen_hash": {
     "text": "77d42862e4942fb3",
-    "facts": "28a1c06aa45c7c10",
-    "all": "14f023e2bcb15dd6"
+    "facts": "5e652ec6e4551af0",
+    "facts2": "7073f340f74f069c",
+    "all": "e3c88a749be646e3"
    },
-   "row_hash": "695dc5d9d0e5e749",
-   "carried": true
+   "row_hash": "513927dd127fca04",
+   "carried": true,
+   "pass": 7
   },
   {
    "row": "C920",
    "screen": "mark_kitchen.pay90",
    "verdict": "N/A",
    "line": "A hundred from next week.",
-   "why": "no move between places; Leave and Done return to the same Kitchen",
+   "why": "no move between places",
    "cause": null,
    "note": false,
    "screen_hash": {
     "text": "bcecc52dc17ed0c8",
-    "facts": "28a1c06aa45c7c10",
-    "all": "e5615da390e01e94"
+    "facts": "5e652ec6e4551af0",
+    "facts2": "7073f340f74f069c",
+    "all": "04931744b776fc09"
    },
-   "row_hash": "695dc5d9d0e5e749",
-   "carried": true
+   "row_hash": "513927dd127fca04",
+   "carried": true,
+   "pass": 7
   },
   {
    "row": "C920",
    "screen": "mark_kitchen.short",
    "verdict": "N/A",
-   "line": "Short. Next Sunday, then. Don't make it a habit, kid.",
-   "why": "no move between places; Leave and Done return to the same Kitchen",
+   "line": "Mom's cup stops halfway to her mouth, then keeps going.",
+   "why": "no move between places",
    "cause": null,
    "note": false,
    "screen_hash": {
     "text": "8b071b6a2ddd72aa",
-    "facts": "61d8c9e46a55fe43",
-    "all": "9a5950d751ae9362"
+    "facts": "bc7f8aaaf6a4f505",
+    "facts2": "796eee3dad582482",
+    "all": "6453ab1af862f835"
    },
-   "row_hash": "695dc5d9d0e5e749",
-   "carried": true
+   "row_hash": "513927dd127fca04",
+   "carried": true,
+   "pass": 7
   },
   {
    "row": "C920",
    "screen": "mark_kitchen.talk",
    "verdict": "PASS",
-   "line": "Done",
-   "why": "back to the same room, 5 min",
+   "line": "Leave",
+   "why": "no hop: Leave and Done return to the same kitchen",
    "cause": null,
    "note": false,
    "screen_hash": {
     "text": "fe35e365dcfda4ec",
-    "facts": "5c487ebd2d9b7450",
-    "all": "5ea0b30f44a52e78"
+    "facts": "811544dad8de125f",
+    "facts2": "57f3c2e33f3edc83",
+    "all": "49da2ec68f166d6c"
    },
-   "row_hash": "695dc5d9d0e5e749",
+   "row_hash": "513927dd127fca04",
    "carried": true,
-   "pass": 4
+   "pass": 7
   },
   {
    "row": "C924",
@@ -10492,81 +10675,90 @@
    "screen": "mark_kitchen.pay100",
    "verdict": "N/A",
    "line": "All there. Same time next Sunday.",
-   "why": "no move between places; Leave and Done return to the same Kitchen",
+   "why": "no hours or travel on this screen",
    "cause": null,
    "note": true,
    "screen_hash": {
     "text": "9562246c2be111d9",
-    "facts": "28a1c06aa45c7c10",
-    "all": "454cb66c384d356c"
+    "facts": "5e652ec6e4551af0",
+    "facts2": "7073f340f74f069c",
+    "all": "04bd193bb19a845c"
    },
    "row_hash": "791cd173e23fb130",
-   "carried": true
+   "carried": true,
+   "pass": 7
   },
   {
    "row": "C924",
    "screen": "mark_kitchen.pay75",
    "verdict": "N/A",
-   "line": "It goes to ninety once you've paid three hundred.",
-   "why": "no move between places; Leave and Done return to the same Kitchen",
+   "line": "It goes to ninety once you've paid three hundred. Four Sundays straight, kid",
+   "why": "no hours or travel on this screen",
    "cause": null,
    "note": true,
    "screen_hash": {
     "text": "77d42862e4942fb3",
-    "facts": "28a1c06aa45c7c10",
-    "all": "14f023e2bcb15dd6"
+    "facts": "5e652ec6e4551af0",
+    "facts2": "7073f340f74f069c",
+    "all": "e3c88a749be646e3"
    },
    "row_hash": "791cd173e23fb130",
-   "carried": true
+   "carried": true,
+   "pass": 7
   },
   {
    "row": "C924",
    "screen": "mark_kitchen.pay90",
    "verdict": "N/A",
    "line": "A hundred from next week.",
-   "why": "no move between places; Leave and Done return to the same Kitchen",
+   "why": "no hours or travel on this screen",
    "cause": null,
    "note": true,
    "screen_hash": {
     "text": "bcecc52dc17ed0c8",
-    "facts": "28a1c06aa45c7c10",
-    "all": "e5615da390e01e94"
+    "facts": "5e652ec6e4551af0",
+    "facts2": "7073f340f74f069c",
+    "all": "04931744b776fc09"
    },
    "row_hash": "791cd173e23fb130",
-   "carried": true
+   "carried": true,
+   "pass": 7
   },
   {
    "row": "C924",
    "screen": "mark_kitchen.short",
    "verdict": "N/A",
-   "line": "Short. Next Sunday, then. Don't make it a habit, kid.",
-   "why": "no move between places; Leave and Done return to the same Kitchen",
+   "line": "Mom's cup stops halfway to her mouth, then keeps going.",
+   "why": "no hours or travel on this screen",
    "cause": null,
    "note": true,
    "screen_hash": {
     "text": "8b071b6a2ddd72aa",
-    "facts": "61d8c9e46a55fe43",
-    "all": "9a5950d751ae9362"
+    "facts": "bc7f8aaaf6a4f505",
+    "facts2": "796eee3dad582482",
+    "all": "6453ab1af862f835"
    },
    "row_hash": "791cd173e23fb130",
-   "carried": true
+   "carried": true,
+   "pass": 7
   },
   {
    "row": "C924",
    "screen": "mark_kitchen.talk",
    "verdict": "N/A",
-   "line": "",
-   "why": "no travel",
+   "line": "You working, kid? Rent doesn't wait. And don't spend it all on coffee.",
+   "why": "no hours or travel on this screen",
    "cause": null,
    "note": true,
    "screen_hash": {
     "text": "fe35e365dcfda4ec",
-    "facts": "5c487ebd2d9b7450",
-    "all": "5ea0b30f44a52e78"
+    "facts": "811544dad8de125f",
+    "facts2": "57f3c2e33f3edc83",
+    "all": "49da2ec68f166d6c"
    },
    "row_hash": "791cd173e23fb130",
    "carried": true,
-   "pass": 4
+   "pass": 7
   },
   {
    "row": "C926",
@@ -10590,180 +10782,198 @@
    "screen": "mark_kitchen.pay100",
    "verdict": "PASS",
    "line": "All there. Same time next Sunday.",
-   "why": "time moves only by time_progression_minutes",
+   "why": "minutes only; no clock printed",
    "cause": null,
    "note": true,
    "screen_hash": {
     "text": "9562246c2be111d9",
-    "facts": "28a1c06aa45c7c10",
-    "all": "454cb66c384d356c"
+    "facts": "5e652ec6e4551af0",
+    "facts2": "7073f340f74f069c",
+    "all": "04bd193bb19a845c"
    },
    "row_hash": "177d1e1776fac74b",
-   "carried": true
+   "carried": true,
+   "pass": 7
   },
   {
    "row": "C926",
    "screen": "mark_kitchen.pay75",
    "verdict": "PASS",
-   "line": "It goes to ninety once you've paid three hundred.",
-   "why": "time moves only by time_progression_minutes",
+   "line": "It goes to ninety once you've paid three hundred. Four Sundays straight, kid",
+   "why": "minutes only; no clock printed",
    "cause": null,
    "note": true,
    "screen_hash": {
     "text": "77d42862e4942fb3",
-    "facts": "28a1c06aa45c7c10",
-    "all": "14f023e2bcb15dd6"
+    "facts": "5e652ec6e4551af0",
+    "facts2": "7073f340f74f069c",
+    "all": "e3c88a749be646e3"
    },
    "row_hash": "177d1e1776fac74b",
-   "carried": true
+   "carried": true,
+   "pass": 7
   },
   {
    "row": "C926",
    "screen": "mark_kitchen.pay90",
    "verdict": "PASS",
    "line": "A hundred from next week.",
-   "why": "time moves only by time_progression_minutes",
+   "why": "minutes only; no clock printed",
    "cause": null,
    "note": true,
    "screen_hash": {
     "text": "bcecc52dc17ed0c8",
-    "facts": "28a1c06aa45c7c10",
-    "all": "e5615da390e01e94"
+    "facts": "5e652ec6e4551af0",
+    "facts2": "7073f340f74f069c",
+    "all": "04931744b776fc09"
    },
    "row_hash": "177d1e1776fac74b",
-   "carried": true
+   "carried": true,
+   "pass": 7
   },
   {
    "row": "C926",
    "screen": "mark_kitchen.short",
    "verdict": "PASS",
-   "line": "Short. Next Sunday, then. Don't make it a habit, kid.",
-   "why": "time moves only by time_progression_minutes",
+   "line": "Mom's cup stops halfway to her mouth, then keeps going.",
+   "why": "minutes only; no clock printed",
    "cause": null,
    "note": true,
    "screen_hash": {
     "text": "8b071b6a2ddd72aa",
-    "facts": "61d8c9e46a55fe43",
-    "all": "9a5950d751ae9362"
+    "facts": "bc7f8aaaf6a4f505",
+    "facts2": "796eee3dad582482",
+    "all": "6453ab1af862f835"
    },
    "row_hash": "177d1e1776fac74b",
-   "carried": true
+   "carried": true,
+   "pass": 7
   },
   {
    "row": "C926",
    "screen": "mark_kitchen.talk",
    "verdict": "PASS",
-   "line": "",
-   "why": "clock moves by 5 minutes only",
+   "line": "You working, kid? Rent doesn't wait. And don't spend it all on coffee.",
+   "why": "minutes only; no clock printed",
    "cause": null,
    "note": true,
    "screen_hash": {
     "text": "fe35e365dcfda4ec",
-    "facts": "5c487ebd2d9b7450",
-    "all": "5ea0b30f44a52e78"
+    "facts": "811544dad8de125f",
+    "facts2": "57f3c2e33f3edc83",
+    "all": "49da2ec68f166d6c"
    },
    "row_hash": "177d1e1776fac74b",
    "carried": true,
-   "pass": 4
+   "pass": 7
   },
   {
    "row": "C927",
    "screen": "mark_kitchen.hub",
    "verdict": "PASS",
-   "line": "Leave (time_progression_minutes = 0)",
-   "why": "Every hub exit sets its time explicitly (Talk 0 then 5 on Done, rent 0 then 5 on Leave/Done, Leave 0), so the 3-minute default (v2.py:17947) never applies unseen.",
+   "line": "Mark's at the table with his coffee. He looks at you over the rim.",
+   "why": "every exit carries its minutes",
    "cause": null,
    "note": true,
    "screen_hash": {
-    "text": "22073abffbe6a4c9",
-    "facts": "b86e64e1dbfb6357",
-    "facts2": "9a97305cf61feadd",
-    "all": "e74f73f06946b013"
+    "text": "cebee1bac30c4ca9",
+    "facts": "e8065fe0f1b995c1",
+    "facts2": "8ff6682bbd8fcf1c",
+    "all": "a6f6a2b85d23b3a2"
    },
    "row_hash": "4e86d143688ba8e5",
-   "carried": false,
-   "pass": 6
+   "carried": true,
+   "pass": 7
   },
   {
    "row": "C927",
    "screen": "mark_kitchen.pay100",
-   "verdict": "N/A",
+   "verdict": "PASS",
    "line": "All there. Same time next Sunday.",
-   "why": "no exit to another place; Leave/Done land in the Kitchen it's in",
+   "why": "every exit carries its minutes",
    "cause": null,
    "note": true,
    "screen_hash": {
     "text": "9562246c2be111d9",
-    "facts": "28a1c06aa45c7c10",
-    "all": "454cb66c384d356c"
+    "facts": "5e652ec6e4551af0",
+    "facts2": "7073f340f74f069c",
+    "all": "04bd193bb19a845c"
    },
    "row_hash": "4e86d143688ba8e5",
-   "carried": true
+   "carried": true,
+   "pass": 7
   },
   {
    "row": "C927",
    "screen": "mark_kitchen.pay75",
-   "verdict": "N/A",
-   "line": "It goes to ninety once you've paid three hundred.",
-   "why": "no exit to another place; Leave/Done land in the Kitchen it's in",
+   "verdict": "PASS",
+   "line": "It goes to ninety once you've paid three hundred. Four Sundays straight, kid",
+   "why": "every exit carries its minutes",
    "cause": null,
    "note": true,
    "screen_hash": {
     "text": "77d42862e4942fb3",
-    "facts": "28a1c06aa45c7c10",
-    "all": "14f023e2bcb15dd6"
+    "facts": "5e652ec6e4551af0",
+    "facts2": "7073f340f74f069c",
+    "all": "e3c88a749be646e3"
    },
    "row_hash": "4e86d143688ba8e5",
-   "carried": true
+   "carried": true,
+   "pass": 7
   },
   {
    "row": "C927",
    "screen": "mark_kitchen.pay90",
-   "verdict": "N/A",
+   "verdict": "PASS",
    "line": "A hundred from next week.",
-   "why": "no exit to another place; Leave/Done land in the Kitchen it's in",
+   "why": "every exit carries its minutes",
    "cause": null,
    "note": true,
    "screen_hash": {
     "text": "bcecc52dc17ed0c8",
-    "facts": "28a1c06aa45c7c10",
-    "all": "e5615da390e01e94"
+    "facts": "5e652ec6e4551af0",
+    "facts2": "7073f340f74f069c",
+    "all": "04931744b776fc09"
    },
    "row_hash": "4e86d143688ba8e5",
-   "carried": true
+   "carried": true,
+   "pass": 7
   },
   {
    "row": "C927",
    "screen": "mark_kitchen.short",
-   "verdict": "N/A",
-   "line": "Short. Next Sunday, then. Don't make it a habit, kid.",
-   "why": "no exit to another place; Leave/Done land in the Kitchen it's in",
+   "verdict": "PASS",
+   "line": "Mom's cup stops halfway to her mouth, then keeps going.",
+   "why": "every exit carries its minutes",
    "cause": null,
    "note": true,
    "screen_hash": {
     "text": "8b071b6a2ddd72aa",
-    "facts": "61d8c9e46a55fe43",
-    "all": "9a5950d751ae9362"
+    "facts": "bc7f8aaaf6a4f505",
+    "facts2": "796eee3dad582482",
+    "all": "6453ab1af862f835"
    },
    "row_hash": "4e86d143688ba8e5",
-   "carried": true
+   "carried": true,
+   "pass": 7
   },
   {
    "row": "C927",
    "screen": "mark_kitchen.talk",
    "verdict": "PASS",
-   "line": "Done",
-   "why": "exit carries 5 minutes",
+   "line": "You working, kid? Rent doesn't wait. And don't spend it all on coffee.",
+   "why": "every exit carries its minutes",
    "cause": null,
    "note": true,
    "screen_hash": {
     "text": "fe35e365dcfda4ec",
-    "facts": "5c487ebd2d9b7450",
-    "all": "5ea0b30f44a52e78"
+    "facts": "811544dad8de125f",
+    "facts2": "57f3c2e33f3edc83",
+    "all": "49da2ec68f166d6c"
    },
    "row_hash": "4e86d143688ba8e5",
    "carried": true,
-   "pass": 4
+   "pass": 7
   },
   {
    "row": "C928",
@@ -10787,179 +10997,198 @@
    "screen": "mark_kitchen.pay100",
    "verdict": "PASS",
    "line": "All there. Same time next Sunday.",
-   "why": "no clock in prose",
+   "why": "minutes only; no clock printed",
    "cause": null,
    "note": false,
    "screen_hash": {
     "text": "9562246c2be111d9",
-    "facts": "28a1c06aa45c7c10",
-    "all": "454cb66c384d356c"
+    "facts": "5e652ec6e4551af0",
+    "facts2": "7073f340f74f069c",
+    "all": "04bd193bb19a845c"
    },
    "row_hash": "2c3ccc6bd9929d7f",
-   "carried": true
+   "carried": true,
+   "pass": 7
   },
   {
    "row": "C928",
    "screen": "mark_kitchen.pay75",
    "verdict": "PASS",
-   "line": "It goes to ninety once you've paid three hundred.",
-   "why": "no clock in prose",
+   "line": "It goes to ninety once you've paid three hundred. Four Sundays straight, kid",
+   "why": "minutes only; no clock printed",
    "cause": null,
    "note": false,
    "screen_hash": {
     "text": "77d42862e4942fb3",
-    "facts": "28a1c06aa45c7c10",
-    "all": "14f023e2bcb15dd6"
+    "facts": "5e652ec6e4551af0",
+    "facts2": "7073f340f74f069c",
+    "all": "e3c88a749be646e3"
    },
    "row_hash": "2c3ccc6bd9929d7f",
-   "carried": true
+   "carried": true,
+   "pass": 7
   },
   {
    "row": "C928",
    "screen": "mark_kitchen.pay90",
    "verdict": "PASS",
    "line": "A hundred from next week.",
-   "why": "no clock in prose",
+   "why": "minutes only; no clock printed",
    "cause": null,
    "note": false,
    "screen_hash": {
     "text": "bcecc52dc17ed0c8",
-    "facts": "28a1c06aa45c7c10",
-    "all": "e5615da390e01e94"
+    "facts": "5e652ec6e4551af0",
+    "facts2": "7073f340f74f069c",
+    "all": "04931744b776fc09"
    },
    "row_hash": "2c3ccc6bd9929d7f",
-   "carried": true
+   "carried": true,
+   "pass": 7
   },
   {
    "row": "C928",
    "screen": "mark_kitchen.short",
    "verdict": "PASS",
-   "line": "Short. Next Sunday, then. Don't make it a habit, kid.",
-   "why": "no clock in prose",
+   "line": "Mom's cup stops halfway to her mouth, then keeps going.",
+   "why": "minutes only; no clock printed",
    "cause": null,
    "note": false,
    "screen_hash": {
     "text": "8b071b6a2ddd72aa",
-    "facts": "61d8c9e46a55fe43",
-    "all": "9a5950d751ae9362"
+    "facts": "bc7f8aaaf6a4f505",
+    "facts2": "796eee3dad582482",
+    "all": "6453ab1af862f835"
    },
    "row_hash": "2c3ccc6bd9929d7f",
-   "carried": true
+   "carried": true,
+   "pass": 7
   },
   {
    "row": "C928",
    "screen": "mark_kitchen.talk",
    "verdict": "PASS",
    "line": "You working, kid? Rent doesn't wait. And don't spend it all on coffee.",
-   "why": "no clock in prose",
+   "why": "minutes only; no clock printed",
    "cause": null,
    "note": false,
    "screen_hash": {
     "text": "fe35e365dcfda4ec",
-    "facts": "5c487ebd2d9b7450",
-    "all": "5ea0b30f44a52e78"
+    "facts": "811544dad8de125f",
+    "facts2": "57f3c2e33f3edc83",
+    "all": "49da2ec68f166d6c"
    },
    "row_hash": "2c3ccc6bd9929d7f",
    "carried": true,
-   "pass": 4
+   "pass": 7
   },
   {
    "row": "C929",
    "screen": "mark_kitchen.hub",
    "verdict": "PASS",
-   "line": "Talk (5 min)",
-   "why": "the activity label carries its time",
+   "line": "Pay the rent \u2014 Mark collects on Sundays, 8 to 11:55am, at the kitchen table.",
+   "why": "no duration or energy on a label; the greyed line's hours are the clock-shut row publishing them (C913)",
    "cause": null,
    "note": true,
    "screen_hash": {
-    "text": "50e54206a4f37eae",
-    "facts": "f5ba735a7dad78d5",
-    "all": "117535292b23a443"
+    "text": "cebee1bac30c4ca9",
+    "facts": "e8065fe0f1b995c1",
+    "facts2": "8ff6682bbd8fcf1c",
+    "all": "a6f6a2b85d23b3a2"
    },
-   "row_hash": "e20b027bad88ca8c",
+   "row_hash": "18b0ecdf6d7fc901",
    "carried": true,
-   "pass": 2
+   "pass": 7
   },
   {
    "row": "C929",
    "screen": "mark_kitchen.pay100",
-   "verdict": "N/A",
-   "line": "All there. Same time next Sunday.",
-   "why": "no activity label here",
+   "verdict": "PASS",
+   "line": "Done",
+   "why": "no time, duration or energy on the label",
    "cause": null,
    "note": true,
    "screen_hash": {
     "text": "9562246c2be111d9",
-    "facts": "28a1c06aa45c7c10",
-    "all": "454cb66c384d356c"
+    "facts": "5e652ec6e4551af0",
+    "facts2": "7073f340f74f069c",
+    "all": "04bd193bb19a845c"
    },
-   "row_hash": "e20b027bad88ca8c",
-   "carried": true
+   "row_hash": "18b0ecdf6d7fc901",
+   "carried": true,
+   "pass": 7
   },
   {
    "row": "C929",
    "screen": "mark_kitchen.pay75",
-   "verdict": "N/A",
-   "line": "It goes to ninety once you've paid three hundred.",
-   "why": "no activity label here",
+   "verdict": "PASS",
+   "line": "Done",
+   "why": "no time, duration or energy on the label",
    "cause": null,
    "note": true,
    "screen_hash": {
     "text": "77d42862e4942fb3",
-    "facts": "28a1c06aa45c7c10",
-    "all": "14f023e2bcb15dd6"
+    "facts": "5e652ec6e4551af0",
+    "facts2": "7073f340f74f069c",
+    "all": "e3c88a749be646e3"
    },
-   "row_hash": "e20b027bad88ca8c",
-   "carried": true
+   "row_hash": "18b0ecdf6d7fc901",
+   "carried": true,
+   "pass": 7
   },
   {
    "row": "C929",
    "screen": "mark_kitchen.pay90",
-   "verdict": "N/A",
-   "line": "A hundred from next week.",
-   "why": "no activity label here",
+   "verdict": "PASS",
+   "line": "Done",
+   "why": "no time, duration or energy on the label",
    "cause": null,
    "note": true,
    "screen_hash": {
     "text": "bcecc52dc17ed0c8",
-    "facts": "28a1c06aa45c7c10",
-    "all": "e5615da390e01e94"
+    "facts": "5e652ec6e4551af0",
+    "facts2": "7073f340f74f069c",
+    "all": "04931744b776fc09"
    },
-   "row_hash": "e20b027bad88ca8c",
-   "carried": true
+   "row_hash": "18b0ecdf6d7fc901",
+   "carried": true,
+   "pass": 7
   },
   {
    "row": "C929",
    "screen": "mark_kitchen.short",
-   "verdict": "N/A",
-   "line": "Short. Next Sunday, then. Don't make it a habit, kid.",
-   "why": "no activity label here",
+   "verdict": "PASS",
+   "line": "Done",
+   "why": "no time, duration or energy on the label",
    "cause": null,
    "note": true,
    "screen_hash": {
     "text": "8b071b6a2ddd72aa",
-    "facts": "61d8c9e46a55fe43",
-    "all": "9a5950d751ae9362"
+    "facts": "bc7f8aaaf6a4f505",
+    "facts2": "796eee3dad582482",
+    "all": "6453ab1af862f835"
    },
-   "row_hash": "e20b027bad88ca8c",
-   "carried": true
+   "row_hash": "18b0ecdf6d7fc901",
+   "carried": true,
+   "pass": 7
   },
   {
    "row": "C929",
    "screen": "mark_kitchen.talk",
    "verdict": "PASS",
-   "line": "Talk (5 min)",
-   "why": "activity time is on the label",
+   "line": "Done",
+   "why": "no time, duration or energy on the label",
    "cause": null,
    "note": true,
    "screen_hash": {
     "text": "fe35e365dcfda4ec",
-    "facts": "5c487ebd2d9b7450",
-    "all": "5ea0b30f44a52e78"
+    "facts": "811544dad8de125f",
+    "facts2": "57f3c2e33f3edc83",
+    "all": "49da2ec68f166d6c"
    },
-   "row_hash": "e20b027bad88ca8c",
+   "row_hash": "18b0ecdf6d7fc901",
    "carried": true,
-   "pass": 4
+   "pass": 7
   },
   {
    "row": "C930",
@@ -10983,180 +11212,198 @@
    "screen": "mark_kitchen.pay100",
    "verdict": "N/A",
    "line": "All there. Same time next Sunday.",
-   "why": "no windowed row",
+   "why": "no hours or travel on this screen",
    "cause": null,
    "note": true,
    "screen_hash": {
     "text": "9562246c2be111d9",
-    "facts": "28a1c06aa45c7c10",
-    "all": "454cb66c384d356c"
+    "facts": "5e652ec6e4551af0",
+    "facts2": "7073f340f74f069c",
+    "all": "04bd193bb19a845c"
    },
    "row_hash": "beb57cd46fe906bf",
-   "carried": true
+   "carried": true,
+   "pass": 7
   },
   {
    "row": "C930",
    "screen": "mark_kitchen.pay75",
    "verdict": "N/A",
-   "line": "It goes to ninety once you've paid three hundred.",
-   "why": "no windowed row",
+   "line": "It goes to ninety once you've paid three hundred. Four Sundays straight, kid",
+   "why": "no hours or travel on this screen",
    "cause": null,
    "note": true,
    "screen_hash": {
     "text": "77d42862e4942fb3",
-    "facts": "28a1c06aa45c7c10",
-    "all": "14f023e2bcb15dd6"
+    "facts": "5e652ec6e4551af0",
+    "facts2": "7073f340f74f069c",
+    "all": "e3c88a749be646e3"
    },
    "row_hash": "beb57cd46fe906bf",
-   "carried": true
+   "carried": true,
+   "pass": 7
   },
   {
    "row": "C930",
    "screen": "mark_kitchen.pay90",
    "verdict": "N/A",
    "line": "A hundred from next week.",
-   "why": "no windowed row",
+   "why": "no hours or travel on this screen",
    "cause": null,
    "note": true,
    "screen_hash": {
     "text": "bcecc52dc17ed0c8",
-    "facts": "28a1c06aa45c7c10",
-    "all": "e5615da390e01e94"
+    "facts": "5e652ec6e4551af0",
+    "facts2": "7073f340f74f069c",
+    "all": "04931744b776fc09"
    },
    "row_hash": "beb57cd46fe906bf",
-   "carried": true
+   "carried": true,
+   "pass": 7
   },
   {
    "row": "C930",
    "screen": "mark_kitchen.short",
    "verdict": "N/A",
-   "line": "Short. Next Sunday, then. Don't make it a habit, kid.",
-   "why": "no windowed row",
+   "line": "Mom's cup stops halfway to her mouth, then keeps going.",
+   "why": "no hours or travel on this screen",
    "cause": null,
    "note": true,
    "screen_hash": {
     "text": "8b071b6a2ddd72aa",
-    "facts": "61d8c9e46a55fe43",
-    "all": "9a5950d751ae9362"
+    "facts": "bc7f8aaaf6a4f505",
+    "facts2": "796eee3dad582482",
+    "all": "6453ab1af862f835"
    },
    "row_hash": "beb57cd46fe906bf",
-   "carried": true
+   "carried": true,
+   "pass": 7
   },
   {
    "row": "C930",
    "screen": "mark_kitchen.talk",
    "verdict": "N/A",
-   "line": "",
-   "why": "not windowed work",
+   "line": "You working, kid? Rent doesn't wait. And don't spend it all on coffee.",
+   "why": "no hours or travel on this screen",
    "cause": null,
    "note": true,
    "screen_hash": {
     "text": "fe35e365dcfda4ec",
-    "facts": "5c487ebd2d9b7450",
-    "all": "5ea0b30f44a52e78"
+    "facts": "811544dad8de125f",
+    "facts2": "57f3c2e33f3edc83",
+    "all": "49da2ec68f166d6c"
    },
    "row_hash": "beb57cd46fe906bf",
    "carried": true,
-   "pass": 4
+   "pass": 7
   },
   {
    "row": "C931",
    "screen": "mark_kitchen.hub",
    "verdict": "PASS",
-   "line": "{ type = \"time_of_day\", start_time = \"08:00\", end_time = \"11:55\" }",
-   "why": "End exclusive: last open minute 11:54; the rent screens' 5-minute exits land by 11:59, still inside Mark's 10:00-12:00 Kitchen row; at 11:55 the row greys with text that says the window runs to 11:55, consistent with the shut.",
+   "line": "time_of_day 08:00\u201311:55",
+   "why": "end exclusive; the greyed line names the same window",
    "cause": null,
    "note": true,
    "screen_hash": {
-    "text": "22073abffbe6a4c9",
-    "facts": "b86e64e1dbfb6357",
-    "facts2": "9a97305cf61feadd",
-    "all": "e74f73f06946b013"
+    "text": "cebee1bac30c4ca9",
+    "facts": "e8065fe0f1b995c1",
+    "facts2": "8ff6682bbd8fcf1c",
+    "all": "a6f6a2b85d23b3a2"
    },
    "row_hash": "1aadffd96e76381c",
-   "carried": false,
-   "pass": 6
+   "carried": true,
+   "pass": 7
   },
   {
    "row": "C931",
    "screen": "mark_kitchen.pay100",
-   "verdict": "PASS",
+   "verdict": "N/A",
    "line": "All there. Same time next Sunday.",
-   "why": "reached only inside the 08:00\u201311:55 window via the hub; within Mark's row",
+   "why": "no time_of_day on this screen",
    "cause": null,
    "note": true,
    "screen_hash": {
     "text": "9562246c2be111d9",
-    "facts": "28a1c06aa45c7c10",
-    "all": "454cb66c384d356c"
+    "facts": "5e652ec6e4551af0",
+    "facts2": "7073f340f74f069c",
+    "all": "04bd193bb19a845c"
    },
    "row_hash": "1aadffd96e76381c",
-   "carried": true
+   "carried": true,
+   "pass": 7
   },
   {
    "row": "C931",
    "screen": "mark_kitchen.pay75",
-   "verdict": "PASS",
-   "line": "It goes to ninety once you've paid three hundred.",
-   "why": "reached only inside the 08:00\u201311:55 window via the hub; within Mark's row",
+   "verdict": "N/A",
+   "line": "It goes to ninety once you've paid three hundred. Four Sundays straight, kid",
+   "why": "no time_of_day on this screen",
    "cause": null,
    "note": true,
    "screen_hash": {
     "text": "77d42862e4942fb3",
-    "facts": "28a1c06aa45c7c10",
-    "all": "14f023e2bcb15dd6"
+    "facts": "5e652ec6e4551af0",
+    "facts2": "7073f340f74f069c",
+    "all": "e3c88a749be646e3"
    },
    "row_hash": "1aadffd96e76381c",
-   "carried": true
+   "carried": true,
+   "pass": 7
   },
   {
    "row": "C931",
    "screen": "mark_kitchen.pay90",
-   "verdict": "PASS",
+   "verdict": "N/A",
    "line": "A hundred from next week.",
-   "why": "reached only inside the 08:00\u201311:55 window via the hub; within Mark's row",
+   "why": "no time_of_day on this screen",
    "cause": null,
    "note": true,
    "screen_hash": {
     "text": "bcecc52dc17ed0c8",
-    "facts": "28a1c06aa45c7c10",
-    "all": "e5615da390e01e94"
+    "facts": "5e652ec6e4551af0",
+    "facts2": "7073f340f74f069c",
+    "all": "04931744b776fc09"
    },
    "row_hash": "1aadffd96e76381c",
-   "carried": true
+   "carried": true,
+   "pass": 7
   },
   {
    "row": "C931",
    "screen": "mark_kitchen.short",
-   "verdict": "PASS",
-   "line": "Short. Next Sunday, then. Don't make it a habit, kid.",
-   "why": "reached only inside the 08:00\u201311:55 window via the hub; within Mark's row",
+   "verdict": "N/A",
+   "line": "Mom's cup stops halfway to her mouth, then keeps going.",
+   "why": "no time_of_day on this screen",
    "cause": null,
    "note": true,
    "screen_hash": {
     "text": "8b071b6a2ddd72aa",
-    "facts": "61d8c9e46a55fe43",
-    "all": "9a5950d751ae9362"
+    "facts": "bc7f8aaaf6a4f505",
+    "facts2": "796eee3dad582482",
+    "all": "6453ab1af862f835"
    },
    "row_hash": "1aadffd96e76381c",
-   "carried": true
+   "carried": true,
+   "pass": 7
   },
   {
    "row": "C931",
    "screen": "mark_kitchen.talk",
    "verdict": "N/A",
-   "line": "",
-   "why": "no time_of_day on talk",
+   "line": "You working, kid? Rent doesn't wait. And don't spend it all on coffee.",
+   "why": "no time_of_day on this screen",
    "cause": null,
    "note": true,
    "screen_hash": {
     "text": "fe35e365dcfda4ec",
-    "facts": "5c487ebd2d9b7450",
-    "all": "5ea0b30f44a52e78"
+    "facts": "811544dad8de125f",
+    "facts2": "57f3c2e33f3edc83",
+    "all": "49da2ec68f166d6c"
    },
    "row_hash": "1aadffd96e76381c",
    "carried": true,
-   "pass": 4
+   "pass": 7
   },
   {
    "row": "C951",
@@ -11227,181 +11474,199 @@
    "row": "C952",
    "screen": "mark_kitchen.pay100",
    "verdict": "PASS",
-   "line": "All there. Same time next Sunday.",
-   "why": "$75/$90/$100 with the step at $300 and $900 matches PLAN \u00a72/\u00a78c; stage lines fire at 225 (+75=300) and 810 (+90 reaches 930, first payment over 900); \"Four Sundays straight\" matches the goal",
+   "line": "\"All there. Same time next Sunday.\"",
+   "why": "no amount in prose; money -100 matches the $100 band",
    "cause": null,
    "note": false,
    "screen_hash": {
     "text": "9562246c2be111d9",
-    "facts": "28a1c06aa45c7c10",
-    "all": "454cb66c384d356c"
+    "facts": "5e652ec6e4551af0",
+    "facts2": "7073f340f74f069c",
+    "all": "04bd193bb19a845c"
    },
-   "row_hash": "2f7d1a6bf6a93ca9",
-   "carried": true
+   "row_hash": "0ded4fca6fc71925",
+   "carried": false,
+   "pass": 8
   },
   {
    "row": "C952",
    "screen": "mark_kitchen.pay75",
    "verdict": "PASS",
-   "line": "It goes to ninety once you've paid three hundred.",
-   "why": "$75/$90/$100 with the step at $300 and $900 matches PLAN \u00a72/\u00a78c; stage lines fire at 225 (+75=300) and 810 (+90 reaches 930, first payment over 900); \"Four Sundays straight\" matches the goal",
+   "line": "\"It goes to ninety once you've paid three hundred.\" / \"Ninety from next week.\"",
+   "why": "rise said at total >= 225, i.e. this payment reaches $300 (PLAN); money -75, rent_paid_total +75",
    "cause": null,
    "note": false,
    "screen_hash": {
     "text": "77d42862e4942fb3",
-    "facts": "28a1c06aa45c7c10",
-    "all": "14f023e2bcb15dd6"
+    "facts": "5e652ec6e4551af0",
+    "facts2": "7073f340f74f069c",
+    "all": "e3c88a749be646e3"
    },
-   "row_hash": "2f7d1a6bf6a93ca9",
-   "carried": true
+   "row_hash": "0ded4fca6fc71925",
+   "carried": false,
+   "pass": 8
   },
   {
    "row": "C952",
    "screen": "mark_kitchen.pay90",
    "verdict": "PASS",
-   "line": "A hundred from next week.",
-   "why": "$75/$90/$100 with the step at $300 and $900 matches PLAN \u00a72/\u00a78c; stage lines fire at 225 (+75=300) and 810 (+90 reaches 930, first payment over 900); \"Four Sundays straight\" matches the goal",
+   "line": "\"A hundred from next week.\"",
+   "why": "shown at total >= 810, so the payment crosses $900 (300 + 90 x 7 = 930); money -90",
    "cause": null,
    "note": false,
    "screen_hash": {
     "text": "bcecc52dc17ed0c8",
-    "facts": "28a1c06aa45c7c10",
-    "all": "e5615da390e01e94"
+    "facts": "5e652ec6e4551af0",
+    "facts2": "7073f340f74f069c",
+    "all": "04931744b776fc09"
    },
-   "row_hash": "2f7d1a6bf6a93ca9",
-   "carried": true
+   "row_hash": "0ded4fca6fc71925",
+   "carried": false,
+   "pass": 8
   },
   {
    "row": "C952",
    "screen": "mark_kitchen.rent",
    "verdict": "PASS",
-   "line": "Ninety, kid.",
-   "why": "75 under 300, 90 at 300-899, 100 at 900+ (PLAN \u00a72)",
+   "line": "\"Seventy-five, kid.\" / \"Ninety, kid.\" / \"A hundred, kid.\"",
+   "why": "each amount shows on the rent_paid_total band PLAN sets ($75, $90 from $300, $100 from $900) and matches its Hand it over ($N) choice",
    "cause": null,
    "note": false,
    "screen_hash": {
     "text": "9394c9809e8f86c9",
-    "facts": "28a1c06aa45c7c10",
-    "all": "ae9ae39af37fcef9"
+    "facts": "5e652ec6e4551af0",
+    "facts2": "7073f340f74f069c",
+    "all": "3bf25ce111863764"
    },
-   "row_hash": "2f7d1a6bf6a93ca9",
-   "carried": true,
-   "pass": 3
+   "row_hash": "0ded4fca6fc71925",
+   "carried": false,
+   "pass": 8
   },
   {
    "row": "C953",
    "screen": "mark_kitchen.hub",
    "verdict": "PASS",
-   "line": "Pay the rent (5 min) / Hand it over ($75)",
-   "why": "time on the opening button, money on the pay button",
+   "line": "Pay the rent",
+   "why": "no time or energy on Talk, Pay the rent or Leave",
    "cause": null,
    "note": true,
    "screen_hash": {
-    "text": "50e54206a4f37eae",
-    "facts": "f5ba735a7dad78d5",
-    "all": "117535292b23a443"
+    "text": "cebee1bac30c4ca9",
+    "facts": "e8065fe0f1b995c1",
+    "facts2": "8ff6682bbd8fcf1c",
+    "all": "a6f6a2b85d23b3a2"
    },
-   "row_hash": "8d1306a15c51370a",
+   "row_hash": "826bf82fe26afd13",
    "carried": true,
-   "pass": 2
+   "pass": 7
   },
   {
    "row": "C953",
    "screen": "mark_kitchen.pay100",
    "verdict": "PASS",
-   "line": "All there. Same time next Sunday.",
-   "why": "Done's cost was on the buttons before it",
+   "line": "Done",
+   "why": "no time or energy on the label",
    "cause": null,
    "note": true,
    "screen_hash": {
     "text": "9562246c2be111d9",
-    "facts": "28a1c06aa45c7c10",
-    "all": "454cb66c384d356c"
+    "facts": "5e652ec6e4551af0",
+    "facts2": "7073f340f74f069c",
+    "all": "04bd193bb19a845c"
    },
-   "row_hash": "8d1306a15c51370a",
-   "carried": true
+   "row_hash": "826bf82fe26afd13",
+   "carried": true,
+   "pass": 7
   },
   {
    "row": "C953",
    "screen": "mark_kitchen.pay75",
    "verdict": "PASS",
-   "line": "It goes to ninety once you've paid three hundred.",
-   "why": "Done's cost was on the buttons before it",
+   "line": "Done",
+   "why": "no time or energy on the label",
    "cause": null,
    "note": true,
    "screen_hash": {
     "text": "77d42862e4942fb3",
-    "facts": "28a1c06aa45c7c10",
-    "all": "14f023e2bcb15dd6"
+    "facts": "5e652ec6e4551af0",
+    "facts2": "7073f340f74f069c",
+    "all": "e3c88a749be646e3"
    },
-   "row_hash": "8d1306a15c51370a",
-   "carried": true
+   "row_hash": "826bf82fe26afd13",
+   "carried": true,
+   "pass": 7
   },
   {
    "row": "C953",
    "screen": "mark_kitchen.pay90",
    "verdict": "PASS",
-   "line": "A hundred from next week.",
-   "why": "Done's cost was on the buttons before it",
+   "line": "Done",
+   "why": "no time or energy on the label",
    "cause": null,
    "note": true,
    "screen_hash": {
     "text": "bcecc52dc17ed0c8",
-    "facts": "28a1c06aa45c7c10",
-    "all": "e5615da390e01e94"
+    "facts": "5e652ec6e4551af0",
+    "facts2": "7073f340f74f069c",
+    "all": "04931744b776fc09"
    },
-   "row_hash": "8d1306a15c51370a",
-   "carried": true
+   "row_hash": "826bf82fe26afd13",
+   "carried": true,
+   "pass": 7
   },
   {
    "row": "C953",
    "screen": "mark_kitchen.rent",
    "verdict": "PASS",
    "line": "Hand it over ($75)",
-   "why": "money on the button; 5 min carried by 'Pay the rent (5 min)', each path spends exactly 5",
+   "why": "money on the pay button, no time on Leave",
    "cause": null,
    "note": true,
    "screen_hash": {
     "text": "9394c9809e8f86c9",
-    "facts": "28a1c06aa45c7c10",
-    "all": "ae9ae39af37fcef9"
+    "facts": "5e652ec6e4551af0",
+    "facts2": "7073f340f74f069c",
+    "all": "3bf25ce111863764"
    },
-   "row_hash": "8d1306a15c51370a",
+   "row_hash": "826bf82fe26afd13",
    "carried": true,
-   "pass": 3
+   "pass": 7
   },
   {
    "row": "C953",
    "screen": "mark_kitchen.short",
    "verdict": "PASS",
-   "line": "Short. Next Sunday, then. Don't make it a habit, kid.",
-   "why": "Done's cost was on the buttons before it",
+   "line": "Done",
+   "why": "no time or energy on the label",
    "cause": null,
    "note": true,
    "screen_hash": {
     "text": "8b071b6a2ddd72aa",
-    "facts": "61d8c9e46a55fe43",
-    "all": "9a5950d751ae9362"
+    "facts": "bc7f8aaaf6a4f505",
+    "facts2": "796eee3dad582482",
+    "all": "6453ab1af862f835"
    },
-   "row_hash": "8d1306a15c51370a",
-   "carried": true
+   "row_hash": "826bf82fe26afd13",
+   "carried": true,
+   "pass": 7
   },
   {
    "row": "C953",
    "screen": "mark_kitchen.talk",
    "verdict": "PASS",
-   "line": "Talk (5 min)",
-   "why": "cost on the label before the click",
+   "line": "Done",
+   "why": "no time or energy on the label",
    "cause": null,
    "note": true,
    "screen_hash": {
     "text": "fe35e365dcfda4ec",
-    "facts": "5c487ebd2d9b7450",
-    "all": "5ea0b30f44a52e78"
+    "facts": "811544dad8de125f",
+    "facts2": "57f3c2e33f3edc83",
+    "all": "49da2ec68f166d6c"
    },
-   "row_hash": "8d1306a15c51370a",
+   "row_hash": "826bf82fe26afd13",
    "carried": true,
-   "pass": 4
+   "pass": 7
   },
   {
    "row": "C954",
@@ -11536,117 +11801,127 @@
    "row": "L106",
    "screen": "mark_kitchen.hub",
    "verdict": "PASS",
-   "line": "Mark's at the table with his coffee.",
-   "why": "Names only Mark, and the canvas has requires_npc = npc_mark, so the line shows only while who_is_where puts him in home_kitchen; Mom is not named.",
+   "line": "Mark's at the table with his coffee. He looks at you over the rim.",
+   "why": "Mark's kitchen rows: weekdays 07:00\u201307:30 (coffee before work), Sat/Sun 08:00\u201310:00 breakfast, Sun 10:00\u201312:00 at the table; the menu shows only while he's there (requires_npc). The greyed rent line \"Mark collects on Sundays, 8 to 11:55am, at the kitchen table\" matches his Sunday rows and the trigger (end exclusive)",
    "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "22073abffbe6a4c9",
-    "facts": "b86e64e1dbfb6357",
-    "facts2": "9a97305cf61feadd",
-    "all": "e74f73f06946b013"
+    "text": "cebee1bac30c4ca9",
+    "facts": "e8065fe0f1b995c1",
+    "facts2": "8ff6682bbd8fcf1c",
+    "all": "a6f6a2b85d23b3a2"
    },
    "row_hash": "13a714429d15f3b2",
-   "carried": false,
-   "pass": 6
+   "carried": true,
+   "pass": 7
   },
   {
    "row": "L106",
    "screen": "mark_kitchen.pay100",
    "verdict": "PASS",
    "line": "All there. Same time next Sunday.",
-   "why": "Mark in the Kitchen Sun 08\u201312 for the whole rent window",
+   "why": "Sunday only, via the hub's weekday gate",
    "cause": null,
    "note": false,
    "screen_hash": {
     "text": "9562246c2be111d9",
-    "facts": "28a1c06aa45c7c10",
-    "all": "454cb66c384d356c"
+    "facts": "5e652ec6e4551af0",
+    "facts2": "7073f340f74f069c",
+    "all": "04bd193bb19a845c"
    },
    "row_hash": "13a714429d15f3b2",
-   "carried": true
+   "carried": true,
+   "pass": 7
   },
   {
    "row": "L106",
    "screen": "mark_kitchen.pay75",
    "verdict": "PASS",
-   "line": "It goes to ninety once you've paid three hundred.",
-   "why": "Mark in the Kitchen Sun 08\u201312 for the whole rent window",
+   "line": "It goes to ninety once you've paid three hundred. Four Sundays straight, kid",
+   "why": "first-payment line behind rent_paid_once false; \"Ninety from next week\" behind rent_paid_total \u2265 225 (read before the +75), so true when the total reaches 300",
    "cause": null,
    "note": false,
    "screen_hash": {
     "text": "77d42862e4942fb3",
-    "facts": "28a1c06aa45c7c10",
-    "all": "14f023e2bcb15dd6"
+    "facts": "5e652ec6e4551af0",
+    "facts2": "7073f340f74f069c",
+    "all": "e3c88a749be646e3"
    },
    "row_hash": "13a714429d15f3b2",
-   "carried": true
+   "carried": true,
+   "pass": 7
   },
   {
    "row": "L106",
    "screen": "mark_kitchen.pay90",
    "verdict": "PASS",
    "line": "A hundred from next week.",
-   "why": "Mark in the Kitchen Sun 08\u201312 for the whole rent window",
+   "why": "\"A hundred from next week\" behind rent_paid_total \u2265 810, true when the +90 reaches 900",
    "cause": null,
    "note": false,
    "screen_hash": {
     "text": "bcecc52dc17ed0c8",
-    "facts": "28a1c06aa45c7c10",
-    "all": "e5615da390e01e94"
+    "facts": "5e652ec6e4551af0",
+    "facts2": "7073f340f74f069c",
+    "all": "04931744b776fc09"
    },
    "row_hash": "13a714429d15f3b2",
-   "carried": true
+   "carried": true,
+   "pass": 7
   },
   {
    "row": "L106",
    "screen": "mark_kitchen.rent",
    "verdict": "PASS",
    "line": "Mark folds the paper down and holds out his hand.",
-   "why": "names only Mark; Mark Kitchen Sun 08-12",
+   "why": "reached only Sunday 08:00\u201311:55 while Mark is at the table; each price group reads rent_paid_total and money, in an if/elseif chain that picks the right line",
    "cause": null,
    "note": false,
    "screen_hash": {
     "text": "9394c9809e8f86c9",
-    "facts": "28a1c06aa45c7c10",
-    "all": "ae9ae39af37fcef9"
+    "facts": "5e652ec6e4551af0",
+    "facts2": "7073f340f74f069c",
+    "all": "3bf25ce111863764"
    },
    "row_hash": "13a714429d15f3b2",
    "carried": true,
-   "pass": 3
+   "pass": 7
   },
   {
    "row": "L106",
    "screen": "mark_kitchen.short",
    "verdict": "PASS",
    "line": "Mom's cup stops halfway to her mouth, then keeps going.",
-   "why": "Laura's rows: Kitchen Sun 08\u201312",
+   "why": "Laura is in the kitchen Sunday 08:00\u201312:00 (who_is_where), at every minute the rent window can show",
    "cause": null,
    "note": false,
    "screen_hash": {
     "text": "8b071b6a2ddd72aa",
-    "facts": "61d8c9e46a55fe43",
-    "all": "9a5950d751ae9362"
+    "facts": "bc7f8aaaf6a4f505",
+    "facts2": "796eee3dad582482",
+    "all": "6453ab1af862f835"
    },
    "row_hash": "13a714429d15f3b2",
-   "carried": true
+   "carried": true,
+   "pass": 7
   },
   {
    "row": "L106",
    "screen": "mark_kitchen.talk",
    "verdict": "PASS",
-   "line": "Your face goes hot. He's already back to his coffee.",
-   "why": "names only Mark, whom requires_npc puts there",
+   "line": "You working, kid? Rent doesn't wait. And don't spend it all on coffee.",
+   "why": "true at every one of Mark's kitchen hours; \"You working\" asks, claims no job",
    "cause": null,
    "note": false,
    "screen_hash": {
     "text": "fe35e365dcfda4ec",
-    "facts": "5c487ebd2d9b7450",
-    "all": "5ea0b30f44a52e78"
+    "facts": "811544dad8de125f",
+    "facts2": "57f3c2e33f3edc83",
+    "all": "49da2ec68f166d6c"
    },
    "row_hash": "13a714429d15f3b2",
    "carried": true,
-   "pass": 4
+   "pass": 7
   },
   {
    "row": "L116",
@@ -11899,109 +12174,122 @@
    "row": "L167",
    "screen": "mark_kitchen.hub",
    "verdict": "PASS",
-   "line": "Pay the rent (5 min) \u2014 Mark collects on Sundays, 8 to 11:55am, at the kitchen table.",
-   "why": "One rent row, not one per day kind; shut by the clock alone (weekday + time_of_day only) it greys in place (show_when_locked, the choice-level form of show_when_blocked) with text naming the full hours: Sundays, 8 to 11:55am.",
+   "line": "Pay the rent",
+   "why": "one row, one day kind, greyed with its full hours",
    "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "22073abffbe6a4c9",
-    "facts": "b86e64e1dbfb6357",
-    "facts2": "9a97305cf61feadd",
-    "all": "e74f73f06946b013"
+    "text": "cebee1bac30c4ca9",
+    "facts": "e8065fe0f1b995c1",
+    "facts2": "8ff6682bbd8fcf1c",
+    "all": "a6f6a2b85d23b3a2"
    },
    "row_hash": "e64ce2672d85d2d8",
-   "carried": false,
-   "pass": 6
+   "carried": true,
+   "pass": 7
   },
   {
    "row": "L167",
    "screen": "mark_kitchen.pay100",
    "verdict": "N/A",
-   "line": "Done",
-   "why": "No clock-gated row on this screen.",
+   "line": "All there. Same time next Sunday.",
+   "why": "no hours",
    "cause": null,
    "note": false,
    "screen_hash": {
     "text": "9562246c2be111d9",
-    "facts": "27c79c8b8c1144d2",
-    "facts2": "f78d5c923bbd987a",
-    "all": "1f22ca65a0019ca5"
+    "facts": "5e652ec6e4551af0",
+    "facts2": "7073f340f74f069c",
+    "all": "04bd193bb19a845c"
    },
    "row_hash": "e64ce2672d85d2d8",
    "carried": true,
-   "pass": 5
+   "pass": 7
   },
   {
    "row": "L167",
    "screen": "mark_kitchen.pay75",
    "verdict": "N/A",
-   "line": "Done",
-   "why": "No clock-gated row on this screen.",
+   "line": "It goes to ninety once you've paid three hundred. Four Sundays straight, kid",
+   "why": "no hours",
    "cause": null,
    "note": false,
    "screen_hash": {
     "text": "77d42862e4942fb3",
-    "facts": "27c79c8b8c1144d2",
-    "facts2": "f78d5c923bbd987a",
-    "all": "6e36091df5f45859"
+    "facts": "5e652ec6e4551af0",
+    "facts2": "7073f340f74f069c",
+    "all": "e3c88a749be646e3"
    },
    "row_hash": "e64ce2672d85d2d8",
    "carried": true,
-   "pass": 5
+   "pass": 7
   },
   {
    "row": "L167",
    "screen": "mark_kitchen.pay90",
    "verdict": "N/A",
-   "line": "Done",
-   "why": "No clock-gated row on this screen.",
+   "line": "A hundred from next week.",
+   "why": "no hours",
    "cause": null,
    "note": false,
    "screen_hash": {
     "text": "bcecc52dc17ed0c8",
-    "facts": "27c79c8b8c1144d2",
-    "facts2": "f78d5c923bbd987a",
-    "all": "eb6acc0d7d3cdd88"
+    "facts": "5e652ec6e4551af0",
+    "facts2": "7073f340f74f069c",
+    "all": "04931744b776fc09"
    },
    "row_hash": "e64ce2672d85d2d8",
    "carried": true,
-   "pass": 5
+   "pass": 7
   },
   {
    "row": "L167",
    "screen": "mark_kitchen.short",
    "verdict": "N/A",
-   "line": "Done",
-   "why": "No clock-gated row; the two Done rows are split by a flag, not by the day.",
+   "line": "Mom's cup stops halfway to her mouth, then keeps going.",
+   "why": "no hours",
    "cause": null,
    "note": false,
    "screen_hash": {
     "text": "8b071b6a2ddd72aa",
-    "facts": "bc11c94f9afcce4d",
-    "facts2": "4a35ce27cc9a842d",
-    "all": "994d580fea7024f7"
+    "facts": "bc7f8aaaf6a4f505",
+    "facts2": "796eee3dad582482",
+    "all": "6453ab1af862f835"
    },
    "row_hash": "e64ce2672d85d2d8",
    "carried": true,
-   "pass": 5
+   "pass": 7
   },
   {
    "row": "L167",
    "screen": "mark_kitchen.talk",
    "verdict": "N/A",
-   "line": "Done",
-   "why": "No clock-gated row on this screen.",
+   "line": "You working, kid? Rent doesn't wait. And don't spend it all on coffee.",
+   "why": "no hours",
    "cause": null,
    "note": false,
    "screen_hash": {
     "text": "fe35e365dcfda4ec",
-    "facts": "f8abc4563418e614",
-    "facts2": "96a74a5d0613c333",
-    "all": "81b21cc26127cd25"
+    "facts": "811544dad8de125f",
+    "facts2": "57f3c2e33f3edc83",
+    "all": "49da2ec68f166d6c"
    },
    "row_hash": "e64ce2672d85d2d8",
    "carried": true,
-   "pass": 5
+   "pass": 7
+  },
+  {
+   "row": "L170",
+   "screen": "*",
+   "verdict": "N/A",
+   "line": "",
+   "why": "no place on this piece's screens is hidden_until a flag",
+   "cause": null,
+   "note": false,
+   "screen_hash": "791a3ce177fd78c2",
+   "row_hash": "c3599cd09637a240",
+   "carried": false,
+   "pass": 8
   },
   {
    "row": "L70",
@@ -12070,8 +12358,8 @@
  ],
  "causes": [],
  "pending": [],
- "asked": 8,
- "answered": 8,
+ "asked": 5,
+ "answered": 5,
  "pass_items": [],
  "unowed": []
 }

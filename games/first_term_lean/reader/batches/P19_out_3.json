@@ -1,0 +1,26 @@
+{
+ "verdicts": [
+  {
+   "row": "L170",
+   "screen": "*",
+   "verdict": "N/A",
+   "line": "",
+   "why": "no place on this piece's screens is hidden_until a flag"
+  },
+  {
+   "row": "L168",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "The woman at the counter is in weekdays 8am to 4pm.",
+   "why": "matches Rosa's rows; met_rosa is the end step's when"
+  },
+  {
+   "row": "L169",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "The woman at the counter is in weekdays 8am to 4pm.",
+   "why": "cafeteria_meet_rosa fires on any visit while Rosa is there"
+  }
+ ],
+ "causes": []
+}

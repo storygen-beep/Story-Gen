@@ -1,0 +1,10 @@
+{"verdicts": [
+{"row":"B10","screen":"zoe_door_sam.door","verdict":"PASS","line":"She's out, sunshine. Back at six.","why":"Trigger needs Sam present, Zoe absent, 12:00-18:00; Sam's rows 12:00-02:00 there; Zoe's rows put her home from 18:00 every day, so 'back at six' holds at the first and last minute."},
+{"row":"B8","screen":"zoe_door_sam.door","verdict":"PASS","line":"his eyes stop on your chest long enough that your nipples tighten","why":"No garment of hers named; no number on screen."},
+{"row":"C1158","screen":"zoe_door_sam.door","verdict":"PASS","line":"his eyes stop on your chest","why":"Prose names her body, not a garment; Sam's T-shirt is his."},
+{"row":"C1206","screen":"zoe_door_sam.door","verdict":"PASS","line":"You cross your arms.","why":"No garment of hers she might not be wearing."},
+{"row":"C460","screen":"zoe_door_sam.door","verdict":"PASS","line":"You're the one Zoe won't shut up about.","why":"The door is hidden until zoe_place_known, set with met_zoe on Zoe's meeting (P20), so Zoe has met her on every path here; one-time screen, no past claimed beyond that."},
+{"row":"C461","screen":"zoe_door_sam.door","verdict":"PASS","line":"He grins like that's an answer.","why":"Texture and Sam's dialogue fit his cast entry (home, guitar, 'sunshine')."},
+{"row":"L106","screen":"zoe_door_sam.door","verdict":"PASS","line":"It opens on a guy in his twenties, barefoot","why":"Only Sam is named present; npc_at_location is_present on the trigger and his rows agree; Zoe absent by condition."}
+],
+"causes": []}

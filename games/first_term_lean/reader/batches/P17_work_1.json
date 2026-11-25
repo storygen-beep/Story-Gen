@@ -2,33 +2,178 @@
  "items": [
   {
    "row": "B10",
+   "screen": "drama_first.class",
+   "why": "a fact changed"
+  },
+  {
+   "row": "B10",
    "screen": "drama_first.name",
-   "why": "screen changed: truth row"
+   "why": "a fact changed"
+  },
+  {
+   "row": "B8",
+   "screen": "drama_first.class",
+   "why": "a fact changed"
   },
   {
    "row": "B8",
    "screen": "drama_first.name",
-   "why": "screen changed: truth row"
+   "why": "a fact changed"
+  },
+  {
+   "row": "C1265",
+   "screen": "*",
+   "why": "its rule's text changed"
+  },
+  {
+   "row": "C460",
+   "screen": "drama_first.class",
+   "why": "a fact changed"
   },
   {
    "row": "C460",
    "screen": "drama_first.name",
-   "why": "screen changed: truth row"
+   "why": "a fact changed"
+  },
+  {
+   "row": "C461",
+   "screen": "drama_first.class",
+   "why": "a fact changed"
   },
   {
    "row": "C461",
    "screen": "drama_first.name",
-   "why": "screen changed: truth row"
+   "why": "a fact changed"
+  },
+  {
+   "row": "C889",
+   "screen": "*",
+   "why": "its rule's text changed"
+  },
+  {
+   "row": "C889",
+   "screen": "drama_first.class",
+   "why": "a fact changed"
+  },
+  {
+   "row": "C892",
+   "screen": "drama_first.class",
+   "why": "a fact changed"
+  },
+  {
+   "row": "C897",
+   "screen": "drama_first.class",
+   "why": "a fact changed"
+  },
+  {
+   "row": "C900",
+   "screen": "drama_first.class",
+   "why": "a fact changed"
   },
   {
    "row": "C902",
-   "screen": "drama_first.name",
-   "why": "failed last pass (a note), its screen changed"
+   "screen": "drama_first.class",
+   "why": "a fact changed"
+  },
+  {
+   "row": "C903",
+   "screen": "drama_first.class",
+   "why": "a fact changed"
+  },
+  {
+   "row": "C906",
+   "screen": "*",
+   "why": "its rule's text changed"
+  },
+  {
+   "row": "C906",
+   "screen": "drama_first.class",
+   "why": "a fact changed"
+  },
+  {
+   "row": "C910",
+   "screen": "drama_first.class",
+   "why": "a fact changed"
+  },
+  {
+   "row": "C913",
+   "screen": "drama_first.class",
+   "why": "a fact changed"
+  },
+  {
+   "row": "C914",
+   "screen": "drama_first.class",
+   "why": "a fact changed"
+  },
+  {
+   "row": "C916",
+   "screen": "drama_first.class",
+   "why": "a fact changed"
+  },
+  {
+   "row": "C920",
+   "screen": "*",
+   "why": "its rule's text changed"
+  },
+  {
+   "row": "C920",
+   "screen": "drama_first.class",
+   "why": "a fact changed"
+  },
+  {
+   "row": "C924",
+   "screen": "drama_first.class",
+   "why": "a fact changed"
+  },
+  {
+   "row": "C926",
+   "screen": "drama_first.class",
+   "why": "a fact changed"
+  },
+  {
+   "row": "C927",
+   "screen": "drama_first.class",
+   "why": "a fact changed"
+  },
+  {
+   "row": "C928",
+   "screen": "drama_first.class",
+   "why": "a fact changed"
+  },
+  {
+   "row": "C929",
+   "screen": "drama_first.class",
+   "why": "a fact changed"
+  },
+  {
+   "row": "C930",
+   "screen": "drama_first.class",
+   "why": "a fact changed"
+  },
+  {
+   "row": "C931",
+   "screen": "drama_first.class",
+   "why": "a fact changed"
+  },
+  {
+   "row": "C953",
+   "screen": "drama_first.class",
+   "why": "its rule's text changed"
+  },
+  {
+   "row": "L106",
+   "screen": "drama_first.class",
+   "why": "a fact changed"
   },
   {
    "row": "L106",
    "screen": "drama_first.name",
-   "why": "screen changed: truth row"
+   "why": "a fact changed"
+  },
+  {
+   "row": "L167",
+   "screen": "drama_first.class",
+   "why": "a fact changed"
   }
  ]
 }

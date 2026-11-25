@@ -1,0 +1,47 @@
+{
+ "verdicts": [
+  {
+   "row": "L170",
+   "screen": "*",
+   "verdict": "N/A",
+   "line": "",
+   "why": "no place on this piece's screens is hidden_until a flag"
+  },
+  {
+   "row": "C952",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "Tom counts the till and puts twenty-two in your hand. ... You made $22.",
+   "why": "first shift pays $22, effect +22; matches PLAN"
+  },
+  {
+   "row": "C952",
+   "screen": "cafe_hire.both",
+   "verdict": "PASS",
+   "line": "Four-hour shifts, five an hour, plus whatever lands in the tip jar. Call it twenty-two a shift.",
+   "why": "$5 an hour, 4-hour shift, $22 with tips: PLAN 8f"
+  },
+  {
+   "row": "C952",
+   "screen": "cafe_hire.sign",
+   "verdict": "PASS",
+   "line": "Four-hour shifts, five an hour, plus whatever lands in the tip jar. Call it twenty-two a shift.",
+   "why": "$5 an hour, 4-hour shift, $22 with tips: PLAN 8f"
+  },
+  {
+   "row": "L168",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "Ask about the Help Wanted sign at the Café in town. The manager's in Monday to Saturday, from 10am. / Work your first shift ... a weekday between 10am and 3pm",
+   "why": "Tom (Mon-Sat 10-21) and Chris (weekdays 7-15) are pointed at by place and time; met_tom and met_chris are step whens"
+  },
+  {
+   "row": "L169",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "Ask about the Help Wanted sign at the Café in town. The manager's in Monday to Saturday, from 10am. / Work your first shift ... a weekday between 10am and 3pm",
+   "why": "cafe_hire runs Mon-Sat 10:00-20:55 while Tom's in; cafe_first_shift's weekday 10-3 window is named in the hint"
+  }
+ ],
+ "causes": []
+}

@@ -1,0 +1,3049 @@
+{
+ "verdicts": [
+  {
+   "row": "B10",
+   "screen": "borrow_hoodie.take",
+   "verdict": "PASS",
+   "line": "You take the grey one. It smells like him.",
+   "why": "shows only while Ryan is out and she doesn't own it"
+  },
+  {
+   "row": "B10",
+   "screen": "borrow_mom.take",
+   "verdict": "PASS",
+   "line": "You take a short skirt, a low-cut top and the heels she never wears.",
+   "why": "shows only while Laura and Mark are out of the room and she owns none of it; garments named as taken, and the add backs it"
+  },
+  {
+   "row": "B10",
+   "screen": "mom_living_room.hub",
+   "verdict": "PASS",
+   "line": "Mom's on the couch. Mark's in his chair, the remote on his knee.",
+   "why": "Mark in his chair weekdays 16:30\u201323, Sun 12\u201323; absent only Saturday nights, when the couch line shows"
+  },
+  {
+   "row": "B10",
+   "screen": "mom_living_room.talk",
+   "verdict": "PASS",
+   "line": "Next Saturday, you tell me the next part.",
+   "why": "Mark-absent groups fire only Saturday 19\u201323 by the rows, so \"tonight\", \"tomorrow night\" and \"Next Saturday\" are true"
+  },
+  {
+   "row": "B10",
+   "screen": "opening.ask_mom",
+   "verdict": "PASS",
+   "line": "She pushes the toast across the counter and turns the tap on hard.",
+   "why": "lands 07:40 in the kitchen, Laura there to 08:00"
+  },
+  {
+   "row": "B10",
+   "screen": "opening.bath",
+   "verdict": "PASS",
+   "line": "you get the bathroom a second before Ryan, your step-brother, opens his door",
+   "why": "07:12: Ryan leaves his room for the hall at 07:12 (his rows), and knocks from the hall; the towel is prose only (LO's waiver, NOTES 181)"
+  },
+  {
+   "row": "B10",
+   "screen": "opening.bath_freedom",
+   "verdict": "PASS",
+   "line": "Then pay for it.",
+   "why": "07:10: Mark and Laura in the kitchen"
+  },
+  {
+   "row": "B10",
+   "screen": "opening.bath_fun",
+   "verdict": "PASS",
+   "line": "Parties cost money, kid.",
+   "why": "07:10: Mark and Laura in the kitchen"
+  },
+  {
+   "row": "B10",
+   "screen": "opening.bath_grades",
+   "verdict": "PASS",
+   "line": "Straight A's don't pay rent.",
+   "why": "07:10: Mark and Laura in the kitchen"
+  },
+  {
+   "row": "B10",
+   "screen": "opening.hall",
+   "verdict": "PASS",
+   "line": "Ryan's on the wall opposite, shirtless, a towel over his shoulder.",
+   "why": "07:20\u201307:23: Ryan in the hall 07:12\u201307:25; towel prose only (NOTES 181)"
+  },
+  {
+   "row": "B10",
+   "screen": "opening.handover",
+   "verdict": "PASS",
+   "line": "Mark's gone to work. His mug is still on the table. Mom's alone at the sink",
+   "why": "07:35: Mark left the kitchen at 07:30, Laura there to 08:00"
+  },
+  {
+   "row": "B10",
+   "screen": "opening.kitchen_ask",
+   "verdict": "PASS",
+   "line": "Mark turns a page. He's listening.",
+   "why": "07:07: Mark and Laura both in the kitchen by their rows"
+  },
+  {
+   "row": "B10",
+   "screen": "opening.kitchen_rent",
+   "verdict": "PASS",
+   "line": "Mark, your step-father, is at the table with his coffee",
+   "why": "07:05: Mark kitchen 07:00\u201307:30, Laura 07:00\u201308:00 (who_is_where); $75 a week agrees with PLAN \u00a72"
+  },
+  {
+   "row": "B10",
+   "screen": "opening.room",
+   "verdict": "PASS",
+   "line": "You pull a plain bra and panties from the drawer, then your jeans, a T-shirt and sneakers. Your usual.",
+   "why": "the beat names the usual outfit, and \"Keep your usual\" equips it; the other two buttons say \"instead\""
+  },
+  {
+   "row": "B10",
+   "screen": "opening.room_past",
+   "verdict": "PASS",
+   "line": "Ryan flattens himself against the wall so nothing touches.",
+   "why": "07:23\u201307:25: Ryan in the hall until 07:25"
+  },
+  {
+   "row": "B10",
+   "screen": "opening.room_spoke",
+   "verdict": "PASS",
+   "line": "He turns to face the bathroom door and waits for you to move.",
+   "why": "07:23\u201307:25: Ryan in the hall until 07:25"
+  },
+  {
+   "row": "B10",
+   "screen": "opening.room_waited",
+   "verdict": "PASS",
+   "line": "Ryan's eyes go straight to the light switch.",
+   "why": "07:23\u201307:25: Ryan in the hall until 07:25"
+  },
+  {
+   "row": "B10",
+   "screen": "opening.sit_with_mom",
+   "verdict": "PASS",
+   "line": "You eat it at the counter while she does the dishes.",
+   "why": "lands 07:50 in the kitchen, Laura there to 08:00"
+  },
+  {
+   "row": "B10",
+   "screen": "opening.sums",
+   "verdict": "PASS",
+   "line": "The manager's in Monday to Saturday, from 10am.",
+   "why": "Tom's rows: Mon\u2013Sat 10\u201321 at the caf\u00e9; $75 by Sunday agrees with PLAN \u00a72; Mark collects Sunday at the kitchen table (his Sunday kitchen rows)"
+  },
+  {
+   "row": "B10",
+   "screen": "opening.wake",
+   "verdict": "PASS",
+   "line": "Your pyjama top has ridden up in the night",
+   "why": "07:00\u201307:05, alone in her room; no one placed"
+  },
+  {
+   "row": "B10",
+   "screen": "return_hoodie.return",
+   "verdict": "PASS",
+   "line": "You fold the grey hoodie and leave it on his chair.",
+   "why": "shows only while she owns it, isn't wearing it, and Ryan is out"
+  },
+  {
+   "row": "B10",
+   "screen": "return_mom.return",
+   "verdict": "PASS",
+   "line": "You hang the skirt and the top back on her side of the wardrobe and set the heels where they were.",
+   "why": "shows only while she owns all three, wears none, and both are out"
+  },
+  {
+   "row": "B10",
+   "screen": "talk_mom.eat",
+   "verdict": "PASS",
+   "line": "Mark eats without looking up from his paper. Ryan eats standing at the counter.",
+   "why": "eggs before noon, dinner after; Laura's kitchen rows are mornings and 17\u201319; each housemate line behind npc_at_location"
+  },
+  {
+   "row": "B10",
+   "screen": "talk_mom.hub",
+   "verdict": "PASS",
+   "line": "Mom's in the kitchen. Mark's at the table. She looks up at you, then at him.",
+   "why": "each presence line is behind npc_at_location; the garment lines behind clothing_item equipped"
+  },
+  {
+   "row": "B10",
+   "screen": "talk_mom.talk",
+   "verdict": "PASS",
+   "line": "She's got somewhere to be, Laura.",
+   "why": "groups by npc_at_location; Mark and Ryan never share the kitchen (Mark 07:00\u201307:30 weekdays, 08:00\u201312:00 weekends; Ryan 18\u201319 weekdays, 17\u201319 weekends), so the merged chain never hides one"
+  },
+  {
+   "row": "B8",
+   "screen": "borrow_hoodie.take",
+   "verdict": "PASS",
+   "line": "You take the grey one. It smells like him.",
+   "why": "every garment named is taken, put back or put on by this beat's own wardrobeEffects"
+  },
+  {
+   "row": "B8",
+   "screen": "borrow_mom.take",
+   "verdict": "PASS",
+   "line": "You take a short skirt, a low-cut top and the heels she never wears.",
+   "why": "every garment named is taken, put back or put on by this beat's own wardrobeEffects"
+  },
+  {
+   "row": "B8",
+   "screen": "mom_living_room.hub",
+   "verdict": "PASS",
+   "line": "Mom's on the couch. Mark's in his chair, the remote on his knee.",
+   "why": "no garment named; numbers agree with PLAN ($75, Sunday)"
+  },
+  {
+   "row": "B8",
+   "screen": "mom_living_room.talk",
+   "verdict": "PASS",
+   "line": "Next Saturday, you tell me the next part.",
+   "why": "no garment named; numbers agree with PLAN ($75, Sunday)"
+  },
+  {
+   "row": "B8",
+   "screen": "opening.ask_mom",
+   "verdict": "PASS",
+   "line": "She pushes the toast across the counter and turns the tap on hard.",
+   "why": "no garment named; numbers agree with PLAN ($75, Sunday)"
+  },
+  {
+   "row": "B8",
+   "screen": "opening.bath",
+   "verdict": "PASS",
+   "line": "you get the bathroom a second before Ryan, your step-brother, opens his door",
+   "why": "no garment named; numbers agree with PLAN ($75, Sunday)"
+  },
+  {
+   "row": "B8",
+   "screen": "opening.bath_freedom",
+   "verdict": "PASS",
+   "line": "Then pay for it.",
+   "why": "no garment named; numbers agree with PLAN ($75, Sunday)"
+  },
+  {
+   "row": "B8",
+   "screen": "opening.bath_fun",
+   "verdict": "PASS",
+   "line": "Parties cost money, kid.",
+   "why": "no garment named; numbers agree with PLAN ($75, Sunday)"
+  },
+  {
+   "row": "B8",
+   "screen": "opening.bath_grades",
+   "verdict": "PASS",
+   "line": "Straight A's don't pay rent.",
+   "why": "no garment named; numbers agree with PLAN ($75, Sunday)"
+  },
+  {
+   "row": "B8",
+   "screen": "opening.hall",
+   "verdict": "PASS",
+   "line": "Ryan's on the wall opposite, shirtless, a towel over his shoulder.",
+   "why": "no garment named; numbers agree with PLAN ($75, Sunday)"
+  },
+  {
+   "row": "B8",
+   "screen": "opening.handover",
+   "verdict": "PASS",
+   "line": "Mark's gone to work. His mug is still on the table. Mom's alone at the sink",
+   "why": "no garment named; numbers agree with PLAN ($75, Sunday)"
+  },
+  {
+   "row": "B8",
+   "screen": "opening.kitchen_ask",
+   "verdict": "PASS",
+   "line": "Mark turns a page. He's listening.",
+   "why": "no garment named; numbers agree with PLAN ($75, Sunday)"
+  },
+  {
+   "row": "B8",
+   "screen": "opening.kitchen_rent",
+   "verdict": "PASS",
+   "line": "Mark, your step-father, is at the table with his coffee",
+   "why": "no garment named; numbers agree with PLAN ($75, Sunday)"
+  },
+  {
+   "row": "B8",
+   "screen": "opening.room",
+   "verdict": "PASS",
+   "line": "You pull a plain bra and panties from the drawer, then your jeans, a T-shirt and sneakers. Your usual.",
+   "why": "every garment named is taken, put back or put on by this beat's own wardrobeEffects"
+  },
+  {
+   "row": "B8",
+   "screen": "opening.room_past",
+   "verdict": "PASS",
+   "line": "Ryan flattens himself against the wall so nothing touches.",
+   "why": "no garment named; numbers agree with PLAN ($75, Sunday)"
+  },
+  {
+   "row": "B8",
+   "screen": "opening.room_spoke",
+   "verdict": "PASS",
+   "line": "He turns to face the bathroom door and waits for you to move.",
+   "why": "no garment named; numbers agree with PLAN ($75, Sunday)"
+  },
+  {
+   "row": "B8",
+   "screen": "opening.room_waited",
+   "verdict": "PASS",
+   "line": "Ryan's eyes go straight to the light switch.",
+   "why": "no garment named; numbers agree with PLAN ($75, Sunday)"
+  },
+  {
+   "row": "B8",
+   "screen": "opening.sit_with_mom",
+   "verdict": "PASS",
+   "line": "You eat it at the counter while she does the dishes.",
+   "why": "no garment named; numbers agree with PLAN ($75, Sunday)"
+  },
+  {
+   "row": "B8",
+   "screen": "opening.sums",
+   "verdict": "PASS",
+   "line": "The manager's in Monday to Saturday, from 10am.",
+   "why": "no garment named; numbers agree with PLAN ($75, Sunday)"
+  },
+  {
+   "row": "B8",
+   "screen": "opening.wake",
+   "verdict": "WAIVED",
+   "line": "Your pyjama top has ridden up in the night",
+   "why": "LO, NOTES 179 (typed 2026-11-23): \"Yes to all ten, waive 9\" -- the pyjama top on screen 1 is prose only, not a garment"
+  },
+  {
+   "row": "B8",
+   "screen": "return_hoodie.return",
+   "verdict": "PASS",
+   "line": "You fold the grey hoodie and leave it on his chair.",
+   "why": "every garment named is taken, put back or put on by this beat's own wardrobeEffects"
+  },
+  {
+   "row": "B8",
+   "screen": "return_mom.return",
+   "verdict": "PASS",
+   "line": "You hang the skirt and the top back on her side of the wardrobe and set the heels where they were.",
+   "why": "every garment named is taken, put back or put on by this beat's own wardrobeEffects"
+  },
+  {
+   "row": "B8",
+   "screen": "talk_mom.eat",
+   "verdict": "PASS",
+   "line": "Mark eats without looking up from his paper. Ryan eats standing at the counter.",
+   "why": "no garment named; numbers agree with PLAN ($75, Sunday)"
+  },
+  {
+   "row": "B8",
+   "screen": "talk_mom.hub",
+   "verdict": "PASS",
+   "line": "Mom's in the kitchen. Mark's at the table. She looks up at you, then at him.",
+   "why": "no garment named; numbers agree with PLAN ($75, Sunday)"
+  },
+  {
+   "row": "B8",
+   "screen": "talk_mom.talk",
+   "verdict": "PASS",
+   "line": "She's got somewhere to be, Laura.",
+   "why": "no garment named; numbers agree with PLAN ($75, Sunday)"
+  },
+  {
+   "row": "C1158",
+   "screen": "borrow_hoodie.take",
+   "verdict": "PASS",
+   "line": "You take the grey one. It smells like him.",
+   "why": "names the garments as taken or put back, never as worn; backed by the add/remove and the trigger's owned/unequipped"
+  },
+  {
+   "row": "C1158",
+   "screen": "borrow_mom.take",
+   "verdict": "PASS",
+   "line": "You take a short skirt, a low-cut top and the heels she never wears.",
+   "why": "names the garments as taken or put back, never as worn; backed by the add/remove and the trigger's owned/unequipped"
+  },
+  {
+   "row": "C1158",
+   "screen": "mom_living_room.hub",
+   "verdict": "PASS",
+   "line": "Mom's eyes drop to the skirt. Her skirt.",
+   "why": "each garment line sits behind clothing_item equipped"
+  },
+  {
+   "row": "C1158",
+   "screen": "mom_living_room.talk",
+   "verdict": "N/A",
+   "line": "Next Saturday, you tell me the next part.",
+   "why": "no garment named"
+  },
+  {
+   "row": "C1158",
+   "screen": "opening.ask_mom",
+   "verdict": "N/A",
+   "line": "She pushes the toast across the counter and turns the tap on hard.",
+   "why": "no garment named"
+  },
+  {
+   "row": "C1158",
+   "screen": "opening.bath",
+   "verdict": "PASS",
+   "line": "you get the bathroom a second before Ryan, your step-brother, opens his door",
+   "why": "the towel is prose only (LO's waiver, NOTES 181, held as prose not a garment); the strip is the act"
+  },
+  {
+   "row": "C1158",
+   "screen": "opening.bath_freedom",
+   "verdict": "N/A",
+   "line": "Then pay for it.",
+   "why": "no garment named"
+  },
+  {
+   "row": "C1158",
+   "screen": "opening.bath_fun",
+   "verdict": "N/A",
+   "line": "Parties cost money, kid.",
+   "why": "no garment named"
+  },
+  {
+   "row": "C1158",
+   "screen": "opening.bath_grades",
+   "verdict": "N/A",
+   "line": "Straight A's don't pay rent.",
+   "why": "no garment named"
+  },
+  {
+   "row": "C1158",
+   "screen": "opening.hall",
+   "verdict": "PASS",
+   "line": "Ryan's on the wall opposite, shirtless, a towel over his shoulder.",
+   "why": "the towel is prose only (LO's waiver, NOTES 181, held as prose not a garment); the strip is the act"
+  },
+  {
+   "row": "C1158",
+   "screen": "opening.handover",
+   "verdict": "N/A",
+   "line": "Mark's gone to work. His mug is still on the table. Mom's alone at the sink",
+   "why": "no garment named"
+  },
+  {
+   "row": "C1158",
+   "screen": "opening.kitchen_ask",
+   "verdict": "N/A",
+   "line": "Mark turns a page. He's listening.",
+   "why": "no garment named"
+  },
+  {
+   "row": "C1158",
+   "screen": "opening.kitchen_rent",
+   "verdict": "N/A",
+   "line": "Mark, your step-father, is at the table with his coffee",
+   "why": "no garment named"
+  },
+  {
+   "row": "C1158",
+   "screen": "opening.room",
+   "verdict": "PASS",
+   "line": "You pull a plain bra and panties from the drawer, then your jeans, a T-shirt and sneakers. Your usual.",
+   "why": "the beat that equips her names it (C1158 allows \"the beat that equips her\")"
+  },
+  {
+   "row": "C1158",
+   "screen": "opening.room_past",
+   "verdict": "PASS",
+   "line": "Ryan flattens himself against the wall so nothing touches.",
+   "why": "the towel is prose only (LO's waiver, NOTES 181, held as prose not a garment); the strip is the act"
+  },
+  {
+   "row": "C1158",
+   "screen": "opening.room_spoke",
+   "verdict": "PASS",
+   "line": "He turns to face the bathroom door and waits for you to move.",
+   "why": "the towel is prose only (LO's waiver, NOTES 181, held as prose not a garment); the strip is the act"
+  },
+  {
+   "row": "C1158",
+   "screen": "opening.room_waited",
+   "verdict": "PASS",
+   "line": "Ryan's eyes go straight to the light switch.",
+   "why": "the towel is prose only (LO's waiver, NOTES 181, held as prose not a garment); the strip is the act"
+  },
+  {
+   "row": "C1158",
+   "screen": "opening.sit_with_mom",
+   "verdict": "N/A",
+   "line": "You eat it at the counter while she does the dishes.",
+   "why": "no garment named"
+  },
+  {
+   "row": "C1158",
+   "screen": "opening.sums",
+   "verdict": "N/A",
+   "line": "The manager's in Monday to Saturday, from 10am.",
+   "why": "no garment named"
+  },
+  {
+   "row": "C1158",
+   "screen": "opening.wake",
+   "verdict": "WAIVED",
+   "line": "Your pyjama top has ridden up in the night",
+   "why": "LO, NOTES 179 (typed 2026-11-23): \"Yes to all ten, waive 9\" -- the pyjama top on screen 1 is prose only, not a garment"
+  },
+  {
+   "row": "C1158",
+   "screen": "return_hoodie.return",
+   "verdict": "PASS",
+   "line": "You fold the grey hoodie and leave it on his chair.",
+   "why": "names the garments as taken or put back, never as worn; backed by the add/remove and the trigger's owned/unequipped"
+  },
+  {
+   "row": "C1158",
+   "screen": "return_mom.return",
+   "verdict": "PASS",
+   "line": "You hang the skirt and the top back on her side of the wardrobe and set the heels where they were.",
+   "why": "names the garments as taken or put back, never as worn; backed by the add/remove and the trigger's owned/unequipped"
+  },
+  {
+   "row": "C1158",
+   "screen": "talk_mom.eat",
+   "verdict": "N/A",
+   "line": "Mark eats without looking up from his paper. Ryan eats standing at the counter.",
+   "why": "no garment named"
+  },
+  {
+   "row": "C1158",
+   "screen": "talk_mom.hub",
+   "verdict": "PASS",
+   "line": "Mom's eyes drop to the skirt. Her skirt.",
+   "why": "each garment line sits behind clothing_item equipped"
+  },
+  {
+   "row": "C1158",
+   "screen": "talk_mom.talk",
+   "verdict": "N/A",
+   "line": "She's got somewhere to be, Laura.",
+   "why": "no garment named"
+  },
+  {
+   "row": "C1166",
+   "screen": "mom_living_room.talk",
+   "verdict": "N/A",
+   "line": "Next Saturday, you tell me the next part.",
+   "why": "not where she dresses"
+  },
+  {
+   "row": "C1166",
+   "screen": "opening.ask_mom",
+   "verdict": "PASS",
+   "line": "She pushes the toast across the counter and turns the tap on hard.",
+   "why": "the opening's room screen arms the wardrobe with three outfit buttons"
+  },
+  {
+   "row": "C1166",
+   "screen": "opening.sit_with_mom",
+   "verdict": "PASS",
+   "line": "You eat it at the counter while she does the dishes.",
+   "why": "the opening's room screen arms the wardrobe with three outfit buttons"
+  },
+  {
+   "row": "C1166",
+   "screen": "talk_mom.eat",
+   "verdict": "N/A",
+   "line": "Mark eats without looking up from his paper. Ryan eats standing at the counter.",
+   "why": "not where she dresses"
+  },
+  {
+   "row": "C1166",
+   "screen": "talk_mom.talk",
+   "verdict": "N/A",
+   "line": "She's got somewhere to be, Laura.",
+   "why": "not where she dresses"
+  },
+  {
+   "row": "C1167",
+   "screen": "borrow_hoodie.take",
+   "verdict": "WAIVED",
+   "line": "You take the grey one. It smells like him.",
+   "why": "still no clothing event or second reader in release 1; LO, NOTES.md 2026-11-24: \"for the release one system i think we have clothing shop and change clothing. She can change to basic clothing but hotter will stay locked in for the release one as they require higher traits and traits are capped to 0 in the release one.\""
+  },
+  {
+   "row": "C1167",
+   "screen": "borrow_mom.take",
+   "verdict": "WAIVED",
+   "line": "You take a short skirt, a low-cut top and the heels she never wears.",
+   "why": "still no clothing event or second reader in release 1; LO, NOTES.md 2026-11-24: \"for the release one system i think we have clothing shop and change clothing. She can change to basic clothing but hotter will stay locked in for the release one as they require higher traits and traits are capped to 0 in the release one.\""
+  },
+  {
+   "row": "C1167",
+   "screen": "return_hoodie.return",
+   "verdict": "WAIVED",
+   "line": "You fold the grey hoodie and leave it on his chair.",
+   "why": "still no clothing event or second reader in release 1; LO, NOTES.md 2026-11-24: \"for the release one system i think we have clothing shop and change clothing. She can change to basic clothing but hotter will stay locked in for the release one as they require higher traits and traits are capped to 0 in the release one.\""
+  },
+  {
+   "row": "C1167",
+   "screen": "return_mom.return",
+   "verdict": "WAIVED",
+   "line": "You hang the skirt and the top back on her side of the wardrobe and set the heels where they were.",
+   "why": "still no clothing event or second reader in release 1; LO, NOTES.md 2026-11-24: \"for the release one system i think we have clothing shop and change clothing. She can change to basic clothing but hotter will stay locked in for the release one as they require higher traits and traits are capped to 0 in the release one.\""
+  },
+  {
+   "row": "C1177",
+   "screen": "mom_living_room.talk",
+   "verdict": "N/A",
+   "line": "Next Saturday, you tell me the next part.",
+   "why": "she doesn't dress or undress here"
+  },
+  {
+   "row": "C1177",
+   "screen": "opening.ask_mom",
+   "verdict": "N/A",
+   "line": "She pushes the toast across the counter and turns the tap on hard.",
+   "why": "she doesn't dress or undress here"
+  },
+  {
+   "row": "C1177",
+   "screen": "opening.sit_with_mom",
+   "verdict": "N/A",
+   "line": "You eat it at the counter while she does the dishes.",
+   "why": "she doesn't dress or undress here"
+  },
+  {
+   "row": "C1177",
+   "screen": "talk_mom.eat",
+   "verdict": "N/A",
+   "line": "Mark eats without looking up from his paper. Ryan eats standing at the counter.",
+   "why": "she doesn't dress or undress here"
+  },
+  {
+   "row": "C1177",
+   "screen": "talk_mom.talk",
+   "verdict": "N/A",
+   "line": "She's got somewhere to be, Laura.",
+   "why": "she doesn't dress or undress here"
+  },
+  {
+   "row": "C1197",
+   "screen": "mom_living_room.talk",
+   "verdict": "N/A",
+   "line": "Next Saturday, you tell me the next part.",
+   "why": "she doesn't dress or undress here"
+  },
+  {
+   "row": "C1197",
+   "screen": "opening.ask_mom",
+   "verdict": "N/A",
+   "line": "She pushes the toast across the counter and turns the tap on hard.",
+   "why": "she doesn't dress or undress here"
+  },
+  {
+   "row": "C1197",
+   "screen": "opening.sit_with_mom",
+   "verdict": "N/A",
+   "line": "You eat it at the counter while she does the dishes.",
+   "why": "she doesn't dress or undress here"
+  },
+  {
+   "row": "C1197",
+   "screen": "talk_mom.eat",
+   "verdict": "N/A",
+   "line": "Mark eats without looking up from his paper. Ryan eats standing at the counter.",
+   "why": "she doesn't dress or undress here"
+  },
+  {
+   "row": "C1197",
+   "screen": "talk_mom.talk",
+   "verdict": "N/A",
+   "line": "She's got somewhere to be, Laura.",
+   "why": "she doesn't dress or undress here"
+  },
+  {
+   "row": "C1204",
+   "screen": "borrow_hoodie.take",
+   "verdict": "WAIVED",
+   "line": "You take the grey one. It smells like him.",
+   "why": "still no clothing event or second reader in release 1; LO, NOTES.md 2026-11-24: \"for the release one system i think we have clothing shop and change clothing. She can change to basic clothing but hotter will stay locked in for the release one as they require higher traits and traits are capped to 0 in the release one.\""
+  },
+  {
+   "row": "C1204",
+   "screen": "borrow_mom.take",
+   "verdict": "WAIVED",
+   "line": "You take a short skirt, a low-cut top and the heels she never wears.",
+   "why": "still no clothing event or second reader in release 1; LO, NOTES.md 2026-11-24: \"for the release one system i think we have clothing shop and change clothing. She can change to basic clothing but hotter will stay locked in for the release one as they require higher traits and traits are capped to 0 in the release one.\""
+  },
+  {
+   "row": "C1204",
+   "screen": "return_hoodie.return",
+   "verdict": "WAIVED",
+   "line": "You fold the grey hoodie and leave it on his chair.",
+   "why": "still no clothing event or second reader in release 1; LO, NOTES.md 2026-11-24: \"for the release one system i think we have clothing shop and change clothing. She can change to basic clothing but hotter will stay locked in for the release one as they require higher traits and traits are capped to 0 in the release one.\""
+  },
+  {
+   "row": "C1204",
+   "screen": "return_mom.return",
+   "verdict": "WAIVED",
+   "line": "You hang the skirt and the top back on her side of the wardrobe and set the heels where they were.",
+   "why": "still no clothing event or second reader in release 1; LO, NOTES.md 2026-11-24: \"for the release one system i think we have clothing shop and change clothing. She can change to basic clothing but hotter will stay locked in for the release one as they require higher traits and traits are capped to 0 in the release one.\""
+  },
+  {
+   "row": "C1206",
+   "screen": "borrow_hoodie.take",
+   "verdict": "PASS",
+   "line": "You take the grey one. It smells like him.",
+   "why": "names the garments as taken or put back, never as worn; backed by the add/remove and the trigger's owned/unequipped"
+  },
+  {
+   "row": "C1206",
+   "screen": "borrow_mom.take",
+   "verdict": "PASS",
+   "line": "You take a short skirt, a low-cut top and the heels she never wears.",
+   "why": "names the garments as taken or put back, never as worn; backed by the add/remove and the trigger's owned/unequipped"
+  },
+  {
+   "row": "C1206",
+   "screen": "mom_living_room.hub",
+   "verdict": "PASS",
+   "line": "Mom's eyes drop to the skirt. Her skirt.",
+   "why": "each garment line sits behind clothing_item equipped"
+  },
+  {
+   "row": "C1206",
+   "screen": "mom_living_room.talk",
+   "verdict": "N/A",
+   "line": "Next Saturday, you tell me the next part.",
+   "why": "no garment named"
+  },
+  {
+   "row": "C1206",
+   "screen": "opening.ask_mom",
+   "verdict": "N/A",
+   "line": "She pushes the toast across the counter and turns the tap on hard.",
+   "why": "no garment named"
+  },
+  {
+   "row": "C1206",
+   "screen": "opening.bath",
+   "verdict": "PASS",
+   "line": "you get the bathroom a second before Ryan, your step-brother, opens his door",
+   "why": "the towel is prose only (LO's waiver, NOTES 181, held as prose not a garment); the strip is the act"
+  },
+  {
+   "row": "C1206",
+   "screen": "opening.bath_freedom",
+   "verdict": "N/A",
+   "line": "Then pay for it.",
+   "why": "no garment named"
+  },
+  {
+   "row": "C1206",
+   "screen": "opening.bath_fun",
+   "verdict": "N/A",
+   "line": "Parties cost money, kid.",
+   "why": "no garment named"
+  },
+  {
+   "row": "C1206",
+   "screen": "opening.bath_grades",
+   "verdict": "N/A",
+   "line": "Straight A's don't pay rent.",
+   "why": "no garment named"
+  },
+  {
+   "row": "C1206",
+   "screen": "opening.hall",
+   "verdict": "PASS",
+   "line": "Ryan's on the wall opposite, shirtless, a towel over his shoulder.",
+   "why": "the towel is prose only (LO's waiver, NOTES 181, held as prose not a garment); the strip is the act"
+  },
+  {
+   "row": "C1206",
+   "screen": "opening.handover",
+   "verdict": "N/A",
+   "line": "Mark's gone to work. His mug is still on the table. Mom's alone at the sink",
+   "why": "no garment named"
+  },
+  {
+   "row": "C1206",
+   "screen": "opening.kitchen_ask",
+   "verdict": "N/A",
+   "line": "Mark turns a page. He's listening.",
+   "why": "no garment named"
+  },
+  {
+   "row": "C1206",
+   "screen": "opening.kitchen_rent",
+   "verdict": "N/A",
+   "line": "Mark, your step-father, is at the table with his coffee",
+   "why": "no garment named"
+  },
+  {
+   "row": "C1206",
+   "screen": "opening.room",
+   "verdict": "PASS",
+   "line": "You pull a plain bra and panties from the drawer, then your jeans, a T-shirt and sneakers. Your usual.",
+   "why": "the beat that equips her names it (C1158 allows \"the beat that equips her\")"
+  },
+  {
+   "row": "C1206",
+   "screen": "opening.room_past",
+   "verdict": "PASS",
+   "line": "Ryan flattens himself against the wall so nothing touches.",
+   "why": "the towel is prose only (LO's waiver, NOTES 181, held as prose not a garment); the strip is the act"
+  },
+  {
+   "row": "C1206",
+   "screen": "opening.room_spoke",
+   "verdict": "PASS",
+   "line": "He turns to face the bathroom door and waits for you to move.",
+   "why": "the towel is prose only (LO's waiver, NOTES 181, held as prose not a garment); the strip is the act"
+  },
+  {
+   "row": "C1206",
+   "screen": "opening.room_waited",
+   "verdict": "PASS",
+   "line": "Ryan's eyes go straight to the light switch.",
+   "why": "the towel is prose only (LO's waiver, NOTES 181, held as prose not a garment); the strip is the act"
+  },
+  {
+   "row": "C1206",
+   "screen": "opening.sit_with_mom",
+   "verdict": "N/A",
+   "line": "You eat it at the counter while she does the dishes.",
+   "why": "no garment named"
+  },
+  {
+   "row": "C1206",
+   "screen": "opening.sums",
+   "verdict": "N/A",
+   "line": "The manager's in Monday to Saturday, from 10am.",
+   "why": "no garment named"
+  },
+  {
+   "row": "C1206",
+   "screen": "opening.wake",
+   "verdict": "WAIVED",
+   "line": "Your pyjama top has ridden up in the night",
+   "why": "LO, NOTES 179 (typed 2026-11-23): \"Yes to all ten, waive 9\" -- the pyjama top on screen 1 is prose only, not a garment"
+  },
+  {
+   "row": "C1206",
+   "screen": "return_hoodie.return",
+   "verdict": "PASS",
+   "line": "You fold the grey hoodie and leave it on his chair.",
+   "why": "names the garments as taken or put back, never as worn; backed by the add/remove and the trigger's owned/unequipped"
+  },
+  {
+   "row": "C1206",
+   "screen": "return_mom.return",
+   "verdict": "PASS",
+   "line": "You hang the skirt and the top back on her side of the wardrobe and set the heels where they were.",
+   "why": "names the garments as taken or put back, never as worn; backed by the add/remove and the trigger's owned/unequipped"
+  },
+  {
+   "row": "C1206",
+   "screen": "talk_mom.eat",
+   "verdict": "N/A",
+   "line": "Mark eats without looking up from his paper. Ryan eats standing at the counter.",
+   "why": "no garment named"
+  },
+  {
+   "row": "C1206",
+   "screen": "talk_mom.hub",
+   "verdict": "PASS",
+   "line": "Mom's eyes drop to the skirt. Her skirt.",
+   "why": "each garment line sits behind clothing_item equipped"
+  },
+  {
+   "row": "C1206",
+   "screen": "talk_mom.talk",
+   "verdict": "N/A",
+   "line": "She's got somewhere to be, Laura.",
+   "why": "no garment named"
+  },
+  {
+   "row": "C1207",
+   "screen": "mom_living_room.talk",
+   "verdict": "N/A",
+   "line": "Next Saturday, you tell me the next part.",
+   "why": "she doesn't dress or undress here"
+  },
+  {
+   "row": "C1207",
+   "screen": "opening.ask_mom",
+   "verdict": "N/A",
+   "line": "She pushes the toast across the counter and turns the tap on hard.",
+   "why": "she doesn't dress or undress here"
+  },
+  {
+   "row": "C1207",
+   "screen": "opening.sit_with_mom",
+   "verdict": "N/A",
+   "line": "You eat it at the counter while she does the dishes.",
+   "why": "she doesn't dress or undress here"
+  },
+  {
+   "row": "C1207",
+   "screen": "talk_mom.eat",
+   "verdict": "N/A",
+   "line": "Mark eats without looking up from his paper. Ryan eats standing at the counter.",
+   "why": "she doesn't dress or undress here"
+  },
+  {
+   "row": "C1207",
+   "screen": "talk_mom.talk",
+   "verdict": "N/A",
+   "line": "She's got somewhere to be, Laura.",
+   "why": "she doesn't dress or undress here"
+  },
+  {
+   "row": "C1631",
+   "screen": "borrow_hoodie.take",
+   "verdict": "N/A",
+   "line": "You take the grey one. It smells like him.",
+   "why": "not the hand-over"
+  },
+  {
+   "row": "C1631",
+   "screen": "borrow_mom.take",
+   "verdict": "N/A",
+   "line": "You take a short skirt, a low-cut top and the heels she never wears.",
+   "why": "not the hand-over"
+  },
+  {
+   "row": "C1631",
+   "screen": "mom_living_room.hub",
+   "verdict": "N/A",
+   "line": "Mom's on the couch. Mark's in his chair, the remote on his knee.",
+   "why": "not the hand-over"
+  },
+  {
+   "row": "C1631",
+   "screen": "mom_living_room.talk",
+   "verdict": "N/A",
+   "line": "Next Saturday, you tell me the next part.",
+   "why": "not the hand-over"
+  },
+  {
+   "row": "C1631",
+   "screen": "opening.ask_mom",
+   "verdict": "PASS",
+   "line": "She pushes the toast across the counter and turns the tap on hard.",
+   "why": "lands in the kitchen before 08:00 with Laura there: her face is live"
+  },
+  {
+   "row": "C1631",
+   "screen": "opening.bath",
+   "verdict": "N/A",
+   "line": "you get the bathroom a second before Ryan, your step-brother, opens his door",
+   "why": "not the hand-over"
+  },
+  {
+   "row": "C1631",
+   "screen": "opening.bath_freedom",
+   "verdict": "N/A",
+   "line": "Then pay for it.",
+   "why": "not the hand-over"
+  },
+  {
+   "row": "C1631",
+   "screen": "opening.bath_fun",
+   "verdict": "N/A",
+   "line": "Parties cost money, kid.",
+   "why": "not the hand-over"
+  },
+  {
+   "row": "C1631",
+   "screen": "opening.bath_grades",
+   "verdict": "N/A",
+   "line": "Straight A's don't pay rent.",
+   "why": "not the hand-over"
+  },
+  {
+   "row": "C1631",
+   "screen": "opening.hall",
+   "verdict": "N/A",
+   "line": "Ryan's on the wall opposite, shirtless, a towel over his shoulder.",
+   "why": "not the hand-over"
+  },
+  {
+   "row": "C1631",
+   "screen": "opening.handover",
+   "verdict": "PASS",
+   "line": "Mark's gone to work. His mug is still on the table. Mom's alone at the sink",
+   "why": "lands in the kitchen before 08:00 with Laura there: her face is live"
+  },
+  {
+   "row": "C1631",
+   "screen": "opening.kitchen_ask",
+   "verdict": "N/A",
+   "line": "Mark turns a page. He's listening.",
+   "why": "not the hand-over"
+  },
+  {
+   "row": "C1631",
+   "screen": "opening.kitchen_rent",
+   "verdict": "N/A",
+   "line": "Mark, your step-father, is at the table with his coffee",
+   "why": "not the hand-over"
+  },
+  {
+   "row": "C1631",
+   "screen": "opening.room",
+   "verdict": "N/A",
+   "line": "You pull a plain bra and panties from the drawer, then your jeans, a T-shirt and sneakers. Your usual.",
+   "why": "not the hand-over"
+  },
+  {
+   "row": "C1631",
+   "screen": "opening.room_past",
+   "verdict": "N/A",
+   "line": "Ryan flattens himself against the wall so nothing touches.",
+   "why": "not the hand-over"
+  },
+  {
+   "row": "C1631",
+   "screen": "opening.room_spoke",
+   "verdict": "N/A",
+   "line": "He turns to face the bathroom door and waits for you to move.",
+   "why": "not the hand-over"
+  },
+  {
+   "row": "C1631",
+   "screen": "opening.room_waited",
+   "verdict": "N/A",
+   "line": "Ryan's eyes go straight to the light switch.",
+   "why": "not the hand-over"
+  },
+  {
+   "row": "C1631",
+   "screen": "opening.sit_with_mom",
+   "verdict": "PASS",
+   "line": "You eat it at the counter while she does the dishes.",
+   "why": "lands in the kitchen before 08:00 with Laura there: her face is live"
+  },
+  {
+   "row": "C1631",
+   "screen": "opening.sums",
+   "verdict": "N/A",
+   "line": "The manager's in Monday to Saturday, from 10am.",
+   "why": "not the hand-over"
+  },
+  {
+   "row": "C1631",
+   "screen": "opening.wake",
+   "verdict": "N/A",
+   "line": "Your pyjama top has ridden up in the night",
+   "why": "not the hand-over"
+  },
+  {
+   "row": "C1631",
+   "screen": "return_hoodie.return",
+   "verdict": "N/A",
+   "line": "You fold the grey hoodie and leave it on his chair.",
+   "why": "not the hand-over"
+  },
+  {
+   "row": "C1631",
+   "screen": "return_mom.return",
+   "verdict": "N/A",
+   "line": "You hang the skirt and the top back on her side of the wardrobe and set the heels where they were.",
+   "why": "not the hand-over"
+  },
+  {
+   "row": "C1631",
+   "screen": "talk_mom.eat",
+   "verdict": "N/A",
+   "line": "Mark eats without looking up from his paper. Ryan eats standing at the counter.",
+   "why": "not the hand-over"
+  },
+  {
+   "row": "C1631",
+   "screen": "talk_mom.hub",
+   "verdict": "N/A",
+   "line": "Mom's in the kitchen. Mark's at the table. She looks up at you, then at him.",
+   "why": "not the hand-over"
+  },
+  {
+   "row": "C1631",
+   "screen": "talk_mom.talk",
+   "verdict": "N/A",
+   "line": "She's got somewhere to be, Laura.",
+   "why": "not the hand-over"
+  },
+  {
+   "row": "C460",
+   "screen": "borrow_hoodie.take",
+   "verdict": "PASS",
+   "line": "You take the grey one. It smells like him.",
+   "why": "shows only while Ryan is out and she doesn't own it"
+  },
+  {
+   "row": "C460",
+   "screen": "borrow_mom.take",
+   "verdict": "PASS",
+   "line": "You take a short skirt, a low-cut top and the heels she never wears.",
+   "why": "shows only while Laura and Mark are out of the room and she owns none of it; garments named as taken, and the add backs it"
+  },
+  {
+   "row": "C460",
+   "screen": "mom_living_room.hub",
+   "verdict": "PASS",
+   "line": "Mom's on the couch. Mark's in his chair, the remote on his knee.",
+   "why": "Mark in his chair weekdays 16:30\u201323, Sun 12\u201323; absent only Saturday nights, when the couch line shows"
+  },
+  {
+   "row": "C460",
+   "screen": "mom_living_room.talk",
+   "verdict": "PASS",
+   "line": "Next Saturday, you tell me the next part.",
+   "why": "Mark-absent groups fire only Saturday 19\u201323 by the rows, so \"tonight\", \"tomorrow night\" and \"Next Saturday\" are true"
+  },
+  {
+   "row": "C460",
+   "screen": "opening.ask_mom",
+   "verdict": "PASS",
+   "line": "She pushes the toast across the counter and turns the tap on hard.",
+   "why": "lands 07:40 in the kitchen, Laura there to 08:00"
+  },
+  {
+   "row": "C460",
+   "screen": "opening.bath",
+   "verdict": "PASS",
+   "line": "you get the bathroom a second before Ryan, your step-brother, opens his door",
+   "why": "07:12: Ryan leaves his room for the hall at 07:12 (his rows), and knocks from the hall; the towel is prose only (LO's waiver, NOTES 181)"
+  },
+  {
+   "row": "C460",
+   "screen": "opening.bath_freedom",
+   "verdict": "PASS",
+   "line": "Then pay for it.",
+   "why": "07:10: Mark and Laura in the kitchen"
+  },
+  {
+   "row": "C460",
+   "screen": "opening.bath_fun",
+   "verdict": "PASS",
+   "line": "Parties cost money, kid.",
+   "why": "07:10: Mark and Laura in the kitchen"
+  },
+  {
+   "row": "C460",
+   "screen": "opening.bath_grades",
+   "verdict": "PASS",
+   "line": "Straight A's don't pay rent.",
+   "why": "07:10: Mark and Laura in the kitchen"
+  },
+  {
+   "row": "C460",
+   "screen": "opening.hall",
+   "verdict": "PASS",
+   "line": "Ryan's on the wall opposite, shirtless, a towel over his shoulder.",
+   "why": "07:20\u201307:23: Ryan in the hall 07:12\u201307:25; towel prose only (NOTES 181)"
+  },
+  {
+   "row": "C460",
+   "screen": "opening.handover",
+   "verdict": "PASS",
+   "line": "Mark's gone to work. His mug is still on the table. Mom's alone at the sink",
+   "why": "07:35: Mark left the kitchen at 07:30, Laura there to 08:00"
+  },
+  {
+   "row": "C460",
+   "screen": "opening.kitchen_ask",
+   "verdict": "PASS",
+   "line": "Mark turns a page. He's listening.",
+   "why": "07:07: Mark and Laura both in the kitchen by their rows"
+  },
+  {
+   "row": "C460",
+   "screen": "opening.kitchen_rent",
+   "verdict": "PASS",
+   "line": "Mark, your step-father, is at the table with his coffee",
+   "why": "07:05: Mark kitchen 07:00\u201307:30, Laura 07:00\u201308:00 (who_is_where); $75 a week agrees with PLAN \u00a72"
+  },
+  {
+   "row": "C460",
+   "screen": "opening.room",
+   "verdict": "PASS",
+   "line": "You pull a plain bra and panties from the drawer, then your jeans, a T-shirt and sneakers. Your usual.",
+   "why": "the beat names the usual outfit, and \"Keep your usual\" equips it; the other two buttons say \"instead\""
+  },
+  {
+   "row": "C460",
+   "screen": "opening.room_past",
+   "verdict": "PASS",
+   "line": "Ryan flattens himself against the wall so nothing touches.",
+   "why": "07:23\u201307:25: Ryan in the hall until 07:25"
+  },
+  {
+   "row": "C460",
+   "screen": "opening.room_spoke",
+   "verdict": "PASS",
+   "line": "He turns to face the bathroom door and waits for you to move.",
+   "why": "07:23\u201307:25: Ryan in the hall until 07:25"
+  },
+  {
+   "row": "C460",
+   "screen": "opening.room_waited",
+   "verdict": "PASS",
+   "line": "Ryan's eyes go straight to the light switch.",
+   "why": "07:23\u201307:25: Ryan in the hall until 07:25"
+  },
+  {
+   "row": "C460",
+   "screen": "opening.sit_with_mom",
+   "verdict": "PASS",
+   "line": "You eat it at the counter while she does the dishes.",
+   "why": "lands 07:50 in the kitchen, Laura there to 08:00"
+  },
+  {
+   "row": "C460",
+   "screen": "opening.sums",
+   "verdict": "PASS",
+   "line": "The manager's in Monday to Saturday, from 10am.",
+   "why": "Tom's rows: Mon\u2013Sat 10\u201321 at the caf\u00e9; $75 by Sunday agrees with PLAN \u00a72; Mark collects Sunday at the kitchen table (his Sunday kitchen rows)"
+  },
+  {
+   "row": "C460",
+   "screen": "opening.wake",
+   "verdict": "PASS",
+   "line": "Your pyjama top has ridden up in the night",
+   "why": "07:00\u201307:05, alone in her room; no one placed"
+  },
+  {
+   "row": "C460",
+   "screen": "return_hoodie.return",
+   "verdict": "PASS",
+   "line": "You fold the grey hoodie and leave it on his chair.",
+   "why": "shows only while she owns it, isn't wearing it, and Ryan is out"
+  },
+  {
+   "row": "C460",
+   "screen": "return_mom.return",
+   "verdict": "PASS",
+   "line": "You hang the skirt and the top back on her side of the wardrobe and set the heels where they were.",
+   "why": "shows only while she owns all three, wears none, and both are out"
+  },
+  {
+   "row": "C460",
+   "screen": "talk_mom.eat",
+   "verdict": "PASS",
+   "line": "Mark eats without looking up from his paper. Ryan eats standing at the counter.",
+   "why": "eggs before noon, dinner after; Laura's kitchen rows are mornings and 17\u201319; each housemate line behind npc_at_location"
+  },
+  {
+   "row": "C460",
+   "screen": "talk_mom.hub",
+   "verdict": "PASS",
+   "line": "Mom's in the kitchen. Mark's at the table. She looks up at you, then at him.",
+   "why": "each presence line is behind npc_at_location; the garment lines behind clothing_item equipped"
+  },
+  {
+   "row": "C460",
+   "screen": "talk_mom.talk",
+   "verdict": "PASS",
+   "line": "She's got somewhere to be, Laura.",
+   "why": "groups by npc_at_location; Mark and Ryan never share the kitchen (Mark 07:00\u201307:30 weekdays, 08:00\u201312:00 weekends; Ryan 18\u201319 weekdays, 17\u201319 weekends), so the merged chain never hides one"
+  },
+  {
+   "row": "C461",
+   "screen": "borrow_hoodie.take",
+   "verdict": "PASS",
+   "line": "You take the grey one. It smells like him.",
+   "why": "dialogue fits each person's PLAN entry (Mark the pressure, Mom close, Ryan on her side)"
+  },
+  {
+   "row": "C461",
+   "screen": "borrow_mom.take",
+   "verdict": "PASS",
+   "line": "You take a short skirt, a low-cut top and the heels she never wears.",
+   "why": "dialogue fits each person's PLAN entry (Mark the pressure, Mom close, Ryan on her side)"
+  },
+  {
+   "row": "C461",
+   "screen": "mom_living_room.hub",
+   "verdict": "PASS",
+   "line": "Mom's on the couch. Mark's in his chair, the remote on his knee.",
+   "why": "dialogue fits each person's PLAN entry (Mark the pressure, Mom close, Ryan on her side)"
+  },
+  {
+   "row": "C461",
+   "screen": "mom_living_room.talk",
+   "verdict": "PASS",
+   "line": "Next Saturday, you tell me the next part.",
+   "why": "dialogue fits each person's PLAN entry (Mark the pressure, Mom close, Ryan on her side)"
+  },
+  {
+   "row": "C461",
+   "screen": "opening.ask_mom",
+   "verdict": "PASS",
+   "line": "She pushes the toast across the counter and turns the tap on hard.",
+   "why": "dialogue fits each person's PLAN entry (Mark the pressure, Mom close, Ryan on her side)"
+  },
+  {
+   "row": "C461",
+   "screen": "opening.bath",
+   "verdict": "PASS",
+   "line": "you get the bathroom a second before Ryan, your step-brother, opens his door",
+   "why": "dialogue fits each person's PLAN entry (Mark the pressure, Mom close, Ryan on her side)"
+  },
+  {
+   "row": "C461",
+   "screen": "opening.bath_freedom",
+   "verdict": "PASS",
+   "line": "Then pay for it.",
+   "why": "dialogue fits each person's PLAN entry (Mark the pressure, Mom close, Ryan on her side)"
+  },
+  {
+   "row": "C461",
+   "screen": "opening.bath_fun",
+   "verdict": "PASS",
+   "line": "Parties cost money, kid.",
+   "why": "dialogue fits each person's PLAN entry (Mark the pressure, Mom close, Ryan on her side)"
+  },
+  {
+   "row": "C461",
+   "screen": "opening.bath_grades",
+   "verdict": "PASS",
+   "line": "Straight A's don't pay rent.",
+   "why": "dialogue fits each person's PLAN entry (Mark the pressure, Mom close, Ryan on her side)"
+  },
+  {
+   "row": "C461",
+   "screen": "opening.hall",
+   "verdict": "PASS",
+   "line": "Ryan's on the wall opposite, shirtless, a towel over his shoulder.",
+   "why": "dialogue fits each person's PLAN entry (Mark the pressure, Mom close, Ryan on her side)"
+  },
+  {
+   "row": "C461",
+   "screen": "opening.handover",
+   "verdict": "PASS",
+   "line": "Mark's gone to work. His mug is still on the table. Mom's alone at the sink",
+   "why": "dialogue fits each person's PLAN entry (Mark the pressure, Mom close, Ryan on her side)"
+  },
+  {
+   "row": "C461",
+   "screen": "opening.kitchen_ask",
+   "verdict": "PASS",
+   "line": "Mark turns a page. He's listening.",
+   "why": "dialogue fits each person's PLAN entry (Mark the pressure, Mom close, Ryan on her side)"
+  },
+  {
+   "row": "C461",
+   "screen": "opening.kitchen_rent",
+   "verdict": "PASS",
+   "line": "Mark, your step-father, is at the table with his coffee",
+   "why": "dialogue fits each person's PLAN entry (Mark the pressure, Mom close, Ryan on her side)"
+  },
+  {
+   "row": "C461",
+   "screen": "opening.room",
+   "verdict": "PASS",
+   "line": "You pull a plain bra and panties from the drawer, then your jeans, a T-shirt and sneakers. Your usual.",
+   "why": "dialogue fits each person's PLAN entry (Mark the pressure, Mom close, Ryan on her side)"
+  },
+  {
+   "row": "C461",
+   "screen": "opening.room_past",
+   "verdict": "PASS",
+   "line": "Ryan flattens himself against the wall so nothing touches.",
+   "why": "dialogue fits each person's PLAN entry (Mark the pressure, Mom close, Ryan on her side)"
+  },
+  {
+   "row": "C461",
+   "screen": "opening.room_spoke",
+   "verdict": "PASS",
+   "line": "He turns to face the bathroom door and waits for you to move.",
+   "why": "dialogue fits each person's PLAN entry (Mark the pressure, Mom close, Ryan on her side)"
+  },
+  {
+   "row": "C461",
+   "screen": "opening.room_waited",
+   "verdict": "PASS",
+   "line": "Ryan's eyes go straight to the light switch.",
+   "why": "dialogue fits each person's PLAN entry (Mark the pressure, Mom close, Ryan on her side)"
+  },
+  {
+   "row": "C461",
+   "screen": "opening.sit_with_mom",
+   "verdict": "PASS",
+   "line": "You eat it at the counter while she does the dishes.",
+   "why": "dialogue fits each person's PLAN entry (Mark the pressure, Mom close, Ryan on her side)"
+  },
+  {
+   "row": "C461",
+   "screen": "opening.sums",
+   "verdict": "PASS",
+   "line": "The manager's in Monday to Saturday, from 10am.",
+   "why": "dialogue fits each person's PLAN entry (Mark the pressure, Mom close, Ryan on her side)"
+  },
+  {
+   "row": "C461",
+   "screen": "opening.wake",
+   "verdict": "PASS",
+   "line": "Your pyjama top has ridden up in the night",
+   "why": "dialogue fits each person's PLAN entry (Mark the pressure, Mom close, Ryan on her side)"
+  },
+  {
+   "row": "C461",
+   "screen": "return_hoodie.return",
+   "verdict": "PASS",
+   "line": "You fold the grey hoodie and leave it on his chair.",
+   "why": "dialogue fits each person's PLAN entry (Mark the pressure, Mom close, Ryan on her side)"
+  },
+  {
+   "row": "C461",
+   "screen": "return_mom.return",
+   "verdict": "PASS",
+   "line": "You hang the skirt and the top back on her side of the wardrobe and set the heels where they were.",
+   "why": "dialogue fits each person's PLAN entry (Mark the pressure, Mom close, Ryan on her side)"
+  },
+  {
+   "row": "C461",
+   "screen": "talk_mom.eat",
+   "verdict": "PASS",
+   "line": "Mark eats without looking up from his paper. Ryan eats standing at the counter.",
+   "why": "dialogue fits each person's PLAN entry (Mark the pressure, Mom close, Ryan on her side)"
+  },
+  {
+   "row": "C461",
+   "screen": "talk_mom.hub",
+   "verdict": "PASS",
+   "line": "Mom's in the kitchen. Mark's at the table. She looks up at you, then at him.",
+   "why": "dialogue fits each person's PLAN entry (Mark the pressure, Mom close, Ryan on her side)"
+  },
+  {
+   "row": "C461",
+   "screen": "talk_mom.talk",
+   "verdict": "PASS",
+   "line": "She's got somewhere to be, Laura.",
+   "why": "dialogue fits each person's PLAN entry (Mark the pressure, Mom close, Ryan on her side)"
+  },
+  {
+   "row": "C596",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "Sit with me a minute, baby. Ryan, plates.",
+   "why": "Mom's talk screens run 40\u201355 words, most of it spoken, one exit (\"Done\"); her one picture sits on each menu after its first line; the talks have none (note row)"
+  },
+  {
+   "row": "C719",
+   "screen": "mom_living_room.talk",
+   "verdict": "N/A",
+   "line": "Next Saturday, you tell me the next part.",
+   "why": "she doesn't dress or undress here"
+  },
+  {
+   "row": "C719",
+   "screen": "opening.ask_mom",
+   "verdict": "N/A",
+   "line": "She pushes the toast across the counter and turns the tap on hard.",
+   "why": "she doesn't dress or undress here"
+  },
+  {
+   "row": "C719",
+   "screen": "opening.sit_with_mom",
+   "verdict": "N/A",
+   "line": "You eat it at the counter while she does the dishes.",
+   "why": "she doesn't dress or undress here"
+  },
+  {
+   "row": "C719",
+   "screen": "talk_mom.eat",
+   "verdict": "N/A",
+   "line": "Mark eats without looking up from his paper. Ryan eats standing at the counter.",
+   "why": "she doesn't dress or undress here"
+  },
+  {
+   "row": "C719",
+   "screen": "talk_mom.talk",
+   "verdict": "N/A",
+   "line": "She's got somewhere to be, Laura.",
+   "why": "she doesn't dress or undress here"
+  },
+  {
+   "row": "C795",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "Mom's in the kitchen. Mark's at the table.",
+   "why": "no room text in P07's screens names a person; the presence lines live inside Mom's menu, behind her face"
+  },
+  {
+   "row": "C804",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "Across the road, a neighbour's eyes drop to your bare legs",
+   "why": "no line per named person in room text: the street's neighbour is unnamed (crowd), and the home rooms' descriptions name nobody present"
+  },
+  {
+   "row": "C889",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "Wear the leggings and sports top instead",
+   "why": "no label names a clock time or a duration"
+  },
+  {
+   "row": "C889",
+   "screen": "mom_living_room.talk",
+   "verdict": "PASS",
+   "line": "Next Saturday, you tell me the next part.",
+   "why": "labels carry no time, duration or energy"
+  },
+  {
+   "row": "C889",
+   "screen": "opening.ask_mom",
+   "verdict": "PASS",
+   "line": "She pushes the toast across the counter and turns the tap on hard.",
+   "why": "labels carry no time, duration or energy"
+  },
+  {
+   "row": "C889",
+   "screen": "opening.sit_with_mom",
+   "verdict": "PASS",
+   "line": "You eat it at the counter while she does the dishes.",
+   "why": "labels carry no time, duration or energy"
+  },
+  {
+   "row": "C889",
+   "screen": "talk_mom.eat",
+   "verdict": "PASS",
+   "line": "Mark eats without looking up from his paper. Ryan eats standing at the counter.",
+   "why": "labels carry no time, duration or energy"
+  },
+  {
+   "row": "C889",
+   "screen": "talk_mom.talk",
+   "verdict": "PASS",
+   "line": "She's got somewhere to be, Laura.",
+   "why": "labels carry no time, duration or energy"
+  },
+  {
+   "row": "C892",
+   "screen": "mom_living_room.talk",
+   "verdict": "N/A",
+   "line": "Next Saturday, you tell me the next part.",
+   "why": "no door hours or travel here"
+  },
+  {
+   "row": "C892",
+   "screen": "opening.ask_mom",
+   "verdict": "N/A",
+   "line": "She pushes the toast across the counter and turns the tap on hard.",
+   "why": "no door hours or travel here"
+  },
+  {
+   "row": "C892",
+   "screen": "opening.sit_with_mom",
+   "verdict": "N/A",
+   "line": "You eat it at the counter while she does the dishes.",
+   "why": "no door hours or travel here"
+  },
+  {
+   "row": "C892",
+   "screen": "talk_mom.eat",
+   "verdict": "N/A",
+   "line": "Mark eats without looking up from his paper. Ryan eats standing at the counter.",
+   "why": "no door hours or travel here"
+  },
+  {
+   "row": "C892",
+   "screen": "talk_mom.talk",
+   "verdict": "N/A",
+   "line": "She's got somewhere to be, Laura.",
+   "why": "no door hours or travel here"
+  },
+  {
+   "row": "C897",
+   "screen": "mom_living_room.talk",
+   "verdict": "N/A",
+   "line": "Next Saturday, you tell me the next part.",
+   "why": "no door hours or travel here"
+  },
+  {
+   "row": "C897",
+   "screen": "opening.ask_mom",
+   "verdict": "N/A",
+   "line": "She pushes the toast across the counter and turns the tap on hard.",
+   "why": "no door hours or travel here"
+  },
+  {
+   "row": "C897",
+   "screen": "opening.sit_with_mom",
+   "verdict": "N/A",
+   "line": "You eat it at the counter while she does the dishes.",
+   "why": "no door hours or travel here"
+  },
+  {
+   "row": "C897",
+   "screen": "talk_mom.eat",
+   "verdict": "N/A",
+   "line": "Mark eats without looking up from his paper. Ryan eats standing at the counter.",
+   "why": "no door hours or travel here"
+  },
+  {
+   "row": "C897",
+   "screen": "talk_mom.talk",
+   "verdict": "N/A",
+   "line": "She's got somewhere to be, Laura.",
+   "why": "no door hours or travel here"
+  },
+  {
+   "row": "C900",
+   "screen": "mom_living_room.talk",
+   "verdict": "PASS",
+   "line": "Stay in tonight. Just tonight. For me.",
+   "why": "no clock time; \"tonight\" true on Saturday 19\u201323"
+  },
+  {
+   "row": "C900",
+   "screen": "opening.ask_mom",
+   "verdict": "PASS",
+   "line": "She pushes the toast across the counter and turns the tap on hard.",
+   "why": "no clock time in the beat"
+  },
+  {
+   "row": "C900",
+   "screen": "opening.sit_with_mom",
+   "verdict": "PASS",
+   "line": "You eat it at the counter while she does the dishes.",
+   "why": "no clock time in the beat"
+  },
+  {
+   "row": "C900",
+   "screen": "talk_mom.eat",
+   "verdict": "PASS",
+   "line": "Mark eats without looking up from his paper. Ryan eats standing at the counter.",
+   "why": "no clock time in the beat"
+  },
+  {
+   "row": "C900",
+   "screen": "talk_mom.talk",
+   "verdict": "PASS",
+   "line": "She's got somewhere to be, Laura.",
+   "why": "no clock time in the beat"
+  },
+  {
+   "row": "C902",
+   "screen": "mom_living_room.talk",
+   "verdict": "PASS",
+   "line": "Next Saturday, you tell me the next part.",
+   "why": "true at the last minute of the window (Laura's rows end 08:00 / 19:00 / 23:00)"
+  },
+  {
+   "row": "C902",
+   "screen": "opening.ask_mom",
+   "verdict": "PASS",
+   "line": "She pushes the toast across the counter and turns the tap on hard.",
+   "why": "true at the last minute of the window (Laura's rows end 08:00 / 19:00 / 23:00)"
+  },
+  {
+   "row": "C902",
+   "screen": "opening.sit_with_mom",
+   "verdict": "PASS",
+   "line": "You eat it at the counter while she does the dishes.",
+   "why": "true at the last minute of the window (Laura's rows end 08:00 / 19:00 / 23:00)"
+  },
+  {
+   "row": "C902",
+   "screen": "talk_mom.eat",
+   "verdict": "PASS",
+   "line": "Mark eats without looking up from his paper. Ryan eats standing at the counter.",
+   "why": "true at the last minute of the window (Laura's rows end 08:00 / 19:00 / 23:00)"
+  },
+  {
+   "row": "C902",
+   "screen": "talk_mom.talk",
+   "verdict": "PASS",
+   "line": "She's got somewhere to be, Laura.",
+   "why": "true at the last minute of the window (Laura's rows end 08:00 / 19:00 / 23:00)"
+  },
+  {
+   "row": "C903",
+   "screen": "mom_living_room.talk",
+   "verdict": "FAIL",
+   "line": "Next Saturday, you tell me the next part.",
+   "why": "names Saturday behind npc_at_location (Mark absent) and a start flag only; no weekday condition on the trigger or the group. True today only because Mark's bar night is Saturday",
+   "cause": "P07r6-c1"
+  },
+  {
+   "row": "C903",
+   "screen": "opening.ask_mom",
+   "verdict": "PASS",
+   "line": "She pushes the toast across the counter and turns the tap on hard.",
+   "why": "no weekday named"
+  },
+  {
+   "row": "C903",
+   "screen": "opening.sit_with_mom",
+   "verdict": "PASS",
+   "line": "You eat it at the counter while she does the dishes.",
+   "why": "no weekday named"
+  },
+  {
+   "row": "C903",
+   "screen": "talk_mom.eat",
+   "verdict": "PASS",
+   "line": "Mark eats without looking up from his paper. Ryan eats standing at the counter.",
+   "why": "no weekday named"
+  },
+  {
+   "row": "C903",
+   "screen": "talk_mom.talk",
+   "verdict": "PASS",
+   "line": "She's got somewhere to be, Laura.",
+   "why": "no weekday named"
+  },
+  {
+   "row": "C906",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "Done",
+   "why": "no \"till\" on any label"
+  },
+  {
+   "row": "C906",
+   "screen": "mom_living_room.talk",
+   "verdict": "PASS",
+   "line": "Next Saturday, you tell me the next part.",
+   "why": "labels carry no time, duration or energy"
+  },
+  {
+   "row": "C906",
+   "screen": "opening.ask_mom",
+   "verdict": "PASS",
+   "line": "She pushes the toast across the counter and turns the tap on hard.",
+   "why": "labels carry no time, duration or energy"
+  },
+  {
+   "row": "C906",
+   "screen": "opening.sit_with_mom",
+   "verdict": "PASS",
+   "line": "You eat it at the counter while she does the dishes.",
+   "why": "labels carry no time, duration or energy"
+  },
+  {
+   "row": "C906",
+   "screen": "talk_mom.eat",
+   "verdict": "PASS",
+   "line": "Mark eats without looking up from his paper. Ryan eats standing at the counter.",
+   "why": "labels carry no time, duration or energy"
+  },
+  {
+   "row": "C906",
+   "screen": "talk_mom.talk",
+   "verdict": "PASS",
+   "line": "She's got somewhere to be, Laura.",
+   "why": "labels carry no time, duration or energy"
+  },
+  {
+   "row": "C910",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "Eat with her",
+   "why": "no button or reply states time or energy; no money spent here"
+  },
+  {
+   "row": "C910",
+   "screen": "mom_living_room.talk",
+   "verdict": "PASS",
+   "line": "Next Saturday, you tell me the next part.",
+   "why": "labels carry no time, duration or energy"
+  },
+  {
+   "row": "C910",
+   "screen": "opening.ask_mom",
+   "verdict": "PASS",
+   "line": "She pushes the toast across the counter and turns the tap on hard.",
+   "why": "labels carry no time, duration or energy"
+  },
+  {
+   "row": "C910",
+   "screen": "opening.sit_with_mom",
+   "verdict": "PASS",
+   "line": "You eat it at the counter while she does the dishes.",
+   "why": "labels carry no time, duration or energy"
+  },
+  {
+   "row": "C910",
+   "screen": "talk_mom.eat",
+   "verdict": "PASS",
+   "line": "Mark eats without looking up from his paper. Ryan eats standing at the counter.",
+   "why": "labels carry no time, duration or energy"
+  },
+  {
+   "row": "C910",
+   "screen": "talk_mom.talk",
+   "verdict": "PASS",
+   "line": "She's got somewhere to be, Laura.",
+   "why": "labels carry no time, duration or energy"
+  },
+  {
+   "row": "C913",
+   "screen": "mom_living_room.talk",
+   "verdict": "N/A",
+   "line": "Next Saturday, you tell me the next part.",
+   "why": "no hours on this screen's rows"
+  },
+  {
+   "row": "C913",
+   "screen": "opening.ask_mom",
+   "verdict": "N/A",
+   "line": "She pushes the toast across the counter and turns the tap on hard.",
+   "why": "no hours on this screen's rows"
+  },
+  {
+   "row": "C913",
+   "screen": "opening.sit_with_mom",
+   "verdict": "N/A",
+   "line": "You eat it at the counter while she does the dishes.",
+   "why": "no hours on this screen's rows"
+  },
+  {
+   "row": "C913",
+   "screen": "talk_mom.eat",
+   "verdict": "N/A",
+   "line": "Mark eats without looking up from his paper. Ryan eats standing at the counter.",
+   "why": "no hours on this screen's rows"
+  },
+  {
+   "row": "C913",
+   "screen": "talk_mom.talk",
+   "verdict": "N/A",
+   "line": "She's got somewhere to be, Laura.",
+   "why": "no hours on this screen's rows"
+  },
+  {
+   "row": "C914",
+   "screen": "mom_living_room.talk",
+   "verdict": "PASS",
+   "line": "Next Saturday, you tell me the next part.",
+   "why": "greyed Talk/Eat say why without hours (a flag shut them)"
+  },
+  {
+   "row": "C914",
+   "screen": "opening.ask_mom",
+   "verdict": "PASS",
+   "line": "She pushes the toast across the counter and turns the tap on hard.",
+   "why": "greyed Talk/Eat say why without hours (a flag shut them)"
+  },
+  {
+   "row": "C914",
+   "screen": "opening.sit_with_mom",
+   "verdict": "PASS",
+   "line": "You eat it at the counter while she does the dishes.",
+   "why": "greyed Talk/Eat say why without hours (a flag shut them)"
+  },
+  {
+   "row": "C914",
+   "screen": "talk_mom.eat",
+   "verdict": "PASS",
+   "line": "Mark eats without looking up from his paper. Ryan eats standing at the counter.",
+   "why": "greyed Talk/Eat say why without hours (a flag shut them)"
+  },
+  {
+   "row": "C914",
+   "screen": "talk_mom.talk",
+   "verdict": "PASS",
+   "line": "She's got somewhere to be, Laura.",
+   "why": "greyed Talk/Eat say why without hours (a flag shut them)"
+  },
+  {
+   "row": "C916",
+   "screen": "mom_living_room.talk",
+   "verdict": "N/A",
+   "line": "Next Saturday, you tell me the next part.",
+   "why": "no event with hours"
+  },
+  {
+   "row": "C916",
+   "screen": "opening.ask_mom",
+   "verdict": "N/A",
+   "line": "She pushes the toast across the counter and turns the tap on hard.",
+   "why": "no event with hours"
+  },
+  {
+   "row": "C916",
+   "screen": "opening.sit_with_mom",
+   "verdict": "N/A",
+   "line": "You eat it at the counter while she does the dishes.",
+   "why": "no event with hours"
+  },
+  {
+   "row": "C916",
+   "screen": "talk_mom.eat",
+   "verdict": "N/A",
+   "line": "Mark eats without looking up from his paper. Ryan eats standing at the counter.",
+   "why": "no event with hours"
+  },
+  {
+   "row": "C916",
+   "screen": "talk_mom.talk",
+   "verdict": "N/A",
+   "line": "She's got somewhere to be, Laura.",
+   "why": "no event with hours"
+  },
+  {
+   "row": "C920",
+   "screen": "mom_living_room.talk",
+   "verdict": "N/A",
+   "line": "Next Saturday, you tell me the next part.",
+   "why": "no door hours or travel here"
+  },
+  {
+   "row": "C920",
+   "screen": "opening.ask_mom",
+   "verdict": "N/A",
+   "line": "She pushes the toast across the counter and turns the tap on hard.",
+   "why": "no door hours or travel here"
+  },
+  {
+   "row": "C920",
+   "screen": "opening.sit_with_mom",
+   "verdict": "N/A",
+   "line": "You eat it at the counter while she does the dishes.",
+   "why": "no door hours or travel here"
+  },
+  {
+   "row": "C920",
+   "screen": "talk_mom.eat",
+   "verdict": "N/A",
+   "line": "Mark eats without looking up from his paper. Ryan eats standing at the counter.",
+   "why": "no door hours or travel here"
+  },
+  {
+   "row": "C920",
+   "screen": "talk_mom.talk",
+   "verdict": "N/A",
+   "line": "She's got somewhere to be, Laura.",
+   "why": "no door hours or travel here"
+  },
+  {
+   "row": "C921",
+   "screen": "borrow_hoodie.take",
+   "verdict": "N/A",
+   "line": "You take the grey one. It smells like him.",
+   "why": "no schedule window authored here"
+  },
+  {
+   "row": "C921",
+   "screen": "borrow_mom.take",
+   "verdict": "N/A",
+   "line": "You take a short skirt, a low-cut top and the heels she never wears.",
+   "why": "no schedule window authored here"
+  },
+  {
+   "row": "C921",
+   "screen": "mom_living_room.hub",
+   "verdict": "N/A",
+   "line": "Mom's on the couch. Mark's in his chair, the remote on his knee.",
+   "why": "no schedule window authored here"
+  },
+  {
+   "row": "C921",
+   "screen": "mom_living_room.talk",
+   "verdict": "N/A",
+   "line": "Next Saturday, you tell me the next part.",
+   "why": "no schedule window authored here"
+  },
+  {
+   "row": "C921",
+   "screen": "opening.ask_mom",
+   "verdict": "N/A",
+   "line": "She pushes the toast across the counter and turns the tap on hard.",
+   "why": "no schedule window authored here"
+  },
+  {
+   "row": "C921",
+   "screen": "opening.bath",
+   "verdict": "N/A",
+   "line": "you get the bathroom a second before Ryan, your step-brother, opens his door",
+   "why": "no schedule window authored here"
+  },
+  {
+   "row": "C921",
+   "screen": "opening.bath_freedom",
+   "verdict": "N/A",
+   "line": "Then pay for it.",
+   "why": "no schedule window authored here"
+  },
+  {
+   "row": "C921",
+   "screen": "opening.bath_fun",
+   "verdict": "N/A",
+   "line": "Parties cost money, kid.",
+   "why": "no schedule window authored here"
+  },
+  {
+   "row": "C921",
+   "screen": "opening.bath_grades",
+   "verdict": "N/A",
+   "line": "Straight A's don't pay rent.",
+   "why": "no schedule window authored here"
+  },
+  {
+   "row": "C921",
+   "screen": "opening.hall",
+   "verdict": "N/A",
+   "line": "Ryan's on the wall opposite, shirtless, a towel over his shoulder.",
+   "why": "no schedule window authored here"
+  },
+  {
+   "row": "C921",
+   "screen": "opening.handover",
+   "verdict": "N/A",
+   "line": "Mark's gone to work. His mug is still on the table. Mom's alone at the sink",
+   "why": "no schedule window authored here"
+  },
+  {
+   "row": "C921",
+   "screen": "opening.kitchen_ask",
+   "verdict": "N/A",
+   "line": "Mark turns a page. He's listening.",
+   "why": "no schedule window authored here"
+  },
+  {
+   "row": "C921",
+   "screen": "opening.kitchen_rent",
+   "verdict": "N/A",
+   "line": "Mark, your step-father, is at the table with his coffee",
+   "why": "no schedule window authored here"
+  },
+  {
+   "row": "C921",
+   "screen": "opening.room",
+   "verdict": "N/A",
+   "line": "You pull a plain bra and panties from the drawer, then your jeans, a T-shirt and sneakers. Your usual.",
+   "why": "no schedule window authored here"
+  },
+  {
+   "row": "C921",
+   "screen": "opening.room_past",
+   "verdict": "N/A",
+   "line": "Ryan flattens himself against the wall so nothing touches.",
+   "why": "no schedule window authored here"
+  },
+  {
+   "row": "C921",
+   "screen": "opening.room_spoke",
+   "verdict": "N/A",
+   "line": "He turns to face the bathroom door and waits for you to move.",
+   "why": "no schedule window authored here"
+  },
+  {
+   "row": "C921",
+   "screen": "opening.room_waited",
+   "verdict": "N/A",
+   "line": "Ryan's eyes go straight to the light switch.",
+   "why": "no schedule window authored here"
+  },
+  {
+   "row": "C921",
+   "screen": "opening.sit_with_mom",
+   "verdict": "N/A",
+   "line": "You eat it at the counter while she does the dishes.",
+   "why": "no schedule window authored here"
+  },
+  {
+   "row": "C921",
+   "screen": "opening.sums",
+   "verdict": "N/A",
+   "line": "The manager's in Monday to Saturday, from 10am.",
+   "why": "no schedule window authored here"
+  },
+  {
+   "row": "C921",
+   "screen": "opening.wake",
+   "verdict": "N/A",
+   "line": "Your pyjama top has ridden up in the night",
+   "why": "no schedule window authored here"
+  },
+  {
+   "row": "C921",
+   "screen": "return_hoodie.return",
+   "verdict": "N/A",
+   "line": "You fold the grey hoodie and leave it on his chair.",
+   "why": "no schedule window authored here"
+  },
+  {
+   "row": "C921",
+   "screen": "return_mom.return",
+   "verdict": "N/A",
+   "line": "You hang the skirt and the top back on her side of the wardrobe and set the heels where they were.",
+   "why": "no schedule window authored here"
+  },
+  {
+   "row": "C921",
+   "screen": "talk_mom.eat",
+   "verdict": "N/A",
+   "line": "Mark eats without looking up from his paper. Ryan eats standing at the counter.",
+   "why": "no schedule window authored here"
+  },
+  {
+   "row": "C921",
+   "screen": "talk_mom.hub",
+   "verdict": "N/A",
+   "line": "Mom's in the kitchen. Mark's at the table. She looks up at you, then at him.",
+   "why": "no schedule window authored here"
+  },
+  {
+   "row": "C921",
+   "screen": "talk_mom.talk",
+   "verdict": "N/A",
+   "line": "She's got somewhere to be, Laura.",
+   "why": "no schedule window authored here"
+  },
+  {
+   "row": "C924",
+   "screen": "mom_living_room.talk",
+   "verdict": "N/A",
+   "line": "Next Saturday, you tell me the next part.",
+   "why": "no door hours or travel here"
+  },
+  {
+   "row": "C924",
+   "screen": "opening.ask_mom",
+   "verdict": "N/A",
+   "line": "She pushes the toast across the counter and turns the tap on hard.",
+   "why": "no door hours or travel here"
+  },
+  {
+   "row": "C924",
+   "screen": "opening.sit_with_mom",
+   "verdict": "N/A",
+   "line": "You eat it at the counter while she does the dishes.",
+   "why": "no door hours or travel here"
+  },
+  {
+   "row": "C924",
+   "screen": "talk_mom.eat",
+   "verdict": "N/A",
+   "line": "Mark eats without looking up from his paper. Ryan eats standing at the counter.",
+   "why": "no door hours or travel here"
+  },
+  {
+   "row": "C924",
+   "screen": "talk_mom.talk",
+   "verdict": "N/A",
+   "line": "She's got somewhere to be, Laura.",
+   "why": "no door hours or travel here"
+  },
+  {
+   "row": "C926",
+   "screen": "mom_living_room.talk",
+   "verdict": "PASS",
+   "line": "Next Saturday, you tell me the next part.",
+   "why": "minutes only; no clock printed"
+  },
+  {
+   "row": "C926",
+   "screen": "opening.ask_mom",
+   "verdict": "PASS",
+   "line": "She pushes the toast across the counter and turns the tap on hard.",
+   "why": "minutes only; no clock printed"
+  },
+  {
+   "row": "C926",
+   "screen": "opening.sit_with_mom",
+   "verdict": "PASS",
+   "line": "You eat it at the counter while she does the dishes.",
+   "why": "minutes only; no clock printed"
+  },
+  {
+   "row": "C926",
+   "screen": "talk_mom.eat",
+   "verdict": "PASS",
+   "line": "Mark eats without looking up from his paper. Ryan eats standing at the counter.",
+   "why": "minutes only; no clock printed"
+  },
+  {
+   "row": "C926",
+   "screen": "talk_mom.talk",
+   "verdict": "PASS",
+   "line": "She's got somewhere to be, Laura.",
+   "why": "minutes only; no clock printed"
+  },
+  {
+   "row": "C927",
+   "screen": "borrow_hoodie.take",
+   "verdict": "PASS",
+   "line": "You take the grey one. It smells like him.",
+   "why": "every exit carries its minutes"
+  },
+  {
+   "row": "C927",
+   "screen": "borrow_mom.take",
+   "verdict": "PASS",
+   "line": "You take a short skirt, a low-cut top and the heels she never wears.",
+   "why": "every exit carries its minutes"
+  },
+  {
+   "row": "C927",
+   "screen": "mom_living_room.hub",
+   "verdict": "PASS",
+   "line": "Mom's on the couch. Mark's in his chair, the remote on his knee.",
+   "why": "every exit carries its minutes"
+  },
+  {
+   "row": "C927",
+   "screen": "mom_living_room.talk",
+   "verdict": "PASS",
+   "line": "Next Saturday, you tell me the next part.",
+   "why": "every exit carries its minutes"
+  },
+  {
+   "row": "C927",
+   "screen": "opening.ask_mom",
+   "verdict": "PASS",
+   "line": "She pushes the toast across the counter and turns the tap on hard.",
+   "why": "every exit carries its minutes"
+  },
+  {
+   "row": "C927",
+   "screen": "opening.bath",
+   "verdict": "PASS",
+   "line": "you get the bathroom a second before Ryan, your step-brother, opens his door",
+   "why": "every exit carries its minutes"
+  },
+  {
+   "row": "C927",
+   "screen": "opening.bath_freedom",
+   "verdict": "PASS",
+   "line": "Then pay for it.",
+   "why": "every exit carries its minutes"
+  },
+  {
+   "row": "C927",
+   "screen": "opening.bath_fun",
+   "verdict": "PASS",
+   "line": "Parties cost money, kid.",
+   "why": "every exit carries its minutes"
+  },
+  {
+   "row": "C927",
+   "screen": "opening.bath_grades",
+   "verdict": "PASS",
+   "line": "Straight A's don't pay rent.",
+   "why": "every exit carries its minutes"
+  },
+  {
+   "row": "C927",
+   "screen": "opening.hall",
+   "verdict": "PASS",
+   "line": "Ryan's on the wall opposite, shirtless, a towel over his shoulder.",
+   "why": "every exit carries its minutes"
+  },
+  {
+   "row": "C927",
+   "screen": "opening.handover",
+   "verdict": "PASS",
+   "line": "Mark's gone to work. His mug is still on the table. Mom's alone at the sink",
+   "why": "every exit carries its minutes"
+  },
+  {
+   "row": "C927",
+   "screen": "opening.kitchen_ask",
+   "verdict": "PASS",
+   "line": "Mark turns a page. He's listening.",
+   "why": "every exit carries its minutes"
+  },
+  {
+   "row": "C927",
+   "screen": "opening.kitchen_rent",
+   "verdict": "PASS",
+   "line": "Mark, your step-father, is at the table with his coffee",
+   "why": "every exit carries its minutes"
+  },
+  {
+   "row": "C927",
+   "screen": "opening.room",
+   "verdict": "PASS",
+   "line": "You pull a plain bra and panties from the drawer, then your jeans, a T-shirt and sneakers. Your usual.",
+   "why": "every exit carries its minutes"
+  },
+  {
+   "row": "C927",
+   "screen": "opening.room_past",
+   "verdict": "PASS",
+   "line": "Ryan flattens himself against the wall so nothing touches.",
+   "why": "every exit carries its minutes"
+  },
+  {
+   "row": "C927",
+   "screen": "opening.room_spoke",
+   "verdict": "PASS",
+   "line": "He turns to face the bathroom door and waits for you to move.",
+   "why": "every exit carries its minutes"
+  },
+  {
+   "row": "C927",
+   "screen": "opening.room_waited",
+   "verdict": "PASS",
+   "line": "Ryan's eyes go straight to the light switch.",
+   "why": "every exit carries its minutes"
+  },
+  {
+   "row": "C927",
+   "screen": "opening.sit_with_mom",
+   "verdict": "PASS",
+   "line": "You eat it at the counter while she does the dishes.",
+   "why": "every exit carries its minutes"
+  },
+  {
+   "row": "C927",
+   "screen": "opening.sums",
+   "verdict": "PASS",
+   "line": "The manager's in Monday to Saturday, from 10am.",
+   "why": "every exit carries its minutes"
+  },
+  {
+   "row": "C927",
+   "screen": "opening.wake",
+   "verdict": "PASS",
+   "line": "Your pyjama top has ridden up in the night",
+   "why": "every exit carries its minutes"
+  },
+  {
+   "row": "C927",
+   "screen": "return_hoodie.return",
+   "verdict": "PASS",
+   "line": "You fold the grey hoodie and leave it on his chair.",
+   "why": "every exit carries its minutes"
+  },
+  {
+   "row": "C927",
+   "screen": "return_mom.return",
+   "verdict": "PASS",
+   "line": "You hang the skirt and the top back on her side of the wardrobe and set the heels where they were.",
+   "why": "every exit carries its minutes"
+  },
+  {
+   "row": "C927",
+   "screen": "talk_mom.eat",
+   "verdict": "PASS",
+   "line": "Mark eats without looking up from his paper. Ryan eats standing at the counter.",
+   "why": "every exit carries its minutes"
+  },
+  {
+   "row": "C927",
+   "screen": "talk_mom.hub",
+   "verdict": "PASS",
+   "line": "Mom's in the kitchen. Mark's at the table. She looks up at you, then at him.",
+   "why": "every exit carries its minutes"
+  },
+  {
+   "row": "C927",
+   "screen": "talk_mom.talk",
+   "verdict": "PASS",
+   "line": "She's got somewhere to be, Laura.",
+   "why": "every exit carries its minutes"
+  },
+  {
+   "row": "C928",
+   "screen": "mom_living_room.talk",
+   "verdict": "PASS",
+   "line": "Next Saturday, you tell me the next part.",
+   "why": "minutes only; no clock printed"
+  },
+  {
+   "row": "C928",
+   "screen": "opening.ask_mom",
+   "verdict": "PASS",
+   "line": "She pushes the toast across the counter and turns the tap on hard.",
+   "why": "minutes only; no clock printed"
+  },
+  {
+   "row": "C928",
+   "screen": "opening.sit_with_mom",
+   "verdict": "PASS",
+   "line": "You eat it at the counter while she does the dishes.",
+   "why": "minutes only; no clock printed"
+  },
+  {
+   "row": "C928",
+   "screen": "talk_mom.eat",
+   "verdict": "PASS",
+   "line": "Mark eats without looking up from his paper. Ryan eats standing at the counter.",
+   "why": "minutes only; no clock printed"
+  },
+  {
+   "row": "C928",
+   "screen": "talk_mom.talk",
+   "verdict": "PASS",
+   "line": "She's got somewhere to be, Laura.",
+   "why": "minutes only; no clock printed"
+  },
+  {
+   "row": "C929",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "Go down to the kitchen",
+   "why": "no activity label carries its time"
+  },
+  {
+   "row": "C929",
+   "screen": "mom_living_room.talk",
+   "verdict": "PASS",
+   "line": "Next Saturday, you tell me the next part.",
+   "why": "labels carry no time, duration or energy"
+  },
+  {
+   "row": "C929",
+   "screen": "opening.ask_mom",
+   "verdict": "PASS",
+   "line": "She pushes the toast across the counter and turns the tap on hard.",
+   "why": "labels carry no time, duration or energy"
+  },
+  {
+   "row": "C929",
+   "screen": "opening.sit_with_mom",
+   "verdict": "PASS",
+   "line": "You eat it at the counter while she does the dishes.",
+   "why": "labels carry no time, duration or energy"
+  },
+  {
+   "row": "C929",
+   "screen": "talk_mom.eat",
+   "verdict": "PASS",
+   "line": "Mark eats without looking up from his paper. Ryan eats standing at the counter.",
+   "why": "labels carry no time, duration or energy"
+  },
+  {
+   "row": "C929",
+   "screen": "talk_mom.talk",
+   "verdict": "PASS",
+   "line": "She's got somewhere to be, Laura.",
+   "why": "labels carry no time, duration or energy"
+  },
+  {
+   "row": "C930",
+   "screen": "mom_living_room.talk",
+   "verdict": "N/A",
+   "line": "Next Saturday, you tell me the next part.",
+   "why": "no hours on this screen's rows"
+  },
+  {
+   "row": "C930",
+   "screen": "opening.ask_mom",
+   "verdict": "N/A",
+   "line": "She pushes the toast across the counter and turns the tap on hard.",
+   "why": "no hours on this screen's rows"
+  },
+  {
+   "row": "C930",
+   "screen": "opening.sit_with_mom",
+   "verdict": "N/A",
+   "line": "You eat it at the counter while she does the dishes.",
+   "why": "no hours on this screen's rows"
+  },
+  {
+   "row": "C930",
+   "screen": "talk_mom.eat",
+   "verdict": "N/A",
+   "line": "Mark eats without looking up from his paper. Ryan eats standing at the counter.",
+   "why": "no hours on this screen's rows"
+  },
+  {
+   "row": "C930",
+   "screen": "talk_mom.talk",
+   "verdict": "N/A",
+   "line": "She's got somewhere to be, Laura.",
+   "why": "no hours on this screen's rows"
+  },
+  {
+   "row": "C931",
+   "screen": "borrow_hoodie.take",
+   "verdict": "N/A",
+   "line": "You take the grey one. It smells like him.",
+   "why": "no time_of_day"
+  },
+  {
+   "row": "C931",
+   "screen": "borrow_mom.take",
+   "verdict": "N/A",
+   "line": "You take a short skirt, a low-cut top and the heels she never wears.",
+   "why": "no time_of_day"
+  },
+  {
+   "row": "C931",
+   "screen": "mom_living_room.hub",
+   "verdict": "N/A",
+   "line": "Mom's on the couch. Mark's in his chair, the remote on his knee.",
+   "why": "no time_of_day"
+  },
+  {
+   "row": "C931",
+   "screen": "mom_living_room.talk",
+   "verdict": "N/A",
+   "line": "Next Saturday, you tell me the next part.",
+   "why": "no time_of_day"
+  },
+  {
+   "row": "C931",
+   "screen": "opening.ask_mom",
+   "verdict": "N/A",
+   "line": "She pushes the toast across the counter and turns the tap on hard.",
+   "why": "no time_of_day"
+  },
+  {
+   "row": "C931",
+   "screen": "opening.bath",
+   "verdict": "N/A",
+   "line": "you get the bathroom a second before Ryan, your step-brother, opens his door",
+   "why": "no time_of_day"
+  },
+  {
+   "row": "C931",
+   "screen": "opening.bath_freedom",
+   "verdict": "N/A",
+   "line": "Then pay for it.",
+   "why": "no time_of_day"
+  },
+  {
+   "row": "C931",
+   "screen": "opening.bath_fun",
+   "verdict": "N/A",
+   "line": "Parties cost money, kid.",
+   "why": "no time_of_day"
+  },
+  {
+   "row": "C931",
+   "screen": "opening.bath_grades",
+   "verdict": "N/A",
+   "line": "Straight A's don't pay rent.",
+   "why": "no time_of_day"
+  },
+  {
+   "row": "C931",
+   "screen": "opening.hall",
+   "verdict": "N/A",
+   "line": "Ryan's on the wall opposite, shirtless, a towel over his shoulder.",
+   "why": "no time_of_day"
+  },
+  {
+   "row": "C931",
+   "screen": "opening.handover",
+   "verdict": "N/A",
+   "line": "Mark's gone to work. His mug is still on the table. Mom's alone at the sink",
+   "why": "no time_of_day"
+  },
+  {
+   "row": "C931",
+   "screen": "opening.kitchen_ask",
+   "verdict": "N/A",
+   "line": "Mark turns a page. He's listening.",
+   "why": "no time_of_day"
+  },
+  {
+   "row": "C931",
+   "screen": "opening.kitchen_rent",
+   "verdict": "N/A",
+   "line": "Mark, your step-father, is at the table with his coffee",
+   "why": "no time_of_day"
+  },
+  {
+   "row": "C931",
+   "screen": "opening.room",
+   "verdict": "N/A",
+   "line": "You pull a plain bra and panties from the drawer, then your jeans, a T-shirt and sneakers. Your usual.",
+   "why": "no time_of_day"
+  },
+  {
+   "row": "C931",
+   "screen": "opening.room_past",
+   "verdict": "N/A",
+   "line": "Ryan flattens himself against the wall so nothing touches.",
+   "why": "no time_of_day"
+  },
+  {
+   "row": "C931",
+   "screen": "opening.room_spoke",
+   "verdict": "N/A",
+   "line": "He turns to face the bathroom door and waits for you to move.",
+   "why": "no time_of_day"
+  },
+  {
+   "row": "C931",
+   "screen": "opening.room_waited",
+   "verdict": "N/A",
+   "line": "Ryan's eyes go straight to the light switch.",
+   "why": "no time_of_day"
+  },
+  {
+   "row": "C931",
+   "screen": "opening.sit_with_mom",
+   "verdict": "N/A",
+   "line": "You eat it at the counter while she does the dishes.",
+   "why": "no time_of_day"
+  },
+  {
+   "row": "C931",
+   "screen": "opening.sums",
+   "verdict": "N/A",
+   "line": "The manager's in Monday to Saturday, from 10am.",
+   "why": "no time_of_day"
+  },
+  {
+   "row": "C931",
+   "screen": "opening.wake",
+   "verdict": "N/A",
+   "line": "Your pyjama top has ridden up in the night",
+   "why": "no time_of_day"
+  },
+  {
+   "row": "C931",
+   "screen": "return_hoodie.return",
+   "verdict": "N/A",
+   "line": "You fold the grey hoodie and leave it on his chair.",
+   "why": "no time_of_day"
+  },
+  {
+   "row": "C931",
+   "screen": "return_mom.return",
+   "verdict": "N/A",
+   "line": "You hang the skirt and the top back on her side of the wardrobe and set the heels where they were.",
+   "why": "no time_of_day"
+  },
+  {
+   "row": "C931",
+   "screen": "talk_mom.eat",
+   "verdict": "PASS",
+   "line": "Mom dishes up two plates of dinner",
+   "why": "time_of_day 00:00\u201312:00 and 12:00\u201323:59, end exclusive; both cover Laura's kitchen rows"
+  },
+  {
+   "row": "C931",
+   "screen": "talk_mom.hub",
+   "verdict": "N/A",
+   "line": "Mom's in the kitchen. Mark's at the table. She looks up at you, then at him.",
+   "why": "no time_of_day"
+  },
+  {
+   "row": "C931",
+   "screen": "talk_mom.talk",
+   "verdict": "N/A",
+   "line": "She's got somewhere to be, Laura.",
+   "why": "no time_of_day"
+  },
+  {
+   "row": "C953",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "Borrow Mom's things",
+   "why": "no time or energy on labels"
+  },
+  {
+   "row": "L106",
+   "screen": "borrow_hoodie.take",
+   "verdict": "PASS",
+   "line": "You take the grey one. It smells like him.",
+   "why": "shows only while Ryan is out and she doesn't own it"
+  },
+  {
+   "row": "L106",
+   "screen": "borrow_mom.take",
+   "verdict": "PASS",
+   "line": "You take a short skirt, a low-cut top and the heels she never wears.",
+   "why": "shows only while Laura and Mark are out of the room and she owns none of it; garments named as taken, and the add backs it"
+  },
+  {
+   "row": "L106",
+   "screen": "mom_living_room.hub",
+   "verdict": "PASS",
+   "line": "Mom's on the couch. Mark's in his chair, the remote on his knee.",
+   "why": "Mark in his chair weekdays 16:30\u201323, Sun 12\u201323; absent only Saturday nights, when the couch line shows"
+  },
+  {
+   "row": "L106",
+   "screen": "mom_living_room.talk",
+   "verdict": "PASS",
+   "line": "Next Saturday, you tell me the next part.",
+   "why": "Mark-absent groups fire only Saturday 19\u201323 by the rows, so \"tonight\", \"tomorrow night\" and \"Next Saturday\" are true"
+  },
+  {
+   "row": "L106",
+   "screen": "opening.ask_mom",
+   "verdict": "PASS",
+   "line": "She pushes the toast across the counter and turns the tap on hard.",
+   "why": "lands 07:40 in the kitchen, Laura there to 08:00"
+  },
+  {
+   "row": "L106",
+   "screen": "opening.bath",
+   "verdict": "PASS",
+   "line": "you get the bathroom a second before Ryan, your step-brother, opens his door",
+   "why": "07:12: Ryan leaves his room for the hall at 07:12 (his rows), and knocks from the hall; the towel is prose only (LO's waiver, NOTES 181)"
+  },
+  {
+   "row": "L106",
+   "screen": "opening.bath_freedom",
+   "verdict": "PASS",
+   "line": "Then pay for it.",
+   "why": "07:10: Mark and Laura in the kitchen"
+  },
+  {
+   "row": "L106",
+   "screen": "opening.bath_fun",
+   "verdict": "PASS",
+   "line": "Parties cost money, kid.",
+   "why": "07:10: Mark and Laura in the kitchen"
+  },
+  {
+   "row": "L106",
+   "screen": "opening.bath_grades",
+   "verdict": "PASS",
+   "line": "Straight A's don't pay rent.",
+   "why": "07:10: Mark and Laura in the kitchen"
+  },
+  {
+   "row": "L106",
+   "screen": "opening.hall",
+   "verdict": "PASS",
+   "line": "Ryan's on the wall opposite, shirtless, a towel over his shoulder.",
+   "why": "07:20\u201307:23: Ryan in the hall 07:12\u201307:25; towel prose only (NOTES 181)"
+  },
+  {
+   "row": "L106",
+   "screen": "opening.handover",
+   "verdict": "PASS",
+   "line": "Mark's gone to work. His mug is still on the table. Mom's alone at the sink",
+   "why": "07:35: Mark left the kitchen at 07:30, Laura there to 08:00"
+  },
+  {
+   "row": "L106",
+   "screen": "opening.kitchen_ask",
+   "verdict": "PASS",
+   "line": "Mark turns a page. He's listening.",
+   "why": "07:07: Mark and Laura both in the kitchen by their rows"
+  },
+  {
+   "row": "L106",
+   "screen": "opening.kitchen_rent",
+   "verdict": "PASS",
+   "line": "Mark, your step-father, is at the table with his coffee",
+   "why": "07:05: Mark kitchen 07:00\u201307:30, Laura 07:00\u201308:00 (who_is_where); $75 a week agrees with PLAN \u00a72"
+  },
+  {
+   "row": "L106",
+   "screen": "opening.room",
+   "verdict": "PASS",
+   "line": "You pull a plain bra and panties from the drawer, then your jeans, a T-shirt and sneakers. Your usual.",
+   "why": "the beat names the usual outfit, and \"Keep your usual\" equips it; the other two buttons say \"instead\""
+  },
+  {
+   "row": "L106",
+   "screen": "opening.room_past",
+   "verdict": "PASS",
+   "line": "Ryan flattens himself against the wall so nothing touches.",
+   "why": "07:23\u201307:25: Ryan in the hall until 07:25"
+  },
+  {
+   "row": "L106",
+   "screen": "opening.room_spoke",
+   "verdict": "PASS",
+   "line": "He turns to face the bathroom door and waits for you to move.",
+   "why": "07:23\u201307:25: Ryan in the hall until 07:25"
+  },
+  {
+   "row": "L106",
+   "screen": "opening.room_waited",
+   "verdict": "PASS",
+   "line": "Ryan's eyes go straight to the light switch.",
+   "why": "07:23\u201307:25: Ryan in the hall until 07:25"
+  },
+  {
+   "row": "L106",
+   "screen": "opening.sit_with_mom",
+   "verdict": "PASS",
+   "line": "You eat it at the counter while she does the dishes.",
+   "why": "lands 07:50 in the kitchen, Laura there to 08:00"
+  },
+  {
+   "row": "L106",
+   "screen": "opening.sums",
+   "verdict": "PASS",
+   "line": "The manager's in Monday to Saturday, from 10am.",
+   "why": "Tom's rows: Mon\u2013Sat 10\u201321 at the caf\u00e9; $75 by Sunday agrees with PLAN \u00a72; Mark collects Sunday at the kitchen table (his Sunday kitchen rows)"
+  },
+  {
+   "row": "L106",
+   "screen": "opening.wake",
+   "verdict": "PASS",
+   "line": "Your pyjama top has ridden up in the night",
+   "why": "07:00\u201307:05, alone in her room; no one placed"
+  },
+  {
+   "row": "L106",
+   "screen": "return_hoodie.return",
+   "verdict": "PASS",
+   "line": "You fold the grey hoodie and leave it on his chair.",
+   "why": "shows only while she owns it, isn't wearing it, and Ryan is out"
+  },
+  {
+   "row": "L106",
+   "screen": "return_mom.return",
+   "verdict": "PASS",
+   "line": "You hang the skirt and the top back on her side of the wardrobe and set the heels where they were.",
+   "why": "shows only while she owns all three, wears none, and both are out"
+  },
+  {
+   "row": "L106",
+   "screen": "talk_mom.eat",
+   "verdict": "PASS",
+   "line": "Mark eats without looking up from his paper. Ryan eats standing at the counter.",
+   "why": "eggs before noon, dinner after; Laura's kitchen rows are mornings and 17\u201319; each housemate line behind npc_at_location"
+  },
+  {
+   "row": "L106",
+   "screen": "talk_mom.hub",
+   "verdict": "PASS",
+   "line": "Mom's in the kitchen. Mark's at the table. She looks up at you, then at him.",
+   "why": "each presence line is behind npc_at_location; the garment lines behind clothing_item equipped"
+  },
+  {
+   "row": "L106",
+   "screen": "talk_mom.talk",
+   "verdict": "PASS",
+   "line": "She's got somewhere to be, Laura.",
+   "why": "groups by npc_at_location; Mark and Ryan never share the kitchen (Mark 07:00\u201307:30 weekdays, 08:00\u201312:00 weekends; Ryan 18\u201319 weekdays, 17\u201319 weekends), so the merged chain never hides one"
+  },
+  {
+   "row": "L167",
+   "screen": "borrow_hoodie.take",
+   "verdict": "N/A",
+   "line": "You take the grey one. It smells like him.",
+   "why": "no hours on these screens"
+  },
+  {
+   "row": "L167",
+   "screen": "borrow_mom.take",
+   "verdict": "N/A",
+   "line": "You take a short skirt, a low-cut top and the heels she never wears.",
+   "why": "no hours on these screens"
+  },
+  {
+   "row": "L167",
+   "screen": "mom_living_room.hub",
+   "verdict": "N/A",
+   "line": "Mom's on the couch. Mark's in his chair, the remote on his knee.",
+   "why": "no hours on these screens"
+  },
+  {
+   "row": "L167",
+   "screen": "mom_living_room.talk",
+   "verdict": "N/A",
+   "line": "Next Saturday, you tell me the next part.",
+   "why": "no hours on these screens"
+  },
+  {
+   "row": "L167",
+   "screen": "opening.ask_mom",
+   "verdict": "N/A",
+   "line": "She pushes the toast across the counter and turns the tap on hard.",
+   "why": "no hours on these screens"
+  },
+  {
+   "row": "L167",
+   "screen": "opening.bath",
+   "verdict": "N/A",
+   "line": "you get the bathroom a second before Ryan, your step-brother, opens his door",
+   "why": "no hours on these screens"
+  },
+  {
+   "row": "L167",
+   "screen": "opening.bath_freedom",
+   "verdict": "N/A",
+   "line": "Then pay for it.",
+   "why": "no hours on these screens"
+  },
+  {
+   "row": "L167",
+   "screen": "opening.bath_fun",
+   "verdict": "N/A",
+   "line": "Parties cost money, kid.",
+   "why": "no hours on these screens"
+  },
+  {
+   "row": "L167",
+   "screen": "opening.bath_grades",
+   "verdict": "N/A",
+   "line": "Straight A's don't pay rent.",
+   "why": "no hours on these screens"
+  },
+  {
+   "row": "L167",
+   "screen": "opening.hall",
+   "verdict": "N/A",
+   "line": "Ryan's on the wall opposite, shirtless, a towel over his shoulder.",
+   "why": "no hours on these screens"
+  },
+  {
+   "row": "L167",
+   "screen": "opening.handover",
+   "verdict": "N/A",
+   "line": "Mark's gone to work. His mug is still on the table. Mom's alone at the sink",
+   "why": "no hours on these screens"
+  },
+  {
+   "row": "L167",
+   "screen": "opening.kitchen_ask",
+   "verdict": "N/A",
+   "line": "Mark turns a page. He's listening.",
+   "why": "no hours on these screens"
+  },
+  {
+   "row": "L167",
+   "screen": "opening.kitchen_rent",
+   "verdict": "N/A",
+   "line": "Mark, your step-father, is at the table with his coffee",
+   "why": "no hours on these screens"
+  },
+  {
+   "row": "L167",
+   "screen": "opening.room",
+   "verdict": "N/A",
+   "line": "You pull a plain bra and panties from the drawer, then your jeans, a T-shirt and sneakers. Your usual.",
+   "why": "no hours on these screens"
+  },
+  {
+   "row": "L167",
+   "screen": "opening.room_past",
+   "verdict": "N/A",
+   "line": "Ryan flattens himself against the wall so nothing touches.",
+   "why": "no hours on these screens"
+  },
+  {
+   "row": "L167",
+   "screen": "opening.room_spoke",
+   "verdict": "N/A",
+   "line": "He turns to face the bathroom door and waits for you to move.",
+   "why": "no hours on these screens"
+  },
+  {
+   "row": "L167",
+   "screen": "opening.room_waited",
+   "verdict": "N/A",
+   "line": "Ryan's eyes go straight to the light switch.",
+   "why": "no hours on these screens"
+  },
+  {
+   "row": "L167",
+   "screen": "opening.sit_with_mom",
+   "verdict": "N/A",
+   "line": "You eat it at the counter while she does the dishes.",
+   "why": "no hours on these screens"
+  },
+  {
+   "row": "L167",
+   "screen": "opening.sums",
+   "verdict": "N/A",
+   "line": "The manager's in Monday to Saturday, from 10am.",
+   "why": "no hours on these screens"
+  },
+  {
+   "row": "L167",
+   "screen": "opening.wake",
+   "verdict": "N/A",
+   "line": "Your pyjama top has ridden up in the night",
+   "why": "no hours on these screens"
+  },
+  {
+   "row": "L167",
+   "screen": "return_hoodie.return",
+   "verdict": "N/A",
+   "line": "You fold the grey hoodie and leave it on his chair.",
+   "why": "no hours on these screens"
+  },
+  {
+   "row": "L167",
+   "screen": "return_mom.return",
+   "verdict": "N/A",
+   "line": "You hang the skirt and the top back on her side of the wardrobe and set the heels where they were.",
+   "why": "no hours on these screens"
+  },
+  {
+   "row": "L167",
+   "screen": "talk_mom.eat",
+   "verdict": "N/A",
+   "line": "Mark eats without looking up from his paper. Ryan eats standing at the counter.",
+   "why": "no hours on these screens"
+  },
+  {
+   "row": "L167",
+   "screen": "talk_mom.hub",
+   "verdict": "N/A",
+   "line": "Mom's in the kitchen. Mark's at the table. She looks up at you, then at him.",
+   "why": "no hours on these screens"
+  },
+  {
+   "row": "L167",
+   "screen": "talk_mom.talk",
+   "verdict": "N/A",
+   "line": "She's got somewhere to be, Laura.",
+   "why": "no hours on these screens"
+  },
+  {
+   "row": "clock#1",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "Talk \u2014 you've already talked today.",
+   "why": "labels say no time and no energy"
+  },
+  {
+   "row": "clock#6",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "Done",
+   "why": "never \"till X\""
+  },
+  {
+   "row": "clothes#1",
+   "screen": "return_hoodie.return",
+   "verdict": "WAIVED",
+   "line": "You fold the grey hoodie and leave it on his chair.",
+   "why": "still no clothing event or second reader in release 1; LO, NOTES.md 2026-11-24: \"for the release one system i think we have clothing shop and change clothing. She can change to basic clothing but hotter will stay locked in for the release one as they require higher traits and traits are capped to 0 in the release one.\""
+  },
+  {
+   "row": "clothes#1",
+   "screen": "return_mom.return",
+   "verdict": "WAIVED",
+   "line": "You hang the skirt and the top back on her side of the wardrobe and set the heels where they were.",
+   "why": "still no clothing event or second reader in release 1; LO, NOTES.md 2026-11-24: \"for the release one system i think we have clothing shop and change clothing. She can change to basic clothing but hotter will stay locked in for the release one as they require higher traits and traits are capped to 0 in the release one.\""
+  },
+  {
+   "row": "people#3",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "Mark, your step-father",
+   "why": "everyone named on P07's screens is met (housemates; met_mark set on the way out of kitchen_rent, the scene that names him)"
+  },
+  {
+   "row": "people#7",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "Talk",
+   "why": "talk screens about 55 words, one exit; the picture on the menu after its first line"
+  },
+  {
+   "row": "places#2",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "Your street. ... Neighbours, dog walkers, kids on bikes.",
+   "why": "people are faces; the only crowd line is unnamed"
+  },
+  {
+   "row": "places#4",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "Keep your usual",
+   "why": "short labels; no time or energy"
+  }
+ ],
+ "causes": [
+  {
+   "id": "P07r6-c1",
+   "what": "mom_living_room.talk says \"Next Saturday\" with no weekday condition: its groups read only Mark's absence and a start flag, so the weekday rides on Mark's bar-night rows"
+  }
+ ]
+}

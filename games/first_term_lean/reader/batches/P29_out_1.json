@@ -1,0 +1,361 @@
+{
+ "verdicts": [
+  {
+   "row": "B1",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "A jogger coming the other way looks at your leggings, then your face, then your leggings.",
+   "why": "the crowd's wanting is on their bodies and seen by her (the jogger's looks, the bus stop going quiet, the regulars stopping); no act follows"
+  },
+  {
+   "row": "B2",
+   "screen": "*",
+   "verdict": "N/A",
+   "line": "The guys at the bus stop go quiet as you pass in your leggings.",
+   "why": "no person's arc: an unnamed crowd line, one per place, with no scene before it"
+  },
+  {
+   "row": "B3",
+   "screen": "*",
+   "verdict": "N/A",
+   "line": "Two of the regulars stop between sets when you walk in. Your leggings don't leave much to guess.",
+   "why": "a place's description variant, not a scene; PLAN 288 and NOTES 42 rule out any follow-up in release 1, and the place's menu carries on"
+  },
+  {
+   "row": "B4",
+   "screen": "location:hood_street",
+   "verdict": "FAIL",
+   "line": "The guys at the bus stop go quiet as you pass in your leggings.",
+   "why": "the crowd reacts; she doesn't: nothing on her body, nothing said (P07's street lines on the same screen carry 'Your face goes hot. You walk faster')",
+   "cause": "P29a1-c1"
+  },
+  {
+   "row": "B4",
+   "screen": "location:hood_park",
+   "verdict": "FAIL",
+   "line": "A jogger coming the other way looks at your leggings, then your face, then your leggings.",
+   "why": "his look is written; her reaction to it isn't",
+   "cause": "P29a1-c1"
+  },
+  {
+   "row": "B4",
+   "screen": "location:hood_gym",
+   "verdict": "FAIL",
+   "line": "Two of the regulars stop between sets when you walk in. Your leggings don't leave much to guess.",
+   "why": "the regulars stop; no reaction of hers on her body",
+   "cause": "P29a1-c1"
+  },
+  {
+   "row": "B5",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "The guys at the bus stop go quiet as you pass in your leggings.",
+   "why": "the whole piece is who notices: bus stop, jogger, regulars"
+  },
+  {
+   "row": "B6",
+   "screen": "*",
+   "verdict": "N/A",
+   "line": "A jogger coming the other way looks at your leggings, then your face, then your leggings.",
+   "why": "no offer made"
+  },
+  {
+   "row": "B7",
+   "screen": "*",
+   "verdict": "N/A",
+   "line": "Two of the regulars stop between sets when you walk in. Your leggings don't leave much to guess.",
+   "why": "no explicit beat"
+  },
+  {
+   "row": "B8",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "clothing_item leggings equipped",
+   "why": "each line names the leggings only behind that condition; windows match each place's hours and sign (street 7-21, park 6-21, gym 6-22)"
+  },
+  {
+   "row": "B9",
+   "screen": "*",
+   "verdict": "N/A",
+   "line": "The guys at the bus stop go quiet as you pass in your leggings.",
+   "why": "PLAN declares no companion-rival here"
+  },
+  {
+   "row": "B10",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "The guys at the bus stop go quiet as you pass in your leggings.",
+   "why": "first-match chain: Mom's top or bare legs (P07) win first; leggings are slot bottom, so with mom_short_skirt impossible, and with mom_lowcut_top the top line wins and names only the top; the only exposure-1 items wearable in release 1 are Mom's two; unnamed crowds can't clash with any row; repeats each visit as texture"
+  },
+  {
+   "row": "B11",
+   "screen": "*",
+   "verdict": "N/A",
+   "line": "The guys at the bus stop go quiet as you pass in your leggings.",
+   "why": "no solo button added"
+  },
+  {
+   "row": "B12",
+   "screen": "*",
+   "verdict": "N/A",
+   "line": "Two of the regulars stop between sets when you walk in. Your leggings don't leave much to guess.",
+   "why": "a noticing line, not a charged scene (the card's Does has no 'something sexual shows')"
+  },
+  {
+   "row": "B13",
+   "screen": "*",
+   "verdict": "N/A",
+   "line": "Two of the regulars stop between sets when you walk in. Your leggings don't leave much to guess.",
+   "why": "not a moment alone with her body"
+  },
+  {
+   "row": "C1002",
+   "screen": "*",
+   "verdict": "N/A",
+   "line": "The guys at the bus stop go quiet as you pass in your leggings.",
+   "why": "no spend added"
+  },
+  {
+   "row": "C1158",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "your leggings",
+   "why": "backed by clothing_item leggings equipped on each variant"
+  },
+  {
+   "row": "C1173",
+   "screen": "*",
+   "verdict": "N/A",
+   "line": "The guys at the bus stop go quiet as you pass in your leggings.",
+   "why": "no clothing door added; the street's P07 leave rule is unchanged"
+  },
+  {
+   "row": "C1177",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "A jogger coming the other way looks at your leggings, then your face, then your leggings.",
+   "why": "leggings matter on the street, park and gym because a crowd is there"
+  },
+  {
+   "row": "C1184",
+   "screen": "location:hood_street",
+   "verdict": "PASS",
+   "line": "You're not going out like this. Go back up to your room and put on a top and a bottom, or a dress.",
+   "why": "the street's refusal says what's missing in her voice; park and gym have no dress code"
+  },
+  {
+   "row": "C1185",
+   "screen": "location:hood_street",
+   "verdict": "PASS",
+   "line": "slots_required = [\"top\", \"bottom\"]",
+   "why": "coverage, not style"
+  },
+  {
+   "row": "C1198",
+   "screen": "location:hood_street",
+   "verdict": "PASS",
+   "line": "Go back up to your room",
+   "why": "names where to change"
+  },
+  {
+   "row": "C1200",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "Go for a run / Work out ($5): locked_text Needs leggings and a sports top",
+   "why": "clothes asked only where the activity needs them; P29 adds no gate"
+  },
+  {
+   "row": "C1220",
+   "screen": "location:hood_street",
+   "verdict": "PASS",
+   "line": "clothing_rules on hood_street; wardrobe_anywhere = false",
+   "why": "breach plays ClothingBlock with Go back only, the message names her room"
+  },
+  {
+   "row": "C1221",
+   "screen": "*",
+   "verdict": "N/A",
+   "line": "slots_required = [\"top\", \"bottom\"]",
+   "why": "no exception written; the dress counting for both is the engine's (v2.py:2219)"
+  },
+  {
+   "row": "C1250",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "The guys at the bus stop go quiet as you pass in your leggings.",
+   "why": "no media added to the room card; the line is words only (card: 0 spots)"
+  },
+  {
+   "row": "C422",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "Go for a run / Work out ($5) / Walk to campus",
+   "why": "existing labels say what clicking does; none added"
+  },
+  {
+   "row": "C442",
+   "screen": "location:hood_street",
+   "verdict": "PASS",
+   "line": "The guys at the bus stop go quiet as you pass in your leggings.",
+   "why": "says what happens"
+  },
+  {
+   "row": "C442",
+   "screen": "location:hood_park",
+   "verdict": "PASS",
+   "line": "A jogger coming the other way looks at your leggings, then your face, then your leggings.",
+   "why": "says where he looks"
+  },
+  {
+   "row": "C442",
+   "screen": "location:hood_gym",
+   "verdict": "FAIL",
+   "line": "Your leggings don't leave much to guess.",
+   "why": "hints at what the leggings show instead of saying it (her ass, the shape of her)",
+   "cause": "P29a1-c2"
+  },
+  {
+   "row": "C451",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "a bus stop / between sets / the other way",
+   "why": "concrete detail kept"
+  },
+  {
+   "row": "C460",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "The guys at the bus stop go quiet as you pass in your leggings.",
+   "why": "every claim true at the first and last minute of each window and on a second visit (see B10)"
+  },
+  {
+   "row": "C461",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "A jogger coming the other way looks at your leggings, then your face, then your leggings.",
+   "why": "unnamed crowd texture that can't clash"
+  },
+  {
+   "row": "C519",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "Two of the regulars stop between sets when you walk in. Your leggings don't leave much to guess.",
+   "why": "one job each, about 35-55 words"
+  },
+  {
+   "row": "C620",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "The guys at the bus stop go quiet as you pass in your leggings.",
+   "why": "no person listed; crowds are unnamed"
+  },
+  {
+   "row": "C758",
+   "screen": "*",
+   "verdict": "N/A",
+   "line": "The guys at the bus stop go quiet as you pass in your leggings.",
+   "why": "no labels added"
+  },
+  {
+   "row": "C762",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "The guys at the bus stop go quiet as you pass in your leggings.",
+   "why": "no 'Nothing happens'"
+  },
+  {
+   "row": "C769",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "The gym: weights, treadmills, mirrors on every wall.",
+   "why": "each variant keeps the place's own full text"
+  },
+  {
+   "row": "C770",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "The guys at the bus stop go quiet as you pass in your leggings.",
+   "why": "near the field median; nothing fattened"
+  },
+  {
+   "row": "C771",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "The guys at the bus stop go quiet as you pass in your leggings.",
+   "why": "no first-visit screen"
+  },
+  {
+   "row": "C773",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "Go for a run / Work out ($5) / Take the bus to campus ($2)",
+   "why": "no browse list of objects"
+  },
+  {
+   "row": "C776",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "Go for a run / Work out ($5)",
+   "why": "menus hold needs, systems and travel; people are faces"
+  },
+  {
+   "row": "C777",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "The guys at the bus stop go quiet as you pass in your leggings.",
+   "why": "the noticing lives in the description, not a button"
+  },
+  {
+   "row": "C794",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "Your street. The same row of houses",
+   "why": "identity sentence unchanged in every variant"
+  },
+  {
+   "row": "C795",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "A jogger coming the other way looks at your leggings, then your face, then your leggings.",
+   "why": "re-entry change is a crowd line, no per-person line"
+  },
+  {
+   "row": "C804",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "Two of the regulars stop between sets when you walk in. Your leggings don't leave much to guess.",
+   "why": "people shown as faces (Vance, Marco) plus an unnamed crowd line"
+  },
+  {
+   "row": "C953",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "Work out ($5) / Take the bus to campus ($2)",
+   "why": "money shown, no time or energy; P29 adds no label"
+  },
+  {
+   "row": "L106",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "Two of the regulars stop between sets when you walk in. Your leggings don't leave much to guess.",
+   "why": "no named person claimed; 'the regulars' are unnamed"
+  },
+  {
+   "row": "C1206",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "in your leggings",
+   "why": "the leggings are named only while equipped; no other garment named"
+  }
+ ],
+ "causes": [
+  {
+   "id": "P29a1-c1",
+   "what": "the three leggings lines write the crowd's look but no reaction of hers on her body"
+  },
+  {
+   "id": "P29a1-c2",
+   "what": "the gym line 'Your leggings don't leave much to guess.' hints at what shows instead of saying it"
+  }
+ ]
+}

@@ -1,0 +1,110 @@
+{
+ "verdicts": [
+  {
+   "row": "C596",
+   "screen": "mom_living_room.talk",
+   "verdict": "PASS",
+   "line": "talk/eat screens: no picture",
+   "why": "her one picture sits on the hub, right after its first line; talk screens 40-50 words, about two-thirds spoken, one exit (Done)"
+  },
+  {
+   "row": "C596",
+   "screen": "talk_mom.eat",
+   "verdict": "PASS",
+   "line": "talk/eat screens: no picture",
+   "why": "her one picture sits on the hub, right after its first line; talk screens 40-50 words, about two-thirds spoken, one exit (Done)"
+  },
+  {
+   "row": "C596",
+   "screen": "talk_mom.talk",
+   "verdict": "PASS",
+   "line": "talk/eat screens: no picture",
+   "why": "her one picture sits on the hub, right after its first line; talk screens 40-50 words, about two-thirds spoken, one exit (Done)"
+  },
+  {
+   "row": "C795",
+   "screen": "mom_living_room.talk",
+   "verdict": "PASS",
+   "line": "\"Mark eats without looking up from his paper.\" (Mark present group)",
+   "why": "a person's menu screen, not room text"
+  },
+  {
+   "row": "C804",
+   "screen": "mom_living_room.talk",
+   "verdict": "PASS",
+   "line": "\"Some of us are trying to watch this.\" (Mark present group)",
+   "why": "no room-text line per person; names inside presence groups"
+  },
+  {
+   "row": "C795",
+   "screen": "talk_mom.eat",
+   "verdict": "PASS",
+   "line": "\"Mark eats without looking up from his paper.\" (Mark present group)",
+   "why": "a person's menu screen, not room text"
+  },
+  {
+   "row": "C804",
+   "screen": "talk_mom.eat",
+   "verdict": "PASS",
+   "line": "\"Some of us are trying to watch this.\" (Mark present group)",
+   "why": "no room-text line per person; names inside presence groups"
+  },
+  {
+   "row": "C596",
+   "screen": "talk_mom.hub",
+   "verdict": "PASS",
+   "line": "\"Mom's in the kitchen. She looks up at you, and her face goes soft.\" then everyday/mom_kitchen_t0",
+   "why": "her one picture right after the menu's first line"
+  },
+  {
+   "row": "people#7",
+   "screen": "mom_living_room.talk",
+   "verdict": "PASS",
+   "line": "\"Sit with me a minute, baby.\" ... \"Next Saturday, you tell me the next part.\"",
+   "why": "about 50 words, about two-thirds spoken, one exit, no picture"
+  },
+  {
+   "row": "people#7",
+   "screen": "talk_mom.talk",
+   "verdict": "PASS",
+   "line": "\"Did Mark say anything else? About the rent?\" ... \"I promise, Mom.\"",
+   "why": "40-48 words per version, 59-82% spoken, one exit, no picture"
+  },
+  {
+   "row": "people#7",
+   "screen": "mom_living_room.hub",
+   "verdict": "PASS",
+   "line": "\"Mom's on the couch with her feet under her, the TV on low.\" then everyday/mom_living_t0",
+   "why": "picture after the menu's first line, not on the talk"
+  },
+  {
+   "row": "C795",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "talk_mom.hub / mom_living_room.hub",
+   "why": "menus, not room text"
+  },
+  {
+   "row": "C804",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "\"Mom's on the couch. Mark's in his chair...\" (Mark present group)",
+   "why": "Mom is her face; Mark is named only when present, inside her menu"
+  },
+  {
+   "row": "people#3",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "met_laura set in the opening",
+   "why": "Mom is met at the start; no unmet person shows here"
+  },
+  {
+   "row": "places#2",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "\"Mom's in the kitchen. Mark's at the table.\" (Mark present)",
+   "why": "her screens name only who who_is_where puts there; no room-text line added"
+  }
+ ],
+ "causes": []
+}

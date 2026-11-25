@@ -1,0 +1,271 @@
+{
+ "verdicts": [
+  {
+   "row": "C596",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "meeting screen, picture in it",
+   "why": "a first meeting is a new moment, so its picture is allowed; no face-opened menu is built here, and no talk screen carries a picture"
+  },
+  {
+   "row": "C795",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "no room text in this piece's screens",
+   "why": "its screens are scenes, not a place's room text; no line per person is added to any room"
+  },
+  {
+   "row": "C804",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "no room text in this piece's screens",
+   "why": "its screens are scenes, not a place's room text; no line per person is added to any room"
+  },
+  {
+   "row": "B10",
+   "screen": "shop_meet_danny.meet",
+   "verdict": "PASS",
+   "line": "\"A guy in his early twenties with the shop's name badge leans behind the counter...\"",
+   "why": "the trigger needs him at the shop; his rows put him behind the counter on every visit"
+  },
+  {
+   "row": "B8",
+   "screen": "shop_meet_danny.meet",
+   "verdict": "PASS",
+   "line": "\"A guy in his early twenties with the shop's name badge leans behind the counter...\"",
+   "why": "ages match the picture (52, 23); no garment of hers named"
+  },
+  {
+   "row": "C460",
+   "screen": "shop_meet_danny.meet",
+   "verdict": "PASS",
+   "line": "\"A guy in his early twenties with the shop's name badge leans behind the counter...\"",
+   "why": "true on every reach"
+  },
+  {
+   "row": "C461",
+   "screen": "shop_meet_danny.meet",
+   "verdict": "PASS",
+   "line": "\"A guy in his early twenties with the shop's name badge leans behind the counter...\"",
+   "why": "texture and his manner; can't clash"
+  },
+  {
+   "row": "L106",
+   "screen": "shop_meet_danny.meet",
+   "verdict": "PASS",
+   "line": "\"A guy in his early twenties with the shop's name badge leans behind the counter...\"",
+   "why": "only he is named, and the trigger needs him present"
+  },
+  {
+   "row": "B10",
+   "screen": "shop_meet_frank.meet",
+   "verdict": "PASS",
+   "line": "\"A heavy man in his fifties sits behind the till with the paper spread over the counter.\"",
+   "why": "the trigger needs him at the shop; his rows put him behind the counter on every visit"
+  },
+  {
+   "row": "B8",
+   "screen": "shop_meet_frank.meet",
+   "verdict": "PASS",
+   "line": "\"A heavy man in his fifties sits behind the till with the paper spread over the counter.\"",
+   "why": "ages match the picture (52, 23); no garment of hers named"
+  },
+  {
+   "row": "C460",
+   "screen": "shop_meet_frank.meet",
+   "verdict": "PASS",
+   "line": "\"A heavy man in his fifties sits behind the till with the paper spread over the counter.\"",
+   "why": "true on every reach"
+  },
+  {
+   "row": "C461",
+   "screen": "shop_meet_frank.meet",
+   "verdict": "PASS",
+   "line": "\"A heavy man in his fifties sits behind the till with the paper spread over the counter.\"",
+   "why": "texture and his manner; can't clash"
+  },
+  {
+   "row": "L106",
+   "screen": "shop_meet_frank.meet",
+   "verdict": "PASS",
+   "line": "\"A heavy man in his fifties sits behind the till with the paper spread over the counter.\"",
+   "why": "only he is named, and the trigger needs him present"
+  },
+  {
+   "row": "B10",
+   "screen": "shop_meet_frank.after",
+   "verdict": "PASS",
+   "line": "\"Whatever you buy in here, Mark's going to hear about it.\"",
+   "why": "true on every visit; Mark named as who'll hear, not as present; no number or garment"
+  },
+  {
+   "row": "B8",
+   "screen": "shop_meet_frank.after",
+   "verdict": "PASS",
+   "line": "\"Whatever you buy in here, Mark's going to hear about it.\"",
+   "why": "true on every visit; Mark named as who'll hear, not as present; no number or garment"
+  },
+  {
+   "row": "C460",
+   "screen": "shop_meet_frank.after",
+   "verdict": "PASS",
+   "line": "\"Whatever you buy in here, Mark's going to hear about it.\"",
+   "why": "true on every visit; Mark named as who'll hear, not as present; no number or garment"
+  },
+  {
+   "row": "C461",
+   "screen": "shop_meet_frank.after",
+   "verdict": "PASS",
+   "line": "\"Whatever you buy in here, Mark's going to hear about it.\"",
+   "why": "true on every visit; Mark named as who'll hear, not as present; no number or garment"
+  },
+  {
+   "row": "L106",
+   "screen": "shop_meet_frank.after",
+   "verdict": "PASS",
+   "line": "\"Whatever you buy in here, Mark's going to hear about it.\"",
+   "why": "true on every visit; Mark named as who'll hear, not as present; no number or garment"
+  },
+  {
+   "row": "C889",
+   "screen": "shop_meet_frank.after",
+   "verdict": "PASS",
+   "line": "Done (5 min) back to the shop; no time in the beat",
+   "why": "no clock time, weekday or duration in prose or label; a once-only meeting gated on Frank's presence; exit spends 5 min"
+  },
+  {
+   "row": "C892",
+   "screen": "shop_meet_frank.after",
+   "verdict": "PASS",
+   "line": "Done (5 min) back to the shop; no time in the beat",
+   "why": "no clock time, weekday or duration in prose or label; a once-only meeting gated on Frank's presence; exit spends 5 min"
+  },
+  {
+   "row": "C897",
+   "screen": "shop_meet_frank.after",
+   "verdict": "PASS",
+   "line": "Done (5 min) back to the shop; no time in the beat",
+   "why": "no clock time, weekday or duration in prose or label; a once-only meeting gated on Frank's presence; exit spends 5 min"
+  },
+  {
+   "row": "C900",
+   "screen": "shop_meet_frank.after",
+   "verdict": "PASS",
+   "line": "Done (5 min) back to the shop; no time in the beat",
+   "why": "no clock time, weekday or duration in prose or label; a once-only meeting gated on Frank's presence; exit spends 5 min"
+  },
+  {
+   "row": "C902",
+   "screen": "shop_meet_frank.after",
+   "verdict": "PASS",
+   "line": "Done (5 min) back to the shop; no time in the beat",
+   "why": "no clock time, weekday or duration in prose or label; a once-only meeting gated on Frank's presence; exit spends 5 min"
+  },
+  {
+   "row": "C903",
+   "screen": "shop_meet_frank.after",
+   "verdict": "PASS",
+   "line": "Done (5 min) back to the shop; no time in the beat",
+   "why": "no clock time, weekday or duration in prose or label; a once-only meeting gated on Frank's presence; exit spends 5 min"
+  },
+  {
+   "row": "C906",
+   "screen": "shop_meet_frank.after",
+   "verdict": "PASS",
+   "line": "Done (5 min) back to the shop; no time in the beat",
+   "why": "no clock time, weekday or duration in prose or label; a once-only meeting gated on Frank's presence; exit spends 5 min"
+  },
+  {
+   "row": "C910",
+   "screen": "shop_meet_frank.after",
+   "verdict": "PASS",
+   "line": "Done (5 min) back to the shop; no time in the beat",
+   "why": "no clock time, weekday or duration in prose or label; a once-only meeting gated on Frank's presence; exit spends 5 min"
+  },
+  {
+   "row": "C913",
+   "screen": "shop_meet_frank.after",
+   "verdict": "PASS",
+   "line": "Done (5 min) back to the shop; no time in the beat",
+   "why": "no clock time, weekday or duration in prose or label; a once-only meeting gated on Frank's presence; exit spends 5 min"
+  },
+  {
+   "row": "C914",
+   "screen": "shop_meet_frank.after",
+   "verdict": "PASS",
+   "line": "Done (5 min) back to the shop; no time in the beat",
+   "why": "no clock time, weekday or duration in prose or label; a once-only meeting gated on Frank's presence; exit spends 5 min"
+  },
+  {
+   "row": "C916",
+   "screen": "shop_meet_frank.after",
+   "verdict": "PASS",
+   "line": "Done (5 min) back to the shop; no time in the beat",
+   "why": "no clock time, weekday or duration in prose or label; a once-only meeting gated on Frank's presence; exit spends 5 min"
+  },
+  {
+   "row": "C920",
+   "screen": "shop_meet_frank.after",
+   "verdict": "PASS",
+   "line": "Done (5 min) back to the shop; no time in the beat",
+   "why": "no clock time, weekday or duration in prose or label; a once-only meeting gated on Frank's presence; exit spends 5 min"
+  },
+  {
+   "row": "C924",
+   "screen": "shop_meet_frank.after",
+   "verdict": "PASS",
+   "line": "Done (5 min) back to the shop; no time in the beat",
+   "why": "no clock time, weekday or duration in prose or label; a once-only meeting gated on Frank's presence; exit spends 5 min"
+  },
+  {
+   "row": "C926",
+   "screen": "shop_meet_frank.after",
+   "verdict": "PASS",
+   "line": "Done (5 min) back to the shop; no time in the beat",
+   "why": "no clock time, weekday or duration in prose or label; a once-only meeting gated on Frank's presence; exit spends 5 min"
+  },
+  {
+   "row": "C927",
+   "screen": "shop_meet_frank.after",
+   "verdict": "PASS",
+   "line": "Done (5 min) back to the shop; no time in the beat",
+   "why": "no clock time, weekday or duration in prose or label; a once-only meeting gated on Frank's presence; exit spends 5 min"
+  },
+  {
+   "row": "C928",
+   "screen": "shop_meet_frank.after",
+   "verdict": "PASS",
+   "line": "Done (5 min) back to the shop; no time in the beat",
+   "why": "no clock time, weekday or duration in prose or label; a once-only meeting gated on Frank's presence; exit spends 5 min"
+  },
+  {
+   "row": "C929",
+   "screen": "shop_meet_frank.after",
+   "verdict": "PASS",
+   "line": "Done (5 min) back to the shop; no time in the beat",
+   "why": "no clock time, weekday or duration in prose or label; a once-only meeting gated on Frank's presence; exit spends 5 min"
+  },
+  {
+   "row": "C930",
+   "screen": "shop_meet_frank.after",
+   "verdict": "PASS",
+   "line": "Done (5 min) back to the shop; no time in the beat",
+   "why": "no clock time, weekday or duration in prose or label; a once-only meeting gated on Frank's presence; exit spends 5 min"
+  },
+  {
+   "row": "C931",
+   "screen": "shop_meet_frank.after",
+   "verdict": "PASS",
+   "line": "Done (5 min) back to the shop; no time in the beat",
+   "why": "no clock time, weekday or duration in prose or label; a once-only meeting gated on Frank's presence; exit spends 5 min"
+  },
+  {
+   "row": "L167",
+   "screen": "shop_meet_frank.after",
+   "verdict": "PASS",
+   "line": "Done (5 min) back to the shop; no time in the beat",
+   "why": "no clock time, weekday or duration in prose or label; a once-only meeting gated on Frank's presence; exit spends 5 min"
+  }
+ ],
+ "causes": []
+}

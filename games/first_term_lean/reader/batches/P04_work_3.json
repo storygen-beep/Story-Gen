@@ -1,0 +1,34 @@
+{
+ "items": [
+  {
+   "row": "clock#10",
+   "screen": "*",
+   "why": "never judged"
+  },
+  {
+   "row": "places#2",
+   "screen": "campus_lecture_hall",
+   "why": "failed last pass"
+  },
+  {
+   "row": "places#2",
+   "screen": "campus_library",
+   "why": "failed last pass"
+  },
+  {
+   "row": "places#2",
+   "screen": "campus_offices",
+   "why": "failed last pass"
+  },
+  {
+   "row": "places#2",
+   "screen": "campus_theatre",
+   "why": "failed last pass"
+  },
+  {
+   "row": "places#6",
+   "screen": "campus_theatre",
+   "why": "failed last pass"
+  }
+ ]
+}

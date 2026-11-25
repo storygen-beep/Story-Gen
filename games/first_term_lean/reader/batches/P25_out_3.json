@@ -1,0 +1,26 @@
+{
+ "verdicts": [
+  {
+   "row": "L170",
+   "screen": "*",
+   "verdict": "N/A",
+   "line": "",
+   "why": "no place on this piece's screens is hidden_until a flag"
+  },
+  {
+   "row": "L168",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "From your second week, a guy and his friends hang around the Quad on weekday afternoons, 2 to 4.",
+   "why": "Jake on the Quad weekdays 14-16, meeting from day 7; met_jake is the end step's when"
+  },
+  {
+   "row": "L169",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "From your second week, a guy and his friends hang around the Quad on weekday afternoons, 2 to 4.",
+   "why": "quad_meet_jake fires on any Quad visit while he's there from week two, and the hint names that"
+  }
+ ],
+ "causes": []
+}

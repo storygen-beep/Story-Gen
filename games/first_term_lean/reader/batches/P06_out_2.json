@@ -1,0 +1,26 @@
+{
+ "verdicts": [
+  {
+   "row": "C795",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "\"Mom slides the butter across.\" (Laura present group)",
+   "why": "loop beats are scenes; who's at the table is written only inside npc_at_location groups, never room text"
+  },
+  {
+   "row": "C804",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "\"Ryan steals a corner of your toast.\" (Laura+Ryan present)",
+   "why": "no room-text line per person; faces carry presence"
+  },
+  {
+   "row": "places#2",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "locked_text \"Ryan's in the shower.\"; eat groups by npc_at_location",
+   "why": "every named person is behind a presence condition; no room text added"
+  }
+ ],
+ "causes": []
+}

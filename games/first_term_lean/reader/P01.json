@@ -1,6 +1,6 @@
 {
  "piece": "P01",
- "pass": 2,
+ "pass": 4,
  "screens": {
   "*": "4f53cda18c2baa0c"
  },
@@ -34,7 +34,7 @@
   "C989": "e1c6c01fec93f506",
   "C990": "15827455cd5e6620",
   "C951": "a91fce0d99af3de3",
-  "C952": "f1b5a1ea9d237702",
+  "C952": "e641a233b7b0e8b0",
   "C992": "02e29cf84feb0732",
   "C1017": "660f205bfa998913",
   "C967": "801de8f07da9dc5b",
@@ -70,7 +70,7 @@
   "meters#5": "e8844912425defe5",
   "meters#6": "470d2275a4a0510c",
   "meters#7": "2a5409ae48591f37",
-  "meters#8": "d747bf9bfd2bc1a8",
+  "meters#8": "24d0f2be0c16cee7",
   "meters#9": "f34377a1648a56e4",
   "meters#10": "df28366397b8550a",
   "C1651": "1fd1d398f8ff8c05",
@@ -131,7 +131,7 @@
   "systems#1": "11a025871bd91561",
   "systems#2": "08602a299af77b30",
   "systems#3": "2d317a22b4b850f2",
-  "systems#4": "8bf41d5847343d42",
+  "systems#4": "671b614cf229df83",
   "systems#5": "94a3bd2b1d063362",
   "systems#6": "c3246ca0c2177dd6",
   "systems#7": "f862f66e0c4425a8",
@@ -482,7 +482,7 @@
    "note": false,
    "screen_hash": null,
    "row_hash": "a0fd538d352dfedb",
-   "carried": false,
+   "carried": true,
    "pass": 2
   },
   {
@@ -1347,14 +1347,14 @@
    "row": "C952",
    "screen": "*",
    "verdict": "PASS",
-   "line": "Money: 0",
-   "why": "The starting figure agrees with PLAN \u00a78c ($0) and the card (money 0).",
+   "line": "Money ($) \u00b7 Corruption Good Girl 0-19 \u00b7 Grades 50 (C)",
+   "why": "sidebar starts money 0 (PLAN 'She starts at $0'), meters 0-100 in stages of 20, grades 50 = C; no other number shown",
    "cause": null,
    "note": false,
    "screen_hash": "4f53cda18c2baa0c",
-   "row_hash": "f1b5a1ea9d237702",
-   "carried": true,
-   "pass": 1
+   "row_hash": "e641a233b7b0e8b0",
+   "carried": false,
+   "pass": 4
   },
   {
    "row": "C954",
@@ -1561,7 +1561,7 @@
    "note": false,
    "screen_hash": null,
    "row_hash": "288e67bc30cff285",
-   "carried": false,
+   "carried": true,
    "pass": 2
   },
   {
@@ -1725,13 +1725,13 @@
    "screen": "*",
    "verdict": "N/A",
    "line": "",
-   "why": "Step governs acts, talks, locks and crossings; release 1 builds none (card, PLAN.md:309).",
+   "why": "release 1 moves no meter; the sidebar shows no lock and the Quests page has no meter storyline yet, so step 8 has nothing to read on these screens",
    "cause": null,
    "note": false,
    "screen_hash": "4f53cda18c2baa0c",
-   "row_hash": "d747bf9bfd2bc1a8",
-   "carried": true,
-   "pass": 1
+   "row_hash": "24d0f2be0c16cee7",
+   "carried": false,
+   "pass": 4
   },
   {
    "row": "meters#9",
@@ -1795,7 +1795,7 @@
    "note": false,
    "screen_hash": null,
    "row_hash": "441da1fefbe14f9a",
-   "carried": false,
+   "carried": true,
    "pass": 2
   },
   {
@@ -1970,15 +1970,15 @@
   {
    "row": "systems#4",
    "screen": "*",
-   "verdict": "N/A",
-   "line": "",
-   "why": "Step governs a need's or a repeat's card (P06/P10); nothing here costs, refills, caps or repeats.",
+   "verdict": "PASS",
+   "line": "sidebar: Energy bar, Money ($)",
+   "why": "the sidebar holds no repeat button; the energy bar and money line are where the spend shows, as rule 4 says",
    "cause": null,
    "note": false,
    "screen_hash": "4f53cda18c2baa0c",
-   "row_hash": "8bf41d5847343d42",
+   "row_hash": "671b614cf229df83",
    "carried": true,
-   "pass": 1
+   "pass": 3
   },
   {
    "row": "systems#5",
@@ -2152,8 +2152,8 @@
  ],
  "causes": [],
  "pending": [],
- "asked": 3,
- "answered": 3,
+ "asked": 2,
+ "answered": 2,
  "pass_items": [],
  "unowed": []
 }

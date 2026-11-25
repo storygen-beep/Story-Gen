@@ -1,0 +1,29 @@
+{
+ "items": [
+  {
+   "row": "C952",
+   "screen": "mark_kitchen.pay100",
+   "why": "its rule's text changed"
+  },
+  {
+   "row": "C952",
+   "screen": "mark_kitchen.pay75",
+   "why": "its rule's text changed"
+  },
+  {
+   "row": "C952",
+   "screen": "mark_kitchen.pay90",
+   "why": "its rule's text changed"
+  },
+  {
+   "row": "C952",
+   "screen": "mark_kitchen.rent",
+   "why": "its rule's text changed"
+  },
+  {
+   "row": "L170",
+   "screen": "*",
+   "why": "never judged"
+  }
+ ]
+}

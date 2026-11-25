@@ -1,0 +1,68 @@
+{
+ "verdicts": [
+  {
+   "row": "B10",
+   "screen": "quad_meet_zoe.talk",
+   "verdict": "PASS",
+   "line": "Come find me. Saturday. Mine. Nine o'clock.",
+   "why": "zoe_party is built: Saturday 21:00 to Sunday 01:00, needs met_zoe (set on this Done); Zoe's rows Sat 18-24, Sun 00-01 at near_zoe_apartment; her tip says the same"
+  },
+  {
+   "row": "B8",
+   "screen": "quad_meet_zoe.talk",
+   "verdict": "PASS",
+   "line": "Parties every Saturday, 9pm to 1am.",
+   "why": "nine o'clock agrees with zoe_party's trigger and the tip; no garment of hers named"
+  },
+  {
+   "row": "C460",
+   "screen": "quad_meet_zoe.talk",
+   "verdict": "PASS",
+   "line": "Come find me. Saturday. Mine. Nine o'clock.",
+   "why": "the promise is built and reachable (zoe_place_known set here, apartment open 12:00-02:00); 'two streets that way, the green door' matches the apartment"
+  },
+  {
+   "row": "C461",
+   "screen": "quad_meet_zoe.talk",
+   "verdict": "PASS",
+   "line": "I live two streets that way, the green door.",
+   "why": "dialogue fits her entry"
+  },
+  {
+   "row": "C927",
+   "screen": "quad_meet_zoe.talk",
+   "verdict": "PASS",
+   "line": "time_progression_minutes = 10",
+   "why": "exit time set"
+  },
+  {
+   "row": "C931",
+   "screen": "quad_meet_zoe.talk",
+   "verdict": "PASS",
+   "line": "trigger: npc_at_location only",
+   "why": "no time_of_day on this screen"
+  },
+  {
+   "row": "C953",
+   "screen": "quad_meet_zoe.talk",
+   "verdict": "PASS",
+   "line": "Done",
+   "why": "label shows no time or energy and no money is spent; rule now forbids time on the label (LO 2026-11-24)"
+  },
+  {
+   "row": "L106",
+   "screen": "quad_meet_zoe.talk",
+   "verdict": "PASS",
+   "line": "She's halfway across the quad",
+   "why": "only Zoe named; trigger needs her on the quad"
+  },
+  {
+   "row": "L167",
+   "screen": "quad_meet_zoe.talk",
+   "verdict": "N/A",
+   "line": "is_repeatable = false",
+   "why": "a one-time meeting, not a row with hours"
+  }
+ ],
+ "causes": []
+}

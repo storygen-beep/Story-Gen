@@ -2,43 +2,1978 @@
  "items": [
   {
    "row": "B10",
-   "screen": "home_wait.wait",
+   "screen": "home_dishes.do",
+   "why": "a fact changed"
+  },
+  {
+   "row": "B10",
+   "screen": "home_tv.watch",
+   "why": "a fact changed"
+  },
+  {
+   "row": "B10",
+   "screen": "loop_eat.do",
+   "why": "screen changed: truth row"
+  },
+  {
+   "row": "B10",
+   "screen": "mark_kitchen.hub",
+   "why": "screen changed: truth row"
+  },
+  {
+   "row": "B10",
+   "screen": "mark_kitchen.pay100",
+   "why": "a fact changed"
+  },
+  {
+   "row": "B10",
+   "screen": "mark_kitchen.pay75",
+   "why": "a fact changed"
+  },
+  {
+   "row": "B10",
+   "screen": "mark_kitchen.pay90",
+   "why": "a fact changed"
+  },
+  {
+   "row": "B10",
+   "screen": "mark_kitchen.rent",
+   "why": "a fact changed"
+  },
+  {
+   "row": "B10",
+   "screen": "mark_kitchen.short",
+   "why": "a fact changed"
+  },
+  {
+   "row": "B10",
+   "screen": "mark_kitchen.talk",
+   "why": "a fact changed"
+  },
+  {
+   "row": "B10",
+   "screen": "mark_living_room.hub",
+   "why": "screen changed: truth row"
+  },
+  {
+   "row": "B10",
+   "screen": "mark_living_room.talk",
+   "why": "a fact changed"
+  },
+  {
+   "row": "B10",
+   "screen": "ryan_kitchen.hub",
+   "why": "screen changed: truth row"
+  },
+  {
+   "row": "B10",
+   "screen": "ryan_kitchen.talk",
+   "why": "a fact changed"
+  },
+  {
+   "row": "B10",
+   "screen": "ryan_living_room.hub",
+   "why": "screen changed: truth row"
+  },
+  {
+   "row": "B10",
+   "screen": "ryan_living_room.talk",
+   "why": "a fact changed"
+  },
+  {
+   "row": "B10",
+   "screen": "ryan_room.hub",
+   "why": "screen changed: truth row"
+  },
+  {
+   "row": "B10",
+   "screen": "ryan_room.talk",
+   "why": "a fact changed"
+  },
+  {
+   "row": "B10",
+   "screen": "talk_mom.eat",
+   "why": "a fact changed"
+  },
+  {
+   "row": "B10",
+   "screen": "talk_mom.hub",
+   "why": "screen changed: truth row"
+  },
+  {
+   "row": "B10",
+   "screen": "talk_mom.talk",
+   "why": "a fact changed"
+  },
+  {
+   "row": "B8",
+   "screen": "home_dishes.do",
+   "why": "a fact changed"
+  },
+  {
+   "row": "B8",
+   "screen": "home_tv.watch",
+   "why": "a fact changed"
+  },
+  {
+   "row": "B8",
+   "screen": "loop_eat.do",
    "why": "screen changed: truth row"
   },
   {
    "row": "B8",
-   "screen": "home_wait.wait",
+   "screen": "mark_kitchen.hub",
+   "why": "screen changed: truth row"
+  },
+  {
+   "row": "B8",
+   "screen": "mark_kitchen.pay100",
+   "why": "a fact changed"
+  },
+  {
+   "row": "B8",
+   "screen": "mark_kitchen.pay75",
+   "why": "a fact changed"
+  },
+  {
+   "row": "B8",
+   "screen": "mark_kitchen.pay90",
+   "why": "a fact changed"
+  },
+  {
+   "row": "B8",
+   "screen": "mark_kitchen.rent",
+   "why": "a fact changed"
+  },
+  {
+   "row": "B8",
+   "screen": "mark_kitchen.short",
+   "why": "a fact changed"
+  },
+  {
+   "row": "B8",
+   "screen": "mark_kitchen.talk",
+   "why": "a fact changed"
+  },
+  {
+   "row": "B8",
+   "screen": "mark_living_room.hub",
+   "why": "screen changed: truth row"
+  },
+  {
+   "row": "B8",
+   "screen": "mark_living_room.talk",
+   "why": "a fact changed"
+  },
+  {
+   "row": "B8",
+   "screen": "ryan_kitchen.hub",
+   "why": "screen changed: truth row"
+  },
+  {
+   "row": "B8",
+   "screen": "ryan_kitchen.talk",
+   "why": "a fact changed"
+  },
+  {
+   "row": "B8",
+   "screen": "ryan_living_room.hub",
+   "why": "screen changed: truth row"
+  },
+  {
+   "row": "B8",
+   "screen": "ryan_living_room.talk",
+   "why": "a fact changed"
+  },
+  {
+   "row": "B8",
+   "screen": "ryan_room.hub",
+   "why": "screen changed: truth row"
+  },
+  {
+   "row": "B8",
+   "screen": "ryan_room.talk",
+   "why": "a fact changed"
+  },
+  {
+   "row": "B8",
+   "screen": "talk_mom.eat",
+   "why": "a fact changed"
+  },
+  {
+   "row": "B8",
+   "screen": "talk_mom.hub",
+   "why": "screen changed: truth row"
+  },
+  {
+   "row": "B8",
+   "screen": "talk_mom.talk",
+   "why": "a fact changed"
+  },
+  {
+   "row": "C1158",
+   "screen": "talk_mom.hub",
+   "why": "screen changed: truth row"
+  },
+  {
+   "row": "C1206",
+   "screen": "talk_mom.hub",
+   "why": "screen changed: truth row"
+  },
+  {
+   "row": "C1265",
+   "screen": "talk_mom.hub",
+   "why": "its rule's text changed"
+  },
+  {
+   "row": "C460",
+   "screen": "home_dishes.do",
+   "why": "a fact changed"
+  },
+  {
+   "row": "C460",
+   "screen": "home_tv.watch",
+   "why": "a fact changed"
+  },
+  {
+   "row": "C460",
+   "screen": "loop_eat.do",
    "why": "screen changed: truth row"
   },
   {
    "row": "C460",
-   "screen": "home_wait.wait",
+   "screen": "mark_kitchen.hub",
+   "why": "screen changed: truth row"
+  },
+  {
+   "row": "C460",
+   "screen": "mark_kitchen.pay100",
+   "why": "a fact changed"
+  },
+  {
+   "row": "C460",
+   "screen": "mark_kitchen.pay75",
+   "why": "a fact changed"
+  },
+  {
+   "row": "C460",
+   "screen": "mark_kitchen.pay90",
+   "why": "a fact changed"
+  },
+  {
+   "row": "C460",
+   "screen": "mark_kitchen.rent",
+   "why": "a fact changed"
+  },
+  {
+   "row": "C460",
+   "screen": "mark_kitchen.short",
+   "why": "a fact changed"
+  },
+  {
+   "row": "C460",
+   "screen": "mark_kitchen.talk",
+   "why": "a fact changed"
+  },
+  {
+   "row": "C460",
+   "screen": "mark_living_room.hub",
+   "why": "screen changed: truth row"
+  },
+  {
+   "row": "C460",
+   "screen": "mark_living_room.talk",
+   "why": "a fact changed"
+  },
+  {
+   "row": "C460",
+   "screen": "ryan_kitchen.hub",
+   "why": "screen changed: truth row"
+  },
+  {
+   "row": "C460",
+   "screen": "ryan_kitchen.talk",
+   "why": "a fact changed"
+  },
+  {
+   "row": "C460",
+   "screen": "ryan_living_room.hub",
+   "why": "screen changed: truth row"
+  },
+  {
+   "row": "C460",
+   "screen": "ryan_living_room.talk",
+   "why": "a fact changed"
+  },
+  {
+   "row": "C460",
+   "screen": "ryan_room.hub",
+   "why": "screen changed: truth row"
+  },
+  {
+   "row": "C460",
+   "screen": "ryan_room.talk",
+   "why": "a fact changed"
+  },
+  {
+   "row": "C460",
+   "screen": "talk_mom.eat",
+   "why": "a fact changed"
+  },
+  {
+   "row": "C460",
+   "screen": "talk_mom.hub",
+   "why": "screen changed: truth row"
+  },
+  {
+   "row": "C460",
+   "screen": "talk_mom.talk",
+   "why": "a fact changed"
+  },
+  {
+   "row": "C461",
+   "screen": "home_dishes.do",
+   "why": "a fact changed"
+  },
+  {
+   "row": "C461",
+   "screen": "home_tv.watch",
+   "why": "a fact changed"
+  },
+  {
+   "row": "C461",
+   "screen": "loop_eat.do",
    "why": "screen changed: truth row"
   },
   {
    "row": "C461",
-   "screen": "home_wait.wait",
+   "screen": "mark_kitchen.hub",
+   "why": "screen changed: truth row"
+  },
+  {
+   "row": "C461",
+   "screen": "mark_kitchen.pay100",
+   "why": "a fact changed"
+  },
+  {
+   "row": "C461",
+   "screen": "mark_kitchen.pay75",
+   "why": "a fact changed"
+  },
+  {
+   "row": "C461",
+   "screen": "mark_kitchen.pay90",
+   "why": "a fact changed"
+  },
+  {
+   "row": "C461",
+   "screen": "mark_kitchen.rent",
+   "why": "a fact changed"
+  },
+  {
+   "row": "C461",
+   "screen": "mark_kitchen.short",
+   "why": "a fact changed"
+  },
+  {
+   "row": "C461",
+   "screen": "mark_kitchen.talk",
+   "why": "a fact changed"
+  },
+  {
+   "row": "C461",
+   "screen": "mark_living_room.hub",
+   "why": "screen changed: truth row"
+  },
+  {
+   "row": "C461",
+   "screen": "mark_living_room.talk",
+   "why": "a fact changed"
+  },
+  {
+   "row": "C461",
+   "screen": "ryan_kitchen.hub",
+   "why": "screen changed: truth row"
+  },
+  {
+   "row": "C461",
+   "screen": "ryan_kitchen.talk",
+   "why": "a fact changed"
+  },
+  {
+   "row": "C461",
+   "screen": "ryan_living_room.hub",
+   "why": "screen changed: truth row"
+  },
+  {
+   "row": "C461",
+   "screen": "ryan_living_room.talk",
+   "why": "a fact changed"
+  },
+  {
+   "row": "C461",
+   "screen": "ryan_room.hub",
+   "why": "screen changed: truth row"
+  },
+  {
+   "row": "C461",
+   "screen": "ryan_room.talk",
+   "why": "a fact changed"
+  },
+  {
+   "row": "C461",
+   "screen": "talk_mom.eat",
+   "why": "a fact changed"
+  },
+  {
+   "row": "C461",
+   "screen": "talk_mom.hub",
+   "why": "screen changed: truth row"
+  },
+  {
+   "row": "C461",
+   "screen": "talk_mom.talk",
+   "why": "a fact changed"
+  },
+  {
+   "row": "C889",
+   "screen": "*",
+   "why": "its rule's text changed"
+  },
+  {
+   "row": "C889",
+   "screen": "home_dishes.do",
+   "why": "a fact changed"
+  },
+  {
+   "row": "C889",
+   "screen": "home_tv.watch",
+   "why": "a fact changed"
+  },
+  {
+   "row": "C889",
+   "screen": "mark_kitchen.pay100",
+   "why": "a fact changed"
+  },
+  {
+   "row": "C889",
+   "screen": "mark_kitchen.pay75",
+   "why": "a fact changed"
+  },
+  {
+   "row": "C889",
+   "screen": "mark_kitchen.pay90",
+   "why": "a fact changed"
+  },
+  {
+   "row": "C889",
+   "screen": "mark_kitchen.short",
+   "why": "a fact changed"
+  },
+  {
+   "row": "C889",
+   "screen": "mark_kitchen.talk",
+   "why": "a fact changed"
+  },
+  {
+   "row": "C889",
+   "screen": "mark_living_room.talk",
+   "why": "a fact changed"
+  },
+  {
+   "row": "C889",
+   "screen": "ryan_kitchen.talk",
+   "why": "a fact changed"
+  },
+  {
+   "row": "C889",
+   "screen": "ryan_living_room.talk",
+   "why": "a fact changed"
+  },
+  {
+   "row": "C889",
+   "screen": "ryan_room.talk",
+   "why": "a fact changed"
+  },
+  {
+   "row": "C889",
+   "screen": "talk_mom.eat",
+   "why": "a fact changed"
+  },
+  {
+   "row": "C889",
+   "screen": "talk_mom.talk",
+   "why": "a fact changed"
+  },
+  {
+   "row": "C892",
+   "screen": "home_dishes.do",
+   "why": "a fact changed"
+  },
+  {
+   "row": "C892",
+   "screen": "home_tv.watch",
+   "why": "a fact changed"
+  },
+  {
+   "row": "C892",
+   "screen": "mark_kitchen.pay100",
+   "why": "a fact changed"
+  },
+  {
+   "row": "C892",
+   "screen": "mark_kitchen.pay75",
+   "why": "a fact changed"
+  },
+  {
+   "row": "C892",
+   "screen": "mark_kitchen.pay90",
+   "why": "a fact changed"
+  },
+  {
+   "row": "C892",
+   "screen": "mark_kitchen.short",
+   "why": "a fact changed"
+  },
+  {
+   "row": "C892",
+   "screen": "mark_kitchen.talk",
+   "why": "a fact changed"
+  },
+  {
+   "row": "C892",
+   "screen": "mark_living_room.talk",
+   "why": "a fact changed"
+  },
+  {
+   "row": "C892",
+   "screen": "ryan_kitchen.talk",
+   "why": "a fact changed"
+  },
+  {
+   "row": "C892",
+   "screen": "ryan_living_room.talk",
+   "why": "a fact changed"
+  },
+  {
+   "row": "C892",
+   "screen": "ryan_room.talk",
+   "why": "a fact changed"
+  },
+  {
+   "row": "C892",
+   "screen": "talk_mom.eat",
+   "why": "a fact changed"
+  },
+  {
+   "row": "C892",
+   "screen": "talk_mom.talk",
+   "why": "a fact changed"
+  },
+  {
+   "row": "C897",
+   "screen": "home_dishes.do",
+   "why": "a fact changed"
+  },
+  {
+   "row": "C897",
+   "screen": "home_tv.watch",
+   "why": "a fact changed"
+  },
+  {
+   "row": "C897",
+   "screen": "mark_kitchen.pay100",
+   "why": "a fact changed"
+  },
+  {
+   "row": "C897",
+   "screen": "mark_kitchen.pay75",
+   "why": "a fact changed"
+  },
+  {
+   "row": "C897",
+   "screen": "mark_kitchen.pay90",
+   "why": "a fact changed"
+  },
+  {
+   "row": "C897",
+   "screen": "mark_kitchen.short",
+   "why": "a fact changed"
+  },
+  {
+   "row": "C897",
+   "screen": "mark_kitchen.talk",
+   "why": "a fact changed"
+  },
+  {
+   "row": "C897",
+   "screen": "mark_living_room.talk",
+   "why": "a fact changed"
+  },
+  {
+   "row": "C897",
+   "screen": "ryan_kitchen.talk",
+   "why": "a fact changed"
+  },
+  {
+   "row": "C897",
+   "screen": "ryan_living_room.talk",
+   "why": "a fact changed"
+  },
+  {
+   "row": "C897",
+   "screen": "ryan_room.talk",
+   "why": "a fact changed"
+  },
+  {
+   "row": "C897",
+   "screen": "talk_mom.eat",
+   "why": "a fact changed"
+  },
+  {
+   "row": "C897",
+   "screen": "talk_mom.talk",
+   "why": "a fact changed"
+  },
+  {
+   "row": "C900",
+   "screen": "home_dishes.do",
+   "why": "a fact changed"
+  },
+  {
+   "row": "C900",
+   "screen": "home_tv.watch",
+   "why": "a fact changed"
+  },
+  {
+   "row": "C900",
+   "screen": "mark_kitchen.pay100",
+   "why": "a fact changed"
+  },
+  {
+   "row": "C900",
+   "screen": "mark_kitchen.pay75",
+   "why": "a fact changed"
+  },
+  {
+   "row": "C900",
+   "screen": "mark_kitchen.pay90",
+   "why": "a fact changed"
+  },
+  {
+   "row": "C900",
+   "screen": "mark_kitchen.short",
+   "why": "a fact changed"
+  },
+  {
+   "row": "C900",
+   "screen": "mark_kitchen.talk",
+   "why": "a fact changed"
+  },
+  {
+   "row": "C900",
+   "screen": "mark_living_room.talk",
+   "why": "a fact changed"
+  },
+  {
+   "row": "C900",
+   "screen": "ryan_kitchen.talk",
+   "why": "a fact changed"
+  },
+  {
+   "row": "C900",
+   "screen": "ryan_living_room.talk",
+   "why": "a fact changed"
+  },
+  {
+   "row": "C900",
+   "screen": "ryan_room.talk",
+   "why": "a fact changed"
+  },
+  {
+   "row": "C900",
+   "screen": "talk_mom.eat",
+   "why": "a fact changed"
+  },
+  {
+   "row": "C900",
+   "screen": "talk_mom.talk",
+   "why": "a fact changed"
+  },
+  {
+   "row": "C902",
+   "screen": "home_dishes.do",
+   "why": "a fact changed"
+  },
+  {
+   "row": "C902",
+   "screen": "home_tv.watch",
+   "why": "a fact changed"
+  },
+  {
+   "row": "C902",
+   "screen": "mark_kitchen.pay100",
+   "why": "a fact changed"
+  },
+  {
+   "row": "C902",
+   "screen": "mark_kitchen.pay75",
+   "why": "a fact changed"
+  },
+  {
+   "row": "C902",
+   "screen": "mark_kitchen.pay90",
+   "why": "a fact changed"
+  },
+  {
+   "row": "C902",
+   "screen": "mark_kitchen.short",
+   "why": "a fact changed"
+  },
+  {
+   "row": "C902",
+   "screen": "mark_kitchen.talk",
+   "why": "a fact changed"
+  },
+  {
+   "row": "C902",
+   "screen": "mark_living_room.talk",
+   "why": "a fact changed"
+  },
+  {
+   "row": "C902",
+   "screen": "ryan_kitchen.talk",
+   "why": "a fact changed"
+  },
+  {
+   "row": "C902",
+   "screen": "ryan_living_room.talk",
+   "why": "a fact changed"
+  },
+  {
+   "row": "C902",
+   "screen": "ryan_room.talk",
+   "why": "a fact changed"
+  },
+  {
+   "row": "C902",
+   "screen": "talk_mom.eat",
+   "why": "a fact changed"
+  },
+  {
+   "row": "C902",
+   "screen": "talk_mom.talk",
+   "why": "a fact changed"
+  },
+  {
+   "row": "C903",
+   "screen": "home_dishes.do",
+   "why": "a fact changed"
+  },
+  {
+   "row": "C903",
+   "screen": "home_tv.watch",
+   "why": "a fact changed"
+  },
+  {
+   "row": "C903",
+   "screen": "mark_kitchen.pay100",
+   "why": "a fact changed"
+  },
+  {
+   "row": "C903",
+   "screen": "mark_kitchen.pay75",
+   "why": "a fact changed"
+  },
+  {
+   "row": "C903",
+   "screen": "mark_kitchen.pay90",
+   "why": "a fact changed"
+  },
+  {
+   "row": "C903",
+   "screen": "mark_kitchen.short",
+   "why": "a fact changed"
+  },
+  {
+   "row": "C903",
+   "screen": "mark_kitchen.talk",
+   "why": "a fact changed"
+  },
+  {
+   "row": "C903",
+   "screen": "mark_living_room.talk",
+   "why": "a fact changed"
+  },
+  {
+   "row": "C903",
+   "screen": "ryan_kitchen.talk",
+   "why": "a fact changed"
+  },
+  {
+   "row": "C903",
+   "screen": "ryan_living_room.talk",
+   "why": "a fact changed"
+  },
+  {
+   "row": "C903",
+   "screen": "ryan_room.talk",
+   "why": "a fact changed"
+  },
+  {
+   "row": "C903",
+   "screen": "talk_mom.eat",
+   "why": "a fact changed"
+  },
+  {
+   "row": "C903",
+   "screen": "talk_mom.talk",
+   "why": "a fact changed"
+  },
+  {
+   "row": "C906",
+   "screen": "*",
+   "why": "its rule's text changed"
+  },
+  {
+   "row": "C906",
+   "screen": "home_dishes.do",
+   "why": "a fact changed"
+  },
+  {
+   "row": "C906",
+   "screen": "home_tv.watch",
+   "why": "a fact changed"
+  },
+  {
+   "row": "C906",
+   "screen": "mark_kitchen.pay100",
+   "why": "a fact changed"
+  },
+  {
+   "row": "C906",
+   "screen": "mark_kitchen.pay75",
+   "why": "a fact changed"
+  },
+  {
+   "row": "C906",
+   "screen": "mark_kitchen.pay90",
+   "why": "a fact changed"
+  },
+  {
+   "row": "C906",
+   "screen": "mark_kitchen.short",
+   "why": "a fact changed"
+  },
+  {
+   "row": "C906",
+   "screen": "mark_kitchen.talk",
+   "why": "a fact changed"
+  },
+  {
+   "row": "C906",
+   "screen": "mark_living_room.talk",
+   "why": "a fact changed"
+  },
+  {
+   "row": "C906",
+   "screen": "ryan_kitchen.talk",
+   "why": "a fact changed"
+  },
+  {
+   "row": "C906",
+   "screen": "ryan_living_room.talk",
+   "why": "a fact changed"
+  },
+  {
+   "row": "C906",
+   "screen": "ryan_room.talk",
+   "why": "a fact changed"
+  },
+  {
+   "row": "C906",
+   "screen": "talk_mom.eat",
+   "why": "a fact changed"
+  },
+  {
+   "row": "C906",
+   "screen": "talk_mom.talk",
+   "why": "a fact changed"
+  },
+  {
+   "row": "C910",
+   "screen": "*",
+   "why": "its rule's text changed"
+  },
+  {
+   "row": "C910",
+   "screen": "home_dishes.do",
+   "why": "a fact changed"
+  },
+  {
+   "row": "C910",
+   "screen": "home_tv.watch",
+   "why": "a fact changed"
+  },
+  {
+   "row": "C910",
+   "screen": "mark_kitchen.pay100",
+   "why": "a fact changed"
+  },
+  {
+   "row": "C910",
+   "screen": "mark_kitchen.pay75",
+   "why": "a fact changed"
+  },
+  {
+   "row": "C910",
+   "screen": "mark_kitchen.pay90",
+   "why": "a fact changed"
+  },
+  {
+   "row": "C910",
+   "screen": "mark_kitchen.short",
+   "why": "a fact changed"
+  },
+  {
+   "row": "C910",
+   "screen": "mark_kitchen.talk",
+   "why": "a fact changed"
+  },
+  {
+   "row": "C910",
+   "screen": "mark_living_room.talk",
+   "why": "a fact changed"
+  },
+  {
+   "row": "C910",
+   "screen": "ryan_kitchen.talk",
+   "why": "a fact changed"
+  },
+  {
+   "row": "C910",
+   "screen": "ryan_living_room.talk",
+   "why": "a fact changed"
+  },
+  {
+   "row": "C910",
+   "screen": "ryan_room.talk",
+   "why": "a fact changed"
+  },
+  {
+   "row": "C910",
+   "screen": "talk_mom.eat",
+   "why": "a fact changed"
+  },
+  {
+   "row": "C910",
+   "screen": "talk_mom.talk",
+   "why": "a fact changed"
+  },
+  {
+   "row": "C913",
+   "screen": "home_dishes.do",
+   "why": "a fact changed"
+  },
+  {
+   "row": "C913",
+   "screen": "home_tv.watch",
+   "why": "a fact changed"
+  },
+  {
+   "row": "C913",
+   "screen": "mark_kitchen.pay100",
+   "why": "a fact changed"
+  },
+  {
+   "row": "C913",
+   "screen": "mark_kitchen.pay75",
+   "why": "a fact changed"
+  },
+  {
+   "row": "C913",
+   "screen": "mark_kitchen.pay90",
+   "why": "a fact changed"
+  },
+  {
+   "row": "C913",
+   "screen": "mark_kitchen.short",
+   "why": "a fact changed"
+  },
+  {
+   "row": "C913",
+   "screen": "mark_kitchen.talk",
+   "why": "a fact changed"
+  },
+  {
+   "row": "C913",
+   "screen": "mark_living_room.talk",
+   "why": "a fact changed"
+  },
+  {
+   "row": "C913",
+   "screen": "ryan_kitchen.talk",
+   "why": "a fact changed"
+  },
+  {
+   "row": "C913",
+   "screen": "ryan_living_room.talk",
+   "why": "a fact changed"
+  },
+  {
+   "row": "C913",
+   "screen": "ryan_room.talk",
+   "why": "a fact changed"
+  },
+  {
+   "row": "C913",
+   "screen": "talk_mom.eat",
+   "why": "a fact changed"
+  },
+  {
+   "row": "C913",
+   "screen": "talk_mom.talk",
+   "why": "a fact changed"
+  },
+  {
+   "row": "C914",
+   "screen": "home_dishes.do",
+   "why": "a fact changed"
+  },
+  {
+   "row": "C914",
+   "screen": "home_tv.watch",
+   "why": "a fact changed"
+  },
+  {
+   "row": "C914",
+   "screen": "mark_kitchen.pay100",
+   "why": "a fact changed"
+  },
+  {
+   "row": "C914",
+   "screen": "mark_kitchen.pay75",
+   "why": "a fact changed"
+  },
+  {
+   "row": "C914",
+   "screen": "mark_kitchen.pay90",
+   "why": "a fact changed"
+  },
+  {
+   "row": "C914",
+   "screen": "mark_kitchen.short",
+   "why": "a fact changed"
+  },
+  {
+   "row": "C914",
+   "screen": "mark_kitchen.talk",
+   "why": "a fact changed"
+  },
+  {
+   "row": "C914",
+   "screen": "mark_living_room.talk",
+   "why": "a fact changed"
+  },
+  {
+   "row": "C914",
+   "screen": "ryan_kitchen.talk",
+   "why": "a fact changed"
+  },
+  {
+   "row": "C914",
+   "screen": "ryan_living_room.talk",
+   "why": "a fact changed"
+  },
+  {
+   "row": "C914",
+   "screen": "ryan_room.talk",
+   "why": "a fact changed"
+  },
+  {
+   "row": "C914",
+   "screen": "talk_mom.eat",
+   "why": "a fact changed"
+  },
+  {
+   "row": "C914",
+   "screen": "talk_mom.talk",
+   "why": "a fact changed"
+  },
+  {
+   "row": "C916",
+   "screen": "home_dishes.do",
+   "why": "a fact changed"
+  },
+  {
+   "row": "C916",
+   "screen": "home_tv.watch",
+   "why": "a fact changed"
+  },
+  {
+   "row": "C916",
+   "screen": "mark_kitchen.pay100",
+   "why": "a fact changed"
+  },
+  {
+   "row": "C916",
+   "screen": "mark_kitchen.pay75",
+   "why": "a fact changed"
+  },
+  {
+   "row": "C916",
+   "screen": "mark_kitchen.pay90",
+   "why": "a fact changed"
+  },
+  {
+   "row": "C916",
+   "screen": "mark_kitchen.short",
+   "why": "a fact changed"
+  },
+  {
+   "row": "C916",
+   "screen": "mark_kitchen.talk",
+   "why": "a fact changed"
+  },
+  {
+   "row": "C916",
+   "screen": "mark_living_room.talk",
+   "why": "a fact changed"
+  },
+  {
+   "row": "C916",
+   "screen": "ryan_kitchen.talk",
+   "why": "a fact changed"
+  },
+  {
+   "row": "C916",
+   "screen": "ryan_living_room.talk",
+   "why": "a fact changed"
+  },
+  {
+   "row": "C916",
+   "screen": "ryan_room.talk",
+   "why": "a fact changed"
+  },
+  {
+   "row": "C916",
+   "screen": "talk_mom.eat",
+   "why": "a fact changed"
+  },
+  {
+   "row": "C916",
+   "screen": "talk_mom.talk",
+   "why": "a fact changed"
+  },
+  {
+   "row": "C920",
+   "screen": "*",
+   "why": "its rule's text changed"
+  },
+  {
+   "row": "C920",
+   "screen": "home_dishes.do",
+   "why": "a fact changed"
+  },
+  {
+   "row": "C920",
+   "screen": "home_tv.watch",
+   "why": "a fact changed"
+  },
+  {
+   "row": "C920",
+   "screen": "mark_kitchen.pay100",
+   "why": "a fact changed"
+  },
+  {
+   "row": "C920",
+   "screen": "mark_kitchen.pay75",
+   "why": "a fact changed"
+  },
+  {
+   "row": "C920",
+   "screen": "mark_kitchen.pay90",
+   "why": "a fact changed"
+  },
+  {
+   "row": "C920",
+   "screen": "mark_kitchen.short",
+   "why": "a fact changed"
+  },
+  {
+   "row": "C920",
+   "screen": "mark_kitchen.talk",
+   "why": "a fact changed"
+  },
+  {
+   "row": "C920",
+   "screen": "mark_living_room.talk",
+   "why": "a fact changed"
+  },
+  {
+   "row": "C920",
+   "screen": "ryan_kitchen.talk",
+   "why": "a fact changed"
+  },
+  {
+   "row": "C920",
+   "screen": "ryan_living_room.talk",
+   "why": "a fact changed"
+  },
+  {
+   "row": "C920",
+   "screen": "ryan_room.talk",
+   "why": "a fact changed"
+  },
+  {
+   "row": "C920",
+   "screen": "talk_mom.eat",
+   "why": "a fact changed"
+  },
+  {
+   "row": "C920",
+   "screen": "talk_mom.talk",
+   "why": "a fact changed"
+  },
+  {
+   "row": "C924",
+   "screen": "home_dishes.do",
+   "why": "a fact changed"
+  },
+  {
+   "row": "C924",
+   "screen": "home_tv.watch",
+   "why": "a fact changed"
+  },
+  {
+   "row": "C924",
+   "screen": "mark_kitchen.pay100",
+   "why": "a fact changed"
+  },
+  {
+   "row": "C924",
+   "screen": "mark_kitchen.pay75",
+   "why": "a fact changed"
+  },
+  {
+   "row": "C924",
+   "screen": "mark_kitchen.pay90",
+   "why": "a fact changed"
+  },
+  {
+   "row": "C924",
+   "screen": "mark_kitchen.short",
+   "why": "a fact changed"
+  },
+  {
+   "row": "C924",
+   "screen": "mark_kitchen.talk",
+   "why": "a fact changed"
+  },
+  {
+   "row": "C924",
+   "screen": "mark_living_room.talk",
+   "why": "a fact changed"
+  },
+  {
+   "row": "C924",
+   "screen": "ryan_kitchen.talk",
+   "why": "a fact changed"
+  },
+  {
+   "row": "C924",
+   "screen": "ryan_living_room.talk",
+   "why": "a fact changed"
+  },
+  {
+   "row": "C924",
+   "screen": "ryan_room.talk",
+   "why": "a fact changed"
+  },
+  {
+   "row": "C924",
+   "screen": "talk_mom.eat",
+   "why": "a fact changed"
+  },
+  {
+   "row": "C924",
+   "screen": "talk_mom.talk",
+   "why": "a fact changed"
+  },
+  {
+   "row": "C926",
+   "screen": "home_dishes.do",
+   "why": "a fact changed"
+  },
+  {
+   "row": "C926",
+   "screen": "home_tv.watch",
+   "why": "a fact changed"
+  },
+  {
+   "row": "C926",
+   "screen": "mark_kitchen.pay100",
+   "why": "a fact changed"
+  },
+  {
+   "row": "C926",
+   "screen": "mark_kitchen.pay75",
+   "why": "a fact changed"
+  },
+  {
+   "row": "C926",
+   "screen": "mark_kitchen.pay90",
+   "why": "a fact changed"
+  },
+  {
+   "row": "C926",
+   "screen": "mark_kitchen.short",
+   "why": "a fact changed"
+  },
+  {
+   "row": "C926",
+   "screen": "mark_kitchen.talk",
+   "why": "a fact changed"
+  },
+  {
+   "row": "C926",
+   "screen": "mark_living_room.talk",
+   "why": "a fact changed"
+  },
+  {
+   "row": "C926",
+   "screen": "ryan_kitchen.talk",
+   "why": "a fact changed"
+  },
+  {
+   "row": "C926",
+   "screen": "ryan_living_room.talk",
+   "why": "a fact changed"
+  },
+  {
+   "row": "C926",
+   "screen": "ryan_room.talk",
+   "why": "a fact changed"
+  },
+  {
+   "row": "C926",
+   "screen": "talk_mom.eat",
+   "why": "a fact changed"
+  },
+  {
+   "row": "C926",
+   "screen": "talk_mom.talk",
+   "why": "a fact changed"
+  },
+  {
+   "row": "C927",
+   "screen": "home_dishes.do",
+   "why": "a fact changed"
+  },
+  {
+   "row": "C927",
+   "screen": "home_tv.watch",
+   "why": "a fact changed"
+  },
+  {
+   "row": "C927",
+   "screen": "loop_eat.do",
    "why": "screen changed: truth row"
   },
   {
    "row": "C927",
-   "screen": "home_wait.wait",
+   "screen": "mark_kitchen.hub",
+   "why": "screen changed: truth row"
+  },
+  {
+   "row": "C927",
+   "screen": "mark_kitchen.pay100",
+   "why": "a fact changed"
+  },
+  {
+   "row": "C927",
+   "screen": "mark_kitchen.pay75",
+   "why": "a fact changed"
+  },
+  {
+   "row": "C927",
+   "screen": "mark_kitchen.pay90",
+   "why": "a fact changed"
+  },
+  {
+   "row": "C927",
+   "screen": "mark_kitchen.short",
+   "why": "a fact changed"
+  },
+  {
+   "row": "C927",
+   "screen": "mark_kitchen.talk",
+   "why": "a fact changed"
+  },
+  {
+   "row": "C927",
+   "screen": "mark_living_room.hub",
+   "why": "screen changed: truth row"
+  },
+  {
+   "row": "C927",
+   "screen": "mark_living_room.talk",
+   "why": "a fact changed"
+  },
+  {
+   "row": "C927",
+   "screen": "ryan_kitchen.hub",
+   "why": "screen changed: truth row"
+  },
+  {
+   "row": "C927",
+   "screen": "ryan_kitchen.talk",
+   "why": "a fact changed"
+  },
+  {
+   "row": "C927",
+   "screen": "ryan_living_room.hub",
+   "why": "screen changed: truth row"
+  },
+  {
+   "row": "C927",
+   "screen": "ryan_living_room.talk",
+   "why": "a fact changed"
+  },
+  {
+   "row": "C927",
+   "screen": "ryan_room.hub",
+   "why": "screen changed: truth row"
+  },
+  {
+   "row": "C927",
+   "screen": "ryan_room.talk",
+   "why": "a fact changed"
+  },
+  {
+   "row": "C927",
+   "screen": "talk_mom.eat",
+   "why": "a fact changed"
+  },
+  {
+   "row": "C927",
+   "screen": "talk_mom.hub",
+   "why": "screen changed: truth row"
+  },
+  {
+   "row": "C927",
+   "screen": "talk_mom.talk",
+   "why": "a fact changed"
+  },
+  {
+   "row": "C928",
+   "screen": "home_dishes.do",
+   "why": "a fact changed"
+  },
+  {
+   "row": "C928",
+   "screen": "home_tv.watch",
+   "why": "a fact changed"
+  },
+  {
+   "row": "C928",
+   "screen": "mark_kitchen.pay100",
+   "why": "a fact changed"
+  },
+  {
+   "row": "C928",
+   "screen": "mark_kitchen.pay75",
+   "why": "a fact changed"
+  },
+  {
+   "row": "C928",
+   "screen": "mark_kitchen.pay90",
+   "why": "a fact changed"
+  },
+  {
+   "row": "C928",
+   "screen": "mark_kitchen.short",
+   "why": "a fact changed"
+  },
+  {
+   "row": "C928",
+   "screen": "mark_kitchen.talk",
+   "why": "a fact changed"
+  },
+  {
+   "row": "C928",
+   "screen": "mark_living_room.talk",
+   "why": "a fact changed"
+  },
+  {
+   "row": "C928",
+   "screen": "ryan_kitchen.talk",
+   "why": "a fact changed"
+  },
+  {
+   "row": "C928",
+   "screen": "ryan_living_room.talk",
+   "why": "a fact changed"
+  },
+  {
+   "row": "C928",
+   "screen": "ryan_room.talk",
+   "why": "a fact changed"
+  },
+  {
+   "row": "C928",
+   "screen": "talk_mom.eat",
+   "why": "a fact changed"
+  },
+  {
+   "row": "C928",
+   "screen": "talk_mom.talk",
+   "why": "a fact changed"
+  },
+  {
+   "row": "C929",
+   "screen": "*",
+   "why": "its rule's text changed"
+  },
+  {
+   "row": "C929",
+   "screen": "home_dishes.do",
+   "why": "a fact changed"
+  },
+  {
+   "row": "C929",
+   "screen": "home_tv.watch",
+   "why": "a fact changed"
+  },
+  {
+   "row": "C929",
+   "screen": "mark_kitchen.pay100",
+   "why": "a fact changed"
+  },
+  {
+   "row": "C929",
+   "screen": "mark_kitchen.pay75",
+   "why": "a fact changed"
+  },
+  {
+   "row": "C929",
+   "screen": "mark_kitchen.pay90",
+   "why": "a fact changed"
+  },
+  {
+   "row": "C929",
+   "screen": "mark_kitchen.short",
+   "why": "a fact changed"
+  },
+  {
+   "row": "C929",
+   "screen": "mark_kitchen.talk",
+   "why": "a fact changed"
+  },
+  {
+   "row": "C929",
+   "screen": "mark_living_room.talk",
+   "why": "a fact changed"
+  },
+  {
+   "row": "C929",
+   "screen": "ryan_kitchen.talk",
+   "why": "a fact changed"
+  },
+  {
+   "row": "C929",
+   "screen": "ryan_living_room.talk",
+   "why": "a fact changed"
+  },
+  {
+   "row": "C929",
+   "screen": "ryan_room.talk",
+   "why": "a fact changed"
+  },
+  {
+   "row": "C929",
+   "screen": "talk_mom.eat",
+   "why": "a fact changed"
+  },
+  {
+   "row": "C929",
+   "screen": "talk_mom.talk",
+   "why": "a fact changed"
+  },
+  {
+   "row": "C930",
+   "screen": "home_dishes.do",
+   "why": "a fact changed"
+  },
+  {
+   "row": "C930",
+   "screen": "home_tv.watch",
+   "why": "a fact changed"
+  },
+  {
+   "row": "C930",
+   "screen": "mark_kitchen.pay100",
+   "why": "a fact changed"
+  },
+  {
+   "row": "C930",
+   "screen": "mark_kitchen.pay75",
+   "why": "a fact changed"
+  },
+  {
+   "row": "C930",
+   "screen": "mark_kitchen.pay90",
+   "why": "a fact changed"
+  },
+  {
+   "row": "C930",
+   "screen": "mark_kitchen.short",
+   "why": "a fact changed"
+  },
+  {
+   "row": "C930",
+   "screen": "mark_kitchen.talk",
+   "why": "a fact changed"
+  },
+  {
+   "row": "C930",
+   "screen": "mark_living_room.talk",
+   "why": "a fact changed"
+  },
+  {
+   "row": "C930",
+   "screen": "ryan_kitchen.talk",
+   "why": "a fact changed"
+  },
+  {
+   "row": "C930",
+   "screen": "ryan_living_room.talk",
+   "why": "a fact changed"
+  },
+  {
+   "row": "C930",
+   "screen": "ryan_room.talk",
+   "why": "a fact changed"
+  },
+  {
+   "row": "C930",
+   "screen": "talk_mom.eat",
+   "why": "a fact changed"
+  },
+  {
+   "row": "C930",
+   "screen": "talk_mom.talk",
+   "why": "a fact changed"
+  },
+  {
+   "row": "C931",
+   "screen": "home_dishes.do",
+   "why": "a fact changed"
+  },
+  {
+   "row": "C931",
+   "screen": "home_tv.watch",
+   "why": "a fact changed"
+  },
+  {
+   "row": "C931",
+   "screen": "loop_eat.do",
    "why": "screen changed: truth row"
   },
   {
    "row": "C931",
-   "screen": "home_wait.wait",
+   "screen": "mark_kitchen.hub",
+   "why": "screen changed: truth row"
+  },
+  {
+   "row": "C931",
+   "screen": "mark_kitchen.pay100",
+   "why": "a fact changed"
+  },
+  {
+   "row": "C931",
+   "screen": "mark_kitchen.pay75",
+   "why": "a fact changed"
+  },
+  {
+   "row": "C931",
+   "screen": "mark_kitchen.pay90",
+   "why": "a fact changed"
+  },
+  {
+   "row": "C931",
+   "screen": "mark_kitchen.short",
+   "why": "a fact changed"
+  },
+  {
+   "row": "C931",
+   "screen": "mark_kitchen.talk",
+   "why": "a fact changed"
+  },
+  {
+   "row": "C931",
+   "screen": "mark_living_room.hub",
+   "why": "screen changed: truth row"
+  },
+  {
+   "row": "C931",
+   "screen": "mark_living_room.talk",
+   "why": "a fact changed"
+  },
+  {
+   "row": "C931",
+   "screen": "ryan_kitchen.hub",
+   "why": "screen changed: truth row"
+  },
+  {
+   "row": "C931",
+   "screen": "ryan_kitchen.talk",
+   "why": "a fact changed"
+  },
+  {
+   "row": "C931",
+   "screen": "ryan_living_room.hub",
+   "why": "screen changed: truth row"
+  },
+  {
+   "row": "C931",
+   "screen": "ryan_living_room.talk",
+   "why": "a fact changed"
+  },
+  {
+   "row": "C931",
+   "screen": "ryan_room.hub",
+   "why": "screen changed: truth row"
+  },
+  {
+   "row": "C931",
+   "screen": "ryan_room.talk",
+   "why": "a fact changed"
+  },
+  {
+   "row": "C931",
+   "screen": "talk_mom.eat",
+   "why": "a fact changed"
+  },
+  {
+   "row": "C931",
+   "screen": "talk_mom.hub",
+   "why": "screen changed: truth row"
+  },
+  {
+   "row": "C931",
+   "screen": "talk_mom.talk",
+   "why": "a fact changed"
+  },
+  {
+   "row": "C953",
+   "screen": "*",
+   "why": "its rule's text changed"
+  },
+  {
+   "row": "L106",
+   "screen": "home_dishes.do",
+   "why": "a fact changed"
+  },
+  {
+   "row": "L106",
+   "screen": "home_tv.watch",
+   "why": "a fact changed"
+  },
+  {
+   "row": "L106",
+   "screen": "loop_eat.do",
    "why": "screen changed: truth row"
   },
   {
    "row": "L106",
-   "screen": "home_wait.wait",
+   "screen": "mark_kitchen.hub",
+   "why": "screen changed: truth row"
+  },
+  {
+   "row": "L106",
+   "screen": "mark_kitchen.pay100",
+   "why": "a fact changed"
+  },
+  {
+   "row": "L106",
+   "screen": "mark_kitchen.pay75",
+   "why": "a fact changed"
+  },
+  {
+   "row": "L106",
+   "screen": "mark_kitchen.pay90",
+   "why": "a fact changed"
+  },
+  {
+   "row": "L106",
+   "screen": "mark_kitchen.rent",
+   "why": "a fact changed"
+  },
+  {
+   "row": "L106",
+   "screen": "mark_kitchen.short",
+   "why": "a fact changed"
+  },
+  {
+   "row": "L106",
+   "screen": "mark_kitchen.talk",
+   "why": "a fact changed"
+  },
+  {
+   "row": "L106",
+   "screen": "mark_living_room.hub",
+   "why": "screen changed: truth row"
+  },
+  {
+   "row": "L106",
+   "screen": "mark_living_room.talk",
+   "why": "a fact changed"
+  },
+  {
+   "row": "L106",
+   "screen": "ryan_kitchen.hub",
+   "why": "screen changed: truth row"
+  },
+  {
+   "row": "L106",
+   "screen": "ryan_kitchen.talk",
+   "why": "a fact changed"
+  },
+  {
+   "row": "L106",
+   "screen": "ryan_living_room.hub",
+   "why": "screen changed: truth row"
+  },
+  {
+   "row": "L106",
+   "screen": "ryan_living_room.talk",
+   "why": "a fact changed"
+  },
+  {
+   "row": "L106",
+   "screen": "ryan_room.hub",
+   "why": "screen changed: truth row"
+  },
+  {
+   "row": "L106",
+   "screen": "ryan_room.talk",
+   "why": "a fact changed"
+  },
+  {
+   "row": "L106",
+   "screen": "talk_mom.eat",
+   "why": "a fact changed"
+  },
+  {
+   "row": "L106",
+   "screen": "talk_mom.hub",
+   "why": "screen changed: truth row"
+  },
+  {
+   "row": "L106",
+   "screen": "talk_mom.talk",
+   "why": "a fact changed"
+  },
+  {
+   "row": "L167",
+   "screen": "home_dishes.do",
+   "why": "a fact changed"
+  },
+  {
+   "row": "L167",
+   "screen": "home_tv.watch",
+   "why": "a fact changed"
+  },
+  {
+   "row": "L167",
+   "screen": "loop_eat.do",
    "why": "screen changed: truth row"
   },
   {
    "row": "L167",
-   "screen": "home_wait.wait",
+   "screen": "mark_kitchen.hub",
    "why": "screen changed: truth row"
+  },
+  {
+   "row": "L167",
+   "screen": "mark_kitchen.pay100",
+   "why": "a fact changed"
+  },
+  {
+   "row": "L167",
+   "screen": "mark_kitchen.pay75",
+   "why": "a fact changed"
+  },
+  {
+   "row": "L167",
+   "screen": "mark_kitchen.pay90",
+   "why": "a fact changed"
+  },
+  {
+   "row": "L167",
+   "screen": "mark_kitchen.short",
+   "why": "a fact changed"
+  },
+  {
+   "row": "L167",
+   "screen": "mark_kitchen.talk",
+   "why": "a fact changed"
+  },
+  {
+   "row": "L167",
+   "screen": "mark_living_room.hub",
+   "why": "screen changed: truth row"
+  },
+  {
+   "row": "L167",
+   "screen": "mark_living_room.talk",
+   "why": "a fact changed"
+  },
+  {
+   "row": "L167",
+   "screen": "ryan_kitchen.hub",
+   "why": "screen changed: truth row"
+  },
+  {
+   "row": "L167",
+   "screen": "ryan_kitchen.talk",
+   "why": "a fact changed"
+  },
+  {
+   "row": "L167",
+   "screen": "ryan_living_room.hub",
+   "why": "screen changed: truth row"
+  },
+  {
+   "row": "L167",
+   "screen": "ryan_living_room.talk",
+   "why": "a fact changed"
+  },
+  {
+   "row": "L167",
+   "screen": "ryan_room.hub",
+   "why": "screen changed: truth row"
+  },
+  {
+   "row": "L167",
+   "screen": "ryan_room.talk",
+   "why": "a fact changed"
+  },
+  {
+   "row": "L167",
+   "screen": "talk_mom.eat",
+   "why": "a fact changed"
+  },
+  {
+   "row": "L167",
+   "screen": "talk_mom.hub",
+   "why": "screen changed: truth row"
+  },
+  {
+   "row": "L167",
+   "screen": "talk_mom.talk",
+   "why": "a fact changed"
   }
  ]
 }

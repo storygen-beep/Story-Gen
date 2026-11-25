@@ -1,0 +1,19 @@
+{
+ "verdicts": [
+  {
+   "row": "L170",
+   "screen": "*",
+   "verdict": "N/A",
+   "line": "",
+   "why": "no place on this piece's screens is hidden_until a flag"
+  },
+  {
+   "row": "C952",
+   "screen": "walk_danny_deal.pretend",
+   "verdict": "PASS",
+   "line": "He'll be out back again tomorrow night.",
+   "why": "no amount; the deal fires 21:00-23:00 any day Danny's row has him (every night to 23:00)"
+  }
+ ],
+ "causes": []
+}

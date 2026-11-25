@@ -1,0 +1,26 @@
+{
+ "verdicts": [
+  {
+   "row": "L170",
+   "screen": "*",
+   "verdict": "N/A",
+   "line": "",
+   "why": "no place on this piece's screens is hidden_until a flag"
+  },
+  {
+   "row": "L168",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "Drama is in the Theatre, Tuesday and Thursday at 11am.",
+   "why": "Drama's first step names the Theatre, Tue/Thu 11am (Cross's row 11-13); met_cross is the next step's when"
+  },
+  {
+   "row": "L169",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "Drama is in the Theatre, Tuesday and Thursday at 11am.",
+   "why": "drama_first is Tue/Thu 11:00-11:30 only, though Cross is also there 14-18; the hint names the class window from the start"
+  }
+ ],
+ "causes": []
+}

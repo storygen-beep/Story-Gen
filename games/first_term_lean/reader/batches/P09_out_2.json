@@ -1,0 +1,82 @@
+{
+ "verdicts": [
+  {
+   "row": "B10",
+   "screen": "stage_practise.practise",
+   "verdict": "PASS",
+   "line": "\"The seats are empty. You stand under the work light...\"",
+   "why": "fires only weekdays with Cross absent; Brooke's theatre rows sit inside Cross's, so the seats are empty on every visit"
+  },
+  {
+   "row": "B8",
+   "screen": "stage_practise.practise",
+   "verdict": "PASS",
+   "line": "\"say whatever comes into your head to the dark\"",
+   "why": "no number, no garment named"
+  },
+  {
+   "row": "C460",
+   "screen": "stage_practise.practise",
+   "verdict": "PASS",
+   "line": "\"The seats are empty.\"",
+   "why": "true on every reachable visit (who_is_where: nobody else at the theatre when Cross is out)"
+  },
+  {
+   "row": "C461",
+   "screen": "stage_practise.practise",
+   "verdict": "PASS",
+   "line": "\"louder than you'd ever dare with anyone there\"",
+   "why": "her own feeling; can't clash"
+  },
+  {
+   "row": "C927",
+   "screen": "stage_practise.practise",
+   "verdict": "PASS",
+   "line": "Done, time_progression_minutes 30",
+   "why": "the exit spends 30 minutes"
+  },
+  {
+   "row": "C931",
+   "screen": "stage_practise.practise",
+   "verdict": "PASS",
+   "line": "substitution time_of_day 13:00-14:00",
+   "why": "end exclusive; nothing wraps"
+  },
+  {
+   "row": "L106",
+   "screen": "stage_practise.practise",
+   "verdict": "PASS",
+   "line": "\"The seats are empty.\"",
+   "why": "names nobody"
+  },
+  {
+   "row": "L167",
+   "screen": "stage_practise.practise",
+   "verdict": "PASS",
+   "line": "weekdays [0-4], Cross absent; cooldown \"your voice is gone for today.\"",
+   "why": "one row, same hours every open day; greys with show_when_blocked"
+  },
+  {
+   "row": "C596",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "class_*, study_*, stage_practise",
+   "why": "no person's menu or talk screen; no picture"
+  },
+  {
+   "row": "C795",
+   "screen": "study_hall.study",
+   "verdict": "PASS",
+   "line": "\"Down at the front, a lecture goes on without you.\" (lecturer-present groups)",
+   "why": "a study beat, not room text; lecturers named only when present and met"
+  },
+  {
+   "row": "C804",
+   "screen": "study_hall.study",
+   "verdict": "PASS",
+   "line": "\"You at the back, young lady...\" (Hale present + met)",
+   "why": "no room-text line per person; faces carry presence"
+  }
+ ],
+ "causes": []
+}

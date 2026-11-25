@@ -1,0 +1,26 @@
+{
+ "verdicts": [
+  {
+   "row": "L170",
+   "screen": "*",
+   "verdict": "N/A",
+   "line": "",
+   "why": "no place on this piece's screens is hidden_until a flag"
+  },
+  {
+   "row": "L168",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "Your classes are in the Lecture Hall: psychology Monday and Wednesday at 9am, statistics at 11am, English Tuesday and Thursday at 9am.",
+   "why": "Classes points at psychology (Hale, Nadia) and statistics (Pratt) by place and time; met_nadia and met_hale/met_pratt are whens on later steps"
+  },
+  {
+   "row": "L169",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "Your classes are in the Lecture Hall: psychology Monday and Wednesday at 9am, statistics at 11am, English Tuesday and Thursday at 9am.",
+   "why": "psych_first (Mon/Wed 09:00-09:30) and stats_first (11:00-11:30) are class-start windows, and the hint names the class, days and hour"
+  }
+ ],
+ "causes": []
+}

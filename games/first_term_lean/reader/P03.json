@@ -1,6 +1,6 @@
 {
  "piece": "P03",
- "pass": 2,
+ "pass": 5,
  "screens": {
   "*": "4f53cda18c2baa0c"
  },
@@ -18,16 +18,16 @@
   "B11": "1e252efd0904a971",
   "B12": "fd109745c67b71d7",
   "B13": "aaf6518b64dcce55",
-  "C889": "37967c45d79163fc",
-  "C906": "c257bba6d15edc3f",
+  "C889": "cebb147317e10c05",
+  "C906": "b8d0e5793dd14e95",
   "C926": "8cd1b7e3576dc7b5",
   "C900": "a4ef8ce78f554d6b",
   "C902": "66462bdbadae0c77",
   "C903": "263890a884329d60",
   "C904": "999816c6ed6cc232",
   "C892": "1d8d188451bcb51e",
-  "C910": "c86548143d50a17d",
-  "C929": "33a2ca367c2aac5b",
+  "C910": "19dcf805483efc88",
+  "C929": "b628ac285ac9c529",
   "C897": "16b066aee3c1a937",
   "C924": "ce540d1e01b7c301",
   "C920": "e7485c9faee24e77",
@@ -42,15 +42,16 @@
   "C928": "799e1dd153166b6d",
   "C931": "1b8984f52b99537e",
   "C890": "3d716de4269fbd6c",
-  "clock#1": "cd89df2f76a7be89",
+  "clock#1": "b093ed58ec403b3c",
   "clock#2": "e393ecafc7ab9a6c",
   "clock#3": "aae8f146c8ec933d",
   "clock#4": "c33118361d16b379",
   "clock#5": "95c5edec9e714e7b",
-  "clock#6": "31fd30fb07702bc9",
+  "clock#6": "bdedeec28a16e36f",
   "clock#7": "313c48a91780f62b",
   "clock#8": "f0c2400d02519978",
   "clock#9": "5d697f6bcd9f82de",
+  "clock#10": "2ad5e473e29b231d",
   "C1261": "6a661c60639de8be",
   "C1267": "6bafcadf3d586d5a",
   "C1249": "604706399d2f1194",
@@ -81,32 +82,34 @@
   "media#7": "eff6dc1369755c34",
   "C769": "cf7d7a82afabcbbb",
   "C794": "3281d513b7f90d6e",
-  "C795": "84d5bfb2a701bf90",
-  "C804": "2aa951544edb45db",
+  "C795": "a28152099697ac6a",
+  "C804": "56bf64be29d6ea48",
   "L106": "759e6667d7fc3183",
   "C776": "6088d5531ecff698",
   "C777": "38b483431fa177b0",
   "C773": "0825e8443f9180d0",
   "C758": "6329db1ec04ec3da",
-  "C953": "26f84fb90a0ef795",
+  "C953": "7ab90b4c71f3d98a",
   "C954": "a4837b8af6d54bb1",
   "C738": "976cd3e099c13e51",
   "C762": "877801c22bdade00",
   "L147": "5dea5707be5e7e0a",
+  "L170": "8f11debafcf05142",
   "C808": "73aff7401d6970a5",
   "C811": "ded1858e52e3be3a",
   "C770": "dcc6bbe6fde09083",
   "C771": "d941995a226da2b4",
   "C707": "e2898bd02a9e4730",
   "places#1": "18252966b4327f58",
-  "places#2": "3ab79adc34668b04",
+  "places#2": "e0b57720921c4523",
   "places#3": "56d056c80da49bb6",
-  "places#4": "ada53ed66015c980",
+  "places#4": "ae3ba300e1045c9f",
   "places#5": "90ec575adee9bf74",
   "places#6": "f2bc5f0f10c64c4b",
   "places#7": "2a095bf54f175e5e",
   "places#8": "c3ea8d01465e7298",
   "places#9": "f4cd9ab5f62bc6fc",
+  "places#10": "309f0141d342dc6f",
   "C442": "a2b07f40e1a9e908",
   "C449": "ac5932d70cd775a1",
   "C451": "6b0fd679047fc9b8",
@@ -430,15 +433,15 @@
   {
    "row": "C1238",
    "screen": "hood_street",
-   "verdict": "FAIL",
-   "line": "Corner Shop card, closed: \"Closed. Opens at 7:00.\" over hood_shop_t0.jpg (\"woman of 18 picking snacks off a shelf in a small corner shop\")",
-   "why": "the closed card still draws the place image (v2.py:24830); from 23:00 to 07:00 the street shows her shopping inside a shut shop, the park card (her on a bench by the pond) after the gates lock at 9pm, the gym card after 10pm",
-   "cause": "P03c1-c1",
+   "verdict": "PASS",
+   "line": "place cards: hood_shop_t0, hood_park_t0, hood_gym_t0, hood_next_door_t0",
+   "why": "the street itself has no picture; each place card shows her at that place, and a closed place's card now shows the placeholder (v2.py:24831), so no card contradicts the clock",
+   "cause": null,
    "note": false,
    "screen_hash": null,
    "row_hash": "af95eb45b0bdc9db",
-   "carried": false,
-   "pass": 2
+   "carried": true,
+   "pass": 3
   },
   {
    "row": "C1249",
@@ -489,7 +492,7 @@
    "note": false,
    "screen_hash": null,
    "row_hash": "6a661c60639de8be",
-   "carried": false,
+   "carried": true,
    "pass": 2
   },
   {
@@ -502,7 +505,7 @@
    "note": false,
    "screen_hash": null,
    "row_hash": "6a661c60639de8be",
-   "carried": false,
+   "carried": true,
    "pass": 2
   },
   {
@@ -515,7 +518,7 @@
    "note": false,
    "screen_hash": null,
    "row_hash": "6a661c60639de8be",
-   "carried": false,
+   "carried": true,
    "pass": 2
   },
   {
@@ -528,7 +531,7 @@
    "note": false,
    "screen_hash": null,
    "row_hash": "6a661c60639de8be",
-   "carried": false,
+   "carried": true,
    "pass": 2
   },
   {
@@ -606,7 +609,7 @@
    "note": false,
    "screen_hash": null,
    "row_hash": "00b79725344762be",
-   "carried": false,
+   "carried": true,
    "pass": 2
   },
   {
@@ -1067,93 +1070,93 @@
   {
    "row": "C795",
    "screen": "hood_clothes",
-   "verdict": "PASS",
-   "line": "Nina looks up from the till.",
-   "why": "Nina's line, by her rows",
+   "verdict": "FAIL",
+   "line": "Nina looks up from the till. \"Find anything you're brave enough for?\"",
+   "why": "a re-entry change made of a room-text line for one person; the rule now says faces only",
    "cause": null,
    "note": true,
    "screen_hash": null,
-   "row_hash": "84d5bfb2a701bf90",
+   "row_hash": "a28152099697ac6a",
    "carried": true,
-   "pass": 1
+   "pass": 3
   },
   {
    "row": "C795",
    "screen": "hood_gym",
-   "verdict": "FAIL",
-   "line": "The gym: weights, treadmills, mirrors on every wall.",
-   "why": "note: Marco training (weekdays 06-10, 17-21; Sat 08-14) by who_is_where; no presence line, and the screen never changes with who's there",
+   "verdict": "PASS",
+   "line": "\"The same regulars every day.\"",
+   "why": "no per-person line; Marco is his face",
    "cause": null,
    "note": true,
    "screen_hash": null,
-   "row_hash": "84d5bfb2a701bf90",
+   "row_hash": "a28152099697ac6a",
    "carried": true,
-   "pass": 1
+   "pass": 3
   },
   {
    "row": "C795",
    "screen": "hood_shop",
-   "verdict": "FAIL",
-   "line": "The corner shop: snacks, cigarettes behind the counter, the till by the door.",
-   "why": "note: Frank (Mon-Sat 07-15) or Danny (15-23, all Sunday) behind the till by who_is_where; no presence line, and the screen never changes with who's there",
+   "verdict": "PASS",
+   "line": "\"Locals in for milk, kids in for sweets.\"",
+   "why": "no per-person line; Frank and Danny are faces",
    "cause": null,
    "note": true,
    "screen_hash": null,
-   "row_hash": "84d5bfb2a701bf90",
+   "row_hash": "a28152099697ac6a",
    "carried": true,
-   "pass": 1
+   "pass": 3
   },
   {
    "row": "C804",
    "screen": "hood_clothes",
    "verdict": "PASS",
-   "line": "Nina looks up from the till.",
-   "why": "text changes with Nina there",
+   "line": "Girls from campus browse the rails in pairs.",
+   "why": "Nina's room-text line is gone; she is her face; an unnamed crowd line only",
    "cause": null,
    "note": false,
    "screen_hash": null,
-   "row_hash": "2aa951544edb45db",
+   "row_hash": "56bf64be29d6ea48",
    "carried": true,
-   "pass": 1
+   "pass": 4
   },
   {
    "row": "C804",
    "screen": "hood_gym",
-   "verdict": "FAIL",
-   "line": "The gym: weights, treadmills, mirrors on every wall. The same regulars every day.",
-   "why": "Marco's rows put him here weekdays 06-10 and 17-21, Saturday 08-14 (who_is_where); no line changes with him; held to P29, no waiver; judged as built",
-   "cause": "P03c1-c2",
+   "verdict": "PASS",
+   "line": "\"The gym: weights, treadmills, mirrors on every wall. The same regulars every day.\"",
+   "why": "faces plus an unnamed crowd line; the old one-line-per-person ask is gone",
+   "cause": null,
    "note": false,
    "screen_hash": null,
-   "row_hash": "2aa951544edb45db",
-   "carried": false,
-   "pass": 2
+   "row_hash": "56bf64be29d6ea48",
+   "carried": true,
+   "pass": 3
   },
   {
    "row": "C804",
    "screen": "hood_shop",
-   "verdict": "FAIL",
-   "line": "The corner shop: snacks, cigarettes behind the counter, the till by the door. Locals in for milk, kids in for sweets.",
-   "why": "Frank (Mon-Sat 07-15) and Danny (Mon-Sat 15-23, Sun 07-23) are at the till every open minute; no line changes with them; held to P29, no waiver",
-   "cause": "P03c1-c2",
+   "verdict": "PASS",
+   "line": "\"Locals in for milk, kids in for sweets.\"",
+   "why": "faces plus unnamed crowd",
+   "cause": null,
    "note": false,
    "screen_hash": null,
-   "row_hash": "2aa951544edb45db",
-   "carried": false,
-   "pass": 2
+   "row_hash": "56bf64be29d6ea48",
+   "carried": true,
+   "pass": 3
   },
   {
    "row": "C804",
    "screen": "hood_street",
-   "verdict": "FAIL",
-   "line": "Your street. The same row of houses, ... Neighbours, dog walkers, kids on bikes.",
-   "why": "Vance is on the street weekdays 17-20, weekends 09-12 and 17-20; no line shows him (the description_variants read only her clothes); held to P29, no waiver",
-   "cause": "P03c1-c2",
+   "verdict": "PASS",
+   "line": "\"Neighbours, dog walkers, kids on bikes.\"",
+   "why": "an unnamed crowd line; Vance shows as his face 5-8pm; the neighbour who stares is unnamed",
+   "cause": null,
    "note": false,
    "screen_hash": null,
-   "row_hash": "2aa951544edb45db",
-   "carried": false,
-   "pass": 2
+   "row_hash": "56bf64be29d6ea48",
+   "carried": true,
+   "pass": 3
   },
   {
    "row": "C808",
@@ -1184,15 +1187,15 @@
   {
    "row": "C889",
    "screen": "*",
-   "verdict": "N/A",
-   "line": "",
-   "why": "no label names a clock time",
+   "verdict": "PASS",
+   "line": "\"Buy a snack ($2)\", \"Work out ($5)\", \"Go for a run\", \"Take the bus to campus ($2)\"",
+   "why": "the neighbourhood's buttons carry money only when it's a spend, no time, no energy, no clock time, no 'till'",
    "cause": null,
    "note": true,
    "screen_hash": "4f53cda18c2baa0c",
-   "row_hash": "37967c45d79163fc",
+   "row_hash": "cebb147317e10c05",
    "carried": true,
-   "pass": 1
+   "pass": 3
   },
   {
    "row": "C890",
@@ -1288,28 +1291,28 @@
   {
    "row": "C906",
    "screen": "*",
-   "verdict": "N/A",
-   "line": "",
-   "why": "no 'till X' label",
+   "verdict": "PASS",
+   "line": "\"Buy a snack ($2)\", \"Work out ($5)\", \"Go for a run\", \"Take the bus to campus ($2)\"",
+   "why": "the neighbourhood's buttons carry money only when it's a spend, no time, no energy, no clock time, no 'till'",
    "cause": null,
    "note": true,
    "screen_hash": "4f53cda18c2baa0c",
-   "row_hash": "c257bba6d15edc3f",
+   "row_hash": "b8d0e5793dd14e95",
    "carried": true,
-   "pass": 1
+   "pass": 3
   },
   {
    "row": "C910",
    "screen": "*",
    "verdict": "PASS",
-   "line": "Go for a run (45 min, 15 energy) \u00b7 Work out ($5, 1 hour, 20 energy)",
-   "why": "note: every time-spending button says how much",
+   "line": "\"Buy a snack ($2)\", \"Work out ($5)\", \"Go for a run\", \"Take the bus to campus ($2)\"",
+   "why": "the neighbourhood's buttons carry money only when it's a spend, no time, no energy, no clock time, no 'till'",
    "cause": null,
    "note": true,
    "screen_hash": "4f53cda18c2baa0c",
-   "row_hash": "c86548143d50a17d",
+   "row_hash": "19dcf805483efc88",
    "carried": true,
-   "pass": 1
+   "pass": 3
   },
   {
    "row": "C913",
@@ -1373,7 +1376,7 @@
    "note": false,
    "screen_hash": "4f53cda18c2baa0c",
    "row_hash": "e7485c9faee24e77",
-   "carried": false,
+   "carried": true,
    "pass": 2
   },
   {
@@ -1445,14 +1448,14 @@
    "row": "C929",
    "screen": "*",
    "verdict": "PASS",
-   "line": "Buy a snack ($2, 5 min, +10 energy)",
-   "why": "note: activity time on the label",
+   "line": "\"Buy a snack ($2)\", \"Work out ($5)\", \"Go for a run\", \"Take the bus to campus ($2)\"",
+   "why": "the neighbourhood's buttons carry money only when it's a spend, no time, no energy, no clock time, no 'till'",
    "cause": null,
    "note": true,
    "screen_hash": "4f53cda18c2baa0c",
-   "row_hash": "33a2ca367c2aac5b",
+   "row_hash": "b628ac285ac9c529",
    "carried": true,
-   "pass": 1
+   "pass": 3
   },
   {
    "row": "C930",
@@ -1484,14 +1487,14 @@
    "row": "C953",
    "screen": "*",
    "verdict": "PASS",
-   "line": "Work out ($5, 1 hour, 20 energy)",
-   "why": "note: cost before the click",
+   "line": "\"Buy a snack ($2)\", \"Work out ($5)\", \"Go for a run\", \"Take the bus to campus ($2)\"",
+   "why": "the neighbourhood's buttons carry money only when it's a spend, no time, no energy, no clock time, no 'till'",
    "cause": null,
    "note": true,
    "screen_hash": "4f53cda18c2baa0c",
-   "row_hash": "26f84fb90a0ef795",
+   "row_hash": "7ab90b4c71f3d98a",
    "carried": true,
-   "pass": 1
+   "pass": 3
   },
   {
    "row": "C954",
@@ -1611,6 +1614,19 @@
    "pass": 1
   },
   {
+   "row": "L170",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "The man next door sits on his porch. Walk down your street on a Sunday, 9am to noon or 5 to 8pm.",
+   "why": "The House Next Door is hidden_until met_vance; met_vance is the when of The Man Next Door's end step, and the step before it matches Vance's Sunday rows 9-12 and 17-20",
+   "cause": null,
+   "note": false,
+   "screen_hash": "4f53cda18c2baa0c",
+   "row_hash": "8f11debafcf05142",
+   "carried": false,
+   "pass": 5
+  },
+  {
    "row": "L97",
    "screen": "*",
    "verdict": "N/A",
@@ -1627,14 +1643,27 @@
    "row": "clock#1",
    "screen": "*",
    "verdict": "PASS",
-   "line": "Buy a snack ($2, 5 min, +10 energy)",
-   "why": "every button shows its time",
+   "line": "\"Buy a snack ($2)\", \"Work out ($5)\", \"Go for a run\", \"Take the bus to campus ($2)\"",
+   "why": "the neighbourhood's buttons carry money only when it's a spend, no time, no energy, no clock time, no 'till'",
    "cause": null,
    "note": false,
    "screen_hash": "4f53cda18c2baa0c",
-   "row_hash": "cd89df2f76a7be89",
+   "row_hash": "b093ed58ec403b3c",
    "carried": true,
-   "pass": 1
+   "pass": 3
+  },
+  {
+   "row": "clock#10",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "body_snack: max_triggers_per_day 2, show_when_blocked, no time_of_day",
+   "why": "neighbourhood rows with a daily count have no clock window; shop_try_on has a window and no count; the walk-ins hide",
+   "cause": null,
+   "note": false,
+   "screen_hash": "4f53cda18c2baa0c",
+   "row_hash": "2ad5e473e29b231d",
+   "carried": true,
+   "pass": 4
   },
   {
    "row": "clock#2",
@@ -1646,7 +1675,7 @@
    "note": false,
    "screen_hash": "4f53cda18c2baa0c",
    "row_hash": "e393ecafc7ab9a6c",
-   "carried": false,
+   "carried": true,
    "pass": 2
   },
   {
@@ -1692,14 +1721,14 @@
    "row": "clock#6",
    "screen": "*",
    "verdict": "PASS",
-   "line": "",
-   "why": "durations only",
+   "line": "\"Buy a snack ($2)\", \"Work out ($5)\", \"Go for a run\", \"Take the bus to campus ($2)\"",
+   "why": "the neighbourhood's buttons carry money only when it's a spend, no time, no energy, no clock time, no 'till'",
    "cause": null,
    "note": false,
    "screen_hash": "4f53cda18c2baa0c",
-   "row_hash": "31fd30fb07702bc9",
+   "row_hash": "bdedeec28a16e36f",
    "carried": true,
-   "pass": 1
+   "pass": 3
   },
   {
    "row": "clock#7",
@@ -1763,7 +1792,7 @@
    "note": false,
    "screen_hash": "4f53cda18c2baa0c",
    "row_hash": "01ba7fa1cec4bc7a",
-   "carried": false,
+   "carried": true,
    "pass": 2
   },
   {
@@ -1776,7 +1805,7 @@
    "note": false,
    "screen_hash": null,
    "row_hash": "8c75b0d488b188e2",
-   "carried": false,
+   "carried": true,
    "pass": 2
   },
   {
@@ -1910,56 +1939,69 @@
    "pass": 2
   },
   {
+   "row": "places#10",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "The man next door sits on his porch. Walk down your street on a Sunday, 9am to noon or 5 to 8pm.",
+   "why": "The House Next Door is hidden_until met_vance; met_vance is the when of The Man Next Door's end step, and the step before it matches Vance's Sunday rows 9-12 and 17-20",
+   "cause": null,
+   "note": false,
+   "screen_hash": "4f53cda18c2baa0c",
+   "row_hash": "309f0141d342dc6f",
+   "carried": false,
+   "pass": 5
+  },
+  {
    "row": "places#2",
    "screen": "hood_clothes",
    "verdict": "PASS",
-   "line": "Nina looks up from the till.",
-   "why": "her line from her rows",
+   "line": "Girls from campus browse the rails in pairs.",
+   "why": "no line per person; Nina's rows cover every open hour (Mon-Sat 10:00-19:00), so the shop is never open with nobody there",
    "cause": null,
    "note": false,
    "screen_hash": null,
-   "row_hash": "3ab79adc34668b04",
+   "row_hash": "e0b57720921c4523",
    "carried": true,
-   "pass": 1
+   "pass": 4
   },
   {
    "row": "places#2",
    "screen": "hood_gym",
-   "verdict": "FAIL",
-   "line": "The gym: weights, treadmills, mirrors on every wall. The same regulars every day.",
-   "why": "no presence line for Marco and no empty-room line; held to P29, no waiver",
-   "cause": "P03c1-c2",
+   "verdict": "PASS",
+   "line": "\"The same regulars every day.\"",
+   "why": "crowd line means it's never empty while open; no one named",
+   "cause": null,
    "note": false,
    "screen_hash": null,
-   "row_hash": "3ab79adc34668b04",
-   "carried": false,
-   "pass": 2
+   "row_hash": "e0b57720921c4523",
+   "carried": true,
+   "pass": 3
   },
   {
    "row": "places#2",
    "screen": "hood_shop",
-   "verdict": "FAIL",
-   "line": "The corner shop: snacks, cigarettes behind the counter, the till by the door. Locals in for milk, kids in for sweets.",
-   "why": "no presence line for Frank or Danny; held to P29, no waiver",
-   "cause": "P03c1-c2",
+   "verdict": "PASS",
+   "line": "\"The corner shop: snacks, cigarettes behind the counter, the till by the door.\"",
+   "why": "staffed every open minute (Frank 7-15 Mon-Sat, Danny 15-23 Mon-Sat, 7-23 Sun), so never empty; no one named",
+   "cause": null,
    "note": false,
    "screen_hash": null,
-   "row_hash": "3ab79adc34668b04",
-   "carried": false,
-   "pass": 2
+   "row_hash": "e0b57720921c4523",
+   "carried": true,
+   "pass": 3
   },
   {
    "row": "places#2",
    "screen": "hood_street",
-   "verdict": "FAIL",
-   "line": "Your street. The same row of houses, ... Neighbours, dog walkers, kids on bikes.",
-   "why": "no presence line for Vance and none for when he's gone; held to P29, no waiver",
-   "cause": "P03c1-c2",
+   "verdict": "PASS",
+   "line": "\"Across the road, a neighbour's eyes drop to your chest in Mom's top...\"",
+   "why": "crowd only, no named person in room text; never empty (the crowd line)",
+   "cause": null,
    "note": false,
    "screen_hash": null,
-   "row_hash": "3ab79adc34668b04",
-   "carried": false,
-   "pass": 2
+   "row_hash": "e0b57720921c4523",
+   "carried": true,
+   "pass": 3
   },
   {
    "row": "places#3",
@@ -1978,14 +2020,14 @@
    "row": "places#4",
    "screen": "*",
    "verdict": "PASS",
-   "line": "Go for a run (45 min, 15 energy)",
-   "why": "short labels, cost shown",
+   "line": "\"Buy a snack ($2)\", \"Work out ($5)\", \"Go for a run\", \"Take the bus to campus ($2)\"",
+   "why": "the neighbourhood's buttons carry money only when it's a spend, no time, no energy, no clock time, no 'till'",
    "cause": null,
    "note": false,
    "screen_hash": "4f53cda18c2baa0c",
-   "row_hash": "ada53ed66015c980",
+   "row_hash": "ae3ba300e1045c9f",
    "carried": true,
-   "pass": 1
+   "pass": 3
   },
   {
    "row": "places#5",
@@ -2157,27 +2199,10 @@
    "pass": 1
   }
  ],
- "causes": [
-  {
-   "id": "P03b1-c2",
-   "what": "The place pictures are back to her in the place (shop, park, gym, clothes shop), but the engine draws a place's image only as its door card on Your Street (v2.py:11605-11609, 24784-24823): the places' own screens show none, the street (a thoroughfare) carries all four door pictures, and a closed card still shows her inside."
-  },
-  {
-   "id": "P03b1-c4",
-   "what": "Frank/Danny (shop), Marco (gym) and Vance (street) have rows here, but no presence line or empty line shows who is there; held to P29 with no waiver."
-  },
-  {
-   "id": "P03c1-c1",
-   "what": "A shut place's card on Your Street still shows its picture of her inside (closed card keeps img_html, v2.py:24830): her shopping in a shut corner shop, on a park bench after the gates lock, in a closed gym."
-  },
-  {
-   "id": "P03c1-c2",
-   "what": "Frank/Danny (shop), Marco (gym) and Vance (street) have rows there, but no presence line or empty line shows who is there; held to P29, no waiver."
-  }
- ],
+ "causes": [],
  "pending": [],
- "asked": 16,
- "answered": 16,
+ "asked": 2,
+ "answered": 2,
  "pass_items": [],
  "unowed": []
 }

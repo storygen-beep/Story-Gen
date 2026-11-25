@@ -2,67 +2,2768 @@
  "verdicts": [
   {
    "row": "B10",
-   "screen": "home_wait.wait",
+   "screen": "home_dishes.do",
    "verdict": "PASS",
-   "line": "You lie on your bed with your phone for half an hour and let the house go on around you.",
-   "why": "trigger location home_her_room, so 'your bed' is where she is; who_is_where puts nobody in home_her_room at any hour, and the line names nobody; 'the house go on around you' is texture that holds at 3am too",
-   "cause": ""
+   "line": "Mom picks up a towel and dries beside you.",
+   "why": "true on every visit: who it names is there by who_is_where at the first and last minute, and the new night rows only move people off these screens; Laura+Mark, Laura+Ryan, Laura groups read the rows; Laura's night rows are the master bedroom, so at night only the base lines show; no Mark- or Ryan-only kitchen hour exists"
+  },
+  {
+   "row": "B10",
+   "screen": "home_tv.watch",
+   "verdict": "PASS",
+   "line": "You curl up at the end of the couch and let an hour of TV wash over you.",
+   "why": "true on every visit: who it names is there by who_is_where at the first and last minute, and the new night rows only move people off these screens; Mark+Ryan, Mark, Ryan groups read the rows; at 23:00-07:00 Mark is in the master bedroom and Ryan in his room, so only the base lines show, and they hold at any hour"
+  },
+  {
+   "row": "B10",
+   "screen": "loop_eat.do",
+   "verdict": "PASS",
+   "line": "Mom slides the butter across.",
+   "why": "true on every visit: who it names is there by who_is_where at the first and last minute, and the new night rows only move people off these screens; presence groups gated on Laura (with Mark/Ryan); Laura is in the kitchen only 07-08/17-19 weekdays, 08-12/17-19 weekends, never at night under the new rows"
+  },
+  {
+   "row": "B10",
+   "screen": "mark_kitchen.hub",
+   "verdict": "PASS",
+   "line": "Mark's at the table with his coffee. He looks at you over the rim.",
+   "why": "true on every visit: who it names is there by who_is_where at the first and last minute, and the new night rows only move people off these screens; menu shows only while Mark's row has him in the kitchen (weekdays 07:00-07:30, Sat 08-10, Sun 08-12); night rows put him in the master bedroom, so it never shows at night"
+  },
+  {
+   "row": "B10",
+   "screen": "mark_kitchen.pay100",
+   "verdict": "PASS",
+   "line": "He pockets it and goes back to the paper.",
+   "why": "true on every visit: who it names is there by who_is_where at the first and last minute, and the new night rows only move people off these screens; reached only from rent on Sunday with Mark there; $100 after $900 matches PLAN 27"
+  },
+  {
+   "row": "B10",
+   "screen": "mark_kitchen.pay75",
+   "verdict": "PASS",
+   "line": "All there. Same time next Sunday.",
+   "why": "true on every visit: who it names is there by who_is_where at the first and last minute, and the new night rows only move people off these screens; reached only from rent (Sunday 08:00-11:55, Mark in the kitchen); weekday named behind the Sunday condition; numbers 75/300/90 match PLAN 27"
+  },
+  {
+   "row": "B10",
+   "screen": "mark_kitchen.pay90",
+   "verdict": "PASS",
+   "line": "A hundred from next week.",
+   "why": "true on every visit: who it names is there by who_is_where at the first and last minute, and the new night rows only move people off these screens; reached only from rent on Sunday with Mark there; 810+90=900 matches PLAN 27"
+  },
+  {
+   "row": "B10",
+   "screen": "mark_kitchen.rent",
+   "verdict": "PASS",
+   "line": "Mark folds the paper down and holds out his hand.",
+   "why": "true on every visit: who it names is there by who_is_where at the first and last minute, and the new night rows only move people off these screens; Sunday 08:00-11:55 only; Mark's Sunday rows have him in the kitchen 08:00-12:00; night rows don't touch it"
+  },
+  {
+   "row": "B10",
+   "screen": "mark_kitchen.short",
+   "verdict": "PASS",
+   "line": "Mom's cup stops halfway to her mouth, then keeps going.",
+   "why": "true on every visit: who it names is there by who_is_where at the first and last minute, and the new night rows only move people off these screens; Sunday 08:00-11:55; Laura's weekend row has her in the kitchen 08:00-12:00, so Mom is there at every minute it can show"
+  },
+  {
+   "row": "B10",
+   "screen": "mark_kitchen.talk",
+   "verdict": "PASS",
+   "line": "Your face goes hot. He's already back to his coffee.",
+   "why": "true on every visit: who it names is there by who_is_where at the first and last minute, and the new night rows only move people off these screens; shows only while Mark is in the kitchen (his morning rows); no time, no weekday, nobody else named"
+  },
+  {
+   "row": "B10",
+   "screen": "mark_living_room.hub",
+   "verdict": "PASS",
+   "line": "Mark's in his chair, the remote on his knee.",
+   "why": "true on every visit: who it names is there by who_is_where at the first and last minute, and the new night rows only move people off these screens; shows only while Mark's row has him in the living room (weekdays 16:30-23:00, Sat 10-19, Sun 12-23); from 23:00 he's in bed in the master bedroom"
+  },
+  {
+   "row": "B10",
+   "screen": "mark_living_room.talk",
+   "verdict": "PASS",
+   "line": "When you glance back, he's watching you instead of the screen.",
+   "why": "true on every visit: who it names is there by who_is_where at the first and last minute, and the new night rows only move people off these screens; shows only while Mark is in his chair; no time or weekday; Ryan/Laura on the couch aren't contradicted"
+  },
+  {
+   "row": "B10",
+   "screen": "ryan_kitchen.hub",
+   "verdict": "PASS",
+   "line": "Ryan's eating standing up at the counter, straight out of the pan.",
+   "why": "true on every visit: who it names is there by who_is_where at the first and last minute, and the new night rows only move people off these screens; shows only while Ryan's 'eating' kitchen row holds (weekdays 18-19, weekends 17-19)"
+  },
+  {
+   "row": "B10",
+   "screen": "ryan_kitchen.talk",
+   "verdict": "PASS",
+   "line": "There's more in the pan. Don't tell Mark I made it.",
+   "why": "true on every visit: who it names is there by who_is_where at the first and last minute, and the new night rows only move people off these screens; Ryan in the kitchen 18-19 weekdays / 17-19 weekends; Mark is never in the kitchen then, so the line holds"
+  },
+  {
+   "row": "B10",
+   "screen": "ryan_living_room.hub",
+   "verdict": "PASS",
+   "line": "Ryan's sprawled on the couch with the TV on.",
+   "why": "true on every visit: who it names is there by who_is_where at the first and last minute, and the new night rows only move people off these screens; shows only while Ryan's 'on the couch' row holds (weekdays 19-23, weekends 12-17); weekdays 23:00-01:00 he's now in his room, so it doesn't show"
+  },
+  {
+   "row": "B10",
+   "screen": "ryan_living_room.talk",
+   "verdict": "PASS",
+   "line": "Mark's got the remote. Don't even ask.",
+   "why": "true on every visit: who it names is there by who_is_where at the first and last minute, and the new night rows only move people off these screens; every hour Ryan is on the couch Mark is in his chair (weekdays 16:30-23, Sat 10-19, Sun 12-23)"
+  },
+  {
+   "row": "B10",
+   "screen": "ryan_room.hub",
+   "verdict": "PASS",
+   "line": "Ryan's on his bed with a controller, headphones round his neck.",
+   "why": "true on every visit: who it names is there by who_is_where at the first and last minute, and the new night rows only move people off these screens; trigger weekdays 07:00-23:00 / weekends 10:30-23:00 plus requires_npc; weekdays 23:00-01:00 'on his phone' and 01:00-07:00 'asleep' fall outside it, so the controller line never shows while he's on his phone or asleep"
+  },
+  {
+   "row": "B10",
+   "screen": "ryan_room.talk",
+   "verdict": "PASS",
+   "line": "Hey, @player.nickname. You need the bathroom or something?",
+   "why": "true on every visit: who it names is there by who_is_where at the first and last minute, and the new night rows only move people off these screens; reached only from the hub inside the 23:00-closed window; nobody's row has the bathroom then except Ryan's own, so 'It's free' holds"
+  },
+  {
+   "row": "B10",
+   "screen": "talk_mom.eat",
+   "verdict": "PASS",
+   "line": "Mom puts a plate of eggs in front of you and sits down with her coffee.",
+   "why": "true on every visit: who it names is there by who_is_where at the first and last minute, and the new night rows only move people off these screens; shows only while Laura is in the kitchen (07-08, 08-12 weekends: eggs window; 17-19: dinner window); presence lines gated by groups; night rows put her in bed"
+  },
+  {
+   "row": "B10",
+   "screen": "talk_mom.hub",
+   "verdict": "PASS",
+   "line": "Mom's in the kitchen. Mark's at the table. She looks up at you, then at him.",
+   "why": "true on every visit: who it names is there by who_is_where at the first and last minute, and the new night rows only move people off these screens; Mark line gated is_present/is_absent; Laura in the kitchen only by her day rows; night rows (in bed/asleep) keep the menu off"
+  },
+  {
+   "row": "B10",
+   "screen": "talk_mom.talk",
+   "verdict": "PASS",
+   "line": "When he's gone, you tell me everything.",
+   "why": "true on every visit: who it names is there by who_is_where at the first and last minute, and the new night rows only move people off these screens; three versions gated on Mark and Ryan in the kitchen; the night rows change none of them"
   },
   {
    "row": "B8",
-   "screen": "home_wait.wait",
+   "screen": "home_dishes.do",
    "verdict": "PASS",
-   "line": "half an hour",
-   "why": "Done charges time_progression_minutes = 30, matching the label 'Wait (30 min)' and PLAN:213 'pass 30 minutes'; no garment named",
-   "cause": ""
+   "line": "Mom picks up a towel and dries beside you.",
+   "why": "numbers and named clothes agree (rent $75/$90/$100 per PLAN 27; garments behind clothing conditions); night rows change none; Laura+Mark, Laura+Ryan, Laura groups read the rows; Laura's night rows are the master bedroom, so at night only the base lines show; no Mark- or Ryan-only kitchen hour exists"
+  },
+  {
+   "row": "B8",
+   "screen": "home_tv.watch",
+   "verdict": "PASS",
+   "line": "You curl up at the end of the couch and let an hour of TV wash over you.",
+   "why": "numbers and named clothes agree (rent $75/$90/$100 per PLAN 27; garments behind clothing conditions); night rows change none; Mark+Ryan, Mark, Ryan groups read the rows; at 23:00-07:00 Mark is in the master bedroom and Ryan in his room, so only the base lines show, and they hold at any hour"
+  },
+  {
+   "row": "B8",
+   "screen": "loop_eat.do",
+   "verdict": "PASS",
+   "line": "Mom slides the butter across.",
+   "why": "numbers and named clothes agree (rent $75/$90/$100 per PLAN 27; garments behind clothing conditions); night rows change none; presence groups gated on Laura (with Mark/Ryan); Laura is in the kitchen only 07-08/17-19 weekdays, 08-12/17-19 weekends, never at night under the new rows"
+  },
+  {
+   "row": "B8",
+   "screen": "mark_kitchen.hub",
+   "verdict": "PASS",
+   "line": "Mark's at the table with his coffee. He looks at you over the rim.",
+   "why": "numbers and named clothes agree (rent $75/$90/$100 per PLAN 27; garments behind clothing conditions); night rows change none; menu shows only while Mark's row has him in the kitchen (weekdays 07:00-07:30, Sat 08-10, Sun 08-12); night rows put him in the master bedroom, so it never shows at night"
+  },
+  {
+   "row": "B8",
+   "screen": "mark_kitchen.pay100",
+   "verdict": "PASS",
+   "line": "He pockets it and goes back to the paper.",
+   "why": "numbers and named clothes agree (rent $75/$90/$100 per PLAN 27; garments behind clothing conditions); night rows change none; reached only from rent on Sunday with Mark there; $100 after $900 matches PLAN 27"
+  },
+  {
+   "row": "B8",
+   "screen": "mark_kitchen.pay75",
+   "verdict": "PASS",
+   "line": "All there. Same time next Sunday.",
+   "why": "numbers and named clothes agree (rent $75/$90/$100 per PLAN 27; garments behind clothing conditions); night rows change none; reached only from rent (Sunday 08:00-11:55, Mark in the kitchen); weekday named behind the Sunday condition; numbers 75/300/90 match PLAN 27"
+  },
+  {
+   "row": "B8",
+   "screen": "mark_kitchen.pay90",
+   "verdict": "PASS",
+   "line": "A hundred from next week.",
+   "why": "numbers and named clothes agree (rent $75/$90/$100 per PLAN 27; garments behind clothing conditions); night rows change none; reached only from rent on Sunday with Mark there; 810+90=900 matches PLAN 27"
+  },
+  {
+   "row": "B8",
+   "screen": "mark_kitchen.rent",
+   "verdict": "PASS",
+   "line": "Mark folds the paper down and holds out his hand.",
+   "why": "numbers and named clothes agree (rent $75/$90/$100 per PLAN 27; garments behind clothing conditions); night rows change none; Sunday 08:00-11:55 only; Mark's Sunday rows have him in the kitchen 08:00-12:00; night rows don't touch it"
+  },
+  {
+   "row": "B8",
+   "screen": "mark_kitchen.short",
+   "verdict": "PASS",
+   "line": "Mom's cup stops halfway to her mouth, then keeps going.",
+   "why": "numbers and named clothes agree (rent $75/$90/$100 per PLAN 27; garments behind clothing conditions); night rows change none; Sunday 08:00-11:55; Laura's weekend row has her in the kitchen 08:00-12:00, so Mom is there at every minute it can show"
+  },
+  {
+   "row": "B8",
+   "screen": "mark_kitchen.talk",
+   "verdict": "PASS",
+   "line": "Your face goes hot. He's already back to his coffee.",
+   "why": "numbers and named clothes agree (rent $75/$90/$100 per PLAN 27; garments behind clothing conditions); night rows change none; shows only while Mark is in the kitchen (his morning rows); no time, no weekday, nobody else named"
+  },
+  {
+   "row": "B8",
+   "screen": "mark_living_room.hub",
+   "verdict": "PASS",
+   "line": "Mark's in his chair, the remote on his knee.",
+   "why": "numbers and named clothes agree (rent $75/$90/$100 per PLAN 27; garments behind clothing conditions); night rows change none; shows only while Mark's row has him in the living room (weekdays 16:30-23:00, Sat 10-19, Sun 12-23); from 23:00 he's in bed in the master bedroom"
+  },
+  {
+   "row": "B8",
+   "screen": "mark_living_room.talk",
+   "verdict": "PASS",
+   "line": "When you glance back, he's watching you instead of the screen.",
+   "why": "numbers and named clothes agree (rent $75/$90/$100 per PLAN 27; garments behind clothing conditions); night rows change none; shows only while Mark is in his chair; no time or weekday; Ryan/Laura on the couch aren't contradicted"
+  },
+  {
+   "row": "B8",
+   "screen": "ryan_kitchen.hub",
+   "verdict": "PASS",
+   "line": "Ryan's eating standing up at the counter, straight out of the pan.",
+   "why": "numbers and named clothes agree (rent $75/$90/$100 per PLAN 27; garments behind clothing conditions); night rows change none; shows only while Ryan's 'eating' kitchen row holds (weekdays 18-19, weekends 17-19)"
+  },
+  {
+   "row": "B8",
+   "screen": "ryan_kitchen.talk",
+   "verdict": "PASS",
+   "line": "There's more in the pan. Don't tell Mark I made it.",
+   "why": "numbers and named clothes agree (rent $75/$90/$100 per PLAN 27; garments behind clothing conditions); night rows change none; Ryan in the kitchen 18-19 weekdays / 17-19 weekends; Mark is never in the kitchen then, so the line holds"
+  },
+  {
+   "row": "B8",
+   "screen": "ryan_living_room.hub",
+   "verdict": "PASS",
+   "line": "Ryan's sprawled on the couch with the TV on.",
+   "why": "numbers and named clothes agree (rent $75/$90/$100 per PLAN 27; garments behind clothing conditions); night rows change none; shows only while Ryan's 'on the couch' row holds (weekdays 19-23, weekends 12-17); weekdays 23:00-01:00 he's now in his room, so it doesn't show"
+  },
+  {
+   "row": "B8",
+   "screen": "ryan_living_room.talk",
+   "verdict": "PASS",
+   "line": "Mark's got the remote. Don't even ask.",
+   "why": "numbers and named clothes agree (rent $75/$90/$100 per PLAN 27; garments behind clothing conditions); night rows change none; every hour Ryan is on the couch Mark is in his chair (weekdays 16:30-23, Sat 10-19, Sun 12-23)"
+  },
+  {
+   "row": "B8",
+   "screen": "ryan_room.hub",
+   "verdict": "PASS",
+   "line": "Ryan's on his bed with a controller, headphones round his neck.",
+   "why": "numbers and named clothes agree (rent $75/$90/$100 per PLAN 27; garments behind clothing conditions); night rows change none; trigger weekdays 07:00-23:00 / weekends 10:30-23:00 plus requires_npc; weekdays 23:00-01:00 'on his phone' and 01:00-07:00 'asleep' fall outside it, so the controller line never shows while he's on his phone or asleep"
+  },
+  {
+   "row": "B8",
+   "screen": "ryan_room.talk",
+   "verdict": "PASS",
+   "line": "Hey, @player.nickname. You need the bathroom or something?",
+   "why": "numbers and named clothes agree (rent $75/$90/$100 per PLAN 27; garments behind clothing conditions); night rows change none; reached only from the hub inside the 23:00-closed window; nobody's row has the bathroom then except Ryan's own, so 'It's free' holds"
+  },
+  {
+   "row": "B8",
+   "screen": "talk_mom.eat",
+   "verdict": "PASS",
+   "line": "Mom puts a plate of eggs in front of you and sits down with her coffee.",
+   "why": "numbers and named clothes agree (rent $75/$90/$100 per PLAN 27; garments behind clothing conditions); night rows change none; shows only while Laura is in the kitchen (07-08, 08-12 weekends: eggs window; 17-19: dinner window); presence lines gated by groups; night rows put her in bed"
+  },
+  {
+   "row": "B8",
+   "screen": "talk_mom.hub",
+   "verdict": "PASS",
+   "line": "Mom's in the kitchen. Mark's at the table. She looks up at you, then at him.",
+   "why": "numbers and named clothes agree (rent $75/$90/$100 per PLAN 27; garments behind clothing conditions); night rows change none; Mark line gated is_present/is_absent; Laura in the kitchen only by her day rows; night rows (in bed/asleep) keep the menu off"
+  },
+  {
+   "row": "B8",
+   "screen": "talk_mom.talk",
+   "verdict": "PASS",
+   "line": "When he's gone, you tell me everything.",
+   "why": "numbers and named clothes agree (rent $75/$90/$100 per PLAN 27; garments behind clothing conditions); night rows change none; three versions gated on Mark and Ryan in the kitchen; the night rows change none of them"
+  },
+  {
+   "row": "C1158",
+   "screen": "talk_mom.hub",
+   "verdict": "PASS",
+   "line": "Mom's in the kitchen. Mark's at the table. She looks up at you, then at him.",
+   "why": "named garments (skirt, top, heels) each behind a clothing_item equipped condition; Mark line gated is_present/is_absent; Laura in the kitchen only by her day rows; night rows (in bed/asleep) keep the menu off"
+  },
+  {
+   "row": "C1206",
+   "screen": "talk_mom.hub",
+   "verdict": "PASS",
+   "line": "Mom's in the kitchen. Mark's at the table. She looks up at you, then at him.",
+   "why": "no garment named that she may not be wearing: each line gated on equipped; Mark line gated is_present/is_absent; Laura in the kitchen only by her day rows; night rows (in bed/asleep) keep the menu off"
+  },
+  {
+   "row": "C1265",
+   "screen": "talk_mom.hub",
+   "verdict": "PASS",
+   "line": "Mom's in the kitchen. Mark's at the table. She looks up at you, then at him.",
+   "why": "a person's menu opened from her face: one picture after the presence line, the allowed exception; Mark line gated is_present/is_absent; Laura in the kitchen only by her day rows; night rows (in bed/asleep) keep the menu off"
   },
   {
    "row": "C460",
-   "screen": "home_wait.wait",
+   "screen": "home_dishes.do",
    "verdict": "PASS",
-   "line": "Then you get up. Somewhere out there is money, and you're not making it lying here.",
-   "why": "true on every visit: she has no money-making act here; nothing claims a past or a person",
-   "cause": ""
+   "line": "Mom picks up a towel and dries beside you.",
+   "why": "truth rule holds at every hour the screen can show with the new night rows; Laura+Mark, Laura+Ryan, Laura groups read the rows; Laura's night rows are the master bedroom, so at night only the base lines show; no Mark- or Ryan-only kitchen hour exists"
+  },
+  {
+   "row": "C460",
+   "screen": "home_tv.watch",
+   "verdict": "PASS",
+   "line": "You curl up at the end of the couch and let an hour of TV wash over you.",
+   "why": "truth rule holds at every hour the screen can show with the new night rows; Mark+Ryan, Mark, Ryan groups read the rows; at 23:00-07:00 Mark is in the master bedroom and Ryan in his room, so only the base lines show, and they hold at any hour"
+  },
+  {
+   "row": "C460",
+   "screen": "loop_eat.do",
+   "verdict": "PASS",
+   "line": "Mom slides the butter across.",
+   "why": "truth rule holds at every hour the screen can show with the new night rows; presence groups gated on Laura (with Mark/Ryan); Laura is in the kitchen only 07-08/17-19 weekdays, 08-12/17-19 weekends, never at night under the new rows"
+  },
+  {
+   "row": "C460",
+   "screen": "mark_kitchen.hub",
+   "verdict": "PASS",
+   "line": "Mark's at the table with his coffee. He looks at you over the rim.",
+   "why": "truth rule holds at every hour the screen can show with the new night rows; menu shows only while Mark's row has him in the kitchen (weekdays 07:00-07:30, Sat 08-10, Sun 08-12); night rows put him in the master bedroom, so it never shows at night"
+  },
+  {
+   "row": "C460",
+   "screen": "mark_kitchen.pay100",
+   "verdict": "PASS",
+   "line": "He pockets it and goes back to the paper.",
+   "why": "truth rule holds at every hour the screen can show with the new night rows; reached only from rent on Sunday with Mark there; $100 after $900 matches PLAN 27"
+  },
+  {
+   "row": "C460",
+   "screen": "mark_kitchen.pay75",
+   "verdict": "PASS",
+   "line": "All there. Same time next Sunday.",
+   "why": "truth rule holds at every hour the screen can show with the new night rows; reached only from rent (Sunday 08:00-11:55, Mark in the kitchen); weekday named behind the Sunday condition; numbers 75/300/90 match PLAN 27"
+  },
+  {
+   "row": "C460",
+   "screen": "mark_kitchen.pay90",
+   "verdict": "PASS",
+   "line": "A hundred from next week.",
+   "why": "truth rule holds at every hour the screen can show with the new night rows; reached only from rent on Sunday with Mark there; 810+90=900 matches PLAN 27"
+  },
+  {
+   "row": "C460",
+   "screen": "mark_kitchen.rent",
+   "verdict": "PASS",
+   "line": "Mark folds the paper down and holds out his hand.",
+   "why": "truth rule holds at every hour the screen can show with the new night rows; Sunday 08:00-11:55 only; Mark's Sunday rows have him in the kitchen 08:00-12:00; night rows don't touch it"
+  },
+  {
+   "row": "C460",
+   "screen": "mark_kitchen.short",
+   "verdict": "PASS",
+   "line": "Mom's cup stops halfway to her mouth, then keeps going.",
+   "why": "truth rule holds at every hour the screen can show with the new night rows; Sunday 08:00-11:55; Laura's weekend row has her in the kitchen 08:00-12:00, so Mom is there at every minute it can show"
+  },
+  {
+   "row": "C460",
+   "screen": "mark_kitchen.talk",
+   "verdict": "PASS",
+   "line": "Your face goes hot. He's already back to his coffee.",
+   "why": "truth rule holds at every hour the screen can show with the new night rows; shows only while Mark is in the kitchen (his morning rows); no time, no weekday, nobody else named"
+  },
+  {
+   "row": "C460",
+   "screen": "mark_living_room.hub",
+   "verdict": "PASS",
+   "line": "Mark's in his chair, the remote on his knee.",
+   "why": "truth rule holds at every hour the screen can show with the new night rows; shows only while Mark's row has him in the living room (weekdays 16:30-23:00, Sat 10-19, Sun 12-23); from 23:00 he's in bed in the master bedroom"
+  },
+  {
+   "row": "C460",
+   "screen": "mark_living_room.talk",
+   "verdict": "PASS",
+   "line": "When you glance back, he's watching you instead of the screen.",
+   "why": "truth rule holds at every hour the screen can show with the new night rows; shows only while Mark is in his chair; no time or weekday; Ryan/Laura on the couch aren't contradicted"
+  },
+  {
+   "row": "C460",
+   "screen": "ryan_kitchen.hub",
+   "verdict": "PASS",
+   "line": "Ryan's eating standing up at the counter, straight out of the pan.",
+   "why": "truth rule holds at every hour the screen can show with the new night rows; shows only while Ryan's 'eating' kitchen row holds (weekdays 18-19, weekends 17-19)"
+  },
+  {
+   "row": "C460",
+   "screen": "ryan_kitchen.talk",
+   "verdict": "PASS",
+   "line": "There's more in the pan. Don't tell Mark I made it.",
+   "why": "truth rule holds at every hour the screen can show with the new night rows; Ryan in the kitchen 18-19 weekdays / 17-19 weekends; Mark is never in the kitchen then, so the line holds"
+  },
+  {
+   "row": "C460",
+   "screen": "ryan_living_room.hub",
+   "verdict": "PASS",
+   "line": "Ryan's sprawled on the couch with the TV on.",
+   "why": "truth rule holds at every hour the screen can show with the new night rows; shows only while Ryan's 'on the couch' row holds (weekdays 19-23, weekends 12-17); weekdays 23:00-01:00 he's now in his room, so it doesn't show"
+  },
+  {
+   "row": "C460",
+   "screen": "ryan_living_room.talk",
+   "verdict": "PASS",
+   "line": "Mark's got the remote. Don't even ask.",
+   "why": "truth rule holds at every hour the screen can show with the new night rows; every hour Ryan is on the couch Mark is in his chair (weekdays 16:30-23, Sat 10-19, Sun 12-23)"
+  },
+  {
+   "row": "C460",
+   "screen": "ryan_room.hub",
+   "verdict": "PASS",
+   "line": "Ryan's on his bed with a controller, headphones round his neck.",
+   "why": "truth rule holds at every hour the screen can show with the new night rows; trigger weekdays 07:00-23:00 / weekends 10:30-23:00 plus requires_npc; weekdays 23:00-01:00 'on his phone' and 01:00-07:00 'asleep' fall outside it, so the controller line never shows while he's on his phone or asleep"
+  },
+  {
+   "row": "C460",
+   "screen": "ryan_room.talk",
+   "verdict": "PASS",
+   "line": "Hey, @player.nickname. You need the bathroom or something?",
+   "why": "truth rule holds at every hour the screen can show with the new night rows; reached only from the hub inside the 23:00-closed window; nobody's row has the bathroom then except Ryan's own, so 'It's free' holds"
+  },
+  {
+   "row": "C460",
+   "screen": "talk_mom.eat",
+   "verdict": "PASS",
+   "line": "Mom puts a plate of eggs in front of you and sits down with her coffee.",
+   "why": "truth rule holds at every hour the screen can show with the new night rows; shows only while Laura is in the kitchen (07-08, 08-12 weekends: eggs window; 17-19: dinner window); presence lines gated by groups; night rows put her in bed"
+  },
+  {
+   "row": "C460",
+   "screen": "talk_mom.hub",
+   "verdict": "PASS",
+   "line": "Mom's in the kitchen. Mark's at the table. She looks up at you, then at him.",
+   "why": "truth rule holds at every hour the screen can show with the new night rows; Mark line gated is_present/is_absent; Laura in the kitchen only by her day rows; night rows (in bed/asleep) keep the menu off"
+  },
+  {
+   "row": "C460",
+   "screen": "talk_mom.talk",
+   "verdict": "PASS",
+   "line": "When he's gone, you tell me everything.",
+   "why": "truth rule holds at every hour the screen can show with the new night rows; three versions gated on Mark and Ryan in the kitchen; the night rows change none of them"
   },
   {
    "row": "C461",
-   "screen": "home_wait.wait",
+   "screen": "home_dishes.do",
    "verdict": "PASS",
-   "line": "Then you get up. Somewhere out there is money, and you're not making it lying here.",
-   "why": "her opinion, can't clash",
-   "cause": ""
+   "line": "Mom picks up a towel and dries beside you.",
+   "why": "only texture and dialogue that fits the cast; nothing clashes with the night rows; Laura+Mark, Laura+Ryan, Laura groups read the rows; Laura's night rows are the master bedroom, so at night only the base lines show; no Mark- or Ryan-only kitchen hour exists"
+  },
+  {
+   "row": "C461",
+   "screen": "home_tv.watch",
+   "verdict": "PASS",
+   "line": "You curl up at the end of the couch and let an hour of TV wash over you.",
+   "why": "only texture and dialogue that fits the cast; nothing clashes with the night rows; Mark+Ryan, Mark, Ryan groups read the rows; at 23:00-07:00 Mark is in the master bedroom and Ryan in his room, so only the base lines show, and they hold at any hour"
+  },
+  {
+   "row": "C461",
+   "screen": "loop_eat.do",
+   "verdict": "PASS",
+   "line": "Mom slides the butter across.",
+   "why": "only texture and dialogue that fits the cast; nothing clashes with the night rows; presence groups gated on Laura (with Mark/Ryan); Laura is in the kitchen only 07-08/17-19 weekdays, 08-12/17-19 weekends, never at night under the new rows"
+  },
+  {
+   "row": "C461",
+   "screen": "mark_kitchen.hub",
+   "verdict": "PASS",
+   "line": "Mark's at the table with his coffee. He looks at you over the rim.",
+   "why": "only texture and dialogue that fits the cast; nothing clashes with the night rows; menu shows only while Mark's row has him in the kitchen (weekdays 07:00-07:30, Sat 08-10, Sun 08-12); night rows put him in the master bedroom, so it never shows at night"
+  },
+  {
+   "row": "C461",
+   "screen": "mark_kitchen.pay100",
+   "verdict": "PASS",
+   "line": "He pockets it and goes back to the paper.",
+   "why": "only texture and dialogue that fits the cast; nothing clashes with the night rows; reached only from rent on Sunday with Mark there; $100 after $900 matches PLAN 27"
+  },
+  {
+   "row": "C461",
+   "screen": "mark_kitchen.pay75",
+   "verdict": "PASS",
+   "line": "All there. Same time next Sunday.",
+   "why": "only texture and dialogue that fits the cast; nothing clashes with the night rows; reached only from rent (Sunday 08:00-11:55, Mark in the kitchen); weekday named behind the Sunday condition; numbers 75/300/90 match PLAN 27"
+  },
+  {
+   "row": "C461",
+   "screen": "mark_kitchen.pay90",
+   "verdict": "PASS",
+   "line": "A hundred from next week.",
+   "why": "only texture and dialogue that fits the cast; nothing clashes with the night rows; reached only from rent on Sunday with Mark there; 810+90=900 matches PLAN 27"
+  },
+  {
+   "row": "C461",
+   "screen": "mark_kitchen.rent",
+   "verdict": "PASS",
+   "line": "Mark folds the paper down and holds out his hand.",
+   "why": "only texture and dialogue that fits the cast; nothing clashes with the night rows; Sunday 08:00-11:55 only; Mark's Sunday rows have him in the kitchen 08:00-12:00; night rows don't touch it"
+  },
+  {
+   "row": "C461",
+   "screen": "mark_kitchen.short",
+   "verdict": "PASS",
+   "line": "Mom's cup stops halfway to her mouth, then keeps going.",
+   "why": "only texture and dialogue that fits the cast; nothing clashes with the night rows; Sunday 08:00-11:55; Laura's weekend row has her in the kitchen 08:00-12:00, so Mom is there at every minute it can show"
+  },
+  {
+   "row": "C461",
+   "screen": "mark_kitchen.talk",
+   "verdict": "PASS",
+   "line": "Your face goes hot. He's already back to his coffee.",
+   "why": "only texture and dialogue that fits the cast; nothing clashes with the night rows; shows only while Mark is in the kitchen (his morning rows); no time, no weekday, nobody else named"
+  },
+  {
+   "row": "C461",
+   "screen": "mark_living_room.hub",
+   "verdict": "PASS",
+   "line": "Mark's in his chair, the remote on his knee.",
+   "why": "only texture and dialogue that fits the cast; nothing clashes with the night rows; shows only while Mark's row has him in the living room (weekdays 16:30-23:00, Sat 10-19, Sun 12-23); from 23:00 he's in bed in the master bedroom"
+  },
+  {
+   "row": "C461",
+   "screen": "mark_living_room.talk",
+   "verdict": "PASS",
+   "line": "When you glance back, he's watching you instead of the screen.",
+   "why": "only texture and dialogue that fits the cast; nothing clashes with the night rows; shows only while Mark is in his chair; no time or weekday; Ryan/Laura on the couch aren't contradicted"
+  },
+  {
+   "row": "C461",
+   "screen": "ryan_kitchen.hub",
+   "verdict": "PASS",
+   "line": "Ryan's eating standing up at the counter, straight out of the pan.",
+   "why": "only texture and dialogue that fits the cast; nothing clashes with the night rows; shows only while Ryan's 'eating' kitchen row holds (weekdays 18-19, weekends 17-19)"
+  },
+  {
+   "row": "C461",
+   "screen": "ryan_kitchen.talk",
+   "verdict": "PASS",
+   "line": "There's more in the pan. Don't tell Mark I made it.",
+   "why": "only texture and dialogue that fits the cast; nothing clashes with the night rows; Ryan in the kitchen 18-19 weekdays / 17-19 weekends; Mark is never in the kitchen then, so the line holds"
+  },
+  {
+   "row": "C461",
+   "screen": "ryan_living_room.hub",
+   "verdict": "PASS",
+   "line": "Ryan's sprawled on the couch with the TV on.",
+   "why": "only texture and dialogue that fits the cast; nothing clashes with the night rows; shows only while Ryan's 'on the couch' row holds (weekdays 19-23, weekends 12-17); weekdays 23:00-01:00 he's now in his room, so it doesn't show"
+  },
+  {
+   "row": "C461",
+   "screen": "ryan_living_room.talk",
+   "verdict": "PASS",
+   "line": "Mark's got the remote. Don't even ask.",
+   "why": "only texture and dialogue that fits the cast; nothing clashes with the night rows; every hour Ryan is on the couch Mark is in his chair (weekdays 16:30-23, Sat 10-19, Sun 12-23)"
+  },
+  {
+   "row": "C461",
+   "screen": "ryan_room.hub",
+   "verdict": "PASS",
+   "line": "Ryan's on his bed with a controller, headphones round his neck.",
+   "why": "only texture and dialogue that fits the cast; nothing clashes with the night rows; trigger weekdays 07:00-23:00 / weekends 10:30-23:00 plus requires_npc; weekdays 23:00-01:00 'on his phone' and 01:00-07:00 'asleep' fall outside it, so the controller line never shows while he's on his phone or asleep"
+  },
+  {
+   "row": "C461",
+   "screen": "ryan_room.talk",
+   "verdict": "PASS",
+   "line": "Hey, @player.nickname. You need the bathroom or something?",
+   "why": "only texture and dialogue that fits the cast; nothing clashes with the night rows; reached only from the hub inside the 23:00-closed window; nobody's row has the bathroom then except Ryan's own, so 'It's free' holds"
+  },
+  {
+   "row": "C461",
+   "screen": "talk_mom.eat",
+   "verdict": "PASS",
+   "line": "Mom puts a plate of eggs in front of you and sits down with her coffee.",
+   "why": "only texture and dialogue that fits the cast; nothing clashes with the night rows; shows only while Laura is in the kitchen (07-08, 08-12 weekends: eggs window; 17-19: dinner window); presence lines gated by groups; night rows put her in bed"
+  },
+  {
+   "row": "C461",
+   "screen": "talk_mom.hub",
+   "verdict": "PASS",
+   "line": "Mom's in the kitchen. Mark's at the table. She looks up at you, then at him.",
+   "why": "only texture and dialogue that fits the cast; nothing clashes with the night rows; Mark line gated is_present/is_absent; Laura in the kitchen only by her day rows; night rows (in bed/asleep) keep the menu off"
+  },
+  {
+   "row": "C461",
+   "screen": "talk_mom.talk",
+   "verdict": "PASS",
+   "line": "When he's gone, you tell me everything.",
+   "why": "only texture and dialogue that fits the cast; nothing clashes with the night rows; three versions gated on Mark and Ryan in the kitchen; the night rows change none of them"
+  },
+  {
+   "row": "C889",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "Pay the rent \u2014 Mark collects on Sundays, 8 to 11:55am, at the kitchen table.",
+   "why": "clickable labels (Talk, Eat with her, Watch TV, Do the dishes, Hand it over ($75), Leave, Done) carry no time or duration; the rent's hours sit only on its greyed locked line, which C913 asks for"
+  },
+  {
+   "row": "C889",
+   "screen": "home_dishes.do",
+   "verdict": "PASS",
+   "line": "Mom picks up a towel and dries beside you.",
+   "why": "no label promises a clock time or a duration; Laura+Mark, Laura+Ryan, Laura groups read the rows; Laura's night rows are the master bedroom, so at night only the base lines show; no Mark- or Ryan-only kitchen hour exists"
+  },
+  {
+   "row": "C889",
+   "screen": "home_tv.watch",
+   "verdict": "PASS",
+   "line": "You curl up at the end of the couch and let an hour of TV wash over you.",
+   "why": "no label promises a clock time or a duration; Mark+Ryan, Mark, Ryan groups read the rows; at 23:00-07:00 Mark is in the master bedroom and Ryan in his room, so only the base lines show, and they hold at any hour"
+  },
+  {
+   "row": "C889",
+   "screen": "mark_kitchen.pay100",
+   "verdict": "PASS",
+   "line": "He pockets it and goes back to the paper.",
+   "why": "no label promises a clock time or a duration; reached only from rent on Sunday with Mark there; $100 after $900 matches PLAN 27"
+  },
+  {
+   "row": "C889",
+   "screen": "mark_kitchen.pay75",
+   "verdict": "PASS",
+   "line": "All there. Same time next Sunday.",
+   "why": "no label promises a clock time or a duration; reached only from rent (Sunday 08:00-11:55, Mark in the kitchen); weekday named behind the Sunday condition; numbers 75/300/90 match PLAN 27"
+  },
+  {
+   "row": "C889",
+   "screen": "mark_kitchen.pay90",
+   "verdict": "PASS",
+   "line": "A hundred from next week.",
+   "why": "no label promises a clock time or a duration; reached only from rent on Sunday with Mark there; 810+90=900 matches PLAN 27"
+  },
+  {
+   "row": "C889",
+   "screen": "mark_kitchen.short",
+   "verdict": "PASS",
+   "line": "Mom's cup stops halfway to her mouth, then keeps going.",
+   "why": "no label promises a clock time or a duration; Sunday 08:00-11:55; Laura's weekend row has her in the kitchen 08:00-12:00, so Mom is there at every minute it can show"
+  },
+  {
+   "row": "C889",
+   "screen": "mark_kitchen.talk",
+   "verdict": "PASS",
+   "line": "Your face goes hot. He's already back to his coffee.",
+   "why": "no label promises a clock time or a duration; shows only while Mark is in the kitchen (his morning rows); no time, no weekday, nobody else named"
+  },
+  {
+   "row": "C889",
+   "screen": "mark_living_room.talk",
+   "verdict": "PASS",
+   "line": "When you glance back, he's watching you instead of the screen.",
+   "why": "no label promises a clock time or a duration; shows only while Mark is in his chair; no time or weekday; Ryan/Laura on the couch aren't contradicted"
+  },
+  {
+   "row": "C889",
+   "screen": "ryan_kitchen.talk",
+   "verdict": "PASS",
+   "line": "There's more in the pan. Don't tell Mark I made it.",
+   "why": "no label promises a clock time or a duration; Ryan in the kitchen 18-19 weekdays / 17-19 weekends; Mark is never in the kitchen then, so the line holds"
+  },
+  {
+   "row": "C889",
+   "screen": "ryan_living_room.talk",
+   "verdict": "PASS",
+   "line": "Mark's got the remote. Don't even ask.",
+   "why": "no label promises a clock time or a duration; every hour Ryan is on the couch Mark is in his chair (weekdays 16:30-23, Sat 10-19, Sun 12-23)"
+  },
+  {
+   "row": "C889",
+   "screen": "ryan_room.talk",
+   "verdict": "PASS",
+   "line": "Hey, @player.nickname. You need the bathroom or something?",
+   "why": "no label promises a clock time or a duration; reached only from the hub inside the 23:00-closed window; nobody's row has the bathroom then except Ryan's own, so 'It's free' holds"
+  },
+  {
+   "row": "C889",
+   "screen": "talk_mom.eat",
+   "verdict": "PASS",
+   "line": "Mom puts a plate of eggs in front of you and sits down with her coffee.",
+   "why": "no label promises a clock time or a duration; shows only while Laura is in the kitchen (07-08, 08-12 weekends: eggs window; 17-19: dinner window); presence lines gated by groups; night rows put her in bed"
+  },
+  {
+   "row": "C889",
+   "screen": "talk_mom.talk",
+   "verdict": "PASS",
+   "line": "When he's gone, you tell me everything.",
+   "why": "no label promises a clock time or a duration; three versions gated on Mark and Ryan in the kitchen; the night rows change none of them"
+  },
+  {
+   "row": "C892",
+   "screen": "home_dishes.do",
+   "verdict": "PASS",
+   "line": "Mom picks up a towel and dries beside you.",
+   "why": "no hour in the act; Laura+Mark, Laura+Ryan, Laura groups read the rows; Laura's night rows are the master bedroom, so at night only the base lines show; no Mark- or Ryan-only kitchen hour exists"
+  },
+  {
+   "row": "C892",
+   "screen": "home_tv.watch",
+   "verdict": "PASS",
+   "line": "You curl up at the end of the couch and let an hour of TV wash over you.",
+   "why": "no hour in the act; Mark+Ryan, Mark, Ryan groups read the rows; at 23:00-07:00 Mark is in the master bedroom and Ryan in his room, so only the base lines show, and they hold at any hour"
+  },
+  {
+   "row": "C892",
+   "screen": "mark_kitchen.pay100",
+   "verdict": "PASS",
+   "line": "He pockets it and goes back to the paper.",
+   "why": "no hour in the act; reached only from rent on Sunday with Mark there; $100 after $900 matches PLAN 27"
+  },
+  {
+   "row": "C892",
+   "screen": "mark_kitchen.pay75",
+   "verdict": "PASS",
+   "line": "All there. Same time next Sunday.",
+   "why": "no hour in the act; reached only from rent (Sunday 08:00-11:55, Mark in the kitchen); weekday named behind the Sunday condition; numbers 75/300/90 match PLAN 27"
+  },
+  {
+   "row": "C892",
+   "screen": "mark_kitchen.pay90",
+   "verdict": "PASS",
+   "line": "A hundred from next week.",
+   "why": "no hour in the act; reached only from rent on Sunday with Mark there; 810+90=900 matches PLAN 27"
+  },
+  {
+   "row": "C892",
+   "screen": "mark_kitchen.short",
+   "verdict": "PASS",
+   "line": "Mom's cup stops halfway to her mouth, then keeps going.",
+   "why": "no hour in the act; Sunday 08:00-11:55; Laura's weekend row has her in the kitchen 08:00-12:00, so Mom is there at every minute it can show"
+  },
+  {
+   "row": "C892",
+   "screen": "mark_kitchen.talk",
+   "verdict": "PASS",
+   "line": "Your face goes hot. He's already back to his coffee.",
+   "why": "no hour in the act; shows only while Mark is in the kitchen (his morning rows); no time, no weekday, nobody else named"
+  },
+  {
+   "row": "C892",
+   "screen": "mark_living_room.talk",
+   "verdict": "PASS",
+   "line": "When you glance back, he's watching you instead of the screen.",
+   "why": "no hour in the act; shows only while Mark is in his chair; no time or weekday; Ryan/Laura on the couch aren't contradicted"
+  },
+  {
+   "row": "C892",
+   "screen": "ryan_kitchen.talk",
+   "verdict": "PASS",
+   "line": "There's more in the pan. Don't tell Mark I made it.",
+   "why": "no hour in the act; Ryan in the kitchen 18-19 weekdays / 17-19 weekends; Mark is never in the kitchen then, so the line holds"
+  },
+  {
+   "row": "C892",
+   "screen": "ryan_living_room.talk",
+   "verdict": "PASS",
+   "line": "Mark's got the remote. Don't even ask.",
+   "why": "no hour in the act; every hour Ryan is on the couch Mark is in his chair (weekdays 16:30-23, Sat 10-19, Sun 12-23)"
+  },
+  {
+   "row": "C892",
+   "screen": "ryan_room.talk",
+   "verdict": "PASS",
+   "line": "Hey, @player.nickname. You need the bathroom or something?",
+   "why": "no hour in the act; reached only from the hub inside the 23:00-closed window; nobody's row has the bathroom then except Ryan's own, so 'It's free' holds"
+  },
+  {
+   "row": "C892",
+   "screen": "talk_mom.eat",
+   "verdict": "PASS",
+   "line": "Mom puts a plate of eggs in front of you and sits down with her coffee.",
+   "why": "no hour in the act; shows only while Laura is in the kitchen (07-08, 08-12 weekends: eggs window; 17-19: dinner window); presence lines gated by groups; night rows put her in bed"
+  },
+  {
+   "row": "C892",
+   "screen": "talk_mom.talk",
+   "verdict": "PASS",
+   "line": "When he's gone, you tell me everything.",
+   "why": "no hour in the act; three versions gated on Mark and Ryan in the kitchen; the night rows change none of them"
+  },
+  {
+   "row": "C897",
+   "screen": "home_dishes.do",
+   "verdict": "PASS",
+   "line": "Mom picks up a towel and dries beside you.",
+   "why": "no time on a room; Laura+Mark, Laura+Ryan, Laura groups read the rows; Laura's night rows are the master bedroom, so at night only the base lines show; no Mark- or Ryan-only kitchen hour exists"
+  },
+  {
+   "row": "C897",
+   "screen": "home_tv.watch",
+   "verdict": "PASS",
+   "line": "You curl up at the end of the couch and let an hour of TV wash over you.",
+   "why": "no time on a room; Mark+Ryan, Mark, Ryan groups read the rows; at 23:00-07:00 Mark is in the master bedroom and Ryan in his room, so only the base lines show, and they hold at any hour"
+  },
+  {
+   "row": "C897",
+   "screen": "mark_kitchen.pay100",
+   "verdict": "PASS",
+   "line": "He pockets it and goes back to the paper.",
+   "why": "no time on a room; reached only from rent on Sunday with Mark there; $100 after $900 matches PLAN 27"
+  },
+  {
+   "row": "C897",
+   "screen": "mark_kitchen.pay75",
+   "verdict": "PASS",
+   "line": "All there. Same time next Sunday.",
+   "why": "no time on a room; reached only from rent (Sunday 08:00-11:55, Mark in the kitchen); weekday named behind the Sunday condition; numbers 75/300/90 match PLAN 27"
+  },
+  {
+   "row": "C897",
+   "screen": "mark_kitchen.pay90",
+   "verdict": "PASS",
+   "line": "A hundred from next week.",
+   "why": "no time on a room; reached only from rent on Sunday with Mark there; 810+90=900 matches PLAN 27"
+  },
+  {
+   "row": "C897",
+   "screen": "mark_kitchen.short",
+   "verdict": "PASS",
+   "line": "Mom's cup stops halfway to her mouth, then keeps going.",
+   "why": "no time on a room; Sunday 08:00-11:55; Laura's weekend row has her in the kitchen 08:00-12:00, so Mom is there at every minute it can show"
+  },
+  {
+   "row": "C897",
+   "screen": "mark_kitchen.talk",
+   "verdict": "PASS",
+   "line": "Your face goes hot. He's already back to his coffee.",
+   "why": "no time on a room; shows only while Mark is in the kitchen (his morning rows); no time, no weekday, nobody else named"
+  },
+  {
+   "row": "C897",
+   "screen": "mark_living_room.talk",
+   "verdict": "PASS",
+   "line": "When you glance back, he's watching you instead of the screen.",
+   "why": "no time on a room; shows only while Mark is in his chair; no time or weekday; Ryan/Laura on the couch aren't contradicted"
+  },
+  {
+   "row": "C897",
+   "screen": "ryan_kitchen.talk",
+   "verdict": "PASS",
+   "line": "There's more in the pan. Don't tell Mark I made it.",
+   "why": "no time on a room; Ryan in the kitchen 18-19 weekdays / 17-19 weekends; Mark is never in the kitchen then, so the line holds"
+  },
+  {
+   "row": "C897",
+   "screen": "ryan_living_room.talk",
+   "verdict": "PASS",
+   "line": "Mark's got the remote. Don't even ask.",
+   "why": "no time on a room; every hour Ryan is on the couch Mark is in his chair (weekdays 16:30-23, Sat 10-19, Sun 12-23)"
+  },
+  {
+   "row": "C897",
+   "screen": "ryan_room.talk",
+   "verdict": "PASS",
+   "line": "Hey, @player.nickname. You need the bathroom or something?",
+   "why": "no time on a room; reached only from the hub inside the 23:00-closed window; nobody's row has the bathroom then except Ryan's own, so 'It's free' holds"
+  },
+  {
+   "row": "C897",
+   "screen": "talk_mom.eat",
+   "verdict": "PASS",
+   "line": "Mom puts a plate of eggs in front of you and sits down with her coffee.",
+   "why": "no time on a room; shows only while Laura is in the kitchen (07-08, 08-12 weekends: eggs window; 17-19: dinner window); presence lines gated by groups; night rows put her in bed"
+  },
+  {
+   "row": "C897",
+   "screen": "talk_mom.talk",
+   "verdict": "PASS",
+   "line": "When he's gone, you tell me everything.",
+   "why": "no time on a room; three versions gated on Mark and Ryan in the kitchen; the night rows change none of them"
+  },
+  {
+   "row": "C900",
+   "screen": "home_dishes.do",
+   "verdict": "PASS",
+   "line": "Mom picks up a towel and dries beside you.",
+   "why": "the beat names no clock time; Laura+Mark, Laura+Ryan, Laura groups read the rows; Laura's night rows are the master bedroom, so at night only the base lines show; no Mark- or Ryan-only kitchen hour exists"
+  },
+  {
+   "row": "C900",
+   "screen": "home_tv.watch",
+   "verdict": "PASS",
+   "line": "let an hour of TV wash over you",
+   "why": "a duration, not the time of day"
+  },
+  {
+   "row": "C900",
+   "screen": "mark_kitchen.pay100",
+   "verdict": "PASS",
+   "line": "He pockets it and goes back to the paper.",
+   "why": "the beat names no clock time; reached only from rent on Sunday with Mark there; $100 after $900 matches PLAN 27"
+  },
+  {
+   "row": "C900",
+   "screen": "mark_kitchen.pay75",
+   "verdict": "PASS",
+   "line": "All there. Same time next Sunday.",
+   "why": "relative, no clock time; behind the Sunday gate"
+  },
+  {
+   "row": "C900",
+   "screen": "mark_kitchen.pay90",
+   "verdict": "PASS",
+   "line": "A hundred from next week.",
+   "why": "the beat names no clock time; reached only from rent on Sunday with Mark there; 810+90=900 matches PLAN 27"
+  },
+  {
+   "row": "C900",
+   "screen": "mark_kitchen.short",
+   "verdict": "PASS",
+   "line": "Mom's cup stops halfway to her mouth, then keeps going.",
+   "why": "the beat names no clock time; Sunday 08:00-11:55; Laura's weekend row has her in the kitchen 08:00-12:00, so Mom is there at every minute it can show"
+  },
+  {
+   "row": "C900",
+   "screen": "mark_kitchen.talk",
+   "verdict": "PASS",
+   "line": "Your face goes hot. He's already back to his coffee.",
+   "why": "the beat names no clock time; shows only while Mark is in the kitchen (his morning rows); no time, no weekday, nobody else named"
+  },
+  {
+   "row": "C900",
+   "screen": "mark_living_room.talk",
+   "verdict": "PASS",
+   "line": "When you glance back, he's watching you instead of the screen.",
+   "why": "the beat names no clock time; shows only while Mark is in his chair; no time or weekday; Ryan/Laura on the couch aren't contradicted"
+  },
+  {
+   "row": "C900",
+   "screen": "ryan_kitchen.talk",
+   "verdict": "PASS",
+   "line": "There's more in the pan. Don't tell Mark I made it.",
+   "why": "the beat names no clock time; Ryan in the kitchen 18-19 weekdays / 17-19 weekends; Mark is never in the kitchen then, so the line holds"
+  },
+  {
+   "row": "C900",
+   "screen": "ryan_living_room.talk",
+   "verdict": "PASS",
+   "line": "Mark's got the remote. Don't even ask.",
+   "why": "the beat names no clock time; every hour Ryan is on the couch Mark is in his chair (weekdays 16:30-23, Sat 10-19, Sun 12-23)"
+  },
+  {
+   "row": "C900",
+   "screen": "ryan_room.talk",
+   "verdict": "PASS",
+   "line": "Hey, @player.nickname. You need the bathroom or something?",
+   "why": "the beat names no clock time; reached only from the hub inside the 23:00-closed window; nobody's row has the bathroom then except Ryan's own, so 'It's free' holds"
+  },
+  {
+   "row": "C900",
+   "screen": "talk_mom.eat",
+   "verdict": "PASS",
+   "line": "Mom puts a plate of eggs in front of you and sits down with her coffee.",
+   "why": "the beat names no clock time; shows only while Laura is in the kitchen (07-08, 08-12 weekends: eggs window; 17-19: dinner window); presence lines gated by groups; night rows put her in bed"
+  },
+  {
+   "row": "C900",
+   "screen": "talk_mom.talk",
+   "verdict": "PASS",
+   "line": "When he's gone, you tell me everything.",
+   "why": "the beat names no clock time; three versions gated on Mark and Ryan in the kitchen; the night rows change none of them"
+  },
+  {
+   "row": "C902",
+   "screen": "home_dishes.do",
+   "verdict": "PASS",
+   "line": "Mom picks up a towel and dries beside you.",
+   "why": "read at the last minute of its window the line still holds; Laura+Mark, Laura+Ryan, Laura groups read the rows; Laura's night rows are the master bedroom, so at night only the base lines show; no Mark- or Ryan-only kitchen hour exists"
+  },
+  {
+   "row": "C902",
+   "screen": "home_tv.watch",
+   "verdict": "PASS",
+   "line": "You curl up at the end of the couch and let an hour of TV wash over you.",
+   "why": "read at the last minute of its window the line still holds; Mark+Ryan, Mark, Ryan groups read the rows; at 23:00-07:00 Mark is in the master bedroom and Ryan in his room, so only the base lines show, and they hold at any hour"
+  },
+  {
+   "row": "C902",
+   "screen": "mark_kitchen.pay100",
+   "verdict": "PASS",
+   "line": "He pockets it and goes back to the paper.",
+   "why": "read at the last minute of its window the line still holds; reached only from rent on Sunday with Mark there; $100 after $900 matches PLAN 27"
+  },
+  {
+   "row": "C902",
+   "screen": "mark_kitchen.pay75",
+   "verdict": "PASS",
+   "line": "All there. Same time next Sunday.",
+   "why": "read at the last minute of its window the line still holds; reached only from rent (Sunday 08:00-11:55, Mark in the kitchen); weekday named behind the Sunday condition; numbers 75/300/90 match PLAN 27"
+  },
+  {
+   "row": "C902",
+   "screen": "mark_kitchen.pay90",
+   "verdict": "PASS",
+   "line": "A hundred from next week.",
+   "why": "read at the last minute of its window the line still holds; reached only from rent on Sunday with Mark there; 810+90=900 matches PLAN 27"
+  },
+  {
+   "row": "C902",
+   "screen": "mark_kitchen.short",
+   "verdict": "PASS",
+   "line": "Mom's cup stops halfway to her mouth, then keeps going.",
+   "why": "read at the last minute of its window the line still holds; Sunday 08:00-11:55; Laura's weekend row has her in the kitchen 08:00-12:00, so Mom is there at every minute it can show"
+  },
+  {
+   "row": "C902",
+   "screen": "mark_kitchen.talk",
+   "verdict": "PASS",
+   "line": "Your face goes hot. He's already back to his coffee.",
+   "why": "read at the last minute of its window the line still holds; shows only while Mark is in the kitchen (his morning rows); no time, no weekday, nobody else named"
+  },
+  {
+   "row": "C902",
+   "screen": "mark_living_room.talk",
+   "verdict": "PASS",
+   "line": "When you glance back, he's watching you instead of the screen.",
+   "why": "read at the last minute of its window the line still holds; shows only while Mark is in his chair; no time or weekday; Ryan/Laura on the couch aren't contradicted"
+  },
+  {
+   "row": "C902",
+   "screen": "ryan_kitchen.talk",
+   "verdict": "PASS",
+   "line": "There's more in the pan. Don't tell Mark I made it.",
+   "why": "read at the last minute of its window the line still holds; Ryan in the kitchen 18-19 weekdays / 17-19 weekends; Mark is never in the kitchen then, so the line holds"
+  },
+  {
+   "row": "C902",
+   "screen": "ryan_living_room.talk",
+   "verdict": "PASS",
+   "line": "Mark's got the remote. Don't even ask.",
+   "why": "read at the last minute of its window the line still holds; every hour Ryan is on the couch Mark is in his chair (weekdays 16:30-23, Sat 10-19, Sun 12-23)"
+  },
+  {
+   "row": "C902",
+   "screen": "ryan_room.talk",
+   "verdict": "PASS",
+   "line": "Hey, @player.nickname. You need the bathroom or something?",
+   "why": "read at the last minute of its window the line still holds; reached only from the hub inside the 23:00-closed window; nobody's row has the bathroom then except Ryan's own, so 'It's free' holds"
+  },
+  {
+   "row": "C902",
+   "screen": "talk_mom.eat",
+   "verdict": "PASS",
+   "line": "Mom puts a plate of eggs in front of you and sits down with her coffee.",
+   "why": "read at the last minute of its window the line still holds; shows only while Laura is in the kitchen (07-08, 08-12 weekends: eggs window; 17-19: dinner window); presence lines gated by groups; night rows put her in bed"
+  },
+  {
+   "row": "C902",
+   "screen": "talk_mom.talk",
+   "verdict": "PASS",
+   "line": "When he's gone, you tell me everything.",
+   "why": "read at the last minute of its window the line still holds; three versions gated on Mark and Ryan in the kitchen; the night rows change none of them"
+  },
+  {
+   "row": "C903",
+   "screen": "home_dishes.do",
+   "verdict": "PASS",
+   "line": "Mom picks up a towel and dries beside you.",
+   "why": "no weekday named, or named only behind a Sunday condition; Laura+Mark, Laura+Ryan, Laura groups read the rows; Laura's night rows are the master bedroom, so at night only the base lines show; no Mark- or Ryan-only kitchen hour exists"
+  },
+  {
+   "row": "C903",
+   "screen": "home_tv.watch",
+   "verdict": "PASS",
+   "line": "You curl up at the end of the couch and let an hour of TV wash over you.",
+   "why": "no weekday named, or named only behind a Sunday condition; Mark+Ryan, Mark, Ryan groups read the rows; at 23:00-07:00 Mark is in the master bedroom and Ryan in his room, so only the base lines show, and they hold at any hour"
+  },
+  {
+   "row": "C903",
+   "screen": "mark_kitchen.pay100",
+   "verdict": "PASS",
+   "line": "Same time next Sunday.",
+   "why": "Sunday named only behind the weekday=[6] condition"
+  },
+  {
+   "row": "C903",
+   "screen": "mark_kitchen.pay75",
+   "verdict": "PASS",
+   "line": "Same time next Sunday.",
+   "why": "Sunday named only on a screen reached through the weekday=[6] condition"
+  },
+  {
+   "row": "C903",
+   "screen": "mark_kitchen.pay90",
+   "verdict": "PASS",
+   "line": "Same time next Sunday.",
+   "why": "Sunday named only behind the weekday=[6] condition"
+  },
+  {
+   "row": "C903",
+   "screen": "mark_kitchen.short",
+   "verdict": "PASS",
+   "line": "Short. Next Sunday, then.",
+   "why": "Sunday named only behind the weekday=[6] condition"
+  },
+  {
+   "row": "C903",
+   "screen": "mark_kitchen.talk",
+   "verdict": "PASS",
+   "line": "Your face goes hot. He's already back to his coffee.",
+   "why": "no weekday named, or named only behind a Sunday condition; shows only while Mark is in the kitchen (his morning rows); no time, no weekday, nobody else named"
+  },
+  {
+   "row": "C903",
+   "screen": "mark_living_room.talk",
+   "verdict": "PASS",
+   "line": "When you glance back, he's watching you instead of the screen.",
+   "why": "no weekday named, or named only behind a Sunday condition; shows only while Mark is in his chair; no time or weekday; Ryan/Laura on the couch aren't contradicted"
+  },
+  {
+   "row": "C903",
+   "screen": "ryan_kitchen.talk",
+   "verdict": "PASS",
+   "line": "There's more in the pan. Don't tell Mark I made it.",
+   "why": "no weekday named, or named only behind a Sunday condition; Ryan in the kitchen 18-19 weekdays / 17-19 weekends; Mark is never in the kitchen then, so the line holds"
+  },
+  {
+   "row": "C903",
+   "screen": "ryan_living_room.talk",
+   "verdict": "PASS",
+   "line": "Mark's got the remote. Don't even ask.",
+   "why": "no weekday named, or named only behind a Sunday condition; every hour Ryan is on the couch Mark is in his chair (weekdays 16:30-23, Sat 10-19, Sun 12-23)"
+  },
+  {
+   "row": "C903",
+   "screen": "ryan_room.talk",
+   "verdict": "PASS",
+   "line": "Hey, @player.nickname. You need the bathroom or something?",
+   "why": "no weekday named, or named only behind a Sunday condition; reached only from the hub inside the 23:00-closed window; nobody's row has the bathroom then except Ryan's own, so 'It's free' holds"
+  },
+  {
+   "row": "C903",
+   "screen": "talk_mom.eat",
+   "verdict": "PASS",
+   "line": "Mom puts a plate of eggs in front of you and sits down with her coffee.",
+   "why": "no weekday named, or named only behind a Sunday condition; shows only while Laura is in the kitchen (07-08, 08-12 weekends: eggs window; 17-19: dinner window); presence lines gated by groups; night rows put her in bed"
+  },
+  {
+   "row": "C903",
+   "screen": "talk_mom.talk",
+   "verdict": "PASS",
+   "line": "When he's gone, you tell me everything.",
+   "why": "no weekday named, or named only behind a Sunday condition; three versions gated on Mark and Ryan in the kitchen; the night rows change none of them"
+  },
+  {
+   "row": "C906",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "Talk \u00b7 Eat with her \u00b7 Watch TV \u00b7 Do the dishes \u00b7 Leave \u00b7 Done",
+   "why": "no 'till' promise on a label"
+  },
+  {
+   "row": "C906",
+   "screen": "home_dishes.do",
+   "verdict": "PASS",
+   "line": "Mom picks up a towel and dries beside you.",
+   "why": "no 'till' promise on a label; Laura+Mark, Laura+Ryan, Laura groups read the rows; Laura's night rows are the master bedroom, so at night only the base lines show; no Mark- or Ryan-only kitchen hour exists"
+  },
+  {
+   "row": "C906",
+   "screen": "home_tv.watch",
+   "verdict": "PASS",
+   "line": "You curl up at the end of the couch and let an hour of TV wash over you.",
+   "why": "no 'till' promise on a label; Mark+Ryan, Mark, Ryan groups read the rows; at 23:00-07:00 Mark is in the master bedroom and Ryan in his room, so only the base lines show, and they hold at any hour"
+  },
+  {
+   "row": "C906",
+   "screen": "mark_kitchen.pay100",
+   "verdict": "PASS",
+   "line": "He pockets it and goes back to the paper.",
+   "why": "no 'till' promise on a label; reached only from rent on Sunday with Mark there; $100 after $900 matches PLAN 27"
+  },
+  {
+   "row": "C906",
+   "screen": "mark_kitchen.pay75",
+   "verdict": "PASS",
+   "line": "All there. Same time next Sunday.",
+   "why": "no 'till' promise on a label; reached only from rent (Sunday 08:00-11:55, Mark in the kitchen); weekday named behind the Sunday condition; numbers 75/300/90 match PLAN 27"
+  },
+  {
+   "row": "C906",
+   "screen": "mark_kitchen.pay90",
+   "verdict": "PASS",
+   "line": "A hundred from next week.",
+   "why": "no 'till' promise on a label; reached only from rent on Sunday with Mark there; 810+90=900 matches PLAN 27"
+  },
+  {
+   "row": "C906",
+   "screen": "mark_kitchen.short",
+   "verdict": "PASS",
+   "line": "Mom's cup stops halfway to her mouth, then keeps going.",
+   "why": "no 'till' promise on a label; Sunday 08:00-11:55; Laura's weekend row has her in the kitchen 08:00-12:00, so Mom is there at every minute it can show"
+  },
+  {
+   "row": "C906",
+   "screen": "mark_kitchen.talk",
+   "verdict": "PASS",
+   "line": "Your face goes hot. He's already back to his coffee.",
+   "why": "no 'till' promise on a label; shows only while Mark is in the kitchen (his morning rows); no time, no weekday, nobody else named"
+  },
+  {
+   "row": "C906",
+   "screen": "mark_living_room.talk",
+   "verdict": "PASS",
+   "line": "When you glance back, he's watching you instead of the screen.",
+   "why": "no 'till' promise on a label; shows only while Mark is in his chair; no time or weekday; Ryan/Laura on the couch aren't contradicted"
+  },
+  {
+   "row": "C906",
+   "screen": "ryan_kitchen.talk",
+   "verdict": "PASS",
+   "line": "There's more in the pan. Don't tell Mark I made it.",
+   "why": "no 'till' promise on a label; Ryan in the kitchen 18-19 weekdays / 17-19 weekends; Mark is never in the kitchen then, so the line holds"
+  },
+  {
+   "row": "C906",
+   "screen": "ryan_living_room.talk",
+   "verdict": "PASS",
+   "line": "Mark's got the remote. Don't even ask.",
+   "why": "no 'till' promise on a label; every hour Ryan is on the couch Mark is in his chair (weekdays 16:30-23, Sat 10-19, Sun 12-23)"
+  },
+  {
+   "row": "C906",
+   "screen": "ryan_room.talk",
+   "verdict": "PASS",
+   "line": "Hey, @player.nickname. You need the bathroom or something?",
+   "why": "no 'till' promise on a label; reached only from the hub inside the 23:00-closed window; nobody's row has the bathroom then except Ryan's own, so 'It's free' holds"
+  },
+  {
+   "row": "C906",
+   "screen": "talk_mom.eat",
+   "verdict": "PASS",
+   "line": "Mom puts a plate of eggs in front of you and sits down with her coffee.",
+   "why": "no 'till' promise on a label; shows only while Laura is in the kitchen (07-08, 08-12 weekends: eggs window; 17-19: dinner window); presence lines gated by groups; night rows put her in bed"
+  },
+  {
+   "row": "C906",
+   "screen": "talk_mom.talk",
+   "verdict": "PASS",
+   "line": "When he's gone, you tell me everything.",
+   "why": "no 'till' promise on a label; three versions gated on Mark and Ryan in the kitchen; the night rows change none of them"
+  },
+  {
+   "row": "C910",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "Talk \u00b7 Eat with her \u00b7 Watch TV \u00b7 Do the dishes \u00b7 Leave \u00b7 Done",
+   "why": "buttons and replies state no time or energy"
+  },
+  {
+   "row": "C910",
+   "screen": "home_dishes.do",
+   "verdict": "PASS",
+   "line": "Mom picks up a towel and dries beside you.",
+   "why": "buttons and replies state no time or energy; Laura+Mark, Laura+Ryan, Laura groups read the rows; Laura's night rows are the master bedroom, so at night only the base lines show; no Mark- or Ryan-only kitchen hour exists"
+  },
+  {
+   "row": "C910",
+   "screen": "home_tv.watch",
+   "verdict": "PASS",
+   "line": "You curl up at the end of the couch and let an hour of TV wash over you.",
+   "why": "buttons and replies state no time or energy; Mark+Ryan, Mark, Ryan groups read the rows; at 23:00-07:00 Mark is in the master bedroom and Ryan in his room, so only the base lines show, and they hold at any hour"
+  },
+  {
+   "row": "C910",
+   "screen": "mark_kitchen.pay100",
+   "verdict": "PASS",
+   "line": "He pockets it and goes back to the paper.",
+   "why": "buttons and replies state no time or energy; reached only from rent on Sunday with Mark there; $100 after $900 matches PLAN 27"
+  },
+  {
+   "row": "C910",
+   "screen": "mark_kitchen.pay75",
+   "verdict": "PASS",
+   "line": "All there. Same time next Sunday.",
+   "why": "buttons and replies state no time or energy; reached only from rent (Sunday 08:00-11:55, Mark in the kitchen); weekday named behind the Sunday condition; numbers 75/300/90 match PLAN 27"
+  },
+  {
+   "row": "C910",
+   "screen": "mark_kitchen.pay90",
+   "verdict": "PASS",
+   "line": "A hundred from next week.",
+   "why": "buttons and replies state no time or energy; reached only from rent on Sunday with Mark there; 810+90=900 matches PLAN 27"
+  },
+  {
+   "row": "C910",
+   "screen": "mark_kitchen.short",
+   "verdict": "PASS",
+   "line": "Mom's cup stops halfway to her mouth, then keeps going.",
+   "why": "buttons and replies state no time or energy; Sunday 08:00-11:55; Laura's weekend row has her in the kitchen 08:00-12:00, so Mom is there at every minute it can show"
+  },
+  {
+   "row": "C910",
+   "screen": "mark_kitchen.talk",
+   "verdict": "PASS",
+   "line": "Your face goes hot. He's already back to his coffee.",
+   "why": "buttons and replies state no time or energy; shows only while Mark is in the kitchen (his morning rows); no time, no weekday, nobody else named"
+  },
+  {
+   "row": "C910",
+   "screen": "mark_living_room.talk",
+   "verdict": "PASS",
+   "line": "When you glance back, he's watching you instead of the screen.",
+   "why": "buttons and replies state no time or energy; shows only while Mark is in his chair; no time or weekday; Ryan/Laura on the couch aren't contradicted"
+  },
+  {
+   "row": "C910",
+   "screen": "ryan_kitchen.talk",
+   "verdict": "PASS",
+   "line": "There's more in the pan. Don't tell Mark I made it.",
+   "why": "buttons and replies state no time or energy; Ryan in the kitchen 18-19 weekdays / 17-19 weekends; Mark is never in the kitchen then, so the line holds"
+  },
+  {
+   "row": "C910",
+   "screen": "ryan_living_room.talk",
+   "verdict": "PASS",
+   "line": "Mark's got the remote. Don't even ask.",
+   "why": "buttons and replies state no time or energy; every hour Ryan is on the couch Mark is in his chair (weekdays 16:30-23, Sat 10-19, Sun 12-23)"
+  },
+  {
+   "row": "C910",
+   "screen": "ryan_room.talk",
+   "verdict": "PASS",
+   "line": "Hey, @player.nickname. You need the bathroom or something?",
+   "why": "buttons and replies state no time or energy; reached only from the hub inside the 23:00-closed window; nobody's row has the bathroom then except Ryan's own, so 'It's free' holds"
+  },
+  {
+   "row": "C910",
+   "screen": "talk_mom.eat",
+   "verdict": "PASS",
+   "line": "Mom puts a plate of eggs in front of you and sits down with her coffee.",
+   "why": "buttons and replies state no time or energy; shows only while Laura is in the kitchen (07-08, 08-12 weekends: eggs window; 17-19: dinner window); presence lines gated by groups; night rows put her in bed"
+  },
+  {
+   "row": "C910",
+   "screen": "talk_mom.talk",
+   "verdict": "PASS",
+   "line": "When he's gone, you tell me everything.",
+   "why": "buttons and replies state no time or energy; three versions gated on Mark and Ryan in the kitchen; the night rows change none of them"
+  },
+  {
+   "row": "C913",
+   "screen": "home_dishes.do",
+   "verdict": "PASS",
+   "line": "Mom picks up a towel and dries beside you.",
+   "why": "nothing on this screen is a shut activity with hours; Laura+Mark, Laura+Ryan, Laura groups read the rows; Laura's night rows are the master bedroom, so at night only the base lines show; no Mark- or Ryan-only kitchen hour exists"
+  },
+  {
+   "row": "C913",
+   "screen": "home_tv.watch",
+   "verdict": "PASS",
+   "line": "You curl up at the end of the couch and let an hour of TV wash over you.",
+   "why": "nothing on this screen is a shut activity with hours; Mark+Ryan, Mark, Ryan groups read the rows; at 23:00-07:00 Mark is in the master bedroom and Ryan in his room, so only the base lines show, and they hold at any hour"
+  },
+  {
+   "row": "C913",
+   "screen": "mark_kitchen.pay100",
+   "verdict": "PASS",
+   "line": "He pockets it and goes back to the paper.",
+   "why": "nothing on this screen is a shut activity with hours; reached only from rent on Sunday with Mark there; $100 after $900 matches PLAN 27"
+  },
+  {
+   "row": "C913",
+   "screen": "mark_kitchen.pay75",
+   "verdict": "PASS",
+   "line": "All there. Same time next Sunday.",
+   "why": "nothing on this screen is a shut activity with hours; reached only from rent (Sunday 08:00-11:55, Mark in the kitchen); weekday named behind the Sunday condition; numbers 75/300/90 match PLAN 27"
+  },
+  {
+   "row": "C913",
+   "screen": "mark_kitchen.pay90",
+   "verdict": "PASS",
+   "line": "A hundred from next week.",
+   "why": "nothing on this screen is a shut activity with hours; reached only from rent on Sunday with Mark there; 810+90=900 matches PLAN 27"
+  },
+  {
+   "row": "C913",
+   "screen": "mark_kitchen.short",
+   "verdict": "PASS",
+   "line": "Mom's cup stops halfway to her mouth, then keeps going.",
+   "why": "nothing on this screen is a shut activity with hours; Sunday 08:00-11:55; Laura's weekend row has her in the kitchen 08:00-12:00, so Mom is there at every minute it can show"
+  },
+  {
+   "row": "C913",
+   "screen": "mark_kitchen.talk",
+   "verdict": "PASS",
+   "line": "Your face goes hot. He's already back to his coffee.",
+   "why": "nothing on this screen is a shut activity with hours; shows only while Mark is in the kitchen (his morning rows); no time, no weekday, nobody else named"
+  },
+  {
+   "row": "C913",
+   "screen": "mark_living_room.talk",
+   "verdict": "PASS",
+   "line": "When you glance back, he's watching you instead of the screen.",
+   "why": "nothing on this screen is a shut activity with hours; shows only while Mark is in his chair; no time or weekday; Ryan/Laura on the couch aren't contradicted"
+  },
+  {
+   "row": "C913",
+   "screen": "ryan_kitchen.talk",
+   "verdict": "PASS",
+   "line": "There's more in the pan. Don't tell Mark I made it.",
+   "why": "nothing on this screen is a shut activity with hours; Ryan in the kitchen 18-19 weekdays / 17-19 weekends; Mark is never in the kitchen then, so the line holds"
+  },
+  {
+   "row": "C913",
+   "screen": "ryan_living_room.talk",
+   "verdict": "PASS",
+   "line": "Mark's got the remote. Don't even ask.",
+   "why": "nothing on this screen is a shut activity with hours; every hour Ryan is on the couch Mark is in his chair (weekdays 16:30-23, Sat 10-19, Sun 12-23)"
+  },
+  {
+   "row": "C913",
+   "screen": "ryan_room.talk",
+   "verdict": "PASS",
+   "line": "Hey, @player.nickname. You need the bathroom or something?",
+   "why": "nothing on this screen is a shut activity with hours; reached only from the hub inside the 23:00-closed window; nobody's row has the bathroom then except Ryan's own, so 'It's free' holds"
+  },
+  {
+   "row": "C913",
+   "screen": "talk_mom.eat",
+   "verdict": "PASS",
+   "line": "Mom puts a plate of eggs in front of you and sits down with her coffee.",
+   "why": "nothing on this screen is a shut activity with hours; shows only while Laura is in the kitchen (07-08, 08-12 weekends: eggs window; 17-19: dinner window); presence lines gated by groups; night rows put her in bed"
+  },
+  {
+   "row": "C913",
+   "screen": "talk_mom.talk",
+   "verdict": "PASS",
+   "line": "When he's gone, you tell me everything.",
+   "why": "nothing on this screen is a shut activity with hours; three versions gated on Mark and Ryan in the kitchen; the night rows change none of them"
+  },
+  {
+   "row": "C914",
+   "screen": "home_dishes.do",
+   "verdict": "PASS",
+   "line": "Mom picks up a towel and dries beside you.",
+   "why": "no hours shown here; Laura+Mark, Laura+Ryan, Laura groups read the rows; Laura's night rows are the master bedroom, so at night only the base lines show; no Mark- or Ryan-only kitchen hour exists"
+  },
+  {
+   "row": "C914",
+   "screen": "home_tv.watch",
+   "verdict": "PASS",
+   "line": "You curl up at the end of the couch and let an hour of TV wash over you.",
+   "why": "no hours shown here; Mark+Ryan, Mark, Ryan groups read the rows; at 23:00-07:00 Mark is in the master bedroom and Ryan in his room, so only the base lines show, and they hold at any hour"
+  },
+  {
+   "row": "C914",
+   "screen": "mark_kitchen.pay100",
+   "verdict": "PASS",
+   "line": "He pockets it and goes back to the paper.",
+   "why": "no hours shown here; reached only from rent on Sunday with Mark there; $100 after $900 matches PLAN 27"
+  },
+  {
+   "row": "C914",
+   "screen": "mark_kitchen.pay75",
+   "verdict": "PASS",
+   "line": "All there. Same time next Sunday.",
+   "why": "no hours shown here; reached only from rent (Sunday 08:00-11:55, Mark in the kitchen); weekday named behind the Sunday condition; numbers 75/300/90 match PLAN 27"
+  },
+  {
+   "row": "C914",
+   "screen": "mark_kitchen.pay90",
+   "verdict": "PASS",
+   "line": "A hundred from next week.",
+   "why": "no hours shown here; reached only from rent on Sunday with Mark there; 810+90=900 matches PLAN 27"
+  },
+  {
+   "row": "C914",
+   "screen": "mark_kitchen.short",
+   "verdict": "PASS",
+   "line": "Mom's cup stops halfway to her mouth, then keeps going.",
+   "why": "no hours shown here; Sunday 08:00-11:55; Laura's weekend row has her in the kitchen 08:00-12:00, so Mom is there at every minute it can show"
+  },
+  {
+   "row": "C914",
+   "screen": "mark_kitchen.talk",
+   "verdict": "PASS",
+   "line": "Your face goes hot. He's already back to his coffee.",
+   "why": "no hours shown here; shows only while Mark is in the kitchen (his morning rows); no time, no weekday, nobody else named"
+  },
+  {
+   "row": "C914",
+   "screen": "mark_living_room.talk",
+   "verdict": "PASS",
+   "line": "When you glance back, he's watching you instead of the screen.",
+   "why": "no hours shown here; shows only while Mark is in his chair; no time or weekday; Ryan/Laura on the couch aren't contradicted"
+  },
+  {
+   "row": "C914",
+   "screen": "ryan_kitchen.talk",
+   "verdict": "PASS",
+   "line": "There's more in the pan. Don't tell Mark I made it.",
+   "why": "no hours shown here; Ryan in the kitchen 18-19 weekdays / 17-19 weekends; Mark is never in the kitchen then, so the line holds"
+  },
+  {
+   "row": "C914",
+   "screen": "ryan_living_room.talk",
+   "verdict": "PASS",
+   "line": "Mark's got the remote. Don't even ask.",
+   "why": "no hours shown here; every hour Ryan is on the couch Mark is in his chair (weekdays 16:30-23, Sat 10-19, Sun 12-23)"
+  },
+  {
+   "row": "C914",
+   "screen": "ryan_room.talk",
+   "verdict": "PASS",
+   "line": "Hey, @player.nickname. You need the bathroom or something?",
+   "why": "no hours shown here; reached only from the hub inside the 23:00-closed window; nobody's row has the bathroom then except Ryan's own, so 'It's free' holds"
+  },
+  {
+   "row": "C914",
+   "screen": "talk_mom.eat",
+   "verdict": "PASS",
+   "line": "Mom puts a plate of eggs in front of you and sits down with her coffee.",
+   "why": "no hours shown here; shows only while Laura is in the kitchen (07-08, 08-12 weekends: eggs window; 17-19: dinner window); presence lines gated by groups; night rows put her in bed"
+  },
+  {
+   "row": "C914",
+   "screen": "talk_mom.talk",
+   "verdict": "PASS",
+   "line": "When he's gone, you tell me everything.",
+   "why": "no hours shown here; three versions gated on Mark and Ryan in the kitchen; the night rows change none of them"
+  },
+  {
+   "row": "C916",
+   "screen": "home_dishes.do",
+   "verdict": "PASS",
+   "line": "Mom picks up a towel and dries beside you.",
+   "why": "no shut event here; Laura+Mark, Laura+Ryan, Laura groups read the rows; Laura's night rows are the master bedroom, so at night only the base lines show; no Mark- or Ryan-only kitchen hour exists"
+  },
+  {
+   "row": "C916",
+   "screen": "home_tv.watch",
+   "verdict": "PASS",
+   "line": "You curl up at the end of the couch and let an hour of TV wash over you.",
+   "why": "no shut event here; Mark+Ryan, Mark, Ryan groups read the rows; at 23:00-07:00 Mark is in the master bedroom and Ryan in his room, so only the base lines show, and they hold at any hour"
+  },
+  {
+   "row": "C916",
+   "screen": "mark_kitchen.pay100",
+   "verdict": "PASS",
+   "line": "He pockets it and goes back to the paper.",
+   "why": "no shut event here; reached only from rent on Sunday with Mark there; $100 after $900 matches PLAN 27"
+  },
+  {
+   "row": "C916",
+   "screen": "mark_kitchen.pay75",
+   "verdict": "PASS",
+   "line": "All there. Same time next Sunday.",
+   "why": "no shut event here; reached only from rent (Sunday 08:00-11:55, Mark in the kitchen); weekday named behind the Sunday condition; numbers 75/300/90 match PLAN 27"
+  },
+  {
+   "row": "C916",
+   "screen": "mark_kitchen.pay90",
+   "verdict": "PASS",
+   "line": "A hundred from next week.",
+   "why": "no shut event here; reached only from rent on Sunday with Mark there; 810+90=900 matches PLAN 27"
+  },
+  {
+   "row": "C916",
+   "screen": "mark_kitchen.short",
+   "verdict": "PASS",
+   "line": "Mom's cup stops halfway to her mouth, then keeps going.",
+   "why": "no shut event here; Sunday 08:00-11:55; Laura's weekend row has her in the kitchen 08:00-12:00, so Mom is there at every minute it can show"
+  },
+  {
+   "row": "C916",
+   "screen": "mark_kitchen.talk",
+   "verdict": "PASS",
+   "line": "Your face goes hot. He's already back to his coffee.",
+   "why": "no shut event here; shows only while Mark is in the kitchen (his morning rows); no time, no weekday, nobody else named"
+  },
+  {
+   "row": "C916",
+   "screen": "mark_living_room.talk",
+   "verdict": "PASS",
+   "line": "When you glance back, he's watching you instead of the screen.",
+   "why": "no shut event here; shows only while Mark is in his chair; no time or weekday; Ryan/Laura on the couch aren't contradicted"
+  },
+  {
+   "row": "C916",
+   "screen": "ryan_kitchen.talk",
+   "verdict": "PASS",
+   "line": "There's more in the pan. Don't tell Mark I made it.",
+   "why": "no shut event here; Ryan in the kitchen 18-19 weekdays / 17-19 weekends; Mark is never in the kitchen then, so the line holds"
+  },
+  {
+   "row": "C916",
+   "screen": "ryan_living_room.talk",
+   "verdict": "PASS",
+   "line": "Mark's got the remote. Don't even ask.",
+   "why": "no shut event here; every hour Ryan is on the couch Mark is in his chair (weekdays 16:30-23, Sat 10-19, Sun 12-23)"
+  },
+  {
+   "row": "C916",
+   "screen": "ryan_room.talk",
+   "verdict": "PASS",
+   "line": "Hey, @player.nickname. You need the bathroom or something?",
+   "why": "no shut event here; reached only from the hub inside the 23:00-closed window; nobody's row has the bathroom then except Ryan's own, so 'It's free' holds"
+  },
+  {
+   "row": "C916",
+   "screen": "talk_mom.eat",
+   "verdict": "PASS",
+   "line": "Mom puts a plate of eggs in front of you and sits down with her coffee.",
+   "why": "no shut event here; shows only while Laura is in the kitchen (07-08, 08-12 weekends: eggs window; 17-19: dinner window); presence lines gated by groups; night rows put her in bed"
+  },
+  {
+   "row": "C916",
+   "screen": "talk_mom.talk",
+   "verdict": "PASS",
+   "line": "When he's gone, you tell me everything.",
+   "why": "no shut event here; three versions gated on Mark and Ryan in the kitchen; the night rows change none of them"
+  },
+  {
+   "row": "C920",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "Talk \u00b7 Eat with her \u00b7 Watch TV \u00b7 Do the dishes \u00b7 Leave \u00b7 Done",
+   "why": "Leave is 0 minutes; Done's minutes are the activity's own, not a hop"
+  },
+  {
+   "row": "C920",
+   "screen": "home_dishes.do",
+   "verdict": "PASS",
+   "line": "Mom picks up a towel and dries beside you.",
+   "why": "Leave is 0 minutes; Done's minutes are the activity's own, not a hop; Laura+Mark, Laura+Ryan, Laura groups read the rows; Laura's night rows are the master bedroom, so at night only the base lines show; no Mark- or Ryan-only kitchen hour exists"
+  },
+  {
+   "row": "C920",
+   "screen": "home_tv.watch",
+   "verdict": "PASS",
+   "line": "You curl up at the end of the couch and let an hour of TV wash over you.",
+   "why": "Leave is 0 minutes; Done's minutes are the activity's own, not a hop; Mark+Ryan, Mark, Ryan groups read the rows; at 23:00-07:00 Mark is in the master bedroom and Ryan in his room, so only the base lines show, and they hold at any hour"
+  },
+  {
+   "row": "C920",
+   "screen": "mark_kitchen.pay100",
+   "verdict": "PASS",
+   "line": "He pockets it and goes back to the paper.",
+   "why": "Leave is 0 minutes; Done's minutes are the activity's own, not a hop; reached only from rent on Sunday with Mark there; $100 after $900 matches PLAN 27"
+  },
+  {
+   "row": "C920",
+   "screen": "mark_kitchen.pay75",
+   "verdict": "PASS",
+   "line": "All there. Same time next Sunday.",
+   "why": "Leave is 0 minutes; Done's minutes are the activity's own, not a hop; reached only from rent (Sunday 08:00-11:55, Mark in the kitchen); weekday named behind the Sunday condition; numbers 75/300/90 match PLAN 27"
+  },
+  {
+   "row": "C920",
+   "screen": "mark_kitchen.pay90",
+   "verdict": "PASS",
+   "line": "A hundred from next week.",
+   "why": "Leave is 0 minutes; Done's minutes are the activity's own, not a hop; reached only from rent on Sunday with Mark there; 810+90=900 matches PLAN 27"
+  },
+  {
+   "row": "C920",
+   "screen": "mark_kitchen.short",
+   "verdict": "PASS",
+   "line": "Mom's cup stops halfway to her mouth, then keeps going.",
+   "why": "Leave is 0 minutes; Done's minutes are the activity's own, not a hop; Sunday 08:00-11:55; Laura's weekend row has her in the kitchen 08:00-12:00, so Mom is there at every minute it can show"
+  },
+  {
+   "row": "C920",
+   "screen": "mark_kitchen.talk",
+   "verdict": "PASS",
+   "line": "Your face goes hot. He's already back to his coffee.",
+   "why": "Leave is 0 minutes; Done's minutes are the activity's own, not a hop; shows only while Mark is in the kitchen (his morning rows); no time, no weekday, nobody else named"
+  },
+  {
+   "row": "C920",
+   "screen": "mark_living_room.talk",
+   "verdict": "PASS",
+   "line": "When you glance back, he's watching you instead of the screen.",
+   "why": "Leave is 0 minutes; Done's minutes are the activity's own, not a hop; shows only while Mark is in his chair; no time or weekday; Ryan/Laura on the couch aren't contradicted"
+  },
+  {
+   "row": "C920",
+   "screen": "ryan_kitchen.talk",
+   "verdict": "PASS",
+   "line": "There's more in the pan. Don't tell Mark I made it.",
+   "why": "Leave is 0 minutes; Done's minutes are the activity's own, not a hop; Ryan in the kitchen 18-19 weekdays / 17-19 weekends; Mark is never in the kitchen then, so the line holds"
+  },
+  {
+   "row": "C920",
+   "screen": "ryan_living_room.talk",
+   "verdict": "PASS",
+   "line": "Mark's got the remote. Don't even ask.",
+   "why": "Leave is 0 minutes; Done's minutes are the activity's own, not a hop; every hour Ryan is on the couch Mark is in his chair (weekdays 16:30-23, Sat 10-19, Sun 12-23)"
+  },
+  {
+   "row": "C920",
+   "screen": "ryan_room.talk",
+   "verdict": "PASS",
+   "line": "Hey, @player.nickname. You need the bathroom or something?",
+   "why": "Leave is 0 minutes; Done's minutes are the activity's own, not a hop; reached only from the hub inside the 23:00-closed window; nobody's row has the bathroom then except Ryan's own, so 'It's free' holds"
+  },
+  {
+   "row": "C920",
+   "screen": "talk_mom.eat",
+   "verdict": "PASS",
+   "line": "Mom puts a plate of eggs in front of you and sits down with her coffee.",
+   "why": "Leave is 0 minutes; Done's minutes are the activity's own, not a hop; shows only while Laura is in the kitchen (07-08, 08-12 weekends: eggs window; 17-19: dinner window); presence lines gated by groups; night rows put her in bed"
+  },
+  {
+   "row": "C920",
+   "screen": "talk_mom.talk",
+   "verdict": "PASS",
+   "line": "When he's gone, you tell me everything.",
+   "why": "Leave is 0 minutes; Done's minutes are the activity's own, not a hop; three versions gated on Mark and Ryan in the kitchen; the night rows change none of them"
+  },
+  {
+   "row": "C924",
+   "screen": "home_dishes.do",
+   "verdict": "PASS",
+   "line": "Mom picks up a towel and dries beside you.",
+   "why": "no travel on this screen; Laura+Mark, Laura+Ryan, Laura groups read the rows; Laura's night rows are the master bedroom, so at night only the base lines show; no Mark- or Ryan-only kitchen hour exists"
+  },
+  {
+   "row": "C924",
+   "screen": "home_tv.watch",
+   "verdict": "PASS",
+   "line": "You curl up at the end of the couch and let an hour of TV wash over you.",
+   "why": "no travel on this screen; Mark+Ryan, Mark, Ryan groups read the rows; at 23:00-07:00 Mark is in the master bedroom and Ryan in his room, so only the base lines show, and they hold at any hour"
+  },
+  {
+   "row": "C924",
+   "screen": "mark_kitchen.pay100",
+   "verdict": "PASS",
+   "line": "He pockets it and goes back to the paper.",
+   "why": "no travel on this screen; reached only from rent on Sunday with Mark there; $100 after $900 matches PLAN 27"
+  },
+  {
+   "row": "C924",
+   "screen": "mark_kitchen.pay75",
+   "verdict": "PASS",
+   "line": "All there. Same time next Sunday.",
+   "why": "no travel on this screen; reached only from rent (Sunday 08:00-11:55, Mark in the kitchen); weekday named behind the Sunday condition; numbers 75/300/90 match PLAN 27"
+  },
+  {
+   "row": "C924",
+   "screen": "mark_kitchen.pay90",
+   "verdict": "PASS",
+   "line": "A hundred from next week.",
+   "why": "no travel on this screen; reached only from rent on Sunday with Mark there; 810+90=900 matches PLAN 27"
+  },
+  {
+   "row": "C924",
+   "screen": "mark_kitchen.short",
+   "verdict": "PASS",
+   "line": "Mom's cup stops halfway to her mouth, then keeps going.",
+   "why": "no travel on this screen; Sunday 08:00-11:55; Laura's weekend row has her in the kitchen 08:00-12:00, so Mom is there at every minute it can show"
+  },
+  {
+   "row": "C924",
+   "screen": "mark_kitchen.talk",
+   "verdict": "PASS",
+   "line": "Your face goes hot. He's already back to his coffee.",
+   "why": "no travel on this screen; shows only while Mark is in the kitchen (his morning rows); no time, no weekday, nobody else named"
+  },
+  {
+   "row": "C924",
+   "screen": "mark_living_room.talk",
+   "verdict": "PASS",
+   "line": "When you glance back, he's watching you instead of the screen.",
+   "why": "no travel on this screen; shows only while Mark is in his chair; no time or weekday; Ryan/Laura on the couch aren't contradicted"
+  },
+  {
+   "row": "C924",
+   "screen": "ryan_kitchen.talk",
+   "verdict": "PASS",
+   "line": "There's more in the pan. Don't tell Mark I made it.",
+   "why": "no travel on this screen; Ryan in the kitchen 18-19 weekdays / 17-19 weekends; Mark is never in the kitchen then, so the line holds"
+  },
+  {
+   "row": "C924",
+   "screen": "ryan_living_room.talk",
+   "verdict": "PASS",
+   "line": "Mark's got the remote. Don't even ask.",
+   "why": "no travel on this screen; every hour Ryan is on the couch Mark is in his chair (weekdays 16:30-23, Sat 10-19, Sun 12-23)"
+  },
+  {
+   "row": "C924",
+   "screen": "ryan_room.talk",
+   "verdict": "PASS",
+   "line": "Hey, @player.nickname. You need the bathroom or something?",
+   "why": "no travel on this screen; reached only from the hub inside the 23:00-closed window; nobody's row has the bathroom then except Ryan's own, so 'It's free' holds"
+  },
+  {
+   "row": "C924",
+   "screen": "talk_mom.eat",
+   "verdict": "PASS",
+   "line": "Mom puts a plate of eggs in front of you and sits down with her coffee.",
+   "why": "no travel on this screen; shows only while Laura is in the kitchen (07-08, 08-12 weekends: eggs window; 17-19: dinner window); presence lines gated by groups; night rows put her in bed"
+  },
+  {
+   "row": "C924",
+   "screen": "talk_mom.talk",
+   "verdict": "PASS",
+   "line": "When he's gone, you tell me everything.",
+   "why": "no travel on this screen; three versions gated on Mark and Ryan in the kitchen; the night rows change none of them"
+  },
+  {
+   "row": "C926",
+   "screen": "home_dishes.do",
+   "verdict": "PASS",
+   "line": "Mom picks up a towel and dries beside you.",
+   "why": "the clock moves only by minutes; Laura+Mark, Laura+Ryan, Laura groups read the rows; Laura's night rows are the master bedroom, so at night only the base lines show; no Mark- or Ryan-only kitchen hour exists"
+  },
+  {
+   "row": "C926",
+   "screen": "home_tv.watch",
+   "verdict": "PASS",
+   "line": "You curl up at the end of the couch and let an hour of TV wash over you.",
+   "why": "the clock moves only by minutes; Mark+Ryan, Mark, Ryan groups read the rows; at 23:00-07:00 Mark is in the master bedroom and Ryan in his room, so only the base lines show, and they hold at any hour"
+  },
+  {
+   "row": "C926",
+   "screen": "mark_kitchen.pay100",
+   "verdict": "PASS",
+   "line": "He pockets it and goes back to the paper.",
+   "why": "the clock moves only by minutes; reached only from rent on Sunday with Mark there; $100 after $900 matches PLAN 27"
+  },
+  {
+   "row": "C926",
+   "screen": "mark_kitchen.pay75",
+   "verdict": "PASS",
+   "line": "All there. Same time next Sunday.",
+   "why": "the clock moves only by minutes; reached only from rent (Sunday 08:00-11:55, Mark in the kitchen); weekday named behind the Sunday condition; numbers 75/300/90 match PLAN 27"
+  },
+  {
+   "row": "C926",
+   "screen": "mark_kitchen.pay90",
+   "verdict": "PASS",
+   "line": "A hundred from next week.",
+   "why": "the clock moves only by minutes; reached only from rent on Sunday with Mark there; 810+90=900 matches PLAN 27"
+  },
+  {
+   "row": "C926",
+   "screen": "mark_kitchen.short",
+   "verdict": "PASS",
+   "line": "Mom's cup stops halfway to her mouth, then keeps going.",
+   "why": "the clock moves only by minutes; Sunday 08:00-11:55; Laura's weekend row has her in the kitchen 08:00-12:00, so Mom is there at every minute it can show"
+  },
+  {
+   "row": "C926",
+   "screen": "mark_kitchen.talk",
+   "verdict": "PASS",
+   "line": "Your face goes hot. He's already back to his coffee.",
+   "why": "the clock moves only by minutes; shows only while Mark is in the kitchen (his morning rows); no time, no weekday, nobody else named"
+  },
+  {
+   "row": "C926",
+   "screen": "mark_living_room.talk",
+   "verdict": "PASS",
+   "line": "When you glance back, he's watching you instead of the screen.",
+   "why": "the clock moves only by minutes; shows only while Mark is in his chair; no time or weekday; Ryan/Laura on the couch aren't contradicted"
+  },
+  {
+   "row": "C926",
+   "screen": "ryan_kitchen.talk",
+   "verdict": "PASS",
+   "line": "There's more in the pan. Don't tell Mark I made it.",
+   "why": "the clock moves only by minutes; Ryan in the kitchen 18-19 weekdays / 17-19 weekends; Mark is never in the kitchen then, so the line holds"
+  },
+  {
+   "row": "C926",
+   "screen": "ryan_living_room.talk",
+   "verdict": "PASS",
+   "line": "Mark's got the remote. Don't even ask.",
+   "why": "the clock moves only by minutes; every hour Ryan is on the couch Mark is in his chair (weekdays 16:30-23, Sat 10-19, Sun 12-23)"
+  },
+  {
+   "row": "C926",
+   "screen": "ryan_room.talk",
+   "verdict": "PASS",
+   "line": "Hey, @player.nickname. You need the bathroom or something?",
+   "why": "the clock moves only by minutes; reached only from the hub inside the 23:00-closed window; nobody's row has the bathroom then except Ryan's own, so 'It's free' holds"
+  },
+  {
+   "row": "C926",
+   "screen": "talk_mom.eat",
+   "verdict": "PASS",
+   "line": "Mom puts a plate of eggs in front of you and sits down with her coffee.",
+   "why": "the clock moves only by minutes; shows only while Laura is in the kitchen (07-08, 08-12 weekends: eggs window; 17-19: dinner window); presence lines gated by groups; night rows put her in bed"
+  },
+  {
+   "row": "C926",
+   "screen": "talk_mom.talk",
+   "verdict": "PASS",
+   "line": "When he's gone, you tell me everything.",
+   "why": "the clock moves only by minutes; three versions gated on Mark and Ryan in the kitchen; the night rows change none of them"
   },
   {
    "row": "C927",
-   "screen": "home_wait.wait",
+   "screen": "home_dishes.do",
    "verdict": "PASS",
-   "line": "Done",
-   "why": "exit states 30 minutes, back to home_her_room",
-   "cause": ""
+   "line": "Mom picks up a towel and dries beside you.",
+   "why": "every exit sets time_progression_minutes explicitly (0/5/15/20/60), so no hidden 3-minute default; Laura+Mark, Laura+Ryan, Laura groups read the rows; Laura's night rows are the master bedroom, so at night only the base lines show; no Mark- or Ryan-only kitchen hour exists"
+  },
+  {
+   "row": "C927",
+   "screen": "home_tv.watch",
+   "verdict": "PASS",
+   "line": "You curl up at the end of the couch and let an hour of TV wash over you.",
+   "why": "every exit sets time_progression_minutes explicitly (0/5/15/20/60), so no hidden 3-minute default; Mark+Ryan, Mark, Ryan groups read the rows; at 23:00-07:00 Mark is in the master bedroom and Ryan in his room, so only the base lines show, and they hold at any hour"
+  },
+  {
+   "row": "C927",
+   "screen": "loop_eat.do",
+   "verdict": "PASS",
+   "line": "Mom slides the butter across.",
+   "why": "every exit sets time_progression_minutes explicitly (0/5/15/20/60), so no hidden 3-minute default; presence groups gated on Laura (with Mark/Ryan); Laura is in the kitchen only 07-08/17-19 weekdays, 08-12/17-19 weekends, never at night under the new rows"
+  },
+  {
+   "row": "C927",
+   "screen": "mark_kitchen.hub",
+   "verdict": "PASS",
+   "line": "Mark's at the table with his coffee. He looks at you over the rim.",
+   "why": "every exit sets time_progression_minutes explicitly (0/5/15/20/60), so no hidden 3-minute default; menu shows only while Mark's row has him in the kitchen (weekdays 07:00-07:30, Sat 08-10, Sun 08-12); night rows put him in the master bedroom, so it never shows at night"
+  },
+  {
+   "row": "C927",
+   "screen": "mark_kitchen.pay100",
+   "verdict": "PASS",
+   "line": "He pockets it and goes back to the paper.",
+   "why": "every exit sets time_progression_minutes explicitly (0/5/15/20/60), so no hidden 3-minute default; reached only from rent on Sunday with Mark there; $100 after $900 matches PLAN 27"
+  },
+  {
+   "row": "C927",
+   "screen": "mark_kitchen.pay75",
+   "verdict": "PASS",
+   "line": "All there. Same time next Sunday.",
+   "why": "every exit sets time_progression_minutes explicitly (0/5/15/20/60), so no hidden 3-minute default; reached only from rent (Sunday 08:00-11:55, Mark in the kitchen); weekday named behind the Sunday condition; numbers 75/300/90 match PLAN 27"
+  },
+  {
+   "row": "C927",
+   "screen": "mark_kitchen.pay90",
+   "verdict": "PASS",
+   "line": "A hundred from next week.",
+   "why": "every exit sets time_progression_minutes explicitly (0/5/15/20/60), so no hidden 3-minute default; reached only from rent on Sunday with Mark there; 810+90=900 matches PLAN 27"
+  },
+  {
+   "row": "C927",
+   "screen": "mark_kitchen.short",
+   "verdict": "PASS",
+   "line": "Mom's cup stops halfway to her mouth, then keeps going.",
+   "why": "every exit sets time_progression_minutes explicitly (0/5/15/20/60), so no hidden 3-minute default; Sunday 08:00-11:55; Laura's weekend row has her in the kitchen 08:00-12:00, so Mom is there at every minute it can show"
+  },
+  {
+   "row": "C927",
+   "screen": "mark_kitchen.talk",
+   "verdict": "PASS",
+   "line": "Your face goes hot. He's already back to his coffee.",
+   "why": "every exit sets time_progression_minutes explicitly (0/5/15/20/60), so no hidden 3-minute default; shows only while Mark is in the kitchen (his morning rows); no time, no weekday, nobody else named"
+  },
+  {
+   "row": "C927",
+   "screen": "mark_living_room.hub",
+   "verdict": "PASS",
+   "line": "Mark's in his chair, the remote on his knee.",
+   "why": "every exit sets time_progression_minutes explicitly (0/5/15/20/60), so no hidden 3-minute default; shows only while Mark's row has him in the living room (weekdays 16:30-23:00, Sat 10-19, Sun 12-23); from 23:00 he's in bed in the master bedroom"
+  },
+  {
+   "row": "C927",
+   "screen": "mark_living_room.talk",
+   "verdict": "PASS",
+   "line": "When you glance back, he's watching you instead of the screen.",
+   "why": "every exit sets time_progression_minutes explicitly (0/5/15/20/60), so no hidden 3-minute default; shows only while Mark is in his chair; no time or weekday; Ryan/Laura on the couch aren't contradicted"
+  },
+  {
+   "row": "C927",
+   "screen": "ryan_kitchen.hub",
+   "verdict": "PASS",
+   "line": "Ryan's eating standing up at the counter, straight out of the pan.",
+   "why": "every exit sets time_progression_minutes explicitly (0/5/15/20/60), so no hidden 3-minute default; shows only while Ryan's 'eating' kitchen row holds (weekdays 18-19, weekends 17-19)"
+  },
+  {
+   "row": "C927",
+   "screen": "ryan_kitchen.talk",
+   "verdict": "PASS",
+   "line": "There's more in the pan. Don't tell Mark I made it.",
+   "why": "every exit sets time_progression_minutes explicitly (0/5/15/20/60), so no hidden 3-minute default; Ryan in the kitchen 18-19 weekdays / 17-19 weekends; Mark is never in the kitchen then, so the line holds"
+  },
+  {
+   "row": "C927",
+   "screen": "ryan_living_room.hub",
+   "verdict": "PASS",
+   "line": "Ryan's sprawled on the couch with the TV on.",
+   "why": "every exit sets time_progression_minutes explicitly (0/5/15/20/60), so no hidden 3-minute default; shows only while Ryan's 'on the couch' row holds (weekdays 19-23, weekends 12-17); weekdays 23:00-01:00 he's now in his room, so it doesn't show"
+  },
+  {
+   "row": "C927",
+   "screen": "ryan_living_room.talk",
+   "verdict": "PASS",
+   "line": "Mark's got the remote. Don't even ask.",
+   "why": "every exit sets time_progression_minutes explicitly (0/5/15/20/60), so no hidden 3-minute default; every hour Ryan is on the couch Mark is in his chair (weekdays 16:30-23, Sat 10-19, Sun 12-23)"
+  },
+  {
+   "row": "C927",
+   "screen": "ryan_room.hub",
+   "verdict": "PASS",
+   "line": "Ryan's on his bed with a controller, headphones round his neck.",
+   "why": "every exit sets time_progression_minutes explicitly (0/5/15/20/60), so no hidden 3-minute default; trigger weekdays 07:00-23:00 / weekends 10:30-23:00 plus requires_npc; weekdays 23:00-01:00 'on his phone' and 01:00-07:00 'asleep' fall outside it, so the controller line never shows while he's on his phone or asleep"
+  },
+  {
+   "row": "C927",
+   "screen": "ryan_room.talk",
+   "verdict": "PASS",
+   "line": "Hey, @player.nickname. You need the bathroom or something?",
+   "why": "every exit sets time_progression_minutes explicitly (0/5/15/20/60), so no hidden 3-minute default; reached only from the hub inside the 23:00-closed window; nobody's row has the bathroom then except Ryan's own, so 'It's free' holds"
+  },
+  {
+   "row": "C927",
+   "screen": "talk_mom.eat",
+   "verdict": "PASS",
+   "line": "Mom puts a plate of eggs in front of you and sits down with her coffee.",
+   "why": "every exit sets time_progression_minutes explicitly (0/5/15/20/60), so no hidden 3-minute default; shows only while Laura is in the kitchen (07-08, 08-12 weekends: eggs window; 17-19: dinner window); presence lines gated by groups; night rows put her in bed"
+  },
+  {
+   "row": "C927",
+   "screen": "talk_mom.hub",
+   "verdict": "PASS",
+   "line": "Mom's in the kitchen. Mark's at the table. She looks up at you, then at him.",
+   "why": "every exit sets time_progression_minutes explicitly (0/5/15/20/60), so no hidden 3-minute default; Mark line gated is_present/is_absent; Laura in the kitchen only by her day rows; night rows (in bed/asleep) keep the menu off"
+  },
+  {
+   "row": "C927",
+   "screen": "talk_mom.talk",
+   "verdict": "PASS",
+   "line": "When he's gone, you tell me everything.",
+   "why": "every exit sets time_progression_minutes explicitly (0/5/15/20/60), so no hidden 3-minute default; three versions gated on Mark and Ryan in the kitchen; the night rows change none of them"
+  },
+  {
+   "row": "C928",
+   "screen": "home_dishes.do",
+   "verdict": "PASS",
+   "line": "Mom picks up a towel and dries beside you.",
+   "why": "no clock printed in prose; Laura+Mark, Laura+Ryan, Laura groups read the rows; Laura's night rows are the master bedroom, so at night only the base lines show; no Mark- or Ryan-only kitchen hour exists"
+  },
+  {
+   "row": "C928",
+   "screen": "home_tv.watch",
+   "verdict": "PASS",
+   "line": "You curl up at the end of the couch and let an hour of TV wash over you.",
+   "why": "no clock printed in prose; Mark+Ryan, Mark, Ryan groups read the rows; at 23:00-07:00 Mark is in the master bedroom and Ryan in his room, so only the base lines show, and they hold at any hour"
+  },
+  {
+   "row": "C928",
+   "screen": "mark_kitchen.pay100",
+   "verdict": "PASS",
+   "line": "He pockets it and goes back to the paper.",
+   "why": "no clock printed in prose; reached only from rent on Sunday with Mark there; $100 after $900 matches PLAN 27"
+  },
+  {
+   "row": "C928",
+   "screen": "mark_kitchen.pay75",
+   "verdict": "PASS",
+   "line": "All there. Same time next Sunday.",
+   "why": "no clock printed in prose; reached only from rent (Sunday 08:00-11:55, Mark in the kitchen); weekday named behind the Sunday condition; numbers 75/300/90 match PLAN 27"
+  },
+  {
+   "row": "C928",
+   "screen": "mark_kitchen.pay90",
+   "verdict": "PASS",
+   "line": "A hundred from next week.",
+   "why": "no clock printed in prose; reached only from rent on Sunday with Mark there; 810+90=900 matches PLAN 27"
+  },
+  {
+   "row": "C928",
+   "screen": "mark_kitchen.short",
+   "verdict": "PASS",
+   "line": "Mom's cup stops halfway to her mouth, then keeps going.",
+   "why": "no clock printed in prose; Sunday 08:00-11:55; Laura's weekend row has her in the kitchen 08:00-12:00, so Mom is there at every minute it can show"
+  },
+  {
+   "row": "C928",
+   "screen": "mark_kitchen.talk",
+   "verdict": "PASS",
+   "line": "Your face goes hot. He's already back to his coffee.",
+   "why": "no clock printed in prose; shows only while Mark is in the kitchen (his morning rows); no time, no weekday, nobody else named"
+  },
+  {
+   "row": "C928",
+   "screen": "mark_living_room.talk",
+   "verdict": "PASS",
+   "line": "When you glance back, he's watching you instead of the screen.",
+   "why": "no clock printed in prose; shows only while Mark is in his chair; no time or weekday; Ryan/Laura on the couch aren't contradicted"
+  },
+  {
+   "row": "C928",
+   "screen": "ryan_kitchen.talk",
+   "verdict": "PASS",
+   "line": "There's more in the pan. Don't tell Mark I made it.",
+   "why": "no clock printed in prose; Ryan in the kitchen 18-19 weekdays / 17-19 weekends; Mark is never in the kitchen then, so the line holds"
+  },
+  {
+   "row": "C928",
+   "screen": "ryan_living_room.talk",
+   "verdict": "PASS",
+   "line": "Mark's got the remote. Don't even ask.",
+   "why": "no clock printed in prose; every hour Ryan is on the couch Mark is in his chair (weekdays 16:30-23, Sat 10-19, Sun 12-23)"
+  },
+  {
+   "row": "C928",
+   "screen": "ryan_room.talk",
+   "verdict": "PASS",
+   "line": "Hey, @player.nickname. You need the bathroom or something?",
+   "why": "no clock printed in prose; reached only from the hub inside the 23:00-closed window; nobody's row has the bathroom then except Ryan's own, so 'It's free' holds"
+  },
+  {
+   "row": "C928",
+   "screen": "talk_mom.eat",
+   "verdict": "PASS",
+   "line": "Mom puts a plate of eggs in front of you and sits down with her coffee.",
+   "why": "no clock printed in prose; shows only while Laura is in the kitchen (07-08, 08-12 weekends: eggs window; 17-19: dinner window); presence lines gated by groups; night rows put her in bed"
+  },
+  {
+   "row": "C928",
+   "screen": "talk_mom.talk",
+   "verdict": "PASS",
+   "line": "When he's gone, you tell me everything.",
+   "why": "no clock printed in prose; three versions gated on Mark and Ryan in the kitchen; the night rows change none of them"
+  },
+  {
+   "row": "C929",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "Talk \u00b7 Eat with her \u00b7 Watch TV \u00b7 Do the dishes \u00b7 Leave \u00b7 Done",
+   "why": "no activity time on a label"
+  },
+  {
+   "row": "C929",
+   "screen": "home_dishes.do",
+   "verdict": "PASS",
+   "line": "Mom picks up a towel and dries beside you.",
+   "why": "no activity time on a label; Laura+Mark, Laura+Ryan, Laura groups read the rows; Laura's night rows are the master bedroom, so at night only the base lines show; no Mark- or Ryan-only kitchen hour exists"
+  },
+  {
+   "row": "C929",
+   "screen": "home_tv.watch",
+   "verdict": "PASS",
+   "line": "You curl up at the end of the couch and let an hour of TV wash over you.",
+   "why": "no activity time on a label; Mark+Ryan, Mark, Ryan groups read the rows; at 23:00-07:00 Mark is in the master bedroom and Ryan in his room, so only the base lines show, and they hold at any hour"
+  },
+  {
+   "row": "C929",
+   "screen": "mark_kitchen.pay100",
+   "verdict": "PASS",
+   "line": "He pockets it and goes back to the paper.",
+   "why": "no activity time on a label; reached only from rent on Sunday with Mark there; $100 after $900 matches PLAN 27"
+  },
+  {
+   "row": "C929",
+   "screen": "mark_kitchen.pay75",
+   "verdict": "PASS",
+   "line": "All there. Same time next Sunday.",
+   "why": "no activity time on a label; reached only from rent (Sunday 08:00-11:55, Mark in the kitchen); weekday named behind the Sunday condition; numbers 75/300/90 match PLAN 27"
+  },
+  {
+   "row": "C929",
+   "screen": "mark_kitchen.pay90",
+   "verdict": "PASS",
+   "line": "A hundred from next week.",
+   "why": "no activity time on a label; reached only from rent on Sunday with Mark there; 810+90=900 matches PLAN 27"
+  },
+  {
+   "row": "C929",
+   "screen": "mark_kitchen.short",
+   "verdict": "PASS",
+   "line": "Mom's cup stops halfway to her mouth, then keeps going.",
+   "why": "no activity time on a label; Sunday 08:00-11:55; Laura's weekend row has her in the kitchen 08:00-12:00, so Mom is there at every minute it can show"
+  },
+  {
+   "row": "C929",
+   "screen": "mark_kitchen.talk",
+   "verdict": "PASS",
+   "line": "Your face goes hot. He's already back to his coffee.",
+   "why": "no activity time on a label; shows only while Mark is in the kitchen (his morning rows); no time, no weekday, nobody else named"
+  },
+  {
+   "row": "C929",
+   "screen": "mark_living_room.talk",
+   "verdict": "PASS",
+   "line": "When you glance back, he's watching you instead of the screen.",
+   "why": "no activity time on a label; shows only while Mark is in his chair; no time or weekday; Ryan/Laura on the couch aren't contradicted"
+  },
+  {
+   "row": "C929",
+   "screen": "ryan_kitchen.talk",
+   "verdict": "PASS",
+   "line": "There's more in the pan. Don't tell Mark I made it.",
+   "why": "no activity time on a label; Ryan in the kitchen 18-19 weekdays / 17-19 weekends; Mark is never in the kitchen then, so the line holds"
+  },
+  {
+   "row": "C929",
+   "screen": "ryan_living_room.talk",
+   "verdict": "PASS",
+   "line": "Mark's got the remote. Don't even ask.",
+   "why": "no activity time on a label; every hour Ryan is on the couch Mark is in his chair (weekdays 16:30-23, Sat 10-19, Sun 12-23)"
+  },
+  {
+   "row": "C929",
+   "screen": "ryan_room.talk",
+   "verdict": "PASS",
+   "line": "Hey, @player.nickname. You need the bathroom or something?",
+   "why": "no activity time on a label; reached only from the hub inside the 23:00-closed window; nobody's row has the bathroom then except Ryan's own, so 'It's free' holds"
+  },
+  {
+   "row": "C929",
+   "screen": "talk_mom.eat",
+   "verdict": "PASS",
+   "line": "Mom puts a plate of eggs in front of you and sits down with her coffee.",
+   "why": "no activity time on a label; shows only while Laura is in the kitchen (07-08, 08-12 weekends: eggs window; 17-19: dinner window); presence lines gated by groups; night rows put her in bed"
+  },
+  {
+   "row": "C929",
+   "screen": "talk_mom.talk",
+   "verdict": "PASS",
+   "line": "When he's gone, you tell me everything.",
+   "why": "no activity time on a label; three versions gated on Mark and Ryan in the kitchen; the night rows change none of them"
+  },
+  {
+   "row": "C930",
+   "screen": "home_dishes.do",
+   "verdict": "PASS",
+   "line": "Mom picks up a towel and dries beside you.",
+   "why": "no windowed work here; Laura+Mark, Laura+Ryan, Laura groups read the rows; Laura's night rows are the master bedroom, so at night only the base lines show; no Mark- or Ryan-only kitchen hour exists"
+  },
+  {
+   "row": "C930",
+   "screen": "home_tv.watch",
+   "verdict": "PASS",
+   "line": "You curl up at the end of the couch and let an hour of TV wash over you.",
+   "why": "no windowed work here; Mark+Ryan, Mark, Ryan groups read the rows; at 23:00-07:00 Mark is in the master bedroom and Ryan in his room, so only the base lines show, and they hold at any hour"
+  },
+  {
+   "row": "C930",
+   "screen": "mark_kitchen.pay100",
+   "verdict": "PASS",
+   "line": "He pockets it and goes back to the paper.",
+   "why": "no windowed work here; reached only from rent on Sunday with Mark there; $100 after $900 matches PLAN 27"
+  },
+  {
+   "row": "C930",
+   "screen": "mark_kitchen.pay75",
+   "verdict": "PASS",
+   "line": "All there. Same time next Sunday.",
+   "why": "no windowed work here; reached only from rent (Sunday 08:00-11:55, Mark in the kitchen); weekday named behind the Sunday condition; numbers 75/300/90 match PLAN 27"
+  },
+  {
+   "row": "C930",
+   "screen": "mark_kitchen.pay90",
+   "verdict": "PASS",
+   "line": "A hundred from next week.",
+   "why": "no windowed work here; reached only from rent on Sunday with Mark there; 810+90=900 matches PLAN 27"
+  },
+  {
+   "row": "C930",
+   "screen": "mark_kitchen.short",
+   "verdict": "PASS",
+   "line": "Mom's cup stops halfway to her mouth, then keeps going.",
+   "why": "no windowed work here; Sunday 08:00-11:55; Laura's weekend row has her in the kitchen 08:00-12:00, so Mom is there at every minute it can show"
+  },
+  {
+   "row": "C930",
+   "screen": "mark_kitchen.talk",
+   "verdict": "PASS",
+   "line": "Your face goes hot. He's already back to his coffee.",
+   "why": "no windowed work here; shows only while Mark is in the kitchen (his morning rows); no time, no weekday, nobody else named"
+  },
+  {
+   "row": "C930",
+   "screen": "mark_living_room.talk",
+   "verdict": "PASS",
+   "line": "When you glance back, he's watching you instead of the screen.",
+   "why": "no windowed work here; shows only while Mark is in his chair; no time or weekday; Ryan/Laura on the couch aren't contradicted"
+  },
+  {
+   "row": "C930",
+   "screen": "ryan_kitchen.talk",
+   "verdict": "PASS",
+   "line": "There's more in the pan. Don't tell Mark I made it.",
+   "why": "no windowed work here; Ryan in the kitchen 18-19 weekdays / 17-19 weekends; Mark is never in the kitchen then, so the line holds"
+  },
+  {
+   "row": "C930",
+   "screen": "ryan_living_room.talk",
+   "verdict": "PASS",
+   "line": "Mark's got the remote. Don't even ask.",
+   "why": "no windowed work here; every hour Ryan is on the couch Mark is in his chair (weekdays 16:30-23, Sat 10-19, Sun 12-23)"
+  },
+  {
+   "row": "C930",
+   "screen": "ryan_room.talk",
+   "verdict": "PASS",
+   "line": "Hey, @player.nickname. You need the bathroom or something?",
+   "why": "no windowed work here; reached only from the hub inside the 23:00-closed window; nobody's row has the bathroom then except Ryan's own, so 'It's free' holds"
+  },
+  {
+   "row": "C930",
+   "screen": "talk_mom.eat",
+   "verdict": "PASS",
+   "line": "Mom puts a plate of eggs in front of you and sits down with her coffee.",
+   "why": "no windowed work here; shows only while Laura is in the kitchen (07-08, 08-12 weekends: eggs window; 17-19: dinner window); presence lines gated by groups; night rows put her in bed"
+  },
+  {
+   "row": "C930",
+   "screen": "talk_mom.talk",
+   "verdict": "PASS",
+   "line": "When he's gone, you tell me everything.",
+   "why": "no windowed work here; three versions gated on Mark and Ryan in the kitchen; the night rows change none of them"
   },
   {
    "row": "C931",
-   "screen": "home_wait.wait",
-   "verdict": "N/A",
-   "line": "(no time_of_day condition)",
-   "why": "the row has no clock condition",
-   "cause": ""
+   "screen": "home_dishes.do",
+   "verdict": "PASS",
+   "line": "Mom picks up a towel and dries beside you.",
+   "why": "no time_of_day window here breaks at its end minute against the rows; Laura+Mark, Laura+Ryan, Laura groups read the rows; Laura's night rows are the master bedroom, so at night only the base lines show; no Mark- or Ryan-only kitchen hour exists"
+  },
+  {
+   "row": "C931",
+   "screen": "home_tv.watch",
+   "verdict": "PASS",
+   "line": "You curl up at the end of the couch and let an hour of TV wash over you.",
+   "why": "no time_of_day window here breaks at its end minute against the rows; Mark+Ryan, Mark, Ryan groups read the rows; at 23:00-07:00 Mark is in the master bedroom and Ryan in his room, so only the base lines show, and they hold at any hour"
+  },
+  {
+   "row": "C931",
+   "screen": "loop_eat.do",
+   "verdict": "PASS",
+   "line": "Mom slides the butter across.",
+   "why": "no time_of_day window here breaks at its end minute against the rows; presence groups gated on Laura (with Mark/Ryan); Laura is in the kitchen only 07-08/17-19 weekdays, 08-12/17-19 weekends, never at night under the new rows"
+  },
+  {
+   "row": "C931",
+   "screen": "mark_kitchen.hub",
+   "verdict": "PASS",
+   "line": "Mark's at the table with his coffee. He looks at you over the rim.",
+   "why": "no time_of_day window here breaks at its end minute against the rows; menu shows only while Mark's row has him in the kitchen (weekdays 07:00-07:30, Sat 08-10, Sun 08-12); night rows put him in the master bedroom, so it never shows at night"
+  },
+  {
+   "row": "C931",
+   "screen": "mark_kitchen.pay100",
+   "verdict": "PASS",
+   "line": "He pockets it and goes back to the paper.",
+   "why": "no time_of_day window here breaks at its end minute against the rows; reached only from rent on Sunday with Mark there; $100 after $900 matches PLAN 27"
+  },
+  {
+   "row": "C931",
+   "screen": "mark_kitchen.pay75",
+   "verdict": "PASS",
+   "line": "All there. Same time next Sunday.",
+   "why": "no time_of_day window here breaks at its end minute against the rows; reached only from rent (Sunday 08:00-11:55, Mark in the kitchen); weekday named behind the Sunday condition; numbers 75/300/90 match PLAN 27"
+  },
+  {
+   "row": "C931",
+   "screen": "mark_kitchen.pay90",
+   "verdict": "PASS",
+   "line": "A hundred from next week.",
+   "why": "no time_of_day window here breaks at its end minute against the rows; reached only from rent on Sunday with Mark there; 810+90=900 matches PLAN 27"
+  },
+  {
+   "row": "C931",
+   "screen": "mark_kitchen.short",
+   "verdict": "PASS",
+   "line": "Mom's cup stops halfway to her mouth, then keeps going.",
+   "why": "no time_of_day window here breaks at its end minute against the rows; Sunday 08:00-11:55; Laura's weekend row has her in the kitchen 08:00-12:00, so Mom is there at every minute it can show"
+  },
+  {
+   "row": "C931",
+   "screen": "mark_kitchen.talk",
+   "verdict": "PASS",
+   "line": "Your face goes hot. He's already back to his coffee.",
+   "why": "no time_of_day window here breaks at its end minute against the rows; shows only while Mark is in the kitchen (his morning rows); no time, no weekday, nobody else named"
+  },
+  {
+   "row": "C931",
+   "screen": "mark_living_room.hub",
+   "verdict": "PASS",
+   "line": "Mark's in his chair, the remote on his knee.",
+   "why": "no time_of_day window here breaks at its end minute against the rows; shows only while Mark's row has him in the living room (weekdays 16:30-23:00, Sat 10-19, Sun 12-23); from 23:00 he's in bed in the master bedroom"
+  },
+  {
+   "row": "C931",
+   "screen": "mark_living_room.talk",
+   "verdict": "PASS",
+   "line": "When you glance back, he's watching you instead of the screen.",
+   "why": "no time_of_day window here breaks at its end minute against the rows; shows only while Mark is in his chair; no time or weekday; Ryan/Laura on the couch aren't contradicted"
+  },
+  {
+   "row": "C931",
+   "screen": "ryan_kitchen.hub",
+   "verdict": "PASS",
+   "line": "Ryan's eating standing up at the counter, straight out of the pan.",
+   "why": "no time_of_day window here breaks at its end minute against the rows; shows only while Ryan's 'eating' kitchen row holds (weekdays 18-19, weekends 17-19)"
+  },
+  {
+   "row": "C931",
+   "screen": "ryan_kitchen.talk",
+   "verdict": "PASS",
+   "line": "There's more in the pan. Don't tell Mark I made it.",
+   "why": "no time_of_day window here breaks at its end minute against the rows; Ryan in the kitchen 18-19 weekdays / 17-19 weekends; Mark is never in the kitchen then, so the line holds"
+  },
+  {
+   "row": "C931",
+   "screen": "ryan_living_room.hub",
+   "verdict": "PASS",
+   "line": "Ryan's sprawled on the couch with the TV on.",
+   "why": "no time_of_day window here breaks at its end minute against the rows; shows only while Ryan's 'on the couch' row holds (weekdays 19-23, weekends 12-17); weekdays 23:00-01:00 he's now in his room, so it doesn't show"
+  },
+  {
+   "row": "C931",
+   "screen": "ryan_living_room.talk",
+   "verdict": "PASS",
+   "line": "Mark's got the remote. Don't even ask.",
+   "why": "no time_of_day window here breaks at its end minute against the rows; every hour Ryan is on the couch Mark is in his chair (weekdays 16:30-23, Sat 10-19, Sun 12-23)"
+  },
+  {
+   "row": "C931",
+   "screen": "ryan_room.hub",
+   "verdict": "PASS",
+   "line": "Ryan's on his bed with a controller, headphones round his neck.",
+   "why": "no time_of_day window here breaks at its end minute against the rows; trigger weekdays 07:00-23:00 / weekends 10:30-23:00 plus requires_npc; weekdays 23:00-01:00 'on his phone' and 01:00-07:00 'asleep' fall outside it, so the controller line never shows while he's on his phone or asleep"
+  },
+  {
+   "row": "C931",
+   "screen": "ryan_room.talk",
+   "verdict": "PASS",
+   "line": "Hey, @player.nickname. You need the bathroom or something?",
+   "why": "no time_of_day window here breaks at its end minute against the rows; reached only from the hub inside the 23:00-closed window; nobody's row has the bathroom then except Ryan's own, so 'It's free' holds"
+  },
+  {
+   "row": "C931",
+   "screen": "talk_mom.eat",
+   "verdict": "PASS",
+   "line": "time_of_day 00:00-12:00 / 12:00-23:59",
+   "why": "Laura is in the kitchen only 07-08, 08-12 and 17-19, never at 23:59, so one of the two lines always shows"
+  },
+  {
+   "row": "C931",
+   "screen": "talk_mom.hub",
+   "verdict": "PASS",
+   "line": "Mom's in the kitchen. Mark's at the table. She looks up at you, then at him.",
+   "why": "no time_of_day window here breaks at its end minute against the rows; Mark line gated is_present/is_absent; Laura in the kitchen only by her day rows; night rows (in bed/asleep) keep the menu off"
+  },
+  {
+   "row": "C931",
+   "screen": "talk_mom.talk",
+   "verdict": "PASS",
+   "line": "When he's gone, you tell me everything.",
+   "why": "no time_of_day window here breaks at its end minute against the rows; three versions gated on Mark and Ryan in the kitchen; the night rows change none of them"
+  },
+  {
+   "row": "C953",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "Hand it over ($75)",
+   "why": "only the rent buttons cost money and they carry it; no label says time or energy"
   },
   {
    "row": "L106",
-   "screen": "home_wait.wait",
+   "screen": "home_dishes.do",
    "verdict": "PASS",
-   "line": "You lie on your bed with your phone for half an hour and let the house go on around you.",
-   "why": "names nobody as present",
-   "cause": ""
+   "line": "Mom picks up a towel and dries beside you.",
+   "why": "no line claims someone their rows don't put there; Laura+Mark, Laura+Ryan, Laura groups read the rows; Laura's night rows are the master bedroom, so at night only the base lines show; no Mark- or Ryan-only kitchen hour exists"
+  },
+  {
+   "row": "L106",
+   "screen": "home_tv.watch",
+   "verdict": "PASS",
+   "line": "You curl up at the end of the couch and let an hour of TV wash over you.",
+   "why": "no line claims someone their rows don't put there; Mark+Ryan, Mark, Ryan groups read the rows; at 23:00-07:00 Mark is in the master bedroom and Ryan in his room, so only the base lines show, and they hold at any hour"
+  },
+  {
+   "row": "L106",
+   "screen": "loop_eat.do",
+   "verdict": "PASS",
+   "line": "Mom slides the butter across.",
+   "why": "no line claims someone their rows don't put there; presence groups gated on Laura (with Mark/Ryan); Laura is in the kitchen only 07-08/17-19 weekdays, 08-12/17-19 weekends, never at night under the new rows"
+  },
+  {
+   "row": "L106",
+   "screen": "mark_kitchen.hub",
+   "verdict": "PASS",
+   "line": "Mark's at the table with his coffee. He looks at you over the rim.",
+   "why": "no line claims someone their rows don't put there; menu shows only while Mark's row has him in the kitchen (weekdays 07:00-07:30, Sat 08-10, Sun 08-12); night rows put him in the master bedroom, so it never shows at night"
+  },
+  {
+   "row": "L106",
+   "screen": "mark_kitchen.pay100",
+   "verdict": "PASS",
+   "line": "He pockets it and goes back to the paper.",
+   "why": "no line claims someone their rows don't put there; reached only from rent on Sunday with Mark there; $100 after $900 matches PLAN 27"
+  },
+  {
+   "row": "L106",
+   "screen": "mark_kitchen.pay75",
+   "verdict": "PASS",
+   "line": "All there. Same time next Sunday.",
+   "why": "no line claims someone their rows don't put there; reached only from rent (Sunday 08:00-11:55, Mark in the kitchen); weekday named behind the Sunday condition; numbers 75/300/90 match PLAN 27"
+  },
+  {
+   "row": "L106",
+   "screen": "mark_kitchen.pay90",
+   "verdict": "PASS",
+   "line": "A hundred from next week.",
+   "why": "no line claims someone their rows don't put there; reached only from rent on Sunday with Mark there; 810+90=900 matches PLAN 27"
+  },
+  {
+   "row": "L106",
+   "screen": "mark_kitchen.rent",
+   "verdict": "PASS",
+   "line": "Mark folds the paper down and holds out his hand.",
+   "why": "no line claims someone their rows don't put there; Sunday 08:00-11:55 only; Mark's Sunday rows have him in the kitchen 08:00-12:00; night rows don't touch it"
+  },
+  {
+   "row": "L106",
+   "screen": "mark_kitchen.short",
+   "verdict": "PASS",
+   "line": "Mom's cup stops halfway to her mouth, then keeps going.",
+   "why": "no line claims someone their rows don't put there; Sunday 08:00-11:55; Laura's weekend row has her in the kitchen 08:00-12:00, so Mom is there at every minute it can show"
+  },
+  {
+   "row": "L106",
+   "screen": "mark_kitchen.talk",
+   "verdict": "PASS",
+   "line": "Your face goes hot. He's already back to his coffee.",
+   "why": "no line claims someone their rows don't put there; shows only while Mark is in the kitchen (his morning rows); no time, no weekday, nobody else named"
+  },
+  {
+   "row": "L106",
+   "screen": "mark_living_room.hub",
+   "verdict": "PASS",
+   "line": "Mark's in his chair, the remote on his knee.",
+   "why": "no line claims someone their rows don't put there; shows only while Mark's row has him in the living room (weekdays 16:30-23:00, Sat 10-19, Sun 12-23); from 23:00 he's in bed in the master bedroom"
+  },
+  {
+   "row": "L106",
+   "screen": "mark_living_room.talk",
+   "verdict": "PASS",
+   "line": "When you glance back, he's watching you instead of the screen.",
+   "why": "no line claims someone their rows don't put there; shows only while Mark is in his chair; no time or weekday; Ryan/Laura on the couch aren't contradicted"
+  },
+  {
+   "row": "L106",
+   "screen": "ryan_kitchen.hub",
+   "verdict": "PASS",
+   "line": "Ryan's eating standing up at the counter, straight out of the pan.",
+   "why": "no line claims someone their rows don't put there; shows only while Ryan's 'eating' kitchen row holds (weekdays 18-19, weekends 17-19)"
+  },
+  {
+   "row": "L106",
+   "screen": "ryan_kitchen.talk",
+   "verdict": "PASS",
+   "line": "There's more in the pan. Don't tell Mark I made it.",
+   "why": "no line claims someone their rows don't put there; Ryan in the kitchen 18-19 weekdays / 17-19 weekends; Mark is never in the kitchen then, so the line holds"
+  },
+  {
+   "row": "L106",
+   "screen": "ryan_living_room.hub",
+   "verdict": "PASS",
+   "line": "Ryan's sprawled on the couch with the TV on.",
+   "why": "no line claims someone their rows don't put there; shows only while Ryan's 'on the couch' row holds (weekdays 19-23, weekends 12-17); weekdays 23:00-01:00 he's now in his room, so it doesn't show"
+  },
+  {
+   "row": "L106",
+   "screen": "ryan_living_room.talk",
+   "verdict": "PASS",
+   "line": "Mark's got the remote. Don't even ask.",
+   "why": "no line claims someone their rows don't put there; every hour Ryan is on the couch Mark is in his chair (weekdays 16:30-23, Sat 10-19, Sun 12-23)"
+  },
+  {
+   "row": "L106",
+   "screen": "ryan_room.hub",
+   "verdict": "PASS",
+   "line": "Ryan's on his bed with a controller, headphones round his neck.",
+   "why": "no line claims someone their rows don't put there; trigger weekdays 07:00-23:00 / weekends 10:30-23:00 plus requires_npc; weekdays 23:00-01:00 'on his phone' and 01:00-07:00 'asleep' fall outside it, so the controller line never shows while he's on his phone or asleep"
+  },
+  {
+   "row": "L106",
+   "screen": "ryan_room.talk",
+   "verdict": "PASS",
+   "line": "Hey, @player.nickname. You need the bathroom or something?",
+   "why": "no line claims someone their rows don't put there; reached only from the hub inside the 23:00-closed window; nobody's row has the bathroom then except Ryan's own, so 'It's free' holds"
+  },
+  {
+   "row": "L106",
+   "screen": "talk_mom.eat",
+   "verdict": "PASS",
+   "line": "Mom puts a plate of eggs in front of you and sits down with her coffee.",
+   "why": "no line claims someone their rows don't put there; shows only while Laura is in the kitchen (07-08, 08-12 weekends: eggs window; 17-19: dinner window); presence lines gated by groups; night rows put her in bed"
+  },
+  {
+   "row": "L106",
+   "screen": "talk_mom.hub",
+   "verdict": "PASS",
+   "line": "Mom's in the kitchen. Mark's at the table. She looks up at you, then at him.",
+   "why": "no line claims someone their rows don't put there; Mark line gated is_present/is_absent; Laura in the kitchen only by her day rows; night rows (in bed/asleep) keep the menu off"
+  },
+  {
+   "row": "L106",
+   "screen": "talk_mom.talk",
+   "verdict": "PASS",
+   "line": "When he's gone, you tell me everything.",
+   "why": "no line claims someone their rows don't put there; three versions gated on Mark and Ryan in the kitchen; the night rows change none of them"
   },
   {
    "row": "L167",
-   "screen": "home_wait.wait",
-   "verdict": "N/A",
-   "line": "(no hours)",
-   "why": "open at every hour, no greyed state",
-   "cause": ""
+   "screen": "home_dishes.do",
+   "verdict": "PASS",
+   "line": "Mom picks up a towel and dries beside you.",
+   "why": "no activity here runs one row per kind of day; Laura+Mark, Laura+Ryan, Laura groups read the rows; Laura's night rows are the master bedroom, so at night only the base lines show; no Mark- or Ryan-only kitchen hour exists"
+  },
+  {
+   "row": "L167",
+   "screen": "home_tv.watch",
+   "verdict": "PASS",
+   "line": "You curl up at the end of the couch and let an hour of TV wash over you.",
+   "why": "no activity here runs one row per kind of day; Mark+Ryan, Mark, Ryan groups read the rows; at 23:00-07:00 Mark is in the master bedroom and Ryan in his room, so only the base lines show, and they hold at any hour"
+  },
+  {
+   "row": "L167",
+   "screen": "loop_eat.do",
+   "verdict": "PASS",
+   "line": "Mom slides the butter across.",
+   "why": "no activity here runs one row per kind of day; presence groups gated on Laura (with Mark/Ryan); Laura is in the kitchen only 07-08/17-19 weekdays, 08-12/17-19 weekends, never at night under the new rows"
+  },
+  {
+   "row": "L167",
+   "screen": "mark_kitchen.hub",
+   "verdict": "PASS",
+   "line": "Pay the rent \u2014 Mark collects on Sundays, 8 to 11:55am, at the kitchen table.",
+   "why": "one Sunday-only choice; greys with locked_text naming the full hours"
+  },
+  {
+   "row": "L167",
+   "screen": "mark_kitchen.pay100",
+   "verdict": "PASS",
+   "line": "He pockets it and goes back to the paper.",
+   "why": "no activity here runs one row per kind of day; reached only from rent on Sunday with Mark there; $100 after $900 matches PLAN 27"
+  },
+  {
+   "row": "L167",
+   "screen": "mark_kitchen.pay75",
+   "verdict": "PASS",
+   "line": "All there. Same time next Sunday.",
+   "why": "no activity here runs one row per kind of day; reached only from rent (Sunday 08:00-11:55, Mark in the kitchen); weekday named behind the Sunday condition; numbers 75/300/90 match PLAN 27"
+  },
+  {
+   "row": "L167",
+   "screen": "mark_kitchen.pay90",
+   "verdict": "PASS",
+   "line": "A hundred from next week.",
+   "why": "no activity here runs one row per kind of day; reached only from rent on Sunday with Mark there; 810+90=900 matches PLAN 27"
+  },
+  {
+   "row": "L167",
+   "screen": "mark_kitchen.short",
+   "verdict": "PASS",
+   "line": "Mom's cup stops halfway to her mouth, then keeps going.",
+   "why": "no activity here runs one row per kind of day; Sunday 08:00-11:55; Laura's weekend row has her in the kitchen 08:00-12:00, so Mom is there at every minute it can show"
+  },
+  {
+   "row": "L167",
+   "screen": "mark_kitchen.talk",
+   "verdict": "PASS",
+   "line": "Your face goes hot. He's already back to his coffee.",
+   "why": "no activity here runs one row per kind of day; shows only while Mark is in the kitchen (his morning rows); no time, no weekday, nobody else named"
+  },
+  {
+   "row": "L167",
+   "screen": "mark_living_room.hub",
+   "verdict": "PASS",
+   "line": "Mark's in his chair, the remote on his knee.",
+   "why": "no activity here runs one row per kind of day; shows only while Mark's row has him in the living room (weekdays 16:30-23:00, Sat 10-19, Sun 12-23); from 23:00 he's in bed in the master bedroom"
+  },
+  {
+   "row": "L167",
+   "screen": "mark_living_room.talk",
+   "verdict": "PASS",
+   "line": "When you glance back, he's watching you instead of the screen.",
+   "why": "no activity here runs one row per kind of day; shows only while Mark is in his chair; no time or weekday; Ryan/Laura on the couch aren't contradicted"
+  },
+  {
+   "row": "L167",
+   "screen": "ryan_kitchen.hub",
+   "verdict": "PASS",
+   "line": "Ryan's eating standing up at the counter, straight out of the pan.",
+   "why": "no activity here runs one row per kind of day; shows only while Ryan's 'eating' kitchen row holds (weekdays 18-19, weekends 17-19)"
+  },
+  {
+   "row": "L167",
+   "screen": "ryan_kitchen.talk",
+   "verdict": "PASS",
+   "line": "There's more in the pan. Don't tell Mark I made it.",
+   "why": "no activity here runs one row per kind of day; Ryan in the kitchen 18-19 weekdays / 17-19 weekends; Mark is never in the kitchen then, so the line holds"
+  },
+  {
+   "row": "L167",
+   "screen": "ryan_living_room.hub",
+   "verdict": "PASS",
+   "line": "Ryan's sprawled on the couch with the TV on.",
+   "why": "no activity here runs one row per kind of day; shows only while Ryan's 'on the couch' row holds (weekdays 19-23, weekends 12-17); weekdays 23:00-01:00 he's now in his room, so it doesn't show"
+  },
+  {
+   "row": "L167",
+   "screen": "ryan_living_room.talk",
+   "verdict": "PASS",
+   "line": "Mark's got the remote. Don't even ask.",
+   "why": "no activity here runs one row per kind of day; every hour Ryan is on the couch Mark is in his chair (weekdays 16:30-23, Sat 10-19, Sun 12-23)"
+  },
+  {
+   "row": "L167",
+   "screen": "ryan_room.hub",
+   "verdict": "PASS",
+   "line": "is_active = false on ryan_room_weekend; ryan_room trigger is one row with a group",
+   "why": "one row with an OR group (weekdays 07:00-23:00, weekends 10:30-23:00); a person menu can't grey by hours in this engine (npcBlocked is cost-only, v2.py:6577-6590), and present_faces shows his face with 'Ryan is on his phone.' / 'Ryan is asleep.' from the new rows (v2.py:12300-12306)"
+  },
+  {
+   "row": "L167",
+   "screen": "ryan_room.talk",
+   "verdict": "PASS",
+   "line": "Hey, @player.nickname. You need the bathroom or something?",
+   "why": "no activity here runs one row per kind of day; reached only from the hub inside the 23:00-closed window; nobody's row has the bathroom then except Ryan's own, so 'It's free' holds"
+  },
+  {
+   "row": "L167",
+   "screen": "talk_mom.eat",
+   "verdict": "PASS",
+   "line": "Mom puts a plate of eggs in front of you and sits down with her coffee.",
+   "why": "no activity here runs one row per kind of day; shows only while Laura is in the kitchen (07-08, 08-12 weekends: eggs window; 17-19: dinner window); presence lines gated by groups; night rows put her in bed"
+  },
+  {
+   "row": "L167",
+   "screen": "talk_mom.hub",
+   "verdict": "PASS",
+   "line": "Mom's in the kitchen. Mark's at the table. She looks up at you, then at him.",
+   "why": "no activity here runs one row per kind of day; Mark line gated is_present/is_absent; Laura in the kitchen only by her day rows; night rows (in bed/asleep) keep the menu off"
+  },
+  {
+   "row": "L167",
+   "screen": "talk_mom.talk",
+   "verdict": "PASS",
+   "line": "When he's gone, you tell me everything.",
+   "why": "no activity here runs one row per kind of day; three versions gated on Mark and Ryan in the kitchen; the night rows change none of them"
   }
  ],
  "causes": []

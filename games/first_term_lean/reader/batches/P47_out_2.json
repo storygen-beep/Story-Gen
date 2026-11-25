@@ -1,0 +1,243 @@
+{
+ "verdicts": [
+  {
+   "row": "B10",
+   "screen": "dean_first.door",
+   "verdict": "PASS",
+   "line": "The dean's door is at the end of the corridor, and it's open. He's writing.",
+   "why": "Trigger Mon-Fri 08:00-16:35 with npc_dean present; who_is_where has him at campus_offices 08-17; one-time, so no second visit; both exposure variants name no garment."
+  },
+  {
+   "row": "B10",
+   "screen": "dean_first.rules",
+   "verdict": "PASS",
+   "line": "Give me a reason, and you're back in this office. I don't like seeing a student twice.",
+   "why": "Shows 08:15-16:49, inside his row; the conditional threat names no date or mechanic, and PLAN \u00a75/\u00a77 plans Brooke reporting her to the dean, so a return to his office is planned (c1 fix holds)."
+  },
+  {
+   "row": "B10",
+   "screen": "dean_first.sendoff",
+   "verdict": "PASS",
+   "line": "Psychology has started, child. Lecture hall. Go, now.",
+   "why": "Monday split at 9:00: 'at nine' only 08:00-08:59, 'has started' only 09:00-09:24 (Hale in the Lecture Hall Mon 09-11); 'Don't miss a class.' claims no past (c3, c4 fixes hold). Latest show 16:59, inside his row."
+  },
+  {
+   "row": "B10",
+   "screen": "dean_first.timetable",
+   "verdict": "PASS",
+   "line": "Psychology, Dr. Hale: Monday and Wednesday, 9 to 11. Statistics, Mr. Pratt: Monday and Wednesday, 11 to 1.",
+   "why": "Matches who_is_where: Hale MW 09-11, Pratt MW 11-13 lecture hall, Walsh TT 09-11 lecture hall, Cross TT 11-13 theatre. Shows up to 16:54, dean still in."
+  },
+  {
+   "row": "B8",
+   "screen": "dean_first.door",
+   "verdict": "PASS",
+   "line": "Is that what you're wearing to class, child?",
+   "why": "No garment named; worn_exposure gte 1 / lt 1 cover every outfit. No number."
+  },
+  {
+   "row": "B8",
+   "screen": "dean_first.rules",
+   "verdict": "PASS",
+   "line": "He taps a folder with one finger. Your name's already on it.",
+   "why": "No garment, no number claimed."
+  },
+  {
+   "row": "B8",
+   "screen": "dean_first.sendoff",
+   "verdict": "PASS",
+   "line": "Lecture hall, at nine.",
+   "why": "Nine agrees with Hale's row and the timetable; no garment."
+  },
+  {
+   "row": "B8",
+   "screen": "dean_first.timetable",
+   "verdict": "PASS",
+   "line": "English, Prof. Walsh: Tuesday and Thursday, 9 to 11. Drama, Mr. Cross: Tuesday and Thursday, 11 to 1.",
+   "why": "All four classes agree with the rows, the card and the Classes hint; no garment."
+  },
+  {
+   "row": "C1158",
+   "screen": "dean_first.door",
+   "verdict": "PASS",
+   "line": "Is that what you're wearing to class, child?",
+   "why": "Names no garment."
+  },
+  {
+   "row": "C1206",
+   "screen": "dean_first.door",
+   "verdict": "PASS",
+   "line": "Is that what you're wearing to class, child?",
+   "why": "Names no garment; the exposure group backs the remark."
+  },
+  {
+   "row": "C460",
+   "screen": "dean_first.door",
+   "verdict": "PASS",
+   "line": "When he does look up, he takes his time: your face, then down your body",
+   "why": "True on every reachable minute (Mon-Fri 08:00-16:34, he's in)."
+  },
+  {
+   "row": "C460",
+   "screen": "dean_first.rules",
+   "verdict": "PASS",
+   "line": "Give me a reason, and you're back in this office.",
+   "why": "Probation and complaint count gone; the threat is conditional and PLAN plans a later report to the dean."
+  },
+  {
+   "row": "C460",
+   "screen": "dean_first.sendoff",
+   "verdict": "PASS",
+   "line": "You have the timetable, child. Don't miss a class.",
+   "why": "No missed class claimed (c4 fixed); the Monday lines are split at 9:00 to match the clock."
+  },
+  {
+   "row": "C460",
+   "screen": "dean_first.timetable",
+   "verdict": "PASS",
+   "line": "He slides a printed sheet across the desk",
+   "why": "Screen shows 08:20-16:54, inside his row (c5 fixed: trigger ends 16:35)."
+  },
+  {
+   "row": "C461",
+   "screen": "dean_first.door",
+   "verdict": "PASS",
+   "line": "like he's reading a form he means to sign.",
+   "why": "Texture that fits a dean who wants to be obeyed (PLAN cast)."
+  },
+  {
+   "row": "C461",
+   "screen": "dean_first.rules",
+   "verdict": "PASS",
+   "line": "Classes are not optional, child. Your grades come to me. Complaints come to me.",
+   "why": "Fits the cast entry."
+  },
+  {
+   "row": "C461",
+   "screen": "dean_first.sendoff",
+   "verdict": "PASS",
+   "line": "He's already looking back at his writing.",
+   "why": "Texture that can't clash."
+  },
+  {
+   "row": "C461",
+   "screen": "dean_first.timetable",
+   "verdict": "PASS",
+   "line": "Your timetable. Learn it.",
+   "why": "Fits the cast entry."
+  },
+  {
+   "row": "C593",
+   "screen": "dean_first.door",
+   "verdict": "PASS",
+   "line": "You're the new one, child.",
+   "why": "'child' appears only in npc_dean's lines in 7_final_game.toml (grep -w child); used on door, rules and every send-off variant (c2 fixed)."
+  },
+  {
+   "row": "C897",
+   "screen": "dean_first.sendoff",
+   "verdict": "PASS",
+   "line": "Go to Psychology",
+   "why": "5 minutes is the send-off screen's own time, same as 'Leave his office' and every earlier button in the scene; the hop itself adds nothing (lands 9:05-9:29)."
+  },
+  {
+   "row": "C920",
+   "screen": "dean_first.sendoff",
+   "verdict": "PASS",
+   "line": "Wait for nine, then go to Psychology",
+   "why": "The pre-nine minutes are a wait the label names; 'Go to Psychology' carries only the screen's 5 minutes, like 'Leave his office'. Note: the 08:00-08:29 band's 45 lands 9:10-9:14 (35 would land 9:00), inside the other bands' 9:00-9:14 spread and psych_first's 9:00-9:30."
+  },
+  {
+   "row": "C927",
+   "screen": "dean_first.rules",
+   "verdict": "PASS",
+   "line": "\"I understand.\"",
+   "why": "Exit carries 5 minutes."
+  },
+  {
+   "row": "C927",
+   "screen": "dean_first.sendoff",
+   "verdict": "PASS",
+   "line": "Leave his office",
+   "why": "Every exit carries its time (45/30/15/5/5)."
+  },
+  {
+   "row": "C927",
+   "screen": "dean_first.timetable",
+   "verdict": "PASS",
+   "line": "Fold it into your bag.",
+   "why": "Exit carries 5 minutes."
+  },
+  {
+   "row": "C931",
+   "screen": "dean_first.rules",
+   "verdict": "N/A",
+   "line": "",
+   "why": "No time_of_day condition on this screen."
+  },
+  {
+   "row": "C931",
+   "screen": "dean_first.sendoff",
+   "verdict": "PASS",
+   "line": "Psychology has started, child.",
+   "why": "Bands 08:00-09:00, 09:00-09:25, OR(Tue-Fri, 09:25-17:00) meet end-exclusive; the five buttons tile 08:00-08:30-08:45-09:00-09:25-17:00 the same way; every send-off minute (08:25-16:59) gets exactly one line and one button."
+  },
+  {
+   "row": "C931",
+   "screen": "dean_first.timetable",
+   "verdict": "N/A",
+   "line": "",
+   "why": "No time_of_day condition on this screen."
+  },
+  {
+   "row": "L106",
+   "screen": "dean_first.door",
+   "verdict": "PASS",
+   "line": "The dean's door is at the end of the corridor",
+   "why": "Trigger needs npc_dean present; no one else named."
+  },
+  {
+   "row": "L106",
+   "screen": "dean_first.rules",
+   "verdict": "PASS",
+   "line": "I'm Dean Sterling.",
+   "why": "Latest 16:49, inside his 08-17 row."
+  },
+  {
+   "row": "L106",
+   "screen": "dean_first.sendoff",
+   "verdict": "PASS",
+   "line": "Psychology has started, child. Lecture hall.",
+   "why": "Latest 16:59, inside his row; Hale is in the Lecture Hall Mon 09-11 when it says class has started."
+  },
+  {
+   "row": "L106",
+   "screen": "dean_first.timetable",
+   "verdict": "PASS",
+   "line": "He slides a printed sheet across the desk",
+   "why": "Latest 16:54, inside his row."
+  },
+  {
+   "row": "L167",
+   "screen": "dean_first.rules",
+   "verdict": "N/A",
+   "line": "",
+   "why": "No row with day-varying hours."
+  },
+  {
+   "row": "L167",
+   "screen": "dean_first.sendoff",
+   "verdict": "N/A",
+   "line": "Leave his office",
+   "why": "One-time scene buttons, not an activity row by day kind; 'Leave' is one OR-group choice, not a row per day."
+  },
+  {
+   "row": "L167",
+   "screen": "dean_first.timetable",
+   "verdict": "N/A",
+   "line": "",
+   "why": "No row with day-varying hours."
+  }
+ ],
+ "causes": []
+}

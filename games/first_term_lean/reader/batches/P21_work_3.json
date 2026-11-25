@@ -1,0 +1,34 @@
+{
+ "items": [
+  {
+   "row": "C952",
+   "screen": "*",
+   "why": "its rule's text changed"
+  },
+  {
+   "row": "C952",
+   "screen": "cafe_hire.both",
+   "why": "its rule's text changed"
+  },
+  {
+   "row": "C952",
+   "screen": "cafe_hire.sign",
+   "why": "its rule's text changed"
+  },
+  {
+   "row": "L168",
+   "screen": "*",
+   "why": "never judged"
+  },
+  {
+   "row": "L169",
+   "screen": "*",
+   "why": "never judged"
+  },
+  {
+   "row": "L170",
+   "screen": "*",
+   "why": "never judged"
+  }
+ ]
+}

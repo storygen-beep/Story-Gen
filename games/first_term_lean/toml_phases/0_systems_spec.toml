@@ -96,6 +96,20 @@ bands = [
   { min = 80, max = 100, text = "A" },
 ]
 
+# P36 — Reputation (campus), shown, still in release 1 (PLAN §8g).
+[[sidebar_items]]
+type = "trait_words"
+trait = "reputation"
+label = "Reputation"
+show_value = true
+bands = [
+  { min = 0, max = 19, text = "Nobody" },
+  { min = 20, max = 39, text = "Noticed" },
+  { min = 40, max = 59, text = "Talked about" },
+  { min = 60, max = 79, text = "Known" },
+  { min = 80, max = 100, text = "Everyone's talking" },
+]
+
 
 # P11 — goal 1's count and the rent total, internal (not on the sidebar).
 [[traits.labels]]
@@ -120,6 +134,10 @@ toast = false
 [[traits.labels]]
 key = "grades"
 label = "Grades"
+
+[[traits.labels]]
+key = "reputation"
+label = "Reputation"
 
 [[traits.labels]]
 key = "study_today"
@@ -185,18 +203,144 @@ when = [{ flag = "met_mark", op = "is_true" }]
 text = "Your step-father, 46. He collects the rent."
 tip = "He's at the kitchen table on Sunday mornings. That's when he collects."
 
-# P13 — goal 1's card, armed by the opening (C1604). P11 adds the Sundays count.
-[[quest_cards]]
-group = "story_goals"
+# P46 — the story goal card becomes CoT's Hints page entries, one per release-1 storyline (ENI for LO 2026-11-24).
+[[story_hints]]
+title = "Paying Your Way"
+category = "Storyline 📖"
+description = "Mark wants your share every Sunday."
 when = [{ flag = "goal1_shown", op = "is_true" }]
-text = "Pay your own way. Pay Mark your share every Sunday."
-ready_text = "Done. You pay your own way. Next: your name on campus, in a later release."
-tip = "You need money. Take shifts, or find another way. People are in different places at different hours. What you say changes how they treat you."
-goals = [
-  { flag = "met_mark", op = "is_true", label = "Mark told you the rent" },
-  { flag = "cafe_hired", op = "is_true", label = "Ask about the Help Wanted sign at the café across from campus. The manager's in Monday to Saturday, from 10am." },
-  { flag = "rent_paid_once", op = "is_true", label = "Pay Mark on Sunday morning, at the kitchen table." },
-  { trait = "sundays_paid", subject = "player", op = "gte", value = 4, label = "Pay Mark in full four Sundays in a row" },
+walkthrough = "paying_wt"
+hints = [
+  { when = [], text = "Mark collects the rent at the kitchen table on Sunday mornings, 8am to noon. Find the money before then." },
+  { when = [{ flag = "rent_paid_once", op = "is_true" }], text = "Pay Mark at the kitchen table every Sunday morning. Four Sundays in a row, and you're paying your own way." },
+  { when = [{ trait = "sundays_paid", subject = "player", op = "gte", value = 4 }], text = "end" },
+]
+
+[[story_hints]]
+title = "The Café Job"
+category = "Employment 💼"
+description = "The café in town is hiring."
+hints = [
+  { when = [], text = "Ask about the Help Wanted sign at the Café in town. The manager's in Monday to Saturday, from 10am." },
+  { when = [{ flag = "met_tom", op = "is_true" }], text = "Work your first shift at the Café: a weekday between 10am and 3pm, while Tom and the barista are both in." },
+  { when = [{ flag = "met_chris", op = "is_true" }], text = "end" },
+]
+
+[[story_hints]]
+title = "Classes"
+category = "Campus Life 🏫"
+description = "Your first term."
+hints = [
+  { when = [], text = "Before your first class, the dean wants to see every new student: his office is on the faculty corridor, off the Quad, weekdays 8am to 5pm." },
+  { when = [{ flag = "met_dean", op = "is_true" }], text = "Your classes are in the Lecture Hall: psychology Monday and Wednesday at 9am, statistics at 11am, English Tuesday and Thursday at 9am. Drama is in the Theatre, Tuesday and Thursday at 11am." },
+  { when = [{ flag = "met_nadia", op = "is_true" }], text = "You know someone in psychology now. Statistics is Monday and Wednesday at 11am, English Tuesday and Thursday at 9am, both in the Lecture Hall." },
+  { when = [{ flag = "met_hale", op = "is_true" }, { flag = "met_pratt", op = "is_true" }, { flag = "met_walsh", op = "is_true" }], text = "end" },
+]
+
+[[story_hints]]
+title = "Drama"
+category = "Hobbies 🎨"
+description = "A drama class in the Theatre."
+hints = [
+  { when = [], text = "Drama is in the Theatre, Tuesday and Thursday at 11am." },
+  { when = [{ flag = "met_cross", op = "is_true" }], text = "Practise on the empty stage when Mr. Cross isn't on it, or sit in on his rehearsals Tuesday, Thursday and Friday, 2 to 6pm." },
+  { when = [{ flag = "cross_saw_practise", op = "is_true" }], text = "end" },
+]
+
+[[story_hints]]
+title = "Someone on the Quad"
+category = "Relationship 🥰"
+description = "A girl on the quad looks like she runs the place."
+hints = [
+  { when = [], text = "Spend a weekday afternoon on the Quad, between 2 and 3." },
+  { when = [{ flag = "met_zoe", op = "is_true" }], text = "Zoe lives in town, two streets off the high street. Knock in the afternoon, or come to her party on a Saturday, 9pm to 1am." },
+  { when = [{ flag = "met_sam", op = "is_true" }], text = "end" },
+]
+
+[[story_hints]]
+title = "The Guys on the Quad"
+category = "Relationship 🥰"
+description = "A crowd of guys hangs around the quad."
+hints = [
+  { when = [], text = "From your second week, a guy and his friends hang around the Quad on weekday afternoons, 2 to 4." },
+  { when = [{ flag = "met_jake", op = "is_true" }], text = "end" },
+]
+
+[[story_hints]]
+title = "The Mirror"
+category = "Campus Life 🏫"
+description = "Three girls own the bathroom mirror."
+hints = [
+  { when = [], text = "From your second week, three girls own the mirror in the women's bathroom off the Lecture Hall, weekdays 8 to 9am and 1 to 2pm." },
+  { when = [{ flag = "met_brooke", op = "is_true" }], text = "end" },
+]
+
+[[story_hints]]
+title = "The Man Next Door"
+category = "Off-campus 🏙️"
+description = "Someone on your street is always watching."
+hints = [
+  { when = [], text = "The man next door sits on his porch. Walk down your street on a Sunday, 9am to noon or 5 to 8pm." },
+  { when = [{ flag = "met_vance", op = "is_true" }], text = "end" },
+]
+
+[[story_hints]]
+title = "The Clothes Shop"
+category = "Off-campus 🏙️"
+description = "There's a clothes shop in your neighbourhood."
+hints = [
+  { when = [], text = "The clothes shop in your neighbourhood is open Monday to Saturday, 10am to 7pm." },
+  { when = [{ flag = "met_nina", op = "is_true" }], text = "end" },
+]
+
+[[story_hints]]
+title = "Staying in Shape"
+category = "Hobbies 🎨"
+description = "The park and the gym."
+hints = [
+  { when = [], text = "In your leggings and sports top, work out at the gym, 6am to 10pm. The trainer's in weekdays 6 to 10am and 5 to 9pm, and Saturday 8am to 2pm." },
+  { when = [{ flag = "met_marco", op = "is_true" }], text = "Now go for a run in the park, 6am to 9pm, in the same leggings and top." },
+  { when = [{ flag = "ran_once", op = "is_true" }], text = "end" },
+]
+
+[[story_hints]]
+title = "The Corner Shop"
+category = "Off-campus 🏙️"
+description = "There's a corner shop at the end of your street."
+hints = [
+  { when = [], text = "The corner shop at the end of your street is open 7am to 11pm. The owner works the till Monday to Saturday, 7am to 3pm; the night clerk has it after 3pm and all day Sunday." },
+  { when = [{ flag = "met_frank", op = "is_true" }, { flag = "met_danny", op = "is_true" }], text = "end" },
+]
+
+[[story_hints]]
+title = "The Library"
+category = "Campus Life 🏫"
+description = "Long tables and quiet floors."
+hints = [
+  { when = [], text = "The library on campus is open 8am to 10pm. The librarian's at the desk weekdays 8am to 4pm, and Saturday 10am to 4pm." },
+  { when = [{ flag = "met_holt", op = "is_true" }], text = "end" },
+]
+
+[[story_hints]]
+title = "Lunch"
+category = "Campus Life 🏫"
+description = "The cafeteria on campus."
+hints = [
+  { when = [], text = "The cafeteria serves lunch weekdays, 11am to 2pm. The woman at the counter is in weekdays 8am to 4pm." },
+  { when = [{ flag = "met_rosa", op = "is_true" }], text = "end" },
+]
+
+[[walkthroughs]]
+id = "paying_wt"
+title = "Paying Your Way"
+overview = "Mark wants $75 every Sunday morning."
+guard = { when = [{ flag = "met_mark", op = "is_true" }], text = "You haven't met them yet." }
+steps = [
+  { when = [{ flag = "met_mark", op = "is_true" }], done_text = "Mark told you the rent.", todo_text = "Hear Mark out in the kitchen." },
+  { when = [{ flag = "cafe_hired", op = "is_true" }], done_text = "You got the café job.", todo_text = "Ask about the Help Wanted sign at the Café in town, Monday to Saturday from 10am." },
+  { kind = "idea", text = "An hour at the café pays $5; a four-hour shift pays $22. Either way it's counted into your hand when you finish." },
+  { when = [{ flag = "rent_paid_once", op = "is_true" }], done_text = "You paid Mark once.", todo_text = "Pay Mark at the kitchen table on Sunday morning." },
+  { when = [{ trait = "sundays_paid", subject = "player", op = "gte", value = 4 }], done_text = "Four Sundays in a row: you pay your own way.", todo_text = "Pay Mark in full four Sundays in a row." },
 ]
 
 # P21 — Tom and Chris on the People page once met, with where and when.
@@ -244,6 +388,12 @@ text = "Nadia, 20. A second-year, retaking Dr. Hale's course."
 tip = "Psychology on Monday and Wednesday mornings, the cafeteria Monday and Wednesday at 1pm, and the library weekday afternoons, 2 to 6pm."
 
 [[quest_cards]]
+npc_id = "npc_dean"
+when = [{ flag = "met_dean", op = "is_true" }]
+text = "Dean Sterling, 58. He runs the college, and he wants to be obeyed."
+tip = "In his office on the faculty corridor, weekdays 8am to 5pm."
+
+[[quest_cards]]
 npc_id = "npc_holt"
 when = [{ flag = "met_holt", op = "is_true" }]
 text = "Ms. Holt, 31. The librarian."
@@ -283,13 +433,43 @@ tip = "Weekdays 6 to 10am and 5 to 9pm, and Saturday 8am to 2pm."
 npc_id = "npc_zoe"
 when = [{ flag = "met_zoe", op = "is_true" }]
 text = "Zoe, 19. She found you on the quad."
-tip = "On the quad weekday afternoons, 1 to 3 (2 to 3 on Tuesday and Thursday, after lunch in the cafeteria); at home every evening, 6 to 11, two streets from campus."
+tip = "On the quad weekday afternoons, 1 to 3 (2 to 3 on Tuesday and Thursday, after lunch in the cafeteria); at home every evening, 6 to 11, in town, two streets off the high street. Parties every Saturday, 9pm to 1am."
+
+[[quest_cards]]
+npc_id = "npc_jake"
+when = [{ flag = "met_jake", op = "is_true" }]
+text = "Jake, 20. He asked you out on the quad."
+tip = "In the cafeteria weekdays 12 to 2, and on the quad 2 to 4."
+
+[[quest_cards]]
+npc_id = "npc_brooke"
+when = [{ flag = "met_brooke", op = "is_true" }]
+text = "Brooke, 21. The girl who owns the mirror, and wants what you want."
+tip = "The bathroom mirror weekdays 8 to 9 and 1 to 2; psychology Monday and Wednesday mornings; drama Tuesday and Thursday, and rehearsals Tuesday, Thursday and Friday afternoons."
+
+[[quest_cards]]
+npc_id = "npc_kayla"
+when = [{ flag = "met_brooke", op = "is_true" }]
+text = "Kayla, 20. Brooke's friend. She laughs first."
+tip = "At the mirror with Brooke weekdays 8 to 9 and 1 to 2; the cafeteria weekdays 12 to 1."
+
+[[quest_cards]]
+npc_id = "npc_tess"
+when = [{ flag = "met_brooke", op = "is_true" }]
+text = "Tess, 21. Brooke's friend. She does the make-up, and says less."
+tip = "At the mirror with Brooke weekdays 8 to 9 and 1 to 2; the cafeteria weekdays 12 to 1."
+
+[[quest_cards]]
+npc_id = "npc_sam"
+when = [{ flag = "met_sam", op = "is_true" }]
+text = "Sam, 22. Zoe's roommate, and on-and-off boyfriend. Always home."
+tip = "At Zoe's every day, noon to 2am."
 
 [[quest_cards]]
 npc_id = "npc_nina"
 when = [{ flag = "met_nina", op = "is_true" }]
-text = "Nina, 26. She runs the clothes shop on your street."
-tip = "Behind the till Monday to Saturday, 10am to 7pm."
+text = "Nina, 26. She runs the clothes shop in your neighbourhood."
+tip = "Behind the till Monday to Saturday, 10am to 6:45pm."
 
 # P42 — the day turn clears the once-a-day talk flags (v2.py:1269-1277, v2.py:7158).
 [engine.daily_tick]
@@ -302,6 +482,7 @@ flagEffects = [
   { targetType = "player", flag = "cafe_ask_parked", op = "unset" },
   # P11 — the rent week: cleared on Tuesday, after Monday's check has read it
   { targetType = "player", flag = "rent_handled_this_week", op = "unset", conditions = { version = "1.0", logic = "AND", items = [{ type = "weekday", weekdays = [1] }] } },
+  { targetType = "player", flag = "partied_this_week", op = "unset", conditions = { version = "1.0", logic = "AND", items = [{ type = "weekday", weekdays = [0] }] } },
   # P11 — four Sundays in a row: goal 1 done (PLAN §2, §8i)
   { targetType = "player", flag = "pays_her_own_way", op = "set", conditions = { version = "1.0", logic = "AND", items = [{ type = "trait", subject = "player", trait_key = "sundays_paid", operator = "gte", value = 4 }] } },
 ]
@@ -320,6 +501,9 @@ present_faces = true
 # LO 2026-11-24: "Add the clock in the left top when the sidebar is closed. It was is in the old first term."
 phone_clock = true
 clothes_layout = "room"
+# P46 — LO 2026-11-25: "completely aligned with the cots pages": CoT's Hints page and People dialog.
+quests_layout = "hints"
+people_page = "cot"
 
 # LO 2026-11-24, "yes hide popups": bookkeeping flags don't toast; flags the player should notice still do.
 [[flags.labels]]
@@ -621,3 +805,8 @@ sender = "npc"
 after_round = 1
 after_choice = 2
 content = "That's what they all say, sweetie."
+
+[[flags.labels]]
+key = "partied_this_week"
+label = "Partied this week"
+toast = false

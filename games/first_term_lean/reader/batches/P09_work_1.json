@@ -2,72 +2,57 @@
  "items": [
   {
    "row": "B10",
-   "screen": "study_hall.study",
+   "screen": "class_drama.class",
    "why": "screen changed: truth row"
   },
   {
-   "row": "B5",
-   "screen": "study_hall.study",
-   "why": "failed last pass"
-  },
-  {
    "row": "B8",
-   "screen": "study_hall.study",
+   "screen": "class_drama.class",
    "why": "screen changed: truth row"
   },
   {
    "row": "C460",
-   "screen": "study_hall.study",
+   "screen": "class_drama.class",
    "why": "screen changed: truth row"
   },
   {
    "row": "C461",
-   "screen": "study_hall.study",
+   "screen": "class_drama.class",
    "why": "screen changed: truth row"
   },
   {
-   "row": "C804",
-   "screen": "study_hall.study",
+   "row": "C913",
+   "screen": "class_drama.class",
    "why": "failed last pass"
   },
   {
-   "row": "C889",
-   "screen": "study_hall.study",
-   "why": "failed last pass (a note), its screen changed"
-  },
-  {
-   "row": "C910",
-   "screen": "study_hall.study",
-   "why": "failed last pass (a note), its screen changed"
+   "row": "C916",
+   "screen": "class_drama.class",
+   "why": "failed last pass"
   },
   {
    "row": "C927",
-   "screen": "study_hall.study",
+   "screen": "class_drama.class",
    "why": "screen changed: truth row"
   },
   {
-   "row": "C929",
-   "screen": "study_hall.study",
+   "row": "C930",
+   "screen": "class_drama.class",
    "why": "failed last pass (a note), its screen changed"
   },
   {
    "row": "C931",
-   "screen": "study_hall.study",
+   "screen": "class_drama.class",
    "why": "screen changed: truth row"
   },
   {
-   "row": "C953",
-   "screen": "study_hall.study",
-   "why": "failed last pass (a note), its screen changed"
-  },
-  {
    "row": "L106",
-   "screen": "study_hall.study",
+   "screen": "class_drama.class",
    "why": "screen changed: truth row"
   },
   {
    "row": "L167",
-   "screen": "study_hall.study",
+   "screen": "class_drama.class",
    "why": "screen changed: truth row"
   }
  ]

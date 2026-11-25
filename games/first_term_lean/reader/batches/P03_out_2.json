@@ -1,0 +1,152 @@
+{
+ "verdicts": [
+  {
+   "row": "C1238",
+   "screen": "hood_street",
+   "verdict": "PASS",
+   "line": "place cards: hood_shop_t0, hood_park_t0, hood_gym_t0, hood_next_door_t0",
+   "why": "the street itself has no picture; each place card shows her at that place, and a closed place's card now shows the placeholder (v2.py:24831), so no card contradicts the clock"
+  },
+  {
+   "row": "C804",
+   "screen": "hood_street",
+   "verdict": "PASS",
+   "line": "\"Neighbours, dog walkers, kids on bikes.\"",
+   "why": "an unnamed crowd line; Vance shows as his face 5-8pm; the neighbour who stares is unnamed"
+  },
+  {
+   "row": "places#2",
+   "screen": "hood_street",
+   "verdict": "PASS",
+   "line": "\"Across the road, a neighbour's eyes drop to your chest in Mom's top...\"",
+   "why": "crowd only, no named person in room text; never empty (the crowd line)"
+  },
+  {
+   "row": "C795",
+   "screen": "hood_clothes",
+   "verdict": "FAIL",
+   "line": "Nina looks up from the till. \"Find anything you're brave enough for?\"",
+   "why": "a re-entry change made of a room-text line for one person; the rule now says faces only"
+  },
+  {
+   "row": "C804",
+   "screen": "hood_clothes",
+   "verdict": "FAIL",
+   "line": "Nina looks up from the till. \"Find anything you're brave enough for?\"",
+   "why": "Nina's presence is written as a line in the room text (description_variants, met_nina + npc_at_location), not just her face",
+   "cause": "P03r6-c1"
+  },
+  {
+   "row": "places#2",
+   "screen": "hood_clothes",
+   "verdict": "FAIL",
+   "line": "Nina looks up from the till. \"Find anything you're brave enough for?\"",
+   "why": "rule 2: a person at a place is their face, never a room-text line; this variant adds one for Nina",
+   "cause": "P03r6-c1"
+  },
+  {
+   "row": "C795",
+   "screen": "hood_gym",
+   "verdict": "PASS",
+   "line": "\"The same regulars every day.\"",
+   "why": "no per-person line; Marco is his face"
+  },
+  {
+   "row": "C804",
+   "screen": "hood_gym",
+   "verdict": "PASS",
+   "line": "\"The gym: weights, treadmills, mirrors on every wall. The same regulars every day.\"",
+   "why": "faces plus an unnamed crowd line; the old one-line-per-person ask is gone"
+  },
+  {
+   "row": "places#2",
+   "screen": "hood_gym",
+   "verdict": "PASS",
+   "line": "\"The same regulars every day.\"",
+   "why": "crowd line means it's never empty while open; no one named"
+  },
+  {
+   "row": "C795",
+   "screen": "hood_shop",
+   "verdict": "PASS",
+   "line": "\"Locals in for milk, kids in for sweets.\"",
+   "why": "no per-person line; Frank and Danny are faces"
+  },
+  {
+   "row": "C804",
+   "screen": "hood_shop",
+   "verdict": "PASS",
+   "line": "\"Locals in for milk, kids in for sweets.\"",
+   "why": "faces plus unnamed crowd"
+  },
+  {
+   "row": "places#2",
+   "screen": "hood_shop",
+   "verdict": "PASS",
+   "line": "\"The corner shop: snacks, cigarettes behind the counter, the till by the door.\"",
+   "why": "staffed every open minute (Frank 7-15 Mon-Sat, Danny 15-23 Mon-Sat, 7-23 Sun), so never empty; no one named"
+  },
+  {
+   "row": "C889",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "\"Buy a snack ($2)\", \"Work out ($5)\", \"Go for a run\", \"Take the bus to campus ($2)\"",
+   "why": "the neighbourhood's buttons carry money only when it's a spend, no time, no energy, no clock time, no 'till'"
+  },
+  {
+   "row": "C906",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "\"Buy a snack ($2)\", \"Work out ($5)\", \"Go for a run\", \"Take the bus to campus ($2)\"",
+   "why": "the neighbourhood's buttons carry money only when it's a spend, no time, no energy, no clock time, no 'till'"
+  },
+  {
+   "row": "C910",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "\"Buy a snack ($2)\", \"Work out ($5)\", \"Go for a run\", \"Take the bus to campus ($2)\"",
+   "why": "the neighbourhood's buttons carry money only when it's a spend, no time, no energy, no clock time, no 'till'"
+  },
+  {
+   "row": "C929",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "\"Buy a snack ($2)\", \"Work out ($5)\", \"Go for a run\", \"Take the bus to campus ($2)\"",
+   "why": "the neighbourhood's buttons carry money only when it's a spend, no time, no energy, no clock time, no 'till'"
+  },
+  {
+   "row": "C953",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "\"Buy a snack ($2)\", \"Work out ($5)\", \"Go for a run\", \"Take the bus to campus ($2)\"",
+   "why": "the neighbourhood's buttons carry money only when it's a spend, no time, no energy, no clock time, no 'till'"
+  },
+  {
+   "row": "clock#1",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "\"Buy a snack ($2)\", \"Work out ($5)\", \"Go for a run\", \"Take the bus to campus ($2)\"",
+   "why": "the neighbourhood's buttons carry money only when it's a spend, no time, no energy, no clock time, no 'till'"
+  },
+  {
+   "row": "clock#6",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "\"Buy a snack ($2)\", \"Work out ($5)\", \"Go for a run\", \"Take the bus to campus ($2)\"",
+   "why": "the neighbourhood's buttons carry money only when it's a spend, no time, no energy, no clock time, no 'till'"
+  },
+  {
+   "row": "places#4",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "\"Buy a snack ($2)\", \"Work out ($5)\", \"Go for a run\", \"Take the bus to campus ($2)\"",
+   "why": "the neighbourhood's buttons carry money only when it's a spend, no time, no energy, no clock time, no 'till'"
+  }
+ ],
+ "causes": [
+  {
+   "id": "P03r6-c1",
+   "what": "The clothes shop's description variant writes Nina into the room text (\"Nina looks up from the till...\"); a person at a place is now her face only"
+  }
+ ]
+}
