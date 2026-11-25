@@ -4291,9 +4291,9 @@ name = "Sit in on the rehearsal"
 location = "campus_theatre"
 trigger_mode = "manual"
 is_repeatable = true
-# Greys with its hours out of hours (default rule); the people's rows fill the window exactly (P30r11-c3).
-show_when_blocked = true
-cooldown_message = "Tuesday, Thursday and Friday, 2 to 6pm."
+# Twice a day; hidden out of hours and when spent (craft/clock.md rule 10, LO 2026-11-26); the people's rows fill the window exactly (P30r11-c3).
+# LO 2026-11-26 "yes": at most twice a day, like stage_practise; under craft/clock.md rule 10 it hides when spent.
+max_triggers_per_day = 2
 conditions = { version = "1.0", logic = "AND", items = [{ type = "weekday", weekdays = [1, 3, 4] }, { type = "time_of_day", start_time = "14:00", end_time = "18:00" }] }
 
 [[canvases.nodes]]
@@ -4343,9 +4343,9 @@ name = "Sit at the back of drama"
 location = "campus_theatre"
 trigger_mode = "manual"
 is_repeatable = true
-# Greys with its hours out of hours (default rule); the people's rows fill the window exactly (P30r11-c3).
-show_when_blocked = true
-cooldown_message = "Tuesday and Thursday, 11am to 1pm."
+# Twice a day; hidden out of hours and when spent (craft/clock.md rule 10, LO 2026-11-26); the people's rows fill the window exactly (P30r11-c3).
+# LO 2026-11-26 "yes": at most twice a day, like stage_practise; under craft/clock.md rule 10 it hides when spent.
+max_triggers_per_day = 2
 conditions = { version = "1.0", logic = "AND", items = [{ type = "weekday", weekdays = [1, 3] }, { type = "time_of_day", start_time = "11:00", end_time = "13:00" }] }
 
 [[canvases.nodes]]
