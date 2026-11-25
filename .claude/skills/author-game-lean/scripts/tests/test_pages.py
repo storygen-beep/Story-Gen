@@ -183,3 +183,102 @@ def test_a_stranger_name_judged_only_on_star_is_asked_again(people_game):
     merged.write_text(merged.read_text().replace("guy behind the counter", "man at the till"))
     again = [i for i in reading.work_list(people_game, "p1")["items"] if i["screen"] == "npcs.npc_tom.stranger_name"]
     assert again and all(i["row"] in reading.rules.table() for i in again)
+
+
+# ── a person's traits and start feelings, and the sidebar, as screens (P48, 2026-11-25; LO: "Go ahead") ──────────
+
+SYSTEM = '''
+[engine.people]
+system = "cot"
+
+[[npcs]]
+id = "npc_tom"
+name = "Tom"
+gender = "male"
+attracted = true
+people_type = "worker"
+traits = ["Forward", "Loner"]
+core_traits = { friendship = 300 }
+
+[[sidebar_items]]
+type = "trait_words"
+trait = "exhibitionism"
+label = "Exhibitionism"
+bands = [{ min = 0, max = 99, text = "Level 0" }, { min = 100, max = 199, text = "Level 1" }]
+'''
+
+
+@pytest.fixture
+def system_game(tmp_path):
+    g = make_game(tmp_path)
+    (g / "toml_phases" / "7_final_game.toml").write_text(MERGED + SYSTEM)
+    (g / "cards" / "p1.md").write_text("PIECE p1\nWhat the player sees:\n  Screen 1: Mom.\n" + SHEET
+                                       + "Does:\n  start.a | the opening\n  start.b | the opening\n"
+                                       + "  sidebar.exhibitionism | a meter is shown or paid\n"
+                                       + "Builds: start, home, engine:people, sidebar:exhibitionism\n")
+    return g
+
+
+def test_traits_and_start_feelings_are_screens(system_game):
+    game = check.load_merged(system_game)
+    entries = pages.people_entries(game)
+    assert entries["npcs.npc_tom.traits"] == "Forward, Loner"
+    assert entries["npcs.npc_tom.feelings"].startswith("friendship 300, lust 0, control 0")
+    sc = reading.screens(game, {"engine:people"})
+    assert {"npcs.npc_tom.traits", "npcs.npc_tom.feelings"} <= set(sc)
+    assert "npcs.npc_tom.traits" in reading.screens(game, {"npcs:npc_tom"})
+    assert "npcs.npc_tom.traits" not in reading.screens(game, {"start"})
+
+
+def test_no_switch_no_system_screens(system_game):
+    game = check.load_merged(system_game)
+    game["engine"] = {}
+    assert not any(s.endswith((".traits", ".feelings")) for s in pages.people_entries(game))
+
+
+def test_a_sidebar_item_is_a_screen_its_builds_line_covers(system_game):
+    game = check.load_merged(system_game)
+    assert "sidebar.exhibitionism" in reading.screens(game, {"sidebar:exhibitionism"})
+    assert rules.seen(game)["sidebar.exhibitionism"] == {"a meter is shown or paid"}
+    assert pages.is_page("sidebar.exhibitionism")
+
+
+def test_a_card_of_only_page_screens_is_judged_and_needs_no_sheet(tmp_path):
+    g = make_game(tmp_path)
+    (g / "toml_phases" / "7_final_game.toml").write_text(MERGED + SYSTEM)
+    (g / "cards" / "p1.md").write_text("PIECE p1\nDoes:\n  sidebar.exhibitionism | a meter is shown or paid\n"
+                                       "  npcs.npc_tom.traits | a person is on screen\n"
+                                       "Builds: engine:people, sidebar:exhibitionism\n")
+    game = check.load_merged(g)
+    assert not check.not_built_yet(rules.card_does((g / "cards" / "p1.md").read_text()), game)
+    assert check.check_card(g, "p1")[0] == check.GREEN
+    assert check.check_does(g, game) == (check.GREEN, [])
+
+
+def test_a_card_need_not_name_its_sidebar_items_on_does(system_game):
+    # P09 and P36 built Grades and Reputation before a sidebar item was a screen; the reader still reaches them.
+    card = system_game / "cards" / "p1.md"
+    card.write_text(card.read_text().replace("  sidebar.exhibitionism | a meter is shown or paid\n", ""))
+    assert not any("sidebar." in r for r in check.check_does(system_game, check.load_merged(system_game))[1])
+    rows = sorted({i["row"] for i in reading.work_list(system_game, "p1")["items"]})
+    reading.record(system_game, "p1", {"verdicts": [{"row": r, "screen": "*", "verdict": "PASS"} for r in rows],
+                                       "causes": []})
+    merged = system_game / "toml_phases" / "7_final_game.toml"
+    merged.write_text(merged.read_text().replace('text = "Level 1"', 'text = "Bold"'))
+    assert any(i["screen"] == "sidebar.exhibitionism" for i in reading.work_list(system_game, "p1")["items"])
+
+
+@pytest.mark.parametrize("old,new,screen", [
+    ('traits = ["Forward", "Loner"]', 'traits = ["Forward", "Gamer"]', "npcs.npc_tom.traits"),
+    ("friendship = 300", "friendship = 100", "npcs.npc_tom.feelings"),
+    ('text = "Level 1"', 'text = "Bold"', "sidebar.exhibitionism"),
+])
+def test_a_changed_trait_start_value_or_band_reopens_its_rows(system_game, old, new, screen):
+    rows = sorted({i["row"] for i in reading.work_list(system_game, "p1")["items"]})
+    verdicts = [{"row": r, "screen": "*", "verdict": "PASS"} for r in rows]
+    reading.record(system_game, "p1", {"verdicts": verdicts, "causes": []})
+    assert not [i for i in reading.work_list(system_game, "p1")["items"] if i["screen"] == screen]
+    merged = system_game / "toml_phases" / "7_final_game.toml"
+    merged.write_text(merged.read_text().replace(old, new))
+    again = [i for i in reading.work_list(system_game, "p1")["items"] if i["screen"] == screen]
+    assert again

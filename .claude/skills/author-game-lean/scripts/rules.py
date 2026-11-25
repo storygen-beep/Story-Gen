@@ -171,8 +171,8 @@ def seen(game):
             if any(b.get("type") in ("image", "video") for b, _ in scenes.walk(node.get("blocks"))):
                 seen_here.add("a media spot")
             if any(ef.get("trait") not in NOT_METERS for ch in choices for ef in ch.get("effects") or []
-                   if isinstance(ef, dict) and ef.get("trait")):
-                seen_here.add("a meter is shown or paid")
+                   if isinstance(ef, dict) and ef.get("trait")) or any(ch.get("skill_gate") for ch in choices):
+                seen_here.add("a meter is shown or paid")  # a skill gate raises her skill when taken (people.py)
             if any(m in text for m in GOAL_MARKS):
                 seen_here.add("a goal card is shown")
             if any(ch.get("targetType") == "location" for ch in choices):
@@ -190,7 +190,9 @@ def seen(game):
             here.add("the clock moves")
         out[key] = here
     for key in pages.people_entries(game):
-        out[key] = {"a person is on screen"}  # the People dialog: how a person is named before and after
+        out[key] = {"a person is on screen"}  # the People view: how a person is named, their traits, where they start
+    for key in pages.sidebar_entries(game):
+        out[key] = {"a meter is shown or paid"}  # a sidebar item shows her numbers (P48, 2026-11-25)
     return out
 
 

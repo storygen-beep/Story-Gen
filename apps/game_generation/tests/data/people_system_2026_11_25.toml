@@ -1,0 +1,301 @@
+# ═══════════════════════════════════════════════════════════════════════════════
+#  ENGINE FIXTURE — CoT's people system, [engine.people] system = "cot" (2026-11-25).
+#  Media-free. Read by test_people_system.py.
+#
+#  People (all at home all day, each a different fixed make-up):
+#    ben   male, attracted, Shy + Nerd (personality) + Groper (sex): reveal, "date".
+#    cal   male, attracted, Forward (active, casual sex): "fuckbuddy", "hatefuck".
+#    dee   female, attracted, Chaste: tipping point 300 + 100 + 800.
+#    eve   female, attracted, Slut: tipping point 300 + 100 - 200.
+#    fay   female, attracted, Dominant.
+#    gus   male, NOT attracted: a lust gain is dropped.
+#    holt  male professor (Faculty tab), attracted: intimacy 0 / 1 / 2.
+#    ian   male, attracted, Sadist, hand-set want = "rival".
+#    old   male, attracted, 50: friendly and lusting, a "friend", never a "date".
+#    liz   female, attracted, Gossip (the game's own trait); starts 300 / -250 / -150.
+#  Her skills: exhibitionism (0) and charm (250, level 2).
+#  ben_chat: a Talk row whose choices carry the effects, gates and conditions.
+# ═══════════════════════════════════════════════════════════════════════════════
+
+schema_version  = "0.2"
+starting_canvas = "scene_start"
+
+[project]
+id            = "engine_people_system"
+title         = "Engine People System"
+description   = "Engine fixture for CoT's people system."
+quests_engine = "v2"
+
+[time]
+enabled       = true
+starting_hour = 10
+starting_day  = "Monday"
+starting_week = 1
+
+[player]
+id          = "player"
+name        = "Mara"
+description = "Fixture protagonist."
+core_traits = { energy = 100, exhibitionism = 0, charm = 250 }
+flag_keys   = ["started", "sex_partner_ben", "sex_partner_holt", "sex_partner_dee"]
+
+[engine.people]
+system = "cot"
+
+[engine.people.traits.Gossip]
+kind        = "personality"
+threshold   = 150
+emoji       = "🗣️"
+description = "Nothing she hears stays with her."
+
+[[traits.labels]]
+key   = "exhibitionism"
+label = "Exhibitionism"
+skill = true
+
+[[traits.labels]]
+key   = "charm"
+label = "Charm"
+skill = true
+
+[ui]
+people_page = "cot"
+
+[ui.cast_page]
+title = "People"
+
+[[npcs]]
+id          = "ben"
+name        = "Ben Hale"
+description = "Fixture."
+people_tab  = "friends"
+gender      = "male"
+attracted   = true
+traits      = ["Shy", "Nerd", "Groper"]
+[[npcs.schedules]]
+location   = "loc_home"
+start_time = "00:00"
+end_time   = "23:59"
+
+[[npcs]]
+id          = "cal"
+name        = "Cal"
+description = "Fixture."
+people_tab  = "friends"
+gender      = "male"
+attracted   = true
+traits      = ["Forward"]
+[[npcs.schedules]]
+location   = "loc_home"
+start_time = "00:00"
+end_time   = "23:59"
+
+[[npcs]]
+id          = "dee"
+name        = "Dee"
+description = "Fixture."
+people_tab  = "friends"
+gender      = "female"
+attracted   = true
+traits      = ["Chaste"]
+[[npcs.schedules]]
+location   = "loc_home"
+start_time = "00:00"
+end_time   = "23:59"
+
+[[npcs]]
+id          = "eve"
+name        = "Eve"
+description = "Fixture."
+people_tab  = "friends"
+gender      = "female"
+attracted   = true
+traits      = ["Slut"]
+[[npcs.schedules]]
+location   = "loc_home"
+start_time = "00:00"
+end_time   = "23:59"
+
+[[npcs]]
+id          = "fay"
+name        = "Fay"
+description = "Fixture."
+people_tab  = "friends"
+gender      = "female"
+attracted   = true
+traits      = ["Dominant"]
+[[npcs.schedules]]
+location   = "loc_home"
+start_time = "00:00"
+end_time   = "23:59"
+
+[[npcs]]
+id          = "gus"
+name        = "Gus"
+description = "Fixture."
+people_tab  = "friends"
+gender      = "male"
+attracted   = false
+[[npcs.schedules]]
+location   = "loc_home"
+start_time = "00:00"
+end_time   = "23:59"
+
+[[npcs]]
+id          = "holt"
+name        = "Professor Holt"
+description = "Fixture."
+people_tab  = "faculty"
+gender      = "male"
+attracted   = true
+[[npcs.schedules]]
+location   = "loc_home"
+start_time = "00:00"
+end_time   = "23:59"
+
+[[npcs]]
+id          = "ian"
+name        = "Ian"
+description = "Fixture."
+people_tab  = "rivals"
+gender      = "male"
+attracted   = true
+traits      = ["Sadist"]
+want        = "rival"
+[[npcs.schedules]]
+location   = "loc_home"
+start_time = "00:00"
+end_time   = "23:59"
+
+[[npcs]]
+id          = "old"
+name        = "Mr Old"
+description = "Fixture."
+people_tab  = "acquaintances"
+gender      = "male"
+attracted   = true
+age         = 50
+[[npcs.schedules]]
+location   = "loc_home"
+start_time = "00:00"
+end_time   = "23:59"
+
+[[npcs]]
+id          = "liz"
+name        = "Liz"
+description = "Fixture."
+people_tab  = "friends"
+gender      = "female"
+attracted   = true
+traits      = ["Gossip"]
+core_traits = { friendship = 300, lust = -250, control = -150 }
+[[npcs.schedules]]
+location   = "loc_home"
+start_time = "00:00"
+end_time   = "23:59"
+
+[[locations]]
+id          = "loc_home"
+name        = "Home"
+description = "Her house."
+
+# ── canvases ─────────────────────────────────────────────────────────────────
+
+[[canvases]]
+id   = "scene_start"
+name = "Start"
+
+[[canvases.nodes]]
+id     = "intro"
+name   = "Intro"
+blocks = [ { type = "paragraph", content = "Fixture start." } ]
+exit_block = { type = "location", text = "Go home", config = { destinationType = "specific", locationId = "loc_home", time_progression_minutes = 0, flagEffects = [ { targetType = "player", flag = "started" } ] } }
+
+[[canvases]]
+id   = "ben_chat"
+name = "A word with Ben"
+
+[canvases.trigger]
+location      = "loc_home"
+npc           = "ben"
+is_repeatable = true
+is_active     = true
+
+[[canvases.nodes]]
+id   = "talk"
+name = "Talk"
+blocks = [
+  { type = "paragraph", content = "Ben looks up." },
+  { type = "group", props = { conditions = { version = "1.0", logic = "AND", items = [ { type = "npc_wants", npc_id = "ben", any_of = ["fuckbuddy", "date"] } ] } }, blocks = [
+    { type = "paragraph", content = "He wants you in his bed." },
+  ] },
+  { type = "paragraph", content = "He waits." },
+  { type = "group", props = { conditions = { version = "1.0", logic = "AND", items = [ { type = "npc_has_trait", npc_id = "ben", trait = "Shy" } ] } }, blocks = [
+    { type = "paragraph", content = "He goes red." },
+  ] },
+  { type = "paragraph", content = "He shifts." },
+  { type = "group", props = { conditions = { version = "1.0", logic = "AND", items = [ { type = "npc_has_trait", npc_id = "ben", set = "active" } ] } }, blocks = [
+    { type = "paragraph", content = "He takes charge." },
+  ] },
+]
+
+[canvases.nodes.exit_block]
+type = "choices"
+
+[[canvases.nodes.exit_block.choices]]
+text       = "Flirt."
+targetType = "location"
+locationId = "loc_home"
+effects    = [
+  { targetType = "npc", npcId = "ben", trait = "lust", op = "add", value = 50 },
+  { targetType = "npc", npcId = "gus", trait = "lust", op = "add", value = 50 },
+  { targetType = "npc", npcId = "gus", trait = "friendship", op = "add", value = 25 },
+]
+
+[[canvases.nodes.exit_block.choices]]
+text       = "Insult him."
+targetType = "location"
+locationId = "loc_home"
+effects    = [ { targetType = "npc", npcId = "ben", trait = "friendship", op = "add", value = -2500 } ]
+
+[[canvases.nodes.exit_block.choices]]
+text       = "Say nothing."
+targetType = "location"
+locationId = "loc_home"
+
+[[canvases.nodes.exit_block.choices]]
+text       = "Stay after class."
+targetType = "location"
+locationId = "loc_home"
+effects    = [ { targetType = "npc", npcId = "holt", trait = "intimacy", op = "add", value = 5 } ]
+
+[[canvases.nodes.exit_block.choices]]
+text       = "Undo a button."
+targetType = "location"
+locationId = "loc_home"
+skill_gate = { skill = "exhibitionism", level = 1 }
+
+[[canvases.nodes.exit_block.choices]]
+text       = "Lift your top."
+targetType = "location"
+locationId = "loc_home"
+skill_gate = { skill = "exhibitionism", level = 2 }
+
+[[canvases.nodes.exit_block.choices]]
+text             = "Strip."
+targetType       = "location"
+locationId       = "loc_home"
+show_when_locked = true
+skill_gate       = { skill = "exhibitionism", level = 3 }
+
+[[canvases.nodes.exit_block.choices]]
+text       = "Talk him round."
+targetType = "location"
+locationId = "loc_home"
+skill_gate = { skill = "charm", level = 2 }
+
+[[canvases.nodes.exit_block.choices]]
+text       = "Ask what he wants."
+targetType = "location"
+locationId = "loc_home"
+conditions = { version = "1.0", logic = "AND", items = [ { type = "npc_wants", npc_id = "ben", value = "indifferent", operator = "is_false" } ] }

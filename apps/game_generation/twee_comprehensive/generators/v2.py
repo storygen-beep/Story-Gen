@@ -26,6 +26,7 @@ from apps.game_generation.twee_comprehensive.generators.cot_pages import (
     people_cot_passages,
     quests_hints_passages,
 )
+from apps.game_generation.twee_comprehensive.generators import people_system
 from apps.projects.models import Project
 
 logger = logging.getLogger(__name__)
@@ -77,8 +78,9 @@ DEFAULT_COMMUNITY_URL = "https://discord.gg/KhKS4FRmsX"
 
 
 def _is_stat_value(v) -> bool:
-    """E5 — an effect value computed from her stats at runtime ({type = "trait", ...})."""
-    return isinstance(v, dict) and v.get("type") == "trait"
+    """E5 — an effect value computed from her stats at runtime ({type = "trait", ...});
+    a skill gate's gain ({type = "skill_gain", ...}, [engine.people]) is one too."""
+    return isinstance(v, dict) and v.get("type") in ("trait", "skill_gain")
 
 
 class TweeComprehensiveGeneratorV2:
@@ -1289,6 +1291,9 @@ class TweeComprehensiveGeneratorV2:
         self.items = (self.project.metadata or {}).get("items", [])
         # E10 — general shops ([[shops]]), each rendered on its room's screen
         self.shops = (self.project.metadata or {}).get("shops", []) or []
+        # [engine.people] system = "cot" — CoT's people system (generators/people_system.py):
+        # the resolved config, or None in every game that does not ask for it.
+        self.people_system = (self.project.metadata or {}).get("people_system") or None
         # Day-rollover hook ([engine.daily_tick]) — fires inside advanceDay().
         # Always present as a dict with a flagEffects list (possibly empty)
         # so the generated JS loop has a stable target.
@@ -4102,7 +4107,7 @@ for (var _ii = 0; _ii < setup.items.length; _ii++) {{
     setup.items_map[setup.items[_ii].id] = setup.items[_ii];
 }}
 setup.npc_trait_decay = {json.dumps(self.npc_trait_decay_config)};
-setup.player_trait_decay = {json.dumps(self.player_trait_decay_config)};{self._decay_rest_js()}
+setup.player_trait_decay = {json.dumps(self.player_trait_decay_config)};{self._decay_rest_js()}{self._people_system_js()}
 setup.daily_tick = {json.dumps(self.daily_tick)};
 setup.quests_data = {json.dumps(self.quests)};
 setup.corruption_tiers = {json.dumps(self.corruption_tiers)};
@@ -5166,7 +5171,7 @@ setup.triggerConditionsSatisfied = function(conditions) {{
                 results.push(satisfied);
                 continue;
             }}
-
+{self._people_hook(people_system.HOOK_CONDITION)}
             if (type === 'trait') {{
                 var tkey = it.trait_key;
                 var top = it.operator;
@@ -5716,7 +5721,7 @@ setup.markCanvasTriggered = function(canvasId) {{
         var npcUuid = npcUuidMap[key];
         if (npcUuid) {{
             sv.npc_interacted_today = sv.npc_interacted_today || {{}};
-            sv.npc_interacted_today[npcUuid] = true;{self._decay_contact_js()}
+            sv.npc_interacted_today[npcUuid] = true;{self._decay_contact_js()}{self._people_hook(people_system.HOOK_SCENE)}
         }}
     }} catch (e) {{
         // ignore
@@ -7273,7 +7278,7 @@ window.advanceDay = function() {{
         }}
     }}
     // Reset daily NPC interaction tracking
-    State.variables.npc_interacted_today = {{}};
+    State.variables.npc_interacted_today = {{}};{self._people_hook(people_system.HOOK_DAY)}
 }};
 
 window.updateTimeDisplay = function() {{
@@ -7395,7 +7400,7 @@ window.applyTraitEffect = function(targetType, npcId, trait, op, val, clampFlag,
     if (isNaN(current)) current = 0;
     var value = Number(val);
     if (isNaN(value)) value = 0;
-
+{self._people_hook(people_system.HOOK_DROP)}
     // Apply operation
     var next = current;
     if (op === 'add') {{
@@ -7406,7 +7411,7 @@ window.applyTraitEffect = function(targetType, npcId, trait, op, val, clampFlag,
       // Unknown op; do nothing
       return;
     }}
-
+{self._people_hook(people_system.HOOK_SETTLE)}
     // Clamp 0-100 if requested (default true)
     if (clampFlag === undefined || clampFlag === null) {{ clampFlag = true; }}
     if (clampFlag) {{
@@ -7420,7 +7425,7 @@ window.applyTraitEffect = function(targetType, npcId, trait, op, val, clampFlag,
       }}
     }}
 
-    traitsObj[key] = next;
+    traitsObj[key] = next;{self._people_hook(people_system.HOOK_TOUCHED)}
   }} catch (e) {{
     // Ignore to avoid breaking navigation
   }}
@@ -7569,7 +7574,7 @@ setup.applyAndNotifyTrait = function(targetType, npcId, trait, op, val, clampFla
   if (targetType === 'player' && (op || 'add') === 'add' && setup.daily_caps && setup.daily_caps[trait]) {{
     val = setup.dailyCapAllow(trait, oldVal, Number(val));
     if (!(val > 0)) return;
-  }}
+  }}{self._people_hook(people_system.HOOK_SKILL_CAP)}
   applyTraitEffect(targetType, npcId, trait, op, val, clampFlag, cap);
   var newVal = setup.getTraitValue(targetType, npcId, trait);
   var delta = newVal - oldVal;
@@ -9264,7 +9269,7 @@ setup.checkSingleCondition = function(item) {{
     if (item && (item.type === 'weekday' || item.type === 'hours_since_flag')) {{
         return setup.triggerConditionsSatisfied({{ version: '1.0', items: [item] }});
     }}
-
+{self._people_hook(people_system.HOOK_SINGLE_CONDITION)}
     if (item.type === 'flag') {{
         var flags = sv.flags || {{}};
         if (item.subject === 'player') {{
@@ -11918,6 +11923,17 @@ setup.decayToward = function (v, rest, d) {
             out += "\nsetup.npc_decay_after_days = " + json.dumps(self.npc_decay_after_days_config) + ";"
         return out
 
+    def _people_system_js(self) -> str:
+        """[engine.people] system = "cot" — the people system's script, or nothing."""
+        if not self.people_system:
+            return ""
+        return people_system.people_system_js(self.people_system)
+
+    def _people_hook(self, hook: str) -> str:
+        """One of the people system's hooks inside an engine function, or nothing in a
+        game without the switch (so its script is unchanged)."""
+        return hook if self.people_system else ""
+
     def _decay_contact_js(self) -> str:
         """EN8 — record the day of contact, only when some NPC waits before decaying."""
         if not self.npc_decay_after_days_config:
@@ -13510,7 +13526,7 @@ document.addEventListener("click", function (ev) {
             return ':: CastWidgets [widget nobr]\n<<widget "castButton">><</widget>>\n'
         if (self.project.metadata or {}).get("people_page") == "cot":
             # CoT's People dialog in place of the cast page (generators/cot_pages.py).
-            return people_cot_passages(cp, self.npc_people_map)
+            return people_cot_passages(cp, self.npc_people_map, bool(self.people_system))
 
         title = html.escape(cp.get("title") or "The Cast")
         btn_label = html.escape(cp.get("button_label") or cp.get("title") or "The Cast")
@@ -18221,6 +18237,10 @@ setup.carryRent = function (due, paid) {
                 raise ValueError(f"Stat-based effect value needs a `trait`. Got: {val!r}")
             return f"setup.resolveEffectValue({json.dumps(val, sort_keys=True)})"
 
+        # [engine.people] — a skill gate's gain, worked out when the choice is taken.
+        if isinstance(val, dict) and val.get("type") == "skill_gain" and self.people_system:
+            return people_system.skill_gain_js(val)
+
         # Random-range dict — new shape.
         if isinstance(val, dict):
             vtype = val.get("type")
@@ -20919,6 +20939,12 @@ $(document).on(':passagestart', function(ev) {
 </div>
 <</widget>>"""
             npc_traits_widget = ""
+
+        # [engine.people] — the dump prints one of her skills as its level ("Exhibitionism 2").
+        if self.people_system and self.people_system.get("skills"):
+            player_traits_widget = player_traits_widget.replace(
+                people_system.SIDEBAR_VALUE, people_system.SIDEBAR_VALUE_PEOPLE
+            )
 
         # StoryCaption with optional dev indicator and missing media button
         phone_btn_line = "\n<<phoneButton>>" if self.phone_enabled else ""

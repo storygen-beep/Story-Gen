@@ -21,9 +21,9 @@ Must read: C25, C26, C28, C33, C35, C36, C55, C58, C60, C65.
 
 ## 3 · The people
 
-The cast the want needs: for each person, what she wants from them, what they keep score of, and their age. Give each person two lines: **where they end up** (their want, the top of their arc) and **where they are now**, at the start. They are not the same, and a reader who sees only the end takes it as the start. (LO, relayed 2026-11-21: "in the starting ryan doesnt want her.") When the session proposes a person who has no reason to exist, it cuts that proposal. Someone LO named is never cut.
+The cast the want needs: for each person, what she wants from them, and their age. Under the people system (`craft/people.md` rules 8 and 13), first the game's **type table**: each type with its start friendship, lust and control, and the traits it draws from. Then each person: their type, gender, attracted (yes or no), the 2–4 traits they get and each trait's job, any start value tuned by hand, and a hand-set want only when the story fixes it. A professor is marked, with intimacy 0. Give each person two lines: **where they end up** (their want, the top of their arc) and **where they are now**, at the start. They are not the same, and a reader who sees only the end takes it as the start. (LO, relayed 2026-11-21: "in the starting ryan doesnt want her.") When the session proposes a person who has no reason to exist, it cuts that proposal. Someone LO named is never cut.
 
-Must read: C584, C597, C605, C606, C608, C609.
+Must read: C584, C597, C605, C606, C608, C609, C2177, C2178.
 
 ## 4 · The places
 
@@ -106,11 +106,11 @@ Why: designing every step of every ladder before anything was confirmed made no 
 
 ## 10 · The releases
 
-Roughly what each release adds, and per person whether they are in, later or cut, and what the player loses. Release 1 is the skeleton: every person, place and system, with the daily loop and each person's first meeting, all shallow; meters shown, not yet moving. Later releases add events, rungs and people at existing places, not new places.
+Roughly what each release adds, and per person whether they are in, later or cut, and what the player loses. Release 1 is the skeleton: every person, place and system, with the daily loop and each person's first meeting, all shallow; meters shown, not yet moving. **Release 1 is frozen** (C2182): people differ only by their start values and traits, her skills show their start values, and nothing moves: no feeling effect, no skill gate, no effect on a skill. The first release that moves a feeling writes its moves from `craft/people.md` rule 15, and the first that moves a skill writes its gates from `craft/meters.md`. (LO, typed in main-lean 2026-11-25: "Meter frozen".) Later releases add events, rungs and people at existing places, not new places.
 
 **Her own sex opens only with a partner.** Sex she has opens only with a boyfriend or a husband, and is open from the start of that relationship. Until she has one, her own sex is out of scope, and the out-of-scope line says so. Sex she sees or hears is not her sex: it is a walk-in (§8) and is in scope. (LO, relayed by the ENI session, 2026-11-21: "Scenes where player is having sex is fine to put them in the out of scope... until she is married or have a boyfriend, in those case, from the starting she can have sex with her partner.")
 
-Must read: C76, C104, C294, C1462, C2061.
+Must read: C76, C104, C294, C1462, C2061, C2182.
 
 ## The piece list (each release)
 

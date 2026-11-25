@@ -5,6 +5,19 @@ same turn: what changed, why, and how it was verified.
 
 ---
 
+## 2026-11-25 — CoT's people system, as one opt-in engine switch
+
+- **`references/engine.md`:** new §54, `[engine.people] system = "cot"`, at the end of the file. It documents:
+  - the three feelings (`friendship`, `lust`, `control`) on -1000..1000;
+  - `[[npcs]]` `attracted`, `gender`, `traits`, `want`, `age`, `professor` and `core_traits.intimacy`;
+  - `[engine.people.traits.<Name>]` and `fade`;
+  - `[[traits.labels]] skill = true` and a choice's `skill_gate`;
+  - the conditions `npc_wants`, `npc_has_trait` and `skill_level`;
+  - the fading rule, the People view, and the CoT systems left as hooks.
+- **`references/*.md`, citations re-pointed by `cite_check.py --fix`.** The engine edits moved cited lines in `v2.py` and `template_import.py`.
+- **Why:** LO, 2026-11-25: "Yes lets move to cot style type system", then "Go ahead" on the engine part. The engine lives in `apps/projects/services/people_system.py` and `generators/people_system.py`. No craft rule is written here; the lean skill's session does that.
+- **Verified:** `pytest apps/game_generation/tests/test_people_system.py` (34 passed). vesper, first_term, first_term_lean and three fixtures build byte-identical before and after. `pytest apps/game_generation/tests` 964 passed, 17 skipped (930 passed before). `cite_check.py --strict` 0 wrong (145 after the engine edit; `--fix` moved 144, and `engine.md`'s `getWornStatMax` range moved by hand from `v2.py:1888-1889` to `v2.py:1893-1894`). `gates.py --selfcheck` reports the index is current. The exam grader tests pass (107 passed, 1 skipped).
+
 ## 2026-11-25 — CoT's Hints page and People dialog, as two opt-in engine keys
 
 - **`references/engine.md`:** two new sections. `[ui] quests_layout = "hints"` (before `clothes_layout`) documents `[[story_hints]]` and `[[walkthroughs]]`; `[ui] people_page = "cot"` (before `sidebar_hide`) documents `[[npcs]] stranger_name` and `people_tab`.

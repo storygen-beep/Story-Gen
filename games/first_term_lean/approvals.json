@@ -2184,6 +2184,54 @@
       "sha256": "1daeac6b8ab2732f684071c6f675c6ac527153a8817c380fefeab230ecd1ec6d",
       "words": "ENI for LO (delegated 2026-11-24): \"Yes to c1–c6 ... Set the early bucket's bounds by the send-off time\"",
       "date": "2026-11-25"
+    },
+    {
+      "card": "P48",
+      "sha256": "081739d41aa399ed3369b06b1f2143f17f779f9c76a52c47e5fc4e410c3979b4",
+      "words": "ENI for LO (delegated 2026-11-24): \"Yes to P48 as amended\"",
+      "date": "2026-11-25"
+    },
+    {
+      "card": "P48",
+      "sha256": "4db6b4b40e8469cf03204e459316395ce479e5729c0fa9f8a059f43a466ad975",
+      "words": "ENI for LO (delegated 2026-11-24): \"Yes to P48 as amended\"; Mark, Hale, Jake, Tess traits and the 21-lock correction yes; Nadia Forward per ENI test",
+      "date": "2026-11-25"
+    },
+    {
+      "card": "P48",
+      "sha256": "eebed1229b4ed87ada1b4b88a0dc92a595932364ea5d3c6ceaa8e90ecee35ca0",
+      "words": "ENI for LO (delegated 2026-11-24) and LO \"Yes\" (main-lean 2026-11-25): reader causes c1-c4 fixed",
+      "date": "2026-11-25"
+    },
+    {
+      "card": "P48",
+      "sha256": "c2e1b44286ac60f4011837500fd84b28ae4c086aaeab68c843cfbd517fdbf8fe",
+      "words": "ENI for LO (delegated 2026-11-24): \"Yes to the P48 amendment with the two Zoe lines as written\"",
+      "date": "2026-11-25"
+    },
+    {
+      "card": "P48",
+      "sha256": "455ce78be34cbeb455ac08df90b481b55823f2d2e6dc3c4419a5209cffb4ed7c",
+      "words": "ENI for LO (delegated 2026-11-24): \"Yes to the P48 amendment with the two Zoe lines as written\"; Builds names zoe_party, whose last screen it changes",
+      "date": "2026-11-25"
+    },
+    {
+      "card": "P48",
+      "sha256": "83b09664ea822bdf2348daed2f3f2a27c47fa6e103cafea85fcd586724a384eb",
+      "words": "ENI for LO (delegated 2026-11-24): \"Yes to the P48 amendment with the two Zoe lines as written\"; Builds names zoe_party, whose last screen it changes; its rows copied from P37",
+      "date": "2026-11-25"
+    },
+    {
+      "card": "P37",
+      "sha256": "5cb1aa7f66ef9425f1dcc9b40acce20a218bd6d95eb481798f301eef46f3e925",
+      "words": "ENI for LO (delegated 2026-11-24): \"Yes to the P48 amendment with the two Zoe lines as written\" (LO \"1\")",
+      "date": "2026-11-25"
+    },
+    {
+      "card": "P48",
+      "sha256": "1f80e1207d6713513839b0fc7ad288faf9459fa0b774acc3ada9027096be4702",
+      "words": "ENI for LO (delegated 2026-11-24): \"Yes to the P48 amendment with the two Zoe lines as written\"; the lines live on P37, which builds zoe_party",
+      "date": "2026-11-25"
     }
   ]
 }

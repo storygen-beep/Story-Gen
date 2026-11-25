@@ -3816,8 +3816,18 @@ time_progression_minutes = 0
 [[canvases.nodes]]
 id = "home"
 name = "Zoe's party"
+# P48 — Zoe's Dancer and Open Relationships, and Sam's Open Relationships, shown in play (LO 2026-11-25: "1").
 blocks = [
+  { type = "paragraph", content = "Zoe's up on the sofa arm before you've finished saying it, arms over her head, dancing like the party's hers." },
   { type = "dialog", content = "Next time, then. I'm holding you to it.", props = { speaker = "npc", npcId = "npc_zoe" } },
+  { type = "group", props = { conditions = { version = "1.0", logic = "AND", items = [{ type = "flag", subject = "player", flag_key = "met_sam", operator = "is_true" }] } }, blocks = [
+    { type = "paragraph", content = "She jumps down, and a guy you don't know kisses her neck on his way past. She lets him. Sam's on the sofa under the coats, and he just grins." },
+    { type = "dialog", content = "Don't look at Sam like that, babe. Sam's not mine. Nobody's mine.", props = { speaker = "npc", npcId = "npc_zoe" } },
+  ] },
+  { type = "group", props = { conditions = { version = "1.0", logic = "AND", items = [{ type = "flag", subject = "player", flag_key = "met_sam", operator = "is_false" }] } }, blocks = [
+    { type = "paragraph", content = "She jumps down, and a guy you don't know kisses her neck on his way past. She lets him. A sleepy-eyed guy on the sofa under the coats just grins." },
+    { type = "dialog", content = "Don't look at him like that, babe. He's not mine. Nobody's mine.", props = { speaker = "npc", npcId = "npc_zoe" } },
+  ] },
   { type = "paragraph", content = "She lets you go with a kiss on the cheek. You squeeze out through the crowd, and the music follows you halfway down the street. The guy by the speaker watches you leave." },
 ]
 
