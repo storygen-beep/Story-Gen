@@ -1,6 +1,6 @@
 {
  "piece": "P46",
- "pass": 3,
+ "pass": 4,
  "screens": {
   "story_hints.paying_your_way": {
    "text": "49539da5d0bdf535",
@@ -626,6 +626,7 @@
   "C422": "7e128897077ecee6",
   "C460": "67e48e60d5053a2e",
   "C461": "310706ee076318f2",
+  "C2190": "452a5657d7527351",
   "C1619": "80c98d00ce7d3bf8",
   "C430": "83f6356d6b638ebf",
   "C34": "ba026f3c4badeca2",
@@ -1484,7 +1485,7 @@
    "note": false,
    "screen_hash": "3554f5b0075da203",
    "row_hash": "bf7edbd0ddd9e7b7",
-   "carried": false,
+   "carried": true,
    "pass": 3
   },
   {
@@ -1502,7 +1503,7 @@
     "all": "ec18907e1d8acb6c"
    },
    "row_hash": "bf7edbd0ddd9e7b7",
-   "carried": false,
+   "carried": true,
    "pass": 3
   },
   {
@@ -1520,7 +1521,7 @@
     "all": "1039719d878b1525"
    },
    "row_hash": "bf7edbd0ddd9e7b7",
-   "carried": false,
+   "carried": true,
    "pass": 3
   },
   {
@@ -1538,7 +1539,7 @@
     "all": "c74c20351cc8b0e0"
    },
    "row_hash": "bf7edbd0ddd9e7b7",
-   "carried": false,
+   "carried": true,
    "pass": 3
   },
   {
@@ -1556,7 +1557,7 @@
     "all": "212b9e03099a5d86"
    },
    "row_hash": "bf7edbd0ddd9e7b7",
-   "carried": false,
+   "carried": true,
    "pass": 3
   },
   {
@@ -1574,7 +1575,7 @@
     "all": "d8cc03dad68a4ae2"
    },
    "row_hash": "bf7edbd0ddd9e7b7",
-   "carried": false,
+   "carried": true,
    "pass": 3
   },
   {
@@ -1592,7 +1593,7 @@
     "all": "411a26eaa22b2faa"
    },
    "row_hash": "bf7edbd0ddd9e7b7",
-   "carried": false,
+   "carried": true,
    "pass": 3
   },
   {
@@ -2327,7 +2328,7 @@
    "note": false,
    "screen_hash": "3554f5b0075da203",
    "row_hash": "47b9477e3ec8a790",
-   "carried": false,
+   "carried": true,
    "pass": 3
   },
   {
@@ -2340,8 +2341,21 @@
    "note": false,
    "screen_hash": "3554f5b0075da203",
    "row_hash": "40172c2d376bfc32",
-   "carried": false,
+   "carried": true,
    "pass": 3
+  },
+  {
+   "row": "C2190",
+   "screen": "*",
+   "verdict": "N/A",
+   "line": "",
+   "why": "Quests and People pages: not a person's arc step",
+   "cause": null,
+   "note": false,
+   "screen_hash": "3554f5b0075da203",
+   "row_hash": "452a5657d7527351",
+   "carried": false,
+   "pass": 4
   },
   {
    "row": "C327",
@@ -8220,8 +8234,8 @@
  ],
  "causes": [],
  "pending": [],
- "asked": 9,
- "answered": 9,
+ "asked": 1,
+ "answered": 1,
  "pass_items": [],
  "unowed": []
 }

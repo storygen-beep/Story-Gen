@@ -1,6 +1,6 @@
 {
  "piece": "P19",
- "pass": 5,
+ "pass": 6,
  "screens": {
   "cafeteria_meet_rosa.meet": {
    "text": "b626daf6602713a3",
@@ -132,7 +132,9 @@
   "C450": "b01ad555668aba2d",
   "C422": "7e128897077ecee6",
   "C460": "67e48e60d5053a2e",
-  "C461": "310706ee076318f2"
+  "C461": "310706ee076318f2",
+  "C2188": "612394eef6826900",
+  "C2190": "452a5657d7527351"
  },
  "verdicts": [
   {
@@ -937,7 +939,7 @@
    "note": false,
    "screen_hash": "bd97e663ef3c384f",
    "row_hash": "47b9477e3ec8a790",
-   "carried": false,
+   "carried": true,
    "pass": 5
   },
   {
@@ -950,8 +952,44 @@
    "note": false,
    "screen_hash": "bd97e663ef3c384f",
    "row_hash": "40172c2d376bfc32",
-   "carried": false,
+   "carried": true,
    "pass": 5
+  },
+  {
+   "row": "C2188",
+   "screen": "cafeteria_meet_rosa.meet",
+   "verdict": "PASS",
+   "line": "'I'm fine, really.' -> 'Your loss.'",
+   "why": "the roll can be refused with its own line; flag only",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "b626daf6602713a3",
+    "facts": "515715e73cf05730",
+    "facts2": "1b927de09fedcd26",
+    "all": "d4caa8c046ffd471"
+   },
+   "row_hash": "612394eef6826900",
+   "carried": false,
+   "pass": 6
+  },
+  {
+   "row": "C2190",
+   "screen": "cafeteria_meet_rosa.meet",
+   "verdict": "PASS",
+   "line": "Rosa at the counter",
+   "why": "one-time canvas, trigger_mode manual, no chance: self-fires on arrival when its conditions are met (v2.py:5937-5955)",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "b626daf6602713a3",
+    "facts": "515715e73cf05730",
+    "facts2": "1b927de09fedcd26",
+    "all": "d4caa8c046ffd471"
+   },
+   "row_hash": "452a5657d7527351",
+   "carried": false,
+   "pass": 6
   },
   {
    "row": "C422",

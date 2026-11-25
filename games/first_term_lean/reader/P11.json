@@ -1,6 +1,6 @@
 {
  "piece": "P11",
- "pass": 9,
+ "pass": 10,
  "screens": {
   "mark_kitchen.hub": {
    "text": "cebee1bac30c4ca9",
@@ -187,7 +187,9 @@
   "C450": "b01ad555668aba2d",
   "C422": "7e128897077ecee6",
   "C460": "67e48e60d5053a2e",
-  "C461": "310706ee076318f2"
+  "C461": "310706ee076318f2",
+  "C2188": "612394eef6826900",
+  "C2189": "20748838895e4545"
  },
  "verdicts": [
   {
@@ -5595,7 +5597,7 @@
     "all": "04bd193bb19a845c"
    },
    "row_hash": "3a9caf43a2f2b8fd",
-   "carried": false,
+   "carried": true,
    "pass": 9
   },
   {
@@ -5613,7 +5615,7 @@
     "all": "e3c88a749be646e3"
    },
    "row_hash": "3a9caf43a2f2b8fd",
-   "carried": false,
+   "carried": true,
    "pass": 9
   },
   {
@@ -5631,7 +5633,7 @@
     "all": "04931744b776fc09"
    },
    "row_hash": "3a9caf43a2f2b8fd",
-   "carried": false,
+   "carried": true,
    "pass": 9
   },
   {
@@ -5649,7 +5651,7 @@
     "all": "6453ab1af862f835"
    },
    "row_hash": "3a9caf43a2f2b8fd",
-   "carried": false,
+   "carried": true,
    "pass": 9
   },
   {
@@ -5667,7 +5669,7 @@
     "all": "04bd193bb19a845c"
    },
    "row_hash": "00496c4c3aec4580",
-   "carried": false,
+   "carried": true,
    "pass": 9
   },
   {
@@ -5685,7 +5687,7 @@
     "all": "e3c88a749be646e3"
    },
    "row_hash": "00496c4c3aec4580",
-   "carried": false,
+   "carried": true,
    "pass": 9
   },
   {
@@ -5703,7 +5705,7 @@
     "all": "04931744b776fc09"
    },
    "row_hash": "00496c4c3aec4580",
-   "carried": false,
+   "carried": true,
    "pass": 9
   },
   {
@@ -5721,7 +5723,7 @@
     "all": "6453ab1af862f835"
    },
    "row_hash": "00496c4c3aec4580",
-   "carried": false,
+   "carried": true,
    "pass": 9
   },
   {
@@ -5734,7 +5736,7 @@
    "note": false,
    "screen_hash": "791a3ce177fd78c2",
    "row_hash": "47b9477e3ec8a790",
-   "carried": false,
+   "carried": true,
    "pass": 9
   },
   {
@@ -5747,7 +5749,7 @@
    "note": false,
    "screen_hash": "791a3ce177fd78c2",
    "row_hash": "a6c0f498d4d16271",
-   "carried": false,
+   "carried": true,
    "pass": 9
   },
   {
@@ -5760,7 +5762,7 @@
    "note": false,
    "screen_hash": "791a3ce177fd78c2",
    "row_hash": "74c68b4029782b5f",
-   "carried": false,
+   "carried": true,
    "pass": 9
   },
   {
@@ -5773,187 +5775,44 @@
    "note": false,
    "screen_hash": "791a3ce177fd78c2",
    "row_hash": "40172c2d376bfc32",
-   "carried": false,
+   "carried": true,
    "pass": 9
   },
   {
-   "row": "C295",
-   "screen": "mark_kitchen.pay100",
-   "verdict": "N/A",
-   "line": "All there. Same time next Sunday.",
-   "why": "no person climb meter here; sundays_paid/rent_paid_total are goal counts, not a staged meter with rungs",
-   "cause": null,
-   "note": false,
-   "screen_hash": {
-    "text": "9562246c2be111d9",
-    "facts": "28a1c06aa45c7c10",
-    "all": "454cb66c384d356c"
-   },
-   "row_hash": "63160eb49f7bb566",
-   "carried": true
-  },
-  {
-   "row": "C295",
-   "screen": "mark_kitchen.pay75",
-   "verdict": "N/A",
-   "line": "All there. Same time next Sunday.",
-   "why": "no person climb meter here; sundays_paid/rent_paid_total are goal counts, not a staged meter with rungs",
-   "cause": null,
-   "note": false,
-   "screen_hash": {
-    "text": "77d42862e4942fb3",
-    "facts": "28a1c06aa45c7c10",
-    "all": "14f023e2bcb15dd6"
-   },
-   "row_hash": "63160eb49f7bb566",
-   "carried": true
-  },
-  {
-   "row": "C295",
-   "screen": "mark_kitchen.pay90",
-   "verdict": "N/A",
-   "line": "All there. Same time next Sunday.",
-   "why": "no person climb meter here; sundays_paid/rent_paid_total are goal counts, not a staged meter with rungs",
-   "cause": null,
-   "note": false,
-   "screen_hash": {
-    "text": "bcecc52dc17ed0c8",
-    "facts": "28a1c06aa45c7c10",
-    "all": "e5615da390e01e94"
-   },
-   "row_hash": "63160eb49f7bb566",
-   "carried": true
-  },
-  {
-   "row": "C295",
-   "screen": "mark_kitchen.short",
-   "verdict": "N/A",
-   "line": "Short. Next Sunday, then. Don't make it a habit, kid.",
-   "why": "no person climb meter here; sundays_paid/rent_paid_total are goal counts, not a staged meter with rungs",
-   "cause": null,
-   "note": false,
-   "screen_hash": {
-    "text": "8b071b6a2ddd72aa",
-    "facts": "61d8c9e46a55fe43",
-    "all": "9a5950d751ae9362"
-   },
-   "row_hash": "63160eb49f7bb566",
-   "carried": true
-  },
-  {
-   "row": "C330",
-   "screen": "mark_kitchen.hub",
-   "verdict": "N/A",
-   "line": "",
-   "why": "no person meter is paid on this screen; sundays_paid is a goal count capped at 4",
-   "cause": null,
-   "note": false,
-   "screen_hash": {
-    "text": "50e54206a4f37eae",
-    "facts": "f5ba735a7dad78d5",
-    "all": "117535292b23a443"
-   },
-   "row_hash": "923a40b5ad4048fd",
-   "carried": true,
-   "pass": 2
-  },
-  {
-   "row": "C330",
-   "screen": "mark_kitchen.pay100",
-   "verdict": "N/A",
-   "line": "All there. Same time next Sunday.",
-   "why": "no person climb meter here; sundays_paid/rent_paid_total are goal counts, not a staged meter with rungs",
-   "cause": null,
-   "note": false,
-   "screen_hash": {
-    "text": "9562246c2be111d9",
-    "facts": "28a1c06aa45c7c10",
-    "all": "454cb66c384d356c"
-   },
-   "row_hash": "923a40b5ad4048fd",
-   "carried": true
-  },
-  {
-   "row": "C330",
-   "screen": "mark_kitchen.pay75",
-   "verdict": "N/A",
-   "line": "All there. Same time next Sunday.",
-   "why": "no person climb meter here; sundays_paid/rent_paid_total are goal counts, not a staged meter with rungs",
-   "cause": null,
-   "note": false,
-   "screen_hash": {
-    "text": "77d42862e4942fb3",
-    "facts": "28a1c06aa45c7c10",
-    "all": "14f023e2bcb15dd6"
-   },
-   "row_hash": "923a40b5ad4048fd",
-   "carried": true
-  },
-  {
-   "row": "C330",
-   "screen": "mark_kitchen.pay90",
-   "verdict": "N/A",
-   "line": "All there. Same time next Sunday.",
-   "why": "no person climb meter here; sundays_paid/rent_paid_total are goal counts, not a staged meter with rungs",
-   "cause": null,
-   "note": false,
-   "screen_hash": {
-    "text": "bcecc52dc17ed0c8",
-    "facts": "28a1c06aa45c7c10",
-    "all": "e5615da390e01e94"
-   },
-   "row_hash": "923a40b5ad4048fd",
-   "carried": true
-  },
-  {
-   "row": "C330",
+   "row": "C2188",
    "screen": "mark_kitchen.rent",
-   "verdict": "N/A",
-   "line": "Hand it over ($75)",
-   "why": "rent screen pays no meter; payment happens on pay nodes (sundays_paid capped at 4 there)",
+   "verdict": "PASS",
+   "line": "'Tell him you can't pay' -> \"Short. Next Sunday, then. Don't make it a habit, kid.\"",
+   "why": "the no has its own screen; it sets rent_handled_this_week and resets the goal count sundays_paid, but moves no meter or feeling",
    "cause": null,
    "note": false,
    "screen_hash": {
     "text": "9394c9809e8f86c9",
-    "facts": "28a1c06aa45c7c10",
-    "all": "ae9ae39af37fcef9"
+    "facts": "5e652ec6e4551af0",
+    "facts2": "7073f340f74f069c",
+    "all": "3bf25ce111863764"
    },
-   "row_hash": "923a40b5ad4048fd",
-   "carried": true,
-   "pass": 3
+   "row_hash": "612394eef6826900",
+   "carried": false,
+   "pass": 10
   },
   {
-   "row": "C330",
-   "screen": "mark_kitchen.short",
-   "verdict": "N/A",
-   "line": "Short. Next Sunday, then. Don't make it a habit, kid.",
-   "why": "no person climb meter here; sundays_paid/rent_paid_total are goal counts, not a staged meter with rungs",
+   "row": "C2189",
+   "screen": "mark_kitchen.hub",
+   "verdict": "PASS",
+   "line": "Talk gated by talked_mark_today; rent by rent_handled_this_week",
+   "why": "Talk rests a day (daily_tick unsets it, toml:540), rent rests a week (unset Monday, toml:546); nothing replays at once",
    "cause": null,
-   "note": false,
+   "note": true,
    "screen_hash": {
-    "text": "8b071b6a2ddd72aa",
-    "facts": "61d8c9e46a55fe43",
-    "all": "9a5950d751ae9362"
+    "text": "cebee1bac30c4ca9",
+    "facts": "e8065fe0f1b995c1",
+    "facts2": "8ff6682bbd8fcf1c",
+    "all": "a6f6a2b85d23b3a2"
    },
-   "row_hash": "923a40b5ad4048fd",
-   "carried": true
-  },
-  {
-   "row": "C330",
-   "screen": "mark_kitchen.talk",
-   "verdict": "N/A",
-   "line": "",
-   "why": "talk pays no meter",
-   "cause": null,
-   "note": false,
-   "screen_hash": {
-    "text": "fe35e365dcfda4ec",
-    "facts": "5c487ebd2d9b7450",
-    "all": "5ea0b30f44a52e78"
-   },
-   "row_hash": "923a40b5ad4048fd",
-   "carried": true,
-   "pass": 4
+   "row_hash": "20748838895e4545",
+   "carried": false,
+   "pass": 10
   },
   {
    "row": "C338",
@@ -6034,7 +5893,7 @@
     "all": "04bd193bb19a845c"
    },
    "row_hash": "c661ccd26aada1f2",
-   "carried": false,
+   "carried": true,
    "pass": 9
   },
   {
@@ -6052,7 +5911,7 @@
     "all": "e3c88a749be646e3"
    },
    "row_hash": "c661ccd26aada1f2",
-   "carried": false,
+   "carried": true,
    "pass": 9
   },
   {
@@ -6070,7 +5929,7 @@
     "all": "04931744b776fc09"
    },
    "row_hash": "c661ccd26aada1f2",
-   "carried": false,
+   "carried": true,
    "pass": 9
   },
   {
@@ -6088,7 +5947,7 @@
     "all": "6453ab1af862f835"
    },
    "row_hash": "c661ccd26aada1f2",
-   "carried": false,
+   "carried": true,
    "pass": 9
   },
   {
@@ -6106,7 +5965,7 @@
     "all": "04bd193bb19a845c"
    },
    "row_hash": "fbffa0dbed63968f",
-   "carried": false,
+   "carried": true,
    "pass": 9
   },
   {
@@ -6124,7 +5983,7 @@
     "all": "e3c88a749be646e3"
    },
    "row_hash": "fbffa0dbed63968f",
-   "carried": false,
+   "carried": true,
    "pass": 9
   },
   {
@@ -6142,7 +6001,7 @@
     "all": "04931744b776fc09"
    },
    "row_hash": "fbffa0dbed63968f",
-   "carried": false,
+   "carried": true,
    "pass": 9
   },
   {
@@ -6160,7 +6019,7 @@
     "all": "6453ab1af862f835"
    },
    "row_hash": "fbffa0dbed63968f",
-   "carried": false,
+   "carried": true,
    "pass": 9
   },
   {
@@ -8115,7 +7974,7 @@
     "all": "04bd193bb19a845c"
    },
    "row_hash": "eaf957bb84e62bbf",
-   "carried": false,
+   "carried": true,
    "pass": 9
   },
   {
@@ -8133,7 +7992,7 @@
     "all": "e3c88a749be646e3"
    },
    "row_hash": "eaf957bb84e62bbf",
-   "carried": false,
+   "carried": true,
    "pass": 9
   },
   {
@@ -8151,7 +8010,7 @@
     "all": "04931744b776fc09"
    },
    "row_hash": "eaf957bb84e62bbf",
-   "carried": false,
+   "carried": true,
    "pass": 9
   },
   {
@@ -8169,7 +8028,7 @@
     "all": "6453ab1af862f835"
    },
    "row_hash": "eaf957bb84e62bbf",
-   "carried": false,
+   "carried": true,
    "pass": 9
   },
   {
@@ -12032,7 +11891,7 @@
     "all": "04bd193bb19a845c"
    },
    "row_hash": "f7a81c1d066ade25",
-   "carried": false,
+   "carried": true,
    "pass": 9
   },
   {
@@ -12050,7 +11909,7 @@
     "all": "e3c88a749be646e3"
    },
    "row_hash": "f7a81c1d066ade25",
-   "carried": false,
+   "carried": true,
    "pass": 9
   },
   {
@@ -12068,7 +11927,7 @@
     "all": "04931744b776fc09"
    },
    "row_hash": "f7a81c1d066ade25",
-   "carried": false,
+   "carried": true,
    "pass": 9
   },
   {
@@ -12086,7 +11945,7 @@
     "all": "6453ab1af862f835"
    },
    "row_hash": "f7a81c1d066ade25",
-   "carried": false,
+   "carried": true,
    "pass": 9
   },
   {
@@ -12408,7 +12267,7 @@
     "all": "04bd193bb19a845c"
    },
    "row_hash": "32d431db08834e70",
-   "carried": false,
+   "carried": true,
    "pass": 9
   },
   {
@@ -12426,7 +12285,7 @@
     "all": "e3c88a749be646e3"
    },
    "row_hash": "32d431db08834e70",
-   "carried": false,
+   "carried": true,
    "pass": 9
   },
   {
@@ -12444,7 +12303,7 @@
     "all": "04931744b776fc09"
    },
    "row_hash": "32d431db08834e70",
-   "carried": false,
+   "carried": true,
    "pass": 9
   },
   {
@@ -12462,14 +12321,14 @@
     "all": "6453ab1af862f835"
    },
    "row_hash": "32d431db08834e70",
-   "carried": false,
+   "carried": true,
    "pass": 9
   }
  ],
  "causes": [],
  "pending": [],
- "asked": 32,
- "answered": 32,
+ "asked": 2,
+ "answered": 2,
  "pass_items": [],
  "unowed": []
 }

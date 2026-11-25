@@ -2280,6 +2280,78 @@
       "sha256": "8c2eff08110634a748917957b0278338347cc8de4afa18bc281d51c7fd8b8baf",
       "words": "ENI for LO (delegated 2026-11-24): Ryan lust 100, Mark stays 0",
       "date": "2026-11-25"
+    },
+    {
+      "card": "P49",
+      "sha256": "f5ff77b73859033289db0240637c4d7f457ef081d2c63e65c14e7321ac230d84",
+      "words": "ENI for LO (delegated 2026-11-24): \"With those two changes, yes to P49\"; LO \"Go with your picks\" (Ryan at her door, 3-day rest)",
+      "date": "2026-11-26"
+    },
+    {
+      "card": "P49",
+      "sha256": "17bea16522aac73fa3868dbddb7d192fb2d36c28066c33f8de52f7a6f18a5a39",
+      "words": "ENI for LO (delegated 2026-11-24): \"yes to P49\"; talk lines added to Ryan step 2 and Zoe step 2 for the talk check; Sheet synced from the build",
+      "date": "2026-11-26"
+    },
+    {
+      "card": "P49",
+      "sha256": "b3bda6b26f7a059ba0f600509de3d1c9b2fe2f22ab9c09632c7d93a1831972f2",
+      "words": "ENI for LO (delegated 2026-11-24): \"Tune the chance if most days get none\": 0.65 measured headless",
+      "date": "2026-11-26"
+    },
+    {
+      "card": "P49",
+      "sha256": "7befc01a136c2b99cd0f0e77bc8b2c5b851212d001b6a1a646b72bb52ad07055",
+      "words": "ENI for LO (delegated 2026-11-24): reader fixes c2-c9 as approved; LO \"Yes\" to c10 (b): a no comes back after three days",
+      "date": "2026-11-26"
+    },
+    {
+      "card": "P49",
+      "sha256": "0d5781d692cfc5d24c69b84cb3e13322134892953cc7f24eda9c2b1486a3f7d4",
+      "words": "ENI for LO (delegated 2026-11-24): reader fixes c2-c9; LO \"Yes\" to c10 (b); spoken lines for the talk check; Sheet synced",
+      "date": "2026-11-26"
+    },
+    {
+      "card": "P49",
+      "sha256": "aafc1acd04ca4ad31279bb7df239410192af5b81794ba8895f3f76456ca5fef1",
+      "words": "ENI for LO (delegated 2026-11-24): reader fixes c2-c9; LO \"Yes\" to c10 (b); spoken lines for the talk check",
+      "date": "2026-11-26"
+    },
+    {
+      "card": "P49",
+      "sha256": "0ea838021afc1b38b3a118c9b5dac592d4c05dcc5072c2cccfb463c0ec3e3889",
+      "words": "ENI for LO (delegated 2026-11-24): reader fixes c2-c9; LO \"Yes\" to c10 (b); spoken lines for the talk check",
+      "date": "2026-11-26"
+    },
+    {
+      "card": "P49",
+      "sha256": "6528b7ae6b8d564c9ba99174e41adbf5d0749cf2ff086f69c033a8f8a39ae791",
+      "words": "ENI for LO (delegated 2026-11-24) and LO \"Yes go with your picks\" (c1): Freeze, Laugh it off, Hold still",
+      "date": "2026-11-26"
+    },
+    {
+      "card": "P49",
+      "sha256": "176451c03f0e10e904bc8b2622d655f598f3feacc5ba84d8813391fdd0b9cce9",
+      "words": "ENI for LO (delegated 2026-11-24) and LO \"Yes go with your picks\" (c1); headless counts",
+      "date": "2026-11-26"
+    },
+    {
+      "card": "P49",
+      "sha256": "d451074c4b532f3fe80d08167476f8cfb3bfac0eabd6b9d0c574c3ab2d7f09c9",
+      "words": "ENI for LO (delegated 2026-11-24): reader pass 2 fixes on ryan_charger_back (hooks; a line true on both showings)",
+      "date": "2026-11-26"
+    },
+    {
+      "card": "P49",
+      "sha256": "f2c46a20cfba1a3ab3de1124a155094031dc252e3c61dd5d169a34a434dffcc5",
+      "words": "ENI for LO (delegated 2026-11-24): reader pass 2 fixes on ryan_charger_back",
+      "date": "2026-11-26"
+    },
+    {
+      "card": "P49",
+      "sha256": "d78aa5cfb2ee4b018d72b6984d0eccba2f278892d491607095614061232bc7a8",
+      "words": "ENI for LO (delegated 2026-11-24): reader pass 3 hook on ryan_charger_back.look",
+      "date": "2026-11-26"
     }
   ]
 }

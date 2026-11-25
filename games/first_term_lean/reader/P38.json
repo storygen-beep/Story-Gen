@@ -1,6 +1,6 @@
 {
  "piece": "P38",
- "pass": 5,
+ "pass": 6,
  "screens": {
   "walk_parents.moment": {
    "text": "0f689960aa65a5e0",
@@ -257,7 +257,9 @@
   "C450": "b01ad555668aba2d",
   "C422": "7e128897077ecee6",
   "C460": "67e48e60d5053a2e",
-  "C461": "310706ee076318f2"
+  "C461": "310706ee076318f2",
+  "C2188": "612394eef6826900",
+  "C2189": "20748838895e4545"
  },
  "verdicts": [
   {
@@ -2279,7 +2281,7 @@
    "note": false,
    "screen_hash": "e2b0b71b2e28d1a5",
    "row_hash": "47b9477e3ec8a790",
-   "carried": false,
+   "carried": true,
    "pass": 5
   },
   {
@@ -2292,8 +2294,224 @@
    "note": false,
    "screen_hash": "e2b0b71b2e28d1a5",
    "row_hash": "40172c2d376bfc32",
-   "carried": false,
+   "carried": true,
    "pass": 5
+  },
+  {
+   "row": "C2188",
+   "screen": "walk_mark_phone.moment",
+   "verdict": "PASS",
+   "line": "'Walk in'",
+   "why": "two choices, each to its own answer screen; 'Walk in' sets a flag at most, no meter or feeling moves",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "e7e800f7e072024b",
+    "facts": "643dd7b0173cb2a8",
+    "facts2": "371b14470ce23cce",
+    "all": "064db9925c5a7a01"
+   },
+   "row_hash": "612394eef6826900",
+   "carried": false,
+   "pass": 6
+  },
+  {
+   "row": "C2188",
+   "screen": "walk_mom_bills.moment",
+   "verdict": "PASS",
+   "line": "'Say you're late'",
+   "why": "two choices, each to its own answer screen; 'Say you're late' sets a flag at most, no meter or feeling moves",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "1cd7f448b8c965cb",
+    "facts": "4233727f3d0d2307",
+    "facts2": "34a8649ad7102788",
+    "all": "64d249842efe26a0"
+   },
+   "row_hash": "612394eef6826900",
+   "carried": false,
+   "pass": 6
+  },
+  {
+   "row": "C2188",
+   "screen": "walk_parents.moment",
+   "verdict": "PASS",
+   "line": "'Back away'",
+   "why": "two choices, each to its own answer screen; 'Back away' sets a flag at most, no meter or feeling moves",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "0f689960aa65a5e0",
+    "facts": "4ae0ea463b0299c5",
+    "facts2": "a70226de81ca7f87",
+    "all": "5295e17ddac377d2"
+   },
+   "row_hash": "612394eef6826900",
+   "carried": false,
+   "pass": 6
+  },
+  {
+   "row": "C2188",
+   "screen": "walk_ryan_game.moment",
+   "verdict": "PASS",
+   "line": "'Not now'",
+   "why": "two choices, each to its own answer screen; 'Not now' sets a flag at most, no meter or feeling moves",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "5761dbfb3262f770",
+    "facts": "dc79944b1aa0a816",
+    "facts2": "7eac0b49ad26fea0",
+    "all": "5a72a25c7e4e43c9"
+   },
+   "row_hash": "612394eef6826900",
+   "carried": false,
+   "pass": 6
+  },
+  {
+   "row": "C2188",
+   "screen": "walk_ryan_phone.moment",
+   "verdict": "PASS",
+   "line": "'Back away'",
+   "why": "two choices, each to its own answer screen; 'Back away' sets a flag at most, no meter or feeling moves",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "bfa349501d85aa26",
+    "facts": "24c4b946d90ccbb4",
+    "facts2": "829298a706f02a41",
+    "all": "d3596152702ff253"
+   },
+   "row_hash": "612394eef6826900",
+   "carried": false,
+   "pass": 6
+  },
+  {
+   "row": "C2188",
+   "screen": "walk_ryan_shower.moment",
+   "verdict": "PASS",
+   "line": "'Cover up'",
+   "why": "two choices, each to its own answer screen; 'Cover up' sets a flag at most, no meter or feeling moves",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "8c491e1c62636721",
+    "facts": "3a6c1ddc24ec0f10",
+    "facts2": "79c2db2883b9c464",
+    "all": "32095613619b5457"
+   },
+   "row_hash": "612394eef6826900",
+   "carried": false,
+   "pass": 6
+  },
+  {
+   "row": "C2189",
+   "screen": "walk_mark_phone.moment",
+   "verdict": "PASS",
+   "line": "max_triggers_per_day = 1",
+   "why": "repeatable button capped once a day (v2.py:6145 canTriggerCanvas), so it rests a day and never replays at once; LO's three-day rest (NOTES 2026-11-26) is set for 'comes to her' scenes only",
+   "cause": null,
+   "note": true,
+   "screen_hash": {
+    "text": "e7e800f7e072024b",
+    "facts": "643dd7b0173cb2a8",
+    "facts2": "371b14470ce23cce",
+    "all": "064db9925c5a7a01"
+   },
+   "row_hash": "20748838895e4545",
+   "carried": false,
+   "pass": 6
+  },
+  {
+   "row": "C2189",
+   "screen": "walk_mom_bills.moment",
+   "verdict": "PASS",
+   "line": "max_triggers_per_day = 1",
+   "why": "repeatable button capped once a day (v2.py:6145 canTriggerCanvas), so it rests a day and never replays at once; LO's three-day rest (NOTES 2026-11-26) is set for 'comes to her' scenes only",
+   "cause": null,
+   "note": true,
+   "screen_hash": {
+    "text": "1cd7f448b8c965cb",
+    "facts": "4233727f3d0d2307",
+    "facts2": "34a8649ad7102788",
+    "all": "64d249842efe26a0"
+   },
+   "row_hash": "20748838895e4545",
+   "carried": false,
+   "pass": 6
+  },
+  {
+   "row": "C2189",
+   "screen": "walk_parents.moment",
+   "verdict": "PASS",
+   "line": "max_triggers_per_day = 1",
+   "why": "repeatable button capped once a day (v2.py:6145 canTriggerCanvas), so it rests a day and never replays at once; LO's three-day rest (NOTES 2026-11-26) is set for 'comes to her' scenes only",
+   "cause": null,
+   "note": true,
+   "screen_hash": {
+    "text": "0f689960aa65a5e0",
+    "facts": "4ae0ea463b0299c5",
+    "facts2": "a70226de81ca7f87",
+    "all": "5295e17ddac377d2"
+   },
+   "row_hash": "20748838895e4545",
+   "carried": false,
+   "pass": 6
+  },
+  {
+   "row": "C2189",
+   "screen": "walk_ryan_game.moment",
+   "verdict": "PASS",
+   "line": "max_triggers_per_day = 1",
+   "why": "repeatable button capped once a day (v2.py:6145 canTriggerCanvas), so it rests a day and never replays at once; LO's three-day rest (NOTES 2026-11-26) is set for 'comes to her' scenes only",
+   "cause": null,
+   "note": true,
+   "screen_hash": {
+    "text": "5761dbfb3262f770",
+    "facts": "dc79944b1aa0a816",
+    "facts2": "7eac0b49ad26fea0",
+    "all": "5a72a25c7e4e43c9"
+   },
+   "row_hash": "20748838895e4545",
+   "carried": false,
+   "pass": 6
+  },
+  {
+   "row": "C2189",
+   "screen": "walk_ryan_phone.moment",
+   "verdict": "PASS",
+   "line": "max_triggers_per_day = 1",
+   "why": "repeatable button capped once a day (v2.py:6145 canTriggerCanvas), so it rests a day and never replays at once; LO's three-day rest (NOTES 2026-11-26) is set for 'comes to her' scenes only",
+   "cause": null,
+   "note": true,
+   "screen_hash": {
+    "text": "bfa349501d85aa26",
+    "facts": "24c4b946d90ccbb4",
+    "facts2": "829298a706f02a41",
+    "all": "d3596152702ff253"
+   },
+   "row_hash": "20748838895e4545",
+   "carried": false,
+   "pass": 6
+  },
+  {
+   "row": "C2189",
+   "screen": "walk_ryan_shower.moment",
+   "verdict": "PASS",
+   "line": "max_triggers_per_day = 1",
+   "why": "repeatable button capped once a day (v2.py:6145 canTriggerCanvas), so it rests a day and never replays at once; LO's three-day rest (NOTES 2026-11-26) is set for 'comes to her' scenes only",
+   "cause": null,
+   "note": true,
+   "screen_hash": {
+    "text": "8c491e1c62636721",
+    "facts": "3a6c1ddc24ec0f10",
+    "facts2": "79c2db2883b9c464",
+    "all": "32095613619b5457"
+   },
+   "row_hash": "20748838895e4545",
+   "carried": false,
+   "pass": 6
   },
   {
    "row": "C286",
@@ -2409,19 +2627,6 @@
    "note": false,
    "screen_hash": "280aed1bba0156f9",
    "row_hash": "0304731d263aed9f",
-   "carried": true,
-   "pass": 1
-  },
-  {
-   "row": "C330",
-   "screen": "*",
-   "verdict": "PASS",
-   "line": "\u2014",
-   "why": "no meter",
-   "cause": null,
-   "note": false,
-   "screen_hash": "280aed1bba0156f9",
-   "row_hash": "923a40b5ad4048fd",
    "carried": true,
    "pass": 1
   },

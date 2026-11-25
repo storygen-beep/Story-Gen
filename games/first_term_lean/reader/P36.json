@@ -1,6 +1,6 @@
 {
  "piece": "P36",
- "pass": 5,
+ "pass": 6,
  "screens": {
   "rep_mirror.listen": {
    "text": "37e65552ab36cb26",
@@ -119,7 +119,8 @@
   "C450": "b01ad555668aba2d",
   "C422": "7e128897077ecee6",
   "C460": "67e48e60d5053a2e",
-  "C461": "310706ee076318f2"
+  "C461": "310706ee076318f2",
+  "C2189": "20748838895e4545"
  },
  "verdicts": [
   {
@@ -809,7 +810,7 @@
    "note": false,
    "screen_hash": "c87611bdc2813d97",
    "row_hash": "47b9477e3ec8a790",
-   "carried": false,
+   "carried": true,
    "pass": 5
   },
   {
@@ -822,21 +823,62 @@
    "note": false,
    "screen_hash": "c87611bdc2813d97",
    "row_hash": "40172c2d376bfc32",
-   "carried": false,
+   "carried": true,
    "pass": 5
   },
   {
-   "row": "C330",
-   "screen": "*",
-   "verdict": "N/A",
-   "line": "\u2014",
-   "why": "no meter paid",
+   "row": "C2189",
+   "screen": "rep_mirror.listen",
+   "verdict": "PASS",
+   "line": "max_triggers_per_day = 1",
+   "why": "overheard line rests a day",
    "cause": null,
-   "note": false,
-   "screen_hash": "d70e0e170252bcaa",
-   "row_hash": "923a40b5ad4048fd",
-   "carried": true,
-   "pass": 1
+   "note": true,
+   "screen_hash": {
+    "text": "37e65552ab36cb26",
+    "facts": "a2c742f13651416e",
+    "facts2": "805ffde1713f555a",
+    "all": "805814c4c2d77826"
+   },
+   "row_hash": "20748838895e4545",
+   "carried": false,
+   "pass": 6
+  },
+  {
+   "row": "C2189",
+   "screen": "rep_table.listen",
+   "verdict": "PASS",
+   "line": "max_triggers_per_day = 1",
+   "why": "overheard line rests a day",
+   "cause": null,
+   "note": true,
+   "screen_hash": {
+    "text": "0756a10c45c782eb",
+    "facts": "c661925bd9a85198",
+    "facts2": "c3911e4c6ac514f2",
+    "all": "bc96e0a4f6b4b457"
+   },
+   "row_hash": "20748838895e4545",
+   "carried": false,
+   "pass": 6
+  },
+  {
+   "row": "C2189",
+   "screen": "sidebar.reputation",
+   "verdict": "N/A",
+   "line": "",
+   "why": "a sidebar meter, not a scene",
+   "cause": null,
+   "note": true,
+   "screen_hash": {
+    "text": "09e109c3aa6c7876",
+    "facts": "09e109c3aa6c7876",
+    "facts2": "09e109c3aa6c7876",
+    "all": "09e109c3aa6c7876"
+   },
+   "row_hash": "20748838895e4545",
+   "carried": false,
+   "pass": 6
   },
   {
    "row": "C422",
@@ -866,7 +908,7 @@
     "all": "09e109c3aa6c7876"
    },
    "row_hash": "7e128897077ecee6",
-   "carried": false,
+   "carried": true,
    "pass": 5
   },
   {
@@ -897,7 +939,7 @@
     "all": "09e109c3aa6c7876"
    },
    "row_hash": "59b8d8d24f0c7c38",
-   "carried": false,
+   "carried": true,
    "pass": 5
   },
   {
@@ -954,7 +996,7 @@
     "all": "09e109c3aa6c7876"
    },
    "row_hash": "50dbf74577a813c7",
-   "carried": false,
+   "carried": true,
    "pass": 5
   },
   {
@@ -1008,7 +1050,7 @@
     "all": "09e109c3aa6c7876"
    },
    "row_hash": "67e48e60d5053a2e",
-   "carried": false,
+   "carried": true,
    "pass": 5
   },
   {
@@ -1075,7 +1117,7 @@
     "all": "09e109c3aa6c7876"
    },
    "row_hash": "310706ee076318f2",
-   "carried": false,
+   "carried": true,
    "pass": 5
   },
   {
@@ -1106,7 +1148,7 @@
     "all": "09e109c3aa6c7876"
    },
    "row_hash": "e78502f7aa28746d",
-   "carried": false,
+   "carried": true,
    "pass": 5
   },
   {
@@ -1907,8 +1949,8 @@
  ],
  "causes": [],
  "pending": [],
- "asked": 8,
- "answered": 8,
+ "asked": 1,
+ "answered": 1,
  "pass_items": [],
  "unowed": []
 }

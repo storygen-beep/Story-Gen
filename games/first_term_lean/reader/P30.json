@@ -1,6 +1,6 @@
 {
  "piece": "P30",
- "pass": 6,
+ "pass": 7,
  "screens": {
   "watch_rehearsal.watch": {
    "text": "76180fc6c9ebadc2",
@@ -131,7 +131,8 @@
   "C450": "b01ad555668aba2d",
   "C422": "7e128897077ecee6",
   "C460": "67e48e60d5053a2e",
-  "C461": "310706ee076318f2"
+  "C461": "310706ee076318f2",
+  "C2189": "20748838895e4545"
  },
  "verdicts": [
   {
@@ -1130,7 +1131,7 @@
    "note": false,
    "screen_hash": "e6e953eced7681f4",
    "row_hash": "3a9caf43a2f2b8fd",
-   "carried": false,
+   "carried": true,
    "pass": 6
   },
   {
@@ -1143,7 +1144,7 @@
    "note": false,
    "screen_hash": "e6e953eced7681f4",
    "row_hash": "00496c4c3aec4580",
-   "carried": false,
+   "carried": true,
    "pass": 6
   },
   {
@@ -1156,7 +1157,7 @@
    "note": false,
    "screen_hash": "e6e953eced7681f4",
    "row_hash": "47b9477e3ec8a790",
-   "carried": false,
+   "carried": true,
    "pass": 6
   },
   {
@@ -1169,7 +1170,7 @@
    "note": false,
    "screen_hash": "e6e953eced7681f4",
    "row_hash": "a6c0f498d4d16271",
-   "carried": false,
+   "carried": true,
    "pass": 6
   },
   {
@@ -1182,7 +1183,7 @@
    "note": false,
    "screen_hash": "e6e953eced7681f4",
    "row_hash": "74c68b4029782b5f",
-   "carried": false,
+   "carried": true,
    "pass": 6
   },
   {
@@ -1195,34 +1196,21 @@
    "note": false,
    "screen_hash": "e6e953eced7681f4",
    "row_hash": "40172c2d376bfc32",
-   "carried": false,
+   "carried": true,
    "pass": 6
   },
   {
-   "row": "C295",
-   "screen": "*",
-   "verdict": "N/A",
-   "line": "effects = energy +5",
-   "why": "Energy is not a person's or a climb meter; no meter step, rung, lock or offer here.",
-   "cause": null,
-   "note": false,
-   "screen_hash": "9da8dfcbbd238c05",
-   "row_hash": "63160eb49f7bb566",
-   "carried": true,
-   "pass": 3
-  },
-  {
-   "row": "C330",
+   "row": "C2189",
    "screen": "*",
    "verdict": "N/A",
    "line": "",
-   "why": "No repeatable pays a climb meter.",
+   "why": "watch_rehearsal, watch_class, sit_seats: her own loop verb, chosen each time; C2189 (walk-ins.md shape 5) governs a scene that comes again, not a repeated action; location lines are not scenes",
    "cause": null,
-   "note": false,
-   "screen_hash": "9da8dfcbbd238c05",
-   "row_hash": "923a40b5ad4048fd",
-   "carried": true,
-   "pass": 3
+   "note": true,
+   "screen_hash": "e6e953eced7681f4",
+   "row_hash": "20748838895e4545",
+   "carried": false,
+   "pass": 7
   },
   {
    "row": "C338",
@@ -1247,7 +1235,7 @@
    "note": false,
    "screen_hash": "e6e953eced7681f4",
    "row_hash": "c661ccd26aada1f2",
-   "carried": false,
+   "carried": true,
    "pass": 6
   },
   {
@@ -1260,7 +1248,7 @@
    "note": false,
    "screen_hash": "e6e953eced7681f4",
    "row_hash": "fbffa0dbed63968f",
-   "carried": false,
+   "carried": true,
    "pass": 6
   },
   {
@@ -1684,7 +1672,7 @@
    "note": false,
    "screen_hash": "e6e953eced7681f4",
    "row_hash": "eaf957bb84e62bbf",
-   "carried": false,
+   "carried": true,
    "pass": 6
   },
   {
@@ -2360,7 +2348,7 @@
    "note": false,
    "screen_hash": "e6e953eced7681f4",
    "row_hash": "f7a81c1d066ade25",
-   "carried": false,
+   "carried": true,
    "pass": 6
   },
   {
@@ -2497,14 +2485,14 @@
    "note": false,
    "screen_hash": "e6e953eced7681f4",
    "row_hash": "32d431db08834e70",
-   "carried": false,
+   "carried": true,
    "pass": 6
   }
  ],
  "causes": [],
  "pending": [],
- "asked": 11,
- "answered": 11,
+ "asked": 1,
+ "answered": 1,
  "pass_items": [],
  "unowed": []
 }

@@ -1,6 +1,6 @@
 {
  "piece": "P13",
- "pass": 14,
+ "pass": 15,
  "screens": {
   "opening.wake": {
    "text": "cc3c063d9cef0f23",
@@ -258,6 +258,7 @@
   "C422": "7e128897077ecee6",
   "C460": "67e48e60d5053a2e",
   "C461": "310706ee076318f2",
+  "C2190": "452a5657d7527351",
   "C54": "5b7d0c4fc44f21db",
   "C43": "1980256e20e09aeb",
   "C44": "12fb2a1a7aa232a4",
@@ -2157,7 +2158,7 @@
     "all": "4a1ccc16bcecd3d1"
    },
    "row_hash": "bf7edbd0ddd9e7b7",
-   "carried": false,
+   "carried": true,
    "pass": 14
   },
   {
@@ -2506,7 +2507,7 @@
    "note": false,
    "screen_hash": "b14489ed33620279",
    "row_hash": "47b9477e3ec8a790",
-   "carried": false,
+   "carried": true,
    "pass": 14
   },
   {
@@ -2519,8 +2520,65 @@
    "note": false,
    "screen_hash": "b14489ed33620279",
    "row_hash": "40172c2d376bfc32",
-   "carried": false,
+   "carried": true,
    "pass": 14
+  },
+  {
+   "row": "C2190",
+   "screen": "npc_laura",
+   "verdict": "N/A",
+   "line": "",
+   "why": "People dialog field, not a moment",
+   "cause": null,
+   "note": false,
+   "screen_hash": null,
+   "row_hash": "452a5657d7527351",
+   "carried": false,
+   "pass": 15
+  },
+  {
+   "row": "C2190",
+   "screen": "npc_mark",
+   "verdict": "N/A",
+   "line": "",
+   "why": "People dialog field, not a moment",
+   "cause": null,
+   "note": false,
+   "screen_hash": null,
+   "row_hash": "452a5657d7527351",
+   "carried": false,
+   "pass": 15
+  },
+  {
+   "row": "C2190",
+   "screen": "npc_ryan",
+   "verdict": "N/A",
+   "line": "",
+   "why": "People dialog field, not a moment",
+   "cause": null,
+   "note": false,
+   "screen_hash": null,
+   "row_hash": "452a5657d7527351",
+   "carried": false,
+   "pass": 15
+  },
+  {
+   "row": "C2190",
+   "screen": "opening.wake",
+   "verdict": "PASS",
+   "line": "the opening",
+   "why": "fires for sure at the start, no trigger and no chance",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "cc3c063d9cef0f23",
+    "facts": "e0c40fd7cb43a940",
+    "facts2": "e0c40fd7cb43a940",
+    "all": "5ad514c74be46beb"
+   },
+   "row_hash": "452a5657d7527351",
+   "carried": false,
+   "pass": 15
   },
   {
    "row": "C286",
@@ -7665,8 +7723,8 @@
  ],
  "causes": [],
  "pending": [],
- "asked": 3,
- "answered": 3,
+ "asked": 1,
+ "answered": 1,
  "pass_items": [],
  "unowed": []
 }

@@ -1,6 +1,6 @@
 {
  "piece": "P31",
- "pass": 6,
+ "pass": 7,
  "screens": {
   "cafe_window.sit": {
    "text": "38e98584690f209c",
@@ -119,7 +119,8 @@
   "C450": "b01ad555668aba2d",
   "C422": "7e128897077ecee6",
   "C460": "67e48e60d5053a2e",
-  "C461": "310706ee076318f2"
+  "C461": "310706ee076318f2",
+  "C2189": "20748838895e4545"
  },
  "verdicts": [
   {
@@ -150,7 +151,7 @@
     "all": "805ef445741bca1c"
    },
    "row_hash": "c1c0e2ac2588a579",
-   "carried": false,
+   "carried": true,
    "pass": 6
   },
   {
@@ -326,7 +327,7 @@
     "all": "805ef445741bca1c"
    },
    "row_hash": "80d415cf08e0ebfe",
-   "carried": false,
+   "carried": true,
    "pass": 6
   },
   {
@@ -866,7 +867,7 @@
     "all": "805ef445741bca1c"
    },
    "row_hash": "47b9477e3ec8a790",
-   "carried": false,
+   "carried": true,
    "pass": 6
   },
   {
@@ -907,6 +908,24 @@
    "row_hash": "40172c2d376bfc32",
    "carried": true,
    "pass": 5
+  },
+  {
+   "row": "C2189",
+   "screen": "cafe_window.sit",
+   "verdict": "N/A",
+   "line": "",
+   "why": "her own loop verb, chosen each time; C2189 (walk-ins.md shape 5) governs a scene that comes again, not a repeated action (sit by the window, capped twice a day)",
+   "cause": null,
+   "note": true,
+   "screen_hash": {
+    "text": "38e98584690f209c",
+    "facts": "88ebfd4137b4b002",
+    "facts2": "d02aec651f6e0475",
+    "all": "805ef445741bca1c"
+   },
+   "row_hash": "20748838895e4545",
+   "carried": false,
+   "pass": 7
   },
   {
    "row": "C338",
@@ -1047,7 +1066,7 @@
     "all": "805ef445741bca1c"
    },
    "row_hash": "67e48e60d5053a2e",
-   "carried": false,
+   "carried": true,
    "pass": 6
   },
   {
@@ -1091,7 +1110,7 @@
     "all": "805ef445741bca1c"
    },
    "row_hash": "310706ee076318f2",
-   "carried": false,
+   "carried": true,
    "pass": 6
   },
   {
@@ -1627,7 +1646,7 @@
     "all": "805ef445741bca1c"
    },
    "row_hash": "4e86d143688ba8e5",
-   "carried": false,
+   "carried": true,
    "pass": 6
   },
   {
@@ -1702,7 +1721,7 @@
     "all": "805ef445741bca1c"
    },
    "row_hash": "1aadffd96e76381c",
-   "carried": false,
+   "carried": true,
    "pass": 6
   },
   {
@@ -1751,7 +1770,7 @@
     "all": "805ef445741bca1c"
    },
    "row_hash": "13a714429d15f3b2",
-   "carried": false,
+   "carried": true,
    "pass": 6
   },
   {
@@ -1826,7 +1845,7 @@
     "all": "805ef445741bca1c"
    },
    "row_hash": "e64ce2672d85d2d8",
-   "carried": false,
+   "carried": true,
    "pass": 6
   },
   {
@@ -1858,8 +1877,8 @@
  ],
  "causes": [],
  "pending": [],
- "asked": 9,
- "answered": 9,
+ "asked": 1,
+ "answered": 1,
  "pass_items": [],
  "unowed": []
 }

@@ -1,6 +1,6 @@
 {
  "piece": "P25",
- "pass": 5,
+ "pass": 6,
  "screens": {
   "quad_meet_jake.ask": {
    "text": "8894fc030db920d6",
@@ -148,7 +148,9 @@
   "C450": "b01ad555668aba2d",
   "C422": "7e128897077ecee6",
   "C460": "67e48e60d5053a2e",
-  "C461": "310706ee076318f2"
+  "C461": "310706ee076318f2",
+  "C2188": "612394eef6826900",
+  "C2190": "452a5657d7527351"
  },
  "verdicts": [
   {
@@ -1004,7 +1006,7 @@
    "note": false,
    "screen_hash": "9a2d7e28566bccec",
    "row_hash": "47b9477e3ec8a790",
-   "carried": false,
+   "carried": true,
    "pass": 5
   },
   {
@@ -1017,8 +1019,57 @@
    "note": false,
    "screen_hash": "9a2d7e28566bccec",
    "row_hash": "40172c2d376bfc32",
-   "carried": false,
+   "carried": true,
    "pass": 5
+  },
+  {
+   "row": "C2188",
+   "screen": "quad_meet_jake.ask",
+   "verdict": "PASS",
+   "line": "'Not right now.' -> \"Not right now isn't no. I'll take it.\"",
+   "why": "his ask can be refused with its own line; flag only",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "8894fc030db920d6",
+    "facts": "f450a59ac676a174",
+    "facts2": "d12e3bf8fad210ea",
+    "all": "3695e990c9a90d84"
+   },
+   "row_hash": "612394eef6826900",
+   "carried": false,
+   "pass": 6
+  },
+  {
+   "row": "C2190",
+   "screen": "npc_jake",
+   "verdict": "N/A",
+   "line": "",
+   "why": "People dialog field, not a moment",
+   "cause": null,
+   "note": false,
+   "screen_hash": null,
+   "row_hash": "452a5657d7527351",
+   "carried": false,
+   "pass": 6
+  },
+  {
+   "row": "C2190",
+   "screen": "quad_meet_jake.ask",
+   "verdict": "PASS",
+   "line": "days_since met_laura >= 7, Jake on the quad",
+   "why": "one-time canvas, trigger_mode manual, no chance: self-fires on arrival when its conditions are met (v2.py:5937-5955)",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "8894fc030db920d6",
+    "facts": "f450a59ac676a174",
+    "facts2": "d12e3bf8fad210ea",
+    "all": "3695e990c9a90d84"
+   },
+   "row_hash": "452a5657d7527351",
+   "carried": false,
+   "pass": 6
   },
   {
    "row": "C286",
