@@ -19,6 +19,11 @@ Note (2026-11-23): this session's network blocked direct fetches of themoth.org,
 - [Interview: Kenn Adams on the Story Spine — NPR](https://www.npr.org/transcripts/nx-s1-5750619)
   The 8-beat improv tool (Once upon a time / Every day / But one day / Because of that ×3 / Until finally / Ever since then). Use for: structure drills, quick plotting of a told story.
 
+- [Book notes: _Storyworthy_ — Manas Saloi](https://www.manassaloi.com/booksummaries/2021/06/12/storyworthy-dicks.html)
+  Secondary summary of Dicks's stakes tools (Elephant, Backpack, Breadcrumbs, Hourglass, Crystal Ball). Use for: quick check of tool definitions until the book itself is to hand.
+- [Article: Moth live storytelling tips — journalism.co.uk](https://www.journalism.co.uk/feel-the-emotion-live-storytelling-tips-from-the-moth/) and [KNPR: What makes a Moth story a Moth story?](https://knpr.org/desert-companion/2018-11/onstage-story-time)
+  Secondary coverage of The Moth's stakes guidance (what you stand to gain or lose; the lost-luggage example). Use for: stakes.
+
 ## Wisdom (Communities)
 
 - [The Moth StorySLAMs](https://themoth.org)
@@ -27,5 +32,5 @@ Note (2026-11-23): this session's network blocked direct fetches of themoth.org,
   Structured, low-stakes speaking practice with evaluations. Use for: repeated live reps with feedback.
 
 ## Gaps
-- No verified primary-page fetch yet for themoth.org tips or matthewdicks.com (network block).
+- No verified primary-page fetch yet for themoth.org tips (also mirrored at themoth.prx.org) or matthewdicks.com (network block).
 - Need a high-trust source on delivery (pace, pauses, voice) for later lessons.
