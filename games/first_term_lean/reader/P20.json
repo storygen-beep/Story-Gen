@@ -1,20 +1,22 @@
 {
  "piece": "P20",
- "pass": 7,
+ "pass": 8,
  "screens": {
   "quad_meet_zoe.coffee": {
    "text": "cacb601aa799b9fd",
+   "traits": "6b1e34b018661933",
    "facts": "9ffbbc8ba008e154",
    "facts2": "262e056b4f130afa",
    "all": "6e049aeeb336f9ab"
   },
   "quad_meet_zoe.talk": {
    "text": "f7db38821f67277f",
+   "traits": "6b1e34b018661933",
    "facts": "782b2f9b937f0abe",
    "facts2": "215f39220593dca1",
    "all": "081bed1d70385580"
   },
-  "*": "492ea00ea89995f9"
+  "*": "fdb2a1e1a6c519fe"
  },
  "rows": {
   "B1": "5276068df1ca6fa9",
@@ -109,7 +111,7 @@
   "C644": "f5e1d79f3251dbab",
   "C596": "e5f7e6cf2d01613d",
   "C2179": "47b9477e3ec8a790",
-  "C2183": "40172c2d376bfc32",
+  "C2194": "0c03931191c53a34",
   "C448": "b86596f1a02766de",
   "L168": "444c44970dc284f2",
   "L169": "59defccfc63b0454",
@@ -998,7 +1000,7 @@
     "all": "6e049aeeb336f9ab"
    },
    "row_hash": "612394eef6826900",
-   "carried": false,
+   "carried": true,
    "pass": 7
   },
   {
@@ -1011,7 +1013,7 @@
    "note": false,
    "screen_hash": null,
    "row_hash": "452a5657d7527351",
-   "carried": false,
+   "carried": true,
    "pass": 7
   },
   {
@@ -1029,8 +1031,46 @@
     "all": "6e049aeeb336f9ab"
    },
    "row_hash": "452a5657d7527351",
-   "carried": false,
+   "carried": true,
    "pass": 7
+  },
+  {
+   "row": "C2194",
+   "screen": "quad_meet_zoe.coffee",
+   "verdict": "PASS",
+   "line": "You look like you need this more than I do, babe. I'm Zoe. You're new.",
+   "why": "Zoe: Show-off (crop top that shows her stomach; walks up without asking). No strings not shown, fine on a first meeting.",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "cacb601aa799b9fd",
+    "traits": "6b1e34b018661933",
+    "facts": "9ffbbc8ba008e154",
+    "facts2": "262e056b4f130afa",
+    "all": "6e049aeeb336f9ab"
+   },
+   "row_hash": "0c03931191c53a34",
+   "carried": false,
+   "pass": 8
+  },
+  {
+   "row": "C2194",
+   "screen": "quad_meet_zoe.talk",
+   "verdict": "PASS",
+   "line": "Come find me. Saturday. Mine. Nine o'clock.",
+   "why": "Zoe: Show-off (the party at hers; 'You look like you're about to stop being boring'). No strings not shown, fine.",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "f7db38821f67277f",
+    "traits": "6b1e34b018661933",
+    "facts": "782b2f9b937f0abe",
+    "facts2": "215f39220593dca1",
+    "all": "081bed1d70385580"
+   },
+   "row_hash": "0c03931191c53a34",
+   "carried": false,
+   "pass": 8
   },
   {
    "row": "C422",
@@ -2324,8 +2364,8 @@
  ],
  "causes": [],
  "pending": [],
- "asked": 2,
- "answered": 2,
+ "asked": 1,
+ "answered": 1,
  "pass_items": [],
  "unowed": []
 }

@@ -1,200 +1,239 @@
 {
  "piece": "P49",
- "pass": 4,
+ "pass": 7,
  "screens": {
   "ryan_charger.moment": {
-   "text": "e71b26b6febbc0a4",
+   "text": "313906c8298f2b26",
+   "traits": "74c4f68e6476ecee",
    "facts": "c2d1415accf79c05",
    "facts2": "8d63addbcec693e8",
-   "all": "da35acf4f60c4e57"
+   "all": "abde12bfac993bae"
   },
   "ryan_charger.give": {
-   "text": "ecde715461c7a69a",
+   "text": "74a1f5c72905b789",
+   "traits": "74c4f68e6476ecee",
    "facts": "af9643700a2e29bf",
    "facts2": "b24f726a86e87617",
-   "all": "e74fb634d86d3a50"
+   "all": "585a226b99ee83db"
   },
   "ryan_charger.own": {
    "text": "e789e354dcc062b6",
+   "traits": "74c4f68e6476ecee",
    "facts": "ceccd6e6fc26176a",
    "facts2": "cf4e46f749ed8dbd",
    "all": "5de40874824921fa"
   },
   "ryan_charger_back.moment": {
-   "text": "088f904f1787f898",
+   "text": "ba4d186ba1d48c83",
+   "traits": "74c4f68e6476ecee",
    "facts": "794f3425e70e89bc",
    "facts2": "63e40120178d9641",
-   "all": "5bc550c7bb0835e9"
+   "all": "48878c52b6a0aa3c"
   },
   "ryan_charger_back.take": {
-   "text": "de069e800d31e3f4",
+   "text": "88c9e004e47287aa",
+   "traits": "74c4f68e6476ecee",
    "facts": "553013c2cdb96b81",
    "facts2": "e771106eddedbf0a",
-   "all": "dd378bf9d71f4e32"
+   "all": "405e9c94dcd213f1"
   },
   "ryan_charger_back.look": {
-   "text": "80d145c054bd32d6",
+   "text": "ca81d6cf8e22d3c8",
+   "traits": "74c4f68e6476ecee",
    "facts": "e03ae2cd56295992",
    "facts2": "aa200880ec280d14",
-   "all": "e6badfd2b89da059"
+   "all": "1a9d24549c5e70f6"
+  },
+  "ryan_charger_back.look2": {
+   "text": "b6fc34828f2bbcde",
+   "traits": "74c4f68e6476ecee",
+   "facts": "e03ae2cd56295992",
+   "facts2": "aa200880ec280d14",
+   "all": "acd7ba9ed82826e4"
   },
   "mom_taste.moment": {
    "text": "a478c76abe5c1a35",
+   "traits": "95f1c22815f415ed",
    "facts": "31c89ab386edb857",
    "facts2": "f2def89abde9929c",
    "all": "06f6053c7ed12440"
   },
   "mom_taste.taste": {
    "text": "473c28cf613e3565",
+   "traits": "95f1c22815f415ed",
    "facts": "89ca81a108e2ede8",
    "facts2": "2049cc980461d543",
    "all": "def36ad5aae692cd"
   },
   "mom_taste.later": {
    "text": "cb194cc55febcb96",
+   "traits": "95f1c22815f415ed",
    "facts": "3f692296c288f691",
    "facts2": "db832796811a9515",
    "all": "40ea7c896eef73e5"
   },
   "zoe_witness.moment": {
    "text": "f651eb67e838de7f",
+   "traits": "6b1e34b018661933",
    "facts": "55b08b7a92e09b4a",
    "facts2": "1d19261cdc6cf85d",
    "all": "a2080fb3cbcaac95"
   },
   "zoe_witness.go": {
    "text": "a381f4b3c986bc40",
+   "traits": "6b1e34b018661933",
    "facts": "5bc014717ddb04d9",
    "facts2": "2f64407ac0a709fe",
    "all": "dbfc3b56a1c7e201"
   },
   "zoe_witness.busy": {
    "text": "dfdd838040d7b106",
+   "traits": "6b1e34b018661933",
    "facts": "9cc108de644f960a",
    "facts2": "d94ef8bcaf458ae9",
    "all": "bb73969dcb04466d"
   },
   "zoe_give_him.moment": {
    "text": "e049452db2317066",
+   "traits": "0b1fa80c9d60647d",
    "facts": "37fcb9425fcce652",
    "facts2": "130dd93dfc7a1cca",
    "all": "0104d8053969fd0e"
   },
   "zoe_give_him.let": {
    "text": "022028c5793b53ca",
+   "traits": "6b1e34b018661933",
    "facts": "328ede71b75c0b80",
    "facts2": "3d976cb4abe6fb91",
    "all": "8b72ccd0024c88a0"
   },
   "zoe_give_him.stop": {
    "text": "685d557c1d88406a",
+   "traits": "6b1e34b018661933",
    "facts": "0521fb2c86775d25",
    "facts2": "317aff3f6de89433",
    "all": "aeedecb677ebc088"
   },
   "vance_gutter.moment": {
    "text": "4c7736cdae420af3",
+   "traits": "40c19ab6c95d7a0e",
    "facts": "480c3268ade1c5c6",
    "facts2": "f7ec106b04fdf0b4",
    "all": "4f5299bb21a4f368"
   },
   "vance_gutter.tell": {
    "text": "668930d48e752d9f",
+   "traits": "d9172dabbd56b049",
    "facts": "c43a0f9c238fb997",
    "facts2": "f9cc88d125052f67",
    "all": "f64a396f96a88f5d"
   },
   "vance_gutter.himself": {
    "text": "8985ec8a2df74599",
+   "traits": "d9172dabbd56b049",
    "facts": "28cd9494ccb442d4",
    "facts2": "6391a93192f072f4",
    "all": "2faae69a77e7fdbb"
   },
   "vance_envelope.moment": {
    "text": "1febdaba06b391a4",
+   "traits": "40c19ab6c95d7a0e",
    "facts": "480c3268ade1c5c6",
    "facts2": "f7ec106b04fdf0b4",
    "all": "90c5a314b1fbbd9d"
   },
   "vance_envelope.take": {
    "text": "99a19ed8a1c07213",
+   "traits": "d9172dabbd56b049",
    "facts": "5103078824b5373e",
    "facts2": "d09de3decbebb5fc",
    "all": "902ec8bd871f765b"
   },
   "vance_envelope.himself": {
    "text": "9431d261d5f45492",
+   "traits": "40c19ab6c95d7a0e",
    "facts": "b519586b30b72b6e",
    "facts2": "7f09a739c911537a",
    "all": "8201e9c7959847d8"
   },
   "hale_called_in.moment": {
    "text": "f4f26289fd653ba2",
+   "traits": "825724317465730d",
    "facts": "cbcf54fc4dfa6073",
    "facts2": "2b9068e4caba1752",
    "all": "70b96e8554cd9787"
   },
   "hale_called_in.yes": {
    "text": "f98a83957ee8b77e",
+   "traits": "825724317465730d",
    "facts": "913abcc6c4b17b27",
    "facts2": "cd431bea73f6a8a7",
    "all": "2ff3c463385990da"
   },
   "hale_called_in.go": {
    "text": "349f5cd13a90aeee",
+   "traits": "825724317465730d",
    "facts": "913abcc6c4b17b27",
    "facts2": "cd431bea73f6a8a7",
    "all": "a26358848a13db3b"
   },
   "marco_hips.moment": {
    "text": "a342c6199214df5d",
+   "traits": "e4365d01d4eb14be",
    "facts": "f9e936b5d2f7fa16",
    "facts2": "e2ce2f969cea33c2",
    "all": "53d52f49e07cf81c"
   },
   "marco_hips.let": {
    "text": "b4234e73d4c15393",
+   "traits": "e4365d01d4eb14be",
    "facts": "7628053aa2fe64cb",
    "facts2": "49f0b57a72e77115",
    "all": "459937785692e928"
   },
   "marco_hips.got": {
    "text": "4411ac9e8b68d194",
+   "traits": "e4365d01d4eb14be",
    "facts": "6de6e03b516eb8da",
    "facts2": "685918bc7322558b",
    "all": "1581a08c3a6e8b26"
   },
   "nadia_tip.moment": {
    "text": "91eeef5b403409c5",
+   "traits": "ef3e57a6ae056353",
    "facts": "5f454547807041f4",
    "facts2": "8e364add72f35e0d",
    "all": "0156750b0dd46b43"
   },
   "nadia_tip.thanks": {
    "text": "8c8e7515ef396462",
+   "traits": "ef3e57a6ae056353",
    "facts": "f575f5a48b9744f6",
    "facts2": "1cd9907f679c9c22",
    "all": "8e24f9b37993f5d0"
   },
   "nadia_tip.keep": {
    "text": "b82ac2c36a660844",
+   "traits": "ef3e57a6ae056353",
    "facts": "c0dac13d87852489",
    "facts2": "23ca087ae642da1c",
    "all": "a95b70663bf307ee"
   },
   "nadia_tip.tell": {
    "text": "605eb2f5c35428f6",
+   "traits": "ef3e57a6ae056353",
    "facts": "1e6bbfecfe4dcab1",
    "facts2": "e7c4669602474c5e",
    "all": "ef8d985cb08ef38a"
   },
   "nadia_tip.nothere": {
    "text": "7a26b41477264359",
+   "traits": "ef3e57a6ae056353",
    "facts": "49cd86a96ac0bd0f",
    "facts2": "5c2a5075c1a7cd39",
    "all": "284f41d00daf72a1"
   },
-  "*": "a920ee900b79c132"
+  "*": "e21f8c3e32bf52db"
  },
  "rows": {
   "B1": "5276068df1ca6fa9",
@@ -271,7 +310,7 @@
   "C644": "f5e1d79f3251dbab",
   "C596": "e5f7e6cf2d01613d",
   "C2179": "47b9477e3ec8a790",
-  "C2183": "40172c2d376bfc32",
+  "C2194": "0c03931191c53a34",
   "C1340": "b76a6583ae88c60f",
   "C769": "f6b6f78a8f2e5ed7",
   "C794": "bad76e5963432385",
@@ -336,14 +375,14 @@
    "row": "B1",
    "screen": "*",
    "verdict": "PASS",
-   "line": "Marco meet: \"your legs, your ass\"; Hale lecture \"Won't you, young lady?\"; vance_gutter \"His eyes stay on your legs\"; Ryan towel \"eyes go straight to the light switch\"; Jake meet \"His eyes drop to your mouth\"",
-   "why": "each sexual step follows an earlier canvas that showed the wanting (gym_meet_marco, P40 Hale, vance_gutter, Ryan towel scene, quad_meet_jake); the rest are everyday",
+   "line": "Ryan towel scene (\"eyes go straight to the light switch\") before ryan_charger_back; step 2 moment \"His eyes go to your chest\" before Freeze",
+   "why": "each sexual step follows an earlier canvas showing the wanting; Ryan's second look (look2) follows his first look on the same moment screen and his towel scene; the rest unchanged",
    "cause": null,
    "note": false,
-   "screen_hash": "c685ee55a5891d3e",
+   "screen_hash": "e21f8c3e32bf52db",
    "row_hash": "5276068df1ca6fa9",
-   "carried": true,
-   "pass": 1
+   "carried": false,
+   "pass": 7
   },
   {
    "row": "B10",
@@ -601,37 +640,39 @@
    "row": "B10",
    "screen": "ryan_charger.give",
    "verdict": "PASS",
-   "line": "He takes it off your desk himself. \"Lifesaver.\"",
-   "why": "texture only; Done costs 5 minutes",
+   "line": "You hand it over. He takes it without touching your fingers. \"Lifesaver. I'll bring it back.\"",
+   "why": "shows once (the yes sets ryan_charger, which stops step 1); Ryan came to her door from home_ryans_room (step 1 gates is_present and entry_only_from home_hall); \"I'll bring it back\" is built: step 2's first showing has him at her door with her charger a day or more later",
    "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "ecde715461c7a69a",
+    "text": "74a1f5c72905b789",
+    "traits": "74c4f68e6476ecee",
     "facts": "af9643700a2e29bf",
     "facts2": "b24f726a86e87617",
-    "all": "e74fb634d86d3a50"
+    "all": "585a226b99ee83db"
    },
    "row_hash": "c1c0e2ac2588a579",
-   "carried": true,
-   "pass": 2
+   "carried": false,
+   "pass": 7
   },
   {
    "row": "B10",
    "screen": "ryan_charger.moment",
    "verdict": "PASS",
-   "line": "A knock, and Ryan's leaning in your doorframe before you've said come in / again: \"Still dead. Still no charger. Please?\"",
-   "why": "Ryan in home_ryans_room 'in his room' weekdays 08-12, Sat/Sun 10:30-12 and 19-23 (npc_at_location gate); the knock shows him arriving from next door, the form C2186 allows and LO approved; second showing gated on ryan_asked, after her no",
+   "line": "A knock. Ryan waits in the hall until you open the door, then holds up his dead phone and doesn't quite look at you. / again: \"Ryan's knock again. He waits until you open, dead phone held up like evidence.\"",
+   "why": "First lines behind ryan_asked false, 'again' lines behind ryan_asked true, which only 'Use your own, Ryan.' sets, so 'Still no charger' is true (ryan_charger is still false). Ryan is next door at every minute of the trigger (npc_at_location home_ryans_room; rows weekdays 08-12, Sat/Sun 11-12 and 19-23), and the knock brings him to the door, the adjoining form LO approved.",
    "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "e71b26b6febbc0a4",
+    "text": "313906c8298f2b26",
+    "traits": "74c4f68e6476ecee",
     "facts": "c2d1415accf79c05",
     "facts2": "8d63addbcec693e8",
-    "all": "da35acf4f60c4e57"
+    "all": "abde12bfac993bae"
    },
    "row_hash": "c1c0e2ac2588a579",
    "carried": true,
-   "pass": 2
+   "pass": 6
   },
   {
    "row": "B10",
@@ -655,55 +696,77 @@
    "row": "B10",
    "screen": "ryan_charger_back.look",
    "verdict": "PASS",
-   "line": "His door clicks shut next door. In the morning it'll be the two of you and one bathroom again.",
-   "why": "true on both showings and every minute 23:00-24:00 (Mon-Fri, Sun): who_is_where puts npc_ryan in home_ryans_room 23-24 and 00-01; the next morning he has a home_bathroom row every day (Mon-Fri 07-08, Sat/Sun 10-11, so Saturday after a Friday showing too), loop_shower greys 'Ryan's in the shower.' while he is in it; 'again' is the house's standing fact (opening: 'Four people, one bathroom.'), and the scene needs ryan_charger a day or more ago, so she has had a morning there",
+   "line": "Then he sets the charger down just inside your door without looking up. \"Charger's there. Night. Sorry. Night. Sleep well.\" His door clicks shut next door.",
+   "why": "look shows only on the first showing (ryan_back_seen false), when he has her charger (step 1's yes a day or more before), so setting it down is true; his door next door matches his 23-24 rows Mon-Fri, Sun; the bathroom line holds by his morning rows; no arrival claim",
    "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "80d145c054bd32d6",
+    "text": "ca81d6cf8e22d3c8",
+    "traits": "74c4f68e6476ecee",
     "facts": "e03ae2cd56295992",
     "facts2": "aa200880ec280d14",
-    "all": "e6badfd2b89da059"
+    "all": "1a9d24549c5e70f6"
    },
    "row_hash": "c1c0e2ac2588a579",
    "carried": false,
-   "pass": 4
+   "pass": 7
+  },
+  {
+   "row": "B10",
+   "screen": "ryan_charger_back.look2",
+   "verdict": "PASS",
+   "line": "His door clicks shut next door. In the morning it'll be the two of you and one bathroom again.",
+   "why": "look2 shows only on a second-or-later showing (Freeze with ryan_back_seen true), 23:00-23:59 Mon-Fri and Sun; who_is_where puts npc_ryan in home_ryans_room 23-24 those days, so his door next door is true; next morning he has a home_bathroom row every day (Mon-Fri 07-08, Sat/Sun 10-11); \"looks again\" follows the moment's second-showing line \"His eyes go to your chest and snap to the floor\"; no line says she just walked in, true whether she came from the hall or from a room button",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "b6fc34828f2bbcde",
+    "traits": "74c4f68e6476ecee",
+    "facts": "e03ae2cd56295992",
+    "facts2": "aa200880ec280d14",
+    "all": "acd7ba9ed82826e4"
+   },
+   "row_hash": "c1c0e2ac2588a579",
+   "carried": false,
+   "pass": 7
   },
   {
    "row": "B10",
    "screen": "ryan_charger_back.moment",
    "verdict": "PASS",
-   "line": "A knock, late. Ryan's in your doorframe with your charger. / again: with nothing in his hands this time",
-   "why": "Ryan in home_ryans_room 'on his phone' 23-24 Mon-Fri and Sun; charger given a day or more before (ryan_charger); the second showing follows only the take path, where she took the charger back",
+   "line": "A knock, late. Ryan waits until you open, your charger held out. His eyes go to your chest, stay a second too long, then snap to the floor. / again: A knock, late. Ryan waits until you open, nothing in his hands this time. ... \"Just. Saying night. That's all. I couldn't sleep.\"",
+   "why": "first lines behind ryan_back_seen false: he has the charger from step 1 (days_since_flag ryan_charger gte 1); second lines behind ryan_back_seen true, reachable only after \"Take it and shut the door\" (look sets ryan_looked and stops the canvas), so \"nothing in his hands\" is true; \"A knock ... waits until you open\" holds whether she came from the hall or from a room button; Ryan next door 23-24 by his rows; \"I couldn't sleep\" is his own word, dialogue",
    "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "088f904f1787f898",
+    "text": "ba4d186ba1d48c83",
+    "traits": "74c4f68e6476ecee",
     "facts": "794f3425e70e89bc",
     "facts2": "63e40120178d9641",
-    "all": "5bc550c7bb0835e9"
+    "all": "48878c52b6a0aa3c"
    },
    "row_hash": "c1c0e2ac2588a579",
-   "carried": true,
-   "pass": 2
+   "carried": false,
+   "pass": 7
   },
   {
    "row": "B10",
    "screen": "ryan_charger_back.take",
    "verdict": "PASS",
-   "line": "You shut the door on him. ... \"Right. Night. You know where I am.\"",
-   "why": "the jab about thanks is gone; every line fits both showings (door shut on him whether he brought the charger or only said night); his door next door matches his 23-24 home_ryans_room row Mon-Fri, Sun",
+   "line": "You shut the door on him. \"Right. Night. You know where I am.\" His own door clicks a second later.",
+   "why": "every line fits both showings (door shut on him whether he brought the charger or only said night); his door next door matches his rows",
    "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "de069e800d31e3f4",
+    "text": "88c9e004e47287aa",
+    "traits": "74c4f68e6476ecee",
     "facts": "553013c2cdb96b81",
     "facts2": "e771106eddedbf0a",
-    "all": "dd378bf9d71f4e32"
+    "all": "405e9c94dcd213f1"
    },
    "row_hash": "c1c0e2ac2588a579",
-   "carried": true,
-   "pass": 3
+   "carried": false,
+   "pass": 7
   },
   {
    "row": "B10",
@@ -935,6 +998,25 @@
    "pass": 1
   },
   {
+   "row": "B11",
+   "screen": "ryan_charger_back.look2",
+   "verdict": "N/A",
+   "line": "\u2014",
+   "why": "no solo button; the only button is Done",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "b6fc34828f2bbcde",
+    "traits": "74c4f68e6476ecee",
+    "facts": "e03ae2cd56295992",
+    "facts2": "aa200880ec280d14",
+    "all": "acd7ba9ed82826e4"
+   },
+   "row_hash": "1e252efd0904a971",
+   "carried": false,
+   "pass": 7
+  },
+  {
    "row": "B12",
    "screen": "hale_called_in.moment",
    "verdict": "PASS",
@@ -969,6 +1051,25 @@
    "row_hash": "fd109745c67b71d7",
    "carried": true,
    "pass": 1
+  },
+  {
+   "row": "B12",
+   "screen": "ryan_charger_back.look2",
+   "verdict": "PASS",
+   "line": "You don't move. You can't. He looks again, slower, at your chest.",
+   "why": "her chest named, his reaction (a slower look, then a stammered \"Sorry\"), the not-yet is him backing off to his own door, and the bathroom line is the hook",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "b6fc34828f2bbcde",
+    "traits": "74c4f68e6476ecee",
+    "facts": "e03ae2cd56295992",
+    "facts2": "aa200880ec280d14",
+    "all": "acd7ba9ed82826e4"
+   },
+   "row_hash": "fd109745c67b71d7",
+   "carried": false,
+   "pass": 7
   },
   {
    "row": "B12",
@@ -1038,17 +1139,36 @@
    "pass": 1
   },
   {
+   "row": "B13",
+   "screen": "ryan_charger_back.look2",
+   "verdict": "N/A",
+   "line": "\u2014",
+   "why": "no moment alone with her body",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "b6fc34828f2bbcde",
+    "traits": "74c4f68e6476ecee",
+    "facts": "e03ae2cd56295992",
+    "facts2": "aa200880ec280d14",
+    "all": "acd7ba9ed82826e4"
+   },
+   "row_hash": "aaf6518b64dcce55",
+   "carried": false,
+   "pass": 7
+  },
+  {
    "row": "B2",
    "screen": "*",
    "verdict": "PASS",
-   "line": "zoe_give_him after zoe_witness; vance_envelope after vance_gutter; marco_hips after walk_marco_squat; hale_called_in after walk_hale_note",
-   "why": "each scene is a step past the last one with that person",
+   "line": "ryan_charger (a charger at the door) then ryan_charger_back (his eyes on her chest, Freeze lets him look)",
+   "why": "each scene is a step past the last with that person; look2 is the same step as look on a later showing",
    "cause": null,
    "note": false,
-   "screen_hash": "c685ee55a5891d3e",
+   "screen_hash": "e21f8c3e32bf52db",
    "row_hash": "4d9f2ebbce9a39cc",
-   "carried": true,
-   "pass": 1
+   "carried": false,
+   "pass": 7
   },
   {
    "row": "B3",
@@ -1371,8 +1491,27 @@
     "all": "e6badfd2b89da059"
    },
    "row_hash": "4d1fce1c4523b5d4",
-   "carried": false,
+   "carried": true,
    "pass": 4
+  },
+  {
+   "row": "B3",
+   "screen": "ryan_charger_back.look2",
+   "verdict": "PASS",
+   "line": "His door clicks shut next door. In the morning it'll be the two of you and one bathroom again.",
+   "why": "the last line points at the next meeting with Ryan as a time and place (the morning, the one bathroom), built by his bathroom rows and P38's shower scenes",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "b6fc34828f2bbcde",
+    "traits": "74c4f68e6476ecee",
+    "facts": "e03ae2cd56295992",
+    "facts2": "aa200880ec280d14",
+    "all": "acd7ba9ed82826e4"
+   },
+   "row_hash": "4d1fce1c4523b5d4",
+   "carried": false,
+   "pass": 7
   },
   {
    "row": "B3",
@@ -1952,6 +2091,25 @@
   },
   {
    "row": "B4",
+   "screen": "ryan_charger_back.look2",
+   "verdict": "PASS",
+   "line": "You don't move. You can't. He looks again, slower, at your chest.",
+   "why": "stage 0: she reacts on her body (frozen), says nothing, chooses no act",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "b6fc34828f2bbcde",
+    "traits": "74c4f68e6476ecee",
+    "facts": "e03ae2cd56295992",
+    "facts2": "aa200880ec280d14",
+    "all": "acd7ba9ed82826e4"
+   },
+   "row_hash": "ced37cb0de6e7202",
+   "carried": false,
+   "pass": 7
+  },
+  {
+   "row": "B4",
    "screen": "ryan_charger_back.moment",
    "verdict": "PASS",
    "line": "A knock, late. Ryan's in your doorframe with your charger. / again: with nothing in his hands this time",
@@ -2216,6 +2374,25 @@
    "pass": 1
   },
   {
+   "row": "B5",
+   "screen": "ryan_charger_back.look2",
+   "verdict": "PASS",
+   "line": "\"Night. Sorry. Night. Sleep well.\"",
+   "why": "Ryan reacts to her freezing: he looks again and apologizes",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "b6fc34828f2bbcde",
+    "traits": "74c4f68e6476ecee",
+    "facts": "e03ae2cd56295992",
+    "facts2": "aa200880ec280d14",
+    "all": "acd7ba9ed82826e4"
+   },
+   "row_hash": "efcbd1ac6a95e2f2",
+   "carried": false,
+   "pass": 7
+  },
+  {
    "row": "B6",
    "screen": "*",
    "verdict": "PASS",
@@ -2229,6 +2406,25 @@
    "pass": 1
   },
   {
+   "row": "B6",
+   "screen": "ryan_charger_back.look2",
+   "verdict": "PASS",
+   "line": "\"Shut the door\" (moment) / \"You shut the door on him.\"",
+   "why": "look2 is an answer screen; the no lives on the moment's \"Shut the door\" with its own written line at take",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "b6fc34828f2bbcde",
+    "traits": "74c4f68e6476ecee",
+    "facts": "e03ae2cd56295992",
+    "facts2": "aa200880ec280d14",
+    "all": "acd7ba9ed82826e4"
+   },
+   "row_hash": "0e32092e9fe64f2c",
+   "carried": false,
+   "pass": 7
+  },
+  {
    "row": "B7",
    "screen": "*",
    "verdict": "N/A",
@@ -2240,6 +2436,25 @@
    "row_hash": "cef53154cc971fef",
    "carried": true,
    "pass": 1
+  },
+  {
+   "row": "B7",
+   "screen": "ryan_charger_back.look2",
+   "verdict": "N/A",
+   "line": "\u2014",
+   "why": "no explicit beat",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "b6fc34828f2bbcde",
+    "traits": "74c4f68e6476ecee",
+    "facts": "e03ae2cd56295992",
+    "facts2": "aa200880ec280d14",
+    "all": "acd7ba9ed82826e4"
+   },
+   "row_hash": "cef53154cc971fef",
+   "carried": false,
+   "pass": 7
   },
   {
    "row": "B8",
@@ -2456,37 +2671,39 @@
    "row": "B8",
    "screen": "ryan_charger.give",
    "verdict": "PASS",
-   "line": "He takes it off your desk himself. \"Lifesaver.\"",
-   "why": "no number or her garment named; chance 0.65 and the 3-day rest match the card and NOTES (2026-11-26)",
+   "line": "You hand it over. He takes it without touching your fingers. \"Lifesaver. I'll bring it back.\"",
+   "why": "no number and no garment named",
    "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "ecde715461c7a69a",
+    "text": "74a1f5c72905b789",
+    "traits": "74c4f68e6476ecee",
     "facts": "af9643700a2e29bf",
     "facts2": "b24f726a86e87617",
-    "all": "e74fb634d86d3a50"
+    "all": "585a226b99ee83db"
    },
    "row_hash": "80d415cf08e0ebfe",
-   "carried": true,
-   "pass": 2
+   "carried": false,
+   "pass": 7
   },
   {
    "row": "B8",
    "screen": "ryan_charger.moment",
    "verdict": "PASS",
-   "line": "A knock, and Ryan's leaning in your doorframe before you've said come in / again: \"Still dead. Still no charger. Please?\"",
-   "why": "no number or her garment named; chance 0.65 and the 3-day rest match the card and NOTES (2026-11-26)",
+   "line": "A knock. Ryan waits in the hall until you open the door, then holds up his dead phone and doesn't quite look at you. / again: \"Ryan's knock again. He waits until you open, dead phone held up like evidence.\"",
+   "why": "No number and no garment; chance 0.65 and the 3-day rest on ryan_asked match the card.",
    "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "e71b26b6febbc0a4",
+    "text": "313906c8298f2b26",
+    "traits": "74c4f68e6476ecee",
     "facts": "c2d1415accf79c05",
     "facts2": "8d63addbcec693e8",
-    "all": "da35acf4f60c4e57"
+    "all": "abde12bfac993bae"
    },
    "row_hash": "80d415cf08e0ebfe",
    "carried": true,
-   "pass": 2
+   "pass": 6
   },
   {
    "row": "B8",
@@ -2511,54 +2728,76 @@
    "screen": "ryan_charger_back.look",
    "verdict": "PASS",
    "line": "He looks again, slower, at your chest.",
-   "why": "no number and no garment named on the screen; chest is body, not clothes",
+   "why": "no number and no garment named; chest is body",
    "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "80d145c054bd32d6",
+    "text": "ca81d6cf8e22d3c8",
+    "traits": "74c4f68e6476ecee",
     "facts": "e03ae2cd56295992",
     "facts2": "aa200880ec280d14",
-    "all": "e6badfd2b89da059"
+    "all": "1a9d24549c5e70f6"
    },
    "row_hash": "80d415cf08e0ebfe",
    "carried": false,
-   "pass": 4
+   "pass": 7
+  },
+  {
+   "row": "B8",
+   "screen": "ryan_charger_back.look2",
+   "verdict": "PASS",
+   "line": "You don't move. You can't. He looks again, slower, at your chest.",
+   "why": "no number and no garment named; chest is body, not clothes",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "b6fc34828f2bbcde",
+    "traits": "74c4f68e6476ecee",
+    "facts": "e03ae2cd56295992",
+    "facts2": "aa200880ec280d14",
+    "all": "acd7ba9ed82826e4"
+   },
+   "row_hash": "80d415cf08e0ebfe",
+   "carried": false,
+   "pass": 7
   },
   {
    "row": "B8",
    "screen": "ryan_charger_back.moment",
    "verdict": "PASS",
-   "line": "A knock, late. Ryan's in your doorframe with your charger. / again: with nothing in his hands this time",
-   "why": "no number or her garment named; chance 0.65 and the 3-day rest match the card and NOTES (2026-11-26)",
+   "line": "A knock, late. Ryan waits until you open, your charger held out. His eyes go to your chest, stay a second too long, then snap to the floor.",
+   "why": "no number and no garment of hers named; chance 0.65 and the three-day rest match the card",
    "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "088f904f1787f898",
+    "text": "ba4d186ba1d48c83",
+    "traits": "74c4f68e6476ecee",
     "facts": "794f3425e70e89bc",
     "facts2": "63e40120178d9641",
-    "all": "5bc550c7bb0835e9"
+    "all": "48878c52b6a0aa3c"
    },
    "row_hash": "80d415cf08e0ebfe",
-   "carried": true,
-   "pass": 2
+   "carried": false,
+   "pass": 7
   },
   {
    "row": "B8",
    "screen": "ryan_charger_back.take",
    "verdict": "PASS",
-   "line": "You shut the door on him.",
-   "why": "no number and no garment of hers named; 3-day rest and chance 0.65 match the card",
+   "line": "You shut the door on him. \"Right. Night. You know where I am.\" His own door clicks a second later.",
+   "why": "no number and no garment named",
    "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "de069e800d31e3f4",
+    "text": "88c9e004e47287aa",
+    "traits": "74c4f68e6476ecee",
     "facts": "553013c2cdb96b81",
     "facts2": "e771106eddedbf0a",
-    "all": "dd378bf9d71f4e32"
+    "all": "405e9c94dcd213f1"
    },
    "row_hash": "80d415cf08e0ebfe",
-   "carried": true,
-   "pass": 3
+   "carried": false,
+   "pass": 7
   },
   {
    "row": "B8",
@@ -2784,10 +3023,10 @@
    "why": "PLAN.md declares no companion-rival here",
    "cause": null,
    "note": false,
-   "screen_hash": "c685ee55a5891d3e",
+   "screen_hash": "e21f8c3e32bf52db",
    "row_hash": "3b1fcdf549bcc558",
-   "carried": true,
-   "pass": 1
+   "carried": false,
+   "pass": 7
   },
   {
    "row": "C1002",
@@ -2803,6 +3042,25 @@
    "pass": 1
   },
   {
+   "row": "C1002",
+   "screen": "ryan_charger_back.look2",
+   "verdict": "N/A",
+   "line": "\u2014",
+   "why": "no spend",
+   "cause": null,
+   "note": true,
+   "screen_hash": {
+    "text": "b6fc34828f2bbcde",
+    "traits": "74c4f68e6476ecee",
+    "facts": "e03ae2cd56295992",
+    "facts2": "aa200880ec280d14",
+    "all": "acd7ba9ed82826e4"
+   },
+   "row_hash": "657248766e62061f",
+   "carried": false,
+   "pass": 7
+  },
+  {
    "row": "C1173",
    "screen": "*",
    "verdict": "N/A",
@@ -2814,6 +3072,25 @@
    "row_hash": "541a03815a8d19c4",
    "carried": true,
    "pass": 1
+  },
+  {
+   "row": "C1173",
+   "screen": "ryan_charger_back.look2",
+   "verdict": "N/A",
+   "line": "\u2014",
+   "why": "no garment, dress code, spend or clothing state named or read on this screen",
+   "cause": null,
+   "note": true,
+   "screen_hash": {
+    "text": "b6fc34828f2bbcde",
+    "traits": "74c4f68e6476ecee",
+    "facts": "e03ae2cd56295992",
+    "facts2": "aa200880ec280d14",
+    "all": "acd7ba9ed82826e4"
+   },
+   "row_hash": "541a03815a8d19c4",
+   "carried": false,
+   "pass": 7
   },
   {
    "row": "C1176",
@@ -2842,6 +3119,25 @@
    "pass": 1
   },
   {
+   "row": "C1184",
+   "screen": "ryan_charger_back.look2",
+   "verdict": "N/A",
+   "line": "\u2014",
+   "why": "no garment, dress code, spend or clothing state named or read on this screen",
+   "cause": null,
+   "note": true,
+   "screen_hash": {
+    "text": "b6fc34828f2bbcde",
+    "traits": "74c4f68e6476ecee",
+    "facts": "e03ae2cd56295992",
+    "facts2": "aa200880ec280d14",
+    "all": "acd7ba9ed82826e4"
+   },
+   "row_hash": "71c57d9a2f8fdca7",
+   "carried": false,
+   "pass": 7
+  },
+  {
    "row": "C1185",
    "screen": "*",
    "verdict": "N/A",
@@ -2853,6 +3149,25 @@
    "row_hash": "db808998ed69c649",
    "carried": true,
    "pass": 1
+  },
+  {
+   "row": "C1185",
+   "screen": "ryan_charger_back.look2",
+   "verdict": "N/A",
+   "line": "\u2014",
+   "why": "no garment, dress code, spend or clothing state named or read on this screen",
+   "cause": null,
+   "note": true,
+   "screen_hash": {
+    "text": "b6fc34828f2bbcde",
+    "traits": "74c4f68e6476ecee",
+    "facts": "e03ae2cd56295992",
+    "facts2": "aa200880ec280d14",
+    "all": "acd7ba9ed82826e4"
+   },
+   "row_hash": "db808998ed69c649",
+   "carried": false,
+   "pass": 7
   },
   {
    "row": "C1189",
@@ -2881,6 +3196,25 @@
    "pass": 1
   },
   {
+   "row": "C1189",
+   "screen": "ryan_charger_back.look2",
+   "verdict": "N/A",
+   "line": "\u2014",
+   "why": "no garment, dress code, spend or clothing state named or read on this screen",
+   "cause": null,
+   "note": true,
+   "screen_hash": {
+    "text": "b6fc34828f2bbcde",
+    "traits": "74c4f68e6476ecee",
+    "facts": "e03ae2cd56295992",
+    "facts2": "aa200880ec280d14",
+    "all": "acd7ba9ed82826e4"
+   },
+   "row_hash": "2afadc6bbe1996bd",
+   "carried": false,
+   "pass": 7
+  },
+  {
    "row": "C1198",
    "screen": "*",
    "verdict": "N/A",
@@ -2892,6 +3226,25 @@
    "row_hash": "48eae9ceae06ae00",
    "carried": true,
    "pass": 1
+  },
+  {
+   "row": "C1198",
+   "screen": "ryan_charger_back.look2",
+   "verdict": "N/A",
+   "line": "\u2014",
+   "why": "no garment, dress code, spend or clothing state named or read on this screen",
+   "cause": null,
+   "note": true,
+   "screen_hash": {
+    "text": "b6fc34828f2bbcde",
+    "traits": "74c4f68e6476ecee",
+    "facts": "e03ae2cd56295992",
+    "facts2": "aa200880ec280d14",
+    "all": "acd7ba9ed82826e4"
+   },
+   "row_hash": "48eae9ceae06ae00",
+   "carried": false,
+   "pass": 7
   },
   {
    "row": "C1200",
@@ -2907,6 +3260,25 @@
    "pass": 1
   },
   {
+   "row": "C1200",
+   "screen": "ryan_charger_back.look2",
+   "verdict": "N/A",
+   "line": "\u2014",
+   "why": "no garment, dress code, spend or clothing state named or read on this screen",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "b6fc34828f2bbcde",
+    "traits": "74c4f68e6476ecee",
+    "facts": "e03ae2cd56295992",
+    "facts2": "aa200880ec280d14",
+    "all": "acd7ba9ed82826e4"
+   },
+   "row_hash": "65e6616cd17c7eb3",
+   "carried": false,
+   "pass": 7
+  },
+  {
    "row": "C1220",
    "screen": "*",
    "verdict": "N/A",
@@ -2918,6 +3290,25 @@
    "row_hash": "18d85534582def9d",
    "carried": true,
    "pass": 1
+  },
+  {
+   "row": "C1220",
+   "screen": "ryan_charger_back.look2",
+   "verdict": "N/A",
+   "line": "\u2014",
+   "why": "no garment, dress code, spend or clothing state named or read on this screen",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "b6fc34828f2bbcde",
+    "traits": "74c4f68e6476ecee",
+    "facts": "e03ae2cd56295992",
+    "facts2": "aa200880ec280d14",
+    "all": "acd7ba9ed82826e4"
+   },
+   "row_hash": "18d85534582def9d",
+   "carried": false,
+   "pass": 7
   },
   {
    "row": "C1221",
@@ -2933,6 +3324,25 @@
    "pass": 1
   },
   {
+   "row": "C1221",
+   "screen": "ryan_charger_back.look2",
+   "verdict": "N/A",
+   "line": "\u2014",
+   "why": "no garment, dress code, spend or clothing state named or read on this screen",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "b6fc34828f2bbcde",
+    "traits": "74c4f68e6476ecee",
+    "facts": "e03ae2cd56295992",
+    "facts2": "aa200880ec280d14",
+    "all": "acd7ba9ed82826e4"
+   },
+   "row_hash": "3835fed23cc316c7",
+   "carried": false,
+   "pass": 7
+  },
+  {
    "row": "C1250",
    "screen": "*",
    "verdict": "N/A",
@@ -2944,6 +3354,25 @@
    "row_hash": "fde578d75b0d3620",
    "carried": true,
    "pass": 1
+  },
+  {
+   "row": "C1250",
+   "screen": "ryan_charger_back.look2",
+   "verdict": "N/A",
+   "line": "\u2014",
+   "why": "no media on this screen and no room card touched",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "b6fc34828f2bbcde",
+    "traits": "74c4f68e6476ecee",
+    "facts": "e03ae2cd56295992",
+    "facts2": "aa200880ec280d14",
+    "all": "acd7ba9ed82826e4"
+   },
+   "row_hash": "fde578d75b0d3620",
+   "carried": false,
+   "pass": 7
   },
   {
    "row": "C1284",
@@ -2972,6 +3401,25 @@
    "pass": 1
   },
   {
+   "row": "C1303",
+   "screen": "ryan_charger_back.look2",
+   "verdict": "N/A",
+   "line": "\u2014",
+   "why": "no need is read, drained or refilled on this screen",
+   "cause": null,
+   "note": true,
+   "screen_hash": {
+    "text": "b6fc34828f2bbcde",
+    "traits": "74c4f68e6476ecee",
+    "facts": "e03ae2cd56295992",
+    "facts2": "aa200880ec280d14",
+    "all": "acd7ba9ed82826e4"
+   },
+   "row_hash": "5b031a6b82899cfd",
+   "carried": false,
+   "pass": 7
+  },
+  {
    "row": "C1313",
    "screen": "*",
    "verdict": "N/A",
@@ -2983,6 +3431,25 @@
    "row_hash": "c26c2fb5c1443dab",
    "carried": true,
    "pass": 1
+  },
+  {
+   "row": "C1313",
+   "screen": "ryan_charger_back.look2",
+   "verdict": "N/A",
+   "line": "\u2014",
+   "why": "no need is read, drained or refilled on this screen",
+   "cause": null,
+   "note": true,
+   "screen_hash": {
+    "text": "b6fc34828f2bbcde",
+    "traits": "74c4f68e6476ecee",
+    "facts": "e03ae2cd56295992",
+    "facts2": "aa200880ec280d14",
+    "all": "acd7ba9ed82826e4"
+   },
+   "row_hash": "c26c2fb5c1443dab",
+   "carried": false,
+   "pass": 7
   },
   {
    "row": "C1337",
@@ -2998,6 +3465,25 @@
    "pass": 1
   },
   {
+   "row": "C1337",
+   "screen": "ryan_charger_back.look2",
+   "verdict": "N/A",
+   "line": "\u2014",
+   "why": "no need is read, drained or refilled on this screen",
+   "cause": null,
+   "note": true,
+   "screen_hash": {
+    "text": "b6fc34828f2bbcde",
+    "traits": "74c4f68e6476ecee",
+    "facts": "e03ae2cd56295992",
+    "facts2": "aa200880ec280d14",
+    "all": "acd7ba9ed82826e4"
+   },
+   "row_hash": "9a1ab783f9ab6731",
+   "carried": false,
+   "pass": 7
+  },
+  {
    "row": "C1340",
    "screen": "*",
    "verdict": "N/A",
@@ -3009,6 +3495,25 @@
    "row_hash": "b76a6583ae88c60f",
    "carried": true,
    "pass": 1
+  },
+  {
+   "row": "C1340",
+   "screen": "ryan_charger_back.look2",
+   "verdict": "N/A",
+   "line": "\u2014",
+   "why": "no household menu touched",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "b6fc34828f2bbcde",
+    "traits": "74c4f68e6476ecee",
+    "facts": "e03ae2cd56295992",
+    "facts2": "aa200880ec280d14",
+    "all": "acd7ba9ed82826e4"
+   },
+   "row_hash": "b76a6583ae88c60f",
+   "carried": false,
+   "pass": 7
   },
   {
    "row": "C1342",
@@ -3024,6 +3529,25 @@
    "pass": 1
   },
   {
+   "row": "C1342",
+   "screen": "ryan_charger_back.look2",
+   "verdict": "N/A",
+   "line": "\u2014",
+   "why": "no need is read, drained or refilled on this screen",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "b6fc34828f2bbcde",
+    "traits": "74c4f68e6476ecee",
+    "facts": "e03ae2cd56295992",
+    "facts2": "aa200880ec280d14",
+    "all": "acd7ba9ed82826e4"
+   },
+   "row_hash": "59e008f8733a29e2",
+   "carried": false,
+   "pass": 7
+  },
+  {
    "row": "C1345",
    "screen": "*",
    "verdict": "PASS",
@@ -3035,6 +3559,25 @@
    "row_hash": "823e315ef0b56f94",
    "carried": true,
    "pass": 1
+  },
+  {
+   "row": "C1345",
+   "screen": "ryan_charger_back.look2",
+   "verdict": "PASS",
+   "line": "came_to_her_today is_false on the trigger; Freeze sets it",
+   "why": "the brake is on the way in: the day-cap flag",
+   "cause": null,
+   "note": true,
+   "screen_hash": {
+    "text": "b6fc34828f2bbcde",
+    "traits": "74c4f68e6476ecee",
+    "facts": "e03ae2cd56295992",
+    "facts2": "aa200880ec280d14",
+    "all": "acd7ba9ed82826e4"
+   },
+   "row_hash": "823e315ef0b56f94",
+   "carried": false,
+   "pass": 7
   },
   {
    "row": "C1360",
@@ -3050,6 +3593,25 @@
    "pass": 1
   },
   {
+   "row": "C1360",
+   "screen": "ryan_charger_back.look2",
+   "verdict": "N/A",
+   "line": "\u2014",
+   "why": "no need is read, drained or refilled on this screen",
+   "cause": null,
+   "note": true,
+   "screen_hash": {
+    "text": "b6fc34828f2bbcde",
+    "traits": "74c4f68e6476ecee",
+    "facts": "e03ae2cd56295992",
+    "facts2": "aa200880ec280d14",
+    "all": "acd7ba9ed82826e4"
+   },
+   "row_hash": "8c9dc844365f81a5",
+   "carried": false,
+   "pass": 7
+  },
+  {
    "row": "C1421",
    "screen": "*",
    "verdict": "N/A",
@@ -3061,6 +3623,25 @@
    "row_hash": "ef34ee4a51e65d00",
    "carried": true,
    "pass": 1
+  },
+  {
+   "row": "C1421",
+   "screen": "ryan_charger_back.look2",
+   "verdict": "N/A",
+   "line": "\u2014",
+   "why": "no need is read, drained or refilled on this screen",
+   "cause": null,
+   "note": true,
+   "screen_hash": {
+    "text": "b6fc34828f2bbcde",
+    "traits": "74c4f68e6476ecee",
+    "facts": "e03ae2cd56295992",
+    "facts2": "aa200880ec280d14",
+    "all": "acd7ba9ed82826e4"
+   },
+   "row_hash": "ef34ee4a51e65d00",
+   "carried": false,
+   "pass": 7
   },
   {
    "row": "C1423",
@@ -3076,6 +3657,25 @@
    "pass": 1
   },
   {
+   "row": "C1423",
+   "screen": "ryan_charger_back.look2",
+   "verdict": "PASS",
+   "line": "came_to_her_today; days_since_flag ryan_back_seen gte 3",
+   "why": "reaching this answer costs the day cap and a three-day rest",
+   "cause": null,
+   "note": true,
+   "screen_hash": {
+    "text": "b6fc34828f2bbcde",
+    "traits": "74c4f68e6476ecee",
+    "facts": "e03ae2cd56295992",
+    "facts2": "aa200880ec280d14",
+    "all": "acd7ba9ed82826e4"
+   },
+   "row_hash": "4b77685af58632a5",
+   "carried": false,
+   "pass": 7
+  },
+  {
    "row": "C1425",
    "screen": "*",
    "verdict": "PASS",
@@ -3087,6 +3687,25 @@
    "row_hash": "34826508394ba8c0",
    "carried": true,
    "pass": 1
+  },
+  {
+   "row": "C1425",
+   "screen": "ryan_charger_back.look2",
+   "verdict": "PASS",
+   "line": "days_since_flag gte 3 \u00b7 max_triggers_per_day 1 \u00b7 the brake",
+   "why": "spacing and a daily cap pace the repeat",
+   "cause": null,
+   "note": true,
+   "screen_hash": {
+    "text": "b6fc34828f2bbcde",
+    "traits": "74c4f68e6476ecee",
+    "facts": "e03ae2cd56295992",
+    "facts2": "aa200880ec280d14",
+    "all": "acd7ba9ed82826e4"
+   },
+   "row_hash": "34826508394ba8c0",
+   "carried": false,
+   "pass": 7
   },
   {
    "row": "C1427",
@@ -3102,6 +3721,25 @@
    "pass": 1
   },
   {
+   "row": "C1427",
+   "screen": "ryan_charger_back.look2",
+   "verdict": "N/A",
+   "line": "\u2014",
+   "why": "no need is read, drained or refilled on this screen",
+   "cause": null,
+   "note": true,
+   "screen_hash": {
+    "text": "b6fc34828f2bbcde",
+    "traits": "74c4f68e6476ecee",
+    "facts": "e03ae2cd56295992",
+    "facts2": "aa200880ec280d14",
+    "all": "acd7ba9ed82826e4"
+   },
+   "row_hash": "68a94621cd19c13c",
+   "carried": false,
+   "pass": 7
+  },
+  {
    "row": "C1428",
    "screen": "*",
    "verdict": "N/A",
@@ -3113,6 +3751,25 @@
    "row_hash": "cf8af3e56f435107",
    "carried": true,
    "pass": 1
+  },
+  {
+   "row": "C1428",
+   "screen": "ryan_charger_back.look2",
+   "verdict": "N/A",
+   "line": "\u2014",
+   "why": "no need is read, drained or refilled on this screen",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "b6fc34828f2bbcde",
+    "traits": "74c4f68e6476ecee",
+    "facts": "e03ae2cd56295992",
+    "facts2": "aa200880ec280d14",
+    "all": "acd7ba9ed82826e4"
+   },
+   "row_hash": "cf8af3e56f435107",
+   "carried": false,
+   "pass": 7
   },
   {
    "row": "C1431",
@@ -3128,6 +3785,25 @@
    "pass": 1
   },
   {
+   "row": "C1431",
+   "screen": "ryan_charger_back.look2",
+   "verdict": "N/A",
+   "line": "\u2014",
+   "why": "no need is read, drained or refilled on this screen",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "b6fc34828f2bbcde",
+    "traits": "74c4f68e6476ecee",
+    "facts": "e03ae2cd56295992",
+    "facts2": "aa200880ec280d14",
+    "all": "acd7ba9ed82826e4"
+   },
+   "row_hash": "aca442d29c1c8146",
+   "carried": false,
+   "pass": 7
+  },
+  {
    "row": "C1432",
    "screen": "*",
    "verdict": "N/A",
@@ -3139,6 +3815,25 @@
    "row_hash": "ccd7a74d85c7d7fe",
    "carried": true,
    "pass": 1
+  },
+  {
+   "row": "C1432",
+   "screen": "ryan_charger_back.look2",
+   "verdict": "N/A",
+   "line": "\u2014",
+   "why": "no need is read, drained or refilled on this screen",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "b6fc34828f2bbcde",
+    "traits": "74c4f68e6476ecee",
+    "facts": "e03ae2cd56295992",
+    "facts2": "aa200880ec280d14",
+    "all": "acd7ba9ed82826e4"
+   },
+   "row_hash": "ccd7a74d85c7d7fe",
+   "carried": false,
+   "pass": 7
   },
   {
    "row": "C1433",
@@ -3154,6 +3849,25 @@
    "pass": 1
   },
   {
+   "row": "C1433",
+   "screen": "ryan_charger_back.look2",
+   "verdict": "N/A",
+   "line": "\u2014",
+   "why": "no need is read, drained or refilled on this screen",
+   "cause": null,
+   "note": true,
+   "screen_hash": {
+    "text": "b6fc34828f2bbcde",
+    "traits": "74c4f68e6476ecee",
+    "facts": "e03ae2cd56295992",
+    "facts2": "aa200880ec280d14",
+    "all": "acd7ba9ed82826e4"
+   },
+   "row_hash": "f47fc5030774db86",
+   "carried": false,
+   "pass": 7
+  },
+  {
    "row": "C1434",
    "screen": "*",
    "verdict": "N/A",
@@ -3165,6 +3879,25 @@
    "row_hash": "6ac94d11992c72ec",
    "carried": true,
    "pass": 1
+  },
+  {
+   "row": "C1434",
+   "screen": "ryan_charger_back.look2",
+   "verdict": "N/A",
+   "line": "\u2014",
+   "why": "no need is read, drained or refilled on this screen",
+   "cause": null,
+   "note": true,
+   "screen_hash": {
+    "text": "b6fc34828f2bbcde",
+    "traits": "74c4f68e6476ecee",
+    "facts": "e03ae2cd56295992",
+    "facts2": "aa200880ec280d14",
+    "all": "acd7ba9ed82826e4"
+   },
+   "row_hash": "6ac94d11992c72ec",
+   "carried": false,
+   "pass": 7
   },
   {
    "row": "C1438",
@@ -3180,6 +3913,25 @@
    "pass": 1
   },
   {
+   "row": "C1438",
+   "screen": "ryan_charger_back.look2",
+   "verdict": "N/A",
+   "line": "\u2014",
+   "why": "no need is read, drained or refilled on this screen",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "b6fc34828f2bbcde",
+    "traits": "74c4f68e6476ecee",
+    "facts": "e03ae2cd56295992",
+    "facts2": "aa200880ec280d14",
+    "all": "acd7ba9ed82826e4"
+   },
+   "row_hash": "e4d4d230d2bd3815",
+   "carried": false,
+   "pass": 7
+  },
+  {
    "row": "C1441",
    "screen": "*",
    "verdict": "PASS",
@@ -3193,6 +3945,25 @@
    "pass": 1
   },
   {
+   "row": "C1441",
+   "screen": "ryan_charger_back.look2",
+   "verdict": "PASS",
+   "line": "You don't move. You can't. He looks again, slower, at your chest.",
+   "why": "a step about a person is a scene, not a number",
+   "cause": null,
+   "note": true,
+   "screen_hash": {
+    "text": "b6fc34828f2bbcde",
+    "traits": "74c4f68e6476ecee",
+    "facts": "e03ae2cd56295992",
+    "facts2": "aa200880ec280d14",
+    "all": "acd7ba9ed82826e4"
+   },
+   "row_hash": "6b5fb464471de4c7",
+   "carried": false,
+   "pass": 7
+  },
+  {
    "row": "C146",
    "screen": "*",
    "verdict": "PASS",
@@ -3204,6 +3975,25 @@
    "row_hash": "a08ace799dcefe85",
    "carried": true,
    "pass": 1
+  },
+  {
+   "row": "C146",
+   "screen": "ryan_charger_back.look2",
+   "verdict": "PASS",
+   "line": "Freeze sets ryan_looked; trigger needs ryan_looked is_false",
+   "why": "the bigger moment (letting him look) happens once and ends step 2",
+   "cause": null,
+   "note": true,
+   "screen_hash": {
+    "text": "b6fc34828f2bbcde",
+    "traits": "74c4f68e6476ecee",
+    "facts": "e03ae2cd56295992",
+    "facts2": "aa200880ec280d14",
+    "all": "acd7ba9ed82826e4"
+   },
+   "row_hash": "a08ace799dcefe85",
+   "carried": false,
+   "pass": 7
   },
   {
    "row": "C149",
@@ -3436,8 +4226,27 @@
     "all": "e6badfd2b89da059"
    },
    "row_hash": "b8cdd5b1ce3f89ea",
-   "carried": false,
+   "carried": true,
    "pass": 4
+  },
+  {
+   "row": "C149",
+   "screen": "ryan_charger_back.look2",
+   "verdict": "PASS",
+   "line": "His door clicks shut next door. In the morning it'll be the two of you and one bathroom again.",
+   "why": "points at what comes next with him: the shared bathroom in the morning",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "b6fc34828f2bbcde",
+    "traits": "74c4f68e6476ecee",
+    "facts": "e03ae2cd56295992",
+    "facts2": "aa200880ec280d14",
+    "all": "acd7ba9ed82826e4"
+   },
+   "row_hash": "b8cdd5b1ce3f89ea",
+   "carried": false,
+   "pass": 7
   },
   {
    "row": "C149",
@@ -3852,6 +4661,25 @@
    "row_hash": "d5758757a709b1af",
    "carried": true,
    "pass": 1
+  },
+  {
+   "row": "C151",
+   "screen": "ryan_charger_back.look2",
+   "verdict": "PASS",
+   "line": "\"Night. Sorry. Night. Sleep well.\"",
+   "why": "one spoken line and one visible want (his second look at her chest)",
+   "cause": null,
+   "note": true,
+   "screen_hash": {
+    "text": "b6fc34828f2bbcde",
+    "traits": "74c4f68e6476ecee",
+    "facts": "e03ae2cd56295992",
+    "facts2": "aa200880ec280d14",
+    "all": "acd7ba9ed82826e4"
+   },
+   "row_hash": "d5758757a709b1af",
+   "carried": false,
+   "pass": 7
   },
   {
    "row": "C164",
@@ -4279,17 +5107,23 @@
    "pass": 1
   },
   {
-   "row": "C2183",
-   "screen": "*",
+   "row": "C2179",
+   "screen": "ryan_charger_back.look2",
    "verdict": "PASS",
-   "line": "Laura Cook/Insecure: \"Too much salt?\" \u00b7 Marco Sporty \u00b7 Hale Particular: \"I like to see who's listening.\" \u00b7 Zoe Open Relationships",
-   "why": "no shown trait is contradicted here; traits as P48",
+   "line": "\"Night. Sorry. Night. Sleep well.\"",
+   "why": "Ryan is the one written person (indifferent); a scene for one named person needs no want check, and his line fits him",
    "cause": null,
    "note": false,
-   "screen_hash": "c685ee55a5891d3e",
-   "row_hash": "40172c2d376bfc32",
-   "carried": true,
-   "pass": 1
+   "screen_hash": {
+    "text": "b6fc34828f2bbcde",
+    "traits": "74c4f68e6476ecee",
+    "facts": "e03ae2cd56295992",
+    "facts2": "aa200880ec280d14",
+    "all": "acd7ba9ed82826e4"
+   },
+   "row_hash": "47b9477e3ec8a790",
+   "carried": false,
+   "pass": 7
   },
   {
    "row": "C2186",
@@ -4509,6 +5343,652 @@
    "row_hash": "20748838895e4545",
    "carried": true,
    "pass": 1
+  },
+  {
+   "row": "C2189",
+   "screen": "ryan_charger_back.look2",
+   "verdict": "PASS",
+   "line": "Freeze sets ryan_looked, which stops ryan_charger_back",
+   "why": "reached only after a three-day rest on ryan_back_seen; it climbs (ends the step) rather than replaying",
+   "cause": null,
+   "note": true,
+   "screen_hash": {
+    "text": "b6fc34828f2bbcde",
+    "traits": "74c4f68e6476ecee",
+    "facts": "e03ae2cd56295992",
+    "facts2": "aa200880ec280d14",
+    "all": "acd7ba9ed82826e4"
+   },
+   "row_hash": "20748838895e4545",
+   "carried": false,
+   "pass": 7
+  },
+  {
+   "row": "C2194",
+   "screen": "hale_called_in.go",
+   "verdict": "PASS",
+   "line": "Of course you do.",
+   "why": "Dr. Hale: Takes charge (his door stays open behind her).",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "349f5cd13a90aeee",
+    "traits": "825724317465730d",
+    "facts": "913abcc6c4b17b27",
+    "facts2": "cd431bea73f6a8a7",
+    "all": "a26358848a13db3b"
+   },
+   "row_hash": "0c03931191c53a34",
+   "carried": true,
+   "pass": 5
+  },
+  {
+   "row": "C2194",
+   "screen": "hale_called_in.moment",
+   "verdict": "PASS",
+   "line": "Young lady. In here a minute.",
+   "why": "Dr. Hale: Takes charge, Strict ('Front row, next class.').",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "f4f26289fd653ba2",
+    "traits": "825724317465730d",
+    "facts": "cbcf54fc4dfa6073",
+    "facts2": "2b9068e4caba1752",
+    "all": "70b96e8554cd9787"
+   },
+   "row_hash": "0c03931191c53a34",
+   "carried": true,
+   "pass": 5
+  },
+  {
+   "row": "C2194",
+   "screen": "hale_called_in.yes",
+   "verdict": "PASS",
+   "line": "He smiles and goes back to his list.",
+   "why": "Dr. Hale: Takes charge.",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "f98a83957ee8b77e",
+    "traits": "825724317465730d",
+    "facts": "913abcc6c4b17b27",
+    "facts2": "cd431bea73f6a8a7",
+    "all": "2ff3c463385990da"
+   },
+   "row_hash": "0c03931191c53a34",
+   "carried": true,
+   "pass": 5
+  },
+  {
+   "row": "C2194",
+   "screen": "marco_hips.got",
+   "verdict": "PASS",
+   "line": "Suit yourself, champ. ... You'll be back.",
+   "why": "Marco: Takes charge, Sporty (back to the rack).",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "4411ac9e8b68d194",
+    "traits": "e4365d01d4eb14be",
+    "facts": "6de6e03b516eb8da",
+    "facts2": "685918bc7322558b",
+    "all": "1581a08c3a6e8b26"
+   },
+   "row_hash": "0c03931191c53a34",
+   "carried": true,
+   "pass": 5
+  },
+  {
+   "row": "C2194",
+   "screen": "marco_hips.let",
+   "verdict": "PASS",
+   "line": "Feel that? That's where they go. I'll check it next time.",
+   "why": "Marco: Takes charge, Sporty.",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "b4234e73d4c15393",
+    "traits": "e4365d01d4eb14be",
+    "facts": "7628053aa2fe64cb",
+    "facts2": "49f0b57a72e77115",
+    "all": "459937785692e928"
+   },
+   "row_hash": "0c03931191c53a34",
+   "carried": true,
+   "pass": 5
+  },
+  {
+   "row": "C2194",
+   "screen": "marco_hips.moment",
+   "verdict": "PASS",
+   "line": "His hands land on your hips and turn them, and stay.",
+   "why": "Marco: Takes charge, Sporty (her stance).",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "a342c6199214df5d",
+    "traits": "e4365d01d4eb14be",
+    "facts": "f9e936b5d2f7fa16",
+    "facts2": "e2ce2f969cea33c2",
+    "all": "53d52f49e07cf81c"
+   },
+   "row_hash": "0c03931191c53a34",
+   "carried": true,
+   "pass": 5
+  },
+  {
+   "row": "C2194",
+   "screen": "mom_taste.later",
+   "verdict": "PASS",
+   "line": "Next time you taste first.",
+   "why": "Laura: Cook, Warm.",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "cb194cc55febcb96",
+    "traits": "95f1c22815f415ed",
+    "facts": "3f692296c288f691",
+    "facts2": "db832796811a9515",
+    "all": "40ea7c896eef73e5"
+   },
+   "row_hash": "0c03931191c53a34",
+   "carried": true,
+   "pass": 5
+  },
+  {
+   "row": "C2194",
+   "screen": "mom_taste.moment",
+   "verdict": "PASS",
+   "line": "Baby, come here. Taste this. Too much salt?",
+   "why": "Laura: Cook (at the stove), Nervous (asks for reassurance), Warm.",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "a478c76abe5c1a35",
+    "traits": "95f1c22815f415ed",
+    "facts": "31c89ab386edb857",
+    "facts2": "f2def89abde9929c",
+    "all": "06f6053c7ed12440"
+   },
+   "row_hash": "0c03931191c53a34",
+   "carried": true,
+   "pass": 5
+  },
+  {
+   "row": "C2194",
+   "screen": "mom_taste.taste",
+   "verdict": "PASS",
+   "line": "Then it's a good night. Sit with me after?",
+   "why": "Laura: Warm, Nervous.",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "473c28cf613e3565",
+    "traits": "95f1c22815f415ed",
+    "facts": "89ca81a108e2ede8",
+    "facts2": "2049cc980461d543",
+    "all": "def36ad5aae692cd"
+   },
+   "row_hash": "0c03931191c53a34",
+   "carried": true,
+   "pass": 5
+  },
+  {
+   "row": "C2194",
+   "screen": "nadia_tip.keep",
+   "verdict": "PASS",
+   "line": "Your funeral.",
+   "why": "Nadia: Pushy.",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "b82ac2c36a660844",
+    "traits": "ef3e57a6ae056353",
+    "facts": "c0dac13d87852489",
+    "facts2": "23ca087ae642da1c",
+    "all": "a95b70663bf307ee"
+   },
+   "row_hash": "0c03931191c53a34",
+   "carried": true,
+   "pass": 5
+  },
+  {
+   "row": "C2194",
+   "screen": "nadia_tip.moment",
+   "verdict": "PASS",
+   "line": "Hale's exam's all chapter four. You didn't get it from me.",
+   "why": "Nadia: Warm (the tip), Pushy (pushes the page across).",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "91eeef5b403409c5",
+    "traits": "ef3e57a6ae056353",
+    "facts": "5f454547807041f4",
+    "facts2": "8e364add72f35e0d",
+    "all": "0156750b0dd46b43"
+   },
+   "row_hash": "0c03931191c53a34",
+   "carried": true,
+   "pass": 5
+  },
+  {
+   "row": "C2194",
+   "screen": "nadia_tip.nothere",
+   "verdict": "PASS",
+   "line": "Fine. But I'm right.",
+   "why": "Nadia: Pushy.",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "7a26b41477264359",
+    "traits": "ef3e57a6ae056353",
+    "facts": "49cd86a96ac0bd0f",
+    "facts2": "5c2a5075c1a7cd39",
+    "all": "284f41d00daf72a1"
+   },
+   "row_hash": "0c03931191c53a34",
+   "carried": true,
+   "pass": 5
+  },
+  {
+   "row": "C2194",
+   "screen": "nadia_tip.tell",
+   "verdict": "PASS",
+   "line": "Don't go in there alone.",
+   "why": "Nadia: Warm (the warning).",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "605eb2f5c35428f6",
+    "traits": "ef3e57a6ae056353",
+    "facts": "1e6bbfecfe4dcab1",
+    "facts2": "e7c4669602474c5e",
+    "all": "ef8d985cb08ef38a"
+   },
+   "row_hash": "0c03931191c53a34",
+   "carried": true,
+   "pass": 5
+  },
+  {
+   "row": "C2194",
+   "screen": "nadia_tip.thanks",
+   "verdict": "PASS",
+   "line": "Don't thank me. Pass.",
+   "why": "Nadia: Warm, Pushy.",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "8c8e7515ef396462",
+    "traits": "ef3e57a6ae056353",
+    "facts": "f575f5a48b9744f6",
+    "facts2": "1cd9907f679c9c22",
+    "all": "8e24f9b37993f5d0"
+   },
+   "row_hash": "0c03931191c53a34",
+   "carried": true,
+   "pass": 5
+  },
+  {
+   "row": "C2194",
+   "screen": "ryan_charger.give",
+   "verdict": "PASS",
+   "line": "Lifesaver.",
+   "why": "Ryan: takes it off her desk once she's handed it; Gives way, no break.",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "ecde715461c7a69a",
+    "traits": "74c4f68e6476ecee",
+    "facts": "af9643700a2e29bf",
+    "facts2": "b24f726a86e87617",
+    "all": "e74fb634d86d3a50"
+   },
+   "row_hash": "0c03931191c53a34",
+   "carried": true,
+   "pass": 5
+  },
+  {
+   "row": "C2194",
+   "screen": "ryan_charger.moment",
+   "verdict": "PASS",
+   "line": "A knock. Ryan waits in the hall until you open the door, then holds up his dead phone and doesn't quite look at you. / again: \"Ryan's knock again. He waits until you open, dead phone held up like evidence.\"",
+   "why": "Shy ('Looks away, says little, waits for her to speak first.'): he waits in the hall until she opens, doesn't quite look at her, and says five words ('Got a charger? Mine died.'). The second showing keeps it: 'He waits until you open', then 'Still dead. Still no charger. Please?' (Gives way: he asks, he doesn't push). The last pass's FAIL, in her doorway before she spoke, is gone on both showings.",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "313906c8298f2b26",
+    "traits": "74c4f68e6476ecee",
+    "facts": "c2d1415accf79c05",
+    "facts2": "8d63addbcec693e8",
+    "all": "abde12bfac993bae"
+   },
+   "row_hash": "0c03931191c53a34",
+   "carried": true,
+   "pass": 6
+  },
+  {
+   "row": "C2194",
+   "screen": "ryan_charger.own",
+   "verdict": "PASS",
+   "line": "Wow. Okay. ... I'll try you again.",
+   "why": "Ryan: Gives way (pulls her door shut behind him).",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "e789e354dcc062b6",
+    "traits": "74c4f68e6476ecee",
+    "facts": "ceccd6e6fc26176a",
+    "facts2": "cf4e46f749ed8dbd",
+    "all": "5de40874824921fa"
+   },
+   "row_hash": "0c03931191c53a34",
+   "carried": true,
+   "pass": 5
+  },
+  {
+   "row": "C2194",
+   "screen": "ryan_charger_back.look",
+   "verdict": "PASS",
+   "line": "Night. Sorry. Night. Sleep well.",
+   "why": "Ryan: Shy.",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "80d145c054bd32d6",
+    "traits": "74c4f68e6476ecee",
+    "facts": "e03ae2cd56295992",
+    "facts2": "aa200880ec280d14",
+    "all": "e6badfd2b89da059"
+   },
+   "row_hash": "0c03931191c53a34",
+   "carried": true,
+   "pass": 5
+  },
+  {
+   "row": "C2194",
+   "screen": "ryan_charger_back.look2",
+   "verdict": "PASS",
+   "line": "\"Night. Sorry. Night. Sleep well.\"",
+   "why": "Shy (\"Looks away, says little\"): the stammered, repeated \"Night. Sorry.\" and he goes; Gives way: he backs off to his own door without asking anything; Gamer shows nowhere here, fine for a late knock",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "b6fc34828f2bbcde",
+    "traits": "74c4f68e6476ecee",
+    "facts": "e03ae2cd56295992",
+    "facts2": "aa200880ec280d14",
+    "all": "acd7ba9ed82826e4"
+   },
+   "row_hash": "0c03931191c53a34",
+   "carried": false,
+   "pass": 7
+  },
+  {
+   "row": "C2194",
+   "screen": "ryan_charger_back.moment",
+   "verdict": "PASS",
+   "line": "His eyes go to your chest, stay a second too long, then snap to the floor. His ears go pink.",
+   "why": "Ryan: Shy ('Thanks. For the, uh. Charger.').",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "088f904f1787f898",
+    "traits": "74c4f68e6476ecee",
+    "facts": "794f3425e70e89bc",
+    "facts2": "63e40120178d9641",
+    "all": "5bc550c7bb0835e9"
+   },
+   "row_hash": "0c03931191c53a34",
+   "carried": true,
+   "pass": 5
+  },
+  {
+   "row": "C2194",
+   "screen": "ryan_charger_back.take",
+   "verdict": "PASS",
+   "line": "Right. Night. You know where I am.",
+   "why": "Ryan: Gives way.",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "de069e800d31e3f4",
+    "traits": "74c4f68e6476ecee",
+    "facts": "553013c2cdb96b81",
+    "facts2": "e771106eddedbf0a",
+    "all": "dd378bf9d71f4e32"
+   },
+   "row_hash": "0c03931191c53a34",
+   "carried": true,
+   "pass": 5
+  },
+  {
+   "row": "C2194",
+   "screen": "vance_envelope.himself",
+   "verdict": "PASS",
+   "line": "Suit yourself, little lady. Mark'll hear I asked you nicely.",
+   "why": "Mr. Vance: Pushy, Takes charge.",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "9431d261d5f45492",
+    "traits": "40c19ab6c95d7a0e",
+    "facts": "b519586b30b72b6e",
+    "facts2": "7f09a739c911537a",
+    "all": "8201e9c7959847d8"
+   },
+   "row_hash": "0c03931191c53a34",
+   "carried": true,
+   "pass": 5
+  },
+  {
+   "row": "C2194",
+   "screen": "vance_envelope.moment",
+   "verdict": "PASS",
+   "line": "When you reach for it, he doesn't let go. His thumb rests on the inside of your wrist.",
+   "why": "Mr. Vance: Takes charge, Pushy ('Give this to Mark.').",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "1febdaba06b391a4",
+    "traits": "40c19ab6c95d7a0e",
+    "facts": "480c3268ade1c5c6",
+    "facts2": "f7ec106b04fdf0b4",
+    "all": "90c5a314b1fbbd9d"
+   },
+   "row_hash": "0c03931191c53a34",
+   "carried": true,
+   "pass": 5
+  },
+  {
+   "row": "C2194",
+   "screen": "vance_envelope.take",
+   "verdict": "PASS",
+   "line": "Tell him I'm counting.",
+   "why": "Mr. Vance: Takes charge.",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "99a19ed8a1c07213",
+    "traits": "d9172dabbd56b049",
+    "facts": "5103078824b5373e",
+    "facts2": "d09de3decbebb5fc",
+    "all": "902ec8bd871f765b"
+   },
+   "row_hash": "0c03931191c53a34",
+   "carried": true,
+   "pass": 5
+  },
+  {
+   "row": "C2194",
+   "screen": "vance_gutter.himself",
+   "verdict": "PASS",
+   "line": "Oh, I will. And I'll ask you again.",
+   "why": "Mr. Vance: Pushy.",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "8985ec8a2df74599",
+    "traits": "d9172dabbd56b049",
+    "facts": "28cd9494ccb442d4",
+    "facts2": "6391a93192f072f4",
+    "all": "2faae69a77e7fdbb"
+   },
+   "row_hash": "0c03931191c53a34",
+   "carried": true,
+   "pass": 5
+  },
+  {
+   "row": "C2194",
+   "screen": "vance_gutter.moment",
+   "verdict": "PASS",
+   "line": "His eyes stay on your legs the whole time you answer.",
+   "why": "Mr. Vance: Watcher, Pushy ('Tonight.').",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "4c7736cdae420af3",
+    "traits": "40c19ab6c95d7a0e",
+    "facts": "480c3268ade1c5c6",
+    "facts2": "f7ec106b04fdf0b4",
+    "all": "4f5299bb21a4f368"
+   },
+   "row_hash": "0c03931191c53a34",
+   "carried": true,
+   "pass": 5
+  },
+  {
+   "row": "C2194",
+   "screen": "vance_gutter.tell",
+   "verdict": "PASS",
+   "line": "Good girl.",
+   "why": "Mr. Vance: Takes charge, Watcher (watches her go).",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "668930d48e752d9f",
+    "traits": "d9172dabbd56b049",
+    "facts": "c43a0f9c238fb997",
+    "facts2": "f9cc88d125052f67",
+    "all": "f64a396f96a88f5d"
+   },
+   "row_hash": "0c03931191c53a34",
+   "carried": true,
+   "pass": 5
+  },
+  {
+   "row": "C2194",
+   "screen": "zoe_give_him.let",
+   "verdict": "PASS",
+   "line": "See? Easy. He's going to dream about that.",
+   "why": "Zoe: Show-off (shows her off). Jake: watching, no line, fine.",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "022028c5793b53ca",
+    "traits": "6b1e34b018661933",
+    "facts": "328ede71b75c0b80",
+    "facts2": "3d976cb4abe6fb91",
+    "all": "8b72ccd0024c88a0"
+   },
+   "row_hash": "0c03931191c53a34",
+   "carried": true,
+   "pass": 5
+  },
+  {
+   "row": "C2194",
+   "screen": "zoe_give_him.moment",
+   "verdict": "PASS",
+   "line": "She takes you by the hips and turns you, slow, so he gets your ass.",
+   "why": "Zoe: Show-off (being looked at, here through her). Turning her by the hips isn't one of Zoe's words, but breaks none. Jake: no line; watching from the steps, fine.",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "e049452db2317066",
+    "traits": "0b1fa80c9d60647d",
+    "facts": "37fcb9425fcce652",
+    "facts2": "130dd93dfc7a1cca",
+    "all": "0104d8053969fd0e"
+   },
+   "row_hash": "0c03931191c53a34",
+   "carried": true,
+   "pass": 5
+  },
+  {
+   "row": "C2194",
+   "screen": "zoe_give_him.stop",
+   "verdict": "PASS",
+   "line": "Fine. Prude. He'd have loved it. You'd have loved it.",
+   "why": "Zoe: Show-off.",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "685d557c1d88406a",
+    "traits": "6b1e34b018661933",
+    "facts": "0521fb2c86775d25",
+    "facts2": "317aff3f6de89433",
+    "all": "aeedecb677ebc088"
+   },
+   "row_hash": "0c03931191c53a34",
+   "carried": true,
+   "pass": 5
+  },
+  {
+   "row": "C2194",
+   "screen": "zoe_witness.busy",
+   "verdict": "PASS",
+   "line": "Boring. There's always another one, and I'll find you for it.",
+   "why": "Zoe: No strings ('There's always another one').",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "dfdd838040d7b106",
+    "traits": "6b1e34b018661933",
+    "facts": "9cc108de644f960a",
+    "facts2": "d94ef8bcaf458ae9",
+    "all": "bb73969dcb04466d"
+   },
+   "row_hash": "0c03931191c53a34",
+   "carried": true,
+   "pass": 5
+  },
+  {
+   "row": "C2194",
+   "screen": "zoe_witness.go",
+   "verdict": "PASS",
+   "line": "Done. You're my alibi.",
+   "why": "Zoe: Show-off (reads it out loud), No strings (dumps him by text without blinking).",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "a381f4b3c986bc40",
+    "traits": "6b1e34b018661933",
+    "facts": "5bc014717ddb04d9",
+    "facts2": "2f64407ac0a709fe",
+    "all": "dbfc3b56a1c7e201"
+   },
+   "row_hash": "0c03931191c53a34",
+   "carried": true,
+   "pass": 5
+  },
+  {
+   "row": "C2194",
+   "screen": "zoe_witness.moment",
+   "verdict": "PASS",
+   "line": "I'm dumping someone by text and I need a witness.",
+   "why": "Zoe: No strings, Show-off.",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "f651eb67e838de7f",
+    "traits": "6b1e34b018661933",
+    "facts": "55b08b7a92e09b4a",
+    "facts2": "1d19261cdc6cf85d",
+    "all": "a2080fb3cbcaac95"
+   },
+   "row_hash": "0c03931191c53a34",
+   "carried": true,
+   "pass": 5
   },
   {
    "row": "C286",
@@ -4829,6 +6309,25 @@
    "row_hash": "7e128897077ecee6",
    "carried": true,
    "pass": 1
+  },
+  {
+   "row": "C422",
+   "screen": "ryan_charger_back.look2",
+   "verdict": "PASS",
+   "line": "Done",
+   "why": "returns her to her room, as the label says",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "b6fc34828f2bbcde",
+    "traits": "74c4f68e6476ecee",
+    "facts": "e03ae2cd56295992",
+    "facts2": "aa200880ec280d14",
+    "all": "acd7ba9ed82826e4"
+   },
+   "row_hash": "7e128897077ecee6",
+   "carried": false,
+   "pass": 7
   },
   {
    "row": "C442",
@@ -5156,6 +6655,25 @@
   },
   {
    "row": "C442",
+   "screen": "ryan_charger_back.look2",
+   "verdict": "PASS",
+   "line": "You don't move. You can't. He looks again, slower, at your chest.",
+   "why": "says plainly what is happening",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "b6fc34828f2bbcde",
+    "traits": "74c4f68e6476ecee",
+    "facts": "e03ae2cd56295992",
+    "facts2": "aa200880ec280d14",
+    "all": "acd7ba9ed82826e4"
+   },
+   "row_hash": "59b8d8d24f0c7c38",
+   "carried": false,
+   "pass": 7
+  },
+  {
+   "row": "C442",
    "screen": "ryan_charger_back.moment",
    "verdict": "PASS",
    "line": "Zoe hooks your arm before you've seen her coming",
@@ -5418,6 +6936,25 @@
    "row_hash": "5f664198d19facd8",
    "carried": true,
    "pass": 1
+  },
+  {
+   "row": "C447",
+   "screen": "ryan_charger_back.look2",
+   "verdict": "PASS",
+   "line": "\"Night. Sorry. Night. Sleep well.\"",
+   "why": "Ryan's manner held: short, stammered, apologetic",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "b6fc34828f2bbcde",
+    "traits": "74c4f68e6476ecee",
+    "facts": "e03ae2cd56295992",
+    "facts2": "aa200880ec280d14",
+    "all": "acd7ba9ed82826e4"
+   },
+   "row_hash": "5f664198d19facd8",
+   "carried": false,
+   "pass": 7
   },
   {
    "row": "C449",
@@ -5740,8 +7277,27 @@
     "all": "e6badfd2b89da059"
    },
    "row_hash": "b01ad555668aba2d",
-   "carried": false,
+   "carried": true,
    "pass": 4
+  },
+  {
+   "row": "C450",
+   "screen": "ryan_charger_back.look2",
+   "verdict": "PASS",
+   "line": "His door clicks shut next door. In the morning it'll be the two of you and one bathroom again.",
+   "why": "ends on a hook at a real next meeting",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "b6fc34828f2bbcde",
+    "traits": "74c4f68e6476ecee",
+    "facts": "e03ae2cd56295992",
+    "facts2": "aa200880ec280d14",
+    "all": "acd7ba9ed82826e4"
+   },
+   "row_hash": "b01ad555668aba2d",
+   "carried": false,
+   "pass": 7
   },
   {
    "row": "C450",
@@ -5917,6 +7473,25 @@
    "row_hash": "50dbf74577a813c7",
    "carried": true,
    "pass": 1
+  },
+  {
+   "row": "C451",
+   "screen": "ryan_charger_back.look2",
+   "verdict": "PASS",
+   "line": "His door clicks shut next door. In the morning it'll be the two of you and one bathroom again.",
+   "why": "concrete: his door, next door, the one bathroom, the morning",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "b6fc34828f2bbcde",
+    "traits": "74c4f68e6476ecee",
+    "facts": "e03ae2cd56295992",
+    "facts2": "aa200880ec280d14",
+    "all": "acd7ba9ed82826e4"
+   },
+   "row_hash": "50dbf74577a813c7",
+   "carried": false,
+   "pass": 7
   },
   {
    "row": "C460",
@@ -6174,37 +7749,39 @@
    "row": "C460",
    "screen": "ryan_charger.give",
    "verdict": "PASS",
-   "line": "He takes it off your desk himself. \"Lifesaver.\"",
-   "why": "texture only; Done costs 5 minutes",
+   "line": "You hand it over. He takes it without touching your fingers. \"Lifesaver. I'll bring it back.\"",
+   "why": "the handover happens at her door with Ryan there (moment: he waits in the hall); the promise to bring it back is built in step 2; nothing claims an arrival",
    "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "ecde715461c7a69a",
+    "text": "74a1f5c72905b789",
+    "traits": "74c4f68e6476ecee",
     "facts": "af9643700a2e29bf",
     "facts2": "b24f726a86e87617",
-    "all": "e74fb634d86d3a50"
+    "all": "585a226b99ee83db"
    },
    "row_hash": "67e48e60d5053a2e",
-   "carried": true,
-   "pass": 2
+   "carried": false,
+   "pass": 7
   },
   {
    "row": "C460",
    "screen": "ryan_charger.moment",
    "verdict": "PASS",
-   "line": "A knock, and Ryan's leaning in your doorframe before you've said come in / again: \"Still dead. Still no charger. Please?\"",
-   "why": "Ryan in home_ryans_room 'in his room' weekdays 08-12, Sat/Sun 10:30-12 and 19-23 (npc_at_location gate); the knock shows him arriving from next door, the form C2186 allows and LO approved; second showing gated on ryan_asked, after her no",
+   "line": "A knock. Ryan waits in the hall until you open the door, then holds up his dead phone and doesn't quite look at you. / again: \"Ryan's knock again. He waits until you open, dead phone held up like evidence.\"",
+   "why": "Every claim holds at the first and last minute of each window and on the second visit: the knock, Ryan in the hall from next door, his phone dead, no charger yet.",
    "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "e71b26b6febbc0a4",
+    "text": "313906c8298f2b26",
+    "traits": "74c4f68e6476ecee",
     "facts": "c2d1415accf79c05",
     "facts2": "8d63addbcec693e8",
-    "all": "da35acf4f60c4e57"
+    "all": "abde12bfac993bae"
    },
    "row_hash": "67e48e60d5053a2e",
    "carried": true,
-   "pass": 2
+   "pass": 6
   },
   {
    "row": "C460",
@@ -6228,55 +7805,77 @@
    "row": "C460",
    "screen": "ryan_charger_back.look",
    "verdict": "PASS",
-   "line": "His door clicks shut next door. In the morning it'll be the two of you and one bathroom again.",
-   "why": "every claim holds on every reach: he is next door by his 23-24 rows; he uses the one bathroom every morning by his rows (weekday 07-08, weekend 10-11); one bathroom is the house's design (opening line); the line names no other person's presence",
+   "line": "Then he sets the charger down just inside your door without looking up. \"Charger's there. Night. Sorry. Night. Sleep well.\" His door clicks shut next door.",
+   "why": "true on the only showing it can render on (the first, charger in hand); Ryan next door 23-24; one bathroom is the house's design; his bathroom row every next morning",
    "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "80d145c054bd32d6",
+    "text": "ca81d6cf8e22d3c8",
+    "traits": "74c4f68e6476ecee",
     "facts": "e03ae2cd56295992",
     "facts2": "aa200880ec280d14",
-    "all": "e6badfd2b89da059"
+    "all": "1a9d24549c5e70f6"
    },
    "row_hash": "67e48e60d5053a2e",
    "carried": false,
-   "pass": 4
+   "pass": 7
+  },
+  {
+   "row": "C460",
+   "screen": "ryan_charger_back.look2",
+   "verdict": "PASS",
+   "line": "His door clicks shut next door. In the morning it'll be the two of you and one bathroom again.",
+   "why": "every claim true on every reach: Ryan next door 23-24 by his rows; his bathroom row every next morning (incl. Saturday 10-11 after a Friday); one bathroom is the house's design (home_bathroom description); no arrival claim, so true when she came from a room button",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "b6fc34828f2bbcde",
+    "traits": "74c4f68e6476ecee",
+    "facts": "e03ae2cd56295992",
+    "facts2": "aa200880ec280d14",
+    "all": "acd7ba9ed82826e4"
+   },
+   "row_hash": "67e48e60d5053a2e",
+   "carried": false,
+   "pass": 7
   },
   {
    "row": "C460",
    "screen": "ryan_charger_back.moment",
    "verdict": "PASS",
-   "line": "A knock, late. Ryan's in your doorframe with your charger. / again: with nothing in his hands this time",
-   "why": "Ryan in home_ryans_room 'on his phone' 23-24 Mon-Fri and Sun; charger given a day or more before (ryan_charger); the second showing follows only the take path, where she took the charger back",
+   "line": "A knock, late. Ryan waits until you open, your charger held out. His eyes go to your chest, stay a second too long, then snap to the floor. / again: A knock, late. Ryan waits until you open, nothing in his hands this time. ... \"Just. Saying night. That's all. I couldn't sleep.\"",
+   "why": "every claim holds at 23:00 and 23:59 on both showings and whichever way she reached her room; the knock shows him coming from next door, no line says she just walked in",
    "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "088f904f1787f898",
+    "text": "ba4d186ba1d48c83",
+    "traits": "74c4f68e6476ecee",
     "facts": "794f3425e70e89bc",
     "facts2": "63e40120178d9641",
-    "all": "5bc550c7bb0835e9"
+    "all": "48878c52b6a0aa3c"
    },
    "row_hash": "67e48e60d5053a2e",
-   "carried": true,
-   "pass": 2
+   "carried": false,
+   "pass": 7
   },
   {
    "row": "C460",
    "screen": "ryan_charger_back.take",
    "verdict": "PASS",
-   "line": "\"Right. Night. You know where I am.\" ... He'll knock again.",
-   "why": "true after both showings; the future promise is built (step 2 repeats after its rest until the yes)",
+   "line": "You shut the door on him. \"Right. Night. You know where I am.\" His own door clicks a second later.",
+   "why": "true after both showings; \"He'll knock again\" is built (step 2 returns after 3 days on ryan_back_seen until ryan_looked)",
    "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "de069e800d31e3f4",
+    "text": "88c9e004e47287aa",
+    "traits": "74c4f68e6476ecee",
     "facts": "553013c2cdb96b81",
     "facts2": "e771106eddedbf0a",
-    "all": "dd378bf9d71f4e32"
+    "all": "405e9c94dcd213f1"
    },
    "row_hash": "67e48e60d5053a2e",
-   "carried": true,
-   "pass": 3
+   "carried": false,
+   "pass": 7
   },
   {
    "row": "C460",
@@ -6709,37 +8308,39 @@
    "row": "C461",
    "screen": "ryan_charger.give",
    "verdict": "PASS",
-   "line": "He takes it off your desk himself. \"Lifesaver.\"",
-   "why": "texture that cannot clash, and dialogue that fits each person's plan entry",
+   "line": "You hand it over. He takes it without touching your fingers. \"Lifesaver. I'll bring it back.\"",
+   "why": "\"without touching your fingers\" is texture that fits Shy and Gives way; dialogue fits his entry",
    "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "ecde715461c7a69a",
+    "text": "74a1f5c72905b789",
+    "traits": "74c4f68e6476ecee",
     "facts": "af9643700a2e29bf",
     "facts2": "b24f726a86e87617",
-    "all": "e74fb634d86d3a50"
+    "all": "585a226b99ee83db"
    },
    "row_hash": "310706ee076318f2",
-   "carried": true,
-   "pass": 2
+   "carried": false,
+   "pass": 7
   },
   {
    "row": "C461",
    "screen": "ryan_charger.moment",
    "verdict": "PASS",
-   "line": "A knock, and Ryan's leaning in your doorframe before you've said come in / again: \"Still dead. Still no charger. Please?\"",
-   "why": "texture that cannot clash, and dialogue that fits each person's plan entry",
+   "line": "A knock. Ryan waits in the hall until you open the door, then holds up his dead phone and doesn't quite look at you. / again: \"Ryan's knock again. He waits until you open, dead phone held up like evidence.\"",
+   "why": "'Dead phone held up like evidence' is texture; his lines fit his cast entry and his words.",
    "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "e71b26b6febbc0a4",
+    "text": "313906c8298f2b26",
+    "traits": "74c4f68e6476ecee",
     "facts": "c2d1415accf79c05",
     "facts2": "8d63addbcec693e8",
-    "all": "da35acf4f60c4e57"
+    "all": "abde12bfac993bae"
    },
    "row_hash": "310706ee076318f2",
    "carried": true,
-   "pass": 2
+   "pass": 6
   },
   {
    "row": "C461",
@@ -6763,55 +8364,77 @@
    "row": "C461",
    "screen": "ryan_charger_back.look",
    "verdict": "PASS",
-   "line": "\"Night. Sorry. Night. Sleep well.\"",
-   "why": "his flustered cover fits his entry (he hides his want); 'the two of you and one bathroom' is texture on a built fact, can't clash",
+   "line": "Then he sets the charger down just inside your door without looking up. \"Charger's there. Night. Sorry. Night. Sleep well.\" His door clicks shut next door.",
+   "why": "his flustered cover fits his entry; the charger \"just inside your door\" is texture that cannot clash",
    "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "80d145c054bd32d6",
+    "text": "ca81d6cf8e22d3c8",
+    "traits": "74c4f68e6476ecee",
     "facts": "e03ae2cd56295992",
     "facts2": "aa200880ec280d14",
-    "all": "e6badfd2b89da059"
+    "all": "1a9d24549c5e70f6"
    },
    "row_hash": "310706ee076318f2",
    "carried": false,
-   "pass": 4
+   "pass": 7
+  },
+  {
+   "row": "C461",
+   "screen": "ryan_charger_back.look2",
+   "verdict": "PASS",
+   "line": "\"Night. Sorry. Night. Sleep well.\"",
+   "why": "his flustered cover fits his entry; \"the two of you and one bathroom\" is texture on a built fact",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "b6fc34828f2bbcde",
+    "traits": "74c4f68e6476ecee",
+    "facts": "e03ae2cd56295992",
+    "facts2": "aa200880ec280d14",
+    "all": "acd7ba9ed82826e4"
+   },
+   "row_hash": "310706ee076318f2",
+   "carried": false,
+   "pass": 7
   },
   {
    "row": "C461",
    "screen": "ryan_charger_back.moment",
    "verdict": "PASS",
-   "line": "A knock, late. Ryan's in your doorframe with your charger. / again: with nothing in his hands this time",
-   "why": "texture that cannot clash, and dialogue that fits each person's plan entry",
+   "line": "A knock, late. Ryan waits until you open, your charger held out. His eyes go to your chest, stay a second too long, then snap to the floor.",
+   "why": "ears pink, eyes snapping away: texture that fits his Shy entry; \"I couldn't sleep\" is dialogue a person may say",
    "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "088f904f1787f898",
+    "text": "ba4d186ba1d48c83",
+    "traits": "74c4f68e6476ecee",
     "facts": "794f3425e70e89bc",
     "facts2": "63e40120178d9641",
-    "all": "5bc550c7bb0835e9"
+    "all": "48878c52b6a0aa3c"
    },
    "row_hash": "310706ee076318f2",
-   "carried": true,
-   "pass": 2
+   "carried": false,
+   "pass": 7
   },
   {
    "row": "C461",
    "screen": "ryan_charger_back.take",
    "verdict": "PASS",
-   "line": "\"Right. Night. You know where I am.\"",
-   "why": "dialogue fits Ryan's plan entry (on her side, hiding his want)",
+   "line": "You shut the door on him. \"Right. Night. You know where I am.\" His own door clicks a second later.",
+   "why": "dialogue fits Ryan's entry (gives way, backs off)",
    "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "de069e800d31e3f4",
+    "text": "88c9e004e47287aa",
+    "traits": "74c4f68e6476ecee",
     "facts": "553013c2cdb96b81",
     "facts2": "e771106eddedbf0a",
-    "all": "dd378bf9d71f4e32"
+    "all": "405e9c94dcd213f1"
    },
    "row_hash": "310706ee076318f2",
-   "carried": true,
-   "pass": 3
+   "carried": false,
+   "pass": 7
   },
   {
    "row": "C461",
@@ -7043,6 +8666,25 @@
    "pass": 1
   },
   {
+   "row": "C519",
+   "screen": "ryan_charger_back.look2",
+   "verdict": "PASS",
+   "line": "three blocks, about 35 words",
+   "why": "one job (his look and his exit), under 150 words",
+   "cause": null,
+   "note": true,
+   "screen_hash": {
+    "text": "b6fc34828f2bbcde",
+    "traits": "74c4f68e6476ecee",
+    "facts": "e03ae2cd56295992",
+    "facts2": "aa200880ec280d14",
+    "all": "acd7ba9ed82826e4"
+   },
+   "row_hash": "e78502f7aa28746d",
+   "carried": false,
+   "pass": 7
+  },
+  {
    "row": "C593",
    "screen": "*",
    "verdict": "PASS",
@@ -7056,6 +8698,25 @@
    "pass": 1
   },
   {
+   "row": "C593",
+   "screen": "ryan_charger_back.look2",
+   "verdict": "PASS",
+   "line": "\"Night. Sorry. Night. Sleep well.\"",
+   "why": "no term of address used",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "b6fc34828f2bbcde",
+    "traits": "74c4f68e6476ecee",
+    "facts": "e03ae2cd56295992",
+    "facts2": "aa200880ec280d14",
+    "all": "acd7ba9ed82826e4"
+   },
+   "row_hash": "370371a278b9f182",
+   "carried": false,
+   "pass": 7
+  },
+  {
    "row": "C596",
    "screen": "*",
    "verdict": "PASS",
@@ -7067,6 +8728,25 @@
    "row_hash": "e5f7e6cf2d01613d",
    "carried": true,
    "pass": 1
+  },
+  {
+   "row": "C596",
+   "screen": "ryan_charger_back.look2",
+   "verdict": "N/A",
+   "line": "\u2014",
+   "why": "not a talk screen; an answer screen of an arrival scene",
+   "cause": null,
+   "note": true,
+   "screen_hash": {
+    "text": "b6fc34828f2bbcde",
+    "traits": "74c4f68e6476ecee",
+    "facts": "e03ae2cd56295992",
+    "facts2": "aa200880ec280d14",
+    "all": "acd7ba9ed82826e4"
+   },
+   "row_hash": "e5f7e6cf2d01613d",
+   "carried": false,
+   "pass": 7
   },
   {
    "row": "C601",
@@ -7108,6 +8788,25 @@
    "pass": 1
   },
   {
+   "row": "C620",
+   "screen": "ryan_charger_back.look2",
+   "verdict": "PASS",
+   "line": "met_ryan is_true; npc_at_location npc_ryan home_ryans_room is_present",
+   "why": "Ryan is met and next door on every showing",
+   "cause": null,
+   "note": true,
+   "screen_hash": {
+    "text": "b6fc34828f2bbcde",
+    "traits": "74c4f68e6476ecee",
+    "facts": "e03ae2cd56295992",
+    "facts2": "aa200880ec280d14",
+    "all": "acd7ba9ed82826e4"
+   },
+   "row_hash": "76250e48ada2b843",
+   "carried": false,
+   "pass": 7
+  },
+  {
    "row": "C625",
    "screen": "*",
    "verdict": "PASS",
@@ -7119,6 +8818,25 @@
    "row_hash": "dc9a1fd9dbf3fb87",
    "carried": true,
    "pass": 1
+  },
+  {
+   "row": "C625",
+   "screen": "ryan_charger_back.look2",
+   "verdict": "PASS",
+   "line": "speaker npc_ryan, met_ryan is_true",
+   "why": "he is met, so his name is right",
+   "cause": null,
+   "note": true,
+   "screen_hash": {
+    "text": "b6fc34828f2bbcde",
+    "traits": "74c4f68e6476ecee",
+    "facts": "e03ae2cd56295992",
+    "facts2": "aa200880ec280d14",
+    "all": "acd7ba9ed82826e4"
+   },
+   "row_hash": "dc9a1fd9dbf3fb87",
+   "carried": false,
+   "pass": 7
   },
   {
    "row": "C626",
@@ -7134,6 +8852,25 @@
    "pass": 1
   },
   {
+   "row": "C626",
+   "screen": "ryan_charger_back.look2",
+   "verdict": "PASS",
+   "line": "speaker npc_ryan, met_ryan is_true",
+   "why": "met, named by the speaker label",
+   "cause": null,
+   "note": true,
+   "screen_hash": {
+    "text": "b6fc34828f2bbcde",
+    "traits": "74c4f68e6476ecee",
+    "facts": "e03ae2cd56295992",
+    "facts2": "aa200880ec280d14",
+    "all": "acd7ba9ed82826e4"
+   },
+   "row_hash": "8e507f7b235acc25",
+   "carried": false,
+   "pass": 7
+  },
+  {
    "row": "C630",
    "screen": "*",
    "verdict": "PASS",
@@ -7147,6 +8884,25 @@
    "pass": 1
   },
   {
+   "row": "C630",
+   "screen": "ryan_charger_back.look2",
+   "verdict": "PASS",
+   "line": "His door clicks shut next door. In the morning it'll be the two of you and one bathroom again.",
+   "why": "narration says \"he/his\" and the speaker label names Ryan; the relation (step-brother sharing hall and bathroom) is on his People card and carried here by \"the two of you and one bathroom\"; neither replaces the other",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "b6fc34828f2bbcde",
+    "traits": "74c4f68e6476ecee",
+    "facts": "e03ae2cd56295992",
+    "facts2": "aa200880ec280d14",
+    "all": "acd7ba9ed82826e4"
+   },
+   "row_hash": "5a85503d3ef5a0fb",
+   "carried": false,
+   "pass": 7
+  },
+  {
    "row": "C632",
    "screen": "*",
    "verdict": "N/A",
@@ -7158,6 +8914,25 @@
    "row_hash": "146e6806c6c566e3",
    "carried": true,
    "pass": 1
+  },
+  {
+   "row": "C632",
+   "screen": "ryan_charger_back.look2",
+   "verdict": "N/A",
+   "line": "\u2014",
+   "why": "no role label written here",
+   "cause": null,
+   "note": true,
+   "screen_hash": {
+    "text": "b6fc34828f2bbcde",
+    "traits": "74c4f68e6476ecee",
+    "facts": "e03ae2cd56295992",
+    "facts2": "aa200880ec280d14",
+    "all": "acd7ba9ed82826e4"
+   },
+   "row_hash": "146e6806c6c566e3",
+   "carried": false,
+   "pass": 7
   },
   {
    "row": "C639",
@@ -7199,6 +8974,25 @@
    "pass": 1
   },
   {
+   "row": "C644",
+   "screen": "ryan_charger_back.look2",
+   "verdict": "PASS",
+   "line": "His door clicks shut next door. In the morning it'll be the two of you and one bathroom again.",
+   "why": "his own door and room next door, the shared bathroom: his corner of the house",
+   "cause": null,
+   "note": true,
+   "screen_hash": {
+    "text": "b6fc34828f2bbcde",
+    "traits": "74c4f68e6476ecee",
+    "facts": "e03ae2cd56295992",
+    "facts2": "aa200880ec280d14",
+    "all": "acd7ba9ed82826e4"
+   },
+   "row_hash": "f5e1d79f3251dbab",
+   "carried": false,
+   "pass": 7
+  },
+  {
    "row": "C724",
    "screen": "*",
    "verdict": "PASS",
@@ -7225,6 +9019,25 @@
    "pass": 1
   },
   {
+   "row": "C758",
+   "screen": "ryan_charger_back.look2",
+   "verdict": "PASS",
+   "line": "Done",
+   "why": "one word",
+   "cause": null,
+   "note": true,
+   "screen_hash": {
+    "text": "b6fc34828f2bbcde",
+    "traits": "74c4f68e6476ecee",
+    "facts": "e03ae2cd56295992",
+    "facts2": "aa200880ec280d14",
+    "all": "acd7ba9ed82826e4"
+   },
+   "row_hash": "e158aaf055cb61d6",
+   "carried": false,
+   "pass": 7
+  },
+  {
    "row": "C762",
    "screen": "*",
    "verdict": "PASS",
@@ -7236,6 +9049,25 @@
    "row_hash": "40e85f1ae92f1e71",
    "carried": true,
    "pass": 1
+  },
+  {
+   "row": "C762",
+   "screen": "ryan_charger_back.look2",
+   "verdict": "PASS",
+   "line": "\u2014",
+   "why": "no \"Nothing happens.\"",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "b6fc34828f2bbcde",
+    "traits": "74c4f68e6476ecee",
+    "facts": "e03ae2cd56295992",
+    "facts2": "aa200880ec280d14",
+    "all": "acd7ba9ed82826e4"
+   },
+   "row_hash": "40e85f1ae92f1e71",
+   "carried": false,
+   "pass": 7
   },
   {
    "row": "C769",
@@ -7251,6 +9083,25 @@
    "pass": 1
   },
   {
+   "row": "C769",
+   "screen": "ryan_charger_back.look2",
+   "verdict": "N/A",
+   "line": "\u2014",
+   "why": "no place description on this screen",
+   "cause": null,
+   "note": true,
+   "screen_hash": {
+    "text": "b6fc34828f2bbcde",
+    "traits": "74c4f68e6476ecee",
+    "facts": "e03ae2cd56295992",
+    "facts2": "aa200880ec280d14",
+    "all": "acd7ba9ed82826e4"
+   },
+   "row_hash": "f6b6f78a8f2e5ed7",
+   "carried": false,
+   "pass": 7
+  },
+  {
    "row": "C770",
    "screen": "*",
    "verdict": "N/A",
@@ -7262,6 +9113,25 @@
    "row_hash": "ff9aa31c11e5d50f",
    "carried": true,
    "pass": 1
+  },
+  {
+   "row": "C770",
+   "screen": "ryan_charger_back.look2",
+   "verdict": "N/A",
+   "line": "\u2014",
+   "why": "not a room screen",
+   "cause": null,
+   "note": true,
+   "screen_hash": {
+    "text": "b6fc34828f2bbcde",
+    "traits": "74c4f68e6476ecee",
+    "facts": "e03ae2cd56295992",
+    "facts2": "aa200880ec280d14",
+    "all": "acd7ba9ed82826e4"
+   },
+   "row_hash": "ff9aa31c11e5d50f",
+   "carried": false,
+   "pass": 7
   },
   {
    "row": "C771",
@@ -7277,6 +9147,25 @@
    "pass": 1
   },
   {
+   "row": "C771",
+   "screen": "ryan_charger_back.look2",
+   "verdict": "N/A",
+   "line": "\u2014",
+   "why": "not a first-visit screen",
+   "cause": null,
+   "note": true,
+   "screen_hash": {
+    "text": "b6fc34828f2bbcde",
+    "traits": "74c4f68e6476ecee",
+    "facts": "e03ae2cd56295992",
+    "facts2": "aa200880ec280d14",
+    "all": "acd7ba9ed82826e4"
+   },
+   "row_hash": "563e3d25c3219dd0",
+   "carried": false,
+   "pass": 7
+  },
+  {
    "row": "C773",
    "screen": "*",
    "verdict": "PASS",
@@ -7288,6 +9177,25 @@
    "row_hash": "599aac6293908bc4",
    "carried": true,
    "pass": 1
+  },
+  {
+   "row": "C773",
+   "screen": "ryan_charger_back.look2",
+   "verdict": "PASS",
+   "line": "\u2014",
+   "why": "adds no room button",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "b6fc34828f2bbcde",
+    "traits": "74c4f68e6476ecee",
+    "facts": "e03ae2cd56295992",
+    "facts2": "aa200880ec280d14",
+    "all": "acd7ba9ed82826e4"
+   },
+   "row_hash": "599aac6293908bc4",
+   "carried": false,
+   "pass": 7
   },
   {
    "row": "C776",
@@ -7303,6 +9211,25 @@
    "pass": 1
   },
   {
+   "row": "C776",
+   "screen": "ryan_charger_back.look2",
+   "verdict": "PASS",
+   "line": "\u2014",
+   "why": "menu unchanged",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "b6fc34828f2bbcde",
+    "traits": "74c4f68e6476ecee",
+    "facts": "e03ae2cd56295992",
+    "facts2": "aa200880ec280d14",
+    "all": "acd7ba9ed82826e4"
+   },
+   "row_hash": "4141d9e5e24362c3",
+   "carried": false,
+   "pass": 7
+  },
+  {
    "row": "C777",
    "screen": "*",
    "verdict": "PASS",
@@ -7314,6 +9241,25 @@
    "row_hash": "b56360a1040688cf",
    "carried": true,
    "pass": 1
+  },
+  {
+   "row": "C777",
+   "screen": "ryan_charger_back.look2",
+   "verdict": "PASS",
+   "line": "\u2014",
+   "why": "the moment lives in a beat, not on the menu",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "b6fc34828f2bbcde",
+    "traits": "74c4f68e6476ecee",
+    "facts": "e03ae2cd56295992",
+    "facts2": "aa200880ec280d14",
+    "all": "acd7ba9ed82826e4"
+   },
+   "row_hash": "b56360a1040688cf",
+   "carried": false,
+   "pass": 7
   },
   {
    "row": "C788",
@@ -7355,6 +9301,25 @@
    "pass": 1
   },
   {
+   "row": "C794",
+   "screen": "ryan_charger_back.look2",
+   "verdict": "N/A",
+   "line": "\u2014",
+   "why": "no identity sentence touched",
+   "cause": null,
+   "note": true,
+   "screen_hash": {
+    "text": "b6fc34828f2bbcde",
+    "traits": "74c4f68e6476ecee",
+    "facts": "e03ae2cd56295992",
+    "facts2": "aa200880ec280d14",
+    "all": "acd7ba9ed82826e4"
+   },
+   "row_hash": "bad76e5963432385",
+   "carried": false,
+   "pass": 7
+  },
+  {
    "row": "C795",
    "screen": "*",
    "verdict": "PASS",
@@ -7368,6 +9333,25 @@
    "pass": 1
   },
   {
+   "row": "C795",
+   "screen": "ryan_charger_back.look2",
+   "verdict": "PASS",
+   "line": "\u2014",
+   "why": "no room-text line per person",
+   "cause": null,
+   "note": true,
+   "screen_hash": {
+    "text": "b6fc34828f2bbcde",
+    "traits": "74c4f68e6476ecee",
+    "facts": "e03ae2cd56295992",
+    "facts2": "aa200880ec280d14",
+    "all": "acd7ba9ed82826e4"
+   },
+   "row_hash": "34139e6a6914e171",
+   "carried": false,
+   "pass": 7
+  },
+  {
    "row": "C804",
    "screen": "*",
    "verdict": "PASS",
@@ -7379,6 +9363,25 @@
    "row_hash": "5358489178bff0a4",
    "carried": true,
    "pass": 1
+  },
+  {
+   "row": "C804",
+   "screen": "ryan_charger_back.look2",
+   "verdict": "PASS",
+   "line": "\u2014",
+   "why": "no room-text line per person; Ryan comes by knock",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "b6fc34828f2bbcde",
+    "traits": "74c4f68e6476ecee",
+    "facts": "e03ae2cd56295992",
+    "facts2": "aa200880ec280d14",
+    "all": "acd7ba9ed82826e4"
+   },
+   "row_hash": "5358489178bff0a4",
+   "carried": false,
+   "pass": 7
   },
   {
    "row": "C855",
@@ -7433,6 +9436,25 @@
    "pass": 1
   },
   {
+   "row": "C889",
+   "screen": "ryan_charger_back.look2",
+   "verdict": "PASS",
+   "line": "Done",
+   "why": "no time, duration or energy on the label; nothing costs money",
+   "cause": null,
+   "note": true,
+   "screen_hash": {
+    "text": "b6fc34828f2bbcde",
+    "traits": "74c4f68e6476ecee",
+    "facts": "e03ae2cd56295992",
+    "facts2": "aa200880ec280d14",
+    "all": "acd7ba9ed82826e4"
+   },
+   "row_hash": "def1348d483d0c40",
+   "carried": false,
+   "pass": 7
+  },
+  {
    "row": "C892",
    "screen": "*",
    "verdict": "PASS",
@@ -7444,6 +9466,25 @@
    "row_hash": "5c890033f6ac38b8",
    "carried": true,
    "pass": 1
+  },
+  {
+   "row": "C892",
+   "screen": "ryan_charger_back.look2",
+   "verdict": "PASS",
+   "line": "time_of_day 23:00-24:00 on the trigger",
+   "why": "the hour sits on the trigger, not in the act",
+   "cause": null,
+   "note": true,
+   "screen_hash": {
+    "text": "b6fc34828f2bbcde",
+    "traits": "74c4f68e6476ecee",
+    "facts": "e03ae2cd56295992",
+    "facts2": "aa200880ec280d14",
+    "all": "acd7ba9ed82826e4"
+   },
+   "row_hash": "5c890033f6ac38b8",
+   "carried": false,
+   "pass": 7
   },
   {
    "row": "C897",
@@ -7459,6 +9500,25 @@
    "pass": 1
   },
   {
+   "row": "C897",
+   "screen": "ryan_charger_back.look2",
+   "verdict": "N/A",
+   "line": "\u2014",
+   "why": "no travel",
+   "cause": null,
+   "note": true,
+   "screen_hash": {
+    "text": "b6fc34828f2bbcde",
+    "traits": "74c4f68e6476ecee",
+    "facts": "e03ae2cd56295992",
+    "facts2": "aa200880ec280d14",
+    "all": "acd7ba9ed82826e4"
+   },
+   "row_hash": "265ece64add83676",
+   "carried": false,
+   "pass": 7
+  },
+  {
    "row": "C900",
    "screen": "*",
    "verdict": "PASS",
@@ -7470,6 +9530,25 @@
    "row_hash": "6372efb027eb2034",
    "carried": true,
    "pass": 1
+  },
+  {
+   "row": "C900",
+   "screen": "ryan_charger_back.look2",
+   "verdict": "PASS",
+   "line": "His door clicks shut next door. In the morning it'll be the two of you and one bathroom again.",
+   "why": "no clock time in the beat; \"in the morning\" is true from any minute 23:00-23:59",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "b6fc34828f2bbcde",
+    "traits": "74c4f68e6476ecee",
+    "facts": "e03ae2cd56295992",
+    "facts2": "aa200880ec280d14",
+    "all": "acd7ba9ed82826e4"
+   },
+   "row_hash": "6372efb027eb2034",
+   "carried": false,
+   "pass": 7
   },
   {
    "row": "C902",
@@ -7485,6 +9564,25 @@
    "pass": 1
   },
   {
+   "row": "C902",
+   "screen": "ryan_charger_back.look2",
+   "verdict": "PASS",
+   "line": "His door clicks shut next door. In the morning it'll be the two of you and one bathroom again.",
+   "why": "at 23:59 (plus the 5-minute exit) he is still next door and the morning is still next",
+   "cause": null,
+   "note": true,
+   "screen_hash": {
+    "text": "b6fc34828f2bbcde",
+    "traits": "74c4f68e6476ecee",
+    "facts": "e03ae2cd56295992",
+    "facts2": "aa200880ec280d14",
+    "all": "acd7ba9ed82826e4"
+   },
+   "row_hash": "df5ed7a36dbc74e4",
+   "carried": false,
+   "pass": 7
+  },
+  {
    "row": "C903",
    "screen": "*",
    "verdict": "PASS",
@@ -7496,6 +9594,25 @@
    "row_hash": "4f83b0b5eb45f71b",
    "carried": true,
    "pass": 1
+  },
+  {
+   "row": "C903",
+   "screen": "ryan_charger_back.look2",
+   "verdict": "PASS",
+   "line": "\u2014",
+   "why": "no weekday named",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "b6fc34828f2bbcde",
+    "traits": "74c4f68e6476ecee",
+    "facts": "e03ae2cd56295992",
+    "facts2": "aa200880ec280d14",
+    "all": "acd7ba9ed82826e4"
+   },
+   "row_hash": "4f83b0b5eb45f71b",
+   "carried": false,
+   "pass": 7
   },
   {
    "row": "C906",
@@ -7511,6 +9628,25 @@
    "pass": 1
   },
   {
+   "row": "C906",
+   "screen": "ryan_charger_back.look2",
+   "verdict": "PASS",
+   "line": "Done",
+   "why": "no time on the label",
+   "cause": null,
+   "note": true,
+   "screen_hash": {
+    "text": "b6fc34828f2bbcde",
+    "traits": "74c4f68e6476ecee",
+    "facts": "e03ae2cd56295992",
+    "facts2": "aa200880ec280d14",
+    "all": "acd7ba9ed82826e4"
+   },
+   "row_hash": "71713a7e7ae739e7",
+   "carried": false,
+   "pass": 7
+  },
+  {
    "row": "C910",
    "screen": "*",
    "verdict": "PASS",
@@ -7522,6 +9658,25 @@
    "row_hash": "d5a109f1ef88419a",
    "carried": true,
    "pass": 1
+  },
+  {
+   "row": "C910",
+   "screen": "ryan_charger_back.look2",
+   "verdict": "PASS",
+   "line": "Done",
+   "why": "no time, energy or money",
+   "cause": null,
+   "note": true,
+   "screen_hash": {
+    "text": "b6fc34828f2bbcde",
+    "traits": "74c4f68e6476ecee",
+    "facts": "e03ae2cd56295992",
+    "facts2": "aa200880ec280d14",
+    "all": "acd7ba9ed82826e4"
+   },
+   "row_hash": "d5a109f1ef88419a",
+   "carried": false,
+   "pass": 7
   },
   {
    "row": "C913",
@@ -7537,6 +9692,25 @@
    "pass": 1
   },
   {
+   "row": "C913",
+   "screen": "ryan_charger_back.look2",
+   "verdict": "N/A",
+   "line": "\u2014",
+   "why": "an event, not a row with hours",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "b6fc34828f2bbcde",
+    "traits": "74c4f68e6476ecee",
+    "facts": "e03ae2cd56295992",
+    "facts2": "aa200880ec280d14",
+    "all": "acd7ba9ed82826e4"
+   },
+   "row_hash": "c750f9b6ab4ace14",
+   "carried": false,
+   "pass": 7
+  },
+  {
    "row": "C914",
    "screen": "*",
    "verdict": "N/A",
@@ -7548,6 +9722,25 @@
    "row_hash": "bd07273d5822f34f",
    "carried": true,
    "pass": 1
+  },
+  {
+   "row": "C914",
+   "screen": "ryan_charger_back.look2",
+   "verdict": "N/A",
+   "line": "\u2014",
+   "why": "an event, not a row",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "b6fc34828f2bbcde",
+    "traits": "74c4f68e6476ecee",
+    "facts": "e03ae2cd56295992",
+    "facts2": "aa200880ec280d14",
+    "all": "acd7ba9ed82826e4"
+   },
+   "row_hash": "bd07273d5822f34f",
+   "carried": false,
+   "pass": 7
   },
   {
    "row": "C916",
@@ -7563,6 +9756,25 @@
    "pass": 1
   },
   {
+   "row": "C916",
+   "screen": "ryan_charger_back.look2",
+   "verdict": "PASS",
+   "line": "trigger time_of_day 23:00-24:00",
+   "why": "an event that happens to her stays hidden when shut",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "b6fc34828f2bbcde",
+    "traits": "74c4f68e6476ecee",
+    "facts": "e03ae2cd56295992",
+    "facts2": "aa200880ec280d14",
+    "all": "acd7ba9ed82826e4"
+   },
+   "row_hash": "7b2bb0dfdbcfe946",
+   "carried": false,
+   "pass": 7
+  },
+  {
    "row": "C920",
    "screen": "*",
    "verdict": "PASS",
@@ -7574,6 +9786,25 @@
    "row_hash": "513927dd127fca04",
    "carried": true,
    "pass": 1
+  },
+  {
+   "row": "C920",
+   "screen": "ryan_charger_back.look2",
+   "verdict": "PASS",
+   "line": "\u2014",
+   "why": "no hop cost",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "b6fc34828f2bbcde",
+    "traits": "74c4f68e6476ecee",
+    "facts": "e03ae2cd56295992",
+    "facts2": "aa200880ec280d14",
+    "all": "acd7ba9ed82826e4"
+   },
+   "row_hash": "513927dd127fca04",
+   "carried": false,
+   "pass": 7
   },
   {
    "row": "C924",
@@ -7589,6 +9820,25 @@
    "pass": 1
   },
   {
+   "row": "C924",
+   "screen": "ryan_charger_back.look2",
+   "verdict": "N/A",
+   "line": "\u2014",
+   "why": "no travel",
+   "cause": null,
+   "note": true,
+   "screen_hash": {
+    "text": "b6fc34828f2bbcde",
+    "traits": "74c4f68e6476ecee",
+    "facts": "e03ae2cd56295992",
+    "facts2": "aa200880ec280d14",
+    "all": "acd7ba9ed82826e4"
+   },
+   "row_hash": "791cd173e23fb130",
+   "carried": false,
+   "pass": 7
+  },
+  {
    "row": "C926",
    "screen": "*",
    "verdict": "PASS",
@@ -7600,6 +9850,25 @@
    "row_hash": "177d1e1776fac74b",
    "carried": true,
    "pass": 1
+  },
+  {
+   "row": "C926",
+   "screen": "ryan_charger_back.look2",
+   "verdict": "PASS",
+   "line": "time_progression_minutes 0 / 5",
+   "why": "minutes only",
+   "cause": null,
+   "note": true,
+   "screen_hash": {
+    "text": "b6fc34828f2bbcde",
+    "traits": "74c4f68e6476ecee",
+    "facts": "e03ae2cd56295992",
+    "facts2": "aa200880ec280d14",
+    "all": "acd7ba9ed82826e4"
+   },
+   "row_hash": "177d1e1776fac74b",
+   "carried": false,
+   "pass": 7
   },
   {
    "row": "C927",
@@ -7763,18 +10032,19 @@
    "screen": "ryan_charger.give",
    "verdict": "PASS",
    "line": "Done: time_progression_minutes = 5",
-   "why": "every exit carries its own time; first-screen choices are an explicit 0 (v2.py:17877), answer exits 5",
+   "why": "the only exit carries its own time",
    "cause": null,
    "note": true,
    "screen_hash": {
-    "text": "ecde715461c7a69a",
+    "text": "74a1f5c72905b789",
+    "traits": "74c4f68e6476ecee",
     "facts": "af9643700a2e29bf",
     "facts2": "b24f726a86e87617",
-    "all": "e74fb634d86d3a50"
+    "all": "585a226b99ee83db"
    },
    "row_hash": "4e86d143688ba8e5",
-   "carried": true,
-   "pass": 2
+   "carried": false,
+   "pass": 7
   },
   {
    "row": "C927",
@@ -7803,14 +10073,34 @@
    "cause": null,
    "note": true,
    "screen_hash": {
-    "text": "80d145c054bd32d6",
+    "text": "ca81d6cf8e22d3c8",
+    "traits": "74c4f68e6476ecee",
     "facts": "e03ae2cd56295992",
     "facts2": "aa200880ec280d14",
-    "all": "e6badfd2b89da059"
+    "all": "1a9d24549c5e70f6"
    },
    "row_hash": "4e86d143688ba8e5",
    "carried": false,
-   "pass": 4
+   "pass": 7
+  },
+  {
+   "row": "C927",
+   "screen": "ryan_charger_back.look2",
+   "verdict": "PASS",
+   "line": "Done: time_progression_minutes = 5",
+   "why": "the only exit carries its own 5 minutes",
+   "cause": null,
+   "note": true,
+   "screen_hash": {
+    "text": "b6fc34828f2bbcde",
+    "traits": "74c4f68e6476ecee",
+    "facts": "e03ae2cd56295992",
+    "facts2": "aa200880ec280d14",
+    "all": "acd7ba9ed82826e4"
+   },
+   "row_hash": "4e86d143688ba8e5",
+   "carried": false,
+   "pass": 7
   },
   {
    "row": "C927",
@@ -7821,14 +10111,15 @@
    "cause": null,
    "note": true,
    "screen_hash": {
-    "text": "de069e800d31e3f4",
+    "text": "88c9e004e47287aa",
+    "traits": "74c4f68e6476ecee",
     "facts": "553013c2cdb96b81",
     "facts2": "e771106eddedbf0a",
-    "all": "dd378bf9d71f4e32"
+    "all": "405e9c94dcd213f1"
    },
    "row_hash": "4e86d143688ba8e5",
-   "carried": true,
-   "pass": 3
+   "carried": false,
+   "pass": 7
   },
   {
    "row": "C927",
@@ -7988,6 +10279,25 @@
    "pass": 1
   },
   {
+   "row": "C928",
+   "screen": "ryan_charger_back.look2",
+   "verdict": "PASS",
+   "line": "\u2014",
+   "why": "no clock in the prose",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "b6fc34828f2bbcde",
+    "traits": "74c4f68e6476ecee",
+    "facts": "e03ae2cd56295992",
+    "facts2": "aa200880ec280d14",
+    "all": "acd7ba9ed82826e4"
+   },
+   "row_hash": "2c3ccc6bd9929d7f",
+   "carried": false,
+   "pass": 7
+  },
+  {
    "row": "C929",
    "screen": "*",
    "verdict": "PASS",
@@ -8001,6 +10311,25 @@
    "pass": 1
   },
   {
+   "row": "C929",
+   "screen": "ryan_charger_back.look2",
+   "verdict": "PASS",
+   "line": "Done",
+   "why": "no time tagged on the label",
+   "cause": null,
+   "note": true,
+   "screen_hash": {
+    "text": "b6fc34828f2bbcde",
+    "traits": "74c4f68e6476ecee",
+    "facts": "e03ae2cd56295992",
+    "facts2": "aa200880ec280d14",
+    "all": "acd7ba9ed82826e4"
+   },
+   "row_hash": "18b0ecdf6d7fc901",
+   "carried": false,
+   "pass": 7
+  },
+  {
    "row": "C930",
    "screen": "*",
    "verdict": "N/A",
@@ -8012,6 +10341,25 @@
    "row_hash": "beb57cd46fe906bf",
    "carried": true,
    "pass": 1
+  },
+  {
+   "row": "C930",
+   "screen": "ryan_charger_back.look2",
+   "verdict": "N/A",
+   "line": "\u2014",
+   "why": "no windowed work",
+   "cause": null,
+   "note": true,
+   "screen_hash": {
+    "text": "b6fc34828f2bbcde",
+    "traits": "74c4f68e6476ecee",
+    "facts": "e03ae2cd56295992",
+    "facts2": "aa200880ec280d14",
+    "all": "acd7ba9ed82826e4"
+   },
+   "row_hash": "beb57cd46fe906bf",
+   "carried": false,
+   "pass": 7
   },
   {
    "row": "C931",
@@ -8174,19 +10522,20 @@
    "row": "C931",
    "screen": "ryan_charger.give",
    "verdict": "PASS",
-   "line": "time_of_day windows on the trigger",
-   "why": "end exclusive (v2.py:4803-4823); 23:00-24:00 reads 1380-1439; no window wraps",
+   "line": "time_of_day 08:00-12:00 / 11:00-12:00 / 19:00-23:00",
+   "why": "end exclusive, no wrap, each window inside his home_ryans_room rows",
    "cause": null,
    "note": true,
    "screen_hash": {
-    "text": "ecde715461c7a69a",
+    "text": "74a1f5c72905b789",
+    "traits": "74c4f68e6476ecee",
     "facts": "af9643700a2e29bf",
     "facts2": "b24f726a86e87617",
-    "all": "e74fb634d86d3a50"
+    "all": "585a226b99ee83db"
    },
    "row_hash": "1aadffd96e76381c",
-   "carried": true,
-   "pass": 2
+   "carried": false,
+   "pass": 7
   },
   {
    "row": "C931",
@@ -8211,36 +10560,57 @@
    "screen": "ryan_charger_back.look",
    "verdict": "PASS",
    "line": "time_of_day 23:00-24:00",
-   "why": "end exclusive: 1380-1439, no wrap; unchanged",
+   "why": "end exclusive, 1380-1439, no wrap",
    "cause": null,
    "note": true,
    "screen_hash": {
-    "text": "80d145c054bd32d6",
+    "text": "ca81d6cf8e22d3c8",
+    "traits": "74c4f68e6476ecee",
     "facts": "e03ae2cd56295992",
     "facts2": "aa200880ec280d14",
-    "all": "e6badfd2b89da059"
+    "all": "1a9d24549c5e70f6"
    },
    "row_hash": "1aadffd96e76381c",
    "carried": false,
-   "pass": 4
+   "pass": 7
+  },
+  {
+   "row": "C931",
+   "screen": "ryan_charger_back.look2",
+   "verdict": "PASS",
+   "line": "time_of_day 23:00-24:00",
+   "why": "end exclusive, 1380-1439, no wrap",
+   "cause": null,
+   "note": true,
+   "screen_hash": {
+    "text": "b6fc34828f2bbcde",
+    "traits": "74c4f68e6476ecee",
+    "facts": "e03ae2cd56295992",
+    "facts2": "aa200880ec280d14",
+    "all": "acd7ba9ed82826e4"
+   },
+   "row_hash": "1aadffd96e76381c",
+   "carried": false,
+   "pass": 7
   },
   {
    "row": "C931",
    "screen": "ryan_charger_back.take",
    "verdict": "PASS",
    "line": "time_of_day 23:00-24:00",
-   "why": "end exclusive (v2.py:4803-4823 setup.isCurrentTimeSlot): 1380-1439, no wrap",
+   "why": "end exclusive, 1380-1439, no wrap",
    "cause": null,
    "note": true,
    "screen_hash": {
-    "text": "de069e800d31e3f4",
+    "text": "88c9e004e47287aa",
+    "traits": "74c4f68e6476ecee",
     "facts": "553013c2cdb96b81",
     "facts2": "e771106eddedbf0a",
-    "all": "dd378bf9d71f4e32"
+    "all": "405e9c94dcd213f1"
    },
    "row_hash": "1aadffd96e76381c",
-   "carried": true,
-   "pass": 3
+   "carried": false,
+   "pass": 7
   },
   {
    "row": "C931",
@@ -8398,6 +10768,25 @@
    "row_hash": "826bf82fe26afd13",
    "carried": true,
    "pass": 1
+  },
+  {
+   "row": "C953",
+   "screen": "ryan_charger_back.look2",
+   "verdict": "PASS",
+   "line": "Done",
+   "why": "no money cost, no time or energy",
+   "cause": null,
+   "note": true,
+   "screen_hash": {
+    "text": "b6fc34828f2bbcde",
+    "traits": "74c4f68e6476ecee",
+    "facts": "e03ae2cd56295992",
+    "facts2": "aa200880ec280d14",
+    "all": "acd7ba9ed82826e4"
+   },
+   "row_hash": "826bf82fe26afd13",
+   "carried": false,
+   "pass": 7
   },
   {
    "row": "L106",
@@ -8614,37 +11003,39 @@
    "row": "L106",
    "screen": "ryan_charger.give",
    "verdict": "PASS",
-   "line": "He takes it off your desk himself. \"Lifesaver.\"",
-   "why": "who_is_where puts the person here at every minute of the trigger (texture only; Done costs 5 minutes)",
+   "line": "You hand it over. He takes it without touching your fingers. \"Lifesaver. I'll bring it back.\"",
+   "why": "the only person named is Ryan, at her door from next door (npc_at_location home_ryans_room is_present, LO-approved form)",
    "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "ecde715461c7a69a",
+    "text": "74a1f5c72905b789",
+    "traits": "74c4f68e6476ecee",
     "facts": "af9643700a2e29bf",
     "facts2": "b24f726a86e87617",
-    "all": "e74fb634d86d3a50"
+    "all": "585a226b99ee83db"
    },
    "row_hash": "13a714429d15f3b2",
-   "carried": true,
-   "pass": 2
+   "carried": false,
+   "pass": 7
   },
   {
    "row": "L106",
    "screen": "ryan_charger.moment",
    "verdict": "PASS",
-   "line": "A knock, and Ryan's leaning in your doorframe before you've said come in / again: \"Still dead. Still no charger. Please?\"",
-   "why": "who_is_where puts the person here at every minute of the trigger (Ryan in home_ryans_room 'in his room' weekdays 08-12, Sat/Sun 10:30-12 and 19-23 (npc_at_location gate); the knock shows him arriving from next door, the form C2186 allows and LO approved; second showing gated on ryan_asked, after her no)",
+   "line": "A knock. Ryan waits in the hall until you open the door, then holds up his dead phone and doesn't quite look at you. / again: \"Ryan's knock again. He waits until you open, dead phone held up like evidence.\"",
+   "why": "Ryan is at home_ryans_room at every minute the trigger can fire (who_is_where); the knock and 'waits in the hall' show him coming to her door, not already in her room.",
    "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "e71b26b6febbc0a4",
+    "text": "313906c8298f2b26",
+    "traits": "74c4f68e6476ecee",
     "facts": "c2d1415accf79c05",
     "facts2": "8d63addbcec693e8",
-    "all": "da35acf4f60c4e57"
+    "all": "abde12bfac993bae"
    },
    "row_hash": "13a714429d15f3b2",
    "carried": true,
-   "pass": 2
+   "pass": 6
   },
   {
    "row": "L106",
@@ -8669,54 +11060,76 @@
    "screen": "ryan_charger_back.look",
    "verdict": "PASS",
    "line": "His door clicks shut next door.",
-   "why": "who_is_where: npc_ryan home_ryans_room 23-24 Mon-Fri and Sun (Sun 19-24), trigger gates npc_at_location home_ryans_room is_present; the bathroom line is a future, his morning rows put him there",
+   "why": "who_is_where: npc_ryan home_ryans_room 23-24 Mon-Fri and Sun; trigger gates is_present",
    "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "80d145c054bd32d6",
+    "text": "ca81d6cf8e22d3c8",
+    "traits": "74c4f68e6476ecee",
     "facts": "e03ae2cd56295992",
     "facts2": "aa200880ec280d14",
-    "all": "e6badfd2b89da059"
+    "all": "1a9d24549c5e70f6"
    },
    "row_hash": "13a714429d15f3b2",
    "carried": false,
-   "pass": 4
+   "pass": 7
+  },
+  {
+   "row": "L106",
+   "screen": "ryan_charger_back.look2",
+   "verdict": "PASS",
+   "line": "His door clicks shut next door.",
+   "why": "who_is_where: npc_ryan home_ryans_room 23-24 Mon-Fri and Sun; trigger gates npc_at_location home_ryans_room is_present; weekdays [0,1,2,3,4,6] drop Saturday, when he is asleep (home_ryans_roomz)",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "b6fc34828f2bbcde",
+    "traits": "74c4f68e6476ecee",
+    "facts": "e03ae2cd56295992",
+    "facts2": "aa200880ec280d14",
+    "all": "acd7ba9ed82826e4"
+   },
+   "row_hash": "13a714429d15f3b2",
+   "carried": false,
+   "pass": 7
   },
   {
    "row": "L106",
    "screen": "ryan_charger_back.moment",
    "verdict": "PASS",
-   "line": "A knock, late. Ryan's in your doorframe with your charger. / again: with nothing in his hands this time",
-   "why": "who_is_where puts the person here at every minute of the trigger (Ryan in home_ryans_room 'on his phone' 23-24 Mon-Fri and Sun; charger given a day or more before (ryan_charger); the second showing follows only the take path, where she took the charger back)",
+   "line": "A knock, late. Ryan waits until you open, your charger held out. His eyes go to your chest, stay a second too long, then snap to the floor.",
+   "why": "Ryan in home_ryans_room at every minute the trigger can fire; the knock shows him coming to her door, not already in her room",
    "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "088f904f1787f898",
+    "text": "ba4d186ba1d48c83",
+    "traits": "74c4f68e6476ecee",
     "facts": "794f3425e70e89bc",
     "facts2": "63e40120178d9641",
-    "all": "5bc550c7bb0835e9"
+    "all": "48878c52b6a0aa3c"
    },
    "row_hash": "13a714429d15f3b2",
-   "carried": true,
-   "pass": 2
+   "carried": false,
+   "pass": 7
   },
   {
    "row": "L106",
    "screen": "ryan_charger_back.take",
    "verdict": "PASS",
    "line": "His own door clicks a second later.",
-   "why": "who_is_where: npc_ryan home_ryans_room 23-24 Mon-Fri and Sun; trigger gates npc_at_location is_present; weekdays [0,1,2,3,4,6] drop Saturday, when he is asleep",
+   "why": "his rows put him next door 23-24 on every day the trigger runs",
    "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "de069e800d31e3f4",
+    "text": "88c9e004e47287aa",
+    "traits": "74c4f68e6476ecee",
     "facts": "553013c2cdb96b81",
     "facts2": "e771106eddedbf0a",
-    "all": "dd378bf9d71f4e32"
+    "all": "405e9c94dcd213f1"
    },
    "row_hash": "13a714429d15f3b2",
-   "carried": true,
-   "pass": 3
+   "carried": false,
+   "pass": 7
   },
   {
    "row": "L106",
@@ -8961,6 +11374,25 @@
    "pass": 1
   },
   {
+   "row": "L166",
+   "screen": "ryan_charger_back.look2",
+   "verdict": "N/A",
+   "line": "\u2014",
+   "why": "an arrival event, not a repeat activity",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "b6fc34828f2bbcde",
+    "traits": "74c4f68e6476ecee",
+    "facts": "e03ae2cd56295992",
+    "facts2": "aa200880ec280d14",
+    "all": "acd7ba9ed82826e4"
+   },
+   "row_hash": "c12d10588197fbaf",
+   "carried": false,
+   "pass": 7
+  },
+  {
    "row": "L167",
    "screen": "*",
    "verdict": "N/A",
@@ -9121,19 +11553,20 @@
    "row": "L167",
    "screen": "ryan_charger.give",
    "verdict": "PASS",
-   "line": "trigger condition: one OR group of weekday x time_of_day",
-   "why": "different hours on different days are one canvas with a group, not one per day kind",
+   "line": "one OR group of weekday x time_of_day",
+   "why": "different hours on different days are one canvas with one group; a scene, not a greyed row",
    "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "ecde715461c7a69a",
+    "text": "74a1f5c72905b789",
+    "traits": "74c4f68e6476ecee",
     "facts": "af9643700a2e29bf",
     "facts2": "b24f726a86e87617",
-    "all": "e74fb634d86d3a50"
+    "all": "585a226b99ee83db"
    },
    "row_hash": "e64ce2672d85d2d8",
-   "carried": true,
-   "pass": 2
+   "carried": false,
+   "pass": 7
   },
   {
    "row": "L167",
@@ -9158,36 +11591,57 @@
    "screen": "ryan_charger_back.look",
    "verdict": "PASS",
    "line": "weekday [0,1,2,3,4,6] AND time_of_day 23:00-24:00",
-   "why": "one canvas, one window on every day it runs; a random scene, not a row, so no greying",
+   "why": "one window on every day it runs; not a greyed row",
    "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "80d145c054bd32d6",
+    "text": "ca81d6cf8e22d3c8",
+    "traits": "74c4f68e6476ecee",
     "facts": "e03ae2cd56295992",
     "facts2": "aa200880ec280d14",
-    "all": "e6badfd2b89da059"
+    "all": "1a9d24549c5e70f6"
    },
    "row_hash": "e64ce2672d85d2d8",
    "carried": false,
-   "pass": 4
+   "pass": 7
+  },
+  {
+   "row": "L167",
+   "screen": "ryan_charger_back.look2",
+   "verdict": "PASS",
+   "line": "weekday [0,1,2,3,4,6] AND time_of_day 23:00-24:00",
+   "why": "one canvas, one window on every day it runs; a random scene, not a greyed row",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "b6fc34828f2bbcde",
+    "traits": "74c4f68e6476ecee",
+    "facts": "e03ae2cd56295992",
+    "facts2": "aa200880ec280d14",
+    "all": "acd7ba9ed82826e4"
+   },
+   "row_hash": "e64ce2672d85d2d8",
+   "carried": false,
+   "pass": 7
   },
   {
    "row": "L167",
    "screen": "ryan_charger_back.take",
    "verdict": "PASS",
    "line": "weekday [0,1,2,3,4,6] AND time_of_day 23:00-24:00",
-   "why": "one canvas, one window on every day it runs; no split per day kind; no greyed row (a random scene, not a row)",
+   "why": "one window on every day it runs; not a greyed row",
    "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "de069e800d31e3f4",
+    "text": "88c9e004e47287aa",
+    "traits": "74c4f68e6476ecee",
     "facts": "553013c2cdb96b81",
     "facts2": "e771106eddedbf0a",
-    "all": "dd378bf9d71f4e32"
+    "all": "405e9c94dcd213f1"
    },
    "row_hash": "e64ce2672d85d2d8",
-   "carried": true,
-   "pass": 3
+   "carried": false,
+   "pass": 7
   },
   {
    "row": "L167",
@@ -9347,6 +11801,25 @@
    "pass": 1
   },
   {
+   "row": "L170",
+   "screen": "ryan_charger_back.look2",
+   "verdict": "PASS",
+   "line": "\u2014",
+   "why": "pages check green (check.py GREEN); no hidden place here",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "b6fc34828f2bbcde",
+    "traits": "74c4f68e6476ecee",
+    "facts": "e03ae2cd56295992",
+    "facts2": "aa200880ec280d14",
+    "all": "acd7ba9ed82826e4"
+   },
+   "row_hash": "c3599cd09637a240",
+   "carried": false,
+   "pass": 7
+  },
+  {
    "row": "L71",
    "screen": "hale_called_in.moment",
    "verdict": "PASS",
@@ -9452,8 +11925,8 @@
  ],
  "causes": [],
  "pending": [],
- "asked": 11,
- "answered": 11,
+ "asked": 127,
+ "answered": 127,
  "pass_items": [],
  "unowed": []
 }

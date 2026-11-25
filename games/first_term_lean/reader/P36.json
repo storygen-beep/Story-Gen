@@ -1,15 +1,17 @@
 {
  "piece": "P36",
- "pass": 6,
+ "pass": 7,
  "screens": {
   "rep_mirror.listen": {
    "text": "37e65552ab36cb26",
+   "traits": "ebc4051ecd3afac5",
    "facts": "a2c742f13651416e",
    "facts2": "805ffde1713f555a",
    "all": "805814c4c2d77826"
   },
   "rep_table.listen": {
    "text": "0756a10c45c782eb",
+   "traits": "ef3e57a6ae056353",
    "facts": "c661925bd9a85198",
    "facts2": "c3911e4c6ac514f2",
    "all": "bc96e0a4f6b4b457"
@@ -20,7 +22,7 @@
    "facts2": "09e109c3aa6c7876",
    "all": "09e109c3aa6c7876"
   },
-  "*": "c87611bdc2813d97"
+  "*": "7319d66e81a8029a"
  },
  "rows": {
   "B1": "5276068df1ca6fa9",
@@ -78,7 +80,7 @@
   "C644": "f5e1d79f3251dbab",
   "C596": "e5f7e6cf2d01613d",
   "C2179": "47b9477e3ec8a790",
-  "C2183": "40172c2d376bfc32",
+  "C2194": "0c03931191c53a34",
   "C1340": "b76a6583ae88c60f",
   "C769": "f6b6f78a8f2e5ed7",
   "C794": "bad76e5963432385",
@@ -841,7 +843,7 @@
     "all": "805814c4c2d77826"
    },
    "row_hash": "20748838895e4545",
-   "carried": false,
+   "carried": true,
    "pass": 6
   },
   {
@@ -859,7 +861,7 @@
     "all": "bc96e0a4f6b4b457"
    },
    "row_hash": "20748838895e4545",
-   "carried": false,
+   "carried": true,
    "pass": 6
   },
   {
@@ -877,8 +879,46 @@
     "all": "09e109c3aa6c7876"
    },
    "row_hash": "20748838895e4545",
-   "carried": false,
+   "carried": true,
    "pass": 6
+  },
+  {
+   "row": "C2194",
+   "screen": "rep_mirror.listen",
+   "verdict": "PASS",
+   "line": "Brooke tells everyone everything. That's how you know it's not true.",
+   "why": "Brooke (talked about, not on screen): Pushy, telling everyone she'll get the lead; no break. The speakers are unnamed girls with no words.",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "37e65552ab36cb26",
+    "traits": "ebc4051ecd3afac5",
+    "facts": "a2c742f13651416e",
+    "facts2": "805ffde1713f555a",
+    "all": "805814c4c2d77826"
+   },
+   "row_hash": "0c03931191c53a34",
+   "carried": false,
+   "pass": 7
+  },
+  {
+   "row": "C2194",
+   "screen": "rep_table.listen",
+   "verdict": "PASS",
+   "line": "Don't go to his office hours alone.",
+   "why": "Dr. Hale (talked about): Takes charge, the rumour. Nadia (talked about): Gives way, 'Actually, don't ask Nadia.' The speakers have no words.",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "0756a10c45c782eb",
+    "traits": "ef3e57a6ae056353",
+    "facts": "c661925bd9a85198",
+    "facts2": "c3911e4c6ac514f2",
+    "all": "bc96e0a4f6b4b457"
+   },
+   "row_hash": "0c03931191c53a34",
+   "carried": false,
+   "pass": 7
   },
   {
    "row": "C422",

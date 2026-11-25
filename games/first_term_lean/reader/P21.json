@@ -1,44 +1,50 @@
 {
  "piece": "P21",
- "pass": 12,
+ "pass": 13,
  "screens": {
   "cafe_hire.ask": {
    "text": "a5e6e9ac50172fda",
+   "traits": "44136fa355b3678a",
    "facts": "ff262f132ed5ba6b",
    "facts2": "ff262f132ed5ba6b",
    "all": "42418262d722c19a"
   },
   "cafe_hire.sign": {
    "text": "add02910080fce4f",
+   "traits": "7b42410c0bd9090b",
    "facts": "f7c3287ef5d44121",
    "facts2": "80ca4a1b39177ef5",
    "all": "7e7a7c971cf66e89"
   },
   "cafe_hire.both": {
    "text": "ac5c18ab5cbd26f2",
+   "traits": "7b42410c0bd9090b",
    "facts": "f7c3287ef5d44121",
    "facts2": "80ca4a1b39177ef5",
    "all": "6dab71496dd6f5b6"
   },
   "cafe_hire.no": {
    "text": "a7a0d5912c4e135d",
+   "traits": "44136fa355b3678a",
    "facts": "381700a7163747ea",
    "facts2": "381700a7163747ea",
    "all": "056f7af4af82b8ef"
   },
   "cafe_first_shift.start": {
    "text": "1c9ba64c14c54dbc",
+   "traits": "7b42410c0bd9090b",
    "facts": "465e6155df58dbcc",
    "facts2": "98aa2cec72d0253b",
    "all": "4d9f3e0bc1ef9374"
   },
   "cafe_first_shift.end": {
    "text": "ee1ea1f61743e5a4",
+   "traits": "d99594b509571563",
    "facts": "280d5bf0815710ea",
    "facts2": "57c2e70b1e486388",
    "all": "a7317cddb57362e1"
   },
-  "*": "3c0282b5bb2a2efe"
+  "*": "8bde60acbb418c33"
  },
  "rows": {
   "B1": "5276068df1ca6fa9",
@@ -152,7 +158,7 @@
   "C644": "f5e1d79f3251dbab",
   "C596": "e5f7e6cf2d01613d",
   "C2179": "47b9477e3ec8a790",
-  "C2183": "40172c2d376bfc32",
+  "C2194": "0c03931191c53a34",
   "C448": "b86596f1a02766de",
   "L168": "444c44970dc284f2",
   "L169": "59defccfc63b0454",
@@ -3224,7 +3230,7 @@
     "all": "4d9f3e0bc1ef9374"
    },
    "row_hash": "612394eef6826900",
-   "carried": false,
+   "carried": true,
    "pass": 12
   },
   {
@@ -3242,7 +3248,7 @@
     "all": "42418262d722c19a"
    },
    "row_hash": "612394eef6826900",
-   "carried": false,
+   "carried": true,
    "pass": 12
   },
   {
@@ -3260,7 +3266,7 @@
     "all": "4d9f3e0bc1ef9374"
    },
    "row_hash": "20748838895e4545",
-   "carried": false,
+   "carried": true,
    "pass": 12
   },
   {
@@ -3278,7 +3284,7 @@
     "all": "42418262d722c19a"
    },
    "row_hash": "20748838895e4545",
-   "carried": false,
+   "carried": true,
    "pass": 12
   },
   {
@@ -3296,7 +3302,7 @@
     "all": "4d9f3e0bc1ef9374"
    },
    "row_hash": "452a5657d7527351",
-   "carried": false,
+   "carried": true,
    "pass": 12
   },
   {
@@ -3314,7 +3320,7 @@
     "all": "42418262d722c19a"
    },
    "row_hash": "452a5657d7527351",
-   "carried": false,
+   "carried": true,
    "pass": 12
   },
   {
@@ -3327,7 +3333,7 @@
    "note": false,
    "screen_hash": null,
    "row_hash": "452a5657d7527351",
-   "carried": false,
+   "carried": true,
    "pass": 12
   },
   {
@@ -3340,8 +3346,122 @@
    "note": false,
    "screen_hash": null,
    "row_hash": "452a5657d7527351",
-   "carried": false,
+   "carried": true,
    "pass": 12
+  },
+  {
+   "row": "C2194",
+   "screen": "cafe_first_shift.end",
+   "verdict": "PASS",
+   "line": "Same again tomorrow, rookie, if you want it.",
+   "why": "Tom: a pay-out line; Pushy lightly ('rookie', the offer). Sly not shown, fine.",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "ee1ea1f61743e5a4",
+    "traits": "d99594b509571563",
+    "facts": "280d5bf0815710ea",
+    "facts2": "57c2e70b1e486388",
+    "all": "a7317cddb57362e1"
+   },
+   "row_hash": "0c03931191c53a34",
+   "carried": false,
+   "pass": 13
+  },
+  {
+   "row": "C2194",
+   "screen": "cafe_first_shift.start",
+   "verdict": "PASS",
+   "line": "So you're the new girl. Tom says you're mine to train.",
+   "why": "Chris: Pushy, Takes charge (his arm across her chest, no sorry, 'Sure you do.'). Tom: Pushy ('Chris. Customers.' and Chris steps back).",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "1c9ba64c14c54dbc",
+    "traits": "7b42410c0bd9090b",
+    "facts": "465e6155df58dbcc",
+    "facts2": "98aa2cec72d0253b",
+    "all": "4d9f3e0bc1ef9374"
+   },
+   "row_hash": "0c03931191c53a34",
+   "carried": false,
+   "pass": 13
+  },
+  {
+   "row": "C2194",
+   "screen": "cafe_hire.ask",
+   "verdict": "PASS",
+   "line": "You here about the sign, or the coffee?",
+   "why": "Tom (unmet): Pushy (speaks first, straight to it). Sly not shown, fine.",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "a5e6e9ac50172fda",
+    "traits": "44136fa355b3678a",
+    "facts": "ff262f132ed5ba6b",
+    "facts2": "ff262f132ed5ba6b",
+    "all": "42418262d722c19a"
+   },
+   "row_hash": "0c03931191c53a34",
+   "carried": false,
+   "pass": 13
+  },
+  {
+   "row": "C2194",
+   "screen": "cafe_hire.both",
+   "verdict": "PASS",
+   "line": "Funny. I'm Tom. I run the place.",
+   "why": "Tom: Pushy (his terms, 'Come in when you want', 'rookie'; his eyes to her mouth).",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "ac5c18ab5cbd26f2",
+    "traits": "7b42410c0bd9090b",
+    "facts": "f7c3287ef5d44121",
+    "facts2": "80ca4a1b39177ef5",
+    "all": "6dab71496dd6f5b6"
+   },
+   "row_hash": "0c03931191c53a34",
+   "carried": false,
+   "pass": 13
+  },
+  {
+   "row": "C2194",
+   "screen": "cafe_hire.no",
+   "verdict": "PASS",
+   "line": "Suit yourself. Sign stays up.",
+   "why": "Tom (unmet): shows none, and that's fine: a shrug at her no is one line.",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "a7a0d5912c4e135d",
+    "traits": "44136fa355b3678a",
+    "facts": "381700a7163747ea",
+    "facts2": "381700a7163747ea",
+    "all": "056f7af4af82b8ef"
+   },
+   "row_hash": "0c03931191c53a34",
+   "carried": false,
+   "pass": 13
+  },
+  {
+   "row": "C2194",
+   "screen": "cafe_hire.sign",
+   "verdict": "PASS",
+   "line": "Good answer. I'm Tom. I run the place.",
+   "why": "Tom: Pushy (looks her over like a used car; sets the terms).",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "add02910080fce4f",
+    "traits": "7b42410c0bd9090b",
+    "facts": "f7c3287ef5d44121",
+    "facts2": "80ca4a1b39177ef5",
+    "all": "7e7a7c971cf66e89"
+   },
+   "row_hash": "0c03931191c53a34",
+   "carried": false,
+   "pass": 13
   },
   {
    "row": "C286",
@@ -6787,8 +6907,8 @@
  ],
  "causes": [],
  "pending": [],
- "asked": 3,
- "answered": 3,
+ "asked": 1,
+ "answered": 1,
  "pass_items": [],
  "unowed": []
 }

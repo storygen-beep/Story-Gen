@@ -1,20 +1,22 @@
 {
  "piece": "P26",
- "pass": 6,
+ "pass": 7,
  "screens": {
   "mirror_meet_brooke.mirror": {
    "text": "c1e3f57c50f6d293",
+   "traits": "9e12469ed756975c",
    "facts": "862794d34277cc92",
    "facts2": "e0a8d361ec88aeca",
    "all": "1f6d0a0567942779"
   },
   "mirror_meet_brooke.after": {
    "text": "99d52f3067ea6acf",
+   "traits": "9e12469ed756975c",
    "facts": "cb8f003e7158e04b",
    "facts2": "47b8d2fb5c8e7ee5",
    "all": "557078cbb7f69be6"
   },
-  "*": "1e9737649686555a"
+  "*": "0c4a950f844ca323"
  },
  "rows": {
   "B1": "5276068df1ca6fa9",
@@ -109,7 +111,7 @@
   "C644": "f5e1d79f3251dbab",
   "C596": "e5f7e6cf2d01613d",
   "C2179": "47b9477e3ec8a790",
-  "C2183": "40172c2d376bfc32",
+  "C2194": "0c03931191c53a34",
   "C448": "b86596f1a02766de",
   "L168": "444c44970dc284f2",
   "L169": "59defccfc63b0454",
@@ -998,7 +1000,7 @@
     "all": "1f6d0a0567942779"
    },
    "row_hash": "612394eef6826900",
-   "carried": false,
+   "carried": true,
    "pass": 6
   },
   {
@@ -1016,7 +1018,7 @@
     "all": "1f6d0a0567942779"
    },
    "row_hash": "452a5657d7527351",
-   "carried": false,
+   "carried": true,
    "pass": 6
   },
   {
@@ -1029,7 +1031,7 @@
    "note": false,
    "screen_hash": null,
    "row_hash": "452a5657d7527351",
-   "carried": false,
+   "carried": true,
    "pass": 6
   },
   {
@@ -1042,7 +1044,7 @@
    "note": false,
    "screen_hash": null,
    "row_hash": "452a5657d7527351",
-   "carried": false,
+   "carried": true,
    "pass": 6
   },
   {
@@ -1055,8 +1057,46 @@
    "note": false,
    "screen_hash": null,
    "row_hash": "452a5657d7527351",
-   "carried": false,
+   "carried": true,
    "pass": 6
+  },
+  {
+   "row": "C2194",
+   "screen": "mirror_meet_brooke.after",
+   "verdict": "PASS",
+   "line": "Cat got your tongue, princess? Figures.",
+   "why": "Brooke: Mean, Takes charge (doesn't move an inch). Kayla: Mean ('Ooh.'). Tess: Gives way (back to Brooke's lashes); her snort at the comeback is a sound, not a break of Shy.",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "99d52f3067ea6acf",
+    "traits": "9e12469ed756975c",
+    "facts": "cb8f003e7158e04b",
+    "facts2": "47b8d2fb5c8e7ee5",
+    "all": "557078cbb7f69be6"
+   },
+   "row_hash": "0c03931191c53a34",
+   "carried": false,
+   "pass": 7
+  },
+  {
+   "row": "C2194",
+   "screen": "mirror_meet_brooke.mirror",
+   "verdict": "PASS",
+   "line": "Nice outfit, princess. Did you get dressed in the dark?",
+   "why": "Brooke: Mean (in front of the others), Pushy, Takes charge (owns the mirror). Kayla: Mean ('Kayla laughs.'), Gives way (holds the bag). Tess: Shy ('Tess doesn't'), Gives way (does Brooke's lashes, doesn't stop her).",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "c1e3f57c50f6d293",
+    "traits": "9e12469ed756975c",
+    "facts": "862794d34277cc92",
+    "facts2": "e0a8d361ec88aeca",
+    "all": "1f6d0a0567942779"
+   },
+   "row_hash": "0c03931191c53a34",
+   "carried": false,
+   "pass": 7
   },
   {
    "row": "C422",
@@ -2335,8 +2375,8 @@
  ],
  "causes": [],
  "pending": [],
- "asked": 2,
- "answered": 2,
+ "asked": 1,
+ "answered": 1,
  "pass_items": [],
  "unowed": []
 }

@@ -1,140 +1,162 @@
 {
  "piece": "P34",
- "pass": 14,
+ "pass": 15,
  "screens": {
   "talk_mom.hub": {
    "text": "0f4660e14b94ab43",
+   "traits": "4b9cc244e3119951",
    "facts": "a8dd4b5a3c3490e0",
    "facts2": "d48da7894fcd432a",
    "all": "4c25ee55de599eb7"
   },
   "talk_mom.talk": {
    "text": "feb79fad5e3d8649",
+   "traits": "ff8b9fa74641271c",
    "facts": "600f467893ef7bb9",
    "facts2": "667847517eb6a28b",
    "all": "66b9b16dce192c2f"
   },
   "talk_mom.eat": {
    "text": "cb5b4b6d73033d19",
+   "traits": "ff8b9fa74641271c",
    "facts": "bcd4fca1f4ccef8f",
    "facts2": "508d10677899c7a7",
    "all": "72eab913c378c469"
   },
   "mark_kitchen.hub": {
    "text": "cebee1bac30c4ca9",
+   "traits": "a13af4c65af9f24a",
    "facts": "e8065fe0f1b995c1",
    "facts2": "8ff6682bbd8fcf1c",
    "all": "a6f6a2b85d23b3a2"
   },
   "mark_kitchen.talk": {
    "text": "fe35e365dcfda4ec",
+   "traits": "a13af4c65af9f24a",
    "facts": "811544dad8de125f",
    "facts2": "57f3c2e33f3edc83",
    "all": "49da2ec68f166d6c"
   },
   "mark_kitchen.rent": {
    "text": "9394c9809e8f86c9",
+   "traits": "a13af4c65af9f24a",
    "facts": "5e652ec6e4551af0",
    "facts2": "7073f340f74f069c",
    "all": "3bf25ce111863764"
   },
   "mark_kitchen.pay75": {
    "text": "77d42862e4942fb3",
+   "traits": "a13af4c65af9f24a",
    "facts": "5e652ec6e4551af0",
    "facts2": "7073f340f74f069c",
    "all": "e3c88a749be646e3"
   },
   "mark_kitchen.pay90": {
    "text": "bcecc52dc17ed0c8",
+   "traits": "a13af4c65af9f24a",
    "facts": "5e652ec6e4551af0",
    "facts2": "7073f340f74f069c",
    "all": "04931744b776fc09"
   },
   "mark_kitchen.pay100": {
    "text": "9562246c2be111d9",
+   "traits": "a13af4c65af9f24a",
    "facts": "5e652ec6e4551af0",
    "facts2": "7073f340f74f069c",
    "all": "04bd193bb19a845c"
   },
   "mark_kitchen.short": {
    "text": "8b071b6a2ddd72aa",
+   "traits": "4b9cc244e3119951",
    "facts": "bc7f8aaaf6a4f505",
    "facts2": "796eee3dad582482",
    "all": "6453ab1af862f835"
   },
   "mark_living_room.hub": {
    "text": "b1dc74cbca61f8dd",
+   "traits": "a13af4c65af9f24a",
    "facts": "4b59bd8d4cc9e035",
    "facts2": "d1f473d114f3a1de",
    "all": "fc5c2ab05062f34d"
   },
   "mark_living_room.talk": {
    "text": "9c4eb02eda41c82b",
+   "traits": "a13af4c65af9f24a",
    "facts": "37fda9030ed39d1b",
    "facts2": "4244f0114f9bc150",
    "all": "956afa2f5dda70a5"
   },
   "ryan_room.hub": {
    "text": "9d621fad430fa880",
+   "traits": "74c4f68e6476ecee",
    "facts": "3607ac9e4c83f599",
    "facts2": "20cb7e50f57945d6",
    "all": "b022152d5d8242ab"
   },
   "ryan_room.talk": {
    "text": "166cb958fc8ae2d0",
+   "traits": "74c4f68e6476ecee",
    "facts": "a6fb6e766446d2a9",
    "facts2": "9743f5cae6d82f4f",
    "all": "6e6bae3cf8fb4571"
   },
   "ryan_kitchen.hub": {
    "text": "2f251e1b55595f80",
+   "traits": "74c4f68e6476ecee",
    "facts": "c2739df8bdf61c55",
    "facts2": "b1e75d13260c5686",
    "all": "a6a70ab289ac7cd2"
   },
   "ryan_kitchen.talk": {
    "text": "ef2da0282311767b",
+   "traits": "cbe784dabd345f8d",
    "facts": "11c6c935c350ff61",
    "facts2": "f0656c863969b3cd",
    "all": "901dc409441ca938"
   },
   "ryan_living_room.hub": {
    "text": "977902cc542a93c3",
+   "traits": "74c4f68e6476ecee",
    "facts": "708c539e6a8039a9",
    "facts2": "966a80b889b630f1",
    "all": "3818cfe13af52bf4"
   },
   "ryan_living_room.talk": {
    "text": "a3fd91de339b2cda",
+   "traits": "cbe784dabd345f8d",
    "facts": "76519d70d17fe391",
    "facts2": "e058cda41e2fb0ae",
    "all": "636c6d5322eb7f41"
   },
   "home_tv.watch": {
    "text": "558358370261aa8a",
+   "traits": "cbe784dabd345f8d",
    "facts": "a5626c9e1ce0cd10",
    "facts2": "a5ff49eefab1fd84",
    "all": "b4055744f059dd1d"
   },
   "home_dishes.do": {
    "text": "00dad86f6a1b7bb7",
+   "traits": "ff8b9fa74641271c",
    "facts": "7e74f00e4f7f7169",
    "facts2": "382d88df7f2e79a9",
    "all": "e6b3d660fb156c98"
   },
   "home_wait.wait": {
    "text": "6df902dbd12d0ff2",
+   "traits": "44136fa355b3678a",
    "facts": "815b79e9e60fe573",
    "facts2": "815b79e9e60fe573",
    "all": "681db92365af55c1"
   },
   "loop_eat.do": {
    "text": "636d07a3956c340a",
+   "traits": "ff8b9fa74641271c",
    "facts": "7e74f00e4f7f7169",
    "facts2": "382d88df7f2e79a9",
    "all": "4901fcc5436c3e2b"
   },
-  "*": "fced11e95e418963"
+  "*": "b2406cb78fe432cd"
  },
  "rows": {
   "B1": "5276068df1ca6fa9",
@@ -239,7 +261,7 @@
   "C660": "eaf957bb84e62bbf",
   "C2179": "47b9477e3ec8a790",
   "C2180": "a6c0f498d4d16271",
-  "C2183": "40172c2d376bfc32",
+  "C2194": "0c03931191c53a34",
   "C1340": "b76a6583ae88c60f",
   "C769": "f6b6f78a8f2e5ed7",
   "C794": "bad76e5963432385",
@@ -3837,7 +3859,7 @@
    "note": false,
    "screen_hash": "fced11e95e418963",
    "row_hash": "612394eef6826900",
-   "carried": false,
+   "carried": true,
    "pass": 14
   },
   {
@@ -3850,7 +3872,7 @@
    "note": true,
    "screen_hash": "fced11e95e418963",
    "row_hash": "20748838895e4545",
-   "carried": false,
+   "carried": true,
    "pass": 14
   },
   {
@@ -3868,8 +3890,407 @@
     "all": "a6f6a2b85d23b3a2"
    },
    "row_hash": "20748838895e4545",
-   "carried": false,
+   "carried": true,
    "pass": 14
+  },
+  {
+   "row": "C2194",
+   "screen": "home_dishes.do",
+   "verdict": "PASS",
+   "line": "Thank you, baby. Really. You don't have to do this.",
+   "why": "Laura: Warm (dries beside her). Mark: Strict (watches, doesn't help). Ryan: hands her his plate; shows none, fine, a sibling's half-line.",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "00dad86f6a1b7bb7",
+    "traits": "ff8b9fa74641271c",
+    "facts": "7e74f00e4f7f7169",
+    "facts2": "382d88df7f2e79a9",
+    "all": "e6b3d660fb156c98"
+   },
+   "row_hash": "0c03931191c53a34",
+   "carried": false,
+   "pass": 15
+  },
+  {
+   "row": "C2194",
+   "screen": "home_tv.watch",
+   "verdict": "PASS",
+   "line": "Don't touch the remote, kid. I'm watching this one.",
+   "why": "Mark: Takes charge, Strict (changes the channel without asking). Ryan: shows none of Shy or Gives way, fine: 'Told you this bit was good' is a brother at the TV, not about her.",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "558358370261aa8a",
+    "traits": "cbe784dabd345f8d",
+    "facts": "a5626c9e1ce0cd10",
+    "facts2": "a5ff49eefab1fd84",
+    "all": "b4055744f059dd1d"
+   },
+   "row_hash": "0c03931191c53a34",
+   "carried": false,
+   "pass": 15
+  },
+  {
+   "row": "C2194",
+   "screen": "loop_eat.do",
+   "verdict": "PASS",
+   "line": "Sit down to eat, baby. You're not a horse.",
+   "why": "Laura: Warm (the butter, 'Sit down'). Mark: Strict ('Some of us paid for that bread, kid.'). Ryan: 'Kitchen tax. You'd do the same to me.' shows none, fine: a sibling's tease over toast, not about her body, where his Shy lives.",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "636d07a3956c340a",
+    "traits": "ff8b9fa74641271c",
+    "facts": "7e74f00e4f7f7169",
+    "facts2": "382d88df7f2e79a9",
+    "all": "4901fcc5436c3e2b"
+   },
+   "row_hash": "0c03931191c53a34",
+   "carried": false,
+   "pass": 15
+  },
+  {
+   "row": "C2194",
+   "screen": "mark_kitchen.hub",
+   "verdict": "PASS",
+   "line": "He looks at you over the rim.",
+   "why": "Mark: Strict.",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "cebee1bac30c4ca9",
+    "traits": "a13af4c65af9f24a",
+    "facts": "e8065fe0f1b995c1",
+    "facts2": "8ff6682bbd8fcf1c",
+    "all": "a6f6a2b85d23b3a2"
+   },
+   "row_hash": "0c03931191c53a34",
+   "carried": false,
+   "pass": 15
+  },
+  {
+   "row": "C2194",
+   "screen": "mark_kitchen.pay100",
+   "verdict": "PASS",
+   "line": "He makes you stand there while he counts it again.",
+   "why": "Mark: Strict, Takes charge.",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "9562246c2be111d9",
+    "traits": "a13af4c65af9f24a",
+    "facts": "5e652ec6e4551af0",
+    "facts2": "7073f340f74f069c",
+    "all": "04bd193bb19a845c"
+   },
+   "row_hash": "0c03931191c53a34",
+   "carried": false,
+   "pass": 15
+  },
+  {
+   "row": "C2194",
+   "screen": "mark_kitchen.pay75",
+   "verdict": "PASS",
+   "line": "Four Sundays straight, kid, and maybe I'll believe you can do this.",
+   "why": "Mark: Strict, Takes charge.",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "77d42862e4942fb3",
+    "traits": "a13af4c65af9f24a",
+    "facts": "5e652ec6e4551af0",
+    "facts2": "7073f340f74f069c",
+    "all": "e3c88a749be646e3"
+   },
+   "row_hash": "0c03931191c53a34",
+   "carried": false,
+   "pass": 15
+  },
+  {
+   "row": "C2194",
+   "screen": "mark_kitchen.pay90",
+   "verdict": "PASS",
+   "line": "He makes you stand there while he counts it again.",
+   "why": "Mark: Strict, Takes charge.",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "bcecc52dc17ed0c8",
+    "traits": "a13af4c65af9f24a",
+    "facts": "5e652ec6e4551af0",
+    "facts2": "7073f340f74f069c",
+    "all": "04931744b776fc09"
+   },
+   "row_hash": "0c03931191c53a34",
+   "carried": false,
+   "pass": 15
+  },
+  {
+   "row": "C2194",
+   "screen": "mark_kitchen.rent",
+   "verdict": "PASS",
+   "line": "Count it out where I can see it.",
+   "why": "Mark: Strict, Takes charge.",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "9394c9809e8f86c9",
+    "traits": "a13af4c65af9f24a",
+    "facts": "5e652ec6e4551af0",
+    "facts2": "7073f340f74f069c",
+    "all": "3bf25ce111863764"
+   },
+   "row_hash": "0c03931191c53a34",
+   "carried": false,
+   "pass": 15
+  },
+  {
+   "row": "C2194",
+   "screen": "mark_kitchen.short",
+   "verdict": "PASS",
+   "line": "Don't make it a habit, kid.",
+   "why": "Mark: Strict. Laura: Gives way, Nervous (the cup stops, then keeps going).",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "8b071b6a2ddd72aa",
+    "traits": "4b9cc244e3119951",
+    "facts": "bc7f8aaaf6a4f505",
+    "facts2": "796eee3dad582482",
+    "all": "6453ab1af862f835"
+   },
+   "row_hash": "0c03931191c53a34",
+   "carried": false,
+   "pass": 15
+  },
+  {
+   "row": "C2194",
+   "screen": "mark_kitchen.talk",
+   "verdict": "PASS",
+   "line": "Rent doesn't wait. And don't spend it all on coffee.",
+   "why": "Mark: Strict.",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "fe35e365dcfda4ec",
+    "traits": "a13af4c65af9f24a",
+    "facts": "811544dad8de125f",
+    "facts2": "57f3c2e33f3edc83",
+    "all": "49da2ec68f166d6c"
+   },
+   "row_hash": "0c03931191c53a34",
+   "carried": false,
+   "pass": 15
+  },
+  {
+   "row": "C2194",
+   "screen": "mark_living_room.hub",
+   "verdict": "PASS",
+   "line": "The chair's his; everyone knows it.",
+   "why": "Mark: Takes charge.",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "b1dc74cbca61f8dd",
+    "traits": "a13af4c65af9f24a",
+    "facts": "4b59bd8d4cc9e035",
+    "facts2": "d1f473d114f3a1de",
+    "all": "fc5c2ab05062f34d"
+   },
+   "row_hash": "0c03931191c53a34",
+   "carried": false,
+   "pass": 15
+  },
+  {
+   "row": "C2194",
+   "screen": "mark_living_room.talk",
+   "verdict": "PASS",
+   "line": "Better. Stay there.",
+   "why": "Mark: Takes charge (moves her where he wants her), Strict.",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "9c4eb02eda41c82b",
+    "traits": "a13af4c65af9f24a",
+    "facts": "37fda9030ed39d1b",
+    "facts2": "4244f0114f9bc150",
+    "all": "956afa2f5dda70a5"
+   },
+   "row_hash": "0c03931191c53a34",
+   "carried": false,
+   "pass": 15
+  },
+  {
+   "row": "C2194",
+   "screen": "ryan_kitchen.hub",
+   "verdict": "PASS",
+   "line": "Ryan's eating standing up at the counter, straight out of the pan.",
+   "why": "Ryan: Cook isn't his; shows none, fine on a menu line.",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "2f251e1b55595f80",
+    "traits": "74c4f68e6476ecee",
+    "facts": "c2739df8bdf61c55",
+    "facts2": "b1e75d13260c5686",
+    "all": "a6a70ab289ac7cd2"
+   },
+   "row_hash": "0c03931191c53a34",
+   "carried": false,
+   "pass": 15
+  },
+  {
+   "row": "C2194",
+   "screen": "ryan_kitchen.talk",
+   "verdict": "PASS",
+   "line": "He hands you a fork without looking at you.",
+   "why": "Ryan: Shy (doesn't look at her; 'Don't tell Mark I made it'), Gives way ('That's my hoodie.' He doesn't ask for it back).",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "ef2da0282311767b",
+    "traits": "cbe784dabd345f8d",
+    "facts": "11c6c935c350ff61",
+    "facts2": "f0656c863969b3cd",
+    "all": "901dc409441ca938"
+   },
+   "row_hash": "0c03931191c53a34",
+   "carried": false,
+   "pass": 15
+  },
+  {
+   "row": "C2194",
+   "screen": "ryan_living_room.hub",
+   "verdict": "PASS",
+   "line": "Ryan's sprawled on the couch with the TV on.",
+   "why": "Ryan: shows none, fine on a menu line.",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "977902cc542a93c3",
+    "traits": "74c4f68e6476ecee",
+    "facts": "708c539e6a8039a9",
+    "facts2": "966a80b889b630f1",
+    "all": "3818cfe13af52bf4"
+   },
+   "row_hash": "0c03931191c53a34",
+   "carried": false,
+   "pass": 15
+  },
+  {
+   "row": "C2194",
+   "screen": "ryan_living_room.talk",
+   "verdict": "PASS",
+   "line": "He pulls his feet in so you can.",
+   "why": "Ryan: Gives way (makes room, doesn't ask for the hoodie back), Shy ('Sit, if you want.').",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "a3fd91de339b2cda",
+    "traits": "cbe784dabd345f8d",
+    "facts": "76519d70d17fe391",
+    "facts2": "e058cda41e2fb0ae",
+    "all": "636c6d5322eb7f41"
+   },
+   "row_hash": "0c03931191c53a34",
+   "carried": false,
+   "pass": 15
+  },
+  {
+   "row": "C2194",
+   "screen": "ryan_room.hub",
+   "verdict": "PASS",
+   "line": "Ryan's on his bed with a controller, headphones round his neck.",
+   "why": "Ryan: Gamer.",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "9d621fad430fa880",
+    "traits": "74c4f68e6476ecee",
+    "facts": "3607ac9e4c83f599",
+    "facts2": "20cb7e50f57945d6",
+    "all": "b022152d5d8242ab"
+   },
+   "row_hash": "0c03931191c53a34",
+   "carried": false,
+   "pass": 15
+  },
+  {
+   "row": "C2194",
+   "screen": "ryan_room.talk",
+   "verdict": "PASS",
+   "line": "His eyes flick to your chest and straight back to the screen. His ears go pink.",
+   "why": "Ryan: Shy, Gamer (the screen), Gives way ('It's free. I checked.').",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "166cb958fc8ae2d0",
+    "traits": "74c4f68e6476ecee",
+    "facts": "a6fb6e766446d2a9",
+    "facts2": "9743f5cae6d82f4f",
+    "all": "6e6bae3cf8fb4571"
+   },
+   "row_hash": "0c03931191c53a34",
+   "carried": false,
+   "pass": 15
+  },
+  {
+   "row": "C2194",
+   "screen": "talk_mom.eat",
+   "verdict": "PASS",
+   "line": "Eat. You're too thin.",
+   "why": "Laura: Warm, Cook (eggs or dinner on the plate). Mark and Ryan: one presence line each, show none, fine.",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "cb5b4b6d73033d19",
+    "traits": "ff8b9fa74641271c",
+    "facts": "bcd4fca1f4ccef8f",
+    "facts2": "508d10677899c7a7",
+    "all": "72eab913c378c469"
+   },
+   "row_hash": "0c03931191c53a34",
+   "carried": false,
+   "pass": 15
+  },
+  {
+   "row": "C2194",
+   "screen": "talk_mom.hub",
+   "verdict": "PASS",
+   "line": "Her mouth goes tight, and she says nothing.",
+   "why": "Laura: Warm ('her face goes soft'), Gives way (says nothing about the borrowed clothes), Nervous (looks at her, then at Mark).",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "0f4660e14b94ab43",
+    "traits": "4b9cc244e3119951",
+    "facts": "a8dd4b5a3c3490e0",
+    "facts2": "d48da7894fcd432a",
+    "all": "4c25ee55de599eb7"
+   },
+   "row_hash": "0c03931191c53a34",
+   "carried": false,
+   "pass": 15
+  },
+  {
+   "row": "C2194",
+   "screen": "talk_mom.talk",
+   "verdict": "PASS",
+   "line": "Then she's got a minute first.",
+   "why": "Laura: Warm ('Sit with me a minute, baby.'), Nervous ('Did Mark say anything else?'). Her one line back at Mark doesn't break Gives way: it's the sex-kind word (her body, P38), she says it without looking at him, and puts the talk off till 'When he's gone'. Mark: Strict ('She's got somewhere to be, Laura.'). Ryan: Gives way (rolls his eyes and gets the plates).",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "feb79fad5e3d8649",
+    "traits": "ff8b9fa74641271c",
+    "facts": "600f467893ef7bb9",
+    "facts2": "667847517eb6a28b",
+    "all": "66b9b16dce192c2f"
+   },
+   "row_hash": "0c03931191c53a34",
+   "carried": false,
+   "pass": 15
   },
   {
    "row": "C338",
@@ -13039,8 +13460,8 @@
  ],
  "causes": [],
  "pending": [],
- "asked": 2,
- "answered": 2,
+ "asked": 1,
+ "answered": 1,
  "pass_items": [],
  "unowed": []
 }

@@ -1,116 +1,134 @@
 {
  "piece": "P41",
- "pass": 6,
+ "pass": 7,
  "screens": {
   "walk_zoe_sam.moment": {
    "text": "2b0c8d6243d39d82",
+   "traits": "fa1a0a429fa0ea30",
    "facts": "c3521100b11dca8e",
    "facts2": "48fd486abd7e2f3c",
    "all": "6db71aaf2430d594"
   },
   "walk_zoe_sam.watch": {
    "text": "751705d646ffe903",
+   "traits": "fa1a0a429fa0ea30",
    "facts": "c3521100b11dca8e",
    "facts2": "48fd486abd7e2f3c",
    "all": "e0161ca9d4f016b3"
   },
   "walk_zoe_sam.out": {
    "text": "f05502845e21c4bb",
+   "traits": "6b1e34b018661933",
    "facts": "5c0a642e2e7923fd",
    "facts2": "f9f6cd7a1a561521",
    "all": "f211d8ae5d50341e"
   },
   "walk_sam_guitar.moment": {
    "text": "69ab32c0f1cbaded",
+   "traits": "6f7af508d18adad9",
    "facts": "d7cad9c09e1fa5f5",
    "facts2": "5f663059e865650b",
    "all": "3573714eae2e9b62"
   },
   "walk_sam_guitar.truth": {
    "text": "e016e4a384c76f5d",
+   "traits": "6f7af508d18adad9",
    "facts": "d7cad9c09e1fa5f5",
    "facts2": "5f663059e865650b",
    "all": "1bdfba8ad34381d4"
   },
   "walk_sam_guitar.lie": {
    "text": "ff4b07dc46d973bb",
+   "traits": "6f7af508d18adad9",
    "facts": "d7cad9c09e1fa5f5",
    "facts2": "5f663059e865650b",
    "all": "699783f6b8e86e21"
   },
   "walk_zoe_outfits.moment": {
    "text": "ec952fe2a4d06cb3",
+   "traits": "6b1e34b018661933",
    "facts": "df3581105d9dfadd",
    "facts2": "fc2568396f51a2d0",
    "all": "401817391aed5c77"
   },
   "walk_zoe_outfits.pick": {
    "text": "978b696710c9dd35",
+   "traits": "6b1e34b018661933",
    "facts": "df3581105d9dfadd",
    "facts2": "fc2568396f51a2d0",
    "all": "d7e2533ce8d974d2"
   },
   "walk_zoe_outfits.wearing": {
    "text": "3a0d5226aca5520b",
+   "traits": "6b1e34b018661933",
    "facts": "df3581105d9dfadd",
    "facts2": "fc2568396f51a2d0",
    "all": "9c240cea7fd1b670"
   },
   "walk_tom_tips.moment": {
    "text": "637c649000b1e35c",
+   "traits": "d99594b509571563",
    "facts": "67efda545284e49f",
    "facts2": "841fd9234a0769d8",
    "all": "b1c35126b2d249e7"
   },
   "walk_tom_tips.nothing": {
    "text": "fa8ca988d2f4f9f9",
+   "traits": "d99594b509571563",
    "facts": "67efda545284e49f",
    "facts2": "841fd9234a0769d8",
    "all": "1f927f8798a64046"
   },
   "walk_tom_tips.tips": {
    "text": "68624b9a4f3575bd",
+   "traits": "d99594b509571563",
    "facts": "67efda545284e49f",
    "facts2": "841fd9234a0769d8",
    "all": "cdd3601d8a52e654"
   },
   "walk_chris_store.moment": {
    "text": "4c809b4b45992e40",
+   "traits": "1d58a0fd6061427e",
    "facts": "b6edc19b7be2164c",
    "facts2": "d822bf3cee64d8d0",
    "all": "5d7b3e1334d1a2c0"
   },
   "walk_chris_store.watch": {
    "text": "9b2403ef6baafab3",
+   "traits": "1d58a0fd6061427e",
    "facts": "b6edc19b7be2164c",
    "facts2": "d822bf3cee64d8d0",
    "all": "2dd8d80b04b44875"
   },
   "walk_chris_store.out": {
    "text": "d9f71de48cbbf4b5",
+   "traits": "44136fa355b3678a",
    "facts": "b1f7fb4ecb1af6a5",
    "facts2": "b1f7fb4ecb1af6a5",
    "all": "bfa0b731487eb6ff"
   },
   "walk_party_bathroom.moment": {
    "text": "f6af71a8b6945c65",
+   "traits": "44136fa355b3678a",
    "facts": "9a06232c9ed28deb",
    "facts2": "9a06232c9ed28deb",
    "all": "0e9dd7921c11e6d8"
   },
   "walk_party_bathroom.watch": {
    "text": "5470dd6e70f6f160",
+   "traits": "44136fa355b3678a",
    "facts": "9a06232c9ed28deb",
    "facts2": "9a06232c9ed28deb",
    "all": "0246182d3765b1d4"
   },
   "walk_party_bathroom.shut": {
    "text": "7b1a4995952aeebe",
+   "traits": "44136fa355b3678a",
    "facts": "9a06232c9ed28deb",
    "facts2": "9a06232c9ed28deb",
    "all": "5c1041b3545e8873"
   },
-  "*": "7a234a261151cb35"
+  "*": "e39b1811db9c46c7"
  },
  "rows": {
   "B1": "5276068df1ca6fa9",
@@ -216,7 +234,7 @@
   "C644": "f5e1d79f3251dbab",
   "C596": "e5f7e6cf2d01613d",
   "C2179": "47b9477e3ec8a790",
-  "C2183": "40172c2d376bfc32",
+  "C2194": "0c03931191c53a34",
   "C1340": "b76a6583ae88c60f",
   "C769": "f6b6f78a8f2e5ed7",
   "C794": "bad76e5963432385",
@@ -2623,7 +2641,7 @@
     "all": "5d7b3e1334d1a2c0"
    },
    "row_hash": "612394eef6826900",
-   "carried": false,
+   "carried": true,
    "pass": 6
   },
   {
@@ -2641,7 +2659,7 @@
     "all": "0e9dd7921c11e6d8"
    },
    "row_hash": "612394eef6826900",
-   "carried": false,
+   "carried": true,
    "pass": 6
   },
   {
@@ -2659,7 +2677,7 @@
     "all": "3573714eae2e9b62"
    },
    "row_hash": "612394eef6826900",
-   "carried": false,
+   "carried": true,
    "pass": 6
   },
   {
@@ -2677,7 +2695,7 @@
     "all": "b1c35126b2d249e7"
    },
    "row_hash": "612394eef6826900",
-   "carried": false,
+   "carried": true,
    "pass": 6
   },
   {
@@ -2695,7 +2713,7 @@
     "all": "401817391aed5c77"
    },
    "row_hash": "612394eef6826900",
-   "carried": false,
+   "carried": true,
    "pass": 6
   },
   {
@@ -2713,7 +2731,7 @@
     "all": "6db71aaf2430d594"
    },
    "row_hash": "612394eef6826900",
-   "carried": false,
+   "carried": true,
    "pass": 6
   },
   {
@@ -2731,7 +2749,7 @@
     "all": "5d7b3e1334d1a2c0"
    },
    "row_hash": "20748838895e4545",
-   "carried": false,
+   "carried": true,
    "pass": 6
   },
   {
@@ -2749,7 +2767,7 @@
     "all": "0e9dd7921c11e6d8"
    },
    "row_hash": "20748838895e4545",
-   "carried": false,
+   "carried": true,
    "pass": 6
   },
   {
@@ -2767,7 +2785,7 @@
     "all": "3573714eae2e9b62"
    },
    "row_hash": "20748838895e4545",
-   "carried": false,
+   "carried": true,
    "pass": 6
   },
   {
@@ -2785,7 +2803,7 @@
     "all": "b1c35126b2d249e7"
    },
    "row_hash": "20748838895e4545",
-   "carried": false,
+   "carried": true,
    "pass": 6
   },
   {
@@ -2803,7 +2821,7 @@
     "all": "401817391aed5c77"
    },
    "row_hash": "20748838895e4545",
-   "carried": false,
+   "carried": true,
    "pass": 6
   },
   {
@@ -2821,8 +2839,350 @@
     "all": "6db71aaf2430d594"
    },
    "row_hash": "20748838895e4545",
-   "carried": false,
+   "carried": true,
    "pass": 6
+  },
+  {
+   "row": "C2194",
+   "screen": "walk_chris_store.moment",
+   "verdict": "PASS",
+   "line": "Five minutes. Then the shop.",
+   "why": "Chris: Takes charge (has her pinned against the shelves), Pushy.",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "4c809b4b45992e40",
+    "traits": "1d58a0fd6061427e",
+    "facts": "b6edc19b7be2164c",
+    "facts2": "d822bf3cee64d8d0",
+    "all": "5d7b3e1334d1a2c0"
+   },
+   "row_hash": "0c03931191c53a34",
+   "carried": false,
+   "pass": 7
+  },
+  {
+   "row": "C2194",
+   "screen": "walk_chris_store.out",
+   "verdict": "PASS",
+   "line": "The shelf rattles behind the door.",
+   "why": "Chris: no line; fine.",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "d9f71de48cbbf4b5",
+    "traits": "44136fa355b3678a",
+    "facts": "b1f7fb4ecb1af6a5",
+    "facts2": "b1f7fb4ecb1af6a5",
+    "all": "bfa0b731487eb6ff"
+   },
+   "row_hash": "0c03931191c53a34",
+   "carried": false,
+   "pass": 7
+  },
+  {
+   "row": "C2194",
+   "screen": "walk_chris_store.watch",
+   "verdict": "PASS",
+   "line": "That's it. Come for me.",
+   "why": "Chris: Takes charge.",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "9b2403ef6baafab3",
+    "traits": "1d58a0fd6061427e",
+    "facts": "b6edc19b7be2164c",
+    "facts2": "d822bf3cee64d8d0",
+    "all": "2dd8d80b04b44875"
+   },
+   "row_hash": "0c03931191c53a34",
+   "carried": false,
+   "pass": 7
+  },
+  {
+   "row": "C2194",
+   "screen": "walk_party_bathroom.moment",
+   "verdict": "PASS",
+   "line": "Don't stop. Someone's going to \u2014 don't stop. Please.",
+   "why": "Strangers; no words.",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "f6af71a8b6945c65",
+    "traits": "44136fa355b3678a",
+    "facts": "9a06232c9ed28deb",
+    "facts2": "9a06232c9ed28deb",
+    "all": "0e9dd7921c11e6d8"
+   },
+   "row_hash": "0c03931191c53a34",
+   "carried": false,
+   "pass": 7
+  },
+  {
+   "row": "C2194",
+   "screen": "walk_party_bathroom.shut",
+   "verdict": "PASS",
+   "line": "You know that door now.",
+   "why": "No named person.",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "7b1a4995952aeebe",
+    "traits": "44136fa355b3678a",
+    "facts": "9a06232c9ed28deb",
+    "facts2": "9a06232c9ed28deb",
+    "all": "5c1041b3545e8873"
+   },
+   "row_hash": "0c03931191c53a34",
+   "carried": false,
+   "pass": 7
+  },
+  {
+   "row": "C2194",
+   "screen": "walk_party_bathroom.watch",
+   "verdict": "PASS",
+   "line": "Fuck. Oh, fuck. Yes. Yes. God.",
+   "why": "Strangers; no words.",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "5470dd6e70f6f160",
+    "traits": "44136fa355b3678a",
+    "facts": "9a06232c9ed28deb",
+    "facts2": "9a06232c9ed28deb",
+    "all": "0246182d3765b1d4"
+   },
+   "row_hash": "0c03931191c53a34",
+   "carried": false,
+   "pass": 7
+  },
+  {
+   "row": "C2194",
+   "screen": "walk_sam_guitar.lie",
+   "verdict": "PASS",
+   "line": "Liar. I like you.",
+   "why": "Sam: Arty (plays it again, worse).",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "ff4b07dc46d973bb",
+    "traits": "6f7af508d18adad9",
+    "facts": "d7cad9c09e1fa5f5",
+    "facts2": "5f663059e865650b",
+    "all": "699783f6b8e86e21"
+   },
+   "row_hash": "0c03931191c53a34",
+   "carried": false,
+   "pass": 7
+  },
+  {
+   "row": "C2194",
+   "screen": "walk_sam_guitar.moment",
+   "verdict": "PASS",
+   "line": "Be honest, sunshine. Was that a song?",
+   "why": "Sam: Arty (a guitar he can't play).",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "69ab32c0f1cbaded",
+    "traits": "6f7af508d18adad9",
+    "facts": "d7cad9c09e1fa5f5",
+    "facts2": "5f663059e865650b",
+    "all": "3573714eae2e9b62"
+   },
+   "row_hash": "0c03931191c53a34",
+   "carried": false,
+   "pass": 7
+  },
+  {
+   "row": "C2194",
+   "screen": "walk_sam_guitar.truth",
+   "verdict": "PASS",
+   "line": "Brutal. Correct. Again tomorrow.",
+   "why": "Sam: Arty.",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "e016e4a384c76f5d",
+    "traits": "6f7af508d18adad9",
+    "facts": "d7cad9c09e1fa5f5",
+    "facts2": "5f663059e865650b",
+    "all": "1bdfba8ad34381d4"
+   },
+   "row_hash": "0c03931191c53a34",
+   "carried": false,
+   "pass": 7
+  },
+  {
+   "row": "C2194",
+   "screen": "walk_tom_tips.moment",
+   "verdict": "PASS",
+   "line": "Long day. Don't look at me like that.",
+   "why": "Tom: Sly (two bills into his own pocket), Pushy.",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "637c649000b1e35c",
+    "traits": "d99594b509571563",
+    "facts": "67efda545284e49f",
+    "facts2": "841fd9234a0769d8",
+    "all": "b1c35126b2d249e7"
+   },
+   "row_hash": "0c03931191c53a34",
+   "carried": false,
+   "pass": 7
+  },
+  {
+   "row": "C2194",
+   "screen": "walk_tom_tips.nothing",
+   "verdict": "PASS",
+   "line": "He knows you saw. He'll be watching you next shift.",
+   "why": "Tom: Sly.",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "fa8ca988d2f4f9f9",
+    "traits": "d99594b509571563",
+    "facts": "67efda545284e49f",
+    "facts2": "841fd9234a0769d8",
+    "all": "1f927f8798a64046"
+   },
+   "row_hash": "0c03931191c53a34",
+   "carried": false,
+   "pass": 7
+  },
+  {
+   "row": "C2194",
+   "screen": "walk_tom_tips.tips",
+   "verdict": "PASS",
+   "line": "And I'm the one who pays the rent on this place.",
+   "why": "Tom: Pushy, Sly (doesn't put them back).",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "68624b9a4f3575bd",
+    "traits": "d99594b509571563",
+    "facts": "67efda545284e49f",
+    "facts2": "841fd9234a0769d8",
+    "all": "cdd3601d8a52e654"
+   },
+   "row_hash": "0c03931191c53a34",
+   "carried": false,
+   "pass": 7
+  },
+  {
+   "row": "C2194",
+   "screen": "walk_zoe_outfits.moment",
+   "verdict": "PASS",
+   "line": "Which one says I don't care, babe?",
+   "why": "Zoe: Show-off (at the mirror in her underwear, three outfits).",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "ec952fe2a4d06cb3",
+    "traits": "6b1e34b018661933",
+    "facts": "df3581105d9dfadd",
+    "facts2": "fc2568396f51a2d0",
+    "all": "401817391aed5c77"
+   },
+   "row_hash": "0c03931191c53a34",
+   "carried": false,
+   "pass": 7
+  },
+  {
+   "row": "C2194",
+   "screen": "walk_zoe_outfits.pick",
+   "verdict": "PASS",
+   "line": "Obviously. You get me.",
+   "why": "Zoe: Show-off.",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "978b696710c9dd35",
+    "traits": "6b1e34b018661933",
+    "facts": "df3581105d9dfadd",
+    "facts2": "fc2568396f51a2d0",
+    "all": "d7e2533ce8d974d2"
+   },
+   "row_hash": "0c03931191c53a34",
+   "carried": false,
+   "pass": 7
+  },
+  {
+   "row": "C2194",
+   "screen": "walk_zoe_outfits.wearing",
+   "verdict": "PASS",
+   "line": "She doesn't put anything on.",
+   "why": "Zoe: Show-off.",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "3a0d5226aca5520b",
+    "traits": "6b1e34b018661933",
+    "facts": "df3581105d9dfadd",
+    "facts2": "fc2568396f51a2d0",
+    "all": "9c240cea7fd1b670"
+   },
+   "row_hash": "0c03931191c53a34",
+   "carried": false,
+   "pass": 7
+  },
+  {
+   "row": "C2194",
+   "screen": "walk_zoe_sam.moment",
+   "verdict": "PASS",
+   "line": "Don't you dare come yet. Don't you dare. Not yet.",
+   "why": "Zoe: Show-off (the hall door half open). Sam: No strings, with Zoe.",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "2b0c8d6243d39d82",
+    "traits": "fa1a0a429fa0ea30",
+    "facts": "c3521100b11dca8e",
+    "facts2": "48fd486abd7e2f3c",
+    "all": "6db71aaf2430d594"
+   },
+   "row_hash": "0c03931191c53a34",
+   "carried": false,
+   "pass": 7
+  },
+  {
+   "row": "C2194",
+   "screen": "walk_zoe_sam.out",
+   "verdict": "PASS",
+   "line": "She'll know you were there. Zoe always knows.",
+   "why": "Zoe: Show-off.",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "f05502845e21c4bb",
+    "traits": "6b1e34b018661933",
+    "facts": "5c0a642e2e7923fd",
+    "facts2": "f9f6cd7a1a561521",
+    "all": "f211d8ae5d50341e"
+   },
+   "row_hash": "0c03931191c53a34",
+   "carried": false,
+   "pass": 7
+  },
+  {
+   "row": "C2194",
+   "screen": "walk_zoe_sam.watch",
+   "verdict": "PASS",
+   "line": "Fuck, Sam. Fuck.",
+   "why": "Zoe: Show-off. Sam: shows none beyond the act, fine.",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "751705d646ffe903",
+    "traits": "fa1a0a429fa0ea30",
+    "facts": "c3521100b11dca8e",
+    "facts2": "48fd486abd7e2f3c",
+    "all": "e0161ca9d4f016b3"
+   },
+   "row_hash": "0c03931191c53a34",
+   "carried": false,
+   "pass": 7
   },
   {
    "row": "C286",
@@ -5436,8 +5796,8 @@
  ],
  "causes": [],
  "pending": [],
- "asked": 2,
- "answered": 2,
+ "asked": 1,
+ "answered": 1,
  "pass_items": [],
  "unowed": []
 }

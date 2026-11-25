@@ -67,22 +67,84 @@ Everyone is 18 or over, and the game says so.
 
 **The people system** (P48; LO, typed in main-lean 2026-11-25: "Yes lets move to cot style type system", "Meter
 frozen", "i say three", "Go ahead with your picks", "Yes to both A and B"). `[engine.people] system = "cot"`: every
-person has friendship, lust and control on -1000..1000, gender, attracted, age, and 1–4 fixed traits; what they want
+person has friendship, lust and control on -1000..1000, gender, attracted, age, and 2–4 hidden trait words (P50); what they want
 from her is worked out by the engine (none is hand-set). Release 1 moves none of it. Full per-person table, with the
 line behind each trait: `cards/P48.md`.
 
-| type | friendship | lust | control | number traits it draws from |
+| type | friendship | lust | control | trait words it draws from |
 |---|---|---|---|---|
-| Family, parent | 300 | 0 | 200 | Submissive, Dominant, Confident |
-| Family, sibling | 0 | 0 | 0 | Submissive, Switch |
-| Faculty (professor, intimacy 0) | 0 | 0 | 150 | Dominant, Confident, Sadist, Switch, Forward |
-| Student | 0 | 0 | 0 | Submissive, Switch, Strictly Casual, Confident |
-| Worker (over her) | 50 | 0 | 250 | Forward, Confident, Dominant |
-| Town (neighbours, shops) | 0 | 0 | 0 | Forward, Dominant, Strictly Casual, Confident |
-| Rival | -150 | 0 | 0 | Forward, Dominant, Submissive |
+| Family, parent | 300 | 0 | 200 | Warm, Gives way, Strict, Takes charge, Cook |
+| Family, sibling | 0 | 0 | 0 | Shy, Gives way, Gamer |
+| Faculty (professor, intimacy 0) | 0 | 0 | 150 | Strict, Takes charge, Pushy, Warm, Sly, Bookish, Arty |
+| Student | 0 | 0 | 0 | Warm, Pushy, Nervous, Gives way, No strings, Show-off, Arty |
+| Worker (over her) | 50 | 0 | 250 | Pushy, Sly, Takes charge |
+| Town (neighbours, shops) | 0 | 0 | 0 | Pushy, Takes charge, Watcher, Gossip, Sly, Show-off, Warm, Cook, Sporty |
+| Rival | -150 | 0 | 0 | Mean, Pushy, Takes charge, Shy, Gives way |
 
-Manner and hobby traits (Cook, Insecure, Gamer, Bully, Particular, Nerd, Wordsmith, Artistic, Bragger, Stoner, Sporty,
-Shy) are given only where a written scene shows them.
+The CoT trait names P48 first used are replaced by the game's own words below (P50).
+
+### Trait words (P50; LO, typed in main-lean 2026-11-26: "Hide them dont show them, they are for us", "yes fine")
+The game's own list, LO's call. The author's brief for each person's scenes; the player never sees them
+(`show_traits = false`). Each is a row in `[engine.people.traits.<Word>]`; the sets and the node check are on
+`cards/P50.md` (C2193, C2194).
+
+| word | how they act |
+|---|---|
+| Pushy | Takes the lead with her, says what they want, doesn't wait to be asked. |
+| Shy | Looks away, says little, waits for her to speak first. |
+| Nervous | Unsure of themselves; asks for reassurance, second-guesses. |
+| Warm | Looks after her: food, a seat, a warning; glad to see her. |
+| Mean | Enjoys putting her down, best in front of others. |
+| Strict | Rules, orders, checks up on her; things done their way. |
+| Gossip | What she does gets told to someone, usually Mark. |
+| Sly | Hides something, or takes what isn't theirs; a little underhand. |
+| Takes charge | With her body, they lead and move her where they want her. |
+| Gives way | Yields to whoever's stronger; follows, goes along. |
+| No strings | Won't be tied to one person; nobody owns them. |
+| Watcher | Their eyes are on her whenever she passes, and they don't hide it. |
+| Show-off | Wants to be looked at: the party, the dress, the open door. |
+| Gamer | Into games: the controller is where you find them and what they talk about. |
+| Cook | Into cooking: the stove is where you find them and what they talk about. |
+| Sporty | Into training: the gym is where you find them and what they talk about. |
+| Bookish | Into books and numbers: their talk is the work. |
+| Arty | Into making something: the stage, the guitar. |
+
+Each person's words, with the line that shows each (C2193):
+  Laura: Warm ("Sit with me a minute, baby."), Nervous ("Tell me one good thing. Just one."), Gives way (P38: "Then be
+    quiet, Laura. Be quiet for me."), Cook ("Mom's at the stove.")
+  Mark: Strict ("Straight A's don't pay rent."), Takes charge (P38, his hand over her mouth; "One way or another")
+  Ryan: Shy ("Sorry. I didn't— Sorry.", his ears pink), Gives way (backs off every time), Gamer ("on the couch with a
+    controller")
+  Tom: Pushy ("Good answer. I'm Tom. I run the place."), Sly (P41, walk_tom_tips: "two of the bills fold into his own shirt pocket.")
+  Chris: Pushy ("Entertain me. Go on, I'm bored."), Takes charge ("Tom says you're mine to train.")
+  Dr. Hale: Takes charge ("Young lady. In here a minute."), Strict ("Either take notes or take a seat down here.")
+  Mr. Pratt: Strict ("I take attendance, and I notice who isn't here."), Bookish ("fills three whiteboards with numbers")
+  Prof. Walsh: Strict ("I read every word of it"), Warm ("I'd rather hear how you're doing from you"), Bookish (takes an
+    essay apart line by line)
+  Mr. Cross: Pushy ("Louder."), Takes charge ("makes you say the line three times"), Strict ("the same four lines, over
+    and over"), Arty (runs the drama class)
+  Ms. Holt: Strict ("No food, no phones, no noise."), Sly (the romance novel inside the library-science cover)
+  Dean Sterling: Strict ("Dress like a student, not like a guest."), Takes charge ("Classes are not optional, child.")
+  Nadia: Warm (saves the seat; "Trust me."), Pushy ("Sit here, freshman. Not the front."), Gives way ("Last spring it
+    was me.")
+  Zoe: Show-off ("Zoe throws these every week"; dancing "like the party's hers"), No strings ("Sam's not mine. Nobody's
+    mine.")
+  Sam: No strings (grins at "Nobody's mine"), Arty ("a guitar he can't play")
+  Jake: Nervous ("With me, I mean." / "Okay. Okay, good."), Gives way ("my friends dared me")
+  Brooke: Mean ("Did you get dressed in the dark?"), Pushy (opens on Ella in front of everyone), Takes charge (owns the
+    mirror; "Cat got your tongue, princess?")
+  Kayla: Mean ("Kayla laughs." at the insult), Gives way (holds Brooke's bag)
+  Tess: Shy ("says less"; "Tess doesn't [laugh]"), Gives way (does Brooke's lashes)
+  Mr. Vance: Pushy ("Come here a minute, little lady."), Takes charge ("I'm the one who knocks."), Watcher ("His eyes
+    stay on your legs the whole time you answer.")
+  Frank: Gossip ("Oh, I'll tell him you were in."), Watcher ("Everybody knows what everybody buys.")
+  Danny: Pushy ("Hey, gorgeous."), Sly ("something small goes one way, a fold of notes the other")
+  Marco: Takes charge ("Lower. Lower." and his hands on her hips), Show-off ("Look all you want. Everyone does."),
+    Sporty (the trainer)
+  Nina: Pushy ("Let me see. Come on, I won't tell."), Show-off ("in the shop's tightest black dress, turning to check her
+    ass in the mirror")
+  Rosa: Warm ("Here, take a roll."), Pushy ("Eat all of it. I'll know."), Cook (the counter)
+
 Tuned after the readings (start values must agree with the scenes): Tom, Sam and Ryan start at lust 100, and Ms. Holt
 is attracted with lust 100, each for a look on screen (Ryan's eyes on her chest, his ears pink: he hides it, so "at the
 start: nothing from her" still holds). Mark stays at lust 0: his watching reads as control.

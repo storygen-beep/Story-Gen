@@ -1,20 +1,22 @@
 {
  "piece": "P24",
- "pass": 7,
+ "pass": 8,
  "screens": {
   "street_meet_vance.porch": {
    "text": "7af09b116a009078",
+   "traits": "d9172dabbd56b049",
    "facts": "2ee087ec13324ad3",
    "facts2": "6e3e94c479380b40",
    "all": "c1590395ef1a9662"
   },
   "street_meet_vance.after": {
    "text": "85b9adf466332500",
+   "traits": "d9172dabbd56b049",
    "facts": "321ed9a358837a70",
    "facts2": "f55cd6e88bd630e6",
    "all": "956130e88f8c543a"
   },
-  "*": "6dceda6d9f108f92"
+  "*": "e509ac21a754e448"
  },
  "rows": {
   "B1": "5276068df1ca6fa9",
@@ -118,7 +120,7 @@
   "C644": "f5e1d79f3251dbab",
   "C596": "e5f7e6cf2d01613d",
   "C2179": "47b9477e3ec8a790",
-  "C2183": "40172c2d376bfc32",
+  "C2194": "0c03931191c53a34",
   "C448": "b86596f1a02766de",
   "L168": "444c44970dc284f2",
   "L169": "59defccfc63b0454",
@@ -993,7 +995,7 @@
     "all": "c1590395ef1a9662"
    },
    "row_hash": "612394eef6826900",
-   "carried": false,
+   "carried": true,
    "pass": 7
   },
   {
@@ -1011,8 +1013,46 @@
     "all": "c1590395ef1a9662"
    },
    "row_hash": "452a5657d7527351",
-   "carried": false,
+   "carried": true,
    "pass": 7
+  },
+  {
+   "row": "C2194",
+   "screen": "street_meet_vance.after",
+   "verdict": "PASS",
+   "line": "Your stepdad pays me, and when he doesn't, I'm the one who knocks.",
+   "why": "Mr. Vance: Takes charge, Watcher ('You feel his eyes all the way down the street'), Pushy ('I'll see you next Sunday, little lady').",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "85b9adf466332500",
+    "traits": "d9172dabbd56b049",
+    "facts": "321ed9a358837a70",
+    "facts2": "f55cd6e88bd630e6",
+    "all": "956130e88f8c543a"
+   },
+   "row_hash": "0c03931191c53a34",
+   "carried": false,
+   "pass": 8
+  },
+  {
+   "row": "C2194",
+   "screen": "street_meet_vance.porch",
+   "verdict": "PASS",
+   "line": "Come here a minute, little lady.",
+   "why": "Mr. Vance: Pushy, Watcher (eyes over her legs, taking their time).",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "7af09b116a009078",
+    "traits": "d9172dabbd56b049",
+    "facts": "2ee087ec13324ad3",
+    "facts2": "6e3e94c479380b40",
+    "all": "c1590395ef1a9662"
+   },
+   "row_hash": "0c03931191c53a34",
+   "carried": false,
+   "pass": 8
   },
   {
    "row": "C286",
@@ -2219,8 +2259,8 @@
  ],
  "causes": [],
  "pending": [],
- "asked": 2,
- "answered": 2,
+ "asked": 1,
+ "answered": 1,
  "pass_items": [],
  "unowed": []
 }

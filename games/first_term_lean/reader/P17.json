@@ -1,20 +1,22 @@
 {
  "piece": "P17",
- "pass": 7,
+ "pass": 8,
  "screens": {
   "drama_first.name": {
    "text": "7a2f62e5ee575f8a",
+   "traits": "2875b58584de3c6e",
    "facts": "f44b1d2b9b200264",
    "facts2": "5c64fc8c02202032",
    "all": "0ed5613ce14acc0c"
   },
   "drama_first.class": {
    "text": "2169397d9f5735c0",
+   "traits": "2875b58584de3c6e",
    "facts": "a5795dab8aa2122b",
    "facts2": "525918bf83170956",
    "all": "ddd491fa223cc642"
   },
-  "*": "efc115ad39b4f18f"
+  "*": "631e002f938f0b7c"
  },
  "rows": {
   "B1": "5276068df1ca6fa9",
@@ -118,7 +120,7 @@
   "C644": "f5e1d79f3251dbab",
   "C596": "e5f7e6cf2d01613d",
   "C2179": "47b9477e3ec8a790",
-  "C2183": "40172c2d376bfc32",
+  "C2194": "0c03931191c53a34",
   "C448": "b86596f1a02766de",
   "L168": "444c44970dc284f2",
   "L169": "59defccfc63b0454",
@@ -913,7 +915,7 @@
     "all": "0ed5613ce14acc0c"
    },
    "row_hash": "612394eef6826900",
-   "carried": false,
+   "carried": true,
    "pass": 7
   },
   {
@@ -931,8 +933,46 @@
     "all": "0ed5613ce14acc0c"
    },
    "row_hash": "452a5657d7527351",
-   "carried": false,
+   "carried": true,
    "pass": 7
+  },
+  {
+   "row": "C2194",
+   "screen": "drama_first.class",
+   "verdict": "PASS",
+   "line": "New face. You've got a voice. Let's find out what else you've got.",
+   "why": "Mr. Cross: Pushy ('Louder.'), Takes charge (eyes down her body and back), Strict ('That's how loud I want everything'), Arty (the rehearsals).",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "2169397d9f5735c0",
+    "traits": "2875b58584de3c6e",
+    "facts": "a5795dab8aa2122b",
+    "facts2": "525918bf83170956",
+    "all": "ddd491fa223cc642"
+   },
+   "row_hash": "0c03931191c53a34",
+   "carried": false,
+   "pass": 8
+  },
+  {
+   "row": "C2194",
+   "screen": "drama_first.name",
+   "verdict": "PASS",
+   "line": "Phones away. Up on the stage with the others.",
+   "why": "Mr. Cross: Strict, Pushy ('You. New face. Name?'), Arty (the black box), Takes charge (watches her walk down, doesn't pretend).",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "7a2f62e5ee575f8a",
+    "traits": "2875b58584de3c6e",
+    "facts": "f44b1d2b9b200264",
+    "facts2": "5c64fc8c02202032",
+    "all": "0ed5613ce14acc0c"
+   },
+   "row_hash": "0c03931191c53a34",
+   "carried": false,
+   "pass": 8
   },
   {
    "row": "C286",
@@ -2364,8 +2404,8 @@
  ],
  "causes": [],
  "pending": [],
- "asked": 2,
- "answered": 2,
+ "asked": 1,
+ "answered": 1,
  "pass_items": [],
  "unowed": []
 }

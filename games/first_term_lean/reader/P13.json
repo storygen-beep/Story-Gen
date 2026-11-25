@@ -1,104 +1,120 @@
 {
  "piece": "P13",
- "pass": 15,
+ "pass": 16,
  "screens": {
   "opening.wake": {
    "text": "cc3c063d9cef0f23",
+   "traits": "44136fa355b3678a",
    "facts": "e0c40fd7cb43a940",
    "facts2": "e0c40fd7cb43a940",
    "all": "5ad514c74be46beb"
   },
   "opening.kitchen_rent": {
    "text": "7dab9336c6fbdb16",
+   "traits": "4b9cc244e3119951",
    "facts": "da1cfb7a102ff170",
    "facts2": "28ed02d1a88a3f81",
    "all": "8ea96985f6740d9d"
   },
   "opening.kitchen_ask": {
    "text": "737b667eb08c1d74",
+   "traits": "4b9cc244e3119951",
    "facts": "759a78cf2143e75e",
    "facts2": "36f7ec77b178d1d1",
    "all": "9eaf6148f8a161fd"
   },
   "opening.bath_grades": {
    "text": "1a3987499f46332b",
+   "traits": "4b9cc244e3119951",
    "facts": "d5a16b7efb87ff6f",
    "facts2": "a2cd57059ffe69d0",
    "all": "73c769880c579b83"
   },
   "opening.bath_fun": {
    "text": "17255da5baf577ef",
+   "traits": "4b9cc244e3119951",
    "facts": "c50d6e9dd7a776d7",
    "facts2": "c4179ed1944bd65d",
    "all": "b18aff50f616de96"
   },
   "opening.bath_freedom": {
    "text": "6c5bc6bd3a083efe",
+   "traits": "4b9cc244e3119951",
    "facts": "9600e3fd7a6c0269",
    "facts2": "04a70f82ac72f733",
    "all": "d1bf2a6c2e9fa772"
   },
   "opening.bath": {
    "text": "d00f9006696d287d",
+   "traits": "74c4f68e6476ecee",
    "facts": "00a0cc4b2413ad24",
    "facts2": "dc68f2478bb0beee",
    "all": "d6df99d748d72072"
   },
   "opening.hall": {
    "text": "20fd03b2cbe8ed50",
+   "traits": "74c4f68e6476ecee",
    "facts": "a48d9175e172fcd4",
    "facts2": "faa3710528b4391d",
    "all": "e37cfcfd09a2e7e9"
   },
   "opening.room_past": {
    "text": "82c1b173aeb2608a",
+   "traits": "74c4f68e6476ecee",
    "facts": "a750571fad7d54ca",
    "facts2": "2fdf350e1ea5b88c",
    "all": "a27ffea7ce0a38ef"
   },
   "opening.room_spoke": {
    "text": "2124ff3068418da1",
+   "traits": "74c4f68e6476ecee",
    "facts": "200e4791dfa8f630",
    "facts2": "eb146d82a84d7006",
    "all": "060327233d4bbc89"
   },
   "opening.room_waited": {
    "text": "c5a401b11c0eddc1",
+   "traits": "74c4f68e6476ecee",
    "facts": "6ceaa94af5f3a6ff",
    "facts2": "596365ec34442151",
    "all": "df92e7415262c5ca"
   },
   "opening.room": {
    "text": "38c16857e4551e5b",
+   "traits": "44136fa355b3678a",
    "facts": "23b2193f30810469",
    "facts2": "23b2193f30810469",
    "all": "7009aa5d2b0cc2a5"
   },
   "opening.sums": {
    "text": "48aa23cc99bd631e",
+   "traits": "a13af4c65af9f24a",
    "facts": "74439f927ebafbee",
    "facts2": "802ea4adb13e9ebb",
    "all": "4a1ccc16bcecd3d1"
   },
   "opening.handover": {
    "text": "1d46c3684cfbd5e4",
+   "traits": "4b9cc244e3119951",
    "facts": "0d4375cd17e8168c",
    "facts2": "b45e59d07967e1bd",
    "all": "f1b6cc134aa762b1"
   },
   "opening.sit_with_mom": {
    "text": "8b7efbc159662aff",
+   "traits": "4b9cc244e3119951",
    "facts": "205cda2d0ab371fa",
    "facts2": "2d32621c3aac450e",
    "all": "42c6b4e9e45977c2"
   },
   "opening.ask_mom": {
    "text": "e6801fa98e7f89b1",
+   "traits": "95f1c22815f415ed",
    "facts": "83ee1658d95c2630",
    "facts2": "4a5c000f046f1be5",
    "all": "dea9963b899e2bc8"
   },
-  "*": "b14489ed33620279"
+  "*": "311ba6621c8f265f"
  },
  "rows": {
   "B1": "5276068df1ca6fa9",
@@ -230,7 +246,7 @@
   "C644": "f5e1d79f3251dbab",
   "C596": "e5f7e6cf2d01613d",
   "C2179": "47b9477e3ec8a790",
-  "C2183": "40172c2d376bfc32",
+  "C2194": "0c03931191c53a34",
   "C448": "b86596f1a02766de",
   "L168": "444c44970dc284f2",
   "L169": "59defccfc63b0454",
@@ -2533,7 +2549,7 @@
    "note": false,
    "screen_hash": null,
    "row_hash": "452a5657d7527351",
-   "carried": false,
+   "carried": true,
    "pass": 15
   },
   {
@@ -2546,7 +2562,7 @@
    "note": false,
    "screen_hash": null,
    "row_hash": "452a5657d7527351",
-   "carried": false,
+   "carried": true,
    "pass": 15
   },
   {
@@ -2559,7 +2575,7 @@
    "note": false,
    "screen_hash": null,
    "row_hash": "452a5657d7527351",
-   "carried": false,
+   "carried": true,
    "pass": 15
   },
   {
@@ -2577,8 +2593,274 @@
     "all": "5ad514c74be46beb"
    },
    "row_hash": "452a5657d7527351",
-   "carried": false,
+   "carried": true,
    "pass": 15
+  },
+  {
+   "row": "C2194",
+   "screen": "opening.ask_mom",
+   "verdict": "PASS",
+   "line": "Doesn't matter, baby. Eat something. You'll be late. Go on.",
+   "why": "Laura: Warm (food, the dean warning), Nervous (won't look at her; turns the tap on hard).",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "e6801fa98e7f89b1",
+    "traits": "95f1c22815f415ed",
+    "facts": "83ee1658d95c2630",
+    "facts2": "4a5c000f046f1be5",
+    "all": "dea9963b899e2bc8"
+   },
+   "row_hash": "0c03931191c53a34",
+   "carried": false,
+   "pass": 16
+  },
+  {
+   "row": "C2194",
+   "screen": "opening.bath",
+   "verdict": "PASS",
+   "line": "Come on, I'm dying out here.",
+   "why": "Ryan: shows none of his words here, and that's fine: he bangs on a shared bathroom door he can't see through, a sibling's morning, two short lines. His Shy shows the moment he sees her (opening.hall).",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "d00f9006696d287d",
+    "traits": "74c4f68e6476ecee",
+    "facts": "00a0cc4b2413ad24",
+    "facts2": "dc68f2478bb0beee",
+    "all": "d6df99d748d72072"
+   },
+   "row_hash": "0c03931191c53a34",
+   "carried": false,
+   "pass": 16
+  },
+  {
+   "row": "C2194",
+   "screen": "opening.bath_freedom",
+   "verdict": "PASS",
+   "line": "This is your home, baby. / Then pay for it.",
+   "why": "Laura: Warm ('This is your home, baby'), Nervous (the stiff smile). Mark: Strict ('Then pay for it.').",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "6c5bc6bd3a083efe",
+    "traits": "4b9cc244e3119951",
+    "facts": "9600e3fd7a6c0269",
+    "facts2": "04a70f82ac72f733",
+    "all": "d1bf2a6c2e9fa772"
+   },
+   "row_hash": "0c03931191c53a34",
+   "carried": false,
+   "pass": 16
+  },
+  {
+   "row": "C2194",
+   "screen": "opening.bath_fun",
+   "verdict": "PASS",
+   "line": "Parties cost money, kid.",
+   "why": "Laura: Nervous ('it comes out nervous'). Mark: Strict.",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "17255da5baf577ef",
+    "traits": "4b9cc244e3119951",
+    "facts": "c50d6e9dd7a776d7",
+    "facts2": "c4179ed1944bd65d",
+    "all": "b18aff50f616de96"
+   },
+   "row_hash": "0c03931191c53a34",
+   "carried": false,
+   "pass": 16
+  },
+  {
+   "row": "C2194",
+   "screen": "opening.bath_grades",
+   "verdict": "PASS",
+   "line": "Straight A's don't pay rent.",
+   "why": "Laura: Warm (squeezes her arm). Mark: Strict.",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "1a3987499f46332b",
+    "traits": "4b9cc244e3119951",
+    "facts": "d5a16b7efb87ff6f",
+    "facts2": "a2cd57059ffe69d0",
+    "all": "73c769880c579b83"
+   },
+   "row_hash": "0c03931191c53a34",
+   "carried": false,
+   "pass": 16
+  },
+  {
+   "row": "C2194",
+   "screen": "opening.hall",
+   "verdict": "PASS",
+   "line": "He stares at the ceiling, and his ears go red.",
+   "why": "Ryan: Shy (eyes drop one second, then the ceiling, red ears, 'Sorry'), Gives way ('I'll wait. Go.').",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "20fd03b2cbe8ed50",
+    "traits": "74c4f68e6476ecee",
+    "facts": "a48d9175e172fcd4",
+    "facts2": "faa3710528b4391d",
+    "all": "e37cfcfd09a2e7e9"
+   },
+   "row_hash": "0c03931191c53a34",
+   "carried": false,
+   "pass": 16
+  },
+  {
+   "row": "C2194",
+   "screen": "opening.handover",
+   "verdict": "PASS",
+   "line": "There's toast. Eat before you go looking.",
+   "why": "Laura: Warm (toast), Nervous (dries the same plate twice), Gives way ('He means it. I tried.'). Mark named as gone: no line.",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "1d46c3684cfbd5e4",
+    "traits": "4b9cc244e3119951",
+    "facts": "0d4375cd17e8168c",
+    "facts2": "b45e59d07967e1bd",
+    "all": "f1b6cc134aa762b1"
+   },
+   "row_hash": "0c03931191c53a34",
+   "carried": false,
+   "pass": 16
+  },
+  {
+   "row": "C2194",
+   "screen": "opening.kitchen_ask",
+   "verdict": "PASS",
+   "line": "Just... promise me you'll still be the girl you were in high school.",
+   "why": "Laura: Nervous ('too bright'; asks for a promise), Cook (the spatula). Mark: 'He's listening.' Strict (checking on her), no break.",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "737b667eb08c1d74",
+    "traits": "4b9cc244e3119951",
+    "facts": "759a78cf2143e75e",
+    "facts2": "36f7ec77b178d1d1",
+    "all": "9eaf6148f8a161fd"
+   },
+   "row_hash": "0c03931191c53a34",
+   "carried": false,
+   "pass": 16
+  },
+  {
+   "row": "C2194",
+   "screen": "opening.kitchen_rent",
+   "verdict": "PASS",
+   "line": "One way or another. Your mother thinks I'm joking. I'm not.",
+   "why": "Mark: Strict (the rent), Takes charge ('One way or another'). Laura: Cook (at the stove), Gives way (keeps her back to it).",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "7dab9336c6fbdb16",
+    "traits": "4b9cc244e3119951",
+    "facts": "da1cfb7a102ff170",
+    "facts2": "28ed02d1a88a3f81",
+    "all": "8ea96985f6740d9d"
+   },
+   "row_hash": "0c03931191c53a34",
+   "carried": false,
+   "pass": 16
+  },
+  {
+   "row": "C2194",
+   "screen": "opening.room_past",
+   "verdict": "PASS",
+   "line": "Ryan's eyes are on the ceiling, and they stay there.",
+   "why": "Ryan: Shy ('Sorry. I didn't\u2014 Sorry.' to the ceiling), Gives way (flattens himself against the wall).",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "82c1b173aeb2608a",
+    "traits": "74c4f68e6476ecee",
+    "facts": "a750571fad7d54ca",
+    "facts2": "2fdf350e1ea5b88c",
+    "all": "a27ffea7ce0a38ef"
+   },
+   "row_hash": "0c03931191c53a34",
+   "carried": false,
+   "pass": 16
+  },
+  {
+   "row": "C2194",
+   "screen": "opening.room_spoke",
+   "verdict": "PASS",
+   "line": "His eyes never leave the door.",
+   "why": "Ryan: Shy, Gives way (turns to the door and waits for her to move).",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "2124ff3068418da1",
+    "traits": "74c4f68e6476ecee",
+    "facts": "200e4791dfa8f630",
+    "facts2": "eb146d82a84d7006",
+    "all": "060327233d4bbc89"
+   },
+   "row_hash": "0c03931191c53a34",
+   "carried": false,
+   "pass": 16
+  },
+  {
+   "row": "C2194",
+   "screen": "opening.room_waited",
+   "verdict": "PASS",
+   "line": "He doesn't look once.",
+   "why": "Ryan: Shy (eyes to the light switch; 'Take your time.' said to it), Gives way.",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "c5a401b11c0eddc1",
+    "traits": "74c4f68e6476ecee",
+    "facts": "6ceaa94af5f3a6ff",
+    "facts2": "596365ec34442151",
+    "all": "df92e7415262c5ca"
+   },
+   "row_hash": "0c03931191c53a34",
+   "carried": false,
+   "pass": 16
+  },
+  {
+   "row": "C2194",
+   "screen": "opening.sit_with_mom",
+   "verdict": "PASS",
+   "line": "If Mark says anything to you about the money, you tell me first. Okay? Promise me.",
+   "why": "Laura: Warm (slides the toast over; the dean), Nervous (talks about anything but Mark; 'Promise me').",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "8b7efbc159662aff",
+    "traits": "4b9cc244e3119951",
+    "facts": "205cda2d0ab371fa",
+    "facts2": "2d32621c3aac450e",
+    "all": "42c6b4e9e45977c2"
+   },
+   "row_hash": "0c03931191c53a34",
+   "carried": false,
+   "pass": 16
+  },
+  {
+   "row": "C2194",
+   "screen": "opening.sums",
+   "verdict": "PASS",
+   "line": "Mark said \"one way or another\" like he'd already picked one.",
+   "why": "Mark (named, not on screen): Takes charge, as on opening.kitchen_rent. No line breaks a word.",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "48aa23cc99bd631e",
+    "traits": "a13af4c65af9f24a",
+    "facts": "74439f927ebafbee",
+    "facts2": "802ea4adb13e9ebb",
+    "all": "4a1ccc16bcecd3d1"
+   },
+   "row_hash": "0c03931191c53a34",
+   "carried": false,
+   "pass": 16
   },
   {
    "row": "C286",

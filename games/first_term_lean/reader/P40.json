@@ -1,116 +1,134 @@
 {
  "piece": "P40",
- "pass": 7,
+ "pass": 8,
  "screens": {
   "walk_stacks.moment": {
    "text": "8e809e12139051bc",
+   "traits": "44136fa355b3678a",
    "facts": "94fc5e907f77da68",
    "facts2": "94fc5e907f77da68",
    "all": "b7d9ea415d2c4b39"
   },
   "walk_stacks.watch": {
    "text": "8b03230da292270b",
+   "traits": "44136fa355b3678a",
    "facts": "94fc5e907f77da68",
    "facts2": "94fc5e907f77da68",
    "all": "a85a6c519be9c9cd"
   },
   "walk_stacks.away": {
    "text": "277e2ec2f9ef49e5",
+   "traits": "44136fa355b3678a",
    "facts": "94fc5e907f77da68",
    "facts2": "94fc5e907f77da68",
    "all": "8c0d20c57e7740c3"
   },
   "walk_hale_note.moment": {
    "text": "1dc73ddab0950d62",
+   "traits": "838782b7308b47e0",
    "facts": "42567a3208a6dab9",
    "facts2": "b471247d8c9ddba2",
    "all": "13af75175d9374f8"
   },
   "walk_hale_note.knock": {
    "text": "b2f952756bcfcfd6",
+   "traits": "825724317465730d",
    "facts": "7291ac6ca70bd782",
    "facts2": "0d1b466dbc39c306",
    "all": "d7cdeb3050cf2802"
   },
   "walk_hale_note.walkon": {
    "text": "6fc017edf4ddcdc0",
+   "traits": "44136fa355b3678a",
    "facts": "ffe40e2b4d3d9199",
    "facts2": "ffe40e2b4d3d9199",
    "all": "b3989ddfc8341e91"
   },
   "walk_holt_novel.moment": {
    "text": "21c1635a47813e19",
+   "traits": "f6d8d0533b3ef51b",
    "facts": "f2f993e2387bf270",
    "facts2": "5ddca7caca4503ee",
    "all": "1b2935b493699631"
   },
   "walk_holt_novel.ask": {
    "text": "9dc023606cb8714d",
+   "traits": "f6d8d0533b3ef51b",
    "facts": "f2f993e2387bf270",
    "facts2": "5ddca7caca4503ee",
    "all": "faa142475b47ad02"
   },
   "walk_holt_novel.leave": {
    "text": "0e2e766021935b24",
+   "traits": "f6d8d0533b3ef51b",
    "facts": "f2f993e2387bf270",
    "facts2": "5ddca7caca4503ee",
    "all": "e4a9c7e6f469f9da"
   },
   "walk_mirror_girls.moment": {
    "text": "c323d543424379ab",
+   "traits": "9e12469ed756975c",
    "facts": "0ec0e8a07b88427d",
    "facts2": "c3e641b9202c38c9",
    "all": "ad2df7f9e343f1a0"
   },
   "walk_mirror_girls.beside": {
    "text": "b41754b47ac5db86",
+   "traits": "ebc4051ecd3afac5",
    "facts": "63b70900fab98401",
    "facts2": "1c8286cebcac9810",
    "all": "13cd073ccfdefb99"
   },
   "walk_mirror_girls.leave": {
    "text": "324af59133152f55",
+   "traits": "44136fa355b3678a",
    "facts": "6b4cf4fa7c891d9f",
    "facts2": "6b4cf4fa7c891d9f",
    "all": "e9b1f0bc5017e1da"
   },
   "walk_cross_brooke.moment": {
    "text": "734afbbfc200cb7d",
+   "traits": "e6b79f0e524c6de5",
    "facts": "53fbf715bd6b1c0c",
    "facts2": "7d5f431740948a39",
    "all": "529f9288a0c9bf07"
   },
   "walk_cross_brooke.watch": {
    "text": "aa9c7f832d0e0045",
+   "traits": "44136fa355b3678a",
    "facts": "e27a8e51e6c466bf",
    "facts2": "e27a8e51e6c466bf",
    "all": "5021c056e338ce68"
   },
   "walk_cross_brooke.leave": {
    "text": "c0112c78a7691d76",
+   "traits": "44136fa355b3678a",
    "facts": "e27a8e51e6c466bf",
    "facts2": "e27a8e51e6c466bf",
    "all": "524ffb2c4de245f5"
   },
   "walk_cross_seats.moment": {
    "text": "400d1f890ad37714",
+   "traits": "2875b58584de3c6e",
    "facts": "5654cde95f9c7420",
    "facts2": "b88955853267c1db",
    "all": "f2ddf0ee5bece44d"
   },
   "walk_cross_seats.again": {
    "text": "9b7c4d3d893714ee",
+   "traits": "2875b58584de3c6e",
    "facts": "5654cde95f9c7420",
    "facts2": "b88955853267c1db",
    "all": "45729f9d08d27174"
   },
   "walk_cross_seats.off": {
    "text": "a8195d7accc0f1b1",
+   "traits": "2875b58584de3c6e",
    "facts": "5654cde95f9c7420",
    "facts2": "b88955853267c1db",
    "all": "c49004075617357d"
   },
-  "*": "a8a5679d45e51806"
+  "*": "f07ac627253a5561"
  },
  "rows": {
   "B1": "5276068df1ca6fa9",
@@ -210,7 +228,7 @@
   "C644": "f5e1d79f3251dbab",
   "C596": "e5f7e6cf2d01613d",
   "C2179": "47b9477e3ec8a790",
-  "C2183": "40172c2d376bfc32",
+  "C2194": "0c03931191c53a34",
   "C1340": "b76a6583ae88c60f",
   "C769": "f6b6f78a8f2e5ed7",
   "C794": "bad76e5963432385",
@@ -2518,7 +2536,7 @@
     "all": "529f9288a0c9bf07"
    },
    "row_hash": "612394eef6826900",
-   "carried": false,
+   "carried": true,
    "pass": 7
   },
   {
@@ -2536,7 +2554,7 @@
     "all": "f2ddf0ee5bece44d"
    },
    "row_hash": "612394eef6826900",
-   "carried": false,
+   "carried": true,
    "pass": 7
   },
   {
@@ -2554,7 +2572,7 @@
     "all": "13af75175d9374f8"
    },
    "row_hash": "612394eef6826900",
-   "carried": false,
+   "carried": true,
    "pass": 7
   },
   {
@@ -2572,7 +2590,7 @@
     "all": "1b2935b493699631"
    },
    "row_hash": "612394eef6826900",
-   "carried": false,
+   "carried": true,
    "pass": 7
   },
   {
@@ -2590,7 +2608,7 @@
     "all": "ad2df7f9e343f1a0"
    },
    "row_hash": "612394eef6826900",
-   "carried": false,
+   "carried": true,
    "pass": 7
   },
   {
@@ -2608,7 +2626,7 @@
     "all": "b7d9ea415d2c4b39"
    },
    "row_hash": "612394eef6826900",
-   "carried": false,
+   "carried": true,
    "pass": 7
   },
   {
@@ -2626,7 +2644,7 @@
     "all": "529f9288a0c9bf07"
    },
    "row_hash": "20748838895e4545",
-   "carried": false,
+   "carried": true,
    "pass": 7
   },
   {
@@ -2644,7 +2662,7 @@
     "all": "f2ddf0ee5bece44d"
    },
    "row_hash": "20748838895e4545",
-   "carried": false,
+   "carried": true,
    "pass": 7
   },
   {
@@ -2662,7 +2680,7 @@
     "all": "13af75175d9374f8"
    },
    "row_hash": "20748838895e4545",
-   "carried": false,
+   "carried": true,
    "pass": 7
   },
   {
@@ -2680,7 +2698,7 @@
     "all": "1b2935b493699631"
    },
    "row_hash": "20748838895e4545",
-   "carried": false,
+   "carried": true,
    "pass": 7
   },
   {
@@ -2698,7 +2716,7 @@
     "all": "ad2df7f9e343f1a0"
    },
    "row_hash": "20748838895e4545",
-   "carried": false,
+   "carried": true,
    "pass": 7
   },
   {
@@ -2716,8 +2734,350 @@
     "all": "b7d9ea415d2c4b39"
    },
    "row_hash": "20748838895e4545",
-   "carried": false,
+   "carried": true,
    "pass": 7
+  },
+  {
+   "row": "C2194",
+   "screen": "walk_cross_brooke.leave",
+   "verdict": "PASS",
+   "line": "You can still hear him: 'Again.'",
+   "why": "Mr. Cross: Strict.",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "c0112c78a7691d76",
+    "traits": "44136fa355b3678a",
+    "facts": "e27a8e51e6c466bf",
+    "facts2": "e27a8e51e6c466bf",
+    "all": "524ffb2c4de245f5"
+   },
+   "row_hash": "0c03931191c53a34",
+   "carried": false,
+   "pass": 8
+  },
+  {
+   "row": "C2194",
+   "screen": "walk_cross_brooke.moment",
+   "verdict": "PASS",
+   "line": "his hand on her waist to place her, staying.",
+   "why": "Mr. Cross: Takes charge, Strict ('Again. Slower.'), Arty. Brooke: Pushy ('I always mean it.').",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "734afbbfc200cb7d",
+    "traits": "e6b79f0e524c6de5",
+    "facts": "53fbf715bd6b1c0c",
+    "facts2": "7d5f431740948a39",
+    "all": "529f9288a0c9bf07"
+   },
+   "row_hash": "0c03931191c53a34",
+   "carried": false,
+   "pass": 8
+  },
+  {
+   "row": "C2194",
+   "screen": "walk_cross_brooke.watch",
+   "verdict": "PASS",
+   "line": "he looks up into the dark seats, straight at you.",
+   "why": "Mr. Cross: Takes charge.",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "aa9c7f832d0e0045",
+    "traits": "44136fa355b3678a",
+    "facts": "e27a8e51e6c466bf",
+    "facts2": "e27a8e51e6c466bf",
+    "all": "5021c056e338ce68"
+   },
+   "row_hash": "0c03931191c53a34",
+   "carried": false,
+   "pass": 8
+  },
+  {
+   "row": "C2194",
+   "screen": "walk_cross_seats.again",
+   "verdict": "PASS",
+   "line": "Better. See you at two, new face.",
+   "why": "Mr. Cross: Strict, Pushy.",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "9b7c4d3d893714ee",
+    "traits": "2875b58584de3c6e",
+    "facts": "5654cde95f9c7420",
+    "facts2": "b88955853267c1db",
+    "all": "45729f9d08d27174"
+   },
+   "row_hash": "0c03931191c53a34",
+   "carried": false,
+   "pass": 8
+  },
+  {
+   "row": "C2194",
+   "screen": "walk_cross_seats.moment",
+   "verdict": "PASS",
+   "line": "Again. Louder. You stopped meaning it halfway.",
+   "why": "Mr. Cross: Pushy, Strict, Arty.",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "400d1f890ad37714",
+    "traits": "2875b58584de3c6e",
+    "facts": "5654cde95f9c7420",
+    "facts2": "b88955853267c1db",
+    "all": "f2ddf0ee5bece44d"
+   },
+   "row_hash": "0c03931191c53a34",
+   "carried": false,
+   "pass": 8
+  },
+  {
+   "row": "C2194",
+   "screen": "walk_cross_seats.off",
+   "verdict": "PASS",
+   "line": "Shame. You were getting somewhere.",
+   "why": "Mr. Cross: Pushy.",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "a8195d7accc0f1b1",
+    "traits": "2875b58584de3c6e",
+    "facts": "5654cde95f9c7420",
+    "facts2": "b88955853267c1db",
+    "all": "c49004075617357d"
+   },
+   "row_hash": "0c03931191c53a34",
+   "carried": false,
+   "pass": 8
+  },
+  {
+   "row": "C2194",
+   "screen": "walk_hale_note.knock",
+   "verdict": "PASS",
+   "line": "Young lady. Come back with a real question, and I'll have an answer.",
+   "why": "Dr. Hale: Strict, Takes charge (closes the file).",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "b2f952756bcfcfd6",
+    "traits": "825724317465730d",
+    "facts": "7291ac6ca70bd782",
+    "facts2": "0d1b466dbc39c306",
+    "all": "d7cdeb3050cf2802"
+   },
+   "row_hash": "0c03931191c53a34",
+   "carried": false,
+   "pass": 8
+  },
+  {
+   "row": "C2194",
+   "screen": "walk_hale_note.moment",
+   "verdict": "PASS",
+   "line": "Door's open for a reason. Come in or don't.",
+   "why": "Dr. Hale: Takes charge.",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "1dc73ddab0950d62",
+    "traits": "838782b7308b47e0",
+    "facts": "42567a3208a6dab9",
+    "facts2": "b471247d8c9ddba2",
+    "all": "13af75175d9374f8"
+   },
+   "row_hash": "0c03931191c53a34",
+   "carried": false,
+   "pass": 8
+  },
+  {
+   "row": "C2194",
+   "screen": "walk_hale_note.walkon",
+   "verdict": "PASS",
+   "line": "You know the name on it.",
+   "why": "Dr. Hale: no line; fine.",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "6fc017edf4ddcdc0",
+    "traits": "44136fa355b3678a",
+    "facts": "ffe40e2b4d3d9199",
+    "facts2": "ffe40e2b4d3d9199",
+    "all": "b3989ddfc8341e91"
+   },
+   "row_hash": "0c03931191c53a34",
+   "carried": false,
+   "pass": 8
+  },
+  {
+   "row": "C2194",
+   "screen": "walk_holt_novel.ask",
+   "verdict": "PASS",
+   "line": "Research, hon. He's about to take her on a horse.",
+   "why": "Ms. Holt: Sly (the novel, 'Research').",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "9dc023606cb8714d",
+    "traits": "f6d8d0533b3ef51b",
+    "facts": "f2f993e2387bf270",
+    "facts2": "5ddca7caca4503ee",
+    "all": "faa142475b47ad02"
+   },
+   "row_hash": "0c03931191c53a34",
+   "carried": false,
+   "pass": 8
+  },
+  {
+   "row": "C2194",
+   "screen": "walk_holt_novel.leave",
+   "verdict": "PASS",
+   "line": "Smart girl.",
+   "why": "Ms. Holt: Strict, Sly.",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "0e2e766021935b24",
+    "traits": "f6d8d0533b3ef51b",
+    "facts": "f2f993e2387bf270",
+    "facts2": "5ddca7caca4503ee",
+    "all": "e4a9c7e6f469f9da"
+   },
+   "row_hash": "0c03931191c53a34",
+   "carried": false,
+   "pass": 8
+  },
+  {
+   "row": "C2194",
+   "screen": "walk_holt_novel.moment",
+   "verdict": "PASS",
+   "line": "Don't you say a word, hon.",
+   "why": "Ms. Holt: Sly (the romance inside the library-science book), Strict.",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "21c1635a47813e19",
+    "traits": "f6d8d0533b3ef51b",
+    "facts": "f2f993e2387bf270",
+    "facts2": "5ddca7caca4503ee",
+    "all": "1b2935b493699631"
+   },
+   "row_hash": "0c03931191c53a34",
+   "carried": false,
+   "pass": 8
+  },
+  {
+   "row": "C2194",
+   "screen": "walk_mirror_girls.beside",
+   "verdict": "PASS",
+   "line": "Nobody says anything to you. It's louder than if they had.",
+   "why": "Brooke: Mean (the silence, her eyes in the mirror). Kayla, Tess: Gives way.",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "b41754b47ac5db86",
+    "traits": "ebc4051ecd3afac5",
+    "facts": "63b70900fab98401",
+    "facts2": "1c8286cebcac9810",
+    "all": "13cd073ccfdefb99"
+   },
+   "row_hash": "0c03931191c53a34",
+   "carried": false,
+   "pass": 8
+  },
+  {
+   "row": "C2194",
+   "screen": "walk_mirror_girls.leave",
+   "verdict": "PASS",
+   "line": "The laugh starts before the door shuts.",
+   "why": "Brooke, Kayla: Mean.",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "324af59133152f55",
+    "traits": "44136fa355b3678a",
+    "facts": "6b4cf4fa7c891d9f",
+    "facts2": "6b4cf4fa7c891d9f",
+    "all": "e9b1f0bc5017e1da"
+   },
+   "row_hash": "0c03931191c53a34",
+   "carried": false,
+   "pass": 8
+  },
+  {
+   "row": "C2194",
+   "screen": "walk_mirror_girls.moment",
+   "verdict": "PASS",
+   "line": "He says a lot of things. He'll learn.",
+   "why": "Brooke: Takes charge. Kayla: Gives way (holds the bag). Tess: Gives way (does Brooke's lashes), Shy (no line).",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "c323d543424379ab",
+    "traits": "9e12469ed756975c",
+    "facts": "0ec0e8a07b88427d",
+    "facts2": "c3e641b9202c38c9",
+    "all": "ad2df7f9e343f1a0"
+   },
+   "row_hash": "0c03931191c53a34",
+   "carried": false,
+   "pass": 8
+  },
+  {
+   "row": "C2194",
+   "screen": "walk_stacks.away",
+   "verdict": "PASS",
+   "line": "You know which shelf now.",
+   "why": "Strangers; no words.",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "277e2ec2f9ef49e5",
+    "traits": "44136fa355b3678a",
+    "facts": "94fc5e907f77da68",
+    "facts2": "94fc5e907f77da68",
+    "all": "8c0d20c57e7740c3"
+   },
+   "row_hash": "0c03931191c53a34",
+   "carried": false,
+   "pass": 8
+  },
+  {
+   "row": "C2194",
+   "screen": "walk_stacks.moment",
+   "verdict": "PASS",
+   "line": "Let them. Let them watch. Harder. Fuck.",
+   "why": "Strangers, not among the 24; no words to keep.",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "8e809e12139051bc",
+    "traits": "44136fa355b3678a",
+    "facts": "94fc5e907f77da68",
+    "facts2": "94fc5e907f77da68",
+    "all": "b7d9ea415d2c4b39"
+   },
+   "row_hash": "0c03931191c53a34",
+   "carried": false,
+   "pass": 8
+  },
+  {
+   "row": "C2194",
+   "screen": "walk_stacks.watch",
+   "verdict": "PASS",
+   "line": "God. God, don't stop. God. Yes.",
+   "why": "Strangers; no words.",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "8b03230da292270b",
+    "traits": "44136fa355b3678a",
+    "facts": "94fc5e907f77da68",
+    "facts2": "94fc5e907f77da68",
+    "all": "a85a6c519be9c9cd"
+   },
+   "row_hash": "0c03931191c53a34",
+   "carried": false,
+   "pass": 8
   },
   {
    "row": "C286",
@@ -6212,8 +6572,8 @@
  ],
  "causes": [],
  "pending": [],
- "asked": 2,
- "answered": 2,
+ "asked": 1,
+ "answered": 1,
  "pass_items": [],
  "unowed": []
 }

@@ -1,20 +1,22 @@
 {
  "piece": "P35",
- "pass": 8,
+ "pass": 9,
  "screens": {
   "shop_meet_nina.meet": {
    "text": "ea4eb3bb92b30114",
+   "traits": "01d024bf2eee28fd",
    "facts": "754ef4fb7dffe814",
    "facts2": "598a0f6135f4e548",
    "all": "dbb4266ea86f2d20"
   },
   "shop_try_on.try": {
    "text": "bda7f715eddbba10",
+   "traits": "01d024bf2eee28fd",
    "facts": "861abe73330f8e00",
    "facts2": "6fe90f26ec6d12ed",
    "all": "6442aa25e1b725eb"
   },
-  "*": "8f3b8a1cfc9561b7"
+  "*": "491c3a036d302c50"
  },
  "rows": {
   "B1": "5276068df1ca6fa9",
@@ -124,7 +126,7 @@
   "C644": "f5e1d79f3251dbab",
   "C596": "e5f7e6cf2d01613d",
   "C2179": "47b9477e3ec8a790",
-  "C2183": "40172c2d376bfc32",
+  "C2194": "0c03931191c53a34",
   "C448": "b86596f1a02766de",
   "L168": "444c44970dc284f2",
   "L169": "59defccfc63b0454",
@@ -1441,7 +1443,7 @@
     "all": "dbb4266ea86f2d20"
    },
    "row_hash": "20748838895e4545",
-   "carried": false,
+   "carried": true,
    "pass": 8
   },
   {
@@ -1459,7 +1461,7 @@
     "all": "6442aa25e1b725eb"
    },
    "row_hash": "20748838895e4545",
-   "carried": false,
+   "carried": true,
    "pass": 8
   },
   {
@@ -1472,7 +1474,7 @@
    "note": false,
    "screen_hash": null,
    "row_hash": "452a5657d7527351",
-   "carried": false,
+   "carried": true,
    "pass": 8
   },
   {
@@ -1485,7 +1487,7 @@
    "note": false,
    "screen_hash": null,
    "row_hash": "452a5657d7527351",
-   "carried": false,
+   "carried": true,
    "pass": 8
   },
   {
@@ -1503,7 +1505,7 @@
     "all": "dbb4266ea86f2d20"
    },
    "row_hash": "452a5657d7527351",
-   "carried": false,
+   "carried": true,
    "pass": 8
   },
   {
@@ -1521,8 +1523,46 @@
     "all": "6442aa25e1b725eb"
    },
    "row_hash": "452a5657d7527351",
-   "carried": false,
+   "carried": true,
    "pass": 8
+  },
+  {
+   "row": "C2194",
+   "screen": "shop_meet_nina.meet",
+   "verdict": "PASS",
+   "line": "The good stuff's at the back, and it isn't for everyone.",
+   "why": "Nina: Show-off (a black dress two sizes too confident), Pushy (looks her up and down and doesn't hide it).",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "ea4eb3bb92b30114",
+    "traits": "01d024bf2eee28fd",
+    "facts": "754ef4fb7dffe814",
+    "facts2": "598a0f6135f4e548",
+    "all": "dbb4266ea86f2d20"
+   },
+   "row_hash": "0c03931191c53a34",
+   "carried": false,
+   "pass": 9
+  },
+  {
+   "row": "C2194",
+   "screen": "shop_try_on.try",
+   "verdict": "PASS",
+   "line": "Let me see. Come on, I won't tell.",
+   "why": "Nina: Pushy ('Your loss, sweetie. Next time, then.').",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "bda7f715eddbba10",
+    "traits": "01d024bf2eee28fd",
+    "facts": "861abe73330f8e00",
+    "facts2": "6fe90f26ec6d12ed",
+    "all": "6442aa25e1b725eb"
+   },
+   "row_hash": "0c03931191c53a34",
+   "carried": false,
+   "pass": 9
   },
   {
    "row": "C286",
@@ -2871,8 +2911,8 @@
  ],
  "causes": [],
  "pending": [],
- "asked": 2,
- "answered": 2,
+ "asked": 1,
+ "answered": 1,
  "pass_items": [],
  "unowed": []
 }

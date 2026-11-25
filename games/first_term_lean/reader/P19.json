@@ -1,20 +1,22 @@
 {
  "piece": "P19",
- "pass": 6,
+ "pass": 7,
  "screens": {
   "cafeteria_meet_rosa.meet": {
    "text": "b626daf6602713a3",
+   "traits": "0d86d720cd5d73aa",
    "facts": "515715e73cf05730",
    "facts2": "1b927de09fedcd26",
    "all": "d4caa8c046ffd471"
   },
   "cafeteria_meet_rosa.after": {
    "text": "40b129a8944f8d9a",
+   "traits": "0d86d720cd5d73aa",
    "facts": "e242f10b8347d9fd",
    "facts2": "7407c20b0dd18e4a",
    "all": "49ea2b2f4b7153d9"
   },
-  "*": "bd97e663ef3c384f"
+  "*": "4f6d0b349e1d97a2"
  },
  "rows": {
   "B1": "5276068df1ca6fa9",
@@ -106,7 +108,7 @@
   "C644": "f5e1d79f3251dbab",
   "C596": "e5f7e6cf2d01613d",
   "C2179": "47b9477e3ec8a790",
-  "C2183": "40172c2d376bfc32",
+  "C2194": "0c03931191c53a34",
   "C448": "b86596f1a02766de",
   "L168": "444c44970dc284f2",
   "L169": "59defccfc63b0454",
@@ -970,7 +972,7 @@
     "all": "d4caa8c046ffd471"
    },
    "row_hash": "612394eef6826900",
-   "carried": false,
+   "carried": true,
    "pass": 6
   },
   {
@@ -988,8 +990,46 @@
     "all": "d4caa8c046ffd471"
    },
    "row_hash": "452a5657d7527351",
-   "carried": false,
+   "carried": true,
    "pass": 6
+  },
+  {
+   "row": "C2194",
+   "screen": "cafeteria_meet_rosa.after",
+   "verdict": "PASS",
+   "line": "Eat all of it. I'll know.",
+   "why": "Rosa: Pushy, Warm (presses the roll into her hand even when she says nothing), Cook (the counter). 'Your loss.' with a shrug is Pushy, not a break of Warm.",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "40b129a8944f8d9a",
+    "traits": "0d86d720cd5d73aa",
+    "facts": "e242f10b8347d9fd",
+    "facts2": "7407c20b0dd18e4a",
+    "all": "49ea2b2f4b7153d9"
+   },
+   "row_hash": "0c03931191c53a34",
+   "carried": false,
+   "pass": 7
+  },
+  {
+   "row": "C2194",
+   "screen": "cafeteria_meet_rosa.meet",
+   "verdict": "PASS",
+   "line": "You're too skinny for this place, mija. Here, take a roll.",
+   "why": "Rosa: Warm (food, 'mija'), Pushy, Cook.",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "b626daf6602713a3",
+    "traits": "0d86d720cd5d73aa",
+    "facts": "515715e73cf05730",
+    "facts2": "1b927de09fedcd26",
+    "all": "d4caa8c046ffd471"
+   },
+   "row_hash": "0c03931191c53a34",
+   "carried": false,
+   "pass": 7
   },
   {
    "row": "C422",
@@ -2319,8 +2359,8 @@
  ],
  "causes": [],
  "pending": [],
- "asked": 2,
- "answered": 2,
+ "asked": 1,
+ "answered": 1,
  "pass_items": [],
  "unowed": []
 }

@@ -1,50 +1,57 @@
 {
  "piece": "P33",
- "pass": 13,
+ "pass": 14,
  "screens": {
   "body_run.run": {
    "text": "30c91aa93a1f5b0b",
+   "traits": "44136fa355b3678a",
    "facts": "45173fb43c5513f5",
    "facts2": "45173fb43c5513f5",
    "all": "b184641b5e03737b"
   },
   "body_workout.lift": {
    "text": "b0c43c3aa325a5e3",
+   "traits": "44136fa355b3678a",
    "facts": "c4485366da85d0a9",
    "facts2": "c4485366da85d0a9",
    "all": "2caea444a4dc620d"
   },
   "body_mirror.fix": {
    "text": "b734d31c0a6da3e7",
+   "traits": "44136fa355b3678a",
    "facts": "23d6f286c33663c4",
    "facts2": "23d6f286c33663c4",
    "all": "728675dd261fe40d"
   },
   "body_snack.eat": {
    "text": "28ae2143b3c8a2ae",
+   "traits": "44136fa355b3678a",
    "facts": "fb7389f7fdd9b7e8",
    "facts2": "fb7389f7fdd9b7e8",
    "all": "37438349bb3dee9c"
   },
   "body_coffee.drink": {
    "text": "e594dcddd110c9d7",
+   "traits": "7b42410c0bd9090b",
    "facts": "3d15ca8d6434585e",
    "facts2": "889defec3931010e",
    "all": "78169f3a60359c09"
   },
   "body_lunch.eat": {
    "text": "1703e7590d5fbe02",
+   "traits": "44136fa355b3678a",
    "facts": "4607c7f9c0029b8f",
    "facts2": "4607c7f9c0029b8f",
    "all": "1ca8b72d5608e898"
   },
   "body_grass.sit": {
    "text": "762aaf6daecff423",
+   "traits": "44136fa355b3678a",
    "facts": "44eb5528a5afca5f",
    "facts2": "44eb5528a5afca5f",
    "all": "1cd7264031187857"
   },
-  "*": "4530fe64a2396078"
+  "*": "3c2bd659ec68de78"
  },
  "rows": {
   "B1": "5276068df1ca6fa9",
@@ -159,7 +166,7 @@
   "C660": "eaf957bb84e62bbf",
   "C2179": "47b9477e3ec8a790",
   "C2180": "a6c0f498d4d16271",
-  "C2183": "40172c2d376bfc32",
+  "C2194": "0c03931191c53a34",
   "C1340": "b76a6583ae88c60f",
   "C769": "f6b6f78a8f2e5ed7",
   "C794": "bad76e5963432385",
@@ -2430,8 +2437,27 @@
    "note": true,
    "screen_hash": "4530fe64a2396078",
    "row_hash": "20748838895e4545",
-   "carried": false,
+   "carried": true,
    "pass": 13
+  },
+  {
+   "row": "C2194",
+   "screen": "body_coffee.drink",
+   "verdict": "PASS",
+   "line": "Black, rookie? Don't tell me, I know.",
+   "why": "Tom: Pushy (answers for her, asks her next shift). Chris: Pushy ('For you, four.' with a wink).",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "e594dcddd110c9d7",
+    "traits": "7b42410c0bd9090b",
+    "facts": "3d15ca8d6434585e",
+    "facts2": "889defec3931010e",
+    "all": "78169f3a60359c09"
+   },
+   "row_hash": "0c03931191c53a34",
+   "carried": false,
+   "pass": 14
   },
   {
    "row": "C286",

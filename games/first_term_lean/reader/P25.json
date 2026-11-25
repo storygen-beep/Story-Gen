@@ -1,20 +1,22 @@
 {
  "piece": "P25",
- "pass": 6,
+ "pass": 7,
  "screens": {
   "quad_meet_jake.ask": {
    "text": "8894fc030db920d6",
+   "traits": "435644be785b94c8",
    "facts": "f450a59ac676a174",
    "facts2": "d12e3bf8fad210ea",
    "all": "3695e990c9a90d84"
   },
   "quad_meet_jake.after": {
    "text": "56a2a1e9b53909ca",
+   "traits": "435644be785b94c8",
    "facts": "2bb99faa28c46fca",
    "facts2": "679fc34857b92f9e",
    "all": "59df2443b3100c69"
   },
-  "*": "9a2d7e28566bccec"
+  "*": "9c2ed6a576ece78a"
  },
  "rows": {
   "B1": "5276068df1ca6fa9",
@@ -121,7 +123,7 @@
   "C644": "f5e1d79f3251dbab",
   "C596": "e5f7e6cf2d01613d",
   "C2179": "47b9477e3ec8a790",
-  "C2183": "40172c2d376bfc32",
+  "C2194": "0c03931191c53a34",
   "C448": "b86596f1a02766de",
   "L168": "444c44970dc284f2",
   "L169": "59defccfc63b0454",
@@ -1037,7 +1039,7 @@
     "all": "3695e990c9a90d84"
    },
    "row_hash": "612394eef6826900",
-   "carried": false,
+   "carried": true,
    "pass": 6
   },
   {
@@ -1050,7 +1052,7 @@
    "note": false,
    "screen_hash": null,
    "row_hash": "452a5657d7527351",
-   "carried": false,
+   "carried": true,
    "pass": 6
   },
   {
@@ -1068,8 +1070,46 @@
     "all": "3695e990c9a90d84"
    },
    "row_hash": "452a5657d7527351",
-   "carried": false,
+   "carried": true,
    "pass": 6
+  },
+  {
+   "row": "C2194",
+   "screen": "quad_meet_jake.after",
+   "verdict": "PASS",
+   "line": "Yeah? Okay. Okay, good.",
+   "why": "Jake: Nervous (didn't expect the yes), Gives way (backs off with his hands up at 'Not right now'). 'Fair warning' is a dared boy's bravado, not a break of Nervous.",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "56a2a1e9b53909ca",
+    "traits": "435644be785b94c8",
+    "facts": "2bb99faa28c46fca",
+    "facts2": "679fc34857b92f9e",
+    "all": "59df2443b3100c69"
+   },
+   "row_hash": "0c03931191c53a34",
+   "carried": false,
+   "pass": 7
+  },
+  {
+   "row": "C2194",
+   "screen": "quad_meet_jake.ask",
+   "verdict": "PASS",
+   "line": "Coffee sometime? With me, I mean.",
+   "why": "Jake: Nervous (the correction 'With me, I mean'), Gives way (his friends dared him).",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "8894fc030db920d6",
+    "traits": "435644be785b94c8",
+    "facts": "f450a59ac676a174",
+    "facts2": "d12e3bf8fad210ea",
+    "all": "3695e990c9a90d84"
+   },
+   "row_hash": "0c03931191c53a34",
+   "carried": false,
+   "pass": 7
   },
   {
    "row": "C286",
@@ -2230,8 +2270,8 @@
  ],
  "causes": [],
  "pending": [],
- "asked": 2,
- "answered": 2,
+ "asked": 1,
+ "answered": 1,
  "pass_items": [],
  "unowed": []
 }

@@ -1,32 +1,36 @@
 {
  "piece": "P15",
- "pass": 8,
+ "pass": 9,
  "screens": {
   "psych_first.seat": {
    "text": "27a88e4f60f1efff",
+   "traits": "44136fa355b3678a",
    "facts": "ebf2c8a027058eee",
    "facts2": "ebf2c8a027058eee",
    "all": "6269ae07af232e9a"
   },
   "psych_first.lecture": {
    "text": "a64e3086993e7aac",
+   "traits": "838782b7308b47e0",
    "facts": "b23ebb17c2d29ba7",
    "facts2": "4a2f3019ebcf57f7",
    "all": "1b316053b7dda9d7"
   },
   "stats_first.class": {
    "text": "e266def6233d6a3d",
+   "traits": "9814f8002b787cb3",
    "facts": "7f7ded0bf9f4d930",
    "facts2": "857f385689f8c3dc",
    "all": "844dd795f8b322fb"
   },
   "stats_first.after": {
    "text": "008fd936f1516193",
+   "traits": "9814f8002b787cb3",
    "facts": "37fe7c54c585a127",
    "facts2": "fe63bf1deb1ab5cb",
    "all": "1a54966f810f4049"
   },
-  "*": "dfad313623150c50"
+  "*": "4bdbd0743c95e90e"
  },
  "rows": {
   "B1": "5276068df1ca6fa9",
@@ -130,7 +134,7 @@
   "C644": "f5e1d79f3251dbab",
   "C596": "e5f7e6cf2d01613d",
   "C2179": "47b9477e3ec8a790",
-  "C2183": "40172c2d376bfc32",
+  "C2194": "0c03931191c53a34",
   "C448": "b86596f1a02766de",
   "L168": "444c44970dc284f2",
   "L169": "59defccfc63b0454",
@@ -1190,7 +1194,7 @@
     "all": "6269ae07af232e9a"
    },
    "row_hash": "612394eef6826900",
-   "carried": false,
+   "carried": true,
    "pass": 8
   },
   {
@@ -1208,7 +1212,7 @@
     "all": "844dd795f8b322fb"
    },
    "row_hash": "612394eef6826900",
-   "carried": false,
+   "carried": true,
    "pass": 8
   },
   {
@@ -1226,7 +1230,7 @@
     "all": "6269ae07af232e9a"
    },
    "row_hash": "452a5657d7527351",
-   "carried": false,
+   "carried": true,
    "pass": 8
   },
   {
@@ -1244,8 +1248,84 @@
     "all": "844dd795f8b322fb"
    },
    "row_hash": "452a5657d7527351",
-   "carried": false,
+   "carried": true,
    "pass": 8
+  },
+  {
+   "row": "C2194",
+   "screen": "psych_first.lecture",
+   "verdict": "PASS",
+   "line": "Some of you will surprise me. Won't you, young lady?",
+   "why": "Dr. Hale: Takes charge (his eyes on her legs, unhurried; the question). Nadia: Warm (the warning, 'Last spring it was me.'), Gives way (what happened to her last spring); Pushy not shown here, fine.",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "a64e3086993e7aac",
+    "traits": "838782b7308b47e0",
+    "facts": "b23ebb17c2d29ba7",
+    "facts2": "4a2f3019ebcf57f7",
+    "all": "1b316053b7dda9d7"
+   },
+   "row_hash": "0c03931191c53a34",
+   "carried": false,
+   "pass": 9
+  },
+  {
+   "row": "C2194",
+   "screen": "psych_first.seat",
+   "verdict": "PASS",
+   "line": "Sit here, freshman. Not the front. Trust me.",
+   "why": "Nadia (unmet): Pushy (tells her where to sit), Warm (saves the seat, the warning).",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "27a88e4f60f1efff",
+    "traits": "44136fa355b3678a",
+    "facts": "ebf2c8a027058eee",
+    "facts2": "ebf2c8a027058eee",
+    "all": "6269ae07af232e9a"
+   },
+   "row_hash": "0c03931191c53a34",
+   "carried": false,
+   "pass": 9
+  },
+  {
+   "row": "C2194",
+   "screen": "stats_first.after",
+   "verdict": "PASS",
+   "line": "Thank you. Sit where I can see you.",
+   "why": "Mr. Pratt: Strict (ticks her off, 'I'll take that as a yes'), Bookish (back to the board).",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "008fd936f1516193",
+    "traits": "9814f8002b787cb3",
+    "facts": "37fe7c54c585a127",
+    "facts2": "fe63bf1deb1ab5cb",
+    "all": "1a54966f810f4049"
+   },
+   "row_hash": "0c03931191c53a34",
+   "carried": false,
+   "pass": 9
+  },
+  {
+   "row": "C2194",
+   "screen": "stats_first.class",
+   "verdict": "PASS",
+   "line": "I take attendance, and I notice who isn't here.",
+   "why": "Mr. Pratt: Strict, Bookish (filling the whiteboard with numbers).",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "e266def6233d6a3d",
+    "traits": "9814f8002b787cb3",
+    "facts": "7f7ded0bf9f4d930",
+    "facts2": "857f385689f8c3dc",
+    "all": "844dd795f8b322fb"
+   },
+   "row_hash": "0c03931191c53a34",
+   "carried": false,
+   "pass": 9
   },
   {
    "row": "C286",
@@ -3173,8 +3253,8 @@
  ],
  "causes": [],
  "pending": [],
- "asked": 2,
- "answered": 2,
+ "asked": 1,
+ "answered": 1,
  "pass_items": [],
  "unowed": []
 }

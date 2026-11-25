@@ -1,32 +1,36 @@
 {
  "piece": "P22",
- "pass": 6,
+ "pass": 7,
  "screens": {
   "shop_meet_frank.meet": {
    "text": "91ac7305f8eebd82",
+   "traits": "aac70e7f33732b8c",
    "facts": "5f46afb0c2f96483",
    "facts2": "e2a39cf7856df31b",
    "all": "e40aa4939390a239"
   },
   "shop_meet_frank.after": {
    "text": "65b61978d543787e",
+   "traits": "894db1981578d660",
    "facts": "94f313c9c330584f",
    "facts2": "b0de75eb44281759",
    "all": "0edf95153887e801"
   },
   "shop_meet_danny.meet": {
    "text": "ec5fbbc6a3f79840",
+   "traits": "e24a6dbeedcf69e9",
    "facts": "37bac9a1e3711d03",
    "facts2": "86d4a370b5bae7c7",
    "all": "cf93f4681ff30feb"
   },
   "shop_meet_danny.after": {
    "text": "3279d643437fae5e",
+   "traits": "6789af7af3d0366b",
    "facts": "ab0da32714586e35",
    "facts2": "896e8f8ad26c5b50",
    "all": "47bc9e90a53d753b"
   },
-  "*": "883d0f34c9e9c17b"
+  "*": "7ea79c3b11c7e878"
  },
  "rows": {
   "B1": "5276068df1ca6fa9",
@@ -130,7 +134,7 @@
   "C644": "f5e1d79f3251dbab",
   "C596": "e5f7e6cf2d01613d",
   "C2179": "47b9477e3ec8a790",
-  "C2183": "40172c2d376bfc32",
+  "C2194": "0c03931191c53a34",
   "C448": "b86596f1a02766de",
   "L168": "444c44970dc284f2",
   "L169": "59defccfc63b0454",
@@ -1181,7 +1185,7 @@
     "all": "cf93f4681ff30feb"
    },
    "row_hash": "612394eef6826900",
-   "carried": false,
+   "carried": true,
    "pass": 6
   },
   {
@@ -1199,7 +1203,7 @@
     "all": "e40aa4939390a239"
    },
    "row_hash": "612394eef6826900",
-   "carried": false,
+   "carried": true,
    "pass": 6
   },
   {
@@ -1217,7 +1221,7 @@
     "all": "cf93f4681ff30feb"
    },
    "row_hash": "452a5657d7527351",
-   "carried": false,
+   "carried": true,
    "pass": 6
   },
   {
@@ -1235,8 +1239,84 @@
     "all": "e40aa4939390a239"
    },
    "row_hash": "452a5657d7527351",
-   "carried": false,
+   "carried": true,
    "pass": 6
+  },
+  {
+   "row": "C2194",
+   "screen": "shop_meet_danny.after",
+   "verdict": "PASS",
+   "line": "I'm here every evening, gorgeous.",
+   "why": "Danny: Pushy (watches her ass, fingers brush hers at the till). Sly not shown, fine on a first meeting.",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "3279d643437fae5e",
+    "traits": "6789af7af3d0366b",
+    "facts": "ab0da32714586e35",
+    "facts2": "896e8f8ad26c5b50",
+    "all": "47bc9e90a53d753b"
+   },
+   "row_hash": "0c03931191c53a34",
+   "carried": false,
+   "pass": 7
+  },
+  {
+   "row": "C2194",
+   "screen": "shop_meet_danny.meet",
+   "verdict": "PASS",
+   "line": "Hey, gorgeous. Laura's kid, right? You grew up.",
+   "why": "Danny: Pushy (eyes all the way down and back, says it unasked).",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "ec5fbbc6a3f79840",
+    "traits": "e24a6dbeedcf69e9",
+    "facts": "37bac9a1e3711d03",
+    "facts2": "86d4a370b5bae7c7",
+    "all": "cf93f4681ff30feb"
+   },
+   "row_hash": "0c03931191c53a34",
+   "carried": false,
+   "pass": 7
+  },
+  {
+   "row": "C2194",
+   "screen": "shop_meet_frank.after",
+   "verdict": "PASS",
+   "line": "Oh, I'll tell him you were in.",
+   "why": "Frank: Gossip (Mark will hear), Watcher ('Everybody knows what everybody buys'; doesn't turn the page).",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "65b61978d543787e",
+    "traits": "894db1981578d660",
+    "facts": "94f313c9c330584f",
+    "facts2": "b0de75eb44281759",
+    "all": "0edf95153887e801"
+   },
+   "row_hash": "0c03931191c53a34",
+   "carried": false,
+   "pass": 7
+  },
+  {
+   "row": "C2194",
+   "screen": "shop_meet_frank.meet",
+   "verdict": "PASS",
+   "line": "I know your stepdad, girlie. We go back.",
+   "why": "Frank: Watcher (looks at her, then the shelves, adding up a bill), Gossip (tied to Mark).",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "91ac7305f8eebd82",
+    "traits": "aac70e7f33732b8c",
+    "facts": "5f46afb0c2f96483",
+    "facts2": "e2a39cf7856df31b",
+    "all": "e40aa4939390a239"
+   },
+   "row_hash": "0c03931191c53a34",
+   "carried": false,
+   "pass": 7
   },
   {
    "row": "C286",
@@ -2920,8 +3000,8 @@
  ],
  "causes": [],
  "pending": [],
- "asked": 2,
- "answered": 2,
+ "asked": 1,
+ "answered": 1,
  "pass_items": [],
  "unowed": []
 }

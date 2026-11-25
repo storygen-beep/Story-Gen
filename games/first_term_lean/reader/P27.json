@@ -1,20 +1,22 @@
 {
  "piece": "P27",
- "pass": 6,
+ "pass": 7,
  "screens": {
   "zoe_door_sam.door": {
    "text": "04292ed529b31c40",
+   "traits": "fa1a0a429fa0ea30",
    "facts": "a31c2980eeb1cde3",
    "facts2": "b502d165d9d76b6e",
    "all": "c7ed5b6984d9681d"
   },
   "zoe_door_sam.after": {
    "text": "277e955babba12ec",
+   "traits": "fa1a0a429fa0ea30",
    "facts": "019dd13d360af645",
    "facts2": "b55c9dad2526575d",
    "all": "5d20a44c4b8b6796"
   },
-  "*": "9c3480f982f4f732"
+  "*": "4c7d10b80f2d054b"
  },
  "rows": {
   "B1": "5276068df1ca6fa9",
@@ -121,7 +123,7 @@
   "C644": "f5e1d79f3251dbab",
   "C596": "e5f7e6cf2d01613d",
   "C2179": "47b9477e3ec8a790",
-  "C2183": "40172c2d376bfc32",
+  "C2194": "0c03931191c53a34",
   "C448": "b86596f1a02766de",
   "L168": "444c44970dc284f2",
   "L169": "59defccfc63b0454",
@@ -1054,7 +1056,7 @@
     "all": "c7ed5b6984d9681d"
    },
    "row_hash": "612394eef6826900",
-   "carried": false,
+   "carried": true,
    "pass": 6
   },
   {
@@ -1067,7 +1069,7 @@
    "note": false,
    "screen_hash": null,
    "row_hash": "452a5657d7527351",
-   "carried": false,
+   "carried": true,
    "pass": 6
   },
   {
@@ -1085,8 +1087,46 @@
     "all": "c7ed5b6984d9681d"
    },
    "row_hash": "452a5657d7527351",
-   "carried": false,
+   "carried": true,
    "pass": 6
+  },
+  {
+   "row": "C2194",
+   "screen": "zoe_door_sam.after",
+   "verdict": "PASS",
+   "line": "Six o'clock, sunshine. Unless you get bored of waiting.",
+   "why": "Sam: Arty (strumming something that isn't a song). No strings not shown, fine: no one to be tied to on this screen.",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "277e955babba12ec",
+    "traits": "fa1a0a429fa0ea30",
+    "facts": "019dd13d360af645",
+    "facts2": "b55c9dad2526575d",
+    "all": "5d20a44c4b8b6796"
+   },
+   "row_hash": "0c03931191c53a34",
+   "carried": false,
+   "pass": 7
+  },
+  {
+   "row": "C2194",
+   "screen": "zoe_door_sam.door",
+   "verdict": "PASS",
+   "line": "You're the one Zoe won't shut up about. She's out, sunshine.",
+   "why": "Sam: Arty (the guitar on its strap). No strings not shown, fine.",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "04292ed529b31c40",
+    "traits": "fa1a0a429fa0ea30",
+    "facts": "a31c2980eeb1cde3",
+    "facts2": "b502d165d9d76b6e",
+    "all": "c7ed5b6984d9681d"
+   },
+   "row_hash": "0c03931191c53a34",
+   "carried": false,
+   "pass": 7
   },
   {
    "row": "C286",
@@ -2549,8 +2589,8 @@
  ],
  "causes": [],
  "pending": [],
- "asked": 2,
- "answered": 2,
+ "asked": 1,
+ "answered": 1,
  "pass_items": [],
  "unowed": []
 }

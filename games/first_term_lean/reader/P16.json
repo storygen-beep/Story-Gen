@@ -1,26 +1,29 @@
 {
  "piece": "P16",
- "pass": 6,
+ "pass": 7,
  "screens": {
   "english_first.sheet": {
    "text": "7468e6ce2c180231",
+   "traits": "4fd4e58137018fb8",
    "facts": "9023d47fc25f8eba",
    "facts2": "134e428c1a05372c",
    "all": "7e9cacfe01dd8242"
   },
   "english_first.class": {
    "text": "785ff5c8924349a1",
+   "traits": "4fd4e58137018fb8",
    "facts": "8ac4cd42dab2d1e7",
    "facts2": "c9f77f5d87e1e45d",
    "all": "6e60595cb303943c"
   },
   "english_first.after": {
    "text": "8f12677d6fe5def7",
+   "traits": "4fd4e58137018fb8",
    "facts": "5f14d357c41d70d7",
    "facts2": "779660275a9e2dcb",
    "all": "9198ec7fe6537ce9"
   },
-  "*": "35cd6e22511d534a"
+  "*": "87a4d5ee258ea914"
  },
  "rows": {
   "B1": "5276068df1ca6fa9",
@@ -112,7 +115,7 @@
   "C644": "f5e1d79f3251dbab",
   "C596": "e5f7e6cf2d01613d",
   "C2179": "47b9477e3ec8a790",
-  "C2183": "40172c2d376bfc32",
+  "C2194": "0c03931191c53a34",
   "C448": "b86596f1a02766de",
   "L168": "444c44970dc284f2",
   "L169": "59defccfc63b0454",
@@ -1065,7 +1068,7 @@
     "all": "6e60595cb303943c"
    },
    "row_hash": "612394eef6826900",
-   "carried": false,
+   "carried": true,
    "pass": 6
   },
   {
@@ -1083,8 +1086,65 @@
     "all": "7e9cacfe01dd8242"
    },
    "row_hash": "452a5657d7527351",
-   "carried": false,
+   "carried": true,
    "pass": 6
+  },
+  {
+   "row": "C2194",
+   "screen": "english_first.after",
+   "verdict": "PASS",
+   "line": "I'd rather hear how you're doing from you than from your grades.",
+   "why": "Prof. Walsh: Warm (the favour, the office), Strict ('Don't make me chase you.').",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "8f12677d6fe5def7",
+    "traits": "4fd4e58137018fb8",
+    "facts": "5f14d357c41d70d7",
+    "facts2": "779660275a9e2dcb",
+    "all": "9198ec7fe6537ce9"
+   },
+   "row_hash": "0c03931191c53a34",
+   "carried": false,
+   "pass": 7
+  },
+  {
+   "row": "C2194",
+   "screen": "english_first.class",
+   "verdict": "PASS",
+   "line": "Ma'am. Your mother raised you properly.",
+   "why": "Prof. Walsh: Bookish (takes essays apart line by line), Strict (reads the worst sentences out loud), Warm ('Stay a minute, dear.').",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "785ff5c8924349a1",
+    "traits": "4fd4e58137018fb8",
+    "facts": "8ac4cd42dab2d1e7",
+    "facts2": "c9f77f5d87e1e45d",
+    "all": "6e60595cb303943c"
+   },
+   "row_hash": "0c03931191c53a34",
+   "carried": false,
+   "pass": 7
+  },
+  {
+   "row": "C2194",
+   "screen": "english_first.sheet",
+   "verdict": "PASS",
+   "line": "One essay a week, and I read every word of it.",
+   "why": "Prof. Walsh: Strict, Bookish, Warm ('I'm your advisor this year, dear').",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "7468e6ce2c180231",
+    "traits": "4fd4e58137018fb8",
+    "facts": "9023d47fc25f8eba",
+    "facts2": "134e428c1a05372c",
+    "all": "7e9cacfe01dd8242"
+   },
+   "row_hash": "0c03931191c53a34",
+   "carried": false,
+   "pass": 7
   },
   {
    "row": "C422",
@@ -2236,8 +2296,8 @@
  ],
  "causes": [],
  "pending": [],
- "asked": 2,
- "answered": 2,
+ "asked": 1,
+ "answered": 1,
  "pass_items": [],
  "unowed": []
 }
