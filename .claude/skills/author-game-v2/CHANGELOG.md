@@ -21781,3 +21781,7 @@ found and fixed during that run, each by reading the source rather than assuming
 now, as it is not ready to be invoked. The description will carry `EXPLICIT-INVOKE ONLY` when
 it lands, following the `find-media-v3` precedent, and the incumbent `author-game` skill keeps
 every ordinary request until v2 is promoted.
+
+## 2026-11-26
+
+- `references/engine.md` §54: `[engine.people] show_traits = false`. The People dialog then prints no trait and no "???" bubble; `npc_has_trait` still reads them. Engine: `apps/projects/services/people_system.py` (the key, validated as a bool, written to the config only when false) and `generators/people_system.py` (`P.viewHtml`). Why: LO, 2026-11-26, "Hide them dont show them, they are for us, to design the npc scenes and all, dont have to show to a player." Verified: `test_people_system.py` (36 passed; a game that leaves the key alone emits no `show_traits`).

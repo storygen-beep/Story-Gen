@@ -755,3 +755,29 @@ def test_the_conditions_branch_a_block_and_a_choice(html):
         )
         assert checks == [True, False, True, True, False, True, False, True]
         assert g.errors == []
+
+
+# ── show_traits = false: traits are the author's, the view prints none (LO 2026-11-26) ──
+
+
+def test_show_traits_must_be_a_bool_and_is_written_only_when_false():
+    errs = _errors(lambda raw: raw["engine"]["people"].update(show_traits="no"))
+    assert any("show_traits must be true or false" in e for e in errs), errs
+
+    raw = parse_toml(FIXTURE)
+    assert '"show_traits"' not in _twee(raw)
+    raw["engine"]["people"]["show_traits"] = False
+    assert '"show_traits": false' in _twee(raw)
+
+
+@needs_browser
+def test_show_traits_false_prints_no_trait_and_no_unknown_bubble(html):
+    with open_game(html) as g:
+        g.play(HOME)
+        assert "Gossip" in _view(g, "liz")
+        g.js("() => { SugarCube.setup.people_cfg.show_traits = false; }")
+        text = _view(g, "liz")
+        assert "Friendship" in text
+        assert "Personality" not in text and "Gossip" not in text and "???" not in text
+        # scenes still read a trait
+        assert g.js("() => SugarCube.setup.peopleSys.hasTrait('ben', 'Shy')") is True

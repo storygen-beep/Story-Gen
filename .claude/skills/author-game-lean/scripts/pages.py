@@ -20,10 +20,11 @@ import unicodedata
 PAGE_KINDS = ("story_hints", "walkthroughs")  # goal cards: a card that builds one names it on its Does:
 PEOPLE_FIELDS = ("stranger_name", "people_tab", "tip")  # what the People dialog prints of a person
 PEOPLE_KEYS = ("stranger_name", "people_tab")
-# What the people system shows of a person on the People view: their traits, and the feelings they start at
-# (`[engine.people] system = "cot"`, people.py). A screen each, so a changed trait or start value re-opens its rows
-# (P48, 2026-11-25: nothing hashed either, so a later change asked the reader nothing). LO: "Go ahead".
-SYSTEM_FIELDS = ("traits", "feelings")
+# What the people system shows of a person on the People view: the feelings they start at (`[engine.people] system =
+# "cot"`, people.py). A screen, so a changed start value re-opens its rows (P48, 2026-11-25). LO: "Go ahead".
+# Their trait words are no screen: the player never sees them (`show_traits = false`, LO 2026-11-26: "Hide them dont
+# show them, they are for us"). The reader judges the fit on each scene with the person (C2194, reading.py TRAIT_FIT).
+SYSTEM_FIELDS = ("feelings",)
 
 
 def slug(title):
@@ -41,8 +42,8 @@ def is_page(screen):
 
 def people_entries(game):
     """{`npcs.<id>.<field>`: its text} for what the People view shows of each person: under people_page = "cot" the
-    dialog fields (stranger_name, people_tab, tip), and under `[engine.people] system = "cot"` their traits and the
-    feelings they start at (`npcs.<id>.traits`, `npcs.<id>.feelings`). The reader judges each as a screen, so a
+    dialog fields (stranger_name, people_tab, tip), and under `[engine.people] system = "cot"` the feelings they start
+    at (`npcs.<id>.feelings`; their trait words are hidden, so no screen, C2193). The reader judges each as a screen, so a
     changed field re-opens its rows (P46, 2026-11-25: 23 names rewritten, the 18 that had passed carried unjudged;
     P48: traits and start values were no screen at all)."""
     import people
@@ -59,7 +60,7 @@ def people_entries(game):
         if dialog:
             values.update(stranger_name=n.get("stranger_name"), people_tab=n.get("people_tab"), tip=tips.get(n.get("id")))
         if system and n.get("hidden_from_ui") is not True:
-            values.update(traits=", ".join(str(t) for t in n.get("traits") or []), feelings=start_feelings(n))
+            values.update(feelings=start_feelings(n))
         out.update({f"npcs.{n.get('id')}.{k}": str(v) for k, v in values.items() if v})
     return out
 
@@ -122,7 +123,7 @@ def built(builds):
 def screens_for(game, builds, people=True):
     """{screen: entry} for the page screens a card's Builds: line covers. `sidebar:<trait>` covers that sidebar
     item. `ui:people_page` covers every person's People dialog fields (PEOPLE_FIELDS), `engine:people` every person's
-    traits and start feelings (SYSTEM_FIELDS), and `npcs:<id>` one person's fields. One screen, one owning card: the
+    start feelings (SYSTEM_FIELDS), and `npcs:<id>` one person's fields. One screen, one owning card: the
     card that built the People page is not asked again about traits it never built (P46 and P48, 2026-11-25: 912
     duplicate items). `people=False` leaves out the people fields and sidebar items: a
     card's Does: need not list them (P09 and P36 built theirs before they were screens), and the reader reaches them

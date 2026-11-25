@@ -42,7 +42,7 @@ TRAIT_SETS = (
     "nodating",
     "shy",
 )
-ENGINE_KEYS = frozenset({"system", "fade", "traits"})
+ENGINE_KEYS = frozenset({"system", "fade", "traits", "show_traits"})
 TRAIT_ROW_KEYS = frozenset(
     {"kind", "threshold", "emoji", "description", "hidden", "sets"}
 )
@@ -486,13 +486,19 @@ def build_config(data: dict[str, Any]) -> dict[str, Any] | None:
         if _is_number(npc.get("age")):
             row["age"] = npc["age"]
         npcs[str(npc["id"])] = row
-    return {
+    config = {
         "system": "cot",
         "fade": raw.get("fade", True) is not False,
         "traits": trait_table(data),
         "npcs": npcs,
         "skills": skill_keys(data),
     }
+    # show_traits = false: traits are the author's brief for a person's scenes and the People
+    # view prints none of them (LO 2026-11-26). Written only when false, so a game that leaves
+    # it alone builds as before.
+    if raw.get("show_traits") is False:
+        config["show_traits"] = False
+    return config
 
 
 # ── checks ───────────────────────────────────────────────────────────────────
@@ -524,6 +530,10 @@ def _validate_table(raw: dict[str, Any], errors: list[str]) -> None:
     if "fade" in raw and not isinstance(raw["fade"], bool):
         errors.append(
             f"[engine.people] fade must be true or false, got {raw['fade']!r}"
+        )
+    if "show_traits" in raw and not isinstance(raw["show_traits"], bool):
+        errors.append(
+            f"[engine.people] show_traits must be true or false, got {raw['show_traits']!r}"
         )
     own = raw.get("traits", {})
     if not isinstance(own, dict):

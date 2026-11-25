@@ -1000,3 +1000,41 @@ Why for all of these: P13's reader found new FAILs on every pass, v5 to v11 (99 
     - `requires_npc` without a row points at the next-door form;
     - neither form is red.
   - **Verified:** the suite passes.
+- **Traits are the author's brief, never shown, in the game's own words** (C2193, C2194). First item of LO's review of the CoT-copied parts. LO, typed in main-lean 2026-11-26: "Hide them dont show them, they are for us, to design the npc scenes and all, dont have to show to a player.", then "yes" to the design. The lesson kept (C2184): people differ, and it shows in how they act; a few words used often beat many used rarely.
+  - **`craft/people.md`:**
+    - **Rule 13 rewritten.** A trait is one word, on or off, fixed. It is never shown: `show_traits = false`, no label, no "???", no reveal.
+      - 2–4 words per person on the plan, each citing the line that shows it.
+      - The words are the game's own and LO's call. They are defined in `[engine.people.traits.<Word>]`, and the skill keeps no other game's list as a default.
+      - A worked list in roles: how they are with her, their private side, what they're into.
+      - Every scene keeps the words (C2194, reader). `npc_has_trait` is used only where one text serves several people.
+    - **Rule 8** says the same.
+    - **The type table and the café example** use our words (Pushy, Proud, Watcher), with their own table rows.
+    - **Rows:**
+      - C2177 changed: own words, `show_traits = false`.
+      - C2178 changed: no "every trait has a job".
+      - C2183 retired.
+      - C2193 added (script + people) and C2194 added (reader, "a person is on screen").
+    - **"The old trait rules":**
+      - kept: a word true to the writing, the card citing a line; 2–4 words; type then tune; `npc_has_trait`;
+      - changed: C2177, C2178;
+      - retired: C2183, the reveal thresholds, the red on every trait hidden.
+    - **Not-this:** four lines replace two.
+  - **`scripts/people.py`:**
+    - red on `show_traits` not false;
+    - red on fewer than 2 or more than 4 words;
+    - red on a word with no row in the game's own `[engine.people.traits]`, even one CoT's default table holds.
+    - Dropped: the job rule (NUMBER_SETS, WANT_READS, readers, the manner pass) and the red on a person whose traits are all hidden.
+    - Kept: gender, attracted, a type or hand-set values, no old meter, the skill gates.
+  - **`scripts/pages.py`:** `npcs.<id>.traits` is no longer a screen. SYSTEM_FIELDS is feelings only.
+  - **`scripts/reading.py`:**
+    - Each scene screen now stores a `traits` hash of the words of the people on it.
+    - A changed word asks only `TRAIT_FIT` (C2194) on that person's screens, with the reason "a trait word of someone on it changed".
+    - A record from before has no such hash and reads as unchanged once.
+    - Recorded verdicts on the old `npcs.<id>.traits` screens fall under "gone" and are skipped, so nothing is asked of them. The next `--record` drops them.
+  - **`plan.md` §3** and **`templates/PLAN.md` §3:** trait words per person, with the line that shows each. The template gets a Trait words table.
+  - **`scripts/check.py`:** the `people` docstring.
+  - **`lists/COVERAGE.md`:** C2193 and C2194 added, C2183 retired, C2177 and C2178 changed.
+  - **Tests:**
+    - `test_people.py` rewritten (17 tests): two to four words, hidden, the game's own, no job needed.
+    - `test_pages.py`: no traits screen. A new test: a changed word asks only the fit row on that person's scene.
+  - **Verified:** the suite passes, 321 passed.

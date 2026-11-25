@@ -10,11 +10,17 @@ Shape · hold (and who enforces it) · goal, its flag, the next goal · mystery 
 
 ## 3. The people
 ### Types
-| type | friendship | lust | control | traits it draws from |
+| type | friendship | lust | control | trait words it draws from |
 |---|---|---|---|---|
 
+### Trait words
+The game's own list, LO's call: each word, and one line on how a person with it acts. Each goes in `[engine.people.traits.<Word>]` (`kind`, `description`).
+
+| word | how they act |
+|---|---|
+
 ### People
-| person | age | type | gender, attracted | traits, and each one's job | start values tuned by hand | hand-set want, if the story fixes it | what she wants from them | where they end up | where they are now, at the start |
+| person | age | type | gender, attracted | trait words (2–4, the game's own, never shown), each with the line that shows it | start values tuned by hand | hand-set want, if the story fixes it | what she wants from them | where they end up | where they are now, at the start |
 |---|---|---|---|---|---|---|---|---|---|
 
 ## 4. The places
