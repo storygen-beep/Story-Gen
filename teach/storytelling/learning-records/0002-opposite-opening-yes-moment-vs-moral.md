@@ -5,3 +5,5 @@ In the Lesson 1 drill the learner wrote the moment "I realised that if I try and
 **Evidence:** Lesson 1 drill answer, 2026-11-25.
 
 **Implications:** Next lesson should drill telling the *instant* (who, where, what was said or seen) apart from the *takeaway*, then move to stakes. Look for the same moral-instead-of-moment habit in future drills.
+
+**Update (same day):** after one round of feedback the learner found the instant on their own: a friend tasting the food and saying it was actually a good meal. So the moral-vs-moment correction landed. Still to practise: re-deriving the opening when the moment changes, and quoting the exact words said.
