@@ -14,4 +14,4 @@
 - **Backend lead:** junior dev at a startup; ~6 months in, the outgoing backend lead trusted them and handed over the lead role.
 - Recurring theme in both: someone else's verdict is what made them believe in themselves. Worth pointing out; good material for stakes (Lesson 2).
 - Recurring habit: openings stated as abstract feelings ("never had confidence") rather than a concrete detail that shows it.
-- **Paneer roll:** a saver with a college expense spreadsheet; one late night, already fed, orders a paneer roll instead of going to sleep, and still remembers the taste. Moral as stated: spending on yourself isn't always bad.
+- **Paneer roll:** a saver with a college expense spreadsheet; one late night, already fed, orders a paneer roll instead of going to sleep, and still remembers the taste. Moral as stated: spending on yourself isn't always bad. Root stake (learner confirmed): grew up with money tight.
