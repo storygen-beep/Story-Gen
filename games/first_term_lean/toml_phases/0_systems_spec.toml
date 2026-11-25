@@ -527,6 +527,8 @@ tip = "Behind the till Monday to Saturday, 10am to 6:45pm."
 [engine.daily_tick]
 flagEffects = [
   { targetType = "player", flag = "talked_mom_today", op = "unset" },
+  # P49 — one "comes to her" scene a day across the game (craft/walk-ins.md C2187)
+  { targetType = "player", flag = "came_to_her_today", op = "unset" },
   { targetType = "player", flag = "talked_mark_today", op = "unset" },
   { targetType = "player", flag = "talked_ryan_today", op = "unset" },
   { targetType = "player", flag = "ate_with_mom_today", op = "unset" },
@@ -562,6 +564,122 @@ people_page = "cot"
 system = "cot"
 
 # LO 2026-11-24, "yes hide popups": bookkeeping flags don't toast; flags the player should notice still do.
+# P49 — the "comes to her" flags: bookkeeping, no toast.
+[[flags.labels]]
+key = "came_to_her_today"
+label = "Came to her today"
+toast = false
+
+[[flags.labels]]
+key = "ryan_charger"
+label = "Ryan charger"
+toast = false
+
+[[flags.labels]]
+key = "ryan_looked"
+label = "Ryan looked"
+toast = false
+
+[[flags.labels]]
+key = "tasted_dinner"
+label = "Tasted dinner"
+toast = false
+
+[[flags.labels]]
+key = "mom_taste_seen"
+label = "Mom taste seen"
+toast = false
+
+[[flags.labels]]
+key = "zoe_witness"
+label = "Zoe witness"
+toast = false
+
+[[flags.labels]]
+key = "zoe_turned_her"
+label = "Zoe turned her"
+toast = false
+
+[[flags.labels]]
+key = "vance_gutter"
+label = "Vance gutter"
+toast = false
+
+[[flags.labels]]
+key = "vance_envelope"
+label = "Vance envelope"
+toast = false
+
+[[flags.labels]]
+key = "hale_called_in"
+label = "Hale called in"
+toast = false
+
+[[flags.labels]]
+key = "marco_fixed_form"
+label = "Marco fixed form"
+toast = false
+
+[[flags.labels]]
+key = "marco_came"
+label = "Marco came"
+toast = false
+
+[[flags.labels]]
+key = "nadia_tip"
+label = "Nadia tip"
+toast = false
+
+[[flags.labels]]
+key = "nadia_came"
+label = "Nadia came"
+toast = false
+
+[[flags.labels]]
+key = "told_nadia"
+label = "Told nadia"
+toast = false
+
+[[flags.labels]]
+key = "ryan_asked"
+label = "Ryan asked"
+toast = false
+
+[[flags.labels]]
+key = "ryan_back_seen"
+label = "Ryan back seen"
+toast = false
+
+[[flags.labels]]
+key = "zoe_asked"
+label = "Zoe asked"
+toast = false
+
+[[flags.labels]]
+key = "zoe_dared"
+label = "Zoe dared"
+toast = false
+
+[[flags.labels]]
+key = "vance_asked"
+label = "Vance asked"
+toast = false
+
+[[flags.labels]]
+key = "vance_env_seen"
+label = "Vance env seen"
+toast = false
+
+[[flags.labels]]
+key = "nadia_offered"
+label = "Nadia offered"
+toast = false
+
+[[flags.labels]]
+key = "nadia_asked"
+label = "Nadia asked"
+toast = false
+
 [[flags.labels]]
 key = "rent_handled_this_week"
 label = "Rent handled this week"

@@ -1,6 +1,6 @@
 {
  "piece": "P27",
- "pass": 5,
+ "pass": 6,
  "screens": {
   "zoe_door_sam.door": {
    "text": "04292ed529b31c40",
@@ -148,7 +148,9 @@
   "C450": "b01ad555668aba2d",
   "C422": "7e128897077ecee6",
   "C460": "67e48e60d5053a2e",
-  "C461": "310706ee076318f2"
+  "C461": "310706ee076318f2",
+  "C2188": "612394eef6826900",
+  "C2190": "452a5657d7527351"
  },
  "verdicts": [
   {
@@ -1021,7 +1023,7 @@
    "note": false,
    "screen_hash": "9c3480f982f4f732",
    "row_hash": "47b9477e3ec8a790",
-   "carried": false,
+   "carried": true,
    "pass": 5
   },
   {
@@ -1034,8 +1036,57 @@
    "note": false,
    "screen_hash": "9c3480f982f4f732",
    "row_hash": "40172c2d376bfc32",
-   "carried": false,
+   "carried": true,
    "pass": 5
+  },
+  {
+   "row": "C2188",
+   "screen": "zoe_door_sam.door",
+   "verdict": "N/A",
+   "line": "",
+   "why": "no one asks anything she can refuse; C2188's 'a no is possible' has nothing to fire on (Sam says Zoe is out)",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "04292ed529b31c40",
+    "facts": "a31c2980eeb1cde3",
+    "facts2": "b502d165d9d76b6e",
+    "all": "c7ed5b6984d9681d"
+   },
+   "row_hash": "612394eef6826900",
+   "carried": false,
+   "pass": 6
+  },
+  {
+   "row": "C2190",
+   "screen": "npc_sam",
+   "verdict": "N/A",
+   "line": "",
+   "why": "People dialog field, not a moment",
+   "cause": null,
+   "note": false,
+   "screen_hash": null,
+   "row_hash": "452a5657d7527351",
+   "carried": false,
+   "pass": 6
+  },
+  {
+   "row": "C2190",
+   "screen": "zoe_door_sam.door",
+   "verdict": "PASS",
+   "line": "Sam home, Zoe out, 12:00-18:00",
+   "why": "one-time canvas, trigger_mode manual, no chance: self-fires on arrival when its conditions are met (v2.py:5937-5955)",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "04292ed529b31c40",
+    "facts": "a31c2980eeb1cde3",
+    "facts2": "b502d165d9d76b6e",
+    "all": "c7ed5b6984d9681d"
+   },
+   "row_hash": "452a5657d7527351",
+   "carried": false,
+   "pass": 6
   },
   {
    "row": "C286",

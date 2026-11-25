@@ -28,6 +28,10 @@ Checks:
   people     under [engine.people] system = "cot": every person has gender, attracted, a people_type or hand-set
              values, and 1 to 4 traits, each with a job; no person keeps a meter from before the switch; every
              skill gate names one of her skills at a level 1 to 10, and no skill has a band table too (people.py).
+  walkins    every scene that comes to her (trigger_mode = "random": it fires by itself on arrival, never a
+             button) names its person (requires_npc), whose rows reach its place; waits on and sets the game's one
+             brake flag that [engine.daily_tick] clears; has two or more choices on its first screen; and is no
+             card's "a person's arc step" (walkins.py, craft/walk-ins.md).
 
     python3 check.py --rules games/<slug> <id>    the piece's rule list, from its Does: block (rules.py)
     python3 check.py --rules games/<slug> plan    the rules whose `when` is "the plan"
@@ -75,11 +79,12 @@ import sheet  # noqa: E402
 import rules  # noqa: E402
 import pages  # noqa: E402
 import people  # noqa: E402
+import walkins  # noqa: E402
 
 GREEN, RED, INCOMPLETE = "green", "red", "incomplete"
 # Every check a craft row's `judge` may name (SKILL.md, "Rule labels").
 CHECKS = ("merge", "reach", "approvals", "builds", "release", "card", "beat", "sheet", "does",
-          "talk", "length", "presence", "creation", "saves", "speakers", "goals", "pages", "people")
+          "talk", "length", "presence", "creation", "saves", "speakers", "goals", "pages", "people", "walkins")
 GATES = REPO / ".claude" / "skills" / "author-game-v2" / "scripts" / "gates.py"
 BEAT_FLOOR = 3  # C254: an explicit beat has 3+ frozen-list words
 
@@ -417,6 +422,20 @@ def check_people(game):
     return (RED, rows) if rows else (GREEN, [])
 
 
+def check_walkins(game_dir, game):
+    """Scenes that come to her: a named person where their rows are, the one-a-day brake, a way out, no story
+    moment behind a chance (walkins.py)."""
+    if game is None:
+        return INCOMPLETE, ["the merged TOML did not parse"]
+    does = {}
+    for path in sorted((Path(game_dir) / "cards").glob("*.md")) if game_dir else []:
+        d = rules.card_does(path.read_text(encoding="utf-8"))
+        if d is not None:
+            does[path.stem] = d
+    rows = walkins.problems(game, does)
+    return (RED, rows) if rows else (GREEN, [])
+
+
 def check_sheet(game_dir, game):
     """Each card's Sheet: against the computed one. Cards without a Sheet: block are not compared."""
     if game is None:
@@ -445,6 +464,7 @@ def run_all(game_dir, release=False, against=None):
     results["does"] = check_does(game_dir, game)
     results["pages"] = check_pages(game)
     results["people"] = check_people(game)
+    results["walkins"] = check_walkins(game_dir, game)
     if release:
         results["release"] = check_release(game_dir, game)
     return results

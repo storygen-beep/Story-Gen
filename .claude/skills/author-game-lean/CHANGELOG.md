@@ -945,3 +945,58 @@ Why for all of these: P13's reader found new FAILs on every pass, v5 to v11 (99 
   - **`scripts/reading.py` `work_list`, the "*" re-ask:** a new page screen no longer counts as a new screen of the scene for "a screen of the scene changed". Why: P01 re-asked 127 "*" rows, and P09, P36 and P46 three each.
   - **`scripts/check.py` `check_does`:** red when two cards' Builds: lines cover the same page screen. first_term_lean has 142 page screens and 0 shared.
   - **`scripts/tests/test_pages.py`:** three tests: the People page card owns no traits, a card without Does: asks a sidebar item only its rows and no "*" re-ask, and two owners of a page screen is red. With the previous test, all four fail on the committed scripts and pass now. The suite passes, 309 passed.
+
+## 2026-11-26
+
+- **A study gives the lesson; the rule is our design** (C2184; LO, typed in main-lean 2026-11-25: "we dont want to copy everything exactly. Instead learn the design so we can design for our games. Applies to everything.").
+  - **`SKILL.md`, "Changing this skill":** a rule names the lesson it comes from. It never has another game doing it as its only reason. It never copies another game's strings, numbers, tables or layout by default. A game's numbers may still be cited as a measure.
+  - The CoT-based rules of 2026-11-25 stay until LO reviews them one at a time.
+  - **`lists/COVERAGE.md`:** C2184 added.
+  - **Verified:** the suite passes.
+- **A vague design term is LO's question** (C2185; LO, typed in main-lean 2026-11-25: "if something is vaguely defined then that should go into game writing like game want to write grind and whatever and it is not defined very well then game should ask for it").
+  - **`SKILL.md`, Always 8:** a vague design term is LO's question, never a default the session invents.
+  - **`piece.md` step 2:** before writing the card, find where each design idea is pinned down: a number, a count, a shape or a worked example in a craft row, PLAN.md or NOTES.md.
+    - It is not pinned down when what's written is only a word, so two sessions would write different numbers. Then the session asks LO, in simple words with one example.
+    - His answer goes into NOTES as `Decision: … · LO: "…" · <date>`, and into the skill when it is general.
+  - **`lists/COVERAGE.md`:** C2185 added.
+- **Walk-ins: two kinds, our design** (C2186–C2192; LO, typed in main-lean 2026-11-26: "Yes", "One is fine for now"; the measures are `COT_DESIGN_STUDY.md` Part 9 and `playtest_study_20261109/13_random_scenes_top.md`).
+  - **`craft/walk-ins.md`:**
+    - The intro names the two kinds.
+    - Seven must-read rows, C2186–C2192.
+    - A new section, "When someone comes to her": eight shape steps, engine facts cited, and worked example G in roles.
+    - Five Not-this lines.
+    - An engine correction. The old line 39 said a random canvas is "a button" that is missing on a miss (v2.py:6415-6421). That was wrong:
+      - `trigger_mode = "random"` fires by itself on arrival: `getStoryCanvasRedirect` (v2.py:6555) calls `checkRandomEncounters` (v2.py:6823-6943).
+      - Every button path skips it (v2.py:4616, 4736, 5946, 5977, 6009, 6603, 6726).
+      - The chance-button roller, `selectCanvasByPriority` (v2.py:6444), is called from nowhere.
+  - **`plan.md` §8:** the "which kind" bullet names all three kinds.
+  - **`plan.md` §10:** the release-by-release walk-in design, with LO's words.
+  - **Must-read lists** in both files gain the new ids.
+  - **`SKILL.md`:** the `a walk-in` label now covers someone coming to her.
+  - **`lists/COVERAGE.md`:** C2186–C2192 added.
+  - **`scripts/walkins.py`** (new) and **`scripts/check.py`** (`walkins` in CHECKS, `check_walkins`, the docstring). The check is red on a "comes to her" canvas:
+    - with no `requires_npc`, or whose person has no row at its place;
+    - without the brake: no `is_false` wait on a flag `[engine.daily_tick]` unsets, or a first-screen choice that doesn't set it;
+    - when two such canvases use different brake flags;
+    - with under two choices;
+    - named "a person's arc step" on any card's Does:.
+  - **`scripts/tests/test_walkins.py`** (new, 10 tests).
+  - **Verified:** first_term_lean reads green, with 0 such scenes yet. Read-only, in Python.
+  - **Later the same day:** walk-ins.md step 5 now names `days_since_flag` (v2.py:5199-5233) for a rest longer than a day.
+- **A "comes to her" scene may come from next door, and the rest is the game's number** (first_term_lean P49; LO, typed in main-lean 2026-11-26: "Go with your picks").
+  - **Why:** LO approved "he knocks on her bedroom door". The person's rows have him in his own room next door and never in hers. Rule 1 required `requires_npc` plus a row at the scene's place, which pushed the scene into the hall, a 13-minute window on weekdays, and lost the scene LO approved.
+  - **`scripts/walkins.py`** accepts a second form. The canvas has no `requires_npc`, and instead has an `npc_at_location` `is_present` condition on an adjoining place, where the person has a schedule row. The engine reads that condition at v2.py:5419-5435.
+    - Adjoining means the same `parent`, or the parent itself (the hub).
+    - Still red when neither form is there, when the named place doesn't adjoin, or when the person has no row at it.
+    - A `requires_npc` at her place with no row there now points at the next-door form.
+  - **`craft/walk-ins.md`:**
+    - C2186's row and shape step 1 describe both forms. The card names the adjoining place, and the reader judges the arriving line.
+    - C2189's row and step 5 say the rest before a scene comes again is set per game and is LO's call. The worked example is three days, with no game named (SKILL.md Always 4), written as `days_since_flag` `gte` 3. The measures are CoT about 1 day and Shady Deals 4–10 days.
+    - Two Not-this lines.
+  - **`plan.md` §10:** the rest and the next-door form.
+  - **`scripts/tests/test_walkins.py`:** four tests (14 in the file):
+    - a sibling room and the hub pass;
+    - a place that doesn't adjoin, or one with no row, is red;
+    - `requires_npc` without a row points at the next-door form;
+    - neither form is red.
+  - **Verified:** the suite passes.

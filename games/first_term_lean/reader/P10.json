@@ -1,6 +1,6 @@
 {
  "piece": "P10",
- "pass": 12,
+ "pass": 13,
  "screens": {
   "cafe_work_hour.work": {
    "text": "66a5f5a25c0ef79e",
@@ -135,7 +135,8 @@
   "C450": "b01ad555668aba2d",
   "C422": "7e128897077ecee6",
   "C460": "67e48e60d5053a2e",
-  "C461": "310706ee076318f2"
+  "C461": "310706ee076318f2",
+  "C2189": "20748838895e4545"
  },
  "verdicts": [
   {
@@ -945,7 +946,7 @@
    "note": false,
    "screen_hash": "008406a21b5180e7",
    "row_hash": "47b9477e3ec8a790",
-   "carried": false,
+   "carried": true,
    "pass": 12
   },
   {
@@ -958,8 +959,21 @@
    "note": false,
    "screen_hash": "008406a21b5180e7",
    "row_hash": "40172c2d376bfc32",
-   "carried": false,
+   "carried": true,
    "pass": 12
+  },
+  {
+   "row": "C2189",
+   "screen": "*",
+   "verdict": "N/A",
+   "line": "",
+   "why": "cafe_work_* and cafe_hour/shift_*: her own loop verb, chosen each time; C2189 (walk-ins.md shape 5) governs a scene that comes again, not a repeated action (the paid job loop)",
+   "cause": null,
+   "note": true,
+   "screen_hash": "008406a21b5180e7",
+   "row_hash": "20748838895e4545",
+   "carried": false,
+   "pass": 13
   },
   {
    "row": "C286",
@@ -1075,19 +1089,6 @@
    "note": false,
    "screen_hash": "ecf69a17c34da0ff",
    "row_hash": "0304731d263aed9f",
-   "carried": true,
-   "pass": 7
-  },
-  {
-   "row": "C330",
-   "screen": "*",
-   "verdict": "PASS",
-   "line": "",
-   "why": "Stage-1 leak on a repeatable: no cap breach.",
-   "cause": null,
-   "note": false,
-   "screen_hash": "ecf69a17c34da0ff",
-   "row_hash": "923a40b5ad4048fd",
    "carried": true,
    "pass": 7
   },
@@ -2132,8 +2133,8 @@
  ],
  "causes": [],
  "pending": [],
- "asked": 2,
- "answered": 2,
+ "asked": 1,
+ "answered": 1,
  "pass_items": [],
  "unowed": []
 }

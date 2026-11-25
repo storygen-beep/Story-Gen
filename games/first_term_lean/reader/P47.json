@@ -1,6 +1,6 @@
 {
  "piece": "P47",
- "pass": 3,
+ "pass": 4,
  "screens": {
   "dean_first.door": {
    "text": "97cfd263b75f4f60",
@@ -146,7 +146,8 @@
   "C450": "b01ad555668aba2d",
   "C422": "7e128897077ecee6",
   "C460": "67e48e60d5053a2e",
-  "C461": "310706ee076318f2"
+  "C461": "310706ee076318f2",
+  "C2190": "452a5657d7527351"
  },
  "verdicts": [
   {
@@ -989,7 +990,7 @@
    "note": false,
    "screen_hash": "59c88a53c785ea38",
    "row_hash": "47b9477e3ec8a790",
-   "carried": false,
+   "carried": true,
    "pass": 3
   },
   {
@@ -1002,8 +1003,39 @@
    "note": false,
    "screen_hash": "59c88a53c785ea38",
    "row_hash": "40172c2d376bfc32",
-   "carried": false,
+   "carried": true,
    "pass": 3
+  },
+  {
+   "row": "C2190",
+   "screen": "dean_first.door",
+   "verdict": "PASS",
+   "line": "weekdays 08:00-16:35, dean present, met_dean false",
+   "why": "one-time canvas, trigger_mode manual, no chance: self-fires on arrival when its conditions are met (v2.py:5937-5955)",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "97cfd263b75f4f60",
+    "facts": "3052b070d6b4a62b",
+    "facts2": "e533cd9910667c06",
+    "all": "dd6f7b39ae711a4d"
+   },
+   "row_hash": "452a5657d7527351",
+   "carried": false,
+   "pass": 4
+  },
+  {
+   "row": "C2190",
+   "screen": "npc_dean",
+   "verdict": "N/A",
+   "line": "",
+   "why": "People dialog field, not a moment",
+   "cause": null,
+   "note": false,
+   "screen_hash": null,
+   "row_hash": "452a5657d7527351",
+   "carried": false,
+   "pass": 4
   },
   {
    "row": "C327",
@@ -2220,8 +2252,8 @@
  ],
  "causes": [],
  "pending": [],
- "asked": 2,
- "answered": 2,
+ "asked": 1,
+ "answered": 1,
  "pass_items": [],
  "unowed": []
 }

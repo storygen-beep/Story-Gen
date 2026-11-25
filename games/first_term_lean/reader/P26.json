@@ -1,6 +1,6 @@
 {
  "piece": "P26",
- "pass": 5,
+ "pass": 6,
  "screens": {
   "mirror_meet_brooke.mirror": {
    "text": "c1e3f57c50f6d293",
@@ -135,7 +135,9 @@
   "C450": "b01ad555668aba2d",
   "C422": "7e128897077ecee6",
   "C460": "67e48e60d5053a2e",
-  "C461": "310706ee076318f2"
+  "C461": "310706ee076318f2",
+  "C2188": "612394eef6826900",
+  "C2190": "452a5657d7527351"
  },
  "verdicts": [
   {
@@ -965,7 +967,7 @@
    "note": false,
    "screen_hash": "1e9737649686555a",
    "row_hash": "47b9477e3ec8a790",
-   "carried": false,
+   "carried": true,
    "pass": 5
   },
   {
@@ -978,8 +980,83 @@
    "note": false,
    "screen_hash": "1e9737649686555a",
    "row_hash": "40172c2d376bfc32",
-   "carried": false,
+   "carried": true,
    "pass": 5
+  },
+  {
+   "row": "C2188",
+   "screen": "mirror_meet_brooke.mirror",
+   "verdict": "N/A",
+   "line": "",
+   "why": "no one asks anything she can refuse; C2188's 'a no is possible' has nothing to fire on (a cold line, no request)",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "c1e3f57c50f6d293",
+    "facts": "862794d34277cc92",
+    "facts2": "e0a8d361ec88aeca",
+    "all": "1f6d0a0567942779"
+   },
+   "row_hash": "612394eef6826900",
+   "carried": false,
+   "pass": 6
+  },
+  {
+   "row": "C2190",
+   "screen": "mirror_meet_brooke.mirror",
+   "verdict": "PASS",
+   "line": "week two, all three at the mirror",
+   "why": "one-time canvas, trigger_mode manual, no chance: self-fires on arrival when its conditions are met (v2.py:5937-5955)",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "c1e3f57c50f6d293",
+    "facts": "862794d34277cc92",
+    "facts2": "e0a8d361ec88aeca",
+    "all": "1f6d0a0567942779"
+   },
+   "row_hash": "452a5657d7527351",
+   "carried": false,
+   "pass": 6
+  },
+  {
+   "row": "C2190",
+   "screen": "npc_brooke",
+   "verdict": "N/A",
+   "line": "",
+   "why": "People dialog field, not a moment",
+   "cause": null,
+   "note": false,
+   "screen_hash": null,
+   "row_hash": "452a5657d7527351",
+   "carried": false,
+   "pass": 6
+  },
+  {
+   "row": "C2190",
+   "screen": "npc_kayla",
+   "verdict": "N/A",
+   "line": "",
+   "why": "People dialog field, not a moment",
+   "cause": null,
+   "note": false,
+   "screen_hash": null,
+   "row_hash": "452a5657d7527351",
+   "carried": false,
+   "pass": 6
+  },
+  {
+   "row": "C2190",
+   "screen": "npc_tess",
+   "verdict": "N/A",
+   "line": "",
+   "why": "People dialog field, not a moment",
+   "cause": null,
+   "note": false,
+   "screen_hash": null,
+   "row_hash": "452a5657d7527351",
+   "carried": false,
+   "pass": 6
   },
   {
    "row": "C422",

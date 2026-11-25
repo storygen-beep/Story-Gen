@@ -41,6 +41,7 @@ The front door. It always loads. It holds the loop, the rules, and where everyth
 5. **Nothing is built without LO's yes on its card,** recorded in `approvals.json`.
 6. **Never run a media search unasked.** Don't list missing media until LO says "release ready".
 7. **LO decides commits.** A session commits only on his word, relayed or direct, and never pushes or merges unless he says so.
+8. **A design idea the craft files leave vague is LO's question, never a default.** When a card needs a grind, a pace, a reward size or a stance, and no craft row, PLAN.md or NOTES.md line pins it down, ask LO before writing the card: simple words and one concrete example ("How long should the café job take before the raise: three shifts, or ten?"). His answer goes in the game's NOTES.md with his words, and into the skill when it is general (`piece.md` step 2). (C2185)
 
 ## Build commands (engine)
 
@@ -134,7 +135,7 @@ A craft file's must-read table has two more columns, `when` and `judge`, beside 
 | a meter is shown or paid | shows a meter, or moves one |
 | a goal card is shown | shows a quest card or a goal line |
 | a media spot | has a picture or a clip |
-| a walk-in | is someone walking in on her, or her walking in |
+| a walk-in | is someone walking in on her, her walking in, or someone coming to her on arrival |
 | the opening | is in the opening |
 | a release after the first | ships in release 2 or later, onto old saves |
 | the plan | not a screen: the game plan or a release's piece list, where a whole system is designed |
@@ -145,5 +146,6 @@ A craft file's must-read table has two more columns, `when` and `judge`, beside 
 ## Changing this skill
 
 - A new rule needs a real failure, and an answer to "why doesn't an existing rule cover this?". Until then it goes in `LATER.md`.
+- **A study gives the lesson; the rule is our design** (C2184). From a study of another game, take what the player gets and why it works, then write our own design for our games, saying which lesson it comes from. A rule never has "because CoT does it" (or any game) as its only reason, and never copies another game's strings, numbers, tables or layout by default; a copy is LO's call, asked for by name. A row may cite a game's numbers as a measure, as evidence. (LO, typed in main-lean 2026-11-25: "we dont want to copy everything exactly. Instead learn the design so we can design for our games. Applies to everything.") The rules written on 2026-11-25 from CoT stay until LO reviews them, one at a time.
 - Every edit gets a dated `CHANGELOG.md` line: what changed, why, how it was verified.
 - Size caps, enforced by tests on instruction files (everything outside `lists/`, except `CHANGELOG.md`, which is a diary, C2170): this file under 200 lines, every other file under 400.

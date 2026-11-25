@@ -1,6 +1,6 @@
 {
  "piece": "P08",
- "pass": 6,
+ "pass": 7,
  "screens": {
   "*": "4f53cda18c2baa0c"
  },
@@ -64,7 +64,8 @@
   "C593": "370371a278b9f182",
   "C422": "7e128897077ecee6",
   "C460": "67e48e60d5053a2e",
-  "C461": "310706ee076318f2"
+  "C461": "310706ee076318f2",
+  "C2188": "612394eef6826900"
  },
  "verdicts": [
   {
@@ -649,7 +650,7 @@
    "note": false,
    "screen_hash": "4f53cda18c2baa0c",
    "row_hash": "47b9477e3ec8a790",
-   "carried": false,
+   "carried": true,
    "pass": 6
   },
   {
@@ -662,8 +663,21 @@
    "note": false,
    "screen_hash": "4f53cda18c2baa0c",
    "row_hash": "40172c2d376bfc32",
-   "carried": false,
+   "carried": true,
    "pass": 6
+  },
+  {
+   "row": "C2188",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "'Don't hold your breath.' / 'Not my style.' / 'Mind your own business.'",
+   "why": "each text offers a refusing reply with its own answer message; replies carry no effects, so a no is free",
+   "cause": null,
+   "note": false,
+   "screen_hash": "4f53cda18c2baa0c",
+   "row_hash": "612394eef6826900",
+   "carried": false,
+   "pass": 7
   },
   {
    "row": "C286",
@@ -1305,8 +1319,8 @@
  ],
  "causes": [],
  "pending": [],
- "asked": 2,
- "answered": 2,
+ "asked": 1,
+ "answered": 1,
  "pass_items": [],
  "unowed": []
 }

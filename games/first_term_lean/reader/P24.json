@@ -1,6 +1,6 @@
 {
  "piece": "P24",
- "pass": 6,
+ "pass": 7,
  "screens": {
   "street_meet_vance.porch": {
    "text": "7af09b116a009078",
@@ -145,7 +145,9 @@
   "C450": "b01ad555668aba2d",
   "C422": "7e128897077ecee6",
   "C460": "67e48e60d5053a2e",
-  "C461": "310706ee076318f2"
+  "C461": "310706ee076318f2",
+  "C2188": "612394eef6826900",
+  "C2190": "452a5657d7527351"
  },
  "verdicts": [
   {
@@ -960,7 +962,7 @@
    "note": false,
    "screen_hash": "6dceda6d9f108f92",
    "row_hash": "47b9477e3ec8a790",
-   "carried": false,
+   "carried": true,
    "pass": 6
   },
   {
@@ -973,8 +975,44 @@
    "note": false,
    "screen_hash": "6dceda6d9f108f92",
    "row_hash": "40172c2d376bfc32",
-   "carried": false,
+   "carried": true,
    "pass": 6
+  },
+  {
+   "row": "C2188",
+   "screen": "street_meet_vance.porch",
+   "verdict": "PASS",
+   "line": "'Wave and keep walking' -> \"That's it, keep walking. I'll be right here.\"",
+   "why": "his 'Come here a minute' can be refused with its own line; flag only",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "7af09b116a009078",
+    "facts": "2ee087ec13324ad3",
+    "facts2": "6e3e94c479380b40",
+    "all": "c1590395ef1a9662"
+   },
+   "row_hash": "612394eef6826900",
+   "carried": false,
+   "pass": 7
+  },
+  {
+   "row": "C2190",
+   "screen": "street_meet_vance.porch",
+   "verdict": "PASS",
+   "line": "Sunday, Vance on his porch",
+   "why": "one-time canvas, trigger_mode manual, no chance: self-fires on arrival when its conditions are met (v2.py:5937-5955)",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "7af09b116a009078",
+    "facts": "2ee087ec13324ad3",
+    "facts2": "6e3e94c479380b40",
+    "all": "c1590395ef1a9662"
+   },
+   "row_hash": "452a5657d7527351",
+   "carried": false,
+   "pass": 7
   },
   {
    "row": "C286",

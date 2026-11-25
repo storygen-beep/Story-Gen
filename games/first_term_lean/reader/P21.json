@@ -1,6 +1,6 @@
 {
  "piece": "P21",
- "pass": 11,
+ "pass": 12,
  "screens": {
   "cafe_hire.ask": {
    "text": "a5e6e9ac50172fda",
@@ -197,7 +197,10 @@
   "C450": "b01ad555668aba2d",
   "C422": "7e128897077ecee6",
   "C460": "67e48e60d5053a2e",
-  "C461": "310706ee076318f2"
+  "C461": "310706ee076318f2",
+  "C2188": "612394eef6826900",
+  "C2189": "20748838895e4545",
+  "C2190": "452a5657d7527351"
  },
  "verdicts": [
   {
@@ -3190,7 +3193,7 @@
    "note": false,
    "screen_hash": "3c0282b5bb2a2efe",
    "row_hash": "47b9477e3ec8a790",
-   "carried": false,
+   "carried": true,
    "pass": 11
   },
   {
@@ -3203,8 +3206,142 @@
    "note": false,
    "screen_hash": "3c0282b5bb2a2efe",
    "row_hash": "40172c2d376bfc32",
-   "carried": false,
+   "carried": true,
    "pass": 11
+  },
+  {
+   "row": "C2188",
+   "screen": "cafe_first_shift.start",
+   "verdict": "N/A",
+   "line": "",
+   "why": "no one asks anything she can refuse; C2188's 'a no is possible' has nothing to fire on (one choice, the shift itself)",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "1c9ba64c14c54dbc",
+    "facts": "465e6155df58dbcc",
+    "facts2": "98aa2cec72d0253b",
+    "all": "4d9f3e0bc1ef9374"
+   },
+   "row_hash": "612394eef6826900",
+   "carried": false,
+   "pass": 12
+  },
+  {
+   "row": "C2188",
+   "screen": "cafe_hire.ask",
+   "verdict": "PASS",
+   "line": "'Not today.' -> 'Suit yourself. Sign stays up.'",
+   "why": "the no has its own screen; cafe_ask_parked is unset daily (toml:544), so the ask returns tomorrow and nothing is lost",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "a5e6e9ac50172fda",
+    "facts": "ff262f132ed5ba6b",
+    "facts2": "ff262f132ed5ba6b",
+    "all": "42418262d722c19a"
+   },
+   "row_hash": "612394eef6826900",
+   "carried": false,
+   "pass": 12
+  },
+  {
+   "row": "C2189",
+   "screen": "cafe_first_shift.start",
+   "verdict": "N/A",
+   "line": "",
+   "why": "plays once: cafe_first_shift_done closes it",
+   "cause": null,
+   "note": true,
+   "screen_hash": {
+    "text": "1c9ba64c14c54dbc",
+    "facts": "465e6155df58dbcc",
+    "facts2": "98aa2cec72d0253b",
+    "all": "4d9f3e0bc1ef9374"
+   },
+   "row_hash": "20748838895e4545",
+   "carried": false,
+   "pass": 12
+  },
+  {
+   "row": "C2189",
+   "screen": "cafe_hire.ask",
+   "verdict": "PASS",
+   "line": "cafe_ask_parked, unset in [engine.daily_tick]",
+   "why": "after a no the ask rests a day; after a yes cafe_hired closes it",
+   "cause": null,
+   "note": true,
+   "screen_hash": {
+    "text": "a5e6e9ac50172fda",
+    "facts": "ff262f132ed5ba6b",
+    "facts2": "ff262f132ed5ba6b",
+    "all": "42418262d722c19a"
+   },
+   "row_hash": "20748838895e4545",
+   "carried": false,
+   "pass": 12
+  },
+  {
+   "row": "C2190",
+   "screen": "cafe_first_shift.start",
+   "verdict": "PASS",
+   "line": "trigger_mode manual, no chance, weekdays 10:00-14:56",
+   "why": "Chris's step is a button there for sure once hired",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "1c9ba64c14c54dbc",
+    "facts": "465e6155df58dbcc",
+    "facts2": "98aa2cec72d0253b",
+    "all": "4d9f3e0bc1ef9374"
+   },
+   "row_hash": "452a5657d7527351",
+   "carried": false,
+   "pass": 12
+  },
+  {
+   "row": "C2190",
+   "screen": "cafe_hire.ask",
+   "verdict": "PASS",
+   "line": "trigger_mode manual, no chance, Mon-Sat 10:00-20:55",
+   "why": "Tom's step is a button that is there for sure whenever due, never behind a roll",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "a5e6e9ac50172fda",
+    "facts": "ff262f132ed5ba6b",
+    "facts2": "ff262f132ed5ba6b",
+    "all": "42418262d722c19a"
+   },
+   "row_hash": "452a5657d7527351",
+   "carried": false,
+   "pass": 12
+  },
+  {
+   "row": "C2190",
+   "screen": "npc_chris",
+   "verdict": "N/A",
+   "line": "",
+   "why": "People dialog field, not a moment",
+   "cause": null,
+   "note": false,
+   "screen_hash": null,
+   "row_hash": "452a5657d7527351",
+   "carried": false,
+   "pass": 12
+  },
+  {
+   "row": "C2190",
+   "screen": "npc_tom",
+   "verdict": "N/A",
+   "line": "",
+   "why": "People dialog field, not a moment",
+   "cause": null,
+   "note": false,
+   "screen_hash": null,
+   "row_hash": "452a5657d7527351",
+   "carried": false,
+   "pass": 12
   },
   {
    "row": "C286",
@@ -3473,53 +3610,6 @@
     "all": "1910d5d60f0f740b"
    },
    "row_hash": "0304731d263aed9f",
-   "carried": true,
-   "pass": 7
-  },
-  {
-   "row": "C330",
-   "screen": "*",
-   "verdict": "N/A",
-   "line": "You made $22.",
-   "why": "no climb meter shown or paid",
-   "cause": null,
-   "note": false,
-   "screen_hash": "d86f270c9c58a862",
-   "row_hash": "923a40b5ad4048fd",
-   "carried": true,
-   "pass": 5
-  },
-  {
-   "row": "C330",
-   "screen": "cafe_hire.both",
-   "verdict": "N/A",
-   "line": "\u2014",
-   "why": "no meter",
-   "cause": null,
-   "note": false,
-   "screen_hash": {
-    "text": "7a2e33087aeddb7d",
-    "facts": "f7c3287ef5d44121",
-    "all": "1910d5d60f0f740b"
-   },
-   "row_hash": "923a40b5ad4048fd",
-   "carried": true,
-   "pass": 7
-  },
-  {
-   "row": "C330",
-   "screen": "cafe_hire.sign",
-   "verdict": "N/A",
-   "line": "",
-   "why": "No meter moves.",
-   "cause": null,
-   "note": false,
-   "screen_hash": {
-    "text": "ae03affa45dfe48f",
-    "facts": "f7c3287ef5d44121",
-    "all": "ce7de5f2bab0fa98"
-   },
-   "row_hash": "923a40b5ad4048fd",
    "carried": true,
    "pass": 7
   },
@@ -6697,8 +6787,8 @@
  ],
  "causes": [],
  "pending": [],
- "asked": 2,
- "answered": 2,
+ "asked": 3,
+ "answered": 3,
  "pass_items": [],
  "unowed": []
 }

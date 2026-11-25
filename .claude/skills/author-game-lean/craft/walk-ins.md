@@ -1,6 +1,10 @@
-# craft/walk-ins.md — what she walks into, and who walks in on her
+# craft/walk-ins.md — what she walks into, who walks in on her, and who comes to her
 
-Read this before you write a card for a scene that waits at a place: something she walks into (a couple behind the boathouse, a fight on the stairs), or someone who walks in on her in the middle of an act (a housemate at the bathroom door). The plan's walk-ins bite (`plan.md` §8) lists them, area by area; each area's scenes are one piece.
+Read this before you write a card for a scene that waits at a place: something she walks into (a couple behind the boathouse, a fight on the stairs), someone who walks in on her in the middle of an act (a housemate at the bathroom door), or someone who comes to her when she arrives (the neighbour waves her over at the gate). The plan's walk-ins bite (`plan.md` §8) lists them, area by area; each area's scenes are one piece.
+
+**Two kinds, our design** (LO, typed in main-lean 2026-11-26: "Yes", "One is fine for now"; the measures are the study's, `COT_DESIGN_STUDY.md` Part 9 and `playtest_study_20261109/13_random_scenes_top.md`):
+- **(a) She walks in on someone:** a button at the place, as below. Her choice to look.
+- **(b) Someone comes to her:** it fires by itself when she arrives, hand-written for one named person, only where that person's rows put them ("When someone comes to her", below). The world's choice to reach her.
 
 ## Must read
 
@@ -32,11 +36,18 @@ On a card with a `Does:` block (every card from 2026-11-24 on), the rows that ap
 | L147 | the world felt empty: 69 of first_term's 82 random scenes were about her body | the lesson itself: 69 of first_term's 82 random scenes were about her body (`lists/LESSONS.md`) | the plan | reader |
 | L150 | no "nothing happens" scene, anywhere | first_term had them; LO cut them all | a walk-in | reader |
 | L4 | plan from the study's answer and its target, not from the tools already built | first_term planned 10 random events because a helper existed, and reached 19% of ~50% | the plan | reader |
+| C2186 | someone comes to her: a scene that fires by itself on arrival, written for one named person, only where their rows put them: at her place (`requires_npc`), or next door, coming to her (an `npc_at_location` on the adjoining place); about half are everyday | first_term_lean has none: every scene at a place is a button she must find, and the study's players say surprises are too rare (Part 9) | a walk-in | script + walkins |
+| C2187 | at most one "comes to her" scene a day across the whole game: one brake flag every such scene waits on and sets on every way out, cleared in `[engine.daily_tick]`; kind (a) and story moments are outside the limit | — · kept blocking: LO's "One is fine for now" | a walk-in | script + walkins |
+| C2188 | always a written way out, with its own line; a no is free while her meters are frozen, and costs a little with that person once feelings move | — · kept blocking: LO's "Yes" (2026-11-26); every study game has one (Part 9) | a walk-in, a no is possible | reader + walkins |
+| C2189 | a repeat rests or climbs one step (each step needs the one before); it never replays at once. The rest before the same scene comes again is set per game, LO's call, on the plan (worked example: three days) | — (LO's "Yes"; the rest, LO, typed in main-lean 2026-11-26: "Go with your picks") | a repeatable | note |
+| C2190 | a story moment fires for sure when it is due, never behind a chance | — · kept blocking: LO's "Yes" (2026-11-26); same lesson as C174 | a person's arc step | script + walkins |
+| C2191 | bolder answers open by her level, once her meters move | — (later releases; LO's "Yes") | a release after the first | note |
+| C2192 | release 1: 8 to 10 "comes to her" scenes, and the first steps of two or three chains, flags only | — (the count; LO's "Yes") | the plan | note |
 
 ## The engine (cited; `v2.py` is `apps/game_generation/twee_comprehensive/generators/v2.py`)
 
 - **A scene she walks into** is a canvas whose `trigger.location` is the place. It shows as a button there. `max_triggers_per_day = 1` makes it once a day (read at v2.py:15077).
-- **A scene behind a chance** sets `trigger_mode = "random"` and `chance` on its trigger (read at v2.py:15103-15106). The engine rolls each time the place's list is built, and on a miss the button is not there (v2.py:6415-6421).
+- **A scene behind a chance is never a button.** `trigger_mode = "random"` and `chance` on its trigger (read at v2.py:15209-15216) make it fire by itself on arrival: the place's passage calls `setup.getStoryCanvasRedirect` (v2.py:11447, 6555), which runs `setup.checkRandomEncounters` (v2.py:6823-6943). That rolls each eligible one and sends her into the first hit. Every button path skips a random canvas (v2.py:4616, 4736, 5946, 5977, 6009, 6603, 6726). The roller that once showed a button by chance, `setup.selectCanvasByPriority` (v2.py:6444), is called from nowhere. So a chance is kind (b) only ("When someone comes to her").
 - **Someone walks in on her** is a rule on the act she is doing: `[[canvases.trigger.substitutions]]` with `target_canvas_id`, `chance` and conditions (v2.py:14679-14689). `setup.checkAndSubstituteCanvas` (v2.py:6932) runs it when she starts the act; each rule rolls its own dice and the first that hits wins (v2.py:7004-7011). Rules that share an `exclusive_group` (read at v2.py:14695) share one roll instead, and groups go before the independent rules (v2.py:6926-6931, 6967-6991). An `npc_at_location` condition reads the person's rows: `scripts/who_is_where.py` shows where the rows put them.
 
 ## The shape
@@ -173,6 +184,53 @@ Picture: *Her, 19, in a small shared bathroom shower, wet and bare, turning towa
 
 Two screens: the moment, then the answer (C792). No meter moves.
 
+## When someone comes to her
+
+Kind (b). She arrives, and before the place's screen a named person is there for her: the neighbour waves her over, a classmate falls into step. The scene is the world reaching her, so it is written for that person and that place, never a stranger pulled from a pool.
+
+Engine, cited. A random canvas at the place is rolled on every arrival (v2.py:6823-6943), after these filters: not when she comes back from a menu page (v2.py:6842), the place resting after a hit (`random_cooldown` arrivals, 3 by default, v2.py:6845-6850, 6936-6938), the canvas's schedule and conditions (`setup.isCanvasSelectable`, v2.py:6092), its `max_triggers_per_day` by name (v2.py:6870-6879), `entry_only_from` (v2.py:6881-6899), and `requires_npc` against the person's rows (v2.py:6905-6918). A story moment (a one-time canvas that is not random) goes first (v2.py:5938-5959, 6560-6566). Nothing in the engine limits these across places; the one-a-day brake is ours, a flag (author-game-v2 `references/engine.md` §7, §28).
+
+1. **A named person, where they are** (C2186, L97). Two forms, and the check takes either:
+   - **At her place:** `requires_npc` names them, and their rows put them at the place at that time.
+   - **From next door:** they come to her from an adjoining place their rows put them in, a knock on her door, a call from the next room, a wave from the porch. The canvas has no `requires_npc` (it would ask for them at her place, v2.py:6905-6918) and gates on an `npc_at_location` `is_present` condition on the adjoining place (read at v2.py:5419-5435). Adjoining means the same area: a room sharing her place's `parent`, or that parent itself, the hub. The card names the place and why it adjoins. The scene's first line shows them arriving, and the reader judges it. Why: P49's approved "he knocks on her bedroom door" had his own room next door in his rows and no row in hers; the at-her-place form pushed it into the hall, a 13-minute window on weekdays, and lost the scene LO approved (LO, typed in main-lean 2026-11-26: "Go with your picks").
+   Either way they arrive doing what their row has them doing.
+2. **About half everyday.** Their life going on, a small social moment (C788, C802). Count the share across the release's scenes on the plan.
+3. **One a day, across the game.** Every "comes to her" scene waits on the same flag (`is_false`), every choice on its first screen sets it, and `[engine.daily_tick]` clears it (C2187). A button she finds (kind a) and a story moment don't touch the flag. `scripts/walkins.py` is red on a scene without it, on a way out that forgets it, and on two flags.
+4. **Always a written way out** (C2188). Two choices at least, each with its own line after the click. While her meters are frozen a no is free; once feelings move, a no costs that person a little.
+5. **A repeat rests or climbs** (C2189). **The rest is the game's number, and LO's call:** how many days before the same scene can come again goes on the plan with his words, never a default (`SKILL.md`, Always 8). Worked example: a game with about ten of these rests each scene three days, so no one scene crowds the week (LO's pick for such a game, typed in main-lean 2026-11-26: "Go with your picks"; measures: about a day in CoT, 4 to 10 days in Shady Deals after she takes the offer). Written as a `days_since_flag` condition on the scene's own flag, `operator = "gte"`, `value = 3`. Short of that rest: the same person not again for a day or more (`max_triggers_per_day = 1` and the brake give at most one a day; a longer rest is a `days_since_flag` condition on the flag its last visit set, `operator = "gte"`, read at v2.py:5199-5233; it fails while the flag was never set, so a first visit needs its own branch). Climbs: each step needs the one before (a flag the last step set). Never the same scene again at once.
+6. **A story moment is never behind a chance** (C2190, C174). A person's arc step at a place is a one-time canvas that fires when due; it is not `trigger_mode = "random"`. The check is red when a card's Does: puts "a person's arc step" on a random canvas.
+7. **Bolder answers by her level** (C2191), once meters move: a band on her level adds a choice. Release 1 has none.
+8. **Release 1** (C2192): 8 to 10 of these, and the first steps of two or three chains, each setting a flag only.
+
+**G · Someone comes to her, everyday** (38 words). Roles: a neighbour whose morning row is the park path, 07:00–09:00.
+
+```toml
+[canvases.trigger]
+location = "<park>"
+trigger_mode = "random"
+chance = 0.3
+requires_npc = "<npc_neighbour>"
+is_repeatable = true
+max_triggers_per_day = 1
+
+[canvases.trigger.conditions]
+version = "1.0"
+logic = "AND"
+items = [{ type = "flag", subject = "player", flag_key = "came_to_her_today", operator = "is_false" }]
+
+# [engine.daily_tick] flagEffects = [{ targetType = "player", flag = "came_to_her_today", op = "unset" }, ...]
+```
+
+> The neighbour's at the gate before you're through it, dog lead in one hand, a coffee in the other.
+> "You're the one from number nine. You run?" He looks you up and down. "You should. Mornings, with us."
+
+| button | the first line after the click |
+|---|---|
+| "Maybe tomorrow" | *"I'll hold you to that." The dog's already pulling him off.* · sets `came_to_her_today`, `neighbour_run_asked` |
+| "I'm late, sorry" | *He shrugs and lets the dog have its way.* · sets `came_to_her_today` |
+
+The next step of the chain waits on `neighbour_run_asked`, a day or more later (step 5).
+
 ## How a walk-in grows
 
 (LO, relayed 2026-11-22: "does walkins progresses?? like she can do more in those walkins as things rises?? In the release 1 it stays basic obv. But how does top games do it??")
@@ -233,4 +291,10 @@ A later release appends the 0.35 and 0.70 rules with their ranges and adds their
 - Someone walks in on her and the picture is the door, the steam or him. The picture is her, right after he sees her (C1262).
 - Two walk-ins on one act as independent rules. The first one shadows the second; put them in one `exclusive_group`.
 - A housemate who wants her in his first walk-in because his end want says so. His first one is about him, not her; she comes into it only as his arc moves (LO, 2026-11-21).
+- A "comes to her" scene with no named person, or at a place their rows never reach, at hers or next door (C2186).
+- A scene moved out of the room LO approved to fit a row, when the person comes to her from next door. Gate on the adjoining place instead (C2186, P49).
+- Two of them in one day, because each place has its own rest. One brake flag covers the game (C2187).
+- A scene that comes to her and leaves no way out, or a no that costs her while meters are frozen (C2188).
+- A person's next step behind a 1-in-3 roll on arrival. It fires when due (C2190).
+- A button "by chance": the engine has none (v2.py:6444 is called from nowhere). A chance is always kind (b).
 - Walk-ins found only by going place by place. Ask what each person does when alone, too, or the best ones turn up only by luck.

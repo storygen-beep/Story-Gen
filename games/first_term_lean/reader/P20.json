@@ -1,6 +1,6 @@
 {
  "piece": "P20",
- "pass": 6,
+ "pass": 7,
  "screens": {
   "quad_meet_zoe.coffee": {
    "text": "cacb601aa799b9fd",
@@ -135,7 +135,9 @@
   "C450": "b01ad555668aba2d",
   "C422": "7e128897077ecee6",
   "C460": "67e48e60d5053a2e",
-  "C461": "310706ee076318f2"
+  "C461": "310706ee076318f2",
+  "C2188": "612394eef6826900",
+  "C2190": "452a5657d7527351"
  },
  "verdicts": [
   {
@@ -965,7 +967,7 @@
    "note": false,
    "screen_hash": "492ea00ea89995f9",
    "row_hash": "47b9477e3ec8a790",
-   "carried": false,
+   "carried": true,
    "pass": 6
   },
   {
@@ -978,8 +980,57 @@
    "note": false,
    "screen_hash": "492ea00ea89995f9",
    "row_hash": "40172c2d376bfc32",
-   "carried": false,
+   "carried": true,
    "pass": 6
+  },
+  {
+   "row": "C2188",
+   "screen": "quad_meet_zoe.coffee",
+   "verdict": "PASS",
+   "line": "'I'm fine, thanks.' -> 'More for me, then.'",
+   "why": "the coffee can be refused with its own line; flag only",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "cacb601aa799b9fd",
+    "facts": "9ffbbc8ba008e154",
+    "facts2": "262e056b4f130afa",
+    "all": "6e049aeeb336f9ab"
+   },
+   "row_hash": "612394eef6826900",
+   "carried": false,
+   "pass": 7
+  },
+  {
+   "row": "C2190",
+   "screen": "npc_zoe",
+   "verdict": "N/A",
+   "line": "",
+   "why": "People dialog field, not a moment",
+   "cause": null,
+   "note": false,
+   "screen_hash": null,
+   "row_hash": "452a5657d7527351",
+   "carried": false,
+   "pass": 7
+  },
+  {
+   "row": "C2190",
+   "screen": "quad_meet_zoe.coffee",
+   "verdict": "PASS",
+   "line": "Zoe on the quad",
+   "why": "one-time canvas, trigger_mode manual, no chance: self-fires on arrival when its conditions are met (v2.py:5937-5955)",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "cacb601aa799b9fd",
+    "facts": "9ffbbc8ba008e154",
+    "facts2": "262e056b4f130afa",
+    "all": "6e049aeeb336f9ab"
+   },
+   "row_hash": "452a5657d7527351",
+   "carried": false,
+   "pass": 7
   },
   {
    "row": "C422",

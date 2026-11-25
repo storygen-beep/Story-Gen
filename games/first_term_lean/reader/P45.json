@@ -1,6 +1,6 @@
 {
  "piece": "P45",
- "pass": 2,
+ "pass": 3,
  "screens": {
   "travel_gates_in.walk": {
    "text": "db7c5cffc4b89d44",
@@ -62,7 +62,6 @@
   "C1200": "65e6616cd17c7eb3",
   "C1002": "657248766e62061f",
   "C1250": "fde578d75b0d3620",
-  "C330": "923a40b5ad4048fd",
   "C519": "e78502f7aa28746d",
   "C620": "76250e48ada2b843",
   "C1340": "b76a6583ae88c60f",
@@ -103,7 +102,8 @@
   "C450": "b01ad555668aba2d",
   "C422": "7e128897077ecee6",
   "C460": "67e48e60d5053a2e",
-  "C461": "310706ee076318f2"
+  "C461": "310706ee076318f2",
+  "C2189": "20748838895e4545"
  },
  "verdicts": [
   {
@@ -690,6 +690,19 @@
    "row_hash": "d5758757a709b1af",
    "carried": true,
    "pass": 1
+  },
+  {
+   "row": "C2189",
+   "screen": "*",
+   "verdict": "N/A",
+   "line": "",
+   "why": "town_square and travel gates: navigation, not a scene",
+   "cause": null,
+   "note": true,
+   "screen_hash": "025b4d765c8405f2",
+   "row_hash": "20748838895e4545",
+   "carried": false,
+   "pass": 3
   },
   {
    "row": "C330",
@@ -1377,7 +1390,7 @@
    "note": false,
    "screen_hash": "025b4d765c8405f2",
    "row_hash": "c3599cd09637a240",
-   "carried": false,
+   "carried": true,
    "pass": 2
   }
  ],
