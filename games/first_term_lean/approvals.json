@@ -2406,6 +2406,18 @@
       "sha256": "33226641007b28504213f6b67fba7ba357c320ef52d8ebcc86b47db82fe6bdf1",
       "words": "ENI for LO (delegated 2026-11-24): Ryan follow-ups 1-3; option (c) for step 2; spoken line for the talk check",
       "date": "2026-11-26"
+    },
+    {
+      "card": "P30",
+      "sha256": "8e054fc0fa2583b9cdf1e5f357ea31ec7ad9462eba34ad84aceb843361918438",
+      "words": "ENI for LO (delegated 2026-11-24); LO \"yes\" (2026-11-26): the two watch buttons twice a day",
+      "date": "2026-11-26"
+    },
+    {
+      "card": "P30",
+      "sha256": "0265b5d24036873baff27eb2ddb9cec34fe850003b713bbf3ac23e0bc819709f",
+      "words": "ENI for LO (delegated 2026-11-24); LO \"yes\" (2026-11-26): twice a day; card body brought in line",
+      "date": "2026-11-26"
     }
   ]
 }
