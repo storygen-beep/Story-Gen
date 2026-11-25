@@ -2352,6 +2352,60 @@
       "sha256": "d78aa5cfb2ee4b018d72b6984d0eccba2f278892d491607095614061232bc7a8",
       "words": "ENI for LO (delegated 2026-11-24): reader pass 3 hook on ryan_charger_back.look",
       "date": "2026-11-26"
+    },
+    {
+      "card": "P50",
+      "sha256": "8c6cc39d991f82536fc5f624b5d7db9a646ae0d2688669a63b8bdb1f923711ce",
+      "words": "ENI for LO (delegated 2026-11-24): \"Yes to P50\"; LO \"yes fine\" to the 18 words (2026-11-26)",
+      "date": "2026-11-26"
+    },
+    {
+      "card": "P48",
+      "sha256": "07c474e35e70d6ac74db8fe2153d44a9dc6e5e86a53959c3a1d964338391cff5",
+      "words": "ENI for LO (delegated 2026-11-24): trait lines retired by P50 (C2193)",
+      "date": "2026-11-26"
+    },
+    {
+      "card": "P48",
+      "sha256": "ca3d5b24ae3a1dfbb3744eb0cefe829211f4d635a2d62bcfb77468414dfe1be1",
+      "words": "ENI for LO (delegated 2026-11-24): trait lines retired by P50 (C2193); npcs.<id>.traits are no longer screens",
+      "date": "2026-11-26"
+    },
+    {
+      "card": "P50",
+      "sha256": "ea0bf70607943735bf0b29315c018148daa91e2bf067b9420b3e07d349c09e59",
+      "words": "ENI for LO (delegated 2026-11-24): \"Yes to P50\"; Builds left to P48, which owns engine:people",
+      "date": "2026-11-26"
+    },
+    {
+      "card": "P50",
+      "sha256": "be4eb319de38895866e3c7289141c2ad6ca47dd3b5e788626dcc85a4f79b5546",
+      "words": "ENI for LO (delegated 2026-11-24): \"Yes to P50\"; Tom's Sly line quoted exactly",
+      "date": "2026-11-26"
+    },
+    {
+      "card": "P49",
+      "sha256": "44316b7d8a7c56197bc9d8c5d77757f2b382dbf30952bd4eb6cf43a80bee40e8",
+      "words": "ENI for LO (delegated 2026-11-24): Ryan waits to be let in (his word Shy, C2194), option (a)",
+      "date": "2026-11-26"
+    },
+    {
+      "card": "P49",
+      "sha256": "668f5c994ee0f2daceea0930962c7ea4bf02ce5fff8371b920525fc0218c4291",
+      "words": "ENI for LO (delegated 2026-11-24): Ryan waits to be let in (C2194, option a); a spoken line for the talk check",
+      "date": "2026-11-26"
+    },
+    {
+      "card": "P49",
+      "sha256": "0956759fbd099c99976a5168423831d77d89fd6edafe80c848f642fa4678ba97",
+      "words": "ENI for LO (delegated 2026-11-24): Ryan follow-ups 1-3; option (c) for step 2",
+      "date": "2026-11-26"
+    },
+    {
+      "card": "P49",
+      "sha256": "33226641007b28504213f6b67fba7ba357c320ef52d8ebcc86b47db82fe6bdf1",
+      "words": "ENI for LO (delegated 2026-11-24): Ryan follow-ups 1-3; option (c) for step 2; spoken line for the talk check",
+      "date": "2026-11-26"
     }
   ]
 }

@@ -1,50 +1,57 @@
 {
  "piece": "P11",
- "pass": 10,
+ "pass": 11,
  "screens": {
   "mark_kitchen.hub": {
    "text": "cebee1bac30c4ca9",
+   "traits": "a13af4c65af9f24a",
    "facts": "e8065fe0f1b995c1",
    "facts2": "8ff6682bbd8fcf1c",
    "all": "a6f6a2b85d23b3a2"
   },
   "mark_kitchen.talk": {
    "text": "fe35e365dcfda4ec",
+   "traits": "a13af4c65af9f24a",
    "facts": "811544dad8de125f",
    "facts2": "57f3c2e33f3edc83",
    "all": "49da2ec68f166d6c"
   },
   "mark_kitchen.rent": {
    "text": "9394c9809e8f86c9",
+   "traits": "a13af4c65af9f24a",
    "facts": "5e652ec6e4551af0",
    "facts2": "7073f340f74f069c",
    "all": "3bf25ce111863764"
   },
   "mark_kitchen.pay75": {
    "text": "77d42862e4942fb3",
+   "traits": "a13af4c65af9f24a",
    "facts": "5e652ec6e4551af0",
    "facts2": "7073f340f74f069c",
    "all": "e3c88a749be646e3"
   },
   "mark_kitchen.pay90": {
    "text": "bcecc52dc17ed0c8",
+   "traits": "a13af4c65af9f24a",
    "facts": "5e652ec6e4551af0",
    "facts2": "7073f340f74f069c",
    "all": "04931744b776fc09"
   },
   "mark_kitchen.pay100": {
    "text": "9562246c2be111d9",
+   "traits": "a13af4c65af9f24a",
    "facts": "5e652ec6e4551af0",
    "facts2": "7073f340f74f069c",
    "all": "04bd193bb19a845c"
   },
   "mark_kitchen.short": {
    "text": "8b071b6a2ddd72aa",
+   "traits": "4b9cc244e3119951",
    "facts": "bc7f8aaaf6a4f505",
    "facts2": "796eee3dad582482",
    "all": "6453ab1af862f835"
   },
-  "*": "791a3ce177fd78c2"
+  "*": "5d71f5aceec78ad6"
  },
  "rows": {
   "B1": "5276068df1ca6fa9",
@@ -146,7 +153,7 @@
   "C660": "eaf957bb84e62bbf",
   "C2179": "47b9477e3ec8a790",
   "C2180": "a6c0f498d4d16271",
-  "C2183": "40172c2d376bfc32",
+  "C2194": "0c03931191c53a34",
   "C1340": "b76a6583ae88c60f",
   "C769": "f6b6f78a8f2e5ed7",
   "C794": "bad76e5963432385",
@@ -5793,7 +5800,7 @@
     "all": "3bf25ce111863764"
    },
    "row_hash": "612394eef6826900",
-   "carried": false,
+   "carried": true,
    "pass": 10
   },
   {
@@ -5811,8 +5818,141 @@
     "all": "a6f6a2b85d23b3a2"
    },
    "row_hash": "20748838895e4545",
-   "carried": false,
+   "carried": true,
    "pass": 10
+  },
+  {
+   "row": "C2194",
+   "screen": "mark_kitchen.hub",
+   "verdict": "PASS",
+   "line": "Mark's at the table with his coffee. He looks at you over the rim.",
+   "why": "Mark: Strict (waiting at the table, the watcher's look). A menu line, one sentence; fits.",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "cebee1bac30c4ca9",
+    "traits": "a13af4c65af9f24a",
+    "facts": "e8065fe0f1b995c1",
+    "facts2": "8ff6682bbd8fcf1c",
+    "all": "a6f6a2b85d23b3a2"
+   },
+   "row_hash": "0c03931191c53a34",
+   "carried": false,
+   "pass": 11
+  },
+  {
+   "row": "C2194",
+   "screen": "mark_kitchen.pay100",
+   "verdict": "PASS",
+   "line": "He makes you stand there while he counts it again.",
+   "why": "Mark: Strict (counts it twice), Takes charge (keeps her standing).",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "9562246c2be111d9",
+    "traits": "a13af4c65af9f24a",
+    "facts": "5e652ec6e4551af0",
+    "facts2": "7073f340f74f069c",
+    "all": "04bd193bb19a845c"
+   },
+   "row_hash": "0c03931191c53a34",
+   "carried": false,
+   "pass": 11
+  },
+  {
+   "row": "C2194",
+   "screen": "mark_kitchen.pay75",
+   "verdict": "PASS",
+   "line": "Four Sundays straight, kid, and maybe I'll believe you can do this.",
+   "why": "Mark: Strict (the rule for the rise; counts it twice), Takes charge (makes her stand).",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "77d42862e4942fb3",
+    "traits": "a13af4c65af9f24a",
+    "facts": "5e652ec6e4551af0",
+    "facts2": "7073f340f74f069c",
+    "all": "e3c88a749be646e3"
+   },
+   "row_hash": "0c03931191c53a34",
+   "carried": false,
+   "pass": 11
+  },
+  {
+   "row": "C2194",
+   "screen": "mark_kitchen.pay90",
+   "verdict": "PASS",
+   "line": "He makes you stand there while he counts it again.",
+   "why": "Mark: Strict, Takes charge.",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "bcecc52dc17ed0c8",
+    "traits": "a13af4c65af9f24a",
+    "facts": "5e652ec6e4551af0",
+    "facts2": "7073f340f74f069c",
+    "all": "04931744b776fc09"
+   },
+   "row_hash": "0c03931191c53a34",
+   "carried": false,
+   "pass": 11
+  },
+  {
+   "row": "C2194",
+   "screen": "mark_kitchen.rent",
+   "verdict": "PASS",
+   "line": "Count it out where I can see it.",
+   "why": "Mark: Strict (the amount, the order), Takes charge (his hand out, waiting, even when she can't pay).",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "9394c9809e8f86c9",
+    "traits": "a13af4c65af9f24a",
+    "facts": "5e652ec6e4551af0",
+    "facts2": "7073f340f74f069c",
+    "all": "3bf25ce111863764"
+   },
+   "row_hash": "0c03931191c53a34",
+   "carried": false,
+   "pass": 11
+  },
+  {
+   "row": "C2194",
+   "screen": "mark_kitchen.short",
+   "verdict": "PASS",
+   "line": "Short. Next Sunday, then. Don't make it a habit, kid.",
+   "why": "Mark: Strict. Laura ('Mom's cup stops halfway to her mouth, then keeps going.'): Gives way (doesn't step in) and Nervous (the stopped cup).",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "8b071b6a2ddd72aa",
+    "traits": "4b9cc244e3119951",
+    "facts": "bc7f8aaaf6a4f505",
+    "facts2": "796eee3dad582482",
+    "all": "6453ab1af862f835"
+   },
+   "row_hash": "0c03931191c53a34",
+   "carried": false,
+   "pass": 11
+  },
+  {
+   "row": "C2194",
+   "screen": "mark_kitchen.talk",
+   "verdict": "PASS",
+   "line": "You working, kid? Rent doesn't wait. And don't spend it all on coffee.",
+   "why": "Mark: Strict (checks up on her, the rule).",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "fe35e365dcfda4ec",
+    "traits": "a13af4c65af9f24a",
+    "facts": "811544dad8de125f",
+    "facts2": "57f3c2e33f3edc83",
+    "all": "49da2ec68f166d6c"
+   },
+   "row_hash": "0c03931191c53a34",
+   "carried": false,
+   "pass": 11
   },
   {
    "row": "C338",
@@ -12327,8 +12467,8 @@
  ],
  "causes": [],
  "pending": [],
- "asked": 2,
- "answered": 2,
+ "asked": 1,
+ "answered": 1,
  "pass_items": [],
  "unowed": []
 }

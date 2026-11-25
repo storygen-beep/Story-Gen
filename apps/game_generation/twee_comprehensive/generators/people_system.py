@@ -291,7 +291,8 @@ function bubble(label, cls, tip) {
 // nothing at all until the first is known (CoT).
 P.viewHtml = function (slug) {
     var h = "", shown = P.shownTraits(slug), known = P.knownTraits(slug);
-    if (known.length > 0) {
+    // [engine.people] show_traits = false: traits stay the author's, and the view prints none.
+    if (C.show_traits !== false && known.length > 0) {
         h += '<div class="personality-traits-container"><div class="display-npc-personalty-traits-header">Personality</div>' +
             '<div class="npc-display-infobubble-container">';
         known.forEach(function (t) {

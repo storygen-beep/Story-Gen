@@ -1,32 +1,36 @@
 {
  "piece": "P47",
- "pass": 4,
+ "pass": 5,
  "screens": {
   "dean_first.door": {
    "text": "97cfd263b75f4f60",
+   "traits": "c6984adcd9df71b0",
    "facts": "3052b070d6b4a62b",
    "facts2": "e533cd9910667c06",
    "all": "dd6f7b39ae711a4d"
   },
   "dean_first.rules": {
    "text": "11c7469218dce928",
+   "traits": "c6984adcd9df71b0",
    "facts": "db9b0b44ed2ba95b",
    "facts2": "1be0e2cff096fec3",
    "all": "bbf09ca8f1a1d47a"
   },
   "dean_first.timetable": {
    "text": "84b75da6bf1cd7a0",
+   "traits": "bd8b6c990fa6bbac",
    "facts": "64fe7bb1526751d2",
    "facts2": "de0d87c7e3da4a1d",
    "all": "66406c00f6afeac1"
   },
   "dean_first.sendoff": {
    "text": "786a5e0ea6e0a43e",
+   "traits": "c6984adcd9df71b0",
    "facts": "c16d7bce63e9100c",
    "facts2": "eb2cf7d73785fdaf",
    "all": "05d7cfd5ba99dd19"
   },
-  "*": "59c88a53c785ea38"
+  "*": "e0599b77f4f6e39f"
  },
  "rows": {
   "B1": "5276068df1ca6fa9",
@@ -120,7 +124,7 @@
   "C644": "f5e1d79f3251dbab",
   "C596": "e5f7e6cf2d01613d",
   "C2179": "47b9477e3ec8a790",
-  "C2183": "40172c2d376bfc32",
+  "C2194": "0c03931191c53a34",
   "C448": "b86596f1a02766de",
   "L168": "444c44970dc284f2",
   "L169": "59defccfc63b0454",
@@ -1021,7 +1025,7 @@
     "all": "dd6f7b39ae711a4d"
    },
    "row_hash": "452a5657d7527351",
-   "carried": false,
+   "carried": true,
    "pass": 4
   },
   {
@@ -1034,8 +1038,84 @@
    "note": false,
    "screen_hash": null,
    "row_hash": "452a5657d7527351",
-   "carried": false,
+   "carried": true,
    "pass": 4
+  },
+  {
+   "row": "C2194",
+   "screen": "dean_first.door",
+   "verdict": "PASS",
+   "line": "Is that what you're wearing to class, child?",
+   "why": "Dean Sterling: Strict (doesn't ask her to sit), Takes charge (reads her body like a form he means to sign).",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "97cfd263b75f4f60",
+    "traits": "c6984adcd9df71b0",
+    "facts": "3052b070d6b4a62b",
+    "facts2": "e533cd9910667c06",
+    "all": "dd6f7b39ae711a4d"
+   },
+   "row_hash": "0c03931191c53a34",
+   "carried": false,
+   "pass": 5
+  },
+  {
+   "row": "C2194",
+   "screen": "dean_first.rules",
+   "verdict": "PASS",
+   "line": "Dress like a student, not like a guest.",
+   "why": "Dean Sterling: Strict, Takes charge ('Classes are not optional, child.').",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "11c7469218dce928",
+    "traits": "c6984adcd9df71b0",
+    "facts": "db9b0b44ed2ba95b",
+    "facts2": "1be0e2cff096fec3",
+    "all": "bbf09ca8f1a1d47a"
+   },
+   "row_hash": "0c03931191c53a34",
+   "carried": false,
+   "pass": 5
+  },
+  {
+   "row": "C2194",
+   "screen": "dean_first.sendoff",
+   "verdict": "PASS",
+   "line": "Psychology, child. Lecture hall, at nine. Don't make me hear you were late.",
+   "why": "Dean Sterling: Strict.",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "786a5e0ea6e0a43e",
+    "traits": "c6984adcd9df71b0",
+    "facts": "c16d7bce63e9100c",
+    "facts2": "eb2cf7d73785fdaf",
+    "all": "05d7cfd5ba99dd19"
+   },
+   "row_hash": "0c03931191c53a34",
+   "carried": false,
+   "pass": 5
+  },
+  {
+   "row": "C2194",
+   "screen": "dean_first.timetable",
+   "verdict": "PASS",
+   "line": "Your timetable. Learn it.",
+   "why": "Dean Sterling: Strict, Takes charge (two fingers on the sheet before he lets go).",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "84b75da6bf1cd7a0",
+    "traits": "bd8b6c990fa6bbac",
+    "facts": "64fe7bb1526751d2",
+    "facts2": "de0d87c7e3da4a1d",
+    "all": "66406c00f6afeac1"
+   },
+   "row_hash": "0c03931191c53a34",
+   "carried": false,
+   "pass": 5
   },
   {
    "row": "C327",

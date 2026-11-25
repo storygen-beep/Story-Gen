@@ -1,158 +1,183 @@
 {
  "piece": "P07",
- "pass": 9,
+ "pass": 10,
  "screens": {
   "opening.wake": {
    "text": "cc3c063d9cef0f23",
+   "traits": "44136fa355b3678a",
    "facts": "8211a28bc952c9a8",
    "facts2": "8211a28bc952c9a8",
    "all": "b47c03f5d3c55a74"
   },
   "opening.kitchen_rent": {
    "text": "7dab9336c6fbdb16",
+   "traits": "4b9cc244e3119951",
    "facts": "3b335cd140fd108c",
    "facts2": "9691865c876f8a5f",
    "all": "63b630778e968f95"
   },
   "opening.kitchen_ask": {
    "text": "737b667eb08c1d74",
+   "traits": "4b9cc244e3119951",
    "facts": "2cb0d6b3a4644725",
    "facts2": "b761c5ac564d08bd",
    "all": "de6b35675adc13a2"
   },
   "opening.bath_grades": {
    "text": "1a3987499f46332b",
+   "traits": "4b9cc244e3119951",
    "facts": "e6d195cc52843606",
    "facts2": "c1cd670a0173658d",
    "all": "876a19272fe9695d"
   },
   "opening.bath_fun": {
    "text": "17255da5baf577ef",
+   "traits": "4b9cc244e3119951",
    "facts": "0d2e00e2b00d9d9c",
    "facts2": "54441499f4a93ca3",
    "all": "610ca7905e98adcd"
   },
   "opening.bath_freedom": {
    "text": "6c5bc6bd3a083efe",
+   "traits": "4b9cc244e3119951",
    "facts": "af8c69d5077d85d9",
    "facts2": "b16499cbab312c9c",
    "all": "6e76ba2921c19240"
   },
   "opening.bath": {
    "text": "d00f9006696d287d",
+   "traits": "74c4f68e6476ecee",
    "facts": "08380921df914eef",
    "facts2": "95093214eadaa443",
    "all": "ba6923f6931b26dc"
   },
   "opening.hall": {
    "text": "20fd03b2cbe8ed50",
+   "traits": "74c4f68e6476ecee",
    "facts": "1e0168afad0e9566",
    "facts2": "ce93dea924b820f0",
    "all": "d67fa7135cdfe4b0"
   },
   "opening.room_past": {
    "text": "82c1b173aeb2608a",
+   "traits": "74c4f68e6476ecee",
    "facts": "a5e2fa448eeaeeaa",
    "facts2": "4813fa938d77e462",
    "all": "00031c4323c44b1b"
   },
   "opening.room_spoke": {
    "text": "2124ff3068418da1",
+   "traits": "74c4f68e6476ecee",
    "facts": "c0245549ec8bef74",
    "facts2": "45d959c38e033704",
    "all": "45d0f1339f7d2482"
   },
   "opening.room_waited": {
    "text": "c5a401b11c0eddc1",
+   "traits": "74c4f68e6476ecee",
    "facts": "3dfaf2f3c5ecd85d",
    "facts2": "6e56bdc0c43cc1b4",
    "all": "8df38831a530d3c0"
   },
   "opening.room": {
    "text": "38c16857e4551e5b",
+   "traits": "44136fa355b3678a",
    "facts": "7f5851883cb8d732",
    "facts2": "7f5851883cb8d732",
    "all": "47e327c8143e37a1"
   },
   "opening.sums": {
    "text": "48aa23cc99bd631e",
+   "traits": "a13af4c65af9f24a",
    "facts": "6df3738c1a935470",
    "facts2": "a7c255ea1260b6e0",
    "all": "4bf666fd25600983"
   },
   "opening.handover": {
    "text": "1d46c3684cfbd5e4",
+   "traits": "4b9cc244e3119951",
    "facts": "af2b5ece03010b6f",
    "facts2": "d0a233646d75ef07",
    "all": "e0d8743ca6cf8993"
   },
   "opening.sit_with_mom": {
    "text": "8b7efbc159662aff",
+   "traits": "4b9cc244e3119951",
    "facts": "6aa1e7e67910592a",
    "facts2": "15b2c1ff727165b1",
    "all": "fb025ee5267d4642"
   },
   "opening.ask_mom": {
    "text": "e6801fa98e7f89b1",
+   "traits": "95f1c22815f415ed",
    "facts": "2f9a8bc35488eabd",
    "facts2": "1e5693a2790c8354",
    "all": "2f799028dcc6f434"
   },
   "talk_mom.hub": {
    "text": "0f4660e14b94ab43",
+   "traits": "4b9cc244e3119951",
    "facts": "a8dd4b5a3c3490e0",
    "facts2": "d48da7894fcd432a",
    "all": "4c25ee55de599eb7"
   },
   "talk_mom.talk": {
    "text": "feb79fad5e3d8649",
+   "traits": "ff8b9fa74641271c",
    "facts": "600f467893ef7bb9",
    "facts2": "667847517eb6a28b",
    "all": "66b9b16dce192c2f"
   },
   "talk_mom.eat": {
    "text": "cb5b4b6d73033d19",
+   "traits": "ff8b9fa74641271c",
    "facts": "bcd4fca1f4ccef8f",
    "facts2": "508d10677899c7a7",
    "all": "72eab913c378c469"
   },
   "mom_living_room.hub": {
    "text": "fa2c2d66908e634d",
+   "traits": "4b9cc244e3119951",
    "facts": "7b52a3219c796bed",
    "facts2": "d35574a6bc629447",
    "all": "ea352dd9afd21c11"
   },
   "mom_living_room.talk": {
    "text": "eb78fbf9c5206259",
+   "traits": "4b9cc244e3119951",
    "facts": "6bc79094f8d39647",
    "facts2": "04bf141c5cb5340b",
    "all": "13a427d6071bc370"
   },
   "borrow_mom.take": {
    "text": "b72f444bc5afd26d",
+   "traits": "95f1c22815f415ed",
    "facts": "87170b0600d4eb1b",
    "facts2": "b574bdfe31b183e7",
    "all": "812575387a951149"
   },
   "borrow_hoodie.take": {
    "text": "30c1f96b2a025bc3",
+   "traits": "44136fa355b3678a",
    "facts": "77447b04892972f0",
    "facts2": "77447b04892972f0",
    "all": "55c8ae3da3cebd49"
   },
   "return_hoodie.return": {
    "text": "d3b3afbd32d439d4",
+   "traits": "44136fa355b3678a",
    "facts": "77447b04892972f0",
    "facts2": "77447b04892972f0",
    "all": "fc8ba24021b1c8c3"
   },
   "return_mom.return": {
    "text": "0b6c44a1159be9b6",
+   "traits": "95f1c22815f415ed",
    "facts": "87170b0600d4eb1b",
    "facts2": "b574bdfe31b183e7",
    "all": "b9cacebfdba34bb4"
   },
-  "*": "655307a73419f85a"
+  "*": "90e648c7942cd765"
  },
  "rows": {
   "B1": "5276068df1ca6fa9",
@@ -342,11 +367,12 @@
   "C644": "045102ba2f0a9453",
   "C596": "9f0309959e14079c",
   "C660": "0c597aa282053560",
-  "C2177": "df399a418764decd",
-  "C2178": "d9961fc61f627d61",
+  "C2177": "b14487623cb6fccb",
+  "C2178": "9c0115927a58f45d",
   "C2179": "5c8a5cf6d51d30ff",
   "C2180": "e0a49b4151b1ffe1",
-  "C2183": "7187b816725b0ea6",
+  "C2193": "67d1dd3f1a662064",
+  "C2194": "261bc3d5c5b53f2a",
   "C2182": "d8783d0c85f8bad2",
   "C448": "584dada6c379e3d8",
   "L168": "8be185110de48529",
@@ -365,7 +391,7 @@
   "people#10": "4a994154015ae37d",
   "people#11": "022fe9bee3ccb72a",
   "people#12": "479d0271d9f97da4",
-  "people#13": "5bbe85b553019b79",
+  "people#13": "430f08c7c736c6db",
   "people#14": "a5525afeb491f4fc",
   "people#15": "b50727378128b19e",
   "C769": "cf7d7a82afabcbbb",
@@ -4048,27 +4074,27 @@
    "row": "C2177",
    "screen": "*",
    "verdict": "PASS",
-   "line": "npc_laura traits = Submissive, Cook, Insecure; friendship 300, lust 0, control 200",
-   "why": "Laura, Mark and Ryan (the people P07 touches) each have friendship/lust/control in -1000..1000, gender, attracted, people_type and 3 traits; no 0-100 person meter on any of them",
+   "line": "npc_laura friendship 300, lust 0, control 200; female; attracted; family_parent; traits Warm, Nervous, Gives way, Cook",
+   "why": "Laura, Mark (0/0/500, male, Strict, Takes charge) and Ryan (0/100/0, male, Shy, Gives way, Gamer) each carry the three feelings in -1000..1000, gender, attracted, a type and 2\u20134 of the game's own words, each a row in [engine.people.traits.<Word>]; show_traits = false in the TOML and the built HTML; core_traits hold only friendship/lust/control, no 0\u2013100 person meter; check.py GREEN",
    "cause": null,
    "note": false,
-   "screen_hash": "655307a73419f85a",
-   "row_hash": "df399a418764decd",
+   "screen_hash": "90e648c7942cd765",
+   "row_hash": "b14487623cb6fccb",
    "carried": false,
-   "pass": 9
+   "pass": 10
   },
   {
    "row": "C2178",
    "screen": "*",
    "verdict": "PASS",
-   "line": "Cook: \"Mom's at the stove.\" \u00b7 Insecure: \"Tell me one good thing. Just one.\"",
-   "why": "each trait has a job: Submissive/Dominant/Confident/Switch are want-set traits; Cook, Insecure, Particular (\"Straight A's don't pay rent.\") and Gamer (\"Ryan's on his bed with a controller\") are manner/hobby traits shown by written lines",
+   "line": "| Family, parent | 300 | 0 | 200 | Warm, Gives way, Strict, Takes charge, Cook |",
+   "why": "Laura starts on the family_parent row and Mark is tuned from it to 0/0/500 with Strict, Takes charge; Ryan's family_sibling row (Shy, Gives way, Gamer) tuned to lust 100. Laura's Nervous is not in her type's word list: read as hand-tuning, which the rule allows (\"then each is tuned by hand\")",
    "cause": null,
    "note": false,
-   "screen_hash": "655307a73419f85a",
-   "row_hash": "d9961fc61f627d61",
+   "screen_hash": "90e648c7942cd765",
+   "row_hash": "9c0115927a58f45d",
    "carried": false,
-   "pass": 9
+   "pass": 10
   },
   {
    "row": "C2179",
@@ -4080,7 +4106,7 @@
    "note": false,
    "screen_hash": "655307a73419f85a",
    "row_hash": "5c8a5cf6d51d30ff",
-   "carried": false,
+   "carried": true,
    "pass": 9
   },
   {
@@ -4093,7 +4119,7 @@
    "note": false,
    "screen_hash": "655307a73419f85a",
    "row_hash": "e0a49b4151b1ffe1",
-   "carried": false,
+   "carried": true,
    "pass": 9
   },
   {
@@ -4106,7 +4132,7 @@
    "note": true,
    "screen_hash": "655307a73419f85a",
    "row_hash": "d8783d0c85f8bad2",
-   "carried": false,
+   "carried": true,
    "pass": 9
   },
   {
@@ -4119,8 +4145,34 @@
    "note": false,
    "screen_hash": "655307a73419f85a",
    "row_hash": "7187b816725b0ea6",
-   "carried": false,
+   "carried": true,
    "pass": 9
+  },
+  {
+   "row": "C2193",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "Laura: Warm (\"Sit with me a minute, baby.\"), Nervous (\"Tell me one good thing. Just one.\"), Gives way (P38: \"Then be quiet, Laura. Be quiet for me.\"), Cook (\"Mom's at the stove.\")",
+   "why": "each word is fixed, on or off, never shown (headless render of Laura's view: no Personality block, no '???', no bubble); PLAN \u00a73 carries Laura's, Mark's and Ryan's 2\u20134 words each with its line, all present in 5_scenes.toml; two-word labels (Gives way, Takes charge) are names on the game's own list, LO's call (NOTES 2026-11-26: \"yes fine\" \u00b7 \"all 18 kept, no merges, no changes\")",
+   "cause": null,
+   "note": false,
+   "screen_hash": "90e648c7942cd765",
+   "row_hash": "67d1dd3f1a662064",
+   "carried": false,
+   "pass": 10
+  },
+  {
+   "row": "C2194",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "Mom's eyes drop to the skirt. Her skirt. Her mouth goes tight, and she says nothing.",
+   "why": "on P07's person screens every line fits the person's words: Laura Warm/Nervous (\"Just... promise me you'll still be the girl you were in high school.\", \"That's exactly what I'm afraid of.\") and Gives way (the noticing lines: she says nothing; \"He means it, @player. I tried.\"); Mark Strict and Takes charge (\"Seventy-five a week, starting Sunday.\", \"One way or another.\", \"Straight A's don't pay rent.\"); Ryan Shy and Gives way (\"Sorry. I didn't\u2014 Sorry.\", \"I'll wait. Go.\", his eyes on the ceiling). Ryan's \"Come on, I'm dying out here.\" at the bathroom door is a brother's knock, not a break. Borrow/return screens have no person on them (N/A there)",
+   "cause": null,
+   "note": false,
+   "screen_hash": "90e648c7942cd765",
+   "row_hash": "261bc3d5c5b53f2a",
+   "carried": false,
+   "pass": 10
   },
   {
    "row": "C239",
@@ -5657,19 +5709,6 @@
    "pass": 4
   },
   {
-   "row": "C656",
-   "screen": "*",
-   "verdict": "N/A",
-   "line": "",
-   "why": "no meter",
-   "cause": null,
-   "note": false,
-   "screen_hash": "219040e682a0b26e",
-   "row_hash": "41c869f069a2b028",
-   "carried": true,
-   "pass": 4
-  },
-  {
    "row": "C660",
    "screen": "*",
    "verdict": "PASS",
@@ -5679,7 +5718,7 @@
    "note": false,
    "screen_hash": "655307a73419f85a",
    "row_hash": "0c597aa282053560",
-   "carried": false,
+   "carried": true,
    "pass": 9
   },
   {
@@ -11055,14 +11094,14 @@
    "row": "people#13",
    "screen": "*",
    "verdict": "PASS",
-   "line": "npc_laura people_type family_parent, tuned to 300 / 0 / 200",
-   "why": "type then hand-tuned; at least one learnable non-sex trait each (Laura's Cook and Insecure shown at friendship 300; Mark's Particular and Ryan's Gamer threshold-hidden, personality-kind); shown traits are true: Mom cooks and asks for promises on every visit",
+   "line": "traits = [\"Warm\", \"Nervous\", \"Gives way\", \"Cook\"]",
+   "why": "type then tune (family_parent / family_sibling rows, tuned per person); the words are the brief, hidden, the game's own and LO's; scenes keep them (C2194); no scene reads a word with npc_has_trait, and none needs to: every scene here is written for one named person",
    "cause": null,
    "note": false,
-   "screen_hash": "655307a73419f85a",
-   "row_hash": "5bbe85b553019b79",
+   "screen_hash": "90e648c7942cd765",
+   "row_hash": "430f08c7c736c6db",
    "carried": false,
-   "pass": 9
+   "pass": 10
   },
   {
    "row": "people#14",
@@ -11074,7 +11113,7 @@
    "note": false,
    "screen_hash": "655307a73419f85a",
    "row_hash": "a5525afeb491f4fc",
-   "carried": false,
+   "carried": true,
    "pass": 9
   },
   {
@@ -11087,7 +11126,7 @@
    "note": false,
    "screen_hash": "655307a73419f85a",
    "row_hash": "b50727378128b19e",
-   "carried": false,
+   "carried": true,
    "pass": 9
   },
   {
@@ -11178,7 +11217,7 @@
    "note": false,
    "screen_hash": "655307a73419f85a",
    "row_hash": "9e7dd0f7cac6c2ea",
-   "carried": false,
+   "carried": true,
    "pass": 9
   },
   {
@@ -11477,8 +11516,8 @@
  ],
  "causes": [],
  "pending": [],
- "asked": 11,
- "answered": 11,
+ "asked": 5,
+ "answered": 5,
  "pass_items": [],
  "unowed": []
 }

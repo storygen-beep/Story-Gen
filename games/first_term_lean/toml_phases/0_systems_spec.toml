@@ -562,6 +562,105 @@ people_page = "cot"
 # P48 — CoT's people system (LO 2026-11-25: "Yes lets move to cot style type system", "Meter frozen").
 [engine.people]
 system = "cot"
+# P50 — LO 2026-11-26: "Hide them dont show them, they are for us"; "yes fine" to the 18 words. The author's brief
+# for each person's scenes, never shown. `sets` only where a word keeps today's want (cards/P50.md, node check).
+show_traits = false
+
+[engine.people.traits.Pushy]
+kind = "personality"
+threshold = 0
+description = "Takes the lead with her, says what they want, doesn't wait to be asked."
+sets = ["casualsex", "active"]
+
+[engine.people.traits.Shy]
+kind = "personality"
+threshold = 0
+description = "Looks away, says little, waits for her to speak first."
+sets = ["shy"]
+
+[engine.people.traits.Nervous]
+kind = "personality"
+threshold = 0
+description = "Unsure of themselves; asks for reassurance, second-guesses."
+sets = ["shy"]
+
+[engine.people.traits.Warm]
+kind = "personality"
+threshold = 0
+description = "Looks after her: food, a seat, a warning; glad to see her."
+
+[engine.people.traits.Mean]
+kind = "personality"
+threshold = 0
+description = "Enjoys putting her down, best in front of others."
+
+[engine.people.traits.Strict]
+kind = "personality"
+threshold = 0
+description = "Rules, orders, checks up on her; things done their way."
+
+[engine.people.traits.Gossip]
+kind = "personality"
+threshold = 0
+description = "What she does gets told to someone, usually Mark."
+
+[engine.people.traits.Sly]
+kind = "personality"
+threshold = 0
+description = "Hides something, or takes what isn't theirs; a little underhand."
+
+[engine.people.traits."Takes charge"]
+kind = "sex"
+threshold = 0
+description = "With her body, they lead and move her where they want her."
+sets = ["casualsex", "active", "dominant"]
+
+[engine.people.traits."Gives way"]
+kind = "sex"
+threshold = 0
+description = "Yields to whoever's stronger; follows, goes along."
+sets = ["submissive"]
+
+[engine.people.traits."No strings"]
+kind = "personality"
+threshold = 0
+description = "Won't be tied to one person; nobody owns them."
+sets = ["nodating"]
+
+[engine.people.traits.Watcher]
+kind = "personality"
+threshold = 0
+description = "Their eyes are on her whenever she passes, and they don't hide it."
+
+[engine.people.traits."Show-off"]
+kind = "personality"
+threshold = 0
+description = "Wants to be looked at: the party, the dress, the open door."
+
+[engine.people.traits.Gamer]
+kind = "personality"
+threshold = 0
+description = "Into games: the controller is where you find them and what they talk about."
+
+[engine.people.traits.Cook]
+kind = "personality"
+threshold = 0
+description = "Into cooking: the stove is where you find them and what they talk about."
+
+[engine.people.traits.Sporty]
+kind = "personality"
+threshold = 0
+description = "Into training: the gym is where you find them and what they talk about."
+
+[engine.people.traits.Bookish]
+kind = "personality"
+threshold = 0
+description = "Into books and numbers: their talk is the work."
+
+[engine.people.traits.Arty]
+kind = "personality"
+threshold = 0
+description = "Into making something: the stage, the guitar."
 
 # LO 2026-11-24, "yes hide popups": bookkeeping flags don't toast; flags the player should notice still do.
 # P49 — the "comes to her" flags: bookkeeping, no toast.

@@ -1,6 +1,6 @@
 """people.py: check.py's `people` check, CoT's people system under `[engine.people] system = "cot"`. Planted dict games;
 nothing in games/ is read. LO, typed in main-lean 2026-11-25: "Yes lets move to cot style type system", "Go ahead
-with your picks", "Go ahead"."""
+with your picks", "Go ahead"; trait words hidden and our own, 2026-11-26: "Hide them dont show them, they are for us"."""
 import sys
 from pathlib import Path
 
@@ -12,9 +12,13 @@ import rules  # noqa: E402
 
 def person(**kw):
     n = {"id": "npc_tom", "name": "Tom", "gender": "male", "attracted": True, "people_type": "worker",
-         "traits": ["Forward", "Loner"]}
+         "traits": ["Pushy", "Kind"]}
     n.update(kw)
     return {k: v for k, v in n.items() if v is not None}
+
+
+WORDS = {w: {"kind": "personality", "description": f"{w}, in how he is with her."}
+         for w in ("Pushy", "Kind", "Shy", "Cook", "Gamer")}
 
 
 def talk(*conds, gate=None):
@@ -24,23 +28,25 @@ def talk(*conds, gate=None):
     return {"id": "tom_talk", "nodes": [{"id": "a", "exit_block": {"choices": [choice]}}]}
 
 
-LONER = {"type": "npc_has_trait", "npc_id": "npc_tom", "trait": "Loner"}
+LONER = {"type": "npc_has_trait", "npc_id": "npc_tom", "trait": "Kind"}
 
 
-def planted(*npcs, canvases=None, switch=True, skills=("exhibitionism",), caps=None):
+def planted(*npcs, canvases=None, switch=True, skills=("exhibitionism",), caps=None, show=False, words=WORDS):
     game = {"npcs": list(npcs) or [person()], "canvases": canvases if canvases is not None else [talk(LONER)],
             "player": {"core_traits": {k: 0 for k in skills}},
             "traits": {"labels": [{"key": k, "label": k.title(), "skill": True} for k in skills]}}
     engine = {}
     if switch:
-        engine["people"] = {"system": "cot"}
+        engine["people"] = {"system": "cot", "traits": dict(words)}
+        if show is not None:
+            engine["people"]["show_traits"] = show
     if caps:
         engine["daily_caps"] = caps
     game["engine"] = engine
     return game
 
 
-def test_a_typed_person_with_jobs_for_both_traits_is_green():
+def test_a_typed_person_with_two_own_words_is_green():
     assert people.problems(planted()) == []
 
 
@@ -62,30 +68,30 @@ def test_hand_set_values_stand_in_for_a_type():
     assert people.problems(planted(person(people_type=None, want="rival"))) == []
 
 
-def test_no_trait_is_red_and_five_is_too_many():
-    assert any("no trait" in r for r in people.problems(planted(person(traits=[]))))
-    five = ["Forward", "Shy", "Chaste", "Slut", "Dominant"]
-    assert any("5 traits" in r for r in people.problems(planted(person(traits=five))))
+def test_two_to_four_words():
+    # C2193: a few words used often beat many used rarely
+    assert any("1 trait word(s)" in r for r in people.problems(planted(person(traits=["Kind"]))))
+    five = ["Pushy", "Kind", "Shy", "Cook", "Gamer"]
+    assert any("5 trait word(s)" in r for r in people.problems(planted(person(traits=five))))
+    assert people.problems(planted(person(traits=five[:4]))) == []
 
 
-def test_a_sex_trait_with_no_job_is_red():
-    rows = people.problems(planted(person(traits=["Forward", "Groper"]), canvases=[talk()]))  # nothing reads Groper
-    assert any("`Groper` has no job" in r for r in rows)
-    assert not any("`Forward`" in r for r in rows)
+def test_traits_are_hidden():
+    # LO, 2026-11-26: "Hide them dont show them, they are for us"
+    for show in (True, None):
+        assert any("show_traits is not false" in r for r in people.problems(planted(show=show)))
 
 
-def test_a_manner_or_hobby_trait_needs_no_reader():
-    # P48 (LO, "Yes to both A and B", 2026-11-25): shown personality traits are learned on the People view.
-    assert people.problems(planted(person(traits=["Bully", "Gamer", "Shy"]), canvases=[talk()])) == []
+def test_every_word_is_the_games_own():
+    # Forward is in CoT's default table, so the importer takes it; the skill doesn't (C2184)
+    rows = people.problems(planted(person(traits=["Pushy", "Forward"])))
+    assert any("`Forward` has no row in [engine.people.traits.Forward]" in r for r in rows)
+    assert not any("`Pushy`" in r for r in rows)
 
 
-def test_chaste_has_a_job_without_a_set():
-    assert people.problems(planted(person(traits=["Chaste"]), canvases=[talk()])) == []
-
-
-def test_a_set_read_by_a_condition_gives_its_traits_a_job():
-    cond = {"type": "npc_has_trait", "npc_id": "npc_tom", "set": "shy"}
-    assert people.problems(planted(person(traits=["Shy"]), canvases=[talk(cond)])) == []
+def test_a_word_needs_no_reader_and_no_number_job():
+    # retired 2026-11-26: "every trait has a job" and "only hidden traits is red"
+    assert people.problems(planted(person(traits=["Shy", "Cook"]), canvases=[talk()])) == []
 
 
 def test_an_old_person_meter_is_red():
@@ -132,10 +138,3 @@ def test_check_runs_it():
     assert "people" in check.CHECKS
     assert check.check_people(planted(person(traits=[])))[0] == check.RED
     assert check.check_people(None)[0] == check.INCOMPLETE
-
-
-def test_only_hidden_traits_is_red():
-    # P48: Laura, Nadia, Zoe, Kayla and Tess had one hidden trait and an empty personality.
-    rows = people.problems(planted(person(traits=["Loyal"]), canvases=[talk()]))
-    assert any("only hidden traits" in r for r in rows)
-    assert not any("only hidden" in r for r in people.problems(planted(person(traits=["Loyal", "Cook"]))))

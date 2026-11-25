@@ -26,7 +26,8 @@ Checks:
              every flag a hint reads is set by some canvas. Under people_page = "cot": every person has
              stranger_name and people_tab (pages.py).
   people     under [engine.people] system = "cot": every person has gender, attracted, a people_type or hand-set
-             values, and 1 to 4 traits, each with a job; no person keeps a meter from before the switch; every
+             values, and 2 to 4 trait words, each with a row in the game's own [engine.people.traits], under
+             show_traits = false; no person keeps a meter from before the switch; every
              skill gate names one of her skills at a level 1 to 10, and no skill has a band table too (people.py).
   walkins    every scene that comes to her (trigger_mode = "random": it fires by itself on arrival, never a
              button) names its person (requires_npc), whose rows reach its place; waits on and sets the game's one

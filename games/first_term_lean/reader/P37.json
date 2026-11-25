@@ -1,20 +1,22 @@
 {
  "piece": "P37",
- "pass": 6,
+ "pass": 7,
  "screens": {
   "zoe_party.party": {
    "text": "743043cc9ff5e804",
+   "traits": "06d2567e62494596",
    "facts": "bdb41c3bae4339c4",
    "facts2": "64bc96f41ce6505b",
    "all": "1b1cb411f6915f8d"
   },
   "zoe_party.home": {
    "text": "b02777bd9b8b50f8",
+   "traits": "fa1a0a429fa0ea30",
    "facts": "e9d76b772e3b53ca",
    "facts2": "8486592f7b66e230",
    "all": "bb59d48a609273e4"
   },
-  "*": "a2bff43d5a224c8c"
+  "*": "984247e13259e4f7"
  },
  "rows": {
   "B1": "5276068df1ca6fa9",
@@ -121,7 +123,7 @@
   "C660": "eaf957bb84e62bbf",
   "C2179": "47b9477e3ec8a790",
   "C2180": "a6c0f498d4d16271",
-  "C2183": "40172c2d376bfc32",
+  "C2194": "0c03931191c53a34",
   "C1340": "b76a6583ae88c60f",
   "C769": "f6b6f78a8f2e5ed7",
   "C794": "bad76e5963432385",
@@ -1236,7 +1238,7 @@
     "all": "1b1cb411f6915f8d"
    },
    "row_hash": "612394eef6826900",
-   "carried": false,
+   "carried": true,
    "pass": 6
   },
   {
@@ -1254,8 +1256,46 @@
     "all": "1b1cb411f6915f8d"
    },
    "row_hash": "20748838895e4545",
-   "carried": false,
+   "carried": true,
    "pass": 6
+  },
+  {
+   "row": "C2194",
+   "screen": "zoe_party.home",
+   "verdict": "PASS",
+   "line": "Sam's not mine. Nobody's mine.",
+   "why": "Zoe: Show-off (on the sofa arm, dancing like the party's hers), No strings (lets a stranger kiss her neck; 'Nobody's mine.'). Sam: No strings (just grins).",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "b02777bd9b8b50f8",
+    "traits": "fa1a0a429fa0ea30",
+    "facts": "e9d76b772e3b53ca",
+    "facts2": "8486592f7b66e230",
+    "all": "bb59d48a609273e4"
+   },
+   "row_hash": "0c03931191c53a34",
+   "carried": false,
+   "pass": 7
+  },
+  {
+   "row": "C2194",
+   "screen": "zoe_party.party",
+   "verdict": "PASS",
+   "line": "Okay, babe. Dare. Go dance with the guy by the speaker.",
+   "why": "Zoe: Show-off (her party, the dare). Brooke: Mean ('makes sure you see her not looking at you'). Kayla and Tess named in passing, show none, fine.",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "743043cc9ff5e804",
+    "traits": "06d2567e62494596",
+    "facts": "bdb41c3bae4339c4",
+    "facts2": "64bc96f41ce6505b",
+    "all": "1b1cb411f6915f8d"
+   },
+   "row_hash": "0c03931191c53a34",
+   "carried": false,
+   "pass": 7
   },
   {
    "row": "C286",
@@ -2615,8 +2655,8 @@
  ],
  "causes": [],
  "pending": [],
- "asked": 2,
- "answered": 2,
+ "asked": 1,
+ "answered": 1,
  "pass_items": [],
  "unowed": []
 }

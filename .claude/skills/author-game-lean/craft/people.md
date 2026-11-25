@@ -29,11 +29,12 @@ On a card with a `Does:` block (every card from 2026-11-24 on), the rows that ap
 | C644 | each person owns a corner of the world: their own subject, their own people offscreen | — | a person is on screen | note |
 | C596 | the talk screen: about 55 words, two-thirds spoken, one exit; the person's one picture sits on their menu (the screen their face opens), right after the menu's first line, and the talk screen under it has none unless it's a new moment (a menu with no picture is room and system menus only: C1265, `craft/media.md`) | P13 reader pass 12: Mom's living-room talk ran 26 words, 42% spoken (a judgement on a borrowed number) | a person is on screen | note + talk, length |
 | C660 | each person's feelings are shown on the People view with CoT's words, the same across the cast: Friendship (Dislike below 0), Lust, His Dominance or Her Submission | — · kept blocking: LO's choice (2026-11-24; three feelings, 2026-11-25) | a meter is shown or paid | reader |
-| C2177 | under `[engine.people] system = "cot"`, every person has friendship, lust and control on -1000..1000, gender, attracted, a type or hand-set values, and 2–4 traits from CoT's table; no 0–100 person meter is left | — · kept blocking: LO's choice (2026-11-25, LO's "Go ahead with your picks") | the plan | script + people |
-| C2178 | a type sets a person's start feelings and traits, then each is tuned by hand; every trait has a job: it changes a number, or a scene reads it | — · kept blocking: LO's choice (2026-11-25, LO's "Go ahead with your picks") | the plan | script + people |
+| C2177 | under `[engine.people] system = "cot"`, every person has friendship, lust and control on -1000..1000, gender, attracted, a type or hand-set values, and 2–4 trait words of the game's own, each defined in `[engine.people.traits.<Word>]`, with `show_traits = false`; no 0–100 person meter is left | — · kept blocking: LO's choice (2026-11-25, LO's "Go ahead with your picks"; trait words hidden and our own, 2026-11-26) | the plan | script + people |
+| C2178 | a type sets a person's start feelings and the trait words it draws from, then each is tuned by hand | — · kept blocking: LO's choice (2026-11-25, LO's "Go ahead with your picks") | the plan | reader |
 | C2179 | a reaction line to her choice, from a person whose want can differ, is picked by what they want from her and by their traits (`npc_wants`, `npc_has_trait`), never one line for everyone | — · kept blocking: LO's choice (2026-11-25, LO's "Go ahead with your picks") | a person is on screen | reader |
 | C2180 | a choice moves a feeling by the table in rule 15: its sign by the act, its size (a random range) by what they want | — · kept blocking: LO's choice (2026-11-25, LO's "Go ahead with your picks") | a meter is shown or paid | reader |
-| C2183 | a person may carry manner and hobby traits (personality-kind) that a written scene shows, the card citing the line; at least one of their 2–4 traits is shown and not sex-kind; a shown trait is true on every visit | first_term_lean P48: "every trait has a job" left all 24 people with control-set and sex-set traits only, and five (Laura, Nadia, Zoe, Kayla, Tess) with one hidden trait and an empty People page (LO: "Where is personality??") | a person is on screen | reader + people |
+| C2193 | a trait is one word, on or off, fixed: the author's brief for a person's scenes, never shown to the player (no People-view label, no "???", no reveal). 2–4 per person on the plan's people table, in the game's own plain words, each with the line that shows it; the list is the game's, and LO's call | first_term_lean P48: CoT's words on the People view left five people with one hidden trait and an empty personality, and the words weren't ours (LO, typed in main-lean 2026-11-26: "Hide them dont show them, they are for us, to design the npc scenes and all, dont have to show to a player.") | the plan | script + people |
+| C2194 | every scene with a person acts in character: name the trait word the line shows, or say it shows none and why that's fine; a word is true to how the person is written on every visit | — · kept blocking: LO's "yes" to the hidden-trait design (2026-11-26) | a person is on screen | reader |
 | C2182 | release 1 is frozen: people differ only by start values and traits, and nothing moves (no feeling effect, no skill gate, no effect on a skill) | — | the plan | note |
 | C448 | obvious on arrival: who a person is, what they want, how they feel about her, in the first lines | P13 reader pass 10: Ryan arrived as a bare name, never "step-brother" on screen | a first meeting | reader |
 | L168 | every person with a met flag is pointed at, by place and time, on a hint step whose `when` is the met flag, unless the opening meets them | before P46 only Tom was pointed at; sixteen people had nothing (first_term_lean, 2026-11-25) | a first meeting | script + pages |
@@ -67,7 +68,7 @@ Each rule is marked **measured** or **LO's choice**.
    - **three feelings toward her,** `friendship`, `lust` and `control`, in `core_traits`, on -1000..1000. Control above 0 means the person dominates her; below 0, she dominates them;
    - **`gender`** and **`attracted`** (yes or no: lust rises only if they are attracted to her);
    - **a type** (`people_type = "<type>"`, rule 13), or hand-set values;
-   - **2–4 fixed traits** from CoT's table (`traits = [...]`), each with a job (rule 13).
+   - **2–4 trait words** of the game's own (`traits = [...]`), each defined in `[engine.people.traits.<Word>]`, and never shown to the player (rule 13).
 
    What they want from her (friend, date, fuckbuddy, hatefuck, rival, indifferent) is worked out by the engine from the feelings and traits; a scene reads it with `npc_wants`. A hand-set `want` is only for a person the story fixes. A professor is `professor = true`, with `core_traits.intimacy` 0, 1 or 2; they want nothing from her until 2. Romance and trust come later, each in the release where it first has a job. A person's arc keeps its own steps and flags on top: the step flags open the scenes, the feelings say how the person meets her. No 0–100 person meter is left, and `check.py`'s `people` check is red on one (it reads `people_type`; the engine ignores that key). *Measured:* CoT gives every person these feelings on -1000..1000, starting at 0 (`alter_attitude`, `_cot_js.txt` lines 113265-113315); attraction is orientation only (`attracted_to_pc`, line 113857); the want follows `desired_relationship` (lines 114752-115010); a professor's intimacy is 0/1/2 (`professor_intimacy`, line 117982), moved at half and full of a lust threshold of 400 to 800 by kind (lines 117966-117980); CoT's special people carry a fixed want. Three feelings now, not five, is *LO's choice* (LO, typed in main-lean 2026-11-25: "Yes lets move to cot style type system", "Go ahead with your picks"). This replaces "one or two meters per person" and C650's score-by-role choice.
 9. **Obvious on arrival** (C448). *LO's rule, not measured.*
@@ -75,13 +76,13 @@ Each rule is marked **measured** or **LO's choice**.
 11. **Every first meeting is pointed at** (L168). Each person with a met flag gets a storyline step on the Quests page that says where and when to find them ("From your second week, three girls own the mirror in the women's bathroom off the Lecture Hall, weekdays 8 to 9am and 1 to 2pm."), followed by a step whose `when` is the met flag. Only the people the opening meets need none. `check.py`'s `pages` check is red on a met flag no hint step reads. *LO's choice* (LO, typed in main-lean 2026-11-25: "Go ahead"), with CoT, whose Hints page carries a storyline per person worth finding.
 12. **A meeting she can miss is not missed for good** (L169). Either it fires on any visit while the person is there, or its hint names the window (the class, its days and hours). A meeting inside the first 30 minutes of a class held twice a week, with no timetable shown before it, is the failure. *LO's choice* (same).
 
-13. **Pick a type, then tune** (C2178, C2183). A type is a row in the plan's type table (`plan.md` §3): the start friendship, lust and control, and the traits it draws from. Start from the type, then tune each person by hand. A game names the types it needs: Family, Professor, Student, Worker, Neighbour, or others.
-   - **Every trait has a job.** Either it changes a number (it is in a set the want reads: Slut, Strictly Casual, Forward, Confident, Dominant, Submissive, Switch, Sadist, Masochist, Aromantic; or it is Chaste or Asexual), or some scene reads it with `npc_has_trait`, or it is a **manner or hobby trait** (a personality-kind trait from CoT's table: Shy, Bully, Insecure, Bragger, Loner, Gamer, Cook, Sporty, Nerd and the rest) that a scene already written shows. That trait's job is to be learned on the People view, and later to be a chat topic; it needs no `npc_has_trait` reader yet. The card cites the line that shows it (C2183). `check.py`'s `people` check is red on a sex-kind or hidden trait with no number job and no reader.
-   - **At least one trait the player can learn.** Of the 2–4, at least one is shown and not sex-kind, where the scenes give one: a person whose every trait is hidden (Confident, Loyal, Cheater) or sex-kind has an empty personality on the People view. The `people` check is red on a person whose every trait is hidden.
-   - **A shown trait is a claim** (C2183): true on every visit. Bully on a person who is only ever kind is a lie on the People view.
-   - **A trait shows only past its threshold** (friendship above 100 to 600, a sex trait only after sex). While release 1 moves nothing, a trait shows only if the start friendship is above its threshold.
+13. **Pick a type, then tune** (C2178). A type is a row in the plan's type table (`plan.md` §3): the start friendship, lust and control, and the trait words it draws from. Start from the type, then tune each person by hand. A game names the types it needs: Family, Professor, Student, Worker, Neighbour, or others.
+   - **A trait is the author's brief, never shown** (C2193). One word, on or off, fixed. It tells the writer how this person acts in every scene; the player never sees it: `[engine.people] show_traits = false` keeps it off the People view, with no label, no "???" and no reveal by a threshold or by sex (engine.md §54). Each person carries two to four words, on the plan's people table, each with the line that already shows it (the card cites it, as P48 did). The lesson kept (C2184): people differ, and it shows in how they act; a few words used often beat many used rarely.
+   - **The words are the game's own, and LO's call.** Plain words, defined in the game's own table, `[engine.people.traits.<Word>]` (`kind`, a one-line `description` that says how the person acts; `sets` only when the word should move the want, engine.md §54). The skill keeps no other game's list as a default. A worked list, in roles: how they are with her (Pushy, Shy, Kind, Cruel, Controlling, Proud, Nervous), their private side (Takes charge, Gives way, Rough, Watcher, Show-off), what they're into (Gamer, Cook, Sporty). The game's list is drafted on the plan and LO approves it.
+   - **Every scene keeps the words** (C2194). A scene with the person is written to fit them, and the reader asks: does this person act in character here? It names the word the line shows, or says it shows none and why that's fine. A word nothing written ever shows, or a line that breaks one (Kind on a person who's only ever cruel), is the failure.
+   - **A scene reads a word only when one text serves several people** (`npc_has_trait`, rule 14). A scene written for one named person needs no check: its writing is the fit.
 
-   *Measured:* CoT's archetypes set the traits (`setup.archetypes`, `_cot_js.txt` line 19348; its Wage Worker carries "Forward", line 19391), and start every feeling at 0. Ours start apart, because release 1 moves nothing (`plan.md` §10), so start values are the only way two people differ. CoT reads a trait's hobby only for the person's posts (`elkbook` tags, lines 49075-49174) and the want never reads it. The trait table and thresholds are lines 116953-117371. *LO's choice* (same); manner and hobby traits shown by a written scene, LO's "Yes to both A and B", typed in main-lean 2026-11-25.
+   `check.py`'s `people` check is red on `show_traits` left on, on fewer than two or more than four words, and on a word with no row in the game's own table. *Measured:* CoT starts every feeling at 0 and sets traits by archetype (`setup.archetypes`, `_cot_js.txt` line 19348). Ours start apart, because release 1 moves nothing (`plan.md` §10), so start values and the words are how two people differ. Hidden words, our own, are *LO's choice* (LO, typed in main-lean 2026-11-26: "Hide them dont show them, they are for us, to design the npc scenes and all, dont have to show to a player.", then "yes" to this design).
 14. **A reaction reads the person** (C2179). When her choice gets a reaction from someone whose want can differ (worked out, not hand-set), the line is picked by what they want from her and by their traits: a `group` block per want (`npc_wants`), or per trait (`npc_has_trait`), and a plain line for the rest. One line for everyone is the failure. A person whose want the story fixes gets one line. *Measured:* CoT's `EventResHallRunInto.txt` (lines 3-12) answers the same bump four ways: "Shit, sorry!" (friend, date, fuckbuddy), a hand on her ass (hatefuck), "Watch where you're going" (rival), "Sorry!" (the rest). `InPersonDialogueFlirtBrazen.txt` (lines 57-81) answers one flirt six ways by the want. *LO's choice* (same).
 15. **How a choice moves a feeling** (C2180). The act sets the sign; what they want sets the size. A size is a random range, `value = { type = "random", min = 25, max = 50 }`. Release 1 moves nothing (`plan.md` §10); this table is for the release that first moves a feeling.
 
@@ -96,6 +97,12 @@ Each rule is marked **measured** or **LO's choice**.
    | refuse | the feeling they asked with goes down | 25 | `EventGreekHouseHWHelpNo.txt`, line 4 (friendship); `EventSpringrilSplashPartyAnonGroperStop.txt`, line 2 (lust 25, control 15) |
 
    Her no lowers a feeling and never raises one of her skills (C961). *Measured* (2026-11-25, CoT's passages): of 922 friendship moves, 186 are ±25 and 154 are ±50; of 818 lust moves, 105 are +25 and 91 are +50; of 475 control moves, 144 are ±25 and 99 are ±50. The talk menu's moves are ranges (5–10, 15–30, 25–50), each once a day per person (`InPersonDialogueMenu.txt`, lines 1-2 and 77). *LO's choice* (same).
+
+## The old trait rules (2026-11-26)
+
+- **Kept:** every word is true to how the person is written, the card citing a line for each (now a brief the scenes keep, C2194); 2–4 words per person; a type then tuning (C2178); a scene may read a word with `npc_has_trait` (rule 14).
+- **Changed:** C2177 (the game's own words, `show_traits = false`); C2178 (no "every trait has a job": a word's job is the brief).
+- **Retired:** C2183 (manner and hobby traits learned on the People view; at least one shown and not sex-kind; a shown trait is a claim the player reads); the reveal thresholds; the red on a person whose every trait is hidden.
 
 ## The engine (cited; `v2.py` is `apps/game_generation/twee_comprehensive/generators/v2.py`)
 
@@ -146,22 +153,38 @@ After Talk today, the face still opens the menu. Talk is gone until tomorrow, an
 
 | type | friendship | lust | control | traits it draws from |
 |---|---|---|---|---|
-| Family (a parent) | 400 | 0 | 200 | Confident, Cook, Loyal |
-| Family (a sibling) | 150 | 0 | 0 | Gamer, Bully, Insecure |
-| Professor | 0 | 0 | 150 | Assertive, Nerd; `professor = true`, intimacy 0 |
-| Student | 0 | 0 | 0 | Shy or Forward, one hobby, one sex trait |
-| Worker (her boss) | 50 | 50 | 250 | Forward, Assertive |
-| Neighbour | 100 | 0 | 0 | Loner, Green Thumb, Voyeur |
+| Family (a parent) | 400 | 0 | 200 | Controlling, Cook, Kind |
+| Family (a sibling) | 150 | 0 | 0 | Gamer, Cruel, Nervous |
+| Professor | 0 | 0 | 150 | Proud, Takes charge; `professor = true`, intimacy 0 |
+| Student | 0 | 0 | 0 | Shy or Pushy, one interest, one private side |
+| Worker (her boss) | 50 | 50 | 250 | Pushy, Takes charge |
+| Neighbour | 100 | 0 | 0 | Kind, Watcher |
 
-The café manager, tuned from Worker. Bragger is a manner trait the meeting already shows ("<His name>. I run the place. … You start when I say.", the worked example above), so the card cites that line; it needs no reader yet.
+The café manager, tuned from Worker. Each word cites the line that shows it: Pushy and Proud in the meeting ("<His name>. I run the place. … You start when I say.", the worked example above), Watcher in "His eyes go to your mouth when you smile, then down to the till, fast." The player never sees the words.
 ```toml
 [[npcs]]
 id          = "npc_manager"
 people_type = "worker"
 gender      = "male"
 attracted   = true
-traits      = ["Forward", "Bragger", "Assertive"]       # Forward: he wants to fuck, not date; Bragger: shown at the meeting; Assertive: his talk reads it
+traits      = ["Pushy", "Proud", "Watcher"]
 core_traits = { friendship = 50, lust = 120, control = 250 }   # lust tuned up: his eyes go to her mouth at the meeting
+
+[engine.people]
+system      = "cot"
+show_traits = false
+
+[engine.people.traits.Pushy]
+kind        = "personality"
+description = "Tells her what happens next; doesn't wait for a yes."
+
+[engine.people.traits.Proud]
+kind        = "personality"
+description = "His place, his rules, and he says so."
+
+[engine.people.traits.Watcher]
+kind        = "sex"
+description = "Looks, and looks away fast when she sees it."
 ```
 
 **A reaction by want** (rule 14). Her choice "Bump into him on purpose", in the café; the next node's blocks, in the shape `games/first_term_lean/toml_phases/5_scenes.toml` uses. The lines are filler.
@@ -191,7 +214,9 @@ Adjacent groups merge into one if/else chain, so exactly one line shows. The thi
 - A meeting only in a class's first half hour, twice a week, with no hint naming it (L169).
 - A person named at a place, or on the People page, before she has met them (C620, C690). People Here lists them, by their stranger name only.
 - A 0–100 Want or Warmth meter on a person. Their feelings are friendship, lust and control on -1000..1000 (rule 8; C2177).
-- A manner or hobby trait no written scene shows: "Nerd" on a person who never says or does anything nerdy (rule 13; C2183).
-- A person whose every trait is hidden or sex-kind: their personality on the People view stays empty (rule 13; C2183, P48).
+- A trait word on the People view, or a "???" bubble. The words are for us; `show_traits = false` (rule 13; C2193).
+- Another game's trait table copied as the game's words. The list is the game's own, and LO approves it (rule 13; C2184).
+- A word nothing written shows, or a line that breaks it: Kind on a person who's only ever cruel (rule 13; C2194).
+- An `npc_has_trait` check in a scene written for one named person. Its writing is the fit (rule 13).
 - One reaction line for everyone, when the person's want can differ: the same "Sorry!" from the rival and from the man who wants her (rule 14; C2179).
 - A hand-set `want` on a person the story doesn't fix. Let the engine work it out (rule 8).

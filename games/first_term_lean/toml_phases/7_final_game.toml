@@ -570,6 +570,105 @@ people_page = "cot"
 # P48 — CoT's people system (LO 2026-11-25: "Yes lets move to cot style type system", "Meter frozen").
 [engine.people]
 system = "cot"
+# P50 — LO 2026-11-26: "Hide them dont show them, they are for us"; "yes fine" to the 18 words. The author's brief
+# for each person's scenes, never shown. `sets` only where a word keeps today's want (cards/P50.md, node check).
+show_traits = false
+
+[engine.people.traits.Pushy]
+kind = "personality"
+threshold = 0
+description = "Takes the lead with her, says what they want, doesn't wait to be asked."
+sets = ["casualsex", "active"]
+
+[engine.people.traits.Shy]
+kind = "personality"
+threshold = 0
+description = "Looks away, says little, waits for her to speak first."
+sets = ["shy"]
+
+[engine.people.traits.Nervous]
+kind = "personality"
+threshold = 0
+description = "Unsure of themselves; asks for reassurance, second-guesses."
+sets = ["shy"]
+
+[engine.people.traits.Warm]
+kind = "personality"
+threshold = 0
+description = "Looks after her: food, a seat, a warning; glad to see her."
+
+[engine.people.traits.Mean]
+kind = "personality"
+threshold = 0
+description = "Enjoys putting her down, best in front of others."
+
+[engine.people.traits.Strict]
+kind = "personality"
+threshold = 0
+description = "Rules, orders, checks up on her; things done their way."
+
+[engine.people.traits.Gossip]
+kind = "personality"
+threshold = 0
+description = "What she does gets told to someone, usually Mark."
+
+[engine.people.traits.Sly]
+kind = "personality"
+threshold = 0
+description = "Hides something, or takes what isn't theirs; a little underhand."
+
+[engine.people.traits."Takes charge"]
+kind = "sex"
+threshold = 0
+description = "With her body, they lead and move her where they want her."
+sets = ["casualsex", "active", "dominant"]
+
+[engine.people.traits."Gives way"]
+kind = "sex"
+threshold = 0
+description = "Yields to whoever's stronger; follows, goes along."
+sets = ["submissive"]
+
+[engine.people.traits."No strings"]
+kind = "personality"
+threshold = 0
+description = "Won't be tied to one person; nobody owns them."
+sets = ["nodating"]
+
+[engine.people.traits.Watcher]
+kind = "personality"
+threshold = 0
+description = "Their eyes are on her whenever she passes, and they don't hide it."
+
+[engine.people.traits."Show-off"]
+kind = "personality"
+threshold = 0
+description = "Wants to be looked at: the party, the dress, the open door."
+
+[engine.people.traits.Gamer]
+kind = "personality"
+threshold = 0
+description = "Into games: the controller is where you find them and what they talk about."
+
+[engine.people.traits.Cook]
+kind = "personality"
+threshold = 0
+description = "Into cooking: the stove is where you find them and what they talk about."
+
+[engine.people.traits.Sporty]
+kind = "personality"
+threshold = 0
+description = "Into training: the gym is where you find them and what they talk about."
+
+[engine.people.traits.Bookish]
+kind = "personality"
+threshold = 0
+description = "Into books and numbers: their talk is the work."
+
+[engine.people.traits.Arty]
+kind = "personality"
+threshold = 0
+description = "Into making something: the stage, the guitar."
 
 # LO 2026-11-24, "yes hide popups": bookkeeping flags don't toast; flags the player should notice still do.
 # P49 — the "comes to her" flags: bookkeeping, no toast.
@@ -1471,12 +1570,12 @@ people_tab = "special"
 # The people page prints `relationship` in the card body (v2.py:13474); it carries the card's line and his age.
 relationship = "Your step-brother, 22. He shares the hall and the bathroom with you."
 description = "Your step-brother, 22."
-# P48 — CoT's people system (cards/P48.md): type, feelings on -1000..1000, fixed traits.
+# P48 — CoT's people system (cards/P48.md): type, feelings on -1000..1000; trait words are P50's, hidden.
 people_type = "family_sibling"
 gender = "male"
 attracted = true
 age = 22
-traits = ["Submissive", "Switch", "Gamer"]
+traits = ["Shy", "Gives way", "Gamer"]
 core_traits = { friendship = 0, lust = 100, control = 0 }
 
 # His whole week, from PLAN §9a. Weekdays 12–6 at the repair shop: no row.
@@ -1603,12 +1702,12 @@ stranger_name = "woman with tired eyes"
 people_tab = "special"
 relationship = "Your mom, 41. She married Mark three years ago."
 description = "Your mom, 41."
-# P48 — CoT's people system (cards/P48.md): type, feelings on -1000..1000, fixed traits.
+# P48 — CoT's people system (cards/P48.md): type, feelings on -1000..1000; trait words are P50's, hidden.
 people_type = "family_parent"
 gender = "female"
 attracted = true
 age = 41
-traits = ["Submissive", "Cook", "Insecure"]
+traits = ["Warm", "Nervous", "Gives way", "Cook"]
 core_traits = { friendship = 300, lust = 0, control = 200 }
 
 # Her whole week, from PLAN §9a (LO "yes", 2026-11-21). Weekdays 8–5 she's at work: no row.
@@ -1684,12 +1783,12 @@ stranger_name = "broad man with a heavy jaw"
 people_tab = "special"
 relationship = "Your step-father, 46. He collects the rent."
 description = "Your step-father, 46."
-# P48 — CoT's people system (cards/P48.md): type, feelings on -1000..1000, fixed traits.
+# P48 — CoT's people system (cards/P48.md): type, feelings on -1000..1000; trait words are P50's, hidden.
 people_type = "family_parent"
 gender = "male"
 attracted = true
 age = 46
-traits = ["Dominant", "Confident", "Particular"]
+traits = ["Strict", "Takes charge"]
 core_traits = { friendship = 0, lust = 0, control = 500 }
 
 # His whole week, from PLAN §9a. Weekdays 7:30–4:30 at work; Saturday 7–11pm at the bar: no row.
@@ -2088,12 +2187,12 @@ stranger_name = "wiry man in his thirties"
 people_tab = "coworkers"
 relationship = "Tom, 31. He runs the café across from campus, and now he's your boss."
 description = "The café manager, 31."
-# P48 — CoT's people system (cards/P48.md): type, feelings on -1000..1000, fixed traits.
+# P48 — CoT's people system (cards/P48.md): type, feelings on -1000..1000; trait words are P50's, hidden.
 people_type = "worker"
 gender = "male"
 attracted = true
 age = 31
-traits = ["Forward", "Confident"]
+traits = ["Pushy", "Sly"]
 core_traits = { friendship = 50, lust = 100, control = 500 }
 
 [[npcs.schedules]]
@@ -2113,13 +2212,13 @@ stranger_name = "man with an unhurried stare"
 people_tab = "faculty"
 relationship = "Dr. Hale, 39. Your psychology professor."
 description = "Professor, 39."
-# P48 — CoT's people system (cards/P48.md): type, feelings on -1000..1000, fixed traits.
+# P48 — CoT's people system (cards/P48.md): type, feelings on -1000..1000; trait words are P50's, hidden.
 people_type = "faculty"
 gender = "male"
 attracted = true
 age = 39
 professor = true
-traits = ["Dominant", "Sadist", "Particular"]
+traits = ["Takes charge", "Strict"]
 core_traits = { friendship = 0, lust = 300, control = 300, intimacy = 0 }
 
 [[npcs.schedules]]
@@ -2144,13 +2243,13 @@ stranger_name = "man with a flat, quiet voice"
 people_tab = "faculty"
 relationship = "Mr. Pratt, 44. Your statistics teacher."
 description = "Statistics teacher, 44."
-# P48 — CoT's people system (cards/P48.md): type, feelings on -1000..1000, fixed traits.
+# P48 — CoT's people system (cards/P48.md): type, feelings on -1000..1000; trait words are P50's, hidden.
 people_type = "faculty"
 gender = "male"
 attracted = false
 age = 44
 professor = true
-traits = ["Dominant", "Confident", "Nerd", "Particular"]
+traits = ["Strict", "Bookish"]
 core_traits = { friendship = 0, lust = 0, control = 200, intimacy = 0 }
 
 [[npcs.schedules]]
@@ -2175,13 +2274,13 @@ stranger_name = "woman with grey-streaked hair"
 people_tab = "faculty"
 relationship = "Prof. Walsh, 48. Your English professor, and your advisor."
 description = "English professor and advisor, 48."
-# P48 — CoT's people system (cards/P48.md): type, feelings on -1000..1000, fixed traits.
+# P48 — CoT's people system (cards/P48.md): type, feelings on -1000..1000; trait words are P50's, hidden.
 people_type = "faculty"
 gender = "female"
 attracted = false
 age = 48
 professor = true
-traits = ["Dominant", "Confident", "Wordsmith", "Particular"]
+traits = ["Strict", "Warm", "Bookish"]
 core_traits = { friendship = 150, lust = 0, control = 150, intimacy = 0 }
 
 [[npcs.schedules]]
@@ -2206,13 +2305,13 @@ stranger_name = "man with a voice that carries"
 people_tab = "faculty"
 relationship = "Mr. Cross, 38. He teaches drama."
 description = "Drama teacher, 38."
-# P48 — CoT's people system (cards/P48.md): type, feelings on -1000..1000, fixed traits.
+# P48 — CoT's people system (cards/P48.md): type, feelings on -1000..1000; trait words are P50's, hidden.
 people_type = "faculty"
 gender = "male"
 attracted = true
 age = 38
 professor = true
-traits = ["Forward", "Dominant", "Artistic", "Particular"]
+traits = ["Pushy", "Takes charge", "Strict", "Arty"]
 core_traits = { friendship = 0, lust = 150, control = 200, intimacy = 0 }
 
 [[npcs.schedules]]
@@ -2237,12 +2336,12 @@ stranger_name = "dark-haired girl"
 people_tab = "acquaintances"
 relationship = "Nadia, 20. A second-year, retaking Dr. Hale's course."
 description = "Student, 20."
-# P48 — CoT's people system (cards/P48.md): type, feelings on -1000..1000, fixed traits.
+# P48 — CoT's people system (cards/P48.md): type, feelings on -1000..1000; trait words are P50's, hidden.
 people_type = "student"
 gender = "female"
 attracted = false
 age = 20
-traits = ["Submissive", "Forward"]
+traits = ["Warm", "Pushy", "Gives way"]
 core_traits = { friendship = 200, lust = 0, control = 0 }
 
 [[npcs.schedules]]
@@ -2275,13 +2374,13 @@ stranger_name = "silver-haired man"
 people_tab = "faculty"
 relationship = "Dean Sterling, 58. He runs the college."
 description = "Dean, 58."
-# P48 — CoT's people system (cards/P48.md): type, feelings on -1000..1000, fixed traits.
+# P48 — CoT's people system (cards/P48.md): type, feelings on -1000..1000; trait words are P50's, hidden.
 people_type = "faculty"
 gender = "male"
 attracted = true
 age = 58
 professor = true
-traits = ["Dominant", "Confident", "Particular"]
+traits = ["Strict", "Takes charge"]
 core_traits = { friendship = 0, lust = 150, control = 600, intimacy = 0 }
 
 [[npcs.schedules]]
@@ -2299,13 +2398,13 @@ stranger_name = "woman with a long, cool look"
 people_tab = "faculty"
 relationship = "Ms. Holt, 31. The librarian."
 description = "Librarian, 31."
-# P48 — CoT's people system (cards/P48.md): type, feelings on -1000..1000, fixed traits.
+# P48 — CoT's people system (cards/P48.md): type, feelings on -1000..1000; trait words are P50's, hidden.
 people_type = "faculty"
 gender = "female"
 attracted = true
 age = 31
 professor = true
-traits = ["Switch", "Confident", "Particular"]
+traits = ["Strict", "Sly"]
 core_traits = { friendship = 50, lust = 100, control = 150, intimacy = 0 }
 
 [[npcs.schedules]]
@@ -2330,12 +2429,12 @@ stranger_name = "woman with forearms like a baker's"
 people_tab = "acquaintances"
 relationship = "Rosa, 45. She runs the cafeteria counter."
 description = "Cafeteria counter, 45."
-# P48 — CoT's people system (cards/P48.md): type, feelings on -1000..1000, fixed traits.
+# P48 — CoT's people system (cards/P48.md): type, feelings on -1000..1000; trait words are P50's, hidden.
 people_type = "town"
 gender = "female"
 attracted = false
 age = 45
-traits = ["Forward", "Dominant", "Cook"]
+traits = ["Warm", "Pushy", "Cook"]
 core_traits = { friendship = 200, lust = 0, control = 0 }
 
 [[npcs.schedules]]
@@ -2353,12 +2452,12 @@ stranger_name = "slow-eyed man in his fifties"
 people_tab = "acquaintances"
 relationship = "Mr. Vance, 54. He owns your house, and lives next door."
 description = "Landlord, 54."
-# P48 — CoT's people system (cards/P48.md): type, feelings on -1000..1000, fixed traits.
+# P48 — CoT's people system (cards/P48.md): type, feelings on -1000..1000; trait words are P50's, hidden.
 people_type = "town"
 gender = "male"
 attracted = true
 age = 54
-traits = ["Dominant", "Forward"]
+traits = ["Pushy", "Takes charge", "Watcher"]
 core_traits = { friendship = 100, lust = 400, control = 400 }
 
 [[npcs.schedules]]
@@ -2390,12 +2489,12 @@ stranger_name = "heavyset man in his fifties"
 people_tab = "acquaintances"
 relationship = "Frank, 52. He owns the corner shop, and he knows Mark."
 description = "Corner shop owner, 52."
-# P48 — CoT's people system (cards/P48.md): type, feelings on -1000..1000, fixed traits.
+# P48 — CoT's people system (cards/P48.md): type, feelings on -1000..1000; trait words are P50's, hidden.
 people_type = "town"
 gender = "male"
 attracted = false
 age = 52
-traits = ["Dominant", "Confident", "Bragger"]
+traits = ["Gossip", "Watcher"]
 core_traits = { friendship = 0, lust = 0, control = 100 }
 
 [[npcs.schedules]]
@@ -2413,12 +2512,12 @@ stranger_name = "guy with a slow smile"
 people_tab = "acquaintances"
 relationship = "Danny, 23. The corner shop's night clerk."
 description = "Night clerk, 23."
-# P48 — CoT's people system (cards/P48.md): type, feelings on -1000..1000, fixed traits.
+# P48 — CoT's people system (cards/P48.md): type, feelings on -1000..1000; trait words are P50's, hidden.
 people_type = "town"
 gender = "male"
 attracted = true
 age = 23
-traits = ["Forward", "Strictly Casual"]
+traits = ["Pushy", "Sly"]
 core_traits = { friendship = 100, lust = 300, control = 0 }
 
 [[npcs.schedules]]
@@ -2443,12 +2542,12 @@ stranger_name = "heavily muscled man"
 people_tab = "acquaintances"
 relationship = "Marco, 29. A trainer at the gym."
 description = "Trainer, 29."
-# P48 — CoT's people system (cards/P48.md): type, feelings on -1000..1000, fixed traits.
+# P48 — CoT's people system (cards/P48.md): type, feelings on -1000..1000; trait words are P50's, hidden.
 people_type = "town"
 gender = "male"
 attracted = true
 age = 29
-traits = ["Dominant", "Confident", "Sporty"]
+traits = ["Takes charge", "Show-off", "Sporty"]
 core_traits = { friendship = 100, lust = 100, control = 200 }
 
 [[npcs.schedules]]
@@ -2481,12 +2580,12 @@ stranger_name = "girl with messy blonde hair"
 people_tab = "friends"
 relationship = "Zoe, 19. She found you on the quad."
 description = "College friend, 19."
-# P48 — CoT's people system (cards/P48.md): type, feelings on -1000..1000, fixed traits.
+# P48 — CoT's people system (cards/P48.md): type, feelings on -1000..1000; trait words are P50's, hidden.
 people_type = "student"
 gender = "female"
 attracted = true
 age = 19
-traits = ["Switch", "Open Relationships", "Dancer"]
+traits = ["Show-off", "No strings"]
 core_traits = { friendship = 250, lust = 0, control = 100 }
 
 [[npcs.schedules]]
@@ -2548,12 +2647,12 @@ stranger_name = "tall guy with an easy smile"
 people_tab = "acquaintances"
 relationship = "Jake, 20. He asked you out on the quad."
 description = "Campus guy, 20."
-# P48 — CoT's people system (cards/P48.md): type, feelings on -1000..1000, fixed traits.
+# P48 — CoT's people system (cards/P48.md): type, feelings on -1000..1000; trait words are P50's, hidden.
 people_type = "student"
 gender = "male"
 attracted = true
 age = 20
-traits = ["Submissive", "Switch", "Insecure"]
+traits = ["Nervous", "Gives way"]
 core_traits = { friendship = 100, lust = 300, control = 0 }
 
 [[npcs.schedules]]
@@ -2579,12 +2678,12 @@ stranger_name = "girl with a practised smirk"
 people_tab = "rivals"
 relationship = "Brooke, 21. The girl who owns the mirror, and wants what you want."
 description = "Classmate, 21."
-# P48 — CoT's people system (cards/P48.md): type, feelings on -1000..1000, fixed traits.
+# P48 — CoT's people system (cards/P48.md): type, feelings on -1000..1000; trait words are P50's, hidden.
 people_type = "rival"
 gender = "female"
 attracted = false
 age = 21
-traits = ["Forward", "Dominant", "Bully"]
+traits = ["Mean", "Pushy", "Takes charge"]
 core_traits = { friendship = -200, lust = 0, control = 150 }
 
 [[npcs.schedules]]
@@ -2645,12 +2744,12 @@ stranger_name = "girl with a loud laugh"
 people_tab = "rivals"
 relationship = "Kayla, 20. Brooke's friend. She laughs first."
 description = "Brooke's friend, 20."
-# P48 — CoT's people system (cards/P48.md): type, feelings on -1000..1000, fixed traits.
+# P48 — CoT's people system (cards/P48.md): type, feelings on -1000..1000; trait words are P50's, hidden.
 people_type = "rival"
 gender = "female"
 attracted = false
 age = 20
-traits = ["Submissive", "Bully"]
+traits = ["Mean", "Gives way"]
 core_traits = { friendship = -150, lust = 0, control = 0 }
 
 [[npcs.schedules]]
@@ -2697,12 +2796,12 @@ stranger_name = "red-haired girl"
 people_tab = "rivals"
 relationship = "Tess, 21. Brooke's friend. She does the make-up, and says less."
 description = "Brooke's friend, 21."
-# P48 — CoT's people system (cards/P48.md): type, feelings on -1000..1000, fixed traits.
+# P48 — CoT's people system (cards/P48.md): type, feelings on -1000..1000; trait words are P50's, hidden.
 people_type = "rival"
 gender = "female"
 attracted = false
 age = 21
-traits = ["Submissive", "Shy"]
+traits = ["Shy", "Gives way"]
 core_traits = { friendship = -150, lust = 0, control = 0 }
 
 [[npcs.schedules]]
@@ -2750,12 +2849,12 @@ stranger_name = "sleepy-eyed guy"
 people_tab = "acquaintances"
 relationship = "Sam, 22. Zoe's roommate, and on-and-off boyfriend. Always home."
 description = "Zoe's roommate, 22."
-# P48 — CoT's people system (cards/P48.md): type, feelings on -1000..1000, fixed traits.
+# P48 — CoT's people system (cards/P48.md): type, feelings on -1000..1000; trait words are P50's, hidden.
 people_type = "student"
 gender = "male"
 attracted = true
 age = 22
-traits = ["Confident", "Open Relationships", "Artistic"]
+traits = ["No strings", "Arty"]
 core_traits = { friendship = 100, lust = 100, control = 0 }
 
 [[npcs.schedules]]
@@ -2773,12 +2872,12 @@ stranger_name = "woman with a knowing smile"
 people_tab = "acquaintances"
 relationship = "Nina, 26. She runs the clothes shop in your neighbourhood."
 description = "The clothes shop owner, 26."
-# P48 — CoT's people system (cards/P48.md): type, feelings on -1000..1000, fixed traits.
+# P48 — CoT's people system (cards/P48.md): type, feelings on -1000..1000; trait words are P50's, hidden.
 people_type = "town"
 gender = "female"
 attracted = true
 age = 26
-traits = ["Forward", "Strictly Casual"]
+traits = ["Pushy", "Show-off"]
 core_traits = { friendship = 100, lust = 100, control = 0 }
 
 [[npcs.schedules]]
@@ -2804,12 +2903,12 @@ stranger_name = "dark-eyed guy"
 people_tab = "coworkers"
 relationship = "Chris, 24. The café's barista. He keeps the machine to himself."
 description = "The café's barista, 24."
-# P48 — CoT's people system (cards/P48.md): type, feelings on -1000..1000, fixed traits.
+# P48 — CoT's people system (cards/P48.md): type, feelings on -1000..1000; trait words are P50's, hidden.
 people_type = "worker"
 gender = "male"
 attracted = true
 age = 24
-traits = ["Forward", "Dominant"]
+traits = ["Pushy", "Takes charge"]
 core_traits = { friendship = -120, lust = 320, control = 150 }
 
 [[npcs.schedules]]
@@ -7485,11 +7584,11 @@ id = "moment"
 name = "A knock at your door"
 blocks = [
   { type = "group", props = { conditions = { version = "1.0", logic = "AND", items = [{ type = "flag", subject = "player", flag_key = "ryan_asked", operator = "is_false" }] } }, blocks = [
-    { type = "paragraph", content = "A knock, and Ryan's leaning in your doorframe before you've said come in, his dead phone held up." },
+    { type = "paragraph", content = "A knock. Ryan waits in the hall until you open the door, then holds up his dead phone and doesn't quite look at you." },
     { type = "dialog", content = "Got a charger? Mine died.", props = { speaker = "npc", npcId = "npc_ryan" } },
   ] },
   { type = "group", props = { conditions = { version = "1.0", logic = "AND", items = [{ type = "flag", subject = "player", flag_key = "ryan_asked", operator = "is_true" }] } }, blocks = [
-    { type = "paragraph", content = "A knock, and Ryan's in your doorframe again, his dead phone held up like evidence." },
+    { type = "paragraph", content = "Ryan's knock again. He waits until you open, dead phone held up like evidence." },
     { type = "dialog", content = "Still dead. Still no charger. Please?", props = { speaker = "npc", npcId = "npc_ryan" } },
   ] },
 ]
@@ -7515,8 +7614,8 @@ flagEffects = [{ flag = "came_to_her_today", op = "set" }, { flag = "ryan_asked"
 id = "give"
 name = "A knock at your door"
 blocks = [
-  { type = "paragraph", content = "He takes it off your desk himself." },
-  { type = "dialog", content = "Lifesaver.", props = { speaker = "npc", npcId = "npc_ryan" } },
+  { type = "paragraph", content = "You hand it over. He takes it without touching your fingers." },
+  { type = "dialog", content = "Lifesaver. I'll bring it back.", props = { speaker = "npc", npcId = "npc_ryan" } },
 ]
 
 [canvases.nodes.exit_block]
@@ -7557,7 +7656,6 @@ trigger_mode = "random"
 chance = 0.65
 is_repeatable = true
 max_triggers_per_day = 1
-entry_only_from = ["home_hall"]
 conditions = { version = "1.0", logic = "AND", items = [{ type = "flag", subject = "player", flag_key = "came_to_her_today", operator = "is_false" }, { type = "flag", subject = "player", flag_key = "met_ryan", operator = "is_true" }, { type = "days_since_flag", subject = "player", flag_key = "ryan_charger", operator = "gte", value = 1 }, { type = "flag", subject = "player", flag_key = "ryan_looked", operator = "is_false" }, { type = "group", logic = "OR", items = [{ type = "flag", subject = "player", flag_key = "ryan_back_seen", operator = "is_false" }, { type = "days_since_flag", subject = "player", flag_key = "ryan_back_seen", operator = "gte", value = 3 }] }, { type = "npc_at_location", npc_id = "npc_ryan", location_id = "home_ryans_room", operator = "is_present" }, { type = "weekday", weekdays = [0, 1, 2, 3, 4, 6] }, { type = "time_of_day", start_time = "23:00", end_time = "24:00" }] }
 
 [[canvases.nodes]]
@@ -7565,11 +7663,11 @@ id = "moment"
 name = "A knock, late"
 blocks = [
   { type = "group", props = { conditions = { version = "1.0", logic = "AND", items = [{ type = "flag", subject = "player", flag_key = "ryan_back_seen", operator = "is_false" }] } }, blocks = [
-    { type = "paragraph", content = "A knock, late. Ryan's in your doorframe with your charger. His eyes go to your chest, stay a second too long, then snap to the floor. His ears go pink." },
+    { type = "paragraph", content = "A knock, late. Ryan waits until you open, your charger held out. His eyes go to your chest, stay a second too long, then snap to the floor. His ears go pink." },
     { type = "dialog", content = "Thanks. For the, uh. Charger. You're a lifesaver. Seriously. Mine's useless.", props = { speaker = "npc", npcId = "npc_ryan" } },
   ] },
   { type = "group", props = { conditions = { version = "1.0", logic = "AND", items = [{ type = "flag", subject = "player", flag_key = "ryan_back_seen", operator = "is_true" }] } }, blocks = [
-    { type = "paragraph", content = "A knock, late. Ryan's in your doorframe with nothing in his hands this time. His eyes go to your chest and snap to the floor. His ears go pink." },
+    { type = "paragraph", content = "A knock, late. Ryan waits until you open, nothing in his hands this time. His eyes go to your chest and snap to the floor. His ears go pink." },
     { type = "dialog", content = "Just. Saying night. That's all. I couldn't sleep.", props = { speaker = "npc", npcId = "npc_ryan" } },
   ] },
 ]
@@ -7599,6 +7697,15 @@ targetType = "node"
 nodeId = "look"
 time_progression_minutes = 0
 flagEffects = [{ flag = "came_to_her_today", op = "set" }, { flag = "ryan_looked", op = "set" }, { flag = "ryan_back_seen", op = "set" }]
+conditions = { version = "1.0", logic = "AND", items = [{ type = "flag", subject = "player", flag_key = "ryan_back_seen", operator = "is_false" }] }
+
+[[canvases.nodes.exit_block.choices]]
+text = "Freeze"
+targetType = "node"
+nodeId = "look2"
+time_progression_minutes = 0
+flagEffects = [{ flag = "came_to_her_today", op = "set" }, { flag = "ryan_looked", op = "set" }, { flag = "ryan_back_seen", op = "set" }]
+conditions = { version = "1.0", logic = "AND", items = [{ type = "flag", subject = "player", flag_key = "ryan_back_seen", operator = "is_true" }] }
 
 [[canvases.nodes]]
 id = "take"
@@ -7620,6 +7727,24 @@ time_progression_minutes = 5
 
 [[canvases.nodes]]
 id = "look"
+name = "A knock, late"
+blocks = [
+  { type = "paragraph", content = "You don't move. You can't. He looks again, slower, at your chest. Then he sets the charger down just inside your door without looking up." },
+  { type = "dialog", content = "Charger's there. Night. Sorry. Night. Sleep well.", props = { speaker = "npc", npcId = "npc_ryan" } },
+  { type = "paragraph", content = "His door clicks shut next door. In the morning it'll be the two of you and one bathroom again." },
+]
+
+[canvases.nodes.exit_block]
+type = "choices"
+
+[[canvases.nodes.exit_block.choices]]
+text = "Done"
+targetType = "location"
+locationId = "home_her_room"
+time_progression_minutes = 5
+
+[[canvases.nodes]]
+id = "look2"
 name = "A knock, late"
 blocks = [
   { type = "paragraph", content = "You don't move. You can't. He looks again, slower, at your chest." },

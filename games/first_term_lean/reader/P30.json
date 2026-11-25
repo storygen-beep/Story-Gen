@@ -1,26 +1,29 @@
 {
  "piece": "P30",
- "pass": 7,
+ "pass": 8,
  "screens": {
   "watch_rehearsal.watch": {
    "text": "76180fc6c9ebadc2",
+   "traits": "e6b79f0e524c6de5",
    "facts": "416b4c1dc31325c8",
    "facts2": "581155b1059f8df1",
    "all": "45299ea575dfbef7"
   },
   "watch_class.watch": {
    "text": "bfee9c23d859b571",
+   "traits": "2875b58584de3c6e",
    "facts": "421a252894aad712",
    "facts2": "35c67911f123cdb4",
    "all": "f1d32bb391df1e0e"
   },
   "sit_seats.sit": {
    "text": "457a182cc8a999da",
+   "traits": "44136fa355b3678a",
    "facts": "e60043bc128dc9f4",
    "facts2": "e60043bc128dc9f4",
    "all": "56633b9908841b96"
   },
-  "*": "e6e953eced7681f4"
+  "*": "55ff784c2207f0b6"
  },
  "rows": {
   "B1": "5276068df1ca6fa9",
@@ -90,7 +93,7 @@
   "C660": "eaf957bb84e62bbf",
   "C2179": "47b9477e3ec8a790",
   "C2180": "a6c0f498d4d16271",
-  "C2183": "40172c2d376bfc32",
+  "C2194": "0c03931191c53a34",
   "C1340": "b76a6583ae88c60f",
   "C769": "f6b6f78a8f2e5ed7",
   "C794": "bad76e5963432385",
@@ -1209,8 +1212,46 @@
    "note": true,
    "screen_hash": "e6e953eced7681f4",
    "row_hash": "20748838895e4545",
-   "carried": false,
+   "carried": true,
    "pass": 7
+  },
+  {
+   "row": "C2194",
+   "screen": "watch_class.watch",
+   "verdict": "PASS",
+   "line": "You. Up here next time, not hiding. I mean it.",
+   "why": "Mr. Cross: Pushy, Strict, Arty (the drama class).",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "bfee9c23d859b571",
+    "traits": "2875b58584de3c6e",
+    "facts": "421a252894aad712",
+    "facts2": "35c67911f123cdb4",
+    "all": "f1d32bb391df1e0e"
+   },
+   "row_hash": "0c03931191c53a34",
+   "carried": false,
+   "pass": 8
+  },
+  {
+   "row": "C2194",
+   "screen": "watch_rehearsal.watch",
+   "verdict": "PASS",
+   "line": "Again. Slower. Like you want it. Again.",
+   "why": "Mr. Cross: Strict (the same four lines, over and over), Takes charge, Arty. Brooke: Pushy ('I always mean it.'; smiles like she's won). Mean not shown, fine across a dark theatre.",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "76180fc6c9ebadc2",
+    "traits": "e6b79f0e524c6de5",
+    "facts": "416b4c1dc31325c8",
+    "facts2": "581155b1059f8df1",
+    "all": "45299ea575dfbef7"
+   },
+   "row_hash": "0c03931191c53a34",
+   "carried": false,
+   "pass": 8
   },
   {
    "row": "C338",

@@ -1,20 +1,22 @@
 {
  "piece": "P10",
- "pass": 13,
+ "pass": 14,
  "screens": {
   "cafe_work_hour.work": {
    "text": "66a5f5a25c0ef79e",
+   "traits": "7b42410c0bd9090b",
    "facts": "cdc735b0ce394f10",
    "facts2": "f4f805a56f6893db",
    "all": "5084e0ccc55d5ee0"
   },
   "cafe_work_shift.shift": {
    "text": "ebc4af007b52471c",
+   "traits": "7b42410c0bd9090b",
    "facts": "06e4e76c920e51bb",
    "facts2": "f9f482f80b2e4aad",
    "all": "ee058de233e5e74a"
   },
-  "*": "008406a21b5180e7"
+  "*": "aae1d12364012f27"
  },
  "rows": {
   "B1": "5276068df1ca6fa9",
@@ -93,7 +95,7 @@
   "C644": "f5e1d79f3251dbab",
   "C596": "e5f7e6cf2d01613d",
   "C2179": "47b9477e3ec8a790",
-  "C2183": "40172c2d376bfc32",
+  "C2194": "0c03931191c53a34",
   "C1340": "b76a6583ae88c60f",
   "C769": "f6b6f78a8f2e5ed7",
   "C794": "bad76e5963432385",
@@ -972,8 +974,46 @@
    "note": true,
    "screen_hash": "008406a21b5180e7",
    "row_hash": "20748838895e4545",
-   "carried": false,
+   "carried": true,
    "pass": 13
+  },
+  {
+   "row": "C2194",
+   "screen": "cafe_work_hour.work",
+   "verdict": "PASS",
+   "line": "Slow day, new girl. Entertain me. Go on, I'm bored.",
+   "why": "Chris: Pushy (orders her to entertain him), Takes charge (watches her chest, counts the pay without looking up). Tom: Pushy ('Come back when you want more'; his eyes on her ass and staying). Tom's Sly not shown, fine: a pay-out line hides nothing.",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "66a5f5a25c0ef79e",
+    "traits": "7b42410c0bd9090b",
+    "facts": "cdc735b0ce394f10",
+    "facts2": "f4f805a56f6893db",
+    "all": "5084e0ccc55d5ee0"
+   },
+   "row_hash": "0c03931191c53a34",
+   "carried": false,
+   "pass": 14
+  },
+  {
+   "row": "C2194",
+   "screen": "cafe_work_shift.shift",
+   "verdict": "PASS",
+   "line": "Twenty-two, new girl. Next Sunday you're entertaining me.",
+   "why": "Chris: Pushy, Takes charge (takes the machine, leaves her the crumbs; 'Behind you, new girl'). Tom: Pushy ('Same again tomorrow?'; eyes on her ass). Sly not shown, fine.",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "ebc4af007b52471c",
+    "traits": "7b42410c0bd9090b",
+    "facts": "06e4e76c920e51bb",
+    "facts2": "f9f482f80b2e4aad",
+    "all": "ee058de233e5e74a"
+   },
+   "row_hash": "0c03931191c53a34",
+   "carried": false,
+   "pass": 14
   },
   {
    "row": "C286",

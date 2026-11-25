@@ -1,116 +1,134 @@
 {
  "piece": "P38",
- "pass": 6,
+ "pass": 7,
  "screens": {
   "walk_parents.moment": {
    "text": "0f689960aa65a5e0",
+   "traits": "4b9cc244e3119951",
    "facts": "4ae0ea463b0299c5",
    "facts2": "a70226de81ca7f87",
    "all": "5295e17ddac377d2"
   },
   "walk_parents.watch": {
    "text": "1b6cf3a2d6ae7b54",
+   "traits": "4b9cc244e3119951",
    "facts": "4ae0ea463b0299c5",
    "facts2": "a70226de81ca7f87",
    "all": "90662cfef0bc4dad"
   },
   "walk_parents.away": {
    "text": "bdfaab0fb7a6ba72",
+   "traits": "44136fa355b3678a",
    "facts": "9452bbef8a645d19",
    "facts2": "9452bbef8a645d19",
    "all": "42b1714c182871af"
   },
   "walk_ryan_phone.moment": {
    "text": "bfa349501d85aa26",
+   "traits": "74c4f68e6476ecee",
    "facts": "24c4b946d90ccbb4",
    "facts2": "829298a706f02a41",
    "all": "d3596152702ff253"
   },
   "walk_ryan_phone.watch": {
    "text": "2033b9ff4a48f27d",
+   "traits": "74c4f68e6476ecee",
    "facts": "24c4b946d90ccbb4",
    "facts2": "829298a706f02a41",
    "all": "185ff7454f125e7f"
   },
   "walk_ryan_phone.away": {
    "text": "bf24341d4735640c",
+   "traits": "44136fa355b3678a",
    "facts": "9452bbef8a645d19",
    "facts2": "9452bbef8a645d19",
    "all": "421434451f674b49"
   },
   "walk_mom_bills.moment": {
    "text": "1cd7f448b8c965cb",
+   "traits": "95f1c22815f415ed",
    "facts": "4233727f3d0d2307",
    "facts2": "34a8649ad7102788",
    "all": "64d249842efe26a0"
   },
   "walk_mom_bills.sit": {
    "text": "a513792ac09751cf",
+   "traits": "95f1c22815f415ed",
    "facts": "4233727f3d0d2307",
    "facts2": "34a8649ad7102788",
    "all": "5a815628b17253f2"
   },
   "walk_mom_bills.late": {
    "text": "ef6fd3deb3581a74",
+   "traits": "95f1c22815f415ed",
    "facts": "4233727f3d0d2307",
    "facts2": "34a8649ad7102788",
    "all": "afaeaa25d8907415"
   },
   "walk_mark_phone.moment": {
    "text": "e7e800f7e072024b",
+   "traits": "a13af4c65af9f24a",
    "facts": "643dd7b0173cb2a8",
    "facts2": "371b14470ce23cce",
    "all": "064db9925c5a7a01"
   },
   "walk_mark_phone.listen": {
    "text": "ea9f39f66f513ea0",
+   "traits": "a13af4c65af9f24a",
    "facts": "643dd7b0173cb2a8",
    "facts2": "371b14470ce23cce",
    "all": "544cc9be0a5337d2"
   },
   "walk_mark_phone.walkin": {
    "text": "26ac2e8be994efaf",
+   "traits": "a13af4c65af9f24a",
    "facts": "643dd7b0173cb2a8",
    "facts2": "371b14470ce23cce",
    "all": "0cc7824cd5b790e3"
   },
   "walk_ryan_game.moment": {
    "text": "5761dbfb3262f770",
+   "traits": "74c4f68e6476ecee",
    "facts": "dc79944b1aa0a816",
    "facts2": "7eac0b49ad26fea0",
    "all": "5a72a25c7e4e43c9"
   },
   "walk_ryan_game.play": {
    "text": "377f71608ab147cb",
+   "traits": "74c4f68e6476ecee",
    "facts": "dc79944b1aa0a816",
    "facts2": "7eac0b49ad26fea0",
    "all": "ca771038f77c5eff"
   },
   "walk_ryan_game.notnow": {
    "text": "dba7f612cfdd5a68",
+   "traits": "74c4f68e6476ecee",
    "facts": "dc79944b1aa0a816",
    "facts2": "7eac0b49ad26fea0",
    "all": "e8fe387adb6ce6d5"
   },
   "walk_ryan_shower.moment": {
    "text": "8c491e1c62636721",
+   "traits": "74c4f68e6476ecee",
    "facts": "3a6c1ddc24ec0f10",
    "facts2": "79c2db2883b9c464",
    "all": "32095613619b5457"
   },
   "walk_ryan_shower.cover": {
    "text": "f888399d0a1e24cb",
+   "traits": "44136fa355b3678a",
    "facts": "64f3c4db79ffd75c",
    "facts2": "64f3c4db79ffd75c",
    "all": "eaae9b323b3bd884"
   },
   "walk_ryan_shower.keep": {
    "text": "b620ecdf98a93670",
+   "traits": "44136fa355b3678a",
    "facts": "64f3c4db79ffd75c",
    "facts2": "64f3c4db79ffd75c",
    "all": "c065010ed9d5b4d2"
   },
-  "*": "e2b0b71b2e28d1a5"
+  "*": "ca89106ffbb1f06c"
  },
  "rows": {
   "B1": "5276068df1ca6fa9",
@@ -215,7 +233,7 @@
   "C644": "f5e1d79f3251dbab",
   "C596": "e5f7e6cf2d01613d",
   "C2179": "47b9477e3ec8a790",
-  "C2183": "40172c2d376bfc32",
+  "C2194": "0c03931191c53a34",
   "C1340": "b76a6583ae88c60f",
   "C769": "f6b6f78a8f2e5ed7",
   "C794": "bad76e5963432385",
@@ -2312,7 +2330,7 @@
     "all": "064db9925c5a7a01"
    },
    "row_hash": "612394eef6826900",
-   "carried": false,
+   "carried": true,
    "pass": 6
   },
   {
@@ -2330,7 +2348,7 @@
     "all": "64d249842efe26a0"
    },
    "row_hash": "612394eef6826900",
-   "carried": false,
+   "carried": true,
    "pass": 6
   },
   {
@@ -2348,7 +2366,7 @@
     "all": "5295e17ddac377d2"
    },
    "row_hash": "612394eef6826900",
-   "carried": false,
+   "carried": true,
    "pass": 6
   },
   {
@@ -2366,7 +2384,7 @@
     "all": "5a72a25c7e4e43c9"
    },
    "row_hash": "612394eef6826900",
-   "carried": false,
+   "carried": true,
    "pass": 6
   },
   {
@@ -2384,7 +2402,7 @@
     "all": "d3596152702ff253"
    },
    "row_hash": "612394eef6826900",
-   "carried": false,
+   "carried": true,
    "pass": 6
   },
   {
@@ -2402,7 +2420,7 @@
     "all": "32095613619b5457"
    },
    "row_hash": "612394eef6826900",
-   "carried": false,
+   "carried": true,
    "pass": 6
   },
   {
@@ -2420,7 +2438,7 @@
     "all": "064db9925c5a7a01"
    },
    "row_hash": "20748838895e4545",
-   "carried": false,
+   "carried": true,
    "pass": 6
   },
   {
@@ -2438,7 +2456,7 @@
     "all": "64d249842efe26a0"
    },
    "row_hash": "20748838895e4545",
-   "carried": false,
+   "carried": true,
    "pass": 6
   },
   {
@@ -2456,7 +2474,7 @@
     "all": "5295e17ddac377d2"
    },
    "row_hash": "20748838895e4545",
-   "carried": false,
+   "carried": true,
    "pass": 6
   },
   {
@@ -2474,7 +2492,7 @@
     "all": "5a72a25c7e4e43c9"
    },
    "row_hash": "20748838895e4545",
-   "carried": false,
+   "carried": true,
    "pass": 6
   },
   {
@@ -2492,7 +2510,7 @@
     "all": "d3596152702ff253"
    },
    "row_hash": "20748838895e4545",
-   "carried": false,
+   "carried": true,
    "pass": 6
   },
   {
@@ -2510,8 +2528,350 @@
     "all": "32095613619b5457"
    },
    "row_hash": "20748838895e4545",
-   "carried": false,
+   "carried": true,
    "pass": 6
+  },
+  {
+   "row": "C2194",
+   "screen": "walk_mark_phone.listen",
+   "verdict": "PASS",
+   "line": "He hangs up and sits there a long time, not watching the TV.",
+   "why": "Mark: shows none, fine: alone, after a call; his words are how he is with her.",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "ea9f39f66f513ea0",
+    "traits": "a13af4c65af9f24a",
+    "facts": "643dd7b0173cb2a8",
+    "facts2": "371b14470ce23cce",
+    "all": "544cc9be0a5337d2"
+   },
+   "row_hash": "0c03931191c53a34",
+   "carried": false,
+   "pass": 7
+  },
+  {
+   "row": "C2194",
+   "screen": "walk_mark_phone.moment",
+   "verdict": "PASS",
+   "line": "I'll have it Friday. I said Friday, Vance.",
+   "why": "Mark: shows none here, fine: pressed by the man he owes, a hand over his eyes; Strict and Takes charge are how he is with her, and no line to her breaks them.",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "e7e800f7e072024b",
+    "traits": "a13af4c65af9f24a",
+    "facts": "643dd7b0173cb2a8",
+    "facts2": "371b14470ce23cce",
+    "all": "064db9925c5a7a01"
+   },
+   "row_hash": "0c03931191c53a34",
+   "carried": false,
+   "pass": 7
+  },
+  {
+   "row": "C2194",
+   "screen": "walk_mark_phone.walkin",
+   "verdict": "PASS",
+   "line": "He hears you and looks up, and his face shuts like a door.",
+   "why": "Mark: Strict ('What?'; turns the TV up, tells her nothing).",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "26ac2e8be994efaf",
+    "traits": "a13af4c65af9f24a",
+    "facts": "643dd7b0173cb2a8",
+    "facts2": "371b14470ce23cce",
+    "all": "0cc7824cd5b790e3"
+   },
+   "row_hash": "0c03931191c53a34",
+   "carried": false,
+   "pass": 7
+  },
+  {
+   "row": "C2194",
+   "screen": "walk_mom_bills.late",
+   "verdict": "PASS",
+   "line": "Go. Go on, I'm fine.",
+   "why": "Laura: Warm (sends her off, hides it), Nervous.",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "ef6fd3deb3581a74",
+    "traits": "95f1c22815f415ed",
+    "facts": "4233727f3d0d2307",
+    "facts2": "34a8649ad7102788",
+    "all": "afaeaa25d8907415"
+   },
+   "row_hash": "0c03931191c53a34",
+   "carried": false,
+   "pass": 7
+  },
+  {
+   "row": "C2194",
+   "screen": "walk_mom_bills.moment",
+   "verdict": "PASS",
+   "line": "Oh. Baby. Don't look at these.",
+   "why": "Laura: Nervous (crying without sound), Warm.",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "1cd7f448b8c965cb",
+    "traits": "95f1c22815f415ed",
+    "facts": "4233727f3d0d2307",
+    "facts2": "34a8649ad7102788",
+    "all": "64d249842efe26a0"
+   },
+   "row_hash": "0c03931191c53a34",
+   "carried": false,
+   "pass": 7
+  },
+  {
+   "row": "C2194",
+   "screen": "walk_mom_bills.sit",
+   "verdict": "PASS",
+   "line": "It's fine, baby. It's just numbers.",
+   "why": "Laura: Warm (squeezes her hand), Nervous (wipes her face fast).",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "a513792ac09751cf",
+    "traits": "95f1c22815f415ed",
+    "facts": "4233727f3d0d2307",
+    "facts2": "34a8649ad7102788",
+    "all": "5a815628b17253f2"
+   },
+   "row_hash": "0c03931191c53a34",
+   "carried": false,
+   "pass": 7
+  },
+  {
+   "row": "C2194",
+   "screen": "walk_parents.away",
+   "verdict": "PASS",
+   "line": "Their door's never quite shut. You know that now.",
+   "why": "Laura and Mark: no line; show none, fine.",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "bdfaab0fb7a6ba72",
+    "traits": "44136fa355b3678a",
+    "facts": "9452bbef8a645d19",
+    "facts2": "9452bbef8a645d19",
+    "all": "42b1714c182871af"
+   },
+   "row_hash": "0c03931191c53a34",
+   "carried": false,
+   "pass": 7
+  },
+  {
+   "row": "C2194",
+   "screen": "walk_parents.moment",
+   "verdict": "PASS",
+   "line": "Then be quiet, Laura. Be quiet for me.",
+   "why": "Mark: Takes charge (his hand over her mouth). Laura: Gives way ('Mark. The kids.' and she goes quiet).",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "0f689960aa65a5e0",
+    "traits": "4b9cc244e3119951",
+    "facts": "4ae0ea463b0299c5",
+    "facts2": "a70226de81ca7f87",
+    "all": "5295e17ddac377d2"
+   },
+   "row_hash": "0c03931191c53a34",
+   "carried": false,
+   "pass": 7
+  },
+  {
+   "row": "C2194",
+   "screen": "walk_parents.watch",
+   "verdict": "PASS",
+   "line": "That's it, Laura. That's it.",
+   "why": "Mark: Takes charge. Laura: Gives way (her legs go slack round him).",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "1b6cf3a2d6ae7b54",
+    "traits": "4b9cc244e3119951",
+    "facts": "4ae0ea463b0299c5",
+    "facts2": "a70226de81ca7f87",
+    "all": "90662cfef0bc4dad"
+   },
+   "row_hash": "0c03931191c53a34",
+   "carried": false,
+   "pass": 7
+  },
+  {
+   "row": "C2194",
+   "screen": "walk_ryan_game.moment",
+   "verdict": "PASS",
+   "line": "Want a go? You can't be worse than me.",
+   "why": "Ryan: Gamer (the controller, losing loudly). Shy not broken: a brother over a game, not about her.",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "5761dbfb3262f770",
+    "traits": "74c4f68e6476ecee",
+    "facts": "dc79944b1aa0a816",
+    "facts2": "7eac0b49ad26fea0",
+    "all": "5a72a25c7e4e43c9"
+   },
+   "row_hash": "0c03931191c53a34",
+   "carried": false,
+   "pass": 7
+  },
+  {
+   "row": "C2194",
+   "screen": "walk_ryan_game.notnow",
+   "verdict": "PASS",
+   "line": "Coward.",
+   "why": "Ryan: Gamer (never looks away from the screen; the second controller on the cushion). Gives way: lets her go.",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "dba7f612cfdd5a68",
+    "traits": "74c4f68e6476ecee",
+    "facts": "dc79944b1aa0a816",
+    "facts2": "7eac0b49ad26fea0",
+    "all": "e8fe387adb6ce6d5"
+   },
+   "row_hash": "0c03931191c53a34",
+   "carried": false,
+   "pass": 7
+  },
+  {
+   "row": "C2194",
+   "screen": "walk_ryan_game.play",
+   "verdict": "PASS",
+   "line": "Again. Best of three.",
+   "why": "Ryan: Gamer.",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "377f71608ab147cb",
+    "traits": "74c4f68e6476ecee",
+    "facts": "dc79944b1aa0a816",
+    "facts2": "7eac0b49ad26fea0",
+    "all": "ca771038f77c5eff"
+   },
+   "row_hash": "0c03931191c53a34",
+   "carried": false,
+   "pass": 7
+  },
+  {
+   "row": "C2194",
+   "screen": "walk_ryan_phone.away",
+   "verdict": "PASS",
+   "line": "When you look back, his door's still open a crack.",
+   "why": "Ryan: no line; shows none, fine.",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "bf24341d4735640c",
+    "traits": "44136fa355b3678a",
+    "facts": "9452bbef8a645d19",
+    "facts2": "9452bbef8a645d19",
+    "all": "421434451f674b49"
+   },
+   "row_hash": "0c03931191c53a34",
+   "carried": false,
+   "pass": 7
+  },
+  {
+   "row": "C2194",
+   "screen": "walk_ryan_phone.moment",
+   "verdict": "PASS",
+   "line": "Fuck. Yeah. Like that. Don't stop, don't stop.",
+   "why": "Ryan: shows none, fine: he's alone and doesn't know she's there; his words are how he is with her.",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "bfa349501d85aa26",
+    "traits": "74c4f68e6476ecee",
+    "facts": "24c4b946d90ccbb4",
+    "facts2": "829298a706f02a41",
+    "all": "d3596152702ff253"
+   },
+   "row_hash": "0c03931191c53a34",
+   "carried": false,
+   "pass": 7
+  },
+  {
+   "row": "C2194",
+   "screen": "walk_ryan_phone.watch",
+   "verdict": "PASS",
+   "line": "Jesus. Okay. Okay.",
+   "why": "Ryan: shows none, fine (alone).",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "2033b9ff4a48f27d",
+    "traits": "74c4f68e6476ecee",
+    "facts": "24c4b946d90ccbb4",
+    "facts2": "829298a706f02a41",
+    "all": "185ff7454f125e7f"
+   },
+   "row_hash": "0c03931191c53a34",
+   "carried": false,
+   "pass": 7
+  },
+  {
+   "row": "C2194",
+   "screen": "walk_ryan_shower.cover",
+   "verdict": "PASS",
+   "line": "At dinner he won't look at you.",
+   "why": "Ryan: Shy.",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "f888399d0a1e24cb",
+    "traits": "44136fa355b3678a",
+    "facts": "64f3c4db79ffd75c",
+    "facts2": "64f3c4db79ffd75c",
+    "all": "eaae9b323b3bd884"
+   },
+   "row_hash": "0c03931191c53a34",
+   "carried": false,
+   "pass": 7
+  },
+  {
+   "row": "C2194",
+   "screen": "walk_ryan_shower.keep",
+   "verdict": "PASS",
+   "line": "You turn your back to the door and keep washing.",
+   "why": "Ryan: off screen; no line.",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "b620ecdf98a93670",
+    "traits": "44136fa355b3678a",
+    "facts": "64f3c4db79ffd75c",
+    "facts2": "64f3c4db79ffd75c",
+    "all": "c065010ed9d5b4d2"
+   },
+   "row_hash": "0c03931191c53a34",
+   "carried": false,
+   "pass": 7
+  },
+  {
+   "row": "C2194",
+   "screen": "walk_ryan_shower.moment",
+   "verdict": "PASS",
+   "line": "He backs out with his eyes shut, too late.",
+   "why": "Ryan: Shy ('Shit. Sorry. Sorry.'), Gives way ('I'll come back later.'). The door banging open is him not knowing she's in there, not a break.",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "8c491e1c62636721",
+    "traits": "74c4f68e6476ecee",
+    "facts": "3a6c1ddc24ec0f10",
+    "facts2": "79c2db2883b9c464",
+    "all": "32095613619b5457"
+   },
+   "row_hash": "0c03931191c53a34",
+   "carried": false,
+   "pass": 7
   },
   {
    "row": "C286",
@@ -5619,8 +5979,8 @@
  ],
  "causes": [],
  "pending": [],
- "asked": 2,
- "answered": 2,
+ "asked": 1,
+ "answered": 1,
  "pass_items": [],
  "unowed": []
 }

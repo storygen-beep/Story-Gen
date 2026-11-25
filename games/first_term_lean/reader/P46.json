@@ -1,6 +1,6 @@
 {
  "piece": "P46",
- "pass": 4,
+ "pass": 5,
  "screens": {
   "story_hints.paying_your_way": {
    "text": "49539da5d0bdf535",
@@ -602,7 +602,7 @@
   "C644": "f5e1d79f3251dbab",
   "C596": "e5f7e6cf2d01613d",
   "C2179": "47b9477e3ec8a790",
-  "C2183": "40172c2d376bfc32",
+  "C2194": "0c03931191c53a34",
   "C1340": "b76a6583ae88c60f",
   "C769": "f6b6f78a8f2e5ed7",
   "C794": "bad76e5963432385",
@@ -2354,8 +2354,34 @@
    "note": false,
    "screen_hash": "3554f5b0075da203",
    "row_hash": "452a5657d7527351",
-   "carried": false,
+   "carried": true,
    "pass": 4
+  },
+  {
+   "row": "C2194",
+   "screen": "opening.ask_mom",
+   "verdict": "PASS",
+   "line": "Doesn't matter, baby. Eat something. You'll be late. Go on.",
+   "why": "Laura: Warm (food; the dean, where and when), Nervous (won't look at her).",
+   "cause": null,
+   "note": false,
+   "screen_hash": null,
+   "row_hash": "0c03931191c53a34",
+   "carried": false,
+   "pass": 5
+  },
+  {
+   "row": "C2194",
+   "screen": "opening.sit_with_mom",
+   "verdict": "PASS",
+   "line": "If Mark says anything to you about the money, you tell me first.",
+   "why": "Laura: Warm (the toast; the dean), Nervous ('Promise me').",
+   "cause": null,
+   "note": false,
+   "screen_hash": null,
+   "row_hash": "0c03931191c53a34",
+   "carried": false,
+   "pass": 5
   },
   {
    "row": "C327",

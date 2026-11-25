@@ -1,51 +1,59 @@
 {
  "piece": "P09",
- "pass": 10,
+ "pass": 11,
  "screens": {
   "class_psych.class": {
    "text": "7dc50540207a762d",
+   "traits": "825724317465730d",
    "facts": "a66a26384ca488bd",
    "facts2": "b30fe44025af3184",
    "all": "9a1b1c67a46bf088"
   },
   "class_stats.class": {
    "text": "205929646d084121",
+   "traits": "9814f8002b787cb3",
    "facts": "7d6b2b16b1eede97",
    "facts2": "478aca0604cd7e79",
    "all": "ad25d63e05a2d16b"
   },
   "class_english.class": {
    "text": "4ae514e970de642f",
+   "traits": "4fd4e58137018fb8",
    "facts": "dd5009002f49b257",
    "facts2": "ec3d2147a8ab5c6c",
    "all": "6a7b82dd4702d17b"
   },
   "class_drama.class": {
    "text": "9741365e3550a76b",
+   "traits": "2875b58584de3c6e",
    "facts": "77c5977fffe46fc8",
    "facts2": "30f91571176cc73e",
    "all": "331e46e93c15eda9"
   },
   "stage_practise.practise": {
    "text": "601103fec24e1708",
+   "traits": "44136fa355b3678a",
    "facts": "f3fdaee8cfb85e6d",
    "facts2": "f3fdaee8cfb85e6d",
    "all": "271a448474046e50"
   },
   "study_library.study": {
    "text": "73e9d3e0fb10df0e",
+   "traits": "44136fa355b3678a",
    "facts": "f86fc12e0253f59a",
    "facts2": "f86fc12e0253f59a",
    "all": "97bdd08f60e3d4ea"
   },
   "study_hall.study": {
    "text": "3bdf5d62e23fc587",
+   "traits": "6cbb5e5dc786d263",
    "facts": "360934a7af72e6fd",
    "facts2": "6460f3e4c78536c0",
    "all": "2e507d8d99bf8962"
   },
   "study_room.study": {
    "text": "b5d9462a83e6f4cb",
+   "traits": "44136fa355b3678a",
    "facts": "815b79e9e60fe573",
    "facts2": "815b79e9e60fe573",
    "all": "cb6d7055586ca07b"
@@ -56,7 +64,7 @@
    "facts2": "ce9ea30bc0cdb549",
    "all": "ce9ea30bc0cdb549"
   },
-  "*": "4030c893319058d5"
+  "*": "4ac28230310dc0ad"
  },
  "rows": {
   "B1": "5276068df1ca6fa9",
@@ -126,7 +134,7 @@
   "C660": "eaf957bb84e62bbf",
   "C2179": "47b9477e3ec8a790",
   "C2180": "a6c0f498d4d16271",
-  "C2183": "40172c2d376bfc32",
+  "C2194": "0c03931191c53a34",
   "C1340": "b76a6583ae88c60f",
   "C769": "f6b6f78a8f2e5ed7",
   "C794": "bad76e5963432385",
@@ -1221,8 +1229,103 @@
    "note": true,
    "screen_hash": "4030c893319058d5",
    "row_hash": "20748838895e4545",
-   "carried": false,
+   "carried": true,
    "pass": 10
+  },
+  {
+   "row": "C2194",
+   "screen": "class_drama.class",
+   "verdict": "PASS",
+   "line": "Again. Louder, new face. Make them look at you.",
+   "why": "Mr. Cross: Pushy, Takes charge (makes her say the line three times), Strict, Arty (the stage).",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "9741365e3550a76b",
+    "traits": "2875b58584de3c6e",
+    "facts": "77c5977fffe46fc8",
+    "facts2": "30f91571176cc73e",
+    "all": "331e46e93c15eda9"
+   },
+   "row_hash": "0c03931191c53a34",
+   "carried": false,
+   "pass": 11
+  },
+  {
+   "row": "C2194",
+   "screen": "class_english.class",
+   "verdict": "PASS",
+   "line": "Read that back to me, dear. Slower.",
+   "why": "Prof. Walsh: Bookish (takes an essay apart line by line), Strict ('Slower'), Warm ('dear', 'Better').",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "4ae514e970de642f",
+    "traits": "4fd4e58137018fb8",
+    "facts": "dd5009002f49b257",
+    "facts2": "ec3d2147a8ab5c6c",
+    "all": "6a7b82dd4702d17b"
+   },
+   "row_hash": "0c03931191c53a34",
+   "carried": false,
+   "pass": 11
+  },
+  {
+   "row": "C2194",
+   "screen": "class_psych.class",
+   "verdict": "PASS",
+   "line": "Eyes up here, young lady. You'll miss the good part.",
+   "why": "Dr. Hale: Takes charge (every look at her row; the order). Strict shown in the order too.",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "7dc50540207a762d",
+    "traits": "825724317465730d",
+    "facts": "a66a26384ca488bd",
+    "facts2": "b30fe44025af3184",
+    "all": "9a1b1c67a46bf088"
+   },
+   "row_hash": "0c03931191c53a34",
+   "carried": false,
+   "pass": 11
+  },
+  {
+   "row": "C2194",
+   "screen": "class_stats.class",
+   "verdict": "PASS",
+   "line": "Miss @player. Keep up.",
+   "why": "Mr. Pratt: Strict ('Keep up.' 'We'll see.'), Bookish (three whiteboards of numbers).",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "205929646d084121",
+    "traits": "9814f8002b787cb3",
+    "facts": "7d6b2b16b1eede97",
+    "facts2": "478aca0604cd7e79",
+    "all": "ad25d63e05a2d16b"
+   },
+   "row_hash": "0c03931191c53a34",
+   "carried": false,
+   "pass": 11
+  },
+  {
+   "row": "C2194",
+   "screen": "study_hall.study",
+   "verdict": "PASS",
+   "line": "Either take notes or take a seat down here.",
+   "why": "Dr. Hale: Strict, Takes charge. Mr. Pratt: Strict ('The front row's free, if you're staying'). Prof. Walsh: Strict and Warm ('Either join us, dear, or close the door quietly'). The unmet lecturer's 'Back row. Either sit down properly or get out.' is Strict for all three; brusque to a stranger, it doesn't break Walsh's Warm, which is for her once met.",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "3bdf5d62e23fc587",
+    "traits": "6cbb5e5dc786d263",
+    "facts": "360934a7af72e6fd",
+    "facts2": "6460f3e4c78536c0",
+    "all": "2e507d8d99bf8962"
+   },
+   "row_hash": "0c03931191c53a34",
+   "carried": false,
+   "pass": 11
   },
   {
    "row": "C338",

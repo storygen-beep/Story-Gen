@@ -147,6 +147,7 @@ def screens(game, canvas_ids, sheet_rows=None):
     sheet_rows = sheet_rows or {}
     who = scenes.people(game)
     rows_of = {n.get("id"): n.get("schedules") or [] for n in game.get("npcs") or []}
+    words_of = {n.get("id"): n.get("traits") or [] for n in game.get("npcs") or [] if isinstance(n.get("traits"), list)}
     out = {}
     for c in game.get("canvases") or []:
         if c.get("id") not in canvas_ids or scenes.retired(c):
@@ -164,7 +165,10 @@ def screens(game, canvas_ids, sheet_rows=None):
             where_when = {p: [{k: r.get(k) for k in ("location", "weekdays", "start_time", "end_time", "when")}
                               for r in rows_of.get(p, []) if isinstance(r, dict)] for p in sorted(named)}
             key = f"{c['id']}.{node.get('id')}"
+            words = {p: words_of.get(p, []) for p in sorted(named) if words_of.get(p)}
             out[key] = {"text": digest({"node": node, "trigger": trig}),
+                        # the trait words of the people on it: a changed word asks only TRAIT_FIT (C2194)
+                        "traits": digest(words),
                         "facts": digest({"facts": facts, "sheet": sheet_rows.get(key)}),
                         "facts2": digest({"facts": where_when, "sheet": sheet_rows.get(key)}),
                         # the single hash records written before 2026-11-24 hold, to read them as they are
@@ -181,6 +185,7 @@ def screens(game, canvas_ids, sheet_rows=None):
 # longer true, and every such line is judged by the truth rule (C460, C461) and scene test B10 (true on every visit),
 # which apply on every screen; so a fact change can't slip past, whatever else stays carried.
 FACT_ROWS = ("C460", "C461", "B8", "B10")
+TRAIT_FIT = "C2194"  # a person acts in character: the reader row a changed trait word re-asks (craft/people.md)
 PAGE_WHEN = {"npcs": "a person is on screen", "sidebar": "a meter is shown or paid"}  # what a page field shows
 FACT_WHEN = ("the clock moves", "a garment is named", "she dresses or undresses")  # not "a person is on screen":
 # those rows judge how a person sounds or is named, not where they are (LO, relayed 2026-11-24)
@@ -267,6 +272,15 @@ def work_list(game_dir, card_id, everything=False, skill=SKILL, game=None):
 
     def want(row, screen, why):
         wanted.setdefault((row, screen), why)
+
+    # A trait word of someone on a screen changed, and nothing else did: only the fit row is asked (C2194). A record
+    # from before 2026-11-26 has no `traits` hash, so it reads as unchanged once (as facts2 did).
+    words_moved = {s for s in sc if s != WHOLE and s not in changed and isinstance(old_sc.get(s), dict)
+                   and "traits" in old_sc[s] and old_sc[s]["traits"] != sc[s].get("traits")}
+    if TRAIT_FIT in rows:
+        for s in sorted(words_moved):
+            if where is None or s in where.get(TRAIT_FIT, ()):
+                want(TRAIT_FIT, s, "a trait word of someone on it changed")
 
     # LO's stop rule (2026-11-24): after a piece's first reading, a screen whose text changed is asked again only for
     # its last FAILs (the verdict loop below) and the truth rows on it (TRUTH_ROWS, `+ presence`, `+ sheet`), never

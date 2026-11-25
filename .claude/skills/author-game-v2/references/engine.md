@@ -3549,6 +3549,10 @@ skill_gate       = { skill = "exhibitionism", level = 3 }
   Other `[ui.cast_page] show_traits` rows follow.
 - **Personality:** nothing until the first trait shows. Then a bubble per known trait and "???" for each one
   still unknown. The trait's description is the bubble's tooltip.
+- **`[engine.people] show_traits = false`** keeps every trait off the dialog: no Personality block, no
+  "???" bubbles. Traits are then the author's brief for a person's scenes, and a scene can still read one with
+  `npc_has_trait` (LO, 2026-11-26: "Hide them dont show them, they are for us"). The key is written to the
+  config only when false.
 - **No want line.** CoT works the want out and never prints it, and neither does the dialog; scenes read it
   with `npc_wants` (LO, 2026-11-25: "Remove the ... want line").
 - The old cast page (no `people_page`) draws none of this.

@@ -185,7 +185,8 @@ def test_a_stranger_name_judged_only_on_star_is_asked_again(people_game):
     assert again and all(i["row"] in reading.rules.table() for i in again)
 
 
-# ── a person's traits and start feelings, and the sidebar, as screens (P48, 2026-11-25; LO: "Go ahead") ──────────
+# ── a person's start feelings, and the sidebar, as screens (P48, 2026-11-25; LO: "Go ahead"). Trait words are no
+# screen: they are hidden, and the reader judges the fit on the scenes (LO, 2026-11-26: "Hide them dont show them") ──
 
 SYSTEM = '''
 [engine.people]
@@ -197,7 +198,7 @@ name = "Tom"
 gender = "male"
 attracted = true
 people_type = "worker"
-traits = ["Forward", "Loner"]
+traits = ["Pushy", "Kind"]
 core_traits = { friendship = 300 }
 
 [[sidebar_items]]
@@ -219,15 +220,15 @@ def system_game(tmp_path):
     return g
 
 
-def test_traits_and_start_feelings_are_screens(system_game):
+def test_start_feelings_are_screens_and_trait_words_are_not(system_game):
     game = check.load_merged(system_game)
     entries = pages.people_entries(game)
-    assert entries["npcs.npc_tom.traits"] == "Forward, Loner"
     assert entries["npcs.npc_tom.feelings"].startswith("friendship 300, lust 0, control 0")
+    assert not any(s.endswith(".traits") for s in entries)  # hidden: no player-facing screen (C2193)
     sc = reading.screens(game, {"engine:people"})
-    assert {"npcs.npc_tom.traits", "npcs.npc_tom.feelings"} <= set(sc)
-    assert "npcs.npc_tom.traits" in reading.screens(game, {"npcs:npc_tom"})
-    assert "npcs.npc_tom.traits" not in reading.screens(game, {"start"})
+    assert "npcs.npc_tom.feelings" in sc and "npcs.npc_tom.traits" not in sc
+    assert "npcs.npc_tom.feelings" in reading.screens(game, {"npcs:npc_tom"})
+    assert "npcs.npc_tom.feelings" not in reading.screens(game, {"start"})
 
 
 def test_no_switch_no_system_screens(system_game):
@@ -247,7 +248,7 @@ def test_a_card_of_only_page_screens_is_judged_and_needs_no_sheet(tmp_path):
     g = make_game(tmp_path)
     (g / "toml_phases" / "7_final_game.toml").write_text(MERGED + SYSTEM)
     (g / "cards" / "p1.md").write_text("PIECE p1\nDoes:\n  sidebar.exhibitionism | a meter is shown or paid\n"
-                                       "  npcs.npc_tom.traits | a person is on screen\n"
+                                       "  npcs.npc_tom.feelings | a person is on screen\n"
                                        "Builds: engine:people, sidebar:exhibitionism\n")
     game = check.load_merged(g)
     assert not check.not_built_yet(rules.card_does((g / "cards" / "p1.md").read_text()), game)
@@ -269,11 +270,10 @@ def test_a_card_need_not_name_its_sidebar_items_on_does(system_game):
 
 
 @pytest.mark.parametrize("old,new,screen", [
-    ('traits = ["Forward", "Loner"]', 'traits = ["Forward", "Gamer"]', "npcs.npc_tom.traits"),
     ("friendship = 300", "friendship = 100", "npcs.npc_tom.feelings"),
     ('text = "Level 1"', 'text = "Bold"', "sidebar.exhibitionism"),
 ])
-def test_a_changed_trait_start_value_or_band_reopens_its_rows(system_game, old, new, screen):
+def test_a_changed_start_value_or_band_reopens_its_rows(system_game, old, new, screen):
     rows = sorted({i["row"] for i in reading.work_list(system_game, "p1")["items"]})
     verdicts = [{"row": r, "screen": "*", "verdict": "PASS"} for r in rows]
     reading.record(system_game, "p1", {"verdicts": verdicts, "causes": []})
@@ -291,7 +291,7 @@ name = "Ann"
 gender = "female"
 attracted = false
 people_type = "worker"
-traits = ["Shy"]
+traits = ["Shy", "Kind"]
 '''
 
 
@@ -308,8 +308,8 @@ def test_new_people_fields_after_a_reading_are_each_asked_without_does(system_ga
     assert "npcs." not in (system_game / "cards" / "p1.md").read_text()
     items = reading.work_list(system_game, "p1")["items"]
     asked = {i["screen"] for i in items if i["screen"].startswith("npcs.")}
-    every = {k for k in pages.people_entries(check.load_merged(system_game)) if k.endswith((".traits", ".feelings"))}
-    assert {f"npcs.{n}.{f}" for n in ("npc_tom", "npc_ann") for f in ("traits", "feelings")} <= every
+    every = {k for k in pages.people_entries(check.load_merged(system_game)) if k.endswith(".feelings")}
+    assert {f"npcs.{n}.feelings" for n in ("npc_tom", "npc_ann")} <= every
     assert asked == every
     assert all(i["why"] == "screen is new" for i in items if i["screen"].startswith("npcs."))
     assert not any(i["why"].startswith("most of npcs") for i in items)
@@ -324,7 +324,7 @@ def test_the_people_page_card_does_not_own_traits_or_feelings(system_game):
     sc = pages.screens_for(game, {"ui:people_page"})
     assert "npcs.npc_tom.stranger_name" in sc
     assert not any(s.endswith((".traits", ".feelings")) for s in sc)  # P48's, not P46's: 912 duplicate items
-    assert "npcs.npc_tom.traits" in pages.screens_for(game, {"engine:people"})
+    assert "npcs.npc_tom.feelings" in pages.screens_for(game, {"engine:people"})
 
 
 def test_a_card_without_does_asks_a_sidebar_item_only_the_rows_that_fire_on_it(tmp_path):
@@ -348,3 +348,21 @@ def test_two_cards_owning_one_page_screen_is_red(system_game):
                                                  "Builds: sidebar:exhibitionism\n")
     red = check.check_does(system_game, check.load_merged(system_game))[1]
     assert any("sidebar.exhibitionism" in r and "p1" in r and "p2" in r for r in red)
+
+
+# ── the trait fit is judged on the scenes (C2194; LO, typed in main-lean 2026-11-26: "Hide them dont show them") ──
+
+def test_a_changed_trait_word_asks_only_the_fit_row_on_that_persons_scenes(tmp_path):
+    g = make_game(tmp_path)
+    merged = g / "toml_phases" / "7_final_game.toml"
+    merged.write_text(MERGED.replace('id = "npc_mom"\n', 'id = "npc_mom"\ntraits = ["Kind", "Cook"]\n'))
+    (g / "cards" / "p1.md").write_text("PIECE p1\nCraft: craft/people.md · cites C660\nBuilds: start, home\n")
+    rows = sorted({i["row"] for i in reading.work_list(g, "p1")["items"]})
+    assert reading.TRAIT_FIT in rows
+    reading.record(g, "p1", {"verdicts": [{"row": r, "screen": "*", "verdict": "PASS"} for r in rows], "causes": []})
+    assert reading.work_list(g, "p1")["items"] == []
+    merged.write_text(merged.read_text().replace('["Kind", "Cook"]', '["Cruel", "Cook"]'))
+    items = reading.work_list(g, "p1")["items"]
+    assert items and {i["row"] for i in items} == {reading.TRAIT_FIT}
+    assert {i["screen"] for i in items} == {"start.a"}  # mom is on start.a only
+    assert all(i["why"] == "a trait word of someone on it changed" for i in items)
