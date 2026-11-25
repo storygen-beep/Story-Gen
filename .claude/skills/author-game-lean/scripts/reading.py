@@ -52,6 +52,7 @@ sys.path.insert(0, str(HERE))
 import scenes  # noqa: E402
 import sheet  # noqa: E402
 import rules  # noqa: E402
+import pages  # noqa: E402
 
 VERDICTS = ("PASS", "FAIL", "N/A", "WAIVED")
 # Scene tests that judge the scene as a whole and can't be placed on one screen: B1 (an earlier canvas showed him
@@ -129,7 +130,8 @@ def row_screens(game_dir, card_id, skill=SKILL):
     if does is None:
         return None
     out = {rid: set(on) for rid, on in rules.rule_list(does, skill).items()}
-    out.update({t: (set() if t in SCENE_WIDE else set(does)) for t in scene_tests(skill)})  # scene-wide: "*" only
+    story = {s for s in does if not pages.is_page(s)}  # the scene tests judge scenes, not a Hints page entry
+    out.update({t: (set() if t in SCENE_WIDE else story) for t in scene_tests(skill)})  # scene-wide: "*" only
     return out
 
 
@@ -167,6 +169,10 @@ def screens(game, canvas_ids, sheet_rows=None):
                         "facts2": digest({"facts": where_when, "sheet": sheet_rows.get(key)}),
                         # the single hash records written before 2026-11-24 hold, to read them as they are
                         "all": digest({"node": node, "trigger": trig, "facts": facts, "sheet": sheet_rows.get(key)})}
+    # A Hints page entry or walkthrough the card builds is a screen too (pages.py); its text is the whole entry.
+    for key, entry in pages.screens_for(game, canvas_ids).items():
+        h = digest({"page": entry})
+        out[key] = {"text": h, "facts": h, "facts2": h, "all": h}
     return out
 
 
@@ -282,13 +288,19 @@ def work_list(game_dir, card_id, everything=False, skill=SKILL, game=None):
     for s in sorted(changed):
         if s not in old_sc and s.split(".", 1)[0] in rewritten:
             continue
+        # A person's People dialog field is a screen no Does: line names; the rows that judge it are the ones that
+        # fire on a person on screen, plus `always` (P46, 2026-11-25).
+        person_field = s.startswith("npcs.") and (where is None or not any(s in v for v in where.values()))
         for r in sorted(rows):
-            if where is None or s in where.get(r, ()):
+            fires = person_field and r in table and bool({"always", "a person is on screen"} & set(table[r]["when"]))
+            if where is None or s in where.get(r, ()) or fires:
                 if s not in old_sc:
                     want(r, s, "screen is new")
                 elif kind[s] == "text":
-                    if reads_truth(r, table):
-                        want(r, s, "screen changed: truth row")
+                    if reads_truth(r, table) or pages.is_page(s):
+                        # A page entry (a hint, a walkthrough, a person's stranger_name or tip) is a line or two, so
+                        # every row on it is asked again when it changes; LO's stop rule is for scene screens.
+                        want(r, s, "screen changed: truth row" if reads_truth(r, table) else "a page entry changed")
                 elif reads_facts(r, table):  # every card: a fact change asks only the fact rows
                     want(r, s, "a fact changed")
     judged = set()
@@ -302,6 +314,10 @@ def work_list(game_dir, card_id, everything=False, skill=SKILL, game=None):
             want(r, s, "failed last pass")
         elif v["verdict"] == "FAIL" and kind.get(s) == "text":
             want(r, s, "failed last pass (a note), its screen changed")  # check whether the fix took
+        elif kind.get(s) == "text" and pages.is_page(s):
+            # A verdict on a page entry whose text changed is asked again, PASS included (P46, 2026-11-25: c2 rewrote
+            # all 23 stranger_name values, and the 18 that had passed carried unjudged). LO: "Go ahead".
+            want(r, s, "a page entry changed since it was judged")
         elif v["verdict"] == "WAIVED" and kind.get(s) == "text":
             want(r, s, "waived, its screen changed")  # LO waived the line he read; a new line needs a new look
         elif r in rows and old_rows.get(r) != rows[r]:

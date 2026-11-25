@@ -40,7 +40,7 @@ On a card with a `Does:` block (every card from 2026-11-24 on), the rows that ap
 5. **Small rungs.** At 5, 10 and 15 inside a stage, a small step of the same kind opens. It may show greyed as a preview.
 6. **"Not yet", out loud.** Three talks just below each line, in her voice, paying nothing.
 7. **Pace.** Daily caps by band, so a stage takes about 7–14 days at 2–3 paying acts a day.
-8. **Locks and the Quests page.** A lock reads "(Needs <meter> <number>)". The meter's card names only places that pay at her stage.
+8. **Locks and the Quests page.** A lock reads "(Needs <meter> <number>)". The meter's storyline step on the Quests page (a `[[story_hints]]` entry, `craft/want.md` rule 4) names only places that pay at her stage.
 9. **The crossing.** A one-time scene, paying nothing: the stage's name, who she is now, new things she might say yes to.
 10. **A partial release.** Pay caps at the top of the last written stage, no button for an unwritten one, and the next stage is named only on a card.
 
@@ -71,7 +71,7 @@ At 3 a day she crosses 20 in about 7 days. The two 0-acts and the rung at 5 give
 
 Never *(Needs Curious)*: she has never seen that word on a lock.
 
-**Nerve's card on the Quests page at Careful** (C1366):
+**Nerve's storyline step on the Quests page at Careful** (C1366):
 > *Let people look at you. At the café, at the bus stop, at the gym. Don't cover up.*
 
 All three places pay at Careful. The neighbour's doorframe isn't named until she's Curious.

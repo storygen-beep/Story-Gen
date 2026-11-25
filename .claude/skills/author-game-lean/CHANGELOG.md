@@ -792,3 +792,78 @@ Why for all of these: P13's reader found new FAILs on every pass, v5 to v11 (99 
     - No script checks label wording.
     - A grep of `craft/`, `templates/`, `piece.md`, `reader.md`, `SKILL.md` and `build.md` finds no example label left with a time or energy cost.
     - The suite is green.
+- Dropped the one-presence-line-per-person rule: a person at a place is their face, never a line in the room text. This is LO's choice, typed in the main-lean session on 2026-11-24: "We can drop it one line per person rule. Yes go ahead". His question first was: "Does cot do it room description thing??"
+  - **The CoT evidence** (re-read here, `/Users/a0000/Documents/Player_Legibility_Study_20260825/corpus/course-of-temptation/passages`):
+    - No room carries a line per named person.
+    - 19 of 126 location passages read the unnamed crowd (BangCoffee's barista).
+    - Named people are met through menus (`DiningHallMenu.txt`, `ParkSocialMenu.txt` and `BarTableMenu.txt`, all via `setup.people.sort_for_socialization`).
+    - `BFFDorm.txt`, line 6, is the one room that says whether the roommate is there.
+  - **The engine:** `present_faces` at `v2.py:1354` draws every person present as a face.
+  - **The fix:**
+    - `craft/places.md` C795 and C804 are rewritten and marked LO's choice, with CoT.
+    - Rule 2 now reads: a face, not a line. An unnamed crowd line is allowed, not required. An open place with nobody there still says why. Rule 2 cites L5 ("scenes over room text") and the CoT measurement.
+    - The kitchen example drops its per-person lines, and "Not this" gains the per-person line.
+    - `craft/people.md`: the opening, C596, rule 3, rule 7 and the kitchen example now say "face" or "the menu's first line" where they said "presence line".
+    - `craft/clock.md`: the café example now shows the owner's face and an empty-counter line.
+  - **Unchanged:** L106. Any line that names someone still names only who their rows put there.
+  - **Verified:**
+    - No script or reader row asked for a line per person. `rules.py` and `reading.py` use "presence" only for the presence fact-check on gated scenes.
+    - Grep finds no "presence line" left in `craft/`, `reader.md`, `piece.md`, `templates/`, `SKILL.md` or `build.md`.
+    - The suite is green.
+- `craft/clock.md` rule 10: a row with a clock window and `max_triggers_per_day` does not set `show_when_blocked`; it hides whenever it can't be used. This is LO's choice, typed in the main-lean session on 2026-11-24: "I say no text change just button completely gone", then "First one".
+  - **The failure:** the engine greys a row whose daily count is spent with the same `cooldown_message` it shows out of hours (`v2.py:6724-6727`, `setup.canTriggerActivity` then `soloCooldownBlocked.push(c)`). A lunch row at 12:30 after lunch would say "Lunch is served 11am to 2pm", which is false.
+  - **The fix:** rule 10 in "The shape", a cafeteria "Buy lunch ($4)" worked example with its TOML, and a "Not this" line. Rule 9 and L167 (greying a row that has only hours) are unchanged; rule 10 is the exception for a row that also has a count.
+  - **Verified:** the branch was read at its line in the working tree, which holds main-lean's uncommitted `v2.py` edit. The pre-commit cite fixer re-points the line if HEAD differs. The suite is green.
+
+## 2026-11-25
+
+- `craft/people.md` rule 3, the C690 row, the C598 measure and the "Not this" line: CoT does not hide strangers from its People page. Its 📍 People Here lists everyone at the place (`$peopleatlocation`, `Social.txt`, lines 40-62) and prints the anonymous name for anyone not yet known (`SocialWidgets.txt`, lines 233-240); its other tabs hold known people only. The rule now says unmet people are never *named*, and People Here lists them by `stranger_name`. It points at the engine keys (`[ui] people_page = "cot"`, `stranger_name`, `people_tab`, documented in `author-game-v2/references/engine.md` §34). Why: LO's plan for the CoT Quests and People pages (2026-11-25, `~/.claude/plans/hazy-growing-sunrise.md`), which found the rule wrong. Verified: the two CoT passages read at those lines; `apps/game_generation/tests/test_cot_people.py` (a stranger listed by stranger name, "???" on click) green; this skill's script tests green (260 passed).
+
+## 2026-11-25
+
+- Seven fixes from LO's look at first_term_lean: players miss people and content, and the opening promises college and nothing happens. LO, typed in the main-lean session on 2026-11-25: "Go ahead". Each fix has a lesson behind it, L168–L172 in `lists/LESSONS.md`.
+  1. **Every first meeting is pointed at.**
+     - **The failure (L168):** before P46 only Tom was pointed at, and sixteen people had nothing.
+     - **The rule:** `craft/people.md` rule 11 and row L168 (script + pages). The new `check.py` check `pages` (`scripts/pages.py`) is red on a met flag a scene sets that no hint or walkthrough step reads, unless the opening sets it.
+     - **On first_term_lean, read-only:** 8 reds: Chris, Danny, Frank, Holt, Marco, Nadia, Rosa and Tom.
+  2. **A missable meeting fires on any visit, or a hint names its window.**
+     - **The failure (L169):** the teachers' 30-minute class windows, P09 and P15–P17.
+     - **The rule:** `craft/people.md` rule 12 and row L169 (reader).
+  3. **A place hidden until a flag is pointed at.**
+     - **The failure (L170):** the Faculty Offices behind `met_walsh`.
+     - **The rule:** `craft/places.md` rule 10 and row L170 (script + pages). The flag, or a flag set on the same choice, must be a hint `when`.
+  4. **The opening delivers what it promises.**
+     - **The failure (L171):** "Today you start college" with no first-day scene. The old first_term's dean's office is at `games/first_term/toml_phases/5_scenes.toml:35251`.
+     - **The rule:** `craft/opening.md` rule 8 and row L171 (reader). Rule 6 now names the Quests page storyline.
+  5. **The Hints page is screens.**
+     - **The failure (L172):** `rules.py` marked "a goal card is shown" only on ✅/➜ story screens.
+     - **The fix:** `scripts/pages.py` makes each `[[story_hints]]` entry the screen `story_hints.<slug>` and each walkthrough `walkthroughs.<id>`. `rules.seen` gives them "a goal card is shown", plus the clock or money when their text has one.
+     - **Card checks:** the `does` check is red when a card whose Builds: names them leaves one off its Does:. `check.py --card` doesn't ask a page screen for a Sheet: row.
+     - **The reader:** `reading.py` hashes them as screens, and the scene tests B1–B13 skip them.
+     - **On first_term_lean, read-only:** P46 is now red 11 (its ten hints and one walkthrough).
+  6. **The old goal card in the docs.**
+     - **Rewritten for `[[story_hints]]` and `[[walkthroughs]]`:** `craft/want.md` (the title, C1619, rule 4, a new worked example, "Not this"), `craft/arc.md` (the engine's "end" step, rule 5), `craft/meters.md` (rule 8, its example) and `craft/economy.md` (C952). `[[quest_cards]]` stay as what decides met and the tip in the People view.
+     - **New entries:** `lists/COVERAGE.md` gains C2174 (the hints layout), C2175 (the People dialog keys) and C2176 (hint flags are set somewhere).
+     - **New checks:** the `pages` check is red on a hint flag no canvas sets (C2176, `craft/want.md`) and, under `people_page = "cot"`, on a person without `stranger_name` or `people_tab` (C2175, `craft/people.md`). Both rows are kept blocking as LO's choice; neither has an observed failure yet.
+  7. **A changed page entry is asked again, PASS included.**
+     - **The failure:** P46. c2 rewrote all 23 stranger names, and only the 5 that had failed were read again.
+     - **The cause:** the names were not part of any screen's hash. Verdicts recorded on screens like `npcs.npc_zoe.stranger_name` had no hash to compare, and LO's stop rule asks a changed screen's FAILs and truth rows only.
+     - **The fix:** each People dialog field under `people_page = "cot"` is now a hashed screen, `npcs.<id>.stranger_name`, `.people_tab` and `.tip`. A card's `ui:people_page` or `npcs:<id>` on Builds: covers them, and they don't go on Does:. When a page entry's text changes, every verdict on it is asked again, PASS included. So are the rows that fire on a person on screen (or always), for a person's field.
+     - **Kept on purpose:** LO's 2026-11-24 stop rule for scene screens. `reader.md` says the exception.
+     - **On P46, read-only:** the work list now re-asks 10 stranger-name verdicts.
+  - **Tests:** `scripts/tests/test_pages.py`, 16 new tests with planted games:
+    - an unpointed meeting is red, and pointed by a hint or a walkthrough it is green
+    - the opening is exempt
+    - a hidden place is red, and green beside a pointed meeting
+    - a hint flag nothing sets is red, and so are missing People keys
+    - no layout means no check
+    - an entry is a goal-card screen
+    - a card that builds hints names them
+    - a page screen needs no Sheet: row and gets no scene tests
+    - people fields are screens and stay off Does:
+    - a passed stranger name is asked again after it changes, both when it was judged on its own screen and when it was judged on `*`
+  - **Verified:**
+    - The suite is green: 276 passed, the hook's tests included.
+    - Cites are checked by `test_skill`.
+    - Nothing in `games/` was written. The probes called the check functions in Python, not `check.py`, so no `.check_last.json` was written.
+    - Nothing is committed.

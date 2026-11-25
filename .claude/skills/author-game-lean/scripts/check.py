@@ -19,7 +19,12 @@ Checks:
   does       every card with a `Does:` block: what a script can see each built screen do (rules.GUARD's list: a
              person, an equip, a garment named, a price, a time on a label, a picture, a meter effect, a goal card,
              the last screen, a first meeting, a place entered, one-time or repeatable, the opening) is named
-             on that screen's Does: line. Cards without Does: are not judged.
+             on that screen's Does: line. Cards without Does: are not judged. A card whose Builds: names the
+             Hints page (`story_hints`, `walkthrough:<id>`) names each entry's screen on its Does: (pages.py).
+  pages      under [ui] quests_layout = "hints": every first meeting a scene sets (met_*), and every flag a
+             hidden place waits on, is a `when` on some hint or walkthrough step unless the opening sets it;
+             every flag a hint reads is set by some canvas. Under people_page = "cot": every person has
+             stranger_name and people_tab (pages.py).
 
     python3 check.py --rules games/<slug> <id>    the piece's rule list, from its Does: block (rules.py)
     python3 check.py --rules games/<slug> plan    the rules whose `when` is "the plan"
@@ -65,11 +70,12 @@ import reach  # noqa: E402
 import scenes  # noqa: E402
 import sheet  # noqa: E402
 import rules  # noqa: E402
+import pages  # noqa: E402
 
 GREEN, RED, INCOMPLETE = "green", "red", "incomplete"
 # Every check a craft row's `judge` may name (SKILL.md, "Rule labels").
 CHECKS = ("merge", "reach", "approvals", "builds", "release", "card", "beat", "sheet", "does",
-          "talk", "length", "presence", "creation", "saves", "speakers", "goals")
+          "talk", "length", "presence", "creation", "saves", "speakers", "goals", "pages")
 GATES = REPO / ".claude" / "skills" / "author-game-v2" / "scripts" / "gates.py"
 BEAT_FLOOR = 3  # C254: an explicit beat has 3+ frozen-list words
 
@@ -240,8 +246,9 @@ def check_card(game_dir, card_id, skill=None):
         # no cite-every-id check; listing an id was never applying it (LO, relayed 2026-11-24: "Yes").
         rows += rules.does_problems(does, skill)
         mine = sheet.card_sheet(text)
-        if mine is not None and set(mine) != set(does):
-            rows.append(f"Does: and Sheet: name different screens: {sorted(set(mine) ^ set(does))}")
+        story = {s for s in does if not pages.is_page(s)}  # a Hints page screen has no sheet row
+        if mine is not None and set(mine) != story:
+            rows.append(f"Does: and Sheet: name different screens: {sorted(set(mine) ^ story)}")
         if has_screens and mine is None:
             rows.append("the card has screens and no Sheet: block (templates/piece-card.md); "
                         "write each screen's clock, place, who, wearing and flags before the prose")
@@ -359,6 +366,7 @@ def not_built_yet(screens, game):
     its first build on. (STATE.md's built date can't decide this: it is written when the piece closes, after the
     build's own check.) A card with some screens built and others missing is judged, and its missing ones are red."""
     built = {f"{c.get('id')}.{n.get('id')}" for c in game.get("canvases") or [] for n in c.get("nodes") or []}
+    built |= set(pages.entries(game))
     return bool(screens) and not (set(screens) & built)
 
 
@@ -367,11 +375,25 @@ def check_does(game_dir, game):
     if game is None:
         return INCOMPLETE, ["the merged TOML did not parse"]
     red = []
+    builds = card_builds(game_dir)
     for path in sorted((Path(game_dir) / "cards").glob("*.md")):
         does = rules.card_does(path.read_text(encoding="utf-8"))
-        if does is not None and not not_built_yet(does, game):
+        if does is None:
+            continue
+        # A card that builds the Hints page names each entry it builds as a screen, so the goal-card rules reach it.
+        red += [f"{path.stem}: {s} is built by this card and its Does: doesn't name it (a goal card is shown)"
+                for s in sorted(pages.screens_for(game, builds.get(path.stem, ()), people=False)) if s not in does]
+        if not not_built_yet(does, game):
             red += [f"{path.stem}: {r}" for r in rules.guard(does, game)]
     return (RED, red) if red else (GREEN, [])
+
+
+def check_pages(game):
+    """The Hints page's pointers and the People dialog's keys (pages.py)."""
+    if game is None:
+        return INCOMPLETE, ["the merged TOML did not parse"]
+    rows = pages.problems(game)
+    return (RED, rows) if rows else (GREEN, [])
 
 
 def check_sheet(game_dir, game):
@@ -400,6 +422,7 @@ def run_all(game_dir, release=False, against=None):
     results.update(scenes.run(game_dir, game, dev_canvases(game_dir) or {}, ref=against))
     results["sheet"] = check_sheet(game_dir, game)
     results["does"] = check_does(game_dir, game)
+    results["pages"] = check_pages(game)
     if release:
         results["release"] = check_release(game_dir, game)
     return results

@@ -5,6 +5,13 @@ same turn: what changed, why, and how it was verified.
 
 ---
 
+## 2026-11-25 — CoT's Hints page and People dialog, as two opt-in engine keys
+
+- **`references/engine.md`:** two new sections. `[ui] quests_layout = "hints"` (before `clothes_layout`) documents `[[story_hints]]` and `[[walkthroughs]]`; `[ui] people_page = "cot"` (before `sidebar_hide`) documents `[[npcs]] stranger_name` and `people_tab`.
+- **`references/*.md`, 187 citations re-pointed by `cite_check.py --fix` (two runs),** and `engine.md`'s `getWornStatMax` range moved by hand from `v2.py:1871-1872` to `v2.py:1888-1889`. The engine edits for the two keys moved the cited lines in `v2.py` and `template_import.py`.
+- **Why:** LO's plan for the Quests and People pages (2026-11-25, "completely aligned with the cots pages"). The engine lives in `generators/cot_pages.py`, wired from `v2.py`.
+- **Verified:** `cite_check.py --strict` 0 wrong (it was 0 at HEAD; 145 after the engine edit, before the fix). `gates.py --selfcheck` reports the index is current. The exam grader tests pass (107 passed, 1 skipped). `pytest apps/game_generation/tests/test_cot_hints.py test_cot_people.py` is green.
+
 ## 2026-11-18 — the walk-in floor follows "keep going" into a door-only canvas
 
 - **`scripts/gates.py`:** `_continued_subs`, above `main()`. The one counting line in `_walkin_join` now adds the walk-in rules on a `substitution_only` canvas in the same room that a solo activity's choice jumps into (`"<canvas>.<node>"`). It is a same-line edit, so no cited line moves.

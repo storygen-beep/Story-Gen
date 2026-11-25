@@ -21,6 +21,11 @@ from typing import Any, Dict, List, Optional, Set, Tuple
 from pathlib import Path
 
 from apps.common.media_blocks import block_media_pool
+from apps.game_generation.twee_comprehensive.generators.cot_pages import (
+    HINTS_JOURNAL_BUTTON_WIDGET,
+    people_cot_passages,
+    quests_hints_passages,
+)
 from apps.projects.models import Project
 
 logger = logging.getLogger(__name__)
@@ -906,6 +911,9 @@ class TweeComprehensiveGeneratorV2:
         npc_tags_map = {}
         # EN7: slug → [trait keys] this character's cast card shows on top of the page's.
         npc_show_traits_map = {}
+        # [ui] people_page = "cot": slug → {stranger_name, people_tab}, every NPC in file order
+        # (the dialog's default "relevance" order). Read only by the CoT People dialog.
+        npc_people_map = {}
         # Phase A (2026-05-14): slug-keyed NPC schedule registry. Engine
         # consults this first in setup.getNpcLocation(); falls back to
         # canvas-derived presence when an NPC has no declared schedule.
@@ -984,6 +992,13 @@ class TweeComprehensiveGeneratorV2:
                 show_for_npc = ai_config.get("show_traits") or []
                 if show_for_npc and slug:
                     npc_show_traits_map[slug] = list(show_for_npc)
+                if slug:
+                    npc_people_map[slug] = {
+                        "stranger_name": ai_config.get("stranger_name", "") or "",
+                        "people_tab": ai_config.get("people_tab", "") or "",
+                        # $npcs leaves `role` out (see npc_map_for_json); the dialog reads it here.
+                        "role": ai_config.get("role", "") or "",
+                    }
                 # Phase A (2026-05-14): per-NPC schedule registry, slug-keyed.
                 # Consumed by setup.getNpcLocation() at runtime. Schedules with no
                 # entries leave the NPC un-keyed → getNpcLocation falls back to
@@ -1039,6 +1054,7 @@ class TweeComprehensiveGeneratorV2:
             npc_arc_stages_map = {}
             npc_tags_map = {}
             npc_show_traits_map = {}
+            npc_people_map = {}
             npc_schedules_map = {}
 
         # Store as instance variables for use in _convert_blocks_to_game_html
@@ -1052,6 +1068,7 @@ class TweeComprehensiveGeneratorV2:
         # — the cast card checks length before rendering the line.
         self.npc_tags_map = npc_tags_map
         self.npc_show_traits_map = npc_show_traits_map
+        self.npc_people_map = npc_people_map
         # Phase A (2026-05-14): slug-keyed schedule registry. Empty when no
         # NPC has declared schedules — engine.getNpcLocation falls back to
         # canvas-derived presence for those NPCs.
@@ -13491,6 +13508,9 @@ document.addEventListener("click", function (ev) {
         cp = self.cast_page or {}
         if not cp:
             return ':: CastWidgets [widget nobr]\n<<widget "castButton">><</widget>>\n'
+        if (self.project.metadata or {}).get("people_page") == "cot":
+            # CoT's People dialog in place of the cast page (generators/cot_pages.py).
+            return people_cot_passages(cp, self.npc_people_map)
 
         title = html.escape(cp.get("title") or "The Cast")
         btn_label = html.escape(cp.get("button_label") or cp.get("title") or "The Cast")
@@ -19500,7 +19520,24 @@ setup.carryRent = function (due, paid) {
         if (self.project.metadata or {}).get("quests_layout") == "list":
             # The cards passage is the overlay's last; the list layout replaces it.
             text = text[:text.index(":: QuestsPage\n")] + self._quests_list_passages()
+        elif (self.project.metadata or {}).get("quests_layout") == "hints":
+            # CoT's Hints page replaces it the same way (generators/cot_pages.py).
+            text = text[:text.index(":: QuestsPage\n")] + quests_hints_passages(self.project.metadata or {})
         return text
+
+    # The sidebar's Quests button. The literal is the one every game has always had; only
+    # [ui] quests_layout = "hints" swaps it for CoT's glowing button that opens a dialog.
+    _JOURNAL_BUTTON_WIDGET = '''<<widget "journalButton">>
+<!-- Quests - active per-NPC quest cards -->
+<div id="journal-btn-widget">
+  <<if passage() isnot "QuestsPage">><<link "Quests" "QuestsPage">><</link>><<else>><span class="nav-row">Quests</span><</if>><span class="nav-i">📋</span>
+</div>
+<</widget>>'''
+
+    def _journal_button_widget(self) -> str:
+        if (self.project.metadata or {}).get("quests_layout") == "hints":
+            return HINTS_JOURNAL_BUTTON_WIDGET
+        return self._JOURNAL_BUTTON_WIDGET
 
     def _quests_list_passages(self) -> str:
         """[ui] quests_layout = "list" (first_term DECISIONS 97): the QuestsPage as short
@@ -21945,12 +21982,7 @@ if (clothingMsg) {
 <</if>>
 <</widget>>
 
-<<widget "journalButton">>
-<!-- Quests - active per-NPC quest cards -->
-<div id="journal-btn-widget">
-  <<if passage() isnot "QuestsPage">><<link "Quests" "QuestsPage">><</link>><<else>><span class="nav-row">Quests</span><</if>><span class="nav-i">📋</span>
-</div>
-<</widget>>
+""" + self._journal_button_widget() + """
 
 <<widget "tipsButton">>
 <!-- Tips - game-level mechanics surface; conditional on [ui.tips_page] authored -->
