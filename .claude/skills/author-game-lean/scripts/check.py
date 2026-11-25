@@ -390,6 +390,14 @@ def check_does(game_dir, game):
                 for s in sorted(pages.screens_for(game, builds.get(path.stem, ()), people=False)) if s not in does]
         if not not_built_yet(does, game):
             red += [f"{path.stem}: {r}" for r in rules.guard(does, game)]
+    # One page screen, one owning card: two cards whose Builds: lines cover it would each be asked its rows (P46 and
+    # P48, 2026-11-25: 912 duplicate items when ui:people_page also covered traits and feelings).
+    owners = {}
+    for card, ids in sorted(builds.items()):
+        for s in pages.screens_for(game, ids):
+            owners.setdefault(s, []).append(card)
+    red += [f"{s} is covered by the Builds: lines of {', '.join(cs)}; one card owns a screen: drop it from the others"
+            for s, cs in sorted(owners.items()) if len(cs) > 1]
     return (RED, red) if red else (GREEN, [])
 
 

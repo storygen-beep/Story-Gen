@@ -282,3 +282,69 @@ def test_a_changed_trait_start_value_or_band_reopens_its_rows(system_game, old, 
     merged.write_text(merged.read_text().replace(old, new))
     again = [i for i in reading.work_list(system_game, "p1")["items"] if i["screen"] == screen]
     assert again
+
+
+ANN = '''
+[[npcs]]
+id = "npc_ann"
+name = "Ann"
+gender = "female"
+attracted = false
+people_type = "worker"
+traits = ["Shy"]
+'''
+
+
+def test_new_people_fields_after_a_reading_are_each_asked_without_does(system_game):
+    # P48, 2026-11-25: the "most of a canvas is new" shortcut took all new npcs.* screens as one canvas `npcs`, and
+    # with only sidebar lines on Does: it asked 0 people items.
+    merged = system_game / "toml_phases" / "7_final_game.toml"
+    full = merged.read_text()
+    merged.write_text(full.replace('[engine.people]\nsystem = "cot"\n', ""))  # read once before the switch
+    rows = sorted({i["row"] for i in reading.work_list(system_game, "p1")["items"]})
+    reading.record(system_game, "p1", {"verdicts": [{"row": r, "screen": "*", "verdict": "PASS"} for r in rows],
+                                       "causes": []})
+    merged.write_text(full + ANN)
+    assert "npcs." not in (system_game / "cards" / "p1.md").read_text()
+    items = reading.work_list(system_game, "p1")["items"]
+    asked = {i["screen"] for i in items if i["screen"].startswith("npcs.")}
+    every = {k for k in pages.people_entries(check.load_merged(system_game)) if k.endswith((".traits", ".feelings"))}
+    assert {f"npcs.{n}.{f}" for n in ("npc_tom", "npc_ann") for f in ("traits", "feelings")} <= every
+    assert asked == every
+    assert all(i["why"] == "screen is new" for i in items if i["screen"].startswith("npcs."))
+    assert not any(i["why"].startswith("most of npcs") for i in items)
+
+
+# ── one screen, one owning card; a page field asks only the rows that fire on it (2026-11-25) ─────────────────────
+
+def test_the_people_page_card_does_not_own_traits_or_feelings(system_game):
+    game = check.load_merged(system_game)
+    game["ui"] = {"people_page": "cot"}
+    game["npcs"][-1]["stranger_name"] = "guy behind the counter"
+    sc = pages.screens_for(game, {"ui:people_page"})
+    assert "npcs.npc_tom.stranger_name" in sc
+    assert not any(s.endswith((".traits", ".feelings")) for s in sc)  # P48's, not P46's: 912 duplicate items
+    assert "npcs.npc_tom.traits" in pages.screens_for(game, {"engine:people"})
+
+
+def test_a_card_without_does_asks_a_sidebar_item_only_the_rows_that_fire_on_it(tmp_path):
+    g = make_game(tmp_path)
+    (g / "toml_phases" / "7_final_game.toml").write_text(MERGED + SYSTEM)
+    card = g / "cards" / "p1.md"
+    card.write_text("PIECE p1\nCraft: craft/meters.md · cites C285\nBuilds: start, home\n")
+    rows = sorted({i["row"] for i in reading.work_list(g, "p1")["items"]})
+    reading.record(g, "p1", {"verdicts": [{"row": r, "screen": "*", "verdict": "PASS"} for r in rows], "causes": []})
+    card.write_text(card.read_text().replace("Builds: start, home", "Builds: start, home, sidebar:exhibitionism"))
+    items = reading.work_list(g, "p1")["items"]
+    table = rules.table()
+    on_item = {i["row"] for i in items if i["screen"] == "sidebar.exhibitionism"}
+    assert on_item and len(on_item) < len(rows)  # P01: 459 items, every row on each of three items
+    assert all({"always", "a meter is shown or paid"} & set(table[r]["when"]) for r in on_item)
+    assert not any(i["why"] == "a screen of the scene changed" for i in items)  # P01: 127 "*" rows
+
+
+def test_two_cards_owning_one_page_screen_is_red(system_game):
+    (system_game / "cards" / "p2.md").write_text("PIECE p2\nDoes:\n  sidebar.exhibitionism | a meter is shown or paid\n"
+                                                 "Builds: sidebar:exhibitionism\n")
+    red = check.check_does(system_game, check.load_merged(system_game))[1]
+    assert any("sidebar.exhibitionism" in r and "p1" in r and "p2" in r for r in red)

@@ -29,15 +29,6 @@ var FEELINGS = ["friendship", "lust", "control"];
 // CoT setup.Skills.default_increase and daily_caps, by her current level (_cot_js.txt:83479).
 var SKILL_GAIN = [10, 7, 6, 5, 4, 3, 3, 3, 3, 3, 0, 0];
 var SKILL_CAP = [30, 21, 18, 15, 12, 9, 9, 9, 9, 9, 0, 0];
-// What the View Person dialog says once she knows what they want (CoT never prints it).
-var WANT_TEXT = {
-    "date": "Wants to date you.",
-    "friend": "Wants to be your friend.",
-    "fuckbuddy": "Wants to sleep with you.",
-    "hatefuck": "Can't stand you, and wants you anyway.",
-    "rival": "Sees you as a rival.",
-    "indifferent": "Indifferent to you."
-};
 
 function slugOf(who) {
     if (C.npcs[who]) return who;
@@ -291,21 +282,13 @@ P.meterRows = function (slug, rest) {
     var names = FEELINGS.map(function (k) { return setup.traitLabel ? setup.traitLabel(k) : k; });
     return rows.concat((rest || []).filter(function (r) { return names.indexOf(r.label) === -1; }));
 };
-// She knows what they want once they are past CoT's intro threshold (100) either way, or
-// once they have slept together. CoT has no such line; the rule is ours.
-// A professor's want is "indifferent" by rule until intimacy 2 (CoT), whatever he shows her, so
-// the line would lie under a professor who is plainly looking: it stays off until then (LO 2026-11-25).
-P.wantKnown = function (slug) {
-    var c = C.npcs[slugOf(slug)];
-    if (c && c.professor && P.intimacy(slug) < 2) return false;
-    var f = P.feeling(slug, "friendship");
-    return P.isSexPartner(slug) || Math.max(f, -2 * f, P.feeling(slug, "lust")) > 100;
-};
+// CoT works the want out and never prints it; scenes read it through `npc_wants`. The dialog shows
+// no want line (LO 2026-11-25: "Remove the ... want line").
 function bubble(label, cls, tip) {
     return '<div class="npc-display-infobubble ' + cls + '" title="' + esc(tip) + '">' + esc(label) + '</div>';
 }
 // The Personality block: a bubble per known trait, then "???" for each one not yet known;
-// nothing at all until the first is known (CoT). Then the want line.
+// nothing at all until the first is known (CoT).
 P.viewHtml = function (slug) {
     var h = "", shown = P.shownTraits(slug), known = P.knownTraits(slug);
     if (known.length > 0) {
@@ -317,7 +300,6 @@ P.viewHtml = function (slug) {
         for (var i = 0; i < shown.length - known.length; i++) h += bubble("???", "unknown-trait", "This trait is unknown.");
         h += '</div></div>';
     }
-    if (P.wantKnown(slug)) h += '<div class="people-want">' + esc(WANT_TEXT[P.want(slug)] || "") + '</div>';
     return h;
 };
 })();
@@ -412,7 +394,6 @@ PEOPLE_VIEW_CSS = """
 .view-person .personality-traits-container { margin-top: 10px; }
 .view-person .display-npc-personalty-traits-header { font-weight: bold; margin-bottom: 6px; }
 .view-person .unknown-trait { opacity: 0.55; }
-.view-person .people-want { margin-top: 10px; font-style: italic; }
 """
 
 

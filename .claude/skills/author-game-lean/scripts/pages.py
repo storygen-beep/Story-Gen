@@ -121,8 +121,10 @@ def built(builds):
 
 def screens_for(game, builds, people=True):
     """{screen: entry} for the page screens a card's Builds: line covers. `sidebar:<trait>` covers that sidebar
-    item. `ui:people_page` covers every person's People view fields, `engine:people` every person's traits and start
-    feelings, and `npcs:<id>` one person's fields. `people=False` leaves out the people fields and sidebar items: a
+    item. `ui:people_page` covers every person's People dialog fields (PEOPLE_FIELDS), `engine:people` every person's
+    traits and start feelings (SYSTEM_FIELDS), and `npcs:<id>` one person's fields. One screen, one owning card: the
+    card that built the People page is not asked again about traits it never built (P46 and P48, 2026-11-25: 912
+    duplicate items). `people=False` leaves out the people fields and sidebar items: a
     card's Does: need not list them (P09 and P36 built theirs before they were screens), and the reader reaches them
     through reading.PAGE_WHEN."""
     builds = set(builds)
@@ -132,7 +134,8 @@ def screens_for(game, builds, people=True):
         out.update({s: e for s, e in sidebar_entries(game).items() if f"sidebar:{s.split('.', 1)[1]}" in builds})
         for s, v in people_entries(game).items():
             _, nid, field = s.split(".", 2)
-            whole = "ui:people_page" in builds or ("engine:people" in builds and field in SYSTEM_FIELDS)
+            whole = ("ui:people_page" in builds and field in PEOPLE_FIELDS) or ("engine:people" in builds
+                                                                              and field in SYSTEM_FIELDS)
             if whole or f"npcs:{nid}" in builds:
                 out[s] = v
     return out

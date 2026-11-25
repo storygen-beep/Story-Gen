@@ -273,12 +273,15 @@ def work_list(game_dir, card_id, everything=False, skill=SKILL, game=None):
     # every row: each small fix used to re-open about 100 rows, so the lists grew instead of shrinking (P34 560,
     # P42 451, P07 448). A screen the record has never seen is asked in full, and a canvas that is mostly new screens
     # is asked once on "*". The scripts (check.py) still run in full on every build. --all asks everything.
+    # A page screen (a person's field, a sidebar item, a hint, a walkthrough) is never part of a canvas, so it never
+    # takes the shortcut below: it is asked on its own, through PAGE_WHEN when no Does: names it (P48, 2026-11-25:
+    # 48 new traits and feelings screens were read as one canvas `npcs`, and 0 people items were asked).
     per_canvas, new_by_canvas = {}, {}
     for s in sc:
-        if s != WHOLE:
+        if s != WHOLE and not pages.is_page(s):
             per_canvas.setdefault(s.split(".", 1)[0], set()).add(s)
     for s in changed:
-        if s not in old_sc:
+        if s not in old_sc and not pages.is_page(s):
             new_by_canvas.setdefault(s.split(".", 1)[0], set()).add(s)
     # A canvas that is mostly new screens (more than half) is read like a first pass, once on "*" (P34, 1,986 items).
     rewritten = {cv for cv, ss in new_by_canvas.items() if len(ss) * 2 > len(per_canvas[cv])}
@@ -292,11 +295,14 @@ def work_list(game_dir, card_id, everything=False, skill=SKILL, game=None):
         # A person's People view field (P46, 2026-11-25; traits and start feelings, P48) or a sidebar item is a
         # screen a Does: line may not name; the rows that judge it are the ones that fire on what it shows, plus
         # `always`.
+        # A card without Does: (where is None) asks a page field only those rows too, never every row (P01's three
+        # sidebar items, 2026-11-25: 459 items, every row on each).
         page_when = PAGE_WHEN.get(s.split(".", 1)[0])
         person_field = bool(page_when) and (where is None or not any(s in v for v in where.values()))
         for r in sorted(rows):
             fires = person_field and r in table and bool({"always", page_when} & set(table[r]["when"]))
-            if where is None or s in where.get(r, ()) or fires:
+            named = (where is None and not person_field) or s in (where or {}).get(r, ())
+            if named or fires:
                 if s not in old_sc:
                     want(r, s, "screen is new")
                 elif kind[s] == "text":
@@ -325,7 +331,9 @@ def work_list(game_dir, card_id, everything=False, skill=SKILL, game=None):
             want(r, s, "waived, its screen changed")  # LO waived the line he read; a new line needs a new look
         elif r in rows and old_rows.get(r) != rows[r]:
             want(r, s, "its rule's text changed")
-        elif s == WHOLE and any(x not in old_sc for x in changed) and (r in SCENE_WIDE or where is None):
+        elif s == WHOLE and any(x not in old_sc and not pages.is_page(x) for x in changed) and (r in SCENE_WIDE
+                                                                                            or where is None):
+            # a new page field or sidebar item is no screen of the scene (P01, 2026-11-25: 127 "*" rows re-asked)
             want(r, s, "a screen of the scene changed")
         elif (r, s) not in wanted:
             # A note's FAIL is shown in the notes and never holds (reader.md, build.md): it carries like a PASS and
