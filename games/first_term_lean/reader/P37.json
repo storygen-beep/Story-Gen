@@ -1,6 +1,6 @@
 {
  "piece": "P37",
- "pass": 4,
+ "pass": 5,
  "screens": {
   "zoe_party.party": {
    "text": "743043cc9ff5e804",
@@ -9,12 +9,12 @@
    "all": "1b1cb411f6915f8d"
   },
   "zoe_party.home": {
-   "text": "186792ffc393f4b1",
-   "facts": "12fa1f3f52b5d0f3",
-   "facts2": "ec6459147defd940",
-   "all": "0b6c57e3be6056cd"
+   "text": "b02777bd9b8b50f8",
+   "facts": "e9d76b772e3b53ca",
+   "facts2": "8486592f7b66e230",
+   "all": "bb59d48a609273e4"
   },
-  "*": "393ba7e7b05ffb18"
+  "*": "a2bff43d5a224c8c"
  },
  "rows": {
   "B1": "5276068df1ca6fa9",
@@ -93,16 +93,15 @@
   "C1277": "ee51917c5fb43c13",
   "C1238": "6fd430204e984124",
   "C1255": "803b4c46f1e9d7c7",
-  "C295": "63160eb49f7bb566",
-  "C381": "bcb1cf8813579ab9",
-  "C188": "657a435e4ab2ba7f",
-  "C330": "923a40b5ad4048fd",
-  "C210": "0bae50d6c4d47f7c",
+  "C2181": "74c68b4029782b5f",
+  "C381": "c661ccd26aada1f2",
+  "C188": "3a9caf43a2f2b8fd",
+  "C210": "00496c4c3aec4580",
   "C338": "3ce0dbe053c4b2c9",
-  "C388": "1bc289f9a5b378d6",
+  "C388": "fbffa0dbed63968f",
   "C541": "880eaf1315fbaa0b",
-  "L70": "10d904cc9f93ccc8",
-  "L116": "7e4ac68d5328051e",
+  "L70": "32d431db08834e70",
+  "L116": "f7a81c1d066ade25",
   "C519": "e78502f7aa28746d",
   "C311": "bad20c9f078e8b87",
   "C314": "0304731d263aed9f",
@@ -119,7 +118,10 @@
   "C961": "b6cf8c9e8a8ef683",
   "C644": "f5e1d79f3251dbab",
   "C596": "e5f7e6cf2d01613d",
-  "C660": "da4c173ea0935aca",
+  "C660": "eaf957bb84e62bbf",
+  "C2179": "47b9477e3ec8a790",
+  "C2180": "a6c0f498d4d16271",
+  "C2183": "40172c2d376bfc32",
   "C1340": "b76a6583ae88c60f",
   "C769": "f6b6f78a8f2e5ed7",
   "C794": "bad76e5963432385",
@@ -181,19 +183,19 @@
    "row": "B10",
    "screen": "zoe_party.home",
    "verdict": "PASS",
-   "line": "She lets you go with a kiss on the cheek.",
-   "why": "Zoe's rows put her home Sat 18-24, Sun 00-01: the whole window",
+   "line": "Sam's on the sofa under the coats, and he just grins.",
+   "why": "Zoe's rows put her at near_zoe_apartment Sat 18-24 and Sun 00-01, Sam's every day 12-02, so both are there at every minute of the 21:00-00:59 window; Sam is named only behind met_sam, the unmet variant says 'A sleepy-eyed guy' (his People-view look); the kissing guy and the guy by the speaker are unnamed crowd, true on every visit",
    "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "186792ffc393f4b1",
-    "facts": "12fa1f3f52b5d0f3",
-    "facts2": "ec6459147defd940",
-    "all": "0b6c57e3be6056cd"
+    "text": "b02777bd9b8b50f8",
+    "facts": "e9d76b772e3b53ca",
+    "facts2": "8486592f7b66e230",
+    "all": "bb59d48a609273e4"
    },
    "row_hash": "c1c0e2ac2588a579",
-   "carried": true,
-   "pass": 3
+   "carried": false,
+   "pass": 5
   },
   {
    "row": "B10",
@@ -339,19 +341,19 @@
    "row": "B8",
    "screen": "zoe_party.home",
    "verdict": "PASS",
-   "line": "Go home (180 min)",
-   "why": "no garment; weekly flag set; numbers agree with the tip 'Parties every Saturday, 9pm to 1am.'",
+   "line": "Go home (time_progression_minutes = 180)",
+   "why": "the new beats name no garment of hers and no number; the exit still sets partied_this_week and spends 180 minutes, as the card says",
    "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "186792ffc393f4b1",
-    "facts": "12fa1f3f52b5d0f3",
-    "facts2": "ec6459147defd940",
-    "all": "0b6c57e3be6056cd"
+    "text": "b02777bd9b8b50f8",
+    "facts": "e9d76b772e3b53ca",
+    "facts2": "8486592f7b66e230",
+    "all": "bb59d48a609273e4"
    },
    "row_hash": "80d415cf08e0ebfe",
-   "carried": true,
-   "pass": 3
+   "carried": false,
+   "pass": 5
   },
   {
    "row": "B8",
@@ -1133,37 +1135,89 @@
    "row": "C188",
    "screen": "zoe_party.home",
    "verdict": "N/A",
-   "line": "\u2014",
-   "why": "No meter here.",
+   "line": "",
+   "why": "no level gate on this canvas in release 1 (no skill_gate, 'Do it' is out of scope), so no 'not yet' talk below a gate is owed here",
    "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "731bd30c4909323f",
-    "facts": "f2652b41679446db",
-    "facts2": "2ee81abd453dd216",
-    "all": "d559ceb7a13e5a31"
+    "text": "b02777bd9b8b50f8",
+    "facts": "e9d76b772e3b53ca",
+    "facts2": "8486592f7b66e230",
+    "all": "bb59d48a609273e4"
    },
-   "row_hash": "657a435e4ab2ba7f",
-   "carried": true,
-   "pass": 1
+   "row_hash": "3a9caf43a2f2b8fd",
+   "carried": false,
+   "pass": 5
   },
   {
    "row": "C210",
    "screen": "zoe_party.home",
    "verdict": "N/A",
-   "line": "\u2014",
-   "why": "No stage crossing.",
+   "line": "",
+   "why": "no skill moves and no level is crossed on this screen",
    "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "731bd30c4909323f",
-    "facts": "f2652b41679446db",
-    "facts2": "2ee81abd453dd216",
-    "all": "d559ceb7a13e5a31"
+    "text": "b02777bd9b8b50f8",
+    "facts": "e9d76b772e3b53ca",
+    "facts2": "8486592f7b66e230",
+    "all": "bb59d48a609273e4"
    },
-   "row_hash": "0bae50d6c4d47f7c",
-   "carried": true,
-   "pass": 1
+   "row_hash": "00496c4c3aec4580",
+   "carried": false,
+   "pass": 5
+  },
+  {
+   "row": "C2179",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "Next time, then. I'm holding you to it.",
+   "why": "Zoe's reaction to her no is one line, but her want is computed from frozen feelings and cannot differ in release 1 (P48 'Frozen', C2182), so rule 14's 'a person whose want the story fixes gets one line' applies; no other line on either screen reacts to her choice",
+   "cause": null,
+   "note": false,
+   "screen_hash": "a2bff43d5a224c8c",
+   "row_hash": "47b9477e3ec8a790",
+   "carried": false,
+   "pass": 5
+  },
+  {
+   "row": "C2180",
+   "screen": "*",
+   "verdict": "N/A",
+   "line": "",
+   "why": "'Not tonight.' moves no feeling; release 1 moves none (plan.md \u00a710, C2182)",
+   "cause": null,
+   "note": false,
+   "screen_hash": "a2bff43d5a224c8c",
+   "row_hash": "a6c0f498d4d16271",
+   "carried": false,
+   "pass": 5
+  },
+  {
+   "row": "C2181",
+   "screen": "*",
+   "verdict": "N/A",
+   "line": "",
+   "why": "no bold act and no skill_gate on this canvas; the dare's 'Do it' comes in a later release",
+   "cause": null,
+   "note": false,
+   "screen_hash": "a2bff43d5a224c8c",
+   "row_hash": "74c68b4029782b5f",
+   "carried": false,
+   "pass": 5
+  },
+  {
+   "row": "C2183",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "Zoe's up on the sofa arm ... dancing like the party's hers. / Nobody's mine.",
+   "why": "people on screen: Zoe (Switch, Open Relationships, Dancer), Sam (Confident, Open Relationships, Artistic), Brooke (Forward, Dominant, Bully), Kayla (Submissive, Bully), Tess (Submissive, Shy): each 2-4 traits with a personality-kind one; nothing at the party contradicts a trait, and the new home beats now show Zoe's Dancer and Open Relationships and Sam's grin at it",
+   "cause": null,
+   "note": false,
+   "screen_hash": "a2bff43d5a224c8c",
+   "row_hash": "40172c2d376bfc32",
+   "carried": false,
+   "pass": 5
   },
   {
    "row": "C286",
@@ -1380,37 +1434,37 @@
    "row": "C381",
    "screen": "zoe_party.home",
    "verdict": "N/A",
-   "line": "\u2014",
-   "why": "No rung.",
+   "line": "",
+   "why": "no gate on this screen, greyed or otherwise",
    "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "731bd30c4909323f",
-    "facts": "f2652b41679446db",
-    "facts2": "2ee81abd453dd216",
-    "all": "d559ceb7a13e5a31"
+    "text": "b02777bd9b8b50f8",
+    "facts": "e9d76b772e3b53ca",
+    "facts2": "8486592f7b66e230",
+    "all": "bb59d48a609273e4"
    },
-   "row_hash": "bcb1cf8813579ab9",
-   "carried": true,
-   "pass": 1
+   "row_hash": "c661ccd26aada1f2",
+   "carried": false,
+   "pass": 5
   },
   {
    "row": "C388",
    "screen": "zoe_party.party",
    "verdict": "PASS",
-   "line": "Saturdays, 9pm to 1am.",
-   "why": "The clock lock says why; energy shows the engine's need.",
+   "line": "Go to Zoe's party (15 Energy)",
+   "why": "out of hours and after she's been the row is hidden (no show_when_blocked, clock.md rule 10), so no silent locked door shows; short on energy it dims with the engine's cost tag and the passage prints 'Requires 15 Energy (you have N)' (v2.py:6780-6785, 6227-6240)",
    "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "e96d129b23eb539b",
-    "facts": "56cf78cd7a9fca4a",
-    "facts2": "aea11acdfe12ca7e",
-    "all": "ff74b017858b4d01"
+    "text": "743043cc9ff5e804",
+    "facts": "bdb41c3bae4339c4",
+    "facts2": "64bc96f41ce6505b",
+    "all": "1b1cb411f6915f8d"
    },
-   "row_hash": "1bc289f9a5b378d6",
-   "carried": true,
-   "pass": 1
+   "row_hash": "fbffa0dbed63968f",
+   "carried": false,
+   "pass": 5
   },
   {
    "row": "C422",
@@ -1504,19 +1558,19 @@
    "row": "C460",
    "screen": "zoe_party.home",
    "verdict": "PASS",
-   "line": "the music follows you halfway down the street",
-   "why": "true on every visit",
+   "line": "She jumps down, and a guy you don't know kisses her neck on his way past. She lets him.",
+   "why": "every claim holds on every visit: Zoe and Sam present all window, the sofa and coats are the party screen's own, a stranger's kiss can't clash with any flag, 'before you've finished saying it' follows the only choice, 'Not tonight.'",
    "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "186792ffc393f4b1",
-    "facts": "12fa1f3f52b5d0f3",
-    "facts2": "ec6459147defd940",
-    "all": "0b6c57e3be6056cd"
+    "text": "b02777bd9b8b50f8",
+    "facts": "e9d76b772e3b53ca",
+    "facts2": "8486592f7b66e230",
+    "all": "bb59d48a609273e4"
    },
    "row_hash": "67e48e60d5053a2e",
-   "carried": true,
-   "pass": 3
+   "carried": false,
+   "pass": 5
   },
   {
    "row": "C460",
@@ -1553,19 +1607,19 @@
    "row": "C461",
    "screen": "zoe_party.home",
    "verdict": "PASS",
-   "line": "Next time, then. I'm holding you to it.",
-   "why": "fits Zoe",
+   "line": "Don't look at Sam like that, babe. Sam's not mine. Nobody's mine.",
+   "why": "dialogue fits Zoe's cast entry (her 'babe', Sam her on-and-off boyfriend, Open Relationships) and does not contradict the P41 walk-in",
    "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "186792ffc393f4b1",
-    "facts": "12fa1f3f52b5d0f3",
-    "facts2": "ec6459147defd940",
-    "all": "0b6c57e3be6056cd"
+    "text": "b02777bd9b8b50f8",
+    "facts": "e9d76b772e3b53ca",
+    "facts2": "8486592f7b66e230",
+    "all": "bb59d48a609273e4"
    },
    "row_hash": "310706ee076318f2",
-   "carried": true,
-   "pass": 3
+   "carried": false,
+   "pass": 5
   },
   {
    "row": "C461",
@@ -1796,19 +1850,19 @@
    "row": "C660",
    "screen": "zoe_party.home",
    "verdict": "N/A",
-   "line": "\u2014",
-   "why": "No person's meter on these screens.",
+   "line": "",
+   "why": "no person's feeling is shown or paid on this screen; Zoe's and Sam's People views use Friendship / Lust / Her Dominance (p48_rendered2.txt)",
    "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "731bd30c4909323f",
-    "facts": "f2652b41679446db",
-    "facts2": "2ee81abd453dd216",
-    "all": "d559ceb7a13e5a31"
+    "text": "b02777bd9b8b50f8",
+    "facts": "e9d76b772e3b53ca",
+    "facts2": "8486592f7b66e230",
+    "all": "bb59d48a609273e4"
    },
-   "row_hash": "da4c173ea0935aca",
-   "carried": true,
-   "pass": 1
+   "row_hash": "eaf957bb84e62bbf",
+   "carried": false,
+   "pass": 5
   },
   {
    "row": "C758",
@@ -2185,18 +2239,18 @@
    "screen": "zoe_party.home",
    "verdict": "PASS",
    "line": "time_progression_minutes = 180",
-   "why": "exit time set",
+   "why": "the one exit carries its time; the new blocks add no exit",
    "cause": null,
    "note": true,
    "screen_hash": {
-    "text": "186792ffc393f4b1",
-    "facts": "12fa1f3f52b5d0f3",
-    "facts2": "ec6459147defd940",
-    "all": "0b6c57e3be6056cd"
+    "text": "b02777bd9b8b50f8",
+    "facts": "e9d76b772e3b53ca",
+    "facts2": "8486592f7b66e230",
+    "all": "bb59d48a609273e4"
    },
    "row_hash": "4e86d143688ba8e5",
-   "carried": true,
-   "pass": 3
+   "carried": false,
+   "pass": 5
   },
   {
    "row": "C927",
@@ -2264,19 +2318,19 @@
    "row": "C931",
    "screen": "zoe_party.home",
    "verdict": "PASS",
-   "line": "Sat 21:00-00:00, Sun 00:00-01:00",
-   "why": "end 00:00 wraps (v2.py:4796-4798: 21:00-23:59), Sunday group picks up 00:00-00:59; last pass's 23:59 gap is closed",
+   "line": "Sat 21:00-00:00 OR Sun 00:00-01:00",
+   "why": "trigger unchanged: end 00:00 wraps to the day end, the Sunday group covers 00:00-00:59, end exclusive",
    "cause": null,
    "note": true,
    "screen_hash": {
-    "text": "186792ffc393f4b1",
-    "facts": "12fa1f3f52b5d0f3",
-    "facts2": "ec6459147defd940",
-    "all": "0b6c57e3be6056cd"
+    "text": "b02777bd9b8b50f8",
+    "facts": "e9d76b772e3b53ca",
+    "facts2": "8486592f7b66e230",
+    "all": "bb59d48a609273e4"
    },
    "row_hash": "1aadffd96e76381c",
-   "carried": true,
-   "pass": 3
+   "carried": false,
+   "pass": 5
   },
   {
    "row": "C931",
@@ -2331,19 +2385,19 @@
    "row": "L106",
    "screen": "zoe_party.home",
    "verdict": "PASS",
-   "line": "She lets you go",
-   "why": "Zoe present on every minute",
+   "line": "Sam's on the sofa under the coats",
+   "why": "who_is_where: npc_sam at near_zoe_apartment 12-02 every day, npc_zoe Sat 18-24 and Sun 00-01; no one is claimed whose rows don't put them there",
    "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "186792ffc393f4b1",
-    "facts": "12fa1f3f52b5d0f3",
-    "facts2": "ec6459147defd940",
-    "all": "0b6c57e3be6056cd"
+    "text": "b02777bd9b8b50f8",
+    "facts": "e9d76b772e3b53ca",
+    "facts2": "8486592f7b66e230",
+    "all": "bb59d48a609273e4"
    },
    "row_hash": "13a714429d15f3b2",
-   "carried": true,
-   "pass": 3
+   "carried": false,
+   "pass": 5
   },
   {
    "row": "L106",
@@ -2367,19 +2421,19 @@
    "row": "L116",
    "screen": "zoe_party.party",
    "verdict": "N/A",
-   "line": "\u2014",
-   "why": "No meter lock.",
+   "line": "",
+   "why": "no skill lock on this canvas; the only lock is the energy cost tag",
    "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "e96d129b23eb539b",
-    "facts": "56cf78cd7a9fca4a",
-    "facts2": "aea11acdfe12ca7e",
-    "all": "ff74b017858b4d01"
+    "text": "743043cc9ff5e804",
+    "facts": "bdb41c3bae4339c4",
+    "facts2": "64bc96f41ce6505b",
+    "all": "1b1cb411f6915f8d"
    },
-   "row_hash": "7e4ac68d5328051e",
-   "carried": true,
-   "pass": 1
+   "row_hash": "f7a81c1d066ade25",
+   "carried": false,
+   "pass": 5
   },
   {
    "row": "L119",
@@ -2470,19 +2524,19 @@
    "row": "L167",
    "screen": "zoe_party.home",
    "verdict": "PASS",
-   "line": "one row, group OR (Sat 21-24 / Sun 00-01)",
-   "why": "one row; daily count, no show_when_blocked, gone when unusable (rule 10)",
+   "line": "one trigger, group OR (Sat 21:00-00:00 / Sun 00:00-01:00), max_triggers_per_day = 1",
+   "why": "one row with a group; it has a clock window and a daily count, so clock.md rule 10 (LO 2026-11-24, 'button completely gone') overrides rule 9's greying: no show_when_blocked, hidden when unusable",
    "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "186792ffc393f4b1",
-    "facts": "12fa1f3f52b5d0f3",
-    "facts2": "ec6459147defd940",
-    "all": "0b6c57e3be6056cd"
+    "text": "b02777bd9b8b50f8",
+    "facts": "e9d76b772e3b53ca",
+    "facts2": "8486592f7b66e230",
+    "all": "bb59d48a609273e4"
    },
    "row_hash": "e64ce2672d85d2d8",
-   "carried": true,
-   "pass": 3
+   "carried": false,
+   "pass": 5
   },
   {
    "row": "L167",
@@ -2512,26 +2566,26 @@
    "note": false,
    "screen_hash": "393ba7e7b05ffb18",
    "row_hash": "c3599cd09637a240",
-   "carried": false,
+   "carried": true,
    "pass": 4
   },
   {
    "row": "L70",
    "screen": "zoe_party.home",
    "verdict": "N/A",
-   "line": "\u2014",
-   "why": "No climb meter here.",
+   "line": "",
+   "why": "no skill gain on this canvas in release 1",
    "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "731bd30c4909323f",
-    "facts": "f2652b41679446db",
-    "facts2": "2ee81abd453dd216",
-    "all": "d559ceb7a13e5a31"
+    "text": "b02777bd9b8b50f8",
+    "facts": "e9d76b772e3b53ca",
+    "facts2": "8486592f7b66e230",
+    "all": "bb59d48a609273e4"
    },
-   "row_hash": "10d904cc9f93ccc8",
-   "carried": true,
-   "pass": 1
+   "row_hash": "32d431db08834e70",
+   "carried": false,
+   "pass": 5
   },
   {
    "row": "L71",
@@ -2554,8 +2608,8 @@
  ],
  "causes": [],
  "pending": [],
- "asked": 1,
- "answered": 1,
+ "asked": 19,
+ "answered": 19,
  "pass_items": [],
  "unowed": []
 }

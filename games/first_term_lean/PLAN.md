@@ -48,24 +48,43 @@ Craft: C28, C33, C35, C36, C37, C38, C55, C58, C60, C63, C65, C68
 
 Everyone is 18 or over, and the game says so.
 
-| person | who | age | what she wants from them | what they want, every visit | keeps score of |
+| person | who | age | what she wants from them | what they want, every visit | feelings at the start (P48) |
 |---|---|---|---|---|---|
-| Ryan | step-brother, main taboo | 22 | the one person at home on her side | at the start: nothing from her · where he ends up: her, and he stops hiding it | want + warmth |
-| Mark | step-father, the pressure | 46 | his approval, and to be off the hook | control, and her (turns sexual late) | want + power |
-| Laura | mom, climbs | 41 | to tell her everything, to be close | a happy house; wants her nearer than she says | warmth |
-| Zoe | college friend, companion one step ahead | 19 | someone to follow into fun | a partner in trouble | steps + memory flags |
-| Tom | café manager | 31 | shifts and good tips | her behind the counter, closing late | want + power |
-| Dr. Hale | professor | 39 | a passing grade | to see how far she'll go | steps + memory flags |
-| Mr. Vance | owns the house, next door | 54 | the rent to come in | her, a little more each time she passes his porch | want + power |
-| Jake | campus guy | 20 | a normal boyfriend | a girlfriend he can show off | steps + memory flags |
-| Nadia | second-year, retaking Hale's course | 20 | the classmate who knows Hale's history | to see if Hale does to her what he did to Nadia | steps + memory flags |
-| the rival | classmate | 21 | (name open) | to beat her; can report her to the dean | steps + memory flags |
+| Ryan | step-brother, main taboo | 22 | the one person at home on her side | at the start: nothing from her · where he ends up: her, and he stops hiding it | friendship 0 · lust 0 · control 0 |
+| Mark | step-father, the pressure | 46 | his approval, and to be off the hook | control, and her (turns sexual late) | 0 · 0 · 500 |
+| Laura | mom, climbs | 41 | to tell her everything, to be close | a happy house; wants her nearer than she says | 300 · 0 · 200 |
+| Zoe | college friend, companion one step ahead | 19 | someone to follow into fun | a partner in trouble | 250 · 0 · 100 |
+| Tom | café manager | 31 | shifts and good tips | her behind the counter, closing late | 50 · 0 · 500 |
+| Dr. Hale | professor | 39 | a passing grade | to see how far she'll go | 0 · 300 · 300 |
+| Mr. Vance | owns the house, next door | 54 | the rent to come in | her, a little more each time she passes his porch | 100 · 400 · 400 |
+| Jake | campus guy | 20 | a normal boyfriend | a girlfriend he can show off | 100 · 300 · 0 |
+| Nadia | second-year, retaking Hale's course | 20 | the classmate who knows Hale's history | to see if Hale does to her what he did to Nadia | 200 · 0 · 0 |
+| the rival | classmate | 21 | (name open) | to beat her; can report her to the dean | Brooke: -200 · 0 · 150 |
 
 - **Arrivals come in waves, not all in week one.** Day one: the house, then Hale and Nadia. First
   week: Zoe, then Tom when she looks for work. First Sunday: Vance. Later: Jake, then the rival.
 - **No one is named before she meets them.** Until then it's "the man next door", "a guy on the quad".
 
-Craft: C567, C584, C606, C608, C610, C618, C628, C631, C650, C651, C657
+**The people system** (P48; LO, typed in main-lean 2026-11-25: "Yes lets move to cot style type system", "Meter
+frozen", "i say three", "Go ahead with your picks", "Yes to both A and B"). `[engine.people] system = "cot"`: every
+person has friendship, lust and control on -1000..1000, gender, attracted, age, and 1–4 fixed traits; what they want
+from her is worked out by the engine (none is hand-set). Release 1 moves none of it. Full per-person table, with the
+line behind each trait: `cards/P48.md`.
+
+| type | friendship | lust | control | number traits it draws from |
+|---|---|---|---|---|
+| Family, parent | 300 | 0 | 200 | Submissive, Dominant, Confident |
+| Family, sibling | 0 | 0 | 0 | Submissive, Switch |
+| Faculty (professor, intimacy 0) | 0 | 0 | 150 | Dominant, Confident, Sadist, Switch, Forward |
+| Student | 0 | 0 | 0 | Submissive, Switch, Strictly Casual, Confident |
+| Worker (over her) | 50 | 0 | 250 | Forward, Confident, Dominant |
+| Town (neighbours, shops) | 0 | 0 | 0 | Forward, Dominant, Strictly Casual, Confident |
+| Rival | -150 | 0 | 0 | Forward, Dominant, Submissive |
+
+Manner and hobby traits (Cook, Insecure, Gamer, Bully, Particular, Nerd, Wordsmith, Artistic, Bragger, Stoner, Sporty,
+Shy) are given only where a written scene shows them.
+
+Craft: C2177, C2178, C567, C584, C606, C608, C610, C618, C628, C631, C650, C651, C657
 Lessons: L93 (release 1 met all 10 people, 8 in week one), L115 (named before met)
 
 ## 4. The places
@@ -187,8 +206,8 @@ Releases add steps, events and people at places that already exist, not new plac
 
 | release | adds |
 |---|---|
-| 1, the skeleton | every person, place and system; the daily loop; each person's first meeting, in waves; meters shown, none move yet |
-| 2, the house | Ryan, Mark and Laura's next steps; Sunday rent with real costs when short; the meters start moving |
+| 1, the skeleton | every person, place and system; the daily loop; each person's first meeting, in waves; people's feelings and her four skills shown, none move (P48) |
+| 2, the house | Ryan, Mark and Laura's next steps; Sunday rent with real costs when short; feelings and skills start moving (people.md rule 15, meters.md) |
 | 3, college and work | Hale and Nadia; Tom and tips; Zoe's first party; Jake's dates |
 | 4, the street | Vance; goal 1's body route (Mark's chair); the four-Sundays end counts from release 1 (§8i; ENI's call, for LO to review, 2026-11-24) |
 | 5, her name on campus | goal 2 opens; Brooke's threat; the drama part |
@@ -306,12 +325,12 @@ Rules:
   | shoes | flats $15 | ankle boots $25 | heels $35 | platform heels $45 |
 
   Every item is in the shop from release 1, with its price. Buying needs the money and the trait
-  (LO 2026-11-21): normal needs nothing; sexy needs 20 (Curious), super sexy 40 (Bold), slutty
-  60 (Wild). What she shows (top, bottom, dress, legwear, shoes) reads Exhibitionism; what's under
-  (bra, underwear) reads Corruption. Release 1 moves no meter, so only normal can be bought.
-  A locked item shows "Needs Exhibitionism 20+" (v2.py:12376-12382). Layout: `[ui] clothes_layout
-  = "room"`, because the table layout's tiers are fixed at Corruption 0/45/85/135 and read
-  corruption only (v2.py:2429-2434, 2464-2467); 135 can't be reached on a 0-100 meter.
+  (LO 2026-11-21): normal needs nothing; sexy needs level 2, super sexy level 4, slutty level 6 (P48: the old 20 /
+  40 / 60 on a 0–100 meter, ×10 on CoT's 0..1000 skills). What she shows (top, bottom, dress, legwear, shoes) reads
+  Exhibitionism; what's under (bra, underwear) reads Disinhibition (was Corruption). Release 1 moves no skill, so only
+  normal can be bought. A locked item shows "Needs Disinhibition 2" (a `skill_level` condition with locked_text,
+  v2.py `_crLockReason`). Layout: `[ui] clothes_layout = "room"`, because the table layout's tiers are fixed at
+  0/45/85/135 and read one fixed meter only (v2.py:2429-2434, 2464-2467).
   Gates and layout: LO "yes", 2026-11-21.
 - The opening's "Get dressed" must put her day clothes on, or open the picker (C719, C1166).
 
