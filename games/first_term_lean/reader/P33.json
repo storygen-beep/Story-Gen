@@ -1,6 +1,6 @@
 {
  "piece": "P33",
- "pass": 11,
+ "pass": 12,
  "screens": {
   "body_run.run": {
    "text": "30c91aa93a1f5b0b",
@@ -133,16 +133,15 @@
   "C1277": "ee51917c5fb43c13",
   "C1238": "6fd430204e984124",
   "C1255": "803b4c46f1e9d7c7",
-  "C295": "63160eb49f7bb566",
-  "C381": "bcb1cf8813579ab9",
-  "C188": "657a435e4ab2ba7f",
-  "C330": "923a40b5ad4048fd",
-  "C210": "0bae50d6c4d47f7c",
+  "C2181": "74c68b4029782b5f",
+  "C381": "c661ccd26aada1f2",
+  "C188": "3a9caf43a2f2b8fd",
+  "C210": "00496c4c3aec4580",
   "C338": "3ce0dbe053c4b2c9",
-  "C388": "1bc289f9a5b378d6",
+  "C388": "fbffa0dbed63968f",
   "C541": "880eaf1315fbaa0b",
-  "L70": "10d904cc9f93ccc8",
-  "L116": "7e4ac68d5328051e",
+  "L70": "32d431db08834e70",
+  "L116": "f7a81c1d066ade25",
   "C519": "e78502f7aa28746d",
   "C311": "bad20c9f078e8b87",
   "C314": "0304731d263aed9f",
@@ -157,7 +156,10 @@
   "C961": "b6cf8c9e8a8ef683",
   "C644": "f5e1d79f3251dbab",
   "C596": "e5f7e6cf2d01613d",
-  "C660": "da4c173ea0935aca",
+  "C660": "eaf957bb84e62bbf",
+  "C2179": "47b9477e3ec8a790",
+  "C2180": "a6c0f498d4d16271",
+  "C2183": "40172c2d376bfc32",
   "C1340": "b76a6583ae88c60f",
   "C769": "f6b6f78a8f2e5ed7",
   "C794": "bad76e5963432385",
@@ -2333,35 +2335,89 @@
    "row": "C188",
    "screen": "body_lunch.eat",
    "verdict": "N/A",
-   "line": "\u2014",
-   "why": "meals_today is a count, not a climb meter; no stage",
+   "line": "-",
+   "why": "no level gate exists to sit below; release 1 is frozen (C2182): no effect moves a feeling or a skill, and no skill_gate exists; this screen pays +15 energy and meals_today",
    "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "348736bcd0d77e5c",
-    "facts": "9115f4236a2bef89",
-    "all": "3bb8cf6fe4700103"
+    "text": "1703e7590d5fbe02",
+    "facts": "4607c7f9c0029b8f",
+    "facts2": "4607c7f9c0029b8f",
+    "all": "1ca8b72d5608e898"
    },
-   "row_hash": "657a435e4ab2ba7f",
-   "carried": true,
-   "pass": 1
+   "row_hash": "3a9caf43a2f2b8fd",
+   "carried": false,
+   "pass": 12
   },
   {
    "row": "C210",
    "screen": "body_lunch.eat",
    "verdict": "N/A",
-   "line": "\u2014",
-   "why": "meals_today is a count, not a climb meter; no stage",
+   "line": "-",
+   "why": "no level is crossed; release 1 is frozen (C2182): no effect moves a feeling or a skill, and no skill_gate exists",
    "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "348736bcd0d77e5c",
-    "facts": "9115f4236a2bef89",
-    "all": "3bb8cf6fe4700103"
+    "text": "1703e7590d5fbe02",
+    "facts": "4607c7f9c0029b8f",
+    "facts2": "4607c7f9c0029b8f",
+    "all": "1ca8b72d5608e898"
    },
-   "row_hash": "0bae50d6c4d47f7c",
-   "carried": true,
-   "pass": 1
+   "row_hash": "00496c4c3aec4580",
+   "carried": false,
+   "pass": 12
+  },
+  {
+   "row": "C2179",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "Tom: \"Black, rookie? Don't tell me, I know.\" / Chris: \"Three, new girl. For you, four.\"",
+   "why": "one line each, each fits the one want: Tom indifferent and businesslike; Chris hatefuck, overcharging her with a wink",
+   "cause": null,
+   "note": false,
+   "screen_hash": "4530fe64a2396078",
+   "row_hash": "47b9477e3ec8a790",
+   "carried": false,
+   "pass": 12
+  },
+  {
+   "row": "C2180",
+   "screen": "*",
+   "verdict": "N/A",
+   "line": "-",
+   "why": "only body_lunch.eat fires it, and no choice there moves a feeling; release 1 is frozen (C2182): no effect moves a feeling or a skill, and no skill_gate exists",
+   "cause": null,
+   "note": false,
+   "screen_hash": "4530fe64a2396078",
+   "row_hash": "a6c0f498d4d16271",
+   "carried": false,
+   "pass": 12
+  },
+  {
+   "row": "C2181",
+   "screen": "*",
+   "verdict": "N/A",
+   "line": "-",
+   "why": "only body_lunch.eat fires it: no skill_gate, no skill effect; it pays energy and meals_today",
+   "cause": null,
+   "note": false,
+   "screen_hash": "4530fe64a2396078",
+   "row_hash": "74c68b4029782b5f",
+   "carried": false,
+   "pass": 12
+  },
+  {
+   "row": "C2183",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "Chris pours your coffee with a wink",
+   "why": "Tom (Forward, Confident) and Chris (Forward, Dominant) each have 2 traits, Forward personality-kind; nothing on body_coffee.drink contradicts a shown trait",
+   "cause": null,
+   "note": false,
+   "screen_hash": "4530fe64a2396078",
+   "row_hash": "40172c2d376bfc32",
+   "carried": false,
+   "pass": 12
   },
   {
    "row": "C286",
@@ -2548,35 +2604,37 @@
    "row": "C381",
    "screen": "body_lunch.eat",
    "verdict": "N/A",
-   "line": "Buy lunch ($4, 20 min, +15 energy)",
-   "why": "no rung to preview; not a climb meter",
+   "line": "-",
+   "why": "no gate above her level to preview; no skill gate in release 1",
    "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "348736bcd0d77e5c",
-    "facts": "9115f4236a2bef89",
-    "all": "3bb8cf6fe4700103"
+    "text": "1703e7590d5fbe02",
+    "facts": "4607c7f9c0029b8f",
+    "facts2": "4607c7f9c0029b8f",
+    "all": "1ca8b72d5608e898"
    },
-   "row_hash": "bcb1cf8813579ab9",
-   "carried": true,
-   "pass": 1
+   "row_hash": "c661ccd26aada1f2",
+   "carried": false,
+   "pass": 12
   },
   {
    "row": "C388",
    "screen": "body_lunch.eat",
    "verdict": "PASS",
-   "line": "You're not hungry right now.",
-   "why": "the meals lock carries locked_text, played headless; the clock lock shows its hours",
+   "line": "Buy lunch ($4)",
+   "why": "nothing greys without a reason: out of hours or at three meals the row hides; short on money it shows its cost tag",
    "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "348736bcd0d77e5c",
-    "facts": "9115f4236a2bef89",
-    "all": "3bb8cf6fe4700103"
+    "text": "1703e7590d5fbe02",
+    "facts": "4607c7f9c0029b8f",
+    "facts2": "4607c7f9c0029b8f",
+    "all": "1ca8b72d5608e898"
    },
-   "row_hash": "1bc289f9a5b378d6",
-   "carried": true,
-   "pass": 1
+   "row_hash": "fbffa0dbed63968f",
+   "carried": false,
+   "pass": 12
   },
   {
    "row": "C422",
@@ -3216,18 +3274,19 @@
    "row": "C660",
    "screen": "body_lunch.eat",
    "verdict": "N/A",
-   "line": "Buy lunch ($4, 20 min, +15 energy)",
-   "why": "no person's meter on this screen",
+   "line": "-",
+   "why": "nobody on screen; no person's feelings shown or paid",
    "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "348736bcd0d77e5c",
-    "facts": "9115f4236a2bef89",
-    "all": "3bb8cf6fe4700103"
+    "text": "1703e7590d5fbe02",
+    "facts": "4607c7f9c0029b8f",
+    "facts2": "4607c7f9c0029b8f",
+    "all": "1ca8b72d5608e898"
    },
-   "row_hash": "da4c173ea0935aca",
-   "carried": true,
-   "pass": 1
+   "row_hash": "eaf957bb84e62bbf",
+   "carried": false,
+   "pass": 12
   },
   {
    "row": "C758",
@@ -5564,7 +5623,7 @@
    "note": false,
    "screen_hash": "4530fe64a2396078",
    "row_hash": "0ded4fca6fc71925",
-   "carried": false,
+   "carried": true,
    "pass": 11
   },
   {
@@ -5748,19 +5807,20 @@
   {
    "row": "L116",
    "screen": "body_lunch.eat",
-   "verdict": "PASS",
-   "line": "You're not hungry right now.",
-   "why": "a story lock in plain words; no stage word; the hidden count isn't named because it isn't shown",
+   "verdict": "N/A",
+   "line": "-",
+   "why": "no skill lock on this screen",
    "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "348736bcd0d77e5c",
-    "facts": "9115f4236a2bef89",
-    "all": "3bb8cf6fe4700103"
+    "text": "1703e7590d5fbe02",
+    "facts": "4607c7f9c0029b8f",
+    "facts2": "4607c7f9c0029b8f",
+    "all": "1ca8b72d5608e898"
    },
-   "row_hash": "7e4ac68d5328051e",
-   "carried": true,
-   "pass": 1
+   "row_hash": "f7a81c1d066ade25",
+   "carried": false,
+   "pass": 12
   },
   {
    "row": "L119",
@@ -5972,21 +6032,21 @@
    "note": false,
    "screen_hash": "4530fe64a2396078",
    "row_hash": "c3599cd09637a240",
-   "carried": false,
+   "carried": true,
    "pass": 11
   },
   {
    "row": "L70",
    "screen": "*",
    "verdict": "N/A",
-   "line": "Buy lunch",
-   "why": "no climb meter",
+   "line": "-",
+   "why": "pays no skill; release 1 is frozen (C2182): no effect moves a feeling or a skill, and no skill_gate exists",
    "cause": null,
    "note": false,
-   "screen_hash": "443df94f1f7eb1cf",
-   "row_hash": "10d904cc9f93ccc8",
-   "carried": true,
-   "pass": 1
+   "screen_hash": "4530fe64a2396078",
+   "row_hash": "32d431db08834e70",
+   "carried": false,
+   "pass": 12
   },
   {
    "row": "L71",
@@ -6004,8 +6064,8 @@
  ],
  "causes": [],
  "pending": [],
- "asked": 2,
- "answered": 2,
+ "asked": 11,
+ "answered": 11,
  "pass_items": [],
  "unowed": []
 }

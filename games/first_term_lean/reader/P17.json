@@ -1,6 +1,6 @@
 {
  "piece": "P17",
- "pass": 5,
+ "pass": 6,
  "screens": {
   "drama_first.name": {
    "text": "7a2f62e5ee575f8a",
@@ -117,6 +117,8 @@
   "C640": "728d95d9964ccf25",
   "C644": "f5e1d79f3251dbab",
   "C596": "e5f7e6cf2d01613d",
+  "C2179": "47b9477e3ec8a790",
+  "C2183": "40172c2d376bfc32",
   "C448": "b86596f1a02766de",
   "L168": "444c44970dc284f2",
   "L169": "59defccfc63b0454",
@@ -867,6 +869,32 @@
    "row_hash": "d1b589361cb96867",
    "carried": true,
    "pass": 1
+  },
+  {
+   "row": "C2179",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "Cross (indifferent professor) to \"Shout it\": \"Good. That's how loud I want everything.\"; to \"Do I have to?\": \"Yes. That's the whole class, new face.\"",
+   "why": "a teacher's reactions; his look is narration, his lines stay a director's, fitting his one want",
+   "cause": null,
+   "note": false,
+   "screen_hash": "efc115ad39b4f18f",
+   "row_hash": "47b9477e3ec8a790",
+   "carried": false,
+   "pass": 6
+  },
+  {
+   "row": "C2183",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "Cross: Forward, Dominant, Artistic, Particular \u2014 \"Louder. They can't hear you at the back.\", the drama class itself",
+   "why": "4 traits; Particular and Artistic shown on screen",
+   "cause": null,
+   "note": false,
+   "screen_hash": "efc115ad39b4f18f",
+   "row_hash": "40172c2d376bfc32",
+   "carried": false,
+   "pass": 6
   },
   {
    "row": "C286",
@@ -2253,7 +2281,7 @@
    "note": false,
    "screen_hash": "efc115ad39b4f18f",
    "row_hash": "444c44970dc284f2",
-   "carried": false,
+   "carried": true,
    "pass": 5
   },
   {
@@ -2266,7 +2294,7 @@
    "note": false,
    "screen_hash": "efc115ad39b4f18f",
    "row_hash": "59defccfc63b0454",
-   "carried": false,
+   "carried": true,
    "pass": 5
   },
   {
@@ -2279,7 +2307,7 @@
    "note": false,
    "screen_hash": "efc115ad39b4f18f",
    "row_hash": "c3599cd09637a240",
-   "carried": false,
+   "carried": true,
    "pass": 5
   },
   {
@@ -2298,8 +2326,8 @@
  ],
  "causes": [],
  "pending": [],
- "asked": 3,
- "answered": 3,
+ "asked": 2,
+ "answered": 2,
  "pass_items": [],
  "unowed": []
 }

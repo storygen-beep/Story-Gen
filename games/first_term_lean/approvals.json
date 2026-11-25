@@ -2232,6 +2232,54 @@
       "sha256": "1f80e1207d6713513839b0fc7ad288faf9459fa0b774acc3ada9027096be4702",
       "words": "ENI for LO (delegated 2026-11-24): \"Yes to the P48 amendment with the two Zoe lines as written\"; the lines live on P37, which builds zoe_party",
       "date": "2026-11-25"
+    },
+    {
+      "card": "P48",
+      "sha256": "3425c99e730ddc668d70eadba49d0f23fac30bb0d9e9000171baf75674beb829",
+      "words": "ENI for LO (delegated 2026-11-24): page screens named as the skill now models them (sidebar.<skill>; traits and start feelings are reader screens)",
+      "date": "2026-11-25"
+    },
+    {
+      "card": "P48",
+      "sha256": "4d94953792115aae7fb79ab30075332fb22da1bd0ca2a71a89bd0f98bbdc22d9",
+      "words": "ENI for LO (delegated 2026-11-24): page screens named as the skill now models them (sidebar.<skill>, npcs.<id>.traits and .feelings)",
+      "date": "2026-11-25"
+    },
+    {
+      "card": "P48",
+      "sha256": "3355ea32dd3f259804f84ee83a1328f9093de827981915b36928dbb6d6cc963a",
+      "words": "ENI for LO (delegated 2026-11-24): \"Yes: Holt gets attracted = true and lust 100\"",
+      "date": "2026-11-25"
+    },
+    {
+      "card": "P48",
+      "sha256": "62cc88105940acf2469fbafe181aa97681ed4179710adbaa28a4cc7de3d4f392",
+      "words": "ENI for LO (delegated 2026-11-24): LO \"Remove the progress line and card label and want line\"",
+      "date": "2026-11-25"
+    },
+    {
+      "card": "P01",
+      "sha256": "5662e6e4ca8e17f4fe964c767e786966ff8249158f8775fee7b23d24a0c11f6e",
+      "words": "ENI for LO (delegated 2026-11-24): sidebar:corruption retired by P48 (Disinhibition)",
+      "date": "2026-11-25"
+    },
+    {
+      "card": "P01",
+      "sha256": "feac8945dd196c1e09ac7660fb31791f31909f1fc7df5ca846d6b03f4a3e322e",
+      "words": "ENI for LO (delegated 2026-11-24): sidebar:corruption retired by P48; the stage ladders, rungs and caps marked retired",
+      "date": "2026-11-25"
+    },
+    {
+      "card": "P31",
+      "sha256": "90dc247aa6351ae8994bf4976184a3de41f3865c9a7d3a7e0d823368ba268c9d",
+      "words": "ENI for LO (delegated 2026-11-24): \"yes to your fix as written\" (Chris at the window)",
+      "date": "2026-11-25"
+    },
+    {
+      "card": "P48",
+      "sha256": "8c2eff08110634a748917957b0278338347cc8de4afa18bc281d51c7fd8b8baf",
+      "words": "ENI for LO (delegated 2026-11-24): Ryan lust 100, Mark stays 0",
+      "date": "2026-11-25"
     }
   ]
 }

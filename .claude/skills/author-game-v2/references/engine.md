@@ -3549,8 +3549,8 @@ skill_gate       = { skill = "exhibitionism", level = 3 }
   Other `[ui.cast_page] show_traits` rows follow.
 - **Personality:** nothing until the first trait shows. Then a bubble per known trait and "???" for each one
   still unknown. The trait's description is the bubble's tooltip.
-- **The want line** ("Wants to be your friend.") shows once `max(friendship, -2 × friendship, lust)` is above
-  100, or they are sex partners.
+- **No want line.** CoT works the want out and never prints it, and neither does the dialog; scenes read it
+  with `npc_wants` (LO, 2026-11-25: "Remove the ... want line").
 - The old cast page (no `people_page`) draws none of this.
 
 ### Left out, each a marked hook in `generators/people_system.py`

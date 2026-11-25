@@ -1,6 +1,6 @@
 {
  "piece": "P21",
- "pass": 10,
+ "pass": 11,
  "screens": {
   "cafe_hire.ask": {
    "text": "a5e6e9ac50172fda",
@@ -131,7 +131,6 @@
   "C1277": "ee51917c5fb43c13",
   "C1238": "6fd430204e984124",
   "C1255": "803b4c46f1e9d7c7",
-  "C330": "923a40b5ad4048fd",
   "C519": "e78502f7aa28746d",
   "C1637": "72923a871f0435e6",
   "C311": "bad20c9f078e8b87",
@@ -152,6 +151,8 @@
   "C640": "728d95d9964ccf25",
   "C644": "f5e1d79f3251dbab",
   "C596": "e5f7e6cf2d01613d",
+  "C2179": "47b9477e3ec8a790",
+  "C2183": "40172c2d376bfc32",
   "C448": "b86596f1a02766de",
   "L168": "444c44970dc284f2",
   "L169": "59defccfc63b0454",
@@ -3178,6 +3179,32 @@
    "row_hash": "d1b589361cb96867",
    "carried": true,
    "pass": 7
+  },
+  {
+   "row": "C2179",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "Chris (hatefuck) to \"I've got it.\": \"Sure you do.\" / \"Later, new girl.\"; Tom (indifferent) to \"Not today.\": \"Suit yourself. Sign stays up.\"",
+   "why": "Chris's contempt plus the arm across her chest is hatefuck; Tom's shrug is indifferent",
+   "cause": null,
+   "note": false,
+   "screen_hash": "3c0282b5bb2a2efe",
+   "row_hash": "47b9477e3ec8a790",
+   "carried": false,
+   "pass": 11
+  },
+  {
+   "row": "C2183",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "Tom: Forward, Confident (\"Your first one's a weekday... rookie\"); Chris: Forward, Dominant (\"Tom says you're mine to train.\")",
+   "why": "2 traits each; Forward learnable and shown",
+   "cause": null,
+   "note": false,
+   "screen_hash": "3c0282b5bb2a2efe",
+   "row_hash": "40172c2d376bfc32",
+   "carried": false,
+   "pass": 11
   },
   {
    "row": "C286",
@@ -6215,7 +6242,7 @@
    "note": false,
    "screen_hash": "3c0282b5bb2a2efe",
    "row_hash": "0ded4fca6fc71925",
-   "carried": false,
+   "carried": true,
    "pass": 10
   },
   {
@@ -6233,7 +6260,7 @@
     "all": "6dab71496dd6f5b6"
    },
    "row_hash": "0ded4fca6fc71925",
-   "carried": false,
+   "carried": true,
    "pass": 10
   },
   {
@@ -6251,7 +6278,7 @@
     "all": "7e7a7c971cf66e89"
    },
    "row_hash": "0ded4fca6fc71925",
-   "carried": false,
+   "carried": true,
    "pass": 10
   },
   {
@@ -6608,7 +6635,7 @@
    "note": false,
    "screen_hash": "3c0282b5bb2a2efe",
    "row_hash": "444c44970dc284f2",
-   "carried": false,
+   "carried": true,
    "pass": 10
   },
   {
@@ -6621,7 +6648,7 @@
    "note": false,
    "screen_hash": "3c0282b5bb2a2efe",
    "row_hash": "59defccfc63b0454",
-   "carried": false,
+   "carried": true,
    "pass": 10
   },
   {
@@ -6634,7 +6661,7 @@
    "note": false,
    "screen_hash": "3c0282b5bb2a2efe",
    "row_hash": "c3599cd09637a240",
-   "carried": false,
+   "carried": true,
    "pass": 10
   },
   {
@@ -6670,8 +6697,8 @@
  ],
  "causes": [],
  "pending": [],
- "asked": 6,
- "answered": 6,
+ "asked": 2,
+ "answered": 2,
  "pass_items": [],
  "unowed": []
 }

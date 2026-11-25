@@ -1,6 +1,6 @@
 {
  "piece": "P20",
- "pass": 5,
+ "pass": 6,
  "screens": {
   "quad_meet_zoe.coffee": {
    "text": "cacb601aa799b9fd",
@@ -108,6 +108,8 @@
   "C640": "728d95d9964ccf25",
   "C644": "f5e1d79f3251dbab",
   "C596": "e5f7e6cf2d01613d",
+  "C2179": "47b9477e3ec8a790",
+  "C2183": "40172c2d376bfc32",
   "C448": "b86596f1a02766de",
   "L168": "444c44970dc284f2",
   "L169": "59defccfc63b0454",
@@ -952,6 +954,32 @@
    "row_hash": "d1b589361cb96867",
    "carried": true,
    "pass": 1
+  },
+  {
+   "row": "C2179",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "Zoe (friend) to \"I'm fine, thanks.\": \"More for me, then.\"; to \"Do you always do this?\": \"Only with the interesting ones.\"",
+   "why": "warm, teasing, no sexual ask: the friend line",
+   "cause": null,
+   "note": false,
+   "screen_hash": "492ea00ea89995f9",
+   "row_hash": "47b9477e3ec8a790",
+   "carried": false,
+   "pass": 6
+  },
+  {
+   "row": "C2183",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "Zoe: Switch, Open Relationships, Dancer \u2014 lines in P37's zoe_party.home (\"dancing like the party's hers\", \"Nobody's mine\"); nothing on the quad contradicts them",
+   "why": "3 traits, two personality-kind and cited; true here",
+   "cause": null,
+   "note": false,
+   "screen_hash": "492ea00ea89995f9",
+   "row_hash": "40172c2d376bfc32",
+   "carried": false,
+   "pass": 6
   },
   {
    "row": "C422",
@@ -2213,7 +2241,7 @@
    "note": false,
    "screen_hash": "492ea00ea89995f9",
    "row_hash": "444c44970dc284f2",
-   "carried": false,
+   "carried": true,
    "pass": 5
   },
   {
@@ -2226,7 +2254,7 @@
    "note": false,
    "screen_hash": "492ea00ea89995f9",
    "row_hash": "59defccfc63b0454",
-   "carried": false,
+   "carried": true,
    "pass": 5
   },
   {
@@ -2239,14 +2267,14 @@
    "note": false,
    "screen_hash": "492ea00ea89995f9",
    "row_hash": "c3599cd09637a240",
-   "carried": false,
+   "carried": true,
    "pass": 5
   }
  ],
  "causes": [],
  "pending": [],
- "asked": 3,
- "answered": 3,
+ "asked": 2,
+ "answered": 2,
  "pass_items": [],
  "unowed": []
 }

@@ -16,7 +16,7 @@ What is checked, each against CoT's own code
     (attitude_to_mean);
   * her skills: the level in the sidebar, a gate hidden / greyed / passed, the gain table,
     the daily cap (raise_skill);
-  * the People view's meters, bubbles and want line; the three conditions.
+  * the People view's meters and bubbles (no want line, as CoT); the three conditions.
 
     pytest apps/game_generation/tests/test_people_system.py -q
 """
@@ -677,12 +677,12 @@ def test_the_people_view_shows_meters_bubbles_and_the_want(html):
         assert "Friendship" in text and "Lust" in text and "Her Submission" in text
         assert "Dislike" not in text and "Attracted" not in text
         assert "Personality" in text and "Gossip" in text
-        assert "Wants to be your friend." in text
+        assert "Wants to" not in text  # CoT never prints the want (LO 2026-11-25)
         widths = g.js(
             "() => [...document.querySelectorAll('#ui-dialog-body .people-meter-fill')].map(e => e.style.width)"
         )
         assert widths == ["30%", "0%", "15%"]
-        # Ben at nothing: two meters, no Personality block, no want line.
+        # Ben at nothing: two meters, no Personality block.
         text = _view(g, "ben")
         assert "Friendship" in text and "Lust" in text
         assert "Dominance" not in text and "Submission" not in text
@@ -709,7 +709,7 @@ def test_the_people_view_shows_meters_bubbles_and_the_want(html):
             ],
             ["???", "unknown-trait", "This trait is unknown."],
         ]
-        assert "Sees you as a rival." in text
+        assert "rival" not in text.lower()
         # Control shows from 100, or from the first point for a dominant or submissive person.
         _set(g, "ben", control=99)
         assert "Dominance" not in _view(g, "ben")
@@ -755,15 +755,3 @@ def test_the_conditions_branch_a_block_and_a_choice(html):
         )
         assert checks == [True, False, True, True, False, True, False, True]
         assert g.errors == []
-
-
-@needs_browser
-def test_a_professors_want_line_stays_off_until_intimacy_two(html):
-    """LO 2026-11-25: "Indifferent to you." under a professor who is looking at her would be false."""
-    with open_game(html) as g:
-        g.play(HOME)
-        _set(g, "holt", friendship=400, lust=400)
-        text = _view(g, "holt")
-        assert "Indifferent" not in text and "Wants" not in text, text
-        _set(g, "holt", intimacy=2)
-        assert "Wants to sleep with you." in _view(g, "holt")

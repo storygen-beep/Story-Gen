@@ -1,6 +1,6 @@
 {
  "piece": "P36",
- "pass": 4,
+ "pass": 5,
  "screens": {
   "rep_mirror.listen": {
    "text": "37e65552ab36cb26",
@@ -14,7 +14,13 @@
    "facts2": "c3911e4c6ac514f2",
    "all": "bc96e0a4f6b4b457"
   },
-  "*": "d19f93b9b64cd15e"
+  "sidebar.reputation": {
+   "text": "09e109c3aa6c7876",
+   "facts": "09e109c3aa6c7876",
+   "facts2": "09e109c3aa6c7876",
+   "all": "09e109c3aa6c7876"
+  },
+  "*": "c87611bdc2813d97"
  },
  "rows": {
   "B1": "5276068df1ca6fa9",
@@ -63,7 +69,6 @@
   "C1200": "65e6616cd17c7eb3",
   "C1002": "657248766e62061f",
   "C1250": "fde578d75b0d3620",
-  "C330": "923a40b5ad4048fd",
   "C519": "e78502f7aa28746d",
   "C625": "dc9a1fd9dbf3fb87",
   "C626": "8e507f7b235acc25",
@@ -72,6 +77,8 @@
   "C620": "76250e48ada2b843",
   "C644": "f5e1d79f3251dbab",
   "C596": "e5f7e6cf2d01613d",
+  "C2179": "47b9477e3ec8a790",
+  "C2183": "40172c2d376bfc32",
   "C1340": "b76a6583ae88c60f",
   "C769": "f6b6f78a8f2e5ed7",
   "C794": "bad76e5963432385",
@@ -793,6 +800,32 @@
    "pass": 1
   },
   {
+   "row": "C2179",
+   "screen": "*",
+   "verdict": "N/A",
+   "line": "-",
+   "why": "only unnamed extras speak (two girls at the mirror, four second-years); rep_mirror shows only while Brooke is absent; no person with a want reacts to her choice",
+   "cause": null,
+   "note": false,
+   "screen_hash": "c87611bdc2813d97",
+   "row_hash": "47b9477e3ec8a790",
+   "carried": false,
+   "pass": 5
+  },
+  {
+   "row": "C2183",
+   "screen": "*",
+   "verdict": "N/A",
+   "line": "-",
+   "why": "no [[npcs]] person is on either screen; Brooke, Cross, Hale and Nadia are only named in gossip",
+   "cause": null,
+   "note": false,
+   "screen_hash": "c87611bdc2813d97",
+   "row_hash": "40172c2d376bfc32",
+   "carried": false,
+   "pass": 5
+  },
+  {
    "row": "C330",
    "screen": "*",
    "verdict": "N/A",
@@ -819,6 +852,24 @@
    "pass": 1
   },
   {
+   "row": "C422",
+   "screen": "sidebar.reputation",
+   "verdict": "PASS",
+   "line": "Reputation \u00b7 Nobody",
+   "why": "the label names the meter plainly; it isn't clickable",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "09e109c3aa6c7876",
+    "facts": "09e109c3aa6c7876",
+    "facts2": "09e109c3aa6c7876",
+    "all": "09e109c3aa6c7876"
+   },
+   "row_hash": "7e128897077ecee6",
+   "carried": false,
+   "pass": 5
+  },
+  {
    "row": "C442",
    "screen": "*",
    "verdict": "PASS",
@@ -830,6 +881,24 @@
    "row_hash": "59b8d8d24f0c7c38",
    "carried": true,
    "pass": 1
+  },
+  {
+   "row": "C442",
+   "screen": "sidebar.reputation",
+   "verdict": "PASS",
+   "line": "Nobody",
+   "why": "the band word says plainly where she stands",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "09e109c3aa6c7876",
+    "facts": "09e109c3aa6c7876",
+    "facts2": "09e109c3aa6c7876",
+    "all": "09e109c3aa6c7876"
+   },
+   "row_hash": "59b8d8d24f0c7c38",
+   "carried": false,
+   "pass": 5
   },
   {
    "row": "C447",
@@ -871,6 +940,24 @@
    "pass": 1
   },
   {
+   "row": "C451",
+   "screen": "sidebar.reputation",
+   "verdict": "PASS",
+   "line": "show_value = true",
+   "why": "the number shows beside the word",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "09e109c3aa6c7876",
+    "facts": "09e109c3aa6c7876",
+    "facts2": "09e109c3aa6c7876",
+    "all": "09e109c3aa6c7876"
+   },
+   "row_hash": "50dbf74577a813c7",
+   "carried": false,
+   "pass": 5
+  },
+  {
    "row": "C460",
    "screen": "rep_mirror.listen",
    "verdict": "PASS",
@@ -905,6 +992,24 @@
    "row_hash": "67e48e60d5053a2e",
    "carried": true,
    "pass": 3
+  },
+  {
+   "row": "C460",
+   "screen": "sidebar.reputation",
+   "verdict": "PASS",
+   "line": "reputation = 0",
+   "why": "nothing in the build writes reputation (only its label, sidebar item and start value), so 'Nobody' is true on every playthrough",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "09e109c3aa6c7876",
+    "facts": "09e109c3aa6c7876",
+    "facts2": "09e109c3aa6c7876",
+    "all": "09e109c3aa6c7876"
+   },
+   "row_hash": "67e48e60d5053a2e",
+   "carried": false,
+   "pass": 5
   },
   {
    "row": "C461",
@@ -956,6 +1061,24 @@
    "pass": 3
   },
   {
+   "row": "C461",
+   "screen": "sidebar.reputation",
+   "verdict": "PASS",
+   "line": "Nobody / Noticed / Talked about / Known / Everyone's talking",
+   "why": "plain band words, nothing that can clash",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "09e109c3aa6c7876",
+    "facts": "09e109c3aa6c7876",
+    "facts2": "09e109c3aa6c7876",
+    "all": "09e109c3aa6c7876"
+   },
+   "row_hash": "310706ee076318f2",
+   "carried": false,
+   "pass": 5
+  },
+  {
    "row": "C519",
    "screen": "*",
    "verdict": "PASS",
@@ -967,6 +1090,24 @@
    "row_hash": "e78502f7aa28746d",
    "carried": true,
    "pass": 1
+  },
+  {
+   "row": "C519",
+   "screen": "sidebar.reputation",
+   "verdict": "PASS",
+   "line": "Reputation \u00b7 Nobody",
+   "why": "one job, two words",
+   "cause": null,
+   "note": true,
+   "screen_hash": {
+    "text": "09e109c3aa6c7876",
+    "facts": "09e109c3aa6c7876",
+    "facts2": "09e109c3aa6c7876",
+    "all": "09e109c3aa6c7876"
+   },
+   "row_hash": "e78502f7aa28746d",
+   "carried": false,
+   "pass": 5
   },
   {
    "row": "C593",
@@ -1760,14 +1901,14 @@
    "note": false,
    "screen_hash": "d19f93b9b64cd15e",
    "row_hash": "c3599cd09637a240",
-   "carried": false,
+   "carried": true,
    "pass": 4
   }
  ],
  "causes": [],
  "pending": [],
- "asked": 1,
- "answered": 1,
+ "asked": 8,
+ "answered": 8,
  "pass_items": [],
  "unowed": []
 }

@@ -300,3 +300,5 @@
 - 2026-11-25 Rescaled: exhibitionism · LO, on his old save: "its fine"
 
 2026-11-25 · LO, typed in main-lean, relayed by ENI, on P48's first reading: "Yes" to Zoe getting Open Relationships and Dancer (keeping Switch), and to Sam getting Open Relationships and Artistic (his guitar), dropping Strictly Casual and keeping Confident. ENI for LO (delegated 2026-11-24): Tom and Sam start at lust 100 (reader c3), and Danny's Stoner is dropped (reader c1).
+
+2026-11-25 · LO, typed in main-lean, relayed by ENI: "Remove the progress line and card label and want line" · the People view no longer prints what a person wants from her (the engine's want line is removed; CoT never prints it). The progress line and card label were ideas only, never built. The computed want stays, read by scenes through `npc_wants` (P48).

@@ -1,6 +1,6 @@
 {
  "piece": "P18",
- "pass": 4,
+ "pass": 5,
  "screens": {
   "library_meet_holt.meet": {
    "text": "ac593b3110c2d464",
@@ -105,6 +105,8 @@
   "C640": "728d95d9964ccf25",
   "C644": "f5e1d79f3251dbab",
   "C596": "e5f7e6cf2d01613d",
+  "C2179": "47b9477e3ec8a790",
+  "C2183": "40172c2d376bfc32",
   "C448": "b86596f1a02766de",
   "L168": "444c44970dc284f2",
   "L169": "59defccfc63b0454",
@@ -864,6 +866,32 @@
    "row_hash": "d1b589361cb96867",
    "carried": true,
    "pass": 1
+  },
+  {
+   "row": "C2179",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "Holt (indifferent professor) to silence: \"Suit yourself.\"; to \"What happens if I make noise?\": \"Nobody's ever found out.\"",
+   "why": "a librarian's dry reactions, no claim on her",
+   "cause": null,
+   "note": false,
+   "screen_hash": "44217b6fe68293ef",
+   "row_hash": "47b9477e3ec8a790",
+   "carried": false,
+   "pass": 5
+  },
+  {
+   "row": "C2183",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "Holt: Switch, Confident, Particular \u2014 \"Quiet floor's upstairs, hon. No food, no phones, no noise.\"",
+   "why": "3 traits; Particular shown by her first line",
+   "cause": null,
+   "note": false,
+   "screen_hash": "44217b6fe68293ef",
+   "row_hash": "40172c2d376bfc32",
+   "carried": false,
+   "pass": 5
   },
   {
    "row": "C422",
@@ -1845,7 +1873,7 @@
    "note": false,
    "screen_hash": "44217b6fe68293ef",
    "row_hash": "444c44970dc284f2",
-   "carried": false,
+   "carried": true,
    "pass": 4
   },
   {
@@ -1858,7 +1886,7 @@
    "note": false,
    "screen_hash": "44217b6fe68293ef",
    "row_hash": "59defccfc63b0454",
-   "carried": false,
+   "carried": true,
    "pass": 4
   },
   {
@@ -1871,14 +1899,14 @@
    "note": false,
    "screen_hash": "44217b6fe68293ef",
    "row_hash": "c3599cd09637a240",
-   "carried": false,
+   "carried": true,
    "pass": 4
   }
  ],
  "causes": [],
  "pending": [],
- "asked": 3,
- "answered": 3,
+ "asked": 2,
+ "answered": 2,
  "pass_items": [],
  "unowed": []
 }

@@ -1,6 +1,6 @@
 {
  "piece": "P42",
- "pass": 9,
+ "pass": 10,
  "screens": {
   "talk_mom.hub": {
    "text": "0f4660e14b94ab43",
@@ -130,8 +130,13 @@
   "C593": "52e42cdd69c8f10e",
   "C644": "045102ba2f0a9453",
   "C596": "9f0309959e14079c",
-  "C656": "41c869f069a2b028",
-  "C660": "70b5022d4a858fa1",
+  "C660": "0c597aa282053560",
+  "C2177": "df399a418764decd",
+  "C2178": "d9961fc61f627d61",
+  "C2179": "5c8a5cf6d51d30ff",
+  "C2180": "e0a49b4151b1ffe1",
+  "C2183": "7187b816725b0ea6",
+  "C2182": "d8783d0c85f8bad2",
   "C448": "584dada6c379e3d8",
   "L168": "8be185110de48529",
   "L169": "7472e43cdaec19b9",
@@ -144,11 +149,14 @@
   "people#5": "1326d7ac8cba5298",
   "people#6": "0b522d7eb38d75bb",
   "people#7": "6767bfa0275497fe",
-  "people#8": "ba17b4df73559422",
+  "people#8": "9e7dd0f7cac6c2ea",
   "people#9": "a73dd8f1e77941ca",
   "people#10": "4a994154015ae37d",
   "people#11": "022fe9bee3ccb72a",
   "people#12": "479d0271d9f97da4",
+  "people#13": "5bbe85b553019b79",
+  "people#14": "a5525afeb491f4fc",
+  "people#15": "b50727378128b19e",
   "C769": "cf7d7a82afabcbbb",
   "C794": "3281d513b7f90d6e",
   "C795": "a28152099697ac6a",
@@ -1751,8 +1759,86 @@
    "note": false,
    "screen_hash": "8fedc23667492685",
    "row_hash": "72e884ab3b53f126",
-   "carried": false,
+   "carried": true,
    "pass": 9
+  },
+  {
+   "row": "C2177",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "npc_laura: friendship 300, lust 0, control 200; gender female; attracted true; people_type family_parent; traits Submissive, Cook, Insecure",
+   "why": "three feelings on -1000..1000, gender, attracted, type, 3 CoT traits; Mark (0/0/500, Dominant, Confident, Particular) and Ryan (0/0/0, Submissive, Switch, Gamer) the same; no 0-100 person meter",
+   "cause": null,
+   "note": false,
+   "screen_hash": "8fedc23667492685",
+   "row_hash": "df399a418764decd",
+   "carried": false,
+   "pass": 10
+  },
+  {
+   "row": "C2178",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "traits = [\"Submissive\", \"Cook\", \"Insecure\"]",
+   "why": "Laura starts from the family_parent row (300/0/200); Submissive is a number trait, Cook and Insecure are manner traits shown by written lines (\"Mom's at the stove.\", \"Tell me one good thing. Just one.\")",
+   "cause": null,
+   "note": false,
+   "screen_hash": "8fedc23667492685",
+   "row_hash": "d9961fc61f627d61",
+   "carried": false,
+   "pass": 10
+  },
+  {
+   "row": "C2179",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "\"Sit with me a minute, baby.\" / Mark: \"Some of us are trying to watch this.\"",
+   "why": "Laura's want is friend and every variant is a friend's line; Mark (indifferent) only wants his TV",
+   "cause": null,
+   "note": false,
+   "screen_hash": "8fedc23667492685",
+   "row_hash": "5c8a5cf6d51d30ff",
+   "carried": false,
+   "pass": 10
+  },
+  {
+   "row": "C2180",
+   "screen": "*",
+   "verdict": "N/A",
+   "line": "-",
+   "why": "no choice on talk_mom or mom_living_room moves a feeling; release 1 is frozen (C2182): no effect moves a feeling or a skill, and no skill_gate exists",
+   "cause": null,
+   "note": false,
+   "screen_hash": "8fedc23667492685",
+   "row_hash": "e0a49b4151b1ffe1",
+   "carried": false,
+   "pass": 10
+  },
+  {
+   "row": "C2182",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "Talk: flagEffects talked_mom_today only; Eat with her: energy +15, meals_today +1",
+   "why": "no feeling effect, no skill gate, no skill effect on either canvas",
+   "cause": null,
+   "note": true,
+   "screen_hash": "8fedc23667492685",
+   "row_hash": "d8783d0c85f8bad2",
+   "carried": false,
+   "pass": 10
+  },
+  {
+   "row": "C2183",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "She pats the couch. \"Tell me one good thing. Just one. Even a small one counts.\" / Mom puts a plate of eggs in front of you",
+   "why": "Laura's Cook and Insecure are shown on day one (friendship 300 > 200) and true on every visit: she feeds her, and she keeps asking for promises and reassurance",
+   "cause": null,
+   "note": false,
+   "screen_hash": "8fedc23667492685",
+   "row_hash": "7187b816725b0ea6",
+   "carried": false,
+   "pass": 10
   },
   {
    "row": "C422",
@@ -3023,48 +3109,50 @@
    "row": "C660",
    "screen": "*",
    "verdict": "PASS",
-   "line": "label = \"Warmth\"",
-   "why": "warmth shown on the People page with one word across the cast",
+   "line": "-",
+   "why": "people_system.py:275-279 prints Friendship (Dislike below 0), Lust, His/Her Dominance (Submission below 0) for every person; Laura shows Friendship 300, Lust 0, Her Dominance 200",
    "cause": null,
    "note": false,
-   "screen_hash": "ad3f6be4b295a67a",
-   "row_hash": "70b5022d4a858fa1",
-   "carried": true,
-   "pass": 5
+   "screen_hash": "8fedc23667492685",
+   "row_hash": "0c597aa282053560",
+   "carried": false,
+   "pass": 10
   },
   {
    "row": "C660",
    "screen": "mom_living_room.talk",
    "verdict": "PASS",
-   "line": "show_traits = [\"want\", \"warmth\", \"power\"]",
-   "why": "same words cast-wide",
+   "line": "-",
+   "why": "people_system.py:275-279 prints Friendship (Dislike below 0), Lust, His/Her Dominance (Submission below 0) for every person; the same words as the cast for Laura and Mark",
    "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "e38ff3dafa65755f",
-    "facts": "cfda3d7c96f6f167",
-    "all": "dd5c534f9a55bb61"
+    "text": "eb78fbf9c5206259",
+    "facts": "6bc79094f8d39647",
+    "facts2": "04bf141c5cb5340b",
+    "all": "13a427d6071bc370"
    },
-   "row_hash": "70b5022d4a858fa1",
-   "carried": true,
-   "pass": 5
+   "row_hash": "0c597aa282053560",
+   "carried": false,
+   "pass": 10
   },
   {
    "row": "C660",
    "screen": "talk_mom.eat",
    "verdict": "PASS",
-   "line": "show_traits = [\"want\", \"warmth\", \"power\"]",
-   "why": "same; the meal pays no person meter",
+   "line": "-",
+   "why": "people_system.py:275-279 prints Friendship (Dislike below 0), Lust, His/Her Dominance (Submission below 0) for every person; the meal pays energy only, no person's feeling",
    "cause": null,
    "note": false,
    "screen_hash": {
     "text": "cb5b4b6d73033d19",
-    "facts": "a78c81253b9ba872",
-    "all": "1870367b704cb91d"
+    "facts": "bcd4fca1f4ccef8f",
+    "facts2": "508d10677899c7a7",
+    "all": "72eab913c378c469"
    },
-   "row_hash": "70b5022d4a858fa1",
-   "carried": true,
-   "pass": 5
+   "row_hash": "0c597aa282053560",
+   "carried": false,
+   "pass": 10
   },
   {
    "row": "C690",
@@ -6042,7 +6130,7 @@
    "note": false,
    "screen_hash": "8fedc23667492685",
    "row_hash": "8be185110de48529",
-   "carried": false,
+   "carried": true,
    "pass": 9
   },
   {
@@ -6055,7 +6143,7 @@
    "note": false,
    "screen_hash": "8fedc23667492685",
    "row_hash": "7472e43cdaec19b9",
-   "carried": false,
+   "carried": true,
    "pass": 9
   },
   {
@@ -6068,7 +6156,7 @@
    "note": false,
    "screen_hash": "8fedc23667492685",
    "row_hash": "8f11debafcf05142",
-   "carried": false,
+   "carried": true,
    "pass": 9
   },
   {
@@ -6619,7 +6707,7 @@
    "note": false,
    "screen_hash": "8fedc23667492685",
    "row_hash": "022fe9bee3ccb72a",
-   "carried": false,
+   "carried": true,
    "pass": 9
   },
   {
@@ -6632,8 +6720,47 @@
    "note": false,
    "screen_hash": "8fedc23667492685",
    "row_hash": "479d0271d9f97da4",
-   "carried": false,
+   "carried": true,
    "pass": 9
+  },
+  {
+   "row": "people#13",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "traits = [\"Submissive\", \"Cook\", \"Insecure\"]",
+   "why": "type then tune; every trait has a job; Cook and Insecure learnable and true; Submissive (sex) stays ??? until sex",
+   "cause": null,
+   "note": false,
+   "screen_hash": "8fedc23667492685",
+   "row_hash": "5bbe85b553019b79",
+   "carried": false,
+   "pass": 10
+  },
+  {
+   "row": "people#14",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "\"When he's gone, you tell me everything.\"",
+   "why": "Laura's want is one for the release (friend), and her lines are a friend's",
+   "cause": null,
+   "note": false,
+   "screen_hash": "8fedc23667492685",
+   "row_hash": "a5525afeb491f4fc",
+   "carried": false,
+   "pass": 10
+  },
+  {
+   "row": "people#15",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "-",
+   "why": "rule 15 is for the release that first moves a feeling; nothing on these canvases moves one",
+   "cause": null,
+   "note": false,
+   "screen_hash": "8fedc23667492685",
+   "row_hash": "b50727378128b19e",
+   "carried": false,
+   "pass": 10
   },
   {
    "row": "people#2",
@@ -6758,14 +6885,14 @@
    "row": "people#8",
    "screen": "*",
    "verdict": "PASS",
-   "line": "-",
-   "why": "No meter moves here; release 1 shows meters still.",
+   "line": "[engine.people] system = \"cot\"",
+   "why": "Laura, Mark and Ryan carry friendship/lust/control, gender, attracted, a type and 2-4 traits; no hand-set want",
    "cause": null,
    "note": false,
-   "screen_hash": "ad3f6be4b295a67a",
-   "row_hash": "ba17b4df73559422",
-   "carried": true,
-   "pass": 5
+   "screen_hash": "8fedc23667492685",
+   "row_hash": "9e7dd0f7cac6c2ea",
+   "carried": false,
+   "pass": 10
   },
   {
    "row": "people#9",
@@ -6803,7 +6930,7 @@
    "note": false,
    "screen_hash": "8fedc23667492685",
    "row_hash": "309f0141d342dc6f",
-   "carried": false,
+   "carried": true,
    "pass": 9
   },
   {
@@ -7017,8 +7144,8 @@
  ],
  "causes": [],
  "pending": [],
- "asked": 7,
- "answered": 7,
+ "asked": 13,
+ "answered": 13,
  "pass_items": [],
  "unowed": []
 }

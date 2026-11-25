@@ -1,6 +1,6 @@
 {
  "piece": "P06",
- "pass": 6,
+ "pass": 7,
  "screens": {
   "loop_sleep.do": {
    "text": "3c1f6073c033b3c9",
@@ -220,7 +220,7 @@
   "returning-player#1": "ef6038f995ee4a9b",
   "returning-player#2": "cf9e545d681c7ac1",
   "returning-player#3": "fa2d9e90ed16c9bd",
-  "returning-player#4": "8b8d152767cf996a",
+  "returning-player#4": "b66fb813d57540d1",
   "returning-player#5": "9d9e80a6ae3ee32f",
   "returning-player#6": "3cf3fc37d1579b0f",
   "returning-player#7": "37a9c00a2f9d0d2b",
@@ -3629,7 +3629,7 @@
    "note": false,
    "screen_hash": "0d8207e80434a90c",
    "row_hash": "8f11debafcf05142",
-   "carried": false,
+   "carried": true,
    "pass": 6
   },
   {
@@ -4188,7 +4188,7 @@
    "note": false,
    "screen_hash": "0d8207e80434a90c",
    "row_hash": "309f0141d342dc6f",
-   "carried": false,
+   "carried": true,
    "pass": 6
   },
   {
@@ -4376,15 +4376,15 @@
   {
    "row": "returning-player#4",
    "screen": "*",
-   "verdict": "N/A",
-   "line": "",
-   "why": "no shipped meter, title, grant, start choice, reset or re-ship touched by the meal",
+   "verdict": "PASS",
+   "line": "energy = 100 \u2026 clamp = true",
+   "why": "P06's one meter, energy, keeps its 0..100 range with no bands (sleep sets 100, meals +15, shower +5, all clamped); nothing P06 builds rescales a shipped meter, so no Rescaled waiver is needed",
    "cause": null,
    "note": false,
-   "screen_hash": "a3cd947a82240952",
-   "row_hash": "8b8d152767cf996a",
-   "carried": true,
-   "pass": 4
+   "screen_hash": "0d8207e80434a90c",
+   "row_hash": "b66fb813d57540d1",
+   "carried": false,
+   "pass": 7
   },
   {
    "row": "returning-player#5",
@@ -4701,8 +4701,8 @@
  ],
  "causes": [],
  "pending": [],
- "asked": 2,
- "answered": 2,
+ "asked": 1,
+ "answered": 1,
  "pass_items": [],
  "unowed": []
 }

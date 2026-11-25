@@ -1,6 +1,6 @@
 {
  "piece": "P38",
- "pass": 4,
+ "pass": 5,
  "screens": {
   "walk_parents.moment": {
    "text": "0f689960aa65a5e0",
@@ -199,7 +199,6 @@
   "C1277": "ee51917c5fb43c13",
   "C1238": "6fd430204e984124",
   "C1255": "803b4c46f1e9d7c7",
-  "C330": "923a40b5ad4048fd",
   "C519": "e78502f7aa28746d",
   "C311": "bad20c9f078e8b87",
   "C314": "0304731d263aed9f",
@@ -215,6 +214,8 @@
   "C640": "728d95d9964ccf25",
   "C644": "f5e1d79f3251dbab",
   "C596": "e5f7e6cf2d01613d",
+  "C2179": "47b9477e3ec8a790",
+  "C2183": "40172c2d376bfc32",
   "C1340": "b76a6583ae88c60f",
   "C769": "f6b6f78a8f2e5ed7",
   "C794": "bad76e5963432385",
@@ -2267,6 +2268,32 @@
    "row_hash": "d9199efed36f9625",
    "carried": true,
    "pass": 1
+  },
+  {
+   "row": "C2179",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "Laura (friend) to \"Say you're late\": \"Go. Go on, I'm fine.\"; Mark (indifferent) to walking in: \"What?\"; Ryan (indifferent) to \"Not now\": \"Coward.\"; in the shower \"Shit. Sorry. Sorry.\"",
+   "why": "Laura's mothering, Mark's shut face, Ryan's sibling 'Sorry!': each the line for that one want",
+   "cause": null,
+   "note": false,
+   "screen_hash": "e2b0b71b2e28d1a5",
+   "row_hash": "47b9477e3ec8a790",
+   "carried": false,
+   "pass": 5
+  },
+  {
+   "row": "C2183",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "Laura: Submissive, Cook, Insecure (\"It's fine, baby. It's just numbers.\"); Mark: Dominant, Confident, Particular (\"Then be quiet, Laura. Be quiet for me.\"); Ryan: Submissive, Switch, Gamer (\"Ryan's on the couch with a controller, losing loudly.\")",
+   "why": "2-4 traits each, a learnable personality trait backed in the game and true on these visits",
+   "cause": null,
+   "note": false,
+   "screen_hash": "e2b0b71b2e28d1a5",
+   "row_hash": "40172c2d376bfc32",
+   "carried": false,
+   "pass": 5
   },
   {
    "row": "C286",
@@ -4693,7 +4720,7 @@
    "note": false,
    "screen_hash": "e2b0b71b2e28d1a5",
    "row_hash": "0ded4fca6fc71925",
-   "carried": false,
+   "carried": true,
    "pass": 4
   },
   {
@@ -5363,7 +5390,7 @@
    "note": false,
    "screen_hash": "e2b0b71b2e28d1a5",
    "row_hash": "c3599cd09637a240",
-   "carried": false,
+   "carried": true,
    "pass": 4
   },
   {

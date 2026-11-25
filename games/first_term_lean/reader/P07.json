@@ -1,6 +1,6 @@
 {
  "piece": "P07",
- "pass": 8,
+ "pass": 9,
  "screens": {
   "opening.wake": {
    "text": "cc3c063d9cef0f23",
@@ -341,8 +341,13 @@
   "C593": "52e42cdd69c8f10e",
   "C644": "045102ba2f0a9453",
   "C596": "9f0309959e14079c",
-  "C656": "41c869f069a2b028",
-  "C660": "70b5022d4a858fa1",
+  "C660": "0c597aa282053560",
+  "C2177": "df399a418764decd",
+  "C2178": "d9961fc61f627d61",
+  "C2179": "5c8a5cf6d51d30ff",
+  "C2180": "e0a49b4151b1ffe1",
+  "C2183": "7187b816725b0ea6",
+  "C2182": "d8783d0c85f8bad2",
   "C448": "584dada6c379e3d8",
   "L168": "8be185110de48529",
   "L169": "7472e43cdaec19b9",
@@ -355,11 +360,14 @@
   "people#5": "1326d7ac8cba5298",
   "people#6": "0b522d7eb38d75bb",
   "people#7": "6767bfa0275497fe",
-  "people#8": "ba17b4df73559422",
+  "people#8": "9e7dd0f7cac6c2ea",
   "people#9": "a73dd8f1e77941ca",
   "people#10": "4a994154015ae37d",
   "people#11": "022fe9bee3ccb72a",
   "people#12": "479d0271d9f97da4",
+  "people#13": "5bbe85b553019b79",
+  "people#14": "a5525afeb491f4fc",
+  "people#15": "b50727378128b19e",
   "C769": "cf7d7a82afabcbbb",
   "C794": "3281d513b7f90d6e",
   "C795": "a28152099697ac6a",
@@ -507,7 +515,7 @@
     "all": "2f799028dcc6f434"
    },
    "row_hash": "c1c0e2ac2588a579",
-   "carried": false,
+   "carried": true,
    "pass": 8
   },
   {
@@ -741,7 +749,7 @@
     "all": "fb025ee5267d4642"
    },
    "row_hash": "c1c0e2ac2588a579",
-   "carried": false,
+   "carried": true,
    "pass": 8
   },
   {
@@ -1133,7 +1141,7 @@
     "all": "2f799028dcc6f434"
    },
    "row_hash": "80d415cf08e0ebfe",
-   "carried": false,
+   "carried": true,
    "pass": 8
   },
   {
@@ -1367,7 +1375,7 @@
     "all": "fb025ee5267d4642"
    },
    "row_hash": "80d415cf08e0ebfe",
-   "carried": false,
+   "carried": true,
    "pass": 8
   },
   {
@@ -1635,7 +1643,7 @@
     "all": "2f799028dcc6f434"
    },
    "row_hash": "212d17eda04f2799",
-   "carried": false,
+   "carried": true,
    "pass": 8
   },
   {
@@ -1869,7 +1877,7 @@
     "all": "fb025ee5267d4642"
    },
    "row_hash": "212d17eda04f2799",
-   "carried": false,
+   "carried": true,
    "pass": 8
   },
   {
@@ -2694,7 +2702,7 @@
     "all": "2f799028dcc6f434"
    },
    "row_hash": "6b4e6ea1fe51ab17",
-   "carried": false,
+   "carried": true,
    "pass": 8
   },
   {
@@ -2928,7 +2936,7 @@
     "all": "fb025ee5267d4642"
    },
    "row_hash": "6b4e6ea1fe51ab17",
-   "carried": false,
+   "carried": true,
    "pass": 8
   },
   {
@@ -3634,7 +3642,7 @@
     "all": "2f799028dcc6f434"
    },
    "row_hash": "45d1f77e233e111c",
-   "carried": false,
+   "carried": true,
    "pass": 8
   },
   {
@@ -3868,7 +3876,7 @@
     "all": "fb025ee5267d4642"
    },
    "row_hash": "45d1f77e233e111c",
-   "carried": false,
+   "carried": true,
    "pass": 8
   },
   {
@@ -4035,6 +4043,84 @@
    "row_hash": "72e884ab3b53f126",
    "carried": true,
    "pass": 8
+  },
+  {
+   "row": "C2177",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "npc_laura traits = Submissive, Cook, Insecure; friendship 300, lust 0, control 200",
+   "why": "Laura, Mark and Ryan (the people P07 touches) each have friendship/lust/control in -1000..1000, gender, attracted, people_type and 3 traits; no 0-100 person meter on any of them",
+   "cause": null,
+   "note": false,
+   "screen_hash": "655307a73419f85a",
+   "row_hash": "df399a418764decd",
+   "carried": false,
+   "pass": 9
+  },
+  {
+   "row": "C2178",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "Cook: \"Mom's at the stove.\" \u00b7 Insecure: \"Tell me one good thing. Just one.\"",
+   "why": "each trait has a job: Submissive/Dominant/Confident/Switch are want-set traits; Cook, Insecure, Particular (\"Straight A's don't pay rent.\") and Gamer (\"Ryan's on his bed with a controller\") are manner/hobby traits shown by written lines",
+   "cause": null,
+   "note": false,
+   "screen_hash": "655307a73419f85a",
+   "row_hash": "d9961fc61f627d61",
+   "carried": false,
+   "pass": 9
+  },
+  {
+   "row": "C2179",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "Mom's eyes drop to the skirt. Her skirt. Her mouth goes tight, and she says nothing.",
+   "why": "Mom's noticing lines are her one reaction; her computed want for release 1 is friend and a tight-lipped silence fits it; the street neighbour is no [[npcs]] person, so one line is right",
+   "cause": null,
+   "note": false,
+   "screen_hash": "655307a73419f85a",
+   "row_hash": "5c8a5cf6d51d30ff",
+   "carried": false,
+   "pass": 9
+  },
+  {
+   "row": "C2180",
+   "screen": "*",
+   "verdict": "N/A",
+   "line": "",
+   "why": "no P07 choice moves a feeling; release 1 is frozen (C2182)",
+   "cause": null,
+   "note": false,
+   "screen_hash": "655307a73419f85a",
+   "row_hash": "e0a49b4151b1ffe1",
+   "carried": false,
+   "pass": 9
+  },
+  {
+   "row": "C2182",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "wardrobeEffects add mom_short_skirt \u2026",
+   "why": "borrow/return/dress choices carry only wardrobeEffects and time; no feeling effect, no skill_gate (0 in the build), no skill effect",
+   "cause": null,
+   "note": true,
+   "screen_hash": "655307a73419f85a",
+   "row_hash": "d8783d0c85f8bad2",
+   "carried": false,
+   "pass": 9
+  },
+  {
+   "row": "C2183",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "Insecure: \"Tell me one good thing. Just one. Even a small one counts.\"",
+   "why": "Laura (Cook, Insecure), Mark (Particular) and Ryan (Gamer) each have 3 traits with a personality-kind one backed by a written line the P48 card cites, all present in the build",
+   "cause": null,
+   "note": false,
+   "screen_hash": "655307a73419f85a",
+   "row_hash": "7187b816725b0ea6",
+   "carried": false,
+   "pass": 9
   },
   {
    "row": "C239",
@@ -4497,7 +4583,7 @@
     "all": "2f799028dcc6f434"
    },
    "row_hash": "beb5a109bde77305",
-   "carried": false,
+   "carried": true,
    "pass": 8
   },
   {
@@ -4731,7 +4817,7 @@
     "all": "fb025ee5267d4642"
    },
    "row_hash": "beb5a109bde77305",
-   "carried": false,
+   "carried": true,
    "pass": 8
   },
   {
@@ -4960,7 +5046,7 @@
     "all": "2f799028dcc6f434"
    },
    "row_hash": "153b0804e686abae",
-   "carried": false,
+   "carried": true,
    "pass": 8
   },
   {
@@ -5194,7 +5280,7 @@
     "all": "fb025ee5267d4642"
    },
    "row_hash": "153b0804e686abae",
-   "carried": false,
+   "carried": true,
    "pass": 8
   },
   {
@@ -5586,15 +5672,15 @@
   {
    "row": "C660",
    "screen": "*",
-   "verdict": "N/A",
-   "line": "",
-   "why": "no meter",
+   "verdict": "PASS",
+   "line": "Laura: Friendship 300, Lust 0, Her Dominance 200",
+   "why": "the People view rows come from people_system.py meterRows: Friendship/Dislike, Lust, His/Her Dominance or Submission, the same words for every person",
    "cause": null,
    "note": false,
-   "screen_hash": "219040e682a0b26e",
-   "row_hash": "70b5022d4a858fa1",
-   "carried": true,
-   "pass": 4
+   "screen_hash": "655307a73419f85a",
+   "row_hash": "0c597aa282053560",
+   "carried": false,
+   "pass": 9
   },
   {
    "row": "C690",
@@ -7295,7 +7381,7 @@
     "all": "2f799028dcc6f434"
    },
    "row_hash": "19da817e808ac3d6",
-   "carried": false,
+   "carried": true,
    "pass": 8
   },
   {
@@ -7529,7 +7615,7 @@
     "all": "fb025ee5267d4642"
    },
    "row_hash": "19da817e808ac3d6",
-   "carried": false,
+   "carried": true,
    "pass": 8
   },
   {
@@ -7964,7 +8050,7 @@
     "all": "2f799028dcc6f434"
    },
    "row_hash": "1e009d83817fb566",
-   "carried": false,
+   "carried": true,
    "pass": 8
   },
   {
@@ -8198,7 +8284,7 @@
     "all": "fb025ee5267d4642"
    },
    "row_hash": "1e009d83817fb566",
-   "carried": false,
+   "carried": true,
    "pass": 8
   },
   {
@@ -8736,7 +8822,7 @@
     "all": "2f799028dcc6f434"
    },
    "row_hash": "1b8984f52b99537e",
-   "carried": false,
+   "carried": true,
    "pass": 8
   },
   {
@@ -8970,7 +9056,7 @@
     "all": "fb025ee5267d4642"
    },
    "row_hash": "1b8984f52b99537e",
-   "carried": false,
+   "carried": true,
    "pass": 8
   },
   {
@@ -9238,7 +9324,7 @@
     "all": "2f799028dcc6f434"
    },
    "row_hash": "759e6667d7fc3183",
-   "carried": false,
+   "carried": true,
    "pass": 8
   },
   {
@@ -9472,7 +9558,7 @@
     "all": "fb025ee5267d4642"
    },
    "row_hash": "759e6667d7fc3183",
-   "carried": false,
+   "carried": true,
    "pass": 8
   },
   {
@@ -9779,7 +9865,7 @@
     "all": "2f799028dcc6f434"
    },
    "row_hash": "adf7bb3f8b632ac3",
-   "carried": false,
+   "carried": true,
    "pass": 8
   },
   {
@@ -10013,7 +10099,7 @@
     "all": "fb025ee5267d4642"
    },
    "row_hash": "adf7bb3f8b632ac3",
-   "carried": false,
+   "carried": true,
    "pass": 8
   },
   {
@@ -10966,6 +11052,45 @@
    "pass": 8
   },
   {
+   "row": "people#13",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "npc_laura people_type family_parent, tuned to 300 / 0 / 200",
+   "why": "type then hand-tuned; at least one learnable non-sex trait each (Laura's Cook and Insecure shown at friendship 300; Mark's Particular and Ryan's Gamer threshold-hidden, personality-kind); shown traits are true: Mom cooks and asks for promises on every visit",
+   "cause": null,
+   "note": false,
+   "screen_hash": "655307a73419f85a",
+   "row_hash": "5bbe85b553019b79",
+   "carried": false,
+   "pass": 9
+  },
+  {
+   "row": "people#14",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "Mom looks down at your feet. Her heels. Her mouth goes tight, and she says nothing.",
+   "why": "the only reactions are Mom's, one per garment; her one release-1 want (friend) fits the line",
+   "cause": null,
+   "note": false,
+   "screen_hash": "655307a73419f85a",
+   "row_hash": "a5525afeb491f4fc",
+   "carried": false,
+   "pass": 9
+  },
+  {
+   "row": "people#15",
+   "screen": "*",
+   "verdict": "N/A",
+   "line": "",
+   "why": "no choice on P07's screens moves a feeling; release 1 moves nothing",
+   "cause": null,
+   "note": false,
+   "screen_hash": "655307a73419f85a",
+   "row_hash": "b50727378128b19e",
+   "carried": false,
+   "pass": 9
+  },
+  {
    "row": "people#2",
    "screen": "*",
    "verdict": "N/A",
@@ -11046,15 +11171,15 @@
   {
    "row": "people#8",
    "screen": "*",
-   "verdict": "N/A",
-   "line": "",
-   "why": "no meter",
+   "verdict": "PASS",
+   "line": "[engine.people] system = \"cot\"",
+   "why": "every [[npcs]] in P07 carries friendship, lust, control, gender, attracted, a type and 2-4 traits",
    "cause": null,
    "note": false,
-   "screen_hash": "219040e682a0b26e",
-   "row_hash": "ba17b4df73559422",
-   "carried": true,
-   "pass": 4
+   "screen_hash": "655307a73419f85a",
+   "row_hash": "9e7dd0f7cac6c2ea",
+   "carried": false,
+   "pass": 9
   },
   {
    "row": "people#9",
@@ -11352,8 +11477,8 @@
  ],
  "causes": [],
  "pending": [],
- "asked": 24,
- "answered": 24,
+ "asked": 11,
+ "answered": 11,
  "pass_items": [],
  "unowed": []
 }
