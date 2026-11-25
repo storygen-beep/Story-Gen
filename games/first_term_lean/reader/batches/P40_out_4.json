@@ -1,0 +1,197 @@
+{
+ "verdicts": [
+  {
+   "row": "B10",
+   "screen": "walk_stacks.moment",
+   "verdict": "PASS",
+   "line": "Through a gap in the books in the back stacks: a couple against the shelves, her skirt in his fist, her tits out of her top ... Your face goes hot.",
+   "why": "walk_stacks: every day 18:00-21:55, library open 08:00-22:00; strangers; Holt (to 16:00) and Nadia (to 18:00) are gone",
+   "cause": null
+  },
+  {
+   "row": "B8",
+   "screen": "walk_stacks.moment",
+   "verdict": "PASS",
+   "line": "Through a gap in the books in the back stacks: a couple against the shelves, her skirt in his fist, her tits out of her top",
+   "why": "skirt and top are the stranger's",
+   "cause": null
+  },
+  {
+   "row": "C1158",
+   "screen": "walk_stacks.moment",
+   "verdict": "PASS",
+   "line": "Through a gap in the books in the back stacks: a couple against the shelves, her skirt in his fist, her tits out of her top",
+   "why": "garments named are the stranger's",
+   "cause": null
+  },
+  {
+   "row": "C1206",
+   "screen": "walk_stacks.moment",
+   "verdict": "PASS",
+   "line": "Through a gap in the books in the back stacks: a couple against the shelves, her skirt in his fist, her tits out of her top",
+   "why": "no garment of hers named",
+   "cause": null
+  },
+  {
+   "row": "C460",
+   "screen": "walk_stacks.moment",
+   "verdict": "PASS",
+   "line": "Through a gap in the books in the back stacks: a couple against the shelves, her skirt in his fist, her tits out of her top ... Your face goes hot.",
+   "why": "walk_stacks: every day 18:00-21:55, library open 08:00-22:00; strangers; Holt (to 16:00) and Nadia (to 18:00) are gone",
+   "cause": null
+  },
+  {
+   "row": "C461",
+   "screen": "walk_stacks.moment",
+   "verdict": "PASS",
+   "line": "Through a gap in the books in the back stacks: a couple against the shelves, her skirt in his fist, her tits out of her top ... Your face goes hot.",
+   "why": "texture and dialogue that fit the cast entries; no past or fact assumed",
+   "cause": null
+  },
+  {
+   "row": "L106",
+   "screen": "walk_stacks.moment",
+   "verdict": "PASS",
+   "line": "Through a gap in the books in the back stacks: a couple against the shelves, her skirt in his fist, her tits out of her top ... Your face goes hot.",
+   "why": "walk_stacks: every day 18:00-21:55, library open 08:00-22:00; strangers; Holt (to 16:00) and Nadia (to 18:00) are gone",
+   "cause": null
+  },
+  {
+   "row": "C151",
+   "screen": "walk_stacks.moment",
+   "verdict": "FAIL",
+   "line": "\"Quiet. Someone'll come.\" / \"Let them. Let them watch. Harder. Fuck.\"",
+   "why": "a note row: the repeatable moment still carries two spoken lines, not one",
+   "cause": null
+  },
+  {
+   "row": "B10",
+   "screen": "walk_stacks.watch",
+   "verdict": "PASS",
+   "line": "Her eyes find yours through the gap. You're wet. A book falls, and you run.",
+   "why": "walk_stacks: every day 18:00-21:55, library open 08:00-22:00; strangers; Holt (to 16:00) and Nadia (to 18:00) are gone",
+   "cause": null
+  },
+  {
+   "row": "B8",
+   "screen": "walk_stacks.watch",
+   "verdict": "PASS",
+   "line": "Her eyes find yours through the gap. You're wet. A book falls, and you run.",
+   "why": "no number, and no garment of hers is named",
+   "cause": null
+  },
+  {
+   "row": "C460",
+   "screen": "walk_stacks.watch",
+   "verdict": "PASS",
+   "line": "Her eyes find yours through the gap. You're wet. A book falls, and you run.",
+   "why": "walk_stacks: every day 18:00-21:55, library open 08:00-22:00; strangers; Holt (to 16:00) and Nadia (to 18:00) are gone",
+   "cause": null
+  },
+  {
+   "row": "C461",
+   "screen": "walk_stacks.watch",
+   "verdict": "PASS",
+   "line": "Her eyes find yours through the gap. You're wet. A book falls, and you run.",
+   "why": "texture and dialogue that fit the cast entries; no past or fact assumed",
+   "cause": null
+  },
+  {
+   "row": "C927",
+   "screen": "walk_stacks.watch",
+   "verdict": "PASS",
+   "line": "\"Done\" (5 min)",
+   "why": "the exit states its minutes",
+   "cause": null
+  },
+  {
+   "row": "C931",
+   "screen": "walk_stacks.watch",
+   "verdict": "PASS",
+   "line": "time_of_day 18:00-21:55",
+   "why": "end exclusive; last start 21:54, out at 21:59, before 22:00",
+   "cause": null
+  },
+  {
+   "row": "L106",
+   "screen": "walk_stacks.watch",
+   "verdict": "PASS",
+   "line": "Her eyes find yours through the gap. You're wet. A book falls, and you run.",
+   "why": "walk_stacks: every day 18:00-21:55, library open 08:00-22:00; strangers; Holt (to 16:00) and Nadia (to 18:00) are gone",
+   "cause": null
+  },
+  {
+   "row": "L167",
+   "screen": "walk_stacks.watch",
+   "verdict": "PASS",
+   "line": "walk_stacks trigger",
+   "why": "one row, one window every day",
+   "cause": null
+  },
+  {
+   "row": "B10",
+   "screen": "walk_stacks.away",
+   "verdict": "PASS",
+   "line": "You back out of the aisle, very upright, your face still hot. You know which shelf now.",
+   "why": "walk_stacks: every day 18:00-21:55, library open 08:00-22:00; strangers; Holt (to 16:00) and Nadia (to 18:00) are gone",
+   "cause": null
+  },
+  {
+   "row": "B8",
+   "screen": "walk_stacks.away",
+   "verdict": "PASS",
+   "line": "You back out of the aisle, very upright, your face still hot. You know which shelf now.",
+   "why": "no number, and no garment of hers is named",
+   "cause": null
+  },
+  {
+   "row": "C460",
+   "screen": "walk_stacks.away",
+   "verdict": "PASS",
+   "line": "You back out of the aisle, very upright, your face still hot. You know which shelf now.",
+   "why": "walk_stacks: every day 18:00-21:55, library open 08:00-22:00; strangers; Holt (to 16:00) and Nadia (to 18:00) are gone",
+   "cause": null
+  },
+  {
+   "row": "C461",
+   "screen": "walk_stacks.away",
+   "verdict": "PASS",
+   "line": "You back out of the aisle, very upright, your face still hot. You know which shelf now.",
+   "why": "texture and dialogue that fit the cast entries; no past or fact assumed",
+   "cause": null
+  },
+  {
+   "row": "C927",
+   "screen": "walk_stacks.away",
+   "verdict": "PASS",
+   "line": "\"Done\" (5 min)",
+   "why": "the exit states its minutes",
+   "cause": null
+  },
+  {
+   "row": "C931",
+   "screen": "walk_stacks.away",
+   "verdict": "PASS",
+   "line": "time_of_day 18:00-21:55",
+   "why": "end exclusive; out by 21:59",
+   "cause": null
+  },
+  {
+   "row": "L106",
+   "screen": "walk_stacks.away",
+   "verdict": "PASS",
+   "line": "You back out of the aisle, very upright, your face still hot. You know which shelf now.",
+   "why": "walk_stacks: every day 18:00-21:55, library open 08:00-22:00; strangers; Holt (to 16:00) and Nadia (to 18:00) are gone",
+   "cause": null
+  },
+  {
+   "row": "L167",
+   "screen": "walk_stacks.away",
+   "verdict": "PASS",
+   "line": "walk_stacks trigger",
+   "why": "one row, one window",
+   "cause": null
+  }
+ ],
+ "causes": []
+}

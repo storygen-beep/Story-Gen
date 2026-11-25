@@ -3,137 +3,202 @@
   {
    "row": "B10",
    "screen": "psych_first.lecture",
-   "why": "screen changed: truth row"
+   "why": "a fact changed"
   },
   {
    "row": "B10",
    "screen": "psych_first.seat",
-   "why": "screen changed: truth row"
-  },
-  {
-   "row": "B10",
-   "screen": "stats_first.class",
-   "why": "screen changed: truth row"
+   "why": "a fact changed"
   },
   {
    "row": "B8",
    "screen": "psych_first.lecture",
-   "why": "screen changed: truth row"
+   "why": "a fact changed"
   },
   {
    "row": "B8",
    "screen": "psych_first.seat",
-   "why": "screen changed: truth row"
+   "why": "a fact changed"
   },
   {
-   "row": "B8",
-   "screen": "stats_first.class",
-   "why": "screen changed: truth row"
-  },
-  {
-   "row": "C1238",
+   "row": "C1265",
    "screen": "psych_first.lecture",
-   "why": "failed last pass"
+   "why": "its rule's text changed"
   },
   {
    "row": "C460",
    "screen": "psych_first.lecture",
-   "why": "screen changed: truth row"
+   "why": "a fact changed"
   },
   {
    "row": "C460",
    "screen": "psych_first.seat",
-   "why": "screen changed: truth row"
-  },
-  {
-   "row": "C460",
-   "screen": "stats_first.class",
-   "why": "screen changed: truth row"
+   "why": "a fact changed"
   },
   {
    "row": "C461",
    "screen": "psych_first.lecture",
-   "why": "screen changed: truth row"
+   "why": "a fact changed"
   },
   {
    "row": "C461",
    "screen": "psych_first.seat",
-   "why": "screen changed: truth row"
-  },
-  {
-   "row": "C461",
-   "screen": "stats_first.class",
-   "why": "screen changed: truth row"
-  },
-  {
-   "row": "C593",
-   "screen": "psych_first.lecture",
-   "why": "failed last pass"
-  },
-  {
-   "row": "C593",
-   "screen": "stats_first.class",
-   "why": "failed last pass"
-  },
-  {
-   "row": "C639",
-   "screen": "stats_first.class",
-   "why": "failed last pass (a note), its screen changed"
+   "why": "a fact changed"
   },
   {
    "row": "C889",
    "screen": "psych_first.lecture",
-   "why": "failed last pass (a note), its screen changed"
+   "why": "a fact changed"
+  },
+  {
+   "row": "C889",
+   "screen": "stats_first.after",
+   "why": "its rule's text changed"
   },
   {
    "row": "C892",
    "screen": "psych_first.lecture",
-   "why": "failed last pass (a note), its screen changed"
+   "why": "a fact changed"
+  },
+  {
+   "row": "C897",
+   "screen": "psych_first.lecture",
+   "why": "a fact changed"
+  },
+  {
+   "row": "C900",
+   "screen": "psych_first.lecture",
+   "why": "a fact changed"
+  },
+  {
+   "row": "C902",
+   "screen": "psych_first.lecture",
+   "why": "a fact changed"
+  },
+  {
+   "row": "C903",
+   "screen": "psych_first.lecture",
+   "why": "a fact changed"
+  },
+  {
+   "row": "C906",
+   "screen": "*",
+   "why": "its rule's text changed"
+  },
+  {
+   "row": "C906",
+   "screen": "psych_first.lecture",
+   "why": "a fact changed"
   },
   {
    "row": "C910",
    "screen": "psych_first.lecture",
-   "why": "failed last pass (a note), its screen changed"
+   "why": "a fact changed"
+  },
+  {
+   "row": "C910",
+   "screen": "stats_first.after",
+   "why": "its rule's text changed"
+  },
+  {
+   "row": "C913",
+   "screen": "psych_first.lecture",
+   "why": "a fact changed"
+  },
+  {
+   "row": "C914",
+   "screen": "psych_first.lecture",
+   "why": "a fact changed"
+  },
+  {
+   "row": "C916",
+   "screen": "psych_first.lecture",
+   "why": "a fact changed"
+  },
+  {
+   "row": "C920",
+   "screen": "*",
+   "why": "its rule's text changed"
+  },
+  {
+   "row": "C920",
+   "screen": "psych_first.lecture",
+   "why": "a fact changed"
+  },
+  {
+   "row": "C924",
+   "screen": "psych_first.lecture",
+   "why": "a fact changed"
+  },
+  {
+   "row": "C926",
+   "screen": "psych_first.lecture",
+   "why": "a fact changed"
   },
   {
    "row": "C927",
    "screen": "psych_first.lecture",
-   "why": "screen changed: truth row"
+   "why": "a fact changed"
+  },
+  {
+   "row": "C928",
+   "screen": "psych_first.lecture",
+   "why": "a fact changed"
   },
   {
    "row": "C929",
    "screen": "psych_first.lecture",
-   "why": "failed last pass (a note), its screen changed"
+   "why": "a fact changed"
+  },
+  {
+   "row": "C929",
+   "screen": "stats_first.after",
+   "why": "its rule's text changed"
+  },
+  {
+   "row": "C930",
+   "screen": "psych_first.lecture",
+   "why": "a fact changed"
   },
   {
    "row": "C931",
    "screen": "psych_first.lecture",
-   "why": "screen changed: truth row"
+   "why": "a fact changed"
   },
   {
    "row": "C953",
    "screen": "psych_first.lecture",
-   "why": "failed last pass (a note), its screen changed"
+   "why": "its rule's text changed"
+  },
+  {
+   "row": "C953",
+   "screen": "psych_first.seat",
+   "why": "its rule's text changed"
+  },
+  {
+   "row": "C953",
+   "screen": "stats_first.after",
+   "why": "its rule's text changed"
+  },
+  {
+   "row": "C953",
+   "screen": "stats_first.class",
+   "why": "its rule's text changed"
   },
   {
    "row": "L106",
    "screen": "psych_first.lecture",
-   "why": "screen changed: truth row"
+   "why": "a fact changed"
   },
   {
    "row": "L106",
    "screen": "psych_first.seat",
-   "why": "screen changed: truth row"
-  },
-  {
-   "row": "L106",
-   "screen": "stats_first.class",
-   "why": "screen changed: truth row"
+   "why": "a fact changed"
   },
   {
    "row": "L167",
    "screen": "psych_first.lecture",
-   "why": "screen changed: truth row"
+   "why": "a fact changed"
   }
  ]
 }

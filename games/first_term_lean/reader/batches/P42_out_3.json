@@ -1,0 +1,397 @@
+{
+ "verdicts": [
+  {
+   "row": "B10",
+   "screen": "mom_living_room.talk",
+   "verdict": "PASS",
+   "line": "Next time Mark's out, you tell me the next part.",
+   "why": "Mark-absent talks: Mom is in the living room 19-23 daily, Mark is there weekdays 17-23 and Sunday 12-23, so they fire only Saturday 19-23, when Mark's row is '-' (out): 'Mark's out' is true; the Mark-there version names only Mark, who is there"
+  },
+  {
+   "row": "B10",
+   "screen": "talk_mom.eat",
+   "verdict": "PASS",
+   "line": "Mom puts a plate of eggs in front of you and sits down with her coffee.",
+   "why": "eggs 00-12 (Mom 07-08 / 08-12), dinner 12-23:59 (Mom 17-19); Mark/Ryan lines behind is_present; Mark's mornings and Ryan's evenings never overlap"
+  },
+  {
+   "row": "B10",
+   "screen": "talk_mom.talk",
+   "verdict": "PASS",
+   "line": "Did Mark say anything else? About the rent?",
+   "why": "every path hears Mark's rent in the opening (kitchen_rent); private version only while Mark and Ryan are both absent; Ryan version only while Ryan is in (weekdays 18-19, weekends 17-19), Mark version while Mark is in (mornings)"
+  },
+  {
+   "row": "B8",
+   "screen": "mom_living_room.talk",
+   "verdict": "PASS",
+   "line": "",
+   "why": "no garment of hers named outside the clothing-gated groups; no printed number"
+  },
+  {
+   "row": "B8",
+   "screen": "talk_mom.eat",
+   "verdict": "PASS",
+   "line": "",
+   "why": "no garment of hers named outside the clothing-gated groups; no printed number"
+  },
+  {
+   "row": "B8",
+   "screen": "talk_mom.talk",
+   "verdict": "PASS",
+   "line": "",
+   "why": "no garment of hers named outside the clothing-gated groups; no printed number"
+  },
+  {
+   "row": "C460",
+   "screen": "mom_living_room.talk",
+   "verdict": "PASS",
+   "line": "Stay in tonight. Just tonight. For me.",
+   "why": "fires Saturday 19-23 only; 'tonight' true; 'Be home tomorrow night' is a request"
+  },
+  {
+   "row": "C460",
+   "screen": "talk_mom.eat",
+   "verdict": "PASS",
+   "line": "Mark eats without looking up from his paper.",
+   "why": "behind npc_mark is_present at home_kitchen"
+  },
+  {
+   "row": "C460",
+   "screen": "talk_mom.talk",
+   "verdict": "PASS",
+   "line": "Ryan rolls his eyes and gets them.",
+   "why": "behind npc_ryan is_present; 'plates' at 17-19, dinner hours"
+  },
+  {
+   "row": "C461",
+   "screen": "mom_living_room.talk",
+   "verdict": "PASS",
+   "line": "You sit. She laughs, but she's watching your face.",
+   "why": "dialogue fits Mom's cast entry; texture can't clash"
+  },
+  {
+   "row": "C461",
+   "screen": "talk_mom.eat",
+   "verdict": "PASS",
+   "line": "Eat. You're too thin.",
+   "why": "dialogue fits Mom's cast entry; texture can't clash"
+  },
+  {
+   "row": "C461",
+   "screen": "talk_mom.talk",
+   "verdict": "PASS",
+   "line": "I promise, Mom.",
+   "why": "dialogue fits Mom's cast entry; texture can't clash"
+  },
+  {
+   "row": "C889",
+   "screen": "talk_mom.talk",
+   "verdict": "PASS",
+   "line": "Done",
+   "why": "labels carry no time or duration; the 5 minutes is spent on Done"
+  },
+  {
+   "row": "C892",
+   "screen": "talk_mom.eat",
+   "verdict": "PASS",
+   "line": "",
+   "why": "no hours in the act; she has rows, not hours"
+  },
+  {
+   "row": "C892",
+   "screen": "talk_mom.talk",
+   "verdict": "PASS",
+   "line": "",
+   "why": "no hours in the act; she has rows, not hours"
+  },
+  {
+   "row": "C897",
+   "screen": "talk_mom.eat",
+   "verdict": "PASS",
+   "line": "",
+   "why": "the 5/20 minutes are an act's spend, not a room crossing"
+  },
+  {
+   "row": "C897",
+   "screen": "talk_mom.talk",
+   "verdict": "PASS",
+   "line": "",
+   "why": "the 5/20 minutes are an act's spend, not a room crossing"
+  },
+  {
+   "row": "C900",
+   "screen": "talk_mom.eat",
+   "verdict": "PASS",
+   "line": "",
+   "why": "no time of day said; the eat node chooses eggs or dinner by a time_of_day group, never naming the hour"
+  },
+  {
+   "row": "C900",
+   "screen": "talk_mom.talk",
+   "verdict": "PASS",
+   "line": "",
+   "why": "no time of day said; the eat node chooses eggs or dinner by a time_of_day group, never naming the hour"
+  },
+  {
+   "row": "C902",
+   "screen": "talk_mom.eat",
+   "verdict": "PASS",
+   "line": "",
+   "why": "each line true at the last minute of its window (dinner group 12:00-23:59, Mom in the kitchen till 19:00)"
+  },
+  {
+   "row": "C902",
+   "screen": "talk_mom.talk",
+   "verdict": "PASS",
+   "line": "",
+   "why": "each line true at the last minute of its window (dinner group 12:00-23:59, Mom in the kitchen till 19:00)"
+  },
+  {
+   "row": "C903",
+   "screen": "talk_mom.eat",
+   "verdict": "PASS",
+   "line": "",
+   "why": "no weekday named"
+  },
+  {
+   "row": "C903",
+   "screen": "talk_mom.talk",
+   "verdict": "PASS",
+   "line": "",
+   "why": "no weekday named"
+  },
+  {
+   "row": "C916",
+   "screen": "talk_mom.eat",
+   "verdict": "N/A",
+   "line": "",
+   "why": "no event with hours here"
+  },
+  {
+   "row": "C916",
+   "screen": "talk_mom.talk",
+   "verdict": "N/A",
+   "line": "",
+   "why": "no event with hours here"
+  },
+  {
+   "row": "C924",
+   "screen": "talk_mom.eat",
+   "verdict": "N/A",
+   "line": "",
+   "why": "no travel"
+  },
+  {
+   "row": "C924",
+   "screen": "talk_mom.talk",
+   "verdict": "N/A",
+   "line": "",
+   "why": "no travel"
+  },
+  {
+   "row": "C926",
+   "screen": "talk_mom.eat",
+   "verdict": "PASS",
+   "line": "",
+   "why": "the clock moves only by minutes (5, 20)"
+  },
+  {
+   "row": "C926",
+   "screen": "talk_mom.talk",
+   "verdict": "PASS",
+   "line": "",
+   "why": "the clock moves only by minutes (5, 20)"
+  },
+  {
+   "row": "C928",
+   "screen": "talk_mom.eat",
+   "verdict": "PASS",
+   "line": "",
+   "why": "no time printed"
+  },
+  {
+   "row": "C928",
+   "screen": "talk_mom.talk",
+   "verdict": "PASS",
+   "line": "",
+   "why": "no time printed"
+  },
+  {
+   "row": "C930",
+   "screen": "talk_mom.eat",
+   "verdict": "N/A",
+   "line": "",
+   "why": "no windowed work"
+  },
+  {
+   "row": "C930",
+   "screen": "talk_mom.talk",
+   "verdict": "N/A",
+   "line": "",
+   "why": "no windowed work"
+  },
+  {
+   "row": "C913",
+   "screen": "talk_mom.eat",
+   "verdict": "N/A",
+   "line": "",
+   "why": "Mom's menu has no hours of its own; it follows her rows"
+  },
+  {
+   "row": "C914",
+   "screen": "talk_mom.eat",
+   "verdict": "N/A",
+   "line": "",
+   "why": "no row here is shut by the clock"
+  },
+  {
+   "row": "C913",
+   "screen": "talk_mom.talk",
+   "verdict": "N/A",
+   "line": "",
+   "why": "Mom's menu has no hours of its own; it follows her rows"
+  },
+  {
+   "row": "C914",
+   "screen": "talk_mom.talk",
+   "verdict": "N/A",
+   "line": "",
+   "why": "no row here is shut by the clock"
+  },
+  {
+   "row": "C906",
+   "screen": "talk_mom.talk",
+   "verdict": "PASS",
+   "line": "",
+   "why": "no 'till' time on a label"
+  },
+  {
+   "row": "C910",
+   "screen": "talk_mom.talk",
+   "verdict": "PASS",
+   "line": "",
+   "why": "Talk, Eat with her, Done, Leave: no time, no energy, no money"
+  },
+  {
+   "row": "C920",
+   "screen": "talk_mom.talk",
+   "verdict": "PASS",
+   "line": "",
+   "why": "no hop between rooms with a cost; Done is the act's spend"
+  },
+  {
+   "row": "C929",
+   "screen": "talk_mom.talk",
+   "verdict": "PASS",
+   "line": "",
+   "why": "the act's time is on no label"
+  },
+  {
+   "row": "C921",
+   "screen": "mom_living_room.talk",
+   "verdict": "N/A",
+   "line": "",
+   "why": "no schedule window written here"
+  },
+  {
+   "row": "C927",
+   "screen": "mom_living_room.talk",
+   "verdict": "PASS",
+   "line": "Done",
+   "why": "Done spends minutes (5 or 20); Leave is the menu's way out"
+  },
+  {
+   "row": "C921",
+   "screen": "talk_mom.eat",
+   "verdict": "N/A",
+   "line": "",
+   "why": "no schedule window written here"
+  },
+  {
+   "row": "C927",
+   "screen": "talk_mom.eat",
+   "verdict": "PASS",
+   "line": "Done",
+   "why": "Done spends minutes (5 or 20); Leave is the menu's way out"
+  },
+  {
+   "row": "C921",
+   "screen": "talk_mom.talk",
+   "verdict": "N/A",
+   "line": "",
+   "why": "no schedule window written here"
+  },
+  {
+   "row": "C927",
+   "screen": "talk_mom.talk",
+   "verdict": "PASS",
+   "line": "Done",
+   "why": "Done spends minutes (5 or 20); Leave is the menu's way out"
+  },
+  {
+   "row": "C931",
+   "screen": "mom_living_room.talk",
+   "verdict": "N/A",
+   "line": "",
+   "why": "no time_of_day read"
+  },
+  {
+   "row": "C931",
+   "screen": "talk_mom.eat",
+   "verdict": "PASS",
+   "line": "start_time = \"12:00\", end_time = \"23:59\"",
+   "why": "end exclusive; Mom leaves the kitchen at 19:00, so no gap minute is reachable"
+  },
+  {
+   "row": "C931",
+   "screen": "talk_mom.talk",
+   "verdict": "N/A",
+   "line": "",
+   "why": "no time_of_day read"
+  },
+  {
+   "row": "L106",
+   "screen": "mom_living_room.talk",
+   "verdict": "PASS",
+   "line": "Mark's in his chair, the remote on his knee.",
+   "why": "hub and talk name Mark only behind is_present"
+  },
+  {
+   "row": "L106",
+   "screen": "talk_mom.eat",
+   "verdict": "PASS",
+   "line": "Ryan eats standing at the counter.",
+   "why": "behind npc_ryan is_present at home_kitchen"
+  },
+  {
+   "row": "L106",
+   "screen": "talk_mom.talk",
+   "verdict": "PASS",
+   "line": "She doesn't look at Mark.",
+   "why": "Mark version behind is_present"
+  },
+  {
+   "row": "L167",
+   "screen": "mom_living_room.talk",
+   "verdict": "N/A",
+   "line": "",
+   "why": "no row with hours that differ by day"
+  },
+  {
+   "row": "L167",
+   "screen": "talk_mom.eat",
+   "verdict": "N/A",
+   "line": "",
+   "why": "no row with hours that differ by day"
+  },
+  {
+   "row": "L167",
+   "screen": "talk_mom.talk",
+   "verdict": "N/A",
+   "line": "",
+   "why": "no row with hours that differ by day"
+  }
+ ],
+ "causes": []
+}

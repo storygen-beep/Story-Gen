@@ -1,0 +1,1177 @@
+{
+ "verdicts": [
+  {
+   "row": "B10",
+   "screen": "walk_cross_brooke.leave",
+   "verdict": "PASS",
+   "line": "He'll be saying it next rehearsal too.",
+   "why": "every line true at the first and last minute and on a second visit; named people gated present by their rows"
+  },
+  {
+   "row": "B10",
+   "screen": "walk_cross_brooke.moment",
+   "verdict": "PASS",
+   "line": "You can feel where his hand would sit on your own waist.",
+   "why": "every line true at the first and last minute and on a second visit; named people gated present by their rows"
+  },
+  {
+   "row": "B10",
+   "screen": "walk_cross_brooke.watch",
+   "verdict": "PASS",
+   "line": "One day he'll place you like that.",
+   "why": "every line true at the first and last minute and on a second visit; named people gated present by their rows"
+  },
+  {
+   "row": "B10",
+   "screen": "walk_cross_seats.again",
+   "verdict": "PASS",
+   "line": "Better. See you at two, new face.",
+   "why": "every line true at the first and last minute and on a second visit; named people gated present by their rows"
+  },
+  {
+   "row": "B10",
+   "screen": "walk_cross_seats.moment",
+   "verdict": "FAIL",
+   "line": "your nipples tight under your top.",
+   "why": "false on a visit in a dress",
+   "cause": "P40r2-c1"
+  },
+  {
+   "row": "B10",
+   "screen": "walk_cross_seats.off",
+   "verdict": "PASS",
+   "line": "Shame. You were getting somewhere.",
+   "why": "every line true at the first and last minute and on a second visit; named people gated present by their rows"
+  },
+  {
+   "row": "B10",
+   "screen": "walk_hale_note.knock",
+   "verdict": "PASS",
+   "line": "Come back with a real question",
+   "why": "true in his office hours"
+  },
+  {
+   "row": "B10",
+   "screen": "walk_hale_note.moment",
+   "verdict": "PASS",
+   "line": "Door's open for a reason. Come in or don't.",
+   "why": "every line true at the first and last minute and on a second visit; named people gated present by their rows"
+  },
+  {
+   "row": "B10",
+   "screen": "walk_hale_note.walkon",
+   "verdict": "PASS",
+   "line": "You know the name on it.",
+   "why": "met_nadia always set with met_hale (toml 4615)"
+  },
+  {
+   "row": "B10",
+   "screen": "walk_holt_novel.ask",
+   "verdict": "PASS",
+   "line": "Tomorrow you'll want to know if he did.",
+   "why": "every line true at the first and last minute and on a second visit; named people gated present by their rows"
+  },
+  {
+   "row": "B10",
+   "screen": "walk_holt_novel.leave",
+   "verdict": "PASS",
+   "line": "She'll be a chapter further tomorrow.",
+   "why": "Holt named after met_holt; Friday's tomorrow she's at the desk Sat 10-16"
+  },
+  {
+   "row": "B10",
+   "screen": "walk_holt_novel.moment",
+   "verdict": "PASS",
+   "line": "Don't you say a word, hon.",
+   "why": "every line true at the first and last minute and on a second visit; named people gated present by their rows"
+  },
+  {
+   "row": "B10",
+   "screen": "walk_mirror_girls.beside",
+   "verdict": "PASS",
+   "line": "Brooke's eyes find you in the mirror on the way out. She's remembering your face.",
+   "why": "every line true at the first and last minute and on a second visit; named people gated present by their rows"
+  },
+  {
+   "row": "B10",
+   "screen": "walk_mirror_girls.leave",
+   "verdict": "FAIL",
+   "line": "They'll be at that mirror again tomorrow.",
+   "why": "false on Friday: Brooke, Kayla and Tess have no Saturday bathroom row",
+   "cause": "P40r2-c2"
+  },
+  {
+   "row": "B10",
+   "screen": "walk_mirror_girls.moment",
+   "verdict": "PASS",
+   "line": "Tess is doing Brooke's lashes at the mirror while Kayla holds the bag",
+   "why": "every line true at the first and last minute and on a second visit; named people gated present by their rows"
+  },
+  {
+   "row": "B10",
+   "screen": "walk_stacks.away",
+   "verdict": "PASS",
+   "line": "You back out of the aisle, very upright. You know which shelf now.",
+   "why": "every line true at the first and last minute and on a second visit; named people gated present by their rows"
+  },
+  {
+   "row": "B10",
+   "screen": "walk_stacks.moment",
+   "verdict": "PASS",
+   "line": "her skirt in his fist, her leg round his hip as he fucks her.",
+   "why": "every line true at the first and last minute and on a second visit; named people gated present by their rows"
+  },
+  {
+   "row": "B10",
+   "screen": "walk_stacks.watch",
+   "verdict": "PASS",
+   "line": "You're wet. A book slides off the shelf, and you run. You know which shelf now.",
+   "why": "every line true at the first and last minute and on a second visit; named people gated present by their rows"
+  },
+  {
+   "row": "B12",
+   "screen": "walk_cross_brooke.moment",
+   "verdict": "PASS",
+   "line": "You can feel where his hand would sit on your own waist. / watch: 'One day he'll place you like that.'",
+   "why": "her waist named, he looks straight at her on watch, a not-yet, a hook"
+  },
+  {
+   "row": "B13",
+   "screen": "walk_cross_seats.moment",
+   "verdict": "PASS",
+   "line": "Your face goes hot down your neck, your nipples tight under your top. [image people/cross_seats_t3]",
+   "why": "on her body, her picture right after"
+  },
+  {
+   "row": "B3",
+   "screen": "walk_cross_brooke.leave",
+   "verdict": "PASS",
+   "line": "He'll be saying it next rehearsal too.",
+   "why": "ends on a pull that points at the next visit"
+  },
+  {
+   "row": "B3",
+   "screen": "walk_holt_novel.ask",
+   "verdict": "PASS",
+   "line": "Tomorrow you'll want to know if he did.",
+   "why": "ends on a pull that points at the next visit"
+  },
+  {
+   "row": "B3",
+   "screen": "walk_holt_novel.leave",
+   "verdict": "PASS",
+   "line": "Smart girl. / She'll be a chapter further tomorrow.",
+   "why": "ends on a pull that points at the next visit"
+  },
+  {
+   "row": "B3",
+   "screen": "walk_mirror_girls.beside",
+   "verdict": "PASS",
+   "line": "Brooke's eyes find you in the mirror on the way out. She's remembering your face.",
+   "why": "ends on a pull that points at the next visit"
+  },
+  {
+   "row": "B3",
+   "screen": "walk_mirror_girls.leave",
+   "verdict": "PASS",
+   "line": "They'll be at that mirror again tomorrow.",
+   "why": "ends on a pull that points at the next visit"
+  },
+  {
+   "row": "B3",
+   "screen": "walk_stacks.away",
+   "verdict": "PASS",
+   "line": "You back out of the aisle, very upright. You know which shelf now.",
+   "why": "ends on a pull that points at the next visit"
+  },
+  {
+   "row": "B3",
+   "screen": "walk_stacks.watch",
+   "verdict": "PASS",
+   "line": "You're wet. A book slides off the shelf, and you run. You know which shelf now.",
+   "why": "ends on a pull that points at the next visit"
+  },
+  {
+   "row": "B4",
+   "screen": "walk_stacks.moment",
+   "verdict": "FAIL",
+   "line": "her skirt in his fist, her leg round his hip as he fucks her.",
+   "why": "she sees sex and the screen has no reaction on her body; the away path never gets one ('very upright'); voice.md shape 3, arousal is always on her body",
+   "cause": "P40r2-c3"
+  },
+  {
+   "row": "B5",
+   "screen": "walk_stacks.watch",
+   "verdict": "FAIL",
+   "line": "A book slides off the shelf, and you run.",
+   "why": "nobody reacts to her watching, and PLAN \u00a710c doesn't declare that nobody does",
+   "cause": "P40r2-c4"
+  },
+  {
+   "row": "B7",
+   "screen": "walk_stacks.watch",
+   "verdict": "PASS",
+   "line": "He fucks her harder against the shelf, until she bites his shoulder ... he comes with a grunt into her neck.",
+   "why": "the explicit beat ends on the act; her reaction is its own beat"
+  },
+  {
+   "row": "B8",
+   "screen": "walk_cross_brooke.leave",
+   "verdict": "PASS",
+   "line": "He'll be saying it next rehearsal too.",
+   "why": "no number; no garment of hers named, or the one named is backed"
+  },
+  {
+   "row": "B8",
+   "screen": "walk_cross_brooke.moment",
+   "verdict": "PASS",
+   "line": "You can feel where his hand would sit on your own waist.",
+   "why": "no number; no garment of hers named, or the one named is backed"
+  },
+  {
+   "row": "B8",
+   "screen": "walk_cross_brooke.watch",
+   "verdict": "PASS",
+   "line": "One day he'll place you like that.",
+   "why": "no number; no garment of hers named, or the one named is backed"
+  },
+  {
+   "row": "B8",
+   "screen": "walk_cross_seats.again",
+   "verdict": "PASS",
+   "line": "Better. See you at two, new face.",
+   "why": "no number; no garment of hers named, or the one named is backed"
+  },
+  {
+   "row": "B8",
+   "screen": "walk_cross_seats.moment",
+   "verdict": "FAIL",
+   "line": "your nipples tight under your top.",
+   "why": "'your top' is backed by no condition or equip; the leave rule passes a dress alone (toml 872-874), so she can be on stage in the sundress with no top",
+   "cause": "P40r2-c1"
+  },
+  {
+   "row": "B8",
+   "screen": "walk_cross_seats.off",
+   "verdict": "PASS",
+   "line": "Shame. You were getting somewhere.",
+   "why": "no number; no garment of hers named, or the one named is backed"
+  },
+  {
+   "row": "B8",
+   "screen": "walk_hale_note.knock",
+   "verdict": "PASS",
+   "line": "Young lady. Come back with a real question, and I'll have an answer.",
+   "why": "no number; no garment of hers named, or the one named is backed"
+  },
+  {
+   "row": "B8",
+   "screen": "walk_hale_note.moment",
+   "verdict": "PASS",
+   "line": "Door's open for a reason. Come in or don't.",
+   "why": "no number; no garment of hers named, or the one named is backed"
+  },
+  {
+   "row": "B8",
+   "screen": "walk_hale_note.walkon",
+   "verdict": "PASS",
+   "line": "You don't know what the note means. You know the name on it.",
+   "why": "no number; no garment of hers named, or the one named is backed"
+  },
+  {
+   "row": "B8",
+   "screen": "walk_holt_novel.ask",
+   "verdict": "PASS",
+   "line": "Tomorrow you'll want to know if he did.",
+   "why": "no number; no garment of hers named, or the one named is backed"
+  },
+  {
+   "row": "B8",
+   "screen": "walk_holt_novel.leave",
+   "verdict": "PASS",
+   "line": "Smart girl. / She'll be a chapter further tomorrow.",
+   "why": "no number; no garment of hers named, or the one named is backed"
+  },
+  {
+   "row": "B8",
+   "screen": "walk_holt_novel.moment",
+   "verdict": "PASS",
+   "line": "Don't you say a word, hon.",
+   "why": "no number; no garment of hers named, or the one named is backed"
+  },
+  {
+   "row": "B8",
+   "screen": "walk_mirror_girls.beside",
+   "verdict": "PASS",
+   "line": "Brooke's eyes find you in the mirror on the way out. She's remembering your face.",
+   "why": "no number; no garment of hers named, or the one named is backed"
+  },
+  {
+   "row": "B8",
+   "screen": "walk_mirror_girls.leave",
+   "verdict": "PASS",
+   "line": "They'll be at that mirror again tomorrow.",
+   "why": "no number; no garment of hers named, or the one named is backed"
+  },
+  {
+   "row": "B8",
+   "screen": "walk_mirror_girls.moment",
+   "verdict": "PASS",
+   "line": "Tess is doing Brooke's lashes at the mirror while Kayla holds the bag",
+   "why": "no number; no garment of hers named, or the one named is backed"
+  },
+  {
+   "row": "B8",
+   "screen": "walk_stacks.away",
+   "verdict": "PASS",
+   "line": "You back out of the aisle, very upright. You know which shelf now.",
+   "why": "no number; no garment of hers named, or the one named is backed"
+  },
+  {
+   "row": "B8",
+   "screen": "walk_stacks.moment",
+   "verdict": "PASS",
+   "line": "her skirt in his fist, her leg round his hip as he fucks her.",
+   "why": "no number; no garment of hers named, or the one named is backed"
+  },
+  {
+   "row": "B8",
+   "screen": "walk_stacks.watch",
+   "verdict": "PASS",
+   "line": "You're wet. A book slides off the shelf, and you run. You know which shelf now.",
+   "why": "no number; no garment of hers named, or the one named is backed"
+  },
+  {
+   "row": "C1158",
+   "screen": "walk_stacks.moment",
+   "verdict": "PASS",
+   "line": "her skirt in his fist",
+   "why": "the skirt is the stranger's; nothing of hers named"
+  },
+  {
+   "row": "C1206",
+   "screen": "walk_stacks.moment",
+   "verdict": "PASS",
+   "line": "her skirt in his fist",
+   "why": "no garment of hers named"
+  },
+  {
+   "row": "C1262",
+   "screen": "walk_cross_seats.moment",
+   "verdict": "PASS",
+   "line": "...your nipples tight under your top. then image 'a young woman of 18 alone on a lit stage'",
+   "why": "picture right after the body line"
+  },
+  {
+   "row": "C1278",
+   "screen": "walk_stacks.moment",
+   "verdict": "PASS",
+   "line": "two students in their twenties",
+   "why": "ages given"
+  },
+  {
+   "row": "C1280",
+   "screen": "walk_stacks.moment",
+   "verdict": "PASS",
+   "line": "pool_dir = \"sex/stacks_couple_t5\", pool = 4",
+   "why": "explicit repeat, pool 4"
+  },
+  {
+   "row": "C149",
+   "screen": "walk_cross_brooke.leave",
+   "verdict": "PASS",
+   "line": "He'll be saying it next rehearsal too.",
+   "why": "ends on a pull that points at the next visit"
+  },
+  {
+   "row": "C149",
+   "screen": "walk_holt_novel.ask",
+   "verdict": "PASS",
+   "line": "Tomorrow you'll want to know if he did.",
+   "why": "ends on a pull that points at the next visit"
+  },
+  {
+   "row": "C149",
+   "screen": "walk_holt_novel.leave",
+   "verdict": "PASS",
+   "line": "Smart girl. / She'll be a chapter further tomorrow.",
+   "why": "ends on a pull that points at the next visit"
+  },
+  {
+   "row": "C149",
+   "screen": "walk_mirror_girls.beside",
+   "verdict": "PASS",
+   "line": "Brooke's eyes find you in the mirror on the way out. She's remembering your face.",
+   "why": "ends on a pull that points at the next visit"
+  },
+  {
+   "row": "C149",
+   "screen": "walk_mirror_girls.leave",
+   "verdict": "PASS",
+   "line": "They'll be at that mirror again tomorrow.",
+   "why": "ends on a pull that points at the next visit"
+  },
+  {
+   "row": "C149",
+   "screen": "walk_stacks.away",
+   "verdict": "PASS",
+   "line": "You back out of the aisle, very upright. You know which shelf now.",
+   "why": "ends on a pull that points at the next visit"
+  },
+  {
+   "row": "C149",
+   "screen": "walk_stacks.watch",
+   "verdict": "PASS",
+   "line": "You're wet. A book slides off the shelf, and you run. You know which shelf now.",
+   "why": "ends on a pull that points at the next visit"
+  },
+  {
+   "row": "C151",
+   "screen": "walk_mirror_girls.moment",
+   "verdict": "FAIL",
+   "line": "Kayla: \"He said that? To you?\" Brooke: \"He says a lot of things. He'll learn.\"",
+   "why": "two spoken lines on a repeatable (note row)"
+  },
+  {
+   "row": "C151",
+   "screen": "walk_stacks.moment",
+   "verdict": "FAIL",
+   "line": "\"Quiet. Someone'll come.\" / \"Let them. Let them watch. Harder.\"",
+   "why": "two spoken lines on a repeatable (note row)"
+  },
+  {
+   "row": "C311",
+   "screen": "walk_cross_brooke.moment",
+   "verdict": "PASS",
+   "line": "You can feel where his hand would sit on your own waist.",
+   "why": "body part, his reaction (watch), 'One day' as the not-yet, hook"
+  },
+  {
+   "row": "C442",
+   "screen": "walk_stacks.watch",
+   "verdict": "PASS",
+   "line": "He fucks her harder against the shelf ... he comes with a grunt into her neck.",
+   "why": "shown through to the end, no fade"
+  },
+  {
+   "row": "C449",
+   "screen": "walk_cross_brooke.moment",
+   "verdict": "PASS",
+   "line": "his hand on her waist to place her, staying. ... You can feel where his hand would sit on your own waist.",
+   "why": "the pull of his hand is put on her own body, said, not buried"
+  },
+  {
+   "row": "C450",
+   "screen": "walk_cross_brooke.leave",
+   "verdict": "PASS",
+   "line": "He'll be saying it next rehearsal too.",
+   "why": "ends on a pull that points at the next visit"
+  },
+  {
+   "row": "C450",
+   "screen": "walk_holt_novel.ask",
+   "verdict": "PASS",
+   "line": "Tomorrow you'll want to know if he did.",
+   "why": "ends on a pull that points at the next visit"
+  },
+  {
+   "row": "C450",
+   "screen": "walk_holt_novel.leave",
+   "verdict": "PASS",
+   "line": "Smart girl. / She'll be a chapter further tomorrow.",
+   "why": "ends on a pull that points at the next visit"
+  },
+  {
+   "row": "C450",
+   "screen": "walk_mirror_girls.beside",
+   "verdict": "PASS",
+   "line": "Brooke's eyes find you in the mirror on the way out. She's remembering your face.",
+   "why": "ends on a pull that points at the next visit"
+  },
+  {
+   "row": "C450",
+   "screen": "walk_mirror_girls.leave",
+   "verdict": "PASS",
+   "line": "They'll be at that mirror again tomorrow.",
+   "why": "ends on a pull that points at the next visit"
+  },
+  {
+   "row": "C450",
+   "screen": "walk_stacks.away",
+   "verdict": "PASS",
+   "line": "You back out of the aisle, very upright. You know which shelf now.",
+   "why": "ends on a pull that points at the next visit"
+  },
+  {
+   "row": "C450",
+   "screen": "walk_stacks.watch",
+   "verdict": "PASS",
+   "line": "You're wet. A book slides off the shelf, and you run. You know which shelf now.",
+   "why": "ends on a pull that points at the next visit"
+  },
+  {
+   "row": "C460",
+   "screen": "walk_cross_brooke.leave",
+   "verdict": "PASS",
+   "line": "He'll be saying it next rehearsal too.",
+   "why": "every claim checked against PLAN, who_is_where and the trigger; true on every reachable visit"
+  },
+  {
+   "row": "C460",
+   "screen": "walk_cross_brooke.moment",
+   "verdict": "PASS",
+   "line": "You can feel where his hand would sit on your own waist.",
+   "why": "every claim checked against PLAN, who_is_where and the trigger; true on every reachable visit"
+  },
+  {
+   "row": "C460",
+   "screen": "walk_cross_brooke.watch",
+   "verdict": "PASS",
+   "line": "One day he'll place you like that.",
+   "why": "every claim checked against PLAN, who_is_where and the trigger; true on every reachable visit"
+  },
+  {
+   "row": "C460",
+   "screen": "walk_cross_seats.again",
+   "verdict": "PASS",
+   "line": "Better. See you at two, new face.",
+   "why": "every claim checked against PLAN, who_is_where and the trigger; true on every reachable visit"
+  },
+  {
+   "row": "C460",
+   "screen": "walk_cross_seats.moment",
+   "verdict": "FAIL",
+   "line": "your nipples tight under your top.",
+   "why": "truth rule 5: names a garment she may not be wearing (a dress passes the leave rule)",
+   "cause": "P40r2-c1"
+  },
+  {
+   "row": "C460",
+   "screen": "walk_cross_seats.off",
+   "verdict": "PASS",
+   "line": "Shame. You were getting somewhere.",
+   "why": "every claim checked against PLAN, who_is_where and the trigger; true on every reachable visit"
+  },
+  {
+   "row": "C460",
+   "screen": "walk_hale_note.knock",
+   "verdict": "PASS",
+   "line": "Come back with a real question, and I'll have an answer.",
+   "why": "no office-hours claim now"
+  },
+  {
+   "row": "C460",
+   "screen": "walk_hale_note.moment",
+   "verdict": "PASS",
+   "line": "Door's open for a reason. Come in or don't.",
+   "why": "every claim checked against PLAN, who_is_where and the trigger; true on every reachable visit"
+  },
+  {
+   "row": "C460",
+   "screen": "walk_hale_note.walkon",
+   "verdict": "PASS",
+   "line": "You know the name on it.",
+   "why": "trigger needs met_hale, which sets met_nadia too (toml 4615)"
+  },
+  {
+   "row": "C460",
+   "screen": "walk_holt_novel.ask",
+   "verdict": "PASS",
+   "line": "Tomorrow you'll want to know if he did.",
+   "why": "every claim checked against PLAN, who_is_where and the trigger; true on every reachable visit"
+  },
+  {
+   "row": "C460",
+   "screen": "walk_holt_novel.leave",
+   "verdict": "PASS",
+   "line": "Smart girl. (speaker npc_holt)",
+   "why": "Holt speaks under her name; met_holt on the trigger"
+  },
+  {
+   "row": "C460",
+   "screen": "walk_holt_novel.moment",
+   "verdict": "PASS",
+   "line": "Don't you say a word, hon.",
+   "why": "every claim checked against PLAN, who_is_where and the trigger; true on every reachable visit"
+  },
+  {
+   "row": "C460",
+   "screen": "walk_mirror_girls.beside",
+   "verdict": "PASS",
+   "line": "Brooke's eyes find you in the mirror on the way out. She's remembering your face.",
+   "why": "every claim checked against PLAN, who_is_where and the trigger; true on every reachable visit"
+  },
+  {
+   "row": "C460",
+   "screen": "walk_mirror_girls.leave",
+   "verdict": "FAIL",
+   "line": "They'll be at that mirror again tomorrow.",
+   "why": "on a Friday visit tomorrow is Saturday; their rows put none of the three at the mirror at weekends (who_is_where)",
+   "cause": "P40r2-c2"
+  },
+  {
+   "row": "C460",
+   "screen": "walk_mirror_girls.moment",
+   "verdict": "PASS",
+   "line": "Tess is doing Brooke's lashes at the mirror while Kayla holds the bag",
+   "why": "every claim checked against PLAN, who_is_where and the trigger; true on every reachable visit"
+  },
+  {
+   "row": "C460",
+   "screen": "walk_stacks.away",
+   "verdict": "PASS",
+   "line": "You back out of the aisle, very upright. You know which shelf now.",
+   "why": "every claim checked against PLAN, who_is_where and the trigger; true on every reachable visit"
+  },
+  {
+   "row": "C460",
+   "screen": "walk_stacks.moment",
+   "verdict": "PASS",
+   "line": "her skirt in his fist, her leg round his hip as he fucks her.",
+   "why": "every claim checked against PLAN, who_is_where and the trigger; true on every reachable visit"
+  },
+  {
+   "row": "C460",
+   "screen": "walk_stacks.watch",
+   "verdict": "PASS",
+   "line": "You're wet. A book slides off the shelf, and you run. You know which shelf now.",
+   "why": "every claim checked against PLAN, who_is_where and the trigger; true on every reachable visit"
+  },
+  {
+   "row": "C461",
+   "screen": "walk_cross_brooke.leave",
+   "verdict": "PASS",
+   "line": "He'll be saying it next rehearsal too.",
+   "why": "texture and in-character dialogue only"
+  },
+  {
+   "row": "C461",
+   "screen": "walk_cross_brooke.moment",
+   "verdict": "PASS",
+   "line": "You can feel where his hand would sit on your own waist.",
+   "why": "texture and in-character dialogue only"
+  },
+  {
+   "row": "C461",
+   "screen": "walk_cross_brooke.watch",
+   "verdict": "PASS",
+   "line": "One day he'll place you like that.",
+   "why": "texture and in-character dialogue only"
+  },
+  {
+   "row": "C461",
+   "screen": "walk_cross_seats.again",
+   "verdict": "PASS",
+   "line": "Better. See you at two, new face.",
+   "why": "texture and in-character dialogue only"
+  },
+  {
+   "row": "C461",
+   "screen": "walk_cross_seats.moment",
+   "verdict": "PASS",
+   "line": "Your face goes hot down your neck, your nipples tight under your top.",
+   "why": "texture and in-character dialogue only"
+  },
+  {
+   "row": "C461",
+   "screen": "walk_cross_seats.off",
+   "verdict": "PASS",
+   "line": "Shame. You were getting somewhere.",
+   "why": "texture and in-character dialogue only"
+  },
+  {
+   "row": "C461",
+   "screen": "walk_hale_note.knock",
+   "verdict": "PASS",
+   "line": "Young lady. Come back with a real question, and I'll have an answer.",
+   "why": "texture and in-character dialogue only"
+  },
+  {
+   "row": "C461",
+   "screen": "walk_hale_note.moment",
+   "verdict": "PASS",
+   "line": "Door's open for a reason. Come in or don't.",
+   "why": "texture and in-character dialogue only"
+  },
+  {
+   "row": "C461",
+   "screen": "walk_hale_note.walkon",
+   "verdict": "PASS",
+   "line": "You don't know what the note means. You know the name on it.",
+   "why": "texture and in-character dialogue only"
+  },
+  {
+   "row": "C461",
+   "screen": "walk_holt_novel.ask",
+   "verdict": "PASS",
+   "line": "Tomorrow you'll want to know if he did.",
+   "why": "texture and in-character dialogue only"
+  },
+  {
+   "row": "C461",
+   "screen": "walk_holt_novel.leave",
+   "verdict": "PASS",
+   "line": "Smart girl. / She'll be a chapter further tomorrow.",
+   "why": "texture and in-character dialogue only"
+  },
+  {
+   "row": "C461",
+   "screen": "walk_holt_novel.moment",
+   "verdict": "PASS",
+   "line": "Don't you say a word, hon.",
+   "why": "texture and in-character dialogue only"
+  },
+  {
+   "row": "C461",
+   "screen": "walk_mirror_girls.beside",
+   "verdict": "PASS",
+   "line": "Brooke's eyes find you in the mirror on the way out. She's remembering your face.",
+   "why": "texture and in-character dialogue only"
+  },
+  {
+   "row": "C461",
+   "screen": "walk_mirror_girls.leave",
+   "verdict": "PASS",
+   "line": "They'll be at that mirror again tomorrow.",
+   "why": "texture and in-character dialogue only"
+  },
+  {
+   "row": "C461",
+   "screen": "walk_mirror_girls.moment",
+   "verdict": "PASS",
+   "line": "Tess is doing Brooke's lashes at the mirror while Kayla holds the bag",
+   "why": "texture and in-character dialogue only"
+  },
+  {
+   "row": "C461",
+   "screen": "walk_stacks.away",
+   "verdict": "PASS",
+   "line": "You back out of the aisle, very upright. You know which shelf now.",
+   "why": "texture and in-character dialogue only"
+  },
+  {
+   "row": "C461",
+   "screen": "walk_stacks.moment",
+   "verdict": "PASS",
+   "line": "her skirt in his fist, her leg round his hip as he fucks her.",
+   "why": "texture and in-character dialogue only"
+  },
+  {
+   "row": "C461",
+   "screen": "walk_stacks.watch",
+   "verdict": "PASS",
+   "line": "You're wet. A book slides off the shelf, and you run. You know which shelf now.",
+   "why": "texture and in-character dialogue only"
+  },
+  {
+   "row": "C625",
+   "screen": "walk_cross_seats.moment",
+   "verdict": "PASS",
+   "line": "speaker npc_cross; trigger needs met_cross",
+   "why": "met before he shows; his two o'clock known from drama (note row)"
+  },
+  {
+   "row": "C626",
+   "screen": "walk_holt_novel.leave",
+   "verdict": "PASS",
+   "line": "Smart girl. (speaker npc_holt)",
+   "why": "named speaker; trigger needs met_holt (note row)"
+  },
+  {
+   "row": "C927",
+   "screen": "walk_cross_brooke.leave",
+   "verdict": "PASS",
+   "line": "He'll be saying it next rehearsal too.",
+   "why": "every Done states 5 minutes; node hops state 0"
+  },
+  {
+   "row": "C927",
+   "screen": "walk_cross_brooke.watch",
+   "verdict": "PASS",
+   "line": "One day he'll place you like that.",
+   "why": "every Done states 5 minutes; node hops state 0"
+  },
+  {
+   "row": "C927",
+   "screen": "walk_cross_seats.again",
+   "verdict": "PASS",
+   "line": "Better. See you at two, new face.",
+   "why": "every Done states 5 minutes; node hops state 0"
+  },
+  {
+   "row": "C927",
+   "screen": "walk_cross_seats.off",
+   "verdict": "PASS",
+   "line": "Shame. You were getting somewhere.",
+   "why": "every Done states 5 minutes; node hops state 0"
+  },
+  {
+   "row": "C927",
+   "screen": "walk_hale_note.knock",
+   "verdict": "PASS",
+   "line": "Young lady. Come back with a real question, and I'll have an answer.",
+   "why": "every Done states 5 minutes; node hops state 0"
+  },
+  {
+   "row": "C927",
+   "screen": "walk_hale_note.walkon",
+   "verdict": "PASS",
+   "line": "You don't know what the note means. You know the name on it.",
+   "why": "every Done states 5 minutes; node hops state 0"
+  },
+  {
+   "row": "C927",
+   "screen": "walk_holt_novel.ask",
+   "verdict": "PASS",
+   "line": "Tomorrow you'll want to know if he did.",
+   "why": "every Done states 5 minutes; node hops state 0"
+  },
+  {
+   "row": "C927",
+   "screen": "walk_holt_novel.leave",
+   "verdict": "PASS",
+   "line": "Smart girl. / She'll be a chapter further tomorrow.",
+   "why": "every Done states 5 minutes; node hops state 0"
+  },
+  {
+   "row": "C927",
+   "screen": "walk_mirror_girls.beside",
+   "verdict": "PASS",
+   "line": "Brooke's eyes find you in the mirror on the way out. She's remembering your face.",
+   "why": "every Done states 5 minutes; node hops state 0"
+  },
+  {
+   "row": "C927",
+   "screen": "walk_mirror_girls.leave",
+   "verdict": "PASS",
+   "line": "They'll be at that mirror again tomorrow.",
+   "why": "every Done states 5 minutes; node hops state 0"
+  },
+  {
+   "row": "C927",
+   "screen": "walk_stacks.away",
+   "verdict": "PASS",
+   "line": "You back out of the aisle, very upright. You know which shelf now.",
+   "why": "every Done states 5 minutes; node hops state 0"
+  },
+  {
+   "row": "C927",
+   "screen": "walk_stacks.watch",
+   "verdict": "PASS",
+   "line": "You're wet. A book slides off the shelf, and you run. You know which shelf now.",
+   "why": "every Done states 5 minutes; node hops state 0"
+  },
+  {
+   "row": "C931",
+   "screen": "walk_cross_brooke.leave",
+   "verdict": "PASS",
+   "line": "He'll be saying it next rehearsal too.",
+   "why": "window end exclusive, inside the place's hours and the person's row"
+  },
+  {
+   "row": "C931",
+   "screen": "walk_cross_brooke.watch",
+   "verdict": "PASS",
+   "line": "One day he'll place you like that.",
+   "why": "window end exclusive, inside the place's hours and the person's row"
+  },
+  {
+   "row": "C931",
+   "screen": "walk_cross_seats.again",
+   "verdict": "PASS",
+   "line": "Better. See you at two, new face.",
+   "why": "window end exclusive, inside the place's hours and the person's row"
+  },
+  {
+   "row": "C931",
+   "screen": "walk_cross_seats.off",
+   "verdict": "PASS",
+   "line": "Shame. You were getting somewhere.",
+   "why": "window end exclusive, inside the place's hours and the person's row"
+  },
+  {
+   "row": "C931",
+   "screen": "walk_hale_note.knock",
+   "verdict": "PASS",
+   "line": "Young lady. Come back with a real question, and I'll have an answer.",
+   "why": "window end exclusive, inside the place's hours and the person's row"
+  },
+  {
+   "row": "C931",
+   "screen": "walk_hale_note.walkon",
+   "verdict": "PASS",
+   "line": "You don't know what the note means. You know the name on it.",
+   "why": "window end exclusive, inside the place's hours and the person's row"
+  },
+  {
+   "row": "C931",
+   "screen": "walk_holt_novel.ask",
+   "verdict": "PASS",
+   "line": "Tomorrow you'll want to know if he did.",
+   "why": "window end exclusive, inside the place's hours and the person's row"
+  },
+  {
+   "row": "C931",
+   "screen": "walk_holt_novel.leave",
+   "verdict": "PASS",
+   "line": "Smart girl. / She'll be a chapter further tomorrow.",
+   "why": "window end exclusive, inside the place's hours and the person's row"
+  },
+  {
+   "row": "C931",
+   "screen": "walk_mirror_girls.beside",
+   "verdict": "PASS",
+   "line": "Brooke's eyes find you in the mirror on the way out. She's remembering your face.",
+   "why": "window end exclusive, inside the place's hours and the person's row"
+  },
+  {
+   "row": "C931",
+   "screen": "walk_mirror_girls.leave",
+   "verdict": "PASS",
+   "line": "They'll be at that mirror again tomorrow.",
+   "why": "window end exclusive, inside the place's hours and the person's row"
+  },
+  {
+   "row": "C931",
+   "screen": "walk_stacks.away",
+   "verdict": "PASS",
+   "line": "You back out of the aisle, very upright. You know which shelf now.",
+   "why": "window end exclusive, inside the place's hours and the person's row"
+  },
+  {
+   "row": "C931",
+   "screen": "walk_stacks.watch",
+   "verdict": "PASS",
+   "line": "You're wet. A book slides off the shelf, and you run. You know which shelf now.",
+   "why": "window end exclusive, inside the place's hours and the person's row"
+  },
+  {
+   "row": "L106",
+   "screen": "walk_cross_brooke.leave",
+   "verdict": "PASS",
+   "line": "He'll be saying it next rehearsal too.",
+   "why": "everyone named is gated present by their rows (who_is_where), or a stranger"
+  },
+  {
+   "row": "L106",
+   "screen": "walk_cross_brooke.moment",
+   "verdict": "PASS",
+   "line": "You can feel where his hand would sit on your own waist.",
+   "why": "everyone named is gated present by their rows (who_is_where), or a stranger"
+  },
+  {
+   "row": "L106",
+   "screen": "walk_cross_brooke.watch",
+   "verdict": "PASS",
+   "line": "One day he'll place you like that.",
+   "why": "everyone named is gated present by their rows (who_is_where), or a stranger"
+  },
+  {
+   "row": "L106",
+   "screen": "walk_cross_seats.again",
+   "verdict": "PASS",
+   "line": "Better. See you at two, new face.",
+   "why": "everyone named is gated present by their rows (who_is_where), or a stranger"
+  },
+  {
+   "row": "L106",
+   "screen": "walk_cross_seats.moment",
+   "verdict": "PASS",
+   "line": "He's early for his two o'clock",
+   "why": "gated Cross absent 13-14; he arrives early for his 14:00 theatre row (who_is_where Tue/Thu/Fri 14-18), said on screen"
+  },
+  {
+   "row": "L106",
+   "screen": "walk_cross_seats.off",
+   "verdict": "PASS",
+   "line": "Shame. You were getting somewhere.",
+   "why": "everyone named is gated present by their rows (who_is_where), or a stranger"
+  },
+  {
+   "row": "L106",
+   "screen": "walk_hale_note.knock",
+   "verdict": "PASS",
+   "line": "Young lady. Come back with a real question, and I'll have an answer.",
+   "why": "everyone named is gated present by their rows (who_is_where), or a stranger"
+  },
+  {
+   "row": "L106",
+   "screen": "walk_hale_note.moment",
+   "verdict": "PASS",
+   "line": "Door's open for a reason. Come in or don't.",
+   "why": "everyone named is gated present by their rows (who_is_where), or a stranger"
+  },
+  {
+   "row": "L106",
+   "screen": "walk_hale_note.walkon",
+   "verdict": "PASS",
+   "line": "You don't know what the note means. You know the name on it.",
+   "why": "everyone named is gated present by their rows (who_is_where), or a stranger"
+  },
+  {
+   "row": "L106",
+   "screen": "walk_holt_novel.ask",
+   "verdict": "PASS",
+   "line": "Tomorrow you'll want to know if he did.",
+   "why": "everyone named is gated present by their rows (who_is_where), or a stranger"
+  },
+  {
+   "row": "L106",
+   "screen": "walk_holt_novel.leave",
+   "verdict": "PASS",
+   "line": "Smart girl. / She'll be a chapter further tomorrow.",
+   "why": "everyone named is gated present by their rows (who_is_where), or a stranger"
+  },
+  {
+   "row": "L106",
+   "screen": "walk_holt_novel.moment",
+   "verdict": "PASS",
+   "line": "Don't you say a word, hon.",
+   "why": "everyone named is gated present by their rows (who_is_where), or a stranger"
+  },
+  {
+   "row": "L106",
+   "screen": "walk_mirror_girls.beside",
+   "verdict": "PASS",
+   "line": "Brooke's eyes find you in the mirror on the way out. She's remembering your face.",
+   "why": "everyone named is gated present by their rows (who_is_where), or a stranger"
+  },
+  {
+   "row": "L106",
+   "screen": "walk_mirror_girls.leave",
+   "verdict": "PASS",
+   "line": "They'll be at that mirror again tomorrow.",
+   "why": "everyone named is gated present by their rows (who_is_where), or a stranger"
+  },
+  {
+   "row": "L106",
+   "screen": "walk_mirror_girls.moment",
+   "verdict": "PASS",
+   "line": "Tess is doing Brooke's lashes at the mirror while Kayla holds the bag",
+   "why": "everyone named is gated present by their rows (who_is_where), or a stranger"
+  },
+  {
+   "row": "L106",
+   "screen": "walk_stacks.away",
+   "verdict": "PASS",
+   "line": "You back out of the aisle, very upright. You know which shelf now.",
+   "why": "everyone named is gated present by their rows (who_is_where), or a stranger"
+  },
+  {
+   "row": "L106",
+   "screen": "walk_stacks.moment",
+   "verdict": "PASS",
+   "line": "her skirt in his fist, her leg round his hip as he fucks her.",
+   "why": "everyone named is gated present by their rows (who_is_where), or a stranger"
+  },
+  {
+   "row": "L106",
+   "screen": "walk_stacks.watch",
+   "verdict": "PASS",
+   "line": "You're wet. A book slides off the shelf, and you run. You know which shelf now.",
+   "why": "everyone named is gated present by their rows (who_is_where), or a stranger"
+  },
+  {
+   "row": "L167",
+   "screen": "walk_cross_brooke.leave",
+   "verdict": "PASS",
+   "line": "He'll be saying it next rehearsal too.",
+   "why": "one canvas, one window; hidden when shut (an event, C916), no row per day kind"
+  },
+  {
+   "row": "L167",
+   "screen": "walk_cross_brooke.watch",
+   "verdict": "PASS",
+   "line": "One day he'll place you like that.",
+   "why": "one canvas, one window; hidden when shut (an event, C916), no row per day kind"
+  },
+  {
+   "row": "L167",
+   "screen": "walk_cross_seats.again",
+   "verdict": "PASS",
+   "line": "Better. See you at two, new face.",
+   "why": "one canvas, one window; hidden when shut (an event, C916), no row per day kind"
+  },
+  {
+   "row": "L167",
+   "screen": "walk_cross_seats.off",
+   "verdict": "PASS",
+   "line": "Shame. You were getting somewhere.",
+   "why": "one canvas, one window; hidden when shut (an event, C916), no row per day kind"
+  },
+  {
+   "row": "L167",
+   "screen": "walk_hale_note.knock",
+   "verdict": "PASS",
+   "line": "Young lady. Come back with a real question, and I'll have an answer.",
+   "why": "one canvas, one window; hidden when shut (an event, C916), no row per day kind"
+  },
+  {
+   "row": "L167",
+   "screen": "walk_hale_note.walkon",
+   "verdict": "PASS",
+   "line": "You don't know what the note means. You know the name on it.",
+   "why": "one canvas, one window; hidden when shut (an event, C916), no row per day kind"
+  },
+  {
+   "row": "L167",
+   "screen": "walk_holt_novel.ask",
+   "verdict": "PASS",
+   "line": "Tomorrow you'll want to know if he did.",
+   "why": "one canvas, one window; hidden when shut (an event, C916), no row per day kind"
+  },
+  {
+   "row": "L167",
+   "screen": "walk_holt_novel.leave",
+   "verdict": "PASS",
+   "line": "Smart girl. / She'll be a chapter further tomorrow.",
+   "why": "one canvas, one window; hidden when shut (an event, C916), no row per day kind"
+  },
+  {
+   "row": "L167",
+   "screen": "walk_mirror_girls.beside",
+   "verdict": "PASS",
+   "line": "Brooke's eyes find you in the mirror on the way out. She's remembering your face.",
+   "why": "one canvas, one window; hidden when shut (an event, C916), no row per day kind"
+  },
+  {
+   "row": "L167",
+   "screen": "walk_mirror_girls.leave",
+   "verdict": "PASS",
+   "line": "They'll be at that mirror again tomorrow.",
+   "why": "one canvas, one window; hidden when shut (an event, C916), no row per day kind"
+  },
+  {
+   "row": "L167",
+   "screen": "walk_stacks.away",
+   "verdict": "PASS",
+   "line": "You back out of the aisle, very upright. You know which shelf now.",
+   "why": "one canvas, one window; hidden when shut (an event, C916), no row per day kind"
+  },
+  {
+   "row": "L167",
+   "screen": "walk_stacks.watch",
+   "verdict": "PASS",
+   "line": "You're wet. A book slides off the shelf, and you run. You know which shelf now.",
+   "why": "one canvas, one window; hidden when shut (an event, C916), no row per day kind"
+  }
+ ],
+ "causes": [
+  {
+   "id": "P40r2-c1",
+   "what": "walk_cross_seats.moment names 'your top', backed by no condition; a dress alone passes the leave rule (toml 872-874)"
+  },
+  {
+   "id": "P40r2-c2",
+   "what": "walk_mirror_girls.leave's pull 'They'll be at that mirror again tomorrow.' is false on a Friday: the three have weekday rows only"
+  },
+  {
+   "id": "P40r2-c3",
+   "what": "walk_stacks.moment shows the act with nothing on her body, and the away path never gives her a reaction (voice.md shape 3)"
+  },
+  {
+   "id": "P40r2-c4",
+   "what": "walk_stacks.watch: nobody reacts to her watching, and PLAN \u00a710c doesn't declare that nobody does"
+  }
+ ]
+}

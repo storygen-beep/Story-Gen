@@ -1,0 +1,13 @@
+{
+ "verdicts": [
+  {
+   "row": "clock#10",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "home_tv: max_triggers_per_day 2, show_when_blocked, no time_of_day",
+   "why": "home rows with a daily count (home_tv, home_dishes, loop_shower, loop_eat) have no clock window, so their grey lines are true; loop_sleep and ryan_room have a window and no count",
+   "cause": null
+  }
+ ],
+ "causes": []
+}

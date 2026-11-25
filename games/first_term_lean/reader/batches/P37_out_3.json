@@ -1,0 +1,103 @@
+{
+ "verdicts": [
+  {
+   "row": "B10",
+   "screen": "zoe_party.home",
+   "verdict": "PASS",
+   "line": "She lets you go with a kiss on the cheek.",
+   "why": "Zoe's rows put her home Sat 18-24, Sun 00-01: the whole window"
+  },
+  {
+   "row": "B10",
+   "screen": "zoe_party.party",
+   "verdict": "PASS",
+   "line": "Brooke holds court by the kitchen with Kayla and Tess",
+   "why": "behind met_brooke (Kayla and Tess named at that meeting); all three Sat 21-24, Sun 00-01 at near_zoe_apartment; the unmet variant names nobody"
+  },
+  {
+   "row": "B8",
+   "screen": "zoe_party.home",
+   "verdict": "PASS",
+   "line": "Go home (180 min)",
+   "why": "no garment; weekly flag set; numbers agree with the tip 'Parties every Saturday, 9pm to 1am.'"
+  },
+  {
+   "row": "B8",
+   "screen": "zoe_party.party",
+   "verdict": "PASS",
+   "line": "Zoe throws these every week",
+   "why": "agrees with partied_this_week reset Monday and the Saturday window; no garment of hers named"
+  },
+  {
+   "row": "C460",
+   "screen": "zoe_party.home",
+   "verdict": "PASS",
+   "line": "the music follows you halfway down the street",
+   "why": "true on every visit"
+  },
+  {
+   "row": "C460",
+   "screen": "zoe_party.party",
+   "verdict": "PASS",
+   "line": "There she is. Okay, babe. Dare.",
+   "why": "every claim holds 21:00-00:59; the row is gone when used or out of hours, so no false hours line"
+  },
+  {
+   "row": "C461",
+   "screen": "zoe_party.home",
+   "verdict": "PASS",
+   "line": "Next time, then. I'm holding you to it.",
+   "why": "fits Zoe"
+  },
+  {
+   "row": "C461",
+   "screen": "zoe_party.party",
+   "verdict": "PASS",
+   "line": "He's tall, he's already looking at you",
+   "why": "texture of an unnamed guest"
+  },
+  {
+   "row": "C639",
+   "screen": "zoe_party.party",
+   "verdict": "FAIL",
+   "line": "Not tonight.",
+   "why": "note row: still one answer to Zoe's dare, not three to five (LO set it, PLAN 8h)"
+  },
+  {
+   "row": "C927",
+   "screen": "zoe_party.home",
+   "verdict": "PASS",
+   "line": "time_progression_minutes = 180",
+   "why": "exit time set"
+  },
+  {
+   "row": "C931",
+   "screen": "zoe_party.home",
+   "verdict": "PASS",
+   "line": "Sat 21:00-00:00, Sun 00:00-01:00",
+   "why": "end 00:00 wraps (v2.py:4796-4798: 21:00-23:59), Sunday group picks up 00:00-00:59; last pass's 23:59 gap is closed"
+  },
+  {
+   "row": "L106",
+   "screen": "zoe_party.home",
+   "verdict": "PASS",
+   "line": "She lets you go",
+   "why": "Zoe present on every minute"
+  },
+  {
+   "row": "L106",
+   "screen": "zoe_party.party",
+   "verdict": "PASS",
+   "line": "Then Zoe's arm is round your neck",
+   "why": "Zoe, Brooke, Kayla, Tess all there by their rows"
+  },
+  {
+   "row": "L167",
+   "screen": "zoe_party.home",
+   "verdict": "PASS",
+   "line": "one row, group OR (Sat 21-24 / Sun 00-01)",
+   "why": "one row; daily count, no show_when_blocked, gone when unusable (rule 10)"
+  }
+ ],
+ "causes": []
+}

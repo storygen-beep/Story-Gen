@@ -1,0 +1,74 @@
+{
+ "items": [
+  {
+   "row": "B10",
+   "screen": "zoe_party.home",
+   "why": "screen changed: truth row"
+  },
+  {
+   "row": "B10",
+   "screen": "zoe_party.party",
+   "why": "screen changed: truth row"
+  },
+  {
+   "row": "B8",
+   "screen": "zoe_party.home",
+   "why": "screen changed: truth row"
+  },
+  {
+   "row": "B8",
+   "screen": "zoe_party.party",
+   "why": "screen changed: truth row"
+  },
+  {
+   "row": "C460",
+   "screen": "zoe_party.home",
+   "why": "screen changed: truth row"
+  },
+  {
+   "row": "C460",
+   "screen": "zoe_party.party",
+   "why": "screen changed: truth row"
+  },
+  {
+   "row": "C461",
+   "screen": "zoe_party.home",
+   "why": "screen changed: truth row"
+  },
+  {
+   "row": "C461",
+   "screen": "zoe_party.party",
+   "why": "screen changed: truth row"
+  },
+  {
+   "row": "C639",
+   "screen": "zoe_party.party",
+   "why": "failed last pass (a note), its screen changed"
+  },
+  {
+   "row": "C927",
+   "screen": "zoe_party.home",
+   "why": "screen changed: truth row"
+  },
+  {
+   "row": "C931",
+   "screen": "zoe_party.home",
+   "why": "screen changed: truth row"
+  },
+  {
+   "row": "L106",
+   "screen": "zoe_party.home",
+   "why": "screen changed: truth row"
+  },
+  {
+   "row": "L106",
+   "screen": "zoe_party.party",
+   "why": "screen changed: truth row"
+  },
+  {
+   "row": "L167",
+   "screen": "zoe_party.home",
+   "why": "screen changed: truth row"
+  }
+ ]
+}

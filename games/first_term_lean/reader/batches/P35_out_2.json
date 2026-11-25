@@ -1,0 +1,158 @@
+{
+ "verdicts": [
+  {
+   "row": "B10",
+   "screen": "shop_try_on.try",
+   "verdict": "PASS",
+   "line": "\"Let me see. Come on, I won't tell.\" (Nina present group)",
+   "why": "Nina's rows cover the whole 10-6:45 window Mon-Sat; the shop is shut Sunday"
+  },
+  {
+   "row": "B8",
+   "screen": "shop_try_on.try",
+   "verdict": "PASS",
+   "line": "\"a skirt that stops high on your thighs, a top cut lower than anything you own\"",
+   "why": "the garments are the ones she tries on in this beat; 18 in the picture"
+  },
+  {
+   "row": "C1158",
+   "screen": "shop_try_on.try",
+   "verdict": "PASS",
+   "line": "\"In the mirror you try them one by one: a skirt...\"",
+   "why": "backed by the beat that puts them on; 'your own clothes back on' undresses back"
+  },
+  {
+   "row": "C1206",
+   "screen": "shop_try_on.try",
+   "verdict": "PASS",
+   "line": "\"You put your own clothes back on\"",
+   "why": "names no specific garment she may not be wearing"
+  },
+  {
+   "row": "C151",
+   "screen": "shop_try_on.try",
+   "verdict": "FAIL",
+   "line": "\"Let me see. Come on, I won't tell.\" / \"Not a chance.\" / \"Your loss, sweetie. Next time, then.\"",
+   "why": "a repeatable with three spoken lines, two of them Nina's; the row asks one spoken line"
+  },
+  {
+   "row": "C460",
+   "screen": "shop_try_on.try",
+   "verdict": "PASS",
+   "line": "\"You turn and look at your ass in the skirt longer than you mean to.\"",
+   "why": "true on every visit"
+  },
+  {
+   "row": "C461",
+   "screen": "shop_try_on.try",
+   "verdict": "PASS",
+   "line": "\"your face hot\"",
+   "why": "her reaction; can't clash"
+  },
+  {
+   "row": "L106",
+   "screen": "shop_try_on.try",
+   "verdict": "PASS",
+   "line": "Nina group: npc_at_location is_present",
+   "why": "Nina is named only when present"
+  },
+  {
+   "row": "C889",
+   "screen": "shop_try_on.try",
+   "verdict": "PASS",
+   "line": "button \"Try something on\"; cooldown \"the fitting room closes at 6:45pm.\"",
+   "why": "no time or energy on the label; the closing time sits on the greyed row"
+  },
+  {
+   "row": "C906",
+   "screen": "shop_try_on.try",
+   "verdict": "PASS",
+   "line": "button \"Try something on\"; cooldown \"the fitting room closes at 6:45pm.\"",
+   "why": "no time or energy on the label; the closing time sits on the greyed row"
+  },
+  {
+   "row": "C910",
+   "screen": "shop_try_on.try",
+   "verdict": "PASS",
+   "line": "button \"Try something on\"; cooldown \"the fitting room closes at 6:45pm.\"",
+   "why": "no time or energy on the label; the closing time sits on the greyed row"
+  },
+  {
+   "row": "C929",
+   "screen": "shop_try_on.try",
+   "verdict": "PASS",
+   "line": "button \"Try something on\"; cooldown \"the fitting room closes at 6:45pm.\"",
+   "why": "no time or energy on the label; the closing time sits on the greyed row"
+  },
+  {
+   "row": "C920",
+   "screen": "shop_try_on.try",
+   "verdict": "PASS",
+   "line": "Done (15 min) back to the clothes shop",
+   "why": "the spend is the act, not a hop"
+  },
+  {
+   "row": "C927",
+   "screen": "shop_try_on.try",
+   "verdict": "PASS",
+   "line": "Done, 15 min",
+   "why": "exit spends time"
+  },
+  {
+   "row": "C931",
+   "screen": "shop_try_on.try",
+   "verdict": "PASS",
+   "line": "time_of_day 10:00-18:45",
+   "why": "end exclusive; last start 6:40, 'closes at 6:45pm' holds"
+  },
+  {
+   "row": "L167",
+   "screen": "shop_try_on.try",
+   "verdict": "PASS",
+   "line": "one row, time_of_day 10:00-18:45",
+   "why": "same hours every day the shop opens; one row, greys with show_when_blocked"
+  },
+  {
+   "row": "C1265",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "nina_till_t0 (meeting), fitting_room_t3 (body moment)",
+   "why": "no picture on a chore or the room's menu; the place image is its card"
+  },
+  {
+   "row": "C596",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "shop_meet_nina.meet: first line then people/nina_till_t0",
+   "why": "picture right after the meeting's first line; no repeat talk screen"
+  },
+  {
+   "row": "C795",
+   "screen": "hood_clothes",
+   "verdict": "FAIL",
+   "line": "Nina looks up from the till. \"Find anything you're brave enough for?\"",
+   "why": "a re-entry change written as a room-text line for one person"
+  },
+  {
+   "row": "C804",
+   "screen": "hood_clothes",
+   "verdict": "FAIL",
+   "line": "Nina looks up from the till. \"Find anything you're brave enough for?\"",
+   "why": "Nina's presence is a room-text line (description_variants), not only her face",
+   "cause": "P35r6-c1"
+  },
+  {
+   "row": "C953",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "\"Try something on\"",
+   "why": "no cost, no time or energy on the label"
+  }
+ ],
+ "causes": [
+  {
+   "id": "P35r6-c1",
+   "what": "The clothes shop's description variant writes Nina into the room text (\"Nina looks up from the till...\"); a person at a place is now her face only"
+  }
+ ]
+}

@@ -1,0 +1,442 @@
+{
+ "verdicts": [
+  {
+   "row": "B10",
+   "screen": "travel_bus_home.ride",
+   "verdict": "PASS",
+   "line": "The bus home is half empty. You get the back seat and watch the high street go.",
+   "why": "true at the first and last minute and on a second visit: it leaves from Town (trigger town_square), so 'watch the high street go' is true; 'Get off at the bus stop' lands on her street, whose line has the bus stop; nobody named whose rows put them elsewhere",
+   "cause": null
+  },
+  {
+   "row": "C460",
+   "screen": "travel_bus_home.ride",
+   "verdict": "PASS",
+   "line": "The bus home is half empty. You get the back seat and watch the high street go.",
+   "why": "it leaves from Town (trigger town_square), so 'watch the high street go' is true; 'Get off at the bus stop' lands on her street, whose line has the bus stop",
+   "cause": null
+  },
+  {
+   "row": "C461",
+   "screen": "travel_bus_home.ride",
+   "verdict": "PASS",
+   "line": "The bus home is half empty. You get the back seat and watch the high street go.",
+   "why": "texture and the stranger's lines only, as before",
+   "cause": null
+  },
+  {
+   "row": "L106",
+   "screen": "travel_bus_home.ride",
+   "verdict": "PASS",
+   "line": "The bus home is half empty. You get the back seat and watch the high street go.",
+   "why": "no named person; the bus man is an unnamed stranger",
+   "cause": null
+  },
+  {
+   "row": "L167",
+   "screen": "travel_bus_home.ride",
+   "verdict": "N/A",
+   "line": "The bus home is half empty. You get the back seat and watch the high street go.",
+   "why": "no row on this screen has hours that differ by day",
+   "cause": null
+  },
+  {
+   "row": "C927",
+   "screen": "travel_bus_home.ride",
+   "verdict": "PASS",
+   "line": "The bus home is half empty. You get the back seat and watch the high street go.",
+   "why": "every exit carries its own minutes (bus 20, walk 45; the packed replies 0 then 20)",
+   "cause": null
+  },
+  {
+   "row": "B10",
+   "screen": "travel_bus_to_campus.packed_no",
+   "verdict": "PASS",
+   "line": "He shifts half an inch and no further. You step off in town with your legs shaking.",
+   "why": "true at the first and last minute and on a second visit: lands on town_square, so 'step off in town' is true; the stranger is unnamed and the screen only opens weekdays 07:00-10:00; nobody named whose rows put them elsewhere",
+   "cause": null
+  },
+  {
+   "row": "C460",
+   "screen": "travel_bus_to_campus.packed_no",
+   "verdict": "PASS",
+   "line": "He shifts half an inch and no further. You step off in town with your legs shaking.",
+   "why": "lands on town_square, so 'step off in town' is true; the stranger is unnamed and the screen only opens weekdays 07:00-10:00",
+   "cause": null
+  },
+  {
+   "row": "C461",
+   "screen": "travel_bus_to_campus.packed_no",
+   "verdict": "PASS",
+   "line": "He shifts half an inch and no further. You step off in town with your legs shaking.",
+   "why": "texture and the stranger's lines only, as before",
+   "cause": null
+  },
+  {
+   "row": "L106",
+   "screen": "travel_bus_to_campus.packed_no",
+   "verdict": "PASS",
+   "line": "He shifts half an inch and no further. You step off in town with your legs shaking.",
+   "why": "no named person; the bus man is an unnamed stranger",
+   "cause": null
+  },
+  {
+   "row": "L167",
+   "screen": "travel_bus_to_campus.packed_no",
+   "verdict": "N/A",
+   "line": "He shifts half an inch and no further. You step off in town with your legs shaking.",
+   "why": "no row on this screen has hours that differ by day",
+   "cause": null
+  },
+  {
+   "row": "C927",
+   "screen": "travel_bus_to_campus.packed_no",
+   "verdict": "PASS",
+   "line": "He shifts half an inch and no further. You step off in town with your legs shaking.",
+   "why": "every exit carries its own minutes (bus 20, walk 45; the packed replies 0 then 20)",
+   "cause": null
+  },
+  {
+   "row": "B10",
+   "screen": "travel_bus_to_campus.packed_quiet",
+   "verdict": "PASS",
+   "line": "You step off in town with your face burning. Next time, you'll stand by the doors.",
+   "why": "true at the first and last minute and on a second visit: lands on town_square; 'Next time' is her own resolve, true on a repeat; nobody named whose rows put them elsewhere",
+   "cause": null
+  },
+  {
+   "row": "C460",
+   "screen": "travel_bus_to_campus.packed_quiet",
+   "verdict": "PASS",
+   "line": "You step off in town with your face burning. Next time, you'll stand by the doors.",
+   "why": "lands on town_square; 'Next time' is her own resolve, true on a repeat",
+   "cause": null
+  },
+  {
+   "row": "C461",
+   "screen": "travel_bus_to_campus.packed_quiet",
+   "verdict": "PASS",
+   "line": "You step off in town with your face burning. Next time, you'll stand by the doors.",
+   "why": "texture and the stranger's lines only, as before",
+   "cause": null
+  },
+  {
+   "row": "L106",
+   "screen": "travel_bus_to_campus.packed_quiet",
+   "verdict": "PASS",
+   "line": "You step off in town with your face burning. Next time, you'll stand by the doors.",
+   "why": "no named person; the bus man is an unnamed stranger",
+   "cause": null
+  },
+  {
+   "row": "L167",
+   "screen": "travel_bus_to_campus.packed_quiet",
+   "verdict": "N/A",
+   "line": "You step off in town with your face burning. Next time, you'll stand by the doors.",
+   "why": "no row on this screen has hours that differ by day",
+   "cause": null
+  },
+  {
+   "row": "C927",
+   "screen": "travel_bus_to_campus.packed_quiet",
+   "verdict": "PASS",
+   "line": "You step off in town with your face burning. Next time, you'll stand by the doors.",
+   "why": "every exit carries its own minutes (bus 20, walk 45; the packed replies 0 then 20)",
+   "cause": null
+  },
+  {
+   "row": "B10",
+   "screen": "travel_bus_to_campus.ride",
+   "verdict": "PASS",
+   "line": "The bus is half empty. You get a seat by the window and step off in town.",
+   "why": "true at the first and last minute and on a second visit: both groups and the three choices land on town_square; the half-empty line covers every minute the packed one doesn't; nobody named whose rows put them elsewhere",
+   "cause": null
+  },
+  {
+   "row": "C460",
+   "screen": "travel_bus_to_campus.ride",
+   "verdict": "PASS",
+   "line": "The bus is half empty. You get a seat by the window and step off in town.",
+   "why": "both groups and the three choices land on town_square; the half-empty line covers every minute the packed one doesn't",
+   "cause": null
+  },
+  {
+   "row": "C461",
+   "screen": "travel_bus_to_campus.ride",
+   "verdict": "PASS",
+   "line": "The bus is half empty. You get a seat by the window and step off in town.",
+   "why": "texture and the stranger's lines only, as before",
+   "cause": null
+  },
+  {
+   "row": "L106",
+   "screen": "travel_bus_to_campus.ride",
+   "verdict": "PASS",
+   "line": "The bus is half empty. You get a seat by the window and step off in town.",
+   "why": "no named person; the bus man is an unnamed stranger",
+   "cause": null
+  },
+  {
+   "row": "L167",
+   "screen": "travel_bus_to_campus.ride",
+   "verdict": "N/A",
+   "line": "The bus is half empty. You get a seat by the window and step off in town.",
+   "why": "no row on this screen has hours that differ by day",
+   "cause": null
+  },
+  {
+   "row": "C927",
+   "screen": "travel_bus_to_campus.ride",
+   "verdict": "PASS",
+   "line": "The bus is half empty. You get a seat by the window and step off in town.",
+   "why": "every exit carries its own minutes (bus 20, walk 45; the packed replies 0 then 20)",
+   "cause": null
+  },
+  {
+   "row": "B10",
+   "screen": "travel_walk_home.ride",
+   "verdict": "PASS",
+   "line": "The walk home takes forever. Back in the neighbourhood, finally.",
+   "why": "true at the first and last minute and on a second visit: leaves from Town and lands on hood_street, the place named Neighbourhood, so 'Back in the neighbourhood' and 'Walk up your street' are both true; nobody named whose rows put them elsewhere",
+   "cause": null
+  },
+  {
+   "row": "C460",
+   "screen": "travel_walk_home.ride",
+   "verdict": "PASS",
+   "line": "The walk home takes forever. Back in the neighbourhood, finally.",
+   "why": "leaves from Town and lands on hood_street, the place named Neighbourhood, so 'Back in the neighbourhood' and 'Walk up your street' are both true",
+   "cause": null
+  },
+  {
+   "row": "C461",
+   "screen": "travel_walk_home.ride",
+   "verdict": "PASS",
+   "line": "The walk home takes forever. Back in the neighbourhood, finally.",
+   "why": "texture and the stranger's lines only, as before",
+   "cause": null
+  },
+  {
+   "row": "L106",
+   "screen": "travel_walk_home.ride",
+   "verdict": "PASS",
+   "line": "The walk home takes forever. Back in the neighbourhood, finally.",
+   "why": "no named person; the bus man is an unnamed stranger",
+   "cause": null
+  },
+  {
+   "row": "L167",
+   "screen": "travel_walk_home.ride",
+   "verdict": "N/A",
+   "line": "The walk home takes forever. Back in the neighbourhood, finally.",
+   "why": "no row on this screen has hours that differ by day",
+   "cause": null
+  },
+  {
+   "row": "C927",
+   "screen": "travel_walk_home.ride",
+   "verdict": "PASS",
+   "line": "The walk home takes forever. Back in the neighbourhood, finally.",
+   "why": "every exit carries its own minutes (bus 20, walk 45; the packed replies 0 then 20)",
+   "cause": null
+  },
+  {
+   "row": "B10",
+   "screen": "travel_walk_to_campus.ride",
+   "verdict": "PASS",
+   "line": "By the time you reach town your feet ache.",
+   "why": "true at the first and last minute and on a second visit: starts on her street (past the park, which sits off it) and lands on town_square; nobody named whose rows put them elsewhere",
+   "cause": null
+  },
+  {
+   "row": "C460",
+   "screen": "travel_walk_to_campus.ride",
+   "verdict": "PASS",
+   "line": "By the time you reach town your feet ache.",
+   "why": "starts on her street (past the park, which sits off it) and lands on town_square",
+   "cause": null
+  },
+  {
+   "row": "C461",
+   "screen": "travel_walk_to_campus.ride",
+   "verdict": "PASS",
+   "line": "By the time you reach town your feet ache.",
+   "why": "texture and the stranger's lines only, as before",
+   "cause": null
+  },
+  {
+   "row": "L106",
+   "screen": "travel_walk_to_campus.ride",
+   "verdict": "PASS",
+   "line": "By the time you reach town your feet ache.",
+   "why": "no named person; the bus man is an unnamed stranger",
+   "cause": null
+  },
+  {
+   "row": "L167",
+   "screen": "travel_walk_to_campus.ride",
+   "verdict": "N/A",
+   "line": "By the time you reach town your feet ache.",
+   "why": "no row on this screen has hours that differ by day",
+   "cause": null
+  },
+  {
+   "row": "C927",
+   "screen": "travel_walk_to_campus.ride",
+   "verdict": "PASS",
+   "line": "By the time you reach town your feet ache.",
+   "why": "every exit carries its own minutes (bus 20, walk 45; the packed replies 0 then 20)",
+   "cause": null
+  },
+  {
+   "row": "C921",
+   "screen": "travel_bus_home.ride",
+   "verdict": "N/A",
+   "line": "The bus home is half empty. You get the back seat and watch the high street go.",
+   "why": "no window on this screen",
+   "cause": null
+  },
+  {
+   "row": "C931",
+   "screen": "travel_bus_home.ride",
+   "verdict": "N/A",
+   "line": "The bus home is half empty. You get the back seat and watch the high street go.",
+   "why": "no time_of_day on this screen",
+   "cause": null
+  },
+  {
+   "row": "C921",
+   "screen": "travel_bus_to_campus.packed_no",
+   "verdict": "N/A",
+   "line": "He shifts half an inch and no further. You step off in town with your legs shaking.",
+   "why": "no window on this screen",
+   "cause": null
+  },
+  {
+   "row": "C931",
+   "screen": "travel_bus_to_campus.packed_no",
+   "verdict": "N/A",
+   "line": "He shifts half an inch and no further. You step off in town with your legs shaking.",
+   "why": "no time_of_day on this screen",
+   "cause": null
+  },
+  {
+   "row": "C921",
+   "screen": "travel_bus_to_campus.packed_quiet",
+   "verdict": "N/A",
+   "line": "You step off in town with your face burning. Next time, you'll stand by the doors.",
+   "why": "no window on this screen",
+   "cause": null
+  },
+  {
+   "row": "C931",
+   "screen": "travel_bus_to_campus.packed_quiet",
+   "verdict": "N/A",
+   "line": "You step off in town with your face burning. Next time, you'll stand by the doors.",
+   "why": "no time_of_day on this screen",
+   "cause": null
+  },
+  {
+   "row": "C921",
+   "screen": "travel_bus_to_campus.ride",
+   "verdict": "PASS",
+   "line": "The bus is half empty. You get a seat by the window and step off in town.",
+   "why": "the off-peak window 10:00-07:00 wraps past midnight and is the exact complement of weekdays 07:00-10:00",
+   "cause": null
+  },
+  {
+   "row": "C931",
+   "screen": "travel_bus_to_campus.ride",
+   "verdict": "PASS",
+   "line": "The bus is half empty. You get a seat by the window and step off in town.",
+   "why": "end exclusive: at 10:00 only the half-empty line and 'Get off in town' show",
+   "cause": null
+  },
+  {
+   "row": "C921",
+   "screen": "travel_walk_home.ride",
+   "verdict": "N/A",
+   "line": "The walk home takes forever. Back in the neighbourhood, finally.",
+   "why": "no window on this screen",
+   "cause": null
+  },
+  {
+   "row": "C931",
+   "screen": "travel_walk_home.ride",
+   "verdict": "N/A",
+   "line": "The walk home takes forever. Back in the neighbourhood, finally.",
+   "why": "no time_of_day on this screen",
+   "cause": null
+  },
+  {
+   "row": "C921",
+   "screen": "travel_walk_to_campus.ride",
+   "verdict": "N/A",
+   "line": "By the time you reach town your feet ache.",
+   "why": "no window on this screen",
+   "cause": null
+  },
+  {
+   "row": "C931",
+   "screen": "travel_walk_to_campus.ride",
+   "verdict": "N/A",
+   "line": "By the time you reach town your feet ache.",
+   "why": "no time_of_day on this screen",
+   "cause": null
+  },
+  {
+   "row": "B8",
+   "screen": "travel_bus_home.ride",
+   "verdict": "PASS",
+   "line": "The bus home is half empty. You get the back seat and watch the high street go.",
+   "why": "$2 and 20 minutes, as PLAN §2 and 8c say; no garment named",
+   "cause": null
+  },
+  {
+   "row": "B8",
+   "screen": "travel_bus_to_campus.packed_no",
+   "verdict": "PASS",
+   "line": "He shifts half an inch and no further. You step off in town with your legs shaking.",
+   "why": "$2 and 20 minutes to Town, as PLAN and the cards say; her ass and nipples are body, no garment named",
+   "cause": null
+  },
+  {
+   "row": "B8",
+   "screen": "travel_bus_to_campus.packed_quiet",
+   "verdict": "PASS",
+   "line": "You step off in town with your face burning. Next time, you'll stand by the doors.",
+   "why": "$2 and 20 minutes to Town, as PLAN and the cards say; her ass and nipples are body, no garment named",
+   "cause": null
+  },
+  {
+   "row": "B8",
+   "screen": "travel_bus_to_campus.ride",
+   "verdict": "PASS",
+   "line": "The bus is half empty. You get a seat by the window and step off in town.",
+   "why": "$2 and 20 minutes to Town, as PLAN and the cards say; her ass and nipples are body, no garment named",
+   "cause": null
+  },
+  {
+   "row": "B8",
+   "screen": "travel_walk_home.ride",
+   "verdict": "FAIL",
+   "line": "Walk home (P45 card: '\"Walk home\" (10 energy, 45 min)')",
+   "why": "the build charges no energy for the walk home (no costs on the trigger; P04: 'the walk home takes 45 minutes and no energy'), but P45's card says 'Walk home (10 energy, 45 min)', and PLAN §2 still says the walk is 'some energy' both ways",
+   "cause": "P04r12-c1"
+  },
+  {
+   "row": "B8",
+   "screen": "travel_walk_to_campus.ride",
+   "verdict": "PASS",
+   "line": "By the time you reach town your feet ache.",
+   "why": "10 energy and 45 minutes, as P04, P45 and PLAN say; no garment named",
+   "cause": null
+  }
+ ],
+ "causes": [
+  {
+   "id": "P04r12-c1",
+   "what": "P45's card says the walk home costs 10 energy; the build and P04 charge none (PLAN §2's 'walk 45 minutes and some energy', both ways, also disagrees)"
+  }
+ ]
+}

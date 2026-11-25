@@ -1,0 +1,2174 @@
+{
+ "items": [
+  {
+   "row": "B10",
+   "screen": "borrow_hoodie.take",
+   "why": "screen changed: truth row"
+  },
+  {
+   "row": "B10",
+   "screen": "borrow_mom.take",
+   "why": "screen changed: truth row"
+  },
+  {
+   "row": "B10",
+   "screen": "mom_living_room.hub",
+   "why": "screen changed: truth row"
+  },
+  {
+   "row": "B10",
+   "screen": "mom_living_room.talk",
+   "why": "a fact changed"
+  },
+  {
+   "row": "B10",
+   "screen": "opening.ask_mom",
+   "why": "a fact changed"
+  },
+  {
+   "row": "B10",
+   "screen": "opening.bath",
+   "why": "screen changed: truth row"
+  },
+  {
+   "row": "B10",
+   "screen": "opening.bath_freedom",
+   "why": "screen changed: truth row"
+  },
+  {
+   "row": "B10",
+   "screen": "opening.bath_fun",
+   "why": "screen changed: truth row"
+  },
+  {
+   "row": "B10",
+   "screen": "opening.bath_grades",
+   "why": "screen changed: truth row"
+  },
+  {
+   "row": "B10",
+   "screen": "opening.hall",
+   "why": "screen changed: truth row"
+  },
+  {
+   "row": "B10",
+   "screen": "opening.handover",
+   "why": "screen changed: truth row"
+  },
+  {
+   "row": "B10",
+   "screen": "opening.kitchen_ask",
+   "why": "screen changed: truth row"
+  },
+  {
+   "row": "B10",
+   "screen": "opening.kitchen_rent",
+   "why": "screen changed: truth row"
+  },
+  {
+   "row": "B10",
+   "screen": "opening.room",
+   "why": "screen changed: truth row"
+  },
+  {
+   "row": "B10",
+   "screen": "opening.room_past",
+   "why": "screen changed: truth row"
+  },
+  {
+   "row": "B10",
+   "screen": "opening.room_spoke",
+   "why": "screen changed: truth row"
+  },
+  {
+   "row": "B10",
+   "screen": "opening.room_waited",
+   "why": "screen changed: truth row"
+  },
+  {
+   "row": "B10",
+   "screen": "opening.sit_with_mom",
+   "why": "a fact changed"
+  },
+  {
+   "row": "B10",
+   "screen": "opening.sums",
+   "why": "screen changed: truth row"
+  },
+  {
+   "row": "B10",
+   "screen": "opening.wake",
+   "why": "screen changed: truth row"
+  },
+  {
+   "row": "B10",
+   "screen": "return_hoodie.return",
+   "why": "screen changed: truth row"
+  },
+  {
+   "row": "B10",
+   "screen": "return_mom.return",
+   "why": "screen changed: truth row"
+  },
+  {
+   "row": "B10",
+   "screen": "talk_mom.eat",
+   "why": "a fact changed"
+  },
+  {
+   "row": "B10",
+   "screen": "talk_mom.hub",
+   "why": "screen changed: truth row"
+  },
+  {
+   "row": "B10",
+   "screen": "talk_mom.talk",
+   "why": "a fact changed"
+  },
+  {
+   "row": "B8",
+   "screen": "borrow_hoodie.take",
+   "why": "screen changed: truth row"
+  },
+  {
+   "row": "B8",
+   "screen": "borrow_mom.take",
+   "why": "screen changed: truth row"
+  },
+  {
+   "row": "B8",
+   "screen": "mom_living_room.hub",
+   "why": "screen changed: truth row"
+  },
+  {
+   "row": "B8",
+   "screen": "mom_living_room.talk",
+   "why": "a fact changed"
+  },
+  {
+   "row": "B8",
+   "screen": "opening.ask_mom",
+   "why": "a fact changed"
+  },
+  {
+   "row": "B8",
+   "screen": "opening.bath",
+   "why": "screen changed: truth row"
+  },
+  {
+   "row": "B8",
+   "screen": "opening.bath_freedom",
+   "why": "screen changed: truth row"
+  },
+  {
+   "row": "B8",
+   "screen": "opening.bath_fun",
+   "why": "screen changed: truth row"
+  },
+  {
+   "row": "B8",
+   "screen": "opening.bath_grades",
+   "why": "screen changed: truth row"
+  },
+  {
+   "row": "B8",
+   "screen": "opening.hall",
+   "why": "screen changed: truth row"
+  },
+  {
+   "row": "B8",
+   "screen": "opening.handover",
+   "why": "screen changed: truth row"
+  },
+  {
+   "row": "B8",
+   "screen": "opening.kitchen_ask",
+   "why": "screen changed: truth row"
+  },
+  {
+   "row": "B8",
+   "screen": "opening.kitchen_rent",
+   "why": "screen changed: truth row"
+  },
+  {
+   "row": "B8",
+   "screen": "opening.room",
+   "why": "screen changed: truth row"
+  },
+  {
+   "row": "B8",
+   "screen": "opening.room_past",
+   "why": "screen changed: truth row"
+  },
+  {
+   "row": "B8",
+   "screen": "opening.room_spoke",
+   "why": "screen changed: truth row"
+  },
+  {
+   "row": "B8",
+   "screen": "opening.room_waited",
+   "why": "screen changed: truth row"
+  },
+  {
+   "row": "B8",
+   "screen": "opening.sit_with_mom",
+   "why": "a fact changed"
+  },
+  {
+   "row": "B8",
+   "screen": "opening.sums",
+   "why": "screen changed: truth row"
+  },
+  {
+   "row": "B8",
+   "screen": "opening.wake",
+   "why": "screen changed: truth row"
+  },
+  {
+   "row": "B8",
+   "screen": "return_hoodie.return",
+   "why": "screen changed: truth row"
+  },
+  {
+   "row": "B8",
+   "screen": "return_mom.return",
+   "why": "screen changed: truth row"
+  },
+  {
+   "row": "B8",
+   "screen": "talk_mom.eat",
+   "why": "a fact changed"
+  },
+  {
+   "row": "B8",
+   "screen": "talk_mom.hub",
+   "why": "screen changed: truth row"
+  },
+  {
+   "row": "B8",
+   "screen": "talk_mom.talk",
+   "why": "a fact changed"
+  },
+  {
+   "row": "C1158",
+   "screen": "borrow_hoodie.take",
+   "why": "screen changed: truth row"
+  },
+  {
+   "row": "C1158",
+   "screen": "borrow_mom.take",
+   "why": "screen changed: truth row"
+  },
+  {
+   "row": "C1158",
+   "screen": "mom_living_room.hub",
+   "why": "screen changed: truth row"
+  },
+  {
+   "row": "C1158",
+   "screen": "mom_living_room.talk",
+   "why": "a fact changed"
+  },
+  {
+   "row": "C1158",
+   "screen": "opening.ask_mom",
+   "why": "a fact changed"
+  },
+  {
+   "row": "C1158",
+   "screen": "opening.bath",
+   "why": "screen changed: truth row"
+  },
+  {
+   "row": "C1158",
+   "screen": "opening.bath_freedom",
+   "why": "screen changed: truth row"
+  },
+  {
+   "row": "C1158",
+   "screen": "opening.bath_fun",
+   "why": "screen changed: truth row"
+  },
+  {
+   "row": "C1158",
+   "screen": "opening.bath_grades",
+   "why": "screen changed: truth row"
+  },
+  {
+   "row": "C1158",
+   "screen": "opening.hall",
+   "why": "screen changed: truth row"
+  },
+  {
+   "row": "C1158",
+   "screen": "opening.handover",
+   "why": "screen changed: truth row"
+  },
+  {
+   "row": "C1158",
+   "screen": "opening.kitchen_ask",
+   "why": "screen changed: truth row"
+  },
+  {
+   "row": "C1158",
+   "screen": "opening.kitchen_rent",
+   "why": "screen changed: truth row"
+  },
+  {
+   "row": "C1158",
+   "screen": "opening.room",
+   "why": "screen changed: truth row"
+  },
+  {
+   "row": "C1158",
+   "screen": "opening.room_past",
+   "why": "screen changed: truth row"
+  },
+  {
+   "row": "C1158",
+   "screen": "opening.room_spoke",
+   "why": "screen changed: truth row"
+  },
+  {
+   "row": "C1158",
+   "screen": "opening.room_waited",
+   "why": "screen changed: truth row"
+  },
+  {
+   "row": "C1158",
+   "screen": "opening.sit_with_mom",
+   "why": "a fact changed"
+  },
+  {
+   "row": "C1158",
+   "screen": "opening.sums",
+   "why": "screen changed: truth row"
+  },
+  {
+   "row": "C1158",
+   "screen": "opening.wake",
+   "why": "screen changed: truth row"
+  },
+  {
+   "row": "C1158",
+   "screen": "return_hoodie.return",
+   "why": "screen changed: truth row"
+  },
+  {
+   "row": "C1158",
+   "screen": "return_mom.return",
+   "why": "screen changed: truth row"
+  },
+  {
+   "row": "C1158",
+   "screen": "talk_mom.eat",
+   "why": "a fact changed"
+  },
+  {
+   "row": "C1158",
+   "screen": "talk_mom.hub",
+   "why": "screen changed: truth row"
+  },
+  {
+   "row": "C1158",
+   "screen": "talk_mom.talk",
+   "why": "a fact changed"
+  },
+  {
+   "row": "C1166",
+   "screen": "mom_living_room.talk",
+   "why": "a fact changed"
+  },
+  {
+   "row": "C1166",
+   "screen": "opening.ask_mom",
+   "why": "a fact changed"
+  },
+  {
+   "row": "C1166",
+   "screen": "opening.sit_with_mom",
+   "why": "a fact changed"
+  },
+  {
+   "row": "C1166",
+   "screen": "talk_mom.eat",
+   "why": "a fact changed"
+  },
+  {
+   "row": "C1166",
+   "screen": "talk_mom.talk",
+   "why": "a fact changed"
+  },
+  {
+   "row": "C1167",
+   "screen": "borrow_hoodie.take",
+   "why": "waived, its screen changed"
+  },
+  {
+   "row": "C1167",
+   "screen": "borrow_mom.take",
+   "why": "waived, its screen changed"
+  },
+  {
+   "row": "C1167",
+   "screen": "return_hoodie.return",
+   "why": "waived, its screen changed"
+  },
+  {
+   "row": "C1167",
+   "screen": "return_mom.return",
+   "why": "waived, its screen changed"
+  },
+  {
+   "row": "C1177",
+   "screen": "mom_living_room.talk",
+   "why": "a fact changed"
+  },
+  {
+   "row": "C1177",
+   "screen": "opening.ask_mom",
+   "why": "a fact changed"
+  },
+  {
+   "row": "C1177",
+   "screen": "opening.sit_with_mom",
+   "why": "a fact changed"
+  },
+  {
+   "row": "C1177",
+   "screen": "talk_mom.eat",
+   "why": "a fact changed"
+  },
+  {
+   "row": "C1177",
+   "screen": "talk_mom.talk",
+   "why": "a fact changed"
+  },
+  {
+   "row": "C1197",
+   "screen": "mom_living_room.talk",
+   "why": "a fact changed"
+  },
+  {
+   "row": "C1197",
+   "screen": "opening.ask_mom",
+   "why": "a fact changed"
+  },
+  {
+   "row": "C1197",
+   "screen": "opening.sit_with_mom",
+   "why": "a fact changed"
+  },
+  {
+   "row": "C1197",
+   "screen": "talk_mom.eat",
+   "why": "a fact changed"
+  },
+  {
+   "row": "C1197",
+   "screen": "talk_mom.talk",
+   "why": "a fact changed"
+  },
+  {
+   "row": "C1204",
+   "screen": "borrow_hoodie.take",
+   "why": "waived, its screen changed"
+  },
+  {
+   "row": "C1204",
+   "screen": "borrow_mom.take",
+   "why": "waived, its screen changed"
+  },
+  {
+   "row": "C1204",
+   "screen": "return_hoodie.return",
+   "why": "waived, its screen changed"
+  },
+  {
+   "row": "C1204",
+   "screen": "return_mom.return",
+   "why": "waived, its screen changed"
+  },
+  {
+   "row": "C1206",
+   "screen": "borrow_hoodie.take",
+   "why": "screen changed: truth row"
+  },
+  {
+   "row": "C1206",
+   "screen": "borrow_mom.take",
+   "why": "screen changed: truth row"
+  },
+  {
+   "row": "C1206",
+   "screen": "mom_living_room.hub",
+   "why": "screen changed: truth row"
+  },
+  {
+   "row": "C1206",
+   "screen": "mom_living_room.talk",
+   "why": "a fact changed"
+  },
+  {
+   "row": "C1206",
+   "screen": "opening.ask_mom",
+   "why": "a fact changed"
+  },
+  {
+   "row": "C1206",
+   "screen": "opening.bath",
+   "why": "screen changed: truth row"
+  },
+  {
+   "row": "C1206",
+   "screen": "opening.bath_freedom",
+   "why": "screen changed: truth row"
+  },
+  {
+   "row": "C1206",
+   "screen": "opening.bath_fun",
+   "why": "screen changed: truth row"
+  },
+  {
+   "row": "C1206",
+   "screen": "opening.bath_grades",
+   "why": "screen changed: truth row"
+  },
+  {
+   "row": "C1206",
+   "screen": "opening.hall",
+   "why": "screen changed: truth row"
+  },
+  {
+   "row": "C1206",
+   "screen": "opening.handover",
+   "why": "screen changed: truth row"
+  },
+  {
+   "row": "C1206",
+   "screen": "opening.kitchen_ask",
+   "why": "screen changed: truth row"
+  },
+  {
+   "row": "C1206",
+   "screen": "opening.kitchen_rent",
+   "why": "screen changed: truth row"
+  },
+  {
+   "row": "C1206",
+   "screen": "opening.room",
+   "why": "screen changed: truth row"
+  },
+  {
+   "row": "C1206",
+   "screen": "opening.room_past",
+   "why": "screen changed: truth row"
+  },
+  {
+   "row": "C1206",
+   "screen": "opening.room_spoke",
+   "why": "screen changed: truth row"
+  },
+  {
+   "row": "C1206",
+   "screen": "opening.room_waited",
+   "why": "screen changed: truth row"
+  },
+  {
+   "row": "C1206",
+   "screen": "opening.sit_with_mom",
+   "why": "a fact changed"
+  },
+  {
+   "row": "C1206",
+   "screen": "opening.sums",
+   "why": "screen changed: truth row"
+  },
+  {
+   "row": "C1206",
+   "screen": "opening.wake",
+   "why": "screen changed: truth row"
+  },
+  {
+   "row": "C1206",
+   "screen": "return_hoodie.return",
+   "why": "screen changed: truth row"
+  },
+  {
+   "row": "C1206",
+   "screen": "return_mom.return",
+   "why": "screen changed: truth row"
+  },
+  {
+   "row": "C1206",
+   "screen": "talk_mom.eat",
+   "why": "a fact changed"
+  },
+  {
+   "row": "C1206",
+   "screen": "talk_mom.hub",
+   "why": "screen changed: truth row"
+  },
+  {
+   "row": "C1206",
+   "screen": "talk_mom.talk",
+   "why": "a fact changed"
+  },
+  {
+   "row": "C1207",
+   "screen": "mom_living_room.talk",
+   "why": "a fact changed"
+  },
+  {
+   "row": "C1207",
+   "screen": "opening.ask_mom",
+   "why": "a fact changed"
+  },
+  {
+   "row": "C1207",
+   "screen": "opening.sit_with_mom",
+   "why": "a fact changed"
+  },
+  {
+   "row": "C1207",
+   "screen": "talk_mom.eat",
+   "why": "a fact changed"
+  },
+  {
+   "row": "C1207",
+   "screen": "talk_mom.talk",
+   "why": "a fact changed"
+  },
+  {
+   "row": "C1631",
+   "screen": "borrow_hoodie.take",
+   "why": "screen changed: truth row"
+  },
+  {
+   "row": "C1631",
+   "screen": "borrow_mom.take",
+   "why": "screen changed: truth row"
+  },
+  {
+   "row": "C1631",
+   "screen": "mom_living_room.hub",
+   "why": "screen changed: truth row"
+  },
+  {
+   "row": "C1631",
+   "screen": "mom_living_room.talk",
+   "why": "a fact changed"
+  },
+  {
+   "row": "C1631",
+   "screen": "opening.ask_mom",
+   "why": "a fact changed"
+  },
+  {
+   "row": "C1631",
+   "screen": "opening.bath",
+   "why": "screen changed: truth row"
+  },
+  {
+   "row": "C1631",
+   "screen": "opening.bath_freedom",
+   "why": "screen changed: truth row"
+  },
+  {
+   "row": "C1631",
+   "screen": "opening.bath_fun",
+   "why": "screen changed: truth row"
+  },
+  {
+   "row": "C1631",
+   "screen": "opening.bath_grades",
+   "why": "screen changed: truth row"
+  },
+  {
+   "row": "C1631",
+   "screen": "opening.hall",
+   "why": "screen changed: truth row"
+  },
+  {
+   "row": "C1631",
+   "screen": "opening.handover",
+   "why": "screen changed: truth row"
+  },
+  {
+   "row": "C1631",
+   "screen": "opening.kitchen_ask",
+   "why": "screen changed: truth row"
+  },
+  {
+   "row": "C1631",
+   "screen": "opening.kitchen_rent",
+   "why": "screen changed: truth row"
+  },
+  {
+   "row": "C1631",
+   "screen": "opening.room",
+   "why": "screen changed: truth row"
+  },
+  {
+   "row": "C1631",
+   "screen": "opening.room_past",
+   "why": "screen changed: truth row"
+  },
+  {
+   "row": "C1631",
+   "screen": "opening.room_spoke",
+   "why": "screen changed: truth row"
+  },
+  {
+   "row": "C1631",
+   "screen": "opening.room_waited",
+   "why": "screen changed: truth row"
+  },
+  {
+   "row": "C1631",
+   "screen": "opening.sit_with_mom",
+   "why": "a fact changed"
+  },
+  {
+   "row": "C1631",
+   "screen": "opening.sums",
+   "why": "screen changed: truth row"
+  },
+  {
+   "row": "C1631",
+   "screen": "opening.wake",
+   "why": "screen changed: truth row"
+  },
+  {
+   "row": "C1631",
+   "screen": "return_hoodie.return",
+   "why": "screen changed: truth row"
+  },
+  {
+   "row": "C1631",
+   "screen": "return_mom.return",
+   "why": "screen changed: truth row"
+  },
+  {
+   "row": "C1631",
+   "screen": "talk_mom.eat",
+   "why": "a fact changed"
+  },
+  {
+   "row": "C1631",
+   "screen": "talk_mom.hub",
+   "why": "screen changed: truth row"
+  },
+  {
+   "row": "C1631",
+   "screen": "talk_mom.talk",
+   "why": "a fact changed"
+  },
+  {
+   "row": "C460",
+   "screen": "borrow_hoodie.take",
+   "why": "screen changed: truth row"
+  },
+  {
+   "row": "C460",
+   "screen": "borrow_mom.take",
+   "why": "screen changed: truth row"
+  },
+  {
+   "row": "C460",
+   "screen": "mom_living_room.hub",
+   "why": "screen changed: truth row"
+  },
+  {
+   "row": "C460",
+   "screen": "mom_living_room.talk",
+   "why": "a fact changed"
+  },
+  {
+   "row": "C460",
+   "screen": "opening.ask_mom",
+   "why": "a fact changed"
+  },
+  {
+   "row": "C460",
+   "screen": "opening.bath",
+   "why": "screen changed: truth row"
+  },
+  {
+   "row": "C460",
+   "screen": "opening.bath_freedom",
+   "why": "screen changed: truth row"
+  },
+  {
+   "row": "C460",
+   "screen": "opening.bath_fun",
+   "why": "screen changed: truth row"
+  },
+  {
+   "row": "C460",
+   "screen": "opening.bath_grades",
+   "why": "screen changed: truth row"
+  },
+  {
+   "row": "C460",
+   "screen": "opening.hall",
+   "why": "screen changed: truth row"
+  },
+  {
+   "row": "C460",
+   "screen": "opening.handover",
+   "why": "screen changed: truth row"
+  },
+  {
+   "row": "C460",
+   "screen": "opening.kitchen_ask",
+   "why": "screen changed: truth row"
+  },
+  {
+   "row": "C460",
+   "screen": "opening.kitchen_rent",
+   "why": "screen changed: truth row"
+  },
+  {
+   "row": "C460",
+   "screen": "opening.room",
+   "why": "screen changed: truth row"
+  },
+  {
+   "row": "C460",
+   "screen": "opening.room_past",
+   "why": "screen changed: truth row"
+  },
+  {
+   "row": "C460",
+   "screen": "opening.room_spoke",
+   "why": "screen changed: truth row"
+  },
+  {
+   "row": "C460",
+   "screen": "opening.room_waited",
+   "why": "screen changed: truth row"
+  },
+  {
+   "row": "C460",
+   "screen": "opening.sit_with_mom",
+   "why": "a fact changed"
+  },
+  {
+   "row": "C460",
+   "screen": "opening.sums",
+   "why": "screen changed: truth row"
+  },
+  {
+   "row": "C460",
+   "screen": "opening.wake",
+   "why": "screen changed: truth row"
+  },
+  {
+   "row": "C460",
+   "screen": "return_hoodie.return",
+   "why": "screen changed: truth row"
+  },
+  {
+   "row": "C460",
+   "screen": "return_mom.return",
+   "why": "screen changed: truth row"
+  },
+  {
+   "row": "C460",
+   "screen": "talk_mom.eat",
+   "why": "a fact changed"
+  },
+  {
+   "row": "C460",
+   "screen": "talk_mom.hub",
+   "why": "screen changed: truth row"
+  },
+  {
+   "row": "C460",
+   "screen": "talk_mom.talk",
+   "why": "a fact changed"
+  },
+  {
+   "row": "C461",
+   "screen": "borrow_hoodie.take",
+   "why": "screen changed: truth row"
+  },
+  {
+   "row": "C461",
+   "screen": "borrow_mom.take",
+   "why": "screen changed: truth row"
+  },
+  {
+   "row": "C461",
+   "screen": "mom_living_room.hub",
+   "why": "screen changed: truth row"
+  },
+  {
+   "row": "C461",
+   "screen": "mom_living_room.talk",
+   "why": "a fact changed"
+  },
+  {
+   "row": "C461",
+   "screen": "opening.ask_mom",
+   "why": "a fact changed"
+  },
+  {
+   "row": "C461",
+   "screen": "opening.bath",
+   "why": "screen changed: truth row"
+  },
+  {
+   "row": "C461",
+   "screen": "opening.bath_freedom",
+   "why": "screen changed: truth row"
+  },
+  {
+   "row": "C461",
+   "screen": "opening.bath_fun",
+   "why": "screen changed: truth row"
+  },
+  {
+   "row": "C461",
+   "screen": "opening.bath_grades",
+   "why": "screen changed: truth row"
+  },
+  {
+   "row": "C461",
+   "screen": "opening.hall",
+   "why": "screen changed: truth row"
+  },
+  {
+   "row": "C461",
+   "screen": "opening.handover",
+   "why": "screen changed: truth row"
+  },
+  {
+   "row": "C461",
+   "screen": "opening.kitchen_ask",
+   "why": "screen changed: truth row"
+  },
+  {
+   "row": "C461",
+   "screen": "opening.kitchen_rent",
+   "why": "screen changed: truth row"
+  },
+  {
+   "row": "C461",
+   "screen": "opening.room",
+   "why": "screen changed: truth row"
+  },
+  {
+   "row": "C461",
+   "screen": "opening.room_past",
+   "why": "screen changed: truth row"
+  },
+  {
+   "row": "C461",
+   "screen": "opening.room_spoke",
+   "why": "screen changed: truth row"
+  },
+  {
+   "row": "C461",
+   "screen": "opening.room_waited",
+   "why": "screen changed: truth row"
+  },
+  {
+   "row": "C461",
+   "screen": "opening.sit_with_mom",
+   "why": "a fact changed"
+  },
+  {
+   "row": "C461",
+   "screen": "opening.sums",
+   "why": "screen changed: truth row"
+  },
+  {
+   "row": "C461",
+   "screen": "opening.wake",
+   "why": "screen changed: truth row"
+  },
+  {
+   "row": "C461",
+   "screen": "return_hoodie.return",
+   "why": "screen changed: truth row"
+  },
+  {
+   "row": "C461",
+   "screen": "return_mom.return",
+   "why": "screen changed: truth row"
+  },
+  {
+   "row": "C461",
+   "screen": "talk_mom.eat",
+   "why": "a fact changed"
+  },
+  {
+   "row": "C461",
+   "screen": "talk_mom.hub",
+   "why": "screen changed: truth row"
+  },
+  {
+   "row": "C461",
+   "screen": "talk_mom.talk",
+   "why": "a fact changed"
+  },
+  {
+   "row": "C596",
+   "screen": "*",
+   "why": "its rule's text changed"
+  },
+  {
+   "row": "C719",
+   "screen": "mom_living_room.talk",
+   "why": "a fact changed"
+  },
+  {
+   "row": "C719",
+   "screen": "opening.ask_mom",
+   "why": "a fact changed"
+  },
+  {
+   "row": "C719",
+   "screen": "opening.sit_with_mom",
+   "why": "a fact changed"
+  },
+  {
+   "row": "C719",
+   "screen": "talk_mom.eat",
+   "why": "a fact changed"
+  },
+  {
+   "row": "C719",
+   "screen": "talk_mom.talk",
+   "why": "a fact changed"
+  },
+  {
+   "row": "C795",
+   "screen": "*",
+   "why": "its rule's text changed"
+  },
+  {
+   "row": "C804",
+   "screen": "*",
+   "why": "its rule's text changed"
+  },
+  {
+   "row": "C889",
+   "screen": "*",
+   "why": "its rule's text changed"
+  },
+  {
+   "row": "C889",
+   "screen": "mom_living_room.talk",
+   "why": "a fact changed"
+  },
+  {
+   "row": "C889",
+   "screen": "opening.ask_mom",
+   "why": "a fact changed"
+  },
+  {
+   "row": "C889",
+   "screen": "opening.sit_with_mom",
+   "why": "a fact changed"
+  },
+  {
+   "row": "C889",
+   "screen": "talk_mom.eat",
+   "why": "a fact changed"
+  },
+  {
+   "row": "C889",
+   "screen": "talk_mom.talk",
+   "why": "a fact changed"
+  },
+  {
+   "row": "C892",
+   "screen": "mom_living_room.talk",
+   "why": "a fact changed"
+  },
+  {
+   "row": "C892",
+   "screen": "opening.ask_mom",
+   "why": "a fact changed"
+  },
+  {
+   "row": "C892",
+   "screen": "opening.sit_with_mom",
+   "why": "a fact changed"
+  },
+  {
+   "row": "C892",
+   "screen": "talk_mom.eat",
+   "why": "a fact changed"
+  },
+  {
+   "row": "C892",
+   "screen": "talk_mom.talk",
+   "why": "a fact changed"
+  },
+  {
+   "row": "C897",
+   "screen": "mom_living_room.talk",
+   "why": "a fact changed"
+  },
+  {
+   "row": "C897",
+   "screen": "opening.ask_mom",
+   "why": "a fact changed"
+  },
+  {
+   "row": "C897",
+   "screen": "opening.sit_with_mom",
+   "why": "a fact changed"
+  },
+  {
+   "row": "C897",
+   "screen": "talk_mom.eat",
+   "why": "a fact changed"
+  },
+  {
+   "row": "C897",
+   "screen": "talk_mom.talk",
+   "why": "a fact changed"
+  },
+  {
+   "row": "C900",
+   "screen": "mom_living_room.talk",
+   "why": "a fact changed"
+  },
+  {
+   "row": "C900",
+   "screen": "opening.ask_mom",
+   "why": "a fact changed"
+  },
+  {
+   "row": "C900",
+   "screen": "opening.sit_with_mom",
+   "why": "a fact changed"
+  },
+  {
+   "row": "C900",
+   "screen": "talk_mom.eat",
+   "why": "a fact changed"
+  },
+  {
+   "row": "C900",
+   "screen": "talk_mom.talk",
+   "why": "a fact changed"
+  },
+  {
+   "row": "C902",
+   "screen": "mom_living_room.talk",
+   "why": "a fact changed"
+  },
+  {
+   "row": "C902",
+   "screen": "opening.ask_mom",
+   "why": "a fact changed"
+  },
+  {
+   "row": "C902",
+   "screen": "opening.sit_with_mom",
+   "why": "a fact changed"
+  },
+  {
+   "row": "C902",
+   "screen": "talk_mom.eat",
+   "why": "a fact changed"
+  },
+  {
+   "row": "C902",
+   "screen": "talk_mom.talk",
+   "why": "a fact changed"
+  },
+  {
+   "row": "C903",
+   "screen": "mom_living_room.talk",
+   "why": "a fact changed"
+  },
+  {
+   "row": "C903",
+   "screen": "opening.ask_mom",
+   "why": "a fact changed"
+  },
+  {
+   "row": "C903",
+   "screen": "opening.sit_with_mom",
+   "why": "a fact changed"
+  },
+  {
+   "row": "C903",
+   "screen": "talk_mom.eat",
+   "why": "a fact changed"
+  },
+  {
+   "row": "C903",
+   "screen": "talk_mom.talk",
+   "why": "a fact changed"
+  },
+  {
+   "row": "C906",
+   "screen": "*",
+   "why": "its rule's text changed"
+  },
+  {
+   "row": "C906",
+   "screen": "mom_living_room.talk",
+   "why": "a fact changed"
+  },
+  {
+   "row": "C906",
+   "screen": "opening.ask_mom",
+   "why": "a fact changed"
+  },
+  {
+   "row": "C906",
+   "screen": "opening.sit_with_mom",
+   "why": "a fact changed"
+  },
+  {
+   "row": "C906",
+   "screen": "talk_mom.eat",
+   "why": "a fact changed"
+  },
+  {
+   "row": "C906",
+   "screen": "talk_mom.talk",
+   "why": "a fact changed"
+  },
+  {
+   "row": "C910",
+   "screen": "*",
+   "why": "its rule's text changed"
+  },
+  {
+   "row": "C910",
+   "screen": "mom_living_room.talk",
+   "why": "a fact changed"
+  },
+  {
+   "row": "C910",
+   "screen": "opening.ask_mom",
+   "why": "a fact changed"
+  },
+  {
+   "row": "C910",
+   "screen": "opening.sit_with_mom",
+   "why": "a fact changed"
+  },
+  {
+   "row": "C910",
+   "screen": "talk_mom.eat",
+   "why": "a fact changed"
+  },
+  {
+   "row": "C910",
+   "screen": "talk_mom.talk",
+   "why": "a fact changed"
+  },
+  {
+   "row": "C913",
+   "screen": "mom_living_room.talk",
+   "why": "a fact changed"
+  },
+  {
+   "row": "C913",
+   "screen": "opening.ask_mom",
+   "why": "a fact changed"
+  },
+  {
+   "row": "C913",
+   "screen": "opening.sit_with_mom",
+   "why": "a fact changed"
+  },
+  {
+   "row": "C913",
+   "screen": "talk_mom.eat",
+   "why": "a fact changed"
+  },
+  {
+   "row": "C913",
+   "screen": "talk_mom.talk",
+   "why": "a fact changed"
+  },
+  {
+   "row": "C914",
+   "screen": "mom_living_room.talk",
+   "why": "a fact changed"
+  },
+  {
+   "row": "C914",
+   "screen": "opening.ask_mom",
+   "why": "a fact changed"
+  },
+  {
+   "row": "C914",
+   "screen": "opening.sit_with_mom",
+   "why": "a fact changed"
+  },
+  {
+   "row": "C914",
+   "screen": "talk_mom.eat",
+   "why": "a fact changed"
+  },
+  {
+   "row": "C914",
+   "screen": "talk_mom.talk",
+   "why": "a fact changed"
+  },
+  {
+   "row": "C916",
+   "screen": "mom_living_room.talk",
+   "why": "a fact changed"
+  },
+  {
+   "row": "C916",
+   "screen": "opening.ask_mom",
+   "why": "a fact changed"
+  },
+  {
+   "row": "C916",
+   "screen": "opening.sit_with_mom",
+   "why": "a fact changed"
+  },
+  {
+   "row": "C916",
+   "screen": "talk_mom.eat",
+   "why": "a fact changed"
+  },
+  {
+   "row": "C916",
+   "screen": "talk_mom.talk",
+   "why": "a fact changed"
+  },
+  {
+   "row": "C920",
+   "screen": "mom_living_room.talk",
+   "why": "a fact changed"
+  },
+  {
+   "row": "C920",
+   "screen": "opening.ask_mom",
+   "why": "a fact changed"
+  },
+  {
+   "row": "C920",
+   "screen": "opening.sit_with_mom",
+   "why": "a fact changed"
+  },
+  {
+   "row": "C920",
+   "screen": "talk_mom.eat",
+   "why": "a fact changed"
+  },
+  {
+   "row": "C920",
+   "screen": "talk_mom.talk",
+   "why": "a fact changed"
+  },
+  {
+   "row": "C921",
+   "screen": "borrow_hoodie.take",
+   "why": "screen changed: truth row"
+  },
+  {
+   "row": "C921",
+   "screen": "borrow_mom.take",
+   "why": "screen changed: truth row"
+  },
+  {
+   "row": "C921",
+   "screen": "mom_living_room.hub",
+   "why": "screen changed: truth row"
+  },
+  {
+   "row": "C921",
+   "screen": "mom_living_room.talk",
+   "why": "a fact changed"
+  },
+  {
+   "row": "C921",
+   "screen": "opening.ask_mom",
+   "why": "a fact changed"
+  },
+  {
+   "row": "C921",
+   "screen": "opening.bath",
+   "why": "screen changed: truth row"
+  },
+  {
+   "row": "C921",
+   "screen": "opening.bath_freedom",
+   "why": "screen changed: truth row"
+  },
+  {
+   "row": "C921",
+   "screen": "opening.bath_fun",
+   "why": "screen changed: truth row"
+  },
+  {
+   "row": "C921",
+   "screen": "opening.bath_grades",
+   "why": "screen changed: truth row"
+  },
+  {
+   "row": "C921",
+   "screen": "opening.hall",
+   "why": "screen changed: truth row"
+  },
+  {
+   "row": "C921",
+   "screen": "opening.handover",
+   "why": "screen changed: truth row"
+  },
+  {
+   "row": "C921",
+   "screen": "opening.kitchen_ask",
+   "why": "screen changed: truth row"
+  },
+  {
+   "row": "C921",
+   "screen": "opening.kitchen_rent",
+   "why": "screen changed: truth row"
+  },
+  {
+   "row": "C921",
+   "screen": "opening.room",
+   "why": "screen changed: truth row"
+  },
+  {
+   "row": "C921",
+   "screen": "opening.room_past",
+   "why": "screen changed: truth row"
+  },
+  {
+   "row": "C921",
+   "screen": "opening.room_spoke",
+   "why": "screen changed: truth row"
+  },
+  {
+   "row": "C921",
+   "screen": "opening.room_waited",
+   "why": "screen changed: truth row"
+  },
+  {
+   "row": "C921",
+   "screen": "opening.sit_with_mom",
+   "why": "a fact changed"
+  },
+  {
+   "row": "C921",
+   "screen": "opening.sums",
+   "why": "screen changed: truth row"
+  },
+  {
+   "row": "C921",
+   "screen": "opening.wake",
+   "why": "screen changed: truth row"
+  },
+  {
+   "row": "C921",
+   "screen": "return_hoodie.return",
+   "why": "screen changed: truth row"
+  },
+  {
+   "row": "C921",
+   "screen": "return_mom.return",
+   "why": "screen changed: truth row"
+  },
+  {
+   "row": "C921",
+   "screen": "talk_mom.eat",
+   "why": "a fact changed"
+  },
+  {
+   "row": "C921",
+   "screen": "talk_mom.hub",
+   "why": "screen changed: truth row"
+  },
+  {
+   "row": "C921",
+   "screen": "talk_mom.talk",
+   "why": "a fact changed"
+  },
+  {
+   "row": "C924",
+   "screen": "mom_living_room.talk",
+   "why": "a fact changed"
+  },
+  {
+   "row": "C924",
+   "screen": "opening.ask_mom",
+   "why": "a fact changed"
+  },
+  {
+   "row": "C924",
+   "screen": "opening.sit_with_mom",
+   "why": "a fact changed"
+  },
+  {
+   "row": "C924",
+   "screen": "talk_mom.eat",
+   "why": "a fact changed"
+  },
+  {
+   "row": "C924",
+   "screen": "talk_mom.talk",
+   "why": "a fact changed"
+  },
+  {
+   "row": "C926",
+   "screen": "mom_living_room.talk",
+   "why": "a fact changed"
+  },
+  {
+   "row": "C926",
+   "screen": "opening.ask_mom",
+   "why": "a fact changed"
+  },
+  {
+   "row": "C926",
+   "screen": "opening.sit_with_mom",
+   "why": "a fact changed"
+  },
+  {
+   "row": "C926",
+   "screen": "talk_mom.eat",
+   "why": "a fact changed"
+  },
+  {
+   "row": "C926",
+   "screen": "talk_mom.talk",
+   "why": "a fact changed"
+  },
+  {
+   "row": "C927",
+   "screen": "borrow_hoodie.take",
+   "why": "screen changed: truth row"
+  },
+  {
+   "row": "C927",
+   "screen": "borrow_mom.take",
+   "why": "screen changed: truth row"
+  },
+  {
+   "row": "C927",
+   "screen": "mom_living_room.hub",
+   "why": "screen changed: truth row"
+  },
+  {
+   "row": "C927",
+   "screen": "mom_living_room.talk",
+   "why": "a fact changed"
+  },
+  {
+   "row": "C927",
+   "screen": "opening.ask_mom",
+   "why": "a fact changed"
+  },
+  {
+   "row": "C927",
+   "screen": "opening.bath",
+   "why": "screen changed: truth row"
+  },
+  {
+   "row": "C927",
+   "screen": "opening.bath_freedom",
+   "why": "screen changed: truth row"
+  },
+  {
+   "row": "C927",
+   "screen": "opening.bath_fun",
+   "why": "screen changed: truth row"
+  },
+  {
+   "row": "C927",
+   "screen": "opening.bath_grades",
+   "why": "screen changed: truth row"
+  },
+  {
+   "row": "C927",
+   "screen": "opening.hall",
+   "why": "screen changed: truth row"
+  },
+  {
+   "row": "C927",
+   "screen": "opening.handover",
+   "why": "screen changed: truth row"
+  },
+  {
+   "row": "C927",
+   "screen": "opening.kitchen_ask",
+   "why": "screen changed: truth row"
+  },
+  {
+   "row": "C927",
+   "screen": "opening.kitchen_rent",
+   "why": "screen changed: truth row"
+  },
+  {
+   "row": "C927",
+   "screen": "opening.room",
+   "why": "screen changed: truth row"
+  },
+  {
+   "row": "C927",
+   "screen": "opening.room_past",
+   "why": "screen changed: truth row"
+  },
+  {
+   "row": "C927",
+   "screen": "opening.room_spoke",
+   "why": "screen changed: truth row"
+  },
+  {
+   "row": "C927",
+   "screen": "opening.room_waited",
+   "why": "screen changed: truth row"
+  },
+  {
+   "row": "C927",
+   "screen": "opening.sit_with_mom",
+   "why": "a fact changed"
+  },
+  {
+   "row": "C927",
+   "screen": "opening.sums",
+   "why": "screen changed: truth row"
+  },
+  {
+   "row": "C927",
+   "screen": "opening.wake",
+   "why": "screen changed: truth row"
+  },
+  {
+   "row": "C927",
+   "screen": "return_hoodie.return",
+   "why": "screen changed: truth row"
+  },
+  {
+   "row": "C927",
+   "screen": "return_mom.return",
+   "why": "screen changed: truth row"
+  },
+  {
+   "row": "C927",
+   "screen": "talk_mom.eat",
+   "why": "a fact changed"
+  },
+  {
+   "row": "C927",
+   "screen": "talk_mom.hub",
+   "why": "screen changed: truth row"
+  },
+  {
+   "row": "C927",
+   "screen": "talk_mom.talk",
+   "why": "a fact changed"
+  },
+  {
+   "row": "C928",
+   "screen": "mom_living_room.talk",
+   "why": "a fact changed"
+  },
+  {
+   "row": "C928",
+   "screen": "opening.ask_mom",
+   "why": "a fact changed"
+  },
+  {
+   "row": "C928",
+   "screen": "opening.sit_with_mom",
+   "why": "a fact changed"
+  },
+  {
+   "row": "C928",
+   "screen": "talk_mom.eat",
+   "why": "a fact changed"
+  },
+  {
+   "row": "C928",
+   "screen": "talk_mom.talk",
+   "why": "a fact changed"
+  },
+  {
+   "row": "C929",
+   "screen": "*",
+   "why": "its rule's text changed"
+  },
+  {
+   "row": "C929",
+   "screen": "mom_living_room.talk",
+   "why": "a fact changed"
+  },
+  {
+   "row": "C929",
+   "screen": "opening.ask_mom",
+   "why": "a fact changed"
+  },
+  {
+   "row": "C929",
+   "screen": "opening.sit_with_mom",
+   "why": "a fact changed"
+  },
+  {
+   "row": "C929",
+   "screen": "talk_mom.eat",
+   "why": "a fact changed"
+  },
+  {
+   "row": "C929",
+   "screen": "talk_mom.talk",
+   "why": "a fact changed"
+  },
+  {
+   "row": "C930",
+   "screen": "mom_living_room.talk",
+   "why": "a fact changed"
+  },
+  {
+   "row": "C930",
+   "screen": "opening.ask_mom",
+   "why": "a fact changed"
+  },
+  {
+   "row": "C930",
+   "screen": "opening.sit_with_mom",
+   "why": "a fact changed"
+  },
+  {
+   "row": "C930",
+   "screen": "talk_mom.eat",
+   "why": "a fact changed"
+  },
+  {
+   "row": "C930",
+   "screen": "talk_mom.talk",
+   "why": "a fact changed"
+  },
+  {
+   "row": "C931",
+   "screen": "borrow_hoodie.take",
+   "why": "screen changed: truth row"
+  },
+  {
+   "row": "C931",
+   "screen": "borrow_mom.take",
+   "why": "screen changed: truth row"
+  },
+  {
+   "row": "C931",
+   "screen": "mom_living_room.hub",
+   "why": "screen changed: truth row"
+  },
+  {
+   "row": "C931",
+   "screen": "mom_living_room.talk",
+   "why": "a fact changed"
+  },
+  {
+   "row": "C931",
+   "screen": "opening.ask_mom",
+   "why": "a fact changed"
+  },
+  {
+   "row": "C931",
+   "screen": "opening.bath",
+   "why": "screen changed: truth row"
+  },
+  {
+   "row": "C931",
+   "screen": "opening.bath_freedom",
+   "why": "screen changed: truth row"
+  },
+  {
+   "row": "C931",
+   "screen": "opening.bath_fun",
+   "why": "screen changed: truth row"
+  },
+  {
+   "row": "C931",
+   "screen": "opening.bath_grades",
+   "why": "screen changed: truth row"
+  },
+  {
+   "row": "C931",
+   "screen": "opening.hall",
+   "why": "screen changed: truth row"
+  },
+  {
+   "row": "C931",
+   "screen": "opening.handover",
+   "why": "screen changed: truth row"
+  },
+  {
+   "row": "C931",
+   "screen": "opening.kitchen_ask",
+   "why": "screen changed: truth row"
+  },
+  {
+   "row": "C931",
+   "screen": "opening.kitchen_rent",
+   "why": "screen changed: truth row"
+  },
+  {
+   "row": "C931",
+   "screen": "opening.room",
+   "why": "screen changed: truth row"
+  },
+  {
+   "row": "C931",
+   "screen": "opening.room_past",
+   "why": "screen changed: truth row"
+  },
+  {
+   "row": "C931",
+   "screen": "opening.room_spoke",
+   "why": "screen changed: truth row"
+  },
+  {
+   "row": "C931",
+   "screen": "opening.room_waited",
+   "why": "screen changed: truth row"
+  },
+  {
+   "row": "C931",
+   "screen": "opening.sit_with_mom",
+   "why": "a fact changed"
+  },
+  {
+   "row": "C931",
+   "screen": "opening.sums",
+   "why": "screen changed: truth row"
+  },
+  {
+   "row": "C931",
+   "screen": "opening.wake",
+   "why": "screen changed: truth row"
+  },
+  {
+   "row": "C931",
+   "screen": "return_hoodie.return",
+   "why": "screen changed: truth row"
+  },
+  {
+   "row": "C931",
+   "screen": "return_mom.return",
+   "why": "screen changed: truth row"
+  },
+  {
+   "row": "C931",
+   "screen": "talk_mom.eat",
+   "why": "a fact changed"
+  },
+  {
+   "row": "C931",
+   "screen": "talk_mom.hub",
+   "why": "screen changed: truth row"
+  },
+  {
+   "row": "C931",
+   "screen": "talk_mom.talk",
+   "why": "a fact changed"
+  },
+  {
+   "row": "C953",
+   "screen": "*",
+   "why": "its rule's text changed"
+  },
+  {
+   "row": "L106",
+   "screen": "borrow_hoodie.take",
+   "why": "screen changed: truth row"
+  },
+  {
+   "row": "L106",
+   "screen": "borrow_mom.take",
+   "why": "screen changed: truth row"
+  },
+  {
+   "row": "L106",
+   "screen": "mom_living_room.hub",
+   "why": "screen changed: truth row"
+  },
+  {
+   "row": "L106",
+   "screen": "mom_living_room.talk",
+   "why": "a fact changed"
+  },
+  {
+   "row": "L106",
+   "screen": "opening.ask_mom",
+   "why": "a fact changed"
+  },
+  {
+   "row": "L106",
+   "screen": "opening.bath",
+   "why": "screen changed: truth row"
+  },
+  {
+   "row": "L106",
+   "screen": "opening.bath_freedom",
+   "why": "screen changed: truth row"
+  },
+  {
+   "row": "L106",
+   "screen": "opening.bath_fun",
+   "why": "screen changed: truth row"
+  },
+  {
+   "row": "L106",
+   "screen": "opening.bath_grades",
+   "why": "screen changed: truth row"
+  },
+  {
+   "row": "L106",
+   "screen": "opening.hall",
+   "why": "screen changed: truth row"
+  },
+  {
+   "row": "L106",
+   "screen": "opening.handover",
+   "why": "screen changed: truth row"
+  },
+  {
+   "row": "L106",
+   "screen": "opening.kitchen_ask",
+   "why": "screen changed: truth row"
+  },
+  {
+   "row": "L106",
+   "screen": "opening.kitchen_rent",
+   "why": "screen changed: truth row"
+  },
+  {
+   "row": "L106",
+   "screen": "opening.room",
+   "why": "screen changed: truth row"
+  },
+  {
+   "row": "L106",
+   "screen": "opening.room_past",
+   "why": "screen changed: truth row"
+  },
+  {
+   "row": "L106",
+   "screen": "opening.room_spoke",
+   "why": "screen changed: truth row"
+  },
+  {
+   "row": "L106",
+   "screen": "opening.room_waited",
+   "why": "screen changed: truth row"
+  },
+  {
+   "row": "L106",
+   "screen": "opening.sit_with_mom",
+   "why": "a fact changed"
+  },
+  {
+   "row": "L106",
+   "screen": "opening.sums",
+   "why": "screen changed: truth row"
+  },
+  {
+   "row": "L106",
+   "screen": "opening.wake",
+   "why": "screen changed: truth row"
+  },
+  {
+   "row": "L106",
+   "screen": "return_hoodie.return",
+   "why": "screen changed: truth row"
+  },
+  {
+   "row": "L106",
+   "screen": "return_mom.return",
+   "why": "screen changed: truth row"
+  },
+  {
+   "row": "L106",
+   "screen": "talk_mom.eat",
+   "why": "a fact changed"
+  },
+  {
+   "row": "L106",
+   "screen": "talk_mom.hub",
+   "why": "screen changed: truth row"
+  },
+  {
+   "row": "L106",
+   "screen": "talk_mom.talk",
+   "why": "a fact changed"
+  },
+  {
+   "row": "L167",
+   "screen": "borrow_hoodie.take",
+   "why": "screen changed: truth row"
+  },
+  {
+   "row": "L167",
+   "screen": "borrow_mom.take",
+   "why": "screen changed: truth row"
+  },
+  {
+   "row": "L167",
+   "screen": "mom_living_room.hub",
+   "why": "screen changed: truth row"
+  },
+  {
+   "row": "L167",
+   "screen": "mom_living_room.talk",
+   "why": "a fact changed"
+  },
+  {
+   "row": "L167",
+   "screen": "opening.ask_mom",
+   "why": "a fact changed"
+  },
+  {
+   "row": "L167",
+   "screen": "opening.bath",
+   "why": "screen changed: truth row"
+  },
+  {
+   "row": "L167",
+   "screen": "opening.bath_freedom",
+   "why": "screen changed: truth row"
+  },
+  {
+   "row": "L167",
+   "screen": "opening.bath_fun",
+   "why": "screen changed: truth row"
+  },
+  {
+   "row": "L167",
+   "screen": "opening.bath_grades",
+   "why": "screen changed: truth row"
+  },
+  {
+   "row": "L167",
+   "screen": "opening.hall",
+   "why": "screen changed: truth row"
+  },
+  {
+   "row": "L167",
+   "screen": "opening.handover",
+   "why": "screen changed: truth row"
+  },
+  {
+   "row": "L167",
+   "screen": "opening.kitchen_ask",
+   "why": "screen changed: truth row"
+  },
+  {
+   "row": "L167",
+   "screen": "opening.kitchen_rent",
+   "why": "screen changed: truth row"
+  },
+  {
+   "row": "L167",
+   "screen": "opening.room",
+   "why": "screen changed: truth row"
+  },
+  {
+   "row": "L167",
+   "screen": "opening.room_past",
+   "why": "screen changed: truth row"
+  },
+  {
+   "row": "L167",
+   "screen": "opening.room_spoke",
+   "why": "screen changed: truth row"
+  },
+  {
+   "row": "L167",
+   "screen": "opening.room_waited",
+   "why": "screen changed: truth row"
+  },
+  {
+   "row": "L167",
+   "screen": "opening.sit_with_mom",
+   "why": "a fact changed"
+  },
+  {
+   "row": "L167",
+   "screen": "opening.sums",
+   "why": "screen changed: truth row"
+  },
+  {
+   "row": "L167",
+   "screen": "opening.wake",
+   "why": "screen changed: truth row"
+  },
+  {
+   "row": "L167",
+   "screen": "return_hoodie.return",
+   "why": "screen changed: truth row"
+  },
+  {
+   "row": "L167",
+   "screen": "return_mom.return",
+   "why": "screen changed: truth row"
+  },
+  {
+   "row": "L167",
+   "screen": "talk_mom.eat",
+   "why": "a fact changed"
+  },
+  {
+   "row": "L167",
+   "screen": "talk_mom.hub",
+   "why": "screen changed: truth row"
+  },
+  {
+   "row": "L167",
+   "screen": "talk_mom.talk",
+   "why": "a fact changed"
+  },
+  {
+   "row": "clock#1",
+   "screen": "*",
+   "why": "its rule's text changed"
+  },
+  {
+   "row": "clock#6",
+   "screen": "*",
+   "why": "its rule's text changed"
+  },
+  {
+   "row": "clothes#1",
+   "screen": "return_hoodie.return",
+   "why": "waived, its screen changed"
+  },
+  {
+   "row": "clothes#1",
+   "screen": "return_mom.return",
+   "why": "waived, its screen changed"
+  },
+  {
+   "row": "people#3",
+   "screen": "*",
+   "why": "its rule's text changed"
+  },
+  {
+   "row": "people#7",
+   "screen": "*",
+   "why": "its rule's text changed"
+  },
+  {
+   "row": "places#2",
+   "screen": "*",
+   "why": "its rule's text changed"
+  },
+  {
+   "row": "places#4",
+   "screen": "*",
+   "why": "its rule's text changed"
+  }
+ ]
+}

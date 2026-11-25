@@ -1,18 +1,20 @@
 {
  "piece": "P10",
- "pass": 9,
+ "pass": 11,
  "screens": {
   "cafe_work_hour.work": {
    "text": "66a5f5a25c0ef79e",
    "facts": "cdc735b0ce394f10",
+   "facts2": "f4f805a56f6893db",
    "all": "5084e0ccc55d5ee0"
   },
   "cafe_work_shift.shift": {
    "text": "ebc4af007b52471c",
    "facts": "06e4e76c920e51bb",
+   "facts2": "f9f482f80b2e4aad",
    "all": "ee058de233e5e74a"
   },
-  "*": "da7f0f02e2dae475"
+  "*": "008406a21b5180e7"
  },
  "rows": {
   "B1": "5276068df1ca6fa9",
@@ -31,18 +33,18 @@
   "C146": "a08ace799dcefe85",
   "C151": "d5758757a709b1af",
   "C149": "b8cdd5b1ce3f89ea",
-  "C889": "1b724e2dcfbf028b",
-  "C906": "ce3b42a8c86da5b8",
+  "C889": "def1348d483d0c40",
+  "C906": "71713a7e7ae739e7",
   "C926": "177d1e1776fac74b",
   "C900": "6372efb027eb2034",
   "C902": "df5ed7a36dbc74e4",
   "C903": "4f83b0b5eb45f71b",
   "C892": "5c890033f6ac38b8",
-  "C910": "be1c18ee466455f6",
-  "C929": "e20b027bad88ca8c",
+  "C910": "d5a109f1ef88419a",
+  "C929": "18b0ecdf6d7fc901",
   "C897": "265ece64add83676",
   "C924": "791cd173e23fb130",
-  "C920": "695dc5d9d0e5e749",
+  "C920": "513927dd127fca04",
   "C913": "c750f9b6ab4ace14",
   "C930": "beb57cd46fe906bf",
   "L167": "e64ce2672d85d2d8",
@@ -68,7 +70,7 @@
   "C954": "c8001b93946f6f80",
   "C1002": "657248766e62061f",
   "C951": "fe3b305ad0c265a7",
-  "C952": "2f7d1a6bf6a93ca9",
+  "C952": "0ded4fca6fc71925",
   "C291": "53bd56cf597f7ee3",
   "C296": "d702aa9200d2154d",
   "C286": "23fc75bfc032d31c",
@@ -90,19 +92,20 @@
   "C620": "76250e48ada2b843",
   "C613": "6f777b1fcd750dd1",
   "C644": "f5e1d79f3251dbab",
-  "C596": "6d9bba989a2b9666",
+  "C596": "e5f7e6cf2d01613d",
   "C1340": "b76a6583ae88c60f",
   "C769": "f6b6f78a8f2e5ed7",
   "C794": "bad76e5963432385",
-  "C795": "6c9eb17d99266791",
-  "C804": "810ef8e803cb09dd",
+  "C795": "34139e6a6914e171",
+  "C804": "5358489178bff0a4",
   "L106": "13a714429d15f3b2",
   "C776": "4141d9e5e24362c3",
   "C777": "b56360a1040688cf",
   "C773": "599aac6293908bc4",
   "C758": "e158aaf055cb61d6",
-  "C953": "8d1306a15c51370a",
+  "C953": "826bf82fe26afd13",
   "C762": "40e85f1ae92f1e71",
+  "L170": "c3599cd09637a240",
   "C770": "ff9aa31c11e5d50f",
   "C771": "563e3d25c3219dd0",
   "L166": "c12d10588197fbaf",
@@ -161,7 +164,7 @@
     "all": "5084e0ccc55d5ee0"
    },
    "row_hash": "c1c0e2ac2588a579",
-   "carried": false,
+   "carried": true,
    "pass": 9
   },
   {
@@ -178,7 +181,7 @@
     "all": "ee058de233e5e74a"
    },
    "row_hash": "c1c0e2ac2588a579",
-   "carried": false,
+   "carried": true,
    "pass": 9
   },
   {
@@ -375,7 +378,7 @@
     "all": "5084e0ccc55d5ee0"
    },
    "row_hash": "80d415cf08e0ebfe",
-   "carried": false,
+   "carried": true,
    "pass": 9
   },
   {
@@ -392,7 +395,7 @@
     "all": "ee058de233e5e74a"
    },
    "row_hash": "80d415cf08e0ebfe",
-   "carried": false,
+   "carried": true,
    "pass": 9
   },
   {
@@ -928,7 +931,7 @@
     "all": "ee058de233e5e74a"
    },
    "row_hash": "d5758757a709b1af",
-   "carried": false,
+   "carried": true,
    "pass": 9
   },
   {
@@ -1174,7 +1177,7 @@
     "all": "5084e0ccc55d5ee0"
    },
    "row_hash": "67e48e60d5053a2e",
-   "carried": false,
+   "carried": true,
    "pass": 9
   },
   {
@@ -1191,7 +1194,7 @@
     "all": "ee058de233e5e74a"
    },
    "row_hash": "67e48e60d5053a2e",
-   "carried": false,
+   "carried": true,
    "pass": 9
   },
   {
@@ -1221,7 +1224,7 @@
     "all": "5084e0ccc55d5ee0"
    },
    "row_hash": "310706ee076318f2",
-   "carried": false,
+   "carried": true,
    "pass": 9
   },
   {
@@ -1238,7 +1241,7 @@
     "all": "ee058de233e5e74a"
    },
    "row_hash": "310706ee076318f2",
-   "carried": false,
+   "carried": true,
    "pass": 9
   },
   {
@@ -1270,15 +1273,15 @@
   {
    "row": "C596",
    "screen": "*",
-   "verdict": "N/A",
-   "line": "",
-   "why": "Not a talk screen.",
+   "verdict": "PASS",
+   "line": "cafe_work_hour.work, cafe_work_shift.shift",
+   "why": "no talk screen or menu; no picture",
    "cause": null,
    "note": true,
-   "screen_hash": "ecf69a17c34da0ff",
-   "row_hash": "6d9bba989a2b9666",
+   "screen_hash": "008406a21b5180e7",
+   "row_hash": "e5f7e6cf2d01613d",
    "carried": true,
-   "pass": 7
+   "pass": 10
   },
   {
    "row": "C601",
@@ -1504,41 +1507,46 @@
   {
    "row": "C795",
    "screen": "*",
-   "verdict": "WAIVED",
-   "line": "",
-   "why": "NOTES.md:216: \"C804/C795 on the Caf\u00e9: presence lines for Tom and Chris (met and unmet) come with P31.\"",
+   "verdict": "PASS",
+   "line": "\"Sundays it's you and Chris.\" (Sunday group)",
+   "why": "a work beat, not room text",
    "cause": null,
    "note": true,
-   "screen_hash": "ecf69a17c34da0ff",
-   "row_hash": "6c9eb17d99266791",
+   "screen_hash": "008406a21b5180e7",
+   "row_hash": "34139e6a6914e171",
    "carried": true,
-   "pass": 7
+   "pass": 10
   },
   {
    "row": "C804",
    "screen": "*",
    "verdict": "PASS",
-   "line": "Sundays it's you and Chris.",
-   "why": "Text changes with who is in.",
+   "line": "\"Tom has you on the till.\" (15:00 group)",
+   "why": "people named inside clock groups that match their rows; no room-text line",
    "cause": null,
    "note": false,
-   "screen_hash": "ecf69a17c34da0ff",
-   "row_hash": "810ef8e803cb09dd",
+   "screen_hash": "008406a21b5180e7",
+   "row_hash": "5358489178bff0a4",
    "carried": true,
-   "pass": 7
+   "pass": 10
   },
   {
    "row": "C889",
-   "screen": "*",
-   "verdict": "PASS",
-   "line": "(1 hour, ...)",
-   "why": "60 min spent.",
+   "screen": "cafe_work_hour.work",
+   "verdict": "FAIL",
+   "line": "button \"Work an hour\" (cafe_work_hour name)",
+   "why": "the label states a duration; the row says no duration either",
    "cause": null,
    "note": true,
-   "screen_hash": "ecf69a17c34da0ff",
-   "row_hash": "1b724e2dcfbf028b",
+   "screen_hash": {
+    "text": "66a5f5a25c0ef79e",
+    "facts": "cdc735b0ce394f10",
+    "facts2": "f4f805a56f6893db",
+    "all": "5084e0ccc55d5ee0"
+   },
+   "row_hash": "def1348d483d0c40",
    "carried": true,
-   "pass": 7
+   "pass": 10
   },
   {
    "row": "C892",
@@ -1651,27 +1659,32 @@
    "row": "C906",
    "screen": "*",
    "verdict": "PASS",
-   "line": "",
-   "why": "Holds on both screens.",
+   "line": "\"Work an hour\", \"Work a shift\"",
+   "why": "no 'till' and no clock time on a label",
    "cause": null,
    "note": true,
-   "screen_hash": "ecf69a17c34da0ff",
-   "row_hash": "ce3b42a8c86da5b8",
+   "screen_hash": "008406a21b5180e7",
+   "row_hash": "71713a7e7ae739e7",
    "carried": true,
-   "pass": 7
+   "pass": 10
   },
   {
    "row": "C910",
-   "screen": "*",
-   "verdict": "PASS",
-   "line": "(1 hour, 4 energy)",
-   "why": "Same form as Go to class (2 hours, 10 energy).",
+   "screen": "cafe_work_hour.work",
+   "verdict": "FAIL",
+   "line": "button \"Work an hour\" (cafe_work_hour name)",
+   "why": "a button says no time; 'an hour' is time",
    "cause": null,
    "note": true,
-   "screen_hash": "ecf69a17c34da0ff",
-   "row_hash": "be1c18ee466455f6",
+   "screen_hash": {
+    "text": "66a5f5a25c0ef79e",
+    "facts": "cdc735b0ce394f10",
+    "facts2": "f4f805a56f6893db",
+    "all": "5084e0ccc55d5ee0"
+   },
+   "row_hash": "d5a109f1ef88419a",
    "carried": true,
-   "pass": 7
+   "pass": 10
   },
   {
    "row": "C913",
@@ -1715,15 +1728,15 @@
   {
    "row": "C920",
    "screen": "*",
-   "verdict": "N/A",
-   "line": "",
-   "why": "No move; work time only.",
+   "verdict": "PASS",
+   "line": "Done to near_cafe, 60 / 240 min",
+   "why": "the spend is the work, not a hop; no cost on a move inside the area",
    "cause": null,
    "note": false,
-   "screen_hash": "ecf69a17c34da0ff",
-   "row_hash": "695dc5d9d0e5e749",
+   "screen_hash": "008406a21b5180e7",
+   "row_hash": "513927dd127fca04",
    "carried": true,
-   "pass": 7
+   "pass": 10
   },
   {
    "row": "C924",
@@ -1778,7 +1791,7 @@
     "all": "5084e0ccc55d5ee0"
    },
    "row_hash": "4e86d143688ba8e5",
-   "carried": false,
+   "carried": true,
    "pass": 9
   },
   {
@@ -1795,7 +1808,7 @@
     "all": "ee058de233e5e74a"
    },
    "row_hash": "4e86d143688ba8e5",
-   "carried": false,
+   "carried": true,
    "pass": 9
   },
   {
@@ -1813,16 +1826,21 @@
   },
   {
    "row": "C929",
-   "screen": "*",
-   "verdict": "PASS",
-   "line": "Work a shift (4 hours, 15 energy)",
-   "why": "Label carries it.",
+   "screen": "cafe_work_hour.work",
+   "verdict": "FAIL",
+   "line": "button \"Work an hour\" (cafe_work_hour name)",
+   "why": "the activity's time rides on its label",
    "cause": null,
    "note": true,
-   "screen_hash": "ecf69a17c34da0ff",
-   "row_hash": "e20b027bad88ca8c",
+   "screen_hash": {
+    "text": "66a5f5a25c0ef79e",
+    "facts": "cdc735b0ce394f10",
+    "facts2": "f4f805a56f6893db",
+    "all": "5084e0ccc55d5ee0"
+   },
+   "row_hash": "18b0ecdf6d7fc901",
    "carried": true,
-   "pass": 7
+   "pass": 10
   },
   {
    "row": "C930",
@@ -1864,7 +1882,7 @@
     "all": "5084e0ccc55d5ee0"
    },
    "row_hash": "1aadffd96e76381c",
-   "carried": false,
+   "carried": true,
    "pass": 9
   },
   {
@@ -1881,7 +1899,7 @@
     "all": "ee058de233e5e74a"
    },
    "row_hash": "1aadffd96e76381c",
-   "carried": false,
+   "carried": true,
    "pass": 9
   },
   {
@@ -1901,48 +1919,55 @@
    "row": "C952",
    "screen": "cafe_work_hour.work",
    "verdict": "PASS",
-   "line": "You made $5.",
-   "why": "$5/4 energy/hours agree with PLAN.md 338-344.",
+   "line": "\"Five, rookie. Not bad.\" ... You made $5.",
+   "why": "$5 an hour (PLAN 8f), effect money +5; start windows in the blocked message match the :56 ends",
    "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "8f8757bd63b19316",
+    "text": "66a5f5a25c0ef79e",
     "facts": "cdc735b0ce394f10",
-    "all": "ec340aabfaa7179f"
+    "facts2": "f4f805a56f6893db",
+    "all": "5084e0ccc55d5ee0"
    },
-   "row_hash": "2f7d1a6bf6a93ca9",
-   "carried": true,
-   "pass": 7
+   "row_hash": "0ded4fca6fc71925",
+   "carried": false,
+   "pass": 11
   },
   {
    "row": "C952",
    "screen": "cafe_work_shift.shift",
    "verdict": "PASS",
-   "line": "You made $22.",
-   "why": "$22 a shift, 15 energy, 4 hours and the start hours (weekdays 7am-4:55pm, Saturday and Sunday 10am-3:55pm) agree with PLAN.md:340-344, the card, and the Done effect; four shifts cover the $75 rent (PLAN.md:241).",
+   "line": "\"Twenty-two, rookie. Good work.\" ... You made $22.",
+   "why": "$22 a shift (PLAN: $5 an hour plus $2 tips), effect money +22; 'Chris has you tomorrow' matches his Sunday row",
    "cause": null,
    "note": false,
    "screen_hash": {
     "text": "ebc4af007b52471c",
     "facts": "06e4e76c920e51bb",
+    "facts2": "f9f482f80b2e4aad",
     "all": "ee058de233e5e74a"
    },
-   "row_hash": "2f7d1a6bf6a93ca9",
+   "row_hash": "0ded4fca6fc71925",
    "carried": false,
-   "pass": 9
+   "pass": 11
   },
   {
    "row": "C953",
-   "screen": "*",
-   "verdict": "PASS",
-   "line": "(4 hours, 15 energy)",
-   "why": "Holds on both screens.",
+   "screen": "cafe_work_hour.work",
+   "verdict": "FAIL",
+   "line": "button \"Work an hour\" (cafe_work_hour name)",
+   "why": "the label carries time, not money",
    "cause": null,
    "note": true,
-   "screen_hash": "ecf69a17c34da0ff",
-   "row_hash": "8d1306a15c51370a",
+   "screen_hash": {
+    "text": "66a5f5a25c0ef79e",
+    "facts": "cdc735b0ce394f10",
+    "facts2": "f4f805a56f6893db",
+    "all": "5084e0ccc55d5ee0"
+   },
+   "row_hash": "826bf82fe26afd13",
    "carried": true,
-   "pass": 7
+   "pass": 10
   },
   {
    "row": "C954",
@@ -1971,7 +1996,7 @@
     "all": "5084e0ccc55d5ee0"
    },
    "row_hash": "13a714429d15f3b2",
-   "carried": false,
+   "carried": true,
    "pass": 9
   },
   {
@@ -1988,7 +2013,7 @@
     "all": "ee058de233e5e74a"
    },
    "row_hash": "13a714429d15f3b2",
-   "carried": false,
+   "carried": true,
    "pass": 9
   },
   {
@@ -2031,7 +2056,7 @@
     "all": "5084e0ccc55d5ee0"
    },
    "row_hash": "e64ce2672d85d2d8",
-   "carried": false,
+   "carried": true,
    "pass": 9
   },
   {
@@ -2048,8 +2073,21 @@
     "all": "ee058de233e5e74a"
    },
    "row_hash": "e64ce2672d85d2d8",
-   "carried": false,
+   "carried": true,
    "pass": 9
+  },
+  {
+   "row": "L170",
+   "screen": "*",
+   "verdict": "N/A",
+   "line": "",
+   "why": "no place on this piece's screens is hidden_until a flag",
+   "cause": null,
+   "note": false,
+   "screen_hash": "008406a21b5180e7",
+   "row_hash": "c3599cd09637a240",
+   "carried": false,
+   "pass": 11
   },
   {
    "row": "L71",
@@ -2067,8 +2105,8 @@
  ],
  "causes": [],
  "pending": [],
- "asked": 18,
- "answered": 18,
+ "asked": 3,
+ "answered": 3,
  "pass_items": [],
  "unowed": []
 }

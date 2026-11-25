@@ -1,0 +1,19 @@
+{
+ "items": [
+  {
+   "row": "C952",
+   "screen": "cafe_work_hour.work",
+   "why": "its rule's text changed"
+  },
+  {
+   "row": "C952",
+   "screen": "cafe_work_shift.shift",
+   "why": "its rule's text changed"
+  },
+  {
+   "row": "L170",
+   "screen": "*",
+   "why": "never judged"
+  }
+ ]
+}

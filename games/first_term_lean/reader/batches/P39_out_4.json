@@ -1,0 +1,389 @@
+{
+ "verdicts": [
+  {
+   "row": "B10",
+   "screen": "walk_nina_dress.moment",
+   "verdict": "PASS",
+   "line": "The fitting room curtain's half open. Nina's in the shop's tightest black dress, turning to check her ass in the mirror.",
+   "why": "walk_nina_dress: Mon-Sat 18:45-18:55, Nina present; her row has her in the fitting room 18:45-19:00",
+   "cause": null
+  },
+  {
+   "row": "B8",
+   "screen": "walk_nina_dress.moment",
+   "verdict": "PASS",
+   "line": "The fitting room curtain's half open. Nina's in the shop's tightest black dress, turning to check her ass in the mirror.",
+   "why": "the dress is Nina's; nothing of hers named",
+   "cause": null
+  },
+  {
+   "row": "C1158",
+   "screen": "walk_nina_dress.moment",
+   "verdict": "PASS",
+   "line": "The fitting room curtain's half open. Nina's in the shop's tightest black dress, turning to check her ass in the mirror.",
+   "why": "no garment of hers is named",
+   "cause": null
+  },
+  {
+   "row": "C1206",
+   "screen": "walk_nina_dress.moment",
+   "verdict": "PASS",
+   "line": "The fitting room curtain's half open. Nina's in the shop's tightest black dress, turning to check her ass in the mirror.",
+   "why": "no garment of hers is named",
+   "cause": null
+  },
+  {
+   "row": "C460",
+   "screen": "walk_nina_dress.moment",
+   "verdict": "PASS",
+   "line": "The fitting room curtain's half open. Nina's in the shop's tightest black dress, turning to check her ass in the mirror.",
+   "why": "walk_nina_dress: Mon-Sat 18:45-18:55, Nina present; her row has her in the fitting room 18:45-19:00",
+   "cause": null
+  },
+  {
+   "row": "C461",
+   "screen": "walk_nina_dress.moment",
+   "verdict": "PASS",
+   "line": "The fitting room curtain's half open. Nina's in the shop's tightest black dress, turning to check her ass in the mirror.",
+   "why": "texture and dialogue that fit the cast entries; no past or fact assumed",
+   "cause": null
+  },
+  {
+   "row": "L106",
+   "screen": "walk_nina_dress.moment",
+   "verdict": "PASS",
+   "line": "The fitting room curtain's half open. Nina's in the shop's tightest black dress, turning to check her ass in the mirror.",
+   "why": "walk_nina_dress: Mon-Sat 18:45-18:55, Nina present; her row has her in the fitting room 18:45-19:00",
+   "cause": null
+  },
+  {
+   "row": "B10",
+   "screen": "walk_nina_dress.suits",
+   "verdict": "PASS",
+   "line": "I know. Your turn next, sweetie.",
+   "why": "walk_nina_dress: Mon-Sat 18:45-18:55, Nina present; her row has her in the fitting room 18:45-19:00; the 5-minute Done from 18:54 ends at 18:59, inside the shop's 7pm close",
+   "cause": null
+  },
+  {
+   "row": "B8",
+   "screen": "walk_nina_dress.suits",
+   "verdict": "PASS",
+   "line": "I know. Your turn next, sweetie.",
+   "why": "no number, and no garment of hers is named",
+   "cause": null
+  },
+  {
+   "row": "C460",
+   "screen": "walk_nina_dress.suits",
+   "verdict": "PASS",
+   "line": "I know. Your turn next, sweetie.",
+   "why": "walk_nina_dress: Mon-Sat 18:45-18:55, Nina present; her row has her in the fitting room 18:45-19:00; the 5-minute Done from 18:54 ends at 18:59, inside the shop's 7pm close",
+   "cause": null
+  },
+  {
+   "row": "C461",
+   "screen": "walk_nina_dress.suits",
+   "verdict": "PASS",
+   "line": "I know. Your turn next, sweetie.",
+   "why": "texture and dialogue that fit the cast entries; no past or fact assumed",
+   "cause": null
+  },
+  {
+   "row": "C927",
+   "screen": "walk_nina_dress.suits",
+   "verdict": "PASS",
+   "line": "\"Done\" (5 min)",
+   "why": "the exit states its minutes",
+   "cause": null
+  },
+  {
+   "row": "C931",
+   "screen": "walk_nina_dress.suits",
+   "verdict": "PASS",
+   "line": "time_of_day 18:45-18:55",
+   "why": "end exclusive; last start 18:54, out at 18:59, before 19:00",
+   "cause": null
+  },
+  {
+   "row": "L106",
+   "screen": "walk_nina_dress.suits",
+   "verdict": "PASS",
+   "line": "I know. Your turn next, sweetie.",
+   "why": "walk_nina_dress: Mon-Sat 18:45-18:55, Nina present; her row has her in the fitting room 18:45-19:00; the 5-minute Done from 18:54 ends at 18:59, inside the shop's 7pm close",
+   "cause": null
+  },
+  {
+   "row": "L167",
+   "screen": "walk_nina_dress.suits",
+   "verdict": "PASS",
+   "line": "walk_nina_dress trigger",
+   "why": "one row, Mon-Sat one window, hidden when shut",
+   "cause": null
+  },
+  {
+   "row": "B10",
+   "screen": "walk_nina_dress.browse",
+   "verdict": "PASS",
+   "line": "Coward. / She says it with a smile, and pulls the curtain.",
+   "why": "walk_nina_dress: Mon-Sat 18:45-18:55, Nina present; her row has her in the fitting room 18:45-19:00",
+   "cause": null
+  },
+  {
+   "row": "B8",
+   "screen": "walk_nina_dress.browse",
+   "verdict": "PASS",
+   "line": "Coward. / She says it with a smile, and pulls the curtain.",
+   "why": "no number, and no garment of hers is named",
+   "cause": null
+  },
+  {
+   "row": "C460",
+   "screen": "walk_nina_dress.browse",
+   "verdict": "PASS",
+   "line": "Coward. / She says it with a smile, and pulls the curtain.",
+   "why": "walk_nina_dress: Mon-Sat 18:45-18:55, Nina present; her row has her in the fitting room 18:45-19:00",
+   "cause": null
+  },
+  {
+   "row": "C461",
+   "screen": "walk_nina_dress.browse",
+   "verdict": "PASS",
+   "line": "Coward. / She says it with a smile, and pulls the curtain.",
+   "why": "texture and dialogue that fit the cast entries; no past or fact assumed",
+   "cause": null
+  },
+  {
+   "row": "C927",
+   "screen": "walk_nina_dress.browse",
+   "verdict": "PASS",
+   "line": "\"Done\" (5 min)",
+   "why": "the exit states its minutes",
+   "cause": null
+  },
+  {
+   "row": "C931",
+   "screen": "walk_nina_dress.browse",
+   "verdict": "PASS",
+   "line": "time_of_day 18:45-18:55",
+   "why": "end exclusive; out by 18:59",
+   "cause": null
+  },
+  {
+   "row": "L106",
+   "screen": "walk_nina_dress.browse",
+   "verdict": "PASS",
+   "line": "Coward. / She says it with a smile, and pulls the curtain.",
+   "why": "walk_nina_dress: Mon-Sat 18:45-18:55, Nina present; her row has her in the fitting room 18:45-19:00",
+   "cause": null
+  },
+  {
+   "row": "L167",
+   "screen": "walk_nina_dress.browse",
+   "verdict": "PASS",
+   "line": "walk_nina_dress trigger",
+   "why": "one row, one window",
+   "cause": null
+  },
+  {
+   "row": "B10",
+   "screen": "walk_park_couple.moment",
+   "verdict": "PASS",
+   "line": "Through the bushes behind the pond: a man and a woman on the grass, her skirt up, her tits out, his jeans round his knees",
+   "why": "walk_park_couple: every day 19:00-20:55, park open 06:00-21:00; strangers, no rows needed",
+   "cause": null
+  },
+  {
+   "row": "B8",
+   "screen": "walk_park_couple.moment",
+   "verdict": "PASS",
+   "line": "Through the bushes behind the pond: a man and a woman on the grass, her skirt up, her tits out, his jeans round his knees",
+   "why": "the skirt is the stranger's; nothing of hers named",
+   "cause": null
+  },
+  {
+   "row": "C1158",
+   "screen": "walk_park_couple.moment",
+   "verdict": "PASS",
+   "line": "Through the bushes behind the pond: a man and a woman on the grass, her skirt up, her tits out, his jeans round his knees",
+   "why": "the garments named are the strangers'",
+   "cause": null
+  },
+  {
+   "row": "C1206",
+   "screen": "walk_park_couple.moment",
+   "verdict": "PASS",
+   "line": "Through the bushes behind the pond: a man and a woman on the grass, her skirt up, her tits out, his jeans round his knees",
+   "why": "no garment of hers named",
+   "cause": null
+  },
+  {
+   "row": "C460",
+   "screen": "walk_park_couple.moment",
+   "verdict": "PASS",
+   "line": "Through the bushes behind the pond: a man and a woman on the grass, her skirt up, her tits out, his jeans round his knees",
+   "why": "walk_park_couple: every day 19:00-20:55, park open 06:00-21:00; strangers, no rows needed",
+   "cause": null
+  },
+  {
+   "row": "C461",
+   "screen": "walk_park_couple.moment",
+   "verdict": "PASS",
+   "line": "Through the bushes behind the pond: a man and a woman on the grass, her skirt up, her tits out, his jeans round his knees",
+   "why": "texture and dialogue that fit the cast entries; no past or fact assumed",
+   "cause": null
+  },
+  {
+   "row": "L106",
+   "screen": "walk_park_couple.moment",
+   "verdict": "PASS",
+   "line": "Through the bushes behind the pond: a man and a woman on the grass, her skirt up, her tits out, his jeans round his knees",
+   "why": "walk_park_couple: every day 19:00-20:55, park open 06:00-21:00; strangers, no rows needed",
+   "cause": null
+  },
+  {
+   "row": "B10",
+   "screen": "walk_park_couple.watch",
+   "verdict": "PASS",
+   "line": "Your thighs clench. You know which gap in the bushes now.",
+   "why": "walk_park_couple: every day 19:00-20:55, park open 06:00-21:00; strangers, no rows needed; 'now' is true on every visit",
+   "cause": null
+  },
+  {
+   "row": "B8",
+   "screen": "walk_park_couple.watch",
+   "verdict": "PASS",
+   "line": "Your thighs clench. You know which gap in the bushes now.",
+   "why": "no number, and no garment of hers is named",
+   "cause": null
+  },
+  {
+   "row": "C1158",
+   "screen": "walk_park_couple.watch",
+   "verdict": "PASS",
+   "line": "Your thighs clench. You know which gap in the bushes now.",
+   "why": "no garment of hers named",
+   "cause": null
+  },
+  {
+   "row": "C1206",
+   "screen": "walk_park_couple.watch",
+   "verdict": "PASS",
+   "line": "Your thighs clench. You know which gap in the bushes now.",
+   "why": "no garment of hers named",
+   "cause": null
+  },
+  {
+   "row": "C460",
+   "screen": "walk_park_couple.watch",
+   "verdict": "PASS",
+   "line": "Your thighs clench. You know which gap in the bushes now.",
+   "why": "walk_park_couple: every day 19:00-20:55, park open 06:00-21:00; strangers, no rows needed; 'now' is true on every visit",
+   "cause": null
+  },
+  {
+   "row": "C461",
+   "screen": "walk_park_couple.watch",
+   "verdict": "PASS",
+   "line": "Your thighs clench. You know which gap in the bushes now.",
+   "why": "texture and dialogue that fit the cast entries; no past or fact assumed",
+   "cause": null
+  },
+  {
+   "row": "C927",
+   "screen": "walk_park_couple.watch",
+   "verdict": "PASS",
+   "line": "\"Done\" (5 min)",
+   "why": "the exit states its minutes",
+   "cause": null
+  },
+  {
+   "row": "C931",
+   "screen": "walk_park_couple.watch",
+   "verdict": "PASS",
+   "line": "time_of_day 19:00-20:55",
+   "why": "end exclusive; last start 20:54, out at 20:59, before the 9pm lock",
+   "cause": null
+  },
+  {
+   "row": "L106",
+   "screen": "walk_park_couple.watch",
+   "verdict": "PASS",
+   "line": "Your thighs clench. You know which gap in the bushes now.",
+   "why": "walk_park_couple: every day 19:00-20:55, park open 06:00-21:00; strangers, no rows needed; 'now' is true on every visit",
+   "cause": null
+  },
+  {
+   "row": "L167",
+   "screen": "walk_park_couple.watch",
+   "verdict": "PASS",
+   "line": "walk_park_couple trigger",
+   "why": "one row, one window every day",
+   "cause": null
+  },
+  {
+   "row": "B10",
+   "screen": "walk_park_couple.away",
+   "verdict": "PASS",
+   "line": "You back onto the path before a twig can snap. You know that gap's there now.",
+   "why": "walk_park_couple: every day 19:00-20:55, park open 06:00-21:00; strangers, no rows needed",
+   "cause": null
+  },
+  {
+   "row": "B8",
+   "screen": "walk_park_couple.away",
+   "verdict": "PASS",
+   "line": "You back onto the path before a twig can snap. You know that gap's there now.",
+   "why": "no number, and no garment of hers is named",
+   "cause": null
+  },
+  {
+   "row": "C460",
+   "screen": "walk_park_couple.away",
+   "verdict": "PASS",
+   "line": "You back onto the path before a twig can snap. You know that gap's there now.",
+   "why": "walk_park_couple: every day 19:00-20:55, park open 06:00-21:00; strangers, no rows needed",
+   "cause": null
+  },
+  {
+   "row": "C461",
+   "screen": "walk_park_couple.away",
+   "verdict": "PASS",
+   "line": "You back onto the path before a twig can snap. You know that gap's there now.",
+   "why": "texture and dialogue that fit the cast entries; no past or fact assumed",
+   "cause": null
+  },
+  {
+   "row": "C927",
+   "screen": "walk_park_couple.away",
+   "verdict": "PASS",
+   "line": "\"Done\" (5 min)",
+   "why": "the exit states its minutes",
+   "cause": null
+  },
+  {
+   "row": "C931",
+   "screen": "walk_park_couple.away",
+   "verdict": "PASS",
+   "line": "time_of_day 19:00-20:55",
+   "why": "end exclusive; out by 20:59",
+   "cause": null
+  },
+  {
+   "row": "L106",
+   "screen": "walk_park_couple.away",
+   "verdict": "PASS",
+   "line": "You back onto the path before a twig can snap. You know that gap's there now.",
+   "why": "walk_park_couple: every day 19:00-20:55, park open 06:00-21:00; strangers, no rows needed",
+   "cause": null
+  },
+  {
+   "row": "L167",
+   "screen": "walk_park_couple.away",
+   "verdict": "PASS",
+   "line": "walk_park_couple trigger",
+   "why": "one row, one window",
+   "cause": null
+  }
+ ],
+ "causes": []
+}

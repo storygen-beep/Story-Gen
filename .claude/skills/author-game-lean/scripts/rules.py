@@ -178,6 +178,19 @@ def seen(game):
             if any(ch.get("targetType") == "location" for ch in choices):
                 seen_here.add("a place is entered")
             out[key] = seen_here
+    # The Quests page as CoT's Hints page: each hint entry and walkthrough is a screen, and it is a goal card
+    # (pages.py; LO, typed in main-lean 2026-11-25: "Go ahead").
+    import pages
+    for key, (_, entry) in pages.entries(game).items():
+        words = pages.text(entry)
+        here = {"a goal card is shown"}
+        if MONEY.search(words):
+            here.add("a price or pay is shown")
+        if TIME.search(words):
+            here.add("the clock moves")
+        out[key] = here
+    for key in pages.people_entries(game):
+        out[key] = {"a person is on screen"}  # the People dialog: how a person is named before and after
     return out
 
 

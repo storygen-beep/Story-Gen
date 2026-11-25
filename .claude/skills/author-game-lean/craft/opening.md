@@ -24,6 +24,7 @@ On a card with a `Does:` block (every card from 2026-11-24 on), the rows that ap
 | C1604 | the cards showing at the hand-over carry goals | P13 left the goal card to P12 | the hand-over | reader |
 | C1609 | the last screens may carry plain tutorial lines | same | the hand-over | reader |
 | C1621 | the last screen ends on a hook: money problem, objective, mystery, person, choice | P13 ended on "go to breakfast" | the hand-over | reader |
+| L171 | whatever the opening says is happening happens on day one, or a hint points at it | P13 promised "Today you start college" and no first-day scene existed; the old first_term's dean's-office first day was dropped | the opening | reader |
 | C1631 | the hand-over lands where something is live at that minute | P13 landed in an empty kitchen | the hand-over | reader + sheet |
 
 ## The shape
@@ -35,8 +36,9 @@ On a card with a `Does:` block (every card from 2026-11-24 on), the rows that ap
 3. **The start choice, asked by a person.** A person on screen asks about her past, and her answer is a memory of who she already is, not a wish (`craft/want.md` rule 2, C44; CoT's "Think back..."). The person asks because of something happening right then (the bill just said, the first day, a worry), never out of nowhere; a question about her past with no reason in the scene reads as random. Each answer costs or earns something with that person: a reaction line, and a flag only on the one that matters later.
 4. **The build-up.** The room works against her (a lock, thin walls, one towel), then the interruption.
 5. **The temptation, at her stage.** It happens to her. The screen stays on her body and his reaction: a named part of her, his eyes on it, his leak, and (a man she lives with) his cover. His spoken line can be about anything; the screen around it is about her body. There's a price or a "not yet" (the towel slipping). She reacts on her body (her face, her breath, her nipples), never in an italic thought (`craft/voice.md`). No button is a final no; staying a beat is allowed.
-6. **Objective and card.** The hold becomes the first quest card with goal steps, with plain tutorial lines under it.
+6. **Objective and card.** The hold becomes the first storyline on the Quests page (a `[[story_hints]]` entry, `craft/want.md` rule 4), with plain tutorial lines under it; the last screen says where to find it ("If you want some hints on what to do next, try the Quests button.").
 7. **The hand-over, on a hook.** The last click lands where a person is doing something at that minute. The screen ends on money, the objective, a mystery, a person and a choice.
+8. **The opening delivers what it promises** (L171). Whatever it says is happening ("Today you start college") happens on day one as a scene, or a hint step points at it with its place and time. A promise with nothing behind it is the failure: P13 promised college and no first-day scene existed. The old first_term had one, its dean's-office first day (`games/first_term/toml_phases/5_scenes.toml:35251`). *LO's choice* (LO, typed in main-lean 2026-11-25: "Go ahead").
 
 ## Worked example
 

@@ -1,0 +1,75 @@
+{
+ "verdicts": [
+  {
+   "row": "L170",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "The man next door sits on his porch. Walk down your street on a Sunday, 9am to noon or 5 to 8pm.",
+   "why": "hood_street is the hub The House Next Door opens off; The House Next Door is hidden_until met_vance; met_vance is the when of The Man Next Door's end step, and the step before it matches Vance's Sunday rows 9-12 and 17-20"
+  },
+  {
+   "row": "places#10",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "The man next door sits on his porch. Walk down your street on a Sunday, 9am to noon or 5 to 8pm.",
+   "why": "same as L170: the hidden place off hood_street is pointed at"
+  },
+  {
+   "row": "C2175",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "people_page = \"cot\"; every [[npcs]] carries stranger_name and people_tab",
+   "why": "all 24 people have both (npc_laura: 'woman with tired eyes' / special)"
+  },
+  {
+   "row": "L168",
+   "screen": "*",
+   "verdict": "N/A",
+   "line": "",
+   "why": "only Mom (and Mark, Ryan) are met on these screens, and the opening meets them"
+  },
+  {
+   "row": "L169",
+   "screen": "*",
+   "verdict": "N/A",
+   "line": "",
+   "why": "no missable first meeting on these screens"
+  },
+  {
+   "row": "people#11",
+   "screen": "*",
+   "verdict": "N/A",
+   "line": "",
+   "why": "same as L168: the opening meets everyone here"
+  },
+  {
+   "row": "people#12",
+   "screen": "*",
+   "verdict": "N/A",
+   "line": "",
+   "why": "same as L169"
+  },
+  {
+   "row": "L171",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "Monday morning. Today you start college.",
+   "why": "the dean's first-day scene (dean_first) and Monday's psychology class exist on day one, and Classes' first hint step points at the dean with place and hours"
+  },
+  {
+   "row": "opening#8",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "\"And go and see the dean first. ... His office is on the faculty corridor.\"",
+   "why": "what the opening says happens today (college, the dean) has a day-one scene and a hint step"
+  },
+  {
+   "row": "opening#6",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "If you want some hints on what to do next, try the Quests button.",
+   "why": "the hold is the Paying Your Way story_hints entry (when goal1_shown); sums carries the plain tutorial lines; both last screens point at the Quests button"
+  }
+ ],
+ "causes": []
+}

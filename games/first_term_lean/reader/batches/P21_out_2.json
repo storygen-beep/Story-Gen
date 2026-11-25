@@ -1,0 +1,215 @@
+{
+ "verdicts": [
+  {
+   "row": "C1265",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "pictures: people/tom_counter_t0 (hire), look/chris_wand_t3 (first shift)",
+   "why": "a meeting and a charged look, not a chore, a notice or a room menu"
+  },
+  {
+   "row": "C596",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "cafe_hire.ask: picture after the meeting lines",
+   "why": "a first meeting is a new moment; sign/both/no carry no picture"
+  },
+  {
+   "row": "C795",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "\"Your first one's a weekday, when Chris is on to show you the machine, rookie.\"",
+   "why": "dialogue in a scene, not room text"
+  },
+  {
+   "row": "C804",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "cafe_hire, cafe_first_shift",
+   "why": "no room-text line per person"
+  },
+  {
+   "row": "C1265",
+   "screen": "cafe_first_shift.start",
+   "verdict": "PASS",
+   "line": "\"Reaching past you for a jug, his arm drags across your chest.\" then the picture",
+   "why": "the picture is on a charged new moment"
+  },
+  {
+   "row": "C596",
+   "screen": "cafe_first_shift.start",
+   "verdict": "PASS",
+   "line": "look/chris_wand_t3",
+   "why": "a new moment (Chris's brush), not a repeat talk screen"
+  },
+  {
+   "row": "C889",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "\"Ask about the Help Wanted sign\", \"Work your first shift\", \"Work the shift\", \"Done\"",
+   "why": "no time, energy or clock time on a label; the hours sit in the greyed row's cooldown, as clock rule 4 allows; no hop cost"
+  },
+  {
+   "row": "C906",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "\"Ask about the Help Wanted sign\", \"Work your first shift\", \"Work the shift\", \"Done\"",
+   "why": "no time, energy or clock time on a label; the hours sit in the greyed row's cooldown, as clock rule 4 allows; no hop cost"
+  },
+  {
+   "row": "C910",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "\"Ask about the Help Wanted sign\", \"Work your first shift\", \"Work the shift\", \"Done\"",
+   "why": "no time, energy or clock time on a label; the hours sit in the greyed row's cooldown, as clock rule 4 allows; no hop cost"
+  },
+  {
+   "row": "C920",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "\"Ask about the Help Wanted sign\", \"Work your first shift\", \"Work the shift\", \"Done\"",
+   "why": "no time, energy or clock time on a label; the hours sit in the greyed row's cooldown, as clock rule 4 allows; no hop cost"
+  },
+  {
+   "row": "C929",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "\"Ask about the Help Wanted sign\", \"Work your first shift\", \"Work the shift\", \"Done\"",
+   "why": "no time, energy or clock time on a label; the hours sit in the greyed row's cooldown, as clock rule 4 allows; no hop cost"
+  },
+  {
+   "row": "C953",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "\"Ask about the Help Wanted sign\", \"Work your first shift\", \"Work the shift\", \"Done\"",
+   "why": "no time, energy or clock time on a label; the hours sit in the greyed row's cooldown, as clock rule 4 allows; no hop cost"
+  },
+  {
+   "row": "C596",
+   "screen": "cafe_hire.both",
+   "verdict": "PASS",
+   "line": "\"Come in when you want. An hour or a whole shift...\"",
+   "why": "the hire's second screen; no picture, under a picture on the meeting"
+  },
+  {
+   "row": "C795",
+   "screen": "cafe_hire.both",
+   "verdict": "PASS",
+   "line": "\"I'm Tom. I run the place.\"",
+   "why": "dialogue, not room text"
+  },
+  {
+   "row": "C804",
+   "screen": "cafe_hire.both",
+   "verdict": "PASS",
+   "line": "\"when Chris is on to show you the machine\"",
+   "why": "no room-text line per person"
+  },
+  {
+   "row": "C889",
+   "screen": "cafe_hire.both",
+   "verdict": "PASS",
+   "line": "choice \"Done\" (0 min)",
+   "why": "no time, energy, clock time or money on the label; no hop cost"
+  },
+  {
+   "row": "C906",
+   "screen": "cafe_hire.both",
+   "verdict": "PASS",
+   "line": "choice \"Done\" (0 min)",
+   "why": "no time, energy, clock time or money on the label; no hop cost"
+  },
+  {
+   "row": "C910",
+   "screen": "cafe_hire.both",
+   "verdict": "PASS",
+   "line": "choice \"Done\" (0 min)",
+   "why": "no time, energy, clock time or money on the label; no hop cost"
+  },
+  {
+   "row": "C920",
+   "screen": "cafe_hire.both",
+   "verdict": "PASS",
+   "line": "choice \"Done\" (0 min)",
+   "why": "no time, energy, clock time or money on the label; no hop cost"
+  },
+  {
+   "row": "C929",
+   "screen": "cafe_hire.both",
+   "verdict": "PASS",
+   "line": "choice \"Done\" (0 min)",
+   "why": "no time, energy, clock time or money on the label; no hop cost"
+  },
+  {
+   "row": "C953",
+   "screen": "cafe_hire.both",
+   "verdict": "PASS",
+   "line": "choice \"Done\" (0 min)",
+   "why": "no time, energy, clock time or money on the label; no hop cost"
+  },
+  {
+   "row": "C596",
+   "screen": "cafe_hire.sign",
+   "verdict": "PASS",
+   "line": "\"Come in when you want. An hour or a whole shift...\"",
+   "why": "the hire's second screen; no picture, under a picture on the meeting"
+  },
+  {
+   "row": "C795",
+   "screen": "cafe_hire.sign",
+   "verdict": "PASS",
+   "line": "\"I'm Tom. I run the place.\"",
+   "why": "dialogue, not room text"
+  },
+  {
+   "row": "C804",
+   "screen": "cafe_hire.sign",
+   "verdict": "PASS",
+   "line": "\"when Chris is on to show you the machine\"",
+   "why": "no room-text line per person"
+  },
+  {
+   "row": "C889",
+   "screen": "cafe_hire.sign",
+   "verdict": "PASS",
+   "line": "choice \"Done\" (0 min)",
+   "why": "no time, energy, clock time or money on the label; no hop cost"
+  },
+  {
+   "row": "C906",
+   "screen": "cafe_hire.sign",
+   "verdict": "PASS",
+   "line": "choice \"Done\" (0 min)",
+   "why": "no time, energy, clock time or money on the label; no hop cost"
+  },
+  {
+   "row": "C910",
+   "screen": "cafe_hire.sign",
+   "verdict": "PASS",
+   "line": "choice \"Done\" (0 min)",
+   "why": "no time, energy, clock time or money on the label; no hop cost"
+  },
+  {
+   "row": "C920",
+   "screen": "cafe_hire.sign",
+   "verdict": "PASS",
+   "line": "choice \"Done\" (0 min)",
+   "why": "no time, energy, clock time or money on the label; no hop cost"
+  },
+  {
+   "row": "C929",
+   "screen": "cafe_hire.sign",
+   "verdict": "PASS",
+   "line": "choice \"Done\" (0 min)",
+   "why": "no time, energy, clock time or money on the label; no hop cost"
+  },
+  {
+   "row": "C953",
+   "screen": "cafe_hire.sign",
+   "verdict": "PASS",
+   "line": "choice \"Done\" (0 min)",
+   "why": "no time, energy, clock time or money on the label; no hop cost"
+  }
+ ],
+ "causes": []
+}

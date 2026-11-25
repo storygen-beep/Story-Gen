@@ -1,0 +1,29 @@
+{
+ "items": [
+  {
+   "row": "C596",
+   "screen": "*",
+   "why": "still to ask: its rule's text changed"
+  },
+  {
+   "row": "C596",
+   "screen": "opening.room_spoke",
+   "why": "still to ask: its rule's text changed"
+  },
+  {
+   "row": "C596",
+   "screen": "opening.sums",
+   "why": "still to ask: its rule's text changed"
+  },
+  {
+   "row": "C795",
+   "screen": "*",
+   "why": "still to ask: its rule's text changed"
+  },
+  {
+   "row": "C804",
+   "screen": "*",
+   "why": "still to ask: its rule's text changed"
+  }
+ ]
+}

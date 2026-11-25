@@ -1,6 +1,6 @@
 {
  "piece": "P16",
- "pass": 2,
+ "pass": 4,
  "screens": {
   "english_first.sheet": {
    "text": "7468e6ce2c180231",
@@ -47,18 +47,18 @@
   "C165": "59fe434fa706bff6",
   "C166": "d9199efed36f9625",
   "C1279": "534032f000706830",
-  "C889": "1b724e2dcfbf028b",
-  "C906": "ce3b42a8c86da5b8",
+  "C889": "def1348d483d0c40",
+  "C906": "71713a7e7ae739e7",
   "C926": "177d1e1776fac74b",
   "C900": "6372efb027eb2034",
   "C902": "df5ed7a36dbc74e4",
   "C903": "4f83b0b5eb45f71b",
   "C892": "5c890033f6ac38b8",
-  "C910": "be1c18ee466455f6",
-  "C929": "e20b027bad88ca8c",
+  "C910": "d5a109f1ef88419a",
+  "C929": "18b0ecdf6d7fc901",
   "C897": "265ece64add83676",
   "C924": "791cd173e23fb130",
-  "C920": "695dc5d9d0e5e749",
+  "C920": "513927dd127fca04",
   "C913": "c750f9b6ab4ace14",
   "C930": "beb57cd46fe906bf",
   "L167": "e64ce2672d85d2d8",
@@ -80,7 +80,7 @@
   "C1267": "f0db81b801577bf2",
   "C1249": "a843f9b57e43a020",
   "C1250": "fde578d75b0d3620",
-  "C1265": "447179d04e01ff5d",
+  "C1265": "64b72c778e96e443",
   "C1234": "1b2a2d5f05b10331",
   "L121": "45842b25d0708a15",
   "L125": "1fca3bfe1d0c2419",
@@ -110,20 +110,23 @@
   "C639": "be0ad7093b24bc46",
   "C640": "728d95d9964ccf25",
   "C644": "f5e1d79f3251dbab",
-  "C596": "6d9bba989a2b9666",
+  "C596": "e5f7e6cf2d01613d",
   "C448": "b86596f1a02766de",
+  "L168": "444c44970dc284f2",
+  "L169": "59defccfc63b0454",
   "C1340": "b76a6583ae88c60f",
   "C769": "f6b6f78a8f2e5ed7",
   "C794": "bad76e5963432385",
-  "C795": "6c9eb17d99266791",
-  "C804": "810ef8e803cb09dd",
+  "C795": "34139e6a6914e171",
+  "C804": "5358489178bff0a4",
   "L106": "13a714429d15f3b2",
   "C776": "4141d9e5e24362c3",
   "C777": "b56360a1040688cf",
   "C773": "599aac6293908bc4",
   "C758": "e158aaf055cb61d6",
-  "C953": "8d1306a15c51370a",
+  "C953": "826bf82fe26afd13",
   "C762": "40e85f1ae92f1e71",
+  "L170": "c3599cd09637a240",
   "C770": "ff9aa31c11e5d50f",
   "C771": "563e3d25c3219dd0",
   "C442": "59b8d8d24f0c7c38",
@@ -164,7 +167,7 @@
     "all": "9198ec7fe6537ce9"
    },
    "row_hash": "c1c0e2ac2588a579",
-   "carried": false,
+   "carried": true,
    "pass": 2
   },
   {
@@ -182,7 +185,7 @@
     "all": "6e60595cb303943c"
    },
    "row_hash": "c1c0e2ac2588a579",
-   "carried": false,
+   "carried": true,
    "pass": 2
   },
   {
@@ -200,7 +203,7 @@
     "all": "7e9cacfe01dd8242"
    },
    "row_hash": "c1c0e2ac2588a579",
-   "carried": false,
+   "carried": true,
    "pass": 2
   },
   {
@@ -301,7 +304,7 @@
     "all": "6e60595cb303943c"
    },
    "row_hash": "ced37cb0de6e7202",
-   "carried": false,
+   "carried": true,
    "pass": 2
   },
   {
@@ -319,7 +322,7 @@
     "all": "7e9cacfe01dd8242"
    },
    "row_hash": "ced37cb0de6e7202",
-   "carried": false,
+   "carried": true,
    "pass": 2
   },
   {
@@ -389,7 +392,7 @@
     "all": "9198ec7fe6537ce9"
    },
    "row_hash": "80d415cf08e0ebfe",
-   "carried": false,
+   "carried": true,
    "pass": 2
   },
   {
@@ -407,7 +410,7 @@
     "all": "6e60595cb303943c"
    },
    "row_hash": "80d415cf08e0ebfe",
-   "carried": false,
+   "carried": true,
    "pass": 2
   },
   {
@@ -425,7 +428,7 @@
     "all": "7e9cacfe01dd8242"
    },
    "row_hash": "80d415cf08e0ebfe",
-   "carried": false,
+   "carried": true,
    "pass": 2
   },
   {
@@ -714,19 +717,19 @@
    "row": "C1265",
    "screen": "english_first.class",
    "verdict": "PASS",
-   "line": "",
-   "why": "Not a chore, door or menu.",
+   "line": "picture people/walsh_front_t0 after \"For the rest of the class she takes essays apart...\"",
+   "why": "a first class and a first meeting, not a chore, a notice or a room menu",
    "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "82add8a74b1db237",
+    "text": "785ff5c8924349a1",
     "facts": "8ac4cd42dab2d1e7",
     "facts2": "c9f77f5d87e1e45d",
-    "all": "0da3a9d0462b6031"
+    "all": "6e60595cb303943c"
    },
-   "row_hash": "447179d04e01ff5d",
+   "row_hash": "64b72c778e96e443",
    "carried": true,
-   "pass": 1
+   "pass": 3
   },
   {
    "row": "C1267",
@@ -1110,7 +1113,7 @@
     "all": "9198ec7fe6537ce9"
    },
    "row_hash": "67e48e60d5053a2e",
-   "carried": false,
+   "carried": true,
    "pass": 2
   },
   {
@@ -1128,7 +1131,7 @@
     "all": "6e60595cb303943c"
    },
    "row_hash": "67e48e60d5053a2e",
-   "carried": false,
+   "carried": true,
    "pass": 2
   },
   {
@@ -1146,7 +1149,7 @@
     "all": "7e9cacfe01dd8242"
    },
    "row_hash": "67e48e60d5053a2e",
-   "carried": false,
+   "carried": true,
    "pass": 2
   },
   {
@@ -1177,7 +1180,7 @@
     "all": "9198ec7fe6537ce9"
    },
    "row_hash": "310706ee076318f2",
-   "carried": false,
+   "carried": true,
    "pass": 2
   },
   {
@@ -1195,7 +1198,7 @@
     "all": "6e60595cb303943c"
    },
    "row_hash": "310706ee076318f2",
-   "carried": false,
+   "carried": true,
    "pass": 2
   },
   {
@@ -1213,7 +1216,7 @@
     "all": "7e9cacfe01dd8242"
    },
    "row_hash": "310706ee076318f2",
-   "carried": false,
+   "carried": true,
    "pass": 2
   },
   {
@@ -1262,7 +1265,7 @@
     "all": "6e60595cb303943c"
    },
    "row_hash": "370371a278b9f182",
-   "carried": false,
+   "carried": true,
    "pass": 2
   },
   {
@@ -1280,21 +1283,21 @@
     "all": "7e9cacfe01dd8242"
    },
    "row_hash": "370371a278b9f182",
-   "carried": false,
+   "carried": true,
    "pass": 2
   },
   {
    "row": "C596",
    "screen": "*",
-   "verdict": "N/A",
-   "line": "",
-   "why": "No talk screen or person menu; this is a one-time meeting.",
+   "verdict": "PASS",
+   "line": "meeting screen, picture in it",
+   "why": "a first meeting is a new moment, so its picture is allowed; no face-opened menu is built here, and no talk screen carries a picture",
    "cause": null,
    "note": true,
-   "screen_hash": "408ba4bf821747d1",
-   "row_hash": "6d9bba989a2b9666",
+   "screen_hash": "35cd6e22511d534a",
+   "row_hash": "e5f7e6cf2d01613d",
    "carried": true,
-   "pass": 1
+   "pass": 3
   },
   {
    "row": "C601",
@@ -1586,34 +1589,34 @@
    "row": "C795",
    "screen": "*",
    "verdict": "PASS",
-   "line": "",
-   "why": "No re-entry text added.",
+   "line": "no room text in this piece's screens",
+   "why": "its screens are scenes, not a place's room text; no line per person is added to any room",
    "cause": null,
    "note": true,
-   "screen_hash": "408ba4bf821747d1",
-   "row_hash": "6c9eb17d99266791",
+   "screen_hash": "35cd6e22511d534a",
+   "row_hash": "34139e6a6914e171",
    "carried": true,
-   "pass": 1
+   "pass": 3
   },
   {
    "row": "C804",
    "screen": "*",
    "verdict": "PASS",
-   "line": "",
-   "why": "The lecture hall scene is about who is there (Walsh).",
+   "line": "no room text in this piece's screens",
+   "why": "its screens are scenes, not a place's room text; no line per person is added to any room",
    "cause": null,
    "note": false,
-   "screen_hash": "408ba4bf821747d1",
-   "row_hash": "810ef8e803cb09dd",
+   "screen_hash": "35cd6e22511d534a",
+   "row_hash": "5358489178bff0a4",
    "carried": true,
-   "pass": 1
+   "pass": 3
   },
   {
    "row": "C889",
    "screen": "english_first.after",
-   "verdict": "FAIL",
-   "line": "Done",
-   "why": "Spends 120 minutes and the label states no duration (note).",
+   "verdict": "PASS",
+   "line": "choice \"Done\" (120 min, back to the lecture hall)",
+   "why": "the label carries no time, energy, clock time or money; the 120 minutes are the class, not a hop",
    "cause": null,
    "note": true,
    "screen_hash": {
@@ -1622,9 +1625,9 @@
     "facts2": "779660275a9e2dcb",
     "all": "9198ec7fe6537ce9"
    },
-   "row_hash": "1b724e2dcfbf028b",
-   "carried": false,
-   "pass": 2
+   "row_hash": "def1348d483d0c40",
+   "carried": true,
+   "pass": 3
   },
   {
    "row": "C892",
@@ -1720,26 +1723,8 @@
    "row": "C906",
    "screen": "english_first.after",
    "verdict": "PASS",
-   "line": "",
-   "why": "No 'till'.",
-   "cause": null,
-   "note": true,
-   "screen_hash": {
-    "text": "60e03d99ce0e8328",
-    "facts": "5f14d357c41d70d7",
-    "facts2": "779660275a9e2dcb",
-    "all": "79dba80a814bf471"
-   },
-   "row_hash": "ce3b42a8c86da5b8",
-   "carried": true,
-   "pass": 1
-  },
-  {
-   "row": "C910",
-   "screen": "english_first.after",
-   "verdict": "FAIL",
-   "line": "Done",
-   "why": "A 120-minute spend with no time on the button (note).",
+   "line": "choice \"Done\" (120 min, back to the lecture hall)",
+   "why": "the label carries no time, energy, clock time or money; the 120 minutes are the class, not a hop",
    "cause": null,
    "note": true,
    "screen_hash": {
@@ -1748,9 +1733,27 @@
     "facts2": "779660275a9e2dcb",
     "all": "9198ec7fe6537ce9"
    },
-   "row_hash": "be1c18ee466455f6",
-   "carried": false,
-   "pass": 2
+   "row_hash": "71713a7e7ae739e7",
+   "carried": true,
+   "pass": 3
+  },
+  {
+   "row": "C910",
+   "screen": "english_first.after",
+   "verdict": "PASS",
+   "line": "choice \"Done\" (120 min, back to the lecture hall)",
+   "why": "the label carries no time, energy, clock time or money; the 120 minutes are the class, not a hop",
+   "cause": null,
+   "note": true,
+   "screen_hash": {
+    "text": "8f12677d6fe5def7",
+    "facts": "5f14d357c41d70d7",
+    "facts2": "779660275a9e2dcb",
+    "all": "9198ec7fe6537ce9"
+   },
+   "row_hash": "d5a109f1ef88419a",
+   "carried": true,
+   "pass": 3
   },
   {
    "row": "C913",
@@ -1810,19 +1813,19 @@
    "row": "C920",
    "screen": "english_first.after",
    "verdict": "PASS",
-   "line": "",
-   "why": "Done returns to the same room; the 125 min is the class, not a move.",
+   "line": "choice \"Done\" (120 min, back to the lecture hall)",
+   "why": "the label carries no time, energy, clock time or money; the 120 minutes are the class, not a hop",
    "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "60e03d99ce0e8328",
+    "text": "8f12677d6fe5def7",
     "facts": "5f14d357c41d70d7",
     "facts2": "779660275a9e2dcb",
-    "all": "79dba80a814bf471"
+    "all": "9198ec7fe6537ce9"
    },
-   "row_hash": "695dc5d9d0e5e749",
+   "row_hash": "513927dd127fca04",
    "carried": true,
-   "pass": 1
+   "pass": 3
   },
   {
    "row": "C924",
@@ -1875,7 +1878,7 @@
     "all": "9198ec7fe6537ce9"
    },
    "row_hash": "4e86d143688ba8e5",
-   "carried": false,
+   "carried": true,
    "pass": 2
   },
   {
@@ -1899,9 +1902,9 @@
   {
    "row": "C929",
    "screen": "english_first.after",
-   "verdict": "FAIL",
-   "line": "Done",
-   "why": "An activity's time is tagged nowhere and this label doesn't carry its 120 minutes (note).",
+   "verdict": "PASS",
+   "line": "choice \"Done\" (120 min, back to the lecture hall)",
+   "why": "the label carries no time, energy, clock time or money; the 120 minutes are the class, not a hop",
    "cause": null,
    "note": true,
    "screen_hash": {
@@ -1910,9 +1913,9 @@
     "facts2": "779660275a9e2dcb",
     "all": "9198ec7fe6537ce9"
    },
-   "row_hash": "e20b027bad88ca8c",
-   "carried": false,
-   "pass": 2
+   "row_hash": "18b0ecdf6d7fc901",
+   "carried": true,
+   "pass": 3
   },
   {
    "row": "C930",
@@ -1947,15 +1950,15 @@
     "all": "9198ec7fe6537ce9"
    },
    "row_hash": "1aadffd96e76381c",
-   "carried": false,
+   "carried": true,
    "pass": 2
   },
   {
    "row": "C953",
    "screen": "english_first.after",
-   "verdict": "FAIL",
-   "line": "Done",
-   "why": "The label carries no cost before the click: 120 minutes unshown (note).",
+   "verdict": "PASS",
+   "line": "choice \"Done\" (120 min, back to the lecture hall)",
+   "why": "the label carries no time, energy, clock time or money; the 120 minutes are the class, not a hop",
    "cause": null,
    "note": true,
    "screen_hash": {
@@ -1964,9 +1967,9 @@
     "facts2": "779660275a9e2dcb",
     "all": "9198ec7fe6537ce9"
    },
-   "row_hash": "8d1306a15c51370a",
-   "carried": false,
-   "pass": 2
+   "row_hash": "826bf82fe26afd13",
+   "carried": true,
+   "pass": 3
   },
   {
    "row": "L106",
@@ -1996,7 +1999,7 @@
     "all": "9198ec7fe6537ce9"
    },
    "row_hash": "13a714429d15f3b2",
-   "carried": false,
+   "carried": true,
    "pass": 2
   },
   {
@@ -2014,7 +2017,7 @@
     "all": "6e60595cb303943c"
    },
    "row_hash": "13a714429d15f3b2",
-   "carried": false,
+   "carried": true,
    "pass": 2
   },
   {
@@ -2032,7 +2035,7 @@
     "all": "7e9cacfe01dd8242"
    },
    "row_hash": "13a714429d15f3b2",
-   "carried": false,
+   "carried": true,
    "pass": 2
   },
   {
@@ -2122,14 +2125,53 @@
     "all": "9198ec7fe6537ce9"
    },
    "row_hash": "e64ce2672d85d2d8",
-   "carried": false,
+   "carried": true,
    "pass": 2
+  },
+  {
+   "row": "L168",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "Your classes are in the Lecture Hall: psychology Monday and Wednesday at 9am, statistics at 11am, English Tuesday and Thursday at 9am.",
+   "why": "English Tue/Thu 9am in the Lecture Hall, Walsh's row Tue/Thu 9-11; met_walsh is a when on the end step",
+   "cause": null,
+   "note": false,
+   "screen_hash": "35cd6e22511d534a",
+   "row_hash": "444c44970dc284f2",
+   "carried": false,
+   "pass": 4
+  },
+  {
+   "row": "L169",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "Your classes are in the Lecture Hall: psychology Monday and Wednesday at 9am, statistics at 11am, English Tuesday and Thursday at 9am.",
+   "why": "english_first is Tue/Thu 09:00-09:30; the hint names the class, days and hour",
+   "cause": null,
+   "note": false,
+   "screen_hash": "35cd6e22511d534a",
+   "row_hash": "59defccfc63b0454",
+   "carried": false,
+   "pass": 4
+  },
+  {
+   "row": "L170",
+   "screen": "*",
+   "verdict": "N/A",
+   "line": "",
+   "why": "no place on this piece's screens is hidden_until a flag (Faculty Offices now open on goal1_shown, not met_walsh)",
+   "cause": null,
+   "note": false,
+   "screen_hash": "35cd6e22511d534a",
+   "row_hash": "c3599cd09637a240",
+   "carried": false,
+   "pass": 4
   }
  ],
  "causes": [],
  "pending": [],
- "asked": 26,
- "answered": 26,
+ "asked": 3,
+ "answered": 3,
  "pass_items": [],
  "unowed": []
 }

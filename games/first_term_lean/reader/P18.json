@@ -1,6 +1,6 @@
 {
  "piece": "P18",
- "pass": 2,
+ "pass": 4,
  "screens": {
   "library_meet_holt.meet": {
    "text": "ac593b3110c2d464",
@@ -104,13 +104,15 @@
   "C639": "be0ad7093b24bc46",
   "C640": "728d95d9964ccf25",
   "C644": "f5e1d79f3251dbab",
-  "C596": "6d9bba989a2b9666",
+  "C596": "e5f7e6cf2d01613d",
   "C448": "b86596f1a02766de",
+  "L168": "444c44970dc284f2",
+  "L169": "59defccfc63b0454",
   "C1340": "b76a6583ae88c60f",
   "C769": "f6b6f78a8f2e5ed7",
   "C794": "bad76e5963432385",
-  "C795": "6c9eb17d99266791",
-  "C804": "810ef8e803cb09dd",
+  "C795": "34139e6a6914e171",
+  "C804": "5358489178bff0a4",
   "L106": "13a714429d15f3b2",
   "C776": "4141d9e5e24362c3",
   "C777": "b56360a1040688cf",
@@ -118,6 +120,7 @@
   "C758": "e158aaf055cb61d6",
   "C953": "826bf82fe26afd13",
   "C762": "40e85f1ae92f1e71",
+  "L170": "c3599cd09637a240",
   "C770": "ff9aa31c11e5d50f",
   "C771": "563e3d25c3219dd0",
   "C442": "59b8d8d24f0c7c38",
@@ -171,7 +174,7 @@
     "all": "bcfc1ea04cc852ed"
    },
    "row_hash": "c1c0e2ac2588a579",
-   "carried": false,
+   "carried": true,
    "pass": 2
   },
   {
@@ -189,7 +192,7 @@
     "all": "d6de0ab85a3697e9"
    },
    "row_hash": "c1c0e2ac2588a579",
-   "carried": false,
+   "carried": true,
    "pass": 2
   },
   {
@@ -337,7 +340,7 @@
     "all": "bcfc1ea04cc852ed"
    },
    "row_hash": "80d415cf08e0ebfe",
-   "carried": false,
+   "carried": true,
    "pass": 2
   },
   {
@@ -355,7 +358,7 @@
     "all": "d6de0ab85a3697e9"
    },
    "row_hash": "80d415cf08e0ebfe",
-   "carried": false,
+   "carried": true,
    "pass": 2
   },
   {
@@ -542,7 +545,7 @@
     "all": "bcfc1ea04cc852ed"
    },
    "row_hash": "1b2a2d5f05b10331",
-   "carried": false,
+   "carried": true,
    "pass": 2
   },
   {
@@ -560,7 +563,7 @@
     "all": "bcfc1ea04cc852ed"
    },
    "row_hash": "6fd430204e984124",
-   "carried": false,
+   "carried": true,
    "pass": 2
   },
   {
@@ -968,7 +971,7 @@
     "all": "bcfc1ea04cc852ed"
    },
    "row_hash": "67e48e60d5053a2e",
-   "carried": false,
+   "carried": true,
    "pass": 2
   },
   {
@@ -986,7 +989,7 @@
     "all": "d6de0ab85a3697e9"
    },
    "row_hash": "67e48e60d5053a2e",
-   "carried": false,
+   "carried": true,
    "pass": 2
   },
   {
@@ -1017,7 +1020,7 @@
     "all": "bcfc1ea04cc852ed"
    },
    "row_hash": "310706ee076318f2",
-   "carried": false,
+   "carried": true,
    "pass": 2
   },
   {
@@ -1035,7 +1038,7 @@
     "all": "d6de0ab85a3697e9"
    },
    "row_hash": "310706ee076318f2",
-   "carried": false,
+   "carried": true,
    "pass": 2
   },
   {
@@ -1067,15 +1070,15 @@
   {
    "row": "C596",
    "screen": "*",
-   "verdict": "N/A",
-   "line": "",
-   "why": "A meeting, not a talk screen; Holt has no menu in release 1.",
+   "verdict": "PASS",
+   "line": "meeting screen, picture in it",
+   "why": "a first meeting is a new moment, so its picture is allowed; no face-opened menu is built here, and no talk screen carries a picture",
    "cause": null,
    "note": true,
-   "screen_hash": "462ac33c11a215ea",
-   "row_hash": "6d9bba989a2b9666",
+   "screen_hash": "44217b6fe68293ef",
+   "row_hash": "e5f7e6cf2d01613d",
    "carried": true,
-   "pass": 1
+   "pass": 3
   },
   {
    "row": "C601",
@@ -1367,40 +1370,40 @@
    "row": "C795",
    "screen": "*",
    "verdict": "PASS",
-   "line": "conditions: npc_at_location npc_holt campus_library is_present; is_repeatable = false",
-   "why": "An event, an allowed source of change.",
+   "line": "no room text in this piece's screens",
+   "why": "its screens are scenes, not a place's room text; no line per person is added to any room",
    "cause": null,
    "note": true,
-   "screen_hash": "462ac33c11a215ea",
-   "row_hash": "6c9eb17d99266791",
+   "screen_hash": "44217b6fe68293ef",
+   "row_hash": "34139e6a6914e171",
    "carried": true,
-   "pass": 1
+   "pass": 3
   },
   {
    "row": "C804",
    "screen": "*",
    "verdict": "PASS",
-   "line": "conditions: npc_at_location npc_holt campus_library is_present; is_repeatable = false",
-   "why": "The screen exists only while Holt is there.",
+   "line": "no room text in this piece's screens",
+   "why": "its screens are scenes, not a place's room text; no line per person is added to any room",
    "cause": null,
    "note": false,
-   "screen_hash": "462ac33c11a215ea",
-   "row_hash": "810ef8e803cb09dd",
+   "screen_hash": "44217b6fe68293ef",
+   "row_hash": "5358489178bff0a4",
    "carried": true,
-   "pass": 1
+   "pass": 3
   },
   {
    "row": "C889",
    "screen": "*",
    "verdict": "PASS",
-   "line": "\"Done\"",
-   "why": "No clock time promised.",
+   "line": "Got it. / What happens if I make noise? / Say nothing / Done",
+   "why": "No label in library_meet_holt names a clock time or a duration.",
    "cause": null,
    "note": true,
-   "screen_hash": "462ac33c11a215ea",
-   "row_hash": "1b724e2dcfbf028b",
+   "screen_hash": "44217b6fe68293ef",
+   "row_hash": "def1348d483d0c40",
    "carried": true,
-   "pass": 1
+   "pass": 2
   },
   {
    "row": "C892",
@@ -1471,14 +1474,14 @@
    "row": "C906",
    "screen": "*",
    "verdict": "PASS",
-   "line": "\"Done\"",
-   "why": "No \"till\".",
+   "line": "Got it. / What happens if I make noise? / Say nothing / Done",
+   "why": "No \"till X\" on any label.",
    "cause": null,
    "note": true,
-   "screen_hash": "462ac33c11a215ea",
-   "row_hash": "ce3b42a8c86da5b8",
+   "screen_hash": "44217b6fe68293ef",
+   "row_hash": "71713a7e7ae739e7",
    "carried": true,
-   "pass": 1
+   "pass": 2
   },
   {
    "row": "C910",
@@ -1495,7 +1498,7 @@
     "all": "bcfc1ea04cc852ed"
    },
    "row_hash": "d5a109f1ef88419a",
-   "carried": false,
+   "carried": true,
    "pass": 2
   },
   {
@@ -1604,7 +1607,7 @@
     "all": "bcfc1ea04cc852ed"
    },
    "row_hash": "4e86d143688ba8e5",
-   "carried": false,
+   "carried": true,
    "pass": 2
   },
   {
@@ -1635,7 +1638,7 @@
     "all": "bcfc1ea04cc852ed"
    },
    "row_hash": "18b0ecdf6d7fc901",
-   "carried": false,
+   "carried": true,
    "pass": 2
   },
   {
@@ -1679,7 +1682,7 @@
     "all": "bcfc1ea04cc852ed"
    },
    "row_hash": "1aadffd96e76381c",
-   "carried": false,
+   "carried": true,
    "pass": 2
   },
   {
@@ -1697,7 +1700,7 @@
     "all": "bcfc1ea04cc852ed"
    },
    "row_hash": "826bf82fe26afd13",
-   "carried": false,
+   "carried": true,
    "pass": 2
   },
   {
@@ -1728,7 +1731,7 @@
     "all": "bcfc1ea04cc852ed"
    },
    "row_hash": "13a714429d15f3b2",
-   "carried": false,
+   "carried": true,
    "pass": 2
   },
   {
@@ -1746,7 +1749,7 @@
     "all": "d6de0ab85a3697e9"
    },
    "row_hash": "13a714429d15f3b2",
-   "carried": false,
+   "carried": true,
    "pass": 2
   },
   {
@@ -1829,126 +1832,53 @@
     "all": "bcfc1ea04cc852ed"
    },
    "row_hash": "e64ce2672d85d2d8",
-   "carried": false,
+   "carried": true,
    "pass": 2
+  },
+  {
+   "row": "L168",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "The librarian's at the desk weekdays 8am to 4pm, and Saturday 10am to 4pm.",
+   "why": "matches Holt's rows; met_holt is the end step's when",
+   "cause": null,
+   "note": false,
+   "screen_hash": "44217b6fe68293ef",
+   "row_hash": "444c44970dc284f2",
+   "carried": false,
+   "pass": 4
+  },
+  {
+   "row": "L169",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "The librarian's at the desk weekdays 8am to 4pm, and Saturday 10am to 4pm.",
+   "why": "library_meet_holt fires on any visit while Holt is there",
+   "cause": null,
+   "note": false,
+   "screen_hash": "44217b6fe68293ef",
+   "row_hash": "59defccfc63b0454",
+   "carried": false,
+   "pass": 4
+  },
+  {
+   "row": "L170",
+   "screen": "*",
+   "verdict": "N/A",
+   "line": "",
+   "why": "no place on this piece's screens is hidden_until a flag",
+   "cause": null,
+   "note": false,
+   "screen_hash": "44217b6fe68293ef",
+   "row_hash": "c3599cd09637a240",
+   "carried": false,
+   "pass": 4
   }
  ],
  "causes": [],
- "pending": [
-  {
-   "row": "C889",
-   "screen": "*",
-   "why": "its rule's text changed"
-  },
-  {
-   "row": "C906",
-   "screen": "*",
-   "why": "its rule's text changed"
-  }
- ],
- "asked": 20,
- "answered": 18,
- "pass_items": [
-  {
-   "row": "B10",
-   "screen": "library_meet_holt.after",
-   "why": "screen changed: truth row"
-  },
-  {
-   "row": "B10",
-   "screen": "library_meet_holt.meet",
-   "why": "screen changed: truth row"
-  },
-  {
-   "row": "B8",
-   "screen": "library_meet_holt.after",
-   "why": "screen changed: truth row"
-  },
-  {
-   "row": "B8",
-   "screen": "library_meet_holt.meet",
-   "why": "screen changed: truth row"
-  },
-  {
-   "row": "C1234",
-   "screen": "library_meet_holt.after",
-   "why": "failed last pass"
-  },
-  {
-   "row": "C1238",
-   "screen": "library_meet_holt.after",
-   "why": "failed last pass"
-  },
-  {
-   "row": "C460",
-   "screen": "library_meet_holt.after",
-   "why": "screen changed: truth row"
-  },
-  {
-   "row": "C460",
-   "screen": "library_meet_holt.meet",
-   "why": "screen changed: truth row"
-  },
-  {
-   "row": "C461",
-   "screen": "library_meet_holt.after",
-   "why": "screen changed: truth row"
-  },
-  {
-   "row": "C461",
-   "screen": "library_meet_holt.meet",
-   "why": "screen changed: truth row"
-  },
-  {
-   "row": "C889",
-   "screen": "*",
-   "why": "its rule's text changed"
-  },
-  {
-   "row": "C906",
-   "screen": "*",
-   "why": "its rule's text changed"
-  },
-  {
-   "row": "C910",
-   "screen": "library_meet_holt.after",
-   "why": "failed last pass (a note), its screen changed"
-  },
-  {
-   "row": "C927",
-   "screen": "library_meet_holt.after",
-   "why": "screen changed: truth row"
-  },
-  {
-   "row": "C929",
-   "screen": "library_meet_holt.after",
-   "why": "failed last pass (a note), its screen changed"
-  },
-  {
-   "row": "C931",
-   "screen": "library_meet_holt.after",
-   "why": "screen changed: truth row"
-  },
-  {
-   "row": "C953",
-   "screen": "library_meet_holt.after",
-   "why": "failed last pass (a note), its screen changed"
-  },
-  {
-   "row": "L106",
-   "screen": "library_meet_holt.after",
-   "why": "screen changed: truth row"
-  },
-  {
-   "row": "L106",
-   "screen": "library_meet_holt.meet",
-   "why": "screen changed: truth row"
-  },
-  {
-   "row": "L167",
-   "screen": "library_meet_holt.after",
-   "why": "screen changed: truth row"
-  }
- ],
+ "pending": [],
+ "asked": 3,
+ "answered": 3,
+ "pass_items": [],
  "unowed": []
 }

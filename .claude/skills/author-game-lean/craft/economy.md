@@ -24,7 +24,7 @@ On a card with a `Does:` block (every card from 2026-11-24 on), the rows that ap
 | C989 | money is the system that makes her choose | — · kept blocking: LO's choice (2026-11-24) | the plan | reader |
 | C990 | money gates content: conditions read the money, not only prices | — · kept blocking: LO's choice (2026-11-24) | the plan | reader |
 | C951 | keep the amount in prose; the player budgets against it | — · kept blocking: LO's choice (2026-11-24) | a price or pay is shown | reader |
-| C952 | every number a scene or a card states agrees with the plan and the ledger | — · kept blocking: LO's choice (2026-11-24) | a price or pay is shown, a goal card is shown | reader |
+| C952 | every number a scene, a card or a Quests page entry states agrees with the plan and the ledger | — · kept blocking: LO's choice (2026-11-24) | a price or pay is shown, a goal card is shown | reader |
 | C992 | example numbers are filler; derive real prices from her week's income | — | the plan | note |
 | C1017 | a route to money she'd be ashamed of is visible but locked, never the only way to pay | — · kept blocking: LO's choice (2026-11-24) | the plan | reader |
 | C967 | a game with no paid sex says so | — | the plan | note |

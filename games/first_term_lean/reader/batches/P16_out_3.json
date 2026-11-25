@@ -1,0 +1,26 @@
+{
+ "verdicts": [
+  {
+   "row": "L170",
+   "screen": "*",
+   "verdict": "N/A",
+   "line": "",
+   "why": "no place on this piece's screens is hidden_until a flag (Faculty Offices now open on goal1_shown, not met_walsh)"
+  },
+  {
+   "row": "L168",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "Your classes are in the Lecture Hall: psychology Monday and Wednesday at 9am, statistics at 11am, English Tuesday and Thursday at 9am.",
+   "why": "English Tue/Thu 9am in the Lecture Hall, Walsh's row Tue/Thu 9-11; met_walsh is a when on the end step"
+  },
+  {
+   "row": "L169",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "Your classes are in the Lecture Hall: psychology Monday and Wednesday at 9am, statistics at 11am, English Tuesday and Thursday at 9am.",
+   "why": "english_first is Tue/Thu 09:00-09:30; the hint names the class, days and hour"
+  }
+ ],
+ "causes": []
+}

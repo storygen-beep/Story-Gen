@@ -1,0 +1,900 @@
+{
+ "verdicts": [
+  {
+   "row": "B1",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "your face, then down your body, then back up, slowly, like he's reading a form he means to sign.",
+   "why": "First canvas, no sexual act: his want (obedience, and his slow look at her) shows on the same screen; Mom's pointer on opening.sit_with_mom/ask_mom is the only earlier mention."
+  },
+  {
+   "row": "B2",
+   "screen": "*",
+   "verdict": "N/A",
+   "line": "I'm Dean Sterling.",
+   "why": "His first scene; there is no earlier scene with him to go one step past."
+  },
+  {
+   "row": "B3",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "Psychology. Lecture hall, at nine. Don't make me hear you were late.",
+   "why": "Every send-off variant points at the next thing (class) and he warns her off a second visit."
+  },
+  {
+   "row": "B4",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "Your face goes hot under it. You keep your hands still.",
+   "why": "Stage 0: she reacts on her body and answers politely (\"Good morning, sir.\", \"I understand.\"); she chooses nothing."
+  },
+  {
+   "row": "B5",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "Is that what you're wearing to class?",
+   "why": "He reacts to what she wears (worn_exposure gte 1) and to her as the new one."
+  },
+  {
+   "row": "B6",
+   "screen": "*",
+   "verdict": "N/A",
+   "line": "\"I understand.\"",
+   "why": "No offer is made to her; nothing to refuse."
+  },
+  {
+   "row": "B7",
+   "screen": "*",
+   "verdict": "N/A",
+   "line": "",
+   "why": "No explicit beat."
+  },
+  {
+   "row": "B8",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "Psychology, Dr. Hale: Monday and Wednesday, 9 to 11. Statistics, Mr. Pratt: Monday and Wednesday, 11 to 1.",
+   "why": "Timetable matches who_is_where (Hale MW 9-11, Pratt MW 11-13, Walsh TT 9-11, Cross TT 11-13) and the Classes hint; no garment named."
+  },
+  {
+   "row": "B9",
+   "screen": "*",
+   "verdict": "N/A",
+   "line": "",
+   "why": "PLAN declares no companion-rival here."
+  },
+  {
+   "row": "B10",
+   "screen": "dean_first.rules",
+   "verdict": "FAIL",
+   "line": "Two complaints and you're on probation, and back in this office.",
+   "why": "A future rule nothing builds: no complaint count or probation exists in release 1 or in PLAN (PLAN has only Brooke's later report to the dean).",
+   "cause": "P47a1-c1"
+  },
+  {
+   "row": "B10",
+   "screen": "dean_first.sendoff",
+   "verdict": "FAIL",
+   "line": "Psychology has started. Lecture hall. Go, now.",
+   "why": "Group runs 08:55-09:25; at 08:55-08:59 (door at 08:30-08:34, reachable by bus plus a stop) class hasn't started. Also see C460 here (c4) and L106 (c5).",
+   "cause": "P47a1-c3"
+  },
+  {
+   "row": "B10",
+   "screen": "dean_first.door",
+   "verdict": "PASS",
+   "line": "The dean's door is at the end of the corridor, and it's open.",
+   "why": "Fires only weekdays 8-17 with npc_dean present; both exposure variants true on every visit."
+  },
+  {
+   "row": "B11",
+   "screen": "*",
+   "verdict": "N/A",
+   "line": "",
+   "why": "No solo button."
+  },
+  {
+   "row": "B12",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "your face, then down your body, then back up, slowly, like he's reading a form he means to sign.",
+   "why": "Charged look at low heat: names her face, writes his look and his reaction, and holds a price (complaints, his office twice); her face goes hot on the next screen."
+  },
+  {
+   "row": "B13",
+   "screen": "*",
+   "verdict": "N/A",
+   "line": "",
+   "why": "No moment alone with her body."
+  },
+  {
+   "row": "C1002",
+   "screen": "*",
+   "verdict": "N/A",
+   "line": "",
+   "why": "No spend."
+  },
+  {
+   "row": "C109",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "Don't make me hear you were late.",
+   "why": "First scene, leak half N/A; it ends on a promise (he will hear about her, and she'll be back in his office)."
+  },
+  {
+   "row": "C115",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "I don't like seeing a student twice.",
+   "why": "He wants to be obeyed, for his own reason, and says what he does about it."
+  },
+  {
+   "row": "C1158",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "Is that what you're wearing to class?",
+   "why": "Names no garment."
+  },
+  {
+   "row": "C1173",
+   "screen": "*",
+   "verdict": "N/A",
+   "line": "",
+   "why": "No dress code or clothing door on these screens."
+  },
+  {
+   "row": "C1184",
+   "screen": "*",
+   "verdict": "N/A",
+   "line": "",
+   "why": "No dress code or clothing door on these screens."
+  },
+  {
+   "row": "C1185",
+   "screen": "*",
+   "verdict": "N/A",
+   "line": "",
+   "why": "No dress code or clothing door on these screens."
+  },
+  {
+   "row": "C1198",
+   "screen": "*",
+   "verdict": "N/A",
+   "line": "",
+   "why": "No dress code or clothing door on these screens."
+  },
+  {
+   "row": "C1220",
+   "screen": "*",
+   "verdict": "N/A",
+   "line": "",
+   "why": "No dress code or clothing door on these screens."
+  },
+  {
+   "row": "C1221",
+   "screen": "*",
+   "verdict": "N/A",
+   "line": "",
+   "why": "No dress code or clothing door on these screens."
+  },
+  {
+   "row": "C1177",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "Is that what you're wearing to class?",
+   "why": "Exposure 1+ is noticed on campus by the dean; read by place and audience."
+  },
+  {
+   "row": "C1189",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "Is that what you're wearing to class?",
+   "why": "One line for the state, in his cold manner; otherwise \"You're the new one.\""
+  },
+  {
+   "row": "C1200",
+   "screen": "*",
+   "verdict": "N/A",
+   "line": "",
+   "why": "No button needing clothes."
+  },
+  {
+   "row": "C1206",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "Is that what you're wearing to class?",
+   "why": "No garment named."
+  },
+  {
+   "row": "C120",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "He taps a folder with one finger. Your name's already on it.",
+   "why": "A new risk: a man who keeps a file on her and hears the complaints."
+  },
+  {
+   "row": "C1234",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "like he's reading a form he means to sign.",
+   "why": "The picture sits right after the look line."
+  },
+  {
+   "row": "C1238",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "looking up at the camera over his reading",
+   "why": "One-time; matches \"When he does look up\" on the only visit."
+  },
+  {
+   "row": "C1249",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "",
+   "why": "One picture on the meeting screen."
+  },
+  {
+   "row": "C1250",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "",
+   "why": "The corridor's room text stays bare; the picture is in the talk with him."
+  },
+  {
+   "row": "C1255",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "pool_dir = \"people/dean_first_t3\"",
+   "why": "Asset used by this block only."
+  },
+  {
+   "row": "C1261",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "",
+   "why": "The dean looking her over is where the player wants to look."
+  },
+  {
+   "row": "C1265",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "",
+   "why": "A person's first meeting, not a door, chore or menu."
+  },
+  {
+   "row": "C1267",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "",
+   "why": "His face and stare is what the words can't give."
+  },
+  {
+   "row": "C1274",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "dean_first_t3",
+   "why": "_t3 for his look at her."
+  },
+  {
+   "row": "C1275",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "looking up at the camera over his reading",
+   "why": "A held stare: a still."
+  },
+  {
+   "row": "C1277",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "Her view across a dean's desk",
+   "why": "Names the dean's desk, the office the scene is named for."
+  },
+  {
+   "row": "C1278",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "she is 18, out of frame",
+   "why": "Her age given."
+  },
+  {
+   "row": "C1279",
+   "screen": "*",
+   "verdict": "N/A",
+   "line": "",
+   "why": "No mirror."
+  },
+  {
+   "row": "C1280",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "pool = 1",
+   "why": "Once-seen spot, pool 1."
+  },
+  {
+   "row": "C1281",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "a silver-haired man of 58 in a suit, looking up at the camera",
+   "why": "The looker alone, from her view."
+  },
+  {
+   "row": "C1284",
+   "screen": "*",
+   "verdict": "N/A",
+   "line": "",
+   "why": "Not a walk-in."
+  },
+  {
+   "row": "C1340",
+   "screen": "*",
+   "verdict": "N/A",
+   "line": "",
+   "why": "The dean is not a housemate."
+  },
+  {
+   "row": "C148",
+   "screen": "*",
+   "verdict": "N/A",
+   "line": "",
+   "why": "His first scene."
+  },
+  {
+   "row": "C149",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "You have the timetable. Don't miss another class.",
+   "why": "Every send-off points at class next."
+  },
+  {
+   "row": "C1611",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "I'm Dean Sterling. Classes are not optional.",
+   "why": "One person, on screen and speaking."
+  },
+  {
+   "row": "C162",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "Your timetable. Learn it.",
+   "why": "The timetable is information she uses (class times)."
+  },
+  {
+   "row": "C1637",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "",
+   "why": "Small meeting, he speaks; each screen well under 150 words."
+  },
+  {
+   "row": "C180",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "back in this office. I don't like seeing a student twice.",
+   "why": "Pays Mom's \"go and see the dean first\" and opens class next; the office return is plan-backed (Brooke's report), though the probation half fails at C460."
+  },
+  {
+   "row": "C327",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "your face, then down your body, then back up, slowly, like he's reading a form he means to sign.",
+   "why": "Not talk only: his look on her body, her face hot."
+  },
+  {
+   "row": "C422",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "Go to Psychology",
+   "why": "Labels say what clicking does."
+  },
+  {
+   "row": "C442",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "He doesn't look up, and he doesn't ask you to sit, so you stand.",
+   "why": "Says what happens."
+  },
+  {
+   "row": "C447",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "Your timetable. Learn it.",
+   "why": "One clipped, cold manner held across all four screens."
+  },
+  {
+   "row": "C448",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "I'm Dean Sterling. Classes are not optional.",
+   "why": "Who he is, what he wants (obedience) and how he sees her are clear in the first lines."
+  },
+  {
+   "row": "C450",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "Don't make me hear you were late.",
+   "why": "Ends on a hook."
+  },
+  {
+   "row": "C451",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "He slides a printed sheet across the desk and keeps two fingers on it a second",
+   "why": "Concrete: folder, sheet, rooms, times."
+  },
+  {
+   "row": "C460",
+   "screen": "dean_first.rules",
+   "verdict": "FAIL",
+   "line": "Two complaints and you're on probation, and back in this office.",
+   "why": "Fails the truth rule: \"A promise about the future must be built\". No complaint count or probation exists in release 1, and PLAN has no step that reaches probation.",
+   "cause": "P47a1-c1"
+  },
+  {
+   "row": "C460",
+   "screen": "dean_first.timetable",
+   "verdict": "FAIL",
+   "line": "He slides a printed sheet across the desk",
+   "why": "The trigger runs to 17:00 and screens 2-4 come +15 to +25 min later; his row ends 17:00, so he's on screen after his row (also rules, sendoff).",
+   "cause": "P47a1-c5"
+  },
+  {
+   "row": "C460",
+   "screen": "dean_first.sendoff",
+   "verdict": "FAIL",
+   "line": "You have the timetable. Don't miss another class.",
+   "why": "\"another\" claims she missed one; psych_first and stats_first don't need met_dean, so a player who went to Monday's classes and then the corridor (Mon 13:00, or Tuesday) never missed one. No flag behind it.",
+   "cause": "P47a1-c4"
+  },
+  {
+   "row": "C460",
+   "screen": "dean_first.door",
+   "verdict": "PASS",
+   "line": "The dean's door is at the end of the corridor, and it's open.",
+   "why": "True on every visit the trigger allows."
+  },
+  {
+   "row": "C461",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "Your grades come to me. Complaints come to me.",
+   "why": "Texture that fits a dean."
+  },
+  {
+   "row": "C519",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "",
+   "why": "One job per screen: arrival, rules, timetable, send-off."
+  },
+  {
+   "row": "C520",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "",
+   "why": "Staged: door (setup), his look (temptation), rules (problem), timetable and send-off (objective); screens near target."
+  },
+  {
+   "row": "C593",
+   "screen": "dean_first.door",
+   "verdict": "FAIL",
+   "line": "You're the new one. @player.",
+   "why": "He has no term of address of his own: bare @player is also Laura's (\"He means it, @player.\") and Walsh's (\"@player, isn't it?\"), and the exposure variant and screens 2-4 address her with nothing.",
+   "cause": "P47a1-c2"
+  },
+  {
+   "row": "C596",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "",
+   "why": "Not a talk screen; talk check green."
+  },
+  {
+   "row": "C601",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "your face, then down your body, then back up, slowly, like he's reading a form he means to sign.",
+   "why": "His leak is on his body (his eyes), she sees it; he doesn't live with her, so no cover owed."
+  },
+  {
+   "row": "C618",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "",
+   "why": "The scene is his meeting; no hub before it."
+  },
+  {
+   "row": "C619",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "",
+   "why": "met_dean is his first-contact flag; not met at turn one."
+  },
+  {
+   "row": "C620",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "",
+   "why": "Listed at the corridor only once met and there (engine)."
+  },
+  {
+   "row": "C622",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "",
+   "why": "One-time meeting canvas; later visits his face."
+  },
+  {
+   "row": "C627",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "",
+   "why": "The one-time scene that sets met_dean names him: \"I'm Dean Sterling.\""
+  },
+  {
+   "row": "C625",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "The dean's door",
+   "why": "Role first (\"the dean\"), name in the meeting."
+  },
+  {
+   "row": "C626",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "",
+   "why": "Stranger name until met_dean; name after (engine)."
+  },
+  {
+   "row": "C630",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "I'm Dean Sterling.",
+   "why": "Name and relation (Dean) together."
+  },
+  {
+   "row": "C632",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "role = \"Dean\"",
+   "why": "Says who he is."
+  },
+  {
+   "row": "C644",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "Your grades come to me. Complaints come to me.",
+   "why": "His corner: the college, grades, complaints, his folders."
+  },
+  {
+   "row": "C758",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "",
+   "why": "The corridor's description and labels unchanged; the scene is not its only introduction."
+  },
+  {
+   "row": "C769",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "",
+   "why": "The corridor's description and labels unchanged; the scene is not its only introduction."
+  },
+  {
+   "row": "C770",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "",
+   "why": "The corridor's description and labels unchanged; the scene is not its only introduction."
+  },
+  {
+   "row": "C771",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "",
+   "why": "The corridor's description and labels unchanged; the scene is not its only introduction."
+  },
+  {
+   "row": "C794",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "",
+   "why": "The corridor's description and labels unchanged; the scene is not its only introduction."
+  },
+  {
+   "row": "C795",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "",
+   "why": "The corridor's description and labels unchanged; the scene is not its only introduction."
+  },
+  {
+   "row": "C762",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "",
+   "why": "No \"Nothing happens.\""
+  },
+  {
+   "row": "C773",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "",
+   "why": "No browse buttons added."
+  },
+  {
+   "row": "C776",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "",
+   "why": "The corridor menu gains nothing; the dean is his face."
+  },
+  {
+   "row": "C777",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "",
+   "why": "The meeting is a beat, not a menu item."
+  },
+  {
+   "row": "C804",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "",
+   "why": "The dean shows as his face by his row; P30's empty line now waits on him too."
+  },
+  {
+   "row": "C889",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "Go to Psychology",
+   "why": "No clock time or duration on labels."
+  },
+  {
+   "row": "C892",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "",
+   "why": "Hours on the corridor sign and the hint, not in the act."
+  },
+  {
+   "row": "C897",
+   "screen": "dean_first.sendoff",
+   "verdict": "FAIL",
+   "line": "Go to Psychology",
+   "why": "30 minutes (or 5) on a hop inside campus that the map charges nothing for."
+  },
+  {
+   "row": "C900",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "Psychology. Lecture hall, at nine.",
+   "why": "Names the class time, not the time now, inside a Monday 08:00-08:55 group."
+  },
+  {
+   "row": "C902",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "",
+   "why": "Each send-off line true at its window's last minute."
+  },
+  {
+   "row": "C903",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "Monday and Wednesday, 9 to 11",
+   "why": "One-time; weekdays are timetable facts."
+  },
+  {
+   "row": "C906",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "",
+   "why": "No \"till\"."
+  },
+  {
+   "row": "C910",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "\"I understand.\"",
+   "why": "No time or energy on any button."
+  },
+  {
+   "row": "C913",
+   "screen": "*",
+   "verdict": "N/A",
+   "line": "",
+   "why": "No activity with hours on these screens; the scene is an event."
+  },
+  {
+   "row": "C914",
+   "screen": "*",
+   "verdict": "N/A",
+   "line": "",
+   "why": "No row shown with hours."
+  },
+  {
+   "row": "C916",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "",
+   "why": "An event that happens to her; it stays hidden out of its window."
+  },
+  {
+   "row": "C920",
+   "screen": "dean_first.sendoff",
+   "verdict": "FAIL",
+   "line": "Go to Psychology",
+   "why": "The corridor to the Lecture Hall is a hop inside campus (free on the map); this button charges 30 minutes on Monday before 08:55 and 5 after, a hidden wait to land her at nine.",
+   "cause": "P47a1-c6"
+  },
+  {
+   "row": "C924",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "",
+   "why": "Travel cost (bus vs walk) decides whether she makes Monday's class."
+  },
+  {
+   "row": "C926",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "",
+   "why": "Only minutes added."
+  },
+  {
+   "row": "C927",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "",
+   "why": "Every exit has time."
+  },
+  {
+   "row": "C928",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "",
+   "why": "No clock printed as the time now."
+  },
+  {
+   "row": "C929",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "",
+   "why": "No time tags on labels."
+  },
+  {
+   "row": "C930",
+   "screen": "*",
+   "verdict": "N/A",
+   "line": "",
+   "why": "No windowed work."
+  },
+  {
+   "row": "C931",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "",
+   "why": "08:00-08:55 and 08:55-09:25 meet with end exclusive; the OR group covers the rest."
+  },
+  {
+   "row": "C953",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "",
+   "why": "No cost on labels."
+  },
+  {
+   "row": "L106",
+   "screen": "dean_first.door",
+   "verdict": "PASS",
+   "line": "",
+   "why": "Trigger needs npc_dean present."
+  },
+  {
+   "row": "L106",
+   "screen": "dean_first.rules",
+   "verdict": "FAIL",
+   "line": "I'm Dean Sterling.",
+   "why": "Door at 16:45-16:59 puts this screen at 17:00-17:14, after his row ends at 17:00.",
+   "cause": "P47a1-c5"
+  },
+  {
+   "row": "L106",
+   "screen": "dean_first.sendoff",
+   "verdict": "FAIL",
+   "line": "He's already looking back at his writing.",
+   "why": "Shows up to 17:24; who_is_where has him gone from 17:00.",
+   "cause": "P47a1-c5"
+  },
+  {
+   "row": "L119",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "pool = 1",
+   "why": ""
+  },
+  {
+   "row": "L120",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "",
+   "why": "Looker alone, no two-person frame."
+  },
+  {
+   "row": "L121",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "",
+   "why": "One picture for the scene."
+  },
+  {
+   "row": "L125",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "",
+   "why": "The picture follows the look; it doesn't open the screen."
+  },
+  {
+   "row": "L167",
+   "screen": "*",
+   "verdict": "N/A",
+   "line": "",
+   "why": "No row with day-varying hours on these screens."
+  },
+  {
+   "row": "L168",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "Before your first class, the dean wants to see every new student: his office is on the faculty corridor, off the Quad, weekdays 8am to 5pm.",
+   "why": "Pointed at by place and time, before the met_dean step."
+  },
+  {
+   "row": "L169",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "",
+   "why": "Fires on any weekday 8-17 corridor visit while he's in; the hint names the window."
+  },
+  {
+   "row": "L170",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "hidden_until = { flag = \"goal1_shown\" }",
+   "why": "goal1_shown is set in the opening; pages check green."
+  },
+  {
+   "row": "L171",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "",
+   "why": "\"Today you start college\" now has a day-one scene (Monday morning) and a hint."
+  }
+ ],
+ "causes": [
+  {
+   "id": "P47a1-c1",
+   "what": "The dean's \"Two complaints and you're on probation\" states a rule nothing builds (no complaint count, no probation); keep the menace, drop the mechanic."
+  },
+  {
+   "id": "P47a1-c2",
+   "what": "The dean has no term of address of his own; bare @player is Laura's and Walsh's too."
+  },
+  {
+   "id": "P47a1-c3",
+   "what": "\"Psychology has started\" shows from 08:55, five minutes before the class starts at 9:00."
+  },
+  {
+   "id": "P47a1-c4",
+   "what": "\"Don't miss another class\" claims a missed class no flag records; she can have attended Monday's classes before the corridor."
+  },
+  {
+   "id": "P47a1-c5",
+   "what": "The trigger runs to 17:00 but screens 2-4 come 15-25 minutes later, so the dean is on screen after his row ends at 17:00."
+  },
+  {
+   "id": "P47a1-c6",
+   "what": "\"Go to Psychology\" charges 30 (or 5) minutes for a hop inside campus that the map makes free, as a hidden wait to land her at nine."
+  }
+ ]
+}

@@ -2,12 +2,272 @@
  "items": [
   {
    "row": "B10",
+   "screen": "opening.ask_mom",
+   "why": "a fact changed"
+  },
+  {
+   "row": "B10",
+   "screen": "opening.bath",
+   "why": "screen changed: truth row"
+  },
+  {
+   "row": "B10",
+   "screen": "opening.bath_freedom",
+   "why": "screen changed: truth row"
+  },
+  {
+   "row": "B10",
+   "screen": "opening.bath_fun",
+   "why": "screen changed: truth row"
+  },
+  {
+   "row": "B10",
+   "screen": "opening.bath_grades",
+   "why": "screen changed: truth row"
+  },
+  {
+   "row": "B10",
+   "screen": "opening.hall",
+   "why": "screen changed: truth row"
+  },
+  {
+   "row": "B10",
+   "screen": "opening.handover",
+   "why": "screen changed: truth row"
+  },
+  {
+   "row": "B10",
+   "screen": "opening.kitchen_ask",
+   "why": "screen changed: truth row"
+  },
+  {
+   "row": "B10",
+   "screen": "opening.kitchen_rent",
+   "why": "screen changed: truth row"
+  },
+  {
+   "row": "B10",
+   "screen": "opening.room",
+   "why": "screen changed: truth row"
+  },
+  {
+   "row": "B10",
+   "screen": "opening.room_past",
+   "why": "screen changed: truth row"
+  },
+  {
+   "row": "B10",
+   "screen": "opening.room_spoke",
+   "why": "screen changed: truth row"
+  },
+  {
+   "row": "B10",
+   "screen": "opening.room_waited",
+   "why": "screen changed: truth row"
+  },
+  {
+   "row": "B10",
+   "screen": "opening.sit_with_mom",
+   "why": "a fact changed"
+  },
+  {
+   "row": "B10",
+   "screen": "opening.sums",
+   "why": "screen changed: truth row"
+  },
+  {
+   "row": "B10",
    "screen": "opening.wake",
    "why": "screen changed: truth row"
   },
   {
    "row": "B8",
+   "screen": "opening.ask_mom",
+   "why": "a fact changed"
+  },
+  {
+   "row": "B8",
+   "screen": "opening.bath",
+   "why": "screen changed: truth row"
+  },
+  {
+   "row": "B8",
+   "screen": "opening.bath_freedom",
+   "why": "screen changed: truth row"
+  },
+  {
+   "row": "B8",
+   "screen": "opening.bath_fun",
+   "why": "screen changed: truth row"
+  },
+  {
+   "row": "B8",
+   "screen": "opening.bath_grades",
+   "why": "screen changed: truth row"
+  },
+  {
+   "row": "B8",
+   "screen": "opening.hall",
+   "why": "screen changed: truth row"
+  },
+  {
+   "row": "B8",
+   "screen": "opening.handover",
+   "why": "screen changed: truth row"
+  },
+  {
+   "row": "B8",
+   "screen": "opening.kitchen_ask",
+   "why": "screen changed: truth row"
+  },
+  {
+   "row": "B8",
+   "screen": "opening.kitchen_rent",
+   "why": "screen changed: truth row"
+  },
+  {
+   "row": "B8",
+   "screen": "opening.room",
+   "why": "screen changed: truth row"
+  },
+  {
+   "row": "B8",
+   "screen": "opening.room_past",
+   "why": "screen changed: truth row"
+  },
+  {
+   "row": "B8",
+   "screen": "opening.room_spoke",
+   "why": "screen changed: truth row"
+  },
+  {
+   "row": "B8",
+   "screen": "opening.room_waited",
+   "why": "screen changed: truth row"
+  },
+  {
+   "row": "B8",
+   "screen": "opening.sit_with_mom",
+   "why": "a fact changed"
+  },
+  {
+   "row": "B8",
+   "screen": "opening.sums",
+   "why": "screen changed: truth row"
+  },
+  {
+   "row": "B8",
    "screen": "opening.wake",
+   "why": "screen changed: truth row"
+  },
+  {
+   "row": "C1158",
+   "screen": "opening.room",
+   "why": "screen changed: truth row"
+  },
+  {
+   "row": "C1206",
+   "screen": "opening.room",
+   "why": "screen changed: truth row"
+  },
+  {
+   "row": "C1265",
+   "screen": "*",
+   "why": "its rule's text changed"
+  },
+  {
+   "row": "C1265",
+   "screen": "opening.room_spoke",
+   "why": "its rule's text changed"
+  },
+  {
+   "row": "C1631",
+   "screen": "opening.ask_mom",
+   "why": "a fact changed"
+  },
+  {
+   "row": "C1631",
+   "screen": "opening.handover",
+   "why": "screen changed: truth row"
+  },
+  {
+   "row": "C1631",
+   "screen": "opening.sit_with_mom",
+   "why": "a fact changed"
+  },
+  {
+   "row": "C460",
+   "screen": "opening.ask_mom",
+   "why": "a fact changed"
+  },
+  {
+   "row": "C460",
+   "screen": "opening.bath",
+   "why": "screen changed: truth row"
+  },
+  {
+   "row": "C460",
+   "screen": "opening.bath_freedom",
+   "why": "screen changed: truth row"
+  },
+  {
+   "row": "C460",
+   "screen": "opening.bath_fun",
+   "why": "screen changed: truth row"
+  },
+  {
+   "row": "C460",
+   "screen": "opening.bath_grades",
+   "why": "screen changed: truth row"
+  },
+  {
+   "row": "C460",
+   "screen": "opening.hall",
+   "why": "screen changed: truth row"
+  },
+  {
+   "row": "C460",
+   "screen": "opening.handover",
+   "why": "screen changed: truth row"
+  },
+  {
+   "row": "C460",
+   "screen": "opening.kitchen_ask",
+   "why": "screen changed: truth row"
+  },
+  {
+   "row": "C460",
+   "screen": "opening.kitchen_rent",
+   "why": "screen changed: truth row"
+  },
+  {
+   "row": "C460",
+   "screen": "opening.room",
+   "why": "screen changed: truth row"
+  },
+  {
+   "row": "C460",
+   "screen": "opening.room_past",
+   "why": "screen changed: truth row"
+  },
+  {
+   "row": "C460",
+   "screen": "opening.room_spoke",
+   "why": "screen changed: truth row"
+  },
+  {
+   "row": "C460",
+   "screen": "opening.room_waited",
+   "why": "screen changed: truth row"
+  },
+  {
+   "row": "C460",
+   "screen": "opening.sit_with_mom",
+   "why": "a fact changed"
+  },
+  {
+   "row": "C460",
+   "screen": "opening.sums",
    "why": "screen changed: truth row"
   },
   {
@@ -17,7 +277,207 @@
   },
   {
    "row": "C461",
+   "screen": "opening.ask_mom",
+   "why": "a fact changed"
+  },
+  {
+   "row": "C461",
+   "screen": "opening.bath",
+   "why": "screen changed: truth row"
+  },
+  {
+   "row": "C461",
+   "screen": "opening.bath_freedom",
+   "why": "screen changed: truth row"
+  },
+  {
+   "row": "C461",
+   "screen": "opening.bath_fun",
+   "why": "screen changed: truth row"
+  },
+  {
+   "row": "C461",
+   "screen": "opening.bath_grades",
+   "why": "screen changed: truth row"
+  },
+  {
+   "row": "C461",
+   "screen": "opening.hall",
+   "why": "screen changed: truth row"
+  },
+  {
+   "row": "C461",
+   "screen": "opening.handover",
+   "why": "screen changed: truth row"
+  },
+  {
+   "row": "C461",
+   "screen": "opening.kitchen_ask",
+   "why": "screen changed: truth row"
+  },
+  {
+   "row": "C461",
+   "screen": "opening.kitchen_rent",
+   "why": "screen changed: truth row"
+  },
+  {
+   "row": "C461",
+   "screen": "opening.room",
+   "why": "screen changed: truth row"
+  },
+  {
+   "row": "C461",
+   "screen": "opening.room_past",
+   "why": "screen changed: truth row"
+  },
+  {
+   "row": "C461",
+   "screen": "opening.room_spoke",
+   "why": "screen changed: truth row"
+  },
+  {
+   "row": "C461",
+   "screen": "opening.room_waited",
+   "why": "screen changed: truth row"
+  },
+  {
+   "row": "C461",
+   "screen": "opening.sit_with_mom",
+   "why": "a fact changed"
+  },
+  {
+   "row": "C461",
+   "screen": "opening.sums",
+   "why": "screen changed: truth row"
+  },
+  {
+   "row": "C461",
    "screen": "opening.wake",
+   "why": "screen changed: truth row"
+  },
+  {
+   "row": "C889",
+   "screen": "*",
+   "why": "its rule's text changed"
+  },
+  {
+   "row": "C889",
+   "screen": "opening.room_spoke",
+   "why": "its rule's text changed"
+  },
+  {
+   "row": "C889",
+   "screen": "opening.sums",
+   "why": "its rule's text changed"
+  },
+  {
+   "row": "C906",
+   "screen": "*",
+   "why": "its rule's text changed"
+  },
+  {
+   "row": "C906",
+   "screen": "opening.room_spoke",
+   "why": "its rule's text changed"
+  },
+  {
+   "row": "C906",
+   "screen": "opening.sums",
+   "why": "its rule's text changed"
+  },
+  {
+   "row": "C910",
+   "screen": "*",
+   "why": "its rule's text changed"
+  },
+  {
+   "row": "C910",
+   "screen": "opening.room_spoke",
+   "why": "its rule's text changed"
+  },
+  {
+   "row": "C910",
+   "screen": "opening.sums",
+   "why": "its rule's text changed"
+  },
+  {
+   "row": "C920",
+   "screen": "*",
+   "why": "its rule's text changed"
+  },
+  {
+   "row": "C920",
+   "screen": "opening.room_spoke",
+   "why": "its rule's text changed"
+  },
+  {
+   "row": "C920",
+   "screen": "opening.sums",
+   "why": "its rule's text changed"
+  },
+  {
+   "row": "C927",
+   "screen": "opening.bath",
+   "why": "screen changed: truth row"
+  },
+  {
+   "row": "C927",
+   "screen": "opening.bath_freedom",
+   "why": "screen changed: truth row"
+  },
+  {
+   "row": "C927",
+   "screen": "opening.bath_fun",
+   "why": "screen changed: truth row"
+  },
+  {
+   "row": "C927",
+   "screen": "opening.bath_grades",
+   "why": "screen changed: truth row"
+  },
+  {
+   "row": "C927",
+   "screen": "opening.hall",
+   "why": "screen changed: truth row"
+  },
+  {
+   "row": "C927",
+   "screen": "opening.handover",
+   "why": "screen changed: truth row"
+  },
+  {
+   "row": "C927",
+   "screen": "opening.kitchen_ask",
+   "why": "screen changed: truth row"
+  },
+  {
+   "row": "C927",
+   "screen": "opening.kitchen_rent",
+   "why": "screen changed: truth row"
+  },
+  {
+   "row": "C927",
+   "screen": "opening.room",
+   "why": "screen changed: truth row"
+  },
+  {
+   "row": "C927",
+   "screen": "opening.room_past",
+   "why": "screen changed: truth row"
+  },
+  {
+   "row": "C927",
+   "screen": "opening.room_spoke",
+   "why": "screen changed: truth row"
+  },
+  {
+   "row": "C927",
+   "screen": "opening.room_waited",
+   "why": "screen changed: truth row"
+  },
+  {
+   "row": "C927",
+   "screen": "opening.sums",
    "why": "screen changed: truth row"
   },
   {
@@ -26,8 +486,233 @@
    "why": "screen changed: truth row"
   },
   {
+   "row": "C929",
+   "screen": "*",
+   "why": "its rule's text changed"
+  },
+  {
+   "row": "C929",
+   "screen": "opening.room_spoke",
+   "why": "its rule's text changed"
+  },
+  {
+   "row": "C929",
+   "screen": "opening.sums",
+   "why": "its rule's text changed"
+  },
+  {
+   "row": "C931",
+   "screen": "opening.bath",
+   "why": "screen changed: truth row"
+  },
+  {
+   "row": "C931",
+   "screen": "opening.bath_freedom",
+   "why": "screen changed: truth row"
+  },
+  {
+   "row": "C931",
+   "screen": "opening.bath_fun",
+   "why": "screen changed: truth row"
+  },
+  {
+   "row": "C931",
+   "screen": "opening.bath_grades",
+   "why": "screen changed: truth row"
+  },
+  {
+   "row": "C931",
+   "screen": "opening.hall",
+   "why": "screen changed: truth row"
+  },
+  {
+   "row": "C931",
+   "screen": "opening.handover",
+   "why": "screen changed: truth row"
+  },
+  {
+   "row": "C931",
+   "screen": "opening.kitchen_ask",
+   "why": "screen changed: truth row"
+  },
+  {
+   "row": "C931",
+   "screen": "opening.kitchen_rent",
+   "why": "screen changed: truth row"
+  },
+  {
+   "row": "C931",
+   "screen": "opening.room",
+   "why": "screen changed: truth row"
+  },
+  {
+   "row": "C931",
+   "screen": "opening.room_past",
+   "why": "screen changed: truth row"
+  },
+  {
+   "row": "C931",
+   "screen": "opening.room_spoke",
+   "why": "screen changed: truth row"
+  },
+  {
+   "row": "C931",
+   "screen": "opening.room_waited",
+   "why": "screen changed: truth row"
+  },
+  {
+   "row": "C931",
+   "screen": "opening.sums",
+   "why": "screen changed: truth row"
+  },
+  {
    "row": "C931",
    "screen": "opening.wake",
+   "why": "screen changed: truth row"
+  },
+  {
+   "row": "C953",
+   "screen": "*",
+   "why": "its rule's text changed"
+  },
+  {
+   "row": "C953",
+   "screen": "opening.sums",
+   "why": "its rule's text changed"
+  },
+  {
+   "row": "L106",
+   "screen": "opening.ask_mom",
+   "why": "a fact changed"
+  },
+  {
+   "row": "L106",
+   "screen": "opening.bath",
+   "why": "screen changed: truth row"
+  },
+  {
+   "row": "L106",
+   "screen": "opening.bath_freedom",
+   "why": "screen changed: truth row"
+  },
+  {
+   "row": "L106",
+   "screen": "opening.bath_fun",
+   "why": "screen changed: truth row"
+  },
+  {
+   "row": "L106",
+   "screen": "opening.bath_grades",
+   "why": "screen changed: truth row"
+  },
+  {
+   "row": "L106",
+   "screen": "opening.hall",
+   "why": "screen changed: truth row"
+  },
+  {
+   "row": "L106",
+   "screen": "opening.handover",
+   "why": "screen changed: truth row"
+  },
+  {
+   "row": "L106",
+   "screen": "opening.kitchen_ask",
+   "why": "screen changed: truth row"
+  },
+  {
+   "row": "L106",
+   "screen": "opening.kitchen_rent",
+   "why": "screen changed: truth row"
+  },
+  {
+   "row": "L106",
+   "screen": "opening.room_past",
+   "why": "screen changed: truth row"
+  },
+  {
+   "row": "L106",
+   "screen": "opening.room_spoke",
+   "why": "screen changed: truth row"
+  },
+  {
+   "row": "L106",
+   "screen": "opening.room_waited",
+   "why": "screen changed: truth row"
+  },
+  {
+   "row": "L106",
+   "screen": "opening.sit_with_mom",
+   "why": "a fact changed"
+  },
+  {
+   "row": "L106",
+   "screen": "opening.sums",
+   "why": "screen changed: truth row"
+  },
+  {
+   "row": "L167",
+   "screen": "opening.bath",
+   "why": "screen changed: truth row"
+  },
+  {
+   "row": "L167",
+   "screen": "opening.bath_freedom",
+   "why": "screen changed: truth row"
+  },
+  {
+   "row": "L167",
+   "screen": "opening.bath_fun",
+   "why": "screen changed: truth row"
+  },
+  {
+   "row": "L167",
+   "screen": "opening.bath_grades",
+   "why": "screen changed: truth row"
+  },
+  {
+   "row": "L167",
+   "screen": "opening.hall",
+   "why": "screen changed: truth row"
+  },
+  {
+   "row": "L167",
+   "screen": "opening.handover",
+   "why": "screen changed: truth row"
+  },
+  {
+   "row": "L167",
+   "screen": "opening.kitchen_ask",
+   "why": "screen changed: truth row"
+  },
+  {
+   "row": "L167",
+   "screen": "opening.kitchen_rent",
+   "why": "screen changed: truth row"
+  },
+  {
+   "row": "L167",
+   "screen": "opening.room",
+   "why": "screen changed: truth row"
+  },
+  {
+   "row": "L167",
+   "screen": "opening.room_past",
+   "why": "screen changed: truth row"
+  },
+  {
+   "row": "L167",
+   "screen": "opening.room_spoke",
+   "why": "screen changed: truth row"
+  },
+  {
+   "row": "L167",
+   "screen": "opening.room_waited",
+   "why": "screen changed: truth row"
+  },
+  {
+   "row": "L167",
+   "screen": "opening.sums",
    "why": "screen changed: truth row"
   },
   {

@@ -1,0 +1,284 @@
+{
+ "items": [
+  {
+   "row": "B10",
+   "screen": "mom_living_room.talk",
+   "why": "screen changed: truth row"
+  },
+  {
+   "row": "B10",
+   "screen": "talk_mom.eat",
+   "why": "still to ask: a fact changed"
+  },
+  {
+   "row": "B10",
+   "screen": "talk_mom.talk",
+   "why": "still to ask: a fact changed"
+  },
+  {
+   "row": "B8",
+   "screen": "mom_living_room.talk",
+   "why": "screen changed: truth row"
+  },
+  {
+   "row": "B8",
+   "screen": "talk_mom.eat",
+   "why": "still to ask: a fact changed"
+  },
+  {
+   "row": "B8",
+   "screen": "talk_mom.talk",
+   "why": "still to ask: a fact changed"
+  },
+  {
+   "row": "C460",
+   "screen": "mom_living_room.talk",
+   "why": "screen changed: truth row"
+  },
+  {
+   "row": "C460",
+   "screen": "talk_mom.eat",
+   "why": "still to ask: a fact changed"
+  },
+  {
+   "row": "C460",
+   "screen": "talk_mom.talk",
+   "why": "still to ask: a fact changed"
+  },
+  {
+   "row": "C461",
+   "screen": "mom_living_room.talk",
+   "why": "screen changed: truth row"
+  },
+  {
+   "row": "C461",
+   "screen": "talk_mom.eat",
+   "why": "still to ask: a fact changed"
+  },
+  {
+   "row": "C461",
+   "screen": "talk_mom.talk",
+   "why": "still to ask: a fact changed"
+  },
+  {
+   "row": "C889",
+   "screen": "talk_mom.talk",
+   "why": "still to ask: a fact changed"
+  },
+  {
+   "row": "C892",
+   "screen": "talk_mom.eat",
+   "why": "still to ask: a fact changed"
+  },
+  {
+   "row": "C892",
+   "screen": "talk_mom.talk",
+   "why": "still to ask: a fact changed"
+  },
+  {
+   "row": "C897",
+   "screen": "talk_mom.eat",
+   "why": "still to ask: a fact changed"
+  },
+  {
+   "row": "C897",
+   "screen": "talk_mom.talk",
+   "why": "still to ask: a fact changed"
+  },
+  {
+   "row": "C900",
+   "screen": "talk_mom.eat",
+   "why": "still to ask: a fact changed"
+  },
+  {
+   "row": "C900",
+   "screen": "talk_mom.talk",
+   "why": "still to ask: a fact changed"
+  },
+  {
+   "row": "C902",
+   "screen": "talk_mom.eat",
+   "why": "still to ask: a fact changed"
+  },
+  {
+   "row": "C902",
+   "screen": "talk_mom.talk",
+   "why": "still to ask: a fact changed"
+  },
+  {
+   "row": "C903",
+   "screen": "talk_mom.eat",
+   "why": "still to ask: a fact changed"
+  },
+  {
+   "row": "C903",
+   "screen": "talk_mom.talk",
+   "why": "still to ask: a fact changed"
+  },
+  {
+   "row": "C906",
+   "screen": "talk_mom.talk",
+   "why": "still to ask: a fact changed"
+  },
+  {
+   "row": "C910",
+   "screen": "talk_mom.talk",
+   "why": "still to ask: a fact changed"
+  },
+  {
+   "row": "C913",
+   "screen": "talk_mom.eat",
+   "why": "still to ask: a fact changed"
+  },
+  {
+   "row": "C913",
+   "screen": "talk_mom.talk",
+   "why": "still to ask: a fact changed"
+  },
+  {
+   "row": "C914",
+   "screen": "talk_mom.eat",
+   "why": "still to ask: a fact changed"
+  },
+  {
+   "row": "C914",
+   "screen": "talk_mom.talk",
+   "why": "still to ask: a fact changed"
+  },
+  {
+   "row": "C916",
+   "screen": "talk_mom.eat",
+   "why": "still to ask: a fact changed"
+  },
+  {
+   "row": "C916",
+   "screen": "talk_mom.talk",
+   "why": "still to ask: a fact changed"
+  },
+  {
+   "row": "C920",
+   "screen": "talk_mom.talk",
+   "why": "still to ask: a fact changed"
+  },
+  {
+   "row": "C921",
+   "screen": "mom_living_room.talk",
+   "why": "screen changed: truth row"
+  },
+  {
+   "row": "C921",
+   "screen": "talk_mom.eat",
+   "why": "still to ask: a fact changed"
+  },
+  {
+   "row": "C921",
+   "screen": "talk_mom.talk",
+   "why": "still to ask: a fact changed"
+  },
+  {
+   "row": "C924",
+   "screen": "talk_mom.eat",
+   "why": "still to ask: a fact changed"
+  },
+  {
+   "row": "C924",
+   "screen": "talk_mom.talk",
+   "why": "still to ask: a fact changed"
+  },
+  {
+   "row": "C926",
+   "screen": "talk_mom.eat",
+   "why": "still to ask: a fact changed"
+  },
+  {
+   "row": "C926",
+   "screen": "talk_mom.talk",
+   "why": "still to ask: a fact changed"
+  },
+  {
+   "row": "C927",
+   "screen": "mom_living_room.talk",
+   "why": "screen changed: truth row"
+  },
+  {
+   "row": "C927",
+   "screen": "talk_mom.eat",
+   "why": "still to ask: a fact changed"
+  },
+  {
+   "row": "C927",
+   "screen": "talk_mom.talk",
+   "why": "still to ask: a fact changed"
+  },
+  {
+   "row": "C928",
+   "screen": "talk_mom.eat",
+   "why": "still to ask: a fact changed"
+  },
+  {
+   "row": "C928",
+   "screen": "talk_mom.talk",
+   "why": "still to ask: a fact changed"
+  },
+  {
+   "row": "C929",
+   "screen": "talk_mom.talk",
+   "why": "still to ask: a fact changed"
+  },
+  {
+   "row": "C930",
+   "screen": "talk_mom.eat",
+   "why": "still to ask: a fact changed"
+  },
+  {
+   "row": "C930",
+   "screen": "talk_mom.talk",
+   "why": "still to ask: a fact changed"
+  },
+  {
+   "row": "C931",
+   "screen": "mom_living_room.talk",
+   "why": "screen changed: truth row"
+  },
+  {
+   "row": "C931",
+   "screen": "talk_mom.eat",
+   "why": "still to ask: a fact changed"
+  },
+  {
+   "row": "C931",
+   "screen": "talk_mom.talk",
+   "why": "still to ask: a fact changed"
+  },
+  {
+   "row": "L106",
+   "screen": "mom_living_room.talk",
+   "why": "screen changed: truth row"
+  },
+  {
+   "row": "L106",
+   "screen": "talk_mom.eat",
+   "why": "still to ask: a fact changed"
+  },
+  {
+   "row": "L106",
+   "screen": "talk_mom.talk",
+   "why": "still to ask: a fact changed"
+  },
+  {
+   "row": "L167",
+   "screen": "mom_living_room.talk",
+   "why": "screen changed: truth row"
+  },
+  {
+   "row": "L167",
+   "screen": "talk_mom.eat",
+   "why": "still to ask: a fact changed"
+  },
+  {
+   "row": "L167",
+   "screen": "talk_mom.talk",
+   "why": "still to ask: a fact changed"
+  }
+ ]
+}

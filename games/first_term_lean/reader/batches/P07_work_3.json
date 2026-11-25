@@ -1,0 +1,74 @@
+{
+ "items": [
+  {
+   "row": "B10",
+   "screen": "mom_living_room.talk",
+   "why": "screen changed: truth row"
+  },
+  {
+   "row": "B8",
+   "screen": "mom_living_room.talk",
+   "why": "screen changed: truth row"
+  },
+  {
+   "row": "C1158",
+   "screen": "mom_living_room.talk",
+   "why": "screen changed: truth row"
+  },
+  {
+   "row": "C1206",
+   "screen": "mom_living_room.talk",
+   "why": "screen changed: truth row"
+  },
+  {
+   "row": "C1631",
+   "screen": "mom_living_room.talk",
+   "why": "screen changed: truth row"
+  },
+  {
+   "row": "C460",
+   "screen": "mom_living_room.talk",
+   "why": "screen changed: truth row"
+  },
+  {
+   "row": "C461",
+   "screen": "mom_living_room.talk",
+   "why": "screen changed: truth row"
+  },
+  {
+   "row": "C903",
+   "screen": "mom_living_room.talk",
+   "why": "failed last pass"
+  },
+  {
+   "row": "C921",
+   "screen": "mom_living_room.talk",
+   "why": "screen changed: truth row"
+  },
+  {
+   "row": "C927",
+   "screen": "mom_living_room.talk",
+   "why": "screen changed: truth row"
+  },
+  {
+   "row": "C931",
+   "screen": "mom_living_room.talk",
+   "why": "screen changed: truth row"
+  },
+  {
+   "row": "L106",
+   "screen": "mom_living_room.talk",
+   "why": "screen changed: truth row"
+  },
+  {
+   "row": "L167",
+   "screen": "mom_living_room.talk",
+   "why": "screen changed: truth row"
+  },
+  {
+   "row": "clock#10",
+   "screen": "*",
+   "why": "never judged"
+  }
+ ]
+}

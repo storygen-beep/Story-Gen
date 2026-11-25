@@ -1,94 +1,14 @@
 {
  "items": [
   {
-   "row": "B10",
-   "screen": "library_meet_holt.after",
-   "why": "screen changed: truth row"
+   "row": "C889",
+   "screen": "*",
+   "why": "still to ask: its rule's text changed"
   },
   {
-   "row": "B10",
-   "screen": "library_meet_holt.meet",
-   "why": "screen changed: truth row"
-  },
-  {
-   "row": "B8",
-   "screen": "library_meet_holt.after",
-   "why": "screen changed: truth row"
-  },
-  {
-   "row": "B8",
-   "screen": "library_meet_holt.meet",
-   "why": "screen changed: truth row"
-  },
-  {
-   "row": "C1234",
-   "screen": "library_meet_holt.after",
-   "why": "failed last pass"
-  },
-  {
-   "row": "C1238",
-   "screen": "library_meet_holt.after",
-   "why": "failed last pass"
-  },
-  {
-   "row": "C460",
-   "screen": "library_meet_holt.after",
-   "why": "screen changed: truth row"
-  },
-  {
-   "row": "C460",
-   "screen": "library_meet_holt.meet",
-   "why": "screen changed: truth row"
-  },
-  {
-   "row": "C461",
-   "screen": "library_meet_holt.after",
-   "why": "screen changed: truth row"
-  },
-  {
-   "row": "C461",
-   "screen": "library_meet_holt.meet",
-   "why": "screen changed: truth row"
-  },
-  {
-   "row": "C910",
-   "screen": "library_meet_holt.after",
-   "why": "failed last pass (a note), its screen changed"
-  },
-  {
-   "row": "C927",
-   "screen": "library_meet_holt.after",
-   "why": "screen changed: truth row"
-  },
-  {
-   "row": "C929",
-   "screen": "library_meet_holt.after",
-   "why": "failed last pass (a note), its screen changed"
-  },
-  {
-   "row": "C931",
-   "screen": "library_meet_holt.after",
-   "why": "screen changed: truth row"
-  },
-  {
-   "row": "C953",
-   "screen": "library_meet_holt.after",
-   "why": "failed last pass (a note), its screen changed"
-  },
-  {
-   "row": "L106",
-   "screen": "library_meet_holt.after",
-   "why": "screen changed: truth row"
-  },
-  {
-   "row": "L106",
-   "screen": "library_meet_holt.meet",
-   "why": "screen changed: truth row"
-  },
-  {
-   "row": "L167",
-   "screen": "library_meet_holt.after",
-   "why": "screen changed: truth row"
+   "row": "C906",
+   "screen": "*",
+   "why": "still to ask: its rule's text changed"
   }
  ]
 }

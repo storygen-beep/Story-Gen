@@ -1,0 +1,469 @@
+{
+ "items": [
+  {
+   "row": "C1189",
+   "screen": "npcs.npc_dean.people_tab",
+   "why": "still to ask: screen is new"
+  },
+  {
+   "row": "C1189",
+   "screen": "npcs.npc_dean.stranger_name",
+   "why": "still to ask: screen is new"
+  },
+  {
+   "row": "C1189",
+   "screen": "npcs.npc_dean.tip",
+   "why": "still to ask: screen is new"
+  },
+  {
+   "row": "C124",
+   "screen": "story_hints.staying_in_shape",
+   "why": "a page entry changed"
+  },
+  {
+   "row": "C1340",
+   "screen": "npcs.npc_dean.people_tab",
+   "why": "still to ask: screen is new"
+  },
+  {
+   "row": "C1340",
+   "screen": "npcs.npc_dean.stranger_name",
+   "why": "still to ask: screen is new"
+  },
+  {
+   "row": "C1340",
+   "screen": "npcs.npc_dean.tip",
+   "why": "still to ask: screen is new"
+  },
+  {
+   "row": "C1366",
+   "screen": "story_hints.staying_in_shape",
+   "why": "a page entry changed"
+  },
+  {
+   "row": "C140",
+   "screen": "story_hints.staying_in_shape",
+   "why": "a page entry changed"
+  },
+  {
+   "row": "C1619",
+   "screen": "story_hints.staying_in_shape",
+   "why": "a page entry changed"
+  },
+  {
+   "row": "C215",
+   "screen": "story_hints.staying_in_shape",
+   "why": "a page entry changed"
+  },
+  {
+   "row": "C217",
+   "screen": "story_hints.staying_in_shape",
+   "why": "a page entry changed"
+  },
+  {
+   "row": "C2176",
+   "screen": "story_hints.staying_in_shape",
+   "why": "a page entry changed"
+  },
+  {
+   "row": "C34",
+   "screen": "story_hints.staying_in_shape",
+   "why": "a page entry changed"
+  },
+  {
+   "row": "C35",
+   "screen": "story_hints.staying_in_shape",
+   "why": "a page entry changed"
+  },
+  {
+   "row": "C36",
+   "screen": "story_hints.staying_in_shape",
+   "why": "a page entry changed"
+  },
+  {
+   "row": "C37",
+   "screen": "story_hints.staying_in_shape",
+   "why": "a page entry changed"
+  },
+  {
+   "row": "C422",
+   "screen": "npcs.npc_dean.people_tab",
+   "why": "still to ask: screen is new"
+  },
+  {
+   "row": "C422",
+   "screen": "npcs.npc_dean.stranger_name",
+   "why": "still to ask: screen is new"
+  },
+  {
+   "row": "C422",
+   "screen": "npcs.npc_dean.tip",
+   "why": "still to ask: screen is new"
+  },
+  {
+   "row": "C422",
+   "screen": "story_hints.staying_in_shape",
+   "why": "a page entry changed"
+  },
+  {
+   "row": "C430",
+   "screen": "story_hints.staying_in_shape",
+   "why": "a page entry changed"
+  },
+  {
+   "row": "C433",
+   "screen": "story_hints.staying_in_shape",
+   "why": "a page entry changed"
+  },
+  {
+   "row": "C442",
+   "screen": "npcs.npc_dean.people_tab",
+   "why": "still to ask: screen is new"
+  },
+  {
+   "row": "C442",
+   "screen": "npcs.npc_dean.stranger_name",
+   "why": "still to ask: screen is new"
+  },
+  {
+   "row": "C442",
+   "screen": "npcs.npc_dean.tip",
+   "why": "still to ask: screen is new"
+  },
+  {
+   "row": "C442",
+   "screen": "story_hints.staying_in_shape",
+   "why": "a page entry changed"
+  },
+  {
+   "row": "C447",
+   "screen": "npcs.npc_dean.people_tab",
+   "why": "still to ask: screen is new"
+  },
+  {
+   "row": "C447",
+   "screen": "npcs.npc_dean.stranger_name",
+   "why": "still to ask: screen is new"
+  },
+  {
+   "row": "C447",
+   "screen": "npcs.npc_dean.tip",
+   "why": "still to ask: screen is new"
+  },
+  {
+   "row": "C451",
+   "screen": "npcs.npc_dean.people_tab",
+   "why": "still to ask: screen is new"
+  },
+  {
+   "row": "C451",
+   "screen": "npcs.npc_dean.stranger_name",
+   "why": "still to ask: screen is new"
+  },
+  {
+   "row": "C451",
+   "screen": "npcs.npc_dean.tip",
+   "why": "still to ask: screen is new"
+  },
+  {
+   "row": "C451",
+   "screen": "story_hints.staying_in_shape",
+   "why": "a page entry changed"
+  },
+  {
+   "row": "C460",
+   "screen": "npcs.npc_dean.people_tab",
+   "why": "still to ask: screen is new"
+  },
+  {
+   "row": "C460",
+   "screen": "npcs.npc_dean.stranger_name",
+   "why": "still to ask: screen is new"
+  },
+  {
+   "row": "C460",
+   "screen": "npcs.npc_dean.tip",
+   "why": "still to ask: screen is new"
+  },
+  {
+   "row": "C460",
+   "screen": "story_hints.staying_in_shape",
+   "why": "screen changed: truth row"
+  },
+  {
+   "row": "C461",
+   "screen": "npcs.npc_dean.people_tab",
+   "why": "still to ask: screen is new"
+  },
+  {
+   "row": "C461",
+   "screen": "npcs.npc_dean.stranger_name",
+   "why": "still to ask: screen is new"
+  },
+  {
+   "row": "C461",
+   "screen": "npcs.npc_dean.tip",
+   "why": "still to ask: screen is new"
+  },
+  {
+   "row": "C461",
+   "screen": "story_hints.staying_in_shape",
+   "why": "screen changed: truth row"
+  },
+  {
+   "row": "C519",
+   "screen": "npcs.npc_dean.people_tab",
+   "why": "still to ask: screen is new"
+  },
+  {
+   "row": "C519",
+   "screen": "npcs.npc_dean.stranger_name",
+   "why": "still to ask: screen is new"
+  },
+  {
+   "row": "C519",
+   "screen": "npcs.npc_dean.tip",
+   "why": "still to ask: screen is new"
+  },
+  {
+   "row": "C519",
+   "screen": "story_hints.staying_in_shape",
+   "why": "a page entry changed"
+  },
+  {
+   "row": "C593",
+   "screen": "npcs.npc_dean.people_tab",
+   "why": "still to ask: screen is new"
+  },
+  {
+   "row": "C593",
+   "screen": "npcs.npc_dean.stranger_name",
+   "why": "still to ask: screen is new"
+  },
+  {
+   "row": "C593",
+   "screen": "npcs.npc_dean.tip",
+   "why": "still to ask: screen is new"
+  },
+  {
+   "row": "C596",
+   "screen": "npcs.npc_dean.people_tab",
+   "why": "still to ask: screen is new"
+  },
+  {
+   "row": "C596",
+   "screen": "npcs.npc_dean.stranger_name",
+   "why": "still to ask: screen is new"
+  },
+  {
+   "row": "C596",
+   "screen": "npcs.npc_dean.tip",
+   "why": "still to ask: screen is new"
+  },
+  {
+   "row": "C598",
+   "screen": "story_hints.staying_in_shape",
+   "why": "a page entry changed"
+  },
+  {
+   "row": "C625",
+   "screen": "npcs.npc_dean.people_tab",
+   "why": "still to ask: screen is new"
+  },
+  {
+   "row": "C625",
+   "screen": "npcs.npc_dean.stranger_name",
+   "why": "still to ask: screen is new"
+  },
+  {
+   "row": "C625",
+   "screen": "npcs.npc_dean.tip",
+   "why": "still to ask: screen is new"
+  },
+  {
+   "row": "C626",
+   "screen": "npcs.npc_dean.people_tab",
+   "why": "still to ask: screen is new"
+  },
+  {
+   "row": "C626",
+   "screen": "npcs.npc_dean.stranger_name",
+   "why": "still to ask: screen is new"
+  },
+  {
+   "row": "C626",
+   "screen": "npcs.npc_dean.tip",
+   "why": "still to ask: screen is new"
+  },
+  {
+   "row": "C630",
+   "screen": "npcs.npc_dean.people_tab",
+   "why": "still to ask: screen is new"
+  },
+  {
+   "row": "C630",
+   "screen": "npcs.npc_dean.stranger_name",
+   "why": "still to ask: screen is new"
+  },
+  {
+   "row": "C630",
+   "screen": "npcs.npc_dean.tip",
+   "why": "still to ask: screen is new"
+  },
+  {
+   "row": "C632",
+   "screen": "npcs.npc_dean.people_tab",
+   "why": "still to ask: screen is new"
+  },
+  {
+   "row": "C632",
+   "screen": "npcs.npc_dean.stranger_name",
+   "why": "still to ask: screen is new"
+  },
+  {
+   "row": "C632",
+   "screen": "npcs.npc_dean.tip",
+   "why": "still to ask: screen is new"
+  },
+  {
+   "row": "C644",
+   "screen": "npcs.npc_dean.people_tab",
+   "why": "still to ask: screen is new"
+  },
+  {
+   "row": "C644",
+   "screen": "npcs.npc_dean.stranger_name",
+   "why": "still to ask: screen is new"
+  },
+  {
+   "row": "C644",
+   "screen": "npcs.npc_dean.tip",
+   "why": "still to ask: screen is new"
+  },
+  {
+   "row": "C889",
+   "screen": "story_hints.staying_in_shape",
+   "why": "a page entry changed"
+  },
+  {
+   "row": "C892",
+   "screen": "story_hints.staying_in_shape",
+   "why": "a page entry changed"
+  },
+  {
+   "row": "C897",
+   "screen": "story_hints.staying_in_shape",
+   "why": "a page entry changed"
+  },
+  {
+   "row": "C900",
+   "screen": "story_hints.staying_in_shape",
+   "why": "a page entry changed"
+  },
+  {
+   "row": "C902",
+   "screen": "story_hints.staying_in_shape",
+   "why": "a page entry changed"
+  },
+  {
+   "row": "C903",
+   "screen": "story_hints.staying_in_shape",
+   "why": "a page entry changed"
+  },
+  {
+   "row": "C906",
+   "screen": "story_hints.staying_in_shape",
+   "why": "a page entry changed"
+  },
+  {
+   "row": "C910",
+   "screen": "story_hints.staying_in_shape",
+   "why": "a page entry changed"
+  },
+  {
+   "row": "C913",
+   "screen": "story_hints.staying_in_shape",
+   "why": "a page entry changed"
+  },
+  {
+   "row": "C914",
+   "screen": "story_hints.staying_in_shape",
+   "why": "a page entry changed"
+  },
+  {
+   "row": "C916",
+   "screen": "story_hints.staying_in_shape",
+   "why": "a page entry changed"
+  },
+  {
+   "row": "C920",
+   "screen": "story_hints.staying_in_shape",
+   "why": "a page entry changed"
+  },
+  {
+   "row": "C924",
+   "screen": "story_hints.staying_in_shape",
+   "why": "a page entry changed"
+  },
+  {
+   "row": "C926",
+   "screen": "story_hints.staying_in_shape",
+   "why": "a page entry changed"
+  },
+  {
+   "row": "C927",
+   "screen": "story_hints.staying_in_shape",
+   "why": "screen changed: truth row"
+  },
+  {
+   "row": "C928",
+   "screen": "story_hints.staying_in_shape",
+   "why": "a page entry changed"
+  },
+  {
+   "row": "C929",
+   "screen": "story_hints.staying_in_shape",
+   "why": "a page entry changed"
+  },
+  {
+   "row": "C930",
+   "screen": "story_hints.staying_in_shape",
+   "why": "a page entry changed"
+  },
+  {
+   "row": "C931",
+   "screen": "story_hints.staying_in_shape",
+   "why": "screen changed: truth row"
+  },
+  {
+   "row": "C952",
+   "screen": "story_hints.staying_in_shape",
+   "why": "a page entry changed"
+  },
+  {
+   "row": "L106",
+   "screen": "npcs.npc_dean.people_tab",
+   "why": "still to ask: screen is new"
+  },
+  {
+   "row": "L106",
+   "screen": "npcs.npc_dean.stranger_name",
+   "why": "still to ask: screen is new"
+  },
+  {
+   "row": "L106",
+   "screen": "npcs.npc_dean.tip",
+   "why": "still to ask: screen is new"
+  },
+  {
+   "row": "L167",
+   "screen": "story_hints.staying_in_shape",
+   "why": "screen changed: truth row"
+  },
+  {
+   "row": "L172",
+   "screen": "story_hints.staying_in_shape",
+   "why": "a page entry changed"
+  }
+ ]
+}

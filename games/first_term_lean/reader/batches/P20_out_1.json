@@ -1,930 +1,180 @@
 {
  "verdicts": [
   {
-   "row": "B1",
-   "screen": "*",
-   "verdict": "PASS",
-   "line": "I live two streets that way, the green door. Come find me.",
-   "why": "Zoe's first canvas (no earlier one to check); her want, pulling Ella into fun, is on screen before the offer: she drops down uninvited and holds a cup out; nothing sexual is acted"
-  },
-  {
-   "row": "B10",
-   "screen": "quad_meet_zoe.coffee",
-   "verdict": "FAIL",
-   "line": "A girl drops onto the grass next to you without asking",
-   "why": "fires on entry to a thoroughfare, usually straight off the bus ('step off at the campus gates', travel_bus_to_campus) or out of a building; Ella is not on the grass, so 'drops onto the grass next to you' and 'Her view from the grass' are false on most arrivals",
-   "cause": "P20a1-c1"
-  },
-  {
    "row": "B10",
    "screen": "quad_meet_zoe.talk",
    "verdict": "PASS",
-   "line": "She's halfway across the quad before you've said yes",
-   "why": "true at every minute (Zoe there 13–15 M/W/F, 14–15 Tu/Th by who_is_where; she stays on the quad, her face reads 'on the grass' after met)"
-  },
-  {
-   "row": "B11",
-   "screen": "*",
-   "verdict": "N/A",
-   "line": "—",
-   "why": "no solo button; a one-time meeting"
-  },
-  {
-   "row": "B12",
-   "screen": "quad_meet_zoe.coffee",
-   "verdict": "FAIL",
-   "line": "a crop top that shows off her stomach and doesn't care who looks.",
-   "why": "the card marks this screen 'something sexual shows', but its only charge is Zoe's stomach and an unseen 'who looks': no part of Ella's body, no reaction to her, no 'not yet' or price",
-   "cause": "P20a1-c2"
-  },
-  {
-   "row": "B13",
-   "screen": "*",
-   "verdict": "N/A",
-   "line": "—",
-   "why": "no moment alone with her body"
-  },
-  {
-   "row": "B2",
-   "screen": "*",
-   "verdict": "PASS",
-   "line": "Come find me.",
-   "why": "first meeting: from stranger to met, with her door opened (zoe_place_known)"
-  },
-  {
-   "row": "B3",
-   "screen": "*",
-   "verdict": "PASS",
-   "line": "You know exactly where the green door is.",
-   "why": "ends on her door and an invitation; Zoe's Apartment opens"
-  },
-  {
-   "row": "B4",
-   "screen": "*",
-   "verdict": "PASS",
-   "line": "I'm really not.",
-   "why": "pushback at stage 0, a laugh on her body on the 'asked' path, no italic thought"
-  },
-  {
-   "row": "B5",
-   "screen": "*",
-   "verdict": "PASS",
-   "line": "More for me, then.",
-   "why": "Zoe answers each of her three choices"
-  },
-  {
-   "row": "B6",
-   "screen": "*",
-   "verdict": "PASS",
-   "line": "More for me, then. / She drinks from both.",
-   "why": "the no to the coffee is written and lands; the meeting still completes, no final no"
-  },
-  {
-   "row": "B7",
-   "screen": "*",
-   "verdict": "N/A",
-   "line": "—",
-   "why": "no explicit beat"
+   "line": "She's halfway across the quad before you've said yes, waving over her shoulder without looking back.",
+   "why": "every line holds at the first and last minute and on a second visit; no person named (fires while Zoe's row has her on the grass, Mon/Wed/Fri 13-15, Tue/Thu 14-15; Jake and his friends 14-16 may be on the quad unnamed, and nothing claims the quad is empty; 'the green door' is built (zoe_place_known, home 18-23))"
   },
   {
    "row": "B8",
-   "screen": "*",
+   "screen": "quad_meet_zoe.talk",
    "verdict": "PASS",
-   "line": "Zoe, 19 / two streets that way",
-   "why": "19 matches PLAN §5 table; 'two streets' matches near_zoe_apartment's description; the only garment named (crop top) is Zoe's, none of Ella's"
-  },
-  {
-   "row": "B9",
-   "screen": "*",
-   "verdict": "N/A",
-   "line": "—",
-   "why": "PLAN declares no companion-rival for Zoe (rival is a later person, PLAN line 65)"
-  },
-  {
-   "row": "C1002",
-   "screen": "*",
-   "verdict": "N/A",
-   "line": "—",
-   "why": "no spend"
-  },
-  {
-   "row": "C109",
-   "screen": "*",
-   "verdict": "PASS",
-   "line": "Come find me.",
-   "why": "first scene: leak half N/A (no step before); the promise it ends on is her door"
-  },
-  {
-   "row": "C115",
-   "screen": "*",
-   "verdict": "PASS",
-   "line": "Everyone here's so boring. You look like you're about to stop being boring.",
-   "why": "her own reason (boredom), shown, and what she does: coffee and her address"
-  },
-  {
-   "row": "C1158",
-   "screen": "*",
-   "verdict": "PASS",
-   "line": "a crop top that shows off her stomach and doesn't care who looks.",
-   "why": "no garment of Ella's is named; the crop top is Zoe's"
-  },
-  {
-   "row": "C1173",
-   "screen": "*",
-   "verdict": "N/A",
-   "line": "—",
-   "why": "no dress code met or crossed: the scene starts and ends on the quad"
-  },
-  {
-   "row": "C1176",
-   "screen": "*",
-   "verdict": "PASS",
-   "line": "—",
-   "why": "no clothing read on a sex scene"
-  },
-  {
-   "row": "C1177",
-   "screen": "*",
-   "verdict": "N/A",
-   "line": "—",
-   "why": "Ella's exposure not in play"
-  },
-  {
-   "row": "C1184",
-   "screen": "*",
-   "verdict": "N/A",
-   "line": "—",
-   "why": "no dress code met or crossed: the scene starts and ends on the quad"
-  },
-  {
-   "row": "C1185",
-   "screen": "*",
-   "verdict": "N/A",
-   "line": "—",
-   "why": "no dress code met or crossed: the scene starts and ends on the quad"
-  },
-  {
-   "row": "C1189",
-   "screen": "*",
-   "verdict": "N/A",
-   "line": "—",
-   "why": "no state of Ella's worth noticing in play; nothing equipped"
-  },
-  {
-   "row": "C1198",
-   "screen": "*",
-   "verdict": "N/A",
-   "line": "—",
-   "why": "no dress code met or crossed: the scene starts and ends on the quad"
-  },
-  {
-   "row": "C120",
-   "screen": "*",
-   "verdict": "PASS",
-   "line": "I live two streets that way, the green door.",
-   "why": "first step adds a new kind of yes: a friend and a door"
-  },
-  {
-   "row": "C1200",
-   "screen": "*",
-   "verdict": "PASS",
-   "line": "—",
-   "why": "no clothes asked by the scene"
-  },
-  {
-   "row": "C1206",
-   "screen": "*",
-   "verdict": "PASS",
-   "line": "a crop top that shows off her stomach and doesn't care who looks.",
-   "why": "no garment of Ella's is named"
-  },
-  {
-   "row": "C1220",
-   "screen": "*",
-   "verdict": "N/A",
-   "line": "—",
-   "why": "no dress code met or crossed: the scene starts and ends on the quad"
-  },
-  {
-   "row": "C1221",
-   "screen": "*",
-   "verdict": "N/A",
-   "line": "—",
-   "why": "no dress code met or crossed: the scene starts and ends on the quad"
-  },
-  {
-   "row": "C1234",
-   "screen": "quad_meet_zoe.coffee",
-   "verdict": "PASS",
-   "line": "She holds one cup out and waits.",
-   "why": "the still sits right after the line it shows"
-  },
-  {
-   "row": "C1238",
-   "screen": "quad_meet_zoe.coffee",
-   "verdict": "PASS",
-   "line": "She holds one cup out and waits.",
-   "why": "one-time; the picture (two coffees, grinning) matches the line on its one visit; the grass framing is the c1 line's, same claim"
-  },
-  {
-   "row": "C1249",
-   "screen": "*",
-   "verdict": "PASS",
-   "line": "—",
-   "why": "a person's meeting picture"
-  },
-  {
-   "row": "C1250",
-   "screen": "*",
-   "verdict": "PASS",
-   "line": "—",
-   "why": "media on a talk screen, not the room card"
-  },
-  {
-   "row": "C1255",
-   "screen": "*",
-   "verdict": "PASS",
-   "line": "pool_dir = people/zoe_quad_t0",
-   "why": "used by no other block"
-  },
-  {
-   "row": "C1261",
-   "screen": "*",
-   "verdict": "PASS",
-   "line": "—",
-   "why": "a new face the player wants to see"
-  },
-  {
-   "row": "C1265",
-   "screen": "*",
-   "verdict": "PASS",
-   "line": "—",
-   "why": "a person's first meeting, not a chore or menu"
-  },
-  {
-   "row": "C1267",
-   "screen": "*",
-   "verdict": "PASS",
-   "line": "—",
-   "why": "her look is what the words can't give"
-  },
-  {
-   "row": "C1274",
-   "screen": "*",
-   "verdict": "PASS",
-   "line": "_t0",
-   "why": "everyday, still"
-  },
-  {
-   "row": "C1275",
-   "screen": "*",
-   "verdict": "PASS",
-   "line": "sitting cross-legged ... grinning",
-   "why": "a held pose; a still"
-  },
-  {
-   "row": "C1277",
-   "screen": "*",
-   "verdict": "PASS",
-   "line": "on a campus lawn",
-   "why": "names the quad"
-  },
-  {
-   "row": "C1278",
-   "screen": "*",
-   "verdict": "PASS",
-   "line": "she is 18, out of frame",
-   "why": "Ella's age given; Zoe's 19 too"
-  },
-  {
-   "row": "C1279",
-   "screen": "*",
-   "verdict": "N/A",
-   "line": "—",
-   "why": "no mirror"
-  },
-  {
-   "row": "C1280",
-   "screen": "*",
-   "verdict": "PASS",
-   "line": "pool = 1",
-   "why": "one-time person spot"
-  },
-  {
-   "row": "C1281",
-   "screen": "*",
-   "verdict": "PASS",
-   "line": "Her view ... grinning at the camera",
-   "why": "what the looker sees, one person in frame"
-  },
-  {
-   "row": "C1284",
-   "screen": "*",
-   "verdict": "N/A",
-   "line": "—",
-   "why": "not a walk-in"
-  },
-  {
-   "row": "C1340",
-   "screen": "*",
-   "verdict": "N/A",
-   "line": "—",
-   "why": "Zoe is not a housemate"
-  },
-  {
-   "row": "C148",
-   "screen": "*",
-   "verdict": "PASS",
-   "line": "Come find me.",
-   "why": "first step, goes from nothing to met + her place"
-  },
-  {
-   "row": "C149",
-   "screen": "*",
-   "verdict": "PASS",
-   "line": "You know exactly where the green door is.",
-   "why": "points at her apartment"
-  },
-  {
-   "row": "C162",
-   "screen": "*",
-   "verdict": "PASS",
-   "line": "I live two streets that way, the green door.",
-   "why": "information earned in-scene opens a place"
-  },
-  {
-   "row": "C1637",
-   "screen": "*",
-   "verdict": "PASS",
-   "line": "—",
-   "why": "about 61 and 85–100 words; somebody speaks"
-  },
-  {
-   "row": "C164",
-   "screen": "*",
-   "verdict": "PASS",
-   "line": "More for me, then.",
-   "why": "the no is to the coffee, not the step; the step still completes, nothing is lost"
-  },
-  {
-   "row": "C165",
-   "screen": "*",
-   "verdict": "PASS",
-   "line": "—",
-   "why": "no final no anywhere"
-  },
-  {
-   "row": "C166",
-   "screen": "*",
-   "verdict": "PASS",
-   "line": "I'm fine, thanks.",
-   "why": "the refusal is ordinary, not final, on Zoe's first step"
-  },
-  {
-   "row": "C180",
-   "screen": "*",
-   "verdict": "PASS",
-   "line": "Come find me. / You know exactly where the green door is.",
-   "why": "opens the next (Zoe's Apartment) and says so"
-  },
-  {
-   "row": "C286",
-   "screen": "*",
-   "verdict": "PASS",
-   "line": "a crop top that shows off her stomach and doesn't care who looks.",
-   "why": "stage 1 content only; nothing sexual happens to her"
-  },
-  {
-   "row": "C287",
-   "screen": "*",
-   "verdict": "PASS",
-   "line": "a crop top that shows off her stomach and doesn't care who looks.",
-   "why": "no flirt or dare asked of her; nothing above her stage"
-  },
-  {
-   "row": "C288",
-   "screen": "*",
-   "verdict": "N/A",
-   "line": "—",
-   "why": "no private contact"
-  },
-  {
-   "row": "C289",
-   "screen": "*",
-   "verdict": "N/A",
-   "line": "—",
-   "why": "no bare body"
-  },
-  {
-   "row": "C291",
-   "screen": "*",
-   "verdict": "PASS",
-   "line": "a crop top that shows off her stomach and doesn't care who looks.",
-   "why": "level set by what shows (a crop top); no watchers named"
-  },
-  {
-   "row": "C296",
-   "screen": "*",
-   "verdict": "PASS",
-   "line": "a crop top that shows off her stomach and doesn't care who looks.",
-   "why": "opens low"
-  },
-  {
-   "row": "C297",
-   "screen": "*",
-   "verdict": "N/A",
-   "line": "—",
-   "why": "Zoe doesn't live with her"
-  },
-  {
-   "row": "C311",
-   "screen": "quad_meet_zoe.coffee",
-   "verdict": "FAIL",
-   "line": "a crop top that shows off her stomach and doesn't care who looks.",
-   "why": "low-heat screen names no part of Ella's body and writes nobody's reaction to her, no 'not yet' or price",
-   "cause": "P20a1-c2"
-  },
-  {
-   "row": "C314",
-   "screen": "quad_meet_zoe.coffee",
-   "verdict": "FAIL",
-   "line": "a crop top that shows off her stomach and doesn't care who looks.",
-   "why": "the charge is talk and Zoe's outfit only; no reaction on anyone's body",
-   "cause": "P20a1-c2"
-  },
-  {
-   "row": "C422",
-   "screen": "*",
-   "verdict": "PASS",
-   "line": "Take the coffee · I'm fine, thanks. · Do you always do this? · Done",
-   "why": "plain"
-  },
-  {
-   "row": "C442",
-   "screen": "*",
-   "verdict": "PASS",
-   "line": "She's halfway across the quad before you've said yes",
-   "why": "what happens is said plainly"
-  },
-  {
-   "row": "C447",
-   "screen": "*",
-   "verdict": "PASS",
-   "line": "Only with the interesting ones.",
-   "why": "one breezy, teasing manner held"
-  },
-  {
-   "row": "C448",
-   "screen": "*",
-   "verdict": "PASS",
-   "line": "You look like you need this more than I do, babe. I'm Zoe. You're new.",
-   "why": "who she is, what she wants, that she likes Ella, all in the first lines"
-  },
-  {
-   "row": "C449",
-   "screen": "quad_meet_zoe.coffee",
-   "verdict": "FAIL",
-   "line": "a crop top that shows off her stomach and doesn't care who looks.",
-   "why": "the sexual tension is buried in 'doesn't care who looks': no looker, nothing named",
-   "cause": "P20a1-c2"
-  },
-  {
-   "row": "C450",
-   "screen": "*",
-   "verdict": "PASS",
-   "line": "You know exactly where the green door is.",
-   "why": "ends on her door"
-  },
-  {
-   "row": "C451",
-   "screen": "*",
-   "verdict": "PASS",
-   "line": "a coffee in each hand ... the green door",
-   "why": "concrete detail"
-  },
-  {
-   "row": "C460",
-   "screen": "quad_meet_zoe.coffee",
-   "verdict": "FAIL",
-   "line": "A girl drops onto the grass next to you without asking",
-   "why": "Ella arrives at a thoroughfare (off the bus at the campus gates, or out of a building) and is not on the grass; the line and 'Her view from the grass' are false on most arrivals",
-   "cause": "P20a1-c1"
+   "line": "She's halfway across the quad before you've said yes, waving over her shoulder without looking back.",
+   "why": "no garment of hers named; no number that disagrees with PLAN"
   },
   {
    "row": "C460",
    "screen": "quad_meet_zoe.talk",
    "verdict": "PASS",
-   "line": "I live two streets that way, the green door.",
-   "why": "matches near_zoe_apartment; Zoe present every minute of the window"
+   "line": "She's halfway across the quad before you've said yes, waving over her shoulder without looking back.",
+   "why": "no claim about who is there, the clock, her past or her clothes that can be false (fires while Zoe's row has her on the grass, Mon/Wed/Fri 13-15, Tue/Thu 14-15; Jake and his friends 14-16 may be on the quad unnamed, and nothing claims the quad is empty; 'the green door' is built (zoe_place_known, home 18-23))"
   },
   {
    "row": "C461",
-   "screen": "*",
-   "verdict": "PASS",
-   "line": "Everyone here's so boring.",
-   "why": "dialogue fits her PLAN entry (companion, pulls her into fun)"
-  },
-  {
-   "row": "C519",
-   "screen": "*",
-   "verdict": "PASS",
-   "line": "—",
-   "why": "one job per screen, under 150 words"
-  },
-  {
-   "row": "C593",
-   "screen": "*",
-   "verdict": "PASS",
-   "line": "babe",
-   "why": "'babe' appears only in this line in the game (grep of toml_phases)"
-  },
-  {
-   "row": "C596",
-   "screen": "*",
-   "verdict": "N/A",
-   "line": "—",
-   "why": "not a talk screen under a person's menu; a meeting"
-  },
-  {
-   "row": "C601",
-   "screen": "quad_meet_zoe.coffee",
-   "verdict": "PASS",
-   "line": "She holds one cup out and waits.",
-   "why": "her want shows on her body before the offer; not a man she lives with, no cover needed"
-  },
-  {
-   "row": "C601",
    "screen": "quad_meet_zoe.talk",
    "verdict": "PASS",
-   "line": "she watches you drink it like it's a test you're passing",
-   "why": "her want on her face, seen by Ella"
-  },
-  {
-   "row": "C613",
-   "screen": "*",
-   "verdict": "PASS",
-   "line": "She holds one cup out and waits.",
-   "why": "her wanting shows on her body before she acts"
-  },
-  {
-   "row": "C618",
-   "screen": "*",
-   "verdict": "PASS",
-   "line": "—",
-   "why": "Zoe's Apartment (hidden_until zoe_place_known) sits behind this meeting; she is unmet at start"
-  },
-  {
-   "row": "C619",
-   "screen": "*",
-   "verdict": "PASS",
-   "line": "—",
-   "why": "Zoe's Apartment (hidden_until zoe_place_known) sits behind this meeting; she is unmet at start"
-  },
-  {
-   "row": "C620",
-   "screen": "*",
-   "verdict": "PASS",
-   "line": "—",
-   "why": "present_faces hides her until her quest card (met_zoe) shows (setup.presentFaceSlugs)"
-  },
-  {
-   "row": "C622",
-   "screen": "*",
-   "verdict": "PASS",
-   "line": "—",
-   "why": "Zoe's Apartment (hidden_until zoe_place_known) sits behind this meeting; she is unmet at start"
-  },
-  {
-   "row": "C625",
-   "screen": "*",
-   "verdict": "PASS",
-   "line": "A girl drops onto the grass next to you",
-   "why": "a description first, the name when she gives it"
-  },
-  {
-   "row": "C626",
-   "screen": "*",
-   "verdict": "PASS",
-   "line": "Zoe, 19. She found you on the quad.",
-   "why": "the name after met"
-  },
-  {
-   "row": "C627",
-   "screen": "*",
-   "verdict": "PASS",
-   "line": "I'm Zoe.",
-   "why": "the scene that sets met_zoe names her"
-  },
-  {
-   "row": "C630",
-   "screen": "*",
-   "verdict": "PASS",
-   "line": "I'm Zoe. You're new. / Everyone here's so boring.",
-   "why": "name and relation (a student here, at Ella's college) both on screen"
-  },
-  {
-   "row": "C632",
-   "screen": "*",
-   "verdict": "PASS",
-   "line": "role = College friend",
-   "why": "says who she is"
-  },
-  {
-   "row": "C639",
-   "screen": "*",
-   "verdict": "PASS",
-   "line": "Take the coffee · Do you always do this? · I'm fine, thanks.",
-   "why": "three graded answers, each written"
-  },
-  {
-   "row": "C640",
-   "screen": "*",
-   "verdict": "PASS",
-   "line": "More for me, then.",
-   "why": "the no is content"
-  },
-  {
-   "row": "C644",
-   "screen": "*",
-   "verdict": "PASS",
-   "line": "I live two streets that way, the green door.",
-   "why": "her own subject (boredom, fun) and place"
-  },
-  {
-   "row": "C758",
-   "screen": "*",
-   "verdict": "PASS",
-   "line": "—",
-   "why": "short labels"
-  },
-  {
-   "row": "C762",
-   "screen": "*",
-   "verdict": "PASS",
-   "line": "—",
-   "why": "no 'Nothing happens.'"
-  },
-  {
-   "row": "C769",
-   "screen": "*",
-   "verdict": "PASS",
-   "line": "—",
-   "why": "the quad's description is unchanged"
-  },
-  {
-   "row": "C770",
-   "screen": "*",
-   "verdict": "N/A",
-   "line": "—",
-   "why": "not a room screen"
-  },
-  {
-   "row": "C771",
-   "screen": "*",
-   "verdict": "PASS",
-   "line": "—",
-   "why": "a one-time meeting, not the quad's introduction"
-  },
-  {
-   "row": "C773",
-   "screen": "*",
-   "verdict": "PASS",
-   "line": "—",
-   "why": "no menu button added; the scene fires by itself"
-  },
-  {
-   "row": "C776",
-   "screen": "*",
-   "verdict": "PASS",
-   "line": "—",
-   "why": "no menu button added; the scene fires by itself"
-  },
-  {
-   "row": "C777",
-   "screen": "*",
-   "verdict": "PASS",
-   "line": "—",
-   "why": "no menu button added; the scene fires by itself"
-  },
-  {
-   "row": "C794",
-   "screen": "*",
-   "verdict": "PASS",
-   "line": "—",
-   "why": "the quad's description is unchanged"
-  },
-  {
-   "row": "C795",
-   "screen": "*",
-   "verdict": "PASS",
-   "line": "—",
-   "why": "the quad's description is unchanged"
-  },
-  {
-   "row": "C804",
-   "screen": "*",
-   "verdict": "PASS",
-   "line": "—",
-   "why": "the quad changes with Zoe there"
+   "line": "She's halfway across the quad before you've said yes, waving over her shoulder without looking back.",
+   "why": "texture only, and dialogue that fits the cast entry"
   },
   {
    "row": "C889",
-   "screen": "*",
+   "screen": "quad_meet_zoe.talk",
    "verdict": "PASS",
-   "line": "—",
-   "why": "no clock promise; true at 14:59 too"
+   "line": "She's halfway across the quad before you've said yes, waving over her shoulder without looking back.",
+   "why": "labels name no clock time and no duration"
   },
   {
    "row": "C892",
-   "screen": "*",
+   "screen": "quad_meet_zoe.talk",
    "verdict": "PASS",
-   "line": "—",
-   "why": "no clock promise; true at 14:59 too"
+   "line": "She's halfway across the quad before you've said yes, waving over her shoulder without looking back.",
+   "why": "no hour in the act"
   },
   {
    "row": "C897",
-   "screen": "*",
-   "verdict": "N/A",
-   "line": "—",
-   "why": "no travel"
+   "screen": "quad_meet_zoe.talk",
+   "verdict": "PASS",
+   "line": "She's halfway across the quad before you've said yes, waving over her shoulder without looking back.",
+   "why": "time sits on the move or the act, not on every room"
   },
   {
    "row": "C900",
-   "screen": "*",
+   "screen": "quad_meet_zoe.talk",
    "verdict": "PASS",
-   "line": "—",
-   "why": "no clock time in prose"
+   "line": "She's halfway across the quad before you've said yes, waving over her shoulder without looking back.",
+   "why": "no beat says what time it is"
   },
   {
    "row": "C902",
-   "screen": "*",
+   "screen": "quad_meet_zoe.talk",
    "verdict": "PASS",
-   "line": "—",
-   "why": "no clock promise; true at 14:59 too"
+   "line": "She's halfway across the quad before you've said yes, waving over her shoulder without looking back.",
+   "why": "read at the last minute of the window, still true"
   },
   {
    "row": "C903",
-   "screen": "*",
+   "screen": "quad_meet_zoe.talk",
    "verdict": "PASS",
-   "line": "—",
-   "why": "no weekday named"
+   "line": "She's halfway across the quad before you've said yes, waving over her shoulder without looking back.",
+   "why": "no weekday named in a beat"
   },
   {
    "row": "C906",
-   "screen": "*",
+   "screen": "quad_meet_zoe.talk",
    "verdict": "PASS",
-   "line": "—",
-   "why": "no clock promise; true at 14:59 too"
+   "line": "She's halfway across the quad before you've said yes, waving over her shoulder without looking back.",
+   "why": "no 'till X' on any label"
   },
   {
    "row": "C910",
    "screen": "quad_meet_zoe.talk",
-   "verdict": "FAIL",
-   "line": "Done",
-   "why": "spends 10 minutes; the label doesn't say how much"
+   "verdict": "PASS",
+   "line": "She's halfway across the quad before you've said yes, waving over her shoulder without looking back.",
+   "why": "buttons say no time and no energy; money only where the act costs money"
   },
   {
    "row": "C913",
-   "screen": "*",
-   "verdict": "PASS",
-   "line": "—",
-   "why": "an event that happens to her; hidden when Zoe isn't there"
+   "screen": "quad_meet_zoe.talk",
+   "verdict": "N/A",
+   "line": "She's halfway across the quad before you've said yes, waving over her shoulder without looking back.",
+   "why": "no row on this screen has hours or a window"
   },
   {
    "row": "C914",
-   "screen": "*",
-   "verdict": "PASS",
-   "line": "—",
-   "why": "no row with hours shown"
+   "screen": "quad_meet_zoe.talk",
+   "verdict": "N/A",
+   "line": "She's halfway across the quad before you've said yes, waving over her shoulder without looking back.",
+   "why": "no row on this screen has hours or a window"
   },
   {
    "row": "C916",
-   "screen": "*",
+   "screen": "quad_meet_zoe.talk",
    "verdict": "PASS",
-   "line": "—",
-   "why": "the event stays hidden when shut"
+   "line": "trigger: npc_zoe is_present",
+   "why": "the meeting happens to her and stays hidden when her row is out"
   },
   {
    "row": "C920",
-   "screen": "*",
+   "screen": "quad_meet_zoe.talk",
    "verdict": "PASS",
-   "line": "—",
-   "why": "Done stays on the quad; no hop"
+   "line": "She's halfway across the quad before you've said yes, waving over her shoulder without looking back.",
+   "why": "Done returns to the same place; its minutes are the act's, not a hop"
   },
   {
    "row": "C924",
-   "screen": "*",
-   "verdict": "N/A",
-   "line": "—",
-   "why": "no travel"
+   "screen": "quad_meet_zoe.talk",
+   "verdict": "PASS",
+   "line": "She's halfway across the quad before you've said yes, waving over her shoulder without looking back.",
+   "why": "the minutes spent make the schedule matter"
   },
   {
    "row": "C926",
-   "screen": "*",
+   "screen": "quad_meet_zoe.talk",
    "verdict": "PASS",
-   "line": "—",
-   "why": "no clock promise; true at 14:59 too"
+   "line": "She's halfway across the quad before you've said yes, waving over her shoulder without looking back.",
+   "why": "nothing sends the clock to a named hour"
   },
   {
    "row": "C927",
-   "screen": "*",
+   "screen": "quad_meet_zoe.talk",
    "verdict": "PASS",
-   "line": "time_progression_minutes = 0",
-   "why": "every exit states its time (0 on the first screen, 10 on Done; read with .get, so 0 stays 0)"
+   "line": "She's halfway across the quad before you've said yes, waving over her shoulder without looking back.",
+   "why": "every exit carries its own minutes"
   },
   {
    "row": "C928",
-   "screen": "*",
+   "screen": "quad_meet_zoe.talk",
    "verdict": "PASS",
-   "line": "—",
-   "why": "no clock printed"
+   "line": "She's halfway across the quad before you've said yes, waving over her shoulder without looking back.",
+   "why": "no clock printed into prose"
   },
   {
    "row": "C929",
    "screen": "quad_meet_zoe.talk",
-   "verdict": "FAIL",
-   "line": "Done",
-   "why": "the activity's time is tagged nowhere, and the label doesn't carry it"
+   "verdict": "PASS",
+   "line": "She's halfway across the quad before you've said yes, waving over her shoulder without looking back.",
+   "why": "the activity's time is on no label"
   },
   {
    "row": "C930",
-   "screen": "*",
+   "screen": "quad_meet_zoe.talk",
    "verdict": "N/A",
-   "line": "—",
-   "why": "no windowed work"
+   "line": "She's halfway across the quad before you've said yes, waving over her shoulder without looking back.",
+   "why": "no row on this screen has hours or a window"
   },
   {
    "row": "C931",
-   "screen": "*",
-   "verdict": "N/A",
-   "line": "—",
-   "why": "no time_of_day condition"
-  },
-  {
-   "row": "C953",
    "screen": "quad_meet_zoe.talk",
-   "verdict": "FAIL",
-   "line": "Done",
-   "why": "'Done' spends 10 minutes and the label doesn't say so"
+   "verdict": "N/A",
+   "line": "",
+   "why": "no time_of_day; the trigger reads Zoe's row"
   },
   {
    "row": "L106",
-   "screen": "*",
+   "screen": "quad_meet_zoe.talk",
    "verdict": "PASS",
-   "line": "A girl drops onto the grass next to you",
-   "why": "gated on npc_zoe present at campus_quad; who_is_where agrees"
-  },
-  {
-   "row": "L119",
-   "screen": "*",
-   "verdict": "PASS",
-   "line": "pool = 1",
-   "why": "pool written"
-  },
-  {
-   "row": "L120",
-   "screen": "*",
-   "verdict": "PASS",
-   "line": "—",
-   "why": "one person in frame"
-  },
-  {
-   "row": "L121",
-   "screen": "*",
-   "verdict": "PASS",
-   "line": "—",
-   "why": "one picture for the scene"
-  },
-  {
-   "row": "L125",
-   "screen": "*",
-   "verdict": "PASS",
-   "line": "—",
-   "why": "a still after its line, no payoff spoiled"
+   "line": "She's halfway across the quad before you've said yes, waving over her shoulder without looking back.",
+   "why": "no line names a person whose rows don't put them there (fires while Zoe's row has her on the grass, Mon/Wed/Fri 13-15, Tue/Thu 14-15; Jake and his friends 14-16 may be on the quad unnamed, and nothing claims the quad is empty; 'the green door' is built (zoe_place_known, home 18-23))"
   },
   {
    "row": "L167",
-   "screen": "*",
-   "verdict": "PASS",
-   "line": "—",
-   "why": "one trigger, gated on presence; no per-day-kind rows"
-  },
-  {
-   "row": "L71",
-   "screen": "*",
-   "verdict": "PASS",
-   "line": "Take the coffee",
-   "why": "her only choices are about a coffee; nothing sexual chosen"
+   "screen": "quad_meet_zoe.talk",
+   "verdict": "N/A",
+   "line": "She's halfway across the quad before you've said yes, waving over her shoulder without looking back.",
+   "why": "no row on this screen has hours or a window"
   }
  ],
- "causes": [
-  {
-   "id": "P20a1-c1",
-   "what": "quad_meet_zoe fires on entry to the quad (usually off the bus or out of a building), but its first line and picture put Ella already sitting on the grass"
-  },
-  {
-   "id": "P20a1-c2",
-   "what": "the coffee screen is marked 'something sexual shows', but its charge is only Zoe's crop top and an unseen 'who looks': no part of Ella's body, no reaction, no 'not yet', the tension unnamed"
-  }
- ]
+ "causes": []
 }

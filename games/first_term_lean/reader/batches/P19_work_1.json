@@ -3,77 +3,177 @@
   {
    "row": "B10",
    "screen": "cafeteria_meet_rosa.after",
-   "why": "screen changed: truth row"
+   "why": "a fact changed"
   },
   {
    "row": "B10",
    "screen": "cafeteria_meet_rosa.meet",
-   "why": "screen changed: truth row"
+   "why": "a fact changed"
   },
   {
    "row": "B8",
    "screen": "cafeteria_meet_rosa.after",
-   "why": "screen changed: truth row"
+   "why": "a fact changed"
   },
   {
    "row": "B8",
    "screen": "cafeteria_meet_rosa.meet",
-   "why": "screen changed: truth row"
-  },
-  {
-   "row": "C1234",
-   "screen": "cafeteria_meet_rosa.after",
-   "why": "failed last pass"
-  },
-  {
-   "row": "C1238",
-   "screen": "cafeteria_meet_rosa.after",
-   "why": "failed last pass"
+   "why": "a fact changed"
   },
   {
    "row": "C460",
    "screen": "cafeteria_meet_rosa.after",
-   "why": "screen changed: truth row"
+   "why": "a fact changed"
   },
   {
    "row": "C460",
    "screen": "cafeteria_meet_rosa.meet",
-   "why": "screen changed: truth row"
+   "why": "a fact changed"
   },
   {
    "row": "C461",
    "screen": "cafeteria_meet_rosa.after",
-   "why": "screen changed: truth row"
+   "why": "a fact changed"
   },
   {
    "row": "C461",
    "screen": "cafeteria_meet_rosa.meet",
-   "why": "screen changed: truth row"
+   "why": "a fact changed"
+  },
+  {
+   "row": "C889",
+   "screen": "*",
+   "why": "still to ask: its rule's text changed"
+  },
+  {
+   "row": "C889",
+   "screen": "cafeteria_meet_rosa.after",
+   "why": "a fact changed"
+  },
+  {
+   "row": "C892",
+   "screen": "cafeteria_meet_rosa.after",
+   "why": "a fact changed"
+  },
+  {
+   "row": "C897",
+   "screen": "cafeteria_meet_rosa.after",
+   "why": "a fact changed"
+  },
+  {
+   "row": "C900",
+   "screen": "cafeteria_meet_rosa.after",
+   "why": "a fact changed"
+  },
+  {
+   "row": "C902",
+   "screen": "cafeteria_meet_rosa.after",
+   "why": "a fact changed"
+  },
+  {
+   "row": "C903",
+   "screen": "cafeteria_meet_rosa.after",
+   "why": "a fact changed"
+  },
+  {
+   "row": "C906",
+   "screen": "*",
+   "why": "still to ask: its rule's text changed"
+  },
+  {
+   "row": "C906",
+   "screen": "cafeteria_meet_rosa.after",
+   "why": "a fact changed"
+  },
+  {
+   "row": "C910",
+   "screen": "*",
+   "why": "still to ask: its rule's text changed"
+  },
+  {
+   "row": "C910",
+   "screen": "cafeteria_meet_rosa.after",
+   "why": "a fact changed"
+  },
+  {
+   "row": "C913",
+   "screen": "cafeteria_meet_rosa.after",
+   "why": "a fact changed"
+  },
+  {
+   "row": "C914",
+   "screen": "cafeteria_meet_rosa.after",
+   "why": "a fact changed"
+  },
+  {
+   "row": "C916",
+   "screen": "cafeteria_meet_rosa.after",
+   "why": "a fact changed"
+  },
+  {
+   "row": "C920",
+   "screen": "cafeteria_meet_rosa.after",
+   "why": "a fact changed"
+  },
+  {
+   "row": "C924",
+   "screen": "cafeteria_meet_rosa.after",
+   "why": "a fact changed"
+  },
+  {
+   "row": "C926",
+   "screen": "cafeteria_meet_rosa.after",
+   "why": "a fact changed"
   },
   {
    "row": "C927",
    "screen": "cafeteria_meet_rosa.after",
-   "why": "screen changed: truth row"
+   "why": "a fact changed"
+  },
+  {
+   "row": "C928",
+   "screen": "cafeteria_meet_rosa.after",
+   "why": "a fact changed"
+  },
+  {
+   "row": "C929",
+   "screen": "*",
+   "why": "still to ask: its rule's text changed"
+  },
+  {
+   "row": "C929",
+   "screen": "cafeteria_meet_rosa.after",
+   "why": "a fact changed"
+  },
+  {
+   "row": "C930",
+   "screen": "cafeteria_meet_rosa.after",
+   "why": "a fact changed"
   },
   {
    "row": "C931",
    "screen": "cafeteria_meet_rosa.after",
-   "why": "screen changed: truth row"
+   "why": "a fact changed"
+  },
+  {
+   "row": "C953",
+   "screen": "*",
+   "why": "still to ask: its rule's text changed"
   },
   {
    "row": "L106",
    "screen": "cafeteria_meet_rosa.after",
-   "why": "screen changed: truth row"
+   "why": "a fact changed"
   },
   {
    "row": "L106",
    "screen": "cafeteria_meet_rosa.meet",
-   "why": "screen changed: truth row"
+   "why": "a fact changed"
   },
   {
    "row": "L167",
    "screen": "cafeteria_meet_rosa.after",
-   "why": "screen changed: truth row"
+   "why": "a fact changed"
   }
  ]
 }

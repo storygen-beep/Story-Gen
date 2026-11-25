@@ -1,0 +1,68 @@
+{
+ "verdicts": [
+  {
+   "row": "L170",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "Before your first class, the dean wants to see every new student: his office is on the faculty corridor, off the Quad, weekdays 8am to 5pm.",
+   "why": "Faculty Offices are now hidden_until goal1_shown, set on every hall choice of the opening (unmissable); Classes' first step points at the corridor and the dean's row (weekdays 8-17)"
+  },
+  {
+   "row": "C952",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "\"Morning, kid. Seventy-five a week, starting Sunday.\"",
+   "why": "$75 weekly from Sunday, as PLAN; no other amount on the opening's screens"
+  },
+  {
+   "row": "C952",
+   "screen": "opening.sums",
+   "verdict": "PASS",
+   "line": "Seventy-five by Sunday. ... ➜ Pay Mark in full four Sundays in a row.",
+   "why": "$75, Sunday, four Sundays in a row and the manager's Monday-Saturday from 10am all agree with PLAN goal 1, Tom's row and the walkthrough"
+  },
+  {
+   "row": "C1619",
+   "screen": "opening.sums",
+   "verdict": "PASS",
+   "line": "<strong>Pay your own way.</strong> ... ✅ Mark told you the rent / ➜ ...",
+   "why": "the first objective is the Paying Your Way story_hints entry (when goal1_shown, set in the hall) with the paying_wt walkthrough's done/next steps; the next screen says 'try the Quests button'"
+  },
+  {
+   "row": "C2176",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "when = goal1_shown / met_dean / rent_paid_once",
+   "why": "every flag the hint steps read is set by a canvas: goal1_shown (opening.hall), met_dean (dean_first), rent_paid_once (pay75/90/100), the met flags by their meetings"
+  },
+  {
+   "row": "L168",
+   "screen": "*",
+   "verdict": "N/A",
+   "line": "",
+   "why": "only Laura, Mark and Ryan are met here, and the opening meets them (the row's own exemption)"
+  },
+  {
+   "row": "L169",
+   "screen": "*",
+   "verdict": "N/A",
+   "line": "",
+   "why": "the opening's meetings are forced one-time screens; nothing here can be missed"
+  },
+  {
+   "row": "L171",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "Monday morning. Today you start college. / \"And go and see the dean first, baby.\"",
+   "why": "dean_first fires on day one (weekdays 8-17, his row Mon 8-17, corridor open from goal1_shown) and Classes' first hint step names it with place and hours; psychology runs Monday 9am"
+  },
+  {
+   "row": "L172",
+   "screen": "*",
+   "verdict": "N/A",
+   "line": "",
+   "why": "P13 builds no story_hints entry or walkthrough (P46 does)"
+  }
+ ],
+ "causes": []
+}

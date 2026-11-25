@@ -1,0 +1,348 @@
+{
+ "verdicts": [
+  {
+   "row": "B10",
+   "screen": "loop_eat.do",
+   "verdict": "PASS",
+   "line": "You eat standing at the counter: toast, whatever's in the fridge, coffee from the pot.",
+   "why": "New night rows put nobody in the Kitchen 23:00-07:00, so the plain counter text shows alone; Mark and Ryan are only in the Kitchen while Mom is (Mark weekdays 07:00-07:30, weekends 08:00-10:00, Sun 10:00-12:00; Ryan 18:00-19:00 weekdays, 17:00-19:00 weekends), and the merged groups pick the right one. No past claimed."
+  },
+  {
+   "row": "B10",
+   "screen": "loop_shower.do",
+   "verdict": "PASS",
+   "line": "The water takes forever to run hot. You step in anyway.",
+   "why": "No one is named on the screen; the grey 'Ryan's in the shower.' is gated on his presence in the bathroom (weekdays 07:25-07:45, weekends 10:00-10:30). The razor substitution checks weekday 07:45-08:30 and Ryan in his room, where his row 07:45-12:00 puts him. True at any hour."
+  },
+  {
+   "row": "B10",
+   "screen": "loop_sleep.do",
+   "verdict": "PASS",
+   "line": "You pull on your pyjamas: the thin top and the little shorts.",
+   "why": "Nobody named; no past; the line is the act. True at 21:00 and at 02:59, the window's last minute."
+  },
+  {
+   "row": "B8",
+   "screen": "loop_eat.do",
+   "verdict": "PASS",
+   "line": "You eat standing at the counter: toast, whatever's in the fridge, coffee from the pot.",
+   "why": "No number printed; no garment named."
+  },
+  {
+   "row": "B8",
+   "screen": "loop_shower.do",
+   "verdict": "PASS",
+   "line": "The water takes forever to run hot. You step in anyway.",
+   "why": "No number printed; naked by the act (undressing in an act is backed by the act)."
+  },
+  {
+   "row": "B8",
+   "screen": "loop_sleep.do",
+   "verdict": "PASS",
+   "line": "You pull on your pyjamas: the thin top and the little shorts.",
+   "why": "The pyjamas are named on the beat that puts them on; no number printed."
+  },
+  {
+   "row": "C1158",
+   "screen": "loop_eat.do",
+   "verdict": "N/A",
+   "line": "You eat standing at the counter: toast, whatever's in the fridge, coffee from the pot.",
+   "why": "No garment named."
+  },
+  {
+   "row": "C1158",
+   "screen": "loop_shower.do",
+   "verdict": "PASS",
+   "line": "The water takes forever to run hot. You step in anyway.",
+   "why": "'runs down your belly and between your legs': no garment; undressing is backed by the act."
+  },
+  {
+   "row": "C1158",
+   "screen": "loop_sleep.do",
+   "verdict": "PASS",
+   "line": "You pull on your pyjamas: the thin top and the little shorts.",
+   "why": "The pyjamas are named by the beat that dresses her in them (clothes.md C1158: 'or the beat that equips her'); prose only, as the card says and NOTES 179 notes 'as with P06's sleep'."
+  },
+  {
+   "row": "C1206",
+   "screen": "loop_eat.do",
+   "verdict": "N/A",
+   "line": "You eat standing at the counter: toast, whatever's in the fridge, coffee from the pot.",
+   "why": "No garment named."
+  },
+  {
+   "row": "C1206",
+   "screen": "loop_shower.do",
+   "verdict": "N/A",
+   "line": "The water takes forever to run hot. You step in anyway.",
+   "why": "No garment named."
+  },
+  {
+   "row": "C1206",
+   "screen": "loop_sleep.do",
+   "verdict": "PASS",
+   "line": "You pull on your pyjamas: the thin top and the little shorts.",
+   "why": "She is wearing the pyjamas the line just put on her; 'the thin top' after it refers to the same."
+  },
+  {
+   "row": "C1265",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "loop_eat.do: no media block; loop_shower.do and loop_sleep.do: one picture each",
+   "why": "The meal is a chore and gets no spot; the shower and bed are body moments and carry a picture of her right after the line."
+  },
+  {
+   "row": "C1313",
+   "screen": "loop_shower.do",
+   "verdict": "PASS",
+   "line": "[[canvases.trigger.substitutions]] target_canvas_id = \"walk_ryan_shower\" chance = 0.25",
+   "why": "Note row. The shower now carries a substitution: Ryan's razor walk-in, weekdays 07:45-08:30, chance 0.25."
+  },
+  {
+   "row": "C1313",
+   "screen": "loop_sleep.do",
+   "verdict": "FAIL",
+   "line": "You pull on your pyjamas: the thin top and the little shorts.",
+   "why": "Note row. Still one text every visit and no substitution; the room's other canvases (home_wait, study_room) are her own activities, not an event."
+  },
+  {
+   "row": "C1434",
+   "screen": "loop_sleep.do",
+   "verdict": "FAIL",
+   "line": "You're gone before you've finished thinking about tomorrow.",
+   "why": "Note row. The energy refill sends her to her bedroom and nothing happens there: no substitution, no event canvas."
+  },
+  {
+   "row": "C460",
+   "screen": "loop_eat.do",
+   "verdict": "PASS",
+   "line": "You eat standing at the counter: toast, whatever's in the fridge, coffee from the pot.",
+   "why": "New night rows put nobody in the Kitchen 23:00-07:00, so the plain counter text shows alone; Mark and Ryan are only in the Kitchen while Mom is (Mark weekdays 07:00-07:30, weekends 08:00-10:00, Sun 10:00-12:00; Ryan 18:00-19:00 weekdays, 17:00-19:00 weekends), and the merged groups pick the right one. No past claimed."
+  },
+  {
+   "row": "C460",
+   "screen": "loop_shower.do",
+   "verdict": "PASS",
+   "line": "The water takes forever to run hot. You step in anyway.",
+   "why": "No one is named on the screen; the grey 'Ryan's in the shower.' is gated on his presence in the bathroom (weekdays 07:25-07:45, weekends 10:00-10:30). The razor substitution checks weekday 07:45-08:30 and Ryan in his room, where his row 07:45-12:00 puts him. True at any hour."
+  },
+  {
+   "row": "C460",
+   "screen": "loop_sleep.do",
+   "verdict": "PASS",
+   "line": "You pull on your pyjamas: the thin top and the little shorts.",
+   "why": "Nobody named; no past; the line is the act. True at 21:00 and at 02:59, the window's last minute."
+  },
+  {
+   "row": "C461",
+   "screen": "loop_eat.do",
+   "verdict": "PASS",
+   "line": "You eat standing at the counter: toast, whatever's in the fridge, coffee from the pot.",
+   "why": "Texture that can't clash; her own act."
+  },
+  {
+   "row": "C461",
+   "screen": "loop_shower.do",
+   "verdict": "PASS",
+   "line": "The water takes forever to run hot. You step in anyway.",
+   "why": "Texture that can't clash; her own act."
+  },
+  {
+   "row": "C461",
+   "screen": "loop_sleep.do",
+   "verdict": "PASS",
+   "line": "You pull on your pyjamas: the thin top and the little shorts.",
+   "why": "Texture that can't clash; her own act."
+  },
+  {
+   "row": "C889",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "Sleep \u00b7 Eat something \u00b7 Shower \u00b7 Wake up \u00b7 Done",
+   "why": "Note row. No label names a clock time or a duration; the spend sits in the exits (480, 20, 15 minutes). 'not until 9pm.' is the greyed hours line, shown only when the clock alone shuts Sleep (C914)."
+  },
+  {
+   "row": "C906",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "Sleep \u00b7 Eat something \u00b7 Shower \u00b7 Wake up \u00b7 Done",
+   "why": "Note row. No 'till X' on any label."
+  },
+  {
+   "row": "C910",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "Sleep \u00b7 Eat something \u00b7 Shower \u00b7 Wake up \u00b7 Done",
+   "why": "Note row. No button states time or energy; nothing here costs money, so none states money."
+  },
+  {
+   "row": "C920",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "Wake up / Done (to the room she is in)",
+   "why": "No hop is charged: each exit returns to the same room, and the minutes are the activity's own (sleep 480, meal 20, shower 15)."
+  },
+  {
+   "row": "C921",
+   "screen": "loop_eat.do",
+   "verdict": "PASS",
+   "line": "You eat standing at the counter: toast, whatever's in the fridge, coffee from the pot.",
+   "why": "Note row. The screen reads only presence by place. The new night rows wrap past midnight and the engine handles it (isCurrentTimeSlot). Ryan's weekdays-only 23:00-01:00 row reads the weekday against today, so Sun 23:00 'asleep' turns into Mon 00:00-01:00 'on his phone', and Fri 23:00 phone into Sat 00:00 asleep; his place stays home_ryans_room, so nothing on this screen changes."
+  },
+  {
+   "row": "C921",
+   "screen": "loop_shower.do",
+   "verdict": "PASS",
+   "line": "The water takes forever to run hot. You step in anyway.",
+   "why": "Note row. The screen reads only presence by place. The new night rows wrap past midnight and the engine handles it (isCurrentTimeSlot). Ryan's weekdays-only 23:00-01:00 row reads the weekday against today, so Sun 23:00 'asleep' turns into Mon 00:00-01:00 'on his phone', and Fri 23:00 phone into Sat 00:00 asleep; his place stays home_ryans_room, so nothing on this screen changes."
+  },
+  {
+   "row": "C921",
+   "screen": "loop_sleep.do",
+   "verdict": "PASS",
+   "line": "You pull on your pyjamas: the thin top and the little shorts.",
+   "why": "Note row. The screen reads only presence by place. The new night rows wrap past midnight and the engine handles it (isCurrentTimeSlot). Ryan's weekdays-only 23:00-01:00 row reads the weekday against today, so Sun 23:00 'asleep' turns into Mon 00:00-01:00 'on his phone', and Fri 23:00 phone into Sat 00:00 asleep; his place stays home_ryans_room, so nothing on this screen changes."
+  },
+  {
+   "row": "C927",
+   "screen": "loop_eat.do",
+   "verdict": "PASS",
+   "line": "Done (20)",
+   "why": "Note row. Every exit states its minutes."
+  },
+  {
+   "row": "C927",
+   "screen": "loop_shower.do",
+   "verdict": "PASS",
+   "line": "Done (15)",
+   "why": "Note row. Every exit states its minutes."
+  },
+  {
+   "row": "C927",
+   "screen": "loop_sleep.do",
+   "verdict": "PASS",
+   "line": "Wake up (480)",
+   "why": "Note row. Every exit states its minutes."
+  },
+  {
+   "row": "C929",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "Sleep \u00b7 Eat something \u00b7 Shower \u00b7 Wake up \u00b7 Done",
+   "why": "Note row. The activity's time is on no label; the clock and the energy bar show it."
+  },
+  {
+   "row": "C931",
+   "screen": "loop_eat.do",
+   "verdict": "N/A",
+   "line": "You eat standing at the counter: toast, whatever's in the fridge, coffee from the pot.",
+   "why": "Note row. No time_of_day here."
+  },
+  {
+   "row": "C931",
+   "screen": "loop_shower.do",
+   "verdict": "PASS",
+   "line": "The water takes forever to run hot. You step in anyway.",
+   "why": "Note row. The substitution's 07:45-08:30 is end exclusive and matches Ryan's 07:45 row start."
+  },
+  {
+   "row": "C931",
+   "screen": "loop_sleep.do",
+   "verdict": "PASS",
+   "line": "You pull on your pyjamas: the thin top and the little shorts.",
+   "why": "Note row. 21:00-03:00 wraps, end exclusive: open 21:00-02:59; 'not until 9pm.' is true from 03:00 to 20:59."
+  },
+  {
+   "row": "C953",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "Sleep \u00b7 Eat something \u00b7 Shower \u00b7 Wake up \u00b7 Done",
+   "why": "Note row. No money cost, and no time or energy on a label."
+  },
+  {
+   "row": "L106",
+   "screen": "loop_eat.do",
+   "verdict": "PASS",
+   "line": "You eat standing at the counter: toast, whatever's in the fridge, coffee from the pot.",
+   "why": "Mom, Mark and Ryan are each named only inside an npc_at_location group; with the night rows nobody is named at night."
+  },
+  {
+   "row": "L106",
+   "screen": "loop_shower.do",
+   "verdict": "PASS",
+   "line": "The water takes forever to run hot. You step in anyway.",
+   "why": "Nobody named on the screen; the grey line is presence-gated."
+  },
+  {
+   "row": "L106",
+   "screen": "loop_sleep.do",
+   "verdict": "PASS",
+   "line": "You pull on your pyjamas: the thin top and the little shorts.",
+   "why": "Nobody named."
+  },
+  {
+   "row": "L167",
+   "screen": "loop_eat.do",
+   "verdict": "N/A",
+   "line": "You eat standing at the counter: toast, whatever's in the fridge, coffee from the pot.",
+   "why": "No hours."
+  },
+  {
+   "row": "L167",
+   "screen": "loop_shower.do",
+   "verdict": "N/A",
+   "line": "The water takes forever to run hot. You step in anyway.",
+   "why": "No hours."
+  },
+  {
+   "row": "L167",
+   "screen": "loop_sleep.do",
+   "verdict": "N/A",
+   "line": "You pull on your pyjamas: the thin top and the little shorts.",
+   "why": "Sleep's hours are the same every day, one row, no day kinds."
+  },
+  {
+   "row": "clock#1",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "Sleep \u00b7 Eat something \u00b7 Shower \u00b7 Wake up \u00b7 Done",
+   "why": "Shape step 1: no time, no energy on any button; no money spent."
+  },
+  {
+   "row": "clock#2",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "Done \u2192 home_kitchen (20) / home_bathroom (15)",
+   "why": "Shape step 2: no time on any move inside the house; the minutes are the activity, not travel."
+  },
+  {
+   "row": "clock#6",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "cooldown_message = \"not until 9pm.\"",
+   "why": "Shape step 6: never 'till X'; sleep is 480 minutes, not 'until 7am'."
+  },
+  {
+   "row": "media#2",
+   "screen": "*",
+   "verdict": "N/A",
+   "line": "\u2014",
+   "why": "Shape step 2 is a place's one picture; P06 builds canvases, no place image."
+  },
+  {
+   "row": "places#4",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "Sleep \u00b7 Eat something \u00b7 Shower \u00b7 Wake up \u00b7 Done",
+   "why": "Shape step 4: short labels (1-2 words), no time or energy, no spend."
+  },
+  {
+   "row": "systems#4",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "max_triggers_per_day = 2 / meals_today lt 3 / 21:00-03:00",
+   "why": "Shape step 4: each repeat has a real cost sized to its window: sleep 8 hours in a 21:00-03:00 window can't chain; meals capped at 3, showers at 2 a day; buttons show none of it."
+  }
+ ],
+ "causes": []
+}

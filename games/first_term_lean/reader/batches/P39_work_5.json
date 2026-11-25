@@ -1,0 +1,14 @@
+{
+ "items": [
+  {
+   "row": "C952",
+   "screen": "walk_danny_deal.pretend",
+   "why": "its rule's text changed"
+  },
+  {
+   "row": "L170",
+   "screen": "*",
+   "why": "never judged"
+  }
+ ]
+}

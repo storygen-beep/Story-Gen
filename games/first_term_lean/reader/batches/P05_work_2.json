@@ -1,0 +1,69 @@
+{
+ "items": [
+  {
+   "row": "C795",
+   "screen": "near_cafe",
+   "why": "its rule's text changed"
+  },
+  {
+   "row": "C804",
+   "screen": "near_cafe",
+   "why": "failed last pass"
+  },
+  {
+   "row": "C889",
+   "screen": "*",
+   "why": "its rule's text changed"
+  },
+  {
+   "row": "C906",
+   "screen": "*",
+   "why": "its rule's text changed"
+  },
+  {
+   "row": "C910",
+   "screen": "*",
+   "why": "its rule's text changed"
+  },
+  {
+   "row": "C929",
+   "screen": "*",
+   "why": "its rule's text changed"
+  },
+  {
+   "row": "C953",
+   "screen": "*",
+   "why": "its rule's text changed"
+  },
+  {
+   "row": "L147",
+   "screen": "near_cafe",
+   "why": "failed last pass"
+  },
+  {
+   "row": "clock#1",
+   "screen": "*",
+   "why": "its rule's text changed"
+  },
+  {
+   "row": "clock#6",
+   "screen": "*",
+   "why": "its rule's text changed"
+  },
+  {
+   "row": "places#2",
+   "screen": "near_cafe",
+   "why": "failed last pass"
+  },
+  {
+   "row": "places#4",
+   "screen": "*",
+   "why": "its rule's text changed"
+  },
+  {
+   "row": "places#6",
+   "screen": "near_cafe",
+   "why": "failed last pass"
+  }
+ ]
+}

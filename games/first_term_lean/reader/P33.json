@@ -1,6 +1,6 @@
 {
  "piece": "P33",
- "pass": 7,
+ "pass": 11,
  "screens": {
   "body_run.run": {
    "text": "30c91aa93a1f5b0b",
@@ -15,10 +15,10 @@
    "all": "2caea444a4dc620d"
   },
   "body_mirror.fix": {
-   "text": "eecca1bddbdeb214",
-   "facts": "06ce3e0e808b3228",
-   "facts2": "06ce3e0e808b3228",
-   "all": "53654a4496dc76c3"
+   "text": "b734d31c0a6da3e7",
+   "facts": "23d6f286c33663c4",
+   "facts2": "23d6f286c33663c4",
+   "all": "728675dd261fe40d"
   },
   "body_snack.eat": {
    "text": "28ae2143b3c8a2ae",
@@ -33,18 +33,18 @@
    "all": "78169f3a60359c09"
   },
   "body_lunch.eat": {
-   "text": "00b85db49e628bf5",
-   "facts": "f0aaa3201cfb8ef5",
-   "facts2": "f0aaa3201cfb8ef5",
-   "all": "a68b14bbbf1a24f5"
+   "text": "1703e7590d5fbe02",
+   "facts": "4607c7f9c0029b8f",
+   "facts2": "4607c7f9c0029b8f",
+   "all": "1ca8b72d5608e898"
   },
   "body_grass.sit": {
    "text": "762aaf6daecff423",
-   "facts": "5d90976a96216451",
-   "facts2": "5d90976a96216451",
-   "all": "41772c245a388c03"
+   "facts": "44eb5528a5afca5f",
+   "facts2": "44eb5528a5afca5f",
+   "all": "1cd7264031187857"
   },
-  "*": "897b7347c2fa1b52"
+  "*": "4530fe64a2396078"
  },
  "rows": {
   "B1": "5276068df1ca6fa9",
@@ -106,7 +106,7 @@
   "C954": "c8001b93946f6f80",
   "C1002": "657248766e62061f",
   "C951": "fe3b305ad0c265a7",
-  "C952": "2f7d1a6bf6a93ca9",
+  "C952": "0ded4fca6fc71925",
   "C291": "53bd56cf597f7ee3",
   "C296": "d702aa9200d2154d",
   "C286": "23fc75bfc032d31c",
@@ -156,13 +156,13 @@
   "C613": "6f777b1fcd750dd1",
   "C961": "b6cf8c9e8a8ef683",
   "C644": "f5e1d79f3251dbab",
-  "C596": "6d9bba989a2b9666",
+  "C596": "e5f7e6cf2d01613d",
   "C660": "da4c173ea0935aca",
   "C1340": "b76a6583ae88c60f",
   "C769": "f6b6f78a8f2e5ed7",
   "C794": "bad76e5963432385",
-  "C795": "6c9eb17d99266791",
-  "C804": "810ef8e803cb09dd",
+  "C795": "34139e6a6914e171",
+  "C804": "5358489178bff0a4",
   "L106": "13a714429d15f3b2",
   "C776": "4141d9e5e24362c3",
   "C777": "b56360a1040688cf",
@@ -170,6 +170,7 @@
   "C758": "e158aaf055cb61d6",
   "C953": "826bf82fe26afd13",
   "C762": "40e85f1ae92f1e71",
+  "L170": "c3599cd09637a240",
   "C770": "ff9aa31c11e5d50f",
   "C771": "563e3d25c3219dd0",
   "L166": "c12d10588197fbaf",
@@ -341,52 +342,55 @@
    "row": "B10",
    "screen": "body_grass.sit",
    "verdict": "PASS",
-   "line": "When you sit up, you're already thinking about money again.",
-   "why": "no person, no past behind a flag; 'again' is true from the opening's rent on every visit, any hour (the sky line holds at night too)",
+   "line": "You lie back on the grass with your bag under your head and stare up at the sky until your head clears.",
+   "why": "every line holds at the first and last minute and on a second visit; no person named (Zoe 13-15 / 14-15 and Jake with friends 14-16 may be on the quad unnamed; nothing claims she is alone)",
    "cause": null,
    "note": false,
    "screen_hash": {
     "text": "762aaf6daecff423",
-    "facts": "9df05c3a3b8296d2",
-    "all": "f9166a6788183351"
+    "facts": "44eb5528a5afca5f",
+    "facts2": "44eb5528a5afca5f",
+    "all": "1cd7264031187857"
    },
    "row_hash": "c1c0e2ac2588a579",
    "carried": true,
-   "pass": 4
+   "pass": 7
   },
   {
    "row": "B10",
    "screen": "body_lunch.eat",
    "verdict": "PASS",
-   "line": "You take a tray down the line: pasta, a roll, a carton of milk. You eat at the end of a long table, half listening to a table making plans you're not part of yet.",
-   "why": "Lunch row is weekdays 11:00-14:00; Rosa's row covers it (weekdays 08-16), 'down the line' implies an unnamed server, true. Nadia Mon/Wed 13-14 is there but unmet (no built canvas meets her, P15 not built), so she is one of the crowd; 'eat at the end of a long table' does not clash.",
+   "line": "You take a tray down the line: pasta, a roll, a carton of milk.",
+   "why": "Weekdays 11:00-13:59 with meals_today < 3; Rosa at the counter 8-16 (who_is_where); the unnamed table is crowd texture; true on repeat.",
    "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "00b85db49e628bf5",
-    "facts": "3c7fa927521bb8d1",
-    "all": "9d4339762cdd8960"
+    "text": "1703e7590d5fbe02",
+    "facts": "4607c7f9c0029b8f",
+    "facts2": "4607c7f9c0029b8f",
+    "all": "1ca8b72d5608e898"
    },
    "row_hash": "c1c0e2ac2588a579",
    "carried": true,
-   "pass": 6
+   "pass": 10
   },
   {
    "row": "B10",
    "screen": "body_mirror.fix",
    "verdict": "PASS",
-   "line": "The girl in the mirror looks older, and ready for whoever looks at her next.",
-   "why": "her opinion; 'than this morning' gone; bathroom has one long mirror",
+   "line": "A woman of 18 at a long campus restroom mirror putting on lip gloss, no phone.",
+   "why": "'alone' is gone; the prose claims no one absent or present, so it holds at 08-09 and 13-14 when Brooke, Kayla and Tess are at the mirror and at every other open minute.",
    "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "eecca1bddbdeb214",
-    "facts": "06ce3e0e808b3228",
-    "all": "53654a4496dc76c3"
+    "text": "b734d31c0a6da3e7",
+    "facts": "23d6f286c33663c4",
+    "facts2": "23d6f286c33663c4",
+    "all": "728675dd261fe40d"
    },
    "row_hash": "c1c0e2ac2588a579",
    "carried": true,
-   "pass": 2
+   "pass": 8
   },
   {
    "row": "B10",
@@ -1226,52 +1230,55 @@
    "row": "B8",
    "screen": "body_grass.sit",
    "verdict": "PASS",
-   "line": "Sit on the grass (30 min, +5 energy)",
-   "why": "30 min, +5 energy clamped, 2 a day match the card and the built trigger; no garment named",
+   "line": "You lie back on the grass with your bag under your head and stare up at the sky until your head clears.",
+   "why": "no garment of hers named; no number that disagrees with PLAN",
    "cause": null,
    "note": false,
    "screen_hash": {
     "text": "762aaf6daecff423",
-    "facts": "9df05c3a3b8296d2",
-    "all": "f9166a6788183351"
+    "facts": "44eb5528a5afca5f",
+    "facts2": "44eb5528a5afca5f",
+    "all": "1cd7264031187857"
    },
    "row_hash": "80d415cf08e0ebfe",
    "carried": true,
-   "pass": 4
+   "pass": 7
   },
   {
    "row": "B8",
    "screen": "body_lunch.eat",
    "verdict": "PASS",
-   "line": "You take a tray down the line: pasta, a roll, a carton of milk. You eat at the end of a long table, half listening to a table making plans you're not part of yet.",
-   "why": "$4, 20 min, +15 energy, meals_today +1, under 3, match PLAN 255/355 and the card; no garment named.",
+   "line": "$4, +15 energy, meals_today +1, 20 min",
+   "why": "Matches PLAN 255/355 and the card; no garment.",
    "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "00b85db49e628bf5",
-    "facts": "3c7fa927521bb8d1",
-    "all": "9d4339762cdd8960"
+    "text": "1703e7590d5fbe02",
+    "facts": "4607c7f9c0029b8f",
+    "facts2": "4607c7f9c0029b8f",
+    "all": "1ca8b72d5608e898"
    },
    "row_hash": "80d415cf08e0ebfe",
    "carried": true,
-   "pass": 6
+   "pass": 10
   },
   {
    "row": "B8",
    "screen": "body_mirror.fix",
    "verdict": "PASS",
-   "line": "Fix your hair and make-up (10 min)",
-   "why": "no number but 10 min; no garment named",
+   "line": "a little mascara, lip gloss, your hair pulled back and let down again",
+   "why": "No garment named.",
    "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "eecca1bddbdeb214",
-    "facts": "06ce3e0e808b3228",
-    "all": "53654a4496dc76c3"
+    "text": "b734d31c0a6da3e7",
+    "facts": "23d6f286c33663c4",
+    "facts2": "23d6f286c33663c4",
+    "all": "728675dd261fe40d"
    },
    "row_hash": "80d415cf08e0ebfe",
    "carried": true,
-   "pass": 2
+   "pass": 8
   },
   {
    "row": "B8",
@@ -1735,7 +1742,7 @@
    "note": false,
    "screen_hash": "897b7347c2fa1b52",
    "row_hash": "64b72c778e96e443",
-   "carried": false,
+   "carried": true,
    "pass": 7
   },
   {
@@ -2777,51 +2784,54 @@
    "screen": "body_grass.sit",
    "verdict": "PASS",
    "line": "You lie back on the grass with your bag under your head and stare up at the sky until your head clears.",
-   "why": "no claim that can clash at any hour (the quad has no hours) or on a repeat",
+   "why": "no claim about who is there, the clock, her past or her clothes that can be false (Zoe 13-15 / 14-15 and Jake with friends 14-16 may be on the quad unnamed; nothing claims she is alone)",
    "cause": null,
    "note": false,
    "screen_hash": {
     "text": "762aaf6daecff423",
-    "facts": "9df05c3a3b8296d2",
-    "all": "f9166a6788183351"
+    "facts": "44eb5528a5afca5f",
+    "facts2": "44eb5528a5afca5f",
+    "all": "1cd7264031187857"
    },
    "row_hash": "67e48e60d5053a2e",
    "carried": true,
-   "pass": 4
+   "pass": 7
   },
   {
    "row": "C460",
    "screen": "body_lunch.eat",
    "verdict": "PASS",
-   "line": "You take a tray down the line: pasta, a roll, a carton of milk. You eat at the end of a long table, half listening to a table making plans you're not part of yet.",
-   "why": "Lunch row is weekdays 11:00-14:00; Rosa's row covers it (weekdays 08-16), 'down the line' implies an unnamed server, true. Nadia Mon/Wed 13-14 is there but unmet (no built canvas meets her, P15 not built), so she is one of the crowd; 'eat at the end of a long table' does not clash.",
+   "line": "You take a tray down the line: pasta, a roll, a carton of milk.",
+   "why": "Nothing false at 11:00 or 13:59; the row hides once three meals are eaten.",
    "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "00b85db49e628bf5",
-    "facts": "3c7fa927521bb8d1",
-    "all": "9d4339762cdd8960"
+    "text": "1703e7590d5fbe02",
+    "facts": "4607c7f9c0029b8f",
+    "facts2": "4607c7f9c0029b8f",
+    "all": "1ca8b72d5608e898"
    },
    "row_hash": "67e48e60d5053a2e",
    "carried": true,
-   "pass": 6
+   "pass": 10
   },
   {
    "row": "C460",
    "screen": "body_mirror.fix",
    "verdict": "PASS",
-   "line": "The girl in the mirror looks older, and ready for whoever looks at her next.",
-   "why": "her opinion; 'than this morning' gone; bathroom has one long mirror",
+   "line": "A woman of 18 at a long campus restroom mirror putting on lip gloss, no phone.",
+   "why": "No claim about who else is there; true on every visit in the bathroom's hours.",
    "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "eecca1bddbdeb214",
-    "facts": "06ce3e0e808b3228",
-    "all": "53654a4496dc76c3"
+    "text": "b734d31c0a6da3e7",
+    "facts": "23d6f286c33663c4",
+    "facts2": "23d6f286c33663c4",
+    "all": "728675dd261fe40d"
    },
    "row_hash": "67e48e60d5053a2e",
    "carried": true,
-   "pass": 2
+   "pass": 8
   },
   {
    "row": "C460",
@@ -2908,52 +2918,55 @@
    "row": "C461",
    "screen": "body_grass.sit",
    "verdict": "PASS",
-   "line": "you're already thinking about money again.",
-   "why": "texture and her own concern; nothing that can clash",
+   "line": "You lie back on the grass with your bag under your head and stare up at the sky until your head clears.",
+   "why": "texture only, and dialogue that fits the cast entry",
    "cause": null,
    "note": false,
    "screen_hash": {
     "text": "762aaf6daecff423",
-    "facts": "9df05c3a3b8296d2",
-    "all": "f9166a6788183351"
+    "facts": "44eb5528a5afca5f",
+    "facts2": "44eb5528a5afca5f",
+    "all": "1cd7264031187857"
    },
    "row_hash": "310706ee076318f2",
    "carried": true,
-   "pass": 4
+   "pass": 7
   },
   {
    "row": "C461",
    "screen": "body_lunch.eat",
    "verdict": "PASS",
-   "line": "You take a tray down the line: pasta, a roll, a carton of milk. You eat at the end of a long table, half listening to a table making plans you're not part of yet.",
-   "why": "Unnamed extras and texture only (the till, the line, two guys, a table); none can clash with whoever's row puts them there.",
+   "line": "a table making plans you're not part of yet",
+   "why": "Her opinion/texture.",
    "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "00b85db49e628bf5",
-    "facts": "3c7fa927521bb8d1",
-    "all": "9d4339762cdd8960"
+    "text": "1703e7590d5fbe02",
+    "facts": "4607c7f9c0029b8f",
+    "facts2": "4607c7f9c0029b8f",
+    "all": "1ca8b72d5608e898"
    },
    "row_hash": "310706ee076318f2",
    "carried": true,
-   "pass": 6
+   "pass": 10
   },
   {
    "row": "C461",
    "screen": "body_mirror.fix",
    "verdict": "PASS",
-   "line": "a little mascara, lip gloss, your hair pulled back and let down again.",
-   "why": "texture that can't clash, or her own opinion",
+   "line": "The girl in the mirror looks older, and ready for whoever looks at her next.",
+   "why": "Her opinion on her body; texture that can't clash.",
    "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "eecca1bddbdeb214",
-    "facts": "06ce3e0e808b3228",
-    "all": "53654a4496dc76c3"
+    "text": "b734d31c0a6da3e7",
+    "facts": "23d6f286c33663c4",
+    "facts2": "23d6f286c33663c4",
+    "all": "728675dd261fe40d"
    },
    "row_hash": "310706ee076318f2",
    "carried": true,
-   "pass": 2
+   "pass": 8
   },
   {
    "row": "C461",
@@ -3052,15 +3065,15 @@
   {
    "row": "C596",
    "screen": "*",
-   "verdict": "N/A",
-   "line": "Buy a coffee",
-   "why": "the coffee is a purchase row, not a person's talk screen or menu",
+   "verdict": "PASS",
+   "line": "body_* screens",
+   "why": "no person's menu or talk screen; pictures are body moments",
    "cause": null,
    "note": true,
-   "screen_hash": "a843bdea2a15adc0",
-   "row_hash": "6d9bba989a2b9666",
+   "screen_hash": "2503a4d714f6f5e4",
+   "row_hash": "e5f7e6cf2d01613d",
    "carried": true,
-   "pass": 2
+   "pass": 9
   },
   {
    "row": "C601",
@@ -3354,197 +3367,243 @@
    "row": "C795",
    "screen": "*",
    "verdict": "PASS",
-   "line": "You buy a coffee at the counter",
-   "why": "re-entry changes come from the menu rows; nothing else added",
+   "line": "body_* screens",
+   "why": "activity beats, not room text",
    "cause": null,
    "note": true,
-   "screen_hash": "443df94f1f7eb1cf",
-   "row_hash": "6c9eb17d99266791",
+   "screen_hash": "2503a4d714f6f5e4",
+   "row_hash": "34139e6a6914e171",
    "carried": true,
-   "pass": 1
+   "pass": 9
   },
   {
    "row": "C804",
    "screen": "body_coffee.drink",
    "verdict": "PASS",
-   "line": "Black, rookie? Don't tell me, I know. / Three bucks, new girl. For you, four.",
-   "why": "text changes with who's behind the counter; adjacent groups compile to if/elseif (index.html), so with both in only Tom serves",
+   "line": "\"Tom pours your coffee and slides it across.\" (Tom present group)",
+   "why": "no room-text line per person; anyone else is an unnamed crowd, or named only inside a presence group",
    "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "e7daafd231d8533e",
-    "facts": "d385dc7e24adc33b",
-    "all": "b6021c163e1107b7"
+    "text": "e594dcddd110c9d7",
+    "facts": "3d15ca8d6434585e",
+    "facts2": "889defec3931010e",
+    "all": "78169f3a60359c09"
    },
-   "row_hash": "810ef8e803cb09dd",
+   "row_hash": "5358489178bff0a4",
    "carried": true,
-   "pass": 2
+   "pass": 9
   },
   {
    "row": "C804",
    "screen": "body_grass.sit",
    "verdict": "PASS",
-   "line": "watch people cut across the quad.",
-   "why": "strangers or nobody; the people who will staff these places (Frank, Danny, Rosa, Marco) have no rows until P32, said on the card",
+   "line": "\"You lie back on the grass with your bag under your head...\"",
+   "why": "no room-text line per person; anyone else is an unnamed crowd, or named only inside a presence group",
    "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "5552e7f96cb4eabc",
-    "facts": "4fddcdbcc6706ab6",
-    "all": "659af886197b8d51"
+    "text": "762aaf6daecff423",
+    "facts": "44eb5528a5afca5f",
+    "facts2": "44eb5528a5afca5f",
+    "all": "1cd7264031187857"
    },
-   "row_hash": "810ef8e803cb09dd",
+   "row_hash": "5358489178bff0a4",
    "carried": true,
-   "pass": 1
+   "pass": 9
   },
   {
    "row": "C804",
    "screen": "body_lunch.eat",
    "verdict": "PASS",
-   "line": "You eat at the end of a long table.",
-   "why": "strangers or nobody; the people who will staff these places (Frank, Danny, Rosa, Marco) have no rows until P32, said on the card",
+   "line": "\"half listening to a table making plans you're not part of yet\"",
+   "why": "no room-text line per person; anyone else is an unnamed crowd, or named only inside a presence group",
    "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "348736bcd0d77e5c",
-    "facts": "9115f4236a2bef89",
-    "all": "3bb8cf6fe4700103"
+    "text": "00b85db49e628bf5",
+    "facts": "4607c7f9c0029b8f",
+    "facts2": "4607c7f9c0029b8f",
+    "all": "cc0d6855a92479ee"
    },
-   "row_hash": "810ef8e803cb09dd",
+   "row_hash": "5358489178bff0a4",
    "carried": true,
-   "pass": 1
+   "pass": 9
   },
   {
    "row": "C804",
    "screen": "body_mirror.fix",
    "verdict": "PASS",
-   "line": "You lean into the long mirror",
-   "why": "strangers or nobody; the people who will staff these places (Frank, Danny, Rosa, Marco) have no rows until P32, said on the card",
+   "line": "\"You lean into the long mirror and fix your face\"",
+   "why": "no room-text line per person; anyone else is an unnamed crowd, or named only inside a presence group",
    "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "bdf54844cf3e1a57",
-    "facts": "06ce3e0e808b3228",
-    "all": "09f5db9e6f9a7a20"
+    "text": "b734d31c0a6da3e7",
+    "facts": "23d6f286c33663c4",
+    "facts2": "23d6f286c33663c4",
+    "all": "728675dd261fe40d"
    },
-   "row_hash": "810ef8e803cb09dd",
+   "row_hash": "5358489178bff0a4",
    "carried": true,
-   "pass": 1
+   "pass": 9
   },
   {
    "row": "C804",
    "screen": "body_run.run",
    "verdict": "PASS",
-   "line": "a guy coming the other way turns his head",
-   "why": "strangers or nobody; the people who will staff these places (Frank, Danny, Rosa, Marco) have no rows until P32, said on the card",
+   "line": "\"A dog walker's eyes follow your ass round the pond.\"",
+   "why": "no room-text line per person; anyone else is an unnamed crowd, or named only inside a presence group",
    "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "b81f0a84304a114c",
+    "text": "30c91aa93a1f5b0b",
     "facts": "45173fb43c5513f5",
-    "all": "3e4af20d815112fd"
+    "facts2": "45173fb43c5513f5",
+    "all": "b184641b5e03737b"
    },
-   "row_hash": "810ef8e803cb09dd",
+   "row_hash": "5358489178bff0a4",
    "carried": true,
-   "pass": 1
+   "pass": 9
   },
   {
    "row": "C804",
    "screen": "body_snack.eat",
    "verdict": "PASS",
-   "line": "pay at the till",
-   "why": "strangers or nobody; the people who will staff these places (Frank, Danny, Rosa, Marco) have no rows until P32, said on the card",
+   "line": "\"You grab a candy bar and a soda and pay at the till.\"",
+   "why": "no room-text line per person; anyone else is an unnamed crowd, or named only inside a presence group",
    "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "20d564a6385fb69a",
-    "facts": "d4cdf2dbc1a7d5c3",
-    "all": "c8994d1fc17af514"
+    "text": "28ae2143b3c8a2ae",
+    "facts": "fb7389f7fdd9b7e8",
+    "facts2": "fb7389f7fdd9b7e8",
+    "all": "37438349bb3dee9c"
    },
-   "row_hash": "810ef8e803cb09dd",
+   "row_hash": "5358489178bff0a4",
    "carried": true,
-   "pass": 1
+   "pass": 9
   },
   {
    "row": "C804",
    "screen": "body_workout.lift",
    "verdict": "PASS",
-   "line": "Two guys at the rack",
-   "why": "strangers or nobody; the people who will staff these places (Frank, Danny, Rosa, Marco) have no rows until P32, said on the card",
+   "line": "\"Two guys at the rack stop talking when you bend for the kettlebell.\"",
+   "why": "no room-text line per person; anyone else is an unnamed crowd, or named only inside a presence group",
    "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "00b1f7001ad542d1",
-    "facts": "c6185ad809e8ab04",
-    "all": "7b25b48c3a5e3f44"
+    "text": "b0c43c3aa325a5e3",
+    "facts": "c4485366da85d0a9",
+    "facts2": "c4485366da85d0a9",
+    "all": "2caea444a4dc620d"
    },
-   "row_hash": "810ef8e803cb09dd",
+   "row_hash": "5358489178bff0a4",
    "carried": true,
-   "pass": 1
+   "pass": 9
   },
   {
    "row": "C889",
    "screen": "*",
    "verdict": "PASS",
-   "line": "Work out ($5, 1 hour, 20 energy)",
-   "why": "every label's duration equals its Done's time_progression_minutes (45, 60, 10, 5, 10, 20, 30)",
+   "line": "Go for a run \u00b7 Work out ($5) \u00b7 Fix your hair and make-up \u00b7 Buy a snack ($2) \u00b7 Buy a coffee ($3) \u00b7 Buy lunch ($4) \u00b7 Sit on the grass \u00b7 Done",
+   "why": "no label names a clock time, a duration or energy; every spend shows its money",
    "cause": null,
    "note": true,
-   "screen_hash": "443df94f1f7eb1cf",
-   "row_hash": "1b724e2dcfbf028b",
+   "screen_hash": "e4f030d5f1cb9e39",
+   "row_hash": "def1348d483d0c40",
    "carried": true,
-   "pass": 1
+   "pass": 7
+  },
+  {
+   "row": "C889",
+   "screen": "body_grass.sit",
+   "verdict": "PASS",
+   "line": "You lie back on the grass with your bag under your head and stare up at the sky until your head clears.",
+   "why": "labels name no clock time and no duration",
+   "cause": null,
+   "note": true,
+   "screen_hash": {
+    "text": "762aaf6daecff423",
+    "facts": "44eb5528a5afca5f",
+    "facts2": "44eb5528a5afca5f",
+    "all": "1cd7264031187857"
+   },
+   "row_hash": "def1348d483d0c40",
+   "carried": true,
+   "pass": 7
   },
   {
    "row": "C889",
    "screen": "body_lunch.eat",
    "verdict": "PASS",
-   "line": "Buy lunch ($4, 20 min, +15 energy)",
-   "why": "Label states a duration equal to Done's time_progression_minutes (20 min = 20).",
+   "line": "You eat at the end of a long table, half listening to a table making plans you're not part of yet.",
+   "why": "labels name no clock time and no duration",
    "cause": null,
    "note": true,
    "screen_hash": {
     "text": "00b85db49e628bf5",
-    "facts": "3c7fa927521bb8d1",
-    "all": "9d4339762cdd8960"
+    "facts": "4607c7f9c0029b8f",
+    "facts2": "4607c7f9c0029b8f",
+    "all": "cc0d6855a92479ee"
    },
-   "row_hash": "1b724e2dcfbf028b",
+   "row_hash": "def1348d483d0c40",
    "carried": true,
-   "pass": 6
+   "pass": 7
+  },
+  {
+   "row": "C889",
+   "screen": "body_mirror.fix",
+   "verdict": "PASS",
+   "line": "A woman of 18 at a long campus restroom mirror putting on lip gloss, alone, no phone.",
+   "why": "labels name no clock time and no duration",
+   "cause": null,
+   "note": true,
+   "screen_hash": {
+    "text": "eecca1bddbdeb214",
+    "facts": "23d6f286c33663c4",
+    "facts2": "23d6f286c33663c4",
+    "all": "fb3d765815beb532"
+   },
+   "row_hash": "def1348d483d0c40",
+   "carried": true,
+   "pass": 7
   },
   {
    "row": "C889",
    "screen": "body_snack.eat",
    "verdict": "PASS",
-   "line": "Buy a snack ($2, 5 min, +10 energy)",
-   "why": "Label states a duration equal to Done's time_progression_minutes (5 min = 5).",
+   "line": "Buy a snack ($2) \u00b7 Done",
+   "why": "labels name no clock time and no duration",
    "cause": null,
    "note": true,
    "screen_hash": {
     "text": "28ae2143b3c8a2ae",
     "facts": "fb7389f7fdd9b7e8",
+    "facts2": "fb7389f7fdd9b7e8",
     "all": "37438349bb3dee9c"
    },
-   "row_hash": "1b724e2dcfbf028b",
+   "row_hash": "def1348d483d0c40",
    "carried": true,
-   "pass": 6
+   "pass": 7
   },
   {
    "row": "C889",
    "screen": "body_workout.lift",
    "verdict": "PASS",
-   "line": "Work out ($5, 1 hour, 20 energy)",
-   "why": "Label states a duration equal to Done's time_progression_minutes (1 hour = 60).",
+   "line": "Work out ($5) \u00b7 Done",
+   "why": "labels name no clock time and no duration",
    "cause": null,
    "note": true,
    "screen_hash": {
     "text": "b0c43c3aa325a5e3",
     "facts": "c4485366da85d0a9",
+    "facts2": "c4485366da85d0a9",
     "all": "2caea444a4dc620d"
    },
-   "row_hash": "1b724e2dcfbf028b",
+   "row_hash": "def1348d483d0c40",
    "carried": true,
-   "pass": 6
+   "pass": 7
   },
   {
    "row": "C892",
@@ -3561,20 +3620,57 @@
   },
   {
    "row": "C892",
+   "screen": "body_grass.sit",
+   "verdict": "PASS",
+   "line": "You lie back on the grass with your bag under your head and stare up at the sky until your head clears.",
+   "why": "no hour in the act",
+   "cause": null,
+   "note": true,
+   "screen_hash": {
+    "text": "762aaf6daecff423",
+    "facts": "44eb5528a5afca5f",
+    "facts2": "44eb5528a5afca5f",
+    "all": "1cd7264031187857"
+   },
+   "row_hash": "5c890033f6ac38b8",
+   "carried": true,
+   "pass": 7
+  },
+  {
+   "row": "C892",
    "screen": "body_lunch.eat",
    "verdict": "PASS",
-   "line": "You take a tray down the line: pasta, a roll, a carton of milk. You eat at the end of a long table, half listening to a table making plans you're not part of yet.",
-   "why": "Hours are on the room's sign / lunch's greyed line, not in the act.",
+   "line": "You eat at the end of a long table, half listening to a table making plans you're not part of yet.",
+   "why": "no hour in the act",
    "cause": null,
    "note": true,
    "screen_hash": {
     "text": "00b85db49e628bf5",
-    "facts": "3c7fa927521bb8d1",
-    "all": "9d4339762cdd8960"
+    "facts": "4607c7f9c0029b8f",
+    "facts2": "4607c7f9c0029b8f",
+    "all": "cc0d6855a92479ee"
    },
    "row_hash": "5c890033f6ac38b8",
    "carried": true,
-   "pass": 6
+   "pass": 7
+  },
+  {
+   "row": "C892",
+   "screen": "body_mirror.fix",
+   "verdict": "PASS",
+   "line": "A woman of 18 at a long campus restroom mirror putting on lip gloss, alone, no phone.",
+   "why": "no hour in the act",
+   "cause": null,
+   "note": true,
+   "screen_hash": {
+    "text": "eecca1bddbdeb214",
+    "facts": "23d6f286c33663c4",
+    "facts2": "23d6f286c33663c4",
+    "all": "fb3d765815beb532"
+   },
+   "row_hash": "5c890033f6ac38b8",
+   "carried": true,
+   "pass": 7
   },
   {
    "row": "C892",
@@ -3625,20 +3721,57 @@
   },
   {
    "row": "C897",
+   "screen": "body_grass.sit",
+   "verdict": "PASS",
+   "line": "You lie back on the grass with your bag under your head and stare up at the sky until your head clears.",
+   "why": "time sits on the move or the act, not on every room",
+   "cause": null,
+   "note": true,
+   "screen_hash": {
+    "text": "762aaf6daecff423",
+    "facts": "44eb5528a5afca5f",
+    "facts2": "44eb5528a5afca5f",
+    "all": "1cd7264031187857"
+   },
+   "row_hash": "265ece64add83676",
+   "carried": true,
+   "pass": 7
+  },
+  {
+   "row": "C897",
    "screen": "body_lunch.eat",
    "verdict": "PASS",
-   "line": "You take a tray down the line: pasta, a roll, a carton of milk. You eat at the end of a long table, half listening to a table making plans you're not part of yet.",
-   "why": "No time put on the room itself; time is on the activity only.",
+   "line": "You eat at the end of a long table, half listening to a table making plans you're not part of yet.",
+   "why": "time sits on the move or the act, not on every room",
    "cause": null,
    "note": true,
    "screen_hash": {
     "text": "00b85db49e628bf5",
-    "facts": "3c7fa927521bb8d1",
-    "all": "9d4339762cdd8960"
+    "facts": "4607c7f9c0029b8f",
+    "facts2": "4607c7f9c0029b8f",
+    "all": "cc0d6855a92479ee"
    },
    "row_hash": "265ece64add83676",
    "carried": true,
-   "pass": 6
+   "pass": 7
+  },
+  {
+   "row": "C897",
+   "screen": "body_mirror.fix",
+   "verdict": "PASS",
+   "line": "A woman of 18 at a long campus restroom mirror putting on lip gloss, alone, no phone.",
+   "why": "time sits on the move or the act, not on every room",
+   "cause": null,
+   "note": true,
+   "screen_hash": {
+    "text": "eecca1bddbdeb214",
+    "facts": "23d6f286c33663c4",
+    "facts2": "23d6f286c33663c4",
+    "all": "fb3d765815beb532"
+   },
+   "row_hash": "265ece64add83676",
+   "carried": true,
+   "pass": 7
   },
   {
    "row": "C897",
@@ -3689,20 +3822,57 @@
   },
   {
    "row": "C900",
+   "screen": "body_grass.sit",
+   "verdict": "PASS",
+   "line": "You lie back on the grass with your bag under your head and stare up at the sky until your head clears.",
+   "why": "no beat says what time it is",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "762aaf6daecff423",
+    "facts": "44eb5528a5afca5f",
+    "facts2": "44eb5528a5afca5f",
+    "all": "1cd7264031187857"
+   },
+   "row_hash": "6372efb027eb2034",
+   "carried": true,
+   "pass": 7
+  },
+  {
+   "row": "C900",
    "screen": "body_lunch.eat",
    "verdict": "PASS",
-   "line": "You take a tray down the line: pasta, a roll, a carton of milk. You eat at the end of a long table, half listening to a table making plans you're not part of yet.",
-   "why": "No beat says what time it is.",
+   "line": "You eat at the end of a long table, half listening to a table making plans you're not part of yet.",
+   "why": "no beat says what time it is",
    "cause": null,
    "note": false,
    "screen_hash": {
     "text": "00b85db49e628bf5",
-    "facts": "3c7fa927521bb8d1",
-    "all": "9d4339762cdd8960"
+    "facts": "4607c7f9c0029b8f",
+    "facts2": "4607c7f9c0029b8f",
+    "all": "cc0d6855a92479ee"
    },
    "row_hash": "6372efb027eb2034",
    "carried": true,
-   "pass": 6
+   "pass": 7
+  },
+  {
+   "row": "C900",
+   "screen": "body_mirror.fix",
+   "verdict": "PASS",
+   "line": "A woman of 18 at a long campus restroom mirror putting on lip gloss, alone, no phone.",
+   "why": "no beat says what time it is",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "eecca1bddbdeb214",
+    "facts": "23d6f286c33663c4",
+    "facts2": "23d6f286c33663c4",
+    "all": "fb3d765815beb532"
+   },
+   "row_hash": "6372efb027eb2034",
+   "carried": true,
+   "pass": 7
   },
   {
    "row": "C900",
@@ -3753,20 +3923,57 @@
   },
   {
    "row": "C902",
+   "screen": "body_grass.sit",
+   "verdict": "PASS",
+   "line": "You lie back on the grass with your bag under your head and stare up at the sky until your head clears.",
+   "why": "read at the last minute of the window, still true",
+   "cause": null,
+   "note": true,
+   "screen_hash": {
+    "text": "762aaf6daecff423",
+    "facts": "44eb5528a5afca5f",
+    "facts2": "44eb5528a5afca5f",
+    "all": "1cd7264031187857"
+   },
+   "row_hash": "df5ed7a36dbc74e4",
+   "carried": true,
+   "pass": 7
+  },
+  {
+   "row": "C902",
    "screen": "body_lunch.eat",
    "verdict": "PASS",
-   "line": "You take a tray down the line: pasta, a roll, a carton of milk. You eat at the end of a long table, half listening to a table making plans you're not part of yet.",
-   "why": "At 13:55 Rosa still at the counter; Nadia (unmet) leaving at 14:00 changes nothing. True.",
+   "line": "You eat at the end of a long table, half listening to a table making plans you're not part of yet.",
+   "why": "read at the last minute of the window, still true",
    "cause": null,
    "note": true,
    "screen_hash": {
     "text": "00b85db49e628bf5",
-    "facts": "3c7fa927521bb8d1",
-    "all": "9d4339762cdd8960"
+    "facts": "4607c7f9c0029b8f",
+    "facts2": "4607c7f9c0029b8f",
+    "all": "cc0d6855a92479ee"
    },
    "row_hash": "df5ed7a36dbc74e4",
    "carried": true,
-   "pass": 6
+   "pass": 7
+  },
+  {
+   "row": "C902",
+   "screen": "body_mirror.fix",
+   "verdict": "PASS",
+   "line": "A woman of 18 at a long campus restroom mirror putting on lip gloss, alone, no phone.",
+   "why": "read at the last minute of the window, still true",
+   "cause": null,
+   "note": true,
+   "screen_hash": {
+    "text": "eecca1bddbdeb214",
+    "facts": "23d6f286c33663c4",
+    "facts2": "23d6f286c33663c4",
+    "all": "fb3d765815beb532"
+   },
+   "row_hash": "df5ed7a36dbc74e4",
+   "carried": true,
+   "pass": 7
   },
   {
    "row": "C902",
@@ -3817,20 +4024,57 @@
   },
   {
    "row": "C903",
+   "screen": "body_grass.sit",
+   "verdict": "PASS",
+   "line": "You lie back on the grass with your bag under your head and stare up at the sky until your head clears.",
+   "why": "no weekday named in a beat",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "762aaf6daecff423",
+    "facts": "44eb5528a5afca5f",
+    "facts2": "44eb5528a5afca5f",
+    "all": "1cd7264031187857"
+   },
+   "row_hash": "4f83b0b5eb45f71b",
+   "carried": true,
+   "pass": 7
+  },
+  {
+   "row": "C903",
    "screen": "body_lunch.eat",
    "verdict": "PASS",
-   "line": "You take a tray down the line: pasta, a roll, a carton of milk. You eat at the end of a long table, half listening to a table making plans you're not part of yet.",
-   "why": "Prose names no weekday; lunch's 'on weekdays' is only on the greyed sign, behind the weekday condition.",
+   "line": "lunch is 11am to 2pm on weekdays.",
+   "why": "'weekdays' sits on a row gated to weekdays, in its greyed message, not in a beat",
    "cause": null,
    "note": false,
    "screen_hash": {
     "text": "00b85db49e628bf5",
-    "facts": "3c7fa927521bb8d1",
-    "all": "9d4339762cdd8960"
+    "facts": "4607c7f9c0029b8f",
+    "facts2": "4607c7f9c0029b8f",
+    "all": "cc0d6855a92479ee"
    },
    "row_hash": "4f83b0b5eb45f71b",
    "carried": true,
-   "pass": 6
+   "pass": 7
+  },
+  {
+   "row": "C903",
+   "screen": "body_mirror.fix",
+   "verdict": "PASS",
+   "line": "A woman of 18 at a long campus restroom mirror putting on lip gloss, alone, no phone.",
+   "why": "no weekday named in a beat",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "eecca1bddbdeb214",
+    "facts": "23d6f286c33663c4",
+    "facts2": "23d6f286c33663c4",
+    "all": "fb3d765815beb532"
+   },
+   "row_hash": "4f83b0b5eb45f71b",
+   "carried": true,
+   "pass": 7
   },
   {
    "row": "C903",
@@ -3870,129 +4114,207 @@
    "row": "C906",
    "screen": "*",
    "verdict": "PASS",
-   "line": "Sit on the grass (30 min, +5 energy)",
-   "why": "only durations, no 'till' promises",
+   "line": "Go for a run \u00b7 Work out ($5) \u00b7 Fix your hair and make-up \u00b7 Buy a snack ($2) \u00b7 Buy a coffee ($3) \u00b7 Buy lunch ($4) \u00b7 Sit on the grass \u00b7 Done",
+   "why": "no label names a clock time, a duration or energy; every spend shows its money",
    "cause": null,
    "note": true,
-   "screen_hash": "443df94f1f7eb1cf",
-   "row_hash": "ce3b42a8c86da5b8",
+   "screen_hash": "e4f030d5f1cb9e39",
+   "row_hash": "71713a7e7ae739e7",
    "carried": true,
-   "pass": 1
+   "pass": 7
+  },
+  {
+   "row": "C906",
+   "screen": "body_grass.sit",
+   "verdict": "PASS",
+   "line": "You lie back on the grass with your bag under your head and stare up at the sky until your head clears.",
+   "why": "no 'till X' on any label",
+   "cause": null,
+   "note": true,
+   "screen_hash": {
+    "text": "762aaf6daecff423",
+    "facts": "44eb5528a5afca5f",
+    "facts2": "44eb5528a5afca5f",
+    "all": "1cd7264031187857"
+   },
+   "row_hash": "71713a7e7ae739e7",
+   "carried": true,
+   "pass": 7
   },
   {
    "row": "C906",
    "screen": "body_lunch.eat",
    "verdict": "PASS",
-   "line": "You take a tray down the line: pasta, a roll, a carton of milk. You eat at the end of a long table, half listening to a table making plans you're not part of yet.",
-   "why": "No 'till' promise; only durations.",
+   "line": "You eat at the end of a long table, half listening to a table making plans you're not part of yet.",
+   "why": "no 'till X' on any label",
    "cause": null,
    "note": true,
    "screen_hash": {
     "text": "00b85db49e628bf5",
-    "facts": "3c7fa927521bb8d1",
-    "all": "9d4339762cdd8960"
+    "facts": "4607c7f9c0029b8f",
+    "facts2": "4607c7f9c0029b8f",
+    "all": "cc0d6855a92479ee"
    },
-   "row_hash": "ce3b42a8c86da5b8",
+   "row_hash": "71713a7e7ae739e7",
    "carried": true,
-   "pass": 6
+   "pass": 7
+  },
+  {
+   "row": "C906",
+   "screen": "body_mirror.fix",
+   "verdict": "PASS",
+   "line": "A woman of 18 at a long campus restroom mirror putting on lip gloss, alone, no phone.",
+   "why": "no 'till X' on any label",
+   "cause": null,
+   "note": true,
+   "screen_hash": {
+    "text": "eecca1bddbdeb214",
+    "facts": "23d6f286c33663c4",
+    "facts2": "23d6f286c33663c4",
+    "all": "fb3d765815beb532"
+   },
+   "row_hash": "71713a7e7ae739e7",
+   "carried": true,
+   "pass": 7
   },
   {
    "row": "C906",
    "screen": "body_snack.eat",
    "verdict": "PASS",
-   "line": "You grab a candy bar and a soda and pay at the till.",
-   "why": "No 'till' promise; only durations.",
+   "line": "Buy a snack ($2) \u00b7 Done",
+   "why": "no 'till X' on any label",
    "cause": null,
    "note": true,
    "screen_hash": {
     "text": "28ae2143b3c8a2ae",
     "facts": "fb7389f7fdd9b7e8",
+    "facts2": "fb7389f7fdd9b7e8",
     "all": "37438349bb3dee9c"
    },
-   "row_hash": "ce3b42a8c86da5b8",
+   "row_hash": "71713a7e7ae739e7",
    "carried": true,
-   "pass": 6
+   "pass": 7
   },
   {
    "row": "C906",
    "screen": "body_workout.lift",
    "verdict": "PASS",
-   "line": "Two guys at the rack stop talking when you bend for the kettlebell.",
-   "why": "No 'till' promise; only durations.",
+   "line": "Work out ($5) \u00b7 Done",
+   "why": "no 'till X' on any label",
    "cause": null,
    "note": true,
    "screen_hash": {
     "text": "b0c43c3aa325a5e3",
     "facts": "c4485366da85d0a9",
+    "facts2": "c4485366da85d0a9",
     "all": "2caea444a4dc620d"
    },
-   "row_hash": "ce3b42a8c86da5b8",
+   "row_hash": "71713a7e7ae739e7",
    "carried": true,
-   "pass": 6
+   "pass": 7
   },
   {
    "row": "C910",
    "screen": "*",
    "verdict": "PASS",
-   "line": "($4, 20 min, +15 energy)",
-   "why": "the game's one form: '(N min'/'(1 hour', cost first",
+   "line": "Go for a run \u00b7 Work out ($5) \u00b7 Fix your hair and make-up \u00b7 Buy a snack ($2) \u00b7 Buy a coffee ($3) \u00b7 Buy lunch ($4) \u00b7 Sit on the grass \u00b7 Done",
+   "why": "no label names a clock time, a duration or energy; every spend shows its money",
    "cause": null,
    "note": true,
-   "screen_hash": "443df94f1f7eb1cf",
-   "row_hash": "be1c18ee466455f6",
+   "screen_hash": "e4f030d5f1cb9e39",
+   "row_hash": "d5a109f1ef88419a",
    "carried": true,
-   "pass": 1
+   "pass": 7
+  },
+  {
+   "row": "C910",
+   "screen": "body_grass.sit",
+   "verdict": "PASS",
+   "line": "You lie back on the grass with your bag under your head and stare up at the sky until your head clears.",
+   "why": "buttons say no time and no energy; money only where the act costs money",
+   "cause": null,
+   "note": true,
+   "screen_hash": {
+    "text": "762aaf6daecff423",
+    "facts": "44eb5528a5afca5f",
+    "facts2": "44eb5528a5afca5f",
+    "all": "1cd7264031187857"
+   },
+   "row_hash": "d5a109f1ef88419a",
+   "carried": true,
+   "pass": 7
   },
   {
    "row": "C910",
    "screen": "body_lunch.eat",
    "verdict": "PASS",
-   "line": "You take a tray down the line: pasta, a roll, a carton of milk. You eat at the end of a long table, half listening to a table making plans you're not part of yet.",
-   "why": "Same '(cost, duration, energy)' form as the game's other solo rows.",
+   "line": "You eat at the end of a long table, half listening to a table making plans you're not part of yet.",
+   "why": "buttons say no time and no energy; money only where the act costs money",
    "cause": null,
    "note": true,
    "screen_hash": {
     "text": "00b85db49e628bf5",
-    "facts": "3c7fa927521bb8d1",
-    "all": "9d4339762cdd8960"
+    "facts": "4607c7f9c0029b8f",
+    "facts2": "4607c7f9c0029b8f",
+    "all": "cc0d6855a92479ee"
    },
-   "row_hash": "be1c18ee466455f6",
+   "row_hash": "d5a109f1ef88419a",
    "carried": true,
-   "pass": 6
+   "pass": 7
+  },
+  {
+   "row": "C910",
+   "screen": "body_mirror.fix",
+   "verdict": "PASS",
+   "line": "A woman of 18 at a long campus restroom mirror putting on lip gloss, alone, no phone.",
+   "why": "buttons say no time and no energy; money only where the act costs money",
+   "cause": null,
+   "note": true,
+   "screen_hash": {
+    "text": "eecca1bddbdeb214",
+    "facts": "23d6f286c33663c4",
+    "facts2": "23d6f286c33663c4",
+    "all": "fb3d765815beb532"
+   },
+   "row_hash": "d5a109f1ef88419a",
+   "carried": true,
+   "pass": 7
   },
   {
    "row": "C910",
    "screen": "body_snack.eat",
    "verdict": "PASS",
-   "line": "You grab a candy bar and a soda and pay at the till.",
-   "why": "Same '(cost, duration, energy)' form as the game's other solo rows.",
+   "line": "Buy a snack ($2) \u00b7 Done",
+   "why": "money on the label, no time or energy",
    "cause": null,
    "note": true,
    "screen_hash": {
     "text": "28ae2143b3c8a2ae",
     "facts": "fb7389f7fdd9b7e8",
+    "facts2": "fb7389f7fdd9b7e8",
     "all": "37438349bb3dee9c"
    },
-   "row_hash": "be1c18ee466455f6",
+   "row_hash": "d5a109f1ef88419a",
    "carried": true,
-   "pass": 6
+   "pass": 7
   },
   {
    "row": "C910",
    "screen": "body_workout.lift",
    "verdict": "PASS",
-   "line": "Two guys at the rack stop talking when you bend for the kettlebell.",
-   "why": "Same '(cost, duration, energy)' form as the game's other solo rows.",
+   "line": "Work out ($5) \u00b7 Done",
+   "why": "money on the label, no time or energy",
    "cause": null,
    "note": true,
    "screen_hash": {
     "text": "b0c43c3aa325a5e3",
     "facts": "c4485366da85d0a9",
+    "facts2": "c4485366da85d0a9",
     "all": "2caea444a4dc620d"
    },
-   "row_hash": "be1c18ee466455f6",
+   "row_hash": "d5a109f1ef88419a",
    "carried": true,
-   "pass": 6
+   "pass": 7
   },
   {
    "row": "C913",
@@ -4015,52 +4337,55 @@
    "row": "C913",
    "screen": "body_grass.sit",
    "verdict": "PASS",
-   "line": "you've lazed enough for one day.",
-   "why": "the quad has no hours, so there are none to publish",
+   "line": "\u2014 you've lazed enough for one day.",
+   "why": "the quad has no hours; the row greys only by its count, with its message",
    "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "249f6ddbec45df08",
-    "facts": "9df05c3a3b8296d2",
-    "all": "72100ce19fc1ce8d"
+    "text": "762aaf6daecff423",
+    "facts": "44eb5528a5afca5f",
+    "facts2": "44eb5528a5afca5f",
+    "all": "1cd7264031187857"
    },
    "row_hash": "c750f9b6ab4ace14",
    "carried": true,
-   "pass": 2
+   "pass": 7
   },
   {
    "row": "C913",
    "screen": "body_lunch.eat",
    "verdict": "PASS",
-   "line": "lunch is 11am to 2pm on weekdays.",
-   "why": "Shut lunch stays dimmed with show_when_blocked and cooldown_message 'lunch is 11am to 2pm on weekdays.'",
+   "line": "Buy lunch ($4) \u2014 lunch is 11am to 2pm on weekdays.",
+   "why": "one row, one set of weekday hours, greyed with show_when_blocked and a cooldown naming the full hours",
    "cause": null,
    "note": false,
    "screen_hash": {
     "text": "00b85db49e628bf5",
-    "facts": "3c7fa927521bb8d1",
-    "all": "9d4339762cdd8960"
+    "facts": "4607c7f9c0029b8f",
+    "facts2": "4607c7f9c0029b8f",
+    "all": "cc0d6855a92479ee"
    },
    "row_hash": "c750f9b6ab4ace14",
    "carried": true,
-   "pass": 6
+   "pass": 7
   },
   {
    "row": "C913",
    "screen": "body_mirror.fix",
    "verdict": "PASS",
-   "line": "Fix your hair and make-up (10 min)",
-   "why": "this row's hours are its room's hours, on the room's sign",
+   "line": "The bathroom is locked with the lecture hall.",
+   "why": "the room publishes its hours",
    "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "bdf54844cf3e1a57",
-    "facts": "06ce3e0e808b3228",
-    "all": "09f5db9e6f9a7a20"
+    "text": "eecca1bddbdeb214",
+    "facts": "23d6f286c33663c4",
+    "facts2": "23d6f286c33663c4",
+    "all": "fb3d765815beb532"
    },
    "row_hash": "c750f9b6ab4ace14",
    "carried": true,
-   "pass": 1
+   "pass": 7
   },
   {
    "row": "C913",
@@ -4134,52 +4459,55 @@
    "row": "C914",
    "screen": "body_grass.sit",
    "verdict": "PASS",
-   "line": "you've lazed enough for one day.",
-   "why": "no hours shown; the greyed line is the count's",
+   "line": "\u2014 you've lazed enough for one day.",
+   "why": "the quad has no hours; the row greys only by its count, with its message",
    "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "249f6ddbec45df08",
-    "facts": "9df05c3a3b8296d2",
-    "all": "72100ce19fc1ce8d"
+    "text": "762aaf6daecff423",
+    "facts": "44eb5528a5afca5f",
+    "facts2": "44eb5528a5afca5f",
+    "all": "1cd7264031187857"
    },
    "row_hash": "bd07273d5822f34f",
    "carried": true,
-   "pass": 2
+   "pass": 7
   },
   {
    "row": "C914",
    "screen": "body_lunch.eat",
    "verdict": "PASS",
-   "line": "You take a tray down the line: pasta, a roll, a carton of milk. You eat at the end of a long table, half listening to a table making plans you're not part of yet.",
-   "why": "Engine greys with cooldown_message only when onlyTheClockShut, else locked_text 'You're not hungry right now.' (v2.py:6713-6721).",
+   "line": "Buy lunch ($4) \u2014 lunch is 11am to 2pm on weekdays.",
+   "why": "one row, one set of weekday hours, greyed with show_when_blocked and a cooldown naming the full hours",
    "cause": null,
    "note": false,
    "screen_hash": {
     "text": "00b85db49e628bf5",
-    "facts": "3c7fa927521bb8d1",
-    "all": "9d4339762cdd8960"
+    "facts": "4607c7f9c0029b8f",
+    "facts2": "4607c7f9c0029b8f",
+    "all": "cc0d6855a92479ee"
    },
    "row_hash": "bd07273d5822f34f",
    "carried": true,
-   "pass": 6
+   "pass": 7
   },
   {
    "row": "C914",
    "screen": "body_mirror.fix",
    "verdict": "PASS",
-   "line": "Buy a coffee ($3, 10 min, +10 energy) \u2014 any more and you'll shake.",
-   "why": "no clock condition on this row; any greyed line is the count's, clothes' or cost's",
+   "line": "its hours are the room's",
+   "why": "the row has no hours of its own; the bathroom's closed line carries them",
    "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "bdf54844cf3e1a57",
-    "facts": "06ce3e0e808b3228",
-    "all": "09f5db9e6f9a7a20"
+    "text": "eecca1bddbdeb214",
+    "facts": "23d6f286c33663c4",
+    "facts2": "23d6f286c33663c4",
+    "all": "fb3d765815beb532"
    },
    "row_hash": "bd07273d5822f34f",
    "carried": true,
-   "pass": 1
+   "pass": 7
   },
   {
    "row": "C914",
@@ -4247,20 +4575,57 @@
   },
   {
    "row": "C916",
+   "screen": "body_grass.sit",
+   "verdict": "PASS",
+   "line": "Sit on the grass",
+   "why": "her choice; no hours to hide",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "762aaf6daecff423",
+    "facts": "44eb5528a5afca5f",
+    "facts2": "44eb5528a5afca5f",
+    "all": "1cd7264031187857"
+   },
+   "row_hash": "7b2bb0dfdbcfe946",
+   "carried": true,
+   "pass": 7
+  },
+  {
+   "row": "C916",
    "screen": "body_lunch.eat",
    "verdict": "PASS",
-   "line": "You take a tray down the line: pasta, a roll, a carton of milk. You eat at the end of a long table, half listening to a table making plans you're not part of yet.",
-   "why": "Hours sit on a button she chooses; nothing happens to her here.",
+   "line": "Buy lunch ($4)",
+   "why": "her choice, so its hours show",
    "cause": null,
    "note": false,
    "screen_hash": {
     "text": "00b85db49e628bf5",
-    "facts": "3c7fa927521bb8d1",
-    "all": "9d4339762cdd8960"
+    "facts": "4607c7f9c0029b8f",
+    "facts2": "4607c7f9c0029b8f",
+    "all": "cc0d6855a92479ee"
    },
    "row_hash": "7b2bb0dfdbcfe946",
    "carried": true,
-   "pass": 6
+   "pass": 7
+  },
+  {
+   "row": "C916",
+   "screen": "body_mirror.fix",
+   "verdict": "PASS",
+   "line": "A woman of 18 at a long campus restroom mirror putting on lip gloss, alone, no phone.",
+   "why": "an event that happens to her stays hidden when shut",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "eecca1bddbdeb214",
+    "facts": "23d6f286c33663c4",
+    "facts2": "23d6f286c33663c4",
+    "all": "fb3d765815beb532"
+   },
+   "row_hash": "7b2bb0dfdbcfe946",
+   "carried": true,
+   "pass": 7
   },
   {
    "row": "C916",
@@ -4306,25 +4671,61 @@
    "note": false,
    "screen_hash": "897b7347c2fa1b52",
    "row_hash": "513927dd127fca04",
-   "carried": false,
+   "carried": true,
+   "pass": 7
+  },
+  {
+   "row": "C920",
+   "screen": "body_grass.sit",
+   "verdict": "PASS",
+   "line": "You lie back on the grass with your bag under your head and stare up at the sky until your head clears.",
+   "why": "Done returns to the same place; its minutes are the act's, not a hop",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "762aaf6daecff423",
+    "facts": "44eb5528a5afca5f",
+    "facts2": "44eb5528a5afca5f",
+    "all": "1cd7264031187857"
+   },
+   "row_hash": "513927dd127fca04",
+   "carried": true,
    "pass": 7
   },
   {
    "row": "C920",
    "screen": "body_lunch.eat",
    "verdict": "PASS",
-   "line": "Done (back to the Cafeteria, 20 min)",
-   "why": "20 minutes is lunch, on the label; no hop; Zoe's Tue/Thu 13\u201314 cafeteria row adds no claim to the line",
+   "line": "You eat at the end of a long table, half listening to a table making plans you're not part of yet.",
+   "why": "Done returns to the same place; its minutes are the act's, not a hop",
    "cause": null,
    "note": false,
    "screen_hash": {
     "text": "00b85db49e628bf5",
-    "facts": "f0aaa3201cfb8ef5",
-    "facts2": "f0aaa3201cfb8ef5",
-    "all": "a68b14bbbf1a24f5"
+    "facts": "4607c7f9c0029b8f",
+    "facts2": "4607c7f9c0029b8f",
+    "all": "cc0d6855a92479ee"
    },
    "row_hash": "513927dd127fca04",
-   "carried": false,
+   "carried": true,
+   "pass": 7
+  },
+  {
+   "row": "C920",
+   "screen": "body_mirror.fix",
+   "verdict": "PASS",
+   "line": "A woman of 18 at a long campus restroom mirror putting on lip gloss, alone, no phone.",
+   "why": "Done returns to the same place; its minutes are the act's, not a hop",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "eecca1bddbdeb214",
+    "facts": "23d6f286c33663c4",
+    "facts2": "23d6f286c33663c4",
+    "all": "fb3d765815beb532"
+   },
+   "row_hash": "513927dd127fca04",
+   "carried": true,
    "pass": 7
   },
   {
@@ -4342,7 +4743,7 @@
     "all": "37438349bb3dee9c"
    },
    "row_hash": "513927dd127fca04",
-   "carried": false,
+   "carried": true,
    "pass": 7
   },
   {
@@ -4360,7 +4761,7 @@
     "all": "2caea444a4dc620d"
    },
    "row_hash": "513927dd127fca04",
-   "carried": false,
+   "carried": true,
    "pass": 7
   },
   {
@@ -4378,20 +4779,57 @@
   },
   {
    "row": "C924",
+   "screen": "body_grass.sit",
+   "verdict": "PASS",
+   "line": "You lie back on the grass with your bag under your head and stare up at the sky until your head clears.",
+   "why": "the minutes spent make the schedule matter",
+   "cause": null,
+   "note": true,
+   "screen_hash": {
+    "text": "762aaf6daecff423",
+    "facts": "44eb5528a5afca5f",
+    "facts2": "44eb5528a5afca5f",
+    "all": "1cd7264031187857"
+   },
+   "row_hash": "791cd173e23fb130",
+   "carried": true,
+   "pass": 7
+  },
+  {
+   "row": "C924",
    "screen": "body_lunch.eat",
-   "verdict": "N/A",
-   "line": "Done",
-   "why": "No move or exit on this screen: Done returns to the same room with its own time.",
+   "verdict": "PASS",
+   "line": "You eat at the end of a long table, half listening to a table making plans you're not part of yet.",
+   "why": "the minutes spent make the schedule matter",
    "cause": null,
    "note": true,
    "screen_hash": {
     "text": "00b85db49e628bf5",
-    "facts": "3c7fa927521bb8d1",
-    "all": "9d4339762cdd8960"
+    "facts": "4607c7f9c0029b8f",
+    "facts2": "4607c7f9c0029b8f",
+    "all": "cc0d6855a92479ee"
    },
    "row_hash": "791cd173e23fb130",
    "carried": true,
-   "pass": 6
+   "pass": 7
+  },
+  {
+   "row": "C924",
+   "screen": "body_mirror.fix",
+   "verdict": "PASS",
+   "line": "A woman of 18 at a long campus restroom mirror putting on lip gloss, alone, no phone.",
+   "why": "the minutes spent make the schedule matter",
+   "cause": null,
+   "note": true,
+   "screen_hash": {
+    "text": "eecca1bddbdeb214",
+    "facts": "23d6f286c33663c4",
+    "facts2": "23d6f286c33663c4",
+    "all": "fb3d765815beb532"
+   },
+   "row_hash": "791cd173e23fb130",
+   "carried": true,
+   "pass": 7
   },
   {
    "row": "C924",
@@ -4442,20 +4880,57 @@
   },
   {
    "row": "C926",
+   "screen": "body_grass.sit",
+   "verdict": "PASS",
+   "line": "You lie back on the grass with your bag under your head and stare up at the sky until your head clears.",
+   "why": "nothing sends the clock to a named hour",
+   "cause": null,
+   "note": true,
+   "screen_hash": {
+    "text": "762aaf6daecff423",
+    "facts": "44eb5528a5afca5f",
+    "facts2": "44eb5528a5afca5f",
+    "all": "1cd7264031187857"
+   },
+   "row_hash": "177d1e1776fac74b",
+   "carried": true,
+   "pass": 7
+  },
+  {
+   "row": "C926",
    "screen": "body_lunch.eat",
    "verdict": "PASS",
-   "line": "Done",
-   "why": "Clock moves by time_progression_minutes only.",
+   "line": "You eat at the end of a long table, half listening to a table making plans you're not part of yet.",
+   "why": "nothing sends the clock to a named hour",
    "cause": null,
    "note": true,
    "screen_hash": {
     "text": "00b85db49e628bf5",
-    "facts": "3c7fa927521bb8d1",
-    "all": "9d4339762cdd8960"
+    "facts": "4607c7f9c0029b8f",
+    "facts2": "4607c7f9c0029b8f",
+    "all": "cc0d6855a92479ee"
    },
    "row_hash": "177d1e1776fac74b",
    "carried": true,
-   "pass": 6
+   "pass": 7
+  },
+  {
+   "row": "C926",
+   "screen": "body_mirror.fix",
+   "verdict": "PASS",
+   "line": "A woman of 18 at a long campus restroom mirror putting on lip gloss, alone, no phone.",
+   "why": "nothing sends the clock to a named hour",
+   "cause": null,
+   "note": true,
+   "screen_hash": {
+    "text": "eecca1bddbdeb214",
+    "facts": "23d6f286c33663c4",
+    "facts2": "23d6f286c33663c4",
+    "all": "fb3d765815beb532"
+   },
+   "row_hash": "177d1e1776fac74b",
+   "carried": true,
+   "pass": 7
   },
   {
    "row": "C926",
@@ -4525,52 +5000,55 @@
    "row": "C927",
    "screen": "body_grass.sit",
    "verdict": "PASS",
-   "line": "time_progression_minutes = 30",
-   "why": "the exit carries its own 30 minutes",
+   "line": "You lie back on the grass with your bag under your head and stare up at the sky until your head clears.",
+   "why": "every exit carries its own minutes",
    "cause": null,
    "note": true,
    "screen_hash": {
     "text": "762aaf6daecff423",
-    "facts": "9df05c3a3b8296d2",
-    "all": "f9166a6788183351"
+    "facts": "44eb5528a5afca5f",
+    "facts2": "44eb5528a5afca5f",
+    "all": "1cd7264031187857"
    },
    "row_hash": "4e86d143688ba8e5",
    "carried": true,
-   "pass": 4
+   "pass": 7
   },
   {
    "row": "C927",
    "screen": "body_lunch.eat",
-   "verdict": "N/A",
-   "line": "Done",
-   "why": "No move or exit on this screen: Done returns to the same room with its own time.",
+   "verdict": "PASS",
+   "line": "time_progression_minutes = 20",
+   "why": "Exit has its time.",
    "cause": null,
    "note": true,
    "screen_hash": {
-    "text": "00b85db49e628bf5",
-    "facts": "3c7fa927521bb8d1",
-    "all": "9d4339762cdd8960"
+    "text": "1703e7590d5fbe02",
+    "facts": "4607c7f9c0029b8f",
+    "facts2": "4607c7f9c0029b8f",
+    "all": "1ca8b72d5608e898"
    },
    "row_hash": "4e86d143688ba8e5",
    "carried": true,
-   "pass": 6
+   "pass": 10
   },
   {
    "row": "C927",
    "screen": "body_mirror.fix",
    "verdict": "PASS",
-   "line": "Done",
-   "why": "every Done carries its minutes (5 to 60)",
+   "line": "Done (time_progression_minutes = 10)",
+   "why": "Exit states its time.",
    "cause": null,
    "note": true,
    "screen_hash": {
-    "text": "eecca1bddbdeb214",
-    "facts": "06ce3e0e808b3228",
-    "all": "53654a4496dc76c3"
+    "text": "b734d31c0a6da3e7",
+    "facts": "23d6f286c33663c4",
+    "facts2": "23d6f286c33663c4",
+    "all": "728675dd261fe40d"
    },
    "row_hash": "4e86d143688ba8e5",
    "carried": true,
-   "pass": 2
+   "pass": 8
   },
   {
    "row": "C927",
@@ -4638,20 +5116,57 @@
   },
   {
    "row": "C928",
+   "screen": "body_grass.sit",
+   "verdict": "PASS",
+   "line": "You lie back on the grass with your bag under your head and stare up at the sky until your head clears.",
+   "why": "no clock printed into prose",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "762aaf6daecff423",
+    "facts": "44eb5528a5afca5f",
+    "facts2": "44eb5528a5afca5f",
+    "all": "1cd7264031187857"
+   },
+   "row_hash": "2c3ccc6bd9929d7f",
+   "carried": true,
+   "pass": 7
+  },
+  {
+   "row": "C928",
    "screen": "body_lunch.eat",
    "verdict": "PASS",
-   "line": "You take a tray down the line: pasta, a roll, a carton of milk. You eat at the end of a long table, half listening to a table making plans you're not part of yet.",
-   "why": "No clock printed in prose.",
+   "line": "You eat at the end of a long table, half listening to a table making plans you're not part of yet.",
+   "why": "no clock printed into prose",
    "cause": null,
    "note": false,
    "screen_hash": {
     "text": "00b85db49e628bf5",
-    "facts": "3c7fa927521bb8d1",
-    "all": "9d4339762cdd8960"
+    "facts": "4607c7f9c0029b8f",
+    "facts2": "4607c7f9c0029b8f",
+    "all": "cc0d6855a92479ee"
    },
    "row_hash": "2c3ccc6bd9929d7f",
    "carried": true,
-   "pass": 6
+   "pass": 7
+  },
+  {
+   "row": "C928",
+   "screen": "body_mirror.fix",
+   "verdict": "PASS",
+   "line": "A woman of 18 at a long campus restroom mirror putting on lip gloss, alone, no phone.",
+   "why": "no clock printed into prose",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "eecca1bddbdeb214",
+    "facts": "23d6f286c33663c4",
+    "facts2": "23d6f286c33663c4",
+    "all": "fb3d765815beb532"
+   },
+   "row_hash": "2c3ccc6bd9929d7f",
+   "carried": true,
+   "pass": 7
   },
   {
    "row": "C928",
@@ -4691,65 +5206,104 @@
    "row": "C929",
    "screen": "*",
    "verdict": "PASS",
-   "line": "Fix your hair and make-up (10 min)",
-   "why": "activity time is on the label",
+   "line": "Go for a run \u00b7 Work out ($5) \u00b7 Fix your hair and make-up \u00b7 Buy a snack ($2) \u00b7 Buy a coffee ($3) \u00b7 Buy lunch ($4) \u00b7 Sit on the grass \u00b7 Done",
+   "why": "no label names a clock time, a duration or energy; every spend shows its money",
    "cause": null,
    "note": true,
-   "screen_hash": "443df94f1f7eb1cf",
-   "row_hash": "e20b027bad88ca8c",
+   "screen_hash": "e4f030d5f1cb9e39",
+   "row_hash": "18b0ecdf6d7fc901",
    "carried": true,
-   "pass": 1
+   "pass": 7
+  },
+  {
+   "row": "C929",
+   "screen": "body_grass.sit",
+   "verdict": "PASS",
+   "line": "You lie back on the grass with your bag under your head and stare up at the sky until your head clears.",
+   "why": "the activity's time is on no label",
+   "cause": null,
+   "note": true,
+   "screen_hash": {
+    "text": "762aaf6daecff423",
+    "facts": "44eb5528a5afca5f",
+    "facts2": "44eb5528a5afca5f",
+    "all": "1cd7264031187857"
+   },
+   "row_hash": "18b0ecdf6d7fc901",
+   "carried": true,
+   "pass": 7
   },
   {
    "row": "C929",
    "screen": "body_lunch.eat",
    "verdict": "PASS",
-   "line": "You take a tray down the line: pasta, a roll, a carton of milk. You eat at the end of a long table, half listening to a table making plans you're not part of yet.",
-   "why": "The activity's time is carried on the label.",
+   "line": "You eat at the end of a long table, half listening to a table making plans you're not part of yet.",
+   "why": "the activity's time is on no label",
    "cause": null,
    "note": true,
    "screen_hash": {
     "text": "00b85db49e628bf5",
-    "facts": "3c7fa927521bb8d1",
-    "all": "9d4339762cdd8960"
+    "facts": "4607c7f9c0029b8f",
+    "facts2": "4607c7f9c0029b8f",
+    "all": "cc0d6855a92479ee"
    },
-   "row_hash": "e20b027bad88ca8c",
+   "row_hash": "18b0ecdf6d7fc901",
    "carried": true,
-   "pass": 6
+   "pass": 7
+  },
+  {
+   "row": "C929",
+   "screen": "body_mirror.fix",
+   "verdict": "PASS",
+   "line": "A woman of 18 at a long campus restroom mirror putting on lip gloss, alone, no phone.",
+   "why": "the activity's time is on no label",
+   "cause": null,
+   "note": true,
+   "screen_hash": {
+    "text": "eecca1bddbdeb214",
+    "facts": "23d6f286c33663c4",
+    "facts2": "23d6f286c33663c4",
+    "all": "fb3d765815beb532"
+   },
+   "row_hash": "18b0ecdf6d7fc901",
+   "carried": true,
+   "pass": 7
   },
   {
    "row": "C929",
    "screen": "body_snack.eat",
    "verdict": "PASS",
-   "line": "You grab a candy bar and a soda and pay at the till.",
-   "why": "The activity's time is carried on the label.",
+   "line": "Buy a snack ($2) \u00b7 Done",
+   "why": "the activity's time is on no label",
    "cause": null,
    "note": true,
    "screen_hash": {
     "text": "28ae2143b3c8a2ae",
     "facts": "fb7389f7fdd9b7e8",
+    "facts2": "fb7389f7fdd9b7e8",
     "all": "37438349bb3dee9c"
    },
-   "row_hash": "e20b027bad88ca8c",
+   "row_hash": "18b0ecdf6d7fc901",
    "carried": true,
-   "pass": 6
+   "pass": 7
   },
   {
    "row": "C929",
    "screen": "body_workout.lift",
    "verdict": "PASS",
-   "line": "Two guys at the rack stop talking when you bend for the kettlebell.",
-   "why": "The activity's time is carried on the label.",
+   "line": "Work out ($5) \u00b7 Done",
+   "why": "the activity's time is on no label",
    "cause": null,
    "note": true,
    "screen_hash": {
     "text": "b0c43c3aa325a5e3",
     "facts": "c4485366da85d0a9",
+    "facts2": "c4485366da85d0a9",
     "all": "2caea444a4dc620d"
    },
-   "row_hash": "e20b027bad88ca8c",
+   "row_hash": "18b0ecdf6d7fc901",
    "carried": true,
-   "pass": 6
+   "pass": 7
   },
   {
    "row": "C930",
@@ -4766,20 +5320,57 @@
   },
   {
    "row": "C930",
+   "screen": "body_grass.sit",
+   "verdict": "PASS",
+   "line": "\u2014 you've lazed enough for one day.",
+   "why": "the quad has no hours; the row greys only by its count, with its message",
+   "cause": null,
+   "note": true,
+   "screen_hash": {
+    "text": "762aaf6daecff423",
+    "facts": "44eb5528a5afca5f",
+    "facts2": "44eb5528a5afca5f",
+    "all": "1cd7264031187857"
+   },
+   "row_hash": "beb57cd46fe906bf",
+   "carried": true,
+   "pass": 7
+  },
+  {
+   "row": "C930",
    "screen": "body_lunch.eat",
    "verdict": "PASS",
-   "line": "You take a tray down the line: pasta, a roll, a carton of milk. You eat at the end of a long table, half listening to a table making plans you're not part of yet.",
-   "why": "show_when_blocked = true on the trigger.",
+   "line": "Buy lunch ($4) \u2014 lunch is 11am to 2pm on weekdays.",
+   "why": "one row, one set of weekday hours, greyed with show_when_blocked and a cooldown naming the full hours",
    "cause": null,
    "note": true,
    "screen_hash": {
     "text": "00b85db49e628bf5",
-    "facts": "3c7fa927521bb8d1",
-    "all": "9d4339762cdd8960"
+    "facts": "4607c7f9c0029b8f",
+    "facts2": "4607c7f9c0029b8f",
+    "all": "cc0d6855a92479ee"
    },
    "row_hash": "beb57cd46fe906bf",
    "carried": true,
-   "pass": 6
+   "pass": 7
+  },
+  {
+   "row": "C930",
+   "screen": "body_mirror.fix",
+   "verdict": "N/A",
+   "line": "A woman of 18 at a long campus restroom mirror putting on lip gloss, alone, no phone.",
+   "why": "no row on this screen has hours or a window",
+   "cause": null,
+   "note": true,
+   "screen_hash": {
+    "text": "eecca1bddbdeb214",
+    "facts": "23d6f286c33663c4",
+    "facts2": "23d6f286c33663c4",
+    "all": "fb3d765815beb532"
+   },
+   "row_hash": "beb57cd46fe906bf",
+   "carried": true,
+   "pass": 7
   },
   {
    "row": "C930",
@@ -4848,53 +5439,56 @@
   {
    "row": "C931",
    "screen": "body_grass.sit",
-   "verdict": "N/A",
-   "line": "conditions: none",
-   "why": "no time_of_day condition on this row (the quad has no hours)",
+   "verdict": "PASS",
+   "line": "You lie back on the grass with your bag under your head and stare up at the sky until your head clears.",
+   "why": "no time_of_day on this screen's lines",
    "cause": null,
    "note": true,
    "screen_hash": {
     "text": "762aaf6daecff423",
-    "facts": "9df05c3a3b8296d2",
-    "all": "f9166a6788183351"
+    "facts": "44eb5528a5afca5f",
+    "facts2": "44eb5528a5afca5f",
+    "all": "1cd7264031187857"
    },
    "row_hash": "1aadffd96e76381c",
    "carried": true,
-   "pass": 4
+   "pass": 7
   },
   {
    "row": "C931",
    "screen": "body_lunch.eat",
    "verdict": "PASS",
-   "line": "lunch is 11am to 2pm on weekdays.",
-   "why": "time_of_day 11:00-14:00, end exclusive; the sign says 11am to 2pm, shut at 14:00, consistent.",
+   "line": "11:00-14:00",
+   "why": "End exclusive; 13:59 + 20 min ends inside open hours (to 16:00).",
    "cause": null,
    "note": true,
    "screen_hash": {
-    "text": "00b85db49e628bf5",
-    "facts": "3c7fa927521bb8d1",
-    "all": "9d4339762cdd8960"
+    "text": "1703e7590d5fbe02",
+    "facts": "4607c7f9c0029b8f",
+    "facts2": "4607c7f9c0029b8f",
+    "all": "1ca8b72d5608e898"
    },
    "row_hash": "1aadffd96e76381c",
    "carried": true,
-   "pass": 6
+   "pass": 10
   },
   {
    "row": "C931",
    "screen": "body_mirror.fix",
-   "verdict": "PASS",
-   "line": "no time_of_day",
-   "why": "lunch end exclusive, said as 'to 2pm'; others have no time condition",
+   "verdict": "N/A",
+   "line": "(no time_of_day; the bathroom's location hours 08:00-18:00 weekdays)",
+   "why": "No time_of_day on the canvas.",
    "cause": null,
    "note": true,
    "screen_hash": {
-    "text": "eecca1bddbdeb214",
-    "facts": "06ce3e0e808b3228",
-    "all": "53654a4496dc76c3"
+    "text": "b734d31c0a6da3e7",
+    "facts": "23d6f286c33663c4",
+    "facts2": "23d6f286c33663c4",
+    "all": "728675dd261fe40d"
    },
    "row_hash": "1aadffd96e76381c",
    "carried": true,
-   "pass": 2
+   "pass": 8
   },
   {
    "row": "C931",
@@ -4964,27 +5558,27 @@
    "row": "C952",
    "screen": "*",
    "verdict": "PASS",
-   "line": "Buy lunch ($4, 20 min, +15 energy)",
-   "why": "PLAN \u00a78b/\u00a78c agree: snack $2 +10, coffee $3 +10, lunch $4 +15, gym $5 20 energy, run 15 energy; grass +5 (PLAN:356)",
+   "line": "\"Three, new girl. For you, four.\" / You pay at the desk for a day pass",
+   "why": "coffee costs $3 (his 'four' is a wink, never charged), gym $5 day pass, snack $2, lunch $4, run 45 min 15 energy, workout 1 hour 20 energy: all PLAN",
    "cause": null,
    "note": false,
-   "screen_hash": "443df94f1f7eb1cf",
-   "row_hash": "2f7d1a6bf6a93ca9",
-   "carried": true,
-   "pass": 1
+   "screen_hash": "4530fe64a2396078",
+   "row_hash": "0ded4fca6fc71925",
+   "carried": false,
+   "pass": 11
   },
   {
    "row": "C953",
    "screen": "*",
    "verdict": "PASS",
-   "line": "Buy a snack ($2, 5 min, +10 energy)",
-   "why": "each label carries time, money, energy before the click",
+   "line": "Go for a run \u00b7 Work out ($5) \u00b7 Fix your hair and make-up \u00b7 Buy a snack ($2) \u00b7 Buy a coffee ($3) \u00b7 Buy lunch ($4) \u00b7 Sit on the grass \u00b7 Done",
+   "why": "no label names a clock time, a duration or energy; every spend shows its money",
    "cause": null,
    "note": true,
-   "screen_hash": "443df94f1f7eb1cf",
-   "row_hash": "8d1306a15c51370a",
+   "screen_hash": "e4f030d5f1cb9e39",
+   "row_hash": "826bf82fe26afd13",
    "carried": true,
-   "pass": 1
+   "pass": 7
   },
   {
    "row": "C954",
@@ -5050,52 +5644,55 @@
    "row": "L106",
    "screen": "body_grass.sit",
    "verdict": "PASS",
-   "line": "You lie back on the grass",
-   "why": "nobody is named or claimed present",
+   "line": "You lie back on the grass with your bag under your head and stare up at the sky until your head clears.",
+   "why": "no line names a person whose rows don't put them there (Zoe 13-15 / 14-15 and Jake with friends 14-16 may be on the quad unnamed; nothing claims she is alone)",
    "cause": null,
    "note": false,
    "screen_hash": {
     "text": "762aaf6daecff423",
-    "facts": "9df05c3a3b8296d2",
-    "all": "f9166a6788183351"
+    "facts": "44eb5528a5afca5f",
+    "facts2": "44eb5528a5afca5f",
+    "all": "1cd7264031187857"
    },
    "row_hash": "13a714429d15f3b2",
    "carried": true,
-   "pass": 4
+   "pass": 7
   },
   {
    "row": "L106",
    "screen": "body_lunch.eat",
    "verdict": "PASS",
-   "line": "You take a tray down the line: pasta, a roll, a carton of milk. You eat at the end of a long table, half listening to a table making plans you're not part of yet.",
-   "why": "Lunch row is weekdays 11:00-14:00; Rosa's row covers it (weekdays 08-16), 'down the line' implies an unnamed server, true. Nadia Mon/Wed 13-14 is there but unmet (no built canvas meets her, P15 not built), so she is one of the crowd; 'eat at the end of a long table' does not clash.",
+   "line": "You take a tray down the line: pasta, a roll, a carton of milk.",
+   "why": "Names nobody; Rosa's row covers lunch.",
    "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "00b85db49e628bf5",
-    "facts": "3c7fa927521bb8d1",
-    "all": "9d4339762cdd8960"
+    "text": "1703e7590d5fbe02",
+    "facts": "4607c7f9c0029b8f",
+    "facts2": "4607c7f9c0029b8f",
+    "all": "1ca8b72d5608e898"
    },
    "row_hash": "13a714429d15f3b2",
    "carried": true,
-   "pass": 6
+   "pass": 10
   },
   {
    "row": "L106",
    "screen": "body_mirror.fix",
    "verdict": "PASS",
-   "line": "no known person named",
-   "why": "coffee's Tom/Chris groups are gated on their presence rows; other screens name only strangers",
+   "line": "You lean into the long mirror and fix your face",
+   "why": "Names nobody else at the mirror.",
    "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "eecca1bddbdeb214",
-    "facts": "06ce3e0e808b3228",
-    "all": "53654a4496dc76c3"
+    "text": "b734d31c0a6da3e7",
+    "facts": "23d6f286c33663c4",
+    "facts2": "23d6f286c33663c4",
+    "all": "728675dd261fe40d"
    },
    "row_hash": "13a714429d15f3b2",
    "carried": true,
-   "pass": 2
+   "pass": 8
   },
   {
    "row": "L106",
@@ -5263,53 +5860,56 @@
   {
    "row": "L167",
    "screen": "body_grass.sit",
-   "verdict": "PASS",
-   "line": "max_triggers_per_day = 2, cooldown_message = \"you've lazed enough for one day.\"",
-   "why": "one row, same hours every day; no day-kind split",
+   "verdict": "N/A",
+   "line": "You lie back on the grass with your bag under your head and stare up at the sky until your head clears.",
+   "why": "no row on this screen has hours or a window",
    "cause": null,
    "note": false,
    "screen_hash": {
     "text": "762aaf6daecff423",
-    "facts": "9df05c3a3b8296d2",
-    "all": "f9166a6788183351"
+    "facts": "44eb5528a5afca5f",
+    "facts2": "44eb5528a5afca5f",
+    "all": "1cd7264031187857"
    },
    "row_hash": "e64ce2672d85d2d8",
    "carried": true,
-   "pass": 4
+   "pass": 7
   },
   {
    "row": "L167",
    "screen": "body_lunch.eat",
    "verdict": "PASS",
-   "line": "lunch is 11am to 2pm on weekdays.",
-   "why": "One row: weekday + time_of_day, show_when_blocked, cooldown_message names the full hours.",
+   "line": "weekdays, 11:00-14:00, no show_when_blocked",
+   "why": "One row; clock plus count, so it hides (clock.md rule 10).",
    "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "00b85db49e628bf5",
-    "facts": "3c7fa927521bb8d1",
-    "all": "9d4339762cdd8960"
+    "text": "1703e7590d5fbe02",
+    "facts": "4607c7f9c0029b8f",
+    "facts2": "4607c7f9c0029b8f",
+    "all": "1ca8b72d5608e898"
    },
    "row_hash": "e64ce2672d85d2d8",
    "carried": true,
-   "pass": 6
+   "pass": 10
   },
   {
    "row": "L167",
    "screen": "body_mirror.fix",
-   "verdict": "PASS",
-   "line": "one row",
-   "why": "one row per activity; lunch's weekday+time row greys naming its full hours",
+   "verdict": "N/A",
+   "line": "(no trigger conditions)",
+   "why": "No hours row of its own; the place's hours shut it.",
    "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "eecca1bddbdeb214",
-    "facts": "06ce3e0e808b3228",
-    "all": "53654a4496dc76c3"
+    "text": "b734d31c0a6da3e7",
+    "facts": "23d6f286c33663c4",
+    "facts2": "23d6f286c33663c4",
+    "all": "728675dd261fe40d"
    },
    "row_hash": "e64ce2672d85d2d8",
    "carried": true,
-   "pass": 2
+   "pass": 8
   },
   {
    "row": "L167",
@@ -5363,6 +5963,19 @@
    "pass": 6
   },
   {
+   "row": "L170",
+   "screen": "*",
+   "verdict": "N/A",
+   "line": "",
+   "why": "no place on this piece's screens is hidden_until a flag",
+   "cause": null,
+   "note": false,
+   "screen_hash": "4530fe64a2396078",
+   "row_hash": "c3599cd09637a240",
+   "carried": false,
+   "pass": 11
+  },
+  {
    "row": "L70",
    "screen": "*",
    "verdict": "N/A",
@@ -5390,206 +6003,9 @@
   }
  ],
  "causes": [],
- "pending": [
-  {
-   "row": "C889",
-   "screen": "*",
-   "why": "its rule's text changed"
-  },
-  {
-   "row": "C889",
-   "screen": "body_lunch.eat",
-   "why": "its rule's text changed"
-  },
-  {
-   "row": "C889",
-   "screen": "body_snack.eat",
-   "why": "its rule's text changed"
-  },
-  {
-   "row": "C889",
-   "screen": "body_workout.lift",
-   "why": "its rule's text changed"
-  },
-  {
-   "row": "C906",
-   "screen": "*",
-   "why": "its rule's text changed"
-  },
-  {
-   "row": "C906",
-   "screen": "body_lunch.eat",
-   "why": "its rule's text changed"
-  },
-  {
-   "row": "C906",
-   "screen": "body_snack.eat",
-   "why": "its rule's text changed"
-  },
-  {
-   "row": "C906",
-   "screen": "body_workout.lift",
-   "why": "its rule's text changed"
-  },
-  {
-   "row": "C910",
-   "screen": "*",
-   "why": "its rule's text changed"
-  },
-  {
-   "row": "C910",
-   "screen": "body_lunch.eat",
-   "why": "its rule's text changed"
-  },
-  {
-   "row": "C910",
-   "screen": "body_snack.eat",
-   "why": "its rule's text changed"
-  },
-  {
-   "row": "C910",
-   "screen": "body_workout.lift",
-   "why": "its rule's text changed"
-  },
-  {
-   "row": "C929",
-   "screen": "*",
-   "why": "its rule's text changed"
-  },
-  {
-   "row": "C929",
-   "screen": "body_lunch.eat",
-   "why": "its rule's text changed"
-  },
-  {
-   "row": "C929",
-   "screen": "body_snack.eat",
-   "why": "its rule's text changed"
-  },
-  {
-   "row": "C929",
-   "screen": "body_workout.lift",
-   "why": "its rule's text changed"
-  },
-  {
-   "row": "C953",
-   "screen": "*",
-   "why": "its rule's text changed"
-  }
- ],
- "asked": 22,
- "answered": 5,
- "pass_items": [
-  {
-   "row": "C1265",
-   "screen": "*",
-   "why": "its rule's text changed"
-  },
-  {
-   "row": "C889",
-   "screen": "*",
-   "why": "its rule's text changed"
-  },
-  {
-   "row": "C889",
-   "screen": "body_lunch.eat",
-   "why": "its rule's text changed"
-  },
-  {
-   "row": "C889",
-   "screen": "body_snack.eat",
-   "why": "its rule's text changed"
-  },
-  {
-   "row": "C889",
-   "screen": "body_workout.lift",
-   "why": "its rule's text changed"
-  },
-  {
-   "row": "C906",
-   "screen": "*",
-   "why": "its rule's text changed"
-  },
-  {
-   "row": "C906",
-   "screen": "body_lunch.eat",
-   "why": "its rule's text changed"
-  },
-  {
-   "row": "C906",
-   "screen": "body_snack.eat",
-   "why": "its rule's text changed"
-  },
-  {
-   "row": "C906",
-   "screen": "body_workout.lift",
-   "why": "its rule's text changed"
-  },
-  {
-   "row": "C910",
-   "screen": "*",
-   "why": "its rule's text changed"
-  },
-  {
-   "row": "C910",
-   "screen": "body_lunch.eat",
-   "why": "its rule's text changed"
-  },
-  {
-   "row": "C910",
-   "screen": "body_snack.eat",
-   "why": "its rule's text changed"
-  },
-  {
-   "row": "C910",
-   "screen": "body_workout.lift",
-   "why": "its rule's text changed"
-  },
-  {
-   "row": "C920",
-   "screen": "*",
-   "why": "its rule's text changed"
-  },
-  {
-   "row": "C920",
-   "screen": "body_lunch.eat",
-   "why": "its rule's text changed"
-  },
-  {
-   "row": "C920",
-   "screen": "body_snack.eat",
-   "why": "its rule's text changed"
-  },
-  {
-   "row": "C920",
-   "screen": "body_workout.lift",
-   "why": "its rule's text changed"
-  },
-  {
-   "row": "C929",
-   "screen": "*",
-   "why": "its rule's text changed"
-  },
-  {
-   "row": "C929",
-   "screen": "body_lunch.eat",
-   "why": "its rule's text changed"
-  },
-  {
-   "row": "C929",
-   "screen": "body_snack.eat",
-   "why": "its rule's text changed"
-  },
-  {
-   "row": "C929",
-   "screen": "body_workout.lift",
-   "why": "its rule's text changed"
-  },
-  {
-   "row": "C953",
-   "screen": "*",
-   "why": "its rule's text changed"
-  }
- ],
+ "pending": [],
+ "asked": 2,
+ "answered": 2,
+ "pass_items": [],
  "unowed": []
 }

@@ -1,786 +1,93 @@
 {
  "verdicts": [
   {
-   "row": "B1",
-   "screen": "*",
+   "row": "B10",
+   "screen": "class_drama.class",
    "verdict": "PASS",
-   "line": "Every time he looks up, it's at your row.",
-   "why": "scene-wide: each class shows its teacher wanting her attention (Hale's look, Cross 'Make them look at you'); no sexual step in P09; study_hall has no person",
-   "cause": ""
-  },
-  {
-   "row": "B2",
-   "screen": "*",
-   "verdict": "PASS",
-   "line": "Closer. Next time, I'll show you.",
-   "why": "scene-wide: the class repeatables sit one step past the meetings (P15-P17); study_hall has no person to step with",
-   "cause": ""
-  },
-  {
-   "row": "B9",
-   "screen": "*",
-   "verdict": "N/A",
-   "line": "",
-   "why": "PLAN declares no companion-rival in college",
-   "cause": ""
-  },
-  {
-   "row": "B3",
-   "screen": "study_hall.study",
-   "verdict": "PASS",
-   "line": "There's always more of it waiting.",
-   "why": "ends pointing at the next study, same as the library's line",
-   "cause": ""
-  },
-  {
-   "row": "B4",
-   "screen": "study_hall.study",
-   "verdict": "PASS",
-   "line": "work through them until your neck aches",
-   "why": "solo chore, no spoken line needed; reaction on her body, no italic thought",
-   "cause": ""
-  },
-  {
-   "row": "B5",
-   "screen": "study_hall.study",
-   "verdict": "FAIL",
-   "line": "You find an empty row near the back, spread your notes along the seats",
-   "why": "the screen reads the same during a lecture (Mon/Wed Hale 9-11, Pratt 11-13, Nadia 9-11; Tue/Thu Walsh 9-11, who_is_where) as in the empty hall; PLAN \u00a75 declares 'Hale: her. Nadia: Hale looking. Pratt: if she's missing' for this room, and nobody reacts",
-   "cause": "P09c1-c1"
-  },
-  {
-   "row": "B6",
-   "screen": "study_hall.study",
-   "verdict": "N/A",
-   "line": "",
-   "why": "no offer on the screen",
-   "cause": ""
-  },
-  {
-   "row": "B7",
-   "screen": "study_hall.study",
-   "verdict": "N/A",
-   "line": "",
-   "why": "no explicit beat",
-   "cause": ""
+   "line": "Mr. Cross has you all on the stage in a line ... Everyone's watching.",
+   "why": "Trigger is Tue/Thu 11:00-11:29 (weekdays [1,3], 0=Monday, v2.py:5214); who_is_where puts npc_cross (and npc_brooke) at campus_theatre Tue/Thu 11-13, so the class he runs is there at the first and last minute.",
+   "cause": null
   },
   {
    "row": "B8",
-   "screen": "study_hall.study",
+   "screen": "class_drama.class",
    "verdict": "PASS",
-   "line": "Study in an empty row (1 hour, 5 energy)",
-   "why": "1 hour (time_progression_minutes 60) and 5 energy (costs) match PLAN \u00a78f; no garment named",
-   "cause": ""
-  },
-  {
-   "row": "B10",
-   "screen": "study_hall.study",
-   "verdict": "PASS",
-   "line": "You find an empty row near the back, spread your notes along the seats and work through them until your neck aches. There's always more of it waiting.",
-   "why": "open whenever the hall is (weekdays 8-18, its hours); 'an empty row' holds even mid-lecture; past 18:00 the engine shows the hall's closed lines on return (NOTES 2026-11-20 P04 ruling); no past, no first time",
-   "cause": ""
-  },
-  {
-   "row": "B11",
-   "screen": "study_hall.study",
-   "verdict": "PASS",
-   "line": "You find an empty row near the back, spread your notes along the seats and work through them until your neck aches. There's always more of it waiting.",
-   "why": "shows the act it names (studying) and spends the shared study_today count, 1 hour and 5 energy",
-   "cause": ""
-  },
-  {
-   "row": "B12",
-   "screen": "study_hall.study",
-   "verdict": "N/A",
-   "line": "",
-   "why": "not a charged scene",
-   "cause": ""
-  },
-  {
-   "row": "B13",
-   "screen": "study_hall.study",
-   "verdict": "N/A",
-   "line": "",
-   "why": "not a moment alone with her body",
-   "cause": ""
-  },
-  {
-   "row": "C1002",
-   "screen": "study_hall.study",
-   "verdict": "N/A",
-   "line": "",
-   "why": "no money spent",
-   "cause": ""
-  },
-  {
-   "row": "C1173",
-   "screen": "study_hall.study",
-   "verdict": "N/A",
-   "line": "",
-   "why": "no clothing door on the hall",
-   "cause": ""
-  },
-  {
-   "row": "C1184",
-   "screen": "study_hall.study",
-   "verdict": "N/A",
-   "line": "",
-   "why": "no clothing refusal",
-   "cause": ""
-  },
-  {
-   "row": "C1185",
-   "screen": "study_hall.study",
-   "verdict": "N/A",
-   "line": "",
-   "why": "no dress code",
-   "cause": ""
-  },
-  {
-   "row": "C1198",
-   "screen": "study_hall.study",
-   "verdict": "N/A",
-   "line": "",
-   "why": "no refusal",
-   "cause": ""
-  },
-  {
-   "row": "C1220",
-   "screen": "study_hall.study",
-   "verdict": "N/A",
-   "line": "",
-   "why": "no dress code on campus_lecture_hall",
-   "cause": ""
-  },
-  {
-   "row": "C1221",
-   "screen": "study_hall.study",
-   "verdict": "N/A",
-   "line": "",
-   "why": "no dress-code exception",
-   "cause": ""
-  },
-  {
-   "row": "C1313",
-   "screen": "study_hall.study",
-   "verdict": "N/A",
-   "line": "",
-   "why": "not a refill",
-   "cause": ""
-  },
-  {
-   "row": "C1340",
-   "screen": "study_hall.study",
-   "verdict": "N/A",
-   "line": "",
-   "why": "not the household",
-   "cause": ""
-  },
-  {
-   "row": "C151",
-   "screen": "study_hall.study",
-   "verdict": "N/A",
-   "line": "",
-   "why": "no person on this repeatable",
-   "cause": ""
-  },
-  {
-   "row": "C188",
-   "screen": "study_hall.study",
-   "verdict": "N/A",
-   "line": "",
-   "why": "no meter line",
-   "cause": ""
-  },
-  {
-   "row": "C210",
-   "screen": "study_hall.study",
-   "verdict": "N/A",
-   "line": "",
-   "why": "no stage crossed",
-   "cause": ""
-  },
-  {
-   "row": "C295",
-   "screen": "study_hall.study",
-   "verdict": "N/A",
-   "line": "",
-   "why": "no meter rung",
-   "cause": ""
-  },
-  {
-   "row": "C330",
-   "screen": "study_hall.study",
-   "verdict": "N/A",
-   "line": "",
-   "why": "pays no meter",
-   "cause": ""
-  },
-  {
-   "row": "C338",
-   "screen": "study_hall.study",
-   "verdict": "N/A",
-   "line": "",
-   "why": "no accident or meter act",
-   "cause": ""
-  },
-  {
-   "row": "C381",
-   "screen": "study_hall.study",
-   "verdict": "N/A",
-   "line": "",
-   "why": "no meter rung",
-   "cause": ""
-  },
-  {
-   "row": "L116",
-   "screen": "study_hall.study",
-   "verdict": "N/A",
-   "line": "",
-   "why": "no meter lock; the count lock is a story lock with locked_text",
-   "cause": ""
-  },
-  {
-   "row": "L70",
-   "screen": "study_hall.study",
-   "verdict": "N/A",
-   "line": "",
-   "why": "pays no climb meter",
-   "cause": ""
-  },
-  {
-   "row": "C660",
-   "screen": "study_hall.study",
-   "verdict": "N/A",
-   "line": "",
-   "why": "no person's meter",
-   "cause": ""
-  },
-  {
-   "row": "C961",
-   "screen": "study_hall.study",
-   "verdict": "N/A",
-   "line": "",
-   "why": "no no on this screen",
-   "cause": ""
-  },
-  {
-   "row": "C920",
-   "screen": "study_hall.study",
-   "verdict": "N/A",
-   "line": "",
-   "why": "no hop",
-   "cause": ""
-  },
-  {
-   "row": "C924",
-   "screen": "study_hall.study",
-   "verdict": "N/A",
-   "line": "",
-   "why": "no travel",
-   "cause": ""
-  },
-  {
-   "row": "C931",
-   "screen": "study_hall.study",
-   "verdict": "N/A",
-   "line": "",
-   "why": "no time_of_day condition; gated by the hall's hours and study_today",
-   "cause": ""
-  },
-  {
-   "row": "C1200",
-   "screen": "study_hall.study",
-   "verdict": "PASS",
-   "line": "You find an empty row near the back, spread your notes along the seats and work through them until your neck aches. There's always more of it waiting.",
-   "why": "no clothes placed by the activity",
-   "cause": ""
-  },
-  {
-   "row": "C1250",
-   "screen": "study_hall.study",
-   "verdict": "PASS",
-   "line": "You find an empty row near the back, spread your notes along the seats and work through them until your neck aches. There's always more of it waiting.",
-   "why": "no media on the study screen; the hall card is the place's picture only",
-   "cause": ""
-  },
-  {
-   "row": "C1303",
-   "screen": "study_hall.study",
-   "verdict": "PASS",
-   "line": "You find an empty row near the back, spread your notes along the seats and work through them until your neck aches. There's always more of it waiting.",
-   "why": "energy read by the trigger cost; the count read by its condition",
-   "cause": ""
-  },
-  {
-   "row": "C1337",
-   "screen": "study_hall.study",
-   "verdict": "PASS",
-   "line": "You find an empty row near the back, spread your notes along the seats and work through them until your neck aches. There's always more of it waiting.",
-   "why": "spends 5 energy, read by the cost",
-   "cause": ""
-  },
-  {
-   "row": "C1342",
-   "screen": "study_hall.study",
-   "verdict": "PASS",
-   "line": "You find an empty row near the back, spread your notes along the seats and work through them until your neck aches. There's always more of it waiting.",
-   "why": "energy refills elsewhere (sleep, lunch, the quad)",
-   "cause": ""
-  },
-  {
-   "row": "C1345",
-   "screen": "study_hall.study",
-   "verdict": "PASS",
-   "line": "You find an empty row near the back, spread your notes along the seats and work through them until your neck aches. There's always more of it waiting.",
-   "why": "brake on the way in: 5 energy and study_today < 3",
-   "cause": ""
-  },
-  {
-   "row": "C1360",
-   "screen": "study_hall.study",
-   "verdict": "PASS",
-   "line": "Study in an empty row (1 hour, 5 energy)",
-   "why": "show_when_blocked + locked_text: greys as 'Study in an empty row (1 hour, 5 energy) \u2014 you can't take in another page today.'",
-   "cause": ""
-  },
-  {
-   "row": "C1421",
-   "screen": "study_hall.study",
-   "verdict": "PASS",
-   "line": "You find an empty row near the back, spread your notes along the seats and work through them until your neck aches. There's always more of it waiting.",
-   "why": "the cap's reason and the energy need are told",
-   "cause": ""
-  },
-  {
-   "row": "C1423",
-   "screen": "study_hall.study",
-   "verdict": "PASS",
-   "line": "You find an empty row near the back, spread your notes along the seats and work through them until your neck aches. There's always more of it waiting.",
-   "why": "costs 5 energy and a share of 3 a day",
-   "cause": ""
-  },
-  {
-   "row": "C1425",
-   "screen": "study_hall.study",
-   "verdict": "PASS",
-   "line": "You find an empty row near the back, spread your notes along the seats and work through them until your neck aches. There's always more of it waiting.",
-   "why": "time 1 hour, cap 3 a day, 5 energy",
-   "cause": ""
-  },
-  {
-   "row": "C1427",
-   "screen": "study_hall.study",
-   "verdict": "PASS",
-   "line": "You find an empty row near the back, spread your notes along the seats and work through them until your neck aches. There's always more of it waiting.",
-   "why": "1 hour inside a 10-hour hall window, 3 a day shared",
-   "cause": ""
-  },
-  {
-   "row": "C1428",
-   "screen": "study_hall.study",
-   "verdict": "PASS",
-   "line": "You find an empty row near the back, spread your notes along the seats and work through them until your neck aches. There's always more of it waiting.",
-   "why": "energy throttles a chore, not a person",
-   "cause": ""
-  },
-  {
-   "row": "C1431",
-   "screen": "study_hall.study",
-   "verdict": "PASS",
-   "line": "You find an empty row near the back, spread your notes along the seats and work through them until your neck aches. There's always more of it waiting.",
-   "why": "under 5 energy it shuts",
-   "cause": ""
-  },
-  {
-   "row": "C1432",
-   "screen": "study_hall.study",
-   "verdict": "PASS",
-   "line": "You find an empty row near the back, spread your notes along the seats and work through them until your neck aches. There's always more of it waiting.",
-   "why": "energy as the game declares it; this row only spends it",
-   "cause": ""
-  },
-  {
-   "row": "C1433",
-   "screen": "study_hall.study",
-   "verdict": "PASS",
-   "line": "You find an empty row near the back, spread your notes along the seats and work through them until your neck aches. There's always more of it waiting.",
-   "why": "energy below 5 shuts the row",
-   "cause": ""
-  },
-  {
-   "row": "C1434",
-   "screen": "study_hall.study",
-   "verdict": "PASS",
-   "line": "You find an empty row near the back, spread your notes along the seats and work through them until your neck aches. There's always more of it waiting.",
-   "why": "no new need here; energy's refills stand",
-   "cause": ""
-  },
-  {
-   "row": "C1438",
-   "screen": "study_hall.study",
-   "verdict": "PASS",
-   "line": "You find an empty row near the back, spread your notes along the seats and work through them until your neck aches. There's always more of it waiting.",
-   "why": "energy spent by use",
-   "cause": ""
-  },
-  {
-   "row": "C1441",
-   "screen": "study_hall.study",
-   "verdict": "PASS",
-   "line": "You find an empty row near the back, spread your notes along the seats and work through them until your neck aches. There's always more of it waiting.",
-   "why": "a chore, shown as a short scene, no number-only result",
-   "cause": ""
-  },
-  {
-   "row": "C146",
-   "screen": "study_hall.study",
-   "verdict": "PASS",
-   "line": "You find an empty row near the back, spread your notes along the seats and work through them until your neck aches. There's always more of it waiting.",
-   "why": "a chore, not a big moment",
-   "cause": ""
-  },
-  {
-   "row": "C149",
-   "screen": "study_hall.study",
-   "verdict": "PASS",
-   "line": "You find an empty row near the back, spread your notes along the seats and work through them until your neck aches. There's always more of it waiting.",
-   "why": "'There's always more of it waiting.' points at the next session",
-   "cause": ""
-  },
-  {
-   "row": "C388",
-   "screen": "study_hall.study",
-   "verdict": "PASS",
-   "line": "You find an empty row near the back, spread your notes along the seats and work through them until your neck aches. There's always more of it waiting.",
-   "why": "locked_text 'you can't take in another page today.'",
-   "cause": ""
-  },
-  {
-   "row": "C541",
-   "screen": "study_hall.study",
-   "verdict": "PASS",
-   "line": "You find an empty row near the back, spread your notes along the seats and work through them until your neck aches. There's always more of it waiting.",
-   "why": "no +X printed",
-   "cause": ""
-  },
-  {
-   "row": "C422",
-   "screen": "study_hall.study",
-   "verdict": "PASS",
-   "line": "Study in an empty row (1 hour, 5 energy)",
-   "why": "label says what clicking does and its cost",
-   "cause": ""
-  },
-  {
-   "row": "C442",
-   "screen": "study_hall.study",
-   "verdict": "PASS",
-   "line": "You find an empty row near the back, spread your notes along the seats and work through them until your neck aches. There's always more of it waiting.",
-   "why": "says plainly what she does",
-   "cause": ""
-  },
-  {
-   "row": "C450",
-   "screen": "study_hall.study",
-   "verdict": "PASS",
-   "line": "You find an empty row near the back, spread your notes along the seats and work through them until your neck aches. There's always more of it waiting.",
-   "why": "ends on 'There's always more of it waiting.'",
-   "cause": ""
-  },
-  {
-   "row": "C451",
-   "screen": "study_hall.study",
-   "verdict": "PASS",
-   "line": "You find an empty row near the back, spread your notes along the seats and work through them until your neck aches. There's always more of it waiting.",
-   "why": "the back row, notes on the seats",
-   "cause": ""
+   "line": "Mr. Cross has you all on the stage in a line ... Everyone's watching.",
+   "why": "No garment of hers is named on the screen.",
+   "cause": null
   },
   {
    "row": "C460",
-   "screen": "study_hall.study",
+   "screen": "class_drama.class",
    "verdict": "PASS",
-   "line": "You find an empty row near the back, spread your notes along the seats and work through them until your neck aches. There's always more of it waiting.",
-   "why": "true at every minute the hall is open, including during a lecture (an empty row near the back)",
-   "cause": ""
+   "line": "Mr. Cross has you all on the stage in a line ... Everyone's watching.",
+   "why": "Every claim (Cross there, the room watching, the line said three times) holds on any visit in the window; 'Next time, I'll show you.' is a promise in his voice on a repeatable.",
+   "cause": null
   },
   {
    "row": "C461",
-   "screen": "study_hall.study",
+   "screen": "class_drama.class",
    "verdict": "PASS",
-   "line": "You find an empty row near the back, spread your notes along the seats and work through them until your neck aches. There's always more of it waiting.",
-   "why": "texture that can't clash",
-   "cause": ""
-  },
-  {
-   "row": "C519",
-   "screen": "study_hall.study",
-   "verdict": "PASS",
-   "line": "You find an empty row near the back, spread your notes along the seats and work through them until your neck aches. There's always more of it waiting.",
-   "why": "one job, 28 words",
-   "cause": ""
-  },
-  {
-   "row": "C620",
-   "screen": "study_hall.study",
-   "verdict": "PASS",
-   "line": "You find an empty row near the back, spread your notes along the seats and work through them until your neck aches. There's always more of it waiting.",
-   "why": "nobody listed",
-   "cause": ""
-  },
-  {
-   "row": "C758",
-   "screen": "study_hall.study",
-   "verdict": "PASS",
-   "line": "Study in an empty row (1 hour, 5 energy)",
-   "why": "label short for a row carrying its cost",
-   "cause": ""
-  },
-  {
-   "row": "C762",
-   "screen": "study_hall.study",
-   "verdict": "PASS",
-   "line": "You find an empty row near the back, spread your notes along the seats and work through them until your neck aches. There's always more of it waiting.",
-   "why": "no 'Nothing happens.'",
-   "cause": ""
-  },
-  {
-   "row": "C769",
-   "screen": "study_hall.study",
-   "verdict": "PASS",
-   "line": "You find an empty row near the back, spread your notes along the seats and work through them until your neck aches. There's always more of it waiting.",
-   "why": "the hall's description says what it is and that classes are here",
-   "cause": ""
-  },
-  {
-   "row": "C770",
-   "screen": "study_hall.study",
-   "verdict": "PASS",
-   "line": "You find an empty row near the back, spread your notes along the seats and work through them until your neck aches. There's always more of it waiting.",
-   "why": "short screen",
-   "cause": ""
-  },
-  {
-   "row": "C771",
-   "screen": "study_hall.study",
-   "verdict": "PASS",
-   "line": "You find an empty row near the back, spread your notes along the seats and work through them until your neck aches. There's always more of it waiting.",
-   "why": "not a first-visit screen",
-   "cause": ""
-  },
-  {
-   "row": "C773",
-   "screen": "study_hall.study",
-   "verdict": "PASS",
-   "line": "You find an empty row near the back, spread your notes along the seats and work through them until your neck aches. There's always more of it waiting.",
-   "why": "a study row, work-kind",
-   "cause": ""
-  },
-  {
-   "row": "C776",
-   "screen": "study_hall.study",
-   "verdict": "PASS",
-   "line": "You find an empty row near the back, spread your notes along the seats and work through them until your neck aches. There's always more of it waiting.",
-   "why": "a system row",
-   "cause": ""
-  },
-  {
-   "row": "C777",
-   "screen": "study_hall.study",
-   "verdict": "PASS",
-   "line": "You find an empty row near the back, spread your notes along the seats and work through them until your neck aches. There's always more of it waiting.",
-   "why": "nothing else on the menu",
-   "cause": ""
-  },
-  {
-   "row": "C794",
-   "screen": "study_hall.study",
-   "verdict": "PASS",
-   "line": "You find an empty row near the back, spread your notes along the seats and work through them until your neck aches. There's always more of it waiting.",
-   "why": "identity sentence untouched",
-   "cause": ""
-  },
-  {
-   "row": "C795",
-   "screen": "study_hall.study",
-   "verdict": "PASS",
-   "line": "You find an empty row near the back, spread your notes along the seats and work through them until your neck aches. There's always more of it waiting.",
-   "why": "row adds a menu item, no re-entry text",
-   "cause": ""
-  },
-  {
-   "row": "C889",
-   "screen": "study_hall.study",
-   "verdict": "FAIL",
-   "line": "Study in an empty row (1 hour, 5 energy)",
-   "why": "note: the label states a duration (1 hour); the row now says it states none (LO 2026-11-24, clock.md:11)",
-   "cause": ""
-  },
-  {
-   "row": "C892",
-   "screen": "study_hall.study",
-   "verdict": "PASS",
-   "line": "You find an empty row near the back, spread your notes along the seats and work through them until your neck aches. There's always more of it waiting.",
-   "why": "no hour in the act",
-   "cause": ""
-  },
-  {
-   "row": "C897",
-   "screen": "study_hall.study",
-   "verdict": "PASS",
-   "line": "You find an empty row near the back, spread your notes along the seats and work through them until your neck aches. There's always more of it waiting.",
-   "why": "no time on a room hop",
-   "cause": ""
-  },
-  {
-   "row": "C900",
-   "screen": "study_hall.study",
-   "verdict": "PASS",
-   "line": "You find an empty row near the back, spread your notes along the seats and work through them until your neck aches. There's always more of it waiting.",
-   "why": "no time of day named",
-   "cause": ""
-  },
-  {
-   "row": "C902",
-   "screen": "study_hall.study",
-   "verdict": "PASS",
-   "line": "You find an empty row near the back, spread your notes along the seats and work through them until your neck aches. There's always more of it waiting.",
-   "why": "at 17:59 the line still holds; the engine's closed lines take over on return",
-   "cause": ""
-  },
-  {
-   "row": "C903",
-   "screen": "study_hall.study",
-   "verdict": "PASS",
-   "line": "You find an empty row near the back, spread your notes along the seats and work through them until your neck aches. There's always more of it waiting.",
-   "why": "no weekday named",
-   "cause": ""
-  },
-  {
-   "row": "C906",
-   "screen": "study_hall.study",
-   "verdict": "PASS",
-   "line": "You find an empty row near the back, spread your notes along the seats and work through them until your neck aches. There's always more of it waiting.",
-   "why": "duration only",
-   "cause": ""
-  },
-  {
-   "row": "C910",
-   "screen": "study_hall.study",
-   "verdict": "FAIL",
-   "line": "Study in an empty row (1 hour, 5 energy)",
-   "why": "note: the button says its time and energy; the row now says a button says no time and no energy, money only (LO 2026-11-24, clock.md:19)",
-   "cause": ""
+   "line": "Again. Louder, new face. Make them look at you.",
+   "why": "Texture and Cross's own dialogue; 'new face' is his term of address, allowed under the rule.",
+   "cause": null
   },
   {
    "row": "C913",
-   "screen": "study_hall.study",
+   "screen": "class_drama.class",
    "verdict": "PASS",
-   "line": "You find an empty row near the back, spread your notes along the seats and work through them until your neck aches. There's always more of it waiting.",
-   "why": "hall hours on its sign; the row is open whenever the hall is",
-   "cause": ""
-  },
-  {
-   "row": "C914",
-   "screen": "study_hall.study",
-   "verdict": "PASS",
-   "line": "You find an empty row near the back, spread your notes along the seats and work through them until your neck aches. There's always more of it waiting.",
-   "why": "greys only by the count, not the clock",
-   "cause": ""
+   "line": "cooldown_message = \"Tuesday and Thursday at 11am.\"",
+   "why": "show_when_blocked plus cooldown_message: out of its slot the row stays on the Theatre as a dimmed line with its hours (v2.py:6716-6720, onlyTheClockShut v2.py:6079 drops the weekday and time items).",
+   "cause": null
   },
   {
    "row": "C916",
-   "screen": "study_hall.study",
+   "screen": "class_drama.class",
    "verdict": "PASS",
-   "line": "You find an empty row near the back, spread your notes along the seats and work through them until your neck aches. There's always more of it waiting.",
-   "why": "a choice she makes, shown greyed when capped",
-   "cause": ""
-  },
-  {
-   "row": "C926",
-   "screen": "study_hall.study",
-   "verdict": "PASS",
-   "line": "You find an empty row near the back, spread your notes along the seats and work through them until your neck aches. There's always more of it waiting.",
-   "why": "clock moves by 60 minutes",
-   "cause": ""
+   "line": "Go to drama",
+   "why": "A class she chooses now carries its hours as a greyed line; hidden only until met_cross, which is a flag, not the clock (onlyTheClockShut returns false, no locked_text, so hidden: v2.py:6716-6727).",
+   "cause": null
   },
   {
    "row": "C927",
-   "screen": "study_hall.study",
+   "screen": "class_drama.class",
    "verdict": "PASS",
-   "line": "You find an empty row near the back, spread your notes along the seats and work through them until your neck aches. There's always more of it waiting.",
-   "why": "Done sets 60",
-   "cause": ""
-  },
-  {
-   "row": "C928",
-   "screen": "study_hall.study",
-   "verdict": "PASS",
-   "line": "You find an empty row near the back, spread your notes along the seats and work through them until your neck aches. There's always more of it waiting.",
-   "why": "no clock in prose",
-   "cause": ""
-  },
-  {
-   "row": "C929",
-   "screen": "study_hall.study",
-   "verdict": "FAIL",
-   "line": "Study in an empty row (1 hour, 5 energy)",
-   "why": "note: the label carries the activity's time; the row now says it doesn't, the clock and energy bar show the spend (clock.md:20)",
-   "cause": ""
+   "line": "Done (time_progression_minutes = 120)",
+   "why": "Its exit states its time; no 3-minute default applies.",
+   "cause": null
   },
   {
    "row": "C930",
-   "screen": "study_hall.study",
+   "screen": "class_drama.class",
    "verdict": "PASS",
-   "line": "You find an empty row near the back, spread your notes along the seats and work through them until your neck aches. There's always more of it waiting.",
-   "why": "show_when_blocked set",
-   "cause": ""
+   "line": "show_when_blocked = true",
+   "why": "Windowed work no longer vanishes out of hours once she's met Cross.",
+   "cause": null
   },
   {
-   "row": "C953",
-   "screen": "study_hall.study",
-   "verdict": "FAIL",
-   "line": "Study in an empty row (1 hour, 5 energy)",
-   "why": "note: the label carries time and energy; the row now says money only, never time or energy (places.md:20)",
-   "cause": ""
+   "row": "C931",
+   "screen": "class_drama.class",
+   "verdict": "PASS",
+   "line": "time_of_day 11:00-11:30",
+   "why": "End exclusive: starts 11:00-11:29, matching 'at 11am'; Cross's row runs to 13:00, so the 120-minute class ends inside his presence.",
+   "cause": null
   },
   {
    "row": "L106",
-   "screen": "study_hall.study",
+   "screen": "class_drama.class",
    "verdict": "PASS",
-   "line": "You find an empty row near the back, spread your notes along the seats and work through them until your neck aches. There's always more of it waiting.",
-   "why": "claims nobody is there",
-   "cause": ""
-  },
-  {
-   "row": "L166",
-   "screen": "study_hall.study",
-   "verdict": "PASS",
-   "line": "You find an empty row near the back, spread your notes along the seats and work through them until your neck aches. There's always more of it waiting.",
-   "why": "no clock conditions: open whenever the hall is",
-   "cause": ""
+   "line": "Mr. Cross has you all on the stage in a line ... Everyone's watching.",
+   "why": "Cross's rows put him at campus_theatre Tue/Thu 11-13; no one else is claimed beyond the class.",
+   "cause": null
   },
   {
    "row": "L167",
-   "screen": "study_hall.study",
+   "screen": "class_drama.class",
    "verdict": "PASS",
-   "line": "You find an empty row near the back, spread your notes along the seats and work through them until your neck aches. There's always more of it waiting.",
-   "why": "one row, no per-day rows",
-   "cause": ""
-  },
-  {
-   "row": "C804",
-   "screen": "study_hall.study",
-   "verdict": "FAIL",
-   "line": "You find an empty row near the back, spread your notes along the seats and work through them until your neck aches. There's always more of it waiting.",
-   "why": "same screen whether the hall is empty or a teacher is lecturing with Nadia there; text never changes with who is there",
-   "cause": "P09c1-c1"
+   "line": "weekdays [1, 3] + time_of_day 11:00-11:30; \"Tuesday and Thursday at 11am.\"",
+   "why": "One row for both days (same hours), greys with show_when_blocked and a cooldown_message naming the days and the hour, in the timetable form class_psych uses.",
+   "cause": null
   }
  ],
- "causes": [
-  {
-   "id": "P09c1-c1",
-   "what": "study_hall's screen ignores who is in the hall: during a lecture (Hale, Pratt or Walsh teaching, Nadia there) it reads like an empty hall, and nobody the PLAN says notices her here reacts"
-  }
- ]
+ "causes": []
 }

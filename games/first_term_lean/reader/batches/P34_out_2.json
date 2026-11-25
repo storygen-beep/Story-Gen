@@ -1,0 +1,26 @@
+{
+ "verdicts": [
+  {
+   "row": "C596",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "mark_kitchen.hub: \"Mark's at the table with his coffee...\" then people/mark_kitchen_t0",
+   "why": "every face-opened menu (Mark, Ryan, Mom) has its one picture right after its first line; no talk screen has one"
+  },
+  {
+   "row": "C795",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "talk_mom.hub \"Mom's in the kitchen. Mark's at the table.\" (Mark present group)",
+   "why": "menu and activity screens, not room text"
+  },
+  {
+   "row": "C804",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "home_tv / home_dishes / loop_eat presence groups",
+   "why": "no room-text line per person; names only inside presence groups"
+  }
+ ],
+ "causes": []
+}

@@ -1,0 +1,79 @@
+{
+ "items": [
+  {
+   "row": "C596",
+   "screen": "mom_living_room.talk",
+   "why": "still to ask: its rule's text changed"
+  },
+  {
+   "row": "C596",
+   "screen": "talk_mom.eat",
+   "why": "still to ask: its rule's text changed"
+  },
+  {
+   "row": "C596",
+   "screen": "talk_mom.hub",
+   "why": "still to ask: its rule's text changed"
+  },
+  {
+   "row": "C596",
+   "screen": "talk_mom.talk",
+   "why": "still to ask: its rule's text changed"
+  },
+  {
+   "row": "C795",
+   "screen": "*",
+   "why": "still to ask: its rule's text changed"
+  },
+  {
+   "row": "C795",
+   "screen": "mom_living_room.talk",
+   "why": "still to ask: its rule's text changed"
+  },
+  {
+   "row": "C795",
+   "screen": "talk_mom.eat",
+   "why": "still to ask: its rule's text changed"
+  },
+  {
+   "row": "C804",
+   "screen": "*",
+   "why": "still to ask: its rule's text changed"
+  },
+  {
+   "row": "C804",
+   "screen": "mom_living_room.talk",
+   "why": "still to ask: its rule's text changed"
+  },
+  {
+   "row": "C804",
+   "screen": "talk_mom.eat",
+   "why": "still to ask: its rule's text changed"
+  },
+  {
+   "row": "people#3",
+   "screen": "*",
+   "why": "still to ask: its rule's text changed"
+  },
+  {
+   "row": "people#7",
+   "screen": "mom_living_room.hub",
+   "why": "still to ask: its rule's text changed"
+  },
+  {
+   "row": "people#7",
+   "screen": "mom_living_room.talk",
+   "why": "still to ask: its rule's text changed"
+  },
+  {
+   "row": "people#7",
+   "screen": "talk_mom.talk",
+   "why": "still to ask: its rule's text changed"
+  },
+  {
+   "row": "places#2",
+   "screen": "*",
+   "why": "still to ask: its rule's text changed"
+  }
+ ]
+}

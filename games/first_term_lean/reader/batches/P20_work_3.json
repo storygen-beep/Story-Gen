@@ -1,0 +1,49 @@
+{
+ "items": [
+  {
+   "row": "B10",
+   "screen": "quad_meet_zoe.talk",
+   "why": "screen changed: truth row"
+  },
+  {
+   "row": "B8",
+   "screen": "quad_meet_zoe.talk",
+   "why": "screen changed: truth row"
+  },
+  {
+   "row": "C460",
+   "screen": "quad_meet_zoe.talk",
+   "why": "screen changed: truth row"
+  },
+  {
+   "row": "C461",
+   "screen": "quad_meet_zoe.talk",
+   "why": "screen changed: truth row"
+  },
+  {
+   "row": "C927",
+   "screen": "quad_meet_zoe.talk",
+   "why": "screen changed: truth row"
+  },
+  {
+   "row": "C931",
+   "screen": "quad_meet_zoe.talk",
+   "why": "screen changed: truth row"
+  },
+  {
+   "row": "C953",
+   "screen": "quad_meet_zoe.talk",
+   "why": "failed last pass (a note), its screen changed"
+  },
+  {
+   "row": "L106",
+   "screen": "quad_meet_zoe.talk",
+   "why": "screen changed: truth row"
+  },
+  {
+   "row": "L167",
+   "screen": "quad_meet_zoe.talk",
+   "why": "screen changed: truth row"
+  }
+ ]
+}

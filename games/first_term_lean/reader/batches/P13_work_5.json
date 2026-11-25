@@ -1,0 +1,49 @@
+{
+ "items": [
+  {
+   "row": "C1619",
+   "screen": "opening.sums",
+   "why": "its rule's text changed"
+  },
+  {
+   "row": "C2176",
+   "screen": "*",
+   "why": "never judged"
+  },
+  {
+   "row": "C952",
+   "screen": "*",
+   "why": "its rule's text changed"
+  },
+  {
+   "row": "C952",
+   "screen": "opening.sums",
+   "why": "its rule's text changed"
+  },
+  {
+   "row": "L168",
+   "screen": "*",
+   "why": "never judged"
+  },
+  {
+   "row": "L169",
+   "screen": "*",
+   "why": "never judged"
+  },
+  {
+   "row": "L170",
+   "screen": "*",
+   "why": "never judged"
+  },
+  {
+   "row": "L171",
+   "screen": "*",
+   "why": "never judged"
+  },
+  {
+   "row": "L172",
+   "screen": "*",
+   "why": "never judged"
+  }
+ ]
+}

@@ -181,6 +181,13 @@ class TemplateNPC:
     #     what actually separates them — birth order, side of the family, a place
     # Empty is fine and renders no line at all.
     role: str = ""
+    # [ui] people_page = "cot" (2026-11-25): what the People dialog calls this person
+    # before she knows them (CoT's anonymous_name, "guy behind the counter"; the dialog
+    # adds "A"/"An" where CoT does), and the tab they are filed under once known
+    # (PEOPLE_TABS). Kept raw; validate() checks both. Empty = no stranger line / People
+    # Here only.
+    stranger_name: Any = ""
+    people_tab: Any = ""
 
 
 @dataclass
@@ -613,6 +620,14 @@ class GameTemplate:
     # [ui] quests_layout — "cards" (default, one card per person in file order) or
     # "list" (short tap-to-open rows, ready first). Kept raw; validate() checks it.
     quests_layout: Any = "cards"
+    # [[story_hints]] / [[walkthroughs]] — the entries of the "hints" layout (CoT's
+    # setup.storyhints.db and its *Walkthrough passages). Parsed by _parse_story_hints /
+    # _parse_walkthroughs; validate() checks them. Empty in every other game.
+    story_hints: list[dict[str, Any]] = field(default_factory=list)
+    walkthroughs: list[dict[str, Any]] = field(default_factory=list)
+    # [ui] people_page — "" (default: the cast page) or "cot" (CoT's People dialog and
+    # View Person dialog). Kept raw; validate() checks it.
+    people_page: Any = ""
     # [ui] clothes_layout — "table" (default: today's slot table and tier shop) or "room"
     # (her portrait beside what she wears, a rail per slot; the shop as a stand and a rack).
     # [ui] clothes_door — the location whose dress-code rules the room's "can she go out"
@@ -1502,6 +1517,114 @@ def _parse_quests_card(d: Dict[str, Any]) -> QuestsCard:
         terminal_text=_require_str(d, "terminal_text", "") or None,
         heading=_require_str(d, "heading", "") or None,
     )
+
+
+# ── [ui] quests_layout = "hints" (2026-11-25): CoT's Hints page ─────────────────
+# One [[story_hints]] entry is one entry of CoT's setup.storyhints.db (title = the db key,
+# category, description, `when` = displayif, hints = the [condition, text] pairs, walkthrough
+# = its `link`). One [[walkthroughs]] entry is one of CoT's *Walkthrough passages. The
+# conditions are the quest cards' flat shape, read by setup.checkQuestsCondition.
+STORY_HINT_KEYS = ("title", "category", "description", "when", "hints", "walkthrough")
+STORY_HINT_PAIR_KEYS = ("when", "text")
+WALKTHROUGH_KEYS = ("id", "title", "overview", "guard", "steps")
+WALKTHROUGH_GUARD_KEYS = ("when", "text")
+WALKTHROUGH_STEP_KEYS = ("when", "done_text", "todo_text", "kind", "text")
+# CoT's markers: step = ✅ done / ➡️ to do; idea = 💡; up_to_you = ❓; stop = 🛑.
+WALKTHROUGH_STEP_KINDS = ("step", "idea", "up_to_you", "stop")
+
+
+def _parse_condition_list(value: Any) -> list[QuestsCondition]:
+    """A `when` list in the quest cards' flat shape. Non-dict items are left for validate()."""
+    if not isinstance(value, list):
+        return []
+    return [_parse_quests_condition(i) for i in value if isinstance(i, dict)]
+
+
+def _parse_story_hints(raw: Any) -> list[dict[str, Any]]:
+    """[[story_hints]] as dicts; the authored table rides along as `_raw` for validate()."""
+    if not raw:
+        return []
+    if not isinstance(raw, list):
+        return [{"_raw": raw}]
+    out: list[dict[str, Any]] = []
+    for e in raw:
+        if not isinstance(e, dict):
+            out.append({"_raw": e})
+            continue
+        hints_raw = e.get("hints")
+        pairs = []
+        for h in hints_raw if isinstance(hints_raw, list) else []:
+            if isinstance(h, dict):
+                pairs.append(
+                    {
+                        "_raw": h,
+                        "when": _parse_condition_list(h.get("when") or []),
+                        "text": h.get("text", ""),
+                    }
+                )
+            else:
+                pairs.append({"_raw": h})
+        out.append(
+            {
+                "_raw": e,
+                "title": e.get("title", ""),
+                "category": e.get("category", ""),
+                "description": e.get("description", ""),
+                "when": _parse_condition_list(e.get("when") or []),
+                "hints": pairs,
+                "walkthrough": e.get("walkthrough", ""),
+            }
+        )
+    return out
+
+
+def _parse_walkthroughs(raw: Any) -> list[dict[str, Any]]:
+    """[[walkthroughs]] as dicts; the authored table rides along as `_raw` for validate()."""
+    if not raw:
+        return []
+    if not isinstance(raw, list):
+        return [{"_raw": raw}]
+    out: list[dict[str, Any]] = []
+    for w in raw:
+        if not isinstance(w, dict):
+            out.append({"_raw": w})
+            continue
+        guard = w.get("guard")
+        steps_raw = w.get("steps")
+        steps = []
+        for st in steps_raw if isinstance(steps_raw, list) else []:
+            if isinstance(st, dict):
+                steps.append(
+                    {
+                        "_raw": st,
+                        "kind": st.get("kind", "step"),
+                        "when": _parse_condition_list(st.get("when") or []),
+                        "done_text": st.get("done_text", ""),
+                        "todo_text": st.get("todo_text", ""),
+                        "text": st.get("text", ""),
+                    }
+                )
+            else:
+                steps.append({"_raw": st})
+        out.append(
+            {
+                "_raw": w,
+                "id": w.get("id", ""),
+                "title": w.get("title", ""),
+                "overview": w.get("overview", ""),
+                "guard": (
+                    {
+                        "_raw": guard,
+                        "when": _parse_condition_list(guard.get("when") or []),
+                        "text": guard.get("text", ""),
+                    }
+                    if isinstance(guard, dict)
+                    else guard
+                ),
+                "steps": steps,
+            }
+        )
+    return out
 
 
 @dataclass
@@ -2524,6 +2647,8 @@ def normalize(data: Dict[str, Any]) -> GameTemplate:
                 tags=npc_tags,
                 show_traits=n.get("show_traits") or [],
                 role=_require_str(n, "role", ""),
+                stranger_name=n.get("stranger_name", ""),
+                people_tab=n.get("people_tab", ""),
             )
         )
 
@@ -3689,6 +3814,7 @@ def normalize(data: Dict[str, Any]) -> GameTemplate:
     phone_clock = False
     present_faces = False
     quests_layout_raw: Any = "cards"
+    people_page_raw: Any = ""
     clothes_layout_raw: Any = "table"
     clothes_door_raw: Any = ""
     timetable_raw: Any = []
@@ -3698,6 +3824,7 @@ def normalize(data: Dict[str, Any]) -> GameTemplate:
         phone_clock = ui_raw.get("phone_clock") is True
         present_faces = ui_raw.get("present_faces") is True
         quests_layout_raw = ui_raw.get("quests_layout", "cards")
+        people_page_raw = ui_raw.get("people_page", "")
         clothes_layout_raw = ui_raw.get("clothes_layout", "table")
         clothes_door_raw = ui_raw.get("clothes_door", "")
         timetable_raw = ui_raw.get("timetable") or []
@@ -3898,6 +4025,9 @@ def normalize(data: Dict[str, Any]) -> GameTemplate:
         phone_clock=phone_clock,
         present_faces=present_faces,
         quests_layout=quests_layout_raw,
+        story_hints=_parse_story_hints(data.get("story_hints")),
+        walkthroughs=_parse_walkthroughs(data.get("walkthroughs")),
+        people_page=people_page_raw,
         clothes_layout=clothes_layout_raw,
         clothes_door=clothes_door_raw,
         timetable=timetable_raw,
@@ -6926,6 +7056,8 @@ def validate(template: GameTemplate) -> List[str]:
     errors.extend(_validate_cast_traits(template))
     errors.extend(_validate_sidebar_hide(template))
     errors.extend(_validate_quests_layout(template))
+    errors.extend(_validate_story_hints(template))
+    errors.extend(_validate_people_page(template))
     errors.extend(_validate_clothes_layout(template))
     errors.extend(_validate_timetable(template))
 
@@ -7267,7 +7399,7 @@ def _validate_sidebar_hide(template) -> List[str]:
     ]
 
 
-QUESTS_LAYOUTS = ("cards", "list")
+QUESTS_LAYOUTS = ("cards", "list", "hints")
 
 
 CLOTHES_LAYOUTS = ("table", "room")
@@ -7306,9 +7438,240 @@ def _validate_quests_layout(template) -> List[str]:
     raw = template.quests_layout
     if raw not in QUESTS_LAYOUTS:
         return [f"[ui] quests_layout must be one of {', '.join(QUESTS_LAYOUTS)}, got {raw!r}"]
-    if raw == "list" and template.project.quests_engine != "v2":
-        return ['[ui] quests_layout = "list" requires project.quests_engine = "v2"']
+    if raw in ("list", "hints") and template.project.quests_engine != "v2":
+        return [f'[ui] quests_layout = "{raw}" requires project.quests_engine = "v2"']
     return []
+
+
+def _check_condition_list(
+    value: Any,
+    parsed: list[QuestsCondition],
+    ctx: str,
+    npc_ids: set[str],
+    errors: list[str],
+) -> None:
+    """A `when` list: a list of tables, each a well-formed quest-card condition."""
+    if value is None:
+        return
+    if not isinstance(value, list) or not all(isinstance(i, dict) for i in value):
+        errors.append(f"{ctx}: when must be a list of conditions, got {value!r}")
+        return
+    for i, item in enumerate(parsed):
+        _check_quests_condition(
+            item,
+            f"{ctx}.when[{i}]",
+            require_label=False,
+            npc_ids=npc_ids,
+            errors=errors,
+        )
+
+
+def _check_keys(
+    raw: dict[str, Any], allowed: tuple[str, ...], ctx: str, errors: list[str]
+) -> None:
+    for k in raw:
+        if k not in allowed:
+            errors.append(f"{ctx}: unknown key '{k}' (known: {', '.join(allowed)})")
+
+
+def _nonempty_str(value: Any) -> bool:
+    return isinstance(value, str) and bool(value.strip())
+
+
+def _validate_story_hints(template) -> list[str]:
+    """`[[story_hints]]` and `[[walkthroughs]]`, read only by `[ui] quests_layout = "hints"`.
+    Errors: an entry the page could not draw, or one it would silently never show."""
+    errors: list[str] = []
+    npc_ids = {n.id for n in template.npcs}
+    hints = template.story_hints or []
+    wts = template.walkthroughs or []
+    if template.quests_layout != "hints":
+        if hints:
+            errors.append(
+                '[[story_hints]] is read only by [ui] quests_layout = "hints"'
+            )
+        if wts:
+            errors.append(
+                '[[walkthroughs]] is read only by [ui] quests_layout = "hints"'
+            )
+        return errors
+    wt_ids: set[str] = set()
+    for wi, w in enumerate(wts):
+        ctx = f"walkthroughs[{wi}]"
+        raw = w.get("_raw")
+        if not isinstance(raw, dict):
+            errors.append(f"{ctx}: must be a table, got {raw!r}")
+            continue
+        _check_keys(raw, WALKTHROUGH_KEYS, ctx, errors)
+        if not _nonempty_str(w["id"]):
+            errors.append(f"{ctx}: id is required")
+        elif w["id"] in wt_ids:
+            errors.append(f"{ctx}: duplicate id '{w['id']}'")
+        else:
+            wt_ids.add(w["id"])
+        if not _nonempty_str(w["title"]):
+            errors.append(f"{ctx}: title is required")
+        if not isinstance(w["overview"], str):
+            errors.append(f"{ctx}: overview must be text")
+        guard = w["guard"]
+        if guard is not None:
+            if not isinstance(guard, dict):
+                errors.append(
+                    f"{ctx}.guard: must be a table {{ when, text }}, got {guard!r}"
+                )
+            else:
+                _check_keys(
+                    guard["_raw"], WALKTHROUGH_GUARD_KEYS, f"{ctx}.guard", errors
+                )
+                if not guard["when"]:
+                    errors.append(f"{ctx}.guard: when must list at least one condition")
+                _check_condition_list(
+                    guard["_raw"].get("when"),
+                    guard["when"],
+                    f"{ctx}.guard",
+                    npc_ids,
+                    errors,
+                )
+                if not _nonempty_str(guard["text"]):
+                    errors.append(
+                        f"{ctx}.guard: text is required (what the page says instead)"
+                    )
+        steps_raw = raw.get("steps")
+        if not isinstance(steps_raw, list) or not steps_raw:
+            errors.append(f"{ctx}: steps must list at least one step")
+        for si, st in enumerate(w["steps"]):
+            sctx = f"{ctx}.steps[{si}]"
+            if not isinstance(st.get("_raw"), dict):
+                errors.append(f"{sctx}: must be a table, got {st.get('_raw')!r}")
+                continue
+            _check_keys(st["_raw"], WALKTHROUGH_STEP_KEYS, sctx, errors)
+            kind = st["kind"]
+            if kind not in WALKTHROUGH_STEP_KINDS:
+                errors.append(
+                    f"{sctx}: kind must be one of {', '.join(WALKTHROUGH_STEP_KINDS)}, got {kind!r}"
+                )
+                continue
+            _check_condition_list(
+                st["_raw"].get("when"), st["when"], sctx, npc_ids, errors
+            )
+            if kind == "step":
+                if not (
+                    _nonempty_str(st["done_text"]) and _nonempty_str(st["todo_text"])
+                ):
+                    errors.append(f"{sctx}: a step needs `done_text` and `todo_text`")
+                if not st["when"]:
+                    errors.append(
+                        f"{sctx}: a step needs `when` (the condition that marks it done)"
+                    )
+                if st["text"]:
+                    errors.append(
+                        f"{sctx}: `text` is for idea/up_to_you/stop lines; a step uses done_text/todo_text"
+                    )
+            else:
+                if not _nonempty_str(st["text"]):
+                    errors.append(f"{sctx}: a {kind} line needs `text`")
+                if st["done_text"] or st["todo_text"]:
+                    errors.append(
+                        f'{sctx}: done_text/todo_text are for kind = "step"; a {kind} line uses `text`'
+                    )
+    titles: set[str] = set()
+    for hi, h in enumerate(hints):
+        ctx = f"story_hints[{hi}]"
+        raw = h.get("_raw")
+        if not isinstance(raw, dict):
+            errors.append(f"{ctx}: must be a table, got {raw!r}")
+            continue
+        _check_keys(raw, STORY_HINT_KEYS, ctx, errors)
+        if not _nonempty_str(h["title"]):
+            errors.append(f"{ctx}: title is required")
+        elif h["title"] in titles:
+            errors.append(f"{ctx}: duplicate title '{h['title']}'")
+        else:
+            titles.add(h["title"])
+        if not _nonempty_str(h["category"]):
+            errors.append(
+                f'{ctx}: category is required (CoT\'s, with its emoji: "Employment 💼")'
+            )
+        if not isinstance(h["description"], str):
+            errors.append(f"{ctx}: description must be text")
+        _check_condition_list(raw.get("when"), h["when"], ctx, npc_ids, errors)
+        pairs_raw = raw.get("hints")
+        if not isinstance(pairs_raw, list) or not pairs_raw:
+            errors.append(f"{ctx}: hints must list at least one {{ when, text }} pair")
+        for pi, pair in enumerate(h["hints"]):
+            pctx = f"{ctx}.hints[{pi}]"
+            if not isinstance(pair.get("_raw"), dict):
+                errors.append(
+                    f"{pctx}: must be a table {{ when, text }}, got {pair.get('_raw')!r}"
+                )
+                continue
+            _check_keys(pair["_raw"], STORY_HINT_PAIR_KEYS, pctx, errors)
+            if not _nonempty_str(pair["text"]):
+                errors.append(
+                    f'{pctx}: text is required ("end" for the end of the storyline)'
+                )
+            _check_condition_list(
+                pair["_raw"].get("when"), pair["when"], pctx, npc_ids, errors
+            )
+        wt = h["walkthrough"]
+        if wt not in ("", None):
+            if not isinstance(wt, str) or wt not in wt_ids:
+                errors.append(
+                    f"{ctx}: walkthrough {wt!r} not found in [[walkthroughs]]"
+                )
+    return errors
+
+
+# [ui] people_page = "cot": CoT's People dialog tabs a person can be filed under, in CoT's
+# order (Social.txt:39-160). Only the tabs our game can fill: no Favorites, Crush, Greek,
+# Team, Admirers, Haters or custom groups (no system behind them).
+PEOPLE_TABS = (
+    "romantic_partners",
+    "friends",
+    "sexual_partners",
+    "rivals",
+    "coworkers",
+    "acquaintances",
+    "special",
+    "faculty",
+)
+
+
+def _validate_people_page(template) -> list[str]:
+    """`[ui] people_page` and the `[[npcs]]` keys it reads (stranger_name, people_tab).
+    A misspelt value would draw the old cast page and say nothing; a key set without the
+    page is dead. All errors."""
+    errors: list[str] = []
+    raw = template.people_page
+    if raw not in ("", None, "cot"):
+        return [f'[ui] people_page must be "cot" or left out, got {raw!r}']
+    cot = raw == "cot"
+    if cot and template.project.quests_engine != "v2":
+        errors.append(
+            '[ui] people_page = "cot" requires project.quests_engine = "v2" '
+            "(who is met is read from the quest cards)"
+        )
+    if cot and not template.cast_page:
+        errors.append(
+            '[ui] people_page = "cot" requires [ui.cast_page] (its show_traits are the meters)'
+        )
+    for n in template.npcs:
+        for key in ("stranger_name", "people_tab"):
+            value = getattr(n, key, "")
+            if value in ("", None):
+                continue
+            if not cot:
+                errors.append(
+                    f"npcs['{n.id}'].{key} is read only by [ui] people_page = \"cot\""
+                )
+                continue
+            if not isinstance(value, str):
+                errors.append(f"npcs['{n.id}'].{key} must be text, got {value!r}")
+            elif key == "people_tab" and value not in PEOPLE_TABS:
+                errors.append(
+                    f"npcs['{n.id}'].people_tab must be one of {', '.join(PEOPLE_TABS)}, got {value!r}"
+                )
+    return errors
 
 
 TIMETABLE_KEYS = ("class", "place", "lecturer", "weekdays", "from", "to", "late_until")
@@ -7686,6 +8049,144 @@ def _validate_step_consumption(template: GameTemplate) -> List[str]:
     return errors
 
 
+def _check_quests_condition(
+    item: QuestsCondition,
+    ctx: str,
+    *,
+    require_label: bool,
+    npc_ids: set[str],
+    errors: list[str],
+) -> None:
+    """One `when`/`goals` item in the flat shape setup.checkQuestsCondition reads. Shared by
+    [[quest_cards]] and [[story_hints]] / [[walkthroughs]], which use the same evaluator.
+    """
+    # Detect old-schema field leakage via the raw __dict__ (since we
+    # parsed permissively, stray fields are dropped silently — catch at
+    # validate time by looking for both flag and trait being None).
+    has_flag = item.flag is not None
+    has_trait = item.trait is not None
+    has_days = item.days_since_flag is not None
+    has_hours = item.hours_since_flag is not None
+    has_weekday = item.weekday is not None
+    shapes = [
+        n
+        for n, on in (
+            ("flag", has_flag),
+            ("trait", has_trait),
+            ("days_since_flag", has_days),
+            ("hours_since_flag", has_hours),
+            ("weekday", has_weekday),
+        )
+        if on
+    ]
+    if not shapes:
+        errors.append(
+            f"{ctx}: condition item must set one of `flag`, `trait`, "
+            f"`days_since_flag`, `hours_since_flag` or `weekday`"
+        )
+        return
+    if len(shapes) > 1:
+        errors.append(
+            f"{ctx}: condition item must set ONLY ONE of `flag`, `trait`, "
+            f"`days_since_flag`, `hours_since_flag` or `weekday`, not "
+            f"{' + '.join(shapes)}"
+        )
+        return
+    if has_weekday:
+        # E4 — today is one of these days. No `op`: a day is in the list or not.
+        if not item.weekday:
+            errors.append(f"{ctx}: weekday must list at least one day (0-6)")
+        try:
+            _validate_weekdays(item.weekday, ctx)
+        except (TypeError, ValueError) as exc:
+            errors.append(str(exc))
+        if item.op:
+            errors.append(f"{ctx}: weekday condition takes no op, got {item.op!r}")
+        if require_label and not item.label:
+            errors.append(
+                f"{ctx}: weekday goal item must have a `label` "
+                f"(it renders next to the ◯ bullet)"
+            )
+        return
+    if has_hours:
+        # E4 — the day gate in hours, with the same rules.
+        if item.op not in ("gte", "lte", "gt", "lt", "eq"):
+            errors.append(
+                f"{ctx}: hours_since_flag condition op must be gte/lte/gt/lt/eq, "
+                f"got {item.op!r}"
+            )
+        if item.value is None:
+            errors.append(
+                f"{ctx}: hours_since_flag condition requires numeric value "
+                f"(the number of hours to wait)"
+            )
+        if require_label and not item.label:
+            errors.append(
+                f"{ctx}: hours_since_flag goal item must have a `label` "
+                f"(it renders next to the ◯ bullet)"
+            )
+        return
+    if has_days:
+        # A DAY GATE. Same predicate the canvas side has had since 0.2.2: days
+        # elapsed since the flag was SET, read off flags_meta. It exists so a
+        # card can SHOW the wait ("◯ Let a day pass — 0 / 1") instead of leaving
+        # it in the tip, where a player reads a working wait as a stuck game.
+        # Numeric ops only — "a day has passed" is a count, never a boolean —
+        # and the same `ne`-free whitelist as traits, for the same reason.
+        if item.op not in ("gte", "lte", "gt", "lt", "eq"):
+            errors.append(
+                f"{ctx}: days_since_flag condition op must be gte/lte/gt/lt/eq, "
+                f"got {item.op!r}"
+            )
+        if item.value is None:
+            errors.append(
+                f"{ctx}: days_since_flag condition requires numeric value "
+                f"(the number of days to wait)"
+            )
+        if require_label and not item.label:
+            errors.append(
+                f"{ctx}: days_since_flag goal item must have a `label` "
+                f"(it renders next to the ◯ bullet)"
+            )
+    elif has_flag:
+        if item.op not in ("is_true", "is_false"):
+            errors.append(
+                f"{ctx}: flag condition op must be is_true/is_false, "
+                f"got {item.op!r}"
+            )
+    else:  # trait/counter
+        if item.subject not in ("player", "npc"):
+            errors.append(
+                f"{ctx}: trait condition subject must be 'player' or "
+                f"'npc', got {item.subject!r}"
+            )
+        if item.subject == "npc" and not item.npc_id:
+            errors.append(f"{ctx}: trait condition subject='npc' requires npc_id")
+        # ⚠️ NO `ne` HERE, AND THAT IS DELIBERATE (2026-08-24). This is the
+        # QUEST-CARD validator, and quest cards are evaluated by a third
+        # evaluator — setup.checkQuestsCondition — whose switch has no `ne`
+        # case and falls through to `return false`. Widening this whitelist
+        # without adding that case would let an author write a condition
+        # that is silently always false. Canvas/node/choice conditions are a
+        # different path entirely; see engine.md §37.
+        if item.op not in ("gte", "lte", "gt", "lt", "eq"):
+            errors.append(
+                f"{ctx}: trait condition op must be gte/lte/gt/lt/eq, "
+                f"got {item.op!r}"
+            )
+        if item.value is None:
+            errors.append(f"{ctx}: trait condition requires numeric value")
+        if require_label and not item.label:
+            errors.append(
+                f"{ctx}: trait/counter goal item must have a `label` "
+                f"(it renders next to the ◯ bullet)"
+            )
+        if item.subject == "npc" and item.npc_id and item.npc_id not in npc_ids:
+            errors.append(
+                f"{ctx}: condition npc_id '{item.npc_id}' not found in " f"[[npcs]]"
+            )
+
+
 def _validate_quests_cards(
     cards: List[QuestsCard],
     canvases: List["TemplateCanvas"],
@@ -7717,127 +8218,9 @@ def _validate_quests_cards(
     def _is_condition_well_formed(
         item: QuestsCondition, ctx: str, *, require_label: bool
     ) -> None:
-        # Detect old-schema field leakage via the raw __dict__ (since we
-        # parsed permissively, stray fields are dropped silently — catch at
-        # validate time by looking for both flag and trait being None).
-        has_flag = item.flag is not None
-        has_trait = item.trait is not None
-        has_days = item.days_since_flag is not None
-        has_hours = item.hours_since_flag is not None
-        has_weekday = item.weekday is not None
-        shapes = [n for n, on in (("flag", has_flag), ("trait", has_trait),
-                                  ("days_since_flag", has_days),
-                                  ("hours_since_flag", has_hours),
-                                  ("weekday", has_weekday)) if on]
-        if not shapes:
-            errors.append(
-                f"{ctx}: condition item must set one of `flag`, `trait`, "
-                f"`days_since_flag`, `hours_since_flag` or `weekday`"
-            )
-            return
-        if len(shapes) > 1:
-            errors.append(
-                f"{ctx}: condition item must set ONLY ONE of `flag`, `trait`, "
-                f"`days_since_flag`, `hours_since_flag` or `weekday`, not "
-                f"{' + '.join(shapes)}"
-            )
-            return
-        if has_weekday:
-            # E4 — today is one of these days. No `op`: a day is in the list or not.
-            if not item.weekday:
-                errors.append(f"{ctx}: weekday must list at least one day (0-6)")
-            try:
-                _validate_weekdays(item.weekday, ctx)
-            except (TypeError, ValueError) as exc:
-                errors.append(str(exc))
-            if item.op:
-                errors.append(f"{ctx}: weekday condition takes no op, got {item.op!r}")
-            if require_label and not item.label:
-                errors.append(
-                    f"{ctx}: weekday goal item must have a `label` "
-                    f"(it renders next to the ◯ bullet)"
-                )
-            return
-        if has_hours:
-            # E4 — the day gate in hours, with the same rules.
-            if item.op not in ("gte", "lte", "gt", "lt", "eq"):
-                errors.append(
-                    f"{ctx}: hours_since_flag condition op must be gte/lte/gt/lt/eq, "
-                    f"got {item.op!r}"
-                )
-            if item.value is None:
-                errors.append(
-                    f"{ctx}: hours_since_flag condition requires numeric value "
-                    f"(the number of hours to wait)"
-                )
-            if require_label and not item.label:
-                errors.append(
-                    f"{ctx}: hours_since_flag goal item must have a `label` "
-                    f"(it renders next to the ◯ bullet)"
-                )
-            return
-        if has_days:
-            # A DAY GATE. Same predicate the canvas side has had since 0.2.2: days
-            # elapsed since the flag was SET, read off flags_meta. It exists so a
-            # card can SHOW the wait ("◯ Let a day pass — 0 / 1") instead of leaving
-            # it in the tip, where a player reads a working wait as a stuck game.
-            # Numeric ops only — "a day has passed" is a count, never a boolean —
-            # and the same `ne`-free whitelist as traits, for the same reason.
-            if item.op not in ("gte", "lte", "gt", "lt", "eq"):
-                errors.append(
-                    f"{ctx}: days_since_flag condition op must be gte/lte/gt/lt/eq, "
-                    f"got {item.op!r}"
-                )
-            if item.value is None:
-                errors.append(
-                    f"{ctx}: days_since_flag condition requires numeric value "
-                    f"(the number of days to wait)"
-                )
-            if require_label and not item.label:
-                errors.append(
-                    f"{ctx}: days_since_flag goal item must have a `label` "
-                    f"(it renders next to the ◯ bullet)"
-                )
-        elif has_flag:
-            if item.op not in ("is_true", "is_false"):
-                errors.append(
-                    f"{ctx}: flag condition op must be is_true/is_false, "
-                    f"got {item.op!r}"
-                )
-        else:  # trait/counter
-            if item.subject not in ("player", "npc"):
-                errors.append(
-                    f"{ctx}: trait condition subject must be 'player' or "
-                    f"'npc', got {item.subject!r}"
-                )
-            if item.subject == "npc" and not item.npc_id:
-                errors.append(
-                    f"{ctx}: trait condition subject='npc' requires npc_id"
-                )
-            # ⚠️ NO `ne` HERE, AND THAT IS DELIBERATE (2026-08-24). This is the
-            # QUEST-CARD validator, and quest cards are evaluated by a third
-            # evaluator — setup.checkQuestsCondition — whose switch has no `ne`
-            # case and falls through to `return false`. Widening this whitelist
-            # without adding that case would let an author write a condition
-            # that is silently always false. Canvas/node/choice conditions are a
-            # different path entirely; see engine.md §37.
-            if item.op not in ("gte", "lte", "gt", "lt", "eq"):
-                errors.append(
-                    f"{ctx}: trait condition op must be gte/lte/gt/lt/eq, "
-                    f"got {item.op!r}"
-                )
-            if item.value is None:
-                errors.append(f"{ctx}: trait condition requires numeric value")
-            if require_label and not item.label:
-                errors.append(
-                    f"{ctx}: trait/counter goal item must have a `label` "
-                    f"(it renders next to the ◯ bullet)"
-                )
-            if item.subject == "npc" and item.npc_id and item.npc_id not in npc_ids:
-                errors.append(
-                    f"{ctx}: condition npc_id '{item.npc_id}' not found in "
-                    f"[[npcs]]"
-                )
+        _check_quests_condition(
+            item, ctx, require_label=require_label, npc_ids=npc_ids, errors=errors
+        )
 
     import warnings as _w
 
@@ -8457,6 +8840,53 @@ def _serialize_quests_card(card: QuestsCard) -> Dict[str, Any]:
     return out
 
 
+def _serialize_story_hint(h: dict[str, Any]) -> dict[str, Any]:
+    """One [[story_hints]] entry in the runtime shape setup.hintsHtml reads."""
+    out: dict[str, Any] = {
+        "title": h["title"],
+        "category": h["category"],
+        "description": h["description"],
+        "when": [_serialize_quests_condition(c) for c in h["when"]],
+        "hints": [
+            {
+                "when": [_serialize_quests_condition(c) for c in p["when"]],
+                "text": p["text"],
+            }
+            for p in h["hints"]
+        ],
+    }
+    if h["walkthrough"]:
+        out["walkthrough"] = h["walkthrough"]
+    return out
+
+
+def _serialize_walkthrough(w: dict[str, Any]) -> dict[str, Any]:
+    """One [[walkthroughs]] entry in the runtime shape setup.walkthroughHtml reads."""
+    out: dict[str, Any] = {
+        "id": w["id"],
+        "title": w["title"],
+        "overview": w["overview"],
+    }
+    if w["guard"]:
+        out["guard"] = {
+            "when": [_serialize_quests_condition(c) for c in w["guard"]["when"]],
+            "text": w["guard"]["text"],
+        }
+    out["steps"] = []
+    for st in w["steps"]:
+        step: dict[str, Any] = {
+            "kind": st["kind"],
+            "when": [_serialize_quests_condition(c) for c in st["when"]],
+        }
+        if st["kind"] == "step":
+            step["done_text"] = st["done_text"]
+            step["todo_text"] = st["todo_text"]
+        else:
+            step["text"] = st["text"]
+        out["steps"].append(step)
+    return out
+
+
 def _serialize_hint_template(t: TemplateHintTemplate) -> Dict[str, Any]:
     """Emit a hint template into the runtime JSON shape.
 
@@ -8987,8 +9417,17 @@ def _assemble_project_metadata(project, template):
         project.metadata["phone_clock"] = True
     if template.present_faces:
         project.metadata["present_faces"] = True
-    if template.quests_layout == "list":
-        project.metadata["quests_layout"] = "list"
+    if template.quests_layout in ("list", "hints"):
+        project.metadata["quests_layout"] = template.quests_layout
+    if template.quests_layout == "hints":
+        project.metadata["story_hints"] = [
+            _serialize_story_hint(h) for h in template.story_hints
+        ]
+        project.metadata["walkthroughs"] = [
+            _serialize_walkthrough(w) for w in template.walkthroughs
+        ]
+    if template.people_page == "cot":
+        project.metadata["people_page"] = "cot"
     if template.clothes_layout == "room":
         project.metadata["clothes_layout"] = "room"
         if template.clothes_door:
@@ -9424,6 +9863,10 @@ def create_project_from_template(
             npc.ai_behavior_config["show_traits"] = list(n.show_traits)
         if n.role:
             npc.ai_behavior_config["role"] = n.role
+        if n.stranger_name:  # [ui] people_page = "cot" — MIRRORED in game_graph.py
+            npc.ai_behavior_config["stranger_name"] = n.stranger_name
+        if n.people_tab:
+            npc.ai_behavior_config["people_tab"] = n.people_tab
         npc.save()
         npc_ids.append(str(npc.id))
 

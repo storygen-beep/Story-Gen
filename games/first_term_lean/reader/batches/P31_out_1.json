@@ -1,0 +1,810 @@
+{
+ "verdicts": [
+  {
+   "row": "B1",
+   "screen": "*",
+   "verdict": "N/A",
+   "line": "",
+   "why": "no person in the scene; the room lines are not scenes",
+   "cause": null
+  },
+  {
+   "row": "B2",
+   "screen": "*",
+   "verdict": "N/A",
+   "line": "",
+   "why": "no person in the scene; the room lines are not scenes",
+   "cause": null
+  },
+  {
+   "row": "B3",
+   "screen": "cafe_window.sit",
+   "verdict": "FAIL",
+   "line": "You take the table by the window and watch campus through the glass. Nobody hurries you out.",
+   "why": "the window sit ends on \"Nobody hurries you out.\" \u2014 it points at nothing next (compare the quad's \"you're already thinking about money again\")",
+   "cause": "P31a1-c1"
+  },
+  {
+   "row": "B4",
+   "screen": "*",
+   "verdict": "N/A",
+   "line": "",
+   "why": "solo refill, no meter, nothing to react to",
+   "cause": null
+  },
+  {
+   "row": "B5",
+   "screen": "cafe_window.sit",
+   "verdict": "FAIL",
+   "line": "You take the table by the window and watch campus through the glass. Nobody hurries you out.",
+   "why": "Tom or Chris is behind the counter every open hour except Sat/Sun 7-10 and Sun 20-21, and nobody reacts to her sitting; PLAN \u00a75 names who notices her at the caf\u00e9 and does not declare nobody does",
+   "cause": "P31a1-c3"
+  },
+  {
+   "row": "B6",
+   "screen": "*",
+   "verdict": "N/A",
+   "line": "",
+   "why": "no offer",
+   "cause": null
+  },
+  {
+   "row": "B7",
+   "screen": "*",
+   "verdict": "N/A",
+   "line": "",
+   "why": "no explicit beat",
+   "cause": null
+  },
+  {
+   "row": "B8",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "You take the table by the window and watch campus through the glass. Nobody hurries you out.",
+   "why": "+5 energy and 30 minutes match the card; the sign's 7am-9pm matches hours; no garment named",
+   "cause": null
+  },
+  {
+   "row": "B9",
+   "screen": "*",
+   "verdict": "N/A",
+   "line": "",
+   "why": "PLAN declares no companion-rival here",
+   "cause": null
+  },
+  {
+   "row": "B10",
+   "screen": "near_cafe",
+   "verdict": "PASS",
+   "line": "Nobody's behind the counter. The machine hisses to itself.",
+   "why": "all three variants gated on Tom and Chris is_absent (Sat/Sun 07-10, Sun 20-21); nobody else has a caf\u00e9 row; first-match order keeps Help Wanted / first-shift lines",
+   "cause": null
+  },
+  {
+   "row": "B10",
+   "screen": "cafe_window.sit",
+   "verdict": "FAIL",
+   "line": "You take the table by the window and watch campus through the glass. Nobody hurries you out.",
+   "why": "the row is open to the Caf\u00e9's last minute and spends 30 minutes: at 20:59 she sits until 21:29 in a caf\u00e9 that shuts at 21:00 (Tom there until 21:00), so \"Nobody hurries you out\" does not hold at the last minute",
+   "cause": "P31a1-c2"
+  },
+  {
+   "row": "B11",
+   "screen": "cafe_window.sit",
+   "verdict": "PASS",
+   "line": "effects energy +5, 30 minutes",
+   "why": "a real act: the energy bar moves",
+   "cause": null
+  },
+  {
+   "row": "B12",
+   "screen": "*",
+   "verdict": "N/A",
+   "line": "",
+   "why": "not a charged scene",
+   "cause": null
+  },
+  {
+   "row": "B13",
+   "screen": "*",
+   "verdict": "N/A",
+   "line": "",
+   "why": "not a moment alone with her body",
+   "cause": null
+  },
+  {
+   "row": "C1002",
+   "screen": "*",
+   "verdict": "N/A",
+   "line": "",
+   "why": "no spend",
+   "cause": null
+  },
+  {
+   "row": "C1173",
+   "screen": "*",
+   "verdict": "N/A",
+   "line": "",
+   "why": "no clothing door",
+   "cause": null
+  },
+  {
+   "row": "C1184",
+   "screen": "*",
+   "verdict": "N/A",
+   "line": "",
+   "why": "no refusal",
+   "cause": null
+  },
+  {
+   "row": "C1185",
+   "screen": "*",
+   "verdict": "N/A",
+   "line": "",
+   "why": "no dress code",
+   "cause": null
+  },
+  {
+   "row": "C1198",
+   "screen": "*",
+   "verdict": "N/A",
+   "line": "",
+   "why": "no refusal",
+   "cause": null
+  },
+  {
+   "row": "C1200",
+   "screen": "*",
+   "verdict": "N/A",
+   "line": "",
+   "why": "no place clothes",
+   "cause": null
+  },
+  {
+   "row": "C1220",
+   "screen": "*",
+   "verdict": "N/A",
+   "line": "",
+   "why": "no dress code",
+   "cause": null
+  },
+  {
+   "row": "C1221",
+   "screen": "*",
+   "verdict": "N/A",
+   "line": "",
+   "why": "no dress code",
+   "cause": null
+  },
+  {
+   "row": "C1250",
+   "screen": "near_cafe",
+   "verdict": "PASS",
+   "line": "Nobody's behind the counter. The machine hisses to itself.",
+   "why": "room text stays bare: the place's line plus one sentence",
+   "cause": null
+  },
+  {
+   "row": "C1303",
+   "screen": "cafe_window.sit",
+   "verdict": "PASS",
+   "line": "energy +5",
+   "why": "energy is read by costs across the game (classes, study, walks)",
+   "cause": null
+  },
+  {
+   "row": "C1313",
+   "screen": "cafe_window.sit",
+   "verdict": "PASS",
+   "line": "You take the table by the window and watch campus through the glass. Nobody hurries you out.",
+   "why": "the Caf\u00e9 holds events (walk_tom_tips, walk_chris_store)",
+   "cause": null
+  },
+  {
+   "row": "C1337",
+   "screen": "cafe_window.sit",
+   "verdict": "PASS",
+   "line": "energy +5",
+   "why": "energy moves up here and is read by costs elsewhere",
+   "cause": null
+  },
+  {
+   "row": "C1340",
+   "screen": "*",
+   "verdict": "N/A",
+   "line": "",
+   "why": "not the household",
+   "cause": null
+  },
+  {
+   "row": "C1342",
+   "screen": "cafe_window.sit",
+   "verdict": "PASS",
+   "line": "effects energy +5",
+   "why": "a refill on a room's list",
+   "cause": null
+  },
+  {
+   "row": "C1345",
+   "screen": "cafe_window.sit",
+   "verdict": "FAIL",
+   "line": "You take the table by the window and watch campus through the glass. Nobody hurries you out.",
+   "why": "no brake on the way in: no trigger cost, no max_triggers_per_day, no day flag; the card names none (systems.md rule 5)",
+   "cause": null
+  },
+  {
+   "row": "C1360",
+   "screen": "*",
+   "verdict": "N/A",
+   "line": "",
+   "why": "no locked choice",
+   "cause": null
+  },
+  {
+   "row": "C1421",
+   "screen": "*",
+   "verdict": "N/A",
+   "line": "",
+   "why": "no lock",
+   "cause": null
+  },
+  {
+   "row": "C1423",
+   "screen": "cafe_window.sit",
+   "verdict": "PASS",
+   "line": "time_progression_minutes = 30",
+   "why": "real time is the cost",
+   "cause": null
+  },
+  {
+   "row": "C1425",
+   "screen": "cafe_window.sit",
+   "verdict": "FAIL",
+   "line": "time_progression_minutes = 30; no cap, cost or spacing",
+   "why": "only one lever (time) paces the repeat; the rule says none works alone",
+   "cause": null
+  },
+  {
+   "row": "C1427",
+   "screen": "cafe_window.sit",
+   "verdict": "PASS",
+   "line": "time_progression_minutes = 30",
+   "why": "30 minutes for +5 is sized against a 14-hour window: a full refill costs hours of the day",
+   "cause": null
+  },
+  {
+   "row": "C1428",
+   "screen": "*",
+   "verdict": "N/A",
+   "line": "",
+   "why": "no energy lock on a person",
+   "cause": null
+  },
+  {
+   "row": "C1431",
+   "screen": "cafe_window.sit",
+   "verdict": "PASS",
+   "line": "energy +5",
+   "why": "energy falls by costs, refills here and by sleep/eat, and empty greys work",
+   "cause": null
+  },
+  {
+   "row": "C1432",
+   "screen": "cafe_window.sit",
+   "verdict": "PASS",
+   "line": "energy +5, 30 minutes, at the Caf\u00e9",
+   "why": "the refill is declared: place, activity, minutes, gain",
+   "cause": null
+  },
+  {
+   "row": "C1433",
+   "screen": "*",
+   "verdict": "N/A",
+   "line": "",
+   "why": "this screen refills, it does not shut",
+   "cause": null
+  },
+  {
+   "row": "C1434",
+   "screen": "cafe_window.sit",
+   "verdict": "PASS",
+   "line": "You take the table by the window and watch campus through the glass. Nobody hurries you out.",
+   "why": "the refill place has events (Tom at the tip jar, the storeroom door)",
+   "cause": null
+  },
+  {
+   "row": "C1438",
+   "screen": "cafe_window.sit",
+   "verdict": "PASS",
+   "line": "energy +5",
+   "why": "energy is spent by use",
+   "cause": null
+  },
+  {
+   "row": "C1441",
+   "screen": "cafe_window.sit",
+   "verdict": "PASS",
+   "line": "You take the table by the window and watch campus through the glass. Nobody hurries you out.",
+   "why": "a rest result, not a step about a person or her body",
+   "cause": null
+  },
+  {
+   "row": "C146",
+   "screen": "cafe_window.sit",
+   "verdict": "PASS",
+   "line": "You take the table by the window and watch campus through the glass. Nobody hurries you out.",
+   "why": "a plain everyday repeat, no big moment",
+   "cause": null
+  },
+  {
+   "row": "C149",
+   "screen": "cafe_window.sit",
+   "verdict": "FAIL",
+   "line": "You take the table by the window and watch campus through the glass. Nobody hurries you out.",
+   "why": "the scene's last screen points at nothing next",
+   "cause": "P31a1-c1"
+  },
+  {
+   "row": "C151",
+   "screen": "cafe_window.sit",
+   "verdict": "N/A",
+   "line": "",
+   "why": "solo repeat with nobody on screen to speak",
+   "cause": null
+  },
+  {
+   "row": "C188",
+   "screen": "*",
+   "verdict": "N/A",
+   "line": "",
+   "why": "no meter talk",
+   "cause": null
+  },
+  {
+   "row": "C210",
+   "screen": "*",
+   "verdict": "N/A",
+   "line": "",
+   "why": "no stage crossing",
+   "cause": null
+  },
+  {
+   "row": "C295",
+   "screen": "*",
+   "verdict": "N/A",
+   "line": "",
+   "why": "no rung",
+   "cause": null
+  },
+  {
+   "row": "C330",
+   "screen": "*",
+   "verdict": "N/A",
+   "line": "",
+   "why": "no meter paid",
+   "cause": null
+  },
+  {
+   "row": "C338",
+   "screen": "*",
+   "verdict": "N/A",
+   "line": "",
+   "why": "no accident or meter pay",
+   "cause": null
+  },
+  {
+   "row": "C381",
+   "screen": "*",
+   "verdict": "N/A",
+   "line": "",
+   "why": "no rung preview",
+   "cause": null
+  },
+  {
+   "row": "C388",
+   "screen": "*",
+   "verdict": "N/A",
+   "line": "",
+   "why": "no locked door",
+   "cause": null
+  },
+  {
+   "row": "C422",
+   "screen": "cafe_window.sit",
+   "verdict": "PASS",
+   "line": "Sit by the window",
+   "why": "says what clicking does",
+   "cause": null
+  },
+  {
+   "row": "C442",
+   "screen": "cafe_window.sit",
+   "verdict": "PASS",
+   "line": "You take the table by the window and watch campus through the glass. Nobody hurries you out.",
+   "why": "says plainly what she does",
+   "cause": null
+  },
+  {
+   "row": "C450",
+   "screen": "cafe_window.sit",
+   "verdict": "FAIL",
+   "line": "You take the table by the window and watch campus through the glass. Nobody hurries you out.",
+   "why": "ends on a statement, not a hook toward what comes next",
+   "cause": "P31a1-c1"
+  },
+  {
+   "row": "C451",
+   "screen": "cafe_window.sit",
+   "verdict": "PASS",
+   "line": "You take the table by the window and watch campus through the glass. Nobody hurries you out.",
+   "why": "the table by the window, campus through the glass",
+   "cause": null
+  },
+  {
+   "row": "C460",
+   "screen": "near_cafe",
+   "verdict": "PASS",
+   "line": "Nobody's behind the counter. The machine hisses to itself.",
+   "why": "true whenever the gate holds: Tom and Chris both absent by who_is_where",
+   "cause": null
+  },
+  {
+   "row": "C460",
+   "screen": "cafe_window.sit",
+   "verdict": "FAIL",
+   "line": "You take the table by the window and watch campus through the glass. Nobody hurries you out.",
+   "why": "at the last open minute the 30-minute sit runs past closing, so \"Nobody hurries you out\" is false then",
+   "cause": "P31a1-c2"
+  },
+  {
+   "row": "C461",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "Nobody's behind the counter. The machine hisses to itself.",
+   "why": "texture that can't clash, behind presence gates",
+   "cause": null
+  },
+  {
+   "row": "C519",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "You take the table by the window and watch campus through the glass. Nobody hurries you out.",
+   "why": "one job, 18 words",
+   "cause": null
+  },
+  {
+   "row": "C541",
+   "screen": "cafe_window.sit",
+   "verdict": "PASS",
+   "line": "effects energy +5",
+   "why": "the toast shows a shown stat; no +X printed in prose",
+   "cause": null
+  },
+  {
+   "row": "C620",
+   "screen": "*",
+   "verdict": "N/A",
+   "line": "",
+   "why": "no person listed by these lines",
+   "cause": null
+  },
+  {
+   "row": "C660",
+   "screen": "*",
+   "verdict": "N/A",
+   "line": "",
+   "why": "no person's meter",
+   "cause": null
+  },
+  {
+   "row": "C758",
+   "screen": "cafe_window.sit",
+   "verdict": "PASS",
+   "line": "Sit by the window",
+   "why": "4 words",
+   "cause": null
+  },
+  {
+   "row": "C762",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "Nobody's behind the counter. The machine hisses to itself.",
+   "why": "no \"Nothing happens\"",
+   "cause": null
+  },
+  {
+   "row": "C769",
+   "screen": "near_cafe",
+   "verdict": "PASS",
+   "line": "The caf\u00e9 across from campus: the coffee machine hissing, a long counter, a tip jar by the till.",
+   "why": "identity line kept in every variant",
+   "cause": null
+  },
+  {
+   "row": "C770",
+   "screen": "near_cafe",
+   "verdict": "PASS",
+   "line": "Nobody's behind the counter. The machine hisses to itself.",
+   "why": "about 55-65 words",
+   "cause": null
+  },
+  {
+   "row": "C771",
+   "screen": "*",
+   "verdict": "N/A",
+   "line": "",
+   "why": "no first-visit screen",
+   "cause": null
+  },
+  {
+   "row": "C773",
+   "screen": "cafe_window.sit",
+   "verdict": "PASS",
+   "line": "Sit by the window",
+   "why": "a rest/refill button, not a browse list",
+   "cause": null
+  },
+  {
+   "row": "C776",
+   "screen": "cafe_window.sit",
+   "verdict": "PASS",
+   "line": "Sit by the window",
+   "why": "a need (energy) on the menu",
+   "cause": null
+  },
+  {
+   "row": "C777",
+   "screen": "cafe_window.sit",
+   "verdict": "PASS",
+   "line": "Sit by the window",
+   "why": "nothing else on the menu",
+   "cause": null
+  },
+  {
+   "row": "C794",
+   "screen": "near_cafe",
+   "verdict": "PASS",
+   "line": "The caf\u00e9 across from campus: ...",
+   "why": "each variant carries the identity sentence word for word",
+   "cause": null
+  },
+  {
+   "row": "C795",
+   "screen": "near_cafe",
+   "verdict": "PASS",
+   "line": "Nobody's behind the counter. The machine hisses to itself.",
+   "why": "an empty-place line, no per-person room text",
+   "cause": null
+  },
+  {
+   "row": "C804",
+   "screen": "near_cafe",
+   "verdict": "PASS",
+   "line": "Nobody's behind the counter. The machine hisses to itself.",
+   "why": "presence is faces; the line only says the counter is empty",
+   "cause": null
+  },
+  {
+   "row": "C889",
+   "screen": "cafe_window.sit",
+   "verdict": "PASS",
+   "line": "Sit by the window",
+   "why": "no time or duration on the label",
+   "cause": null
+  },
+  {
+   "row": "C892",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "Nobody's behind the counter. The machine hisses to itself.",
+   "why": "hours stay on the sign",
+   "cause": null
+  },
+  {
+   "row": "C897",
+   "screen": "*",
+   "verdict": "N/A",
+   "line": "",
+   "why": "no travel",
+   "cause": null
+  },
+  {
+   "row": "C900",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "You take the table by the window and watch campus through the glass. Nobody hurries you out.",
+   "why": "no clock time in the beat; \"between 10am and 3pm\" in the first-shift variant is a rule, not the time now",
+   "cause": null
+  },
+  {
+   "row": "C902",
+   "screen": "cafe_window.sit",
+   "verdict": "FAIL",
+   "line": "You take the table by the window and watch campus through the glass. Nobody hurries you out.",
+   "why": "read at 20:59: she sits until 21:29, past the 21:00 close, and the line still says nobody hurries her out",
+   "cause": null
+  },
+  {
+   "row": "C903",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "Your first shift starts on a weekday",
+   "why": "a rule, not a claim about today",
+   "cause": null
+  },
+  {
+   "row": "C906",
+   "screen": "cafe_window.sit",
+   "verdict": "PASS",
+   "line": "Sit by the window",
+   "why": "no time promised",
+   "cause": null
+  },
+  {
+   "row": "C910",
+   "screen": "cafe_window.sit",
+   "verdict": "PASS",
+   "line": "Done",
+   "why": "no time or energy on buttons",
+   "cause": null
+  },
+  {
+   "row": "C913",
+   "screen": "*",
+   "verdict": "N/A",
+   "line": "",
+   "why": "the window sit has no hours of its own beyond the Caf\u00e9",
+   "cause": null
+  },
+  {
+   "row": "C914",
+   "screen": "*",
+   "verdict": "N/A",
+   "line": "",
+   "why": "no clock-shut row",
+   "cause": null
+  },
+  {
+   "row": "C916",
+   "screen": "*",
+   "verdict": "N/A",
+   "line": "",
+   "why": "no shut event",
+   "cause": null
+  },
+  {
+   "row": "C920",
+   "screen": "*",
+   "verdict": "N/A",
+   "line": "",
+   "why": "no hop",
+   "cause": null
+  },
+  {
+   "row": "C924",
+   "screen": "*",
+   "verdict": "N/A",
+   "line": "",
+   "why": "no travel",
+   "cause": null
+  },
+  {
+   "row": "C926",
+   "screen": "cafe_window.sit",
+   "verdict": "PASS",
+   "line": "time_progression_minutes = 30",
+   "why": "minutes only",
+   "cause": null
+  },
+  {
+   "row": "C927",
+   "screen": "cafe_window.sit",
+   "verdict": "PASS",
+   "line": "time_progression_minutes = 30",
+   "why": "exit carries its time",
+   "cause": null
+  },
+  {
+   "row": "C928",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "You take the table by the window and watch campus through the glass. Nobody hurries you out.",
+   "why": "no clock in prose",
+   "cause": null
+  },
+  {
+   "row": "C929",
+   "screen": "cafe_window.sit",
+   "verdict": "PASS",
+   "line": "Sit by the window",
+   "why": "time tagged nowhere on the label",
+   "cause": null
+  },
+  {
+   "row": "C930",
+   "screen": "*",
+   "verdict": "N/A",
+   "line": "",
+   "why": "no windowed work",
+   "cause": null
+  },
+  {
+   "row": "C931",
+   "screen": "*",
+   "verdict": "N/A",
+   "line": "",
+   "why": "no time_of_day condition built",
+   "cause": null
+  },
+  {
+   "row": "C953",
+   "screen": "cafe_window.sit",
+   "verdict": "PASS",
+   "line": "Sit by the window",
+   "why": "no money, time or energy on the label",
+   "cause": null
+  },
+  {
+   "row": "C961",
+   "screen": "*",
+   "verdict": "N/A",
+   "line": "",
+   "why": "no no",
+   "cause": null
+  },
+  {
+   "row": "L106",
+   "screen": "near_cafe",
+   "verdict": "PASS",
+   "line": "Nobody's behind the counter. The machine hisses to itself.",
+   "why": "names nobody; gated on Tom and Chris is_absent",
+   "cause": null
+  },
+  {
+   "row": "L116",
+   "screen": "*",
+   "verdict": "N/A",
+   "line": "",
+   "why": "no lock",
+   "cause": null
+  },
+  {
+   "row": "L166",
+   "screen": "cafe_window.sit",
+   "verdict": "PASS",
+   "line": "[canvases.trigger] location = \"near_cafe\", no conditions",
+   "why": "open whenever the Caf\u00e9 is open",
+   "cause": null
+  },
+  {
+   "row": "L167",
+   "screen": "*",
+   "verdict": "N/A",
+   "line": "",
+   "why": "one row, no per-day hours",
+   "cause": null
+  },
+  {
+   "row": "L70",
+   "screen": "*",
+   "verdict": "N/A",
+   "line": "",
+   "why": "no climb meter",
+   "cause": null
+  }
+ ],
+ "causes": [
+  {
+   "id": "P31a1-c1",
+   "what": "'Sit by the window' ends on 'Nobody hurries you out.', which points at nothing next"
+  },
+  {
+   "id": "P31a1-c2",
+   "what": "'Sit by the window' is open to 20:59 and spends 30 minutes, so 'Nobody hurries you out' runs past the 21:00 close"
+  },
+  {
+   "id": "P31a1-c3",
+   "what": "Nobody reacts to her sitting by the window, though Tom or Chris is behind the counter nearly every open hour"
+  }
+ ]
+}

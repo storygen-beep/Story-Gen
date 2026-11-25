@@ -1,0 +1,113 @@
+{
+ "verdicts": [
+  {
+   "row": "C795",
+   "screen": "near_cafe",
+   "verdict": "PASS",
+   "line": "\"The café across from campus: the coffee machine hissing, a long counter, a tip jar by the till. A sign on the door says it's open from 7am to 9pm.\"",
+   "why": "no line per person; Tom and Chris show as faces. The hire-wait variant's 'while Tom and Chris are both in' gives shift hours, not a presence claim"
+  },
+  {
+   "row": "C804",
+   "screen": "near_cafe",
+   "verdict": "PASS",
+   "line": "\"The café across from campus: the coffee machine hissing, a long counter, a tip jar by the till. A sign on the door says it's open from 7am to 9pm.\"",
+   "why": "who is there is their faces; no per-person room line (clears the old Tom and Chris presence cause)"
+  },
+  {
+   "row": "L147",
+   "screen": "near_cafe",
+   "verdict": "PASS",
+   "line": "Buy a coffee ($3) with Tom or Chris; Work an hour/shift; the hire",
+   "why": "the café's scenes are everyday work and coffee with people, not only her body"
+  },
+  {
+   "row": "places#2",
+   "screen": "near_cafe",
+   "verdict": "FAIL",
+   "line": "\"The café across from campus: the coffee machine hissing, a long counter, a tip jar by the till. A sign on the door says it's open from 7am to 9pm.\"",
+   "why": "open 7am-9pm every day, but nobody's behind the counter Sat and Sun 7-10am and Sun 8-9pm (Chris Sat/Sun 10-20, Tom Mon-Sat 10-21); the room text never says why",
+   "cause": "P05r6-c1"
+  },
+  {
+   "row": "places#6",
+   "screen": "near_cafe",
+   "verdict": "FAIL",
+   "line": "Buy a coffee ($3) needs cafe_first_shift_done and Tom or Chris present",
+   "why": "nothing to do alone before the hire on Sundays or weekdays 7-10am, before the first shift outside 10-8:55 Mon-Sat, and after it Sat/Sun 7-10am and Sun 8-9pm (work starts 10am weekends, Sunday hour last start 6:55pm)",
+   "cause": "P05r6-c2"
+  },
+  {
+   "row": "C889",
+   "screen": "near_cafe",
+   "verdict": "FAIL",
+   "line": "menu button \"Work an hour\"",
+   "why": "the label states a duration ('an hour'); the row says no duration either"
+  },
+  {
+   "row": "C906",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "\"Work a shift\", \"Buy a coffee ($3)\", \"Go to Zoe's party\"",
+   "why": "no 'till' or clock time on any label"
+  },
+  {
+   "row": "C910",
+   "screen": "near_cafe",
+   "verdict": "FAIL",
+   "line": "menu button \"Work an hour\"",
+   "why": "a button says no time; this one says an hour"
+  },
+  {
+   "row": "C929",
+   "screen": "near_cafe",
+   "verdict": "FAIL",
+   "line": "menu button \"Work an hour\"",
+   "why": "an activity's time is tagged nowhere, its label included; this label carries it"
+  },
+  {
+   "row": "C953",
+   "screen": "near_cafe",
+   "verdict": "FAIL",
+   "line": "menu button \"Work an hour\"",
+   "why": "the label carries time; money-only labels like \"Buy a coffee ($3)\" are right"
+  },
+  {
+   "row": "clock#1",
+   "screen": "near_cafe",
+   "verdict": "FAIL",
+   "line": "menu button \"Work an hour\"",
+   "why": "rule 1: a button says no time; \"an hour\" is the act's time on the button",
+   "cause": "P05r6-c3"
+  },
+  {
+   "row": "clock#6",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "cooldown: \"ask the manager between 10am and 8:55pm, Monday to Saturday.\"",
+   "why": "no 'till X' on a label; hours sit on the greyed row, as clock rule 4 allows"
+  },
+  {
+   "row": "places#4",
+   "screen": "near_cafe",
+   "verdict": "FAIL",
+   "line": "menu button \"Work an hour\"",
+   "why": "rule 4: short labels, money when a spend, never time; this one names its time",
+   "cause": "P05r6-c3"
+  }
+ ],
+ "causes": [
+  {
+   "id": "P05r6-c1",
+   "what": "The Café is open with nobody behind the counter (Sat and Sun 7-10am, Sun 8-9pm) and its text never says why"
+  },
+  {
+   "id": "P05r6-c2",
+   "what": "The Café has open hours with nothing she can do alone (coffee needs the first shift done and Tom or Chris there; weekend work starts at 10am)"
+  },
+  {
+   "id": "P05r6-c3",
+   "what": "The Café's menu button \"Work an hour\" (P10's cafe_work_hour) puts the act's time on the label"
+  }
+ ]
+}

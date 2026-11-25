@@ -1,0 +1,864 @@
+{
+ "items": [
+  {
+   "row": "B10",
+   "screen": "mark_kitchen.hub",
+   "why": "screen changed: truth row"
+  },
+  {
+   "row": "B10",
+   "screen": "mark_kitchen.pay100",
+   "why": "a fact changed"
+  },
+  {
+   "row": "B10",
+   "screen": "mark_kitchen.pay75",
+   "why": "a fact changed"
+  },
+  {
+   "row": "B10",
+   "screen": "mark_kitchen.pay90",
+   "why": "a fact changed"
+  },
+  {
+   "row": "B10",
+   "screen": "mark_kitchen.rent",
+   "why": "a fact changed"
+  },
+  {
+   "row": "B10",
+   "screen": "mark_kitchen.short",
+   "why": "a fact changed"
+  },
+  {
+   "row": "B10",
+   "screen": "mark_kitchen.talk",
+   "why": "a fact changed"
+  },
+  {
+   "row": "B8",
+   "screen": "mark_kitchen.hub",
+   "why": "screen changed: truth row"
+  },
+  {
+   "row": "B8",
+   "screen": "mark_kitchen.pay100",
+   "why": "a fact changed"
+  },
+  {
+   "row": "B8",
+   "screen": "mark_kitchen.pay75",
+   "why": "a fact changed"
+  },
+  {
+   "row": "B8",
+   "screen": "mark_kitchen.pay90",
+   "why": "a fact changed"
+  },
+  {
+   "row": "B8",
+   "screen": "mark_kitchen.rent",
+   "why": "a fact changed"
+  },
+  {
+   "row": "B8",
+   "screen": "mark_kitchen.short",
+   "why": "a fact changed"
+  },
+  {
+   "row": "B8",
+   "screen": "mark_kitchen.talk",
+   "why": "a fact changed"
+  },
+  {
+   "row": "C1265",
+   "screen": "mark_kitchen.hub",
+   "why": "its rule's text changed"
+  },
+  {
+   "row": "C460",
+   "screen": "mark_kitchen.hub",
+   "why": "screen changed: truth row"
+  },
+  {
+   "row": "C460",
+   "screen": "mark_kitchen.pay100",
+   "why": "a fact changed"
+  },
+  {
+   "row": "C460",
+   "screen": "mark_kitchen.pay75",
+   "why": "a fact changed"
+  },
+  {
+   "row": "C460",
+   "screen": "mark_kitchen.pay90",
+   "why": "a fact changed"
+  },
+  {
+   "row": "C460",
+   "screen": "mark_kitchen.rent",
+   "why": "a fact changed"
+  },
+  {
+   "row": "C460",
+   "screen": "mark_kitchen.short",
+   "why": "a fact changed"
+  },
+  {
+   "row": "C460",
+   "screen": "mark_kitchen.talk",
+   "why": "a fact changed"
+  },
+  {
+   "row": "C461",
+   "screen": "mark_kitchen.hub",
+   "why": "screen changed: truth row"
+  },
+  {
+   "row": "C461",
+   "screen": "mark_kitchen.pay100",
+   "why": "a fact changed"
+  },
+  {
+   "row": "C461",
+   "screen": "mark_kitchen.pay75",
+   "why": "a fact changed"
+  },
+  {
+   "row": "C461",
+   "screen": "mark_kitchen.pay90",
+   "why": "a fact changed"
+  },
+  {
+   "row": "C461",
+   "screen": "mark_kitchen.rent",
+   "why": "a fact changed"
+  },
+  {
+   "row": "C461",
+   "screen": "mark_kitchen.short",
+   "why": "a fact changed"
+  },
+  {
+   "row": "C461",
+   "screen": "mark_kitchen.talk",
+   "why": "a fact changed"
+  },
+  {
+   "row": "C596",
+   "screen": "mark_kitchen.hub",
+   "why": "its rule's text changed"
+  },
+  {
+   "row": "C596",
+   "screen": "mark_kitchen.pay100",
+   "why": "its rule's text changed"
+  },
+  {
+   "row": "C596",
+   "screen": "mark_kitchen.pay75",
+   "why": "its rule's text changed"
+  },
+  {
+   "row": "C596",
+   "screen": "mark_kitchen.pay90",
+   "why": "its rule's text changed"
+  },
+  {
+   "row": "C596",
+   "screen": "mark_kitchen.rent",
+   "why": "its rule's text changed"
+  },
+  {
+   "row": "C596",
+   "screen": "mark_kitchen.short",
+   "why": "its rule's text changed"
+  },
+  {
+   "row": "C596",
+   "screen": "mark_kitchen.talk",
+   "why": "its rule's text changed"
+  },
+  {
+   "row": "C795",
+   "screen": "mark_kitchen.hub",
+   "why": "its rule's text changed"
+  },
+  {
+   "row": "C795",
+   "screen": "mark_kitchen.pay100",
+   "why": "its rule's text changed"
+  },
+  {
+   "row": "C795",
+   "screen": "mark_kitchen.pay75",
+   "why": "its rule's text changed"
+  },
+  {
+   "row": "C795",
+   "screen": "mark_kitchen.pay90",
+   "why": "its rule's text changed"
+  },
+  {
+   "row": "C795",
+   "screen": "mark_kitchen.rent",
+   "why": "its rule's text changed"
+  },
+  {
+   "row": "C795",
+   "screen": "mark_kitchen.short",
+   "why": "its rule's text changed"
+  },
+  {
+   "row": "C795",
+   "screen": "mark_kitchen.talk",
+   "why": "its rule's text changed"
+  },
+  {
+   "row": "C804",
+   "screen": "mark_kitchen.hub",
+   "why": "its rule's text changed"
+  },
+  {
+   "row": "C804",
+   "screen": "mark_kitchen.pay100",
+   "why": "its rule's text changed"
+  },
+  {
+   "row": "C804",
+   "screen": "mark_kitchen.pay75",
+   "why": "its rule's text changed"
+  },
+  {
+   "row": "C804",
+   "screen": "mark_kitchen.pay90",
+   "why": "its rule's text changed"
+  },
+  {
+   "row": "C804",
+   "screen": "mark_kitchen.rent",
+   "why": "its rule's text changed"
+  },
+  {
+   "row": "C804",
+   "screen": "mark_kitchen.short",
+   "why": "its rule's text changed"
+  },
+  {
+   "row": "C804",
+   "screen": "mark_kitchen.talk",
+   "why": "its rule's text changed"
+  },
+  {
+   "row": "C889",
+   "screen": "mark_kitchen.hub",
+   "why": "its rule's text changed"
+  },
+  {
+   "row": "C889",
+   "screen": "mark_kitchen.pay100",
+   "why": "a fact changed"
+  },
+  {
+   "row": "C889",
+   "screen": "mark_kitchen.pay75",
+   "why": "a fact changed"
+  },
+  {
+   "row": "C889",
+   "screen": "mark_kitchen.pay90",
+   "why": "a fact changed"
+  },
+  {
+   "row": "C889",
+   "screen": "mark_kitchen.short",
+   "why": "a fact changed"
+  },
+  {
+   "row": "C889",
+   "screen": "mark_kitchen.talk",
+   "why": "a fact changed"
+  },
+  {
+   "row": "C892",
+   "screen": "mark_kitchen.pay100",
+   "why": "a fact changed"
+  },
+  {
+   "row": "C892",
+   "screen": "mark_kitchen.pay75",
+   "why": "a fact changed"
+  },
+  {
+   "row": "C892",
+   "screen": "mark_kitchen.pay90",
+   "why": "a fact changed"
+  },
+  {
+   "row": "C892",
+   "screen": "mark_kitchen.short",
+   "why": "a fact changed"
+  },
+  {
+   "row": "C892",
+   "screen": "mark_kitchen.talk",
+   "why": "a fact changed"
+  },
+  {
+   "row": "C897",
+   "screen": "mark_kitchen.pay100",
+   "why": "a fact changed"
+  },
+  {
+   "row": "C897",
+   "screen": "mark_kitchen.pay75",
+   "why": "a fact changed"
+  },
+  {
+   "row": "C897",
+   "screen": "mark_kitchen.pay90",
+   "why": "a fact changed"
+  },
+  {
+   "row": "C897",
+   "screen": "mark_kitchen.short",
+   "why": "a fact changed"
+  },
+  {
+   "row": "C897",
+   "screen": "mark_kitchen.talk",
+   "why": "a fact changed"
+  },
+  {
+   "row": "C900",
+   "screen": "mark_kitchen.pay100",
+   "why": "a fact changed"
+  },
+  {
+   "row": "C900",
+   "screen": "mark_kitchen.pay75",
+   "why": "a fact changed"
+  },
+  {
+   "row": "C900",
+   "screen": "mark_kitchen.pay90",
+   "why": "a fact changed"
+  },
+  {
+   "row": "C900",
+   "screen": "mark_kitchen.short",
+   "why": "a fact changed"
+  },
+  {
+   "row": "C900",
+   "screen": "mark_kitchen.talk",
+   "why": "a fact changed"
+  },
+  {
+   "row": "C902",
+   "screen": "mark_kitchen.pay100",
+   "why": "a fact changed"
+  },
+  {
+   "row": "C902",
+   "screen": "mark_kitchen.pay75",
+   "why": "a fact changed"
+  },
+  {
+   "row": "C902",
+   "screen": "mark_kitchen.pay90",
+   "why": "a fact changed"
+  },
+  {
+   "row": "C902",
+   "screen": "mark_kitchen.short",
+   "why": "a fact changed"
+  },
+  {
+   "row": "C902",
+   "screen": "mark_kitchen.talk",
+   "why": "a fact changed"
+  },
+  {
+   "row": "C903",
+   "screen": "mark_kitchen.pay100",
+   "why": "a fact changed"
+  },
+  {
+   "row": "C903",
+   "screen": "mark_kitchen.pay75",
+   "why": "a fact changed"
+  },
+  {
+   "row": "C903",
+   "screen": "mark_kitchen.pay90",
+   "why": "a fact changed"
+  },
+  {
+   "row": "C903",
+   "screen": "mark_kitchen.short",
+   "why": "a fact changed"
+  },
+  {
+   "row": "C903",
+   "screen": "mark_kitchen.talk",
+   "why": "a fact changed"
+  },
+  {
+   "row": "C906",
+   "screen": "mark_kitchen.hub",
+   "why": "its rule's text changed"
+  },
+  {
+   "row": "C906",
+   "screen": "mark_kitchen.pay100",
+   "why": "a fact changed"
+  },
+  {
+   "row": "C906",
+   "screen": "mark_kitchen.pay75",
+   "why": "a fact changed"
+  },
+  {
+   "row": "C906",
+   "screen": "mark_kitchen.pay90",
+   "why": "a fact changed"
+  },
+  {
+   "row": "C906",
+   "screen": "mark_kitchen.short",
+   "why": "a fact changed"
+  },
+  {
+   "row": "C906",
+   "screen": "mark_kitchen.talk",
+   "why": "a fact changed"
+  },
+  {
+   "row": "C910",
+   "screen": "mark_kitchen.hub",
+   "why": "its rule's text changed"
+  },
+  {
+   "row": "C910",
+   "screen": "mark_kitchen.pay100",
+   "why": "a fact changed"
+  },
+  {
+   "row": "C910",
+   "screen": "mark_kitchen.pay75",
+   "why": "a fact changed"
+  },
+  {
+   "row": "C910",
+   "screen": "mark_kitchen.pay90",
+   "why": "a fact changed"
+  },
+  {
+   "row": "C910",
+   "screen": "mark_kitchen.short",
+   "why": "a fact changed"
+  },
+  {
+   "row": "C910",
+   "screen": "mark_kitchen.talk",
+   "why": "a fact changed"
+  },
+  {
+   "row": "C913",
+   "screen": "mark_kitchen.pay100",
+   "why": "a fact changed"
+  },
+  {
+   "row": "C913",
+   "screen": "mark_kitchen.pay75",
+   "why": "a fact changed"
+  },
+  {
+   "row": "C913",
+   "screen": "mark_kitchen.pay90",
+   "why": "a fact changed"
+  },
+  {
+   "row": "C913",
+   "screen": "mark_kitchen.short",
+   "why": "a fact changed"
+  },
+  {
+   "row": "C913",
+   "screen": "mark_kitchen.talk",
+   "why": "a fact changed"
+  },
+  {
+   "row": "C914",
+   "screen": "mark_kitchen.pay100",
+   "why": "a fact changed"
+  },
+  {
+   "row": "C914",
+   "screen": "mark_kitchen.pay75",
+   "why": "a fact changed"
+  },
+  {
+   "row": "C914",
+   "screen": "mark_kitchen.pay90",
+   "why": "a fact changed"
+  },
+  {
+   "row": "C914",
+   "screen": "mark_kitchen.short",
+   "why": "a fact changed"
+  },
+  {
+   "row": "C914",
+   "screen": "mark_kitchen.talk",
+   "why": "a fact changed"
+  },
+  {
+   "row": "C916",
+   "screen": "mark_kitchen.pay100",
+   "why": "a fact changed"
+  },
+  {
+   "row": "C916",
+   "screen": "mark_kitchen.pay75",
+   "why": "a fact changed"
+  },
+  {
+   "row": "C916",
+   "screen": "mark_kitchen.pay90",
+   "why": "a fact changed"
+  },
+  {
+   "row": "C916",
+   "screen": "mark_kitchen.short",
+   "why": "a fact changed"
+  },
+  {
+   "row": "C916",
+   "screen": "mark_kitchen.talk",
+   "why": "a fact changed"
+  },
+  {
+   "row": "C920",
+   "screen": "mark_kitchen.hub",
+   "why": "its rule's text changed"
+  },
+  {
+   "row": "C920",
+   "screen": "mark_kitchen.pay100",
+   "why": "a fact changed"
+  },
+  {
+   "row": "C920",
+   "screen": "mark_kitchen.pay75",
+   "why": "a fact changed"
+  },
+  {
+   "row": "C920",
+   "screen": "mark_kitchen.pay90",
+   "why": "a fact changed"
+  },
+  {
+   "row": "C920",
+   "screen": "mark_kitchen.short",
+   "why": "a fact changed"
+  },
+  {
+   "row": "C920",
+   "screen": "mark_kitchen.talk",
+   "why": "a fact changed"
+  },
+  {
+   "row": "C924",
+   "screen": "mark_kitchen.pay100",
+   "why": "a fact changed"
+  },
+  {
+   "row": "C924",
+   "screen": "mark_kitchen.pay75",
+   "why": "a fact changed"
+  },
+  {
+   "row": "C924",
+   "screen": "mark_kitchen.pay90",
+   "why": "a fact changed"
+  },
+  {
+   "row": "C924",
+   "screen": "mark_kitchen.short",
+   "why": "a fact changed"
+  },
+  {
+   "row": "C924",
+   "screen": "mark_kitchen.talk",
+   "why": "a fact changed"
+  },
+  {
+   "row": "C926",
+   "screen": "mark_kitchen.pay100",
+   "why": "a fact changed"
+  },
+  {
+   "row": "C926",
+   "screen": "mark_kitchen.pay75",
+   "why": "a fact changed"
+  },
+  {
+   "row": "C926",
+   "screen": "mark_kitchen.pay90",
+   "why": "a fact changed"
+  },
+  {
+   "row": "C926",
+   "screen": "mark_kitchen.short",
+   "why": "a fact changed"
+  },
+  {
+   "row": "C926",
+   "screen": "mark_kitchen.talk",
+   "why": "a fact changed"
+  },
+  {
+   "row": "C927",
+   "screen": "mark_kitchen.hub",
+   "why": "screen changed: truth row"
+  },
+  {
+   "row": "C927",
+   "screen": "mark_kitchen.pay100",
+   "why": "a fact changed"
+  },
+  {
+   "row": "C927",
+   "screen": "mark_kitchen.pay75",
+   "why": "a fact changed"
+  },
+  {
+   "row": "C927",
+   "screen": "mark_kitchen.pay90",
+   "why": "a fact changed"
+  },
+  {
+   "row": "C927",
+   "screen": "mark_kitchen.short",
+   "why": "a fact changed"
+  },
+  {
+   "row": "C927",
+   "screen": "mark_kitchen.talk",
+   "why": "a fact changed"
+  },
+  {
+   "row": "C928",
+   "screen": "mark_kitchen.pay100",
+   "why": "a fact changed"
+  },
+  {
+   "row": "C928",
+   "screen": "mark_kitchen.pay75",
+   "why": "a fact changed"
+  },
+  {
+   "row": "C928",
+   "screen": "mark_kitchen.pay90",
+   "why": "a fact changed"
+  },
+  {
+   "row": "C928",
+   "screen": "mark_kitchen.short",
+   "why": "a fact changed"
+  },
+  {
+   "row": "C928",
+   "screen": "mark_kitchen.talk",
+   "why": "a fact changed"
+  },
+  {
+   "row": "C929",
+   "screen": "mark_kitchen.hub",
+   "why": "its rule's text changed"
+  },
+  {
+   "row": "C929",
+   "screen": "mark_kitchen.pay100",
+   "why": "a fact changed"
+  },
+  {
+   "row": "C929",
+   "screen": "mark_kitchen.pay75",
+   "why": "a fact changed"
+  },
+  {
+   "row": "C929",
+   "screen": "mark_kitchen.pay90",
+   "why": "a fact changed"
+  },
+  {
+   "row": "C929",
+   "screen": "mark_kitchen.short",
+   "why": "a fact changed"
+  },
+  {
+   "row": "C929",
+   "screen": "mark_kitchen.talk",
+   "why": "a fact changed"
+  },
+  {
+   "row": "C930",
+   "screen": "mark_kitchen.pay100",
+   "why": "a fact changed"
+  },
+  {
+   "row": "C930",
+   "screen": "mark_kitchen.pay75",
+   "why": "a fact changed"
+  },
+  {
+   "row": "C930",
+   "screen": "mark_kitchen.pay90",
+   "why": "a fact changed"
+  },
+  {
+   "row": "C930",
+   "screen": "mark_kitchen.short",
+   "why": "a fact changed"
+  },
+  {
+   "row": "C930",
+   "screen": "mark_kitchen.talk",
+   "why": "a fact changed"
+  },
+  {
+   "row": "C931",
+   "screen": "mark_kitchen.hub",
+   "why": "screen changed: truth row"
+  },
+  {
+   "row": "C931",
+   "screen": "mark_kitchen.pay100",
+   "why": "a fact changed"
+  },
+  {
+   "row": "C931",
+   "screen": "mark_kitchen.pay75",
+   "why": "a fact changed"
+  },
+  {
+   "row": "C931",
+   "screen": "mark_kitchen.pay90",
+   "why": "a fact changed"
+  },
+  {
+   "row": "C931",
+   "screen": "mark_kitchen.short",
+   "why": "a fact changed"
+  },
+  {
+   "row": "C931",
+   "screen": "mark_kitchen.talk",
+   "why": "a fact changed"
+  },
+  {
+   "row": "C953",
+   "screen": "mark_kitchen.hub",
+   "why": "its rule's text changed"
+  },
+  {
+   "row": "C953",
+   "screen": "mark_kitchen.pay100",
+   "why": "its rule's text changed"
+  },
+  {
+   "row": "C953",
+   "screen": "mark_kitchen.pay75",
+   "why": "its rule's text changed"
+  },
+  {
+   "row": "C953",
+   "screen": "mark_kitchen.pay90",
+   "why": "its rule's text changed"
+  },
+  {
+   "row": "C953",
+   "screen": "mark_kitchen.rent",
+   "why": "its rule's text changed"
+  },
+  {
+   "row": "C953",
+   "screen": "mark_kitchen.short",
+   "why": "its rule's text changed"
+  },
+  {
+   "row": "C953",
+   "screen": "mark_kitchen.talk",
+   "why": "its rule's text changed"
+  },
+  {
+   "row": "L106",
+   "screen": "mark_kitchen.hub",
+   "why": "screen changed: truth row"
+  },
+  {
+   "row": "L106",
+   "screen": "mark_kitchen.pay100",
+   "why": "a fact changed"
+  },
+  {
+   "row": "L106",
+   "screen": "mark_kitchen.pay75",
+   "why": "a fact changed"
+  },
+  {
+   "row": "L106",
+   "screen": "mark_kitchen.pay90",
+   "why": "a fact changed"
+  },
+  {
+   "row": "L106",
+   "screen": "mark_kitchen.rent",
+   "why": "a fact changed"
+  },
+  {
+   "row": "L106",
+   "screen": "mark_kitchen.short",
+   "why": "a fact changed"
+  },
+  {
+   "row": "L106",
+   "screen": "mark_kitchen.talk",
+   "why": "a fact changed"
+  },
+  {
+   "row": "L167",
+   "screen": "mark_kitchen.hub",
+   "why": "screen changed: truth row"
+  },
+  {
+   "row": "L167",
+   "screen": "mark_kitchen.pay100",
+   "why": "a fact changed"
+  },
+  {
+   "row": "L167",
+   "screen": "mark_kitchen.pay75",
+   "why": "a fact changed"
+  },
+  {
+   "row": "L167",
+   "screen": "mark_kitchen.pay90",
+   "why": "a fact changed"
+  },
+  {
+   "row": "L167",
+   "screen": "mark_kitchen.short",
+   "why": "a fact changed"
+  },
+  {
+   "row": "L167",
+   "screen": "mark_kitchen.talk",
+   "why": "a fact changed"
+  }
+ ]
+}

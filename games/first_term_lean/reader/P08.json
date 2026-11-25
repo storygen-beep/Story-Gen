@@ -1,6 +1,6 @@
 {
  "piece": "P08",
- "pass": 3,
+ "pass": 5,
  "screens": {
   "*": "4f53cda18c2baa0c"
  },
@@ -30,7 +30,7 @@
   "C1022": "c800d0d9acba0592",
   "C954": "c8001b93946f6f80",
   "C951": "fe3b305ad0c265a7",
-  "C952": "2f7d1a6bf6a93ca9",
+  "C952": "0ded4fca6fc71925",
   "C291": "53bd56cf597f7ee3",
   "C296": "d702aa9200d2154d",
   "C286": "23fc75bfc032d31c",
@@ -51,10 +51,10 @@
   "C639": "be0ad7093b24bc46",
   "C640": "728d95d9964ccf25",
   "C644": "f5e1d79f3251dbab",
-  "C596": "6d9bba989a2b9666",
+  "C596": "e5f7e6cf2d01613d",
   "C1340": "b76a6583ae88c60f",
   "L106": "13a714429d15f3b2",
-  "C953": "8d1306a15c51370a",
+  "C953": "826bf82fe26afd13",
   "C442": "59b8d8d24f0c7c38",
   "C449": "e33f3e7fed17fa30",
   "C451": "50dbf74577a813c7",
@@ -88,7 +88,7 @@
    "note": false,
    "screen_hash": null,
    "row_hash": "c1c0e2ac2588a579",
-   "carried": false,
+   "carried": true,
    "pass": 3
   },
   {
@@ -179,7 +179,7 @@
    "note": false,
    "screen_hash": null,
    "row_hash": "fd109745c67b71d7",
-   "carried": false,
+   "carried": true,
    "pass": 3
   },
   {
@@ -738,7 +738,7 @@
    "note": false,
    "screen_hash": null,
    "row_hash": "bad20c9f078e8b87",
-   "carried": false,
+   "carried": true,
    "pass": 3
   },
   {
@@ -894,7 +894,7 @@
    "note": false,
    "screen_hash": null,
    "row_hash": "67e48e60d5053a2e",
-   "carried": false,
+   "carried": true,
    "pass": 3
   },
   {
@@ -1005,14 +1005,14 @@
    "row": "C596",
    "screen": "*",
    "verdict": "N/A",
-   "line": "\u2014",
-   "why": "a text thread, not a talk screen",
+   "line": "phone texts (text_laura ... text_nina)",
+   "why": "Messages are not a talk screen or a face-opened menu; no picture",
    "cause": null,
    "note": true,
    "screen_hash": "4f53cda18c2baa0c",
-   "row_hash": "6d9bba989a2b9666",
+   "row_hash": "e5f7e6cf2d01613d",
    "carried": true,
-   "pass": 1
+   "pass": 4
   },
   {
    "row": "C601",
@@ -1213,27 +1213,27 @@
    "row": "C952",
    "screen": "phone:text_mark",
    "verdict": "PASS",
-   "line": "Seventy-five.",
-   "why": "agrees with PLAN \u00a72 and the opening",
+   "line": "Sunday. Seventy-five. Don't make me ask twice.",
+   "why": "fires 10h after met_mark, inside week one, when the rent is $75 (rent_paid_total < 300)",
    "cause": null,
    "note": false,
    "screen_hash": null,
-   "row_hash": "2f7d1a6bf6a93ca9",
-   "carried": true,
-   "pass": 1
+   "row_hash": "0ded4fca6fc71925",
+   "carried": false,
+   "pass": 5
   },
   {
    "row": "C953",
    "screen": "phone:text_mark",
    "verdict": "PASS",
-   "line": "\u2014",
-   "why": "reply buttons cost nothing and carry nothing",
+   "line": "replies \"I know.\" / \"I'm working on it.\" / \"Or what?\"",
+   "why": "no reply is a spend; none carries time or energy",
    "cause": null,
    "note": true,
    "screen_hash": null,
-   "row_hash": "8d1306a15c51370a",
+   "row_hash": "826bf82fe26afd13",
    "carried": true,
-   "pass": 1
+   "pass": 4
   },
   {
    "row": "C954",
@@ -1277,8 +1277,8 @@
  ],
  "causes": [],
  "pending": [],
- "asked": 4,
- "answered": 4,
+ "asked": 1,
+ "answered": 1,
  "pass_items": [],
  "unowed": []
 }

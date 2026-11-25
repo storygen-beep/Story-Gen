@@ -1,0 +1,165 @@
+{
+ "verdicts": [
+  {
+   "row": "B10",
+   "screen": "walk_ryan_phone.watch",
+   "verdict": "PASS",
+   "line": "You'll pass his door again tomorrow night.",
+   "why": "Fires Mon-Fri 23:00-01:00 while Ryan's row has him in his room on his phone (Sun 19-24/Mon 00-01 and weekdays 23-01); 'pass his door' is something she can do any night, and Mon-Thu the walk-in is there again; on a Friday it names only her passing the door, not the scene",
+   "cause": ""
+  },
+  {
+   "row": "B10",
+   "screen": "walk_ryan_shower.cover",
+   "verdict": "PASS",
+   "line": "At dinner he won't look at you. You don't know yet if that's worse.",
+   "why": "Shower walk-in is weekdays only; Ryan's weekday row has him in home_kitchen 18-19 'eating' while Mom's row is 'making dinner', so a dinner with him exists later the same day",
+   "cause": ""
+  },
+  {
+   "row": "B3",
+   "screen": "walk_ryan_phone.watch",
+   "verdict": "PASS",
+   "line": "You'll pass his door again tomorrow night.",
+   "why": "Pull fixed: points at tomorrow night's hall, where the walk-in comes back (weekday nights); no breakfast claim left",
+   "cause": ""
+  },
+  {
+   "row": "B8",
+   "screen": "walk_ryan_phone.watch",
+   "verdict": "PASS",
+   "line": "His hand speeds up until he comes into a sock.",
+   "why": "No number and none of her garments named on this screen",
+   "cause": ""
+  },
+  {
+   "row": "B8",
+   "screen": "walk_ryan_shower.cover",
+   "verdict": "PASS",
+   "line": "You stand with your arms across yourself until the water runs cold.",
+   "why": "No number; she is bare in the shower, backed by the act (loop_shower), no garment named",
+   "cause": ""
+  },
+  {
+   "row": "C149",
+   "screen": "walk_ryan_phone.watch",
+   "verdict": "PASS",
+   "line": "You'll pass his door again tomorrow night.",
+   "why": "Ends pointing at the next night at his door",
+   "cause": ""
+  },
+  {
+   "row": "C450",
+   "screen": "walk_ryan_phone.watch",
+   "verdict": "PASS",
+   "line": "You'll pass his door again tomorrow night.",
+   "why": "Last line is a pull at what comes next, tomorrow night",
+   "cause": ""
+  },
+  {
+   "row": "C450",
+   "screen": "walk_ryan_shower.cover",
+   "verdict": "PASS",
+   "line": "At dinner he won't look at you. You don't know yet if that's worse.",
+   "why": "Last screen ends on dinner, a meeting his kitchen row 18-19 weekdays makes real",
+   "cause": ""
+  },
+  {
+   "row": "C460",
+   "screen": "walk_ryan_phone.watch",
+   "verdict": "PASS",
+   "line": "You'll pass his door again tomorrow night.",
+   "why": "True at 23:00 and 00:59 on every weekday night it fires; no past claimed, no breakfast",
+   "cause": ""
+  },
+  {
+   "row": "C460",
+   "screen": "walk_ryan_shower.cover",
+   "verdict": "PASS",
+   "line": "At dinner he won't look at you. You don't know yet if that's worse.",
+   "why": "Dinner with Ryan is on his weekday row (home_kitchen 18:00-19:00, eating); the shower window 07:45-08:30 is the same weekday morning",
+   "cause": ""
+  },
+  {
+   "row": "C461",
+   "screen": "walk_ryan_phone.watch",
+   "verdict": "PASS",
+   "line": "Jesus. Okay. Okay.",
+   "why": "Ryan's line fits him, about himself, nothing about her (walk-ins step 13)",
+   "cause": ""
+  },
+  {
+   "row": "C461",
+   "screen": "walk_ryan_shower.cover",
+   "verdict": "PASS",
+   "line": "You don't know yet if that's worse.",
+   "why": "Her opinion, narration, can't clash",
+   "cause": ""
+  },
+  {
+   "row": "C927",
+   "screen": "walk_ryan_phone.watch",
+   "verdict": "PASS",
+   "line": "Done (5 min) to home_hall",
+   "why": "Exit spends 5 minutes, at or over 3",
+   "cause": ""
+  },
+  {
+   "row": "C927",
+   "screen": "walk_ryan_shower.cover",
+   "verdict": "PASS",
+   "line": "Done (5 min) to home_bathroom",
+   "why": "Exit spends 5 minutes, at or over 3",
+   "cause": ""
+  },
+  {
+   "row": "C931",
+   "screen": "walk_ryan_phone.watch",
+   "verdict": "PASS",
+   "line": "time_of_day 23:00-01:00",
+   "why": "Wraps midnight, end exclusive; last start 00:59 still inside Ryan's room row (to 01:00)",
+   "cause": ""
+  },
+  {
+   "row": "C931",
+   "screen": "walk_ryan_shower.cover",
+   "verdict": "PASS",
+   "line": "time_of_day 07:45-08:30",
+   "why": "End exclusive; Ryan's row is home_ryans_room from 07:45 through 12:00, so every start minute has him there",
+   "cause": ""
+  },
+  {
+   "row": "L106",
+   "screen": "walk_ryan_phone.watch",
+   "verdict": "PASS",
+   "line": "You're gone before he looks up.",
+   "why": "Only Ryan is named, and his row puts him in home_ryans_room 23-01; condition npc_at_location is_present",
+   "cause": ""
+  },
+  {
+   "row": "L106",
+   "screen": "walk_ryan_shower.cover",
+   "verdict": "PASS",
+   "line": "At dinner he won't look at you. You don't know yet if that's worse.",
+   "why": "Names Ryan at dinner, where his weekday row puts him (home_kitchen 18-19); no one claimed in the bathroom now",
+   "cause": ""
+  },
+  {
+   "row": "L167",
+   "screen": "walk_ryan_phone.watch",
+   "verdict": "PASS",
+   "line": "weekdays 0-4, 23:00-01:00",
+   "why": "One window on all its days, one row; an event she walks into stays hidden when shut (C916), so no greying asked",
+   "cause": ""
+  },
+  {
+   "row": "L167",
+   "screen": "walk_ryan_shower.cover",
+   "verdict": "PASS",
+   "line": "substitution on loop_shower, weekdays 07:45-08:30",
+   "why": "Same hours each day; a substitution is not a row she picks, nothing to grey",
+   "cause": ""
+  }
+ ],
+ "causes": []
+}

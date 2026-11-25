@@ -1,0 +1,278 @@
+{
+ "verdicts": [
+  {
+   "row": "B10",
+   "screen": "walk_cross_seats.moment",
+   "verdict": "PASS",
+   "line": "He's early for his two o'clock, and you've no idea how long he's been watching.",
+   "why": "true at first and last minute and on a repeat visit: Cross unplaced 13-14 Tue/Thu/Fri, next row the theatre 14-18 (who_is_where), so 'early for his two o'clock' agrees; no face is drawn"
+  },
+  {
+   "row": "B10",
+   "screen": "walk_mirror_girls.leave",
+   "verdict": "PASS",
+   "line": "You leave. The laugh starts before the door shuts. They own that mirror. They'll be back.",
+   "why": "true at first and last minute and on a repeat visit: Brooke, Kayla, Tess all at campus_bathroom weekdays 08-09 and 13-14 by who_is_where; trigger needs all three"
+  },
+  {
+   "row": "B10",
+   "screen": "walk_stacks.away",
+   "verdict": "PASS",
+   "line": "You back out of the aisle, very upright, your face still hot. You know which shelf now.",
+   "why": "true at first and last minute and on a repeat visit: strangers only; window 18:00-22:00 inside library hours 08-22"
+  },
+  {
+   "row": "B10",
+   "screen": "walk_stacks.moment",
+   "verdict": "PASS",
+   "line": "her skirt in his fist, her tits out of her top ... Your face goes hot.",
+   "why": "true at first and last minute and on a repeat visit: strangers only; window 18:00-22:00 inside library hours 08-22"
+  },
+  {
+   "row": "B10",
+   "screen": "walk_stacks.watch",
+   "verdict": "PASS",
+   "line": "Her eyes find yours through the gap. You're wet. A book falls, and you run.",
+   "why": "true at first and last minute and on a repeat visit: strangers only; window 18:00-22:00 inside library hours 08-22"
+  },
+  {
+   "row": "B4",
+   "screen": "walk_stacks.moment",
+   "verdict": "PASS",
+   "line": "Your face goes hot.",
+   "why": "her reaction is on her body only, stage 0, no act of her own and no touch"
+  },
+  {
+   "row": "B5",
+   "screen": "walk_stacks.watch",
+   "verdict": "PASS",
+   "line": "Her eyes find yours through the gap.",
+   "why": "the woman sees her watching; someone reacts"
+  },
+  {
+   "row": "B8",
+   "screen": "walk_cross_seats.moment",
+   "verdict": "PASS",
+   "line": "He's early for his two o'clock, and you've no idea how long he's been watching.",
+   "why": "no number on the screen; every garment named is another person's (or the try-on skirt and a grouped underwear line), none of hers unbacked"
+  },
+  {
+   "row": "B8",
+   "screen": "walk_mirror_girls.leave",
+   "verdict": "PASS",
+   "line": "You leave. The laugh starts before the door shuts. They own that mirror. They'll be back.",
+   "why": "no number on the screen; every garment named is another person's (or the try-on skirt and a grouped underwear line), none of hers unbacked"
+  },
+  {
+   "row": "B8",
+   "screen": "walk_stacks.away",
+   "verdict": "PASS",
+   "line": "You back out of the aisle, very upright, your face still hot. You know which shelf now.",
+   "why": "no number on the screen; every garment named is another person's (or the try-on skirt and a grouped underwear line), none of hers unbacked"
+  },
+  {
+   "row": "B8",
+   "screen": "walk_stacks.moment",
+   "verdict": "PASS",
+   "line": "her skirt in his fist, her tits out of her top ... Your face goes hot.",
+   "why": "no number on the screen; every garment named is another person's (or the try-on skirt and a grouped underwear line), none of hers unbacked"
+  },
+  {
+   "row": "B8",
+   "screen": "walk_stacks.watch",
+   "verdict": "PASS",
+   "line": "Her eyes find yours through the gap. You're wet. A book falls, and you run.",
+   "why": "no number on the screen; every garment named is another person's (or the try-on skirt and a grouped underwear line), none of hers unbacked"
+  },
+  {
+   "row": "C1158",
+   "screen": "walk_stacks.moment",
+   "verdict": "PASS",
+   "line": "her skirt in his fist, her tits out of her top ... Your face goes hot.",
+   "why": "the only garments named belong to the people she watches; her own body lines name no garment"
+  },
+  {
+   "row": "C1206",
+   "screen": "walk_stacks.moment",
+   "verdict": "PASS",
+   "line": "her skirt in his fist, her tits out of her top ... Your face goes hot.",
+   "why": "the only garments named belong to the people she watches; her own body lines name no garment"
+  },
+  {
+   "row": "C151",
+   "screen": "walk_stacks.moment",
+   "verdict": "FAIL",
+   "line": "\"Quiet. Someone'll come.\" / \"Let them. Let them watch. Harder. Fuck.\"",
+   "why": "a note row: the repeatable moment carries two spoken lines, not one"
+  },
+  {
+   "row": "C460",
+   "screen": "walk_cross_seats.moment",
+   "verdict": "PASS",
+   "line": "He's early for his two o'clock, and you've no idea how long he's been watching.",
+   "why": "true at first and last minute and on a repeat visit: Cross unplaced 13-14 Tue/Thu/Fri, next row the theatre 14-18 (who_is_where), so 'early for his two o'clock' agrees; no face is drawn"
+  },
+  {
+   "row": "C460",
+   "screen": "walk_mirror_girls.leave",
+   "verdict": "PASS",
+   "line": "You leave. The laugh starts before the door shuts. They own that mirror. They'll be back.",
+   "why": "true at first and last minute and on a repeat visit: Brooke, Kayla, Tess all at campus_bathroom weekdays 08-09 and 13-14 by who_is_where; trigger needs all three"
+  },
+  {
+   "row": "C460",
+   "screen": "walk_stacks.away",
+   "verdict": "PASS",
+   "line": "You back out of the aisle, very upright, your face still hot. You know which shelf now.",
+   "why": "true at first and last minute and on a repeat visit: strangers only; window 18:00-22:00 inside library hours 08-22"
+  },
+  {
+   "row": "C460",
+   "screen": "walk_stacks.moment",
+   "verdict": "PASS",
+   "line": "her skirt in his fist, her tits out of her top ... Your face goes hot.",
+   "why": "true at first and last minute and on a repeat visit: strangers only; window 18:00-22:00 inside library hours 08-22"
+  },
+  {
+   "row": "C460",
+   "screen": "walk_stacks.watch",
+   "verdict": "PASS",
+   "line": "Her eyes find yours through the gap. You're wet. A book falls, and you run.",
+   "why": "true at first and last minute and on a repeat visit: strangers only; window 18:00-22:00 inside library hours 08-22"
+  },
+  {
+   "row": "C461",
+   "screen": "walk_cross_seats.moment",
+   "verdict": "PASS",
+   "line": "He's early for his two o'clock, and you've no idea how long he's been watching.",
+   "why": "texture and her reactions only; dialogue fits the cast entries (Tom runs the café, Nina owns the shop, Zoe 19, Sam 22)"
+  },
+  {
+   "row": "C461",
+   "screen": "walk_mirror_girls.leave",
+   "verdict": "PASS",
+   "line": "You leave. The laugh starts before the door shuts. They own that mirror. They'll be back.",
+   "why": "texture and her reactions only; dialogue fits the cast entries (Tom runs the café, Nina owns the shop, Zoe 19, Sam 22)"
+  },
+  {
+   "row": "C461",
+   "screen": "walk_stacks.away",
+   "verdict": "PASS",
+   "line": "You back out of the aisle, very upright, your face still hot. You know which shelf now.",
+   "why": "texture and her reactions only; dialogue fits the cast entries (Tom runs the café, Nina owns the shop, Zoe 19, Sam 22)"
+  },
+  {
+   "row": "C461",
+   "screen": "walk_stacks.moment",
+   "verdict": "PASS",
+   "line": "her skirt in his fist, her tits out of her top ... Your face goes hot.",
+   "why": "texture and her reactions only; dialogue fits the cast entries (Tom runs the café, Nina owns the shop, Zoe 19, Sam 22)"
+  },
+  {
+   "row": "C461",
+   "screen": "walk_stacks.watch",
+   "verdict": "PASS",
+   "line": "Her eyes find yours through the gap. You're wet. A book falls, and you run.",
+   "why": "texture and her reactions only; dialogue fits the cast entries (Tom runs the café, Nina owns the shop, Zoe 19, Sam 22)"
+  },
+  {
+   "row": "C927",
+   "screen": "walk_mirror_girls.leave",
+   "verdict": "PASS",
+   "line": "You leave. The laugh starts before the door shuts. They own that mirror. They'll be back.",
+   "why": "every exit states its minutes: the choices 0, Done 5"
+  },
+  {
+   "row": "C927",
+   "screen": "walk_stacks.away",
+   "verdict": "PASS",
+   "line": "You back out of the aisle, very upright, your face still hot. You know which shelf now.",
+   "why": "every exit states its minutes: the choices 0, Done 5"
+  },
+  {
+   "row": "C927",
+   "screen": "walk_stacks.watch",
+   "verdict": "PASS",
+   "line": "Her eyes find yours through the gap. You're wet. A book falls, and you run.",
+   "why": "every exit states its minutes: the choices 0, Done 5"
+  },
+  {
+   "row": "C931",
+   "screen": "walk_mirror_girls.leave",
+   "verdict": "PASS",
+   "line": "You leave. The laugh starts before the door shuts. They own that mirror. They'll be back.",
+   "why": "the window ends exclusive and the answer screen costs 0 minutes, so its lines show inside the window"
+  },
+  {
+   "row": "C931",
+   "screen": "walk_stacks.away",
+   "verdict": "PASS",
+   "line": "You back out of the aisle, very upright, your face still hot. You know which shelf now.",
+   "why": "the window ends exclusive and the answer screen costs 0 minutes, so its lines show inside the window"
+  },
+  {
+   "row": "C931",
+   "screen": "walk_stacks.watch",
+   "verdict": "PASS",
+   "line": "Her eyes find yours through the gap. You're wet. A book falls, and you run.",
+   "why": "the window ends exclusive and the answer screen costs 0 minutes, so its lines show inside the window"
+  },
+  {
+   "row": "L106",
+   "screen": "walk_cross_seats.moment",
+   "verdict": "PASS",
+   "line": "He's early for his two o'clock, and you've no idea how long he's been watching.",
+   "why": "every named person is where their rows put them: Cross unplaced 13-14 Tue/Thu/Fri, next row the theatre 14-18 (who_is_where), so 'early for his two o'clock' agrees; no face is drawn"
+  },
+  {
+   "row": "L106",
+   "screen": "walk_mirror_girls.leave",
+   "verdict": "PASS",
+   "line": "You leave. The laugh starts before the door shuts. They own that mirror. They'll be back.",
+   "why": "every named person is where their rows put them: Brooke, Kayla, Tess all at campus_bathroom weekdays 08-09 and 13-14 by who_is_where; trigger needs all three"
+  },
+  {
+   "row": "L106",
+   "screen": "walk_stacks.away",
+   "verdict": "PASS",
+   "line": "You back out of the aisle, very upright, your face still hot. You know which shelf now.",
+   "why": "every named person is where their rows put them: strangers only; window 18:00-22:00 inside library hours 08-22"
+  },
+  {
+   "row": "L106",
+   "screen": "walk_stacks.moment",
+   "verdict": "PASS",
+   "line": "her skirt in his fist, her tits out of her top ... Your face goes hot.",
+   "why": "every named person is where their rows put them: strangers only; window 18:00-22:00 inside library hours 08-22"
+  },
+  {
+   "row": "L106",
+   "screen": "walk_stacks.watch",
+   "verdict": "PASS",
+   "line": "Her eyes find yours through the gap. You're wet. A book falls, and you run.",
+   "why": "every named person is where their rows put them: strangers only; window 18:00-22:00 inside library hours 08-22"
+  },
+  {
+   "row": "L167",
+   "screen": "walk_mirror_girls.leave",
+   "verdict": "PASS",
+   "line": "You leave. The laugh starts before the door shuts. They own that mirror. They'll be back.",
+   "why": "one canvas per scene; days that differ are one trigger with a group (or the same hours every open day); a walk-in hides out of its window by design (walk-ins.md, no 'nothing happens')"
+  },
+  {
+   "row": "L167",
+   "screen": "walk_stacks.away",
+   "verdict": "PASS",
+   "line": "You back out of the aisle, very upright, your face still hot. You know which shelf now.",
+   "why": "one canvas per scene; days that differ are one trigger with a group (or the same hours every open day); a walk-in hides out of its window by design (walk-ins.md, no 'nothing happens')"
+  },
+  {
+   "row": "L167",
+   "screen": "walk_stacks.watch",
+   "verdict": "PASS",
+   "line": "Her eyes find yours through the gap. You're wet. A book falls, and you run.",
+   "why": "one canvas per scene; days that differ are one trigger with a group (or the same hours every open day); a walk-in hides out of its window by design (walk-ins.md, no 'nothing happens')"
+  }
+ ],
+ "causes": []
+}

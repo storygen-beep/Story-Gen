@@ -1,0 +1,34 @@
+{
+ "items": [
+  {
+   "row": "C1619",
+   "screen": "*",
+   "why": "its rule's text changed"
+  },
+  {
+   "row": "C2176",
+   "screen": "*",
+   "why": "never judged"
+  },
+  {
+   "row": "L170",
+   "screen": "*",
+   "why": "never judged"
+  },
+  {
+   "row": "L172",
+   "screen": "*",
+   "why": "never judged"
+  },
+  {
+   "row": "places#10",
+   "screen": "*",
+   "why": "never judged"
+  },
+  {
+   "row": "want#4",
+   "screen": "*",
+   "why": "its rule's text changed"
+  }
+ ]
+}

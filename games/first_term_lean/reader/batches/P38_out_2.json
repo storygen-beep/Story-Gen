@@ -1,0 +1,1442 @@
+{
+ "verdicts": [
+  {
+   "row": "B10",
+   "screen": "walk_mark_phone.listen",
+   "line": "He hangs up and sits there a long time, not watching the TV. / Friday. Whatever it is, it's due Friday.",
+   "cause": "",
+   "verdict": "PASS",
+   "why": "Mark stays in his chair till 23:00; TV is in the room (home_tv); Friday line as he said it"
+  },
+  {
+   "row": "B10",
+   "screen": "walk_mark_phone.moment",
+   "line": "Mark's in his chair, phone to his ear... \"I'll have the money Friday. I said Friday.\" / (met_vance) \"I'll have it Friday. I said Friday, Vance.\"",
+   "cause": "",
+   "verdict": "PASS",
+   "why": "Mon-Fri 16:30-17:00, Mark 'in his chair' from 16:30; Vance named only behind met_vance; 'Friday' still true at Friday 16:59"
+  },
+  {
+   "row": "B10",
+   "screen": "walk_mark_phone.walkin",
+   "line": "He hears you and looks up, and his face shuts like a door. ... Whatever he owes, he's not telling you.",
+   "cause": "",
+   "verdict": "PASS",
+   "why": "Mark there; 'owes' is her read of the call, true for both variants"
+  },
+  {
+   "row": "B10",
+   "screen": "walk_mom_bills.late",
+   "line": "You know they'll still be on the table tonight.",
+   "cause": "",
+   "verdict": "PASS",
+   "why": "bills on the table tonight is texture/her expectation; Laura stays in the kitchen till 19:00"
+  },
+  {
+   "row": "B10",
+   "screen": "walk_mom_bills.moment",
+   "line": "Mom's at the kitchen table with the bills spread in front of her... \"Oh. Baby. Don't look at these.\"",
+   "cause": "",
+   "verdict": "PASS",
+   "why": "Mon-Fri 17:00-18:00, Laura kitchen 17-19; Mark in the living room, Ryan out till 18; no one else claimed"
+  },
+  {
+   "row": "B10",
+   "screen": "walk_mom_bills.sit",
+   "line": "Rent's due Sunday. She hasn't said how much is missing.",
+   "cause": "",
+   "verdict": "PASS",
+   "why": "rent is Sunday (P11, PLAN), true on every weekday the scene can show; the family's shortfall is the plan's hold"
+  },
+  {
+   "row": "B10",
+   "screen": "walk_parents.away",
+   "line": "Their door's never quite shut. You know that now.",
+   "cause": "",
+   "verdict": "PASS",
+   "why": "no fact beyond the hall and her door; exit Your Bedroom matches 'all the way to your door'"
+  },
+  {
+   "row": "B10",
+   "screen": "walk_parents.moment",
+   "line": "Their door hasn't caught. Through the gap: Mom on her back... Your face burns.",
+   "cause": "",
+   "verdict": "PASS",
+   "why": "trigger Mon-Fri 23:00-01:00 gated on both in home_master_bedroom; both rows 'in bed' 23:00-01:00 every day; Ryan in his room, so 'The kids' holds"
+  },
+  {
+   "row": "B10",
+   "screen": "walk_parents.watch",
+   "line": "At breakfast you won't be able to look at either of them.",
+   "cause": "",
+   "verdict": "PASS",
+   "why": "next breakfast has both: weekdays Laura kitchen 07-08, Mark 07-07:30; Sat (after a Fri night) Laura 08-12, Mark 08-10; exit Your Bedroom matches 'back in your room'"
+  },
+  {
+   "row": "B10",
+   "screen": "walk_ryan_game.moment",
+   "line": "Ryan's on the couch with a controller, losing loudly.",
+   "cause": "",
+   "verdict": "PASS",
+   "why": "Sat/Sun 12:00-17:00, Ryan 'on the couch' 12-17; Mark in his chair too, not contradicted; Laura out"
+  },
+  {
+   "row": "B10",
+   "screen": "walk_ryan_game.notnow",
+   "line": "The second controller stays on the cushion beside him.",
+   "cause": "",
+   "verdict": "PASS",
+   "why": "Ryan still on the couch; texture only"
+  },
+  {
+   "row": "B10",
+   "screen": "walk_ryan_game.play",
+   "line": "You lose, then you win, and he throws a cushion at you like it's an insult. \"Again. Best of three.\"",
+   "cause": "",
+   "verdict": "PASS",
+   "why": "no time, day or presence claim beyond Ryan on the couch; 'Best of three' is dialogue"
+  },
+  {
+   "row": "B10",
+   "screen": "walk_ryan_phone.away",
+   "line": "When you look back, his door's still open a crack.",
+   "cause": "",
+   "verdict": "PASS",
+   "why": "door and floorboard only; exit stays in the hall, where she is"
+  },
+  {
+   "row": "B10",
+   "screen": "walk_ryan_phone.moment",
+   "line": "He's on his bed in his phone's light, shorts round his thighs, stroking his cock, eyes on the screen. Your face goes hot.",
+   "cause": "",
+   "verdict": "PASS",
+   "why": "trigger Mon-Fri 23:00-01:00 + Ryan in home_ryans_room; his rows read 'on his phone' 23:00-01:00 (Mon 00-01 too), so the act shows what he was doing (L97)"
+  },
+  {
+   "row": "B10",
+   "screen": "walk_ryan_phone.watch",
+   "line": "Breakfast is going to be hard.",
+   "cause": "P38r2-c1",
+   "verdict": "FAIL",
+   "why": "Ryan's rows never put him at breakfast (weekdays his room 07:45-12:00, no kitchen row; after a Friday night he's asleep till 10), so the pull points at a meeting the game never has"
+  },
+  {
+   "row": "B10",
+   "screen": "walk_ryan_shower.cover",
+   "line": "At breakfast he won't look at you. You don't know yet if that's worse.",
+   "cause": "P38r2-c1",
+   "verdict": "FAIL",
+   "why": "Ryan has no breakfast row (his room 07:45-12:00) and the scene runs to 08:30, after Mom's breakfast ends at 08:00: the line puts him at a breakfast that never happens"
+  },
+  {
+   "row": "B10",
+   "screen": "walk_ryan_shower.keep",
+   "line": "You turn your back to the door and keep washing, like nothing happened. Your hands aren't steady.",
+   "cause": "",
+   "verdict": "PASS",
+   "why": "she is in the shower she started; no claim about others"
+  },
+  {
+   "row": "B10",
+   "screen": "walk_ryan_shower.moment",
+   "line": "Then he sees you through the wet glass, all of you, soap running down your tits, and freezes. [image body/ryan_shower_t4, pool 4]",
+   "cause": "",
+   "verdict": "PASS",
+   "why": "Mon-Fri 07:45-08:30, Ryan back in his room after his 07:25-07:45 shower row; towel and razor are his own business (L97)"
+  },
+  {
+   "row": "B13",
+   "screen": "walk_ryan_shower.moment",
+   "line": "Then he sees you through the wet glass, all of you, soap running down your tits, and freezes. [image body/ryan_shower_t4, pool 4]",
+   "cause": "",
+   "verdict": "PASS",
+   "why": "stays on her wet body ('soap running down your tits') with her picture right after, body/ryan_shower_t4 pool 4"
+  },
+  {
+   "row": "B3",
+   "screen": "walk_mom_bills.late",
+   "line": "You know they'll still be on the table tonight.",
+   "cause": "",
+   "verdict": "PASS",
+   "why": "ends on the bills still there tonight: the trouble isn't going away"
+  },
+  {
+   "row": "B3",
+   "screen": "walk_mom_bills.sit",
+   "line": "Rent's due Sunday. She hasn't said how much is missing.",
+   "cause": "",
+   "verdict": "PASS",
+   "why": "ends on Sunday's rent and the unnamed shortfall"
+  },
+  {
+   "row": "B3",
+   "screen": "walk_parents.away",
+   "line": "Their door's never quite shut. You know that now.",
+   "cause": "",
+   "verdict": "PASS",
+   "why": "ends on the door that's never shut: she can come back"
+  },
+  {
+   "row": "B3",
+   "screen": "walk_parents.watch",
+   "line": "At breakfast you won't be able to look at either of them.",
+   "cause": "",
+   "verdict": "PASS",
+   "why": "ends on breakfast with both of them, which their rows hold"
+  },
+  {
+   "row": "B3",
+   "screen": "walk_ryan_phone.away",
+   "line": "When you look back, his door's still open a crack.",
+   "cause": "",
+   "verdict": "PASS",
+   "why": "ends on his door still open a crack: a pull back to it"
+  },
+  {
+   "row": "B3",
+   "screen": "walk_ryan_phone.watch",
+   "line": "Breakfast is going to be hard.",
+   "cause": "P38r2-c1",
+   "verdict": "FAIL",
+   "why": "Ryan's rows never put him at breakfast (weekdays his room 07:45-12:00, no kitchen row; after a Friday night he's asleep till 10), so the pull points at a meeting the game never has"
+  },
+  {
+   "row": "B4",
+   "screen": "walk_ryan_phone.moment",
+   "line": "He's on his bed in his phone's light, shorts round his thighs, stroking his cock, eyes on the screen. Your face goes hot.",
+   "cause": "",
+   "verdict": "PASS",
+   "why": "her reaction is on her body, 'Your face goes hot.', at her stage"
+  },
+  {
+   "row": "B4",
+   "screen": "walk_ryan_shower.keep",
+   "line": "You turn your back to the door and keep washing, like nothing happened. Your hands aren't steady.",
+   "cause": "",
+   "verdict": "PASS",
+   "why": "she turns her back and her hands shake: reacts on her body, no display"
+  },
+  {
+   "row": "B8",
+   "screen": "walk_mark_phone.listen",
+   "line": "He hangs up and sits there a long time, not watching the TV. / Friday. Whatever it is, it's due Friday.",
+   "cause": "",
+   "verdict": "PASS",
+   "why": "no number disagrees with PLAN (rent Sunday, Mark's Friday); the only garments named are theirs (nightie, shorts, towel) or her naked in the shower she started"
+  },
+  {
+   "row": "B8",
+   "screen": "walk_mark_phone.moment",
+   "line": "Mark's in his chair, phone to his ear... \"I'll have the money Friday. I said Friday.\" / (met_vance) \"I'll have it Friday. I said Friday, Vance.\"",
+   "cause": "",
+   "verdict": "PASS",
+   "why": "no number disagrees with PLAN (rent Sunday, Mark's Friday); the only garments named are theirs (nightie, shorts, towel) or her naked in the shower she started"
+  },
+  {
+   "row": "B8",
+   "screen": "walk_mark_phone.walkin",
+   "line": "He hears you and looks up, and his face shuts like a door. ... Whatever he owes, he's not telling you.",
+   "cause": "",
+   "verdict": "PASS",
+   "why": "no number disagrees with PLAN (rent Sunday, Mark's Friday); the only garments named are theirs (nightie, shorts, towel) or her naked in the shower she started"
+  },
+  {
+   "row": "B8",
+   "screen": "walk_mom_bills.late",
+   "line": "You know they'll still be on the table tonight.",
+   "cause": "",
+   "verdict": "PASS",
+   "why": "no number disagrees with PLAN (rent Sunday, Mark's Friday); the only garments named are theirs (nightie, shorts, towel) or her naked in the shower she started"
+  },
+  {
+   "row": "B8",
+   "screen": "walk_mom_bills.moment",
+   "line": "Mom's at the kitchen table with the bills spread in front of her... \"Oh. Baby. Don't look at these.\"",
+   "cause": "",
+   "verdict": "PASS",
+   "why": "no number disagrees with PLAN (rent Sunday, Mark's Friday); the only garments named are theirs (nightie, shorts, towel) or her naked in the shower she started"
+  },
+  {
+   "row": "B8",
+   "screen": "walk_mom_bills.sit",
+   "line": "Rent's due Sunday. She hasn't said how much is missing.",
+   "cause": "",
+   "verdict": "PASS",
+   "why": "no number disagrees with PLAN (rent Sunday, Mark's Friday); the only garments named are theirs (nightie, shorts, towel) or her naked in the shower she started"
+  },
+  {
+   "row": "B8",
+   "screen": "walk_parents.away",
+   "line": "Their door's never quite shut. You know that now.",
+   "cause": "",
+   "verdict": "PASS",
+   "why": "no number disagrees with PLAN (rent Sunday, Mark's Friday); the only garments named are theirs (nightie, shorts, towel) or her naked in the shower she started"
+  },
+  {
+   "row": "B8",
+   "screen": "walk_parents.moment",
+   "line": "Their door hasn't caught. Through the gap: Mom on her back... Your face burns.",
+   "cause": "",
+   "verdict": "PASS",
+   "why": "no number disagrees with PLAN (rent Sunday, Mark's Friday); the only garments named are theirs (nightie, shorts, towel) or her naked in the shower she started"
+  },
+  {
+   "row": "B8",
+   "screen": "walk_parents.watch",
+   "line": "At breakfast you won't be able to look at either of them.",
+   "cause": "",
+   "verdict": "PASS",
+   "why": "no number disagrees with PLAN (rent Sunday, Mark's Friday); the only garments named are theirs (nightie, shorts, towel) or her naked in the shower she started"
+  },
+  {
+   "row": "B8",
+   "screen": "walk_ryan_game.moment",
+   "line": "Ryan's on the couch with a controller, losing loudly.",
+   "cause": "",
+   "verdict": "PASS",
+   "why": "no number disagrees with PLAN (rent Sunday, Mark's Friday); the only garments named are theirs (nightie, shorts, towel) or her naked in the shower she started"
+  },
+  {
+   "row": "B8",
+   "screen": "walk_ryan_game.notnow",
+   "line": "The second controller stays on the cushion beside him.",
+   "cause": "",
+   "verdict": "PASS",
+   "why": "no number disagrees with PLAN (rent Sunday, Mark's Friday); the only garments named are theirs (nightie, shorts, towel) or her naked in the shower she started"
+  },
+  {
+   "row": "B8",
+   "screen": "walk_ryan_game.play",
+   "line": "You lose, then you win, and he throws a cushion at you like it's an insult. \"Again. Best of three.\"",
+   "cause": "",
+   "verdict": "PASS",
+   "why": "no number disagrees with PLAN (rent Sunday, Mark's Friday); the only garments named are theirs (nightie, shorts, towel) or her naked in the shower she started"
+  },
+  {
+   "row": "B8",
+   "screen": "walk_ryan_phone.away",
+   "line": "When you look back, his door's still open a crack.",
+   "cause": "",
+   "verdict": "PASS",
+   "why": "no number disagrees with PLAN (rent Sunday, Mark's Friday); the only garments named are theirs (nightie, shorts, towel) or her naked in the shower she started"
+  },
+  {
+   "row": "B8",
+   "screen": "walk_ryan_phone.moment",
+   "line": "He's on his bed in his phone's light, shorts round his thighs, stroking his cock, eyes on the screen. Your face goes hot.",
+   "cause": "",
+   "verdict": "PASS",
+   "why": "no number disagrees with PLAN (rent Sunday, Mark's Friday); the only garments named are theirs (nightie, shorts, towel) or her naked in the shower she started"
+  },
+  {
+   "row": "B8",
+   "screen": "walk_ryan_phone.watch",
+   "line": "Breakfast is going to be hard.",
+   "cause": "",
+   "verdict": "PASS",
+   "why": "no number disagrees with PLAN (rent Sunday, Mark's Friday); the only garments named are theirs (nightie, shorts, towel) or her naked in the shower she started"
+  },
+  {
+   "row": "B8",
+   "screen": "walk_ryan_shower.cover",
+   "line": "At breakfast he won't look at you. You don't know yet if that's worse.",
+   "cause": "",
+   "verdict": "PASS",
+   "why": "no number disagrees with PLAN (rent Sunday, Mark's Friday); the only garments named are theirs (nightie, shorts, towel) or her naked in the shower she started"
+  },
+  {
+   "row": "B8",
+   "screen": "walk_ryan_shower.keep",
+   "line": "You turn your back to the door and keep washing, like nothing happened. Your hands aren't steady.",
+   "cause": "",
+   "verdict": "PASS",
+   "why": "no number disagrees with PLAN (rent Sunday, Mark's Friday); the only garments named are theirs (nightie, shorts, towel) or her naked in the shower she started"
+  },
+  {
+   "row": "B8",
+   "screen": "walk_ryan_shower.moment",
+   "line": "Then he sees you through the wet glass, all of you, soap running down your tits, and freezes. [image body/ryan_shower_t4, pool 4]",
+   "cause": "",
+   "verdict": "PASS",
+   "why": "no number disagrees with PLAN (rent Sunday, Mark's Friday); the only garments named are theirs (nightie, shorts, towel) or her naked in the shower she started"
+  },
+  {
+   "row": "C1262",
+   "screen": "walk_ryan_shower.moment",
+   "line": "Then he sees you through the wet glass, all of you, soap running down your tits, and freezes. [image body/ryan_shower_t4, pool 4]",
+   "cause": "",
+   "verdict": "PASS",
+   "why": "the still of her sits right after the line where he sees her body"
+  },
+  {
+   "row": "C1274",
+   "screen": "walk_ryan_phone.moment",
+   "line": "He's on his bed in his phone's light, shorts round his thighs, stroking his cock, eyes on the screen. Your face goes hot.",
+   "cause": "",
+   "verdict": "PASS",
+   "why": "_t5 for sex shown, gif in the search words (animated)"
+  },
+  {
+   "row": "C1280",
+   "screen": "walk_parents.moment",
+   "line": "Their door hasn't caught. Through the gap: Mom on her back... Your face burns.",
+   "cause": "",
+   "verdict": "PASS",
+   "why": "explicit spot on a repeat: pool 4"
+  },
+  {
+   "row": "C1280",
+   "screen": "walk_ryan_phone.moment",
+   "line": "He's on his bed in his phone's light, shorts round his thighs, stroking his cock, eyes on the screen. Your face goes hot.",
+   "cause": "",
+   "verdict": "PASS",
+   "why": "explicit spot on a repeat: pool 4"
+  },
+  {
+   "row": "C149",
+   "screen": "walk_mom_bills.late",
+   "line": "You know they'll still be on the table tonight.",
+   "cause": "",
+   "verdict": "PASS",
+   "why": "ends on the bills still there tonight: the trouble isn't going away"
+  },
+  {
+   "row": "C149",
+   "screen": "walk_mom_bills.sit",
+   "line": "Rent's due Sunday. She hasn't said how much is missing.",
+   "cause": "",
+   "verdict": "PASS",
+   "why": "ends on Sunday's rent and the unnamed shortfall"
+  },
+  {
+   "row": "C149",
+   "screen": "walk_parents.away",
+   "line": "Their door's never quite shut. You know that now.",
+   "cause": "",
+   "verdict": "PASS",
+   "why": "ends on the door that's never shut: she can come back"
+  },
+  {
+   "row": "C149",
+   "screen": "walk_parents.watch",
+   "line": "At breakfast you won't be able to look at either of them.",
+   "cause": "",
+   "verdict": "PASS",
+   "why": "ends on breakfast with both of them, which their rows hold"
+  },
+  {
+   "row": "C149",
+   "screen": "walk_ryan_phone.away",
+   "line": "When you look back, his door's still open a crack.",
+   "cause": "",
+   "verdict": "PASS",
+   "why": "ends on his door still open a crack: a pull back to it"
+  },
+  {
+   "row": "C149",
+   "screen": "walk_ryan_phone.watch",
+   "line": "Breakfast is going to be hard.",
+   "cause": "P38r2-c1",
+   "verdict": "FAIL",
+   "why": "Ryan's rows never put him at breakfast (weekdays his room 07:45-12:00, no kitchen row; after a Friday night he's asleep till 10), so the pull points at a meeting the game never has"
+  },
+  {
+   "row": "C151",
+   "screen": "walk_parents.moment",
+   "line": "\"Mark. The kids.\" / \"Then be quiet, Laura. Be quiet for me.\"",
+   "cause": "",
+   "verdict": "FAIL",
+   "why": "note row: two spoken lines (Laura's whisper and Mark's answer) on a repeatable"
+  },
+  {
+   "row": "C151",
+   "screen": "walk_ryan_shower.moment",
+   "line": "\"Shit. Sorry. Sorry.\" / \"I'll come back. I'll come back later. Sorry.\"",
+   "cause": "",
+   "verdict": "FAIL",
+   "why": "note row: two spoken lines from Ryan (\"Shit. Sorry. Sorry.\" and \"I'll come back. I'll come back later. Sorry.\") on a repeatable"
+  },
+  {
+   "row": "C442",
+   "screen": "walk_mark_phone.moment",
+   "line": "Mark's in his chair, phone to his ear... \"I'll have the money Friday. I said Friday.\" / (met_vance) \"I'll have it Friday. I said Friday, Vance.\"",
+   "cause": "",
+   "verdict": "PASS",
+   "why": "says what's happening: he owes money by Friday ('the money' before met_vance; Vance, the landlord, after)"
+  },
+  {
+   "row": "C449",
+   "screen": "walk_ryan_phone.moment",
+   "line": "He's on his bed in his phone's light, shorts round his thighs, stroking his cock, eyes on the screen. Your face goes hot.",
+   "cause": "",
+   "verdict": "PASS",
+   "why": "the act is named plainly ('stroking his cock') and her reaction is on her body"
+  },
+  {
+   "row": "C450",
+   "screen": "walk_mark_phone.listen",
+   "line": "He hangs up and sits there a long time, not watching the TV. / Friday. Whatever it is, it's due Friday.",
+   "cause": "",
+   "verdict": "PASS",
+   "why": "ends on Friday, the debt's due date"
+  },
+  {
+   "row": "C450",
+   "screen": "walk_mark_phone.walkin",
+   "line": "He hears you and looks up, and his face shuts like a door. ... Whatever he owes, he's not telling you.",
+   "cause": "",
+   "verdict": "PASS",
+   "why": "ends on what he owes and won't say"
+  },
+  {
+   "row": "C450",
+   "screen": "walk_mom_bills.late",
+   "line": "You know they'll still be on the table tonight.",
+   "cause": "",
+   "verdict": "PASS",
+   "why": "ends on the bills still there tonight: the trouble isn't going away"
+  },
+  {
+   "row": "C450",
+   "screen": "walk_mom_bills.sit",
+   "line": "Rent's due Sunday. She hasn't said how much is missing.",
+   "cause": "",
+   "verdict": "PASS",
+   "why": "ends on Sunday's rent and the unnamed shortfall"
+  },
+  {
+   "row": "C450",
+   "screen": "walk_parents.away",
+   "line": "Their door's never quite shut. You know that now.",
+   "cause": "",
+   "verdict": "PASS",
+   "why": "ends on the door that's never shut: she can come back"
+  },
+  {
+   "row": "C450",
+   "screen": "walk_parents.watch",
+   "line": "At breakfast you won't be able to look at either of them.",
+   "cause": "",
+   "verdict": "PASS",
+   "why": "ends on breakfast with both of them, which their rows hold"
+  },
+  {
+   "row": "C450",
+   "screen": "walk_ryan_game.notnow",
+   "line": "The second controller stays on the cushion beside him.",
+   "cause": "",
+   "verdict": "PASS",
+   "why": "ends on the second controller left for her"
+  },
+  {
+   "row": "C450",
+   "screen": "walk_ryan_phone.away",
+   "line": "When you look back, his door's still open a crack.",
+   "cause": "",
+   "verdict": "PASS",
+   "why": "ends on his door still open a crack: a pull back to it"
+  },
+  {
+   "row": "C450",
+   "screen": "walk_ryan_phone.watch",
+   "line": "Breakfast is going to be hard.",
+   "cause": "P38r2-c1",
+   "verdict": "FAIL",
+   "why": "Ryan's rows never put him at breakfast (weekdays his room 07:45-12:00, no kitchen row; after a Friday night he's asleep till 10), so the pull points at a meeting the game never has"
+  },
+  {
+   "row": "C450",
+   "screen": "walk_ryan_shower.cover",
+   "line": "At breakfast he won't look at you. You don't know yet if that's worse.",
+   "cause": "P38r2-c1",
+   "verdict": "FAIL",
+   "why": "Ryan has no breakfast row (his room 07:45-12:00) and the scene runs to 08:30, after Mom's breakfast ends at 08:00: the line puts him at a breakfast that never happens"
+  },
+  {
+   "row": "C460",
+   "screen": "walk_mark_phone.listen",
+   "line": "He hangs up and sits there a long time, not watching the TV. / Friday. Whatever it is, it's due Friday.",
+   "cause": "",
+   "verdict": "PASS",
+   "why": "Mark stays in his chair till 23:00; TV is in the room (home_tv); Friday line as he said it"
+  },
+  {
+   "row": "C460",
+   "screen": "walk_mark_phone.moment",
+   "line": "Mark's in his chair, phone to his ear... \"I'll have the money Friday. I said Friday.\" / (met_vance) \"I'll have it Friday. I said Friday, Vance.\"",
+   "cause": "",
+   "verdict": "PASS",
+   "why": "Mon-Fri 16:30-17:00, Mark 'in his chair' from 16:30; Vance named only behind met_vance; 'Friday' still true at Friday 16:59"
+  },
+  {
+   "row": "C460",
+   "screen": "walk_mark_phone.walkin",
+   "line": "He hears you and looks up, and his face shuts like a door. ... Whatever he owes, he's not telling you.",
+   "cause": "",
+   "verdict": "PASS",
+   "why": "Mark there; 'owes' is her read of the call, true for both variants"
+  },
+  {
+   "row": "C460",
+   "screen": "walk_mom_bills.late",
+   "line": "You know they'll still be on the table tonight.",
+   "cause": "",
+   "verdict": "PASS",
+   "why": "bills on the table tonight is texture/her expectation; Laura stays in the kitchen till 19:00"
+  },
+  {
+   "row": "C460",
+   "screen": "walk_mom_bills.moment",
+   "line": "Mom's at the kitchen table with the bills spread in front of her... \"Oh. Baby. Don't look at these.\"",
+   "cause": "",
+   "verdict": "PASS",
+   "why": "Mon-Fri 17:00-18:00, Laura kitchen 17-19; Mark in the living room, Ryan out till 18; no one else claimed"
+  },
+  {
+   "row": "C460",
+   "screen": "walk_mom_bills.sit",
+   "line": "Rent's due Sunday. She hasn't said how much is missing.",
+   "cause": "",
+   "verdict": "PASS",
+   "why": "rent is Sunday (P11, PLAN), true on every weekday the scene can show; the family's shortfall is the plan's hold"
+  },
+  {
+   "row": "C460",
+   "screen": "walk_parents.away",
+   "line": "Their door's never quite shut. You know that now.",
+   "cause": "",
+   "verdict": "PASS",
+   "why": "no fact beyond the hall and her door; exit Your Bedroom matches 'all the way to your door'"
+  },
+  {
+   "row": "C460",
+   "screen": "walk_parents.moment",
+   "line": "Their door hasn't caught. Through the gap: Mom on her back... Your face burns.",
+   "cause": "",
+   "verdict": "PASS",
+   "why": "trigger Mon-Fri 23:00-01:00 gated on both in home_master_bedroom; both rows 'in bed' 23:00-01:00 every day; Ryan in his room, so 'The kids' holds"
+  },
+  {
+   "row": "C460",
+   "screen": "walk_parents.watch",
+   "line": "At breakfast you won't be able to look at either of them.",
+   "cause": "",
+   "verdict": "PASS",
+   "why": "next breakfast has both: weekdays Laura kitchen 07-08, Mark 07-07:30; Sat (after a Fri night) Laura 08-12, Mark 08-10; exit Your Bedroom matches 'back in your room'"
+  },
+  {
+   "row": "C460",
+   "screen": "walk_ryan_game.moment",
+   "line": "Ryan's on the couch with a controller, losing loudly.",
+   "cause": "",
+   "verdict": "PASS",
+   "why": "Sat/Sun 12:00-17:00, Ryan 'on the couch' 12-17; Mark in his chair too, not contradicted; Laura out"
+  },
+  {
+   "row": "C460",
+   "screen": "walk_ryan_game.notnow",
+   "line": "The second controller stays on the cushion beside him.",
+   "cause": "",
+   "verdict": "PASS",
+   "why": "Ryan still on the couch; texture only"
+  },
+  {
+   "row": "C460",
+   "screen": "walk_ryan_game.play",
+   "line": "You lose, then you win, and he throws a cushion at you like it's an insult. \"Again. Best of three.\"",
+   "cause": "",
+   "verdict": "PASS",
+   "why": "no time, day or presence claim beyond Ryan on the couch; 'Best of three' is dialogue"
+  },
+  {
+   "row": "C460",
+   "screen": "walk_ryan_phone.away",
+   "line": "When you look back, his door's still open a crack.",
+   "cause": "",
+   "verdict": "PASS",
+   "why": "door and floorboard only; exit stays in the hall, where she is"
+  },
+  {
+   "row": "C460",
+   "screen": "walk_ryan_phone.moment",
+   "line": "He's on his bed in his phone's light, shorts round his thighs, stroking his cock, eyes on the screen. Your face goes hot.",
+   "cause": "",
+   "verdict": "PASS",
+   "why": "trigger Mon-Fri 23:00-01:00 + Ryan in home_ryans_room; his rows read 'on his phone' 23:00-01:00 (Mon 00-01 too), so the act shows what he was doing (L97)"
+  },
+  {
+   "row": "C460",
+   "screen": "walk_ryan_phone.watch",
+   "line": "Breakfast is going to be hard.",
+   "cause": "P38r2-c1",
+   "verdict": "FAIL",
+   "why": "Ryan's rows never put him at breakfast (weekdays his room 07:45-12:00, no kitchen row; after a Friday night he's asleep till 10), so the pull points at a meeting the game never has"
+  },
+  {
+   "row": "C460",
+   "screen": "walk_ryan_shower.cover",
+   "line": "At breakfast he won't look at you. You don't know yet if that's worse.",
+   "cause": "P38r2-c1",
+   "verdict": "FAIL",
+   "why": "Ryan has no breakfast row (his room 07:45-12:00) and the scene runs to 08:30, after Mom's breakfast ends at 08:00: the line puts him at a breakfast that never happens"
+  },
+  {
+   "row": "C460",
+   "screen": "walk_ryan_shower.keep",
+   "line": "You turn your back to the door and keep washing, like nothing happened. Your hands aren't steady.",
+   "cause": "",
+   "verdict": "PASS",
+   "why": "she is in the shower she started; no claim about others"
+  },
+  {
+   "row": "C460",
+   "screen": "walk_ryan_shower.moment",
+   "line": "Then he sees you through the wet glass, all of you, soap running down your tits, and freezes. [image body/ryan_shower_t4, pool 4]",
+   "cause": "",
+   "verdict": "PASS",
+   "why": "Mon-Fri 07:45-08:30, Ryan back in his room after his 07:25-07:45 shower row; towel and razor are his own business (L97)"
+  },
+  {
+   "row": "C461",
+   "screen": "walk_mark_phone.listen",
+   "line": "He hangs up and sits there a long time, not watching the TV. / Friday. Whatever it is, it's due Friday.",
+   "cause": "",
+   "verdict": "PASS",
+   "why": "texture, her reaction, and dialogue in each person's manner (Mom 'baby', Mark curt, Ryan joking/swearing)"
+  },
+  {
+   "row": "C461",
+   "screen": "walk_mark_phone.moment",
+   "line": "Mark's in his chair, phone to his ear... \"I'll have the money Friday. I said Friday.\" / (met_vance) \"I'll have it Friday. I said Friday, Vance.\"",
+   "cause": "",
+   "verdict": "PASS",
+   "why": "texture, her reaction, and dialogue in each person's manner (Mom 'baby', Mark curt, Ryan joking/swearing)"
+  },
+  {
+   "row": "C461",
+   "screen": "walk_mark_phone.walkin",
+   "line": "He hears you and looks up, and his face shuts like a door. ... Whatever he owes, he's not telling you.",
+   "cause": "",
+   "verdict": "PASS",
+   "why": "texture, her reaction, and dialogue in each person's manner (Mom 'baby', Mark curt, Ryan joking/swearing)"
+  },
+  {
+   "row": "C461",
+   "screen": "walk_mom_bills.late",
+   "line": "You know they'll still be on the table tonight.",
+   "cause": "",
+   "verdict": "PASS",
+   "why": "texture, her reaction, and dialogue in each person's manner (Mom 'baby', Mark curt, Ryan joking/swearing)"
+  },
+  {
+   "row": "C461",
+   "screen": "walk_mom_bills.moment",
+   "line": "Mom's at the kitchen table with the bills spread in front of her... \"Oh. Baby. Don't look at these.\"",
+   "cause": "",
+   "verdict": "PASS",
+   "why": "texture, her reaction, and dialogue in each person's manner (Mom 'baby', Mark curt, Ryan joking/swearing)"
+  },
+  {
+   "row": "C461",
+   "screen": "walk_mom_bills.sit",
+   "line": "Rent's due Sunday. She hasn't said how much is missing.",
+   "cause": "",
+   "verdict": "PASS",
+   "why": "texture, her reaction, and dialogue in each person's manner (Mom 'baby', Mark curt, Ryan joking/swearing)"
+  },
+  {
+   "row": "C461",
+   "screen": "walk_parents.away",
+   "line": "Their door's never quite shut. You know that now.",
+   "cause": "",
+   "verdict": "PASS",
+   "why": "texture, her reaction, and dialogue in each person's manner (Mom 'baby', Mark curt, Ryan joking/swearing)"
+  },
+  {
+   "row": "C461",
+   "screen": "walk_parents.moment",
+   "line": "Their door hasn't caught. Through the gap: Mom on her back... Your face burns.",
+   "cause": "",
+   "verdict": "PASS",
+   "why": "texture, her reaction, and dialogue in each person's manner (Mom 'baby', Mark curt, Ryan joking/swearing)"
+  },
+  {
+   "row": "C461",
+   "screen": "walk_parents.watch",
+   "line": "At breakfast you won't be able to look at either of them.",
+   "cause": "",
+   "verdict": "PASS",
+   "why": "texture, her reaction, and dialogue in each person's manner (Mom 'baby', Mark curt, Ryan joking/swearing)"
+  },
+  {
+   "row": "C461",
+   "screen": "walk_ryan_game.moment",
+   "line": "Ryan's on the couch with a controller, losing loudly.",
+   "cause": "",
+   "verdict": "PASS",
+   "why": "texture, her reaction, and dialogue in each person's manner (Mom 'baby', Mark curt, Ryan joking/swearing)"
+  },
+  {
+   "row": "C461",
+   "screen": "walk_ryan_game.notnow",
+   "line": "The second controller stays on the cushion beside him.",
+   "cause": "",
+   "verdict": "PASS",
+   "why": "texture, her reaction, and dialogue in each person's manner (Mom 'baby', Mark curt, Ryan joking/swearing)"
+  },
+  {
+   "row": "C461",
+   "screen": "walk_ryan_game.play",
+   "line": "You lose, then you win, and he throws a cushion at you like it's an insult. \"Again. Best of three.\"",
+   "cause": "",
+   "verdict": "PASS",
+   "why": "texture, her reaction, and dialogue in each person's manner (Mom 'baby', Mark curt, Ryan joking/swearing)"
+  },
+  {
+   "row": "C461",
+   "screen": "walk_ryan_phone.away",
+   "line": "When you look back, his door's still open a crack.",
+   "cause": "",
+   "verdict": "PASS",
+   "why": "texture, her reaction, and dialogue in each person's manner (Mom 'baby', Mark curt, Ryan joking/swearing)"
+  },
+  {
+   "row": "C461",
+   "screen": "walk_ryan_phone.moment",
+   "line": "He's on his bed in his phone's light, shorts round his thighs, stroking his cock, eyes on the screen. Your face goes hot.",
+   "cause": "",
+   "verdict": "PASS",
+   "why": "texture, her reaction, and dialogue in each person's manner (Mom 'baby', Mark curt, Ryan joking/swearing)"
+  },
+  {
+   "row": "C461",
+   "screen": "walk_ryan_phone.watch",
+   "line": "Breakfast is going to be hard.",
+   "cause": "",
+   "verdict": "PASS",
+   "why": "texture, her reaction, and dialogue in each person's manner (Mom 'baby', Mark curt, Ryan joking/swearing)"
+  },
+  {
+   "row": "C461",
+   "screen": "walk_ryan_shower.cover",
+   "line": "At breakfast he won't look at you. You don't know yet if that's worse.",
+   "cause": "",
+   "verdict": "PASS",
+   "why": "texture, her reaction, and dialogue in each person's manner (Mom 'baby', Mark curt, Ryan joking/swearing)"
+  },
+  {
+   "row": "C461",
+   "screen": "walk_ryan_shower.keep",
+   "line": "You turn your back to the door and keep washing, like nothing happened. Your hands aren't steady.",
+   "cause": "",
+   "verdict": "PASS",
+   "why": "texture, her reaction, and dialogue in each person's manner (Mom 'baby', Mark curt, Ryan joking/swearing)"
+  },
+  {
+   "row": "C461",
+   "screen": "walk_ryan_shower.moment",
+   "line": "Then he sees you through the wet glass, all of you, soap running down your tits, and freezes. [image body/ryan_shower_t4, pool 4]",
+   "cause": "",
+   "verdict": "PASS",
+   "why": "texture, her reaction, and dialogue in each person's manner (Mom 'baby', Mark curt, Ryan joking/swearing)"
+  },
+  {
+   "row": "C625",
+   "screen": "walk_mark_phone.moment",
+   "line": "Mark's in his chair, phone to his ear... \"I'll have the money Friday. I said Friday.\" / (met_vance) \"I'll have it Friday. I said Friday, Vance.\"",
+   "cause": "",
+   "verdict": "PASS",
+   "why": "before met_vance the call names nobody; the name comes after the meeting"
+  },
+  {
+   "row": "C630",
+   "screen": "walk_mark_phone.moment",
+   "line": "Mark's in his chair, phone to his ear... \"I'll have the money Friday. I said Friday.\" / (met_vance) \"I'll have it Friday. I said Friday, Vance.\"",
+   "cause": "",
+   "verdict": "PASS",
+   "why": "Vance is named only behind met_vance, after the meeting that gives his relation; before it he's unnamed"
+  },
+  {
+   "row": "C889",
+   "screen": "walk_ryan_game.play",
+   "line": "You lose, then you win, and he throws a cushion at you like it's an insult. \"Again. Best of three.\"",
+   "cause": "",
+   "verdict": "PASS",
+   "why": "labels 'Play a round', 'Done' name no time"
+  },
+  {
+   "row": "C892",
+   "screen": "walk_ryan_game.play",
+   "line": "You lose, then you win, and he throws a cushion at you like it's an insult. \"Again. Best of three.\"",
+   "cause": "",
+   "verdict": "PASS",
+   "why": "the window is on the trigger, not in the act"
+  },
+  {
+   "row": "C897",
+   "screen": "walk_ryan_game.play",
+   "line": "You lose, then you win, and he throws a cushion at you like it's an insult. \"Again. Best of three.\"",
+   "cause": "",
+   "verdict": "PASS",
+   "why": "no travel; the 5 min sits on Done, not a room"
+  },
+  {
+   "row": "C900",
+   "screen": "walk_ryan_game.play",
+   "line": "You lose, then you win, and he throws a cushion at you like it's an insult. \"Again. Best of three.\"",
+   "cause": "",
+   "verdict": "PASS",
+   "why": "no clock time in the beat"
+  },
+  {
+   "row": "C902",
+   "screen": "walk_ryan_game.play",
+   "line": "You lose, then you win, and he throws a cushion at you like it's an insult. \"Again. Best of three.\"",
+   "cause": "",
+   "verdict": "PASS",
+   "why": "at 16:59 Ryan is still on the couch, the line holds"
+  },
+  {
+   "row": "C903",
+   "screen": "walk_ryan_game.play",
+   "line": "You lose, then you win, and he throws a cushion at you like it's an insult. \"Again. Best of three.\"",
+   "cause": "",
+   "verdict": "PASS",
+   "why": "no weekday named"
+  },
+  {
+   "row": "C906",
+   "screen": "walk_ryan_game.play",
+   "line": "You lose, then you win, and he throws a cushion at you like it's an insult. \"Again. Best of three.\"",
+   "cause": "",
+   "verdict": "PASS",
+   "why": "no 'till' in a label"
+  },
+  {
+   "row": "C910",
+   "screen": "walk_ryan_game.play",
+   "line": "You lose, then you win, and he throws a cushion at you like it's an insult. \"Again. Best of three.\"",
+   "cause": "",
+   "verdict": "PASS",
+   "why": "no time or energy on any button"
+  },
+  {
+   "row": "C913",
+   "screen": "walk_ryan_game.play",
+   "line": "You lose, then you win, and he throws a cushion at you like it's an insult. \"Again. Best of three.\"",
+   "cause": "",
+   "verdict": "PASS",
+   "why": "a walk-in is an event, not a published activity: hidden when shut is right (C916)"
+  },
+  {
+   "row": "C914",
+   "screen": "walk_ryan_game.play",
+   "line": "You lose, then you win, and he throws a cushion at you like it's an insult. \"Again. Best of three.\"",
+   "cause": "",
+   "verdict": "PASS",
+   "why": "no hours shown; the clock-only rule doesn't apply"
+  },
+  {
+   "row": "C916",
+   "screen": "walk_ryan_game.play",
+   "line": "You lose, then you win, and he throws a cushion at you like it's an insult. \"Again. Best of three.\"",
+   "cause": "",
+   "verdict": "PASS",
+   "why": "the event stays hidden outside its window"
+  },
+  {
+   "row": "C920",
+   "screen": "walk_ryan_game.play",
+   "line": "You lose, then you win, and he throws a cushion at you like it's an insult. \"Again. Best of three.\"",
+   "cause": "",
+   "verdict": "PASS",
+   "why": "no hop charged; Done stays in the room"
+  },
+  {
+   "row": "C924",
+   "screen": "walk_ryan_game.play",
+   "line": "You lose, then you win, and he throws a cushion at you like it's an insult. \"Again. Best of three.\"",
+   "cause": "",
+   "verdict": "PASS",
+   "why": "no travel on this screen"
+  },
+  {
+   "row": "C926",
+   "screen": "walk_ryan_game.play",
+   "line": "You lose, then you win, and he throws a cushion at you like it's an insult. \"Again. Best of three.\"",
+   "cause": "",
+   "verdict": "PASS",
+   "why": "time moves by minutes only"
+  },
+  {
+   "row": "C927",
+   "screen": "walk_mark_phone.listen",
+   "line": "He hangs up and sits there a long time, not watching the TV. / Friday. Whatever it is, it's due Friday.",
+   "cause": "",
+   "verdict": "PASS",
+   "why": "Done sets time_progression_minutes = 5; no bare exit"
+  },
+  {
+   "row": "C927",
+   "screen": "walk_mark_phone.walkin",
+   "line": "He hears you and looks up, and his face shuts like a door. ... Whatever he owes, he's not telling you.",
+   "cause": "",
+   "verdict": "PASS",
+   "why": "Done sets time_progression_minutes = 5; no bare exit"
+  },
+  {
+   "row": "C927",
+   "screen": "walk_mom_bills.late",
+   "line": "You know they'll still be on the table tonight.",
+   "cause": "",
+   "verdict": "PASS",
+   "why": "Done sets time_progression_minutes = 5; no bare exit"
+  },
+  {
+   "row": "C927",
+   "screen": "walk_mom_bills.sit",
+   "line": "Rent's due Sunday. She hasn't said how much is missing.",
+   "cause": "",
+   "verdict": "PASS",
+   "why": "Done sets time_progression_minutes = 5; no bare exit"
+  },
+  {
+   "row": "C927",
+   "screen": "walk_parents.away",
+   "line": "Their door's never quite shut. You know that now.",
+   "cause": "",
+   "verdict": "PASS",
+   "why": "Done sets time_progression_minutes = 5; no bare exit"
+  },
+  {
+   "row": "C927",
+   "screen": "walk_parents.watch",
+   "line": "At breakfast you won't be able to look at either of them.",
+   "cause": "",
+   "verdict": "PASS",
+   "why": "Done sets time_progression_minutes = 5; no bare exit"
+  },
+  {
+   "row": "C927",
+   "screen": "walk_ryan_game.notnow",
+   "line": "The second controller stays on the cushion beside him.",
+   "cause": "",
+   "verdict": "PASS",
+   "why": "Done sets time_progression_minutes = 5; no bare exit"
+  },
+  {
+   "row": "C927",
+   "screen": "walk_ryan_game.play",
+   "line": "You lose, then you win, and he throws a cushion at you like it's an insult. \"Again. Best of three.\"",
+   "cause": "",
+   "verdict": "PASS",
+   "why": "Done sets time_progression_minutes = 5; no bare exit"
+  },
+  {
+   "row": "C927",
+   "screen": "walk_ryan_phone.away",
+   "line": "When you look back, his door's still open a crack.",
+   "cause": "",
+   "verdict": "PASS",
+   "why": "Done sets time_progression_minutes = 5; no bare exit"
+  },
+  {
+   "row": "C927",
+   "screen": "walk_ryan_phone.watch",
+   "line": "Breakfast is going to be hard.",
+   "cause": "",
+   "verdict": "PASS",
+   "why": "Done sets time_progression_minutes = 5; no bare exit"
+  },
+  {
+   "row": "C927",
+   "screen": "walk_ryan_shower.cover",
+   "line": "At breakfast he won't look at you. You don't know yet if that's worse.",
+   "cause": "",
+   "verdict": "PASS",
+   "why": "Done sets time_progression_minutes = 5; no bare exit"
+  },
+  {
+   "row": "C927",
+   "screen": "walk_ryan_shower.keep",
+   "line": "You turn your back to the door and keep washing, like nothing happened. Your hands aren't steady.",
+   "cause": "",
+   "verdict": "PASS",
+   "why": "Done sets time_progression_minutes = 5; no bare exit"
+  },
+  {
+   "row": "C928",
+   "screen": "walk_ryan_game.play",
+   "line": "You lose, then you win, and he throws a cushion at you like it's an insult. \"Again. Best of three.\"",
+   "cause": "",
+   "verdict": "PASS",
+   "why": "no clock printed in prose"
+  },
+  {
+   "row": "C929",
+   "screen": "walk_ryan_game.play",
+   "line": "You lose, then you win, and he throws a cushion at you like it's an insult. \"Again. Best of three.\"",
+   "cause": "",
+   "verdict": "PASS",
+   "why": "no time tag on the label"
+  },
+  {
+   "row": "C930",
+   "screen": "walk_ryan_game.play",
+   "line": "You lose, then you win, and he throws a cushion at you like it's an insult. \"Again. Best of three.\"",
+   "cause": "",
+   "verdict": "PASS",
+   "why": "not work; hidden outside hours is intended"
+  },
+  {
+   "row": "C931",
+   "screen": "walk_mark_phone.listen",
+   "line": "He hangs up and sits there a long time, not watching the TV. / Friday. Whatever it is, it's due Friday.",
+   "cause": "",
+   "verdict": "PASS",
+   "why": "windows read end-exclusive and wrap as the rows do (23:00-01:00; 12:00-17:00 ends as Ryan's row ends)"
+  },
+  {
+   "row": "C931",
+   "screen": "walk_mark_phone.walkin",
+   "line": "He hears you and looks up, and his face shuts like a door. ... Whatever he owes, he's not telling you.",
+   "cause": "",
+   "verdict": "PASS",
+   "why": "windows read end-exclusive and wrap as the rows do (23:00-01:00; 12:00-17:00 ends as Ryan's row ends)"
+  },
+  {
+   "row": "C931",
+   "screen": "walk_mom_bills.late",
+   "line": "You know they'll still be on the table tonight.",
+   "cause": "",
+   "verdict": "PASS",
+   "why": "windows read end-exclusive and wrap as the rows do (23:00-01:00; 12:00-17:00 ends as Ryan's row ends)"
+  },
+  {
+   "row": "C931",
+   "screen": "walk_mom_bills.sit",
+   "line": "Rent's due Sunday. She hasn't said how much is missing.",
+   "cause": "",
+   "verdict": "PASS",
+   "why": "windows read end-exclusive and wrap as the rows do (23:00-01:00; 12:00-17:00 ends as Ryan's row ends)"
+  },
+  {
+   "row": "C931",
+   "screen": "walk_parents.away",
+   "line": "Their door's never quite shut. You know that now.",
+   "cause": "",
+   "verdict": "PASS",
+   "why": "windows read end-exclusive and wrap as the rows do (23:00-01:00; 12:00-17:00 ends as Ryan's row ends)"
+  },
+  {
+   "row": "C931",
+   "screen": "walk_parents.watch",
+   "line": "At breakfast you won't be able to look at either of them.",
+   "cause": "",
+   "verdict": "PASS",
+   "why": "windows read end-exclusive and wrap as the rows do (23:00-01:00; 12:00-17:00 ends as Ryan's row ends)"
+  },
+  {
+   "row": "C931",
+   "screen": "walk_ryan_game.notnow",
+   "line": "The second controller stays on the cushion beside him.",
+   "cause": "",
+   "verdict": "PASS",
+   "why": "windows read end-exclusive and wrap as the rows do (23:00-01:00; 12:00-17:00 ends as Ryan's row ends)"
+  },
+  {
+   "row": "C931",
+   "screen": "walk_ryan_game.play",
+   "line": "You lose, then you win, and he throws a cushion at you like it's an insult. \"Again. Best of three.\"",
+   "cause": "",
+   "verdict": "PASS",
+   "why": "windows read end-exclusive and wrap as the rows do (23:00-01:00; 12:00-17:00 ends as Ryan's row ends)"
+  },
+  {
+   "row": "C931",
+   "screen": "walk_ryan_phone.away",
+   "line": "When you look back, his door's still open a crack.",
+   "cause": "",
+   "verdict": "PASS",
+   "why": "windows read end-exclusive and wrap as the rows do (23:00-01:00; 12:00-17:00 ends as Ryan's row ends)"
+  },
+  {
+   "row": "C931",
+   "screen": "walk_ryan_phone.watch",
+   "line": "Breakfast is going to be hard.",
+   "cause": "",
+   "verdict": "PASS",
+   "why": "windows read end-exclusive and wrap as the rows do (23:00-01:00; 12:00-17:00 ends as Ryan's row ends)"
+  },
+  {
+   "row": "C931",
+   "screen": "walk_ryan_shower.cover",
+   "line": "At breakfast he won't look at you. You don't know yet if that's worse.",
+   "cause": "",
+   "verdict": "PASS",
+   "why": "windows read end-exclusive and wrap as the rows do (23:00-01:00; 12:00-17:00 ends as Ryan's row ends)"
+  },
+  {
+   "row": "C931",
+   "screen": "walk_ryan_shower.keep",
+   "line": "You turn your back to the door and keep washing, like nothing happened. Your hands aren't steady.",
+   "cause": "",
+   "verdict": "PASS",
+   "why": "windows read end-exclusive and wrap as the rows do (23:00-01:00; 12:00-17:00 ends as Ryan's row ends)"
+  },
+  {
+   "row": "L106",
+   "screen": "walk_mark_phone.listen",
+   "line": "He hangs up and sits there a long time, not watching the TV. / Friday. Whatever it is, it's due Friday.",
+   "cause": "",
+   "verdict": "PASS",
+   "why": "Mark stays in his chair till 23:00; TV is in the room (home_tv); Friday line as he said it"
+  },
+  {
+   "row": "L106",
+   "screen": "walk_mark_phone.moment",
+   "line": "Mark's in his chair, phone to his ear... \"I'll have the money Friday. I said Friday.\" / (met_vance) \"I'll have it Friday. I said Friday, Vance.\"",
+   "cause": "",
+   "verdict": "PASS",
+   "why": "Mon-Fri 16:30-17:00, Mark 'in his chair' from 16:30; Vance named only behind met_vance; 'Friday' still true at Friday 16:59"
+  },
+  {
+   "row": "L106",
+   "screen": "walk_mark_phone.walkin",
+   "line": "He hears you and looks up, and his face shuts like a door. ... Whatever he owes, he's not telling you.",
+   "cause": "",
+   "verdict": "PASS",
+   "why": "Mark there; 'owes' is her read of the call, true for both variants"
+  },
+  {
+   "row": "L106",
+   "screen": "walk_mom_bills.late",
+   "line": "You know they'll still be on the table tonight.",
+   "cause": "",
+   "verdict": "PASS",
+   "why": "bills on the table tonight is texture/her expectation; Laura stays in the kitchen till 19:00"
+  },
+  {
+   "row": "L106",
+   "screen": "walk_mom_bills.moment",
+   "line": "Mom's at the kitchen table with the bills spread in front of her... \"Oh. Baby. Don't look at these.\"",
+   "cause": "",
+   "verdict": "PASS",
+   "why": "Mon-Fri 17:00-18:00, Laura kitchen 17-19; Mark in the living room, Ryan out till 18; no one else claimed"
+  },
+  {
+   "row": "L106",
+   "screen": "walk_mom_bills.sit",
+   "line": "Rent's due Sunday. She hasn't said how much is missing.",
+   "cause": "",
+   "verdict": "PASS",
+   "why": "rent is Sunday (P11, PLAN), true on every weekday the scene can show; the family's shortfall is the plan's hold"
+  },
+  {
+   "row": "L106",
+   "screen": "walk_parents.away",
+   "line": "Their door's never quite shut. You know that now.",
+   "cause": "",
+   "verdict": "PASS",
+   "why": "no fact beyond the hall and her door; exit Your Bedroom matches 'all the way to your door'"
+  },
+  {
+   "row": "L106",
+   "screen": "walk_parents.moment",
+   "line": "Their door hasn't caught. Through the gap: Mom on her back... Your face burns.",
+   "cause": "",
+   "verdict": "PASS",
+   "why": "trigger Mon-Fri 23:00-01:00 gated on both in home_master_bedroom; both rows 'in bed' 23:00-01:00 every day; Ryan in his room, so 'The kids' holds"
+  },
+  {
+   "row": "L106",
+   "screen": "walk_parents.watch",
+   "line": "At breakfast you won't be able to look at either of them.",
+   "cause": "",
+   "verdict": "PASS",
+   "why": "next breakfast has both: weekdays Laura kitchen 07-08, Mark 07-07:30; Sat (after a Fri night) Laura 08-12, Mark 08-10; exit Your Bedroom matches 'back in your room'"
+  },
+  {
+   "row": "L106",
+   "screen": "walk_ryan_game.moment",
+   "line": "Ryan's on the couch with a controller, losing loudly.",
+   "cause": "",
+   "verdict": "PASS",
+   "why": "Sat/Sun 12:00-17:00, Ryan 'on the couch' 12-17; Mark in his chair too, not contradicted; Laura out"
+  },
+  {
+   "row": "L106",
+   "screen": "walk_ryan_game.notnow",
+   "line": "The second controller stays on the cushion beside him.",
+   "cause": "",
+   "verdict": "PASS",
+   "why": "Ryan still on the couch; texture only"
+  },
+  {
+   "row": "L106",
+   "screen": "walk_ryan_game.play",
+   "line": "You lose, then you win, and he throws a cushion at you like it's an insult. \"Again. Best of three.\"",
+   "cause": "",
+   "verdict": "PASS",
+   "why": "no time, day or presence claim beyond Ryan on the couch; 'Best of three' is dialogue"
+  },
+  {
+   "row": "L106",
+   "screen": "walk_ryan_phone.away",
+   "line": "When you look back, his door's still open a crack.",
+   "cause": "",
+   "verdict": "PASS",
+   "why": "door and floorboard only; exit stays in the hall, where she is"
+  },
+  {
+   "row": "L106",
+   "screen": "walk_ryan_phone.moment",
+   "line": "He's on his bed in his phone's light, shorts round his thighs, stroking his cock, eyes on the screen. Your face goes hot.",
+   "cause": "",
+   "verdict": "PASS",
+   "why": "trigger Mon-Fri 23:00-01:00 + Ryan in home_ryans_room; his rows read 'on his phone' 23:00-01:00 (Mon 00-01 too), so the act shows what he was doing (L97)"
+  },
+  {
+   "row": "L106",
+   "screen": "walk_ryan_phone.watch",
+   "line": "Breakfast is going to be hard.",
+   "cause": "",
+   "verdict": "PASS",
+   "why": "no claim the rows or flags contradict"
+  },
+  {
+   "row": "L106",
+   "screen": "walk_ryan_shower.cover",
+   "line": "At breakfast he won't look at you. You don't know yet if that's worse.",
+   "cause": "P38r2-c1",
+   "verdict": "FAIL",
+   "why": "Ryan has no breakfast row (his room 07:45-12:00) and the scene runs to 08:30, after Mom's breakfast ends at 08:00: the line puts him at a breakfast that never happens"
+  },
+  {
+   "row": "L106",
+   "screen": "walk_ryan_shower.keep",
+   "line": "You turn your back to the door and keep washing, like nothing happened. Your hands aren't steady.",
+   "cause": "",
+   "verdict": "PASS",
+   "why": "she is in the shower she started; no claim about others"
+  },
+  {
+   "row": "L106",
+   "screen": "walk_ryan_shower.moment",
+   "line": "Then he sees you through the wet glass, all of you, soap running down your tits, and freezes. [image body/ryan_shower_t4, pool 4]",
+   "cause": "",
+   "verdict": "PASS",
+   "why": "Mon-Fri 07:45-08:30, Ryan back in his room after his 07:25-07:45 shower row; towel and razor are his own business (L97)"
+  },
+  {
+   "row": "L167",
+   "screen": "walk_mark_phone.listen",
+   "line": "He hangs up and sits there a long time, not watching the TV. / Friday. Whatever it is, it's due Friday.",
+   "cause": "",
+   "verdict": "PASS",
+   "why": "one window per canvas; no per-day-kind duplicate rows, and as a walk-in it stays hidden when shut (C916)"
+  },
+  {
+   "row": "L167",
+   "screen": "walk_mark_phone.walkin",
+   "line": "He hears you and looks up, and his face shuts like a door. ... Whatever he owes, he's not telling you.",
+   "cause": "",
+   "verdict": "PASS",
+   "why": "one window per canvas; no per-day-kind duplicate rows, and as a walk-in it stays hidden when shut (C916)"
+  },
+  {
+   "row": "L167",
+   "screen": "walk_mom_bills.late",
+   "line": "You know they'll still be on the table tonight.",
+   "cause": "",
+   "verdict": "PASS",
+   "why": "one window per canvas; no per-day-kind duplicate rows, and as a walk-in it stays hidden when shut (C916)"
+  },
+  {
+   "row": "L167",
+   "screen": "walk_mom_bills.sit",
+   "line": "Rent's due Sunday. She hasn't said how much is missing.",
+   "cause": "",
+   "verdict": "PASS",
+   "why": "one window per canvas; no per-day-kind duplicate rows, and as a walk-in it stays hidden when shut (C916)"
+  },
+  {
+   "row": "L167",
+   "screen": "walk_parents.away",
+   "line": "Their door's never quite shut. You know that now.",
+   "cause": "",
+   "verdict": "PASS",
+   "why": "one window per canvas; no per-day-kind duplicate rows, and as a walk-in it stays hidden when shut (C916)"
+  },
+  {
+   "row": "L167",
+   "screen": "walk_parents.watch",
+   "line": "At breakfast you won't be able to look at either of them.",
+   "cause": "",
+   "verdict": "PASS",
+   "why": "one window per canvas; no per-day-kind duplicate rows, and as a walk-in it stays hidden when shut (C916)"
+  },
+  {
+   "row": "L167",
+   "screen": "walk_ryan_game.notnow",
+   "line": "The second controller stays on the cushion beside him.",
+   "cause": "",
+   "verdict": "PASS",
+   "why": "one window per canvas; no per-day-kind duplicate rows, and as a walk-in it stays hidden when shut (C916)"
+  },
+  {
+   "row": "L167",
+   "screen": "walk_ryan_game.play",
+   "line": "You lose, then you win, and he throws a cushion at you like it's an insult. \"Again. Best of three.\"",
+   "cause": "",
+   "verdict": "PASS",
+   "why": "one window per canvas; no per-day-kind duplicate rows, and as a walk-in it stays hidden when shut (C916)"
+  },
+  {
+   "row": "L167",
+   "screen": "walk_ryan_phone.away",
+   "line": "When you look back, his door's still open a crack.",
+   "cause": "",
+   "verdict": "PASS",
+   "why": "one window per canvas; no per-day-kind duplicate rows, and as a walk-in it stays hidden when shut (C916)"
+  },
+  {
+   "row": "L167",
+   "screen": "walk_ryan_phone.watch",
+   "line": "Breakfast is going to be hard.",
+   "cause": "",
+   "verdict": "PASS",
+   "why": "one window per canvas; no per-day-kind duplicate rows, and as a walk-in it stays hidden when shut (C916)"
+  },
+  {
+   "row": "L167",
+   "screen": "walk_ryan_shower.cover",
+   "line": "At breakfast he won't look at you. You don't know yet if that's worse.",
+   "cause": "",
+   "verdict": "PASS",
+   "why": "one window per canvas; no per-day-kind duplicate rows, and as a walk-in it stays hidden when shut (C916)"
+  },
+  {
+   "row": "L167",
+   "screen": "walk_ryan_shower.keep",
+   "line": "You turn your back to the door and keep washing, like nothing happened. Your hands aren't steady.",
+   "cause": "",
+   "verdict": "PASS",
+   "why": "one window per canvas; no per-day-kind duplicate rows, and as a walk-in it stays hidden when shut (C916)"
+  },
+  {
+   "row": "L71",
+   "screen": "walk_ryan_shower.keep",
+   "line": "You turn your back to the door and keep washing, like nothing happened. Your hands aren't steady.",
+   "cause": "",
+   "verdict": "PASS",
+   "why": "she carries on her own wash with her back to the door after he's gone; she doesn't let him look"
+  }
+ ],
+ "causes": [
+  {
+   "id": "P38r2-c1",
+   "what": "Ryan has no breakfast row (weekdays his room 07:45-12:00, weekends asleep till 10) and the shower walk-in can end after breakfast is over (08:00), so the breakfast lines with Ryan on walk_ryan_phone.watch and walk_ryan_shower.cover point at a meeting the game never has"
+  }
+ ]
+}

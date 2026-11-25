@@ -1,0 +1,29 @@
+{
+ "items": [
+  {
+   "row": "clock#1",
+   "screen": "near_cafe",
+   "why": "failed last pass"
+  },
+  {
+   "row": "clock#10",
+   "screen": "*",
+   "why": "never judged"
+  },
+  {
+   "row": "places#2",
+   "screen": "near_cafe",
+   "why": "failed last pass"
+  },
+  {
+   "row": "places#4",
+   "screen": "near_cafe",
+   "why": "failed last pass"
+  },
+  {
+   "row": "places#6",
+   "screen": "near_cafe",
+   "why": "failed last pass"
+  }
+ ]
+}

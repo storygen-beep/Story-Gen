@@ -1,0 +1,418 @@
+{
+ "verdicts": [
+  {
+   "row": "B10",
+   "screen": "walk_curtain.finish",
+   "verdict": "PASS",
+   "line": "You finish changing with your back to the curtain, fast. Next time you'll pull the curtain tighter.",
+   "why": "true at first and last minute and on a repeat visit: Nina present by trigger; the skirt is the one shop_try_on names on every visit"
+  },
+  {
+   "row": "B10",
+   "screen": "walk_nina_dress.browse",
+   "verdict": "PASS",
+   "line": "She says it with a smile, and pulls the curtain. Next time she might not let you just browse.",
+   "why": "true at first and last minute and on a repeat visit: Nina's 'in the fitting room' row Mon-Sat 18:45-19:00 matches the 18:45-19:00 trigger; shop open till 19:00"
+  },
+  {
+   "row": "B10",
+   "screen": "walk_nina_dress.moment",
+   "verdict": "PASS",
+   "line": "Nina's in the shop's tightest black dress, turning to check her ass in the mirror.",
+   "why": "true at first and last minute and on a repeat visit: Nina's 'in the fitting room' row Mon-Sat 18:45-19:00 matches the 18:45-19:00 trigger; shop open till 19:00"
+  },
+  {
+   "row": "B10",
+   "screen": "walk_nina_dress.suits",
+   "verdict": "PASS",
+   "line": "I know. Your turn next, sweetie.",
+   "why": "true at first and last minute and on a repeat visit: Nina's 'in the fitting room' row Mon-Sat 18:45-19:00 matches the 18:45-19:00 trigger; shop open till 19:00"
+  },
+  {
+   "row": "B10",
+   "screen": "walk_park_couple.away",
+   "verdict": "PASS",
+   "line": "You back onto the path before a twig can snap. You know that gap's there now.",
+   "why": "true at first and last minute and on a repeat visit: strangers only; window 19:00-21:00 inside park hours 06-21"
+  },
+  {
+   "row": "B10",
+   "screen": "walk_park_couple.moment",
+   "verdict": "PASS",
+   "line": "a man and a woman on the grass, her skirt up, her tits out, his jeans round his knees",
+   "why": "true at first and last minute and on a repeat visit: strangers only; window 19:00-21:00 inside park hours 06-21"
+  },
+  {
+   "row": "B10",
+   "screen": "walk_park_couple.watch",
+   "verdict": "PASS",
+   "line": "Your thighs clench. You know which gap in the bushes now.",
+   "why": "true at first and last minute and on a repeat visit: strangers only; window 19:00-21:00 inside park hours 06-21"
+  },
+  {
+   "row": "B3",
+   "screen": "walk_curtain.finish",
+   "verdict": "PASS",
+   "line": "Next time you'll pull the curtain tighter.",
+   "why": "ends pointing at her next try-on, like the 'Pull it shut' answer"
+  },
+  {
+   "row": "B8",
+   "screen": "walk_curtain.finish",
+   "verdict": "PASS",
+   "line": "You finish changing with your back to the curtain, fast. Next time you'll pull the curtain tighter.",
+   "why": "no number on the screen; every garment named is another person's (or the try-on skirt and a grouped underwear line), none of hers unbacked"
+  },
+  {
+   "row": "B8",
+   "screen": "walk_nina_dress.browse",
+   "verdict": "PASS",
+   "line": "She says it with a smile, and pulls the curtain. Next time she might not let you just browse.",
+   "why": "no number on the screen; every garment named is another person's (or the try-on skirt and a grouped underwear line), none of hers unbacked"
+  },
+  {
+   "row": "B8",
+   "screen": "walk_nina_dress.moment",
+   "verdict": "PASS",
+   "line": "Nina's in the shop's tightest black dress, turning to check her ass in the mirror.",
+   "why": "no number on the screen; every garment named is another person's (or the try-on skirt and a grouped underwear line), none of hers unbacked"
+  },
+  {
+   "row": "B8",
+   "screen": "walk_nina_dress.suits",
+   "verdict": "PASS",
+   "line": "I know. Your turn next, sweetie.",
+   "why": "no number on the screen; every garment named is another person's (or the try-on skirt and a grouped underwear line), none of hers unbacked"
+  },
+  {
+   "row": "B8",
+   "screen": "walk_park_couple.away",
+   "verdict": "PASS",
+   "line": "You back onto the path before a twig can snap. You know that gap's there now.",
+   "why": "no number on the screen; every garment named is another person's (or the try-on skirt and a grouped underwear line), none of hers unbacked"
+  },
+  {
+   "row": "B8",
+   "screen": "walk_park_couple.moment",
+   "verdict": "PASS",
+   "line": "a man and a woman on the grass, her skirt up, her tits out, his jeans round his knees",
+   "why": "no number on the screen; every garment named is another person's (or the try-on skirt and a grouped underwear line), none of hers unbacked"
+  },
+  {
+   "row": "B8",
+   "screen": "walk_park_couple.watch",
+   "verdict": "PASS",
+   "line": "Your thighs clench. You know which gap in the bushes now.",
+   "why": "no number on the screen; every garment named is another person's (or the try-on skirt and a grouped underwear line), none of hers unbacked"
+  },
+  {
+   "row": "C1158",
+   "screen": "walk_nina_dress.moment",
+   "verdict": "PASS",
+   "line": "Nina's in the shop's tightest black dress, turning to check her ass in the mirror.",
+   "why": "the only garments named belong to the people she watches; her own body lines name no garment"
+  },
+  {
+   "row": "C1158",
+   "screen": "walk_park_couple.moment",
+   "verdict": "PASS",
+   "line": "a man and a woman on the grass, her skirt up, her tits out, his jeans round his knees",
+   "why": "the only garments named belong to the people she watches; her own body lines name no garment"
+  },
+  {
+   "row": "C1158",
+   "screen": "walk_park_couple.watch",
+   "verdict": "PASS",
+   "line": "Your thighs clench. You know which gap in the bushes now.",
+   "why": "the only garments named belong to the people she watches; her own body lines name no garment"
+  },
+  {
+   "row": "C1206",
+   "screen": "walk_nina_dress.moment",
+   "verdict": "PASS",
+   "line": "Nina's in the shop's tightest black dress, turning to check her ass in the mirror.",
+   "why": "the only garments named belong to the people she watches; her own body lines name no garment"
+  },
+  {
+   "row": "C1206",
+   "screen": "walk_park_couple.moment",
+   "verdict": "PASS",
+   "line": "a man and a woman on the grass, her skirt up, her tits out, his jeans round his knees",
+   "why": "the only garments named belong to the people she watches; her own body lines name no garment"
+  },
+  {
+   "row": "C1206",
+   "screen": "walk_park_couple.watch",
+   "verdict": "PASS",
+   "line": "Your thighs clench. You know which gap in the bushes now.",
+   "why": "the only garments named belong to the people she watches; her own body lines name no garment"
+  },
+  {
+   "row": "C149",
+   "screen": "walk_curtain.finish",
+   "verdict": "PASS",
+   "line": "Next time you'll pull the curtain tighter.",
+   "why": "ends pointing at her next try-on, like the 'Pull it shut' answer"
+  },
+  {
+   "row": "C450",
+   "screen": "walk_curtain.finish",
+   "verdict": "PASS",
+   "line": "Next time you'll pull the curtain tighter.",
+   "why": "ends pointing at her next try-on, like the 'Pull it shut' answer"
+  },
+  {
+   "row": "C460",
+   "screen": "walk_curtain.finish",
+   "verdict": "PASS",
+   "line": "You finish changing with your back to the curtain, fast. Next time you'll pull the curtain tighter.",
+   "why": "true at first and last minute and on a repeat visit: Nina present by trigger; the skirt is the one shop_try_on names on every visit"
+  },
+  {
+   "row": "C460",
+   "screen": "walk_nina_dress.browse",
+   "verdict": "PASS",
+   "line": "She says it with a smile, and pulls the curtain. Next time she might not let you just browse.",
+   "why": "true at first and last minute and on a repeat visit: Nina's 'in the fitting room' row Mon-Sat 18:45-19:00 matches the 18:45-19:00 trigger; shop open till 19:00"
+  },
+  {
+   "row": "C460",
+   "screen": "walk_nina_dress.moment",
+   "verdict": "PASS",
+   "line": "Nina's in the shop's tightest black dress, turning to check her ass in the mirror.",
+   "why": "true at first and last minute and on a repeat visit: Nina's 'in the fitting room' row Mon-Sat 18:45-19:00 matches the 18:45-19:00 trigger; shop open till 19:00"
+  },
+  {
+   "row": "C460",
+   "screen": "walk_nina_dress.suits",
+   "verdict": "PASS",
+   "line": "I know. Your turn next, sweetie.",
+   "why": "true at first and last minute and on a repeat visit: Nina's 'in the fitting room' row Mon-Sat 18:45-19:00 matches the 18:45-19:00 trigger; shop open till 19:00"
+  },
+  {
+   "row": "C460",
+   "screen": "walk_park_couple.away",
+   "verdict": "PASS",
+   "line": "You back onto the path before a twig can snap. You know that gap's there now.",
+   "why": "true at first and last minute and on a repeat visit: strangers only; window 19:00-21:00 inside park hours 06-21"
+  },
+  {
+   "row": "C460",
+   "screen": "walk_park_couple.moment",
+   "verdict": "PASS",
+   "line": "a man and a woman on the grass, her skirt up, her tits out, his jeans round his knees",
+   "why": "true at first and last minute and on a repeat visit: strangers only; window 19:00-21:00 inside park hours 06-21"
+  },
+  {
+   "row": "C460",
+   "screen": "walk_park_couple.watch",
+   "verdict": "PASS",
+   "line": "Your thighs clench. You know which gap in the bushes now.",
+   "why": "true at first and last minute and on a repeat visit: strangers only; window 19:00-21:00 inside park hours 06-21"
+  },
+  {
+   "row": "C461",
+   "screen": "walk_curtain.finish",
+   "verdict": "PASS",
+   "line": "You finish changing with your back to the curtain, fast. Next time you'll pull the curtain tighter.",
+   "why": "texture and her reactions only; dialogue fits the cast entries (Tom runs the café, Nina owns the shop, Zoe 19, Sam 22)"
+  },
+  {
+   "row": "C461",
+   "screen": "walk_nina_dress.browse",
+   "verdict": "PASS",
+   "line": "She says it with a smile, and pulls the curtain. Next time she might not let you just browse.",
+   "why": "texture and her reactions only; dialogue fits the cast entries (Tom runs the café, Nina owns the shop, Zoe 19, Sam 22)"
+  },
+  {
+   "row": "C461",
+   "screen": "walk_nina_dress.moment",
+   "verdict": "PASS",
+   "line": "Nina's in the shop's tightest black dress, turning to check her ass in the mirror.",
+   "why": "texture and her reactions only; dialogue fits the cast entries (Tom runs the café, Nina owns the shop, Zoe 19, Sam 22)"
+  },
+  {
+   "row": "C461",
+   "screen": "walk_nina_dress.suits",
+   "verdict": "PASS",
+   "line": "I know. Your turn next, sweetie.",
+   "why": "texture and her reactions only; dialogue fits the cast entries (Tom runs the café, Nina owns the shop, Zoe 19, Sam 22)"
+  },
+  {
+   "row": "C461",
+   "screen": "walk_park_couple.away",
+   "verdict": "PASS",
+   "line": "You back onto the path before a twig can snap. You know that gap's there now.",
+   "why": "texture and her reactions only; dialogue fits the cast entries (Tom runs the café, Nina owns the shop, Zoe 19, Sam 22)"
+  },
+  {
+   "row": "C461",
+   "screen": "walk_park_couple.moment",
+   "verdict": "PASS",
+   "line": "a man and a woman on the grass, her skirt up, her tits out, his jeans round his knees",
+   "why": "texture and her reactions only; dialogue fits the cast entries (Tom runs the café, Nina owns the shop, Zoe 19, Sam 22)"
+  },
+  {
+   "row": "C461",
+   "screen": "walk_park_couple.watch",
+   "verdict": "PASS",
+   "line": "Your thighs clench. You know which gap in the bushes now.",
+   "why": "texture and her reactions only; dialogue fits the cast entries (Tom runs the café, Nina owns the shop, Zoe 19, Sam 22)"
+  },
+  {
+   "row": "C927",
+   "screen": "walk_curtain.finish",
+   "verdict": "PASS",
+   "line": "You finish changing with your back to the curtain, fast. Next time you'll pull the curtain tighter.",
+   "why": "every exit states its minutes: the choices 0, Done 5"
+  },
+  {
+   "row": "C927",
+   "screen": "walk_nina_dress.browse",
+   "verdict": "PASS",
+   "line": "She says it with a smile, and pulls the curtain. Next time she might not let you just browse.",
+   "why": "every exit states its minutes: the choices 0, Done 5"
+  },
+  {
+   "row": "C927",
+   "screen": "walk_nina_dress.suits",
+   "verdict": "PASS",
+   "line": "I know. Your turn next, sweetie.",
+   "why": "every exit states its minutes: the choices 0, Done 5"
+  },
+  {
+   "row": "C927",
+   "screen": "walk_park_couple.away",
+   "verdict": "PASS",
+   "line": "You back onto the path before a twig can snap. You know that gap's there now.",
+   "why": "every exit states its minutes: the choices 0, Done 5"
+  },
+  {
+   "row": "C927",
+   "screen": "walk_park_couple.watch",
+   "verdict": "PASS",
+   "line": "Your thighs clench. You know which gap in the bushes now.",
+   "why": "every exit states its minutes: the choices 0, Done 5"
+  },
+  {
+   "row": "C931",
+   "screen": "walk_curtain.finish",
+   "verdict": "PASS",
+   "line": "You finish changing with your back to the curtain, fast. Next time you'll pull the curtain tighter.",
+   "why": "the window ends exclusive and the answer screen costs 0 minutes, so its lines show inside the window"
+  },
+  {
+   "row": "C931",
+   "screen": "walk_nina_dress.browse",
+   "verdict": "PASS",
+   "line": "She says it with a smile, and pulls the curtain. Next time she might not let you just browse.",
+   "why": "the window ends exclusive and the answer screen costs 0 minutes, so its lines show inside the window"
+  },
+  {
+   "row": "C931",
+   "screen": "walk_nina_dress.suits",
+   "verdict": "PASS",
+   "line": "I know. Your turn next, sweetie.",
+   "why": "the window ends exclusive and the answer screen costs 0 minutes, so its lines show inside the window"
+  },
+  {
+   "row": "C931",
+   "screen": "walk_park_couple.away",
+   "verdict": "PASS",
+   "line": "You back onto the path before a twig can snap. You know that gap's there now.",
+   "why": "the window ends exclusive and the answer screen costs 0 minutes, so its lines show inside the window"
+  },
+  {
+   "row": "C931",
+   "screen": "walk_park_couple.watch",
+   "verdict": "PASS",
+   "line": "Your thighs clench. You know which gap in the bushes now.",
+   "why": "the window ends exclusive and the answer screen costs 0 minutes, so its lines show inside the window"
+  },
+  {
+   "row": "L106",
+   "screen": "walk_curtain.finish",
+   "verdict": "PASS",
+   "line": "You finish changing with your back to the curtain, fast. Next time you'll pull the curtain tighter.",
+   "why": "every named person is where their rows put them: Nina present by trigger; the skirt is the one shop_try_on names on every visit"
+  },
+  {
+   "row": "L106",
+   "screen": "walk_nina_dress.browse",
+   "verdict": "PASS",
+   "line": "She says it with a smile, and pulls the curtain. Next time she might not let you just browse.",
+   "why": "every named person is where their rows put them: Nina's 'in the fitting room' row Mon-Sat 18:45-19:00 matches the 18:45-19:00 trigger; shop open till 19:00"
+  },
+  {
+   "row": "L106",
+   "screen": "walk_nina_dress.moment",
+   "verdict": "PASS",
+   "line": "Nina's in the shop's tightest black dress, turning to check her ass in the mirror.",
+   "why": "every named person is where their rows put them: Nina's 'in the fitting room' row Mon-Sat 18:45-19:00 matches the 18:45-19:00 trigger; shop open till 19:00"
+  },
+  {
+   "row": "L106",
+   "screen": "walk_nina_dress.suits",
+   "verdict": "PASS",
+   "line": "I know. Your turn next, sweetie.",
+   "why": "every named person is where their rows put them: Nina's 'in the fitting room' row Mon-Sat 18:45-19:00 matches the 18:45-19:00 trigger; shop open till 19:00"
+  },
+  {
+   "row": "L106",
+   "screen": "walk_park_couple.away",
+   "verdict": "PASS",
+   "line": "You back onto the path before a twig can snap. You know that gap's there now.",
+   "why": "every named person is where their rows put them: strangers only; window 19:00-21:00 inside park hours 06-21"
+  },
+  {
+   "row": "L106",
+   "screen": "walk_park_couple.moment",
+   "verdict": "PASS",
+   "line": "a man and a woman on the grass, her skirt up, her tits out, his jeans round his knees",
+   "why": "every named person is where their rows put them: strangers only; window 19:00-21:00 inside park hours 06-21"
+  },
+  {
+   "row": "L106",
+   "screen": "walk_park_couple.watch",
+   "verdict": "PASS",
+   "line": "Your thighs clench. You know which gap in the bushes now.",
+   "why": "every named person is where their rows put them: strangers only; window 19:00-21:00 inside park hours 06-21"
+  },
+  {
+   "row": "L167",
+   "screen": "walk_curtain.finish",
+   "verdict": "PASS",
+   "line": "You finish changing with your back to the curtain, fast. Next time you'll pull the curtain tighter.",
+   "why": "one canvas per scene; days that differ are one trigger with a group (or the same hours every open day); a walk-in hides out of its window by design (walk-ins.md, no 'nothing happens')"
+  },
+  {
+   "row": "L167",
+   "screen": "walk_nina_dress.browse",
+   "verdict": "PASS",
+   "line": "She says it with a smile, and pulls the curtain. Next time she might not let you just browse.",
+   "why": "one canvas per scene; days that differ are one trigger with a group (or the same hours every open day); a walk-in hides out of its window by design (walk-ins.md, no 'nothing happens')"
+  },
+  {
+   "row": "L167",
+   "screen": "walk_nina_dress.suits",
+   "verdict": "PASS",
+   "line": "I know. Your turn next, sweetie.",
+   "why": "one canvas per scene; days that differ are one trigger with a group (or the same hours every open day); a walk-in hides out of its window by design (walk-ins.md, no 'nothing happens')"
+  },
+  {
+   "row": "L167",
+   "screen": "walk_park_couple.away",
+   "verdict": "PASS",
+   "line": "You back onto the path before a twig can snap. You know that gap's there now.",
+   "why": "one canvas per scene; days that differ are one trigger with a group (or the same hours every open day); a walk-in hides out of its window by design (walk-ins.md, no 'nothing happens')"
+  },
+  {
+   "row": "L167",
+   "screen": "walk_park_couple.watch",
+   "verdict": "PASS",
+   "line": "Your thighs clench. You know which gap in the bushes now.",
+   "why": "one canvas per scene; days that differ are one trigger with a group (or the same hours every open day); a walk-in hides out of its window by design (walk-ins.md, no 'nothing happens')"
+  }
+ ],
+ "causes": []
+}

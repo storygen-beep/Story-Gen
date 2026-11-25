@@ -1,0 +1,89 @@
+{
+ "verdicts": [
+  {
+   "row": "B10",
+   "screen": "opening.ask_mom",
+   "verdict": "PASS",
+   "line": "Mom: \"Doesn't matter, baby. Eat something. You'll be late. Go on.\"",
+   "why": "One-time screen at 07:50 (sit) / 07:40 (ask) Monday; Mom is in the kitchen (07-08), Mark gone (row ends 07:30), the toast was offered on the hand-over; the Quests button exists."
+  },
+  {
+   "row": "B10",
+   "screen": "opening.sit_with_mom",
+   "verdict": "PASS",
+   "line": "Mom: \"If Mark says anything to you about the money, you tell me first. Okay? Promise me.\"",
+   "why": "One-time screen at 07:50 (sit) / 07:40 (ask) Monday; Mom is in the kitchen (07-08), Mark gone (row ends 07:30), the toast was offered on the hand-over; the Quests button exists."
+  },
+  {
+   "row": "B8",
+   "screen": "opening.ask_mom",
+   "verdict": "PASS",
+   "line": "Mom: \"Doesn't matter, baby. Eat something. You'll be late. Go on.\"",
+   "why": "No garment and no number on the screen."
+  },
+  {
+   "row": "B8",
+   "screen": "opening.sit_with_mom",
+   "verdict": "PASS",
+   "line": "Mom: \"If Mark says anything to you about the money, you tell me first. Okay? Promise me.\"",
+   "why": "No garment and no number on the screen."
+  },
+  {
+   "row": "C1631",
+   "screen": "opening.ask_mom",
+   "verdict": "PASS",
+   "line": "Mom: \"Doesn't matter, baby. Eat something. You'll be late. Go on.\"",
+   "why": "Done lands in home_kitchen at about 07:50/07:40 (start 07:00 + 50/40 min); Laura's kitchen row runs to 08:00, so her face and Talk are live."
+  },
+  {
+   "row": "C1631",
+   "screen": "opening.sit_with_mom",
+   "verdict": "PASS",
+   "line": "Mom: \"If Mark says anything to you about the money, you tell me first. Okay? Promise me.\"",
+   "why": "Done lands in home_kitchen at about 07:50/07:40 (start 07:00 + 50/40 min); Laura's kitchen row runs to 08:00, so her face and Talk are live."
+  },
+  {
+   "row": "C460",
+   "screen": "opening.ask_mom",
+   "verdict": "PASS",
+   "line": "Mom: \"Doesn't matter, baby. Eat something. You'll be late. Go on.\"",
+   "why": "Every claim holds on every path in: the toast from the hand-over, Mom at the counter, Mark not there; 'You'll be late' is her opinion at 07:40 with classes at 9."
+  },
+  {
+   "row": "C460",
+   "screen": "opening.sit_with_mom",
+   "verdict": "PASS",
+   "line": "Mom: \"If Mark says anything to you about the money, you tell me first. Okay? Promise me.\"",
+   "why": "Every claim holds on every path in: the toast from the hand-over, Mom at the counter, Mark not there; 'You'll be late' is her opinion at 07:40 with classes at 9."
+  },
+  {
+   "row": "C461",
+   "screen": "opening.ask_mom",
+   "verdict": "PASS",
+   "line": "Mom: \"Doesn't matter, baby. Eat something. You'll be late. Go on.\"",
+   "why": "Texture and Mom's dialogue fit her plan entry (anxious, deflecting about Mark)."
+  },
+  {
+   "row": "C461",
+   "screen": "opening.sit_with_mom",
+   "verdict": "PASS",
+   "line": "Mom: \"If Mark says anything to you about the money, you tell me first. Okay? Promise me.\"",
+   "why": "Texture and Mom's dialogue fit her plan entry (anxious, deflecting about Mark)."
+  },
+  {
+   "row": "L106",
+   "screen": "opening.ask_mom",
+   "verdict": "PASS",
+   "line": "Mom: \"Doesn't matter, baby. Eat something. You'll be late. Go on.\"",
+   "why": "Names only Mom as present (Laura home_kitchen 07-08); Mark is only in her dialogue."
+  },
+  {
+   "row": "L106",
+   "screen": "opening.sit_with_mom",
+   "verdict": "PASS",
+   "line": "Mom: \"If Mark says anything to you about the money, you tell me first. Okay? Promise me.\"",
+   "why": "Names only Mom as present (Laura home_kitchen 07-08); Mark is only in her dialogue."
+  }
+ ],
+ "causes": []
+}

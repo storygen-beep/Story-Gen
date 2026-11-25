@@ -77,8 +77,8 @@ makes it risky.
 |---|---|---|
 | Home | the hall (hub, and the way out to her street; anything at the front door plays here) · kitchen · living room · shared bathroom · her bedroom (her old key locks it) · Ryan's room · the master bedroom (Laura and Mark's) | anchor |
 | Neighbourhood | her street (passes through only) · Mr. Vance's house and porch, next door · the corner shop · the clothes shop (10am–7pm, closed Sundays) · the park (walk, rest, run; not her way to campus) · the gym | satellite |
-| Campus | the quad (hub) · the lecture hall · the library · the cafeteria · the professors' offices (a corridor; Dr. Hale's is one door) · the dean's office (later) · a women's bathroom off the lecture-hall corridor · the theatre (drama studio) | satellite |
-| Near campus | the café · Zoe's apartment | satellite |
+| Campus | the quad (hub) · the lecture hall · the library · the cafeteria · the professors' offices (a corridor; Dr. Hale's is one door) · the dean's office (P47: his door on the corridor, his first-day scene in release 1) · a women's bathroom off the lecture-hall corridor · the theatre (drama studio) | satellite |
+| Town (P45, LO 2026-11-25: "New Town hub") | the high street (hub; the bus stop, the campus gates, 5 minutes to the quad) · the café · Zoe's apartment | satellite |
 
 - Every place says in its own text what it is and what she can do there.
 - A room's menu holds only needs, systems and people.
@@ -86,8 +86,8 @@ makes it risky.
 - Every one of these exists in release 1, shallow.
 
 Decided:
-- Getting to campus, both ways: bus $2 and 20 minutes; walk 45 minutes and some energy (placeholder
-  numbers). Engine: a place's `entry_costs` take `time` plus any trait (`v2.py:6200-6203`).
+- Getting to town, both ways (P45; was "to campus"): bus $2 and 20 minutes; walk 45 minutes, 10 energy there and
+  none home (P04: she can always get home). Engine: a place's `entry_costs` take `time` plus any trait (`v2.py:6200-6203`).
 - Hours: lectures weekdays 9–1, library 8am–10pm, café 7am–9pm, shop 7am–11pm, park 6am–9pm, gym 6am–10pm.
 - Courses: Intro to Psychology (Dr. Hale), English Composition (Prof. Diane Walsh, 48, her advisor),
   Statistics (Mr. Owen Pratt, 44), Drama (Mr. Julian Cross, 38, basic in release 1). Dean Paul Sterling, 58.
@@ -140,7 +140,9 @@ both in release 2 (LO's pick A); Mark's friends later. The master bedroom gets L
 | the women's bathroom | none | Brooke at the mirror | girls at the mirror | the girls: her outfit, and they talk |
 | the theatre (drama studio) | Mr. Cross | Brooke, for the same part | the drama class | Cross: her under the lights |
 
-### Near campus
+### Town (was "Near campus", P45)
+
+| the high street (Town) | none: passes through, the bus stop, the campus gates | none | students and shoppers | none in release 1 |
 
 | place | face | other named people | crowd | who notices her, and what |
 |---|---|---|---|---|
@@ -459,7 +461,7 @@ house: weekday mornings 8–12 (Friday has no lectures).
 | Nadia | Lecture Hall Mon/Wed 9–11 · Cafeteria Mon/Wed 1–2 · Library weekdays 2–6 | 26 |
 | Ms. Ivy Holt | Library desk weekdays 8–4, Saturday 10–4 | 46 |
 | Rosa Diaz | Cafeteria counter weekdays 8–4 | 40 |
-| Dean Sterling | faculty corridor weekdays 9–5, behind his closed door | 0 (release 5) |
+| Dean Sterling | faculty corridor weekdays 8–5, behind his desk (P47, ENI for LO 2026-11-24: release 1 for his first-day scene only) | 0 |
 
 Her café hours (any hour, 8f) clash with classes, office hours, rehearsals and Nadia in the library: money
 or people, every weekday afternoon. Hale's later loop (his office after hours) must open 18+ hours a
@@ -504,7 +506,7 @@ walk-in is seen, not heard.
 | Laura at the kitchen table with the bills, crying quietly | she walks in on | Laura | yes | weekdays 5–6pm, Kitchen | once a day | Sit with her · Say you're late |
 | Mark on the phone to Vance: "I'll have it Friday." | she walks in on | Mark | yes | weekdays 4:30–5pm, Living Room | once a day | Listen from the hall · Walk in |
 | Ryan on the couch with a controller: "Want a go?" | she walks in on | Ryan | yes | weekends 12–5pm, Living Room | once a day | Play a round · Not now |
-| Ryan comes back for his razor while she showers; "Shit, sorry," and he backs out | walks in on her | Ryan | no | weekdays 7:30–8:30, on Shower, chance 0.25 | once a day | Cover up · Keep washing |
+| Ryan comes back for his razor while she showers; "Shit, sorry," and he backs out | walks in on her | Ryan | no | weekdays 7:45–8:30 (ENI for LO 2026-11-24, matches Ryan's 7:25–7:45 bathroom row), on Shower, chance 0.25 | once a day | Cover up · Keep washing |
 
 Count: 6 scenes, 3 everyday (half, C802); 6 of 6 name someone she knows (C678). Each housemate has
 at least one (C28). Release 1: a flag each, no meter. Ryan shows nothing about her (LO, relayed
@@ -518,7 +520,7 @@ at least one (C28). Release 1: a flag each, no meter. Ryan shows nothing about h
 | Vance on his porch with a ledger of envelopes, licking his thumb, counting | she walks in on | Vance | yes | weekdays 5–8pm, her street | once a day | Say hello · Walk past |
 | Danny selling something small out the shop's back door | she walks in on | Danny | yes | every day 9–11pm, Corner Shop | once a day | Pretend you didn't see · Ask what that was |
 | Marco "fixing" a woman's squat, hands on her hips longer than he needs | she walks in on | Marco | no | weekdays 5–9pm, Gym | once a day | Watch from the bench · Back to your workout |
-| Nina in the fitting room in the shop's tightest dress: "Don't tell my boss. I'm the boss." | she walks in on | Nina | yes | Mon–Sat 10am–7pm, Clothes Shop | once a day | Tell her it suits her · Just browse |
+| Nina in the fitting room in the shop's tightest dress: "Don't tell my boss. I'm the boss." | she walks in on | Nina | yes | Mon–Sat 6:45–7pm (ENI for LO 2026-11-24, after the try-on closes at 18:45), Clothes Shop | once a day | Tell her it suits her · Just browse |
 | A man yanks the fitting-room curtain while she's half in a dress; "Oh, Christ, sorry," and he drops it | walks in on her | a stranger | no | on Try it on, chance 0.25 | once a day | Pull it shut · Finish changing |
 
 Count: 6 scenes, 3 everyday (C802); 4 of 6 name someone she knows (C678). Seen, not heard. Release

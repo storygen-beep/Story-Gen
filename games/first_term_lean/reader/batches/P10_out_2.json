@@ -1,0 +1,68 @@
+{
+ "verdicts": [
+  {
+   "row": "C596",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "cafe_work_hour.work, cafe_work_shift.shift",
+   "why": "no talk screen or menu; no picture"
+  },
+  {
+   "row": "C795",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "\"Sundays it's you and Chris.\" (Sunday group)",
+   "why": "a work beat, not room text"
+  },
+  {
+   "row": "C804",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "\"Tom has you on the till.\" (15:00 group)",
+   "why": "people named inside clock groups that match their rows; no room-text line"
+  },
+  {
+   "row": "C889",
+   "screen": "cafe_work_hour.work",
+   "verdict": "FAIL",
+   "line": "button \"Work an hour\" (cafe_work_hour name)",
+   "why": "the label states a duration; the row says no duration either"
+  },
+  {
+   "row": "C906",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "\"Work an hour\", \"Work a shift\"",
+   "why": "no 'till' and no clock time on a label"
+  },
+  {
+   "row": "C910",
+   "screen": "cafe_work_hour.work",
+   "verdict": "FAIL",
+   "line": "button \"Work an hour\" (cafe_work_hour name)",
+   "why": "a button says no time; 'an hour' is time"
+  },
+  {
+   "row": "C920",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "Done to near_cafe, 60 / 240 min",
+   "why": "the spend is the work, not a hop; no cost on a move inside the area"
+  },
+  {
+   "row": "C929",
+   "screen": "cafe_work_hour.work",
+   "verdict": "FAIL",
+   "line": "button \"Work an hour\" (cafe_work_hour name)",
+   "why": "the activity's time rides on its label"
+  },
+  {
+   "row": "C953",
+   "screen": "cafe_work_hour.work",
+   "verdict": "FAIL",
+   "line": "button \"Work an hour\" (cafe_work_hour name)",
+   "why": "the label carries time, not money"
+  }
+ ],
+ "causes": []
+}

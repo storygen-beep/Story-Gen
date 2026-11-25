@@ -1,0 +1,199 @@
+{
+ "items": [
+  {
+   "row": "B10",
+   "screen": "walk_cross_seats.moment",
+   "why": "screen changed: truth row"
+  },
+  {
+   "row": "B10",
+   "screen": "walk_mirror_girls.leave",
+   "why": "screen changed: truth row"
+  },
+  {
+   "row": "B10",
+   "screen": "walk_stacks.away",
+   "why": "screen changed: truth row"
+  },
+  {
+   "row": "B10",
+   "screen": "walk_stacks.moment",
+   "why": "screen changed: truth row"
+  },
+  {
+   "row": "B10",
+   "screen": "walk_stacks.watch",
+   "why": "screen changed: truth row"
+  },
+  {
+   "row": "B4",
+   "screen": "walk_stacks.moment",
+   "why": "failed last pass"
+  },
+  {
+   "row": "B5",
+   "screen": "walk_stacks.watch",
+   "why": "failed last pass"
+  },
+  {
+   "row": "B8",
+   "screen": "walk_cross_seats.moment",
+   "why": "screen changed: truth row"
+  },
+  {
+   "row": "B8",
+   "screen": "walk_mirror_girls.leave",
+   "why": "screen changed: truth row"
+  },
+  {
+   "row": "B8",
+   "screen": "walk_stacks.away",
+   "why": "screen changed: truth row"
+  },
+  {
+   "row": "B8",
+   "screen": "walk_stacks.moment",
+   "why": "screen changed: truth row"
+  },
+  {
+   "row": "B8",
+   "screen": "walk_stacks.watch",
+   "why": "screen changed: truth row"
+  },
+  {
+   "row": "C1158",
+   "screen": "walk_stacks.moment",
+   "why": "screen changed: truth row"
+  },
+  {
+   "row": "C1206",
+   "screen": "walk_stacks.moment",
+   "why": "screen changed: truth row"
+  },
+  {
+   "row": "C151",
+   "screen": "walk_stacks.moment",
+   "why": "failed last pass (a note), its screen changed"
+  },
+  {
+   "row": "C460",
+   "screen": "walk_cross_seats.moment",
+   "why": "screen changed: truth row"
+  },
+  {
+   "row": "C460",
+   "screen": "walk_mirror_girls.leave",
+   "why": "screen changed: truth row"
+  },
+  {
+   "row": "C460",
+   "screen": "walk_stacks.away",
+   "why": "screen changed: truth row"
+  },
+  {
+   "row": "C460",
+   "screen": "walk_stacks.moment",
+   "why": "screen changed: truth row"
+  },
+  {
+   "row": "C460",
+   "screen": "walk_stacks.watch",
+   "why": "screen changed: truth row"
+  },
+  {
+   "row": "C461",
+   "screen": "walk_cross_seats.moment",
+   "why": "screen changed: truth row"
+  },
+  {
+   "row": "C461",
+   "screen": "walk_mirror_girls.leave",
+   "why": "screen changed: truth row"
+  },
+  {
+   "row": "C461",
+   "screen": "walk_stacks.away",
+   "why": "screen changed: truth row"
+  },
+  {
+   "row": "C461",
+   "screen": "walk_stacks.moment",
+   "why": "screen changed: truth row"
+  },
+  {
+   "row": "C461",
+   "screen": "walk_stacks.watch",
+   "why": "screen changed: truth row"
+  },
+  {
+   "row": "C927",
+   "screen": "walk_mirror_girls.leave",
+   "why": "screen changed: truth row"
+  },
+  {
+   "row": "C927",
+   "screen": "walk_stacks.away",
+   "why": "screen changed: truth row"
+  },
+  {
+   "row": "C927",
+   "screen": "walk_stacks.watch",
+   "why": "screen changed: truth row"
+  },
+  {
+   "row": "C931",
+   "screen": "walk_mirror_girls.leave",
+   "why": "screen changed: truth row"
+  },
+  {
+   "row": "C931",
+   "screen": "walk_stacks.away",
+   "why": "screen changed: truth row"
+  },
+  {
+   "row": "C931",
+   "screen": "walk_stacks.watch",
+   "why": "screen changed: truth row"
+  },
+  {
+   "row": "L106",
+   "screen": "walk_cross_seats.moment",
+   "why": "screen changed: truth row"
+  },
+  {
+   "row": "L106",
+   "screen": "walk_mirror_girls.leave",
+   "why": "screen changed: truth row"
+  },
+  {
+   "row": "L106",
+   "screen": "walk_stacks.away",
+   "why": "screen changed: truth row"
+  },
+  {
+   "row": "L106",
+   "screen": "walk_stacks.moment",
+   "why": "screen changed: truth row"
+  },
+  {
+   "row": "L106",
+   "screen": "walk_stacks.watch",
+   "why": "screen changed: truth row"
+  },
+  {
+   "row": "L167",
+   "screen": "walk_mirror_girls.leave",
+   "why": "screen changed: truth row"
+  },
+  {
+   "row": "L167",
+   "screen": "walk_stacks.away",
+   "why": "screen changed: truth row"
+  },
+  {
+   "row": "L167",
+   "screen": "walk_stacks.watch",
+   "why": "screen changed: truth row"
+  }
+ ]
+}

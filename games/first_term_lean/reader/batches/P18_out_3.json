@@ -1,0 +1,26 @@
+{
+ "verdicts": [
+  {
+   "row": "L170",
+   "screen": "*",
+   "verdict": "N/A",
+   "line": "",
+   "why": "no place on this piece's screens is hidden_until a flag"
+  },
+  {
+   "row": "L168",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "The librarian's at the desk weekdays 8am to 4pm, and Saturday 10am to 4pm.",
+   "why": "matches Holt's rows; met_holt is the end step's when"
+  },
+  {
+   "row": "L169",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "The librarian's at the desk weekdays 8am to 4pm, and Saturday 10am to 4pm.",
+   "why": "library_meet_holt fires on any visit while Holt is there"
+  }
+ ],
+ "causes": []
+}

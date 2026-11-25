@@ -1,0 +1,37 @@
+{
+ "verdicts": [
+  {
+   "row": "clock#10",
+   "screen": "campus_cafeteria",
+   "verdict": "PASS",
+   "line": "body_lunch / rep_table: no show_when_blocked",
+   "why": "Both clock-plus-count rows hide when they can't be used; nothing greys with an hours line."
+  },
+  {
+   "row": "places#6",
+   "screen": "campus_theatre",
+   "verdict": "FAIL",
+   "line": "Sit at the back of drama: needs met_cross",
+   "why": "Tue/Thu 11:30-13:00 before met_cross: Cross is there so Practise hides, watch_class needs met_cross and drama_first's window ends at 11:30; nothing to do alone.",
+   "cause": "P04r10-c1"
+  },
+  {
+   "row": "places#6",
+   "screen": "campus_theatre",
+   "verdict": "FAIL",
+   "line": "stage_practise: max_triggers_per_day = 2",
+   "why": "After two practises, every hour Cross is away (all Mon/Wed, Fri 9-14, Tue/Thu 9-11, 13-14, 18-21) leaves the open Theatre with nothing to do alone.",
+   "cause": "P04r10-c2"
+  }
+ ],
+ "causes": [
+  {
+   "id": "P04r10-c1",
+   "what": "The Theatre on Tue/Thu 11:30-13:00 before she has met Cross has nothing to do alone: Practise hides while he's there and watch_class waits on met_cross."
+  },
+  {
+   "id": "P04r10-c2",
+   "what": "Practise is capped at 2 a day and hides after, so whenever Cross is away the open Theatre is left with nothing to do alone."
+  }
+ ]
+}

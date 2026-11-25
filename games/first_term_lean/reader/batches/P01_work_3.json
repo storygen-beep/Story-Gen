@@ -1,0 +1,14 @@
+{
+ "items": [
+  {
+   "row": "C952",
+   "screen": "*",
+   "why": "its rule's text changed"
+  },
+  {
+   "row": "meters#8",
+   "screen": "*",
+   "why": "its rule's text changed"
+  }
+ ]
+}

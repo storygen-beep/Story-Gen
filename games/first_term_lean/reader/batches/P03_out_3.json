@@ -1,0 +1,29 @@
+{
+ "verdicts": [
+  {
+   "row": "C804",
+   "screen": "hood_clothes",
+   "verdict": "PASS",
+   "line": "Girls from campus browse the rails in pairs.",
+   "why": "Nina's room-text line is gone; she is her face; an unnamed crowd line only",
+   "cause": null
+  },
+  {
+   "row": "places#2",
+   "screen": "hood_clothes",
+   "verdict": "PASS",
+   "line": "Girls from campus browse the rails in pairs.",
+   "why": "no line per person; Nina's rows cover every open hour (Mon-Sat 10:00-19:00), so the shop is never open with nobody there",
+   "cause": null
+  },
+  {
+   "row": "clock#10",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "body_snack: max_triggers_per_day 2, show_when_blocked, no time_of_day",
+   "why": "neighbourhood rows with a daily count have no clock window; shop_try_on has a window and no count; the walk-ins hide",
+   "cause": null
+  }
+ ],
+ "causes": []
+}

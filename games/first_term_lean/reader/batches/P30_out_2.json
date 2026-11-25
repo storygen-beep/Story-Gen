@@ -1,0 +1,810 @@
+{
+ "verdicts": [
+  {
+   "row": "B1",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "Again. Slower. Like you want it. Again.",
+   "why": "Cross visibly wants something on both repeats (the line done slower, louder); no sexual step, so no earlier canvas needed."
+  },
+  {
+   "row": "B10",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "Cross makes Brooke run the same four lines again, and again.",
+   "why": "Rehearsal Tue/Thu/Fri 14:00-17:59 and class Tue/Thu 11:30-12:59 sit inside Cross's and Brooke's rows (who_is_where); names gated on met flags; true at first and last minute and on repeat."
+  },
+  {
+   "row": "B11",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "You sit in the dark at the back.",
+   "why": "Both buttons show the act they name."
+  },
+  {
+   "row": "B11",
+   "screen": "campus_theatre",
+   "verdict": "PASS",
+   "line": "Sit in on the rehearsal / Sit at the back of drama / Practise on the empty stage",
+   "why": "Every solo button on the Theatre now shows the act it names; watch_rehearsal is in the build."
+  },
+  {
+   "row": "B12",
+   "screen": "watch_rehearsal.watch",
+   "verdict": "FAIL",
+   "line": "You stay in your seat longer than you meant to.",
+   "why": "Charged repeat ('Like you want it') names no part of her body, has no reaction to her and no 'not yet'.",
+   "cause": "P30r10-c3"
+  },
+  {
+   "row": "B12",
+   "screen": "watch_class.watch",
+   "verdict": "N/A",
+   "line": "Your face goes hot anyway.",
+   "why": "A class drill seen from the back, not a charged scene."
+  },
+  {
+   "row": "B13",
+   "screen": "*",
+   "verdict": "N/A",
+   "line": "",
+   "why": "No moment alone with her body."
+  },
+  {
+   "row": "B2",
+   "screen": "*",
+   "verdict": "N/A",
+   "line": "",
+   "why": "Plain repeats on a place (card: 'a plain repeat (C1265)'; 'Out of scope: anything that moves at the rehearsal'); Cross's steps are P17/P40."
+  },
+  {
+   "row": "B3",
+   "screen": "watch_rehearsal.watch",
+   "verdict": "FAIL",
+   "line": "You stay in your seat longer than you meant to.",
+   "why": "The last line is a reaction in the moment; nothing points at what comes next.",
+   "cause": "P30r10-c2"
+  },
+  {
+   "row": "B3",
+   "screen": "watch_class.watch",
+   "verdict": "FAIL",
+   "line": "Your face goes hot anyway.",
+   "why": "The last line is a reaction in the moment; nothing points at what comes next.",
+   "cause": "P30r10-c2"
+  },
+  {
+   "row": "B4",
+   "screen": "watch_rehearsal.watch",
+   "verdict": "FAIL",
+   "line": "You stay in your seat longer than you meant to.",
+   "why": "Her reaction is behaviour, not on her body.",
+   "cause": "P30r10-c3"
+  },
+  {
+   "row": "B4",
+   "screen": "watch_class.watch",
+   "verdict": "PASS",
+   "line": "Your face goes hot anyway.",
+   "why": "Stage-0 reaction on her body."
+  },
+  {
+   "row": "B5",
+   "screen": "watch_rehearsal.watch",
+   "verdict": "FAIL",
+   "line": "You sit in the dark at the back.",
+   "why": "Nobody reacts to her, and PLAN.md doesn't declare that nobody does.",
+   "cause": "P30r10-c4"
+  },
+  {
+   "row": "B5",
+   "screen": "watch_class.watch",
+   "verdict": "FAIL",
+   "line": "Nobody turns round.",
+   "why": "Nobody reacts to her, and PLAN.md doesn't declare that nobody does.",
+   "cause": "P30r10-c4"
+  },
+  {
+   "row": "B6",
+   "screen": "*",
+   "verdict": "N/A",
+   "line": "",
+   "why": "No offer is made to her."
+  },
+  {
+   "row": "B7",
+   "screen": "*",
+   "verdict": "N/A",
+   "line": "",
+   "why": "No explicit beat."
+  },
+  {
+   "row": "B8",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "time_progression_minutes = 30",
+   "why": "30 minutes as the card says; no garment named."
+  },
+  {
+   "row": "B9",
+   "screen": "*",
+   "verdict": "N/A",
+   "line": "",
+   "why": "PLAN.md declares no companion who is the rival."
+  },
+  {
+   "row": "C1200",
+   "screen": "*",
+   "verdict": "N/A",
+   "line": "",
+   "why": "No dress code or clothing state on these screens."
+  },
+  {
+   "row": "C1220",
+   "screen": "*",
+   "verdict": "N/A",
+   "line": "",
+   "why": "No dress code or clothing state on these screens."
+  },
+  {
+   "row": "C1221",
+   "screen": "*",
+   "verdict": "N/A",
+   "line": "",
+   "why": "No dress code or clothing state on these screens."
+  },
+  {
+   "row": "C1173",
+   "screen": "*",
+   "verdict": "N/A",
+   "line": "",
+   "why": "No dress code or clothing state on these screens."
+  },
+  {
+   "row": "C1184",
+   "screen": "*",
+   "verdict": "N/A",
+   "line": "",
+   "why": "No dress code or clothing state on these screens."
+  },
+  {
+   "row": "C1185",
+   "screen": "*",
+   "verdict": "N/A",
+   "line": "",
+   "why": "No dress code or clothing state on these screens."
+  },
+  {
+   "row": "C1189",
+   "screen": "*",
+   "verdict": "N/A",
+   "line": "",
+   "why": "No dress code or clothing state on these screens."
+  },
+  {
+   "row": "C1198",
+   "screen": "*",
+   "verdict": "N/A",
+   "line": "",
+   "why": "No dress code or clothing state on these screens."
+  },
+  {
+   "row": "C1250",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "Sit in on the rehearsal",
+   "why": "The Theatre's card stays bare; no media on the repeats."
+  },
+  {
+   "row": "C1340",
+   "screen": "*",
+   "verdict": "N/A",
+   "line": "",
+   "why": "Not a household loop."
+  },
+  {
+   "row": "C1342",
+   "screen": "*",
+   "verdict": "N/A",
+   "line": "",
+   "why": "No need, meter, energy or spend on these repeats."
+  },
+  {
+   "row": "C1428",
+   "screen": "*",
+   "verdict": "N/A",
+   "line": "",
+   "why": "No need, meter, energy or spend on these repeats."
+  },
+  {
+   "row": "C1431",
+   "screen": "*",
+   "verdict": "N/A",
+   "line": "",
+   "why": "No need, meter, energy or spend on these repeats."
+  },
+  {
+   "row": "C1432",
+   "screen": "*",
+   "verdict": "N/A",
+   "line": "",
+   "why": "No need, meter, energy or spend on these repeats."
+  },
+  {
+   "row": "C1438",
+   "screen": "*",
+   "verdict": "N/A",
+   "line": "",
+   "why": "No need, meter, energy or spend on these repeats."
+  },
+  {
+   "row": "C1303",
+   "screen": "*",
+   "verdict": "N/A",
+   "line": "",
+   "why": "No need, meter, energy or spend on these repeats."
+  },
+  {
+   "row": "C1313",
+   "screen": "*",
+   "verdict": "N/A",
+   "line": "",
+   "why": "No need, meter, energy or spend on these repeats."
+  },
+  {
+   "row": "C1337",
+   "screen": "*",
+   "verdict": "N/A",
+   "line": "",
+   "why": "No need, meter, energy or spend on these repeats."
+  },
+  {
+   "row": "C1433",
+   "screen": "*",
+   "verdict": "N/A",
+   "line": "",
+   "why": "No need, meter, energy or spend on these repeats."
+  },
+  {
+   "row": "C1434",
+   "screen": "*",
+   "verdict": "N/A",
+   "line": "",
+   "why": "No need, meter, energy or spend on these repeats."
+  },
+  {
+   "row": "C1423",
+   "screen": "*",
+   "verdict": "N/A",
+   "line": "",
+   "why": "No need, meter, energy or spend on these repeats."
+  },
+  {
+   "row": "C1002",
+   "screen": "*",
+   "verdict": "N/A",
+   "line": "",
+   "why": "No need, meter, energy or spend on these repeats."
+  },
+  {
+   "row": "C330",
+   "screen": "*",
+   "verdict": "N/A",
+   "line": "",
+   "why": "No need, meter, energy or spend on these repeats."
+  },
+  {
+   "row": "C149",
+   "screen": "watch_rehearsal.watch",
+   "verdict": "FAIL",
+   "line": "You stay in your seat longer than you meant to.",
+   "why": "Doesn't point at what comes next.",
+   "cause": "P30r10-c2"
+  },
+  {
+   "row": "C450",
+   "screen": "watch_rehearsal.watch",
+   "verdict": "FAIL",
+   "line": "You stay in your seat longer than you meant to.",
+   "why": "Ends on the moment, not a hook.",
+   "cause": "P30r10-c2"
+  },
+  {
+   "row": "C149",
+   "screen": "watch_class.watch",
+   "verdict": "FAIL",
+   "line": "Your face goes hot anyway.",
+   "why": "Doesn't point at what comes next.",
+   "cause": "P30r10-c2"
+  },
+  {
+   "row": "C450",
+   "screen": "watch_class.watch",
+   "verdict": "FAIL",
+   "line": "Your face goes hot anyway.",
+   "why": "Ends on the moment, not a hook.",
+   "cause": "P30r10-c2"
+  },
+  {
+   "row": "C422",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "Sit in on the rehearsal / Sit at the back of drama",
+   "why": "Labels say what clicking does."
+  },
+  {
+   "row": "C442",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "Cross has the class in a line on the stage, saying their line louder each time.",
+   "why": "Says what is happening."
+  },
+  {
+   "row": "C447",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "Louder. Again. Make them look at you. Louder.",
+   "why": "Cross's clipped 'Again.' drill manner held, as in class_drama."
+  },
+  {
+   "row": "C451",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "the same four lines / the back row",
+   "why": "Concrete detail kept."
+  },
+  {
+   "row": "C460",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "The drama teacher makes a blonde girl run the same four lines",
+   "why": "Every claim checked against rows and flags; nothing false."
+  },
+  {
+   "row": "C461",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "Again. Slower. Like you want it. Again.",
+   "why": "Dialogue fits Cross's entry."
+  },
+  {
+   "row": "C593",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "Again. Slower. Like you want it.",
+   "why": "No term of address used; none borrowed."
+  },
+  {
+   "row": "C630",
+   "screen": "watch_rehearsal.watch",
+   "verdict": "FAIL",
+   "line": "The drama teacher makes a blonde girl run the same four lines",
+   "why": "The unmet group is OR: with met_cross but not met_brooke (set only at the bathroom mirror), Cross is only 'the drama teacher' and an unknown speaker after she knows his name; same for Brooke the other way.",
+   "cause": "P30r10-c1"
+  },
+  {
+   "row": "C630",
+   "screen": "watch_class.watch",
+   "verdict": "PASS",
+   "line": "Cross has the class in a line on the stage",
+   "why": "Behind met_cross; his drama class carries the relation."
+  },
+  {
+   "row": "C762",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "You stay in your seat longer than you meant to.",
+   "why": "No 'Nothing happens'."
+  },
+  {
+   "row": "C773",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "Sit in on the rehearsal",
+   "why": "Activities of the place, not a browse list."
+  },
+  {
+   "row": "C776",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "Sit at the back of drama",
+   "why": "A class/rehearsal of the place, like Go to drama; no person action on the menu."
+  },
+  {
+   "row": "C777",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "Sit in on the rehearsal",
+   "why": "Nothing else on the menu."
+  },
+  {
+   "row": "C804",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "Nobody's on the stage. The work light's on.",
+   "why": "No line per person; the variant says only who's absent."
+  },
+  {
+   "row": "C900",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "You stay in your seat longer than you meant to.",
+   "why": "No time in the beats."
+  },
+  {
+   "row": "C903",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "Cross makes Brooke run the same four lines",
+   "why": "No weekday named."
+  },
+  {
+   "row": "C913",
+   "screen": "watch_rehearsal.watch",
+   "verdict": "FAIL",
+   "line": "conditions = weekday + time_of_day, no show_when_blocked",
+   "why": "Out of its window the row vanishes instead of staying dimmed with its hours; it has no daily count, so clock.md rule 10 doesn't cover it, and NOTES holds no LO words for it (the card's 'LO 2026-11-24' are about rows with a clock and a count).",
+   "cause": "P30r10-c5"
+  },
+  {
+   "row": "C916",
+   "screen": "watch_rehearsal.watch",
+   "verdict": "FAIL",
+   "line": "Sit in on the rehearsal / Sit at the back of drama",
+   "why": "Something she chooses, so its hours go on it; they show nowhere on the room.",
+   "cause": "P30r10-c5"
+  },
+  {
+   "row": "C1360",
+   "screen": "watch_rehearsal.watch",
+   "verdict": "FAIL",
+   "line": "no show_when_blocked",
+   "why": "Out of hours it hides instead of showing greyed (note)."
+  },
+  {
+   "row": "C1421",
+   "screen": "watch_rehearsal.watch",
+   "verdict": "FAIL",
+   "line": "no show_when_blocked",
+   "why": "Out of hours the requirement is never told (note)."
+  },
+  {
+   "row": "C913",
+   "screen": "watch_class.watch",
+   "verdict": "FAIL",
+   "line": "conditions = weekday + time_of_day, no show_when_blocked",
+   "why": "Out of its window the row vanishes instead of staying dimmed with its hours; it has no daily count, so clock.md rule 10 doesn't cover it, and NOTES holds no LO words for it (the card's 'LO 2026-11-24' are about rows with a clock and a count).",
+   "cause": "P30r10-c5"
+  },
+  {
+   "row": "C916",
+   "screen": "watch_class.watch",
+   "verdict": "FAIL",
+   "line": "Sit in on the rehearsal / Sit at the back of drama",
+   "why": "Something she chooses, so its hours go on it; they show nowhere on the room.",
+   "cause": "P30r10-c5"
+  },
+  {
+   "row": "C1360",
+   "screen": "watch_class.watch",
+   "verdict": "FAIL",
+   "line": "no show_when_blocked",
+   "why": "Out of hours it hides instead of showing greyed (note)."
+  },
+  {
+   "row": "C1421",
+   "screen": "watch_class.watch",
+   "verdict": "FAIL",
+   "line": "no show_when_blocked",
+   "why": "Out of hours the requirement is never told (note)."
+  },
+  {
+   "row": "C914",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "no show_when_blocked",
+   "why": "Shows no hours anywhere, so never on a non-clock shut."
+  },
+  {
+   "row": "C920",
+   "screen": "*",
+   "verdict": "N/A",
+   "line": "",
+   "why": "No move between places."
+  },
+  {
+   "row": "C928",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "You stay in your seat longer than you meant to.",
+   "why": "No clock in prose."
+  },
+  {
+   "row": "L106",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "Cross makes Brooke run the same four lines",
+   "why": "Cross and Brooke at campus_theatre Tue/Thu/Fri 14-18 and Tue/Thu 11-13 per who_is_where; triggers read is_present."
+  },
+  {
+   "row": "L166",
+   "screen": "watch_class.watch",
+   "verdict": "FAIL",
+   "line": "time_of_day 11:30-13:00",
+   "why": "Cross's row has him teaching 11-13, but the repeat opens at 11:30, placed around 'Go to drama' (11:00-11:30, card) to avoid the clash.",
+   "cause": "P30r10-c6"
+  },
+  {
+   "row": "L166",
+   "screen": "watch_rehearsal.watch",
+   "verdict": "PASS",
+   "line": "time_of_day 14:00-18:00",
+   "why": "Open exactly while Cross and Brooke are there."
+  },
+  {
+   "row": "L166",
+   "screen": "campus_theatre",
+   "verdict": "FAIL",
+   "line": "Sit at the back of drama (11:30-13:00)",
+   "why": "The Theatre's class-time repeat is placed around Go to drama rather than open whenever Cross is there.",
+   "cause": "P30r10-c6"
+  },
+  {
+   "row": "L167",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "weekdays [1, 3, 4], 14:00-18:00",
+   "why": "One row per activity; same hours each day it runs."
+  },
+  {
+   "row": "C146",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "",
+   "why": "No big moment on a repeat."
+  },
+  {
+   "row": "C151",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "",
+   "why": "One spoken line and one visible want each."
+  },
+  {
+   "row": "C519",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "",
+   "why": "One job each, about 40-50 words."
+  },
+  {
+   "row": "C625",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "",
+   "why": "Role before name in the unmet branch ('the drama teacher', 'a blonde girl')."
+  },
+  {
+   "row": "C758",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "",
+   "why": "Short labels."
+  },
+  {
+   "row": "C769",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "",
+   "why": "The Theatre says what it is."
+  },
+  {
+   "row": "C770",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "",
+   "why": "Room screen short."
+  },
+  {
+   "row": "C794",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "",
+   "why": "Identity sentence unchanged in the variant."
+  },
+  {
+   "row": "C795",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "",
+   "why": "No per-person room line."
+  },
+  {
+   "row": "C889",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "",
+   "why": "Labels name no time."
+  },
+  {
+   "row": "C892",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "",
+   "why": "No hour in the act."
+  },
+  {
+   "row": "C902",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "",
+   "why": "True at 17:59 and 12:59."
+  },
+  {
+   "row": "C906",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "",
+   "why": "No 'till' on a label."
+  },
+  {
+   "row": "C910",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "",
+   "why": "Done says no time or energy."
+  },
+  {
+   "row": "C926",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "",
+   "why": "Clock moves by minutes."
+  },
+  {
+   "row": "C927",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "",
+   "why": "Exits cost 30."
+  },
+  {
+   "row": "C929",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "",
+   "why": "No time on labels."
+  },
+  {
+   "row": "C930",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "",
+   "why": "Windowed rows vanish out of hours, as the row describes."
+  },
+  {
+   "row": "C931",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "",
+   "why": "Ends 18:00/13:00 exclusive, matching the rows."
+  },
+  {
+   "row": "C953",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "",
+   "why": "No cost to show."
+  },
+  {
+   "row": "C644",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "",
+   "why": "Cross's drama corner."
+  },
+  {
+   "row": "C1427",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "",
+   "why": "30 min inside a 4h/1.5h window."
+  },
+  {
+   "row": "C1441",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "",
+   "why": "The repeats are scenes."
+  },
+  {
+   "row": "C1345",
+   "screen": "*",
+   "verdict": "N/A",
+   "line": "",
+   "why": "The repeats pay nothing, so there is nothing to brake."
+  },
+  {
+   "row": "C1425",
+   "screen": "*",
+   "verdict": "N/A",
+   "line": "",
+   "why": "Pays nothing; no pacing needed."
+  },
+  {
+   "row": "C596",
+   "screen": "*",
+   "verdict": "N/A",
+   "line": "",
+   "why": "Not a talk screen."
+  },
+  {
+   "row": "C620",
+   "screen": "*",
+   "verdict": "N/A",
+   "line": "",
+   "why": "Faces are the engine's."
+  },
+  {
+   "row": "C632",
+   "screen": "*",
+   "verdict": "N/A",
+   "line": "",
+   "why": "No role label."
+  },
+  {
+   "row": "C771",
+   "screen": "*",
+   "verdict": "N/A",
+   "line": "",
+   "why": "No first-visit screen."
+  },
+  {
+   "row": "C897",
+   "screen": "*",
+   "verdict": "N/A",
+   "line": "",
+   "why": "No travel."
+  },
+  {
+   "row": "C924",
+   "screen": "*",
+   "verdict": "N/A",
+   "line": "",
+   "why": "No travel."
+  },
+  {
+   "row": "C626",
+   "screen": "watch_rehearsal.watch",
+   "verdict": "FAIL",
+   "line": "The drama teacher makes a blonde girl run",
+   "why": "With met_cross and not met_brooke, Cross's description isn't swapped for his name (note)."
+  }
+ ],
+ "causes": [
+  {
+   "id": "P30r10-c1",
+   "what": "watch_rehearsal's unmet group is OR, so once she has met Cross but not Brooke (or the reverse) the met one is still 'the drama teacher' / 'a blonde girl' and Cross speaks as an unknown."
+  },
+  {
+   "id": "P30r10-c2",
+   "what": "Neither repeat ends on a hook: 'You stay in your seat longer than you meant to.' and 'Your face goes hot anyway.' point at nothing next."
+  },
+  {
+   "id": "P30r10-c3",
+   "what": "The rehearsal is charged ('Like you want it') but her reaction is off her body: no body part, no reaction to her, no 'not yet'."
+  },
+  {
+   "id": "P30r10-c4",
+   "what": "Nobody reacts to her on either repeat ('Nobody turns round.'), and PLAN.md doesn't declare that nobody does."
+  },
+  {
+   "id": "P30r10-c5",
+   "what": "watch_rehearsal and watch_class have hours and no daily count, yet hide out of hours instead of greying with their hours (C913, C916); clock.md rule 10 covers only clock-plus-count rows."
+  },
+  {
+   "id": "P30r10-c6",
+   "what": "watch_class opens at 11:30 though Cross teaches from 11:00, placed around 'Go to drama' to avoid the clash (L166)."
+  }
+ ]
+}

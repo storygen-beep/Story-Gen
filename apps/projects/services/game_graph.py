@@ -196,6 +196,10 @@ def build_game_graph(
             npc.ai_behavior_config["show_traits"] = list(n.show_traits)
         if n.role:
             npc.ai_behavior_config["role"] = n.role
+        if n.stranger_name:  # [ui] people_page = "cot" — MIRRORED in template_import.create_project_from_template
+            npc.ai_behavior_config["stranger_name"] = n.stranger_name
+        if n.people_tab:
+            npc.ai_behavior_config["people_tab"] = n.people_tab
         graph.npcs.append(npc)
         npc_ids.append(str(npc.id))
 

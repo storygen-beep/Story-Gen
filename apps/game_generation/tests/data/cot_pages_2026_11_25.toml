@@ -1,0 +1,374 @@
+# ═══════════════════════════════════════════════════════════════════════════════
+#  ENGINE FIXTURE — the Quests page as CoT's Hints page, the People page as CoT's
+#  People dialog (2026-11-25). Media-free. Read by test_cot_hints.py and
+#  test_cot_people.py.
+#
+#  Hints ([ui] quests_layout = "hints"):
+#    "The Job"     three steps: nothing set, the middle step (job_got), "end" (job_done);
+#                  links the walkthrough job_wt.
+#    "Free Time"   a single step that always passes: stays In Progress (CoT's rule).
+#    "The Quad"    shown once `started`; its only step needs quad_seen: "Keep exploring!".
+#    "Hidden"      shown only behind never_set: never listed.
+#  Walkthrough job_wt: a guard on `started`, a day count, a done/to-do step, an idea.
+#
+#  People ([ui] people_page = "cot"):
+#    tom    friends tab, met by met_tom, at the bar all day, with a Talk row (tom_chat).
+#    zed    friends tab, met by met_zed, at home all day: a stranger until then.
+#    mom    special tab, met once `started`, at home all day.
+#    x01-x17 acquaintances, no quest card (so known), at home all day: 19 people at home (Zed, Mom, 17),
+#           two pages of 16.
+# ═══════════════════════════════════════════════════════════════════════════════
+
+schema_version  = "0.2"
+starting_canvas = "scene_start"
+
+[project]
+id            = "engine_cot_pages"
+title         = "Engine CoT Pages"
+description   = "Engine fixture for the CoT Hints and People pages."
+quests_engine = "v2"
+
+[time]
+enabled       = true
+starting_hour = 18
+starting_day  = "Monday"
+starting_week = 1
+
+[player]
+id          = "player"
+name        = "Mara"
+description = "Fixture protagonist."
+core_traits = { energy = 100, money = 40 }
+flag_keys   = ["started", "met_tom", "met_zed", "job_got", "job_done", "quad_seen", "never_set"]
+
+[ui]
+quests_layout = "hints"
+people_page   = "cot"
+
+[ui.cast_page]
+title       = "People"
+show_traits = ["want", "warmth"]
+
+# ── hints ────────────────────────────────────────────────────────────────────
+
+[[story_hints]]
+title       = "The Job"
+category    = "Employment 💼"
+description = "The bar is hiring."
+walkthrough = "job_wt"
+hints = [
+  { when = [], text = "Go to the bar and ask for work." },
+  { when = [ { flag = "job_got", op = "is_true" } ], text = "Work the shifts." },
+  { when = [ { flag = "job_done", op = "is_true" } ], text = "end" },
+]
+
+[[story_hints]]
+title       = "Free Time"
+category    = "Campus Life 🏫"
+description = "Something to do."
+hints       = [ { when = [], text = "Visit the park." } ]
+
+[[story_hints]]
+title       = "The Quad"
+category    = "Storyline 📖"
+description = "A party on Fridays."
+when        = [ { flag = "started", op = "is_true" } ]
+hints       = [ { when = [ { flag = "quad_seen", op = "is_true" } ], text = "Go to the quad." } ]
+
+[[story_hints]]
+title       = "Hidden"
+category    = "Storyline 📖"
+description = "Never listed."
+when        = [ { flag = "never_set", op = "is_true" } ]
+hints       = [ { when = [], text = "Unseen." } ]
+
+[[walkthroughs]]
+id       = "job_wt"
+title    = "The Job"
+overview = "The bar needs a hand. It will take at least {days_until:5}."
+guard    = { when = [ { flag = "started", op = "is_true" } ], text = "You haven't met them yet." }
+steps = [
+  { when = [ { flag = "job_got", op = "is_true" } ], done_text = "You got the job.", todo_text = "Ask at the bar." },
+  { kind = "idea", text = "Wear something nice." },
+  { when = [ { flag = "job_done", op = "is_true" } ], done_text = "Three shifts worked.", todo_text = "Work three shifts." },
+]
+
+# ── people ───────────────────────────────────────────────────────────────────
+
+[[npcs]]
+id            = "tom"
+name          = "Tom Baker"
+role          = "Bartender"
+relationship  = "Runs the bar."
+description   = "Fixture bartender."
+stranger_name = "guy behind the counter"
+people_tab    = "friends"
+core_traits   = { want = 40, warmth = 10 }
+flag_keys     = []
+
+[[npcs.schedules]]
+location   = "loc_bar"
+start_time = "00:00"
+end_time   = "23:59"
+activity   = "behind the counter"
+
+[[npcs]]
+id            = "zed"
+name          = "Zed"
+role          = "Neighbour"
+description   = "Fixture stranger."
+stranger_name = "guy by the window"
+people_tab    = "friends"
+core_traits   = { want = 90, warmth = 0 }
+flag_keys     = []
+
+[[npcs.schedules]]
+location   = "loc_home"
+start_time = "00:00"
+end_time   = "23:59"
+activity   = "by the window"
+
+[[npcs]]
+id            = "mom"
+name          = "Laura"
+role          = "Mom"
+description   = "Fixture mother."
+stranger_name = "woman in the kitchen"
+people_tab    = "special"
+core_traits   = { want = 0, warmth = 30 }
+flag_keys     = []
+
+[[npcs.schedules]]
+location   = "loc_home"
+start_time = "00:00"
+end_time   = "23:59"
+activity   = "in the kitchen"
+
+# x01-x17: generated below this line by hand; keep them identical but for the number.
+[[npcs]]
+id = "x01"
+name = "Extra 01"
+people_tab = "acquaintances"
+core_traits = { want = 1, warmth = 1 }
+[[npcs.schedules]]
+location = "loc_home"
+start_time = "00:00"
+end_time = "23:59"
+
+[[npcs]]
+id = "x02"
+name = "Extra 02"
+people_tab = "acquaintances"
+core_traits = { want = 2, warmth = 2 }
+[[npcs.schedules]]
+location = "loc_home"
+start_time = "00:00"
+end_time = "23:59"
+
+[[npcs]]
+id = "x03"
+name = "Extra 03"
+people_tab = "acquaintances"
+core_traits = { want = 3, warmth = 3 }
+[[npcs.schedules]]
+location = "loc_home"
+start_time = "00:00"
+end_time = "23:59"
+
+[[npcs]]
+id = "x04"
+name = "Extra 04"
+people_tab = "acquaintances"
+core_traits = { want = 4, warmth = 4 }
+[[npcs.schedules]]
+location = "loc_home"
+start_time = "00:00"
+end_time = "23:59"
+
+[[npcs]]
+id = "x05"
+name = "Extra 05"
+people_tab = "acquaintances"
+core_traits = { want = 5, warmth = 5 }
+[[npcs.schedules]]
+location = "loc_home"
+start_time = "00:00"
+end_time = "23:59"
+
+[[npcs]]
+id = "x06"
+name = "Extra 06"
+people_tab = "acquaintances"
+core_traits = { want = 6, warmth = 6 }
+[[npcs.schedules]]
+location = "loc_home"
+start_time = "00:00"
+end_time = "23:59"
+
+[[npcs]]
+id = "x07"
+name = "Extra 07"
+people_tab = "acquaintances"
+core_traits = { want = 7, warmth = 7 }
+[[npcs.schedules]]
+location = "loc_home"
+start_time = "00:00"
+end_time = "23:59"
+
+[[npcs]]
+id = "x08"
+name = "Extra 08"
+people_tab = "acquaintances"
+core_traits = { want = 8, warmth = 8 }
+[[npcs.schedules]]
+location = "loc_home"
+start_time = "00:00"
+end_time = "23:59"
+
+[[npcs]]
+id = "x09"
+name = "Extra 09"
+people_tab = "acquaintances"
+core_traits = { want = 9, warmth = 9 }
+[[npcs.schedules]]
+location = "loc_home"
+start_time = "00:00"
+end_time = "23:59"
+
+[[npcs]]
+id = "x10"
+name = "Extra 10"
+people_tab = "acquaintances"
+core_traits = { want = 10, warmth = 10 }
+[[npcs.schedules]]
+location = "loc_home"
+start_time = "00:00"
+end_time = "23:59"
+
+[[npcs]]
+id = "x11"
+name = "Extra 11"
+people_tab = "acquaintances"
+core_traits = { want = 11, warmth = 11 }
+[[npcs.schedules]]
+location = "loc_home"
+start_time = "00:00"
+end_time = "23:59"
+
+[[npcs]]
+id = "x12"
+name = "Extra 12"
+people_tab = "acquaintances"
+core_traits = { want = 12, warmth = 12 }
+[[npcs.schedules]]
+location = "loc_home"
+start_time = "00:00"
+end_time = "23:59"
+
+[[npcs]]
+id = "x13"
+name = "Extra 13"
+people_tab = "acquaintances"
+core_traits = { want = 13, warmth = 13 }
+[[npcs.schedules]]
+location = "loc_home"
+start_time = "00:00"
+end_time = "23:59"
+
+[[npcs]]
+id = "x14"
+name = "Extra 14"
+people_tab = "acquaintances"
+core_traits = { want = 14, warmth = 14 }
+[[npcs.schedules]]
+location = "loc_home"
+start_time = "00:00"
+end_time = "23:59"
+
+[[npcs]]
+id = "x15"
+name = "Extra 15"
+people_tab = "acquaintances"
+core_traits = { want = 15, warmth = 15 }
+[[npcs.schedules]]
+location = "loc_home"
+start_time = "00:00"
+end_time = "23:59"
+
+[[npcs]]
+id = "x16"
+name = "Extra 16"
+people_tab = "acquaintances"
+core_traits = { want = 16, warmth = 16 }
+[[npcs.schedules]]
+location = "loc_home"
+start_time = "00:00"
+end_time = "23:59"
+
+[[npcs]]
+id = "x17"
+name = "Extra 17"
+people_tab = "acquaintances"
+core_traits = { want = 17, warmth = 17 }
+[[npcs.schedules]]
+location = "loc_home"
+start_time = "00:00"
+end_time = "23:59"
+
+[[locations]]
+id               = "loc_home"
+name             = "Home"
+description      = "Her house."
+navigation_order = ["loc_bar"]
+
+[[locations]]
+id          = "loc_bar"
+name        = "Bar"
+description = "The bar."
+entry_from  = "loc_home"
+
+# ── canvases ─────────────────────────────────────────────────────────────────
+
+[[canvases]]
+id   = "scene_start"
+name = "Start"
+
+[[canvases.nodes]]
+id     = "intro"
+name   = "Intro"
+blocks = [ { type = "paragraph", content = "Fixture start." } ]
+exit_block = { type = "location", text = "Go home", config = { destinationType = "specific", locationId = "loc_home", time_progression_minutes = 0, flagEffects = [ { targetType = "player", flag = "started" } ] } }
+
+[[canvases]]
+id   = "tom_chat"
+name = "A word with Tom"
+
+[canvases.trigger]
+location      = "loc_bar"
+npc           = "tom"
+is_repeatable = true
+is_active     = true
+
+[[canvases.nodes]]
+id     = "talk"
+name   = "Talk"
+blocks = [ { type = "paragraph", content = "Tom nods." } ]
+exit_block = { type = "location", text = "Back", config = { destinationType = "specific", locationId = "loc_bar", time_progression_minutes = 0 } }
+
+# ── quest cards: who is met ──────────────────────────────────────────────────
+
+[[quest_cards]]
+npc_id = "tom"
+text   = "Tom runs the bar."
+tip    = "He is behind the counter all day."
+when   = [ { flag = "met_tom", op = "is_true" } ]
+
+[[quest_cards]]
+npc_id = "zed"
+text   = "Zed lives next door."
+when   = [ { flag = "met_zed", op = "is_true" } ]
+
+[[quest_cards]]
+npc_id = "mom"
+text   = "Mom."
+when   = [ { flag = "started", op = "is_true" } ]

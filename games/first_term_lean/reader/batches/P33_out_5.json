@@ -1,0 +1,19 @@
+{
+ "verdicts": [
+  {
+   "row": "L170",
+   "screen": "*",
+   "verdict": "N/A",
+   "line": "",
+   "why": "no place on this piece's screens is hidden_until a flag"
+  },
+  {
+   "row": "C952",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "\"Three, new girl. For you, four.\" / You pay at the desk for a day pass",
+   "why": "coffee costs $3 (his 'four' is a wink, never charged), gym $5 day pass, snack $2, lunch $4, run 45 min 15 energy, workout 1 hour 20 energy: all PLAN"
+  }
+ ],
+ "causes": []
+}

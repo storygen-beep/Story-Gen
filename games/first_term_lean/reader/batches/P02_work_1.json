@@ -1,29 +1,44 @@
 {
  "items": [
   {
-   "row": "C1265",
-   "screen": "home_hall",
-   "why": "failed last pass"
-  },
-  {
-   "row": "C920",
-   "screen": "home_hall",
-   "why": "failed last pass"
-  },
-  {
-   "row": "clock#2",
+   "row": "C889",
    "screen": "*",
    "why": "its rule's text changed"
   },
   {
-   "row": "media#2",
-   "screen": "home_hall",
-   "why": "failed last pass"
+   "row": "C906",
+   "screen": "*",
+   "why": "its rule's text changed"
   },
   {
-   "row": "media#3",
-   "screen": "home_hall",
-   "why": "failed last pass"
+   "row": "C910",
+   "screen": "*",
+   "why": "its rule's text changed"
+  },
+  {
+   "row": "C929",
+   "screen": "*",
+   "why": "its rule's text changed"
+  },
+  {
+   "row": "C953",
+   "screen": "*",
+   "why": "its rule's text changed"
+  },
+  {
+   "row": "clock#1",
+   "screen": "*",
+   "why": "its rule's text changed"
+  },
+  {
+   "row": "clock#6",
+   "screen": "*",
+   "why": "its rule's text changed"
+  },
+  {
+   "row": "places#4",
+   "screen": "*",
+   "why": "its rule's text changed"
   }
  ]
 }

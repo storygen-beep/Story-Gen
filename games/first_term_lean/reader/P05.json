@@ -1,6 +1,6 @@
 {
  "piece": "P05",
- "pass": 2,
+ "pass": 5,
  "screens": {
   "*": "4f53cda18c2baa0c"
  },
@@ -18,16 +18,16 @@
   "B11": "1e252efd0904a971",
   "B12": "fd109745c67b71d7",
   "B13": "aaf6518b64dcce55",
-  "C889": "37967c45d79163fc",
-  "C906": "c257bba6d15edc3f",
+  "C889": "cebb147317e10c05",
+  "C906": "b8d0e5793dd14e95",
   "C926": "8cd1b7e3576dc7b5",
   "C900": "a4ef8ce78f554d6b",
   "C902": "66462bdbadae0c77",
   "C903": "263890a884329d60",
   "C904": "999816c6ed6cc232",
   "C892": "1d8d188451bcb51e",
-  "C910": "c86548143d50a17d",
-  "C929": "33a2ca367c2aac5b",
+  "C910": "19dcf805483efc88",
+  "C929": "b628ac285ac9c529",
   "C897": "16b066aee3c1a937",
   "C924": "ce540d1e01b7c301",
   "C920": "e7485c9faee24e77",
@@ -42,15 +42,16 @@
   "C928": "799e1dd153166b6d",
   "C931": "1b8984f52b99537e",
   "C890": "3d716de4269fbd6c",
-  "clock#1": "cd89df2f76a7be89",
+  "clock#1": "b093ed58ec403b3c",
   "clock#2": "e393ecafc7ab9a6c",
   "clock#3": "aae8f146c8ec933d",
   "clock#4": "c33118361d16b379",
   "clock#5": "95c5edec9e714e7b",
-  "clock#6": "31fd30fb07702bc9",
+  "clock#6": "bdedeec28a16e36f",
   "clock#7": "313c48a91780f62b",
   "clock#8": "f0c2400d02519978",
   "clock#9": "5d697f6bcd9f82de",
+  "clock#10": "2ad5e473e29b231d",
   "C1261": "6a661c60639de8be",
   "C1267": "6bafcadf3d586d5a",
   "C1249": "604706399d2f1194",
@@ -81,32 +82,34 @@
   "media#7": "eff6dc1369755c34",
   "C769": "cf7d7a82afabcbbb",
   "C794": "3281d513b7f90d6e",
-  "C795": "84d5bfb2a701bf90",
-  "C804": "2aa951544edb45db",
+  "C795": "a28152099697ac6a",
+  "C804": "56bf64be29d6ea48",
   "L106": "759e6667d7fc3183",
   "C776": "6088d5531ecff698",
   "C777": "38b483431fa177b0",
   "C773": "0825e8443f9180d0",
   "C758": "6329db1ec04ec3da",
-  "C953": "26f84fb90a0ef795",
+  "C953": "7ab90b4c71f3d98a",
   "C954": "a4837b8af6d54bb1",
   "C738": "976cd3e099c13e51",
   "C762": "877801c22bdade00",
   "L147": "5dea5707be5e7e0a",
+  "L170": "8f11debafcf05142",
   "C808": "73aff7401d6970a5",
   "C811": "ded1858e52e3be3a",
   "C770": "dcc6bbe6fde09083",
   "C771": "d941995a226da2b4",
   "C707": "e2898bd02a9e4730",
   "places#1": "18252966b4327f58",
-  "places#2": "3ab79adc34668b04",
+  "places#2": "e0b57720921c4523",
   "places#3": "56d056c80da49bb6",
-  "places#4": "ada53ed66015c980",
+  "places#4": "ae3ba300e1045c9f",
   "places#5": "90ec575adee9bf74",
   "places#6": "f2bc5f0f10c64c4b",
   "places#7": "2a095bf54f175e5e",
   "places#8": "c3ea8d01465e7298",
   "places#9": "f4cd9ab5f62bc6fc",
+  "places#10": "309f0141d342dc6f",
   "C442": "a2b07f40e1a9e908",
   "C449": "ac5932d70cd775a1",
   "C451": "6b0fd679047fc9b8",
@@ -132,7 +135,7 @@
   "C46": "c8a4fc47f8ed9846",
   "C48": "9de57a92c1e650b7",
   "C51": "5d738179035dbf70",
-  "C1619": "36e949e72f8e3580",
+  "C1619": "73325cf765e749b2",
   "C1628": "e719ebeb96d81334",
   "C430": "f237c738ebbd5816",
   "C598": "2fd3cf10cece7af8",
@@ -142,6 +145,8 @@
   "C35": "24fd2a098e158826",
   "C36": "8002361b82ec4c12",
   "C37": "f282d0fe91e8e8b7",
+  "L172": "b99311cd35a8586e",
+  "C2176": "a5ba9c9008667d02",
   "C433": "db62cad2bd9936f9",
   "C32": "59bc6f20811f006f",
   "C56": "e688101a315686b9",
@@ -152,7 +157,7 @@
   "want#1": "650bc8fd3e147551",
   "want#2": "6ac0ef3782b47bdb",
   "want#3": "291d73f0088c7e63",
-  "want#4": "c2b008959e37f5fe",
+  "want#4": "82e1671bb988af4e",
   "want#5": "725b2fbd263b6906",
   "want#6": "de62e461403b72a1",
   "want#7": "b5e0471f08e5ceaf"
@@ -428,7 +433,7 @@
    "note": false,
    "screen_hash": "4f53cda18c2baa0c",
    "row_hash": "00b79725344762be",
-   "carried": false,
+   "carried": true,
    "pass": 2
   },
   {
@@ -539,14 +544,14 @@
    "row": "C1619",
    "screen": "*",
    "verdict": "PASS",
-   "line": "\"A Help Wanted sign is taped in the window.\"",
-   "why": "the caf\u00e9's Help Wanted line is where goal 1's step points; the card's step reads plainly",
+   "line": "Your first shift starts on a weekday, between 10am and 3pm, while Tom and Chris are both in.",
+   "why": "the caf\u00e9's goal (the job) is The Caf\u00e9 Job storyline on the Quests page, a ladder with a next step; the place line agrees with it",
    "cause": null,
    "note": false,
    "screen_hash": "4f53cda18c2baa0c",
-   "row_hash": "36e949e72f8e3580",
-   "carried": true,
-   "pass": 1
+   "row_hash": "73325cf765e749b2",
+   "carried": false,
+   "pass": 5
   },
   {
    "row": "C1628",
@@ -560,6 +565,19 @@
    "row_hash": "e719ebeb96d81334",
    "carried": true,
    "pass": 1
+  },
+  {
+   "row": "C2176",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "when = met_tom / met_chris",
+   "why": "The Caf\u00e9 Job reads met_tom (cafe_hire) and met_chris (cafe_first_shift); Someone on the Quad reads met_zoe (quad_meet_zoe)",
+   "cause": null,
+   "note": false,
+   "screen_hash": "4f53cda18c2baa0c",
+   "row_hash": "a5ba9c9008667d02",
+   "carried": false,
+   "pass": 5
   },
   {
    "row": "C32",
@@ -1097,28 +1115,28 @@
   {
    "row": "C795",
    "screen": "near_cafe",
-   "verdict": "FAIL",
+   "verdict": "PASS",
    "line": "\"The caf\u00e9 across from campus: the coffee machine hissing, a long counter, a tip jar by the till. A sign on the door says it's open from 7am to 9pm.\"",
-   "why": "ENI for LO (delegated 2026-11-24), NOTES.md: \"C804/C795 on the Caf\u00e9: presence lines for Tom and Chris (met and unmet) come with P31.\" (recorded as FAIL: a waiver needs LO's own words; the presence lines come with P31)",
+   "why": "no line per person; Tom and Chris show as faces. The hire-wait variant's 'while Tom and Chris are both in' gives shift hours, not a presence claim",
    "cause": null,
    "note": true,
    "screen_hash": null,
-   "row_hash": "84d5bfb2a701bf90",
+   "row_hash": "a28152099697ac6a",
    "carried": true,
-   "pass": 1
+   "pass": 3
   },
   {
    "row": "C804",
    "screen": "near_cafe",
-   "verdict": "FAIL",
-   "line": "The caf\u00e9 across from campus: the coffee machine hissing, a long counter, a tip jar by the till. A sign on the door says it's open from 7am to 9pm.",
-   "why": "Tom (Mon-Sat 10-21) and Chris (weekdays 07-15, weekends 10-20) are here by who_is_where; no line changes with who is in; held to P31, no waiver; judged as built",
-   "cause": "P05c1-c1",
+   "verdict": "PASS",
+   "line": "\"The caf\u00e9 across from campus: the coffee machine hissing, a long counter, a tip jar by the till. A sign on the door says it's open from 7am to 9pm.\"",
+   "why": "who is there is their faces; no per-person room line (clears the old Tom and Chris presence cause)",
+   "cause": null,
    "note": false,
    "screen_hash": null,
-   "row_hash": "2aa951544edb45db",
-   "carried": false,
-   "pass": 2
+   "row_hash": "56bf64be29d6ea48",
+   "carried": true,
+   "pass": 3
   },
   {
    "row": "C808",
@@ -1148,16 +1166,16 @@
   },
   {
    "row": "C889",
-   "screen": "*",
-   "verdict": "PASS",
-   "line": "Leave Caf\u00e9",
-   "why": "no label promises a clock time",
+   "screen": "near_cafe",
+   "verdict": "FAIL",
+   "line": "menu button \"Work an hour\"",
+   "why": "the label states a duration ('an hour'); the row says no duration either",
    "cause": null,
    "note": true,
-   "screen_hash": "4f53cda18c2baa0c",
-   "row_hash": "37967c45d79163fc",
+   "screen_hash": null,
+   "row_hash": "cebb147317e10c05",
    "carried": true,
-   "pass": 1
+   "pass": 3
   },
   {
    "row": "C890",
@@ -1254,27 +1272,27 @@
    "row": "C906",
    "screen": "*",
    "verdict": "PASS",
-   "line": "Leave Caf\u00e9",
-   "why": "no 'till' anywhere",
+   "line": "\"Work a shift\", \"Buy a coffee ($3)\", \"Go to Zoe's party\"",
+   "why": "no 'till' or clock time on any label",
    "cause": null,
    "note": true,
    "screen_hash": "4f53cda18c2baa0c",
-   "row_hash": "c257bba6d15edc3f",
+   "row_hash": "b8d0e5793dd14e95",
    "carried": true,
-   "pass": 1
+   "pass": 3
   },
   {
    "row": "C910",
-   "screen": "*",
-   "verdict": "PASS",
-   "line": "Caf\u00e9 5m",
-   "why": "P05's only button, Leave Caf\u00e9, spends no time and says none; the walk in shows 5m",
+   "screen": "near_cafe",
+   "verdict": "FAIL",
+   "line": "menu button \"Work an hour\"",
+   "why": "a button says no time; this one says an hour",
    "cause": null,
    "note": true,
-   "screen_hash": "4f53cda18c2baa0c",
-   "row_hash": "c86548143d50a17d",
+   "screen_hash": null,
+   "row_hash": "19dcf805483efc88",
    "carried": true,
-   "pass": 1
+   "pass": 3
   },
   {
    "row": "C913",
@@ -1408,16 +1426,16 @@
   },
   {
    "row": "C929",
-   "screen": "*",
-   "verdict": "PASS",
-   "line": "Caf\u00e9 5m",
-   "why": "travel time is the quad's card tag",
+   "screen": "near_cafe",
+   "verdict": "FAIL",
+   "line": "menu button \"Work an hour\"",
+   "why": "an activity's time is tagged nowhere, its label included; this label carries it",
    "cause": null,
    "note": true,
-   "screen_hash": "4f53cda18c2baa0c",
-   "row_hash": "33a2ca367c2aac5b",
+   "screen_hash": null,
+   "row_hash": "b628ac285ac9c529",
    "carried": true,
-   "pass": 1
+   "pass": 3
   },
   {
    "row": "C930",
@@ -1460,16 +1478,16 @@
   },
   {
    "row": "C953",
-   "screen": "*",
-   "verdict": "PASS",
-   "line": "Caf\u00e9 5m",
-   "why": "the quad's link carries its cost tag 'Caf\u00e9 5m' (getLocationCostTag); Leave spends nothing and shows nothing",
+   "screen": "near_cafe",
+   "verdict": "FAIL",
+   "line": "menu button \"Work an hour\"",
+   "why": "the label carries time; money-only labels like \"Buy a coffee ($3)\" are right",
    "cause": null,
    "note": true,
-   "screen_hash": "4f53cda18c2baa0c",
-   "row_hash": "26f84fb90a0ef795",
+   "screen_hash": null,
+   "row_hash": "7ab90b4c71f3d98a",
    "carried": true,
-   "pass": 1
+   "pass": 3
   },
   {
    "row": "C954",
@@ -1565,15 +1583,15 @@
   {
    "row": "L147",
    "screen": "near_cafe",
-   "verdict": "FAIL",
-   "line": "Leave Caf\u00e9",
-   "why": "the open caf\u00e9 is empty with nothing to do at Sat/Sun 07-10 and Sun 19:00-21:00 after her first shift (no one in, coffee needs Tom or Chris, the work rows grey), on Sundays and before 10am before she's hired, and outside weekdays 10-14:56 before her first shift; held to P31, no waiver",
-   "cause": "P05c1-c2",
+   "verdict": "PASS",
+   "line": "Buy a coffee ($3) with Tom or Chris; Work an hour/shift; the hire",
+   "why": "the caf\u00e9's scenes are everyday work and coffee with people, not only her body",
+   "cause": null,
    "note": false,
    "screen_hash": null,
    "row_hash": "5dea5707be5e7e0a",
-   "carried": false,
-   "pass": 2
+   "carried": true,
+   "pass": 3
   },
   {
    "row": "L163",
@@ -1602,6 +1620,32 @@
    "pass": 1
   },
   {
+   "row": "L170",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "Zoe lives in town, two streets off the high street. Knock in the afternoon, or come to her party on a Saturday, 9pm to 1am.",
+   "why": "Zoe's Apartment is hidden_until zoe_place_known, set on the same choice as met_zoe (quad_meet_zoe); met_zoe is the when of a Someone on the Quad step, whose first step points at the quad weekdays 2 to 3 (Zoe's row 13/14-15)",
+   "cause": null,
+   "note": false,
+   "screen_hash": "4f53cda18c2baa0c",
+   "row_hash": "8f11debafcf05142",
+   "carried": false,
+   "pass": 5
+  },
+  {
+   "row": "L172",
+   "screen": "*",
+   "verdict": "N/A",
+   "line": "",
+   "why": "P05 builds no story_hints entry or walkthrough",
+   "cause": null,
+   "note": false,
+   "screen_hash": "4f53cda18c2baa0c",
+   "row_hash": "b99311cd35a8586e",
+   "carried": false,
+   "pass": 5
+  },
+  {
    "row": "L97",
    "screen": "*",
    "verdict": "N/A",
@@ -1616,16 +1660,29 @@
   },
   {
    "row": "clock#1",
+   "screen": "near_cafe",
+   "verdict": "PASS",
+   "line": "\"Work an hour\"",
+   "why": "clock.md's own worked example uses this label: 'Work an hour' (60 minutes and 10 energy in the costs; 'the label says neither'); the files rule it time-free",
+   "cause": null,
+   "note": false,
+   "screen_hash": null,
+   "row_hash": "b093ed58ec403b3c",
+   "carried": true,
+   "pass": 4
+  },
+  {
+   "row": "clock#10",
    "screen": "*",
    "verdict": "PASS",
-   "line": "Caf\u00e9 5m",
-   "why": "the walk shows 5m on its card; Leave spends and shows nothing",
+   "line": "zoe_party: max 1, weekday/time group, no show_when_blocked",
+   "why": "zoe_party now hides; body_coffee has a count and no clock window; the caf\u00e9 work rows have windows and no daily count",
    "cause": null,
    "note": false,
    "screen_hash": "4f53cda18c2baa0c",
-   "row_hash": "cd89df2f76a7be89",
+   "row_hash": "2ad5e473e29b231d",
    "carried": true,
-   "pass": 1
+   "pass": 4
   },
   {
    "row": "clock#2",
@@ -1683,14 +1740,14 @@
    "row": "clock#6",
    "screen": "*",
    "verdict": "PASS",
-   "line": "\"The caf\u00e9 across from campus: the coffee machine hissing, a long counter, a tip jar by the till. A sign on the door says it's open from 7am to 9pm.\"",
-   "why": "no 'till X'",
+   "line": "cooldown: \"ask the manager between 10am and 8:55pm, Monday to Saturday.\"",
+   "why": "no 'till X' on a label; hours sit on the greyed row, as clock rule 4 allows",
    "cause": null,
    "note": false,
    "screen_hash": "4f53cda18c2baa0c",
-   "row_hash": "31fd30fb07702bc9",
+   "row_hash": "bdedeec28a16e36f",
    "carried": true,
-   "pass": 1
+   "pass": 3
   },
   {
    "row": "clock#7",
@@ -1754,7 +1811,7 @@
    "note": false,
    "screen_hash": "4f53cda18c2baa0c",
    "row_hash": "01ba7fa1cec4bc7a",
-   "carried": false,
+   "carried": true,
    "pass": 2
   },
   {
@@ -1836,17 +1893,30 @@
    "pass": 1
   },
   {
+   "row": "places#10",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "Zoe lives in town, two streets off the high street. Knock in the afternoon, or come to her party on a Saturday, 9pm to 1am.",
+   "why": "Zoe's Apartment is hidden_until zoe_place_known, set on the same choice as met_zoe (quad_meet_zoe); met_zoe is the when of a Someone on the Quad step, whose first step points at the quad weekdays 2 to 3 (Zoe's row 13/14-15)",
+   "cause": null,
+   "note": false,
+   "screen_hash": "4f53cda18c2baa0c",
+   "row_hash": "309f0141d342dc6f",
+   "carried": false,
+   "pass": 5
+  },
+  {
    "row": "places#2",
    "screen": "near_cafe",
-   "verdict": "FAIL",
-   "line": "The caf\u00e9 across from campus: ... A sign on the door says it's open from 7am to 9pm.",
-   "why": "no presence line for Tom or Chris, and no empty line (Sat/Sun 07-10 and Sun 20-21 nobody is in); held to P31, no waiver",
-   "cause": "P05c1-c1",
+   "verdict": "PASS",
+   "line": "Nobody's behind the counter. The machine hisses to itself.",
+   "why": "the empty windows (Sat/Sun 07-10, Sun 20-21) now say why, in all three stages (before hire, before first shift, after)",
+   "cause": null,
    "note": false,
    "screen_hash": null,
-   "row_hash": "3ab79adc34668b04",
-   "carried": false,
-   "pass": 2
+   "row_hash": "e0b57720921c4523",
+   "carried": true,
+   "pass": 4
   },
   {
    "row": "places#3",
@@ -1863,16 +1933,16 @@
   },
   {
    "row": "places#4",
-   "screen": "*",
+   "screen": "near_cafe",
    "verdict": "PASS",
-   "line": "Caf\u00e9 5m",
-   "why": "'Leave Caf\u00e9' is short; the walk's cost is on the quad's card",
+   "line": "\"Buy a coffee ($3)\" / \"Work an hour\" / \"Sit by the window\"",
+   "why": "short labels; money on the spend; 'Work an hour' is the worked example's own label",
    "cause": null,
    "note": false,
-   "screen_hash": "4f53cda18c2baa0c",
-   "row_hash": "ada53ed66015c980",
+   "screen_hash": null,
+   "row_hash": "ae3ba300e1045c9f",
    "carried": true,
-   "pass": 1
+   "pass": 4
   },
   {
    "row": "places#5",
@@ -1890,15 +1960,15 @@
   {
    "row": "places#6",
    "screen": "near_cafe",
-   "verdict": "FAIL",
-   "line": "Leave Caf\u00e9",
-   "why": "before cafe_hired only the hire row (greyed Sundays and before 10am, hidden the rest of the day after \"Not today.\"); before the first shift only that shift (weekdays 10:00-14:56); after it, coffee shows only while Tom or Chris is in and work starts from 10 at weekends and ends 18:56 Sundays, so Sat/Sun 07-10 and Sun 19-21 nothing can be done; held to P31, no waiver",
-   "cause": "P05c1-c2",
+   "verdict": "PASS",
+   "line": "\"Sit by the window\"",
+   "why": "cafe_window has no conditions, so she always has one thing to do alone while the Caf\u00e9 is open",
+   "cause": null,
    "note": false,
    "screen_hash": null,
    "row_hash": "f2bc5f0f10c64c4b",
-   "carried": false,
-   "pass": 2
+   "carried": true,
+   "pass": 4
   },
   {
    "row": "places#7",
@@ -2085,15 +2155,15 @@
   {
    "row": "want#4",
    "screen": "*",
-   "verdict": "N/A",
-   "line": "",
-   "why": "the goal card is P13's, not a P05 screen",
+   "verdict": "PASS",
+   "line": "Work your first shift at the Caf\u00e9: a weekday between 10am and 3pm, while Tom and the barista are both in.",
+   "why": "the caf\u00e9's storyline is a story_hints ladder whose last passed step says what's next and names only met people (the barista unnamed until met_chris)",
    "cause": null,
    "note": false,
    "screen_hash": "4f53cda18c2baa0c",
-   "row_hash": "c2b008959e37f5fe",
-   "carried": true,
-   "pass": 1
+   "row_hash": "82e1671bb988af4e",
+   "carried": false,
+   "pass": 5
   },
   {
    "row": "want#5",
@@ -2135,24 +2205,7 @@
    "pass": 1
   }
  ],
- "causes": [
-  {
-   "id": "P05b1-c2",
-   "what": "The open Caf\u00e9 often has nothing she can do alone: before she's hired only the hire row (greyed Sundays and weekdays before 10, hidden for the day after 'Not today.'), before her first shift only that shift (weekdays 10-15), coffee hidden until cafe_first_shift_done and then only while Tom or Chris is in, so Sat/Sun 07-10 and Sun 20-21 every row hides or greys; held to P31, no waiver."
-  },
-  {
-   "id": "P05b1-c3",
-   "what": "No presence line on the Caf\u00e9 for Tom and Chris (met or unmet) and no empty line; held to P31, no waiver."
-  },
-  {
-   "id": "P05c1-c1",
-   "what": "No presence line on the Caf\u00e9 for Tom and Chris (met or unmet) and no empty line; held to P31, no waiver."
-  },
-  {
-   "id": "P05c1-c2",
-   "what": "The open Caf\u00e9 has hours with nothing she can do alone: before hire (Sundays, before 10am, after \"Not today.\"), before her first shift (outside weekdays 10-15), and after it Sat/Sun 07-10 and Sun 19-21; held to P31, no waiver."
-  }
- ],
+ "causes": [],
  "pending": [],
  "asked": 6,
  "answered": 6,

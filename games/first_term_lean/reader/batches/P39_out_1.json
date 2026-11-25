@@ -1,0 +1,1227 @@
+{
+ "verdicts": [
+  {
+   "row": "B1",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "Marco's behind a woman ... his hands on her hips",
+   "why": "each person visibly wants their own thing (money, a sale, a client, to show off); checked walk_* canvases and the meetings shop_meet_danny, gym_meet_marco, street_meet_vance, shop_meet_nina; no sexual step on her"
+  },
+  {
+   "row": "B10",
+   "screen": "walk_danny_deal.pretend",
+   "verdict": "FAIL",
+   "line": "You take your snack to the till and look at the price",
+   "why": "true on no visit: she bought nothing, and pays nothing",
+   "cause": "P39a1-c3"
+  },
+  {
+   "row": "B10",
+   "screen": "walk_nina_dress.moment",
+   "verdict": "FAIL",
+   "line": "Nina's in the shop's tightest black dress, turning to check her ass in the mirror.",
+   "why": "contradicts the room text shown with the button ('Nina looks up from the till')",
+   "cause": "P39a1-c8"
+  },
+  {
+   "row": "B11",
+   "screen": "*",
+   "verdict": "N/A",
+   "line": "",
+   "why": "no solo buttons; every button is an answer with someone there"
+  },
+  {
+   "row": "B12",
+   "screen": "walk_marco_squat.moment",
+   "verdict": "FAIL",
+   "line": "He catches your eye in the mirror and doesn't let go of her.",
+   "why": "low heat with nothing on her body",
+   "cause": "P39a1-c9"
+  },
+  {
+   "row": "B13",
+   "screen": "walk_curtain.moment",
+   "verdict": "FAIL",
+   "line": "The curtain rips back. ... the skirt halfway up your thighs",
+   "why": "undressing in the fitting room with no picture of her",
+   "cause": "P39a1-c6"
+  },
+  {
+   "row": "B2",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "Vance ... a shoebox of envelopes ... counting",
+   "why": "each known person shows a new side after the meeting (ledger, deal, client, dress)"
+  },
+  {
+   "row": "B3",
+   "screen": "walk_park_couple.watch",
+   "verdict": "FAIL",
+   "line": "Your knees are weak by the time you make it back to the path.",
+   "why": "no screen of the park scene points at anything next",
+   "cause": "P39a1-c7"
+  },
+  {
+   "row": "B3",
+   "screen": "walk_curtain.finish",
+   "verdict": "FAIL",
+   "line": "You finish changing with your back to the curtain, fast.",
+   "why": "no screen of the curtain scene points at anything next",
+   "cause": "P39a1-c7"
+  },
+  {
+   "row": "B4",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "Your knees are weak / until your heart slows down",
+   "why": "her reactions are on her body; release 1 sex she sees (heat.md shape 4)"
+  },
+  {
+   "row": "B5",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "He catches your eye in the mirror / He smiles like you've both agreed",
+   "why": "someone reacts in each known-person scene; park strangers don't, being caught is out of scope on the card"
+  },
+  {
+   "row": "B6",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "Back away / Walk past / Just browse / Pull it shut",
+   "why": "every scene has a written leave; none final"
+  },
+  {
+   "row": "B7",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "her heels in the backs of his thighs as he fucks her, slow and deep.",
+   "why": "explicit lines end on the act, not on meaning"
+  },
+  {
+   "row": "B8",
+   "screen": "walk_danny_deal.pretend",
+   "verdict": "FAIL",
+   "line": "Two fifty.",
+   "why": "number disagrees with 'Buy a snack ($2)'; no money cost on the choice",
+   "cause": "P39a1-c3"
+  },
+  {
+   "row": "B9",
+   "screen": "*",
+   "verdict": "N/A",
+   "line": "",
+   "why": "no companion/rival declared for these people in PLAN"
+  },
+  {
+   "row": "C1002",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "You take your snack to the till",
+   "why": "the only spend is at the shop; its mismatch is C952"
+  },
+  {
+   "row": "C1008",
+   "screen": "*",
+   "verdict": "N/A",
+   "line": "",
+   "why": "the row's subject (need, dress code, rent, talk screen or place description) is not on these screens"
+  },
+  {
+   "row": "C1013",
+   "screen": "*",
+   "verdict": "N/A",
+   "line": "",
+   "why": "the row's subject (need, dress code, rent, talk screen or place description) is not on these screens"
+  },
+  {
+   "row": "C1021",
+   "screen": "*",
+   "verdict": "N/A",
+   "line": "",
+   "why": "the row's subject (need, dress code, rent, talk screen or place description) is not on these screens"
+  },
+  {
+   "row": "C1022",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "Two fifty. / a fold of notes",
+   "why": "no real-world currency named"
+  },
+  {
+   "row": "C1033",
+   "screen": "*",
+   "verdict": "N/A",
+   "line": "",
+   "why": "the row's subject (need, dress code, rent, talk screen or place description) is not on these screens"
+  },
+  {
+   "row": "C1158",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "your underwear right there (clothing_slot underwear equipped) / nothing under it",
+   "why": "her garment is backed by a slot group; the skirt is the try-on the act backs"
+  },
+  {
+   "row": "C1173",
+   "screen": "*",
+   "verdict": "N/A",
+   "line": "",
+   "why": "the row's subject (need, dress code, rent, talk screen or place description) is not on these screens"
+  },
+  {
+   "row": "C1176",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "the skirt halfway up your thighs",
+   "why": "no clothing read on the park sex scene; the curtain's is the event itself"
+  },
+  {
+   "row": "C1177",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "A man, a stranger with a bag of shirts",
+   "why": "outfit + fitting room + a stranger makes it the event"
+  },
+  {
+   "row": "C1184",
+   "screen": "*",
+   "verdict": "N/A",
+   "line": "",
+   "why": "the row's subject (need, dress code, rent, talk screen or place description) is not on these screens"
+  },
+  {
+   "row": "C1185",
+   "screen": "*",
+   "verdict": "N/A",
+   "line": "",
+   "why": "the row's subject (need, dress code, rent, talk screen or place description) is not on these screens"
+  },
+  {
+   "row": "C1189",
+   "screen": "*",
+   "verdict": "N/A",
+   "line": "",
+   "why": "the row's subject (need, dress code, rent, talk screen or place description) is not on these screens"
+  },
+  {
+   "row": "C1198",
+   "screen": "*",
+   "verdict": "N/A",
+   "line": "",
+   "why": "the row's subject (need, dress code, rent, talk screen or place description) is not on these screens"
+  },
+  {
+   "row": "C1200",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "the skirt halfway up your thighs",
+   "why": "clothes named only where the try-on asks for them"
+  },
+  {
+   "row": "C1206",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "your underwear right there in front of him",
+   "why": "grouped on clothing_slot underwear; 'nothing under it' otherwise"
+  },
+  {
+   "row": "C1220",
+   "screen": "*",
+   "verdict": "N/A",
+   "line": "",
+   "why": "the row's subject (need, dress code, rent, talk screen or place description) is not on these screens"
+  },
+  {
+   "row": "C1221",
+   "screen": "*",
+   "verdict": "N/A",
+   "line": "",
+   "why": "the row's subject (need, dress code, rent, talk screen or place description) is not on these screens"
+  },
+  {
+   "row": "C1234",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "her heels in the backs of his thighs as he fucks her ... [image]",
+   "why": "the clip sits right after the act line"
+  },
+  {
+   "row": "C1238",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "a man and a woman having sex on the grass behind a pond, her skirt pushed up",
+   "why": "matches the line on every visit (19:00-21:00, gates lock at 9pm)"
+  },
+  {
+   "row": "C1249",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "sex/park_couple_t5",
+   "why": "one spot, on the sex scene"
+  },
+  {
+   "row": "C1250",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "(no room text added)",
+   "why": "media on the sex scene only"
+  },
+  {
+   "row": "C1255",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "pool_dir = \"sex/park_couple_t5\"",
+   "why": "used once in the TOML"
+  },
+  {
+   "row": "C1261",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "Behind the pond, through a gap in the bushes",
+   "why": "the one spot is where the player wants to look"
+  },
+  {
+   "row": "C1262",
+   "screen": "walk_curtain.moment",
+   "verdict": "FAIL",
+   "line": "...the skirt halfway up your thighs and your underwear right there in front of him.",
+   "why": "body moment with no clip or still after the line (walk-ins.md 'When someone walks in on her' step 2)",
+   "cause": "P39a1-c6"
+  },
+  {
+   "row": "C1265",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "Vance / Danny / Marco / Nina scenes",
+   "why": "no spot on everyday walk-ins"
+  },
+  {
+   "row": "C1267",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "a man and a woman on the grass",
+   "why": "the picture gives the act the words can't"
+  },
+  {
+   "row": "C1274",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "_t5, gif in the search words",
+   "why": "sex, animated"
+  },
+  {
+   "row": "C1275",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "couple having sex on grass park dusk seen through bushes gif",
+   "why": "something happens, gif asked"
+  },
+  {
+   "row": "C1277",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "behind a pond",
+   "why": "the place the scene is named for is in the picture"
+  },
+  {
+   "row": "C1278",
+   "screen": "walk_park_couple.moment",
+   "verdict": "FAIL",
+   "line": "Seen through bushes at dusk: a man and a woman having sex on the grass behind a pond",
+   "why": "no age in the description",
+   "cause": "P39a1-c5"
+  },
+  {
+   "row": "C1279",
+   "screen": "*",
+   "verdict": "N/A",
+   "line": "",
+   "why": "the one picture is not a mirror"
+  },
+  {
+   "row": "C1280",
+   "screen": "walk_park_couple.moment",
+   "verdict": "FAIL",
+   "line": "pool_dir = \"sex/park_couple_t5\", pool = 2",
+   "why": "explicit repeat asks pool 4",
+   "cause": "P39a1-c4"
+  },
+  {
+   "row": "C1281",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "nobody looking at the camera",
+   "why": "what she sees, nobody looking at her"
+  },
+  {
+   "row": "C1284",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "Seen through bushes at dusk: ...",
+   "why": "written as what the looker sees"
+  },
+  {
+   "row": "C1303",
+   "screen": "*",
+   "verdict": "N/A",
+   "line": "",
+   "why": "the row's subject (need, dress code, rent, talk screen or place description) is not on these screens"
+  },
+  {
+   "row": "C1313",
+   "screen": "*",
+   "verdict": "N/A",
+   "line": "",
+   "why": "the row's subject (need, dress code, rent, talk screen or place description) is not on these screens"
+  },
+  {
+   "row": "C1337",
+   "screen": "*",
+   "verdict": "N/A",
+   "line": "",
+   "why": "the row's subject (need, dress code, rent, talk screen or place description) is not on these screens"
+  },
+  {
+   "row": "C1340",
+   "screen": "*",
+   "verdict": "N/A",
+   "line": "",
+   "why": "no housemate on these screens"
+  },
+  {
+   "row": "C1342",
+   "screen": "*",
+   "verdict": "N/A",
+   "line": "",
+   "why": "the row's subject (need, dress code, rent, talk screen or place description) is not on these screens"
+  },
+  {
+   "row": "C1345",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "max_triggers_per_day = 1",
+   "why": "brake on the way in, every canvas"
+  },
+  {
+   "row": "C1360",
+   "screen": "*",
+   "verdict": "N/A",
+   "line": "",
+   "why": "the row's subject (need, dress code, rent, talk screen or place description) is not on these screens"
+  },
+  {
+   "row": "C1421",
+   "screen": "*",
+   "verdict": "N/A",
+   "line": "",
+   "why": "the row's subject (need, dress code, rent, talk screen or place description) is not on these screens"
+  },
+  {
+   "row": "C1423",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "max_triggers_per_day = 1",
+   "why": "a daily cap"
+  },
+  {
+   "row": "C1425",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "max_triggers_per_day = 1; 5 min on Done",
+   "why": "cap plus time"
+  },
+  {
+   "row": "C1427",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "time_progression_minutes = 5",
+   "why": "small spend inside 2-4 hour windows; nothing to throttle"
+  },
+  {
+   "row": "C1428",
+   "screen": "*",
+   "verdict": "N/A",
+   "line": "",
+   "why": "the row's subject (need, dress code, rent, talk screen or place description) is not on these screens"
+  },
+  {
+   "row": "C1431",
+   "screen": "*",
+   "verdict": "N/A",
+   "line": "",
+   "why": "the row's subject (need, dress code, rent, talk screen or place description) is not on these screens"
+  },
+  {
+   "row": "C1432",
+   "screen": "*",
+   "verdict": "N/A",
+   "line": "",
+   "why": "the row's subject (need, dress code, rent, talk screen or place description) is not on these screens"
+  },
+  {
+   "row": "C1433",
+   "screen": "*",
+   "verdict": "N/A",
+   "line": "",
+   "why": "the row's subject (need, dress code, rent, talk screen or place description) is not on these screens"
+  },
+  {
+   "row": "C1434",
+   "screen": "*",
+   "verdict": "N/A",
+   "line": "",
+   "why": "the row's subject (need, dress code, rent, talk screen or place description) is not on these screens"
+  },
+  {
+   "row": "C1438",
+   "screen": "*",
+   "verdict": "N/A",
+   "line": "",
+   "why": "the row's subject (need, dress code, rent, talk screen or place description) is not on these screens"
+  },
+  {
+   "row": "C1441",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "each scene has its own screen",
+   "why": "no number-only result"
+  },
+  {
+   "row": "C146",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "once a day, a flag each",
+   "why": "no big moment on a repeatable"
+  },
+  {
+   "row": "C149",
+   "screen": "walk_park_couple.watch",
+   "verdict": "FAIL",
+   "line": "Your knees are weak by the time you make it back to the path.",
+   "why": "last screen closes the moment; nothing points at what comes next",
+   "cause": "P39a1-c7"
+  },
+  {
+   "row": "C149",
+   "screen": "walk_park_couple.away",
+   "verdict": "FAIL",
+   "line": "You back onto the path before a twig can snap.",
+   "why": "last screen closes the moment; nothing points at what comes next",
+   "cause": "P39a1-c7"
+  },
+  {
+   "row": "C149",
+   "screen": "walk_vance_ledger.past",
+   "verdict": "FAIL",
+   "line": "You walk past. You hear the box lid shut behind you.",
+   "why": "last screen closes the moment; nothing points at what comes next",
+   "cause": "P39a1-c7"
+  },
+  {
+   "row": "C149",
+   "screen": "walk_danny_deal.pretend",
+   "verdict": "FAIL",
+   "line": "Two fifty.",
+   "why": "last screen closes the moment; nothing points at what comes next",
+   "cause": "P39a1-c7"
+  },
+  {
+   "row": "C149",
+   "screen": "walk_nina_dress.browse",
+   "verdict": "FAIL",
+   "line": "She says it with a smile, and pulls the curtain.",
+   "why": "last screen closes the moment; nothing points at what comes next",
+   "cause": "P39a1-c7"
+  },
+  {
+   "row": "C149",
+   "screen": "walk_curtain.shut",
+   "verdict": "FAIL",
+   "line": "You hold the curtain shut with both hands until your heart slows down.",
+   "why": "last screen closes the moment; nothing points at what comes next",
+   "cause": "P39a1-c7"
+  },
+  {
+   "row": "C149",
+   "screen": "walk_curtain.finish",
+   "verdict": "FAIL",
+   "line": "You finish changing with your back to the curtain, fast.",
+   "why": "last screen closes the moment; nothing points at what comes next",
+   "cause": "P39a1-c7"
+  },
+  {
+   "row": "C151",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "Short again, number nine. Always number nine.",
+   "why": "each repeatable stays short: one line, one want"
+  },
+  {
+   "row": "C164",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "Back away / Walk past",
+   "why": "an ordinary no; the scene is back the next day"
+  },
+  {
+   "row": "C165",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "Back away / Walk past / Just browse",
+   "why": "no final no anywhere"
+  },
+  {
+   "row": "C166",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "Back away",
+   "why": "no final no"
+  },
+  {
+   "row": "C286",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "He drops the curtain at once, too late.",
+   "why": "the curtain is an accident, stage 1"
+  },
+  {
+   "row": "C287",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "Watch / Watch from the bench",
+   "why": "sex she sees is in release 1 (heat.md shape 4)"
+  },
+  {
+   "row": "C288",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "(none)",
+   "why": "no private contact"
+  },
+  {
+   "row": "C289",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "and nothing under it",
+   "why": "the curtain counts as a flash, dropped at once (ENI for LO, per the brief)"
+  },
+  {
+   "row": "C291",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "your underwear right there / nothing under it",
+   "why": "what shows sets the level"
+  },
+  {
+   "row": "C296",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "the low version",
+   "why": "each kind opens at its lowest"
+  },
+  {
+   "row": "C297",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "(no housemate)",
+   "why": "no one she lives with here"
+  },
+  {
+   "row": "C311",
+   "screen": "walk_marco_squat.moment",
+   "verdict": "FAIL",
+   "line": "Marco's behind a woman at the squat rack, his hands on her hips",
+   "why": "charged, no explicit beat; her body is never named, no price or not-yet",
+   "cause": "P39a1-c9"
+  },
+  {
+   "row": "C314",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "his hands on her hips ... She doesn't move them.",
+   "why": "not talk only: bodies and reactions on every charged screen"
+  },
+  {
+   "row": "C330",
+   "screen": "*",
+   "verdict": "N/A",
+   "line": "",
+   "why": "no meter moves (release 1, a flag each)"
+  },
+  {
+   "row": "C422",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "Watch / Back away / Say hello / Walk past / Pull it shut",
+   "why": "answer labels say plainly what clicking does; place buttons follow walk-ins.md's 'His door's open a crack' shape"
+  },
+  {
+   "row": "C442",
+   "screen": "walk_park_couple.watch",
+   "verdict": "FAIL",
+   "line": "You watch until she arches and shakes under him.",
+   "why": "a fade in the shape heat.md bans ('You watch until it's over.')",
+   "cause": "P39a1-c10"
+  },
+  {
+   "row": "C447",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "Same time Friday. Don't be late. Cash only. / Coward.",
+   "why": "each person holds their manner"
+  },
+  {
+   "row": "C449",
+   "screen": "walk_park_couple.watch",
+   "verdict": "FAIL",
+   "line": "You watch until she arches and shakes under him.",
+   "why": "the act skipped to its end; her arousal isn't named on her body",
+   "cause": "P39a1-c10"
+  },
+  {
+   "row": "C450",
+   "screen": "walk_park_couple.watch",
+   "verdict": "FAIL",
+   "line": "Your knees are weak by the time you make it back to the path.",
+   "why": "last screen closes the moment; nothing points at what comes next",
+   "cause": "P39a1-c7"
+  },
+  {
+   "row": "C450",
+   "screen": "walk_park_couple.away",
+   "verdict": "FAIL",
+   "line": "You back onto the path before a twig can snap.",
+   "why": "last screen closes the moment; nothing points at what comes next",
+   "cause": "P39a1-c7"
+  },
+  {
+   "row": "C450",
+   "screen": "walk_vance_ledger.past",
+   "verdict": "FAIL",
+   "line": "You walk past. You hear the box lid shut behind you.",
+   "why": "last screen closes the moment; nothing points at what comes next",
+   "cause": "P39a1-c7"
+  },
+  {
+   "row": "C450",
+   "screen": "walk_danny_deal.pretend",
+   "verdict": "FAIL",
+   "line": "Two fifty.",
+   "why": "last screen closes the moment; nothing points at what comes next",
+   "cause": "P39a1-c7"
+  },
+  {
+   "row": "C450",
+   "screen": "walk_nina_dress.browse",
+   "verdict": "FAIL",
+   "line": "She says it with a smile, and pulls the curtain.",
+   "why": "last screen closes the moment; nothing points at what comes next",
+   "cause": "P39a1-c7"
+  },
+  {
+   "row": "C450",
+   "screen": "walk_curtain.shut",
+   "verdict": "FAIL",
+   "line": "You hold the curtain shut with both hands until your heart slows down.",
+   "why": "last screen closes the moment; nothing points at what comes next",
+   "cause": "P39a1-c7"
+  },
+  {
+   "row": "C450",
+   "screen": "walk_curtain.finish",
+   "verdict": "FAIL",
+   "line": "You finish changing with your back to the curtain, fast.",
+   "why": "last screen closes the moment; nothing points at what comes next",
+   "cause": "P39a1-c7"
+  },
+  {
+   "row": "C451",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "a shoebox of envelopes on his knee, licking his thumb, counting",
+   "why": "concrete objects throughout"
+  },
+  {
+   "row": "C460",
+   "screen": "walk_vance_ledger.moment",
+   "verdict": "FAIL",
+   "line": "Short again, number nine. Always number nine. (speaker npc_vance)",
+   "why": "before met_vance (weekdays before her first Sunday) the label prints 'Mr. Vance' though narration says 'The man next door'; PLAN 10b: unnamed until P24",
+   "cause": "P39a1-c1"
+  },
+  {
+   "row": "C460",
+   "screen": "walk_vance_ledger.hello",
+   "verdict": "FAIL",
+   "line": "Evening. (met_vance is_false group, speaker npc_vance)",
+   "why": "the unmet variant still shows his name as the speaker",
+   "cause": "P39a1-c1"
+  },
+  {
+   "row": "C460",
+   "screen": "walk_danny_deal.pretend",
+   "verdict": "FAIL",
+   "line": "You take your snack to the till",
+   "why": "no snack was taken on any path into this screen; price said, money unchanged",
+   "cause": "P39a1-c3"
+  },
+  {
+   "row": "C460",
+   "screen": "walk_nina_dress.moment",
+   "verdict": "FAIL",
+   "line": "The fitting room curtain's half open. Nina's in the shop's tightest black dress",
+   "why": "her row is 'behind the till' and the shop's text on the same menu says 'Nina looks up from the till'",
+   "cause": "P39a1-c8"
+  },
+  {
+   "row": "C461",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "Don't tell my boss. I'm the boss.",
+   "why": "texture and in-character dialogue"
+  },
+  {
+   "row": "C519",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "(each screen under 60 words)",
+   "why": "one job per screen"
+  },
+  {
+   "row": "C593",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "little lady / gorgeous / sweetie",
+   "why": "each term used only by its person (grep: Vance 3, Danny 3, Nina 4 incl. her phone)"
+  },
+  {
+   "row": "C596",
+   "screen": "*",
+   "verdict": "N/A",
+   "line": "",
+   "why": "no talk screen here"
+  },
+  {
+   "row": "C601",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "He catches your eye in the mirror and doesn't let go of her.",
+   "why": "his leak on his body, seen by her; the stranger's 'I didn't see anything' is his cover"
+  },
+  {
+   "row": "C613",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "He catches your eye in the mirror",
+   "why": "shown before anything toward her; the curtain is an accident"
+  },
+  {
+   "row": "C620",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "npc_at_location gates",
+   "why": "no listing change here"
+  },
+  {
+   "row": "C625",
+   "screen": "walk_vance_ledger.moment",
+   "verdict": "FAIL",
+   "line": "Short again, number nine. (speaker npc_vance, unmet)",
+   "why": "name before meeting on the speaker label (note row)"
+  },
+  {
+   "row": "C625",
+   "screen": "walk_vance_ledger.hello",
+   "verdict": "FAIL",
+   "line": "Evening. (speaker npc_vance, unmet)",
+   "why": "name before meeting on the speaker label (note row)"
+  },
+  {
+   "row": "C626",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "Vance is on his porch / The man next door is on his porch",
+   "why": "narration swaps on met flags"
+  },
+  {
+   "row": "C630",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "Vance / Danny / Marco / Nina (met variants)",
+   "why": "relations given at their meetings; unmet variants use the relation"
+  },
+  {
+   "row": "C632",
+   "screen": "*",
+   "verdict": "N/A",
+   "line": "",
+   "why": "the row's subject (need, dress code, rent, talk screen or place description) is not on these screens"
+  },
+  {
+   "row": "C639",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "Say hello \u00b7 Walk past",
+   "why": "no offer is made; walk-ins.md prescribes two answers"
+  },
+  {
+   "row": "C640",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "Coward. She says it with a smile",
+   "why": "each no is written content"
+  },
+  {
+   "row": "C644",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "a shoebox of envelopes / a fold of notes / a client / her shop",
+   "why": "each person owns a corner"
+  },
+  {
+   "row": "C758",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "Watch / Back away / Walk past",
+   "why": "short labels"
+  },
+  {
+   "row": "C762",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "(every scene)",
+   "why": "no 'nothing happens'"
+  },
+  {
+   "row": "C769",
+   "screen": "*",
+   "verdict": "N/A",
+   "line": "",
+   "why": "the row's subject (need, dress code, rent, talk screen or place description) is not on these screens"
+  },
+  {
+   "row": "C770",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "(not a room screen)",
+   "why": "no room text here"
+  },
+  {
+   "row": "C771",
+   "screen": "*",
+   "verdict": "N/A",
+   "line": "",
+   "why": "the row's subject (need, dress code, rent, talk screen or place description) is not on these screens"
+  },
+  {
+   "row": "C773",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "(walk-in buttons)",
+   "why": "a scene, not a browse list"
+  },
+  {
+   "row": "C776",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "(walk-in buttons)",
+   "why": "walk-ins.md: a scene she walks into is a button at the place"
+  },
+  {
+   "row": "C777",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "(walk-in buttons)",
+   "why": "each opens a beat"
+  },
+  {
+   "row": "C782",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "Pull it shut \u00b7 Finish changing",
+   "why": "choices inside the moment's own screen; no solo act"
+  },
+  {
+   "row": "C794",
+   "screen": "*",
+   "verdict": "N/A",
+   "line": "",
+   "why": "the row's subject (need, dress code, rent, talk screen or place description) is not on these screens"
+  },
+  {
+   "row": "C795",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "(no room-text line)",
+   "why": "no per-person room text added"
+  },
+  {
+   "row": "C804",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "(no room-text line)",
+   "why": "people stay faces"
+  },
+  {
+   "row": "C889",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "Watch / Done",
+   "why": "no time or duration on labels"
+  },
+  {
+   "row": "C892",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "time_of_day on the trigger",
+   "why": "hours on the door"
+  },
+  {
+   "row": "C897",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "time_progression_minutes = 5",
+   "why": "no per-room travel cost"
+  },
+  {
+   "row": "C900",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "Evening, little lady.",
+   "why": "no clock time in prose; 'Evening' holds 17:00-20:00"
+  },
+  {
+   "row": "C902",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "Evening. (19:59)",
+   "why": "each line still true at its window's last minute"
+  },
+  {
+   "row": "C903",
+   "screen": "walk_danny_deal.moment",
+   "verdict": "FAIL",
+   "line": "Same time Friday. Don't be late. Cash only.",
+   "why": "canvas fires every day 21:00-23:00, no weekday condition; on a Friday visit it is 'Friday' said on Friday",
+   "cause": "P39a1-c2"
+  },
+  {
+   "row": "C906",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "(labels)",
+   "why": "no 'till' times"
+  },
+  {
+   "row": "C910",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "Watch / Done",
+   "why": "no time or energy on buttons"
+  },
+  {
+   "row": "C913",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "(walk-ins)",
+   "why": "events, hidden out of window (C916)"
+  },
+  {
+   "row": "C914",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "(walk-ins)",
+   "why": "no clock-greyed rows"
+  },
+  {
+   "row": "C916",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "no show_when_blocked",
+   "why": "events stay hidden when shut"
+  },
+  {
+   "row": "C920",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "Done back to the same place",
+   "why": "no hop cost"
+  },
+  {
+   "row": "C924",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "(no travel)",
+   "why": "no travel here"
+  },
+  {
+   "row": "C926",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "time_progression_minutes = 5",
+   "why": "minutes only"
+  },
+  {
+   "row": "C927",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "time_progression_minutes = 5",
+   "why": "exits cost 5"
+  },
+  {
+   "row": "C928",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "(no clock in prose)",
+   "why": "clock left to the HUD"
+  },
+  {
+   "row": "C929",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "(labels)",
+   "why": "no time tag on labels"
+  },
+  {
+   "row": "C930",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "(no show_when_blocked)",
+   "why": "events vanish out of window, as intended"
+  },
+  {
+   "row": "C931",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "end_time = \"23:00\" etc.",
+   "why": "windows end exclusive inside the places' hours"
+  },
+  {
+   "row": "C951",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "Two fifty.",
+   "why": "amount stays in prose (its value FAILs at C952)"
+  },
+  {
+   "row": "C952",
+   "screen": "walk_danny_deal.pretend",
+   "verdict": "FAIL",
+   "line": "Two fifty.",
+   "why": "the snack is $2 elsewhere (body_snack), and nothing is bought here",
+   "cause": "P39a1-c3"
+  },
+  {
+   "row": "C953",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "(labels)",
+   "why": "no money/time on labels"
+  },
+  {
+   "row": "C954",
+   "screen": "walk_danny_deal.pretend",
+   "verdict": "FAIL",
+   "line": "Two fifty.",
+   "why": "a spend said in the scene with no button and no spend (note row)"
+  },
+  {
+   "row": "L106",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "npc_at_location on each trigger",
+   "why": "who_is_where: Vance street Mon-Fri 17-20, Danny shop to 23, Marco gym 17-21 weekdays, Nina shop Mon-Sat 10-19"
+  },
+  {
+   "row": "L119",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "pool = 2",
+   "why": "pool written, not defaulted"
+  },
+  {
+   "row": "L120",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "a man and a woman having sex ... nobody looking at the camera",
+   "why": "no 'man looking at her' frame"
+  },
+  {
+   "row": "L121",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "one spot on the sex scene",
+   "why": "no everyday overshoot"
+  },
+  {
+   "row": "L125",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "[image] after the act line",
+   "why": "the clip shows the act she walks into, not the Watch payoff"
+  },
+  {
+   "row": "L166",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "time_of_day on walk-ins",
+   "why": "windows from PLAN 10b, said on the card"
+  },
+  {
+   "row": "L167",
+   "screen": "*",
+   "verdict": "N/A",
+   "line": "",
+   "why": "no row with different hours on different days"
+  },
+  {
+   "row": "L71",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "Watch \u00b7 Back away",
+   "why": "release 1: stage 1 and sex she sees (heat.md shape 4); she chooses no act"
+  }
+ ],
+ "causes": [
+  {
+   "id": "P39a1-c1",
+   "what": "Vance's lines before met_vance are spoken under his name (speaker npc_vance renders 'Mr. Vance', v2.py:19289-19300), not as Stranger, so the unmet man next door is named on screen"
+  },
+  {
+   "id": "P39a1-c2",
+   "what": "Danny's 'Same time Friday.' names a weekday on a canvas that fires every day, with no weekday condition behind it"
+  },
+  {
+   "id": "P39a1-c3",
+   "what": "Danny says 'Two fifty.' for 'your snack', but no snack was bought, no money moves, and the shop's snack is $2 (body_snack 'Buy a snack ($2)')"
+  },
+  {
+   "id": "P39a1-c4",
+   "what": "The park couple is an explicit (_t5) spot on a repeat (once a day) with pool = 2; the rule says 4"
+  },
+  {
+   "id": "P39a1-c5",
+   "what": "The park picture's description gives no age for anyone in it (nor 'she is 18, out of frame')"
+  },
+  {
+   "id": "P39a1-c6",
+   "what": "walk_curtain has no picture of her after the line where the stranger sees her half into the skirt"
+  },
+  {
+   "id": "P39a1-c7",
+   "what": "Several answer screens end on a closing line that points at nothing next (park watch/away, Vance walk past, Danny pretend, Nina browse, curtain shut/finish)"
+  },
+  {
+   "id": "P39a1-c8",
+   "what": "Nina's row has her 'behind the till', and the shop's room text on the same menu says 'Nina looks up from the till', while the walk-in puts her in the fitting room in a dress"
+  },
+  {
+   "id": "P39a1-c9",
+   "what": "The Marco squat scene is charged but never names a part of her body and holds no price or 'not yet'"
+  },
+  {
+   "id": "P39a1-c10",
+   "what": "The park Watch payoff fades the act ('You watch until she arches and shakes under him.') and her arousal never reaches her body (heat.md 'Not this': 'You watch until it's over.')"
+  }
+ ]
+}

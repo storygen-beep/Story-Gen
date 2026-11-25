@@ -1,0 +1,117 @@
+{
+ "verdicts": [
+  {
+   "row": "B10",
+   "screen": "mom_living_room.talk",
+   "verdict": "PASS",
+   "line": "Next time Mark's out, you tell me the next part.",
+   "why": "Mom's face gates the canvas (requires_npc); each group reads Mark's presence; Mark is out of the living room only Saturday 19-23, so 'next time Mark's out' is true",
+   "cause": null
+  },
+  {
+   "row": "B8",
+   "screen": "mom_living_room.talk",
+   "verdict": "PASS",
+   "line": "Next time Mark's out, you tell me the next part.",
+   "why": "no number and no garment on the talk",
+   "cause": null
+  },
+  {
+   "row": "C1158",
+   "screen": "mom_living_room.talk",
+   "verdict": "PASS",
+   "line": "Stay in tonight. Just tonight. For me.",
+   "why": "no garment named on the talk",
+   "cause": null
+  },
+  {
+   "row": "C1206",
+   "screen": "mom_living_room.talk",
+   "verdict": "PASS",
+   "line": "Stay in tonight. Just tonight. For me.",
+   "why": "no garment named on the talk",
+   "cause": null
+  },
+  {
+   "row": "C1631",
+   "screen": "mom_living_room.talk",
+   "verdict": "N/A",
+   "line": "Next time Mark's out, you tell me the next part.",
+   "why": "not the opening's hand-over screen",
+   "cause": null
+  },
+  {
+   "row": "C460",
+   "screen": "mom_living_room.talk",
+   "verdict": "PASS",
+   "line": "Next time Mark's out, you tell me the next part.",
+   "why": "every claim holds: Mom is on the couch 19-23 every day, 'tonight' fits that window, no past assumed beyond the start flags each group reads",
+   "cause": null
+  },
+  {
+   "row": "C461",
+   "screen": "mom_living_room.talk",
+   "verdict": "PASS",
+   "line": "Then watch it, Mark. / Tomorrow, Mom. Promise.",
+   "why": "dialogue that fits Mom, Mark and her",
+   "cause": null
+  },
+  {
+   "row": "C903",
+   "screen": "mom_living_room.talk",
+   "verdict": "PASS",
+   "line": "Next time Mark's out, you tell me the next part.",
+   "why": "the weekday is gone; no line names a day",
+   "cause": null
+  },
+  {
+   "row": "C921",
+   "screen": "mom_living_room.talk",
+   "verdict": "PASS",
+   "line": "Mom 19:00-23:00 living room; Mark weekday 16:30-23:00, Sat 10:00-19:00, Sun 12:00-23:00",
+   "why": "every row behind the screen has an end time; none wraps here",
+   "cause": null
+  },
+  {
+   "row": "C927",
+   "screen": "mom_living_room.talk",
+   "verdict": "PASS",
+   "line": "\"Done\" (5 min)",
+   "why": "the exit states its minutes",
+   "cause": null
+  },
+  {
+   "row": "C931",
+   "screen": "mom_living_room.talk",
+   "verdict": "N/A",
+   "line": "\"Done\"",
+   "why": "no time_of_day read on the talk",
+   "cause": null
+  },
+  {
+   "row": "L106",
+   "screen": "mom_living_room.talk",
+   "verdict": "PASS",
+   "line": "Mark's in his chair... / Some of us are trying to watch this.",
+   "why": "Mark speaks only in the group gated on his presence",
+   "cause": null
+  },
+  {
+   "row": "L167",
+   "screen": "mom_living_room.talk",
+   "verdict": "PASS",
+   "line": "\"Talk\" — \"Talk — you've already talked today.\"",
+   "why": "no hours on this row; a daily flag greys it",
+   "cause": null
+  },
+  {
+   "row": "clock#10",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "talk_mom / mom_living_room triggers: no time_of_day, no max_triggers_per_day",
+   "why": "no row in P07's canvases has both a clock window and a daily count",
+   "cause": null
+  }
+ ],
+ "causes": []
+}

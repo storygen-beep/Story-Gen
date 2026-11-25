@@ -1,0 +1,1374 @@
+{
+ "verdicts": [
+  {
+   "row": "C1262",
+   "screen": "walk_ryan_shower.moment",
+   "verdict": "FAIL",
+   "line": "Then he sees you through the wet glass, all of you, soap running down your tits, and freezes.",
+   "why": "no image block on the screen; walk-ins.md 'When someone walks in on her' step 2: her picture right after the line where he sees her, pool 4",
+   "cause": "P38a1-c1"
+  },
+  {
+   "row": "B13",
+   "screen": "walk_ryan_shower.moment",
+   "verdict": "FAIL",
+   "line": "soap running down your tits",
+   "why": "the shower walk-in stays on her body but has no picture of her",
+   "cause": "P38a1-c1"
+  },
+  {
+   "row": "C1280",
+   "screen": "walk_parents.moment",
+   "verdict": "FAIL",
+   "line": "pool_dir = \"sex/parents_door_t5\", pool = 2",
+   "why": "explicit sex on a once-a-day repeatable: pool 4",
+   "cause": "P38a1-c2"
+  },
+  {
+   "row": "C1280",
+   "screen": "walk_ryan_phone.moment",
+   "verdict": "FAIL",
+   "line": "pool_dir = \"body/ryan_phone_t4\", pool = 2",
+   "why": "explicit (stroking his cock) on a once-a-day repeatable: pool 4; card's 'once a night, so pool 2' is not the rule",
+   "cause": "P38a1-c2"
+  },
+  {
+   "row": "C460",
+   "screen": "walk_parents.watch",
+   "verdict": "FAIL",
+   "line": "You're back in your room before you breathe, wet and furious about it.",
+   "why": "Done has locationId home_hall: she is in the Hall, not her room",
+   "cause": "P38a1-c3"
+  },
+  {
+   "row": "B10",
+   "screen": "walk_parents.watch",
+   "verdict": "FAIL",
+   "line": "You're back in your room before you breathe",
+   "why": "the next screen she sees is the Hall's menu",
+   "cause": "P38a1-c3"
+  },
+  {
+   "row": "C460",
+   "screen": "walk_mark_phone.moment",
+   "verdict": "FAIL",
+   "line": "He hears you and looks up, and his face shuts like a door.",
+   "why": "he has seen her, so the choice 'Listen from the hall' and 'You stay out of sight' (listen) can't be true",
+   "cause": "P38a1-c4"
+  },
+  {
+   "row": "C460",
+   "screen": "walk_mark_phone.listen",
+   "verdict": "FAIL",
+   "line": "You stay out of sight. He hangs up and sits there a long time",
+   "why": "he looked up at her on the screen before; also the button sits on the Living Room menu, so she is already in the room",
+   "cause": "P38a1-c4"
+  },
+  {
+   "row": "B10",
+   "screen": "walk_mark_phone.listen",
+   "verdict": "FAIL",
+   "line": "You stay out of sight.",
+   "why": "false on every visit: the moment has him see her",
+   "cause": "P38a1-c4"
+  },
+  {
+   "row": "C630",
+   "screen": "walk_mark_phone.moment",
+   "verdict": "FAIL",
+   "line": "I'll have it Friday. I said Friday, Vance.",
+   "why": "Vance named with no relation; ungated on met_vance, can show Mon 16:30 of week 1 (start Monday, Vance met on Sunday, P24)",
+   "cause": "P38a1-c5"
+  },
+  {
+   "row": "C442",
+   "screen": "walk_mark_phone.moment",
+   "verdict": "FAIL",
+   "line": "I'll have it Friday. I said Friday, Vance.",
+   "why": "'it' and 'Vance' hint; the screen never says he owes the landlord the rent",
+   "cause": "P38a1-c5"
+  },
+  {
+   "row": "C625",
+   "screen": "walk_mark_phone.moment",
+   "verdict": "FAIL",
+   "line": "I said Friday, Vance.",
+   "why": "name before role: she hasn't met Vance before her first Sunday (note row)"
+  },
+  {
+   "row": "B4",
+   "screen": "walk_ryan_phone.moment",
+   "verdict": "FAIL",
+   "line": "He hasn't seen you.",
+   "why": "no reaction of hers on her body here, nor on watch ('You're gone before he looks up.') or away",
+   "cause": "P38a1-c6"
+  },
+  {
+   "row": "C449",
+   "screen": "walk_ryan_phone.moment",
+   "verdict": "FAIL",
+   "line": "stroking his cock, slow, eyes on the screen. He hasn't seen you.",
+   "why": "the sexual tension on her side is never named: voice.md shape 3, arousal is always on her body",
+   "cause": "P38a1-c6"
+  },
+  {
+   "row": "B4",
+   "screen": "walk_ryan_shower.keep",
+   "verdict": "FAIL",
+   "line": "keep washing, slower than you need to. You don't know if he's still outside it.",
+   "why": "at stage 0 she reacts; slowing down for a possible watcher is appetite her stage hasn't opened",
+   "cause": "P38a1-c7"
+  },
+  {
+   "row": "L71",
+   "screen": "walk_ryan_shower.keep",
+   "verdict": "FAIL",
+   "line": "slower than you need to. You don't know if he's still outside it.",
+   "why": "she chooses to let him look; the craft's 'Keep washing' (walk-ins.md F) just carries on",
+   "cause": "P38a1-c7"
+  },
+  {
+   "row": "C450",
+   "screen": "walk_parents.watch",
+   "verdict": "FAIL",
+   "line": "You're back in your room before you breathe, wet and furious about it.",
+   "why": "the scene's last screen closes; nothing points at what happens next",
+   "cause": "P38a1-c8"
+  },
+  {
+   "row": "C450",
+   "screen": "walk_parents.away",
+   "verdict": "FAIL",
+   "line": "The tapping follows you all the way to your door.",
+   "why": "the scene's last screen closes; nothing points at what happens next",
+   "cause": "P38a1-c8"
+  },
+  {
+   "row": "C450",
+   "screen": "walk_ryan_phone.watch",
+   "verdict": "FAIL",
+   "line": "You're gone before he looks up.",
+   "why": "the scene's last screen closes; nothing points at what happens next",
+   "cause": "P38a1-c8"
+  },
+  {
+   "row": "C450",
+   "screen": "walk_ryan_phone.away",
+   "verdict": "FAIL",
+   "line": "You pull back before the floorboard gives you away.",
+   "why": "the scene's last screen closes; nothing points at what happens next",
+   "cause": "P38a1-c8"
+  },
+  {
+   "row": "C450",
+   "screen": "walk_mom_bills.sit",
+   "verdict": "FAIL",
+   "line": "She squeezes your hand and doesn't let go for a long time.",
+   "why": "the scene's last screen closes; nothing points at what happens next",
+   "cause": "P38a1-c8"
+  },
+  {
+   "row": "C450",
+   "screen": "walk_mom_bills.late",
+   "verdict": "FAIL",
+   "line": "She's already looking back down at the bills.",
+   "why": "the scene's last screen closes; nothing points at what happens next",
+   "cause": "P38a1-c8"
+  },
+  {
+   "row": "C450",
+   "screen": "walk_mark_phone.listen",
+   "verdict": "FAIL",
+   "line": "He hangs up and sits there a long time, not watching the TV.",
+   "why": "the scene's last screen closes; nothing points at what happens next",
+   "cause": "P38a1-c8"
+  },
+  {
+   "row": "C450",
+   "screen": "walk_mark_phone.walkin",
+   "verdict": "FAIL",
+   "line": "You walk past him to the window. He turns the TV up.",
+   "why": "the scene's last screen closes; nothing points at what happens next",
+   "cause": "P38a1-c8"
+  },
+  {
+   "row": "C450",
+   "screen": "walk_ryan_game.notnow",
+   "verdict": "FAIL",
+   "line": "He grins without looking away from the screen.",
+   "why": "the scene's last screen closes; nothing points at what happens next",
+   "cause": "P38a1-c8"
+  },
+  {
+   "row": "C450",
+   "screen": "walk_ryan_shower.cover",
+   "verdict": "FAIL",
+   "line": "You stand with your arms across yourself until the water runs cold.",
+   "why": "the scene's last screen closes; nothing points at what happens next",
+   "cause": "P38a1-c8"
+  },
+  {
+   "row": "C450",
+   "screen": "walk_ryan_game.play",
+   "verdict": "PASS",
+   "line": "Again. Best of three.",
+   "why": "points at the next round"
+  },
+  {
+   "row": "C450",
+   "screen": "walk_ryan_shower.keep",
+   "verdict": "PASS",
+   "line": "You don't know if he's still outside it.",
+   "why": "leaves him at the door: open"
+  },
+  {
+   "row": "C149",
+   "screen": "walk_parents.watch",
+   "verdict": "FAIL",
+   "line": "You're back in your room before you breathe, wet and furious about it.",
+   "why": "no line in the scene points at what comes next with this person",
+   "cause": "P38a1-c8"
+  },
+  {
+   "row": "B3",
+   "screen": "walk_parents.watch",
+   "verdict": "FAIL",
+   "line": "You're back in your room before you breathe, wet and furious about it.",
+   "why": "no hook: no line, promise or choice names what comes next",
+   "cause": "P38a1-c8"
+  },
+  {
+   "row": "C149",
+   "screen": "walk_parents.away",
+   "verdict": "FAIL",
+   "line": "The tapping follows you all the way to your door.",
+   "why": "no line in the scene points at what comes next with this person",
+   "cause": "P38a1-c8"
+  },
+  {
+   "row": "B3",
+   "screen": "walk_parents.away",
+   "verdict": "FAIL",
+   "line": "The tapping follows you all the way to your door.",
+   "why": "no hook: no line, promise or choice names what comes next",
+   "cause": "P38a1-c8"
+  },
+  {
+   "row": "C149",
+   "screen": "walk_ryan_phone.watch",
+   "verdict": "FAIL",
+   "line": "You're gone before he looks up.",
+   "why": "no line in the scene points at what comes next with this person",
+   "cause": "P38a1-c8"
+  },
+  {
+   "row": "B3",
+   "screen": "walk_ryan_phone.watch",
+   "verdict": "FAIL",
+   "line": "You're gone before he looks up.",
+   "why": "no hook: no line, promise or choice names what comes next",
+   "cause": "P38a1-c8"
+  },
+  {
+   "row": "C149",
+   "screen": "walk_ryan_phone.away",
+   "verdict": "FAIL",
+   "line": "You pull back before the floorboard gives you away.",
+   "why": "no line in the scene points at what comes next with this person",
+   "cause": "P38a1-c8"
+  },
+  {
+   "row": "B3",
+   "screen": "walk_ryan_phone.away",
+   "verdict": "FAIL",
+   "line": "You pull back before the floorboard gives you away.",
+   "why": "no hook: no line, promise or choice names what comes next",
+   "cause": "P38a1-c8"
+  },
+  {
+   "row": "C149",
+   "screen": "walk_mom_bills.sit",
+   "verdict": "FAIL",
+   "line": "She squeezes your hand and doesn't let go for a long time.",
+   "why": "no line in the scene points at what comes next with this person",
+   "cause": "P38a1-c8"
+  },
+  {
+   "row": "B3",
+   "screen": "walk_mom_bills.sit",
+   "verdict": "FAIL",
+   "line": "She squeezes your hand and doesn't let go for a long time.",
+   "why": "no hook: no line, promise or choice names what comes next",
+   "cause": "P38a1-c8"
+  },
+  {
+   "row": "C149",
+   "screen": "walk_mom_bills.late",
+   "verdict": "FAIL",
+   "line": "She's already looking back down at the bills.",
+   "why": "no line in the scene points at what comes next with this person",
+   "cause": "P38a1-c8"
+  },
+  {
+   "row": "B3",
+   "screen": "walk_mom_bills.late",
+   "verdict": "FAIL",
+   "line": "She's already looking back down at the bills.",
+   "why": "no hook: no line, promise or choice names what comes next",
+   "cause": "P38a1-c8"
+  },
+  {
+   "row": "C149",
+   "screen": "walk_mark_phone.listen",
+   "verdict": "PASS",
+   "line": "I'll have it Friday.",
+   "why": "the moment names Friday as what comes next"
+  },
+  {
+   "row": "B3",
+   "screen": "walk_mark_phone.listen",
+   "verdict": "PASS",
+   "line": "I'll have it Friday.",
+   "why": "the moment names Friday as what comes next"
+  },
+  {
+   "row": "C149",
+   "screen": "walk_mark_phone.walkin",
+   "verdict": "PASS",
+   "line": "I'll have it Friday.",
+   "why": "the moment names Friday"
+  },
+  {
+   "row": "B3",
+   "screen": "walk_mark_phone.walkin",
+   "verdict": "PASS",
+   "line": "I'll have it Friday.",
+   "why": "the moment names Friday"
+  },
+  {
+   "row": "C149",
+   "screen": "walk_ryan_game.play",
+   "verdict": "PASS",
+   "line": "Again. Best of three.",
+   "why": "the next round"
+  },
+  {
+   "row": "B3",
+   "screen": "walk_ryan_game.play",
+   "verdict": "PASS",
+   "line": "Again. Best of three.",
+   "why": "the next round"
+  },
+  {
+   "row": "C149",
+   "screen": "walk_ryan_game.notnow",
+   "verdict": "PASS",
+   "line": "Want a go? You can't be worse than me.",
+   "why": "the standing offer of a go"
+  },
+  {
+   "row": "B3",
+   "screen": "walk_ryan_game.notnow",
+   "verdict": "PASS",
+   "line": "Want a go? You can't be worse than me.",
+   "why": "the standing offer of a go"
+  },
+  {
+   "row": "C149",
+   "screen": "walk_ryan_shower.cover",
+   "verdict": "PASS",
+   "line": "I'll come back. I'll come back later. Sorry.",
+   "why": "he says he'll come back"
+  },
+  {
+   "row": "B3",
+   "screen": "walk_ryan_shower.cover",
+   "verdict": "PASS",
+   "line": "I'll come back. I'll come back later. Sorry.",
+   "why": "he says he'll come back"
+  },
+  {
+   "row": "C149",
+   "screen": "walk_ryan_shower.keep",
+   "verdict": "PASS",
+   "line": "You don't know if he's still outside it.",
+   "why": "he may be at the door"
+  },
+  {
+   "row": "B3",
+   "screen": "walk_ryan_shower.keep",
+   "verdict": "PASS",
+   "line": "You don't know if he's still outside it.",
+   "why": "he may be at the door"
+  },
+  {
+   "row": "C460",
+   "screen": "walk_mom_bills.moment",
+   "verdict": "FAIL",
+   "line": "Oh. Baby. I didn't hear you come in.",
+   "why": "the button is on the kitchen menu with Mom's face (whose menu has her 'face goes soft'), Talk and Eat with her; after those, she didn't just come in and Mom wasn't crying unseen",
+   "cause": "P38a1-c9"
+  },
+  {
+   "row": "B10",
+   "screen": "walk_mom_bills.moment",
+   "verdict": "FAIL",
+   "line": "I didn't hear you come in.",
+   "why": "false on a visit where she already talked or ate with Mom in the kitchen",
+   "cause": "P38a1-c9"
+  },
+  {
+   "row": "B8",
+   "screen": "walk_ryan_shower.moment",
+   "verdict": "FAIL",
+   "line": "start_time = \"07:45\", end_time = \"08:30\"",
+   "why": "PLAN \u00a710a: 'weekdays 7:30-8:30, on Shower'; build and card say 7:45; no NOTES line records the call",
+   "cause": "P38a1-c10"
+  },
+  {
+   "row": "C151",
+   "screen": "walk_parents.moment",
+   "verdict": "FAIL",
+   "line": "Mark. The kids. / Then be quiet, Laura. Be quiet for me.",
+   "why": "two spoken lines on one repeatable screen (note row)"
+  },
+  {
+   "row": "C151",
+   "screen": "walk_ryan_shower.moment",
+   "verdict": "FAIL",
+   "line": "Shit. Sorry. Sorry. / I'll come back. I'll come back later. Sorry.",
+   "why": "two spoken lines on one repeatable screen (note row)"
+  },
+  {
+   "row": "C1274",
+   "screen": "walk_ryan_phone.moment",
+   "verdict": "FAIL",
+   "line": "pool_dir = \"body/ryan_phone_t4\"",
+   "why": "stroking his cock to a climax is sex shown: _t5, not _t4 skin (note row)"
+  },
+  {
+   "row": "B1",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "Then be quiet, Laura. Be quiet for me. / I'll have it Friday / Want a go?",
+   "why": "each person wants something of their own on screen; no sexual step toward her, so no earlier canvas needed"
+  },
+  {
+   "row": "B11",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "sets saw_mom_and_mark / played_with_ryan",
+   "why": "each walk-in button shows its act and sets a flag"
+  },
+  {
+   "row": "B12",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "soap running down your tits ... freezes ... I'll come back later",
+   "why": "the shower is on her body, his reaction, he backs off, a hook; the others are explicit or not charged"
+  },
+  {
+   "row": "B2",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "Through the gap: Mom on her back ... / She's crying without making any sound.",
+   "why": "each scene shows a person further than their talks did"
+  },
+  {
+   "row": "B5",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "Oh. Baby. I didn't hear you come in. / Shit. Sorry. Sorry.",
+   "why": "the person reacts where she is seen; the two door-gap peeks are unseen by design, caught is out of scope (card, C302)"
+  },
+  {
+   "row": "B6",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "Back away / Say you're late / Walk in / Not now / Cover up",
+   "why": "every scene has a written leave with its own line"
+  },
+  {
+   "row": "B7",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "Your face burns, and your feet won't move. / comes into a sock.",
+   "why": "the explicit beats end on what is happening"
+  },
+  {
+   "row": "B9",
+   "screen": "*",
+   "verdict": "N/A",
+   "line": "\u2014",
+   "why": "PLAN declares no companion-rival here"
+  },
+  {
+   "row": "C1002",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "\u2014",
+   "why": "no spend"
+  },
+  {
+   "row": "C1008",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "\u2014",
+   "why": "no collection"
+  },
+  {
+   "row": "C1013",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "\u2014",
+   "why": "no rent week"
+  },
+  {
+   "row": "C1021",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "\u2014",
+   "why": "no price on a button"
+  },
+  {
+   "row": "C1022",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "I'll have it Friday.",
+   "why": "no currency named"
+  },
+  {
+   "row": "C1033",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "\u2014",
+   "why": "no collection"
+  },
+  {
+   "row": "C1173",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "\u2014",
+   "why": "no clothing door"
+  },
+  {
+   "row": "C1176",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "\u2014",
+   "why": "no clothing read on the sex scenes"
+  },
+  {
+   "row": "C1184",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "\u2014",
+   "why": "no refusal"
+  },
+  {
+   "row": "C1185",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "\u2014",
+   "why": "no dress code"
+  },
+  {
+   "row": "C1189",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "\u2014",
+   "why": "no clothes state read"
+  },
+  {
+   "row": "C1198",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "\u2014",
+   "why": "no refusal"
+  },
+  {
+   "row": "C1200",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "\u2014",
+   "why": "no clothes placed; home places have no dress code"
+  },
+  {
+   "row": "C1220",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "\u2014",
+   "why": "no dress code on these places"
+  },
+  {
+   "row": "C1221",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "\u2014",
+   "why": "no dress-code exception"
+  },
+  {
+   "row": "C1234",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "image after the sight paragraph and the two lines on moment",
+   "why": "the clip sits on the moment the player is reading"
+  },
+  {
+   "row": "C1238",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "a man of 46 between her legs, his hand over her mouth",
+   "why": "descriptions match their lines"
+  },
+  {
+   "row": "C1249",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "\u2014",
+   "why": "field figure; the room screens are not touched"
+  },
+  {
+   "row": "C1250",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "\u2014",
+   "why": "no room-card words added"
+  },
+  {
+   "row": "C1255",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "sex/parents_door_t5 \u00b7 body/ryan_phone_t4",
+   "why": "one pool per block"
+  },
+  {
+   "row": "C1261",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "Watch",
+   "why": "both spots are where the player wants to look"
+  },
+  {
+   "row": "C1265",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "the four everyday scenes have none",
+   "why": "no spot on a chore or menu"
+  },
+  {
+   "row": "C1267",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "Seen through a door gap from a dark hall",
+   "why": "the picture gives what words can't"
+  },
+  {
+   "row": "C1275",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "\"... seen through door gap lamp light gif\"",
+   "why": "both looks with motion ask for a gif"
+  },
+  {
+   "row": "C1277",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "Seen through a door gap from a dark hall",
+   "why": "the door gap is named"
+  },
+  {
+   "row": "C1278",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "a woman of 41 ... a man of 46 / a man of 22",
+   "why": "ages given"
+  },
+  {
+   "row": "C1279",
+   "screen": "*",
+   "verdict": "N/A",
+   "line": "\u2014",
+   "why": "no mirror"
+  },
+  {
+   "row": "C1281",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "Nobody looking at the camera.",
+   "why": "written as what she sees"
+  },
+  {
+   "row": "C1284",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "Seen through a door gap from a dark hall:",
+   "why": "the picture is the looker's view"
+  },
+  {
+   "row": "C1303",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "\u2014",
+   "why": "no need touched"
+  },
+  {
+   "row": "C1313",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "[[canvases.trigger.substitutions]] on loop_shower",
+   "why": "the shower refill now carries a substitution"
+  },
+  {
+   "row": "C1337",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "\u2014",
+   "why": "no energy moved"
+  },
+  {
+   "row": "C1340",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "\u2014",
+   "why": "walk-ins are place buttons (walk-ins.md engine), not a Talk on the room menu"
+  },
+  {
+   "row": "C1342",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "\u2014",
+   "why": "no need touched"
+  },
+  {
+   "row": "C1345",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "max_triggers_per_day = 1",
+   "why": "cap per day on each"
+  },
+  {
+   "row": "C1360",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "\u2014",
+   "why": "no locked choice"
+  },
+  {
+   "row": "C1421",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "\u2014",
+   "why": "nothing out of reach shown"
+  },
+  {
+   "row": "C1423",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "max_triggers_per_day = 1",
+   "why": "daily cap"
+  },
+  {
+   "row": "C1425",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "max_triggers_per_day = 1; 5 min",
+   "why": "cap and time"
+  },
+  {
+   "row": "C1427",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "\u2014",
+   "why": "no time cost sized"
+  },
+  {
+   "row": "C1428",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "\u2014",
+   "why": "energy locks nothing"
+  },
+  {
+   "row": "C1431",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "\u2014",
+   "why": "no need"
+  },
+  {
+   "row": "C1432",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "\u2014",
+   "why": "no need"
+  },
+  {
+   "row": "C1433",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "\u2014",
+   "why": "no need"
+  },
+  {
+   "row": "C1434",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "\u2014",
+   "why": "no need"
+  },
+  {
+   "row": "C1438",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "\u2014",
+   "why": "no need"
+  },
+  {
+   "row": "C1441",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "\u2014",
+   "why": "each step is a scene, not a number"
+  },
+  {
+   "row": "C146",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "\u2014",
+   "why": "no reveal on a repeatable; walk-ins.md makes these once a day"
+  },
+  {
+   "row": "C164",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "Back away",
+   "why": "a no is parked: the button returns next day"
+  },
+  {
+   "row": "C165",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "\u2014",
+   "why": "no final no"
+  },
+  {
+   "row": "C166",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "\u2014",
+   "why": "no final no"
+  },
+  {
+   "row": "C286",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "The door bangs open. Ryan, in a towel",
+   "why": "the shower is an accident"
+  },
+  {
+   "row": "C287",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "Watch",
+   "why": "watching sex she sees is release 1's scope (heat.md step 4, PLAN \u00a710a)"
+  },
+  {
+   "row": "C288",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "\u2014",
+   "why": "no contact"
+  },
+  {
+   "row": "C289",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "\u2014",
+   "why": "no stage-4 act of hers"
+  },
+  {
+   "row": "C291",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "\u2014",
+   "why": "level set by what shows"
+  },
+  {
+   "row": "C296",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "\u2014",
+   "why": "the low version"
+  },
+  {
+   "row": "C297",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "The door bangs open.",
+   "why": "housemate reached by accident"
+  },
+  {
+   "row": "C311",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "soap running down your tits ... freezes ... I'll come back later",
+   "why": "shower: body, reaction, he backs off, hook; the door gaps are explicit beats, not low heat"
+  },
+  {
+   "row": "C314",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "soap running down your tits",
+   "why": "not talk only"
+  },
+  {
+   "row": "C330",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "\u2014",
+   "why": "no meter"
+  },
+  {
+   "row": "C422",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "Watch \u00b7 Back away \u00b7 Done",
+   "why": "labels say what clicking does"
+  },
+  {
+   "row": "C447",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "It's fine, baby. It's just numbers. / Coward.",
+   "why": "each sounds like their cast entry"
+  },
+  {
+   "row": "C451",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "the bills, a pen she isn't using, the razor on the sink, a sock",
+   "why": "concrete"
+  },
+  {
+   "row": "C461",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "the dinner forgotten on the stove",
+   "why": "texture that can't clash"
+  },
+  {
+   "row": "C519",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "\u2014",
+   "why": "each screen one job, under 150 words"
+  },
+  {
+   "row": "C593",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "Oh. Baby.",
+   "why": "Mom's 'baby' held; no one borrows another's term"
+  },
+  {
+   "row": "C596",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "\u2014",
+   "why": "no talk screen built"
+  },
+  {
+   "row": "C601",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "He backs out with his eyes shut, too late.",
+   "why": "he catches himself and covers"
+  },
+  {
+   "row": "C613",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "\u2014",
+   "why": "no act on her"
+  },
+  {
+   "row": "C620",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "\u2014",
+   "why": "no listing"
+  },
+  {
+   "row": "C626",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "\u2014",
+   "why": "no description swap needed"
+  },
+  {
+   "row": "C632",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "\u2014",
+   "why": "no role label"
+  },
+  {
+   "row": "C639",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "Play a round \u00b7 Not now",
+   "why": "a walk-in is two answers (walk-ins.md shape 5, C792)"
+  },
+  {
+   "row": "C640",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "Coward.",
+   "why": "the no is content"
+  },
+  {
+   "row": "C644",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "I said Friday, Vance.",
+   "why": "Mark's corner: money, the landlord"
+  },
+  {
+   "row": "C758",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "Watch \u00b7 Back away",
+   "why": "short"
+  },
+  {
+   "row": "C762",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "\u2014",
+   "why": "no 'Nothing happens.'"
+  },
+  {
+   "row": "C769",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "\u2014",
+   "why": "no place description changed"
+  },
+  {
+   "row": "C770",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "\u2014",
+   "why": "no room screen"
+  },
+  {
+   "row": "C771",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "\u2014",
+   "why": "no first-visit screen"
+  },
+  {
+   "row": "C773",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "\u2014",
+   "why": "walk-in buttons are scenes, not an object list"
+  },
+  {
+   "row": "C776",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "\u2014",
+   "why": "each is a person's scene"
+  },
+  {
+   "row": "C777",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "\u2014",
+   "why": "nothing else added to a menu"
+  },
+  {
+   "row": "C782",
+   "screen": "*",
+   "verdict": "N/A",
+   "line": "\u2014",
+   "why": "no solo act on the shower walk-in"
+  },
+  {
+   "row": "C794",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "\u2014",
+   "why": "no identity sentence changed"
+  },
+  {
+   "row": "C795",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "\u2014",
+   "why": "no re-entry line"
+  },
+  {
+   "row": "C804",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "Mom's at the kitchen table",
+   "why": "the places change with who is there"
+  },
+  {
+   "row": "C889",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "Watch \u00b7 Done",
+   "why": "no clock time or duration on a label"
+  },
+  {
+   "row": "C892",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "\u2014",
+   "why": "hours on triggers"
+  },
+  {
+   "row": "C897",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "\u2014",
+   "why": "no travel"
+  },
+  {
+   "row": "C900",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "\u2014",
+   "why": "no beat says the time"
+  },
+  {
+   "row": "C902",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "I'll have it Friday.",
+   "why": "true at the last minute, Friday included"
+  },
+  {
+   "row": "C903",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "I'll have it Friday.",
+   "why": "weekday condition Mon-Fri on the trigger; a deadline of 'Friday' holds on each of those days"
+  },
+  {
+   "row": "C906",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "\u2014",
+   "why": "no 'till' on a label"
+  },
+  {
+   "row": "C910",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "Done",
+   "why": "no time or energy on a button"
+  },
+  {
+   "row": "C913",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "\u2014",
+   "why": "walk-ins are events, hidden when shut (C916)"
+  },
+  {
+   "row": "C914",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "\u2014",
+   "why": "no hours shown"
+  },
+  {
+   "row": "C916",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "\u2014",
+   "why": "events hidden out of their window"
+  },
+  {
+   "row": "C920",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "Done (5 min, same place)",
+   "why": "no hop"
+  },
+  {
+   "row": "C924",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "\u2014",
+   "why": "no travel"
+  },
+  {
+   "row": "C926",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "\u2014",
+   "why": "minutes only"
+  },
+  {
+   "row": "C927",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "\u2014",
+   "why": "no exit"
+  },
+  {
+   "row": "C928",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "\u2014",
+   "why": "no clock in prose"
+  },
+  {
+   "row": "C929",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "\u2014",
+   "why": "no time on a label"
+  },
+  {
+   "row": "C930",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "\u2014",
+   "why": "events vanish out of hours by design"
+  },
+  {
+   "row": "C931",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "start_time = \"23:00\", end_time = \"01:00\"",
+   "why": "wraps, end exclusive; presence-gated so no false claim past midnight"
+  },
+  {
+   "row": "C951",
+   "screen": "*",
+   "verdict": "N/A",
+   "line": "\u2014",
+   "why": "N/A"
+  },
+  {
+   "row": "C952",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "\u2014",
+   "why": "no number disagrees"
+  },
+  {
+   "row": "C953",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "Done",
+   "why": "no time or energy on labels"
+  },
+  {
+   "row": "C954",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "\u2014",
+   "why": "no pay"
+  },
+  {
+   "row": "L106",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "npc_at_location ... is_present on every trigger",
+   "why": "each person claimed is put there by their rows (who_is_where)"
+  },
+  {
+   "row": "L119",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "pool = 2",
+   "why": "pools set by hand, not the default"
+  },
+  {
+   "row": "L120",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "Nobody looking at the camera.",
+   "why": "no 'man looking at her' frame"
+  },
+  {
+   "row": "L121",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "2 spots, everyday scenes none",
+   "why": "by kind of screen"
+  },
+  {
+   "row": "L125",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "image at the end of the moment",
+   "why": "the payoff (Watch) is on the next screen"
+  },
+  {
+   "row": "L166",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "\u2014",
+   "why": "windows from PLAN \u00a710a and the rows"
+  },
+  {
+   "row": "L167",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "\u2014",
+   "why": "one window per walk-in"
+  }
+ ],
+ "causes": [
+  {
+   "id": "P38a1-c1",
+   "what": "walk_ryan_shower.moment has no picture of her after the line where Ryan sees her bare in the shower (a body moment with no clip)"
+  },
+  {
+   "id": "P38a1-c2",
+   "what": "the two door-gap spots (parents_door_t5, ryan_phone_t4) are pool 2; an explicit look on a once-a-day repeat is pool 4"
+  },
+  {
+   "id": "P38a1-c3",
+   "what": "walk_parents.watch says \"You're back in your room before you breathe\", but its Done returns her to the Hall"
+  },
+  {
+   "id": "P38a1-c4",
+   "what": "walk_mark_phone.moment has Mark hear her and look up, then offers \"Listen from the hall\" and says \"You stay out of sight\""
+  },
+  {
+   "id": "P38a1-c5",
+   "what": "Mark's call names \"Vance\" and \"it\" with no relation and no rent; it can show Mon-Fri of week 1, before met_vance (her first Sunday), so the player isn't told he owes the landlord"
+  },
+  {
+   "id": "P38a1-c6",
+   "what": "walk_ryan_phone has no line of her reaction on her body on any of its three screens (the craft's D1 has \"Your face goes hot.\")"
+  },
+  {
+   "id": "P38a1-c7",
+   "what": "walk_ryan_shower.keep has her wash \"slower than you need to\" for a man who may still be at the door: a display she chooses at stage 0"
+  },
+  {
+   "id": "P38a1-c8",
+   "what": "the walk-ins' answer screens end on a closing line, not a hook pointing at what comes next"
+  },
+  {
+   "id": "P38a1-c9",
+   "what": "walk_mom_bills.moment (\"I didn't hear you come in\", Mom crying at the table) sits on the kitchen menu beside Mom's face, Talk and Eat with her, so it can follow them on the same visit and say she just came in"
+  },
+  {
+   "id": "P38a1-c10",
+   "what": "the razor window is 07:45-08:30 in the build and on the card, but PLAN \u00a710a still says weekdays 7:30-8:30 and NOTES records no call"
+  }
+ ]
+}

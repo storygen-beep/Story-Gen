@@ -1,0 +1,149 @@
+{
+ "verdicts": [
+  {
+   "row": "B10",
+   "screen": "mirror_meet_brooke.after",
+   "verdict": "PASS",
+   "line": "You turn back to the sink, and you can still hear them laughing behind you. You know you'll see that mirror again, and her in it.",
+   "why": "Done returns her to campus_bathroom with the three still at the mirror (rows to 09:00/14:00); the line keeps her inside at the sink, so it agrees with where Done leaves her. The last line's promise is true: their weekday rows put Brooke at that mirror twice a day.",
+   "cause": null
+  },
+  {
+   "row": "B10",
+   "screen": "mirror_meet_brooke.mirror",
+   "verdict": "PASS",
+   "line": "They all stop when they see you, and the blonde finds you in the mirror and looks you over",
+   "why": "'when they see you' no longer claims she just came in, so it holds on the re-render after Fix your hair crosses 13:00 too; all three are there by the trigger.",
+   "cause": null
+  },
+  {
+   "row": "B8",
+   "screen": "mirror_meet_brooke.after",
+   "verdict": "PASS",
+   "line": "You squeeze past to the sink. Brooke doesn't move an inch, so your hip brushes hers.",
+   "why": "No garment of hers named on any path.",
+   "cause": null
+  },
+  {
+   "row": "B8",
+   "screen": "mirror_meet_brooke.mirror",
+   "verdict": "PASS",
+   "line": "Nice outfit, princess. Did you get dressed in the dark?",
+   "why": "'outfit' names no garment; Brooke's fitted blazer is hers, not the player's.",
+   "cause": null
+  },
+  {
+   "row": "C1158",
+   "screen": "mirror_meet_brooke.mirror",
+   "verdict": "PASS",
+   "line": "Nice outfit, princess.",
+   "why": "No garment of hers named, so nothing needs backing.",
+   "cause": null
+  },
+  {
+   "row": "C1206",
+   "screen": "mirror_meet_brooke.mirror",
+   "verdict": "PASS",
+   "line": "Nice outfit, princess.",
+   "why": "Names no garment she may not be wearing.",
+   "cause": null
+  },
+  {
+   "row": "C1234",
+   "screen": "mirror_meet_brooke.after",
+   "verdict": "PASS",
+   "line": "You turn back to the sink, and you can still hear them laughing behind you. You know you'll see that mirror again, and her in it.",
+   "why": "The mirror picture has moved to the mirror screen, under Brooke's first line, the beat it shows; the after screen has no picture.",
+   "cause": null
+  },
+  {
+   "row": "C1238",
+   "screen": "mirror_meet_brooke.after",
+   "verdict": "PASS",
+   "line": "You turn back to the sink, and you can still hear them laughing behind you. You know you'll see that mirror again, and her in it.",
+   "why": "No picture on the after screen now; the mirror picture sits under the line it shows (Brooke smirking at her in the reflection).",
+   "cause": null
+  },
+  {
+   "row": "C1279",
+   "screen": "mirror_meet_brooke.after",
+   "verdict": "PASS",
+   "line": "No phone, not a selfie.",
+   "why": "The mirror picture (now on the mirror screen) says 'No phone'; the after screen has no mirror picture.",
+   "cause": null
+  },
+  {
+   "row": "C460",
+   "screen": "mirror_meet_brooke.after",
+   "verdict": "PASS",
+   "line": "You turn back to the sink, and you can still hear them laughing behind you. You know you'll see that mirror again, and her in it.",
+   "why": "She stays in the bathroom, which is where Done puts her; Kayla laughed on the mirror screen on every path, so 'still' is backed.",
+   "cause": null
+  },
+  {
+   "row": "C460",
+   "screen": "mirror_meet_brooke.mirror",
+   "verdict": "PASS",
+   "line": "They all stop when they see you, and the blonde finds you in the mirror and looks you over",
+   "why": "True on every render that can fire it, including the one after Fix your hair.",
+   "cause": null
+  },
+  {
+   "row": "C461",
+   "screen": "mirror_meet_brooke.after",
+   "verdict": "PASS",
+   "line": "Tess snorts and goes back to Brooke's lashes.",
+   "why": "Tess is the redhead doing the lashes, which fits her card ('She does the make-up, and says less.') and PLAN 534 (Tess doing Brooke's make-up, Kayla holding the bag).",
+   "cause": null
+  },
+  {
+   "row": "C461",
+   "screen": "mirror_meet_brooke.mirror",
+   "verdict": "PASS",
+   "line": "Oh, look. Kayla, Tess, it's the new girl everybody's whispering about.",
+   "why": "Brooke's exaggeration fits her entry (rep_mirror: 'Brooke tells everyone everything'); the redhead/bag roles agree with PLAN 534.",
+   "cause": null
+  },
+  {
+   "row": "C927",
+   "screen": "mirror_meet_brooke.after",
+   "verdict": "PASS",
+   "line": "Done (time_progression_minutes = 5)",
+   "why": "Exit states its time.",
+   "cause": null
+  },
+  {
+   "row": "C931",
+   "screen": "mirror_meet_brooke.after",
+   "verdict": "N/A",
+   "line": "days_since_flag met_laura gte 7 + presence",
+   "why": "No time_of_day on this canvas; nothing for the row to break.",
+   "cause": null
+  },
+  {
+   "row": "L106",
+   "screen": "mirror_meet_brooke.after",
+   "verdict": "PASS",
+   "line": "You turn back to the sink, and you can still hear them laughing behind you. You know you'll see that mirror again, and her in it.",
+   "why": "The three are at the bathroom by their rows (the trigger requires all three present) for the whole 5 minutes.",
+   "cause": null
+  },
+  {
+   "row": "L106",
+   "screen": "mirror_meet_brooke.mirror",
+   "verdict": "PASS",
+   "line": "Three girls own the long mirror.",
+   "why": "All three present by trigger and rows.",
+   "cause": null
+  },
+  {
+   "row": "L167",
+   "screen": "mirror_meet_brooke.after",
+   "verdict": "N/A",
+   "line": "is_repeatable = false",
+   "why": "One-time scene with no hours row of its own.",
+   "cause": null
+  }
+ ],
+ "causes": []
+}

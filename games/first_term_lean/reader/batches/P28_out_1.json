@@ -1,0 +1,313 @@
+{
+ "verdicts": [
+  {
+   "row": "B1",
+   "screen": "*",
+   "verdict": "N/A",
+   "line": "",
+   "why": "room screens with nobody in them: no person, no want to show"
+  },
+  {
+   "row": "B2",
+   "screen": "*",
+   "verdict": "N/A",
+   "line": "",
+   "why": "no person on these lines; nothing goes a step further with anyone"
+  },
+  {
+   "row": "B3",
+   "screen": "*",
+   "verdict": "N/A",
+   "line": "",
+   "why": "a room description is not a scene; no scene end to hook from"
+  },
+  {
+   "row": "B4",
+   "screen": "*",
+   "verdict": "N/A",
+   "line": "",
+   "why": "no offer, no person: nothing for her to react to"
+  },
+  {
+   "row": "B5",
+   "screen": "*",
+   "verdict": "N/A",
+   "line": "",
+   "why": "nobody is there by construction (every line is gated on the people being absent)"
+  },
+  {
+   "row": "B6",
+   "screen": "*",
+   "verdict": "N/A",
+   "line": "",
+   "why": "no offer on these screens"
+  },
+  {
+   "row": "B7",
+   "screen": "*",
+   "verdict": "N/A",
+   "line": "",
+   "why": "no explicit beat"
+  },
+  {
+   "row": "B8",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "Ryan's not here. His bed's unmade.",
+   "why": "no number and none of her garments named; the clothes on the floor are Ryan's room texture"
+  },
+  {
+   "row": "B9",
+   "screen": "*",
+   "verdict": "N/A",
+   "line": "",
+   "why": "PLAN declares no companion-rival here"
+  },
+  {
+   "row": "B10",
+   "screen": "location:home_kitchen",
+   "verdict": "PASS",
+   "line": "Nobody's here. The fridge hums.",
+   "why": "variant only when npc_laura, npc_mark and npc_ryan are all is_absent at home_kitchen (7_final_game.toml:805); who_is_where e.g. Tue 10:00 all three '-'; at night all asleep elsewhere, so 'Nobody's here' is true at every minute it shows"
+  },
+  {
+   "row": "B10",
+   "screen": "location:home_living_room",
+   "verdict": "PASS",
+   "line": "Nobody's here. The TV's off, and the armchair still has the shape of him.",
+   "why": "gated on all three absent (7_final_game.toml:819); 'him' is Mark of the identity line, and says nothing about where he is"
+  },
+  {
+   "row": "B10",
+   "screen": "location:home_ryans_room",
+   "verdict": "PASS",
+   "line": "Ryan's not here. His bed's unmade.",
+   "why": "gated on npc_ryan is_absent (7_final_game.toml:853); his rows put him out weekdays 12-18, in the kitchen 18-19 and living room 19-23; no hours on the room, so it shows any time he's away"
+  },
+  {
+   "row": "B11",
+   "screen": "*",
+   "verdict": "N/A",
+   "line": "",
+   "why": "this piece adds no button; the rooms' solo rows belong to P06, P07, P42"
+  },
+  {
+   "row": "B12",
+   "screen": "*",
+   "verdict": "N/A",
+   "line": "",
+   "why": "no charged moment on an empty room line"
+  },
+  {
+   "row": "B13",
+   "screen": "*",
+   "verdict": "N/A",
+   "line": "",
+   "why": "no moment alone with her body"
+  },
+  {
+   "row": "C1002",
+   "screen": "*",
+   "verdict": "N/A",
+   "line": "",
+   "why": "no spend on these screens"
+  },
+  {
+   "row": "C1173",
+   "screen": "*",
+   "verdict": "N/A",
+   "line": "",
+   "why": "no clothing door on these rooms"
+  },
+  {
+   "row": "C1184",
+   "screen": "*",
+   "verdict": "N/A",
+   "line": "",
+   "why": "no clothing refusal"
+  },
+  {
+   "row": "C1185",
+   "screen": "*",
+   "verdict": "N/A",
+   "line": "",
+   "why": "no dress code"
+  },
+  {
+   "row": "C1198",
+   "screen": "*",
+   "verdict": "N/A",
+   "line": "",
+   "why": "no refusal"
+  },
+  {
+   "row": "C1220",
+   "screen": "*",
+   "verdict": "N/A",
+   "line": "",
+   "why": "no dress code on these rooms"
+  },
+  {
+   "row": "C1221",
+   "screen": "*",
+   "verdict": "N/A",
+   "line": "",
+   "why": "no dress-code exception"
+  },
+  {
+   "row": "C1200",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "",
+   "why": "no clothes conditions on the three rooms or their new lines"
+  },
+  {
+   "row": "C1250",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "Nobody's here. The fridge hums.",
+   "why": "the room text stays a short identity line plus one empty line; no media added (the room's image is its card on the hall)"
+  },
+  {
+   "row": "C422",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "Kitchen \u00b7 Living Room \u00b7 Ryan's Room",
+   "why": "room names unchanged and plain"
+  },
+  {
+   "row": "C442",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "Nobody's here. The fridge hums.",
+   "why": "says it plainly: nobody is here"
+  },
+  {
+   "row": "C451",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "Nobody's here. The TV's off, and the armchair still has the shape of him.",
+   "why": "concrete objects: fridge, TV, armchair, unmade bed"
+  },
+  {
+   "row": "C460",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "Ryan's not here. His bed's unmade.",
+   "why": "each line is gated on exactly the absence it claims; texture (fridge hum, TV off, bed unmade) can't clash with any row or flag"
+  },
+  {
+   "row": "C461",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "Nobody's here. The TV's off, and the armchair still has the shape of him.",
+   "why": "texture that can't clash; names only who isn't there"
+  },
+  {
+   "row": "C519",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "Nobody's here. The fridge hums.",
+   "why": "one job each, about 20-30 words"
+  },
+  {
+   "row": "C620",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "",
+   "why": "nobody is listed in the lines; present people stay faces"
+  },
+  {
+   "row": "C758",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "",
+   "why": "no label added; existing labels Eat something, Do the dishes, Watch TV, Borrow one of his hoodies"
+  },
+  {
+   "row": "C762",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "Nobody's here. The fridge hums.",
+   "why": "no 'Nothing happens' line; each says who's missing"
+  },
+  {
+   "row": "C769",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "The kitchen: the table where the family eats, the fridge",
+   "why": "identity sentence kept as the head of each variant"
+  },
+  {
+   "row": "C770",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "Nobody's here. The TV's off, and the armchair still has the shape of him.",
+   "why": "about 25 words, under the field median"
+  },
+  {
+   "row": "C771",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "",
+   "why": "no first-visit screen"
+  },
+  {
+   "row": "C773",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "",
+   "why": "no browse list of objects added; the fridge and TV are prose, not buttons"
+  },
+  {
+   "row": "C776",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "",
+   "why": "menus unchanged: needs and systems (Eat, dishes, TV, hoodie); people are faces"
+  },
+  {
+   "row": "C777",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "",
+   "why": "nothing else added to the menu"
+  },
+  {
+   "row": "C794",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "Ryan's room. Clothes on the floor, the curtains shut, and it smells like him.",
+   "why": "variant text begins with the identity sentence verbatim"
+  },
+  {
+   "row": "C795",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "Ryan's not here. His bed's unmade.",
+   "why": "no line per person; the only re-entry change is the nobody line"
+  },
+  {
+   "row": "C804",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "Nobody's here. The fridge hums.",
+   "why": "rule 2's own example; people present show as faces, no per-person room line"
+  },
+  {
+   "row": "C953",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "",
+   "why": "no label with time or energy added"
+  },
+  {
+   "row": "L106",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "Ryan's not here. His bed's unmade.",
+   "why": "no line claims anyone is there; each is gated on is_absent"
+  }
+ ],
+ "causes": []
+}

@@ -1,0 +1,187 @@
+{
+ "verdicts": [
+  {
+   "row": "B10",
+   "screen": "rep_mirror.listen",
+   "verdict": "PASS",
+   "line": "Two girls you don't know are doing their lips at the far end of the mirror",
+   "why": "the strangers have no rows; Kayla and Tess are at the bathroom only with Brooke (who_is_where 08-09, 13-14), and the row is hidden while Brooke is there; names gated on met_brooke/met_cross; 'Not yet' true at Reputation 0"
+  },
+  {
+   "row": "B10",
+   "screen": "rep_table.listen",
+   "verdict": "FAIL",
+   "line": "You eat slower, listening.",
+   "why": "rep_table needs only weekday 11:00-14:00; nothing needs her to have bought lunch (body_lunch is a separate $4 row, capped by meals_today), so on a visit with no food, or $0, she isn't eating",
+   "cause": "P36r2-c2"
+  },
+  {
+   "row": "B4",
+   "screen": "rep_mirror.listen",
+   "verdict": "PASS",
+   "line": "You keep your eyes on your own reflection. Your ears are hot.",
+   "why": "her reaction is now on her body: eyes kept down, ears hot; fits stage 0 overhearing"
+  },
+  {
+   "row": "B4",
+   "screen": "rep_table.listen",
+   "verdict": "FAIL",
+   "line": "You eat slower, listening.",
+   "why": "the one reaction line is an action, and a false one on visits with no lunch; nothing on her body answers a warning about her own professor (no face, no stomach, no line of hers): thin",
+   "cause": "P36r2-c2"
+  },
+  {
+   "row": "B8",
+   "screen": "rep_mirror.listen",
+   "verdict": "PASS",
+   "line": "",
+   "why": "no number, no garment of hers"
+  },
+  {
+   "row": "B8",
+   "screen": "rep_table.listen",
+   "verdict": "PASS",
+   "line": "Listen to the next table",
+   "why": "no garment; the only number (11am to 2pm) matches the trigger 11:00-14:00"
+  },
+  {
+   "row": "C460",
+   "screen": "rep_mirror.listen",
+   "verdict": "PASS",
+   "line": "Brooke's telling everyone she's getting the lead in Cross's play.",
+   "why": "behind met_brooke AND met_cross; else 'That blonde from drama's...'; true at every visit"
+  },
+  {
+   "row": "C460",
+   "screen": "rep_table.listen",
+   "verdict": "FAIL",
+   "line": "cooldown_message = \"the tables are empty outside lunch, 11am to 2pm on weekdays.\"",
+   "why": "still as built: after one listen the day-capped row greys with the clock's cooldown_message (v2.py:6725-6728 pushes c, whose cooldownMessage is the hours); at 12:30 it says the tables are empty outside lunch, during lunch. locked_text 'they've gone quiet.' is only used when something other than the clock shut it (v2.py:6716-6721), so it never shows. Also false on the screen: 'You eat slower' (P36r2-c2)",
+   "cause": "P36r2-c1"
+  },
+  {
+   "row": "C461",
+   "screen": "rep_mirror.listen",
+   "verdict": "PASS",
+   "line": "She tells everyone everything. That's how you know it's not true.",
+   "why": "stranger gossip that fits; texture that can't clash"
+  },
+  {
+   "row": "C461",
+   "screen": "rep_table.listen",
+   "verdict": "FAIL",
+   "line": "You eat slower, listening.",
+   "why": "not texture that can't clash: it asserts she's eating, which no condition backs",
+   "cause": "P36r2-c2"
+  },
+  {
+   "row": "C625",
+   "screen": "rep_mirror.listen",
+   "verdict": "PASS",
+   "line": "That blonde from drama's telling everyone she's getting the lead in the play.",
+   "why": "role before name: unnamed version until met"
+  },
+  {
+   "row": "C625",
+   "screen": "rep_table.listen",
+   "verdict": "PASS",
+   "line": "You're taking intro psych? Go to class. Don't go to his office hours alone.",
+   "why": "role before name: the course, not Hale, until met_hale; Nadia is 'the girl who took it last spring' (PLAN:176 'last spring it was me')"
+  },
+  {
+   "row": "C626",
+   "screen": "rep_mirror.listen",
+   "verdict": "PASS",
+   "line": "Brooke tells everyone everything.",
+   "why": "name swaps in on met_brooke (and Cross on met_cross)"
+  },
+  {
+   "row": "C630",
+   "screen": "rep_mirror.listen",
+   "verdict": "PASS",
+   "line": "Brooke's telling everyone she's getting the lead in Cross's play.",
+   "why": "named only after met, when she has already had both (Brooke at the mirror, Cross in drama); before, a relation-only description; 'Cross's play' carries his role"
+  },
+  {
+   "row": "C630",
+   "screen": "rep_table.listen",
+   "verdict": "PASS",
+   "line": "Ask Nadia. Actually, don't ask Nadia.",
+   "why": "behind met_hale; met_hale and met_nadia are set together only (7_final_game.toml:4637), so Nadia is met; before, 'the girl who took it last spring'"
+  },
+  {
+   "row": "C914",
+   "screen": "rep_table.listen",
+   "verdict": "FAIL",
+   "line": "cooldown_message = \"the tables are empty outside lunch, 11am to 2pm on weekdays.\"",
+   "why": "the row shows its hours when the daily cap, not the clock, shut it: engine find, waiting for LO (ENI: leave as built)",
+   "cause": "P36r2-c1"
+  },
+  {
+   "row": "C927",
+   "screen": "rep_mirror.listen",
+   "verdict": "PASS",
+   "line": "Done",
+   "why": "Done spends 10 minutes"
+  },
+  {
+   "row": "C927",
+   "screen": "rep_table.listen",
+   "verdict": "PASS",
+   "line": "Done",
+   "why": "Done spends 15 minutes"
+  },
+  {
+   "row": "C931",
+   "screen": "rep_mirror.listen",
+   "verdict": "N/A",
+   "line": "",
+   "why": "no time_of_day on rep_mirror; the bathroom's hours are the place's"
+  },
+  {
+   "row": "C931",
+   "screen": "rep_table.listen",
+   "verdict": "PASS",
+   "line": "start_time = \"11:00\", end_time = \"14:00\"",
+   "why": "end exclusive: last start 13:59, matching 'to 2pm'"
+  },
+  {
+   "row": "L106",
+   "screen": "rep_mirror.listen",
+   "verdict": "PASS",
+   "line": "Two girls you don't know",
+   "why": "unnamed strangers, no rows; no met person claimed"
+  },
+  {
+   "row": "L106",
+   "screen": "rep_table.listen",
+   "verdict": "PASS",
+   "line": "The table behind you is four second-years",
+   "why": "unnamed strangers; no named person claimed there"
+  },
+  {
+   "row": "L167",
+   "screen": "rep_mirror.listen",
+   "verdict": "N/A",
+   "line": "",
+   "why": "rep_mirror has no hours of its own; its grey is the daily cap"
+  },
+  {
+   "row": "L167",
+   "screen": "rep_table.listen",
+   "verdict": "PASS",
+   "line": "cooldown_message = \"the tables are empty outside lunch, 11am to 2pm on weekdays.\"",
+   "why": "one row, weekdays 11:00-14:00, greys with show_when_blocked and the full hours"
+  }
+ ],
+ "causes": [
+  {
+   "id": "P36r2-c1",
+   "what": "ENGINE (waiting for LO): a day-capped repeatable greys with its clock cooldown_message (v2.py:6725-6728); rep_table's locked_text 'they've gone quiet.' never shows, so after one listen at lunch the row says the tables are empty outside lunch"
+  },
+  {
+   "id": "P36r2-c2",
+   "what": "rep_table's new reaction line 'You eat slower, listening.' assumes she's eating (nothing gates it on lunch) and puts no feeling on her body"
+  }
+ ]
+}

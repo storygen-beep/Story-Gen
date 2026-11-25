@@ -1,0 +1,45 @@
+{
+ "verdicts": [
+  {
+   "row": "B10",
+   "screen": "shop_meet_nina.meet",
+   "verdict": "PASS",
+   "line": "A woman in her twenties is behind the till in a black dress two sizes too confident for a shop this small.",
+   "why": "trigger 10:00-18:45 with Nina present; her row has her behind the till exactly 10:00-18:45, Mon-Sat",
+   "cause": null
+  },
+  {
+   "row": "B8",
+   "screen": "shop_meet_nina.meet",
+   "verdict": "PASS",
+   "line": "A woman in her twenties is behind the till in a black dress two sizes too confident for a shop this small.",
+   "why": "the black dress is Nina's; no garment of hers named, no number",
+   "cause": null
+  },
+  {
+   "row": "C460",
+   "screen": "shop_meet_nina.meet",
+   "verdict": "PASS",
+   "line": "A woman in her twenties is behind the till in a black dress two sizes too confident for a shop this small.",
+   "why": "trigger 10:00-18:45 with Nina present; her row has her behind the till exactly 10:00-18:45, Mon-Sat",
+   "cause": null
+  },
+  {
+   "row": "C461",
+   "screen": "shop_meet_nina.meet",
+   "verdict": "PASS",
+   "line": "A woman in her twenties is behind the till in a black dress two sizes too confident for a shop this small.",
+   "why": "texture and dialogue that fit the cast entries; no past or fact assumed",
+   "cause": null
+  },
+  {
+   "row": "L106",
+   "screen": "shop_meet_nina.meet",
+   "verdict": "PASS",
+   "line": "A woman in her twenties is behind the till in a black dress two sizes too confident for a shop this small.",
+   "why": "trigger 10:00-18:45 with Nina present; her row has her behind the till exactly 10:00-18:45, Mon-Sat",
+   "cause": null
+  }
+ ],
+ "causes": []
+}

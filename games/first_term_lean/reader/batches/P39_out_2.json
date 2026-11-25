@@ -1,0 +1,1162 @@
+{
+ "verdicts": [
+  {
+   "row": "B10",
+   "screen": "walk_curtain.finish",
+   "verdict": "PASS",
+   "line": "Your face stays hot all the way to the till.",
+   "why": "every line true at the first and last minute and on a second visit; named people gated present by their rows"
+  },
+  {
+   "row": "B10",
+   "screen": "walk_curtain.moment",
+   "verdict": "PASS",
+   "line": "you with the skirt halfway up your thighs and your underwear right there / nothing under it",
+   "why": "every line true at the first and last minute and on a second visit; named people gated present by their rows"
+  },
+  {
+   "row": "B10",
+   "screen": "walk_curtain.shut",
+   "verdict": "PASS",
+   "line": "Next time you'll check the hooks.",
+   "why": "every line true at the first and last minute and on a second visit; named people gated present by their rows"
+  },
+  {
+   "row": "B10",
+   "screen": "walk_danny_deal.ask",
+   "verdict": "PASS",
+   "line": "He smiles like you've both agreed on something.",
+   "why": "every line true at the first and last minute and on a second visit; named people gated present by their rows"
+  },
+  {
+   "row": "B10",
+   "screen": "walk_danny_deal.moment",
+   "verdict": "PASS",
+   "line": "Same time tomorrow. Don't be late. Cash only.",
+   "why": "every line true at the first and last minute and on a second visit; named people gated present by their rows"
+  },
+  {
+   "row": "B10",
+   "screen": "walk_danny_deal.pretend",
+   "verdict": "PASS",
+   "line": "He'll be out back again tomorrow night.",
+   "why": "no snack bought or priced; Danny at the shop every day to 23:00"
+  },
+  {
+   "row": "B10",
+   "screen": "walk_marco_squat.back",
+   "verdict": "PASS",
+   "line": "You can feel him clocking you anyway.",
+   "why": "every line true at the first and last minute and on a second visit; named people gated present by their rows"
+  },
+  {
+   "row": "B10",
+   "screen": "walk_marco_squat.moment",
+   "verdict": "PASS",
+   "line": "Your own thighs go tight on the bench. He sees that too.",
+   "why": "every line true at the first and last minute and on a second visit; named people gated present by their rows"
+  },
+  {
+   "row": "B10",
+   "screen": "walk_marco_squat.watch",
+   "verdict": "PASS",
+   "line": "Your turn's coming, champ.",
+   "why": "every line true at the first and last minute and on a second visit; named people gated present by their rows"
+  },
+  {
+   "row": "B10",
+   "screen": "walk_nina_dress.browse",
+   "verdict": "FAIL",
+   "line": "Next time she'll make you try it.",
+   "why": "false on the second visit: the scene repeats unchanged, nobody makes her try it",
+   "cause": "P39r2-c2"
+  },
+  {
+   "row": "B10",
+   "screen": "walk_nina_dress.moment",
+   "verdict": "PASS",
+   "line": "The fitting room curtain's half open.",
+   "why": "matches her fitting-room row; trigger 13:00-13:30 Mon-Sat"
+  },
+  {
+   "row": "B10",
+   "screen": "walk_nina_dress.suits",
+   "verdict": "PASS",
+   "line": "I know. Your turn next, sweetie.",
+   "why": "every line true at the first and last minute and on a second visit; named people gated present by their rows"
+  },
+  {
+   "row": "B10",
+   "screen": "walk_park_couple.away",
+   "verdict": "FAIL",
+   "line": "You'll walk past that gap again tomorrow.",
+   "why": "false on any playthrough that doesn't go to the park the next day (PLAN \u00a74: not her way)",
+   "cause": "P39r2-c2"
+  },
+  {
+   "row": "B10",
+   "screen": "walk_park_couple.moment",
+   "verdict": "PASS",
+   "line": "her heels in the backs of his thighs as he fucks her, slow and deep.",
+   "why": "every line true at the first and last minute and on a second visit; named people gated present by their rows"
+  },
+  {
+   "row": "B10",
+   "screen": "walk_park_couple.watch",
+   "verdict": "PASS",
+   "line": "Your thighs clench. You know which gap in the bushes now.",
+   "why": "every line true at the first and last minute and on a second visit; named people gated present by their rows"
+  },
+  {
+   "row": "B10",
+   "screen": "walk_vance_ledger.hello",
+   "verdict": "PASS",
+   "line": "He just watches you read the numbers on them.",
+   "why": "every line true at the first and last minute and on a second visit; named people gated present by their rows"
+  },
+  {
+   "row": "B10",
+   "screen": "walk_vance_ledger.moment",
+   "verdict": "PASS",
+   "line": "[not met_vance] The man next door is on his porch ... Stranger: \"Short again, number nine.\"",
+   "why": "every line true at the first and last minute and on a second visit; named people gated present by their rows"
+  },
+  {
+   "row": "B10",
+   "screen": "walk_vance_ledger.past",
+   "verdict": "PASS",
+   "line": "Number nine. You wonder who that is.",
+   "why": "every line true at the first and last minute and on a second visit; named people gated present by their rows"
+  },
+  {
+   "row": "B12",
+   "screen": "walk_marco_squat.moment",
+   "verdict": "PASS",
+   "line": "Your own thighs go tight on the bench. He sees that too. / watch: \"Your turn's coming, champ.\"",
+   "why": "her thighs named, his reaction (he sees it), a not-yet on watch, a hook"
+  },
+  {
+   "row": "B13",
+   "screen": "walk_curtain.moment",
+   "verdict": "PASS",
+   "line": "the skirt halfway up your thighs and your underwear right there in front of him. [image body/curtain_flash_t4]",
+   "why": "on her body, her picture right after the line he sees her"
+  },
+  {
+   "row": "B3",
+   "screen": "walk_curtain.finish",
+   "verdict": "FAIL",
+   "line": "Your face stays hot all the way to the till.",
+   "why": "the last line closes the moment on her face; it points at nothing next (S2)",
+   "cause": "P39r2-c1"
+  },
+  {
+   "row": "B3",
+   "screen": "walk_park_couple.watch",
+   "verdict": "PASS",
+   "line": "You know which gap in the bushes now.",
+   "why": "points at coming back"
+  },
+  {
+   "row": "B8",
+   "screen": "walk_curtain.finish",
+   "verdict": "PASS",
+   "line": "Your face stays hot all the way to the till.",
+   "why": "no number; no garment of hers named, or the one named is backed"
+  },
+  {
+   "row": "B8",
+   "screen": "walk_curtain.moment",
+   "verdict": "PASS",
+   "line": "you with the skirt halfway up your thighs and your underwear right there / nothing under it",
+   "why": "no number; no garment of hers named, or the one named is backed"
+  },
+  {
+   "row": "B8",
+   "screen": "walk_curtain.shut",
+   "verdict": "PASS",
+   "line": "Next time you'll check the hooks.",
+   "why": "no number; no garment of hers named, or the one named is backed"
+  },
+  {
+   "row": "B8",
+   "screen": "walk_danny_deal.ask",
+   "verdict": "PASS",
+   "line": "He smiles like you've both agreed on something.",
+   "why": "no number; no garment of hers named, or the one named is backed"
+  },
+  {
+   "row": "B8",
+   "screen": "walk_danny_deal.moment",
+   "verdict": "PASS",
+   "line": "Same time tomorrow. Don't be late. Cash only.",
+   "why": "no number; no garment of hers named, or the one named is backed"
+  },
+  {
+   "row": "B8",
+   "screen": "walk_danny_deal.pretend",
+   "verdict": "PASS",
+   "line": "You pick up a snack you don't want",
+   "why": "no number, no garment"
+  },
+  {
+   "row": "B8",
+   "screen": "walk_marco_squat.back",
+   "verdict": "PASS",
+   "line": "You can feel him clocking you anyway.",
+   "why": "no number; no garment of hers named, or the one named is backed"
+  },
+  {
+   "row": "B8",
+   "screen": "walk_marco_squat.moment",
+   "verdict": "PASS",
+   "line": "Your own thighs go tight on the bench. He sees that too.",
+   "why": "no number; no garment of hers named, or the one named is backed"
+  },
+  {
+   "row": "B8",
+   "screen": "walk_marco_squat.watch",
+   "verdict": "PASS",
+   "line": "Your turn's coming, champ.",
+   "why": "no number; no garment of hers named, or the one named is backed"
+  },
+  {
+   "row": "B8",
+   "screen": "walk_nina_dress.browse",
+   "verdict": "PASS",
+   "line": "Next time she'll make you try it.",
+   "why": "no number; no garment of hers named, or the one named is backed"
+  },
+  {
+   "row": "B8",
+   "screen": "walk_nina_dress.moment",
+   "verdict": "PASS",
+   "line": "The fitting room curtain's half open. Nina's in the shop's tightest black dress",
+   "why": "no number; no garment of hers named, or the one named is backed"
+  },
+  {
+   "row": "B8",
+   "screen": "walk_nina_dress.suits",
+   "verdict": "PASS",
+   "line": "I know. Your turn next, sweetie.",
+   "why": "no number; no garment of hers named, or the one named is backed"
+  },
+  {
+   "row": "B8",
+   "screen": "walk_park_couple.away",
+   "verdict": "PASS",
+   "line": "You'll walk past that gap again tomorrow.",
+   "why": "no number; no garment of hers named, or the one named is backed"
+  },
+  {
+   "row": "B8",
+   "screen": "walk_park_couple.moment",
+   "verdict": "PASS",
+   "line": "her heels in the backs of his thighs as he fucks her, slow and deep.",
+   "why": "no number; no garment of hers named, or the one named is backed"
+  },
+  {
+   "row": "B8",
+   "screen": "walk_park_couple.watch",
+   "verdict": "PASS",
+   "line": "Your thighs clench. You know which gap in the bushes now.",
+   "why": "no number; no garment of hers named, or the one named is backed"
+  },
+  {
+   "row": "B8",
+   "screen": "walk_vance_ledger.hello",
+   "verdict": "PASS",
+   "line": "He just watches you read the numbers on them.",
+   "why": "no number; no garment of hers named, or the one named is backed"
+  },
+  {
+   "row": "B8",
+   "screen": "walk_vance_ledger.moment",
+   "verdict": "PASS",
+   "line": "[not met_vance] The man next door is on his porch ... Stranger: \"Short again, number nine.\"",
+   "why": "no number; no garment of hers named, or the one named is backed"
+  },
+  {
+   "row": "B8",
+   "screen": "walk_vance_ledger.past",
+   "verdict": "PASS",
+   "line": "Number nine. You wonder who that is.",
+   "why": "no number; no garment of hers named, or the one named is backed"
+  },
+  {
+   "row": "C1158",
+   "screen": "walk_curtain.moment",
+   "verdict": "PASS",
+   "line": "you with the skirt halfway up your thighs and your underwear right there / nothing under it",
+   "why": "garments named are the strangers'/Nina's, or backed by a slot group or the try-on act"
+  },
+  {
+   "row": "C1158",
+   "screen": "walk_nina_dress.moment",
+   "verdict": "PASS",
+   "line": "The fitting room curtain's half open. Nina's in the shop's tightest black dress",
+   "why": "garments named are the strangers'/Nina's, or backed by a slot group or the try-on act"
+  },
+  {
+   "row": "C1158",
+   "screen": "walk_park_couple.moment",
+   "verdict": "PASS",
+   "line": "her heels in the backs of his thighs as he fucks her, slow and deep.",
+   "why": "garments named are the strangers'/Nina's, or backed by a slot group or the try-on act"
+  },
+  {
+   "row": "C1158",
+   "screen": "walk_park_couple.watch",
+   "verdict": "PASS",
+   "line": "Your thighs clench. You know which gap in the bushes now.",
+   "why": "garments named are the strangers'/Nina's, or backed by a slot group or the try-on act"
+  },
+  {
+   "row": "C1206",
+   "screen": "walk_curtain.moment",
+   "verdict": "PASS",
+   "line": "you with the skirt halfway up your thighs and your underwear right there / nothing under it",
+   "why": "no garment of hers named that she may not wear (underwear grouped on its slot)"
+  },
+  {
+   "row": "C1206",
+   "screen": "walk_nina_dress.moment",
+   "verdict": "PASS",
+   "line": "The fitting room curtain's half open. Nina's in the shop's tightest black dress",
+   "why": "no garment of hers named that she may not wear (underwear grouped on its slot)"
+  },
+  {
+   "row": "C1206",
+   "screen": "walk_park_couple.moment",
+   "verdict": "PASS",
+   "line": "her heels in the backs of his thighs as he fucks her, slow and deep.",
+   "why": "no garment of hers named that she may not wear (underwear grouped on its slot)"
+  },
+  {
+   "row": "C1206",
+   "screen": "walk_park_couple.watch",
+   "verdict": "PASS",
+   "line": "Your thighs clench. You know which gap in the bushes now.",
+   "why": "no garment of hers named that she may not wear (underwear grouped on its slot)"
+  },
+  {
+   "row": "C1262",
+   "screen": "walk_curtain.moment",
+   "verdict": "PASS",
+   "line": "...right there in front of him. then image 'a young woman of 18 caught half into a skirt'",
+   "why": "picture right after the line that says it"
+  },
+  {
+   "row": "C1278",
+   "screen": "walk_park_couple.moment",
+   "verdict": "PASS",
+   "line": "a woman in her twenties and a man in his thirties",
+   "why": "ages given"
+  },
+  {
+   "row": "C1280",
+   "screen": "walk_park_couple.moment",
+   "verdict": "PASS",
+   "line": "pool_dir = \"sex/park_couple_t5\", pool = 4",
+   "why": "explicit repeat, pool 4"
+  },
+  {
+   "row": "C149",
+   "screen": "walk_curtain.finish",
+   "verdict": "FAIL",
+   "line": "Your face stays hot all the way to the till.",
+   "why": "no pull at what comes next",
+   "cause": "P39r2-c1"
+  },
+  {
+   "row": "C149",
+   "screen": "walk_curtain.shut",
+   "verdict": "PASS",
+   "line": "Next time you'll check the hooks.",
+   "why": "ends on a pull that points at the next visit"
+  },
+  {
+   "row": "C149",
+   "screen": "walk_danny_deal.pretend",
+   "verdict": "PASS",
+   "line": "You buying that or marrying it? / He'll be out back again tomorrow night.",
+   "why": "ends on a pull that points at the next visit"
+  },
+  {
+   "row": "C149",
+   "screen": "walk_nina_dress.browse",
+   "verdict": "PASS",
+   "line": "Next time she'll make you try it.",
+   "why": "ends on a pull that points at the next visit"
+  },
+  {
+   "row": "C149",
+   "screen": "walk_park_couple.away",
+   "verdict": "PASS",
+   "line": "You'll walk past that gap again tomorrow.",
+   "why": "ends on a pull that points at the next visit"
+  },
+  {
+   "row": "C149",
+   "screen": "walk_park_couple.watch",
+   "verdict": "PASS",
+   "line": "Your thighs clench. You know which gap in the bushes now.",
+   "why": "ends on a pull that points at the next visit"
+  },
+  {
+   "row": "C149",
+   "screen": "walk_vance_ledger.past",
+   "verdict": "PASS",
+   "line": "Number nine. You wonder who that is.",
+   "why": "ends on a pull that points at the next visit"
+  },
+  {
+   "row": "C311",
+   "screen": "walk_marco_squat.moment",
+   "verdict": "PASS",
+   "line": "Your own thighs go tight on the bench. He sees that too.",
+   "why": "body part, his reaction, 'Your turn's coming' as the not-yet, hook"
+  },
+  {
+   "row": "C442",
+   "screen": "walk_park_couple.watch",
+   "verdict": "PASS",
+   "line": "He drives into her harder ... he pulls out and comes across her thigh.",
+   "why": "the act shown through to the end, no fade"
+  },
+  {
+   "row": "C449",
+   "screen": "walk_park_couple.watch",
+   "verdict": "PASS",
+   "line": "he pulls out and comes across her thigh. ... Your thighs clench.",
+   "why": "act named; her reaction on her body (S4, stage 0)"
+  },
+  {
+   "row": "C450",
+   "screen": "walk_curtain.finish",
+   "verdict": "FAIL",
+   "line": "Your face stays hot all the way to the till.",
+   "why": "no hook at what comes next",
+   "cause": "P39r2-c1"
+  },
+  {
+   "row": "C450",
+   "screen": "walk_curtain.shut",
+   "verdict": "PASS",
+   "line": "Next time you'll check the hooks.",
+   "why": "ends on a pull that points at the next visit"
+  },
+  {
+   "row": "C450",
+   "screen": "walk_danny_deal.pretend",
+   "verdict": "PASS",
+   "line": "You buying that or marrying it? / He'll be out back again tomorrow night.",
+   "why": "ends on a pull that points at the next visit"
+  },
+  {
+   "row": "C450",
+   "screen": "walk_nina_dress.browse",
+   "verdict": "PASS",
+   "line": "Next time she'll make you try it.",
+   "why": "ends on a pull that points at the next visit"
+  },
+  {
+   "row": "C450",
+   "screen": "walk_park_couple.away",
+   "verdict": "PASS",
+   "line": "You'll walk past that gap again tomorrow.",
+   "why": "ends on a pull that points at the next visit"
+  },
+  {
+   "row": "C450",
+   "screen": "walk_park_couple.watch",
+   "verdict": "PASS",
+   "line": "Your thighs clench. You know which gap in the bushes now.",
+   "why": "ends on a pull that points at the next visit"
+  },
+  {
+   "row": "C450",
+   "screen": "walk_vance_ledger.past",
+   "verdict": "PASS",
+   "line": "Number nine. You wonder who that is.",
+   "why": "ends on a pull that points at the next visit"
+  },
+  {
+   "row": "C460",
+   "screen": "walk_curtain.finish",
+   "verdict": "PASS",
+   "line": "Your face stays hot all the way to the till.",
+   "why": "every claim checked against PLAN, who_is_where and the trigger; true on every reachable visit"
+  },
+  {
+   "row": "C460",
+   "screen": "walk_curtain.moment",
+   "verdict": "PASS",
+   "line": "you with the skirt halfway up your thighs and your underwear right there / nothing under it",
+   "why": "every claim checked against PLAN, who_is_where and the trigger; true on every reachable visit"
+  },
+  {
+   "row": "C460",
+   "screen": "walk_curtain.shut",
+   "verdict": "PASS",
+   "line": "Next time you'll check the hooks.",
+   "why": "every claim checked against PLAN, who_is_where and the trigger; true on every reachable visit"
+  },
+  {
+   "row": "C460",
+   "screen": "walk_danny_deal.ask",
+   "verdict": "PASS",
+   "line": "He smiles like you've both agreed on something.",
+   "why": "every claim checked against PLAN, who_is_where and the trigger; true on every reachable visit"
+  },
+  {
+   "row": "C460",
+   "screen": "walk_danny_deal.moment",
+   "verdict": "PASS",
+   "line": "Same time tomorrow. Don't be late. Cash only.",
+   "why": "every claim checked against PLAN, who_is_where and the trigger; true on every reachable visit"
+  },
+  {
+   "row": "C460",
+   "screen": "walk_danny_deal.pretend",
+   "verdict": "PASS",
+   "line": "He'll be out back again tomorrow night.",
+   "why": "true daily by his rows and the window"
+  },
+  {
+   "row": "C460",
+   "screen": "walk_marco_squat.back",
+   "verdict": "PASS",
+   "line": "You can feel him clocking you anyway.",
+   "why": "every claim checked against PLAN, who_is_where and the trigger; true on every reachable visit"
+  },
+  {
+   "row": "C460",
+   "screen": "walk_marco_squat.moment",
+   "verdict": "PASS",
+   "line": "Your own thighs go tight on the bench. He sees that too.",
+   "why": "every claim checked against PLAN, who_is_where and the trigger; true on every reachable visit"
+  },
+  {
+   "row": "C460",
+   "screen": "walk_marco_squat.watch",
+   "verdict": "PASS",
+   "line": "Your turn's coming, champ.",
+   "why": "every claim checked against PLAN, who_is_where and the trigger; true on every reachable visit"
+  },
+  {
+   "row": "C460",
+   "screen": "walk_nina_dress.browse",
+   "verdict": "FAIL",
+   "line": "Next time she'll make you try it.",
+   "why": "the next visit replays this same scene and she doesn't; no built step makes her",
+   "cause": "P39r2-c2"
+  },
+  {
+   "row": "C460",
+   "screen": "walk_nina_dress.moment",
+   "verdict": "PASS",
+   "line": "Nina's in the shop's tightest black dress",
+   "why": "her row 13:00-13:30 'in the fitting room' (toml 2187) matches the trigger window; shop text no longer puts her at the till"
+  },
+  {
+   "row": "C460",
+   "screen": "walk_nina_dress.suits",
+   "verdict": "PASS",
+   "line": "I know. Your turn next, sweetie.",
+   "why": "every claim checked against PLAN, who_is_where and the trigger; true on every reachable visit"
+  },
+  {
+   "row": "C460",
+   "screen": "walk_park_couple.away",
+   "verdict": "FAIL",
+   "line": "You'll walk past that gap again tomorrow.",
+   "why": "a future her play may never make: the park is 'not her way to campus' (PLAN \u00a74) and nothing sends her there tomorrow",
+   "cause": "P39r2-c2"
+  },
+  {
+   "row": "C460",
+   "screen": "walk_park_couple.moment",
+   "verdict": "PASS",
+   "line": "her heels in the backs of his thighs as he fucks her, slow and deep.",
+   "why": "every claim checked against PLAN, who_is_where and the trigger; true on every reachable visit"
+  },
+  {
+   "row": "C460",
+   "screen": "walk_park_couple.watch",
+   "verdict": "PASS",
+   "line": "Your thighs clench. You know which gap in the bushes now.",
+   "why": "every claim checked against PLAN, who_is_where and the trigger; true on every reachable visit"
+  },
+  {
+   "row": "C460",
+   "screen": "walk_vance_ledger.hello",
+   "verdict": "PASS",
+   "line": "[not met_vance] Stranger: \"Evening.\"",
+   "why": "Stranger before met_vance"
+  },
+  {
+   "row": "C460",
+   "screen": "walk_vance_ledger.moment",
+   "verdict": "PASS",
+   "line": "[not met_vance] speaker unknown",
+   "why": "renders Stranger (v2.py:19280-19287); named only behind met_vance"
+  },
+  {
+   "row": "C460",
+   "screen": "walk_vance_ledger.past",
+   "verdict": "PASS",
+   "line": "Number nine. You wonder who that is.",
+   "why": "every claim checked against PLAN, who_is_where and the trigger; true on every reachable visit"
+  },
+  {
+   "row": "C461",
+   "screen": "walk_curtain.finish",
+   "verdict": "PASS",
+   "line": "Your face stays hot all the way to the till.",
+   "why": "texture and in-character dialogue only"
+  },
+  {
+   "row": "C461",
+   "screen": "walk_curtain.moment",
+   "verdict": "PASS",
+   "line": "you with the skirt halfway up your thighs and your underwear right there / nothing under it",
+   "why": "texture and in-character dialogue only"
+  },
+  {
+   "row": "C461",
+   "screen": "walk_curtain.shut",
+   "verdict": "PASS",
+   "line": "Next time you'll check the hooks.",
+   "why": "texture and in-character dialogue only"
+  },
+  {
+   "row": "C461",
+   "screen": "walk_danny_deal.ask",
+   "verdict": "PASS",
+   "line": "He smiles like you've both agreed on something.",
+   "why": "texture and in-character dialogue only"
+  },
+  {
+   "row": "C461",
+   "screen": "walk_danny_deal.moment",
+   "verdict": "PASS",
+   "line": "Same time tomorrow. Don't be late. Cash only.",
+   "why": "texture and in-character dialogue only"
+  },
+  {
+   "row": "C461",
+   "screen": "walk_danny_deal.pretend",
+   "verdict": "PASS",
+   "line": "You buying that or marrying it? / He'll be out back again tomorrow night.",
+   "why": "texture and in-character dialogue only"
+  },
+  {
+   "row": "C461",
+   "screen": "walk_marco_squat.back",
+   "verdict": "PASS",
+   "line": "You can feel him clocking you anyway.",
+   "why": "texture and in-character dialogue only"
+  },
+  {
+   "row": "C461",
+   "screen": "walk_marco_squat.moment",
+   "verdict": "PASS",
+   "line": "Your own thighs go tight on the bench. He sees that too.",
+   "why": "texture and in-character dialogue only"
+  },
+  {
+   "row": "C461",
+   "screen": "walk_marco_squat.watch",
+   "verdict": "PASS",
+   "line": "Your turn's coming, champ.",
+   "why": "texture and in-character dialogue only"
+  },
+  {
+   "row": "C461",
+   "screen": "walk_nina_dress.browse",
+   "verdict": "PASS",
+   "line": "Next time she'll make you try it.",
+   "why": "texture and in-character dialogue only"
+  },
+  {
+   "row": "C461",
+   "screen": "walk_nina_dress.moment",
+   "verdict": "PASS",
+   "line": "The fitting room curtain's half open. Nina's in the shop's tightest black dress",
+   "why": "texture and in-character dialogue only"
+  },
+  {
+   "row": "C461",
+   "screen": "walk_nina_dress.suits",
+   "verdict": "PASS",
+   "line": "I know. Your turn next, sweetie.",
+   "why": "texture and in-character dialogue only"
+  },
+  {
+   "row": "C461",
+   "screen": "walk_park_couple.away",
+   "verdict": "PASS",
+   "line": "You'll walk past that gap again tomorrow.",
+   "why": "texture and in-character dialogue only"
+  },
+  {
+   "row": "C461",
+   "screen": "walk_park_couple.moment",
+   "verdict": "PASS",
+   "line": "her heels in the backs of his thighs as he fucks her, slow and deep.",
+   "why": "texture and in-character dialogue only"
+  },
+  {
+   "row": "C461",
+   "screen": "walk_park_couple.watch",
+   "verdict": "PASS",
+   "line": "Your thighs clench. You know which gap in the bushes now.",
+   "why": "texture and in-character dialogue only"
+  },
+  {
+   "row": "C461",
+   "screen": "walk_vance_ledger.hello",
+   "verdict": "PASS",
+   "line": "He just watches you read the numbers on them.",
+   "why": "texture and in-character dialogue only"
+  },
+  {
+   "row": "C461",
+   "screen": "walk_vance_ledger.moment",
+   "verdict": "PASS",
+   "line": "[not met_vance] The man next door is on his porch ... Stranger: \"Short again, number nine.\"",
+   "why": "texture and in-character dialogue only"
+  },
+  {
+   "row": "C461",
+   "screen": "walk_vance_ledger.past",
+   "verdict": "PASS",
+   "line": "Number nine. You wonder who that is.",
+   "why": "texture and in-character dialogue only"
+  },
+  {
+   "row": "C625",
+   "screen": "walk_vance_ledger.hello",
+   "verdict": "PASS",
+   "line": "[not met_vance] Stranger: \"Evening.\"",
+   "why": "Stranger until met_vance (note row)"
+  },
+  {
+   "row": "C625",
+   "screen": "walk_vance_ledger.moment",
+   "verdict": "PASS",
+   "line": "The man next door is on his porch ... speaker unknown (Stranger, v2.py:19280-19287)",
+   "why": "role before name until met_vance (note row)"
+  },
+  {
+   "row": "C903",
+   "screen": "walk_danny_deal.moment",
+   "verdict": "PASS",
+   "line": "Same time tomorrow. Don't be late. Cash only.",
+   "why": "no weekday named; Danny's rows put him at the shop daily to 23:00"
+  },
+  {
+   "row": "C927",
+   "screen": "walk_curtain.finish",
+   "verdict": "PASS",
+   "line": "Your face stays hot all the way to the till.",
+   "why": "every Done states 5 minutes; node hops state 0"
+  },
+  {
+   "row": "C927",
+   "screen": "walk_curtain.shut",
+   "verdict": "PASS",
+   "line": "Next time you'll check the hooks.",
+   "why": "every Done states 5 minutes; node hops state 0"
+  },
+  {
+   "row": "C927",
+   "screen": "walk_danny_deal.ask",
+   "verdict": "PASS",
+   "line": "He smiles like you've both agreed on something.",
+   "why": "every Done states 5 minutes; node hops state 0"
+  },
+  {
+   "row": "C927",
+   "screen": "walk_danny_deal.pretend",
+   "verdict": "PASS",
+   "line": "You buying that or marrying it? / He'll be out back again tomorrow night.",
+   "why": "every Done states 5 minutes; node hops state 0"
+  },
+  {
+   "row": "C927",
+   "screen": "walk_marco_squat.back",
+   "verdict": "PASS",
+   "line": "You can feel him clocking you anyway.",
+   "why": "every Done states 5 minutes; node hops state 0"
+  },
+  {
+   "row": "C927",
+   "screen": "walk_marco_squat.watch",
+   "verdict": "PASS",
+   "line": "Your turn's coming, champ.",
+   "why": "every Done states 5 minutes; node hops state 0"
+  },
+  {
+   "row": "C927",
+   "screen": "walk_nina_dress.browse",
+   "verdict": "PASS",
+   "line": "Next time she'll make you try it.",
+   "why": "every Done states 5 minutes; node hops state 0"
+  },
+  {
+   "row": "C927",
+   "screen": "walk_nina_dress.suits",
+   "verdict": "PASS",
+   "line": "I know. Your turn next, sweetie.",
+   "why": "every Done states 5 minutes; node hops state 0"
+  },
+  {
+   "row": "C927",
+   "screen": "walk_park_couple.away",
+   "verdict": "PASS",
+   "line": "You'll walk past that gap again tomorrow.",
+   "why": "every Done states 5 minutes; node hops state 0"
+  },
+  {
+   "row": "C927",
+   "screen": "walk_park_couple.watch",
+   "verdict": "PASS",
+   "line": "Your thighs clench. You know which gap in the bushes now.",
+   "why": "every Done states 5 minutes; node hops state 0"
+  },
+  {
+   "row": "C927",
+   "screen": "walk_vance_ledger.hello",
+   "verdict": "PASS",
+   "line": "He just watches you read the numbers on them.",
+   "why": "every Done states 5 minutes; node hops state 0"
+  },
+  {
+   "row": "C927",
+   "screen": "walk_vance_ledger.past",
+   "verdict": "PASS",
+   "line": "Number nine. You wonder who that is.",
+   "why": "every Done states 5 minutes; node hops state 0"
+  },
+  {
+   "row": "C931",
+   "screen": "walk_curtain.finish",
+   "verdict": "PASS",
+   "line": "Your face stays hot all the way to the till.",
+   "why": "window end exclusive, inside the place's hours and the person's row"
+  },
+  {
+   "row": "C931",
+   "screen": "walk_curtain.shut",
+   "verdict": "PASS",
+   "line": "Next time you'll check the hooks.",
+   "why": "window end exclusive, inside the place's hours and the person's row"
+  },
+  {
+   "row": "C931",
+   "screen": "walk_danny_deal.ask",
+   "verdict": "PASS",
+   "line": "He smiles like you've both agreed on something.",
+   "why": "window end exclusive, inside the place's hours and the person's row"
+  },
+  {
+   "row": "C931",
+   "screen": "walk_danny_deal.pretend",
+   "verdict": "PASS",
+   "line": "You buying that or marrying it? / He'll be out back again tomorrow night.",
+   "why": "window end exclusive, inside the place's hours and the person's row"
+  },
+  {
+   "row": "C931",
+   "screen": "walk_marco_squat.back",
+   "verdict": "PASS",
+   "line": "You can feel him clocking you anyway.",
+   "why": "window end exclusive, inside the place's hours and the person's row"
+  },
+  {
+   "row": "C931",
+   "screen": "walk_marco_squat.watch",
+   "verdict": "PASS",
+   "line": "Your turn's coming, champ.",
+   "why": "window end exclusive, inside the place's hours and the person's row"
+  },
+  {
+   "row": "C931",
+   "screen": "walk_nina_dress.browse",
+   "verdict": "PASS",
+   "line": "Next time she'll make you try it.",
+   "why": "window end exclusive, inside the place's hours and the person's row"
+  },
+  {
+   "row": "C931",
+   "screen": "walk_nina_dress.suits",
+   "verdict": "PASS",
+   "line": "I know. Your turn next, sweetie.",
+   "why": "window end exclusive, inside the place's hours and the person's row"
+  },
+  {
+   "row": "C931",
+   "screen": "walk_park_couple.away",
+   "verdict": "PASS",
+   "line": "You'll walk past that gap again tomorrow.",
+   "why": "window end exclusive, inside the place's hours and the person's row"
+  },
+  {
+   "row": "C931",
+   "screen": "walk_park_couple.watch",
+   "verdict": "PASS",
+   "line": "Your thighs clench. You know which gap in the bushes now.",
+   "why": "window end exclusive, inside the place's hours and the person's row"
+  },
+  {
+   "row": "C931",
+   "screen": "walk_vance_ledger.hello",
+   "verdict": "PASS",
+   "line": "He just watches you read the numbers on them.",
+   "why": "window end exclusive, inside the place's hours and the person's row"
+  },
+  {
+   "row": "C931",
+   "screen": "walk_vance_ledger.past",
+   "verdict": "PASS",
+   "line": "Number nine. You wonder who that is.",
+   "why": "window end exclusive, inside the place's hours and the person's row"
+  },
+  {
+   "row": "C952",
+   "screen": "walk_danny_deal.pretend",
+   "verdict": "PASS",
+   "line": "You pick up a snack you don't want and stare at the label",
+   "why": "no number stated"
+  },
+  {
+   "row": "C954",
+   "screen": "walk_danny_deal.pretend",
+   "verdict": "PASS",
+   "line": "You pick up a snack you don't want",
+   "why": "no price said, no spend (note row)"
+  },
+  {
+   "row": "L106",
+   "screen": "walk_curtain.finish",
+   "verdict": "PASS",
+   "line": "Your face stays hot all the way to the till.",
+   "why": "everyone named is gated present by their rows (who_is_where), or a stranger"
+  },
+  {
+   "row": "L106",
+   "screen": "walk_curtain.moment",
+   "verdict": "PASS",
+   "line": "you with the skirt halfway up your thighs and your underwear right there / nothing under it",
+   "why": "everyone named is gated present by their rows (who_is_where), or a stranger"
+  },
+  {
+   "row": "L106",
+   "screen": "walk_curtain.shut",
+   "verdict": "PASS",
+   "line": "Next time you'll check the hooks.",
+   "why": "everyone named is gated present by their rows (who_is_where), or a stranger"
+  },
+  {
+   "row": "L106",
+   "screen": "walk_danny_deal.ask",
+   "verdict": "PASS",
+   "line": "He smiles like you've both agreed on something.",
+   "why": "everyone named is gated present by their rows (who_is_where), or a stranger"
+  },
+  {
+   "row": "L106",
+   "screen": "walk_danny_deal.moment",
+   "verdict": "PASS",
+   "line": "Same time tomorrow. Don't be late. Cash only.",
+   "why": "everyone named is gated present by their rows (who_is_where), or a stranger"
+  },
+  {
+   "row": "L106",
+   "screen": "walk_danny_deal.pretend",
+   "verdict": "PASS",
+   "line": "You buying that or marrying it? / He'll be out back again tomorrow night.",
+   "why": "everyone named is gated present by their rows (who_is_where), or a stranger"
+  },
+  {
+   "row": "L106",
+   "screen": "walk_marco_squat.back",
+   "verdict": "PASS",
+   "line": "You can feel him clocking you anyway.",
+   "why": "everyone named is gated present by their rows (who_is_where), or a stranger"
+  },
+  {
+   "row": "L106",
+   "screen": "walk_marco_squat.moment",
+   "verdict": "PASS",
+   "line": "Your own thighs go tight on the bench. He sees that too.",
+   "why": "everyone named is gated present by their rows (who_is_where), or a stranger"
+  },
+  {
+   "row": "L106",
+   "screen": "walk_marco_squat.watch",
+   "verdict": "PASS",
+   "line": "Your turn's coming, champ.",
+   "why": "everyone named is gated present by their rows (who_is_where), or a stranger"
+  },
+  {
+   "row": "L106",
+   "screen": "walk_nina_dress.browse",
+   "verdict": "PASS",
+   "line": "Next time she'll make you try it.",
+   "why": "everyone named is gated present by their rows (who_is_where), or a stranger"
+  },
+  {
+   "row": "L106",
+   "screen": "walk_nina_dress.moment",
+   "verdict": "PASS",
+   "line": "The fitting room curtain's half open. Nina's in the shop's tightest black dress",
+   "why": "everyone named is gated present by their rows (who_is_where), or a stranger"
+  },
+  {
+   "row": "L106",
+   "screen": "walk_nina_dress.suits",
+   "verdict": "PASS",
+   "line": "I know. Your turn next, sweetie.",
+   "why": "everyone named is gated present by their rows (who_is_where), or a stranger"
+  },
+  {
+   "row": "L106",
+   "screen": "walk_park_couple.away",
+   "verdict": "PASS",
+   "line": "You'll walk past that gap again tomorrow.",
+   "why": "everyone named is gated present by their rows (who_is_where), or a stranger"
+  },
+  {
+   "row": "L106",
+   "screen": "walk_park_couple.moment",
+   "verdict": "PASS",
+   "line": "her heels in the backs of his thighs as he fucks her, slow and deep.",
+   "why": "everyone named is gated present by their rows (who_is_where), or a stranger"
+  },
+  {
+   "row": "L106",
+   "screen": "walk_park_couple.watch",
+   "verdict": "PASS",
+   "line": "Your thighs clench. You know which gap in the bushes now.",
+   "why": "everyone named is gated present by their rows (who_is_where), or a stranger"
+  },
+  {
+   "row": "L106",
+   "screen": "walk_vance_ledger.hello",
+   "verdict": "PASS",
+   "line": "He just watches you read the numbers on them.",
+   "why": "everyone named is gated present by their rows (who_is_where), or a stranger"
+  },
+  {
+   "row": "L106",
+   "screen": "walk_vance_ledger.moment",
+   "verdict": "PASS",
+   "line": "[not met_vance] The man next door is on his porch ... Stranger: \"Short again, number nine.\"",
+   "why": "everyone named is gated present by their rows (who_is_where), or a stranger"
+  },
+  {
+   "row": "L106",
+   "screen": "walk_vance_ledger.past",
+   "verdict": "PASS",
+   "line": "Number nine. You wonder who that is.",
+   "why": "everyone named is gated present by their rows (who_is_where), or a stranger"
+  },
+  {
+   "row": "L167",
+   "screen": "walk_curtain.finish",
+   "verdict": "PASS",
+   "line": "Your face stays hot all the way to the till.",
+   "why": "one canvas, one window; hidden when shut (an event, C916), no row per day kind"
+  },
+  {
+   "row": "L167",
+   "screen": "walk_curtain.shut",
+   "verdict": "PASS",
+   "line": "Next time you'll check the hooks.",
+   "why": "one canvas, one window; hidden when shut (an event, C916), no row per day kind"
+  },
+  {
+   "row": "L167",
+   "screen": "walk_danny_deal.ask",
+   "verdict": "PASS",
+   "line": "He smiles like you've both agreed on something.",
+   "why": "one canvas, one window; hidden when shut (an event, C916), no row per day kind"
+  },
+  {
+   "row": "L167",
+   "screen": "walk_danny_deal.pretend",
+   "verdict": "PASS",
+   "line": "You buying that or marrying it? / He'll be out back again tomorrow night.",
+   "why": "one canvas, one window; hidden when shut (an event, C916), no row per day kind"
+  },
+  {
+   "row": "L167",
+   "screen": "walk_marco_squat.back",
+   "verdict": "PASS",
+   "line": "You can feel him clocking you anyway.",
+   "why": "one canvas, one window; hidden when shut (an event, C916), no row per day kind"
+  },
+  {
+   "row": "L167",
+   "screen": "walk_marco_squat.watch",
+   "verdict": "PASS",
+   "line": "Your turn's coming, champ.",
+   "why": "one canvas, one window; hidden when shut (an event, C916), no row per day kind"
+  },
+  {
+   "row": "L167",
+   "screen": "walk_nina_dress.browse",
+   "verdict": "PASS",
+   "line": "Next time she'll make you try it.",
+   "why": "one canvas, one window; hidden when shut (an event, C916), no row per day kind"
+  },
+  {
+   "row": "L167",
+   "screen": "walk_nina_dress.suits",
+   "verdict": "PASS",
+   "line": "I know. Your turn next, sweetie.",
+   "why": "one canvas, one window; hidden when shut (an event, C916), no row per day kind"
+  },
+  {
+   "row": "L167",
+   "screen": "walk_park_couple.away",
+   "verdict": "PASS",
+   "line": "You'll walk past that gap again tomorrow.",
+   "why": "one canvas, one window; hidden when shut (an event, C916), no row per day kind"
+  },
+  {
+   "row": "L167",
+   "screen": "walk_park_couple.watch",
+   "verdict": "PASS",
+   "line": "Your thighs clench. You know which gap in the bushes now.",
+   "why": "one canvas, one window; hidden when shut (an event, C916), no row per day kind"
+  },
+  {
+   "row": "L167",
+   "screen": "walk_vance_ledger.hello",
+   "verdict": "PASS",
+   "line": "He just watches you read the numbers on them.",
+   "why": "one canvas, one window; hidden when shut (an event, C916), no row per day kind"
+  },
+  {
+   "row": "L167",
+   "screen": "walk_vance_ledger.past",
+   "verdict": "PASS",
+   "line": "Number nine. You wonder who that is.",
+   "why": "one canvas, one window; hidden when shut (an event, C916), no row per day kind"
+  }
+ ],
+ "causes": [
+  {
+   "id": "P39r2-c1",
+   "what": "walk_curtain.finish ends on 'Your face stays hot all the way to the till.', a closing body line with no pull at what comes next (S2)"
+  },
+  {
+   "id": "P39r2-c2",
+   "what": "two answer-screen pulls promise a future the game doesn't build: park away 'You'll walk past that gap again tomorrow.' (the park is not her way, PLAN \u00a74) and Nina browse 'Next time she'll make you try it.' (the next visit replays the same scene)"
+  }
+ ]
+}

@@ -1,0 +1,29 @@
+{
+ "items": [
+  {
+   "row": "B10",
+   "screen": "shop_meet_nina.meet",
+   "why": "screen changed: truth row"
+  },
+  {
+   "row": "B8",
+   "screen": "shop_meet_nina.meet",
+   "why": "screen changed: truth row"
+  },
+  {
+   "row": "C460",
+   "screen": "shop_meet_nina.meet",
+   "why": "screen changed: truth row"
+  },
+  {
+   "row": "C461",
+   "screen": "shop_meet_nina.meet",
+   "why": "screen changed: truth row"
+  },
+  {
+   "row": "L106",
+   "screen": "shop_meet_nina.meet",
+   "why": "screen changed: truth row"
+  }
+ ]
+}

@@ -2,59 +2,1011 @@
  "verdicts": [
   {
    "row": "B10",
+   "screen": "opening.ask_mom",
+   "verdict": "PASS",
+   "line": "She pushes the toast across the counter and turns the tap on hard.",
+   "why": "Shows at 07:40 (+5): Mom in the Kitchen to 08:00."
+  },
+  {
+   "row": "B10",
+   "screen": "opening.bath",
+   "verdict": "PASS",
+   "line": "Upstairs, you get the bathroom a second before Ryan, your step-brother, opens his door.",
+   "why": "07:12-07:20: Ryan's rows: in his room 07:00-07:12, in the hall 07:12-07:25, so he opens his door at 07:12 and bangs from the hall. Nobody else named."
+  },
+  {
+   "row": "B10",
+   "screen": "opening.bath_freedom",
+   "verdict": "PASS",
+   "line": "Then pay for it.",
+   "why": "07:10: Mark and Mom in the Kitchen; answers start_freedom only."
+  },
+  {
+   "row": "B10",
+   "screen": "opening.bath_fun",
+   "verdict": "PASS",
+   "line": "Parties cost money, kid.",
+   "why": "07:10: Mark and Mom in the Kitchen; answers start_fun only."
+  },
+  {
+   "row": "B10",
+   "screen": "opening.bath_grades",
+   "verdict": "PASS",
+   "line": "Straight A's don't pay rent.",
+   "why": "07:10: Mark and Mom still in the Kitchen; the line answers start_grades, set on the click into this node."
+  },
+  {
+   "row": "B10",
+   "screen": "opening.hall",
+   "verdict": "PASS",
+   "line": "Ryan's on the wall opposite, shirtless, a towel over his shoulder.",
+   "why": "07:20: Ryan in the hall by his 07:12-07:25 row ('waiting for the bathroom')."
+  },
+  {
+   "row": "B10",
+   "screen": "opening.handover",
+   "verdict": "PASS",
+   "line": "Mark's gone to work. His mug is still on the table. Mom's alone at the sink",
+   "why": "07:35: Mark's Kitchen row ended 07:30; Mom is there to 08:00; Ryan is in the hall/bathroom. 'Alone' holds."
+  },
+  {
+   "row": "B10",
+   "screen": "opening.kitchen_ask",
+   "verdict": "PASS",
+   "line": "Mark turns a page. He's listening.",
+   "why": "07:07: Mark and Mom in the Kitchen by their rows; Mom's question asks her past and every answer is a memory."
+  },
+  {
+   "row": "B10",
+   "screen": "opening.kitchen_rent",
+   "verdict": "PASS",
+   "line": "Mark, your step-father, is at the table with his coffee, like he's been waiting for you. Mom's at the stove.",
+   "why": "07:05: Mark's row 07:00-07:30 'having coffee before work' and Mom's 07:00-08:00 'making breakfast' put both in the Kitchen; $75 a week from Sunday matches PLAN 2. Night rows don't reach 07:05."
+  },
+  {
+   "row": "B10",
+   "screen": "opening.room",
+   "verdict": "PASS",
+   "line": "Back in your room, you shut the door and let the towel drop.",
+   "why": "07:25: her room, nobody named; the garments named are the ones the next button equips."
+  },
+  {
+   "row": "B10",
+   "screen": "opening.room_past",
+   "verdict": "PASS",
+   "line": "Ryan flattens himself against the wall so nothing touches.",
+   "why": "07:23: Ryan still in the hall (row to 07:25)."
+  },
+  {
+   "row": "B10",
+   "screen": "opening.room_spoke",
+   "verdict": "PASS",
+   "line": "He turns to face the bathroom door and waits for you to move.",
+   "why": "07:23: Ryan in the hall; he waits, he does not go into the bathroom before his 07:25 row."
+  },
+  {
+   "row": "B10",
+   "screen": "opening.room_waited",
+   "verdict": "PASS",
+   "line": "Ryan's eyes go straight to the light switch.",
+   "why": "07:23: Ryan in the hall."
+  },
+  {
+   "row": "B10",
+   "screen": "opening.sit_with_mom",
+   "verdict": "PASS",
+   "line": "You eat it at the counter while she does the dishes.",
+   "why": "Shows at 07:50 (+15): Mom's Kitchen row runs to 08:00."
+  },
+  {
+   "row": "B10",
+   "screen": "opening.sums",
+   "verdict": "PASS",
+   "line": "Seventy-five by Sunday. You have nothing.",
+   "why": "07:30: money starts at 0; $75 Sunday and four Sundays in a row agree with PLAN 2 and the rent nodes; Mark's 'one way or another' is on kitchen_rent on every path; the manager's hours match cafe_hire (Mon-Sat from 10:00); the rent line matches the Sunday 08:00-11:55 kitchen-table rent."
+  },
+  {
+   "row": "B10",
    "screen": "opening.wake",
    "verdict": "PASS",
-   "line": "Your saves live in this browser. Use Saves, then Save to Disk…, to keep one.",
-   "why": "true at every visit: the Saves menu and 'Save to Disk…' exist under those labels in output/index.html; no person named on screen; the rest of the screen unchanged",
-   "cause": ""
+   "line": "Monday morning. Today you start college.",
+   "why": "One-time, 07:00 Monday (starting_hour 7, starting_day Monday); nobody named present; 'Four people, one bathroom' fits PLAN. The new night rows end at 07:00 (end exclusive), so at 07:00 Mom and Mark are in the Kitchen and Ryan in his room, as before."
+  },
+  {
+   "row": "B8",
+   "screen": "opening.ask_mom",
+   "verdict": "PASS",
+   "line": "She pushes the toast across the counter and turns the tap on hard.",
+   "why": "No number; no garment of hers named (she is dressed from the outfit buttons)."
+  },
+  {
+   "row": "B8",
+   "screen": "opening.bath",
+   "verdict": "WAIVED",
+   "line": "You grab the towel off the rail. It's the small one.",
+   "why": "The towel is named with nothing equipped. LO, NOTES 2026-11-23: \"the towel in the opening (screens 4b\u20136) is prose only, not a garment\" (\"Yes\" to all ten fixes with the towel waived)."
+  },
+  {
+   "row": "B8",
+   "screen": "opening.bath_freedom",
+   "verdict": "PASS",
+   "line": "Then pay for it.",
+   "why": "No number and no garment of hers named."
+  },
+  {
+   "row": "B8",
+   "screen": "opening.bath_fun",
+   "verdict": "PASS",
+   "line": "Parties cost money, kid.",
+   "why": "No number and no garment of hers named."
+  },
+  {
+   "row": "B8",
+   "screen": "opening.bath_grades",
+   "verdict": "PASS",
+   "line": "Straight A's don't pay rent.",
+   "why": "No number and no garment of hers named."
+  },
+  {
+   "row": "B8",
+   "screen": "opening.hall",
+   "verdict": "WAIVED",
+   "line": "His eyes drop to where the towel ends on your wet thighs.",
+   "why": "The towel is named with nothing equipped. LO, NOTES 2026-11-23: \"the towel in the opening (screens 4b\u20136) is prose only, not a garment\" (\"Yes\" to all ten fixes with the towel waived)."
+  },
+  {
+   "row": "B8",
+   "screen": "opening.handover",
+   "verdict": "PASS",
+   "line": "Mark's gone to work. His mug is still on the table. Mom's alone at the sink",
+   "why": "No number; no garment of hers named (she is dressed from the outfit buttons)."
+  },
+  {
+   "row": "B8",
+   "screen": "opening.kitchen_ask",
+   "verdict": "PASS",
+   "line": "Mark turns a page. He's listening.",
+   "why": "No number and no garment of hers named."
+  },
+  {
+   "row": "B8",
+   "screen": "opening.kitchen_rent",
+   "verdict": "PASS",
+   "line": "Mark, your step-father, is at the table with his coffee, like he's been waiting for you. Mom's at the stove.",
+   "why": "$75 a week from Sunday and four Sundays in a row agree with PLAN 2 and P11's rent nodes; no garment named."
+  },
+  {
+   "row": "B8",
+   "screen": "opening.room",
+   "verdict": "WAIVED",
+   "line": "Back in your room, you shut the door and let the towel drop.",
+   "why": "The towel is named with nothing equipped. LO, NOTES 2026-11-23: \"the towel in the opening (screens 4b\u20136) is prose only, not a garment\" (\"Yes\" to all ten fixes with the towel waived)."
+  },
+  {
+   "row": "B8",
+   "screen": "opening.room_past",
+   "verdict": "WAIVED",
+   "line": "The towel drops off your tits",
+   "why": "The towel is named with nothing equipped. LO, NOTES 2026-11-23: \"the towel in the opening (screens 4b\u20136) is prose only, not a garment\" (\"Yes\" to all ten fixes with the towel waived)."
+  },
+  {
+   "row": "B8",
+   "screen": "opening.room_spoke",
+   "verdict": "WAIVED",
+   "line": "The towel slides to your waist",
+   "why": "The towel is named with nothing equipped. LO, NOTES 2026-11-23: \"the towel in the opening (screens 4b\u20136) is prose only, not a garment\" (\"Yes\" to all ten fixes with the towel waived)."
+  },
+  {
+   "row": "B8",
+   "screen": "opening.room_waited",
+   "verdict": "WAIVED",
+   "line": "for a second the towel hangs open on your tits",
+   "why": "The towel is named with nothing equipped. LO, NOTES 2026-11-23: \"the towel in the opening (screens 4b\u20136) is prose only, not a garment\" (\"Yes\" to all ten fixes with the towel waived)."
+  },
+  {
+   "row": "B8",
+   "screen": "opening.sit_with_mom",
+   "verdict": "PASS",
+   "line": "You eat it at the counter while she does the dishes.",
+   "why": "No number; no garment of hers named (she is dressed from the outfit buttons)."
+  },
+  {
+   "row": "B8",
+   "screen": "opening.sums",
+   "verdict": "PASS",
+   "line": "Seventy-five by Sunday. You have nothing.",
+   "why": "$75 a week from Sunday and four Sundays in a row agree with PLAN 2 and P11's rent nodes; no garment named."
   },
   {
    "row": "B8",
    "screen": "opening.wake",
    "verdict": "PASS",
-   "line": "You're eighteen, in the single bed you had at twelve",
-   "why": "numbers unchanged and agree with PLAN/P02; the pyjama top is prose only, LO's waiver (NOTES 179: \"Yes to all ten, waive 9\")",
-   "cause": ""
+   "line": "Your pyjama top has ridden up in the night",
+   "why": "Numbers agree with PLAN; the pyjama top is prose only by LO's call (NOTES 179: \"Yes to all ten, waive 9\"), as carried on the record."
+  },
+  {
+   "row": "C1158",
+   "screen": "opening.room",
+   "verdict": "WAIVED",
+   "line": "Back in your room, you shut the door and let the towel drop.",
+   "why": "Bra, panties, jeans, T-shirt and sneakers are named by the beat whose buttons equip them; the towel has nothing behind it. LO, NOTES 2026-11-23: \"the towel in the opening (screens 4b\u20136) is prose only, not a garment\" (\"Yes\" to all ten fixes with the towel waived)."
+  },
+  {
+   "row": "C1206",
+   "screen": "opening.room",
+   "verdict": "WAIVED",
+   "line": "Back in your room, you shut the door and let the towel drop.",
+   "why": "Bra, panties, jeans, T-shirt and sneakers are named by the beat whose buttons equip them; the towel has nothing behind it. LO, NOTES 2026-11-23: \"the towel in the opening (screens 4b\u20136) is prose only, not a garment\" (\"Yes\" to all ten fixes with the towel waived)."
+  },
+  {
+   "row": "C1265",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "spots on wake, bath, hall, room_past, room_spoke, room_waited, room",
+   "why": "Every spot sits on a body moment (bed, shower, towel, dressing) or the hall look; sums, the kitchen screens and the hand-over carry none."
+  },
+  {
+   "row": "C1265",
+   "screen": "opening.room_spoke",
+   "verdict": "PASS",
+   "line": "The towel slides to your waist, and you stand bare in the hall",
+   "why": "A towel body moment, not a chore or menu; the picture of her sits right after the line."
+  },
+  {
+   "row": "C1631",
+   "screen": "opening.ask_mom",
+   "verdict": "PASS",
+   "line": "Done \u2192 home_kitchen",
+   "why": "The hand-over lands in the Kitchen at 07:40 (ask) or 07:50 (sit); Mom's row runs 07:00-08:00, so her face and menu are live; the night-row change ends at 07:00 and doesn't touch this."
+  },
+  {
+   "row": "C1631",
+   "screen": "opening.handover",
+   "verdict": "PASS",
+   "line": "Mark's gone to work. His mug is still on the table. Mom's alone at the sink",
+   "why": "The hand-over lands in the Kitchen at 07:40 (ask) or 07:50 (sit); Mom's row runs 07:00-08:00, so her face and menu are live; the night-row change ends at 07:00 and doesn't touch this."
+  },
+  {
+   "row": "C1631",
+   "screen": "opening.sit_with_mom",
+   "verdict": "PASS",
+   "line": "Done \u2192 home_kitchen",
+   "why": "The hand-over lands in the Kitchen at 07:40 (ask) or 07:50 (sit); Mom's row runs 07:00-08:00, so her face and menu are live; the night-row change ends at 07:00 and doesn't touch this."
+  },
+  {
+   "row": "C460",
+   "screen": "opening.ask_mom",
+   "verdict": "PASS",
+   "line": "She pushes the toast across the counter and turns the tap on hard.",
+   "why": "Shows at 07:40 (+5): Mom in the Kitchen to 08:00."
+  },
+  {
+   "row": "C460",
+   "screen": "opening.bath",
+   "verdict": "PASS",
+   "line": "Upstairs, you get the bathroom a second before Ryan, your step-brother, opens his door.",
+   "why": "07:12-07:20: Ryan's rows: in his room 07:00-07:12, in the hall 07:12-07:25, so he opens his door at 07:12 and bangs from the hall. Nobody else named."
+  },
+  {
+   "row": "C460",
+   "screen": "opening.bath_freedom",
+   "verdict": "PASS",
+   "line": "Then pay for it.",
+   "why": "07:10: Mark and Mom in the Kitchen; answers start_freedom only."
+  },
+  {
+   "row": "C460",
+   "screen": "opening.bath_fun",
+   "verdict": "PASS",
+   "line": "Parties cost money, kid.",
+   "why": "07:10: Mark and Mom in the Kitchen; answers start_fun only."
+  },
+  {
+   "row": "C460",
+   "screen": "opening.bath_grades",
+   "verdict": "PASS",
+   "line": "Straight A's don't pay rent.",
+   "why": "07:10: Mark and Mom still in the Kitchen; the line answers start_grades, set on the click into this node."
+  },
+  {
+   "row": "C460",
+   "screen": "opening.hall",
+   "verdict": "PASS",
+   "line": "Ryan's on the wall opposite, shirtless, a towel over his shoulder.",
+   "why": "07:20: Ryan in the hall by his 07:12-07:25 row ('waiting for the bathroom')."
+  },
+  {
+   "row": "C460",
+   "screen": "opening.handover",
+   "verdict": "PASS",
+   "line": "Mark's gone to work. His mug is still on the table. Mom's alone at the sink",
+   "why": "07:35: Mark's Kitchen row ended 07:30; Mom is there to 08:00; Ryan is in the hall/bathroom. 'Alone' holds."
+  },
+  {
+   "row": "C460",
+   "screen": "opening.kitchen_ask",
+   "verdict": "PASS",
+   "line": "Mark turns a page. He's listening.",
+   "why": "07:07: Mark and Mom in the Kitchen by their rows; Mom's question asks her past and every answer is a memory."
+  },
+  {
+   "row": "C460",
+   "screen": "opening.kitchen_rent",
+   "verdict": "PASS",
+   "line": "Mark, your step-father, is at the table with his coffee, like he's been waiting for you. Mom's at the stove.",
+   "why": "07:05: Mark's row 07:00-07:30 'having coffee before work' and Mom's 07:00-08:00 'making breakfast' put both in the Kitchen; $75 a week from Sunday matches PLAN 2. Night rows don't reach 07:05."
+  },
+  {
+   "row": "C460",
+   "screen": "opening.room",
+   "verdict": "PASS",
+   "line": "Back in your room, you shut the door and let the towel drop.",
+   "why": "07:25: her room, nobody named; the garments named are the ones the next button equips."
+  },
+  {
+   "row": "C460",
+   "screen": "opening.room_past",
+   "verdict": "PASS",
+   "line": "Ryan flattens himself against the wall so nothing touches.",
+   "why": "07:23: Ryan still in the hall (row to 07:25)."
+  },
+  {
+   "row": "C460",
+   "screen": "opening.room_spoke",
+   "verdict": "PASS",
+   "line": "He turns to face the bathroom door and waits for you to move.",
+   "why": "07:23: Ryan in the hall; he waits, he does not go into the bathroom before his 07:25 row."
+  },
+  {
+   "row": "C460",
+   "screen": "opening.room_waited",
+   "verdict": "PASS",
+   "line": "Ryan's eyes go straight to the light switch.",
+   "why": "07:23: Ryan in the hall."
+  },
+  {
+   "row": "C460",
+   "screen": "opening.sit_with_mom",
+   "verdict": "PASS",
+   "line": "You eat it at the counter while she does the dishes.",
+   "why": "Shows at 07:50 (+15): Mom's Kitchen row runs to 08:00."
+  },
+  {
+   "row": "C460",
+   "screen": "opening.sums",
+   "verdict": "PASS",
+   "line": "Seventy-five by Sunday. You have nothing.",
+   "why": "07:30: money starts at 0; $75 Sunday and four Sundays in a row agree with PLAN 2 and the rent nodes; Mark's 'one way or another' is on kitchen_rent on every path; the manager's hours match cafe_hire (Mon-Sat from 10:00); the rent line matches the Sunday 08:00-11:55 kitchen-table rent."
   },
   {
    "row": "C460",
    "screen": "opening.wake",
    "verdict": "PASS",
-   "line": "Your saves live in this browser. Use Saves, then Save to Disk…, to keep one.",
-   "why": "the new line is true on every playthrough; labels match the built UI",
-   "cause": ""
+   "line": "Monday morning. Today you start college.",
+   "why": "One-time, 07:00 Monday (starting_hour 7, starting_day Monday); nobody named present; 'Four people, one bathroom' fits PLAN. The new night rows end at 07:00 (end exclusive), so at 07:00 Mom and Mark are in the Kitchen and Ryan in his room, as before."
+  },
+  {
+   "row": "C461",
+   "screen": "opening.ask_mom",
+   "verdict": "PASS",
+   "line": "She pushes the toast across the counter and turns the tap on hard.",
+   "why": "Texture, her reactions on her body, and lines that fit each person's plan entry (Mark's rent, Mom's 'baby', Ryan covering)."
+  },
+  {
+   "row": "C461",
+   "screen": "opening.bath",
+   "verdict": "PASS",
+   "line": "Upstairs, you get the bathroom a second before Ryan, your step-brother, opens his door.",
+   "why": "Texture, her reactions on her body, and lines that fit each person's plan entry (Mark's rent, Mom's 'baby', Ryan covering)."
+  },
+  {
+   "row": "C461",
+   "screen": "opening.bath_freedom",
+   "verdict": "PASS",
+   "line": "Then pay for it.",
+   "why": "Texture, her reactions on her body, and lines that fit each person's plan entry (Mark's rent, Mom's 'baby', Ryan covering)."
+  },
+  {
+   "row": "C461",
+   "screen": "opening.bath_fun",
+   "verdict": "PASS",
+   "line": "Parties cost money, kid.",
+   "why": "Texture, her reactions on her body, and lines that fit each person's plan entry (Mark's rent, Mom's 'baby', Ryan covering)."
+  },
+  {
+   "row": "C461",
+   "screen": "opening.bath_grades",
+   "verdict": "PASS",
+   "line": "Straight A's don't pay rent.",
+   "why": "Texture, her reactions on her body, and lines that fit each person's plan entry (Mark's rent, Mom's 'baby', Ryan covering)."
+  },
+  {
+   "row": "C461",
+   "screen": "opening.hall",
+   "verdict": "PASS",
+   "line": "Ryan's on the wall opposite, shirtless, a towel over his shoulder.",
+   "why": "Texture, her reactions on her body, and lines that fit each person's plan entry (Mark's rent, Mom's 'baby', Ryan covering)."
+  },
+  {
+   "row": "C461",
+   "screen": "opening.handover",
+   "verdict": "PASS",
+   "line": "Mark's gone to work. His mug is still on the table. Mom's alone at the sink",
+   "why": "Texture, her reactions on her body, and lines that fit each person's plan entry (Mark's rent, Mom's 'baby', Ryan covering)."
+  },
+  {
+   "row": "C461",
+   "screen": "opening.kitchen_ask",
+   "verdict": "PASS",
+   "line": "Mark turns a page. He's listening.",
+   "why": "Texture, her reactions on her body, and lines that fit each person's plan entry (Mark's rent, Mom's 'baby', Ryan covering)."
+  },
+  {
+   "row": "C461",
+   "screen": "opening.kitchen_rent",
+   "verdict": "PASS",
+   "line": "Mark, your step-father, is at the table with his coffee, like he's been waiting for you. Mom's at the stove.",
+   "why": "Texture, her reactions on her body, and lines that fit each person's plan entry (Mark's rent, Mom's 'baby', Ryan covering)."
+  },
+  {
+   "row": "C461",
+   "screen": "opening.room",
+   "verdict": "PASS",
+   "line": "Back in your room, you shut the door and let the towel drop.",
+   "why": "Texture, her reactions on her body, and lines that fit each person's plan entry (Mark's rent, Mom's 'baby', Ryan covering)."
+  },
+  {
+   "row": "C461",
+   "screen": "opening.room_past",
+   "verdict": "PASS",
+   "line": "Ryan flattens himself against the wall so nothing touches.",
+   "why": "Texture, her reactions on her body, and lines that fit each person's plan entry (Mark's rent, Mom's 'baby', Ryan covering)."
+  },
+  {
+   "row": "C461",
+   "screen": "opening.room_spoke",
+   "verdict": "PASS",
+   "line": "He turns to face the bathroom door and waits for you to move.",
+   "why": "Texture, her reactions on her body, and lines that fit each person's plan entry (Mark's rent, Mom's 'baby', Ryan covering)."
+  },
+  {
+   "row": "C461",
+   "screen": "opening.room_waited",
+   "verdict": "PASS",
+   "line": "Ryan's eyes go straight to the light switch.",
+   "why": "Texture, her reactions on her body, and lines that fit each person's plan entry (Mark's rent, Mom's 'baby', Ryan covering)."
+  },
+  {
+   "row": "C461",
+   "screen": "opening.sit_with_mom",
+   "verdict": "PASS",
+   "line": "You eat it at the counter while she does the dishes.",
+   "why": "Texture, her reactions on her body, and lines that fit each person's plan entry (Mark's rent, Mom's 'baby', Ryan covering)."
+  },
+  {
+   "row": "C461",
+   "screen": "opening.sums",
+   "verdict": "PASS",
+   "line": "Seventy-five by Sunday. You have nothing.",
+   "why": "Texture, her reactions on her body, and lines that fit each person's plan entry (Mark's rent, Mom's 'baby', Ryan covering)."
   },
   {
    "row": "C461",
    "screen": "opening.wake",
    "verdict": "PASS",
-   "line": "College. Finally, something that's yours.",
-   "why": "her opinion; no clash",
-   "cause": ""
+   "line": "Monday morning. Today you start college.",
+   "why": "Texture, her reactions on her body, and lines that fit each person's plan entry (Mark's rent, Mom's 'baby', Ryan covering)."
+  },
+  {
+   "row": "C889",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "Go down to the kitchen \u00b7 Look at Mom \u00b7 Go upstairs \u00b7 Open the door \u00b7 Go to your room \u00b7 Keep your usual \u00b7 Sit with her \u00b7 Ask what she tried \u00b7 Done",
+   "why": "Note row. No label names a clock time or a duration any more; the spend sits in time_progression_minutes."
+  },
+  {
+   "row": "C889",
+   "screen": "opening.room_spoke",
+   "verdict": "PASS",
+   "line": "Go to your room",
+   "why": "Note row. No label names a clock time or a duration any more; the spend sits in time_progression_minutes."
+  },
+  {
+   "row": "C889",
+   "screen": "opening.sums",
+   "verdict": "PASS",
+   "line": "Go down to the kitchen",
+   "why": "Note row. No label names a clock time or a duration any more; the spend sits in time_progression_minutes."
+  },
+  {
+   "row": "C906",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "Go down to the kitchen \u00b7 Look at Mom \u00b7 Go upstairs \u00b7 Open the door \u00b7 Go to your room \u00b7 Keep your usual \u00b7 Sit with her \u00b7 Ask what she tried \u00b7 Done",
+   "why": "Note row. No 'till X'."
+  },
+  {
+   "row": "C906",
+   "screen": "opening.room_spoke",
+   "verdict": "PASS",
+   "line": "Go to your room",
+   "why": "Note row. No 'till X'."
+  },
+  {
+   "row": "C906",
+   "screen": "opening.sums",
+   "verdict": "PASS",
+   "line": "Go down to the kitchen",
+   "why": "Note row. No 'till X'."
+  },
+  {
+   "row": "C910",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "Go down to the kitchen \u00b7 Look at Mom \u00b7 Go upstairs \u00b7 Open the door \u00b7 Go to your room \u00b7 Keep your usual \u00b7 Sit with her \u00b7 Ask what she tried \u00b7 Done",
+   "why": "Note row. No button or reply states time or energy; nothing costs money, so none states money."
+  },
+  {
+   "row": "C910",
+   "screen": "opening.room_spoke",
+   "verdict": "PASS",
+   "line": "Go to your room",
+   "why": "Note row. No button or reply states time or energy; nothing costs money, so none states money."
+  },
+  {
+   "row": "C910",
+   "screen": "opening.sums",
+   "verdict": "PASS",
+   "line": "Go down to the kitchen",
+   "why": "Note row. No button or reply states time or energy; nothing costs money, so none states money."
+  },
+  {
+   "row": "C920",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "Go upstairs \u00b7 Go to your room \u00b7 Go down to the kitchen",
+   "why": "These are node exits inside one scene, not location moves: no entry cost is charged, the labels carry no time, and the minutes are the scene's own (shower, dressing, sums) that land the hand-over on Mom's row; the same move down to the kitchen is 5 both times."
+  },
+  {
+   "row": "C920",
+   "screen": "opening.room_spoke",
+   "verdict": "PASS",
+   "line": "Go to your room",
+   "why": "These are node exits inside one scene, not location moves: no entry cost is charged, the labels carry no time, and the minutes are the scene's own (shower, dressing, sums) that land the hand-over on Mom's row; the same move down to the kitchen is 5 both times."
+  },
+  {
+   "row": "C920",
+   "screen": "opening.sums",
+   "verdict": "PASS",
+   "line": "Go down to the kitchen",
+   "why": "These are node exits inside one scene, not location moves: no entry cost is charged, the labels carry no time, and the minutes are the scene's own (shower, dressing, sums) that land the hand-over on Mom's row; the same move down to the kitchen is 5 both times."
+  },
+  {
+   "row": "C927",
+   "screen": "opening.bath",
+   "verdict": "PASS",
+   "line": "Open the door (8)",
+   "why": "Note row. Every exit states its minutes; none falls back to the 3-minute default."
+  },
+  {
+   "row": "C927",
+   "screen": "opening.bath_freedom",
+   "verdict": "PASS",
+   "line": "Go upstairs (2)",
+   "why": "Note row. Every exit states its minutes; none falls back to the 3-minute default."
+  },
+  {
+   "row": "C927",
+   "screen": "opening.bath_fun",
+   "verdict": "PASS",
+   "line": "Go upstairs (2)",
+   "why": "Note row. Every exit states its minutes; none falls back to the 3-minute default."
+  },
+  {
+   "row": "C927",
+   "screen": "opening.bath_grades",
+   "verdict": "PASS",
+   "line": "Go upstairs (2)",
+   "why": "Note row. Every exit states its minutes; none falls back to the 3-minute default."
+  },
+  {
+   "row": "C927",
+   "screen": "opening.hall",
+   "verdict": "PASS",
+   "line": "three choices (3 each)",
+   "why": "Note row. Every exit states its minutes; none falls back to the 3-minute default."
+  },
+  {
+   "row": "C927",
+   "screen": "opening.handover",
+   "verdict": "PASS",
+   "line": "Sit with her (15) / Ask what she tried (5)",
+   "why": "Note row. Every exit states its minutes; none falls back to the 3-minute default."
+  },
+  {
+   "row": "C927",
+   "screen": "opening.kitchen_ask",
+   "verdict": "PASS",
+   "line": "three answers (3 each)",
+   "why": "Note row. Every exit states its minutes; none falls back to the 3-minute default."
+  },
+  {
+   "row": "C927",
+   "screen": "opening.kitchen_rent",
+   "verdict": "PASS",
+   "line": "Look at Mom (2)",
+   "why": "Note row. Every exit states its minutes; none falls back to the 3-minute default."
+  },
+  {
+   "row": "C927",
+   "screen": "opening.room",
+   "verdict": "PASS",
+   "line": "three outfit buttons (5 each)",
+   "why": "Note row. Every exit states its minutes; none falls back to the 3-minute default."
+  },
+  {
+   "row": "C927",
+   "screen": "opening.room_past",
+   "verdict": "PASS",
+   "line": "Go to your room (2)",
+   "why": "Note row. Every exit states its minutes; none falls back to the 3-minute default."
+  },
+  {
+   "row": "C927",
+   "screen": "opening.room_spoke",
+   "verdict": "PASS",
+   "line": "Go to your room (2)",
+   "why": "Note row. Every exit states its minutes; none falls back to the 3-minute default."
+  },
+  {
+   "row": "C927",
+   "screen": "opening.room_waited",
+   "verdict": "PASS",
+   "line": "Go to your room (2)",
+   "why": "Note row. Every exit states its minutes; none falls back to the 3-minute default."
+  },
+  {
+   "row": "C927",
+   "screen": "opening.sums",
+   "verdict": "PASS",
+   "line": "Go down to the kitchen (5)",
+   "why": "Note row. Every exit states its minutes; none falls back to the 3-minute default."
   },
   {
    "row": "C927",
    "screen": "opening.wake",
    "verdict": "PASS",
-   "line": "Go down to the kitchen (5 min)",
-   "why": "the one exit states its time (time_progression_minutes = 5)",
-   "cause": ""
+   "line": "Go down to the kitchen (5)",
+   "why": "Note row. Every exit states its minutes; none falls back to the 3-minute default."
+  },
+  {
+   "row": "C929",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "Go down to the kitchen \u00b7 Look at Mom \u00b7 Go upstairs \u00b7 Open the door \u00b7 Go to your room \u00b7 Keep your usual \u00b7 Sit with her \u00b7 Ask what she tried \u00b7 Done",
+   "why": "Note row. No activity time on a label; the clock shows it."
+  },
+  {
+   "row": "C929",
+   "screen": "opening.room_spoke",
+   "verdict": "PASS",
+   "line": "Go to your room",
+   "why": "Note row. No activity time on a label; the clock shows it."
+  },
+  {
+   "row": "C929",
+   "screen": "opening.sums",
+   "verdict": "PASS",
+   "line": "Go down to the kitchen",
+   "why": "Note row. No activity time on a label; the clock shows it."
+  },
+  {
+   "row": "C931",
+   "screen": "opening.bath",
+   "verdict": "N/A",
+   "line": "Open the door (8)",
+   "why": "Note row. No time_of_day condition on this screen."
+  },
+  {
+   "row": "C931",
+   "screen": "opening.bath_freedom",
+   "verdict": "N/A",
+   "line": "Go upstairs (2)",
+   "why": "Note row. No time_of_day condition on this screen."
+  },
+  {
+   "row": "C931",
+   "screen": "opening.bath_fun",
+   "verdict": "N/A",
+   "line": "Go upstairs (2)",
+   "why": "Note row. No time_of_day condition on this screen."
+  },
+  {
+   "row": "C931",
+   "screen": "opening.bath_grades",
+   "verdict": "N/A",
+   "line": "Go upstairs (2)",
+   "why": "Note row. No time_of_day condition on this screen."
+  },
+  {
+   "row": "C931",
+   "screen": "opening.hall",
+   "verdict": "N/A",
+   "line": "three choices (3 each)",
+   "why": "Note row. No time_of_day condition on this screen."
+  },
+  {
+   "row": "C931",
+   "screen": "opening.handover",
+   "verdict": "N/A",
+   "line": "Sit with her (15) / Ask what she tried (5)",
+   "why": "Note row. No time_of_day condition on this screen."
+  },
+  {
+   "row": "C931",
+   "screen": "opening.kitchen_ask",
+   "verdict": "N/A",
+   "line": "three answers (3 each)",
+   "why": "Note row. No time_of_day condition on this screen."
+  },
+  {
+   "row": "C931",
+   "screen": "opening.kitchen_rent",
+   "verdict": "N/A",
+   "line": "Look at Mom (2)",
+   "why": "Note row. No time_of_day condition on this screen."
+  },
+  {
+   "row": "C931",
+   "screen": "opening.room",
+   "verdict": "N/A",
+   "line": "three outfit buttons (5 each)",
+   "why": "Note row. No time_of_day condition on this screen."
+  },
+  {
+   "row": "C931",
+   "screen": "opening.room_past",
+   "verdict": "N/A",
+   "line": "Go to your room (2)",
+   "why": "Note row. No time_of_day condition on this screen."
+  },
+  {
+   "row": "C931",
+   "screen": "opening.room_spoke",
+   "verdict": "N/A",
+   "line": "Go to your room (2)",
+   "why": "Note row. No time_of_day condition on this screen."
+  },
+  {
+   "row": "C931",
+   "screen": "opening.room_waited",
+   "verdict": "N/A",
+   "line": "Go to your room (2)",
+   "why": "Note row. No time_of_day condition on this screen."
+  },
+  {
+   "row": "C931",
+   "screen": "opening.sums",
+   "verdict": "N/A",
+   "line": "Go down to the kitchen (5)",
+   "why": "Note row. No time_of_day condition on this screen."
   },
   {
    "row": "C931",
    "screen": "opening.wake",
    "verdict": "N/A",
-   "line": "(no time_of_day condition on wake)",
-   "why": "nothing on the screen reads time_of_day",
-   "cause": ""
+   "line": "Go down to the kitchen (5)",
+   "why": "Note row. No time_of_day condition on this screen."
+  },
+  {
+   "row": "C953",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "Go down to the kitchen \u00b7 Look at Mom \u00b7 Go upstairs \u00b7 Open the door \u00b7 Go to your room \u00b7 Keep your usual \u00b7 Sit with her \u00b7 Ask what she tried \u00b7 Done",
+   "why": "Note row. No money spent in the opening; no time or energy on a label."
+  },
+  {
+   "row": "C953",
+   "screen": "opening.sums",
+   "verdict": "PASS",
+   "line": "Go down to the kitchen",
+   "why": "Note row. No money spent in the opening; no time or energy on a label."
+  },
+  {
+   "row": "L106",
+   "screen": "opening.ask_mom",
+   "verdict": "PASS",
+   "line": "She pushes the toast across the counter and turns the tap on hard.",
+   "why": "Everyone the line puts in the room is there by who_is_where at that minute (07:40)."
+  },
+  {
+   "row": "L106",
+   "screen": "opening.bath",
+   "verdict": "PASS",
+   "line": "Upstairs, you get the bathroom a second before Ryan, your step-brother, opens his door.",
+   "why": "Everyone the line puts in the room is there by who_is_where at that minute (07:12)."
+  },
+  {
+   "row": "L106",
+   "screen": "opening.bath_freedom",
+   "verdict": "PASS",
+   "line": "Then pay for it.",
+   "why": "Everyone the line puts in the room is there by who_is_where at that minute (07:10)."
+  },
+  {
+   "row": "L106",
+   "screen": "opening.bath_fun",
+   "verdict": "PASS",
+   "line": "Parties cost money, kid.",
+   "why": "Everyone the line puts in the room is there by who_is_where at that minute (07:10)."
+  },
+  {
+   "row": "L106",
+   "screen": "opening.bath_grades",
+   "verdict": "PASS",
+   "line": "Straight A's don't pay rent.",
+   "why": "Everyone the line puts in the room is there by who_is_where at that minute (07:10)."
+  },
+  {
+   "row": "L106",
+   "screen": "opening.hall",
+   "verdict": "PASS",
+   "line": "Ryan's on the wall opposite, shirtless, a towel over his shoulder.",
+   "why": "Everyone the line puts in the room is there by who_is_where at that minute (07:20)."
+  },
+  {
+   "row": "L106",
+   "screen": "opening.handover",
+   "verdict": "PASS",
+   "line": "Mark's gone to work. His mug is still on the table. Mom's alone at the sink",
+   "why": "Everyone the line puts in the room is there by who_is_where at that minute (07:35)."
+  },
+  {
+   "row": "L106",
+   "screen": "opening.kitchen_ask",
+   "verdict": "PASS",
+   "line": "Mark turns a page. He's listening.",
+   "why": "Everyone the line puts in the room is there by who_is_where at that minute (07:07)."
+  },
+  {
+   "row": "L106",
+   "screen": "opening.kitchen_rent",
+   "verdict": "PASS",
+   "line": "Mark, your step-father, is at the table with his coffee, like he's been waiting for you. Mom's at the stove.",
+   "why": "Everyone the line puts in the room is there by who_is_where at that minute (07:05)."
+  },
+  {
+   "row": "L106",
+   "screen": "opening.room_past",
+   "verdict": "PASS",
+   "line": "Ryan flattens himself against the wall so nothing touches.",
+   "why": "Everyone the line puts in the room is there by who_is_where at that minute (07:23)."
+  },
+  {
+   "row": "L106",
+   "screen": "opening.room_spoke",
+   "verdict": "PASS",
+   "line": "He turns to face the bathroom door and waits for you to move.",
+   "why": "Everyone the line puts in the room is there by who_is_where at that minute (07:23)."
+  },
+  {
+   "row": "L106",
+   "screen": "opening.room_waited",
+   "verdict": "PASS",
+   "line": "Ryan's eyes go straight to the light switch.",
+   "why": "Everyone the line puts in the room is there by who_is_where at that minute (07:23)."
+  },
+  {
+   "row": "L106",
+   "screen": "opening.sit_with_mom",
+   "verdict": "PASS",
+   "line": "You eat it at the counter while she does the dishes.",
+   "why": "Everyone the line puts in the room is there by who_is_where at that minute (07:50)."
+  },
+  {
+   "row": "L106",
+   "screen": "opening.sums",
+   "verdict": "PASS",
+   "line": "Seventy-five by Sunday. You have nothing.",
+   "why": "Names nobody as present; Mark is past tense."
+  },
+  {
+   "row": "L167",
+   "screen": "opening.bath",
+   "verdict": "N/A",
+   "line": "Open the door (8)",
+   "why": "One-time opening screen; no hours, no greyed row."
+  },
+  {
+   "row": "L167",
+   "screen": "opening.bath_freedom",
+   "verdict": "N/A",
+   "line": "Go upstairs (2)",
+   "why": "One-time opening screen; no hours, no greyed row."
+  },
+  {
+   "row": "L167",
+   "screen": "opening.bath_fun",
+   "verdict": "N/A",
+   "line": "Go upstairs (2)",
+   "why": "One-time opening screen; no hours, no greyed row."
+  },
+  {
+   "row": "L167",
+   "screen": "opening.bath_grades",
+   "verdict": "N/A",
+   "line": "Go upstairs (2)",
+   "why": "One-time opening screen; no hours, no greyed row."
+  },
+  {
+   "row": "L167",
+   "screen": "opening.hall",
+   "verdict": "N/A",
+   "line": "three choices (3 each)",
+   "why": "One-time opening screen; no hours, no greyed row."
+  },
+  {
+   "row": "L167",
+   "screen": "opening.handover",
+   "verdict": "N/A",
+   "line": "Sit with her (15) / Ask what she tried (5)",
+   "why": "One-time opening screen; no hours, no greyed row."
+  },
+  {
+   "row": "L167",
+   "screen": "opening.kitchen_ask",
+   "verdict": "N/A",
+   "line": "three answers (3 each)",
+   "why": "One-time opening screen; no hours, no greyed row."
+  },
+  {
+   "row": "L167",
+   "screen": "opening.kitchen_rent",
+   "verdict": "N/A",
+   "line": "Look at Mom (2)",
+   "why": "One-time opening screen; no hours, no greyed row."
+  },
+  {
+   "row": "L167",
+   "screen": "opening.room",
+   "verdict": "N/A",
+   "line": "three outfit buttons (5 each)",
+   "why": "One-time opening screen; no hours, no greyed row."
+  },
+  {
+   "row": "L167",
+   "screen": "opening.room_past",
+   "verdict": "N/A",
+   "line": "Go to your room (2)",
+   "why": "One-time opening screen; no hours, no greyed row."
+  },
+  {
+   "row": "L167",
+   "screen": "opening.room_spoke",
+   "verdict": "N/A",
+   "line": "Go to your room (2)",
+   "why": "One-time opening screen; no hours, no greyed row."
+  },
+  {
+   "row": "L167",
+   "screen": "opening.room_waited",
+   "verdict": "N/A",
+   "line": "Go to your room (2)",
+   "why": "One-time opening screen; no hours, no greyed row."
+  },
+  {
+   "row": "L167",
+   "screen": "opening.sums",
+   "verdict": "N/A",
+   "line": "Go down to the kitchen (5)",
+   "why": "One-time opening screen; no hours, no greyed row."
   },
   {
    "row": "L167",
    "screen": "opening.wake",
    "verdict": "N/A",
-   "line": "(no hours on wake)",
-   "why": "one-time opening screen, no hours, no greyed row",
-   "cause": ""
+   "line": "Go down to the kitchen (5)",
+   "why": "One-time opening screen; no hours, no greyed row."
   }
  ],
  "causes": []

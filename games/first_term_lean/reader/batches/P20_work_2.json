@@ -1,0 +1,184 @@
+{
+ "items": [
+  {
+   "row": "B10",
+   "screen": "quad_meet_zoe.coffee",
+   "why": "a fact changed"
+  },
+  {
+   "row": "B10",
+   "screen": "quad_meet_zoe.talk",
+   "why": "a fact changed"
+  },
+  {
+   "row": "B8",
+   "screen": "quad_meet_zoe.coffee",
+   "why": "a fact changed"
+  },
+  {
+   "row": "B8",
+   "screen": "quad_meet_zoe.talk",
+   "why": "a fact changed"
+  },
+  {
+   "row": "C1158",
+   "screen": "quad_meet_zoe.coffee",
+   "why": "a fact changed"
+  },
+  {
+   "row": "C1177",
+   "screen": "quad_meet_zoe.coffee",
+   "why": "a fact changed"
+  },
+  {
+   "row": "C1206",
+   "screen": "quad_meet_zoe.coffee",
+   "why": "a fact changed"
+  },
+  {
+   "row": "C460",
+   "screen": "quad_meet_zoe.coffee",
+   "why": "a fact changed"
+  },
+  {
+   "row": "C460",
+   "screen": "quad_meet_zoe.talk",
+   "why": "a fact changed"
+  },
+  {
+   "row": "C461",
+   "screen": "quad_meet_zoe.coffee",
+   "why": "a fact changed"
+  },
+  {
+   "row": "C461",
+   "screen": "quad_meet_zoe.talk",
+   "why": "a fact changed"
+  },
+  {
+   "row": "C596",
+   "screen": "*",
+   "why": "its rule's text changed"
+  },
+  {
+   "row": "C795",
+   "screen": "*",
+   "why": "its rule's text changed"
+  },
+  {
+   "row": "C804",
+   "screen": "*",
+   "why": "its rule's text changed"
+  },
+  {
+   "row": "C889",
+   "screen": "quad_meet_zoe.talk",
+   "why": "a fact changed"
+  },
+  {
+   "row": "C892",
+   "screen": "quad_meet_zoe.talk",
+   "why": "a fact changed"
+  },
+  {
+   "row": "C897",
+   "screen": "quad_meet_zoe.talk",
+   "why": "a fact changed"
+  },
+  {
+   "row": "C900",
+   "screen": "quad_meet_zoe.talk",
+   "why": "a fact changed"
+  },
+  {
+   "row": "C902",
+   "screen": "quad_meet_zoe.talk",
+   "why": "a fact changed"
+  },
+  {
+   "row": "C903",
+   "screen": "quad_meet_zoe.talk",
+   "why": "a fact changed"
+  },
+  {
+   "row": "C906",
+   "screen": "quad_meet_zoe.talk",
+   "why": "a fact changed"
+  },
+  {
+   "row": "C910",
+   "screen": "quad_meet_zoe.talk",
+   "why": "a fact changed"
+  },
+  {
+   "row": "C913",
+   "screen": "quad_meet_zoe.talk",
+   "why": "a fact changed"
+  },
+  {
+   "row": "C914",
+   "screen": "quad_meet_zoe.talk",
+   "why": "a fact changed"
+  },
+  {
+   "row": "C916",
+   "screen": "quad_meet_zoe.talk",
+   "why": "a fact changed"
+  },
+  {
+   "row": "C920",
+   "screen": "quad_meet_zoe.talk",
+   "why": "a fact changed"
+  },
+  {
+   "row": "C924",
+   "screen": "quad_meet_zoe.talk",
+   "why": "a fact changed"
+  },
+  {
+   "row": "C926",
+   "screen": "quad_meet_zoe.talk",
+   "why": "a fact changed"
+  },
+  {
+   "row": "C927",
+   "screen": "quad_meet_zoe.talk",
+   "why": "a fact changed"
+  },
+  {
+   "row": "C928",
+   "screen": "quad_meet_zoe.talk",
+   "why": "a fact changed"
+  },
+  {
+   "row": "C929",
+   "screen": "quad_meet_zoe.talk",
+   "why": "a fact changed"
+  },
+  {
+   "row": "C930",
+   "screen": "quad_meet_zoe.talk",
+   "why": "a fact changed"
+  },
+  {
+   "row": "C931",
+   "screen": "quad_meet_zoe.talk",
+   "why": "a fact changed"
+  },
+  {
+   "row": "L106",
+   "screen": "quad_meet_zoe.coffee",
+   "why": "a fact changed"
+  },
+  {
+   "row": "L106",
+   "screen": "quad_meet_zoe.talk",
+   "why": "a fact changed"
+  },
+  {
+   "row": "L167",
+   "screen": "quad_meet_zoe.talk",
+   "why": "a fact changed"
+  }
+ ]
+}

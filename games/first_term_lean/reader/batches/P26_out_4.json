@@ -1,0 +1,26 @@
+{
+ "verdicts": [
+  {
+   "row": "L170",
+   "screen": "*",
+   "verdict": "N/A",
+   "line": "",
+   "why": "no place on this piece's screens is hidden_until a flag"
+  },
+  {
+   "row": "L168",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "From your second week, three girls own the mirror in the women's bathroom off the Lecture Hall, weekdays 8 to 9am and 1 to 2pm.",
+   "why": "all three are at the mirror weekdays 8-9 and 13-14; met_brooke is the end step's when (Kayla and Tess carry no met flag)"
+  },
+  {
+   "row": "L169",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "From your second week, three girls own the mirror in the women's bathroom off the Lecture Hall, weekdays 8 to 9am and 1 to 2pm.",
+   "why": "mirror_meet_brooke fires whenever all three are there from week two, the window the hint names"
+  }
+ ],
+ "causes": []
+}

@@ -1,0 +1,40 @@
+{
+ "verdicts": [
+  {
+   "row": "C596",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "opening: every screen a first, once",
+   "why": "no face-opened menu or repeat talk in the opening; its pictures sit on new moments"
+  },
+  {
+   "row": "C795",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "opening scene screens",
+   "why": "scenes, not room text; no per-person room line"
+  },
+  {
+   "row": "C804",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "opening scene screens",
+   "why": "no room text added"
+  },
+  {
+   "row": "C596",
+   "screen": "opening.room_spoke",
+   "verdict": "PASS",
+   "line": "\"Thanks. Go get dressed.\" then picture body/hall_knot_spoke_t4",
+   "why": "a body moment, a new moment, not a talk screen under a menu"
+  },
+  {
+   "row": "C596",
+   "screen": "opening.sums",
+   "verdict": "PASS",
+   "line": "\"Hair still wet, you sit down and do the sums.\"",
+   "why": "the hand-over screen; no person's menu, no picture"
+  }
+ ],
+ "causes": []
+}

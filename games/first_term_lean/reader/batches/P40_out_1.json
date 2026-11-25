@@ -1,0 +1,1466 @@
+{
+ "verdicts": [
+  {
+   "row": "B1",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "\"Door's open for a reason. Come in or don't.\" / \"Don't you say a word, hon.\" / \"Again. Slower. Like you mean it.\"",
+   "why": "each scene shows the person wanting their own thing; the one sexual step (Cross's hand on Brooke) follows his wanting shown earlier in drama (\"Closer. Next time, I'll show you.\", drama class) and P17's meeting."
+  },
+  {
+   "row": "B2",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "Hale's office after his \"Won't you, young lady?\" lecture; Holt's novel after P18's hook; Cross watching her alone after drama class",
+   "why": "each known person's walk-in is a step past their meeting scene; unmet versions are a first scene."
+  },
+  {
+   "row": "B3",
+   "screen": "walk_stacks.watch",
+   "verdict": "FAIL",
+   "line": "A book slides off the shelf, and you run.",
+   "why": "the scene's last screen ends on her leaving; nothing points at what comes next with this person or place.",
+   "cause": "P40a1-c3"
+  },
+  {
+   "row": "C149",
+   "screen": "walk_stacks.watch",
+   "verdict": "FAIL",
+   "line": "A book slides off the shelf, and you run.",
+   "why": "the scene's last screen ends on her leaving; nothing points at what comes next with this person or place.",
+   "cause": "P40a1-c3"
+  },
+  {
+   "row": "C450",
+   "screen": "walk_stacks.watch",
+   "verdict": "FAIL",
+   "line": "A book slides off the shelf, and you run.",
+   "why": "the scene's last screen ends on her leaving; nothing points at what comes next with this person or place.",
+   "cause": "P40a1-c3"
+  },
+  {
+   "row": "B3",
+   "screen": "walk_stacks.away",
+   "verdict": "FAIL",
+   "line": "You back out of the aisle, very upright.",
+   "why": "the scene's last screen ends on her leaving; nothing points at what comes next with this person or place.",
+   "cause": "P40a1-c3"
+  },
+  {
+   "row": "C149",
+   "screen": "walk_stacks.away",
+   "verdict": "FAIL",
+   "line": "You back out of the aisle, very upright.",
+   "why": "the scene's last screen ends on her leaving; nothing points at what comes next with this person or place.",
+   "cause": "P40a1-c3"
+  },
+  {
+   "row": "C450",
+   "screen": "walk_stacks.away",
+   "verdict": "FAIL",
+   "line": "You back out of the aisle, very upright.",
+   "why": "the scene's last screen ends on her leaving; nothing points at what comes next with this person or place.",
+   "cause": "P40a1-c3"
+  },
+  {
+   "row": "B3",
+   "screen": "walk_holt_novel.ask",
+   "verdict": "FAIL",
+   "line": "She doesn't smile. You do.",
+   "why": "the scene's last screen ends on her leaving; nothing points at what comes next with this person or place.",
+   "cause": "P40a1-c3"
+  },
+  {
+   "row": "C149",
+   "screen": "walk_holt_novel.ask",
+   "verdict": "FAIL",
+   "line": "She doesn't smile. You do.",
+   "why": "the scene's last screen ends on her leaving; nothing points at what comes next with this person or place.",
+   "cause": "P40a1-c3"
+  },
+  {
+   "row": "C450",
+   "screen": "walk_holt_novel.ask",
+   "verdict": "FAIL",
+   "line": "She doesn't smile. You do.",
+   "why": "the scene's last screen ends on her leaving; nothing points at what comes next with this person or place.",
+   "cause": "P40a1-c3"
+  },
+  {
+   "row": "B3",
+   "screen": "walk_holt_novel.leave",
+   "verdict": "FAIL",
+   "line": "Smart girl.",
+   "why": "the scene's last screen ends on her leaving; nothing points at what comes next with this person or place.",
+   "cause": "P40a1-c3"
+  },
+  {
+   "row": "C149",
+   "screen": "walk_holt_novel.leave",
+   "verdict": "FAIL",
+   "line": "Smart girl.",
+   "why": "the scene's last screen ends on her leaving; nothing points at what comes next with this person or place.",
+   "cause": "P40a1-c3"
+  },
+  {
+   "row": "C450",
+   "screen": "walk_holt_novel.leave",
+   "verdict": "FAIL",
+   "line": "Smart girl.",
+   "why": "the scene's last screen ends on her leaving; nothing points at what comes next with this person or place.",
+   "cause": "P40a1-c3"
+  },
+  {
+   "row": "B3",
+   "screen": "walk_mirror_girls.beside",
+   "verdict": "FAIL",
+   "line": "Nobody says anything to you. It's louder than if they had.",
+   "why": "the scene's last screen ends on her leaving; nothing points at what comes next with this person or place.",
+   "cause": "P40a1-c3"
+  },
+  {
+   "row": "C149",
+   "screen": "walk_mirror_girls.beside",
+   "verdict": "FAIL",
+   "line": "Nobody says anything to you. It's louder than if they had.",
+   "why": "the scene's last screen ends on her leaving; nothing points at what comes next with this person or place.",
+   "cause": "P40a1-c3"
+  },
+  {
+   "row": "C450",
+   "screen": "walk_mirror_girls.beside",
+   "verdict": "FAIL",
+   "line": "Nobody says anything to you. It's louder than if they had.",
+   "why": "the scene's last screen ends on her leaving; nothing points at what comes next with this person or place.",
+   "cause": "P40a1-c3"
+  },
+  {
+   "row": "B3",
+   "screen": "walk_mirror_girls.leave",
+   "verdict": "FAIL",
+   "line": "You leave. The laugh starts before the door shuts.",
+   "why": "the scene's last screen ends on her leaving; nothing points at what comes next with this person or place.",
+   "cause": "P40a1-c3"
+  },
+  {
+   "row": "C149",
+   "screen": "walk_mirror_girls.leave",
+   "verdict": "FAIL",
+   "line": "You leave. The laugh starts before the door shuts.",
+   "why": "the scene's last screen ends on her leaving; nothing points at what comes next with this person or place.",
+   "cause": "P40a1-c3"
+  },
+  {
+   "row": "C450",
+   "screen": "walk_mirror_girls.leave",
+   "verdict": "FAIL",
+   "line": "You leave. The laugh starts before the door shuts.",
+   "why": "the scene's last screen ends on her leaving; nothing points at what comes next with this person or place.",
+   "cause": "P40a1-c3"
+  },
+  {
+   "row": "B3",
+   "screen": "walk_cross_brooke.leave",
+   "verdict": "FAIL",
+   "line": "You can still hear him: 'Again.'",
+   "why": "the scene's last screen ends on her leaving; nothing points at what comes next with this person or place.",
+   "cause": "P40a1-c3"
+  },
+  {
+   "row": "C149",
+   "screen": "walk_cross_brooke.leave",
+   "verdict": "FAIL",
+   "line": "You can still hear him: 'Again.'",
+   "why": "the scene's last screen ends on her leaving; nothing points at what comes next with this person or place.",
+   "cause": "P40a1-c3"
+  },
+  {
+   "row": "C450",
+   "screen": "walk_cross_brooke.leave",
+   "verdict": "FAIL",
+   "line": "You can still hear him: 'Again.'",
+   "why": "the scene's last screen ends on her leaving; nothing points at what comes next with this person or place.",
+   "cause": "P40a1-c3"
+  },
+  {
+   "row": "B3",
+   "screen": "walk_hale_note.knock",
+   "verdict": "PASS",
+   "line": "Come back in my office hours with a question, and I'll have an answer.",
+   "why": "ends on a pointer: office hours, the name, he's seen her, two o'clock, 'getting somewhere'."
+  },
+  {
+   "row": "C149",
+   "screen": "walk_hale_note.knock",
+   "verdict": "PASS",
+   "line": "Come back in my office hours with a question, and I'll have an answer.",
+   "why": "ends on a pointer: office hours, the name, he's seen her, two o'clock, 'getting somewhere'."
+  },
+  {
+   "row": "C450",
+   "screen": "walk_hale_note.knock",
+   "verdict": "PASS",
+   "line": "Come back in my office hours with a question, and I'll have an answer.",
+   "why": "ends on a pointer: office hours, the name, he's seen her, two o'clock, 'getting somewhere'."
+  },
+  {
+   "row": "B3",
+   "screen": "walk_hale_note.walkon",
+   "verdict": "PASS",
+   "line": "You don't know what the note means. You know the name on it.",
+   "why": "ends on a pointer: office hours, the name, he's seen her, two o'clock, 'getting somewhere'."
+  },
+  {
+   "row": "C149",
+   "screen": "walk_hale_note.walkon",
+   "verdict": "PASS",
+   "line": "You don't know what the note means. You know the name on it.",
+   "why": "ends on a pointer: office hours, the name, he's seen her, two o'clock, 'getting somewhere'."
+  },
+  {
+   "row": "C450",
+   "screen": "walk_hale_note.walkon",
+   "verdict": "PASS",
+   "line": "You don't know what the note means. You know the name on it.",
+   "why": "ends on a pointer: office hours, the name, he's seen her, two o'clock, 'getting somewhere'."
+  },
+  {
+   "row": "B3",
+   "screen": "walk_cross_brooke.watch",
+   "verdict": "PASS",
+   "line": "he looks up into the dark seats, straight at you.",
+   "why": "ends on a pointer: office hours, the name, he's seen her, two o'clock, 'getting somewhere'."
+  },
+  {
+   "row": "C149",
+   "screen": "walk_cross_brooke.watch",
+   "verdict": "PASS",
+   "line": "he looks up into the dark seats, straight at you.",
+   "why": "ends on a pointer: office hours, the name, he's seen her, two o'clock, 'getting somewhere'."
+  },
+  {
+   "row": "C450",
+   "screen": "walk_cross_brooke.watch",
+   "verdict": "PASS",
+   "line": "he looks up into the dark seats, straight at you.",
+   "why": "ends on a pointer: office hours, the name, he's seen her, two o'clock, 'getting somewhere'."
+  },
+  {
+   "row": "B3",
+   "screen": "walk_cross_seats.again",
+   "verdict": "PASS",
+   "line": "Better. See you at two, new face.",
+   "why": "ends on a pointer: office hours, the name, he's seen her, two o'clock, 'getting somewhere'."
+  },
+  {
+   "row": "C149",
+   "screen": "walk_cross_seats.again",
+   "verdict": "PASS",
+   "line": "Better. See you at two, new face.",
+   "why": "ends on a pointer: office hours, the name, he's seen her, two o'clock, 'getting somewhere'."
+  },
+  {
+   "row": "C450",
+   "screen": "walk_cross_seats.again",
+   "verdict": "PASS",
+   "line": "Better. See you at two, new face.",
+   "why": "ends on a pointer: office hours, the name, he's seen her, two o'clock, 'getting somewhere'."
+  },
+  {
+   "row": "B3",
+   "screen": "walk_cross_seats.off",
+   "verdict": "PASS",
+   "line": "Shame. You were getting somewhere.",
+   "why": "ends on a pointer: office hours, the name, he's seen her, two o'clock, 'getting somewhere'."
+  },
+  {
+   "row": "C149",
+   "screen": "walk_cross_seats.off",
+   "verdict": "PASS",
+   "line": "Shame. You were getting somewhere.",
+   "why": "ends on a pointer: office hours, the name, he's seen her, two o'clock, 'getting somewhere'."
+  },
+  {
+   "row": "C450",
+   "screen": "walk_cross_seats.off",
+   "verdict": "PASS",
+   "line": "Shame. You were getting somewhere.",
+   "why": "ends on a pointer: office hours, the name, he's seen her, two o'clock, 'getting somewhere'."
+  },
+  {
+   "row": "B4",
+   "screen": "walk_stacks.moment",
+   "verdict": "FAIL",
+   "line": "In the back stacks, through a gap in the books: a couple against the shelves, her skirt in his fist, her leg round his hip as he fucks her.",
+   "why": "she sees sex and has no reaction at all on her body on this screen or the next (voice.md rule 3: arousal is always on her body).",
+   "cause": "P40a1-c1"
+  },
+  {
+   "row": "B4",
+   "screen": "walk_mirror_girls.beside",
+   "verdict": "PASS",
+   "line": "You fix your hair a foot from them.",
+   "why": "low-stage reaction, she holds her ground; no act above her stage."
+  },
+  {
+   "row": "B4",
+   "screen": "walk_cross_seats.again",
+   "verdict": "PASS",
+   "line": "You're shaking when you get off the stage.",
+   "why": "reaction on her body at a low stage; nothing chosen above it."
+  },
+  {
+   "row": "B4",
+   "screen": "walk_hale_note.walkon",
+   "verdict": "PASS",
+   "line": "You walk on.",
+   "why": "everyday reaction, fits stage 0."
+  },
+  {
+   "row": "B5",
+   "screen": "walk_stacks.watch",
+   "verdict": "FAIL",
+   "line": "A book slides off the shelf, and you run.",
+   "why": "nobody reacts to her watching; the couple's notice is never written and PLAN §10c doesn't declare nobody does.",
+   "cause": "P40a1-c1"
+  },
+  {
+   "row": "B5",
+   "screen": "walk_cross_brooke.watch",
+   "verdict": "PASS",
+   "line": "he looks up into the dark seats, straight at you.",
+   "why": "Cross notices her."
+  },
+  {
+   "row": "B5",
+   "screen": "walk_mirror_girls.leave",
+   "verdict": "PASS",
+   "line": "The laugh starts before the door shuts.",
+   "why": "the girls react."
+  },
+  {
+   "row": "B5",
+   "screen": "walk_hale_note.knock",
+   "verdict": "PASS",
+   "line": "He closes the file.",
+   "why": "Hale reacts to the knock."
+  },
+  {
+   "row": "B5",
+   "screen": "walk_holt_novel.ask",
+   "verdict": "PASS",
+   "line": "She doesn't smile. You do.",
+   "why": "Holt reacts."
+  },
+  {
+   "row": "B5",
+   "screen": "walk_cross_seats.moment",
+   "verdict": "PASS",
+   "line": "Again. Louder. You stopped meaning it halfway.",
+   "why": "Cross reacts to her practise."
+  },
+  {
+   "row": "B6",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "\"Back away\" · \"Walk on\" · \"Leave her to it\" · \"Leave\" · \"Get off the stage\"",
+   "why": "every scene has a leave, each with its own written line; none is final."
+  },
+  {
+   "row": "B7",
+   "screen": "walk_stacks.watch",
+   "verdict": "FAIL",
+   "line": "You watch until she bites his shoulder to keep quiet.",
+   "why": "the Watch beat skips the act (heat.md 'Not this': \"You watch until it's over.\") and its last sentence, \"A book slides off the shelf, and you run.\", is off the body.",
+   "cause": "P40a1-c1"
+  },
+  {
+   "row": "B7",
+   "screen": "walk_stacks.moment",
+   "verdict": "PASS",
+   "line": "her leg round his hip as he fucks her.",
+   "why": "the moment's last narration sentence is on the act."
+  },
+  {
+   "row": "B8",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "her skirt in his fist",
+   "why": "no numbers; the only garment named is the stranger's, none of hers."
+  },
+  {
+   "row": "B9",
+   "screen": "*",
+   "verdict": "N/A",
+   "line": "—",
+   "why": "PLAN.md declares no companion-rival in these scenes."
+  },
+  {
+   "row": "B10",
+   "screen": "walk_hale_note.walkon",
+   "verdict": "FAIL",
+   "line": "You know the name on it.",
+   "why": "with met_walsh and not met_hale she has not met Nadia (met_nadia set only with met_hale, 7_final_game.toml:4598), and the line is ungrouped.",
+   "cause": "P40a1-c6"
+  },
+  {
+   "row": "B10",
+   "screen": "walk_holt_novel.leave",
+   "verdict": "FAIL",
+   "line": "Smart girl.",
+   "why": "speaker \"unknown\" outside the met_holt groups: after met_holt, Ms. Holt shows as a Stranger.",
+   "cause": "P40a1-c4"
+  },
+  {
+   "row": "B10",
+   "screen": "walk_hale_note.knock",
+   "verdict": "FAIL",
+   "line": "Come back in my office hours with a question",
+   "why": "said during his office hours (PLAN 455, the trigger's Mon/Wed 14:00-17:00).",
+   "cause": "P40a1-c5"
+  },
+  {
+   "row": "B10",
+   "screen": "walk_cross_seats.moment",
+   "verdict": "PASS",
+   "line": "He's early for his two o'clock",
+   "why": "gated on Cross absent 13-14; he arrives toward his 14:00 theatre row (who_is_where: Tue/Thu/Fri 14-18 campus_theatre), the card's option (c)."
+  },
+  {
+   "row": "B10",
+   "screen": "walk_mirror_girls.moment",
+   "verdict": "PASS",
+   "line": "Three girls own the mirror",
+   "why": "trigger needs all three present; rows put them there weekdays 8-9 and 13-14."
+  },
+  {
+   "row": "B10",
+   "screen": "walk_cross_brooke.moment",
+   "verdict": "PASS",
+   "line": "Cross is running a scene with a blonde girl",
+   "why": "trigger needs Cross and Brooke present (Tue/Thu/Fri 14-18); Brooke is blonde (canvas at line 5747)."
+  },
+  {
+   "row": "B10",
+   "screen": "walk_stacks.moment",
+   "verdict": "PASS",
+   "line": "a couple against the shelves",
+   "why": "strangers; window 18-22 inside library hours 8-22, end exclusive."
+  },
+  {
+   "row": "B10",
+   "screen": "walk_holt_novel.moment",
+   "verdict": "PASS",
+   "line": "Ms. Holt's at the desk",
+   "why": "trigger needs Holt present, rows weekdays 8-16."
+  },
+  {
+   "row": "B11",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "\"Fix your hair beside them\" · \"Do it again\" · \"Watch\"",
+   "why": "each button shows the act it names and sets its flag or writes its leave."
+  },
+  {
+   "row": "B12",
+   "screen": "walk_cross_brooke.moment",
+   "verdict": "FAIL",
+   "line": "his hand on her waist to place her, staying.",
+   "why": "a charged scene with no explicit beat names no part of her body and puts no heat on her.",
+   "cause": "P40a1-c2"
+  },
+  {
+   "row": "B12",
+   "screen": "walk_cross_seats.moment",
+   "verdict": "PASS",
+   "line": "You've been saying your lines to nobody. You're not.",
+   "why": "charged, and on her body on the answers (\"face burning\", \"shaking\"); the price is that he watched."
+  },
+  {
+   "row": "B13",
+   "screen": "walk_cross_seats.moment",
+   "verdict": "FAIL",
+   "line": "One pair of hands claps, once, from the dark seats.",
+   "why": "declared a moment alone with her body and a walk-in on her: no line on her body, no picture of her.",
+   "cause": "P40a1-c9"
+  },
+  {
+   "row": "C1158",
+   "screen": "walk_stacks.moment",
+   "verdict": "PASS",
+   "line": "her skirt in his fist",
+   "why": "the skirt is the stranger's; nothing of hers is named."
+  },
+  {
+   "row": "C1206",
+   "screen": "walk_stacks.moment",
+   "verdict": "PASS",
+   "line": "her skirt in his fist",
+   "why": "no garment of hers named."
+  },
+  {
+   "row": "C1200",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "—",
+   "why": "no screen places clothes."
+  },
+  {
+   "row": "C1220",
+   "screen": "*",
+   "verdict": "N/A",
+   "line": "—",
+   "why": "no dress code on these places' doors is touched by these screens."
+  },
+  {
+   "row": "C1221",
+   "screen": "*",
+   "verdict": "N/A",
+   "line": "—",
+   "why": "no dress-code exception here."
+  },
+  {
+   "row": "C1234",
+   "screen": "walk_stacks.moment",
+   "verdict": "PASS",
+   "line": "…as he fucks her. [image]",
+   "why": "the clip sits right after the line that shows the act."
+  },
+  {
+   "row": "C1238",
+   "screen": "walk_stacks.moment",
+   "verdict": "PASS",
+   "line": "her skirt bunched up",
+   "why": "picture matches the line on every visit."
+  },
+  {
+   "row": "C1250",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "—",
+   "why": "no room card text; the one picture is on sex."
+  },
+  {
+   "row": "C1255",
+   "screen": "walk_stacks.moment",
+   "verdict": "PASS",
+   "line": "pool_dir = \"sex/stacks_couple_t5\"",
+   "why": "the pool is used once in the game."
+  },
+  {
+   "row": "C1261",
+   "screen": "walk_stacks.moment",
+   "verdict": "PASS",
+   "line": "the back stacks",
+   "why": "the spot is where the player wants to look."
+  },
+  {
+   "row": "C1262",
+   "screen": "walk_cross_seats.moment",
+   "verdict": "FAIL",
+   "line": "One pair of hands claps, once, from the dark seats.",
+   "why": "the body moment the card declares has no clip or still.",
+   "cause": "P40a1-c9"
+  },
+  {
+   "row": "C1265",
+   "screen": "walk_stacks.moment",
+   "verdict": "PASS",
+   "line": "—",
+   "why": "a sex walk-in, not a chore or menu; the everyday walk-ins carry none."
+  },
+  {
+   "row": "C1267",
+   "screen": "walk_stacks.moment",
+   "verdict": "PASS",
+   "line": "—",
+   "why": "the act is what the player wants to see."
+  },
+  {
+   "row": "C1275",
+   "screen": "walk_stacks.moment",
+   "verdict": "PASS",
+   "line": "\"…seen through gap in books gif\"",
+   "why": "something happens; gif in the search words."
+  },
+  {
+   "row": "C1277",
+   "screen": "walk_stacks.moment",
+   "verdict": "PASS",
+   "line": "Seen through a gap in library books… against the shelves",
+   "why": "the place is named."
+  },
+  {
+   "row": "C1278",
+   "screen": "walk_stacks.moment",
+   "verdict": "FAIL",
+   "line": "a man and a woman having sex against the shelves",
+   "why": "the description gives no age.",
+   "cause": "P40a1-c7"
+  },
+  {
+   "row": "C1279",
+   "screen": "walk_stacks.moment",
+   "verdict": "N/A",
+   "line": "—",
+   "why": "not a mirror picture."
+  },
+  {
+   "row": "C1280",
+   "screen": "walk_stacks.moment",
+   "verdict": "FAIL",
+   "line": "pool_dir = \"sex/stacks_couple_t5\", pool = 2",
+   "why": "explicit (_t5) repeat asks for 4.",
+   "cause": "P40a1-c8"
+  },
+  {
+   "row": "C1281",
+   "screen": "walk_stacks.moment",
+   "verdict": "PASS",
+   "line": "Seen through a gap in library books",
+   "why": "written as what the looker sees; nobody looks at the camera."
+  },
+  {
+   "row": "C1284",
+   "screen": "walk_stacks.moment",
+   "verdict": "PASS",
+   "line": "Seen through a gap in library books: …",
+   "why": "a walk-in picture written from her viewpoint."
+  },
+  {
+   "row": "C1340",
+   "screen": "*",
+   "verdict": "N/A",
+   "line": "—",
+   "why": "no housemate on these screens."
+  },
+  {
+   "row": "C1342",
+   "screen": "*",
+   "verdict": "N/A",
+   "line": "—",
+   "why": "no need is drained, refilled or read by these screens."
+  },
+  {
+   "row": "C1431",
+   "screen": "*",
+   "verdict": "N/A",
+   "line": "—",
+   "why": "no need is drained, refilled or read by these screens."
+  },
+  {
+   "row": "C1432",
+   "screen": "*",
+   "verdict": "N/A",
+   "line": "—",
+   "why": "no need is drained, refilled or read by these screens."
+  },
+  {
+   "row": "C1438",
+   "screen": "*",
+   "verdict": "N/A",
+   "line": "—",
+   "why": "no need is drained, refilled or read by these screens."
+  },
+  {
+   "row": "C1428",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "—",
+   "why": "no energy cost or lock on any walk-in."
+  },
+  {
+   "row": "C164",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "\"Back away\" · \"Walk on\" · \"Leave\"",
+   "why": "a no is parked: each scene is once a day and comes back the next day."
+  },
+  {
+   "row": "C165",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "—",
+   "why": "no final no anywhere."
+  },
+  {
+   "row": "C166",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "—",
+   "why": "no final no; not the opening."
+  },
+  {
+   "row": "C289",
+   "screen": "*",
+   "verdict": "N/A",
+   "line": "—",
+   "why": "no bare body of hers before anyone."
+  },
+  {
+   "row": "C311",
+   "screen": "walk_cross_brooke.moment",
+   "verdict": "FAIL",
+   "line": "his hand on her waist to place her, staying.",
+   "why": "no part of her body named; the low-heat charge stays on Brooke and his hand.",
+   "cause": "P40a1-c2"
+  },
+  {
+   "row": "C311",
+   "screen": "walk_stacks.moment",
+   "verdict": "N/A",
+   "line": "—",
+   "why": "sex shown, not a low-heat scene."
+  },
+  {
+   "row": "C314",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "his hand on her waist",
+   "why": "neither sexual screen is talk only."
+  },
+  {
+   "row": "C330",
+   "screen": "*",
+   "verdict": "N/A",
+   "line": "—",
+   "why": "no meter moves."
+  },
+  {
+   "row": "C422",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "\"The back stacks\" · \"A door's ajar\" · \"At the desk\" · \"At the mirror\" · \"A rehearsal\"",
+   "why": "each label names where she goes; answers say the act."
+  },
+  {
+   "row": "C442",
+   "screen": "walk_stacks.watch",
+   "verdict": "FAIL",
+   "line": "You watch until she bites his shoulder to keep quiet.",
+   "why": "hints what she watched instead of telling it.",
+   "cause": "P40a1-c1"
+  },
+  {
+   "row": "C442",
+   "screen": "walk_hale_note.moment",
+   "verdict": "PASS",
+   "line": "a yellow note stuck to it: 'Nadia — spring.'",
+   "why": "says what she sees."
+  },
+  {
+   "row": "C447",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "\"hon\" (Holt), \"young lady\" (Hale), \"new face\" (Cross), Brooke's \"He'll learn.\"",
+   "why": "each person holds their manner."
+  },
+  {
+   "row": "C449",
+   "screen": "walk_cross_brooke.moment",
+   "verdict": "FAIL",
+   "line": "his hand on her waist to place her, staying.",
+   "why": "the tension is buried in one word, never named.",
+   "cause": "P40a1-c2"
+  },
+  {
+   "row": "C449",
+   "screen": "walk_stacks.moment",
+   "verdict": "PASS",
+   "line": "as he fucks her",
+   "why": "named."
+  },
+  {
+   "row": "C451",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "a yellow note… 'Nadia — spring.' / a paperback romance with a bare chest on the cover",
+   "why": "concrete detail throughout."
+  },
+  {
+   "row": "C460",
+   "screen": "walk_hale_note.walkon",
+   "verdict": "FAIL",
+   "line": "You know the name on it.",
+   "why": "false on the met_walsh-without-met_hale path.",
+   "cause": "P40a1-c6"
+  },
+  {
+   "row": "C460",
+   "screen": "walk_holt_novel.leave",
+   "verdict": "FAIL",
+   "line": "Smart girl.",
+   "why": "after met_holt the line claims a Stranger speaks.",
+   "cause": "P40a1-c4"
+  },
+  {
+   "row": "C460",
+   "screen": "walk_hale_note.knock",
+   "verdict": "FAIL",
+   "line": "Come back in my office hours",
+   "why": "it is his office hours.",
+   "cause": "P40a1-c5"
+  },
+  {
+   "row": "C460",
+   "screen": "walk_stacks.moment",
+   "verdict": "PASS",
+   "line": "—",
+   "why": "true at 18:00 and 21:55, any day."
+  },
+  {
+   "row": "C460",
+   "screen": "walk_cross_seats.moment",
+   "verdict": "PASS",
+   "line": "He's early for his two o'clock",
+   "why": "true 13:00-13:55 Tue/Thu/Fri; he has a 14:00 row."
+  },
+  {
+   "row": "C461",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "He's about to take her on a horse.",
+   "why": "dialogue and texture that fit the cast."
+  },
+  {
+   "row": "C593",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "\"hon\" / \"young lady\" / \"new face\"",
+   "why": "each term is used by one person only (grep)."
+  },
+  {
+   "row": "C601",
+   "screen": "walk_cross_brooke.moment",
+   "verdict": "PASS",
+   "line": "his hand on her waist to place her, staying.",
+   "why": "his leak is on his body and she sees it; he doesn't live with her."
+  },
+  {
+   "row": "C601",
+   "screen": "walk_stacks.moment",
+   "verdict": "N/A",
+   "line": "—",
+   "why": "strangers' act, no leak toward her."
+  },
+  {
+   "row": "C630",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "Dr. Hale / Ms. Holt / Cross",
+   "why": "met people named; relations given at their meetings; unmet ones by role."
+  },
+  {
+   "row": "C762",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "—",
+   "why": "no 'nothing happens'."
+  },
+  {
+   "row": "C773",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "—",
+   "why": "each walk-in is a canvas button at its place, the shape walk-ins.md's engine section names; no browse list, no Talk button."
+  },
+  {
+   "row": "C776",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "—",
+   "why": "each walk-in is a canvas button at its place, the shape walk-ins.md's engine section names; no browse list, no Talk button."
+  },
+  {
+   "row": "C777",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "—",
+   "why": "each walk-in is a canvas button at its place, the shape walk-ins.md's engine section names; no browse list, no Talk button."
+  },
+  {
+   "row": "C782",
+   "screen": "walk_cross_seats.moment",
+   "verdict": "N/A",
+   "line": "—",
+   "why": "no solo act here."
+  },
+  {
+   "row": "C804",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "—",
+   "why": "no room-text line per person; people are in scenes."
+  },
+  {
+   "row": "C900",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "He's early for his two o'clock",
+   "why": "no beat says the current time; 'two o'clock' is his rehearsal, true at every minute of 13:00-14:00."
+  },
+  {
+   "row": "C903",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "—",
+   "why": "no weekday named."
+  },
+  {
+   "row": "C913",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "—",
+   "why": "walk-ins are events at a place and stay hidden out of their window (C916); no chosen activity's hours change."
+  },
+  {
+   "row": "C914",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "—",
+   "why": "walk-ins are events at a place and stay hidden out of their window (C916); no chosen activity's hours change."
+  },
+  {
+   "row": "C916",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "—",
+   "why": "walk-ins are events at a place and stay hidden out of their window (C916); no chosen activity's hours change."
+  },
+  {
+   "row": "C920",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "Done (5 min, same place)",
+   "why": "no hop is charged; the 5 minutes are the scene's."
+  },
+  {
+   "row": "C928",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "—",
+   "why": "no clock printed."
+  },
+  {
+   "row": "L106",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "He's alone with a file / Ms. Holt's at the desk / Cross … with a blonde girl",
+   "why": "each named person is gated present by rows; Cross in the seats arrives toward his 14:00 row (card option c); Pratt in the offices 13-15 is behind his own door."
+  },
+  {
+   "row": "L119",
+   "screen": "walk_stacks.moment",
+   "verdict": "PASS",
+   "line": "pool = 2",
+   "why": "pool set deliberately, not the default 4 (its size is C1280)."
+  },
+  {
+   "row": "L120",
+   "screen": "walk_stacks.moment",
+   "verdict": "PASS",
+   "line": "\"couple sex against library shelves seen through gap in books gif\"",
+   "why": "a couple frame, nobody looking at her."
+  },
+  {
+   "row": "L121",
+   "screen": "walk_stacks.moment",
+   "verdict": "PASS",
+   "line": "—",
+   "why": "one picture per scene; everyday walk-ins have none."
+  },
+  {
+   "row": "L125",
+   "screen": "walk_stacks.moment",
+   "verdict": "PASS",
+   "line": "—",
+   "why": "the clip shows the act in progress, not the Watch payoff."
+  },
+  {
+   "row": "L166",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "—",
+   "why": "windows from PLAN §10c and the people's rows, said on the card."
+  },
+  {
+   "row": "L167",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "—",
+   "why": "the mirror's two windows are one canvas gated by presence; no row per day kind."
+  },
+  {
+   "row": "L71",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "\"Watch\"",
+   "why": "she chooses to watch, which heat.md shape 4 allows in release 1; nothing done to her."
+  },
+  {
+   "row": "C1002",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "—",
+   "why": "no spend."
+  },
+  {
+   "row": "C1173",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "—",
+   "why": "no clothing door."
+  },
+  {
+   "row": "C1176",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "—",
+   "why": "no clothing read on a sex scene."
+  },
+  {
+   "row": "C1177",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "—",
+   "why": "no exposure of hers."
+  },
+  {
+   "row": "C1184",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "—",
+   "why": "no refusal."
+  },
+  {
+   "row": "C1185",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "—",
+   "why": "no dress code."
+  },
+  {
+   "row": "C1189",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "—",
+   "why": "no clothing state noticed."
+  },
+  {
+   "row": "C1198",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "—",
+   "why": "no refusal."
+  },
+  {
+   "row": "C1249",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "—",
+   "why": "one picture on the one sex screen."
+  },
+  {
+   "row": "C1274",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "—",
+   "why": "_t5 sex, gif."
+  },
+  {
+   "row": "C1303",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "—",
+   "why": "no need."
+  },
+  {
+   "row": "C1313",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "—",
+   "why": "no refill."
+  },
+  {
+   "row": "C1337",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "—",
+   "why": "no energy."
+  },
+  {
+   "row": "C1345",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "—",
+   "why": "max_triggers_per_day = 1 on each."
+  },
+  {
+   "row": "C1360",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "—",
+   "why": "no locked choice."
+  },
+  {
+   "row": "C1421",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "—",
+   "why": "nothing locked to tell."
+  },
+  {
+   "row": "C1423",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "—",
+   "why": "the daily cap is the cost."
+  },
+  {
+   "row": "C1425",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "—",
+   "why": "daily cap plus 5 minutes."
+  },
+  {
+   "row": "C1427",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "—",
+   "why": "no time cost against a window."
+  },
+  {
+   "row": "C1433",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "—",
+   "why": "no need."
+  },
+  {
+   "row": "C1434",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "—",
+   "why": "no need."
+  },
+  {
+   "row": "C1441",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "—",
+   "why": "each step is a scene."
+  },
+  {
+   "row": "C146",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "—",
+   "why": "small repeat moments, no big step."
+  },
+  {
+   "row": "C286",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "—",
+   "why": "Cross's leak on Brooke is stage 1."
+  },
+  {
+   "row": "C287",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "—",
+   "why": "watching by choice, which heat.md shape 4 allows as sex she sees."
+  },
+  {
+   "row": "C288",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "—",
+   "why": "no contact."
+  },
+  {
+   "row": "C291",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "—",
+   "why": "what shows sets the level."
+  },
+  {
+   "row": "C296",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "—",
+   "why": "low version."
+  },
+  {
+   "row": "C297",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "—",
+   "why": "no housemate."
+  },
+  {
+   "row": "C519",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "—",
+   "why": "every screen under 60 words, one job."
+  },
+  {
+   "row": "C596",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "—",
+   "why": "no talk screen."
+  },
+  {
+   "row": "C613",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "—",
+   "why": "Cross's want on his hand, seen by her, before the scene ends."
+  },
+  {
+   "row": "C620",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "—",
+   "why": "no place listing changed."
+  },
+  {
+   "row": "C632",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "—",
+   "why": "no role label."
+  },
+  {
+   "row": "C639",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "—",
+   "why": "walk-in choices are two by walk-ins.md shape 5, not an offer."
+  },
+  {
+   "row": "C640",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "—",
+   "why": "each no has its line."
+  },
+  {
+   "row": "C644",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "—",
+   "why": "Holt's novel, Hale's note, Brooke's guy."
+  },
+  {
+   "row": "C758",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "—",
+   "why": "labels 2-5 words."
+  },
+  {
+   "row": "C769",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "—",
+   "why": "no place description changed."
+  },
+  {
+   "row": "C770",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "—",
+   "why": "no room screen changed."
+  },
+  {
+   "row": "C771",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "—",
+   "why": "no first-visit screen."
+  },
+  {
+   "row": "C794",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "—",
+   "why": "no identity line changed."
+  },
+  {
+   "row": "C795",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "—",
+   "why": "no room-text line."
+  },
+  {
+   "row": "C889",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "—",
+   "why": "no time on labels."
+  },
+  {
+   "row": "C892",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "—",
+   "why": "hours on the trigger, not in the act."
+  },
+  {
+   "row": "C897",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "—",
+   "why": "no room time."
+  },
+  {
+   "row": "C902",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "—",
+   "why": "stacks at 21:55, Hale at 16:55, seats at 13:55: still true."
+  },
+  {
+   "row": "C906",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "—",
+   "why": "no time on labels."
+  },
+  {
+   "row": "C910",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "—",
+   "why": "no time or energy on buttons."
+  },
+  {
+   "row": "C924",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "—",
+   "why": "no travel."
+  },
+  {
+   "row": "C926",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "—",
+   "why": "minutes only."
+  },
+  {
+   "row": "C927",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "—",
+   "why": "each Done costs 5."
+  },
+  {
+   "row": "C929",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "—",
+   "why": "no time tagged."
+  },
+  {
+   "row": "C930",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "—",
+   "why": "events vanish out of window by design."
+  },
+  {
+   "row": "C931",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "—",
+   "why": "ends exclusive: 22:00 = library close, 14:00 = Cross arrives."
+  },
+  {
+   "row": "C953",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "—",
+   "why": "no cost, none shown."
+  },
+  {
+   "row": "C151",
+   "screen": "walk_mirror_girls.moment",
+   "verdict": "FAIL",
+   "line": "He said that? To you? / He says a lot of things. He'll learn.",
+   "why": "two spoken lines on a repeatable."
+  },
+  {
+   "row": "C151",
+   "screen": "walk_stacks.moment",
+   "verdict": "FAIL",
+   "line": "Quiet. Someone'll come. / Let them. Let them watch.",
+   "why": "two spoken lines on a repeatable."
+  },
+  {
+   "row": "C625",
+   "screen": "walk_cross_seats.moment",
+   "verdict": "FAIL",
+   "line": "He's early for his two o'clock",
+   "why": "before met_cross he has no role on screen (card's own 'the drama teacher' pattern), and she can't know his two o'clock."
+  },
+  {
+   "row": "C626",
+   "screen": "walk_holt_novel.leave",
+   "verdict": "FAIL",
+   "line": "Smart girl.",
+   "why": "no swap to Holt's name once met."
+  },
+  {
+   "row": "C626",
+   "screen": "walk_hale_note.moment",
+   "verdict": "PASS",
+   "line": "Dr. Hale's door / A professor's door",
+   "why": "swapped on met_hale."
+  }
+ ],
+ "causes": [
+  {
+   "id": "P40a1-c1",
+   "what": "walk_stacks's Watch answer fades the act and leaves her out: \"You watch until she bites his shoulder to keep quiet.\" then \"you run\"; no body on either of them past the moment, nothing on her body on any stacks screen, and nobody reacts to her watching."
+  },
+  {
+   "id": "P40a1-c2",
+   "what": "walk_cross_brooke hints the charge (\"his hand on her waist to place her, staying.\") and never puts it on her body: no part of her named, no heat on her, on the moment or the watch screen."
+  },
+  {
+   "id": "P40a1-c3",
+   "what": "seven answer screens end on her exit with nothing pointing at what comes next (stacks watch/away, Holt ask/leave, mirror beside/leave, rehearsal leave)."
+  },
+  {
+   "id": "P40a1-c4",
+   "what": "walk_holt_novel.leave prints Holt's \"Smart girl.\" with speaker \"unknown\" outside any met_holt group, so after met_holt Ms. Holt speaks as a Stranger."
+  },
+  {
+   "id": "P40a1-c5",
+   "what": "Hale's knock line \"Come back in my office hours with a question\" plays inside his office hours (PLAN 455: his office Mon/Wed 2–5 office hours; the scene's window is the same)."
+  },
+  {
+   "id": "P40a1-c6",
+   "what": "walk_hale_note.walkon's \"You know the name on it.\" is ungrouped; with met_walsh true and met_hale false (Walsh met Tue/Thu 9am, Hale's lecture skipped) met_nadia is false (set only with met_hale, line 4598) and she doesn't know Nadia."
+  },
+  {
+   "id": "P40a1-c7",
+   "what": "the stacks picture description gives nobody's age (\"a man and a woman having sex against the shelves\")."
+  },
+  {
+   "id": "P40a1-c8",
+   "what": "the stacks clip is an explicit (_t5) spot on a once-a-day repeat at pool 2; C1280 says explicit repeat 4."
+  },
+  {
+   "id": "P40a1-c9",
+   "what": "walk_cross_seats is someone walking in on her, declared a moment alone with her body on the card's Does, yet the moment has no line on her body and no picture of her after he's seen (walk-ins.md 'When someone walks in on her' step 2)."
+  }
+ ]
+}

@@ -1,0 +1,26 @@
+{
+ "verdicts": [
+  {
+   "row": "places#2",
+   "screen": "home_kitchen",
+   "verdict": "PASS",
+   "line": "Nobody's here. The fridge hums.",
+   "why": "empty-room variant now shows whenever Laura, Mark and Ryan are all absent (7_final_game.toml:805); P02r6-c1 cleared"
+  },
+  {
+   "row": "places#2",
+   "screen": "home_living_room",
+   "verdict": "PASS",
+   "line": "Nobody's here. The TV's off, and the armchair still has the shape of him.",
+   "why": "variant on all three absent (7_final_game.toml:819); cleared"
+  },
+  {
+   "row": "places#2",
+   "screen": "home_ryans_room",
+   "verdict": "PASS",
+   "line": "Ryan's not here. His bed's unmade.",
+   "why": "variant on npc_ryan absent (7_final_game.toml:853); cleared"
+  }
+ ],
+ "causes": []
+}

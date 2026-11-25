@@ -1,0 +1,75 @@
+{
+ "verdicts": [
+  {
+   "row": "B10",
+   "screen": "rep_table.listen",
+   "verdict": "PASS",
+   "line": "You keep very still, listening. The back of your neck prickles.",
+   "why": "no claim she's eating any more; the listeners are unnamed; Hale/Nadia only behind met_hale (met_hale and met_nadia set together on psych_first's Done, where Nadia names herself on every path)"
+  },
+  {
+   "row": "B4",
+   "screen": "rep_table.listen",
+   "verdict": "PASS",
+   "line": "You keep very still, listening. The back of your neck prickles.",
+   "why": "a stage-0 reaction on her body: she freezes, her neck prickles; no act chosen"
+  },
+  {
+   "row": "B8",
+   "screen": "rep_table.listen",
+   "verdict": "PASS",
+   "line": "four second-years splitting a pizza",
+   "why": "no garment, no number on screen"
+  },
+  {
+   "row": "C460",
+   "screen": "rep_table.listen",
+   "verdict": "PASS",
+   "line": "You keep very still, listening. The back of your neck prickles.",
+   "why": "no cooldown line any more (no show_when_blocked); every line true 11:00-13:59 weekdays on every visit"
+  },
+  {
+   "row": "C461",
+   "screen": "rep_table.listen",
+   "verdict": "PASS",
+   "line": "The table behind you is four second-years splitting a pizza",
+   "why": "texture that can't clash"
+  },
+  {
+   "row": "C914",
+   "screen": "rep_table.listen",
+   "verdict": "PASS",
+   "line": "max_triggers_per_day = 1, no show_when_blocked",
+   "why": "the row no longer shows hours when the daily count shut it: it is gone (clock.md rule 10, LO 2026-11-24)"
+  },
+  {
+   "row": "C927",
+   "screen": "rep_table.listen",
+   "verdict": "PASS",
+   "line": "time_progression_minutes = 15",
+   "why": "exit time set"
+  },
+  {
+   "row": "C931",
+   "screen": "rep_table.listen",
+   "verdict": "PASS",
+   "line": "end_time = \"14:00\"",
+   "why": "end exclusive, last start 13:59, inside cafeteria hours; no line names the time"
+  },
+  {
+   "row": "L106",
+   "screen": "rep_table.listen",
+   "verdict": "PASS",
+   "line": "Nobody at the table looks your way.",
+   "why": "no named person claimed present"
+  },
+  {
+   "row": "L167",
+   "screen": "rep_table.listen",
+   "verdict": "PASS",
+   "line": "one row, weekdays 11:00-14:00",
+   "why": "one row; a daily count, so no show_when_blocked (rule 10)"
+  }
+ ],
+ "causes": []
+}

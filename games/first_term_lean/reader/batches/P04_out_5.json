@@ -1,0 +1,12 @@
+{
+ "verdicts": [
+  {
+   "row": "places#6",
+   "screen": "campus_theatre",
+   "verdict": "PASS",
+   "line": "Practise on the empty stage \u00b7 Sit in the empty seats \u00b7 Sit at the back of drama \u00b7 Sit in on the rehearsal",
+   "why": "Every open hour has something to do alone. Cross away (Mon/Wed, Tue/Thu 9-11 and 13-21, Fri 9-14 and 18-21): Practise and Sit in the empty seats, 2 a day each. Tue/Thu 11-13: the back row, met or unmet (clears P04r10-c1). Tue/Thu/Fri 14-18: the rehearsal. After all four capped uses in a day the menu is empty while Cross is away, the same as every capped row that hides once used (clock.md rule 10, LO's 11-24 call); clears P04r10-c2."
+  }
+ ],
+ "causes": []
+}

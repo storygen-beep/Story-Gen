@@ -1,0 +1,19 @@
+{
+ "verdicts": [
+  {
+   "row": "C952",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "Money ($) · Corruption Good Girl 0-19 · Grades 50 (C)",
+   "why": "sidebar starts money 0 (PLAN 'She starts at $0'), meters 0-100 in stages of 20, grades 50 = C; no other number shown"
+  },
+  {
+   "row": "meters#8",
+   "screen": "*",
+   "verdict": "N/A",
+   "line": "",
+   "why": "release 1 moves no meter; the sidebar shows no lock and the Quests page has no meter storyline yet, so step 8 has nothing to read on these screens"
+  }
+ ],
+ "causes": []
+}

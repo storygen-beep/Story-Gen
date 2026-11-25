@@ -1,0 +1,189 @@
+{
+ "verdicts": [
+  {
+   "row": "C1166",
+   "screen": "loop_eat.do",
+   "verdict": "N/A",
+   "line": "You eat standing at the counter: toast, whatever's in the fridge, coffee from the pot.",
+   "why": "not the opening, and she doesn't dress here",
+   "cause": null
+  },
+  {
+   "row": "C1177",
+   "screen": "loop_eat.do",
+   "verdict": "N/A",
+   "line": "You eat standing at the counter: toast, whatever's in the fridge, coffee from the pot.",
+   "why": "no garment or exposure on the screen",
+   "cause": null
+  },
+  {
+   "row": "C1197",
+   "screen": "loop_eat.do",
+   "verdict": "N/A",
+   "line": "You eat standing at the counter: toast, whatever's in the fridge, coffee from the pot.",
+   "why": "no changing here",
+   "cause": null
+  },
+  {
+   "row": "C1207",
+   "screen": "loop_eat.do",
+   "verdict": "N/A",
+   "line": "You eat standing at the counter: toast, whatever's in the fridge, coffee from the pot.",
+   "why": "not the wardrobe screen",
+   "cause": null
+  },
+  {
+   "row": "C719",
+   "screen": "loop_eat.do",
+   "verdict": "N/A",
+   "line": "\"Eat something\" / \"Done\"",
+   "why": "no dressing button; Done spends the meal (energy +15, meals_today +1)",
+   "cause": null
+  },
+  {
+   "row": "C889",
+   "screen": "loop_eat.do",
+   "verdict": "PASS",
+   "line": "\"Eat something\" / \"Done\"",
+   "why": "labels name no clock time and no duration; the spend sits in the costs",
+   "cause": null
+  },
+  {
+   "row": "C892",
+   "screen": "loop_eat.do",
+   "verdict": "PASS",
+   "line": "You eat standing at the counter: toast, whatever's in the fridge, coffee from the pot.",
+   "why": "no hour in the act",
+   "cause": null
+  },
+  {
+   "row": "C897",
+   "screen": "loop_eat.do",
+   "verdict": "PASS",
+   "line": "\"Eat something\" / \"Done\"",
+   "why": "the only time here is the act's own, not a per-room charge",
+   "cause": null
+  },
+  {
+   "row": "C900",
+   "screen": "loop_eat.do",
+   "verdict": "PASS",
+   "line": "You eat standing at the counter: toast, whatever's in the fridge, coffee from the pot.",
+   "why": "no line says what time it is",
+   "cause": null
+  },
+  {
+   "row": "C902",
+   "screen": "loop_eat.do",
+   "verdict": "PASS",
+   "line": "You eat standing at the counter: toast, whatever's in the fridge, coffee from the pot.",
+   "why": "true at the last minute it can show; it names no time",
+   "cause": null
+  },
+  {
+   "row": "C903",
+   "screen": "loop_eat.do",
+   "verdict": "PASS",
+   "line": "You eat standing at the counter: toast, whatever's in the fridge, coffee from the pot.",
+   "why": "names no weekday",
+   "cause": null
+  },
+  {
+   "row": "C906",
+   "screen": "loop_eat.do",
+   "verdict": "PASS",
+   "line": "\"Eat something\" / \"Done\"",
+   "why": "no 'till X' anywhere",
+   "cause": null
+  },
+  {
+   "row": "C910",
+   "screen": "loop_eat.do",
+   "verdict": "PASS",
+   "line": "\"Eat something\" / \"Done\"",
+   "why": "buttons say no time and no energy, and this act costs no money",
+   "cause": null
+  },
+  {
+   "row": "C913",
+   "screen": "loop_eat.do",
+   "verdict": "PASS",
+   "line": "locked_text \"you're not hungry right now.\"",
+   "why": "Eat has no hours; shut by meals_today it greys with a true reason",
+   "cause": null
+  },
+  {
+   "row": "C914",
+   "screen": "loop_eat.do",
+   "verdict": "PASS",
+   "line": "locked_text \"you're not hungry right now.\"",
+   "why": "no hours printed; the reason is the meal count",
+   "cause": null
+  },
+  {
+   "row": "C916",
+   "screen": "loop_eat.do",
+   "verdict": "N/A",
+   "line": "\"Eat something\" / \"Done\"",
+   "why": "Eat has no hours",
+   "cause": null
+  },
+  {
+   "row": "C920",
+   "screen": "loop_eat.do",
+   "verdict": "PASS",
+   "line": "\"Done\" (20 min) back to the Kitchen",
+   "why": "the 20 minutes are the meal, and Done stays in the Kitchen; no hop is charged",
+   "cause": null
+  },
+  {
+   "row": "C924",
+   "screen": "loop_eat.do",
+   "verdict": "PASS",
+   "line": "\"Eat something\" / \"Done\"",
+   "why": "travel cost stays on the moves between areas, not here",
+   "cause": null
+  },
+  {
+   "row": "C926",
+   "screen": "loop_eat.do",
+   "verdict": "PASS",
+   "line": "\"Eat something\" / \"Done\"",
+   "why": "the clock moves only by the choice's minutes",
+   "cause": null
+  },
+  {
+   "row": "C928",
+   "screen": "loop_eat.do",
+   "verdict": "PASS",
+   "line": "You eat standing at the counter: toast, whatever's in the fridge, coffee from the pot.",
+   "why": "no clock printed in the prose",
+   "cause": null
+  },
+  {
+   "row": "C929",
+   "screen": "loop_eat.do",
+   "verdict": "PASS",
+   "line": "\"Eat something\" / \"Done\"",
+   "why": "no activity time on the label",
+   "cause": null
+  },
+  {
+   "row": "C930",
+   "screen": "loop_eat.do",
+   "verdict": "N/A",
+   "line": "\"Eat something\" / \"Done\"",
+   "why": "Eat is not windowed",
+   "cause": null
+  },
+  {
+   "row": "clock#10",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "loop_shower: max_triggers_per_day 2, show_when_blocked, no time_of_day in its conditions",
+   "why": "loop_sleep has a window and no count; loop_shower and loop_eat have a count and no clock window, so their grey lines (\"you've showered enough for one day.\", \"you're not hungry right now.\") are true",
+   "cause": null
+  }
+ ],
+ "causes": []
+}

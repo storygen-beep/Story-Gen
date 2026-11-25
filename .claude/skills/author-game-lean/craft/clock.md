@@ -73,6 +73,7 @@ Each rule is marked **measured** or **LO's choice**.
 7. **A repeatable names a weekday only where a weekday condition makes it true** (C903): "Saturdays" inside a Saturday group is fine; "See you Monday" on a screen any day reaches is not. *LO's choice;* CoT names a weekday 1.43 times per 10,000 words.
 8. **The clock repeats** (C890): a weekly bill, a weekly count, not a deadline. *LO's choice, stated.*
 9. **Different hours on different days are one row with a group** (L167): never one row per day kind. Out of hours it greys once, with `show_when_blocked` and a `cooldown_message` that names the full hours. *The failure:* P10's six café rows, and the weekday row greyed beside the live weekend one, so each button showed twice.
+10. **A row with a clock window and a daily count does not set `show_when_blocked`: it hides whenever it can't be used,** out of hours as well as after the day's count is spent. With `show_when_blocked`, the engine greys a count-spent row with the same `cooldown_message` it uses out of hours (`v2.py:6724-6727`), so a lunch row says "Lunch is served 11am to 2pm" at 12:30, which is false. *LO's choice* (LO, 2026-11-24: "I say no text change just button completely gone", then "First one").
 
 ## Worked example
 
@@ -81,7 +82,7 @@ Roles: the café owner. LO approved these words, with the name swapped for a rol
 **Café**
 > A narrow café across from campus: six tables, a chalkboard menu, a coffee machine that screams. Students camp here with laptops. A sign by the door says it's open between 7am and 9pm.
 
-Presence, from his rows: "The owner's behind the counter, wiping the same spot."
+Who is there: the owner's face, from his rows; no line for him in the room text (`craft/places.md` rule 2). With nobody behind the counter while it's open: "Nobody's behind the counter."
 
 Buttons: Buy a coffee ($3) · Ask about the Help Wanted sign (once) · Walk to the quad. The coffee still takes 10 minutes and the walk is free (a hop inside the area, C920); the labels say neither.
 
@@ -110,6 +111,20 @@ items = [
 
 Before she's hired the flag shuts it and it hides; once hired, only the clock can shut it, so it greys. Its sheet row: "weekdays 07:00–21:00 / weekends 10:00–21:00".
 
+**Hours and a count: hidden, not greyed** (rule 10). Roles: the cafeteria. The hours are filler.
+- Button: "Buy lunch ($4)", 11am to 2pm, once a day. Outside those hours, and after she has eaten there today, the button is gone; nothing greys and no line explains it.
+
+```toml
+[canvases.trigger]
+max_triggers_per_day = 1
+# no show_when_blocked: a greyed row would show the hours line at 12:30 after lunch
+
+[canvases.trigger.conditions]
+version = "1.0"
+logic = "AND"
+items = [{ type = "time_of_day", start_time = "11:00", end_time = "14:00" }]
+```
+
 ## Not this
 
 - "It's nine in the morning and the café is quiet." A repeatable screen shows at any minute of its window (C900, C902).
@@ -117,3 +132,4 @@ Before she's hired the flag shuts it and it hides; once hired, only the clock ca
 - A label that prints its own time or energy: "Eat something (20 min, +15 energy)" (C910, C929; LO, 2026-11-24). The clock and the energy bar show the spend.
 - A shut place that just disappears. It stays, dimmed, with when it opens (C913, C930).
 - One row per kind of day for the same activity: a weekday "Work an hour" greyed on Saturday beside the live Saturday one (L167). One row, a group.
+- A row with hours and `max_triggers_per_day` that sets `show_when_blocked`: after lunch, at 12:30, it greys with "Lunch is served 11am to 2pm" (rule 10; LO, 2026-11-24).

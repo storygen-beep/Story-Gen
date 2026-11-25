@@ -1,0 +1,45 @@
+{
+ "verdicts": [
+  {
+   "row": "clock#1",
+   "screen": "near_cafe",
+   "verdict": "PASS",
+   "line": "\"Work an hour\"",
+   "why": "clock.md's own worked example uses this label: 'Work an hour' (60 minutes and 10 energy in the costs; 'the label says neither'); the files rule it time-free",
+   "cause": null
+  },
+  {
+   "row": "places#2",
+   "screen": "near_cafe",
+   "verdict": "PASS",
+   "line": "Nobody's behind the counter. The machine hisses to itself.",
+   "why": "the empty windows (Sat/Sun 07-10, Sun 20-21) now say why, in all three stages (before hire, before first shift, after)",
+   "cause": null
+  },
+  {
+   "row": "places#4",
+   "screen": "near_cafe",
+   "verdict": "PASS",
+   "line": "\"Buy a coffee ($3)\" / \"Work an hour\" / \"Sit by the window\"",
+   "why": "short labels; money on the spend; 'Work an hour' is the worked example's own label",
+   "cause": null
+  },
+  {
+   "row": "places#6",
+   "screen": "near_cafe",
+   "verdict": "PASS",
+   "line": "\"Sit by the window\"",
+   "why": "cafe_window has no conditions, so she always has one thing to do alone while the Café is open",
+   "cause": null
+  },
+  {
+   "row": "clock#10",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "zoe_party: max 1, weekday/time group, no show_when_blocked",
+   "why": "zoe_party now hides; body_coffee has a count and no clock window; the café work rows have windows and no daily count",
+   "cause": null
+  }
+ ],
+ "causes": []
+}

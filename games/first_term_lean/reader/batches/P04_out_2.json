@@ -1,0 +1,117 @@
+{
+ "verdicts": [
+  {
+   "row": "C795",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "\"The library: long tables, quiet floors, and the desk by the door.\"",
+   "why": "no campus room has a line per person; people show as faces"
+  },
+  {
+   "row": "C804",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "\"The cafeteria: trays, long tables, the lunch counter.\"",
+   "why": "faces only; no per-person room line on any campus place"
+  },
+  {
+   "row": "places#2",
+   "screen": "campus_offices",
+   "verdict": "FAIL",
+   "line": "\"The faculty corridor: a row of office doors with name plates, and the dean's office at the end.\"",
+   "why": "open weekdays 8-6, but Hale, Pratt and Walsh are in only Mon/Wed 1-5 and Tue/Thu 2-4; the rest of the time nobody's there and nothing says so",
+   "cause": "P04r6-c1"
+  },
+  {
+   "row": "places#2",
+   "screen": "campus_quad",
+   "verdict": "PASS",
+   "line": "\"The quad. Paths cut across the grass to every building on campus.\"",
+   "why": "a thoroughfare; the Sunday board names Brooke as a name on a list, not as present"
+  },
+  {
+   "row": "places#2",
+   "screen": "campus_bathroom",
+   "verdict": "PASS",
+   "line": "\"three stalls and one long mirror\"",
+   "why": "no one named; nobody is expected in a bathroom"
+  },
+  {
+   "row": "C804",
+   "screen": "campus_cafeteria",
+   "verdict": "PASS",
+   "line": "\"The cafeteria: trays, long tables, the lunch counter.\"",
+   "why": "no per-person line; Rosa (and the lunch crowd's people) are faces"
+  },
+  {
+   "row": "places#2",
+   "screen": "campus_cafeteria",
+   "verdict": "PASS",
+   "line": "\"...the lunch counter. A sign says it's open weekdays from 8am to 4pm.\"",
+   "why": "Rosa's rows (weekdays 8-16) cover every open minute; no one named in the text"
+  },
+  {
+   "row": "C804",
+   "screen": "campus_lecture_hall",
+   "verdict": "PASS",
+   "line": "\"Most of your classes are here.\"",
+   "why": "no per-person line; lecturers are faces"
+  },
+  {
+   "row": "places#2",
+   "screen": "campus_lecture_hall",
+   "verdict": "FAIL",
+   "line": "\"The lecture hall: rows of seats rising to the back, a screen, a lectern at the bottom. Most of your classes are here.\"",
+   "why": "open weekdays 8-6; empty all Friday and most afternoons (Hale/Pratt/Walsh/Nadia/Brooke only 9-1 Mon-Thu); nothing says nobody's lecturing",
+   "cause": "P04r6-c1"
+  },
+  {
+   "row": "C804",
+   "screen": "campus_library",
+   "verdict": "PASS",
+   "line": "\"...and the desk by the door.\"",
+   "why": "no per-person line; Holt and Nadia are faces"
+  },
+  {
+   "row": "places#2",
+   "screen": "campus_library",
+   "verdict": "FAIL",
+   "line": "\"The library: long tables, quiet floors, and the desk by the door. A sign on the door says it's open from 8am to 10pm.\"",
+   "why": "open 8-10 every day; nobody at all weekdays 6-10pm, Saturday 8-10am and 4-10pm, all Sunday (Holt 8-16, Sat 10-16; Nadia 14-18); nothing says the desk is empty",
+   "cause": "P04r6-c1"
+  },
+  {
+   "row": "C804",
+   "screen": "campus_theatre",
+   "verdict": "PASS",
+   "line": "\"The theatre: a black stage, rows of folding seats, and the lights rigged overhead.\"",
+   "why": "no per-person line; Cross and Brooke are faces"
+  },
+  {
+   "row": "places#2",
+   "screen": "campus_theatre",
+   "verdict": "FAIL",
+   "line": "\"The theatre: a black stage, rows of folding seats, and the lights rigged overhead.\"",
+   "why": "open weekdays 9-9; empty all Monday and Wednesday and every evening after 6 (Cross/Brooke Tue/Thu 11-1, 2-6, Fri 2-6); the room text never says so (stage_practise's 'The seats are empty' is a button's beat, not the room)",
+   "cause": "P04r6-c1"
+  },
+  {
+   "row": "places#6",
+   "screen": "campus_theatre",
+   "verdict": "FAIL",
+   "line": "locked_text: \"someone has the stage.\"",
+   "why": "while Cross is in (Tue/Thu 11:30am-1pm and 2-6pm, Fri 2-6pm) stage_practise greys and nothing else is hers alone; NOTES holds this for P40 with no waiver",
+   "cause": "P04r6-c2"
+  }
+ ],
+ "causes": [
+  {
+   "id": "P04r6-c1",
+   "what": "Campus rooms (lecture hall, library, theatre, faculty offices) are open for long stretches with nobody there, and the room text never says so (places.md rule 2)"
+  },
+  {
+   "id": "P04r6-c2",
+   "what": "The theatre has nothing she can do alone while Cross has the stage (stage_practise greys 'someone has the stage.')"
+  }
+ ]
+}

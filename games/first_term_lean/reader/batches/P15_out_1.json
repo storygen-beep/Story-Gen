@@ -1,32 +1,285 @@
 {
  "verdicts": [
-  {"row": "B10", "screen": "psych_first.lecture", "verdict": "PASS", "line": "He looks over the rows until he finds you ... At the end, the girl catches you on the way out.", "why": "True on all three paths, front row included (rows rise to the back, lectern at the bottom: scanning over them finds her anywhere). Hale and Nadia there Mon/Wed 09-11, trigger 09:00-09:29; 'already at the lectern' true at 09:00 and 09:29; one-time, so no second visit."},
-  {"row": "B10", "screen": "psych_first.seat", "verdict": "PASS", "line": "A dark-haired girl in the third row ... \"Sit here, freshman.\" (Stranger)", "why": "Nadia's row puts her there 09:00-11:00 Mon/Wed; 'freshman' true on day one or any later first lecture of her first term; unnamed until she names herself."},
-  {"row": "B10", "screen": "stats_first.class", "verdict": "PASS", "line": "A man in a grey cardigan is already filling the whiteboard ... Miss @player?", "why": "Pratt's row 11:00-13:00 Mon/Wed; 'already' true at 11:00, at 11:29 and straight after psychology's Done."},
-  {"row": "B8", "screen": "psych_first.lecture", "verdict": "PASS", "line": "A man in his late thirties ... You cross your legs ... press your thighs together under the desk.", "why": "Hale is 39 in PLAN; no garment of hers named; Done's 120 min is the 2-hour class."},
-  {"row": "B8", "screen": "psych_first.seat", "verdict": "PASS", "line": "A dark-haired girl in the third row moves her bag off the seat", "why": "No number, no garment of hers."},
-  {"row": "B8", "screen": "stats_first.class", "verdict": "PASS", "line": "A man in a grey cardigan", "why": "His garment, texture; no garment of hers, no number against PLAN."},
-  {"row": "C1238", "screen": "psych_first.lecture", "verdict": "PASS", "line": "Her view from her seat (she is 18, out of frame): a man of 39 ... looking across the rows at the camera.", "why": "Fixed: 'across the rows' holds from the front row and from the third; matches 'He looks over the rows until he finds you' on every path."},
-  {"row": "C460", "screen": "psych_first.lecture", "verdict": "PASS", "line": "Behind you, the girl sighs ... the girl catches you on the way out.", "why": "Every claim true on each path and at both ends of the window; Nadia's past ('Last spring it was me.') fits her PLAN entry."},
-  {"row": "C460", "screen": "psych_first.seat", "verdict": "PASS", "line": "Sit here, freshman. Not the front. Trust me.", "why": "Nadia there every trigger minute; she is a first-term student."},
-  {"row": "C460", "screen": "stats_first.class", "verdict": "PASS", "line": "He turns round long enough to read names off a sheet.", "why": "True at every minute of 11:00-11:29; she is on his list."},
-  {"row": "C461", "screen": "psych_first.lecture", "verdict": "PASS", "line": "Some of you will surprise me. Won't you, young lady?", "why": "Fits Hale's cast entry (wants to see how far she'll go)."},
-  {"row": "C461", "screen": "psych_first.seat", "verdict": "PASS", "line": "Not the front. Trust me.", "why": "Fits Nadia's entry: she knows Hale's history."},
-  {"row": "C461", "screen": "stats_first.class", "verdict": "PASS", "line": "I take attendance, and I notice who isn't here. / Miss @player?", "why": "Fits PLAN: Pratt notices if she's missing; formal roll-call address fits his manner."},
-  {"row": "C593", "screen": "psych_first.lecture", "verdict": "PASS", "line": "Won't you, young lady?", "why": "Fixed: Hale's 'young lady' is used by nobody else in 7_final_game.toml (grep: only line 4123); Nadia's 'freshman' is hers alone (only line 4081), no longer Chris's 'new girl'."},
-  {"row": "C593", "screen": "stats_first.class", "verdict": "PASS", "line": "Miss @player?", "why": "Fixed: 'Miss' appears nowhere else in the built TOML (grep: only line 4161); distinct from Laura's plain @player."},
-  {"row": "C639", "screen": "stats_first.class", "verdict": "FAIL", "line": "Here. · Present. · Say nothing", "why": "Note row. 'Here.' and 'Present.' are one grade with the same outcome (no flag, same text); two grades, not three."},
-  {"row": "C889", "screen": "psych_first.lecture", "verdict": "FAIL", "line": "Done", "why": "Note row. Spends 120 minutes and states no duration."},
-  {"row": "C892", "screen": "psych_first.lecture", "verdict": "FAIL", "line": "A sign by the door says it's open weekdays from 8am to 6pm.", "why": "Note row. The lecture's own hours (Mon/Wed 9-11) are on no door or sign."},
-  {"row": "C910", "screen": "psych_first.lecture", "verdict": "FAIL", "line": "Done", "why": "Note row. Spends 120 minutes and doesn't say how much."},
-  {"row": "C927", "screen": "psych_first.lecture", "verdict": "PASS", "line": "time_progression_minutes = 0 / 120", "why": "Every exit sets its time; no 3-minute default."},
-  {"row": "C929", "screen": "psych_first.lecture", "verdict": "FAIL", "line": "Done", "why": "Note row. The activity's time is tagged nowhere, and the label doesn't carry it."},
-  {"row": "C931", "screen": "psych_first.lecture", "verdict": "PASS", "line": "time_of_day 09:00-09:30", "why": "End exclusive: last start 09:29, inside Hale's and Nadia's rows; matches the sheet."},
-  {"row": "C953", "screen": "psych_first.lecture", "verdict": "FAIL", "line": "Done", "why": "Note row. The 2-hour cost isn't on the label."},
-  {"row": "L106", "screen": "psych_first.lecture", "verdict": "PASS", "line": "A man in his late thirties is already at the lectern ... the girl catches you on the way out.", "why": "Hale's and Nadia's rows put them in the Lecture Hall at every trigger minute."},
-  {"row": "L106", "screen": "psych_first.seat", "verdict": "PASS", "line": "A dark-haired girl in the third row", "why": "Nadia's row: Lecture Hall Mon/Wed 09-11."},
-  {"row": "L106", "screen": "stats_first.class", "verdict": "PASS", "line": "A man in a grey cardigan is already filling the whiteboard", "why": "Pratt's row: Lecture Hall Mon/Wed 11-13."},
-  {"row": "L167", "screen": "psych_first.lecture", "verdict": "PASS", "line": "weekday [0, 2] + time_of_day 09:00-09:30", "why": "One trigger covers both days with the same hours; no row per day kind."}
+  {
+   "row": "B10",
+   "screen": "psych_first.lecture",
+   "verdict": "PASS",
+   "line": "A man in his late thirties is already at the lectern ... At the end, the girl catches you on the way out.",
+   "why": "Brooke (lecture hall Mon/Wed 9-11) is in the half-full hall unnamed; every line names only Hale and Nadia, both gated present by the trigger, and \"the girl\" is Nadia. True on every path and minute of 09:00-09:30."
+  },
+  {
+   "row": "B10",
+   "screen": "psych_first.seat",
+   "verdict": "PASS",
+   "line": "The lecture hall is half full and loud. A dark-haired girl in the third row moves her bag off the seat beside her",
+   "why": "Brooke (Mon/Wed 9-11) is part of the \"half full\" hall, unnamed; the girl is Nadia, shown as Stranger until she names herself; both Hale and Nadia are gated present."
+  },
+  {
+   "row": "B8",
+   "screen": "psych_first.lecture",
+   "verdict": "PASS",
+   "line": "A man in his late thirties is already at the lectern ... At the end, the girl catches you on the way out.",
+   "why": "No garment named (\"You cross your legs ... press your thighs together\" names the body only); \"late thirties\" agrees with Hale, 39."
+  },
+  {
+   "row": "B8",
+   "screen": "psych_first.seat",
+   "verdict": "PASS",
+   "line": "The lecture hall is half full and loud. A dark-haired girl in the third row moves her bag off the seat beside her",
+   "why": "No garment, no number."
+  },
+  {
+   "row": "C1265",
+   "screen": "psych_first.lecture",
+   "verdict": "PASS",
+   "line": "A man in his late thirties is already at the lectern ... At the end, the girl catches you on the way out.",
+   "why": "The spot is the first meeting's picture of Hale on the line that introduces him: a new moment, not a chore, door or menu."
+  },
+  {
+   "row": "C460",
+   "screen": "psych_first.lecture",
+   "verdict": "PASS",
+   "line": "A man in his late thirties is already at the lectern ... At the end, the girl catches you on the way out.",
+   "why": "True with Brooke present: \"half full\" holds, nobody new is named."
+  },
+  {
+   "row": "C460",
+   "screen": "psych_first.seat",
+   "verdict": "PASS",
+   "line": "The lecture hall is half full and loud. A dark-haired girl in the third row moves her bag off the seat beside her",
+   "why": "Brooke (Mon/Wed 9-11) is part of the \"half full\" hall, unnamed; the girl is Nadia, shown as Stranger until she names herself; both Hale and Nadia are gated present."
+  },
+  {
+   "row": "C461",
+   "screen": "psych_first.lecture",
+   "verdict": "PASS",
+   "line": "A man in his late thirties is already at the lectern ... At the end, the girl catches you on the way out.",
+   "why": "Texture only (half full, loud, the coffee); dialogue fits Hale's and Nadia's cast entries."
+  },
+  {
+   "row": "C461",
+   "screen": "psych_first.seat",
+   "verdict": "PASS",
+   "line": "The lecture hall is half full and loud. A dark-haired girl in the third row moves her bag off the seat beside her",
+   "why": "Texture that cannot clash; Nadia's line fits her entry."
+  },
+  {
+   "row": "C889",
+   "screen": "psych_first.lecture",
+   "verdict": "PASS",
+   "line": "A man in his late thirties is already at the lectern ... At the end, the girl catches you on the way out.",
+   "why": "\"Done\": no clock time, no duration."
+  },
+  {
+   "row": "C889",
+   "screen": "stats_first.after",
+   "verdict": "PASS",
+   "line": "Done",
+   "why": "Labels \"Here.\" / \"Present.\" / \"Say nothing\" / \"Done\" carry no time, energy, duration or clock time."
+  },
+  {
+   "row": "C892",
+   "screen": "psych_first.lecture",
+   "verdict": "PASS",
+   "line": "A man in his late thirties is already at the lectern ... At the end, the girl catches you on the way out.",
+   "why": "No hour in the act."
+  },
+  {
+   "row": "C897",
+   "screen": "psych_first.lecture",
+   "verdict": "PASS",
+   "line": "A man in his late thirties is already at the lectern ... At the end, the girl catches you on the way out.",
+   "why": "No time on rooms."
+  },
+  {
+   "row": "C900",
+   "screen": "psych_first.lecture",
+   "verdict": "PASS",
+   "line": "A man in his late thirties is already at the lectern ... At the end, the girl catches you on the way out.",
+   "why": "No time said in the beat."
+  },
+  {
+   "row": "C902",
+   "screen": "psych_first.lecture",
+   "verdict": "PASS",
+   "line": "A man in his late thirties is already at the lectern ... At the end, the girl catches you on the way out.",
+   "why": "True at 09:29 too."
+  },
+  {
+   "row": "C903",
+   "screen": "psych_first.lecture",
+   "verdict": "PASS",
+   "line": "A man in his late thirties is already at the lectern ... At the end, the girl catches you on the way out.",
+   "why": "No weekday named."
+  },
+  {
+   "row": "C906",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "Done",
+   "why": "No label in psych_first or stats_first names a clock time (\"till X\")."
+  },
+  {
+   "row": "C906",
+   "screen": "psych_first.lecture",
+   "verdict": "PASS",
+   "line": "A man in his late thirties is already at the lectern ... At the end, the girl catches you on the way out.",
+   "why": "No \"till X\"."
+  },
+  {
+   "row": "C910",
+   "screen": "psych_first.lecture",
+   "verdict": "PASS",
+   "line": "A man in his late thirties is already at the lectern ... At the end, the girl catches you on the way out.",
+   "why": "Labels say no time and no energy; the meeting costs none."
+  },
+  {
+   "row": "C910",
+   "screen": "stats_first.after",
+   "verdict": "PASS",
+   "line": "Done",
+   "why": "Labels \"Here.\" / \"Present.\" / \"Say nothing\" / \"Done\" carry no time, energy, duration or clock time."
+  },
+  {
+   "row": "C913",
+   "screen": "psych_first.lecture",
+   "verdict": "PASS",
+   "line": "A man in his late thirties is already at the lectern ... At the end, the girl catches you on the way out.",
+   "why": "A one-time scene that plays by itself on entry (non-repeatable manual canvas auto-fires, setup.selectAutoFireCanvasForLocation, v2.py:5916-5933): an event that happens to her, so hidden when shut is right; the repeatable class row (P09) carries the hours."
+  },
+  {
+   "row": "C914",
+   "screen": "psych_first.lecture",
+   "verdict": "PASS",
+   "line": "A man in his late thirties is already at the lectern ... At the end, the girl catches you on the way out.",
+   "why": "Shows no hours."
+  },
+  {
+   "row": "C916",
+   "screen": "psych_first.lecture",
+   "verdict": "PASS",
+   "line": "A man in his late thirties is already at the lectern ... At the end, the girl catches you on the way out.",
+   "why": "An event that happens to her, hidden when shut."
+  },
+  {
+   "row": "C920",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "Done",
+   "why": "Neither canvas moves her: every Done returns to the Lecture Hall."
+  },
+  {
+   "row": "C920",
+   "screen": "psych_first.lecture",
+   "verdict": "PASS",
+   "line": "A man in his late thirties is already at the lectern ... At the end, the girl catches you on the way out.",
+   "why": "No hop; Done returns to the Lecture Hall."
+  },
+  {
+   "row": "C924",
+   "screen": "psych_first.lecture",
+   "verdict": "PASS",
+   "line": "A man in his late thirties is already at the lectern ... At the end, the girl catches you on the way out.",
+   "why": "No travel."
+  },
+  {
+   "row": "C926",
+   "screen": "psych_first.lecture",
+   "verdict": "PASS",
+   "line": "A man in his late thirties is already at the lectern ... At the end, the girl catches you on the way out.",
+   "why": "Clock moves by minutes only."
+  },
+  {
+   "row": "C927",
+   "screen": "psych_first.lecture",
+   "verdict": "PASS",
+   "line": "A man in his late thirties is already at the lectern ... At the end, the girl catches you on the way out.",
+   "why": "Done carries 120 minutes."
+  },
+  {
+   "row": "C928",
+   "screen": "psych_first.lecture",
+   "verdict": "PASS",
+   "line": "A man in his late thirties is already at the lectern ... At the end, the girl catches you on the way out.",
+   "why": "No clock in prose."
+  },
+  {
+   "row": "C929",
+   "screen": "psych_first.lecture",
+   "verdict": "PASS",
+   "line": "A man in his late thirties is already at the lectern ... At the end, the girl catches you on the way out.",
+   "why": "No activity time on any label."
+  },
+  {
+   "row": "C929",
+   "screen": "stats_first.after",
+   "verdict": "PASS",
+   "line": "Done",
+   "why": "Labels \"Here.\" / \"Present.\" / \"Say nothing\" / \"Done\" carry no time, energy, duration or clock time."
+  },
+  {
+   "row": "C930",
+   "screen": "psych_first.lecture",
+   "verdict": "PASS",
+   "line": "A man in his late thirties is already at the lectern ... At the end, the girl catches you on the way out.",
+   "why": "Not windowed work; a one-time event."
+  },
+  {
+   "row": "C931",
+   "screen": "psych_first.lecture",
+   "verdict": "PASS",
+   "line": "A man in his late thirties is already at the lectern ... At the end, the girl catches you on the way out.",
+   "why": "09:00-09:30 is end-exclusive; last entry 09:29."
+  },
+  {
+   "row": "C953",
+   "screen": "psych_first.lecture",
+   "verdict": "PASS",
+   "line": "A man in his late thirties is already at the lectern ... At the end, the girl catches you on the way out.",
+   "why": "No label carries time or energy; none is a spend."
+  },
+  {
+   "row": "C953",
+   "screen": "psych_first.seat",
+   "verdict": "PASS",
+   "line": "The lecture hall is half full and loud. A dark-haired girl in the third row moves her bag off the seat beside her",
+   "why": "\"Sit with her\" / \"Take the front row anyway\" / \"Ask her why\": no time, energy or money."
+  },
+  {
+   "row": "C953",
+   "screen": "stats_first.after",
+   "verdict": "PASS",
+   "line": "Done",
+   "why": "Labels \"Here.\" / \"Present.\" / \"Say nothing\" / \"Done\" carry no time, energy, duration or clock time."
+  },
+  {
+   "row": "C953",
+   "screen": "stats_first.class",
+   "verdict": "PASS",
+   "line": "Here. / Present. / Say nothing",
+   "why": "Labels \"Here.\" / \"Present.\" / \"Say nothing\" / \"Done\" carry no time, energy, duration or clock time."
+  },
+  {
+   "row": "L106",
+   "screen": "psych_first.lecture",
+   "verdict": "PASS",
+   "line": "A man in his late thirties is already at the lectern ... At the end, the girl catches you on the way out.",
+   "why": "Hale and Nadia are both in the trigger's npc_at_location items; Brooke is not claimed."
+  },
+  {
+   "row": "L106",
+   "screen": "psych_first.seat",
+   "verdict": "PASS",
+   "line": "The lecture hall is half full and loud. A dark-haired girl in the third row moves her bag off the seat beside her",
+   "why": "Brooke (Mon/Wed 9-11) is part of the \"half full\" hall, unnamed; the girl is Nadia, shown as Stranger until she names herself; both Hale and Nadia are gated present."
+  },
+  {
+   "row": "L167",
+   "screen": "psych_first.lecture",
+   "verdict": "PASS",
+   "line": "A man in his late thirties is already at the lectern ... At the end, the girl catches you on the way out.",
+   "why": "One one-time canvas, no per-day rows."
+  }
  ],
  "causes": []
 }

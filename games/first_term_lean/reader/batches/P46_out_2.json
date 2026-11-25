@@ -1,0 +1,117 @@
+{
+ "verdicts": [
+  {
+   "row": "B10",
+   "screen": "npcs.npc_brooke.stranger_name",
+   "verdict": "PASS",
+   "line": "girl with a practised smirk",
+   "why": "Rows: bathroom 8-9/13-14 weekdays, Lecture Hall Mon/Wed 9-11, Theatre Tue/Thu 11-13 and 14-18, Fri 14-18, Zoe's party Sat 21-01; unmet until mirror_meet_brooke (day 8+). A smirk is her face, not a place or prop; the mirror picture gives it ('looking at the camera in the reflection with a smirk'), and no scene contradicts it (party: 'makes sure you see her not looking at you'; drama: 'smiles like she's won something'). Unlike any other name (Zoe is the blonde-hair one)."
+  },
+  {
+   "row": "C460",
+   "screen": "npcs.npc_brooke.stranger_name",
+   "verdict": "PASS",
+   "line": "girl with a practised smirk",
+   "why": "Rows: bathroom 8-9/13-14 weekdays, Lecture Hall Mon/Wed 9-11, Theatre Tue/Thu 11-13 and 14-18, Fri 14-18, Zoe's party Sat 21-01; unmet until mirror_meet_brooke (day 8+). A smirk is her face, not a place or prop; the mirror picture gives it ('looking at the camera in the reflection with a smirk'), and no scene contradicts it (party: 'makes sure you see her not looking at you'; drama: 'smiles like she's won something'). Unlike any other name (Zoe is the blonde-hair one)."
+  },
+  {
+   "row": "B10",
+   "screen": "npcs.npc_hale.stranger_name",
+   "verdict": "PASS",
+   "line": "man with an unhurried stare",
+   "why": "Rows: Lecture Hall Mon/Wed 9-11, Faculty Offices Mon/Wed 14-17. From psych_first: 'He looks over the rows until he finds you, and keeps looking... then back to your face, unhurried.'; later lectures 'every time he looks up, it's at your row'. Tied to no place or moment; true in his office too."
+  },
+  {
+   "row": "C460",
+   "screen": "npcs.npc_hale.stranger_name",
+   "verdict": "PASS",
+   "line": "man with an unhurried stare",
+   "why": "Rows: Lecture Hall Mon/Wed 9-11, Faculty Offices Mon/Wed 14-17. From psych_first: 'He looks over the rows until he finds you, and keeps looking... then back to your face, unhurried.'; later lectures 'every time he looks up, it's at your row'. Tied to no place or moment; true in his office too."
+  },
+  {
+   "row": "B10",
+   "screen": "npcs.npc_jake.stranger_name",
+   "verdict": "PASS",
+   "line": "tall guy with an easy smile",
+   "why": "Rows: Cafeteria weekdays 12-14, Quad 14-16; unmet until quad_meet_jake (day 8+). From the meeting: 'tall, easy smile'; picture 'with a grin'. No place or moment in it, so the week-1 Cafeteria listing is true."
+  },
+  {
+   "row": "C460",
+   "screen": "npcs.npc_jake.stranger_name",
+   "verdict": "PASS",
+   "line": "tall guy with an easy smile",
+   "why": "Rows: Cafeteria weekdays 12-14, Quad 14-16; unmet until quad_meet_jake (day 8+). From the meeting: 'tall, easy smile'; picture 'with a grin'. No place or moment in it, so the week-1 Cafeteria listing is true."
+  },
+  {
+   "row": "B10",
+   "screen": "npcs.npc_tess.stranger_name",
+   "verdict": "PASS",
+   "line": "red-haired girl",
+   "why": "Rows: bathroom 8-9/13-14, Cafeteria 12-13 weekdays, party Sat 21-01; unmet until day 8+. The mirror text and picture: 'a redhead does her lashes', and mirror_repeat says 'Tess is doing Brooke's lashes', so the redhead is Tess. True in the Cafeteria and at the party; no other red-haired person."
+  },
+  {
+   "row": "C460",
+   "screen": "npcs.npc_tess.stranger_name",
+   "verdict": "PASS",
+   "line": "red-haired girl",
+   "why": "Rows: bathroom 8-9/13-14, Cafeteria 12-13 weekdays, party Sat 21-01; unmet until day 8+. The mirror text and picture: 'a redhead does her lashes', and mirror_repeat says 'Tess is doing Brooke's lashes', so the redhead is Tess. True in the Cafeteria and at the party; no other red-haired person."
+  },
+  {
+   "row": "B10",
+   "screen": "npcs.npc_zoe.stranger_name",
+   "verdict": "PASS",
+   "line": "girl with messy blonde hair",
+   "why": "Rows: Quad weekdays, Cafeteria Tue/Thu 13-14, her apartment evenings. From quad_meet_zoe: 'a mess of blonde hair'; picture 'messy blonde hair'. No more coffees or sunglasses; no scene describes her hair otherwise."
+  },
+  {
+   "row": "C460",
+   "screen": "npcs.npc_zoe.stranger_name",
+   "verdict": "PASS",
+   "line": "girl with messy blonde hair",
+   "why": "Rows: Quad weekdays, Cafeteria Tue/Thu 13-14, her apartment evenings. From quad_meet_zoe: 'a mess of blonde hair'; picture 'messy blonde hair'. No more coffees or sunglasses; no scene describes her hair otherwise."
+  },
+  {
+   "row": "B10",
+   "screen": "story_hints.Zoe",
+   "verdict": "PASS",
+   "line": "Someone on the Quad · \"A girl on the quad looks like she runs the place.\"",
+   "why": "Shown from day one, names no one. Zoe's Quad rows (Mon/Wed/Fri 13-15, Tue/Thu 14-15) are there from day one, and quad_meet_zoe has no week gate, so the claim holds on every visit. Claims no meeting. Once met_zoe is set, the step names Zoe, behind her flag."
+  },
+  {
+   "row": "C460",
+   "screen": "story_hints.Zoe",
+   "verdict": "PASS",
+   "line": "Someone on the Quad · \"A girl on the quad looks like she runs the place.\"",
+   "why": "Shown from day one, names no one. Zoe's Quad rows (Mon/Wed/Fri 13-15, Tue/Thu 14-15) are there from day one, and quad_meet_zoe has no week gate, so the claim holds on every visit. Claims no meeting. Once met_zoe is set, the step names Zoe, behind her flag."
+  },
+  {
+   "row": "B10",
+   "screen": "story_hints.Jake",
+   "verdict": "PASS",
+   "line": "The Guys on the Quad · \"A crowd of guys hangs around the quad.\"",
+   "why": "Shown from day one, names no one. Jake's Quad row weekdays 14-16 'with his friends' has no day gate, and the meeting shows 'a knot of friends by the steps', so the claim is true in week 1 too, even before the day-8 meeting."
+  },
+  {
+   "row": "C460",
+   "screen": "story_hints.Jake",
+   "verdict": "PASS",
+   "line": "The Guys on the Quad · \"A crowd of guys hangs around the quad.\"",
+   "why": "Shown from day one, names no one. Jake's Quad row weekdays 14-16 'with his friends' has no day gate, and the meeting shows 'a knot of friends by the steps', so the claim is true in week 1 too, even before the day-8 meeting."
+  },
+  {
+   "row": "B10",
+   "screen": "story_hints.Brooke",
+   "verdict": "PASS",
+   "line": "The Mirror · \"Three girls own the bathroom mirror.\"",
+   "why": "Shown from day one, names no one. Brooke, Kayla and Tess all have bathroom rows weekdays 8-9 and 13-14 with no day gate, so it's true from day one. It matches the meeting's own line, 'Three girls own the long mirror.'"
+  },
+  {
+   "row": "C460",
+   "screen": "story_hints.Brooke",
+   "verdict": "PASS",
+   "line": "The Mirror · \"Three girls own the bathroom mirror.\"",
+   "why": "Shown from day one, names no one. Brooke, Kayla and Tess all have bathroom rows weekdays 8-9 and 13-14 with no day gate, so it's true from day one. It matches the meeting's own line, 'Three girls own the long mirror.'"
+  }
+ ],
+ "causes": []
+}

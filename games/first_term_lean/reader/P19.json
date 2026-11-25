@@ -1,20 +1,20 @@
 {
  "piece": "P19",
- "pass": 2,
+ "pass": 4,
  "screens": {
   "cafeteria_meet_rosa.meet": {
    "text": "b626daf6602713a3",
-   "facts": "26f44f56ec29cb9c",
-   "facts2": "cfd7197356aa64ce",
-   "all": "5e8087446260e9d5"
+   "facts": "515715e73cf05730",
+   "facts2": "1b927de09fedcd26",
+   "all": "d4caa8c046ffd471"
   },
   "cafeteria_meet_rosa.after": {
    "text": "40b129a8944f8d9a",
-   "facts": "9255656a39c94000",
-   "facts2": "4c63342b1ee10415",
-   "all": "c71204d0e93722c5"
+   "facts": "e242f10b8347d9fd",
+   "facts2": "7407c20b0dd18e4a",
+   "all": "49ea2b2f4b7153d9"
   },
-  "*": "2acd6e3bb29f2092"
+  "*": "bd97e663ef3c384f"
  },
  "rows": {
   "B1": "5276068df1ca6fa9",
@@ -104,13 +104,15 @@
   "C639": "be0ad7093b24bc46",
   "C640": "728d95d9964ccf25",
   "C644": "f5e1d79f3251dbab",
-  "C596": "6d9bba989a2b9666",
+  "C596": "e5f7e6cf2d01613d",
   "C448": "b86596f1a02766de",
+  "L168": "444c44970dc284f2",
+  "L169": "59defccfc63b0454",
   "C1340": "b76a6583ae88c60f",
   "C769": "f6b6f78a8f2e5ed7",
   "C794": "bad76e5963432385",
-  "C795": "6c9eb17d99266791",
-  "C804": "810ef8e803cb09dd",
+  "C795": "34139e6a6914e171",
+  "C804": "5358489178bff0a4",
   "L106": "13a714429d15f3b2",
   "C776": "4141d9e5e24362c3",
   "C777": "b56360a1040688cf",
@@ -118,6 +120,7 @@
   "C758": "e158aaf055cb61d6",
   "C953": "826bf82fe26afd13",
   "C762": "40e85f1ae92f1e71",
+  "L170": "c3599cd09637a240",
   "C770": "ff9aa31c11e5d50f",
   "C771": "563e3d25c3219dd0",
   "C442": "59b8d8d24f0c7c38",
@@ -160,36 +163,36 @@
    "row": "B10",
    "screen": "cafeteria_meet_rosa.after",
    "verdict": "PASS",
-   "line": "She's already looking past you at the next tray",
-   "why": "0 minutes after meet, Rosa still there; each path's first lines follow its own answer",
+   "line": "She's already looking past you at the next tray, but she'll know your face next time.",
+   "why": "every line holds at the first and last minute and on a second visit; no person named (it fires on entry while Rosa's row has her at the counter, weekdays 8-16; Kayla and Tess 12-13, Jake 12-14, Zoe Tue/Thu 13-14 and Nadia may be in the room unnamed, and nothing says the room is empty; 'the next tray' fits a lunch crowd)",
    "cause": null,
    "note": false,
    "screen_hash": {
     "text": "40b129a8944f8d9a",
-    "facts": "9255656a39c94000",
-    "facts2": "4c63342b1ee10415",
-    "all": "c71204d0e93722c5"
+    "facts": "e242f10b8347d9fd",
+    "facts2": "7407c20b0dd18e4a",
+    "all": "49ea2b2f4b7153d9"
    },
    "row_hash": "c1c0e2ac2588a579",
-   "carried": false,
+   "carried": true,
    "pass": 2
   },
   {
    "row": "B10",
    "screen": "cafeteria_meet_rosa.meet",
    "verdict": "PASS",
-   "line": "A woman in her forties runs the counter",
-   "why": "gated on npc_rosa present; who_is_where has her at the counter weekdays 08\u201316; no one else is claimed (Nadia, Zoe unnamed)",
+   "line": "A woman in her forties runs the counter, hairnet on, forearms like a baker's.",
+   "why": "every line holds at the first and last minute and on a second visit; no person named (it fires on entry while Rosa's row has her at the counter, weekdays 8-16; Kayla and Tess 12-13, Jake 12-14, Zoe Tue/Thu 13-14 and Nadia may be in the room unnamed, and nothing says the room is empty; 'the next tray' fits a lunch crowd)",
    "cause": null,
    "note": false,
    "screen_hash": {
     "text": "b626daf6602713a3",
-    "facts": "26f44f56ec29cb9c",
-    "facts2": "cfd7197356aa64ce",
-    "all": "5e8087446260e9d5"
+    "facts": "515715e73cf05730",
+    "facts2": "1b927de09fedcd26",
+    "all": "d4caa8c046ffd471"
    },
    "row_hash": "c1c0e2ac2588a579",
-   "carried": false,
+   "carried": true,
    "pass": 2
   },
   {
@@ -326,36 +329,36 @@
    "row": "B8",
    "screen": "cafeteria_meet_rosa.after",
    "verdict": "PASS",
-   "line": "She presses the roll into your hand.",
-   "why": "no number or garment of Ella's",
+   "line": "She's already looking past you at the next tray, but she'll know your face next time.",
+   "why": "no garment of hers named; no number that disagrees with PLAN",
    "cause": null,
    "note": false,
    "screen_hash": {
     "text": "40b129a8944f8d9a",
-    "facts": "9255656a39c94000",
-    "facts2": "4c63342b1ee10415",
-    "all": "c71204d0e93722c5"
+    "facts": "e242f10b8347d9fd",
+    "facts2": "7407c20b0dd18e4a",
+    "all": "49ea2b2f4b7153d9"
    },
    "row_hash": "80d415cf08e0ebfe",
-   "carried": false,
+   "carried": true,
    "pass": 2
   },
   {
    "row": "B8",
    "screen": "cafeteria_meet_rosa.meet",
    "verdict": "PASS",
-   "line": "A woman in her forties ... hairnet on",
-   "why": "45 per PLAN \u00a75; the only garment named is Rosa's",
+   "line": "A woman in her forties runs the counter, hairnet on, forearms like a baker's.",
+   "why": "no garment of hers named; no number that disagrees with PLAN",
    "cause": null,
    "note": false,
    "screen_hash": {
     "text": "b626daf6602713a3",
-    "facts": "26f44f56ec29cb9c",
-    "facts2": "cfd7197356aa64ce",
-    "all": "5e8087446260e9d5"
+    "facts": "515715e73cf05730",
+    "facts2": "1b927de09fedcd26",
+    "all": "d4caa8c046ffd471"
    },
    "row_hash": "80d415cf08e0ebfe",
-   "carried": false,
+   "carried": true,
    "pass": 2
   },
   {
@@ -542,7 +545,7 @@
     "all": "c71204d0e93722c5"
    },
    "row_hash": "1b2a2d5f05b10331",
-   "carried": false,
+   "carried": true,
    "pass": 2
   },
   {
@@ -560,7 +563,7 @@
     "all": "c71204d0e93722c5"
    },
    "row_hash": "6fd430204e984124",
-   "carried": false,
+   "carried": true,
    "pass": 2
   },
   {
@@ -1023,35 +1026,35 @@
    "screen": "cafeteria_meet_rosa.after",
    "verdict": "PASS",
    "line": "She's already looking past you at the next tray, but she'll know your face next time.",
-   "why": "true on all three paths; the roll lines are behind their flags",
+   "why": "no claim about who is there, the clock, her past or her clothes that can be false (it fires on entry while Rosa's row has her at the counter, weekdays 8-16; Kayla and Tess 12-13, Jake 12-14, Zoe Tue/Thu 13-14 and Nadia may be in the room unnamed, and nothing says the room is empty; 'the next tray' fits a lunch crowd)",
    "cause": null,
    "note": false,
    "screen_hash": {
     "text": "40b129a8944f8d9a",
-    "facts": "9255656a39c94000",
-    "facts2": "4c63342b1ee10415",
-    "all": "c71204d0e93722c5"
+    "facts": "e242f10b8347d9fd",
+    "facts2": "7407c20b0dd18e4a",
+    "all": "49ea2b2f4b7153d9"
    },
    "row_hash": "67e48e60d5053a2e",
-   "carried": false,
+   "carried": true,
    "pass": 2
   },
   {
    "row": "C460",
    "screen": "cafeteria_meet_rosa.meet",
    "verdict": "PASS",
-   "line": "Listen to that. You're too skinny for this place, mija. Here, take a roll.",
-   "why": "Rosa there by her gate; the picture (her holding a roll) is true on its one visit",
+   "line": "A woman in her forties runs the counter, hairnet on, forearms like a baker's.",
+   "why": "no claim about who is there, the clock, her past or her clothes that can be false (it fires on entry while Rosa's row has her at the counter, weekdays 8-16; Kayla and Tess 12-13, Jake 12-14, Zoe Tue/Thu 13-14 and Nadia may be in the room unnamed, and nothing says the room is empty; 'the next tray' fits a lunch crowd)",
    "cause": null,
    "note": false,
    "screen_hash": {
     "text": "b626daf6602713a3",
-    "facts": "26f44f56ec29cb9c",
-    "facts2": "cfd7197356aa64ce",
-    "all": "5e8087446260e9d5"
+    "facts": "515715e73cf05730",
+    "facts2": "1b927de09fedcd26",
+    "all": "d4caa8c046ffd471"
    },
    "row_hash": "67e48e60d5053a2e",
-   "carried": false,
+   "carried": true,
    "pass": 2
   },
   {
@@ -1071,36 +1074,36 @@
    "row": "C461",
    "screen": "cafeteria_meet_rosa.after",
    "verdict": "PASS",
-   "line": "Eat all of it. I'll know.",
-   "why": "fits her manner",
+   "line": "She's already looking past you at the next tray, but she'll know your face next time.",
+   "why": "texture only, and dialogue that fits the cast entry",
    "cause": null,
    "note": false,
    "screen_hash": {
     "text": "40b129a8944f8d9a",
-    "facts": "9255656a39c94000",
-    "facts2": "4c63342b1ee10415",
-    "all": "c71204d0e93722c5"
+    "facts": "e242f10b8347d9fd",
+    "facts2": "7407c20b0dd18e4a",
+    "all": "49ea2b2f4b7153d9"
    },
    "row_hash": "310706ee076318f2",
-   "carried": false,
+   "carried": true,
    "pass": 2
   },
   {
    "row": "C461",
    "screen": "cafeteria_meet_rosa.meet",
    "verdict": "PASS",
-   "line": "mija",
-   "why": "fits her plan entry (45, lunch lady)",
+   "line": "A woman in her forties runs the counter, hairnet on, forearms like a baker's.",
+   "why": "texture only, and dialogue that fits the cast entry",
    "cause": null,
    "note": false,
    "screen_hash": {
     "text": "b626daf6602713a3",
-    "facts": "26f44f56ec29cb9c",
-    "facts2": "cfd7197356aa64ce",
-    "all": "5e8087446260e9d5"
+    "facts": "515715e73cf05730",
+    "facts2": "1b927de09fedcd26",
+    "all": "d4caa8c046ffd471"
    },
    "row_hash": "310706ee076318f2",
-   "carried": false,
+   "carried": true,
    "pass": 2
   },
   {
@@ -1133,14 +1136,14 @@
    "row": "C596",
    "screen": "*",
    "verdict": "PASS",
-   "line": "-",
-   "why": "Rosa has no menu in release 1; her one picture is on her meeting, which is not a talk screen.",
+   "line": "meeting screen, picture in it",
+   "why": "a first meeting is a new moment, so its picture is allowed; no face-opened menu is built here, and no talk screen carries a picture",
    "cause": null,
    "note": true,
-   "screen_hash": "c73b827335da7685",
-   "row_hash": "6d9bba989a2b9666",
+   "screen_hash": "bd97e663ef3c384f",
+   "row_hash": "e5f7e6cf2d01613d",
    "carried": true,
-   "pass": 1
+   "pass": 3
   },
   {
    "row": "C601",
@@ -1431,41 +1434,59 @@
   {
    "row": "C795",
    "screen": "*",
-   "verdict": "N/A",
-   "line": "-",
-   "why": "Rosa's presence line is P30, out of scope.",
+   "verdict": "PASS",
+   "line": "no room text in this piece's screens",
+   "why": "its screens are scenes, not a place's room text; no line per person is added to any room",
    "cause": null,
    "note": true,
-   "screen_hash": "c73b827335da7685",
-   "row_hash": "6c9eb17d99266791",
+   "screen_hash": "bd97e663ef3c384f",
+   "row_hash": "34139e6a6914e171",
    "carried": true,
-   "pass": 1
+   "pass": 3
   },
   {
    "row": "C804",
    "screen": "*",
    "verdict": "PASS",
-   "line": "npc_at_location npc_rosa is_present",
-   "why": "Plays only while Rosa is there.",
+   "line": "no room text in this piece's screens",
+   "why": "its screens are scenes, not a place's room text; no line per person is added to any room",
    "cause": null,
    "note": false,
-   "screen_hash": "c73b827335da7685",
-   "row_hash": "810ef8e803cb09dd",
+   "screen_hash": "bd97e663ef3c384f",
+   "row_hash": "5358489178bff0a4",
    "carried": true,
-   "pass": 1
+   "pass": 3
   },
   {
    "row": "C889",
    "screen": "*",
    "verdict": "PASS",
-   "line": "-",
-   "why": "No label promises a clock time.",
+   "line": "Thanks. \u00b7 I'm fine, really. \u00b7 Say nothing \u00b7 Done",
+   "why": "no label carries a clock time, a duration or energy; nothing here costs money",
    "cause": null,
    "note": true,
-   "screen_hash": "c73b827335da7685",
-   "row_hash": "1b724e2dcfbf028b",
+   "screen_hash": "bd97e663ef3c384f",
+   "row_hash": "def1348d483d0c40",
    "carried": true,
-   "pass": 1
+   "pass": 2
+  },
+  {
+   "row": "C889",
+   "screen": "cafeteria_meet_rosa.after",
+   "verdict": "PASS",
+   "line": "She's already looking past you at the next tray, but she'll know your face next time.",
+   "why": "labels name no clock time and no duration",
+   "cause": null,
+   "note": true,
+   "screen_hash": {
+    "text": "40b129a8944f8d9a",
+    "facts": "e242f10b8347d9fd",
+    "facts2": "7407c20b0dd18e4a",
+    "all": "49ea2b2f4b7153d9"
+   },
+   "row_hash": "def1348d483d0c40",
+   "carried": true,
+   "pass": 2
   },
   {
    "row": "C892",
@@ -1481,6 +1502,24 @@
    "pass": 1
   },
   {
+   "row": "C892",
+   "screen": "cafeteria_meet_rosa.after",
+   "verdict": "PASS",
+   "line": "She's already looking past you at the next tray, but she'll know your face next time.",
+   "why": "no hour in the act",
+   "cause": null,
+   "note": true,
+   "screen_hash": {
+    "text": "40b129a8944f8d9a",
+    "facts": "e242f10b8347d9fd",
+    "facts2": "7407c20b0dd18e4a",
+    "all": "49ea2b2f4b7153d9"
+   },
+   "row_hash": "5c890033f6ac38b8",
+   "carried": true,
+   "pass": 2
+  },
+  {
    "row": "C897",
    "screen": "*",
    "verdict": "N/A",
@@ -1492,6 +1531,24 @@
    "row_hash": "265ece64add83676",
    "carried": true,
    "pass": 1
+  },
+  {
+   "row": "C897",
+   "screen": "cafeteria_meet_rosa.after",
+   "verdict": "PASS",
+   "line": "She's already looking past you at the next tray, but she'll know your face next time.",
+   "why": "time sits on the move or the act, not on every room",
+   "cause": null,
+   "note": true,
+   "screen_hash": {
+    "text": "40b129a8944f8d9a",
+    "facts": "e242f10b8347d9fd",
+    "facts2": "7407c20b0dd18e4a",
+    "all": "49ea2b2f4b7153d9"
+   },
+   "row_hash": "265ece64add83676",
+   "carried": true,
+   "pass": 2
   },
   {
    "row": "C900",
@@ -1507,6 +1564,24 @@
    "pass": 1
   },
   {
+   "row": "C900",
+   "screen": "cafeteria_meet_rosa.after",
+   "verdict": "PASS",
+   "line": "She's already looking past you at the next tray, but she'll know your face next time.",
+   "why": "no beat says what time it is",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "40b129a8944f8d9a",
+    "facts": "e242f10b8347d9fd",
+    "facts2": "7407c20b0dd18e4a",
+    "all": "49ea2b2f4b7153d9"
+   },
+   "row_hash": "6372efb027eb2034",
+   "carried": true,
+   "pass": 2
+  },
+  {
    "row": "C902",
    "screen": "*",
    "verdict": "PASS",
@@ -1518,6 +1593,24 @@
    "row_hash": "df5ed7a36dbc74e4",
    "carried": true,
    "pass": 1
+  },
+  {
+   "row": "C902",
+   "screen": "cafeteria_meet_rosa.after",
+   "verdict": "PASS",
+   "line": "She's already looking past you at the next tray, but she'll know your face next time.",
+   "why": "read at the last minute of the window, still true",
+   "cause": null,
+   "note": true,
+   "screen_hash": {
+    "text": "40b129a8944f8d9a",
+    "facts": "e242f10b8347d9fd",
+    "facts2": "7407c20b0dd18e4a",
+    "all": "49ea2b2f4b7153d9"
+   },
+   "row_hash": "df5ed7a36dbc74e4",
+   "carried": true,
+   "pass": 2
   },
   {
    "row": "C903",
@@ -1533,30 +1626,84 @@
    "pass": 1
   },
   {
+   "row": "C903",
+   "screen": "cafeteria_meet_rosa.after",
+   "verdict": "PASS",
+   "line": "She's already looking past you at the next tray, but she'll know your face next time.",
+   "why": "no weekday named in a beat",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "40b129a8944f8d9a",
+    "facts": "e242f10b8347d9fd",
+    "facts2": "7407c20b0dd18e4a",
+    "all": "49ea2b2f4b7153d9"
+   },
+   "row_hash": "4f83b0b5eb45f71b",
+   "carried": true,
+   "pass": 2
+  },
+  {
    "row": "C906",
    "screen": "*",
-   "verdict": "N/A",
-   "line": "-",
-   "why": "No \"till\" promise.",
+   "verdict": "PASS",
+   "line": "Thanks. \u00b7 I'm fine, really. \u00b7 Say nothing \u00b7 Done",
+   "why": "no label carries a clock time, a duration or energy; nothing here costs money",
    "cause": null,
    "note": true,
-   "screen_hash": "c73b827335da7685",
-   "row_hash": "ce3b42a8c86da5b8",
+   "screen_hash": "bd97e663ef3c384f",
+   "row_hash": "71713a7e7ae739e7",
    "carried": true,
-   "pass": 1
+   "pass": 2
+  },
+  {
+   "row": "C906",
+   "screen": "cafeteria_meet_rosa.after",
+   "verdict": "PASS",
+   "line": "She's already looking past you at the next tray, but she'll know your face next time.",
+   "why": "no 'till X' on any label",
+   "cause": null,
+   "note": true,
+   "screen_hash": {
+    "text": "40b129a8944f8d9a",
+    "facts": "e242f10b8347d9fd",
+    "facts2": "7407c20b0dd18e4a",
+    "all": "49ea2b2f4b7153d9"
+   },
+   "row_hash": "71713a7e7ae739e7",
+   "carried": true,
+   "pass": 2
   },
   {
    "row": "C910",
    "screen": "*",
    "verdict": "PASS",
-   "line": "Done (5 min)",
-   "why": "Sole exit after a scene, the game's one form for a scene's Done; no choice to weigh.",
+   "line": "Thanks. \u00b7 I'm fine, really. \u00b7 Say nothing \u00b7 Done",
+   "why": "no label carries a clock time, a duration or energy; nothing here costs money",
    "cause": null,
    "note": true,
-   "screen_hash": "c73b827335da7685",
-   "row_hash": "be1c18ee466455f6",
+   "screen_hash": "bd97e663ef3c384f",
+   "row_hash": "d5a109f1ef88419a",
    "carried": true,
-   "pass": 1
+   "pass": 2
+  },
+  {
+   "row": "C910",
+   "screen": "cafeteria_meet_rosa.after",
+   "verdict": "PASS",
+   "line": "She's already looking past you at the next tray, but she'll know your face next time.",
+   "why": "buttons say no time and no energy; money only where the act costs money",
+   "cause": null,
+   "note": true,
+   "screen_hash": {
+    "text": "40b129a8944f8d9a",
+    "facts": "e242f10b8347d9fd",
+    "facts2": "7407c20b0dd18e4a",
+    "all": "49ea2b2f4b7153d9"
+   },
+   "row_hash": "d5a109f1ef88419a",
+   "carried": true,
+   "pass": 2
   },
   {
    "row": "C913",
@@ -1572,6 +1719,24 @@
    "pass": 1
   },
   {
+   "row": "C913",
+   "screen": "cafeteria_meet_rosa.after",
+   "verdict": "N/A",
+   "line": "She's already looking past you at the next tray, but she'll know your face next time.",
+   "why": "no row on this screen has hours or a window",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "40b129a8944f8d9a",
+    "facts": "e242f10b8347d9fd",
+    "facts2": "7407c20b0dd18e4a",
+    "all": "49ea2b2f4b7153d9"
+   },
+   "row_hash": "c750f9b6ab4ace14",
+   "carried": true,
+   "pass": 2
+  },
+  {
    "row": "C914",
    "screen": "*",
    "verdict": "N/A",
@@ -1583,6 +1748,24 @@
    "row_hash": "bd07273d5822f34f",
    "carried": true,
    "pass": 1
+  },
+  {
+   "row": "C914",
+   "screen": "cafeteria_meet_rosa.after",
+   "verdict": "N/A",
+   "line": "She's already looking past you at the next tray, but she'll know your face next time.",
+   "why": "no row on this screen has hours or a window",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "40b129a8944f8d9a",
+    "facts": "e242f10b8347d9fd",
+    "facts2": "7407c20b0dd18e4a",
+    "all": "49ea2b2f4b7153d9"
+   },
+   "row_hash": "bd07273d5822f34f",
+   "carried": true,
+   "pass": 2
   },
   {
    "row": "C916",
@@ -1598,6 +1781,24 @@
    "pass": 1
   },
   {
+   "row": "C916",
+   "screen": "cafeteria_meet_rosa.after",
+   "verdict": "PASS",
+   "line": "trigger: npc_rosa is_present",
+   "why": "the meeting happens to her and stays hidden when Rosa's row is out",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "40b129a8944f8d9a",
+    "facts": "e242f10b8347d9fd",
+    "facts2": "7407c20b0dd18e4a",
+    "all": "49ea2b2f4b7153d9"
+   },
+   "row_hash": "7b2bb0dfdbcfe946",
+   "carried": true,
+   "pass": 2
+  },
+  {
    "row": "C920",
    "screen": "*",
    "verdict": "N/A",
@@ -1609,6 +1810,24 @@
    "row_hash": "513927dd127fca04",
    "carried": true,
    "pass": 1
+  },
+  {
+   "row": "C920",
+   "screen": "cafeteria_meet_rosa.after",
+   "verdict": "PASS",
+   "line": "She's already looking past you at the next tray, but she'll know your face next time.",
+   "why": "Done returns to the same place; its minutes are the act's, not a hop",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "40b129a8944f8d9a",
+    "facts": "e242f10b8347d9fd",
+    "facts2": "7407c20b0dd18e4a",
+    "all": "49ea2b2f4b7153d9"
+   },
+   "row_hash": "513927dd127fca04",
+   "carried": true,
+   "pass": 2
   },
   {
    "row": "C924",
@@ -1624,6 +1843,24 @@
    "pass": 1
   },
   {
+   "row": "C924",
+   "screen": "cafeteria_meet_rosa.after",
+   "verdict": "PASS",
+   "line": "She's already looking past you at the next tray, but she'll know your face next time.",
+   "why": "the minutes spent make the schedule matter",
+   "cause": null,
+   "note": true,
+   "screen_hash": {
+    "text": "40b129a8944f8d9a",
+    "facts": "e242f10b8347d9fd",
+    "facts2": "7407c20b0dd18e4a",
+    "all": "49ea2b2f4b7153d9"
+   },
+   "row_hash": "791cd173e23fb130",
+   "carried": true,
+   "pass": 2
+  },
+  {
    "row": "C926",
    "screen": "*",
    "verdict": "PASS",
@@ -1635,6 +1872,24 @@
    "row_hash": "177d1e1776fac74b",
    "carried": true,
    "pass": 1
+  },
+  {
+   "row": "C926",
+   "screen": "cafeteria_meet_rosa.after",
+   "verdict": "PASS",
+   "line": "She's already looking past you at the next tray, but she'll know your face next time.",
+   "why": "nothing sends the clock to a named hour",
+   "cause": null,
+   "note": true,
+   "screen_hash": {
+    "text": "40b129a8944f8d9a",
+    "facts": "e242f10b8347d9fd",
+    "facts2": "7407c20b0dd18e4a",
+    "all": "49ea2b2f4b7153d9"
+   },
+   "row_hash": "177d1e1776fac74b",
+   "carried": true,
+   "pass": 2
   },
   {
    "row": "C927",
@@ -1653,18 +1908,18 @@
    "row": "C927",
    "screen": "cafeteria_meet_rosa.after",
    "verdict": "PASS",
-   "line": "time_progression_minutes = 5",
-   "why": "Done states its time",
+   "line": "She's already looking past you at the next tray, but she'll know your face next time.",
+   "why": "every exit carries its own minutes",
    "cause": null,
    "note": true,
    "screen_hash": {
     "text": "40b129a8944f8d9a",
-    "facts": "9255656a39c94000",
-    "facts2": "4c63342b1ee10415",
-    "all": "c71204d0e93722c5"
+    "facts": "e242f10b8347d9fd",
+    "facts2": "7407c20b0dd18e4a",
+    "all": "49ea2b2f4b7153d9"
    },
    "row_hash": "4e86d143688ba8e5",
-   "carried": false,
+   "carried": true,
    "pass": 2
   },
   {
@@ -1681,17 +1936,53 @@
    "pass": 1
   },
   {
+   "row": "C928",
+   "screen": "cafeteria_meet_rosa.after",
+   "verdict": "PASS",
+   "line": "She's already looking past you at the next tray, but she'll know your face next time.",
+   "why": "no clock printed into prose",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "40b129a8944f8d9a",
+    "facts": "e242f10b8347d9fd",
+    "facts2": "7407c20b0dd18e4a",
+    "all": "49ea2b2f4b7153d9"
+   },
+   "row_hash": "2c3ccc6bd9929d7f",
+   "carried": true,
+   "pass": 2
+  },
+  {
    "row": "C929",
    "screen": "*",
-   "verdict": "N/A",
-   "line": "-",
-   "why": "No activity label to tag.",
+   "verdict": "PASS",
+   "line": "Thanks. \u00b7 I'm fine, really. \u00b7 Say nothing \u00b7 Done",
+   "why": "no label carries a clock time, a duration or energy; nothing here costs money",
    "cause": null,
    "note": true,
-   "screen_hash": "c73b827335da7685",
-   "row_hash": "e20b027bad88ca8c",
+   "screen_hash": "bd97e663ef3c384f",
+   "row_hash": "18b0ecdf6d7fc901",
    "carried": true,
-   "pass": 1
+   "pass": 2
+  },
+  {
+   "row": "C929",
+   "screen": "cafeteria_meet_rosa.after",
+   "verdict": "PASS",
+   "line": "She's already looking past you at the next tray, but she'll know your face next time.",
+   "why": "the activity's time is on no label",
+   "cause": null,
+   "note": true,
+   "screen_hash": {
+    "text": "40b129a8944f8d9a",
+    "facts": "e242f10b8347d9fd",
+    "facts2": "7407c20b0dd18e4a",
+    "all": "49ea2b2f4b7153d9"
+   },
+   "row_hash": "18b0ecdf6d7fc901",
+   "carried": true,
+   "pass": 2
   },
   {
    "row": "C930",
@@ -1705,6 +1996,24 @@
    "row_hash": "beb57cd46fe906bf",
    "carried": true,
    "pass": 1
+  },
+  {
+   "row": "C930",
+   "screen": "cafeteria_meet_rosa.after",
+   "verdict": "N/A",
+   "line": "She's already looking past you at the next tray, but she'll know your face next time.",
+   "why": "no row on this screen has hours or a window",
+   "cause": null,
+   "note": true,
+   "screen_hash": {
+    "text": "40b129a8944f8d9a",
+    "facts": "e242f10b8347d9fd",
+    "facts2": "7407c20b0dd18e4a",
+    "all": "49ea2b2f4b7153d9"
+   },
+   "row_hash": "beb57cd46fe906bf",
+   "carried": true,
+   "pass": 2
   },
   {
    "row": "C931",
@@ -1723,32 +2032,32 @@
    "row": "C931",
    "screen": "cafeteria_meet_rosa.after",
    "verdict": "N/A",
-   "line": "\u2014",
-   "why": "no time_of_day condition on the screen",
+   "line": "",
+   "why": "no time_of_day; the trigger reads Rosa's row",
    "cause": null,
    "note": true,
    "screen_hash": {
     "text": "40b129a8944f8d9a",
-    "facts": "9255656a39c94000",
-    "facts2": "4c63342b1ee10415",
-    "all": "c71204d0e93722c5"
+    "facts": "e242f10b8347d9fd",
+    "facts2": "7407c20b0dd18e4a",
+    "all": "49ea2b2f4b7153d9"
    },
    "row_hash": "1aadffd96e76381c",
-   "carried": false,
+   "carried": true,
    "pass": 2
   },
   {
    "row": "C953",
    "screen": "*",
    "verdict": "PASS",
-   "line": "Done",
-   "why": "Sole exit; no menu label with a cost to show.",
+   "line": "Thanks. \u00b7 I'm fine, really. \u00b7 Say nothing \u00b7 Done",
+   "why": "no label carries a clock time, a duration or energy; nothing here costs money",
    "cause": null,
    "note": true,
-   "screen_hash": "c73b827335da7685",
-   "row_hash": "8d1306a15c51370a",
+   "screen_hash": "bd97e663ef3c384f",
+   "row_hash": "826bf82fe26afd13",
    "carried": true,
-   "pass": 1
+   "pass": 2
   },
   {
    "row": "L106",
@@ -1767,36 +2076,36 @@
    "row": "L106",
    "screen": "cafeteria_meet_rosa.after",
    "verdict": "PASS",
-   "line": "She's already looking past you at the next tray",
-   "why": "still there; no one else named",
+   "line": "She's already looking past you at the next tray, but she'll know your face next time.",
+   "why": "no line names a person whose rows don't put them there (it fires on entry while Rosa's row has her at the counter, weekdays 8-16; Kayla and Tess 12-13, Jake 12-14, Zoe Tue/Thu 13-14 and Nadia may be in the room unnamed, and nothing says the room is empty; 'the next tray' fits a lunch crowd)",
    "cause": null,
    "note": false,
    "screen_hash": {
     "text": "40b129a8944f8d9a",
-    "facts": "9255656a39c94000",
-    "facts2": "4c63342b1ee10415",
-    "all": "c71204d0e93722c5"
+    "facts": "e242f10b8347d9fd",
+    "facts2": "7407c20b0dd18e4a",
+    "all": "49ea2b2f4b7153d9"
    },
    "row_hash": "13a714429d15f3b2",
-   "carried": false,
+   "carried": true,
    "pass": 2
   },
   {
    "row": "L106",
    "screen": "cafeteria_meet_rosa.meet",
    "verdict": "PASS",
-   "line": "A woman in her forties runs the counter",
-   "why": "her rows put her there at every minute the gate opens",
+   "line": "A woman in her forties runs the counter, hairnet on, forearms like a baker's.",
+   "why": "no line names a person whose rows don't put them there (it fires on entry while Rosa's row has her at the counter, weekdays 8-16; Kayla and Tess 12-13, Jake 12-14, Zoe Tue/Thu 13-14 and Nadia may be in the room unnamed, and nothing says the room is empty; 'the next tray' fits a lunch crowd)",
    "cause": null,
    "note": false,
    "screen_hash": {
     "text": "b626daf6602713a3",
-    "facts": "26f44f56ec29cb9c",
-    "facts2": "cfd7197356aa64ce",
-    "all": "5e8087446260e9d5"
+    "facts": "515715e73cf05730",
+    "facts2": "1b927de09fedcd26",
+    "all": "d4caa8c046ffd471"
    },
    "row_hash": "13a714429d15f3b2",
-   "carried": false,
+   "carried": true,
    "pass": 2
   },
   {
@@ -1888,152 +2197,64 @@
    "row": "L167",
    "screen": "cafeteria_meet_rosa.after",
    "verdict": "N/A",
-   "line": "\u2014",
-   "why": "no windowed row or button with hours on this screen",
+   "line": "She's already looking past you at the next tray, but she'll know your face next time.",
+   "why": "no row on this screen has hours or a window",
    "cause": null,
    "note": false,
    "screen_hash": {
     "text": "40b129a8944f8d9a",
-    "facts": "9255656a39c94000",
-    "facts2": "4c63342b1ee10415",
-    "all": "c71204d0e93722c5"
+    "facts": "e242f10b8347d9fd",
+    "facts2": "7407c20b0dd18e4a",
+    "all": "49ea2b2f4b7153d9"
    },
    "row_hash": "e64ce2672d85d2d8",
-   "carried": false,
+   "carried": true,
    "pass": 2
+  },
+  {
+   "row": "L168",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "The woman at the counter is in weekdays 8am to 4pm.",
+   "why": "matches Rosa's rows; met_rosa is the end step's when",
+   "cause": null,
+   "note": false,
+   "screen_hash": "bd97e663ef3c384f",
+   "row_hash": "444c44970dc284f2",
+   "carried": false,
+   "pass": 4
+  },
+  {
+   "row": "L169",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "The woman at the counter is in weekdays 8am to 4pm.",
+   "why": "cafeteria_meet_rosa fires on any visit while Rosa is there",
+   "cause": null,
+   "note": false,
+   "screen_hash": "bd97e663ef3c384f",
+   "row_hash": "59defccfc63b0454",
+   "carried": false,
+   "pass": 4
+  },
+  {
+   "row": "L170",
+   "screen": "*",
+   "verdict": "N/A",
+   "line": "",
+   "why": "no place on this piece's screens is hidden_until a flag",
+   "cause": null,
+   "note": false,
+   "screen_hash": "bd97e663ef3c384f",
+   "row_hash": "c3599cd09637a240",
+   "carried": false,
+   "pass": 4
   }
  ],
  "causes": [],
- "pending": [
-  {
-   "row": "C889",
-   "screen": "*",
-   "why": "its rule's text changed"
-  },
-  {
-   "row": "C906",
-   "screen": "*",
-   "why": "its rule's text changed"
-  },
-  {
-   "row": "C910",
-   "screen": "*",
-   "why": "its rule's text changed"
-  },
-  {
-   "row": "C929",
-   "screen": "*",
-   "why": "its rule's text changed"
-  },
-  {
-   "row": "C953",
-   "screen": "*",
-   "why": "its rule's text changed"
-  }
- ],
- "asked": 20,
- "answered": 15,
- "pass_items": [
-  {
-   "row": "B10",
-   "screen": "cafeteria_meet_rosa.after",
-   "why": "screen changed: truth row"
-  },
-  {
-   "row": "B10",
-   "screen": "cafeteria_meet_rosa.meet",
-   "why": "screen changed: truth row"
-  },
-  {
-   "row": "B8",
-   "screen": "cafeteria_meet_rosa.after",
-   "why": "screen changed: truth row"
-  },
-  {
-   "row": "B8",
-   "screen": "cafeteria_meet_rosa.meet",
-   "why": "screen changed: truth row"
-  },
-  {
-   "row": "C1234",
-   "screen": "cafeteria_meet_rosa.after",
-   "why": "failed last pass"
-  },
-  {
-   "row": "C1238",
-   "screen": "cafeteria_meet_rosa.after",
-   "why": "failed last pass"
-  },
-  {
-   "row": "C460",
-   "screen": "cafeteria_meet_rosa.after",
-   "why": "screen changed: truth row"
-  },
-  {
-   "row": "C460",
-   "screen": "cafeteria_meet_rosa.meet",
-   "why": "screen changed: truth row"
-  },
-  {
-   "row": "C461",
-   "screen": "cafeteria_meet_rosa.after",
-   "why": "screen changed: truth row"
-  },
-  {
-   "row": "C461",
-   "screen": "cafeteria_meet_rosa.meet",
-   "why": "screen changed: truth row"
-  },
-  {
-   "row": "C889",
-   "screen": "*",
-   "why": "its rule's text changed"
-  },
-  {
-   "row": "C906",
-   "screen": "*",
-   "why": "its rule's text changed"
-  },
-  {
-   "row": "C910",
-   "screen": "*",
-   "why": "its rule's text changed"
-  },
-  {
-   "row": "C927",
-   "screen": "cafeteria_meet_rosa.after",
-   "why": "screen changed: truth row"
-  },
-  {
-   "row": "C929",
-   "screen": "*",
-   "why": "its rule's text changed"
-  },
-  {
-   "row": "C931",
-   "screen": "cafeteria_meet_rosa.after",
-   "why": "screen changed: truth row"
-  },
-  {
-   "row": "C953",
-   "screen": "*",
-   "why": "its rule's text changed"
-  },
-  {
-   "row": "L106",
-   "screen": "cafeteria_meet_rosa.after",
-   "why": "screen changed: truth row"
-  },
-  {
-   "row": "L106",
-   "screen": "cafeteria_meet_rosa.meet",
-   "why": "screen changed: truth row"
-  },
-  {
-   "row": "L167",
-   "screen": "cafeteria_meet_rosa.after",
-   "why": "screen changed: truth row"
-  }
- ],
+ "pending": [],
+ "asked": 3,
+ "answered": 3,
+ "pass_items": [],
  "unowed": []
 }

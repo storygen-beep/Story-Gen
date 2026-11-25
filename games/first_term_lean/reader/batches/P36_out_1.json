@@ -1,0 +1,746 @@
+{
+ "verdicts": [
+  {
+   "row": "B1",
+   "screen": "*",
+   "verdict": "N/A",
+   "line": "Two girls you don't know ... / four second-years",
+   "why": "strangers only; no person's step, no want to show (checked rep_mirror, rep_table; P26 and P32 are the people's own canvases)"
+  },
+  {
+   "row": "B10",
+   "screen": "rep_mirror.listen",
+   "verdict": "PASS",
+   "line": "Two girls you don't know are doing their lips at the far end of the mirror",
+   "why": "shows only while Brooke is absent (npc_at_location is_absent); who_is_where puts Kayla and Tess at the mirror only with Brooke (8\u20139, 13\u201314), so the two girls are strangers on every visit; the daily-cap grey \"they've moved on to someone else.\" is true"
+  },
+  {
+   "row": "B10",
+   "screen": "rep_table.listen",
+   "verdict": "FAIL",
+   "line": "cooldown_message = \"the tables are empty outside lunch, 11am to 2pm on weekdays.\"",
+   "why": "after the one listen a day, the row greys at lunch with this line (engine: a day-capped row pushes its own cooldownMessage, v2.py:6725-6728): at 12:30 on a Tuesday it says the tables are empty outside lunch, during lunch; the card promised \"\u2014 they've gone quiet.\"",
+   "cause": "P36a1-c1"
+  },
+  {
+   "row": "B11",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "Listen to the girls at the mirror / Listen to the next table",
+   "why": "the button shows the act it names: the overheard lines"
+  },
+  {
+   "row": "B12",
+   "screen": "*",
+   "verdict": "N/A",
+   "line": "Don't go to his office hours alone.",
+   "why": "not a charged scene on screen"
+  },
+  {
+   "row": "B13",
+   "screen": "*",
+   "verdict": "N/A",
+   "line": "the far end of the mirror",
+   "why": "not a moment alone with her body: she is listening to two strangers"
+  },
+  {
+   "row": "B2",
+   "screen": "*",
+   "verdict": "N/A",
+   "line": "overheard strangers",
+   "why": "no person whose last scene this goes one step past"
+  },
+  {
+   "row": "B3",
+   "screen": "rep_mirror.listen",
+   "verdict": "PASS",
+   "line": "Nobody's saying your name in here. Not yet.",
+   "why": "\"Not yet\" points at her name being said"
+  },
+  {
+   "row": "B3",
+   "screen": "rep_table.listen",
+   "verdict": "PASS",
+   "line": "They laugh, and then they don't. Nobody at the table looks your way. Not yet.",
+   "why": "\"Not yet\", and the Hale warning points at his office hours"
+  },
+  {
+   "row": "B4",
+   "screen": "rep_mirror.listen",
+   "verdict": "FAIL",
+   "line": "Nobody's saying your name in here. Not yet.",
+   "why": "she has no reaction at all: nothing on her body, nothing said; the screen is the strangers and the narrator",
+   "cause": "P36a1-c2"
+  },
+  {
+   "row": "B4",
+   "screen": "rep_table.listen",
+   "verdict": "FAIL",
+   "line": "They laugh, and then they don't. Nobody at the table looks your way. Not yet.",
+   "why": "same: her face, her stomach, her mouth never move at a warning about her own professor",
+   "cause": "P36a1-c2"
+  },
+  {
+   "row": "B5",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "Neither of them looks your way.",
+   "why": "the screens say nobody notices her, as PLAN \u00a78g declares at Reputation 0"
+  },
+  {
+   "row": "B6",
+   "screen": "*",
+   "verdict": "N/A",
+   "line": "Done",
+   "why": "no offer on either screen"
+  },
+  {
+   "row": "B7",
+   "screen": "*",
+   "verdict": "N/A",
+   "line": "\u2014",
+   "why": "no explicit beat"
+  },
+  {
+   "row": "B8",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "11am to 2pm on weekdays",
+   "why": "hours agree with the trigger (weekday, 11:00\u201314:00) and the card; no garment named; sidebar bands match the card and PLAN \u00a78g words"
+  },
+  {
+   "row": "B9",
+   "screen": "*",
+   "verdict": "N/A",
+   "line": "Brooke",
+   "why": "PLAN does not declare the companion is the rival"
+  },
+  {
+   "row": "C1002",
+   "screen": "*",
+   "verdict": "N/A",
+   "line": "\u2014",
+   "why": "no spend"
+  },
+  {
+   "row": "C1173",
+   "screen": "*",
+   "verdict": "N/A",
+   "line": "\u2014",
+   "why": "no clothing door"
+  },
+  {
+   "row": "C1184",
+   "screen": "*",
+   "verdict": "N/A",
+   "line": "\u2014",
+   "why": "no refusal"
+  },
+  {
+   "row": "C1185",
+   "screen": "*",
+   "verdict": "N/A",
+   "line": "\u2014",
+   "why": "no dress code"
+  },
+  {
+   "row": "C1189",
+   "screen": "*",
+   "verdict": "N/A",
+   "line": "\u2014",
+   "why": "no clothes state"
+  },
+  {
+   "row": "C1198",
+   "screen": "*",
+   "verdict": "N/A",
+   "line": "\u2014",
+   "why": "no refusal"
+  },
+  {
+   "row": "C1200",
+   "screen": "*",
+   "verdict": "N/A",
+   "line": "\u2014",
+   "why": "no garment or dress rule on these screens"
+  },
+  {
+   "row": "C1220",
+   "screen": "*",
+   "verdict": "N/A",
+   "line": "\u2014",
+   "why": "no dress code here"
+  },
+  {
+   "row": "C1221",
+   "screen": "*",
+   "verdict": "N/A",
+   "line": "\u2014",
+   "why": "no dress code here"
+  },
+  {
+   "row": "C1250",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "\u2014",
+   "why": "no media added; the room card text unchanged"
+  },
+  {
+   "row": "C1303",
+   "screen": "*",
+   "verdict": "N/A",
+   "line": "\u2014",
+   "why": "no need"
+  },
+  {
+   "row": "C1313",
+   "screen": "*",
+   "verdict": "N/A",
+   "line": "\u2014",
+   "why": "not a refill"
+  },
+  {
+   "row": "C1337",
+   "screen": "*",
+   "verdict": "N/A",
+   "line": "\u2014",
+   "why": "no energy"
+  },
+  {
+   "row": "C1340",
+   "screen": "*",
+   "verdict": "N/A",
+   "line": "\u2014",
+   "why": "not a housemate"
+  },
+  {
+   "row": "C1342",
+   "screen": "*",
+   "verdict": "N/A",
+   "line": "\u2014",
+   "why": "no need touched"
+  },
+  {
+   "row": "C1345",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "max_triggers_per_day = 1",
+   "why": "cap on the way in"
+  },
+  {
+   "row": "C1360",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "Listen to the girls at the mirror \u2014 they've moved on to someone else.",
+   "why": "greyed with its action as the label"
+  },
+  {
+   "row": "C1421",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "npc_brooke is_absent",
+   "why": "hidden while Brooke is at the mirror, and her face is the reason on screen (ENI for LO on the card)"
+  },
+  {
+   "row": "C1423",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "max_triggers_per_day = 1",
+   "why": "a daily cap"
+  },
+  {
+   "row": "C1425",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "time_progression_minutes = 10 / 15",
+   "why": "a time cost and a daily cap"
+  },
+  {
+   "row": "C1427",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "time_progression_minutes = 15",
+   "why": "15 minutes in a 3-hour lunch, capped once a day"
+  },
+  {
+   "row": "C1428",
+   "screen": "*",
+   "verdict": "N/A",
+   "line": "\u2014",
+   "why": "no energy lock"
+  },
+  {
+   "row": "C1431",
+   "screen": "*",
+   "verdict": "N/A",
+   "line": "\u2014",
+   "why": "no need touched"
+  },
+  {
+   "row": "C1432",
+   "screen": "*",
+   "verdict": "N/A",
+   "line": "\u2014",
+   "why": "no need touched"
+  },
+  {
+   "row": "C1433",
+   "screen": "*",
+   "verdict": "N/A",
+   "line": "\u2014",
+   "why": "no need"
+  },
+  {
+   "row": "C1434",
+   "screen": "*",
+   "verdict": "N/A",
+   "line": "\u2014",
+   "why": "no need"
+  },
+  {
+   "row": "C1438",
+   "screen": "*",
+   "verdict": "N/A",
+   "line": "\u2014",
+   "why": "no need touched"
+  },
+  {
+   "row": "C1441",
+   "screen": "*",
+   "verdict": "N/A",
+   "line": "\u2014",
+   "why": "no number result"
+  },
+  {
+   "row": "C146",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "\u2014",
+   "why": "no big moment on a repeatable"
+  },
+  {
+   "row": "C149",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "Not yet.",
+   "why": "both point at her name on campus"
+  },
+  {
+   "row": "C151",
+   "screen": "*",
+   "verdict": "N/A",
+   "line": "\u2014",
+   "why": "strangers only, not a person's repeatable"
+  },
+  {
+   "row": "C330",
+   "screen": "*",
+   "verdict": "N/A",
+   "line": "\u2014",
+   "why": "no meter paid"
+  },
+  {
+   "row": "C422",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "Listen to the next table",
+   "why": "plain labels"
+  },
+  {
+   "row": "C442",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "Don't go to his office hours alone.",
+   "why": "the gossip says what it means plainly"
+  },
+  {
+   "row": "C447",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "Brooke tells everyone everything. That's how you know it's not true.",
+   "why": "each stranger pair has two distinct voices, the gossip and the cynic"
+  },
+  {
+   "row": "C450",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "Not yet.",
+   "why": "hook on the last line"
+  },
+  {
+   "row": "C451",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "four second-years splitting a pizza",
+   "why": "concrete: lips, the mirror, the pizza, office hours"
+  },
+  {
+   "row": "C460",
+   "screen": "rep_mirror.listen",
+   "verdict": "PASS",
+   "line": "Two girls you don't know are doing their lips at the far end of the mirror",
+   "why": "true on every visit (see B10)"
+  },
+  {
+   "row": "C460",
+   "screen": "rep_table.listen",
+   "verdict": "FAIL",
+   "line": "cooldown_message = \"the tables are empty outside lunch, 11am to 2pm on weekdays.\"",
+   "why": "the day-capped grey names the hours during the hours: false at any minute of lunch after one listen",
+   "cause": "P36a1-c1"
+  },
+  {
+   "row": "C461",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "Brooke's telling everyone she's getting the lead in Cross's play.",
+   "why": "fits PLAN: Brooke wants the drama lead, Cross casts it (\u00a78g, \u00a73)"
+  },
+  {
+   "row": "C519",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "about 60 words a screen",
+   "why": "one job each, under 150"
+  },
+  {
+   "row": "C593",
+   "screen": "*",
+   "verdict": "N/A",
+   "line": "\u2014",
+   "why": "nobody addresses her"
+  },
+  {
+   "row": "C596",
+   "screen": "*",
+   "verdict": "N/A",
+   "line": "\u2014",
+   "why": "not a person's talk screen"
+  },
+  {
+   "row": "C620",
+   "screen": "*",
+   "verdict": "N/A",
+   "line": "\u2014",
+   "why": "lists nobody at a place"
+  },
+  {
+   "row": "C625",
+   "screen": "rep_mirror.listen",
+   "verdict": "FAIL",
+   "line": "Brooke's telling everyone she's getting the lead in Cross's play.",
+   "why": "note row: named before met (PLAN \u00a73); the card gates Brooke's name on the board by met_brooke but not here"
+  },
+  {
+   "row": "C625",
+   "screen": "rep_table.listen",
+   "verdict": "FAIL",
+   "line": "Ask Nadia.",
+   "why": "note row: Nadia and Hale named with no met condition"
+  },
+  {
+   "row": "C626",
+   "screen": "rep_mirror.listen",
+   "verdict": "FAIL",
+   "line": "Brooke's telling everyone",
+   "why": "note row: no description variant before met_brooke, unlike the board line"
+  },
+  {
+   "row": "C626",
+   "screen": "rep_table.listen",
+   "verdict": "N/A",
+   "line": "Ask Nadia.",
+   "why": "Nadia and Hale are usually met at day one's lecture; carried under C625"
+  },
+  {
+   "row": "C630",
+   "screen": "rep_mirror.listen",
+   "verdict": "FAIL",
+   "line": "Brooke's telling everyone she's getting the lead in Cross's play.",
+   "why": "Brooke and Cross are named with no relation, on a screen open from Monday of week one, before met_cross (P17) and met_brooke (P26); PLAN \u00a73: \"No one is named before she meets them.\"",
+   "cause": "P36a1-c3"
+  },
+  {
+   "row": "C630",
+   "screen": "rep_table.listen",
+   "verdict": "FAIL",
+   "line": "Ask Nadia. Actually, don't ask Nadia.",
+   "why": "Nadia (and Hale) named with no relation and no met condition; skipping Monday's lecture leaves both unmet (met_hale, met_nadia set at 7_final_game.toml:4584)",
+   "cause": "P36a1-c3"
+  },
+  {
+   "row": "C632",
+   "screen": "*",
+   "verdict": "N/A",
+   "line": "\u2014",
+   "why": "no role label"
+  },
+  {
+   "row": "C644",
+   "screen": "*",
+   "verdict": "N/A",
+   "line": "\u2014",
+   "why": "strangers own no corner"
+  },
+  {
+   "row": "C758",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "Done",
+   "why": "long listen labels, but \"Done\" pairs them; note row"
+  },
+  {
+   "row": "C762",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "\u2014",
+   "why": "no \"Nothing happens.\""
+  },
+  {
+   "row": "C769",
+   "screen": "*",
+   "verdict": "N/A",
+   "line": "\u2014",
+   "why": "place descriptions untouched"
+  },
+  {
+   "row": "C770",
+   "screen": "*",
+   "verdict": "N/A",
+   "line": "\u2014",
+   "why": "room screen untouched"
+  },
+  {
+   "row": "C771",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "\u2014",
+   "why": "no first-visit screen"
+  },
+  {
+   "row": "C773",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "Listen to the girls at the mirror",
+   "why": "a system act, not an object browse"
+  },
+  {
+   "row": "C776",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "Listen to the next table",
+   "why": "the reputation system's row"
+  },
+  {
+   "row": "C777",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "Listen to the next table",
+   "why": "a system row; nothing else added to the menu"
+  },
+  {
+   "row": "C794",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "\u2014",
+   "why": "place identity lines untouched"
+  },
+  {
+   "row": "C795",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "Listen to the girls at the mirror",
+   "why": "re-entry change is a menu row, not a line per person"
+  },
+  {
+   "row": "C804",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "Two girls you don't know",
+   "why": "an unnamed crowd line inside the beat; no named presence line"
+  },
+  {
+   "row": "C889",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "Done",
+   "why": "no time on labels"
+  },
+  {
+   "row": "C892",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "11am to 2pm on weekdays",
+   "why": "the hour is on the row, not in the act"
+  },
+  {
+   "row": "C897",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "\u2014",
+   "why": "no room-to-room cost added"
+  },
+  {
+   "row": "C900",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "The table behind you is four second-years splitting a pizza",
+   "why": "no clock time in a beat; the hours are on the grey, as a rule"
+  },
+  {
+   "row": "C902",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "four second-years splitting a pizza",
+   "why": "true at 13:59 too"
+  },
+  {
+   "row": "C903",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "on weekdays",
+   "why": "the weekday is named only on a row whose trigger reads weekdays, in a place shut on weekends"
+  },
+  {
+   "row": "C906",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "Done",
+   "why": "no \"till\""
+  },
+  {
+   "row": "C910",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "Done",
+   "why": "no time, energy or money on buttons"
+  },
+  {
+   "row": "C913",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "Listen to the next table \u2014 the tables are empty outside lunch, 11am to 2pm on weekdays.",
+   "why": "show_when_blocked with the hours, out of hours (onlyTheClockShut: weekday + time_of_day)"
+  },
+  {
+   "row": "C914",
+   "screen": "rep_mirror.listen",
+   "verdict": "PASS",
+   "line": "they've moved on to someone else.",
+   "why": "no hours on its grey"
+  },
+  {
+   "row": "C914",
+   "screen": "rep_table.listen",
+   "verdict": "FAIL",
+   "line": "cooldown_message = \"the tables are empty outside lunch, 11am to 2pm on weekdays.\"",
+   "why": "the row shows its hours when the daily cap, not the clock, shut it",
+   "cause": "P36a1-c1"
+  },
+  {
+   "row": "C916",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "Listen to the next table",
+   "why": "hours on what she chooses"
+  },
+  {
+   "row": "C920",
+   "screen": "*",
+   "verdict": "N/A",
+   "line": "Done",
+   "why": "no hop: Done returns to the same place"
+  },
+  {
+   "row": "C924",
+   "screen": "*",
+   "verdict": "N/A",
+   "line": "\u2014",
+   "why": "no travel"
+  },
+  {
+   "row": "C926",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "time_progression_minutes",
+   "why": "minutes only"
+  },
+  {
+   "row": "C927",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "time_progression_minutes = 10",
+   "why": "exits carry time"
+  },
+  {
+   "row": "C928",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "\u2014",
+   "why": "no clock printed into prose"
+  },
+  {
+   "row": "C929",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "Done",
+   "why": "no time tag on labels"
+  },
+  {
+   "row": "C930",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "show_when_blocked = true",
+   "why": "set on both"
+  },
+  {
+   "row": "C931",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "end_time = \"14:00\"",
+   "why": "end exclusive, matches \"2pm\""
+  },
+  {
+   "row": "C953",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "Done",
+   "why": "no time or energy on labels; no money spent"
+  },
+  {
+   "row": "L106",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "Two girls you don't know",
+   "why": "no named person claimed present; Brooke's absence is a trigger condition"
+  },
+  {
+   "row": "L166",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "time_of_day 11:00\u201314:00",
+   "why": "the table is fixed to lunch because the lunch crowd is there then, said on the card; the mirror is open whenever the bathroom is, Brooke aside (ENI for LO)"
+  },
+  {
+   "row": "L167",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "show_when_blocked = true",
+   "why": "one row each, greys with show_when_blocked and a cooldown naming the full hours"
+  }
+ ],
+ "causes": [
+  {
+   "id": "P36a1-c1",
+   "what": "rep_table has one cooldown_message, the hours; the engine shows it on the daily-cap grey too, so after one listen at lunch it says the tables are empty outside lunch (the card's \"\u2014 they've gone quiet.\" is not built)"
+  },
+  {
+   "id": "P36a1-c2",
+   "what": "neither overheard screen has her reaction: no body, no line of hers"
+  },
+  {
+   "id": "P36a1-c3",
+   "what": "the overheard lines name Brooke, Cross, Nadia and Hale with no relation and no met condition (PLAN \u00a73: no one is named before she meets them)"
+  }
+ ]
+}

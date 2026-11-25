@@ -1,0 +1,84 @@
+{
+ "items": [
+  {
+   "row": "B10",
+   "screen": "npcs.npc_brooke.stranger_name",
+   "why": "failed last pass"
+  },
+  {
+   "row": "B10",
+   "screen": "npcs.npc_hale.stranger_name",
+   "why": "failed last pass"
+  },
+  {
+   "row": "B10",
+   "screen": "npcs.npc_jake.stranger_name",
+   "why": "failed last pass"
+  },
+  {
+   "row": "B10",
+   "screen": "npcs.npc_tess.stranger_name",
+   "why": "failed last pass"
+  },
+  {
+   "row": "B10",
+   "screen": "npcs.npc_zoe.stranger_name",
+   "why": "failed last pass"
+  },
+  {
+   "row": "B10",
+   "screen": "story_hints.Brooke",
+   "why": "failed last pass"
+  },
+  {
+   "row": "B10",
+   "screen": "story_hints.Jake",
+   "why": "failed last pass"
+  },
+  {
+   "row": "B10",
+   "screen": "story_hints.Zoe",
+   "why": "failed last pass"
+  },
+  {
+   "row": "C460",
+   "screen": "npcs.npc_brooke.stranger_name",
+   "why": "failed last pass"
+  },
+  {
+   "row": "C460",
+   "screen": "npcs.npc_hale.stranger_name",
+   "why": "failed last pass"
+  },
+  {
+   "row": "C460",
+   "screen": "npcs.npc_jake.stranger_name",
+   "why": "failed last pass"
+  },
+  {
+   "row": "C460",
+   "screen": "npcs.npc_tess.stranger_name",
+   "why": "failed last pass"
+  },
+  {
+   "row": "C460",
+   "screen": "npcs.npc_zoe.stranger_name",
+   "why": "failed last pass"
+  },
+  {
+   "row": "C460",
+   "screen": "story_hints.Brooke",
+   "why": "failed last pass"
+  },
+  {
+   "row": "C460",
+   "screen": "story_hints.Jake",
+   "why": "failed last pass"
+  },
+  {
+   "row": "C460",
+   "screen": "story_hints.Zoe",
+   "why": "failed last pass"
+  }
+ ]
+}

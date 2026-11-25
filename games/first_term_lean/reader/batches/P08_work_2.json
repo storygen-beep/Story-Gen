@@ -1,0 +1,14 @@
+{
+ "items": [
+  {
+   "row": "C596",
+   "screen": "*",
+   "why": "its rule's text changed"
+  },
+  {
+   "row": "C953",
+   "screen": "phone:text_mark",
+   "why": "its rule's text changed"
+  }
+ ]
+}

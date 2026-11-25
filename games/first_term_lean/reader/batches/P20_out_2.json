@@ -1,0 +1,257 @@
+{
+ "verdicts": [
+  {
+   "row": "C596",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "meeting screen, picture in it",
+   "why": "a first meeting is a new moment, so its picture is allowed; no face-opened menu is built here, and no talk screen carries a picture"
+  },
+  {
+   "row": "C795",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "no room text in this piece's screens",
+   "why": "its screens are scenes, not a place's room text; no line per person is added to any room"
+  },
+  {
+   "row": "C804",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "no room text in this piece's screens",
+   "why": "its screens are scenes, not a place's room text; no line per person is added to any room"
+  },
+  {
+   "row": "B10",
+   "screen": "quad_meet_zoe.coffee",
+   "verdict": "PASS",
+   "line": "\"A girl falls into step beside you on the path\"",
+   "why": "fires only with Zoe on the quad (her rows Mon/Wed/Fri 1-3, Tue/Thu 2-3); true on every visit"
+  },
+  {
+   "row": "B8",
+   "screen": "quad_meet_zoe.coffee",
+   "verdict": "PASS",
+   "line": "\"a crop top that shows off her stomach\" (Zoe's)",
+   "why": "the only garment is Zoe's; 19 in the picture matches her card"
+  },
+  {
+   "row": "C1158",
+   "screen": "quad_meet_zoe.coffee",
+   "verdict": "PASS",
+   "line": "\"a crop top that shows off her stomach\"",
+   "why": "no garment of Ella's named"
+  },
+  {
+   "row": "C1177",
+   "screen": "quad_meet_zoe.coffee",
+   "verdict": "PASS",
+   "line": "her view on the path",
+   "why": "no exposure of hers in play"
+  },
+  {
+   "row": "C1206",
+   "screen": "quad_meet_zoe.coffee",
+   "verdict": "PASS",
+   "line": "\"You look like you need this more than I do, babe.\"",
+   "why": "names no garment Ella may not be wearing"
+  },
+  {
+   "row": "C460",
+   "screen": "quad_meet_zoe.coffee",
+   "verdict": "PASS",
+   "line": "\"I'm Zoe. You're new.\"",
+   "why": "true on every reach: first term, Zoe present"
+  },
+  {
+   "row": "C461",
+   "screen": "quad_meet_zoe.coffee",
+   "verdict": "PASS",
+   "line": "\"sunglasses pushed up into a mess of blonde hair\"",
+   "why": "texture that can't clash"
+  },
+  {
+   "row": "L106",
+   "screen": "quad_meet_zoe.coffee",
+   "verdict": "PASS",
+   "line": "\"A girl falls into step beside you\"",
+   "why": "only Zoe named, and the trigger needs her present"
+  },
+  {
+   "row": "B10",
+   "screen": "quad_meet_zoe.talk",
+   "verdict": "PASS",
+   "line": "\"I live two streets that way, the green door. Come find me.\"",
+   "why": "true by her rows (apartment every evening 6-11); no number or garment; only Zoe named"
+  },
+  {
+   "row": "B8",
+   "screen": "quad_meet_zoe.talk",
+   "verdict": "PASS",
+   "line": "\"I live two streets that way, the green door. Come find me.\"",
+   "why": "true by her rows (apartment every evening 6-11); no number or garment; only Zoe named"
+  },
+  {
+   "row": "C460",
+   "screen": "quad_meet_zoe.talk",
+   "verdict": "PASS",
+   "line": "\"I live two streets that way, the green door. Come find me.\"",
+   "why": "true by her rows (apartment every evening 6-11); no number or garment; only Zoe named"
+  },
+  {
+   "row": "C461",
+   "screen": "quad_meet_zoe.talk",
+   "verdict": "PASS",
+   "line": "\"I live two streets that way, the green door. Come find me.\"",
+   "why": "true by her rows (apartment every evening 6-11); no number or garment; only Zoe named"
+  },
+  {
+   "row": "L106",
+   "screen": "quad_meet_zoe.talk",
+   "verdict": "PASS",
+   "line": "\"I live two streets that way, the green door. Come find me.\"",
+   "why": "true by her rows (apartment every evening 6-11); no number or garment; only Zoe named"
+  },
+  {
+   "row": "C889",
+   "screen": "quad_meet_zoe.talk",
+   "verdict": "PASS",
+   "line": "Done (10 min) back to the quad; no time in the beat",
+   "why": "no clock time, weekday or duration in prose or label; a one-time meeting gated on her presence, not hours; exit spends 10 min"
+  },
+  {
+   "row": "C892",
+   "screen": "quad_meet_zoe.talk",
+   "verdict": "PASS",
+   "line": "Done (10 min) back to the quad; no time in the beat",
+   "why": "no clock time, weekday or duration in prose or label; a one-time meeting gated on her presence, not hours; exit spends 10 min"
+  },
+  {
+   "row": "C897",
+   "screen": "quad_meet_zoe.talk",
+   "verdict": "PASS",
+   "line": "Done (10 min) back to the quad; no time in the beat",
+   "why": "no clock time, weekday or duration in prose or label; a one-time meeting gated on her presence, not hours; exit spends 10 min"
+  },
+  {
+   "row": "C900",
+   "screen": "quad_meet_zoe.talk",
+   "verdict": "PASS",
+   "line": "Done (10 min) back to the quad; no time in the beat",
+   "why": "no clock time, weekday or duration in prose or label; a one-time meeting gated on her presence, not hours; exit spends 10 min"
+  },
+  {
+   "row": "C902",
+   "screen": "quad_meet_zoe.talk",
+   "verdict": "PASS",
+   "line": "Done (10 min) back to the quad; no time in the beat",
+   "why": "no clock time, weekday or duration in prose or label; a one-time meeting gated on her presence, not hours; exit spends 10 min"
+  },
+  {
+   "row": "C903",
+   "screen": "quad_meet_zoe.talk",
+   "verdict": "PASS",
+   "line": "Done (10 min) back to the quad; no time in the beat",
+   "why": "no clock time, weekday or duration in prose or label; a one-time meeting gated on her presence, not hours; exit spends 10 min"
+  },
+  {
+   "row": "C906",
+   "screen": "quad_meet_zoe.talk",
+   "verdict": "PASS",
+   "line": "Done (10 min) back to the quad; no time in the beat",
+   "why": "no clock time, weekday or duration in prose or label; a one-time meeting gated on her presence, not hours; exit spends 10 min"
+  },
+  {
+   "row": "C910",
+   "screen": "quad_meet_zoe.talk",
+   "verdict": "PASS",
+   "line": "Done (10 min) back to the quad; no time in the beat",
+   "why": "no clock time, weekday or duration in prose or label; a one-time meeting gated on her presence, not hours; exit spends 10 min"
+  },
+  {
+   "row": "C913",
+   "screen": "quad_meet_zoe.talk",
+   "verdict": "PASS",
+   "line": "Done (10 min) back to the quad; no time in the beat",
+   "why": "no clock time, weekday or duration in prose or label; a one-time meeting gated on her presence, not hours; exit spends 10 min"
+  },
+  {
+   "row": "C914",
+   "screen": "quad_meet_zoe.talk",
+   "verdict": "PASS",
+   "line": "Done (10 min) back to the quad; no time in the beat",
+   "why": "no clock time, weekday or duration in prose or label; a one-time meeting gated on her presence, not hours; exit spends 10 min"
+  },
+  {
+   "row": "C916",
+   "screen": "quad_meet_zoe.talk",
+   "verdict": "PASS",
+   "line": "Done (10 min) back to the quad; no time in the beat",
+   "why": "no clock time, weekday or duration in prose or label; a one-time meeting gated on her presence, not hours; exit spends 10 min"
+  },
+  {
+   "row": "C920",
+   "screen": "quad_meet_zoe.talk",
+   "verdict": "PASS",
+   "line": "Done (10 min) back to the quad; no time in the beat",
+   "why": "no clock time, weekday or duration in prose or label; a one-time meeting gated on her presence, not hours; exit spends 10 min"
+  },
+  {
+   "row": "C924",
+   "screen": "quad_meet_zoe.talk",
+   "verdict": "PASS",
+   "line": "Done (10 min) back to the quad; no time in the beat",
+   "why": "no clock time, weekday or duration in prose or label; a one-time meeting gated on her presence, not hours; exit spends 10 min"
+  },
+  {
+   "row": "C926",
+   "screen": "quad_meet_zoe.talk",
+   "verdict": "PASS",
+   "line": "Done (10 min) back to the quad; no time in the beat",
+   "why": "no clock time, weekday or duration in prose or label; a one-time meeting gated on her presence, not hours; exit spends 10 min"
+  },
+  {
+   "row": "C927",
+   "screen": "quad_meet_zoe.talk",
+   "verdict": "PASS",
+   "line": "Done (10 min) back to the quad; no time in the beat",
+   "why": "no clock time, weekday or duration in prose or label; a one-time meeting gated on her presence, not hours; exit spends 10 min"
+  },
+  {
+   "row": "C928",
+   "screen": "quad_meet_zoe.talk",
+   "verdict": "PASS",
+   "line": "Done (10 min) back to the quad; no time in the beat",
+   "why": "no clock time, weekday or duration in prose or label; a one-time meeting gated on her presence, not hours; exit spends 10 min"
+  },
+  {
+   "row": "C929",
+   "screen": "quad_meet_zoe.talk",
+   "verdict": "PASS",
+   "line": "Done (10 min) back to the quad; no time in the beat",
+   "why": "no clock time, weekday or duration in prose or label; a one-time meeting gated on her presence, not hours; exit spends 10 min"
+  },
+  {
+   "row": "C930",
+   "screen": "quad_meet_zoe.talk",
+   "verdict": "PASS",
+   "line": "Done (10 min) back to the quad; no time in the beat",
+   "why": "no clock time, weekday or duration in prose or label; a one-time meeting gated on her presence, not hours; exit spends 10 min"
+  },
+  {
+   "row": "C931",
+   "screen": "quad_meet_zoe.talk",
+   "verdict": "PASS",
+   "line": "Done (10 min) back to the quad; no time in the beat",
+   "why": "no clock time, weekday or duration in prose or label; a one-time meeting gated on her presence, not hours; exit spends 10 min"
+  },
+  {
+   "row": "L167",
+   "screen": "quad_meet_zoe.talk",
+   "verdict": "PASS",
+   "line": "Done (10 min) back to the quad; no time in the beat",
+   "why": "no clock time, weekday or duration in prose or label; a one-time meeting gated on her presence, not hours; exit spends 10 min"
+  }
+ ],
+ "causes": []
+}

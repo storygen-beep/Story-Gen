@@ -1,0 +1,61 @@
+{
+ "verdicts": [
+  {
+   "row": "B10",
+   "screen": "stage_practise.practise",
+   "verdict": "PASS",
+   "line": "The seats are empty. You stand under the work light and say whatever comes into your head to the dark",
+   "why": "trigger needs Cross absent; theatre's only rows are Cross and Brooke (Brooke 11-13/14-18 Tue/Thu/Fri, same as Cross), so with Cross out the seats are empty at every minute; work light matches the theatre's empty variant"
+  },
+  {
+   "row": "B8",
+   "screen": "stage_practise.practise",
+   "verdict": "PASS",
+   "line": "max_triggers_per_day = 2; Done 30 min",
+   "why": "no garment named; no number on screen; weekdays agree with theatre hours (weekdays 9am-9pm)"
+  },
+  {
+   "row": "C460",
+   "screen": "stage_practise.practise",
+   "verdict": "PASS",
+   "line": "The seats are empty. You stand under the work light and say whatever comes into your head to the dark",
+   "why": "every claim (empty seats, work light, nobody there) true on every reachable visit per who_is_where"
+  },
+  {
+   "row": "C461",
+   "screen": "stage_practise.practise",
+   "verdict": "PASS",
+   "line": "louder than you'd ever dare with anyone there",
+   "why": "her opinion, on her voice; texture can't clash"
+  },
+  {
+   "row": "C927",
+   "screen": "stage_practise.practise",
+   "verdict": "PASS",
+   "line": "time_progression_minutes = 30",
+   "why": "exit time set"
+  },
+  {
+   "row": "C931",
+   "screen": "stage_practise.practise",
+   "verdict": "PASS",
+   "line": "conditions: weekday + npc_at_location only",
+   "why": "no time_of_day on the row; the clock window is the theatre's hours, so no end-exclusive gap"
+  },
+  {
+   "row": "L106",
+   "screen": "stage_practise.practise",
+   "verdict": "PASS",
+   "line": "The seats are empty.",
+   "why": "claims nobody there; Cross absent by condition, Brooke's rows never put her there without Cross"
+  },
+  {
+   "row": "L167",
+   "screen": "stage_practise.practise",
+   "verdict": "PASS",
+   "line": "max_triggers_per_day = 2, no show_when_blocked",
+   "why": "one row; with a daily count it sets no show_when_blocked, so it is gone when used up or shut (clock.md rule 10, LO 2026-11-24)"
+  }
+ ],
+ "causes": []
+}

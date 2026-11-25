@@ -1,0 +1,26 @@
+{
+ "verdicts": [
+  {
+   "row": "L170",
+   "screen": "*",
+   "verdict": "N/A",
+   "line": "",
+   "why": "no place on this piece's screens is hidden_until a flag"
+  },
+  {
+   "row": "C952",
+   "screen": "cafe_work_hour.work",
+   "verdict": "PASS",
+   "line": "\"Five, rookie. Not bad.\" ... You made $5.",
+   "why": "$5 an hour (PLAN 8f), effect money +5; start windows in the blocked message match the :56 ends"
+  },
+  {
+   "row": "C952",
+   "screen": "cafe_work_shift.shift",
+   "verdict": "PASS",
+   "line": "\"Twenty-two, rookie. Good work.\" ... You made $22.",
+   "why": "$22 a shift (PLAN: $5 an hour plus $2 tips), effect money +22; 'Chris has you tomorrow' matches his Sunday row"
+  }
+ ],
+ "causes": []
+}

@@ -1,0 +1,645 @@
+{
+ "verdicts": [
+  {
+   "row": "C889",
+   "screen": "opening.bath",
+   "verdict": "PASS",
+   "line": "\"Open the door\"",
+   "why": "labels name no clock time and no duration; the spend sits in the costs",
+   "cause": null
+  },
+  {
+   "row": "C892",
+   "screen": "opening.bath",
+   "verdict": "PASS",
+   "line": "Your shoulders drop for the first time all morning.",
+   "why": "no hour in the act",
+   "cause": null
+  },
+  {
+   "row": "C897",
+   "screen": "opening.bath",
+   "verdict": "PASS",
+   "line": "\"Open the door\"",
+   "why": "the only time here is the act's own, not a per-room charge",
+   "cause": null
+  },
+  {
+   "row": "C900",
+   "screen": "opening.bath",
+   "verdict": "PASS",
+   "line": "Your shoulders drop for the first time all morning.",
+   "why": "one-time opening, fixed on Monday morning; 'morning' is no clock time and is true",
+   "cause": null
+  },
+  {
+   "row": "C902",
+   "screen": "opening.bath",
+   "verdict": "PASS",
+   "line": "Your shoulders drop for the first time all morning.",
+   "why": "true at the last minute it can show; it names no time",
+   "cause": null
+  },
+  {
+   "row": "C903",
+   "screen": "opening.bath",
+   "verdict": "PASS",
+   "line": "Your shoulders drop for the first time all morning.",
+   "why": "names no weekday",
+   "cause": null
+  },
+  {
+   "row": "C906",
+   "screen": "opening.bath",
+   "verdict": "PASS",
+   "line": "\"Open the door\"",
+   "why": "no 'till X' anywhere",
+   "cause": null
+  },
+  {
+   "row": "C910",
+   "screen": "opening.bath",
+   "verdict": "PASS",
+   "line": "\"Open the door\"",
+   "why": "buttons say no time and no energy, and this act costs no money",
+   "cause": null
+  },
+  {
+   "row": "C913",
+   "screen": "opening.bath",
+   "verdict": "N/A",
+   "line": "\"Open the door\"",
+   "why": "no activity with hours on an opening screen",
+   "cause": null
+  },
+  {
+   "row": "C914",
+   "screen": "opening.bath",
+   "verdict": "N/A",
+   "line": "\"Open the door\"",
+   "why": "no row with hours on an opening screen",
+   "cause": null
+  },
+  {
+   "row": "C916",
+   "screen": "opening.bath",
+   "verdict": "N/A",
+   "line": "\"Open the door\"",
+   "why": "no hours on an opening screen",
+   "cause": null
+  },
+  {
+   "row": "C920",
+   "screen": "opening.bath",
+   "verdict": "PASS",
+   "line": "\"Open the door\" (8 min)",
+   "why": "the 8 minutes are the shower, a scene step inside the opening, not a room hop",
+   "cause": null
+  },
+  {
+   "row": "C924",
+   "screen": "opening.bath",
+   "verdict": "PASS",
+   "line": "\"Open the door\"",
+   "why": "travel cost stays on the moves between areas, not here",
+   "cause": null
+  },
+  {
+   "row": "C926",
+   "screen": "opening.bath",
+   "verdict": "PASS",
+   "line": "\"Open the door\"",
+   "why": "the clock moves only by the choice's minutes",
+   "cause": null
+  },
+  {
+   "row": "C928",
+   "screen": "opening.bath",
+   "verdict": "PASS",
+   "line": "Your shoulders drop for the first time all morning.",
+   "why": "no clock printed in the prose",
+   "cause": null
+  },
+  {
+   "row": "C929",
+   "screen": "opening.bath",
+   "verdict": "PASS",
+   "line": "\"Open the door\"",
+   "why": "no activity time on the label",
+   "cause": null
+  },
+  {
+   "row": "C930",
+   "screen": "opening.bath",
+   "verdict": "N/A",
+   "line": "\"Open the door\"",
+   "why": "no windowed work on an opening screen",
+   "cause": null
+  },
+  {
+   "row": "C889",
+   "screen": "opening.hall",
+   "verdict": "PASS",
+   "line": "\"Hold the towel and squeeze past him\" / \"\\\"All yours.\\\"\" / \"Fix the knot first\"",
+   "why": "labels name no clock time and no duration; the spend sits in the costs",
+   "cause": null
+  },
+  {
+   "row": "C892",
+   "screen": "opening.hall",
+   "verdict": "PASS",
+   "line": "Shit. Sorry. First day, huh?",
+   "why": "no hour in the act",
+   "cause": null
+  },
+  {
+   "row": "C897",
+   "screen": "opening.hall",
+   "verdict": "PASS",
+   "line": "\"Hold the towel and squeeze past him\" / \"\\\"All yours.\\\"\" / \"Fix the knot first\"",
+   "why": "the only time here is the act's own, not a per-room charge",
+   "cause": null
+  },
+  {
+   "row": "C900",
+   "screen": "opening.hall",
+   "verdict": "PASS",
+   "line": "Shit. Sorry. First day, huh?",
+   "why": "no line says what time it is",
+   "cause": null
+  },
+  {
+   "row": "C902",
+   "screen": "opening.hall",
+   "verdict": "PASS",
+   "line": "Shit. Sorry. First day, huh?",
+   "why": "true at the last minute it can show; it names no time",
+   "cause": null
+  },
+  {
+   "row": "C903",
+   "screen": "opening.hall",
+   "verdict": "PASS",
+   "line": "Shit. Sorry. First day, huh?",
+   "why": "names no weekday",
+   "cause": null
+  },
+  {
+   "row": "C906",
+   "screen": "opening.hall",
+   "verdict": "PASS",
+   "line": "\"Hold the towel and squeeze past him\" / \"\\\"All yours.\\\"\" / \"Fix the knot first\"",
+   "why": "no 'till X' anywhere",
+   "cause": null
+  },
+  {
+   "row": "C910",
+   "screen": "opening.hall",
+   "verdict": "PASS",
+   "line": "\"Hold the towel and squeeze past him\" / \"\\\"All yours.\\\"\" / \"Fix the knot first\"",
+   "why": "buttons say no time and no energy, and this act costs no money",
+   "cause": null
+  },
+  {
+   "row": "C913",
+   "screen": "opening.hall",
+   "verdict": "N/A",
+   "line": "\"Hold the towel and squeeze past him\" / \"\\\"All yours.\\\"\" / \"Fix the knot first\"",
+   "why": "no activity with hours on an opening screen",
+   "cause": null
+  },
+  {
+   "row": "C914",
+   "screen": "opening.hall",
+   "verdict": "N/A",
+   "line": "\"Hold the towel and squeeze past him\" / \"\\\"All yours.\\\"\" / \"Fix the knot first\"",
+   "why": "no row with hours on an opening screen",
+   "cause": null
+  },
+  {
+   "row": "C916",
+   "screen": "opening.hall",
+   "verdict": "N/A",
+   "line": "\"Hold the towel and squeeze past him\" / \"\\\"All yours.\\\"\" / \"Fix the knot first\"",
+   "why": "no hours on an opening screen",
+   "cause": null
+  },
+  {
+   "row": "C920",
+   "screen": "opening.hall",
+   "verdict": "PASS",
+   "line": "\"Hold the towel and squeeze past him\" / \"\\\"All yours.\\\"\" / \"Fix the knot first\"",
+   "why": "the 3 and 2 minutes are scene steps of the opening, the same on every branch; no label carries them",
+   "cause": null
+  },
+  {
+   "row": "C924",
+   "screen": "opening.hall",
+   "verdict": "PASS",
+   "line": "\"Hold the towel and squeeze past him\" / \"\\\"All yours.\\\"\" / \"Fix the knot first\"",
+   "why": "travel cost stays on the moves between areas, not here",
+   "cause": null
+  },
+  {
+   "row": "C926",
+   "screen": "opening.hall",
+   "verdict": "PASS",
+   "line": "\"Hold the towel and squeeze past him\" / \"\\\"All yours.\\\"\" / \"Fix the knot first\"",
+   "why": "the clock moves only by the choice's minutes",
+   "cause": null
+  },
+  {
+   "row": "C928",
+   "screen": "opening.hall",
+   "verdict": "PASS",
+   "line": "Shit. Sorry. First day, huh?",
+   "why": "no clock printed in the prose",
+   "cause": null
+  },
+  {
+   "row": "C929",
+   "screen": "opening.hall",
+   "verdict": "PASS",
+   "line": "\"Hold the towel and squeeze past him\" / \"\\\"All yours.\\\"\" / \"Fix the knot first\"",
+   "why": "no activity time on the label",
+   "cause": null
+  },
+  {
+   "row": "C930",
+   "screen": "opening.hall",
+   "verdict": "N/A",
+   "line": "\"Hold the towel and squeeze past him\" / \"\\\"All yours.\\\"\" / \"Fix the knot first\"",
+   "why": "no windowed work on an opening screen",
+   "cause": null
+  },
+  {
+   "row": "C889",
+   "screen": "opening.room_past",
+   "verdict": "PASS",
+   "line": "\"Go to your room\"",
+   "why": "labels name no clock time and no duration; the spend sits in the costs",
+   "cause": null
+  },
+  {
+   "row": "C892",
+   "screen": "opening.room_past",
+   "verdict": "PASS",
+   "line": "You run for your room. The bathroom bolt hasn't held in years, and everyone in this house knows it.",
+   "why": "no hour in the act",
+   "cause": null
+  },
+  {
+   "row": "C897",
+   "screen": "opening.room_past",
+   "verdict": "PASS",
+   "line": "\"Go to your room\"",
+   "why": "the only time here is the act's own, not a per-room charge",
+   "cause": null
+  },
+  {
+   "row": "C900",
+   "screen": "opening.room_past",
+   "verdict": "PASS",
+   "line": "You run for your room. The bathroom bolt hasn't held in years, and everyone in this house knows it.",
+   "why": "no line says what time it is",
+   "cause": null
+  },
+  {
+   "row": "C902",
+   "screen": "opening.room_past",
+   "verdict": "PASS",
+   "line": "You run for your room. The bathroom bolt hasn't held in years, and everyone in this house knows it.",
+   "why": "true at the last minute it can show; it names no time",
+   "cause": null
+  },
+  {
+   "row": "C903",
+   "screen": "opening.room_past",
+   "verdict": "PASS",
+   "line": "You run for your room. The bathroom bolt hasn't held in years, and everyone in this house knows it.",
+   "why": "names no weekday",
+   "cause": null
+  },
+  {
+   "row": "C906",
+   "screen": "opening.room_past",
+   "verdict": "PASS",
+   "line": "\"Go to your room\"",
+   "why": "no 'till X' anywhere",
+   "cause": null
+  },
+  {
+   "row": "C910",
+   "screen": "opening.room_past",
+   "verdict": "PASS",
+   "line": "\"Go to your room\"",
+   "why": "buttons say no time and no energy, and this act costs no money",
+   "cause": null
+  },
+  {
+   "row": "C913",
+   "screen": "opening.room_past",
+   "verdict": "N/A",
+   "line": "\"Go to your room\"",
+   "why": "no activity with hours on an opening screen",
+   "cause": null
+  },
+  {
+   "row": "C914",
+   "screen": "opening.room_past",
+   "verdict": "N/A",
+   "line": "\"Go to your room\"",
+   "why": "no row with hours on an opening screen",
+   "cause": null
+  },
+  {
+   "row": "C916",
+   "screen": "opening.room_past",
+   "verdict": "N/A",
+   "line": "\"Go to your room\"",
+   "why": "no hours on an opening screen",
+   "cause": null
+  },
+  {
+   "row": "C920",
+   "screen": "opening.room_past",
+   "verdict": "PASS",
+   "line": "\"Go to your room\"",
+   "why": "the 3 and 2 minutes are scene steps of the opening, the same on every branch; no label carries them",
+   "cause": null
+  },
+  {
+   "row": "C924",
+   "screen": "opening.room_past",
+   "verdict": "PASS",
+   "line": "\"Go to your room\"",
+   "why": "travel cost stays on the moves between areas, not here",
+   "cause": null
+  },
+  {
+   "row": "C926",
+   "screen": "opening.room_past",
+   "verdict": "PASS",
+   "line": "\"Go to your room\"",
+   "why": "the clock moves only by the choice's minutes",
+   "cause": null
+  },
+  {
+   "row": "C928",
+   "screen": "opening.room_past",
+   "verdict": "PASS",
+   "line": "You run for your room. The bathroom bolt hasn't held in years, and everyone in this house knows it.",
+   "why": "no clock printed in the prose",
+   "cause": null
+  },
+  {
+   "row": "C929",
+   "screen": "opening.room_past",
+   "verdict": "PASS",
+   "line": "\"Go to your room\"",
+   "why": "no activity time on the label",
+   "cause": null
+  },
+  {
+   "row": "C930",
+   "screen": "opening.room_past",
+   "verdict": "N/A",
+   "line": "\"Go to your room\"",
+   "why": "no windowed work on an opening screen",
+   "cause": null
+  },
+  {
+   "row": "C889",
+   "screen": "opening.room_waited",
+   "verdict": "PASS",
+   "line": "\"Go to your room\"",
+   "why": "labels name no clock time and no duration; the spend sits in the costs",
+   "cause": null
+  },
+  {
+   "row": "C892",
+   "screen": "opening.room_waited",
+   "verdict": "PASS",
+   "line": "You run for your room. The bathroom bolt hasn't held in years, and everyone in this house knows it.",
+   "why": "no hour in the act",
+   "cause": null
+  },
+  {
+   "row": "C897",
+   "screen": "opening.room_waited",
+   "verdict": "PASS",
+   "line": "\"Go to your room\"",
+   "why": "the only time here is the act's own, not a per-room charge",
+   "cause": null
+  },
+  {
+   "row": "C900",
+   "screen": "opening.room_waited",
+   "verdict": "PASS",
+   "line": "You run for your room. The bathroom bolt hasn't held in years, and everyone in this house knows it.",
+   "why": "no line says what time it is",
+   "cause": null
+  },
+  {
+   "row": "C902",
+   "screen": "opening.room_waited",
+   "verdict": "PASS",
+   "line": "You run for your room. The bathroom bolt hasn't held in years, and everyone in this house knows it.",
+   "why": "true at the last minute it can show; it names no time",
+   "cause": null
+  },
+  {
+   "row": "C903",
+   "screen": "opening.room_waited",
+   "verdict": "PASS",
+   "line": "You run for your room. The bathroom bolt hasn't held in years, and everyone in this house knows it.",
+   "why": "names no weekday",
+   "cause": null
+  },
+  {
+   "row": "C906",
+   "screen": "opening.room_waited",
+   "verdict": "PASS",
+   "line": "\"Go to your room\"",
+   "why": "no 'till X' anywhere",
+   "cause": null
+  },
+  {
+   "row": "C910",
+   "screen": "opening.room_waited",
+   "verdict": "PASS",
+   "line": "\"Go to your room\"",
+   "why": "buttons say no time and no energy, and this act costs no money",
+   "cause": null
+  },
+  {
+   "row": "C913",
+   "screen": "opening.room_waited",
+   "verdict": "N/A",
+   "line": "\"Go to your room\"",
+   "why": "no activity with hours on an opening screen",
+   "cause": null
+  },
+  {
+   "row": "C914",
+   "screen": "opening.room_waited",
+   "verdict": "N/A",
+   "line": "\"Go to your room\"",
+   "why": "no row with hours on an opening screen",
+   "cause": null
+  },
+  {
+   "row": "C916",
+   "screen": "opening.room_waited",
+   "verdict": "N/A",
+   "line": "\"Go to your room\"",
+   "why": "no hours on an opening screen",
+   "cause": null
+  },
+  {
+   "row": "C920",
+   "screen": "opening.room_waited",
+   "verdict": "PASS",
+   "line": "\"Go to your room\"",
+   "why": "the 3 and 2 minutes are scene steps of the opening, the same on every branch; no label carries them",
+   "cause": null
+  },
+  {
+   "row": "C924",
+   "screen": "opening.room_waited",
+   "verdict": "PASS",
+   "line": "\"Go to your room\"",
+   "why": "travel cost stays on the moves between areas, not here",
+   "cause": null
+  },
+  {
+   "row": "C926",
+   "screen": "opening.room_waited",
+   "verdict": "PASS",
+   "line": "\"Go to your room\"",
+   "why": "the clock moves only by the choice's minutes",
+   "cause": null
+  },
+  {
+   "row": "C928",
+   "screen": "opening.room_waited",
+   "verdict": "PASS",
+   "line": "You run for your room. The bathroom bolt hasn't held in years, and everyone in this house knows it.",
+   "why": "no clock printed in the prose",
+   "cause": null
+  },
+  {
+   "row": "C929",
+   "screen": "opening.room_waited",
+   "verdict": "PASS",
+   "line": "\"Go to your room\"",
+   "why": "no activity time on the label",
+   "cause": null
+  },
+  {
+   "row": "C930",
+   "screen": "opening.room_waited",
+   "verdict": "N/A",
+   "line": "\"Go to your room\"",
+   "why": "no windowed work on an opening screen",
+   "cause": null
+  },
+  {
+   "row": "C892",
+   "screen": "opening.room_spoke",
+   "verdict": "PASS",
+   "line": "Thanks. Go get dressed.",
+   "why": "no hour in the act",
+   "cause": null
+  },
+  {
+   "row": "C897",
+   "screen": "opening.room_spoke",
+   "verdict": "PASS",
+   "line": "\"Go to your room\"",
+   "why": "the only time here is the act's own, not a per-room charge",
+   "cause": null
+  },
+  {
+   "row": "C900",
+   "screen": "opening.room_spoke",
+   "verdict": "PASS",
+   "line": "Thanks. Go get dressed.",
+   "why": "no line says what time it is",
+   "cause": null
+  },
+  {
+   "row": "C902",
+   "screen": "opening.room_spoke",
+   "verdict": "PASS",
+   "line": "Thanks. Go get dressed.",
+   "why": "true at the last minute it can show; it names no time",
+   "cause": null
+  },
+  {
+   "row": "C903",
+   "screen": "opening.room_spoke",
+   "verdict": "PASS",
+   "line": "Thanks. Go get dressed.",
+   "why": "names no weekday",
+   "cause": null
+  },
+  {
+   "row": "C913",
+   "screen": "opening.room_spoke",
+   "verdict": "N/A",
+   "line": "\"Go to your room\"",
+   "why": "no activity with hours on an opening screen",
+   "cause": null
+  },
+  {
+   "row": "C914",
+   "screen": "opening.room_spoke",
+   "verdict": "N/A",
+   "line": "\"Go to your room\"",
+   "why": "no row with hours on an opening screen",
+   "cause": null
+  },
+  {
+   "row": "C916",
+   "screen": "opening.room_spoke",
+   "verdict": "N/A",
+   "line": "\"Go to your room\"",
+   "why": "no hours on an opening screen",
+   "cause": null
+  },
+  {
+   "row": "C924",
+   "screen": "opening.room_spoke",
+   "verdict": "PASS",
+   "line": "\"Go to your room\"",
+   "why": "travel cost stays on the moves between areas, not here",
+   "cause": null
+  },
+  {
+   "row": "C926",
+   "screen": "opening.room_spoke",
+   "verdict": "PASS",
+   "line": "\"Go to your room\"",
+   "why": "the clock moves only by the choice's minutes",
+   "cause": null
+  },
+  {
+   "row": "C928",
+   "screen": "opening.room_spoke",
+   "verdict": "PASS",
+   "line": "Thanks. Go get dressed.",
+   "why": "no clock printed in the prose",
+   "cause": null
+  },
+  {
+   "row": "C930",
+   "screen": "opening.room_spoke",
+   "verdict": "N/A",
+   "line": "\"Go to your room\"",
+   "why": "no windowed work on an opening screen",
+   "cause": null
+  }
+ ],
+ "causes": []
+}

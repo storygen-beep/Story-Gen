@@ -1,0 +1,549 @@
+{
+ "verdicts": [
+  {
+   "row": "C889",
+   "screen": "loop_eat.do",
+   "verdict": "PASS",
+   "line": "\"Eat something\" / \"Done\"",
+   "why": "labels name no clock time and no duration; the spend sits in the costs",
+   "cause": null
+  },
+  {
+   "row": "C892",
+   "screen": "loop_eat.do",
+   "verdict": "PASS",
+   "line": "You eat standing at the counter: toast, whatever's in the fridge, coffee from the pot.",
+   "why": "no hour in the act",
+   "cause": null
+  },
+  {
+   "row": "C897",
+   "screen": "loop_eat.do",
+   "verdict": "PASS",
+   "line": "\"Eat something\" / \"Done\"",
+   "why": "the only time here is the act's own, not a per-room charge",
+   "cause": null
+  },
+  {
+   "row": "C900",
+   "screen": "loop_eat.do",
+   "verdict": "PASS",
+   "line": "You eat standing at the counter: toast, whatever's in the fridge, coffee from the pot.",
+   "why": "no line says what time it is",
+   "cause": null
+  },
+  {
+   "row": "C902",
+   "screen": "loop_eat.do",
+   "verdict": "PASS",
+   "line": "You eat standing at the counter: toast, whatever's in the fridge, coffee from the pot.",
+   "why": "true at the last minute it can show; it names no time",
+   "cause": null
+  },
+  {
+   "row": "C903",
+   "screen": "loop_eat.do",
+   "verdict": "PASS",
+   "line": "You eat standing at the counter: toast, whatever's in the fridge, coffee from the pot.",
+   "why": "names no weekday",
+   "cause": null
+  },
+  {
+   "row": "C906",
+   "screen": "loop_eat.do",
+   "verdict": "PASS",
+   "line": "\"Eat something\" / \"Done\"",
+   "why": "no 'till X' anywhere",
+   "cause": null
+  },
+  {
+   "row": "C910",
+   "screen": "loop_eat.do",
+   "verdict": "PASS",
+   "line": "\"Eat something\" / \"Done\"",
+   "why": "buttons say no time and no energy, and this act costs no money",
+   "cause": null
+  },
+  {
+   "row": "C913",
+   "screen": "loop_eat.do",
+   "verdict": "PASS",
+   "line": "locked_text \"you're not hungry right now.\"",
+   "why": "Eat has no hours; shut by meals_today it greys with a true reason",
+   "cause": null
+  },
+  {
+   "row": "C914",
+   "screen": "loop_eat.do",
+   "verdict": "PASS",
+   "line": "locked_text \"you're not hungry right now.\"",
+   "why": "no hours printed; the reason is the meal count",
+   "cause": null
+  },
+  {
+   "row": "C916",
+   "screen": "loop_eat.do",
+   "verdict": "N/A",
+   "line": "\"Eat something\" / \"Done\"",
+   "why": "Eat has no hours",
+   "cause": null
+  },
+  {
+   "row": "C920",
+   "screen": "loop_eat.do",
+   "verdict": "PASS",
+   "line": "\"Done\" (20 min) back to the Kitchen",
+   "why": "the 20 minutes are the meal, and Done stays in the Kitchen; no hop is charged",
+   "cause": null
+  },
+  {
+   "row": "C924",
+   "screen": "loop_eat.do",
+   "verdict": "PASS",
+   "line": "\"Eat something\" / \"Done\"",
+   "why": "travel cost stays on the moves between areas, not here",
+   "cause": null
+  },
+  {
+   "row": "C926",
+   "screen": "loop_eat.do",
+   "verdict": "PASS",
+   "line": "\"Eat something\" / \"Done\"",
+   "why": "the clock moves only by the choice's minutes",
+   "cause": null
+  },
+  {
+   "row": "C928",
+   "screen": "loop_eat.do",
+   "verdict": "PASS",
+   "line": "You eat standing at the counter: toast, whatever's in the fridge, coffee from the pot.",
+   "why": "no clock printed in the prose",
+   "cause": null
+  },
+  {
+   "row": "C929",
+   "screen": "loop_eat.do",
+   "verdict": "PASS",
+   "line": "\"Eat something\" / \"Done\"",
+   "why": "no activity time on the label",
+   "cause": null
+  },
+  {
+   "row": "C930",
+   "screen": "loop_eat.do",
+   "verdict": "N/A",
+   "line": "\"Eat something\" / \"Done\"",
+   "why": "Eat is not windowed",
+   "cause": null
+  },
+  {
+   "row": "C889",
+   "screen": "ryan_kitchen.hub",
+   "verdict": "PASS",
+   "line": "\"Talk\" / \"Leave\"",
+   "why": "labels name no clock time and no duration; the spend sits in the costs",
+   "cause": null
+  },
+  {
+   "row": "C892",
+   "screen": "ryan_kitchen.hub",
+   "verdict": "PASS",
+   "line": "Ryan's eating standing up at the counter, straight out of the pan.",
+   "why": "no hour in the act",
+   "cause": null
+  },
+  {
+   "row": "C897",
+   "screen": "ryan_kitchen.hub",
+   "verdict": "PASS",
+   "line": "\"Talk\" / \"Leave\"",
+   "why": "the only time here is the act's own, not a per-room charge",
+   "cause": null
+  },
+  {
+   "row": "C900",
+   "screen": "ryan_kitchen.hub",
+   "verdict": "PASS",
+   "line": "Ryan's eating standing up at the counter, straight out of the pan.",
+   "why": "no line says what time it is",
+   "cause": null
+  },
+  {
+   "row": "C902",
+   "screen": "ryan_kitchen.hub",
+   "verdict": "PASS",
+   "line": "Ryan's eating standing up at the counter, straight out of the pan.",
+   "why": "true at the last minute it can show; it names no time",
+   "cause": null
+  },
+  {
+   "row": "C903",
+   "screen": "ryan_kitchen.hub",
+   "verdict": "PASS",
+   "line": "Ryan's eating standing up at the counter, straight out of the pan.",
+   "why": "names no weekday",
+   "cause": null
+  },
+  {
+   "row": "C906",
+   "screen": "ryan_kitchen.hub",
+   "verdict": "PASS",
+   "line": "\"Talk\" / \"Leave\"",
+   "why": "no 'till X' anywhere",
+   "cause": null
+  },
+  {
+   "row": "C910",
+   "screen": "ryan_kitchen.hub",
+   "verdict": "PASS",
+   "line": "\"Talk\" / \"Leave\"",
+   "why": "buttons say no time and no energy, and this act costs no money",
+   "cause": null
+  },
+  {
+   "row": "C913",
+   "screen": "ryan_kitchen.hub",
+   "verdict": "PASS",
+   "line": "\"Talk\" — locked_text \"Talk — you've already talked today.\"",
+   "why": "a person's menu, not an activity with hours; his hours are on the Schedules page (clock rule 5)",
+   "cause": null
+  },
+  {
+   "row": "C914",
+   "screen": "ryan_kitchen.hub",
+   "verdict": "PASS",
+   "line": "\"Talk — you've already talked today.\"",
+   "why": "the grey line names the daily flag, not hours",
+   "cause": null
+  },
+  {
+   "row": "C916",
+   "screen": "ryan_kitchen.hub",
+   "verdict": "PASS",
+   "line": "\"Talk\" / \"Leave\"",
+   "why": "his menu follows his face; nothing with hours greys here",
+   "cause": null
+  },
+  {
+   "row": "C920",
+   "screen": "ryan_kitchen.hub",
+   "verdict": "PASS",
+   "line": "\"Leave\" (0 min) back to the same room",
+   "why": "Leave stays in the room and costs nothing; Talk spends its 5 minutes on Done",
+   "cause": null
+  },
+  {
+   "row": "C924",
+   "screen": "ryan_kitchen.hub",
+   "verdict": "PASS",
+   "line": "\"Talk\" / \"Leave\"",
+   "why": "travel cost stays on the moves between areas, not here",
+   "cause": null
+  },
+  {
+   "row": "C926",
+   "screen": "ryan_kitchen.hub",
+   "verdict": "PASS",
+   "line": "\"Talk\" / \"Leave\"",
+   "why": "the clock moves only by the choice's minutes",
+   "cause": null
+  },
+  {
+   "row": "C928",
+   "screen": "ryan_kitchen.hub",
+   "verdict": "PASS",
+   "line": "Ryan's eating standing up at the counter, straight out of the pan.",
+   "why": "no clock printed in the prose",
+   "cause": null
+  },
+  {
+   "row": "C929",
+   "screen": "ryan_kitchen.hub",
+   "verdict": "PASS",
+   "line": "\"Talk\" / \"Leave\"",
+   "why": "no activity time on the label",
+   "cause": null
+  },
+  {
+   "row": "C930",
+   "screen": "ryan_kitchen.hub",
+   "verdict": "N/A",
+   "line": "\"Talk\" / \"Leave\"",
+   "why": "no windowed work on a person's menu",
+   "cause": null
+  },
+  {
+   "row": "C889",
+   "screen": "ryan_living_room.hub",
+   "verdict": "PASS",
+   "line": "\"Talk\" / \"Leave\"",
+   "why": "labels name no clock time and no duration; the spend sits in the costs",
+   "cause": null
+  },
+  {
+   "row": "C892",
+   "screen": "ryan_living_room.hub",
+   "verdict": "PASS",
+   "line": "Ryan's sprawled on the couch with the TV on.",
+   "why": "no hour in the act",
+   "cause": null
+  },
+  {
+   "row": "C897",
+   "screen": "ryan_living_room.hub",
+   "verdict": "PASS",
+   "line": "\"Talk\" / \"Leave\"",
+   "why": "the only time here is the act's own, not a per-room charge",
+   "cause": null
+  },
+  {
+   "row": "C900",
+   "screen": "ryan_living_room.hub",
+   "verdict": "PASS",
+   "line": "Ryan's sprawled on the couch with the TV on.",
+   "why": "no line says what time it is",
+   "cause": null
+  },
+  {
+   "row": "C902",
+   "screen": "ryan_living_room.hub",
+   "verdict": "PASS",
+   "line": "Ryan's sprawled on the couch with the TV on.",
+   "why": "true at the last minute it can show; it names no time",
+   "cause": null
+  },
+  {
+   "row": "C903",
+   "screen": "ryan_living_room.hub",
+   "verdict": "PASS",
+   "line": "Ryan's sprawled on the couch with the TV on.",
+   "why": "names no weekday",
+   "cause": null
+  },
+  {
+   "row": "C906",
+   "screen": "ryan_living_room.hub",
+   "verdict": "PASS",
+   "line": "\"Talk\" / \"Leave\"",
+   "why": "no 'till X' anywhere",
+   "cause": null
+  },
+  {
+   "row": "C910",
+   "screen": "ryan_living_room.hub",
+   "verdict": "PASS",
+   "line": "\"Talk\" / \"Leave\"",
+   "why": "buttons say no time and no energy, and this act costs no money",
+   "cause": null
+  },
+  {
+   "row": "C913",
+   "screen": "ryan_living_room.hub",
+   "verdict": "PASS",
+   "line": "\"Talk\" — locked_text \"Talk — you've already talked today.\"",
+   "why": "a person's menu, not an activity with hours; his hours are on the Schedules page (clock rule 5)",
+   "cause": null
+  },
+  {
+   "row": "C914",
+   "screen": "ryan_living_room.hub",
+   "verdict": "PASS",
+   "line": "\"Talk — you've already talked today.\"",
+   "why": "the grey line names the daily flag, not hours",
+   "cause": null
+  },
+  {
+   "row": "C916",
+   "screen": "ryan_living_room.hub",
+   "verdict": "PASS",
+   "line": "\"Talk\" / \"Leave\"",
+   "why": "his menu follows his face; nothing with hours greys here",
+   "cause": null
+  },
+  {
+   "row": "C920",
+   "screen": "ryan_living_room.hub",
+   "verdict": "PASS",
+   "line": "\"Leave\" (0 min) back to the same room",
+   "why": "Leave stays in the room and costs nothing; Talk spends its 5 minutes on Done",
+   "cause": null
+  },
+  {
+   "row": "C924",
+   "screen": "ryan_living_room.hub",
+   "verdict": "PASS",
+   "line": "\"Talk\" / \"Leave\"",
+   "why": "travel cost stays on the moves between areas, not here",
+   "cause": null
+  },
+  {
+   "row": "C926",
+   "screen": "ryan_living_room.hub",
+   "verdict": "PASS",
+   "line": "\"Talk\" / \"Leave\"",
+   "why": "the clock moves only by the choice's minutes",
+   "cause": null
+  },
+  {
+   "row": "C928",
+   "screen": "ryan_living_room.hub",
+   "verdict": "PASS",
+   "line": "Ryan's sprawled on the couch with the TV on.",
+   "why": "no clock printed in the prose",
+   "cause": null
+  },
+  {
+   "row": "C929",
+   "screen": "ryan_living_room.hub",
+   "verdict": "PASS",
+   "line": "\"Talk\" / \"Leave\"",
+   "why": "no activity time on the label",
+   "cause": null
+  },
+  {
+   "row": "C930",
+   "screen": "ryan_living_room.hub",
+   "verdict": "N/A",
+   "line": "\"Talk\" / \"Leave\"",
+   "why": "no windowed work on a person's menu",
+   "cause": null
+  },
+  {
+   "row": "C889",
+   "screen": "ryan_room.hub",
+   "verdict": "PASS",
+   "line": "\"Talk\" / \"Leave\"",
+   "why": "labels name no clock time and no duration; the spend sits in the costs",
+   "cause": null
+  },
+  {
+   "row": "C892",
+   "screen": "ryan_room.hub",
+   "verdict": "PASS",
+   "line": "Ryan's on his bed with a controller, headphones round his neck.",
+   "why": "no hour in the act",
+   "cause": null
+  },
+  {
+   "row": "C897",
+   "screen": "ryan_room.hub",
+   "verdict": "PASS",
+   "line": "\"Talk\" / \"Leave\"",
+   "why": "the only time here is the act's own, not a per-room charge",
+   "cause": null
+  },
+  {
+   "row": "C900",
+   "screen": "ryan_room.hub",
+   "verdict": "PASS",
+   "line": "Ryan's on his bed with a controller, headphones round his neck.",
+   "why": "no line says what time it is",
+   "cause": null
+  },
+  {
+   "row": "C902",
+   "screen": "ryan_room.hub",
+   "verdict": "PASS",
+   "line": "Ryan's on his bed with a controller, headphones round his neck.",
+   "why": "at 22:59 (weekday or weekend) Ryan's rows keep him in his room; no time claim",
+   "cause": null
+  },
+  {
+   "row": "C903",
+   "screen": "ryan_room.hub",
+   "verdict": "PASS",
+   "line": "Ryan's on his bed with a controller, headphones round his neck.",
+   "why": "names no weekday",
+   "cause": null
+  },
+  {
+   "row": "C906",
+   "screen": "ryan_room.hub",
+   "verdict": "PASS",
+   "line": "\"Talk\" / \"Leave\"",
+   "why": "no 'till X' anywhere",
+   "cause": null
+  },
+  {
+   "row": "C910",
+   "screen": "ryan_room.hub",
+   "verdict": "PASS",
+   "line": "\"Talk\" / \"Leave\"",
+   "why": "buttons say no time and no energy, and this act costs no money",
+   "cause": null
+  },
+  {
+   "row": "C913",
+   "screen": "ryan_room.hub",
+   "verdict": "PASS",
+   "line": "ryan_room trigger: weekdays 07:00-23:00, weekends 10:30-23:00, no show_when_blocked",
+   "why": "a person's menu, hidden with him at night (card P34: 'after 11pm his door is shut for the night'); his hours sit on the Schedules page (clock rule 5)",
+   "cause": null
+  },
+  {
+   "row": "C914",
+   "screen": "ryan_room.hub",
+   "verdict": "PASS",
+   "line": "ryan_room trigger, no cooldown_message",
+   "why": "no hours printed anywhere on the row",
+   "cause": null
+  },
+  {
+   "row": "C916",
+   "screen": "ryan_room.hub",
+   "verdict": "PASS",
+   "line": "ryan_room trigger, no show_when_blocked",
+   "why": "his menu hides when shut; no hours shown",
+   "cause": null
+  },
+  {
+   "row": "C920",
+   "screen": "ryan_room.hub",
+   "verdict": "PASS",
+   "line": "\"Leave\" (0 min) back to the same room",
+   "why": "Leave stays in the room and costs nothing; Talk spends its 5 minutes on Done",
+   "cause": null
+  },
+  {
+   "row": "C924",
+   "screen": "ryan_room.hub",
+   "verdict": "PASS",
+   "line": "\"Talk\" / \"Leave\"",
+   "why": "travel cost stays on the moves between areas, not here",
+   "cause": null
+  },
+  {
+   "row": "C926",
+   "screen": "ryan_room.hub",
+   "verdict": "PASS",
+   "line": "\"Talk\" / \"Leave\"",
+   "why": "the clock moves only by the choice's minutes",
+   "cause": null
+  },
+  {
+   "row": "C928",
+   "screen": "ryan_room.hub",
+   "verdict": "PASS",
+   "line": "Ryan's on his bed with a controller, headphones round his neck.",
+   "why": "no clock printed in the prose",
+   "cause": null
+  },
+  {
+   "row": "C929",
+   "screen": "ryan_room.hub",
+   "verdict": "PASS",
+   "line": "\"Talk\" / \"Leave\"",
+   "why": "no activity time on the label",
+   "cause": null
+  },
+  {
+   "row": "C930",
+   "screen": "ryan_room.hub",
+   "verdict": "PASS",
+   "line": "ryan_room trigger, no show_when_blocked",
+   "why": "not work; it vanishes out of hours as intended",
+   "cause": null
+  }
+ ],
+ "causes": []
+}

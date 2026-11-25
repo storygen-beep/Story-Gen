@@ -1,0 +1,54 @@
+{
+ "verdicts": [
+  {
+   "row": "L170",
+   "screen": "*",
+   "verdict": "N/A",
+   "line": "",
+   "why": "no place on this piece's screens is hidden_until a flag"
+  },
+  {
+   "row": "places#10",
+   "screen": "*",
+   "verdict": "N/A",
+   "line": "",
+   "why": "no place on this piece's screens is hidden_until a flag"
+  },
+  {
+   "row": "C2175",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "people_page = \"cot\"; every [[npcs]] carries stranger_name and people_tab",
+   "why": "all 24 people have both (npc_laura: 'woman with tired eyes' / special)"
+  },
+  {
+   "row": "L168",
+   "screen": "*",
+   "verdict": "N/A",
+   "line": "",
+   "why": "only Mom (and Mark, Ryan) are met on these screens, and the opening meets them"
+  },
+  {
+   "row": "L169",
+   "screen": "*",
+   "verdict": "N/A",
+   "line": "",
+   "why": "no missable first meeting on these screens"
+  },
+  {
+   "row": "people#11",
+   "screen": "*",
+   "verdict": "N/A",
+   "line": "",
+   "why": "same as L168: the opening meets everyone here"
+  },
+  {
+   "row": "people#12",
+   "screen": "*",
+   "verdict": "N/A",
+   "line": "",
+   "why": "same as L169"
+  }
+ ],
+ "causes": []
+}

@@ -1,0 +1,12 @@
+{
+ "verdicts": [
+  {
+   "row": "C952",
+   "screen": "phone:text_mark",
+   "verdict": "PASS",
+   "line": "Sunday. Seventy-five. Don't make me ask twice.",
+   "why": "fires 10h after met_mark, inside week one, when the rent is $75 (rent_paid_total < 300)"
+  }
+ ],
+ "causes": []
+}

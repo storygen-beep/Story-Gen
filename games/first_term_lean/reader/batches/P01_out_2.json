@@ -1,0 +1,12 @@
+{
+ "verdicts": [
+  {
+   "row": "systems#4",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "sidebar: Energy bar, Money ($)",
+   "why": "the sidebar holds no repeat button; the energy bar and money line are where the spend shows, as rule 4 says"
+  }
+ ],
+ "causes": []
+}
