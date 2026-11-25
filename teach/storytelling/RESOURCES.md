@@ -24,6 +24,9 @@ Note (2026-11-23): this session's network blocked direct fetches of themoth.org,
 - [Article: Moth live storytelling tips — journalism.co.uk](https://www.journalism.co.uk/feel-the-emotion-live-storytelling-tips-from-the-moth/) and [KNPR: What makes a Moth story a Moth story?](https://knpr.org/desert-companion/2018-11/onstage-story-time)
   Secondary coverage of The Moth's stakes guidance (what you stand to gain or lose; the lost-luggage example). Use for: stakes.
 
+- [Book summary: The Moth's _How to Tell a Story_ — Readingraphics](https://readingraphics.com/book-summary-how-to-tell-a-story/)
+  Secondary summary of The Moth's guide. Use for: first and last lines, memorize only those, endings rooted in change.
+
 ## Wisdom (Communities)
 
 - [The Moth StorySLAMs](https://themoth.org)
