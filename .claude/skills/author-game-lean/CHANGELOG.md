@@ -867,3 +867,71 @@ Why for all of these: P13's reader found new FAILs on every pass, v5 to v11 (99 
     - Cites are checked by `test_skill`.
     - Nothing in `games/` was written. The probes called the check functions in Python, not `check.py`, so no `.check_last.json` was written.
     - Nothing is committed.
+
+- **CoT's people system and her skills** (LO, typed in main-lean 2026-11-25: "Yes lets move to cot style type system", "Go ahead with your picks", "Go ahead", "Meter frozen"). The engine is `[engine.people] system = "cot"`, `.claude/skills/author-game-v2/references/engine.md` §54; every CoT measure below was re-read today in `_cot_js.txt` and the CoT passages.
+  - **`craft/people.md`:**
+    - Rule 8 now says every person carries the same people system: friendship, lust and control on -1000..1000, gender, attracted, a type or hand-set values, and 2–4 traits from CoT's table. A hand-set want is only for a person the story fixes; a professor has `professor = true` and intimacy 0/1/2; romance and trust come later; arcs keep their steps and flags on top. It replaces "one or two meters per person" and C650's choice by role.
+    - New rule 13, pick a type then tune: every trait has a job, hobbies are chat topics only, and a trait shows only past its threshold.
+    - New rule 14, a reaction reads the person (`npc_wants`, `npc_has_trait`), measured on `EventResHallRunInto.txt` and `InPersonDialogueFlirtBrazen.txt`.
+    - New rule 15, how a choice moves a feeling: a table with CoT's sizes as random ranges.
+    - Must read: C656 retired, C660 reworded to the three feelings, and new rows C2177 (script + people), C2178 (script + people), C2179 (reader, a person is on screen), C2180 (reader) and C2182 (note, the plan), each marked "kept blocking: LO's choice".
+    - Also: an engine bullet, the type table and a tuned person in roles, a reaction-by-want TOML (parsed with `tomllib`), and four Not-this lines.
+  - **`craft/meters.md`:** rewritten for CoT's skills.
+    - New row C2181 (script + people). Rule 2 is the level ladder 1–6, with a CoT example per level for Disinhibition, Exhibitionism, Submission and Dominance.
+    - The pace uses CoT's gain and cap tables. A new section, "The old rules", says which old rules are kept, changed or retired, and why: C295 and C330 retired; C285, C294, C381, C1401, C210 and L69 changed; C188, C338, C1366, C388, C541, L68, L70 and L116 kept.
+    - LO's standing rules are kept: only her choice pays her, a way up from 0, "not yet" said out loud, and locks show a number.
+  - **`plan.md`:**
+    - §3 asks for the type table and, per person, type, gender, attracted, traits with their jobs, tuned values, and a hand-set want.
+    - §10 says release 1 is frozen (C2182).
+    - `templates/PLAN.md` §3 has the matching tables.
+  - **`scripts/people.py` (new):** check.py's `people` check, which runs only under the switch. It is red when:
+    - a person lacks gender, attracted, a `people_type` or hand-set values, or a trait, or has more than 4 traits;
+    - a trait has no job. A trait has a job if it is in a set that changes a number (Shy and Insecure are not), is Chaste or Asexual, or is read by an `npc_has_trait`;
+    - a person keeps a core_traits key, a trait_decay key or an effect on a meter from before the switch (intimacy is allowed for a professor);
+    - a skill gate or `skill_level` condition names no skill of hers or a level outside 1–10;
+    - a skill also has an `[engine.daily_caps]` band table.
+
+    The trait table is loaded from the importer's own file. `people_type` is read only here; the importer ignores the key (checked by validating the engine fixture with it).
+  - **`scripts/check.py`:** CHECKS adds "people", with a docstring entry and `check_people`, and run_all adds results["people"]. **`scripts/rules.py`:** a choice with a `skill_gate` counts as "a meter is shown or paid".
+  - **`lists/COVERAGE.md`:** new rows C2177–C2182. The LO column marks C650, C656, C295 and C330 retired, and C660, C285, C294, C381, C1401 and C210 changed. **`lists/LESSONS.md`:** L69 is marked changed.
+  - **Verified:**
+    - `scripts/tests/test_people.py` adds 18 tests on planted games.
+    - The suite is green: 294 passed, the hook's tests and test_skill's labels, cites and ids included.
+    - On first_term_lean, through the function and not `check.py`, so nothing was written: the switch is off, so the check returns 0 rows. With the switch turned on in memory, it returns 103 rows: 24 people each lack gender, attracted, a type and traits, and old `want` and `warmth` keys remain.
+    - Nothing is committed.
+
+- **Manner and hobby traits** (LO, typed in main-lean 2026-11-25: "Where is personality??", then "Yes to both A and B"; this is A). The failure: in first_term_lean P48, "every trait has a job" left all 24 people with only control-set and sex-set traits, and five (Laura, Nadia, Zoe, Kayla, Tess) with one hidden trait and an empty People page.
+  - **`craft/people.md`:**
+    - Rule 13 now lets a person carry manner and hobby traits (personality-kind ones from CoT's table) when a scene already written shows them, with the card citing the line. That trait's job is to be learned on the People view, and later to be a chat topic; it needs no reader yet.
+    - Of the 2–4 traits, at least one is shown and not sex-kind, where the scenes give one. A shown trait is a claim, true on every visit.
+    - New row C2183 (reader + people, a person is on screen), with P48 as its failure.
+    - The worked example's café manager now carries Bragger, shown by his meeting line. Two Not-this lines were rewritten.
+  - **`scripts/people.py`:**
+    - A shown personality-kind trait has a job.
+    - A sex-kind or hidden trait still needs a number job or an `npc_has_trait` reader.
+    - New red: a person whose every trait is hidden.
+  - **`lists/COVERAGE.md`:** new row C2183.
+  - **`scripts/tests/test_people.py`:**
+    - Rewritten: the trait-without-a-job test now uses Groper, a sex trait, and the Shy test now says a manner or hobby trait needs no reader.
+    - New: a hidden-only person is red.
+
+- **A rescale LO accepted, on the saves check** (first_term_lean P48 moves `exhibitionism` from 0–100 to a CoT skill on 0–1000; LO, typed in main-lean 2026-11-25, on his old save: "its fine"). Before this, the check had no way to record it, so the game was RED 1.
+  - **`scripts/scenes.py`:** new `rescaled()`.
+    - `Rescaled: <meter>` in NOTES.md waives C1659 for that one meter only, and only on a line that carries a quote and a YYYY-MM-DD date.
+    - A marker without both is refused, and the red row says so.
+    - The marker follows the pattern of `Same meaning:`, and the check's docstring names it.
+  - **`craft/returning-player.md` rule 4:** a waiver needs LO's own quoted, dated words, and the session never writes his yes for him.
+  - **`scripts/tests/test_scenes.py`:** two tests, one that the waiver covers only the meter it names, and one that a marker without a quote or a date is refused.
+- **A person's traits and start feelings, and every sidebar item, are reader screens** (first_term_lean P48; LO, typed in main-lean 2026-11-25: "Go ahead"). Why: the People view's traits and start values, and the sidebar, were no screen at all. So P48's `people.view` and `sidebar.skills` matched nothing built, and passed only because `not_built_yet` skipped the card. A later change to a trait, a start value or a band also reopened no reader row.
+  - **`scripts/pages.py`:**
+    - `people_entries` now adds `npcs.<id>.traits` and `npcs.<id>.feelings` under `[engine.people] system = "cot"`, next to the dialog fields under `people_page = "cot"`.
+    - `feelings` is the start values as the importer fills them (`people_system.npc_defaults`): friendship, lust, control, a professor's intimacy, and a hand-set want, with people_type, gender and attracted.
+    - The new `sidebar_entries` makes each sidebar item the screen `sidebar.<trait>`, hashed on the whole item.
+    - `is_page` takes `sidebar`.
+    - In `screens_for`, `engine:people` covers every person's traits and feelings, `ui:people_page` covers every field, `npcs:<id>` covers one person, and `sidebar:<trait>` covers its item.
+    - A card's Does: need not name these screens, because P09 and P36 built Grades and Reputation before they were screens.
+  - **`scripts/rules.py`:** `seen` gives a sidebar screen "a meter is shown or paid".
+  - **`scripts/reading.py`:** the new `PAGE_WHEN` extends P46's person-field fallback to sidebar items. A screen no Does: names gets the rows that fire on what it shows, plus `always`.
+  - **`scripts/check.py`:** `not_built_yet` counts people fields and sidebar items as built, so a card of only page screens is judged.
+  - **`scripts/people.py`:** `engine()` is cached.
+  - **`scripts/tests/test_pages.py`:** six tests (eight cases). They cover the screens and what covers them, no switch, the sidebar screen, a card of only page screens being judged, Does: not needing to name a sidebar item, and a changed trait, start value or band reopening its rows.

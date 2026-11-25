@@ -33,6 +33,11 @@ import html
 import json
 from typing import Any
 
+from apps.game_generation.twee_comprehensive.generators.people_system import (
+    PEOPLE_VIEW_CSS,
+    people_view_js,
+)
+
 # ── Quests = CoT's Hints page ────────────────────────────────────────────────
 
 # The sidebar button. CoT wraps the button in <span class="glow"> until $firsttime.tutorial
@@ -688,10 +693,16 @@ _PEOPLE_CSS = """
 
 
 def people_cot_passages(
-    cast_page: dict[str, Any], npc_people: dict[str, dict[str, str]]
+    cast_page: dict[str, Any],
+    npc_people: dict[str, dict[str, str]],
+    people_system: bool = False,
 ) -> str:
     """The cast section under `[ui] people_page = "cot"`: the sidebar button ("People (N)"),
-    the dialog's script and styles, and CastPage as a passage (it is an info page)."""
+    the dialog's script and styles, and CastPage as a passage (it is an info page).
+
+    `people_system` ([engine.people] system = "cot"): the meters become friendship (or
+    Dislike), lust and control on CoT's -1000..1000 scale, and the View Person dialog gains
+    the trait bubbles and the want line (generators/people_system.py)."""
     used = {p.get("people_tab") for p in npc_people.values() if p.get("people_tab")}
     tabs: list[dict[str, str]] = [
         {"id": t[0], "emoji": t[1], "label": t[2], "title": t[3], "empty": t[4]}
@@ -705,6 +716,10 @@ def people_cot_passages(
         .replace("%%PEOPLE%%", json.dumps(npc_people, ensure_ascii=False))
         .replace("%%ORDER%%", json.dumps(list(npc_people), ensure_ascii=False))
     )
+    css = _PEOPLE_CSS
+    if people_system:
+        js = people_view_js(js)
+        css += PEOPLE_VIEW_CSS
     return (
         ":: CastWidgets [widget nobr]\n"
         '<<widget "castButton">>\n'
@@ -713,7 +728,7 @@ def people_cot_passages(
         "</div>\n"
         "<</widget>>\n"
         "\n:: PeopleCotScript [script]" + js + "\n"
-        ":: PeopleCotStyles [stylesheet]" + _PEOPLE_CSS + "\n"
+        ":: PeopleCotStyles [stylesheet]" + css + "\n"
         ":: CastPage\n"
         "<<nobr>><<run setup.peopleOpen()>><</nobr>>\n"
         '<<link "← Back">><<run setup.smartBack()>><</link>>\n'

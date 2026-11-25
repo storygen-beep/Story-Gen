@@ -307,3 +307,22 @@ def test_a_group_with_a_time_window_narrows_too():
     assert scenes.check_presence(g) == (GREEN, [])
     g["canvases"][0]["nodes"][0]["blocks"][1] = say("Morning. Eggs?")  # out of the group: 08:00-09:00 is red
     assert scenes.check_presence(g)[0] == RED
+
+
+def test_a_rescale_lo_accepted_is_waived_for_that_meter_only(tmp_path):
+    # first_term_lean P48: exhibitionism 0-100 to a CoT skill; LO, typed in main-lean 2026-11-25: "its fine".
+    now = clean()
+    now["sidebar_items"][0]["max"] = 1000
+    (tmp_path / "NOTES.md").write_text('- 2026-11-25 Rescaled: `energy` · LO, on his old save: "its fine"\n')
+    assert scenes.check_saves(tmp_path, now, baseline=clean(), ref="x") == (GREEN, [])
+    (tmp_path / "NOTES.md").write_text('- 2026-11-25 Rescaled: `money` · LO: "its fine"\n')
+    assert scenes.check_saves(tmp_path, now, baseline=clean(), ref="x")[0] == RED
+
+
+def test_a_rescale_without_los_words_or_date_is_refused(tmp_path):
+    now = clean()
+    now["sidebar_items"][0]["max"] = 1000
+    for line in ("Rescaled: energy · LO: yes\n", 'Rescaled: energy · LO: "its fine"\n', "2026-11-25 Rescaled: energy\n"):
+        (tmp_path / "NOTES.md").write_text(line)
+        status, rows = scenes.check_saves(tmp_path, now, baseline=clean(), ref="x")
+        assert status == RED and "is refused" in rows[0]

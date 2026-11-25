@@ -181,6 +181,7 @@ def screens(game, canvas_ids, sheet_rows=None):
 # longer true, and every such line is judged by the truth rule (C460, C461) and scene test B10 (true on every visit),
 # which apply on every screen; so a fact change can't slip past, whatever else stays carried.
 FACT_ROWS = ("C460", "C461", "B8", "B10")
+PAGE_WHEN = {"npcs": "a person is on screen", "sidebar": "a meter is shown or paid"}  # what a page field shows
 FACT_WHEN = ("the clock moves", "a garment is named", "she dresses or undresses")  # not "a person is on screen":
 # those rows judge how a person sounds or is named, not where they are (LO, relayed 2026-11-24)
 FACT_CHECKS = ("presence", "sheet")
@@ -288,11 +289,13 @@ def work_list(game_dir, card_id, everything=False, skill=SKILL, game=None):
     for s in sorted(changed):
         if s not in old_sc and s.split(".", 1)[0] in rewritten:
             continue
-        # A person's People dialog field is a screen no Does: line names; the rows that judge it are the ones that
-        # fire on a person on screen, plus `always` (P46, 2026-11-25).
-        person_field = s.startswith("npcs.") and (where is None or not any(s in v for v in where.values()))
+        # A person's People view field (P46, 2026-11-25; traits and start feelings, P48) or a sidebar item is a
+        # screen a Does: line may not name; the rows that judge it are the ones that fire on what it shows, plus
+        # `always`.
+        page_when = PAGE_WHEN.get(s.split(".", 1)[0])
+        person_field = bool(page_when) and (where is None or not any(s in v for v in where.values()))
         for r in sorted(rows):
-            fires = person_field and r in table and bool({"always", "a person is on screen"} & set(table[r]["when"]))
+            fires = person_field and r in table and bool({"always", page_when} & set(table[r]["when"]))
             if where is None or s in where.get(r, ()) or fires:
                 if s not in old_sc:
                     want(r, s, "screen is new")

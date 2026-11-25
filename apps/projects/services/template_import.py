@@ -29,6 +29,7 @@ from apps.stories.models import (
     TriggerSchedule,
 )
 from apps.stories.services.block_conversion import BlockConversionService
+from apps.projects.services import people_system
 
 
 User = get_user_model()
@@ -628,6 +629,9 @@ class GameTemplate:
     # [ui] people_page — "" (default: the cast page) or "cot" (CoT's People dialog and
     # View Person dialog). Kept raw; validate() checks it.
     people_page: Any = ""
+    # [engine.people] system = "cot" — the resolved people system (people_system.build_config:
+    # the trait table, each person's fixed facts, her skills), or None when the switch is off.
+    people_system: Optional[Dict[str, Any]] = None
     # [ui] clothes_layout — "table" (default: today's slot table and tier shop) or "room"
     # (her portrait beside what she wears, a rail per slot; the shop as a stand and a rack).
     # [ui] clothes_door — the location whose dress-code rules the room's "can she go out"
@@ -1895,6 +1899,13 @@ CONDITION_SCHEMA: Dict[str, Tuple[FrozenSet[str], FrozenSet[str]]] = {
     "weekday": (frozenset({"weekdays"}), frozenset()),
     "hours_since_flag": (_COND_SUBJECT_KEYS | {"flag_key", "operator", "value"},
                          _COND_NUMERIC_OPS),
+    # [engine.people] system = "cot" (2026-11-25): what a person wants from her, a fixed
+    # trait of theirs, one of her skill levels. people_system.validate_raw checks the values.
+    "npc_wants": (frozenset({"npc_id", "value", "any_of", "operator"}),
+                  frozenset({"is_true", "is_false"})),
+    "npc_has_trait": (frozenset({"npc_id", "trait", "set", "operator"}),
+                      frozenset({"is_true", "is_false"})),
+    "skill_level": (frozenset({"skill", "level"}), frozenset()),
 }
 _COND_BLOCK_KEYS = frozenset({"version", "logic", "items"})
 
@@ -2455,6 +2466,10 @@ def normalize(data: Dict[str, Any]) -> GameTemplate:
     _parse_errors.extend(_walk_condition_carriers(data, ""))
     _parse_errors.extend(_walk_effect_values(
         data, "", set(((data.get("player") or {}).get("core_traits") or {}).keys())))
+    # [engine.people] system = "cot" — every check of the people system, on the raw TOML.
+    _parse_errors.extend(people_system.validate_raw(data))
+    _people_on = people_system.is_on(data)
+    _people_skills = people_system.skill_keys(data) if _people_on else {}
 
     schema_version = _require_str(data, "schema_version", "0.1")
 
@@ -2633,7 +2648,14 @@ def normalize(data: Dict[str, Any]) -> GameTemplate:
                 name=_require_str(n, "name"),
                 description=_require_str(n, "description", ""),
                 portrait=_require_str(n, "portrait", ""),
-                core_traits=_require_dict(n, "core_traits"),
+                # Under [engine.people] every person carries the three feelings (0 unless set).
+                core_traits=(
+                    people_system.npc_defaults(
+                        _require_dict(n, "core_traits"), people_system.is_professor(n)
+                    )
+                    if _people_on
+                    else _require_dict(n, "core_traits")
+                ),
                 flag_keys=_require_list(n, "flag_keys"),
                 schedules=npc_schedules,
                 customizable=bool(n.get("customizable", False)),
@@ -2844,6 +2866,10 @@ def normalize(data: Dict[str, Any]) -> GameTemplate:
                 for chi, ch in enumerate(eb_raw.get("choices") or []):
                     if not isinstance(ch, dict):
                         continue
+                    if _people_skills and "skill_gate" in ch:
+                        # [engine.people] — the gate becomes a condition and an effect.
+                        ch = dict(ch)
+                        people_system.desugar_skill_gate(ch, _people_skills)
                     effs = []
                     for ei, e in enumerate(ch.get("effects") or []):
                         if not isinstance(e, dict):
@@ -4028,6 +4054,7 @@ def normalize(data: Dict[str, Any]) -> GameTemplate:
         story_hints=_parse_story_hints(data.get("story_hints")),
         walkthroughs=_parse_walkthroughs(data.get("walkthroughs")),
         people_page=people_page_raw,
+        people_system=people_system.build_config(data),
         clothes_layout=clothes_layout_raw,
         clothes_door=clothes_door_raw,
         timetable=timetable_raw,
@@ -6998,8 +7025,10 @@ def validate(template: GameTemplate) -> List[str]:
             errors.append(f"traits.labels[{tl.key}] toast must be true or false, got {tl.toast!r}")
         if not tl.label and not tl.hidden and tl.in_dump is not False:
             errors.append(f"traits.labels[{tl.key}] missing required `label` field")
-        if tl.hidden and tl.key not in _all_core_trait_keys and warnings is not None:
-            warnings.append(
+        # `warnings` here is the module (imported earlier in this function), so the old
+        # `warnings.append` crashed; the list for validate()'s warnings is `_validate_warnings`.
+        if tl.hidden and tl.key not in _all_core_trait_keys:
+            _validate_warnings.append(
                 f"traits.labels[{tl.key}] hidden=true but '{tl.key}' is not a declared "
                 f"core_trait on the player or any NPC — typo? (the hide will no-op)"
             )
@@ -9428,6 +9457,8 @@ def _assemble_project_metadata(project, template):
         ]
     if template.people_page == "cot":
         project.metadata["people_page"] = "cot"
+    if template.people_system:
+        project.metadata["people_system"] = template.people_system
     if template.clothes_layout == "room":
         project.metadata["clothes_layout"] = "room"
         if template.clothes_door:

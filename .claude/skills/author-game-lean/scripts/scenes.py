@@ -8,7 +8,8 @@
   creation  every creation field the player fills in (her name, a nickname) is printed back somewhere (C48)
   saves     against the last build LO played (the last commit of games/<slug>/output/index.html): no id or key is
             removed, no meter's range changed, and no flag is set by a different choice than before, unless
-            NOTES.md says `Same meaning: <flag>` (C1656, C1658, C1659; craft/returning-player.md)
+            NOTES.md says `Same meaning: <flag>`, or, for a meter's range, `Rescaled: <meter>` on a line with LO's
+            quoted words and a date (C1656, C1658, C1659; craft/returning-player.md)
   speakers  every dialog block names its speaker, and a person speaker is a person in the game (v2's
             `speakers are named`, gates.py:9500)
   goals     a quest-card goal line reads the way it works (v2's `a goal line reads the way it works`, gates.py:18911)
@@ -397,6 +398,26 @@ def same_meaning(game_dir):
     return set(re.findall(r"Same meaning:\s*`?([\w]+)`?", text))
 
 
+# LO's words on the line: a quote ("…" or “…”) and a date (YYYY-MM-DD). A waiver without them is refused.
+QUOTED = re.compile(r'"[^"]+"|“[^”]+”')
+DATED = re.compile(r"\b\d{4}-\d{2}-\d{2}\b")
+
+
+def rescaled(game_dir):
+    """({meter: the NOTES line} LO accepted a range or band change for, [meters marked without his words]).
+    `Rescaled: <meter>` waives C1659 for that one meter only, and only on a line that carries LO's quoted, dated
+    words (first_term_lean P48, exhibitionism 0-100 to a CoT skill; LO, typed in main-lean 2026-11-25: "its fine")."""
+    path = Path(game_dir) / "NOTES.md"
+    ok, bare = {}, []
+    for line in (path.read_text(encoding="utf-8").splitlines() if path.is_file() else []):
+        for key in re.findall(r"Rescaled:\s*`?(\w+)`?", line):
+            if QUOTED.search(line) and DATED.search(line):
+                ok[key] = line.strip()
+            else:
+                bare.append(key)
+    return ok, bare
+
+
 def check_saves(game_dir, game, dev=(), baseline=None, ref=None):
     if baseline is None:
         ref, baseline = played(game_dir, ref)
@@ -408,9 +429,13 @@ def check_saves(game_dir, game, dev=(), baseline=None, ref=None):
         for k in sorted(was[kind] - now[kind]):
             rows.append(f"{kind} `{k}` was in the build LO played ({ref}) and is gone: an old save loses it (C1656)")
     old_r, new_r = ranges(baseline), ranges(game)
+    waived, bare = rescaled(game_dir)
     for k in sorted(set(old_r) & set(new_r)):
-        if old_r[k] != new_r[k]:
-            rows.append(f"meter `{k}`: its range or bands changed from {old_r[k]} to {new_r[k]}; a shipped meter's are frozen (C1659)")
+        if old_r[k] != new_r[k] and k not in waived:
+            why = (f"; NOTES.md's `Rescaled: {k}` is refused: the line needs LO's own quoted words and a date"
+                   if k in bare else f"; if LO accepted it, write `Rescaled: {k}` in NOTES.md with his quoted, dated words")
+            rows.append(f"meter `{k}`: its range or bands changed from {old_r[k]} to {new_r[k]}; a shipped meter's are "
+                        f"frozen (C1659){why}")
     ok = same_meaning(game_dir)
     old_s, new_s = setters(baseline, dev), setters(game, dev)
     for k in sorted(set(old_s) & set(new_s)):

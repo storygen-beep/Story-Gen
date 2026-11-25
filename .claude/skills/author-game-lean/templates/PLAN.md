@@ -9,8 +9,13 @@ Age, situation at minute zero, written or blank, narration person: <first | seco
 Shape · hold (and who enforces it) · goal, its flag, the next goal · mystery · rival · appetite · ascent.
 
 ## 3. The people
-| person | age | what she wants from them | what they keep score of | where they end up (their want) | where they are now, at the start |
-|---|---|---|---|---|---|
+### Types
+| type | friendship | lust | control | traits it draws from |
+|---|---|---|---|---|
+
+### People
+| person | age | type | gender, attracted | traits, and each one's job | start values tuned by hand | hand-set want, if the story fixes it | what she wants from them | where they end up | where they are now, at the start |
+|---|---|---|---|---|---|---|---|---|---|
 
 ## 4. The places
 | place | opens into | serves (needs, systems, people) | its dramatic job |
