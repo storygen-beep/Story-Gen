@@ -1,6 +1,6 @@
 {
  "piece": "P16",
- "pass": 4,
+ "pass": 5,
  "screens": {
   "english_first.sheet": {
    "text": "7468e6ce2c180231",
@@ -111,6 +111,8 @@
   "C640": "728d95d9964ccf25",
   "C644": "f5e1d79f3251dbab",
   "C596": "e5f7e6cf2d01613d",
+  "C2179": "47b9477e3ec8a790",
+  "C2183": "40172c2d376bfc32",
   "C448": "b86596f1a02766de",
   "L168": "444c44970dc284f2",
   "L169": "59defccfc63b0454",
@@ -1019,6 +1021,32 @@
    "row_hash": "d1b589361cb96867",
    "carried": true,
    "pass": 1
+  },
+  {
+   "row": "C2179",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "Walsh (indifferent professor) to \"Yes, ma'am.\": \"Ma'am. Your mother raised you properly.\"; to leaving: \"Don't make me chase you.\"",
+   "why": "an advisor's reactions with no claim on her, the line for her one want",
+   "cause": null,
+   "note": false,
+   "screen_hash": "35cd6e22511d534a",
+   "row_hash": "47b9477e3ec8a790",
+   "carried": false,
+   "pass": 5
+  },
+  {
+   "row": "C2183",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "Walsh: Dominant, Confident, Wordsmith, Particular \u2014 \"she takes essays apart line by line, reading the worst sentences out loud\"",
+   "why": "4 traits; Wordsmith and Particular shown by this class's own line",
+   "cause": null,
+   "note": false,
+   "screen_hash": "35cd6e22511d534a",
+   "row_hash": "40172c2d376bfc32",
+   "carried": false,
+   "pass": 5
   },
   {
    "row": "C422",
@@ -2138,7 +2166,7 @@
    "note": false,
    "screen_hash": "35cd6e22511d534a",
    "row_hash": "444c44970dc284f2",
-   "carried": false,
+   "carried": true,
    "pass": 4
   },
   {
@@ -2151,7 +2179,7 @@
    "note": false,
    "screen_hash": "35cd6e22511d534a",
    "row_hash": "59defccfc63b0454",
-   "carried": false,
+   "carried": true,
    "pass": 4
   },
   {
@@ -2164,14 +2192,14 @@
    "note": false,
    "screen_hash": "35cd6e22511d534a",
    "row_hash": "c3599cd09637a240",
-   "carried": false,
+   "carried": true,
    "pass": 4
   }
  ],
  "causes": [],
  "pending": [],
- "asked": 3,
- "answered": 3,
+ "asked": 2,
+ "answered": 2,
  "pass_items": [],
  "unowed": []
 }

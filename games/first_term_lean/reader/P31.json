@@ -1,14 +1,14 @@
 {
  "piece": "P31",
- "pass": 4,
+ "pass": 6,
  "screens": {
   "cafe_window.sit": {
-   "text": "08fe0b0d0eecee09",
+   "text": "38e98584690f209c",
    "facts": "88ebfd4137b4b002",
    "facts2": "d02aec651f6e0475",
-   "all": "07f005f24048454a"
+   "all": "805ef445741bca1c"
   },
-  "*": "3faff7ee3b05bf6f"
+  "*": "31d95bd4caceb5e5"
  },
  "rows": {
   "B1": "5276068df1ca6fa9",
@@ -57,16 +57,15 @@
   "C1200": "65e6616cd17c7eb3",
   "C1002": "657248766e62061f",
   "C1250": "fde578d75b0d3620",
-  "C295": "63160eb49f7bb566",
-  "C381": "bcb1cf8813579ab9",
-  "C188": "657a435e4ab2ba7f",
-  "C330": "923a40b5ad4048fd",
-  "C210": "0bae50d6c4d47f7c",
+  "C2181": "74c68b4029782b5f",
+  "C381": "c661ccd26aada1f2",
+  "C188": "3a9caf43a2f2b8fd",
+  "C210": "00496c4c3aec4580",
   "C338": "3ce0dbe053c4b2c9",
-  "C388": "1bc289f9a5b378d6",
+  "C388": "fbffa0dbed63968f",
   "C541": "880eaf1315fbaa0b",
-  "L70": "10d904cc9f93ccc8",
-  "L116": "7e4ac68d5328051e",
+  "L70": "32d431db08834e70",
+  "L116": "f7a81c1d066ade25",
   "C519": "e78502f7aa28746d",
   "C625": "dc9a1fd9dbf3fb87",
   "C626": "8e507f7b235acc25",
@@ -76,7 +75,10 @@
   "C961": "b6cf8c9e8a8ef683",
   "C644": "f5e1d79f3251dbab",
   "C596": "e5f7e6cf2d01613d",
-  "C660": "da4c173ea0935aca",
+  "C660": "eaf957bb84e62bbf",
+  "C2179": "47b9477e3ec8a790",
+  "C2180": "a6c0f498d4d16271",
+  "C2183": "40172c2d376bfc32",
   "C1340": "b76a6583ae88c60f",
   "C769": "f6b6f78a8f2e5ed7",
   "C794": "bad76e5963432385",
@@ -137,19 +139,19 @@
    "row": "B10",
    "screen": "cafe_window.sit",
    "verdict": "PASS",
-   "line": "Chris tops up your water ... / Tom glances over from the till ... / The guy behind the counter leaves you alone.",
-   "why": "First-match chain: each line gated on that man present (and met where named); nobody in, no line. At 07:00 weekdays Chris is in and Tom isn't; at 20:25 Tom's in Mon-Sat, nobody Sunday. Second visit true.",
+   "line": "Chris tops up your water without being asked, and looks a second too long, like he hates that he's looking.",
+   "why": "Chain is first-match; Chris's line gated on met_chris (set on 'Work the shift' in cafe_first_shift) and Chris present at near_cafe (who_is_where: weekdays 7-15, weekends 10-20); 'eating into my hours' is true once met_chris is set, since met_chris is set only by working a shift; true on a second visit, nothing in it is a first",
    "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "08fe0b0d0eecee09",
+    "text": "38e98584690f209c",
     "facts": "88ebfd4137b4b002",
     "facts2": "d02aec651f6e0475",
-    "all": "07f005f24048454a"
+    "all": "805ef445741bca1c"
    },
    "row_hash": "c1c0e2ac2588a579",
-   "carried": true,
-   "pass": 3
+   "carried": false,
+   "pass": 6
   },
   {
    "row": "B10",
@@ -313,19 +315,19 @@
    "row": "B8",
    "screen": "cafe_window.sit",
    "verdict": "PASS",
-   "line": "max_triggers_per_day = 2, 30 minutes, +5 energy, 07:00-20:30",
-   "why": "Matches the card; no garment named.",
+   "line": "Free water, new girl. Don't get used to it. You're already eating into my hours.",
+   "why": "No number on the lines; card's +5 energy, 30 minutes, 2 a day, 07:00-20:30 match the build; no garment named",
    "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "08fe0b0d0eecee09",
+    "text": "38e98584690f209c",
     "facts": "88ebfd4137b4b002",
     "facts2": "d02aec651f6e0475",
-    "all": "07f005f24048454a"
+    "all": "805ef445741bca1c"
    },
    "row_hash": "80d415cf08e0ebfe",
-   "carried": true,
-   "pass": 3
+   "carried": false,
+   "pass": 6
   },
   {
    "row": "B9",
@@ -827,53 +829,84 @@
    "row": "C188",
    "screen": "*",
    "verdict": "N/A",
-   "line": "",
-   "why": "no meter talk",
+   "line": "-",
+   "why": "no level gate exists to sit below; release 1 is frozen (C2182): no effect moves a feeling or a skill, and no skill_gate exists; this screen pays +5 energy only",
    "cause": null,
    "note": false,
-   "screen_hash": "281aec3238c0b4ec",
-   "row_hash": "657a435e4ab2ba7f",
+   "screen_hash": "3faff7ee3b05bf6f",
+   "row_hash": "3a9caf43a2f2b8fd",
    "carried": true,
-   "pass": 1
+   "pass": 5
   },
   {
    "row": "C210",
    "screen": "*",
    "verdict": "N/A",
-   "line": "",
-   "why": "no stage crossing",
+   "line": "-",
+   "why": "no level is crossed; release 1 is frozen (C2182): no effect moves a feeling or a skill, and no skill_gate exists",
    "cause": null,
    "note": false,
-   "screen_hash": "281aec3238c0b4ec",
-   "row_hash": "0bae50d6c4d47f7c",
+   "screen_hash": "3faff7ee3b05bf6f",
+   "row_hash": "00496c4c3aec4580",
    "carried": true,
-   "pass": 1
+   "pass": 5
   },
   {
-   "row": "C295",
-   "screen": "*",
-   "verdict": "N/A",
-   "line": "",
-   "why": "no rung",
+   "row": "C2179",
+   "screen": "cafe_window.sit",
+   "verdict": "PASS",
+   "line": "Chris tops up your water without being asked, and looks a second too long, like he hates that he's looking. / Free water, new girl. Don't get used to it. You're already eating into my hours.",
+   "why": "Chris's one want is hatefuck (C2179 context): the long look carries the lust, 'like he hates that he's looking' and 'Don't get used to it. You're already eating into my hours.' carry the dislike; matches PLAN 5 ('wants her shifts, and her') and his other lines ('Entertain me. Go on, I'm bored.'); last pass's favour-and-welcome cause is gone",
    "cause": null,
    "note": false,
-   "screen_hash": "281aec3238c0b4ec",
-   "row_hash": "63160eb49f7bb566",
-   "carried": true,
-   "pass": 1
+   "screen_hash": {
+    "text": "38e98584690f209c",
+    "facts": "88ebfd4137b4b002",
+    "facts2": "d02aec651f6e0475",
+    "all": "805ef445741bca1c"
+   },
+   "row_hash": "47b9477e3ec8a790",
+   "carried": false,
+   "pass": 6
   },
   {
-   "row": "C330",
+   "row": "C2180",
    "screen": "*",
    "verdict": "N/A",
-   "line": "",
-   "why": "no meter paid",
+   "line": "-",
+   "why": "no choice here moves a feeling; release 1 is frozen (C2182): no effect moves a feeling or a skill, and no skill_gate exists",
    "cause": null,
    "note": false,
-   "screen_hash": "281aec3238c0b4ec",
-   "row_hash": "923a40b5ad4048fd",
+   "screen_hash": "3faff7ee3b05bf6f",
+   "row_hash": "a6c0f498d4d16271",
    "carried": true,
-   "pass": 1
+   "pass": 5
+  },
+  {
+   "row": "C2181",
+   "screen": "*",
+   "verdict": "N/A",
+   "line": "-",
+   "why": "no skill_gate and no skill effect on this screen; it pays +5 energy only",
+   "cause": null,
+   "note": false,
+   "screen_hash": "3faff7ee3b05bf6f",
+   "row_hash": "74c68b4029782b5f",
+   "carried": true,
+   "pass": 5
+  },
+  {
+   "row": "C2183",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "Chris tops up your water without being asked",
+   "why": "Chris: Forward, Dominant (Forward shown on day one, and true: he acts first); Tom: Forward, Confident (Forward personality-kind, hidden at friendship 50); nothing here contradicts a shown trait",
+   "cause": null,
+   "note": false,
+   "screen_hash": "3faff7ee3b05bf6f",
+   "row_hash": "40172c2d376bfc32",
+   "carried": true,
+   "pass": 5
   },
   {
    "row": "C338",
@@ -892,27 +925,27 @@
    "row": "C381",
    "screen": "*",
    "verdict": "N/A",
-   "line": "",
-   "why": "no rung preview",
+   "line": "-",
+   "why": "no gate above her level to preview; no skill gate in release 1",
    "cause": null,
    "note": false,
-   "screen_hash": "281aec3238c0b4ec",
-   "row_hash": "bcb1cf8813579ab9",
+   "screen_hash": "3faff7ee3b05bf6f",
+   "row_hash": "c661ccd26aada1f2",
    "carried": true,
-   "pass": 1
+   "pass": 5
   },
   {
    "row": "C388",
    "screen": "*",
    "verdict": "N/A",
-   "line": "",
-   "why": "no locked door",
+   "line": "-",
+   "why": "cafe_window has no show_when_blocked: past its cap or hours the row hides; no greyed door",
    "cause": null,
    "note": false,
-   "screen_hash": "281aec3238c0b4ec",
-   "row_hash": "1bc289f9a5b378d6",
+   "screen_hash": "3faff7ee3b05bf6f",
+   "row_hash": "fbffa0dbed63968f",
    "carried": true,
-   "pass": 1
+   "pass": 5
   },
   {
    "row": "C422",
@@ -1003,19 +1036,19 @@
    "row": "C460",
    "screen": "cafe_window.sit",
    "verdict": "PASS",
-   "line": "Take your time. Table's yours till close.",
-   "why": "Caf\u00e9 open to 21:00; last start 20:25 ends 20:55; Tom's and Chris's lines only while each is in.",
+   "line": "Free water, new girl. Don't get used to it. You're already eating into my hours.",
+   "why": "Every claim holds where the group can show: he's present, she's met him, she works shifts by then (met_chris set only on the first shift), and she's at a table with water; Tom's and the stranger's lines unchanged and gated on presence",
    "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "08fe0b0d0eecee09",
+    "text": "38e98584690f209c",
     "facts": "88ebfd4137b4b002",
     "facts2": "d02aec651f6e0475",
-    "all": "07f005f24048454a"
+    "all": "805ef445741bca1c"
    },
    "row_hash": "67e48e60d5053a2e",
-   "carried": true,
-   "pass": 3
+   "carried": false,
+   "pass": 6
   },
   {
    "row": "C460",
@@ -1047,19 +1080,19 @@
    "row": "C461",
    "screen": "cafe_window.sit",
    "verdict": "PASS",
-   "line": "On the house. Don't tell Tom. Stay as long as you like.",
-   "why": "Fits Chris's cast entry; met_chris is set on the first shift, after Tom's hire.",
+   "line": "Free water, new girl. Don't get used to it. You're already eating into my hours.",
+   "why": "Dialogue fits Chris's cast entry (24, barista; wants her shifts, and her) and his address 'new girl', used by him alone",
    "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "08fe0b0d0eecee09",
+    "text": "38e98584690f209c",
     "facts": "88ebfd4137b4b002",
     "facts2": "d02aec651f6e0475",
-    "all": "07f005f24048454a"
+    "all": "805ef445741bca1c"
    },
    "row_hash": "310706ee076318f2",
-   "carried": true,
-   "pass": 3
+   "carried": false,
+   "pass": 6
   },
   {
    "row": "C519",
@@ -1199,15 +1232,15 @@
   {
    "row": "C660",
    "screen": "*",
-   "verdict": "N/A",
-   "line": "",
-   "why": "no person's meter",
+   "verdict": "PASS",
+   "line": "-",
+   "why": "people_system.py:275-279 prints Friendship (Dislike below 0), Lust, His/Her Dominance (Submission below 0) for every person; Chris and Tom on screen get the same words as the cast",
    "cause": null,
    "note": false,
-   "screen_hash": "281aec3238c0b4ec",
-   "row_hash": "da4c173ea0935aca",
+   "screen_hash": "3faff7ee3b05bf6f",
+   "row_hash": "eaf957bb84e62bbf",
    "carried": true,
-   "pass": 1
+   "pass": 5
   },
   {
    "row": "C758",
@@ -1584,18 +1617,18 @@
    "screen": "cafe_window.sit",
    "verdict": "PASS",
    "line": "Done: time_progression_minutes = 30",
-   "why": "Explicit 30 minutes.",
+   "why": "The only exit spends 30 minutes",
    "cause": null,
    "note": true,
    "screen_hash": {
-    "text": "08fe0b0d0eecee09",
+    "text": "38e98584690f209c",
     "facts": "88ebfd4137b4b002",
     "facts2": "d02aec651f6e0475",
-    "all": "07f005f24048454a"
+    "all": "805ef445741bca1c"
    },
    "row_hash": "4e86d143688ba8e5",
-   "carried": true,
-   "pass": 3
+   "carried": false,
+   "pass": 6
   },
   {
    "row": "C928",
@@ -1659,18 +1692,18 @@
    "screen": "cafe_window.sit",
    "verdict": "PASS",
    "line": "time_of_day 07:00-20:30",
-   "why": "End exclusive: last start 20:25, so the 30 minutes end by close.",
+   "why": "End exclusive: last start before 20:30, so the 30 minutes end by the 21:00 close; re-read on every visit",
    "cause": null,
    "note": true,
    "screen_hash": {
-    "text": "08fe0b0d0eecee09",
+    "text": "38e98584690f209c",
     "facts": "88ebfd4137b4b002",
     "facts2": "d02aec651f6e0475",
-    "all": "07f005f24048454a"
+    "all": "805ef445741bca1c"
    },
    "row_hash": "1aadffd96e76381c",
-   "carried": true,
-   "pass": 3
+   "carried": false,
+   "pass": 6
   },
   {
    "row": "C953",
@@ -1707,19 +1740,19 @@
    "row": "L106",
    "screen": "cafe_window.sit",
    "verdict": "PASS",
-   "line": "Tom glances over from the till",
-   "why": "Each named line is gated on that man present at near_cafe.",
+   "line": "Chris tops up your water ... / Tom glances over from the till ...",
+   "why": "Each named man's line is gated on npc_at_location is_present at near_cafe; the stranger line on either present; nobody in, no line",
    "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "08fe0b0d0eecee09",
+    "text": "38e98584690f209c",
     "facts": "88ebfd4137b4b002",
     "facts2": "d02aec651f6e0475",
-    "all": "07f005f24048454a"
+    "all": "805ef445741bca1c"
    },
    "row_hash": "13a714429d15f3b2",
-   "carried": true,
-   "pass": 3
+   "carried": false,
+   "pass": 6
   },
   {
    "row": "L106",
@@ -1738,14 +1771,14 @@
    "row": "L116",
    "screen": "*",
    "verdict": "N/A",
-   "line": "",
-   "why": "no lock",
+   "line": "-",
+   "why": "no skill lock on this screen",
    "cause": null,
    "note": false,
-   "screen_hash": "281aec3238c0b4ec",
-   "row_hash": "7e4ac68d5328051e",
+   "screen_hash": "3faff7ee3b05bf6f",
+   "row_hash": "f7a81c1d066ade25",
    "carried": true,
-   "pass": 1
+   "pass": 5
   },
   {
    "row": "L166",
@@ -1783,18 +1816,18 @@
    "screen": "cafe_window.sit",
    "verdict": "PASS",
    "line": "one row, 07:00-20:30 every day",
-   "why": "Same hours every day; one row. No show_when_blocked by clock.md rule 10 (clock plus count).",
+   "why": "Same hours every day, so one row and no per-day group; no show_when_blocked, as the card decides (a clock plus a count hides once used)",
    "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "08fe0b0d0eecee09",
+    "text": "38e98584690f209c",
     "facts": "88ebfd4137b4b002",
     "facts2": "d02aec651f6e0475",
-    "all": "07f005f24048454a"
+    "all": "805ef445741bca1c"
    },
    "row_hash": "e64ce2672d85d2d8",
-   "carried": true,
-   "pass": 3
+   "carried": false,
+   "pass": 6
   },
   {
    "row": "L170",
@@ -1806,27 +1839,27 @@
    "note": false,
    "screen_hash": "3faff7ee3b05bf6f",
    "row_hash": "c3599cd09637a240",
-   "carried": false,
+   "carried": true,
    "pass": 4
   },
   {
    "row": "L70",
    "screen": "*",
    "verdict": "N/A",
-   "line": "",
-   "why": "no climb meter",
+   "line": "-",
+   "why": "pays no skill; release 1 is frozen (C2182): no effect moves a feeling or a skill, and no skill_gate exists",
    "cause": null,
    "note": false,
-   "screen_hash": "281aec3238c0b4ec",
-   "row_hash": "10d904cc9f93ccc8",
+   "screen_hash": "3faff7ee3b05bf6f",
+   "row_hash": "32d431db08834e70",
    "carried": true,
-   "pass": 1
+   "pass": 5
   }
  ],
  "causes": [],
  "pending": [],
- "asked": 1,
- "answered": 1,
+ "asked": 9,
+ "answered": 9,
  "pass_items": [],
  "unowed": []
 }

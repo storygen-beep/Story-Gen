@@ -1,6 +1,6 @@
 {
  "piece": "P13",
- "pass": 13,
+ "pass": 14,
  "screens": {
   "opening.wake": {
    "text": "cc3c063d9cef0f23",
@@ -199,7 +199,7 @@
   "C1277": "ee51917c5fb43c13",
   "C1238": "6fd430204e984124",
   "C1255": "803b4c46f1e9d7c7",
-  "C1366": "6c2faedceab35a43",
+  "C1366": "bf7edbd0ddd9e7b7",
   "C520": "34947f7e290656f0",
   "C519": "e78502f7aa28746d",
   "C1626": "5b15e3900897c4f9",
@@ -229,6 +229,8 @@
   "C613": "6f777b1fcd750dd1",
   "C644": "f5e1d79f3251dbab",
   "C596": "e5f7e6cf2d01613d",
+  "C2179": "47b9477e3ec8a790",
+  "C2183": "40172c2d376bfc32",
   "C448": "b86596f1a02766de",
   "L168": "444c44970dc284f2",
   "L169": "59defccfc63b0454",
@@ -385,7 +387,7 @@
     "all": "dea9963b899e2bc8"
    },
    "row_hash": "c1c0e2ac2588a579",
-   "carried": false,
+   "carried": true,
    "pass": 13
   },
   {
@@ -619,7 +621,7 @@
     "all": "42c6b4e9e45977c2"
    },
    "row_hash": "c1c0e2ac2588a579",
-   "carried": false,
+   "carried": true,
    "pass": 13
   },
   {
@@ -1000,7 +1002,7 @@
     "all": "dea9963b899e2bc8"
    },
    "row_hash": "80d415cf08e0ebfe",
-   "carried": false,
+   "carried": true,
    "pass": 13
   },
   {
@@ -1234,7 +1236,7 @@
     "all": "42c6b4e9e45977c2"
    },
    "row_hash": "80d415cf08e0ebfe",
-   "carried": false,
+   "carried": true,
    "pass": 13
   },
   {
@@ -2145,16 +2147,18 @@
    "screen": "opening.sums",
    "verdict": "PASS",
    "line": "\u279c Pay Mark on Sunday morning, at the kitchen table.",
-   "why": "the card names the caf\u00e9 (pays at stage 0 after hire, P21) and the kitchen table (rent); nothing that doesn't pay",
+   "why": "the goal card's steps name the caf\u00e9 (the job, which pays money) and the kitchen table (the rent); no place that pays nothing at her level",
    "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "a541a1c36e0d9cff",
-    "facts": "1bb55a6bea468407",
-    "all": "51e02ac85027cfa7"
+    "text": "48aa23cc99bd631e",
+    "facts": "74439f927ebafbee",
+    "facts2": "802ea4adb13e9ebb",
+    "all": "4a1ccc16bcecd3d1"
    },
-   "row_hash": "6c2faedceab35a43",
-   "carried": true
+   "row_hash": "bf7edbd0ddd9e7b7",
+   "carried": false,
+   "pass": 14
   },
   {
    "row": "C140",
@@ -2375,7 +2379,7 @@
     "all": "dea9963b899e2bc8"
    },
    "row_hash": "e0e72329113941a2",
-   "carried": false,
+   "carried": true,
    "pass": 13
   },
   {
@@ -2411,7 +2415,7 @@
     "all": "42c6b4e9e45977c2"
    },
    "row_hash": "e0e72329113941a2",
-   "carried": false,
+   "carried": true,
    "pass": 13
   },
   {
@@ -2491,6 +2495,32 @@
    "row_hash": "03aca88c8939cd81",
    "carried": true,
    "pass": 13
+  },
+  {
+   "row": "C2179",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "That's exactly what I'm afraid of.",
+   "why": "each opening reaction is one line per start choice from Laura (friend), Mark and Ryan (indifferent); each fits that person's one release-1 want (Ryan's \"Sorry. I didn't\u2014 Sorry.\" is CoT's indifferent answer)",
+   "cause": null,
+   "note": false,
+   "screen_hash": "b14489ed33620279",
+   "row_hash": "47b9477e3ec8a790",
+   "carried": false,
+   "pass": 14
+  },
+  {
+   "row": "C2183",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "Ryan's on his bed with a controller, headphones round his neck.",
+   "why": "Laura (Cook: \"Mom's at the stove.\"), Mark (Particular: \"Then pay for it.\") and Ryan (Gamer) each carry 3 traits with a personality-kind one backed by a written line",
+   "cause": null,
+   "note": false,
+   "screen_hash": "b14489ed33620279",
+   "row_hash": "40172c2d376bfc32",
+   "carried": false,
+   "pass": 14
   },
   {
    "row": "C286",
@@ -3068,7 +3098,7 @@
     "all": "dea9963b899e2bc8"
    },
    "row_hash": "67e48e60d5053a2e",
-   "carried": false,
+   "carried": true,
    "pass": 13
   },
   {
@@ -3302,7 +3332,7 @@
     "all": "42c6b4e9e45977c2"
    },
    "row_hash": "67e48e60d5053a2e",
-   "carried": false,
+   "carried": true,
    "pass": 13
   },
   {
@@ -3367,7 +3397,7 @@
     "all": "dea9963b899e2bc8"
    },
    "row_hash": "310706ee076318f2",
-   "carried": false,
+   "carried": true,
    "pass": 13
   },
   {
@@ -3601,7 +3631,7 @@
     "all": "42c6b4e9e45977c2"
    },
    "row_hash": "310706ee076318f2",
-   "carried": false,
+   "carried": true,
    "pass": 13
   },
   {
@@ -6955,7 +6985,7 @@
     "all": "dea9963b899e2bc8"
    },
    "row_hash": "13a714429d15f3b2",
-   "carried": false,
+   "carried": true,
    "pass": 13
   },
   {
@@ -7171,7 +7201,7 @@
     "all": "42c6b4e9e45977c2"
    },
    "row_hash": "13a714429d15f3b2",
-   "carried": false,
+   "carried": true,
    "pass": 13
   },
   {
@@ -7635,8 +7665,8 @@
  ],
  "causes": [],
  "pending": [],
- "asked": 12,
- "answered": 12,
+ "asked": 3,
+ "answered": 3,
  "pass_items": [],
  "unowed": []
 }

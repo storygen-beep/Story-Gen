@@ -1,8 +1,26 @@
 {
  "piece": "P01",
- "pass": 4,
+ "pass": 5,
  "screens": {
-  "*": "4f53cda18c2baa0c"
+  "sidebar.energy": {
+   "text": "3473bd68b6c72b9a",
+   "facts": "3473bd68b6c72b9a",
+   "facts2": "3473bd68b6c72b9a",
+   "all": "3473bd68b6c72b9a"
+  },
+  "sidebar.money": {
+   "text": "adc8a52b803f892e",
+   "facts": "adc8a52b803f892e",
+   "facts2": "adc8a52b803f892e",
+   "all": "adc8a52b803f892e"
+  },
+  "sidebar.exhibitionism": {
+   "text": "41c419fdfc72bfa1",
+   "facts": "41c419fdfc72bfa1",
+   "facts2": "41c419fdfc72bfa1",
+   "all": "41c419fdfc72bfa1"
+  },
+  "*": "94d0fedd770a24d2"
  },
  "rows": {
   "B1": "5276068df1ca6fa9",
@@ -47,32 +65,32 @@
   "economy#7": "fb554bd9b0b05714",
   "economy#8": "8566e893cebb0186",
   "economy#9": "cb0ada4b2d3e024c",
-  "C285": "789c49111f9e35ff",
-  "C294": "c7ce54e99675df08",
-  "C295": "fd4c6b8f536da26f",
-  "C381": "a78923933e7a5c0c",
-  "C188": "e3621edd6c70ac32",
-  "C330": "a3937a97fde4581a",
-  "C1401": "8556d848b4f6d218",
-  "C210": "8cdd90c7dc3c9a81",
+  "C2181": "f8cba1df1d6b6384",
+  "C285": "63dd19db6d439270",
+  "C294": "9d682881e7aea9a7",
+  "C381": "8ea1846db089ca4d",
+  "C188": "404308188039d271",
+  "C1401": "65f57d72286776bb",
+  "C210": "697c162086896fc9",
   "C338": "4fc1fa22afd78930",
-  "C1366": "1e6ecae8382ff533",
-  "C388": "02b0ddf9307af0f3",
+  "C1366": "38fdd6005330d0e3",
+  "C388": "59a86de5b842fe4a",
   "C541": "4997553b1220b492",
-  "L68": "0a3111278bd8496e",
-  "L69": "60980c0fde02d655",
-  "L70": "11b63ea3b676114f",
-  "L116": "6932920746767339",
-  "meters#1": "bb33c87d035b3ac4",
-  "meters#2": "2b1319ce4efdc167",
-  "meters#3": "9fa52622f07bd773",
-  "meters#4": "538f0f2acbddebc8",
-  "meters#5": "e8844912425defe5",
-  "meters#6": "470d2275a4a0510c",
-  "meters#7": "2a5409ae48591f37",
-  "meters#8": "24d0f2be0c16cee7",
-  "meters#9": "f34377a1648a56e4",
-  "meters#10": "df28366397b8550a",
+  "L68": "51210f20e260ef5b",
+  "L69": "83c3a8553703cd3e",
+  "L70": "1a6d38f98d54f822",
+  "L116": "3404a09acbdd6056",
+  "meters#1": "2c2366c8a4f0661a",
+  "meters#2": "5f0e666241071b92",
+  "meters#3": "64b4a3356f5a7f41",
+  "meters#4": "883bf0bdb8da859b",
+  "meters#5": "dc6e47a9359795b0",
+  "meters#6": "8a832f79aa255e2a",
+  "meters#7": "44547e982e718e68",
+  "meters#8": "659ca34eac5bbffe",
+  "meters#9": "89fd02b035ec620b",
+  "meters#10": "f5701f398cb4dd09",
+  "meters#11": "2499d8c168b63ff7",
   "C1651": "1fd1d398f8ff8c05",
   "C1652": "2865863f1d3334b3",
   "C1653": "fdc77dd44dd4184f",
@@ -97,7 +115,7 @@
   "returning-player#1": "ef6038f995ee4a9b",
   "returning-player#2": "cf9e545d681c7ac1",
   "returning-player#3": "fa2d9e90ed16c9bd",
-  "returning-player#4": "8b8d152767cf996a",
+  "returning-player#4": "b66fb813d57540d1",
   "returning-player#5": "9d9e80a6ae3ee32f",
   "returning-player#6": "3cf3fc37d1579b0f",
   "returning-player#7": "37a9c00a2f9d0d2b",
@@ -581,13 +599,13 @@
    "screen": "*",
    "verdict": "N/A",
    "line": "",
-   "why": "No act, goal card, lock or choice in this piece (card skip lines).",
+   "why": "P01 builds no Quests entry; no [[story_hints]] step names a skill storyline in release 1.",
    "cause": null,
    "note": false,
-   "screen_hash": "4f53cda18c2baa0c",
-   "row_hash": "1e6ecae8382ff533",
-   "carried": true,
-   "pass": 1
+   "screen_hash": "94d0fedd770a24d2",
+   "row_hash": "38fdd6005330d0e3",
+   "carried": false,
+   "pass": 5
   },
   {
    "row": "C1369",
@@ -619,14 +637,14 @@
    "row": "C1401",
    "screen": "*",
    "verdict": "PASS",
-   "line": "daily caps by stage are 3, 3, 2, 2, 2",
-   "why": "Card declares daily caps 3, 3, 2, 2, 2 and caps at the stage above; no act exists, nothing moves either meter in the build.",
+   "line": "no [engine.daily_caps] in 7_final_game.toml",
+   "why": "No band table on a skill; the engine applies CoT's gain and cap (people_system.py SKILL_GAIN/SKILL_CAP); release 1 writes no gate to pace.",
    "cause": null,
    "note": false,
-   "screen_hash": "4f53cda18c2baa0c",
-   "row_hash": "8556d848b4f6d218",
-   "carried": true,
-   "pass": 1
+   "screen_hash": "94d0fedd770a24d2",
+   "row_hash": "65f57d72286776bb",
+   "carried": false,
+   "pass": 5
   },
   {
    "row": "C1403",
@@ -1073,54 +1091,229 @@
   {
    "row": "C188",
    "screen": "*",
-   "verdict": "PASS",
-   "line": "small rungs at 5, 10 and 15 ... never the next stage's kind",
-   "why": "Card states the rule in the row's own terms and says release 1 builds none because no meter moves; verified nothing in the build pays either meter.",
+   "verdict": "N/A",
+   "line": "",
+   "why": "Release 1 writes no skill_gate and no effect on any skill (grep of 7_final_game.toml; C2182, LO \"Meter frozen\"), so there is no gate for this row to judge. No level has a first gate yet, so no \"not yet\" talk is owed below one.",
    "cause": null,
    "note": false,
-   "screen_hash": "4f53cda18c2baa0c",
-   "row_hash": "e3621edd6c70ac32",
-   "carried": true,
-   "pass": 1
+   "screen_hash": "94d0fedd770a24d2",
+   "row_hash": "404308188039d271",
+   "carried": false,
+   "pass": 5
+  },
+  {
+   "row": "C188",
+   "screen": "sidebar.energy",
+   "verdict": "N/A",
+   "line": "",
+   "why": "Release 1 writes no skill_gate and no effect on any skill (grep of 7_final_game.toml; C2182, LO \"Meter frozen\"), so there is no gate for this row to judge. No level has a first gate yet, so no \"not yet\" talk is owed below one.",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "3473bd68b6c72b9a",
+    "facts": "3473bd68b6c72b9a",
+    "facts2": "3473bd68b6c72b9a",
+    "all": "3473bd68b6c72b9a"
+   },
+   "row_hash": "404308188039d271",
+   "carried": false,
+   "pass": 5
+  },
+  {
+   "row": "C188",
+   "screen": "sidebar.exhibitionism",
+   "verdict": "N/A",
+   "line": "",
+   "why": "Release 1 writes no skill_gate and no effect on any skill (grep of 7_final_game.toml; C2182, LO \"Meter frozen\"), so there is no gate for this row to judge. No level has a first gate yet, so no \"not yet\" talk is owed below one.",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "41c419fdfc72bfa1",
+    "facts": "41c419fdfc72bfa1",
+    "facts2": "41c419fdfc72bfa1",
+    "all": "41c419fdfc72bfa1"
+   },
+   "row_hash": "404308188039d271",
+   "carried": false,
+   "pass": 5
+  },
+  {
+   "row": "C188",
+   "screen": "sidebar.money",
+   "verdict": "N/A",
+   "line": "",
+   "why": "Release 1 writes no skill_gate and no effect on any skill (grep of 7_final_game.toml; C2182, LO \"Meter frozen\"), so there is no gate for this row to judge. No level has a first gate yet, so no \"not yet\" talk is owed below one.",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "adc8a52b803f892e",
+    "facts": "adc8a52b803f892e",
+    "facts2": "adc8a52b803f892e",
+    "all": "adc8a52b803f892e"
+   },
+   "row_hash": "404308188039d271",
+   "carried": false,
+   "pass": 5
   },
   {
    "row": "C210",
    "screen": "*",
    "verdict": "PASS",
-   "line": "small rungs at 5, 10 and 15 ... never the next stage's kind",
-   "why": "Card states the rule in the row's own terms and says release 1 builds none because no meter moves; verified nothing in the build pays either meter.",
+   "line": "Level 0",
+   "why": "The sidebar item has a band per level, Level 0 to Level 10 (7_final_game.toml:126-142), so a crossing prints the new level; no crossing scene exists, so none pays.",
    "cause": null,
    "note": false,
-   "screen_hash": "4f53cda18c2baa0c",
-   "row_hash": "8cdd90c7dc3c9a81",
-   "carried": true,
-   "pass": 1
+   "screen_hash": "94d0fedd770a24d2",
+   "row_hash": "697c162086896fc9",
+   "carried": false,
+   "pass": 5
+  },
+  {
+   "row": "C210",
+   "screen": "sidebar.energy",
+   "verdict": "N/A",
+   "line": "",
+   "why": "Energy and money are not climb meters; the row reads her skills only.",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "3473bd68b6c72b9a",
+    "facts": "3473bd68b6c72b9a",
+    "facts2": "3473bd68b6c72b9a",
+    "all": "3473bd68b6c72b9a"
+   },
+   "row_hash": "697c162086896fc9",
+   "carried": false,
+   "pass": 5
+  },
+  {
+   "row": "C210",
+   "screen": "sidebar.exhibitionism",
+   "verdict": "PASS",
+   "line": "Exhibitionism / Level 0",
+   "why": "The sidebar item has a band per level, Level 0 to Level 10 (7_final_game.toml:126-142), so a crossing prints the new level; no crossing scene exists, so none pays.",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "41c419fdfc72bfa1",
+    "facts": "41c419fdfc72bfa1",
+    "facts2": "41c419fdfc72bfa1",
+    "all": "41c419fdfc72bfa1"
+   },
+   "row_hash": "697c162086896fc9",
+   "carried": false,
+   "pass": 5
+  },
+  {
+   "row": "C210",
+   "screen": "sidebar.money",
+   "verdict": "N/A",
+   "line": "",
+   "why": "Energy and money are not climb meters; the row reads her skills only.",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "adc8a52b803f892e",
+    "facts": "adc8a52b803f892e",
+    "facts2": "adc8a52b803f892e",
+    "all": "adc8a52b803f892e"
+   },
+   "row_hash": "697c162086896fc9",
+   "carried": false,
+   "pass": 5
+  },
+  {
+   "row": "C2181",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "key = \"exhibitionism\" ... skill = true",
+   "why": "Exhibitionism is a [[traits.labels]] row with skill = true, stored 0 in [player] core_traits (0..1000), shown by level; release 1 writes no skill_gate, so no gate names an unknown skill.",
+   "cause": null,
+   "note": false,
+   "screen_hash": "94d0fedd770a24d2",
+   "row_hash": "f8cba1df1d6b6384",
+   "carried": false,
+   "pass": 5
+  },
+  {
+   "row": "C2181",
+   "screen": "sidebar.energy",
+   "verdict": "N/A",
+   "line": "",
+   "why": "Energy and money are not climb meters; the row reads her skills only.",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "3473bd68b6c72b9a",
+    "facts": "3473bd68b6c72b9a",
+    "facts2": "3473bd68b6c72b9a",
+    "all": "3473bd68b6c72b9a"
+   },
+   "row_hash": "f8cba1df1d6b6384",
+   "carried": false,
+   "pass": 5
+  },
+  {
+   "row": "C2181",
+   "screen": "sidebar.exhibitionism",
+   "verdict": "PASS",
+   "line": "Exhibitionism / Level 0",
+   "why": "Exhibitionism is a [[traits.labels]] row with skill = true, stored 0 in [player] core_traits (0..1000), shown by level; release 1 writes no skill_gate, so no gate names an unknown skill.",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "41c419fdfc72bfa1",
+    "facts": "41c419fdfc72bfa1",
+    "facts2": "41c419fdfc72bfa1",
+    "all": "41c419fdfc72bfa1"
+   },
+   "row_hash": "f8cba1df1d6b6384",
+   "carried": false,
+   "pass": 5
+  },
+  {
+   "row": "C2181",
+   "screen": "sidebar.money",
+   "verdict": "N/A",
+   "line": "",
+   "why": "Energy and money are not climb meters; the row reads her skills only.",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "adc8a52b803f892e",
+    "facts": "adc8a52b803f892e",
+    "facts2": "adc8a52b803f892e",
+    "all": "adc8a52b803f892e"
+   },
+   "row_hash": "f8cba1df1d6b6384",
+   "carried": false,
+   "pass": 5
   },
   {
    "row": "C285",
    "screen": "*",
    "verdict": "PASS",
-   "line": "Good Girl 0\u201319 \u00b7 Curious 20\u201339 \u00b7 Bold 40\u201359 \u00b7 Wild 60\u201379 \u00b7 Shameless 80\u2013100",
-   "why": "Five stages of 20 on both meters, order kept, as sidebar bands (7_final_game.toml:68-93).",
+   "line": "sexy needs level 2, super sexy level 4, slutty level 6",
+   "why": "PLAN \u00a78d reads the skills by level in CoT's order (2, 4, 6); the built sidebar shows levels, not stages of 20. (Card P01 Variants still lists the old 20-point word ladders; see report.)",
    "cause": null,
    "note": true,
-   "screen_hash": "4f53cda18c2baa0c",
-   "row_hash": "789c49111f9e35ff",
-   "carried": true,
-   "pass": 1
+   "screen_hash": "94d0fedd770a24d2",
+   "row_hash": "63dd19db6d439270",
+   "carried": false,
+   "pass": 5
   },
   {
    "row": "C294",
    "screen": "*",
    "verdict": "PASS",
-   "line": "Corruption: 0 \u00b7 Good Girl",
-   "why": "Release 1 pays neither meter (no applyAndNotifyTrait on corruption/exhibitionism in output/index.html); the sidebar prints only the current band word, never the next stage.",
+   "line": "Exhibitionism / Level 0",
+   "why": "Release 1 writes no skill_gate at any level; the sidebar names only her current level, never the next.",
    "cause": null,
    "note": false,
-   "screen_hash": "4f53cda18c2baa0c",
-   "row_hash": "c7ce54e99675df08",
-   "carried": true,
-   "pass": 1
+   "screen_hash": "94d0fedd770a24d2",
+   "row_hash": "9d682881e7aea9a7",
+   "carried": false,
+   "pass": 5
   },
   {
    "row": "C295",
@@ -1162,30 +1355,192 @@
    "pass": 1
   },
   {
-   "row": "C381",
-   "screen": "*",
-   "verdict": "PASS",
-   "line": "small rungs at 5, 10 and 15 ... never the next stage's kind",
-   "why": "Card states the rule in the row's own terms and says release 1 builds none because no meter moves; verified nothing in the build pays either meter.",
+   "row": "C338",
+   "screen": "sidebar.energy",
+   "verdict": "N/A",
+   "line": "",
+   "why": "The sidebar has no act, accident or button; nothing pays in release 1 (C2182).",
    "cause": null,
    "note": false,
-   "screen_hash": "4f53cda18c2baa0c",
-   "row_hash": "a78923933e7a5c0c",
-   "carried": true,
-   "pass": 1
+   "screen_hash": {
+    "text": "3473bd68b6c72b9a",
+    "facts": "3473bd68b6c72b9a",
+    "facts2": "3473bd68b6c72b9a",
+    "all": "3473bd68b6c72b9a"
+   },
+   "row_hash": "4fc1fa22afd78930",
+   "carried": false,
+   "pass": 5
+  },
+  {
+   "row": "C338",
+   "screen": "sidebar.exhibitionism",
+   "verdict": "N/A",
+   "line": "",
+   "why": "The sidebar has no act, accident or button; nothing pays in release 1 (C2182).",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "41c419fdfc72bfa1",
+    "facts": "41c419fdfc72bfa1",
+    "facts2": "41c419fdfc72bfa1",
+    "all": "41c419fdfc72bfa1"
+   },
+   "row_hash": "4fc1fa22afd78930",
+   "carried": false,
+   "pass": 5
+  },
+  {
+   "row": "C338",
+   "screen": "sidebar.money",
+   "verdict": "N/A",
+   "line": "",
+   "why": "The sidebar has no act, accident or button; nothing pays in release 1 (C2182).",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "adc8a52b803f892e",
+    "facts": "adc8a52b803f892e",
+    "facts2": "adc8a52b803f892e",
+    "all": "adc8a52b803f892e"
+   },
+   "row_hash": "4fc1fa22afd78930",
+   "carried": false,
+   "pass": 5
+  },
+  {
+   "row": "C381",
+   "screen": "*",
+   "verdict": "N/A",
+   "line": "",
+   "why": "The row permits a greyed next-level gate; the sidebar has no gate and release 1 writes none.",
+   "cause": null,
+   "note": false,
+   "screen_hash": "94d0fedd770a24d2",
+   "row_hash": "8ea1846db089ca4d",
+   "carried": false,
+   "pass": 5
+  },
+  {
+   "row": "C381",
+   "screen": "sidebar.energy",
+   "verdict": "N/A",
+   "line": "",
+   "why": "The row permits a greyed next-level gate; the sidebar has no gate and release 1 writes none.",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "3473bd68b6c72b9a",
+    "facts": "3473bd68b6c72b9a",
+    "facts2": "3473bd68b6c72b9a",
+    "all": "3473bd68b6c72b9a"
+   },
+   "row_hash": "8ea1846db089ca4d",
+   "carried": false,
+   "pass": 5
+  },
+  {
+   "row": "C381",
+   "screen": "sidebar.exhibitionism",
+   "verdict": "N/A",
+   "line": "",
+   "why": "The row permits a greyed next-level gate; the sidebar has no gate and release 1 writes none.",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "41c419fdfc72bfa1",
+    "facts": "41c419fdfc72bfa1",
+    "facts2": "41c419fdfc72bfa1",
+    "all": "41c419fdfc72bfa1"
+   },
+   "row_hash": "8ea1846db089ca4d",
+   "carried": false,
+   "pass": 5
+  },
+  {
+   "row": "C381",
+   "screen": "sidebar.money",
+   "verdict": "N/A",
+   "line": "",
+   "why": "The row permits a greyed next-level gate; the sidebar has no gate and release 1 writes none.",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "adc8a52b803f892e",
+    "facts": "adc8a52b803f892e",
+    "facts2": "adc8a52b803f892e",
+    "all": "adc8a52b803f892e"
+   },
+   "row_hash": "8ea1846db089ca4d",
+   "carried": false,
+   "pass": 5
   },
   {
    "row": "C388",
    "screen": "*",
    "verdict": "N/A",
    "line": "",
-   "why": "No act, goal card, lock or choice in this piece (card skip lines).",
+   "why": "No lock on the sidebar and none built by P01.",
    "cause": null,
    "note": false,
-   "screen_hash": "4f53cda18c2baa0c",
-   "row_hash": "02b0ddf9307af0f3",
-   "carried": true,
-   "pass": 1
+   "screen_hash": "94d0fedd770a24d2",
+   "row_hash": "59a86de5b842fe4a",
+   "carried": false,
+   "pass": 5
+  },
+  {
+   "row": "C388",
+   "screen": "sidebar.energy",
+   "verdict": "N/A",
+   "line": "",
+   "why": "No lock on the sidebar and none built by P01.",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "3473bd68b6c72b9a",
+    "facts": "3473bd68b6c72b9a",
+    "facts2": "3473bd68b6c72b9a",
+    "all": "3473bd68b6c72b9a"
+   },
+   "row_hash": "59a86de5b842fe4a",
+   "carried": false,
+   "pass": 5
+  },
+  {
+   "row": "C388",
+   "screen": "sidebar.exhibitionism",
+   "verdict": "N/A",
+   "line": "",
+   "why": "No lock on the sidebar and none built by P01.",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "41c419fdfc72bfa1",
+    "facts": "41c419fdfc72bfa1",
+    "facts2": "41c419fdfc72bfa1",
+    "all": "41c419fdfc72bfa1"
+   },
+   "row_hash": "59a86de5b842fe4a",
+   "carried": false,
+   "pass": 5
+  },
+  {
+   "row": "C388",
+   "screen": "sidebar.money",
+   "verdict": "N/A",
+   "line": "",
+   "why": "No lock on the sidebar and none built by P01.",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "adc8a52b803f892e",
+    "facts": "adc8a52b803f892e",
+    "facts2": "adc8a52b803f892e",
+    "all": "adc8a52b803f892e"
+   },
+   "row_hash": "59a86de5b842fe4a",
+   "carried": false,
+   "pass": 5
   },
   {
    "row": "C422",
@@ -1201,6 +1556,60 @@
    "pass": 1
   },
   {
+   "row": "C422",
+   "screen": "sidebar.energy",
+   "verdict": "PASS",
+   "line": "Energy: 100 / 100",
+   "why": "The label says plainly what the number is; nothing on it is clickable.",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "3473bd68b6c72b9a",
+    "facts": "3473bd68b6c72b9a",
+    "facts2": "3473bd68b6c72b9a",
+    "all": "3473bd68b6c72b9a"
+   },
+   "row_hash": "8933f85010afbef7",
+   "carried": false,
+   "pass": 5
+  },
+  {
+   "row": "C422",
+   "screen": "sidebar.exhibitionism",
+   "verdict": "PASS",
+   "line": "Exhibitionism / Level 0",
+   "why": "The label says plainly what the number is; nothing on it is clickable.",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "41c419fdfc72bfa1",
+    "facts": "41c419fdfc72bfa1",
+    "facts2": "41c419fdfc72bfa1",
+    "all": "41c419fdfc72bfa1"
+   },
+   "row_hash": "8933f85010afbef7",
+   "carried": false,
+   "pass": 5
+  },
+  {
+   "row": "C422",
+   "screen": "sidebar.money",
+   "verdict": "PASS",
+   "line": "Money ($): 0",
+   "why": "The label says plainly what the number is; nothing on it is clickable.",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "adc8a52b803f892e",
+    "facts": "adc8a52b803f892e",
+    "facts2": "adc8a52b803f892e",
+    "all": "adc8a52b803f892e"
+   },
+   "row_hash": "8933f85010afbef7",
+   "carried": false,
+   "pass": 5
+  },
+  {
    "row": "C442",
    "screen": "*",
    "verdict": "N/A",
@@ -1212,6 +1621,60 @@
    "row_hash": "a2b07f40e1a9e908",
    "carried": true,
    "pass": 1
+  },
+  {
+   "row": "C442",
+   "screen": "sidebar.energy",
+   "verdict": "N/A",
+   "line": "",
+   "why": "A sidebar item is a label and a value, no story text to say or hint.",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "3473bd68b6c72b9a",
+    "facts": "3473bd68b6c72b9a",
+    "facts2": "3473bd68b6c72b9a",
+    "all": "3473bd68b6c72b9a"
+   },
+   "row_hash": "a2b07f40e1a9e908",
+   "carried": false,
+   "pass": 5
+  },
+  {
+   "row": "C442",
+   "screen": "sidebar.exhibitionism",
+   "verdict": "N/A",
+   "line": "",
+   "why": "A sidebar item is a label and a value, no story text to say or hint.",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "41c419fdfc72bfa1",
+    "facts": "41c419fdfc72bfa1",
+    "facts2": "41c419fdfc72bfa1",
+    "all": "41c419fdfc72bfa1"
+   },
+   "row_hash": "a2b07f40e1a9e908",
+   "carried": false,
+   "pass": 5
+  },
+  {
+   "row": "C442",
+   "screen": "sidebar.money",
+   "verdict": "N/A",
+   "line": "",
+   "why": "A sidebar item is a label and a value, no story text to say or hint.",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "adc8a52b803f892e",
+    "facts": "adc8a52b803f892e",
+    "facts2": "adc8a52b803f892e",
+    "all": "adc8a52b803f892e"
+   },
+   "row_hash": "a2b07f40e1a9e908",
+   "carried": false,
+   "pass": 5
   },
   {
    "row": "C447",
@@ -1279,6 +1742,60 @@
    "pass": 1
   },
   {
+   "row": "C451",
+   "screen": "sidebar.energy",
+   "verdict": "N/A",
+   "line": "",
+   "why": "A sidebar item is a label and a value, no prose to keep detail in.",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "3473bd68b6c72b9a",
+    "facts": "3473bd68b6c72b9a",
+    "facts2": "3473bd68b6c72b9a",
+    "all": "3473bd68b6c72b9a"
+   },
+   "row_hash": "6b0fd679047fc9b8",
+   "carried": false,
+   "pass": 5
+  },
+  {
+   "row": "C451",
+   "screen": "sidebar.exhibitionism",
+   "verdict": "N/A",
+   "line": "",
+   "why": "A sidebar item is a label and a value, no prose to keep detail in.",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "41c419fdfc72bfa1",
+    "facts": "41c419fdfc72bfa1",
+    "facts2": "41c419fdfc72bfa1",
+    "all": "41c419fdfc72bfa1"
+   },
+   "row_hash": "6b0fd679047fc9b8",
+   "carried": false,
+   "pass": 5
+  },
+  {
+   "row": "C451",
+   "screen": "sidebar.money",
+   "verdict": "N/A",
+   "line": "",
+   "why": "A sidebar item is a label and a value, no prose to keep detail in.",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "adc8a52b803f892e",
+    "facts": "adc8a52b803f892e",
+    "facts2": "adc8a52b803f892e",
+    "all": "adc8a52b803f892e"
+   },
+   "row_hash": "6b0fd679047fc9b8",
+   "carried": false,
+   "pass": 5
+  },
+  {
    "row": "C460",
    "screen": "*",
    "verdict": "PASS",
@@ -1290,6 +1807,60 @@
    "row_hash": "beb5a109bde77305",
    "carried": true,
    "pass": 1
+  },
+  {
+   "row": "C460",
+   "screen": "sidebar.energy",
+   "verdict": "PASS",
+   "line": "Energy: 100 / 100",
+   "why": "The value is read live from $player.core_traits each render (v2.py trait_bar/trait_words), so it is true at every minute and on every visit; no person or past claimed.",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "3473bd68b6c72b9a",
+    "facts": "3473bd68b6c72b9a",
+    "facts2": "3473bd68b6c72b9a",
+    "all": "3473bd68b6c72b9a"
+   },
+   "row_hash": "beb5a109bde77305",
+   "carried": false,
+   "pass": 5
+  },
+  {
+   "row": "C460",
+   "screen": "sidebar.exhibitionism",
+   "verdict": "PASS",
+   "line": "Exhibitionism / Level 0",
+   "why": "The value is read live from $player.core_traits each render (v2.py trait_bar/trait_words), so it is true at every minute and on every visit; no person or past claimed.",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "41c419fdfc72bfa1",
+    "facts": "41c419fdfc72bfa1",
+    "facts2": "41c419fdfc72bfa1",
+    "all": "41c419fdfc72bfa1"
+   },
+   "row_hash": "beb5a109bde77305",
+   "carried": false,
+   "pass": 5
+  },
+  {
+   "row": "C460",
+   "screen": "sidebar.money",
+   "verdict": "PASS",
+   "line": "Money ($): 0",
+   "why": "The value is read live from $player.core_traits each render (v2.py trait_bar/trait_words), so it is true at every minute and on every visit; no person or past claimed.",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "adc8a52b803f892e",
+    "facts": "adc8a52b803f892e",
+    "facts2": "adc8a52b803f892e",
+    "all": "adc8a52b803f892e"
+   },
+   "row_hash": "beb5a109bde77305",
+   "carried": false,
+   "pass": 5
   },
   {
    "row": "C461",
@@ -1305,6 +1876,60 @@
    "pass": 1
   },
   {
+   "row": "C461",
+   "screen": "sidebar.energy",
+   "verdict": "PASS",
+   "line": "Energy: 100 / 100",
+   "why": "Only a label and the live value; nothing that can clash.",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "3473bd68b6c72b9a",
+    "facts": "3473bd68b6c72b9a",
+    "facts2": "3473bd68b6c72b9a",
+    "all": "3473bd68b6c72b9a"
+   },
+   "row_hash": "153b0804e686abae",
+   "carried": false,
+   "pass": 5
+  },
+  {
+   "row": "C461",
+   "screen": "sidebar.exhibitionism",
+   "verdict": "PASS",
+   "line": "Exhibitionism / Level 0",
+   "why": "Only a label and the live value; nothing that can clash.",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "41c419fdfc72bfa1",
+    "facts": "41c419fdfc72bfa1",
+    "facts2": "41c419fdfc72bfa1",
+    "all": "41c419fdfc72bfa1"
+   },
+   "row_hash": "153b0804e686abae",
+   "carried": false,
+   "pass": 5
+  },
+  {
+   "row": "C461",
+   "screen": "sidebar.money",
+   "verdict": "PASS",
+   "line": "Money ($): 0",
+   "why": "Only a label and the live value; nothing that can clash.",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "adc8a52b803f892e",
+    "facts": "adc8a52b803f892e",
+    "facts2": "adc8a52b803f892e",
+    "all": "adc8a52b803f892e"
+   },
+   "row_hash": "153b0804e686abae",
+   "carried": false,
+   "pass": 5
+  },
+  {
    "row": "C541",
    "screen": "*",
    "verdict": "N/A",
@@ -1316,6 +1941,60 @@
    "row_hash": "4997553b1220b492",
    "carried": true,
    "pass": 1
+  },
+  {
+   "row": "C541",
+   "screen": "sidebar.energy",
+   "verdict": "PASS",
+   "line": "Energy: 100 / 100",
+   "why": "No +X printed anywhere on the sidebar; every trait that can toast (energy, money, the four skills, grades, reputation) is shown on the sidebar, and every hidden trait has toast = false.",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "3473bd68b6c72b9a",
+    "facts": "3473bd68b6c72b9a",
+    "facts2": "3473bd68b6c72b9a",
+    "all": "3473bd68b6c72b9a"
+   },
+   "row_hash": "4997553b1220b492",
+   "carried": false,
+   "pass": 5
+  },
+  {
+   "row": "C541",
+   "screen": "sidebar.exhibitionism",
+   "verdict": "PASS",
+   "line": "Exhibitionism / Level 0",
+   "why": "No +X printed anywhere on the sidebar; every trait that can toast (energy, money, the four skills, grades, reputation) is shown on the sidebar, and every hidden trait has toast = false.",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "41c419fdfc72bfa1",
+    "facts": "41c419fdfc72bfa1",
+    "facts2": "41c419fdfc72bfa1",
+    "all": "41c419fdfc72bfa1"
+   },
+   "row_hash": "4997553b1220b492",
+   "carried": false,
+   "pass": 5
+  },
+  {
+   "row": "C541",
+   "screen": "sidebar.money",
+   "verdict": "PASS",
+   "line": "Money ($): 0",
+   "why": "No +X printed anywhere on the sidebar; every trait that can toast (energy, money, the four skills, grades, reputation) is shown on the sidebar, and every hidden trait has toast = false.",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "adc8a52b803f892e",
+    "facts": "adc8a52b803f892e",
+    "facts2": "adc8a52b803f892e",
+    "all": "adc8a52b803f892e"
+   },
+   "row_hash": "4997553b1220b492",
+   "carried": false,
+   "pass": 5
   },
   {
    "row": "C593",
@@ -1353,7 +2032,7 @@
    "note": false,
    "screen_hash": "4f53cda18c2baa0c",
    "row_hash": "e641a233b7b0e8b0",
-   "carried": false,
+   "carried": true,
    "pass": 4
   },
   {
@@ -1426,13 +2105,67 @@
    "screen": "*",
    "verdict": "N/A",
    "line": "",
-   "why": "No act, goal card, lock or choice in this piece (card skip lines).",
+   "why": "No lock on the sidebar and none built by P01.",
    "cause": null,
    "note": false,
-   "screen_hash": "4f53cda18c2baa0c",
-   "row_hash": "6932920746767339",
-   "carried": true,
-   "pass": 1
+   "screen_hash": "94d0fedd770a24d2",
+   "row_hash": "3404a09acbdd6056",
+   "carried": false,
+   "pass": 5
+  },
+  {
+   "row": "L116",
+   "screen": "sidebar.energy",
+   "verdict": "N/A",
+   "line": "",
+   "why": "No lock on the sidebar and none built by P01.",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "3473bd68b6c72b9a",
+    "facts": "3473bd68b6c72b9a",
+    "facts2": "3473bd68b6c72b9a",
+    "all": "3473bd68b6c72b9a"
+   },
+   "row_hash": "3404a09acbdd6056",
+   "carried": false,
+   "pass": 5
+  },
+  {
+   "row": "L116",
+   "screen": "sidebar.exhibitionism",
+   "verdict": "N/A",
+   "line": "",
+   "why": "No lock on the sidebar and none built by P01.",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "41c419fdfc72bfa1",
+    "facts": "41c419fdfc72bfa1",
+    "facts2": "41c419fdfc72bfa1",
+    "all": "41c419fdfc72bfa1"
+   },
+   "row_hash": "3404a09acbdd6056",
+   "carried": false,
+   "pass": 5
+  },
+  {
+   "row": "L116",
+   "screen": "sidebar.money",
+   "verdict": "N/A",
+   "line": "",
+   "why": "No lock on the sidebar and none built by P01.",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "adc8a52b803f892e",
+    "facts": "adc8a52b803f892e",
+    "facts2": "adc8a52b803f892e",
+    "all": "adc8a52b803f892e"
+   },
+   "row_hash": "3404a09acbdd6056",
+   "carried": false,
+   "pass": 5
   },
   {
    "row": "L163",
@@ -1465,39 +2198,93 @@
    "screen": "*",
    "verdict": "N/A",
    "line": "",
-   "why": "Release 1 moves no meter by LO's plan (PLAN.md:309 'Release 1 moves no meter'; NOTES.md:40); no act exists to judge.",
+   "why": "Release 1 writes no skill_gate and no effect on any skill (grep of 7_final_game.toml; C2182, LO \"Meter frozen\"), so there is no gate for this row to judge.",
    "cause": null,
    "note": false,
-   "screen_hash": "4f53cda18c2baa0c",
-   "row_hash": "0a3111278bd8496e",
-   "carried": true,
-   "pass": 1
+   "screen_hash": "94d0fedd770a24d2",
+   "row_hash": "51210f20e260ef5b",
+   "carried": false,
+   "pass": 5
   },
   {
    "row": "L69",
    "screen": "*",
    "verdict": "PASS",
    "line": "daily caps by stage are 3, 3, 2, 2, 2",
-   "why": "Card declares daily caps 3, 3, 2, 2, 2 and caps at the stage above; no act exists, nothing moves either meter in the build.",
+   "why": "The plan never paces a level by one act a day; release 1 has no gate to pace.",
    "cause": null,
    "note": false,
-   "screen_hash": "4f53cda18c2baa0c",
-   "row_hash": "60980c0fde02d655",
-   "carried": true,
-   "pass": 1
+   "screen_hash": "94d0fedd770a24d2",
+   "row_hash": "83c3a8553703cd3e",
+   "carried": false,
+   "pass": 5
   },
   {
    "row": "L70",
    "screen": "*",
    "verdict": "N/A",
    "line": "",
-   "why": "No act, goal card, lock or choice in this piece (card skip lines).",
+   "why": "Release 1 writes no skill_gate and no effect on any skill (grep of 7_final_game.toml; C2182, LO \"Meter frozen\"), so there is no gate for this row to judge.",
    "cause": null,
    "note": false,
-   "screen_hash": "4f53cda18c2baa0c",
-   "row_hash": "11b63ea3b676114f",
-   "carried": true,
-   "pass": 1
+   "screen_hash": "94d0fedd770a24d2",
+   "row_hash": "1a6d38f98d54f822",
+   "carried": false,
+   "pass": 5
+  },
+  {
+   "row": "L70",
+   "screen": "sidebar.energy",
+   "verdict": "N/A",
+   "line": "",
+   "why": "Energy and money are not climb meters; the row reads her skills only.",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "3473bd68b6c72b9a",
+    "facts": "3473bd68b6c72b9a",
+    "facts2": "3473bd68b6c72b9a",
+    "all": "3473bd68b6c72b9a"
+   },
+   "row_hash": "1a6d38f98d54f822",
+   "carried": false,
+   "pass": 5
+  },
+  {
+   "row": "L70",
+   "screen": "sidebar.exhibitionism",
+   "verdict": "N/A",
+   "line": "",
+   "why": "Release 1 writes no skill_gate and no effect on any skill (grep of 7_final_game.toml; C2182, LO \"Meter frozen\"), so there is no gate for this row to judge.",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "41c419fdfc72bfa1",
+    "facts": "41c419fdfc72bfa1",
+    "facts2": "41c419fdfc72bfa1",
+    "all": "41c419fdfc72bfa1"
+   },
+   "row_hash": "1a6d38f98d54f822",
+   "carried": false,
+   "pass": 5
+  },
+  {
+   "row": "L70",
+   "screen": "sidebar.money",
+   "verdict": "N/A",
+   "line": "",
+   "why": "Energy and money are not climb meters; the row reads her skills only.",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "adc8a52b803f892e",
+    "facts": "adc8a52b803f892e",
+    "facts2": "adc8a52b803f892e",
+    "all": "adc8a52b803f892e"
+   },
+   "row_hash": "1a6d38f98d54f822",
+   "carried": false,
+   "pass": 5
   },
   {
    "row": "economy#1",
@@ -1620,131 +2407,144 @@
    "row": "meters#1",
    "screen": "*",
    "verdict": "PASS",
-   "line": "Covered 0\u201319 \u00b7 Noticed 20\u201339 \u00b7 Showing Off 40\u201359 \u00b7 Exposed 60\u201379 \u00b7 On Display 80\u2013100",
-   "why": "The table: five named stages of 20 per meter, each word printed by the sidebar.",
+   "line": "Exhibitionism / Level 0",
+   "why": "skill = true on all four skills (7_final_game.toml:45-62), 0 in core_traits, sidebar shows each by level.",
    "cause": null,
    "note": false,
-   "screen_hash": "4f53cda18c2baa0c",
-   "row_hash": "bb33c87d035b3ac4",
-   "carried": true,
-   "pass": 1
+   "screen_hash": "94d0fedd770a24d2",
+   "row_hash": "2c2366c8a4f0661a",
+   "carried": false,
+   "pass": 5
   },
   {
    "row": "meters#10",
    "screen": "*",
    "verdict": "PASS",
-   "line": "Exhibitionism: 0 \u00b7 Covered",
-   "why": "Partial release: no pay at all, no button for an unwritten stage in this piece, next stage not named on the sidebar.",
+   "line": "Exhibitionism / Level 0",
+   "why": "No gate above the last written level (none written); the sidebar never names the next level.",
    "cause": null,
    "note": false,
-   "screen_hash": "4f53cda18c2baa0c",
-   "row_hash": "df28366397b8550a",
-   "carried": true,
-   "pass": 1
+   "screen_hash": "94d0fedd770a24d2",
+   "row_hash": "f5701f398cb4dd09",
+   "carried": false,
+   "pass": 5
+  },
+  {
+   "row": "meters#11",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "disinhibition = 0, corruption = 0, exhibitionism = 0, submission = 0, dominance = 0",
+   "why": "Start values shown as Level 0; no gate or effect on a skill anywhere in the build, no applyAndNotifyTrait on a skill in output/index.html.",
+   "cause": null,
+   "note": false,
+   "screen_hash": "94d0fedd770a24d2",
+   "row_hash": "2499d8c168b63ff7",
+   "carried": false,
+   "pass": 5
   },
   {
    "row": "meters#2",
    "screen": "*",
-   "verdict": "N/A",
-   "line": "",
-   "why": "Step governs acts, talks, locks and crossings; release 1 builds none (card, PLAN.md:309).",
+   "verdict": "PASS",
+   "line": "sexy needs level 2, super sexy level 4, slutty level 6",
+   "why": "Order kept, as C285.",
    "cause": null,
    "note": false,
-   "screen_hash": "4f53cda18c2baa0c",
-   "row_hash": "2b1319ce4efdc167",
-   "carried": true,
-   "pass": 1
+   "screen_hash": "94d0fedd770a24d2",
+   "row_hash": "5f0e666241071b92",
+   "carried": false,
+   "pass": 5
   },
   {
    "row": "meters#3",
    "screen": "*",
    "verdict": "N/A",
    "line": "",
-   "why": "Step governs acts, talks, locks and crossings; release 1 builds none (card, PLAN.md:309).",
+   "why": "Release 1 writes no skill_gate and no effect on any skill (grep of 7_final_game.toml; C2182, LO \"Meter frozen\"), so there is no gate for this row to judge.",
    "cause": null,
    "note": false,
-   "screen_hash": "4f53cda18c2baa0c",
-   "row_hash": "9fa52622f07bd773",
-   "carried": true,
-   "pass": 1
+   "screen_hash": "94d0fedd770a24d2",
+   "row_hash": "64b4a3356f5a7f41",
+   "carried": false,
+   "pass": 5
   },
   {
    "row": "meters#4",
    "screen": "*",
    "verdict": "N/A",
    "line": "",
-   "why": "Step governs acts, talks, locks and crossings; release 1 builds none (card, PLAN.md:309).",
+   "why": "Release 1 writes no skill_gate and no effect on any skill (grep of 7_final_game.toml; C2182, LO \"Meter frozen\"), so there is no gate for this row to judge.",
    "cause": null,
    "note": false,
-   "screen_hash": "4f53cda18c2baa0c",
-   "row_hash": "538f0f2acbddebc8",
-   "carried": true,
-   "pass": 1
+   "screen_hash": "94d0fedd770a24d2",
+   "row_hash": "883bf0bdb8da859b",
+   "carried": false,
+   "pass": 5
   },
   {
    "row": "meters#5",
    "screen": "*",
    "verdict": "N/A",
    "line": "",
-   "why": "Step governs acts, talks, locks and crossings; release 1 builds none (card, PLAN.md:309).",
+   "why": "Release 1 writes no skill_gate and no effect on any skill (grep of 7_final_game.toml; C2182, LO \"Meter frozen\"), so there is no gate for this row to judge.",
    "cause": null,
    "note": false,
-   "screen_hash": "4f53cda18c2baa0c",
-   "row_hash": "e8844912425defe5",
-   "carried": true,
-   "pass": 1
+   "screen_hash": "94d0fedd770a24d2",
+   "row_hash": "dc6e47a9359795b0",
+   "carried": false,
+   "pass": 5
   },
   {
    "row": "meters#6",
    "screen": "*",
-   "verdict": "N/A",
-   "line": "",
-   "why": "Step governs acts, talks, locks and crossings; release 1 builds none (card, PLAN.md:309).",
+   "verdict": "PASS",
+   "line": "no [engine.daily_caps] in 7_final_game.toml",
+   "why": "As C1401: the engine applies CoT's tables; no band table on a skill.",
    "cause": null,
    "note": false,
-   "screen_hash": "4f53cda18c2baa0c",
-   "row_hash": "470d2275a4a0510c",
-   "carried": true,
-   "pass": 1
+   "screen_hash": "94d0fedd770a24d2",
+   "row_hash": "8a832f79aa255e2a",
+   "carried": false,
+   "pass": 5
   },
   {
    "row": "meters#7",
    "screen": "*",
    "verdict": "N/A",
    "line": "",
-   "why": "Step governs acts, talks, locks and crossings; release 1 builds none (card, PLAN.md:309).",
+   "why": "Release 1 writes no skill_gate and no effect on any skill (grep of 7_final_game.toml; C2182, LO \"Meter frozen\"), so there is no gate for this row to judge.",
    "cause": null,
    "note": false,
-   "screen_hash": "4f53cda18c2baa0c",
-   "row_hash": "2a5409ae48591f37",
-   "carried": true,
-   "pass": 1
+   "screen_hash": "94d0fedd770a24d2",
+   "row_hash": "44547e982e718e68",
+   "carried": false,
+   "pass": 5
   },
   {
    "row": "meters#8",
    "screen": "*",
    "verdict": "N/A",
    "line": "",
-   "why": "release 1 moves no meter; the sidebar shows no lock and the Quests page has no meter storyline yet, so step 8 has nothing to read on these screens",
+   "why": "No [[story_hints]] entry is a skill storyline in release 1.",
    "cause": null,
    "note": false,
-   "screen_hash": "4f53cda18c2baa0c",
-   "row_hash": "24d0f2be0c16cee7",
+   "screen_hash": "94d0fedd770a24d2",
+   "row_hash": "659ca34eac5bbffe",
    "carried": false,
-   "pass": 4
+   "pass": 5
   },
   {
    "row": "meters#9",
    "screen": "*",
-   "verdict": "N/A",
-   "line": "",
-   "why": "Step governs acts, talks, locks and crossings; release 1 builds none (card, PLAN.md:309).",
+   "verdict": "PASS",
+   "line": "Level 0",
+   "why": "As C210: the sidebar bands print each level; no crossing scene.",
    "cause": null,
    "note": false,
-   "screen_hash": "4f53cda18c2baa0c",
-   "row_hash": "f34377a1648a56e4",
-   "carried": true,
-   "pass": 1
+   "screen_hash": "94d0fedd770a24d2",
+   "row_hash": "89fd02b035ec620b",
+   "carried": false,
+   "pass": 5
   },
   {
    "row": "returning-player#1",
@@ -1828,14 +2628,14 @@
    "row": "returning-player#4",
    "screen": "*",
    "verdict": "PASS",
-   "line": "First Term (Lean)",
-   "why": "Save rules honoured: nothing renamed, ranges frozen, title kept, saves never refused (check.py GREEN; build has backfill and version stamps).",
+   "line": "- 2026-11-25 Rescaled: exhibitionism \u00b7 LO, on his old save: \"its fine\"",
+   "why": "Exhibitionism's range and bands changed (0..100 stages to 0..1000 levels); NOTES.md carries the Rescaled line with LO's quoted words and the date (NOTES.md:300, and :296 \"saves, 'its fine'\"). Energy (bar of 100) and money unchanged; corruption kept as a hidden key, disinhibition is a new key.",
    "cause": null,
    "note": false,
-   "screen_hash": "4f53cda18c2baa0c",
-   "row_hash": "8b8d152767cf996a",
-   "carried": true,
-   "pass": 1
+   "screen_hash": "94d0fedd770a24d2",
+   "row_hash": "b66fb813d57540d1",
+   "carried": false,
+   "pass": 5
   },
   {
    "row": "returning-player#5",
@@ -2152,8 +2952,8 @@
  ],
  "causes": [],
  "pending": [],
- "asked": 2,
- "answered": 2,
+ "asked": 67,
+ "answered": 67,
  "pass_items": [],
  "unowed": []
 }

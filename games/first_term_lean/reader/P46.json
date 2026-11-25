@@ -1,6 +1,6 @@
 {
  "piece": "P46",
- "pass": 2,
+ "pass": 3,
  "screens": {
   "story_hints.paying_your_way": {
    "text": "49539da5d0bdf535",
@@ -583,7 +583,7 @@
   "C951": "fe3b305ad0c265a7",
   "C952": "0ded4fca6fc71925",
   "C1250": "fde578d75b0d3620",
-  "C1366": "6c2faedceab35a43",
+  "C1366": "bf7edbd0ddd9e7b7",
   "C520": "34947f7e290656f0",
   "C519": "e78502f7aa28746d",
   "C1611": "b398108d4c5989a3",
@@ -601,6 +601,8 @@
   "C620": "76250e48ada2b843",
   "C644": "f5e1d79f3251dbab",
   "C596": "e5f7e6cf2d01613d",
+  "C2179": "47b9477e3ec8a790",
+  "C2183": "40172c2d376bfc32",
   "C1340": "b76a6583ae88c60f",
   "C769": "f6b6f78a8f2e5ed7",
   "C794": "bad76e5963432385",
@@ -1131,7 +1133,7 @@
     "all": "3ae3386f3e617161"
    },
    "row_hash": "2afadc6bbe1996bd",
-   "carried": false,
+   "carried": true,
    "pass": 2
   },
   {
@@ -1149,7 +1151,7 @@
     "all": "df0d0423e2a5a1cc"
    },
    "row_hash": "2afadc6bbe1996bd",
-   "carried": false,
+   "carried": true,
    "pass": 2
   },
   {
@@ -1167,7 +1169,7 @@
     "all": "4ea6cfb583baafb8"
    },
    "row_hash": "2afadc6bbe1996bd",
-   "carried": false,
+   "carried": true,
    "pass": 2
   },
   {
@@ -1317,7 +1319,7 @@
     "all": "c74c20351cc8b0e0"
    },
    "row_hash": "6eb13e48e8502791",
-   "carried": false,
+   "carried": true,
    "pass": 2
   },
   {
@@ -1415,7 +1417,7 @@
     "all": "3ae3386f3e617161"
    },
    "row_hash": "b76a6583ae88c60f",
-   "carried": false,
+   "carried": true,
    "pass": 2
   },
   {
@@ -1433,7 +1435,7 @@
     "all": "df0d0423e2a5a1cc"
    },
    "row_hash": "b76a6583ae88c60f",
-   "carried": false,
+   "carried": true,
    "pass": 2
   },
   {
@@ -1451,7 +1453,7 @@
     "all": "4ea6cfb583baafb8"
    },
    "row_hash": "b76a6583ae88c60f",
-   "carried": false,
+   "carried": true,
    "pass": 2
   },
   {
@@ -1476,21 +1478,21 @@
    "row": "C1366",
    "screen": "*",
    "verdict": "N/A",
-   "line": "",
-   "why": "Release 1 moves no meter (PLAN.md:190, 'meters shown, none move yet'); no hint is a meter's storyline step.",
+   "line": "-",
+   "why": "the hint is not a skill's storyline step (meters.md rule 8), and release 1 has no gate at any level (C2182), so no place on the Quests page pays a skill",
    "cause": null,
    "note": false,
-   "screen_hash": "160d30b0c783ac9f",
-   "row_hash": "6c2faedceab35a43",
-   "carried": true,
-   "pass": 2
+   "screen_hash": "3554f5b0075da203",
+   "row_hash": "bf7edbd0ddd9e7b7",
+   "carried": false,
+   "pass": 3
   },
   {
    "row": "C1366",
    "screen": "story_hints.classes",
    "verdict": "N/A",
-   "line": "You know someone in psychology now. Statistics is Monday and Wednesday at 11am, English Tuesday and Thursday at 9am, both in the Lecture Hall.",
-   "why": "Release 1 moves no meter (PLAN.md:190, 'meters shown, none move yet'); no hint is a meter's storyline step.",
+   "line": "Your classes are in the Lecture Hall: psychology Monday and Wednesday at 9am...",
+   "why": "the hint is not a skill's storyline step (meters.md rule 8), and release 1 has no gate at any level (C2182), so no place on the Quests page pays a skill",
    "cause": null,
    "note": false,
    "screen_hash": {
@@ -1499,16 +1501,16 @@
     "facts2": "ec18907e1d8acb6c",
     "all": "ec18907e1d8acb6c"
    },
-   "row_hash": "6c2faedceab35a43",
-   "carried": true,
-   "pass": 2
+   "row_hash": "bf7edbd0ddd9e7b7",
+   "carried": false,
+   "pass": 3
   },
   {
    "row": "C1366",
    "screen": "story_hints.lunch",
    "verdict": "N/A",
-   "line": "The cafeteria serves lunch weekdays, 11am to 2pm. The woman at the counter is in weekdays 8am to 4pm.",
-   "why": "Release 1 moves no meter (PLAN.md:190, 'meters shown, none move yet'); no hint is a meter's storyline step.",
+   "line": "The cafeteria serves lunch weekdays, 11am to 2pm.",
+   "why": "the hint is not a skill's storyline step (meters.md rule 8), and release 1 has no gate at any level (C2182), so no place on the Quests page pays a skill",
    "cause": null,
    "note": false,
    "screen_hash": {
@@ -1517,16 +1519,16 @@
     "facts2": "1039719d878b1525",
     "all": "1039719d878b1525"
    },
-   "row_hash": "6c2faedceab35a43",
-   "carried": true,
-   "pass": 2
+   "row_hash": "bf7edbd0ddd9e7b7",
+   "carried": false,
+   "pass": 3
   },
   {
    "row": "C1366",
    "screen": "story_hints.staying_in_shape",
-   "verdict": "PASS",
-   "line": "In your leggings and sports top, work out at the gym, 6am to 10pm. The trainer's in weekdays 6 to 10am and 5 to 9pm, and Saturday 8am to 2pm.",
-   "why": "Gym (workout, Marco, walk-ins) and park (the run) both have live acts at her stage.",
+   "verdict": "N/A",
+   "line": "In your leggings and sports top, work out at the gym, 6am to 10pm.",
+   "why": "the hint is not a skill's storyline step (meters.md rule 8), and release 1 has no gate at any level (C2182), so no place on the Quests page pays a skill",
    "cause": null,
    "note": false,
    "screen_hash": {
@@ -1535,16 +1537,16 @@
     "facts2": "c74c20351cc8b0e0",
     "all": "c74c20351cc8b0e0"
    },
-   "row_hash": "6c2faedceab35a43",
+   "row_hash": "bf7edbd0ddd9e7b7",
    "carried": false,
-   "pass": 2
+   "pass": 3
   },
   {
    "row": "C1366",
    "screen": "story_hints.the_cafe_job",
    "verdict": "N/A",
-   "line": "Work your first shift at the Caf\u00e9: a weekday between 10am and 3pm, while Tom and the barista are both in.",
-   "why": "Release 1 moves no meter (PLAN.md:190, 'meters shown, none move yet'); no hint is a meter's storyline step.",
+   "line": "Ask about the Help Wanted sign at the Caf\u00e9 in town.",
+   "why": "the hint is not a skill's storyline step (meters.md rule 8), and release 1 has no gate at any level (C2182), so no place on the Quests page pays a skill",
    "cause": null,
    "note": false,
    "screen_hash": {
@@ -1553,16 +1555,16 @@
     "facts2": "212b9e03099a5d86",
     "all": "212b9e03099a5d86"
    },
-   "row_hash": "6c2faedceab35a43",
-   "carried": true,
-   "pass": 2
+   "row_hash": "bf7edbd0ddd9e7b7",
+   "carried": false,
+   "pass": 3
   },
   {
    "row": "C1366",
    "screen": "story_hints.the_corner_shop",
    "verdict": "N/A",
-   "line": "The owner works the till Monday to Saturday, 7am to 3pm; the night clerk has it after 3pm and all day Sunday.",
-   "why": "Release 1 moves no meter (PLAN.md:190, 'meters shown, none move yet'); no hint is a meter's storyline step.",
+   "line": "The corner shop at the end of your street is open 7am to 11pm.",
+   "why": "the hint is not a skill's storyline step (meters.md rule 8), and release 1 has no gate at any level (C2182), so no place on the Quests page pays a skill",
    "cause": null,
    "note": false,
    "screen_hash": {
@@ -1571,16 +1573,16 @@
     "facts2": "d8cc03dad68a4ae2",
     "all": "d8cc03dad68a4ae2"
    },
-   "row_hash": "6c2faedceab35a43",
-   "carried": true,
-   "pass": 2
+   "row_hash": "bf7edbd0ddd9e7b7",
+   "carried": false,
+   "pass": 3
   },
   {
    "row": "C1366",
    "screen": "story_hints.the_library",
    "verdict": "N/A",
-   "line": "The librarian's at the desk weekdays 8am to 4pm, and Saturday 10am to 4pm.",
-   "why": "Release 1 moves no meter (PLAN.md:190, 'meters shown, none move yet'); no hint is a meter's storyline step.",
+   "line": "The library on campus is open 8am to 10pm.",
+   "why": "the hint is not a skill's storyline step (meters.md rule 8), and release 1 has no gate at any level (C2182), so no place on the Quests page pays a skill",
    "cause": null,
    "note": false,
    "screen_hash": {
@@ -1589,9 +1591,9 @@
     "facts2": "411a26eaa22b2faa",
     "all": "411a26eaa22b2faa"
    },
-   "row_hash": "6c2faedceab35a43",
-   "carried": true,
-   "pass": 2
+   "row_hash": "bf7edbd0ddd9e7b7",
+   "carried": false,
+   "pass": 3
   },
   {
    "row": "C140",
@@ -1657,7 +1659,7 @@
     "all": "c74c20351cc8b0e0"
    },
    "row_hash": "b83b93c2f7e2d41f",
-   "carried": false,
+   "carried": true,
    "pass": 2
   },
   {
@@ -1843,7 +1845,7 @@
     "all": "c74c20351cc8b0e0"
    },
    "row_hash": "80c98d00ce7d3bf8",
-   "carried": false,
+   "carried": true,
    "pass": 2
   },
   {
@@ -2016,7 +2018,7 @@
     "all": "c74c20351cc8b0e0"
    },
    "row_hash": "3b13472a8f7c42da",
-   "carried": false,
+   "carried": true,
    "pass": 2
   },
   {
@@ -2137,7 +2139,7 @@
     "all": "c74c20351cc8b0e0"
    },
    "row_hash": "7bb70ca4ff31e145",
-   "carried": false,
+   "carried": true,
    "pass": 2
   },
   {
@@ -2258,7 +2260,7 @@
     "all": "c74c20351cc8b0e0"
    },
    "row_hash": "03aca88c8939cd81",
-   "carried": false,
+   "carried": true,
    "pass": 2
   },
   {
@@ -2314,6 +2316,32 @@
    "row_hash": "03aca88c8939cd81",
    "carried": true,
    "pass": 2
+  },
+  {
+   "row": "C2179",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "\"If Mark says anything to you about the money, you tell me first. Okay? Promise me.\" / \"Doesn't matter, baby. Eat something.\"",
+   "why": "Laura is the only person on both opening screens; her want is friend and both lines are a worried friend's",
+   "cause": null,
+   "note": false,
+   "screen_hash": "3554f5b0075da203",
+   "row_hash": "47b9477e3ec8a790",
+   "carried": false,
+   "pass": 3
+  },
+  {
+   "row": "C2183",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "Mom smiles, small, and slides the toast over. / \"Promise me.\"",
+   "why": "Laura's Cook (toast, dishes, \"Eat something\") and Insecure (\"Promise me\", \"She won't look at you\") are shown and true on both screens",
+   "cause": null,
+   "note": false,
+   "screen_hash": "3554f5b0075da203",
+   "row_hash": "40172c2d376bfc32",
+   "carried": false,
+   "pass": 3
   },
   {
    "row": "C327",
@@ -2392,7 +2420,7 @@
     "all": "c74c20351cc8b0e0"
    },
    "row_hash": "ba026f3c4badeca2",
-   "carried": false,
+   "carried": true,
    "pass": 2
   },
   {
@@ -2513,7 +2541,7 @@
     "all": "c74c20351cc8b0e0"
    },
    "row_hash": "4fe71dee68944f61",
-   "carried": false,
+   "carried": true,
    "pass": 2
   },
   {
@@ -2634,7 +2662,7 @@
     "all": "c74c20351cc8b0e0"
    },
    "row_hash": "ccf2da275f59cae3",
-   "carried": false,
+   "carried": true,
    "pass": 2
   },
   {
@@ -2755,7 +2783,7 @@
     "all": "c74c20351cc8b0e0"
    },
    "row_hash": "cee89ca03f857080",
-   "carried": false,
+   "carried": true,
    "pass": 2
   },
   {
@@ -2840,7 +2868,7 @@
     "all": "3ae3386f3e617161"
    },
    "row_hash": "7e128897077ecee6",
-   "carried": false,
+   "carried": true,
    "pass": 2
   },
   {
@@ -2858,7 +2886,7 @@
     "all": "df0d0423e2a5a1cc"
    },
    "row_hash": "7e128897077ecee6",
-   "carried": false,
+   "carried": true,
    "pass": 2
   },
   {
@@ -2876,7 +2904,7 @@
     "all": "4ea6cfb583baafb8"
    },
    "row_hash": "7e128897077ecee6",
-   "carried": false,
+   "carried": true,
    "pass": 2
   },
   {
@@ -2948,7 +2976,7 @@
     "all": "c74c20351cc8b0e0"
    },
    "row_hash": "7e128897077ecee6",
-   "carried": false,
+   "carried": true,
    "pass": 2
   },
   {
@@ -3069,7 +3097,7 @@
     "all": "c74c20351cc8b0e0"
    },
    "row_hash": "83f6356d6b638ebf",
-   "carried": false,
+   "carried": true,
    "pass": 2
   },
   {
@@ -3190,7 +3218,7 @@
     "all": "c74c20351cc8b0e0"
    },
    "row_hash": "d0461c156ea1bc3f",
-   "carried": false,
+   "carried": true,
    "pass": 2
   },
   {
@@ -3275,7 +3303,7 @@
     "all": "3ae3386f3e617161"
    },
    "row_hash": "59b8d8d24f0c7c38",
-   "carried": false,
+   "carried": true,
    "pass": 2
   },
   {
@@ -3293,7 +3321,7 @@
     "all": "df0d0423e2a5a1cc"
    },
    "row_hash": "59b8d8d24f0c7c38",
-   "carried": false,
+   "carried": true,
    "pass": 2
   },
   {
@@ -3311,7 +3339,7 @@
     "all": "4ea6cfb583baafb8"
    },
    "row_hash": "59b8d8d24f0c7c38",
-   "carried": false,
+   "carried": true,
    "pass": 2
   },
   {
@@ -3383,7 +3411,7 @@
     "all": "c74c20351cc8b0e0"
    },
    "row_hash": "59b8d8d24f0c7c38",
-   "carried": false,
+   "carried": true,
    "pass": 2
   },
   {
@@ -3468,7 +3496,7 @@
     "all": "3ae3386f3e617161"
    },
    "row_hash": "5f664198d19facd8",
-   "carried": false,
+   "carried": true,
    "pass": 2
   },
   {
@@ -3486,7 +3514,7 @@
     "all": "df0d0423e2a5a1cc"
    },
    "row_hash": "5f664198d19facd8",
-   "carried": false,
+   "carried": true,
    "pass": 2
   },
   {
@@ -3504,7 +3532,7 @@
     "all": "4ea6cfb583baafb8"
    },
    "row_hash": "5f664198d19facd8",
-   "carried": false,
+   "carried": true,
    "pass": 2
   },
   {
@@ -3566,7 +3594,7 @@
     "all": "3ae3386f3e617161"
    },
    "row_hash": "50dbf74577a813c7",
-   "carried": false,
+   "carried": true,
    "pass": 2
   },
   {
@@ -3584,7 +3612,7 @@
     "all": "df0d0423e2a5a1cc"
    },
    "row_hash": "50dbf74577a813c7",
-   "carried": false,
+   "carried": true,
    "pass": 2
   },
   {
@@ -3602,7 +3630,7 @@
     "all": "4ea6cfb583baafb8"
    },
    "row_hash": "50dbf74577a813c7",
-   "carried": false,
+   "carried": true,
    "pass": 2
   },
   {
@@ -3674,7 +3702,7 @@
     "all": "c74c20351cc8b0e0"
    },
    "row_hash": "50dbf74577a813c7",
-   "carried": false,
+   "carried": true,
    "pass": 2
   },
   {
@@ -3759,7 +3787,7 @@
     "all": "3ae3386f3e617161"
    },
    "row_hash": "67e48e60d5053a2e",
-   "carried": false,
+   "carried": true,
    "pass": 2
   },
   {
@@ -3777,7 +3805,7 @@
     "all": "df0d0423e2a5a1cc"
    },
    "row_hash": "67e48e60d5053a2e",
-   "carried": false,
+   "carried": true,
    "pass": 2
   },
   {
@@ -3795,7 +3823,7 @@
     "all": "4ea6cfb583baafb8"
    },
    "row_hash": "67e48e60d5053a2e",
-   "carried": false,
+   "carried": true,
    "pass": 2
   },
   {
@@ -4010,7 +4038,7 @@
     "all": "c74c20351cc8b0e0"
    },
    "row_hash": "67e48e60d5053a2e",
-   "carried": false,
+   "carried": true,
    "pass": 2
   },
   {
@@ -4108,7 +4136,7 @@
     "all": "3ae3386f3e617161"
    },
    "row_hash": "310706ee076318f2",
-   "carried": false,
+   "carried": true,
    "pass": 2
   },
   {
@@ -4126,7 +4154,7 @@
     "all": "df0d0423e2a5a1cc"
    },
    "row_hash": "310706ee076318f2",
-   "carried": false,
+   "carried": true,
    "pass": 2
   },
   {
@@ -4144,7 +4172,7 @@
     "all": "4ea6cfb583baafb8"
    },
    "row_hash": "310706ee076318f2",
-   "carried": false,
+   "carried": true,
    "pass": 2
   },
   {
@@ -4216,7 +4244,7 @@
     "all": "c74c20351cc8b0e0"
    },
    "row_hash": "310706ee076318f2",
-   "carried": false,
+   "carried": true,
    "pass": 2
   },
   {
@@ -4301,7 +4329,7 @@
     "all": "3ae3386f3e617161"
    },
    "row_hash": "e78502f7aa28746d",
-   "carried": false,
+   "carried": true,
    "pass": 2
   },
   {
@@ -4319,7 +4347,7 @@
     "all": "df0d0423e2a5a1cc"
    },
    "row_hash": "e78502f7aa28746d",
-   "carried": false,
+   "carried": true,
    "pass": 2
   },
   {
@@ -4337,7 +4365,7 @@
     "all": "4ea6cfb583baafb8"
    },
    "row_hash": "e78502f7aa28746d",
-   "carried": false,
+   "carried": true,
    "pass": 2
   },
   {
@@ -4409,7 +4437,7 @@
     "all": "c74c20351cc8b0e0"
    },
    "row_hash": "e78502f7aa28746d",
-   "carried": false,
+   "carried": true,
    "pass": 2
   },
   {
@@ -4507,7 +4535,7 @@
     "all": "3ae3386f3e617161"
    },
    "row_hash": "370371a278b9f182",
-   "carried": false,
+   "carried": true,
    "pass": 2
   },
   {
@@ -4525,7 +4553,7 @@
     "all": "df0d0423e2a5a1cc"
    },
    "row_hash": "370371a278b9f182",
-   "carried": false,
+   "carried": true,
    "pass": 2
   },
   {
@@ -4543,7 +4571,7 @@
     "all": "4ea6cfb583baafb8"
    },
    "row_hash": "370371a278b9f182",
-   "carried": false,
+   "carried": true,
    "pass": 2
   },
   {
@@ -4592,7 +4620,7 @@
     "all": "3ae3386f3e617161"
    },
    "row_hash": "e5f7e6cf2d01613d",
-   "carried": false,
+   "carried": true,
    "pass": 2
   },
   {
@@ -4610,7 +4638,7 @@
     "all": "df0d0423e2a5a1cc"
    },
    "row_hash": "e5f7e6cf2d01613d",
-   "carried": false,
+   "carried": true,
    "pass": 2
   },
   {
@@ -4628,7 +4656,7 @@
     "all": "4ea6cfb583baafb8"
    },
    "row_hash": "e5f7e6cf2d01613d",
-   "carried": false,
+   "carried": true,
    "pass": 2
   },
   {
@@ -4713,7 +4741,7 @@
     "all": "c74c20351cc8b0e0"
    },
    "row_hash": "56c1e6a836c774b1",
-   "carried": false,
+   "carried": true,
    "pass": 2
   },
   {
@@ -4798,7 +4826,7 @@
     "all": "3ae3386f3e617161"
    },
    "row_hash": "dc9a1fd9dbf3fb87",
-   "carried": false,
+   "carried": true,
    "pass": 2
   },
   {
@@ -4816,7 +4844,7 @@
     "all": "df0d0423e2a5a1cc"
    },
    "row_hash": "dc9a1fd9dbf3fb87",
-   "carried": false,
+   "carried": true,
    "pass": 2
   },
   {
@@ -4834,7 +4862,7 @@
     "all": "4ea6cfb583baafb8"
    },
    "row_hash": "dc9a1fd9dbf3fb87",
-   "carried": false,
+   "carried": true,
    "pass": 2
   },
   {
@@ -4922,7 +4950,7 @@
     "all": "3ae3386f3e617161"
    },
    "row_hash": "8e507f7b235acc25",
-   "carried": false,
+   "carried": true,
    "pass": 2
   },
   {
@@ -4940,7 +4968,7 @@
     "all": "df0d0423e2a5a1cc"
    },
    "row_hash": "8e507f7b235acc25",
-   "carried": false,
+   "carried": true,
    "pass": 2
   },
   {
@@ -4958,7 +4986,7 @@
     "all": "4ea6cfb583baafb8"
    },
    "row_hash": "8e507f7b235acc25",
-   "carried": false,
+   "carried": true,
    "pass": 2
   },
   {
@@ -5007,7 +5035,7 @@
     "all": "3ae3386f3e617161"
    },
    "row_hash": "5a85503d3ef5a0fb",
-   "carried": false,
+   "carried": true,
    "pass": 2
   },
   {
@@ -5025,7 +5053,7 @@
     "all": "df0d0423e2a5a1cc"
    },
    "row_hash": "5a85503d3ef5a0fb",
-   "carried": false,
+   "carried": true,
    "pass": 2
   },
   {
@@ -5043,7 +5071,7 @@
     "all": "4ea6cfb583baafb8"
    },
    "row_hash": "5a85503d3ef5a0fb",
-   "carried": false,
+   "carried": true,
    "pass": 2
   },
   {
@@ -5092,7 +5120,7 @@
     "all": "3ae3386f3e617161"
    },
    "row_hash": "146e6806c6c566e3",
-   "carried": false,
+   "carried": true,
    "pass": 2
   },
   {
@@ -5110,7 +5138,7 @@
     "all": "df0d0423e2a5a1cc"
    },
    "row_hash": "146e6806c6c566e3",
-   "carried": false,
+   "carried": true,
    "pass": 2
   },
   {
@@ -5128,7 +5156,7 @@
     "all": "4ea6cfb583baafb8"
    },
    "row_hash": "146e6806c6c566e3",
-   "carried": false,
+   "carried": true,
    "pass": 2
   },
   {
@@ -5177,7 +5205,7 @@
     "all": "3ae3386f3e617161"
    },
    "row_hash": "f5e1d79f3251dbab",
-   "carried": false,
+   "carried": true,
    "pass": 2
   },
   {
@@ -5195,7 +5223,7 @@
     "all": "df0d0423e2a5a1cc"
    },
    "row_hash": "f5e1d79f3251dbab",
-   "carried": false,
+   "carried": true,
    "pass": 2
   },
   {
@@ -5213,7 +5241,7 @@
     "all": "4ea6cfb583baafb8"
    },
    "row_hash": "f5e1d79f3251dbab",
-   "carried": false,
+   "carried": true,
    "pass": 2
   },
   {
@@ -5441,7 +5469,7 @@
     "all": "c74c20351cc8b0e0"
    },
    "row_hash": "def1348d483d0c40",
-   "carried": false,
+   "carried": true,
    "pass": 2
   },
   {
@@ -5562,7 +5590,7 @@
     "all": "c74c20351cc8b0e0"
    },
    "row_hash": "5c890033f6ac38b8",
-   "carried": false,
+   "carried": true,
    "pass": 2
   },
   {
@@ -5683,7 +5711,7 @@
     "all": "c74c20351cc8b0e0"
    },
    "row_hash": "265ece64add83676",
-   "carried": false,
+   "carried": true,
    "pass": 2
   },
   {
@@ -5804,7 +5832,7 @@
     "all": "c74c20351cc8b0e0"
    },
    "row_hash": "6372efb027eb2034",
-   "carried": false,
+   "carried": true,
    "pass": 2
   },
   {
@@ -5925,7 +5953,7 @@
     "all": "c74c20351cc8b0e0"
    },
    "row_hash": "df5ed7a36dbc74e4",
-   "carried": false,
+   "carried": true,
    "pass": 2
   },
   {
@@ -6046,7 +6074,7 @@
     "all": "c74c20351cc8b0e0"
    },
    "row_hash": "4f83b0b5eb45f71b",
-   "carried": false,
+   "carried": true,
    "pass": 2
   },
   {
@@ -6167,7 +6195,7 @@
     "all": "c74c20351cc8b0e0"
    },
    "row_hash": "71713a7e7ae739e7",
-   "carried": false,
+   "carried": true,
    "pass": 2
   },
   {
@@ -6288,7 +6316,7 @@
     "all": "c74c20351cc8b0e0"
    },
    "row_hash": "d5a109f1ef88419a",
-   "carried": false,
+   "carried": true,
    "pass": 2
   },
   {
@@ -6409,7 +6437,7 @@
     "all": "c74c20351cc8b0e0"
    },
    "row_hash": "c750f9b6ab4ace14",
-   "carried": false,
+   "carried": true,
    "pass": 2
   },
   {
@@ -6530,7 +6558,7 @@
     "all": "c74c20351cc8b0e0"
    },
    "row_hash": "bd07273d5822f34f",
-   "carried": false,
+   "carried": true,
    "pass": 2
   },
   {
@@ -6651,7 +6679,7 @@
     "all": "c74c20351cc8b0e0"
    },
    "row_hash": "7b2bb0dfdbcfe946",
-   "carried": false,
+   "carried": true,
    "pass": 2
   },
   {
@@ -6772,7 +6800,7 @@
     "all": "c74c20351cc8b0e0"
    },
    "row_hash": "513927dd127fca04",
-   "carried": false,
+   "carried": true,
    "pass": 2
   },
   {
@@ -6893,7 +6921,7 @@
     "all": "c74c20351cc8b0e0"
    },
    "row_hash": "791cd173e23fb130",
-   "carried": false,
+   "carried": true,
    "pass": 2
   },
   {
@@ -7014,7 +7042,7 @@
     "all": "c74c20351cc8b0e0"
    },
    "row_hash": "177d1e1776fac74b",
-   "carried": false,
+   "carried": true,
    "pass": 2
   },
   {
@@ -7135,7 +7163,7 @@
     "all": "c74c20351cc8b0e0"
    },
    "row_hash": "4e86d143688ba8e5",
-   "carried": false,
+   "carried": true,
    "pass": 2
   },
   {
@@ -7256,7 +7284,7 @@
     "all": "c74c20351cc8b0e0"
    },
    "row_hash": "2c3ccc6bd9929d7f",
-   "carried": false,
+   "carried": true,
    "pass": 2
   },
   {
@@ -7377,7 +7405,7 @@
     "all": "c74c20351cc8b0e0"
    },
    "row_hash": "18b0ecdf6d7fc901",
-   "carried": false,
+   "carried": true,
    "pass": 2
   },
   {
@@ -7498,7 +7526,7 @@
     "all": "c74c20351cc8b0e0"
    },
    "row_hash": "beb57cd46fe906bf",
-   "carried": false,
+   "carried": true,
    "pass": 2
   },
   {
@@ -7619,7 +7647,7 @@
     "all": "c74c20351cc8b0e0"
    },
    "row_hash": "1aadffd96e76381c",
-   "carried": false,
+   "carried": true,
    "pass": 2
   },
   {
@@ -7753,7 +7781,7 @@
     "all": "c74c20351cc8b0e0"
    },
    "row_hash": "0ded4fca6fc71925",
-   "carried": false,
+   "carried": true,
    "pass": 2
   },
   {
@@ -7864,7 +7892,7 @@
     "all": "3ae3386f3e617161"
    },
    "row_hash": "13a714429d15f3b2",
-   "carried": false,
+   "carried": true,
    "pass": 2
   },
   {
@@ -7882,7 +7910,7 @@
     "all": "df0d0423e2a5a1cc"
    },
    "row_hash": "13a714429d15f3b2",
-   "carried": false,
+   "carried": true,
    "pass": 2
   },
   {
@@ -7900,7 +7928,7 @@
     "all": "4ea6cfb583baafb8"
    },
    "row_hash": "13a714429d15f3b2",
-   "carried": false,
+   "carried": true,
    "pass": 2
   },
   {
@@ -7985,7 +8013,7 @@
     "all": "c74c20351cc8b0e0"
    },
    "row_hash": "e64ce2672d85d2d8",
-   "carried": false,
+   "carried": true,
    "pass": 2
   },
   {
@@ -8132,7 +8160,7 @@
     "all": "c74c20351cc8b0e0"
    },
    "row_hash": "77e6271dc896a2b3",
-   "carried": false,
+   "carried": true,
    "pass": 2
   },
   {
@@ -8190,19 +8218,10 @@
    "pass": 2
   }
  ],
- "causes": [
-  {
-   "id": "P46r3-c1",
-   "what": "Ryan's stranger name \"lanky\" contradicts opening.hall's \"He's broader than you remember.\""
-  },
-  {
-   "id": "P46r4-c1",
-   "what": "Staying in Shape's ladder: step 1 names a run or any gym hour but passes only on met_marco, and the met_marco step never names the run (ran_once) that ends it."
-  }
- ],
+ "causes": [],
  "pending": [],
- "asked": 93,
- "answered": 93,
+ "asked": 9,
+ "answered": 9,
  "pass_items": [],
  "unowed": []
 }

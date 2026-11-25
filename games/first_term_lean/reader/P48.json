@@ -1,8 +1,314 @@
 {
  "piece": "P48",
- "pass": 3,
+ "pass": 6,
  "screens": {
-  "*": "4f53cda18c2baa0c"
+  "sidebar.disinhibition": {
+   "text": "ac50b5d02b9cf256",
+   "facts": "ac50b5d02b9cf256",
+   "facts2": "ac50b5d02b9cf256",
+   "all": "ac50b5d02b9cf256"
+  },
+  "sidebar.submission": {
+   "text": "5e5beb86dfaf52eb",
+   "facts": "5e5beb86dfaf52eb",
+   "facts2": "5e5beb86dfaf52eb",
+   "all": "5e5beb86dfaf52eb"
+  },
+  "sidebar.dominance": {
+   "text": "b889198ddfd820d9",
+   "facts": "b889198ddfd820d9",
+   "facts2": "b889198ddfd820d9",
+   "all": "b889198ddfd820d9"
+  },
+  "npcs.npc_ryan.traits": {
+   "text": "7ec2e3821d0cbdcd",
+   "facts": "7ec2e3821d0cbdcd",
+   "facts2": "7ec2e3821d0cbdcd",
+   "all": "7ec2e3821d0cbdcd"
+  },
+  "npcs.npc_ryan.feelings": {
+   "text": "c2573ba08e7d35fa",
+   "facts": "c2573ba08e7d35fa",
+   "facts2": "c2573ba08e7d35fa",
+   "all": "c2573ba08e7d35fa"
+  },
+  "npcs.npc_laura.traits": {
+   "text": "1ef12eb438a6b1f6",
+   "facts": "1ef12eb438a6b1f6",
+   "facts2": "1ef12eb438a6b1f6",
+   "all": "1ef12eb438a6b1f6"
+  },
+  "npcs.npc_laura.feelings": {
+   "text": "c2ece3628f705293",
+   "facts": "c2ece3628f705293",
+   "facts2": "c2ece3628f705293",
+   "all": "c2ece3628f705293"
+  },
+  "npcs.npc_mark.traits": {
+   "text": "0b25d431f98d6bd8",
+   "facts": "0b25d431f98d6bd8",
+   "facts2": "0b25d431f98d6bd8",
+   "all": "0b25d431f98d6bd8"
+  },
+  "npcs.npc_mark.feelings": {
+   "text": "60eb96c9edf4241c",
+   "facts": "60eb96c9edf4241c",
+   "facts2": "60eb96c9edf4241c",
+   "all": "60eb96c9edf4241c"
+  },
+  "npcs.npc_tom.traits": {
+   "text": "f8569e4bb1e3ada6",
+   "facts": "f8569e4bb1e3ada6",
+   "facts2": "f8569e4bb1e3ada6",
+   "all": "f8569e4bb1e3ada6"
+  },
+  "npcs.npc_tom.feelings": {
+   "text": "a8e75982636762f5",
+   "facts": "a8e75982636762f5",
+   "facts2": "a8e75982636762f5",
+   "all": "a8e75982636762f5"
+  },
+  "npcs.npc_hale.traits": {
+   "text": "9347bc942483f0d6",
+   "facts": "9347bc942483f0d6",
+   "facts2": "9347bc942483f0d6",
+   "all": "9347bc942483f0d6"
+  },
+  "npcs.npc_hale.feelings": {
+   "text": "6cf40d6b379a200b",
+   "facts": "6cf40d6b379a200b",
+   "facts2": "6cf40d6b379a200b",
+   "all": "6cf40d6b379a200b"
+  },
+  "npcs.npc_pratt.traits": {
+   "text": "d18e30b89e29ef27",
+   "facts": "d18e30b89e29ef27",
+   "facts2": "d18e30b89e29ef27",
+   "all": "d18e30b89e29ef27"
+  },
+  "npcs.npc_pratt.feelings": {
+   "text": "c3091ecb151fbdd0",
+   "facts": "c3091ecb151fbdd0",
+   "facts2": "c3091ecb151fbdd0",
+   "all": "c3091ecb151fbdd0"
+  },
+  "npcs.npc_walsh.traits": {
+   "text": "83457562f149a973",
+   "facts": "83457562f149a973",
+   "facts2": "83457562f149a973",
+   "all": "83457562f149a973"
+  },
+  "npcs.npc_walsh.feelings": {
+   "text": "a6a7776352906814",
+   "facts": "a6a7776352906814",
+   "facts2": "a6a7776352906814",
+   "all": "a6a7776352906814"
+  },
+  "npcs.npc_cross.traits": {
+   "text": "3f8a9dd3b19244e9",
+   "facts": "3f8a9dd3b19244e9",
+   "facts2": "3f8a9dd3b19244e9",
+   "all": "3f8a9dd3b19244e9"
+  },
+  "npcs.npc_cross.feelings": {
+   "text": "7e50b113c23cbe3e",
+   "facts": "7e50b113c23cbe3e",
+   "facts2": "7e50b113c23cbe3e",
+   "all": "7e50b113c23cbe3e"
+  },
+  "npcs.npc_nadia.traits": {
+   "text": "a5500a39ecbe9482",
+   "facts": "a5500a39ecbe9482",
+   "facts2": "a5500a39ecbe9482",
+   "all": "a5500a39ecbe9482"
+  },
+  "npcs.npc_nadia.feelings": {
+   "text": "beb556b432ef1f40",
+   "facts": "beb556b432ef1f40",
+   "facts2": "beb556b432ef1f40",
+   "all": "beb556b432ef1f40"
+  },
+  "npcs.npc_dean.traits": {
+   "text": "0b25d431f98d6bd8",
+   "facts": "0b25d431f98d6bd8",
+   "facts2": "0b25d431f98d6bd8",
+   "all": "0b25d431f98d6bd8"
+  },
+  "npcs.npc_dean.feelings": {
+   "text": "f72498d167e61811",
+   "facts": "f72498d167e61811",
+   "facts2": "f72498d167e61811",
+   "all": "f72498d167e61811"
+  },
+  "npcs.npc_holt.traits": {
+   "text": "492ec61653b4ffe9",
+   "facts": "492ec61653b4ffe9",
+   "facts2": "492ec61653b4ffe9",
+   "all": "492ec61653b4ffe9"
+  },
+  "npcs.npc_holt.feelings": {
+   "text": "bc13dc2efc80419e",
+   "facts": "bc13dc2efc80419e",
+   "facts2": "bc13dc2efc80419e",
+   "all": "bc13dc2efc80419e"
+  },
+  "npcs.npc_rosa.traits": {
+   "text": "bbdb413a5207e59b",
+   "facts": "bbdb413a5207e59b",
+   "facts2": "bbdb413a5207e59b",
+   "all": "bbdb413a5207e59b"
+  },
+  "npcs.npc_rosa.feelings": {
+   "text": "3c5c2838f553c03e",
+   "facts": "3c5c2838f553c03e",
+   "facts2": "3c5c2838f553c03e",
+   "all": "3c5c2838f553c03e"
+  },
+  "npcs.npc_vance.traits": {
+   "text": "4bf4c31cf997481f",
+   "facts": "4bf4c31cf997481f",
+   "facts2": "4bf4c31cf997481f",
+   "all": "4bf4c31cf997481f"
+  },
+  "npcs.npc_vance.feelings": {
+   "text": "9aeb4d992b31224d",
+   "facts": "9aeb4d992b31224d",
+   "facts2": "9aeb4d992b31224d",
+   "all": "9aeb4d992b31224d"
+  },
+  "npcs.npc_frank.traits": {
+   "text": "cfdc3aaccd10251b",
+   "facts": "cfdc3aaccd10251b",
+   "facts2": "cfdc3aaccd10251b",
+   "all": "cfdc3aaccd10251b"
+  },
+  "npcs.npc_frank.feelings": {
+   "text": "8b2ab51d7967e09a",
+   "facts": "8b2ab51d7967e09a",
+   "facts2": "8b2ab51d7967e09a",
+   "all": "8b2ab51d7967e09a"
+  },
+  "npcs.npc_danny.traits": {
+   "text": "426a67aec8453d6e",
+   "facts": "426a67aec8453d6e",
+   "facts2": "426a67aec8453d6e",
+   "all": "426a67aec8453d6e"
+  },
+  "npcs.npc_danny.feelings": {
+   "text": "ee99d7a73797c059",
+   "facts": "ee99d7a73797c059",
+   "facts2": "ee99d7a73797c059",
+   "all": "ee99d7a73797c059"
+  },
+  "npcs.npc_marco.traits": {
+   "text": "269bcfe0e959d9bb",
+   "facts": "269bcfe0e959d9bb",
+   "facts2": "269bcfe0e959d9bb",
+   "all": "269bcfe0e959d9bb"
+  },
+  "npcs.npc_marco.feelings": {
+   "text": "41164a73eb257e47",
+   "facts": "41164a73eb257e47",
+   "facts2": "41164a73eb257e47",
+   "all": "41164a73eb257e47"
+  },
+  "npcs.npc_zoe.traits": {
+   "text": "8cb24620eaba571d",
+   "facts": "8cb24620eaba571d",
+   "facts2": "8cb24620eaba571d",
+   "all": "8cb24620eaba571d"
+  },
+  "npcs.npc_zoe.feelings": {
+   "text": "e7327b25249effb4",
+   "facts": "e7327b25249effb4",
+   "facts2": "e7327b25249effb4",
+   "all": "e7327b25249effb4"
+  },
+  "npcs.npc_jake.traits": {
+   "text": "77d7324f60b76bb8",
+   "facts": "77d7324f60b76bb8",
+   "facts2": "77d7324f60b76bb8",
+   "all": "77d7324f60b76bb8"
+  },
+  "npcs.npc_jake.feelings": {
+   "text": "1c2920e7418f31d2",
+   "facts": "1c2920e7418f31d2",
+   "facts2": "1c2920e7418f31d2",
+   "all": "1c2920e7418f31d2"
+  },
+  "npcs.npc_brooke.traits": {
+   "text": "59941efc0f4b3912",
+   "facts": "59941efc0f4b3912",
+   "facts2": "59941efc0f4b3912",
+   "all": "59941efc0f4b3912"
+  },
+  "npcs.npc_brooke.feelings": {
+   "text": "94f3e67c634c4344",
+   "facts": "94f3e67c634c4344",
+   "facts2": "94f3e67c634c4344",
+   "all": "94f3e67c634c4344"
+  },
+  "npcs.npc_kayla.traits": {
+   "text": "d371069bcfbd7b82",
+   "facts": "d371069bcfbd7b82",
+   "facts2": "d371069bcfbd7b82",
+   "all": "d371069bcfbd7b82"
+  },
+  "npcs.npc_kayla.feelings": {
+   "text": "57b86a11dd40cafb",
+   "facts": "57b86a11dd40cafb",
+   "facts2": "57b86a11dd40cafb",
+   "all": "57b86a11dd40cafb"
+  },
+  "npcs.npc_tess.traits": {
+   "text": "408531b219e0bde2",
+   "facts": "408531b219e0bde2",
+   "facts2": "408531b219e0bde2",
+   "all": "408531b219e0bde2"
+  },
+  "npcs.npc_tess.feelings": {
+   "text": "57b86a11dd40cafb",
+   "facts": "57b86a11dd40cafb",
+   "facts2": "57b86a11dd40cafb",
+   "all": "57b86a11dd40cafb"
+  },
+  "npcs.npc_sam.traits": {
+   "text": "d67c6a59cc0504ae",
+   "facts": "d67c6a59cc0504ae",
+   "facts2": "d67c6a59cc0504ae",
+   "all": "d67c6a59cc0504ae"
+  },
+  "npcs.npc_sam.feelings": {
+   "text": "3910250e4c05c4ea",
+   "facts": "3910250e4c05c4ea",
+   "facts2": "3910250e4c05c4ea",
+   "all": "3910250e4c05c4ea"
+  },
+  "npcs.npc_nina.traits": {
+   "text": "426a67aec8453d6e",
+   "facts": "426a67aec8453d6e",
+   "facts2": "426a67aec8453d6e",
+   "all": "426a67aec8453d6e"
+  },
+  "npcs.npc_nina.feelings": {
+   "text": "c1856207a6e35bea",
+   "facts": "c1856207a6e35bea",
+   "facts2": "c1856207a6e35bea",
+   "all": "c1856207a6e35bea"
+  },
+  "npcs.npc_chris.traits": {
+   "text": "ac986eaf8a64f6c1",
+   "facts": "ac986eaf8a64f6c1",
+   "facts2": "ac986eaf8a64f6c1",
+   "all": "ac986eaf8a64f6c1"
+  },
+  "npcs.npc_chris.feelings": {
+   "text": "50a42bb6cb6b9e65",
+   "facts": "50a42bb6cb6b9e65",
+   "facts2": "50a42bb6cb6b9e65",
+   "all": "50a42bb6cb6b9e65"
+  },
+  "*": "01e2a0782f89b5b6"
  },
  "rows": {
   "B1": "5276068df1ca6fa9",
@@ -56,13 +362,13 @@
    "screen": "*",
    "verdict": "N/A",
    "line": "",
-   "why": "no canvas in P48: a people-data piece has no scene, so no act for a want to come before",
+   "why": "no canvas in P48: its screens are People-view fields and sidebar items; no act for a want to come before (the P37 party beats from the amendment are on P37's canvas and judged in P37's reading)",
    "cause": null,
    "note": false,
-   "screen_hash": "4f53cda18c2baa0c",
+   "screen_hash": "d4438ac582dc1f3f",
    "row_hash": "5276068df1ca6fa9",
    "carried": true,
-   "pass": 1
+   "pass": 4
   },
   {
    "row": "B10",
@@ -74,7 +380,7 @@
    "note": false,
    "screen_hash": null,
    "row_hash": "c1c0e2ac2588a579",
-   "carried": false,
+   "carried": true,
    "pass": 3
   },
   {
@@ -134,13 +440,13 @@
    "screen": "*",
    "verdict": "N/A",
    "line": "",
-   "why": "no canvas in P48: a people-data piece has no scene, so no step with any person goes further",
+   "why": "no canvas in P48: its screens are People-view fields and sidebar items; no step with any person goes further",
    "cause": null,
    "note": false,
-   "screen_hash": "4f53cda18c2baa0c",
+   "screen_hash": "d4438ac582dc1f3f",
    "row_hash": "4d9f2ebbce9a39cc",
    "carried": true,
-   "pass": 1
+   "pass": 4
   },
   {
    "row": "B3",
@@ -241,75 +547,224 @@
    "why": "PLAN names Zoe the companion and Brooke the rival, not one person",
    "cause": null,
    "note": false,
-   "screen_hash": "4f53cda18c2baa0c",
+   "screen_hash": "d4438ac582dc1f3f",
    "row_hash": "3b1fcdf549bcc558",
    "carried": true,
-   "pass": 1
+   "pass": 4
   },
   {
    "row": "C1189",
    "screen": "*",
    "verdict": "N/A",
    "line": "",
-   "why": "no clothing state is noticed: P48 writes no line a person says about what she wears",
+   "why": "no person says a line about what she wears on a traits or feelings field",
    "cause": null,
    "note": true,
-   "screen_hash": "4f53cda18c2baa0c",
+   "screen_hash": "d4438ac582dc1f3f",
    "row_hash": "2afadc6bbe1996bd",
    "carried": true,
-   "pass": 1
+   "pass": 4
+  },
+  {
+   "row": "C1189",
+   "screen": "npcs.npc_holt.feelings",
+   "verdict": "N/A",
+   "line": "friendship 50, lust 100, control 150, intimacy 0, people_type faculty, gender female, attracted True",
+   "why": "a clothing-state notice row; the field is start feelings, no line about what she wears",
+   "cause": null,
+   "note": true,
+   "screen_hash": {
+    "text": "bc13dc2efc80419e",
+    "facts": "bc13dc2efc80419e",
+    "facts2": "bc13dc2efc80419e",
+    "all": "bc13dc2efc80419e"
+   },
+   "row_hash": "2afadc6bbe1996bd",
+   "carried": true,
+   "pass": 5
+  },
+  {
+   "row": "C1189",
+   "screen": "npcs.npc_ryan.feelings",
+   "verdict": "N/A",
+   "line": "",
+   "why": "No person says a line about what she wears on a feelings field",
+   "cause": null,
+   "note": true,
+   "screen_hash": {
+    "text": "c2573ba08e7d35fa",
+    "facts": "c2573ba08e7d35fa",
+    "facts2": "c2573ba08e7d35fa",
+    "all": "c2573ba08e7d35fa"
+   },
+   "row_hash": "2afadc6bbe1996bd",
+   "carried": false,
+   "pass": 6
   },
   {
    "row": "C1340",
    "screen": "*",
    "verdict": "N/A",
    "line": "",
-   "why": "no canvas, face or Talk menu is added or changed",
+   "why": "no face, spot or Talk menu is added or changed; the fields are People-view data",
    "cause": null,
    "note": false,
-   "screen_hash": "4f53cda18c2baa0c",
+   "screen_hash": "d4438ac582dc1f3f",
    "row_hash": "b76a6583ae88c60f",
    "carried": true,
-   "pass": 1
+   "pass": 4
+  },
+  {
+   "row": "C1340",
+   "screen": "npcs.npc_holt.feelings",
+   "verdict": "N/A",
+   "line": "friendship 50, lust 100, control 150, intimacy 0, people_type faculty, gender female, attracted True",
+   "why": "household loop (face, Talk, +1 a click); Holt is no housemate and the field is a page entry, not a menu",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "bc13dc2efc80419e",
+    "facts": "bc13dc2efc80419e",
+    "facts2": "bc13dc2efc80419e",
+    "all": "bc13dc2efc80419e"
+   },
+   "row_hash": "b76a6583ae88c60f",
+   "carried": true,
+   "pass": 5
+  },
+  {
+   "row": "C1340",
+   "screen": "npcs.npc_ryan.feelings",
+   "verdict": "N/A",
+   "line": "",
+   "why": "No face, spot or Talk menu is added or changed; the field is People-view data",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "c2573ba08e7d35fa",
+    "facts": "c2573ba08e7d35fa",
+    "facts2": "c2573ba08e7d35fa",
+    "all": "c2573ba08e7d35fa"
+   },
+   "row_hash": "b76a6583ae88c60f",
+   "carried": false,
+   "pass": 6
   },
   {
    "row": "C188",
    "screen": "*",
    "verdict": "N/A",
    "line": "",
-   "why": "release 1 is frozen (C2182, LO \"Meter frozen\"): no skill gate exists, so no level's first gate to talk below",
+   "why": "release 1 moves nothing (meters.md rule 11, C2182, LO \"Meter frozen\"): no skill gate exists, so no level's first gate to talk below",
    "cause": null,
    "note": false,
-   "screen_hash": "4f53cda18c2baa0c",
+   "screen_hash": "d4438ac582dc1f3f",
    "row_hash": "3a9caf43a2f2b8fd",
    "carried": true,
-   "pass": 1
+   "pass": 4
   },
   {
    "row": "C210",
-   "screen": "sidebar.skills",
+   "screen": "sidebar.disinhibition",
    "verdict": "PASS",
-   "line": "DISINHIBITION | Level 0",
-   "why": "the sidebar prints the level by bands (Level 0 to Level 10); no crossing scene pays",
+   "line": "Level 0",
+   "why": "the sidebar prints the level by eleven 100-wide bands, Level 0 to Level 10; no crossing scene, nothing pays",
    "cause": null,
    "note": false,
-   "screen_hash": null,
+   "screen_hash": {
+    "text": "ac50b5d02b9cf256",
+    "facts": "ac50b5d02b9cf256",
+    "facts2": "ac50b5d02b9cf256",
+    "all": "ac50b5d02b9cf256"
+   },
    "row_hash": "00496c4c3aec4580",
    "carried": true,
-   "pass": 1
+   "pass": 4
+  },
+  {
+   "row": "C210",
+   "screen": "sidebar.dominance",
+   "verdict": "PASS",
+   "line": "Level 0",
+   "why": "the sidebar prints the level by eleven 100-wide bands, Level 0 to Level 10; no crossing scene, nothing pays",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "b889198ddfd820d9",
+    "facts": "b889198ddfd820d9",
+    "facts2": "b889198ddfd820d9",
+    "all": "b889198ddfd820d9"
+   },
+   "row_hash": "00496c4c3aec4580",
+   "carried": true,
+   "pass": 4
+  },
+  {
+   "row": "C210",
+   "screen": "sidebar.submission",
+   "verdict": "PASS",
+   "line": "Level 0",
+   "why": "the sidebar prints the level by eleven 100-wide bands, Level 0 to Level 10; no crossing scene, nothing pays",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "5e5beb86dfaf52eb",
+    "facts": "5e5beb86dfaf52eb",
+    "facts2": "5e5beb86dfaf52eb",
+    "all": "5e5beb86dfaf52eb"
+   },
+   "row_hash": "00496c4c3aec4580",
+   "carried": true,
+   "pass": 4
   },
   {
    "row": "C2179",
    "screen": "*",
    "verdict": "N/A",
    "line": "",
-   "why": "no reaction line is written; the card keeps every scene unchanged and each person's want is fixed for release 1",
+   "why": "no reaction line is written; each person's want is fixed for release 1 (the card's Frozen note)",
    "cause": null,
    "note": false,
-   "screen_hash": "4f53cda18c2baa0c",
+   "screen_hash": "d4438ac582dc1f3f",
    "row_hash": "47b9477e3ec8a790",
    "carried": true,
-   "pass": 1
+   "pass": 4
+  },
+  {
+   "row": "C2179",
+   "screen": "npcs.npc_holt.feelings",
+   "verdict": "N/A",
+   "line": "friendship 50, lust 100, control 150, intimacy 0, people_type faculty, gender female, attracted True",
+   "why": "no reaction line on this field; feelings are frozen in release 1 so she has one want (card, Frozen)",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "bc13dc2efc80419e",
+    "facts": "bc13dc2efc80419e",
+    "facts2": "bc13dc2efc80419e",
+    "all": "bc13dc2efc80419e"
+   },
+   "row_hash": "47b9477e3ec8a790",
+   "carried": true,
+   "pass": 5
+  },
+  {
+   "row": "C2179",
+   "screen": "npcs.npc_ryan.feelings",
+   "verdict": "N/A",
+   "line": "",
+   "why": "No reaction line is written on a feelings field; Ryan's computed want stays indifferent (people_system.py P.want: lust 100 below his tipping point 300, friendship 0 below 200), as the round's want list says",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "c2573ba08e7d35fa",
+    "facts": "c2573ba08e7d35fa",
+    "facts2": "c2573ba08e7d35fa",
+    "all": "c2573ba08e7d35fa"
+   },
+   "row_hash": "47b9477e3ec8a790",
+   "carried": false,
+   "pass": 6
   },
   {
    "row": "C2180",
@@ -319,36 +774,113 @@
    "why": "release 1 is frozen (C2182): no choice moves a feeling",
    "cause": null,
    "note": false,
-   "screen_hash": "4f53cda18c2baa0c",
+   "screen_hash": "d4438ac582dc1f3f",
    "row_hash": "a6c0f498d4d16271",
    "carried": true,
-   "pass": 1
+   "pass": 4
   },
   {
    "row": "C2181",
-   "screen": "sidebar.skills",
+   "screen": "sidebar.disinhibition",
    "verdict": "PASS",
-   "line": "skill levels: disinhibition=0 isSkill=true ... dominance=0 isSkill=true",
-   "why": "four [[traits.labels]] skill = true, 0..1000, shown as Level value/100; the gate half is N/A while release 1 has no gate",
+   "line": "disinhibition=0 isSkill=true",
+   "why": "[[traits.labels]] skill = true, 0 in [player] core_traits, shown as Level value/100; the shop's 21 skill_level locks name exhibitionism or disinhibition; the gate half is N/A while release 1 has no gate",
    "cause": null,
    "note": false,
-   "screen_hash": null,
+   "screen_hash": {
+    "text": "ac50b5d02b9cf256",
+    "facts": "ac50b5d02b9cf256",
+    "facts2": "ac50b5d02b9cf256",
+    "all": "ac50b5d02b9cf256"
+   },
    "row_hash": "74c68b4029782b5f",
    "carried": true,
-   "pass": 1
+   "pass": 4
+  },
+  {
+   "row": "C2181",
+   "screen": "sidebar.dominance",
+   "verdict": "PASS",
+   "line": "dominance=0 isSkill=true",
+   "why": "[[traits.labels]] skill = true, 0 in [player] core_traits, shown as Level value/100; the shop's 21 skill_level locks name exhibitionism or disinhibition; the gate half is N/A while release 1 has no gate",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "b889198ddfd820d9",
+    "facts": "b889198ddfd820d9",
+    "facts2": "b889198ddfd820d9",
+    "all": "b889198ddfd820d9"
+   },
+   "row_hash": "74c68b4029782b5f",
+   "carried": true,
+   "pass": 4
+  },
+  {
+   "row": "C2181",
+   "screen": "sidebar.submission",
+   "verdict": "PASS",
+   "line": "submission=0 isSkill=true",
+   "why": "[[traits.labels]] skill = true, 0 in [player] core_traits, shown as Level value/100; the shop's 21 skill_level locks name exhibitionism or disinhibition; the gate half is N/A while release 1 has no gate",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "5e5beb86dfaf52eb",
+    "facts": "5e5beb86dfaf52eb",
+    "facts2": "5e5beb86dfaf52eb",
+    "all": "5e5beb86dfaf52eb"
+   },
+   "row_hash": "74c68b4029782b5f",
+   "carried": true,
+   "pass": 4
   },
   {
    "row": "C2183",
-   "screen": "people.view",
+   "screen": "*",
    "verdict": "PASS",
-   "line": "Zoe: Switch, Open Relationships, Dancer; cited in P48's Amendment: 'Zoe's up on the sofa arm ...', 'Nobody's mine.'",
-   "why": "all 24 people have 2-4 traits with at least one personality-kind, not sex-kind; every manner trait has a written line the card cites: Zoe's two now cite the P37 amendment beats (5_scenes.toml:3821, 3825, 3829), Sam's Open Relationships cites his grin there plus 'Door's open whenever I'm here' (3655) and Artistic his guitar (3621, 5584)",
+   "line": "Laura: Submissive, Cook, Insecure ... Tess: Submissive, Shy",
+   "why": "all 24 have 2-4 traits with at least one personality trait; every manner trait has a written line (Cook: \"Mom's at the stove.\"; Gamer: \"on the couch with a controller\"; Nerd: \"fills three whiteboards with numbers\"; Wordsmith: \"takes it apart, line by line\"; Artistic: drama, the guitar; Bully: \"Did you get dressed in the dark?\"; Shy: \"Tess doesn't, but she doesn't stop her either\"; Bragger: \"Everybody knows what everybody buys\"; Sporty: \"spotting someone on the bench\"; Insecure: \"Tell me one good thing\", \"That you'd say no. So don't.\"; Particular, Dancer, Open Relationships as cited); nothing on screen contradicts any of them",
    "cause": null,
    "note": false,
-   "screen_hash": null,
+   "screen_hash": "d4438ac582dc1f3f",
+   "row_hash": "40172c2d376bfc32",
+   "carried": true,
+   "pass": 4
+  },
+  {
+   "row": "C2183",
+   "screen": "npcs.npc_holt.feelings",
+   "verdict": "PASS",
+   "line": "friendship 50, lust 100, control 150, intimacy 0, people_type faculty, gender female, attracted True",
+   "why": "the feelings leave her trait set intact: Particular is personality-kind, not hidden, cited to \"No food, no phones, no noise\"; at friendship 50 it stays unknown, so the view shows no trait to be untrue",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "bc13dc2efc80419e",
+    "facts": "bc13dc2efc80419e",
+    "facts2": "bc13dc2efc80419e",
+    "all": "bc13dc2efc80419e"
+   },
+   "row_hash": "40172c2d376bfc32",
+   "carried": true,
+   "pass": 5
+  },
+  {
+   "row": "C2183",
+   "screen": "npcs.npc_ryan.feelings",
+   "verdict": "PASS",
+   "line": "Submissive, Switch, Gamer",
+   "why": "Lust change leaves his 3 traits as they were; Gamer is personality-kind with a written line ('Ryan's on the couch with a controller, losing loudly.'), Submissive with 'Sorry. I didn't\u2014 Sorry.'",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "c2573ba08e7d35fa",
+    "facts": "c2573ba08e7d35fa",
+    "facts2": "c2573ba08e7d35fa",
+    "all": "c2573ba08e7d35fa"
+   },
    "row_hash": "40172c2d376bfc32",
    "carried": false,
-   "pass": 3
+   "pass": 6
   },
   {
    "row": "C338",
@@ -358,192 +890,1289 @@
    "why": "release 1 is frozen: no act pays her or him",
    "cause": null,
    "note": false,
-   "screen_hash": "4f53cda18c2baa0c",
+   "screen_hash": "d4438ac582dc1f3f",
    "row_hash": "3ce0dbe053c4b2c9",
    "carried": true,
-   "pass": 1
+   "pass": 4
   },
   {
    "row": "C381",
    "screen": "*",
    "verdict": "N/A",
    "line": "",
-   "why": "no skill gate exists in release 1, so none shows greyed",
+   "why": "no skill_gate choice exists in release 1; the shop's greyed garments are purchase locks, judged at C388 and L116",
    "cause": null,
    "note": false,
-   "screen_hash": "4f53cda18c2baa0c",
+   "screen_hash": "d4438ac582dc1f3f",
    "row_hash": "c661ccd26aada1f2",
    "carried": true,
-   "pass": 1
+   "pass": 4
   },
   {
    "row": "C388",
-   "screen": "sidebar.skills",
+   "screen": "sidebar.disinhibition",
    "verdict": "PASS",
    "line": "shop_lace_bra: Needs Disinhibition 2",
-   "why": "every shop lock carries locked_text naming the skill and level (Needs Exhibitionism 2/4/6, Needs Disinhibition 2/4/6)",
+   "why": "all 21 shop locks carry locked_text that matches their skill_level condition (Needs Exhibitionism 2/4/6, Needs Disinhibition 2/4/6)",
    "cause": null,
    "note": false,
-   "screen_hash": null,
+   "screen_hash": {
+    "text": "ac50b5d02b9cf256",
+    "facts": "ac50b5d02b9cf256",
+    "facts2": "ac50b5d02b9cf256",
+    "all": "ac50b5d02b9cf256"
+   },
    "row_hash": "fbffa0dbed63968f",
    "carried": true,
-   "pass": 1
+   "pass": 4
+  },
+  {
+   "row": "C388",
+   "screen": "sidebar.dominance",
+   "verdict": "PASS",
+   "line": "shop_lace_bra: Needs Disinhibition 2",
+   "why": "all 21 shop locks carry locked_text that matches their skill_level condition (Needs Exhibitionism 2/4/6, Needs Disinhibition 2/4/6)",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "b889198ddfd820d9",
+    "facts": "b889198ddfd820d9",
+    "facts2": "b889198ddfd820d9",
+    "all": "b889198ddfd820d9"
+   },
+   "row_hash": "fbffa0dbed63968f",
+   "carried": true,
+   "pass": 4
+  },
+  {
+   "row": "C388",
+   "screen": "sidebar.submission",
+   "verdict": "PASS",
+   "line": "shop_lace_bra: Needs Disinhibition 2",
+   "why": "all 21 shop locks carry locked_text that matches their skill_level condition (Needs Exhibitionism 2/4/6, Needs Disinhibition 2/4/6)",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "5e5beb86dfaf52eb",
+    "facts": "5e5beb86dfaf52eb",
+    "facts2": "5e5beb86dfaf52eb",
+    "all": "5e5beb86dfaf52eb"
+   },
+   "row_hash": "fbffa0dbed63968f",
+   "carried": true,
+   "pass": 4
   },
   {
    "row": "C422",
-   "screen": "people.view",
+   "screen": "*",
    "verdict": "PASS",
-   "line": "Friendship | Lust | His Dominance ... Wants to date you.",
-   "why": "the view's labels say plainly what each row is",
+   "line": "Friendship | Lust | His Dominance ... Wants to date you. / DISINHIBITION | Level 0",
+   "why": "the row names, trait bubbles, want lines and sidebar levels say plainly what each is",
    "cause": null,
    "note": false,
-   "screen_hash": null,
+   "screen_hash": "d4438ac582dc1f3f",
    "row_hash": "7e128897077ecee6",
    "carried": true,
-   "pass": 1
+   "pass": 4
   },
   {
    "row": "C422",
-   "screen": "sidebar.skills",
-   "verdict": "PASS",
-   "line": "SUBMISSION | Level 0",
-   "why": "the sidebar names each skill and its level plainly",
+   "screen": "npcs.npc_holt.feelings",
+   "verdict": "N/A",
+   "line": "friendship 50, lust 100, control 150, intimacy 0, people_type faculty, gender female, attracted True",
+   "why": "no label or clickable on the field; it is numbers on the People view",
    "cause": null,
    "note": false,
-   "screen_hash": null,
+   "screen_hash": {
+    "text": "bc13dc2efc80419e",
+    "facts": "bc13dc2efc80419e",
+    "facts2": "bc13dc2efc80419e",
+    "all": "bc13dc2efc80419e"
+   },
    "row_hash": "7e128897077ecee6",
    "carried": true,
-   "pass": 1
+   "pass": 5
+  },
+  {
+   "row": "C422",
+   "screen": "npcs.npc_ryan.feelings",
+   "verdict": "PASS",
+   "line": "Friendship 0 | Lust 100",
+   "why": "The People view prints plain row names and values (people_system.py meterRows); no Dominance row at control 0",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "c2573ba08e7d35fa",
+    "facts": "c2573ba08e7d35fa",
+    "facts2": "c2573ba08e7d35fa",
+    "all": "c2573ba08e7d35fa"
+   },
+   "row_hash": "7e128897077ecee6",
+   "carried": false,
+   "pass": 6
   },
   {
    "row": "C442",
-   "screen": "people.view",
+   "screen": "*",
    "verdict": "PASS",
    "line": "Can't stand you, and wants you anyway.",
-   "why": "want lines say it outright",
+   "why": "the want lines and locks say it outright; no hint",
    "cause": null,
    "note": false,
-   "screen_hash": null,
+   "screen_hash": "d4438ac582dc1f3f",
    "row_hash": "59b8d8d24f0c7c38",
    "carried": true,
-   "pass": 1
+   "pass": 4
   },
   {
    "row": "C442",
-   "screen": "sidebar.skills",
-   "verdict": "PASS",
-   "line": "Needs Exhibitionism 2",
-   "why": "the lock says what is needed, no hint",
+   "screen": "npcs.npc_holt.feelings",
+   "verdict": "N/A",
+   "line": "friendship 50, lust 100, control 150, intimacy 0, people_type faculty, gender female, attracted True",
+   "why": "numbers, no prose to hint or say",
    "cause": null,
    "note": false,
-   "screen_hash": null,
+   "screen_hash": {
+    "text": "bc13dc2efc80419e",
+    "facts": "bc13dc2efc80419e",
+    "facts2": "bc13dc2efc80419e",
+    "all": "bc13dc2efc80419e"
+   },
    "row_hash": "59b8d8d24f0c7c38",
    "carried": true,
-   "pass": 1
+   "pass": 5
+  },
+  {
+   "row": "C442",
+   "screen": "npcs.npc_ryan.feelings",
+   "verdict": "PASS",
+   "line": "Lust 100",
+   "why": "Says outright that he wants her, at 10% of the bar",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "c2573ba08e7d35fa",
+    "facts": "c2573ba08e7d35fa",
+    "facts2": "c2573ba08e7d35fa",
+    "all": "c2573ba08e7d35fa"
+   },
+   "row_hash": "59b8d8d24f0c7c38",
+   "carried": false,
+   "pass": 6
   },
   {
    "row": "C447",
    "screen": "*",
    "verdict": "N/A",
    "line": "",
-   "why": "no line of speech is written in P48; manner claims (traits) are judged at C460 and C2183",
+   "why": "no speech is written on a traits or feelings field; a trait's fit to the person's lines is judged at C460 and C2183",
    "cause": null,
    "note": false,
-   "screen_hash": "4f53cda18c2baa0c",
+   "screen_hash": "d4438ac582dc1f3f",
    "row_hash": "5f664198d19facd8",
    "carried": true,
-   "pass": 1
+   "pass": 4
   },
   {
-   "row": "C451",
-   "screen": "people.view",
-   "verdict": "PASS",
-   "line": "Your mom, 41. She married Mark three years ago.",
-   "why": "concrete detail kept: ages, places, hours",
+   "row": "C447",
+   "screen": "npcs.npc_holt.feelings",
+   "verdict": "N/A",
+   "line": "friendship 50, lust 100, control 150, intimacy 0, people_type faculty, gender female, attracted True",
+   "why": "no spoken line on the field; her manner is judged on her scenes",
    "cause": null,
    "note": false,
-   "screen_hash": null,
-   "row_hash": "50dbf74577a813c7",
+   "screen_hash": {
+    "text": "bc13dc2efc80419e",
+    "facts": "bc13dc2efc80419e",
+    "facts2": "bc13dc2efc80419e",
+    "all": "bc13dc2efc80419e"
+   },
+   "row_hash": "5f664198d19facd8",
    "carried": true,
-   "pass": 1
+   "pass": 5
   },
   {
-   "row": "C451",
-   "screen": "sidebar.skills",
-   "verdict": "PASS",
-   "line": "Needs Disinhibition 4",
-   "why": "a number, not a stage word",
-   "cause": null,
-   "note": false,
-   "screen_hash": null,
-   "row_hash": "50dbf74577a813c7",
-   "carried": true,
-   "pass": 1
-  },
-  {
-   "row": "C460",
-   "screen": "people.view",
-   "verdict": "PASS",
-   "line": "Dancer: \"They're really into dancing.\" / Open Relationships: \"They prefer not to tie sexual needs to a single person.\"",
-   "why": "both claims on Zoe are now shown in play and nothing contradicts them (P41's walk-in with Sam is compatible); Sam's Open Relationships (hidden until friendship passes 100) is backed by the same beat. Start values still agree with the scenes: Tom and Sam lust 100, Ryan and Mark 0, Vance 400, Hale 300, Cross and the Dean 150, Brooke -200, Chris -120, Kayla and Tess -150, Zoe friendship 250",
-   "cause": null,
-   "note": false,
-   "screen_hash": null,
-   "row_hash": "67e48e60d5053a2e",
-   "carried": false,
-   "pass": 3
-  },
-  {
-   "row": "C460",
-   "screen": "sidebar.skills",
-   "verdict": "PASS",
-   "line": "Level 0",
-   "why": "true on every playthrough: nothing raises a skill in release 1",
-   "cause": null,
-   "note": false,
-   "screen_hash": null,
-   "row_hash": "67e48e60d5053a2e",
-   "carried": true,
-   "pass": 1
-  },
-  {
-   "row": "C461",
-   "screen": "people.view",
-   "verdict": "PASS",
-   "line": "Dancer / Open Relationships (Zoe)",
-   "why": "a trait bubble is a claim, and Zoe's two now fit lines on screen; every other person's shown or later-shown manner trait fits its cited line, as judged last pass, with nothing changed",
-   "cause": null,
-   "note": false,
-   "screen_hash": null,
-   "row_hash": "310706ee076318f2",
-   "carried": false,
-   "pass": 3
-  },
-  {
-   "row": "C461",
-   "screen": "sidebar.skills",
+   "row": "C447",
+   "screen": "npcs.npc_ryan.feelings",
    "verdict": "N/A",
    "line": "",
-   "why": "the sidebar carries no texture, opinion or dialogue",
+   "why": "No speech is written on a feelings field",
    "cause": null,
    "note": false,
-   "screen_hash": null,
+   "screen_hash": {
+    "text": "c2573ba08e7d35fa",
+    "facts": "c2573ba08e7d35fa",
+    "facts2": "c2573ba08e7d35fa",
+    "all": "c2573ba08e7d35fa"
+   },
+   "row_hash": "5f664198d19facd8",
+   "carried": false,
+   "pass": 6
+  },
+  {
+   "row": "C451",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "Friendship 300 ... Needs Disinhibition 4",
+   "why": "numbers and named skills, no stage words",
+   "cause": null,
+   "note": false,
+   "screen_hash": "d4438ac582dc1f3f",
+   "row_hash": "50dbf74577a813c7",
+   "carried": true,
+   "pass": 4
+  },
+  {
+   "row": "C451",
+   "screen": "npcs.npc_holt.feelings",
+   "verdict": "N/A",
+   "line": "friendship 50, lust 100, control 150, intimacy 0, people_type faculty, gender female, attracted True",
+   "why": "numbers only; no places, objects or times to keep",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "bc13dc2efc80419e",
+    "facts": "bc13dc2efc80419e",
+    "facts2": "bc13dc2efc80419e",
+    "all": "bc13dc2efc80419e"
+   },
+   "row_hash": "50dbf74577a813c7",
+   "carried": true,
+   "pass": 5
+  },
+  {
+   "row": "C451",
+   "screen": "npcs.npc_ryan.feelings",
+   "verdict": "PASS",
+   "line": "Lust 100",
+   "why": "A concrete number, no stage word",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "c2573ba08e7d35fa",
+    "facts": "c2573ba08e7d35fa",
+    "facts2": "c2573ba08e7d35fa",
+    "all": "c2573ba08e7d35fa"
+   },
+   "row_hash": "50dbf74577a813c7",
+   "carried": false,
+   "pass": 6
+  },
+  {
+   "row": "C460",
+   "screen": "npcs.npc_brooke.feelings",
+   "verdict": "PASS",
+   "line": "Cat got your tongue, princess? Figures.",
+   "why": "-200/0/150 fits: rival, she owns the mirror; her slow look ends on an insult to the outfit, not desire; female, not attracted, 21",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "94f3e67c634c4344",
+    "facts": "94f3e67c634c4344",
+    "facts2": "94f3e67c634c4344",
+    "all": "94f3e67c634c4344"
+   },
+   "row_hash": "67e48e60d5053a2e",
+   "carried": true,
+   "pass": 4
+  },
+  {
+   "row": "C460",
+   "screen": "npcs.npc_brooke.traits",
+   "verdict": "PASS",
+   "line": "Nice outfit, princess. Did you get dressed in the dark?",
+   "why": "Forward and Bully shown (dislike 200), true at her meeting; Dominant hidden",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "59941efc0f4b3912",
+    "facts": "59941efc0f4b3912",
+    "facts2": "59941efc0f4b3912",
+    "all": "59941efc0f4b3912"
+   },
+   "row_hash": "67e48e60d5053a2e",
+   "carried": true,
+   "pass": 4
+  },
+  {
+   "row": "C460",
+   "screen": "npcs.npc_chris.feelings",
+   "verdict": "PASS",
+   "line": "He doesn't say sorry. He watches you notice.",
+   "why": "-120/320/150 fits: contempt plus want; Can't stand you, and wants you anyway; male, attracted, 24",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "50a42bb6cb6b9e65",
+    "facts": "50a42bb6cb6b9e65",
+    "facts2": "50a42bb6cb6b9e65",
+    "all": "50a42bb6cb6b9e65"
+   },
+   "row_hash": "67e48e60d5053a2e",
+   "carried": true,
+   "pass": 4
+  },
+  {
+   "row": "C460",
+   "screen": "npcs.npc_chris.traits",
+   "verdict": "PASS",
+   "line": "So you're the new girl. Tom says you're mine to train.",
+   "why": "Forward shown (dislike 120), true at his first shift; Dominant hidden",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "ac986eaf8a64f6c1",
+    "facts": "ac986eaf8a64f6c1",
+    "facts2": "ac986eaf8a64f6c1",
+    "all": "ac986eaf8a64f6c1"
+   },
+   "row_hash": "67e48e60d5053a2e",
+   "carried": true,
+   "pass": 4
+  },
+  {
+   "row": "C460",
+   "screen": "npcs.npc_cross.feelings",
+   "verdict": "PASS",
+   "line": "his eyes stay on you after you've finished, down your body and back up",
+   "why": "0/150/200 fits; professor so no want line; male, attracted, 38 (\"late thirties\")",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "7e50b113c23cbe3e",
+    "facts": "7e50b113c23cbe3e",
+    "facts2": "7e50b113c23cbe3e",
+    "all": "7e50b113c23cbe3e"
+   },
+   "row_hash": "67e48e60d5053a2e",
+   "carried": true,
+   "pass": 4
+  },
+  {
+   "row": "C460",
+   "screen": "npcs.npc_cross.traits",
+   "verdict": "PASS",
+   "line": "he makes you say the line three times, louder each time",
+   "why": "Forward, Artistic, Particular hidden at 0, each true to the drama scenes",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "3f8a9dd3b19244e9",
+    "facts": "3f8a9dd3b19244e9",
+    "facts2": "3f8a9dd3b19244e9",
+    "all": "3f8a9dd3b19244e9"
+   },
+   "row_hash": "67e48e60d5053a2e",
+   "carried": true,
+   "pass": 4
+  },
+  {
+   "row": "C460",
+   "screen": "npcs.npc_danny.feelings",
+   "verdict": "PASS",
+   "line": "When you turn to the shelves you can feel him watching your ass.",
+   "why": "100/300/0 fits; Wants to sleep with you; male, attracted, 23",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "ee99d7a73797c059",
+    "facts": "ee99d7a73797c059",
+    "facts2": "ee99d7a73797c059",
+    "all": "ee99d7a73797c059"
+   },
+   "row_hash": "67e48e60d5053a2e",
+   "carried": true,
+   "pass": 4
+  },
+  {
+   "row": "C460",
+   "screen": "npcs.npc_danny.traits",
+   "verdict": "PASS",
+   "line": "Only the ones who come back.",
+   "why": "Forward and Strictly Casual hidden at 100 (not above); his come-ons and no talk of dating fit both",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "426a67aec8453d6e",
+    "facts": "426a67aec8453d6e",
+    "facts2": "426a67aec8453d6e",
+    "all": "426a67aec8453d6e"
+   },
+   "row_hash": "67e48e60d5053a2e",
+   "carried": true,
+   "pass": 4
+  },
+  {
+   "row": "C460",
+   "screen": "npcs.npc_dean.feelings",
+   "verdict": "PASS",
+   "line": "your face, then down your body, then back up, slowly",
+   "why": "0/150/600 fits; professor; male, attracted, 58",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "f72498d167e61811",
+    "facts": "f72498d167e61811",
+    "facts2": "f72498d167e61811",
+    "all": "f72498d167e61811"
+   },
+   "row_hash": "67e48e60d5053a2e",
+   "carried": true,
+   "pass": 4
+  },
+  {
+   "row": "C460",
+   "screen": "npcs.npc_dean.traits",
+   "verdict": "PASS",
+   "line": "Dress like a student, not like a guest.",
+   "why": "Particular hidden at 0; true to his lines",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "0b25d431f98d6bd8",
+    "facts": "0b25d431f98d6bd8",
+    "facts2": "0b25d431f98d6bd8",
+    "all": "0b25d431f98d6bd8"
+   },
+   "row_hash": "67e48e60d5053a2e",
+   "carried": true,
+   "pass": 4
+  },
+  {
+   "row": "C460",
+   "screen": "npcs.npc_frank.feelings",
+   "verdict": "PASS",
+   "line": "like he's adding up a bill",
+   "why": "0/0/100 fits: his look is written as non-sexual; attracted false; 52",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "8b2ab51d7967e09a",
+    "facts": "8b2ab51d7967e09a",
+    "facts2": "8b2ab51d7967e09a",
+    "all": "8b2ab51d7967e09a"
+   },
+   "row_hash": "67e48e60d5053a2e",
+   "carried": true,
+   "pass": 4
+  },
+  {
+   "row": "C460",
+   "screen": "npcs.npc_frank.traits",
+   "verdict": "PASS",
+   "line": "Oh, I'll tell him you were in.",
+   "why": "Bragger hidden at 0, and true: he reports to Mark",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "cfdc3aaccd10251b",
+    "facts": "cfdc3aaccd10251b",
+    "facts2": "cfdc3aaccd10251b",
+    "all": "cfdc3aaccd10251b"
+   },
+   "row_hash": "67e48e60d5053a2e",
+   "carried": true,
+   "pass": 4
+  },
+  {
+   "row": "C460",
+   "screen": "npcs.npc_hale.feelings",
+   "verdict": "PASS",
+   "line": "every time he looks up, it's at your row",
+   "why": "0/300/300 fits; professor so no want line; male, attracted, 39",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "6cf40d6b379a200b",
+    "facts": "6cf40d6b379a200b",
+    "facts2": "6cf40d6b379a200b",
+    "all": "6cf40d6b379a200b"
+   },
+   "row_hash": "67e48e60d5053a2e",
+   "carried": true,
+   "pass": 4
+  },
+  {
+   "row": "C460",
+   "screen": "npcs.npc_hale.traits",
+   "verdict": "PASS",
+   "line": "Either take notes or take a seat down here.",
+   "why": "Particular hidden at 0; Dominant/Sadist sex traits hidden",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "9347bc942483f0d6",
+    "facts": "9347bc942483f0d6",
+    "facts2": "9347bc942483f0d6",
+    "all": "9347bc942483f0d6"
+   },
+   "row_hash": "67e48e60d5053a2e",
+   "carried": true,
+   "pass": 4
+  },
+  {
+   "row": "C460",
+   "screen": "npcs.npc_holt.feelings",
+   "verdict": "PASS",
+   "line": "She reads your student card for longer than a card needs, then looks you up and down. Your ears go warm.",
+   "why": "lust 100 and attracted now back the once-over at library_meet_holt.meet; friendship 50 fits \"hon\" and \"Smart girl.\"; Her Dominance 150 fits her orders; female, 31 matches PLAN \"Ms. Ivy Holt (31, librarian)\" and PLAN \u00a73 tuning line; professor hides the want line, so no want claim; c1 fixed",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "bc13dc2efc80419e",
+    "facts": "bc13dc2efc80419e",
+    "facts2": "bc13dc2efc80419e",
+    "all": "bc13dc2efc80419e"
+   },
+   "row_hash": "67e48e60d5053a2e",
+   "carried": true,
+   "pass": 5
+  },
+  {
+   "row": "C460",
+   "screen": "npcs.npc_holt.traits",
+   "verdict": "PASS",
+   "line": "Quiet floor's upstairs, hon. No food, no phones, no noise.",
+   "why": "Particular hidden at 50; Switch hidden; true to her lines",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "492ec61653b4ffe9",
+    "facts": "492ec61653b4ffe9",
+    "facts2": "492ec61653b4ffe9",
+    "all": "492ec61653b4ffe9"
+   },
+   "row_hash": "67e48e60d5053a2e",
+   "carried": true,
+   "pass": 4
+  },
+  {
+   "row": "C460",
+   "screen": "npcs.npc_jake.feelings",
+   "verdict": "PASS",
+   "line": "His eyes drop to your mouth before they come back up",
+   "why": "100/300/0 fits; Wants to date you; male, attracted, 20",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "1c2920e7418f31d2",
+    "facts": "1c2920e7418f31d2",
+    "facts2": "1c2920e7418f31d2",
+    "all": "1c2920e7418f31d2"
+   },
+   "row_hash": "67e48e60d5053a2e",
+   "carried": true,
+   "pass": 4
+  },
+  {
+   "row": "C460",
+   "screen": "npcs.npc_jake.traits",
+   "verdict": "PASS",
+   "line": "That you'd say no. So don't.",
+   "why": "Insecure hidden at 100; Submissive/Switch hidden",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "77d7324f60b76bb8",
+    "facts": "77d7324f60b76bb8",
+    "facts2": "77d7324f60b76bb8",
+    "all": "77d7324f60b76bb8"
+   },
+   "row_hash": "67e48e60d5053a2e",
+   "carried": true,
+   "pass": 4
+  },
+  {
+   "row": "C460",
+   "screen": "npcs.npc_kayla.feelings",
+   "verdict": "PASS",
+   "line": "Ooh.",
+   "why": "-150/0/0 fits the sidekick; female, not attracted, 20",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "57b86a11dd40cafb",
+    "facts": "57b86a11dd40cafb",
+    "facts2": "57b86a11dd40cafb",
+    "all": "57b86a11dd40cafb"
+   },
+   "row_hash": "67e48e60d5053a2e",
+   "carried": true,
+   "pass": 4
+  },
+  {
+   "row": "C460",
+   "screen": "npcs.npc_kayla.traits",
+   "verdict": "PASS",
+   "line": "Kayla laughs.",
+   "why": "Bully shown (dislike 150), true: she laughs at Brooke's jab, at the meeting where she is met",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "d371069bcfbd7b82",
+    "facts": "d371069bcfbd7b82",
+    "facts2": "d371069bcfbd7b82",
+    "all": "d371069bcfbd7b82"
+   },
+   "row_hash": "67e48e60d5053a2e",
+   "carried": true,
+   "pass": 4
+  },
+  {
+   "row": "C460",
+   "screen": "npcs.npc_laura.feelings",
+   "verdict": "PASS",
+   "line": "Eat. You're too thin.",
+   "why": "friendship 300 and control 200 fit the mothering and her orders; lust 0 fits; female, attracted (PLAN \u00a76a top), 41 as the image and people line say",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "c2ece3628f705293",
+    "facts": "c2ece3628f705293",
+    "facts2": "c2ece3628f705293",
+    "all": "c2ece3628f705293"
+   },
+   "row_hash": "67e48e60d5053a2e",
+   "carried": true,
+   "pass": 4
+  },
+  {
+   "row": "C460",
+   "screen": "npcs.npc_laura.traits",
+   "verdict": "PASS",
+   "line": "Tell me one good thing. Just one. Even a small one counts.",
+   "why": "Cook (\"Mom's at the stove.\", \"There's toast.\") and Insecure (\"Promise me.\", \"Stay in tonight. Just tonight. For me.\") show from the opening, where she is met; Submissive stays ??? (P38's \"Be quiet, Laura.\")",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "1ef12eb438a6b1f6",
+    "facts": "1ef12eb438a6b1f6",
+    "facts2": "1ef12eb438a6b1f6",
+    "all": "1ef12eb438a6b1f6"
+   },
+   "row_hash": "67e48e60d5053a2e",
+   "carried": true,
+   "pass": 4
+  },
+  {
+   "row": "C460",
+   "screen": "npcs.npc_marco.feelings",
+   "verdict": "PASS",
+   "line": "your legs, your ass, then your face",
+   "why": "100/100/200 fits; male, attracted, 29",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "41164a73eb257e47",
+    "facts": "41164a73eb257e47",
+    "facts2": "41164a73eb257e47",
+    "all": "41164a73eb257e47"
+   },
+   "row_hash": "67e48e60d5053a2e",
+   "carried": true,
+   "pass": 4
+  },
+  {
+   "row": "C460",
+   "screen": "npcs.npc_marco.traits",
+   "verdict": "PASS",
+   "line": "Squats. Lots of squats. You'll thank me.",
+   "why": "Sporty hidden at 100, true (the gym's trainer)",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "269bcfe0e959d9bb",
+    "facts": "269bcfe0e959d9bb",
+    "facts2": "269bcfe0e959d9bb",
+    "all": "269bcfe0e959d9bb"
+   },
+   "row_hash": "67e48e60d5053a2e",
+   "carried": true,
+   "pass": 4
+  },
+  {
+   "row": "C460",
+   "screen": "npcs.npc_mark.feelings",
+   "verdict": "PASS",
+   "line": "Mark watches you over his coffee and doesn't offer to help.",
+   "why": "0/0/500 fits: his watching is not written as sexual; PLAN \"turns sexual late\"; male, attracted, 46",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "60eb96c9edf4241c",
+    "facts": "60eb96c9edf4241c",
+    "facts2": "60eb96c9edf4241c",
+    "all": "60eb96c9edf4241c"
+   },
+   "row_hash": "67e48e60d5053a2e",
+   "carried": true,
+   "pass": 4
+  },
+  {
+   "row": "C460",
+   "screen": "npcs.npc_mark.traits",
+   "verdict": "PASS",
+   "line": "Straight A's don't pay rent.",
+   "why": "Particular hidden at friendship 0; Dominant/Confident unseen; consistent with the rent scenes",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "0b25d431f98d6bd8",
+    "facts": "0b25d431f98d6bd8",
+    "facts2": "0b25d431f98d6bd8",
+    "all": "0b25d431f98d6bd8"
+   },
+   "row_hash": "67e48e60d5053a2e",
+   "carried": true,
+   "pass": 4
+  },
+  {
+   "row": "C460",
+   "screen": "npcs.npc_nadia.feelings",
+   "verdict": "PASS",
+   "line": "Last spring it was me.",
+   "why": "200/0/0 fits: she saves a seat and warns you; female, not attracted, 20",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "beb556b432ef1f40",
+    "facts": "beb556b432ef1f40",
+    "facts2": "beb556b432ef1f40",
+    "all": "beb556b432ef1f40"
+   },
+   "row_hash": "67e48e60d5053a2e",
+   "carried": true,
+   "pass": 4
+  },
+  {
+   "row": "C460",
+   "screen": "npcs.npc_nadia.traits",
+   "verdict": "PASS",
+   "line": "Sit here, freshman. Not the front. Trust me.",
+   "why": "Forward shown on day one, true at her meeting (she moves her bag and tells you where to sit); Submissive hidden",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "a5500a39ecbe9482",
+    "facts": "a5500a39ecbe9482",
+    "facts2": "a5500a39ecbe9482",
+    "all": "a5500a39ecbe9482"
+   },
+   "row_hash": "67e48e60d5053a2e",
+   "carried": true,
+   "pass": 4
+  },
+  {
+   "row": "C460",
+   "screen": "npcs.npc_nina.feelings",
+   "verdict": "PASS",
+   "line": "She looks you up and down, slowly, and doesn't hide it.",
+   "why": "100/100/0 fits; female, attracted, 26",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "c1856207a6e35bea",
+    "facts": "c1856207a6e35bea",
+    "facts2": "c1856207a6e35bea",
+    "all": "c1856207a6e35bea"
+   },
+   "row_hash": "67e48e60d5053a2e",
+   "carried": true,
+   "pass": 4
+  },
+  {
+   "row": "C460",
+   "screen": "npcs.npc_nina.traits",
+   "verdict": "PASS",
+   "line": "Let me see. Come on, I won't tell.",
+   "why": "Forward and Strictly Casual hidden at 100; nothing contradicts",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "426a67aec8453d6e",
+    "facts": "426a67aec8453d6e",
+    "facts2": "426a67aec8453d6e",
+    "all": "426a67aec8453d6e"
+   },
+   "row_hash": "67e48e60d5053a2e",
+   "carried": true,
+   "pass": 4
+  },
+  {
+   "row": "C460",
+   "screen": "npcs.npc_pratt.feelings",
+   "verdict": "PASS",
+   "line": "Thank you. Sit where I can see you.",
+   "why": "0/0/200 fits: control, no look at her body anywhere; attracted false not contradicted; 44",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "c3091ecb151fbdd0",
+    "facts": "c3091ecb151fbdd0",
+    "facts2": "c3091ecb151fbdd0",
+    "all": "c3091ecb151fbdd0"
+   },
+   "row_hash": "67e48e60d5053a2e",
+   "carried": true,
+   "pass": 4
+  },
+  {
+   "row": "C460",
+   "screen": "npcs.npc_pratt.traits",
+   "verdict": "PASS",
+   "line": "Mr. Pratt fills three whiteboards with numbers and never once turns round.",
+   "why": "Nerd and Particular hidden at 0, both true to his lines",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "d18e30b89e29ef27",
+    "facts": "d18e30b89e29ef27",
+    "facts2": "d18e30b89e29ef27",
+    "all": "d18e30b89e29ef27"
+   },
+   "row_hash": "67e48e60d5053a2e",
+   "carried": true,
+   "pass": 4
+  },
+  {
+   "row": "C460",
+   "screen": "npcs.npc_rosa.feelings",
+   "verdict": "PASS",
+   "line": "She looks you over, the way a mother checks a coat.",
+   "why": "200/0/0 fits; her look is written as non-sexual; female, not attracted, 45",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "3c5c2838f553c03e",
+    "facts": "3c5c2838f553c03e",
+    "facts2": "3c5c2838f553c03e",
+    "all": "3c5c2838f553c03e"
+   },
+   "row_hash": "67e48e60d5053a2e",
+   "carried": true,
+   "pass": 4
+  },
+  {
+   "row": "C460",
+   "screen": "npcs.npc_rosa.traits",
+   "verdict": "PASS",
+   "line": "Eat all of it. I'll know.",
+   "why": "Forward shown at 200, true at her meeting; Cook hidden (200 not above 200)",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "bbdb413a5207e59b",
+    "facts": "bbdb413a5207e59b",
+    "facts2": "bbdb413a5207e59b",
+    "all": "bbdb413a5207e59b"
+   },
+   "row_hash": "67e48e60d5053a2e",
+   "carried": true,
+   "pass": 4
+  },
+  {
+   "row": "C460",
+   "screen": "npcs.npc_ryan.feelings",
+   "verdict": "PASS",
+   "line": "His eyes flick to your chest and straight back to the screen. His ears go pink.",
+   "why": "Lust 100 is backed by the look on Talk to Ryan and agrees with PLAN 3 ('friendship 0 \u00b7 lust 100 \u00b7 control 0') and PLAN line 86; he hides it ('Ryan's eyes are on the ceiling, and they stay there.'), which fits a hidden 100; true on every visit: release 1 is frozen, and fadeDay never moves a value inside -100..100; male, attracted, 22 as his People line says",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "c2573ba08e7d35fa",
+    "facts": "c2573ba08e7d35fa",
+    "facts2": "c2573ba08e7d35fa",
+    "all": "c2573ba08e7d35fa"
+   },
+   "row_hash": "67e48e60d5053a2e",
+   "carried": false,
+   "pass": 6
+  },
+  {
+   "row": "C460",
+   "screen": "npcs.npc_ryan.traits",
+   "verdict": "PASS",
+   "line": "Ryan's on the couch with a controller, losing loudly.",
+   "why": "Gamer hidden until friendship passes 200; Submissive/Switch hidden until sex; nothing contradicts",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "7ec2e3821d0cbdcd",
+    "facts": "7ec2e3821d0cbdcd",
+    "facts2": "7ec2e3821d0cbdcd",
+    "all": "7ec2e3821d0cbdcd"
+   },
+   "row_hash": "67e48e60d5053a2e",
+   "carried": true,
+   "pass": 4
+  },
+  {
+   "row": "C460",
+   "screen": "npcs.npc_sam.feelings",
+   "verdict": "PASS",
+   "line": "his eyes stop on your chest long enough that your nipples tighten",
+   "why": "100/100/0 fits; male, attracted, 22",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "3910250e4c05c4ea",
+    "facts": "3910250e4c05c4ea",
+    "facts2": "3910250e4c05c4ea",
+    "all": "3910250e4c05c4ea"
+   },
+   "row_hash": "67e48e60d5053a2e",
+   "carried": true,
+   "pass": 4
+  },
+  {
+   "row": "C460",
+   "screen": "npcs.npc_sam.traits",
+   "verdict": "PASS",
+   "line": "He's still strumming when you reach the corner.",
+   "why": "Open Relationships and Artistic hidden at 100 (not above); both backed (the party grin, the guitar)",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "d67c6a59cc0504ae",
+    "facts": "d67c6a59cc0504ae",
+    "facts2": "d67c6a59cc0504ae",
+    "all": "d67c6a59cc0504ae"
+   },
+   "row_hash": "67e48e60d5053a2e",
+   "carried": true,
+   "pass": 4
+  },
+  {
+   "row": "C460",
+   "screen": "npcs.npc_tess.feelings",
+   "verdict": "PASS",
+   "line": "Tess snorts and goes back to Brooke's lashes.",
+   "why": "-150/0/0 fits; female, not attracted, 21",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "57b86a11dd40cafb",
+    "facts": "57b86a11dd40cafb",
+    "facts2": "57b86a11dd40cafb",
+    "all": "57b86a11dd40cafb"
+   },
+   "row_hash": "67e48e60d5053a2e",
+   "carried": true,
+   "pass": 4
+  },
+  {
+   "row": "C460",
+   "screen": "npcs.npc_tess.traits",
+   "verdict": "PASS",
+   "line": "Kayla laughs. Tess doesn't, but she doesn't stop her either.",
+   "why": "Shy shown (dislike 150), true: she stays passive and says least",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "408531b219e0bde2",
+    "facts": "408531b219e0bde2",
+    "facts2": "408531b219e0bde2",
+    "all": "408531b219e0bde2"
+   },
+   "row_hash": "67e48e60d5053a2e",
+   "carried": true,
+   "pass": 4
+  },
+  {
+   "row": "C460",
+   "screen": "npcs.npc_tom.feelings",
+   "verdict": "PASS",
+   "line": "Every time you bend for the milk, Tom's eyes drop to your ass and stay there.",
+   "why": "50/100/500 fits: boss, looks, not past 100 so no want line; male, attracted, 31 (\"a man in his thirties\")",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "a8e75982636762f5",
+    "facts": "a8e75982636762f5",
+    "facts2": "a8e75982636762f5",
+    "all": "a8e75982636762f5"
+   },
+   "row_hash": "67e48e60d5053a2e",
+   "carried": true,
+   "pass": 4
+  },
+  {
+   "row": "C460",
+   "screen": "npcs.npc_tom.traits",
+   "verdict": "PASS",
+   "line": "Good answer. I'm Tom. I run the place.",
+   "why": "Forward hidden at friendship 50; Confident never shown",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "f8569e4bb1e3ada6",
+    "facts": "f8569e4bb1e3ada6",
+    "facts2": "f8569e4bb1e3ada6",
+    "all": "f8569e4bb1e3ada6"
+   },
+   "row_hash": "67e48e60d5053a2e",
+   "carried": true,
+   "pass": 4
+  },
+  {
+   "row": "C460",
+   "screen": "npcs.npc_vance.feelings",
+   "verdict": "PASS",
+   "line": "his eyes follow you down the pavement, taking their time over your legs",
+   "why": "100/400/400 fits; Wants to sleep with you; male, attracted, 54",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "9aeb4d992b31224d",
+    "facts": "9aeb4d992b31224d",
+    "facts2": "9aeb4d992b31224d",
+    "all": "9aeb4d992b31224d"
+   },
+   "row_hash": "67e48e60d5053a2e",
+   "carried": true,
+   "pass": 4
+  },
+  {
+   "row": "C460",
+   "screen": "npcs.npc_vance.traits",
+   "verdict": "PASS",
+   "line": "Come here a minute, little lady.",
+   "why": "Forward hidden at 100; Dominant hidden",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "4bf4c31cf997481f",
+    "facts": "4bf4c31cf997481f",
+    "facts2": "4bf4c31cf997481f",
+    "all": "4bf4c31cf997481f"
+   },
+   "row_hash": "67e48e60d5053a2e",
+   "carried": true,
+   "pass": 4
+  },
+  {
+   "row": "C460",
+   "screen": "npcs.npc_walsh.feelings",
+   "verdict": "PASS",
+   "line": "I'd rather hear how you're doing from you than from your grades.",
+   "why": "150/0/150 fits the warm, exacting advisor; female, not attracted, 48",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "a6a7776352906814",
+    "facts": "a6a7776352906814",
+    "facts2": "a6a7776352906814",
+    "all": "a6a7776352906814"
+   },
+   "row_hash": "67e48e60d5053a2e",
+   "carried": true,
+   "pass": 4
+  },
+  {
+   "row": "C460",
+   "screen": "npcs.npc_walsh.traits",
+   "verdict": "PASS",
+   "line": "One essay a week, and I read every word of it.",
+   "why": "Particular shown on day one at friendship 150 and true at her first class; Wordsmith hidden, true (\"takes it apart, line by line\")",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "83457562f149a973",
+    "facts": "83457562f149a973",
+    "facts2": "83457562f149a973",
+    "all": "83457562f149a973"
+   },
+   "row_hash": "67e48e60d5053a2e",
+   "carried": true,
+   "pass": 4
+  },
+  {
+   "row": "C460",
+   "screen": "npcs.npc_zoe.feelings",
+   "verdict": "PASS",
+   "line": "You look like you need this more than I do, babe.",
+   "why": "250/0/100 fits; no line has her want Ella sexually; female, attracted (PLAN \u00a76b), 19",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "e7327b25249effb4",
+    "facts": "e7327b25249effb4",
+    "facts2": "e7327b25249effb4",
+    "all": "e7327b25249effb4"
+   },
+   "row_hash": "67e48e60d5053a2e",
+   "carried": true,
+   "pass": 4
+  },
+  {
+   "row": "C460",
+   "screen": "npcs.npc_zoe.traits",
+   "verdict": "PASS",
+   "line": "Zoe's up on the sofa arm before you've finished saying it, arms over her head, dancing like the party's hers.",
+   "why": "Dancer and Open Relationships shown at 250, made true at zoe_party.home (\"Nobody's mine.\"); a trait is a standing fact, so the view before the party isn't false; Switch hidden",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "8cb24620eaba571d",
+    "facts": "8cb24620eaba571d",
+    "facts2": "8cb24620eaba571d",
+    "all": "8cb24620eaba571d"
+   },
+   "row_hash": "67e48e60d5053a2e",
+   "carried": true,
+   "pass": 4
+  },
+  {
+   "row": "C460",
+   "screen": "sidebar.disinhibition",
+   "verdict": "PASS",
+   "line": "Level 0",
+   "why": "true on every playthrough: nothing raises a skill in release 1; the bands read the level the engine computes",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "ac50b5d02b9cf256",
+    "facts": "ac50b5d02b9cf256",
+    "facts2": "ac50b5d02b9cf256",
+    "all": "ac50b5d02b9cf256"
+   },
+   "row_hash": "67e48e60d5053a2e",
+   "carried": true,
+   "pass": 4
+  },
+  {
+   "row": "C460",
+   "screen": "sidebar.dominance",
+   "verdict": "PASS",
+   "line": "Level 0",
+   "why": "true on every playthrough: nothing raises a skill in release 1; the bands read the level the engine computes",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "b889198ddfd820d9",
+    "facts": "b889198ddfd820d9",
+    "facts2": "b889198ddfd820d9",
+    "all": "b889198ddfd820d9"
+   },
+   "row_hash": "67e48e60d5053a2e",
+   "carried": true,
+   "pass": 4
+  },
+  {
+   "row": "C460",
+   "screen": "sidebar.submission",
+   "verdict": "PASS",
+   "line": "Level 0",
+   "why": "true on every playthrough: nothing raises a skill in release 1; the bands read the level the engine computes",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "5e5beb86dfaf52eb",
+    "facts": "5e5beb86dfaf52eb",
+    "facts2": "5e5beb86dfaf52eb",
+    "all": "5e5beb86dfaf52eb"
+   },
+   "row_hash": "67e48e60d5053a2e",
+   "carried": true,
+   "pass": 4
+  },
+  {
+   "row": "C461",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "Cook / Bully / Particular / Wordsmith",
+   "why": "each trait fits the person's cast entry and lines; no trait or value clashes with any scene apart from c1 (judged at C460)",
+   "cause": null,
+   "note": false,
+   "screen_hash": "d4438ac582dc1f3f",
    "row_hash": "310706ee076318f2",
    "carried": true,
-   "pass": 1
+   "pass": 4
+  },
+  {
+   "row": "C461",
+   "screen": "npcs.npc_holt.feelings",
+   "verdict": "PASS",
+   "line": "friendship 50, lust 100, control 150, intimacy 0, people_type faculty, gender female, attracted True",
+   "why": "claims nothing past the cast entry (librarian, 31) and her scenes; no texture or opinion to clash",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "bc13dc2efc80419e",
+    "facts": "bc13dc2efc80419e",
+    "facts2": "bc13dc2efc80419e",
+    "all": "bc13dc2efc80419e"
+   },
+   "row_hash": "310706ee076318f2",
+   "carried": true,
+   "pass": 5
+  },
+  {
+   "row": "C461",
+   "screen": "npcs.npc_ryan.feelings",
+   "verdict": "PASS",
+   "line": "friendship 0, lust 100, control 0, people_type family_sibling, gender male, attracted True",
+   "why": "Values fit his cast entry ('the one person at home on her side', 'he stops hiding it' at the top); nothing clashes with a scene",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "c2573ba08e7d35fa",
+    "facts": "c2573ba08e7d35fa",
+    "facts2": "c2573ba08e7d35fa",
+    "all": "c2573ba08e7d35fa"
+   },
+   "row_hash": "310706ee076318f2",
+   "carried": false,
+   "pass": 6
   },
   {
    "row": "C519",
    "screen": "*",
    "verdict": "PASS",
    "line": "",
-   "why": "each People view and the sidebar hold one job; no prose screen is written",
+   "why": "each field and sidebar item holds one job; no prose screen is written",
    "cause": null,
    "note": true,
-   "screen_hash": "4f53cda18c2baa0c",
+   "screen_hash": "d4438ac582dc1f3f",
    "row_hash": "e78502f7aa28746d",
    "carried": true,
-   "pass": 1
+   "pass": 4
+  },
+  {
+   "row": "C519",
+   "screen": "npcs.npc_holt.feelings",
+   "verdict": "PASS",
+   "line": "friendship 50, lust 100, control 150, intimacy 0, people_type faculty, gender female, attracted True",
+   "why": "one job (her start feelings), a handful of values, far under 150 words",
+   "cause": null,
+   "note": true,
+   "screen_hash": {
+    "text": "bc13dc2efc80419e",
+    "facts": "bc13dc2efc80419e",
+    "facts2": "bc13dc2efc80419e",
+    "all": "bc13dc2efc80419e"
+   },
+   "row_hash": "e78502f7aa28746d",
+   "carried": true,
+   "pass": 5
+  },
+  {
+   "row": "C519",
+   "screen": "npcs.npc_ryan.feelings",
+   "verdict": "PASS",
+   "line": "friendship 0, lust 100, control 0, people_type family_sibling, gender male, attracted True",
+   "why": "One field, one job: his three feelings",
+   "cause": null,
+   "note": true,
+   "screen_hash": {
+    "text": "c2573ba08e7d35fa",
+    "facts": "c2573ba08e7d35fa",
+    "facts2": "c2573ba08e7d35fa",
+    "all": "c2573ba08e7d35fa"
+   },
+   "row_hash": "e78502f7aa28746d",
+   "carried": false,
+   "pass": 6
   },
   {
    "row": "C541",
@@ -553,23 +2182,59 @@
    "why": "no choice and no reaction line in P48; no +X printed",
    "cause": null,
    "note": false,
-   "screen_hash": "4f53cda18c2baa0c",
+   "screen_hash": "d4438ac582dc1f3f",
    "row_hash": "880eaf1315fbaa0b",
    "carried": true,
-   "pass": 1
+   "pass": 4
   },
   {
    "row": "C593",
    "screen": "*",
    "verdict": "N/A",
    "line": "",
-   "why": "no speech, so no term of address",
+   "why": "no speech on these fields, so no term of address",
    "cause": null,
    "note": false,
-   "screen_hash": "4f53cda18c2baa0c",
+   "screen_hash": "d4438ac582dc1f3f",
    "row_hash": "370371a278b9f182",
    "carried": true,
-   "pass": 1
+   "pass": 4
+  },
+  {
+   "row": "C593",
+   "screen": "npcs.npc_holt.feelings",
+   "verdict": "N/A",
+   "line": "friendship 50, lust 100, control 150, intimacy 0, people_type faculty, gender female, attracted True",
+   "why": "no term of address on the field; \"hon\" is in her scenes, not here",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "bc13dc2efc80419e",
+    "facts": "bc13dc2efc80419e",
+    "facts2": "bc13dc2efc80419e",
+    "all": "bc13dc2efc80419e"
+   },
+   "row_hash": "370371a278b9f182",
+   "carried": true,
+   "pass": 5
+  },
+  {
+   "row": "C593",
+   "screen": "npcs.npc_ryan.feelings",
+   "verdict": "N/A",
+   "line": "",
+   "why": "No speech on the field, so no term of address",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "c2573ba08e7d35fa",
+    "facts": "c2573ba08e7d35fa",
+    "facts2": "c2573ba08e7d35fa",
+    "all": "c2573ba08e7d35fa"
+   },
+   "row_hash": "370371a278b9f182",
+   "carried": false,
+   "pass": 6
   },
   {
    "row": "C596",
@@ -579,88 +2244,304 @@
    "why": "no talk screen is added or changed",
    "cause": null,
    "note": true,
-   "screen_hash": "4f53cda18c2baa0c",
+   "screen_hash": "d4438ac582dc1f3f",
    "row_hash": "e5f7e6cf2d01613d",
    "carried": true,
-   "pass": 1
+   "pass": 4
+  },
+  {
+   "row": "C596",
+   "screen": "npcs.npc_holt.feelings",
+   "verdict": "N/A",
+   "line": "friendship 50, lust 100, control 150, intimacy 0, people_type faculty, gender female, attracted True",
+   "why": "not a talk screen; a page field with no speech or picture",
+   "cause": null,
+   "note": true,
+   "screen_hash": {
+    "text": "bc13dc2efc80419e",
+    "facts": "bc13dc2efc80419e",
+    "facts2": "bc13dc2efc80419e",
+    "all": "bc13dc2efc80419e"
+   },
+   "row_hash": "e5f7e6cf2d01613d",
+   "carried": true,
+   "pass": 5
+  },
+  {
+   "row": "C596",
+   "screen": "npcs.npc_ryan.feelings",
+   "verdict": "N/A",
+   "line": "",
+   "why": "No talk screen is added or changed",
+   "cause": null,
+   "note": true,
+   "screen_hash": {
+    "text": "c2573ba08e7d35fa",
+    "facts": "c2573ba08e7d35fa",
+    "facts2": "c2573ba08e7d35fa",
+    "all": "c2573ba08e7d35fa"
+   },
+   "row_hash": "e5f7e6cf2d01613d",
+   "carried": false,
+   "pass": 6
   },
   {
    "row": "C625",
-   "screen": "people.view",
+   "screen": "*",
    "verdict": "PASS",
    "line": "Mom \u00b7 Your mom, 41.",
-   "why": "the People view lists met people only, role first then name",
+   "why": "the fields show only on a met person's People view, under the relation",
    "cause": null,
    "note": true,
-   "screen_hash": null,
+   "screen_hash": "d4438ac582dc1f3f",
    "row_hash": "dc9a1fd9dbf3fb87",
    "carried": true,
-   "pass": 1
+   "pass": 4
+  },
+  {
+   "row": "C625",
+   "screen": "npcs.npc_holt.feelings",
+   "verdict": "N/A",
+   "line": "friendship 50, lust 100, control 150, intimacy 0, people_type faculty, gender female, attracted True",
+   "why": "the field names no one; the People view lists her only once met",
+   "cause": null,
+   "note": true,
+   "screen_hash": {
+    "text": "bc13dc2efc80419e",
+    "facts": "bc13dc2efc80419e",
+    "facts2": "bc13dc2efc80419e",
+    "all": "bc13dc2efc80419e"
+   },
+   "row_hash": "dc9a1fd9dbf3fb87",
+   "carried": true,
+   "pass": 5
+  },
+  {
+   "row": "C625",
+   "screen": "npcs.npc_ryan.feelings",
+   "verdict": "PASS",
+   "line": "Step-brother \u00b7 Your step-brother, 22.",
+   "why": "The feelings show on his met People view, under the relation",
+   "cause": null,
+   "note": true,
+   "screen_hash": {
+    "text": "c2573ba08e7d35fa",
+    "facts": "c2573ba08e7d35fa",
+    "facts2": "c2573ba08e7d35fa",
+    "all": "c2573ba08e7d35fa"
+   },
+   "row_hash": "dc9a1fd9dbf3fb87",
+   "carried": false,
+   "pass": 6
   },
   {
    "row": "C626",
    "screen": "*",
    "verdict": "N/A",
    "line": "",
-   "why": "no description is swapped for a name in P48; the met-flag naming is P46's",
+   "why": "no description is swapped for a name on these fields; the met-flag naming is P46's",
    "cause": null,
    "note": true,
-   "screen_hash": "4f53cda18c2baa0c",
+   "screen_hash": "d4438ac582dc1f3f",
    "row_hash": "8e507f7b235acc25",
    "carried": true,
-   "pass": 1
+   "pass": 4
+  },
+  {
+   "row": "C626",
+   "screen": "npcs.npc_holt.feelings",
+   "verdict": "N/A",
+   "line": "friendship 50, lust 100, control 150, intimacy 0, people_type faculty, gender female, attracted True",
+   "why": "no description or name on the field to swap",
+   "cause": null,
+   "note": true,
+   "screen_hash": {
+    "text": "bc13dc2efc80419e",
+    "facts": "bc13dc2efc80419e",
+    "facts2": "bc13dc2efc80419e",
+    "all": "bc13dc2efc80419e"
+   },
+   "row_hash": "8e507f7b235acc25",
+   "carried": true,
+   "pass": 5
+  },
+  {
+   "row": "C626",
+   "screen": "npcs.npc_ryan.feelings",
+   "verdict": "N/A",
+   "line": "",
+   "why": "No description is swapped for a name on a feelings field",
+   "cause": null,
+   "note": true,
+   "screen_hash": {
+    "text": "c2573ba08e7d35fa",
+    "facts": "c2573ba08e7d35fa",
+    "facts2": "c2573ba08e7d35fa",
+    "all": "c2573ba08e7d35fa"
+   },
+   "row_hash": "8e507f7b235acc25",
+   "carried": false,
+   "pass": 6
   },
   {
    "row": "C630",
-   "screen": "people.view",
+   "screen": "*",
    "verdict": "PASS",
    "line": "Ryan | Step-brother \u00b7 Your step-brother, 22.",
-   "why": "all 24 views carry name and relation",
+   "why": "each view carrying the fields shows name and relation",
    "cause": null,
    "note": false,
-   "screen_hash": null,
+   "screen_hash": "d4438ac582dc1f3f",
    "row_hash": "5a85503d3ef5a0fb",
    "carried": true,
-   "pass": 1
+   "pass": 4
+  },
+  {
+   "row": "C630",
+   "screen": "npcs.npc_holt.feelings",
+   "verdict": "N/A",
+   "line": "friendship 50, lust 100, control 150, intimacy 0, people_type faculty, gender female, attracted True",
+   "why": "no name or relation on the field; those are in relationship/stranger_name",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "bc13dc2efc80419e",
+    "facts": "bc13dc2efc80419e",
+    "facts2": "bc13dc2efc80419e",
+    "all": "bc13dc2efc80419e"
+   },
+   "row_hash": "5a85503d3ef5a0fb",
+   "carried": true,
+   "pass": 5
+  },
+  {
+   "row": "C630",
+   "screen": "npcs.npc_ryan.feelings",
+   "verdict": "PASS",
+   "line": "Ryan | Step-brother",
+   "why": "The view carrying the field shows name and relation both",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "c2573ba08e7d35fa",
+    "facts": "c2573ba08e7d35fa",
+    "facts2": "c2573ba08e7d35fa",
+    "all": "c2573ba08e7d35fa"
+   },
+   "row_hash": "5a85503d3ef5a0fb",
+   "carried": false,
+   "pass": 6
   },
   {
    "row": "C632",
-   "screen": "people.view",
+   "screen": "*",
    "verdict": "PASS",
    "line": "Kayla | Brooke's sidekick",
    "why": "role labels say who each person is",
    "cause": null,
    "note": true,
-   "screen_hash": null,
+   "screen_hash": "d4438ac582dc1f3f",
    "row_hash": "146e6806c6c566e3",
    "carried": true,
-   "pass": 1
+   "pass": 4
+  },
+  {
+   "row": "C632",
+   "screen": "npcs.npc_holt.feelings",
+   "verdict": "N/A",
+   "line": "friendship 50, lust 100, control 150, intimacy 0, people_type faculty, gender female, attracted True",
+   "why": "no role label on the field; people_type is the engine's tab key, not a shown label",
+   "cause": null,
+   "note": true,
+   "screen_hash": {
+    "text": "bc13dc2efc80419e",
+    "facts": "bc13dc2efc80419e",
+    "facts2": "bc13dc2efc80419e",
+    "all": "bc13dc2efc80419e"
+   },
+   "row_hash": "146e6806c6c566e3",
+   "carried": true,
+   "pass": 5
+  },
+  {
+   "row": "C632",
+   "screen": "npcs.npc_ryan.feelings",
+   "verdict": "PASS",
+   "line": "Step-brother",
+   "why": "Role label says who he is, not his plot job",
+   "cause": null,
+   "note": true,
+   "screen_hash": {
+    "text": "c2573ba08e7d35fa",
+    "facts": "c2573ba08e7d35fa",
+    "facts2": "c2573ba08e7d35fa",
+    "all": "c2573ba08e7d35fa"
+   },
+   "row_hash": "146e6806c6c566e3",
+   "carried": false,
+   "pass": 6
   },
   {
    "row": "C644",
-   "screen": "people.view",
+   "screen": "*",
    "verdict": "PASS",
-   "line": "Cook / Gamer / Sporty / Wordsmith",
-   "why": "the traits give each person a corner of their own; none added beyond the scenes",
+   "line": "Cook / Gamer / Sporty / Wordsmith / Bragger",
+   "why": "the manner traits give each person their own corner, taken from their own scenes",
    "cause": null,
    "note": true,
-   "screen_hash": null,
+   "screen_hash": "d4438ac582dc1f3f",
    "row_hash": "f5e1d79f3251dbab",
    "carried": true,
-   "pass": 1
+   "pass": 4
+  },
+  {
+   "row": "C644",
+   "screen": "npcs.npc_holt.feelings",
+   "verdict": "N/A",
+   "line": "friendship 50, lust 100, control 150, intimacy 0, people_type faculty, gender female, attracted True",
+   "why": "no subject or offscreen people on a field of numbers",
+   "cause": null,
+   "note": true,
+   "screen_hash": {
+    "text": "bc13dc2efc80419e",
+    "facts": "bc13dc2efc80419e",
+    "facts2": "bc13dc2efc80419e",
+    "all": "bc13dc2efc80419e"
+   },
+   "row_hash": "f5e1d79f3251dbab",
+   "carried": true,
+   "pass": 5
+  },
+  {
+   "row": "C644",
+   "screen": "npcs.npc_ryan.feelings",
+   "verdict": "PASS",
+   "line": "Gamer",
+   "why": "His corner (the controller, the couch, his room) is unchanged by the lust value",
+   "cause": null,
+   "note": true,
+   "screen_hash": {
+    "text": "c2573ba08e7d35fa",
+    "facts": "c2573ba08e7d35fa",
+    "facts2": "c2573ba08e7d35fa",
+    "all": "c2573ba08e7d35fa"
+   },
+   "row_hash": "f5e1d79f3251dbab",
+   "carried": false,
+   "pass": 6
   },
   {
    "row": "C660",
-   "screen": "people.view",
+   "screen": "*",
    "verdict": "PASS",
    "line": "Dislike | Lust | Her Dominance",
-   "why": "CoT's words, the same across the cast: Friendship or Dislike, Lust, His/Her Dominance from control 100",
+   "why": "CoT's words, the same across the cast: Friendship or Dislike, Lust, His/Her Dominance from control 100; no Want/Warmth/Power left",
    "cause": null,
    "note": false,
-   "screen_hash": null,
+   "screen_hash": "d4438ac582dc1f3f",
    "row_hash": "eaf957bb84e62bbf",
    "carried": true,
-   "pass": 1
+   "pass": 4
   },
   {
    "row": "C961",
@@ -670,36 +2551,113 @@
    "why": "no no is written; nothing moves in release 1",
    "cause": null,
    "note": true,
-   "screen_hash": "4f53cda18c2baa0c",
+   "screen_hash": "d4438ac582dc1f3f",
    "row_hash": "b6cf8c9e8a8ef683",
    "carried": true,
-   "pass": 1
+   "pass": 4
   },
   {
    "row": "L106",
    "screen": "*",
    "verdict": "N/A",
    "line": "",
-   "why": "P48 adds no presence claim; the Schedule lines on the view are P46's",
+   "why": "the traits and feelings fields claim nobody is anywhere; the Schedule lines on the view are P46's",
    "cause": null,
    "note": false,
-   "screen_hash": "4f53cda18c2baa0c",
+   "screen_hash": "d4438ac582dc1f3f",
    "row_hash": "13a714429d15f3b2",
    "carried": true,
-   "pass": 1
+   "pass": 4
+  },
+  {
+   "row": "L106",
+   "screen": "npcs.npc_holt.feelings",
+   "verdict": "N/A",
+   "line": "friendship 50, lust 100, control 150, intimacy 0, people_type faculty, gender female, attracted True",
+   "why": "the field claims nobody is anywhere; no presence claim",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "bc13dc2efc80419e",
+    "facts": "bc13dc2efc80419e",
+    "facts2": "bc13dc2efc80419e",
+    "all": "bc13dc2efc80419e"
+   },
+   "row_hash": "13a714429d15f3b2",
+   "carried": true,
+   "pass": 5
+  },
+  {
+   "row": "L106",
+   "screen": "npcs.npc_ryan.feelings",
+   "verdict": "N/A",
+   "line": "",
+   "why": "A feelings field claims nobody is anywhere; the view's Schedule tip is P46's",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "c2573ba08e7d35fa",
+    "facts": "c2573ba08e7d35fa",
+    "facts2": "c2573ba08e7d35fa",
+    "all": "c2573ba08e7d35fa"
+   },
+   "row_hash": "13a714429d15f3b2",
+   "carried": false,
+   "pass": 6
   },
   {
    "row": "L116",
-   "screen": "sidebar.skills",
+   "screen": "sidebar.disinhibition",
    "verdict": "PASS",
    "line": "Needs Exhibitionism 6",
-   "why": "every lock names a skill and a level the sidebar shows; no stage word left (Good Girl .. On Display gone)",
+   "why": "every lock names a skill and a level the sidebar shows (Level N); no stage word left (Good Girl .. On Display gone; \"Noticed\" survives only as a Reputation band, P36)",
    "cause": null,
    "note": false,
-   "screen_hash": null,
+   "screen_hash": {
+    "text": "ac50b5d02b9cf256",
+    "facts": "ac50b5d02b9cf256",
+    "facts2": "ac50b5d02b9cf256",
+    "all": "ac50b5d02b9cf256"
+   },
    "row_hash": "f7a81c1d066ade25",
    "carried": true,
-   "pass": 1
+   "pass": 4
+  },
+  {
+   "row": "L116",
+   "screen": "sidebar.dominance",
+   "verdict": "PASS",
+   "line": "Needs Exhibitionism 6",
+   "why": "every lock names a skill and a level the sidebar shows (Level N); no stage word left (Good Girl .. On Display gone; \"Noticed\" survives only as a Reputation band, P36)",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "b889198ddfd820d9",
+    "facts": "b889198ddfd820d9",
+    "facts2": "b889198ddfd820d9",
+    "all": "b889198ddfd820d9"
+   },
+   "row_hash": "f7a81c1d066ade25",
+   "carried": true,
+   "pass": 4
+  },
+  {
+   "row": "L116",
+   "screen": "sidebar.submission",
+   "verdict": "PASS",
+   "line": "Needs Exhibitionism 6",
+   "why": "every lock names a skill and a level the sidebar shows (Level N); no stage word left (Good Girl .. On Display gone; \"Noticed\" survives only as a Reputation band, P36)",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "5e5beb86dfaf52eb",
+    "facts": "5e5beb86dfaf52eb",
+    "facts2": "5e5beb86dfaf52eb",
+    "all": "5e5beb86dfaf52eb"
+   },
+   "row_hash": "f7a81c1d066ade25",
+   "carried": true,
+   "pass": 4
   },
   {
    "row": "L70",
@@ -709,16 +2667,16 @@
    "why": "release 1 is frozen by LO (\"Meter frozen\", C2182, meters.md rule 11): no gate on any skill, so no first gain to open",
    "cause": null,
    "note": false,
-   "screen_hash": "4f53cda18c2baa0c",
+   "screen_hash": "d4438ac582dc1f3f",
    "row_hash": "32d431db08834e70",
    "carried": true,
-   "pass": 1
+   "pass": 4
   }
  ],
  "causes": [],
  "pending": [],
- "asked": 4,
- "answered": 4,
+ "asked": 19,
+ "answered": 19,
  "pass_items": [],
  "unowed": []
 }

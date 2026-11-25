@@ -4422,8 +4422,8 @@ name = "Sit by the window"
 blocks = [
   { type = "paragraph", content = "You take the table by the window and watch campus through the glass." },
   { type = "group", props = { conditions = { version = "1.0", logic = "AND", items = [{ type = "flag", subject = "player", flag_key = "met_chris", operator = "is_true" }, { type = "npc_at_location", npc_id = "npc_chris", location_id = "near_cafe", operator = "is_present" }] } }, blocks = [
-    { type = "paragraph", content = "Chris tops up your water without being asked, and looks a second too long." },
-    { type = "dialog", content = "On the house. Don't tell Tom. Stay as long as you like.", props = { speaker = "npc", npcId = "npc_chris" } },
+    { type = "paragraph", content = "Chris tops up your water without being asked, and looks a second too long, like he hates that he's looking." },
+    { type = "dialog", content = "Free water, new girl. Don't get used to it. You're already eating into my hours.", props = { speaker = "npc", npcId = "npc_chris" } },
   ] },
   { type = "group", props = { conditions = { version = "1.0", logic = "AND", items = [{ type = "flag", subject = "player", flag_key = "met_tom", operator = "is_true" }, { type = "npc_at_location", npc_id = "npc_tom", location_id = "near_cafe", operator = "is_present" }] } }, blocks = [
     { type = "paragraph", content = "Tom glances over from the till and lets you be." },

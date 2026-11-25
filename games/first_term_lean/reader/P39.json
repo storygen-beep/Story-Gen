@@ -1,6 +1,6 @@
 {
  "piece": "P39",
- "pass": 5,
+ "pass": 6,
  "screens": {
   "walk_park_couple.moment": {
    "text": "2c64cca5577cbac7",
@@ -202,7 +202,6 @@
   "C1277": "ee51917c5fb43c13",
   "C1238": "6fd430204e984124",
   "C1255": "803b4c46f1e9d7c7",
-  "C330": "923a40b5ad4048fd",
   "C519": "e78502f7aa28746d",
   "C311": "bad20c9f078e8b87",
   "C314": "0304731d263aed9f",
@@ -218,6 +217,8 @@
   "C640": "728d95d9964ccf25",
   "C644": "f5e1d79f3251dbab",
   "C596": "e5f7e6cf2d01613d",
+  "C2179": "47b9477e3ec8a790",
+  "C2183": "40172c2d376bfc32",
   "C1340": "b76a6583ae88c60f",
   "C769": "f6b6f78a8f2e5ed7",
   "C794": "bad76e5963432385",
@@ -2124,6 +2125,32 @@
    "row_hash": "d9199efed36f9625",
    "carried": true,
    "pass": 1
+  },
+  {
+   "row": "C2179",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "Vance (fuckbuddy): \"Evening, little lady.\"; Danny (fuckbuddy) to \"Ask what that was\": \"What was what, gorgeous?\"; Marco (indifferent): \"Your turn's coming, champ.\"; Nina (indifferent) to browse: \"Coward.\"",
+   "why": "each fits that person's one want; the strangers (park couple, curtain man) are not people with a want",
+   "cause": null,
+   "note": false,
+   "screen_hash": "48bc2ded07f552cb",
+   "row_hash": "47b9477e3ec8a790",
+   "carried": false,
+   "pass": 6
+  },
+  {
+   "row": "C2183",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "Vance Dominant/Forward; Danny Forward/Strictly Casual (\"Cash only.\"); Marco Dominant/Confident/Sporty (\"fixing\" her form at the squat rack); Nina Forward/Strictly Casual (\"Your turn next, sweetie.\")",
+   "why": "2-3 traits each, Forward or Sporty learnable and true here",
+   "cause": null,
+   "note": false,
+   "screen_hash": "48bc2ded07f552cb",
+   "row_hash": "40172c2d376bfc32",
+   "carried": false,
+   "pass": 6
   },
   {
    "row": "C286",
@@ -4182,7 +4209,7 @@
     "all": "db9750bdc09cd71a"
    },
    "row_hash": "0ded4fca6fc71925",
-   "carried": false,
+   "carried": true,
    "pass": 5
   },
   {
@@ -4857,7 +4884,7 @@
    "note": false,
    "screen_hash": "48bc2ded07f552cb",
    "row_hash": "c3599cd09637a240",
-   "carried": false,
+   "carried": true,
    "pass": 5
   },
   {

@@ -1,6 +1,6 @@
 {
  "piece": "P26",
- "pass": 4,
+ "pass": 5,
  "screens": {
   "mirror_meet_brooke.mirror": {
    "text": "c1e3f57c50f6d293",
@@ -108,6 +108,8 @@
   "C640": "728d95d9964ccf25",
   "C644": "f5e1d79f3251dbab",
   "C596": "e5f7e6cf2d01613d",
+  "C2179": "47b9477e3ec8a790",
+  "C2183": "40172c2d376bfc32",
   "C448": "b86596f1a02766de",
   "L168": "444c44970dc284f2",
   "L169": "59defccfc63b0454",
@@ -952,6 +954,32 @@
    "row_hash": "d1b589361cb96867",
    "carried": true,
    "pass": 1
+  },
+  {
+   "row": "C2179",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "Brooke (rival) to the comeback: \"Cute. Say that again when it's not just us.\"; Kayla (rival): \"Ooh.\"; Tess (rival): \"Tess snorts and goes back to Brooke's lashes.\"",
+   "why": "all three answer from the rival side",
+   "cause": null,
+   "note": false,
+   "screen_hash": "1e9737649686555a",
+   "row_hash": "47b9477e3ec8a790",
+   "carried": false,
+   "pass": 5
+  },
+  {
+   "row": "C2183",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "Brooke: Forward, Dominant, Bully (\"Nice outfit, princess.\"); Kayla: Submissive, Bully (\"Kayla laughs.\"); Tess: Submissive, Shy (\"Tess doesn't, but she doesn't stop her either.\")",
+   "why": "2-3 traits each, a learnable personality trait backed on screen; Tess's snort stays passive, not a contradiction of Shy",
+   "cause": null,
+   "note": false,
+   "screen_hash": "1e9737649686555a",
+   "row_hash": "40172c2d376bfc32",
+   "carried": false,
+   "pass": 5
   },
   {
    "row": "C422",
@@ -2198,7 +2226,7 @@
    "note": false,
    "screen_hash": "1e9737649686555a",
    "row_hash": "444c44970dc284f2",
-   "carried": false,
+   "carried": true,
    "pass": 4
   },
   {
@@ -2211,7 +2239,7 @@
    "note": false,
    "screen_hash": "1e9737649686555a",
    "row_hash": "59defccfc63b0454",
-   "carried": false,
+   "carried": true,
    "pass": 4
   },
   {
@@ -2224,14 +2252,14 @@
    "note": false,
    "screen_hash": "1e9737649686555a",
    "row_hash": "c3599cd09637a240",
-   "carried": false,
+   "carried": true,
    "pass": 4
   }
  ],
  "causes": [],
  "pending": [],
- "asked": 3,
- "answered": 3,
+ "asked": 2,
+ "answered": 2,
  "pass_items": [],
  "unowed": []
 }

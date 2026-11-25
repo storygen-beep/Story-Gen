@@ -1,6 +1,6 @@
 {
  "piece": "P22",
- "pass": 4,
+ "pass": 5,
  "screens": {
   "shop_meet_frank.meet": {
    "text": "91ac7305f8eebd82",
@@ -129,6 +129,8 @@
   "C640": "728d95d9964ccf25",
   "C644": "f5e1d79f3251dbab",
   "C596": "e5f7e6cf2d01613d",
+  "C2179": "47b9477e3ec8a790",
+  "C2183": "40172c2d376bfc32",
   "C448": "b86596f1a02766de",
   "L168": "444c44970dc284f2",
   "L169": "59defccfc63b0454",
@@ -1135,6 +1137,32 @@
    "row_hash": "d1b589361cb96867",
    "carried": true,
    "pass": 1
+  },
+  {
+   "row": "C2179",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "Frank (indifferent) to \"Say hi to him for me.\": \"Oh, I'll tell him you were in.\"; Danny (fuckbuddy) to silence: \"Quiet type. I like that.\" / \"I'm here every evening, gorgeous.\"",
+   "why": "Frank reports, no claim; Danny flirts easily, the fuckbuddy line",
+   "cause": null,
+   "note": false,
+   "screen_hash": "883d0f34c9e9c17b",
+   "row_hash": "47b9477e3ec8a790",
+   "carried": false,
+   "pass": 5
+  },
+  {
+   "row": "C2183",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "Frank: Dominant, Confident, Bragger (\"Small street. Everybody knows what everybody buys.\"); Danny: Forward, Strictly Casual (\"Hey, gorgeous... You grew up.\")",
+   "why": "3 and 2 traits; Bragger and Forward backed by these screens",
+   "cause": null,
+   "note": false,
+   "screen_hash": "883d0f34c9e9c17b",
+   "row_hash": "40172c2d376bfc32",
+   "carried": false,
+   "pass": 5
   },
   {
    "row": "C286",
@@ -2773,7 +2801,7 @@
    "note": false,
    "screen_hash": "883d0f34c9e9c17b",
    "row_hash": "444c44970dc284f2",
-   "carried": false,
+   "carried": true,
    "pass": 4
   },
   {
@@ -2786,7 +2814,7 @@
    "note": false,
    "screen_hash": "883d0f34c9e9c17b",
    "row_hash": "59defccfc63b0454",
-   "carried": false,
+   "carried": true,
    "pass": 4
   },
   {
@@ -2799,7 +2827,7 @@
    "note": false,
    "screen_hash": "883d0f34c9e9c17b",
    "row_hash": "c3599cd09637a240",
-   "carried": false,
+   "carried": true,
    "pass": 4
   },
   {
@@ -2818,8 +2846,8 @@
  ],
  "causes": [],
  "pending": [],
- "asked": 3,
- "answered": 3,
+ "asked": 2,
+ "answered": 2,
  "pass_items": [],
  "unowed": []
 }

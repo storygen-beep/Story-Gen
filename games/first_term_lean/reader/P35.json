@@ -1,6 +1,6 @@
 {
  "piece": "P35",
- "pass": 6,
+ "pass": 7,
  "screens": {
   "shop_meet_nina.meet": {
    "text": "ea4eb3bb92b30114",
@@ -105,7 +105,6 @@
   "C1277": "ee51917c5fb43c13",
   "C1238": "6fd430204e984124",
   "C1255": "803b4c46f1e9d7c7",
-  "C330": "923a40b5ad4048fd",
   "C519": "e78502f7aa28746d",
   "C1637": "72923a871f0435e6",
   "C311": "bad20c9f078e8b87",
@@ -124,6 +123,8 @@
   "C613": "6f777b1fcd750dd1",
   "C644": "f5e1d79f3251dbab",
   "C596": "e5f7e6cf2d01613d",
+  "C2179": "47b9477e3ec8a790",
+  "C2183": "40172c2d376bfc32",
   "C448": "b86596f1a02766de",
   "L168": "444c44970dc284f2",
   "L169": "59defccfc63b0454",
@@ -1396,6 +1397,32 @@
    "row_hash": "d1b589361cb96867",
    "carried": true,
    "pass": 1
+  },
+  {
+   "row": "C2179",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "Nina (indifferent) to \"Not a chance.\": \"Your loss, sweetie. Next time, then.\"; to \"Just looking.\": \"Everyone says that.\"",
+   "why": "a shop owner's tease, no claim: indifferent",
+   "cause": null,
+   "note": false,
+   "screen_hash": "8f3b8a1cfc9561b7",
+   "row_hash": "47b9477e3ec8a790",
+   "carried": false,
+   "pass": 7
+  },
+  {
+   "row": "C2183",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "Nina: Forward, Strictly Casual \u2014 \"Let me see. Come on, I won't tell.\"",
+   "why": "2 traits; Forward shown on this screen",
+   "cause": null,
+   "note": false,
+   "screen_hash": "8f3b8a1cfc9561b7",
+   "row_hash": "40172c2d376bfc32",
+   "carried": false,
+   "pass": 7
   },
   {
    "row": "C286",
@@ -2712,7 +2739,7 @@
    "note": false,
    "screen_hash": "8f3b8a1cfc9561b7",
    "row_hash": "444c44970dc284f2",
-   "carried": false,
+   "carried": true,
    "pass": 6
   },
   {
@@ -2725,7 +2752,7 @@
    "note": false,
    "screen_hash": "8f3b8a1cfc9561b7",
    "row_hash": "59defccfc63b0454",
-   "carried": false,
+   "carried": true,
    "pass": 6
   },
   {
@@ -2738,7 +2765,7 @@
    "note": false,
    "screen_hash": "8f3b8a1cfc9561b7",
    "row_hash": "c3599cd09637a240",
-   "carried": false,
+   "carried": true,
    "pass": 6
   },
   {
@@ -2761,8 +2788,8 @@
  ],
  "causes": [],
  "pending": [],
- "asked": 3,
- "answered": 3,
+ "asked": 2,
+ "answered": 2,
  "pass_items": [],
  "unowed": []
 }

@@ -50,11 +50,11 @@ Everyone is 18 or over, and the game says so.
 
 | person | who | age | what she wants from them | what they want, every visit | feelings at the start (P48) |
 |---|---|---|---|---|---|
-| Ryan | step-brother, main taboo | 22 | the one person at home on her side | at the start: nothing from her · where he ends up: her, and he stops hiding it | friendship 0 · lust 0 · control 0 |
+| Ryan | step-brother, main taboo | 22 | the one person at home on her side | at the start: nothing from her · where he ends up: her, and he stops hiding it | friendship 0 · lust 100 · control 0 |
 | Mark | step-father, the pressure | 46 | his approval, and to be off the hook | control, and her (turns sexual late) | 0 · 0 · 500 |
 | Laura | mom, climbs | 41 | to tell her everything, to be close | a happy house; wants her nearer than she says | 300 · 0 · 200 |
 | Zoe | college friend, companion one step ahead | 19 | someone to follow into fun | a partner in trouble | 250 · 0 · 100 |
-| Tom | café manager | 31 | shifts and good tips | her behind the counter, closing late | 50 · 0 · 500 |
+| Tom | café manager | 31 | shifts and good tips | her behind the counter, closing late | 50 · 100 · 500 |
 | Dr. Hale | professor | 39 | a passing grade | to see how far she'll go | 0 · 300 · 300 |
 | Mr. Vance | owns the house, next door | 54 | the rent to come in | her, a little more each time she passes his porch | 100 · 400 · 400 |
 | Jake | campus guy | 20 | a normal boyfriend | a girlfriend he can show off | 100 · 300 · 0 |
@@ -83,6 +83,9 @@ line behind each trait: `cards/P48.md`.
 
 Manner and hobby traits (Cook, Insecure, Gamer, Bully, Particular, Nerd, Wordsmith, Artistic, Bragger, Stoner, Sporty,
 Shy) are given only where a written scene shows them.
+Tuned after the readings (start values must agree with the scenes): Tom, Sam and Ryan start at lust 100, and Ms. Holt
+is attracted with lust 100, each for a look on screen (Ryan's eyes on her chest, his ears pink: he hides it, so "at the
+start: nothing from her" still holds). Mark stays at lust 0: his watching reads as control.
 
 Craft: C2177, C2178, C567, C584, C606, C608, C610, C618, C628, C631, C650, C651, C657
 Lessons: L93 (release 1 met all 10 people, 8 in week one), L115 (named before met)

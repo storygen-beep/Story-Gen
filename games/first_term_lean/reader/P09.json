@@ -1,6 +1,6 @@
 {
  "piece": "P09",
- "pass": 8,
+ "pass": 9,
  "screens": {
   "class_psych.class": {
    "text": "7dc50540207a762d",
@@ -50,7 +50,13 @@
    "facts2": "815b79e9e60fe573",
    "all": "cb6d7055586ca07b"
   },
-  "*": "25ea9c7b82a80239"
+  "sidebar.grades": {
+   "text": "ce9ea30bc0cdb549",
+   "facts": "ce9ea30bc0cdb549",
+   "facts2": "ce9ea30bc0cdb549",
+   "all": "ce9ea30bc0cdb549"
+  },
+  "*": "4030c893319058d5"
  },
  "rows": {
   "B1": "5276068df1ca6fa9",
@@ -99,16 +105,15 @@
   "C1200": "65e6616cd17c7eb3",
   "C1002": "657248766e62061f",
   "C1250": "fde578d75b0d3620",
-  "C295": "63160eb49f7bb566",
-  "C381": "bcb1cf8813579ab9",
-  "C188": "657a435e4ab2ba7f",
-  "C330": "923a40b5ad4048fd",
-  "C210": "0bae50d6c4d47f7c",
+  "C2181": "74c68b4029782b5f",
+  "C381": "c661ccd26aada1f2",
+  "C188": "3a9caf43a2f2b8fd",
+  "C210": "00496c4c3aec4580",
   "C338": "3ce0dbe053c4b2c9",
-  "C388": "1bc289f9a5b378d6",
+  "C388": "fbffa0dbed63968f",
   "C541": "880eaf1315fbaa0b",
-  "L70": "10d904cc9f93ccc8",
-  "L116": "7e4ac68d5328051e",
+  "L70": "32d431db08834e70",
+  "L116": "f7a81c1d066ade25",
   "C519": "e78502f7aa28746d",
   "C625": "dc9a1fd9dbf3fb87",
   "C626": "8e507f7b235acc25",
@@ -118,7 +123,10 @@
   "C961": "b6cf8c9e8a8ef683",
   "C644": "f5e1d79f3251dbab",
   "C596": "e5f7e6cf2d01613d",
-  "C660": "da4c173ea0935aca",
+  "C660": "eaf957bb84e62bbf",
+  "C2179": "47b9477e3ec8a790",
+  "C2180": "a6c0f498d4d16271",
+  "C2183": "40172c2d376bfc32",
   "C1340": "b76a6583ae88c60f",
   "C769": "f6b6f78a8f2e5ed7",
   "C794": "bad76e5963432385",
@@ -1044,39 +1052,163 @@
   },
   {
    "row": "C188",
+   "screen": "sidebar.grades",
+   "verdict": "N/A",
+   "line": "",
+   "why": "Grades is a college letter, not a skill with gates; no \"not yet\" talk applies",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "ce9ea30bc0cdb549",
+    "facts": "ce9ea30bc0cdb549",
+    "facts2": "ce9ea30bc0cdb549",
+    "all": "ce9ea30bc0cdb549"
+   },
+   "row_hash": "3a9caf43a2f2b8fd",
+   "carried": false,
+   "pass": 9
+  },
+  {
+   "row": "C188",
    "screen": "study_hall.study",
    "verdict": "N/A",
    "line": "",
-   "why": "no meter line",
-   "cause": "",
+   "why": "no skill gate on this screen",
+   "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "c1e166a2469a4da2",
-    "facts": "e55d2c2c4885f4a0",
-    "facts2": "e55d2c2c4885f4a0",
-    "all": "9f2c0299409edfd3"
+    "text": "3bdf5d62e23fc587",
+    "facts": "360934a7af72e6fd",
+    "facts2": "6460f3e4c78536c0",
+    "all": "2e507d8d99bf8962"
    },
-   "row_hash": "657a435e4ab2ba7f",
-   "carried": true,
-   "pass": 3
+   "row_hash": "3a9caf43a2f2b8fd",
+   "carried": false,
+   "pass": 9
+  },
+  {
+   "row": "C210",
+   "screen": "sidebar.grades",
+   "verdict": "N/A",
+   "line": "",
+   "why": "Grades is not a skill level, and nothing moves it in release 1, so no crossing exists",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "ce9ea30bc0cdb549",
+    "facts": "ce9ea30bc0cdb549",
+    "facts2": "ce9ea30bc0cdb549",
+    "all": "ce9ea30bc0cdb549"
+   },
+   "row_hash": "00496c4c3aec4580",
+   "carried": false,
+   "pass": 9
   },
   {
    "row": "C210",
    "screen": "study_hall.study",
    "verdict": "N/A",
    "line": "",
-   "why": "no stage crossed",
-   "cause": "",
+   "why": "no level crossed here",
+   "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "c1e166a2469a4da2",
-    "facts": "e55d2c2c4885f4a0",
-    "facts2": "e55d2c2c4885f4a0",
-    "all": "9f2c0299409edfd3"
+    "text": "3bdf5d62e23fc587",
+    "facts": "360934a7af72e6fd",
+    "facts2": "6460f3e4c78536c0",
+    "all": "2e507d8d99bf8962"
    },
-   "row_hash": "0bae50d6c4d47f7c",
-   "carried": true,
-   "pass": 3
+   "row_hash": "00496c4c3aec4580",
+   "carried": false,
+   "pass": 9
+  },
+  {
+   "row": "C2179",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "Eyes up here, young lady. You'll miss the good part.",
+   "why": "the reactions in P09 are the professors' (Hale, Pratt, Walsh, Cross) and an unnamed stranger; professors are fixed indifferent at intimacy 0, so one line each fits",
+   "cause": null,
+   "note": false,
+   "screen_hash": "4030c893319058d5",
+   "row_hash": "47b9477e3ec8a790",
+   "carried": false,
+   "pass": 9
+  },
+  {
+   "row": "C2180",
+   "screen": "*",
+   "verdict": "N/A",
+   "line": "",
+   "why": "no P09 choice moves a feeling; release 1 frozen",
+   "cause": null,
+   "note": false,
+   "screen_hash": "4030c893319058d5",
+   "row_hash": "a6c0f498d4d16271",
+   "carried": false,
+   "pass": 9
+  },
+  {
+   "row": "C2180",
+   "screen": "sidebar.grades",
+   "verdict": "N/A",
+   "line": "",
+   "why": "a sidebar line moves no feeling",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "ce9ea30bc0cdb549",
+    "facts": "ce9ea30bc0cdb549",
+    "facts2": "ce9ea30bc0cdb549",
+    "all": "ce9ea30bc0cdb549"
+   },
+   "row_hash": "a6c0f498d4d16271",
+   "carried": false,
+   "pass": 9
+  },
+  {
+   "row": "C2181",
+   "screen": "*",
+   "verdict": "N/A",
+   "line": "",
+   "why": "no P09 screen shows or pays a climb meter; energy costs and the study count are not skills, and no skill_gate exists",
+   "cause": null,
+   "note": false,
+   "screen_hash": "4030c893319058d5",
+   "row_hash": "74c68b4029782b5f",
+   "carried": false,
+   "pass": 9
+  },
+  {
+   "row": "C2181",
+   "screen": "sidebar.grades",
+   "verdict": "N/A",
+   "line": "",
+   "why": "Grades is a college letter, not a climb meter; the four skills are their own sidebar rows",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "ce9ea30bc0cdb549",
+    "facts": "ce9ea30bc0cdb549",
+    "facts2": "ce9ea30bc0cdb549",
+    "all": "ce9ea30bc0cdb549"
+   },
+   "row_hash": "74c68b4029782b5f",
+   "carried": false,
+   "pass": 9
+  },
+  {
+   "row": "C2183",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "Particular: \"You at the back, young lady. Either take notes or take a seat down here.\"",
+   "why": "Hale (Particular), Pratt (Nerd: \"fills three whiteboards\"), Walsh (Wordsmith), Cross (Artistic, Particular), Holt (Particular: \"Quiet floor's upstairs\") each have 3-4 traits with a personality-kind one backed by a line in the build",
+   "cause": null,
+   "note": false,
+   "screen_hash": "4030c893319058d5",
+   "row_hash": "40172c2d376bfc32",
+   "carried": false,
+   "pass": 9
   },
   {
    "row": "C295",
@@ -1116,6 +1248,24 @@
   },
   {
    "row": "C338",
+   "screen": "sidebar.grades",
+   "verdict": "N/A",
+   "line": "",
+   "why": "no accident or pay on a sidebar line",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "ce9ea30bc0cdb549",
+    "facts": "ce9ea30bc0cdb549",
+    "facts2": "ce9ea30bc0cdb549",
+    "all": "ce9ea30bc0cdb549"
+   },
+   "row_hash": "3ce0dbe053c4b2c9",
+   "carried": false,
+   "pass": 9
+  },
+  {
+   "row": "C338",
    "screen": "study_hall.study",
    "verdict": "N/A",
    "line": "",
@@ -1134,39 +1284,93 @@
   },
   {
    "row": "C381",
+   "screen": "sidebar.grades",
+   "verdict": "N/A",
+   "line": "",
+   "why": "no gate on a sidebar line",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "ce9ea30bc0cdb549",
+    "facts": "ce9ea30bc0cdb549",
+    "facts2": "ce9ea30bc0cdb549",
+    "all": "ce9ea30bc0cdb549"
+   },
+   "row_hash": "c661ccd26aada1f2",
+   "carried": false,
+   "pass": 9
+  },
+  {
+   "row": "C381",
    "screen": "study_hall.study",
    "verdict": "N/A",
    "line": "",
-   "why": "no meter rung",
-   "cause": "",
+   "why": "no skill gate; the count lock is not a level preview",
+   "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "c1e166a2469a4da2",
-    "facts": "e55d2c2c4885f4a0",
-    "facts2": "e55d2c2c4885f4a0",
-    "all": "9f2c0299409edfd3"
+    "text": "3bdf5d62e23fc587",
+    "facts": "360934a7af72e6fd",
+    "facts2": "6460f3e4c78536c0",
+    "all": "2e507d8d99bf8962"
    },
-   "row_hash": "bcb1cf8813579ab9",
-   "carried": true,
-   "pass": 3
+   "row_hash": "c661ccd26aada1f2",
+   "carried": false,
+   "pass": 9
+  },
+  {
+   "row": "C388",
+   "screen": "sidebar.grades",
+   "verdict": "N/A",
+   "line": "",
+   "why": "nothing locked",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "ce9ea30bc0cdb549",
+    "facts": "ce9ea30bc0cdb549",
+    "facts2": "ce9ea30bc0cdb549",
+    "all": "ce9ea30bc0cdb549"
+   },
+   "row_hash": "fbffa0dbed63968f",
+   "carried": false,
+   "pass": 9
   },
   {
    "row": "C388",
    "screen": "study_hall.study",
    "verdict": "PASS",
-   "line": "You find an empty row near the back, spread your notes along the seats and work through them until your neck aches. There's always more of it waiting.",
-   "why": "locked_text 'you can't take in another page today.'",
-   "cause": "",
+   "line": "Study in an empty row \u2014 you can't take in another page today.",
+   "why": "the count lock carries locked_text; the energy cost greys with the engine's cost",
+   "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "c1e166a2469a4da2",
-    "facts": "e55d2c2c4885f4a0",
-    "facts2": "e55d2c2c4885f4a0",
-    "all": "9f2c0299409edfd3"
+    "text": "3bdf5d62e23fc587",
+    "facts": "360934a7af72e6fd",
+    "facts2": "6460f3e4c78536c0",
+    "all": "2e507d8d99bf8962"
    },
-   "row_hash": "1bc289f9a5b378d6",
-   "carried": true,
-   "pass": 3
+   "row_hash": "fbffa0dbed63968f",
+   "carried": false,
+   "pass": 9
+  },
+  {
+   "row": "C422",
+   "screen": "sidebar.grades",
+   "verdict": "PASS",
+   "line": "Grades: C",
+   "why": "a plain label and a letter; it is a readout, not a button",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "ce9ea30bc0cdb549",
+    "facts": "ce9ea30bc0cdb549",
+    "facts2": "ce9ea30bc0cdb549",
+    "all": "ce9ea30bc0cdb549"
+   },
+   "row_hash": "7e128897077ecee6",
+   "carried": false,
+   "pass": 9
   },
   {
    "row": "C422",
@@ -1185,6 +1389,24 @@
    "row_hash": "7e128897077ecee6",
    "carried": true,
    "pass": 3
+  },
+  {
+   "row": "C442",
+   "screen": "sidebar.grades",
+   "verdict": "PASS",
+   "line": "Grades: C",
+   "why": "says the grade outright",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "ce9ea30bc0cdb549",
+    "facts": "ce9ea30bc0cdb549",
+    "facts2": "ce9ea30bc0cdb549",
+    "all": "ce9ea30bc0cdb549"
+   },
+   "row_hash": "59b8d8d24f0c7c38",
+   "carried": false,
+   "pass": 9
   },
   {
    "row": "C442",
@@ -1234,6 +1456,24 @@
    "row_hash": "b01ad555668aba2d",
    "carried": true,
    "pass": 3
+  },
+  {
+   "row": "C451",
+   "screen": "sidebar.grades",
+   "verdict": "PASS",
+   "line": "Grades: C",
+   "why": "a concrete letter by fixed bands (F/D/C/B/A)",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "ce9ea30bc0cdb549",
+    "facts": "ce9ea30bc0cdb549",
+    "facts2": "ce9ea30bc0cdb549",
+    "all": "ce9ea30bc0cdb549"
+   },
+   "row_hash": "50dbf74577a813c7",
+   "carried": false,
+   "pass": 9
   },
   {
    "row": "C451",
@@ -1288,6 +1528,24 @@
    "row_hash": "67e48e60d5053a2e",
    "carried": true,
    "pass": 4
+  },
+  {
+   "row": "C460",
+   "screen": "sidebar.grades",
+   "verdict": "PASS",
+   "line": "Grades: C",
+   "why": "grades starts at 50 for every start and no effect moves it (no grades effect in the build), so it reads C on every playthrough; PLAN \u00a78f",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "ce9ea30bc0cdb549",
+    "facts": "ce9ea30bc0cdb549",
+    "facts2": "ce9ea30bc0cdb549",
+    "all": "ce9ea30bc0cdb549"
+   },
+   "row_hash": "67e48e60d5053a2e",
+   "carried": false,
+   "pass": 9
   },
   {
    "row": "C460",
@@ -1363,6 +1621,24 @@
   },
   {
    "row": "C461",
+   "screen": "sidebar.grades",
+   "verdict": "PASS",
+   "line": "Grades: C",
+   "why": "a game readout, no claim outside it",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "ce9ea30bc0cdb549",
+    "facts": "ce9ea30bc0cdb549",
+    "facts2": "ce9ea30bc0cdb549",
+    "all": "ce9ea30bc0cdb549"
+   },
+   "row_hash": "310706ee076318f2",
+   "carried": false,
+   "pass": 9
+  },
+  {
+   "row": "C461",
    "screen": "stage_practise.practise",
    "verdict": "PASS",
    "line": "louder than you'd ever dare with anyone there",
@@ -1399,6 +1675,24 @@
   },
   {
    "row": "C519",
+   "screen": "sidebar.grades",
+   "verdict": "PASS",
+   "line": "Grades: C",
+   "why": "one job, two words",
+   "cause": null,
+   "note": true,
+   "screen_hash": {
+    "text": "ce9ea30bc0cdb549",
+    "facts": "ce9ea30bc0cdb549",
+    "facts2": "ce9ea30bc0cdb549",
+    "all": "ce9ea30bc0cdb549"
+   },
+   "row_hash": "e78502f7aa28746d",
+   "carried": false,
+   "pass": 9
+  },
+  {
+   "row": "C519",
    "screen": "study_hall.study",
    "verdict": "PASS",
    "line": "You find an empty row near the back, spread your notes along the seats and work through them until your neck aches. There's always more of it waiting.",
@@ -1414,6 +1708,24 @@
    "row_hash": "e78502f7aa28746d",
    "carried": true,
    "pass": 3
+  },
+  {
+   "row": "C541",
+   "screen": "sidebar.grades",
+   "verdict": "PASS",
+   "line": "Grades: C",
+   "why": "shown stat; nothing prints a +X for it",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "ce9ea30bc0cdb549",
+    "facts": "ce9ea30bc0cdb549",
+    "facts2": "ce9ea30bc0cdb549",
+    "all": "ce9ea30bc0cdb549"
+   },
+   "row_hash": "880eaf1315fbaa0b",
+   "carried": false,
+   "pass": 9
   },
   {
    "row": "C541",
@@ -1544,21 +1856,39 @@
   },
   {
    "row": "C660",
+   "screen": "sidebar.grades",
+   "verdict": "N/A",
+   "line": "",
+   "why": "not a person's People view",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "ce9ea30bc0cdb549",
+    "facts": "ce9ea30bc0cdb549",
+    "facts2": "ce9ea30bc0cdb549",
+    "all": "ce9ea30bc0cdb549"
+   },
+   "row_hash": "eaf957bb84e62bbf",
+   "carried": false,
+   "pass": 9
+  },
+  {
+   "row": "C660",
    "screen": "study_hall.study",
    "verdict": "N/A",
    "line": "",
-   "why": "no person's meter",
-   "cause": "",
+   "why": "no People view field on this screen",
+   "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "c1e166a2469a4da2",
-    "facts": "e55d2c2c4885f4a0",
-    "facts2": "e55d2c2c4885f4a0",
-    "all": "9f2c0299409edfd3"
+    "text": "3bdf5d62e23fc587",
+    "facts": "360934a7af72e6fd",
+    "facts2": "6460f3e4c78536c0",
+    "all": "2e507d8d99bf8962"
    },
-   "row_hash": "da4c173ea0935aca",
-   "carried": true,
-   "pass": 3
+   "row_hash": "eaf957bb84e62bbf",
+   "carried": false,
+   "pass": 9
   },
   {
    "row": "C758",
@@ -3146,6 +3476,24 @@
   },
   {
    "row": "C961",
+   "screen": "sidebar.grades",
+   "verdict": "N/A",
+   "line": "",
+   "why": "no no here",
+   "cause": null,
+   "note": true,
+   "screen_hash": {
+    "text": "ce9ea30bc0cdb549",
+    "facts": "ce9ea30bc0cdb549",
+    "facts2": "ce9ea30bc0cdb549",
+    "all": "ce9ea30bc0cdb549"
+   },
+   "row_hash": "b6cf8c9e8a8ef683",
+   "carried": false,
+   "pass": 9
+  },
+  {
+   "row": "C961",
    "screen": "study_hall.study",
    "verdict": "N/A",
    "line": "",
@@ -3236,21 +3584,39 @@
   },
   {
    "row": "L116",
+   "screen": "sidebar.grades",
+   "verdict": "N/A",
+   "line": "",
+   "why": "no lock",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "ce9ea30bc0cdb549",
+    "facts": "ce9ea30bc0cdb549",
+    "facts2": "ce9ea30bc0cdb549",
+    "all": "ce9ea30bc0cdb549"
+   },
+   "row_hash": "f7a81c1d066ade25",
+   "carried": false,
+   "pass": 9
+  },
+  {
+   "row": "L116",
    "screen": "study_hall.study",
    "verdict": "N/A",
    "line": "",
-   "why": "no meter lock; the count lock is a story lock with locked_text",
-   "cause": "",
+   "why": "no skill lock; the count lock says why in plain words, no stage word",
+   "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "c1e166a2469a4da2",
-    "facts": "e55d2c2c4885f4a0",
-    "facts2": "e55d2c2c4885f4a0",
-    "all": "9f2c0299409edfd3"
+    "text": "3bdf5d62e23fc587",
+    "facts": "360934a7af72e6fd",
+    "facts2": "6460f3e4c78536c0",
+    "all": "2e507d8d99bf8962"
    },
-   "row_hash": "7e4ac68d5328051e",
-   "carried": true,
-   "pass": 3
+   "row_hash": "f7a81c1d066ade25",
+   "carried": false,
+   "pass": 9
   },
   {
    "row": "L166",
@@ -3352,32 +3718,50 @@
    "note": false,
    "screen_hash": "25ea9c7b82a80239",
    "row_hash": "c3599cd09637a240",
-   "carried": false,
+   "carried": true,
    "pass": 8
+  },
+  {
+   "row": "L70",
+   "screen": "sidebar.grades",
+   "verdict": "N/A",
+   "line": "",
+   "why": "Grades is not a skill; release 1 pays nothing",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "ce9ea30bc0cdb549",
+    "facts": "ce9ea30bc0cdb549",
+    "facts2": "ce9ea30bc0cdb549",
+    "all": "ce9ea30bc0cdb549"
+   },
+   "row_hash": "32d431db08834e70",
+   "carried": false,
+   "pass": 9
   },
   {
    "row": "L70",
    "screen": "study_hall.study",
    "verdict": "N/A",
    "line": "",
-   "why": "pays no climb meter",
-   "cause": "",
+   "why": "pays no skill",
+   "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "c1e166a2469a4da2",
-    "facts": "e55d2c2c4885f4a0",
-    "facts2": "e55d2c2c4885f4a0",
-    "all": "9f2c0299409edfd3"
+    "text": "3bdf5d62e23fc587",
+    "facts": "360934a7af72e6fd",
+    "facts2": "6460f3e4c78536c0",
+    "all": "2e507d8d99bf8962"
    },
-   "row_hash": "10d904cc9f93ccc8",
-   "carried": true,
-   "pass": 3
+   "row_hash": "32d431db08834e70",
+   "carried": false,
+   "pass": 9
   }
  ],
  "causes": [],
  "pending": [],
- "asked": 1,
- "answered": 1,
+ "asked": 29,
+ "answered": 29,
  "pass_items": [],
  "unowed": []
 }

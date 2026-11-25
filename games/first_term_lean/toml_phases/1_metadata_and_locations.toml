@@ -478,7 +478,7 @@ gender = "male"
 attracted = true
 age = 22
 traits = ["Submissive", "Switch", "Gamer"]
-core_traits = { friendship = 0, lust = 0, control = 0 }
+core_traits = { friendship = 0, lust = 100, control = 0 }
 
 # His whole week, from PLAN §9a. Weekdays 12–6 at the repair shop: no row.
 [[npcs.schedules]]
@@ -1303,11 +1303,11 @@ description = "Librarian, 31."
 # P48 — CoT's people system (cards/P48.md): type, feelings on -1000..1000, fixed traits.
 people_type = "faculty"
 gender = "female"
-attracted = false
+attracted = true
 age = 31
 professor = true
 traits = ["Switch", "Confident", "Particular"]
-core_traits = { friendship = 50, lust = 0, control = 150, intimacy = 0 }
+core_traits = { friendship = 50, lust = 100, control = 150, intimacy = 0 }
 
 [[npcs.schedules]]
 location = "campus_library"

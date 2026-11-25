@@ -1,6 +1,6 @@
 {
  "piece": "P10",
- "pass": 11,
+ "pass": 12,
  "screens": {
   "cafe_work_hour.work": {
    "text": "66a5f5a25c0ef79e",
@@ -79,7 +79,6 @@
   "C289": "3952eba1e2267f12",
   "C297": "b920ef848ab61988",
   "C1250": "fde578d75b0d3620",
-  "C330": "923a40b5ad4048fd",
   "C519": "e78502f7aa28746d",
   "C311": "bad20c9f078e8b87",
   "C314": "0304731d263aed9f",
@@ -93,6 +92,8 @@
   "C613": "6f777b1fcd750dd1",
   "C644": "f5e1d79f3251dbab",
   "C596": "e5f7e6cf2d01613d",
+  "C2179": "47b9477e3ec8a790",
+  "C2183": "40172c2d376bfc32",
   "C1340": "b76a6583ae88c60f",
   "C769": "f6b6f78a8f2e5ed7",
   "C794": "bad76e5963432385",
@@ -933,6 +934,32 @@
    "row_hash": "d5758757a709b1af",
    "carried": true,
    "pass": 9
+  },
+  {
+   "row": "C2179",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "Chris (hatefuck): \"Slow day, new girl. Entertain me. Go on, I'm bored.\" / \"Not a chance.\" / \"He grins and doesn't move.\"; Tom (indifferent): \"Five, rookie. Not bad. Come back when you want more.\"",
+   "why": "Chris answers her no with a leer and no warmth (hatefuck); Tom pays and moves on as a boss (indifferent)",
+   "cause": null,
+   "note": false,
+   "screen_hash": "008406a21b5180e7",
+   "row_hash": "47b9477e3ec8a790",
+   "carried": false,
+   "pass": 12
+  },
+  {
+   "row": "C2183",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "Tom: Forward, Confident (\"Come back when you want more.\"); Chris: Forward, Dominant (\"Entertain me. Go on, I'm bored.\")",
+   "why": "two traits each, Forward learnable and shown by their lines; nothing on these screens contradicts it",
+   "cause": null,
+   "note": false,
+   "screen_hash": "008406a21b5180e7",
+   "row_hash": "40172c2d376bfc32",
+   "carried": false,
+   "pass": 12
   },
   {
    "row": "C286",
@@ -1930,7 +1957,7 @@
     "all": "5084e0ccc55d5ee0"
    },
    "row_hash": "0ded4fca6fc71925",
-   "carried": false,
+   "carried": true,
    "pass": 11
   },
   {
@@ -1948,7 +1975,7 @@
     "all": "ee058de233e5e74a"
    },
    "row_hash": "0ded4fca6fc71925",
-   "carried": false,
+   "carried": true,
    "pass": 11
   },
   {
@@ -2086,7 +2113,7 @@
    "note": false,
    "screen_hash": "008406a21b5180e7",
    "row_hash": "c3599cd09637a240",
-   "carried": false,
+   "carried": true,
    "pass": 11
   },
   {
@@ -2105,8 +2132,8 @@
  ],
  "causes": [],
  "pending": [],
- "asked": 3,
- "answered": 3,
+ "asked": 2,
+ "answered": 2,
  "pass_items": [],
  "unowed": []
 }
