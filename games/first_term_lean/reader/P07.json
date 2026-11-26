@@ -1,6 +1,6 @@
 {
  "piece": "P07",
- "pass": 13,
+ "pass": 19,
  "screens": {
   "opening.wake": {
    "text": "cc3c063d9cef0f23",
@@ -87,11 +87,11 @@
    "all": "47e327c8143e37a1"
   },
   "opening.sums": {
-   "text": "48aa23cc99bd631e",
+   "text": "e01b11164a4a03ec",
    "traits": "a13af4c65af9f24a",
    "facts": "6df3738c1a935470",
    "facts2": "a7c255ea1260b6e0",
-   "all": "4bf666fd25600983"
+   "all": "569699eca8d45913"
   },
   "opening.handover": {
    "text": "1d46c3684cfbd5e4",
@@ -177,7 +177,7 @@
    "facts2": "b574bdfe31b183e7",
    "all": "b9cacebfdba34bb4"
   },
-  "*": "90e648c7942cd765"
+  "*": "1cd3b560243bdeb3"
  },
  "rows": {
   "B1": "5276068df1ca6fa9",
@@ -233,8 +233,8 @@
   "C928": "799e1dd153166b6d",
   "C931": "1b8984f52b99537e",
   "C890": "3d716de4269fbd6c",
-  "clock#1": "b093ed58ec403b3c",
-  "clock#2": "e393ecafc7ab9a6c",
+  "clock#1": "df2ea5f83738c062",
+  "clock#2": "77b3fafe9c2bf20c",
   "clock#3": "aae8f146c8ec933d",
   "clock#4": "c33118361d16b379",
   "clock#5": "95c5edec9e714e7b",
@@ -242,7 +242,7 @@
   "clock#7": "313c48a91780f62b",
   "clock#8": "f0c2400d02519978",
   "clock#9": "5d697f6bcd9f82de",
-  "clock#10": "2ad5e473e29b231d",
+  "clock#10": "5a788439a11d7765",
   "C1206": "6b4e6ea1fe51ab17",
   "C1166": "c5509dae0642ac9f",
   "C1167": "6fbed55f60b39ebd",
@@ -269,7 +269,7 @@
   "clothes#3": "afe7079cb8699d23",
   "clothes#4": "7c2dc2ddee173de4",
   "clothes#5": "58e88b96e1566182",
-  "clothes#6": "a704975690f5df41",
+  "clothes#6": "2564b4ed16e2c7f7",
   "clothes#7": "bb14def6ad6b8f84",
   "clothes#8": "e75be85fc8419181",
   "clothes#9": "fa33eaefa120f48c",
@@ -304,7 +304,7 @@
   "C1267": "6bafcadf3d586d5a",
   "C1249": "604706399d2f1194",
   "C1250": "8384cc6bcbd67c07",
-  "C1265": "00b79725344762be",
+  "C1265": "fe36d5bbc01da9a6",
   "C1234": "7dc492e03732757e",
   "L121": "cddfa55c18e5c7b7",
   "L125": "259dda0a0553e751",
@@ -317,7 +317,7 @@
   "C1255": "d81893b9077b4b53",
   "L97": "2bfb9527e76ad93b",
   "media#1": "3641bf707d9adfce",
-  "media#2": "01ba7fa1cec4bc7a",
+  "media#2": "69a8103be1e1032a",
   "media#3": "8c75b0d488b188e2",
   "media#4": "03599fc0722690b6",
   "media#5": "2cf5e3607ccecd4a",
@@ -379,7 +379,7 @@
   "L169": "7472e43cdaec19b9",
   "C2175": "72e884ab3b53f126",
   "C1340": "a335a4d228798817",
-  "C2197": "b681e73e13919ee2",
+  "C2197": "a650718d44343cef",
   "C2198": "be119a385da08978",
   "people#1": "3ca322fe98f5dab6",
   "people#2": "77207820edd1c3a4",
@@ -425,7 +425,7 @@
   "places#7": "2a095bf54f175e5e",
   "places#8": "c3ea8d01465e7298",
   "places#9": "f4cd9ab5f62bc6fc",
-  "places#10": "309f0141d342dc6f",
+  "places#10": "d6f0b4b357efc043",
   "C442": "a2b07f40e1a9e908",
   "C449": "ac5932d70cd775a1",
   "C451": "6b0fd679047fc9b8",
@@ -438,7 +438,7 @@
   "voice#2": "a40d4073409a2705",
   "voice#3": "4777d2c1251214c2",
   "voice#4": "ac2fdd7245f436db",
-  "voice#5": "7bbdd4290054e601",
+  "voice#5": "f74d350a978e124c",
   "voice#6": "df1f5dc8b6d21538",
   "voice#7": "321cc76cff93aadb",
   "voice#8": "4362249fb5f9616e"
@@ -785,19 +785,20 @@
    "row": "B10",
    "screen": "opening.sums",
    "verdict": "PASS",
-   "line": "The manager's in Monday to Saturday, from 10am.",
-   "why": "Tom's rows: Mon\u2013Sat 10\u201321 at the caf\u00e9; $75 by Sunday agrees with PLAN \u00a72; Mark collects Sunday at the kitchen table (his Sunday kitchen rows)",
+   "line": "Seventy-five by Sunday. You have nothing. / \u279c Ask about the Help Wanted sign at the caf\u00e9 across from campus. The manager's in Monday to Saturday, from 10am. / \u279c Pay Mark on Sunday morning, at the kitchen table.",
+   "why": "the opening plays once from Monday 07:00 ($0) and every path passes kitchen_rent, where Mark names the $75 and 'One way or another', so '\u2705 Mark told you the rent' and the quoted line are behind what she saw; Tom's rows Mon-Sat 10-21 at near_cafe; Mark in the kitchen Sunday 08-12 and the rent window 08:00-11:55 make 'Sunday morning, at the kitchen table' true; the four-Sundays line is gone, agreeing with P66",
    "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "48aa23cc99bd631e",
+    "text": "e01b11164a4a03ec",
+    "traits": "a13af4c65af9f24a",
     "facts": "6df3738c1a935470",
     "facts2": "a7c255ea1260b6e0",
-    "all": "4bf666fd25600983"
+    "all": "569699eca8d45913"
    },
    "row_hash": "c1c0e2ac2588a579",
    "carried": true,
-   "pass": 5
+   "pass": 18
   },
   {
    "row": "B10",
@@ -1411,19 +1412,20 @@
    "row": "B8",
    "screen": "opening.sums",
    "verdict": "PASS",
-   "line": "The manager's in Monday to Saturday, from 10am.",
-   "why": "no garment named; numbers agree with PLAN ($75, Sunday)",
+   "line": "Pay your way. Pay Mark your share on Sunday. / Seventy-five by Sunday.",
+   "why": "$75 weekly on Sunday agrees with PLAN.md:332 and \u00a78i's cut (goal 1 ends at the first payment); no garment named",
    "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "48aa23cc99bd631e",
+    "text": "e01b11164a4a03ec",
+    "traits": "a13af4c65af9f24a",
     "facts": "6df3738c1a935470",
     "facts2": "a7c255ea1260b6e0",
-    "all": "4bf666fd25600983"
+    "all": "569699eca8d45913"
    },
    "row_hash": "80d415cf08e0ebfe",
    "carried": true,
-   "pass": 5
+   "pass": 18
   },
   {
    "row": "B8",
@@ -1913,19 +1915,20 @@
    "row": "C1158",
    "screen": "opening.sums",
    "verdict": "N/A",
-   "line": "The manager's in Monday to Saturday, from 10am.",
-   "why": "no garment named",
+   "line": "Hair still wet, you sit down and do the sums.",
+   "why": "no garment named on this screen",
    "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "48aa23cc99bd631e",
+    "text": "e01b11164a4a03ec",
+    "traits": "a13af4c65af9f24a",
     "facts": "6df3738c1a935470",
     "facts2": "a7c255ea1260b6e0",
-    "all": "4bf666fd25600983"
+    "all": "569699eca8d45913"
    },
    "row_hash": "212d17eda04f2799",
    "carried": true,
-   "pass": 5
+   "pass": 18
   },
   {
    "row": "C1158",
@@ -2972,19 +2975,20 @@
    "row": "C1206",
    "screen": "opening.sums",
    "verdict": "N/A",
-   "line": "The manager's in Monday to Saturday, from 10am.",
-   "why": "no garment named",
+   "line": "Hair still wet, you sit down and do the sums.",
+   "why": "no garment named on this screen",
    "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "48aa23cc99bd631e",
+    "text": "e01b11164a4a03ec",
+    "traits": "a13af4c65af9f24a",
     "facts": "6df3738c1a935470",
     "facts2": "a7c255ea1260b6e0",
-    "all": "4bf666fd25600983"
+    "all": "569699eca8d45913"
    },
    "row_hash": "6b4e6ea1fe51ab17",
    "carried": true,
-   "pass": 5
+   "pass": 18
   },
   {
    "row": "C1206",
@@ -3318,50 +3322,52 @@
    "row": "C1265",
    "screen": "*",
    "verdict": "PASS",
-   "line": "",
-   "why": "a solo chore with no spot, as the row asks",
+   "line": "talk_mom.hub <<everyday/mom_kitchen_t0>>; borrow/return screens no media",
+   "why": "Mom's picture is on her menu (the C596 exception C1265 points to); the borrow and return chores have none; opening pictures are body moments",
    "cause": null,
    "note": false,
-   "screen_hash": "219040e682a0b26e",
-   "row_hash": "00b79725344762be",
+   "screen_hash": "1cd3b560243bdeb3",
+   "row_hash": "fe36d5bbc01da9a6",
    "carried": true,
-   "pass": 4
+   "pass": 19
   },
   {
    "row": "C1265",
    "screen": "borrow_hoodie.take",
    "verdict": "PASS",
-   "line": "You take the grey one. It smells like him. You wonder if he'll notice it's gone.",
-   "why": "a solo room-row chore; it has no media spot, as the row asks",
+   "line": "\"You take the grey one. It smells like him.\"",
+   "why": "a chore alone, one line, and it carries no spot",
    "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "69204da2f0de8ef0",
+    "text": "30c1f96b2a025bc3",
+    "traits": "44136fa355b3678a",
     "facts": "77447b04892972f0",
     "facts2": "77447b04892972f0",
-    "all": "ce3c3ead1ffe15f5"
+    "all": "55c8ae3da3cebd49"
    },
-   "row_hash": "00b79725344762be",
+   "row_hash": "fe36d5bbc01da9a6",
    "carried": true,
-   "pass": 4
+   "pass": 19
   },
   {
    "row": "C1265",
    "screen": "mom_living_room.talk",
    "verdict": "PASS",
-   "line": "Sit with me a minute, baby.",
-   "why": "her one picture sits on the hub (her menu, after the presence line); the talk screen under it has no media block",
+   "line": "\"Sit with me a minute, baby.\"",
+   "why": "the talk screen has no picture; her one picture sits on the hub menu, as C1265 and C596 say",
    "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "bea6a579cecdd65d",
-    "facts": "9ef876d314bb2bbd",
-    "facts2": "d23eeb020c2b3c7d",
-    "all": "62c2bd623396940b"
+    "text": "eb78fbf9c5206259",
+    "traits": "4b9cc244e3119951",
+    "facts": "6bc79094f8d39647",
+    "facts2": "04bf141c5cb5340b",
+    "all": "13a427d6071bc370"
    },
-   "row_hash": "00b79725344762be",
+   "row_hash": "fe36d5bbc01da9a6",
    "carried": true,
-   "pass": 4
+   "pass": 19
   },
   {
    "row": "C1267",
@@ -3912,19 +3918,20 @@
    "row": "C1631",
    "screen": "opening.sums",
    "verdict": "N/A",
-   "line": "The manager's in Monday to Saturday, from 10am.",
-   "why": "not the hand-over",
+   "line": "Go down to the kitchen",
+   "why": "not the hand-over; the hand-over is the next node, handover",
    "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "48aa23cc99bd631e",
+    "text": "e01b11164a4a03ec",
+    "traits": "a13af4c65af9f24a",
     "facts": "6df3738c1a935470",
     "facts2": "a7c255ea1260b6e0",
-    "all": "4bf666fd25600983"
+    "all": "569699eca8d45913"
    },
    "row_hash": "45d1f77e233e111c",
    "carried": true,
-   "pass": 5
+   "pass": 18
   },
   {
    "row": "C1631",
@@ -4168,14 +4175,14 @@
    "row": "C2197",
    "screen": "*",
    "verdict": "PASS",
-   "line": "talk_mom, mom_living_room behind met_laura; mark_kitchen, mark_living_room; ryan_room, ryan_kitchen, ryan_living_room",
-   "why": "the family has a menu in each room their rows put them awake (kitchen, living room, Ryan's room); none in the bathroom, hall or asleep",
+   "line": "talk_mom, mom_living_room (Laura); mark_kitchen, mark_living_room (Mark); ryan_room, ryan_kitchen, ryan_living_room (Ryan)",
+   "why": "each person on P07's screens has a menu with Talk, behind their met flag, at every room their rows put them awake where talking fits; Ryan's room after 23:00 is shut for the night by P34's card and the hall is routes only (PLAN.md:191, 'the hall | none: everyone passes'); people.py problems() returns none",
    "cause": null,
    "note": false,
-   "screen_hash": "90e648c7942cd765",
-   "row_hash": "b681e73e13919ee2",
+   "screen_hash": "1cd3b560243bdeb3",
+   "row_hash": "a650718d44343cef",
    "carried": true,
-   "pass": 11
+   "pass": 18
   },
   {
    "row": "C2198",
@@ -4917,19 +4924,20 @@
    "row": "C460",
    "screen": "opening.sums",
    "verdict": "PASS",
-   "line": "The manager's in Monday to Saturday, from 10am.",
-   "why": "Tom's rows: Mon\u2013Sat 10\u201321 at the caf\u00e9; $75 by Sunday agrees with PLAN \u00a72; Mark collects Sunday at the kitchen table (his Sunday kitchen rows)",
+   "line": "Seventy-five by Sunday. You have nothing. / \u279c Ask about the Help Wanted sign at the caf\u00e9 across from campus. The manager's in Monday to Saturday, from 10am. / \u279c Pay Mark on Sunday morning, at the kitchen table.",
+   "why": "every claim is true on the one playthrough shape that reaches it; see B10",
    "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "48aa23cc99bd631e",
+    "text": "e01b11164a4a03ec",
+    "traits": "a13af4c65af9f24a",
     "facts": "6df3738c1a935470",
     "facts2": "a7c255ea1260b6e0",
-    "all": "4bf666fd25600983"
+    "all": "569699eca8d45913"
    },
    "row_hash": "beb5a109bde77305",
    "carried": true,
-   "pass": 5
+   "pass": 18
   },
   {
    "row": "C460",
@@ -5380,19 +5388,20 @@
    "row": "C461",
    "screen": "opening.sums",
    "verdict": "PASS",
-   "line": "The manager's in Monday to Saturday, from 10am.",
-   "why": "dialogue fits each person's PLAN entry (Mark the pressure, Mom close, Ryan on her side)",
+   "line": "And Mark said \"one way or another\" like he'd already picked one.",
+   "why": "her opinion of a line she heard on kitchen_rent; texture that can't clash",
    "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "48aa23cc99bd631e",
+    "text": "e01b11164a4a03ec",
+    "traits": "a13af4c65af9f24a",
     "facts": "6df3738c1a935470",
     "facts2": "a7c255ea1260b6e0",
-    "all": "4bf666fd25600983"
+    "all": "569699eca8d45913"
    },
    "row_hash": "153b0804e686abae",
    "carried": true,
-   "pass": 5
+   "pass": 18
   },
   {
    "row": "C461",
@@ -7702,19 +7711,20 @@
    "row": "C921",
    "screen": "opening.sums",
    "verdict": "N/A",
-   "line": "The manager's in Monday to Saturday, from 10am.",
-   "why": "no schedule window authored here",
+   "line": "\u2014",
+   "why": "no schedule window authored on this screen",
    "cause": null,
    "note": true,
    "screen_hash": {
-    "text": "48aa23cc99bd631e",
+    "text": "e01b11164a4a03ec",
+    "traits": "a13af4c65af9f24a",
     "facts": "6df3738c1a935470",
     "facts2": "a7c255ea1260b6e0",
-    "all": "4bf666fd25600983"
+    "all": "569699eca8d45913"
    },
    "row_hash": "19da817e808ac3d6",
    "carried": true,
-   "pass": 5
+   "pass": 18
   },
   {
    "row": "C921",
@@ -8371,19 +8381,20 @@
    "row": "C927",
    "screen": "opening.sums",
    "verdict": "PASS",
-   "line": "The manager's in Monday to Saturday, from 10am.",
-   "why": "every exit carries its minutes",
+   "line": "Go down to the kitchen (time_progression_minutes = 5)",
+   "why": "the exit sets its time",
    "cause": null,
    "note": true,
    "screen_hash": {
-    "text": "48aa23cc99bd631e",
+    "text": "e01b11164a4a03ec",
+    "traits": "a13af4c65af9f24a",
     "facts": "6df3738c1a935470",
     "facts2": "a7c255ea1260b6e0",
-    "all": "4bf666fd25600983"
+    "all": "569699eca8d45913"
    },
    "row_hash": "1e009d83817fb566",
    "carried": true,
-   "pass": 5
+   "pass": 18
   },
   {
    "row": "C927",
@@ -9143,19 +9154,20 @@
    "row": "C931",
    "screen": "opening.sums",
    "verdict": "N/A",
-   "line": "The manager's in Monday to Saturday, from 10am.",
-   "why": "no time_of_day",
+   "line": "\u2014",
+   "why": "no time_of_day condition on this screen",
    "cause": null,
    "note": true,
    "screen_hash": {
-    "text": "48aa23cc99bd631e",
+    "text": "e01b11164a4a03ec",
+    "traits": "a13af4c65af9f24a",
     "facts": "6df3738c1a935470",
     "facts2": "a7c255ea1260b6e0",
-    "all": "4bf666fd25600983"
+    "all": "569699eca8d45913"
    },
    "row_hash": "1b8984f52b99537e",
    "carried": true,
-   "pass": 5
+   "pass": 18
   },
   {
    "row": "C931",
@@ -9646,18 +9658,19 @@
    "screen": "opening.sums",
    "verdict": "PASS",
    "line": "The manager's in Monday to Saturday, from 10am.",
-   "why": "Tom's rows: Mon\u2013Sat 10\u201321 at the caf\u00e9; $75 by Sunday agrees with PLAN \u00a72; Mark collects Sunday at the kitchen table (his Sunday kitchen rows)",
+   "why": "nobody is claimed present; the hours stated match Tom's rows (who_is_where)",
    "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "48aa23cc99bd631e",
+    "text": "e01b11164a4a03ec",
+    "traits": "a13af4c65af9f24a",
     "facts": "6df3738c1a935470",
     "facts2": "a7c255ea1260b6e0",
-    "all": "4bf666fd25600983"
+    "all": "569699eca8d45913"
    },
    "row_hash": "759e6667d7fc3183",
    "carried": true,
-   "pass": 5
+   "pass": 18
   },
   {
    "row": "L106",
@@ -10186,19 +10199,20 @@
    "row": "L167",
    "screen": "opening.sums",
    "verdict": "N/A",
-   "line": "The manager's in Monday to Saturday, from 10am.",
-   "why": "no hours on these screens",
+   "line": "\u2014",
+   "why": "no row with hours on this screen",
    "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "48aa23cc99bd631e",
+    "text": "e01b11164a4a03ec",
+    "traits": "a13af4c65af9f24a",
     "facts": "6df3738c1a935470",
     "facts2": "a7c255ea1260b6e0",
-    "all": "4bf666fd25600983"
+    "all": "569699eca8d45913"
    },
    "row_hash": "adf7bb3f8b632ac3",
    "carried": true,
-   "pass": 5
+   "pass": 18
   },
   {
    "row": "L167",
@@ -10527,40 +10541,40 @@
    "row": "clock#1",
    "screen": "*",
    "verdict": "PASS",
-   "line": "Talk \u2014 you've already talked today.",
-   "why": "labels say no time and no energy",
+   "line": "Go down to the kitchen \u00b7 Keep your usual \u00b7 Wear the sundress instead \u00b7 Talk \u00b7 Eat with her \u00b7 Leave \u00b7 Done \u00b7 'Talk \u2014 you've already talked today.'",
+   "why": "no label or locked_text on P07's canvases names a time, energy or money; nothing is bought here, so no price is owed",
    "cause": null,
    "note": false,
-   "screen_hash": "148b90954a504ef6",
-   "row_hash": "b093ed58ec403b3c",
+   "screen_hash": "1cd3b560243bdeb3",
+   "row_hash": "df2ea5f83738c062",
    "carried": true,
-   "pass": 5
+   "pass": 18
   },
   {
    "row": "clock#10",
    "screen": "*",
    "verdict": "PASS",
-   "line": "talk_mom / mom_living_room triggers: no time_of_day, no max_triggers_per_day",
-   "why": "no row in P07's canvases has both a clock window and a daily count",
+   "line": "talk_mom / mom_living_room / borrow_* / return_* triggers",
+   "why": "no P07 row has both a clock window and a daily count; none sets show_when_blocked",
    "cause": null,
    "note": false,
-   "screen_hash": "efacbe058611129a",
-   "row_hash": "2ad5e473e29b231d",
+   "screen_hash": "1cd3b560243bdeb3",
+   "row_hash": "5a788439a11d7765",
    "carried": true,
-   "pass": 6
+   "pass": 18
   },
   {
    "row": "clock#2",
    "screen": "*",
-   "verdict": "N/A",
-   "line": "",
-   "why": "no travel",
+   "verdict": "PASS",
+   "line": "talk 5, eat 20, borrow/return 5, each back to the same room",
+   "why": "every exit stays in its room; no hop inside home is charged",
    "cause": null,
    "note": false,
-   "screen_hash": "219040e682a0b26e",
-   "row_hash": "e393ecafc7ab9a6c",
+   "screen_hash": "1cd3b560243bdeb3",
+   "row_hash": "77b3fafe9c2bf20c",
    "carried": true,
-   "pass": 4
+   "pass": 19
   },
   {
    "row": "clock#3",
@@ -10744,15 +10758,15 @@
   {
    "row": "clothes#6",
    "screen": "*",
-   "verdict": "N/A",
-   "line": "",
-   "why": "no leave rule here",
+   "verdict": "PASS",
+   "line": "You're not going out like this. Go back up to your room and put on a top and a bottom, or a dress.",
+   "why": "the dress code sits on hood_street, outside the front door; it checks coverage (top and bottom, a dress counts for both); the refusal says what's missing in her voice and where to change; wardrobe_anywhere = false with wardrobe_location home_her_room, so the door offers 'Go back' only; no exception to name",
    "cause": null,
    "note": false,
-   "screen_hash": "219040e682a0b26e",
-   "row_hash": "a704975690f5df41",
+   "screen_hash": "1cd3b560243bdeb3",
+   "row_hash": "2564b4ed16e2c7f7",
    "carried": true,
-   "pass": 4
+   "pass": 18
   },
   {
    "row": "clothes#7",
@@ -10900,15 +10914,15 @@
   {
    "row": "media#2",
    "screen": "*",
-   "verdict": "N/A",
-   "line": "",
-   "why": "not a place picture",
+   "verdict": "PASS",
+   "line": "home_her_room: 'woman of 18 sitting cross-legged on a single bed in a small bedroom'",
+   "why": "one tier-0 file with her in it; the room has no hours, so it shows at every hour, and it names no one and never says empty or alone; hood_street carries no image",
    "cause": null,
    "note": false,
-   "screen_hash": "219040e682a0b26e",
-   "row_hash": "01ba7fa1cec4bc7a",
+   "screen_hash": "1cd3b560243bdeb3",
+   "row_hash": "69a8103be1e1032a",
    "carried": true,
-   "pass": 4
+   "pass": 18
   },
   {
    "row": "media#3",
@@ -11186,7 +11200,7 @@
     "all": "13a427d6071bc370"
    },
    "row_hash": "45053c701775c75f",
-   "carried": false,
+   "carried": true,
    "pass": 13
   },
   {
@@ -11205,7 +11219,7 @@
     "all": "66b9b16dce192c2f"
    },
    "row_hash": "45053c701775c75f",
-   "carried": false,
+   "carried": true,
    "pass": 13
   },
   {
@@ -11329,14 +11343,14 @@
    "row": "places#10",
    "screen": "*",
    "verdict": "PASS",
-   "line": "The man next door sits on his porch. Walk down your street on a Sunday, 9am to noon or 5 to 8pm.",
-   "why": "same as L170: the hidden place off hood_street is pointed at",
+   "line": "hood_next_door: hidden_until = { flag = \"next_door_open\" }",
+   "why": "hood_street (built here) lists The House Next Door only behind next_door_open, the cut-for-a-release form: declared (L1317), set by nothing, comment names release 2 (L1545); the street never offers it in release 1, so no hint is owed",
    "cause": null,
    "note": false,
-   "screen_hash": "655307a73419f85a",
-   "row_hash": "309f0141d342dc6f",
-   "carried": true,
-   "pass": 8
+   "screen_hash": "1cd3b560243bdeb3",
+   "row_hash": "d6f0b4b357efc043",
+   "carried": false,
+   "pass": 19
   },
   {
    "row": "places#2",
@@ -11498,14 +11512,14 @@
    "row": "voice#5",
    "screen": "*",
    "verdict": "PASS",
-   "line": "",
-   "why": "she is alone; no speech needed",
+   "line": "talk_mom hub>eat 90 : 18; opening 517 : 131; mom_living_room 50 : 29",
+   "why": "5.0, 3.95 and 1.72 : 1, all at or under 5 : 1; borrow/return have nobody in them",
    "cause": null,
    "note": false,
-   "screen_hash": "219040e682a0b26e",
-   "row_hash": "7bbdd4290054e601",
+   "screen_hash": "1cd3b560243bdeb3",
+   "row_hash": "f74d350a978e124c",
    "carried": true,
-   "pass": 4
+   "pass": 19
   },
   {
    "row": "voice#6",
@@ -11595,8 +11609,8 @@
  ],
  "causes": [],
  "pending": [],
- "asked": 2,
- "answered": 2,
+ "asked": 1,
+ "answered": 1,
  "pass_items": [],
  "unowed": []
 }

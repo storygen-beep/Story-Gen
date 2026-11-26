@@ -1,6 +1,6 @@
 {
  "piece": "P56",
- "pass": 1,
+ "pass": 2,
  "screens": {
   "*": "4f53cda18c2baa0c"
  },
@@ -33,7 +33,7 @@
   "voice#2": "a40d4073409a2705",
   "voice#3": "4777d2c1251214c2",
   "voice#4": "ac2fdd7245f436db",
-  "voice#5": "7bbdd4290054e601",
+  "voice#5": "f74d350a978e124c",
   "voice#6": "df1f5dc8b6d21538",
   "voice#7": "321cc76cff93aadb",
   "voice#8": "4362249fb5f9616e",
@@ -95,7 +95,7 @@
    "note": false,
    "screen_hash": "4f53cda18c2baa0c",
    "row_hash": "5276068df1ca6fa9",
-   "carried": false,
+   "carried": true,
    "pass": 1
   },
   {
@@ -108,7 +108,7 @@
    "note": false,
    "screen_hash": "4f53cda18c2baa0c",
    "row_hash": "c1c0e2ac2588a579",
-   "carried": false,
+   "carried": true,
    "pass": 1
   },
   {
@@ -121,7 +121,7 @@
    "note": false,
    "screen_hash": "4f53cda18c2baa0c",
    "row_hash": "1e252efd0904a971",
-   "carried": false,
+   "carried": true,
    "pass": 1
   },
   {
@@ -134,7 +134,7 @@
    "note": false,
    "screen_hash": "4f53cda18c2baa0c",
    "row_hash": "fd109745c67b71d7",
-   "carried": false,
+   "carried": true,
    "pass": 1
   },
   {
@@ -147,7 +147,7 @@
    "note": false,
    "screen_hash": "4f53cda18c2baa0c",
    "row_hash": "aaf6518b64dcce55",
-   "carried": false,
+   "carried": true,
    "pass": 1
   },
   {
@@ -160,7 +160,7 @@
    "note": false,
    "screen_hash": "4f53cda18c2baa0c",
    "row_hash": "4d9f2ebbce9a39cc",
-   "carried": false,
+   "carried": true,
    "pass": 1
   },
   {
@@ -173,7 +173,7 @@
    "note": false,
    "screen_hash": "4f53cda18c2baa0c",
    "row_hash": "4d1fce1c4523b5d4",
-   "carried": false,
+   "carried": true,
    "pass": 1
   },
   {
@@ -186,7 +186,7 @@
    "note": false,
    "screen_hash": "4f53cda18c2baa0c",
    "row_hash": "ced37cb0de6e7202",
-   "carried": false,
+   "carried": true,
    "pass": 1
   },
   {
@@ -199,7 +199,7 @@
    "note": false,
    "screen_hash": "4f53cda18c2baa0c",
    "row_hash": "efcbd1ac6a95e2f2",
-   "carried": false,
+   "carried": true,
    "pass": 1
   },
   {
@@ -212,7 +212,7 @@
    "note": false,
    "screen_hash": "4f53cda18c2baa0c",
    "row_hash": "0e32092e9fe64f2c",
-   "carried": false,
+   "carried": true,
    "pass": 1
   },
   {
@@ -225,7 +225,7 @@
    "note": false,
    "screen_hash": "4f53cda18c2baa0c",
    "row_hash": "cef53154cc971fef",
-   "carried": false,
+   "carried": true,
    "pass": 1
   },
   {
@@ -238,7 +238,7 @@
    "note": false,
    "screen_hash": "4f53cda18c2baa0c",
    "row_hash": "80d415cf08e0ebfe",
-   "carried": false,
+   "carried": true,
    "pass": 1
   },
   {
@@ -251,7 +251,7 @@
    "note": false,
    "screen_hash": "4f53cda18c2baa0c",
    "row_hash": "3b1fcdf549bcc558",
-   "carried": false,
+   "carried": true,
    "pass": 1
   },
   {
@@ -264,7 +264,7 @@
    "note": false,
    "screen_hash": "4f53cda18c2baa0c",
    "row_hash": "2946d2fe0b7dc28f",
-   "carried": false,
+   "carried": true,
    "pass": 1
   },
   {
@@ -277,7 +277,7 @@
    "note": true,
    "screen_hash": "4f53cda18c2baa0c",
    "row_hash": "5053b7bf67f983b4",
-   "carried": false,
+   "carried": true,
    "pass": 1
   },
   {
@@ -290,7 +290,7 @@
    "note": true,
    "screen_hash": "4f53cda18c2baa0c",
    "row_hash": "2a77041b914dcaf5",
-   "carried": false,
+   "carried": true,
    "pass": 1
   },
   {
@@ -303,7 +303,7 @@
    "note": true,
    "screen_hash": "4f53cda18c2baa0c",
    "row_hash": "12343d9fcdd8b92d",
-   "carried": false,
+   "carried": true,
    "pass": 1
   },
   {
@@ -316,7 +316,7 @@
    "note": true,
    "screen_hash": "4f53cda18c2baa0c",
    "row_hash": "9ef802da52fe7e96",
-   "carried": false,
+   "carried": true,
    "pass": 1
   },
   {
@@ -329,7 +329,7 @@
    "note": true,
    "screen_hash": "4f53cda18c2baa0c",
    "row_hash": "f890ab6fd3e3720d",
-   "carried": false,
+   "carried": true,
    "pass": 1
   },
   {
@@ -342,7 +342,7 @@
    "note": false,
    "screen_hash": "4f53cda18c2baa0c",
    "row_hash": "d8075e425feee4fa",
-   "carried": false,
+   "carried": true,
    "pass": 1
   },
   {
@@ -355,7 +355,7 @@
    "note": false,
    "screen_hash": "4f53cda18c2baa0c",
    "row_hash": "d621c4772fef8f82",
-   "carried": false,
+   "carried": true,
    "pass": 1
   },
   {
@@ -368,7 +368,7 @@
    "note": false,
    "screen_hash": "4f53cda18c2baa0c",
    "row_hash": "fbe14a2b0c34106e",
-   "carried": false,
+   "carried": true,
    "pass": 1
   },
   {
@@ -381,7 +381,7 @@
    "note": true,
    "screen_hash": "4f53cda18c2baa0c",
    "row_hash": "04fb06f35934002e",
-   "carried": false,
+   "carried": true,
    "pass": 1
   },
   {
@@ -394,7 +394,7 @@
    "note": false,
    "screen_hash": "4f53cda18c2baa0c",
    "row_hash": "7e4f552f7679a5f9",
-   "carried": false,
+   "carried": true,
    "pass": 1
   },
   {
@@ -407,7 +407,7 @@
    "note": true,
    "screen_hash": "4f53cda18c2baa0c",
    "row_hash": "71b59bd8f960bc11",
-   "carried": false,
+   "carried": true,
    "pass": 1
   },
   {
@@ -420,7 +420,7 @@
    "note": true,
    "screen_hash": "4f53cda18c2baa0c",
    "row_hash": "fb8267ff01adf133",
-   "carried": false,
+   "carried": true,
    "pass": 1
   },
   {
@@ -433,7 +433,7 @@
    "note": false,
    "screen_hash": "4f53cda18c2baa0c",
    "row_hash": "40447ff526d3f730",
-   "carried": false,
+   "carried": true,
    "pass": 1
   },
   {
@@ -446,7 +446,7 @@
    "note": false,
    "screen_hash": "4f53cda18c2baa0c",
    "row_hash": "4ca489a2e70123f0",
-   "carried": false,
+   "carried": true,
    "pass": 1
   },
   {
@@ -459,7 +459,7 @@
    "note": true,
    "screen_hash": "4f53cda18c2baa0c",
    "row_hash": "7719acc71466cc69",
-   "carried": false,
+   "carried": true,
    "pass": 1
   },
   {
@@ -472,7 +472,7 @@
    "note": true,
    "screen_hash": "4f53cda18c2baa0c",
    "row_hash": "1de2e1d8420f1081",
-   "carried": false,
+   "carried": true,
    "pass": 1
   },
   {
@@ -485,7 +485,7 @@
    "note": false,
    "screen_hash": "4f53cda18c2baa0c",
    "row_hash": "8933f85010afbef7",
-   "carried": false,
+   "carried": true,
    "pass": 1
   },
   {
@@ -498,7 +498,7 @@
    "note": false,
    "screen_hash": "4f53cda18c2baa0c",
    "row_hash": "a2b07f40e1a9e908",
-   "carried": false,
+   "carried": true,
    "pass": 1
   },
   {
@@ -511,7 +511,7 @@
    "note": false,
    "screen_hash": "4f53cda18c2baa0c",
    "row_hash": "e3ca01ba145f4580",
-   "carried": false,
+   "carried": true,
    "pass": 1
   },
   {
@@ -524,7 +524,7 @@
    "note": false,
    "screen_hash": "4f53cda18c2baa0c",
    "row_hash": "584dada6c379e3d8",
-   "carried": false,
+   "carried": true,
    "pass": 1
   },
   {
@@ -537,7 +537,7 @@
    "note": false,
    "screen_hash": "4f53cda18c2baa0c",
    "row_hash": "ac5932d70cd775a1",
-   "carried": false,
+   "carried": true,
    "pass": 1
   },
   {
@@ -550,7 +550,7 @@
    "note": false,
    "screen_hash": "4f53cda18c2baa0c",
    "row_hash": "3eb18b4cefbe49d3",
-   "carried": false,
+   "carried": true,
    "pass": 1
   },
   {
@@ -563,7 +563,7 @@
    "note": false,
    "screen_hash": "4f53cda18c2baa0c",
    "row_hash": "6b0fd679047fc9b8",
-   "carried": false,
+   "carried": true,
    "pass": 1
   },
   {
@@ -576,7 +576,7 @@
    "note": false,
    "screen_hash": "4f53cda18c2baa0c",
    "row_hash": "beb5a109bde77305",
-   "carried": false,
+   "carried": true,
    "pass": 1
   },
   {
@@ -589,7 +589,7 @@
    "note": false,
    "screen_hash": "4f53cda18c2baa0c",
    "row_hash": "153b0804e686abae",
-   "carried": false,
+   "carried": true,
    "pass": 1
   },
   {
@@ -602,7 +602,7 @@
    "note": false,
    "screen_hash": "4f53cda18c2baa0c",
    "row_hash": "52e42cdd69c8f10e",
-   "carried": false,
+   "carried": true,
    "pass": 1
   },
   {
@@ -615,7 +615,7 @@
    "note": true,
    "screen_hash": "4f53cda18c2baa0c",
    "row_hash": "d45ec06603465a63",
-   "carried": false,
+   "carried": true,
    "pass": 1
   },
   {
@@ -628,7 +628,7 @@
    "note": true,
    "screen_hash": "4f53cda18c2baa0c",
    "row_hash": "3390e967abb51243",
-   "carried": false,
+   "carried": true,
    "pass": 1
   },
   {
@@ -641,7 +641,7 @@
    "note": false,
    "screen_hash": "4f53cda18c2baa0c",
    "row_hash": "6ca552cf65706e45",
-   "carried": false,
+   "carried": true,
    "pass": 1
   },
   {
@@ -654,7 +654,7 @@
    "note": true,
    "screen_hash": "4f53cda18c2baa0c",
    "row_hash": "b58b7227d96fc810",
-   "carried": false,
+   "carried": true,
    "pass": 1
   },
   {
@@ -667,7 +667,7 @@
    "note": false,
    "screen_hash": "4f53cda18c2baa0c",
    "row_hash": "8dd8bd44ba6187b5",
-   "carried": false,
+   "carried": true,
    "pass": 1
   },
   {
@@ -680,7 +680,7 @@
    "note": true,
    "screen_hash": "4f53cda18c2baa0c",
    "row_hash": "d05616cfa60dc7d3",
-   "carried": false,
+   "carried": true,
    "pass": 1
   },
   {
@@ -693,7 +693,7 @@
    "note": true,
    "screen_hash": "4f53cda18c2baa0c",
    "row_hash": "6a7949baddebb1b0",
-   "carried": false,
+   "carried": true,
    "pass": 1
   },
   {
@@ -706,7 +706,7 @@
    "note": true,
    "screen_hash": "4f53cda18c2baa0c",
    "row_hash": "060f09260e15e9dc",
-   "carried": false,
+   "carried": true,
    "pass": 1
   },
   {
@@ -719,7 +719,7 @@
    "note": true,
    "screen_hash": "4f53cda18c2baa0c",
    "row_hash": "1ad30279cc68e956",
-   "carried": false,
+   "carried": true,
    "pass": 1
   },
   {
@@ -732,7 +732,7 @@
    "note": true,
    "screen_hash": "4f53cda18c2baa0c",
    "row_hash": "2578c01d84422900",
-   "carried": false,
+   "carried": true,
    "pass": 1
   },
   {
@@ -745,7 +745,7 @@
    "note": true,
    "screen_hash": "4f53cda18c2baa0c",
    "row_hash": "9b53c2c9b08b3f3f",
-   "carried": false,
+   "carried": true,
    "pass": 1
   },
   {
@@ -758,7 +758,7 @@
    "note": false,
    "screen_hash": "4f53cda18c2baa0c",
    "row_hash": "cec7d7c1c727274b",
-   "carried": false,
+   "carried": true,
    "pass": 1
   },
   {
@@ -771,7 +771,7 @@
    "note": false,
    "screen_hash": "4f53cda18c2baa0c",
    "row_hash": "aa69359e7cbce5fc",
-   "carried": false,
+   "carried": true,
    "pass": 1
   },
   {
@@ -784,7 +784,7 @@
    "note": false,
    "screen_hash": "4f53cda18c2baa0c",
    "row_hash": "00a617ab9b4e9cd4",
-   "carried": false,
+   "carried": true,
    "pass": 1
   },
   {
@@ -797,7 +797,7 @@
    "note": false,
    "screen_hash": "4f53cda18c2baa0c",
    "row_hash": "66f12c600cd0c53c",
-   "carried": false,
+   "carried": true,
    "pass": 1
   },
   {
@@ -810,7 +810,7 @@
    "note": false,
    "screen_hash": "4f53cda18c2baa0c",
    "row_hash": "add17271c89e815f",
-   "carried": false,
+   "carried": true,
    "pass": 1
   },
   {
@@ -823,7 +823,7 @@
    "note": false,
    "screen_hash": "4f53cda18c2baa0c",
    "row_hash": "ae6557de353f1fae",
-   "carried": false,
+   "carried": true,
    "pass": 1
   },
   {
@@ -836,7 +836,7 @@
    "note": false,
    "screen_hash": "4f53cda18c2baa0c",
    "row_hash": "b8e8afcb32208b40",
-   "carried": false,
+   "carried": true,
    "pass": 1
   },
   {
@@ -849,7 +849,7 @@
    "note": false,
    "screen_hash": "4f53cda18c2baa0c",
    "row_hash": "a40d4073409a2705",
-   "carried": false,
+   "carried": true,
    "pass": 1
   },
   {
@@ -862,7 +862,7 @@
    "note": false,
    "screen_hash": "4f53cda18c2baa0c",
    "row_hash": "4777d2c1251214c2",
-   "carried": false,
+   "carried": true,
    "pass": 1
   },
   {
@@ -875,21 +875,21 @@
    "note": false,
    "screen_hash": "4f53cda18c2baa0c",
    "row_hash": "ac2fdd7245f436db",
-   "carried": false,
+   "carried": true,
    "pass": 1
   },
   {
    "row": "voice#5",
    "screen": "*",
    "verdict": "PASS",
-   "line": "\"You pay at the desk for a day pass and find a bench by the mirrors. You're halfway through a set when Marco walks over\"",
-   "why": "people speak; narration leads under 5:1 (check.py GREEN)",
+   "line": "marco_hips moment>got 44 : 11; nadia_tip moment>keep 31 : 8",
+   "why": "4.0 and 3.88 : 1; body_workout and study_library have nobody in them",
    "cause": null,
    "note": false,
    "screen_hash": "4f53cda18c2baa0c",
-   "row_hash": "7bbdd4290054e601",
+   "row_hash": "f74d350a978e124c",
    "carried": false,
-   "pass": 1
+   "pass": 2
   },
   {
    "row": "voice#6",
@@ -901,7 +901,7 @@
    "note": false,
    "screen_hash": "4f53cda18c2baa0c",
    "row_hash": "df1f5dc8b6d21538",
-   "carried": false,
+   "carried": true,
    "pass": 1
   },
   {
@@ -914,7 +914,7 @@
    "note": false,
    "screen_hash": "4f53cda18c2baa0c",
    "row_hash": "321cc76cff93aadb",
-   "carried": false,
+   "carried": true,
    "pass": 1
   },
   {
@@ -927,7 +927,7 @@
    "note": false,
    "screen_hash": "4f53cda18c2baa0c",
    "row_hash": "4362249fb5f9616e",
-   "carried": false,
+   "carried": true,
    "pass": 1
   },
   {
@@ -940,7 +940,7 @@
    "note": false,
    "screen_hash": "4f53cda18c2baa0c",
    "row_hash": "e2c5c7198fc0d5ef",
-   "carried": false,
+   "carried": true,
    "pass": 1
   },
   {
@@ -953,7 +953,7 @@
    "note": false,
    "screen_hash": "4f53cda18c2baa0c",
    "row_hash": "b492e3b4fd27f4e4",
-   "carried": false,
+   "carried": true,
    "pass": 1
   },
   {
@@ -966,7 +966,7 @@
    "note": false,
    "screen_hash": "4f53cda18c2baa0c",
    "row_hash": "bdd82bbbd13c115f",
-   "carried": false,
+   "carried": true,
    "pass": 1
   },
   {
@@ -979,7 +979,7 @@
    "note": false,
    "screen_hash": "4f53cda18c2baa0c",
    "row_hash": "e2c310df2ddf3dec",
-   "carried": false,
+   "carried": true,
    "pass": 1
   },
   {
@@ -992,7 +992,7 @@
    "note": false,
    "screen_hash": "4f53cda18c2baa0c",
    "row_hash": "bb778f4205cccf64",
-   "carried": false,
+   "carried": true,
    "pass": 1
   },
   {
@@ -1005,7 +1005,7 @@
    "note": false,
    "screen_hash": "4f53cda18c2baa0c",
    "row_hash": "23e5d0e67707aeaf",
-   "carried": false,
+   "carried": true,
    "pass": 1
   },
   {
@@ -1018,7 +1018,7 @@
    "note": false,
    "screen_hash": "4f53cda18c2baa0c",
    "row_hash": "6ef8eb0271aa1f38",
-   "carried": false,
+   "carried": true,
    "pass": 1
   },
   {
@@ -1031,7 +1031,7 @@
    "note": false,
    "screen_hash": "4f53cda18c2baa0c",
    "row_hash": "68ca9ffd0869b5f8",
-   "carried": false,
+   "carried": true,
    "pass": 1
   },
   {
@@ -1044,7 +1044,7 @@
    "note": false,
    "screen_hash": "4f53cda18c2baa0c",
    "row_hash": "d511a97ea3c30cbc",
-   "carried": false,
+   "carried": true,
    "pass": 1
   },
   {
@@ -1057,7 +1057,7 @@
    "note": false,
    "screen_hash": "4f53cda18c2baa0c",
    "row_hash": "357e11d8bd6c9101",
-   "carried": false,
+   "carried": true,
    "pass": 1
   },
   {
@@ -1070,7 +1070,7 @@
    "note": false,
    "screen_hash": "4f53cda18c2baa0c",
    "row_hash": "309cc9fe906dadf1",
-   "carried": false,
+   "carried": true,
    "pass": 1
   },
   {
@@ -1083,7 +1083,7 @@
    "note": false,
    "screen_hash": "4f53cda18c2baa0c",
    "row_hash": "1d7fc47e630b746b",
-   "carried": false,
+   "carried": true,
    "pass": 1
   },
   {
@@ -1096,14 +1096,14 @@
    "note": false,
    "screen_hash": "4f53cda18c2baa0c",
    "row_hash": "d36c2304f1cc12b8",
-   "carried": false,
+   "carried": true,
    "pass": 1
   }
  ],
  "causes": [],
  "pending": [],
- "asked": 78,
- "answered": 78,
+ "asked": 1,
+ "answered": 1,
  "pass_items": [],
  "unowed": []
 }

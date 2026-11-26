@@ -346,11 +346,10 @@ blocks = [
   { type = "paragraph", content = "Hair still wet, you sit down and do the sums." },
   { type = "paragraph", content = "Seventy-five by Sunday. You have nothing." },
   { type = "paragraph", content = "There's a Help Wanted sign in the café window across from campus. And Mark said \"one way or another\" like he'd already picked one." },
-  { type = "paragraph", content = "<strong>Pay your own way.</strong> Pay Mark your share every Sunday." },
+  { type = "paragraph", content = "<strong>Pay your way.</strong> Pay Mark your share on Sunday." },
   { type = "paragraph", content = "✅ Mark told you the rent" },
   { type = "paragraph", content = "➜ Ask about the Help Wanted sign at the café across from campus. The manager's in Monday to Saturday, from 10am." },
   { type = "paragraph", content = "➜ Pay Mark on Sunday morning, at the kitchen table." },
-  { type = "paragraph", content = "➜ Pay Mark in full four Sundays in a row." },
   { type = "paragraph", content = "You need money. Take shifts, or find another way. People are in different places at different hours. What you say changes how they treat you." },
 ]
 
@@ -1413,38 +1412,155 @@ blocks = [
     { type = "paragraph", content = "Mark doesn't look up from the paper." },
     { type = "dialog", content = "That's this week done, kid. Next Sunday.", props = { speaker = "npc", npcId = "npc_mark" } },
   ] },
-  { type = "group", props = { conditions = { version = "1.0", logic = "AND", items = [{ type = "flag", subject = "player", flag_key = "rent_handled_this_week", operator = "is_false" }, { type = "trait", subject = "player", trait_key = "rent_paid_total", operator = "lt", value = 300 }, { type = "trait", subject = "player", trait_key = "money", operator = "lt", value = 75 }] } }, blocks = [
+  { type = "group", props = { conditions = { version = "1.0", logic = "AND", items = [{ type = "flag", subject = "player", flag_key = "rent_handled_this_week", operator = "is_false" }, { type = "trait", subject = "player", trait_key = "rent_paid_total", operator = "lt", value = 300 }, { type = "trait", subject = "player", trait_key = "rent_weeks_owed", operator = "eq", value = 0 }, { type = "trait", subject = "player", trait_key = "money", operator = "lt", value = 75 }] } }, blocks = [
     { type = "paragraph", content = "Mark folds the paper down and holds out his hand." },
     { type = "dialog", content = "Count it out where I can see it.", props = { speaker = "npc", npcId = "npc_mark" } },
     { type = "dialog", content = "Seventy-five, kid.", props = { speaker = "npc", npcId = "npc_mark" } },
     { type = "paragraph", content = "You don't have it. He waits anyway, his hand still out." },
   ] },
-  { type = "group", props = { conditions = { version = "1.0", logic = "AND", items = [{ type = "flag", subject = "player", flag_key = "rent_handled_this_week", operator = "is_false" }, { type = "trait", subject = "player", trait_key = "rent_paid_total", operator = "lt", value = 300 }] } }, blocks = [
+  { type = "group", props = { conditions = { version = "1.0", logic = "AND", items = [{ type = "flag", subject = "player", flag_key = "rent_handled_this_week", operator = "is_false" }, { type = "trait", subject = "player", trait_key = "rent_paid_total", operator = "lt", value = 300 }, { type = "trait", subject = "player", trait_key = "rent_weeks_owed", operator = "eq", value = 0 }] } }, blocks = [
     { type = "paragraph", content = "Mark folds the paper down and holds out his hand." },
     { type = "dialog", content = "Count it out where I can see it.", props = { speaker = "npc", npcId = "npc_mark" } },
     { type = "dialog", content = "Seventy-five, kid.", props = { speaker = "npc", npcId = "npc_mark" } },
   ] },
-  { type = "group", props = { conditions = { version = "1.0", logic = "AND", items = [{ type = "flag", subject = "player", flag_key = "rent_handled_this_week", operator = "is_false" }, { type = "trait", subject = "player", trait_key = "rent_paid_total", operator = "gte", value = 300 }, { type = "trait", subject = "player", trait_key = "rent_paid_total", operator = "lt", value = 900 }, { type = "trait", subject = "player", trait_key = "money", operator = "lt", value = 90 }] } }, blocks = [
+  { type = "group", props = { conditions = { version = "1.0", logic = "AND", items = [{ type = "flag", subject = "player", flag_key = "rent_handled_this_week", operator = "is_false" }, { type = "trait", subject = "player", trait_key = "rent_paid_total", operator = "lt", value = 300 }, { type = "trait", subject = "player", trait_key = "rent_weeks_owed", operator = "eq", value = 1 }, { type = "trait", subject = "player", trait_key = "money", operator = "lt", value = 150 }] } }, blocks = [
+    { type = "paragraph", content = "Mark folds the paper down and holds out his hand." },
+    { type = "dialog", content = "Count it out where I can see it.", props = { speaker = "npc", npcId = "npc_mark" } },
+    { type = "paragraph", content = "It's $75 this week, plus $75 from last week: $150." },
+    { type = "dialog", content = "Seventy-five, and what you owe me. A hundred and fifty, kid.", props = { speaker = "npc", npcId = "npc_mark" } },
+    { type = "paragraph", content = "You don't have it. He waits anyway, his hand still out." },
+  ] },
+  { type = "group", props = { conditions = { version = "1.0", logic = "AND", items = [{ type = "flag", subject = "player", flag_key = "rent_handled_this_week", operator = "is_false" }, { type = "trait", subject = "player", trait_key = "rent_paid_total", operator = "lt", value = 300 }, { type = "trait", subject = "player", trait_key = "rent_weeks_owed", operator = "eq", value = 1 }] } }, blocks = [
+    { type = "paragraph", content = "Mark folds the paper down and holds out his hand." },
+    { type = "dialog", content = "Count it out where I can see it.", props = { speaker = "npc", npcId = "npc_mark" } },
+    { type = "paragraph", content = "It's $75 this week, plus $75 from last week: $150." },
+    { type = "dialog", content = "Seventy-five, and what you owe me. A hundred and fifty, kid.", props = { speaker = "npc", npcId = "npc_mark" } },
+  ] },
+  { type = "group", props = { conditions = { version = "1.0", logic = "AND", items = [{ type = "flag", subject = "player", flag_key = "rent_handled_this_week", operator = "is_false" }, { type = "trait", subject = "player", trait_key = "rent_paid_total", operator = "lt", value = 300 }, { type = "trait", subject = "player", trait_key = "rent_weeks_owed", operator = "eq", value = 2 }, { type = "trait", subject = "player", trait_key = "money", operator = "lt", value = 225 }] } }, blocks = [
+    { type = "paragraph", content = "Mark folds the paper down and holds out his hand." },
+    { type = "dialog", content = "Count it out where I can see it.", props = { speaker = "npc", npcId = "npc_mark" } },
+    { type = "paragraph", content = "It's $75 this week, plus $150 from the last two weeks: $225." },
+    { type = "dialog", content = "Seventy-five, and what you owe me. Two twenty-five, kid.", props = { speaker = "npc", npcId = "npc_mark" } },
+    { type = "paragraph", content = "You don't have it. He waits anyway, his hand still out." },
+  ] },
+  { type = "group", props = { conditions = { version = "1.0", logic = "AND", items = [{ type = "flag", subject = "player", flag_key = "rent_handled_this_week", operator = "is_false" }, { type = "trait", subject = "player", trait_key = "rent_paid_total", operator = "lt", value = 300 }, { type = "trait", subject = "player", trait_key = "rent_weeks_owed", operator = "eq", value = 2 }] } }, blocks = [
+    { type = "paragraph", content = "Mark folds the paper down and holds out his hand." },
+    { type = "dialog", content = "Count it out where I can see it.", props = { speaker = "npc", npcId = "npc_mark" } },
+    { type = "paragraph", content = "It's $75 this week, plus $150 from the last two weeks: $225." },
+    { type = "dialog", content = "Seventy-five, and what you owe me. Two twenty-five, kid.", props = { speaker = "npc", npcId = "npc_mark" } },
+  ] },
+  { type = "group", props = { conditions = { version = "1.0", logic = "AND", items = [{ type = "flag", subject = "player", flag_key = "rent_handled_this_week", operator = "is_false" }, { type = "trait", subject = "player", trait_key = "rent_paid_total", operator = "lt", value = 300 }, { type = "trait", subject = "player", trait_key = "rent_weeks_owed", operator = "eq", value = 3 }, { type = "trait", subject = "player", trait_key = "money", operator = "lt", value = 300 }] } }, blocks = [
+    { type = "paragraph", content = "Mark folds the paper down and holds out his hand." },
+    { type = "dialog", content = "Count it out where I can see it.", props = { speaker = "npc", npcId = "npc_mark" } },
+    { type = "paragraph", content = "It's $75 this week, plus $225 from the last three weeks: $300." },
+    { type = "dialog", content = "Seventy-five, and what you owe me. Three hundred, kid.", props = { speaker = "npc", npcId = "npc_mark" } },
+    { type = "paragraph", content = "You don't have it. He waits anyway, his hand still out." },
+  ] },
+  { type = "group", props = { conditions = { version = "1.0", logic = "AND", items = [{ type = "flag", subject = "player", flag_key = "rent_handled_this_week", operator = "is_false" }, { type = "trait", subject = "player", trait_key = "rent_paid_total", operator = "lt", value = 300 }, { type = "trait", subject = "player", trait_key = "rent_weeks_owed", operator = "eq", value = 3 }] } }, blocks = [
+    { type = "paragraph", content = "Mark folds the paper down and holds out his hand." },
+    { type = "dialog", content = "Count it out where I can see it.", props = { speaker = "npc", npcId = "npc_mark" } },
+    { type = "paragraph", content = "It's $75 this week, plus $225 from the last three weeks: $300." },
+    { type = "dialog", content = "Seventy-five, and what you owe me. Three hundred, kid.", props = { speaker = "npc", npcId = "npc_mark" } },
+  ] },
+  { type = "group", props = { conditions = { version = "1.0", logic = "AND", items = [{ type = "flag", subject = "player", flag_key = "rent_handled_this_week", operator = "is_false" }, { type = "trait", subject = "player", trait_key = "rent_paid_total", operator = "gte", value = 300 }, { type = "trait", subject = "player", trait_key = "rent_paid_total", operator = "lt", value = 900 }, { type = "trait", subject = "player", trait_key = "rent_weeks_owed", operator = "eq", value = 0 }, { type = "trait", subject = "player", trait_key = "money", operator = "lt", value = 90 }] } }, blocks = [
     { type = "paragraph", content = "Mark folds the paper down and holds out his hand." },
     { type = "dialog", content = "Count it out where I can see it.", props = { speaker = "npc", npcId = "npc_mark" } },
     { type = "dialog", content = "Ninety, kid.", props = { speaker = "npc", npcId = "npc_mark" } },
     { type = "paragraph", content = "You don't have it. He waits anyway, his hand still out." },
   ] },
-  { type = "group", props = { conditions = { version = "1.0", logic = "AND", items = [{ type = "flag", subject = "player", flag_key = "rent_handled_this_week", operator = "is_false" }, { type = "trait", subject = "player", trait_key = "rent_paid_total", operator = "gte", value = 300 }, { type = "trait", subject = "player", trait_key = "rent_paid_total", operator = "lt", value = 900 }] } }, blocks = [
+  { type = "group", props = { conditions = { version = "1.0", logic = "AND", items = [{ type = "flag", subject = "player", flag_key = "rent_handled_this_week", operator = "is_false" }, { type = "trait", subject = "player", trait_key = "rent_paid_total", operator = "gte", value = 300 }, { type = "trait", subject = "player", trait_key = "rent_paid_total", operator = "lt", value = 900 }, { type = "trait", subject = "player", trait_key = "rent_weeks_owed", operator = "eq", value = 0 }] } }, blocks = [
     { type = "paragraph", content = "Mark folds the paper down and holds out his hand." },
     { type = "dialog", content = "Count it out where I can see it.", props = { speaker = "npc", npcId = "npc_mark" } },
     { type = "dialog", content = "Ninety, kid.", props = { speaker = "npc", npcId = "npc_mark" } },
   ] },
-  { type = "group", props = { conditions = { version = "1.0", logic = "AND", items = [{ type = "flag", subject = "player", flag_key = "rent_handled_this_week", operator = "is_false" }, { type = "trait", subject = "player", trait_key = "rent_paid_total", operator = "gte", value = 900 }, { type = "trait", subject = "player", trait_key = "money", operator = "lt", value = 100 }] } }, blocks = [
+  { type = "group", props = { conditions = { version = "1.0", logic = "AND", items = [{ type = "flag", subject = "player", flag_key = "rent_handled_this_week", operator = "is_false" }, { type = "trait", subject = "player", trait_key = "rent_paid_total", operator = "gte", value = 300 }, { type = "trait", subject = "player", trait_key = "rent_paid_total", operator = "lt", value = 900 }, { type = "trait", subject = "player", trait_key = "rent_weeks_owed", operator = "eq", value = 1 }, { type = "trait", subject = "player", trait_key = "money", operator = "lt", value = 180 }] } }, blocks = [
+    { type = "paragraph", content = "Mark folds the paper down and holds out his hand." },
+    { type = "dialog", content = "Count it out where I can see it.", props = { speaker = "npc", npcId = "npc_mark" } },
+    { type = "paragraph", content = "It's $90 this week, plus $90 from last week: $180." },
+    { type = "dialog", content = "Ninety, and what you owe me. A hundred and eighty, kid.", props = { speaker = "npc", npcId = "npc_mark" } },
+    { type = "paragraph", content = "You don't have it. He waits anyway, his hand still out." },
+  ] },
+  { type = "group", props = { conditions = { version = "1.0", logic = "AND", items = [{ type = "flag", subject = "player", flag_key = "rent_handled_this_week", operator = "is_false" }, { type = "trait", subject = "player", trait_key = "rent_paid_total", operator = "gte", value = 300 }, { type = "trait", subject = "player", trait_key = "rent_paid_total", operator = "lt", value = 900 }, { type = "trait", subject = "player", trait_key = "rent_weeks_owed", operator = "eq", value = 1 }] } }, blocks = [
+    { type = "paragraph", content = "Mark folds the paper down and holds out his hand." },
+    { type = "dialog", content = "Count it out where I can see it.", props = { speaker = "npc", npcId = "npc_mark" } },
+    { type = "paragraph", content = "It's $90 this week, plus $90 from last week: $180." },
+    { type = "dialog", content = "Ninety, and what you owe me. A hundred and eighty, kid.", props = { speaker = "npc", npcId = "npc_mark" } },
+  ] },
+  { type = "group", props = { conditions = { version = "1.0", logic = "AND", items = [{ type = "flag", subject = "player", flag_key = "rent_handled_this_week", operator = "is_false" }, { type = "trait", subject = "player", trait_key = "rent_paid_total", operator = "gte", value = 300 }, { type = "trait", subject = "player", trait_key = "rent_paid_total", operator = "lt", value = 900 }, { type = "trait", subject = "player", trait_key = "rent_weeks_owed", operator = "eq", value = 2 }, { type = "trait", subject = "player", trait_key = "money", operator = "lt", value = 270 }] } }, blocks = [
+    { type = "paragraph", content = "Mark folds the paper down and holds out his hand." },
+    { type = "dialog", content = "Count it out where I can see it.", props = { speaker = "npc", npcId = "npc_mark" } },
+    { type = "paragraph", content = "It's $90 this week, plus $180 from the last two weeks: $270." },
+    { type = "dialog", content = "Ninety, and what you owe me. Two seventy, kid.", props = { speaker = "npc", npcId = "npc_mark" } },
+    { type = "paragraph", content = "You don't have it. He waits anyway, his hand still out." },
+  ] },
+  { type = "group", props = { conditions = { version = "1.0", logic = "AND", items = [{ type = "flag", subject = "player", flag_key = "rent_handled_this_week", operator = "is_false" }, { type = "trait", subject = "player", trait_key = "rent_paid_total", operator = "gte", value = 300 }, { type = "trait", subject = "player", trait_key = "rent_paid_total", operator = "lt", value = 900 }, { type = "trait", subject = "player", trait_key = "rent_weeks_owed", operator = "eq", value = 2 }] } }, blocks = [
+    { type = "paragraph", content = "Mark folds the paper down and holds out his hand." },
+    { type = "dialog", content = "Count it out where I can see it.", props = { speaker = "npc", npcId = "npc_mark" } },
+    { type = "paragraph", content = "It's $90 this week, plus $180 from the last two weeks: $270." },
+    { type = "dialog", content = "Ninety, and what you owe me. Two seventy, kid.", props = { speaker = "npc", npcId = "npc_mark" } },
+  ] },
+  { type = "group", props = { conditions = { version = "1.0", logic = "AND", items = [{ type = "flag", subject = "player", flag_key = "rent_handled_this_week", operator = "is_false" }, { type = "trait", subject = "player", trait_key = "rent_paid_total", operator = "gte", value = 300 }, { type = "trait", subject = "player", trait_key = "rent_paid_total", operator = "lt", value = 900 }, { type = "trait", subject = "player", trait_key = "rent_weeks_owed", operator = "eq", value = 3 }, { type = "trait", subject = "player", trait_key = "money", operator = "lt", value = 360 }] } }, blocks = [
+    { type = "paragraph", content = "Mark folds the paper down and holds out his hand." },
+    { type = "dialog", content = "Count it out where I can see it.", props = { speaker = "npc", npcId = "npc_mark" } },
+    { type = "paragraph", content = "It's $90 this week, plus $270 from the last three weeks: $360." },
+    { type = "dialog", content = "Ninety, and what you owe me. Three sixty, kid.", props = { speaker = "npc", npcId = "npc_mark" } },
+    { type = "paragraph", content = "You don't have it. He waits anyway, his hand still out." },
+  ] },
+  { type = "group", props = { conditions = { version = "1.0", logic = "AND", items = [{ type = "flag", subject = "player", flag_key = "rent_handled_this_week", operator = "is_false" }, { type = "trait", subject = "player", trait_key = "rent_paid_total", operator = "gte", value = 300 }, { type = "trait", subject = "player", trait_key = "rent_paid_total", operator = "lt", value = 900 }, { type = "trait", subject = "player", trait_key = "rent_weeks_owed", operator = "eq", value = 3 }] } }, blocks = [
+    { type = "paragraph", content = "Mark folds the paper down and holds out his hand." },
+    { type = "dialog", content = "Count it out where I can see it.", props = { speaker = "npc", npcId = "npc_mark" } },
+    { type = "paragraph", content = "It's $90 this week, plus $270 from the last three weeks: $360." },
+    { type = "dialog", content = "Ninety, and what you owe me. Three sixty, kid.", props = { speaker = "npc", npcId = "npc_mark" } },
+  ] },
+  { type = "group", props = { conditions = { version = "1.0", logic = "AND", items = [{ type = "flag", subject = "player", flag_key = "rent_handled_this_week", operator = "is_false" }, { type = "trait", subject = "player", trait_key = "rent_paid_total", operator = "gte", value = 900 }, { type = "trait", subject = "player", trait_key = "rent_weeks_owed", operator = "eq", value = 0 }, { type = "trait", subject = "player", trait_key = "money", operator = "lt", value = 100 }] } }, blocks = [
     { type = "paragraph", content = "Mark folds the paper down and holds out his hand." },
     { type = "dialog", content = "Count it out where I can see it.", props = { speaker = "npc", npcId = "npc_mark" } },
     { type = "dialog", content = "A hundred, kid.", props = { speaker = "npc", npcId = "npc_mark" } },
     { type = "paragraph", content = "You don't have it. He waits anyway, his hand still out." },
   ] },
-  { type = "group", props = { conditions = { version = "1.0", logic = "AND", items = [{ type = "flag", subject = "player", flag_key = "rent_handled_this_week", operator = "is_false" }, { type = "trait", subject = "player", trait_key = "rent_paid_total", operator = "gte", value = 900 }] } }, blocks = [
+  { type = "group", props = { conditions = { version = "1.0", logic = "AND", items = [{ type = "flag", subject = "player", flag_key = "rent_handled_this_week", operator = "is_false" }, { type = "trait", subject = "player", trait_key = "rent_paid_total", operator = "gte", value = 900 }, { type = "trait", subject = "player", trait_key = "rent_weeks_owed", operator = "eq", value = 0 }] } }, blocks = [
     { type = "paragraph", content = "Mark folds the paper down and holds out his hand." },
     { type = "dialog", content = "Count it out where I can see it.", props = { speaker = "npc", npcId = "npc_mark" } },
     { type = "dialog", content = "A hundred, kid.", props = { speaker = "npc", npcId = "npc_mark" } },
+  ] },
+  { type = "group", props = { conditions = { version = "1.0", logic = "AND", items = [{ type = "flag", subject = "player", flag_key = "rent_handled_this_week", operator = "is_false" }, { type = "trait", subject = "player", trait_key = "rent_paid_total", operator = "gte", value = 900 }, { type = "trait", subject = "player", trait_key = "rent_weeks_owed", operator = "eq", value = 1 }, { type = "trait", subject = "player", trait_key = "money", operator = "lt", value = 200 }] } }, blocks = [
+    { type = "paragraph", content = "Mark folds the paper down and holds out his hand." },
+    { type = "dialog", content = "Count it out where I can see it.", props = { speaker = "npc", npcId = "npc_mark" } },
+    { type = "paragraph", content = "It's $100 this week, plus $100 from last week: $200." },
+    { type = "dialog", content = "A hundred, and what you owe me. Two hundred, kid.", props = { speaker = "npc", npcId = "npc_mark" } },
+    { type = "paragraph", content = "You don't have it. He waits anyway, his hand still out." },
+  ] },
+  { type = "group", props = { conditions = { version = "1.0", logic = "AND", items = [{ type = "flag", subject = "player", flag_key = "rent_handled_this_week", operator = "is_false" }, { type = "trait", subject = "player", trait_key = "rent_paid_total", operator = "gte", value = 900 }, { type = "trait", subject = "player", trait_key = "rent_weeks_owed", operator = "eq", value = 1 }] } }, blocks = [
+    { type = "paragraph", content = "Mark folds the paper down and holds out his hand." },
+    { type = "dialog", content = "Count it out where I can see it.", props = { speaker = "npc", npcId = "npc_mark" } },
+    { type = "paragraph", content = "It's $100 this week, plus $100 from last week: $200." },
+    { type = "dialog", content = "A hundred, and what you owe me. Two hundred, kid.", props = { speaker = "npc", npcId = "npc_mark" } },
+  ] },
+  { type = "group", props = { conditions = { version = "1.0", logic = "AND", items = [{ type = "flag", subject = "player", flag_key = "rent_handled_this_week", operator = "is_false" }, { type = "trait", subject = "player", trait_key = "rent_paid_total", operator = "gte", value = 900 }, { type = "trait", subject = "player", trait_key = "rent_weeks_owed", operator = "eq", value = 2 }, { type = "trait", subject = "player", trait_key = "money", operator = "lt", value = 300 }] } }, blocks = [
+    { type = "paragraph", content = "Mark folds the paper down and holds out his hand." },
+    { type = "dialog", content = "Count it out where I can see it.", props = { speaker = "npc", npcId = "npc_mark" } },
+    { type = "paragraph", content = "It's $100 this week, plus $200 from the last two weeks: $300." },
+    { type = "dialog", content = "A hundred, and what you owe me. Three hundred, kid.", props = { speaker = "npc", npcId = "npc_mark" } },
+    { type = "paragraph", content = "You don't have it. He waits anyway, his hand still out." },
+  ] },
+  { type = "group", props = { conditions = { version = "1.0", logic = "AND", items = [{ type = "flag", subject = "player", flag_key = "rent_handled_this_week", operator = "is_false" }, { type = "trait", subject = "player", trait_key = "rent_paid_total", operator = "gte", value = 900 }, { type = "trait", subject = "player", trait_key = "rent_weeks_owed", operator = "eq", value = 2 }] } }, blocks = [
+    { type = "paragraph", content = "Mark folds the paper down and holds out his hand." },
+    { type = "dialog", content = "Count it out where I can see it.", props = { speaker = "npc", npcId = "npc_mark" } },
+    { type = "paragraph", content = "It's $100 this week, plus $200 from the last two weeks: $300." },
+    { type = "dialog", content = "A hundred, and what you owe me. Three hundred, kid.", props = { speaker = "npc", npcId = "npc_mark" } },
+  ] },
+  { type = "group", props = { conditions = { version = "1.0", logic = "AND", items = [{ type = "flag", subject = "player", flag_key = "rent_handled_this_week", operator = "is_false" }, { type = "trait", subject = "player", trait_key = "rent_paid_total", operator = "gte", value = 900 }, { type = "trait", subject = "player", trait_key = "rent_weeks_owed", operator = "eq", value = 3 }, { type = "trait", subject = "player", trait_key = "money", operator = "lt", value = 400 }] } }, blocks = [
+    { type = "paragraph", content = "Mark folds the paper down and holds out his hand." },
+    { type = "dialog", content = "Count it out where I can see it.", props = { speaker = "npc", npcId = "npc_mark" } },
+    { type = "paragraph", content = "It's $100 this week, plus $300 from the last three weeks: $400." },
+    { type = "dialog", content = "A hundred, and what you owe me. Four hundred, kid.", props = { speaker = "npc", npcId = "npc_mark" } },
+    { type = "paragraph", content = "You don't have it. He waits anyway, his hand still out." },
+  ] },
+  { type = "group", props = { conditions = { version = "1.0", logic = "AND", items = [{ type = "flag", subject = "player", flag_key = "rent_handled_this_week", operator = "is_false" }, { type = "trait", subject = "player", trait_key = "rent_paid_total", operator = "gte", value = 900 }, { type = "trait", subject = "player", trait_key = "rent_weeks_owed", operator = "eq", value = 3 }] } }, blocks = [
+    { type = "paragraph", content = "Mark folds the paper down and holds out his hand." },
+    { type = "dialog", content = "Count it out where I can see it.", props = { speaker = "npc", npcId = "npc_mark" } },
+    { type = "paragraph", content = "It's $100 this week, plus $300 from the last three weeks: $400." },
+    { type = "dialog", content = "A hundred, and what you owe me. Four hundred, kid.", props = { speaker = "npc", npcId = "npc_mark" } },
   ] },
 ]
 
@@ -1455,21 +1571,84 @@ type = "choices"
 text = "Hand it over ($75)"
 targetType = "node"
 nodeId = "pay75"
-conditions = { version = "1.0", logic = "AND", items = [{ type = "flag", subject = "player", flag_key = "rent_handled_this_week", operator = "is_false" }, { type = "trait", subject = "player", trait_key = "rent_paid_total", operator = "lt", value = 300 }, { type = "trait", subject = "player", trait_key = "money", operator = "gte", value = 75 }] }
+conditions = { version = "1.0", logic = "AND", items = [{ type = "flag", subject = "player", flag_key = "rent_handled_this_week", operator = "is_false" }, { type = "trait", subject = "player", trait_key = "rent_paid_total", operator = "lt", value = 300 }, { type = "trait", subject = "player", trait_key = "rent_weeks_owed", operator = "eq", value = 0 }, { type = "trait", subject = "player", trait_key = "money", operator = "gte", value = 75 }] }
+time_progression_minutes = 0
+
+[[canvases.nodes.exit_block.choices]]
+text = "Hand it over ($150)"
+targetType = "node"
+nodeId = "pay75_1"
+conditions = { version = "1.0", logic = "AND", items = [{ type = "flag", subject = "player", flag_key = "rent_handled_this_week", operator = "is_false" }, { type = "trait", subject = "player", trait_key = "rent_paid_total", operator = "lt", value = 300 }, { type = "trait", subject = "player", trait_key = "rent_weeks_owed", operator = "eq", value = 1 }, { type = "trait", subject = "player", trait_key = "money", operator = "gte", value = 150 }] }
+time_progression_minutes = 0
+
+[[canvases.nodes.exit_block.choices]]
+text = "Hand it over ($225)"
+targetType = "node"
+nodeId = "pay75_2"
+conditions = { version = "1.0", logic = "AND", items = [{ type = "flag", subject = "player", flag_key = "rent_handled_this_week", operator = "is_false" }, { type = "trait", subject = "player", trait_key = "rent_paid_total", operator = "lt", value = 300 }, { type = "trait", subject = "player", trait_key = "rent_weeks_owed", operator = "eq", value = 2 }, { type = "trait", subject = "player", trait_key = "money", operator = "gte", value = 225 }] }
+time_progression_minutes = 0
+
+[[canvases.nodes.exit_block.choices]]
+text = "Hand it over ($300)"
+targetType = "node"
+nodeId = "pay75_3"
+conditions = { version = "1.0", logic = "AND", items = [{ type = "flag", subject = "player", flag_key = "rent_handled_this_week", operator = "is_false" }, { type = "trait", subject = "player", trait_key = "rent_paid_total", operator = "lt", value = 300 }, { type = "trait", subject = "player", trait_key = "rent_weeks_owed", operator = "eq", value = 3 }, { type = "trait", subject = "player", trait_key = "money", operator = "gte", value = 300 }] }
 time_progression_minutes = 0
 
 [[canvases.nodes.exit_block.choices]]
 text = "Hand it over ($90)"
 targetType = "node"
 nodeId = "pay90"
-conditions = { version = "1.0", logic = "AND", items = [{ type = "flag", subject = "player", flag_key = "rent_handled_this_week", operator = "is_false" }, { type = "trait", subject = "player", trait_key = "rent_paid_total", operator = "gte", value = 300 }, { type = "trait", subject = "player", trait_key = "rent_paid_total", operator = "lt", value = 900 }, { type = "trait", subject = "player", trait_key = "money", operator = "gte", value = 90 }] }
+conditions = { version = "1.0", logic = "AND", items = [{ type = "flag", subject = "player", flag_key = "rent_handled_this_week", operator = "is_false" }, { type = "trait", subject = "player", trait_key = "rent_paid_total", operator = "gte", value = 300 }, { type = "trait", subject = "player", trait_key = "rent_paid_total", operator = "lt", value = 900 }, { type = "trait", subject = "player", trait_key = "rent_weeks_owed", operator = "eq", value = 0 }, { type = "trait", subject = "player", trait_key = "money", operator = "gte", value = 90 }] }
+time_progression_minutes = 0
+
+[[canvases.nodes.exit_block.choices]]
+text = "Hand it over ($180)"
+targetType = "node"
+nodeId = "pay90_1"
+conditions = { version = "1.0", logic = "AND", items = [{ type = "flag", subject = "player", flag_key = "rent_handled_this_week", operator = "is_false" }, { type = "trait", subject = "player", trait_key = "rent_paid_total", operator = "gte", value = 300 }, { type = "trait", subject = "player", trait_key = "rent_paid_total", operator = "lt", value = 900 }, { type = "trait", subject = "player", trait_key = "rent_weeks_owed", operator = "eq", value = 1 }, { type = "trait", subject = "player", trait_key = "money", operator = "gte", value = 180 }] }
+time_progression_minutes = 0
+
+[[canvases.nodes.exit_block.choices]]
+text = "Hand it over ($270)"
+targetType = "node"
+nodeId = "pay90_2"
+conditions = { version = "1.0", logic = "AND", items = [{ type = "flag", subject = "player", flag_key = "rent_handled_this_week", operator = "is_false" }, { type = "trait", subject = "player", trait_key = "rent_paid_total", operator = "gte", value = 300 }, { type = "trait", subject = "player", trait_key = "rent_paid_total", operator = "lt", value = 900 }, { type = "trait", subject = "player", trait_key = "rent_weeks_owed", operator = "eq", value = 2 }, { type = "trait", subject = "player", trait_key = "money", operator = "gte", value = 270 }] }
+time_progression_minutes = 0
+
+[[canvases.nodes.exit_block.choices]]
+text = "Hand it over ($360)"
+targetType = "node"
+nodeId = "pay90_3"
+conditions = { version = "1.0", logic = "AND", items = [{ type = "flag", subject = "player", flag_key = "rent_handled_this_week", operator = "is_false" }, { type = "trait", subject = "player", trait_key = "rent_paid_total", operator = "gte", value = 300 }, { type = "trait", subject = "player", trait_key = "rent_paid_total", operator = "lt", value = 900 }, { type = "trait", subject = "player", trait_key = "rent_weeks_owed", operator = "eq", value = 3 }, { type = "trait", subject = "player", trait_key = "money", operator = "gte", value = 360 }] }
 time_progression_minutes = 0
 
 [[canvases.nodes.exit_block.choices]]
 text = "Hand it over ($100)"
 targetType = "node"
 nodeId = "pay100"
-conditions = { version = "1.0", logic = "AND", items = [{ type = "flag", subject = "player", flag_key = "rent_handled_this_week", operator = "is_false" }, { type = "trait", subject = "player", trait_key = "rent_paid_total", operator = "gte", value = 900 }, { type = "trait", subject = "player", trait_key = "money", operator = "gte", value = 100 }] }
+conditions = { version = "1.0", logic = "AND", items = [{ type = "flag", subject = "player", flag_key = "rent_handled_this_week", operator = "is_false" }, { type = "trait", subject = "player", trait_key = "rent_paid_total", operator = "gte", value = 900 }, { type = "trait", subject = "player", trait_key = "rent_weeks_owed", operator = "eq", value = 0 }, { type = "trait", subject = "player", trait_key = "money", operator = "gte", value = 100 }] }
+time_progression_minutes = 0
+
+[[canvases.nodes.exit_block.choices]]
+text = "Hand it over ($200)"
+targetType = "node"
+nodeId = "pay100_1"
+conditions = { version = "1.0", logic = "AND", items = [{ type = "flag", subject = "player", flag_key = "rent_handled_this_week", operator = "is_false" }, { type = "trait", subject = "player", trait_key = "rent_paid_total", operator = "gte", value = 900 }, { type = "trait", subject = "player", trait_key = "rent_weeks_owed", operator = "eq", value = 1 }, { type = "trait", subject = "player", trait_key = "money", operator = "gte", value = 200 }] }
+time_progression_minutes = 0
+
+[[canvases.nodes.exit_block.choices]]
+text = "Hand it over ($300)"
+targetType = "node"
+nodeId = "pay100_2"
+conditions = { version = "1.0", logic = "AND", items = [{ type = "flag", subject = "player", flag_key = "rent_handled_this_week", operator = "is_false" }, { type = "trait", subject = "player", trait_key = "rent_paid_total", operator = "gte", value = 900 }, { type = "trait", subject = "player", trait_key = "rent_weeks_owed", operator = "eq", value = 2 }, { type = "trait", subject = "player", trait_key = "money", operator = "gte", value = 300 }] }
+time_progression_minutes = 0
+
+[[canvases.nodes.exit_block.choices]]
+text = "Hand it over ($400)"
+targetType = "node"
+nodeId = "pay100_3"
+conditions = { version = "1.0", logic = "AND", items = [{ type = "flag", subject = "player", flag_key = "rent_handled_this_week", operator = "is_false" }, { type = "trait", subject = "player", trait_key = "rent_paid_total", operator = "gte", value = 900 }, { type = "trait", subject = "player", trait_key = "rent_weeks_owed", operator = "eq", value = 3 }, { type = "trait", subject = "player", trait_key = "money", operator = "gte", value = 400 }] }
 time_progression_minutes = 0
 
 [[canvases.nodes.exit_block.choices]]
@@ -1492,7 +1671,7 @@ blocks = [
   { type = "paragraph", content = "You count it out on the table. He makes you stand there while he counts it again. Your stomach knots while he does." },
   { type = "dialog", content = "All there. Same time next Sunday.", props = { speaker = "npc", npcId = "npc_mark" } },
   { type = "group", props = { conditions = { version = "1.0", logic = "AND", items = [{ type = "flag", subject = "player", flag_key = "rent_paid_once", operator = "is_false" }] } }, blocks = [
-    { type = "dialog", content = "It goes to ninety once you've paid three hundred. Four Sundays straight, kid, and maybe I'll believe you can do this.", props = { speaker = "npc", npcId = "npc_mark" } },
+    { type = "dialog", content = "It goes to ninety once you've paid three hundred. Keep it coming, kid, and maybe I'll believe you can do this.", props = { speaker = "npc", npcId = "npc_mark" } },
   ] },
   { type = "group", props = { conditions = { version = "1.0", logic = "AND", items = [{ type = "trait", subject = "player", trait_key = "rent_paid_total", operator = "gte", value = 225 }] } }, blocks = [
     { type = "dialog", content = "Ninety from next week. You're doing well enough.", props = { speaker = "npc", npcId = "npc_mark" } },
@@ -1510,7 +1689,88 @@ targetType = "location"
 locationId = "home_kitchen"
 time_progression_minutes = 5
 flagEffects = [{ flag = "rent_paid_once", op = "set" }, { flag = "rent_handled_this_week", op = "set" }]
-effects = [{ trait = "money", op = "add", value = -75 }, { trait = "rent_paid_total", op = "add", value = 75 }, { trait = "sundays_paid", op = "add", value = 1, cap = 4 }]
+effects = [{ trait = "money", op = "add", value = -75 }, { trait = "rent_paid_total", op = "add", value = 75 }, { trait = "rent_weeks_owed", op = "set", value = 0 }]
+
+[[canvases.nodes]]
+id = "pay75_1"
+name = "The rent, paid"
+blocks = [
+  { type = "paragraph", content = "You count it out on the table. He makes you stand there while he counts it again. Your stomach knots while he does." },
+  { type = "dialog", content = "All there. Same time next Sunday.", props = { speaker = "npc", npcId = "npc_mark" } },
+  { type = "group", props = { conditions = { version = "1.0", logic = "AND", items = [{ type = "flag", subject = "player", flag_key = "rent_paid_once", operator = "is_false" }] } }, blocks = [
+    { type = "dialog", content = "It goes to ninety once you've paid three hundred. Keep it coming, kid, and maybe I'll believe you can do this.", props = { speaker = "npc", npcId = "npc_mark" } },
+  ] },
+  { type = "group", props = { conditions = { version = "1.0", logic = "AND", items = [{ type = "trait", subject = "player", trait_key = "rent_paid_total", operator = "gte", value = 150 }] } }, blocks = [
+    { type = "dialog", content = "Ninety from next week. You're doing well enough.", props = { speaker = "npc", npcId = "npc_mark" } },
+    { type = "paragraph", content = "You keep your face still. It's more." },
+  ] },
+  { type = "paragraph", content = "He pockets it and goes back to the paper." },
+]
+
+[canvases.nodes.exit_block]
+type = "choices"
+
+[[canvases.nodes.exit_block.choices]]
+text = "Done"
+targetType = "location"
+locationId = "home_kitchen"
+time_progression_minutes = 5
+flagEffects = [{ flag = "rent_paid_once", op = "set" }, { flag = "rent_handled_this_week", op = "set" }]
+effects = [{ trait = "money", op = "add", value = -150 }, { trait = "rent_paid_total", op = "add", value = 150 }, { trait = "rent_weeks_owed", op = "set", value = 0 }]
+
+[[canvases.nodes]]
+id = "pay75_2"
+name = "The rent, paid"
+blocks = [
+  { type = "paragraph", content = "You count it out on the table. He makes you stand there while he counts it again. Your stomach knots while he does." },
+  { type = "dialog", content = "All there. Same time next Sunday.", props = { speaker = "npc", npcId = "npc_mark" } },
+  { type = "group", props = { conditions = { version = "1.0", logic = "AND", items = [{ type = "flag", subject = "player", flag_key = "rent_paid_once", operator = "is_false" }] } }, blocks = [
+    { type = "dialog", content = "It goes to ninety once you've paid three hundred. Keep it coming, kid, and maybe I'll believe you can do this.", props = { speaker = "npc", npcId = "npc_mark" } },
+  ] },
+  { type = "group", props = { conditions = { version = "1.0", logic = "AND", items = [{ type = "trait", subject = "player", trait_key = "rent_paid_total", operator = "gte", value = 75 }] } }, blocks = [
+    { type = "dialog", content = "Ninety from next week. You're doing well enough.", props = { speaker = "npc", npcId = "npc_mark" } },
+    { type = "paragraph", content = "You keep your face still. It's more." },
+  ] },
+  { type = "paragraph", content = "He pockets it and goes back to the paper." },
+]
+
+[canvases.nodes.exit_block]
+type = "choices"
+
+[[canvases.nodes.exit_block.choices]]
+text = "Done"
+targetType = "location"
+locationId = "home_kitchen"
+time_progression_minutes = 5
+flagEffects = [{ flag = "rent_paid_once", op = "set" }, { flag = "rent_handled_this_week", op = "set" }]
+effects = [{ trait = "money", op = "add", value = -225 }, { trait = "rent_paid_total", op = "add", value = 225 }, { trait = "rent_weeks_owed", op = "set", value = 0 }]
+
+[[canvases.nodes]]
+id = "pay75_3"
+name = "The rent, paid"
+blocks = [
+  { type = "paragraph", content = "You count it out on the table. He makes you stand there while he counts it again. Your stomach knots while he does." },
+  { type = "dialog", content = "All there. Same time next Sunday.", props = { speaker = "npc", npcId = "npc_mark" } },
+  { type = "group", props = { conditions = { version = "1.0", logic = "AND", items = [{ type = "flag", subject = "player", flag_key = "rent_paid_once", operator = "is_false" }] } }, blocks = [
+    { type = "dialog", content = "It goes to ninety once you've paid three hundred. Keep it coming, kid, and maybe I'll believe you can do this.", props = { speaker = "npc", npcId = "npc_mark" } },
+  ] },
+  { type = "group", props = { conditions = { version = "1.0", logic = "AND", items = [{ type = "trait", subject = "player", trait_key = "rent_paid_total", operator = "gte", value = 0 }] } }, blocks = [
+    { type = "dialog", content = "Ninety from next week. You're doing well enough.", props = { speaker = "npc", npcId = "npc_mark" } },
+    { type = "paragraph", content = "You keep your face still. It's more." },
+  ] },
+  { type = "paragraph", content = "He pockets it and goes back to the paper." },
+]
+
+[canvases.nodes.exit_block]
+type = "choices"
+
+[[canvases.nodes.exit_block.choices]]
+text = "Done"
+targetType = "location"
+locationId = "home_kitchen"
+time_progression_minutes = 5
+flagEffects = [{ flag = "rent_paid_once", op = "set" }, { flag = "rent_handled_this_week", op = "set" }]
+effects = [{ trait = "money", op = "add", value = -300 }, { trait = "rent_paid_total", op = "add", value = 300 }, { trait = "rent_weeks_owed", op = "set", value = 0 }]
 
 [[canvases.nodes]]
 id = "pay90"
@@ -1534,7 +1794,79 @@ targetType = "location"
 locationId = "home_kitchen"
 time_progression_minutes = 5
 flagEffects = [{ flag = "rent_paid_once", op = "set" }, { flag = "rent_handled_this_week", op = "set" }]
-effects = [{ trait = "money", op = "add", value = -90 }, { trait = "rent_paid_total", op = "add", value = 90 }, { trait = "sundays_paid", op = "add", value = 1, cap = 4 }]
+effects = [{ trait = "money", op = "add", value = -90 }, { trait = "rent_paid_total", op = "add", value = 90 }, { trait = "rent_weeks_owed", op = "set", value = 0 }]
+
+[[canvases.nodes]]
+id = "pay90_1"
+name = "The rent, paid"
+blocks = [
+  { type = "paragraph", content = "You count it out on the table. He makes you stand there while he counts it again. Your stomach knots while he does." },
+  { type = "dialog", content = "All there. Same time next Sunday.", props = { speaker = "npc", npcId = "npc_mark" } },
+  { type = "group", props = { conditions = { version = "1.0", logic = "AND", items = [{ type = "trait", subject = "player", trait_key = "rent_paid_total", operator = "gte", value = 720 }] } }, blocks = [
+    { type = "dialog", content = "A hundred from next week.", props = { speaker = "npc", npcId = "npc_mark" } },
+    { type = "paragraph", content = "You keep your face still. It's more." },
+  ] },
+  { type = "paragraph", content = "He pockets it and goes back to the paper." },
+]
+
+[canvases.nodes.exit_block]
+type = "choices"
+
+[[canvases.nodes.exit_block.choices]]
+text = "Done"
+targetType = "location"
+locationId = "home_kitchen"
+time_progression_minutes = 5
+flagEffects = [{ flag = "rent_paid_once", op = "set" }, { flag = "rent_handled_this_week", op = "set" }]
+effects = [{ trait = "money", op = "add", value = -180 }, { trait = "rent_paid_total", op = "add", value = 180 }, { trait = "rent_weeks_owed", op = "set", value = 0 }]
+
+[[canvases.nodes]]
+id = "pay90_2"
+name = "The rent, paid"
+blocks = [
+  { type = "paragraph", content = "You count it out on the table. He makes you stand there while he counts it again. Your stomach knots while he does." },
+  { type = "dialog", content = "All there. Same time next Sunday.", props = { speaker = "npc", npcId = "npc_mark" } },
+  { type = "group", props = { conditions = { version = "1.0", logic = "AND", items = [{ type = "trait", subject = "player", trait_key = "rent_paid_total", operator = "gte", value = 630 }] } }, blocks = [
+    { type = "dialog", content = "A hundred from next week.", props = { speaker = "npc", npcId = "npc_mark" } },
+    { type = "paragraph", content = "You keep your face still. It's more." },
+  ] },
+  { type = "paragraph", content = "He pockets it and goes back to the paper." },
+]
+
+[canvases.nodes.exit_block]
+type = "choices"
+
+[[canvases.nodes.exit_block.choices]]
+text = "Done"
+targetType = "location"
+locationId = "home_kitchen"
+time_progression_minutes = 5
+flagEffects = [{ flag = "rent_paid_once", op = "set" }, { flag = "rent_handled_this_week", op = "set" }]
+effects = [{ trait = "money", op = "add", value = -270 }, { trait = "rent_paid_total", op = "add", value = 270 }, { trait = "rent_weeks_owed", op = "set", value = 0 }]
+
+[[canvases.nodes]]
+id = "pay90_3"
+name = "The rent, paid"
+blocks = [
+  { type = "paragraph", content = "You count it out on the table. He makes you stand there while he counts it again. Your stomach knots while he does." },
+  { type = "dialog", content = "All there. Same time next Sunday.", props = { speaker = "npc", npcId = "npc_mark" } },
+  { type = "group", props = { conditions = { version = "1.0", logic = "AND", items = [{ type = "trait", subject = "player", trait_key = "rent_paid_total", operator = "gte", value = 540 }] } }, blocks = [
+    { type = "dialog", content = "A hundred from next week.", props = { speaker = "npc", npcId = "npc_mark" } },
+    { type = "paragraph", content = "You keep your face still. It's more." },
+  ] },
+  { type = "paragraph", content = "He pockets it and goes back to the paper." },
+]
+
+[canvases.nodes.exit_block]
+type = "choices"
+
+[[canvases.nodes.exit_block.choices]]
+text = "Done"
+targetType = "location"
+locationId = "home_kitchen"
+time_progression_minutes = 5
+flagEffects = [{ flag = "rent_paid_once", op = "set" }, { flag = "rent_handled_this_week", op = "set" }]
+effects = [{ trait = "money", op = "add", value = -360 }, { trait = "rent_paid_total", op = "add", value = 360 }, { trait = "rent_weeks_owed", op = "set", value = 0 }]
 
 [[canvases.nodes]]
 id = "pay100"
@@ -1554,14 +1886,85 @@ targetType = "location"
 locationId = "home_kitchen"
 time_progression_minutes = 5
 flagEffects = [{ flag = "rent_paid_once", op = "set" }, { flag = "rent_handled_this_week", op = "set" }]
-effects = [{ trait = "money", op = "add", value = -100 }, { trait = "rent_paid_total", op = "add", value = 100 }, { trait = "sundays_paid", op = "add", value = 1, cap = 4 }]
+effects = [{ trait = "money", op = "add", value = -100 }, { trait = "rent_paid_total", op = "add", value = 100 }, { trait = "rent_weeks_owed", op = "set", value = 0 }]
+
+[[canvases.nodes]]
+id = "pay100_1"
+name = "The rent, paid"
+blocks = [
+  { type = "paragraph", content = "You count it out on the table. He makes you stand there while he counts it again. Your stomach knots while he does." },
+  { type = "dialog", content = "All there. Same time next Sunday.", props = { speaker = "npc", npcId = "npc_mark" } },
+  { type = "paragraph", content = "He pockets it and goes back to the paper." },
+]
+
+[canvases.nodes.exit_block]
+type = "choices"
+
+[[canvases.nodes.exit_block.choices]]
+text = "Done"
+targetType = "location"
+locationId = "home_kitchen"
+time_progression_minutes = 5
+flagEffects = [{ flag = "rent_paid_once", op = "set" }, { flag = "rent_handled_this_week", op = "set" }]
+effects = [{ trait = "money", op = "add", value = -200 }, { trait = "rent_paid_total", op = "add", value = 200 }, { trait = "rent_weeks_owed", op = "set", value = 0 }]
+
+[[canvases.nodes]]
+id = "pay100_2"
+name = "The rent, paid"
+blocks = [
+  { type = "paragraph", content = "You count it out on the table. He makes you stand there while he counts it again. Your stomach knots while he does." },
+  { type = "dialog", content = "All there. Same time next Sunday.", props = { speaker = "npc", npcId = "npc_mark" } },
+  { type = "paragraph", content = "He pockets it and goes back to the paper." },
+]
+
+[canvases.nodes.exit_block]
+type = "choices"
+
+[[canvases.nodes.exit_block.choices]]
+text = "Done"
+targetType = "location"
+locationId = "home_kitchen"
+time_progression_minutes = 5
+flagEffects = [{ flag = "rent_paid_once", op = "set" }, { flag = "rent_handled_this_week", op = "set" }]
+effects = [{ trait = "money", op = "add", value = -300 }, { trait = "rent_paid_total", op = "add", value = 300 }, { trait = "rent_weeks_owed", op = "set", value = 0 }]
+
+[[canvases.nodes]]
+id = "pay100_3"
+name = "The rent, paid"
+blocks = [
+  { type = "paragraph", content = "You count it out on the table. He makes you stand there while he counts it again. Your stomach knots while he does." },
+  { type = "dialog", content = "All there. Same time next Sunday.", props = { speaker = "npc", npcId = "npc_mark" } },
+  { type = "paragraph", content = "He pockets it and goes back to the paper." },
+]
+
+[canvases.nodes.exit_block]
+type = "choices"
+
+[[canvases.nodes.exit_block.choices]]
+text = "Done"
+targetType = "location"
+locationId = "home_kitchen"
+time_progression_minutes = 5
+flagEffects = [{ flag = "rent_paid_once", op = "set" }, { flag = "rent_handled_this_week", op = "set" }]
+effects = [{ trait = "money", op = "add", value = -400 }, { trait = "rent_paid_total", op = "add", value = 400 }, { trait = "rent_weeks_owed", op = "set", value = 0 }]
 
 [[canvases.nodes]]
 id = "short"
 name = "Short"
 blocks = [
   { type = "paragraph", content = "Mark lets his hand drop and picks the paper back up." },
-  { type = "dialog", content = "Short. Next Sunday, then. Don't make it a habit, kid.", props = { speaker = "npc", npcId = "npc_mark" } },
+  { type = "group", props = { conditions = { version = "1.0", logic = "AND", items = [{ type = "trait", subject = "player", trait_key = "rent_weeks_owed", operator = "eq", value = 0 }] } }, blocks = [
+    { type = "dialog", content = "Short. Next Sunday, then. Both weeks. Don't make it a habit, kid.", props = { speaker = "npc", npcId = "npc_mark" } },
+  ] },
+  { type = "group", props = { conditions = { version = "1.0", logic = "AND", items = [{ type = "trait", subject = "player", trait_key = "rent_weeks_owed", operator = "eq", value = 1 }] } }, blocks = [
+    { type = "dialog", content = "Short again. That's three weeks next Sunday, kid.", props = { speaker = "npc", npcId = "npc_mark" } },
+  ] },
+  { type = "group", props = { conditions = { version = "1.0", logic = "AND", items = [{ type = "trait", subject = "player", trait_key = "rent_weeks_owed", operator = "eq", value = 2 }] } }, blocks = [
+    { type = "dialog", content = "Short again. Four weeks next Sunday.", props = { speaker = "npc", npcId = "npc_mark" } },
+  ] },
+  { type = "group", props = { conditions = { version = "1.0", logic = "AND", items = [{ type = "trait", subject = "player", trait_key = "rent_weeks_owed", operator = "eq", value = 3 }] } }, blocks = [
+    { type = "dialog", content = "Still short. It stays at four weeks, kid, and it's all coming to me.", props = { speaker = "npc", npcId = "npc_mark" } },
+  ] },
   { type = "paragraph", content = "Your face goes hot. You don't move until he turns the page." },
   { type = "paragraph", content = "Mom's cup stops halfway to her mouth, then keeps going." },
 ]
@@ -1575,16 +1978,8 @@ targetType = "location"
 locationId = "home_kitchen"
 time_progression_minutes = 5
 flagEffects = [{ flag = "rent_handled_this_week", op = "set" }]
-effects = [{ trait = "sundays_paid", op = "set", value = 0 }]
-conditions = { version = "1.0", logic = "AND", items = [{ type = "flag", subject = "player", flag_key = "pays_her_own_way", operator = "is_false" }] }
-
-[[canvases.nodes.exit_block.choices]]
-text = "Done"
-targetType = "location"
-locationId = "home_kitchen"
-time_progression_minutes = 5
-flagEffects = [{ flag = "rent_handled_this_week", op = "set" }]
-conditions = { version = "1.0", logic = "AND", items = [{ type = "flag", subject = "player", flag_key = "pays_her_own_way", operator = "is_true" }] }
+# P66 — a short Sunday carries the debt, in weeks at this rate, up to three owed (LO 2026-11-27: "yes to all 4").
+effects = [{ trait = "rent_weeks_owed", op = "add", value = 1, cap = 3 }]
 
 [[canvases]]
 id = "mark_living_room"
@@ -1901,6 +2296,8 @@ targetType = "location"
 locationId = "home_living_room"
 time_progression_minutes = 5
 
+# P64 — TV channels (LO 2026-11-27: "1 yes late night", "2 yes", "3 watch only"). One row, five channels; the cap of
+# two a day is the row's, so changing channel inside one watch costs nothing more.
 [[canvases]]
 id = "home_tv"
 name = "Watch TV"
@@ -1917,19 +2314,64 @@ cooldown_message = "you've watched enough TV for one day."
 id = "watch"
 name = "Watch TV"
 blocks = [
-  { type = "paragraph", content = "You curl up at the end of the couch and let an hour of TV wash over you." },
+  { type = "paragraph", content = "You curl up at the end of the couch." },
+]
+
+[canvases.nodes.exit_block]
+type = "choices"
+
+[[canvases.nodes.exit_block.choices]]
+text = "Channel 4 News"
+targetType = "node"
+nodeId = "news"
+time_progression_minutes = 0
+
+[[canvases.nodes.exit_block.choices]]
+text = "Flatmates"
+targetType = "node"
+nodeId = "sitcom"
+time_progression_minutes = 0
+
+[[canvases.nodes.exit_block.choices]]
+text = "Kitchen Rescue"
+targetType = "node"
+nodeId = "cooking"
+time_progression_minutes = 0
+
+[[canvases.nodes.exit_block.choices]]
+text = "The Match"
+targetType = "node"
+nodeId = "sports"
+time_progression_minutes = 0
+
+# Channel 9: 23:00-02:00 (time_of_day wraps past midnight, v2.py:4826-4829) and nobody in the room. One grey line
+# for both: a choice has one locked_text (v2.py:17428-17470), and no row puts anyone here after 23:00.
+[[canvases.nodes.exit_block.choices]]
+text = "Channel 9 After Dark"
+targetType = "node"
+nodeId = "after_dark"
+time_progression_minutes = 0
+show_when_locked = true
+locked_text = "Channel 9 After Dark — it comes on at eleven, once the living room's empty."
+conditions = { version = "1.0", logic = "AND", items = [{ type = "time_of_day", start_time = "23:00", end_time = "02:00" }, { type = "npc_at_location", npc_id = "npc_laura", location_id = "home_living_room", operator = "is_absent" }, { type = "npc_at_location", npc_id = "npc_mark", location_id = "home_living_room", operator = "is_absent" }, { type = "npc_at_location", npc_id = "npc_ryan", location_id = "home_living_room", operator = "is_absent" }] }
+
+[[canvases.nodes]]
+id = "news"
+name = "Channel 4 News"
+blocks = [
+  { type = "paragraph", content = "A newsreader in a sharp blazer: \"A bus strike two towns over, and a fire where nobody was hurt.\" The weatherman promises rain again." },
   { type = "group", props = { conditions = { version = "1.0", logic = "AND", items = [{ type = "npc_at_location", npc_id = "npc_mark", location_id = "home_living_room", operator = "is_present" }, { type = "npc_at_location", npc_id = "npc_ryan", location_id = "home_living_room", operator = "is_present" }] } }, blocks = [
-    { type = "paragraph", content = "Mark changes the channel twice without asking. Ryan laughs at the same parts you do." },
-    { type = "dialog", content = "Don't touch the remote, kid. I'm watching this one.", props = { speaker = "npc", npcId = "npc_mark" } },
-    { type = "dialog", content = "Told you this bit was good. Wait for it. Here it comes.", props = { speaker = "npc", npcId = "npc_ryan" } },
+    { type = "paragraph", content = "Mark watches from his chair with his arms folded. Ryan sprawls at the other end of the couch, half watching." },
+    { type = "dialog", content = "Leave it on this one, kid.", props = { speaker = "npc", npcId = "npc_mark" } },
+    { type = "dialog", content = "Not bad, actually.", props = { speaker = "npc", npcId = "npc_ryan" } },
   ] },
   { type = "group", props = { conditions = { version = "1.0", logic = "AND", items = [{ type = "npc_at_location", npc_id = "npc_mark", location_id = "home_living_room", operator = "is_present" }] } }, blocks = [
-    { type = "paragraph", content = "Mark changes the channel twice without asking." },
-    { type = "dialog", content = "Don't touch the remote, kid. I'm watching this one.", props = { speaker = "npc", npcId = "npc_mark" } },
+    { type = "paragraph", content = "Mark watches from his chair with his arms folded." },
+    { type = "dialog", content = "Leave it on this one, kid. I'm watching too.", props = { speaker = "npc", npcId = "npc_mark" } },
   ] },
   { type = "group", props = { conditions = { version = "1.0", logic = "AND", items = [{ type = "npc_at_location", npc_id = "npc_ryan", location_id = "home_living_room", operator = "is_present" }] } }, blocks = [
-    { type = "paragraph", content = "Ryan laughs at the same parts you do." },
-    { type = "dialog", content = "Told you this bit was good. Wait for it.", props = { speaker = "npc", npcId = "npc_ryan" } },
+    { type = "paragraph", content = "Ryan sprawls at the other end of the couch, half watching." },
+    { type = "dialog", content = "Wake me up if anything happens. Or if anyone comes in.", props = { speaker = "npc", npcId = "npc_ryan" } },
   ] },
   { type = "paragraph", content = "When it's over, you pull out your phone and count what you've got, and what it'll take." },
 ]
@@ -1943,6 +2385,138 @@ targetType = "location"
 locationId = "home_living_room"
 time_progression_minutes = 60
 effects = [{ trait = "energy", op = "add", value = 5, clamp = true }]
+
+[[canvases.nodes]]
+id = "sitcom"
+name = "Flatmates"
+blocks = [
+  { type = "paragraph", content = "Four friends fight over a couch in an apartment too big for their jobs. \"It's my couch! Get your own couch!\" The laugh track does the rest. You laugh once, at the dog." },
+  { type = "group", props = { conditions = { version = "1.0", logic = "AND", items = [{ type = "npc_at_location", npc_id = "npc_mark", location_id = "home_living_room", operator = "is_present" }, { type = "npc_at_location", npc_id = "npc_ryan", location_id = "home_living_room", operator = "is_present" }] } }, blocks = [
+    { type = "paragraph", content = "Mark watches from his chair with his arms folded. Ryan sprawls at the other end of the couch, half watching." },
+    { type = "dialog", content = "Leave it on this one, kid.", props = { speaker = "npc", npcId = "npc_mark" } },
+    { type = "dialog", content = "Not bad, actually.", props = { speaker = "npc", npcId = "npc_ryan" } },
+  ] },
+  { type = "group", props = { conditions = { version = "1.0", logic = "AND", items = [{ type = "npc_at_location", npc_id = "npc_mark", location_id = "home_living_room", operator = "is_present" }] } }, blocks = [
+    { type = "paragraph", content = "Mark watches from his chair with his arms folded." },
+    { type = "dialog", content = "Leave it on this one, kid. I'm watching too.", props = { speaker = "npc", npcId = "npc_mark" } },
+  ] },
+  { type = "group", props = { conditions = { version = "1.0", logic = "AND", items = [{ type = "npc_at_location", npc_id = "npc_ryan", location_id = "home_living_room", operator = "is_present" }] } }, blocks = [
+    { type = "paragraph", content = "Ryan sprawls at the other end of the couch, half watching." },
+    { type = "dialog", content = "Wake me up if anything happens. Or if anyone comes in.", props = { speaker = "npc", npcId = "npc_ryan" } },
+  ] },
+  { type = "paragraph", content = "When it's over, you pull out your phone and count what you've got, and what it'll take." },
+]
+
+[canvases.nodes.exit_block]
+type = "choices"
+
+[[canvases.nodes.exit_block.choices]]
+text = "Done"
+targetType = "location"
+locationId = "home_living_room"
+time_progression_minutes = 60
+effects = [{ trait = "energy", op = "add", value = 5, clamp = true }]
+
+[[canvases.nodes]]
+id = "cooking"
+name = "Kitchen Rescue"
+blocks = [
+  { type = "paragraph", content = "A chef shouts at a man about his risotto. \"This is glue! Glue!\" The man nearly cries into it. By the end you're starving." },
+  { type = "group", props = { conditions = { version = "1.0", logic = "AND", items = [{ type = "npc_at_location", npc_id = "npc_mark", location_id = "home_living_room", operator = "is_present" }, { type = "npc_at_location", npc_id = "npc_ryan", location_id = "home_living_room", operator = "is_present" }] } }, blocks = [
+    { type = "paragraph", content = "Mark watches from his chair with his arms folded. Ryan sprawls at the other end of the couch, half watching." },
+    { type = "dialog", content = "Leave it on this one, kid.", props = { speaker = "npc", npcId = "npc_mark" } },
+    { type = "dialog", content = "Not bad, actually.", props = { speaker = "npc", npcId = "npc_ryan" } },
+  ] },
+  { type = "group", props = { conditions = { version = "1.0", logic = "AND", items = [{ type = "npc_at_location", npc_id = "npc_mark", location_id = "home_living_room", operator = "is_present" }] } }, blocks = [
+    { type = "paragraph", content = "Mark watches from his chair with his arms folded." },
+    { type = "dialog", content = "Leave it on this one, kid. I'm watching too.", props = { speaker = "npc", npcId = "npc_mark" } },
+  ] },
+  { type = "group", props = { conditions = { version = "1.0", logic = "AND", items = [{ type = "npc_at_location", npc_id = "npc_ryan", location_id = "home_living_room", operator = "is_present" }] } }, blocks = [
+    { type = "paragraph", content = "Ryan sprawls at the other end of the couch, half watching." },
+    { type = "dialog", content = "Wake me up if anything happens. Or if anyone comes in.", props = { speaker = "npc", npcId = "npc_ryan" } },
+  ] },
+  { type = "paragraph", content = "When it's over, you pull out your phone and count what you've got, and what it'll take." },
+]
+
+[canvases.nodes.exit_block]
+type = "choices"
+
+[[canvases.nodes.exit_block.choices]]
+text = "Done"
+targetType = "location"
+locationId = "home_living_room"
+time_progression_minutes = 60
+effects = [{ trait = "energy", op = "add", value = 5, clamp = true }]
+
+[[canvases.nodes]]
+id = "sports"
+name = "The Match"
+blocks = [
+  { type = "paragraph", content = "Two teams you don't follow run up and down a wet pitch. Last minute, somebody scores. \"Unbelievable! Absolutely unbelievable!\" the commentator screams." },
+  { type = "group", props = { conditions = { version = "1.0", logic = "AND", items = [{ type = "npc_at_location", npc_id = "npc_mark", location_id = "home_living_room", operator = "is_present" }, { type = "npc_at_location", npc_id = "npc_ryan", location_id = "home_living_room", operator = "is_present" }] } }, blocks = [
+    { type = "paragraph", content = "Mark watches from his chair with his arms folded. Ryan sprawls at the other end of the couch, half watching." },
+    { type = "dialog", content = "Leave it on this one, kid.", props = { speaker = "npc", npcId = "npc_mark" } },
+    { type = "dialog", content = "Not bad, actually.", props = { speaker = "npc", npcId = "npc_ryan" } },
+  ] },
+  { type = "group", props = { conditions = { version = "1.0", logic = "AND", items = [{ type = "npc_at_location", npc_id = "npc_mark", location_id = "home_living_room", operator = "is_present" }] } }, blocks = [
+    { type = "paragraph", content = "Mark watches from his chair with his arms folded." },
+    { type = "dialog", content = "Leave it on this one, kid. I'm watching too.", props = { speaker = "npc", npcId = "npc_mark" } },
+  ] },
+  { type = "group", props = { conditions = { version = "1.0", logic = "AND", items = [{ type = "npc_at_location", npc_id = "npc_ryan", location_id = "home_living_room", operator = "is_present" }] } }, blocks = [
+    { type = "paragraph", content = "Ryan sprawls at the other end of the couch, half watching." },
+    { type = "dialog", content = "Wake me up if anything happens. Or if anyone comes in.", props = { speaker = "npc", npcId = "npc_ryan" } },
+  ] },
+  { type = "paragraph", content = "When it's over, you pull out your phone and count what you've got, and what it'll take." },
+]
+
+[canvases.nodes.exit_block]
+type = "choices"
+
+[[canvases.nodes.exit_block.choices]]
+text = "Done"
+targetType = "location"
+locationId = "home_living_room"
+time_progression_minutes = 60
+effects = [{ trait = "energy", op = "add", value = 5, clamp = true }]
+
+# Watch only (LO "3 watch only"; release 1 is sex she sees, craft/heat.md:58): on the screen and on her body.
+[[canvases.nodes]]
+id = "after_dark"
+name = "Channel 9 After Dark"
+blocks = [
+  { type = "paragraph", content = "You turn the sound right down and find Channel 9." },
+  { type = "image", props = { description = "Her view from a dark couch: a TV screen showing a woman in her twenties on her knees with a man in his thirties, his cock in her mouth, his hand in her hair. The room lit only by the screen. Nobody looking at the camera.", search_queries = ["tv screen porn blowjob dark living room gif", "woman watching porn on tv dark room pov gif"], pool_dir = "sex/tv_after_dark_t5", pool = 4 } },
+  { type = "paragraph", content = "On the screen a woman is on her knees on a hotel carpet. A man has his fist in her hair. His cock slides in and out of her mouth, slow, all the way, until she gags and he holds her there." },
+  { type = "paragraph", content = "Your breath goes short. Heat pools low in your belly and spreads between your legs." },
+  { type = "paragraph", content = "She looks up at him with her mouth full and her mascara running. He tells her she's a good girl." },
+  { type = "group", props = { conditions = { version = "1.0", logic = "AND", items = [{ type = "clothing_slot", slot = "top", operator = "equipped" }] } }, blocks = [
+    { type = "paragraph", content = "Your nipples go tight against your top." },
+  ] },
+  { type = "group", props = { conditions = { version = "1.0", logic = "AND", items = [{ type = "clothing_slot", slot = "top", operator = "unequipped" }] } }, blocks = [
+    { type = "paragraph", content = "Your nipples go tight." },
+  ] },
+  { type = "paragraph", content = "You're wet. You can feel it. You press your thighs together hard and keep your hands flat on the cushion." },
+  { type = "paragraph", content = "He pulls out and comes across her face. Your pulse is in your ears, and between your legs." },
+  { type = "paragraph", content = "A line crawls along the bottom of the screen: Channel 9 After Dark, every night at eleven." },
+]
+
+[canvases.nodes.exit_block]
+type = "choices"
+
+[[canvases.nodes.exit_block.choices]]
+text = "Change the channel"
+targetType = "node"
+nodeId = "watch"
+time_progression_minutes = 30
+flagEffects = [{ flag = "watched_after_dark", op = "set" }]
+
+[[canvases.nodes.exit_block.choices]]
+text = "Turn it off"
+targetType = "location"
+locationId = "home_living_room"
+time_progression_minutes = 30
+flagEffects = [{ flag = "watched_after_dark", op = "set" }]
+
 
 [[canvases]]
 id = "home_dishes"
@@ -2031,8 +2605,8 @@ trigger_mode = "manual"
 is_repeatable = true
 costs = [{ trait = "energy", value = 15 }]
 show_when_blocked = true
-locked_text = "Needs leggings and a sports top"
-conditions = { version = "1.0", logic = "AND", items = [{ type = "clothing_item", item_id = "leggings", operator = "equipped" }, { type = "clothing_item", item_id = "sports_top", operator = "equipped" }] }
+locked_text = "Needs leggings, a sports top and sneakers"
+conditions = { version = "1.0", logic = "AND", items = [{ type = "clothing_item", item_id = "leggings", operator = "equipped" }, { type = "clothing_item", item_id = "sports_top", operator = "equipped" }, { type = "clothing_item", item_id = "sneakers", operator = "equipped" }] }
 
 [[canvases.nodes]]
 id = "run"
@@ -2057,18 +2631,19 @@ locationId = "hood_park"
 time_progression_minutes = 45
 flagEffects = [{ flag = "ran_once", op = "set" }]
 
+# P65 — a running gym pass (day lt 1, week lt 7, month lt 30 days since bought; v2.py:5232-5238), not $5 each time.
 [[canvases]]
 id = "body_workout"
-name = "Work out ($5)"
+name = "Work out"
 
 [canvases.trigger]
 location = "hood_gym"
 trigger_mode = "manual"
 is_repeatable = true
-costs = [{ trait = "money", value = 5 }, { trait = "energy", value = 20 }]
+costs = [{ trait = "energy", value = 20 }]
 show_when_blocked = true
-locked_text = "Needs leggings and a sports top"
-conditions = { version = "1.0", logic = "AND", items = [{ type = "clothing_item", item_id = "leggings", operator = "equipped" }, { type = "clothing_item", item_id = "sports_top", operator = "equipped" }] }
+locked_text = "Needs a gym pass from the front desk, leggings, a sports top and sneakers"
+conditions = { version = "1.0", logic = "AND", items = [{ type = "clothing_item", item_id = "leggings", operator = "equipped" }, { type = "clothing_item", item_id = "sports_top", operator = "equipped" }, { type = "clothing_item", item_id = "sneakers", operator = "equipped" }, { type = "group", logic = "OR", items = [{ type = "days_since_flag", subject = "player", flag_key = "gym_day_pass", operator = "lt", value = 1 }, { type = "days_since_flag", subject = "player", flag_key = "gym_week_pass", operator = "lt", value = 7 }, { type = "days_since_flag", subject = "player", flag_key = "gym_month_pass", operator = "lt", value = 30 }] }] }
 
 # P56 — marco_hips comes to her here, inside the act (C2196; the brake and rest are on marco_hips's own trigger).
 [[canvases.trigger.substitutions]]
@@ -2080,7 +2655,7 @@ conditions = { version = "1.0", logic = "AND", items = [{ type = "npc_at_locatio
 id = "lift"
 name = "Work out"
 blocks = [
-  { type = "paragraph", content = "You pay at the desk for a day pass and find a bench by the mirrors. Two guys at the rack stop talking when you bend for the kettlebell. You feel it on the back of your thighs. You finish the set with your back to them. Next time you'll know where to stand." },
+  { type = "paragraph", content = "You show your pass at the desk and find a bench by the mirrors. Two guys at the rack stop talking when you bend for the kettlebell. You feel it on the back of your thighs. You finish the set with your back to them. Next time you'll know where to stand." },
 ]
 
 [canvases.nodes.exit_block]
@@ -2091,6 +2666,199 @@ text = "Done"
 targetType = "location"
 locationId = "hood_gym"
 time_progression_minutes = 60
+
+
+# P65 — gym passes (LO 2026-11-27: "one day pass, one week pass and one month pass"; "1 yes" $5/$20/$60, "2 yes", "3. yes").
+# A solo row with no npc: Marco's face is his menu (P58). Pass lines and Marco's lines are kept apart by the sign
+# paragraph, because adjacent groups merge into one if/elseif chain.
+[[canvases]]
+id = "gym_desk"
+name = "Front desk"
+
+[canvases.trigger]
+location = "hood_gym"
+trigger_mode = "manual"
+is_repeatable = true
+
+[[canvases.nodes]]
+id = "desk"
+name = "Front desk"
+blocks = [
+  { type = "group", props = { conditions = { version = "1.0", logic = "AND", items = [{ type = "days_since_flag", subject = "player", flag_key = "gym_day_pass", operator = "lt", value = 1 }] } }, blocks = [
+    { type = "paragraph", content = "Your day pass is good till closing." },
+  ] },
+  { type = "group", props = { conditions = { version = "1.0", logic = "AND", items = [{ type = "days_since_flag", subject = "player", flag_key = "gym_week_pass", operator = "eq", value = 0 }] } }, blocks = [
+    { type = "paragraph", content = "Your week pass has seven days left, today included." },
+  ] },
+  { type = "group", props = { conditions = { version = "1.0", logic = "AND", items = [{ type = "days_since_flag", subject = "player", flag_key = "gym_week_pass", operator = "eq", value = 1 }] } }, blocks = [
+    { type = "paragraph", content = "Your week pass has six days left, today included." },
+  ] },
+  { type = "group", props = { conditions = { version = "1.0", logic = "AND", items = [{ type = "days_since_flag", subject = "player", flag_key = "gym_week_pass", operator = "eq", value = 2 }] } }, blocks = [
+    { type = "paragraph", content = "Your week pass has five days left, today included." },
+  ] },
+  { type = "group", props = { conditions = { version = "1.0", logic = "AND", items = [{ type = "days_since_flag", subject = "player", flag_key = "gym_week_pass", operator = "eq", value = 3 }] } }, blocks = [
+    { type = "paragraph", content = "Your week pass has four days left, today included." },
+  ] },
+  { type = "group", props = { conditions = { version = "1.0", logic = "AND", items = [{ type = "days_since_flag", subject = "player", flag_key = "gym_week_pass", operator = "eq", value = 4 }] } }, blocks = [
+    { type = "paragraph", content = "Your week pass has three days left, today included." },
+  ] },
+  { type = "group", props = { conditions = { version = "1.0", logic = "AND", items = [{ type = "days_since_flag", subject = "player", flag_key = "gym_week_pass", operator = "eq", value = 5 }] } }, blocks = [
+    { type = "paragraph", content = "Your week pass has two days left, today included." },
+  ] },
+  { type = "group", props = { conditions = { version = "1.0", logic = "AND", items = [{ type = "days_since_flag", subject = "player", flag_key = "gym_week_pass", operator = "eq", value = 6 }] } }, blocks = [
+    { type = "paragraph", content = "Your week pass runs out tonight." },
+  ] },
+  { type = "group", props = { conditions = { version = "1.0", logic = "AND", items = [{ type = "days_since_flag", subject = "player", flag_key = "gym_month_pass", operator = "lt", value = 23 }] } }, blocks = [
+    { type = "paragraph", content = "Your month pass has more than a week left." },
+  ] },
+  { type = "group", props = { conditions = { version = "1.0", logic = "AND", items = [{ type = "days_since_flag", subject = "player", flag_key = "gym_month_pass", operator = "eq", value = 23 }] } }, blocks = [
+    { type = "paragraph", content = "Your month pass has seven days left, today included." },
+  ] },
+  { type = "group", props = { conditions = { version = "1.0", logic = "AND", items = [{ type = "days_since_flag", subject = "player", flag_key = "gym_month_pass", operator = "eq", value = 24 }] } }, blocks = [
+    { type = "paragraph", content = "Your month pass has six days left, today included." },
+  ] },
+  { type = "group", props = { conditions = { version = "1.0", logic = "AND", items = [{ type = "days_since_flag", subject = "player", flag_key = "gym_month_pass", operator = "eq", value = 25 }] } }, blocks = [
+    { type = "paragraph", content = "Your month pass has five days left, today included." },
+  ] },
+  { type = "group", props = { conditions = { version = "1.0", logic = "AND", items = [{ type = "days_since_flag", subject = "player", flag_key = "gym_month_pass", operator = "eq", value = 26 }] } }, blocks = [
+    { type = "paragraph", content = "Your month pass has four days left, today included." },
+  ] },
+  { type = "group", props = { conditions = { version = "1.0", logic = "AND", items = [{ type = "days_since_flag", subject = "player", flag_key = "gym_month_pass", operator = "eq", value = 27 }] } }, blocks = [
+    { type = "paragraph", content = "Your month pass has three days left, today included." },
+  ] },
+  { type = "group", props = { conditions = { version = "1.0", logic = "AND", items = [{ type = "days_since_flag", subject = "player", flag_key = "gym_month_pass", operator = "eq", value = 28 }] } }, blocks = [
+    { type = "paragraph", content = "Your month pass has two days left, today included." },
+  ] },
+  { type = "group", props = { conditions = { version = "1.0", logic = "AND", items = [{ type = "days_since_flag", subject = "player", flag_key = "gym_month_pass", operator = "eq", value = 29 }] } }, blocks = [
+    { type = "paragraph", content = "Your month pass runs out tonight." },
+  ] },
+  { type = "group", props = { conditions = { version = "1.0", logic = "AND", items = [{ type = "group", logic = "OR", items = [{ type = "flag", subject = "player", flag_key = "gym_day_pass", operator = "is_false" }, { type = "days_since_flag", subject = "player", flag_key = "gym_day_pass", operator = "gte", value = 1 }] }, { type = "group", logic = "OR", items = [{ type = "flag", subject = "player", flag_key = "gym_week_pass", operator = "is_false" }, { type = "days_since_flag", subject = "player", flag_key = "gym_week_pass", operator = "gte", value = 7 }] }, { type = "group", logic = "OR", items = [{ type = "flag", subject = "player", flag_key = "gym_month_pass", operator = "is_false" }, { type = "days_since_flag", subject = "player", flag_key = "gym_month_pass", operator = "gte", value = 30 }] }] } }, blocks = [
+    { type = "paragraph", content = "You don't have a pass running." },
+  ] },
+  { type = "paragraph", content = "The desk is a counter, a card reader and a laminated sign: DAY $5 · WEEK $20 · MONTH $60." },
+  { type = "group", props = { conditions = { version = "1.0", logic = "AND", items = [{ type = "npc_at_location", npc_id = "npc_marco", location_id = "hood_gym", operator = "is_present" }, { type = "flag", subject = "player", flag_key = "met_marco", operator = "is_true" }, { type = "group", logic = "OR", items = [{ type = "flag", subject = "player", flag_key = "gym_day_pass", operator = "is_false" }, { type = "days_since_flag", subject = "player", flag_key = "gym_day_pass", operator = "gte", value = 1 }] }, { type = "group", logic = "OR", items = [{ type = "flag", subject = "player", flag_key = "gym_week_pass", operator = "is_false" }, { type = "days_since_flag", subject = "player", flag_key = "gym_week_pass", operator = "gte", value = 7 }] }, { type = "group", logic = "OR", items = [{ type = "flag", subject = "player", flag_key = "gym_month_pass", operator = "is_false" }, { type = "days_since_flag", subject = "player", flag_key = "gym_month_pass", operator = "gte", value = 30 }] }] } }, blocks = [
+    { type = "dialog", content = "Day's five, week's twenty, month's sixty. Take the month, champ. You'll be in here every day.", props = { speaker = "npc", npcId = "npc_marco" } },
+  ] },
+  { type = "group", props = { conditions = { version = "1.0", logic = "AND", items = [{ type = "npc_at_location", npc_id = "npc_marco", location_id = "hood_gym", operator = "is_present" }, { type = "flag", subject = "player", flag_key = "met_marco", operator = "is_true" }, { type = "group", logic = "OR", items = [{ type = "days_since_flag", subject = "player", flag_key = "gym_day_pass", operator = "lt", value = 1 }, { type = "days_since_flag", subject = "player", flag_key = "gym_week_pass", operator = "lt", value = 7 }, { type = "days_since_flag", subject = "player", flag_key = "gym_month_pass", operator = "lt", value = 30 }] }] } }, blocks = [
+    { type = "dialog", content = "You're paid up, champ. Go lift something. Squats first, and keep your back straight.", props = { speaker = "npc", npcId = "npc_marco" } },
+  ] },
+]
+
+[canvases.nodes.exit_block]
+type = "choices"
+
+[[canvases.nodes.exit_block.choices]]
+text = "Day pass ($5)"
+targetType = "node"
+nodeId = "paid"
+time_progression_minutes = 5
+costs = [{ trait = "money", value = 5 }]
+show_when_locked = true
+locked_text = "Day pass ($5) — your pass is still running."
+conditions = { version = "1.0", logic = "AND", items = [{ type = "group", logic = "OR", items = [{ type = "flag", subject = "player", flag_key = "gym_day_pass", operator = "is_false" }, { type = "days_since_flag", subject = "player", flag_key = "gym_day_pass", operator = "gte", value = 1 }] }, { type = "group", logic = "OR", items = [{ type = "flag", subject = "player", flag_key = "gym_week_pass", operator = "is_false" }, { type = "days_since_flag", subject = "player", flag_key = "gym_week_pass", operator = "gte", value = 7 }] }, { type = "group", logic = "OR", items = [{ type = "flag", subject = "player", flag_key = "gym_month_pass", operator = "is_false" }, { type = "days_since_flag", subject = "player", flag_key = "gym_month_pass", operator = "gte", value = 30 }] }] }
+flagEffects = [{ flag = "gym_day_pass", op = "set" }]
+
+[[canvases.nodes.exit_block.choices]]
+text = "Week pass ($20)"
+targetType = "node"
+nodeId = "paid"
+time_progression_minutes = 5
+costs = [{ trait = "money", value = 20 }]
+show_when_locked = true
+locked_text = "Week pass ($20) — your pass is still running."
+conditions = { version = "1.0", logic = "AND", items = [{ type = "group", logic = "OR", items = [{ type = "flag", subject = "player", flag_key = "gym_day_pass", operator = "is_false" }, { type = "days_since_flag", subject = "player", flag_key = "gym_day_pass", operator = "gte", value = 1 }] }, { type = "group", logic = "OR", items = [{ type = "flag", subject = "player", flag_key = "gym_week_pass", operator = "is_false" }, { type = "days_since_flag", subject = "player", flag_key = "gym_week_pass", operator = "gte", value = 7 }] }, { type = "group", logic = "OR", items = [{ type = "flag", subject = "player", flag_key = "gym_month_pass", operator = "is_false" }, { type = "days_since_flag", subject = "player", flag_key = "gym_month_pass", operator = "gte", value = 30 }] }] }
+flagEffects = [{ flag = "gym_week_pass", op = "set" }]
+
+[[canvases.nodes.exit_block.choices]]
+text = "Month pass ($60)"
+targetType = "node"
+nodeId = "paid"
+time_progression_minutes = 5
+costs = [{ trait = "money", value = 60 }]
+show_when_locked = true
+locked_text = "Month pass ($60) — your pass is still running."
+conditions = { version = "1.0", logic = "AND", items = [{ type = "group", logic = "OR", items = [{ type = "flag", subject = "player", flag_key = "gym_day_pass", operator = "is_false" }, { type = "days_since_flag", subject = "player", flag_key = "gym_day_pass", operator = "gte", value = 1 }] }, { type = "group", logic = "OR", items = [{ type = "flag", subject = "player", flag_key = "gym_week_pass", operator = "is_false" }, { type = "days_since_flag", subject = "player", flag_key = "gym_week_pass", operator = "gte", value = 7 }] }, { type = "group", logic = "OR", items = [{ type = "flag", subject = "player", flag_key = "gym_month_pass", operator = "is_false" }, { type = "days_since_flag", subject = "player", flag_key = "gym_month_pass", operator = "gte", value = 30 }] }] }
+flagEffects = [{ flag = "gym_month_pass", op = "set" }]
+
+[[canvases.nodes.exit_block.choices]]
+text = "Leave"
+targetType = "location"
+locationId = "hood_gym"
+time_progression_minutes = 0
+
+[[canvases.nodes]]
+id = "paid"
+name = "Front desk"
+blocks = [
+  { type = "group", props = { conditions = { version = "1.0", logic = "AND", items = [{ type = "npc_at_location", npc_id = "npc_marco", location_id = "hood_gym", operator = "is_present" }, { type = "flag", subject = "player", flag_key = "met_marco", operator = "is_true" }] } }, blocks = [
+    { type = "paragraph", content = "Marco runs your card himself and hands it back." },
+    { type = "dialog", content = "Good. Now go and use it, champ. Squats first, and don't skip legs.", props = { speaker = "npc", npcId = "npc_marco" } },
+  ] },
+  { type = "group", props = { conditions = { version = "1.0", logic = "AND", items = [{ type = "group", logic = "OR", items = [{ type = "npc_at_location", npc_id = "npc_marco", location_id = "hood_gym", operator = "is_absent" }, { type = "flag", subject = "player", flag_key = "met_marco", operator = "is_false" }] }] } }, blocks = [
+    { type = "paragraph", content = "You tap your card. The reader beeps green." },
+  ] },
+  { type = "paragraph", content = "A receipt curls out of the machine." },
+  { type = "group", props = { conditions = { version = "1.0", logic = "AND", items = [{ type = "days_since_flag", subject = "player", flag_key = "gym_day_pass", operator = "lt", value = 1 }] } }, blocks = [
+    { type = "paragraph", content = "Your day pass is good till closing." },
+  ] },
+  { type = "group", props = { conditions = { version = "1.0", logic = "AND", items = [{ type = "days_since_flag", subject = "player", flag_key = "gym_week_pass", operator = "eq", value = 0 }] } }, blocks = [
+    { type = "paragraph", content = "Your week pass has seven days left, today included." },
+  ] },
+  { type = "group", props = { conditions = { version = "1.0", logic = "AND", items = [{ type = "days_since_flag", subject = "player", flag_key = "gym_week_pass", operator = "eq", value = 1 }] } }, blocks = [
+    { type = "paragraph", content = "Your week pass has six days left, today included." },
+  ] },
+  { type = "group", props = { conditions = { version = "1.0", logic = "AND", items = [{ type = "days_since_flag", subject = "player", flag_key = "gym_week_pass", operator = "eq", value = 2 }] } }, blocks = [
+    { type = "paragraph", content = "Your week pass has five days left, today included." },
+  ] },
+  { type = "group", props = { conditions = { version = "1.0", logic = "AND", items = [{ type = "days_since_flag", subject = "player", flag_key = "gym_week_pass", operator = "eq", value = 3 }] } }, blocks = [
+    { type = "paragraph", content = "Your week pass has four days left, today included." },
+  ] },
+  { type = "group", props = { conditions = { version = "1.0", logic = "AND", items = [{ type = "days_since_flag", subject = "player", flag_key = "gym_week_pass", operator = "eq", value = 4 }] } }, blocks = [
+    { type = "paragraph", content = "Your week pass has three days left, today included." },
+  ] },
+  { type = "group", props = { conditions = { version = "1.0", logic = "AND", items = [{ type = "days_since_flag", subject = "player", flag_key = "gym_week_pass", operator = "eq", value = 5 }] } }, blocks = [
+    { type = "paragraph", content = "Your week pass has two days left, today included." },
+  ] },
+  { type = "group", props = { conditions = { version = "1.0", logic = "AND", items = [{ type = "days_since_flag", subject = "player", flag_key = "gym_week_pass", operator = "eq", value = 6 }] } }, blocks = [
+    { type = "paragraph", content = "Your week pass runs out tonight." },
+  ] },
+  { type = "group", props = { conditions = { version = "1.0", logic = "AND", items = [{ type = "days_since_flag", subject = "player", flag_key = "gym_month_pass", operator = "lt", value = 23 }] } }, blocks = [
+    { type = "paragraph", content = "Your month pass has more than a week left." },
+  ] },
+  { type = "group", props = { conditions = { version = "1.0", logic = "AND", items = [{ type = "days_since_flag", subject = "player", flag_key = "gym_month_pass", operator = "eq", value = 23 }] } }, blocks = [
+    { type = "paragraph", content = "Your month pass has seven days left, today included." },
+  ] },
+  { type = "group", props = { conditions = { version = "1.0", logic = "AND", items = [{ type = "days_since_flag", subject = "player", flag_key = "gym_month_pass", operator = "eq", value = 24 }] } }, blocks = [
+    { type = "paragraph", content = "Your month pass has six days left, today included." },
+  ] },
+  { type = "group", props = { conditions = { version = "1.0", logic = "AND", items = [{ type = "days_since_flag", subject = "player", flag_key = "gym_month_pass", operator = "eq", value = 25 }] } }, blocks = [
+    { type = "paragraph", content = "Your month pass has five days left, today included." },
+  ] },
+  { type = "group", props = { conditions = { version = "1.0", logic = "AND", items = [{ type = "days_since_flag", subject = "player", flag_key = "gym_month_pass", operator = "eq", value = 26 }] } }, blocks = [
+    { type = "paragraph", content = "Your month pass has four days left, today included." },
+  ] },
+  { type = "group", props = { conditions = { version = "1.0", logic = "AND", items = [{ type = "days_since_flag", subject = "player", flag_key = "gym_month_pass", operator = "eq", value = 27 }] } }, blocks = [
+    { type = "paragraph", content = "Your month pass has three days left, today included." },
+  ] },
+  { type = "group", props = { conditions = { version = "1.0", logic = "AND", items = [{ type = "days_since_flag", subject = "player", flag_key = "gym_month_pass", operator = "eq", value = 28 }] } }, blocks = [
+    { type = "paragraph", content = "Your month pass has two days left, today included." },
+  ] },
+  { type = "group", props = { conditions = { version = "1.0", logic = "AND", items = [{ type = "days_since_flag", subject = "player", flag_key = "gym_month_pass", operator = "eq", value = 29 }] } }, blocks = [
+    { type = "paragraph", content = "Your month pass runs out tonight." },
+  ] },
+  { type = "group", props = { conditions = { version = "1.0", logic = "AND", items = [{ type = "group", logic = "OR", items = [{ type = "flag", subject = "player", flag_key = "gym_day_pass", operator = "is_false" }, { type = "days_since_flag", subject = "player", flag_key = "gym_day_pass", operator = "gte", value = 1 }] }, { type = "group", logic = "OR", items = [{ type = "flag", subject = "player", flag_key = "gym_week_pass", operator = "is_false" }, { type = "days_since_flag", subject = "player", flag_key = "gym_week_pass", operator = "gte", value = 7 }] }, { type = "group", logic = "OR", items = [{ type = "flag", subject = "player", flag_key = "gym_month_pass", operator = "is_false" }, { type = "days_since_flag", subject = "player", flag_key = "gym_month_pass", operator = "gte", value = 30 }] }] } }, blocks = [
+    { type = "paragraph", content = "You don't have a pass running." },
+  ] },
+]
+
+[canvases.nodes.exit_block]
+type = "choices"
+
+[[canvases.nodes.exit_block.choices]]
+text = "Done"
+targetType = "location"
+locationId = "hood_gym"
+time_progression_minutes = 0
 
 [[canvases]]
 id = "body_mirror"
@@ -3388,10 +4156,11 @@ id = "street_meet_vance"
 name = "Mr. Vance"
 
 [canvases.trigger]
+# P68 — only if the weekday hello hasn't met him first: every line here is a first meeting.
 location = "hood_street"
 trigger_mode = "manual"
 is_repeatable = false
-conditions = { version = "1.0", logic = "AND", items = [{ type = "npc_at_location", npc_id = "npc_vance", location_id = "hood_street", operator = "is_present" }, { type = "weekday", weekdays = [6] }] }
+conditions = { version = "1.0", logic = "AND", items = [{ type = "npc_at_location", npc_id = "npc_vance", location_id = "hood_street", operator = "is_present" }, { type = "weekday", weekdays = [6] }, { type = "flag", subject = "player", flag_key = "met_vance", operator = "is_false" }] }
 
 [[canvases.nodes]]
 id = "porch"
@@ -5355,7 +6124,7 @@ conditions = { version = "1.0", logic = "AND", items = [{ type = "flag", subject
 id = "moment"
 name = "Marco has notes"
 blocks = [
-  { type = "paragraph", content = "You pay at the desk for a day pass and find a bench by the mirrors. You're halfway through a set when Marco walks over and looks you over." },
+  { type = "paragraph", content = "You show your pass at the desk and find a bench by the mirrors. You're halfway through a set when Marco walks over and looks you over." },
   { type = "group", props = { conditions = { version = "1.0", logic = "AND", items = [{ type = "flag", subject = "player", flag_key = "marco_fixed_form", operator = "is_false" }] } }, blocks = [
     { type = "dialog", content = "You've got the build. Your stance is all wrong, though. Here.", props = { speaker = "npc", npcId = "npc_marco" } },
   ] },
@@ -5678,7 +6447,10 @@ blocks = [
     { type = "dialog", content = "Evening, little lady.", props = { speaker = "npc", npcId = "npc_vance" } },
   ] },
   { type = "group", props = { conditions = { version = "1.0", logic = "AND", items = [{ type = "flag", subject = "player", flag_key = "met_vance", operator = "is_false" }] } }, blocks = [
-    { type = "dialog", content = "Evening.", props = { speaker = "unknown" } },
+    { type = "dialog", content = "Evening, little lady. Vance. I own your house.", props = { speaker = "npc", npcId = "npc_vance" } },
+    { type = "paragraph", content = "He looks you over, slow, from your feet up, and doesn't hide it." },
+    { type = "paragraph", content = "Your skin prickles. You keep your arms at your sides." },
+    { type = "dialog", content = "Your stepdad pays me Sundays. When he doesn't, I'm the one who knocks. Tell him I said hello.", props = { speaker = "npc", npcId = "npc_vance" } },
   ] },
   { type = "paragraph", content = "He doesn't put the envelopes away. He just watches you read the numbers on them." },
 ]
@@ -5691,7 +6463,8 @@ text = "Done"
 targetType = "location"
 locationId = "hood_street"
 time_progression_minutes = 5
-flagEffects = [{ flag = "said_hello_vance", op = "set" }]
+# P68 — a first hello is the meeting (LO 2026-11-27: "yes to all 4").
+flagEffects = [{ flag = "said_hello_vance", op = "set" }, { flag = "met_vance", op = "set" }]
 
 [[canvases.nodes]]
 id = "past"
@@ -6989,7 +7762,7 @@ time_progression_minutes = 45
 
 [[canvases]]
 id = "travel_bus_home"
-name = "Take the bus home ($2)"
+name = "Take the bus to the neighbourhood ($2)"
 
 [canvases.trigger]
 location = "town_square"
@@ -6999,9 +7772,9 @@ costs = [{ trait = "money", value = 2 }]
 
 [[canvases.nodes]]
 id = "ride"
-name = "Take the bus home ($2)"
+name = "Take the bus to the neighbourhood ($2)"
 blocks = [
-  { type = "paragraph", content = "The bus home is half empty. You get the back seat and watch the high street go." },
+  { type = "paragraph", content = "The bus back is half empty. You get the back seat and watch the high street go." },
 ]
 
 [canvases.nodes.exit_block]
@@ -7015,7 +7788,7 @@ time_progression_minutes = 20
 
 [[canvases]]
 id = "travel_walk_home"
-name = "Walk home"
+name = "Walk to the neighbourhood"
 
 [canvases.trigger]
 location = "town_square"
@@ -7025,9 +7798,9 @@ is_repeatable = true
 
 [[canvases.nodes]]
 id = "ride"
-name = "Walk home"
+name = "Walk to the neighbourhood"
 blocks = [
-  { type = "paragraph", content = "The walk home takes forever. Back in the neighbourhood, finally." },
+  { type = "paragraph", content = "The walk back takes forever. Back in the neighbourhood, finally." },
 ]
 
 [canvases.nodes.exit_block]

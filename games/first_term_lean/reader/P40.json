@@ -1,6 +1,6 @@
 {
  "piece": "P40",
- "pass": 15,
+ "pass": 19,
  "screens": {
   "walk_stacks.moment": {
    "text": "a37c81e3865bb04b",
@@ -197,7 +197,7 @@
   "C1267": "f0db81b801577bf2",
   "C1249": "a843f9b57e43a020",
   "C1250": "fde578d75b0d3620",
-  "C1265": "64b72c778e96e443",
+  "C1265": "eb11e05cd75e52a9",
   "C1234": "1b2a2d5f05b10331",
   "L121": "45842b25d0708a15",
   "L125": "1fca3bfe1d0c2419",
@@ -1836,19 +1836,20 @@
    "row": "C1265",
    "screen": "walk_stacks.moment",
    "verdict": "PASS",
-   "line": "\u2014",
-   "why": "a sex walk-in, not a chore or menu; the everyday walk-ins carry none.",
+   "line": "\"a couple against the shelves, her skirt in his fist\" <<sex/stacks_couple_t5>>",
+   "why": "an explicit walk-in moment, not a chore or notice",
    "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "7ee012926f063563",
-    "facts": "7a879c609cbcb66f",
-    "facts2": "7a879c609cbcb66f",
-    "all": "7c06e5917af4da26"
+    "text": "a37c81e3865bb04b",
+    "traits": "44136fa355b3678a",
+    "facts": "94fc5e907f77da68",
+    "facts2": "94fc5e907f77da68",
+    "all": "5e3a47aada8ed046"
    },
-   "row_hash": "64b72c778e96e443",
-   "carried": true,
-   "pass": 1
+   "row_hash": "eb11e05cd75e52a9",
+   "carried": false,
+   "pass": 19
   },
   {
    "row": "C1267",
@@ -3301,7 +3302,7 @@
     "all": "795f50791074d0c4"
    },
    "row_hash": "cafbb0a598dbfa97",
-   "carried": false,
+   "carried": true,
    "pass": 15
   },
   {
@@ -3314,7 +3315,7 @@
    "note": false,
    "screen_hash": "05042e65f38935b8",
    "row_hash": "27e6b45f50edd3ac",
-   "carried": false,
+   "carried": true,
    "pass": 15
   },
   {
@@ -7008,8 +7009,8 @@
  ],
  "causes": [],
  "pending": [],
- "asked": 2,
- "answered": 2,
+ "asked": 1,
+ "answered": 1,
  "pass_items": [],
  "unowed": []
 }

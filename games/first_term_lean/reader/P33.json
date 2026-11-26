@@ -1,20 +1,20 @@
 {
  "piece": "P33",
- "pass": 17,
+ "pass": 24,
  "screens": {
   "body_run.run": {
-   "text": "30c91aa93a1f5b0b",
+   "text": "52e231e9336395b1",
    "traits": "44136fa355b3678a",
-   "facts": "45173fb43c5513f5",
-   "facts2": "45173fb43c5513f5",
-   "all": "b184641b5e03737b"
+   "facts": "446c2b70de750093",
+   "facts2": "446c2b70de750093",
+   "all": "c37c733bf2e1f53f"
   },
   "body_workout.lift": {
-   "text": "c4aeda4721674d6a",
+   "text": "b361d7bf6afb9b1e",
    "traits": "44136fa355b3678a",
-   "facts": "c4485366da85d0a9",
-   "facts2": "c4485366da85d0a9",
-   "all": "92711573fff64d9b"
+   "facts": "5b71a801d7d5bb46",
+   "facts2": "5b71a801d7d5bb46",
+   "all": "1477ab4f21b4e32f"
   },
   "body_mirror.fix": {
    "text": "b734d31c0a6da3e7",
@@ -51,7 +51,7 @@
    "facts2": "44eb5528a5afca5f",
    "all": "1cd7264031187857"
   },
-  "*": "7d7d28267bfb1ef6"
+  "*": "0394ea7853ec2d39"
  },
  "rows": {
   "B1": "5276068df1ca6fa9",
@@ -125,7 +125,7 @@
   "C1267": "f0db81b801577bf2",
   "C1249": "a843f9b57e43a020",
   "C1250": "fde578d75b0d3620",
-  "C1265": "64b72c778e96e443",
+  "C1265": "eb11e05cd75e52a9",
   "C1234": "1b2a2d5f05b10331",
   "L121": "45842b25d0708a15",
   "L125": "1fca3bfe1d0c2419",
@@ -408,18 +408,20 @@
    "row": "B10",
    "screen": "body_run.run",
    "verdict": "PASS",
-   "line": "A dog walker's eyes follow your ass round the pond.",
-   "why": "park has a pond (hood_park description), open 6am-9pm; first-time line behind ran_once is_false, repeat behind is_true",
+   "line": "Your tits bounce in the sports top however tight you pulled it",
+   "why": "sneakers in the trigger only gate; prose unchanged and true on every visit (ran_once groups; pass-gated 'your pass'); hours from the location",
    "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "30c91aa93a1f5b0b",
-    "facts": "45173fb43c5513f5",
-    "all": "b184641b5e03737b"
+    "text": "52e231e9336395b1",
+    "traits": "44136fa355b3678a",
+    "facts": "446c2b70de750093",
+    "facts2": "446c2b70de750093",
+    "all": "c37c733bf2e1f53f"
    },
    "row_hash": "c1c0e2ac2588a579",
    "carried": true,
-   "pass": 2
+   "pass": 22
   },
   {
    "row": "B10",
@@ -442,20 +444,20 @@
    "row": "B10",
    "screen": "body_workout.lift",
    "verdict": "PASS",
-   "line": "Two guys at the rack stop talking when you bend for the kettlebell.",
-   "why": "names nobody; with Marco in by his row (weekdays 6-10, 17-21, Sat 8-14) and the 0.65 roll missing, unnamed regulars still don't deny or misname him; true on first and later visits",
+   "line": "You show your pass at the desk and find a bench by the mirrors.",
+   "why": "sneakers in the trigger only gate; prose unchanged and true on every visit (ran_once groups; pass-gated 'your pass'); hours from the location",
    "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "c4aeda4721674d6a",
+    "text": "b361d7bf6afb9b1e",
     "traits": "44136fa355b3678a",
-    "facts": "c4485366da85d0a9",
-    "facts2": "c4485366da85d0a9",
-    "all": "92711573fff64d9b"
+    "facts": "5b71a801d7d5bb46",
+    "facts2": "5b71a801d7d5bb46",
+    "all": "1477ab4f21b4e32f"
    },
    "row_hash": "c1c0e2ac2588a579",
    "carried": true,
-   "pass": 15
+   "pass": 22
   },
   {
    "row": "B11",
@@ -1298,18 +1300,20 @@
    "row": "B8",
    "screen": "body_run.run",
    "verdict": "PASS",
-   "line": "Your tits bounce in the sports top",
-   "why": "sports top backed by the trigger's clothing_item condition; 15 energy as on label",
+   "line": "Go for a run \u2014 Needs leggings, a sports top and sneakers",
+   "why": "PLAN.md:372 now reads 'a top and a bottom, or a dress, and shoes (any pair; P67)' and PLAN.md:375 'the leggings, sports top and sneakers (P67)'; the trigger conditions (leggings, sports_top, sneakers equipped, 7_final_game.toml:5395) and the greyed line name the same three garments; no number on the screen to disagree",
    "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "30c91aa93a1f5b0b",
-    "facts": "45173fb43c5513f5",
-    "all": "b184641b5e03737b"
+    "text": "52e231e9336395b1",
+    "traits": "44136fa355b3678a",
+    "facts": "446c2b70de750093",
+    "facts2": "446c2b70de750093",
+    "all": "c37c733bf2e1f53f"
    },
    "row_hash": "80d415cf08e0ebfe",
    "carried": true,
-   "pass": 2
+   "pass": 23
   },
   {
    "row": "B8",
@@ -1332,20 +1336,20 @@
    "row": "B8",
    "screen": "body_workout.lift",
    "verdict": "PASS",
-   "line": "Two guys at the rack stop talking when you bend for the kettlebell.",
-   "why": "$5, 20 energy, 60 min match PLAN 315/338; marco_hips exits spend 60 back to the Gym as the workout; garments are the act's leggings + sports_top conditions, none named in prose",
+   "line": "Work out \u2014 Needs a gym pass from the front desk, leggings, a sports top and sneakers",
+   "why": "PLAN.md:372 now reads 'a top and a bottom, or a dress, and shoes (any pair; P67)' and PLAN.md:375 'the leggings, sports top and sneakers (P67)'; the conditions (the same three garments plus a running day/week/month pass, 7_final_game.toml:5432) match the greyed line; pass day counts lt 1 / lt 7 / lt 30 match gym_desk's",
    "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "c4aeda4721674d6a",
+    "text": "b361d7bf6afb9b1e",
     "traits": "44136fa355b3678a",
-    "facts": "c4485366da85d0a9",
-    "facts2": "c4485366da85d0a9",
-    "all": "92711573fff64d9b"
+    "facts": "5b71a801d7d5bb46",
+    "facts2": "5b71a801d7d5bb46",
+    "all": "1477ab4f21b4e32f"
    },
    "row_hash": "80d415cf08e0ebfe",
    "carried": true,
-   "pass": 15
+   "pass": 23
   },
   {
    "row": "B9",
@@ -1442,37 +1446,39 @@
    "row": "C1158",
    "screen": "body_run.run",
    "verdict": "PASS",
-   "line": "Your tits bounce in the sports top",
-   "why": "leggings and sports_top are trigger conditions; workout prose names no garment",
+   "line": "Your tits bounce in the sports top however tight you pulled it",
+   "why": "the only garment named (sports top, run) is in the trigger; sneakers added to the conditions, not named in prose",
    "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "30c91aa93a1f5b0b",
-    "facts": "45173fb43c5513f5",
-    "all": "b184641b5e03737b"
+    "text": "52e231e9336395b1",
+    "traits": "44136fa355b3678a",
+    "facts": "446c2b70de750093",
+    "facts2": "446c2b70de750093",
+    "all": "c37c733bf2e1f53f"
    },
    "row_hash": "f40f51a0fd6cfd10",
    "carried": true,
-   "pass": 2
+   "pass": 22
   },
   {
    "row": "C1158",
    "screen": "body_workout.lift",
    "verdict": "PASS",
-   "line": "Two guys at the rack stop talking when you bend for the kettlebell.",
-   "why": "prose names no garment ('the back of your thighs' is body); the trigger requires leggings and sports_top, and the substitution only runs inside that lock",
+   "line": "You show your pass at the desk and find a bench by the mirrors.",
+   "why": "no garment named; the clothes are conditions",
    "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "c4aeda4721674d6a",
+    "text": "b361d7bf6afb9b1e",
     "traits": "44136fa355b3678a",
-    "facts": "c4485366da85d0a9",
-    "facts2": "c4485366da85d0a9",
-    "all": "92711573fff64d9b"
+    "facts": "5b71a801d7d5bb46",
+    "facts2": "5b71a801d7d5bb46",
+    "all": "1477ab4f21b4e32f"
    },
    "row_hash": "f40f51a0fd6cfd10",
    "carried": true,
-   "pass": 15
+   "pass": 22
   },
   {
    "row": "C1173",
@@ -1599,37 +1605,39 @@
    "row": "C1206",
    "screen": "body_run.run",
    "verdict": "PASS",
-   "line": "Your tits bounce in the sports top",
-   "why": "only garments the trigger requires are named",
+   "line": "Your tits bounce in the sports top however tight you pulled it",
+   "why": "no garment she may not be wearing; she is in leggings, sports top and sneakers by the trigger",
    "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "30c91aa93a1f5b0b",
-    "facts": "45173fb43c5513f5",
-    "all": "b184641b5e03737b"
+    "text": "52e231e9336395b1",
+    "traits": "44136fa355b3678a",
+    "facts": "446c2b70de750093",
+    "facts2": "446c2b70de750093",
+    "all": "c37c733bf2e1f53f"
    },
    "row_hash": "bfff76edbee583de",
    "carried": true,
-   "pass": 2
+   "pass": 22
   },
   {
    "row": "C1206",
    "screen": "body_workout.lift",
    "verdict": "PASS",
-   "line": "Two guys at the rack stop talking when you bend for the kettlebell.",
-   "why": "no garment named; nothing she might not be wearing",
+   "line": "You show your pass at the desk and find a bench by the mirrors.",
+   "why": "no garment she may not be wearing; she is in leggings, sports top and sneakers by the trigger",
    "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "c4aeda4721674d6a",
+    "text": "b361d7bf6afb9b1e",
     "traits": "44136fa355b3678a",
-    "facts": "c4485366da85d0a9",
-    "facts2": "c4485366da85d0a9",
-    "all": "92711573fff64d9b"
+    "facts": "5b71a801d7d5bb46",
+    "facts2": "5b71a801d7d5bb46",
+    "all": "1477ab4f21b4e32f"
    },
    "row_hash": "bfff76edbee583de",
    "carried": true,
-   "pass": 15
+   "pass": 22
   },
   {
    "row": "C1220",
@@ -1756,14 +1764,14 @@
    "row": "C1265",
    "screen": "*",
    "verdict": "PASS",
-   "line": "\u2014",
-   "why": "the two spots are the run (a look, a repeat) and the mirror (a body moment); the snack, lunch, coffee, workout and grass screens carry none",
+   "line": "body_snack/lunch/coffee/grass/workout: no media; body_run <<look/park_run_t3>>; body_mirror <<body/campus_mirror_t3>>",
+   "why": "the everyday solo acts (snack, lunch, coffee, grass, workout) carry none; the mirror is a body moment; the run is a looked-at body scene, not a chore",
    "cause": null,
    "note": false,
-   "screen_hash": "897b7347c2fa1b52",
-   "row_hash": "64b72c778e96e443",
-   "carried": true,
-   "pass": 7
+   "screen_hash": "0394ea7853ec2d39",
+   "row_hash": "eb11e05cd75e52a9",
+   "carried": false,
+   "pass": 24
   },
   {
    "row": "C1267",
@@ -2005,21 +2013,21 @@
   {
    "row": "C1360",
    "screen": "body_workout.lift",
-   "verdict": "FAIL",
-   "line": "Work out ($5) (5 Money)",
-   "why": "note row: the greyed cost tag is always costs[0] (v2.py:6780-6783); with $5+ but under 20 energy it still prints '(5 Money)'; unchanged by P56",
+   "verdict": "PASS",
+   "line": "Work out \u2014 Needs a gym pass from the front desk, leggings and a sports top",
+   "why": "label is the action ('Work out', no price now); a condition lock greys with its locked_text (v2.py:6781-6786); short only on energy it greys with the engine's tag from blockedCostTag, the cost she is short of, '(20 Energy)' (v2.py:6273-6284, 6824-6828). Last pass's '(5 Money)' tag is gone with the money cost",
    "cause": null,
    "note": true,
    "screen_hash": {
-    "text": "c4aeda4721674d6a",
+    "text": "cdd2be782163c7b5",
     "traits": "44136fa355b3678a",
     "facts": "c4485366da85d0a9",
     "facts2": "c4485366da85d0a9",
-    "all": "92711573fff64d9b"
+    "all": "4cda01cbbd4d6776"
    },
    "row_hash": "8c9dc844365f81a5",
    "carried": true,
-   "pass": 15
+   "pass": 20
   },
   {
    "row": "C1421",
@@ -2058,21 +2066,21 @@
   {
    "row": "C1421",
    "screen": "body_workout.lift",
-   "verdict": "FAIL",
-   "line": "(5 Money)",
-   "why": "note row: short on energy only, the told requirement is money, not energy (v2.py:6780-6783); unchanged by P56",
+   "verdict": "PASS",
+   "line": "Needs a gym pass from the front desk, leggings and a sports top",
+   "why": "each requirement is told: the pass (and where to get it) and the clothes by locked_text, energy by the engine's '(20 Energy)' tag; last pass's wrong '(5 Money)' requirement no longer exists",
    "cause": null,
    "note": true,
    "screen_hash": {
-    "text": "c4aeda4721674d6a",
+    "text": "cdd2be782163c7b5",
     "traits": "44136fa355b3678a",
     "facts": "c4485366da85d0a9",
     "facts2": "c4485366da85d0a9",
-    "all": "92711573fff64d9b"
+    "all": "4cda01cbbd4d6776"
    },
    "row_hash": "ef34ee4a51e65d00",
    "carried": true,
-   "pass": 15
+   "pass": 20
   },
   {
    "row": "C1423",
@@ -2483,7 +2491,7 @@
    "note": false,
    "screen_hash": "7d7d28267bfb1ef6",
    "row_hash": "27e6b45f50edd3ac",
-   "carried": false,
+   "carried": true,
    "pass": 17
   },
   {
@@ -2936,18 +2944,20 @@
    "row": "C460",
    "screen": "body_run.run",
    "verdict": "PASS",
-   "line": "A dog walker's eyes follow your ass round the pond.",
-   "why": "park has a pond (hood_park description), open 6am-9pm; first-time line behind ran_once is_false, repeat behind is_true",
+   "line": "Your tits bounce in the sports top however tight you pulled it",
+   "why": "unchanged prose, still true; the new sneakers condition only narrows who reaches it",
    "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "30c91aa93a1f5b0b",
-    "facts": "45173fb43c5513f5",
-    "all": "b184641b5e03737b"
+    "text": "52e231e9336395b1",
+    "traits": "44136fa355b3678a",
+    "facts": "446c2b70de750093",
+    "facts2": "446c2b70de750093",
+    "all": "c37c733bf2e1f53f"
    },
    "row_hash": "67e48e60d5053a2e",
    "carried": true,
-   "pass": 2
+   "pass": 22
   },
   {
    "row": "C460",
@@ -2970,20 +2980,20 @@
    "row": "C460",
    "screen": "body_workout.lift",
    "verdict": "PASS",
-   "line": "Two guys at the rack stop talking when you bend for the kettlebell.",
-   "why": "no claim of who is or was there; true on every playthrough that reaches it, the 0.35 miss with Marco present included",
+   "line": "You show your pass at the desk and find a bench by the mirrors.",
+   "why": "unchanged prose, still true; the new sneakers condition only narrows who reaches it",
    "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "c4aeda4721674d6a",
+    "text": "b361d7bf6afb9b1e",
     "traits": "44136fa355b3678a",
-    "facts": "c4485366da85d0a9",
-    "facts2": "c4485366da85d0a9",
-    "all": "92711573fff64d9b"
+    "facts": "5b71a801d7d5bb46",
+    "facts2": "5b71a801d7d5bb46",
+    "all": "1477ab4f21b4e32f"
    },
    "row_hash": "67e48e60d5053a2e",
    "carried": true,
-   "pass": 15
+   "pass": 22
   },
   {
    "row": "C461",
@@ -3073,18 +3083,20 @@
    "row": "C461",
    "screen": "body_run.run",
    "verdict": "PASS",
-   "line": "Two laps of the loop, your breath loud in your ears.",
-   "why": "texture that can't clash, or her own opinion",
+   "line": "Your legs will feel it later.",
+   "why": "texture and her opinion",
    "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "30c91aa93a1f5b0b",
-    "facts": "45173fb43c5513f5",
-    "all": "b184641b5e03737b"
+    "text": "52e231e9336395b1",
+    "traits": "44136fa355b3678a",
+    "facts": "446c2b70de750093",
+    "facts2": "446c2b70de750093",
+    "all": "c37c733bf2e1f53f"
    },
    "row_hash": "310706ee076318f2",
    "carried": true,
-   "pass": 2
+   "pass": 22
   },
   {
    "row": "C461",
@@ -3107,20 +3119,20 @@
    "row": "C461",
    "screen": "body_workout.lift",
    "verdict": "PASS",
-   "line": "Two guys at the rack stop talking when you bend for the kettlebell.",
-   "why": "unnamed extras and texture only; nothing can clash with a person's rows",
+   "line": "Next time you'll know where to stand.",
+   "why": "texture and her opinion",
    "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "c4aeda4721674d6a",
+    "text": "b361d7bf6afb9b1e",
     "traits": "44136fa355b3678a",
-    "facts": "c4485366da85d0a9",
-    "facts2": "c4485366da85d0a9",
-    "all": "92711573fff64d9b"
+    "facts": "5b71a801d7d5bb46",
+    "facts2": "5b71a801d7d5bb46",
+    "all": "1477ab4f21b4e32f"
    },
    "row_hash": "310706ee076318f2",
    "carried": true,
-   "pass": 15
+   "pass": 22
   },
   {
    "row": "C519",
@@ -5159,17 +5171,19 @@
    "screen": "body_run.run",
    "verdict": "PASS",
    "line": "Done",
-   "why": "every Done carries its minutes (5 to 60)",
+   "why": "Done spends 45 / 60 minutes",
    "cause": null,
    "note": true,
    "screen_hash": {
-    "text": "30c91aa93a1f5b0b",
-    "facts": "45173fb43c5513f5",
-    "all": "b184641b5e03737b"
+    "text": "52e231e9336395b1",
+    "traits": "44136fa355b3678a",
+    "facts": "446c2b70de750093",
+    "facts2": "446c2b70de750093",
+    "all": "c37c733bf2e1f53f"
    },
    "row_hash": "4e86d143688ba8e5",
    "carried": true,
-   "pass": 2
+   "pass": 22
   },
   {
    "row": "C927",
@@ -5191,21 +5205,21 @@
   {
    "row": "C927",
    "screen": "body_workout.lift",
-   "verdict": "N/A",
+   "verdict": "PASS",
    "line": "Done",
-   "why": "Done carries its own 60 minutes; no exit without time",
+   "why": "Done spends 45 / 60 minutes",
    "cause": null,
    "note": true,
    "screen_hash": {
-    "text": "c4aeda4721674d6a",
+    "text": "b361d7bf6afb9b1e",
     "traits": "44136fa355b3678a",
-    "facts": "c4485366da85d0a9",
-    "facts2": "c4485366da85d0a9",
-    "all": "92711573fff64d9b"
+    "facts": "5b71a801d7d5bb46",
+    "facts2": "5b71a801d7d5bb46",
+    "all": "1477ab4f21b4e32f"
    },
    "row_hash": "4e86d143688ba8e5",
    "carried": true,
-   "pass": 15
+   "pass": 22
   },
   {
    "row": "C928",
@@ -5599,19 +5613,21 @@
   {
    "row": "C931",
    "screen": "body_run.run",
-   "verdict": "PASS",
-   "line": "no time_of_day",
-   "why": "lunch end exclusive, said as 'to 2pm'; others have no time condition",
+   "verdict": "N/A",
+   "line": "\u2014",
+   "why": "no time_of_day condition; hours are the location's (park 06-21, gym 06-22)",
    "cause": null,
    "note": true,
    "screen_hash": {
-    "text": "30c91aa93a1f5b0b",
-    "facts": "45173fb43c5513f5",
-    "all": "b184641b5e03737b"
+    "text": "52e231e9336395b1",
+    "traits": "44136fa355b3678a",
+    "facts": "446c2b70de750093",
+    "facts2": "446c2b70de750093",
+    "all": "c37c733bf2e1f53f"
    },
    "row_hash": "1aadffd96e76381c",
    "carried": true,
-   "pass": 2
+   "pass": 22
   },
   {
    "row": "C931",
@@ -5634,20 +5650,20 @@
    "row": "C931",
    "screen": "body_workout.lift",
    "verdict": "N/A",
-   "line": "show_when_blocked = true",
-   "why": "no time_of_day on the act or on the Marco rule; marco_hips has none either; gym room hours only",
+   "line": "\u2014",
+   "why": "no time_of_day condition; hours are the location's (park 06-21, gym 06-22)",
    "cause": null,
    "note": true,
    "screen_hash": {
-    "text": "c4aeda4721674d6a",
+    "text": "b361d7bf6afb9b1e",
     "traits": "44136fa355b3678a",
-    "facts": "c4485366da85d0a9",
-    "facts2": "c4485366da85d0a9",
-    "all": "92711573fff64d9b"
+    "facts": "5b71a801d7d5bb46",
+    "facts2": "5b71a801d7d5bb46",
+    "all": "1477ab4f21b4e32f"
    },
    "row_hash": "1aadffd96e76381c",
    "carried": true,
-   "pass": 15
+   "pass": 22
   },
   {
    "row": "C951",
@@ -5806,18 +5822,20 @@
    "row": "L106",
    "screen": "body_run.run",
    "verdict": "PASS",
-   "line": "no known person named",
-   "why": "coffee's Tom/Chris groups are gated on their presence rows; other screens name only strangers",
+   "line": "a guy coming the other way",
+   "why": "unnamed crowd only; no person the rows don't put there",
    "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "30c91aa93a1f5b0b",
-    "facts": "45173fb43c5513f5",
-    "all": "b184641b5e03737b"
+    "text": "52e231e9336395b1",
+    "traits": "44136fa355b3678a",
+    "facts": "446c2b70de750093",
+    "facts2": "446c2b70de750093",
+    "all": "c37c733bf2e1f53f"
    },
    "row_hash": "13a714429d15f3b2",
    "carried": true,
-   "pass": 2
+   "pass": 22
   },
   {
    "row": "L106",
@@ -5840,20 +5858,20 @@
    "row": "L106",
    "screen": "body_workout.lift",
    "verdict": "PASS",
-   "line": "npc_at_location npc_marco hood_gym is_present",
-   "why": "the lift screen names nobody; Marco's swap is gated by his presence (rule condition + requires_npc), so he only appears where his rows put him",
+   "line": "Two guys at the rack stop talking",
+   "why": "unnamed crowd only; no person the rows don't put there",
    "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "c4aeda4721674d6a",
+    "text": "b361d7bf6afb9b1e",
     "traits": "44136fa355b3678a",
-    "facts": "c4485366da85d0a9",
-    "facts2": "c4485366da85d0a9",
-    "all": "92711573fff64d9b"
+    "facts": "5b71a801d7d5bb46",
+    "facts2": "5b71a801d7d5bb46",
+    "all": "1477ab4f21b4e32f"
    },
    "row_hash": "13a714429d15f3b2",
    "carried": true,
-   "pass": 15
+   "pass": 22
   },
   {
    "row": "L116",
@@ -6026,18 +6044,20 @@
    "row": "L167",
    "screen": "body_run.run",
    "verdict": "PASS",
-   "line": "one row",
-   "why": "one row per activity; lunch's weekday+time row greys naming its full hours",
+   "line": "Go for a run \u2014 Needs leggings, a sports top and sneakers",
+   "why": "one row, no per-day hours",
    "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "30c91aa93a1f5b0b",
-    "facts": "45173fb43c5513f5",
-    "all": "b184641b5e03737b"
+    "text": "52e231e9336395b1",
+    "traits": "44136fa355b3678a",
+    "facts": "446c2b70de750093",
+    "facts2": "446c2b70de750093",
+    "all": "c37c733bf2e1f53f"
    },
    "row_hash": "e64ce2672d85d2d8",
    "carried": true,
-   "pass": 2
+   "pass": 22
   },
   {
    "row": "L167",
@@ -6059,21 +6079,21 @@
   {
    "row": "L167",
    "screen": "body_workout.lift",
-   "verdict": "N/A",
-   "line": "show_when_blocked = true",
-   "why": "no hours of its own; gym hours 6am-10pm every day (PLAN 175)",
+   "verdict": "PASS",
+   "line": "Work out \u2014 Needs a gym pass from the front desk, leggings, a sports top and sneakers",
+   "why": "one row, no per-day hours",
    "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "c4aeda4721674d6a",
+    "text": "b361d7bf6afb9b1e",
     "traits": "44136fa355b3678a",
-    "facts": "c4485366da85d0a9",
-    "facts2": "c4485366da85d0a9",
-    "all": "92711573fff64d9b"
+    "facts": "5b71a801d7d5bb46",
+    "facts2": "5b71a801d7d5bb46",
+    "all": "1477ab4f21b4e32f"
    },
    "row_hash": "e64ce2672d85d2d8",
    "carried": true,
-   "pass": 15
+   "pass": 22
   },
   {
    "row": "L170",

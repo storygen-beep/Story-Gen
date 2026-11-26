@@ -1,6 +1,6 @@
 {
  "piece": "P01",
- "pass": 6,
+ "pass": 8,
  "screens": {
   "sidebar.energy": {
    "text": "3473bd68b6c72b9a",
@@ -80,8 +80,8 @@
   "L69": "83c3a8553703cd3e",
   "L70": "1a6d38f98d54f822",
   "L116": "3404a09acbdd6056",
-  "meters#1": "2c2366c8a4f0661a",
-  "meters#2": "5f0e666241071b92",
+  "meters#1": "e14674c1aa355bf6",
+  "meters#2": "0f19025a55312671",
   "meters#3": "64b4a3356f5a7f41",
   "meters#4": "883bf0bdb8da859b",
   "meters#5": "dc6e47a9359795b0",
@@ -173,7 +173,7 @@
   "voice#2": "a40d4073409a2705",
   "voice#3": "4777d2c1251214c2",
   "voice#4": "ac2fdd7245f436db",
-  "voice#5": "7bbdd4290054e601",
+  "voice#5": "f74d350a978e124c",
   "voice#6": "df1f5dc8b6d21538",
   "voice#7": "321cc76cff93aadb",
   "voice#8": "4362249fb5f9616e"
@@ -1300,7 +1300,7 @@
    "note": false,
    "screen_hash": "94d0fedd770a24d2",
    "row_hash": "6626e5d54fe97b40",
-   "carried": false,
+   "carried": true,
    "pass": 6
   },
   {
@@ -2395,14 +2395,14 @@
    "row": "meters#1",
    "screen": "*",
    "verdict": "PASS",
-   "line": "Exhibitionism / Level 0",
-   "why": "skill = true on all four skills (7_final_game.toml:45-62), 0 in core_traits, sidebar shows each by level.",
+   "line": "disinhibition, exhibitionism, submission, dominance: skill = true; core_traits 0; sidebar bands \"Level 0\"..\"Level 10\"",
+   "why": "four skills as [[traits.labels]] rows with skill = true, 0..1000, shown by level; the set is first_term_lean's, named as LO's choice in meters.md rule 1 (NOTES.md:294); Submission and Dominance read nothing in release 1 and PLAN.md:274-275 names them shown, none moving, until release 2",
    "cause": null,
    "note": false,
    "screen_hash": "94d0fedd770a24d2",
-   "row_hash": "2c2366c8a4f0661a",
+   "row_hash": "e14674c1aa355bf6",
    "carried": true,
-   "pass": 5
+   "pass": 7
   },
   {
    "row": "meters#10",
@@ -2434,14 +2434,14 @@
    "row": "meters#2",
    "screen": "*",
    "verdict": "PASS",
-   "line": "sexy needs level 2, super sexy level 4, slutty level 6",
-   "why": "Order kept, as C285.",
+   "line": "shop locks: Exhibitionism 2 / 4 / 6 (crop top, low-cut tank, mesh top); Disinhibition 2 / 4 / 6 (lace, push-up, sheer bra)",
+   "why": "the game uses CoT's four, so CoT's table is its ladder; every built lock climbs in order of boldness and no row is dropped; no skill_gate choice exists in release 1 (frozen, C2182)",
    "cause": null,
    "note": false,
    "screen_hash": "94d0fedd770a24d2",
-   "row_hash": "5f0e666241071b92",
+   "row_hash": "0f19025a55312671",
    "carried": true,
-   "pass": 5
+   "pass": 7
   },
   {
    "row": "meters#3",
@@ -2889,14 +2889,14 @@
    "row": "voice#5",
    "screen": "*",
    "verdict": "N/A",
-   "line": "",
-   "why": "No scene in this piece: the sidebar carries no story text, person or choice.",
+   "line": "Builds: sidebar:energy, sidebar:money, sidebar:exhibitionism",
+   "why": "sidebar items only; no scene with someone in it, nothing to count",
    "cause": null,
    "note": false,
-   "screen_hash": "4f53cda18c2baa0c",
-   "row_hash": "7bbdd4290054e601",
-   "carried": true,
-   "pass": 1
+   "screen_hash": "94d0fedd770a24d2",
+   "row_hash": "f74d350a978e124c",
+   "carried": false,
+   "pass": 8
   },
   {
    "row": "voice#6",

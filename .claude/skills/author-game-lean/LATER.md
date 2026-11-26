@@ -35,6 +35,10 @@ Sources are paths inside `.claude/skills/author-game-v2/` (frozen); the full row
 - C2150: check a piece against its own card. references/the-map.md:339 (partly built: the `Builds:` check)
 - C2170: a changelog is a diary; facts needed to do the job go in a reference file. references/engine.md:1199
 
+## Cite drift left after the 2026-11-27 audit
+
+75 code cites name something that is not in their lines today, and no older version of the code proves where they moved (51 in `lists/COVERAGE.md`'s evidence column; the rest in craft/clock, clothes, walk-ins, systems, arc, media, people, returning-player, and scripts/walkins.py, who_is_where.py). 221 more have no backticked name before them, so the audit could not judge them. Fix each by reading the code it describes. The hook re-anchors only author-game-v2's cites, so every engine commit moves these again until the lean skill gets the same re-anchoring.
+
 ## Ideas from the lessons list
 
 I1–I36: `lists/LESSONS.md`, section "Ideas, not lessons" (`grep -n "^| I[0-9]" lists/LESSONS.md`). No failure is behind them; they stay there, in one place.

@@ -1,6 +1,6 @@
 {
  "piece": "P04",
- "pass": 12,
+ "pass": 18,
  "screens": {
   "travel_bus_to_campus.ride": {
    "text": "b315e370a219f4ed",
@@ -31,20 +31,20 @@
    "all": "8b038b9e8128c7fc"
   },
   "travel_bus_home.ride": {
-   "text": "df2d19d305bf312b",
+   "text": "cb3be596658309ec",
    "traits": "44136fa355b3678a",
    "facts": "3cf0347032935327",
    "facts2": "3cf0347032935327",
-   "all": "529cc24d20f907de"
+   "all": "38b345272f60886d"
   },
   "travel_walk_home.ride": {
-   "text": "93689c53074f6b53",
+   "text": "32a9412037419a4b",
    "traits": "44136fa355b3678a",
    "facts": "3cf0347032935327",
    "facts2": "3cf0347032935327",
-   "all": "0f763af84b7c6a4c"
+   "all": "44aedf3d6ea918ee"
   },
-  "*": "ad0693286fb79f95"
+  "*": "d3c2d7277327c09d"
  },
  "rows": {
   "B1": "5276068df1ca6fa9",
@@ -84,8 +84,8 @@
   "C928": "799e1dd153166b6d",
   "C931": "1b8984f52b99537e",
   "C890": "3d716de4269fbd6c",
-  "clock#1": "b093ed58ec403b3c",
-  "clock#2": "e393ecafc7ab9a6c",
+  "clock#1": "df2ea5f83738c062",
+  "clock#2": "77b3fafe9c2bf20c",
   "clock#3": "aae8f146c8ec933d",
   "clock#4": "c33118361d16b379",
   "clock#5": "95c5edec9e714e7b",
@@ -93,7 +93,7 @@
   "clock#7": "313c48a91780f62b",
   "clock#8": "f0c2400d02519978",
   "clock#9": "5d697f6bcd9f82de",
-  "clock#10": "2ad5e473e29b231d",
+  "clock#10": "5a788439a11d7765",
   "C1003": "529731c34f717060",
   "C1004": "03f537ef62449273",
   "C1033": "2344627a8d464a08",
@@ -154,7 +154,7 @@
   "C1267": "6bafcadf3d586d5a",
   "C1249": "604706399d2f1194",
   "C1250": "8384cc6bcbd67c07",
-  "C1265": "00b79725344762be",
+  "C1265": "fe36d5bbc01da9a6",
   "C1262": "2946d2fe0b7dc28f",
   "C1234": "7dc492e03732757e",
   "L121": "cddfa55c18e5c7b7",
@@ -172,7 +172,7 @@
   "C1255": "d81893b9077b4b53",
   "L97": "2bfb9527e76ad93b",
   "media#1": "3641bf707d9adfce",
-  "media#2": "01ba7fa1cec4bc7a",
+  "media#2": "69a8103be1e1032a",
   "media#3": "8c75b0d488b188e2",
   "media#4": "03599fc0722690b6",
   "media#5": "2cf5e3607ccecd4a",
@@ -206,7 +206,7 @@
   "places#7": "2a095bf54f175e5e",
   "places#8": "c3ea8d01465e7298",
   "places#9": "f4cd9ab5f62bc6fc",
-  "places#10": "309f0141d342dc6f",
+  "places#10": "d6f0b4b357efc043",
   "C1446": "bb31891410f03faf",
   "L166": "4e530707de7da850",
   "C1386": "4a3df70ba62ff0c1",
@@ -256,7 +256,7 @@
   "voice#2": "a40d4073409a2705",
   "voice#3": "4777d2c1251214c2",
   "voice#4": "ac2fdd7245f436db",
-  "voice#5": "7bbdd4290054e601",
+  "voice#5": "f74d350a978e124c",
   "voice#6": "df1f5dc8b6d21538",
   "voice#7": "321cc76cff93aadb",
   "voice#8": "4362249fb5f9616e"
@@ -292,19 +292,20 @@
    "row": "B10",
    "screen": "travel_bus_home.ride",
    "verdict": "PASS",
-   "line": "The bus home is half empty. You get the back seat and watch the high street go.",
-   "why": "true at the first and last minute and on a second visit: it leaves from Town (trigger town_square), so 'watch the high street go' is true; 'Get off at the bus stop' lands on her street, whose line has the bus stop; nobody named whose rows put them elsewhere",
+   "line": "The bus back is half empty. You get the back seat and watch the high street go.",
+   "why": "true at any hour and on every visit: every way into Town starts in the neighbourhood, so \"back\" holds; no person is named; the bus runs at any hour (card, L166)",
    "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "df2d19d305bf312b",
+    "text": "cb3be596658309ec",
+    "traits": "44136fa355b3678a",
     "facts": "3cf0347032935327",
     "facts2": "3cf0347032935327",
-    "all": "529cc24d20f907de"
+    "all": "38b345272f60886d"
    },
    "row_hash": "c1c0e2ac2588a579",
    "carried": true,
-   "pass": 9
+   "pass": 13
   },
   {
    "row": "B10",
@@ -364,19 +365,20 @@
    "row": "B10",
    "screen": "travel_walk_home.ride",
    "verdict": "PASS",
-   "line": "The walk home takes forever. Back in the neighbourhood, finally.",
-   "why": "true at the first and last minute and on a second visit: leaves from Town and lands on hood_street, the place named Neighbourhood, so 'Back in the neighbourhood' and 'Walk up your street' are both true; nobody named whose rows put them elsewhere",
+   "line": "The walk back takes forever. Back in the neighbourhood, finally.",
+   "why": "she only reaches Town from her street, so \"back\" is true on the first visit and every one after; it names nobody and no hour",
    "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "93689c53074f6b53",
+    "text": "32a9412037419a4b",
+    "traits": "44136fa355b3678a",
     "facts": "3cf0347032935327",
     "facts2": "3cf0347032935327",
-    "all": "0f763af84b7c6a4c"
+    "all": "44aedf3d6ea918ee"
    },
    "row_hash": "c1c0e2ac2588a579",
    "carried": true,
-   "pass": 9
+   "pass": 13
   },
   {
    "row": "B10",
@@ -530,19 +532,20 @@
    "row": "B8",
    "screen": "travel_bus_home.ride",
    "verdict": "PASS",
-   "line": "The bus home is half empty. You get the back seat and watch the high street go.",
-   "why": "$2 and 20 minutes, as PLAN \u00a72 and 8c say; no garment named",
+   "line": "Take the bus to the neighbourhood ($2) \u00b7 Get off at the bus stop (20 min)",
+   "why": "$2 and 20 minutes agree with PLAN 8c, P04 and P62; the landing hood_street has its bus stop (\"a bus stop with its morning queue\"); no garment named",
    "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "df2d19d305bf312b",
+    "text": "cb3be596658309ec",
+    "traits": "44136fa355b3678a",
     "facts": "3cf0347032935327",
     "facts2": "3cf0347032935327",
-    "all": "529cc24d20f907de"
+    "all": "38b345272f60886d"
    },
    "row_hash": "80d415cf08e0ebfe",
    "carried": true,
-   "pass": 9
+   "pass": 13
   },
   {
    "row": "B8",
@@ -602,19 +605,20 @@
    "row": "B8",
    "screen": "travel_walk_home.ride",
    "verdict": "PASS",
-   "line": "The walk home takes forever. Back in the neighbourhood, finally.",
-   "why": "build: trigger at town_square has no costs, exit 'Walk up your street' takes 45 minutes; P45 card 'Walk home (45 min, no energy, as before: P04)', PLAN \u00a72 'walk 45 minutes, 10 energy there and none home', P04 'the walk home takes 45 minutes and no energy' all agree; no garment named",
+   "line": "Walk to the neighbourhood \u00b7 Walk up your street (45 min, no cost)",
+   "why": "45 minutes and no energy agree with P04 (\"the walk home takes 45 minutes and no energy\") and P62; no garment named",
    "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "93689c53074f6b53",
+    "text": "32a9412037419a4b",
+    "traits": "44136fa355b3678a",
     "facts": "3cf0347032935327",
     "facts2": "3cf0347032935327",
-    "all": "0f763af84b7c6a4c"
+    "all": "44aedf3d6ea918ee"
    },
    "row_hash": "80d415cf08e0ebfe",
    "carried": true,
-   "pass": 10
+   "pass": 13
   },
   {
    "row": "B8",
@@ -911,14 +915,14 @@
    "row": "C1265",
    "screen": "*",
    "verdict": "PASS",
-   "line": "image = \"locations/campus_library_t0.jpg\" on the [[locations]] row; quad and travel screens carry none",
-   "why": "Place images are nav cards, not spots of this kind; the quad (routes only), the travel screens and the place menus have no spot.",
+   "line": "travel_*.ride: no media block; place images on campus rooms",
+   "why": "four travel screens are doors/one-liners with no spot; the campus rooms' images are place cards, not spots",
    "cause": null,
    "note": false,
-   "screen_hash": "e2a4a0e66257bc3f",
-   "row_hash": "00b79725344762be",
+   "screen_hash": "d3c2d7277327c09d",
+   "row_hash": "fe36d5bbc01da9a6",
    "carried": true,
-   "pass": 4
+   "pass": 18
   },
   {
    "row": "C1267",
@@ -1307,7 +1311,7 @@
    "note": false,
    "screen_hash": "ad0693286fb79f95",
    "row_hash": "6626e5d54fe97b40",
-   "carried": false,
+   "carried": true,
    "pass": 12
   },
   {
@@ -1652,19 +1656,20 @@
    "row": "C460",
    "screen": "travel_bus_home.ride",
    "verdict": "PASS",
-   "line": "The bus home is half empty. You get the back seat and watch the high street go.",
-   "why": "it leaves from Town (trigger town_square), so 'watch the high street go' is true; 'Get off at the bus stop' lands on her street, whose line has the bus stop",
+   "line": "The bus back is half empty.",
+   "why": "every claim holds on every path that reaches Town (all start on her street); nothing names a past or a person",
    "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "df2d19d305bf312b",
+    "text": "cb3be596658309ec",
+    "traits": "44136fa355b3678a",
     "facts": "3cf0347032935327",
     "facts2": "3cf0347032935327",
-    "all": "529cc24d20f907de"
+    "all": "38b345272f60886d"
    },
    "row_hash": "beb5a109bde77305",
    "carried": true,
-   "pass": 9
+   "pass": 13
   },
   {
    "row": "C460",
@@ -1724,19 +1729,20 @@
    "row": "C460",
    "screen": "travel_walk_home.ride",
    "verdict": "PASS",
-   "line": "The walk home takes forever. Back in the neighbourhood, finally.",
-   "why": "leaves from Town and lands on hood_street, the place named Neighbourhood, so 'Back in the neighbourhood' and 'Walk up your street' are both true",
+   "line": "The walk back takes forever. Back in the neighbourhood, finally.",
+   "why": "\"back\" and \"the neighbourhood\" are true: it lands on hood_street, named Neighbourhood",
    "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "93689c53074f6b53",
+    "text": "32a9412037419a4b",
+    "traits": "44136fa355b3678a",
     "facts": "3cf0347032935327",
     "facts2": "3cf0347032935327",
-    "all": "0f763af84b7c6a4c"
+    "all": "44aedf3d6ea918ee"
    },
    "row_hash": "beb5a109bde77305",
    "carried": true,
-   "pass": 9
+   "pass": 13
   },
   {
    "row": "C460",
@@ -1773,19 +1779,20 @@
    "row": "C461",
    "screen": "travel_bus_home.ride",
    "verdict": "PASS",
-   "line": "The bus home is half empty. You get the back seat and watch the high street go.",
-   "why": "texture and the stranger's lines only, as before",
+   "line": "You get the back seat and watch the high street go.",
+   "why": "texture that can't clash; Town's own line names the high street",
    "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "df2d19d305bf312b",
+    "text": "cb3be596658309ec",
+    "traits": "44136fa355b3678a",
     "facts": "3cf0347032935327",
     "facts2": "3cf0347032935327",
-    "all": "529cc24d20f907de"
+    "all": "38b345272f60886d"
    },
    "row_hash": "153b0804e686abae",
    "carried": true,
-   "pass": 9
+   "pass": 13
   },
   {
    "row": "C461",
@@ -1845,19 +1852,20 @@
    "row": "C461",
    "screen": "travel_walk_home.ride",
    "verdict": "PASS",
-   "line": "The walk home takes forever. Back in the neighbourhood, finally.",
-   "why": "texture and the stranger's lines only, as before",
+   "line": "The walk back takes forever.",
+   "why": "her opinion of the walk, allowed under the truth rule",
    "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "93689c53074f6b53",
+    "text": "32a9412037419a4b",
+    "traits": "44136fa355b3678a",
     "facts": "3cf0347032935327",
     "facts2": "3cf0347032935327",
-    "all": "0f763af84b7c6a4c"
+    "all": "44aedf3d6ea918ee"
    },
    "row_hash": "153b0804e686abae",
    "carried": true,
-   "pass": 9
+   "pass": 13
   },
   {
    "row": "C461",
@@ -2768,19 +2776,20 @@
    "row": "C921",
    "screen": "travel_bus_home.ride",
    "verdict": "N/A",
-   "line": "The bus home is half empty. You get the back seat and watch the high street go.",
-   "why": "no window on this screen",
+   "line": "",
+   "why": "no schedule window on this trip (trigger has no time_of_day)",
    "cause": null,
    "note": true,
    "screen_hash": {
-    "text": "df2d19d305bf312b",
+    "text": "cb3be596658309ec",
+    "traits": "44136fa355b3678a",
     "facts": "3cf0347032935327",
     "facts2": "3cf0347032935327",
-    "all": "529cc24d20f907de"
+    "all": "38b345272f60886d"
    },
    "row_hash": "19da817e808ac3d6",
    "carried": true,
-   "pass": 9
+   "pass": 13
   },
   {
    "row": "C921",
@@ -2840,19 +2849,20 @@
    "row": "C921",
    "screen": "travel_walk_home.ride",
    "verdict": "N/A",
-   "line": "The walk home takes forever. Back in the neighbourhood, finally.",
-   "why": "no window on this screen",
+   "line": "",
+   "why": "no schedule window on this trip (trigger has no time_of_day)",
    "cause": null,
    "note": true,
    "screen_hash": {
-    "text": "93689c53074f6b53",
+    "text": "32a9412037419a4b",
+    "traits": "44136fa355b3678a",
     "facts": "3cf0347032935327",
     "facts2": "3cf0347032935327",
-    "all": "0f763af84b7c6a4c"
+    "all": "44aedf3d6ea918ee"
    },
    "row_hash": "19da817e808ac3d6",
    "carried": true,
-   "pass": 9
+   "pass": 13
   },
   {
    "row": "C921",
@@ -2987,19 +2997,20 @@
    "row": "C927",
    "screen": "travel_bus_home.ride",
    "verdict": "PASS",
-   "line": "The bus home is half empty. You get the back seat and watch the high street go.",
-   "why": "every exit carries its own minutes (bus 20, walk 45; the packed replies 0 then 20)",
+   "line": "Get off at the bus stop: time_progression_minutes = 20",
+   "why": "the exit states its time, so no silent 3-minute default",
    "cause": null,
    "note": true,
    "screen_hash": {
-    "text": "df2d19d305bf312b",
+    "text": "cb3be596658309ec",
+    "traits": "44136fa355b3678a",
     "facts": "3cf0347032935327",
     "facts2": "3cf0347032935327",
-    "all": "529cc24d20f907de"
+    "all": "38b345272f60886d"
    },
    "row_hash": "1e009d83817fb566",
    "carried": true,
-   "pass": 9
+   "pass": 13
   },
   {
    "row": "C927",
@@ -3059,19 +3070,20 @@
    "row": "C927",
    "screen": "travel_walk_home.ride",
    "verdict": "PASS",
-   "line": "The walk home takes forever. Back in the neighbourhood, finally.",
-   "why": "every exit carries its own minutes (bus 20, walk 45; the packed replies 0 then 20)",
+   "line": "Walk up your street: time_progression_minutes = 45",
+   "why": "the exit states its time",
    "cause": null,
    "note": true,
    "screen_hash": {
-    "text": "93689c53074f6b53",
+    "text": "32a9412037419a4b",
+    "traits": "44136fa355b3678a",
     "facts": "3cf0347032935327",
     "facts2": "3cf0347032935327",
-    "all": "0f763af84b7c6a4c"
+    "all": "44aedf3d6ea918ee"
    },
    "row_hash": "1e009d83817fb566",
    "carried": true,
-   "pass": 9
+   "pass": 13
   },
   {
    "row": "C927",
@@ -3242,19 +3254,20 @@
    "row": "C931",
    "screen": "travel_bus_home.ride",
    "verdict": "N/A",
-   "line": "The bus home is half empty. You get the back seat and watch the high street go.",
-   "why": "no time_of_day on this screen",
+   "line": "",
+   "why": "no time_of_day condition on this canvas",
    "cause": null,
    "note": true,
    "screen_hash": {
-    "text": "df2d19d305bf312b",
+    "text": "cb3be596658309ec",
+    "traits": "44136fa355b3678a",
     "facts": "3cf0347032935327",
     "facts2": "3cf0347032935327",
-    "all": "529cc24d20f907de"
+    "all": "38b345272f60886d"
    },
    "row_hash": "1b8984f52b99537e",
    "carried": true,
-   "pass": 9
+   "pass": 13
   },
   {
    "row": "C931",
@@ -3314,19 +3327,20 @@
    "row": "C931",
    "screen": "travel_walk_home.ride",
    "verdict": "N/A",
-   "line": "The walk home takes forever. Back in the neighbourhood, finally.",
-   "why": "no time_of_day on this screen",
+   "line": "",
+   "why": "no time_of_day condition on this canvas",
    "cause": null,
    "note": true,
    "screen_hash": {
-    "text": "93689c53074f6b53",
+    "text": "32a9412037419a4b",
+    "traits": "44136fa355b3678a",
     "facts": "3cf0347032935327",
     "facts2": "3cf0347032935327",
-    "all": "0f763af84b7c6a4c"
+    "all": "44aedf3d6ea918ee"
    },
    "row_hash": "1b8984f52b99537e",
    "carried": true,
-   "pass": 9
+   "pass": 13
   },
   {
    "row": "C931",
@@ -3467,19 +3481,20 @@
    "row": "L106",
    "screen": "travel_bus_home.ride",
    "verdict": "PASS",
-   "line": "The bus home is half empty. You get the back seat and watch the high street go.",
-   "why": "no named person; the bus man is an unnamed stranger",
+   "line": "The bus back is half empty.",
+   "why": "no line claims a named person is there",
    "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "df2d19d305bf312b",
+    "text": "cb3be596658309ec",
+    "traits": "44136fa355b3678a",
     "facts": "3cf0347032935327",
     "facts2": "3cf0347032935327",
-    "all": "529cc24d20f907de"
+    "all": "38b345272f60886d"
    },
    "row_hash": "759e6667d7fc3183",
    "carried": true,
-   "pass": 9
+   "pass": 13
   },
   {
    "row": "L106",
@@ -3539,19 +3554,20 @@
    "row": "L106",
    "screen": "travel_walk_home.ride",
    "verdict": "PASS",
-   "line": "The walk home takes forever. Back in the neighbourhood, finally.",
-   "why": "no named person; the bus man is an unnamed stranger",
+   "line": "The walk back takes forever. Back in the neighbourhood, finally.",
+   "why": "no line claims anyone is there",
    "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "93689c53074f6b53",
+    "text": "32a9412037419a4b",
+    "traits": "44136fa355b3678a",
     "facts": "3cf0347032935327",
     "facts2": "3cf0347032935327",
-    "all": "0f763af84b7c6a4c"
+    "all": "44aedf3d6ea918ee"
    },
    "row_hash": "759e6667d7fc3183",
    "carried": true,
-   "pass": 9
+   "pass": 13
   },
   {
    "row": "L106",
@@ -3679,19 +3695,20 @@
    "row": "L167",
    "screen": "travel_bus_home.ride",
    "verdict": "N/A",
-   "line": "The bus home is half empty. You get the back seat and watch the high street go.",
-   "why": "no row on this screen has hours that differ by day",
+   "line": "",
+   "why": "the trip has no hours, on any day",
    "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "df2d19d305bf312b",
+    "text": "cb3be596658309ec",
+    "traits": "44136fa355b3678a",
     "facts": "3cf0347032935327",
     "facts2": "3cf0347032935327",
-    "all": "529cc24d20f907de"
+    "all": "38b345272f60886d"
    },
    "row_hash": "adf7bb3f8b632ac3",
    "carried": true,
-   "pass": 9
+   "pass": 13
   },
   {
    "row": "L167",
@@ -3751,19 +3768,20 @@
    "row": "L167",
    "screen": "travel_walk_home.ride",
    "verdict": "N/A",
-   "line": "The walk home takes forever. Back in the neighbourhood, finally.",
-   "why": "no row on this screen has hours that differ by day",
+   "line": "",
+   "why": "the trip has no hours, on any day",
    "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "93689c53074f6b53",
+    "text": "32a9412037419a4b",
+    "traits": "44136fa355b3678a",
     "facts": "3cf0347032935327",
     "facts2": "3cf0347032935327",
-    "all": "0f763af84b7c6a4c"
+    "all": "44aedf3d6ea918ee"
    },
    "row_hash": "adf7bb3f8b632ac3",
    "carried": true,
-   "pass": 9
+   "pass": 13
   },
   {
    "row": "L167",
@@ -3813,40 +3831,40 @@
    "row": "clock#1",
    "screen": "*",
    "verdict": "PASS",
-   "line": "Take the bus to campus ($2) \u00b7 Walk home",
-   "why": "the bus shows its $2; the walk's 10 energy and every 20/45 minutes are in the costs only",
+   "line": "Take the bus to town ($2) \u00b7 Walk to town \u00b7 Tell him to back off \u00b7 Say nothing \u00b7 Get off in town \u00b7 Walk into town",
+   "why": "the bus shows its $2; the walk's 10 energy and the 20/45 minutes are in costs only",
    "cause": null,
    "note": false,
-   "screen_hash": "12bbee84876e73c7",
-   "row_hash": "b093ed58ec403b3c",
+   "screen_hash": "d3c2d7277327c09d",
+   "row_hash": "df2ea5f83738c062",
    "carried": true,
-   "pass": 4
+   "pass": 17
   },
   {
    "row": "clock#10",
    "screen": "campus_cafeteria",
    "verdict": "PASS",
-   "line": "body_lunch / rep_table: no show_when_blocked",
-   "why": "Both clock-plus-count rows hide when they can't be used; nothing greys with an hours line.",
+   "line": "body_lunch (time_of_day, no show_when_blocked) / rep_table (max 1 + clock, no show_when_blocked)",
+   "why": "both clock-plus-count rows hide when they cannot be used; nothing greys with an hours line",
    "cause": null,
    "note": false,
    "screen_hash": null,
-   "row_hash": "2ad5e473e29b231d",
+   "row_hash": "5a788439a11d7765",
    "carried": true,
-   "pass": 7
+   "pass": 17
   },
   {
    "row": "clock#2",
    "screen": "*",
    "verdict": "PASS",
-   "line": "\"Take the bus to campus ($2, 20 min)\" \u00b7 \"Walk to campus (45 min, 10 energy)\"; no place on campus has an entry cost",
-   "why": "Time is on the crossing between areas; hops are free both ways.",
+   "line": "\"Get off in town\" 20 min; \"Walk into town\" 45 min; campus rooms no entry cost",
+   "why": "time is spent only on the area-to-area trips; quad to any campus room is a free hop",
    "cause": null,
    "note": false,
-   "screen_hash": "e2a4a0e66257bc3f",
-   "row_hash": "e393ecafc7ab9a6c",
+   "screen_hash": "d3c2d7277327c09d",
+   "row_hash": "77b3fafe9c2bf20c",
    "carried": true,
-   "pass": 4
+   "pass": 18
   },
   {
    "row": "clock#3",
@@ -4180,16 +4198,81 @@
   },
   {
    "row": "media#2",
-   "screen": "*",
+   "screen": "campus_bathroom",
    "verdict": "PASS",
-   "line": "image_search_queries: \"woman of 18 at a long library table with books\" (each place one _t0 file with her in it)",
-   "why": "Each of the six places has at most one picture, tier 0, with her; the quad none; never the empty room.",
+   "line": "washing her hands at a long college bathroom mirror, no phone",
+   "why": "one tier-0 file with her in it; open weekdays 08-18; claims no one, never says empty or alone",
    "cause": null,
    "note": false,
-   "screen_hash": "e2a4a0e66257bc3f",
-   "row_hash": "01ba7fa1cec4bc7a",
+   "screen_hash": null,
+   "row_hash": "69a8103be1e1032a",
    "carried": true,
-   "pass": 4
+   "pass": 17
+  },
+  {
+   "row": "media#2",
+   "screen": "campus_cafeteria",
+   "verdict": "PASS",
+   "line": "with a tray in a college cafeteria / eating lunch at a long cafeteria table",
+   "why": "one tier-0 file with her in it; hours Mon-Fri 08-16 match Rosa's row; the words never say empty or alone",
+   "cause": null,
+   "note": false,
+   "screen_hash": null,
+   "row_hash": "69a8103be1e1032a",
+   "carried": true,
+   "pass": 17
+  },
+  {
+   "row": "media#2",
+   "screen": "campus_lecture_hall",
+   "verdict": "PASS",
+   "line": "sitting in a tiered college lecture hall with a notebook",
+   "why": "one tier-0 file with her in it; claims no one, never says empty or alone; true with or without a lecture on",
+   "cause": null,
+   "note": false,
+   "screen_hash": null,
+   "row_hash": "69a8103be1e1032a",
+   "carried": true,
+   "pass": 17
+  },
+  {
+   "row": "media#2",
+   "screen": "campus_library",
+   "verdict": "PASS",
+   "line": "at a long library table with books / studying in a quiet college library",
+   "why": "one tier-0 file with her in it; 'quiet' is not empty; claims no one; Holt's desk row does not contradict it",
+   "cause": null,
+   "note": false,
+   "screen_hash": null,
+   "row_hash": "69a8103be1e1032a",
+   "carried": true,
+   "pass": 17
+  },
+  {
+   "row": "media#2",
+   "screen": "campus_offices",
+   "verdict": "PASS",
+   "line": "in a college corridor of office doors / waiting outside a professor's office",
+   "why": "one tier-0 file with her in it; nobody's row is the corridor; claims no one, never says empty or alone",
+   "cause": null,
+   "note": false,
+   "screen_hash": null,
+   "row_hash": "69a8103be1e1032a",
+   "carried": true,
+   "pass": 17
+  },
+  {
+   "row": "media#2",
+   "screen": "campus_theatre",
+   "verdict": "PASS",
+   "line": "standing at the edge of a black stage under the lights, the seats dark in front of her",
+   "why": "one tier-0 file with her in it; open weekdays 09-21; no one is always in; the words claim no one",
+   "cause": null,
+   "note": false,
+   "screen_hash": null,
+   "row_hash": "69a8103be1e1032a",
+   "carried": true,
+   "pass": 17
   },
   {
    "row": "media#3",
@@ -4273,14 +4356,14 @@
    "row": "places#10",
    "screen": "*",
    "verdict": "PASS",
-   "line": "Before your first class, the dean wants to see every new student: his office is on the faculty corridor, off the Quad, weekdays 8am to 5pm.",
-   "why": "Faculty Offices are now hidden_until goal1_shown, set on every hall choice of the opening (unmissable); Classes' first step points at the corridor and the dean's row (weekdays 8-17)",
+   "line": "campus_offices: hidden_until = { flag = \"goal1_shown\" }",
+   "why": "goal1_shown is set on all three exits of the opening (the starting canvas, L3400/3407/3414), so the corridor is on the menu from the end of the opening; nothing later to point at, and the Paying Your Way card itself shows on goal1_shown (L279)",
    "cause": null,
    "note": false,
-   "screen_hash": "0c7e096aab3e7c8f",
-   "row_hash": "309f0141d342dc6f",
-   "carried": true,
-   "pass": 11
+   "screen_hash": "d3c2d7277327c09d",
+   "row_hash": "d6f0b4b357efc043",
+   "carried": false,
+   "pass": 18
   },
   {
    "row": "places#2",
@@ -4702,32 +4785,33 @@
    "row": "voice#5",
    "screen": "*",
    "verdict": "PASS",
-   "line": "Good girl. I'll look for you on this bus.",
-   "why": "packed_no 26 : 10 and packed_quiet 26 : 9; the other screens have no one in them",
+   "line": "travel_bus_to_campus worst path ride>packed_quiet 57 narration : 17 spoken",
+   "why": "3.35 : 1, under 5 : 1; the other three trips have nobody in them (no company, not counted)",
    "cause": null,
    "note": false,
-   "screen_hash": "d3e09853ea2f6bae",
-   "row_hash": "7bbdd4290054e601",
+   "screen_hash": "d3c2d7277327c09d",
+   "row_hash": "f74d350a978e124c",
    "carried": true,
-   "pass": 3
+   "pass": 18
   },
   {
    "row": "voice#5",
    "screen": "travel_bus_to_campus.ride",
    "verdict": "PASS",
-   "line": "Packed in tight today, huh? Don't mind me.",
-   "why": "ride 32 narration : 8 spoken (4 : 1); path via packed_no 58 : 18 (3.2 : 1), via packed_quiet 58 : 17 (3.4 : 1); all under 5 : 1",
+   "line": "\"Packed in tight today, huh? Don't mind me.\"",
+   "why": "the packed variant has the man and his line; the half-empty variant has nobody in it and, per the changed rule, is not counted as company; worst path 3.35 : 1",
    "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "98713ee301dfd03b",
+    "text": "b315e370a219f4ed",
+    "traits": "44136fa355b3678a",
     "facts": "4bec7b370aee14bb",
     "facts2": "4bec7b370aee14bb",
-    "all": "144f95579bff818c"
+    "all": "eab098c8e0d9d96b"
    },
-   "row_hash": "7bbdd4290054e601",
+   "row_hash": "f74d350a978e124c",
    "carried": true,
-   "pass": 3
+   "pass": 18
   },
   {
    "row": "voice#6",

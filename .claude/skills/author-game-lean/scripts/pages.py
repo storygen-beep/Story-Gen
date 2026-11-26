@@ -208,7 +208,10 @@ def problems(game):
         for loc in game.get("locations") or []:
             hid = loc.get("hidden_until") if isinstance(loc, dict) else None
             f = str(hid.get("flag")) if isinstance(hid, dict) and hid.get("flag") else None
-            if f and f not in opening and not pointed(f):
+            # A place cut for this release: its flag is declared and nothing in the game sets it, so it can never
+            # open and there is no step to point at (craft/places.md rule 10; LO 2026-11-27, the House Next Door).
+            cut = f and f not in everywhere and f in set((game.get("player") or {}).get("flag_keys") or [])
+            if f and f not in opening and not pointed(f) and not cut:
                 rows.append(f"place `{loc.get('id')}` is hidden until `{f}`, and no hint step points at the step "
                             f"that sets it (craft/places.md rule 10)")
         for f in sorted(ladders):

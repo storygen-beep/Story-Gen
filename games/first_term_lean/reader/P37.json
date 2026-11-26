@@ -1,6 +1,6 @@
 {
  "piece": "P37",
- "pass": 9,
+ "pass": 13,
  "screens": {
   "zoe_party.party": {
    "text": "743043cc9ff5e804",
@@ -80,7 +80,7 @@
   "C1267": "f0db81b801577bf2",
   "C1249": "a843f9b57e43a020",
   "C1250": "fde578d75b0d3620",
-  "C1265": "64b72c778e96e443",
+  "C1265": "eb11e05cd75e52a9",
   "C1234": "1b2a2d5f05b10331",
   "L121": "45842b25d0708a15",
   "L125": "1fca3bfe1d0c2419",
@@ -624,19 +624,20 @@
    "row": "C1265",
    "screen": "zoe_party.party",
    "verdict": "PASS",
-   "line": "\u2014",
-   "why": "A scene, not a chore, door or menu.",
+   "line": "\"He's tall, he's already looking at you\" <<people/zoe_party_t0>>",
+   "why": "a party scene with Zoe's dare, not a chore or menu",
    "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "e96d129b23eb539b",
-    "facts": "56cf78cd7a9fca4a",
-    "facts2": "aea11acdfe12ca7e",
-    "all": "ff74b017858b4d01"
+    "text": "743043cc9ff5e804",
+    "traits": "06d2567e62494596",
+    "facts": "bdb41c3bae4339c4",
+    "facts2": "64bc96f41ce6505b",
+    "all": "1b1cb411f6915f8d"
    },
-   "row_hash": "64b72c778e96e443",
-   "carried": true,
-   "pass": 1
+   "row_hash": "eb11e05cd75e52a9",
+   "carried": false,
+   "pass": 13
   },
   {
    "row": "C1267",
@@ -1302,7 +1303,7 @@
     "all": "1b1cb411f6915f8d"
    },
    "row_hash": "cafbb0a598dbfa97",
-   "carried": false,
+   "carried": true,
    "pass": 9
   },
   {
@@ -1315,7 +1316,7 @@
    "note": false,
    "screen_hash": "984247e13259e4f7",
    "row_hash": "27e6b45f50edd3ac",
-   "carried": false,
+   "carried": true,
    "pass": 9
   },
   {
@@ -2676,8 +2677,8 @@
  ],
  "causes": [],
  "pending": [],
- "asked": 2,
- "answered": 2,
+ "asked": 1,
+ "answered": 1,
  "pass_items": [],
  "unowed": []
 }

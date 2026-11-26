@@ -28,6 +28,9 @@ Craft: C39, C42, C44, C46, C48, C49, C51, C54
   Short means Mark decides what happens next; behind him, Vance comes knocking when the family is late.
 - **Goal 1, pay her own way:** ends on four Sundays in a row paid in full from her own money, or by
   the body route (taking Mark's chair at the top of his arc). Flag `pays_her_own_way`. Next: goal 2.
+  **Release 1 cut (P66; LO 2026-11-27: "just one pay and then it says more in the further releases", "Nope … say
+  out loud that this is it for now"):** in release 1 goal 1 ends at the first payment. Its hint says the storyline's
+  end-for-now line, and its walkthrough stops with 🛑. Four in a row comes in release 2, counted from zero then.
 - **Goal 2, her name on campus:** her campus talk opens the party everyone goes to; she hosts it,
   and that scene sets the end flag. Next: goal 3.
 - **Goal 3, beyond campus:** a man from town sits at Sunday dinner with the whole family, invited by
@@ -62,7 +65,7 @@ Everyone is 18 or over, and the game says so.
 | the rival | classmate | 21 | (name open) | to beat her; can report her to the dean | Brooke: -200 · 0 · 150 |
 
 - **Arrivals come in waves, not all in week one.** Day one: the house, then Hale and Nadia. First
-  week: Zoe, then Tom when she looks for work. First Sunday: Vance. Later: Jake, then the rival.
+  week: Zoe, then Tom when she looks for work. Vance: a weekday evening hello on his porch, or the first Sunday (P68). Later: Jake, then the rival.
 - **No one is named before she meets them.** Until then it's "the man next door", "a guy on the quad".
 
 **The people system** (P48; LO, typed in main-lean 2026-11-25: "Yes lets move to cot style type system", "Meter
@@ -257,7 +260,7 @@ Decided (LO, yes): all three long; release 1 gives each only step 1, the first m
 | Zoe (companion) | medium | the quad, first week: she pulls Ella into fun | parties, a dare, Zoe one step ahead | Zoe and Ella together, a shared night |
 | Dr. Hale | long | he watches her on day one; Nadia sees it | office hours, her grade, "how far will you go" | his office after hours |
 | Tom | medium | she asks for work; her first shift | flirting for tips; closing late with him | café regulars paying for more |
-| Mr. Vance | medium | first Sunday, the man on the porch | she walks past slower; the family is short and he knocks | his porch when the family is short |
+| Mr. Vance | medium | a weekday evening hello, or the first Sunday, the man on the porch (P68) | she walks past slower; the family is short and he knocks | his porch when the family is short |
 | Jake | medium | a guy on the quad who asks her out | dates on Wednesday and Saturday; he shows her off | a normal boyfriend who doesn't know the rest; Ryan sees |
 | Nadia | short | saves her a seat; "last spring it was me" | one line about Hale each lecture | what Hale did to her, told in full |
 | Brooke (rival) | short | the classmate who wants the same part | the competition in drama and lectures | she reports Ella to the dean |
@@ -274,7 +277,7 @@ Releases add steps, events and people at places that already exist, not new plac
 | 1, the skeleton | every person, place and system; the daily loop; each person's first meeting, in waves; people's feelings and her four skills shown, none move (P48) |
 | 2, the house | Ryan, Mark and Laura's next steps; Sunday rent with real costs when short; feelings and skills start moving (people.md rule 15, meters.md) |
 | 3, college and work | Hale and Nadia; Tom and tips; Zoe's first party; Jake's dates |
-| 4, the street | Vance; goal 1's body route (Mark's chair); the four-Sundays end counts from release 1 (§8i; ENI's call, for LO to review, 2026-11-24) |
+| 4, the street | Vance; goal 1's body route (Mark's chair); the four-Sundays end comes in release 2, counted from zero then (P66) (§8i; ENI's call, for LO to review, 2026-11-24) |
 | 5, her name on campus | goal 2 opens; Brooke's threat; the drama part |
 | later | goal 3 (the man at Sunday dinner); short arcs for the named faces; past the top stages, who she does it in front of (WANT, release 41) |
 
@@ -312,7 +315,7 @@ Energy is the one body need. Sources: sleep (to 100), a meal (+15), a shower (+5
 | Bathroom | Shower (built) | the shared bathroom; walk-ins in release 1 (P38, §10a) |
 | Living Room | Watch TV (+5) | (home life) |
 | Park | Go for a run (45 min, 15 energy): the run on screen, and who looks | none in release 1 |
-| Gym | Work out (1 hour, 20 energy, $5 day pass) | Marco, at his meeting |
+| Gym | Work out (1 hour, 20 energy, needs a running pass); Front desk: day pass $5, week $20, month $60 | Marco, at his meeting |
 | Women's Bathroom (campus) | Fix your hair and make-up (10 min) | none |
 | Corner Shop | Buy a snack ($2, +10) (money bite) | Frank or Danny at the till |
 
@@ -335,7 +338,7 @@ Sinks (what money is for):
 |---|---|---|
 | rent | $75 a week | goal 1; short means Mark decides (release 2) |
 | the bus | $2 each way | 25 minutes of her day back, and no energy spent |
-| the gym day pass | $5 | Marco, and the workout |
+| a gym pass: day / week / month | $5 / $20 / $60 | Marco, and the workout (P65) |
 | a snack, corner shop | $2 | +10 energy; Frank or Danny at the till |
 | a coffee, café | $3 | +10 energy; Tom or Chris behind the counter, once she's worked her first shift and met both (P33 reader fix, ENI for LO 2026-11-24) |
 | lunch, cafeteria | $4 | +15 energy; Rosa at the counter |
@@ -366,10 +369,10 @@ top, heels. Ryan's room: one of his hoodies.
 | Ryan's Room | Borrow one of his hoodies | Ryan seeing her in it (release 2) |
 
 Rules:
-- Leaving the house needs a top and a bottom, or a dress. The hall's "Exit Home" says why when it
-  won't open: "You're not going out like this." (the standing rule: no public topless or bottomless).
+- Leaving the house needs a top and a bottom, or a dress, and shoes (any pair; P67, LO 2026-11-27). The hall's
+  "Exit Home" says why when it won't open: "You're not going out like this." (the standing rule: no public topless or bottomless).
 - Ryan's hoodie with nothing under it counts as a dress at home only.
-- The run and the workout need the leggings and sports top; the button says so.
+- The run and the workout need the leggings, sports top and sneakers (P67); the button says so.
 - People notice, one line each, release 1: Laura in the hall when she goes out in Laura's things;
   the neighbours on her street; the girls at the campus mirror. No meter moves.
 - Clothes to buy, release 1: the clothes shop on her street (LO "yes", 2026-11-21).
@@ -504,6 +507,12 @@ Goal 1 reads one counter: Sundays paid in full in a row, 0 to 4, on goal 1's car
 You pay your own way." with goal 2 named as next, in a later release. It counts in release 1 (LO
 2026-11-21: "yes count the sundays"). Goal 2 reads Reputation (8g). Goal 3: later.
 
+Release 1 cut (P66, LO 2026-11-27): nothing counts the Sundays in release 1. The pay choices no longer add to
+`sundays_paid`, no Monday resets it, and nothing sets `pays_her_own_way`. Both keys stay declared (C1656). A short Sunday carries the debt to the next one, counted
+in weeks at the current rate (`rent_weeks_owed`, up to three owed); paying the whole sum clears it, and adds what she
+really paid to `rent_paid_total` (P66, LO 2026-11-27). Goal 1
+ends at the first payment (`rent_paid_once`). The four-in-a-row count starts from zero in release 2.
+
 ## 9. Schedules
 
 ### 9a. Home (LO "yes", 2026-11-21)
@@ -608,7 +617,7 @@ at least one (C28). Release 1: a flag each, no meter. Ryan shows nothing about h
 | A man yanks the fitting-room curtain while she's half into a short skirt; "Oh, Christ, sorry," and he drops it | walks in on her | a stranger | no | on Try it on, chance 0.25 | once a day | Pull it shut · Finish changing |
 
 Count: 6 scenes, 3 everyday (C802); 4 of 6 name someone she knows (C678). Seen, not heard. Release
-1: a flag each, no meter. Vance is "the man next door" in these until P24 names him.
+1: a flag each, no meter. Vance is "the man next door" in these until she meets him (P24's Sunday scene, or P68's weekday hello).
 
 ### 10c. Campus (LO "yes", 2026-11-21)
 

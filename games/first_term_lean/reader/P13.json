@@ -1,6 +1,6 @@
 {
  "piece": "P13",
- "pass": 18,
+ "pass": 22,
  "screens": {
   "opening.wake": {
    "text": "cc3c063d9cef0f23",
@@ -87,11 +87,11 @@
    "all": "7009aa5d2b0cc2a5"
   },
   "opening.sums": {
-   "text": "48aa23cc99bd631e",
+   "text": "e01b11164a4a03ec",
    "traits": "a13af4c65af9f24a",
    "facts": "74439f927ebafbee",
    "facts2": "802ea4adb13e9ebb",
-   "all": "4a1ccc16bcecd3d1"
+   "all": "8ea8f8e29792c677"
   },
   "opening.handover": {
    "text": "1d46c3684cfbd5e4",
@@ -114,7 +114,7 @@
    "facts2": "4a5c000f046f1be5",
    "all": "dea9963b899e2bc8"
   },
-  "*": "311ba6621c8f265f"
+  "*": "9dd1f46454290fc3"
  },
  "rows": {
   "B1": "5276068df1ca6fa9",
@@ -200,7 +200,7 @@
   "C1267": "f0db81b801577bf2",
   "C1249": "a843f9b57e43a020",
   "C1250": "fde578d75b0d3620",
-  "C1265": "64b72c778e96e443",
+  "C1265": "eb11e05cd75e52a9",
   "C1234": "1b2a2d5f05b10331",
   "L121": "45842b25d0708a15",
   "L125": "1fca3bfe1d0c2419",
@@ -647,19 +647,20 @@
    "row": "B10",
    "screen": "opening.sums",
    "verdict": "PASS",
-   "line": "Seventy-five by Sunday. You have nothing.",
-   "why": "07:30: money starts at 0; $75 Sunday and four Sundays in a row agree with PLAN 2 and the rent nodes; Mark's 'one way or another' is on kitchen_rent on every path; the manager's hours match cafe_hire (Mon-Sat from 10:00); the rent line matches the Sunday 08:00-11:55 kitchen-table rent.",
+   "line": "<strong>Pay your way.</strong> Pay Mark your share on Sunday.",
+   "why": "07:30 day one, money 0; $75 by Sunday; the goal names no count; caf\u00e9 hours match cafe_hire (Mon-Sat from 10:00); Mark's \"one way or another\" is on kitchen_rent, which every path passes",
    "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "48aa23cc99bd631e",
+    "text": "e01b11164a4a03ec",
+    "traits": "a13af4c65af9f24a",
     "facts": "74439f927ebafbee",
     "facts2": "802ea4adb13e9ebb",
-    "all": "4a1ccc16bcecd3d1"
+    "all": "8ea8f8e29792c677"
    },
    "row_hash": "c1c0e2ac2588a579",
    "carried": true,
-   "pass": 11
+   "pass": 21
   },
   {
    "row": "B10",
@@ -1263,18 +1264,19 @@
    "screen": "opening.sums",
    "verdict": "PASS",
    "line": "Seventy-five by Sunday. You have nothing.",
-   "why": "$75 a week from Sunday and four Sundays in a row agree with PLAN 2 and P11's rent nodes; no garment named.",
+   "why": "$75 first Sunday agrees with PLAN \u00a72 and P11; no garment named",
    "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "48aa23cc99bd631e",
+    "text": "e01b11164a4a03ec",
+    "traits": "a13af4c65af9f24a",
     "facts": "74439f927ebafbee",
     "facts2": "802ea4adb13e9ebb",
-    "all": "4a1ccc16bcecd3d1"
+    "all": "8ea8f8e29792c677"
    },
    "row_hash": "80d415cf08e0ebfe",
    "carried": true,
-   "pass": 11
+   "pass": 21
   },
   {
    "row": "B8",
@@ -1898,32 +1900,33 @@
    "row": "C1265",
    "screen": "*",
    "verdict": "PASS",
-   "line": "spots on wake, bath, hall, room_past, room_spoke, room_waited, room",
-   "why": "Every spot sits on a body moment (bed, shower, towel, dressing) or the hall look; sums, the kitchen screens and the hand-over carry none.",
+   "line": "opening: wake, bath, hall, room_past/spoke/waited, room pictures",
+   "why": "every opening picture is a moment alone with her body or the towel in the hall, none on a chore, door or menu",
    "cause": null,
    "note": false,
-   "screen_hash": "fe4813e603b44f18",
-   "row_hash": "64b72c778e96e443",
-   "carried": true,
-   "pass": 11
+   "screen_hash": "9dd1f46454290fc3",
+   "row_hash": "eb11e05cd75e52a9",
+   "carried": false,
+   "pass": 22
   },
   {
    "row": "C1265",
    "screen": "opening.room_spoke",
    "verdict": "PASS",
-   "line": "The towel slides to your waist, and you stand bare in the hall",
-   "why": "A towel body moment, not a chore or menu; the picture of her sits right after the line.",
+   "line": "\"The towel slides to your waist, and you stand bare in the hall\"",
+   "why": "the towel moment is a body moment, not a chore or one-liner; the spot belongs",
    "cause": null,
    "note": false,
    "screen_hash": {
     "text": "2124ff3068418da1",
-    "facts": "8e581705588af1d5",
-    "facts2": "cb28514d9d4a772a",
-    "all": "58b0c1b9fb46861f"
+    "traits": "74c4f68e6476ecee",
+    "facts": "200e4791dfa8f630",
+    "facts2": "eb146d82a84d7006",
+    "all": "060327233d4bbc89"
    },
-   "row_hash": "64b72c778e96e443",
-   "carried": true,
-   "pass": 11
+   "row_hash": "eb11e05cd75e52a9",
+   "carried": false,
+   "pass": 22
   },
   {
    "row": "C1267",
@@ -2880,7 +2883,7 @@
     "all": "e37cfcfd09a2e7e9"
    },
    "row_hash": "27e6b45f50edd3ac",
-   "carried": false,
+   "carried": true,
    "pass": 18
   },
   {
@@ -2899,7 +2902,7 @@
     "all": "8ea96985f6740d9d"
    },
    "row_hash": "27e6b45f50edd3ac",
-   "carried": false,
+   "carried": true,
    "pass": 18
   },
   {
@@ -3719,19 +3722,20 @@
    "row": "C460",
    "screen": "opening.sums",
    "verdict": "PASS",
-   "line": "Seventy-five by Sunday. You have nothing.",
-   "why": "07:30: money starts at 0; $75 Sunday and four Sundays in a row agree with PLAN 2 and the rent nodes; Mark's 'one way or another' is on kitchen_rent on every path; the manager's hours match cafe_hire (Mon-Sat from 10:00); the rent line matches the Sunday 08:00-11:55 kitchen-table rent.",
+   "line": "<strong>Pay your way.</strong> Pay Mark your share on Sunday.",
+   "why": "true on every path into it: due Sunday, no counter; \u2705 reads met_mark, set before",
    "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "48aa23cc99bd631e",
+    "text": "e01b11164a4a03ec",
+    "traits": "a13af4c65af9f24a",
     "facts": "74439f927ebafbee",
     "facts2": "802ea4adb13e9ebb",
-    "all": "4a1ccc16bcecd3d1"
+    "all": "8ea8f8e29792c677"
    },
    "row_hash": "67e48e60d5053a2e",
    "carried": true,
-   "pass": 11
+   "pass": 21
   },
   {
    "row": "C460",
@@ -4019,18 +4023,19 @@
    "screen": "opening.sums",
    "verdict": "PASS",
    "line": "Seventy-five by Sunday. You have nothing.",
-   "why": "Texture, her reactions on her body, and lines that fit each person's plan entry (Mark's rent, Mom's 'baby', Ryan covering).",
+   "why": "her reaction and the plan's facts",
    "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "48aa23cc99bd631e",
+    "text": "e01b11164a4a03ec",
+    "traits": "a13af4c65af9f24a",
     "facts": "74439f927ebafbee",
     "facts2": "802ea4adb13e9ebb",
-    "all": "4a1ccc16bcecd3d1"
+    "all": "8ea8f8e29792c677"
    },
    "row_hash": "310706ee076318f2",
    "carried": true,
-   "pass": 11
+   "pass": 21
   },
   {
    "row": "C461",
@@ -6574,18 +6579,19 @@
    "screen": "opening.sums",
    "verdict": "PASS",
    "line": "Go down to the kitchen (5)",
-   "why": "Note row. Every exit states its minutes; none falls back to the 3-minute default.",
+   "why": "note: the exit states its minutes",
    "cause": null,
    "note": true,
    "screen_hash": {
-    "text": "48aa23cc99bd631e",
+    "text": "e01b11164a4a03ec",
+    "traits": "a13af4c65af9f24a",
     "facts": "74439f927ebafbee",
     "facts2": "802ea4adb13e9ebb",
-    "all": "4a1ccc16bcecd3d1"
+    "all": "8ea8f8e29792c677"
    },
    "row_hash": "4e86d143688ba8e5",
    "carried": true,
-   "pass": 11
+   "pass": 21
   },
   {
    "row": "C927",
@@ -7191,19 +7197,20 @@
    "row": "C931",
    "screen": "opening.sums",
    "verdict": "N/A",
-   "line": "Go down to the kitchen (5)",
-   "why": "Note row. No time_of_day condition on this screen.",
+   "line": "Go down to the kitchen",
+   "why": "note: no time_of_day on this screen",
    "cause": null,
    "note": true,
    "screen_hash": {
-    "text": "48aa23cc99bd631e",
+    "text": "e01b11164a4a03ec",
+    "traits": "a13af4c65af9f24a",
     "facts": "74439f927ebafbee",
     "facts2": "802ea4adb13e9ebb",
-    "all": "4a1ccc16bcecd3d1"
+    "all": "8ea8f8e29792c677"
    },
    "row_hash": "1aadffd96e76381c",
    "carried": true,
-   "pass": 11
+   "pass": 21
   },
   {
    "row": "C931",
@@ -7589,18 +7596,19 @@
    "screen": "opening.sums",
    "verdict": "PASS",
    "line": "Seventy-five by Sunday. You have nothing.",
-   "why": "Names nobody as present; Mark is past tense.",
+   "why": "names nobody as present; Mark is past tense",
    "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "48aa23cc99bd631e",
+    "text": "e01b11164a4a03ec",
+    "traits": "a13af4c65af9f24a",
     "facts": "74439f927ebafbee",
     "facts2": "802ea4adb13e9ebb",
-    "all": "4a1ccc16bcecd3d1"
+    "all": "8ea8f8e29792c677"
    },
    "row_hash": "13a714429d15f3b2",
    "carried": true,
-   "pass": 11
+   "pass": 21
   },
   {
    "row": "L119",
@@ -7923,19 +7931,20 @@
    "row": "L167",
    "screen": "opening.sums",
    "verdict": "N/A",
-   "line": "Go down to the kitchen (5)",
-   "why": "One-time opening screen; no hours, no greyed row.",
+   "line": "Go down to the kitchen",
+   "why": "one-time opening screen; no hours",
    "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "48aa23cc99bd631e",
+    "text": "e01b11164a4a03ec",
+    "traits": "a13af4c65af9f24a",
     "facts": "74439f927ebafbee",
     "facts2": "802ea4adb13e9ebb",
-    "all": "4a1ccc16bcecd3d1"
+    "all": "8ea8f8e29792c677"
    },
    "row_hash": "e64ce2672d85d2d8",
    "carried": true,
-   "pass": 11
+   "pass": 21
   },
   {
    "row": "L167",

@@ -10,7 +10,7 @@ One row per screen, every path into it merged:
 How each column is worked out (LO, relayed 2026-11-24: "Commit and continue", the plan's Part C):
   clock    the starting canvas starts at [time] starting_day / starting_hour, minute 0 (v2.py:1601-1602); a
            repeatable starts in its trigger's time_of_day window ("07:00–09:00"), or "any" with none. Each choice adds
-           its time_progression_minutes, 3 when it has none (v2.py:17764, 17758). In and out are the screen's first
+           its time_progression_minutes, 3 when it has none (v2.py:17805, 17758). In and out are the screen's first
            minute and the minute its choice leaves it; a repeatable's are written "+<n>" from the scene's start.
            A repeatable bound to a person with no window reads "while <id> is there": who else is there is
            worked out over the minutes that person's rows put them at the place.
@@ -20,7 +20,7 @@ How each column is worked out (LO, relayed 2026-11-24: "Commit and continue", th
            screen can show at (its first minute, on every day and time the scene can start; not the time its choice
            then spends); "<id> (part)" when only at some; the scene's bound person (trigger npc / requires_npc) is
            always there. "nobody" when no one is.
-  wearing  on the starting canvas: the `initial` garments, equipped in file order (v2.py:1219-1241), then each
+  wearing  on the starting canvas: the `initial` garments, equipped in file order (v2.py:1227-1249), then each
            wardrobeEffects equip / unequip / remove on the path, with the dress rule of setup.equipItem
            (v2.py:1769-1775). On a repeatable: the garments its trigger checks as equipped, else "any".
   flags    flags set by choices on the path before the screen, plus flags the trigger checks is_true. Flags set on
@@ -42,7 +42,7 @@ import who_is_where  # noqa: E402
 from scenes import guaranteed  # noqa: E402
 
 DAYS = ("Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday")
-DEFAULT_MINUTES = 3  # v2.py:17764
+DEFAULT_MINUTES = 3  # v2.py:17805
 SLOTS_OF = ("bra", "underwear", "top", "bottom", "dress", "legwear", "shoes")
 COLUMNS = ("screen", "clock", "place", "who", "wearing", "flags")
 

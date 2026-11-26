@@ -1,6 +1,6 @@
 {
  "piece": "P45",
- "pass": 4,
+ "pass": 5,
  "screens": {
   "*": "4f53cda18c2baa0c"
  },
@@ -47,7 +47,7 @@
   "places#7": "2a095bf54f175e5e",
   "places#8": "c3ea8d01465e7298",
   "places#9": "f4cd9ab5f62bc6fc",
-  "places#10": "309f0141d342dc6f",
+  "places#10": "d6f0b4b357efc043",
   "C442": "a2b07f40e1a9e908",
   "C449": "ac5932d70cd775a1",
   "C451": "6b0fd679047fc9b8",
@@ -63,7 +63,7 @@
   "voice#2": "a40d4073409a2705",
   "voice#3": "4777d2c1251214c2",
   "voice#4": "ac2fdd7245f436db",
-  "voice#5": "7bbdd4290054e601",
+  "voice#5": "f74d350a978e124c",
   "voice#6": "df1f5dc8b6d21538",
   "voice#7": "321cc76cff93aadb",
   "voice#8": "4362249fb5f9616e"
@@ -265,409 +265,6 @@
    "pass": 1
   },
   {
-   "row": "C1002",
-   "screen": "*",
-   "verdict": "N/A",
-   "line": "You walk up from the high street and through the campus gates.",
-   "why": "no spend on these screens; the bus fare stays on the bus canvases",
-   "cause": null,
-   "note": true,
-   "screen_hash": "025b4d765c8405f2",
-   "row_hash": "657248766e62061f",
-   "carried": true,
-   "pass": 1
-  },
-  {
-   "row": "C1173",
-   "screen": "*",
-   "verdict": "N/A",
-   "line": "You walk up from the high street and through the campus gates.",
-   "why": "no clothing door on Town or the gates",
-   "cause": null,
-   "note": true,
-   "screen_hash": "025b4d765c8405f2",
-   "row_hash": "541a03815a8d19c4",
-   "carried": true,
-   "pass": 1
-  },
-  {
-   "row": "C1184",
-   "screen": "*",
-   "verdict": "N/A",
-   "line": "You walk up from the high street and through the campus gates.",
-   "why": "no refusal here",
-   "cause": null,
-   "note": true,
-   "screen_hash": "025b4d765c8405f2",
-   "row_hash": "71c57d9a2f8fdca7",
-   "carried": true,
-   "pass": 1
-  },
-  {
-   "row": "C1185",
-   "screen": "*",
-   "verdict": "N/A",
-   "line": "You walk up from the high street and through the campus gates.",
-   "why": "no dress code here",
-   "cause": null,
-   "note": true,
-   "screen_hash": "025b4d765c8405f2",
-   "row_hash": "db808998ed69c649",
-   "carried": true,
-   "pass": 1
-  },
-  {
-   "row": "C1198",
-   "screen": "*",
-   "verdict": "N/A",
-   "line": "You walk up from the high street and through the campus gates.",
-   "why": "no refusal here",
-   "cause": null,
-   "note": true,
-   "screen_hash": "025b4d765c8405f2",
-   "row_hash": "48eae9ceae06ae00",
-   "carried": true,
-   "pass": 1
-  },
-  {
-   "row": "C1200",
-   "screen": "*",
-   "verdict": "PASS",
-   "line": "Town: the high street, the bus stop, a caf\u00e9 on the corner across from the campus gates, and the side streets where students rent rooms.",
-   "why": "no clothes rule on Town or the gates; walking asks none, and she reaches Town only through the street's leave rule or from campus",
-   "cause": null,
-   "note": false,
-   "screen_hash": "025b4d765c8405f2",
-   "row_hash": "65e6616cd17c7eb3",
-   "carried": true,
-   "pass": 1
-  },
-  {
-   "row": "C1220",
-   "screen": "*",
-   "verdict": "N/A",
-   "line": "Town: the high street, the bus stop, a caf\u00e9 on the corner across from the campus gates, and the side streets where students rent rooms.",
-   "why": "no dress code on Town or the gates",
-   "cause": null,
-   "note": false,
-   "screen_hash": "025b4d765c8405f2",
-   "row_hash": "18d85534582def9d",
-   "carried": true,
-   "pass": 1
-  },
-  {
-   "row": "C1221",
-   "screen": "*",
-   "verdict": "N/A",
-   "line": "Town: the high street, the bus stop, a caf\u00e9 on the corner across from the campus gates, and the side streets where students rent rooms.",
-   "why": "no dress-code exception; reach.py: every kept scene has a way in",
-   "cause": null,
-   "note": false,
-   "screen_hash": "025b4d765c8405f2",
-   "row_hash": "3835fed23cc316c7",
-   "carried": true,
-   "pass": 1
-  },
-  {
-   "row": "C1250",
-   "screen": "*",
-   "verdict": "PASS",
-   "line": "Town: the high street, the bus stop, a caf\u00e9 on the corner across from the campus gates, and the side streets where students rent rooms.",
-   "why": "Town's card is bare: name only, no picture (C1265); the gates canvases carry none",
-   "cause": null,
-   "note": false,
-   "screen_hash": "025b4d765c8405f2",
-   "row_hash": "fde578d75b0d3620",
-   "carried": true,
-   "pass": 1
-  },
-  {
-   "row": "C1303",
-   "screen": "*",
-   "verdict": "N/A",
-   "line": "You walk up from the high street and through the campus gates.",
-   "why": "no need read or refilled here",
-   "cause": null,
-   "note": true,
-   "screen_hash": "025b4d765c8405f2",
-   "row_hash": "5b031a6b82899cfd",
-   "carried": true,
-   "pass": 1
-  },
-  {
-   "row": "C1313",
-   "screen": "*",
-   "verdict": "N/A",
-   "line": "You walk up from the high street and through the campus gates.",
-   "why": "no refill here",
-   "cause": null,
-   "note": true,
-   "screen_hash": "025b4d765c8405f2",
-   "row_hash": "c26c2fb5c1443dab",
-   "carried": true,
-   "pass": 1
-  },
-  {
-   "row": "C1337",
-   "screen": "*",
-   "verdict": "N/A",
-   "line": "You walk up from the high street and through the campus gates.",
-   "why": "no energy spent or given on the gates",
-   "cause": null,
-   "note": true,
-   "screen_hash": "025b4d765c8405f2",
-   "row_hash": "9a1ab783f9ab6731",
-   "carried": true,
-   "pass": 1
-  },
-  {
-   "row": "C1340",
-   "screen": "*",
-   "verdict": "N/A",
-   "line": "You walk up from the high street and through the campus gates.",
-   "why": "no housemate here",
-   "cause": null,
-   "note": false,
-   "screen_hash": "025b4d765c8405f2",
-   "row_hash": "b76a6583ae88c60f",
-   "carried": true,
-   "pass": 1
-  },
-  {
-   "row": "C1342",
-   "screen": "*",
-   "verdict": "N/A",
-   "line": "You walk up from the high street and through the campus gates.",
-   "why": "no need is spent or refilled on these screens",
-   "cause": null,
-   "note": false,
-   "screen_hash": "025b4d765c8405f2",
-   "row_hash": "59e008f8733a29e2",
-   "carried": true,
-   "pass": 1
-  },
-  {
-   "row": "C1345",
-   "screen": "*",
-   "verdict": "N/A",
-   "line": "You walk up from the high street and through the campus gates.",
-   "why": "no brake needed: a free walk between two hubs",
-   "cause": null,
-   "note": true,
-   "screen_hash": "025b4d765c8405f2",
-   "row_hash": "823e315ef0b56f94",
-   "carried": true,
-   "pass": 1
-  },
-  {
-   "row": "C1360",
-   "screen": "*",
-   "verdict": "N/A",
-   "line": "You walk up from the high street and through the campus gates.",
-   "why": "no locked choice on these screens",
-   "cause": null,
-   "note": true,
-   "screen_hash": "025b4d765c8405f2",
-   "row_hash": "8c9dc844365f81a5",
-   "carried": true,
-   "pass": 1
-  },
-  {
-   "row": "C1421",
-   "screen": "*",
-   "verdict": "N/A",
-   "line": "You walk up from the high street and through the campus gates.",
-   "why": "nothing out of reach here",
-   "cause": null,
-   "note": true,
-   "screen_hash": "025b4d765c8405f2",
-   "row_hash": "ef34ee4a51e65d00",
-   "carried": true,
-   "pass": 1
-  },
-  {
-   "row": "C1423",
-   "screen": "*",
-   "verdict": "PASS",
-   "line": "You walk up from the high street and through the campus gates.",
-   "why": "the gate costs real time, 5 minutes each way",
-   "cause": null,
-   "note": true,
-   "screen_hash": "025b4d765c8405f2",
-   "row_hash": "4b77685af58632a5",
-   "carried": true,
-   "pass": 1
-  },
-  {
-   "row": "C1425",
-   "screen": "*",
-   "verdict": "N/A",
-   "line": "You walk up from the high street and through the campus gates.",
-   "why": "a travel walk, not a paced repeat act",
-   "cause": null,
-   "note": true,
-   "screen_hash": "025b4d765c8405f2",
-   "row_hash": "34826508394ba8c0",
-   "carried": true,
-   "pass": 1
-  },
-  {
-   "row": "C1427",
-   "screen": "*",
-   "verdict": "N/A",
-   "line": "You walk up from the high street and through the campus gates.",
-   "why": "no window on the gates",
-   "cause": null,
-   "note": true,
-   "screen_hash": "025b4d765c8405f2",
-   "row_hash": "68a94621cd19c13c",
-   "carried": true,
-   "pass": 1
-  },
-  {
-   "row": "C1428",
-   "screen": "*",
-   "verdict": "N/A",
-   "line": "You walk up from the high street and through the campus gates.",
-   "why": "no energy lock here; the gates cost none",
-   "cause": null,
-   "note": false,
-   "screen_hash": "025b4d765c8405f2",
-   "row_hash": "cf8af3e56f435107",
-   "carried": true,
-   "pass": 1
-  },
-  {
-   "row": "C1431",
-   "screen": "*",
-   "verdict": "N/A",
-   "line": "You walk up from the high street and through the campus gates.",
-   "why": "no need is spent or refilled on these screens",
-   "cause": null,
-   "note": false,
-   "screen_hash": "025b4d765c8405f2",
-   "row_hash": "aca442d29c1c8146",
-   "carried": true,
-   "pass": 1
-  },
-  {
-   "row": "C1432",
-   "screen": "*",
-   "verdict": "N/A",
-   "line": "You walk up from the high street and through the campus gates.",
-   "why": "no need is spent or refilled on these screens",
-   "cause": null,
-   "note": false,
-   "screen_hash": "025b4d765c8405f2",
-   "row_hash": "ccd7a74d85c7d7fe",
-   "carried": true,
-   "pass": 1
-  },
-  {
-   "row": "C1433",
-   "screen": "*",
-   "verdict": "N/A",
-   "line": "You walk up from the high street and through the campus gates.",
-   "why": "no energy-type need shuts a door here",
-   "cause": null,
-   "note": true,
-   "screen_hash": "025b4d765c8405f2",
-   "row_hash": "f47fc5030774db86",
-   "carried": true,
-   "pass": 1
-  },
-  {
-   "row": "C1434",
-   "screen": "*",
-   "verdict": "N/A",
-   "line": "You walk up from the high street and through the campus gates.",
-   "why": "no empty need sends her here",
-   "cause": null,
-   "note": true,
-   "screen_hash": "025b4d765c8405f2",
-   "row_hash": "6ac94d11992c72ec",
-   "carried": true,
-   "pass": 1
-  },
-  {
-   "row": "C1438",
-   "screen": "*",
-   "verdict": "N/A",
-   "line": "You walk up from the high street and through the campus gates.",
-   "why": "no need is spent or refilled on these screens",
-   "cause": null,
-   "note": false,
-   "screen_hash": "025b4d765c8405f2",
-   "row_hash": "e4d4d230d2bd3815",
-   "carried": true,
-   "pass": 1
-  },
-  {
-   "row": "C1441",
-   "screen": "*",
-   "verdict": "N/A",
-   "line": "You walk up from the high street and through the campus gates.",
-   "why": "no result screen",
-   "cause": null,
-   "note": true,
-   "screen_hash": "025b4d765c8405f2",
-   "row_hash": "6b5fb464471de4c7",
-   "carried": true,
-   "pass": 1
-  },
-  {
-   "row": "C146",
-   "screen": "*",
-   "verdict": "N/A",
-   "line": "You walk up from the high street and through the campus gates.",
-   "why": "no big moment; a walk",
-   "cause": null,
-   "note": true,
-   "screen_hash": "025b4d765c8405f2",
-   "row_hash": "a08ace799dcefe85",
-   "carried": true,
-   "pass": 1
-  },
-  {
-   "row": "C149",
-   "screen": "*",
-   "verdict": "PASS",
-   "line": "Onto the quad",
-   "why": "the choice names where she goes next",
-   "cause": null,
-   "note": false,
-   "screen_hash": "025b4d765c8405f2",
-   "row_hash": "b8cdd5b1ce3f89ea",
-   "carried": true,
-   "pass": 1
-  },
-  {
-   "row": "C151",
-   "screen": "*",
-   "verdict": "N/A",
-   "line": "You walk up from the high street and through the campus gates.",
-   "why": "no person on the repeatable",
-   "cause": null,
-   "note": true,
-   "screen_hash": "025b4d765c8405f2",
-   "row_hash": "d5758757a709b1af",
-   "carried": true,
-   "pass": 1
-  },
-  {
-   "row": "C2189",
-   "screen": "*",
-   "verdict": "N/A",
-   "line": "",
-   "why": "town_square and travel gates: navigation, not a scene",
-   "cause": null,
-   "note": true,
-   "screen_hash": "025b4d765c8405f2",
-   "row_hash": "20748838895e4545",
-   "carried": true,
-   "pass": 3
-  },
-  {
    "row": "C422",
    "screen": "*",
    "verdict": "PASS",
@@ -677,7 +274,7 @@
    "note": false,
    "screen_hash": "4f53cda18c2baa0c",
    "row_hash": "8933f85010afbef7",
-   "carried": false,
+   "carried": true,
    "pass": 4
   },
   {
@@ -690,7 +287,7 @@
    "note": false,
    "screen_hash": null,
    "row_hash": "8933f85010afbef7",
-   "carried": false,
+   "carried": true,
    "pass": 4
   },
   {
@@ -703,7 +300,7 @@
    "note": false,
    "screen_hash": "4f53cda18c2baa0c",
    "row_hash": "a2b07f40e1a9e908",
-   "carried": false,
+   "carried": true,
    "pass": 4
   },
   {
@@ -716,7 +313,7 @@
    "note": false,
    "screen_hash": "4f53cda18c2baa0c",
    "row_hash": "e3ca01ba145f4580",
-   "carried": false,
+   "carried": true,
    "pass": 4
   },
   {
@@ -729,7 +326,7 @@
    "note": false,
    "screen_hash": "4f53cda18c2baa0c",
    "row_hash": "584dada6c379e3d8",
-   "carried": false,
+   "carried": true,
    "pass": 4
   },
   {
@@ -742,7 +339,7 @@
    "note": false,
    "screen_hash": "4f53cda18c2baa0c",
    "row_hash": "ac5932d70cd775a1",
-   "carried": false,
+   "carried": true,
    "pass": 4
   },
   {
@@ -755,7 +352,7 @@
    "note": false,
    "screen_hash": "4f53cda18c2baa0c",
    "row_hash": "3eb18b4cefbe49d3",
-   "carried": false,
+   "carried": true,
    "pass": 4
   },
   {
@@ -768,7 +365,7 @@
    "note": false,
    "screen_hash": "4f53cda18c2baa0c",
    "row_hash": "6b0fd679047fc9b8",
-   "carried": false,
+   "carried": true,
    "pass": 4
   },
   {
@@ -781,7 +378,7 @@
    "note": false,
    "screen_hash": "4f53cda18c2baa0c",
    "row_hash": "beb5a109bde77305",
-   "carried": false,
+   "carried": true,
    "pass": 4
   },
   {
@@ -794,7 +391,7 @@
    "note": false,
    "screen_hash": null,
    "row_hash": "beb5a109bde77305",
-   "carried": false,
+   "carried": true,
    "pass": 4
   },
   {
@@ -807,7 +404,7 @@
    "note": false,
    "screen_hash": null,
    "row_hash": "beb5a109bde77305",
-   "carried": false,
+   "carried": true,
    "pass": 4
   },
   {
@@ -820,7 +417,7 @@
    "note": false,
    "screen_hash": null,
    "row_hash": "beb5a109bde77305",
-   "carried": false,
+   "carried": true,
    "pass": 4
   },
   {
@@ -833,7 +430,7 @@
    "note": false,
    "screen_hash": null,
    "row_hash": "beb5a109bde77305",
-   "carried": false,
+   "carried": true,
    "pass": 4
   },
   {
@@ -846,7 +443,7 @@
    "note": false,
    "screen_hash": null,
    "row_hash": "beb5a109bde77305",
-   "carried": false,
+   "carried": true,
    "pass": 4
   },
   {
@@ -859,7 +456,7 @@
    "note": false,
    "screen_hash": null,
    "row_hash": "beb5a109bde77305",
-   "carried": false,
+   "carried": true,
    "pass": 4
   },
   {
@@ -872,7 +469,7 @@
    "note": false,
    "screen_hash": null,
    "row_hash": "beb5a109bde77305",
-   "carried": false,
+   "carried": true,
    "pass": 4
   },
   {
@@ -885,7 +482,7 @@
    "note": false,
    "screen_hash": "4f53cda18c2baa0c",
    "row_hash": "153b0804e686abae",
-   "carried": false,
+   "carried": true,
    "pass": 4
   },
   {
@@ -898,21 +495,8 @@
    "note": false,
    "screen_hash": null,
    "row_hash": "153b0804e686abae",
-   "carried": false,
-   "pass": 4
-  },
-  {
-   "row": "C519",
-   "screen": "*",
-   "verdict": "PASS",
-   "line": "You walk up from the high street and through the campus gates.",
-   "why": "one job per screen, 12 words",
-   "cause": null,
-   "note": true,
-   "screen_hash": "025b4d765c8405f2",
-   "row_hash": "e78502f7aa28746d",
    "carried": true,
-   "pass": 1
+   "pass": 4
   },
   {
    "row": "C593",
@@ -924,21 +508,8 @@
    "note": false,
    "screen_hash": "4f53cda18c2baa0c",
    "row_hash": "52e42cdd69c8f10e",
-   "carried": false,
-   "pass": 4
-  },
-  {
-   "row": "C620",
-   "screen": "*",
-   "verdict": "PASS",
-   "line": "Town: the high street, the bus stop, a caf\u00e9 on the corner across from the campus gates, and the side streets where students rent rooms.",
-   "why": "nobody is listed in Town; who_is_where puts no one there",
-   "cause": null,
-   "note": true,
-   "screen_hash": "025b4d765c8405f2",
-   "row_hash": "76250e48ada2b843",
    "carried": true,
-   "pass": 1
+   "pass": 4
   },
   {
    "row": "C707",
@@ -950,7 +521,7 @@
    "note": true,
    "screen_hash": "4f53cda18c2baa0c",
    "row_hash": "e2898bd02a9e4730",
-   "carried": false,
+   "carried": true,
    "pass": 4
   },
   {
@@ -963,7 +534,7 @@
    "note": false,
    "screen_hash": "4f53cda18c2baa0c",
    "row_hash": "976cd3e099c13e51",
-   "carried": false,
+   "carried": true,
    "pass": 4
   },
   {
@@ -976,7 +547,7 @@
    "note": true,
    "screen_hash": "4f53cda18c2baa0c",
    "row_hash": "6329db1ec04ec3da",
-   "carried": false,
+   "carried": true,
    "pass": 4
   },
   {
@@ -989,7 +560,7 @@
    "note": false,
    "screen_hash": "4f53cda18c2baa0c",
    "row_hash": "877801c22bdade00",
-   "carried": false,
+   "carried": true,
    "pass": 4
   },
   {
@@ -1002,7 +573,7 @@
    "note": true,
    "screen_hash": "4f53cda18c2baa0c",
    "row_hash": "cf7d7a82afabcbbb",
-   "carried": false,
+   "carried": true,
    "pass": 4
   },
   {
@@ -1015,7 +586,7 @@
    "note": true,
    "screen_hash": "4f53cda18c2baa0c",
    "row_hash": "dcc6bbe6fde09083",
-   "carried": false,
+   "carried": true,
    "pass": 4
   },
   {
@@ -1028,7 +599,7 @@
    "note": true,
    "screen_hash": "4f53cda18c2baa0c",
    "row_hash": "d941995a226da2b4",
-   "carried": false,
+   "carried": true,
    "pass": 4
   },
   {
@@ -1041,7 +612,7 @@
    "note": false,
    "screen_hash": "4f53cda18c2baa0c",
    "row_hash": "0825e8443f9180d0",
-   "carried": false,
+   "carried": true,
    "pass": 4
   },
   {
@@ -1054,7 +625,7 @@
    "note": false,
    "screen_hash": "4f53cda18c2baa0c",
    "row_hash": "6088d5531ecff698",
-   "carried": false,
+   "carried": true,
    "pass": 4
   },
   {
@@ -1067,7 +638,7 @@
    "note": false,
    "screen_hash": "4f53cda18c2baa0c",
    "row_hash": "38b483431fa177b0",
-   "carried": false,
+   "carried": true,
    "pass": 4
   },
   {
@@ -1080,7 +651,7 @@
    "note": true,
    "screen_hash": "4f53cda18c2baa0c",
    "row_hash": "3281d513b7f90d6e",
-   "carried": false,
+   "carried": true,
    "pass": 4
   },
   {
@@ -1093,7 +664,7 @@
    "note": true,
    "screen_hash": "4f53cda18c2baa0c",
    "row_hash": "a28152099697ac6a",
-   "carried": false,
+   "carried": true,
    "pass": 4
   },
   {
@@ -1106,7 +677,7 @@
    "note": false,
    "screen_hash": "4f53cda18c2baa0c",
    "row_hash": "56bf64be29d6ea48",
-   "carried": false,
+   "carried": true,
    "pass": 4
   },
   {
@@ -1119,7 +690,7 @@
    "note": true,
    "screen_hash": "4f53cda18c2baa0c",
    "row_hash": "73aff7401d6970a5",
-   "carried": false,
+   "carried": true,
    "pass": 4
   },
   {
@@ -1132,255 +703,8 @@
    "note": true,
    "screen_hash": "4f53cda18c2baa0c",
    "row_hash": "ded1858e52e3be3a",
-   "carried": false,
+   "carried": true,
    "pass": 4
-  },
-  {
-   "row": "C889",
-   "screen": "*",
-   "verdict": "PASS",
-   "line": "Walk through the campus gates",
-   "why": "no clock time and no duration on any label",
-   "cause": null,
-   "note": true,
-   "screen_hash": "025b4d765c8405f2",
-   "row_hash": "def1348d483d0c40",
-   "carried": true,
-   "pass": 1
-  },
-  {
-   "row": "C892",
-   "screen": "*",
-   "verdict": "PASS",
-   "line": "You walk up from the high street and through the campus gates.",
-   "why": "no hour in the act",
-   "cause": null,
-   "note": true,
-   "screen_hash": "025b4d765c8405f2",
-   "row_hash": "5c890033f6ac38b8",
-   "carried": true,
-   "pass": 1
-  },
-  {
-   "row": "C897",
-   "screen": "*",
-   "verdict": "PASS",
-   "line": "You walk up from the high street and through the campus gates.",
-   "why": "time sits on crossing between Town and campus; Town's rooms (Caf\u00e9, Zoe's) carry no entry time",
-   "cause": null,
-   "note": true,
-   "screen_hash": "025b4d765c8405f2",
-   "row_hash": "265ece64add83676",
-   "carried": true,
-   "pass": 1
-  },
-  {
-   "row": "C900",
-   "screen": "*",
-   "verdict": "PASS",
-   "line": "You walk up from the high street and through the campus gates.",
-   "why": "no beat says the time",
-   "cause": null,
-   "note": false,
-   "screen_hash": "025b4d765c8405f2",
-   "row_hash": "6372efb027eb2034",
-   "carried": true,
-   "pass": 1
-  },
-  {
-   "row": "C902",
-   "screen": "*",
-   "verdict": "PASS",
-   "line": "You walk up from the high street and through the campus gates.",
-   "why": "read at 23:59 or 03:00, still true: no window",
-   "cause": null,
-   "note": true,
-   "screen_hash": "025b4d765c8405f2",
-   "row_hash": "df5ed7a36dbc74e4",
-   "carried": true,
-   "pass": 1
-  },
-  {
-   "row": "C903",
-   "screen": "*",
-   "verdict": "PASS",
-   "line": "You walk up from the high street and through the campus gates.",
-   "why": "no weekday named",
-   "cause": null,
-   "note": false,
-   "screen_hash": "025b4d765c8405f2",
-   "row_hash": "4f83b0b5eb45f71b",
-   "carried": true,
-   "pass": 1
-  },
-  {
-   "row": "C906",
-   "screen": "*",
-   "verdict": "PASS",
-   "line": "Walk out to town",
-   "why": "no 'till X'",
-   "cause": null,
-   "note": true,
-   "screen_hash": "025b4d765c8405f2",
-   "row_hash": "71713a7e7ae739e7",
-   "carried": true,
-   "pass": 1
-  },
-  {
-   "row": "C910",
-   "screen": "*",
-   "verdict": "PASS",
-   "line": "Onto the quad",
-   "why": "no time, no energy, no money on the buttons; the walk costs no money",
-   "cause": null,
-   "note": true,
-   "screen_hash": "025b4d765c8405f2",
-   "row_hash": "d5a109f1ef88419a",
-   "carried": true,
-   "pass": 1
-  },
-  {
-   "row": "C913",
-   "screen": "town_square",
-   "verdict": "PASS",
-   "line": "Caf\u00e9 \u00b7 Zoe's Apartment",
-   "why": "both places with hours keep their hours and closed text (07:00-21:00, 12:00-02:00) and show dimmed from Town by the engine",
-   "cause": null,
-   "note": false,
-   "screen_hash": null,
-   "row_hash": "c750f9b6ab4ace14",
-   "carried": true,
-   "pass": 1
-  },
-  {
-   "row": "C914",
-   "screen": "*",
-   "verdict": "PASS",
-   "line": "Town: the high street, the bus stop, a caf\u00e9 on the corner across from the campus gates, and the side streets where students rent rooms.",
-   "why": "the gates have no hours; only the clock shuts the Caf\u00e9 and Zoe's",
-   "cause": null,
-   "note": false,
-   "screen_hash": "025b4d765c8405f2",
-   "row_hash": "bd07273d5822f34f",
-   "carried": true,
-   "pass": 1
-  },
-  {
-   "row": "C916",
-   "screen": "*",
-   "verdict": "PASS",
-   "line": "You walk up from the high street and through the campus gates.",
-   "why": "the walks are chosen, with no hours; no event here",
-   "cause": null,
-   "note": false,
-   "screen_hash": "025b4d765c8405f2",
-   "row_hash": "7b2bb0dfdbcfe946",
-   "carried": true,
-   "pass": 1
-  },
-  {
-   "row": "C920",
-   "screen": "*",
-   "verdict": "PASS",
-   "line": "Onto the quad (5 min) / Into town (5 min)",
-   "why": "Town to Caf\u00e9 or Zoe's is a free hop (no location carries an entry cost); Town and the quad are two areas, 5 minutes each way on the choice, the same both ways",
-   "cause": null,
-   "note": false,
-   "screen_hash": "025b4d765c8405f2",
-   "row_hash": "513927dd127fca04",
-   "carried": true,
-   "pass": 1
-  },
-  {
-   "row": "C924",
-   "screen": "*",
-   "verdict": "PASS",
-   "line": "You walk up from the high street and through the campus gates.",
-   "why": "the 5 minutes plus the 20/45 travel make where people are matter",
-   "cause": null,
-   "note": true,
-   "screen_hash": "025b4d765c8405f2",
-   "row_hash": "791cd173e23fb130",
-   "carried": true,
-   "pass": 1
-  },
-  {
-   "row": "C926",
-   "screen": "*",
-   "verdict": "PASS",
-   "line": "You walk up from the high street and through the campus gates.",
-   "why": "5 minutes added; nothing sets an hour",
-   "cause": null,
-   "note": true,
-   "screen_hash": "025b4d765c8405f2",
-   "row_hash": "177d1e1776fac74b",
-   "carried": true,
-   "pass": 1
-  },
-  {
-   "row": "C927",
-   "screen": "*",
-   "verdict": "PASS",
-   "line": "Onto the quad (5 min in the costs)",
-   "why": "each exit carries its own minutes",
-   "cause": null,
-   "note": true,
-   "screen_hash": "025b4d765c8405f2",
-   "row_hash": "4e86d143688ba8e5",
-   "carried": true,
-   "pass": 1
-  },
-  {
-   "row": "C928",
-   "screen": "*",
-   "verdict": "PASS",
-   "line": "You walk up from the high street and through the campus gates.",
-   "why": "no clock in prose",
-   "cause": null,
-   "note": false,
-   "screen_hash": "025b4d765c8405f2",
-   "row_hash": "2c3ccc6bd9929d7f",
-   "carried": true,
-   "pass": 1
-  },
-  {
-   "row": "C929",
-   "screen": "*",
-   "verdict": "PASS",
-   "line": "Walk through the campus gates",
-   "why": "the walk's time is on no label",
-   "cause": null,
-   "note": true,
-   "screen_hash": "025b4d765c8405f2",
-   "row_hash": "18b0ecdf6d7fc901",
-   "carried": true,
-   "pass": 1
-  },
-  {
-   "row": "C930",
-   "screen": "*",
-   "verdict": "N/A",
-   "line": "You walk up from the high street and through the campus gates.",
-   "why": "no windowed work here",
-   "cause": null,
-   "note": true,
-   "screen_hash": "025b4d765c8405f2",
-   "row_hash": "beb57cd46fe906bf",
-   "carried": true,
-   "pass": 1
-  },
-  {
-   "row": "C931",
-   "screen": "*",
-   "verdict": "N/A",
-   "line": "You walk up from the high street and through the campus gates.",
-   "why": "no time_of_day condition on these screens",
-   "cause": null,
-   "note": true,
-   "screen_hash": "025b4d765c8405f2",
-   "row_hash": "1aadffd96e76381c",
-   "carried": true,
-   "pass": 1
   },
   {
    "row": "C953",
@@ -1392,7 +716,7 @@
    "note": true,
    "screen_hash": "4f53cda18c2baa0c",
    "row_hash": "7ab90b4c71f3d98a",
-   "carried": false,
+   "carried": true,
    "pass": 4
   },
   {
@@ -1405,7 +729,7 @@
    "note": true,
    "screen_hash": "4f53cda18c2baa0c",
    "row_hash": "a4837b8af6d54bb1",
-   "carried": false,
+   "carried": true,
    "pass": 4
   },
   {
@@ -1418,7 +742,7 @@
    "note": false,
    "screen_hash": "4f53cda18c2baa0c",
    "row_hash": "759e6667d7fc3183",
-   "carried": false,
+   "carried": true,
    "pass": 4
   },
   {
@@ -1431,7 +755,7 @@
    "note": false,
    "screen_hash": "4f53cda18c2baa0c",
    "row_hash": "5dea5707be5e7e0a",
-   "carried": false,
+   "carried": true,
    "pass": 4
   },
   {
@@ -1444,34 +768,8 @@
    "note": false,
    "screen_hash": "4f53cda18c2baa0c",
    "row_hash": "00a617ab9b4e9cd4",
-   "carried": false,
+   "carried": true,
    "pass": 4
-  },
-  {
-   "row": "L166",
-   "screen": "*",
-   "verdict": "PASS",
-   "line": "You walk up from the high street and through the campus gates.",
-   "why": "the gates walks are open at every hour, like the quad and Town",
-   "cause": null,
-   "note": false,
-   "screen_hash": "025b4d765c8405f2",
-   "row_hash": "c12d10588197fbaf",
-   "carried": true,
-   "pass": 1
-  },
-  {
-   "row": "L167",
-   "screen": "*",
-   "verdict": "N/A",
-   "line": "You walk up from the high street and through the campus gates.",
-   "why": "no row with hours here",
-   "cause": null,
-   "note": false,
-   "screen_hash": "025b4d765c8405f2",
-   "row_hash": "e64ce2672d85d2d8",
-   "carried": true,
-   "pass": 1
   },
   {
    "row": "L170",
@@ -1483,7 +781,7 @@
    "note": false,
    "screen_hash": "4f53cda18c2baa0c",
    "row_hash": "8f11debafcf05142",
-   "carried": false,
+   "carried": true,
    "pass": 4
   },
   {
@@ -1496,21 +794,21 @@
    "note": false,
    "screen_hash": "4f53cda18c2baa0c",
    "row_hash": "18252966b4327f58",
-   "carried": false,
+   "carried": true,
    "pass": 4
   },
   {
    "row": "places#10",
    "screen": "*",
    "verdict": "PASS",
-   "line": "Zoe lives in town, two streets off the high street.",
-   "why": "the one hidden place off Town is pointed at by a hint step (L170)",
+   "line": "near_zoe_apartment: hidden_until = { flag = \"zoe_place_known\" }",
+   "why": "town_square lists Zoe's Apartment behind zoe_place_known, set beside met_zoe (L7132), and met_zoe is a when on the Someone on the Quad hint step (L324)",
    "cause": null,
    "note": false,
    "screen_hash": "4f53cda18c2baa0c",
-   "row_hash": "309f0141d342dc6f",
+   "row_hash": "d6f0b4b357efc043",
    "carried": false,
-   "pass": 4
+   "pass": 5
   },
   {
    "row": "places#2",
@@ -1522,7 +820,7 @@
    "note": false,
    "screen_hash": "4f53cda18c2baa0c",
    "row_hash": "e0b57720921c4523",
-   "carried": false,
+   "carried": true,
    "pass": 4
   },
   {
@@ -1535,7 +833,7 @@
    "note": false,
    "screen_hash": "4f53cda18c2baa0c",
    "row_hash": "56d056c80da49bb6",
-   "carried": false,
+   "carried": true,
    "pass": 4
   },
   {
@@ -1548,7 +846,7 @@
    "note": false,
    "screen_hash": "4f53cda18c2baa0c",
    "row_hash": "ae3ba300e1045c9f",
-   "carried": false,
+   "carried": true,
    "pass": 4
   },
   {
@@ -1561,7 +859,7 @@
    "note": false,
    "screen_hash": "4f53cda18c2baa0c",
    "row_hash": "90ec575adee9bf74",
-   "carried": false,
+   "carried": true,
    "pass": 4
   },
   {
@@ -1574,7 +872,7 @@
    "note": false,
    "screen_hash": "4f53cda18c2baa0c",
    "row_hash": "f2bc5f0f10c64c4b",
-   "carried": false,
+   "carried": true,
    "pass": 4
   },
   {
@@ -1587,7 +885,7 @@
    "note": false,
    "screen_hash": "4f53cda18c2baa0c",
    "row_hash": "2a095bf54f175e5e",
-   "carried": false,
+   "carried": true,
    "pass": 4
   },
   {
@@ -1600,7 +898,7 @@
    "note": false,
    "screen_hash": "4f53cda18c2baa0c",
    "row_hash": "c3ea8d01465e7298",
-   "carried": false,
+   "carried": true,
    "pass": 4
   },
   {
@@ -1613,7 +911,7 @@
    "note": false,
    "screen_hash": "4f53cda18c2baa0c",
    "row_hash": "f4cd9ab5f62bc6fc",
-   "carried": false,
+   "carried": true,
    "pass": 4
   },
   {
@@ -1626,7 +924,7 @@
    "note": false,
    "screen_hash": "4f53cda18c2baa0c",
    "row_hash": "b8e8afcb32208b40",
-   "carried": false,
+   "carried": true,
    "pass": 4
   },
   {
@@ -1639,7 +937,7 @@
    "note": false,
    "screen_hash": "4f53cda18c2baa0c",
    "row_hash": "a40d4073409a2705",
-   "carried": false,
+   "carried": true,
    "pass": 4
   },
   {
@@ -1652,7 +950,7 @@
    "note": false,
    "screen_hash": "4f53cda18c2baa0c",
    "row_hash": "4777d2c1251214c2",
-   "carried": false,
+   "carried": true,
    "pass": 4
   },
   {
@@ -1665,21 +963,21 @@
    "note": false,
    "screen_hash": "4f53cda18c2baa0c",
    "row_hash": "ac2fdd7245f436db",
-   "carried": false,
+   "carried": true,
    "pass": 4
   },
   {
    "row": "voice#5",
    "screen": "*",
    "verdict": "N/A",
-   "line": "Town: the high street, the bus stop, a caf\u00e9 on the corner across from the campus gates, and the side streets where students rent rooms.",
-   "why": "no one else on these screens",
+   "line": "travel_gates_in/out: is_active = false",
+   "why": "retired one-line walks with nobody in them; town_square is a place",
    "cause": null,
    "note": false,
    "screen_hash": "4f53cda18c2baa0c",
-   "row_hash": "7bbdd4290054e601",
-   "carried": false,
-   "pass": 4
+   "row_hash": "f74d350a978e124c",
+   "carried": true,
+   "pass": 5
   },
   {
    "row": "voice#6",
@@ -1691,7 +989,7 @@
    "note": false,
    "screen_hash": "4f53cda18c2baa0c",
    "row_hash": "df1f5dc8b6d21538",
-   "carried": false,
+   "carried": true,
    "pass": 4
   },
   {
@@ -1704,7 +1002,7 @@
    "note": false,
    "screen_hash": "4f53cda18c2baa0c",
    "row_hash": "321cc76cff93aadb",
-   "carried": false,
+   "carried": true,
    "pass": 4
   },
   {
@@ -1717,14 +1015,14 @@
    "note": false,
    "screen_hash": "4f53cda18c2baa0c",
    "row_hash": "4362249fb5f9616e",
-   "carried": false,
+   "carried": true,
    "pass": 4
   }
  ],
  "causes": [],
  "pending": [],
- "asked": 58,
- "answered": 58,
+ "asked": 1,
+ "answered": 1,
  "pass_items": [],
  "unowed": []
 }

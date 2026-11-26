@@ -1,6 +1,6 @@
 {
  "piece": "P02",
- "pass": 6,
+ "pass": 12,
  "screens": {
   "*": "4f53cda18c2baa0c"
  },
@@ -42,8 +42,8 @@
   "C928": "799e1dd153166b6d",
   "C931": "1b8984f52b99537e",
   "C890": "3d716de4269fbd6c",
-  "clock#1": "b093ed58ec403b3c",
-  "clock#2": "e393ecafc7ab9a6c",
+  "clock#1": "df2ea5f83738c062",
+  "clock#2": "77b3fafe9c2bf20c",
   "clock#3": "aae8f146c8ec933d",
   "clock#4": "c33118361d16b379",
   "clock#5": "95c5edec9e714e7b",
@@ -51,12 +51,12 @@
   "clock#7": "313c48a91780f62b",
   "clock#8": "f0c2400d02519978",
   "clock#9": "5d697f6bcd9f82de",
-  "clock#10": "2ad5e473e29b231d",
+  "clock#10": "5a788439a11d7765",
   "C1261": "6a661c60639de8be",
   "C1267": "6bafcadf3d586d5a",
   "C1249": "604706399d2f1194",
   "C1250": "8384cc6bcbd67c07",
-  "C1265": "00b79725344762be",
+  "C1265": "fe36d5bbc01da9a6",
   "C1262": "2946d2fe0b7dc28f",
   "C1234": "7dc492e03732757e",
   "L121": "cddfa55c18e5c7b7",
@@ -74,7 +74,7 @@
   "C1255": "d81893b9077b4b53",
   "L97": "2bfb9527e76ad93b",
   "media#1": "3641bf707d9adfce",
-  "media#2": "01ba7fa1cec4bc7a",
+  "media#2": "69a8103be1e1032a",
   "media#3": "8c75b0d488b188e2",
   "media#4": "03599fc0722690b6",
   "media#5": "2cf5e3607ccecd4a",
@@ -109,7 +109,7 @@
   "places#7": "2a095bf54f175e5e",
   "places#8": "c3ea8d01465e7298",
   "places#9": "f4cd9ab5f62bc6fc",
-  "places#10": "309f0141d342dc6f",
+  "places#10": "d6f0b4b357efc043",
   "C442": "a2b07f40e1a9e908",
   "C449": "ac5932d70cd775a1",
   "C451": "6b0fd679047fc9b8",
@@ -125,7 +125,7 @@
   "voice#2": "a40d4073409a2705",
   "voice#3": "4777d2c1251214c2",
   "voice#4": "ac2fdd7245f436db",
-  "voice#5": "7bbdd4290054e601",
+  "voice#5": "f74d350a978e124c",
   "voice#6": "df1f5dc8b6d21538",
   "voice#7": "321cc76cff93aadb",
   "voice#8": "4362249fb5f9616e"
@@ -551,14 +551,14 @@
    "row": "C1265",
    "screen": "home_hall",
    "verdict": "PASS",
-   "line": "# P02 re-check: no picture, the hall only routes (craft/media.md, C1265).",
-   "why": "the hall has no image of its own; its six cards carry the six rooms' own place pictures, which C1265 now says are not a spot of this kind (a place's image renders only as its card on the menu it is entered from (v2.py:24764); media.md step 2 says that card is the place's one picture, not a door or menu spot)",
+   "line": "home_hall: image = none (thoroughfare)",
+   "why": "the hall carries no spot; its six room cards are the rooms' place images, which C1265 now says are not spots of this kind (v2.py:24930 card)",
    "cause": null,
    "note": false,
    "screen_hash": null,
-   "row_hash": "00b79725344762be",
+   "row_hash": "fe36d5bbc01da9a6",
    "carried": true,
-   "pass": 3
+   "pass": 12
   },
   {
    "row": "C1267",
@@ -1584,7 +1584,7 @@
    "note": false,
    "screen_hash": "4f53cda18c2baa0c",
    "row_hash": "8f11debafcf05142",
-   "carried": false,
+   "carried": true,
    "pass": 6
   },
   {
@@ -1604,40 +1604,40 @@
    "row": "clock#1",
    "screen": "*",
    "verdict": "PASS",
-   "line": "Room cards on the hall (Bathroom \u00b7 Kitchen \u00b7 Living Room \u00b7 Master Bedroom \u00b7 Ryan's Room \u00b7 Your Bedroom \u00b7 Exit Home) and 'Leave <room>'",
-   "why": "Shape step 1: no time or energy on any room link.",
+   "line": "Bathroom \u00b7 Kitchen \u00b7 Living Room \u00b7 Master Bedroom \u00b7 Ryan's Room \u00b7 Your Bedroom \u00b7 Exit Home",
+   "why": "room links name no time, energy or money; nothing on P02 costs money; no author-written grey line names a cost",
    "cause": null,
    "note": false,
    "screen_hash": "4f53cda18c2baa0c",
-   "row_hash": "b093ed58ec403b3c",
+   "row_hash": "df2ea5f83738c062",
    "carried": true,
-   "pass": 4
+   "pass": 11
   },
   {
    "row": "clock#10",
    "screen": "*",
    "verdict": "PASS",
-   "line": "home_tv: max_triggers_per_day 2, show_when_blocked, no time_of_day",
-   "why": "home rows with a daily count (home_tv, home_dishes, loop_shower, loop_eat) have no clock window, so their grey lines are true; loop_sleep and ryan_room have a window and no count",
+   "line": "home rows: loop_sleep (window, no count), loop_shower (count, no window)",
+   "why": "no house row has both a clock window and a daily count with show_when_blocked",
    "cause": null,
    "note": false,
    "screen_hash": "4f53cda18c2baa0c",
-   "row_hash": "2ad5e473e29b231d",
+   "row_hash": "5a788439a11d7765",
    "carried": true,
-   "pass": 5
+   "pass": 11
   },
   {
    "row": "clock#2",
    "screen": "*",
    "verdict": "PASS",
-   "line": "(home, home_hall and the six rooms: no costs; Exit Home to Your Street: no costs)",
-   "why": "rule 2: a hop inside an area costs nothing; room-to-room and the front door to her own street (next door) are free in both directions",
+   "line": "home rooms: no entry_costs on any home place",
+   "why": "hall to any room is a hop inside home and costs nothing; no place in the game sets entry costs",
    "cause": null,
    "note": false,
    "screen_hash": "4f53cda18c2baa0c",
-   "row_hash": "e393ecafc7ab9a6c",
+   "row_hash": "77b3fafe9c2bf20c",
    "carried": true,
-   "pass": 3
+   "pass": 12
   },
   {
    "row": "clock#3",
@@ -1812,14 +1812,14 @@
    "row": "media#2",
    "screen": "home_hall",
    "verdict": "PASS",
-   "line": "image_search_queries = [\"woman of 18 eating toast at a small family kitchen counter\", ...]",
-   "why": "each of the six rooms has one tier-0 file with her in it (every query names a woman of 18 or a young woman); none is the empty room; the hall has none",
+   "line": "kitchen 'eating toast at a small family kitchen counter' \u00b7 living room 'curled on a couch watching TV'",
+   "why": "one tier-0 file per room, her in it; no hours, so each shows at every hour, and none names anyone else or says empty or alone",
    "cause": null,
    "note": false,
    "screen_hash": null,
-   "row_hash": "01ba7fa1cec4bc7a",
+   "row_hash": "69a8103be1e1032a",
    "carried": true,
-   "pass": 3
+   "pass": 11
   },
   {
    "row": "media#3",
@@ -1903,14 +1903,14 @@
    "row": "places#10",
    "screen": "*",
    "verdict": "N/A",
-   "line": "",
-   "why": "no place on this piece's screens is hidden_until a flag",
+   "line": "home places: no hidden_until on any of them",
+   "why": "none of P02's places is hidden until a flag; the rule has nothing to judge",
    "cause": null,
    "note": false,
    "screen_hash": "4f53cda18c2baa0c",
-   "row_hash": "309f0141d342dc6f",
+   "row_hash": "d6f0b4b357efc043",
    "carried": false,
-   "pass": 6
+   "pass": 12
   },
   {
    "row": "places#2",
@@ -2228,14 +2228,14 @@
    "row": "voice#5",
    "screen": "*",
    "verdict": "N/A",
-   "line": "(alone)",
-   "why": "nobody else on a room line",
+   "line": "Builds: home, home_hall, home_kitchen, ... (places)",
+   "why": "places only; their menus are not scenes, no path to count",
    "cause": null,
    "note": false,
    "screen_hash": "4f53cda18c2baa0c",
-   "row_hash": "7bbdd4290054e601",
+   "row_hash": "f74d350a978e124c",
    "carried": true,
-   "pass": 1
+   "pass": 12
   },
   {
    "row": "voice#6",
@@ -2357,8 +2357,8 @@
  ],
  "causes": [],
  "pending": [],
- "asked": 2,
- "answered": 2,
+ "asked": 1,
+ "answered": 1,
  "pass_items": [],
  "unowed": []
 }

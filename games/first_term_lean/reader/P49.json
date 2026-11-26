@@ -1,6 +1,6 @@
 {
  "piece": "P49",
- "pass": 13,
+ "pass": 14,
  "screens": {
   "ryan_charger.moment": {
    "text": "313906c8298f2b26",
@@ -178,11 +178,11 @@
    "all": "11f18506cdfd9b90"
   },
   "marco_hips.moment": {
-   "text": "e1e2ae840eb36acf",
+   "text": "bf09273041b98acb",
    "traits": "e4365d01d4eb14be",
    "facts": "f9e936b5d2f7fa16",
    "facts2": "e2ce2f969cea33c2",
-   "all": "6caf8adc9e13179d"
+   "all": "06eb346786cec3d5"
   },
   "marco_hips.let": {
    "text": "d73ea7023c6bda5d",
@@ -233,7 +233,7 @@
    "facts2": "5c2a5075c1a7cd39",
    "all": "02498b18ad0f6fab"
   },
-  "*": "be5378a297ac233d"
+  "*": "e959c453c19609e7"
  },
  "rows": {
   "B1": "5276068df1ca6fa9",
@@ -499,20 +499,20 @@
    "row": "B10",
    "screen": "marco_hips.moment",
    "verdict": "PASS",
-   "line": "\"You pay at the desk for a day pass and find a bench by the mirrors. You're halfway through a set when Marco walks over\"",
-   "why": "day pass and energy paid by body_workout before the swap; Marco present by requires_npc and the rule's npc_at_location; stance line behind marco_fixed_form false, \"Hips. Show me you remember.\" behind true; \"next time\" is built (the rest returns the scene)",
+   "line": "You show your pass at the desk and find a bench by the mirrors. You're halfway through a set when Marco walks over and looks you over.",
+   "why": "fires only as body_workout's substitution (substitution_only), after its costs and inside its clothing and pass lock, with Marco present (rule condition + requires_npc, who_is_where: weekdays 06-10, 17-21, Sat 08-14); 'your pass' true with any pass; the two opening lines are split by marco_fixed_form, so the 'remember' line shows only after he fixed her form",
    "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "e1e2ae840eb36acf",
+    "text": "bf09273041b98acb",
     "traits": "e4365d01d4eb14be",
     "facts": "f9e936b5d2f7fa16",
     "facts2": "e2ce2f969cea33c2",
-    "all": "6caf8adc9e13179d"
+    "all": "06eb346786cec3d5"
    },
    "row_hash": "c1c0e2ac2588a579",
-   "carried": true,
-   "pass": 11
+   "carried": false,
+   "pass": 14
   },
   {
    "row": "B10",
@@ -2595,20 +2595,20 @@
    "row": "B8",
    "screen": "marco_hips.moment",
    "verdict": "PASS",
-   "line": "\"You pay at the desk for a day pass and find a bench by the mirrors. You're halfway through a set when Marco walks over\"",
-   "why": "$5 / 20 energy / 1 hour match PLAN Gym row; exits 60 minutes; no garment named, the act's leggings-and-sports-top lock is before it",
+   "line": "His hands land on your hips and turn them, and stay.",
+   "why": "no garment named; no number; both exits spend 60 minutes, the workout's hour",
    "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "e1e2ae840eb36acf",
+    "text": "bf09273041b98acb",
     "traits": "e4365d01d4eb14be",
     "facts": "f9e936b5d2f7fa16",
     "facts2": "e2ce2f969cea33c2",
-    "all": "6caf8adc9e13179d"
+    "all": "06eb346786cec3d5"
    },
    "row_hash": "80d415cf08e0ebfe",
-   "carried": true,
-   "pass": 11
+   "carried": false,
+   "pass": 14
   },
   {
    "row": "B8",
@@ -6165,20 +6165,20 @@
    "row": "C2196",
    "screen": "marco_hips.moment",
    "verdict": "PASS",
-   "line": "\"You pay at the desk for a day pass and find a bench by the mirrors. You're halfway through a set when Marco walks over\"",
-   "why": "mid-workout after $5 and 20 energy, in the act's leggings and sports top; words agree",
+   "line": "You show your pass at the desk and find a bench by the mirrors. You're halfway through a set when Marco walks over and looks you over.",
+   "why": "what she is doing and wearing when it fires: mid-workout, after the act's 20 energy is taken, in leggings and a sports top (the act's conditions); the words put her in the act ('halfway through a set') and her stance fits; it never fires on arrival (substitution_only; headless 2026-11-27: fires inside the workout)",
    "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "e1e2ae840eb36acf",
+    "text": "bf09273041b98acb",
     "traits": "e4365d01d4eb14be",
     "facts": "f9e936b5d2f7fa16",
     "facts2": "e2ce2f969cea33c2",
-    "all": "6caf8adc9e13179d"
+    "all": "06eb346786cec3d5"
    },
    "row_hash": "a8ae0700d13a7f9b",
-   "carried": true,
-   "pass": 11
+   "carried": false,
+   "pass": 14
   },
   {
    "row": "C2196",
@@ -6228,7 +6228,7 @@
     "all": "60672e322c6eb2bc"
    },
    "row_hash": "27e6b45f50edd3ac",
-   "carried": false,
+   "carried": true,
    "pass": 13
   },
   {
@@ -6247,7 +6247,7 @@
     "all": "6caf8adc9e13179d"
    },
    "row_hash": "27e6b45f50edd3ac",
-   "carried": false,
+   "carried": true,
    "pass": 13
   },
   {
@@ -6266,7 +6266,7 @@
     "all": "06f6053c7ed12440"
    },
    "row_hash": "27e6b45f50edd3ac",
-   "carried": false,
+   "carried": true,
    "pass": 13
   },
   {
@@ -6285,7 +6285,7 @@
     "all": "0571296a34379742"
    },
    "row_hash": "27e6b45f50edd3ac",
-   "carried": false,
+   "carried": true,
    "pass": 13
   },
   {
@@ -6304,7 +6304,7 @@
     "all": "abde12bfac993bae"
    },
    "row_hash": "27e6b45f50edd3ac",
-   "carried": false,
+   "carried": true,
    "pass": 13
   },
   {
@@ -6323,7 +6323,7 @@
     "all": "90c5a314b1fbbd9d"
    },
    "row_hash": "27e6b45f50edd3ac",
-   "carried": false,
+   "carried": true,
    "pass": 13
   },
   {
@@ -6342,7 +6342,7 @@
     "all": "4f5299bb21a4f368"
    },
    "row_hash": "27e6b45f50edd3ac",
-   "carried": false,
+   "carried": true,
    "pass": 13
   },
   {
@@ -6361,7 +6361,7 @@
     "all": "0104d8053969fd0e"
    },
    "row_hash": "27e6b45f50edd3ac",
-   "carried": false,
+   "carried": true,
    "pass": 13
   },
   {
@@ -6380,7 +6380,7 @@
     "all": "a2080fb3cbcaac95"
    },
    "row_hash": "27e6b45f50edd3ac",
-   "carried": false,
+   "carried": true,
    "pass": 13
   },
   {
@@ -8024,20 +8024,20 @@
    "row": "C460",
    "screen": "marco_hips.moment",
    "verdict": "PASS",
-   "line": "\"You pay at the desk for a day pass and find a bench by the mirrors. You're halfway through a set when Marco walks over\"",
-   "why": "day pass and energy paid by body_workout before the swap; Marco present by requires_npc and the rule's npc_at_location; stance line behind marco_fixed_form false, \"Hips. Show me you remember.\" behind true; \"next time\" is built (the rest returns the scene)",
+   "line": "You show your pass at the desk and find a bench by the mirrors. You're halfway through a set when Marco walks over and looks you over.",
+   "why": "every claim holds on every reach: the pass is running, she is lifting, Marco is there by rule and row, met_marco is set; no past without its flag",
    "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "e1e2ae840eb36acf",
+    "text": "bf09273041b98acb",
     "traits": "e4365d01d4eb14be",
     "facts": "f9e936b5d2f7fa16",
     "facts2": "e2ce2f969cea33c2",
-    "all": "6caf8adc9e13179d"
+    "all": "06eb346786cec3d5"
    },
    "row_hash": "67e48e60d5053a2e",
-   "carried": true,
-   "pass": 11
+   "carried": false,
+   "pass": 14
   },
   {
    "row": "C460",
@@ -8648,20 +8648,20 @@
    "row": "C461",
    "screen": "marco_hips.moment",
    "verdict": "PASS",
-   "line": "\"You pay at the desk for a day pass and find a bench by the mirrors. You're halfway through a set when Marco walks over\"",
-   "why": "texture and dialogue that fit Marco's entry (Takes charge, \"his hands on her hips\")",
+   "line": "Hips. Show me you remember.",
+   "why": "dialogue fits Marco (Takes charge, Sporty) and sits behind marco_fixed_form is_true",
    "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "e1e2ae840eb36acf",
+    "text": "bf09273041b98acb",
     "traits": "e4365d01d4eb14be",
     "facts": "f9e936b5d2f7fa16",
     "facts2": "e2ce2f969cea33c2",
-    "all": "6caf8adc9e13179d"
+    "all": "06eb346786cec3d5"
    },
    "row_hash": "310706ee076318f2",
-   "carried": true,
-   "pass": 11
+   "carried": false,
+   "pass": 14
   },
   {
    "row": "C461",
@@ -11535,20 +11535,20 @@
    "row": "L106",
    "screen": "marco_hips.moment",
    "verdict": "PASS",
-   "line": "\"You pay at the desk for a day pass and find a bench by the mirrors. You're halfway through a set when Marco walks over\"",
-   "why": "Marco at hood_gym by his rows (weekdays 6-10, 5-9, Sat 8-2); nobody else named",
+   "line": "Marco walks over",
+   "why": "Marco named only where the substitution rule's npc_at_location and the trigger's requires_npc put him at hood_gym",
    "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "e1e2ae840eb36acf",
+    "text": "bf09273041b98acb",
     "traits": "e4365d01d4eb14be",
     "facts": "f9e936b5d2f7fa16",
     "facts2": "e2ce2f969cea33c2",
-    "all": "6caf8adc9e13179d"
+    "all": "06eb346786cec3d5"
    },
    "row_hash": "13a714429d15f3b2",
-   "carried": true,
-   "pass": 11
+   "carried": false,
+   "pass": 14
   },
   {
    "row": "L106",
@@ -12695,8 +12695,8 @@
  ],
  "causes": [],
  "pending": [],
- "asked": 9,
- "answered": 9,
+ "asked": 6,
+ "answered": 6,
  "pass_items": [],
  "unowed": []
 }
