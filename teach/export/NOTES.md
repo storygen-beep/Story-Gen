@@ -5,3 +5,4 @@
 - Capital not stated. Ask before teaching anything cost-dependent.
 - Workspace lives at teach/export/ in the Story-Gen repo (learner's choice). Lessons are also published as claude.ai artifacts so they open in the app.
 - Keep lessons short; the learner answers tersely.
+- Session 1: chose sourcing agent. Lesson 0002 gave a real-world task: ask an Indore exporter or trader how they pay agents. Ask for the result next session.

@@ -7,7 +7,7 @@ The learner lives in Indore (Madhya Pradesh) and wants to find out what they cou
 - Can name the registrations an Indian vegetable exporter needs (IEC, APEDA RCMC, phytosanitary certificate) and say who issues each one.
 - Can describe the main roles in the trade (grower-exporter, merchant exporter, sourcing agent, service provider) and the money, risk and skills each one needs.
 - Can explain why Indore/MP is a sourcing base (onion, garlic, potato) and what that means for product choice.
-- Has chosen one path and written a first-steps checklist for it.
+- Has chosen one path and written a first-steps checklist for it. (Path chosen: sourcing agent, see learning-records/0001.)
 
 ## Constraints
 - Based in Indore, India. Indian rules (DGFT, APEDA, Plant Protection, customs) apply.

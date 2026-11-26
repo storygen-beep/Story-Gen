@@ -20,6 +20,16 @@
   Local context on garlic growing around Indore (Rabi season). Its 63% national share figure conflicts with other sources; treat as unconfirmed.
 - [DGFT notification removing onion MEP, Sept 2024 (via ANI/Lokmat)](https://www.lokmattimes.com/business/india-removes-minimum-export-price-on-onion/amp)
   Example of how fast onion export policy changes (2023 ban, May 2024 MEP USD 550, MEP removed Sept 2024).
+- [Tally: Intermediary services under GST](https://tallysolutions.com/gst/intermediary-services-under-gst-place-of-supply-rules/)
+  Plain explanation of IGST s.13(8)(b): intermediary place of supply is the agent's location. Use for: GST on agent commission.
+- [Grant Thornton: GST on intermediary services, Finance Act 2026](https://www.grantthornton.in/insights/articles/gst-on-intermediary-services/)
+  Reports s.13(8)(b) omitted by Finance Act 2026. Single source; confirm with a CA or the amended Act.
+- [howtoexportimport.com: Commission for export order](https://howtoexportimport.com/Commission-for-Export-order-4388.aspx)
+  Practitioner guide on commission base (invoice vs net proceeds) and timing. Secondary; the 1% figure there is a forum remark.
+- [FreshPlaza: APEDA and VAFA reverse buyer-seller meet, Mumbai](https://www.freshplaza.com/europe/article/9837870/apeda-and-vafa-organise-international-reverse-buyer-seller-meet-in-mumbai/)
+  Foreign buyers meeting Indian fresh-produce exporters at Fresh India Show 2026. Use for: where agents meet buyers.
+- [APEDA service providers directory](https://agriexchange.apeda.gov.in/Service_providers/service_providers.aspx)
+  Packhouses, labs and other providers. Use for: who an agent coordinates.
 
 ## Wisdom (Communities)
 
@@ -29,6 +39,8 @@
   State body in Indore that ran "Coffee with Exporters" workshops for new exporters. Use for: meeting local exporters in person.
 
 ## Gaps
+- Official or trade-body benchmark for fresh-produce agent commission rates.
+- Template or legal guidance for agency / non-circumvention agreements in India.
 - Current onion export duty status (40% duty from May 2024; removal not confirmed).
 - Logistics from Indore: nearest ICD/container depot and air cargo options. No source found yet.
 - A trusted online forum of Indian agri exporters.
