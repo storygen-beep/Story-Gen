@@ -4560,7 +4560,6 @@ text = "\"Good morning, sir.\""
 targetType = "node"
 nodeId = "rules"
 time_progression_minutes = 15
-flagEffects = [{ flag = "met_dean", op = "set" }]
 
 [[canvases.nodes]]
 id = "rules"
@@ -4587,7 +4586,8 @@ name = "The timetable"
 blocks = [
   { type = "paragraph", content = "He slides a printed sheet across the desk and keeps two fingers on it a second before he lets go." },
   { type = "dialog", content = "Your timetable. Learn it.", props = { speaker = "npc", npcId = "npc_dean" } },
-  { type = "paragraph", content = "Psychology, Dr. Hale: Monday and Wednesday, 9 to 11. Statistics, Mr. Pratt: Monday and Wednesday, 11 to 1. English, Prof. Walsh: Tuesday and Thursday, 9 to 11. Drama, Mr. Cross: Tuesday and Thursday, 11 to 1. All in the Lecture Hall, except drama, in the Theatre." },
+  # P61 — the sheet opens as the Timetable popup (C2199; LO 2026-11-26: "Should first open in the deans office").
+  { type = "timetable", props = { label = "Look at the sheet", open = true } },
 ]
 
 [canvases.nodes.exit_block]
@@ -4598,6 +4598,8 @@ text = "Fold it into your bag."
 targetType = "node"
 nodeId = "sendoff"
 time_progression_minutes = 5
+# P61 — met_dean is set once she has the sheet, so the sidebar Timetable waits on it (C2199).
+flagEffects = [{ flag = "met_dean", op = "set" }]
 
 [[canvases.nodes]]
 id = "sendoff"
