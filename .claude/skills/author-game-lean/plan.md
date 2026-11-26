@@ -85,7 +85,7 @@ Why: nothing asked for each person's week before the everyday pieces were listed
 
 After the schedules, because a walk-in sits where that person's rows already put them (L97; v2's gate `a walk-in can happen`). One area per bite. For each place, name one or two scenes, and for each:
 - **what she sees,** and her choice: watch or leave, help or say she's late;
-- **which kind:** she comes across something (it fires by itself on arrival, `chance = 0.35`, once a day each, never a button; C2195), someone walks in on her in the middle of an act, or someone comes to her when she arrives (it fires by itself, at most one a day across the game; `craft/walk-ins.md`, "When someone comes to her");
+- **which kind:** she comes across something (it fires by itself on arrival, `chance = 0.35`, once a day each, never a button; C2195), someone walks in on her in the middle of an act, or someone comes to her when she arrives (it fires by itself, at most one a day across the game; `craft/walk-ins.md`, "When someone comes to her"); Or she gets noticed: a stranger reacting to what she wears, on arrival, once a day each, at most a quarter of the area's scenes (C2200); never the place description (C2201).
 - **on arrival, or inside an act:** what is she doing and wearing when it fires? If the words need her in the middle of something (a workout, a meal, studying), it fires inside that act, after its costs, never on arrival (C2196);
 - **who:** half or more of an area's scenes name a person she knows (C678);
 - **everyday or not:** about half are everyday, someone's life going on without her (C802, L147); give the area's count;

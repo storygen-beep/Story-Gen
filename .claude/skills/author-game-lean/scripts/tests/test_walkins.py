@@ -225,3 +225,64 @@ def test_someone_walking_in_on_her_off_the_brake_is_not_checked_as_coming_to_her
     act, target = gym(sub_only=False)
     target["trigger"]["conditions"]["items"] = []  # off the brake: the housemate at the bathroom door
     assert walkins.problems(planted(comes("cafe_ann", "npc_ann", "cafe"), act, target)) == []
+
+
+# ── kind (c), she gets noticed (LO, typed in main-lean 2026-11-27) ──
+
+LEGGINGS = {"type": "clothing_item", "item_id": "leggings", "operator": "equipped"}
+
+
+def noticed(cid="street_leggings", conds=(LEGGINGS,), per_day=1, choices=None):
+    c = comes(cid, who=None, place="park", conds=conds, choices=choices if choices is not None else [
+        {"text": "Keep walking", "flagEffects": [{"flag": "noticed_leggings", "op": "set"}]},
+        {"text": "Look back", "flagEffects": [{"flag": "noticed_leggings", "op": "set"}]}])
+    c["trigger"]["max_triggers_per_day"] = per_day
+    return c
+
+
+def does(*cids):
+    return {"P72": {f"{c}.a": {walkins.NOTICED} for c in cids}}
+
+
+def many_others():
+    return [comes(f"park_tom_{i}") for i in range(3)]
+
+
+def test_a_stranger_noticing_her_leggings_is_green():
+    # No named person and no brake: kind (c) needs neither.
+    assert walkins.problems(planted(noticed(), *many_others()), does("street_leggings")) == []
+
+
+def test_unlabelled_it_reads_as_someone_coming_to_her():
+    # The old logic's only home for it: without the label, it needs a person and the brake.
+    rows = walkins.problems(planted(noticed(), *many_others()))
+    assert any("with no person" in r for r in rows)
+
+
+def test_kind_c_needs_a_clothing_condition():
+    rows = walkins.problems(planted(noticed(conds=()), *many_others()), does("street_leggings"))
+    assert any("no clothing condition" in r for r in rows)
+
+
+def test_kind_c_is_once_a_day_and_off_the_brake():
+    rows = walkins.problems(planted(noticed(per_day=None), *many_others()), does("street_leggings"))
+    assert any("once a day" in r for r in rows)
+    braked = noticed(conds=(LEGGINGS, BRAKE))
+    rows = walkins.problems(planted(braked, *many_others()), does("street_leggings"))
+    assert any("shared brake" in r for r in rows)
+
+
+def test_kind_c_has_a_way_out():
+    one = noticed(choices=[{"text": "Keep walking"}])
+    assert any("1 choice" in r for r in walkins.problems(planted(one, *many_others()), does("street_leggings")))
+
+
+def test_kind_c_as_a_button_is_red():
+    button = noticed()
+    button["trigger"]["trigger_mode"] = "manual"
+    assert any("is a button" in r for r in walkins.problems(planted(button), does("street_leggings")))
+
+
+def test_kind_c_over_a_quarter_is_red():
+    rows = walkins.problems(planted(noticed("a"), noticed("b"), comes()), does("a", "b"))
+    assert any("at most a quarter" in r for r in rows)

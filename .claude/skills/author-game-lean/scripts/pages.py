@@ -193,9 +193,43 @@ def meeting_flags(game):
     return {f for f in flags_set(game) if f.startswith("met_") or f.endswith("_met")}
 
 
-def problems(game):
-    """Rows that make the pages check red. Empty for a game without either CoT page."""
+# Conditions that read what she wears (the same set as reach.py's CLOTH).
+CLOTH = {"clothing_slot", "clothing_item", "worn_type", "worn_exposure", "worn_beauty", "worn_corruption"}
+
+
+def _cond_types(d):
+    out = set()
+    if isinstance(d, dict):
+        if d.get("type"):
+            out.add(d["type"])
+        for v in d.values():
+            out |= _cond_types(v)
+    elif isinstance(d, list):
+        for v in d:
+            out |= _cond_types(v)
+    return out
+
+
+def description_problems(game):
+    """A place's description never changes with what she wears (craft/places.md rule 1, C2201). LO, typed in
+    main-lean 2026-11-27: "Yes, we should align our place description to it." A stranger noticing her clothes is a
+    "she gets noticed" scene (craft/walk-ins.md, C2200)."""
     rows = []
+    for loc in game.get("locations") or []:
+        if not isinstance(loc, dict):
+            continue
+        for i, v in enumerate(loc.get("description_variants") or []):
+            hit = sorted(_cond_types((v or {}).get("conditions")) & CLOTH)
+            if hit:
+                rows.append(f"place `{loc.get('id')}`'s description variant {i + 1} changes with what she wears "
+                            f"(`{hit[0]}`): a description says where she is and what is here; make it a 'she gets "
+                            f"noticed' scene (craft/places.md rule 1, C2201)")
+    return rows
+
+
+def problems(game):
+    """Rows that make the pages check red. The description rule runs on every game; the rest only with a CoT page."""
+    rows = description_problems(game)
     if hints_on(game):
         ladders = ladder_flags(game)
         everywhere = flags_set(game)

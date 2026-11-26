@@ -37,12 +37,23 @@ Red on (LO, typed in main-lean 2026-11-26: "Yes", "One is fine for now"):
      person (`requires_npc`, or `npc_at_location` in the rule's or its own conditions), every first-screen choice
      setting the brake, two choices; and it is `substitution_only` with the act's `trigger.location`, or the
      engine can't find it (v2.py:4160-4174) or offers it as a button (C2196).
+
+Kind (c), she gets noticed (LO, typed in main-lean 2026-11-27: "Yes, we should align our place description to it.
+And for scenes like leggings ones, those should be walkins right??", "dont we need skill changes"): a random canvas
+whose card's Does: names "she gets noticed". A stranger may be the one who notices, so rule 1 (a named person) doesn't
+apply. Red on:
+  9. kind (c) as a button, or without a clothing condition on its trigger (it is about what she wears), or without
+     `max_triggers_per_day = 1`, or on the shared brake, or with fewer than two first-screen choices (C2200);
+ 10. kind (c) over a quarter of the game's arrival scenes (C2200, L147).
 """
 
 import scenes
 
 RANDOM = "random"
 FINDS = "she comes across something"  # the Rule label that marks kind (a) on a card's Does: (SKILL.md)
+NOTICED = "she gets noticed"  # the Rule label that marks kind (c) (SKILL.md)
+# Conditions that read what she wears (the same set as reach.py's CLOTH).
+CLOTH = {"clothing_slot", "clothing_item", "worn_type", "worn_exposure", "worn_beauty", "worn_corruption"}
 # Words that put her in the middle of an act. On a scene that fires as she walks in, each is a line about something
 # she isn't doing yet (C2196; first_term_lean's marco_hips, "Your stance is all wrong", P49).
 ACT_WORDS = ("your stance", "your form", "your set", "your squat", "your reps", "your lift", "mid-set",
@@ -164,6 +175,7 @@ def problems(game, does_by_card=None):
     """Rows that make the walkins check red. does_by_card: {card id: its Does: dict}, for rules 4 to 6."""
     rows = []
     finds = labelled(does_by_card, FINDS)
+    noticed = labelled(does_by_card, NOTICED)
     walk_ins = labelled(does_by_card, "a walk-in")
     subs = substitution_canvases(game)
     for c in game.get("canvases") or []:
@@ -175,9 +187,13 @@ def problems(game, does_by_card=None):
             rows.append(f"{cid}: a walk-in she comes across is a button; it fires by itself on arrival: "
                         f"trigger_mode = \"random\", chance (0.35 by default), max_triggers_per_day = 1 "
                         f"(craft/walk-ins.md, C2195)")
+        if cid in noticed:
+            rows.append(f"{cid}: she gets noticed is a button; it fires by itself on arrival: trigger_mode = "
+                        f"\"random\", chance (0.35 by default), max_triggers_per_day = 1 (craft/walk-ins.md, C2200)")
     every = comes_to_her(game)
     found = [c for c in every if c.get("id") in finds]
-    scenes_b = [c for c in every if c.get("id") not in finds]
+    seen = [c for c in every if c.get("id") in noticed]
+    scenes_b = [c for c in every if c.get("id") not in finds and c.get("id") not in noticed]
     cleared = daily_unset(game)
     brakes = {}
     for c in scenes_b:
@@ -229,6 +245,24 @@ def problems(game, does_by_card=None):
         if len(choices) < 2:
             rows.append(f"{cid}: its first screen has {len(choices)} choice(s); she always has a written way out "
                         f"(C2188)")
+    for c in seen:
+        cid, t = c.get("id"), c["trigger"]
+        if not any(i.get("type") in CLOTH for i in scenes.items(t.get("conditions"))):
+            rows.append(f"{cid}: she gets noticed with no clothing condition on its trigger; it is about what she "
+                        f"wears, so it fires only in that (clothing_item, clothing_slot, worn_exposure; C2200)")
+        on = (waits_on(t.get("conditions")) | {f for ch in first_choices(c) for f in sets(ch)}) & shared_flags
+        if on:
+            rows.append(f"{cid}: she gets noticed is on the shared brake `{sorted(on)[0]}`; that flag is only for the "
+                        f"scenes that come to her (C2200, C2187)")
+        if t.get("max_triggers_per_day") != 1:
+            rows.append(f"{cid}: she gets noticed is once a day: max_triggers_per_day = 1 (C2200)")
+        choices = first_choices(c)
+        if len(choices) < 2:
+            rows.append(f"{cid}: its first screen has {len(choices)} choice(s); she always has a written way out "
+                        f"(C2188)")
+    if seen and len(seen) * 4 > len(every):
+        rows.append(f"{len(seen)} of {len(every)} arrival scenes are 'she gets noticed'; at most a quarter, or the "
+                    f"world is only about her body (C2200, L147)")
     for act, rule, target in in_acts(game):
         tt = target.get("trigger") if isinstance(target.get("trigger"), dict) else {}
         brake = waits_on(tt.get("conditions")) & shared_flags

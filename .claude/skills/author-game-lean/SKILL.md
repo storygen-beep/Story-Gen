@@ -137,6 +137,7 @@ A craft file's must-read table has two more columns, `when` and `judge`, beside 
 | a media spot | has a picture or a clip |
 | a walk-in | is someone walking in on her, her walking in, or someone coming to her on arrival |
 | she comes across something | is a walk-in she comes across, firing on arrival (kind a, `craft/walk-ins.md`), not someone coming to her |
+| she gets noticed | is a stranger reacting to what she wears, firing on arrival (kind c, `craft/walk-ins.md`) |
 | the opening | is in the opening |
 | a release after the first | ships in release 2 or later, onto old saves |
 | the plan | not a screen: the game plan or a release's piece list, where a whole system is designed |
