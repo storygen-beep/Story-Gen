@@ -1,6 +1,6 @@
 {
  "piece": "P15",
- "pass": 9,
+ "pass": 10,
  "screens": {
   "psych_first.seat": {
    "text": "27a88e4f60f1efff",
@@ -12,25 +12,25 @@
   "psych_first.lecture": {
    "text": "a64e3086993e7aac",
    "traits": "838782b7308b47e0",
-   "facts": "b23ebb17c2d29ba7",
-   "facts2": "4a2f3019ebcf57f7",
-   "all": "1b316053b7dda9d7"
+   "facts": "7d245779a427421e",
+   "facts2": "ec08c20306b7a51e",
+   "all": "ca28668471962e90"
   },
   "stats_first.class": {
    "text": "e266def6233d6a3d",
    "traits": "9814f8002b787cb3",
-   "facts": "7f7ded0bf9f4d930",
-   "facts2": "857f385689f8c3dc",
-   "all": "844dd795f8b322fb"
+   "facts": "a20589f4654da20c",
+   "facts2": "743270983b23ae77",
+   "all": "b527f47cbd6a4ba9"
   },
   "stats_first.after": {
    "text": "008fd936f1516193",
    "traits": "9814f8002b787cb3",
-   "facts": "37fe7c54c585a127",
-   "facts2": "fe63bf1deb1ab5cb",
-   "all": "1a54966f810f4049"
+   "facts": "32dd645a74c7fa4f",
+   "facts2": "ca6730df4b95ef43",
+   "all": "078715a819e95838"
   },
-  "*": "4bdbd0743c95e90e"
+  "*": "031dcb9d72b879f3"
  },
  "rows": {
   "B1": "5276068df1ca6fa9",
@@ -184,18 +184,19 @@
    "screen": "psych_first.lecture",
    "verdict": "PASS",
    "line": "A man in his late thirties is already at the lectern ... At the end, the girl catches you on the way out.",
-   "why": "Brooke (lecture hall Mon/Wed 9-11) is in the half-full hall unnamed; every line names only Hale and Nadia, both gated present by the trigger, and \"the girl\" is Nadia. True on every path and minute of 09:00-09:30.",
+   "why": "Hale and Nadia are both trigger npc_at_location items (hall Mon/Wed 09-11), start 09:00-09:29; Brooke is in the 'half full' hall unnamed; no office is named",
    "cause": null,
    "note": false,
    "screen_hash": {
     "text": "a64e3086993e7aac",
-    "facts": "b23ebb17c2d29ba7",
-    "facts2": "4a2f3019ebcf57f7",
-    "all": "1b316053b7dda9d7"
+    "traits": "838782b7308b47e0",
+    "facts": "7d245779a427421e",
+    "facts2": "ec08c20306b7a51e",
+    "all": "ca28668471962e90"
    },
    "row_hash": "c1c0e2ac2588a579",
-   "carried": true,
-   "pass": 4
+   "carried": false,
+   "pass": 10
   },
   {
    "row": "B10",
@@ -219,37 +220,39 @@
    "row": "B10",
    "screen": "stats_first.after",
    "verdict": "PASS",
-   "line": "doesn't look at the room again for the rest of the class ... On the way out he says your name once more",
-   "why": "No duration claimed; nothing says who is there after the 120-minute Done.",
+   "line": "He turns back to the board and doesn't look at the room again for the rest of the class.",
+   "why": "Pratt is there until 13:00 and the clock does not move until Done; no office or other person claimed",
    "cause": null,
    "note": false,
    "screen_hash": {
     "text": "008fd936f1516193",
-    "facts": "37fe7c54c585a127",
-    "facts2": "fe63bf1deb1ab5cb",
-    "all": "1a54966f810f4049"
+    "traits": "9814f8002b787cb3",
+    "facts": "32dd645a74c7fa4f",
+    "facts2": "ca6730df4b95ef43",
+    "all": "078715a819e95838"
    },
    "row_hash": "c1c0e2ac2588a579",
-   "carried": true,
-   "pass": 2
+   "carried": false,
+   "pass": 10
   },
   {
    "row": "B10",
    "screen": "stats_first.class",
    "verdict": "PASS",
-   "line": "A man in a grey cardigan is already filling the whiteboard ... Miss @player?",
-   "why": "Pratt's row 11:00-13:00 Mon/Wed; 'already' true at 11:00, at 11:29 and straight after psychology's Done.",
+   "line": "A man in a grey cardigan is already filling the whiteboard with numbers.",
+   "why": "Pratt's row: campus_lecture_hall Mon/Wed 11-13; trigger needs him present 11:00-11:29; 'already' holds at 11:00 and 11:29",
    "cause": null,
    "note": false,
    "screen_hash": {
     "text": "e266def6233d6a3d",
-    "facts": "7f7ded0bf9f4d930",
-    "facts2": "857f385689f8c3dc",
-    "all": "844dd795f8b322fb"
+    "traits": "9814f8002b787cb3",
+    "facts": "a20589f4654da20c",
+    "facts2": "743270983b23ae77",
+    "all": "b527f47cbd6a4ba9"
    },
    "row_hash": "c1c0e2ac2588a579",
-   "carried": true,
-   "pass": 3
+   "carried": false,
+   "pass": 10
   },
   {
    "row": "B11",
@@ -414,18 +417,19 @@
    "screen": "psych_first.lecture",
    "verdict": "PASS",
    "line": "A man in his late thirties is already at the lectern ... At the end, the girl catches you on the way out.",
-   "why": "No garment named (\"You cross your legs ... press your thighs together\" names the body only); \"late thirties\" agrees with Hale, 39.",
+   "why": "'late thirties' agrees with Hale, 39; legs and thighs named, no garment",
    "cause": null,
    "note": false,
    "screen_hash": {
     "text": "a64e3086993e7aac",
-    "facts": "b23ebb17c2d29ba7",
-    "facts2": "4a2f3019ebcf57f7",
-    "all": "1b316053b7dda9d7"
+    "traits": "838782b7308b47e0",
+    "facts": "7d245779a427421e",
+    "facts2": "ec08c20306b7a51e",
+    "all": "ca28668471962e90"
    },
    "row_hash": "80d415cf08e0ebfe",
-   "carried": true,
-   "pass": 4
+   "carried": false,
+   "pass": 10
   },
   {
    "row": "B8",
@@ -449,37 +453,39 @@
    "row": "B8",
    "screen": "stats_first.after",
    "verdict": "PASS",
-   "line": "You copy every line and understand about half.",
-   "why": "No garment of hers; 120 min matches PLAN's 2-hour class.",
+   "line": "He turns back to the board and doesn't look at the room again for the rest of the class.",
+   "why": "No garment of hers named; the 120/60 minutes match the card",
    "cause": null,
    "note": false,
    "screen_hash": {
     "text": "008fd936f1516193",
-    "facts": "37fe7c54c585a127",
-    "facts2": "fe63bf1deb1ab5cb",
-    "all": "1a54966f810f4049"
+    "traits": "9814f8002b787cb3",
+    "facts": "32dd645a74c7fa4f",
+    "facts2": "ca6730df4b95ef43",
+    "all": "078715a819e95838"
    },
    "row_hash": "80d415cf08e0ebfe",
-   "carried": true,
-   "pass": 2
+   "carried": false,
+   "pass": 10
   },
   {
    "row": "B8",
    "screen": "stats_first.class",
    "verdict": "PASS",
-   "line": "A man in a grey cardigan",
-   "why": "His garment, texture; no garment of hers, no number against PLAN.",
+   "line": "A man in a grey cardigan is already filling the whiteboard with numbers.",
+   "why": "No garment of hers named; the 120/60 minutes match the card",
    "cause": null,
    "note": false,
    "screen_hash": {
     "text": "e266def6233d6a3d",
-    "facts": "7f7ded0bf9f4d930",
-    "facts2": "857f385689f8c3dc",
-    "all": "844dd795f8b322fb"
+    "traits": "9814f8002b787cb3",
+    "facts": "a20589f4654da20c",
+    "facts2": "743270983b23ae77",
+    "all": "b527f47cbd6a4ba9"
    },
    "row_hash": "80d415cf08e0ebfe",
-   "carried": true,
-   "pass": 3
+   "carried": false,
+   "pass": 10
   },
   {
    "row": "B9",
@@ -1167,19 +1173,6 @@
    "pass": 7
   },
   {
-   "row": "C2183",
-   "screen": "*",
-   "verdict": "PASS",
-   "line": "Nadia: Submissive, Forward (\"Sit here, freshman. Not the front. Trust me.\"); Hale: Dominant, Sadist, Particular (\"Come back with a real question\" elsewhere); Pratt: Dominant, Confident, Nerd, Particular (\"I take attendance, and I notice who isn't here.\")",
-   "why": "2-4 traits each, a personality-kind trait backed by a written line; Nadia's Forward and Pratt's Particular/Nerd are on this screen",
-   "cause": null,
-   "note": false,
-   "screen_hash": "dfad313623150c50",
-   "row_hash": "40172c2d376bfc32",
-   "carried": true,
-   "pass": 7
-  },
-  {
    "row": "C2188",
    "screen": "psych_first.seat",
    "verdict": "PASS",
@@ -1267,7 +1260,7 @@
     "all": "1b316053b7dda9d7"
    },
    "row_hash": "0c03931191c53a34",
-   "carried": false,
+   "carried": true,
    "pass": 9
   },
   {
@@ -1286,7 +1279,7 @@
     "all": "6269ae07af232e9a"
    },
    "row_hash": "0c03931191c53a34",
-   "carried": false,
+   "carried": true,
    "pass": 9
   },
   {
@@ -1305,7 +1298,7 @@
     "all": "1a54966f810f4049"
    },
    "row_hash": "0c03931191c53a34",
-   "carried": false,
+   "carried": true,
    "pass": 9
   },
   {
@@ -1324,7 +1317,7 @@
     "all": "844dd795f8b322fb"
    },
    "row_hash": "0c03931191c53a34",
-   "carried": false,
+   "carried": true,
    "pass": 9
   },
   {
@@ -1647,18 +1640,19 @@
    "screen": "psych_first.lecture",
    "verdict": "PASS",
    "line": "A man in his late thirties is already at the lectern ... At the end, the girl catches you on the way out.",
-   "why": "True with Brooke present: \"half full\" holds, nobody new is named.",
+   "why": "Every claim true on every reachable visit: Hale and Nadia are both trigger npc_at_location items (hall Mon/Wed 09-11), start 09:00-09:29; Brooke is in the 'half full' hall unnamed; no office is named",
    "cause": null,
    "note": false,
    "screen_hash": {
     "text": "a64e3086993e7aac",
-    "facts": "b23ebb17c2d29ba7",
-    "facts2": "4a2f3019ebcf57f7",
-    "all": "1b316053b7dda9d7"
+    "traits": "838782b7308b47e0",
+    "facts": "7d245779a427421e",
+    "facts2": "ec08c20306b7a51e",
+    "all": "ca28668471962e90"
    },
    "row_hash": "67e48e60d5053a2e",
-   "carried": true,
-   "pass": 4
+   "carried": false,
+   "pass": 10
   },
   {
    "row": "C460",
@@ -1682,37 +1676,39 @@
    "row": "C460",
    "screen": "stats_first.after",
    "verdict": "PASS",
-   "line": "for the rest of the class",
-   "why": "No duration past Pratt's row.",
+   "line": "He turns back to the board and doesn't look at the room again for the rest of the class.",
+   "why": "Every claim true on every reachable visit: Pratt is there until 13:00 and the clock does not move until Done; no office or other person claimed",
    "cause": null,
    "note": false,
    "screen_hash": {
     "text": "008fd936f1516193",
-    "facts": "37fe7c54c585a127",
-    "facts2": "fe63bf1deb1ab5cb",
-    "all": "1a54966f810f4049"
+    "traits": "9814f8002b787cb3",
+    "facts": "32dd645a74c7fa4f",
+    "facts2": "ca6730df4b95ef43",
+    "all": "078715a819e95838"
    },
    "row_hash": "67e48e60d5053a2e",
-   "carried": true,
-   "pass": 2
+   "carried": false,
+   "pass": 10
   },
   {
    "row": "C460",
    "screen": "stats_first.class",
    "verdict": "PASS",
-   "line": "He turns round long enough to read names off a sheet.",
-   "why": "True at every minute of 11:00-11:29; she is on his list.",
+   "line": "A man in a grey cardigan is already filling the whiteboard with numbers.",
+   "why": "Every claim true on every reachable visit: Pratt's row: campus_lecture_hall Mon/Wed 11-13; trigger needs him present 11:00-11:29; 'already' holds at 11:00 and 11:29",
    "cause": null,
    "note": false,
    "screen_hash": {
     "text": "e266def6233d6a3d",
-    "facts": "7f7ded0bf9f4d930",
-    "facts2": "857f385689f8c3dc",
-    "all": "844dd795f8b322fb"
+    "traits": "9814f8002b787cb3",
+    "facts": "a20589f4654da20c",
+    "facts2": "743270983b23ae77",
+    "all": "b527f47cbd6a4ba9"
    },
    "row_hash": "67e48e60d5053a2e",
-   "carried": true,
-   "pass": 3
+   "carried": false,
+   "pass": 10
   },
   {
    "row": "C461",
@@ -1732,18 +1728,19 @@
    "screen": "psych_first.lecture",
    "verdict": "PASS",
    "line": "A man in his late thirties is already at the lectern ... At the end, the girl catches you on the way out.",
-   "why": "Texture only (half full, loud, the coffee); dialogue fits Hale's and Nadia's cast entries.",
+   "why": "Texture that cannot clash and dialogue that fits the cast entry (Hale \"young lady\", Pratt \"Miss @player\", Walsh \"dear\").",
    "cause": null,
    "note": false,
    "screen_hash": {
     "text": "a64e3086993e7aac",
-    "facts": "b23ebb17c2d29ba7",
-    "facts2": "4a2f3019ebcf57f7",
-    "all": "1b316053b7dda9d7"
+    "traits": "838782b7308b47e0",
+    "facts": "7d245779a427421e",
+    "facts2": "ec08c20306b7a51e",
+    "all": "ca28668471962e90"
    },
    "row_hash": "310706ee076318f2",
-   "carried": true,
-   "pass": 4
+   "carried": false,
+   "pass": 10
   },
   {
    "row": "C461",
@@ -1767,37 +1764,39 @@
    "row": "C461",
    "screen": "stats_first.after",
    "verdict": "PASS",
-   "line": "Two girls behind you snigger. Your face goes hot.",
-   "why": "Texture that can't clash; her reaction on her body.",
+   "line": "He turns back to the board and doesn't look at the room again for the rest of the class.",
+   "why": "Texture that cannot clash and dialogue that fits the cast entry (Hale \"young lady\", Pratt \"Miss @player\", Walsh \"dear\").",
    "cause": null,
    "note": false,
    "screen_hash": {
     "text": "008fd936f1516193",
-    "facts": "37fe7c54c585a127",
-    "facts2": "fe63bf1deb1ab5cb",
-    "all": "1a54966f810f4049"
+    "traits": "9814f8002b787cb3",
+    "facts": "32dd645a74c7fa4f",
+    "facts2": "ca6730df4b95ef43",
+    "all": "078715a819e95838"
    },
    "row_hash": "310706ee076318f2",
-   "carried": true,
-   "pass": 2
+   "carried": false,
+   "pass": 10
   },
   {
    "row": "C461",
    "screen": "stats_first.class",
    "verdict": "PASS",
-   "line": "I take attendance, and I notice who isn't here. / Miss @player?",
-   "why": "Fits PLAN: Pratt notices if she's missing; formal roll-call address fits his manner.",
+   "line": "A man in a grey cardigan is already filling the whiteboard with numbers.",
+   "why": "Texture that cannot clash and dialogue that fits the cast entry (Hale \"young lady\", Pratt \"Miss @player\", Walsh \"dear\").",
    "cause": null,
    "note": false,
    "screen_hash": {
     "text": "e266def6233d6a3d",
-    "facts": "7f7ded0bf9f4d930",
-    "facts2": "857f385689f8c3dc",
-    "all": "844dd795f8b322fb"
+    "traits": "9814f8002b787cb3",
+    "facts": "a20589f4654da20c",
+    "facts2": "743270983b23ae77",
+    "all": "b527f47cbd6a4ba9"
    },
    "row_hash": "310706ee076318f2",
-   "carried": true,
-   "pass": 3
+   "carried": false,
+   "pass": 10
   },
   {
    "row": "C519",
@@ -2287,55 +2286,77 @@
    "row": "C889",
    "screen": "psych_first.lecture",
    "verdict": "PASS",
-   "line": "A man in his late thirties is already at the lectern ... At the end, the girl catches you on the way out.",
-   "why": "\"Done\": no clock time, no duration.",
+   "line": "Done",
+   "why": "The label names no clock time and no duration; the exit spends its minutes in the costs",
    "cause": null,
    "note": true,
    "screen_hash": {
     "text": "a64e3086993e7aac",
-    "facts": "b23ebb17c2d29ba7",
-    "facts2": "4a2f3019ebcf57f7",
-    "all": "1b316053b7dda9d7"
+    "traits": "838782b7308b47e0",
+    "facts": "7d245779a427421e",
+    "facts2": "ec08c20306b7a51e",
+    "all": "ca28668471962e90"
    },
    "row_hash": "def1348d483d0c40",
-   "carried": true,
-   "pass": 4
+   "carried": false,
+   "pass": 10
   },
   {
    "row": "C889",
    "screen": "stats_first.after",
    "verdict": "PASS",
    "line": "Done",
-   "why": "Labels \"Here.\" / \"Present.\" / \"Say nothing\" / \"Done\" carry no time, energy, duration or clock time.",
+   "why": "The label names no clock time and no duration; the exit spends its minutes in the costs",
    "cause": null,
    "note": true,
    "screen_hash": {
     "text": "008fd936f1516193",
-    "facts": "37fe7c54c585a127",
-    "facts2": "fe63bf1deb1ab5cb",
-    "all": "1a54966f810f4049"
+    "traits": "9814f8002b787cb3",
+    "facts": "32dd645a74c7fa4f",
+    "facts2": "ca6730df4b95ef43",
+    "all": "078715a819e95838"
    },
    "row_hash": "def1348d483d0c40",
-   "carried": true,
-   "pass": 4
+   "carried": false,
+   "pass": 10
   },
   {
    "row": "C892",
    "screen": "psych_first.lecture",
    "verdict": "PASS",
    "line": "A man in his late thirties is already at the lectern ... At the end, the girl catches you on the way out.",
-   "why": "No hour in the act.",
+   "why": "No hour inside the act",
    "cause": null,
    "note": true,
    "screen_hash": {
     "text": "a64e3086993e7aac",
-    "facts": "b23ebb17c2d29ba7",
-    "facts2": "4a2f3019ebcf57f7",
-    "all": "1b316053b7dda9d7"
+    "traits": "838782b7308b47e0",
+    "facts": "7d245779a427421e",
+    "facts2": "ec08c20306b7a51e",
+    "all": "ca28668471962e90"
    },
    "row_hash": "5c890033f6ac38b8",
-   "carried": true,
-   "pass": 4
+   "carried": false,
+   "pass": 10
+  },
+  {
+   "row": "C892",
+   "screen": "stats_first.after",
+   "verdict": "PASS",
+   "line": "He turns back to the board and doesn't look at the room again for the rest of the class.",
+   "why": "No hour inside the act",
+   "cause": null,
+   "note": true,
+   "screen_hash": {
+    "text": "008fd936f1516193",
+    "traits": "9814f8002b787cb3",
+    "facts": "32dd645a74c7fa4f",
+    "facts2": "ca6730df4b95ef43",
+    "all": "078715a819e95838"
+   },
+   "row_hash": "5c890033f6ac38b8",
+   "carried": false,
+   "pass": 10
   },
   {
    "row": "C897",
@@ -2354,19 +2375,39 @@
    "row": "C897",
    "screen": "psych_first.lecture",
    "verdict": "PASS",
-   "line": "A man in his late thirties is already at the lectern ... At the end, the girl catches you on the way out.",
-   "why": "No time on rooms.",
+   "line": "Done",
+   "why": "No time on a room; the minutes are the activity itself, and Done returns to the same place",
    "cause": null,
    "note": true,
    "screen_hash": {
     "text": "a64e3086993e7aac",
-    "facts": "b23ebb17c2d29ba7",
-    "facts2": "4a2f3019ebcf57f7",
-    "all": "1b316053b7dda9d7"
+    "traits": "838782b7308b47e0",
+    "facts": "7d245779a427421e",
+    "facts2": "ec08c20306b7a51e",
+    "all": "ca28668471962e90"
    },
    "row_hash": "265ece64add83676",
-   "carried": true,
-   "pass": 4
+   "carried": false,
+   "pass": 10
+  },
+  {
+   "row": "C897",
+   "screen": "stats_first.after",
+   "verdict": "PASS",
+   "line": "Done",
+   "why": "No time on a room; the minutes are the activity itself, and Done returns to the same place",
+   "cause": null,
+   "note": true,
+   "screen_hash": {
+    "text": "008fd936f1516193",
+    "traits": "9814f8002b787cb3",
+    "facts": "32dd645a74c7fa4f",
+    "facts2": "ca6730df4b95ef43",
+    "all": "078715a819e95838"
+   },
+   "row_hash": "265ece64add83676",
+   "carried": false,
+   "pass": 10
   },
   {
    "row": "C900",
@@ -2386,54 +2427,76 @@
    "screen": "psych_first.lecture",
    "verdict": "PASS",
    "line": "A man in his late thirties is already at the lectern ... At the end, the girl catches you on the way out.",
-   "why": "No time said in the beat.",
+   "why": "The beat says no time of day",
    "cause": null,
    "note": false,
    "screen_hash": {
     "text": "a64e3086993e7aac",
-    "facts": "b23ebb17c2d29ba7",
-    "facts2": "4a2f3019ebcf57f7",
-    "all": "1b316053b7dda9d7"
+    "traits": "838782b7308b47e0",
+    "facts": "7d245779a427421e",
+    "facts2": "ec08c20306b7a51e",
+    "all": "ca28668471962e90"
    },
    "row_hash": "6372efb027eb2034",
-   "carried": true,
-   "pass": 4
+   "carried": false,
+   "pass": 10
+  },
+  {
+   "row": "C900",
+   "screen": "stats_first.after",
+   "verdict": "PASS",
+   "line": "He turns back to the board and doesn't look at the room again for the rest of the class.",
+   "why": "The beat says no time of day",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "008fd936f1516193",
+    "traits": "9814f8002b787cb3",
+    "facts": "32dd645a74c7fa4f",
+    "facts2": "ca6730df4b95ef43",
+    "all": "078715a819e95838"
+   },
+   "row_hash": "6372efb027eb2034",
+   "carried": false,
+   "pass": 10
   },
   {
    "row": "C902",
    "screen": "psych_first.lecture",
    "verdict": "PASS",
    "line": "A man in his late thirties is already at the lectern ... At the end, the girl catches you on the way out.",
-   "why": "True at 09:29 too.",
+   "why": "Read at the last start minute of its window (09:29/11:29, or 17:59 for the hall) the line still holds: Hale and Nadia are both trigger npc_at_location items (hall Mon/Wed 09-11), start 09:00-09:29; Brooke is in the 'half full' hall unnamed; no office is named",
    "cause": null,
    "note": true,
    "screen_hash": {
     "text": "a64e3086993e7aac",
-    "facts": "b23ebb17c2d29ba7",
-    "facts2": "4a2f3019ebcf57f7",
-    "all": "1b316053b7dda9d7"
+    "traits": "838782b7308b47e0",
+    "facts": "7d245779a427421e",
+    "facts2": "ec08c20306b7a51e",
+    "all": "ca28668471962e90"
    },
    "row_hash": "df5ed7a36dbc74e4",
-   "carried": true,
-   "pass": 4
+   "carried": false,
+   "pass": 10
   },
   {
    "row": "C902",
    "screen": "stats_first.after",
    "verdict": "PASS",
-   "line": "for the rest of the class",
-   "why": "True at 11:29.",
+   "line": "He turns back to the board and doesn't look at the room again for the rest of the class.",
+   "why": "Read at the last start minute of its window (09:29/11:29, or 17:59 for the hall) the line still holds: Pratt is there until 13:00 and the clock does not move until Done; no office or other person claimed",
    "cause": null,
    "note": true,
    "screen_hash": {
     "text": "008fd936f1516193",
-    "facts": "37fe7c54c585a127",
-    "facts2": "fe63bf1deb1ab5cb",
-    "all": "1a54966f810f4049"
+    "traits": "9814f8002b787cb3",
+    "facts": "32dd645a74c7fa4f",
+    "facts2": "ca6730df4b95ef43",
+    "all": "078715a819e95838"
    },
    "row_hash": "df5ed7a36dbc74e4",
-   "carried": true,
-   "pass": 2
+   "carried": false,
+   "pass": 10
   },
   {
    "row": "C903",
@@ -2453,18 +2516,38 @@
    "screen": "psych_first.lecture",
    "verdict": "PASS",
    "line": "A man in his late thirties is already at the lectern ... At the end, the girl catches you on the way out.",
-   "why": "No weekday named.",
+   "why": "No weekday named",
    "cause": null,
    "note": false,
    "screen_hash": {
     "text": "a64e3086993e7aac",
-    "facts": "b23ebb17c2d29ba7",
-    "facts2": "4a2f3019ebcf57f7",
-    "all": "1b316053b7dda9d7"
+    "traits": "838782b7308b47e0",
+    "facts": "7d245779a427421e",
+    "facts2": "ec08c20306b7a51e",
+    "all": "ca28668471962e90"
    },
    "row_hash": "4f83b0b5eb45f71b",
-   "carried": true,
-   "pass": 4
+   "carried": false,
+   "pass": 10
+  },
+  {
+   "row": "C903",
+   "screen": "stats_first.after",
+   "verdict": "PASS",
+   "line": "He turns back to the board and doesn't look at the room again for the rest of the class.",
+   "why": "No weekday named",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "008fd936f1516193",
+    "traits": "9814f8002b787cb3",
+    "facts": "32dd645a74c7fa4f",
+    "facts2": "ca6730df4b95ef43",
+    "all": "078715a819e95838"
+   },
+   "row_hash": "4f83b0b5eb45f71b",
+   "carried": false,
+   "pass": 10
   },
   {
    "row": "C906",
@@ -2483,55 +2566,77 @@
    "row": "C906",
    "screen": "psych_first.lecture",
    "verdict": "PASS",
-   "line": "A man in his late thirties is already at the lectern ... At the end, the girl catches you on the way out.",
-   "why": "No \"till X\".",
+   "line": "Done",
+   "why": "No \"till X\" on any label",
    "cause": null,
    "note": true,
    "screen_hash": {
     "text": "a64e3086993e7aac",
-    "facts": "b23ebb17c2d29ba7",
-    "facts2": "4a2f3019ebcf57f7",
-    "all": "1b316053b7dda9d7"
+    "traits": "838782b7308b47e0",
+    "facts": "7d245779a427421e",
+    "facts2": "ec08c20306b7a51e",
+    "all": "ca28668471962e90"
    },
    "row_hash": "71713a7e7ae739e7",
-   "carried": true,
-   "pass": 4
+   "carried": false,
+   "pass": 10
+  },
+  {
+   "row": "C906",
+   "screen": "stats_first.after",
+   "verdict": "PASS",
+   "line": "Done",
+   "why": "No \"till X\" on any label",
+   "cause": null,
+   "note": true,
+   "screen_hash": {
+    "text": "008fd936f1516193",
+    "traits": "9814f8002b787cb3",
+    "facts": "32dd645a74c7fa4f",
+    "facts2": "ca6730df4b95ef43",
+    "all": "078715a819e95838"
+   },
+   "row_hash": "71713a7e7ae739e7",
+   "carried": false,
+   "pass": 10
   },
   {
    "row": "C910",
    "screen": "psych_first.lecture",
    "verdict": "PASS",
-   "line": "A man in his late thirties is already at the lectern ... At the end, the girl catches you on the way out.",
-   "why": "Labels say no time and no energy; the meeting costs none.",
+   "line": "Done",
+   "why": "Written labels carry no time, energy or money; a cost-blocked \"(10 Energy)\"/\"(5 Energy)\" is the engine tag rule 1 keeps",
    "cause": null,
    "note": true,
    "screen_hash": {
     "text": "a64e3086993e7aac",
-    "facts": "b23ebb17c2d29ba7",
-    "facts2": "4a2f3019ebcf57f7",
-    "all": "1b316053b7dda9d7"
+    "traits": "838782b7308b47e0",
+    "facts": "7d245779a427421e",
+    "facts2": "ec08c20306b7a51e",
+    "all": "ca28668471962e90"
    },
    "row_hash": "d5a109f1ef88419a",
-   "carried": true,
-   "pass": 4
+   "carried": false,
+   "pass": 10
   },
   {
    "row": "C910",
    "screen": "stats_first.after",
    "verdict": "PASS",
    "line": "Done",
-   "why": "Labels \"Here.\" / \"Present.\" / \"Say nothing\" / \"Done\" carry no time, energy, duration or clock time.",
+   "why": "Written labels carry no time, energy or money; a cost-blocked \"(10 Energy)\"/\"(5 Energy)\" is the engine tag rule 1 keeps",
    "cause": null,
    "note": true,
    "screen_hash": {
     "text": "008fd936f1516193",
-    "facts": "37fe7c54c585a127",
-    "facts2": "fe63bf1deb1ab5cb",
-    "all": "1a54966f810f4049"
+    "traits": "9814f8002b787cb3",
+    "facts": "32dd645a74c7fa4f",
+    "facts2": "ca6730df4b95ef43",
+    "all": "078715a819e95838"
    },
    "row_hash": "d5a109f1ef88419a",
-   "carried": true,
-   "pass": 4
+   "carried": false,
+   "pass": 10
   },
   {
    "row": "C913",
@@ -2551,18 +2656,38 @@
    "screen": "psych_first.lecture",
    "verdict": "PASS",
    "line": "A man in his late thirties is already at the lectern ... At the end, the girl catches you on the way out.",
-   "why": "A one-time scene that plays by itself on entry (non-repeatable manual canvas auto-fires, setup.selectAutoFireCanvasForLocation, v2.py:5916-5933): an event that happens to her, so hidden when shut is right; the repeatable class row (P09) carries the hours.",
+   "why": "A one-time scene that fires on its own: an event that happens to her (C916); its class hours are in the Timetable popup and the professor's hours are on her door",
    "cause": null,
    "note": false,
    "screen_hash": {
     "text": "a64e3086993e7aac",
-    "facts": "b23ebb17c2d29ba7",
-    "facts2": "4a2f3019ebcf57f7",
-    "all": "1b316053b7dda9d7"
+    "traits": "838782b7308b47e0",
+    "facts": "7d245779a427421e",
+    "facts2": "ec08c20306b7a51e",
+    "all": "ca28668471962e90"
    },
    "row_hash": "c750f9b6ab4ace14",
-   "carried": true,
-   "pass": 4
+   "carried": false,
+   "pass": 10
+  },
+  {
+   "row": "C913",
+   "screen": "stats_first.after",
+   "verdict": "PASS",
+   "line": "He turns back to the board and doesn't look at the room again for the rest of the class.",
+   "why": "A one-time scene that fires on its own: an event that happens to her (C916); its class hours are in the Timetable popup and the professor's hours are on her door",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "008fd936f1516193",
+    "traits": "9814f8002b787cb3",
+    "facts": "32dd645a74c7fa4f",
+    "facts2": "ca6730df4b95ef43",
+    "all": "078715a819e95838"
+   },
+   "row_hash": "c750f9b6ab4ace14",
+   "carried": false,
+   "pass": 10
   },
   {
    "row": "C914",
@@ -2582,18 +2707,38 @@
    "screen": "psych_first.lecture",
    "verdict": "PASS",
    "line": "A man in his late thirties is already at the lectern ... At the end, the girl catches you on the way out.",
-   "why": "Shows no hours.",
+   "why": "The row never shows hours, so never shows them wrongly",
    "cause": null,
    "note": false,
    "screen_hash": {
     "text": "a64e3086993e7aac",
-    "facts": "b23ebb17c2d29ba7",
-    "facts2": "4a2f3019ebcf57f7",
-    "all": "1b316053b7dda9d7"
+    "traits": "838782b7308b47e0",
+    "facts": "7d245779a427421e",
+    "facts2": "ec08c20306b7a51e",
+    "all": "ca28668471962e90"
    },
    "row_hash": "bd07273d5822f34f",
-   "carried": true,
-   "pass": 4
+   "carried": false,
+   "pass": 10
+  },
+  {
+   "row": "C914",
+   "screen": "stats_first.after",
+   "verdict": "PASS",
+   "line": "He turns back to the board and doesn't look at the room again for the rest of the class.",
+   "why": "The row never shows hours, so never shows them wrongly",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "008fd936f1516193",
+    "traits": "9814f8002b787cb3",
+    "facts": "32dd645a74c7fa4f",
+    "facts2": "ca6730df4b95ef43",
+    "all": "078715a819e95838"
+   },
+   "row_hash": "bd07273d5822f34f",
+   "carried": false,
+   "pass": 10
   },
   {
    "row": "C916",
@@ -2613,18 +2758,38 @@
    "screen": "psych_first.lecture",
    "verdict": "PASS",
    "line": "A man in his late thirties is already at the lectern ... At the end, the girl catches you on the way out.",
-   "why": "An event that happens to her, hidden when shut.",
+   "why": "An event that happens to her; hidden out of its window",
    "cause": null,
    "note": false,
    "screen_hash": {
     "text": "a64e3086993e7aac",
-    "facts": "b23ebb17c2d29ba7",
-    "facts2": "4a2f3019ebcf57f7",
-    "all": "1b316053b7dda9d7"
+    "traits": "838782b7308b47e0",
+    "facts": "7d245779a427421e",
+    "facts2": "ec08c20306b7a51e",
+    "all": "ca28668471962e90"
    },
    "row_hash": "7b2bb0dfdbcfe946",
-   "carried": true,
-   "pass": 4
+   "carried": false,
+   "pass": 10
+  },
+  {
+   "row": "C916",
+   "screen": "stats_first.after",
+   "verdict": "PASS",
+   "line": "He turns back to the board and doesn't look at the room again for the rest of the class.",
+   "why": "An event that happens to her; hidden out of its window",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "008fd936f1516193",
+    "traits": "9814f8002b787cb3",
+    "facts": "32dd645a74c7fa4f",
+    "facts2": "ca6730df4b95ef43",
+    "all": "078715a819e95838"
+   },
+   "row_hash": "7b2bb0dfdbcfe946",
+   "carried": false,
+   "pass": 10
   },
   {
    "row": "C920",
@@ -2643,19 +2808,39 @@
    "row": "C920",
    "screen": "psych_first.lecture",
    "verdict": "PASS",
-   "line": "A man in his late thirties is already at the lectern ... At the end, the girl catches you on the way out.",
-   "why": "No hop; Done returns to the Lecture Hall.",
+   "line": "Done",
+   "why": "No hop: Done returns to the Lecture Hall itself",
    "cause": null,
    "note": false,
    "screen_hash": {
     "text": "a64e3086993e7aac",
-    "facts": "b23ebb17c2d29ba7",
-    "facts2": "4a2f3019ebcf57f7",
-    "all": "1b316053b7dda9d7"
+    "traits": "838782b7308b47e0",
+    "facts": "7d245779a427421e",
+    "facts2": "ec08c20306b7a51e",
+    "all": "ca28668471962e90"
    },
    "row_hash": "513927dd127fca04",
-   "carried": true,
-   "pass": 4
+   "carried": false,
+   "pass": 10
+  },
+  {
+   "row": "C920",
+   "screen": "stats_first.after",
+   "verdict": "PASS",
+   "line": "Done",
+   "why": "No hop: Done returns to the Lecture Hall itself",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "008fd936f1516193",
+    "traits": "9814f8002b787cb3",
+    "facts": "32dd645a74c7fa4f",
+    "facts2": "ca6730df4b95ef43",
+    "all": "078715a819e95838"
+   },
+   "row_hash": "513927dd127fca04",
+   "carried": false,
+   "pass": 10
   },
   {
    "row": "C924",
@@ -2674,19 +2859,39 @@
    "row": "C924",
    "screen": "psych_first.lecture",
    "verdict": "PASS",
-   "line": "A man in his late thirties is already at the lectern ... At the end, the girl catches you on the way out.",
-   "why": "No travel.",
+   "line": "Done",
+   "why": "No travel on this screen; the campus-in-Town move (P53) is the nav card's, not this screen's",
    "cause": null,
    "note": true,
    "screen_hash": {
     "text": "a64e3086993e7aac",
-    "facts": "b23ebb17c2d29ba7",
-    "facts2": "4a2f3019ebcf57f7",
-    "all": "1b316053b7dda9d7"
+    "traits": "838782b7308b47e0",
+    "facts": "7d245779a427421e",
+    "facts2": "ec08c20306b7a51e",
+    "all": "ca28668471962e90"
    },
    "row_hash": "791cd173e23fb130",
-   "carried": true,
-   "pass": 4
+   "carried": false,
+   "pass": 10
+  },
+  {
+   "row": "C924",
+   "screen": "stats_first.after",
+   "verdict": "PASS",
+   "line": "Done",
+   "why": "No travel on this screen; the campus-in-Town move (P53) is the nav card's, not this screen's",
+   "cause": null,
+   "note": true,
+   "screen_hash": {
+    "text": "008fd936f1516193",
+    "traits": "9814f8002b787cb3",
+    "facts": "32dd645a74c7fa4f",
+    "facts2": "ca6730df4b95ef43",
+    "all": "078715a819e95838"
+   },
+   "row_hash": "791cd173e23fb130",
+   "carried": false,
+   "pass": 10
   },
   {
    "row": "C926",
@@ -2705,19 +2910,39 @@
    "row": "C926",
    "screen": "psych_first.lecture",
    "verdict": "PASS",
-   "line": "A man in his late thirties is already at the lectern ... At the end, the girl catches you on the way out.",
-   "why": "Clock moves by minutes only.",
+   "line": "Done",
+   "why": "The clock moves only by the exit's minutes",
    "cause": null,
    "note": true,
    "screen_hash": {
     "text": "a64e3086993e7aac",
-    "facts": "b23ebb17c2d29ba7",
-    "facts2": "4a2f3019ebcf57f7",
-    "all": "1b316053b7dda9d7"
+    "traits": "838782b7308b47e0",
+    "facts": "7d245779a427421e",
+    "facts2": "ec08c20306b7a51e",
+    "all": "ca28668471962e90"
    },
    "row_hash": "177d1e1776fac74b",
-   "carried": true,
-   "pass": 4
+   "carried": false,
+   "pass": 10
+  },
+  {
+   "row": "C926",
+   "screen": "stats_first.after",
+   "verdict": "PASS",
+   "line": "Done",
+   "why": "The clock moves only by the exit's minutes",
+   "cause": null,
+   "note": true,
+   "screen_hash": {
+    "text": "008fd936f1516193",
+    "traits": "9814f8002b787cb3",
+    "facts": "32dd645a74c7fa4f",
+    "facts2": "ca6730df4b95ef43",
+    "all": "078715a819e95838"
+   },
+   "row_hash": "177d1e1776fac74b",
+   "carried": false,
+   "pass": 10
   },
   {
    "row": "C927",
@@ -2736,37 +2961,39 @@
    "row": "C927",
    "screen": "psych_first.lecture",
    "verdict": "PASS",
-   "line": "A man in his late thirties is already at the lectern ... At the end, the girl catches you on the way out.",
-   "why": "Done carries 120 minutes.",
+   "line": "Done",
+   "why": "The exit states its own minutes (120, or 60 for study); no 3-minute default",
    "cause": null,
    "note": true,
    "screen_hash": {
     "text": "a64e3086993e7aac",
-    "facts": "b23ebb17c2d29ba7",
-    "facts2": "4a2f3019ebcf57f7",
-    "all": "1b316053b7dda9d7"
+    "traits": "838782b7308b47e0",
+    "facts": "7d245779a427421e",
+    "facts2": "ec08c20306b7a51e",
+    "all": "ca28668471962e90"
    },
    "row_hash": "4e86d143688ba8e5",
-   "carried": true,
-   "pass": 4
+   "carried": false,
+   "pass": 10
   },
   {
    "row": "C927",
    "screen": "stats_first.after",
    "verdict": "PASS",
-   "line": "time_progression_minutes = 0 / 120",
-   "why": "Every exit sets its time; no 3-minute default.",
+   "line": "Done",
+   "why": "The exit states its own minutes (120, or 60 for study); no 3-minute default",
    "cause": null,
    "note": true,
    "screen_hash": {
     "text": "008fd936f1516193",
-    "facts": "37fe7c54c585a127",
-    "facts2": "fe63bf1deb1ab5cb",
-    "all": "1a54966f810f4049"
+    "traits": "9814f8002b787cb3",
+    "facts": "32dd645a74c7fa4f",
+    "facts2": "ca6730df4b95ef43",
+    "all": "078715a819e95838"
    },
    "row_hash": "4e86d143688ba8e5",
-   "carried": true,
-   "pass": 2
+   "carried": false,
+   "pass": 10
   },
   {
    "row": "C928",
@@ -2786,54 +3013,76 @@
    "screen": "psych_first.lecture",
    "verdict": "PASS",
    "line": "A man in his late thirties is already at the lectern ... At the end, the girl catches you on the way out.",
-   "why": "No clock in prose.",
+   "why": "No clock printed into prose",
    "cause": null,
    "note": false,
    "screen_hash": {
     "text": "a64e3086993e7aac",
-    "facts": "b23ebb17c2d29ba7",
-    "facts2": "4a2f3019ebcf57f7",
-    "all": "1b316053b7dda9d7"
+    "traits": "838782b7308b47e0",
+    "facts": "7d245779a427421e",
+    "facts2": "ec08c20306b7a51e",
+    "all": "ca28668471962e90"
    },
    "row_hash": "2c3ccc6bd9929d7f",
-   "carried": true,
-   "pass": 4
+   "carried": false,
+   "pass": 10
+  },
+  {
+   "row": "C928",
+   "screen": "stats_first.after",
+   "verdict": "PASS",
+   "line": "He turns back to the board and doesn't look at the room again for the rest of the class.",
+   "why": "No clock printed into prose",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "008fd936f1516193",
+    "traits": "9814f8002b787cb3",
+    "facts": "32dd645a74c7fa4f",
+    "facts2": "ca6730df4b95ef43",
+    "all": "078715a819e95838"
+   },
+   "row_hash": "2c3ccc6bd9929d7f",
+   "carried": false,
+   "pass": 10
   },
   {
    "row": "C929",
    "screen": "psych_first.lecture",
    "verdict": "PASS",
-   "line": "A man in his late thirties is already at the lectern ... At the end, the girl catches you on the way out.",
-   "why": "No activity time on any label.",
+   "line": "Done",
+   "why": "No activity time on any label",
    "cause": null,
    "note": true,
    "screen_hash": {
     "text": "a64e3086993e7aac",
-    "facts": "b23ebb17c2d29ba7",
-    "facts2": "4a2f3019ebcf57f7",
-    "all": "1b316053b7dda9d7"
+    "traits": "838782b7308b47e0",
+    "facts": "7d245779a427421e",
+    "facts2": "ec08c20306b7a51e",
+    "all": "ca28668471962e90"
    },
    "row_hash": "18b0ecdf6d7fc901",
-   "carried": true,
-   "pass": 4
+   "carried": false,
+   "pass": 10
   },
   {
    "row": "C929",
    "screen": "stats_first.after",
    "verdict": "PASS",
    "line": "Done",
-   "why": "Labels \"Here.\" / \"Present.\" / \"Say nothing\" / \"Done\" carry no time, energy, duration or clock time.",
+   "why": "No activity time on any label",
    "cause": null,
    "note": true,
    "screen_hash": {
     "text": "008fd936f1516193",
-    "facts": "37fe7c54c585a127",
-    "facts2": "fe63bf1deb1ab5cb",
-    "all": "1a54966f810f4049"
+    "traits": "9814f8002b787cb3",
+    "facts": "32dd645a74c7fa4f",
+    "facts2": "ca6730df4b95ef43",
+    "all": "078715a819e95838"
    },
    "row_hash": "18b0ecdf6d7fc901",
-   "carried": true,
-   "pass": 4
+   "carried": false,
+   "pass": 10
   },
   {
    "row": "C930",
@@ -2851,20 +3100,40 @@
   {
    "row": "C930",
    "screen": "psych_first.lecture",
-   "verdict": "PASS",
-   "line": "A man in his late thirties is already at the lectern ... At the end, the girl catches you on the way out.",
-   "why": "Not windowed work; a one-time event.",
+   "verdict": "N/A",
+   "line": "",
+   "why": "Not windowed work she chooses: a one-time scene that fires on entry",
    "cause": null,
    "note": true,
    "screen_hash": {
     "text": "a64e3086993e7aac",
-    "facts": "b23ebb17c2d29ba7",
-    "facts2": "4a2f3019ebcf57f7",
-    "all": "1b316053b7dda9d7"
+    "traits": "838782b7308b47e0",
+    "facts": "7d245779a427421e",
+    "facts2": "ec08c20306b7a51e",
+    "all": "ca28668471962e90"
    },
    "row_hash": "beb57cd46fe906bf",
-   "carried": true,
-   "pass": 4
+   "carried": false,
+   "pass": 10
+  },
+  {
+   "row": "C930",
+   "screen": "stats_first.after",
+   "verdict": "N/A",
+   "line": "",
+   "why": "Not windowed work she chooses: a one-time scene that fires on entry",
+   "cause": null,
+   "note": true,
+   "screen_hash": {
+    "text": "008fd936f1516193",
+    "traits": "9814f8002b787cb3",
+    "facts": "32dd645a74c7fa4f",
+    "facts2": "ca6730df4b95ef43",
+    "all": "078715a819e95838"
+   },
+   "row_hash": "beb57cd46fe906bf",
+   "carried": false,
+   "pass": 10
   },
   {
    "row": "C931",
@@ -2884,36 +3153,38 @@
    "screen": "psych_first.lecture",
    "verdict": "PASS",
    "line": "A man in his late thirties is already at the lectern ... At the end, the girl catches you on the way out.",
-   "why": "09:00-09:30 is end-exclusive; last entry 09:29.",
+   "why": "time_of_day is end exclusive (last start 09:29 or 11:29), inside the teacher's row",
    "cause": null,
    "note": true,
    "screen_hash": {
     "text": "a64e3086993e7aac",
-    "facts": "b23ebb17c2d29ba7",
-    "facts2": "4a2f3019ebcf57f7",
-    "all": "1b316053b7dda9d7"
+    "traits": "838782b7308b47e0",
+    "facts": "7d245779a427421e",
+    "facts2": "ec08c20306b7a51e",
+    "all": "ca28668471962e90"
    },
    "row_hash": "1aadffd96e76381c",
-   "carried": true,
-   "pass": 4
+   "carried": false,
+   "pass": 10
   },
   {
    "row": "C931",
    "screen": "stats_first.after",
    "verdict": "PASS",
-   "line": "time_of_day 11:00-11:30",
-   "why": "End exclusive: last start 11:29, inside Pratt's row; matches the sheet.",
+   "line": "He turns back to the board and doesn't look at the room again for the rest of the class.",
+   "why": "time_of_day is end exclusive (last start 09:29 or 11:29), inside the teacher's row",
    "cause": null,
    "note": true,
    "screen_hash": {
     "text": "008fd936f1516193",
-    "facts": "37fe7c54c585a127",
-    "facts2": "fe63bf1deb1ab5cb",
-    "all": "1a54966f810f4049"
+    "traits": "9814f8002b787cb3",
+    "facts": "32dd645a74c7fa4f",
+    "facts2": "ca6730df4b95ef43",
+    "all": "078715a819e95838"
    },
    "row_hash": "1aadffd96e76381c",
-   "carried": true,
-   "pass": 2
+   "carried": false,
+   "pass": 10
   },
   {
    "row": "C953",
@@ -3005,18 +3276,19 @@
    "screen": "psych_first.lecture",
    "verdict": "PASS",
    "line": "A man in his late thirties is already at the lectern ... At the end, the girl catches you on the way out.",
-   "why": "Hale and Nadia are both in the trigger's npc_at_location items; Brooke is not claimed.",
+   "why": "Hale and Nadia are both trigger npc_at_location items (hall Mon/Wed 09-11), start 09:00-09:29; Brooke is in the 'half full' hall unnamed; no office is named",
    "cause": null,
    "note": false,
    "screen_hash": {
     "text": "a64e3086993e7aac",
-    "facts": "b23ebb17c2d29ba7",
-    "facts2": "4a2f3019ebcf57f7",
-    "all": "1b316053b7dda9d7"
+    "traits": "838782b7308b47e0",
+    "facts": "7d245779a427421e",
+    "facts2": "ec08c20306b7a51e",
+    "all": "ca28668471962e90"
    },
    "row_hash": "13a714429d15f3b2",
-   "carried": true,
-   "pass": 4
+   "carried": false,
+   "pass": 10
   },
   {
    "row": "L106",
@@ -3040,37 +3312,39 @@
    "row": "L106",
    "screen": "stats_first.after",
    "verdict": "PASS",
-   "line": "He turns back to the board",
-   "why": "Pratt's row: Lecture Hall Mon/Wed 11-13.",
+   "line": "He turns back to the board and doesn't look at the room again for the rest of the class.",
+   "why": "Pratt is there until 13:00 and the clock does not move until Done; no office or other person claimed",
    "cause": null,
    "note": false,
    "screen_hash": {
     "text": "008fd936f1516193",
-    "facts": "37fe7c54c585a127",
-    "facts2": "fe63bf1deb1ab5cb",
-    "all": "1a54966f810f4049"
+    "traits": "9814f8002b787cb3",
+    "facts": "32dd645a74c7fa4f",
+    "facts2": "ca6730df4b95ef43",
+    "all": "078715a819e95838"
    },
    "row_hash": "13a714429d15f3b2",
-   "carried": true,
-   "pass": 2
+   "carried": false,
+   "pass": 10
   },
   {
    "row": "L106",
    "screen": "stats_first.class",
    "verdict": "PASS",
-   "line": "A man in a grey cardigan is already filling the whiteboard",
-   "why": "Pratt's row: Lecture Hall Mon/Wed 11-13.",
+   "line": "A man in a grey cardigan is already filling the whiteboard with numbers.",
+   "why": "Pratt's row: campus_lecture_hall Mon/Wed 11-13; trigger needs him present 11:00-11:29; 'already' holds at 11:00 and 11:29",
    "cause": null,
    "note": false,
    "screen_hash": {
     "text": "e266def6233d6a3d",
-    "facts": "7f7ded0bf9f4d930",
-    "facts2": "857f385689f8c3dc",
-    "all": "844dd795f8b322fb"
+    "traits": "9814f8002b787cb3",
+    "facts": "a20589f4654da20c",
+    "facts2": "743270983b23ae77",
+    "all": "b527f47cbd6a4ba9"
    },
    "row_hash": "13a714429d15f3b2",
-   "carried": true,
-   "pass": 3
+   "carried": false,
+   "pass": 10
   },
   {
    "row": "L119",
@@ -3162,36 +3436,38 @@
    "screen": "psych_first.lecture",
    "verdict": "PASS",
    "line": "A man in his late thirties is already at the lectern ... At the end, the girl catches you on the way out.",
-   "why": "One one-time canvas, no per-day rows.",
+   "why": "One one-time trigger covers both days with the same hours",
    "cause": null,
    "note": false,
    "screen_hash": {
     "text": "a64e3086993e7aac",
-    "facts": "b23ebb17c2d29ba7",
-    "facts2": "4a2f3019ebcf57f7",
-    "all": "1b316053b7dda9d7"
+    "traits": "838782b7308b47e0",
+    "facts": "7d245779a427421e",
+    "facts2": "ec08c20306b7a51e",
+    "all": "ca28668471962e90"
    },
    "row_hash": "e64ce2672d85d2d8",
-   "carried": true,
-   "pass": 4
+   "carried": false,
+   "pass": 10
   },
   {
    "row": "L167",
    "screen": "stats_first.after",
    "verdict": "PASS",
-   "line": "weekday [0, 2] + time_of_day 11:00-11:30",
-   "why": "One trigger covers both days with the same hours; no row per day kind.",
+   "line": "He turns back to the board and doesn't look at the room again for the rest of the class.",
+   "why": "One one-time trigger covers both days with the same hours",
    "cause": null,
    "note": false,
    "screen_hash": {
     "text": "008fd936f1516193",
-    "facts": "37fe7c54c585a127",
-    "facts2": "fe63bf1deb1ab5cb",
-    "all": "1a54966f810f4049"
+    "traits": "9814f8002b787cb3",
+    "facts": "32dd645a74c7fa4f",
+    "facts2": "ca6730df4b95ef43",
+    "all": "078715a819e95838"
    },
    "row_hash": "e64ce2672d85d2d8",
-   "carried": true,
-   "pass": 2
+   "carried": false,
+   "pass": 10
   },
   {
    "row": "L168",
@@ -3253,8 +3529,8 @@
  ],
  "causes": [],
  "pending": [],
- "asked": 1,
- "answered": 1,
+ "asked": 55,
+ "answered": 55,
  "pass_items": [],
  "unowed": []
 }

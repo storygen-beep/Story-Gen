@@ -286,8 +286,8 @@ entry_from = "hood_street"
 hours = [{ weekdays = [], open = "06:00", close = "22:00" }]
 closed_text = "The gym is closed. It opens at 6am."
 
-# ── P04 · Campus: one area, the quad its hub. No entry_from on the area, so there is no free
-# "Exit Campus": the only ways in and out are the travel canvases in 5_scenes.toml. ──
+# ── P04 · Campus: one area, the quad its hub. P53 (LO 2026-11-26: "campus as a location in the town"): a place inside
+# Town, off the town_square hub, like the café; "Exit Campus" takes her back to Town. ──
 
 [[locations]]
 id = "campus"
@@ -295,6 +295,8 @@ name = "Campus"
 description = "The college campus."
 is_container = true
 default_entry = "campus_quad"
+parent = "near_campus"
+entry_from = "town_square"
 
 [[locations]]
 id = "campus_quad"
@@ -328,14 +330,15 @@ closed_text = "The lecture hall is locked. It opens at 8am on weekdays."
 [[locations]]
 id = "campus_bathroom"
 name = "Women's Bathroom"
-description = "The women's bathroom off the lecture-hall corridor: three stalls and one long mirror."
+# P51 — its door is on the quad (LO 2026-11-26).
+description = "The women's bathroom off the quad: three stalls and one long mirror."
 parent = "campus"
 kind = "destination"
 image = "locations/campus_bathroom_t0.jpg"
 image_search_queries = ["woman of 18 washing her hands at a long college bathroom mirror, no phone", "young woman at a row of sinks in a campus restroom, no phone"]
-entry_from = "campus_lecture_hall"
+entry_from = "campus_quad"
 hours = [{ weekdays = [0, 1, 2, 3, 4], open = "08:00", close = "18:00" }]
-closed_text = "The bathroom is locked with the lecture hall."
+closed_text = "The bathroom is locked. It's open weekdays, 8am to 6pm."
 
 [[locations]]
 id = "campus_library"
@@ -368,11 +371,8 @@ closed_text = "The cafeteria is closed. It's open weekdays, 8am to 4pm."
 [[locations]]
 id = "campus_offices"
 name = "Faculty Offices"
-description = "The faculty corridor: a row of office doors with name plates, and the dean's office at the end. A sign says it's open weekdays from 8am to 6pm."
-# P30 — an empty place says so (places.md rule 2; LO 2026-11-24).
-description_variants = [
-  { conditions = { version = "1.0", logic = "AND", items = [{ type = "npc_at_location", npc_id = "npc_hale", location_id = "campus_offices", operator = "is_absent" }, { type = "npc_at_location", npc_id = "npc_pratt", location_id = "campus_offices", operator = "is_absent" }, { type = "npc_at_location", npc_id = "npc_walsh", location_id = "campus_offices", operator = "is_absent" }, { type = "npc_at_location", npc_id = "npc_dean", location_id = "campus_offices", operator = "is_absent" }] }, text = "The faculty corridor: a row of office doors with name plates, and the dean's office at the end. A sign says it's open weekdays from 8am to 6pm. Every door on the corridor is shut. Nobody's in office hours." },
-]
+# P54 (LO 2026-11-26: "Each facility to get there own office"): a corridor hub; each office is its own room off it.
+description = "The faculty corridor: a row of office doors with name plates, the dean's at the end. Out here it's quiet: just the hum of the lights. A sign says it's open weekdays from 8am to 6pm."
 parent = "campus"
 kind = "destination"
 image = "locations/campus_offices_t0.jpg"
@@ -383,6 +383,57 @@ hidden_until = { flag = "goal1_shown" }
 entry_from = "campus_quad"
 hours = [{ weekdays = [0, 1, 2, 3, 4], open = "08:00", close = "18:00" }]
 closed_text = "The faculty corridor is locked. It opens at 8am on weekdays."
+
+# ── P54 · an office each, off the faculty corridor (LO 2026-11-26). Named for the job, not the person (people.md rule 3);
+# open in the person's own hours, so whoever's door is open is in. ──
+
+[[locations]]
+id = "campus_office_dean"
+name = "Dean's Office"
+description = "The dean's office: a big desk, a window, and a chair nobody's asked to sit in."
+parent = "campus"
+kind = "destination"
+image = "locations/campus_office_dean_t0.jpg"
+image_search_queries = ["older man behind a big desk in a college dean's office, window behind him", "college dean's office with a heavy desk and a single visitor chair"]
+entry_from = "campus_offices"
+hours = [{ weekdays = [0, 1, 2, 3, 4], open = "08:00", close = "17:00" }]
+closed_text = "The dean's door is shut. He's in weekdays, 8am to 5pm."
+
+[[locations]]
+id = "campus_office_hale"
+name = "Psychology Office"
+description = "The psychology office: shelves of files, a desk, and a chair facing it."
+parent = "campus"
+kind = "destination"
+image = "locations/campus_office_hale_t0.jpg"
+image_search_queries = ["professor's office with shelves of files and a desk facing one chair", "small college faculty office, desk and visitor chair"]
+entry_from = "campus_offices"
+hours = [{ weekdays = [0, 2], open = "14:00", close = "17:00" }]
+closed_text = "The psychology office is locked. Office hours: Monday and Wednesday, 2 to 5pm."
+
+[[locations]]
+id = "campus_office_pratt"
+name = "Statistics Office"
+description = "The statistics office: whiteboards on every wall, every one full."
+parent = "campus"
+kind = "destination"
+image = "locations/campus_office_pratt_t0.jpg"
+image_search_queries = ["college office with whiteboards full of numbers on every wall", "math professor's office covered in whiteboards"]
+entry_from = "campus_offices"
+hours = [{ weekdays = [0, 2], open = "13:00", close = "15:00" }]
+closed_text = "The statistics office is locked. Office hours: Monday and Wednesday, 1 to 3pm."
+
+[[locations]]
+id = "campus_office_walsh"
+name = "English Office"
+description = "The English office: books stacked on every surface and a kettle on the sill."
+parent = "campus"
+kind = "destination"
+image = "locations/campus_office_walsh_t0.jpg"
+image_search_queries = ["english professor's office with books stacked everywhere and a kettle on the windowsill", "cluttered college office full of books"]
+entry_from = "campus_offices"
+hours = [{ weekdays = [1, 3], open = "14:00", close = "16:00" }]
+closed_text = "The English office is locked. Office hours: Tuesday and Thursday, 2 to 4pm."
 
 [[locations]]
 id = "campus_theatre"
@@ -1131,7 +1182,7 @@ end_time = "11:00"
 activity = "lecturing"
 
 [[npcs.schedules]]
-location = "campus_offices"
+location = "campus_office_hale"
 weekdays = [0, 2]
 start_time = "14:00"
 end_time = "17:00"
@@ -1162,7 +1213,7 @@ end_time = "13:00"
 activity = "teaching"
 
 [[npcs.schedules]]
-location = "campus_offices"
+location = "campus_office_pratt"
 weekdays = [0, 2]
 start_time = "13:00"
 end_time = "15:00"
@@ -1193,7 +1244,7 @@ end_time = "11:00"
 activity = "teaching"
 
 [[npcs.schedules]]
-location = "campus_offices"
+location = "campus_office_walsh"
 weekdays = [1, 3]
 start_time = "14:00"
 end_time = "16:00"
@@ -1286,7 +1337,7 @@ traits = ["Strict", "Takes charge"]
 core_traits = { friendship = 0, lust = 150, control = 600, intimacy = 0 }
 
 [[npcs.schedules]]
-location = "campus_offices"
+location = "campus_office_dean"
 weekdays = [0, 1, 2, 3, 4]
 start_time = "08:00"
 end_time = "17:00"

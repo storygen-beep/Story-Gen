@@ -323,7 +323,7 @@ title = "The Mirror"
 category = "Campus Life 🏫"
 description = "Three girls own the bathroom mirror."
 hints = [
-  { when = [], text = "From your second week, three girls own the mirror in the women's bathroom off the Lecture Hall, weekdays 8 to 9am and 1 to 2pm." },
+  { when = [], text = "From your second week, three girls own the mirror in the women's bathroom off the Quad, weekdays 8 to 9am and 1 to 2pm." },
   { when = [{ flag = "met_brooke", op = "is_true" }], text = "end" },
 ]
 
@@ -558,6 +558,44 @@ clothes_layout = "room"
 # P46 — LO 2026-11-25: "completely aligned with the cots pages": CoT's Hints page and People dialog.
 quests_layout = "hints"
 people_page = "cot"
+# P52 — LO 2026-11-26: "Timetable as the popup modal like in the old first term". From the start: the engine has no
+# `when` on the button. No lecturer on a row: it would name a teacher before she meets them.
+timetable_button = true
+
+# P52 — her four classes (the teachers' rows; the dean's sheet, P47). late_until: each class lets her in only in its
+# first 30 minutes (psych_first, class_psych and the rest), so the popup says "Doors shut" after.
+
+[[ui.timetable]]
+class = "Psychology"
+place = "campus_lecture_hall"
+weekdays = [0, 2]
+from = "09:00"
+to = "11:00"
+late_until = "09:30"
+
+[[ui.timetable]]
+class = "Statistics"
+place = "campus_lecture_hall"
+weekdays = [0, 2]
+from = "11:00"
+to = "13:00"
+late_until = "11:30"
+
+[[ui.timetable]]
+class = "English"
+place = "campus_lecture_hall"
+weekdays = [1, 3]
+from = "09:00"
+to = "11:00"
+late_until = "09:30"
+
+[[ui.timetable]]
+class = "Drama"
+place = "campus_theatre"
+weekdays = [1, 3]
+from = "11:00"
+to = "13:00"
+late_until = "11:30"
 
 # P48 — CoT's people system (LO 2026-11-25: "Yes lets move to cot style type system", "Meter frozen").
 [engine.people]

@@ -1,111 +1,111 @@
 {
  "piece": "P38",
- "pass": 7,
+ "pass": 9,
  "screens": {
   "walk_parents.moment": {
-   "text": "0f689960aa65a5e0",
+   "text": "7f828ca106b8bccf",
    "traits": "4b9cc244e3119951",
    "facts": "4ae0ea463b0299c5",
    "facts2": "a70226de81ca7f87",
-   "all": "5295e17ddac377d2"
+   "all": "1baa72359f71d3ca"
   },
   "walk_parents.watch": {
-   "text": "1b6cf3a2d6ae7b54",
+   "text": "e03514a08a342533",
    "traits": "4b9cc244e3119951",
    "facts": "4ae0ea463b0299c5",
    "facts2": "a70226de81ca7f87",
-   "all": "90662cfef0bc4dad"
+   "all": "d54dbe75b89f56bc"
   },
   "walk_parents.away": {
-   "text": "bdfaab0fb7a6ba72",
+   "text": "9ff3393e0734e1e8",
    "traits": "44136fa355b3678a",
    "facts": "9452bbef8a645d19",
    "facts2": "9452bbef8a645d19",
-   "all": "42b1714c182871af"
+   "all": "4ec41e5bdd3c080e"
   },
   "walk_ryan_phone.moment": {
-   "text": "bfa349501d85aa26",
+   "text": "bc2dfd613888c1cc",
    "traits": "74c4f68e6476ecee",
    "facts": "24c4b946d90ccbb4",
    "facts2": "829298a706f02a41",
-   "all": "d3596152702ff253"
+   "all": "a012f1eb60a521c0"
   },
   "walk_ryan_phone.watch": {
-   "text": "2033b9ff4a48f27d",
+   "text": "9c54792da90cec47",
    "traits": "74c4f68e6476ecee",
    "facts": "24c4b946d90ccbb4",
    "facts2": "829298a706f02a41",
-   "all": "185ff7454f125e7f"
+   "all": "b42248054a63abe1"
   },
   "walk_ryan_phone.away": {
-   "text": "bf24341d4735640c",
+   "text": "304343848758928d",
    "traits": "44136fa355b3678a",
    "facts": "9452bbef8a645d19",
    "facts2": "9452bbef8a645d19",
-   "all": "421434451f674b49"
+   "all": "cb04089789f4814f"
   },
   "walk_mom_bills.moment": {
-   "text": "1cd7f448b8c965cb",
+   "text": "0d852b4dad8ff4ee",
    "traits": "95f1c22815f415ed",
    "facts": "4233727f3d0d2307",
    "facts2": "34a8649ad7102788",
-   "all": "64d249842efe26a0"
+   "all": "128e6f1356329d45"
   },
   "walk_mom_bills.sit": {
-   "text": "a513792ac09751cf",
+   "text": "547a746593a51255",
    "traits": "95f1c22815f415ed",
    "facts": "4233727f3d0d2307",
    "facts2": "34a8649ad7102788",
-   "all": "5a815628b17253f2"
+   "all": "1bed1fcf7f557de8"
   },
   "walk_mom_bills.late": {
-   "text": "ef6fd3deb3581a74",
+   "text": "09e3b0cc2f97e18e",
    "traits": "95f1c22815f415ed",
    "facts": "4233727f3d0d2307",
    "facts2": "34a8649ad7102788",
-   "all": "afaeaa25d8907415"
+   "all": "3a6f3a963bcc92ac"
   },
   "walk_mark_phone.moment": {
-   "text": "e7e800f7e072024b",
+   "text": "c14403bba8d4220d",
    "traits": "a13af4c65af9f24a",
    "facts": "643dd7b0173cb2a8",
    "facts2": "371b14470ce23cce",
-   "all": "064db9925c5a7a01"
+   "all": "8840d8c240b6ef1f"
   },
   "walk_mark_phone.listen": {
-   "text": "ea9f39f66f513ea0",
+   "text": "af631e7f8f6d9194",
    "traits": "a13af4c65af9f24a",
    "facts": "643dd7b0173cb2a8",
    "facts2": "371b14470ce23cce",
-   "all": "544cc9be0a5337d2"
+   "all": "c26e98d8fd10c2e5"
   },
   "walk_mark_phone.walkin": {
-   "text": "26ac2e8be994efaf",
+   "text": "cb36a7c8c179f47d",
    "traits": "a13af4c65af9f24a",
    "facts": "643dd7b0173cb2a8",
    "facts2": "371b14470ce23cce",
-   "all": "0cc7824cd5b790e3"
+   "all": "76963d85a72ef688"
   },
   "walk_ryan_game.moment": {
-   "text": "5761dbfb3262f770",
+   "text": "c2fc8528c8a17f52",
    "traits": "74c4f68e6476ecee",
    "facts": "dc79944b1aa0a816",
    "facts2": "7eac0b49ad26fea0",
-   "all": "5a72a25c7e4e43c9"
+   "all": "78691f04ac562b87"
   },
   "walk_ryan_game.play": {
-   "text": "377f71608ab147cb",
+   "text": "289cbc8c56884395",
    "traits": "74c4f68e6476ecee",
    "facts": "dc79944b1aa0a816",
    "facts2": "7eac0b49ad26fea0",
-   "all": "ca771038f77c5eff"
+   "all": "a3da739cc0766d6d"
   },
   "walk_ryan_game.notnow": {
-   "text": "dba7f612cfdd5a68",
+   "text": "160b99b2e866fe1a",
    "traits": "74c4f68e6476ecee",
    "facts": "dc79944b1aa0a816",
    "facts2": "7eac0b49ad26fea0",
-   "all": "e8fe387adb6ce6d5"
+   "all": "2d129f40cb61bacc"
   },
   "walk_ryan_shower.moment": {
    "text": "8c491e1c62636721",
@@ -128,7 +128,7 @@
    "facts2": "64f3c4db79ffd75c",
    "all": "c065010ed9d5b4d2"
   },
-  "*": "ca89106ffbb1f06c"
+  "*": "60dfda327fb194f0"
  },
  "rows": {
   "B1": "5276068df1ca6fa9",
@@ -276,8 +276,23 @@
   "C422": "7e128897077ecee6",
   "C460": "67e48e60d5053a2e",
   "C461": "310706ee076318f2",
+  "C788": "cae1598ef9cb6ff1",
+  "C855": "d3dc77f2f96e20ae",
+  "C856": "9c58ec7792f1f95a",
+  "C859": "c504ec577b14e288",
+  "C1820": "d8f9999d285c6607",
+  "C724": "37e21685569ccea7",
+  "C1821": "b9818557d5e43850",
+  "C1864": "45e669c2511d9b8e",
+  "C792": "92be110855d5a128",
+  "C302": "2ba94157c9da471e",
+  "L97": "5d6e027964066b8b",
+  "L150": "ec7af502db4f0c7e",
+  "C2186": "39e6f4b48d03d606",
+  "C2187": "f2b54b1dd7c15f2f",
   "C2188": "612394eef6826900",
-  "C2189": "20748838895e4545"
+  "C2189": "20748838895e4545",
+  "C2195": "77083291a86791c3"
  },
  "verdicts": [
   {
@@ -297,271 +312,286 @@
    "row": "B10",
    "screen": "walk_mark_phone.listen",
    "verdict": "PASS",
-   "line": "He hangs up and sits there a long time, not watching the TV. / Friday. Whatever it is, it's due Friday.",
-   "why": "Mark stays in his chair till 23:00; TV is in the room (home_tv); Friday line as he said it",
+   "line": "You stay out of sight. He hangs up and sits there a long time, not watching the TV. / Friday. Whatever it is, it's due Friday.",
+   "why": "Mark 'in his chair' at home_living_room weekdays 16:30-23:00; trigger gates npc_at_location; Vance named only behind met_vance; true at first and last minute of the window and on a second visit",
    "cause": "",
    "note": false,
    "screen_hash": {
-    "text": "ea9f39f66f513ea0",
+    "text": "af631e7f8f6d9194",
+    "traits": "a13af4c65af9f24a",
     "facts": "643dd7b0173cb2a8",
     "facts2": "371b14470ce23cce",
-    "all": "544cc9be0a5337d2"
+    "all": "c26e98d8fd10c2e5"
    },
    "row_hash": "c1c0e2ac2588a579",
    "carried": true,
-   "pass": 2
+   "pass": 8
   },
   {
    "row": "B10",
    "screen": "walk_mark_phone.moment",
    "verdict": "PASS",
-   "line": "Mark's in his chair, phone to his ear... \"I'll have the money Friday. I said Friday.\" / (met_vance) \"I'll have it Friday. I said Friday, Vance.\"",
-   "why": "Mon-Fri 16:30-17:00, Mark 'in his chair' from 16:30; Vance named only behind met_vance; 'Friday' still true at Friday 16:59",
+   "line": "Mark's in his chair, phone to his ear, a hand over his eyes. / I'll have it Friday. I said Friday, Vance.",
+   "why": "Mark 'in his chair' at home_living_room weekdays 16:30-23:00; trigger gates npc_at_location; Vance named only behind met_vance; read on arrival: the scene fires as she reaches the room, before its screen, so 'Listen from the hall' and 'Walk in' are both still open to her; true at first and last minute of the window and on a second visit",
    "cause": "",
    "note": false,
    "screen_hash": {
-    "text": "e7e800f7e072024b",
+    "text": "c14403bba8d4220d",
+    "traits": "a13af4c65af9f24a",
     "facts": "643dd7b0173cb2a8",
     "facts2": "371b14470ce23cce",
-    "all": "064db9925c5a7a01"
+    "all": "8840d8c240b6ef1f"
    },
    "row_hash": "c1c0e2ac2588a579",
    "carried": true,
-   "pass": 2
+   "pass": 8
   },
   {
    "row": "B10",
    "screen": "walk_mark_phone.walkin",
    "verdict": "PASS",
-   "line": "He hears you and looks up, and his face shuts like a door. ... Whatever he owes, he's not telling you.",
-   "why": "Mark there; 'owes' is her read of the call, true for both variants",
+   "line": "He hears you and looks up, and his face shuts like a door. / What?",
+   "why": "Mark 'in his chair' at home_living_room weekdays 16:30-23:00; trigger gates npc_at_location; Vance named only behind met_vance; true at first and last minute of the window and on a second visit",
    "cause": "",
    "note": false,
    "screen_hash": {
-    "text": "26ac2e8be994efaf",
+    "text": "cb36a7c8c179f47d",
+    "traits": "a13af4c65af9f24a",
     "facts": "643dd7b0173cb2a8",
     "facts2": "371b14470ce23cce",
-    "all": "0cc7824cd5b790e3"
+    "all": "76963d85a72ef688"
    },
    "row_hash": "c1c0e2ac2588a579",
    "carried": true,
-   "pass": 2
+   "pass": 8
   },
   {
    "row": "B10",
    "screen": "walk_mom_bills.late",
    "verdict": "PASS",
-   "line": "You know they'll still be on the table tonight.",
-   "why": "bills on the table tonight is texture/her expectation; Laura stays in the kitchen till 19:00",
+   "line": "Go. Go on, I'm fine. / She's already looking back down at the bills.",
+   "why": "Laura at home_kitchen weekdays 17:00-19:00 by her row; trigger gates npc_at_location, window 17:00-18:00; true at first and last minute of the window and on a second visit",
    "cause": "",
    "note": false,
    "screen_hash": {
-    "text": "ef6fd3deb3581a74",
+    "text": "09e3b0cc2f97e18e",
+    "traits": "95f1c22815f415ed",
     "facts": "4233727f3d0d2307",
     "facts2": "34a8649ad7102788",
-    "all": "afaeaa25d8907415"
+    "all": "3a6f3a963bcc92ac"
    },
    "row_hash": "c1c0e2ac2588a579",
    "carried": true,
-   "pass": 2
+   "pass": 8
   },
   {
    "row": "B10",
    "screen": "walk_mom_bills.moment",
    "verdict": "PASS",
-   "line": "Mom's at the kitchen table with the bills spread in front of her... \"Oh. Baby. Don't look at these.\"",
-   "why": "Mon-Fri 17:00-18:00, Laura kitchen 17-19; Mark in the living room, Ryan out till 18; no one else claimed",
-   "cause": "",
+   "line": "Dinner's on the stove, and Mom's sat at the kitchen table with the bills spread in front of her and a pen she isn't using.",
+   "why": "fires weekdays 17:00-18:00 on arrival with Laura in the kitchen by her 'making dinner' row (17-19); dinner on the stove is that row; Ryan's kitchen row starts 18:00 (end exclusive), Mark is in the living room; rent Sunday is PLAN's, and the window is weekdays only",
+   "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "1cd7f448b8c965cb",
+    "text": "0d852b4dad8ff4ee",
+    "traits": "95f1c22815f415ed",
     "facts": "4233727f3d0d2307",
     "facts2": "34a8649ad7102788",
-    "all": "64d249842efe26a0"
+    "all": "128e6f1356329d45"
    },
    "row_hash": "c1c0e2ac2588a579",
-   "carried": true,
-   "pass": 2
+   "carried": false,
+   "pass": 9
   },
   {
    "row": "B10",
    "screen": "walk_mom_bills.sit",
    "verdict": "PASS",
-   "line": "Rent's due Sunday. She hasn't said how much is missing.",
-   "why": "rent is Sunday (P11, PLAN), true on every weekday the scene can show; the family's shortfall is the plan's hold",
-   "cause": "",
+   "line": "It's fine, baby. It's just numbers. Really. / Rent's due Sunday. She hasn't said how much is missing.",
+   "why": "fires weekdays 17:00-18:00 on arrival with Laura in the kitchen by her 'making dinner' row (17-19); dinner on the stove is that row; Ryan's kitchen row starts 18:00 (end exclusive), Mark is in the living room; rent Sunday is PLAN's, and the window is weekdays only",
+   "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "a513792ac09751cf",
+    "text": "547a746593a51255",
+    "traits": "95f1c22815f415ed",
     "facts": "4233727f3d0d2307",
     "facts2": "34a8649ad7102788",
-    "all": "5a815628b17253f2"
+    "all": "1bed1fcf7f557de8"
    },
    "row_hash": "c1c0e2ac2588a579",
-   "carried": true,
-   "pass": 2
+   "carried": false,
+   "pass": 9
   },
   {
    "row": "B10",
    "screen": "walk_parents.away",
    "verdict": "PASS",
-   "line": "Their door's never quite shut. You know that now.",
-   "why": "no fact beyond the hall and her door; exit Your Bedroom matches 'all the way to your door'",
+   "line": "You back down the hall on your toes. The tapping follows you all the way to your door. / Their door's never quite shut. You know that now.",
+   "why": "Laura and Mark 'in bed' at home_master_bedroom 23:00-01:00 every day by their rows; trigger gates npc_at_location on both, Mon-Fri; true at first and last minute of the window and on a second visit",
    "cause": "",
    "note": false,
    "screen_hash": {
-    "text": "bdfaab0fb7a6ba72",
+    "text": "9ff3393e0734e1e8",
+    "traits": "44136fa355b3678a",
     "facts": "9452bbef8a645d19",
     "facts2": "9452bbef8a645d19",
-    "all": "42b1714c182871af"
+    "all": "4ec41e5bdd3c080e"
    },
    "row_hash": "c1c0e2ac2588a579",
    "carried": true,
-   "pass": 2
+   "pass": 8
   },
   {
    "row": "B10",
    "screen": "walk_parents.moment",
    "verdict": "PASS",
-   "line": "Their door hasn't caught. Through the gap: Mom on her back... Your face burns.",
-   "why": "trigger Mon-Fri 23:00-01:00 gated on both in home_master_bedroom; both rows 'in bed' 23:00-01:00 every day; Ryan in his room, so 'The kids' holds",
+   "line": "Their door hasn't caught. Through the gap: Mom on her back, nightie round her waist, Mark between her legs, his hand over her mouth, slamming into her so hard t",
+   "why": "Laura and Mark 'in bed' at home_master_bedroom 23:00-01:00 every day by their rows; trigger gates npc_at_location on both, Mon-Fri; read on just arriving in the hall: the door gap is what she finds there, nothing assumes she chose to look; true at first and last minute of the window and on a second visit",
    "cause": "",
    "note": false,
    "screen_hash": {
-    "text": "0f689960aa65a5e0",
+    "text": "7f828ca106b8bccf",
+    "traits": "4b9cc244e3119951",
     "facts": "4ae0ea463b0299c5",
     "facts2": "a70226de81ca7f87",
-    "all": "5295e17ddac377d2"
+    "all": "1baa72359f71d3ca"
    },
    "row_hash": "c1c0e2ac2588a579",
    "carried": true,
-   "pass": 2
+   "pass": 8
   },
   {
    "row": "B10",
    "screen": "walk_parents.watch",
    "verdict": "PASS",
-   "line": "At breakfast you won't be able to look at either of them.",
-   "why": "next breakfast has both: weekdays Laura kitchen 07-08, Mark 07-07:30; Sat (after a Fri night) Laura 08-12, Mark 08-10; exit Your Bedroom matches 'back in your room'",
+   "line": "You watch until Mark grunts and goes still, and Mom's legs go slack round him. / That's it, Laura. That's it.",
+   "why": "Laura and Mark 'in bed' at home_master_bedroom 23:00-01:00 every day by their rows; trigger gates npc_at_location on both, Mon-Fri; true at first and last minute of the window and on a second visit",
    "cause": "",
    "note": false,
    "screen_hash": {
-    "text": "1b6cf3a2d6ae7b54",
+    "text": "e03514a08a342533",
+    "traits": "4b9cc244e3119951",
     "facts": "4ae0ea463b0299c5",
     "facts2": "a70226de81ca7f87",
-    "all": "90662cfef0bc4dad"
+    "all": "d54dbe75b89f56bc"
    },
    "row_hash": "c1c0e2ac2588a579",
    "carried": true,
-   "pass": 2
+   "pass": 8
   },
   {
    "row": "B10",
    "screen": "walk_ryan_game.moment",
    "verdict": "PASS",
-   "line": "Ryan's on the couch with a controller, losing loudly.",
-   "why": "Sat/Sun 12:00-17:00, Ryan 'on the couch' 12-17; Mark in his chair too, not contradicted; Laura out",
+   "line": "Ryan's on the couch with a controller, losing loudly. / Want a go? You can't be worse than me.",
+   "why": "Ryan 'on the couch' at home_living_room Sat/Sun 12:00-17:00; trigger gates npc_at_location; window ends as his row ends; read on just arriving in the living room: Ryan on the couch, his offer is to her as she comes in; true at first and last minute of the window and on a second visit",
    "cause": "",
    "note": false,
    "screen_hash": {
-    "text": "5761dbfb3262f770",
+    "text": "c2fc8528c8a17f52",
+    "traits": "74c4f68e6476ecee",
     "facts": "dc79944b1aa0a816",
     "facts2": "7eac0b49ad26fea0",
-    "all": "5a72a25c7e4e43c9"
+    "all": "78691f04ac562b87"
    },
    "row_hash": "c1c0e2ac2588a579",
    "carried": true,
-   "pass": 2
+   "pass": 8
   },
   {
    "row": "B10",
    "screen": "walk_ryan_game.notnow",
    "verdict": "PASS",
-   "line": "The second controller stays on the cushion beside him.",
-   "why": "Ryan still on the couch; texture only",
+   "line": "Coward. / He grins without looking away from the screen.",
+   "why": "Ryan 'on the couch' at home_living_room Sat/Sun 12:00-17:00; trigger gates npc_at_location; window ends as his row ends; true at first and last minute of the window and on a second visit",
    "cause": "",
    "note": false,
    "screen_hash": {
-    "text": "dba7f612cfdd5a68",
+    "text": "160b99b2e866fe1a",
+    "traits": "74c4f68e6476ecee",
     "facts": "dc79944b1aa0a816",
     "facts2": "7eac0b49ad26fea0",
-    "all": "e8fe387adb6ce6d5"
+    "all": "2d129f40cb61bacc"
    },
    "row_hash": "c1c0e2ac2588a579",
    "carried": true,
-   "pass": 2
+   "pass": 8
   },
   {
    "row": "B10",
    "screen": "walk_ryan_game.play",
    "verdict": "PASS",
-   "line": "You lose, then you win, and he throws a cushion at you like it's an insult. \"Again. Best of three.\"",
-   "why": "no time, day or presence claim beyond Ryan on the couch; 'Best of three' is dialogue",
+   "line": "You lose, then you win, and he throws a cushion at you like it's an insult. / Again. Best of three.",
+   "why": "Ryan 'on the couch' at home_living_room Sat/Sun 12:00-17:00; trigger gates npc_at_location; window ends as his row ends; true at first and last minute of the window and on a second visit",
    "cause": "",
    "note": false,
    "screen_hash": {
-    "text": "377f71608ab147cb",
+    "text": "289cbc8c56884395",
+    "traits": "74c4f68e6476ecee",
     "facts": "dc79944b1aa0a816",
     "facts2": "7eac0b49ad26fea0",
-    "all": "ca771038f77c5eff"
+    "all": "a3da739cc0766d6d"
    },
    "row_hash": "c1c0e2ac2588a579",
    "carried": true,
-   "pass": 2
+   "pass": 8
   },
   {
    "row": "B10",
    "screen": "walk_ryan_phone.away",
    "verdict": "PASS",
-   "line": "When you look back, his door's still open a crack.",
-   "why": "door and floorboard only; exit stays in the hall, where she is",
+   "line": "You pull back before the floorboard gives you away. / When you look back, his door's still open a crack.",
+   "why": "Ryan 'on his phone' at home_ryans_room weekdays 23:00-01:00 (asleep from 01:00); trigger gates npc_at_location; true at first and last minute of the window and on a second visit",
    "cause": "",
    "note": false,
    "screen_hash": {
-    "text": "bf24341d4735640c",
+    "text": "304343848758928d",
+    "traits": "44136fa355b3678a",
     "facts": "9452bbef8a645d19",
     "facts2": "9452bbef8a645d19",
-    "all": "421434451f674b49"
+    "all": "cb04089789f4814f"
    },
    "row_hash": "c1c0e2ac2588a579",
    "carried": true,
-   "pass": 2
+   "pass": 8
   },
   {
    "row": "B10",
    "screen": "walk_ryan_phone.moment",
    "verdict": "PASS",
-   "line": "He's on his bed in his phone's light, shorts round his thighs, stroking his cock, eyes on the screen. Your face goes hot.",
-   "why": "trigger Mon-Fri 23:00-01:00 + Ryan in home_ryans_room; his rows read 'on his phone' 23:00-01:00 (Mon 00-01 too), so the act shows what he was doing (L97)",
+   "line": "Ryan's door is open a hand's width. He's on his bed in his phone's light, shorts round his thighs, stroking his cock, eyes on the screen. Your face goes hot. / ",
+   "why": "Ryan 'on his phone' at home_ryans_room weekdays 23:00-01:00 (asleep from 01:00); trigger gates npc_at_location; read on just arriving in the hall: his open door is what she finds, nothing assumes she went to look; true at first and last minute of the window and on a second visit",
    "cause": "",
    "note": false,
    "screen_hash": {
-    "text": "bfa349501d85aa26",
+    "text": "bc2dfd613888c1cc",
+    "traits": "74c4f68e6476ecee",
     "facts": "24c4b946d90ccbb4",
     "facts2": "829298a706f02a41",
-    "all": "d3596152702ff253"
+    "all": "a012f1eb60a521c0"
    },
    "row_hash": "c1c0e2ac2588a579",
    "carried": true,
-   "pass": 2
+   "pass": 8
   },
   {
    "row": "B10",
    "screen": "walk_ryan_phone.watch",
    "verdict": "PASS",
-   "line": "You'll pass his door again tomorrow night.",
-   "why": "Fires Mon-Fri 23:00-01:00 while Ryan's row has him in his room on his phone (Sun 19-24/Mon 00-01 and weekdays 23-01); 'pass his door' is something she can do any night, and Mon-Thu the walk-in is there again; on a Friday it names only her passing the door, not the scene",
+   "line": "His hand speeds up until he comes into a sock. / Jesus. Okay. Okay.",
+   "why": "Ryan 'on his phone' at home_ryans_room weekdays 23:00-01:00 (asleep from 01:00); trigger gates npc_at_location; true at first and last minute of the window and on a second visit",
    "cause": "",
    "note": false,
    "screen_hash": {
-    "text": "2033b9ff4a48f27d",
+    "text": "9c54792da90cec47",
+    "traits": "74c4f68e6476ecee",
     "facts": "24c4b946d90ccbb4",
     "facts2": "829298a706f02a41",
-    "all": "185ff7454f125e7f"
+    "all": "b42248054a63abe1"
    },
    "row_hash": "c1c0e2ac2588a579",
    "carried": true,
-   "pass": 3
+   "pass": 8
   },
   {
    "row": "B10",
@@ -969,271 +999,286 @@
    "row": "B8",
    "screen": "walk_mark_phone.listen",
    "verdict": "PASS",
-   "line": "He hangs up and sits there a long time, not watching the TV. / Friday. Whatever it is, it's due Friday.",
-   "why": "no number disagrees with PLAN (rent Sunday, Mark's Friday); the only garments named are theirs (nightie, shorts, towel) or her naked in the shower she started",
+   "line": "You stay out of sight. He hangs up and sits there a long time, not watching the TV. / Friday. Whatever it is, it's due Friday.",
+   "why": "no number disagrees with PLAN (rent Sunday, Friday, number nine); the only garments named are the other people's, not hers",
    "cause": "",
    "note": false,
    "screen_hash": {
-    "text": "ea9f39f66f513ea0",
+    "text": "af631e7f8f6d9194",
+    "traits": "a13af4c65af9f24a",
     "facts": "643dd7b0173cb2a8",
     "facts2": "371b14470ce23cce",
-    "all": "544cc9be0a5337d2"
+    "all": "c26e98d8fd10c2e5"
    },
    "row_hash": "80d415cf08e0ebfe",
    "carried": true,
-   "pass": 2
+   "pass": 8
   },
   {
    "row": "B8",
    "screen": "walk_mark_phone.moment",
    "verdict": "PASS",
-   "line": "Mark's in his chair, phone to his ear... \"I'll have the money Friday. I said Friday.\" / (met_vance) \"I'll have it Friday. I said Friday, Vance.\"",
-   "why": "no number disagrees with PLAN (rent Sunday, Mark's Friday); the only garments named are theirs (nightie, shorts, towel) or her naked in the shower she started",
+   "line": "Mark's in his chair, phone to his ear, a hand over his eyes. / I'll have it Friday. I said Friday, Vance.",
+   "why": "no number disagrees with PLAN (rent Sunday, Friday, number nine); the only garments named are the other people's, not hers",
    "cause": "",
    "note": false,
    "screen_hash": {
-    "text": "e7e800f7e072024b",
+    "text": "c14403bba8d4220d",
+    "traits": "a13af4c65af9f24a",
     "facts": "643dd7b0173cb2a8",
     "facts2": "371b14470ce23cce",
-    "all": "064db9925c5a7a01"
+    "all": "8840d8c240b6ef1f"
    },
    "row_hash": "80d415cf08e0ebfe",
    "carried": true,
-   "pass": 2
+   "pass": 8
   },
   {
    "row": "B8",
    "screen": "walk_mark_phone.walkin",
    "verdict": "PASS",
-   "line": "He hears you and looks up, and his face shuts like a door. ... Whatever he owes, he's not telling you.",
-   "why": "no number disagrees with PLAN (rent Sunday, Mark's Friday); the only garments named are theirs (nightie, shorts, towel) or her naked in the shower she started",
+   "line": "He hears you and looks up, and his face shuts like a door. / What?",
+   "why": "no number disagrees with PLAN (rent Sunday, Friday, number nine); the only garments named are the other people's, not hers",
    "cause": "",
    "note": false,
    "screen_hash": {
-    "text": "26ac2e8be994efaf",
+    "text": "cb36a7c8c179f47d",
+    "traits": "a13af4c65af9f24a",
     "facts": "643dd7b0173cb2a8",
     "facts2": "371b14470ce23cce",
-    "all": "0cc7824cd5b790e3"
+    "all": "76963d85a72ef688"
    },
    "row_hash": "80d415cf08e0ebfe",
    "carried": true,
-   "pass": 2
+   "pass": 8
   },
   {
    "row": "B8",
    "screen": "walk_mom_bills.late",
    "verdict": "PASS",
-   "line": "You know they'll still be on the table tonight.",
-   "why": "no number disagrees with PLAN (rent Sunday, Mark's Friday); the only garments named are theirs (nightie, shorts, towel) or her naked in the shower she started",
+   "line": "Go. Go on, I'm fine. / She's already looking back down at the bills.",
+   "why": "no number disagrees with PLAN (rent Sunday, Friday, number nine); the only garments named are the other people's, not hers",
    "cause": "",
    "note": false,
    "screen_hash": {
-    "text": "ef6fd3deb3581a74",
+    "text": "09e3b0cc2f97e18e",
+    "traits": "95f1c22815f415ed",
     "facts": "4233727f3d0d2307",
     "facts2": "34a8649ad7102788",
-    "all": "afaeaa25d8907415"
+    "all": "3a6f3a963bcc92ac"
    },
    "row_hash": "80d415cf08e0ebfe",
    "carried": true,
-   "pass": 2
+   "pass": 8
   },
   {
    "row": "B8",
    "screen": "walk_mom_bills.moment",
    "verdict": "PASS",
-   "line": "Mom's at the kitchen table with the bills spread in front of her... \"Oh. Baby. Don't look at these.\"",
-   "why": "no number disagrees with PLAN (rent Sunday, Mark's Friday); the only garments named are theirs (nightie, shorts, towel) or her naked in the shower she started",
-   "cause": "",
+   "line": "Dinner's on the stove, and Mom's sat at the kitchen table with the bills spread in front of her and a pen she isn't using.",
+   "why": "no number disagrees with PLAN (rent due Sunday, PLAN 189/248); no garment of hers named",
+   "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "1cd7f448b8c965cb",
+    "text": "0d852b4dad8ff4ee",
+    "traits": "95f1c22815f415ed",
     "facts": "4233727f3d0d2307",
     "facts2": "34a8649ad7102788",
-    "all": "64d249842efe26a0"
+    "all": "128e6f1356329d45"
    },
    "row_hash": "80d415cf08e0ebfe",
-   "carried": true,
-   "pass": 2
+   "carried": false,
+   "pass": 9
   },
   {
    "row": "B8",
    "screen": "walk_mom_bills.sit",
    "verdict": "PASS",
-   "line": "Rent's due Sunday. She hasn't said how much is missing.",
-   "why": "no number disagrees with PLAN (rent Sunday, Mark's Friday); the only garments named are theirs (nightie, shorts, towel) or her naked in the shower she started",
-   "cause": "",
+   "line": "It's fine, baby. It's just numbers. Really. / Rent's due Sunday. She hasn't said how much is missing.",
+   "why": "no number disagrees with PLAN (rent due Sunday, PLAN 189/248); no garment of hers named",
+   "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "a513792ac09751cf",
+    "text": "547a746593a51255",
+    "traits": "95f1c22815f415ed",
     "facts": "4233727f3d0d2307",
     "facts2": "34a8649ad7102788",
-    "all": "5a815628b17253f2"
+    "all": "1bed1fcf7f557de8"
    },
    "row_hash": "80d415cf08e0ebfe",
-   "carried": true,
-   "pass": 2
+   "carried": false,
+   "pass": 9
   },
   {
    "row": "B8",
    "screen": "walk_parents.away",
    "verdict": "PASS",
-   "line": "Their door's never quite shut. You know that now.",
-   "why": "no number disagrees with PLAN (rent Sunday, Mark's Friday); the only garments named are theirs (nightie, shorts, towel) or her naked in the shower she started",
+   "line": "You back down the hall on your toes. The tapping follows you all the way to your door. / Their door's never quite shut. You know that now.",
+   "why": "no number disagrees with PLAN (rent Sunday, Friday, number nine); the only garments named are the other people's, not hers",
    "cause": "",
    "note": false,
    "screen_hash": {
-    "text": "bdfaab0fb7a6ba72",
+    "text": "9ff3393e0734e1e8",
+    "traits": "44136fa355b3678a",
     "facts": "9452bbef8a645d19",
     "facts2": "9452bbef8a645d19",
-    "all": "42b1714c182871af"
+    "all": "4ec41e5bdd3c080e"
    },
    "row_hash": "80d415cf08e0ebfe",
    "carried": true,
-   "pass": 2
+   "pass": 8
   },
   {
    "row": "B8",
    "screen": "walk_parents.moment",
    "verdict": "PASS",
-   "line": "Their door hasn't caught. Through the gap: Mom on her back... Your face burns.",
-   "why": "no number disagrees with PLAN (rent Sunday, Mark's Friday); the only garments named are theirs (nightie, shorts, towel) or her naked in the shower she started",
+   "line": "Their door hasn't caught. Through the gap: Mom on her back, nightie round her waist, Mark between her legs, his hand over her mouth, slamming into her so hard t",
+   "why": "no number disagrees with PLAN (rent Sunday, Friday, number nine); the only garments named are the other people's, not hers",
    "cause": "",
    "note": false,
    "screen_hash": {
-    "text": "0f689960aa65a5e0",
+    "text": "7f828ca106b8bccf",
+    "traits": "4b9cc244e3119951",
     "facts": "4ae0ea463b0299c5",
     "facts2": "a70226de81ca7f87",
-    "all": "5295e17ddac377d2"
+    "all": "1baa72359f71d3ca"
    },
    "row_hash": "80d415cf08e0ebfe",
    "carried": true,
-   "pass": 2
+   "pass": 8
   },
   {
    "row": "B8",
    "screen": "walk_parents.watch",
    "verdict": "PASS",
-   "line": "At breakfast you won't be able to look at either of them.",
-   "why": "no number disagrees with PLAN (rent Sunday, Mark's Friday); the only garments named are theirs (nightie, shorts, towel) or her naked in the shower she started",
+   "line": "You watch until Mark grunts and goes still, and Mom's legs go slack round him. / That's it, Laura. That's it.",
+   "why": "no number disagrees with PLAN (rent Sunday, Friday, number nine); the only garments named are the other people's, not hers",
    "cause": "",
    "note": false,
    "screen_hash": {
-    "text": "1b6cf3a2d6ae7b54",
+    "text": "e03514a08a342533",
+    "traits": "4b9cc244e3119951",
     "facts": "4ae0ea463b0299c5",
     "facts2": "a70226de81ca7f87",
-    "all": "90662cfef0bc4dad"
+    "all": "d54dbe75b89f56bc"
    },
    "row_hash": "80d415cf08e0ebfe",
    "carried": true,
-   "pass": 2
+   "pass": 8
   },
   {
    "row": "B8",
    "screen": "walk_ryan_game.moment",
    "verdict": "PASS",
-   "line": "Ryan's on the couch with a controller, losing loudly.",
-   "why": "no number disagrees with PLAN (rent Sunday, Mark's Friday); the only garments named are theirs (nightie, shorts, towel) or her naked in the shower she started",
+   "line": "Ryan's on the couch with a controller, losing loudly. / Want a go? You can't be worse than me.",
+   "why": "no number disagrees with PLAN (rent Sunday, Friday, number nine); the only garments named are the other people's, not hers",
    "cause": "",
    "note": false,
    "screen_hash": {
-    "text": "5761dbfb3262f770",
+    "text": "c2fc8528c8a17f52",
+    "traits": "74c4f68e6476ecee",
     "facts": "dc79944b1aa0a816",
     "facts2": "7eac0b49ad26fea0",
-    "all": "5a72a25c7e4e43c9"
+    "all": "78691f04ac562b87"
    },
    "row_hash": "80d415cf08e0ebfe",
    "carried": true,
-   "pass": 2
+   "pass": 8
   },
   {
    "row": "B8",
    "screen": "walk_ryan_game.notnow",
    "verdict": "PASS",
-   "line": "The second controller stays on the cushion beside him.",
-   "why": "no number disagrees with PLAN (rent Sunday, Mark's Friday); the only garments named are theirs (nightie, shorts, towel) or her naked in the shower she started",
+   "line": "Coward. / He grins without looking away from the screen.",
+   "why": "no number disagrees with PLAN (rent Sunday, Friday, number nine); the only garments named are the other people's, not hers",
    "cause": "",
    "note": false,
    "screen_hash": {
-    "text": "dba7f612cfdd5a68",
+    "text": "160b99b2e866fe1a",
+    "traits": "74c4f68e6476ecee",
     "facts": "dc79944b1aa0a816",
     "facts2": "7eac0b49ad26fea0",
-    "all": "e8fe387adb6ce6d5"
+    "all": "2d129f40cb61bacc"
    },
    "row_hash": "80d415cf08e0ebfe",
    "carried": true,
-   "pass": 2
+   "pass": 8
   },
   {
    "row": "B8",
    "screen": "walk_ryan_game.play",
    "verdict": "PASS",
-   "line": "You lose, then you win, and he throws a cushion at you like it's an insult. \"Again. Best of three.\"",
-   "why": "no number disagrees with PLAN (rent Sunday, Mark's Friday); the only garments named are theirs (nightie, shorts, towel) or her naked in the shower she started",
+   "line": "You lose, then you win, and he throws a cushion at you like it's an insult. / Again. Best of three.",
+   "why": "no number disagrees with PLAN (rent Sunday, Friday, number nine); the only garments named are the other people's, not hers",
    "cause": "",
    "note": false,
    "screen_hash": {
-    "text": "377f71608ab147cb",
+    "text": "289cbc8c56884395",
+    "traits": "74c4f68e6476ecee",
     "facts": "dc79944b1aa0a816",
     "facts2": "7eac0b49ad26fea0",
-    "all": "ca771038f77c5eff"
+    "all": "a3da739cc0766d6d"
    },
    "row_hash": "80d415cf08e0ebfe",
    "carried": true,
-   "pass": 2
+   "pass": 8
   },
   {
    "row": "B8",
    "screen": "walk_ryan_phone.away",
    "verdict": "PASS",
-   "line": "When you look back, his door's still open a crack.",
-   "why": "no number disagrees with PLAN (rent Sunday, Mark's Friday); the only garments named are theirs (nightie, shorts, towel) or her naked in the shower she started",
+   "line": "You pull back before the floorboard gives you away. / When you look back, his door's still open a crack.",
+   "why": "no number disagrees with PLAN (rent Sunday, Friday, number nine); the only garments named are the other people's, not hers",
    "cause": "",
    "note": false,
    "screen_hash": {
-    "text": "bf24341d4735640c",
+    "text": "304343848758928d",
+    "traits": "44136fa355b3678a",
     "facts": "9452bbef8a645d19",
     "facts2": "9452bbef8a645d19",
-    "all": "421434451f674b49"
+    "all": "cb04089789f4814f"
    },
    "row_hash": "80d415cf08e0ebfe",
    "carried": true,
-   "pass": 2
+   "pass": 8
   },
   {
    "row": "B8",
    "screen": "walk_ryan_phone.moment",
    "verdict": "PASS",
-   "line": "He's on his bed in his phone's light, shorts round his thighs, stroking his cock, eyes on the screen. Your face goes hot.",
-   "why": "no number disagrees with PLAN (rent Sunday, Mark's Friday); the only garments named are theirs (nightie, shorts, towel) or her naked in the shower she started",
+   "line": "Ryan's door is open a hand's width. He's on his bed in his phone's light, shorts round his thighs, stroking his cock, eyes on the screen. Your face goes hot. / ",
+   "why": "no number disagrees with PLAN (rent Sunday, Friday, number nine); the only garments named are the other people's, not hers",
    "cause": "",
    "note": false,
    "screen_hash": {
-    "text": "bfa349501d85aa26",
+    "text": "bc2dfd613888c1cc",
+    "traits": "74c4f68e6476ecee",
     "facts": "24c4b946d90ccbb4",
     "facts2": "829298a706f02a41",
-    "all": "d3596152702ff253"
+    "all": "a012f1eb60a521c0"
    },
    "row_hash": "80d415cf08e0ebfe",
    "carried": true,
-   "pass": 2
+   "pass": 8
   },
   {
    "row": "B8",
    "screen": "walk_ryan_phone.watch",
    "verdict": "PASS",
-   "line": "His hand speeds up until he comes into a sock.",
-   "why": "No number and none of her garments named on this screen",
+   "line": "His hand speeds up until he comes into a sock. / Jesus. Okay. Okay.",
+   "why": "no number disagrees with PLAN (rent Sunday, Friday, number nine); the only garments named are the other people's, not hers",
    "cause": "",
    "note": false,
    "screen_hash": {
-    "text": "2033b9ff4a48f27d",
+    "text": "9c54792da90cec47",
+    "traits": "74c4f68e6476ecee",
     "facts": "24c4b946d90ccbb4",
     "facts2": "829298a706f02a41",
-    "all": "185ff7454f125e7f"
+    "all": "b42248054a63abe1"
    },
    "row_hash": "80d415cf08e0ebfe",
    "carried": true,
-   "pass": 3
+   "pass": 8
   },
   {
    "row": "B8",
@@ -2219,18 +2264,19 @@
    "screen": "walk_parents.moment",
    "verdict": "FAIL",
    "line": "\"Mark. The kids.\" / \"Then be quiet, Laura. Be quiet for me.\"",
-   "why": "note row: two spoken lines (Laura's whisper and Mark's answer) on a repeatable",
+   "why": "note row: two spoken lines on a repeatable (\"Mark. The kids.\" and \"Then be quiet, Laura. Be quiet for me.\"), text unchanged from last pass",
    "cause": null,
    "note": true,
    "screen_hash": {
-    "text": "0f689960aa65a5e0",
+    "text": "7f828ca106b8bccf",
+    "traits": "4b9cc244e3119951",
     "facts": "4ae0ea463b0299c5",
     "facts2": "a70226de81ca7f87",
-    "all": "5295e17ddac377d2"
+    "all": "1baa72359f71d3ca"
    },
    "row_hash": "d5758757a709b1af",
    "carried": true,
-   "pass": 2
+   "pass": 8
   },
   {
    "row": "C151",
@@ -2290,6 +2336,45 @@
    "pass": 1
   },
   {
+   "row": "C1820",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "chance = 0.35",
+   "why": "one canvas each with its one bottom band (release 1, meters frozen, C2182); 0.35 is C2195's default by LO's 'Go', not a band left out",
+   "cause": null,
+   "note": true,
+   "screen_hash": "4593e0a3f0277f14",
+   "row_hash": "d8f9999d285c6607",
+   "carried": true,
+   "pass": 8
+  },
+  {
+   "row": "C1821",
+   "screen": "*",
+   "verdict": "N/A",
+   "line": "\u2014",
+   "why": "router/branch/payoff is the substitution shape; these walk-ins are random canvases at a place with no router, and release 1 has no branch",
+   "cause": null,
+   "note": true,
+   "screen_hash": "4593e0a3f0277f14",
+   "row_hash": "b9818557d5e43850",
+   "carried": true,
+   "pass": 8
+  },
+  {
+   "row": "C1864",
+   "screen": "*",
+   "verdict": "N/A",
+   "line": "\u2014",
+   "why": "no bands and no exclusive_group on these canvases in release 1",
+   "cause": null,
+   "note": true,
+   "screen_hash": "4593e0a3f0277f14",
+   "row_hash": "45e669c2511d9b8e",
+   "carried": true,
+   "pass": 8
+  },
+  {
    "row": "C2179",
    "screen": "*",
    "verdict": "PASS",
@@ -2303,17 +2388,30 @@
    "pass": 5
   },
   {
-   "row": "C2183",
+   "row": "C2186",
    "screen": "*",
-   "verdict": "PASS",
-   "line": "Laura: Submissive, Cook, Insecure (\"It's fine, baby. It's just numbers.\"); Mark: Dominant, Confident, Particular (\"Then be quiet, Laura. Be quiet for me.\"); Ryan: Submissive, Switch, Gamer (\"Ryan's on the couch with a controller, losing loudly.\")",
-   "why": "2-4 traits each, a learnable personality trait backed in the game and true on these visits",
-   "cause": null,
+   "verdict": "N/A",
+   "line": "\u2014",
+   "why": "kind (b) 'comes to her' row; every walk-in here is kind (a), she comes across something (Does: line), none written as someone coming to her",
+   "cause": "",
    "note": false,
-   "screen_hash": "e2b0b71b2e28d1a5",
-   "row_hash": "40172c2d376bfc32",
+   "screen_hash": "4593e0a3f0277f14",
+   "row_hash": "39e6f4b48d03d606",
    "carried": true,
-   "pass": 5
+   "pass": 8
+  },
+  {
+   "row": "C2187",
+   "screen": "*",
+   "verdict": "N/A",
+   "line": "\u2014",
+   "why": "kind (b) brake; these are kind (a) and correctly stay off came_to_her_today (no condition reads it, no choice sets it)",
+   "cause": "",
+   "note": false,
+   "screen_hash": "4593e0a3f0277f14",
+   "row_hash": "f2b54b1dd7c15f2f",
+   "carried": true,
+   "pass": 8
   },
   {
    "row": "C2188",
@@ -2547,7 +2645,7 @@
     "all": "544cc9be0a5337d2"
    },
    "row_hash": "0c03931191c53a34",
-   "carried": false,
+   "carried": true,
    "pass": 7
   },
   {
@@ -2566,7 +2664,7 @@
     "all": "064db9925c5a7a01"
    },
    "row_hash": "0c03931191c53a34",
-   "carried": false,
+   "carried": true,
    "pass": 7
   },
   {
@@ -2585,7 +2683,7 @@
     "all": "0cc7824cd5b790e3"
    },
    "row_hash": "0c03931191c53a34",
-   "carried": false,
+   "carried": true,
    "pass": 7
   },
   {
@@ -2604,7 +2702,7 @@
     "all": "afaeaa25d8907415"
    },
    "row_hash": "0c03931191c53a34",
-   "carried": false,
+   "carried": true,
    "pass": 7
   },
   {
@@ -2623,7 +2721,7 @@
     "all": "64d249842efe26a0"
    },
    "row_hash": "0c03931191c53a34",
-   "carried": false,
+   "carried": true,
    "pass": 7
   },
   {
@@ -2642,7 +2740,7 @@
     "all": "5a815628b17253f2"
    },
    "row_hash": "0c03931191c53a34",
-   "carried": false,
+   "carried": true,
    "pass": 7
   },
   {
@@ -2661,7 +2759,7 @@
     "all": "42b1714c182871af"
    },
    "row_hash": "0c03931191c53a34",
-   "carried": false,
+   "carried": true,
    "pass": 7
   },
   {
@@ -2680,7 +2778,7 @@
     "all": "5295e17ddac377d2"
    },
    "row_hash": "0c03931191c53a34",
-   "carried": false,
+   "carried": true,
    "pass": 7
   },
   {
@@ -2699,7 +2797,7 @@
     "all": "90662cfef0bc4dad"
    },
    "row_hash": "0c03931191c53a34",
-   "carried": false,
+   "carried": true,
    "pass": 7
   },
   {
@@ -2718,7 +2816,7 @@
     "all": "5a72a25c7e4e43c9"
    },
    "row_hash": "0c03931191c53a34",
-   "carried": false,
+   "carried": true,
    "pass": 7
   },
   {
@@ -2737,7 +2835,7 @@
     "all": "e8fe387adb6ce6d5"
    },
    "row_hash": "0c03931191c53a34",
-   "carried": false,
+   "carried": true,
    "pass": 7
   },
   {
@@ -2756,7 +2854,7 @@
     "all": "ca771038f77c5eff"
    },
    "row_hash": "0c03931191c53a34",
-   "carried": false,
+   "carried": true,
    "pass": 7
   },
   {
@@ -2775,7 +2873,7 @@
     "all": "421434451f674b49"
    },
    "row_hash": "0c03931191c53a34",
-   "carried": false,
+   "carried": true,
    "pass": 7
   },
   {
@@ -2794,7 +2892,7 @@
     "all": "d3596152702ff253"
    },
    "row_hash": "0c03931191c53a34",
-   "carried": false,
+   "carried": true,
    "pass": 7
   },
   {
@@ -2813,7 +2911,7 @@
     "all": "185ff7454f125e7f"
    },
    "row_hash": "0c03931191c53a34",
-   "carried": false,
+   "carried": true,
    "pass": 7
   },
   {
@@ -2832,7 +2930,7 @@
     "all": "eaae9b323b3bd884"
    },
    "row_hash": "0c03931191c53a34",
-   "carried": false,
+   "carried": true,
    "pass": 7
   },
   {
@@ -2851,7 +2949,7 @@
     "all": "c065010ed9d5b4d2"
    },
    "row_hash": "0c03931191c53a34",
-   "carried": false,
+   "carried": true,
    "pass": 7
   },
   {
@@ -2870,8 +2968,21 @@
     "all": "32095613619b5457"
    },
    "row_hash": "0c03931191c53a34",
-   "carried": false,
+   "carried": true,
    "pass": 7
+  },
+  {
+   "row": "C2195",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "trigger_mode = \"random\", chance = 0.35, max_triggers_per_day = 1",
+   "why": "every kind-(a) walk-in is random 0.35 once a day, gated by the person's rows and window as before, no random_cooldown override (engine default 3), never on came_to_her_today; the substitution walk-in is a different kind",
+   "cause": "",
+   "note": false,
+   "screen_hash": "4593e0a3f0277f14",
+   "row_hash": "77083291a86791c3",
+   "carried": true,
+   "pass": 8
   },
   {
    "row": "C286",
@@ -2963,6 +3074,19 @@
    "row_hash": "b920ef848ab61988",
    "carried": true,
    "pass": 1
+  },
+  {
+   "row": "C302",
+   "screen": "*",
+   "verdict": "N/A",
+   "line": "\u2014",
+   "why": "meters frozen in release 1 (C2182): no stage to add an option; the card lists being caught as later (Out of scope)",
+   "cause": null,
+   "note": true,
+   "screen_hash": "4593e0a3f0277f14",
+   "row_hash": "2ba94157c9da471e",
+   "carried": true,
+   "pass": 8
   },
   {
    "row": "C311",
@@ -3285,271 +3409,286 @@
    "row": "C460",
    "screen": "walk_mark_phone.listen",
    "verdict": "PASS",
-   "line": "He hangs up and sits there a long time, not watching the TV. / Friday. Whatever it is, it's due Friday.",
-   "why": "Mark stays in his chair till 23:00; TV is in the room (home_tv); Friday line as he said it",
+   "line": "You stay out of sight. He hangs up and sits there a long time, not watching the TV. / Friday. Whatever it is, it's due Friday.",
+   "why": "Mark 'in his chair' at home_living_room weekdays 16:30-23:00; trigger gates npc_at_location; Vance named only behind met_vance; true at first and last minute of the window and on a second visit",
    "cause": "",
    "note": false,
    "screen_hash": {
-    "text": "ea9f39f66f513ea0",
+    "text": "af631e7f8f6d9194",
+    "traits": "a13af4c65af9f24a",
     "facts": "643dd7b0173cb2a8",
     "facts2": "371b14470ce23cce",
-    "all": "544cc9be0a5337d2"
+    "all": "c26e98d8fd10c2e5"
    },
    "row_hash": "67e48e60d5053a2e",
    "carried": true,
-   "pass": 2
+   "pass": 8
   },
   {
    "row": "C460",
    "screen": "walk_mark_phone.moment",
    "verdict": "PASS",
-   "line": "Mark's in his chair, phone to his ear... \"I'll have the money Friday. I said Friday.\" / (met_vance) \"I'll have it Friday. I said Friday, Vance.\"",
-   "why": "Mon-Fri 16:30-17:00, Mark 'in his chair' from 16:30; Vance named only behind met_vance; 'Friday' still true at Friday 16:59",
+   "line": "Mark's in his chair, phone to his ear, a hand over his eyes. / I'll have it Friday. I said Friday, Vance.",
+   "why": "Mark 'in his chair' at home_living_room weekdays 16:30-23:00; trigger gates npc_at_location; Vance named only behind met_vance; read on arrival: the scene fires as she reaches the room, before its screen, so 'Listen from the hall' and 'Walk in' are both still open to her; true at first and last minute of the window and on a second visit",
    "cause": "",
    "note": false,
    "screen_hash": {
-    "text": "e7e800f7e072024b",
+    "text": "c14403bba8d4220d",
+    "traits": "a13af4c65af9f24a",
     "facts": "643dd7b0173cb2a8",
     "facts2": "371b14470ce23cce",
-    "all": "064db9925c5a7a01"
+    "all": "8840d8c240b6ef1f"
    },
    "row_hash": "67e48e60d5053a2e",
    "carried": true,
-   "pass": 2
+   "pass": 8
   },
   {
    "row": "C460",
    "screen": "walk_mark_phone.walkin",
    "verdict": "PASS",
-   "line": "He hears you and looks up, and his face shuts like a door. ... Whatever he owes, he's not telling you.",
-   "why": "Mark there; 'owes' is her read of the call, true for both variants",
+   "line": "He hears you and looks up, and his face shuts like a door. / What?",
+   "why": "Mark 'in his chair' at home_living_room weekdays 16:30-23:00; trigger gates npc_at_location; Vance named only behind met_vance; true at first and last minute of the window and on a second visit",
    "cause": "",
    "note": false,
    "screen_hash": {
-    "text": "26ac2e8be994efaf",
+    "text": "cb36a7c8c179f47d",
+    "traits": "a13af4c65af9f24a",
     "facts": "643dd7b0173cb2a8",
     "facts2": "371b14470ce23cce",
-    "all": "0cc7824cd5b790e3"
+    "all": "76963d85a72ef688"
    },
    "row_hash": "67e48e60d5053a2e",
    "carried": true,
-   "pass": 2
+   "pass": 8
   },
   {
    "row": "C460",
    "screen": "walk_mom_bills.late",
    "verdict": "PASS",
-   "line": "You know they'll still be on the table tonight.",
-   "why": "bills on the table tonight is texture/her expectation; Laura stays in the kitchen till 19:00",
+   "line": "Go. Go on, I'm fine. / She's already looking back down at the bills.",
+   "why": "Laura at home_kitchen weekdays 17:00-19:00 by her row; trigger gates npc_at_location, window 17:00-18:00; true at first and last minute of the window and on a second visit",
    "cause": "",
    "note": false,
    "screen_hash": {
-    "text": "ef6fd3deb3581a74",
+    "text": "09e3b0cc2f97e18e",
+    "traits": "95f1c22815f415ed",
     "facts": "4233727f3d0d2307",
     "facts2": "34a8649ad7102788",
-    "all": "afaeaa25d8907415"
+    "all": "3a6f3a963bcc92ac"
    },
    "row_hash": "67e48e60d5053a2e",
    "carried": true,
-   "pass": 2
+   "pass": 8
   },
   {
    "row": "C460",
    "screen": "walk_mom_bills.moment",
    "verdict": "PASS",
-   "line": "Mom's at the kitchen table with the bills spread in front of her... \"Oh. Baby. Don't look at these.\"",
-   "why": "Mon-Fri 17:00-18:00, Laura kitchen 17-19; Mark in the living room, Ryan out till 18; no one else claimed",
-   "cause": "",
+   "line": "Dinner's on the stove, and Mom's sat at the kitchen table with the bills spread in front of her and a pen she isn't using.",
+   "why": "every fact checks: Laura there by her row and the trigger's npc_at_location, dinner cooking fits 'making dinner', nobody else claimed, rent Sunday matches PLAN",
+   "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "1cd7f448b8c965cb",
+    "text": "0d852b4dad8ff4ee",
+    "traits": "95f1c22815f415ed",
     "facts": "4233727f3d0d2307",
     "facts2": "34a8649ad7102788",
-    "all": "64d249842efe26a0"
+    "all": "128e6f1356329d45"
    },
    "row_hash": "67e48e60d5053a2e",
-   "carried": true,
-   "pass": 2
+   "carried": false,
+   "pass": 9
   },
   {
    "row": "C460",
    "screen": "walk_mom_bills.sit",
    "verdict": "PASS",
-   "line": "Rent's due Sunday. She hasn't said how much is missing.",
-   "why": "rent is Sunday (P11, PLAN), true on every weekday the scene can show; the family's shortfall is the plan's hold",
-   "cause": "",
+   "line": "It's fine, baby. It's just numbers. Really. / Rent's due Sunday. She hasn't said how much is missing.",
+   "why": "every fact checks: Laura there by her row and the trigger's npc_at_location, dinner cooking fits 'making dinner', nobody else claimed, rent Sunday matches PLAN",
+   "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "a513792ac09751cf",
+    "text": "547a746593a51255",
+    "traits": "95f1c22815f415ed",
     "facts": "4233727f3d0d2307",
     "facts2": "34a8649ad7102788",
-    "all": "5a815628b17253f2"
+    "all": "1bed1fcf7f557de8"
    },
    "row_hash": "67e48e60d5053a2e",
-   "carried": true,
-   "pass": 2
+   "carried": false,
+   "pass": 9
   },
   {
    "row": "C460",
    "screen": "walk_parents.away",
    "verdict": "PASS",
-   "line": "Their door's never quite shut. You know that now.",
-   "why": "no fact beyond the hall and her door; exit Your Bedroom matches 'all the way to your door'",
+   "line": "You back down the hall on your toes. The tapping follows you all the way to your door. / Their door's never quite shut. You know that now.",
+   "why": "Laura and Mark 'in bed' at home_master_bedroom 23:00-01:00 every day by their rows; trigger gates npc_at_location on both, Mon-Fri; true at first and last minute of the window and on a second visit",
    "cause": "",
    "note": false,
    "screen_hash": {
-    "text": "bdfaab0fb7a6ba72",
+    "text": "9ff3393e0734e1e8",
+    "traits": "44136fa355b3678a",
     "facts": "9452bbef8a645d19",
     "facts2": "9452bbef8a645d19",
-    "all": "42b1714c182871af"
+    "all": "4ec41e5bdd3c080e"
    },
    "row_hash": "67e48e60d5053a2e",
    "carried": true,
-   "pass": 2
+   "pass": 8
   },
   {
    "row": "C460",
    "screen": "walk_parents.moment",
    "verdict": "PASS",
-   "line": "Their door hasn't caught. Through the gap: Mom on her back... Your face burns.",
-   "why": "trigger Mon-Fri 23:00-01:00 gated on both in home_master_bedroom; both rows 'in bed' 23:00-01:00 every day; Ryan in his room, so 'The kids' holds",
+   "line": "Their door hasn't caught. Through the gap: Mom on her back, nightie round her waist, Mark between her legs, his hand over her mouth, slamming into her so hard t",
+   "why": "Laura and Mark 'in bed' at home_master_bedroom 23:00-01:00 every day by their rows; trigger gates npc_at_location on both, Mon-Fri; read on just arriving in the hall: the door gap is what she finds there, nothing assumes she chose to look; true at first and last minute of the window and on a second visit",
    "cause": "",
    "note": false,
    "screen_hash": {
-    "text": "0f689960aa65a5e0",
+    "text": "7f828ca106b8bccf",
+    "traits": "4b9cc244e3119951",
     "facts": "4ae0ea463b0299c5",
     "facts2": "a70226de81ca7f87",
-    "all": "5295e17ddac377d2"
+    "all": "1baa72359f71d3ca"
    },
    "row_hash": "67e48e60d5053a2e",
    "carried": true,
-   "pass": 2
+   "pass": 8
   },
   {
    "row": "C460",
    "screen": "walk_parents.watch",
    "verdict": "PASS",
-   "line": "At breakfast you won't be able to look at either of them.",
-   "why": "next breakfast has both: weekdays Laura kitchen 07-08, Mark 07-07:30; Sat (after a Fri night) Laura 08-12, Mark 08-10; exit Your Bedroom matches 'back in your room'",
+   "line": "You watch until Mark grunts and goes still, and Mom's legs go slack round him. / That's it, Laura. That's it.",
+   "why": "Laura and Mark 'in bed' at home_master_bedroom 23:00-01:00 every day by their rows; trigger gates npc_at_location on both, Mon-Fri; true at first and last minute of the window and on a second visit",
    "cause": "",
    "note": false,
    "screen_hash": {
-    "text": "1b6cf3a2d6ae7b54",
+    "text": "e03514a08a342533",
+    "traits": "4b9cc244e3119951",
     "facts": "4ae0ea463b0299c5",
     "facts2": "a70226de81ca7f87",
-    "all": "90662cfef0bc4dad"
+    "all": "d54dbe75b89f56bc"
    },
    "row_hash": "67e48e60d5053a2e",
    "carried": true,
-   "pass": 2
+   "pass": 8
   },
   {
    "row": "C460",
    "screen": "walk_ryan_game.moment",
    "verdict": "PASS",
-   "line": "Ryan's on the couch with a controller, losing loudly.",
-   "why": "Sat/Sun 12:00-17:00, Ryan 'on the couch' 12-17; Mark in his chair too, not contradicted; Laura out",
+   "line": "Ryan's on the couch with a controller, losing loudly. / Want a go? You can't be worse than me.",
+   "why": "Ryan 'on the couch' at home_living_room Sat/Sun 12:00-17:00; trigger gates npc_at_location; window ends as his row ends; read on just arriving in the living room: Ryan on the couch, his offer is to her as she comes in; true at first and last minute of the window and on a second visit",
    "cause": "",
    "note": false,
    "screen_hash": {
-    "text": "5761dbfb3262f770",
+    "text": "c2fc8528c8a17f52",
+    "traits": "74c4f68e6476ecee",
     "facts": "dc79944b1aa0a816",
     "facts2": "7eac0b49ad26fea0",
-    "all": "5a72a25c7e4e43c9"
+    "all": "78691f04ac562b87"
    },
    "row_hash": "67e48e60d5053a2e",
    "carried": true,
-   "pass": 2
+   "pass": 8
   },
   {
    "row": "C460",
    "screen": "walk_ryan_game.notnow",
    "verdict": "PASS",
-   "line": "The second controller stays on the cushion beside him.",
-   "why": "Ryan still on the couch; texture only",
+   "line": "Coward. / He grins without looking away from the screen.",
+   "why": "Ryan 'on the couch' at home_living_room Sat/Sun 12:00-17:00; trigger gates npc_at_location; window ends as his row ends; true at first and last minute of the window and on a second visit",
    "cause": "",
    "note": false,
    "screen_hash": {
-    "text": "dba7f612cfdd5a68",
+    "text": "160b99b2e866fe1a",
+    "traits": "74c4f68e6476ecee",
     "facts": "dc79944b1aa0a816",
     "facts2": "7eac0b49ad26fea0",
-    "all": "e8fe387adb6ce6d5"
+    "all": "2d129f40cb61bacc"
    },
    "row_hash": "67e48e60d5053a2e",
    "carried": true,
-   "pass": 2
+   "pass": 8
   },
   {
    "row": "C460",
    "screen": "walk_ryan_game.play",
    "verdict": "PASS",
-   "line": "You lose, then you win, and he throws a cushion at you like it's an insult. \"Again. Best of three.\"",
-   "why": "no time, day or presence claim beyond Ryan on the couch; 'Best of three' is dialogue",
+   "line": "You lose, then you win, and he throws a cushion at you like it's an insult. / Again. Best of three.",
+   "why": "Ryan 'on the couch' at home_living_room Sat/Sun 12:00-17:00; trigger gates npc_at_location; window ends as his row ends; true at first and last minute of the window and on a second visit",
    "cause": "",
    "note": false,
    "screen_hash": {
-    "text": "377f71608ab147cb",
+    "text": "289cbc8c56884395",
+    "traits": "74c4f68e6476ecee",
     "facts": "dc79944b1aa0a816",
     "facts2": "7eac0b49ad26fea0",
-    "all": "ca771038f77c5eff"
+    "all": "a3da739cc0766d6d"
    },
    "row_hash": "67e48e60d5053a2e",
    "carried": true,
-   "pass": 2
+   "pass": 8
   },
   {
    "row": "C460",
    "screen": "walk_ryan_phone.away",
    "verdict": "PASS",
-   "line": "When you look back, his door's still open a crack.",
-   "why": "door and floorboard only; exit stays in the hall, where she is",
+   "line": "You pull back before the floorboard gives you away. / When you look back, his door's still open a crack.",
+   "why": "Ryan 'on his phone' at home_ryans_room weekdays 23:00-01:00 (asleep from 01:00); trigger gates npc_at_location; true at first and last minute of the window and on a second visit",
    "cause": "",
    "note": false,
    "screen_hash": {
-    "text": "bf24341d4735640c",
+    "text": "304343848758928d",
+    "traits": "44136fa355b3678a",
     "facts": "9452bbef8a645d19",
     "facts2": "9452bbef8a645d19",
-    "all": "421434451f674b49"
+    "all": "cb04089789f4814f"
    },
    "row_hash": "67e48e60d5053a2e",
    "carried": true,
-   "pass": 2
+   "pass": 8
   },
   {
    "row": "C460",
    "screen": "walk_ryan_phone.moment",
    "verdict": "PASS",
-   "line": "He's on his bed in his phone's light, shorts round his thighs, stroking his cock, eyes on the screen. Your face goes hot.",
-   "why": "trigger Mon-Fri 23:00-01:00 + Ryan in home_ryans_room; his rows read 'on his phone' 23:00-01:00 (Mon 00-01 too), so the act shows what he was doing (L97)",
+   "line": "Ryan's door is open a hand's width. He's on his bed in his phone's light, shorts round his thighs, stroking his cock, eyes on the screen. Your face goes hot. / ",
+   "why": "Ryan 'on his phone' at home_ryans_room weekdays 23:00-01:00 (asleep from 01:00); trigger gates npc_at_location; read on just arriving in the hall: his open door is what she finds, nothing assumes she went to look; true at first and last minute of the window and on a second visit",
    "cause": "",
    "note": false,
    "screen_hash": {
-    "text": "bfa349501d85aa26",
+    "text": "bc2dfd613888c1cc",
+    "traits": "74c4f68e6476ecee",
     "facts": "24c4b946d90ccbb4",
     "facts2": "829298a706f02a41",
-    "all": "d3596152702ff253"
+    "all": "a012f1eb60a521c0"
    },
    "row_hash": "67e48e60d5053a2e",
    "carried": true,
-   "pass": 2
+   "pass": 8
   },
   {
    "row": "C460",
    "screen": "walk_ryan_phone.watch",
    "verdict": "PASS",
-   "line": "You'll pass his door again tomorrow night.",
-   "why": "True at 23:00 and 00:59 on every weekday night it fires; no past claimed, no breakfast",
+   "line": "His hand speeds up until he comes into a sock. / Jesus. Okay. Okay.",
+   "why": "Ryan 'on his phone' at home_ryans_room weekdays 23:00-01:00 (asleep from 01:00); trigger gates npc_at_location; true at first and last minute of the window and on a second visit",
    "cause": "",
    "note": false,
    "screen_hash": {
-    "text": "2033b9ff4a48f27d",
+    "text": "9c54792da90cec47",
+    "traits": "74c4f68e6476ecee",
     "facts": "24c4b946d90ccbb4",
     "facts2": "829298a706f02a41",
-    "all": "185ff7454f125e7f"
+    "all": "b42248054a63abe1"
    },
    "row_hash": "67e48e60d5053a2e",
    "carried": true,
-   "pass": 3
+   "pass": 8
   },
   {
    "row": "C460",
@@ -3622,271 +3761,286 @@
    "row": "C461",
    "screen": "walk_mark_phone.listen",
    "verdict": "PASS",
-   "line": "He hangs up and sits there a long time, not watching the TV. / Friday. Whatever it is, it's due Friday.",
-   "why": "texture, her reaction, and dialogue in each person's manner (Mom 'baby', Mark curt, Ryan joking/swearing)",
+   "line": "You stay out of sight. He hangs up and sits there a long time, not watching the TV. / Friday. Whatever it is, it's due Friday.",
+   "why": "texture and her reaction only; nothing that can clash with rows, clock or flags",
    "cause": "",
    "note": false,
    "screen_hash": {
-    "text": "ea9f39f66f513ea0",
+    "text": "af631e7f8f6d9194",
+    "traits": "a13af4c65af9f24a",
     "facts": "643dd7b0173cb2a8",
     "facts2": "371b14470ce23cce",
-    "all": "544cc9be0a5337d2"
+    "all": "c26e98d8fd10c2e5"
    },
    "row_hash": "310706ee076318f2",
    "carried": true,
-   "pass": 2
+   "pass": 8
   },
   {
    "row": "C461",
    "screen": "walk_mark_phone.moment",
    "verdict": "PASS",
-   "line": "Mark's in his chair, phone to his ear... \"I'll have the money Friday. I said Friday.\" / (met_vance) \"I'll have it Friday. I said Friday, Vance.\"",
-   "why": "texture, her reaction, and dialogue in each person's manner (Mom 'baby', Mark curt, Ryan joking/swearing)",
+   "line": "Mark's in his chair, phone to his ear, a hand over his eyes. / I'll have it Friday. I said Friday, Vance.",
+   "why": "texture and her reaction only; nothing that can clash with rows, clock or flags",
    "cause": "",
    "note": false,
    "screen_hash": {
-    "text": "e7e800f7e072024b",
+    "text": "c14403bba8d4220d",
+    "traits": "a13af4c65af9f24a",
     "facts": "643dd7b0173cb2a8",
     "facts2": "371b14470ce23cce",
-    "all": "064db9925c5a7a01"
+    "all": "8840d8c240b6ef1f"
    },
    "row_hash": "310706ee076318f2",
    "carried": true,
-   "pass": 2
+   "pass": 8
   },
   {
    "row": "C461",
    "screen": "walk_mark_phone.walkin",
    "verdict": "PASS",
-   "line": "He hears you and looks up, and his face shuts like a door. ... Whatever he owes, he's not telling you.",
-   "why": "texture, her reaction, and dialogue in each person's manner (Mom 'baby', Mark curt, Ryan joking/swearing)",
+   "line": "He hears you and looks up, and his face shuts like a door. / What?",
+   "why": "texture and her reaction only; nothing that can clash with rows, clock or flags",
    "cause": "",
    "note": false,
    "screen_hash": {
-    "text": "26ac2e8be994efaf",
+    "text": "cb36a7c8c179f47d",
+    "traits": "a13af4c65af9f24a",
     "facts": "643dd7b0173cb2a8",
     "facts2": "371b14470ce23cce",
-    "all": "0cc7824cd5b790e3"
+    "all": "76963d85a72ef688"
    },
    "row_hash": "310706ee076318f2",
    "carried": true,
-   "pass": 2
+   "pass": 8
   },
   {
    "row": "C461",
    "screen": "walk_mom_bills.late",
    "verdict": "PASS",
-   "line": "You know they'll still be on the table tonight.",
-   "why": "texture, her reaction, and dialogue in each person's manner (Mom 'baby', Mark curt, Ryan joking/swearing)",
+   "line": "Go. Go on, I'm fine. / She's already looking back down at the bills.",
+   "why": "texture and her reaction only; nothing that can clash with rows, clock or flags",
    "cause": "",
    "note": false,
    "screen_hash": {
-    "text": "ef6fd3deb3581a74",
+    "text": "09e3b0cc2f97e18e",
+    "traits": "95f1c22815f415ed",
     "facts": "4233727f3d0d2307",
     "facts2": "34a8649ad7102788",
-    "all": "afaeaa25d8907415"
+    "all": "3a6f3a963bcc92ac"
    },
    "row_hash": "310706ee076318f2",
    "carried": true,
-   "pass": 2
+   "pass": 8
   },
   {
    "row": "C461",
    "screen": "walk_mom_bills.moment",
    "verdict": "PASS",
-   "line": "Mom's at the kitchen table with the bills spread in front of her... \"Oh. Baby. Don't look at these.\"",
-   "why": "texture, her reaction, and dialogue in each person's manner (Mom 'baby', Mark curt, Ryan joking/swearing)",
-   "cause": "",
+   "line": "Dinner's on the stove, and Mom's sat at the kitchen table with the bills spread in front of her and a pen she isn't using.",
+   "why": "her line is Laura's warm, gives-way register with her 'baby'; the rest is texture and her reaction",
+   "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "1cd7f448b8c965cb",
+    "text": "0d852b4dad8ff4ee",
+    "traits": "95f1c22815f415ed",
     "facts": "4233727f3d0d2307",
     "facts2": "34a8649ad7102788",
-    "all": "64d249842efe26a0"
+    "all": "128e6f1356329d45"
    },
    "row_hash": "310706ee076318f2",
-   "carried": true,
-   "pass": 2
+   "carried": false,
+   "pass": 9
   },
   {
    "row": "C461",
    "screen": "walk_mom_bills.sit",
    "verdict": "PASS",
-   "line": "Rent's due Sunday. She hasn't said how much is missing.",
-   "why": "texture, her reaction, and dialogue in each person's manner (Mom 'baby', Mark curt, Ryan joking/swearing)",
-   "cause": "",
+   "line": "It's fine, baby. It's just numbers. Really. / Rent's due Sunday. She hasn't said how much is missing.",
+   "why": "her line is Laura's warm, gives-way register with her 'baby'; the rest is texture and her reaction",
+   "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "a513792ac09751cf",
+    "text": "547a746593a51255",
+    "traits": "95f1c22815f415ed",
     "facts": "4233727f3d0d2307",
     "facts2": "34a8649ad7102788",
-    "all": "5a815628b17253f2"
+    "all": "1bed1fcf7f557de8"
    },
    "row_hash": "310706ee076318f2",
-   "carried": true,
-   "pass": 2
+   "carried": false,
+   "pass": 9
   },
   {
    "row": "C461",
    "screen": "walk_parents.away",
    "verdict": "PASS",
-   "line": "Their door's never quite shut. You know that now.",
-   "why": "texture, her reaction, and dialogue in each person's manner (Mom 'baby', Mark curt, Ryan joking/swearing)",
+   "line": "You back down the hall on your toes. The tapping follows you all the way to your door. / Their door's never quite shut. You know that now.",
+   "why": "texture and her reaction only; nothing that can clash with rows, clock or flags",
    "cause": "",
    "note": false,
    "screen_hash": {
-    "text": "bdfaab0fb7a6ba72",
+    "text": "9ff3393e0734e1e8",
+    "traits": "44136fa355b3678a",
     "facts": "9452bbef8a645d19",
     "facts2": "9452bbef8a645d19",
-    "all": "42b1714c182871af"
+    "all": "4ec41e5bdd3c080e"
    },
    "row_hash": "310706ee076318f2",
    "carried": true,
-   "pass": 2
+   "pass": 8
   },
   {
    "row": "C461",
    "screen": "walk_parents.moment",
    "verdict": "PASS",
-   "line": "Their door hasn't caught. Through the gap: Mom on her back... Your face burns.",
-   "why": "texture, her reaction, and dialogue in each person's manner (Mom 'baby', Mark curt, Ryan joking/swearing)",
+   "line": "Their door hasn't caught. Through the gap: Mom on her back, nightie round her waist, Mark between her legs, his hand over her mouth, slamming into her so hard t",
+   "why": "texture and her reaction only; nothing that can clash with rows, clock or flags",
    "cause": "",
    "note": false,
    "screen_hash": {
-    "text": "0f689960aa65a5e0",
+    "text": "7f828ca106b8bccf",
+    "traits": "4b9cc244e3119951",
     "facts": "4ae0ea463b0299c5",
     "facts2": "a70226de81ca7f87",
-    "all": "5295e17ddac377d2"
+    "all": "1baa72359f71d3ca"
    },
    "row_hash": "310706ee076318f2",
    "carried": true,
-   "pass": 2
+   "pass": 8
   },
   {
    "row": "C461",
    "screen": "walk_parents.watch",
    "verdict": "PASS",
-   "line": "At breakfast you won't be able to look at either of them.",
-   "why": "texture, her reaction, and dialogue in each person's manner (Mom 'baby', Mark curt, Ryan joking/swearing)",
+   "line": "You watch until Mark grunts and goes still, and Mom's legs go slack round him. / That's it, Laura. That's it.",
+   "why": "texture and her reaction only; nothing that can clash with rows, clock or flags",
    "cause": "",
    "note": false,
    "screen_hash": {
-    "text": "1b6cf3a2d6ae7b54",
+    "text": "e03514a08a342533",
+    "traits": "4b9cc244e3119951",
     "facts": "4ae0ea463b0299c5",
     "facts2": "a70226de81ca7f87",
-    "all": "90662cfef0bc4dad"
+    "all": "d54dbe75b89f56bc"
    },
    "row_hash": "310706ee076318f2",
    "carried": true,
-   "pass": 2
+   "pass": 8
   },
   {
    "row": "C461",
    "screen": "walk_ryan_game.moment",
    "verdict": "PASS",
-   "line": "Ryan's on the couch with a controller, losing loudly.",
-   "why": "texture, her reaction, and dialogue in each person's manner (Mom 'baby', Mark curt, Ryan joking/swearing)",
+   "line": "Ryan's on the couch with a controller, losing loudly. / Want a go? You can't be worse than me.",
+   "why": "texture and her reaction only; nothing that can clash with rows, clock or flags",
    "cause": "",
    "note": false,
    "screen_hash": {
-    "text": "5761dbfb3262f770",
+    "text": "c2fc8528c8a17f52",
+    "traits": "74c4f68e6476ecee",
     "facts": "dc79944b1aa0a816",
     "facts2": "7eac0b49ad26fea0",
-    "all": "5a72a25c7e4e43c9"
+    "all": "78691f04ac562b87"
    },
    "row_hash": "310706ee076318f2",
    "carried": true,
-   "pass": 2
+   "pass": 8
   },
   {
    "row": "C461",
    "screen": "walk_ryan_game.notnow",
    "verdict": "PASS",
-   "line": "The second controller stays on the cushion beside him.",
-   "why": "texture, her reaction, and dialogue in each person's manner (Mom 'baby', Mark curt, Ryan joking/swearing)",
+   "line": "Coward. / He grins without looking away from the screen.",
+   "why": "texture and her reaction only; nothing that can clash with rows, clock or flags",
    "cause": "",
    "note": false,
    "screen_hash": {
-    "text": "dba7f612cfdd5a68",
+    "text": "160b99b2e866fe1a",
+    "traits": "74c4f68e6476ecee",
     "facts": "dc79944b1aa0a816",
     "facts2": "7eac0b49ad26fea0",
-    "all": "e8fe387adb6ce6d5"
+    "all": "2d129f40cb61bacc"
    },
    "row_hash": "310706ee076318f2",
    "carried": true,
-   "pass": 2
+   "pass": 8
   },
   {
    "row": "C461",
    "screen": "walk_ryan_game.play",
    "verdict": "PASS",
-   "line": "You lose, then you win, and he throws a cushion at you like it's an insult. \"Again. Best of three.\"",
-   "why": "texture, her reaction, and dialogue in each person's manner (Mom 'baby', Mark curt, Ryan joking/swearing)",
+   "line": "You lose, then you win, and he throws a cushion at you like it's an insult. / Again. Best of three.",
+   "why": "texture and her reaction only; nothing that can clash with rows, clock or flags",
    "cause": "",
    "note": false,
    "screen_hash": {
-    "text": "377f71608ab147cb",
+    "text": "289cbc8c56884395",
+    "traits": "74c4f68e6476ecee",
     "facts": "dc79944b1aa0a816",
     "facts2": "7eac0b49ad26fea0",
-    "all": "ca771038f77c5eff"
+    "all": "a3da739cc0766d6d"
    },
    "row_hash": "310706ee076318f2",
    "carried": true,
-   "pass": 2
+   "pass": 8
   },
   {
    "row": "C461",
    "screen": "walk_ryan_phone.away",
    "verdict": "PASS",
-   "line": "When you look back, his door's still open a crack.",
-   "why": "texture, her reaction, and dialogue in each person's manner (Mom 'baby', Mark curt, Ryan joking/swearing)",
+   "line": "You pull back before the floorboard gives you away. / When you look back, his door's still open a crack.",
+   "why": "texture and her reaction only; nothing that can clash with rows, clock or flags",
    "cause": "",
    "note": false,
    "screen_hash": {
-    "text": "bf24341d4735640c",
+    "text": "304343848758928d",
+    "traits": "44136fa355b3678a",
     "facts": "9452bbef8a645d19",
     "facts2": "9452bbef8a645d19",
-    "all": "421434451f674b49"
+    "all": "cb04089789f4814f"
    },
    "row_hash": "310706ee076318f2",
    "carried": true,
-   "pass": 2
+   "pass": 8
   },
   {
    "row": "C461",
    "screen": "walk_ryan_phone.moment",
    "verdict": "PASS",
-   "line": "He's on his bed in his phone's light, shorts round his thighs, stroking his cock, eyes on the screen. Your face goes hot.",
-   "why": "texture, her reaction, and dialogue in each person's manner (Mom 'baby', Mark curt, Ryan joking/swearing)",
+   "line": "Ryan's door is open a hand's width. He's on his bed in his phone's light, shorts round his thighs, stroking his cock, eyes on the screen. Your face goes hot. / ",
+   "why": "texture and her reaction only; nothing that can clash with rows, clock or flags",
    "cause": "",
    "note": false,
    "screen_hash": {
-    "text": "bfa349501d85aa26",
+    "text": "bc2dfd613888c1cc",
+    "traits": "74c4f68e6476ecee",
     "facts": "24c4b946d90ccbb4",
     "facts2": "829298a706f02a41",
-    "all": "d3596152702ff253"
+    "all": "a012f1eb60a521c0"
    },
    "row_hash": "310706ee076318f2",
    "carried": true,
-   "pass": 2
+   "pass": 8
   },
   {
    "row": "C461",
    "screen": "walk_ryan_phone.watch",
    "verdict": "PASS",
-   "line": "Jesus. Okay. Okay.",
-   "why": "Ryan's line fits him, about himself, nothing about her (walk-ins step 13)",
+   "line": "His hand speeds up until he comes into a sock. / Jesus. Okay. Okay.",
+   "why": "texture and her reaction only; nothing that can clash with rows, clock or flags",
    "cause": "",
    "note": false,
    "screen_hash": {
-    "text": "2033b9ff4a48f27d",
+    "text": "9c54792da90cec47",
+    "traits": "74c4f68e6476ecee",
     "facts": "24c4b946d90ccbb4",
     "facts2": "829298a706f02a41",
-    "all": "185ff7454f125e7f"
+    "all": "b42248054a63abe1"
    },
    "row_hash": "310706ee076318f2",
    "carried": true,
-   "pass": 3
+   "pass": 8
   },
   {
    "row": "C461",
@@ -4122,6 +4276,19 @@
    "pass": 1
   },
   {
+   "row": "C724",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "chance 0.35",
+   "why": "flat odds, listed on the card's Changed line with LO's '2nd one', 'Go'",
+   "cause": null,
+   "note": true,
+   "screen_hash": "4593e0a3f0277f14",
+   "row_hash": "37e21685569ccea7",
+   "carried": true,
+   "pass": 8
+  },
+  {
    "row": "C758",
    "screen": "*",
    "verdict": "PASS",
@@ -4239,6 +4406,32 @@
    "pass": 1
   },
   {
+   "row": "C788",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "",
+   "why": "moments run about 20-55 words, three of five everyday (plus the substitution), every one with a choice; who is there sets the tone",
+   "cause": "",
+   "note": false,
+   "screen_hash": "4593e0a3f0277f14",
+   "row_hash": "cae1598ef9cb6ff1",
+   "carried": true,
+   "pass": 8
+  },
+  {
+   "row": "C792",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "",
+   "why": "each is the moment, then one answer screen per choice; no third screen",
+   "cause": null,
+   "note": true,
+   "screen_hash": "4593e0a3f0277f14",
+   "row_hash": "92be110855d5a128",
+   "carried": true,
+   "pass": 8
+  },
+  {
    "row": "C794",
    "screen": "*",
    "verdict": "PASS",
@@ -4276,6 +4469,45 @@
    "row_hash": "5358489178bff0a4",
    "carried": true,
    "pass": 1
+  },
+  {
+   "row": "C855",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "",
+   "why": "filtered by hours, weekday, who is here (npc_at_location) and met flags; wear and meters frozen in release 1",
+   "cause": null,
+   "note": true,
+   "screen_hash": "4593e0a3f0277f14",
+   "row_hash": "d3dc77f2f96e20ae",
+   "carried": true,
+   "pass": 8
+  },
+  {
+   "row": "C856",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "",
+   "why": "every scene carries a time window",
+   "cause": null,
+   "note": true,
+   "screen_hash": "4593e0a3f0277f14",
+   "row_hash": "9c58ec7792f1f95a",
+   "carried": true,
+   "pass": 8
+  },
+  {
+   "row": "C859",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "",
+   "why": "release 1 pays flags only (C2182), so no scene takes anything yet; the row allows it, it doesn't demand it",
+   "cause": null,
+   "note": true,
+   "screen_hash": "4593e0a3f0277f14",
+   "row_hash": "c504ec577b14e288",
+   "carried": true,
+   "pass": 8
   },
   {
    "row": "C889",
@@ -4728,181 +4960,191 @@
    "row": "C927",
    "screen": "walk_mark_phone.listen",
    "verdict": "PASS",
-   "line": "He hangs up and sits there a long time, not watching the TV. / Friday. Whatever it is, it's due Friday.",
-   "why": "Done sets time_progression_minutes = 5; no bare exit",
+   "line": "You stay out of sight. He hangs up and sits there a long time, not watching the TV. / Friday. Whatever it is, it's due Friday.",
+   "why": "node hops are inside the scene; Done costs time_progression_minutes = 5, no bare exit",
    "cause": null,
    "note": true,
    "screen_hash": {
-    "text": "ea9f39f66f513ea0",
+    "text": "af631e7f8f6d9194",
+    "traits": "a13af4c65af9f24a",
     "facts": "643dd7b0173cb2a8",
     "facts2": "371b14470ce23cce",
-    "all": "544cc9be0a5337d2"
+    "all": "c26e98d8fd10c2e5"
    },
    "row_hash": "4e86d143688ba8e5",
    "carried": true,
-   "pass": 2
+   "pass": 8
   },
   {
    "row": "C927",
    "screen": "walk_mark_phone.walkin",
    "verdict": "PASS",
-   "line": "He hears you and looks up, and his face shuts like a door. ... Whatever he owes, he's not telling you.",
-   "why": "Done sets time_progression_minutes = 5; no bare exit",
+   "line": "He hears you and looks up, and his face shuts like a door. / What?",
+   "why": "node hops are inside the scene; Done costs time_progression_minutes = 5, no bare exit",
    "cause": null,
    "note": true,
    "screen_hash": {
-    "text": "26ac2e8be994efaf",
+    "text": "cb36a7c8c179f47d",
+    "traits": "a13af4c65af9f24a",
     "facts": "643dd7b0173cb2a8",
     "facts2": "371b14470ce23cce",
-    "all": "0cc7824cd5b790e3"
+    "all": "76963d85a72ef688"
    },
    "row_hash": "4e86d143688ba8e5",
    "carried": true,
-   "pass": 2
+   "pass": 8
   },
   {
    "row": "C927",
    "screen": "walk_mom_bills.late",
    "verdict": "PASS",
-   "line": "You know they'll still be on the table tonight.",
-   "why": "Done sets time_progression_minutes = 5; no bare exit",
+   "line": "Go. Go on, I'm fine. / She's already looking back down at the bills.",
+   "why": "node hops are inside the scene; Done costs time_progression_minutes = 5, no bare exit",
    "cause": null,
    "note": true,
    "screen_hash": {
-    "text": "ef6fd3deb3581a74",
+    "text": "09e3b0cc2f97e18e",
+    "traits": "95f1c22815f415ed",
     "facts": "4233727f3d0d2307",
     "facts2": "34a8649ad7102788",
-    "all": "afaeaa25d8907415"
+    "all": "3a6f3a963bcc92ac"
    },
    "row_hash": "4e86d143688ba8e5",
    "carried": true,
-   "pass": 2
+   "pass": 8
   },
   {
    "row": "C927",
    "screen": "walk_mom_bills.sit",
    "verdict": "PASS",
-   "line": "Rent's due Sunday. She hasn't said how much is missing.",
-   "why": "Done sets time_progression_minutes = 5; no bare exit",
+   "line": "It's fine, baby. It's just numbers. Really. / Rent's due Sunday. She hasn't said how much is missing.",
+   "why": "Done costs time_progression_minutes = 5; the in-scene hops are node moves",
    "cause": null,
    "note": true,
    "screen_hash": {
-    "text": "a513792ac09751cf",
+    "text": "547a746593a51255",
+    "traits": "95f1c22815f415ed",
     "facts": "4233727f3d0d2307",
     "facts2": "34a8649ad7102788",
-    "all": "5a815628b17253f2"
+    "all": "1bed1fcf7f557de8"
    },
    "row_hash": "4e86d143688ba8e5",
-   "carried": true,
-   "pass": 2
+   "carried": false,
+   "pass": 9
   },
   {
    "row": "C927",
    "screen": "walk_parents.away",
    "verdict": "PASS",
-   "line": "Their door's never quite shut. You know that now.",
-   "why": "Done sets time_progression_minutes = 5; no bare exit",
+   "line": "You back down the hall on your toes. The tapping follows you all the way to your door. / Their door's never quite shut. You know that now.",
+   "why": "node hops are inside the scene; Done costs time_progression_minutes = 5, no bare exit",
    "cause": null,
    "note": true,
    "screen_hash": {
-    "text": "bdfaab0fb7a6ba72",
+    "text": "9ff3393e0734e1e8",
+    "traits": "44136fa355b3678a",
     "facts": "9452bbef8a645d19",
     "facts2": "9452bbef8a645d19",
-    "all": "42b1714c182871af"
+    "all": "4ec41e5bdd3c080e"
    },
    "row_hash": "4e86d143688ba8e5",
    "carried": true,
-   "pass": 2
+   "pass": 8
   },
   {
    "row": "C927",
    "screen": "walk_parents.watch",
    "verdict": "PASS",
-   "line": "At breakfast you won't be able to look at either of them.",
-   "why": "Done sets time_progression_minutes = 5; no bare exit",
+   "line": "You watch until Mark grunts and goes still, and Mom's legs go slack round him. / That's it, Laura. That's it.",
+   "why": "node hops are inside the scene; Done costs time_progression_minutes = 5, no bare exit",
    "cause": null,
    "note": true,
    "screen_hash": {
-    "text": "1b6cf3a2d6ae7b54",
+    "text": "e03514a08a342533",
+    "traits": "4b9cc244e3119951",
     "facts": "4ae0ea463b0299c5",
     "facts2": "a70226de81ca7f87",
-    "all": "90662cfef0bc4dad"
+    "all": "d54dbe75b89f56bc"
    },
    "row_hash": "4e86d143688ba8e5",
    "carried": true,
-   "pass": 2
+   "pass": 8
   },
   {
    "row": "C927",
    "screen": "walk_ryan_game.notnow",
    "verdict": "PASS",
-   "line": "The second controller stays on the cushion beside him.",
-   "why": "Done sets time_progression_minutes = 5; no bare exit",
+   "line": "Coward. / He grins without looking away from the screen.",
+   "why": "node hops are inside the scene; Done costs time_progression_minutes = 5, no bare exit",
    "cause": null,
    "note": true,
    "screen_hash": {
-    "text": "dba7f612cfdd5a68",
+    "text": "160b99b2e866fe1a",
+    "traits": "74c4f68e6476ecee",
     "facts": "dc79944b1aa0a816",
     "facts2": "7eac0b49ad26fea0",
-    "all": "e8fe387adb6ce6d5"
+    "all": "2d129f40cb61bacc"
    },
    "row_hash": "4e86d143688ba8e5",
    "carried": true,
-   "pass": 2
+   "pass": 8
   },
   {
    "row": "C927",
    "screen": "walk_ryan_game.play",
    "verdict": "PASS",
-   "line": "You lose, then you win, and he throws a cushion at you like it's an insult. \"Again. Best of three.\"",
-   "why": "Done sets time_progression_minutes = 5; no bare exit",
+   "line": "You lose, then you win, and he throws a cushion at you like it's an insult. / Again. Best of three.",
+   "why": "node hops are inside the scene; Done costs time_progression_minutes = 5, no bare exit",
    "cause": null,
    "note": true,
    "screen_hash": {
-    "text": "377f71608ab147cb",
+    "text": "289cbc8c56884395",
+    "traits": "74c4f68e6476ecee",
     "facts": "dc79944b1aa0a816",
     "facts2": "7eac0b49ad26fea0",
-    "all": "ca771038f77c5eff"
+    "all": "a3da739cc0766d6d"
    },
    "row_hash": "4e86d143688ba8e5",
    "carried": true,
-   "pass": 2
+   "pass": 8
   },
   {
    "row": "C927",
    "screen": "walk_ryan_phone.away",
    "verdict": "PASS",
-   "line": "When you look back, his door's still open a crack.",
-   "why": "Done sets time_progression_minutes = 5; no bare exit",
+   "line": "You pull back before the floorboard gives you away. / When you look back, his door's still open a crack.",
+   "why": "node hops are inside the scene; Done costs time_progression_minutes = 5, no bare exit",
    "cause": null,
    "note": true,
    "screen_hash": {
-    "text": "bf24341d4735640c",
+    "text": "304343848758928d",
+    "traits": "44136fa355b3678a",
     "facts": "9452bbef8a645d19",
     "facts2": "9452bbef8a645d19",
-    "all": "421434451f674b49"
+    "all": "cb04089789f4814f"
    },
    "row_hash": "4e86d143688ba8e5",
    "carried": true,
-   "pass": 2
+   "pass": 8
   },
   {
    "row": "C927",
    "screen": "walk_ryan_phone.watch",
    "verdict": "PASS",
-   "line": "Done (5 min) to home_hall",
-   "why": "Exit spends 5 minutes, at or over 3",
+   "line": "His hand speeds up until he comes into a sock. / Jesus. Okay. Okay.",
+   "why": "node hops are inside the scene; Done costs time_progression_minutes = 5, no bare exit",
    "cause": null,
    "note": true,
    "screen_hash": {
-    "text": "2033b9ff4a48f27d",
+    "text": "9c54792da90cec47",
+    "traits": "74c4f68e6476ecee",
     "facts": "24c4b946d90ccbb4",
     "facts2": "829298a706f02a41",
-    "all": "185ff7454f125e7f"
+    "all": "b42248054a63abe1"
    },
    "row_hash": "4e86d143688ba8e5",
    "carried": true,
-   "pass": 3
+   "pass": 8
   },
   {
    "row": "C927",
@@ -5050,181 +5292,191 @@
    "row": "C931",
    "screen": "walk_mark_phone.listen",
    "verdict": "PASS",
-   "line": "He hangs up and sits there a long time, not watching the TV. / Friday. Whatever it is, it's due Friday.",
-   "why": "windows read end-exclusive and wrap as the rows do (23:00-01:00; 12:00-17:00 ends as Ryan's row ends)",
+   "line": "You stay out of sight. He hangs up and sits there a long time, not watching the TV. / Friday. Whatever it is, it's due Friday.",
+   "why": "window read end-exclusive and wrapping as the rows do (23:00-01:00 on the weekday of the current day, like the schedule rows)",
    "cause": null,
    "note": true,
    "screen_hash": {
-    "text": "ea9f39f66f513ea0",
+    "text": "af631e7f8f6d9194",
+    "traits": "a13af4c65af9f24a",
     "facts": "643dd7b0173cb2a8",
     "facts2": "371b14470ce23cce",
-    "all": "544cc9be0a5337d2"
+    "all": "c26e98d8fd10c2e5"
    },
    "row_hash": "1aadffd96e76381c",
    "carried": true,
-   "pass": 2
+   "pass": 8
   },
   {
    "row": "C931",
    "screen": "walk_mark_phone.walkin",
    "verdict": "PASS",
-   "line": "He hears you and looks up, and his face shuts like a door. ... Whatever he owes, he's not telling you.",
-   "why": "windows read end-exclusive and wrap as the rows do (23:00-01:00; 12:00-17:00 ends as Ryan's row ends)",
+   "line": "He hears you and looks up, and his face shuts like a door. / What?",
+   "why": "window read end-exclusive and wrapping as the rows do (23:00-01:00 on the weekday of the current day, like the schedule rows)",
    "cause": null,
    "note": true,
    "screen_hash": {
-    "text": "26ac2e8be994efaf",
+    "text": "cb36a7c8c179f47d",
+    "traits": "a13af4c65af9f24a",
     "facts": "643dd7b0173cb2a8",
     "facts2": "371b14470ce23cce",
-    "all": "0cc7824cd5b790e3"
+    "all": "76963d85a72ef688"
    },
    "row_hash": "1aadffd96e76381c",
    "carried": true,
-   "pass": 2
+   "pass": 8
   },
   {
    "row": "C931",
    "screen": "walk_mom_bills.late",
    "verdict": "PASS",
-   "line": "You know they'll still be on the table tonight.",
-   "why": "windows read end-exclusive and wrap as the rows do (23:00-01:00; 12:00-17:00 ends as Ryan's row ends)",
+   "line": "Go. Go on, I'm fine. / She's already looking back down at the bills.",
+   "why": "window read end-exclusive and wrapping as the rows do (23:00-01:00 on the weekday of the current day, like the schedule rows)",
    "cause": null,
    "note": true,
    "screen_hash": {
-    "text": "ef6fd3deb3581a74",
+    "text": "09e3b0cc2f97e18e",
+    "traits": "95f1c22815f415ed",
     "facts": "4233727f3d0d2307",
     "facts2": "34a8649ad7102788",
-    "all": "afaeaa25d8907415"
+    "all": "3a6f3a963bcc92ac"
    },
    "row_hash": "1aadffd96e76381c",
    "carried": true,
-   "pass": 2
+   "pass": 8
   },
   {
    "row": "C931",
    "screen": "walk_mom_bills.sit",
    "verdict": "PASS",
-   "line": "Rent's due Sunday. She hasn't said how much is missing.",
-   "why": "windows read end-exclusive and wrap as the rows do (23:00-01:00; 12:00-17:00 ends as Ryan's row ends)",
+   "line": "It's fine, baby. It's just numbers. Really. / Rent's due Sunday. She hasn't said how much is missing.",
+   "why": "time_of_day 17:00-18:00 read end exclusive on the same weekday; Done +5 stays in Laura's 17-19 row",
    "cause": null,
    "note": true,
    "screen_hash": {
-    "text": "a513792ac09751cf",
+    "text": "547a746593a51255",
+    "traits": "95f1c22815f415ed",
     "facts": "4233727f3d0d2307",
     "facts2": "34a8649ad7102788",
-    "all": "5a815628b17253f2"
+    "all": "1bed1fcf7f557de8"
    },
    "row_hash": "1aadffd96e76381c",
-   "carried": true,
-   "pass": 2
+   "carried": false,
+   "pass": 9
   },
   {
    "row": "C931",
    "screen": "walk_parents.away",
    "verdict": "PASS",
-   "line": "Their door's never quite shut. You know that now.",
-   "why": "windows read end-exclusive and wrap as the rows do (23:00-01:00; 12:00-17:00 ends as Ryan's row ends)",
+   "line": "You back down the hall on your toes. The tapping follows you all the way to your door. / Their door's never quite shut. You know that now.",
+   "why": "window read end-exclusive and wrapping as the rows do (23:00-01:00 on the weekday of the current day, like the schedule rows)",
    "cause": null,
    "note": true,
    "screen_hash": {
-    "text": "bdfaab0fb7a6ba72",
+    "text": "9ff3393e0734e1e8",
+    "traits": "44136fa355b3678a",
     "facts": "9452bbef8a645d19",
     "facts2": "9452bbef8a645d19",
-    "all": "42b1714c182871af"
+    "all": "4ec41e5bdd3c080e"
    },
    "row_hash": "1aadffd96e76381c",
    "carried": true,
-   "pass": 2
+   "pass": 8
   },
   {
    "row": "C931",
    "screen": "walk_parents.watch",
    "verdict": "PASS",
-   "line": "At breakfast you won't be able to look at either of them.",
-   "why": "windows read end-exclusive and wrap as the rows do (23:00-01:00; 12:00-17:00 ends as Ryan's row ends)",
+   "line": "You watch until Mark grunts and goes still, and Mom's legs go slack round him. / That's it, Laura. That's it.",
+   "why": "window read end-exclusive and wrapping as the rows do (23:00-01:00 on the weekday of the current day, like the schedule rows)",
    "cause": null,
    "note": true,
    "screen_hash": {
-    "text": "1b6cf3a2d6ae7b54",
+    "text": "e03514a08a342533",
+    "traits": "4b9cc244e3119951",
     "facts": "4ae0ea463b0299c5",
     "facts2": "a70226de81ca7f87",
-    "all": "90662cfef0bc4dad"
+    "all": "d54dbe75b89f56bc"
    },
    "row_hash": "1aadffd96e76381c",
    "carried": true,
-   "pass": 2
+   "pass": 8
   },
   {
    "row": "C931",
    "screen": "walk_ryan_game.notnow",
    "verdict": "PASS",
-   "line": "The second controller stays on the cushion beside him.",
-   "why": "windows read end-exclusive and wrap as the rows do (23:00-01:00; 12:00-17:00 ends as Ryan's row ends)",
+   "line": "Coward. / He grins without looking away from the screen.",
+   "why": "window read end-exclusive and wrapping as the rows do (23:00-01:00 on the weekday of the current day, like the schedule rows)",
    "cause": null,
    "note": true,
    "screen_hash": {
-    "text": "dba7f612cfdd5a68",
+    "text": "160b99b2e866fe1a",
+    "traits": "74c4f68e6476ecee",
     "facts": "dc79944b1aa0a816",
     "facts2": "7eac0b49ad26fea0",
-    "all": "e8fe387adb6ce6d5"
+    "all": "2d129f40cb61bacc"
    },
    "row_hash": "1aadffd96e76381c",
    "carried": true,
-   "pass": 2
+   "pass": 8
   },
   {
    "row": "C931",
    "screen": "walk_ryan_game.play",
    "verdict": "PASS",
-   "line": "You lose, then you win, and he throws a cushion at you like it's an insult. \"Again. Best of three.\"",
-   "why": "windows read end-exclusive and wrap as the rows do (23:00-01:00; 12:00-17:00 ends as Ryan's row ends)",
+   "line": "You lose, then you win, and he throws a cushion at you like it's an insult. / Again. Best of three.",
+   "why": "window read end-exclusive and wrapping as the rows do (23:00-01:00 on the weekday of the current day, like the schedule rows)",
    "cause": null,
    "note": true,
    "screen_hash": {
-    "text": "377f71608ab147cb",
+    "text": "289cbc8c56884395",
+    "traits": "74c4f68e6476ecee",
     "facts": "dc79944b1aa0a816",
     "facts2": "7eac0b49ad26fea0",
-    "all": "ca771038f77c5eff"
+    "all": "a3da739cc0766d6d"
    },
    "row_hash": "1aadffd96e76381c",
    "carried": true,
-   "pass": 2
+   "pass": 8
   },
   {
    "row": "C931",
    "screen": "walk_ryan_phone.away",
    "verdict": "PASS",
-   "line": "When you look back, his door's still open a crack.",
-   "why": "windows read end-exclusive and wrap as the rows do (23:00-01:00; 12:00-17:00 ends as Ryan's row ends)",
+   "line": "You pull back before the floorboard gives you away. / When you look back, his door's still open a crack.",
+   "why": "window read end-exclusive and wrapping as the rows do (23:00-01:00 on the weekday of the current day, like the schedule rows)",
    "cause": null,
    "note": true,
    "screen_hash": {
-    "text": "bf24341d4735640c",
+    "text": "304343848758928d",
+    "traits": "44136fa355b3678a",
     "facts": "9452bbef8a645d19",
     "facts2": "9452bbef8a645d19",
-    "all": "421434451f674b49"
+    "all": "cb04089789f4814f"
    },
    "row_hash": "1aadffd96e76381c",
    "carried": true,
-   "pass": 2
+   "pass": 8
   },
   {
    "row": "C931",
    "screen": "walk_ryan_phone.watch",
    "verdict": "PASS",
-   "line": "time_of_day 23:00-01:00",
-   "why": "Wraps midnight, end exclusive; last start 00:59 still inside Ryan's room row (to 01:00)",
+   "line": "His hand speeds up until he comes into a sock. / Jesus. Okay. Okay.",
+   "why": "window read end-exclusive and wrapping as the rows do (23:00-01:00 on the weekday of the current day, like the schedule rows)",
    "cause": null,
    "note": true,
    "screen_hash": {
-    "text": "2033b9ff4a48f27d",
+    "text": "9c54792da90cec47",
+    "traits": "74c4f68e6476ecee",
     "facts": "24c4b946d90ccbb4",
     "facts2": "829298a706f02a41",
-    "all": "185ff7454f125e7f"
+    "all": "b42248054a63abe1"
    },
    "row_hash": "1aadffd96e76381c",
    "carried": true,
-   "pass": 3
+   "pass": 8
   },
   {
    "row": "C931",
@@ -5331,271 +5583,286 @@
    "row": "L106",
    "screen": "walk_mark_phone.listen",
    "verdict": "PASS",
-   "line": "He hangs up and sits there a long time, not watching the TV. / Friday. Whatever it is, it's due Friday.",
-   "why": "Mark stays in his chair till 23:00; TV is in the room (home_tv); Friday line as he said it",
+   "line": "You stay out of sight. He hangs up and sits there a long time, not watching the TV. / Friday. Whatever it is, it's due Friday.",
+   "why": "Mark 'in his chair' at home_living_room weekdays 16:30-23:00; trigger gates npc_at_location; Vance named only behind met_vance; true at first and last minute of the window and on a second visit",
    "cause": "",
    "note": false,
    "screen_hash": {
-    "text": "ea9f39f66f513ea0",
+    "text": "af631e7f8f6d9194",
+    "traits": "a13af4c65af9f24a",
     "facts": "643dd7b0173cb2a8",
     "facts2": "371b14470ce23cce",
-    "all": "544cc9be0a5337d2"
+    "all": "c26e98d8fd10c2e5"
    },
    "row_hash": "13a714429d15f3b2",
    "carried": true,
-   "pass": 2
+   "pass": 8
   },
   {
    "row": "L106",
    "screen": "walk_mark_phone.moment",
    "verdict": "PASS",
-   "line": "Mark's in his chair, phone to his ear... \"I'll have the money Friday. I said Friday.\" / (met_vance) \"I'll have it Friday. I said Friday, Vance.\"",
-   "why": "Mon-Fri 16:30-17:00, Mark 'in his chair' from 16:30; Vance named only behind met_vance; 'Friday' still true at Friday 16:59",
+   "line": "Mark's in his chair, phone to his ear, a hand over his eyes. / I'll have it Friday. I said Friday, Vance.",
+   "why": "Mark 'in his chair' at home_living_room weekdays 16:30-23:00; trigger gates npc_at_location; Vance named only behind met_vance; read on arrival: the scene fires as she reaches the room, before its screen, so 'Listen from the hall' and 'Walk in' are both still open to her; true at first and last minute of the window and on a second visit",
    "cause": "",
    "note": false,
    "screen_hash": {
-    "text": "e7e800f7e072024b",
+    "text": "c14403bba8d4220d",
+    "traits": "a13af4c65af9f24a",
     "facts": "643dd7b0173cb2a8",
     "facts2": "371b14470ce23cce",
-    "all": "064db9925c5a7a01"
+    "all": "8840d8c240b6ef1f"
    },
    "row_hash": "13a714429d15f3b2",
    "carried": true,
-   "pass": 2
+   "pass": 8
   },
   {
    "row": "L106",
    "screen": "walk_mark_phone.walkin",
    "verdict": "PASS",
-   "line": "He hears you and looks up, and his face shuts like a door. ... Whatever he owes, he's not telling you.",
-   "why": "Mark there; 'owes' is her read of the call, true for both variants",
+   "line": "He hears you and looks up, and his face shuts like a door. / What?",
+   "why": "Mark 'in his chair' at home_living_room weekdays 16:30-23:00; trigger gates npc_at_location; Vance named only behind met_vance; true at first and last minute of the window and on a second visit",
    "cause": "",
    "note": false,
    "screen_hash": {
-    "text": "26ac2e8be994efaf",
+    "text": "cb36a7c8c179f47d",
+    "traits": "a13af4c65af9f24a",
     "facts": "643dd7b0173cb2a8",
     "facts2": "371b14470ce23cce",
-    "all": "0cc7824cd5b790e3"
+    "all": "76963d85a72ef688"
    },
    "row_hash": "13a714429d15f3b2",
    "carried": true,
-   "pass": 2
+   "pass": 8
   },
   {
    "row": "L106",
    "screen": "walk_mom_bills.late",
    "verdict": "PASS",
-   "line": "You know they'll still be on the table tonight.",
-   "why": "bills on the table tonight is texture/her expectation; Laura stays in the kitchen till 19:00",
+   "line": "Go. Go on, I'm fine. / She's already looking back down at the bills.",
+   "why": "Laura at home_kitchen weekdays 17:00-19:00 by her row; trigger gates npc_at_location, window 17:00-18:00; true at first and last minute of the window and on a second visit",
    "cause": "",
    "note": false,
    "screen_hash": {
-    "text": "ef6fd3deb3581a74",
+    "text": "09e3b0cc2f97e18e",
+    "traits": "95f1c22815f415ed",
     "facts": "4233727f3d0d2307",
     "facts2": "34a8649ad7102788",
-    "all": "afaeaa25d8907415"
+    "all": "3a6f3a963bcc92ac"
    },
    "row_hash": "13a714429d15f3b2",
    "carried": true,
-   "pass": 2
+   "pass": 8
   },
   {
    "row": "L106",
    "screen": "walk_mom_bills.moment",
    "verdict": "PASS",
-   "line": "Mom's at the kitchen table with the bills spread in front of her... \"Oh. Baby. Don't look at these.\"",
-   "why": "Mon-Fri 17:00-18:00, Laura kitchen 17-19; Mark in the living room, Ryan out till 18; no one else claimed",
-   "cause": "",
+   "line": "Dinner's on the stove, and Mom's sat at the kitchen table with the bills spread in front of her and a pen she isn't using.",
+   "why": "names only Mom, whom her 17:00-19:00 kitchen row and the trigger put there",
+   "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "1cd7f448b8c965cb",
+    "text": "0d852b4dad8ff4ee",
+    "traits": "95f1c22815f415ed",
     "facts": "4233727f3d0d2307",
     "facts2": "34a8649ad7102788",
-    "all": "64d249842efe26a0"
+    "all": "128e6f1356329d45"
    },
    "row_hash": "13a714429d15f3b2",
-   "carried": true,
-   "pass": 2
+   "carried": false,
+   "pass": 9
   },
   {
    "row": "L106",
    "screen": "walk_mom_bills.sit",
    "verdict": "PASS",
-   "line": "Rent's due Sunday. She hasn't said how much is missing.",
-   "why": "rent is Sunday (P11, PLAN), true on every weekday the scene can show; the family's shortfall is the plan's hold",
-   "cause": "",
+   "line": "It's fine, baby. It's just numbers. Really. / Rent's due Sunday. She hasn't said how much is missing.",
+   "why": "names only Mom, whom her 17:00-19:00 kitchen row and the trigger put there",
+   "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "a513792ac09751cf",
+    "text": "547a746593a51255",
+    "traits": "95f1c22815f415ed",
     "facts": "4233727f3d0d2307",
     "facts2": "34a8649ad7102788",
-    "all": "5a815628b17253f2"
+    "all": "1bed1fcf7f557de8"
    },
    "row_hash": "13a714429d15f3b2",
-   "carried": true,
-   "pass": 2
+   "carried": false,
+   "pass": 9
   },
   {
    "row": "L106",
    "screen": "walk_parents.away",
    "verdict": "PASS",
-   "line": "Their door's never quite shut. You know that now.",
-   "why": "no fact beyond the hall and her door; exit Your Bedroom matches 'all the way to your door'",
+   "line": "You back down the hall on your toes. The tapping follows you all the way to your door. / Their door's never quite shut. You know that now.",
+   "why": "Laura and Mark 'in bed' at home_master_bedroom 23:00-01:00 every day by their rows; trigger gates npc_at_location on both, Mon-Fri; true at first and last minute of the window and on a second visit",
    "cause": "",
    "note": false,
    "screen_hash": {
-    "text": "bdfaab0fb7a6ba72",
+    "text": "9ff3393e0734e1e8",
+    "traits": "44136fa355b3678a",
     "facts": "9452bbef8a645d19",
     "facts2": "9452bbef8a645d19",
-    "all": "42b1714c182871af"
+    "all": "4ec41e5bdd3c080e"
    },
    "row_hash": "13a714429d15f3b2",
    "carried": true,
-   "pass": 2
+   "pass": 8
   },
   {
    "row": "L106",
    "screen": "walk_parents.moment",
    "verdict": "PASS",
-   "line": "Their door hasn't caught. Through the gap: Mom on her back... Your face burns.",
-   "why": "trigger Mon-Fri 23:00-01:00 gated on both in home_master_bedroom; both rows 'in bed' 23:00-01:00 every day; Ryan in his room, so 'The kids' holds",
+   "line": "Their door hasn't caught. Through the gap: Mom on her back, nightie round her waist, Mark between her legs, his hand over her mouth, slamming into her so hard t",
+   "why": "Laura and Mark 'in bed' at home_master_bedroom 23:00-01:00 every day by their rows; trigger gates npc_at_location on both, Mon-Fri; read on just arriving in the hall: the door gap is what she finds there, nothing assumes she chose to look; true at first and last minute of the window and on a second visit",
    "cause": "",
    "note": false,
    "screen_hash": {
-    "text": "0f689960aa65a5e0",
+    "text": "7f828ca106b8bccf",
+    "traits": "4b9cc244e3119951",
     "facts": "4ae0ea463b0299c5",
     "facts2": "a70226de81ca7f87",
-    "all": "5295e17ddac377d2"
+    "all": "1baa72359f71d3ca"
    },
    "row_hash": "13a714429d15f3b2",
    "carried": true,
-   "pass": 2
+   "pass": 8
   },
   {
    "row": "L106",
    "screen": "walk_parents.watch",
    "verdict": "PASS",
-   "line": "At breakfast you won't be able to look at either of them.",
-   "why": "next breakfast has both: weekdays Laura kitchen 07-08, Mark 07-07:30; Sat (after a Fri night) Laura 08-12, Mark 08-10; exit Your Bedroom matches 'back in your room'",
+   "line": "You watch until Mark grunts and goes still, and Mom's legs go slack round him. / That's it, Laura. That's it.",
+   "why": "Laura and Mark 'in bed' at home_master_bedroom 23:00-01:00 every day by their rows; trigger gates npc_at_location on both, Mon-Fri; true at first and last minute of the window and on a second visit",
    "cause": "",
    "note": false,
    "screen_hash": {
-    "text": "1b6cf3a2d6ae7b54",
+    "text": "e03514a08a342533",
+    "traits": "4b9cc244e3119951",
     "facts": "4ae0ea463b0299c5",
     "facts2": "a70226de81ca7f87",
-    "all": "90662cfef0bc4dad"
+    "all": "d54dbe75b89f56bc"
    },
    "row_hash": "13a714429d15f3b2",
    "carried": true,
-   "pass": 2
+   "pass": 8
   },
   {
    "row": "L106",
    "screen": "walk_ryan_game.moment",
    "verdict": "PASS",
-   "line": "Ryan's on the couch with a controller, losing loudly.",
-   "why": "Sat/Sun 12:00-17:00, Ryan 'on the couch' 12-17; Mark in his chair too, not contradicted; Laura out",
+   "line": "Ryan's on the couch with a controller, losing loudly. / Want a go? You can't be worse than me.",
+   "why": "Ryan 'on the couch' at home_living_room Sat/Sun 12:00-17:00; trigger gates npc_at_location; window ends as his row ends; read on just arriving in the living room: Ryan on the couch, his offer is to her as she comes in; true at first and last minute of the window and on a second visit",
    "cause": "",
    "note": false,
    "screen_hash": {
-    "text": "5761dbfb3262f770",
+    "text": "c2fc8528c8a17f52",
+    "traits": "74c4f68e6476ecee",
     "facts": "dc79944b1aa0a816",
     "facts2": "7eac0b49ad26fea0",
-    "all": "5a72a25c7e4e43c9"
+    "all": "78691f04ac562b87"
    },
    "row_hash": "13a714429d15f3b2",
    "carried": true,
-   "pass": 2
+   "pass": 8
   },
   {
    "row": "L106",
    "screen": "walk_ryan_game.notnow",
    "verdict": "PASS",
-   "line": "The second controller stays on the cushion beside him.",
-   "why": "Ryan still on the couch; texture only",
+   "line": "Coward. / He grins without looking away from the screen.",
+   "why": "Ryan 'on the couch' at home_living_room Sat/Sun 12:00-17:00; trigger gates npc_at_location; window ends as his row ends; true at first and last minute of the window and on a second visit",
    "cause": "",
    "note": false,
    "screen_hash": {
-    "text": "dba7f612cfdd5a68",
+    "text": "160b99b2e866fe1a",
+    "traits": "74c4f68e6476ecee",
     "facts": "dc79944b1aa0a816",
     "facts2": "7eac0b49ad26fea0",
-    "all": "e8fe387adb6ce6d5"
+    "all": "2d129f40cb61bacc"
    },
    "row_hash": "13a714429d15f3b2",
    "carried": true,
-   "pass": 2
+   "pass": 8
   },
   {
    "row": "L106",
    "screen": "walk_ryan_game.play",
    "verdict": "PASS",
-   "line": "You lose, then you win, and he throws a cushion at you like it's an insult. \"Again. Best of three.\"",
-   "why": "no time, day or presence claim beyond Ryan on the couch; 'Best of three' is dialogue",
+   "line": "You lose, then you win, and he throws a cushion at you like it's an insult. / Again. Best of three.",
+   "why": "Ryan 'on the couch' at home_living_room Sat/Sun 12:00-17:00; trigger gates npc_at_location; window ends as his row ends; true at first and last minute of the window and on a second visit",
    "cause": "",
    "note": false,
    "screen_hash": {
-    "text": "377f71608ab147cb",
+    "text": "289cbc8c56884395",
+    "traits": "74c4f68e6476ecee",
     "facts": "dc79944b1aa0a816",
     "facts2": "7eac0b49ad26fea0",
-    "all": "ca771038f77c5eff"
+    "all": "a3da739cc0766d6d"
    },
    "row_hash": "13a714429d15f3b2",
    "carried": true,
-   "pass": 2
+   "pass": 8
   },
   {
    "row": "L106",
    "screen": "walk_ryan_phone.away",
    "verdict": "PASS",
-   "line": "When you look back, his door's still open a crack.",
-   "why": "door and floorboard only; exit stays in the hall, where she is",
+   "line": "You pull back before the floorboard gives you away. / When you look back, his door's still open a crack.",
+   "why": "Ryan 'on his phone' at home_ryans_room weekdays 23:00-01:00 (asleep from 01:00); trigger gates npc_at_location; true at first and last minute of the window and on a second visit",
    "cause": "",
    "note": false,
    "screen_hash": {
-    "text": "bf24341d4735640c",
+    "text": "304343848758928d",
+    "traits": "44136fa355b3678a",
     "facts": "9452bbef8a645d19",
     "facts2": "9452bbef8a645d19",
-    "all": "421434451f674b49"
+    "all": "cb04089789f4814f"
    },
    "row_hash": "13a714429d15f3b2",
    "carried": true,
-   "pass": 2
+   "pass": 8
   },
   {
    "row": "L106",
    "screen": "walk_ryan_phone.moment",
    "verdict": "PASS",
-   "line": "He's on his bed in his phone's light, shorts round his thighs, stroking his cock, eyes on the screen. Your face goes hot.",
-   "why": "trigger Mon-Fri 23:00-01:00 + Ryan in home_ryans_room; his rows read 'on his phone' 23:00-01:00 (Mon 00-01 too), so the act shows what he was doing (L97)",
+   "line": "Ryan's door is open a hand's width. He's on his bed in his phone's light, shorts round his thighs, stroking his cock, eyes on the screen. Your face goes hot. / ",
+   "why": "Ryan 'on his phone' at home_ryans_room weekdays 23:00-01:00 (asleep from 01:00); trigger gates npc_at_location; read on just arriving in the hall: his open door is what she finds, nothing assumes she went to look; true at first and last minute of the window and on a second visit",
    "cause": "",
    "note": false,
    "screen_hash": {
-    "text": "bfa349501d85aa26",
+    "text": "bc2dfd613888c1cc",
+    "traits": "74c4f68e6476ecee",
     "facts": "24c4b946d90ccbb4",
     "facts2": "829298a706f02a41",
-    "all": "d3596152702ff253"
+    "all": "a012f1eb60a521c0"
    },
    "row_hash": "13a714429d15f3b2",
    "carried": true,
-   "pass": 2
+   "pass": 8
   },
   {
    "row": "L106",
    "screen": "walk_ryan_phone.watch",
    "verdict": "PASS",
-   "line": "You're gone before he looks up.",
-   "why": "Only Ryan is named, and his row puts him in home_ryans_room 23-01; condition npc_at_location is_present",
+   "line": "His hand speeds up until he comes into a sock. / Jesus. Okay. Okay.",
+   "why": "Ryan 'on his phone' at home_ryans_room weekdays 23:00-01:00 (asleep from 01:00); trigger gates npc_at_location; true at first and last minute of the window and on a second visit",
    "cause": "",
    "note": false,
    "screen_hash": {
-    "text": "2033b9ff4a48f27d",
+    "text": "9c54792da90cec47",
+    "traits": "74c4f68e6476ecee",
     "facts": "24c4b946d90ccbb4",
     "facts2": "829298a706f02a41",
-    "all": "185ff7454f125e7f"
+    "all": "b42248054a63abe1"
    },
    "row_hash": "13a714429d15f3b2",
    "carried": true,
-   "pass": 3
+   "pass": 8
   },
   {
    "row": "L106",
@@ -5704,6 +5971,19 @@
    "pass": 1
   },
   {
+   "row": "L150",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "",
+   "why": "every scene shows something happening; no 'nothing happens' line",
+   "cause": "",
+   "note": false,
+   "screen_hash": "4593e0a3f0277f14",
+   "row_hash": "ec7af502db4f0c7e",
+   "carried": true,
+   "pass": 8
+  },
+  {
    "row": "L166",
    "screen": "*",
    "verdict": "PASS",
@@ -5733,181 +6013,191 @@
    "row": "L167",
    "screen": "walk_mark_phone.listen",
    "verdict": "PASS",
-   "line": "He hangs up and sits there a long time, not watching the TV. / Friday. Whatever it is, it's due Friday.",
-   "why": "one window per canvas; no per-day-kind duplicate rows, and as a walk-in it stays hidden when shut (C916)",
+   "line": "You stay out of sight. He hangs up and sits there a long time, not watching the TV. / Friday. Whatever it is, it's due Friday.",
+   "why": "no activity row on this screen; as a random walk-in it stays hidden when shut (C916)",
    "cause": "",
    "note": false,
    "screen_hash": {
-    "text": "ea9f39f66f513ea0",
+    "text": "af631e7f8f6d9194",
+    "traits": "a13af4c65af9f24a",
     "facts": "643dd7b0173cb2a8",
     "facts2": "371b14470ce23cce",
-    "all": "544cc9be0a5337d2"
+    "all": "c26e98d8fd10c2e5"
    },
    "row_hash": "e64ce2672d85d2d8",
    "carried": true,
-   "pass": 2
+   "pass": 8
   },
   {
    "row": "L167",
    "screen": "walk_mark_phone.walkin",
    "verdict": "PASS",
-   "line": "He hears you and looks up, and his face shuts like a door. ... Whatever he owes, he's not telling you.",
-   "why": "one window per canvas; no per-day-kind duplicate rows, and as a walk-in it stays hidden when shut (C916)",
+   "line": "He hears you and looks up, and his face shuts like a door. / What?",
+   "why": "no activity row on this screen; as a random walk-in it stays hidden when shut (C916)",
    "cause": "",
    "note": false,
    "screen_hash": {
-    "text": "26ac2e8be994efaf",
+    "text": "cb36a7c8c179f47d",
+    "traits": "a13af4c65af9f24a",
     "facts": "643dd7b0173cb2a8",
     "facts2": "371b14470ce23cce",
-    "all": "0cc7824cd5b790e3"
+    "all": "76963d85a72ef688"
    },
    "row_hash": "e64ce2672d85d2d8",
    "carried": true,
-   "pass": 2
+   "pass": 8
   },
   {
    "row": "L167",
    "screen": "walk_mom_bills.late",
    "verdict": "PASS",
-   "line": "You know they'll still be on the table tonight.",
-   "why": "one window per canvas; no per-day-kind duplicate rows, and as a walk-in it stays hidden when shut (C916)",
+   "line": "Go. Go on, I'm fine. / She's already looking back down at the bills.",
+   "why": "no activity row on this screen; as a random walk-in it stays hidden when shut (C916)",
    "cause": "",
    "note": false,
    "screen_hash": {
-    "text": "ef6fd3deb3581a74",
+    "text": "09e3b0cc2f97e18e",
+    "traits": "95f1c22815f415ed",
     "facts": "4233727f3d0d2307",
     "facts2": "34a8649ad7102788",
-    "all": "afaeaa25d8907415"
+    "all": "3a6f3a963bcc92ac"
    },
    "row_hash": "e64ce2672d85d2d8",
    "carried": true,
-   "pass": 2
+   "pass": 8
   },
   {
    "row": "L167",
    "screen": "walk_mom_bills.sit",
    "verdict": "PASS",
-   "line": "Rent's due Sunday. She hasn't said how much is missing.",
-   "why": "one window per canvas; no per-day-kind duplicate rows, and as a walk-in it stays hidden when shut (C916)",
-   "cause": "",
+   "line": "It's fine, baby. It's just numbers. Really. / Rent's due Sunday. She hasn't said how much is missing.",
+   "why": "no activity row on this screen; one trigger, weekdays only, and a random walk-in stays hidden out of its window",
+   "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "a513792ac09751cf",
+    "text": "547a746593a51255",
+    "traits": "95f1c22815f415ed",
     "facts": "4233727f3d0d2307",
     "facts2": "34a8649ad7102788",
-    "all": "5a815628b17253f2"
+    "all": "1bed1fcf7f557de8"
    },
    "row_hash": "e64ce2672d85d2d8",
-   "carried": true,
-   "pass": 2
+   "carried": false,
+   "pass": 9
   },
   {
    "row": "L167",
    "screen": "walk_parents.away",
    "verdict": "PASS",
-   "line": "Their door's never quite shut. You know that now.",
-   "why": "one window per canvas; no per-day-kind duplicate rows, and as a walk-in it stays hidden when shut (C916)",
+   "line": "You back down the hall on your toes. The tapping follows you all the way to your door. / Their door's never quite shut. You know that now.",
+   "why": "no activity row on this screen; as a random walk-in it stays hidden when shut (C916)",
    "cause": "",
    "note": false,
    "screen_hash": {
-    "text": "bdfaab0fb7a6ba72",
+    "text": "9ff3393e0734e1e8",
+    "traits": "44136fa355b3678a",
     "facts": "9452bbef8a645d19",
     "facts2": "9452bbef8a645d19",
-    "all": "42b1714c182871af"
+    "all": "4ec41e5bdd3c080e"
    },
    "row_hash": "e64ce2672d85d2d8",
    "carried": true,
-   "pass": 2
+   "pass": 8
   },
   {
    "row": "L167",
    "screen": "walk_parents.watch",
    "verdict": "PASS",
-   "line": "At breakfast you won't be able to look at either of them.",
-   "why": "one window per canvas; no per-day-kind duplicate rows, and as a walk-in it stays hidden when shut (C916)",
+   "line": "You watch until Mark grunts and goes still, and Mom's legs go slack round him. / That's it, Laura. That's it.",
+   "why": "no activity row on this screen; as a random walk-in it stays hidden when shut (C916)",
    "cause": "",
    "note": false,
    "screen_hash": {
-    "text": "1b6cf3a2d6ae7b54",
+    "text": "e03514a08a342533",
+    "traits": "4b9cc244e3119951",
     "facts": "4ae0ea463b0299c5",
     "facts2": "a70226de81ca7f87",
-    "all": "90662cfef0bc4dad"
+    "all": "d54dbe75b89f56bc"
    },
    "row_hash": "e64ce2672d85d2d8",
    "carried": true,
-   "pass": 2
+   "pass": 8
   },
   {
    "row": "L167",
    "screen": "walk_ryan_game.notnow",
    "verdict": "PASS",
-   "line": "The second controller stays on the cushion beside him.",
-   "why": "one window per canvas; no per-day-kind duplicate rows, and as a walk-in it stays hidden when shut (C916)",
+   "line": "Coward. / He grins without looking away from the screen.",
+   "why": "no activity row on this screen; as a random walk-in it stays hidden when shut (C916)",
    "cause": "",
    "note": false,
    "screen_hash": {
-    "text": "dba7f612cfdd5a68",
+    "text": "160b99b2e866fe1a",
+    "traits": "74c4f68e6476ecee",
     "facts": "dc79944b1aa0a816",
     "facts2": "7eac0b49ad26fea0",
-    "all": "e8fe387adb6ce6d5"
+    "all": "2d129f40cb61bacc"
    },
    "row_hash": "e64ce2672d85d2d8",
    "carried": true,
-   "pass": 2
+   "pass": 8
   },
   {
    "row": "L167",
    "screen": "walk_ryan_game.play",
    "verdict": "PASS",
-   "line": "You lose, then you win, and he throws a cushion at you like it's an insult. \"Again. Best of three.\"",
-   "why": "one window per canvas; no per-day-kind duplicate rows, and as a walk-in it stays hidden when shut (C916)",
+   "line": "You lose, then you win, and he throws a cushion at you like it's an insult. / Again. Best of three.",
+   "why": "no activity row on this screen; as a random walk-in it stays hidden when shut (C916)",
    "cause": "",
    "note": false,
    "screen_hash": {
-    "text": "377f71608ab147cb",
+    "text": "289cbc8c56884395",
+    "traits": "74c4f68e6476ecee",
     "facts": "dc79944b1aa0a816",
     "facts2": "7eac0b49ad26fea0",
-    "all": "ca771038f77c5eff"
+    "all": "a3da739cc0766d6d"
    },
    "row_hash": "e64ce2672d85d2d8",
    "carried": true,
-   "pass": 2
+   "pass": 8
   },
   {
    "row": "L167",
    "screen": "walk_ryan_phone.away",
    "verdict": "PASS",
-   "line": "When you look back, his door's still open a crack.",
-   "why": "one window per canvas; no per-day-kind duplicate rows, and as a walk-in it stays hidden when shut (C916)",
+   "line": "You pull back before the floorboard gives you away. / When you look back, his door's still open a crack.",
+   "why": "no activity row on this screen; as a random walk-in it stays hidden when shut (C916)",
    "cause": "",
    "note": false,
    "screen_hash": {
-    "text": "bf24341d4735640c",
+    "text": "304343848758928d",
+    "traits": "44136fa355b3678a",
     "facts": "9452bbef8a645d19",
     "facts2": "9452bbef8a645d19",
-    "all": "421434451f674b49"
+    "all": "cb04089789f4814f"
    },
    "row_hash": "e64ce2672d85d2d8",
    "carried": true,
-   "pass": 2
+   "pass": 8
   },
   {
    "row": "L167",
    "screen": "walk_ryan_phone.watch",
    "verdict": "PASS",
-   "line": "weekdays 0-4, 23:00-01:00",
-   "why": "One window on all its days, one row; an event she walks into stays hidden when shut (C916), so no greying asked",
+   "line": "His hand speeds up until he comes into a sock. / Jesus. Okay. Okay.",
+   "why": "no activity row on this screen; as a random walk-in it stays hidden when shut (C916)",
    "cause": "",
    "note": false,
    "screen_hash": {
-    "text": "2033b9ff4a48f27d",
+    "text": "9c54792da90cec47",
+    "traits": "74c4f68e6476ecee",
     "facts": "24c4b946d90ccbb4",
     "facts2": "829298a706f02a41",
-    "all": "185ff7454f125e7f"
+    "all": "b42248054a63abe1"
    },
    "row_hash": "e64ce2672d85d2d8",
    "carried": true,
-   "pass": 3
+   "pass": 8
   },
   {
    "row": "L167",
@@ -5975,12 +6265,107 @@
    "row_hash": "412fb4816f34d294",
    "carried": true,
    "pass": 2
+  },
+  {
+   "row": "L97",
+   "screen": "walk_mark_phone.moment",
+   "verdict": "PASS",
+   "line": "Mark's in his chair, phone to his ear, a hand over his eyes. / I'll have it Friday. I said Friday, Vance.",
+   "why": "Mark's row is 'in his chair'; he is in his chair on the phone",
+   "cause": "",
+   "note": false,
+   "screen_hash": {
+    "text": "c14403bba8d4220d",
+    "traits": "a13af4c65af9f24a",
+    "facts": "643dd7b0173cb2a8",
+    "facts2": "371b14470ce23cce",
+    "all": "8840d8c240b6ef1f"
+   },
+   "row_hash": "5d6e027964066b8b",
+   "carried": true,
+   "pass": 8
+  },
+  {
+   "row": "L97",
+   "screen": "walk_mom_bills.moment",
+   "verdict": "PASS",
+   "line": "Dinner's on the stove, and Mom's sat at the kitchen table with the bills spread in front of her and a pen she isn't using.",
+   "why": "her row at home_kitchen 17:00-19:00 is 'making dinner'; the scene now opens on dinner on the stove and her sat at the table while it cooks: what she was already doing, caught mid-task, not a second version",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "0d852b4dad8ff4ee",
+    "traits": "95f1c22815f415ed",
+    "facts": "4233727f3d0d2307",
+    "facts2": "34a8649ad7102788",
+    "all": "128e6f1356329d45"
+   },
+   "row_hash": "5d6e027964066b8b",
+   "carried": false,
+   "pass": 9
+  },
+  {
+   "row": "L97",
+   "screen": "walk_parents.moment",
+   "verdict": "PASS",
+   "line": "Their door hasn't caught. Through the gap: Mom on her back, nightie round her waist, Mark between her legs, his hand over her mouth, slamming into her so hard t",
+   "why": "Laura and Mark's row there is 'in bed'; the scene is them in bed",
+   "cause": "",
+   "note": false,
+   "screen_hash": {
+    "text": "7f828ca106b8bccf",
+    "traits": "4b9cc244e3119951",
+    "facts": "4ae0ea463b0299c5",
+    "facts2": "a70226de81ca7f87",
+    "all": "1baa72359f71d3ca"
+   },
+   "row_hash": "5d6e027964066b8b",
+   "carried": true,
+   "pass": 8
+  },
+  {
+   "row": "L97",
+   "screen": "walk_ryan_game.moment",
+   "verdict": "PASS",
+   "line": "Ryan's on the couch with a controller, losing loudly. / Want a go? You can't be worse than me.",
+   "why": "Ryan's row is 'on the couch'; he is on the couch with a controller",
+   "cause": "",
+   "note": false,
+   "screen_hash": {
+    "text": "c2fc8528c8a17f52",
+    "traits": "74c4f68e6476ecee",
+    "facts": "dc79944b1aa0a816",
+    "facts2": "7eac0b49ad26fea0",
+    "all": "78691f04ac562b87"
+   },
+   "row_hash": "5d6e027964066b8b",
+   "carried": true,
+   "pass": 8
+  },
+  {
+   "row": "L97",
+   "screen": "walk_ryan_phone.moment",
+   "verdict": "PASS",
+   "line": "Ryan's door is open a hand's width. He's on his bed in his phone's light, shorts round his thighs, stroking his cock, eyes on the screen. Your face goes hot. / ",
+   "why": "Ryan's row is 'on his phone' in his room; he is on his bed with his phone",
+   "cause": "",
+   "note": false,
+   "screen_hash": {
+    "text": "bc2dfd613888c1cc",
+    "traits": "74c4f68e6476ecee",
+    "facts": "24c4b946d90ccbb4",
+    "facts2": "829298a706f02a41",
+    "all": "a012f1eb60a521c0"
+   },
+   "row_hash": "5d6e027964066b8b",
+   "carried": true,
+   "pass": 8
   }
  ],
  "causes": [],
  "pending": [],
- "asked": 1,
- "answered": 1,
+ "asked": 14,
+ "answered": 14,
  "pass_items": [],
  "unowed": []
 }

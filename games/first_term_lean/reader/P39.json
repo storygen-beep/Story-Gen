@@ -1,111 +1,111 @@
 {
  "piece": "P39",
- "pass": 8,
+ "pass": 11,
  "screens": {
   "walk_park_couple.moment": {
-   "text": "2c64cca5577cbac7",
+   "text": "9f8c3c7fe47596ff",
    "traits": "44136fa355b3678a",
    "facts": "2ce65de01af70a7d",
    "facts2": "2ce65de01af70a7d",
-   "all": "8a847becb2cf976a"
+   "all": "e9cf488728b26e5b"
   },
   "walk_park_couple.watch": {
-   "text": "09119467bbc547a0",
+   "text": "599c5d32b887425e",
    "traits": "44136fa355b3678a",
    "facts": "2ce65de01af70a7d",
    "facts2": "2ce65de01af70a7d",
-   "all": "06680ae1766b2db2"
+   "all": "109e8e360b10d947"
   },
   "walk_park_couple.away": {
-   "text": "79bf3c036e1eec95",
+   "text": "0a30fd6f753a1015",
    "traits": "44136fa355b3678a",
    "facts": "2ce65de01af70a7d",
    "facts2": "2ce65de01af70a7d",
-   "all": "4193ec3dc239d2b3"
+   "all": "c85419e455c00de3"
   },
   "walk_vance_ledger.moment": {
-   "text": "1820d55a7d00c5da",
+   "text": "2557979fbd1c0b8d",
    "traits": "d9172dabbd56b049",
    "facts": "c00465774a257291",
    "facts2": "144cf636eba42a4a",
-   "all": "23deead29a4d9161"
+   "all": "239ef322866e551e"
   },
   "walk_vance_ledger.hello": {
-   "text": "6570f572d33abf27",
+   "text": "2e8649bf8e537d1b",
    "traits": "d9172dabbd56b049",
    "facts": "c00465774a257291",
    "facts2": "144cf636eba42a4a",
-   "all": "381625358bf64de6"
+   "all": "1f8f81a8423f6559"
   },
   "walk_vance_ledger.past": {
-   "text": "f18c3940a540acbe",
+   "text": "2c890f8a73feab69",
    "traits": "44136fa355b3678a",
    "facts": "978c7e388c3b3778",
    "facts2": "978c7e388c3b3778",
-   "all": "d4562d8fc7c0bc6f"
+   "all": "2c7440d174a776b1"
   },
   "walk_danny_deal.moment": {
-   "text": "d28812cc4f82f7ff",
+   "text": "f97cdd937a22a8b0",
    "traits": "6789af7af3d0366b",
    "facts": "8bd078dd07945ef3",
    "facts2": "bfe48a7d9d77f37a",
-   "all": "68f690b15a7332ac"
+   "all": "e67b4cb0443e490e"
   },
   "walk_danny_deal.pretend": {
-   "text": "341170cb3d2fcded",
+   "text": "43feab5adf168a36",
    "traits": "6789af7af3d0366b",
    "facts": "8bd078dd07945ef3",
    "facts2": "bfe48a7d9d77f37a",
-   "all": "db9750bdc09cd71a"
+   "all": "aca4ad35d46b1572"
   },
   "walk_danny_deal.ask": {
-   "text": "a5631bc334696220",
+   "text": "12766d8ef2ae94e7",
    "traits": "6789af7af3d0366b",
    "facts": "8bd078dd07945ef3",
    "facts2": "bfe48a7d9d77f37a",
-   "all": "6d18a1335d3f8bce"
+   "all": "19effe31b7c3eac6"
   },
   "walk_marco_squat.moment": {
-   "text": "f774dc0dd74361b0",
+   "text": "ed1d60a71171d96c",
    "traits": "e4365d01d4eb14be",
    "facts": "8965fc400ca80c26",
    "facts2": "fc909c0a076152b4",
-   "all": "56eea93205d11b00"
+   "all": "0ae49aa661a7f66d"
   },
   "walk_marco_squat.watch": {
-   "text": "18b2a59c167765e8",
+   "text": "b8170a0eb7937980",
    "traits": "e4365d01d4eb14be",
    "facts": "8965fc400ca80c26",
    "facts2": "fc909c0a076152b4",
-   "all": "0178edb783db2004"
+   "all": "9296b2f163dab50c"
   },
   "walk_marco_squat.back": {
-   "text": "9580227f653d68f6",
+   "text": "0fd4ed4fe645e21a",
    "traits": "44136fa355b3678a",
    "facts": "79f3020e3ffe2d3c",
    "facts2": "79f3020e3ffe2d3c",
-   "all": "ec4fb2c9d24d8347"
+   "all": "292cf200c13d9676"
   },
   "walk_nina_dress.moment": {
-   "text": "3a33050b5c9c33fe",
+   "text": "68580ed617a631bb",
    "traits": "01d024bf2eee28fd",
    "facts": "a218a488dcdc9af8",
    "facts2": "cd23064395339386",
-   "all": "9ab58aa3cdfb8d76"
+   "all": "6ae7b9d79a18e2aa"
   },
   "walk_nina_dress.suits": {
-   "text": "7f56db26544085cf",
+   "text": "45a123dabc375de6",
    "traits": "01d024bf2eee28fd",
    "facts": "a218a488dcdc9af8",
    "facts2": "cd23064395339386",
-   "all": "fdd5ccf047119995"
+   "all": "7500023af45d7642"
   },
   "walk_nina_dress.browse": {
-   "text": "b0b4f48fa106cb3c",
+   "text": "e7bbd5ddecead95c",
    "traits": "01d024bf2eee28fd",
    "facts": "a218a488dcdc9af8",
    "facts2": "cd23064395339386",
-   "all": "659cce2420e2729f"
+   "all": "61918301fd8d0aa4"
   },
   "walk_curtain.moment": {
    "text": "14b6453c7e2b9e8f",
@@ -128,7 +128,7 @@
    "facts2": "bc7bb076a1931a10",
    "all": "643b5204a11ac43b"
   },
-  "*": "0aef139f74c27282"
+  "*": "bece9e9917a3cc7f"
  },
  "rows": {
   "B1": "5276068df1ca6fa9",
@@ -279,8 +279,23 @@
   "C422": "7e128897077ecee6",
   "C460": "67e48e60d5053a2e",
   "C461": "310706ee076318f2",
+  "C788": "cae1598ef9cb6ff1",
+  "C855": "d3dc77f2f96e20ae",
+  "C856": "9c58ec7792f1f95a",
+  "C859": "c504ec577b14e288",
+  "C1820": "d8f9999d285c6607",
+  "C724": "37e21685569ccea7",
+  "C1821": "b9818557d5e43850",
+  "C1864": "45e669c2511d9b8e",
+  "C792": "92be110855d5a128",
+  "C302": "2ba94157c9da471e",
+  "L97": "5d6e027964066b8b",
+  "L150": "ec7af502db4f0c7e",
+  "C2186": "39e6f4b48d03d606",
+  "C2187": "f2b54b1dd7c15f2f",
   "C2188": "612394eef6826900",
-  "C2189": "20748838895e4545"
+  "C2189": "20748838895e4545",
+  "C2195": "77083291a86791c3"
  },
  "verdicts": [
   {
@@ -354,271 +369,286 @@
    "row": "B10",
    "screen": "walk_danny_deal.ask",
    "verdict": "PASS",
-   "line": "He smiles like you've both agreed on something.",
-   "why": "every line true at the first and last minute and on a second visit; named people gated present by their rows",
+   "line": "What was what, gorgeous? / He smiles like you've both agreed on something.",
+   "why": "fires 21:00-23:00 on arrival, met_danny, Danny present; his rows put him behind the till 15-23 Mon-Sat and 07-23 Sun, so 'at the till' and 'tomorrow night' hold on every day; Frank's row ends 15:00, nobody else is claimed",
    "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "a5631bc334696220",
+    "text": "12766d8ef2ae94e7",
+    "traits": "6789af7af3d0366b",
     "facts": "8bd078dd07945ef3",
     "facts2": "bfe48a7d9d77f37a",
-    "all": "6d18a1335d3f8bce"
+    "all": "19effe31b7c3eac6"
    },
    "row_hash": "c1c0e2ac2588a579",
    "carried": true,
-   "pass": 2
+   "pass": 10
   },
   {
    "row": "B10",
    "screen": "walk_danny_deal.moment",
    "verdict": "PASS",
-   "line": "Same time tomorrow. Don't be late. Cash only.",
-   "why": "every line true at the first and last minute and on a second visit; named people gated present by their rows",
+   "line": "Danny's at the till, and a guy in a hood is leaning over it: something small goes one way, a fold of notes the other.",
+   "why": "fires 21:00-23:00 on arrival, met_danny, Danny present; his rows put him behind the till 15-23 Mon-Sat and 07-23 Sun, so 'at the till' and 'tomorrow night' hold on every day; Frank's row ends 15:00, nobody else is claimed",
    "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "d28812cc4f82f7ff",
+    "text": "f97cdd937a22a8b0",
+    "traits": "6789af7af3d0366b",
     "facts": "8bd078dd07945ef3",
     "facts2": "bfe48a7d9d77f37a",
-    "all": "68f690b15a7332ac"
+    "all": "e67b4cb0443e490e"
    },
    "row_hash": "c1c0e2ac2588a579",
    "carried": true,
-   "pass": 2
+   "pass": 10
   },
   {
    "row": "B10",
    "screen": "walk_danny_deal.pretend",
    "verdict": "PASS",
-   "line": "He'll be out back again tomorrow night.",
-   "why": "no snack bought or priced; Danny at the shop every day to 23:00",
+   "line": "You pick up a snack you don't want and stare at the label, not at him. / He'll be at the till again tomorrow night, and so will the guy in the hood.",
+   "why": "fires 21:00-23:00 on arrival, met_danny, Danny present; his rows put him behind the till 15-23 Mon-Sat and 07-23 Sun, so 'at the till' and 'tomorrow night' hold on every day; Frank's row ends 15:00, nobody else is claimed",
    "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "341170cb3d2fcded",
+    "text": "43feab5adf168a36",
+    "traits": "6789af7af3d0366b",
     "facts": "8bd078dd07945ef3",
     "facts2": "bfe48a7d9d77f37a",
-    "all": "db9750bdc09cd71a"
+    "all": "aca4ad35d46b1572"
    },
    "row_hash": "c1c0e2ac2588a579",
    "carried": true,
-   "pass": 2
+   "pass": 10
   },
   {
    "row": "B10",
    "screen": "walk_marco_squat.back",
    "verdict": "PASS",
-   "line": "You can feel him clocking you anyway.",
-   "why": "every line true at the first and last minute and on a second visit; named people gated present by their rows",
+   "line": "You look away, at the mirror, at the door, anywhere. You can feel him clocking you anyway.",
+   "why": "Marco at hood_gym weekdays 17-21 (who_is_where); trigger gates met_marco, weekdays 0-4, 17:00-21:00, npc_at_location Marco at hood_gym; gym open 6am-10pm; she is by the door and the gym has 'mirrors on every wall' and a door (hood_gym description), so looking at the mirror and the door is true on arrival, at 17:00 and 20:59, and on a second visit; no workout, money or clothes claimed",
    "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "9580227f653d68f6",
+    "text": "0fd4ed4fe645e21a",
+    "traits": "44136fa355b3678a",
     "facts": "79f3020e3ffe2d3c",
     "facts2": "79f3020e3ffe2d3c",
-    "all": "ec4fb2c9d24d8347"
+    "all": "292cf200c13d9676"
    },
    "row_hash": "c1c0e2ac2588a579",
-   "carried": true,
-   "pass": 2
+   "carried": false,
+   "pass": 11
   },
   {
    "row": "B10",
    "screen": "walk_marco_squat.moment",
    "verdict": "PASS",
-   "line": "Your own thighs go tight on the bench. He sees that too.",
-   "why": "every line true at the first and last minute and on a second visit; named people gated present by their rows",
+   "line": "Marco's behind a woman at the squat rack... / Your own thighs go tight by the door. He sees that too. / -> Watch from the door \u00b7 Look away",
+   "why": "Marco at hood_gym weekdays 17-21 (who_is_where); trigger gates met_marco, weekdays 0-4, 17:00-21:00, npc_at_location Marco at hood_gym; gym open 6am-10pm; 'by the door' reads true on arrival; both choices are acts open in any clothes and at any money: watching and looking away; the old 'Go and start your workout' (needed leggings, sports top, $5) is gone",
    "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "f774dc0dd74361b0",
+    "text": "ed1d60a71171d96c",
+    "traits": "e4365d01d4eb14be",
     "facts": "8965fc400ca80c26",
     "facts2": "fc909c0a076152b4",
-    "all": "56eea93205d11b00"
+    "all": "0ae49aa661a7f66d"
    },
    "row_hash": "c1c0e2ac2588a579",
-   "carried": true,
-   "pass": 2
+   "carried": false,
+   "pass": 11
   },
   {
    "row": "B10",
    "screen": "walk_marco_squat.watch",
    "verdict": "PASS",
-   "line": "Your turn's coming, champ.",
-   "why": "every line true at the first and last minute and on a second visit; named people gated present by their rows",
-   "cause": null,
+   "line": "His hands stay there another rep. He catches your eye in the mirror and doesn't let go of her. / Your turn's coming, champ.",
+   "why": "Marco at hood_gym weekdays 17:00-21:00; gated met_marco + npc_at_location; gym open to 22:00; true at first and last minute of the window and on a second visit",
+   "cause": "",
    "note": false,
    "screen_hash": {
-    "text": "18b2a59c167765e8",
+    "text": "b8170a0eb7937980",
+    "traits": "e4365d01d4eb14be",
     "facts": "8965fc400ca80c26",
     "facts2": "fc909c0a076152b4",
-    "all": "0178edb783db2004"
+    "all": "9296b2f163dab50c"
    },
    "row_hash": "c1c0e2ac2588a579",
    "carried": true,
-   "pass": 2
+   "pass": 9
   },
   {
    "row": "B10",
    "screen": "walk_nina_dress.browse",
    "verdict": "PASS",
-   "line": "Coward. / She says it with a smile, and pulls the curtain.",
-   "why": "walk_nina_dress: Mon-Sat 18:45-18:55, Nina present; her row has her in the fitting room 18:45-19:00",
-   "cause": null,
+   "line": "Coward. / She says it with a smile, and pulls the curtain. Next time she might not let you just browse.",
+   "why": "Nina 'in the fitting room' at hood_clothes Mon-Sat 18:45-19:00; gated met_nina + npc_at_location; window 18:45-18:55; true at first and last minute of the window and on a second visit",
+   "cause": "",
    "note": false,
    "screen_hash": {
-    "text": "b0b4f48fa106cb3c",
+    "text": "e7bbd5ddecead95c",
+    "traits": "01d024bf2eee28fd",
     "facts": "a218a488dcdc9af8",
     "facts2": "cd23064395339386",
-    "all": "659cce2420e2729f"
+    "all": "61918301fd8d0aa4"
    },
    "row_hash": "c1c0e2ac2588a579",
    "carried": true,
-   "pass": 4
+   "pass": 9
   },
   {
    "row": "B10",
    "screen": "walk_nina_dress.moment",
    "verdict": "PASS",
-   "line": "The fitting room curtain's half open. Nina's in the shop's tightest black dress, turning to check her ass in the mirror.",
-   "why": "walk_nina_dress: Mon-Sat 18:45-18:55, Nina present; her row has her in the fitting room 18:45-19:00",
-   "cause": null,
+   "line": "The fitting room curtain's half open. Nina's in the shop's tightest black dress, turning to check her ass in the mirror. / Don't tell my boss. I'm the boss.",
+   "why": "Nina 'in the fitting room' at hood_clothes Mon-Sat 18:45-19:00; gated met_nina + npc_at_location; window 18:45-18:55; read on just walking into the shop: the curtain is half open as she comes in; true at first and last minute of the window and on a second visit",
+   "cause": "",
    "note": false,
    "screen_hash": {
-    "text": "3a33050b5c9c33fe",
+    "text": "68580ed617a631bb",
+    "traits": "01d024bf2eee28fd",
     "facts": "a218a488dcdc9af8",
     "facts2": "cd23064395339386",
-    "all": "9ab58aa3cdfb8d76"
+    "all": "6ae7b9d79a18e2aa"
    },
    "row_hash": "c1c0e2ac2588a579",
    "carried": true,
-   "pass": 4
+   "pass": 9
   },
   {
    "row": "B10",
    "screen": "walk_nina_dress.suits",
    "verdict": "PASS",
    "line": "I know. Your turn next, sweetie.",
-   "why": "walk_nina_dress: Mon-Sat 18:45-18:55, Nina present; her row has her in the fitting room 18:45-19:00; the 5-minute Done from 18:54 ends at 18:59, inside the shop's 7pm close",
-   "cause": null,
+   "why": "Nina 'in the fitting room' at hood_clothes Mon-Sat 18:45-19:00; gated met_nina + npc_at_location; window 18:45-18:55; true at first and last minute of the window and on a second visit",
+   "cause": "",
    "note": false,
    "screen_hash": {
-    "text": "7f56db26544085cf",
+    "text": "45a123dabc375de6",
+    "traits": "01d024bf2eee28fd",
     "facts": "a218a488dcdc9af8",
     "facts2": "cd23064395339386",
-    "all": "fdd5ccf047119995"
+    "all": "7500023af45d7642"
    },
    "row_hash": "c1c0e2ac2588a579",
    "carried": true,
-   "pass": 4
+   "pass": 9
   },
   {
    "row": "B10",
    "screen": "walk_park_couple.away",
    "verdict": "PASS",
    "line": "You back onto the path before a twig can snap. You know that gap's there now.",
-   "why": "walk_park_couple: every day 19:00-20:55, park open 06:00-21:00; strangers, no rows needed",
-   "cause": null,
+   "why": "strangers only; park open 06:00-21:00, window 19:00-20:55 ends before the gates lock; true at first and last minute of the window and on a second visit",
+   "cause": "",
    "note": false,
    "screen_hash": {
-    "text": "79bf3c036e1eec95",
+    "text": "0a30fd6f753a1015",
+    "traits": "44136fa355b3678a",
     "facts": "2ce65de01af70a7d",
     "facts2": "2ce65de01af70a7d",
-    "all": "4193ec3dc239d2b3"
+    "all": "c85419e455c00de3"
    },
    "row_hash": "c1c0e2ac2588a579",
    "carried": true,
-   "pass": 4
+   "pass": 9
   },
   {
    "row": "B10",
    "screen": "walk_park_couple.moment",
    "verdict": "PASS",
-   "line": "Through the bushes behind the pond: a man and a woman on the grass, her skirt up, her tits out, his jeans round his knees",
-   "why": "walk_park_couple: every day 19:00-20:55, park open 06:00-21:00; strangers, no rows needed",
-   "cause": null,
+   "line": "Through the bushes behind the pond: a man and a woman on the grass, her skirt up, her tits out, his jeans round his knees, his cock thrusting into her, slow and",
+   "why": "strangers only; park open 06:00-21:00, window 19:00-20:55 ends before the gates lock; read on just arriving in the park: what she comes across through the bushes; nothing says she went looking; true at first and last minute of the window and on a second visit",
+   "cause": "",
    "note": false,
    "screen_hash": {
-    "text": "2c64cca5577cbac7",
+    "text": "9f8c3c7fe47596ff",
+    "traits": "44136fa355b3678a",
     "facts": "2ce65de01af70a7d",
     "facts2": "2ce65de01af70a7d",
-    "all": "8a847becb2cf976a"
+    "all": "e9cf488728b26e5b"
    },
    "row_hash": "c1c0e2ac2588a579",
    "carried": true,
-   "pass": 4
+   "pass": 9
   },
   {
    "row": "B10",
    "screen": "walk_park_couple.watch",
    "verdict": "PASS",
-   "line": "Your thighs clench. You know which gap in the bushes now.",
-   "why": "walk_park_couple: every day 19:00-20:55, park open 06:00-21:00; strangers, no rows needed; 'now' is true on every visit",
-   "cause": null,
+   "line": "He drives his cock into her harder, her heels digging in, until she arches and moans under him, and he pulls out and cums across her thigh. / Fuck. Fuck, yes. F",
+   "why": "strangers only; park open 06:00-21:00, window 19:00-20:55 ends before the gates lock; true at first and last minute of the window and on a second visit",
+   "cause": "",
    "note": false,
    "screen_hash": {
-    "text": "09119467bbc547a0",
+    "text": "599c5d32b887425e",
+    "traits": "44136fa355b3678a",
     "facts": "2ce65de01af70a7d",
     "facts2": "2ce65de01af70a7d",
-    "all": "06680ae1766b2db2"
+    "all": "109e8e360b10d947"
    },
    "row_hash": "c1c0e2ac2588a579",
    "carried": true,
-   "pass": 4
+   "pass": 9
   },
   {
    "row": "B10",
    "screen": "walk_vance_ledger.hello",
    "verdict": "PASS",
-   "line": "He just watches you read the numbers on them.",
-   "why": "every line true at the first and last minute and on a second visit; named people gated present by their rows",
-   "cause": null,
+   "line": "Evening, little lady. / Evening.",
+   "why": "Vance 'on his porch' at hood_street weekdays 17:00-20:00; gated npc_at_location; named only behind met_vance, 'the man next door' before; true at first and last minute of the window and on a second visit",
+   "cause": "",
    "note": false,
    "screen_hash": {
-    "text": "6570f572d33abf27",
+    "text": "2e8649bf8e537d1b",
+    "traits": "d9172dabbd56b049",
     "facts": "c00465774a257291",
     "facts2": "144cf636eba42a4a",
-    "all": "381625358bf64de6"
+    "all": "1f8f81a8423f6559"
    },
    "row_hash": "c1c0e2ac2588a579",
    "carried": true,
-   "pass": 2
+   "pass": 9
   },
   {
    "row": "B10",
    "screen": "walk_vance_ledger.moment",
    "verdict": "PASS",
-   "line": "[not met_vance] The man next door is on his porch ... Stranger: \"Short again, number nine.\"",
-   "why": "every line true at the first and last minute and on a second visit; named people gated present by their rows",
-   "cause": null,
+   "line": "Vance is on his porch with a shoebox of envelopes on his knee, licking his thumb, counting. / Short again, number nine. Always number nine.",
+   "why": "Vance 'on his porch' at hood_street weekdays 17:00-20:00; gated npc_at_location; named only behind met_vance, 'the man next door' before; read on just stepping onto her street: he is on his porch as she passes; true at first and last minute of the window and on a second visit",
+   "cause": "",
    "note": false,
    "screen_hash": {
-    "text": "1820d55a7d00c5da",
+    "text": "2557979fbd1c0b8d",
+    "traits": "d9172dabbd56b049",
     "facts": "c00465774a257291",
     "facts2": "144cf636eba42a4a",
-    "all": "23deead29a4d9161"
+    "all": "239ef322866e551e"
    },
    "row_hash": "c1c0e2ac2588a579",
    "carried": true,
-   "pass": 2
+   "pass": 9
   },
   {
    "row": "B10",
    "screen": "walk_vance_ledger.past",
    "verdict": "PASS",
-   "line": "Number nine. You wonder who that is.",
-   "why": "every line true at the first and last minute and on a second visit; named people gated present by their rows",
-   "cause": null,
+   "line": "You walk past. You hear the box lid shut behind you. Number nine. You wonder who that is.",
+   "why": "Vance 'on his porch' at hood_street weekdays 17:00-20:00; gated npc_at_location; named only behind met_vance, 'the man next door' before; true at first and last minute of the window and on a second visit",
+   "cause": "",
    "note": false,
    "screen_hash": {
-    "text": "f18c3940a540acbe",
+    "text": "2c890f8a73feab69",
+    "traits": "44136fa355b3678a",
     "facts": "978c7e388c3b3778",
     "facts2": "978c7e388c3b3778",
-    "all": "d4562d8fc7c0bc6f"
+    "all": "2c7440d174a776b1"
    },
    "row_hash": "c1c0e2ac2588a579",
    "carried": true,
-   "pass": 2
+   "pass": 9
   },
   {
    "row": "B11",
@@ -828,271 +858,286 @@
    "row": "B8",
    "screen": "walk_danny_deal.ask",
    "verdict": "PASS",
-   "line": "He smiles like you've both agreed on something.",
-   "why": "no number; no garment of hers named, or the one named is backed",
+   "line": "What was what, gorgeous? / He smiles like you've both agreed on something.",
+   "why": "no number disagrees with PLAN; no garment of hers named",
    "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "a5631bc334696220",
+    "text": "12766d8ef2ae94e7",
+    "traits": "6789af7af3d0366b",
     "facts": "8bd078dd07945ef3",
     "facts2": "bfe48a7d9d77f37a",
-    "all": "6d18a1335d3f8bce"
+    "all": "19effe31b7c3eac6"
    },
    "row_hash": "80d415cf08e0ebfe",
    "carried": true,
-   "pass": 2
+   "pass": 10
   },
   {
    "row": "B8",
    "screen": "walk_danny_deal.moment",
    "verdict": "PASS",
-   "line": "Same time tomorrow. Don't be late. Cash only.",
-   "why": "no number; no garment of hers named, or the one named is backed",
+   "line": "Danny's at the till, and a guy in a hood is leaning over it: something small goes one way, a fold of notes the other.",
+   "why": "no number disagrees with PLAN; no garment of hers named",
    "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "d28812cc4f82f7ff",
+    "text": "f97cdd937a22a8b0",
+    "traits": "6789af7af3d0366b",
     "facts": "8bd078dd07945ef3",
     "facts2": "bfe48a7d9d77f37a",
-    "all": "68f690b15a7332ac"
+    "all": "e67b4cb0443e490e"
    },
    "row_hash": "80d415cf08e0ebfe",
    "carried": true,
-   "pass": 2
+   "pass": 10
   },
   {
    "row": "B8",
    "screen": "walk_danny_deal.pretend",
    "verdict": "PASS",
-   "line": "You pick up a snack you don't want",
-   "why": "no number, no garment",
+   "line": "You pick up a snack you don't want and stare at the label, not at him. / He'll be at the till again tomorrow night, and so will the guy in the hood.",
+   "why": "no number disagrees with PLAN; no garment of hers named",
    "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "341170cb3d2fcded",
+    "text": "43feab5adf168a36",
+    "traits": "6789af7af3d0366b",
     "facts": "8bd078dd07945ef3",
     "facts2": "bfe48a7d9d77f37a",
-    "all": "db9750bdc09cd71a"
+    "all": "aca4ad35d46b1572"
    },
    "row_hash": "80d415cf08e0ebfe",
    "carried": true,
-   "pass": 2
+   "pass": 10
   },
   {
    "row": "B8",
    "screen": "walk_marco_squat.back",
    "verdict": "PASS",
-   "line": "You can feel him clocking you anyway.",
-   "why": "no number; no garment of hers named, or the one named is backed",
+   "line": "You look away, at the mirror, at the door, anywhere. You can feel him clocking you anyway.",
+   "why": "no number on screen; none of her garments named",
    "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "9580227f653d68f6",
+    "text": "0fd4ed4fe645e21a",
+    "traits": "44136fa355b3678a",
     "facts": "79f3020e3ffe2d3c",
     "facts2": "79f3020e3ffe2d3c",
-    "all": "ec4fb2c9d24d8347"
+    "all": "292cf200c13d9676"
    },
    "row_hash": "80d415cf08e0ebfe",
-   "carried": true,
-   "pass": 2
+   "carried": false,
+   "pass": 11
   },
   {
    "row": "B8",
    "screen": "walk_marco_squat.moment",
    "verdict": "PASS",
-   "line": "Your own thighs go tight on the bench. He sees that too.",
-   "why": "no number; no garment of hers named, or the one named is backed",
+   "line": "Marco's behind a woman at the squat rack... / Your own thighs go tight by the door. He sees that too. / -> Watch from the door \u00b7 Look away",
+   "why": "no number on screen; only the woman's form and her own thighs, no garment of hers named",
    "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "f774dc0dd74361b0",
+    "text": "ed1d60a71171d96c",
+    "traits": "e4365d01d4eb14be",
     "facts": "8965fc400ca80c26",
     "facts2": "fc909c0a076152b4",
-    "all": "56eea93205d11b00"
+    "all": "0ae49aa661a7f66d"
    },
    "row_hash": "80d415cf08e0ebfe",
-   "carried": true,
-   "pass": 2
+   "carried": false,
+   "pass": 11
   },
   {
    "row": "B8",
    "screen": "walk_marco_squat.watch",
    "verdict": "PASS",
-   "line": "Your turn's coming, champ.",
-   "why": "no number; no garment of hers named, or the one named is backed",
-   "cause": null,
+   "line": "His hands stay there another rep. He catches your eye in the mirror and doesn't let go of her. / Your turn's coming, champ.",
+   "why": "no number disagrees with PLAN (rent Sunday, Friday, number nine); the only garments named are the other people's, not hers",
+   "cause": "",
    "note": false,
    "screen_hash": {
-    "text": "18b2a59c167765e8",
+    "text": "b8170a0eb7937980",
+    "traits": "e4365d01d4eb14be",
     "facts": "8965fc400ca80c26",
     "facts2": "fc909c0a076152b4",
-    "all": "0178edb783db2004"
+    "all": "9296b2f163dab50c"
    },
    "row_hash": "80d415cf08e0ebfe",
    "carried": true,
-   "pass": 2
+   "pass": 9
   },
   {
    "row": "B8",
    "screen": "walk_nina_dress.browse",
    "verdict": "PASS",
-   "line": "Coward. / She says it with a smile, and pulls the curtain.",
-   "why": "no number, and no garment of hers is named",
-   "cause": null,
+   "line": "Coward. / She says it with a smile, and pulls the curtain. Next time she might not let you just browse.",
+   "why": "no number disagrees with PLAN (rent Sunday, Friday, number nine); the only garments named are the other people's, not hers",
+   "cause": "",
    "note": false,
    "screen_hash": {
-    "text": "b0b4f48fa106cb3c",
+    "text": "e7bbd5ddecead95c",
+    "traits": "01d024bf2eee28fd",
     "facts": "a218a488dcdc9af8",
     "facts2": "cd23064395339386",
-    "all": "659cce2420e2729f"
+    "all": "61918301fd8d0aa4"
    },
    "row_hash": "80d415cf08e0ebfe",
    "carried": true,
-   "pass": 4
+   "pass": 9
   },
   {
    "row": "B8",
    "screen": "walk_nina_dress.moment",
    "verdict": "PASS",
-   "line": "The fitting room curtain's half open. Nina's in the shop's tightest black dress, turning to check her ass in the mirror.",
-   "why": "the dress is Nina's; nothing of hers named",
-   "cause": null,
+   "line": "The fitting room curtain's half open. Nina's in the shop's tightest black dress, turning to check her ass in the mirror. / Don't tell my boss. I'm the boss.",
+   "why": "no number disagrees with PLAN (rent Sunday, Friday, number nine); the only garments named are the other people's, not hers",
+   "cause": "",
    "note": false,
    "screen_hash": {
-    "text": "3a33050b5c9c33fe",
+    "text": "68580ed617a631bb",
+    "traits": "01d024bf2eee28fd",
     "facts": "a218a488dcdc9af8",
     "facts2": "cd23064395339386",
-    "all": "9ab58aa3cdfb8d76"
+    "all": "6ae7b9d79a18e2aa"
    },
    "row_hash": "80d415cf08e0ebfe",
    "carried": true,
-   "pass": 4
+   "pass": 9
   },
   {
    "row": "B8",
    "screen": "walk_nina_dress.suits",
    "verdict": "PASS",
    "line": "I know. Your turn next, sweetie.",
-   "why": "no number, and no garment of hers is named",
-   "cause": null,
+   "why": "no number disagrees with PLAN (rent Sunday, Friday, number nine); the only garments named are the other people's, not hers",
+   "cause": "",
    "note": false,
    "screen_hash": {
-    "text": "7f56db26544085cf",
+    "text": "45a123dabc375de6",
+    "traits": "01d024bf2eee28fd",
     "facts": "a218a488dcdc9af8",
     "facts2": "cd23064395339386",
-    "all": "fdd5ccf047119995"
+    "all": "7500023af45d7642"
    },
    "row_hash": "80d415cf08e0ebfe",
    "carried": true,
-   "pass": 4
+   "pass": 9
   },
   {
    "row": "B8",
    "screen": "walk_park_couple.away",
    "verdict": "PASS",
    "line": "You back onto the path before a twig can snap. You know that gap's there now.",
-   "why": "no number, and no garment of hers is named",
-   "cause": null,
+   "why": "no number disagrees with PLAN (rent Sunday, Friday, number nine); the only garments named are the other people's, not hers",
+   "cause": "",
    "note": false,
    "screen_hash": {
-    "text": "79bf3c036e1eec95",
+    "text": "0a30fd6f753a1015",
+    "traits": "44136fa355b3678a",
     "facts": "2ce65de01af70a7d",
     "facts2": "2ce65de01af70a7d",
-    "all": "4193ec3dc239d2b3"
+    "all": "c85419e455c00de3"
    },
    "row_hash": "80d415cf08e0ebfe",
    "carried": true,
-   "pass": 4
+   "pass": 9
   },
   {
    "row": "B8",
    "screen": "walk_park_couple.moment",
    "verdict": "PASS",
-   "line": "Through the bushes behind the pond: a man and a woman on the grass, her skirt up, her tits out, his jeans round his knees",
-   "why": "the skirt is the stranger's; nothing of hers named",
-   "cause": null,
+   "line": "Through the bushes behind the pond: a man and a woman on the grass, her skirt up, her tits out, his jeans round his knees, his cock thrusting into her, slow and",
+   "why": "no number disagrees with PLAN (rent Sunday, Friday, number nine); the only garments named are the other people's, not hers",
+   "cause": "",
    "note": false,
    "screen_hash": {
-    "text": "2c64cca5577cbac7",
+    "text": "9f8c3c7fe47596ff",
+    "traits": "44136fa355b3678a",
     "facts": "2ce65de01af70a7d",
     "facts2": "2ce65de01af70a7d",
-    "all": "8a847becb2cf976a"
+    "all": "e9cf488728b26e5b"
    },
    "row_hash": "80d415cf08e0ebfe",
    "carried": true,
-   "pass": 4
+   "pass": 9
   },
   {
    "row": "B8",
    "screen": "walk_park_couple.watch",
    "verdict": "PASS",
-   "line": "Your thighs clench. You know which gap in the bushes now.",
-   "why": "no number, and no garment of hers is named",
-   "cause": null,
+   "line": "He drives his cock into her harder, her heels digging in, until she arches and moans under him, and he pulls out and cums across her thigh. / Fuck. Fuck, yes. F",
+   "why": "no number disagrees with PLAN (rent Sunday, Friday, number nine); the only garments named are the other people's, not hers",
+   "cause": "",
    "note": false,
    "screen_hash": {
-    "text": "09119467bbc547a0",
+    "text": "599c5d32b887425e",
+    "traits": "44136fa355b3678a",
     "facts": "2ce65de01af70a7d",
     "facts2": "2ce65de01af70a7d",
-    "all": "06680ae1766b2db2"
+    "all": "109e8e360b10d947"
    },
    "row_hash": "80d415cf08e0ebfe",
    "carried": true,
-   "pass": 4
+   "pass": 9
   },
   {
    "row": "B8",
    "screen": "walk_vance_ledger.hello",
    "verdict": "PASS",
-   "line": "He just watches you read the numbers on them.",
-   "why": "no number; no garment of hers named, or the one named is backed",
-   "cause": null,
+   "line": "Evening, little lady. / Evening.",
+   "why": "no number disagrees with PLAN (rent Sunday, Friday, number nine); the only garments named are the other people's, not hers",
+   "cause": "",
    "note": false,
    "screen_hash": {
-    "text": "6570f572d33abf27",
+    "text": "2e8649bf8e537d1b",
+    "traits": "d9172dabbd56b049",
     "facts": "c00465774a257291",
     "facts2": "144cf636eba42a4a",
-    "all": "381625358bf64de6"
+    "all": "1f8f81a8423f6559"
    },
    "row_hash": "80d415cf08e0ebfe",
    "carried": true,
-   "pass": 2
+   "pass": 9
   },
   {
    "row": "B8",
    "screen": "walk_vance_ledger.moment",
    "verdict": "PASS",
-   "line": "[not met_vance] The man next door is on his porch ... Stranger: \"Short again, number nine.\"",
-   "why": "no number; no garment of hers named, or the one named is backed",
-   "cause": null,
+   "line": "Vance is on his porch with a shoebox of envelopes on his knee, licking his thumb, counting. / Short again, number nine. Always number nine.",
+   "why": "no number disagrees with PLAN (rent Sunday, Friday, number nine); the only garments named are the other people's, not hers",
+   "cause": "",
    "note": false,
    "screen_hash": {
-    "text": "1820d55a7d00c5da",
+    "text": "2557979fbd1c0b8d",
+    "traits": "d9172dabbd56b049",
     "facts": "c00465774a257291",
     "facts2": "144cf636eba42a4a",
-    "all": "23deead29a4d9161"
+    "all": "239ef322866e551e"
    },
    "row_hash": "80d415cf08e0ebfe",
    "carried": true,
-   "pass": 2
+   "pass": 9
   },
   {
    "row": "B8",
    "screen": "walk_vance_ledger.past",
    "verdict": "PASS",
-   "line": "Number nine. You wonder who that is.",
-   "why": "no number; no garment of hers named, or the one named is backed",
-   "cause": null,
+   "line": "You walk past. You hear the box lid shut behind you. Number nine. You wonder who that is.",
+   "why": "no number disagrees with PLAN (rent Sunday, Friday, number nine); the only garments named are the other people's, not hers",
+   "cause": "",
    "note": false,
    "screen_hash": {
-    "text": "f18c3940a540acbe",
+    "text": "2c890f8a73feab69",
+    "traits": "44136fa355b3678a",
     "facts": "978c7e388c3b3778",
     "facts2": "978c7e388c3b3778",
-    "all": "d4562d8fc7c0bc6f"
+    "all": "2c7440d174a776b1"
    },
    "row_hash": "80d415cf08e0ebfe",
    "carried": true,
-   "pass": 2
+   "pass": 9
   },
   {
    "row": "B9",
@@ -1220,55 +1265,58 @@
    "row": "C1158",
    "screen": "walk_nina_dress.moment",
    "verdict": "PASS",
-   "line": "The fitting room curtain's half open. Nina's in the shop's tightest black dress, turning to check her ass in the mirror.",
-   "why": "no garment of hers is named",
-   "cause": null,
+   "line": "The fitting room curtain's half open. Nina's in the shop's tightest black dress, turning to check her ass in the mirror. / Don't tell my boss. I'm the boss.",
+   "why": "garments named are the couple's / Nina's own (skirt, jeans, the shop's dress), never hers",
+   "cause": "",
    "note": false,
    "screen_hash": {
-    "text": "3a33050b5c9c33fe",
+    "text": "68580ed617a631bb",
+    "traits": "01d024bf2eee28fd",
     "facts": "a218a488dcdc9af8",
     "facts2": "cd23064395339386",
-    "all": "9ab58aa3cdfb8d76"
+    "all": "6ae7b9d79a18e2aa"
    },
    "row_hash": "f40f51a0fd6cfd10",
    "carried": true,
-   "pass": 4
+   "pass": 9
   },
   {
    "row": "C1158",
    "screen": "walk_park_couple.moment",
    "verdict": "PASS",
-   "line": "Through the bushes behind the pond: a man and a woman on the grass, her skirt up, her tits out, his jeans round his knees",
-   "why": "the garments named are the strangers'",
-   "cause": null,
+   "line": "Through the bushes behind the pond: a man and a woman on the grass, her skirt up, her tits out, his jeans round his knees, his cock thrusting into her, slow and",
+   "why": "garments named are the couple's / Nina's own (skirt, jeans, the shop's dress), never hers",
+   "cause": "",
    "note": false,
    "screen_hash": {
-    "text": "2c64cca5577cbac7",
+    "text": "9f8c3c7fe47596ff",
+    "traits": "44136fa355b3678a",
     "facts": "2ce65de01af70a7d",
     "facts2": "2ce65de01af70a7d",
-    "all": "8a847becb2cf976a"
+    "all": "e9cf488728b26e5b"
    },
    "row_hash": "f40f51a0fd6cfd10",
    "carried": true,
-   "pass": 4
+   "pass": 9
   },
   {
    "row": "C1158",
    "screen": "walk_park_couple.watch",
    "verdict": "PASS",
-   "line": "Your thighs clench. You know which gap in the bushes now.",
-   "why": "no garment of hers named",
-   "cause": null,
+   "line": "He drives his cock into her harder, her heels digging in, until she arches and moans under him, and he pulls out and cums across her thigh. / Fuck. Fuck, yes. F",
+   "why": "garments named are the couple's / Nina's own (skirt, jeans, the shop's dress), never hers",
+   "cause": "",
    "note": false,
    "screen_hash": {
-    "text": "09119467bbc547a0",
+    "text": "599c5d32b887425e",
+    "traits": "44136fa355b3678a",
     "facts": "2ce65de01af70a7d",
     "facts2": "2ce65de01af70a7d",
-    "all": "06680ae1766b2db2"
+    "all": "109e8e360b10d947"
    },
    "row_hash": "f40f51a0fd6cfd10",
    "carried": true,
-   "pass": 4
+   "pass": 9
   },
   {
    "row": "C1173",
@@ -1409,55 +1457,58 @@
    "row": "C1206",
    "screen": "walk_nina_dress.moment",
    "verdict": "PASS",
-   "line": "The fitting room curtain's half open. Nina's in the shop's tightest black dress, turning to check her ass in the mirror.",
-   "why": "no garment of hers is named",
-   "cause": null,
+   "line": "The fitting room curtain's half open. Nina's in the shop's tightest black dress, turning to check her ass in the mirror. / Don't tell my boss. I'm the boss.",
+   "why": "garments named are the couple's / Nina's own (skirt, jeans, the shop's dress), never hers",
+   "cause": "",
    "note": false,
    "screen_hash": {
-    "text": "3a33050b5c9c33fe",
+    "text": "68580ed617a631bb",
+    "traits": "01d024bf2eee28fd",
     "facts": "a218a488dcdc9af8",
     "facts2": "cd23064395339386",
-    "all": "9ab58aa3cdfb8d76"
+    "all": "6ae7b9d79a18e2aa"
    },
    "row_hash": "bfff76edbee583de",
    "carried": true,
-   "pass": 4
+   "pass": 9
   },
   {
    "row": "C1206",
    "screen": "walk_park_couple.moment",
    "verdict": "PASS",
-   "line": "Through the bushes behind the pond: a man and a woman on the grass, her skirt up, her tits out, his jeans round his knees",
-   "why": "no garment of hers named",
-   "cause": null,
+   "line": "Through the bushes behind the pond: a man and a woman on the grass, her skirt up, her tits out, his jeans round his knees, his cock thrusting into her, slow and",
+   "why": "garments named are the couple's / Nina's own (skirt, jeans, the shop's dress), never hers",
+   "cause": "",
    "note": false,
    "screen_hash": {
-    "text": "2c64cca5577cbac7",
+    "text": "9f8c3c7fe47596ff",
+    "traits": "44136fa355b3678a",
     "facts": "2ce65de01af70a7d",
     "facts2": "2ce65de01af70a7d",
-    "all": "8a847becb2cf976a"
+    "all": "e9cf488728b26e5b"
    },
    "row_hash": "bfff76edbee583de",
    "carried": true,
-   "pass": 4
+   "pass": 9
   },
   {
    "row": "C1206",
    "screen": "walk_park_couple.watch",
    "verdict": "PASS",
-   "line": "Your thighs clench. You know which gap in the bushes now.",
-   "why": "no garment of hers named",
-   "cause": null,
+   "line": "He drives his cock into her harder, her heels digging in, until she arches and moans under him, and he pulls out and cums across her thigh. / Fuck. Fuck, yes. F",
+   "why": "garments named are the couple's / Nina's own (skirt, jeans, the shop's dress), never hers",
+   "cause": "",
    "note": false,
    "screen_hash": {
-    "text": "09119467bbc547a0",
+    "text": "599c5d32b887425e",
+    "traits": "44136fa355b3678a",
     "facts": "2ce65de01af70a7d",
     "facts2": "2ce65de01af70a7d",
-    "all": "06680ae1766b2db2"
+    "all": "109e8e360b10d947"
    },
    "row_hash": "bfff76edbee583de",
    "carried": true,
-   "pass": 4
+   "pass": 9
   },
   {
    "row": "C1220",
@@ -2147,6 +2198,45 @@
    "pass": 1
   },
   {
+   "row": "C1820",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "chance = 0.35",
+   "why": "one canvas each with its one bottom band (release 1, meters frozen, C2182); 0.35 is C2195's default by LO's 'Go', not a band left out",
+   "cause": null,
+   "note": true,
+   "screen_hash": "bb75fdf914fa7a4f",
+   "row_hash": "d8f9999d285c6607",
+   "carried": true,
+   "pass": 9
+  },
+  {
+   "row": "C1821",
+   "screen": "*",
+   "verdict": "N/A",
+   "line": "\u2014",
+   "why": "router/branch/payoff is the substitution shape; these walk-ins are random canvases at a place with no router, and release 1 has no branch",
+   "cause": null,
+   "note": true,
+   "screen_hash": "bb75fdf914fa7a4f",
+   "row_hash": "b9818557d5e43850",
+   "carried": true,
+   "pass": 9
+  },
+  {
+   "row": "C1864",
+   "screen": "*",
+   "verdict": "N/A",
+   "line": "\u2014",
+   "why": "no bands and no exclusive_group on these canvases in release 1",
+   "cause": null,
+   "note": true,
+   "screen_hash": "bb75fdf914fa7a4f",
+   "row_hash": "45e669c2511d9b8e",
+   "carried": true,
+   "pass": 9
+  },
+  {
    "row": "C2179",
    "screen": "*",
    "verdict": "PASS",
@@ -2160,17 +2250,30 @@
    "pass": 6
   },
   {
-   "row": "C2183",
+   "row": "C2186",
    "screen": "*",
-   "verdict": "PASS",
-   "line": "Vance Dominant/Forward; Danny Forward/Strictly Casual (\"Cash only.\"); Marco Dominant/Confident/Sporty (\"fixing\" her form at the squat rack); Nina Forward/Strictly Casual (\"Your turn next, sweetie.\")",
-   "why": "2-3 traits each, Forward or Sporty learnable and true here",
-   "cause": null,
+   "verdict": "N/A",
+   "line": "\u2014",
+   "why": "kind (b) 'comes to her' row; every walk-in here is kind (a), she comes across something (Does: line), none written as someone coming to her",
+   "cause": "",
    "note": false,
-   "screen_hash": "48bc2ded07f552cb",
-   "row_hash": "40172c2d376bfc32",
+   "screen_hash": "bb75fdf914fa7a4f",
+   "row_hash": "39e6f4b48d03d606",
    "carried": true,
-   "pass": 6
+   "pass": 9
+  },
+  {
+   "row": "C2187",
+   "screen": "*",
+   "verdict": "N/A",
+   "line": "\u2014",
+   "why": "kind (b) brake; these are kind (a) and correctly stay off came_to_her_today (no condition reads it, no choice sets it)",
+   "cause": "",
+   "note": false,
+   "screen_hash": "bb75fdf914fa7a4f",
+   "row_hash": "f2b54b1dd7c15f2f",
+   "carried": true,
+   "pass": 9
   },
   {
    "row": "C2188",
@@ -2404,7 +2507,7 @@
     "all": "643b5204a11ac43b"
    },
    "row_hash": "0c03931191c53a34",
-   "carried": false,
+   "carried": true,
    "pass": 8
   },
   {
@@ -2423,7 +2526,7 @@
     "all": "a8e5b43e286cc341"
    },
    "row_hash": "0c03931191c53a34",
-   "carried": false,
+   "carried": true,
    "pass": 8
   },
   {
@@ -2442,7 +2545,7 @@
     "all": "c9184004a52862f8"
    },
    "row_hash": "0c03931191c53a34",
-   "carried": false,
+   "carried": true,
    "pass": 8
   },
   {
@@ -2461,7 +2564,7 @@
     "all": "6d18a1335d3f8bce"
    },
    "row_hash": "0c03931191c53a34",
-   "carried": false,
+   "carried": true,
    "pass": 8
   },
   {
@@ -2480,7 +2583,7 @@
     "all": "68f690b15a7332ac"
    },
    "row_hash": "0c03931191c53a34",
-   "carried": false,
+   "carried": true,
    "pass": 8
   },
   {
@@ -2499,7 +2602,7 @@
     "all": "db9750bdc09cd71a"
    },
    "row_hash": "0c03931191c53a34",
-   "carried": false,
+   "carried": true,
    "pass": 8
   },
   {
@@ -2518,7 +2621,7 @@
     "all": "ec4fb2c9d24d8347"
    },
    "row_hash": "0c03931191c53a34",
-   "carried": false,
+   "carried": true,
    "pass": 8
   },
   {
@@ -2537,7 +2640,7 @@
     "all": "56eea93205d11b00"
    },
    "row_hash": "0c03931191c53a34",
-   "carried": false,
+   "carried": true,
    "pass": 8
   },
   {
@@ -2556,7 +2659,7 @@
     "all": "0178edb783db2004"
    },
    "row_hash": "0c03931191c53a34",
-   "carried": false,
+   "carried": true,
    "pass": 8
   },
   {
@@ -2575,7 +2678,7 @@
     "all": "659cce2420e2729f"
    },
    "row_hash": "0c03931191c53a34",
-   "carried": false,
+   "carried": true,
    "pass": 8
   },
   {
@@ -2594,7 +2697,7 @@
     "all": "9ab58aa3cdfb8d76"
    },
    "row_hash": "0c03931191c53a34",
-   "carried": false,
+   "carried": true,
    "pass": 8
   },
   {
@@ -2613,7 +2716,7 @@
     "all": "fdd5ccf047119995"
    },
    "row_hash": "0c03931191c53a34",
-   "carried": false,
+   "carried": true,
    "pass": 8
   },
   {
@@ -2632,7 +2735,7 @@
     "all": "4193ec3dc239d2b3"
    },
    "row_hash": "0c03931191c53a34",
-   "carried": false,
+   "carried": true,
    "pass": 8
   },
   {
@@ -2651,7 +2754,7 @@
     "all": "8a847becb2cf976a"
    },
    "row_hash": "0c03931191c53a34",
-   "carried": false,
+   "carried": true,
    "pass": 8
   },
   {
@@ -2670,7 +2773,7 @@
     "all": "06680ae1766b2db2"
    },
    "row_hash": "0c03931191c53a34",
-   "carried": false,
+   "carried": true,
    "pass": 8
   },
   {
@@ -2689,7 +2792,7 @@
     "all": "381625358bf64de6"
    },
    "row_hash": "0c03931191c53a34",
-   "carried": false,
+   "carried": true,
    "pass": 8
   },
   {
@@ -2708,7 +2811,7 @@
     "all": "23deead29a4d9161"
    },
    "row_hash": "0c03931191c53a34",
-   "carried": false,
+   "carried": true,
    "pass": 8
   },
   {
@@ -2727,8 +2830,21 @@
     "all": "d4562d8fc7c0bc6f"
    },
    "row_hash": "0c03931191c53a34",
-   "carried": false,
+   "carried": true,
    "pass": 8
+  },
+  {
+   "row": "C2195",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "trigger_mode = \"random\", chance = 0.35, max_triggers_per_day = 1",
+   "why": "every kind-(a) walk-in is random 0.35 once a day, gated by the person's rows and window as before, no random_cooldown override (engine default 3), never on came_to_her_today; the substitution walk-in is a different kind",
+   "cause": "",
+   "note": false,
+   "screen_hash": "bb75fdf914fa7a4f",
+   "row_hash": "77083291a86791c3",
+   "carried": true,
+   "pass": 9
   },
   {
    "row": "C286",
@@ -2820,6 +2936,19 @@
    "row_hash": "b920ef848ab61988",
    "carried": true,
    "pass": 1
+  },
+  {
+   "row": "C302",
+   "screen": "*",
+   "verdict": "N/A",
+   "line": "\u2014",
+   "why": "meters frozen in release 1 (C2182): no stage to add an option; the card lists being caught as later (Out of scope)",
+   "cause": null,
+   "note": true,
+   "screen_hash": "bb75fdf914fa7a4f",
+   "row_hash": "2ba94157c9da471e",
+   "carried": true,
+   "pass": 9
   },
   {
    "row": "C311",
@@ -3111,271 +3240,286 @@
    "row": "C460",
    "screen": "walk_danny_deal.ask",
    "verdict": "PASS",
-   "line": "He smiles like you've both agreed on something.",
-   "why": "every claim checked against PLAN, who_is_where and the trigger; true on every reachable visit",
+   "line": "What was what, gorgeous? / He smiles like you've both agreed on something.",
+   "why": "every fact checks against his rows and the shop's 07:00-23:00 hours; the hooded guy is a stranger who returns because the scene repeats daily, as Danny's 'Same time tomorrow' says",
    "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "a5631bc334696220",
+    "text": "12766d8ef2ae94e7",
+    "traits": "6789af7af3d0366b",
     "facts": "8bd078dd07945ef3",
     "facts2": "bfe48a7d9d77f37a",
-    "all": "6d18a1335d3f8bce"
+    "all": "19effe31b7c3eac6"
    },
    "row_hash": "67e48e60d5053a2e",
    "carried": true,
-   "pass": 2
+   "pass": 10
   },
   {
    "row": "C460",
    "screen": "walk_danny_deal.moment",
    "verdict": "PASS",
-   "line": "Same time tomorrow. Don't be late. Cash only.",
-   "why": "every claim checked against PLAN, who_is_where and the trigger; true on every reachable visit",
+   "line": "Danny's at the till, and a guy in a hood is leaning over it: something small goes one way, a fold of notes the other.",
+   "why": "every fact checks against his rows and the shop's 07:00-23:00 hours; the hooded guy is a stranger who returns because the scene repeats daily, as Danny's 'Same time tomorrow' says",
    "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "d28812cc4f82f7ff",
+    "text": "f97cdd937a22a8b0",
+    "traits": "6789af7af3d0366b",
     "facts": "8bd078dd07945ef3",
     "facts2": "bfe48a7d9d77f37a",
-    "all": "68f690b15a7332ac"
+    "all": "e67b4cb0443e490e"
    },
    "row_hash": "67e48e60d5053a2e",
    "carried": true,
-   "pass": 2
+   "pass": 10
   },
   {
    "row": "C460",
    "screen": "walk_danny_deal.pretend",
    "verdict": "PASS",
-   "line": "He'll be out back again tomorrow night.",
-   "why": "true daily by his rows and the window",
+   "line": "You pick up a snack you don't want and stare at the label, not at him. / He'll be at the till again tomorrow night, and so will the guy in the hood.",
+   "why": "every fact checks against his rows and the shop's 07:00-23:00 hours; the hooded guy is a stranger who returns because the scene repeats daily, as Danny's 'Same time tomorrow' says",
    "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "341170cb3d2fcded",
+    "text": "43feab5adf168a36",
+    "traits": "6789af7af3d0366b",
     "facts": "8bd078dd07945ef3",
     "facts2": "bfe48a7d9d77f37a",
-    "all": "db9750bdc09cd71a"
+    "all": "aca4ad35d46b1572"
    },
    "row_hash": "67e48e60d5053a2e",
    "carried": true,
-   "pass": 2
+   "pass": 10
   },
   {
    "row": "C460",
    "screen": "walk_marco_squat.back",
    "verdict": "PASS",
-   "line": "You can feel him clocking you anyway.",
-   "why": "every claim checked against PLAN, who_is_where and the trigger; true on every reachable visit",
+   "line": "You look away, at the mirror, at the door, anywhere. You can feel him clocking you anyway.",
+   "why": "every claim true on every reachable visit: Marco there by his row and the trigger, mirror and door are in the gym's own description, his look is texture",
    "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "9580227f653d68f6",
+    "text": "0fd4ed4fe645e21a",
+    "traits": "44136fa355b3678a",
     "facts": "79f3020e3ffe2d3c",
     "facts2": "79f3020e3ffe2d3c",
-    "all": "ec4fb2c9d24d8347"
+    "all": "292cf200c13d9676"
    },
    "row_hash": "67e48e60d5053a2e",
-   "carried": true,
-   "pass": 2
+   "carried": false,
+   "pass": 11
   },
   {
    "row": "C460",
    "screen": "walk_marco_squat.moment",
    "verdict": "PASS",
-   "line": "Your own thighs go tight on the bench. He sees that too.",
-   "why": "every claim checked against PLAN, who_is_where and the trigger; true on every reachable visit",
+   "line": "Marco's behind a woman at the squat rack... / Your own thighs go tight by the door. He sees that too. / -> Watch from the door \u00b7 Look away",
+   "why": "Marco there by row and trigger; 'by the door' true on arrival; no choice promises an act the game can refuse her (no workout claimed)",
    "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "f774dc0dd74361b0",
+    "text": "ed1d60a71171d96c",
+    "traits": "e4365d01d4eb14be",
     "facts": "8965fc400ca80c26",
     "facts2": "fc909c0a076152b4",
-    "all": "56eea93205d11b00"
+    "all": "0ae49aa661a7f66d"
    },
    "row_hash": "67e48e60d5053a2e",
-   "carried": true,
-   "pass": 2
+   "carried": false,
+   "pass": 11
   },
   {
    "row": "C460",
    "screen": "walk_marco_squat.watch",
    "verdict": "PASS",
-   "line": "Your turn's coming, champ.",
-   "why": "every claim checked against PLAN, who_is_where and the trigger; true on every reachable visit",
-   "cause": null,
+   "line": "His hands stay there another rep. He catches your eye in the mirror and doesn't let go of her. / Your turn's coming, champ.",
+   "why": "Marco at hood_gym weekdays 17:00-21:00; gated met_marco + npc_at_location; gym open to 22:00; true at first and last minute of the window and on a second visit",
+   "cause": "",
    "note": false,
    "screen_hash": {
-    "text": "18b2a59c167765e8",
+    "text": "b8170a0eb7937980",
+    "traits": "e4365d01d4eb14be",
     "facts": "8965fc400ca80c26",
     "facts2": "fc909c0a076152b4",
-    "all": "0178edb783db2004"
+    "all": "9296b2f163dab50c"
    },
    "row_hash": "67e48e60d5053a2e",
    "carried": true,
-   "pass": 2
+   "pass": 9
   },
   {
    "row": "C460",
    "screen": "walk_nina_dress.browse",
    "verdict": "PASS",
-   "line": "Coward. / She says it with a smile, and pulls the curtain.",
-   "why": "walk_nina_dress: Mon-Sat 18:45-18:55, Nina present; her row has her in the fitting room 18:45-19:00",
-   "cause": null,
+   "line": "Coward. / She says it with a smile, and pulls the curtain. Next time she might not let you just browse.",
+   "why": "Nina 'in the fitting room' at hood_clothes Mon-Sat 18:45-19:00; gated met_nina + npc_at_location; window 18:45-18:55; true at first and last minute of the window and on a second visit",
+   "cause": "",
    "note": false,
    "screen_hash": {
-    "text": "b0b4f48fa106cb3c",
+    "text": "e7bbd5ddecead95c",
+    "traits": "01d024bf2eee28fd",
     "facts": "a218a488dcdc9af8",
     "facts2": "cd23064395339386",
-    "all": "659cce2420e2729f"
+    "all": "61918301fd8d0aa4"
    },
    "row_hash": "67e48e60d5053a2e",
    "carried": true,
-   "pass": 4
+   "pass": 9
   },
   {
    "row": "C460",
    "screen": "walk_nina_dress.moment",
    "verdict": "PASS",
-   "line": "The fitting room curtain's half open. Nina's in the shop's tightest black dress, turning to check her ass in the mirror.",
-   "why": "walk_nina_dress: Mon-Sat 18:45-18:55, Nina present; her row has her in the fitting room 18:45-19:00",
-   "cause": null,
+   "line": "The fitting room curtain's half open. Nina's in the shop's tightest black dress, turning to check her ass in the mirror. / Don't tell my boss. I'm the boss.",
+   "why": "Nina 'in the fitting room' at hood_clothes Mon-Sat 18:45-19:00; gated met_nina + npc_at_location; window 18:45-18:55; read on just walking into the shop: the curtain is half open as she comes in; true at first and last minute of the window and on a second visit",
+   "cause": "",
    "note": false,
    "screen_hash": {
-    "text": "3a33050b5c9c33fe",
+    "text": "68580ed617a631bb",
+    "traits": "01d024bf2eee28fd",
     "facts": "a218a488dcdc9af8",
     "facts2": "cd23064395339386",
-    "all": "9ab58aa3cdfb8d76"
+    "all": "6ae7b9d79a18e2aa"
    },
    "row_hash": "67e48e60d5053a2e",
    "carried": true,
-   "pass": 4
+   "pass": 9
   },
   {
    "row": "C460",
    "screen": "walk_nina_dress.suits",
    "verdict": "PASS",
    "line": "I know. Your turn next, sweetie.",
-   "why": "walk_nina_dress: Mon-Sat 18:45-18:55, Nina present; her row has her in the fitting room 18:45-19:00; the 5-minute Done from 18:54 ends at 18:59, inside the shop's 7pm close",
-   "cause": null,
+   "why": "Nina 'in the fitting room' at hood_clothes Mon-Sat 18:45-19:00; gated met_nina + npc_at_location; window 18:45-18:55; true at first and last minute of the window and on a second visit",
+   "cause": "",
    "note": false,
    "screen_hash": {
-    "text": "7f56db26544085cf",
+    "text": "45a123dabc375de6",
+    "traits": "01d024bf2eee28fd",
     "facts": "a218a488dcdc9af8",
     "facts2": "cd23064395339386",
-    "all": "fdd5ccf047119995"
+    "all": "7500023af45d7642"
    },
    "row_hash": "67e48e60d5053a2e",
    "carried": true,
-   "pass": 4
+   "pass": 9
   },
   {
    "row": "C460",
    "screen": "walk_park_couple.away",
    "verdict": "PASS",
    "line": "You back onto the path before a twig can snap. You know that gap's there now.",
-   "why": "walk_park_couple: every day 19:00-20:55, park open 06:00-21:00; strangers, no rows needed",
-   "cause": null,
+   "why": "strangers only; park open 06:00-21:00, window 19:00-20:55 ends before the gates lock; true at first and last minute of the window and on a second visit",
+   "cause": "",
    "note": false,
    "screen_hash": {
-    "text": "79bf3c036e1eec95",
+    "text": "0a30fd6f753a1015",
+    "traits": "44136fa355b3678a",
     "facts": "2ce65de01af70a7d",
     "facts2": "2ce65de01af70a7d",
-    "all": "4193ec3dc239d2b3"
+    "all": "c85419e455c00de3"
    },
    "row_hash": "67e48e60d5053a2e",
    "carried": true,
-   "pass": 4
+   "pass": 9
   },
   {
    "row": "C460",
    "screen": "walk_park_couple.moment",
    "verdict": "PASS",
-   "line": "Through the bushes behind the pond: a man and a woman on the grass, her skirt up, her tits out, his jeans round his knees",
-   "why": "walk_park_couple: every day 19:00-20:55, park open 06:00-21:00; strangers, no rows needed",
-   "cause": null,
+   "line": "Through the bushes behind the pond: a man and a woman on the grass, her skirt up, her tits out, his jeans round his knees, his cock thrusting into her, slow and",
+   "why": "strangers only; park open 06:00-21:00, window 19:00-20:55 ends before the gates lock; read on just arriving in the park: what she comes across through the bushes; nothing says she went looking; true at first and last minute of the window and on a second visit",
+   "cause": "",
    "note": false,
    "screen_hash": {
-    "text": "2c64cca5577cbac7",
+    "text": "9f8c3c7fe47596ff",
+    "traits": "44136fa355b3678a",
     "facts": "2ce65de01af70a7d",
     "facts2": "2ce65de01af70a7d",
-    "all": "8a847becb2cf976a"
+    "all": "e9cf488728b26e5b"
    },
    "row_hash": "67e48e60d5053a2e",
    "carried": true,
-   "pass": 4
+   "pass": 9
   },
   {
    "row": "C460",
    "screen": "walk_park_couple.watch",
    "verdict": "PASS",
-   "line": "Your thighs clench. You know which gap in the bushes now.",
-   "why": "walk_park_couple: every day 19:00-20:55, park open 06:00-21:00; strangers, no rows needed; 'now' is true on every visit",
-   "cause": null,
+   "line": "He drives his cock into her harder, her heels digging in, until she arches and moans under him, and he pulls out and cums across her thigh. / Fuck. Fuck, yes. F",
+   "why": "strangers only; park open 06:00-21:00, window 19:00-20:55 ends before the gates lock; true at first and last minute of the window and on a second visit",
+   "cause": "",
    "note": false,
    "screen_hash": {
-    "text": "09119467bbc547a0",
+    "text": "599c5d32b887425e",
+    "traits": "44136fa355b3678a",
     "facts": "2ce65de01af70a7d",
     "facts2": "2ce65de01af70a7d",
-    "all": "06680ae1766b2db2"
+    "all": "109e8e360b10d947"
    },
    "row_hash": "67e48e60d5053a2e",
    "carried": true,
-   "pass": 4
+   "pass": 9
   },
   {
    "row": "C460",
    "screen": "walk_vance_ledger.hello",
    "verdict": "PASS",
-   "line": "[not met_vance] Stranger: \"Evening.\"",
-   "why": "Stranger before met_vance",
-   "cause": null,
+   "line": "Evening, little lady. / Evening.",
+   "why": "Vance 'on his porch' at hood_street weekdays 17:00-20:00; gated npc_at_location; named only behind met_vance, 'the man next door' before; true at first and last minute of the window and on a second visit",
+   "cause": "",
    "note": false,
    "screen_hash": {
-    "text": "6570f572d33abf27",
+    "text": "2e8649bf8e537d1b",
+    "traits": "d9172dabbd56b049",
     "facts": "c00465774a257291",
     "facts2": "144cf636eba42a4a",
-    "all": "381625358bf64de6"
+    "all": "1f8f81a8423f6559"
    },
    "row_hash": "67e48e60d5053a2e",
    "carried": true,
-   "pass": 2
+   "pass": 9
   },
   {
    "row": "C460",
    "screen": "walk_vance_ledger.moment",
    "verdict": "PASS",
-   "line": "[not met_vance] speaker unknown",
-   "why": "renders Stranger (v2.py:19280-19287); named only behind met_vance",
-   "cause": null,
+   "line": "Vance is on his porch with a shoebox of envelopes on his knee, licking his thumb, counting. / Short again, number nine. Always number nine.",
+   "why": "Vance 'on his porch' at hood_street weekdays 17:00-20:00; gated npc_at_location; named only behind met_vance, 'the man next door' before; read on just stepping onto her street: he is on his porch as she passes; true at first and last minute of the window and on a second visit",
+   "cause": "",
    "note": false,
    "screen_hash": {
-    "text": "1820d55a7d00c5da",
+    "text": "2557979fbd1c0b8d",
+    "traits": "d9172dabbd56b049",
     "facts": "c00465774a257291",
     "facts2": "144cf636eba42a4a",
-    "all": "23deead29a4d9161"
+    "all": "239ef322866e551e"
    },
    "row_hash": "67e48e60d5053a2e",
    "carried": true,
-   "pass": 2
+   "pass": 9
   },
   {
    "row": "C460",
    "screen": "walk_vance_ledger.past",
    "verdict": "PASS",
-   "line": "Number nine. You wonder who that is.",
-   "why": "every claim checked against PLAN, who_is_where and the trigger; true on every reachable visit",
-   "cause": null,
+   "line": "You walk past. You hear the box lid shut behind you. Number nine. You wonder who that is.",
+   "why": "Vance 'on his porch' at hood_street weekdays 17:00-20:00; gated npc_at_location; named only behind met_vance, 'the man next door' before; true at first and last minute of the window and on a second visit",
+   "cause": "",
    "note": false,
    "screen_hash": {
-    "text": "f18c3940a540acbe",
+    "text": "2c890f8a73feab69",
+    "traits": "44136fa355b3678a",
     "facts": "978c7e388c3b3778",
     "facts2": "978c7e388c3b3778",
-    "all": "d4562d8fc7c0bc6f"
+    "all": "2c7440d174a776b1"
    },
    "row_hash": "67e48e60d5053a2e",
    "carried": true,
-   "pass": 2
+   "pass": 9
   },
   {
    "row": "C461",
@@ -3448,271 +3592,286 @@
    "row": "C461",
    "screen": "walk_danny_deal.ask",
    "verdict": "PASS",
-   "line": "He smiles like you've both agreed on something.",
-   "why": "texture and in-character dialogue only",
+   "line": "What was what, gorgeous? / He smiles like you've both agreed on something.",
+   "why": "Danny's lines fit a fuckbuddy-want dealer ('gorgeous', 'marrying it?'); the rest is texture and her reaction",
    "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "a5631bc334696220",
+    "text": "12766d8ef2ae94e7",
+    "traits": "6789af7af3d0366b",
     "facts": "8bd078dd07945ef3",
     "facts2": "bfe48a7d9d77f37a",
-    "all": "6d18a1335d3f8bce"
+    "all": "19effe31b7c3eac6"
    },
    "row_hash": "310706ee076318f2",
    "carried": true,
-   "pass": 2
+   "pass": 10
   },
   {
    "row": "C461",
    "screen": "walk_danny_deal.moment",
    "verdict": "PASS",
-   "line": "Same time tomorrow. Don't be late. Cash only.",
-   "why": "texture and in-character dialogue only",
+   "line": "Danny's at the till, and a guy in a hood is leaning over it: something small goes one way, a fold of notes the other.",
+   "why": "Danny's lines fit a fuckbuddy-want dealer ('gorgeous', 'marrying it?'); the rest is texture and her reaction",
    "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "d28812cc4f82f7ff",
+    "text": "f97cdd937a22a8b0",
+    "traits": "6789af7af3d0366b",
     "facts": "8bd078dd07945ef3",
     "facts2": "bfe48a7d9d77f37a",
-    "all": "68f690b15a7332ac"
+    "all": "e67b4cb0443e490e"
    },
    "row_hash": "310706ee076318f2",
    "carried": true,
-   "pass": 2
+   "pass": 10
   },
   {
    "row": "C461",
    "screen": "walk_danny_deal.pretend",
    "verdict": "PASS",
-   "line": "You buying that or marrying it? / He'll be out back again tomorrow night.",
-   "why": "texture and in-character dialogue only",
+   "line": "You pick up a snack you don't want and stare at the label, not at him. / He'll be at the till again tomorrow night, and so will the guy in the hood.",
+   "why": "Danny's lines fit a fuckbuddy-want dealer ('gorgeous', 'marrying it?'); the rest is texture and her reaction",
    "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "341170cb3d2fcded",
+    "text": "43feab5adf168a36",
+    "traits": "6789af7af3d0366b",
     "facts": "8bd078dd07945ef3",
     "facts2": "bfe48a7d9d77f37a",
-    "all": "db9750bdc09cd71a"
+    "all": "aca4ad35d46b1572"
    },
    "row_hash": "310706ee076318f2",
    "carried": true,
-   "pass": 2
+   "pass": 10
   },
   {
    "row": "C461",
    "screen": "walk_marco_squat.back",
    "verdict": "PASS",
-   "line": "You can feel him clocking you anyway.",
-   "why": "texture and in-character dialogue only",
+   "line": "You look away, at the mirror, at the door, anywhere. You can feel him clocking you anyway.",
+   "why": "her reaction and texture that can't clash with rows, clock or flags",
    "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "9580227f653d68f6",
+    "text": "0fd4ed4fe645e21a",
+    "traits": "44136fa355b3678a",
     "facts": "79f3020e3ffe2d3c",
     "facts2": "79f3020e3ffe2d3c",
-    "all": "ec4fb2c9d24d8347"
+    "all": "292cf200c13d9676"
    },
    "row_hash": "310706ee076318f2",
-   "carried": true,
-   "pass": 2
+   "carried": false,
+   "pass": 11
   },
   {
    "row": "C461",
    "screen": "walk_marco_squat.moment",
    "verdict": "PASS",
-   "line": "Your own thighs go tight on the bench. He sees that too.",
-   "why": "texture and in-character dialogue only",
+   "line": "Marco's behind a woman at the squat rack... / Your own thighs go tight by the door. He sees that too. / -> Watch from the door \u00b7 Look away",
+   "why": "Marco's line fits his cast entry (takes charge, sporty); her thighs and his noticing are texture that can't clash; the labels claim nothing the sheet can contradict",
    "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "f774dc0dd74361b0",
+    "text": "ed1d60a71171d96c",
+    "traits": "e4365d01d4eb14be",
     "facts": "8965fc400ca80c26",
     "facts2": "fc909c0a076152b4",
-    "all": "56eea93205d11b00"
+    "all": "0ae49aa661a7f66d"
    },
    "row_hash": "310706ee076318f2",
-   "carried": true,
-   "pass": 2
+   "carried": false,
+   "pass": 11
   },
   {
    "row": "C461",
    "screen": "walk_marco_squat.watch",
    "verdict": "PASS",
-   "line": "Your turn's coming, champ.",
-   "why": "texture and in-character dialogue only",
-   "cause": null,
+   "line": "His hands stay there another rep. He catches your eye in the mirror and doesn't let go of her. / Your turn's coming, champ.",
+   "why": "texture and her reaction only; nothing that can clash with rows, clock or flags",
+   "cause": "",
    "note": false,
    "screen_hash": {
-    "text": "18b2a59c167765e8",
+    "text": "b8170a0eb7937980",
+    "traits": "e4365d01d4eb14be",
     "facts": "8965fc400ca80c26",
     "facts2": "fc909c0a076152b4",
-    "all": "0178edb783db2004"
+    "all": "9296b2f163dab50c"
    },
    "row_hash": "310706ee076318f2",
    "carried": true,
-   "pass": 2
+   "pass": 9
   },
   {
    "row": "C461",
    "screen": "walk_nina_dress.browse",
    "verdict": "PASS",
-   "line": "Coward. / She says it with a smile, and pulls the curtain.",
-   "why": "texture and dialogue that fit the cast entries; no past or fact assumed",
-   "cause": null,
+   "line": "Coward. / She says it with a smile, and pulls the curtain. Next time she might not let you just browse.",
+   "why": "texture and her reaction only; nothing that can clash with rows, clock or flags",
+   "cause": "",
    "note": false,
    "screen_hash": {
-    "text": "b0b4f48fa106cb3c",
+    "text": "e7bbd5ddecead95c",
+    "traits": "01d024bf2eee28fd",
     "facts": "a218a488dcdc9af8",
     "facts2": "cd23064395339386",
-    "all": "659cce2420e2729f"
+    "all": "61918301fd8d0aa4"
    },
    "row_hash": "310706ee076318f2",
    "carried": true,
-   "pass": 4
+   "pass": 9
   },
   {
    "row": "C461",
    "screen": "walk_nina_dress.moment",
    "verdict": "PASS",
-   "line": "The fitting room curtain's half open. Nina's in the shop's tightest black dress, turning to check her ass in the mirror.",
-   "why": "texture and dialogue that fit the cast entries; no past or fact assumed",
-   "cause": null,
+   "line": "The fitting room curtain's half open. Nina's in the shop's tightest black dress, turning to check her ass in the mirror. / Don't tell my boss. I'm the boss.",
+   "why": "texture and her reaction only; nothing that can clash with rows, clock or flags",
+   "cause": "",
    "note": false,
    "screen_hash": {
-    "text": "3a33050b5c9c33fe",
+    "text": "68580ed617a631bb",
+    "traits": "01d024bf2eee28fd",
     "facts": "a218a488dcdc9af8",
     "facts2": "cd23064395339386",
-    "all": "9ab58aa3cdfb8d76"
+    "all": "6ae7b9d79a18e2aa"
    },
    "row_hash": "310706ee076318f2",
    "carried": true,
-   "pass": 4
+   "pass": 9
   },
   {
    "row": "C461",
    "screen": "walk_nina_dress.suits",
    "verdict": "PASS",
    "line": "I know. Your turn next, sweetie.",
-   "why": "texture and dialogue that fit the cast entries; no past or fact assumed",
-   "cause": null,
+   "why": "texture and her reaction only; nothing that can clash with rows, clock or flags",
+   "cause": "",
    "note": false,
    "screen_hash": {
-    "text": "7f56db26544085cf",
+    "text": "45a123dabc375de6",
+    "traits": "01d024bf2eee28fd",
     "facts": "a218a488dcdc9af8",
     "facts2": "cd23064395339386",
-    "all": "fdd5ccf047119995"
+    "all": "7500023af45d7642"
    },
    "row_hash": "310706ee076318f2",
    "carried": true,
-   "pass": 4
+   "pass": 9
   },
   {
    "row": "C461",
    "screen": "walk_park_couple.away",
    "verdict": "PASS",
    "line": "You back onto the path before a twig can snap. You know that gap's there now.",
-   "why": "texture and dialogue that fit the cast entries; no past or fact assumed",
-   "cause": null,
+   "why": "texture and her reaction only; nothing that can clash with rows, clock or flags",
+   "cause": "",
    "note": false,
    "screen_hash": {
-    "text": "79bf3c036e1eec95",
+    "text": "0a30fd6f753a1015",
+    "traits": "44136fa355b3678a",
     "facts": "2ce65de01af70a7d",
     "facts2": "2ce65de01af70a7d",
-    "all": "4193ec3dc239d2b3"
+    "all": "c85419e455c00de3"
    },
    "row_hash": "310706ee076318f2",
    "carried": true,
-   "pass": 4
+   "pass": 9
   },
   {
    "row": "C461",
    "screen": "walk_park_couple.moment",
    "verdict": "PASS",
-   "line": "Through the bushes behind the pond: a man and a woman on the grass, her skirt up, her tits out, his jeans round his knees",
-   "why": "texture and dialogue that fit the cast entries; no past or fact assumed",
-   "cause": null,
+   "line": "Through the bushes behind the pond: a man and a woman on the grass, her skirt up, her tits out, his jeans round his knees, his cock thrusting into her, slow and",
+   "why": "texture and her reaction only; nothing that can clash with rows, clock or flags",
+   "cause": "",
    "note": false,
    "screen_hash": {
-    "text": "2c64cca5577cbac7",
+    "text": "9f8c3c7fe47596ff",
+    "traits": "44136fa355b3678a",
     "facts": "2ce65de01af70a7d",
     "facts2": "2ce65de01af70a7d",
-    "all": "8a847becb2cf976a"
+    "all": "e9cf488728b26e5b"
    },
    "row_hash": "310706ee076318f2",
    "carried": true,
-   "pass": 4
+   "pass": 9
   },
   {
    "row": "C461",
    "screen": "walk_park_couple.watch",
    "verdict": "PASS",
-   "line": "Your thighs clench. You know which gap in the bushes now.",
-   "why": "texture and dialogue that fit the cast entries; no past or fact assumed",
-   "cause": null,
+   "line": "He drives his cock into her harder, her heels digging in, until she arches and moans under him, and he pulls out and cums across her thigh. / Fuck. Fuck, yes. F",
+   "why": "texture and her reaction only; nothing that can clash with rows, clock or flags",
+   "cause": "",
    "note": false,
    "screen_hash": {
-    "text": "09119467bbc547a0",
+    "text": "599c5d32b887425e",
+    "traits": "44136fa355b3678a",
     "facts": "2ce65de01af70a7d",
     "facts2": "2ce65de01af70a7d",
-    "all": "06680ae1766b2db2"
+    "all": "109e8e360b10d947"
    },
    "row_hash": "310706ee076318f2",
    "carried": true,
-   "pass": 4
+   "pass": 9
   },
   {
    "row": "C461",
    "screen": "walk_vance_ledger.hello",
    "verdict": "PASS",
-   "line": "He just watches you read the numbers on them.",
-   "why": "texture and in-character dialogue only",
-   "cause": null,
+   "line": "Evening, little lady. / Evening.",
+   "why": "texture and her reaction only; nothing that can clash with rows, clock or flags",
+   "cause": "",
    "note": false,
    "screen_hash": {
-    "text": "6570f572d33abf27",
+    "text": "2e8649bf8e537d1b",
+    "traits": "d9172dabbd56b049",
     "facts": "c00465774a257291",
     "facts2": "144cf636eba42a4a",
-    "all": "381625358bf64de6"
+    "all": "1f8f81a8423f6559"
    },
    "row_hash": "310706ee076318f2",
    "carried": true,
-   "pass": 2
+   "pass": 9
   },
   {
    "row": "C461",
    "screen": "walk_vance_ledger.moment",
    "verdict": "PASS",
-   "line": "[not met_vance] The man next door is on his porch ... Stranger: \"Short again, number nine.\"",
-   "why": "texture and in-character dialogue only",
-   "cause": null,
+   "line": "Vance is on his porch with a shoebox of envelopes on his knee, licking his thumb, counting. / Short again, number nine. Always number nine.",
+   "why": "texture and her reaction only; nothing that can clash with rows, clock or flags",
+   "cause": "",
    "note": false,
    "screen_hash": {
-    "text": "1820d55a7d00c5da",
+    "text": "2557979fbd1c0b8d",
+    "traits": "d9172dabbd56b049",
     "facts": "c00465774a257291",
     "facts2": "144cf636eba42a4a",
-    "all": "23deead29a4d9161"
+    "all": "239ef322866e551e"
    },
    "row_hash": "310706ee076318f2",
    "carried": true,
-   "pass": 2
+   "pass": 9
   },
   {
    "row": "C461",
    "screen": "walk_vance_ledger.past",
    "verdict": "PASS",
-   "line": "Number nine. You wonder who that is.",
-   "why": "texture and in-character dialogue only",
-   "cause": null,
+   "line": "You walk past. You hear the box lid shut behind you. Number nine. You wonder who that is.",
+   "why": "texture and her reaction only; nothing that can clash with rows, clock or flags",
+   "cause": "",
    "note": false,
    "screen_hash": {
-    "text": "f18c3940a540acbe",
+    "text": "2c890f8a73feab69",
+    "traits": "44136fa355b3678a",
     "facts": "978c7e388c3b3778",
     "facts2": "978c7e388c3b3778",
-    "all": "d4562d8fc7c0bc6f"
+    "all": "2c7440d174a776b1"
    },
    "row_hash": "310706ee076318f2",
    "carried": true,
-   "pass": 2
+   "pass": 9
   },
   {
    "row": "C519",
@@ -3907,6 +4066,19 @@
    "pass": 1
   },
   {
+   "row": "C724",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "chance 0.35",
+   "why": "flat odds, listed on the card's Changed line with LO's '2nd one', 'Go'",
+   "cause": null,
+   "note": true,
+   "screen_hash": "bb75fdf914fa7a4f",
+   "row_hash": "37e21685569ccea7",
+   "carried": true,
+   "pass": 9
+  },
+  {
    "row": "C758",
    "screen": "*",
    "verdict": "PASS",
@@ -4024,6 +4196,32 @@
    "pass": 1
   },
   {
+   "row": "C788",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "",
+   "why": "moments run about 20-55 words, three of five everyday (plus the substitution), every one with a choice; who is there sets the tone",
+   "cause": "",
+   "note": false,
+   "screen_hash": "bb75fdf914fa7a4f",
+   "row_hash": "cae1598ef9cb6ff1",
+   "carried": true,
+   "pass": 9
+  },
+  {
+   "row": "C792",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "",
+   "why": "each is the moment, then one answer screen per choice; no third screen",
+   "cause": null,
+   "note": true,
+   "screen_hash": "bb75fdf914fa7a4f",
+   "row_hash": "92be110855d5a128",
+   "carried": true,
+   "pass": 9
+  },
+  {
    "row": "C794",
    "screen": "*",
    "verdict": "N/A",
@@ -4061,6 +4259,45 @@
    "row_hash": "5358489178bff0a4",
    "carried": true,
    "pass": 1
+  },
+  {
+   "row": "C855",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "",
+   "why": "filtered by hours, weekday, who is here (npc_at_location) and met flags; wear and meters frozen in release 1",
+   "cause": null,
+   "note": true,
+   "screen_hash": "bb75fdf914fa7a4f",
+   "row_hash": "d3dc77f2f96e20ae",
+   "carried": true,
+   "pass": 9
+  },
+  {
+   "row": "C856",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "",
+   "why": "every scene carries a time window",
+   "cause": null,
+   "note": true,
+   "screen_hash": "bb75fdf914fa7a4f",
+   "row_hash": "9c58ec7792f1f95a",
+   "carried": true,
+   "pass": 9
+  },
+  {
+   "row": "C859",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "",
+   "why": "release 1 pays flags only (C2182), so no scene takes anything yet; the row allows it, it doesn't demand it",
+   "cause": null,
+   "note": true,
+   "screen_hash": "bb75fdf914fa7a4f",
+   "row_hash": "c504ec577b14e288",
+   "carried": true,
+   "pass": 9
   },
   {
    "row": "C889",
@@ -4302,181 +4539,191 @@
    "row": "C927",
    "screen": "walk_danny_deal.ask",
    "verdict": "PASS",
-   "line": "He smiles like you've both agreed on something.",
-   "why": "every Done states 5 minutes; node hops state 0",
+   "line": "What was what, gorgeous? / He smiles like you've both agreed on something.",
+   "why": "Done costs time_progression_minutes = 5",
    "cause": null,
    "note": true,
    "screen_hash": {
-    "text": "a5631bc334696220",
+    "text": "12766d8ef2ae94e7",
+    "traits": "6789af7af3d0366b",
     "facts": "8bd078dd07945ef3",
     "facts2": "bfe48a7d9d77f37a",
-    "all": "6d18a1335d3f8bce"
+    "all": "19effe31b7c3eac6"
    },
    "row_hash": "4e86d143688ba8e5",
    "carried": true,
-   "pass": 2
+   "pass": 10
   },
   {
    "row": "C927",
    "screen": "walk_danny_deal.pretend",
    "verdict": "PASS",
-   "line": "You buying that or marrying it? / He'll be out back again tomorrow night.",
-   "why": "every Done states 5 minutes; node hops state 0",
+   "line": "You pick up a snack you don't want and stare at the label, not at him. / He'll be at the till again tomorrow night, and so will the guy in the hood.",
+   "why": "Done costs time_progression_minutes = 5",
    "cause": null,
    "note": true,
    "screen_hash": {
-    "text": "341170cb3d2fcded",
+    "text": "43feab5adf168a36",
+    "traits": "6789af7af3d0366b",
     "facts": "8bd078dd07945ef3",
     "facts2": "bfe48a7d9d77f37a",
-    "all": "db9750bdc09cd71a"
+    "all": "aca4ad35d46b1572"
    },
    "row_hash": "4e86d143688ba8e5",
    "carried": true,
-   "pass": 2
+   "pass": 10
   },
   {
    "row": "C927",
    "screen": "walk_marco_squat.back",
    "verdict": "PASS",
-   "line": "You can feel him clocking you anyway.",
-   "why": "every Done states 5 minutes; node hops state 0",
+   "line": "You look away, at the mirror, at the door, anywhere. You can feel him clocking you anyway.",
+   "why": "Done costs time_progression_minutes = 5; no bare exit",
    "cause": null,
    "note": true,
    "screen_hash": {
-    "text": "9580227f653d68f6",
+    "text": "0fd4ed4fe645e21a",
+    "traits": "44136fa355b3678a",
     "facts": "79f3020e3ffe2d3c",
     "facts2": "79f3020e3ffe2d3c",
-    "all": "ec4fb2c9d24d8347"
+    "all": "292cf200c13d9676"
    },
    "row_hash": "4e86d143688ba8e5",
-   "carried": true,
-   "pass": 2
+   "carried": false,
+   "pass": 11
   },
   {
    "row": "C927",
    "screen": "walk_marco_squat.watch",
    "verdict": "PASS",
-   "line": "Your turn's coming, champ.",
-   "why": "every Done states 5 minutes; node hops state 0",
+   "line": "His hands stay there another rep. He catches your eye in the mirror and doesn't let go of her. / Your turn's coming, champ.",
+   "why": "node hops are inside the scene; Done costs time_progression_minutes = 5, no bare exit",
    "cause": null,
    "note": true,
    "screen_hash": {
-    "text": "18b2a59c167765e8",
+    "text": "b8170a0eb7937980",
+    "traits": "e4365d01d4eb14be",
     "facts": "8965fc400ca80c26",
     "facts2": "fc909c0a076152b4",
-    "all": "0178edb783db2004"
+    "all": "9296b2f163dab50c"
    },
    "row_hash": "4e86d143688ba8e5",
    "carried": true,
-   "pass": 2
+   "pass": 9
   },
   {
    "row": "C927",
    "screen": "walk_nina_dress.browse",
    "verdict": "PASS",
-   "line": "\"Done\" (5 min)",
-   "why": "the exit states its minutes",
+   "line": "Coward. / She says it with a smile, and pulls the curtain. Next time she might not let you just browse.",
+   "why": "node hops are inside the scene; Done costs time_progression_minutes = 5, no bare exit",
    "cause": null,
    "note": true,
    "screen_hash": {
-    "text": "b0b4f48fa106cb3c",
+    "text": "e7bbd5ddecead95c",
+    "traits": "01d024bf2eee28fd",
     "facts": "a218a488dcdc9af8",
     "facts2": "cd23064395339386",
-    "all": "659cce2420e2729f"
+    "all": "61918301fd8d0aa4"
    },
    "row_hash": "4e86d143688ba8e5",
    "carried": true,
-   "pass": 4
+   "pass": 9
   },
   {
    "row": "C927",
    "screen": "walk_nina_dress.suits",
    "verdict": "PASS",
-   "line": "\"Done\" (5 min)",
-   "why": "the exit states its minutes",
+   "line": "I know. Your turn next, sweetie.",
+   "why": "node hops are inside the scene; Done costs time_progression_minutes = 5, no bare exit",
    "cause": null,
    "note": true,
    "screen_hash": {
-    "text": "7f56db26544085cf",
+    "text": "45a123dabc375de6",
+    "traits": "01d024bf2eee28fd",
     "facts": "a218a488dcdc9af8",
     "facts2": "cd23064395339386",
-    "all": "fdd5ccf047119995"
+    "all": "7500023af45d7642"
    },
    "row_hash": "4e86d143688ba8e5",
    "carried": true,
-   "pass": 4
+   "pass": 9
   },
   {
    "row": "C927",
    "screen": "walk_park_couple.away",
    "verdict": "PASS",
-   "line": "\"Done\" (5 min)",
-   "why": "the exit states its minutes",
+   "line": "You back onto the path before a twig can snap. You know that gap's there now.",
+   "why": "node hops are inside the scene; Done costs time_progression_minutes = 5, no bare exit",
    "cause": null,
    "note": true,
    "screen_hash": {
-    "text": "79bf3c036e1eec95",
+    "text": "0a30fd6f753a1015",
+    "traits": "44136fa355b3678a",
     "facts": "2ce65de01af70a7d",
     "facts2": "2ce65de01af70a7d",
-    "all": "4193ec3dc239d2b3"
+    "all": "c85419e455c00de3"
    },
    "row_hash": "4e86d143688ba8e5",
    "carried": true,
-   "pass": 4
+   "pass": 9
   },
   {
    "row": "C927",
    "screen": "walk_park_couple.watch",
    "verdict": "PASS",
-   "line": "\"Done\" (5 min)",
-   "why": "the exit states its minutes",
+   "line": "He drives his cock into her harder, her heels digging in, until she arches and moans under him, and he pulls out and cums across her thigh. / Fuck. Fuck, yes. F",
+   "why": "node hops are inside the scene; Done costs time_progression_minutes = 5, no bare exit",
    "cause": null,
    "note": true,
    "screen_hash": {
-    "text": "09119467bbc547a0",
+    "text": "599c5d32b887425e",
+    "traits": "44136fa355b3678a",
     "facts": "2ce65de01af70a7d",
     "facts2": "2ce65de01af70a7d",
-    "all": "06680ae1766b2db2"
+    "all": "109e8e360b10d947"
    },
    "row_hash": "4e86d143688ba8e5",
    "carried": true,
-   "pass": 4
+   "pass": 9
   },
   {
    "row": "C927",
    "screen": "walk_vance_ledger.hello",
    "verdict": "PASS",
-   "line": "He just watches you read the numbers on them.",
-   "why": "every Done states 5 minutes; node hops state 0",
+   "line": "Evening, little lady. / Evening.",
+   "why": "node hops are inside the scene; Done costs time_progression_minutes = 5, no bare exit",
    "cause": null,
    "note": true,
    "screen_hash": {
-    "text": "6570f572d33abf27",
+    "text": "2e8649bf8e537d1b",
+    "traits": "d9172dabbd56b049",
     "facts": "c00465774a257291",
     "facts2": "144cf636eba42a4a",
-    "all": "381625358bf64de6"
+    "all": "1f8f81a8423f6559"
    },
    "row_hash": "4e86d143688ba8e5",
    "carried": true,
-   "pass": 2
+   "pass": 9
   },
   {
    "row": "C927",
    "screen": "walk_vance_ledger.past",
    "verdict": "PASS",
-   "line": "Number nine. You wonder who that is.",
-   "why": "every Done states 5 minutes; node hops state 0",
+   "line": "You walk past. You hear the box lid shut behind you. Number nine. You wonder who that is.",
+   "why": "node hops are inside the scene; Done costs time_progression_minutes = 5, no bare exit",
    "cause": null,
    "note": true,
    "screen_hash": {
-    "text": "f18c3940a540acbe",
+    "text": "2c890f8a73feab69",
+    "traits": "44136fa355b3678a",
     "facts": "978c7e388c3b3778",
     "facts2": "978c7e388c3b3778",
-    "all": "d4562d8fc7c0bc6f"
+    "all": "2c7440d174a776b1"
    },
    "row_hash": "4e86d143688ba8e5",
    "carried": true,
-   "pass": 2
+   "pass": 9
   },
   {
    "row": "C928",
@@ -4570,181 +4817,191 @@
    "row": "C931",
    "screen": "walk_danny_deal.ask",
    "verdict": "PASS",
-   "line": "He smiles like you've both agreed on something.",
-   "why": "window end exclusive, inside the place's hours and the person's row",
+   "line": "What was what, gorgeous? / He smiles like you've both agreed on something.",
+   "why": "time_of_day 21:00-23:00 read end exclusive, inside his row and the shop's hours",
    "cause": null,
    "note": true,
    "screen_hash": {
-    "text": "a5631bc334696220",
+    "text": "12766d8ef2ae94e7",
+    "traits": "6789af7af3d0366b",
     "facts": "8bd078dd07945ef3",
     "facts2": "bfe48a7d9d77f37a",
-    "all": "6d18a1335d3f8bce"
+    "all": "19effe31b7c3eac6"
    },
    "row_hash": "1aadffd96e76381c",
    "carried": true,
-   "pass": 2
+   "pass": 10
   },
   {
    "row": "C931",
    "screen": "walk_danny_deal.pretend",
    "verdict": "PASS",
-   "line": "You buying that or marrying it? / He'll be out back again tomorrow night.",
-   "why": "window end exclusive, inside the place's hours and the person's row",
+   "line": "You pick up a snack you don't want and stare at the label, not at him. / He'll be at the till again tomorrow night, and so will the guy in the hood.",
+   "why": "time_of_day 21:00-23:00 read end exclusive, inside his row and the shop's hours",
    "cause": null,
    "note": true,
    "screen_hash": {
-    "text": "341170cb3d2fcded",
+    "text": "43feab5adf168a36",
+    "traits": "6789af7af3d0366b",
     "facts": "8bd078dd07945ef3",
     "facts2": "bfe48a7d9d77f37a",
-    "all": "db9750bdc09cd71a"
+    "all": "aca4ad35d46b1572"
    },
    "row_hash": "1aadffd96e76381c",
    "carried": true,
-   "pass": 2
+   "pass": 10
   },
   {
    "row": "C931",
    "screen": "walk_marco_squat.back",
    "verdict": "PASS",
-   "line": "You can feel him clocking you anyway.",
-   "why": "window end exclusive, inside the place's hours and the person's row",
+   "line": "You look away, at the mirror, at the door, anywhere. You can feel him clocking you anyway.",
+   "why": "trigger window 17:00-21:00 end-exclusive matches Marco's 17-21 row; no wrap needed",
    "cause": null,
    "note": true,
    "screen_hash": {
-    "text": "9580227f653d68f6",
+    "text": "0fd4ed4fe645e21a",
+    "traits": "44136fa355b3678a",
     "facts": "79f3020e3ffe2d3c",
     "facts2": "79f3020e3ffe2d3c",
-    "all": "ec4fb2c9d24d8347"
+    "all": "292cf200c13d9676"
    },
    "row_hash": "1aadffd96e76381c",
-   "carried": true,
-   "pass": 2
+   "carried": false,
+   "pass": 11
   },
   {
    "row": "C931",
    "screen": "walk_marco_squat.watch",
    "verdict": "PASS",
-   "line": "Your turn's coming, champ.",
-   "why": "window end exclusive, inside the place's hours and the person's row",
+   "line": "His hands stay there another rep. He catches your eye in the mirror and doesn't let go of her. / Your turn's coming, champ.",
+   "why": "window read end-exclusive and wrapping as the rows do (23:00-01:00 on the weekday of the current day, like the schedule rows)",
    "cause": null,
    "note": true,
    "screen_hash": {
-    "text": "18b2a59c167765e8",
+    "text": "b8170a0eb7937980",
+    "traits": "e4365d01d4eb14be",
     "facts": "8965fc400ca80c26",
     "facts2": "fc909c0a076152b4",
-    "all": "0178edb783db2004"
+    "all": "9296b2f163dab50c"
    },
    "row_hash": "1aadffd96e76381c",
    "carried": true,
-   "pass": 2
+   "pass": 9
   },
   {
    "row": "C931",
    "screen": "walk_nina_dress.browse",
    "verdict": "PASS",
-   "line": "time_of_day 18:45-18:55",
-   "why": "end exclusive; out by 18:59",
+   "line": "Coward. / She says it with a smile, and pulls the curtain. Next time she might not let you just browse.",
+   "why": "window read end-exclusive and wrapping as the rows do (23:00-01:00 on the weekday of the current day, like the schedule rows)",
    "cause": null,
    "note": true,
    "screen_hash": {
-    "text": "b0b4f48fa106cb3c",
+    "text": "e7bbd5ddecead95c",
+    "traits": "01d024bf2eee28fd",
     "facts": "a218a488dcdc9af8",
     "facts2": "cd23064395339386",
-    "all": "659cce2420e2729f"
+    "all": "61918301fd8d0aa4"
    },
    "row_hash": "1aadffd96e76381c",
    "carried": true,
-   "pass": 4
+   "pass": 9
   },
   {
    "row": "C931",
    "screen": "walk_nina_dress.suits",
    "verdict": "PASS",
-   "line": "time_of_day 18:45-18:55",
-   "why": "end exclusive; last start 18:54, out at 18:59, before 19:00",
+   "line": "I know. Your turn next, sweetie.",
+   "why": "window read end-exclusive and wrapping as the rows do (23:00-01:00 on the weekday of the current day, like the schedule rows)",
    "cause": null,
    "note": true,
    "screen_hash": {
-    "text": "7f56db26544085cf",
+    "text": "45a123dabc375de6",
+    "traits": "01d024bf2eee28fd",
     "facts": "a218a488dcdc9af8",
     "facts2": "cd23064395339386",
-    "all": "fdd5ccf047119995"
+    "all": "7500023af45d7642"
    },
    "row_hash": "1aadffd96e76381c",
    "carried": true,
-   "pass": 4
+   "pass": 9
   },
   {
    "row": "C931",
    "screen": "walk_park_couple.away",
    "verdict": "PASS",
-   "line": "time_of_day 19:00-20:55",
-   "why": "end exclusive; out by 20:59",
+   "line": "You back onto the path before a twig can snap. You know that gap's there now.",
+   "why": "window read end-exclusive and wrapping as the rows do (23:00-01:00 on the weekday of the current day, like the schedule rows)",
    "cause": null,
    "note": true,
    "screen_hash": {
-    "text": "79bf3c036e1eec95",
+    "text": "0a30fd6f753a1015",
+    "traits": "44136fa355b3678a",
     "facts": "2ce65de01af70a7d",
     "facts2": "2ce65de01af70a7d",
-    "all": "4193ec3dc239d2b3"
+    "all": "c85419e455c00de3"
    },
    "row_hash": "1aadffd96e76381c",
    "carried": true,
-   "pass": 4
+   "pass": 9
   },
   {
    "row": "C931",
    "screen": "walk_park_couple.watch",
    "verdict": "PASS",
-   "line": "time_of_day 19:00-20:55",
-   "why": "end exclusive; last start 20:54, out at 20:59, before the 9pm lock",
+   "line": "He drives his cock into her harder, her heels digging in, until she arches and moans under him, and he pulls out and cums across her thigh. / Fuck. Fuck, yes. F",
+   "why": "window read end-exclusive and wrapping as the rows do (23:00-01:00 on the weekday of the current day, like the schedule rows)",
    "cause": null,
    "note": true,
    "screen_hash": {
-    "text": "09119467bbc547a0",
+    "text": "599c5d32b887425e",
+    "traits": "44136fa355b3678a",
     "facts": "2ce65de01af70a7d",
     "facts2": "2ce65de01af70a7d",
-    "all": "06680ae1766b2db2"
+    "all": "109e8e360b10d947"
    },
    "row_hash": "1aadffd96e76381c",
    "carried": true,
-   "pass": 4
+   "pass": 9
   },
   {
    "row": "C931",
    "screen": "walk_vance_ledger.hello",
    "verdict": "PASS",
-   "line": "He just watches you read the numbers on them.",
-   "why": "window end exclusive, inside the place's hours and the person's row",
+   "line": "Evening, little lady. / Evening.",
+   "why": "window read end-exclusive and wrapping as the rows do (23:00-01:00 on the weekday of the current day, like the schedule rows)",
    "cause": null,
    "note": true,
    "screen_hash": {
-    "text": "6570f572d33abf27",
+    "text": "2e8649bf8e537d1b",
+    "traits": "d9172dabbd56b049",
     "facts": "c00465774a257291",
     "facts2": "144cf636eba42a4a",
-    "all": "381625358bf64de6"
+    "all": "1f8f81a8423f6559"
    },
    "row_hash": "1aadffd96e76381c",
    "carried": true,
-   "pass": 2
+   "pass": 9
   },
   {
    "row": "C931",
    "screen": "walk_vance_ledger.past",
    "verdict": "PASS",
-   "line": "Number nine. You wonder who that is.",
-   "why": "window end exclusive, inside the place's hours and the person's row",
+   "line": "You walk past. You hear the box lid shut behind you. Number nine. You wonder who that is.",
+   "why": "window read end-exclusive and wrapping as the rows do (23:00-01:00 on the weekday of the current day, like the schedule rows)",
    "cause": null,
    "note": true,
    "screen_hash": {
-    "text": "f18c3940a540acbe",
+    "text": "2c890f8a73feab69",
+    "traits": "44136fa355b3678a",
     "facts": "978c7e388c3b3778",
     "facts2": "978c7e388c3b3778",
-    "all": "d4562d8fc7c0bc6f"
+    "all": "2c7440d174a776b1"
    },
    "row_hash": "1aadffd96e76381c",
    "carried": true,
-   "pass": 2
+   "pass": 9
   },
   {
    "row": "C951",
@@ -4879,271 +5136,286 @@
    "row": "L106",
    "screen": "walk_danny_deal.ask",
    "verdict": "PASS",
-   "line": "He smiles like you've both agreed on something.",
-   "why": "everyone named is gated present by their rows (who_is_where), or a stranger",
+   "line": "What was what, gorgeous? / He smiles like you've both agreed on something.",
+   "why": "names only Danny, whom his till row and the trigger put there",
    "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "a5631bc334696220",
+    "text": "12766d8ef2ae94e7",
+    "traits": "6789af7af3d0366b",
     "facts": "8bd078dd07945ef3",
     "facts2": "bfe48a7d9d77f37a",
-    "all": "6d18a1335d3f8bce"
+    "all": "19effe31b7c3eac6"
    },
    "row_hash": "13a714429d15f3b2",
    "carried": true,
-   "pass": 2
+   "pass": 10
   },
   {
    "row": "L106",
    "screen": "walk_danny_deal.moment",
    "verdict": "PASS",
-   "line": "Same time tomorrow. Don't be late. Cash only.",
-   "why": "everyone named is gated present by their rows (who_is_where), or a stranger",
+   "line": "Danny's at the till, and a guy in a hood is leaning over it: something small goes one way, a fold of notes the other.",
+   "why": "names only Danny, whom his till row and the trigger put there",
    "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "d28812cc4f82f7ff",
+    "text": "f97cdd937a22a8b0",
+    "traits": "6789af7af3d0366b",
     "facts": "8bd078dd07945ef3",
     "facts2": "bfe48a7d9d77f37a",
-    "all": "68f690b15a7332ac"
+    "all": "e67b4cb0443e490e"
    },
    "row_hash": "13a714429d15f3b2",
    "carried": true,
-   "pass": 2
+   "pass": 10
   },
   {
    "row": "L106",
    "screen": "walk_danny_deal.pretend",
    "verdict": "PASS",
-   "line": "You buying that or marrying it? / He'll be out back again tomorrow night.",
-   "why": "everyone named is gated present by their rows (who_is_where), or a stranger",
+   "line": "You pick up a snack you don't want and stare at the label, not at him. / He'll be at the till again tomorrow night, and so will the guy in the hood.",
+   "why": "names only Danny, whom his till row and the trigger put there",
    "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "341170cb3d2fcded",
+    "text": "43feab5adf168a36",
+    "traits": "6789af7af3d0366b",
     "facts": "8bd078dd07945ef3",
     "facts2": "bfe48a7d9d77f37a",
-    "all": "db9750bdc09cd71a"
+    "all": "aca4ad35d46b1572"
    },
    "row_hash": "13a714429d15f3b2",
    "carried": true,
-   "pass": 2
+   "pass": 10
   },
   {
    "row": "L106",
    "screen": "walk_marco_squat.back",
    "verdict": "PASS",
-   "line": "You can feel him clocking you anyway.",
-   "why": "everyone named is gated present by their rows (who_is_where), or a stranger",
+   "line": "You look away, at the mirror, at the door, anywhere. You can feel him clocking you anyway.",
+   "why": "'him' is Marco, whom his weekday 17-21 hood_gym row and the npc_at_location condition put there",
    "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "9580227f653d68f6",
+    "text": "0fd4ed4fe645e21a",
+    "traits": "44136fa355b3678a",
     "facts": "79f3020e3ffe2d3c",
     "facts2": "79f3020e3ffe2d3c",
-    "all": "ec4fb2c9d24d8347"
+    "all": "292cf200c13d9676"
    },
    "row_hash": "13a714429d15f3b2",
-   "carried": true,
-   "pass": 2
+   "carried": false,
+   "pass": 11
   },
   {
    "row": "L106",
    "screen": "walk_marco_squat.moment",
    "verdict": "PASS",
-   "line": "Your own thighs go tight on the bench. He sees that too.",
-   "why": "everyone named is gated present by their rows (who_is_where), or a stranger",
+   "line": "Marco's behind a woman at the squat rack... / Your own thighs go tight by the door. He sees that too. / -> Watch from the door \u00b7 Look away",
+   "why": "names Marco, there by his 17-21 row and the trigger condition; the woman is an unnamed stranger",
    "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "f774dc0dd74361b0",
+    "text": "ed1d60a71171d96c",
+    "traits": "e4365d01d4eb14be",
     "facts": "8965fc400ca80c26",
     "facts2": "fc909c0a076152b4",
-    "all": "56eea93205d11b00"
+    "all": "0ae49aa661a7f66d"
    },
    "row_hash": "13a714429d15f3b2",
-   "carried": true,
-   "pass": 2
+   "carried": false,
+   "pass": 11
   },
   {
    "row": "L106",
    "screen": "walk_marco_squat.watch",
    "verdict": "PASS",
-   "line": "Your turn's coming, champ.",
-   "why": "everyone named is gated present by their rows (who_is_where), or a stranger",
-   "cause": null,
+   "line": "His hands stay there another rep. He catches your eye in the mirror and doesn't let go of her. / Your turn's coming, champ.",
+   "why": "Marco at hood_gym weekdays 17:00-21:00; gated met_marco + npc_at_location; gym open to 22:00; true at first and last minute of the window and on a second visit",
+   "cause": "",
    "note": false,
    "screen_hash": {
-    "text": "18b2a59c167765e8",
+    "text": "b8170a0eb7937980",
+    "traits": "e4365d01d4eb14be",
     "facts": "8965fc400ca80c26",
     "facts2": "fc909c0a076152b4",
-    "all": "0178edb783db2004"
+    "all": "9296b2f163dab50c"
    },
    "row_hash": "13a714429d15f3b2",
    "carried": true,
-   "pass": 2
+   "pass": 9
   },
   {
    "row": "L106",
    "screen": "walk_nina_dress.browse",
    "verdict": "PASS",
-   "line": "Coward. / She says it with a smile, and pulls the curtain.",
-   "why": "walk_nina_dress: Mon-Sat 18:45-18:55, Nina present; her row has her in the fitting room 18:45-19:00",
-   "cause": null,
+   "line": "Coward. / She says it with a smile, and pulls the curtain. Next time she might not let you just browse.",
+   "why": "Nina 'in the fitting room' at hood_clothes Mon-Sat 18:45-19:00; gated met_nina + npc_at_location; window 18:45-18:55; true at first and last minute of the window and on a second visit",
+   "cause": "",
    "note": false,
    "screen_hash": {
-    "text": "b0b4f48fa106cb3c",
+    "text": "e7bbd5ddecead95c",
+    "traits": "01d024bf2eee28fd",
     "facts": "a218a488dcdc9af8",
     "facts2": "cd23064395339386",
-    "all": "659cce2420e2729f"
+    "all": "61918301fd8d0aa4"
    },
    "row_hash": "13a714429d15f3b2",
    "carried": true,
-   "pass": 4
+   "pass": 9
   },
   {
    "row": "L106",
    "screen": "walk_nina_dress.moment",
    "verdict": "PASS",
-   "line": "The fitting room curtain's half open. Nina's in the shop's tightest black dress, turning to check her ass in the mirror.",
-   "why": "walk_nina_dress: Mon-Sat 18:45-18:55, Nina present; her row has her in the fitting room 18:45-19:00",
-   "cause": null,
+   "line": "The fitting room curtain's half open. Nina's in the shop's tightest black dress, turning to check her ass in the mirror. / Don't tell my boss. I'm the boss.",
+   "why": "Nina 'in the fitting room' at hood_clothes Mon-Sat 18:45-19:00; gated met_nina + npc_at_location; window 18:45-18:55; read on just walking into the shop: the curtain is half open as she comes in; true at first and last minute of the window and on a second visit",
+   "cause": "",
    "note": false,
    "screen_hash": {
-    "text": "3a33050b5c9c33fe",
+    "text": "68580ed617a631bb",
+    "traits": "01d024bf2eee28fd",
     "facts": "a218a488dcdc9af8",
     "facts2": "cd23064395339386",
-    "all": "9ab58aa3cdfb8d76"
+    "all": "6ae7b9d79a18e2aa"
    },
    "row_hash": "13a714429d15f3b2",
    "carried": true,
-   "pass": 4
+   "pass": 9
   },
   {
    "row": "L106",
    "screen": "walk_nina_dress.suits",
    "verdict": "PASS",
    "line": "I know. Your turn next, sweetie.",
-   "why": "walk_nina_dress: Mon-Sat 18:45-18:55, Nina present; her row has her in the fitting room 18:45-19:00; the 5-minute Done from 18:54 ends at 18:59, inside the shop's 7pm close",
-   "cause": null,
+   "why": "Nina 'in the fitting room' at hood_clothes Mon-Sat 18:45-19:00; gated met_nina + npc_at_location; window 18:45-18:55; true at first and last minute of the window and on a second visit",
+   "cause": "",
    "note": false,
    "screen_hash": {
-    "text": "7f56db26544085cf",
+    "text": "45a123dabc375de6",
+    "traits": "01d024bf2eee28fd",
     "facts": "a218a488dcdc9af8",
     "facts2": "cd23064395339386",
-    "all": "fdd5ccf047119995"
+    "all": "7500023af45d7642"
    },
    "row_hash": "13a714429d15f3b2",
    "carried": true,
-   "pass": 4
+   "pass": 9
   },
   {
    "row": "L106",
    "screen": "walk_park_couple.away",
    "verdict": "PASS",
    "line": "You back onto the path before a twig can snap. You know that gap's there now.",
-   "why": "walk_park_couple: every day 19:00-20:55, park open 06:00-21:00; strangers, no rows needed",
-   "cause": null,
+   "why": "strangers only; park open 06:00-21:00, window 19:00-20:55 ends before the gates lock; true at first and last minute of the window and on a second visit",
+   "cause": "",
    "note": false,
    "screen_hash": {
-    "text": "79bf3c036e1eec95",
+    "text": "0a30fd6f753a1015",
+    "traits": "44136fa355b3678a",
     "facts": "2ce65de01af70a7d",
     "facts2": "2ce65de01af70a7d",
-    "all": "4193ec3dc239d2b3"
+    "all": "c85419e455c00de3"
    },
    "row_hash": "13a714429d15f3b2",
    "carried": true,
-   "pass": 4
+   "pass": 9
   },
   {
    "row": "L106",
    "screen": "walk_park_couple.moment",
    "verdict": "PASS",
-   "line": "Through the bushes behind the pond: a man and a woman on the grass, her skirt up, her tits out, his jeans round his knees",
-   "why": "walk_park_couple: every day 19:00-20:55, park open 06:00-21:00; strangers, no rows needed",
-   "cause": null,
+   "line": "Through the bushes behind the pond: a man and a woman on the grass, her skirt up, her tits out, his jeans round his knees, his cock thrusting into her, slow and",
+   "why": "strangers only; park open 06:00-21:00, window 19:00-20:55 ends before the gates lock; read on just arriving in the park: what she comes across through the bushes; nothing says she went looking; true at first and last minute of the window and on a second visit",
+   "cause": "",
    "note": false,
    "screen_hash": {
-    "text": "2c64cca5577cbac7",
+    "text": "9f8c3c7fe47596ff",
+    "traits": "44136fa355b3678a",
     "facts": "2ce65de01af70a7d",
     "facts2": "2ce65de01af70a7d",
-    "all": "8a847becb2cf976a"
+    "all": "e9cf488728b26e5b"
    },
    "row_hash": "13a714429d15f3b2",
    "carried": true,
-   "pass": 4
+   "pass": 9
   },
   {
    "row": "L106",
    "screen": "walk_park_couple.watch",
    "verdict": "PASS",
-   "line": "Your thighs clench. You know which gap in the bushes now.",
-   "why": "walk_park_couple: every day 19:00-20:55, park open 06:00-21:00; strangers, no rows needed; 'now' is true on every visit",
-   "cause": null,
+   "line": "He drives his cock into her harder, her heels digging in, until she arches and moans under him, and he pulls out and cums across her thigh. / Fuck. Fuck, yes. F",
+   "why": "strangers only; park open 06:00-21:00, window 19:00-20:55 ends before the gates lock; true at first and last minute of the window and on a second visit",
+   "cause": "",
    "note": false,
    "screen_hash": {
-    "text": "09119467bbc547a0",
+    "text": "599c5d32b887425e",
+    "traits": "44136fa355b3678a",
     "facts": "2ce65de01af70a7d",
     "facts2": "2ce65de01af70a7d",
-    "all": "06680ae1766b2db2"
+    "all": "109e8e360b10d947"
    },
    "row_hash": "13a714429d15f3b2",
    "carried": true,
-   "pass": 4
+   "pass": 9
   },
   {
    "row": "L106",
    "screen": "walk_vance_ledger.hello",
    "verdict": "PASS",
-   "line": "He just watches you read the numbers on them.",
-   "why": "everyone named is gated present by their rows (who_is_where), or a stranger",
-   "cause": null,
+   "line": "Evening, little lady. / Evening.",
+   "why": "Vance 'on his porch' at hood_street weekdays 17:00-20:00; gated npc_at_location; named only behind met_vance, 'the man next door' before; true at first and last minute of the window and on a second visit",
+   "cause": "",
    "note": false,
    "screen_hash": {
-    "text": "6570f572d33abf27",
+    "text": "2e8649bf8e537d1b",
+    "traits": "d9172dabbd56b049",
     "facts": "c00465774a257291",
     "facts2": "144cf636eba42a4a",
-    "all": "381625358bf64de6"
+    "all": "1f8f81a8423f6559"
    },
    "row_hash": "13a714429d15f3b2",
    "carried": true,
-   "pass": 2
+   "pass": 9
   },
   {
    "row": "L106",
    "screen": "walk_vance_ledger.moment",
    "verdict": "PASS",
-   "line": "[not met_vance] The man next door is on his porch ... Stranger: \"Short again, number nine.\"",
-   "why": "everyone named is gated present by their rows (who_is_where), or a stranger",
-   "cause": null,
+   "line": "Vance is on his porch with a shoebox of envelopes on his knee, licking his thumb, counting. / Short again, number nine. Always number nine.",
+   "why": "Vance 'on his porch' at hood_street weekdays 17:00-20:00; gated npc_at_location; named only behind met_vance, 'the man next door' before; read on just stepping onto her street: he is on his porch as she passes; true at first and last minute of the window and on a second visit",
+   "cause": "",
    "note": false,
    "screen_hash": {
-    "text": "1820d55a7d00c5da",
+    "text": "2557979fbd1c0b8d",
+    "traits": "d9172dabbd56b049",
     "facts": "c00465774a257291",
     "facts2": "144cf636eba42a4a",
-    "all": "23deead29a4d9161"
+    "all": "239ef322866e551e"
    },
    "row_hash": "13a714429d15f3b2",
    "carried": true,
-   "pass": 2
+   "pass": 9
   },
   {
    "row": "L106",
    "screen": "walk_vance_ledger.past",
    "verdict": "PASS",
-   "line": "Number nine. You wonder who that is.",
-   "why": "everyone named is gated present by their rows (who_is_where), or a stranger",
-   "cause": null,
+   "line": "You walk past. You hear the box lid shut behind you. Number nine. You wonder who that is.",
+   "why": "Vance 'on his porch' at hood_street weekdays 17:00-20:00; gated npc_at_location; named only behind met_vance, 'the man next door' before; true at first and last minute of the window and on a second visit",
+   "cause": "",
    "note": false,
    "screen_hash": {
-    "text": "f18c3940a540acbe",
+    "text": "2c890f8a73feab69",
+    "traits": "44136fa355b3678a",
     "facts": "978c7e388c3b3778",
     "facts2": "978c7e388c3b3778",
-    "all": "d4562d8fc7c0bc6f"
+    "all": "2c7440d174a776b1"
    },
    "row_hash": "13a714429d15f3b2",
    "carried": true,
-   "pass": 2
+   "pass": 9
   },
   {
    "row": "L119",
@@ -5196,6 +5468,19 @@
    "row_hash": "1fca3bfe1d0c2419",
    "carried": true,
    "pass": 1
+  },
+  {
+   "row": "L150",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "",
+   "why": "every scene shows something happening; no 'nothing happens' line",
+   "cause": "",
+   "note": false,
+   "screen_hash": "bb75fdf914fa7a4f",
+   "row_hash": "ec7af502db4f0c7e",
+   "carried": true,
+   "pass": 9
   },
   {
    "row": "L166",
@@ -5263,181 +5548,191 @@
    "row": "L167",
    "screen": "walk_danny_deal.ask",
    "verdict": "PASS",
-   "line": "He smiles like you've both agreed on something.",
-   "why": "one canvas, one window; hidden when shut (an event, C916), no row per day kind",
+   "line": "What was what, gorgeous? / He smiles like you've both agreed on something.",
+   "why": "no activity row on this screen; one trigger for every day, and a random walk-in stays hidden out of its window",
    "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "a5631bc334696220",
+    "text": "12766d8ef2ae94e7",
+    "traits": "6789af7af3d0366b",
     "facts": "8bd078dd07945ef3",
     "facts2": "bfe48a7d9d77f37a",
-    "all": "6d18a1335d3f8bce"
+    "all": "19effe31b7c3eac6"
    },
    "row_hash": "e64ce2672d85d2d8",
    "carried": true,
-   "pass": 2
+   "pass": 10
   },
   {
    "row": "L167",
    "screen": "walk_danny_deal.pretend",
    "verdict": "PASS",
-   "line": "You buying that or marrying it? / He'll be out back again tomorrow night.",
-   "why": "one canvas, one window; hidden when shut (an event, C916), no row per day kind",
+   "line": "You pick up a snack you don't want and stare at the label, not at him. / He'll be at the till again tomorrow night, and so will the guy in the hood.",
+   "why": "no activity row on this screen; one trigger for every day, and a random walk-in stays hidden out of its window",
    "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "341170cb3d2fcded",
+    "text": "43feab5adf168a36",
+    "traits": "6789af7af3d0366b",
     "facts": "8bd078dd07945ef3",
     "facts2": "bfe48a7d9d77f37a",
-    "all": "db9750bdc09cd71a"
+    "all": "aca4ad35d46b1572"
    },
    "row_hash": "e64ce2672d85d2d8",
    "carried": true,
-   "pass": 2
+   "pass": 10
   },
   {
    "row": "L167",
    "screen": "walk_marco_squat.back",
    "verdict": "PASS",
-   "line": "You can feel him clocking you anyway.",
-   "why": "one canvas, one window; hidden when shut (an event, C916), no row per day kind",
+   "line": "You look away, at the mirror, at the door, anywhere. You can feel him clocking you anyway.",
+   "why": "no activity row on this screen; the walk-in fires on arrival and has no greyed button (trigger_mode random)",
    "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "9580227f653d68f6",
+    "text": "0fd4ed4fe645e21a",
+    "traits": "44136fa355b3678a",
     "facts": "79f3020e3ffe2d3c",
     "facts2": "79f3020e3ffe2d3c",
-    "all": "ec4fb2c9d24d8347"
+    "all": "292cf200c13d9676"
    },
    "row_hash": "e64ce2672d85d2d8",
-   "carried": true,
-   "pass": 2
+   "carried": false,
+   "pass": 11
   },
   {
    "row": "L167",
    "screen": "walk_marco_squat.watch",
    "verdict": "PASS",
-   "line": "Your turn's coming, champ.",
-   "why": "one canvas, one window; hidden when shut (an event, C916), no row per day kind",
-   "cause": null,
+   "line": "His hands stay there another rep. He catches your eye in the mirror and doesn't let go of her. / Your turn's coming, champ.",
+   "why": "no activity row on this screen; as a random walk-in it stays hidden when shut (C916)",
+   "cause": "",
    "note": false,
    "screen_hash": {
-    "text": "18b2a59c167765e8",
+    "text": "b8170a0eb7937980",
+    "traits": "e4365d01d4eb14be",
     "facts": "8965fc400ca80c26",
     "facts2": "fc909c0a076152b4",
-    "all": "0178edb783db2004"
+    "all": "9296b2f163dab50c"
    },
    "row_hash": "e64ce2672d85d2d8",
    "carried": true,
-   "pass": 2
+   "pass": 9
   },
   {
    "row": "L167",
    "screen": "walk_nina_dress.browse",
    "verdict": "PASS",
-   "line": "walk_nina_dress trigger",
-   "why": "one row, one window",
-   "cause": null,
+   "line": "Coward. / She says it with a smile, and pulls the curtain. Next time she might not let you just browse.",
+   "why": "no activity row on this screen; as a random walk-in it stays hidden when shut (C916)",
+   "cause": "",
    "note": false,
    "screen_hash": {
-    "text": "b0b4f48fa106cb3c",
+    "text": "e7bbd5ddecead95c",
+    "traits": "01d024bf2eee28fd",
     "facts": "a218a488dcdc9af8",
     "facts2": "cd23064395339386",
-    "all": "659cce2420e2729f"
+    "all": "61918301fd8d0aa4"
    },
    "row_hash": "e64ce2672d85d2d8",
    "carried": true,
-   "pass": 4
+   "pass": 9
   },
   {
    "row": "L167",
    "screen": "walk_nina_dress.suits",
    "verdict": "PASS",
-   "line": "walk_nina_dress trigger",
-   "why": "one row, Mon-Sat one window, hidden when shut",
-   "cause": null,
+   "line": "I know. Your turn next, sweetie.",
+   "why": "no activity row on this screen; as a random walk-in it stays hidden when shut (C916)",
+   "cause": "",
    "note": false,
    "screen_hash": {
-    "text": "7f56db26544085cf",
+    "text": "45a123dabc375de6",
+    "traits": "01d024bf2eee28fd",
     "facts": "a218a488dcdc9af8",
     "facts2": "cd23064395339386",
-    "all": "fdd5ccf047119995"
+    "all": "7500023af45d7642"
    },
    "row_hash": "e64ce2672d85d2d8",
    "carried": true,
-   "pass": 4
+   "pass": 9
   },
   {
    "row": "L167",
    "screen": "walk_park_couple.away",
    "verdict": "PASS",
-   "line": "walk_park_couple trigger",
-   "why": "one row, one window",
-   "cause": null,
+   "line": "You back onto the path before a twig can snap. You know that gap's there now.",
+   "why": "no activity row on this screen; as a random walk-in it stays hidden when shut (C916)",
+   "cause": "",
    "note": false,
    "screen_hash": {
-    "text": "79bf3c036e1eec95",
+    "text": "0a30fd6f753a1015",
+    "traits": "44136fa355b3678a",
     "facts": "2ce65de01af70a7d",
     "facts2": "2ce65de01af70a7d",
-    "all": "4193ec3dc239d2b3"
+    "all": "c85419e455c00de3"
    },
    "row_hash": "e64ce2672d85d2d8",
    "carried": true,
-   "pass": 4
+   "pass": 9
   },
   {
    "row": "L167",
    "screen": "walk_park_couple.watch",
    "verdict": "PASS",
-   "line": "walk_park_couple trigger",
-   "why": "one row, one window every day",
-   "cause": null,
+   "line": "He drives his cock into her harder, her heels digging in, until she arches and moans under him, and he pulls out and cums across her thigh. / Fuck. Fuck, yes. F",
+   "why": "no activity row on this screen; as a random walk-in it stays hidden when shut (C916)",
+   "cause": "",
    "note": false,
    "screen_hash": {
-    "text": "09119467bbc547a0",
+    "text": "599c5d32b887425e",
+    "traits": "44136fa355b3678a",
     "facts": "2ce65de01af70a7d",
     "facts2": "2ce65de01af70a7d",
-    "all": "06680ae1766b2db2"
+    "all": "109e8e360b10d947"
    },
    "row_hash": "e64ce2672d85d2d8",
    "carried": true,
-   "pass": 4
+   "pass": 9
   },
   {
    "row": "L167",
    "screen": "walk_vance_ledger.hello",
    "verdict": "PASS",
-   "line": "He just watches you read the numbers on them.",
-   "why": "one canvas, one window; hidden when shut (an event, C916), no row per day kind",
-   "cause": null,
+   "line": "Evening, little lady. / Evening.",
+   "why": "no activity row on this screen; as a random walk-in it stays hidden when shut (C916)",
+   "cause": "",
    "note": false,
    "screen_hash": {
-    "text": "6570f572d33abf27",
+    "text": "2e8649bf8e537d1b",
+    "traits": "d9172dabbd56b049",
     "facts": "c00465774a257291",
     "facts2": "144cf636eba42a4a",
-    "all": "381625358bf64de6"
+    "all": "1f8f81a8423f6559"
    },
    "row_hash": "e64ce2672d85d2d8",
    "carried": true,
-   "pass": 2
+   "pass": 9
   },
   {
    "row": "L167",
    "screen": "walk_vance_ledger.past",
    "verdict": "PASS",
-   "line": "Number nine. You wonder who that is.",
-   "why": "one canvas, one window; hidden when shut (an event, C916), no row per day kind",
-   "cause": null,
+   "line": "You walk past. You hear the box lid shut behind you. Number nine. You wonder who that is.",
+   "why": "no activity row on this screen; as a random walk-in it stays hidden when shut (C916)",
+   "cause": "",
    "note": false,
    "screen_hash": {
-    "text": "f18c3940a540acbe",
+    "text": "2c890f8a73feab69",
+    "traits": "44136fa355b3678a",
     "facts": "978c7e388c3b3778",
     "facts2": "978c7e388c3b3778",
-    "all": "d4562d8fc7c0bc6f"
+    "all": "2c7440d174a776b1"
    },
    "row_hash": "e64ce2672d85d2d8",
    "carried": true,
-   "pass": 2
+   "pass": 9
   },
   {
    "row": "L170",
@@ -5464,12 +5759,107 @@
    "row_hash": "412fb4816f34d294",
    "carried": true,
    "pass": 1
+  },
+  {
+   "row": "L97",
+   "screen": "walk_danny_deal.moment",
+   "verdict": "PASS",
+   "line": "Danny's at the till, and a guy in a hood is leaning over it: something small goes one way, a fold of notes the other.",
+   "why": "his row at hood_shop is 'behind the till'; the scene now shows him at the till, mid-sale: what he was already doing",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "f97cdd937a22a8b0",
+    "traits": "6789af7af3d0366b",
+    "facts": "8bd078dd07945ef3",
+    "facts2": "bfe48a7d9d77f37a",
+    "all": "e67b4cb0443e490e"
+   },
+   "row_hash": "5d6e027964066b8b",
+   "carried": true,
+   "pass": 10
+  },
+  {
+   "row": "L97",
+   "screen": "walk_marco_squat.moment",
+   "verdict": "PASS",
+   "line": "Marco's behind a woman at the squat rack, his hands on her hips, \"fixing\" her form long after it's fixed. She doesn't move them. / Lower. Lower. That's it. Feel",
+   "why": "Marco's row is 'training' at the gym; he is at the squat rack with a woman",
+   "cause": "",
+   "note": false,
+   "screen_hash": {
+    "text": "e3d10a82863ff03a",
+    "traits": "e4365d01d4eb14be",
+    "facts": "8965fc400ca80c26",
+    "facts2": "fc909c0a076152b4",
+    "all": "522df92c30c79038"
+   },
+   "row_hash": "5d6e027964066b8b",
+   "carried": true,
+   "pass": 9
+  },
+  {
+   "row": "L97",
+   "screen": "walk_nina_dress.moment",
+   "verdict": "PASS",
+   "line": "The fitting room curtain's half open. Nina's in the shop's tightest black dress, turning to check her ass in the mirror. / Don't tell my boss. I'm the boss.",
+   "why": "Nina's 18:45-19:00 row is 'in the fitting room'; she is in the fitting room",
+   "cause": "",
+   "note": false,
+   "screen_hash": {
+    "text": "68580ed617a631bb",
+    "traits": "01d024bf2eee28fd",
+    "facts": "a218a488dcdc9af8",
+    "facts2": "cd23064395339386",
+    "all": "6ae7b9d79a18e2aa"
+   },
+   "row_hash": "5d6e027964066b8b",
+   "carried": true,
+   "pass": 9
+  },
+  {
+   "row": "L97",
+   "screen": "walk_park_couple.moment",
+   "verdict": "PASS",
+   "line": "Through the bushes behind the pond: a man and a woman on the grass, her skirt up, her tits out, his jeans round his knees, his cock thrusting into her, slow and",
+   "why": "strangers, no rows; fires only in the park's open hours",
+   "cause": "",
+   "note": false,
+   "screen_hash": {
+    "text": "9f8c3c7fe47596ff",
+    "traits": "44136fa355b3678a",
+    "facts": "2ce65de01af70a7d",
+    "facts2": "2ce65de01af70a7d",
+    "all": "e9cf488728b26e5b"
+   },
+   "row_hash": "5d6e027964066b8b",
+   "carried": true,
+   "pass": 9
+  },
+  {
+   "row": "L97",
+   "screen": "walk_vance_ledger.moment",
+   "verdict": "PASS",
+   "line": "Vance is on his porch with a shoebox of envelopes on his knee, licking his thumb, counting. / Short again, number nine. Always number nine.",
+   "why": "Vance's row is 'on his porch' at hood_street; he is on his porch counting envelopes",
+   "cause": "",
+   "note": false,
+   "screen_hash": {
+    "text": "2557979fbd1c0b8d",
+    "traits": "d9172dabbd56b049",
+    "facts": "c00465774a257291",
+    "facts2": "144cf636eba42a4a",
+    "all": "239ef322866e551e"
+   },
+   "row_hash": "5d6e027964066b8b",
+   "carried": true,
+   "pass": 9
   }
  ],
  "causes": [],
  "pending": [],
- "asked": 1,
- "answered": 1,
+ "asked": 13,
+ "answered": 13,
  "pass_items": [],
  "unowed": []
 }

@@ -117,3 +117,50 @@ def test_requires_npc_at_her_place_without_their_row_points_at_the_next_door_for
 
 def test_neither_form_is_red():
     assert any("with no person" in r for r in walkins.problems(planted(comes(who=None))))
+
+
+# ── kind (a) fires on arrival too (LO, typed in main-lean 2026-11-26: "2nd one", "Go") ─────────────────────────
+
+def found(cid="bridge_couple", conds=(), mpd=1, mode="random", choices=None):
+    c = comes(cid, who=None, place="park", conds=conds, choices=choices if choices is not None else [
+        {"text": "Watch", "flagEffects": [{"flag": "saw_bridge_couple", "op": "set"}]}, {"text": "Back up the path"}])
+    c["trigger"]["trigger_mode"] = mode
+    c["trigger"]["chance"] = 0.35
+    if mpd is not None:
+        c["trigger"]["max_triggers_per_day"] = mpd
+    return c
+
+
+FINDS = {"p8": {"bridge_couple.a": ("a walk-in", "she comes across something")}}
+
+
+def test_a_walk_in_she_comes_across_is_green_off_the_brake():
+    assert walkins.problems(planted(comes(), found()), FINDS) == []
+
+
+def test_a_walk_in_she_comes_across_is_never_a_button():
+    assert any("is a button" in r for r in walkins.problems(planted(comes(), found(mode="manual")), FINDS))
+    old = {"p8": {"bridge_couple.a": ("a walk-in",)}}  # an older card's label, on a button at a place
+    assert any("is a button" in r for r in walkins.problems(planted(found(mode="manual")), old))
+
+
+def test_someone_walking_in_on_her_stays_a_substitution():
+    act = found("shower", mode="manual")
+    act["trigger"]["substitutions"] = [{"target_canvas_id": "shower_walk_in", "chance": 0.2}]
+    target = found("shower_walk_in", mode="manual")
+    target["trigger"]["substitution_only"] = True
+    does = {"p8": {"shower.a": ("a walk-in",), "shower_walk_in.a": ("a walk-in",)}}
+    assert walkins.problems(planted(act, target), does) == []
+
+
+def test_a_walk_in_she_comes_across_is_off_the_shared_brake():
+    waits = found(conds=(BRAKE,))
+    assert any("on the shared brake `came_to_her_today`" in r for r in walkins.problems(planted(comes(), waits), FINDS))
+    sets_it = found(choices=[{"text": t, "flagEffects": [{"flag": "came_to_her_today", "op": "set"}]} for t in "AB"])
+    assert any("shared brake" in r for r in walkins.problems(planted(comes(), sets_it), FINDS))
+
+
+def test_a_walk_in_she_comes_across_is_once_a_day_and_has_a_way_out():
+    assert any("max_triggers_per_day = 1" in r for r in walkins.problems(planted(found(mpd=None)), FINDS))
+    one = found(choices=[{"text": "Watch"}])
+    assert any("1 choice(s)" in r for r in walkins.problems(planted(one), FINDS))
