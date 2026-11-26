@@ -11,7 +11,7 @@ flag_keys = [
   "zoe_place_known",
   # P03 re-check: the house next door opens once she has met him (P24 sets it)
   "met_vance",
-  # P68 — the House Next Door opens in release 2; nothing sets it in release 1
+  # P68 — kept as a key a save may hold (C1656); P69 opened the House Next Door, so nothing reads it now
   "next_door_open",
   # P04 re-check: the faculty corridor opens once her advisor asks to see her (P16 sets it)
   "met_walsh",
@@ -239,9 +239,14 @@ description = "The house next door. The man who owns your family's house lives h
 parent = "neighbourhood"
 kind = "destination"
 image = "locations/hood_next_door_t0.jpg"
-# P03 re-check: hidden until she has met the man next door; P24 meets him on her street, on his porch.
-# P68 — hidden for all of release 1: nothing is here yet (LO 2026-11-27: "yes to all 4"); release 2 sets next_door_open.
-hidden_until = { flag = "next_door_open" }
+# P69 — open from the start: his porch is here (LO 2026-11-27, "go ahead"); next_door_open is no longer read.
+# His face shows who is there (places.md rule 2); the room text only says when the chair is empty (LO: "yes on both").
+# places.md rule 6 is waived here: the house holds only his face and scenes (LO 2026-11-27, "yes on both").
+description_variants = [
+  # P69 — before she has met him he has no face here (faces are for people she has met), so an unnamed line (rule 2 allows it).
+  { conditions = { version = "1.0", logic = "AND", items = [{ type = "npc_at_location", npc_id = "npc_vance", location_id = "hood_next_door", operator = "is_present" }, { type = "flag", subject = "player", flag_key = "met_vance", operator = "is_false" }] }, text = "The house next door. The man who owns your family's house lives here: a porch, one chair on it, and a clear view of your front door. A man sits in the porch chair, watching the street." },
+  { conditions = { version = "1.0", logic = "AND", items = [{ type = "npc_at_location", npc_id = "npc_vance", location_id = "hood_next_door", operator = "is_absent" }] }, text = "The house next door. The man who owns your family's house lives here: a porch, one chair on it, and a clear view of your front door. The chair is empty." },
+]
 image_search_queries = ["woman of 18 on the pavement in front of a neighbour's porch with one chair", "young woman at the bottom of porch steps, suburban street"]
 entry_from = "hood_street"
 
@@ -1432,21 +1437,22 @@ traits = ["Pushy", "Takes charge", "Watcher"]
 core_traits = { friendship = 100, lust = 400, control = 400 }
 
 [[npcs.schedules]]
-location = "hood_street"
+# P69 — his porch is at his own house (LO 2026-11-27: "mr vance is showing in the neighbourhood not in his home").
+location = "hood_next_door"
 weekdays = [0, 1, 2, 3, 4]
 start_time = "17:00"
 end_time = "20:00"
 activity = "on his porch"
 
 [[npcs.schedules]]
-location = "hood_street"
+location = "hood_next_door"
 weekdays = [5, 6]
 start_time = "09:00"
 end_time = "12:00"
 activity = "on his porch"
 
 [[npcs.schedules]]
-location = "hood_street"
+location = "hood_next_door"
 weekdays = [5, 6]
 start_time = "17:00"
 end_time = "20:00"

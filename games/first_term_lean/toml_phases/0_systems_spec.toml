@@ -340,7 +340,7 @@ title = "The Man Next Door"
 category = "Off-campus 🏙️"
 description = "Someone on your street is always watching."
 hints = [
-  { when = [], text = "The man next door sits on his porch, weekday evenings 5 to 8pm and on Sundays. Walk down your street and say hello." },
+  { when = [], text = "The man next door sits on his porch, weekday evenings 5 to 8pm and on Sundays. Go next door and say hello." },
   { when = [{ flag = "met_vance", op = "is_true" }], text = "end" },
 ]
 

@@ -1,22 +1,22 @@
 {
  "piece": "P24",
- "pass": 14,
+ "pass": 15,
  "screens": {
   "street_meet_vance.porch": {
-   "text": "02e830550f61824c",
+   "text": "540bcf0e74e245a0",
    "traits": "d9172dabbd56b049",
-   "facts": "2ee087ec13324ad3",
-   "facts2": "6e3e94c479380b40",
-   "all": "60be951657200cc6"
+   "facts": "093da1921eaeb199",
+   "facts2": "bfd991956d1f9064",
+   "all": "dc50d8f39532556d"
   },
   "street_meet_vance.after": {
-   "text": "5c55e708a77fb7e4",
+   "text": "b681518a9dc12eea",
    "traits": "d9172dabbd56b049",
-   "facts": "321ed9a358837a70",
-   "facts2": "f55cd6e88bd630e6",
-   "all": "c0b7182465f50aec"
+   "facts": "b262390dae86a287",
+   "facts2": "35addffdca947460",
+   "all": "198beb2011e6ab38"
   },
-  "*": "44b3b224a08677a7"
+  "*": "02a24fe8adc7e20c"
  },
  "rows": {
   "B1": "5276068df1ca6fa9",
@@ -171,39 +171,39 @@
    "row": "B10",
    "screen": "street_meet_vance.after",
    "verdict": "PASS",
-   "line": "Quiet one. I'll see you next Sunday, little lady.",
-   "why": "behind the Sunday trigger and now met_vance is_false, so its first-meeting lines never play after a weekday hello; he's there next week by his rows",
+   "line": "That's it, keep walking. I'll be right here. / You feel his eyes all the way down the street.",
+   "why": "every path ends with her leaving his house and Done goes to hood_street; gated met_vance is_false, Sunday, he's present (Sun 09-12, 17-20), 'next Sunday'/'next week' true by his rows",
    "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "5c55e708a77fb7e4",
+    "text": "b681518a9dc12eea",
     "traits": "d9172dabbd56b049",
-    "facts": "321ed9a358837a70",
-    "facts2": "f55cd6e88bd630e6",
-    "all": "c0b7182465f50aec"
+    "facts": "b262390dae86a287",
+    "facts2": "35addffdca947460",
+    "all": "198beb2011e6ab38"
    },
    "row_hash": "c1c0e2ac2588a579",
    "carried": false,
-   "pass": 14
+   "pass": 15
   },
   {
    "row": "B10",
    "screen": "street_meet_vance.porch",
    "verdict": "PASS",
-   "line": "The man next door is in the one chair on his porch, a mug on the rail, like every Sunday.",
-   "why": "Sunday, present (9-12, 17-20) and unmet: a weekday 'Walk past' leaves her unmet, and 'like every Sunday' stays true",
+   "line": "The man next door is in the one chair on his porch, a mug on the rail, like every Sunday. ... his eyes follow you up his path",
+   "why": "a button at hood_next_door, Sunday, he's present and unmet; 'up his path' is true at his house; his Sat/Sun rows keep 'like every Sunday' true",
    "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "02e830550f61824c",
+    "text": "540bcf0e74e245a0",
     "traits": "d9172dabbd56b049",
-    "facts": "2ee087ec13324ad3",
-    "facts2": "6e3e94c479380b40",
-    "all": "60be951657200cc6"
+    "facts": "093da1921eaeb199",
+    "facts2": "bfd991956d1f9064",
+    "all": "dc50d8f39532556d"
    },
    "row_hash": "c1c0e2ac2588a579",
    "carried": false,
-   "pass": 14
+   "pass": 15
   },
   {
    "row": "B11",
@@ -340,38 +340,38 @@
    "screen": "street_meet_vance.after",
    "verdict": "PASS",
    "line": "Your stepdad pays me, and when he doesn't, I'm the one who knocks.",
-   "why": "no garment, no number; agrees with the rent",
+   "why": "no garment of hers; rent paid to Vance agrees with PLAN:26-28",
    "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "5c55e708a77fb7e4",
+    "text": "b681518a9dc12eea",
     "traits": "d9172dabbd56b049",
-    "facts": "321ed9a358837a70",
-    "facts2": "f55cd6e88bd630e6",
-    "all": "c0b7182465f50aec"
+    "facts": "b262390dae86a287",
+    "facts2": "35addffdca947460",
+    "all": "198beb2011e6ab38"
    },
    "row_hash": "80d415cf08e0ebfe",
    "carried": false,
-   "pass": 14
+   "pass": 15
   },
   {
    "row": "B8",
    "screen": "street_meet_vance.porch",
    "verdict": "PASS",
    "line": "taking their time over your legs",
-   "why": "no garment of hers named",
+   "why": "names her legs, no garment; 54 in the picture agrees with PLAN:62",
    "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "02e830550f61824c",
+    "text": "540bcf0e74e245a0",
     "traits": "d9172dabbd56b049",
-    "facts": "2ee087ec13324ad3",
-    "facts2": "6e3e94c479380b40",
-    "all": "60be951657200cc6"
+    "facts": "093da1921eaeb199",
+    "facts2": "bfd991956d1f9064",
+    "all": "dc50d8f39532556d"
    },
    "row_hash": "80d415cf08e0ebfe",
    "carried": false,
-   "pass": 14
+   "pass": 15
   },
   {
    "row": "B9",
@@ -674,7 +674,7 @@
     "all": "c0b7182465f50aec"
    },
    "row_hash": "eb11e05cd75e52a9",
-   "carried": false,
+   "carried": true,
    "pass": 14
   },
   {
@@ -1316,39 +1316,39 @@
    "row": "C460",
    "screen": "street_meet_vance.after",
    "verdict": "PASS",
-   "line": "you know he'll be there next week.",
-   "why": "true on all paths; gated unmet so it's always the meeting",
+   "line": "You don't look back at the porch. ... you know he'll be there next week.",
+   "why": "true on all three paths at his house; Done to the street matches her walking away",
    "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "5c55e708a77fb7e4",
+    "text": "b681518a9dc12eea",
     "traits": "d9172dabbd56b049",
-    "facts": "321ed9a358837a70",
-    "facts2": "f55cd6e88bd630e6",
-    "all": "c0b7182465f50aec"
+    "facts": "b262390dae86a287",
+    "facts2": "35addffdca947460",
+    "all": "198beb2011e6ab38"
    },
    "row_hash": "67e48e60d5053a2e",
    "carried": false,
-   "pass": 14
+   "pass": 15
   },
   {
    "row": "C460",
    "screen": "street_meet_vance.porch",
    "verdict": "PASS",
-   "line": "The man next door is in the one chair on his porch, a mug on the rail, like every Sunday.",
-   "why": "true on every Sunday it can fire, unmet",
+   "line": "The man next door is in the one chair on his porch, a mug on the rail, like every Sunday. ... his eyes follow you up his path",
+   "why": "true on every Sunday minute the button shows (presence condition), unmet",
    "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "02e830550f61824c",
+    "text": "540bcf0e74e245a0",
     "traits": "d9172dabbd56b049",
-    "facts": "2ee087ec13324ad3",
-    "facts2": "6e3e94c479380b40",
-    "all": "60be951657200cc6"
+    "facts": "093da1921eaeb199",
+    "facts2": "bfd991956d1f9064",
+    "all": "dc50d8f39532556d"
    },
    "row_hash": "67e48e60d5053a2e",
    "carried": false,
-   "pass": 14
+   "pass": 15
   },
   {
    "row": "C461",
@@ -1368,38 +1368,38 @@
    "screen": "street_meet_vance.after",
    "verdict": "PASS",
    "line": "He does. So far.",
-   "why": "fits his cast entry",
+   "why": "his manner, fits PLAN:141",
    "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "5c55e708a77fb7e4",
+    "text": "b681518a9dc12eea",
     "traits": "d9172dabbd56b049",
-    "facts": "321ed9a358837a70",
-    "facts2": "f55cd6e88bd630e6",
-    "all": "c0b7182465f50aec"
+    "facts": "b262390dae86a287",
+    "facts2": "35addffdca947460",
+    "all": "198beb2011e6ab38"
    },
    "row_hash": "310706ee076318f2",
    "carried": false,
-   "pass": 14
+   "pass": 15
   },
   {
    "row": "C461",
    "screen": "street_meet_vance.porch",
    "verdict": "PASS",
-   "line": "Come here a minute, little lady.",
-   "why": "fits",
+   "line": "Well. Look who stopped being a kid. Come here a minute, little lady.",
+   "why": "his cast line (PLAN:141 'Come here a minute, little lady.')",
    "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "02e830550f61824c",
+    "text": "540bcf0e74e245a0",
     "traits": "d9172dabbd56b049",
-    "facts": "2ee087ec13324ad3",
-    "facts2": "6e3e94c479380b40",
-    "all": "60be951657200cc6"
+    "facts": "093da1921eaeb199",
+    "facts2": "bfd991956d1f9064",
+    "all": "dc50d8f39532556d"
    },
    "row_hash": "310706ee076318f2",
    "carried": false,
-   "pass": 14
+   "pass": 15
   },
   {
    "row": "C519",
@@ -1975,19 +1975,19 @@
    "screen": "street_meet_vance.after",
    "verdict": "PASS",
    "line": "Done (time_progression_minutes = 5)",
-   "why": "exit costs 5 minutes",
+   "why": "exit states 5 minutes",
    "cause": null,
    "note": true,
    "screen_hash": {
-    "text": "5c55e708a77fb7e4",
+    "text": "b681518a9dc12eea",
     "traits": "d9172dabbd56b049",
-    "facts": "321ed9a358837a70",
-    "facts2": "f55cd6e88bd630e6",
-    "all": "c0b7182465f50aec"
+    "facts": "b262390dae86a287",
+    "facts2": "35addffdca947460",
+    "all": "198beb2011e6ab38"
    },
    "row_hash": "4e86d143688ba8e5",
    "carried": false,
-   "pass": 14
+   "pass": 15
   },
   {
    "row": "C928",
@@ -2044,21 +2044,21 @@
   {
    "row": "C931",
    "screen": "street_meet_vance.after",
-   "verdict": "PASS",
-   "line": "Done",
-   "why": "no time_of_day item; presence by rows",
+   "verdict": "N/A",
+   "line": "",
+   "why": "no time_of_day condition on this canvas; presence comes from his rows via npc_at_location",
    "cause": null,
    "note": true,
    "screen_hash": {
-    "text": "5c55e708a77fb7e4",
+    "text": "b681518a9dc12eea",
     "traits": "d9172dabbd56b049",
-    "facts": "321ed9a358837a70",
-    "facts2": "f55cd6e88bd630e6",
-    "all": "c0b7182465f50aec"
+    "facts": "b262390dae86a287",
+    "facts2": "35addffdca947460",
+    "all": "198beb2011e6ab38"
    },
    "row_hash": "1aadffd96e76381c",
    "carried": false,
-   "pass": 14
+   "pass": 15
   },
   {
    "row": "C953",
@@ -2091,38 +2091,38 @@
    "screen": "street_meet_vance.after",
    "verdict": "PASS",
    "line": "You stop at the bottom of his steps.",
-   "why": "same minute, he's present",
+   "why": "same minute as the porch screen; npc_at_location hood_next_door is_present in the trigger",
    "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "5c55e708a77fb7e4",
+    "text": "b681518a9dc12eea",
     "traits": "d9172dabbd56b049",
-    "facts": "321ed9a358837a70",
-    "facts2": "f55cd6e88bd630e6",
-    "all": "c0b7182465f50aec"
+    "facts": "b262390dae86a287",
+    "facts2": "35addffdca947460",
+    "all": "198beb2011e6ab38"
    },
    "row_hash": "13a714429d15f3b2",
    "carried": false,
-   "pass": 14
+   "pass": 15
   },
   {
    "row": "L106",
    "screen": "street_meet_vance.porch",
    "verdict": "PASS",
-   "line": "The man next door is in the one chair on his porch, a mug on the rail, like every Sunday.",
-   "why": "npc_at_location is_present in the trigger",
+   "line": "The man next door is in the one chair on his porch, a mug on the rail, like every Sunday. ... his eyes follow you up his path",
+   "why": "npc_at_location npc_vance hood_next_door is_present in the trigger; his rows put him there",
    "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "02e830550f61824c",
+    "text": "540bcf0e74e245a0",
     "traits": "d9172dabbd56b049",
-    "facts": "2ee087ec13324ad3",
-    "facts2": "6e3e94c479380b40",
-    "all": "60be951657200cc6"
+    "facts": "093da1921eaeb199",
+    "facts2": "bfd991956d1f9064",
+    "all": "dc50d8f39532556d"
    },
    "row_hash": "13a714429d15f3b2",
    "carried": false,
-   "pass": 14
+   "pass": 15
   },
   {
    "row": "L119",
@@ -2214,19 +2214,19 @@
    "screen": "street_meet_vance.after",
    "verdict": "PASS",
    "line": "Done",
-   "why": "one-time canvas, no per-day rows",
+   "why": "one-time canvas, one trigger with a weekday condition; no per-day-kind rows",
    "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "5c55e708a77fb7e4",
+    "text": "b681518a9dc12eea",
     "traits": "d9172dabbd56b049",
-    "facts": "321ed9a358837a70",
-    "facts2": "f55cd6e88bd630e6",
-    "all": "c0b7182465f50aec"
+    "facts": "b262390dae86a287",
+    "facts2": "35addffdca947460",
+    "all": "198beb2011e6ab38"
    },
    "row_hash": "e64ce2672d85d2d8",
    "carried": false,
-   "pass": 14
+   "pass": 15
   },
   {
    "row": "L168",
@@ -2288,8 +2288,8 @@
  ],
  "causes": [],
  "pending": [],
- "asked": 14,
- "answered": 14,
+ "asked": 13,
+ "answered": 13,
  "pass_items": [],
  "unowed": []
 }

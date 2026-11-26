@@ -1,13 +1,13 @@
 {
  "piece": "P04",
- "pass": 18,
+ "pass": 19,
  "screens": {
   "travel_bus_to_campus.ride": {
    "text": "b315e370a219f4ed",
    "traits": "44136fa355b3678a",
-   "facts": "4bec7b370aee14bb",
-   "facts2": "4bec7b370aee14bb",
-   "all": "eab098c8e0d9d96b"
+   "facts": "3e0b146f3964c928",
+   "facts2": "3e0b146f3964c928",
+   "all": "145cb6ccd6c225c9"
   },
   "travel_bus_to_campus.packed_no": {
    "text": "70e6483c3726a20d",
@@ -26,9 +26,9 @@
   "travel_walk_to_campus.ride": {
    "text": "9db6c85f17af2668",
    "traits": "44136fa355b3678a",
-   "facts": "4bec7b370aee14bb",
-   "facts2": "4bec7b370aee14bb",
-   "all": "8b038b9e8128c7fc"
+   "facts": "3e0b146f3964c928",
+   "facts2": "3e0b146f3964c928",
+   "all": "ce3fdbe8537c6649"
   },
   "travel_bus_home.ride": {
    "text": "cb3be596658309ec",
@@ -44,7 +44,7 @@
    "facts2": "3cf0347032935327",
    "all": "44aedf3d6ea918ee"
   },
-  "*": "d3c2d7277327c09d"
+  "*": "570f4c04d7c6be2a"
  },
  "rows": {
   "B1": "5276068df1ca6fa9",
@@ -348,18 +348,19 @@
    "screen": "travel_bus_to_campus.ride",
    "verdict": "PASS",
    "line": "The bus is half empty. You get a seat by the window and step off in town.",
-   "why": "true at the first and last minute and on a second visit: both groups and the three choices land on town_square; the half-empty line covers every minute the packed one doesn't; nobody named whose rows put them elsewhere",
+   "why": "Vance's rows moved to hood_next_door; no line here ever named him. The packed group (weekdays 07-10) and the half-empty group (weekends, or 10:00-07:00) tile every minute; an unnamed stranger only",
    "cause": null,
    "note": false,
    "screen_hash": {
     "text": "b315e370a219f4ed",
-    "facts": "4bec7b370aee14bb",
-    "facts2": "4bec7b370aee14bb",
-    "all": "eab098c8e0d9d96b"
+    "traits": "44136fa355b3678a",
+    "facts": "3e0b146f3964c928",
+    "facts2": "3e0b146f3964c928",
+    "all": "145cb6ccd6c225c9"
    },
    "row_hash": "c1c0e2ac2588a579",
-   "carried": true,
-   "pass": 9
+   "carried": false,
+   "pass": 19
   },
   {
    "row": "B10",
@@ -384,19 +385,20 @@
    "row": "B10",
    "screen": "travel_walk_to_campus.ride",
    "verdict": "PASS",
-   "line": "By the time you reach town your feet ache.",
-   "why": "true at the first and last minute and on a second visit: starts on her street (past the park, which sits off it) and lands on town_square; nobody named whose rows put them elsewhere",
+   "line": "It's a long walk: past the park, over the bridge, along the main road. By the time you reach town your feet ache.",
+   "why": "names no one; the park sits off her street; true at any minute and on a second visit",
    "cause": null,
    "note": false,
    "screen_hash": {
     "text": "9db6c85f17af2668",
-    "facts": "4bec7b370aee14bb",
-    "facts2": "4bec7b370aee14bb",
-    "all": "8b038b9e8128c7fc"
+    "traits": "44136fa355b3678a",
+    "facts": "3e0b146f3964c928",
+    "facts2": "3e0b146f3964c928",
+    "all": "ce3fdbe8537c6649"
    },
    "row_hash": "c1c0e2ac2588a579",
-   "carried": true,
-   "pass": 9
+   "carried": false,
+   "pass": 19
   },
   {
    "row": "B11",
@@ -587,19 +589,20 @@
    "row": "B8",
    "screen": "travel_bus_to_campus.ride",
    "verdict": "PASS",
-   "line": "The bus is half empty. You get a seat by the window and step off in town.",
+   "line": "The bus is packed. Every time it brakes, a man's hips press into your ass, and he doesn't step back.",
    "why": "$2 and 20 minutes to Town, as PLAN and the cards say; her ass and nipples are body, no garment named",
    "cause": null,
    "note": false,
    "screen_hash": {
     "text": "b315e370a219f4ed",
-    "facts": "4bec7b370aee14bb",
-    "facts2": "4bec7b370aee14bb",
-    "all": "eab098c8e0d9d96b"
+    "traits": "44136fa355b3678a",
+    "facts": "3e0b146f3964c928",
+    "facts2": "3e0b146f3964c928",
+    "all": "145cb6ccd6c225c9"
    },
    "row_hash": "80d415cf08e0ebfe",
-   "carried": true,
-   "pass": 9
+   "carried": false,
+   "pass": 19
   },
   {
    "row": "B8",
@@ -624,19 +627,20 @@
    "row": "B8",
    "screen": "travel_walk_to_campus.ride",
    "verdict": "PASS",
-   "line": "By the time you reach town your feet ache.",
+   "line": "It's a long walk: past the park, over the bridge, along the main road. By the time you reach town your feet ache.",
    "why": "10 energy and 45 minutes, as P04, P45 and PLAN say; no garment named",
    "cause": null,
    "note": false,
    "screen_hash": {
     "text": "9db6c85f17af2668",
-    "facts": "4bec7b370aee14bb",
-    "facts2": "4bec7b370aee14bb",
-    "all": "8b038b9e8128c7fc"
+    "traits": "44136fa355b3678a",
+    "facts": "3e0b146f3964c928",
+    "facts2": "3e0b146f3964c928",
+    "all": "ce3fdbe8537c6649"
    },
    "row_hash": "80d415cf08e0ebfe",
-   "carried": true,
-   "pass": 9
+   "carried": false,
+   "pass": 19
   },
   {
    "row": "B9",
@@ -1712,18 +1716,19 @@
    "screen": "travel_bus_to_campus.ride",
    "verdict": "PASS",
    "line": "The bus is half empty. You get a seat by the window and step off in town.",
-   "why": "both groups and the three choices land on town_square; the half-empty line covers every minute the packed one doesn't",
+   "why": "both groups land on town_square; nothing about who is on her street, so the move of Vance's porch changes no claim",
    "cause": null,
    "note": false,
    "screen_hash": {
     "text": "b315e370a219f4ed",
-    "facts": "4bec7b370aee14bb",
-    "facts2": "4bec7b370aee14bb",
-    "all": "eab098c8e0d9d96b"
+    "traits": "44136fa355b3678a",
+    "facts": "3e0b146f3964c928",
+    "facts2": "3e0b146f3964c928",
+    "all": "145cb6ccd6c225c9"
    },
    "row_hash": "beb5a109bde77305",
-   "carried": true,
-   "pass": 9
+   "carried": false,
+   "pass": 19
   },
   {
    "row": "C460",
@@ -1748,19 +1753,20 @@
    "row": "C460",
    "screen": "travel_walk_to_campus.ride",
    "verdict": "PASS",
-   "line": "By the time you reach town your feet ache.",
-   "why": "starts on her street (past the park, which sits off it) and lands on town_square",
+   "line": "It's a long walk: past the park, over the bridge, along the main road. By the time you reach town your feet ache.",
+   "why": "starts on her street and lands on town_square; no presence claim",
    "cause": null,
    "note": false,
    "screen_hash": {
     "text": "9db6c85f17af2668",
-    "facts": "4bec7b370aee14bb",
-    "facts2": "4bec7b370aee14bb",
-    "all": "8b038b9e8128c7fc"
+    "traits": "44136fa355b3678a",
+    "facts": "3e0b146f3964c928",
+    "facts2": "3e0b146f3964c928",
+    "all": "ce3fdbe8537c6649"
    },
    "row_hash": "beb5a109bde77305",
-   "carried": true,
-   "pass": 9
+   "carried": false,
+   "pass": 19
   },
   {
    "row": "C461",
@@ -1834,19 +1840,20 @@
    "row": "C461",
    "screen": "travel_bus_to_campus.ride",
    "verdict": "PASS",
-   "line": "The bus is half empty. You get a seat by the window and step off in town.",
-   "why": "texture and the stranger's lines only, as before",
+   "line": "Packed in tight today, huh? Don't mind me.",
+   "why": "texture and the stranger's line only",
    "cause": null,
    "note": false,
    "screen_hash": {
     "text": "b315e370a219f4ed",
-    "facts": "4bec7b370aee14bb",
-    "facts2": "4bec7b370aee14bb",
-    "all": "eab098c8e0d9d96b"
+    "traits": "44136fa355b3678a",
+    "facts": "3e0b146f3964c928",
+    "facts2": "3e0b146f3964c928",
+    "all": "145cb6ccd6c225c9"
    },
    "row_hash": "153b0804e686abae",
-   "carried": true,
-   "pass": 9
+   "carried": false,
+   "pass": 19
   },
   {
    "row": "C461",
@@ -1871,19 +1878,20 @@
    "row": "C461",
    "screen": "travel_walk_to_campus.ride",
    "verdict": "PASS",
-   "line": "By the time you reach town your feet ache.",
-   "why": "texture and the stranger's lines only, as before",
+   "line": "It's a long walk: past the park, over the bridge, along the main road. By the time you reach town your feet ache.",
+   "why": "texture only",
    "cause": null,
    "note": false,
    "screen_hash": {
     "text": "9db6c85f17af2668",
-    "facts": "4bec7b370aee14bb",
-    "facts2": "4bec7b370aee14bb",
-    "all": "8b038b9e8128c7fc"
+    "traits": "44136fa355b3678a",
+    "facts": "3e0b146f3964c928",
+    "facts2": "3e0b146f3964c928",
+    "all": "ce3fdbe8537c6649"
    },
    "row_hash": "153b0804e686abae",
-   "carried": true,
-   "pass": 9
+   "carried": false,
+   "pass": 19
   },
   {
    "row": "C593",
@@ -2191,6 +2199,25 @@
   },
   {
    "row": "C889",
+   "screen": "travel_bus_to_campus.ride",
+   "verdict": "PASS",
+   "line": "Take the bus to town ($2)",
+   "why": "money shown, no clock time or duration; Get off in town spends the 20",
+   "cause": null,
+   "note": true,
+   "screen_hash": {
+    "text": "b315e370a219f4ed",
+    "traits": "44136fa355b3678a",
+    "facts": "3e0b146f3964c928",
+    "facts2": "3e0b146f3964c928",
+    "all": "145cb6ccd6c225c9"
+   },
+   "row_hash": "cebb147317e10c05",
+   "carried": false,
+   "pass": 19
+  },
+  {
+   "row": "C889",
    "screen": "travel_walk_home.ride",
    "verdict": "PASS",
    "line": "The walk home takes forever. Your street, finally.",
@@ -2206,6 +2233,25 @@
    "row_hash": "cebb147317e10c05",
    "carried": true,
    "pass": 4
+  },
+  {
+   "row": "C889",
+   "screen": "travel_walk_to_campus.ride",
+   "verdict": "PASS",
+   "line": "Walk to town",
+   "why": "no time on the label; Walk into town spends the 45",
+   "cause": null,
+   "note": true,
+   "screen_hash": {
+    "text": "9db6c85f17af2668",
+    "traits": "44136fa355b3678a",
+    "facts": "3e0b146f3964c928",
+    "facts2": "3e0b146f3964c928",
+    "all": "ce3fdbe8537c6649"
+   },
+   "row_hash": "cebb147317e10c05",
+   "carried": false,
+   "pass": 19
   },
   {
    "row": "C890",
@@ -2253,6 +2299,25 @@
   },
   {
    "row": "C892",
+   "screen": "travel_bus_to_campus.ride",
+   "verdict": "PASS",
+   "line": "The bus is packed. Every time it brakes, a man's hips press into your ass, and he doesn't step back.",
+   "why": "no hour in the act",
+   "cause": null,
+   "note": true,
+   "screen_hash": {
+    "text": "b315e370a219f4ed",
+    "traits": "44136fa355b3678a",
+    "facts": "3e0b146f3964c928",
+    "facts2": "3e0b146f3964c928",
+    "all": "145cb6ccd6c225c9"
+   },
+   "row_hash": "1d8d188451bcb51e",
+   "carried": false,
+   "pass": 19
+  },
+  {
+   "row": "C892",
    "screen": "travel_walk_home.ride",
    "verdict": "PASS",
    "line": "The walk home takes forever. Your street, finally.",
@@ -2268,6 +2333,25 @@
    "row_hash": "1d8d188451bcb51e",
    "carried": true,
    "pass": 4
+  },
+  {
+   "row": "C892",
+   "screen": "travel_walk_to_campus.ride",
+   "verdict": "PASS",
+   "line": "It's a long walk: past the park, over the bridge, along the main road. By the time you reach town your feet ache.",
+   "why": "no hour in the act",
+   "cause": null,
+   "note": true,
+   "screen_hash": {
+    "text": "9db6c85f17af2668",
+    "traits": "44136fa355b3678a",
+    "facts": "3e0b146f3964c928",
+    "facts2": "3e0b146f3964c928",
+    "all": "ce3fdbe8537c6649"
+   },
+   "row_hash": "1d8d188451bcb51e",
+   "carried": false,
+   "pass": 19
   },
   {
    "row": "C897",
@@ -2302,6 +2386,25 @@
   },
   {
    "row": "C897",
+   "screen": "travel_bus_to_campus.ride",
+   "verdict": "PASS",
+   "line": "time_progression_minutes = 20",
+   "why": "time on crossing to Town",
+   "cause": null,
+   "note": true,
+   "screen_hash": {
+    "text": "b315e370a219f4ed",
+    "traits": "44136fa355b3678a",
+    "facts": "3e0b146f3964c928",
+    "facts2": "3e0b146f3964c928",
+    "all": "145cb6ccd6c225c9"
+   },
+   "row_hash": "16b066aee3c1a937",
+   "carried": false,
+   "pass": 19
+  },
+  {
+   "row": "C897",
    "screen": "travel_walk_home.ride",
    "verdict": "PASS",
    "line": "The walk home takes forever. Your street, finally.",
@@ -2317,6 +2420,25 @@
    "row_hash": "16b066aee3c1a937",
    "carried": true,
    "pass": 4
+  },
+  {
+   "row": "C897",
+   "screen": "travel_walk_to_campus.ride",
+   "verdict": "PASS",
+   "line": "time_progression_minutes = 45",
+   "why": "time on crossing to Town",
+   "cause": null,
+   "note": true,
+   "screen_hash": {
+    "text": "9db6c85f17af2668",
+    "traits": "44136fa355b3678a",
+    "facts": "3e0b146f3964c928",
+    "facts2": "3e0b146f3964c928",
+    "all": "ce3fdbe8537c6649"
+   },
+   "row_hash": "16b066aee3c1a937",
+   "carried": false,
+   "pass": 19
   },
   {
    "row": "C900",
@@ -2351,6 +2473,25 @@
   },
   {
    "row": "C900",
+   "screen": "travel_bus_to_campus.ride",
+   "verdict": "PASS",
+   "line": "Packed in tight today, huh?",
+   "why": "'today' is no clock time; the rush is behind its weekday 07-10 group",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "b315e370a219f4ed",
+    "traits": "44136fa355b3678a",
+    "facts": "3e0b146f3964c928",
+    "facts2": "3e0b146f3964c928",
+    "all": "145cb6ccd6c225c9"
+   },
+   "row_hash": "a4ef8ce78f554d6b",
+   "carried": false,
+   "pass": 19
+  },
+  {
+   "row": "C900",
    "screen": "travel_walk_home.ride",
    "verdict": "PASS",
    "line": "The walk home takes forever. Your street, finally.",
@@ -2366,6 +2507,25 @@
    "row_hash": "a4ef8ce78f554d6b",
    "carried": true,
    "pass": 4
+  },
+  {
+   "row": "C900",
+   "screen": "travel_walk_to_campus.ride",
+   "verdict": "PASS",
+   "line": "It's a long walk: past the park, over the bridge, along the main road. By the time you reach town your feet ache.",
+   "why": "no time said",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "9db6c85f17af2668",
+    "traits": "44136fa355b3678a",
+    "facts": "3e0b146f3964c928",
+    "facts2": "3e0b146f3964c928",
+    "all": "ce3fdbe8537c6649"
+   },
+   "row_hash": "a4ef8ce78f554d6b",
+   "carried": false,
+   "pass": 19
   },
   {
    "row": "C902",
@@ -2400,6 +2560,25 @@
   },
   {
    "row": "C902",
+   "screen": "travel_bus_to_campus.ride",
+   "verdict": "PASS",
+   "line": "The bus is packed. Every time it brakes, a man's hips press into your ass, and he doesn't step back.",
+   "why": "at 09:59 on a weekday still the packed window; at 10:00 only the half-empty line shows",
+   "cause": null,
+   "note": true,
+   "screen_hash": {
+    "text": "b315e370a219f4ed",
+    "traits": "44136fa355b3678a",
+    "facts": "3e0b146f3964c928",
+    "facts2": "3e0b146f3964c928",
+    "all": "145cb6ccd6c225c9"
+   },
+   "row_hash": "66462bdbadae0c77",
+   "carried": false,
+   "pass": 19
+  },
+  {
+   "row": "C902",
    "screen": "travel_walk_home.ride",
    "verdict": "PASS",
    "line": "The walk home takes forever. Your street, finally.",
@@ -2415,6 +2594,25 @@
    "row_hash": "66462bdbadae0c77",
    "carried": true,
    "pass": 4
+  },
+  {
+   "row": "C902",
+   "screen": "travel_walk_to_campus.ride",
+   "verdict": "PASS",
+   "line": "It's a long walk: past the park, over the bridge, along the main road. By the time you reach town your feet ache.",
+   "why": "true at any minute",
+   "cause": null,
+   "note": true,
+   "screen_hash": {
+    "text": "9db6c85f17af2668",
+    "traits": "44136fa355b3678a",
+    "facts": "3e0b146f3964c928",
+    "facts2": "3e0b146f3964c928",
+    "all": "ce3fdbe8537c6649"
+   },
+   "row_hash": "66462bdbadae0c77",
+   "carried": false,
+   "pass": 19
   },
   {
    "row": "C903",
@@ -2449,6 +2647,25 @@
   },
   {
    "row": "C903",
+   "screen": "travel_bus_to_campus.ride",
+   "verdict": "PASS",
+   "line": "The bus is packed. Every time it brakes, a man's hips press into your ass, and he doesn't step back.",
+   "why": "names no weekday; the packed line sits behind its weekday group",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "b315e370a219f4ed",
+    "traits": "44136fa355b3678a",
+    "facts": "3e0b146f3964c928",
+    "facts2": "3e0b146f3964c928",
+    "all": "145cb6ccd6c225c9"
+   },
+   "row_hash": "263890a884329d60",
+   "carried": false,
+   "pass": 19
+  },
+  {
+   "row": "C903",
    "screen": "travel_walk_home.ride",
    "verdict": "PASS",
    "line": "The walk home takes forever. Your street, finally.",
@@ -2464,6 +2681,25 @@
    "row_hash": "263890a884329d60",
    "carried": true,
    "pass": 4
+  },
+  {
+   "row": "C903",
+   "screen": "travel_walk_to_campus.ride",
+   "verdict": "PASS",
+   "line": "It's a long walk: past the park, over the bridge, along the main road. By the time you reach town your feet ache.",
+   "why": "names no weekday",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "9db6c85f17af2668",
+    "traits": "44136fa355b3678a",
+    "facts": "3e0b146f3964c928",
+    "facts2": "3e0b146f3964c928",
+    "all": "ce3fdbe8537c6649"
+   },
+   "row_hash": "263890a884329d60",
+   "carried": false,
+   "pass": 19
   },
   {
    "row": "C904",
@@ -2498,6 +2734,25 @@
   },
   {
    "row": "C906",
+   "screen": "travel_bus_to_campus.ride",
+   "verdict": "PASS",
+   "line": "Take the bus to town ($2)",
+   "why": "no time on the label",
+   "cause": null,
+   "note": true,
+   "screen_hash": {
+    "text": "b315e370a219f4ed",
+    "traits": "44136fa355b3678a",
+    "facts": "3e0b146f3964c928",
+    "facts2": "3e0b146f3964c928",
+    "all": "145cb6ccd6c225c9"
+   },
+   "row_hash": "b8d0e5793dd14e95",
+   "carried": false,
+   "pass": 19
+  },
+  {
+   "row": "C906",
    "screen": "travel_walk_home.ride",
    "verdict": "PASS",
    "line": "The walk home takes forever. Your street, finally.",
@@ -2513,6 +2768,25 @@
    "row_hash": "b8d0e5793dd14e95",
    "carried": true,
    "pass": 4
+  },
+  {
+   "row": "C906",
+   "screen": "travel_walk_to_campus.ride",
+   "verdict": "PASS",
+   "line": "Walk to town",
+   "why": "no time on the label",
+   "cause": null,
+   "note": true,
+   "screen_hash": {
+    "text": "9db6c85f17af2668",
+    "traits": "44136fa355b3678a",
+    "facts": "3e0b146f3964c928",
+    "facts2": "3e0b146f3964c928",
+    "all": "ce3fdbe8537c6649"
+   },
+   "row_hash": "b8d0e5793dd14e95",
+   "carried": false,
+   "pass": 19
   },
   {
    "row": "C910",
@@ -2534,6 +2808,25 @@
   },
   {
    "row": "C910",
+   "screen": "travel_bus_to_campus.ride",
+   "verdict": "PASS",
+   "line": "Take the bus to town ($2)",
+   "why": "states money only, the act costs $2; no time or energy",
+   "cause": null,
+   "note": true,
+   "screen_hash": {
+    "text": "b315e370a219f4ed",
+    "traits": "44136fa355b3678a",
+    "facts": "3e0b146f3964c928",
+    "facts2": "3e0b146f3964c928",
+    "all": "145cb6ccd6c225c9"
+   },
+   "row_hash": "19dcf805483efc88",
+   "carried": false,
+   "pass": 19
+  },
+  {
+   "row": "C910",
    "screen": "travel_walk_home.ride",
    "verdict": "PASS",
    "line": "The walk home takes forever. Your street, finally.",
@@ -2549,6 +2842,25 @@
    "row_hash": "19dcf805483efc88",
    "carried": true,
    "pass": 4
+  },
+  {
+   "row": "C910",
+   "screen": "travel_walk_to_campus.ride",
+   "verdict": "PASS",
+   "line": "Walk into town",
+   "why": "no time, no energy, no money",
+   "cause": null,
+   "note": true,
+   "screen_hash": {
+    "text": "9db6c85f17af2668",
+    "traits": "44136fa355b3678a",
+    "facts": "3e0b146f3964c928",
+    "facts2": "3e0b146f3964c928",
+    "all": "ce3fdbe8537c6649"
+   },
+   "row_hash": "19dcf805483efc88",
+   "carried": false,
+   "pass": 19
   },
   {
    "row": "C913",
@@ -2583,6 +2895,25 @@
   },
   {
    "row": "C913",
+   "screen": "travel_bus_to_campus.ride",
+   "verdict": "N/A",
+   "line": "",
+   "why": "the bus row has no hours: it runs at any minute",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "b315e370a219f4ed",
+    "traits": "44136fa355b3678a",
+    "facts": "3e0b146f3964c928",
+    "facts2": "3e0b146f3964c928",
+    "all": "145cb6ccd6c225c9"
+   },
+   "row_hash": "48bd82911a86ecbd",
+   "carried": false,
+   "pass": 19
+  },
+  {
+   "row": "C913",
    "screen": "travel_walk_home.ride",
    "verdict": "N/A",
    "line": "The walk home takes forever. Your street, finally.",
@@ -2598,6 +2929,25 @@
    "row_hash": "48bd82911a86ecbd",
    "carried": true,
    "pass": 4
+  },
+  {
+   "row": "C913",
+   "screen": "travel_walk_to_campus.ride",
+   "verdict": "N/A",
+   "line": "",
+   "why": "the walk has no hours",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "9db6c85f17af2668",
+    "traits": "44136fa355b3678a",
+    "facts": "3e0b146f3964c928",
+    "facts2": "3e0b146f3964c928",
+    "all": "ce3fdbe8537c6649"
+   },
+   "row_hash": "48bd82911a86ecbd",
+   "carried": false,
+   "pass": 19
   },
   {
    "row": "C914",
@@ -2632,6 +2982,25 @@
   },
   {
    "row": "C914",
+   "screen": "travel_bus_to_campus.ride",
+   "verdict": "N/A",
+   "line": "",
+   "why": "no hours on the row",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "b315e370a219f4ed",
+    "traits": "44136fa355b3678a",
+    "facts": "3e0b146f3964c928",
+    "facts2": "3e0b146f3964c928",
+    "all": "145cb6ccd6c225c9"
+   },
+   "row_hash": "5a326c2d5d8a0abd",
+   "carried": false,
+   "pass": 19
+  },
+  {
+   "row": "C914",
    "screen": "travel_walk_home.ride",
    "verdict": "N/A",
    "line": "The walk home takes forever. Your street, finally.",
@@ -2647,6 +3016,25 @@
    "row_hash": "5a326c2d5d8a0abd",
    "carried": true,
    "pass": 4
+  },
+  {
+   "row": "C914",
+   "screen": "travel_walk_to_campus.ride",
+   "verdict": "N/A",
+   "line": "",
+   "why": "no hours on the row",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "9db6c85f17af2668",
+    "traits": "44136fa355b3678a",
+    "facts": "3e0b146f3964c928",
+    "facts2": "3e0b146f3964c928",
+    "all": "ce3fdbe8537c6649"
+   },
+   "row_hash": "5a326c2d5d8a0abd",
+   "carried": false,
+   "pass": 19
   },
   {
    "row": "C915",
@@ -2694,6 +3082,25 @@
   },
   {
    "row": "C916",
+   "screen": "travel_bus_to_campus.ride",
+   "verdict": "N/A",
+   "line": "",
+   "why": "no event with hours",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "b315e370a219f4ed",
+    "traits": "44136fa355b3678a",
+    "facts": "3e0b146f3964c928",
+    "facts2": "3e0b146f3964c928",
+    "all": "145cb6ccd6c225c9"
+   },
+   "row_hash": "06706eb2d5bad3b5",
+   "carried": false,
+   "pass": 19
+  },
+  {
+   "row": "C916",
    "screen": "travel_walk_home.ride",
    "verdict": "N/A",
    "line": "",
@@ -2709,6 +3116,25 @@
    "row_hash": "06706eb2d5bad3b5",
    "carried": true,
    "pass": 4
+  },
+  {
+   "row": "C916",
+   "screen": "travel_walk_to_campus.ride",
+   "verdict": "N/A",
+   "line": "",
+   "why": "no event with hours",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "9db6c85f17af2668",
+    "traits": "44136fa355b3678a",
+    "facts": "3e0b146f3964c928",
+    "facts2": "3e0b146f3964c928",
+    "all": "ce3fdbe8537c6649"
+   },
+   "row_hash": "06706eb2d5bad3b5",
+   "carried": false,
+   "pass": 19
   },
   {
    "row": "C920",
@@ -2743,6 +3169,25 @@
   },
   {
    "row": "C920",
+   "screen": "travel_bus_to_campus.ride",
+   "verdict": "PASS",
+   "line": "time_progression_minutes = 20",
+   "why": "a move between areas (neighbourhood to Town) carries the time; the hop to the House Next Door stays free",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "b315e370a219f4ed",
+    "traits": "44136fa355b3678a",
+    "facts": "3e0b146f3964c928",
+    "facts2": "3e0b146f3964c928",
+    "all": "145cb6ccd6c225c9"
+   },
+   "row_hash": "e7485c9faee24e77",
+   "carried": false,
+   "pass": 19
+  },
+  {
+   "row": "C920",
    "screen": "travel_walk_home.ride",
    "verdict": "PASS",
    "line": "The walk home takes forever. Your street, finally.",
@@ -2758,6 +3203,25 @@
    "row_hash": "e7485c9faee24e77",
    "carried": true,
    "pass": 4
+  },
+  {
+   "row": "C920",
+   "screen": "travel_walk_to_campus.ride",
+   "verdict": "PASS",
+   "line": "time_progression_minutes = 45",
+   "why": "a move between areas carries the time",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "9db6c85f17af2668",
+    "traits": "44136fa355b3678a",
+    "facts": "3e0b146f3964c928",
+    "facts2": "3e0b146f3964c928",
+    "all": "ce3fdbe8537c6649"
+   },
+   "row_hash": "e7485c9faee24e77",
+   "carried": false,
+   "pass": 19
   },
   {
    "row": "C921",
@@ -2831,19 +3295,20 @@
    "row": "C921",
    "screen": "travel_bus_to_campus.ride",
    "verdict": "PASS",
-   "line": "The bus is half empty. You get a seat by the window and step off in town.",
-   "why": "the off-peak window 10:00-07:00 wraps past midnight and is the exact complement of weekdays 07:00-10:00",
+   "line": "time_of_day 10:00-07:00",
+   "why": "the off-peak window wraps past midnight and is the exact complement of weekdays 07:00-10:00",
    "cause": null,
    "note": true,
    "screen_hash": {
     "text": "b315e370a219f4ed",
-    "facts": "4bec7b370aee14bb",
-    "facts2": "4bec7b370aee14bb",
-    "all": "eab098c8e0d9d96b"
+    "traits": "44136fa355b3678a",
+    "facts": "3e0b146f3964c928",
+    "facts2": "3e0b146f3964c928",
+    "all": "145cb6ccd6c225c9"
    },
    "row_hash": "19da817e808ac3d6",
-   "carried": true,
-   "pass": 9
+   "carried": false,
+   "pass": 19
   },
   {
    "row": "C921",
@@ -2868,19 +3333,20 @@
    "row": "C921",
    "screen": "travel_walk_to_campus.ride",
    "verdict": "N/A",
-   "line": "By the time you reach town your feet ache.",
+   "line": "",
    "why": "no window on this screen",
    "cause": null,
    "note": true,
    "screen_hash": {
     "text": "9db6c85f17af2668",
-    "facts": "4bec7b370aee14bb",
-    "facts2": "4bec7b370aee14bb",
-    "all": "8b038b9e8128c7fc"
+    "traits": "44136fa355b3678a",
+    "facts": "3e0b146f3964c928",
+    "facts2": "3e0b146f3964c928",
+    "all": "ce3fdbe8537c6649"
    },
    "row_hash": "19da817e808ac3d6",
-   "carried": true,
-   "pass": 9
+   "carried": false,
+   "pass": 19
   },
   {
    "row": "C924",
@@ -2915,6 +3381,25 @@
   },
   {
    "row": "C924",
+   "screen": "travel_bus_to_campus.ride",
+   "verdict": "PASS",
+   "line": "Take the bus to town ($2)",
+   "why": "$2 and 20 minutes, or 10 energy and 45 on foot, make Town's hours matter",
+   "cause": null,
+   "note": true,
+   "screen_hash": {
+    "text": "b315e370a219f4ed",
+    "traits": "44136fa355b3678a",
+    "facts": "3e0b146f3964c928",
+    "facts2": "3e0b146f3964c928",
+    "all": "145cb6ccd6c225c9"
+   },
+   "row_hash": "ce540d1e01b7c301",
+   "carried": false,
+   "pass": 19
+  },
+  {
+   "row": "C924",
    "screen": "travel_walk_home.ride",
    "verdict": "PASS",
    "line": "The walk home takes forever. Your street, finally.",
@@ -2930,6 +3415,25 @@
    "row_hash": "ce540d1e01b7c301",
    "carried": true,
    "pass": 4
+  },
+  {
+   "row": "C924",
+   "screen": "travel_walk_to_campus.ride",
+   "verdict": "PASS",
+   "line": "Walk to town",
+   "why": "45 minutes and 10 energy make the schedule matter",
+   "cause": null,
+   "note": true,
+   "screen_hash": {
+    "text": "9db6c85f17af2668",
+    "traits": "44136fa355b3678a",
+    "facts": "3e0b146f3964c928",
+    "facts2": "3e0b146f3964c928",
+    "all": "ce3fdbe8537c6649"
+   },
+   "row_hash": "ce540d1e01b7c301",
+   "carried": false,
+   "pass": 19
   },
   {
    "row": "C926",
@@ -2964,6 +3468,25 @@
   },
   {
    "row": "C926",
+   "screen": "travel_bus_to_campus.ride",
+   "verdict": "PASS",
+   "line": "time_progression_minutes = 20",
+   "why": "minutes only",
+   "cause": null,
+   "note": true,
+   "screen_hash": {
+    "text": "b315e370a219f4ed",
+    "traits": "44136fa355b3678a",
+    "facts": "3e0b146f3964c928",
+    "facts2": "3e0b146f3964c928",
+    "all": "145cb6ccd6c225c9"
+   },
+   "row_hash": "8cd1b7e3576dc7b5",
+   "carried": false,
+   "pass": 19
+  },
+  {
+   "row": "C926",
    "screen": "travel_walk_home.ride",
    "verdict": "PASS",
    "line": "The walk home takes forever. Your street, finally.",
@@ -2979,6 +3502,25 @@
    "row_hash": "8cd1b7e3576dc7b5",
    "carried": true,
    "pass": 4
+  },
+  {
+   "row": "C926",
+   "screen": "travel_walk_to_campus.ride",
+   "verdict": "PASS",
+   "line": "time_progression_minutes = 45",
+   "why": "minutes only",
+   "cause": null,
+   "note": true,
+   "screen_hash": {
+    "text": "9db6c85f17af2668",
+    "traits": "44136fa355b3678a",
+    "facts": "3e0b146f3964c928",
+    "facts2": "3e0b146f3964c928",
+    "all": "ce3fdbe8537c6649"
+   },
+   "row_hash": "8cd1b7e3576dc7b5",
+   "carried": false,
+   "pass": 19
   },
   {
    "row": "C927",
@@ -3052,19 +3594,20 @@
    "row": "C927",
    "screen": "travel_bus_to_campus.ride",
    "verdict": "PASS",
-   "line": "The bus is half empty. You get a seat by the window and step off in town.",
-   "why": "every exit carries its own minutes (bus 20, walk 45; the packed replies 0 then 20)",
+   "line": "Get off in town (20)",
+   "why": "every exit carries its own minutes (the packed replies 0 then 20)",
    "cause": null,
    "note": true,
    "screen_hash": {
     "text": "b315e370a219f4ed",
-    "facts": "4bec7b370aee14bb",
-    "facts2": "4bec7b370aee14bb",
-    "all": "eab098c8e0d9d96b"
+    "traits": "44136fa355b3678a",
+    "facts": "3e0b146f3964c928",
+    "facts2": "3e0b146f3964c928",
+    "all": "145cb6ccd6c225c9"
    },
    "row_hash": "1e009d83817fb566",
-   "carried": true,
-   "pass": 9
+   "carried": false,
+   "pass": 19
   },
   {
    "row": "C927",
@@ -3089,19 +3632,20 @@
    "row": "C927",
    "screen": "travel_walk_to_campus.ride",
    "verdict": "PASS",
-   "line": "By the time you reach town your feet ache.",
-   "why": "every exit carries its own minutes (bus 20, walk 45; the packed replies 0 then 20)",
+   "line": "Walk into town (45)",
+   "why": "the one exit carries its own minutes",
    "cause": null,
    "note": true,
    "screen_hash": {
     "text": "9db6c85f17af2668",
-    "facts": "4bec7b370aee14bb",
-    "facts2": "4bec7b370aee14bb",
-    "all": "8b038b9e8128c7fc"
+    "traits": "44136fa355b3678a",
+    "facts": "3e0b146f3964c928",
+    "facts2": "3e0b146f3964c928",
+    "all": "ce3fdbe8537c6649"
    },
    "row_hash": "1e009d83817fb566",
-   "carried": true,
-   "pass": 9
+   "carried": false,
+   "pass": 19
   },
   {
    "row": "C928",
@@ -3136,6 +3680,25 @@
   },
   {
    "row": "C928",
+   "screen": "travel_bus_to_campus.ride",
+   "verdict": "PASS",
+   "line": "The bus is packed. Every time it brakes, a man's hips press into your ass, and he doesn't step back.",
+   "why": "no clock in prose",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "b315e370a219f4ed",
+    "traits": "44136fa355b3678a",
+    "facts": "3e0b146f3964c928",
+    "facts2": "3e0b146f3964c928",
+    "all": "145cb6ccd6c225c9"
+   },
+   "row_hash": "799e1dd153166b6d",
+   "carried": false,
+   "pass": 19
+  },
+  {
+   "row": "C928",
    "screen": "travel_walk_home.ride",
    "verdict": "PASS",
    "line": "The walk home takes forever. Your street, finally.",
@@ -3151,6 +3714,25 @@
    "row_hash": "799e1dd153166b6d",
    "carried": true,
    "pass": 4
+  },
+  {
+   "row": "C928",
+   "screen": "travel_walk_to_campus.ride",
+   "verdict": "PASS",
+   "line": "It's a long walk: past the park, over the bridge, along the main road. By the time you reach town your feet ache.",
+   "why": "no clock in prose",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "9db6c85f17af2668",
+    "traits": "44136fa355b3678a",
+    "facts": "3e0b146f3964c928",
+    "facts2": "3e0b146f3964c928",
+    "all": "ce3fdbe8537c6649"
+   },
+   "row_hash": "799e1dd153166b6d",
+   "carried": false,
+   "pass": 19
   },
   {
    "row": "C929",
@@ -3172,6 +3754,25 @@
   },
   {
    "row": "C929",
+   "screen": "travel_bus_to_campus.ride",
+   "verdict": "PASS",
+   "line": "Take the bus to town ($2)",
+   "why": "the act's time is tagged nowhere",
+   "cause": null,
+   "note": true,
+   "screen_hash": {
+    "text": "b315e370a219f4ed",
+    "traits": "44136fa355b3678a",
+    "facts": "3e0b146f3964c928",
+    "facts2": "3e0b146f3964c928",
+    "all": "145cb6ccd6c225c9"
+   },
+   "row_hash": "b628ac285ac9c529",
+   "carried": false,
+   "pass": 19
+  },
+  {
+   "row": "C929",
    "screen": "travel_walk_home.ride",
    "verdict": "PASS",
    "line": "The walk home takes forever. Your street, finally.",
@@ -3187,6 +3788,25 @@
    "row_hash": "b628ac285ac9c529",
    "carried": true,
    "pass": 4
+  },
+  {
+   "row": "C929",
+   "screen": "travel_walk_to_campus.ride",
+   "verdict": "PASS",
+   "line": "Walk to town",
+   "why": "the act's time is tagged nowhere",
+   "cause": null,
+   "note": true,
+   "screen_hash": {
+    "text": "9db6c85f17af2668",
+    "traits": "44136fa355b3678a",
+    "facts": "3e0b146f3964c928",
+    "facts2": "3e0b146f3964c928",
+    "all": "ce3fdbe8537c6649"
+   },
+   "row_hash": "b628ac285ac9c529",
+   "carried": false,
+   "pass": 19
   },
   {
    "row": "C930",
@@ -3221,6 +3841,25 @@
   },
   {
    "row": "C930",
+   "screen": "travel_bus_to_campus.ride",
+   "verdict": "N/A",
+   "line": "",
+   "why": "not windowed work",
+   "cause": null,
+   "note": true,
+   "screen_hash": {
+    "text": "b315e370a219f4ed",
+    "traits": "44136fa355b3678a",
+    "facts": "3e0b146f3964c928",
+    "facts2": "3e0b146f3964c928",
+    "all": "145cb6ccd6c225c9"
+   },
+   "row_hash": "97d54d350dd4ee77",
+   "carried": false,
+   "pass": 19
+  },
+  {
+   "row": "C930",
    "screen": "travel_walk_home.ride",
    "verdict": "N/A",
    "line": "The walk home takes forever. Your street, finally.",
@@ -3236,6 +3875,25 @@
    "row_hash": "97d54d350dd4ee77",
    "carried": true,
    "pass": 4
+  },
+  {
+   "row": "C930",
+   "screen": "travel_walk_to_campus.ride",
+   "verdict": "N/A",
+   "line": "",
+   "why": "not windowed work",
+   "cause": null,
+   "note": true,
+   "screen_hash": {
+    "text": "9db6c85f17af2668",
+    "traits": "44136fa355b3678a",
+    "facts": "3e0b146f3964c928",
+    "facts2": "3e0b146f3964c928",
+    "all": "ce3fdbe8537c6649"
+   },
+   "row_hash": "97d54d350dd4ee77",
+   "carried": false,
+   "pass": 19
   },
   {
    "row": "C931",
@@ -3309,19 +3967,20 @@
    "row": "C931",
    "screen": "travel_bus_to_campus.ride",
    "verdict": "PASS",
-   "line": "The bus is half empty. You get a seat by the window and step off in town.",
+   "line": "time_of_day 07:00-10:00",
    "why": "end exclusive: at 10:00 only the half-empty line and 'Get off in town' show",
    "cause": null,
    "note": true,
    "screen_hash": {
     "text": "b315e370a219f4ed",
-    "facts": "4bec7b370aee14bb",
-    "facts2": "4bec7b370aee14bb",
-    "all": "eab098c8e0d9d96b"
+    "traits": "44136fa355b3678a",
+    "facts": "3e0b146f3964c928",
+    "facts2": "3e0b146f3964c928",
+    "all": "145cb6ccd6c225c9"
    },
    "row_hash": "1b8984f52b99537e",
-   "carried": true,
-   "pass": 9
+   "carried": false,
+   "pass": 19
   },
   {
    "row": "C931",
@@ -3346,19 +4005,20 @@
    "row": "C931",
    "screen": "travel_walk_to_campus.ride",
    "verdict": "N/A",
-   "line": "By the time you reach town your feet ache.",
+   "line": "",
    "why": "no time_of_day on this screen",
    "cause": null,
    "note": true,
    "screen_hash": {
     "text": "9db6c85f17af2668",
-    "facts": "4bec7b370aee14bb",
-    "facts2": "4bec7b370aee14bb",
-    "all": "8b038b9e8128c7fc"
+    "traits": "44136fa355b3678a",
+    "facts": "3e0b146f3964c928",
+    "facts2": "3e0b146f3964c928",
+    "all": "ce3fdbe8537c6649"
    },
    "row_hash": "1b8984f52b99537e",
-   "carried": true,
-   "pass": 9
+   "carried": false,
+   "pass": 19
   },
   {
    "row": "C951",
@@ -3536,19 +4196,20 @@
    "row": "L106",
    "screen": "travel_bus_to_campus.ride",
    "verdict": "PASS",
-   "line": "The bus is half empty. You get a seat by the window and step off in town.",
-   "why": "no named person; the bus man is an unnamed stranger",
+   "line": "The bus is packed. Every time it brakes, a man's hips press into your ass, and he doesn't step back.",
+   "why": "no named person; the bus man is an unnamed stranger; nobody at the stop is named, so Vance's move breaks nothing",
    "cause": null,
    "note": false,
    "screen_hash": {
     "text": "b315e370a219f4ed",
-    "facts": "4bec7b370aee14bb",
-    "facts2": "4bec7b370aee14bb",
-    "all": "eab098c8e0d9d96b"
+    "traits": "44136fa355b3678a",
+    "facts": "3e0b146f3964c928",
+    "facts2": "3e0b146f3964c928",
+    "all": "145cb6ccd6c225c9"
    },
    "row_hash": "759e6667d7fc3183",
-   "carried": true,
-   "pass": 9
+   "carried": false,
+   "pass": 19
   },
   {
    "row": "L106",
@@ -3573,19 +4234,20 @@
    "row": "L106",
    "screen": "travel_walk_to_campus.ride",
    "verdict": "PASS",
-   "line": "By the time you reach town your feet ache.",
-   "why": "no named person; the bus man is an unnamed stranger",
+   "line": "It's a long walk: past the park, over the bridge, along the main road. By the time you reach town your feet ache.",
+   "why": "no named person",
    "cause": null,
    "note": false,
    "screen_hash": {
     "text": "9db6c85f17af2668",
-    "facts": "4bec7b370aee14bb",
-    "facts2": "4bec7b370aee14bb",
-    "all": "8b038b9e8128c7fc"
+    "traits": "44136fa355b3678a",
+    "facts": "3e0b146f3964c928",
+    "facts2": "3e0b146f3964c928",
+    "all": "ce3fdbe8537c6649"
    },
    "row_hash": "759e6667d7fc3183",
-   "carried": true,
-   "pass": 9
+   "carried": false,
+   "pass": 19
   },
   {
    "row": "L119",
@@ -3750,19 +4412,20 @@
    "row": "L167",
    "screen": "travel_bus_to_campus.ride",
    "verdict": "N/A",
-   "line": "The bus is half empty. You get a seat by the window and step off in town.",
+   "line": "",
    "why": "no row on this screen has hours that differ by day",
    "cause": null,
    "note": false,
    "screen_hash": {
     "text": "b315e370a219f4ed",
-    "facts": "4bec7b370aee14bb",
-    "facts2": "4bec7b370aee14bb",
-    "all": "eab098c8e0d9d96b"
+    "traits": "44136fa355b3678a",
+    "facts": "3e0b146f3964c928",
+    "facts2": "3e0b146f3964c928",
+    "all": "145cb6ccd6c225c9"
    },
    "row_hash": "adf7bb3f8b632ac3",
-   "carried": true,
-   "pass": 9
+   "carried": false,
+   "pass": 19
   },
   {
    "row": "L167",
@@ -3787,19 +4450,20 @@
    "row": "L167",
    "screen": "travel_walk_to_campus.ride",
    "verdict": "N/A",
-   "line": "By the time you reach town your feet ache.",
+   "line": "",
    "why": "no row on this screen has hours that differ by day",
    "cause": null,
    "note": false,
    "screen_hash": {
     "text": "9db6c85f17af2668",
-    "facts": "4bec7b370aee14bb",
-    "facts2": "4bec7b370aee14bb",
-    "all": "8b038b9e8128c7fc"
+    "traits": "44136fa355b3678a",
+    "facts": "3e0b146f3964c928",
+    "facts2": "3e0b146f3964c928",
+    "all": "ce3fdbe8537c6649"
    },
    "row_hash": "adf7bb3f8b632ac3",
-   "carried": true,
-   "pass": 9
+   "carried": false,
+   "pass": 19
   },
   {
    "row": "L170",
@@ -4362,7 +5026,7 @@
    "note": false,
    "screen_hash": "d3c2d7277327c09d",
    "row_hash": "d6f0b4b357efc043",
-   "carried": false,
+   "carried": true,
    "pass": 18
   },
   {
@@ -4855,8 +5519,8 @@
  ],
  "causes": [],
  "pending": [],
- "asked": 1,
- "answered": 1,
+ "asked": 52,
+ "answered": 52,
  "pass_items": [],
  "unowed": []
 }

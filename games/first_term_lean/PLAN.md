@@ -207,7 +207,7 @@ both in release 2 (LO's pick A); Mark's friends later. The master bedroom gets L
 
 | place | face | other named people | crowd | who notices her, and what |
 |---|---|---|---|---|
-| her street | none: passes through, the bus stop | Vance on his porch, Jake picking her up | neighbours, the bus queue | neighbours: what she wears out, and they tell Laura |
+| her street | none: passes through, the bus stop | Jake picking her up (Vance's porch is at his house, P69) | neighbours, the bus queue | neighbours: what she wears out, and they tell Laura |
 | Vance's house and porch | Mr. Vance | none | none | Vance: her, every time she walks past |
 | the corner shop | Frank Novak (52, owner, days; knows Mark) | Danny Price (23, night clerk) | customers | Frank: what she buys, and he tells Mark. Danny: her, at night |
 | the park | none | Zoe on a run (later) | joggers, dog walkers | joggers: her in running clothes |
@@ -610,7 +610,7 @@ at least one (C28). Release 1: a flag each, no meter. Ryan shows nothing about h
 | scene | kind | who | everyday? | window (§9c, place hours) | how often | her choice |
 |---|---|---|---|---|---|---|
 | The park couple: a man and a woman on the grass behind the pond, seen through the bushes | she walks in on | strangers | no | every day 7–9pm, Park | once a day | Watch · Back away |
-| Vance on his porch with a ledger of envelopes, licking his thumb, counting | she walks in on | Vance | yes | weekdays 5–8pm, her street | once a day | Say hello · Walk past |
+| Vance on his porch with a ledger of envelopes, licking his thumb, counting | she walks in on | Vance | yes | weekdays 5–8pm, his house (P69) | once a day | Say hello · Leave him to it |
 | Danny selling something small out the shop's back door | she walks in on | Danny | yes | every day 9–11pm, Corner Shop | once a day | Pretend you didn't see · Ask what that was |
 | Marco "fixing" a woman's squat, hands on her hips longer than he needs | she walks in on (on arrival since P55) | Marco | no | weekdays 5–9pm, Gym | once a day | Watch from the door · Look away |
 | Nina in the fitting room in the shop's tightest dress: "Don't tell my boss. I'm the boss." | she walks in on | Nina | yes | Mon–Sat 6:45–7pm (ENI for LO 2026-11-24, after the try-on closes at 18:45), Clothes Shop | once a day | Tell her it suits her · Just browse |
