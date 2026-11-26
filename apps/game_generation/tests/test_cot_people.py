@@ -112,14 +112,14 @@ def _open(g):
 
 def _names(g):
     return g.js(
-        "() => [...document.querySelectorAll('#ui-dialog-body .view-people-person-name a')]"
+        "() => [...document.querySelectorAll('.passage .view-people-person-name a')]"
         ".map(a => a.textContent.trim())"
     )
 
 
 def _tabs(g):
     return g.js(
-        "() => [...document.querySelectorAll('#ui-dialog-body .tabgroup-button')]"
+        "() => [...document.querySelectorAll('.passage .tabgroup-button')]"
         ".map(b => b.querySelector('.tabgroup-button-emoji').textContent + ' '"
         " + b.querySelector('.tabgroup-button-label').textContent)"
     )
@@ -127,7 +127,7 @@ def _tabs(g):
 
 def _tab(g, label):
     g.js(
-        """(l) => [...document.querySelectorAll('#ui-dialog-body .tabgroup-button')]
+        """(l) => [...document.querySelectorAll('.passage .tabgroup-button')]
             .find(b => b.querySelector('.tabgroup-button-label').textContent.trim() === l).click()""",
         label,
     )
@@ -135,12 +135,12 @@ def _tab(g, label):
 
 
 def _body(g):
-    return g.js("() => document.querySelector('#ui-dialog-body').innerText")
+    return g.js("() => document.querySelector('.passage').innerText")
 
 
 def _link(g, text):
     g.js(
-        """(t) => [...document.querySelectorAll('#ui-dialog-body a')]
+        """(t) => [...document.querySelectorAll('.passage a')]
             .find(a => a.textContent.trim() === t).click()""",
         text,
     )
@@ -149,7 +149,7 @@ def _link(g, text):
 
 def _search(g, text):
     g.js(
-        """(t) => { const i = document.querySelector('#ui-dialog-body .social-search-input input');
+        """(t) => { const i = document.querySelector('.passage .social-search-input input');
             i.value = t; i.dispatchEvent(new Event('input', { bubbles: true })); }""",
         text,
     )
@@ -172,7 +172,7 @@ def test_people_here_lists_a_stranger_by_stranger_name(html):
         _at(g, "Location_loc_home", started=True)
         _open(g)
         assert (
-            g.js("() => document.querySelector('#ui-dialog-title').textContent.trim()")
+            g.js("() => document.querySelector('.passage .cot-page-title').textContent.trim()")
             == "People"
         )
         names = _names(g)
@@ -182,7 +182,7 @@ def test_people_here_lists_a_stranger_by_stranger_name(html):
         assert "People nearby:" in text and "Click a person to see more." in text
         # The niche line is the role, and a stranger has none.
         niches = g.js(
-            "() => [...document.querySelectorAll('#ui-dialog-body .view-people-person')].slice(0, 2)"
+            "() => [...document.querySelectorAll('.passage .view-people-person')].slice(0, 2)"
             ".map(p => (p.querySelector('.view-people-person-niche') || {textContent: ''}).textContent.trim())"
         )
         assert niches == ["", "Mom"]
@@ -196,7 +196,7 @@ def test_a_stranger_is_three_question_marks(html):
         _open(g)
         _link(g, "guy by the window")
         assert (
-            g.js("() => document.querySelector('#ui-dialog-title').textContent.trim()")
+            g.js("() => document.querySelector('.passage .cot-page-title').textContent.trim()")
             == "View Person"
         )
         assert (
@@ -219,7 +219,7 @@ def test_a_stranger_is_three_question_marks(html):
         g.js("() => document.querySelector('#view-people-backward').click()")
         g.page.wait_for_timeout(150)
         assert (
-            g.js("() => document.querySelector('#ui-dialog-title').textContent.trim()")
+            g.js("() => document.querySelector('.passage .cot-page-title').textContent.trim()")
             == "People"
         )
         assert g.errors == []
@@ -259,7 +259,7 @@ def test_search_and_sort(html):
         _open(g)
         assert "Filter Options" in _body(g)
         g.js(
-            "() => document.querySelector('#ui-dialog-body .shop-filter-toolbar-header-minrestore a').click()"
+            "() => document.querySelector('.passage .shop-filter-toolbar-header-minrestore a').click()"
         )
         g.page.wait_for_timeout(100)
         _search(g, "window")
@@ -335,4 +335,44 @@ def test_no_talk_away_from_them(html):
         _tab(g, "Friends")
         _link(g, "Tom Baker")
         assert "Talk to" not in _body(g)
+        assert g.errors == []
+
+
+# ── pages, not dialogs (LO 2026-11-26: "They should have their own page. This design can be
+# ported into that page. And a schedule modal in the people's page should work like before.") ──
+
+
+@needs_browser
+def test_people_and_view_person_are_pages_with_back_to_the_game(html):
+    with open_game(html) as g:
+        _at(g, "Location_loc_bar", started=True, met_tom=True)
+        _open(g)
+        assert g.passage() == "CastPage"
+        assert not g.js("() => SugarCube.Dialog.isOpen()")
+        _link(g, "Tom Baker")
+        assert g.passage() == "PersonPage"
+        assert not g.js("() => SugarCube.Dialog.isOpen()")
+        # ◀ goes back to the list, on the same tab; ← Back from either page goes to the game.
+        g.js("() => document.querySelector('#view-people-backward').click()")
+        g.page.wait_for_timeout(150)
+        assert g.passage() == "CastPage"
+        _link(g, "Tom Baker")
+        _link(g, "← Back")
+        assert g.passage() == "Location_loc_bar"
+        assert g.errors == []
+
+
+@needs_browser
+def test_the_schedule_is_the_old_pop_up(html):
+    with open_game(html) as g:
+        _at(g, "Location_loc_bar", started=True, met_tom=True)
+        _open(g)
+        _link(g, "Tom Baker")
+        assert "people-accordion" not in g.js("() => document.querySelector('.passage').innerHTML")
+        _link(g, "🗓 Schedule")
+        assert g.js("() => SugarCube.Dialog.isOpen()")
+        title = g.js("() => document.querySelector('#ui-dialog-title').textContent.trim()")
+        assert title.endswith("Schedule"), title
+        assert g.js("() => !!document.querySelector('#ui-dialog-body .tt-day, #ui-dialog-body [data-day]')")
+        assert g.passage() == "PersonPage"
         assert g.errors == []

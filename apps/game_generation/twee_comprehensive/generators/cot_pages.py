@@ -23,9 +23,15 @@ option. CoT's sources are under
 Every string the player reads here is CoT's, except the dialog title "Quests" (LO kept the
 name) and the schedule accordion's "Schedule" (CoT's is "Nightlife Schedule").
 
-All markup is built in JavaScript and put into the dialog with jQuery, like
-setup.castScheduleHtml, so no SugarCube macro sits between two others (each line break
-between v2 macros renders as <br>).
+All markup is built in JavaScript, like setup.castScheduleHtml, so no SugarCube macro sits
+between two others (each line break between v2 macros renders as <br>).
+
+Pages, not dialogs (LO 2026-11-26: "change guest page and people's page, so they are now modal.
+They should have their own page. This design can be ported into that page. And a schedule modal
+in the people's page should work like before."): the sidebar buttons go to QuestsPage and
+CastPage, a walkthrough to QuestsWalkthrough and a person to PersonPage, each an info page with
+← Back. The one dialog left is the person's schedule, the cast page's old pop-up
+(setup.castOpenSchedule).
 """
 from __future__ import annotations
 
@@ -171,12 +177,12 @@ setup.hintsHtml = function () {
         '</table></div><br><br><div id="hintlist" class="nokeys">' + setup.hintsListHtml() + '</div>';
 };
 
-// The sidebar button: the page marks itself seen (CoT's $firsttime.tutorial), in a dialog.
+// The sidebar button goes to the Quests page, which marks itself seen (CoT's
+// $firsttime.tutorial). Its own page, not a dialog (LO 2026-11-26: "They should have their own
+// page. This design can be ported into that page.").
 setup.openHints = function () {
     State.variables.hints_opened = true;
-    Dialog.setup("Quests", "hints-dialog");
-    jQuery(Dialog.body()).empty().append(setup.hintsHtml());
-    Dialog.open();
+    Engine.play("QuestsPage");
 };
 
 // {days_until:N}: CoT's "<<highlight>>N more days<</highlight>>", counted off the day counter.
@@ -217,11 +223,14 @@ setup.walkthroughHtml = function (id) {
     return h + '</div>';
 };
 
+// A walkthrough is its own page too; ◀ "Back to hints page" returns to the Quests page.
 setup.openWalkthrough = function (id) {
+    State.variables.hints_walkthrough = id;
+    Engine.play("QuestsWalkthrough");
+};
+setup.walkthroughTitle = function (id) {
     var w = setup.walkthroughs[id];
-    Dialog.setup("Walkthrough: " + (w ? w.title : ""), "hints-dialog");
-    jQuery(Dialog.body()).empty().append(setup.walkthroughHtml(id));
-    Dialog.open();
+    return "Walkthrough: " + (w ? w.title : "");
 };
 
 // A box redraws the list (StoryHints.txt's change handler).
@@ -236,7 +245,7 @@ jQuery(document).on("change", "#hintfilters input", function () {
 jQuery(document).on("click", "#hintlist .hints-see-here", function () {
     setup.openWalkthrough(this.getAttribute("data-wt"));
 });
-jQuery(document).on("click", "#help-backward", function () { setup.openHints(); });
+jQuery(document).on("click", "#help-backward", function () { Engine.play("QuestsPage"); });
 })();
 """
 
@@ -256,13 +265,14 @@ _HINTS_CSS = """
 .hints-dialog .options-col-label { font-weight: bold; white-space: nowrap; }
 .hints-dialog .hint-category-label { display: inline-block; margin: 0 14px 4px 0; white-space: nowrap; }
 .hints-dialog #help-backward { cursor: pointer; padding: 2px 8px; }
+.cot-page-title { margin: 0 0 12px; }
 """
 
 
 def quests_hints_passages(metadata: dict[str, Any]) -> str:
     """The passages that replace the V2 cards QuestsPage under `[ui] quests_layout = "hints"`.
-    QuestsPage stays as a passage (it is an info page and old links name it); the sidebar
-    button opens the same markup in a dialog."""
+    QuestsPage is the page the sidebar button goes to, and QuestsWalkthrough is a walkthrough
+    page; both are info pages (v2.py registers them), so ← Back returns to the game."""
     hints = metadata.get("story_hints") or []
     wts = {w["id"]: w for w in (metadata.get("walkthroughs") or [])}
     js = _HINTS_JS.replace(
@@ -272,7 +282,12 @@ def quests_hints_passages(metadata: dict[str, Any]) -> str:
         ":: QuestsHintsScript [script]" + js + "\n"
         ":: QuestsHintsStyles [stylesheet]" + _HINTS_CSS + "\n"
         ":: QuestsPage\n"
-        "<<nobr>><<run State.variables.hints_opened = true>><<print setup.hintsHtml()>><</nobr>>\n"
+        '<<nobr>><<run State.variables.hints_opened = true>><h2 class="cot-page-title">Quests</h2>'
+        '<div class="hints-dialog hints-page"><<print setup.hintsHtml()>></div><</nobr>>\n'
+        '<<link "← Back">><<run setup.smartBack()>><</link>>\n'
+        ":: QuestsWalkthrough\n"
+        '<<nobr>><h2 class="cot-page-title"><<print setup.walkthroughTitle($hints_walkthrough)>></h2>'
+        '<div class="hints-dialog hints-page"><<print setup.walkthroughHtml($hints_walkthrough)>></div><</nobr>>\n'
         '<<link "← Back">><<run setup.smartBack()>><</link>>\n'
     )
 
@@ -484,11 +499,11 @@ setup.peopleDialogHtml = function () {
         '</div><div class="tabgroup-content" role="tabpanel"><div id="display-people-body">' + setup.peopleBodyHtml() + '</div></div></div>';
 };
 
+// The People page and the View Person page are their own pages, not dialogs (LO 2026-11-26:
+// "They should have their own page."); the tab is kept between them, as CoT keeps it.
 function showPeople() {
     setup.peopleUi.page = 0;
-    Dialog.setup("People", "social");
-    jQuery(Dialog.body()).empty().append(setup.peopleDialogHtml());
-    Dialog.open();
+    Engine.play("CastPage");
 }
 // The sidebar button opens on People Here with a clear search.
 setup.peopleOpen = function () {
@@ -575,11 +590,8 @@ setup.peopleViewHtml = function (slug) {
     }
     h += '</div>';
     if (known) {
-        var id = setup.resolveNpcId(slug);
         if (setup.castHasSchedule && setup.castHasSchedule(slug)) {
-            var today = ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"]
-                .indexOf(State.variables.game_state.time_state.current_day);
-            h += '<details class="people-accordion"><summary>Schedule</summary>' + setup.castScheduleHtml(id, today < 0 ? 0 : today) + '</details>';
+            h += '<div class="people-schedule-link"><a class="link-internal people-schedule" data-slug="' + esc(slug) + '">🗓 Schedule</a></div>';
         }
         var card = setup.pickQuestsCard(slug);
         if (card && card.tip) h += '<div class="people-tip">' + esc(card.tip) + '</div>';
@@ -590,9 +602,8 @@ setup.peopleViewHtml = function (slug) {
 };
 
 setup.peopleView = function (slug) {
-    Dialog.setup("View Person", "view-person");
-    jQuery(Dialog.body()).empty().append(setup.peopleViewHtml(slug));
-    Dialog.open();
+    State.variables.people_view_slug = slug;
+    Engine.play("PersonPage");
 };
 
 // ── handlers ──
@@ -641,11 +652,13 @@ $d.on("click", ".social .people-sort", function () {
     redrawBody();
 });
 $d.on("click", ".view-person .people-talk", function () {
-    var to = this.getAttribute("data-passage-to");
-    Dialog.close();
-    Engine.play(to);
+    Engine.play(this.getAttribute("data-passage-to"));
 });
-$d.on(":dialogclosed", function () { setup.peopleUi.search = ""; });
+// The schedule is the old pop-up (setup.castOpenSchedule): day chips, today picked
+// (LO 2026-11-26: "a schedule modal in the people's page should work like before").
+$d.on("click", ".view-person .people-schedule", function () {
+    setup.castOpenSchedule(this.getAttribute("data-slug"));
+});
 })();
 """
 
@@ -686,8 +699,8 @@ _PEOPLE_CSS = """
 .view-person .display-npc-action-header { font-weight: bold; margin: 12px 0 6px; }
 .view-person .display-npc-button { display: inline-block; margin-right: 10px; }
 .view-person .people-talk-blocked { opacity: 0.45; }
-.view-person .people-accordion { margin-top: 12px; border: 1px solid var(--theme-border, #555); border-radius: 8px; padding: 6px 10px; }
-.view-person .people-accordion summary { cursor: pointer; font-weight: bold; }
+.view-person .people-schedule-link { margin-top: 12px; font-weight: bold; }
+.cot-page-title { margin: 0 0 12px; }
 .view-person .people-tip { margin-top: 10px; }
 """
 
@@ -730,6 +743,9 @@ def people_cot_passages(
         "\n:: PeopleCotScript [script]" + js + "\n"
         ":: PeopleCotStyles [stylesheet]" + css + "\n"
         ":: CastPage\n"
-        "<<nobr>><<run setup.peopleOpen()>><</nobr>>\n"
+        '<<nobr>><h2 class="cot-page-title">People</h2><div class="social cot-page"><<print setup.peopleDialogHtml()>></div><</nobr>>\n'
+        '<<link "← Back">><<run setup.smartBack()>><</link>>\n'
+        ":: PersonPage\n"
+        '<<nobr>><h2 class="cot-page-title">View Person</h2><div class="view-person cot-page"><<print setup.peopleViewHtml($people_view_slug)>></div><</nobr>>\n'
         '<<link "← Back">><<run setup.smartBack()>><</link>>\n'
     )

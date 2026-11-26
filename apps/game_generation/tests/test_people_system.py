@@ -348,7 +348,7 @@ def _text(g):
 def _view(g, slug):
     g.js("(s) => SugarCube.setup.peopleView(s)", slug)
     g.page.wait_for_timeout(150)
-    return g.js("() => document.querySelector('#ui-dialog-body').innerText")
+    return g.js("() => document.querySelector('.passage').innerText")
 
 
 @needs_browser
@@ -679,7 +679,7 @@ def test_the_people_view_shows_meters_bubbles_and_the_want(html):
         assert "Personality" in text and "Gossip" in text
         assert "Wants to" not in text  # CoT never prints the want (LO 2026-11-25)
         widths = g.js(
-            "() => [...document.querySelectorAll('#ui-dialog-body .people-meter-fill')].map(e => e.style.width)"
+            "() => [...document.querySelectorAll('.passage .people-meter-fill')].map(e => e.style.width)"
         )
         assert widths == ["30%", "0%", "15%"]
         # Ben at nothing: two meters, no Personality block.
@@ -693,7 +693,7 @@ def test_the_people_view_shows_meters_bubbles_and_the_want(html):
         text = _view(g, "ben")
         assert "Dislike" in text and "Friendship" not in text
         bubbles = g.js(
-            "() => [...document.querySelectorAll('#ui-dialog-body .personality-traits-container .npc-display-infobubble')]"
+            "() => [...document.querySelectorAll('.passage .personality-traits-container .npc-display-infobubble')]"
             ".map(e => [e.textContent, e.className.split(' ').pop(), e.title])"
         )
         assert bubbles == [
@@ -721,7 +721,7 @@ def test_the_people_view_shows_meters_bubbles_and_the_want(html):
         g.js("() => SugarCube.setup.peopleOpen()")
         g.page.wait_for_timeout(150)
         card = g.js(
-            "() => document.querySelector('#ui-dialog-body .view-people-person[data-slug=\"liz\"]').innerText"
+            "() => document.querySelector('.passage .view-people-person[data-slug=\"liz\"]').innerText"
         )
         assert "Friendship" in card and "Lust" in card and "Her Submission" in card
         assert g.errors == []

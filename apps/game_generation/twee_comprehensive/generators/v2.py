@@ -20620,6 +20620,12 @@ setup.travelMoveSlug = function (psg) {
         # is lost on save/refresh. Membership also keeps Back from landing on it.
         if self.cast_page:
             info_pages_list += ', "CastPage"'
+            if (self.project.metadata or {}).get("people_page") == "cot":
+                # The View Person page (generators/cot_pages.py), an info page like CastPage.
+                info_pages_list += ', "PersonPage"'
+        if (self.project.metadata or {}).get("quests_layout") == "hints":
+            # A walkthrough page (generators/cot_pages.py), an info page like QuestsPage.
+            info_pages_list += ', "QuestsWalkthrough"'
         if self.cheat_page:
             info_pages_list += ', "CheatPage"'
         if self.present_faces:

@@ -1393,7 +1393,7 @@ paid_closing = "…" · cant_pay = "…" · partial_pay = "…"
    whatever hour the collector's schedule row says.
 2. The next time the player lands on a `Location_*` passage or `Navigation`, they are intercepted
    into `RentDay` (`v2.py:18393-18402`). Never mid-canvas.
-3. Paying runs `$player.core_traits.money -= _rent` and clears `is_due` (`v2.py:21382`). Verified
+3. Paying runs `$player.core_traits.money -= _rent` and clears `is_due` (`v2.py:21388`). Verified
    live.
 4. A short week with `on_short = "carry"` is paid as far as she can and the rest is owed next week
    (`setup.carryRent`, `v2.py:16142`); nothing ends.
@@ -1633,8 +1633,8 @@ already above the cap it is left alone; the cap only refuses to *raise* it past 
 The sidebar prints **two** things about a trait, from two different places:
 
 1. **The auto Traits dump** — every declared `core_trait`, as a bare number.
-2. **Whatever `[[sidebar_items]]` you authored** — `trait_status_text` (`v2.py:21718`),
-   `trait_words` (`v2.py:21781`), `trait_bar` (`v2.py:20927`).
+2. **Whatever `[[sidebar_items]]` you authored** — `trait_status_text` (`v2.py:21724`),
+   `trait_words` (`v2.py:21787`), `trait_bar` (`v2.py:20927`).
 
 They do not know about each other. Band a trait without suppressing its number and the player reads
 *"Nothing under it"* and `cover 55` stacked on top of each other.
@@ -1904,7 +1904,7 @@ Since EN2c `currency_symbol` covers every rent screen, and nothing else.
 
 Every honouring site concatenates symbol-then-number:
 `"Pay " + _cur + _rent + " rent"` (`v2.py:19204`),
-`<<print _cur>><<print _money>>` (`v2.py:21375`). There is no suffix form and no format string. An invented unit that reads after the number (`10 coin`, `1000 caps`) cannot be
+`<<print _cur>><<print _money>>` (`v2.py:21381`). There is no suffix form and no format string. An invented unit that reads after the number (`10 coin`, `1000 caps`) cannot be
 expressed through `currency_symbol`.
 
 ### 33.3 The sidebar's label
@@ -1918,7 +1918,7 @@ A `trait_bar` takes its label from the sidebar item's own `label`, and falls bac
 name (`setup.traitLabel`, `v2.py:4700`, EN5), so `[[traits.labels]] key = "money", label = "Change
 bag"` now names the sidebar readout too (§30).
 
-`_traitMax` defaults to 100 (`v2.py:21681`), so an uncapped counter renders as a fraction of a
+`_traitMax` defaults to 100 (`v2.py:21687`), so an uncapped counter renders as a fraction of a
 maximum it does not have: a money trait with no `max` prints **`Money: 12 / 100`** over a 12% fill
 bar. Set `max` to something the currency will not exceed, or show money as `trait_words` with
 `show_value = true` and no bands (*"Money: 140"*, §30).
@@ -2567,7 +2567,7 @@ The path from the TOML to the screen, traced end to end:
 | read off `[project]`, defaulting to `""` | `template_import.py:2291` |
 | copied onto the project's metadata | `template_import.py:8601` |
 | escaped, then joined with ` · ` | `v2.py:18865-18866`, joined at `:18868` |
-| composed into the `versionFooter` widget | `v2.py:20977-20980` |
+| composed into the `versionFooter` widget | `v2.py:20983-20986` |
 | called unconditionally from `StoryCaption` — both variants | `v2.py:18896` and `:18911` |
 
 Rendered as `v0.1 · 2026-08-23` in a `<div class="sidebar-version">` under the sidebar.
@@ -2662,7 +2662,7 @@ fall behind what a fresh game starts with. They used to be two hand-maintained s
 three-key dict, which is exactly how turning the phone on in a patch release left
 `$game_state.phone` undefined in every existing save with no build error anywhere.
 
-**`setup.backfillStateDefaults`** (`v2.py:20659`) is called from the `:passagestart` handler
+**`setup.backfillStateDefaults`** (`v2.py:20665`) is called from the `:passagestart` handler
 (`v2.py:18704`) on **every passage**. It fill-if-absent merges the defaults into `State.variables`,
 never overwrites an earned value, is idempotent, and hands out deep copies so a player's state can
 never alias the shared default object.
@@ -2776,7 +2776,7 @@ costs three build rounds rather than one.
 The suppression is `[[traits.labels]] in_dump = false` (or `hidden = true`, the secret-trait switch)
 and nothing else — §30 above says so, and it is worth repeating here because the wrong key is the
 obvious guess. `hide_value = true` only drops the number from a `trait_bar`'s own label
-(`v2.py:21705`); the auto Traits dump keeps printing the bare number under the band.
+(`v2.py:21711`); the auto Traits dump keeps printing the bare number under the band.
 
 ### 41e. `_is_free` reads the TRIGGER, never the inner choices
 
