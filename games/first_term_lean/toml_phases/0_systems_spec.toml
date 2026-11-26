@@ -531,6 +531,31 @@ flagEffects = [
   { targetType = "player", flag = "came_to_her_today", op = "unset" },
   { targetType = "player", flag = "talked_mark_today", op = "unset" },
   { targetType = "player", flag = "talked_ryan_today", op = "unset" },
+  # P58 — the neighbourhood people's Talk (C2198)
+  { targetType = "player", flag = "talked_vance_today", op = "unset" },
+  { targetType = "player", flag = "talked_frank_today", op = "unset" },
+  { targetType = "player", flag = "talked_danny_today", op = "unset" },
+  { targetType = "player", flag = "talked_marco_today", op = "unset" },
+  { targetType = "player", flag = "talked_nina_today", op = "unset" },
+  # P59 — the near-campus people's Talk (C2198)
+  { targetType = "player", flag = "talked_tom_today", op = "unset" },
+  { targetType = "player", flag = "talked_chris_today", op = "unset" },
+  { targetType = "player", flag = "talked_sam_today", op = "unset" },
+  # P60 — Kayla's and Tess's Talk (C2198)
+  { targetType = "player", flag = "talked_kayla_today", op = "unset" },
+  { targetType = "player", flag = "talked_tess_today", op = "unset" },
+  # P57 — the campus people's Talk (C2198)
+  { targetType = "player", flag = "talked_hale_today", op = "unset" },
+  { targetType = "player", flag = "talked_pratt_today", op = "unset" },
+  { targetType = "player", flag = "talked_walsh_today", op = "unset" },
+  { targetType = "player", flag = "talked_dean_today", op = "unset" },
+  { targetType = "player", flag = "talked_cross_today", op = "unset" },
+  { targetType = "player", flag = "talked_holt_today", op = "unset" },
+  { targetType = "player", flag = "talked_nadia_today", op = "unset" },
+  { targetType = "player", flag = "talked_rosa_today", op = "unset" },
+  { targetType = "player", flag = "talked_zoe_today", op = "unset" },
+  { targetType = "player", flag = "talked_jake_today", op = "unset" },
+  { targetType = "player", flag = "talked_brooke_today", op = "unset" },
   { targetType = "player", flag = "ate_with_mom_today", op = "unset" },
   # P21 — "Not today." at the café parks the ask until the next day
   { targetType = "player", flag = "cafe_ask_parked", op = "unset" },
@@ -825,6 +850,115 @@ toast = false
 [[flags.labels]]
 key = "goal1_shown"
 label = "Goal1 shown"
+toast = false
+
+# P58 — the neighbourhood people's Talk flags
+[[flags.labels]]
+key = "talked_vance_today"
+label = "Talked vance today"
+toast = false
+
+[[flags.labels]]
+key = "talked_frank_today"
+label = "Talked frank today"
+toast = false
+
+[[flags.labels]]
+key = "talked_danny_today"
+label = "Talked danny today"
+toast = false
+
+[[flags.labels]]
+key = "talked_marco_today"
+label = "Talked marco today"
+toast = false
+
+[[flags.labels]]
+key = "talked_nina_today"
+label = "Talked nina today"
+toast = false
+
+# P59 — the near-campus people's Talk flags
+[[flags.labels]]
+key = "talked_tom_today"
+label = "Talked tom today"
+toast = false
+
+[[flags.labels]]
+key = "talked_chris_today"
+label = "Talked chris today"
+toast = false
+
+[[flags.labels]]
+key = "talked_sam_today"
+label = "Talked sam today"
+toast = false
+
+# P60 — Kayla's and Tess's Talk flags
+[[flags.labels]]
+key = "talked_kayla_today"
+label = "Talked kayla today"
+toast = false
+
+[[flags.labels]]
+key = "talked_tess_today"
+label = "Talked tess today"
+toast = false
+
+# P57 — the campus people's Talk flags
+[[flags.labels]]
+key = "talked_hale_today"
+label = "Talked hale today"
+toast = false
+
+[[flags.labels]]
+key = "talked_pratt_today"
+label = "Talked pratt today"
+toast = false
+
+[[flags.labels]]
+key = "talked_walsh_today"
+label = "Talked walsh today"
+toast = false
+
+[[flags.labels]]
+key = "talked_dean_today"
+label = "Talked dean today"
+toast = false
+
+[[flags.labels]]
+key = "talked_cross_today"
+label = "Talked cross today"
+toast = false
+
+[[flags.labels]]
+key = "talked_holt_today"
+label = "Talked holt today"
+toast = false
+
+[[flags.labels]]
+key = "talked_nadia_today"
+label = "Talked nadia today"
+toast = false
+
+[[flags.labels]]
+key = "talked_rosa_today"
+label = "Talked rosa today"
+toast = false
+
+[[flags.labels]]
+key = "talked_zoe_today"
+label = "Talked zoe today"
+toast = false
+
+[[flags.labels]]
+key = "talked_jake_today"
+label = "Talked jake today"
+toast = false
+
+[[flags.labels]]
+key = "talked_brooke_today"
+label = "Talked brooke today"
 toast = false
 
 [[flags.labels]]

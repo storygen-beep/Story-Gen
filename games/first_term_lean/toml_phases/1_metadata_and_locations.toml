@@ -24,6 +24,14 @@ flag_keys = [
   "cafe_hired", "rent_paid_once",
   # P11 — Sunday rent
   "rent_handled_this_week", "pays_her_own_way",
+  # P57 — campus: Talk once a day across their places (C2197, C2198)
+  "talked_hale_today", "talked_pratt_today", "talked_walsh_today", "talked_dean_today", "talked_cross_today", "talked_holt_today", "talked_nadia_today", "talked_rosa_today", "talked_zoe_today", "talked_jake_today", "talked_brooke_today",
+  # P58 — the neighbourhood: Talk once a day across their places (C2197, C2198)
+  "talked_vance_today", "talked_frank_today", "talked_danny_today", "talked_marco_today", "talked_nina_today",
+  # P59 — near campus: Talk once a day across their places (C2197, C2198)
+  "talked_tom_today", "talked_chris_today", "talked_sam_today",
+  # P60 — Brooke's friends: Talk once a day across their places (C2197, C2198)
+  "talked_kayla_today", "talked_tess_today",
   # P34 — Mark's and Ryan's Talk, once a day each; the day turn clears them
   "talked_mark_today", "talked_ryan_today",
   # P34 — Eat with her, once a day; the day turn clears it

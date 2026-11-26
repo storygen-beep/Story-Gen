@@ -603,9 +603,9 @@ at least one (C28). Release 1: a flag each, no meter. Ryan shows nothing about h
 | The park couple: a man and a woman on the grass behind the pond, seen through the bushes | she walks in on | strangers | no | every day 7–9pm, Park | once a day | Watch · Back away |
 | Vance on his porch with a ledger of envelopes, licking his thumb, counting | she walks in on | Vance | yes | weekdays 5–8pm, her street | once a day | Say hello · Walk past |
 | Danny selling something small out the shop's back door | she walks in on | Danny | yes | every day 9–11pm, Corner Shop | once a day | Pretend you didn't see · Ask what that was |
-| Marco "fixing" a woman's squat, hands on her hips longer than he needs | she walks in on | Marco | no | weekdays 5–9pm, Gym | once a day | Watch from the bench · Back to your workout |
+| Marco "fixing" a woman's squat, hands on her hips longer than he needs | she walks in on (on arrival since P55) | Marco | no | weekdays 5–9pm, Gym | once a day | Watch from the door · Look away |
 | Nina in the fitting room in the shop's tightest dress: "Don't tell my boss. I'm the boss." | she walks in on | Nina | yes | Mon–Sat 6:45–7pm (ENI for LO 2026-11-24, after the try-on closes at 18:45), Clothes Shop | once a day | Tell her it suits her · Just browse |
-| A man yanks the fitting-room curtain while she's half in a dress; "Oh, Christ, sorry," and he drops it | walks in on her | a stranger | no | on Try it on, chance 0.25 | once a day | Pull it shut · Finish changing |
+| A man yanks the fitting-room curtain while she's half into a short skirt; "Oh, Christ, sorry," and he drops it | walks in on her | a stranger | no | on Try it on, chance 0.25 | once a day | Pull it shut · Finish changing |
 
 Count: 6 scenes, 3 everyday (C802); 4 of 6 name someone she knows (C678). Seen, not heard. Release
 1: a flag each, no meter. Vance is "the man next door" in these until P24 names him.

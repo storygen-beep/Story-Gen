@@ -2646,6 +2646,150 @@
       "sha256": "76e2b523127a15063aac7307ac8e7272b46387873e1716aae16d5a9e317c4a69",
       "words": "ENI for LO (delegated 2026-11-24): reader fixes (P55 round)",
       "date": "2026-11-26"
+    },
+    {
+      "card": "P56",
+      "sha256": "42240a49007b81e9ff5d4657d799459d9bd441350fbdf02b0fc293b63cc41b23",
+      "words": "ENI for LO (delegated 2026-11-24): yes. LO, typed in main-lean 2026-11-26: \"Go ahead.\" to the C2196 plan and this card.",
+      "date": "2026-11-26"
+    },
+    {
+      "card": "P09",
+      "sha256": "a45b594ab20b94c6604e056068185ca077e0678fa17a07aeddeb009a388e1dbb",
+      "words": "ENI for LO (delegated 2026-11-24): P56, the two scenes ride on their acts (C2196)",
+      "date": "2026-11-26"
+    },
+    {
+      "card": "P33",
+      "sha256": "f1bc9659bca987695580f61f1207332c865eb5a242fd649ca0bd8cadfe313d0b",
+      "words": "ENI for LO (delegated 2026-11-24): P56, the two scenes ride on their acts (C2196)",
+      "date": "2026-11-26"
+    },
+    {
+      "card": "P49",
+      "sha256": "99ca8e5012820f40fedcafe829a2b335b501c9ccb954af0f33acf5d1cc4efef3",
+      "words": "ENI for LO (delegated 2026-11-24): P56, the two scenes ride on their acts (C2196)",
+      "date": "2026-11-26"
+    },
+    {
+      "card": "P49",
+      "sha256": "60eecf8a69c469c30b4bb103f21d52a7e5ffcaf16d69a481ddf4aef46794a4eb",
+      "words": "ENI for LO (delegated 2026-11-24): P56, the two scenes ride on their acts (C2196)",
+      "date": "2026-11-26"
+    },
+    {
+      "card": "P57",
+      "sha256": "4414446338b6b748e7fe832d16fdccced6e25bf13aee0c7747f0c67404b81d33",
+      "words": "ENI for LO (delegated 2026-11-24): yes. LO, typed in main-lean 2026-11-26: \"2 yes what can we do on it.\", \"Option B.\"",
+      "date": "2026-11-26"
+    },
+    {
+      "card": "P57",
+      "sha256": "099287133cdb8637767a58ab7ccf81a7c0ee0d81554ae1e709c078e4acf27113",
+      "words": "ENI for LO (delegated 2026-11-24): yes; with the two second versions ENI asked to be checked (Nadia after hale_called_in, Brooke before met_zoe)",
+      "date": "2026-11-26"
+    },
+    {
+      "card": "P58",
+      "sha256": "93c275c72dcb585046d605a18bd01bf11f6aaa5eb51105f3157c8bf9424fca96",
+      "words": "ENI for LO (delegated 2026-11-24): yes, with Danny and Marco step 2 restored and Vance step 1 cut to the Sunday rent through Mark. LO, typed in main-lean 2026-11-26: \"Option B.\"",
+      "date": "2026-11-26"
+    },
+    {
+      "card": "P59",
+      "sha256": "b43513ff41c007a8cfa3a06e07524c1a3c54565beb31bef67b09f92c6f597847",
+      "words": "ENI for LO (delegated 2026-11-24): yes. LO, typed in main-lean 2026-11-26: \"Option B.\"",
+      "date": "2026-11-26"
+    },
+    {
+      "card": "P57",
+      "sha256": "cde67e50da51c8668b0b40afad5ac7aee6b1a63b2bd6b48146169a991909a5d8",
+      "words": "ENI for LO (delegated 2026-11-24): yes to the reader pass 1 fixes c1-c9 (one long mirror, no garment named, Zoe and Jake second versions, standing hours on hooks, office pictures). LO, typed in main-lean 2026-11-26: \"Option B.\"",
+      "date": "2026-11-26"
+    },
+    {
+      "card": "P58",
+      "sha256": "9be7fcfb0d8a3172238848165c7bc40fd7b07a6f4d2bde1675553af93237af11",
+      "words": "ENI for LO (delegated 2026-11-24): yes to the reader pass 1 fixes c1-c5 (Danny, Nina hook to walk_nina_dress, Marco next Saturday, feet not shoes, no clothes claim). LO, typed in main-lean 2026-11-26: \"Option B.\"",
+      "date": "2026-11-26"
+    },
+    {
+      "card": "P57",
+      "sha256": "51704bfeadde78c47d256d04b90d61690e49d0e38b7e8439d7191644cd7aa1d6",
+      "words": "ENI for LO (delegated 2026-11-24): yes to the two Zoe note fixes (C1189 opening, C626 hook to the back stacks). LO, typed in main-lean 2026-11-26: \"Option B.\"",
+      "date": "2026-11-26"
+    },
+    {
+      "card": "P59",
+      "sha256": "47f952c2182444ecc140fd09b387bf6d4cd38f0174cd673c64f1822b9b230fad",
+      "words": "ENI for LO (delegated 2026-11-24): yes to the reader pass 1 fixes c1-c5 (hooks off the open hour, Sam until midnight, body lines, place pictures). LO, typed in main-lean 2026-11-26: \"Option B.\"",
+      "date": "2026-11-26"
+    },
+    {
+      "card": "P58",
+      "sha256": "2f378719eb150e5c44731bcfc8bea606b59251a0614081c84c7c8d8639603db9",
+      "words": "ENI for LO (delegated 2026-11-24): yes to Marco step 2 pointing at his standing Saturday hours. LO, typed in main-lean 2026-11-26: \"Option B.\"",
+      "date": "2026-11-26"
+    },
+    {
+      "card": "P60",
+      "sha256": "52ade8c893222902ef376793d5285cae8db35a457bd09d1e827ca68c3d5a853c",
+      "words": "ENI for LO (delegated 2026-11-24): yes, with mirror and cafeteria menus (rule 16) and place-free hooks for Tess 1 and Kayla 3. LO, typed in main-lean 2026-11-26: \"Option B.\"",
+      "date": "2026-11-26"
+    },
+    {
+      "card": "P57",
+      "sha256": "a701c121c5cccae105357066c5d2af84eeab26499c1035af03ab287d13a4d8d0",
+      "words": "ENI for LO (delegated 2026-11-24): yes to one Talk a day, steps 2 and 3 held on the card. LO, typed in main-lean 2026-11-26: \"I want to hold these for now. Take all these 3 talks to to only one.\"",
+      "date": "2026-11-26"
+    },
+    {
+      "card": "P58",
+      "sha256": "2b20a16b1a9f3d360621dbd5ef1bcbb8fe8e29d186fc27db03cf4713aff13598",
+      "words": "ENI for LO (delegated 2026-11-24): yes to one Talk a day, steps 2 and 3 held on the card. LO, typed in main-lean 2026-11-26: \"I want to hold these for now. Take all these 3 talks to to only one.\"",
+      "date": "2026-11-26"
+    },
+    {
+      "card": "P59",
+      "sha256": "63dd8e2466082094892437c91fc6bfaff1529945bab61f1f2ce71498e9b22a8a",
+      "words": "ENI for LO (delegated 2026-11-24): yes to one Talk a day, steps 2 and 3 held on the card. LO, typed in main-lean 2026-11-26: \"I want to hold these for now. Take all these 3 talks to to only one.\"",
+      "date": "2026-11-26"
+    },
+    {
+      "card": "P60",
+      "sha256": "6340c037b54b5a37d75d0f3fa613ae50c4434b05e7ec5a4585089c73edf04c69",
+      "words": "ENI for LO (delegated 2026-11-24): yes to one Talk a day, steps 2 and 3 held on the card. LO, typed in main-lean 2026-11-26: \"I want to hold these for now. Take all these 3 talks to to only one.\"",
+      "date": "2026-11-26"
+    },
+    {
+      "card": "P58",
+      "sha256": "2eba0e84e3c8e3a564bf42be9d28d38d3c688b1923b7a53b242c7d5a1389e013",
+      "words": "ENI for LO (delegated 2026-11-24): yes to Danny and Marco talks true on the meeting visit too. LO, typed in main-lean 2026-11-26: \"Take all these 3 talks to to only one.\"",
+      "date": "2026-11-26"
+    },
+    {
+      "card": "P57",
+      "sha256": "7634f0b13a26d47ac4bfc179f8eefb0d29e9082327eaa835041ca8e1df4b7eb3",
+      "words": "ENI for LO (delegated 2026-11-24): yes to the talks true on the meeting visit (Brooke, Rosa / Chris). LO, typed in main-lean 2026-11-26: \"Take all these 3 talks to to only one.\"",
+      "date": "2026-11-26"
+    },
+    {
+      "card": "P59",
+      "sha256": "b5456f5a07f78d238943f74da74924ddcea2e0b4d12f6d7827670f4df77c19f5",
+      "words": "ENI for LO (delegated 2026-11-24): yes to the talks true on the meeting visit (Brooke, Rosa / Chris). LO, typed in main-lean 2026-11-26: \"Take all these 3 talks to to only one.\"",
+      "date": "2026-11-26"
+    },
+    {
+      "card": "P59",
+      "sha256": "87f35ba008545161a2b79fe4f115fa2bcb4b8b6feb2bce0390581f08b9a03c03",
+      "words": "ENI for LO (delegated 2026-11-24): yes to the reader fixes (Sam hook ahead of her / Kayla without Chris's name for her). LO, typed in main-lean 2026-11-26: \"Take all these 3 talks to to only one.\"",
+      "date": "2026-11-26"
+    },
+    {
+      "card": "P60",
+      "sha256": "272d8042c064c5bc919576a5865f9a3e1fa708ae9cdb8a528272935f7aa1f2e3",
+      "words": "ENI for LO (delegated 2026-11-24): yes to the reader fixes (Sam hook ahead of her / Kayla without Chris's name for her). LO, typed in main-lean 2026-11-26: \"Take all these 3 talks to to only one.\"",
+      "date": "2026-11-26"
     }
   ]
 }

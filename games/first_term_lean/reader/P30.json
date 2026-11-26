@@ -1,6 +1,6 @@
 {
  "piece": "P30",
- "pass": 9,
+ "pass": 11,
  "screens": {
   "watch_rehearsal.watch": {
    "text": "350d7868a423a75f",
@@ -95,6 +95,8 @@
   "C2180": "a6c0f498d4d16271",
   "C2194": "0c03931191c53a34",
   "C1340": "b76a6583ae88c60f",
+  "C2197": "cafbb0a598dbfa97",
+  "C2198": "27e6b45f50edd3ac",
   "C769": "f6b6f78a8f2e5ed7",
   "C794": "bad76e5963432385",
   "C795": "34139e6a6914e171",
@@ -198,7 +200,7 @@
     "all": "fe99757515b7f62d"
    },
    "row_hash": "c1c0e2ac2588a579",
-   "carried": false,
+   "carried": true,
    "pass": 9
   },
   {
@@ -217,7 +219,7 @@
     "all": "ac58338a8ea58f94"
    },
    "row_hash": "c1c0e2ac2588a579",
-   "carried": false,
+   "carried": true,
    "pass": 9
   },
   {
@@ -528,7 +530,7 @@
     "all": "fe99757515b7f62d"
    },
    "row_hash": "80d415cf08e0ebfe",
-   "carried": false,
+   "carried": true,
    "pass": 9
   },
   {
@@ -547,7 +549,7 @@
     "all": "ac58338a8ea58f94"
    },
    "row_hash": "80d415cf08e0ebfe",
-   "carried": false,
+   "carried": true,
    "pass": 9
   },
   {
@@ -1245,6 +1247,32 @@
    "pass": 8
   },
   {
+   "row": "C2197",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "talk_cross 14:00-18:00; talk_brooke at campus_bathroom; Brooke mid-rehearsal gets none",
+   "why": "Cross, Brooke: a menu at each place their rows put them where talking fits, behind the met flag; none where it doesn't (lecture hall, mid-rehearsal, party hours)",
+   "cause": null,
+   "note": false,
+   "screen_hash": "36d1703664094e0c",
+   "row_hash": "cafbb0a598dbfa97",
+   "carried": true,
+   "pass": 10
+  },
+  {
+   "row": "C2198",
+   "screen": "*",
+   "verdict": "N/A",
+   "line": "",
+   "why": "theatre seats and watch buttons: no menu's Talk screen in this piece; C2198 is judged only on a person's Talk screen (the screen their menu's Talk opens)",
+   "cause": null,
+   "note": false,
+   "screen_hash": "36d1703664094e0c",
+   "row_hash": "27e6b45f50edd3ac",
+   "carried": false,
+   "pass": 11
+  },
+  {
    "row": "C338",
    "screen": "*",
    "verdict": "N/A",
@@ -1449,7 +1477,7 @@
     "all": "fe99757515b7f62d"
    },
    "row_hash": "67e48e60d5053a2e",
-   "carried": false,
+   "carried": true,
    "pass": 9
   },
   {
@@ -1468,7 +1496,7 @@
     "all": "ac58338a8ea58f94"
    },
    "row_hash": "67e48e60d5053a2e",
-   "carried": false,
+   "carried": true,
    "pass": 9
   },
   {
@@ -1518,7 +1546,7 @@
     "all": "fe99757515b7f62d"
    },
    "row_hash": "310706ee076318f2",
-   "carried": false,
+   "carried": true,
    "pass": 9
   },
   {
@@ -1537,7 +1565,7 @@
     "all": "ac58338a8ea58f94"
    },
    "row_hash": "310706ee076318f2",
-   "carried": false,
+   "carried": true,
    "pass": 9
   },
   {
@@ -2155,7 +2183,7 @@
     "all": "fe99757515b7f62d"
    },
    "row_hash": "4e86d143688ba8e5",
-   "carried": false,
+   "carried": true,
    "pass": 9
   },
   {
@@ -2174,7 +2202,7 @@
     "all": "ac58338a8ea58f94"
    },
    "row_hash": "4e86d143688ba8e5",
-   "carried": false,
+   "carried": true,
    "pass": 9
   },
   {
@@ -2263,7 +2291,7 @@
     "all": "fe99757515b7f62d"
    },
    "row_hash": "1aadffd96e76381c",
-   "carried": false,
+   "carried": true,
    "pass": 9
   },
   {
@@ -2282,7 +2310,7 @@
     "all": "ac58338a8ea58f94"
    },
    "row_hash": "1aadffd96e76381c",
-   "carried": false,
+   "carried": true,
    "pass": 9
   },
   {
@@ -2358,7 +2386,7 @@
     "all": "fe99757515b7f62d"
    },
    "row_hash": "13a714429d15f3b2",
-   "carried": false,
+   "carried": true,
    "pass": 9
   },
   {
@@ -2377,7 +2405,7 @@
     "all": "ac58338a8ea58f94"
    },
    "row_hash": "13a714429d15f3b2",
-   "carried": false,
+   "carried": true,
    "pass": 9
   },
   {
@@ -2484,7 +2512,7 @@
     "all": "fe99757515b7f62d"
    },
    "row_hash": "e64ce2672d85d2d8",
-   "carried": false,
+   "carried": true,
    "pass": 9
   },
   {
@@ -2503,7 +2531,7 @@
     "all": "ac58338a8ea58f94"
    },
    "row_hash": "e64ce2672d85d2d8",
-   "carried": false,
+   "carried": true,
    "pass": 9
   },
   {
@@ -2535,8 +2563,8 @@
  ],
  "causes": [],
  "pending": [],
- "asked": 16,
- "answered": 16,
+ "asked": 1,
+ "answered": 1,
  "pass_items": [],
  "unowed": []
 }

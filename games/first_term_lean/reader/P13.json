@@ -1,6 +1,6 @@
 {
  "piece": "P13",
- "pass": 16,
+ "pass": 18,
  "screens": {
   "opening.wake": {
    "text": "cc3c063d9cef0f23",
@@ -251,6 +251,8 @@
   "L168": "444c44970dc284f2",
   "L169": "59defccfc63b0454",
   "C1340": "b76a6583ae88c60f",
+  "C2197": "cafbb0a598dbfa97",
+  "C2198": "27e6b45f50edd3ac",
   "C769": "f6b6f78a8f2e5ed7",
   "C794": "bad76e5963432385",
   "C795": "34139e6a6914e171",
@@ -2527,19 +2529,6 @@
    "pass": 14
   },
   {
-   "row": "C2183",
-   "screen": "*",
-   "verdict": "PASS",
-   "line": "Ryan's on his bed with a controller, headphones round his neck.",
-   "why": "Laura (Cook: \"Mom's at the stove.\"), Mark (Particular: \"Then pay for it.\") and Ryan (Gamer) each carry 3 traits with a personality-kind one backed by a written line",
-   "cause": null,
-   "note": false,
-   "screen_hash": "b14489ed33620279",
-   "row_hash": "40172c2d376bfc32",
-   "carried": true,
-   "pass": 14
-  },
-  {
    "row": "C2190",
    "screen": "npc_laura",
    "verdict": "N/A",
@@ -2612,7 +2601,7 @@
     "all": "dea9963b899e2bc8"
    },
    "row_hash": "0c03931191c53a34",
-   "carried": false,
+   "carried": true,
    "pass": 16
   },
   {
@@ -2631,7 +2620,7 @@
     "all": "d6df99d748d72072"
    },
    "row_hash": "0c03931191c53a34",
-   "carried": false,
+   "carried": true,
    "pass": 16
   },
   {
@@ -2650,7 +2639,7 @@
     "all": "d1bf2a6c2e9fa772"
    },
    "row_hash": "0c03931191c53a34",
-   "carried": false,
+   "carried": true,
    "pass": 16
   },
   {
@@ -2669,7 +2658,7 @@
     "all": "b18aff50f616de96"
    },
    "row_hash": "0c03931191c53a34",
-   "carried": false,
+   "carried": true,
    "pass": 16
   },
   {
@@ -2688,7 +2677,7 @@
     "all": "73c769880c579b83"
    },
    "row_hash": "0c03931191c53a34",
-   "carried": false,
+   "carried": true,
    "pass": 16
   },
   {
@@ -2707,7 +2696,7 @@
     "all": "e37cfcfd09a2e7e9"
    },
    "row_hash": "0c03931191c53a34",
-   "carried": false,
+   "carried": true,
    "pass": 16
   },
   {
@@ -2726,7 +2715,7 @@
     "all": "f1b6cc134aa762b1"
    },
    "row_hash": "0c03931191c53a34",
-   "carried": false,
+   "carried": true,
    "pass": 16
   },
   {
@@ -2745,7 +2734,7 @@
     "all": "9eaf6148f8a161fd"
    },
    "row_hash": "0c03931191c53a34",
-   "carried": false,
+   "carried": true,
    "pass": 16
   },
   {
@@ -2764,7 +2753,7 @@
     "all": "8ea96985f6740d9d"
    },
    "row_hash": "0c03931191c53a34",
-   "carried": false,
+   "carried": true,
    "pass": 16
   },
   {
@@ -2783,7 +2772,7 @@
     "all": "a27ffea7ce0a38ef"
    },
    "row_hash": "0c03931191c53a34",
-   "carried": false,
+   "carried": true,
    "pass": 16
   },
   {
@@ -2802,7 +2791,7 @@
     "all": "060327233d4bbc89"
    },
    "row_hash": "0c03931191c53a34",
-   "carried": false,
+   "carried": true,
    "pass": 16
   },
   {
@@ -2821,7 +2810,7 @@
     "all": "df92e7415262c5ca"
    },
    "row_hash": "0c03931191c53a34",
-   "carried": false,
+   "carried": true,
    "pass": 16
   },
   {
@@ -2840,7 +2829,7 @@
     "all": "42c6b4e9e45977c2"
    },
    "row_hash": "0c03931191c53a34",
-   "carried": false,
+   "carried": true,
    "pass": 16
   },
   {
@@ -2859,8 +2848,59 @@
     "all": "4a1ccc16bcecd3d1"
    },
    "row_hash": "0c03931191c53a34",
-   "carried": false,
+   "carried": true,
    "pass": 16
+  },
+  {
+   "row": "C2197",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "talk_mom, mom_living_room behind met_laura; mark_kitchen, mark_living_room; ryan_room, ryan_kitchen, ryan_living_room",
+   "why": "the family has a menu in each room their rows put them awake (kitchen, living room, Ryan's room); none in the bathroom, hall or asleep",
+   "cause": null,
+   "note": false,
+   "screen_hash": "311ba6621c8f265f",
+   "row_hash": "cafbb0a598dbfa97",
+   "carried": true,
+   "pass": 17
+  },
+  {
+   "row": "C2198",
+   "screen": "opening.hall",
+   "verdict": "N/A",
+   "line": "",
+   "why": "the opening's hall, not a menu's Talk screen; C2198 is judged only on the screen a person's menu's Talk opens (Ryan's: ryan_room/ryan_kitchen/ryan_living_room .talk)",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "20fd03b2cbe8ed50",
+    "traits": "74c4f68e6476ecee",
+    "facts": "a48d9175e172fcd4",
+    "facts2": "faa3710528b4391d",
+    "all": "e37cfcfd09a2e7e9"
+   },
+   "row_hash": "27e6b45f50edd3ac",
+   "carried": false,
+   "pass": 18
+  },
+  {
+   "row": "C2198",
+   "screen": "opening.kitchen_rent",
+   "verdict": "N/A",
+   "line": "",
+   "why": "the opening's kitchen, not a menu's Talk screen; C2198 is judged only on the screen a person's menu's Talk opens (Mark's and Mom's .talk screens)",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "7dab9336c6fbdb16",
+    "traits": "4b9cc244e3119951",
+    "facts": "da1cfb7a102ff170",
+    "facts2": "28ed02d1a88a3f81",
+    "all": "8ea96985f6740d9d"
+   },
+   "row_hash": "27e6b45f50edd3ac",
+   "carried": false,
+   "pass": 18
   },
   {
    "row": "C286",
@@ -8005,8 +8045,8 @@
  ],
  "causes": [],
  "pending": [],
- "asked": 1,
- "answered": 1,
+ "asked": 2,
+ "answered": 2,
  "pass_items": [],
  "unowed": []
 }

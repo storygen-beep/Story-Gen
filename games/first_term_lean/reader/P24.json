@@ -1,6 +1,6 @@
 {
  "piece": "P24",
- "pass": 8,
+ "pass": 10,
  "screens": {
   "street_meet_vance.porch": {
    "text": "7af09b116a009078",
@@ -125,6 +125,8 @@
   "L168": "444c44970dc284f2",
   "L169": "59defccfc63b0454",
   "C1340": "b76a6583ae88c60f",
+  "C2197": "cafbb0a598dbfa97",
+  "C2198": "27e6b45f50edd3ac",
   "C769": "f6b6f78a8f2e5ed7",
   "C794": "bad76e5963432385",
   "C795": "34139e6a6914e171",
@@ -968,19 +970,6 @@
    "pass": 6
   },
   {
-   "row": "C2183",
-   "screen": "*",
-   "verdict": "PASS",
-   "line": "Vance: Dominant, Forward \u2014 \"Come here a minute, little lady.\"",
-   "why": "2 traits; Forward shown by his opening line",
-   "cause": null,
-   "note": false,
-   "screen_hash": "6dceda6d9f108f92",
-   "row_hash": "40172c2d376bfc32",
-   "carried": true,
-   "pass": 6
-  },
-  {
    "row": "C2188",
    "screen": "street_meet_vance.porch",
    "verdict": "PASS",
@@ -1032,7 +1021,7 @@
     "all": "956130e88f8c543a"
    },
    "row_hash": "0c03931191c53a34",
-   "carried": false,
+   "carried": true,
    "pass": 8
   },
   {
@@ -1051,8 +1040,34 @@
     "all": "c1590395ef1a9662"
    },
    "row_hash": "0c03931191c53a34",
-   "carried": false,
+   "carried": true,
    "pass": 8
+  },
+  {
+   "row": "C2197",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "talk_vance at hood_street behind met_vance",
+   "why": "Vance: a menu at each place their rows put them where talking fits, behind the met flag; none where it doesn't (lecture hall, mid-rehearsal, party hours)",
+   "cause": null,
+   "note": false,
+   "screen_hash": "e509ac21a754e448",
+   "row_hash": "cafbb0a598dbfa97",
+   "carried": true,
+   "pass": 9
+  },
+  {
+   "row": "C2198",
+   "screen": "*",
+   "verdict": "N/A",
+   "line": "",
+   "why": "street_meet_vance, a meeting: no menu's Talk screen in this piece; C2198 is judged only on a person's Talk screen (the screen their menu's Talk opens)",
+   "cause": null,
+   "note": false,
+   "screen_hash": "e509ac21a754e448",
+   "row_hash": "27e6b45f50edd3ac",
+   "carried": false,
+   "pass": 10
   },
   {
    "row": "C286",

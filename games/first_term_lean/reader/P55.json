@@ -1,6 +1,6 @@
 {
  "piece": "P55",
- "pass": 3,
+ "pass": 4,
  "screens": {
   "*": "4f53cda18c2baa0c"
  },
@@ -69,6 +69,7 @@
   "C2191": "71b59bd8f960bc11",
   "C2192": "fb8267ff01adf133",
   "C2195": "40447ff526d3f730",
+  "C2196": "4ca489a2e70123f0",
   "walk-ins#1": "e2c5c7198fc0d5ef",
   "walk-ins#2": "23e5d0e67707aeaf",
   "walk-ins#3": "6ef8eb0271aa1f38",
@@ -315,7 +316,7 @@
    "note": false,
    "screen_hash": null,
    "row_hash": "c1c0e2ac2588a579",
-   "carried": false,
+   "carried": true,
    "pass": 3
   },
   {
@@ -1242,6 +1243,19 @@
    "pass": 1
   },
   {
+   "row": "C2196",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "Your own thighs go tight by the door.",
+   "why": "all 21 now fire on arrival (trigger_mode random, 0.35); each one's first screen needs her only just arrived (at a door, in a hall, passing a porch, coming in) and names none of her garments; walk_marco_squat, the one at a place with an act, puts her by the door, not mid-set. The three that need her mid-act (walk_ryan_shower, walk_curtain, walk_cross_seats) stay substitutions on their acts",
+   "cause": null,
+   "note": false,
+   "screen_hash": "4f53cda18c2baa0c",
+   "row_hash": "4ca489a2e70123f0",
+   "carried": false,
+   "pass": 4
+  },
+  {
    "row": "C28",
    "screen": "*",
    "verdict": "PASS",
@@ -1576,7 +1590,7 @@
    "note": false,
    "screen_hash": null,
    "row_hash": "beb5a109bde77305",
-   "carried": false,
+   "carried": true,
    "pass": 3
   },
   {
@@ -2720,7 +2734,7 @@
    "note": false,
    "screen_hash": null,
    "row_hash": "321cc76cff93aadb",
-   "carried": false,
+   "carried": true,
    "pass": 3
   },
   {
@@ -3506,8 +3520,8 @@
  ],
  "causes": [],
  "pending": [],
- "asked": 3,
- "answered": 3,
+ "asked": 1,
+ "answered": 1,
  "pass_items": [],
  "unowed": []
 }

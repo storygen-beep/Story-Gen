@@ -1,6 +1,6 @@
 {
  "piece": "P27",
- "pass": 7,
+ "pass": 9,
  "screens": {
   "zoe_door_sam.door": {
    "text": "04292ed529b31c40",
@@ -128,6 +128,8 @@
   "L168": "444c44970dc284f2",
   "L169": "59defccfc63b0454",
   "C1340": "b76a6583ae88c60f",
+  "C2197": "cafbb0a598dbfa97",
+  "C2198": "27e6b45f50edd3ac",
   "C769": "f6b6f78a8f2e5ed7",
   "C794": "bad76e5963432385",
   "C795": "34139e6a6914e171",
@@ -1029,19 +1031,6 @@
    "pass": 5
   },
   {
-   "row": "C2183",
-   "screen": "*",
-   "verdict": "PASS",
-   "line": "Sam: Confident, Open Relationships, Artistic \u2014 \"a guitar hanging off him by the strap\", \"strumming something that isn't a song\"",
-   "why": "3 traits; Artistic shown here, Open Relationships cited in P37",
-   "cause": null,
-   "note": false,
-   "screen_hash": "9c3480f982f4f732",
-   "row_hash": "40172c2d376bfc32",
-   "carried": true,
-   "pass": 5
-  },
-  {
    "row": "C2188",
    "screen": "zoe_door_sam.door",
    "verdict": "N/A",
@@ -1106,7 +1095,7 @@
     "all": "5d20a44c4b8b6796"
    },
    "row_hash": "0c03931191c53a34",
-   "carried": false,
+   "carried": true,
    "pass": 7
   },
   {
@@ -1125,8 +1114,34 @@
     "all": "c7ed5b6984d9681d"
    },
    "row_hash": "0c03931191c53a34",
-   "carried": false,
+   "carried": true,
    "pass": 7
+  },
+  {
+   "row": "C2197",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "talk_sam at near_zoe_apartment, off in party hours; talk_zoe_flat",
+   "why": "Sam, Zoe: a menu at each place their rows put them where talking fits, behind the met flag; none where it doesn't (lecture hall, mid-rehearsal, party hours)",
+   "cause": null,
+   "note": false,
+   "screen_hash": "4c7d10b80f2d054b",
+   "row_hash": "cafbb0a598dbfa97",
+   "carried": true,
+   "pass": 8
+  },
+  {
+   "row": "C2198",
+   "screen": "*",
+   "verdict": "N/A",
+   "line": "",
+   "why": "zoe_door_sam, a meeting: no menu's Talk screen in this piece; C2198 is judged only on a person's Talk screen (the screen their menu's Talk opens)",
+   "cause": null,
+   "note": false,
+   "screen_hash": "4c7d10b80f2d054b",
+   "row_hash": "27e6b45f50edd3ac",
+   "carried": false,
+   "pass": 9
   },
   {
    "row": "C286",
