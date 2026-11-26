@@ -10,7 +10,7 @@ The learner lives in Indore (Madhya Pradesh) and wants to find out what they cou
 - Has chosen one path and written a first-steps checklist for it. (Path chosen: sourcing agent, see learning-records/0001.)
 
 ## Constraints
-- Based in Indore, India. Indian rules (DGFT, APEDA, Plant Protection, customs) apply.
+- Lives in Mandla, MP (corrected in session 1; earlier lessons assumed Indore). Indian rules (DGFT, APEDA, Plant Protection, customs) apply. Family is sceptical that export is possible from Mandla.
 - Interest so far: vegetables and related produce. Starting capital not yet stated.
 - Prefers short, direct answers.
 

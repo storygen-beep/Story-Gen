@@ -40,6 +40,12 @@
   Draft only; source of the 4% visible-sprouting tolerance.
 - [APEDA onion export procedure for EU (Agmark)](https://www.apeda.gov.in/sites/default/files/documents/2024-06/ONION_AGMARK.doc)
   Lots sampled at recognised labs, container loaded under lab supervision. Dated 2006 in origin; check if current.
+- [PIB: Millets Mahotsav in Mandla, kodo-kutki as Mandla ODOP (2023)](https://pib.gov.in/PressReleasePage.aspx?PRID=1892696)
+  Official: Mandla is the hub of kodo and kutki millet production; ODOP under PMFME. Use for: Mandla's product.
+- [Mongabay: Millet tradition loses flavour among MP's tribals (2024)](https://india.mongabay.com/2024/03/millet-tradition-loses-flavour-among-madhya-pradeshs-tribals/)
+  Aggregators truck unprocessed millet from the region to Nashik for processing and marketing. Use for: where value leaves the district.
+- [Maritime Gateway: Four more ICDs in MP](https://www.maritimegateway.com/four-icds-madhya-pradesh-strengthen-logistics/)
+  ICDs proposed for Satna, Katni, Jabalpur, Chhindwara. Date unclear; none confirmed operating.
 
 ## Wisdom (Communities)
 
@@ -49,6 +55,8 @@
   State body in Indore that ran "Coffee with Exporters" workshops for new exporters. Use for: meeting local exporters in person.
 
 ## Gaps
+- Whether any Jabalpur ICD/CFS is operating now; road time and cost Mandla to nearest ICD and to JNPT.
+- Named Mandla FPOs and any with organic (NPOP) certification.
 - Official sampling plan (how many bags/bulbs) for onion lot inspection in India.
 - Full official text of UNECE FFV-25 sprouting limit.
 - Official or trade-body benchmark for fresh-produce agent commission rates.
