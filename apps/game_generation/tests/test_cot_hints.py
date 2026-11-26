@@ -146,7 +146,7 @@ def _open(g):
 def _entries(g):
     """[title, category, hint line, grey] for each listed entry."""
     return g.js(
-        """() => [...document.querySelectorAll('#ui-dialog-body #hintlist .rounded-border')].map(b => [
+        """() => [...document.querySelectorAll('.passage #hintlist .rounded-border')].map(b => [
             b.querySelector('.large').textContent.trim(),
             b.querySelector('.hint-category').textContent.trim(),
             b.querySelector('.hint-line').textContent.replace(/\\s+/g, ' ').trim(),
@@ -156,7 +156,7 @@ def _entries(g):
 
 def _list_text(g):
     return g.js(
-        "() => document.querySelector('#ui-dialog-body #hintlist').textContent.trim()"
+        "() => document.querySelector('.passage #hintlist').textContent.trim()"
     )
 
 
@@ -175,7 +175,7 @@ def test_the_ladder(html):
     with open_game(html) as g:
         _open(g)
         assert (
-            g.js("() => document.querySelector('#ui-dialog-title').textContent.trim()")
+            g.js("() => document.querySelector('.passage .cot-page-title').textContent.trim()")
             == "Quests"
         )
         rows = {r[0]: r for r in _entries(g)}
@@ -269,7 +269,7 @@ def _walkthrough(g):
             .find(a => a.textContent.trim() === 'see here').click()"""
     )
     g.page.wait_for_timeout(150)
-    return g.js("() => document.querySelector('#ui-dialog-body').innerText")
+    return g.js("() => document.querySelector('.passage').innerText")
 
 
 @needs_browser
@@ -286,7 +286,7 @@ def test_the_walkthrough(html):
         # The guard: before `started` the page says only its line.
         text = _walkthrough(g)
         assert (
-            g.js("() => document.querySelector('#ui-dialog-title').textContent.trim()")
+            g.js("() => document.querySelector('.passage .cot-page-title').textContent.trim()")
             == "Walkthrough: The Job"
         )
         assert "Back to hints page" in text
@@ -318,7 +318,23 @@ def test_the_walkthrough(html):
         g.js("() => document.querySelector('#help-backward').click()")
         g.page.wait_for_timeout(150)
         assert (
-            g.js("() => document.querySelector('#ui-dialog-title').textContent.trim()")
+            g.js("() => document.querySelector('.passage .cot-page-title').textContent.trim()")
             == "Quests"
         )
+        assert g.errors == []
+
+
+@needs_browser
+def test_quests_and_a_walkthrough_are_pages_with_back_to_the_game(html):
+    """LO 2026-11-26: "They should have their own page." No dialog opens; ← Back goes home."""
+    with open_game(html) as g:
+        g.play("Location_loc_home")
+        _open(g)
+        assert g.passage() == "QuestsPage" and not g.js("() => SugarCube.Dialog.isOpen()")
+        g.js("() => document.querySelector('#hintlist .hints-see-here').click()")
+        g.page.wait_for_timeout(150)
+        assert g.passage() == "QuestsWalkthrough" and not g.js("() => SugarCube.Dialog.isOpen()")
+        g.js("() => [...document.querySelectorAll('.passage a')].find(a => a.textContent.trim() === '← Back').click()")
+        g.page.wait_for_timeout(150)
+        assert g.passage() == "Location_loc_home"
         assert g.errors == []

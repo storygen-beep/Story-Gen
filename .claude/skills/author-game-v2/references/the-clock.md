@@ -54,7 +54,7 @@ The clock is not hidden — `<<timeDisplay>>` sits at the top of `StoryCaption` 
 (`v2.py:18883`, `:18900`), rendering a live reading through `<<timeFormatted>>`
 (`v2.py:19326`) — 12-hour by default, 24-hour if the player ticks it in Settings (`setup.formatTime`
 is the one formatter every engine-printed time goes through) — and it carries **wait buttons**: `>` is 10 minutes, `>>` is an hour, `>>>>>` is a
-day (`v2.py:21552-21574`, `waitTime` at `v2.py:7107`). The player can always see the time and can
+day (`v2.py:21558-21580`, `waitTime` at `v2.py:7107`). The player can always see the time and can
 always move it. That is exactly why the prose must not compete with it.
 
 **What C1 licenses.** The opening's first node, before any exit has fired, may state the starting

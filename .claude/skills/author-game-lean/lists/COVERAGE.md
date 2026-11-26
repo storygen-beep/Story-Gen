@@ -1119,7 +1119,7 @@ Harvested 2026-11-19 from `.claude/skills/author-game-v2/` (frozen at `ea8f6465`
 | C1067 | Choice costs deduct with clamp false; canvas and location costs always clamp 0–100 and cannot be turned off. | references/engine.md:1442 | port |  | stated (v2.py:15573,6165) | |
 | C1068 | `costs` is the brake a player can feel on a repeatable rung; it always spends — to require a trait without spending it, use `conditions`. | references/engine.md:1452 | port |  | stated | |
 | C1069 | Money prints at 22 sites; `currency_symbol` governs only the 11 rent ones, 8 hardcode "$", 3 print none, and the symbol is a prefix only. | references/engine.md:1833 | port |  | stated (census 2026-09-30) | |
-| C1070 | A `trait_bar` for money defaults to "/ 100"; set a `max` or show money as `trait_words` with `show_value` and no bands. | references/engine.md:1886 | port |  | stated (v2.py:21521) | |
+| C1070 | A `trait_bar` for money defaults to "/ 100"; set a `max` or show money as `trait_words` with `show_value` and no bands. | references/engine.md:1886 | port |  | stated (v2.py:21527) | |
 | C1071 | An affordable choice never shows its price; the visible price is authored in the label. | references/engine.md:1891 | port |  | stated (v2.py:6192) | |
 | C1072 | A rung's brake belongs on the door (trigger costs, max_triggers_per_day, day-cap on the trigger), not inner choices: one unbraked door makes the whole rung farmable. | references/engine.md:2726 | port |  | stated (gates.py:5244; cleared five meters) | |
 | C1073 | A fast job can have `ranks` (xp per shift, title, income) shown on the board with a promotion toast. | references/engine.md:3208 | port |  | stated (v2.py:3654) | |
@@ -1845,7 +1845,7 @@ Harvested 2026-11-19 from `.claude/skills/author-game-v2/` (frozen at `ea8f6465`
 | C1732 | `[settings]`: narration_person (immutable after first ship), clothing_enabled, wardrobe_location. | the-board.md:426-431 | merge | C1645 | stated | |
 | C1733 | Every cost and effect names trait, op and value; `op = "sub"` on nine canvases silently did nothing. | the-sheets.md:165-172 | merge | C1711 | measured (incident) | |
 | C1734 | The build refuses a gate on a flag no canvas sets (`validate_flag_chains()`). | the-release.md:51-52 | port |  | stated (v2.py:15682) | |
-| C1735 | An authored rent `greeting` replaces the default that prints the live amount, so a re-price makes the collector contradict the UI on one screen. | the-release.md:264-275 | port |  | stated (v2.py:21211, 21192) | |
+| C1735 | An authored rent `greeting` replaces the default that prints the live amount, so a re-price makes the collector contradict the UI on one screen. | the-release.md:264-275 | port |  | stated (v2.py:21217, 21192) | |
 | C1736 | Playing a ladder in the build sets clock and place per step but never the counter, so step 3 is reached only if steps 1-2 really moved it. | the-release.md:403-407 | port |  | stated | |
 | C1737 | `dev: true` and `version` are mutually exclusive on a portal entry. | the-release.md:413-414 | port |  | stated | |
 | C1738 | Missing-media placeholders render only under `--debug`; a clean build shows silent gaps, so check the build's flags-init map and MissingMediaPage count. | the-release.md:442-446 | port |  | stated (v2.py:13355, 15653, 15516) | |
@@ -2115,7 +2115,7 @@ Harvested 2026-11-19 from `.claude/skills/author-game-v2/` (frozen at `ea8f6465`
 | C2002 | The story format is SugarCube 2.30.0 loaded from storyformats/ beside Tweego; `Save.onLoad.add()` does not exist — verify against installed format.js. | references/engine.md:2651 | port |  | stated (game_service.py pins) | |
 | C2003 | Quest-card conditions use `trait` and `op`; canvas conditions use `trait_key` and `operator`. | references/engine.md:2693 | port |  | stated (template_import.py:1303,7426) | |
 | C2004 | Any canvas key written one level too high is discarded with a green build (e.g. `substitution_only`). | references/engine.md:2785 | merge | C1970 | stated | |
-| C2005 | The effect toast does not wrap and clips both ends on a phone past ~5 effects (unfixed). | references/engine.md:2927 | port |  | stated (v2.py:20649) | |
+| C2005 | The effect toast does not wrap and clips both ends on a phone past ~5 effects (unfixed). | references/engine.md:2927 | port |  | stated (v2.py:20655) | |
 | C2006 | `is_active = false` means a canvas never surfaces on its own but stays addressable as a substitution target. | references/engine.md:2961 | port |  | stated (v2.py:6058) | |
 | C2007 | A canvas only a door or call reaches takes `substitution_only = true` with `is_active = true`. | references/engine.md:2972 | port |  | stated | |
 | C2008 | Never fold is_active into isCanvasValid or drop inactive canvases from locationCanvases, or substitution targets silently stop firing. | references/engine.md:2979 | port |  | stated (verified live) | |
