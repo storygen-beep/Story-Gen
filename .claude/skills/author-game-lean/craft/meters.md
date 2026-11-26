@@ -1,6 +1,6 @@
 # craft/meters.md — her climb meters as CoT skills, and the acts that move them
 
-Read this before you write a card that defines one of her climb meters, or an act that pays one. Her climb meters are Course of Temptation's (CoT's) skills: Disinhibition (it was Corruption), Exhibitionism, Submission and Dominance (LO, typed in main-lean 2026-11-25: "Yes lets move to cot style type system", "Go ahead with your picks", "Go ahead"). People's feelings toward her are `craft/people.md` rules 8 and 15.
+Read this before you write a card that defines one of her climb meters, or an act that pays one. Her climb meters work as Course of Temptation's (CoT's) skills. **Which meters, how many and their names are the game's own**, picked on the plan (`plan.md` §1) with LO's words (LO, typed in main-lean 2026-11-26: "Go ahead" (each game picks its own climb meters)). first_term_lean's set, used as the worked example here, is CoT's four: Disinhibition (it was Corruption), Exhibitionism, Submission and Dominance (LO, typed in main-lean 2026-11-25: "Yes lets move to cot style type system", "Go ahead with your picks", "Go ahead"). People's feelings toward her are `craft/people.md` rules 8 and 15.
 
 ## Must read
 
@@ -37,8 +37,8 @@ CoT, read 2026-11-25 (`/Users/a0000/Documents/Process_Review_20260925/round1_evi
 
 Each rule is marked **measured** or **LO's choice**.
 
-1. **Her climb meters are skills** (C2181). Each is a `[[traits.labels]]` row with `skill = true`, stored 0..1000 in `[player] core_traits`, shown in the sidebar as its level ("Exhibitionism 2"). A bold act is a choice with `skill_gate = { skill = "<key>", level = N }`, N from 1 to 10. Passing it raises the skill by her level's gain; you write no effect for it. `check.py`'s `people` check is red on a gate or `skill_level` condition that names no skill of hers. *Measured:* CoT's skills; Disinhibition and Exhibitionism replace Corruption and Exhibitionism, and Submission and Dominance are added, *LO's choice.*
-2. **The ladder** (C285). The acts each level opens, in CoT's order. A game may move a row; it never drops the order.
+1. **Her climb meters are skills** (C2181). Each is a `[[traits.labels]]` row with `skill = true`, stored 0..1000 in `[player] core_traits`, shown in the sidebar as its level ("Exhibitionism 2"). A bold act is a choice with `skill_gate = { skill = "<key>", level = N }`, N from 1 to 10. Passing it raises the skill by her level's gain; you write no effect for it. `check.py`'s `people` check is red on a gate or `skill_level` condition that names no skill of hers. *Measured:* CoT's skills. The set is the game's choice on the plan; first_term_lean's (Disinhibition and Exhibitionism replacing Corruption and Exhibitionism, Submission and Dominance added) is *LO's choice* for that game. A meter nothing reads in a release is left off the sidebar or named on the plan as coming later.
+2. **The ladder** (C285). The acts each level opens, in CoT's order. A game may move a row; it never drops the order. The table is CoT's four; a game with other meters writes its own ladder on the plan, from the boldest act down, in the same order of boldness.
 
    | level | Disinhibition | Exhibitionism | Submission | Dominance |
    |---|---|---|---|---|
