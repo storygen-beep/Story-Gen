@@ -1,12 +1,12 @@
 {
  "piece": "P46",
- "pass": 8,
+ "pass": 10,
  "screens": {
   "story_hints.paying_your_way": {
-   "text": "49539da5d0bdf535",
-   "facts": "49539da5d0bdf535",
-   "facts2": "49539da5d0bdf535",
-   "all": "49539da5d0bdf535"
+   "text": "e0e3d0f456f740b4",
+   "facts": "e0e3d0f456f740b4",
+   "facts2": "e0e3d0f456f740b4",
+   "all": "e0e3d0f456f740b4"
   },
   "story_hints.the_cafe_job": {
    "text": "212b9e03099a5d86",
@@ -45,10 +45,10 @@
    "all": "ec9d9ebfffebad13"
   },
   "story_hints.the_man_next_door": {
-   "text": "23d54d70a3ff3511",
-   "facts": "23d54d70a3ff3511",
-   "facts2": "23d54d70a3ff3511",
-   "all": "23d54d70a3ff3511"
+   "text": "59aaaf8330e3ab03",
+   "facts": "59aaaf8330e3ab03",
+   "facts2": "59aaaf8330e3ab03",
+   "all": "59aaaf8330e3ab03"
   },
   "story_hints.the_clothes_shop": {
    "text": "3effc19959a4c3b0",
@@ -57,10 +57,10 @@
    "all": "3effc19959a4c3b0"
   },
   "story_hints.staying_in_shape": {
-   "text": "c74c20351cc8b0e0",
-   "facts": "c74c20351cc8b0e0",
-   "facts2": "c74c20351cc8b0e0",
-   "all": "c74c20351cc8b0e0"
+   "text": "970d4273ecbcb62a",
+   "facts": "970d4273ecbcb62a",
+   "facts2": "970d4273ecbcb62a",
+   "all": "970d4273ecbcb62a"
   },
   "story_hints.the_corner_shop": {
    "text": "d8cc03dad68a4ae2",
@@ -81,10 +81,10 @@
    "all": "1039719d878b1525"
   },
   "walkthroughs.paying_wt": {
-   "text": "536f9eca46f769c4",
-   "facts": "536f9eca46f769c4",
-   "facts2": "536f9eca46f769c4",
-   "all": "536f9eca46f769c4"
+   "text": "aee2d0faba660dca",
+   "facts": "aee2d0faba660dca",
+   "facts2": "aee2d0faba660dca",
+   "all": "aee2d0faba660dca"
   },
   "npcs.npc_ryan.stranger_name": {
    "text": "2f8a2f67a4955dca",
@@ -518,7 +518,7 @@
    "facts2": "5efc01cd393fef01",
    "all": "5efc01cd393fef01"
   },
-  "*": "2bf25863ce034b80"
+  "*": "f3447b33b8bad2fe"
  },
  "rows": {
   "B1": "5276068df1ca6fa9",
@@ -992,6 +992,24 @@
    "pass": 2
   },
   {
+   "row": "C1008",
+   "screen": "walkthroughs.paying_wt",
+   "verdict": "N/A",
+   "line": "Mark wants your share every Sunday morning: $75 to start.",
+   "why": "note: no payment on a walkthrough",
+   "cause": null,
+   "note": true,
+   "screen_hash": {
+    "text": "aee2d0faba660dca",
+    "facts": "aee2d0faba660dca",
+    "facts2": "aee2d0faba660dca",
+    "all": "aee2d0faba660dca"
+   },
+   "row_hash": "7a86c32012a0b1d3",
+   "carried": false,
+   "pass": 10
+  },
+  {
    "row": "C1013",
    "screen": "*",
    "verdict": "N/A",
@@ -1003,6 +1021,24 @@
    "row_hash": "bb1069aa828de0f6",
    "carried": true,
    "pass": 2
+  },
+  {
+   "row": "C1013",
+   "screen": "walkthroughs.paying_wt",
+   "verdict": "N/A",
+   "line": "The rent storyline stops here for now. Mark still collects every Sunday; paying your own way, four Sundays in a row, comes in release 2.",
+   "why": "note: no short week on the walkthrough",
+   "cause": null,
+   "note": true,
+   "screen_hash": {
+    "text": "aee2d0faba660dca",
+    "facts": "aee2d0faba660dca",
+    "facts2": "aee2d0faba660dca",
+    "all": "aee2d0faba660dca"
+   },
+   "row_hash": "bb1069aa828de0f6",
+   "carried": false,
+   "pass": 10
   },
   {
    "row": "C1021",
@@ -1018,6 +1054,24 @@
    "pass": 2
   },
   {
+   "row": "C1021",
+   "screen": "walkthroughs.paying_wt",
+   "verdict": "N/A",
+   "line": "Mark wants your share every Sunday morning: $75 to start.",
+   "why": "note: no button",
+   "cause": null,
+   "note": true,
+   "screen_hash": {
+    "text": "aee2d0faba660dca",
+    "facts": "aee2d0faba660dca",
+    "facts2": "aee2d0faba660dca",
+    "all": "aee2d0faba660dca"
+   },
+   "row_hash": "ba42f7c2cf26a19a",
+   "carried": false,
+   "pass": 10
+  },
+  {
    "row": "C1022",
    "screen": "*",
    "verdict": "PASS",
@@ -1031,6 +1085,24 @@
    "pass": 2
   },
   {
+   "row": "C1022",
+   "screen": "walkthroughs.paying_wt",
+   "verdict": "PASS",
+   "line": "Mark wants your share every Sunday morning: $75 to start.",
+   "why": "$, no real-world currency",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "aee2d0faba660dca",
+    "facts": "aee2d0faba660dca",
+    "facts2": "aee2d0faba660dca",
+    "all": "aee2d0faba660dca"
+   },
+   "row_hash": "c800d0d9acba0592",
+   "carried": false,
+   "pass": 10
+  },
+  {
    "row": "C1033",
    "screen": "*",
    "verdict": "N/A",
@@ -1042,6 +1114,24 @@
    "row_hash": "9daf075fd3c2e30e",
    "carried": true,
    "pass": 2
+  },
+  {
+   "row": "C1033",
+   "screen": "walkthroughs.paying_wt",
+   "verdict": "N/A",
+   "line": "Mark wants your share every Sunday morning: $75 to start.",
+   "why": "note: not the collection",
+   "cause": null,
+   "note": true,
+   "screen_hash": {
+    "text": "aee2d0faba660dca",
+    "facts": "aee2d0faba660dca",
+    "facts2": "aee2d0faba660dca",
+    "all": "aee2d0faba660dca"
+   },
+   "row_hash": "9daf075fd3c2e30e",
+   "carried": false,
+   "pass": 10
   },
   {
    "row": "C109",
@@ -1309,21 +1399,39 @@
   },
   {
    "row": "C124",
-   "screen": "story_hints.staying_in_shape",
+   "screen": "story_hints.paying_your_way",
    "verdict": "PASS",
-   "line": "In your leggings and sports top, work out at the gym, 6am to 10pm. The trainer's in weekdays 6 to 10am and 5 to 9pm, and Saturday 8am to 2pm.",
-   "why": "Each step says where, when and in what; nobody is left lost.",
+   "line": "Mark collects the rent at the kitchen table on Sunday mornings, 8am to noon. Find the money before then.",
+   "why": "says where and when; after the payment, the end line",
    "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "c74c20351cc8b0e0",
-    "facts": "c74c20351cc8b0e0",
-    "facts2": "c74c20351cc8b0e0",
-    "all": "c74c20351cc8b0e0"
+    "text": "e0e3d0f456f740b4",
+    "facts": "e0e3d0f456f740b4",
+    "facts2": "e0e3d0f456f740b4",
+    "all": "e0e3d0f456f740b4"
    },
    "row_hash": "6eb13e48e8502791",
    "carried": true,
-   "pass": 2
+   "pass": 9
+  },
+  {
+   "row": "C124",
+   "screen": "story_hints.staying_in_shape",
+   "verdict": "PASS",
+   "line": "With a pass from the front desk, in your leggings, sports top and sneakers, work out at the gym, 6am to 10pm.",
+   "why": "where, when, in what (now with sneakers), and the pass",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "970d4273ecbcb62a",
+    "facts": "970d4273ecbcb62a",
+    "facts2": "970d4273ecbcb62a",
+    "all": "970d4273ecbcb62a"
+   },
+   "row_hash": "6eb13e48e8502791",
+   "carried": true,
+   "pass": 10
   },
   {
    "row": "C124",
@@ -1381,6 +1489,24 @@
   },
   {
    "row": "C124",
+   "screen": "story_hints.the_man_next_door",
+   "verdict": "PASS",
+   "line": "The man next door sits on his porch, weekday evenings 5 to 8pm and on Sundays. Walk down your street and say hello.",
+   "why": "says where, when and what to do",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "59aaaf8330e3ab03",
+    "facts": "59aaaf8330e3ab03",
+    "facts2": "59aaaf8330e3ab03",
+    "all": "59aaaf8330e3ab03"
+   },
+   "row_hash": "6eb13e48e8502791",
+   "carried": false,
+   "pass": 10
+  },
+  {
+   "row": "C124",
    "screen": "story_hints.the_mirror",
    "verdict": "PASS",
    "line": "From your second week, three girls own the mirror in the women's bathroom off the Quad, weekdays 8 to 9am and 1 to 2pm.",
@@ -1396,6 +1522,24 @@
    "row_hash": "6eb13e48e8502791",
    "carried": true,
    "pass": 6
+  },
+  {
+   "row": "C124",
+   "screen": "walkthroughs.paying_wt",
+   "verdict": "PASS",
+   "line": "Ask about the Help Wanted sign at the Caf\u00e9 in town, Monday to Saturday from 10am. / Pay Mark at the kitchen table on Sunday morning.",
+   "why": "each step says what to do, where and when",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "aee2d0faba660dca",
+    "facts": "aee2d0faba660dca",
+    "facts2": "aee2d0faba660dca",
+    "all": "aee2d0faba660dca"
+   },
+   "row_hash": "6eb13e48e8502791",
+   "carried": false,
+   "pass": 10
   },
   {
    "row": "C1250",
@@ -1546,21 +1690,39 @@
   },
   {
    "row": "C1366",
-   "screen": "story_hints.staying_in_shape",
-   "verdict": "N/A",
-   "line": "In your leggings and sports top, work out at the gym, 6am to 10pm.",
-   "why": "the hint is not a skill's storyline step (meters.md rule 8), and release 1 has no gate at any level (C2182), so no place on the Quests page pays a skill",
+   "screen": "story_hints.paying_your_way",
+   "verdict": "PASS",
+   "line": "Mark collects the rent at the kitchen table on Sunday mornings, 8am to noon. Find the money before then.",
+   "why": "the kitchen table, the rent",
    "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "c74c20351cc8b0e0",
-    "facts": "c74c20351cc8b0e0",
-    "facts2": "c74c20351cc8b0e0",
-    "all": "c74c20351cc8b0e0"
+    "text": "e0e3d0f456f740b4",
+    "facts": "e0e3d0f456f740b4",
+    "facts2": "e0e3d0f456f740b4",
+    "all": "e0e3d0f456f740b4"
    },
    "row_hash": "bf7edbd0ddd9e7b7",
    "carried": true,
-   "pass": 3
+   "pass": 9
+  },
+  {
+   "row": "C1366",
+   "screen": "story_hints.staying_in_shape",
+   "verdict": "N/A",
+   "line": "With a pass from the front desk, in your leggings, sports top and sneakers, work out at the gym, 6am to 10pm.",
+   "why": "not a skill's storyline step; release 1 gates no level (C2182)",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "970d4273ecbcb62a",
+    "facts": "970d4273ecbcb62a",
+    "facts2": "970d4273ecbcb62a",
+    "all": "970d4273ecbcb62a"
+   },
+   "row_hash": "bf7edbd0ddd9e7b7",
+   "carried": true,
+   "pass": 10
   },
   {
    "row": "C1366",
@@ -1618,6 +1780,24 @@
   },
   {
    "row": "C1366",
+   "screen": "story_hints.the_man_next_door",
+   "verdict": "PASS",
+   "line": "The man next door sits on his porch, weekday evenings 5 to 8pm and on Sundays. Walk down your street and say hello.",
+   "why": "names her street, where his scenes are",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "59aaaf8330e3ab03",
+    "facts": "59aaaf8330e3ab03",
+    "facts2": "59aaaf8330e3ab03",
+    "all": "59aaaf8330e3ab03"
+   },
+   "row_hash": "bf7edbd0ddd9e7b7",
+   "carried": false,
+   "pass": 10
+  },
+  {
+   "row": "C1366",
    "screen": "story_hints.the_mirror",
    "verdict": "N/A",
    "line": "From your second week, three girls own the mirror in the women's bathroom off the Quad, weekdays 8 to 9am and 1 to 2pm.",
@@ -1633,6 +1813,24 @@
    "row_hash": "bf7edbd0ddd9e7b7",
    "carried": true,
    "pass": 6
+  },
+  {
+   "row": "C1366",
+   "screen": "walkthroughs.paying_wt",
+   "verdict": "PASS",
+   "line": "Ask about the Help Wanted sign at the Caf\u00e9 in town, Monday to Saturday from 10am. / Pay Mark at the kitchen table on Sunday morning.",
+   "why": "caf\u00e9 and kitchen table both pay",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "aee2d0faba660dca",
+    "facts": "aee2d0faba660dca",
+    "facts2": "aee2d0faba660dca",
+    "all": "aee2d0faba660dca"
+   },
+   "row_hash": "bf7edbd0ddd9e7b7",
+   "carried": false,
+   "pass": 10
   },
   {
    "row": "C140",
@@ -1685,21 +1883,39 @@
   },
   {
    "row": "C140",
-   "screen": "story_hints.staying_in_shape",
+   "screen": "story_hints.paying_your_way",
    "verdict": "PASS",
-   "line": "end",
-   "why": "Ends on CoT's \"for now!\" line; the run and workout stay repeatable.",
+   "line": "end (CoT: \"You have reached the end of this storyline... for now! But there may still be recurring events.\")",
+   "why": "note: ends on CoT's \"for now\" line; the rent recurs",
    "cause": null,
    "note": true,
    "screen_hash": {
-    "text": "c74c20351cc8b0e0",
-    "facts": "c74c20351cc8b0e0",
-    "facts2": "c74c20351cc8b0e0",
-    "all": "c74c20351cc8b0e0"
+    "text": "e0e3d0f456f740b4",
+    "facts": "e0e3d0f456f740b4",
+    "facts2": "e0e3d0f456f740b4",
+    "all": "e0e3d0f456f740b4"
    },
    "row_hash": "b83b93c2f7e2d41f",
    "carried": true,
-   "pass": 2
+   "pass": 9
+  },
+  {
+   "row": "C140",
+   "screen": "story_hints.staying_in_shape",
+   "verdict": "PASS",
+   "line": "end (CoT: \"You have reached the end of this storyline... for now! But there may still be recurring events.\")",
+   "why": "note: ends on CoT's 'for now' line; gym and run recur",
+   "cause": null,
+   "note": true,
+   "screen_hash": {
+    "text": "970d4273ecbcb62a",
+    "facts": "970d4273ecbcb62a",
+    "facts2": "970d4273ecbcb62a",
+    "all": "970d4273ecbcb62a"
+   },
+   "row_hash": "b83b93c2f7e2d41f",
+   "carried": true,
+   "pass": 10
   },
   {
    "row": "C140",
@@ -1757,6 +1973,24 @@
   },
   {
    "row": "C140",
+   "screen": "story_hints.the_man_next_door",
+   "verdict": "PASS",
+   "line": "end (CoT: \"You have reached the end of this storyline... for now! But there may still be recurring events.\")",
+   "why": "note: ends 'for now', and his walk-ins and Talk recur",
+   "cause": null,
+   "note": true,
+   "screen_hash": {
+    "text": "59aaaf8330e3ab03",
+    "facts": "59aaaf8330e3ab03",
+    "facts2": "59aaaf8330e3ab03",
+    "all": "59aaaf8330e3ab03"
+   },
+   "row_hash": "b83b93c2f7e2d41f",
+   "carried": false,
+   "pass": 10
+  },
+  {
+   "row": "C140",
    "screen": "story_hints.the_mirror",
    "verdict": "PASS",
    "line": "From your second week, three girls own the mirror in the women's bathroom off the Quad, weekdays 8 to 9am and 1 to 2pm.",
@@ -1772,6 +2006,24 @@
    "row_hash": "b83b93c2f7e2d41f",
    "carried": true,
    "pass": 6
+  },
+  {
+   "row": "C140",
+   "screen": "walkthroughs.paying_wt",
+   "verdict": "PASS",
+   "line": "The rent storyline stops here for now. Mark still collects every Sunday; paying your own way, four Sundays in a row, comes in release 2.",
+   "why": "says where it stops and what's next; true: Mark collects weekly, four-in-a-row is release 2 (PLAN:280)",
+   "cause": null,
+   "note": true,
+   "screen_hash": {
+    "text": "aee2d0faba660dca",
+    "facts": "aee2d0faba660dca",
+    "facts2": "aee2d0faba660dca",
+    "all": "aee2d0faba660dca"
+   },
+   "row_hash": "b83b93c2f7e2d41f",
+   "carried": false,
+   "pass": 10
   },
   {
    "row": "C148",
@@ -1889,21 +2141,39 @@
   },
   {
    "row": "C1619",
-   "screen": "story_hints.staying_in_shape",
+   "screen": "story_hints.paying_your_way",
    "verdict": "PASS",
-   "line": "In your leggings and sports top, work out at the gym, 6am to 10pm. The trainer's in weekdays 6 to 10am and 5 to 9pm, and Saturday 8am to 2pm.",
-   "why": "A ladder with steps: gym first, then the run, then end.",
+   "line": "Mark collects the rent at the kitchen table on Sunday mornings, 8am to noon. Find the money before then. / end (CoT: \"You have reached the end of this storyline... for now! But there may still be recurring events.\")",
+   "why": "a storyline with two steps",
    "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "c74c20351cc8b0e0",
-    "facts": "c74c20351cc8b0e0",
-    "facts2": "c74c20351cc8b0e0",
-    "all": "c74c20351cc8b0e0"
+    "text": "e0e3d0f456f740b4",
+    "facts": "e0e3d0f456f740b4",
+    "facts2": "e0e3d0f456f740b4",
+    "all": "e0e3d0f456f740b4"
    },
    "row_hash": "80c98d00ce7d3bf8",
    "carried": true,
-   "pass": 2
+   "pass": 9
+  },
+  {
+   "row": "C1619",
+   "screen": "story_hints.staying_in_shape",
+   "verdict": "PASS",
+   "line": "With a pass from the front desk, in your leggings, sports top and sneakers, work out at the gym, 6am to 10pm. / Now go for a run in the park, 6am to 9pm, in the same leggings, top and sneakers.",
+   "why": "gym, run, end",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "970d4273ecbcb62a",
+    "facts": "970d4273ecbcb62a",
+    "facts2": "970d4273ecbcb62a",
+    "all": "970d4273ecbcb62a"
+   },
+   "row_hash": "80c98d00ce7d3bf8",
+   "carried": true,
+   "pass": 10
   },
   {
    "row": "C1619",
@@ -1961,6 +2231,24 @@
   },
   {
    "row": "C1619",
+   "screen": "story_hints.the_man_next_door",
+   "verdict": "PASS",
+   "line": "The man next door sits on his porch, weekday evenings 5 to 8pm and on Sundays. Walk down your street and say hello. / end",
+   "why": "a storyline with two steps",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "59aaaf8330e3ab03",
+    "facts": "59aaaf8330e3ab03",
+    "facts2": "59aaaf8330e3ab03",
+    "all": "59aaaf8330e3ab03"
+   },
+   "row_hash": "80c98d00ce7d3bf8",
+   "carried": false,
+   "pass": 10
+  },
+  {
+   "row": "C1619",
    "screen": "story_hints.the_mirror",
    "verdict": "PASS",
    "line": "From your second week, three girls own the mirror in the women's bathroom off the Quad, weekdays 8 to 9am and 1 to 2pm.",
@@ -1976,6 +2264,24 @@
    "row_hash": "80c98d00ce7d3bf8",
    "carried": true,
    "pass": 6
+  },
+  {
+   "row": "C1619",
+   "screen": "walkthroughs.paying_wt",
+   "verdict": "PASS",
+   "line": "\u2705 You paid Mark once. / \ud83d\uded1 The rent storyline stops here for now. Mark still collects every Sunday; paying your own way, four Sundays in a row, comes in release 2.",
+   "why": "done and next steps",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "aee2d0faba660dca",
+    "facts": "aee2d0faba660dca",
+    "facts2": "aee2d0faba660dca",
+    "all": "aee2d0faba660dca"
+   },
+   "row_hash": "80c98d00ce7d3bf8",
+   "carried": false,
+   "pass": 10
   },
   {
    "row": "C162",
@@ -2080,21 +2386,39 @@
   },
   {
    "row": "C215",
-   "screen": "story_hints.staying_in_shape",
+   "screen": "story_hints.paying_your_way",
    "verdict": "PASS",
-   "line": "end",
-   "why": "\"for now\", never \"Arc complete\".",
+   "line": "end (CoT: \"You have reached the end of this storyline... for now! But there may still be recurring events.\")",
+   "why": "note: CoT's \"for now!\" line beside the engine's grey Completed \u2705, which the card names (CoT's own shape)",
    "cause": null,
    "note": true,
    "screen_hash": {
-    "text": "c74c20351cc8b0e0",
-    "facts": "c74c20351cc8b0e0",
-    "facts2": "c74c20351cc8b0e0",
-    "all": "c74c20351cc8b0e0"
+    "text": "e0e3d0f456f740b4",
+    "facts": "e0e3d0f456f740b4",
+    "facts2": "e0e3d0f456f740b4",
+    "all": "e0e3d0f456f740b4"
    },
    "row_hash": "3b13472a8f7c42da",
    "carried": true,
-   "pass": 2
+   "pass": 9
+  },
+  {
+   "row": "C215",
+   "screen": "story_hints.staying_in_shape",
+   "verdict": "PASS",
+   "line": "end (CoT: \"You have reached the end of this storyline... for now! But there may still be recurring events.\")",
+   "why": "note: 'for now'",
+   "cause": null,
+   "note": true,
+   "screen_hash": {
+    "text": "970d4273ecbcb62a",
+    "facts": "970d4273ecbcb62a",
+    "facts2": "970d4273ecbcb62a",
+    "all": "970d4273ecbcb62a"
+   },
+   "row_hash": "3b13472a8f7c42da",
+   "carried": true,
+   "pass": 10
   },
   {
    "row": "C215",
@@ -2152,6 +2476,24 @@
   },
   {
    "row": "C215",
+   "screen": "story_hints.the_man_next_door",
+   "verdict": "PASS",
+   "line": "end (CoT: \"You have reached the end of this storyline... for now! But there may still be recurring events.\")",
+   "why": "note: 'for now'",
+   "cause": null,
+   "note": true,
+   "screen_hash": {
+    "text": "59aaaf8330e3ab03",
+    "facts": "59aaaf8330e3ab03",
+    "facts2": "59aaaf8330e3ab03",
+    "all": "59aaaf8330e3ab03"
+   },
+   "row_hash": "3b13472a8f7c42da",
+   "carried": false,
+   "pass": 10
+  },
+  {
+   "row": "C215",
    "screen": "story_hints.the_mirror",
    "verdict": "PASS",
    "line": "From your second week, three girls own the mirror in the women's bathroom off the Quad, weekdays 8 to 9am and 1 to 2pm.",
@@ -2167,6 +2509,24 @@
    "row_hash": "3b13472a8f7c42da",
    "carried": true,
    "pass": 6
+  },
+  {
+   "row": "C215",
+   "screen": "walkthroughs.paying_wt",
+   "verdict": "PASS",
+   "line": "The rent storyline stops here for now. Mark still collects every Sunday; paying your own way, four Sundays in a row, comes in release 2.",
+   "why": "note: 'for now', never 'Arc complete'",
+   "cause": null,
+   "note": true,
+   "screen_hash": {
+    "text": "aee2d0faba660dca",
+    "facts": "aee2d0faba660dca",
+    "facts2": "aee2d0faba660dca",
+    "all": "aee2d0faba660dca"
+   },
+   "row_hash": "3b13472a8f7c42da",
+   "carried": false,
+   "pass": 10
   },
   {
    "row": "C217",
@@ -2219,21 +2579,39 @@
   },
   {
    "row": "C217",
-   "screen": "story_hints.staying_in_shape",
+   "screen": "story_hints.paying_your_way",
    "verdict": "PASS",
-   "line": "Now go for a run in the park, 6am to 9pm, in the same leggings and top.",
-   "why": "met_marco is set on gym_meet_marco's exits; ran_once on body_run's Done.",
+   "line": "end (CoT: \"You have reached the end of this storyline... for now! But there may still be recurring events.\")",
+   "why": "rent_paid_once set on the pay Done",
    "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "c74c20351cc8b0e0",
-    "facts": "c74c20351cc8b0e0",
-    "facts2": "c74c20351cc8b0e0",
-    "all": "c74c20351cc8b0e0"
+    "text": "e0e3d0f456f740b4",
+    "facts": "e0e3d0f456f740b4",
+    "facts2": "e0e3d0f456f740b4",
+    "all": "e0e3d0f456f740b4"
    },
    "row_hash": "7bb70ca4ff31e145",
    "carried": true,
-   "pass": 2
+   "pass": 9
+  },
+  {
+   "row": "C217",
+   "screen": "story_hints.staying_in_shape",
+   "verdict": "PASS",
+   "line": "Now go for a run in the park, 6am to 9pm, in the same leggings, top and sneakers.",
+   "why": "met_marco set on gym_meet_marco's exit; ran_once on body_run's Done",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "970d4273ecbcb62a",
+    "facts": "970d4273ecbcb62a",
+    "facts2": "970d4273ecbcb62a",
+    "all": "970d4273ecbcb62a"
+   },
+   "row_hash": "7bb70ca4ff31e145",
+   "carried": true,
+   "pass": 10
   },
   {
    "row": "C217",
@@ -2291,6 +2669,24 @@
   },
   {
    "row": "C217",
+   "screen": "story_hints.the_man_next_door",
+   "verdict": "PASS",
+   "line": "end (CoT: \"You have reached the end of this storyline... for now! But there may still be recurring events.\")",
+   "why": "met_vance set on the Done of the weekday hello and of the Sunday meeting, the step's way out",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "59aaaf8330e3ab03",
+    "facts": "59aaaf8330e3ab03",
+    "facts2": "59aaaf8330e3ab03",
+    "all": "59aaaf8330e3ab03"
+   },
+   "row_hash": "7bb70ca4ff31e145",
+   "carried": false,
+   "pass": 10
+  },
+  {
+   "row": "C217",
    "screen": "story_hints.the_mirror",
    "verdict": "PASS",
    "line": "From your second week, three girls own the mirror in the women's bathroom off the Quad, weekdays 8 to 9am and 1 to 2pm.",
@@ -2306,6 +2702,24 @@
    "row_hash": "7bb70ca4ff31e145",
    "carried": true,
    "pass": 6
+  },
+  {
+   "row": "C217",
+   "screen": "walkthroughs.paying_wt",
+   "verdict": "PASS",
+   "line": "\u2705 You paid Mark once.",
+   "why": "rent_paid_once set on every pay screen's Done (pay75..pay100_3)",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "aee2d0faba660dca",
+    "facts": "aee2d0faba660dca",
+    "facts2": "aee2d0faba660dca",
+    "all": "aee2d0faba660dca"
+   },
+   "row_hash": "7bb70ca4ff31e145",
+   "carried": false,
+   "pass": 10
   },
   {
    "row": "C2176",
@@ -2358,21 +2772,39 @@
   },
   {
    "row": "C2176",
-   "screen": "story_hints.staying_in_shape",
+   "screen": "story_hints.paying_your_way",
    "verdict": "PASS",
-   "line": "Now go for a run in the park, 6am to 9pm, in the same leggings and top.",
-   "why": "met_marco and ran_once are both set by canvases.",
+   "line": "end (CoT: \"You have reached the end of this storyline... for now! But there may still be recurring events.\")",
+   "why": "goal1_shown and rent_paid_once set by canvases",
    "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "c74c20351cc8b0e0",
-    "facts": "c74c20351cc8b0e0",
-    "facts2": "c74c20351cc8b0e0",
-    "all": "c74c20351cc8b0e0"
+    "text": "e0e3d0f456f740b4",
+    "facts": "e0e3d0f456f740b4",
+    "facts2": "e0e3d0f456f740b4",
+    "all": "e0e3d0f456f740b4"
    },
    "row_hash": "03aca88c8939cd81",
    "carried": true,
-   "pass": 2
+   "pass": 9
+  },
+  {
+   "row": "C2176",
+   "screen": "story_hints.staying_in_shape",
+   "verdict": "PASS",
+   "line": "Now go for a run in the park, 6am to 9pm, in the same leggings, top and sneakers.",
+   "why": "met_marco and ran_once set by canvases",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "970d4273ecbcb62a",
+    "facts": "970d4273ecbcb62a",
+    "facts2": "970d4273ecbcb62a",
+    "all": "970d4273ecbcb62a"
+   },
+   "row_hash": "03aca88c8939cd81",
+   "carried": true,
+   "pass": 10
   },
   {
    "row": "C2176",
@@ -2430,6 +2862,24 @@
   },
   {
    "row": "C2176",
+   "screen": "story_hints.the_man_next_door",
+   "verdict": "PASS",
+   "line": "end (CoT: \"You have reached the end of this storyline... for now! But there may still be recurring events.\")",
+   "why": "met_vance set by walk_vance_ledger and street_meet_vance",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "59aaaf8330e3ab03",
+    "facts": "59aaaf8330e3ab03",
+    "facts2": "59aaaf8330e3ab03",
+    "all": "59aaaf8330e3ab03"
+   },
+   "row_hash": "03aca88c8939cd81",
+   "carried": false,
+   "pass": 10
+  },
+  {
+   "row": "C2176",
    "screen": "story_hints.the_mirror",
    "verdict": "PASS",
    "line": "From your second week, three girls own the mirror in the women's bathroom off the Quad, weekdays 8 to 9am and 1 to 2pm.",
@@ -2445,6 +2895,24 @@
    "row_hash": "03aca88c8939cd81",
    "carried": true,
    "pass": 6
+  },
+  {
+   "row": "C2176",
+   "screen": "walkthroughs.paying_wt",
+   "verdict": "PASS",
+   "line": "\u2705 Mark told you the rent.",
+   "why": "met_mark, cafe_hired, rent_paid_once all set by canvases",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "aee2d0faba660dca",
+    "facts": "aee2d0faba660dca",
+    "facts2": "aee2d0faba660dca",
+    "all": "aee2d0faba660dca"
+   },
+   "row_hash": "03aca88c8939cd81",
+   "carried": false,
+   "pass": 10
   },
   {
    "row": "C2179",
@@ -2521,7 +2989,7 @@
    "note": false,
    "screen_hash": "2bf25863ce034b80",
    "row_hash": "27e6b45f50edd3ac",
-   "carried": false,
+   "carried": true,
    "pass": 8
   },
   {
@@ -2588,21 +3056,39 @@
   },
   {
    "row": "C34",
-   "screen": "story_hints.staying_in_shape",
+   "screen": "story_hints.paying_your_way",
    "verdict": "PASS",
-   "line": "In your leggings and sports top, work out at the gym, 6am to 10pm. The trainer's in weekdays 6 to 10am and 5 to 9pm, and Saturday 8am to 2pm.",
-   "why": "No date.",
+   "line": "Mark collects the rent at the kitchen table on Sunday mornings, 8am to noon. Find the money before then.",
+   "why": "no date",
    "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "c74c20351cc8b0e0",
-    "facts": "c74c20351cc8b0e0",
-    "facts2": "c74c20351cc8b0e0",
-    "all": "c74c20351cc8b0e0"
+    "text": "e0e3d0f456f740b4",
+    "facts": "e0e3d0f456f740b4",
+    "facts2": "e0e3d0f456f740b4",
+    "all": "e0e3d0f456f740b4"
    },
    "row_hash": "ba026f3c4badeca2",
    "carried": true,
-   "pass": 2
+   "pass": 9
+  },
+  {
+   "row": "C34",
+   "screen": "story_hints.staying_in_shape",
+   "verdict": "PASS",
+   "line": "With a pass from the front desk, in your leggings, sports top and sneakers, work out at the gym, 6am to 10pm.",
+   "why": "no date",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "970d4273ecbcb62a",
+    "facts": "970d4273ecbcb62a",
+    "facts2": "970d4273ecbcb62a",
+    "all": "970d4273ecbcb62a"
+   },
+   "row_hash": "ba026f3c4badeca2",
+   "carried": true,
+   "pass": 10
   },
   {
    "row": "C34",
@@ -2657,6 +3143,24 @@
    "row_hash": "ba026f3c4badeca2",
    "carried": true,
    "pass": 2
+  },
+  {
+   "row": "C34",
+   "screen": "story_hints.the_man_next_door",
+   "verdict": "PASS",
+   "line": "The man next door sits on his porch, weekday evenings 5 to 8pm and on Sundays. Walk down your street and say hello.",
+   "why": "no date; weekdays are rules",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "59aaaf8330e3ab03",
+    "facts": "59aaaf8330e3ab03",
+    "facts2": "59aaaf8330e3ab03",
+    "all": "59aaaf8330e3ab03"
+   },
+   "row_hash": "ba026f3c4badeca2",
+   "carried": false,
+   "pass": 10
   },
   {
    "row": "C34",
@@ -2677,6 +3181,24 @@
    "pass": 6
   },
   {
+   "row": "C34",
+   "screen": "walkthroughs.paying_wt",
+   "verdict": "PASS",
+   "line": "Mark wants your share every Sunday morning: $75 to start.",
+   "why": "no date",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "aee2d0faba660dca",
+    "facts": "aee2d0faba660dca",
+    "facts2": "aee2d0faba660dca",
+    "all": "aee2d0faba660dca"
+   },
+   "row_hash": "ba026f3c4badeca2",
+   "carried": false,
+   "pass": 10
+  },
+  {
    "row": "C35",
    "screen": "*",
    "verdict": "PASS",
@@ -2727,21 +3249,39 @@
   },
   {
    "row": "C35",
-   "screen": "story_hints.staying_in_shape",
+   "screen": "story_hints.paying_your_way",
    "verdict": "PASS",
-   "line": "end",
-   "why": "Ends on the engine's end line, as the skill's own worked example does; the gym and run recur.",
+   "line": "end (CoT: \"You have reached the end of this storyline... for now! But there may still be recurring events.\")",
+   "why": "points at what continues (recurring events), and the walkthrough link names the later release",
    "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "c74c20351cc8b0e0",
-    "facts": "c74c20351cc8b0e0",
-    "facts2": "c74c20351cc8b0e0",
-    "all": "c74c20351cc8b0e0"
+    "text": "e0e3d0f456f740b4",
+    "facts": "e0e3d0f456f740b4",
+    "facts2": "e0e3d0f456f740b4",
+    "all": "e0e3d0f456f740b4"
    },
    "row_hash": "4fe71dee68944f61",
    "carried": true,
-   "pass": 2
+   "pass": 9
+  },
+  {
+   "row": "C35",
+   "screen": "story_hints.staying_in_shape",
+   "verdict": "PASS",
+   "line": "end (CoT: \"You have reached the end of this storyline... for now! But there may still be recurring events.\")",
+   "why": "the gym and the run recur",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "970d4273ecbcb62a",
+    "facts": "970d4273ecbcb62a",
+    "facts2": "970d4273ecbcb62a",
+    "all": "970d4273ecbcb62a"
+   },
+   "row_hash": "4fe71dee68944f61",
+   "carried": true,
+   "pass": 10
   },
   {
    "row": "C35",
@@ -2796,6 +3336,24 @@
    "row_hash": "4fe71dee68944f61",
    "carried": true,
    "pass": 2
+  },
+  {
+   "row": "C35",
+   "screen": "story_hints.the_man_next_door",
+   "verdict": "PASS",
+   "line": "end (CoT: \"You have reached the end of this storyline... for now! But there may still be recurring events.\")",
+   "why": "points at recurring events",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "59aaaf8330e3ab03",
+    "facts": "59aaaf8330e3ab03",
+    "facts2": "59aaaf8330e3ab03",
+    "all": "59aaaf8330e3ab03"
+   },
+   "row_hash": "4fe71dee68944f61",
+   "carried": false,
+   "pass": 10
   },
   {
    "row": "C35",
@@ -2816,6 +3374,24 @@
    "pass": 6
   },
   {
+   "row": "C35",
+   "screen": "walkthroughs.paying_wt",
+   "verdict": "PASS",
+   "line": "The rent storyline stops here for now. Mark still collects every Sunday; paying your own way, four Sundays in a row, comes in release 2.",
+   "why": "names what follows, in release 2",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "aee2d0faba660dca",
+    "facts": "aee2d0faba660dca",
+    "facts2": "aee2d0faba660dca",
+    "all": "aee2d0faba660dca"
+   },
+   "row_hash": "4fe71dee68944f61",
+   "carried": false,
+   "pass": 10
+  },
+  {
    "row": "C36",
    "screen": "*",
    "verdict": "PASS",
@@ -2866,21 +3442,39 @@
   },
   {
    "row": "C36",
-   "screen": "story_hints.staying_in_shape",
+   "screen": "story_hints.paying_your_way",
    "verdict": "PASS",
-   "line": "Now go for a run in the park, 6am to 9pm, in the same leggings and top.",
-   "why": "The end step's when is ran_once.",
+   "line": "end (CoT: \"You have reached the end of this storyline... for now! But there may still be recurring events.\")",
+   "why": "the end pair's when is rent_paid_once",
    "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "c74c20351cc8b0e0",
-    "facts": "c74c20351cc8b0e0",
-    "facts2": "c74c20351cc8b0e0",
-    "all": "c74c20351cc8b0e0"
+    "text": "e0e3d0f456f740b4",
+    "facts": "e0e3d0f456f740b4",
+    "facts2": "e0e3d0f456f740b4",
+    "all": "e0e3d0f456f740b4"
    },
    "row_hash": "ccf2da275f59cae3",
    "carried": true,
-   "pass": 2
+   "pass": 9
+  },
+  {
+   "row": "C36",
+   "screen": "story_hints.staying_in_shape",
+   "verdict": "PASS",
+   "line": "Now go for a run in the park, 6am to 9pm, in the same leggings, top and sneakers.",
+   "why": "the end step's when is ran_once",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "970d4273ecbcb62a",
+    "facts": "970d4273ecbcb62a",
+    "facts2": "970d4273ecbcb62a",
+    "all": "970d4273ecbcb62a"
+   },
+   "row_hash": "ccf2da275f59cae3",
+   "carried": true,
+   "pass": 10
   },
   {
    "row": "C36",
@@ -2935,6 +3529,24 @@
    "row_hash": "ccf2da275f59cae3",
    "carried": true,
    "pass": 2
+  },
+  {
+   "row": "C36",
+   "screen": "story_hints.the_man_next_door",
+   "verdict": "PASS",
+   "line": "end (CoT: \"You have reached the end of this storyline... for now! But there may still be recurring events.\")",
+   "why": "end step reads met_vance",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "59aaaf8330e3ab03",
+    "facts": "59aaaf8330e3ab03",
+    "facts2": "59aaaf8330e3ab03",
+    "all": "59aaaf8330e3ab03"
+   },
+   "row_hash": "ccf2da275f59cae3",
+   "carried": false,
+   "pass": 10
   },
   {
    "row": "C36",
@@ -2955,6 +3567,24 @@
    "pass": 6
   },
   {
+   "row": "C36",
+   "screen": "walkthroughs.paying_wt",
+   "verdict": "PASS",
+   "line": "\u2705 You paid Mark once.",
+   "why": "end step reads rent_paid_once",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "aee2d0faba660dca",
+    "facts": "aee2d0faba660dca",
+    "facts2": "aee2d0faba660dca",
+    "all": "aee2d0faba660dca"
+   },
+   "row_hash": "ccf2da275f59cae3",
+   "carried": false,
+   "pass": 10
+  },
+  {
    "row": "C37",
    "screen": "*",
    "verdict": "N/A",
@@ -3005,21 +3635,39 @@
   },
   {
    "row": "C37",
-   "screen": "story_hints.staying_in_shape",
-   "verdict": "N/A",
-   "line": "",
-   "why": "The storyline ends inside release 1.",
+   "screen": "story_hints.paying_your_way",
+   "verdict": "PASS",
+   "line": "end (CoT: \"You have reached the end of this storyline... for now! But there may still be recurring events.\") / For a detailed walkthrough ... see here.",
+   "why": "the box's walkthrough link (cot_pages.py:78-80) opens the \ud83d\uded1 line, which now names release 2; last pass failed when neither named it",
    "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "c74c20351cc8b0e0",
-    "facts": "c74c20351cc8b0e0",
-    "facts2": "c74c20351cc8b0e0",
-    "all": "c74c20351cc8b0e0"
+    "text": "e0e3d0f456f740b4",
+    "facts": "e0e3d0f456f740b4",
+    "facts2": "e0e3d0f456f740b4",
+    "all": "e0e3d0f456f740b4"
+   },
+   "row_hash": "cee89ca03f857080",
+   "carried": false,
+   "pass": 10
+  },
+  {
+   "row": "C37",
+   "screen": "story_hints.staying_in_shape",
+   "verdict": "N/A",
+   "line": "end (CoT: \"You have reached the end of this storyline... for now! But there may still be recurring events.\")",
+   "why": "the storyline ends inside release 1",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "970d4273ecbcb62a",
+    "facts": "970d4273ecbcb62a",
+    "facts2": "970d4273ecbcb62a",
+    "all": "970d4273ecbcb62a"
    },
    "row_hash": "cee89ca03f857080",
    "carried": true,
-   "pass": 2
+   "pass": 10
   },
   {
    "row": "C37",
@@ -3077,6 +3725,24 @@
   },
   {
    "row": "C37",
+   "screen": "story_hints.the_man_next_door",
+   "verdict": "PASS",
+   "line": "end (CoT: \"You have reached the end of this storyline... for now! But there may still be recurring events.\")",
+   "why": "this storyline's end (meeting him) is in release 1",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "59aaaf8330e3ab03",
+    "facts": "59aaaf8330e3ab03",
+    "facts2": "59aaaf8330e3ab03",
+    "all": "59aaaf8330e3ab03"
+   },
+   "row_hash": "cee89ca03f857080",
+   "carried": false,
+   "pass": 10
+  },
+  {
+   "row": "C37",
    "screen": "story_hints.the_mirror",
    "verdict": "N/A",
    "line": "From your second week, three girls own the mirror in the women's bathroom off the Quad, weekdays 8 to 9am and 1 to 2pm.",
@@ -3092,6 +3758,24 @@
    "row_hash": "cee89ca03f857080",
    "carried": true,
    "pass": 6
+  },
+  {
+   "row": "C37",
+   "screen": "walkthroughs.paying_wt",
+   "verdict": "PASS",
+   "line": "The rent storyline stops here for now. Mark still collects every Sunday; paying your own way, four Sundays in a row, comes in release 2.",
+   "why": "names release 2",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "aee2d0faba660dca",
+    "facts": "aee2d0faba660dca",
+    "facts2": "aee2d0faba660dca",
+    "all": "aee2d0faba660dca"
+   },
+   "row_hash": "cee89ca03f857080",
+   "carried": false,
+   "pass": 10
   },
   {
    "row": "C422",
@@ -3216,21 +3900,39 @@
   },
   {
    "row": "C422",
-   "screen": "story_hints.staying_in_shape",
+   "screen": "story_hints.paying_your_way",
    "verdict": "PASS",
-   "line": "In your leggings and sports top, work out at the gym, 6am to 10pm. The trainer's in weekdays 6 to 10am and 5 to 9pm, and Saturday 8am to 2pm.",
-   "why": "Says plainly what to do.",
+   "line": "Mark collects the rent at the kitchen table on Sunday mornings, 8am to noon. Find the money before then.",
+   "why": "plain",
    "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "c74c20351cc8b0e0",
-    "facts": "c74c20351cc8b0e0",
-    "facts2": "c74c20351cc8b0e0",
-    "all": "c74c20351cc8b0e0"
+    "text": "e0e3d0f456f740b4",
+    "facts": "e0e3d0f456f740b4",
+    "facts2": "e0e3d0f456f740b4",
+    "all": "e0e3d0f456f740b4"
    },
    "row_hash": "7e128897077ecee6",
    "carried": true,
-   "pass": 2
+   "pass": 9
+  },
+  {
+   "row": "C422",
+   "screen": "story_hints.staying_in_shape",
+   "verdict": "PASS",
+   "line": "With a pass from the front desk, in your leggings, sports top and sneakers, work out at the gym, 6am to 10pm.",
+   "why": "plain: get a pass, dress, then work out",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "970d4273ecbcb62a",
+    "facts": "970d4273ecbcb62a",
+    "facts2": "970d4273ecbcb62a",
+    "all": "970d4273ecbcb62a"
+   },
+   "row_hash": "7e128897077ecee6",
+   "carried": true,
+   "pass": 10
   },
   {
    "row": "C422",
@@ -3288,6 +3990,24 @@
   },
   {
    "row": "C422",
+   "screen": "story_hints.the_man_next_door",
+   "verdict": "PASS",
+   "line": "The man next door sits on his porch, weekday evenings 5 to 8pm and on Sundays. Walk down your street and say hello.",
+   "why": "plain",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "59aaaf8330e3ab03",
+    "facts": "59aaaf8330e3ab03",
+    "facts2": "59aaaf8330e3ab03",
+    "all": "59aaaf8330e3ab03"
+   },
+   "row_hash": "7e128897077ecee6",
+   "carried": false,
+   "pass": 10
+  },
+  {
+   "row": "C422",
    "screen": "story_hints.the_mirror",
    "verdict": "PASS",
    "line": "From your second week, three girls own the mirror in the women's bathroom off the Quad, weekdays 8 to 9am and 1 to 2pm.",
@@ -3303,6 +4023,24 @@
    "row_hash": "7e128897077ecee6",
    "carried": true,
    "pass": 6
+  },
+  {
+   "row": "C422",
+   "screen": "walkthroughs.paying_wt",
+   "verdict": "PASS",
+   "line": "\u27a1\ufe0f Pay Mark at the kitchen table on Sunday morning.",
+   "why": "plain",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "aee2d0faba660dca",
+    "facts": "aee2d0faba660dca",
+    "facts2": "aee2d0faba660dca",
+    "all": "aee2d0faba660dca"
+   },
+   "row_hash": "7e128897077ecee6",
+   "carried": false,
+   "pass": 10
   },
   {
    "row": "C430",
@@ -3355,21 +4093,39 @@
   },
   {
    "row": "C430",
-   "screen": "story_hints.staying_in_shape",
+   "screen": "story_hints.paying_your_way",
    "verdict": "PASS",
-   "line": "In your leggings and sports top, work out at the gym, 6am to 10pm. The trainer's in weekdays 6 to 10am and 5 to 9pm, and Saturday 8am to 2pm.",
-   "why": "Step 1 names the gym, its hours and the trainer's (meeting him passes it); step 2 names the park, its hours and the clothes.",
+   "line": "Mark collects the rent at the kitchen table on Sunday mornings, 8am to noon. Find the money before then.",
+   "why": "where and when Mark collects",
    "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "c74c20351cc8b0e0",
-    "facts": "c74c20351cc8b0e0",
-    "facts2": "c74c20351cc8b0e0",
-    "all": "c74c20351cc8b0e0"
+    "text": "e0e3d0f456f740b4",
+    "facts": "e0e3d0f456f740b4",
+    "facts2": "e0e3d0f456f740b4",
+    "all": "e0e3d0f456f740b4"
    },
    "row_hash": "83f6356d6b638ebf",
    "carried": true,
-   "pass": 2
+   "pass": 9
+  },
+  {
+   "row": "C430",
+   "screen": "story_hints.staying_in_shape",
+   "verdict": "PASS",
+   "line": "With a pass from the front desk, in your leggings, sports top and sneakers, work out at the gym, 6am to 10pm. The trainer's in weekdays 6 to 10am and 5 to 9pm, and Saturday 8am to 2pm.",
+   "why": "step 1 names the desk, the clothes, the gym's and trainer's hours; step 2 the park, hours, clothes",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "970d4273ecbcb62a",
+    "facts": "970d4273ecbcb62a",
+    "facts2": "970d4273ecbcb62a",
+    "all": "970d4273ecbcb62a"
+   },
+   "row_hash": "83f6356d6b638ebf",
+   "carried": true,
+   "pass": 10
   },
   {
    "row": "C430",
@@ -3427,6 +4183,24 @@
   },
   {
    "row": "C430",
+   "screen": "story_hints.the_man_next_door",
+   "verdict": "PASS",
+   "line": "The man next door sits on his porch, weekday evenings 5 to 8pm and on Sundays. Walk down your street and say hello.",
+   "why": "says how to find him",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "59aaaf8330e3ab03",
+    "facts": "59aaaf8330e3ab03",
+    "facts2": "59aaaf8330e3ab03",
+    "all": "59aaaf8330e3ab03"
+   },
+   "row_hash": "83f6356d6b638ebf",
+   "carried": false,
+   "pass": 10
+  },
+  {
+   "row": "C430",
    "screen": "story_hints.the_mirror",
    "verdict": "PASS",
    "line": "From your second week, three girls own the mirror in the women's bathroom off the Quad, weekdays 8 to 9am and 1 to 2pm.",
@@ -3442,6 +4216,24 @@
    "row_hash": "83f6356d6b638ebf",
    "carried": true,
    "pass": 6
+  },
+  {
+   "row": "C430",
+   "screen": "walkthroughs.paying_wt",
+   "verdict": "PASS",
+   "line": "Ask about the Help Wanted sign at the Caf\u00e9 in town, Monday to Saturday from 10am. / Pay Mark at the kitchen table on Sunday morning.",
+   "why": "each step says how to find the next",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "aee2d0faba660dca",
+    "facts": "aee2d0faba660dca",
+    "facts2": "aee2d0faba660dca",
+    "all": "aee2d0faba660dca"
+   },
+   "row_hash": "83f6356d6b638ebf",
+   "carried": false,
+   "pass": 10
   },
   {
    "row": "C433",
@@ -3494,21 +4286,39 @@
   },
   {
    "row": "C433",
-   "screen": "story_hints.staying_in_shape",
+   "screen": "story_hints.paying_your_way",
    "verdict": "PASS",
-   "line": "end",
-   "why": "Honest \"for now\".",
+   "line": "end (CoT: \"You have reached the end of this storyline... for now! But there may still be recurring events.\")",
+   "why": "\"for now!\"",
    "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "c74c20351cc8b0e0",
-    "facts": "c74c20351cc8b0e0",
-    "facts2": "c74c20351cc8b0e0",
-    "all": "c74c20351cc8b0e0"
+    "text": "e0e3d0f456f740b4",
+    "facts": "e0e3d0f456f740b4",
+    "facts2": "e0e3d0f456f740b4",
+    "all": "e0e3d0f456f740b4"
    },
    "row_hash": "d0461c156ea1bc3f",
    "carried": true,
-   "pass": 2
+   "pass": 9
+  },
+  {
+   "row": "C433",
+   "screen": "story_hints.staying_in_shape",
+   "verdict": "PASS",
+   "line": "end (CoT: \"You have reached the end of this storyline... for now! But there may still be recurring events.\")",
+   "why": "'for now!'",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "970d4273ecbcb62a",
+    "facts": "970d4273ecbcb62a",
+    "facts2": "970d4273ecbcb62a",
+    "all": "970d4273ecbcb62a"
+   },
+   "row_hash": "d0461c156ea1bc3f",
+   "carried": true,
+   "pass": 10
   },
   {
    "row": "C433",
@@ -3566,6 +4376,24 @@
   },
   {
    "row": "C433",
+   "screen": "story_hints.the_man_next_door",
+   "verdict": "PASS",
+   "line": "end (CoT: \"You have reached the end of this storyline... for now! But there may still be recurring events.\")",
+   "why": "'for now!'",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "59aaaf8330e3ab03",
+    "facts": "59aaaf8330e3ab03",
+    "facts2": "59aaaf8330e3ab03",
+    "all": "59aaaf8330e3ab03"
+   },
+   "row_hash": "d0461c156ea1bc3f",
+   "carried": false,
+   "pass": 10
+  },
+  {
+   "row": "C433",
    "screen": "story_hints.the_mirror",
    "verdict": "PASS",
    "line": "From your second week, three girls own the mirror in the women's bathroom off the Quad, weekdays 8 to 9am and 1 to 2pm.",
@@ -3581,6 +4409,24 @@
    "row_hash": "d0461c156ea1bc3f",
    "carried": true,
    "pass": 6
+  },
+  {
+   "row": "C433",
+   "screen": "walkthroughs.paying_wt",
+   "verdict": "PASS",
+   "line": "The rent storyline stops here for now. Mark still collects every Sunday; paying your own way, four Sundays in a row, comes in release 2.",
+   "why": "'for now'",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "aee2d0faba660dca",
+    "facts": "aee2d0faba660dca",
+    "facts2": "aee2d0faba660dca",
+    "all": "aee2d0faba660dca"
+   },
+   "row_hash": "d0461c156ea1bc3f",
+   "carried": false,
+   "pass": 10
   },
   {
    "row": "C442",
@@ -3705,21 +4551,39 @@
   },
   {
    "row": "C442",
-   "screen": "story_hints.staying_in_shape",
+   "screen": "story_hints.paying_your_way",
    "verdict": "PASS",
-   "line": "Now go for a run in the park, 6am to 9pm, in the same leggings and top.",
-   "why": "Says it.",
+   "line": "Mark collects the rent at the kitchen table on Sunday mornings, 8am to noon. Find the money before then.",
+   "why": "says it",
    "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "c74c20351cc8b0e0",
-    "facts": "c74c20351cc8b0e0",
-    "facts2": "c74c20351cc8b0e0",
-    "all": "c74c20351cc8b0e0"
+    "text": "e0e3d0f456f740b4",
+    "facts": "e0e3d0f456f740b4",
+    "facts2": "e0e3d0f456f740b4",
+    "all": "e0e3d0f456f740b4"
    },
    "row_hash": "59b8d8d24f0c7c38",
    "carried": true,
-   "pass": 2
+   "pass": 9
+  },
+  {
+   "row": "C442",
+   "screen": "story_hints.staying_in_shape",
+   "verdict": "PASS",
+   "line": "With a pass from the front desk, in your leggings, sports top and sneakers, work out at the gym, 6am to 10pm.",
+   "why": "says it",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "970d4273ecbcb62a",
+    "facts": "970d4273ecbcb62a",
+    "facts2": "970d4273ecbcb62a",
+    "all": "970d4273ecbcb62a"
+   },
+   "row_hash": "59b8d8d24f0c7c38",
+   "carried": true,
+   "pass": 10
   },
   {
    "row": "C442",
@@ -3777,6 +4641,24 @@
   },
   {
    "row": "C442",
+   "screen": "story_hints.the_man_next_door",
+   "verdict": "PASS",
+   "line": "The man next door sits on his porch, weekday evenings 5 to 8pm and on Sundays. Walk down your street and say hello.",
+   "why": "says it",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "59aaaf8330e3ab03",
+    "facts": "59aaaf8330e3ab03",
+    "facts2": "59aaaf8330e3ab03",
+    "all": "59aaaf8330e3ab03"
+   },
+   "row_hash": "59b8d8d24f0c7c38",
+   "carried": false,
+   "pass": 10
+  },
+  {
+   "row": "C442",
    "screen": "story_hints.the_mirror",
    "verdict": "PASS",
    "line": "From your second week, three girls own the mirror in the women's bathroom off the Quad, weekdays 8 to 9am and 1 to 2pm.",
@@ -3792,6 +4674,24 @@
    "row_hash": "59b8d8d24f0c7c38",
    "carried": true,
    "pass": 6
+  },
+  {
+   "row": "C442",
+   "screen": "walkthroughs.paying_wt",
+   "verdict": "PASS",
+   "line": "The rent storyline stops here for now. Mark still collects every Sunday; paying your own way, four Sundays in a row, comes in release 2.",
+   "why": "says it",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "aee2d0faba660dca",
+    "facts": "aee2d0faba660dca",
+    "facts2": "aee2d0faba660dca",
+    "all": "aee2d0faba660dca"
+   },
+   "row_hash": "59b8d8d24f0c7c38",
+   "carried": false,
+   "pass": 10
   },
   {
    "row": "C447",
@@ -4014,21 +4914,39 @@
   },
   {
    "row": "C451",
-   "screen": "story_hints.staying_in_shape",
+   "screen": "story_hints.paying_your_way",
    "verdict": "PASS",
-   "line": "In your leggings and sports top, work out at the gym, 6am to 10pm. The trainer's in weekdays 6 to 10am and 5 to 9pm, and Saturday 8am to 2pm.",
-   "why": "Places, hours, clothes.",
+   "line": "Mark collects the rent at the kitchen table on Sunday mornings, 8am to noon. Find the money before then.",
+   "why": "kitchen table, Sunday, 8am to noon",
    "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "c74c20351cc8b0e0",
-    "facts": "c74c20351cc8b0e0",
-    "facts2": "c74c20351cc8b0e0",
-    "all": "c74c20351cc8b0e0"
+    "text": "e0e3d0f456f740b4",
+    "facts": "e0e3d0f456f740b4",
+    "facts2": "e0e3d0f456f740b4",
+    "all": "e0e3d0f456f740b4"
    },
    "row_hash": "50dbf74577a813c7",
    "carried": true,
-   "pass": 2
+   "pass": 9
+  },
+  {
+   "row": "C451",
+   "screen": "story_hints.staying_in_shape",
+   "verdict": "PASS",
+   "line": "With a pass from the front desk, in your leggings, sports top and sneakers, work out at the gym, 6am to 10pm.",
+   "why": "the front desk, the clothes, hours",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "970d4273ecbcb62a",
+    "facts": "970d4273ecbcb62a",
+    "facts2": "970d4273ecbcb62a",
+    "all": "970d4273ecbcb62a"
+   },
+   "row_hash": "50dbf74577a813c7",
+   "carried": true,
+   "pass": 10
   },
   {
    "row": "C451",
@@ -4086,6 +5004,24 @@
   },
   {
    "row": "C451",
+   "screen": "story_hints.the_man_next_door",
+   "verdict": "PASS",
+   "line": "The man next door sits on his porch, weekday evenings 5 to 8pm and on Sundays. Walk down your street and say hello.",
+   "why": "porch, weekday evenings, 5 to 8pm, Sundays",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "59aaaf8330e3ab03",
+    "facts": "59aaaf8330e3ab03",
+    "facts2": "59aaaf8330e3ab03",
+    "all": "59aaaf8330e3ab03"
+   },
+   "row_hash": "50dbf74577a813c7",
+   "carried": false,
+   "pass": 10
+  },
+  {
+   "row": "C451",
    "screen": "story_hints.the_mirror",
    "verdict": "PASS",
    "line": "From your second week, three girls own the mirror in the women's bathroom off the Quad, weekdays 8 to 9am and 1 to 2pm.",
@@ -4101,6 +5037,24 @@
    "row_hash": "50dbf74577a813c7",
    "carried": true,
    "pass": 6
+  },
+  {
+   "row": "C451",
+   "screen": "walkthroughs.paying_wt",
+   "verdict": "PASS",
+   "line": "Mark wants your share every Sunday morning: $75 to start.",
+   "why": "money, day, place",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "aee2d0faba660dca",
+    "facts": "aee2d0faba660dca",
+    "facts2": "aee2d0faba660dca",
+    "all": "aee2d0faba660dca"
+   },
+   "row_hash": "50dbf74577a813c7",
+   "carried": false,
+   "pass": 10
   },
   {
    "row": "C460",
@@ -4368,21 +5322,39 @@
   },
   {
    "row": "C460",
-   "screen": "story_hints.staying_in_shape",
+   "screen": "story_hints.paying_your_way",
    "verdict": "PASS",
-   "line": "In your leggings and sports top, work out at the gym, 6am to 10pm. The trainer's in weekdays 6 to 10am and 5 to 9pm, and Saturday 8am to 2pm.",
-   "why": "Gym 6-22 every day, park 6-21 (hours, PLAN 91); Marco's rows weekdays 06-10 and 17-21, Saturday 08-14; leggings and sports top are hers from the opening and needed by both acts. Step 1 stays true if she ran before meeting him.",
+   "line": "Mark collects the rent at the kitchen table on Sunday mornings, 8am to noon. Find the money before then.",
+   "why": "Mark in the kitchen Sun 08-12 (who_is_where); the pay window is 08:00-11:55, \"to noon\" a five-minute round-up; the end line's \"recurring events\" is true",
    "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "c74c20351cc8b0e0",
-    "facts": "c74c20351cc8b0e0",
-    "facts2": "c74c20351cc8b0e0",
-    "all": "c74c20351cc8b0e0"
+    "text": "e0e3d0f456f740b4",
+    "facts": "e0e3d0f456f740b4",
+    "facts2": "e0e3d0f456f740b4",
+    "all": "e0e3d0f456f740b4"
    },
    "row_hash": "67e48e60d5053a2e",
    "carried": true,
-   "pass": 2
+   "pass": 9
+  },
+  {
+   "row": "C460",
+   "screen": "story_hints.staying_in_shape",
+   "verdict": "PASS",
+   "line": "With a pass from the front desk, in your leggings, sports top and sneakers, work out at the gym, 6am to 10pm. / Now go for a run in the park, 6am to 9pm, in the same leggings, top and sneakers.",
+   "why": "body_workout needs leggings, sports_top, sneakers and a running pass; body_run needs the same three garments; she owns all three from the start (wardrobeEffects adds leggings, sports_top, sneakers); gym 06-22, park 06-21; Marco weekdays 06-10 and 17-21, Saturday 08-14 (who_is_where)",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "970d4273ecbcb62a",
+    "facts": "970d4273ecbcb62a",
+    "facts2": "970d4273ecbcb62a",
+    "all": "970d4273ecbcb62a"
+   },
+   "row_hash": "67e48e60d5053a2e",
+   "carried": true,
+   "pass": 10
   },
   {
    "row": "C460",
@@ -4440,6 +5412,24 @@
   },
   {
    "row": "C460",
+   "screen": "story_hints.the_man_next_door",
+   "verdict": "PASS",
+   "line": "The man next door sits on his porch, weekday evenings 5 to 8pm and on Sundays. Walk down your street and say hello.",
+   "why": "who_is_where: Mon-Fri 17-20, Sat/Sun 9-12 and 17-20; the weekday walk-in has 'Say hello', the Sunday scene meets him; true at every minute before met_vance, then 'end'",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "59aaaf8330e3ab03",
+    "facts": "59aaaf8330e3ab03",
+    "facts2": "59aaaf8330e3ab03",
+    "all": "59aaaf8330e3ab03"
+   },
+   "row_hash": "67e48e60d5053a2e",
+   "carried": false,
+   "pass": 10
+  },
+  {
+   "row": "C460",
    "screen": "story_hints.the_mirror",
    "verdict": "PASS",
    "line": "From your second week, three girls own the mirror in the women's bathroom off the Quad, weekdays 8 to 9am and 1 to 2pm.",
@@ -4468,6 +5458,24 @@
    "row_hash": "67e48e60d5053a2e",
    "carried": true,
    "pass": 1
+  },
+  {
+   "row": "C460",
+   "screen": "walkthroughs.paying_wt",
+   "verdict": "PASS",
+   "line": "The rent storyline stops here for now. Mark still collects every Sunday; paying your own way, four Sundays in a row, comes in release 2.",
+   "why": "'$75 to start' true (rises later); Mark collects every Sunday; release 2 agrees with PLAN:280; $5 and $22 match the caf\u00e9 rows",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "aee2d0faba660dca",
+    "facts": "aee2d0faba660dca",
+    "facts2": "aee2d0faba660dca",
+    "all": "aee2d0faba660dca"
+   },
+   "row_hash": "67e48e60d5053a2e",
+   "carried": false,
+   "pass": 10
   },
   {
    "row": "C461",
@@ -4592,21 +5600,39 @@
   },
   {
    "row": "C461",
-   "screen": "story_hints.staying_in_shape",
+   "screen": "story_hints.paying_your_way",
    "verdict": "PASS",
-   "line": "Now go for a run in the park, 6am to 9pm, in the same leggings and top.",
-   "why": "",
+   "line": "Mark collects the rent at the kitchen table on Sunday mornings, 8am to noon. Find the money before then.",
+   "why": "fits",
    "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "c74c20351cc8b0e0",
-    "facts": "c74c20351cc8b0e0",
-    "facts2": "c74c20351cc8b0e0",
-    "all": "c74c20351cc8b0e0"
+    "text": "e0e3d0f456f740b4",
+    "facts": "e0e3d0f456f740b4",
+    "facts2": "e0e3d0f456f740b4",
+    "all": "e0e3d0f456f740b4"
    },
    "row_hash": "310706ee076318f2",
    "carried": true,
-   "pass": 2
+   "pass": 9
+  },
+  {
+   "row": "C461",
+   "screen": "story_hints.staying_in_shape",
+   "verdict": "PASS",
+   "line": "With a pass from the front desk, in your leggings, sports top and sneakers, work out at the gym, 6am to 10pm.",
+   "why": "fits",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "970d4273ecbcb62a",
+    "facts": "970d4273ecbcb62a",
+    "facts2": "970d4273ecbcb62a",
+    "all": "970d4273ecbcb62a"
+   },
+   "row_hash": "310706ee076318f2",
+   "carried": true,
+   "pass": 10
   },
   {
    "row": "C461",
@@ -4664,6 +5690,24 @@
   },
   {
    "row": "C461",
+   "screen": "story_hints.the_man_next_door",
+   "verdict": "PASS",
+   "line": "The man next door sits on his porch, weekday evenings 5 to 8pm and on Sundays. Walk down your street and say hello.",
+   "why": "fits",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "59aaaf8330e3ab03",
+    "facts": "59aaaf8330e3ab03",
+    "facts2": "59aaaf8330e3ab03",
+    "all": "59aaaf8330e3ab03"
+   },
+   "row_hash": "310706ee076318f2",
+   "carried": false,
+   "pass": 10
+  },
+  {
+   "row": "C461",
    "screen": "story_hints.the_mirror",
    "verdict": "PASS",
    "line": "From your second week, three girls own the mirror in the women's bathroom off the Quad, weekdays 8 to 9am and 1 to 2pm.",
@@ -4679,6 +5723,24 @@
    "row_hash": "310706ee076318f2",
    "carried": true,
    "pass": 6
+  },
+  {
+   "row": "C461",
+   "screen": "walkthroughs.paying_wt",
+   "verdict": "PASS",
+   "line": "\u2705 Mark told you the rent.",
+   "why": "fits",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "aee2d0faba660dca",
+    "facts": "aee2d0faba660dca",
+    "facts2": "aee2d0faba660dca",
+    "all": "aee2d0faba660dca"
+   },
+   "row_hash": "310706ee076318f2",
+   "carried": false,
+   "pass": 10
   },
   {
    "row": "C519",
@@ -4803,21 +5865,39 @@
   },
   {
    "row": "C519",
-   "screen": "story_hints.staying_in_shape",
+   "screen": "story_hints.paying_your_way",
    "verdict": "PASS",
-   "line": "In your leggings and sports top, work out at the gym, 6am to 10pm. The trainer's in weekdays 6 to 10am and 5 to 9pm, and Saturday 8am to 2pm.",
-   "why": "Two short lines.",
+   "line": "Mark collects the rent at the kitchen table on Sunday mornings, 8am to noon. Find the money before then.",
+   "why": "two short lines",
    "cause": null,
    "note": true,
    "screen_hash": {
-    "text": "c74c20351cc8b0e0",
-    "facts": "c74c20351cc8b0e0",
-    "facts2": "c74c20351cc8b0e0",
-    "all": "c74c20351cc8b0e0"
+    "text": "e0e3d0f456f740b4",
+    "facts": "e0e3d0f456f740b4",
+    "facts2": "e0e3d0f456f740b4",
+    "all": "e0e3d0f456f740b4"
    },
    "row_hash": "e78502f7aa28746d",
    "carried": true,
-   "pass": 2
+   "pass": 9
+  },
+  {
+   "row": "C519",
+   "screen": "story_hints.staying_in_shape",
+   "verdict": "PASS",
+   "line": "With a pass from the front desk, in your leggings, sports top and sneakers, work out at the gym, 6am to 10pm.",
+   "why": "two short lines",
+   "cause": null,
+   "note": true,
+   "screen_hash": {
+    "text": "970d4273ecbcb62a",
+    "facts": "970d4273ecbcb62a",
+    "facts2": "970d4273ecbcb62a",
+    "all": "970d4273ecbcb62a"
+   },
+   "row_hash": "e78502f7aa28746d",
+   "carried": true,
+   "pass": 10
   },
   {
    "row": "C519",
@@ -4875,6 +5955,24 @@
   },
   {
    "row": "C519",
+   "screen": "story_hints.the_man_next_door",
+   "verdict": "PASS",
+   "line": "The man next door sits on his porch, weekday evenings 5 to 8pm and on Sundays. Walk down your street and say hello.",
+   "why": "one short line",
+   "cause": null,
+   "note": true,
+   "screen_hash": {
+    "text": "59aaaf8330e3ab03",
+    "facts": "59aaaf8330e3ab03",
+    "facts2": "59aaaf8330e3ab03",
+    "all": "59aaaf8330e3ab03"
+   },
+   "row_hash": "e78502f7aa28746d",
+   "carried": false,
+   "pass": 10
+  },
+  {
+   "row": "C519",
    "screen": "story_hints.the_mirror",
    "verdict": "PASS",
    "line": "From your second week, three girls own the mirror in the women's bathroom off the Quad, weekdays 8 to 9am and 1 to 2pm.",
@@ -4890,6 +5988,24 @@
    "row_hash": "e78502f7aa28746d",
    "carried": true,
    "pass": 6
+  },
+  {
+   "row": "C519",
+   "screen": "walkthroughs.paying_wt",
+   "verdict": "PASS",
+   "line": "The rent storyline stops here for now. Mark still collects every Sunday; paying your own way, four Sundays in a row, comes in release 2.",
+   "why": "short steps",
+   "cause": null,
+   "note": true,
+   "screen_hash": {
+    "text": "aee2d0faba660dca",
+    "facts": "aee2d0faba660dca",
+    "facts2": "aee2d0faba660dca",
+    "all": "aee2d0faba660dca"
+   },
+   "row_hash": "e78502f7aa28746d",
+   "carried": false,
+   "pass": 10
   },
   {
    "row": "C520",
@@ -5125,21 +6241,39 @@
   },
   {
    "row": "C598",
-   "screen": "story_hints.staying_in_shape",
+   "screen": "story_hints.paying_your_way",
    "verdict": "PASS",
-   "line": "In your leggings and sports top, work out at the gym, 6am to 10pm. The trainer's in weekdays 6 to 10am and 5 to 9pm, and Saturday 8am to 2pm.",
-   "why": "\"The trainer\", unnamed until met; step 2 names nobody.",
+   "line": "Mark wants your share every Sunday.",
+   "why": "shown at goal1_shown, set after met_mark in the opening",
    "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "c74c20351cc8b0e0",
-    "facts": "c74c20351cc8b0e0",
-    "facts2": "c74c20351cc8b0e0",
-    "all": "c74c20351cc8b0e0"
+    "text": "e0e3d0f456f740b4",
+    "facts": "e0e3d0f456f740b4",
+    "facts2": "e0e3d0f456f740b4",
+    "all": "e0e3d0f456f740b4"
    },
    "row_hash": "56c1e6a836c774b1",
    "carried": true,
-   "pass": 2
+   "pass": 9
+  },
+  {
+   "row": "C598",
+   "screen": "story_hints.staying_in_shape",
+   "verdict": "PASS",
+   "line": "With a pass from the front desk, in your leggings, sports top and sneakers, work out at the gym, 6am to 10pm.",
+   "why": "'the trainer', unnamed until met",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "970d4273ecbcb62a",
+    "facts": "970d4273ecbcb62a",
+    "facts2": "970d4273ecbcb62a",
+    "all": "970d4273ecbcb62a"
+   },
+   "row_hash": "56c1e6a836c774b1",
+   "carried": true,
+   "pass": 10
   },
   {
    "row": "C598",
@@ -5197,6 +6331,24 @@
   },
   {
    "row": "C598",
+   "screen": "story_hints.the_man_next_door",
+   "verdict": "PASS",
+   "line": "The man next door sits on his porch, weekday evenings 5 to 8pm and on Sundays. Walk down your street and say hello.",
+   "why": "'The man next door', never his name before met_vance",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "59aaaf8330e3ab03",
+    "facts": "59aaaf8330e3ab03",
+    "facts2": "59aaaf8330e3ab03",
+    "all": "59aaaf8330e3ab03"
+   },
+   "row_hash": "56c1e6a836c774b1",
+   "carried": false,
+   "pass": 10
+  },
+  {
+   "row": "C598",
    "screen": "story_hints.the_mirror",
    "verdict": "PASS",
    "line": "From your second week, three girls own the mirror in the women's bathroom off the Quad, weekdays 8 to 9am and 1 to 2pm.",
@@ -5212,6 +6364,24 @@
    "row_hash": "56c1e6a836c774b1",
    "carried": true,
    "pass": 6
+  },
+  {
+   "row": "C598",
+   "screen": "walkthroughs.paying_wt",
+   "verdict": "PASS",
+   "line": "guard: met_mark",
+   "why": "names Mark only after met_mark",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "aee2d0faba660dca",
+    "facts": "aee2d0faba660dca",
+    "facts2": "aee2d0faba660dca",
+    "all": "aee2d0faba660dca"
+   },
+   "row_hash": "56c1e6a836c774b1",
+   "carried": false,
+   "pass": 10
   },
   {
    "row": "C620",
@@ -5871,21 +7041,39 @@
   },
   {
    "row": "C889",
-   "screen": "story_hints.staying_in_shape",
+   "screen": "story_hints.paying_your_way",
    "verdict": "PASS",
-   "line": "In your leggings and sports top, work out at the gym, 6am to 10pm. The trainer's in weekdays 6 to 10am and 5 to 9pm, and Saturday 8am to 2pm.",
-   "why": "No label; hours given as a rule.",
+   "line": "Mark collects the rent at the kitchen table on Sunday mornings, 8am to noon. Find the money before then.",
+   "why": "not a label; no clock time or duration on a button",
    "cause": null,
    "note": true,
    "screen_hash": {
-    "text": "c74c20351cc8b0e0",
-    "facts": "c74c20351cc8b0e0",
-    "facts2": "c74c20351cc8b0e0",
-    "all": "c74c20351cc8b0e0"
+    "text": "e0e3d0f456f740b4",
+    "facts": "e0e3d0f456f740b4",
+    "facts2": "e0e3d0f456f740b4",
+    "all": "e0e3d0f456f740b4"
    },
    "row_hash": "def1348d483d0c40",
    "carried": true,
-   "pass": 2
+   "pass": 9
+  },
+  {
+   "row": "C889",
+   "screen": "story_hints.staying_in_shape",
+   "verdict": "PASS",
+   "line": "With a pass from the front desk, in your leggings, sports top and sneakers, work out at the gym, 6am to 10pm.",
+   "why": "not a label; no clock time or duration on a button",
+   "cause": null,
+   "note": true,
+   "screen_hash": {
+    "text": "970d4273ecbcb62a",
+    "facts": "970d4273ecbcb62a",
+    "facts2": "970d4273ecbcb62a",
+    "all": "970d4273ecbcb62a"
+   },
+   "row_hash": "def1348d483d0c40",
+   "carried": true,
+   "pass": 10
   },
   {
    "row": "C889",
@@ -5943,6 +7131,24 @@
   },
   {
    "row": "C889",
+   "screen": "story_hints.the_man_next_door",
+   "verdict": "PASS",
+   "line": "The man next door sits on his porch, weekday evenings 5 to 8pm and on Sundays. Walk down your street and say hello.",
+   "why": "not a label",
+   "cause": null,
+   "note": true,
+   "screen_hash": {
+    "text": "59aaaf8330e3ab03",
+    "facts": "59aaaf8330e3ab03",
+    "facts2": "59aaaf8330e3ab03",
+    "all": "59aaaf8330e3ab03"
+   },
+   "row_hash": "def1348d483d0c40",
+   "carried": false,
+   "pass": 10
+  },
+  {
+   "row": "C889",
    "screen": "story_hints.the_mirror",
    "verdict": "N/A",
    "line": "From your second week, three girls own the mirror in the women's bathroom off the Quad, weekdays 8 to 9am and 1 to 2pm.",
@@ -5958,6 +7164,24 @@
    "row_hash": "def1348d483d0c40",
    "carried": true,
    "pass": 6
+  },
+  {
+   "row": "C889",
+   "screen": "walkthroughs.paying_wt",
+   "verdict": "PASS",
+   "line": "Mark wants your share every Sunday morning: $75 to start.",
+   "why": "note: not a label",
+   "cause": null,
+   "note": true,
+   "screen_hash": {
+    "text": "aee2d0faba660dca",
+    "facts": "aee2d0faba660dca",
+    "facts2": "aee2d0faba660dca",
+    "all": "aee2d0faba660dca"
+   },
+   "row_hash": "def1348d483d0c40",
+   "carried": false,
+   "pass": 10
   },
   {
    "row": "C892",
@@ -6010,21 +7234,39 @@
   },
   {
    "row": "C892",
-   "screen": "story_hints.staying_in_shape",
+   "screen": "story_hints.paying_your_way",
    "verdict": "PASS",
-   "line": "In your leggings and sports top, work out at the gym, 6am to 10pm. The trainer's in weekdays 6 to 10am and 5 to 9pm, and Saturday 8am to 2pm.",
-   "why": "Hours on the place, not the act.",
+   "line": "Mark collects the rent at the kitchen table on Sunday mornings, 8am to noon. Find the money before then.",
+   "why": "the hour goes on the place, not the act",
    "cause": null,
    "note": true,
    "screen_hash": {
-    "text": "c74c20351cc8b0e0",
-    "facts": "c74c20351cc8b0e0",
-    "facts2": "c74c20351cc8b0e0",
-    "all": "c74c20351cc8b0e0"
+    "text": "e0e3d0f456f740b4",
+    "facts": "e0e3d0f456f740b4",
+    "facts2": "e0e3d0f456f740b4",
+    "all": "e0e3d0f456f740b4"
    },
    "row_hash": "5c890033f6ac38b8",
    "carried": true,
-   "pass": 2
+   "pass": 9
+  },
+  {
+   "row": "C892",
+   "screen": "story_hints.staying_in_shape",
+   "verdict": "PASS",
+   "line": "With a pass from the front desk, in your leggings, sports top and sneakers, work out at the gym, 6am to 10pm.",
+   "why": "the hour goes on the place, not the act",
+   "cause": null,
+   "note": true,
+   "screen_hash": {
+    "text": "970d4273ecbcb62a",
+    "facts": "970d4273ecbcb62a",
+    "facts2": "970d4273ecbcb62a",
+    "all": "970d4273ecbcb62a"
+   },
+   "row_hash": "5c890033f6ac38b8",
+   "carried": true,
+   "pass": 10
   },
   {
    "row": "C892",
@@ -6079,6 +7321,24 @@
    "row_hash": "5c890033f6ac38b8",
    "carried": true,
    "pass": 2
+  },
+  {
+   "row": "C892",
+   "screen": "story_hints.the_man_next_door",
+   "verdict": "PASS",
+   "line": "The man next door sits on his porch, weekday evenings 5 to 8pm and on Sundays. Walk down your street and say hello.",
+   "why": "the hours go on the place",
+   "cause": null,
+   "note": true,
+   "screen_hash": {
+    "text": "59aaaf8330e3ab03",
+    "facts": "59aaaf8330e3ab03",
+    "facts2": "59aaaf8330e3ab03",
+    "all": "59aaaf8330e3ab03"
+   },
+   "row_hash": "5c890033f6ac38b8",
+   "carried": false,
+   "pass": 10
   },
   {
    "row": "C892",
@@ -6099,6 +7359,24 @@
    "pass": 6
   },
   {
+   "row": "C892",
+   "screen": "walkthroughs.paying_wt",
+   "verdict": "PASS",
+   "line": "Mark wants your share every Sunday morning: $75 to start.",
+   "why": "note: hours on the place",
+   "cause": null,
+   "note": true,
+   "screen_hash": {
+    "text": "aee2d0faba660dca",
+    "facts": "aee2d0faba660dca",
+    "facts2": "aee2d0faba660dca",
+    "all": "aee2d0faba660dca"
+   },
+   "row_hash": "5c890033f6ac38b8",
+   "carried": false,
+   "pass": 10
+  },
+  {
    "row": "C897",
    "screen": "*",
    "verdict": "N/A",
@@ -6149,21 +7427,39 @@
   },
   {
    "row": "C897",
-   "screen": "story_hints.staying_in_shape",
-   "verdict": "PASS",
-   "line": "",
-   "why": "",
+   "screen": "story_hints.paying_your_way",
+   "verdict": "N/A",
+   "line": "Mark collects the rent at the kitchen table on Sunday mornings, 8am to noon. Find the money before then.",
+   "why": "note: no travel time",
    "cause": null,
    "note": true,
    "screen_hash": {
-    "text": "c74c20351cc8b0e0",
-    "facts": "c74c20351cc8b0e0",
-    "facts2": "c74c20351cc8b0e0",
-    "all": "c74c20351cc8b0e0"
+    "text": "e0e3d0f456f740b4",
+    "facts": "e0e3d0f456f740b4",
+    "facts2": "e0e3d0f456f740b4",
+    "all": "e0e3d0f456f740b4"
    },
    "row_hash": "265ece64add83676",
    "carried": true,
-   "pass": 2
+   "pass": 9
+  },
+  {
+   "row": "C897",
+   "screen": "story_hints.staying_in_shape",
+   "verdict": "N/A",
+   "line": "With a pass from the front desk, in your leggings, sports top and sneakers, work out at the gym, 6am to 10pm.",
+   "why": "note: no travel time",
+   "cause": null,
+   "note": true,
+   "screen_hash": {
+    "text": "970d4273ecbcb62a",
+    "facts": "970d4273ecbcb62a",
+    "facts2": "970d4273ecbcb62a",
+    "all": "970d4273ecbcb62a"
+   },
+   "row_hash": "265ece64add83676",
+   "carried": true,
+   "pass": 10
   },
   {
    "row": "C897",
@@ -6218,6 +7514,24 @@
    "row_hash": "265ece64add83676",
    "carried": true,
    "pass": 2
+  },
+  {
+   "row": "C897",
+   "screen": "story_hints.the_man_next_door",
+   "verdict": "N/A",
+   "line": "The man next door sits on his porch, weekday evenings 5 to 8pm and on Sundays. Walk down your street and say hello.",
+   "why": "note: no travel time",
+   "cause": null,
+   "note": true,
+   "screen_hash": {
+    "text": "59aaaf8330e3ab03",
+    "facts": "59aaaf8330e3ab03",
+    "facts2": "59aaaf8330e3ab03",
+    "all": "59aaaf8330e3ab03"
+   },
+   "row_hash": "265ece64add83676",
+   "carried": false,
+   "pass": 10
   },
   {
    "row": "C897",
@@ -6238,6 +7552,24 @@
    "pass": 6
   },
   {
+   "row": "C897",
+   "screen": "walkthroughs.paying_wt",
+   "verdict": "N/A",
+   "line": "Mark wants your share every Sunday morning: $75 to start.",
+   "why": "note: no travel time",
+   "cause": null,
+   "note": true,
+   "screen_hash": {
+    "text": "aee2d0faba660dca",
+    "facts": "aee2d0faba660dca",
+    "facts2": "aee2d0faba660dca",
+    "all": "aee2d0faba660dca"
+   },
+   "row_hash": "265ece64add83676",
+   "carried": false,
+   "pass": 10
+  },
+  {
    "row": "C900",
    "screen": "*",
    "verdict": "PASS",
@@ -6288,21 +7620,39 @@
   },
   {
    "row": "C900",
-   "screen": "story_hints.staying_in_shape",
+   "screen": "story_hints.paying_your_way",
    "verdict": "PASS",
-   "line": "In your leggings and sports top, work out at the gym, 6am to 10pm. The trainer's in weekdays 6 to 10am and 5 to 9pm, and Saturday 8am to 2pm.",
-   "why": "Hours as a rule, not the time now.",
+   "line": "Mark collects the rent at the kitchen table on Sunday mornings, 8am to noon. Find the money before then.",
+   "why": "hours as a rule, not the time now",
    "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "c74c20351cc8b0e0",
-    "facts": "c74c20351cc8b0e0",
-    "facts2": "c74c20351cc8b0e0",
-    "all": "c74c20351cc8b0e0"
+    "text": "e0e3d0f456f740b4",
+    "facts": "e0e3d0f456f740b4",
+    "facts2": "e0e3d0f456f740b4",
+    "all": "e0e3d0f456f740b4"
    },
    "row_hash": "6372efb027eb2034",
    "carried": true,
-   "pass": 2
+   "pass": 9
+  },
+  {
+   "row": "C900",
+   "screen": "story_hints.staying_in_shape",
+   "verdict": "PASS",
+   "line": "With a pass from the front desk, in your leggings, sports top and sneakers, work out at the gym, 6am to 10pm.",
+   "why": "hours as a rule, not the time now",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "970d4273ecbcb62a",
+    "facts": "970d4273ecbcb62a",
+    "facts2": "970d4273ecbcb62a",
+    "all": "970d4273ecbcb62a"
+   },
+   "row_hash": "6372efb027eb2034",
+   "carried": true,
+   "pass": 10
   },
   {
    "row": "C900",
@@ -6357,6 +7707,24 @@
    "row_hash": "6372efb027eb2034",
    "carried": true,
    "pass": 2
+  },
+  {
+   "row": "C900",
+   "screen": "story_hints.the_man_next_door",
+   "verdict": "PASS",
+   "line": "The man next door sits on his porch, weekday evenings 5 to 8pm and on Sundays. Walk down your street and say hello.",
+   "why": "hours as a rule",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "59aaaf8330e3ab03",
+    "facts": "59aaaf8330e3ab03",
+    "facts2": "59aaaf8330e3ab03",
+    "all": "59aaaf8330e3ab03"
+   },
+   "row_hash": "6372efb027eb2034",
+   "carried": false,
+   "pass": 10
   },
   {
    "row": "C900",
@@ -6377,6 +7745,24 @@
    "pass": 6
   },
   {
+   "row": "C900",
+   "screen": "walkthroughs.paying_wt",
+   "verdict": "PASS",
+   "line": "Mark wants your share every Sunday morning: $75 to start.",
+   "why": "hours as a rule",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "aee2d0faba660dca",
+    "facts": "aee2d0faba660dca",
+    "facts2": "aee2d0faba660dca",
+    "all": "aee2d0faba660dca"
+   },
+   "row_hash": "6372efb027eb2034",
+   "carried": false,
+   "pass": 10
+  },
+  {
    "row": "C902",
    "screen": "*",
    "verdict": "PASS",
@@ -6427,21 +7813,39 @@
   },
   {
    "row": "C902",
-   "screen": "story_hints.staying_in_shape",
+   "screen": "story_hints.paying_your_way",
    "verdict": "PASS",
-   "line": "In your leggings and sports top, work out at the gym, 6am to 10pm. The trainer's in weekdays 6 to 10am and 5 to 9pm, and Saturday 8am to 2pm.",
-   "why": "True at every minute.",
+   "line": "Mark collects the rent at the kitchen table on Sunday mornings, 8am to noon. Find the money before then.",
+   "why": "true at every minute it can show",
    "cause": null,
    "note": true,
    "screen_hash": {
-    "text": "c74c20351cc8b0e0",
-    "facts": "c74c20351cc8b0e0",
-    "facts2": "c74c20351cc8b0e0",
-    "all": "c74c20351cc8b0e0"
+    "text": "e0e3d0f456f740b4",
+    "facts": "e0e3d0f456f740b4",
+    "facts2": "e0e3d0f456f740b4",
+    "all": "e0e3d0f456f740b4"
    },
    "row_hash": "df5ed7a36dbc74e4",
    "carried": true,
-   "pass": 2
+   "pass": 9
+  },
+  {
+   "row": "C902",
+   "screen": "story_hints.staying_in_shape",
+   "verdict": "PASS",
+   "line": "With a pass from the front desk, in your leggings, sports top and sneakers, work out at the gym, 6am to 10pm.",
+   "why": "true at every minute it can show",
+   "cause": null,
+   "note": true,
+   "screen_hash": {
+    "text": "970d4273ecbcb62a",
+    "facts": "970d4273ecbcb62a",
+    "facts2": "970d4273ecbcb62a",
+    "all": "970d4273ecbcb62a"
+   },
+   "row_hash": "df5ed7a36dbc74e4",
+   "carried": true,
+   "pass": 10
   },
   {
    "row": "C902",
@@ -6496,6 +7900,24 @@
    "row_hash": "df5ed7a36dbc74e4",
    "carried": true,
    "pass": 2
+  },
+  {
+   "row": "C902",
+   "screen": "story_hints.the_man_next_door",
+   "verdict": "PASS",
+   "line": "The man next door sits on his porch, weekday evenings 5 to 8pm and on Sundays. Walk down your street and say hello.",
+   "why": "true at every minute it shows",
+   "cause": null,
+   "note": true,
+   "screen_hash": {
+    "text": "59aaaf8330e3ab03",
+    "facts": "59aaaf8330e3ab03",
+    "facts2": "59aaaf8330e3ab03",
+    "all": "59aaaf8330e3ab03"
+   },
+   "row_hash": "df5ed7a36dbc74e4",
+   "carried": false,
+   "pass": 10
   },
   {
    "row": "C902",
@@ -6516,6 +7938,24 @@
    "pass": 6
   },
   {
+   "row": "C902",
+   "screen": "walkthroughs.paying_wt",
+   "verdict": "PASS",
+   "line": "Mark wants your share every Sunday morning: $75 to start.",
+   "why": "note: true at every minute",
+   "cause": null,
+   "note": true,
+   "screen_hash": {
+    "text": "aee2d0faba660dca",
+    "facts": "aee2d0faba660dca",
+    "facts2": "aee2d0faba660dca",
+    "all": "aee2d0faba660dca"
+   },
+   "row_hash": "df5ed7a36dbc74e4",
+   "carried": false,
+   "pass": 10
+  },
+  {
    "row": "C903",
    "screen": "*",
    "verdict": "PASS",
@@ -6566,21 +8006,39 @@
   },
   {
    "row": "C903",
-   "screen": "story_hints.staying_in_shape",
+   "screen": "story_hints.paying_your_way",
    "verdict": "PASS",
-   "line": "In your leggings and sports top, work out at the gym, 6am to 10pm. The trainer's in weekdays 6 to 10am and 5 to 9pm, and Saturday 8am to 2pm.",
-   "why": "\"weekdays\", \"Saturday\" are true of the rows on every view.",
+   "line": "Mark collects the rent at the kitchen table on Sunday mornings, 8am to noon. Find the money before then.",
+   "why": "weekdays named are rules, true on every view",
    "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "c74c20351cc8b0e0",
-    "facts": "c74c20351cc8b0e0",
-    "facts2": "c74c20351cc8b0e0",
-    "all": "c74c20351cc8b0e0"
+    "text": "e0e3d0f456f740b4",
+    "facts": "e0e3d0f456f740b4",
+    "facts2": "e0e3d0f456f740b4",
+    "all": "e0e3d0f456f740b4"
    },
    "row_hash": "4f83b0b5eb45f71b",
    "carried": true,
-   "pass": 2
+   "pass": 9
+  },
+  {
+   "row": "C903",
+   "screen": "story_hints.staying_in_shape",
+   "verdict": "PASS",
+   "line": "With a pass from the front desk, in your leggings, sports top and sneakers, work out at the gym, 6am to 10pm.",
+   "why": "weekdays named are rules, true on every view",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "970d4273ecbcb62a",
+    "facts": "970d4273ecbcb62a",
+    "facts2": "970d4273ecbcb62a",
+    "all": "970d4273ecbcb62a"
+   },
+   "row_hash": "4f83b0b5eb45f71b",
+   "carried": true,
+   "pass": 10
   },
   {
    "row": "C903",
@@ -6635,6 +8093,24 @@
    "row_hash": "4f83b0b5eb45f71b",
    "carried": true,
    "pass": 2
+  },
+  {
+   "row": "C903",
+   "screen": "story_hints.the_man_next_door",
+   "verdict": "PASS",
+   "line": "The man next door sits on his porch, weekday evenings 5 to 8pm and on Sundays. Walk down your street and say hello.",
+   "why": "weekdays named are rules, true on every view",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "59aaaf8330e3ab03",
+    "facts": "59aaaf8330e3ab03",
+    "facts2": "59aaaf8330e3ab03",
+    "all": "59aaaf8330e3ab03"
+   },
+   "row_hash": "4f83b0b5eb45f71b",
+   "carried": false,
+   "pass": 10
   },
   {
    "row": "C903",
@@ -6655,6 +8131,24 @@
    "pass": 6
   },
   {
+   "row": "C903",
+   "screen": "walkthroughs.paying_wt",
+   "verdict": "PASS",
+   "line": "Mark wants your share every Sunday morning: $75 to start.",
+   "why": "weekdays named are rules",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "aee2d0faba660dca",
+    "facts": "aee2d0faba660dca",
+    "facts2": "aee2d0faba660dca",
+    "all": "aee2d0faba660dca"
+   },
+   "row_hash": "4f83b0b5eb45f71b",
+   "carried": false,
+   "pass": 10
+  },
+  {
    "row": "C906",
    "screen": "*",
    "verdict": "N/A",
@@ -6705,21 +8199,39 @@
   },
   {
    "row": "C906",
-   "screen": "story_hints.staying_in_shape",
+   "screen": "story_hints.paying_your_way",
    "verdict": "PASS",
-   "line": "In your leggings and sports top, work out at the gym, 6am to 10pm. The trainer's in weekdays 6 to 10am and 5 to 9pm, and Saturday 8am to 2pm.",
-   "why": "No \"till\".",
+   "line": "Mark collects the rent at the kitchen table on Sunday mornings, 8am to noon. Find the money before then.",
+   "why": "no \"till\"",
    "cause": null,
    "note": true,
    "screen_hash": {
-    "text": "c74c20351cc8b0e0",
-    "facts": "c74c20351cc8b0e0",
-    "facts2": "c74c20351cc8b0e0",
-    "all": "c74c20351cc8b0e0"
+    "text": "e0e3d0f456f740b4",
+    "facts": "e0e3d0f456f740b4",
+    "facts2": "e0e3d0f456f740b4",
+    "all": "e0e3d0f456f740b4"
    },
    "row_hash": "71713a7e7ae739e7",
    "carried": true,
-   "pass": 2
+   "pass": 9
+  },
+  {
+   "row": "C906",
+   "screen": "story_hints.staying_in_shape",
+   "verdict": "PASS",
+   "line": "With a pass from the front desk, in your leggings, sports top and sneakers, work out at the gym, 6am to 10pm.",
+   "why": "no 'till'",
+   "cause": null,
+   "note": true,
+   "screen_hash": {
+    "text": "970d4273ecbcb62a",
+    "facts": "970d4273ecbcb62a",
+    "facts2": "970d4273ecbcb62a",
+    "all": "970d4273ecbcb62a"
+   },
+   "row_hash": "71713a7e7ae739e7",
+   "carried": true,
+   "pass": 10
   },
   {
    "row": "C906",
@@ -6774,6 +8286,24 @@
    "row_hash": "71713a7e7ae739e7",
    "carried": true,
    "pass": 2
+  },
+  {
+   "row": "C906",
+   "screen": "story_hints.the_man_next_door",
+   "verdict": "PASS",
+   "line": "The man next door sits on his porch, weekday evenings 5 to 8pm and on Sundays. Walk down your street and say hello.",
+   "why": "no 'till'",
+   "cause": null,
+   "note": true,
+   "screen_hash": {
+    "text": "59aaaf8330e3ab03",
+    "facts": "59aaaf8330e3ab03",
+    "facts2": "59aaaf8330e3ab03",
+    "all": "59aaaf8330e3ab03"
+   },
+   "row_hash": "71713a7e7ae739e7",
+   "carried": false,
+   "pass": 10
   },
   {
    "row": "C906",
@@ -6794,6 +8324,24 @@
    "pass": 6
   },
   {
+   "row": "C906",
+   "screen": "walkthroughs.paying_wt",
+   "verdict": "PASS",
+   "line": "Mark wants your share every Sunday morning: $75 to start.",
+   "why": "no 'till'",
+   "cause": null,
+   "note": true,
+   "screen_hash": {
+    "text": "aee2d0faba660dca",
+    "facts": "aee2d0faba660dca",
+    "facts2": "aee2d0faba660dca",
+    "all": "aee2d0faba660dca"
+   },
+   "row_hash": "71713a7e7ae739e7",
+   "carried": false,
+   "pass": 10
+  },
+  {
    "row": "C910",
    "screen": "*",
    "verdict": "N/A",
@@ -6844,21 +8392,39 @@
   },
   {
    "row": "C910",
-   "screen": "story_hints.staying_in_shape",
+   "screen": "story_hints.paying_your_way",
    "verdict": "PASS",
-   "line": "In your leggings and sports top, work out at the gym, 6am to 10pm. The trainer's in weekdays 6 to 10am and 5 to 9pm, and Saturday 8am to 2pm.",
-   "why": "No time or energy cost stated.",
+   "line": "Mark collects the rent at the kitchen table on Sunday mornings, 8am to noon. Find the money before then.",
+   "why": "not a button or a reply; no energy",
    "cause": null,
    "note": true,
    "screen_hash": {
-    "text": "c74c20351cc8b0e0",
-    "facts": "c74c20351cc8b0e0",
-    "facts2": "c74c20351cc8b0e0",
-    "all": "c74c20351cc8b0e0"
+    "text": "e0e3d0f456f740b4",
+    "facts": "e0e3d0f456f740b4",
+    "facts2": "e0e3d0f456f740b4",
+    "all": "e0e3d0f456f740b4"
    },
    "row_hash": "d5a109f1ef88419a",
    "carried": true,
-   "pass": 2
+   "pass": 9
+  },
+  {
+   "row": "C910",
+   "screen": "story_hints.staying_in_shape",
+   "verdict": "PASS",
+   "line": "With a pass from the front desk, in your leggings, sports top and sneakers, work out at the gym, 6am to 10pm.",
+   "why": "not a button or a reply; no energy",
+   "cause": null,
+   "note": true,
+   "screen_hash": {
+    "text": "970d4273ecbcb62a",
+    "facts": "970d4273ecbcb62a",
+    "facts2": "970d4273ecbcb62a",
+    "all": "970d4273ecbcb62a"
+   },
+   "row_hash": "d5a109f1ef88419a",
+   "carried": true,
+   "pass": 10
   },
   {
    "row": "C910",
@@ -6913,6 +8479,24 @@
    "row_hash": "d5a109f1ef88419a",
    "carried": true,
    "pass": 2
+  },
+  {
+   "row": "C910",
+   "screen": "story_hints.the_man_next_door",
+   "verdict": "PASS",
+   "line": "The man next door sits on his porch, weekday evenings 5 to 8pm and on Sundays. Walk down your street and say hello.",
+   "why": "not a button",
+   "cause": null,
+   "note": true,
+   "screen_hash": {
+    "text": "59aaaf8330e3ab03",
+    "facts": "59aaaf8330e3ab03",
+    "facts2": "59aaaf8330e3ab03",
+    "all": "59aaaf8330e3ab03"
+   },
+   "row_hash": "d5a109f1ef88419a",
+   "carried": false,
+   "pass": 10
   },
   {
    "row": "C910",
@@ -6933,6 +8517,24 @@
    "pass": 6
   },
   {
+   "row": "C910",
+   "screen": "walkthroughs.paying_wt",
+   "verdict": "PASS",
+   "line": "Mark wants your share every Sunday morning: $75 to start.",
+   "why": "note: not a button",
+   "cause": null,
+   "note": true,
+   "screen_hash": {
+    "text": "aee2d0faba660dca",
+    "facts": "aee2d0faba660dca",
+    "facts2": "aee2d0faba660dca",
+    "all": "aee2d0faba660dca"
+   },
+   "row_hash": "d5a109f1ef88419a",
+   "carried": false,
+   "pass": 10
+  },
+  {
    "row": "C913",
    "screen": "*",
    "verdict": "PASS",
@@ -6983,21 +8585,39 @@
   },
   {
    "row": "C913",
-   "screen": "story_hints.staying_in_shape",
+   "screen": "story_hints.paying_your_way",
    "verdict": "PASS",
-   "line": "In your leggings and sports top, work out at the gym, 6am to 10pm. The trainer's in weekdays 6 to 10am and 5 to 9pm, and Saturday 8am to 2pm.",
-   "why": "Publishes the gym's, park's and trainer's hours.",
+   "line": "Mark collects the rent at the kitchen table on Sunday mornings, 8am to noon. Find the money before then.",
+   "why": "publishes the hours",
    "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "c74c20351cc8b0e0",
-    "facts": "c74c20351cc8b0e0",
-    "facts2": "c74c20351cc8b0e0",
-    "all": "c74c20351cc8b0e0"
+    "text": "e0e3d0f456f740b4",
+    "facts": "e0e3d0f456f740b4",
+    "facts2": "e0e3d0f456f740b4",
+    "all": "e0e3d0f456f740b4"
    },
    "row_hash": "c750f9b6ab4ace14",
    "carried": true,
-   "pass": 2
+   "pass": 9
+  },
+  {
+   "row": "C913",
+   "screen": "story_hints.staying_in_shape",
+   "verdict": "PASS",
+   "line": "With a pass from the front desk, in your leggings, sports top and sneakers, work out at the gym, 6am to 10pm.",
+   "why": "publishes the hours",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "970d4273ecbcb62a",
+    "facts": "970d4273ecbcb62a",
+    "facts2": "970d4273ecbcb62a",
+    "all": "970d4273ecbcb62a"
+   },
+   "row_hash": "c750f9b6ab4ace14",
+   "carried": true,
+   "pass": 10
   },
   {
    "row": "C913",
@@ -7052,6 +8672,24 @@
    "row_hash": "c750f9b6ab4ace14",
    "carried": true,
    "pass": 2
+  },
+  {
+   "row": "C913",
+   "screen": "story_hints.the_man_next_door",
+   "verdict": "PASS",
+   "line": "The man next door sits on his porch, weekday evenings 5 to 8pm and on Sundays. Walk down your street and say hello.",
+   "why": "publishes his hours",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "59aaaf8330e3ab03",
+    "facts": "59aaaf8330e3ab03",
+    "facts2": "59aaaf8330e3ab03",
+    "all": "59aaaf8330e3ab03"
+   },
+   "row_hash": "c750f9b6ab4ace14",
+   "carried": false,
+   "pass": 10
   },
   {
    "row": "C913",
@@ -7072,6 +8710,24 @@
    "pass": 6
   },
   {
+   "row": "C913",
+   "screen": "walkthroughs.paying_wt",
+   "verdict": "PASS",
+   "line": "Mark wants your share every Sunday morning: $75 to start.",
+   "why": "publishes the hours",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "aee2d0faba660dca",
+    "facts": "aee2d0faba660dca",
+    "facts2": "aee2d0faba660dca",
+    "all": "aee2d0faba660dca"
+   },
+   "row_hash": "c750f9b6ab4ace14",
+   "carried": false,
+   "pass": 10
+  },
+  {
    "row": "C914",
    "screen": "*",
    "verdict": "N/A",
@@ -7122,21 +8778,39 @@
   },
   {
    "row": "C914",
-   "screen": "story_hints.staying_in_shape",
+   "screen": "story_hints.paying_your_way",
    "verdict": "N/A",
-   "line": "",
-   "why": "Not a row.",
+   "line": "Mark collects the rent at the kitchen table on Sunday mornings, 8am to noon. Find the money before then.",
+   "why": "not a row",
    "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "c74c20351cc8b0e0",
-    "facts": "c74c20351cc8b0e0",
-    "facts2": "c74c20351cc8b0e0",
-    "all": "c74c20351cc8b0e0"
+    "text": "e0e3d0f456f740b4",
+    "facts": "e0e3d0f456f740b4",
+    "facts2": "e0e3d0f456f740b4",
+    "all": "e0e3d0f456f740b4"
    },
    "row_hash": "bd07273d5822f34f",
    "carried": true,
-   "pass": 2
+   "pass": 9
+  },
+  {
+   "row": "C914",
+   "screen": "story_hints.staying_in_shape",
+   "verdict": "N/A",
+   "line": "With a pass from the front desk, in your leggings, sports top and sneakers, work out at the gym, 6am to 10pm.",
+   "why": "not a row",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "970d4273ecbcb62a",
+    "facts": "970d4273ecbcb62a",
+    "facts2": "970d4273ecbcb62a",
+    "all": "970d4273ecbcb62a"
+   },
+   "row_hash": "bd07273d5822f34f",
+   "carried": true,
+   "pass": 10
   },
   {
    "row": "C914",
@@ -7194,6 +8868,24 @@
   },
   {
    "row": "C914",
+   "screen": "story_hints.the_man_next_door",
+   "verdict": "N/A",
+   "line": "The man next door sits on his porch, weekday evenings 5 to 8pm and on Sundays. Walk down your street and say hello.",
+   "why": "not a row",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "59aaaf8330e3ab03",
+    "facts": "59aaaf8330e3ab03",
+    "facts2": "59aaaf8330e3ab03",
+    "all": "59aaaf8330e3ab03"
+   },
+   "row_hash": "bd07273d5822f34f",
+   "carried": false,
+   "pass": 10
+  },
+  {
+   "row": "C914",
    "screen": "story_hints.the_mirror",
    "verdict": "N/A",
    "line": "From your second week, three girls own the mirror in the women's bathroom off the Quad, weekdays 8 to 9am and 1 to 2pm.",
@@ -7209,6 +8901,24 @@
    "row_hash": "bd07273d5822f34f",
    "carried": true,
    "pass": 6
+  },
+  {
+   "row": "C914",
+   "screen": "walkthroughs.paying_wt",
+   "verdict": "N/A",
+   "line": "Mark wants your share every Sunday morning: $75 to start.",
+   "why": "not a row",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "aee2d0faba660dca",
+    "facts": "aee2d0faba660dca",
+    "facts2": "aee2d0faba660dca",
+    "all": "aee2d0faba660dca"
+   },
+   "row_hash": "bd07273d5822f34f",
+   "carried": false,
+   "pass": 10
   },
   {
    "row": "C916",
@@ -7258,24 +8968,42 @@
    "row_hash": "7b2bb0dfdbcfe946",
    "carried": true,
    "pass": 2
+  },
+  {
+   "row": "C916",
+   "screen": "story_hints.paying_your_way",
+   "verdict": "PASS",
+   "line": "Mark collects the rent at the kitchen table on Sunday mornings, 8am to noon. Find the money before then.",
+   "why": "hours on what she chooses",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "e0e3d0f456f740b4",
+    "facts": "e0e3d0f456f740b4",
+    "facts2": "e0e3d0f456f740b4",
+    "all": "e0e3d0f456f740b4"
+   },
+   "row_hash": "7b2bb0dfdbcfe946",
+   "carried": true,
+   "pass": 9
   },
   {
    "row": "C916",
    "screen": "story_hints.staying_in_shape",
    "verdict": "PASS",
-   "line": "In your leggings and sports top, work out at the gym, 6am to 10pm. The trainer's in weekdays 6 to 10am and 5 to 9pm, and Saturday 8am to 2pm.",
-   "why": "Hours on what she chooses.",
+   "line": "With a pass from the front desk, in your leggings, sports top and sneakers, work out at the gym, 6am to 10pm.",
+   "why": "hours on what she chooses",
    "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "c74c20351cc8b0e0",
-    "facts": "c74c20351cc8b0e0",
-    "facts2": "c74c20351cc8b0e0",
-    "all": "c74c20351cc8b0e0"
+    "text": "970d4273ecbcb62a",
+    "facts": "970d4273ecbcb62a",
+    "facts2": "970d4273ecbcb62a",
+    "all": "970d4273ecbcb62a"
    },
    "row_hash": "7b2bb0dfdbcfe946",
    "carried": true,
-   "pass": 2
+   "pass": 10
   },
   {
    "row": "C916",
@@ -7333,6 +9061,24 @@
   },
   {
    "row": "C916",
+   "screen": "story_hints.the_man_next_door",
+   "verdict": "PASS",
+   "line": "The man next door sits on his porch, weekday evenings 5 to 8pm and on Sundays. Walk down your street and say hello.",
+   "why": "hours on what she chooses: where to walk; the walk-in itself stays hidden when shut",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "59aaaf8330e3ab03",
+    "facts": "59aaaf8330e3ab03",
+    "facts2": "59aaaf8330e3ab03",
+    "all": "59aaaf8330e3ab03"
+   },
+   "row_hash": "7b2bb0dfdbcfe946",
+   "carried": false,
+   "pass": 10
+  },
+  {
+   "row": "C916",
    "screen": "story_hints.the_mirror",
    "verdict": "N/A",
    "line": "From your second week, three girls own the mirror in the women's bathroom off the Quad, weekdays 8 to 9am and 1 to 2pm.",
@@ -7348,6 +9094,24 @@
    "row_hash": "7b2bb0dfdbcfe946",
    "carried": true,
    "pass": 6
+  },
+  {
+   "row": "C916",
+   "screen": "walkthroughs.paying_wt",
+   "verdict": "PASS",
+   "line": "Mark wants your share every Sunday morning: $75 to start.",
+   "why": "hours on what she chooses",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "aee2d0faba660dca",
+    "facts": "aee2d0faba660dca",
+    "facts2": "aee2d0faba660dca",
+    "all": "aee2d0faba660dca"
+   },
+   "row_hash": "7b2bb0dfdbcfe946",
+   "carried": false,
+   "pass": 10
   },
   {
    "row": "C920",
@@ -7397,24 +9161,42 @@
    "row_hash": "513927dd127fca04",
    "carried": true,
    "pass": 2
+  },
+  {
+   "row": "C920",
+   "screen": "story_hints.paying_your_way",
+   "verdict": "N/A",
+   "line": "Mark collects the rent at the kitchen table on Sunday mornings, 8am to noon. Find the money before then.",
+   "why": "no move charged",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "e0e3d0f456f740b4",
+    "facts": "e0e3d0f456f740b4",
+    "facts2": "e0e3d0f456f740b4",
+    "all": "e0e3d0f456f740b4"
+   },
+   "row_hash": "513927dd127fca04",
+   "carried": true,
+   "pass": 9
   },
   {
    "row": "C920",
    "screen": "story_hints.staying_in_shape",
    "verdict": "N/A",
-   "line": "",
-   "why": "No move charged.",
+   "line": "With a pass from the front desk, in your leggings, sports top and sneakers, work out at the gym, 6am to 10pm.",
+   "why": "no move charged",
    "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "c74c20351cc8b0e0",
-    "facts": "c74c20351cc8b0e0",
-    "facts2": "c74c20351cc8b0e0",
-    "all": "c74c20351cc8b0e0"
+    "text": "970d4273ecbcb62a",
+    "facts": "970d4273ecbcb62a",
+    "facts2": "970d4273ecbcb62a",
+    "all": "970d4273ecbcb62a"
    },
    "row_hash": "513927dd127fca04",
    "carried": true,
-   "pass": 2
+   "pass": 10
   },
   {
    "row": "C920",
@@ -7472,6 +9254,24 @@
   },
   {
    "row": "C920",
+   "screen": "story_hints.the_man_next_door",
+   "verdict": "N/A",
+   "line": "The man next door sits on his porch, weekday evenings 5 to 8pm and on Sundays. Walk down your street and say hello.",
+   "why": "no move charged",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "59aaaf8330e3ab03",
+    "facts": "59aaaf8330e3ab03",
+    "facts2": "59aaaf8330e3ab03",
+    "all": "59aaaf8330e3ab03"
+   },
+   "row_hash": "513927dd127fca04",
+   "carried": false,
+   "pass": 10
+  },
+  {
+   "row": "C920",
    "screen": "story_hints.the_mirror",
    "verdict": "N/A",
    "line": "From your second week, three girls own the mirror in the women's bathroom off the Quad, weekdays 8 to 9am and 1 to 2pm.",
@@ -7487,6 +9287,24 @@
    "row_hash": "513927dd127fca04",
    "carried": true,
    "pass": 6
+  },
+  {
+   "row": "C920",
+   "screen": "walkthroughs.paying_wt",
+   "verdict": "N/A",
+   "line": "Mark wants your share every Sunday morning: $75 to start.",
+   "why": "no move charged",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "aee2d0faba660dca",
+    "facts": "aee2d0faba660dca",
+    "facts2": "aee2d0faba660dca",
+    "all": "aee2d0faba660dca"
+   },
+   "row_hash": "513927dd127fca04",
+   "carried": false,
+   "pass": 10
   },
   {
    "row": "C924",
@@ -7536,24 +9354,42 @@
    "row_hash": "791cd173e23fb130",
    "carried": true,
    "pass": 2
+  },
+  {
+   "row": "C924",
+   "screen": "story_hints.paying_your_way",
+   "verdict": "PASS",
+   "line": "Mark collects the rent at the kitchen table on Sunday mornings, 8am to noon. Find the money before then.",
+   "why": "the hours make the trip's timing matter",
+   "cause": null,
+   "note": true,
+   "screen_hash": {
+    "text": "e0e3d0f456f740b4",
+    "facts": "e0e3d0f456f740b4",
+    "facts2": "e0e3d0f456f740b4",
+    "all": "e0e3d0f456f740b4"
+   },
+   "row_hash": "791cd173e23fb130",
+   "carried": true,
+   "pass": 9
   },
   {
    "row": "C924",
    "screen": "story_hints.staying_in_shape",
    "verdict": "PASS",
-   "line": "In your leggings and sports top, work out at the gym, 6am to 10pm. The trainer's in weekdays 6 to 10am and 5 to 9pm, and Saturday 8am to 2pm.",
-   "why": "The trainer's hours make the trip's timing matter.",
+   "line": "With a pass from the front desk, in your leggings, sports top and sneakers, work out at the gym, 6am to 10pm.",
+   "why": "the hours make the trip's timing matter",
    "cause": null,
    "note": true,
    "screen_hash": {
-    "text": "c74c20351cc8b0e0",
-    "facts": "c74c20351cc8b0e0",
-    "facts2": "c74c20351cc8b0e0",
-    "all": "c74c20351cc8b0e0"
+    "text": "970d4273ecbcb62a",
+    "facts": "970d4273ecbcb62a",
+    "facts2": "970d4273ecbcb62a",
+    "all": "970d4273ecbcb62a"
    },
    "row_hash": "791cd173e23fb130",
    "carried": true,
-   "pass": 2
+   "pass": 10
   },
   {
    "row": "C924",
@@ -7611,6 +9447,24 @@
   },
   {
    "row": "C924",
+   "screen": "story_hints.the_man_next_door",
+   "verdict": "PASS",
+   "line": "The man next door sits on his porch, weekday evenings 5 to 8pm and on Sundays. Walk down your street and say hello.",
+   "why": "his hours make the walk's timing matter",
+   "cause": null,
+   "note": true,
+   "screen_hash": {
+    "text": "59aaaf8330e3ab03",
+    "facts": "59aaaf8330e3ab03",
+    "facts2": "59aaaf8330e3ab03",
+    "all": "59aaaf8330e3ab03"
+   },
+   "row_hash": "791cd173e23fb130",
+   "carried": false,
+   "pass": 10
+  },
+  {
+   "row": "C924",
    "screen": "story_hints.the_mirror",
    "verdict": "N/A",
    "line": "From your second week, three girls own the mirror in the women's bathroom off the Quad, weekdays 8 to 9am and 1 to 2pm.",
@@ -7626,6 +9480,24 @@
    "row_hash": "791cd173e23fb130",
    "carried": true,
    "pass": 6
+  },
+  {
+   "row": "C924",
+   "screen": "walkthroughs.paying_wt",
+   "verdict": "PASS",
+   "line": "Mark wants your share every Sunday morning: $75 to start.",
+   "why": "note: the caf\u00e9's hours make the trip matter",
+   "cause": null,
+   "note": true,
+   "screen_hash": {
+    "text": "aee2d0faba660dca",
+    "facts": "aee2d0faba660dca",
+    "facts2": "aee2d0faba660dca",
+    "all": "aee2d0faba660dca"
+   },
+   "row_hash": "791cd173e23fb130",
+   "carried": false,
+   "pass": 10
   },
   {
    "row": "C926",
@@ -7675,24 +9547,42 @@
    "row_hash": "177d1e1776fac74b",
    "carried": true,
    "pass": 2
+  },
+  {
+   "row": "C926",
+   "screen": "story_hints.paying_your_way",
+   "verdict": "PASS",
+   "line": "Mark collects the rent at the kitchen table on Sunday mornings, 8am to noon. Find the money before then.",
+   "why": "note: nothing moves the clock",
+   "cause": null,
+   "note": true,
+   "screen_hash": {
+    "text": "e0e3d0f456f740b4",
+    "facts": "e0e3d0f456f740b4",
+    "facts2": "e0e3d0f456f740b4",
+    "all": "e0e3d0f456f740b4"
+   },
+   "row_hash": "177d1e1776fac74b",
+   "carried": true,
+   "pass": 9
   },
   {
    "row": "C926",
    "screen": "story_hints.staying_in_shape",
    "verdict": "PASS",
-   "line": "",
-   "why": "",
+   "line": "With a pass from the front desk, in your leggings, sports top and sneakers, work out at the gym, 6am to 10pm.",
+   "why": "note: nothing moves the clock",
    "cause": null,
    "note": true,
    "screen_hash": {
-    "text": "c74c20351cc8b0e0",
-    "facts": "c74c20351cc8b0e0",
-    "facts2": "c74c20351cc8b0e0",
-    "all": "c74c20351cc8b0e0"
+    "text": "970d4273ecbcb62a",
+    "facts": "970d4273ecbcb62a",
+    "facts2": "970d4273ecbcb62a",
+    "all": "970d4273ecbcb62a"
    },
    "row_hash": "177d1e1776fac74b",
    "carried": true,
-   "pass": 2
+   "pass": 10
   },
   {
    "row": "C926",
@@ -7750,6 +9640,24 @@
   },
   {
    "row": "C926",
+   "screen": "story_hints.the_man_next_door",
+   "verdict": "PASS",
+   "line": "The man next door sits on his porch, weekday evenings 5 to 8pm and on Sundays. Walk down your street and say hello.",
+   "why": "note: nothing moves the clock",
+   "cause": null,
+   "note": true,
+   "screen_hash": {
+    "text": "59aaaf8330e3ab03",
+    "facts": "59aaaf8330e3ab03",
+    "facts2": "59aaaf8330e3ab03",
+    "all": "59aaaf8330e3ab03"
+   },
+   "row_hash": "177d1e1776fac74b",
+   "carried": false,
+   "pass": 10
+  },
+  {
+   "row": "C926",
    "screen": "story_hints.the_mirror",
    "verdict": "N/A",
    "line": "From your second week, three girls own the mirror in the women's bathroom off the Quad, weekdays 8 to 9am and 1 to 2pm.",
@@ -7765,6 +9673,24 @@
    "row_hash": "177d1e1776fac74b",
    "carried": true,
    "pass": 6
+  },
+  {
+   "row": "C926",
+   "screen": "walkthroughs.paying_wt",
+   "verdict": "PASS",
+   "line": "Mark wants your share every Sunday morning: $75 to start.",
+   "why": "note: nothing moves the clock",
+   "cause": null,
+   "note": true,
+   "screen_hash": {
+    "text": "aee2d0faba660dca",
+    "facts": "aee2d0faba660dca",
+    "facts2": "aee2d0faba660dca",
+    "all": "aee2d0faba660dca"
+   },
+   "row_hash": "177d1e1776fac74b",
+   "carried": false,
+   "pass": 10
   },
   {
    "row": "C927",
@@ -7817,21 +9743,39 @@
   },
   {
    "row": "C927",
-   "screen": "story_hints.staying_in_shape",
+   "screen": "story_hints.paying_your_way",
    "verdict": "N/A",
-   "line": "",
-   "why": "No exit on a hint entry.",
+   "line": "Mark collects the rent at the kitchen table on Sunday mornings, 8am to noon. Find the money before then.",
+   "why": "note: no exit",
    "cause": null,
    "note": true,
    "screen_hash": {
-    "text": "c74c20351cc8b0e0",
-    "facts": "c74c20351cc8b0e0",
-    "facts2": "c74c20351cc8b0e0",
-    "all": "c74c20351cc8b0e0"
+    "text": "e0e3d0f456f740b4",
+    "facts": "e0e3d0f456f740b4",
+    "facts2": "e0e3d0f456f740b4",
+    "all": "e0e3d0f456f740b4"
    },
    "row_hash": "4e86d143688ba8e5",
    "carried": true,
-   "pass": 2
+   "pass": 9
+  },
+  {
+   "row": "C927",
+   "screen": "story_hints.staying_in_shape",
+   "verdict": "N/A",
+   "line": "With a pass from the front desk, in your leggings, sports top and sneakers, work out at the gym, 6am to 10pm.",
+   "why": "note: no exit",
+   "cause": null,
+   "note": true,
+   "screen_hash": {
+    "text": "970d4273ecbcb62a",
+    "facts": "970d4273ecbcb62a",
+    "facts2": "970d4273ecbcb62a",
+    "all": "970d4273ecbcb62a"
+   },
+   "row_hash": "4e86d143688ba8e5",
+   "carried": true,
+   "pass": 10
   },
   {
    "row": "C927",
@@ -7889,6 +9833,24 @@
   },
   {
    "row": "C927",
+   "screen": "story_hints.the_man_next_door",
+   "verdict": "N/A",
+   "line": "The man next door sits on his porch, weekday evenings 5 to 8pm and on Sundays. Walk down your street and say hello.",
+   "why": "note: no exit on a page entry",
+   "cause": null,
+   "note": true,
+   "screen_hash": {
+    "text": "59aaaf8330e3ab03",
+    "facts": "59aaaf8330e3ab03",
+    "facts2": "59aaaf8330e3ab03",
+    "all": "59aaaf8330e3ab03"
+   },
+   "row_hash": "4e86d143688ba8e5",
+   "carried": false,
+   "pass": 10
+  },
+  {
+   "row": "C927",
    "screen": "story_hints.the_mirror",
    "verdict": "N/A",
    "line": "From your second week, three girls own the mirror in the women's bathroom off the Quad, weekdays 8 to 9am and 1 to 2pm.",
@@ -7904,6 +9866,24 @@
    "row_hash": "4e86d143688ba8e5",
    "carried": true,
    "pass": 6
+  },
+  {
+   "row": "C927",
+   "screen": "walkthroughs.paying_wt",
+   "verdict": "N/A",
+   "line": "Mark wants your share every Sunday morning: $75 to start.",
+   "why": "note: no exit on a page entry",
+   "cause": null,
+   "note": true,
+   "screen_hash": {
+    "text": "aee2d0faba660dca",
+    "facts": "aee2d0faba660dca",
+    "facts2": "aee2d0faba660dca",
+    "all": "aee2d0faba660dca"
+   },
+   "row_hash": "4e86d143688ba8e5",
+   "carried": false,
+   "pass": 10
   },
   {
    "row": "C928",
@@ -7956,21 +9936,39 @@
   },
   {
    "row": "C928",
-   "screen": "story_hints.staying_in_shape",
+   "screen": "story_hints.paying_your_way",
    "verdict": "PASS",
-   "line": "In your leggings and sports top, work out at the gym, 6am to 10pm. The trainer's in weekdays 6 to 10am and 5 to 9pm, and Saturday 8am to 2pm.",
-   "why": "Hours as a rule, the clock not printed.",
+   "line": "Mark collects the rent at the kitchen table on Sunday mornings, 8am to noon. Find the money before then.",
+   "why": "the clock is not printed",
    "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "c74c20351cc8b0e0",
-    "facts": "c74c20351cc8b0e0",
-    "facts2": "c74c20351cc8b0e0",
-    "all": "c74c20351cc8b0e0"
+    "text": "e0e3d0f456f740b4",
+    "facts": "e0e3d0f456f740b4",
+    "facts2": "e0e3d0f456f740b4",
+    "all": "e0e3d0f456f740b4"
    },
    "row_hash": "2c3ccc6bd9929d7f",
    "carried": true,
-   "pass": 2
+   "pass": 9
+  },
+  {
+   "row": "C928",
+   "screen": "story_hints.staying_in_shape",
+   "verdict": "PASS",
+   "line": "With a pass from the front desk, in your leggings, sports top and sneakers, work out at the gym, 6am to 10pm.",
+   "why": "the clock is not printed",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "970d4273ecbcb62a",
+    "facts": "970d4273ecbcb62a",
+    "facts2": "970d4273ecbcb62a",
+    "all": "970d4273ecbcb62a"
+   },
+   "row_hash": "2c3ccc6bd9929d7f",
+   "carried": true,
+   "pass": 10
   },
   {
    "row": "C928",
@@ -8025,6 +10023,24 @@
    "row_hash": "2c3ccc6bd9929d7f",
    "carried": true,
    "pass": 2
+  },
+  {
+   "row": "C928",
+   "screen": "story_hints.the_man_next_door",
+   "verdict": "PASS",
+   "line": "The man next door sits on his porch, weekday evenings 5 to 8pm and on Sundays. Walk down your street and say hello.",
+   "why": "the clock is not printed",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "59aaaf8330e3ab03",
+    "facts": "59aaaf8330e3ab03",
+    "facts2": "59aaaf8330e3ab03",
+    "all": "59aaaf8330e3ab03"
+   },
+   "row_hash": "2c3ccc6bd9929d7f",
+   "carried": false,
+   "pass": 10
   },
   {
    "row": "C928",
@@ -8045,6 +10061,24 @@
    "pass": 6
   },
   {
+   "row": "C928",
+   "screen": "walkthroughs.paying_wt",
+   "verdict": "PASS",
+   "line": "Mark wants your share every Sunday morning: $75 to start.",
+   "why": "the clock is not printed",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "aee2d0faba660dca",
+    "facts": "aee2d0faba660dca",
+    "facts2": "aee2d0faba660dca",
+    "all": "aee2d0faba660dca"
+   },
+   "row_hash": "2c3ccc6bd9929d7f",
+   "carried": false,
+   "pass": 10
+  },
+  {
    "row": "C929",
    "screen": "*",
    "verdict": "N/A",
@@ -8092,24 +10126,42 @@
    "row_hash": "18b0ecdf6d7fc901",
    "carried": true,
    "pass": 2
+  },
+  {
+   "row": "C929",
+   "screen": "story_hints.paying_your_way",
+   "verdict": "PASS",
+   "line": "Mark collects the rent at the kitchen table on Sunday mornings, 8am to noon. Find the money before then.",
+   "why": "not a label; no time tag",
+   "cause": null,
+   "note": true,
+   "screen_hash": {
+    "text": "e0e3d0f456f740b4",
+    "facts": "e0e3d0f456f740b4",
+    "facts2": "e0e3d0f456f740b4",
+    "all": "e0e3d0f456f740b4"
+   },
+   "row_hash": "18b0ecdf6d7fc901",
+   "carried": true,
+   "pass": 9
   },
   {
    "row": "C929",
    "screen": "story_hints.staying_in_shape",
    "verdict": "PASS",
-   "line": "In your leggings and sports top, work out at the gym, 6am to 10pm. The trainer's in weekdays 6 to 10am and 5 to 9pm, and Saturday 8am to 2pm.",
-   "why": "No time tag.",
+   "line": "With a pass from the front desk, in your leggings, sports top and sneakers, work out at the gym, 6am to 10pm.",
+   "why": "not a label; no time tag",
    "cause": null,
    "note": true,
    "screen_hash": {
-    "text": "c74c20351cc8b0e0",
-    "facts": "c74c20351cc8b0e0",
-    "facts2": "c74c20351cc8b0e0",
-    "all": "c74c20351cc8b0e0"
+    "text": "970d4273ecbcb62a",
+    "facts": "970d4273ecbcb62a",
+    "facts2": "970d4273ecbcb62a",
+    "all": "970d4273ecbcb62a"
    },
    "row_hash": "18b0ecdf6d7fc901",
    "carried": true,
-   "pass": 2
+   "pass": 10
   },
   {
    "row": "C929",
@@ -8167,6 +10219,24 @@
   },
   {
    "row": "C929",
+   "screen": "story_hints.the_man_next_door",
+   "verdict": "PASS",
+   "line": "The man next door sits on his porch, weekday evenings 5 to 8pm and on Sundays. Walk down your street and say hello.",
+   "why": "not a label",
+   "cause": null,
+   "note": true,
+   "screen_hash": {
+    "text": "59aaaf8330e3ab03",
+    "facts": "59aaaf8330e3ab03",
+    "facts2": "59aaaf8330e3ab03",
+    "all": "59aaaf8330e3ab03"
+   },
+   "row_hash": "18b0ecdf6d7fc901",
+   "carried": false,
+   "pass": 10
+  },
+  {
+   "row": "C929",
    "screen": "story_hints.the_mirror",
    "verdict": "N/A",
    "line": "From your second week, three girls own the mirror in the women's bathroom off the Quad, weekdays 8 to 9am and 1 to 2pm.",
@@ -8182,6 +10252,24 @@
    "row_hash": "18b0ecdf6d7fc901",
    "carried": true,
    "pass": 6
+  },
+  {
+   "row": "C929",
+   "screen": "walkthroughs.paying_wt",
+   "verdict": "PASS",
+   "line": "Mark wants your share every Sunday morning: $75 to start.",
+   "why": "note: not a label",
+   "cause": null,
+   "note": true,
+   "screen_hash": {
+    "text": "aee2d0faba660dca",
+    "facts": "aee2d0faba660dca",
+    "facts2": "aee2d0faba660dca",
+    "all": "aee2d0faba660dca"
+   },
+   "row_hash": "18b0ecdf6d7fc901",
+   "carried": false,
+   "pass": 10
   },
   {
    "row": "C930",
@@ -8234,21 +10322,39 @@
   },
   {
    "row": "C930",
-   "screen": "story_hints.staying_in_shape",
+   "screen": "story_hints.paying_your_way",
    "verdict": "N/A",
-   "line": "",
-   "why": "Not a row.",
+   "line": "Mark collects the rent at the kitchen table on Sunday mornings, 8am to noon. Find the money before then.",
+   "why": "note: not a row",
    "cause": null,
    "note": true,
    "screen_hash": {
-    "text": "c74c20351cc8b0e0",
-    "facts": "c74c20351cc8b0e0",
-    "facts2": "c74c20351cc8b0e0",
-    "all": "c74c20351cc8b0e0"
+    "text": "e0e3d0f456f740b4",
+    "facts": "e0e3d0f456f740b4",
+    "facts2": "e0e3d0f456f740b4",
+    "all": "e0e3d0f456f740b4"
    },
    "row_hash": "beb57cd46fe906bf",
    "carried": true,
-   "pass": 2
+   "pass": 9
+  },
+  {
+   "row": "C930",
+   "screen": "story_hints.staying_in_shape",
+   "verdict": "N/A",
+   "line": "With a pass from the front desk, in your leggings, sports top and sneakers, work out at the gym, 6am to 10pm.",
+   "why": "note: not a row",
+   "cause": null,
+   "note": true,
+   "screen_hash": {
+    "text": "970d4273ecbcb62a",
+    "facts": "970d4273ecbcb62a",
+    "facts2": "970d4273ecbcb62a",
+    "all": "970d4273ecbcb62a"
+   },
+   "row_hash": "beb57cd46fe906bf",
+   "carried": true,
+   "pass": 10
   },
   {
    "row": "C930",
@@ -8306,6 +10412,24 @@
   },
   {
    "row": "C930",
+   "screen": "story_hints.the_man_next_door",
+   "verdict": "N/A",
+   "line": "The man next door sits on his porch, weekday evenings 5 to 8pm and on Sundays. Walk down your street and say hello.",
+   "why": "note: not a row",
+   "cause": null,
+   "note": true,
+   "screen_hash": {
+    "text": "59aaaf8330e3ab03",
+    "facts": "59aaaf8330e3ab03",
+    "facts2": "59aaaf8330e3ab03",
+    "all": "59aaaf8330e3ab03"
+   },
+   "row_hash": "beb57cd46fe906bf",
+   "carried": false,
+   "pass": 10
+  },
+  {
+   "row": "C930",
    "screen": "story_hints.the_mirror",
    "verdict": "N/A",
    "line": "From your second week, three girls own the mirror in the women's bathroom off the Quad, weekdays 8 to 9am and 1 to 2pm.",
@@ -8321,6 +10445,24 @@
    "row_hash": "beb57cd46fe906bf",
    "carried": true,
    "pass": 6
+  },
+  {
+   "row": "C930",
+   "screen": "walkthroughs.paying_wt",
+   "verdict": "N/A",
+   "line": "Mark wants your share every Sunday morning: $75 to start.",
+   "why": "note: not a row",
+   "cause": null,
+   "note": true,
+   "screen_hash": {
+    "text": "aee2d0faba660dca",
+    "facts": "aee2d0faba660dca",
+    "facts2": "aee2d0faba660dca",
+    "all": "aee2d0faba660dca"
+   },
+   "row_hash": "beb57cd46fe906bf",
+   "carried": false,
+   "pass": 10
   },
   {
    "row": "C931",
@@ -8373,21 +10515,39 @@
   },
   {
    "row": "C931",
-   "screen": "story_hints.staying_in_shape",
+   "screen": "story_hints.paying_your_way",
    "verdict": "N/A",
-   "line": "",
-   "why": "No time_of_day on a hint entry.",
+   "line": "Mark collects the rent at the kitchen table on Sunday mornings, 8am to noon. Find the money before then.",
+   "why": "note: no time_of_day",
    "cause": null,
    "note": true,
    "screen_hash": {
-    "text": "c74c20351cc8b0e0",
-    "facts": "c74c20351cc8b0e0",
-    "facts2": "c74c20351cc8b0e0",
-    "all": "c74c20351cc8b0e0"
+    "text": "e0e3d0f456f740b4",
+    "facts": "e0e3d0f456f740b4",
+    "facts2": "e0e3d0f456f740b4",
+    "all": "e0e3d0f456f740b4"
    },
    "row_hash": "1aadffd96e76381c",
    "carried": true,
-   "pass": 2
+   "pass": 9
+  },
+  {
+   "row": "C931",
+   "screen": "story_hints.staying_in_shape",
+   "verdict": "N/A",
+   "line": "With a pass from the front desk, in your leggings, sports top and sneakers, work out at the gym, 6am to 10pm.",
+   "why": "note: no time_of_day",
+   "cause": null,
+   "note": true,
+   "screen_hash": {
+    "text": "970d4273ecbcb62a",
+    "facts": "970d4273ecbcb62a",
+    "facts2": "970d4273ecbcb62a",
+    "all": "970d4273ecbcb62a"
+   },
+   "row_hash": "1aadffd96e76381c",
+   "carried": true,
+   "pass": 10
   },
   {
    "row": "C931",
@@ -8445,6 +10605,24 @@
   },
   {
    "row": "C931",
+   "screen": "story_hints.the_man_next_door",
+   "verdict": "N/A",
+   "line": "The man next door sits on his porch, weekday evenings 5 to 8pm and on Sundays. Walk down your street and say hello.",
+   "why": "note: no time_of_day",
+   "cause": null,
+   "note": true,
+   "screen_hash": {
+    "text": "59aaaf8330e3ab03",
+    "facts": "59aaaf8330e3ab03",
+    "facts2": "59aaaf8330e3ab03",
+    "all": "59aaaf8330e3ab03"
+   },
+   "row_hash": "1aadffd96e76381c",
+   "carried": false,
+   "pass": 10
+  },
+  {
+   "row": "C931",
    "screen": "story_hints.the_mirror",
    "verdict": "N/A",
    "line": "From your second week, three girls own the mirror in the women's bathroom off the Quad, weekdays 8 to 9am and 1 to 2pm.",
@@ -8460,6 +10638,24 @@
    "row_hash": "1aadffd96e76381c",
    "carried": true,
    "pass": 6
+  },
+  {
+   "row": "C931",
+   "screen": "walkthroughs.paying_wt",
+   "verdict": "N/A",
+   "line": "Mark wants your share every Sunday morning: $75 to start.",
+   "why": "note: no time_of_day",
+   "cause": null,
+   "note": true,
+   "screen_hash": {
+    "text": "aee2d0faba660dca",
+    "facts": "aee2d0faba660dca",
+    "facts2": "aee2d0faba660dca",
+    "all": "aee2d0faba660dca"
+   },
+   "row_hash": "1aadffd96e76381c",
+   "carried": false,
+   "pass": 10
   },
   {
    "row": "C951",
@@ -8475,6 +10671,24 @@
    "pass": 2
   },
   {
+   "row": "C951",
+   "screen": "walkthroughs.paying_wt",
+   "verdict": "PASS",
+   "line": "Mark wants your share every Sunday morning: $75 to start.",
+   "why": "amounts in prose",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "aee2d0faba660dca",
+    "facts": "aee2d0faba660dca",
+    "facts2": "aee2d0faba660dca",
+    "all": "aee2d0faba660dca"
+   },
+   "row_hash": "fe3b305ad0c265a7",
+   "carried": false,
+   "pass": 10
+  },
+  {
    "row": "C952",
    "screen": "*",
    "verdict": "PASS",
@@ -8525,21 +10739,39 @@
   },
   {
    "row": "C952",
-   "screen": "story_hints.staying_in_shape",
+   "screen": "story_hints.paying_your_way",
    "verdict": "PASS",
-   "line": "In your leggings and sports top, work out at the gym, 6am to 10pm. The trainer's in weekdays 6 to 10am and 5 to 9pm, and Saturday 8am to 2pm.",
-   "why": "Hours match PLAN 91 and the rows; no price stated.",
+   "line": "Mark collects the rent at the kitchen table on Sunday mornings, 8am to noon. Find the money before then.",
+   "why": "no price; Sunday 8 to noon matches Mark's row",
    "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "c74c20351cc8b0e0",
-    "facts": "c74c20351cc8b0e0",
-    "facts2": "c74c20351cc8b0e0",
-    "all": "c74c20351cc8b0e0"
+    "text": "e0e3d0f456f740b4",
+    "facts": "e0e3d0f456f740b4",
+    "facts2": "e0e3d0f456f740b4",
+    "all": "e0e3d0f456f740b4"
    },
    "row_hash": "0ded4fca6fc71925",
    "carried": true,
-   "pass": 2
+   "pass": 9
+  },
+  {
+   "row": "C952",
+   "screen": "story_hints.staying_in_shape",
+   "verdict": "PASS",
+   "line": "With a pass from the front desk, in your leggings, sports top and sneakers, work out at the gym, 6am to 10pm.",
+   "why": "no price; hours match PLAN:178 and the rows; the three garments match the workout's and the run's conditions",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "970d4273ecbcb62a",
+    "facts": "970d4273ecbcb62a",
+    "facts2": "970d4273ecbcb62a",
+    "all": "970d4273ecbcb62a"
+   },
+   "row_hash": "0ded4fca6fc71925",
+   "carried": true,
+   "pass": 10
   },
   {
    "row": "C952",
@@ -8594,6 +10826,24 @@
    "row_hash": "0ded4fca6fc71925",
    "carried": true,
    "pass": 2
+  },
+  {
+   "row": "C952",
+   "screen": "story_hints.the_man_next_door",
+   "verdict": "PASS",
+   "line": "The man next door sits on his porch, weekday evenings 5 to 8pm and on Sundays. Walk down your street and say hello.",
+   "why": "5 to 8pm weekdays and Sundays agree with PLAN:567 and his rows",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "59aaaf8330e3ab03",
+    "facts": "59aaaf8330e3ab03",
+    "facts2": "59aaaf8330e3ab03",
+    "all": "59aaaf8330e3ab03"
+   },
+   "row_hash": "0ded4fca6fc71925",
+   "carried": false,
+   "pass": 10
   },
   {
    "row": "C952",
@@ -8614,6 +10864,24 @@
    "pass": 6
   },
   {
+   "row": "C952",
+   "screen": "walkthroughs.paying_wt",
+   "verdict": "PASS",
+   "line": "Mark wants your share every Sunday morning: $75 to start. / An hour at the caf\u00e9 pays $5; a four-hour shift pays $22.",
+   "why": "$75, $5, $22 agree with PLAN and the rows; release 2 agrees with PLAN:280",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "aee2d0faba660dca",
+    "facts": "aee2d0faba660dca",
+    "facts2": "aee2d0faba660dca",
+    "all": "aee2d0faba660dca"
+   },
+   "row_hash": "0ded4fca6fc71925",
+   "carried": false,
+   "pass": 10
+  },
+  {
    "row": "C953",
    "screen": "*",
    "verdict": "PASS",
@@ -8627,6 +10895,24 @@
    "pass": 1
   },
   {
+   "row": "C953",
+   "screen": "walkthroughs.paying_wt",
+   "verdict": "N/A",
+   "line": "Mark wants your share every Sunday morning: $75 to start.",
+   "why": "note: no label",
+   "cause": null,
+   "note": true,
+   "screen_hash": {
+    "text": "aee2d0faba660dca",
+    "facts": "aee2d0faba660dca",
+    "facts2": "aee2d0faba660dca",
+    "all": "aee2d0faba660dca"
+   },
+   "row_hash": "826bf82fe26afd13",
+   "carried": false,
+   "pass": 10
+  },
+  {
    "row": "C954",
    "screen": "*",
    "verdict": "PASS",
@@ -8638,6 +10924,24 @@
    "row_hash": "c8001b93946f6f80",
    "carried": true,
    "pass": 2
+  },
+  {
+   "row": "C954",
+   "screen": "walkthroughs.paying_wt",
+   "verdict": "PASS",
+   "line": "An hour at the caf\u00e9 pays $5; a four-hour shift pays $22. Either way it's counted into your hand when you finish.",
+   "why": "pay said in prose",
+   "cause": null,
+   "note": true,
+   "screen_hash": {
+    "text": "aee2d0faba660dca",
+    "facts": "aee2d0faba660dca",
+    "facts2": "aee2d0faba660dca",
+    "all": "aee2d0faba660dca"
+   },
+   "row_hash": "c8001b93946f6f80",
+   "carried": false,
+   "pass": 10
   },
   {
    "row": "L106",
@@ -8775,21 +11079,39 @@
   },
   {
    "row": "L167",
-   "screen": "story_hints.staying_in_shape",
+   "screen": "story_hints.paying_your_way",
    "verdict": "N/A",
-   "line": "",
-   "why": "Not a row.",
+   "line": "Mark collects the rent at the kitchen table on Sunday mornings, 8am to noon. Find the money before then.",
+   "why": "not a row",
    "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "c74c20351cc8b0e0",
-    "facts": "c74c20351cc8b0e0",
-    "facts2": "c74c20351cc8b0e0",
-    "all": "c74c20351cc8b0e0"
+    "text": "e0e3d0f456f740b4",
+    "facts": "e0e3d0f456f740b4",
+    "facts2": "e0e3d0f456f740b4",
+    "all": "e0e3d0f456f740b4"
    },
    "row_hash": "e64ce2672d85d2d8",
    "carried": true,
-   "pass": 2
+   "pass": 9
+  },
+  {
+   "row": "L167",
+   "screen": "story_hints.staying_in_shape",
+   "verdict": "N/A",
+   "line": "With a pass from the front desk, in your leggings, sports top and sneakers, work out at the gym, 6am to 10pm.",
+   "why": "not a row",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "970d4273ecbcb62a",
+    "facts": "970d4273ecbcb62a",
+    "facts2": "970d4273ecbcb62a",
+    "all": "970d4273ecbcb62a"
+   },
+   "row_hash": "e64ce2672d85d2d8",
+   "carried": true,
+   "pass": 10
   },
   {
    "row": "L167",
@@ -8847,6 +11169,24 @@
   },
   {
    "row": "L167",
+   "screen": "story_hints.the_man_next_door",
+   "verdict": "N/A",
+   "line": "The man next door sits on his porch, weekday evenings 5 to 8pm and on Sundays. Walk down your street and say hello.",
+   "why": "not a row",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "59aaaf8330e3ab03",
+    "facts": "59aaaf8330e3ab03",
+    "facts2": "59aaaf8330e3ab03",
+    "all": "59aaaf8330e3ab03"
+   },
+   "row_hash": "e64ce2672d85d2d8",
+   "carried": false,
+   "pass": 10
+  },
+  {
+   "row": "L167",
    "screen": "story_hints.the_mirror",
    "verdict": "N/A",
    "line": "From your second week, three girls own the mirror in the women's bathroom off the Quad, weekdays 8 to 9am and 1 to 2pm.",
@@ -8862,6 +11202,24 @@
    "row_hash": "e64ce2672d85d2d8",
    "carried": true,
    "pass": 6
+  },
+  {
+   "row": "L167",
+   "screen": "walkthroughs.paying_wt",
+   "verdict": "N/A",
+   "line": "Mark wants your share every Sunday morning: $75 to start.",
+   "why": "not a row",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "aee2d0faba660dca",
+    "facts": "aee2d0faba660dca",
+    "facts2": "aee2d0faba660dca",
+    "all": "aee2d0faba660dca"
+   },
+   "row_hash": "e64ce2672d85d2d8",
+   "carried": false,
+   "pass": 10
   },
   {
    "row": "L170",
@@ -8940,21 +11298,39 @@
   },
   {
    "row": "L172",
-   "screen": "story_hints.staying_in_shape",
+   "screen": "story_hints.paying_your_way",
    "verdict": "PASS",
-   "line": "story_hints.staying_in_shape | a goal card is shown, the clock moves",
-   "why": "On P46's Does:.",
+   "line": "story_hints.paying_your_way",
+   "why": "on P46's Does:",
    "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "c74c20351cc8b0e0",
-    "facts": "c74c20351cc8b0e0",
-    "facts2": "c74c20351cc8b0e0",
-    "all": "c74c20351cc8b0e0"
+    "text": "e0e3d0f456f740b4",
+    "facts": "e0e3d0f456f740b4",
+    "facts2": "e0e3d0f456f740b4",
+    "all": "e0e3d0f456f740b4"
    },
    "row_hash": "77e6271dc896a2b3",
    "carried": true,
-   "pass": 2
+   "pass": 9
+  },
+  {
+   "row": "L172",
+   "screen": "story_hints.staying_in_shape",
+   "verdict": "PASS",
+   "line": "story_hints.staying_in_shape",
+   "why": "on P46's Does: (cards/P46.md:144)",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "970d4273ecbcb62a",
+    "facts": "970d4273ecbcb62a",
+    "facts2": "970d4273ecbcb62a",
+    "all": "970d4273ecbcb62a"
+   },
+   "row_hash": "77e6271dc896a2b3",
+   "carried": true,
+   "pass": 10
   },
   {
    "row": "L172",
@@ -9012,6 +11388,24 @@
   },
   {
    "row": "L172",
+   "screen": "story_hints.the_man_next_door",
+   "verdict": "PASS",
+   "line": "The man next door sits on his porch, weekday evenings 5 to 8pm and on Sundays. Walk down your street and say hello.",
+   "why": "on P46's Does: (cards/P46.md:142)",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "59aaaf8330e3ab03",
+    "facts": "59aaaf8330e3ab03",
+    "facts2": "59aaaf8330e3ab03",
+    "all": "59aaaf8330e3ab03"
+   },
+   "row_hash": "77e6271dc896a2b3",
+   "carried": false,
+   "pass": 10
+  },
+  {
+   "row": "L172",
    "screen": "story_hints.the_mirror",
    "verdict": "PASS",
    "line": "From your second week, three girls own the mirror in the women's bathroom off the Quad, weekdays 8 to 9am and 1 to 2pm.",
@@ -9027,12 +11421,30 @@
    "row_hash": "77e6271dc896a2b3",
    "carried": true,
    "pass": 6
+  },
+  {
+   "row": "L172",
+   "screen": "walkthroughs.paying_wt",
+   "verdict": "PASS",
+   "line": "Mark wants your share every Sunday morning: $75 to start.",
+   "why": "on P46's Does: (cards/P46.md:148)",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "aee2d0faba660dca",
+    "facts": "aee2d0faba660dca",
+    "facts2": "aee2d0faba660dca",
+    "all": "aee2d0faba660dca"
+   },
+   "row_hash": "77e6271dc896a2b3",
+   "carried": false,
+   "pass": 10
   }
  ],
  "causes": [],
  "pending": [],
- "asked": 1,
- "answered": 1,
+ "asked": 93,
+ "answered": 93,
  "pass_items": [],
  "unowed": []
 }

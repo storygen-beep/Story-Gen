@@ -197,6 +197,14 @@ bands = [
 
 
 # P11 — goal 1's count and the rent total, internal (not on the sidebar).
+# P66 — the rent debt, in weeks at the current rate (LO 2026-11-27: "yes to all 4"); hidden, no toast.
+[[traits.labels]]
+key = "rent_weeks_owed"
+label = "Rent weeks owed"
+hidden = true
+toast = false
+
+# P66 — sundays_paid is kept as a key a save may hold (C1656); nothing reads or writes it in release 1.
 [[traits.labels]]
 key = "sundays_paid"
 label = "Sundays paid"
@@ -264,8 +272,8 @@ when = [{ flag = "goal1_shown", op = "is_true" }]
 walkthrough = "paying_wt"
 hints = [
   { when = [], text = "Mark collects the rent at the kitchen table on Sunday mornings, 8am to noon. Find the money before then." },
-  { when = [{ flag = "rent_paid_once", op = "is_true" }], text = "Pay Mark at the kitchen table every Sunday morning. Four Sundays in a row, and you're paying your own way." },
-  { when = [{ trait = "sundays_paid", subject = "player", op = "gte", value = 4 }], text = "end" },
+  # P66 — release 1 ends this storyline at the first payment (LO 2026-11-27: "just one pay and then it says more in the further releases").
+  { when = [{ flag = "rent_paid_once", op = "is_true" }], text = "end" },
 ]
 
 [[story_hints]]
@@ -332,7 +340,7 @@ title = "The Man Next Door"
 category = "Off-campus 🏙️"
 description = "Someone on your street is always watching."
 hints = [
-  { when = [], text = "The man next door sits on his porch. Walk down your street on a Sunday, 9am to noon or 5 to 8pm." },
+  { when = [], text = "The man next door sits on his porch, weekday evenings 5 to 8pm and on Sundays. Walk down your street and say hello." },
   { when = [{ flag = "met_vance", op = "is_true" }], text = "end" },
 ]
 
@@ -350,8 +358,8 @@ title = "Staying in Shape"
 category = "Hobbies 🎨"
 description = "The park and the gym."
 hints = [
-  { when = [], text = "In your leggings and sports top, work out at the gym, 6am to 10pm. The trainer's in weekdays 6 to 10am and 5 to 9pm, and Saturday 8am to 2pm." },
-  { when = [{ flag = "met_marco", op = "is_true" }], text = "Now go for a run in the park, 6am to 9pm, in the same leggings and top." },
+  { when = [], text = "With a pass from the front desk, in your leggings, sports top and sneakers, work out at the gym, 6am to 10pm. The trainer's in weekdays 6 to 10am and 5 to 9pm, and Saturday 8am to 2pm." },
+  { when = [{ flag = "met_marco", op = "is_true" }], text = "Now go for a run in the park, 6am to 9pm, in the same leggings, top and sneakers." },
   { when = [{ flag = "ran_once", op = "is_true" }], text = "end" },
 ]
 
@@ -385,14 +393,14 @@ hints = [
 [[walkthroughs]]
 id = "paying_wt"
 title = "Paying Your Way"
-overview = "Mark wants $75 every Sunday morning."
+overview = "Mark wants your share every Sunday morning: $75 to start."
 guard = { when = [{ flag = "met_mark", op = "is_true" }], text = "You haven't met them yet." }
 steps = [
   { when = [{ flag = "met_mark", op = "is_true" }], done_text = "Mark told you the rent.", todo_text = "Hear Mark out in the kitchen." },
   { when = [{ flag = "cafe_hired", op = "is_true" }], done_text = "You got the café job.", todo_text = "Ask about the Help Wanted sign at the Café in town, Monday to Saturday from 10am." },
   { kind = "idea", text = "An hour at the café pays $5; a four-hour shift pays $22. Either way it's counted into your hand when you finish." },
   { when = [{ flag = "rent_paid_once", op = "is_true" }], done_text = "You paid Mark once.", todo_text = "Pay Mark at the kitchen table on Sunday morning." },
-  { when = [{ trait = "sundays_paid", subject = "player", op = "gte", value = 4 }], done_text = "Four Sundays in a row: you pay your own way.", todo_text = "Pay Mark in full four Sundays in a row." },
+  { kind = "stop", text = "The rent storyline stops here for now. Mark still collects every Sunday; paying your own way, four Sundays in a row, comes in release 2." },
 ]
 
 # P21 — Tom and Chris on the People page once met, with where and when.
@@ -562,12 +570,11 @@ flagEffects = [
   # P11 — the rent week: cleared on Tuesday, after Monday's check has read it
   { targetType = "player", flag = "rent_handled_this_week", op = "unset", conditions = { version = "1.0", logic = "AND", items = [{ type = "weekday", weekdays = [1] }] } },
   { targetType = "player", flag = "partied_this_week", op = "unset", conditions = { version = "1.0", logic = "AND", items = [{ type = "weekday", weekdays = [0] }] } },
-  # P11 — four Sundays in a row: goal 1 done (PLAN §2, §8i)
-  { targetType = "player", flag = "pays_her_own_way", op = "set", conditions = { version = "1.0", logic = "AND", items = [{ type = "trait", subject = "player", trait_key = "sundays_paid", operator = "gte", value = 4 }] } },
 ]
-# P11 — on Monday, a Sunday with no payment breaks the run
 traitEffects = [
-  { targetType = "player", trait = "sundays_paid", op = "set", value = 0, conditions = { version = "1.0", logic = "AND", items = [{ type = "weekday", weekdays = [0] }, { type = "flag", subject = "player", flag_key = "rent_handled_this_week", operator = "is_false" }, { type = "flag", subject = "player", flag_key = "pays_her_own_way", operator = "is_false" }] } },
+  # P66 — a Sunday she never brought to Mark is a short one too: on Monday, an unhandled week adds a week owed
+  # (LO 2026-11-27: "yes to all 4"; reader pass: staying away must not be cheaper than saying no).
+  { targetType = "player", trait = "rent_weeks_owed", op = "add", value = 1, cap = 3, conditions = { version = "1.0", logic = "AND", items = [{ type = "weekday", weekdays = [0] }, { type = "flag", subject = "player", flag_key = "rent_handled_this_week", operator = "is_false" }] } },
   # P34 — meals: one count a day
   { targetType = "player", trait = "meals_today", op = "set", value = 0 },
   { targetType = "player", trait = "study_today", op = "set", value = 0 },
@@ -730,6 +737,28 @@ description = "Into making something: the stage, the guitar."
 
 # LO 2026-11-24, "yes hide popups": bookkeeping flags don't toast; flags the player should notice still do.
 # P49 — the "comes to her" flags: bookkeeping, no toast.
+# P65
+[[flags.labels]]
+key = "gym_day_pass"
+label = "Gym day pass"
+toast = false
+
+[[flags.labels]]
+key = "gym_week_pass"
+label = "Gym week pass"
+toast = false
+
+[[flags.labels]]
+key = "gym_month_pass"
+label = "Gym month pass"
+toast = false
+
+# P64
+[[flags.labels]]
+key = "watched_after_dark"
+label = "Watched after dark"
+toast = false
+
 [[flags.labels]]
 key = "came_to_her_today"
 label = "Came to her today"

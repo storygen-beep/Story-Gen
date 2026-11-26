@@ -1,6 +1,6 @@
 {
  "piece": "P53",
- "pass": 6,
+ "pass": 7,
  "screens": {
   "*": "4f53cda18c2baa0c"
  },
@@ -47,7 +47,7 @@
   "places#7": "2a095bf54f175e5e",
   "places#8": "c3ea8d01465e7298",
   "places#9": "f4cd9ab5f62bc6fc",
-  "places#10": "309f0141d342dc6f",
+  "places#10": "d6f0b4b357efc043",
   "C442": "a2b07f40e1a9e908",
   "C449": "ac5932d70cd775a1",
   "C451": "6b0fd679047fc9b8",
@@ -63,7 +63,7 @@
   "voice#2": "a40d4073409a2705",
   "voice#3": "4777d2c1251214c2",
   "voice#4": "ac2fdd7245f436db",
-  "voice#5": "7bbdd4290054e601",
+  "voice#5": "f74d350a978e124c",
   "voice#6": "df1f5dc8b6d21538",
   "voice#7": "321cc76cff93aadb",
   "voice#8": "4362249fb5f9616e"
@@ -222,7 +222,7 @@
    "note": false,
    "screen_hash": null,
    "row_hash": "80d415cf08e0ebfe",
-   "carried": false,
+   "carried": true,
    "pass": 6
   },
   {
@@ -658,14 +658,14 @@
    "row": "places#10",
    "screen": "*",
    "verdict": "PASS",
-   "line": "The quad. Paths cut across the grass to every building on campus.",
-   "why": "every hidden place on the map is still pointed at by a hint step (Faculty Offices, Zoe's Apartment)",
+   "line": "campus_offices: hidden_until = { flag = \"goal1_shown\" }",
+   "why": "the campus area holds the Faculty Offices behind goal1_shown, set on every exit of the opening (L3400/3407/3414), so it is open from the end of the opening; no step to point at",
    "cause": null,
    "note": false,
    "screen_hash": "4f53cda18c2baa0c",
-   "row_hash": "309f0141d342dc6f",
-   "carried": true,
-   "pass": 1
+   "row_hash": "d6f0b4b357efc043",
+   "carried": false,
+   "pass": 7
   },
   {
    "row": "places#2",
@@ -827,14 +827,14 @@
    "row": "voice#5",
    "screen": "*",
    "verdict": "N/A",
-   "line": "The quad. Paths cut across the grass to every building on campus.",
-   "why": "no one else on these screens",
+   "line": "Builds: campus (a place)",
+   "why": "no scene path",
    "cause": null,
    "note": false,
    "screen_hash": "4f53cda18c2baa0c",
-   "row_hash": "7bbdd4290054e601",
+   "row_hash": "f74d350a978e124c",
    "carried": true,
-   "pass": 1
+   "pass": 7
   },
   {
    "row": "voice#6",

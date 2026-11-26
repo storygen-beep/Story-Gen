@@ -1,6 +1,6 @@
 {
  "piece": "P55",
- "pass": 4,
+ "pass": 5,
  "screens": {
   "*": "4f53cda18c2baa0c"
  },
@@ -33,7 +33,7 @@
   "voice#2": "a40d4073409a2705",
   "voice#3": "4777d2c1251214c2",
   "voice#4": "ac2fdd7245f436db",
-  "voice#5": "7bbdd4290054e601",
+  "voice#5": "f74d350a978e124c",
   "voice#6": "df1f5dc8b6d21538",
   "voice#7": "321cc76cff93aadb",
   "voice#8": "4362249fb5f9616e",
@@ -1252,7 +1252,7 @@
    "note": false,
    "screen_hash": "4f53cda18c2baa0c",
    "row_hash": "4ca489a2e70123f0",
-   "carried": false,
+   "carried": true,
    "pass": 4
   },
   {
@@ -2494,14 +2494,14 @@
    "row": "voice#5",
    "screen": "*",
    "verdict": "PASS",
-   "line": "each moment has a spoken line; narration leads",
-   "why": "people speak, under 5:1 (check.py talk green on P38-P41)",
+   "line": "worst: walk_mark_phone moment>walkin 45 : 9; walk_chris_store moment>out 45 : 9",
+   "why": "every one of the 21 walk-ins is at or under 5 : 1 (5.0 at most)",
    "cause": null,
    "note": false,
    "screen_hash": "4f53cda18c2baa0c",
-   "row_hash": "7bbdd4290054e601",
-   "carried": true,
-   "pass": 1
+   "row_hash": "f74d350a978e124c",
+   "carried": false,
+   "pass": 5
   },
   {
    "row": "voice#6",

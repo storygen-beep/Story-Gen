@@ -1,6 +1,6 @@
 {
  "piece": "P59",
- "pass": 3,
+ "pass": 7,
  "screens": {
   "talk_tom.hub": {
    "text": "e27ea7c722ff2d69",
@@ -97,7 +97,7 @@
   "C1267": "f0db81b801577bf2",
   "C1249": "a843f9b57e43a020",
   "C1250": "fde578d75b0d3620",
-  "C1265": "64b72c778e96e443",
+  "C1265": "eb11e05cd75e52a9",
   "C1234": "1b2a2d5f05b10331",
   "L121": "45842b25d0708a15",
   "L125": "1fca3bfe1d0c2419",
@@ -267,7 +267,7 @@
     "all": "a79ebc75a3f89ac1"
    },
    "row_hash": "c1c0e2ac2588a579",
-   "carried": false,
+   "carried": true,
    "pass": 3
   },
   {
@@ -420,7 +420,7 @@
     "all": "a79ebc75a3f89ac1"
    },
    "row_hash": "4d1fce1c4523b5d4",
-   "carried": false,
+   "carried": true,
    "pass": 3
   },
   {
@@ -580,7 +580,7 @@
     "all": "a79ebc75a3f89ac1"
    },
    "row_hash": "80d415cf08e0ebfe",
-   "carried": false,
+   "carried": true,
    "pass": 3
   },
   {
@@ -814,14 +814,14 @@
    "row": "C1265",
    "screen": "*",
    "verdict": "PASS",
-   "line": "",
-   "why": "a person's menu is the exception C596 names",
+   "line": "talk_tom/chris/sam .hub pictures",
+   "why": "on menus only, the C596 exception",
    "cause": null,
    "note": false,
-   "screen_hash": "4f281fd4f20fac19",
-   "row_hash": "64b72c778e96e443",
-   "carried": true,
-   "pass": 1
+   "screen_hash": "e365f92d63479dae",
+   "row_hash": "eb11e05cd75e52a9",
+   "carried": false,
+   "pass": 7
   },
   {
    "row": "C1267",
@@ -1266,7 +1266,7 @@
     "all": "a79ebc75a3f89ac1"
    },
    "row_hash": "b8cdd5b1ce3f89ea",
-   "carried": false,
+   "carried": true,
    "pass": 3
   },
   {
@@ -1432,7 +1432,7 @@
     "all": "a79ebc75a3f89ac1"
    },
    "row_hash": "27e6b45f50edd3ac",
-   "carried": false,
+   "carried": true,
    "pass": 3
   },
   {
@@ -1528,7 +1528,7 @@
     "all": "a79ebc75a3f89ac1"
    },
    "row_hash": "b01ad555668aba2d",
-   "carried": false,
+   "carried": true,
    "pass": 3
   },
   {
@@ -1649,7 +1649,7 @@
     "all": "a79ebc75a3f89ac1"
    },
    "row_hash": "67e48e60d5053a2e",
-   "carried": false,
+   "carried": true,
    "pass": 3
   },
   {
@@ -1757,7 +1757,7 @@
     "all": "a79ebc75a3f89ac1"
    },
    "row_hash": "310706ee076318f2",
-   "carried": false,
+   "carried": true,
    "pass": 3
   },
   {
@@ -2313,7 +2313,7 @@
     "all": "a79ebc75a3f89ac1"
    },
    "row_hash": "4e86d143688ba8e5",
-   "carried": false,
+   "carried": true,
    "pass": 3
   },
   {
@@ -2409,7 +2409,7 @@
     "all": "a79ebc75a3f89ac1"
    },
    "row_hash": "1aadffd96e76381c",
-   "carried": false,
+   "carried": true,
    "pass": 3
   },
   {
@@ -2530,7 +2530,7 @@
     "all": "a79ebc75a3f89ac1"
    },
    "row_hash": "13a714429d15f3b2",
-   "carried": false,
+   "carried": true,
    "pass": 3
   },
   {
@@ -2709,7 +2709,7 @@
     "all": "a79ebc75a3f89ac1"
    },
    "row_hash": "e64ce2672d85d2d8",
-   "carried": false,
+   "carried": true,
    "pass": 3
   },
   {
@@ -2747,8 +2747,8 @@
  ],
  "causes": [],
  "pending": [],
- "asked": 12,
- "answered": 12,
+ "asked": 1,
+ "answered": 1,
  "pass_items": [],
  "unowed": []
 }

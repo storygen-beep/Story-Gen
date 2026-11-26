@@ -1,6 +1,6 @@
 {
  "piece": "P23",
- "pass": 9,
+ "pass": 13,
  "screens": {
   "gym_meet_marco.meet": {
    "text": "e94048ae6551a6c3",
@@ -84,7 +84,7 @@
   "C1267": "f0db81b801577bf2",
   "C1249": "a843f9b57e43a020",
   "C1250": "fde578d75b0d3620",
-  "C1265": "64b72c778e96e443",
+  "C1265": "eb11e05cd75e52a9",
   "C1234": "1b2a2d5f05b10331",
   "L121": "45842b25d0708a15",
   "L125": "1fca3bfe1d0c2419",
@@ -681,19 +681,20 @@
    "row": "C1265",
    "screen": "gym_meet_marco.meet",
    "verdict": "PASS",
-   "line": "Haven't seen you in here.",
-   "why": "a first meeting with a person, not a chore or a menu",
+   "line": "\"your legs, your ass, then your face\" <<people/marco_gym_t0>>",
+   "why": "a meeting with Marco, not a chore or menu",
    "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "76981bacace9fdc5",
+    "text": "e94048ae6551a6c3",
+    "traits": "e4365d01d4eb14be",
     "facts": "23eb50d0d96dba03",
     "facts2": "b2f1ee65de80c8ee",
-    "all": "604fa272bfe0d04d"
+    "all": "060facc282a036da"
    },
-   "row_hash": "64b72c778e96e443",
-   "carried": true,
-   "pass": 1
+   "row_hash": "eb11e05cd75e52a9",
+   "carried": false,
+   "pass": 13
   },
   {
    "row": "C1267",
@@ -1099,7 +1100,7 @@
    "note": false,
    "screen_hash": "f8a9528396e0c4a1",
    "row_hash": "27e6b45f50edd3ac",
-   "carried": false,
+   "carried": true,
    "pass": 9
   },
   {

@@ -1,6 +1,6 @@
 {
  "piece": "P61",
- "pass": 1,
+ "pass": 2,
  "screens": {
   "*": "4f53cda18c2baa0c"
  },
@@ -67,7 +67,7 @@
   "voice#2": "a40d4073409a2705",
   "voice#3": "4777d2c1251214c2",
   "voice#4": "ac2fdd7245f436db",
-  "voice#5": "7bbdd4290054e601",
+  "voice#5": "f74d350a978e124c",
   "voice#6": "df1f5dc8b6d21538",
   "voice#7": "321cc76cff93aadb",
   "voice#8": "4362249fb5f9616e"
@@ -83,7 +83,7 @@
    "note": false,
    "screen_hash": "4f53cda18c2baa0c",
    "row_hash": "5276068df1ca6fa9",
-   "carried": false,
+   "carried": true,
    "pass": 1
   },
   {
@@ -96,7 +96,7 @@
    "note": false,
    "screen_hash": "4f53cda18c2baa0c",
    "row_hash": "c1c0e2ac2588a579",
-   "carried": false,
+   "carried": true,
    "pass": 1
   },
   {
@@ -109,7 +109,7 @@
    "note": false,
    "screen_hash": "4f53cda18c2baa0c",
    "row_hash": "1e252efd0904a971",
-   "carried": false,
+   "carried": true,
    "pass": 1
   },
   {
@@ -122,7 +122,7 @@
    "note": false,
    "screen_hash": "4f53cda18c2baa0c",
    "row_hash": "fd109745c67b71d7",
-   "carried": false,
+   "carried": true,
    "pass": 1
   },
   {
@@ -135,7 +135,7 @@
    "note": false,
    "screen_hash": "4f53cda18c2baa0c",
    "row_hash": "aaf6518b64dcce55",
-   "carried": false,
+   "carried": true,
    "pass": 1
   },
   {
@@ -148,7 +148,7 @@
    "note": false,
    "screen_hash": "4f53cda18c2baa0c",
    "row_hash": "4d9f2ebbce9a39cc",
-   "carried": false,
+   "carried": true,
    "pass": 1
   },
   {
@@ -161,7 +161,7 @@
    "note": false,
    "screen_hash": "4f53cda18c2baa0c",
    "row_hash": "4d1fce1c4523b5d4",
-   "carried": false,
+   "carried": true,
    "pass": 1
   },
   {
@@ -174,7 +174,7 @@
    "note": false,
    "screen_hash": "4f53cda18c2baa0c",
    "row_hash": "ced37cb0de6e7202",
-   "carried": false,
+   "carried": true,
    "pass": 1
   },
   {
@@ -187,7 +187,7 @@
    "note": false,
    "screen_hash": "4f53cda18c2baa0c",
    "row_hash": "efcbd1ac6a95e2f2",
-   "carried": false,
+   "carried": true,
    "pass": 1
   },
   {
@@ -200,7 +200,7 @@
    "note": false,
    "screen_hash": "4f53cda18c2baa0c",
    "row_hash": "0e32092e9fe64f2c",
-   "carried": false,
+   "carried": true,
    "pass": 1
   },
   {
@@ -213,7 +213,7 @@
    "note": false,
    "screen_hash": "4f53cda18c2baa0c",
    "row_hash": "cef53154cc971fef",
-   "carried": false,
+   "carried": true,
    "pass": 1
   },
   {
@@ -226,7 +226,7 @@
    "note": false,
    "screen_hash": "4f53cda18c2baa0c",
    "row_hash": "80d415cf08e0ebfe",
-   "carried": false,
+   "carried": true,
    "pass": 1
   },
   {
@@ -239,7 +239,7 @@
    "note": false,
    "screen_hash": "4f53cda18c2baa0c",
    "row_hash": "3b1fcdf549bcc558",
-   "carried": false,
+   "carried": true,
    "pass": 1
   },
   {
@@ -252,7 +252,7 @@
    "note": true,
    "screen_hash": "4f53cda18c2baa0c",
    "row_hash": "374ef1ff39ed683f",
-   "carried": false,
+   "carried": true,
    "pass": 1
   },
   {
@@ -265,7 +265,7 @@
    "note": true,
    "screen_hash": "4f53cda18c2baa0c",
    "row_hash": "1102503d50722e90",
-   "carried": false,
+   "carried": true,
    "pass": 1
   },
   {
@@ -278,7 +278,7 @@
    "note": true,
    "screen_hash": "4f53cda18c2baa0c",
    "row_hash": "54d313af889ee445",
-   "carried": false,
+   "carried": true,
    "pass": 1
   },
   {
@@ -291,7 +291,7 @@
    "note": false,
    "screen_hash": "4f53cda18c2baa0c",
    "row_hash": "93f6f78fa5d01006",
-   "carried": false,
+   "carried": true,
    "pass": 1
   },
   {
@@ -304,7 +304,7 @@
    "note": true,
    "screen_hash": "4f53cda18c2baa0c",
    "row_hash": "70c31c4c8f168968",
-   "carried": false,
+   "carried": true,
    "pass": 1
   },
   {
@@ -317,7 +317,7 @@
    "note": true,
    "screen_hash": "4f53cda18c2baa0c",
    "row_hash": "d38926e545c247d9",
-   "carried": false,
+   "carried": true,
    "pass": 1
   },
   {
@@ -330,7 +330,7 @@
    "note": true,
    "screen_hash": "4f53cda18c2baa0c",
    "row_hash": "35d5552632b315d7",
-   "carried": false,
+   "carried": true,
    "pass": 1
   },
   {
@@ -343,7 +343,7 @@
    "note": true,
    "screen_hash": "4f53cda18c2baa0c",
    "row_hash": "4a3df70ba62ff0c1",
-   "carried": false,
+   "carried": true,
    "pass": 1
   },
   {
@@ -356,7 +356,7 @@
    "note": false,
    "screen_hash": "4f53cda18c2baa0c",
    "row_hash": "4772eb5bc3a0625c",
-   "carried": false,
+   "carried": true,
    "pass": 1
   },
   {
@@ -369,7 +369,7 @@
    "note": true,
    "screen_hash": "4f53cda18c2baa0c",
    "row_hash": "9dc51ff2fc8fffe8",
-   "carried": false,
+   "carried": true,
    "pass": 1
   },
   {
@@ -382,7 +382,7 @@
    "note": true,
    "screen_hash": "4f53cda18c2baa0c",
    "row_hash": "a3292ce9b375de61",
-   "carried": false,
+   "carried": true,
    "pass": 1
   },
   {
@@ -395,7 +395,7 @@
    "note": true,
    "screen_hash": "4f53cda18c2baa0c",
    "row_hash": "3fdc7ab766d9eed9",
-   "carried": false,
+   "carried": true,
    "pass": 1
   },
   {
@@ -408,7 +408,7 @@
    "note": true,
    "screen_hash": "4f53cda18c2baa0c",
    "row_hash": "37396aa479e7c52a",
-   "carried": false,
+   "carried": true,
    "pass": 1
   },
   {
@@ -421,7 +421,7 @@
    "note": false,
    "screen_hash": "4f53cda18c2baa0c",
    "row_hash": "d8f2ffe787064036",
-   "carried": false,
+   "carried": true,
    "pass": 1
   },
   {
@@ -434,7 +434,7 @@
    "note": false,
    "screen_hash": "4f53cda18c2baa0c",
    "row_hash": "d3067a37085f7cb6",
-   "carried": false,
+   "carried": true,
    "pass": 1
   },
   {
@@ -447,7 +447,7 @@
    "note": false,
    "screen_hash": "4f53cda18c2baa0c",
    "row_hash": "1a2f952203e75b84",
-   "carried": false,
+   "carried": true,
    "pass": 1
   },
   {
@@ -460,7 +460,7 @@
    "note": true,
    "screen_hash": "4f53cda18c2baa0c",
    "row_hash": "bda90c8e06bef173",
-   "carried": false,
+   "carried": true,
    "pass": 1
   },
   {
@@ -473,7 +473,7 @@
    "note": true,
    "screen_hash": "4f53cda18c2baa0c",
    "row_hash": "1990815abef56d49",
-   "carried": false,
+   "carried": true,
    "pass": 1
   },
   {
@@ -486,7 +486,7 @@
    "note": false,
    "screen_hash": "4f53cda18c2baa0c",
    "row_hash": "6160f6f4d03614ba",
-   "carried": false,
+   "carried": true,
    "pass": 1
   },
   {
@@ -499,7 +499,7 @@
    "note": true,
    "screen_hash": "4f53cda18c2baa0c",
    "row_hash": "d0678c728ad9faf0",
-   "carried": false,
+   "carried": true,
    "pass": 1
   },
   {
@@ -512,7 +512,7 @@
    "note": true,
    "screen_hash": "4f53cda18c2baa0c",
    "row_hash": "bb31891410f03faf",
-   "carried": false,
+   "carried": true,
    "pass": 1
   },
   {
@@ -525,7 +525,7 @@
    "note": false,
    "screen_hash": "4f53cda18c2baa0c",
    "row_hash": "6626e5d54fe97b40",
-   "carried": false,
+   "carried": true,
    "pass": 1
   },
   {
@@ -538,7 +538,7 @@
    "note": false,
    "screen_hash": "4f53cda18c2baa0c",
    "row_hash": "8933f85010afbef7",
-   "carried": false,
+   "carried": true,
    "pass": 1
   },
   {
@@ -551,7 +551,7 @@
    "note": false,
    "screen_hash": "4f53cda18c2baa0c",
    "row_hash": "a2b07f40e1a9e908",
-   "carried": false,
+   "carried": true,
    "pass": 1
   },
   {
@@ -564,7 +564,7 @@
    "note": false,
    "screen_hash": "4f53cda18c2baa0c",
    "row_hash": "e3ca01ba145f4580",
-   "carried": false,
+   "carried": true,
    "pass": 1
   },
   {
@@ -577,7 +577,7 @@
    "note": false,
    "screen_hash": "4f53cda18c2baa0c",
    "row_hash": "584dada6c379e3d8",
-   "carried": false,
+   "carried": true,
    "pass": 1
   },
   {
@@ -590,7 +590,7 @@
    "note": false,
    "screen_hash": "4f53cda18c2baa0c",
    "row_hash": "ac5932d70cd775a1",
-   "carried": false,
+   "carried": true,
    "pass": 1
   },
   {
@@ -603,7 +603,7 @@
    "note": false,
    "screen_hash": "4f53cda18c2baa0c",
    "row_hash": "3eb18b4cefbe49d3",
-   "carried": false,
+   "carried": true,
    "pass": 1
   },
   {
@@ -616,7 +616,7 @@
    "note": false,
    "screen_hash": "4f53cda18c2baa0c",
    "row_hash": "6b0fd679047fc9b8",
-   "carried": false,
+   "carried": true,
    "pass": 1
   },
   {
@@ -629,7 +629,7 @@
    "note": false,
    "screen_hash": "4f53cda18c2baa0c",
    "row_hash": "beb5a109bde77305",
-   "carried": false,
+   "carried": true,
    "pass": 1
   },
   {
@@ -642,7 +642,7 @@
    "note": false,
    "screen_hash": "4f53cda18c2baa0c",
    "row_hash": "153b0804e686abae",
-   "carried": false,
+   "carried": true,
    "pass": 1
   },
   {
@@ -655,7 +655,7 @@
    "note": false,
    "screen_hash": "4f53cda18c2baa0c",
    "row_hash": "52e42cdd69c8f10e",
-   "carried": false,
+   "carried": true,
    "pass": 1
   },
   {
@@ -668,7 +668,7 @@
    "note": false,
    "screen_hash": "4f53cda18c2baa0c",
    "row_hash": "00a617ab9b4e9cd4",
-   "carried": false,
+   "carried": true,
    "pass": 1
   },
   {
@@ -681,7 +681,7 @@
    "note": false,
    "screen_hash": "4f53cda18c2baa0c",
    "row_hash": "4e530707de7da850",
-   "carried": false,
+   "carried": true,
    "pass": 1
   },
   {
@@ -694,7 +694,7 @@
    "note": false,
    "screen_hash": "4f53cda18c2baa0c",
    "row_hash": "11a025871bd91561",
-   "carried": false,
+   "carried": true,
    "pass": 1
   },
   {
@@ -707,7 +707,7 @@
    "note": false,
    "screen_hash": "4f53cda18c2baa0c",
    "row_hash": "d1df5ca64fd54c4b",
-   "carried": false,
+   "carried": true,
    "pass": 1
   },
   {
@@ -720,7 +720,7 @@
    "note": false,
    "screen_hash": "4f53cda18c2baa0c",
    "row_hash": "27d05f8558ba0bb1",
-   "carried": false,
+   "carried": true,
    "pass": 1
   },
   {
@@ -733,7 +733,7 @@
    "note": false,
    "screen_hash": "4f53cda18c2baa0c",
    "row_hash": "08602a299af77b30",
-   "carried": false,
+   "carried": true,
    "pass": 1
   },
   {
@@ -746,7 +746,7 @@
    "note": false,
    "screen_hash": "4f53cda18c2baa0c",
    "row_hash": "2d317a22b4b850f2",
-   "carried": false,
+   "carried": true,
    "pass": 1
   },
   {
@@ -759,7 +759,7 @@
    "note": false,
    "screen_hash": "4f53cda18c2baa0c",
    "row_hash": "671b614cf229df83",
-   "carried": false,
+   "carried": true,
    "pass": 1
   },
   {
@@ -772,7 +772,7 @@
    "note": false,
    "screen_hash": "4f53cda18c2baa0c",
    "row_hash": "94a3bd2b1d063362",
-   "carried": false,
+   "carried": true,
    "pass": 1
   },
   {
@@ -785,7 +785,7 @@
    "note": false,
    "screen_hash": "4f53cda18c2baa0c",
    "row_hash": "c3246ca0c2177dd6",
-   "carried": false,
+   "carried": true,
    "pass": 1
   },
   {
@@ -798,7 +798,7 @@
    "note": false,
    "screen_hash": "4f53cda18c2baa0c",
    "row_hash": "f862f66e0c4425a8",
-   "carried": false,
+   "carried": true,
    "pass": 1
   },
   {
@@ -811,7 +811,7 @@
    "note": false,
    "screen_hash": "4f53cda18c2baa0c",
    "row_hash": "b1d7f42dfb70bf0d",
-   "carried": false,
+   "carried": true,
    "pass": 1
   },
   {
@@ -824,7 +824,7 @@
    "note": false,
    "screen_hash": "4f53cda18c2baa0c",
    "row_hash": "5002f2dbd27d6463",
-   "carried": false,
+   "carried": true,
    "pass": 1
   },
   {
@@ -837,7 +837,7 @@
    "note": false,
    "screen_hash": "4f53cda18c2baa0c",
    "row_hash": "b8e8afcb32208b40",
-   "carried": false,
+   "carried": true,
    "pass": 1
   },
   {
@@ -850,7 +850,7 @@
    "note": false,
    "screen_hash": "4f53cda18c2baa0c",
    "row_hash": "a40d4073409a2705",
-   "carried": false,
+   "carried": true,
    "pass": 1
   },
   {
@@ -863,7 +863,7 @@
    "note": false,
    "screen_hash": "4f53cda18c2baa0c",
    "row_hash": "4777d2c1251214c2",
-   "carried": false,
+   "carried": true,
    "pass": 1
   },
   {
@@ -876,21 +876,21 @@
    "note": false,
    "screen_hash": "4f53cda18c2baa0c",
    "row_hash": "ac2fdd7245f436db",
-   "carried": false,
+   "carried": true,
    "pass": 1
   },
   {
    "row": "voice#5",
    "screen": "*",
    "verdict": "PASS",
-   "line": "Your timetable. Learn it.",
-   "why": "Timetable screen 20 narration : 4 speech = 5.0:1, at the limit; the typed paragraph (all narration) is gone, so every path through the scene leans less on narration than before; build check GREEN (talk).",
+   "line": "dean_first door>rules>timetable>sendoff 105 narration : 59 spoken",
+   "why": "1.78 : 1",
    "cause": null,
    "note": false,
    "screen_hash": "4f53cda18c2baa0c",
-   "row_hash": "7bbdd4290054e601",
+   "row_hash": "f74d350a978e124c",
    "carried": false,
-   "pass": 1
+   "pass": 2
   },
   {
    "row": "voice#6",
@@ -902,7 +902,7 @@
    "note": false,
    "screen_hash": "4f53cda18c2baa0c",
    "row_hash": "df1f5dc8b6d21538",
-   "carried": false,
+   "carried": true,
    "pass": 1
   },
   {
@@ -915,7 +915,7 @@
    "note": false,
    "screen_hash": "4f53cda18c2baa0c",
    "row_hash": "321cc76cff93aadb",
-   "carried": false,
+   "carried": true,
    "pass": 1
   },
   {
@@ -928,14 +928,14 @@
    "note": false,
    "screen_hash": "4f53cda18c2baa0c",
    "row_hash": "4362249fb5f9616e",
-   "carried": false,
+   "carried": true,
    "pass": 1
   }
  ],
  "causes": [],
  "pending": [],
- "asked": 66,
- "answered": 66,
+ "asked": 1,
+ "answered": 1,
  "pass_items": [],
  "unowed": []
 }

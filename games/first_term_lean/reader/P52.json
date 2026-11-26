@@ -1,6 +1,6 @@
 {
  "piece": "P52",
- "pass": 2,
+ "pass": 6,
  "screens": {
   "*": "4f53cda18c2baa0c"
  },
@@ -42,8 +42,8 @@
   "C928": "799e1dd153166b6d",
   "C931": "1b8984f52b99537e",
   "C890": "3d716de4269fbd6c",
-  "clock#1": "b093ed58ec403b3c",
-  "clock#2": "e393ecafc7ab9a6c",
+  "clock#1": "df2ea5f83738c062",
+  "clock#2": "77b3fafe9c2bf20c",
   "clock#3": "aae8f146c8ec933d",
   "clock#4": "c33118361d16b379",
   "clock#5": "95c5edec9e714e7b",
@@ -51,7 +51,7 @@
   "clock#7": "313c48a91780f62b",
   "clock#8": "f0c2400d02519978",
   "clock#9": "5d697f6bcd9f82de",
-  "clock#10": "2ad5e473e29b231d",
+  "clock#10": "5a788439a11d7765",
   "C442": "a2b07f40e1a9e908",
   "C449": "ac5932d70cd775a1",
   "C451": "6b0fd679047fc9b8",
@@ -67,7 +67,7 @@
   "voice#2": "a40d4073409a2705",
   "voice#3": "4777d2c1251214c2",
   "voice#4": "ac2fdd7245f436db",
-  "voice#5": "7bbdd4290054e601",
+  "voice#5": "f74d350a978e124c",
   "voice#6": "df1f5dc8b6d21538",
   "voice#7": "321cc76cff93aadb",
   "voice#8": "4362249fb5f9616e"
@@ -512,7 +512,7 @@
    "note": false,
    "screen_hash": null,
    "row_hash": "48bd82911a86ecbd",
-   "carried": false,
+   "carried": true,
    "pass": 2
   },
   {
@@ -702,39 +702,39 @@
    "screen": "*",
    "verdict": "PASS",
    "line": "Timetable \ud83d\uddd3",
-   "why": "The button names no time, energy or money.",
+   "why": "the button names no time, energy or money",
    "cause": null,
    "note": false,
    "screen_hash": "4f53cda18c2baa0c",
-   "row_hash": "b093ed58ec403b3c",
+   "row_hash": "df2ea5f83738c062",
    "carried": true,
-   "pass": 1
+   "pass": 5
   },
   {
    "row": "clock#10",
    "screen": "*",
    "verdict": "N/A",
-   "line": "Psychology \u00b7 9\u201311 AM \u00b7 Lecture Hall (Mon, Wed); Statistics 11 AM\u20131 PM; English 9\u201311 AM (Tue, Thu); Drama 11 AM\u20131 PM \u00b7 Theatre",
-   "why": "No canvas row with a daily count.",
+   "line": "[ui] timetable_button, [[ui.timetable]] rows",
+   "why": "no canvas row, so no clock window and no daily count",
    "cause": null,
    "note": false,
    "screen_hash": "4f53cda18c2baa0c",
-   "row_hash": "2ad5e473e29b231d",
+   "row_hash": "5a788439a11d7765",
    "carried": true,
-   "pass": 1
+   "pass": 5
   },
   {
    "row": "clock#2",
    "screen": "*",
    "verdict": "N/A",
-   "line": "Timetable \ud83d\uddd3",
-   "why": "No travel.",
+   "line": "Builds: none (a [ui] block)",
+   "why": "the timetable popup has no move and no cost",
    "cause": null,
    "note": false,
    "screen_hash": "4f53cda18c2baa0c",
-   "row_hash": "e393ecafc7ab9a6c",
-   "carried": true,
-   "pass": 1
+   "row_hash": "77b3fafe9c2bf20c",
+   "carried": false,
+   "pass": 6
   },
   {
    "row": "clock#3",
@@ -883,14 +883,14 @@
    "row": "voice#5",
    "screen": "*",
    "verdict": "N/A",
-   "line": "Psychology \u00b7 9\u201311 AM \u00b7 Lecture Hall (Mon, Wed); Statistics 11 AM\u20131 PM; English 9\u201311 AM (Tue, Thu); Drama 11 AM\u20131 PM \u00b7 Theatre",
-   "why": "No one in it.",
+   "line": "Builds: none (a [ui] block)",
+   "why": "no scene",
    "cause": null,
    "note": false,
    "screen_hash": "4f53cda18c2baa0c",
-   "row_hash": "7bbdd4290054e601",
-   "carried": true,
-   "pass": 1
+   "row_hash": "f74d350a978e124c",
+   "carried": false,
+   "pass": 6
   },
   {
    "row": "voice#6",
@@ -934,8 +934,8 @@
  ],
  "causes": [],
  "pending": [],
- "asked": 1,
- "answered": 1,
+ "asked": 2,
+ "answered": 2,
  "pass_items": [],
  "unowed": []
 }

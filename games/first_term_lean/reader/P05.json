@@ -1,6 +1,6 @@
 {
  "piece": "P05",
- "pass": 5,
+ "pass": 11,
  "screens": {
   "*": "4f53cda18c2baa0c"
  },
@@ -42,8 +42,8 @@
   "C928": "799e1dd153166b6d",
   "C931": "1b8984f52b99537e",
   "C890": "3d716de4269fbd6c",
-  "clock#1": "b093ed58ec403b3c",
-  "clock#2": "e393ecafc7ab9a6c",
+  "clock#1": "df2ea5f83738c062",
+  "clock#2": "77b3fafe9c2bf20c",
   "clock#3": "aae8f146c8ec933d",
   "clock#4": "c33118361d16b379",
   "clock#5": "95c5edec9e714e7b",
@@ -51,12 +51,12 @@
   "clock#7": "313c48a91780f62b",
   "clock#8": "f0c2400d02519978",
   "clock#9": "5d697f6bcd9f82de",
-  "clock#10": "2ad5e473e29b231d",
+  "clock#10": "5a788439a11d7765",
   "C1261": "6a661c60639de8be",
   "C1267": "6bafcadf3d586d5a",
   "C1249": "604706399d2f1194",
   "C1250": "8384cc6bcbd67c07",
-  "C1265": "00b79725344762be",
+  "C1265": "fe36d5bbc01da9a6",
   "C1262": "2946d2fe0b7dc28f",
   "C1234": "7dc492e03732757e",
   "L121": "cddfa55c18e5c7b7",
@@ -74,7 +74,7 @@
   "C1255": "d81893b9077b4b53",
   "L97": "2bfb9527e76ad93b",
   "media#1": "3641bf707d9adfce",
-  "media#2": "01ba7fa1cec4bc7a",
+  "media#2": "69a8103be1e1032a",
   "media#3": "8c75b0d488b188e2",
   "media#4": "03599fc0722690b6",
   "media#5": "2cf5e3607ccecd4a",
@@ -109,7 +109,7 @@
   "places#7": "2a095bf54f175e5e",
   "places#8": "c3ea8d01465e7298",
   "places#9": "f4cd9ab5f62bc6fc",
-  "places#10": "309f0141d342dc6f",
+  "places#10": "d6f0b4b357efc043",
   "C442": "a2b07f40e1a9e908",
   "C449": "ac5932d70cd775a1",
   "C451": "6b0fd679047fc9b8",
@@ -125,7 +125,7 @@
   "voice#2": "a40d4073409a2705",
   "voice#3": "4777d2c1251214c2",
   "voice#4": "ac2fdd7245f436db",
-  "voice#5": "7bbdd4290054e601",
+  "voice#5": "f74d350a978e124c",
   "voice#6": "df1f5dc8b6d21538",
   "voice#7": "321cc76cff93aadb",
   "voice#8": "4362249fb5f9616e",
@@ -427,14 +427,14 @@
    "row": "C1265",
    "screen": "*",
    "verdict": "PASS",
-   "line": "image = \"locations/near_cafe_t0.jpg\"; image = \"locations/near_zoe_apartment_t0.jpg\"",
-   "why": "the caf\u00e9's and Zoe's pictures render only as their cards on The Quad, which carries no image of its own; C1265 now says a place's card is not a spot of this kind",
+   "line": "near_cafe image = locations/near_cafe_t0.jpg",
+   "why": "only place images, which are cards on Town's menu, not C1265 spots; no media block on any chore, door or menu",
    "cause": null,
    "note": false,
    "screen_hash": "4f53cda18c2baa0c",
-   "row_hash": "00b79725344762be",
+   "row_hash": "fe36d5bbc01da9a6",
    "carried": true,
-   "pass": 2
+   "pass": 11
   },
   {
    "row": "C1267",
@@ -550,7 +550,7 @@
    "note": false,
    "screen_hash": "4f53cda18c2baa0c",
    "row_hash": "73325cf765e749b2",
-   "carried": false,
+   "carried": true,
    "pass": 5
   },
   {
@@ -576,7 +576,7 @@
    "note": false,
    "screen_hash": "4f53cda18c2baa0c",
    "row_hash": "a5ba9c9008667d02",
-   "carried": false,
+   "carried": true,
    "pass": 5
   },
   {
@@ -1629,7 +1629,7 @@
    "note": false,
    "screen_hash": "4f53cda18c2baa0c",
    "row_hash": "8f11debafcf05142",
-   "carried": false,
+   "carried": true,
    "pass": 5
   },
   {
@@ -1642,7 +1642,7 @@
    "note": false,
    "screen_hash": "4f53cda18c2baa0c",
    "row_hash": "b99311cd35a8586e",
-   "carried": false,
+   "carried": true,
    "pass": 5
   },
   {
@@ -1662,40 +1662,40 @@
    "row": "clock#1",
    "screen": "near_cafe",
    "verdict": "PASS",
-   "line": "\"Work an hour\"",
-   "why": "clock.md's own worked example uses this label: 'Work an hour' (60 minutes and 10 energy in the costs; 'the label says neither'); the files rule it time-free",
+   "line": "Work an hour \u00b7 Work a shift \u00b7 Buy a coffee ($3) \u00b7 Sit by the window \u00b7 Ask about the Help Wanted sign",
+   "why": "no energy or minutes in a label; the coffee shows its price; grey lines name hours, never a cost",
    "cause": null,
    "note": false,
    "screen_hash": null,
-   "row_hash": "b093ed58ec403b3c",
+   "row_hash": "df2ea5f83738c062",
    "carried": true,
-   "pass": 4
+   "pass": 10
   },
   {
    "row": "clock#10",
    "screen": "*",
    "verdict": "PASS",
-   "line": "zoe_party: max 1, weekday/time group, no show_when_blocked",
-   "why": "zoe_party now hides; body_coffee has a count and no clock window; the caf\u00e9 work rows have windows and no daily count",
+   "line": "cafe_window: max 2 + time_of_day, no show_when_blocked; zoe_party: max 1 + clock group, no show_when_blocked",
+   "why": "rows with a window and a count hide; body_coffee has a count and no window; the caf\u00e9 work rows have windows and no count",
    "cause": null,
    "note": false,
    "screen_hash": "4f53cda18c2baa0c",
-   "row_hash": "2ad5e473e29b231d",
+   "row_hash": "5a788439a11d7765",
    "carried": true,
-   "pass": 4
+   "pass": 10
   },
   {
    "row": "clock#2",
    "screen": "near_cafe",
    "verdict": "PASS",
-   "line": "Leave Caf\u00e9",
-   "why": "time sits on travel between home and campus (bus 20 min, walk 45 min); the caf\u00e9 opens straight off the quad like a building, free both ways (ENI for LO, 2026-11-24, card P05)",
+   "line": "near_cafe: entry_from town_square, no entry_costs",
+   "why": "Town to Caf\u00e9 is a hop inside the area and costs nothing; the bus/walk carry the trip time",
    "cause": null,
    "note": false,
    "screen_hash": null,
-   "row_hash": "e393ecafc7ab9a6c",
+   "row_hash": "77b3fafe9c2bf20c",
    "carried": true,
-   "pass": 2
+   "pass": 11
   },
   {
    "row": "clock#3",
@@ -1805,14 +1805,14 @@
    "row": "media#2",
    "screen": "*",
    "verdict": "PASS",
-   "line": "\"woman of 18 at a cafe window table with a coffee\"; \"woman of 18 on a messy sofa in a student apartment, clothes on the chairs\"",
-   "why": "one file per place, tier 0, with her in it, no outfit named; the quad has none",
+   "line": "caf\u00e9 'at a cafe window table with a coffee' \u00b7 Zoe's 'on a messy sofa in a student apartment, clothes on the chairs'",
+   "why": "one tier-0 file each, her in it; neither claims anyone or says empty or alone",
    "cause": null,
    "note": false,
    "screen_hash": "4f53cda18c2baa0c",
-   "row_hash": "01ba7fa1cec4bc7a",
+   "row_hash": "69a8103be1e1032a",
    "carried": true,
-   "pass": 2
+   "pass": 10
   },
   {
    "row": "media#3",
@@ -1896,14 +1896,14 @@
    "row": "places#10",
    "screen": "*",
    "verdict": "PASS",
-   "line": "Zoe lives in town, two streets off the high street. Knock in the afternoon, or come to her party on a Saturday, 9pm to 1am.",
-   "why": "Zoe's Apartment is hidden_until zoe_place_known, set on the same choice as met_zoe (quad_meet_zoe); met_zoe is the when of a Someone on the Quad step, whose first step points at the quad weekdays 2 to 3 (Zoe's row 13/14-15)",
+   "line": "near_zoe_apartment: hidden_until = { flag = \"zoe_place_known\" }",
+   "why": "zoe_place_known is set beside met_zoe on the same choice (L7132), and met_zoe is a when on a hint step: \"Zoe lives in town, two streets off the high street...\" (L324)",
    "cause": null,
    "note": false,
    "screen_hash": "4f53cda18c2baa0c",
-   "row_hash": "309f0141d342dc6f",
+   "row_hash": "d6f0b4b357efc043",
    "carried": false,
-   "pass": 5
+   "pass": 11
   },
   {
    "row": "places#2",
@@ -2065,14 +2065,14 @@
    "row": "voice#5",
    "screen": "*",
    "verdict": "N/A",
-   "line": "",
-   "why": "nobody else on a P05 screen",
+   "line": "Builds: near_campus, near_cafe, near_zoe_apartment (places)",
+   "why": "places only, no scene path",
    "cause": null,
    "note": false,
    "screen_hash": "4f53cda18c2baa0c",
-   "row_hash": "7bbdd4290054e601",
+   "row_hash": "f74d350a978e124c",
    "carried": true,
-   "pass": 1
+   "pass": 11
   },
   {
    "row": "voice#6",
@@ -2162,7 +2162,7 @@
    "note": false,
    "screen_hash": "4f53cda18c2baa0c",
    "row_hash": "82e1671bb988af4e",
-   "carried": false,
+   "carried": true,
    "pass": 5
   },
   {
@@ -2207,8 +2207,8 @@
  ],
  "causes": [],
  "pending": [],
- "asked": 6,
- "answered": 6,
+ "asked": 1,
+ "answered": 1,
  "pass_items": [],
  "unowed": []
 }

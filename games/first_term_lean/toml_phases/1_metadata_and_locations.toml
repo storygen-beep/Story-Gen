@@ -4,12 +4,15 @@
 id = "player"
 name = "Ella"
 # money is not a 0-100 meter: every money effect must set clamp = false (v2.py:7361-7364).
-core_traits = { energy = 100, money = 0, disinhibition = 0, corruption = 0, exhibitionism = 0, submission = 0, dominance = 0, sundays_paid = 0, rent_paid_total = 0, meals_today = 0, grades = 50, study_today = 0, reputation = 0 }
+# P66 — sundays_paid is kept as a key a save may hold (C1656); nothing reads or writes it in release 1.
+core_traits = { energy = 100, money = 0, disinhibition = 0, corruption = 0, exhibitionism = 0, submission = 0, dominance = 0, sundays_paid = 0, rent_weeks_owed = 0, rent_paid_total = 0, meals_today = 0, grades = 50, study_today = 0, reputation = 0 }
 # Every player flag is declared here. P05: zoe_place_known (set by P20) reveals Zoe's Apartment.
 flag_keys = [
   "zoe_place_known",
   # P03 re-check: the house next door opens once she has met him (P24 sets it)
   "met_vance",
+  # P68 — the House Next Door opens in release 2; nothing sets it in release 1
+  "next_door_open",
   # P04 re-check: the faculty corridor opens once her advisor asks to see her (P16 sets it)
   "met_walsh",
   # P13 — the opening
@@ -23,6 +26,7 @@ flag_keys = [
   # Goal 1's card reads these; P21 sets cafe_hired, P11 sets rent_paid_once.
   "cafe_hired", "rent_paid_once",
   # P11 — Sunday rent
+  # P66 — pays_her_own_way is kept as a key a save may hold (C1656); nothing sets or reads it in release 1.
   "rent_handled_this_week", "pays_her_own_way",
   # P57 — campus: Talk once a day across their places (C2197, C2198)
   "talked_hale_today", "talked_pratt_today", "talked_walsh_today", "talked_dean_today", "talked_cross_today", "talked_holt_today", "talked_nadia_today", "talked_rosa_today", "talked_zoe_today", "talked_jake_today", "talked_brooke_today",
@@ -38,6 +42,10 @@ flag_keys = [
   "ate_with_mom_today",
   # P33 — the run, first time
   "ran_once",
+  # P65 — gym passes; setting one again restarts its day (v2.py:7516-7522)
+  "gym_day_pass", "gym_week_pass", "gym_month_pass",
+  # P64 — Channel 9, seen once
+  "watched_after_dark",
   # P32 — met flags for the people P32 schedules (their meetings set them)
   "met_hale", "met_pratt", "met_cross", "met_nadia", "met_holt", "met_rosa", "met_frank", "met_danny", "met_marco",
   # P15 — memory flags from her answers
@@ -201,9 +209,10 @@ default_entry = "hood_street"
 id = "hood_street"
 name = "Neighbourhood"
 description = "The neighbourhood: your street, the same row of houses, the corner shop at the end, the park across the road, the gym over the laundromat, the clothes shop, and a bus stop with its morning queue. Neighbours, dog walkers, kids on bikes."
-# P07 — the leave rule: a top and a bottom, or a dress (a dress counts for both, v2.py:2219).
+# P07 — the leave rule: a top and a bottom, or a dress (a dress counts for both, v2.py:2261).
+# P67 — and shoes, any pair (LO 2026-11-27); shoes are checked on their own (v2.py:2262).
 clothing_rules = [
-  { slots_required = ["top", "bottom"], message = "You're not going out like this. Go back up to your room and put on a top and a bottom, or a dress." },
+  { slots_required = ["top", "bottom", "shoes"], message = "You're not going out like this. Go back up to your room and put on a top and a bottom, or a dress, and shoes." },
 ]
 # P07 — the street notices skin, in daylight hours (worn_exposure, v2.py:5264-5272).
 description_variants = [
@@ -231,7 +240,8 @@ parent = "neighbourhood"
 kind = "destination"
 image = "locations/hood_next_door_t0.jpg"
 # P03 re-check: hidden until she has met the man next door; P24 meets him on her street, on his porch.
-hidden_until = { flag = "met_vance" }
+# P68 — hidden for all of release 1: nothing is here yet (LO 2026-11-27: "yes to all 4"); release 2 sets next_door_open.
+hidden_until = { flag = "next_door_open" }
 image_search_queries = ["woman of 18 on the pavement in front of a neighbour's porch with one chair", "young woman at the bottom of porch steps, suburban street"]
 entry_from = "hood_street"
 
@@ -402,7 +412,7 @@ description = "The dean's office: a big desk, a window, and a chair nobody's ask
 parent = "campus"
 kind = "destination"
 image = "locations/campus_office_dean_t0.jpg"
-image_search_queries = ["older man behind a big desk in a college dean's office, window behind him", "college dean's office with a heavy desk and a single visitor chair"]
+image_search_queries = ["seen from behind a big desk: woman of 18 standing in the doorway of a college dean's office, waiting", "young woman standing in front of a dean's desk, view from his chair"]
 entry_from = "campus_offices"
 hours = [{ weekdays = [0, 1, 2, 3, 4], open = "08:00", close = "17:00" }]
 closed_text = "The dean's door is shut. He's in weekdays, 8am to 5pm."
@@ -414,7 +424,7 @@ description = "The psychology office: shelves of files, a desk, and a chair faci
 parent = "campus"
 kind = "destination"
 image = "locations/campus_office_hale_t0.jpg"
-image_search_queries = ["professor's office with shelves of files and a desk facing one chair", "small college faculty office, desk and visitor chair"]
+image_search_queries = ["seen from behind a professor's desk: woman of 18 standing by the visitor chair, shelves of files behind her", "young woman in a small college faculty office, view from the professor's chair"]
 entry_from = "campus_offices"
 hours = [{ weekdays = [0, 2], open = "14:00", close = "17:00" }]
 closed_text = "The psychology office is locked. Office hours: Monday and Wednesday, 2 to 5pm."
@@ -426,7 +436,7 @@ description = "The statistics office: whiteboards on every wall, every one full.
 parent = "campus"
 kind = "destination"
 image = "locations/campus_office_pratt_t0.jpg"
-image_search_queries = ["college office with whiteboards full of numbers on every wall", "math professor's office covered in whiteboards"]
+image_search_queries = ["seen from a professor's desk: woman of 18 standing among whiteboards full of numbers", "young woman in a math professor's office, view from his desk"]
 entry_from = "campus_offices"
 hours = [{ weekdays = [0, 2], open = "13:00", close = "15:00" }]
 closed_text = "The statistics office is locked. Office hours: Monday and Wednesday, 1 to 3pm."
@@ -438,7 +448,7 @@ description = "The English office: books stacked on every surface and a kettle o
 parent = "campus"
 kind = "destination"
 image = "locations/campus_office_walsh_t0.jpg"
-image_search_queries = ["english professor's office with books stacked everywhere and a kettle on the windowsill", "cluttered college office full of books"]
+image_search_queries = ["seen from a professor's desk: woman of 18 in an english professor's office, books stacked everywhere, a kettle on the windowsill", "young woman in a cluttered college office full of books, view from the desk"]
 entry_from = "campus_offices"
 hours = [{ weekdays = [1, 3], open = "14:00", close = "16:00" }]
 closed_text = "The English office is locked. Office hours: Tuesday and Thursday, 2 to 4pm."
@@ -454,7 +464,7 @@ description_variants = [
 parent = "campus"
 kind = "destination"
 image = "locations/campus_theatre_t0.jpg"
-image_search_queries = ["woman of 18 standing on an empty black stage under lights", "young woman on a small college theatre stage"]
+image_search_queries = ["woman of 18 standing at the edge of a black stage under the lights, the seats dark in front of her", "young woman on a small college theatre stage"]
 entry_from = "campus_quad"
 hours = [{ weekdays = [0, 1, 2, 3, 4], open = "09:00", close = "21:00" }]
 closed_text = "The theatre is dark. It's open weekdays, 9am to 9pm."

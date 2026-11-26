@@ -1,6 +1,6 @@
 {
  "piece": "P21",
- "pass": 15,
+ "pass": 19,
  "screens": {
   "cafe_hire.ask": {
    "text": "a5e6e9ac50172fda",
@@ -122,7 +122,7 @@
   "C1267": "f0db81b801577bf2",
   "C1249": "a843f9b57e43a020",
   "C1250": "fde578d75b0d3620",
-  "C1265": "64b72c778e96e443",
+  "C1265": "eb11e05cd75e52a9",
   "C1234": "1b2a2d5f05b10331",
   "L121": "45842b25d0708a15",
   "L125": "1fca3bfe1d0c2419",
@@ -1810,32 +1810,33 @@
    "row": "C1265",
    "screen": "*",
    "verdict": "PASS",
-   "line": "pictures: people/tom_counter_t0 (hire), look/chris_wand_t3 (first shift)",
-   "why": "a meeting and a charged look, not a chore, a notice or a room menu",
+   "line": "cafe_hire.ask <<people/tom_counter_t0>>; cafe_first_shift.start <<look/chris_wand_t3>>",
+   "why": "spots on two people's scenes; no chore, door or menu has one",
    "cause": null,
    "note": false,
-   "screen_hash": "3c0282b5bb2a2efe",
-   "row_hash": "64b72c778e96e443",
-   "carried": true,
-   "pass": 9
+   "screen_hash": "8bde60acbb418c33",
+   "row_hash": "eb11e05cd75e52a9",
+   "carried": false,
+   "pass": 19
   },
   {
    "row": "C1265",
    "screen": "cafe_first_shift.start",
    "verdict": "PASS",
-   "line": "\"Reaching past you for a jug, his arm drags across your chest.\" then the picture",
-   "why": "the picture is on a charged new moment",
+   "line": "\"his arm drags across your chest. He doesn't say sorry.\"",
+   "why": "Chris's brush is a moment with a person, not a chore; the spot belongs",
    "cause": null,
    "note": false,
    "screen_hash": {
     "text": "1c9ba64c14c54dbc",
+    "traits": "7b42410c0bd9090b",
     "facts": "465e6155df58dbcc",
     "facts2": "98aa2cec72d0253b",
     "all": "4d9f3e0bc1ef9374"
    },
-   "row_hash": "64b72c778e96e443",
-   "carried": true,
-   "pass": 9
+   "row_hash": "eb11e05cd75e52a9",
+   "carried": false,
+   "pass": 19
   },
   {
    "row": "C1267",
@@ -3475,7 +3476,7 @@
    "note": false,
    "screen_hash": "8bde60acbb418c33",
    "row_hash": "27e6b45f50edd3ac",
-   "carried": false,
+   "carried": true,
    "pass": 15
   },
   {
@@ -6922,8 +6923,8 @@
  ],
  "causes": [],
  "pending": [],
- "asked": 1,
- "answered": 1,
+ "asked": 2,
+ "answered": 2,
  "pass_items": [],
  "unowed": []
 }

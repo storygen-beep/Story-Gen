@@ -2814,6 +2814,312 @@
       "sha256": "afdf49cbb4c39461ac7a1ab4ecd55fa7f0ca8bf0b22a4eb6ea0a386879cdbe1c",
       "words": "ENI for LO (delegated 2026-11-24): yes to the sheet and Does lines synced to met_dean on \"Fold it into your bag.\" (P61). LO, typed in main-lean 2026-11-26: \"Should first open in the deans office\", \"Go ahead\"",
       "date": "2026-11-26"
+    },
+    {
+      "card": "P62",
+      "sha256": "c64adfdbbd3b43670b7ed4bcf233cf70159e7528807a7c4c8dead1e8aef6be88",
+      "words": "ENI for LO (delegated 2026-11-24): yes, the Town trips back are named for where they land (the neighbourhood). LO, typed in main-lean 2026-11-26: \"should say walk back to the neighbourhood, right??\", \"Go ahead\"",
+      "date": "2026-11-26"
+    },
+    {
+      "card": "P04",
+      "sha256": "7a0b025ba633c8567c75ba85df9de36a7c803c96b97fa0145c4de00982b05368",
+      "words": "ENI for LO (delegated 2026-11-24): yes, the Town trips back are named for where they land (the neighbourhood). LO, typed in main-lean 2026-11-26: \"should say walk back to the neighbourhood, right??\", \"Go ahead\"",
+      "date": "2026-11-26"
+    },
+    {
+      "card": "P63",
+      "sha256": "8253b4224993d4b71d46445a5717b7abf348f23c0b629e23187ebf7a6ca3a90c",
+      "words": "ENI for LO (delegated 2026-11-24): yes, each office picture shows her alone in it (media.md rule 2; LO's choice, first_term DECISIONS 258).",
+      "date": "2026-11-26"
+    },
+    {
+      "card": "P54",
+      "sha256": "72fd9f56c7249c9bdc6c7de1d0d84bf1c06c989fe6ea9c26ea58feee48a8ac87",
+      "words": "ENI for LO (delegated 2026-11-24): yes, each office picture shows her alone in it (media.md rule 2; LO's choice, first_term DECISIONS 258).",
+      "date": "2026-11-26"
+    },
+    {
+      "card": "P63",
+      "sha256": "93268457b4533c4ab205b0397c05339a970e9d960c34df0baed6acfa8ab4e001",
+      "words": "ENI for LO (delegated 2026-11-24): yes to the reader fix, each office picture is her as the person sees her from their desk, with them out of frame; the picture shows only while the office is open (v2.py:24914-24922). media.md rule 2.",
+      "date": "2026-11-26"
+    },
+    {
+      "card": "P54",
+      "sha256": "f0871169e5729769abd3a69ede9cf85db944d17e986edd31f010a4934b3c078c",
+      "words": "ENI for LO (delegated 2026-11-24): yes to the reader fix, each office picture is her as the person sees her from their desk, with them out of frame; the picture shows only while the office is open (v2.py:24914-24922). media.md rule 2.",
+      "date": "2026-11-26"
+    },
+    {
+      "card": "P63",
+      "sha256": "59014eb0a51690e649000b85b4c5b7b97d0a74379f0dc824dd8835c88888b74b",
+      "words": "ENI for LO (delegated 2026-11-24): yes to the Theatre picture at the edge of the stage, seats dark, true with the class or rehearsal on (media.md rule 2).",
+      "date": "2026-11-26"
+    },
+    {
+      "card": "P04",
+      "sha256": "4de45ae11105f89bbb9b7decb76b4a0c0c00083724318843337878c91f7bfae3",
+      "words": "ENI for LO (delegated 2026-11-24): yes to the Theatre picture at the edge of the stage, seats dark, true with the class or rehearsal on (media.md rule 2).",
+      "date": "2026-11-26"
+    },
+    {
+      "card": "P64",
+      "sha256": "bf2715adfe758514abc9410827030628626509d68f204cc80bb96dccbeedfc35",
+      "words": "ENI for LO (delegated 2026-11-24): yes to TV channels as carded: five channels in home_tv, Channel 9 After Dark 23:00-02:00 alone, watch only, one grey line (nobody is ever in the Living Room then), one explicit pool on Channel 9 only. LO's calls 2026-11-27: \"1 yes late night\", \"2 yes\", \"3 watch only\".",
+      "date": "2026-11-27"
+    },
+    {
+      "card": "P34",
+      "sha256": "7c1bce65989706d86390a22c01606c4788f8fcb64d3ac9c3adc551dc22da6b3a",
+      "words": "ENI for LO (delegated 2026-11-24): yes to P34 with home_tv and its two rows moved to P64.",
+      "date": "2026-11-27"
+    },
+    {
+      "card": "P64",
+      "sha256": "d3b03ab6a844e2411291b916ac94ece5d98b07aea7e4752b57307485c4a56440",
+      "words": "ENI for LO (delegated 2026-11-24): yes again to P64 after the change: each ordinary channel gets one line from the screen so the talk ratio passes; Channel 9 unchanged.",
+      "date": "2026-11-27"
+    },
+    {
+      "card": "P64",
+      "sha256": "b76d71bc9ba9a22264e3e9cd445b837c58202bb9f32d71aa73e130ff71fd07f4",
+      "words": "ENI for LO (delegated 2026-11-24): yes again to P64 after the reader fixes: presence lines true on every channel, Channel 9's crawl line as its hook, ages in the picture.",
+      "date": "2026-11-27"
+    },
+    {
+      "card": "P65",
+      "sha256": "82e333ae6a87af34d83bca7310d52ff4c537c90d7dd5892bfa2dea1270f751a4",
+      "words": "ENI for LO (delegated 2026-11-24): yes to gym passes as carded. LO's calls 2026-11-27: \"1 yes\" ($5/$20/$60), \"2 yes, keep three tiers, day, week and montyh\", \"3. yes\" (Marco at the desk).",
+      "date": "2026-11-27"
+    },
+    {
+      "card": "P33",
+      "sha256": "189e8e6bb097fdbc1ac5681d7cbe6d0d297ebd9494a8be5412f63db2bd148505",
+      "words": "ENI for LO (delegated 2026-11-24): yes to P33 with P65's notes (pass, not a $5 day pass).",
+      "date": "2026-11-27"
+    },
+    {
+      "card": "P49",
+      "sha256": "15696bbaf698abf63d850d78dc1eac90b7710844d5def9fd01536ad7a8e4f18e",
+      "words": "ENI for LO (delegated 2026-11-24): yes to P49 with P65's notes (pass, not a $5 day pass).",
+      "date": "2026-11-27"
+    },
+    {
+      "card": "P56",
+      "sha256": "a68a5845025b094b4aa5d1b7f5d3c812e644cdcb6fbaac655b8c151885bdac2f",
+      "words": "ENI for LO (delegated 2026-11-24): yes to P56 with P65's notes (pass, not a $5 day pass).",
+      "date": "2026-11-27"
+    },
+    {
+      "card": "P64",
+      "sha256": "b22719dbdc33ca1db63c6ba8ab56b84a2e02d873c486ef5fe3f4c845dce493ea",
+      "words": "ENI for LO (delegated 2026-11-24): yes again to P64 after check fixes: longer Mark, Ryan and Match lines for the talk ratio, Channel 9's first line shortened.",
+      "date": "2026-11-27"
+    },
+    {
+      "card": "P65",
+      "sha256": "814b8744df6987ffb5fba6a2bded5a7b2b450a063f5cbf186592b6ead3705b0a",
+      "words": "ENI for LO (delegated 2026-11-24): yes again to P65 after its Does line names the price shown.",
+      "date": "2026-11-27"
+    },
+    {
+      "card": "P64",
+      "sha256": "0141fcb06dfd2908d44459d4db9c5c5febbb0a39455ea7207fb8200f02a59bac",
+      "words": "ENI for LO (delegated 2026-11-24): yes again to P64 after reader pass 2: she holds the remote, so Mark says leave it on this one; Ryan's lines fixed.",
+      "date": "2026-11-27"
+    },
+    {
+      "card": "P65",
+      "sha256": "2772fe96fa5c641fa493e016606cc623c1bdf22144468e340e1a7e594cefbf44",
+      "words": "ENI for LO (delegated 2026-11-24): yes again to P65: Marco's line after she buys, and the Staying in Shape step names the pass.",
+      "date": "2026-11-27"
+    },
+    {
+      "card": "P66",
+      "sha256": "8944834197f9adf725ee1a32b84dd0052227a1e45c9edfe4c8938c84172a09dd",
+      "words": "ENI for LO (delegated 2026-11-24): yes to P66 as carded. LO 2026-11-27: \"just one pay and then it says more in the further releases\", \"it just ends that path\", \"Nope ... we can just say out loud that this is it for now.\", \"Go on rent\".",
+      "date": "2026-11-27"
+    },
+    {
+      "card": "P11",
+      "sha256": "f9dcc0903d9fb8b41d0c35dcaec0dbe9d667111d1c504a0f012e1e0a5a90b0d6",
+      "words": "ENI for LO (delegated 2026-11-24): yes to P11 with P66's notes (rent storyline ends at the first payment in release 1).",
+      "date": "2026-11-27"
+    },
+    {
+      "card": "P13",
+      "sha256": "547efdf0c5a22c0eb7b2155b78361ae15d5abbe6a116dc3b0c59a2e202c1315b",
+      "words": "ENI for LO (delegated 2026-11-24): yes to P13 with P66's notes (rent storyline ends at the first payment in release 1).",
+      "date": "2026-11-27"
+    },
+    {
+      "card": "P34",
+      "sha256": "c3ba83eb5ed7882a79d7b7174ae5e8b56bd1836c28b7c345a1f25a4d184f84d8",
+      "words": "ENI for LO (delegated 2026-11-24): yes to P34 with P66's notes (rent storyline ends at the first payment in release 1).",
+      "date": "2026-11-27"
+    },
+    {
+      "card": "P46",
+      "sha256": "d6fa3257fc3cb8778f616330e67fd465abadbcdc9da7501aa0e3b6d84866656d",
+      "words": "ENI for LO (delegated 2026-11-24): yes to P46 with P66's notes (rent storyline ends at the first payment in release 1).",
+      "date": "2026-11-27"
+    },
+    {
+      "card": "P64",
+      "sha256": "56383c09012fab5aa3c454731fe4daadaa5d8f6d9567f1b2861bd0b847302ace",
+      "words": "ENI for LO (delegated 2026-11-24): yes again to P64: the sitcom line gets four more spoken words for the talk ratio.",
+      "date": "2026-11-27"
+    },
+    {
+      "card": "P64",
+      "sha256": "2b24d1c912376460d26916edd73bd353d33ac811ed5f86b064349ead1bfce1ea",
+      "words": "ENI for LO (delegated 2026-11-24): yes again to P64: with Mark in, he has the remote and lets her pick once.",
+      "date": "2026-11-27"
+    },
+    {
+      "card": "P65",
+      "sha256": "7e1d6f730fb18139a52d21112708c3cbc6e9e4c70944740faee1f1cfcbde90e4",
+      "words": "ENI for LO (delegated 2026-11-24): yes again to P65 after reader pass: the paid screen, with and without Marco, ends on the workout.",
+      "date": "2026-11-27"
+    },
+    {
+      "card": "P67",
+      "sha256": "d33af201f7d7bb2c334487c53a68c9e764a67a3535463f32ee5da99484f4d1c2",
+      "words": "ENI for LO (delegated 2026-11-24): yes to shoes as carded. LO 2026-11-27: \"Shoes also to be required in park and gym and change cloths section.\", \"go ahead\".",
+      "date": "2026-11-27"
+    },
+    {
+      "card": "P07",
+      "sha256": "0df6163658adf5dfee443689098d0e7fea3d310eadfaf15469a3a04e47a61322",
+      "words": "ENI for LO (delegated 2026-11-24): yes to P07 with the P66/P67 notes.",
+      "date": "2026-11-27"
+    },
+    {
+      "card": "P33",
+      "sha256": "7c9913f942887feb09f34b9b3c54ad9a604c328f11d90b1ed93daecc0b7c969f",
+      "words": "ENI for LO (delegated 2026-11-24): yes to P33 with the P66/P67 notes.",
+      "date": "2026-11-27"
+    },
+    {
+      "card": "P46",
+      "sha256": "f9f64dd34460334f54f16908e8f114567b7e77d0647e161ca32ca0b9f746f62e",
+      "words": "ENI for LO (delegated 2026-11-24): yes to P46 with the P66/P67 notes.",
+      "date": "2026-11-27"
+    },
+    {
+      "card": "P64",
+      "sha256": "716870a613b51ceeba42468dab5d06bd2470c2863b168f35fbea196062414556",
+      "words": "ENI for LO (delegated 2026-11-24): yes again to P64: Mark's spoken line on the watch screen, and its Does line.",
+      "date": "2026-11-27"
+    },
+    {
+      "card": "P65",
+      "sha256": "b9da4c984e36ee33e16be0821e3f95cb07b72d4d17b73fff0dfc65a5c9188cc6",
+      "words": "ENI for LO (delegated 2026-11-24): yes again to P65: Marco's desk lines longer for the talk ratio.",
+      "date": "2026-11-27"
+    },
+    {
+      "card": "P33",
+      "sha256": "26baa15da145f4df6cbac84246170c6bb826a8afc892ddd62d0ad87229266127",
+      "words": "ENI for LO (delegated 2026-11-24): yes to P33 with sneakers in the run and workout wearing rows.",
+      "date": "2026-11-27"
+    },
+    {
+      "card": "P64",
+      "sha256": "1b3f4b872ba69cf9f0739dc4121bf8af3fa36b443d21b5d188efb63aca47d679",
+      "words": "ENI for LO (delegated 2026-11-24): yes again to P64: the channel list screen says only that she curls up; Mark's lines stay on the channel screens.",
+      "date": "2026-11-27"
+    },
+    {
+      "card": "P65",
+      "sha256": "e0d2cfdabaf55f250d6eceecf81343fa02b7163285ca2cdad000a2d01a935124",
+      "words": "ENI for LO (delegated 2026-11-24): yes again to P65: Marco's desk lines need met_marco; his last line promises nothing his hours can break.",
+      "date": "2026-11-27"
+    },
+    {
+      "card": "P67",
+      "sha256": "9d7e973dca10a1f5140c3acef93f6c7dddd66ecffe481e843d8deb258fa63a59",
+      "words": "ENI for LO (delegated 2026-11-24): yes again to P67: the door offers only Go back (wardrobe_anywhere = false), and PLAN 8d names shoes.",
+      "date": "2026-11-27"
+    },
+    {
+      "card": "P66",
+      "sha256": "cea063014470c595bd4ad4eb1d0b15bcdb51465213422c90ba0c28471cdc1ec6",
+      "words": "ENI for LO (delegated 2026-11-24): yes to P66 with LO's calls 2026-11-27 (\"yes to all 4\"): release 2 named; a short Sunday carries the debt in weeks, capped at four weeks asked, whole sum only.",
+      "date": "2026-11-27"
+    },
+    {
+      "card": "P68",
+      "sha256": "30956e24c40722b16ec76bc1c920291140690bea16448df5ffdbcbb98a5c6e9a",
+      "words": "ENI for LO (delegated 2026-11-24): yes to P68. LO 2026-11-27 \"yes to all 4\": A, a first hello meets Vance; C, the House Next Door hidden for release 1 (L170 skipped by LO's call to hide it).",
+      "date": "2026-11-27"
+    },
+    {
+      "card": "P39",
+      "sha256": "0e2aea3f19a9e03cc9d0d93ef19ebc2125b8854ca661665261037221fcc82745",
+      "words": "ENI for LO (delegated 2026-11-24): yes to P39 with the P66/P68 notes.",
+      "date": "2026-11-27"
+    },
+    {
+      "card": "P24",
+      "sha256": "f8b02216de322726d9ffb4dc434d0a558b31d5bf3756e8905aa2a5e1d269baed",
+      "words": "ENI for LO (delegated 2026-11-24): yes to P24 with the P66/P68 notes.",
+      "date": "2026-11-27"
+    },
+    {
+      "card": "P03",
+      "sha256": "0f6e6f52a3f8570915289dbfecb76ed28fb7a9c5253cda4c7ac836933c1ace43",
+      "words": "ENI for LO (delegated 2026-11-24): yes to P03 with the P66/P68 notes.",
+      "date": "2026-11-27"
+    },
+    {
+      "card": "P46",
+      "sha256": "d59ab78451b923ddee1573eb1c088a8942e97ef81bdbb1a217f920ad9365ba20",
+      "words": "ENI for LO (delegated 2026-11-24): yes to P46 with the P66/P68 notes.",
+      "date": "2026-11-27"
+    },
+    {
+      "card": "P68",
+      "sha256": "ffec1ca2b8ac14b82772905aca85c12d842a74c2ca2de8f69a7891b308ba109c",
+      "words": "ENI for LO (delegated 2026-11-24): yes again to P68: the L170 line cites LO's \"yes to all 4\" (2026-11-27).",
+      "date": "2026-11-27"
+    },
+    {
+      "card": "P03",
+      "sha256": "e66e6ac36415240cb44c8b2ae0e3307a7ba88fb3a86d245c848de30add1f4a7d",
+      "words": "ENI for LO (delegated 2026-11-24): yes again to P03: the L170 line cites LO's \"yes to all 4\" (2026-11-27).",
+      "date": "2026-11-27"
+    },
+    {
+      "card": "P11",
+      "sha256": "90fb9407897d17eb931df0576b5e8117f0a1201bf3ac1e8445d68bd469754a5f",
+      "words": "ENI for LO (delegated 2026-11-24): yes to P11 with the nine new P66 pay screens' Sheet and Does lines and its note.",
+      "date": "2026-11-27"
+    },
+    {
+      "card": "P34",
+      "sha256": "70ad0c3543de2f59ee8575c282ed15381bd4d1e3e599aa3c7e57909cb8ae35ed",
+      "words": "ENI for LO (delegated 2026-11-24): yes to P34 with the nine new P66 pay screens' Sheet and Does lines and its note.",
+      "date": "2026-11-27"
+    },
+    {
+      "card": "P39",
+      "sha256": "299b3e19fc98adfad021ffd327c0483a37e1892a18be0c6a9d9cb0c7b29a5e5e",
+      "words": "ENI for LO (delegated 2026-11-24): yes again to P39: the hello's Does line names a first meeting.",
+      "date": "2026-11-27"
+    },
+    {
+      "card": "P66",
+      "sha256": "aa94d62f08a011e201a99d7ffb76026b99c3b2cf701f70e727c37c0a20f1e9b2",
+      "words": "ENI for LO (delegated 2026-11-24): yes again to P66: a skipped Sunday adds a week of debt on Monday, like a short one.",
+      "date": "2026-11-27"
+    },
+    {
+      "card": "P68",
+      "sha256": "bd9249b3158d1242ad9573b2f9d2e2a8e5578d27f2e913288f89e060d9c93824",
+      "words": "ENI for LO (delegated 2026-11-24): yes again to P68: her reaction to his look in the hello; PLAN's Vance lines name the weekday hello.",
+      "date": "2026-11-27"
     }
   ]
 }

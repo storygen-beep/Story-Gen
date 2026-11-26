@@ -1,6 +1,6 @@
 {
  "piece": "P58",
- "pass": 3,
+ "pass": 7,
  "screens": {
   "talk_vance.hub": {
    "text": "ec77a1eb6c65e629",
@@ -125,7 +125,7 @@
   "C1267": "f0db81b801577bf2",
   "C1249": "a843f9b57e43a020",
   "C1250": "fde578d75b0d3620",
-  "C1265": "64b72c778e96e443",
+  "C1265": "eb11e05cd75e52a9",
   "C1234": "1b2a2d5f05b10331",
   "L121": "45842b25d0708a15",
   "L125": "1fca3bfe1d0c2419",
@@ -244,7 +244,7 @@
     "all": "3e4396aac395e590"
    },
    "row_hash": "c1c0e2ac2588a579",
-   "carried": false,
+   "carried": true,
    "pass": 3
   },
   {
@@ -320,7 +320,7 @@
     "all": "091f7eafd849ad35"
    },
    "row_hash": "c1c0e2ac2588a579",
-   "carried": false,
+   "carried": true,
    "pass": 3
   },
   {
@@ -551,7 +551,7 @@
     "all": "3e4396aac395e590"
    },
    "row_hash": "80d415cf08e0ebfe",
-   "carried": false,
+   "carried": true,
    "pass": 3
   },
   {
@@ -627,7 +627,7 @@
     "all": "091f7eafd849ad35"
    },
    "row_hash": "80d415cf08e0ebfe",
-   "carried": false,
+   "carried": true,
    "pass": 3
   },
   {
@@ -1095,14 +1095,14 @@
    "row": "C1265",
    "screen": "*",
    "verdict": "PASS",
-   "line": "",
-   "why": "a person's menu is the exception C596 names",
+   "line": "talk_vance.hub \"He watches you come over.\" <<everyday/vance_t0>>",
+   "why": "pictures on the five people's menus only",
    "cause": null,
    "note": false,
-   "screen_hash": "e7fe76a0e5932036",
-   "row_hash": "64b72c778e96e443",
-   "carried": true,
-   "pass": 1
+   "screen_hash": "728b328b7c3109b5",
+   "row_hash": "eb11e05cd75e52a9",
+   "carried": false,
+   "pass": 7
   },
   {
    "row": "C1267",
@@ -1562,7 +1562,7 @@
     "all": "3e4396aac395e590"
    },
    "row_hash": "27e6b45f50edd3ac",
-   "carried": false,
+   "carried": true,
    "pass": 3
   },
   {
@@ -1600,7 +1600,7 @@
     "all": "091f7eafd849ad35"
    },
    "row_hash": "27e6b45f50edd3ac",
-   "carried": false,
+   "carried": true,
    "pass": 3
   },
   {
@@ -1741,7 +1741,7 @@
     "all": "3e4396aac395e590"
    },
    "row_hash": "67e48e60d5053a2e",
-   "carried": false,
+   "carried": true,
    "pass": 3
   },
   {
@@ -1817,7 +1817,7 @@
     "all": "091f7eafd849ad35"
    },
    "row_hash": "67e48e60d5053a2e",
-   "carried": false,
+   "carried": true,
    "pass": 3
   },
   {
@@ -1925,7 +1925,7 @@
     "all": "3e4396aac395e590"
    },
    "row_hash": "310706ee076318f2",
-   "carried": false,
+   "carried": true,
    "pass": 3
   },
   {
@@ -1963,7 +1963,7 @@
     "all": "091f7eafd849ad35"
    },
    "row_hash": "310706ee076318f2",
-   "carried": false,
+   "carried": true,
    "pass": 3
   },
   {
@@ -2829,7 +2829,7 @@
     "all": "3e4396aac395e590"
    },
    "row_hash": "4e86d143688ba8e5",
-   "carried": false,
+   "carried": true,
    "pass": 3
   },
   {
@@ -2867,7 +2867,7 @@
     "all": "091f7eafd849ad35"
    },
    "row_hash": "4e86d143688ba8e5",
-   "carried": false,
+   "carried": true,
    "pass": 3
   },
   {
@@ -2976,7 +2976,7 @@
     "all": "3e4396aac395e590"
    },
    "row_hash": "1aadffd96e76381c",
-   "carried": false,
+   "carried": true,
    "pass": 3
   },
   {
@@ -3014,7 +3014,7 @@
     "all": "091f7eafd849ad35"
    },
    "row_hash": "1aadffd96e76381c",
-   "carried": false,
+   "carried": true,
    "pass": 3
   },
   {
@@ -3097,7 +3097,7 @@
     "all": "3e4396aac395e590"
    },
    "row_hash": "13a714429d15f3b2",
-   "carried": false,
+   "carried": true,
    "pass": 3
   },
   {
@@ -3135,7 +3135,7 @@
     "all": "091f7eafd849ad35"
    },
    "row_hash": "13a714429d15f3b2",
-   "carried": false,
+   "carried": true,
    "pass": 3
   },
   {
@@ -3270,7 +3270,7 @@
     "all": "3e4396aac395e590"
    },
    "row_hash": "e64ce2672d85d2d8",
-   "carried": false,
+   "carried": true,
    "pass": 3
   },
   {
@@ -3308,7 +3308,7 @@
     "all": "091f7eafd849ad35"
    },
    "row_hash": "e64ce2672d85d2d8",
-   "carried": false,
+   "carried": true,
    "pass": 3
   },
   {
@@ -3365,8 +3365,8 @@
  ],
  "causes": [],
  "pending": [],
- "asked": 18,
- "answered": 18,
+ "asked": 1,
+ "answered": 1,
  "pass_items": [],
  "unowed": []
 }

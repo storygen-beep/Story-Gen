@@ -1,6 +1,6 @@
 {
  "piece": "P41",
- "pass": 12,
+ "pass": 16,
  "screens": {
   "walk_zoe_sam.moment": {
    "text": "c248c279bc7201af",
@@ -203,7 +203,7 @@
   "C1267": "f0db81b801577bf2",
   "C1249": "a843f9b57e43a020",
   "C1250": "fde578d75b0d3620",
-  "C1265": "64b72c778e96e443",
+  "C1265": "eb11e05cd75e52a9",
   "C1234": "1b2a2d5f05b10331",
   "L121": "45842b25d0708a15",
   "L125": "1fca3bfe1d0c2419",
@@ -1920,37 +1920,39 @@
    "row": "C1265",
    "screen": "walk_party_bathroom.moment",
    "verdict": "PASS",
-   "line": "",
-   "why": "Not a chore, door or menu",
-   "cause": "",
+   "line": "walk_party_bathroom.moment <<sex/party_bathroom_t5>>",
+   "why": "an explicit walk-in moment, not a chore or notice",
+   "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "5b9e2c11df4155e9",
-    "facts": "9a06232c9ed28deb",
-    "facts2": "9a06232c9ed28deb",
-    "all": "56fdc62283dcbefb"
+    "text": "d7e60f112115d298",
+    "traits": "6b1e34b018661933",
+    "facts": "efb118c177f5057f",
+    "facts2": "80e9b9b4ddb849e4",
+    "all": "48e9d529e40d5128"
    },
-   "row_hash": "64b72c778e96e443",
-   "carried": true,
-   "pass": 1
+   "row_hash": "eb11e05cd75e52a9",
+   "carried": false,
+   "pass": 16
   },
   {
    "row": "C1265",
    "screen": "walk_zoe_sam.moment",
    "verdict": "PASS",
-   "line": "",
-   "why": "Not a chore, door or menu",
-   "cause": "",
+   "line": "walk_zoe_sam.moment <<sex/zoe_sam_sofa_t5>>",
+   "why": "an explicit walk-in moment, not a chore or notice",
+   "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "f24a86b2caf75ae6",
+    "text": "c248c279bc7201af",
+    "traits": "fa1a0a429fa0ea30",
     "facts": "c3521100b11dca8e",
     "facts2": "48fd486abd7e2f3c",
-    "all": "83c3b44ab8788f4d"
+    "all": "4b5691a8adc0d4ca"
    },
-   "row_hash": "64b72c778e96e443",
-   "carried": true,
-   "pass": 1
+   "row_hash": "eb11e05cd75e52a9",
+   "carried": false,
+   "pass": 16
   },
   {
    "row": "C1267",
@@ -3473,7 +3475,7 @@
    "note": false,
    "screen_hash": "8635ba4a0df48600",
    "row_hash": "27e6b45f50edd3ac",
-   "carried": false,
+   "carried": true,
    "pass": 12
   },
   {
@@ -6661,8 +6663,8 @@
  ],
  "causes": [],
  "pending": [],
- "asked": 1,
- "answered": 1,
+ "asked": 2,
+ "answered": 2,
  "pass_items": [],
  "unowed": []
 }
