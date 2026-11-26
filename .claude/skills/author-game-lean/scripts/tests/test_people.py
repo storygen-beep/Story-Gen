@@ -213,3 +213,34 @@ def test_a_friend_met_through_someone_else_counts_as_met():
         {"text": "Done", "flagEffects": [{"flag": "met_bee", "op": "set"}]}]}}]}]
     game["quest_cards"] = [{"npc_id": "npc_kay", "when": [{"flag": "met_bee", "op": "is_true"}]}]
     assert any("`npc_kay` is met (`met_bee`)" in r for r in people.menu_problems(game))
+
+
+# ── rule 6: nobody on a thoroughfare (LO 2026-11-27, Vance on her street) ──
+
+def test_a_person_scheduled_on_a_thoroughfare_is_red():
+    game = {"locations": [{"id": "street", "kind": "thoroughfare"}, {"id": "porch", "kind": "destination"}],
+            "npcs": [{"id": "npc_vance", "schedules": [{"location": "street", "start_time": "17:00",
+                                                         "end_time": "20:00", "activity": "on his porch"}]}]}
+    rows = people.thoroughfare_problems(game)
+    assert len(rows) == 1 and "npc_vance" in rows[0] and "thoroughfare" in rows[0]
+
+
+def test_a_person_at_the_place_off_the_street_is_green():
+    game = {"locations": [{"id": "street", "kind": "thoroughfare"}, {"id": "porch", "kind": "destination"}],
+            "npcs": [{"id": "npc_vance", "schedules": [{"location": "porch", "start_time": "17:00",
+                                                         "end_time": "20:00"}]}]}
+    assert people.thoroughfare_problems(game) == []
+
+
+def test_a_row_on_purpose_with_a_reason_is_green():
+    game = {"locations": [{"id": "quad", "kind": "thoroughfare"}],
+            "npcs": [{"id": "npc_zoe", "schedules": [{"location": "quad", "start_time": "13:00", "end_time": "15:00",
+                                                       "activity": "on the grass",
+                                                       "on_route": "students sit on the quad's grass"}]}]}
+    assert people.thoroughfare_problems(game) == []
+
+
+def test_an_empty_reason_is_still_red():
+    game = {"locations": [{"id": "quad", "kind": "thoroughfare"}],
+            "npcs": [{"id": "npc_zoe", "schedules": [{"location": "quad", "on_route": " "}]}]}
+    assert len(people.thoroughfare_problems(game)) == 1

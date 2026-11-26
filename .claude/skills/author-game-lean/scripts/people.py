@@ -27,6 +27,9 @@ Rule 5 runs on every lean game, with or without the switch (LO, typed in main-le
      or by a flag their `[[quest_cards]]` `when` waits on (a friend met through someone else), has a repeatable, manual canvas with `npc` set to them (their face), or carries `no_menu = "<why>"`. Each
      menu's Talk sets a `_today` flag that `[engine.daily_tick]` clears, and all of one person's menus share it,
      so Talk is once a day across places (C2198). The steps and the hooks are the reader's.
+  6. nobody's schedule row puts them on a place with `kind = "thoroughfare"`, unless the row says why it is there on
+     purpose with `on_route = "<why>"` (craft/places.md rule 7, C738; LO, typed in main-lean 2026-11-27: "yes", after
+     Vance's porch rows sat on her street, then "your picks").
 """
 import functools
 import re
@@ -174,9 +177,30 @@ def menu_problems(game):
     return rows
 
 
+def thoroughfare_problems(game):
+    """Rule 6: nobody's schedule row puts them on a thoroughfare. A street or a quad only routes (craft/places.md
+    rule 7, C738); a person there belongs at the place off it. LO, 2026-11-27: Vance's porch rows sat on her street,
+    so he showed in the neighbourhood and not at his own house, and nothing caught it. A row that is there on purpose
+    (students on the quad's grass, someone waiting in the hall for the bathroom) says why in `on_route = "<why>"`,
+    which the engine ignores (template_import.py:2570-2590 reads only the row keys it knows)."""
+    kinds = {str(l.get("id")): str(l.get("kind") or "") for l in game.get("locations") or [] if isinstance(l, dict)}
+    rows = []
+    for n in game.get("npcs") or []:
+        if not isinstance(n, dict):
+            continue
+        for r in n.get("schedules") or []:
+            loc = str((r or {}).get("location") or "")
+            if kinds.get(loc) == "thoroughfare" and not str((r or {}).get("on_route") or "").strip():
+                when = f"{r.get('start_time', '?')}-{r.get('end_time', '?')}"
+                rows.append(f"person `{n.get('id')}` has a schedule row on `{loc}`, a thoroughfare ({when}, "
+                            f"\"{r.get('activity', '')}\"): a street only routes; put them at the place off it, or say why "
+                            f"they are there on purpose with `on_route = \"<why>\"` (craft/places.md rule 7; C738)")
+    return rows
+
+
 def problems(game, mod=None):
-    """Rows that make the people check red. Rule 5 runs on every game; rules 1 to 4 only under the switch."""
-    menu_rows = menu_problems(game)
+    """Rows that make the people check red. Rules 5 and 6 run on every game; rules 1 to 4 only under the switch."""
+    menu_rows = menu_problems(game) + thoroughfare_problems(game)
     if not on(game):
         return menu_rows
     mod = mod or engine()
