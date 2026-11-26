@@ -42,7 +42,7 @@ On a card with a `Does:` block (every card from 2026-11-24 on), the rows that ap
 - `show_when_blocked` with `cooldown_message` keeps a shut activity on screen as a dimmed line with its message (read at v2.py:15124-15128, drawn at v2.py:6760-6768) (C913, C930). That's only when the clock alone shut it. A row shut by something waiting can't fix (clothes, money, a meter, a flag) greys out with its `locked_text` instead, or stays hidden without one (v2.py:6709-6717; `craft/clothes.md`).
 - A place shut by its hours says "Closed. Opens at …" (`setup.locClosedReason`, v2.py:11792-11799), and its `closed_text` shows at the door (v2.py:11464-11467).
 - **A condition item can be a group:** `{ type = "group", logic = "AND"|"OR", items = [...] }`, read with its own logic, recursively; an empty group, or one nested deeper than 3, is false (v2.py:5414-5422). A group made only of clock items counts as the clock, so its row greys with its `cooldown_message` instead of hiding (`setup.onlyTheClockShut`, v2.py:6085). Tests: `apps/game_generation/tests/test_condition_groups.py`.
-- People's hours have their own Schedules page (`:: SchedulePage`, v2.py:24433) (C915).
+- People's hours have their own Schedules page (`:: SchedulePage`, v2.py:24439) (C915).
 - No token prints the current time into prose (C928): a grep of v2.py for `@time` finds none.
 
 ## The measures (re-run 2026-11-22)
