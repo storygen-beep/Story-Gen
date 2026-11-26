@@ -1,6 +1,6 @@
 {
  "piece": "P38",
- "pass": 16,
+ "pass": 17,
  "screens": {
   "walk_parents.moment": {
    "text": "7f828ca106b8bccf",
@@ -26,16 +26,16 @@
   "walk_ryan_phone.moment": {
    "text": "bc2dfd613888c1cc",
    "traits": "74c4f68e6476ecee",
-   "facts": "24c4b946d90ccbb4",
+   "facts": "3fcc8bcb262e57a0",
    "facts2": "829298a706f02a41",
-   "all": "a012f1eb60a521c0"
+   "all": "c03d982b34509559"
   },
   "walk_ryan_phone.watch": {
    "text": "9c54792da90cec47",
    "traits": "74c4f68e6476ecee",
-   "facts": "24c4b946d90ccbb4",
+   "facts": "3fcc8bcb262e57a0",
    "facts2": "829298a706f02a41",
-   "all": "b42248054a63abe1"
+   "all": "dcb9eda74049d929"
   },
   "walk_ryan_phone.away": {
    "text": "304343848758928d",
@@ -89,30 +89,30 @@
   "walk_ryan_game.moment": {
    "text": "c2fc8528c8a17f52",
    "traits": "74c4f68e6476ecee",
-   "facts": "dc79944b1aa0a816",
+   "facts": "4d4e271ca8598b9f",
    "facts2": "7eac0b49ad26fea0",
-   "all": "78691f04ac562b87"
+   "all": "f08ec4396e35505a"
   },
   "walk_ryan_game.play": {
    "text": "289cbc8c56884395",
    "traits": "74c4f68e6476ecee",
-   "facts": "dc79944b1aa0a816",
+   "facts": "4d4e271ca8598b9f",
    "facts2": "7eac0b49ad26fea0",
-   "all": "a3da739cc0766d6d"
+   "all": "2fe7017637a44820"
   },
   "walk_ryan_game.notnow": {
    "text": "160b99b2e866fe1a",
    "traits": "74c4f68e6476ecee",
-   "facts": "dc79944b1aa0a816",
+   "facts": "4d4e271ca8598b9f",
    "facts2": "7eac0b49ad26fea0",
-   "all": "2d129f40cb61bacc"
+   "all": "3b6e17b7a3d69879"
   },
   "walk_ryan_shower.moment": {
    "text": "8c491e1c62636721",
    "traits": "74c4f68e6476ecee",
-   "facts": "3a6c1ddc24ec0f10",
+   "facts": "58b96a0b985de8b8",
    "facts2": "79c2db2883b9c464",
-   "all": "32095613619b5457"
+   "all": "b16f6f6374868814"
   },
   "walk_ryan_shower.cover": {
    "text": "f888399d0a1e24cb",
@@ -128,7 +128,7 @@
    "facts2": "64f3c4db79ffd75c",
    "all": "c065010ed9d5b4d2"
   },
-  "*": "60dfda327fb194f0"
+  "*": "2a93cbd1808cfc0d"
  },
  "rows": {
   "B1": "5276068df1ca6fa9",
@@ -179,7 +179,7 @@
   "C1185": "db808998ed69c649",
   "C1220": "18d85534582def9d",
   "C1221": "3835fed23cc316c7",
-  "C1176": "7632b28c693a43a4",
+  "C1176": "655e8e2b731598c9",
   "C1189": "2afadc6bbe1996bd",
   "C1200": "65e6616cd17c7eb3",
   "C1033": "9daf075fd3c2e30e",
@@ -239,6 +239,7 @@
   "C2198": "27e6b45f50edd3ac",
   "C769": "f6b6f78a8f2e5ed7",
   "C794": "bad76e5963432385",
+  "C2201": "d119dfe665f76359",
   "C795": "34139e6a6914e171",
   "C804": "5358489178bff0a4",
   "L106": "13a714429d15f3b2",
@@ -295,7 +296,8 @@
   "C2188": "612394eef6826900",
   "C2189": "20748838895e4545",
   "C2195": "77083291a86791c3",
-  "C2196": "a8ae0700d13a7f9b"
+  "C2196": "a8ae0700d13a7f9b",
+  "C2200": "117a60e53de1e8a4"
  },
  "verdicts": [
   {
@@ -1445,14 +1447,14 @@
    "row": "C1176",
    "screen": "*",
    "verdict": "PASS",
-   "line": "\u2014",
-   "why": "no clothing read on the sex scenes",
+   "line": "Mom on her back, nightie round her waist, Mark between her legs",
+   "why": "no read of her clothes on the sex screens; the nightie is Mom's, part of what she sees",
    "cause": null,
    "note": true,
-   "screen_hash": "280aed1bba0156f9",
-   "row_hash": "7632b28c693a43a4",
-   "carried": true,
-   "pass": 1
+   "screen_hash": "2a93cbd1808cfc0d",
+   "row_hash": "655e8e2b731598c9",
+   "carried": false,
+   "pass": 17
   },
   {
    "row": "C1184",
@@ -1651,7 +1653,7 @@
    "note": false,
    "screen_hash": "60dfda327fb194f0",
    "row_hash": "eb11e05cd75e52a9",
-   "carried": false,
+   "carried": true,
    "pass": 16
   },
   {
@@ -3069,6 +3071,32 @@
    "row_hash": "27e6b45f50edd3ac",
    "carried": true,
    "pass": 12
+  },
+  {
+   "row": "C2200",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "Their door hasn't caught. Through the gap: Mom on her back...",
+   "why": "not a 'she gets noticed' scene: no stranger reacts to a garment she wears; noticed scenes are 5 of 34 arrival scenes, one per garment state per place",
+   "cause": null,
+   "note": false,
+   "screen_hash": "2a93cbd1808cfc0d",
+   "row_hash": "117a60e53de1e8a4",
+   "carried": false,
+   "pass": 17
+  },
+  {
+   "row": "C2201",
+   "screen": "*",
+   "verdict": "N/A",
+   "line": "Their door hasn't caught.",
+   "why": "scene and menu screens, not a place's description; the descriptions of the places they sit at read no clothes or meters (all 31 checked)",
+   "cause": null,
+   "note": false,
+   "screen_hash": "2a93cbd1808cfc0d",
+   "row_hash": "d119dfe665f76359",
+   "carried": false,
+   "pass": 17
   },
   {
    "row": "C286",
@@ -6450,8 +6478,8 @@
  ],
  "causes": [],
  "pending": [],
- "asked": 1,
- "answered": 1,
+ "asked": 3,
+ "answered": 3,
  "pass_items": [],
  "unowed": []
 }

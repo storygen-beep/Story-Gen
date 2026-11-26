@@ -1,22 +1,22 @@
 {
  "piece": "P20",
- "pass": 14,
+ "pass": 15,
  "screens": {
   "quad_meet_zoe.coffee": {
    "text": "cacb601aa799b9fd",
    "traits": "6b1e34b018661933",
-   "facts": "9ffbbc8ba008e154",
+   "facts": "9ff1bda7763e1f11",
    "facts2": "262e056b4f130afa",
-   "all": "6e049aeeb336f9ab"
+   "all": "1f43585d818f9aa2"
   },
   "quad_meet_zoe.talk": {
    "text": "f7db38821f67277f",
    "traits": "6b1e34b018661933",
-   "facts": "782b2f9b937f0abe",
+   "facts": "d33e5881ea5bb2d3",
    "facts2": "215f39220593dca1",
-   "all": "081bed1d70385580"
+   "all": "41349a2f24f868e2"
   },
-  "*": "fdb2a1e1a6c519fe"
+  "*": "501111601ee5bb96"
  },
  "rows": {
   "B1": "5276068df1ca6fa9",
@@ -120,6 +120,7 @@
   "C2198": "27e6b45f50edd3ac",
   "C769": "f6b6f78a8f2e5ed7",
   "C794": "bad76e5963432385",
+  "C2201": "d119dfe665f76359",
   "C795": "34139e6a6914e171",
   "C804": "5358489178bff0a4",
   "L106": "13a714429d15f3b2",
@@ -724,7 +725,7 @@
    "note": false,
    "screen_hash": "fdb2a1e1a6c519fe",
    "row_hash": "eb11e05cd75e52a9",
-   "carried": false,
+   "carried": true,
    "pass": 14
   },
   {
@@ -1086,6 +1087,19 @@
    "row_hash": "27e6b45f50edd3ac",
    "carried": true,
    "pass": 10
+  },
+  {
+   "row": "C2201",
+   "screen": "*",
+   "verdict": "N/A",
+   "line": "\u2014",
+   "why": "builds no place description (quad_meet_zoe, npc_zoe); a scene is not a place's description",
+   "cause": null,
+   "note": false,
+   "screen_hash": "501111601ee5bb96",
+   "row_hash": "d119dfe665f76359",
+   "carried": false,
+   "pass": 15
   },
   {
    "row": "C422",

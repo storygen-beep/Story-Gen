@@ -1,6 +1,6 @@
 {
  "piece": "P55",
- "pass": 5,
+ "pass": 6,
  "screens": {
   "*": "4f53cda18c2baa0c"
  },
@@ -70,6 +70,7 @@
   "C2192": "fb8267ff01adf133",
   "C2195": "40447ff526d3f730",
   "C2196": "4ca489a2e70123f0",
+  "C2200": "414a4b008effe564",
   "walk-ins#1": "e2c5c7198fc0d5ef",
   "walk-ins#2": "23e5d0e67707aeaf",
   "walk-ins#3": "6ef8eb0271aa1f38",
@@ -1254,6 +1255,19 @@
    "row_hash": "4ca489a2e70123f0",
    "carried": true,
    "pass": 4
+  },
+  {
+   "row": "C2200",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "(the 21 kind (a) walk-ins, trigger_mode random, chance 0.35)",
+   "why": "not a 'she gets noticed' scene: no stranger reacts to a garment she wears; noticed scenes are 5 of 34 arrival scenes, one per garment state per place",
+   "cause": null,
+   "note": false,
+   "screen_hash": "4f53cda18c2baa0c",
+   "row_hash": "414a4b008effe564",
+   "carried": false,
+   "pass": 6
   },
   {
    "row": "C28",
@@ -2500,7 +2514,7 @@
    "note": false,
    "screen_hash": "4f53cda18c2baa0c",
    "row_hash": "f74d350a978e124c",
-   "carried": false,
+   "carried": true,
    "pass": 5
   },
   {

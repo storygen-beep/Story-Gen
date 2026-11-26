@@ -1,6 +1,6 @@
 {
  "piece": "P67",
- "pass": 3,
+ "pass": 4,
  "screens": {
   "*": "4f53cda18c2baa0c"
  },
@@ -36,7 +36,7 @@
   "C1220": "e706f55f84a94a84",
   "C1221": "90572c3a26b59fc7",
   "C1177": "9002e505d1fabe59",
-  "C1176": "78d766628b4d73c2",
+  "C1176": "0e04d12a589767b0",
   "C1189": "add9e8d3fbfb9105",
   "C1197": "b4f0f994f2657396",
   "C1200": "766f516b6b8e329c",
@@ -48,7 +48,7 @@
   "clothes#5": "58e88b96e1566182",
   "clothes#6": "2564b4ed16e2c7f7",
   "clothes#7": "bb14def6ad6b8f84",
-  "clothes#8": "e75be85fc8419181",
+  "clothes#8": "cce3662a8d49bfda",
   "clothes#9": "fa33eaefa120f48c",
   "C442": "a2b07f40e1a9e908",
   "C449": "ac5932d70cd775a1",
@@ -361,14 +361,14 @@
    "row": "C1176",
    "screen": "*",
    "verdict": "PASS",
-   "line": "Go for a run \u2014 Needs leggings, a sports top and sneakers",
-   "why": "the reads sit on the street, the park and the gym, not on sex scenes",
+   "line": "The neighbourhood: your street, the same row of houses... (no variants)",
+   "why": "the street description no longer reads her clothes; the reads sit in the noticed scenes (P72) and the run and workout acts, none on a sex scene",
    "cause": null,
    "note": true,
    "screen_hash": "4f53cda18c2baa0c",
-   "row_hash": "78d766628b4d73c2",
-   "carried": true,
-   "pass": 1
+   "row_hash": "0e04d12a589767b0",
+   "carried": false,
+   "pass": 4
   },
   {
    "row": "C1177",
@@ -802,15 +802,15 @@
   {
    "row": "clothes#8",
    "screen": "*",
-   "verdict": "N/A",
-   "line": "\u2014",
-   "why": "no noticing line added by P67",
+   "verdict": "PASS",
+   "line": "You're not going out like this. Go back up to your room and put on a top and a bottom, or a dress, and shoes.",
+   "why": "P67 adds no noticing line; the street has no description variant; strangers' looks are P72's noticed scenes with her choice",
    "cause": null,
    "note": false,
    "screen_hash": "4f53cda18c2baa0c",
-   "row_hash": "e75be85fc8419181",
-   "carried": true,
-   "pass": 1
+   "row_hash": "cce3662a8d49bfda",
+   "carried": false,
+   "pass": 4
   },
   {
    "row": "clothes#9",
@@ -887,7 +887,7 @@
    "note": false,
    "screen_hash": "4f53cda18c2baa0c",
    "row_hash": "f74d350a978e124c",
-   "carried": false,
+   "carried": true,
    "pass": 3
   },
   {
@@ -932,8 +932,8 @@
  ],
  "causes": [],
  "pending": [],
- "asked": 1,
- "answered": 1,
+ "asked": 2,
+ "answered": 2,
  "pass_items": [],
  "unowed": []
 }

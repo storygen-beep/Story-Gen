@@ -19,30 +19,30 @@
   "home_tv.news": {
    "text": "d20748ba2c28ac5e",
    "traits": "cbe784dabd345f8d",
-   "facts": "314997266ac1c9a4",
+   "facts": "2086a2f386e97188",
    "facts2": "81103bfb9d096e11",
-   "all": "2085932d6951f184"
+   "all": "989795ab017d9893"
   },
   "home_tv.sitcom": {
    "text": "1a97638c0f45f984",
    "traits": "cbe784dabd345f8d",
-   "facts": "314997266ac1c9a4",
+   "facts": "2086a2f386e97188",
    "facts2": "81103bfb9d096e11",
-   "all": "77954d37266734bc"
+   "all": "ea583de33e90d81b"
   },
   "home_tv.cooking": {
    "text": "80004764ac74febf",
    "traits": "cbe784dabd345f8d",
-   "facts": "314997266ac1c9a4",
+   "facts": "2086a2f386e97188",
    "facts2": "81103bfb9d096e11",
-   "all": "56a48f3e00e19f2a"
+   "all": "1cfe730f971b37c3"
   },
   "home_tv.sports": {
    "text": "09919fa69f64e5ca",
    "traits": "cbe784dabd345f8d",
-   "facts": "314997266ac1c9a4",
+   "facts": "2086a2f386e97188",
    "facts2": "81103bfb9d096e11",
-   "all": "df3560b13284452b"
+   "all": "80b203fab047d65e"
   },
   "home_tv.after_dark": {
    "text": "c958337be22edf51",
@@ -51,7 +51,7 @@
    "facts2": "8b0f7870497b38b6",
    "all": "b3043cb0106c97ea"
   },
-  "*": "0560f5676bec5ade"
+  "*": "dcd2e4fdb1327161"
  },
  "rows": {
   "B1": "5276068df1ca6fa9",
@@ -234,7 +234,7 @@
     "all": "b3043cb0106c97ea"
    },
    "row_hash": "c1c0e2ac2588a579",
-   "carried": false,
+   "carried": true,
    "pass": 7
   },
   {
@@ -253,7 +253,7 @@
     "all": "56a48f3e00e19f2a"
    },
    "row_hash": "c1c0e2ac2588a579",
-   "carried": false,
+   "carried": true,
    "pass": 7
   },
   {
@@ -272,7 +272,7 @@
     "all": "2085932d6951f184"
    },
    "row_hash": "c1c0e2ac2588a579",
-   "carried": false,
+   "carried": true,
    "pass": 7
   },
   {
@@ -291,7 +291,7 @@
     "all": "77954d37266734bc"
    },
    "row_hash": "c1c0e2ac2588a579",
-   "carried": false,
+   "carried": true,
    "pass": 7
   },
   {
@@ -310,7 +310,7 @@
     "all": "df3560b13284452b"
    },
    "row_hash": "c1c0e2ac2588a579",
-   "carried": false,
+   "carried": true,
    "pass": 7
   },
   {
@@ -329,7 +329,7 @@
     "all": "2307f209f180b280"
    },
    "row_hash": "c1c0e2ac2588a579",
-   "carried": false,
+   "carried": true,
    "pass": 7
   },
   {
@@ -348,7 +348,7 @@
     "all": "0cf5ddf415e24294"
    },
    "row_hash": "c1c0e2ac2588a579",
-   "carried": false,
+   "carried": true,
    "pass": 7
   },
   {
@@ -668,7 +668,7 @@
     "all": "b3043cb0106c97ea"
    },
    "row_hash": "80d415cf08e0ebfe",
-   "carried": false,
+   "carried": true,
    "pass": 7
   },
   {
@@ -687,7 +687,7 @@
     "all": "56a48f3e00e19f2a"
    },
    "row_hash": "80d415cf08e0ebfe",
-   "carried": false,
+   "carried": true,
    "pass": 7
   },
   {
@@ -706,7 +706,7 @@
     "all": "2085932d6951f184"
    },
    "row_hash": "80d415cf08e0ebfe",
-   "carried": false,
+   "carried": true,
    "pass": 7
   },
   {
@@ -725,7 +725,7 @@
     "all": "77954d37266734bc"
    },
    "row_hash": "80d415cf08e0ebfe",
-   "carried": false,
+   "carried": true,
    "pass": 7
   },
   {
@@ -744,7 +744,7 @@
     "all": "df3560b13284452b"
    },
    "row_hash": "80d415cf08e0ebfe",
-   "carried": false,
+   "carried": true,
    "pass": 7
   },
   {
@@ -763,7 +763,7 @@
     "all": "2307f209f180b280"
    },
    "row_hash": "80d415cf08e0ebfe",
-   "carried": false,
+   "carried": true,
    "pass": 7
   },
   {
@@ -782,7 +782,7 @@
     "all": "0cf5ddf415e24294"
    },
    "row_hash": "80d415cf08e0ebfe",
-   "carried": false,
+   "carried": true,
    "pass": 7
   },
   {
@@ -859,7 +859,7 @@
     "all": "b3043cb0106c97ea"
    },
    "row_hash": "f40f51a0fd6cfd10",
-   "carried": false,
+   "carried": true,
    "pass": 7
   },
   {
@@ -899,13 +899,13 @@
    "screen": "*",
    "verdict": "PASS",
    "line": "Your nipples go tight against your top.",
-   "why": "no clothing read; the top is only where her body presses",
+   "why": "the top is only a truth guard for where her body presses, not an outfit read; as judged before",
    "cause": null,
    "note": true,
-   "screen_hash": "d3ce29d2170a5f3d",
-   "row_hash": "7632b28c693a43a4",
-   "carried": true,
-   "pass": 1
+   "screen_hash": "dcd2e4fdb1327161",
+   "row_hash": "655e8e2b731598c9",
+   "carried": false,
+   "pass": 7
   },
   {
    "row": "C1177",
@@ -1090,7 +1090,7 @@
     "all": "b3043cb0106c97ea"
    },
    "row_hash": "bfff76edbee583de",
-   "carried": false,
+   "carried": true,
    "pass": 7
   },
   {
@@ -2199,6 +2199,19 @@
    "pass": 1
   },
   {
+   "row": "C2201",
+   "screen": "*",
+   "verdict": "N/A",
+   "line": "You turn the sound right down and find Channel 5.",
+   "why": "scene and menu screens, not a place's description; the descriptions of the places they sit at read no clothes or meters (all 31 checked)",
+   "cause": null,
+   "note": false,
+   "screen_hash": "dcd2e4fdb1327161",
+   "row_hash": "d119dfe665f76359",
+   "carried": false,
+   "pass": 7
+  },
+  {
    "row": "C286",
    "screen": "*",
    "verdict": "PASS",
@@ -2524,7 +2537,7 @@
     "all": "b3043cb0106c97ea"
    },
    "row_hash": "67e48e60d5053a2e",
-   "carried": false,
+   "carried": true,
    "pass": 7
   },
   {
@@ -2543,7 +2556,7 @@
     "all": "56a48f3e00e19f2a"
    },
    "row_hash": "67e48e60d5053a2e",
-   "carried": false,
+   "carried": true,
    "pass": 7
   },
   {
@@ -2562,7 +2575,7 @@
     "all": "2085932d6951f184"
    },
    "row_hash": "67e48e60d5053a2e",
-   "carried": false,
+   "carried": true,
    "pass": 7
   },
   {
@@ -2581,7 +2594,7 @@
     "all": "77954d37266734bc"
    },
    "row_hash": "67e48e60d5053a2e",
-   "carried": false,
+   "carried": true,
    "pass": 7
   },
   {
@@ -2600,7 +2613,7 @@
     "all": "df3560b13284452b"
    },
    "row_hash": "67e48e60d5053a2e",
-   "carried": false,
+   "carried": true,
    "pass": 7
   },
   {
@@ -2619,7 +2632,7 @@
     "all": "2307f209f180b280"
    },
    "row_hash": "67e48e60d5053a2e",
-   "carried": false,
+   "carried": true,
    "pass": 7
   },
   {
@@ -2638,7 +2651,7 @@
     "all": "0cf5ddf415e24294"
    },
    "row_hash": "67e48e60d5053a2e",
-   "carried": false,
+   "carried": true,
    "pass": 7
   },
   {
@@ -2670,7 +2683,7 @@
     "all": "b3043cb0106c97ea"
    },
    "row_hash": "310706ee076318f2",
-   "carried": false,
+   "carried": true,
    "pass": 7
   },
   {
@@ -2689,7 +2702,7 @@
     "all": "56a48f3e00e19f2a"
    },
    "row_hash": "310706ee076318f2",
-   "carried": false,
+   "carried": true,
    "pass": 7
   },
   {
@@ -2708,7 +2721,7 @@
     "all": "2085932d6951f184"
    },
    "row_hash": "310706ee076318f2",
-   "carried": false,
+   "carried": true,
    "pass": 7
   },
   {
@@ -2727,7 +2740,7 @@
     "all": "77954d37266734bc"
    },
    "row_hash": "310706ee076318f2",
-   "carried": false,
+   "carried": true,
    "pass": 7
   },
   {
@@ -2746,7 +2759,7 @@
     "all": "df3560b13284452b"
    },
    "row_hash": "310706ee076318f2",
-   "carried": false,
+   "carried": true,
    "pass": 7
   },
   {
@@ -2765,7 +2778,7 @@
     "all": "2307f209f180b280"
    },
    "row_hash": "310706ee076318f2",
-   "carried": false,
+   "carried": true,
    "pass": 7
   },
   {
@@ -2784,7 +2797,7 @@
     "all": "0cf5ddf415e24294"
    },
    "row_hash": "310706ee076318f2",
-   "carried": false,
+   "carried": true,
    "pass": 7
   },
   {
@@ -3557,7 +3570,7 @@
     "all": "b3043cb0106c97ea"
    },
    "row_hash": "4e86d143688ba8e5",
-   "carried": false,
+   "carried": true,
    "pass": 7
   },
   {
@@ -3576,7 +3589,7 @@
     "all": "56a48f3e00e19f2a"
    },
    "row_hash": "4e86d143688ba8e5",
-   "carried": false,
+   "carried": true,
    "pass": 7
   },
   {
@@ -3595,7 +3608,7 @@
     "all": "2085932d6951f184"
    },
    "row_hash": "4e86d143688ba8e5",
-   "carried": false,
+   "carried": true,
    "pass": 7
   },
   {
@@ -3614,7 +3627,7 @@
     "all": "77954d37266734bc"
    },
    "row_hash": "4e86d143688ba8e5",
-   "carried": false,
+   "carried": true,
    "pass": 7
   },
   {
@@ -3633,7 +3646,7 @@
     "all": "df3560b13284452b"
    },
    "row_hash": "4e86d143688ba8e5",
-   "carried": false,
+   "carried": true,
    "pass": 7
   },
   {
@@ -3704,7 +3717,7 @@
     "all": "b3043cb0106c97ea"
    },
    "row_hash": "1aadffd96e76381c",
-   "carried": false,
+   "carried": true,
    "pass": 7
   },
   {
@@ -3723,7 +3736,7 @@
     "all": "56a48f3e00e19f2a"
    },
    "row_hash": "1aadffd96e76381c",
-   "carried": false,
+   "carried": true,
    "pass": 7
   },
   {
@@ -3742,7 +3755,7 @@
     "all": "2085932d6951f184"
    },
    "row_hash": "1aadffd96e76381c",
-   "carried": false,
+   "carried": true,
    "pass": 7
   },
   {
@@ -3761,7 +3774,7 @@
     "all": "77954d37266734bc"
    },
    "row_hash": "1aadffd96e76381c",
-   "carried": false,
+   "carried": true,
    "pass": 7
   },
   {
@@ -3780,7 +3793,7 @@
     "all": "df3560b13284452b"
    },
    "row_hash": "1aadffd96e76381c",
-   "carried": false,
+   "carried": true,
    "pass": 7
   },
   {
@@ -3857,7 +3870,7 @@
     "all": "b3043cb0106c97ea"
    },
    "row_hash": "13a714429d15f3b2",
-   "carried": false,
+   "carried": true,
    "pass": 7
   },
   {
@@ -3876,7 +3889,7 @@
     "all": "56a48f3e00e19f2a"
    },
    "row_hash": "13a714429d15f3b2",
-   "carried": false,
+   "carried": true,
    "pass": 7
   },
   {
@@ -3895,7 +3908,7 @@
     "all": "2085932d6951f184"
    },
    "row_hash": "13a714429d15f3b2",
-   "carried": false,
+   "carried": true,
    "pass": 7
   },
   {
@@ -3914,7 +3927,7 @@
     "all": "77954d37266734bc"
    },
    "row_hash": "13a714429d15f3b2",
-   "carried": false,
+   "carried": true,
    "pass": 7
   },
   {
@@ -3933,7 +3946,7 @@
     "all": "df3560b13284452b"
    },
    "row_hash": "13a714429d15f3b2",
-   "carried": false,
+   "carried": true,
    "pass": 7
   },
   {
@@ -3952,7 +3965,7 @@
     "all": "2307f209f180b280"
    },
    "row_hash": "13a714429d15f3b2",
-   "carried": false,
+   "carried": true,
    "pass": 7
   },
   {
@@ -3971,7 +3984,7 @@
     "all": "0cf5ddf415e24294"
    },
    "row_hash": "13a714429d15f3b2",
-   "carried": false,
+   "carried": true,
    "pass": 7
   },
   {
@@ -4100,7 +4113,7 @@
     "all": "b3043cb0106c97ea"
    },
    "row_hash": "e64ce2672d85d2d8",
-   "carried": false,
+   "carried": true,
    "pass": 7
   },
   {
@@ -4119,7 +4132,7 @@
     "all": "56a48f3e00e19f2a"
    },
    "row_hash": "e64ce2672d85d2d8",
-   "carried": false,
+   "carried": true,
    "pass": 7
   },
   {
@@ -4138,7 +4151,7 @@
     "all": "2085932d6951f184"
    },
    "row_hash": "e64ce2672d85d2d8",
-   "carried": false,
+   "carried": true,
    "pass": 7
   },
   {
@@ -4157,7 +4170,7 @@
     "all": "77954d37266734bc"
    },
    "row_hash": "e64ce2672d85d2d8",
-   "carried": false,
+   "carried": true,
    "pass": 7
   },
   {
@@ -4176,7 +4189,7 @@
     "all": "df3560b13284452b"
    },
    "row_hash": "e64ce2672d85d2d8",
-   "carried": false,
+   "carried": true,
    "pass": 7
   },
   {
@@ -4239,291 +4252,9 @@
   }
  ],
  "causes": [],
- "pending": [
-  {
-   "row": "C1176",
-   "screen": "*",
-   "why": "its rule's text changed"
-  },
-  {
-   "row": "C2201",
-   "screen": "*",
-   "why": "never judged"
-  }
- ],
- "asked": 54,
- "answered": 52,
- "pass_items": [
-  {
-   "row": "B10",
-   "screen": "home_tv.after_dark",
-   "why": "screen changed: truth row"
-  },
-  {
-   "row": "B10",
-   "screen": "home_tv.cooking",
-   "why": "screen changed: truth row"
-  },
-  {
-   "row": "B10",
-   "screen": "home_tv.news",
-   "why": "screen changed: truth row"
-  },
-  {
-   "row": "B10",
-   "screen": "home_tv.sitcom",
-   "why": "screen changed: truth row"
-  },
-  {
-   "row": "B10",
-   "screen": "home_tv.sports",
-   "why": "screen changed: truth row"
-  },
-  {
-   "row": "B10",
-   "screen": "home_tv.watch",
-   "why": "screen changed: truth row"
-  },
-  {
-   "row": "B10",
-   "screen": "home_tv.watch_more",
-   "why": "screen changed: truth row"
-  },
-  {
-   "row": "B8",
-   "screen": "home_tv.after_dark",
-   "why": "screen changed: truth row"
-  },
-  {
-   "row": "B8",
-   "screen": "home_tv.cooking",
-   "why": "screen changed: truth row"
-  },
-  {
-   "row": "B8",
-   "screen": "home_tv.news",
-   "why": "screen changed: truth row"
-  },
-  {
-   "row": "B8",
-   "screen": "home_tv.sitcom",
-   "why": "screen changed: truth row"
-  },
-  {
-   "row": "B8",
-   "screen": "home_tv.sports",
-   "why": "screen changed: truth row"
-  },
-  {
-   "row": "B8",
-   "screen": "home_tv.watch",
-   "why": "screen changed: truth row"
-  },
-  {
-   "row": "B8",
-   "screen": "home_tv.watch_more",
-   "why": "screen changed: truth row"
-  },
-  {
-   "row": "C1158",
-   "screen": "home_tv.after_dark",
-   "why": "screen changed: truth row"
-  },
-  {
-   "row": "C1176",
-   "screen": "*",
-   "why": "its rule's text changed"
-  },
-  {
-   "row": "C1206",
-   "screen": "home_tv.after_dark",
-   "why": "screen changed: truth row"
-  },
-  {
-   "row": "C2201",
-   "screen": "*",
-   "why": "never judged"
-  },
-  {
-   "row": "C460",
-   "screen": "home_tv.after_dark",
-   "why": "screen changed: truth row"
-  },
-  {
-   "row": "C460",
-   "screen": "home_tv.cooking",
-   "why": "screen changed: truth row"
-  },
-  {
-   "row": "C460",
-   "screen": "home_tv.news",
-   "why": "screen changed: truth row"
-  },
-  {
-   "row": "C460",
-   "screen": "home_tv.sitcom",
-   "why": "screen changed: truth row"
-  },
-  {
-   "row": "C460",
-   "screen": "home_tv.sports",
-   "why": "screen changed: truth row"
-  },
-  {
-   "row": "C460",
-   "screen": "home_tv.watch",
-   "why": "screen changed: truth row"
-  },
-  {
-   "row": "C460",
-   "screen": "home_tv.watch_more",
-   "why": "screen changed: truth row"
-  },
-  {
-   "row": "C461",
-   "screen": "home_tv.after_dark",
-   "why": "screen changed: truth row"
-  },
-  {
-   "row": "C461",
-   "screen": "home_tv.cooking",
-   "why": "screen changed: truth row"
-  },
-  {
-   "row": "C461",
-   "screen": "home_tv.news",
-   "why": "screen changed: truth row"
-  },
-  {
-   "row": "C461",
-   "screen": "home_tv.sitcom",
-   "why": "screen changed: truth row"
-  },
-  {
-   "row": "C461",
-   "screen": "home_tv.sports",
-   "why": "screen changed: truth row"
-  },
-  {
-   "row": "C461",
-   "screen": "home_tv.watch",
-   "why": "screen changed: truth row"
-  },
-  {
-   "row": "C461",
-   "screen": "home_tv.watch_more",
-   "why": "screen changed: truth row"
-  },
-  {
-   "row": "C927",
-   "screen": "home_tv.after_dark",
-   "why": "screen changed: truth row"
-  },
-  {
-   "row": "C927",
-   "screen": "home_tv.cooking",
-   "why": "screen changed: truth row"
-  },
-  {
-   "row": "C927",
-   "screen": "home_tv.news",
-   "why": "screen changed: truth row"
-  },
-  {
-   "row": "C927",
-   "screen": "home_tv.sitcom",
-   "why": "screen changed: truth row"
-  },
-  {
-   "row": "C927",
-   "screen": "home_tv.sports",
-   "why": "screen changed: truth row"
-  },
-  {
-   "row": "C931",
-   "screen": "home_tv.after_dark",
-   "why": "screen changed: truth row"
-  },
-  {
-   "row": "C931",
-   "screen": "home_tv.cooking",
-   "why": "screen changed: truth row"
-  },
-  {
-   "row": "C931",
-   "screen": "home_tv.news",
-   "why": "screen changed: truth row"
-  },
-  {
-   "row": "C931",
-   "screen": "home_tv.sitcom",
-   "why": "screen changed: truth row"
-  },
-  {
-   "row": "C931",
-   "screen": "home_tv.sports",
-   "why": "screen changed: truth row"
-  },
-  {
-   "row": "L106",
-   "screen": "home_tv.after_dark",
-   "why": "screen changed: truth row"
-  },
-  {
-   "row": "L106",
-   "screen": "home_tv.cooking",
-   "why": "screen changed: truth row"
-  },
-  {
-   "row": "L106",
-   "screen": "home_tv.news",
-   "why": "screen changed: truth row"
-  },
-  {
-   "row": "L106",
-   "screen": "home_tv.sitcom",
-   "why": "screen changed: truth row"
-  },
-  {
-   "row": "L106",
-   "screen": "home_tv.sports",
-   "why": "screen changed: truth row"
-  },
-  {
-   "row": "L106",
-   "screen": "home_tv.watch",
-   "why": "screen changed: truth row"
-  },
-  {
-   "row": "L106",
-   "screen": "home_tv.watch_more",
-   "why": "screen changed: truth row"
-  },
-  {
-   "row": "L167",
-   "screen": "home_tv.after_dark",
-   "why": "screen changed: truth row"
-  },
-  {
-   "row": "L167",
-   "screen": "home_tv.cooking",
-   "why": "screen changed: truth row"
-  },
-  {
-   "row": "L167",
-   "screen": "home_tv.news",
-   "why": "screen changed: truth row"
-  },
-  {
-   "row": "L167",
-   "screen": "home_tv.sitcom",
-   "why": "screen changed: truth row"
-  },
-  {
-   "row": "L167",
-   "screen": "home_tv.sports",
-   "why": "screen changed: truth row"
-  }
- ],
+ "pending": [],
+ "asked": 2,
+ "answered": 2,
+ "pass_items": [],
  "unowed": []
 }

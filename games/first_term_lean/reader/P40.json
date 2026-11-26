@@ -1,6 +1,6 @@
 {
  "piece": "P40",
- "pass": 19,
+ "pass": 20,
  "screens": {
   "walk_stacks.moment": {
    "text": "a37c81e3865bb04b",
@@ -182,7 +182,7 @@
   "C1220": "18d85534582def9d",
   "C1221": "3835fed23cc316c7",
   "C1177": "ef9bbbe96651efc7",
-  "C1176": "7632b28c693a43a4",
+  "C1176": "655e8e2b731598c9",
   "C1189": "2afadc6bbe1996bd",
   "C1200": "65e6616cd17c7eb3",
   "C1002": "657248766e62061f",
@@ -234,6 +234,7 @@
   "C2198": "27e6b45f50edd3ac",
   "C769": "f6b6f78a8f2e5ed7",
   "C794": "bad76e5963432385",
+  "C2201": "d119dfe665f76359",
   "C795": "34139e6a6914e171",
   "C804": "5358489178bff0a4",
   "L106": "13a714429d15f3b2",
@@ -290,7 +291,8 @@
   "C2188": "612394eef6826900",
   "C2189": "20748838895e4545",
   "C2195": "77083291a86791c3",
-  "C2196": "a8ae0700d13a7f9b"
+  "C2196": "a8ae0700d13a7f9b",
+  "C2200": "117a60e53de1e8a4"
  },
  "verdicts": [
   {
@@ -1584,14 +1586,14 @@
    "row": "C1176",
    "screen": "*",
    "verdict": "PASS",
-   "line": "\u2014",
-   "why": "no clothing read on a sex scene.",
+   "line": "her skirt in his fist, her tits out of her top",
+   "why": "no read of her clothes on the sex screens; the garments are the couple's",
    "cause": null,
    "note": true,
-   "screen_hash": "125e2c8bac92b8ff",
-   "row_hash": "7632b28c693a43a4",
-   "carried": true,
-   "pass": 1
+   "screen_hash": "05042e65f38935b8",
+   "row_hash": "655e8e2b731598c9",
+   "carried": false,
+   "pass": 20
   },
   {
    "row": "C1177",
@@ -1848,7 +1850,7 @@
     "all": "5e3a47aada8ed046"
    },
    "row_hash": "eb11e05cd75e52a9",
-   "carried": false,
+   "carried": true,
    "pass": 19
   },
   {
@@ -3317,6 +3319,32 @@
    "row_hash": "27e6b45f50edd3ac",
    "carried": true,
    "pass": 15
+  },
+  {
+   "row": "C2200",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "Tess is doing Brooke's lashes at the mirror while Kayla holds the bag",
+   "why": "not a 'she gets noticed' scene: no stranger reacts to a garment she wears; noticed scenes are 5 of 34 arrival scenes, one per garment state per place",
+   "cause": null,
+   "note": false,
+   "screen_hash": "05042e65f38935b8",
+   "row_hash": "117a60e53de1e8a4",
+   "carried": false,
+   "pass": 20
+  },
+  {
+   "row": "C2201",
+   "screen": "*",
+   "verdict": "N/A",
+   "line": "Through a gap in the books in the back stacks",
+   "why": "scene and menu screens, not a place's description; the descriptions of the places they sit at read no clothes or meters (all 31 checked)",
+   "cause": null,
+   "note": false,
+   "screen_hash": "05042e65f38935b8",
+   "row_hash": "d119dfe665f76359",
+   "carried": false,
+   "pass": 20
   },
   {
    "row": "C286",
@@ -7009,8 +7037,8 @@
  ],
  "causes": [],
  "pending": [],
- "asked": 1,
- "answered": 1,
+ "asked": 3,
+ "answered": 3,
  "pass_items": [],
  "unowed": []
 }

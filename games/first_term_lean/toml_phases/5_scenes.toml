@@ -9676,3 +9676,370 @@ text = "Done"
 targetType = "location"
 locationId = "campus_cafeteria"
 time_progression_minutes = 10
+
+# ── P72 · she gets noticed (kind c): a stranger reacts to what she wears, on arrival (craft/walk-ins.md, C2200; LO 2026-11-27:
+#    "Yes, we should align our place description to it. And for scenes like leggings ones, those should be walkins right??").
+#    The picker shuffles (v2.py:6962-6968), so the street's order is made by exclusive conditions: Mom's top, then the skirt, then the leggings. ──
+
+[[canvases]]
+id = "notice_street_leggings"
+name = "At the bus stop"
+
+[canvases.trigger]
+location = "hood_street"
+trigger_mode = "random"
+chance = 0.35
+is_repeatable = true
+max_triggers_per_day = 1
+conditions = { version = "1.0", logic = "AND", items = [{ type = "clothing_item", item_id = "leggings", operator = "equipped" }, { type = "clothing_item", item_id = "mom_lowcut_top", operator = "unequipped" }, { type = "time_of_day", start_time = "07:00", end_time = "21:00" }] }
+
+[[canvases.nodes]]
+id = "moment"
+name = "At the bus stop"
+blocks = [
+  { type = "paragraph", content = "The guys at the bus stop go quiet. One of them whistles, low, his eyes on your ass in the leggings." },
+  { type = "dialog", content = "Don't walk so fast, doll. Let us look.", props = { speaker = "unknown" } },
+  { type = "paragraph", content = "Your face goes hot." },
+]
+
+[canvases.nodes.exit_block]
+type = "choices"
+
+[[canvases.nodes.exit_block.choices]]
+text = "Keep walking"
+targetType = "node"
+nodeId = "walk"
+time_progression_minutes = 0
+
+[[canvases.nodes.exit_block.choices]]
+text = "Look back"
+targetType = "node"
+nodeId = "look"
+time_progression_minutes = 0
+
+[[canvases.nodes]]
+id = "walk"
+name = "At the bus stop"
+blocks = [
+  { type = "paragraph", content = "You don't look back. You can feel them watching your ass all the way to the corner." },
+  { type = "dialog", content = "Same stop tomorrow, doll. We'll be here.", props = { speaker = "unknown" } },
+]
+
+[canvases.nodes.exit_block]
+type = "choices"
+
+[[canvases.nodes.exit_block.choices]]
+text = "Done"
+targetType = "location"
+locationId = "hood_street"
+time_progression_minutes = 0
+flagEffects = [{ flag = "noticed_street_leggings", op = "set" }]
+
+[[canvases.nodes]]
+id = "look"
+name = "At the bus stop"
+blocks = [
+  { type = "paragraph", content = "He grins and nudges his mate. You turn away first, and your face burns." },
+  { type = "dialog", content = "See you tomorrow, doll.", props = { speaker = "unknown" } },
+]
+
+[canvases.nodes.exit_block]
+type = "choices"
+
+[[canvases.nodes.exit_block.choices]]
+text = "Done"
+targetType = "location"
+locationId = "hood_street"
+time_progression_minutes = 0
+flagEffects = [{ flag = "noticed_street_leggings", op = "set" }]
+
+[[canvases]]
+id = "notice_street_momtop"
+name = "Across the road"
+
+[canvases.trigger]
+location = "hood_street"
+trigger_mode = "random"
+chance = 0.35
+is_repeatable = true
+max_triggers_per_day = 1
+conditions = { version = "1.0", logic = "AND", items = [{ type = "clothing_item", item_id = "mom_lowcut_top", operator = "equipped" }, { type = "time_of_day", start_time = "07:00", end_time = "21:00" }] }
+
+[[canvases.nodes]]
+id = "moment"
+name = "Across the road"
+blocks = [
+  { type = "paragraph", content = "Across the road, a neighbour stops with his keys in his hand. His eyes drop to your chest in Mom's top and stay there." },
+  { type = "dialog", content = "Nice top, love. It really suits you.", props = { speaker = "unknown" } },
+  { type = "paragraph", content = "Your face goes hot." },
+]
+
+[canvases.nodes.exit_block]
+type = "choices"
+
+[[canvases.nodes.exit_block.choices]]
+text = "Keep walking"
+targetType = "node"
+nodeId = "walk"
+time_progression_minutes = 0
+
+[[canvases.nodes.exit_block.choices]]
+text = "Look back"
+targetType = "node"
+nodeId = "look"
+time_progression_minutes = 0
+
+[[canvases.nodes]]
+id = "walk"
+name = "Across the road"
+blocks = [
+  { type = "paragraph", content = "You cross your arms over your chest and walk faster." },
+  { type = "dialog", content = "Wear it again tomorrow, love.", props = { speaker = "unknown" } },
+]
+
+[canvases.nodes.exit_block]
+type = "choices"
+
+[[canvases.nodes.exit_block.choices]]
+text = "Done"
+targetType = "location"
+locationId = "hood_street"
+time_progression_minutes = 0
+flagEffects = [{ flag = "noticed_street_momtop", op = "set" }]
+
+[[canvases.nodes]]
+id = "look"
+name = "Across the road"
+blocks = [
+  { type = "paragraph", content = "You look at him. He doesn't look away from your chest, and your face burns." },
+  { type = "dialog", content = "I'm out here every morning, love.", props = { speaker = "unknown" } },
+]
+
+[canvases.nodes.exit_block]
+type = "choices"
+
+[[canvases.nodes.exit_block.choices]]
+text = "Done"
+targetType = "location"
+locationId = "hood_street"
+time_progression_minutes = 0
+flagEffects = [{ flag = "noticed_street_momtop", op = "set" }]
+
+[[canvases]]
+id = "notice_street_skirt"
+name = "The van"
+
+[canvases.trigger]
+location = "hood_street"
+trigger_mode = "random"
+chance = 0.35
+is_repeatable = true
+max_triggers_per_day = 1
+conditions = { version = "1.0", logic = "AND", items = [{ type = "clothing_item", item_id = "mom_short_skirt", operator = "equipped" }, { type = "clothing_slot", slot = "legwear", operator = "unequipped" }, { type = "clothing_item", item_id = "mom_lowcut_top", operator = "unequipped" }, { type = "time_of_day", start_time = "07:00", end_time = "21:00" }] }
+
+[[canvases.nodes]]
+id = "moment"
+name = "The van"
+blocks = [
+  { type = "paragraph", content = "A van slows at the kerb. The driver leans across the seat, and his eyes go down your bare legs under Mom's skirt and back up." },
+  { type = "dialog", content = "Legs like that, you shouldn't be walking, darling.", props = { speaker = "unknown" } },
+  { type = "paragraph", content = "You tug the hem down." },
+]
+
+[canvases.nodes.exit_block]
+type = "choices"
+
+[[canvases.nodes.exit_block.choices]]
+text = "Keep walking"
+targetType = "node"
+nodeId = "walk"
+time_progression_minutes = 0
+
+[[canvases.nodes.exit_block.choices]]
+text = "Look back"
+targetType = "node"
+nodeId = "look"
+time_progression_minutes = 0
+
+[[canvases.nodes]]
+id = "walk"
+name = "The van"
+blocks = [
+  { type = "paragraph", content = "You keep your eyes on the pavement until the van pulls away." },
+  { type = "dialog", content = "I'm down this road every day, darling.", props = { speaker = "unknown" } },
+]
+
+[canvases.nodes.exit_block]
+type = "choices"
+
+[[canvases.nodes.exit_block.choices]]
+text = "Done"
+targetType = "location"
+locationId = "hood_street"
+time_progression_minutes = 0
+flagEffects = [{ flag = "noticed_street_skirt", op = "set" }]
+
+[[canvases.nodes]]
+id = "look"
+name = "The van"
+blocks = [
+  { type = "dialog", content = "Need a lift?", props = { speaker = "unknown" } },
+  { type = "paragraph", content = "He smiles slowly when you don't answer. Your legs feel very bare." },
+  { type = "dialog", content = "Next time, then, darling.", props = { speaker = "unknown" } },
+]
+
+[canvases.nodes.exit_block]
+type = "choices"
+
+[[canvases.nodes.exit_block.choices]]
+text = "Done"
+targetType = "location"
+locationId = "hood_street"
+time_progression_minutes = 0
+flagEffects = [{ flag = "noticed_street_skirt", op = "set" }]
+
+[[canvases]]
+id = "notice_park_leggings"
+name = "The jogger"
+
+[canvases.trigger]
+location = "hood_park"
+trigger_mode = "random"
+chance = 0.35
+is_repeatable = true
+max_triggers_per_day = 1
+conditions = { version = "1.0", logic = "AND", items = [{ type = "clothing_item", item_id = "leggings", operator = "equipped" }, { type = "time_of_day", start_time = "06:00", end_time = "21:00" }] }
+
+[[canvases.nodes]]
+id = "moment"
+name = "The jogger"
+blocks = [
+  { type = "paragraph", content = "A jogger coming the other way looks at your leggings, then your face, then your leggings." },
+  { type = "dialog", content = "Nice leggings. Very nice.", props = { speaker = "unknown" } },
+  { type = "paragraph", content = "Your face goes hot." },
+]
+
+[canvases.nodes.exit_block]
+type = "choices"
+
+[[canvases.nodes.exit_block.choices]]
+text = "Keep walking"
+targetType = "node"
+nodeId = "walk"
+time_progression_minutes = 0
+
+[[canvases.nodes.exit_block.choices]]
+text = "Look back"
+targetType = "node"
+nodeId = "look"
+time_progression_minutes = 0
+
+[[canvases.nodes]]
+id = "walk"
+name = "The jogger"
+blocks = [
+  { type = "paragraph", content = "You don't turn round. You can feel his eyes on your ass." },
+  { type = "dialog", content = "I run this loop every day!", props = { speaker = "unknown" } },
+]
+
+[canvases.nodes.exit_block]
+type = "choices"
+
+[[canvases.nodes.exit_block.choices]]
+text = "Done"
+targetType = "location"
+locationId = "hood_park"
+time_progression_minutes = 0
+flagEffects = [{ flag = "noticed_park_leggings", op = "set" }]
+
+[[canvases.nodes]]
+id = "look"
+name = "The jogger"
+blocks = [
+  { type = "paragraph", content = "He's jogging backwards, grinning, and waves. You look away first." },
+  { type = "dialog", content = "Same time tomorrow, yeah?", props = { speaker = "unknown" } },
+]
+
+[canvases.nodes.exit_block]
+type = "choices"
+
+[[canvases.nodes.exit_block.choices]]
+text = "Done"
+targetType = "location"
+locationId = "hood_park"
+time_progression_minutes = 0
+flagEffects = [{ flag = "noticed_park_leggings", op = "set" }]
+
+[[canvases]]
+id = "notice_gym_leggings"
+name = "Between sets"
+
+[canvases.trigger]
+location = "hood_gym"
+# Only on the way in from the street: "when you walk in" (C2196; reader pass 1, like P69's Vance scenes).
+entry_only_from = ["hood_street"]
+trigger_mode = "random"
+chance = 0.35
+is_repeatable = true
+max_triggers_per_day = 1
+conditions = { version = "1.0", logic = "AND", items = [{ type = "clothing_item", item_id = "leggings", operator = "equipped" }, { type = "time_of_day", start_time = "06:00", end_time = "22:00" }] }
+
+[[canvases.nodes]]
+id = "moment"
+name = "Between sets"
+blocks = [
+  { type = "paragraph", content = "Two of the regulars stop between sets when you walk in. Your leggings show every line of your ass." },
+  { type = "dialog", content = "Look what just walked in.", props = { speaker = "unknown" } },
+  { type = "paragraph", content = "Your face goes hot." },
+]
+
+[canvases.nodes.exit_block]
+type = "choices"
+
+[[canvases.nodes.exit_block.choices]]
+text = "Keep walking"
+targetType = "node"
+nodeId = "walk"
+time_progression_minutes = 0
+
+[[canvases.nodes.exit_block.choices]]
+text = "Look back"
+targetType = "node"
+nodeId = "look"
+time_progression_minutes = 0
+
+[[canvases.nodes]]
+id = "walk"
+name = "Between sets"
+blocks = [
+  { type = "paragraph", content = "You keep your eyes on the floor and walk past. In the mirrors they're still looking." },
+  { type = "dialog", content = "Come back tomorrow. We're always here.", props = { speaker = "unknown" } },
+]
+
+[canvases.nodes.exit_block]
+type = "choices"
+
+[[canvases.nodes.exit_block.choices]]
+text = "Done"
+targetType = "location"
+locationId = "hood_gym"
+time_progression_minutes = 0
+flagEffects = [{ flag = "noticed_gym_leggings", op = "set" }]
+
+[[canvases.nodes]]
+id = "look"
+name = "Between sets"
+blocks = [
+  { type = "paragraph", content = "You look back in the mirror. They don't look away, and your face goes hot all over again." },
+  { type = "dialog", content = "Fuck me. Same time tomorrow, yeah?", props = { speaker = "unknown" } },
+]
+
+[canvases.nodes.exit_block]
+type = "choices"
+
+[[canvases.nodes.exit_block.choices]]
+text = "Done"
+targetType = "location"
+locationId = "hood_gym"
+time_progression_minutes = 0
+flagEffects = [{ flag = "noticed_gym_leggings", op = "set" }]

@@ -1,6 +1,6 @@
 {
  "piece": "P07",
- "pass": 19,
+ "pass": 20,
  "screens": {
   "opening.wake": {
    "text": "cc3c063d9cef0f23",
@@ -47,37 +47,37 @@
   "opening.bath": {
    "text": "d00f9006696d287d",
    "traits": "74c4f68e6476ecee",
-   "facts": "08380921df914eef",
+   "facts": "47f33854a15bb2a0",
    "facts2": "95093214eadaa443",
-   "all": "ba6923f6931b26dc"
+   "all": "6c38436dfb16a334"
   },
   "opening.hall": {
    "text": "20fd03b2cbe8ed50",
    "traits": "74c4f68e6476ecee",
-   "facts": "1e0168afad0e9566",
+   "facts": "afb887a64559e7f9",
    "facts2": "ce93dea924b820f0",
-   "all": "d67fa7135cdfe4b0"
+   "all": "3cf39c92883eb5de"
   },
   "opening.room_past": {
    "text": "82c1b173aeb2608a",
    "traits": "74c4f68e6476ecee",
-   "facts": "a5e2fa448eeaeeaa",
+   "facts": "93f75fd78bfe05cf",
    "facts2": "4813fa938d77e462",
-   "all": "00031c4323c44b1b"
+   "all": "7914b2741aad07ad"
   },
   "opening.room_spoke": {
    "text": "2124ff3068418da1",
    "traits": "74c4f68e6476ecee",
-   "facts": "c0245549ec8bef74",
+   "facts": "f195d2fe11038f8c",
    "facts2": "45d959c38e033704",
-   "all": "45d0f1339f7d2482"
+   "all": "291016bf6f76e02f"
   },
   "opening.room_waited": {
    "text": "c5a401b11c0eddc1",
    "traits": "74c4f68e6476ecee",
-   "facts": "3dfaf2f3c5ecd85d",
+   "facts": "5aeb7f3bf01bb2a5",
    "facts2": "6e56bdc0c43cc1b4",
-   "all": "8df38831a530d3c0"
+   "all": "8f4310de3e431de4"
   },
   "opening.room": {
    "text": "38c16857e4551e5b",
@@ -124,16 +124,16 @@
   "talk_mom.talk": {
    "text": "feb79fad5e3d8649",
    "traits": "ff8b9fa74641271c",
-   "facts": "600f467893ef7bb9",
+   "facts": "e75c6957e6fa4665",
    "facts2": "667847517eb6a28b",
-   "all": "66b9b16dce192c2f"
+   "all": "6dcd69d60201e8c3"
   },
   "talk_mom.eat": {
    "text": "cb5b4b6d73033d19",
    "traits": "ff8b9fa74641271c",
-   "facts": "bcd4fca1f4ccef8f",
+   "facts": "34376d1411bc4aad",
    "facts2": "508d10677899c7a7",
-   "all": "72eab913c378c469"
+   "all": "5593e1137ca9a97b"
   },
   "mom_living_room.hub": {
    "text": "fa2c2d66908e634d",
@@ -177,7 +177,7 @@
    "facts2": "b574bdfe31b183e7",
    "all": "b9cacebfdba34bb4"
   },
-  "*": "1cd3b560243bdeb3"
+  "*": "72257d8323b2505b"
  },
  "rows": {
   "B1": "5276068df1ca6fa9",
@@ -259,7 +259,7 @@
   "C1220": "e706f55f84a94a84",
   "C1221": "90572c3a26b59fc7",
   "C1177": "9002e505d1fabe59",
-  "C1176": "78d766628b4d73c2",
+  "C1176": "0e04d12a589767b0",
   "C1189": "add9e8d3fbfb9105",
   "C1197": "b4f0f994f2657396",
   "C1200": "766f516b6b8e329c",
@@ -271,7 +271,7 @@
   "clothes#5": "58e88b96e1566182",
   "clothes#6": "2564b4ed16e2c7f7",
   "clothes#7": "bb14def6ad6b8f84",
-  "clothes#8": "e75be85fc8419181",
+  "clothes#8": "cce3662a8d49bfda",
   "clothes#9": "fa33eaefa120f48c",
   "C255": "41543c0b01047eb6",
   "C256": "39401d1f8b2ac714",
@@ -399,6 +399,7 @@
   "people#16": "45053c701775c75f",
   "C769": "cf7d7a82afabcbbb",
   "C794": "3281d513b7f90d6e",
+  "C2201": "4745761f016db481",
   "C795": "a28152099697ac6a",
   "C804": "56bf64be29d6ea48",
   "L106": "759e6667d7fc3183",
@@ -416,13 +417,13 @@
   "C770": "dcc6bbe6fde09083",
   "C771": "d941995a226da2b4",
   "C707": "e2898bd02a9e4730",
-  "places#1": "18252966b4327f58",
+  "places#1": "378b2df4c8bf116d",
   "places#2": "e0b57720921c4523",
   "places#3": "56d056c80da49bb6",
   "places#4": "ae3ba300e1045c9f",
   "places#5": "90ec575adee9bf74",
   "places#6": "f2bc5f0f10c64c4b",
-  "places#7": "2a095bf54f175e5e",
+  "places#7": "58dab0dc035240bd",
   "places#8": "c3ea8d01465e7298",
   "places#9": "f4cd9ab5f62bc6fc",
   "places#10": "d6f0b4b357efc043",
@@ -2255,15 +2256,15 @@
   {
    "row": "C1176",
    "screen": "*",
-   "verdict": "N/A",
-   "line": "",
-   "why": "nothing sexual shows",
+   "verdict": "PASS",
+   "line": "Mom's eyes drop to the skirt. Her skirt. Her mouth goes tight, and she says nothing.",
+   "why": "the only clothing reads are Mom's, in her own kitchen and living-room menus, not on a sex scene; the street description no longer reads clothes",
    "cause": null,
    "note": true,
-   "screen_hash": "219040e682a0b26e",
-   "row_hash": "78d766628b4d73c2",
-   "carried": true,
-   "pass": 4
+   "screen_hash": "72257d8323b2505b",
+   "row_hash": "0e04d12a589767b0",
+   "carried": false,
+   "pass": 20
   },
   {
    "row": "C1177",
@@ -4221,6 +4222,19 @@
    "row_hash": "be119a385da08978",
    "carried": true,
    "pass": 12
+  },
+  {
+   "row": "C2201",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "The neighbourhood: your street, \u2026 Neighbours, dog walkers, kids on bikes.",
+   "why": "hood_street and home_her_room descriptions are plain; P07's two street clothing lines are gone (P72)",
+   "cause": null,
+   "note": false,
+   "screen_hash": "72257d8323b2505b",
+   "row_hash": "4745761f016db481",
+   "carried": false,
+   "pass": 20
   },
   {
    "row": "C239",
@@ -10784,15 +10798,15 @@
   {
    "row": "clothes#8",
    "screen": "*",
-   "verdict": "N/A",
-   "line": "",
-   "why": "no person on screen",
+   "verdict": "PASS",
+   "line": "Mom's eyes drop to the top. Her top. Her mouth goes tight, and she says nothing.",
+   "why": "a person she knows notices in her own menu, in her manner, and moves nothing; strangers notice in notice_street_momtop/skirt, never the description",
    "cause": null,
    "note": false,
-   "screen_hash": "219040e682a0b26e",
-   "row_hash": "e75be85fc8419181",
-   "carried": true,
-   "pass": 4
+   "screen_hash": "72257d8323b2505b",
+   "row_hash": "cce3662a8d49bfda",
+   "carried": false,
+   "pass": 20
   },
   {
    "row": "clothes#9",
@@ -11329,15 +11343,15 @@
   {
    "row": "places#1",
    "screen": "*",
-   "verdict": "N/A",
-   "line": "",
-   "why": "identity line unchanged",
+   "verdict": "PASS",
+   "line": "Your bedroom. The same single bed since you were twelve, \u2026",
+   "why": "street and bedroom identity lines the same every visit, no clothing variant",
    "cause": null,
    "note": false,
-   "screen_hash": "219040e682a0b26e",
-   "row_hash": "18252966b4327f58",
-   "carried": true,
-   "pass": 4
+   "screen_hash": "72257d8323b2505b",
+   "row_hash": "378b2df4c8bf116d",
+   "carried": false,
+   "pass": 20
   },
   {
    "row": "places#10",
@@ -11349,7 +11363,7 @@
    "note": false,
    "screen_hash": "1cd3b560243bdeb3",
    "row_hash": "d6f0b4b357efc043",
-   "carried": false,
+   "carried": true,
    "pass": 19
   },
   {
@@ -11420,15 +11434,15 @@
   {
    "row": "places#7",
    "screen": "*",
-   "verdict": "N/A",
-   "line": "",
-   "why": "no map change",
+   "verdict": "PASS",
+   "line": "hood_street kind = \"thoroughfare\"",
+   "why": "the street only routes (exits, travel); its leave rule is a dress code, not a thing to do; no schedule row on it",
    "cause": null,
    "note": false,
-   "screen_hash": "219040e682a0b26e",
-   "row_hash": "2a095bf54f175e5e",
-   "carried": true,
-   "pass": 4
+   "screen_hash": "72257d8323b2505b",
+   "row_hash": "58dab0dc035240bd",
+   "carried": false,
+   "pass": 20
   },
   {
    "row": "places#8",
@@ -11609,8 +11623,8 @@
  ],
  "causes": [],
  "pending": [],
- "asked": 1,
- "answered": 1,
+ "asked": 5,
+ "answered": 5,
  "pass_items": [],
  "unowed": []
 }

@@ -1,6 +1,6 @@
 {
  "piece": "P42",
- "pass": 20,
+ "pass": 21,
  "screens": {
   "talk_mom.hub": {
    "text": "0f4660e14b94ab43",
@@ -12,16 +12,16 @@
   "talk_mom.talk": {
    "text": "feb79fad5e3d8649",
    "traits": "ff8b9fa74641271c",
-   "facts": "600f467893ef7bb9",
+   "facts": "e75c6957e6fa4665",
    "facts2": "667847517eb6a28b",
-   "all": "66b9b16dce192c2f"
+   "all": "6dcd69d60201e8c3"
   },
   "talk_mom.eat": {
    "text": "cb5b4b6d73033d19",
    "traits": "ff8b9fa74641271c",
-   "facts": "bcd4fca1f4ccef8f",
+   "facts": "34376d1411bc4aad",
    "facts2": "508d10677899c7a7",
-   "all": "72eab913c378c469"
+   "all": "5593e1137ca9a97b"
   },
   "mom_living_room.hub": {
    "text": "fa2c2d66908e634d",
@@ -37,7 +37,7 @@
    "facts2": "04bf141c5cb5340b",
    "all": "13a427d6071bc370"
   },
-  "*": "fa8a0f5220e51a33"
+  "*": "cc046523f34ec607"
  },
  "rows": {
   "B1": "5276068df1ca6fa9",
@@ -168,6 +168,7 @@
   "people#16": "45053c701775c75f",
   "C769": "cf7d7a82afabcbbb",
   "C794": "3281d513b7f90d6e",
+  "C2201": "4745761f016db481",
   "C795": "a28152099697ac6a",
   "C804": "56bf64be29d6ea48",
   "L106": "759e6667d7fc3183",
@@ -185,13 +186,13 @@
   "C770": "dcc6bbe6fde09083",
   "C771": "d941995a226da2b4",
   "C707": "e2898bd02a9e4730",
-  "places#1": "18252966b4327f58",
+  "places#1": "378b2df4c8bf116d",
   "places#2": "e0b57720921c4523",
   "places#3": "56d056c80da49bb6",
   "places#4": "ae3ba300e1045c9f",
   "places#5": "90ec575adee9bf74",
   "places#6": "f2bc5f0f10c64c4b",
-  "places#7": "2a095bf54f175e5e",
+  "places#7": "58dab0dc035240bd",
   "places#8": "c3ea8d01465e7298",
   "places#9": "f4cd9ab5f62bc6fc",
   "places#10": "d6f0b4b357efc043",
@@ -1914,6 +1915,19 @@
    "row_hash": "be119a385da08978",
    "carried": true,
    "pass": 13
+  },
+  {
+   "row": "C2201",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "The kitchen: the table where the family eats, the fridge, a coffee pot that's always on.",
+   "why": "the description reads no clothes or meters; it changes only with who's there",
+   "cause": null,
+   "note": false,
+   "screen_hash": "cc046523f34ec607",
+   "row_hash": "4745761f016db481",
+   "carried": false,
+   "pass": 21
   },
   {
    "row": "C422",
@@ -6980,15 +6994,15 @@
   {
    "row": "places#1",
    "screen": "*",
-   "verdict": "N/A",
-   "line": "Mom's in the kitchen.",
-   "why": "Her menu is a person screen, not a place screen; the room's identity line lives on the location.",
+   "verdict": "PASS",
+   "line": "The kitchen: the table where the family eats, the fridge, a coffee pot that's always on.",
+   "why": "kitchen and living room: the identity line is fixed; the only variant adds 'Nobody's here.'",
    "cause": null,
    "note": false,
-   "screen_hash": "ad3f6be4b295a67a",
-   "row_hash": "18252966b4327f58",
-   "carried": true,
-   "pass": 5
+   "screen_hash": "cc046523f34ec607",
+   "row_hash": "378b2df4c8bf116d",
+   "carried": false,
+   "pass": 21
   },
   {
    "row": "places#10",
@@ -7000,7 +7014,7 @@
    "note": false,
    "screen_hash": "fa8a0f5220e51a33",
    "row_hash": "d6f0b4b357efc043",
-   "carried": false,
+   "carried": true,
    "pass": 20
   },
   {
@@ -7071,15 +7085,15 @@
   {
    "row": "places#7",
    "screen": "*",
-   "verdict": "N/A",
-   "line": "-",
-   "why": "No street or quad here.",
+   "verdict": "PASS",
+   "line": "The kitchen: the table where the family eats, the fridge, a coffee pot that's always on.",
+   "why": "Mom's rows sit in rooms; the only hall row is Ryan's, with on_route",
    "cause": null,
    "note": false,
-   "screen_hash": "ad3f6be4b295a67a",
-   "row_hash": "2a095bf54f175e5e",
-   "carried": true,
-   "pass": 5
+   "screen_hash": "cc046523f34ec607",
+   "row_hash": "58dab0dc035240bd",
+   "carried": false,
+   "pass": 21
   },
   {
    "row": "places#8",
@@ -7214,8 +7228,8 @@
  ],
  "causes": [],
  "pending": [],
- "asked": 1,
- "answered": 1,
+ "asked": 3,
+ "answered": 3,
  "pass_items": [],
  "unowed": []
 }

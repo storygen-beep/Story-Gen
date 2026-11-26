@@ -1,6 +1,6 @@
 {
  "piece": "P24",
- "pass": 16,
+ "pass": 17,
  "screens": {
   "street_meet_vance.porch": {
    "text": "e69a764c83344876",
@@ -69,7 +69,7 @@
   "C1185": "db808998ed69c649",
   "C1220": "18d85534582def9d",
   "C1221": "3835fed23cc316c7",
-  "C1176": "7632b28c693a43a4",
+  "C1176": "655e8e2b731598c9",
   "C1189": "2afadc6bbe1996bd",
   "C1200": "65e6616cd17c7eb3",
   "C1002": "657248766e62061f",
@@ -129,6 +129,7 @@
   "C2198": "27e6b45f50edd3ac",
   "C769": "f6b6f78a8f2e5ed7",
   "C794": "bad76e5963432385",
+  "C2201": "d119dfe665f76359",
   "C795": "34139e6a6914e171",
   "C804": "5358489178bff0a4",
   "L106": "13a714429d15f3b2",
@@ -202,7 +203,7 @@
     "all": "ec0a7ab26be8740b"
    },
    "row_hash": "c1c0e2ac2588a579",
-   "carried": false,
+   "carried": true,
    "pass": 16
   },
   {
@@ -370,7 +371,7 @@
     "all": "ec0a7ab26be8740b"
    },
    "row_hash": "80d415cf08e0ebfe",
-   "carried": false,
+   "carried": true,
    "pass": 16
   },
   {
@@ -441,15 +442,15 @@
   {
    "row": "C1176",
    "screen": "*",
-   "verdict": "N/A",
-   "line": "",
-   "why": "No clothing read.",
+   "verdict": "PASS",
+   "line": "his eyes go over you, taking their time over your legs",
+   "why": "his look is on her legs, no garment read or condition",
    "cause": null,
    "note": true,
-   "screen_hash": "2209b171a4e362ac",
-   "row_hash": "7632b28c693a43a4",
-   "carried": true,
-   "pass": 1
+   "screen_hash": "217824dcf50567f8",
+   "row_hash": "655e8e2b731598c9",
+   "carried": false,
+   "pass": 17
   },
   {
    "row": "C1184",
@@ -1075,6 +1076,19 @@
    "pass": 10
   },
   {
+   "row": "C2201",
+   "screen": "*",
+   "verdict": "N/A",
+   "line": "\u2014",
+   "why": "builds no place description (street_meet_vance); a scene is not a place's description",
+   "cause": null,
+   "note": false,
+   "screen_hash": "217824dcf50567f8",
+   "row_hash": "d119dfe665f76359",
+   "carried": false,
+   "pass": 17
+  },
+  {
    "row": "C286",
    "screen": "street_meet_vance.porch",
    "verdict": "PASS",
@@ -1347,7 +1361,7 @@
     "all": "ec0a7ab26be8740b"
    },
    "row_hash": "67e48e60d5053a2e",
-   "carried": false,
+   "carried": true,
    "pass": 16
   },
   {
@@ -1398,7 +1412,7 @@
     "all": "ec0a7ab26be8740b"
    },
    "row_hash": "310706ee076318f2",
-   "carried": false,
+   "carried": true,
    "pass": 16
   },
   {
@@ -2121,7 +2135,7 @@
     "all": "ec0a7ab26be8740b"
    },
    "row_hash": "13a714429d15f3b2",
-   "carried": false,
+   "carried": true,
    "pass": 16
   },
   {
@@ -2288,8 +2302,8 @@
  ],
  "causes": [],
  "pending": [],
- "asked": 5,
- "answered": 5,
+ "asked": 2,
+ "answered": 2,
  "pass_items": [],
  "unowed": []
 }

@@ -207,11 +207,11 @@ both in release 2 (LO's pick A); Mark's friends later. The master bedroom gets L
 
 | place | face | other named people | crowd | who notices her, and what |
 |---|---|---|---|---|
-| her street | none: passes through, the bus stop | Jake picking her up (Vance's porch is at his house, P69) | neighbours, the bus queue | neighbours: what she wears out, and they tell Laura |
+| her street | none: passes through, the bus stop | Jake picking her up (Vance's porch is at his house, P69) | neighbours, the bus queue | neighbours: what she wears out, as "she gets noticed" scenes (P72), and they tell Laura |
 | Vance's house and porch | Mr. Vance | none | none | Vance: her, every time she walks past |
 | the corner shop | Frank Novak (52, owner, days; knows Mark) | Danny Price (23, night clerk) | customers | Frank: what she buys, and he tells Mark. Danny: her, at night |
-| the park | none | Zoe on a run (later) | joggers, dog walkers | joggers: her in running clothes |
-| the gym | Marco Silva (29, trainer) | none | the regulars | the regulars: her body, her outfit |
+| the park | none | Zoe on a run (later) | joggers, dog walkers | joggers: her in running clothes, a "she gets noticed" scene (P72) |
+| the gym | Marco Silva (29, trainer) | none | the regulars | the regulars: her body, her outfit, a "she gets noticed" scene (P72) |
 | the clothes shop | Nina Kovac (26, runs it) | none | other shoppers | Nina: what she tries on, and what she buys |
 
 ### Campus

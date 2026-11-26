@@ -1,6 +1,6 @@
 {
  "piece": "P46",
- "pass": 14,
+ "pass": 15,
  "screens": {
   "story_hints.paying_your_way": {
    "text": "e0e3d0f456f740b4",
@@ -608,6 +608,7 @@
   "C2198": "27e6b45f50edd3ac",
   "C769": "f6b6f78a8f2e5ed7",
   "C794": "bad76e5963432385",
+  "C2201": "d119dfe665f76359",
   "C795": "34139e6a6914e171",
   "C804": "5358489178bff0a4",
   "L106": "13a714429d15f3b2",
@@ -1502,7 +1503,7 @@
     "all": "1bad6c706359185e"
    },
    "row_hash": "6eb13e48e8502791",
-   "carried": false,
+   "carried": true,
    "pass": 14
   },
   {
@@ -1793,7 +1794,7 @@
     "all": "1bad6c706359185e"
    },
    "row_hash": "bf7edbd0ddd9e7b7",
-   "carried": false,
+   "carried": true,
    "pass": 14
   },
   {
@@ -1986,7 +1987,7 @@
     "all": "1bad6c706359185e"
    },
    "row_hash": "b83b93c2f7e2d41f",
-   "carried": false,
+   "carried": true,
    "pass": 14
   },
   {
@@ -2244,7 +2245,7 @@
     "all": "1bad6c706359185e"
    },
    "row_hash": "80c98d00ce7d3bf8",
-   "carried": false,
+   "carried": true,
    "pass": 14
   },
   {
@@ -2489,7 +2490,7 @@
     "all": "1bad6c706359185e"
    },
    "row_hash": "3b13472a8f7c42da",
-   "carried": false,
+   "carried": true,
    "pass": 14
   },
   {
@@ -2682,7 +2683,7 @@
     "all": "1bad6c706359185e"
    },
    "row_hash": "7bb70ca4ff31e145",
-   "carried": false,
+   "carried": true,
    "pass": 14
   },
   {
@@ -2875,7 +2876,7 @@
     "all": "1bad6c706359185e"
    },
    "row_hash": "03aca88c8939cd81",
-   "carried": false,
+   "carried": true,
    "pass": 14
   },
   {
@@ -2991,6 +2992,19 @@
    "row_hash": "27e6b45f50edd3ac",
    "carried": true,
    "pass": 8
+  },
+  {
+   "row": "C2201",
+   "screen": "*",
+   "verdict": "N/A",
+   "line": "(the opening screens with Mom)",
+   "why": "scene and menu screens, not a place's description; the descriptions of the places they sit at read no clothes or meters (all 31 checked)",
+   "cause": null,
+   "note": false,
+   "screen_hash": "b0a27944076e58a6",
+   "row_hash": "d119dfe665f76359",
+   "carried": false,
+   "pass": 15
   },
   {
    "row": "C327",
@@ -3159,7 +3173,7 @@
     "all": "1bad6c706359185e"
    },
    "row_hash": "ba026f3c4badeca2",
-   "carried": false,
+   "carried": true,
    "pass": 14
   },
   {
@@ -3352,7 +3366,7 @@
     "all": "1bad6c706359185e"
    },
    "row_hash": "4fe71dee68944f61",
-   "carried": false,
+   "carried": true,
    "pass": 14
   },
   {
@@ -3545,7 +3559,7 @@
     "all": "1bad6c706359185e"
    },
    "row_hash": "ccf2da275f59cae3",
-   "carried": false,
+   "carried": true,
    "pass": 14
   },
   {
@@ -3738,7 +3752,7 @@
     "all": "1bad6c706359185e"
    },
    "row_hash": "cee89ca03f857080",
-   "carried": false,
+   "carried": true,
    "pass": 14
   },
   {
@@ -4003,7 +4017,7 @@
     "all": "1bad6c706359185e"
    },
    "row_hash": "7e128897077ecee6",
-   "carried": false,
+   "carried": true,
    "pass": 14
   },
   {
@@ -4196,7 +4210,7 @@
     "all": "1bad6c706359185e"
    },
    "row_hash": "83f6356d6b638ebf",
-   "carried": false,
+   "carried": true,
    "pass": 14
   },
   {
@@ -4389,7 +4403,7 @@
     "all": "1bad6c706359185e"
    },
    "row_hash": "d0461c156ea1bc3f",
-   "carried": false,
+   "carried": true,
    "pass": 14
   },
   {
@@ -4654,7 +4668,7 @@
     "all": "1bad6c706359185e"
    },
    "row_hash": "59b8d8d24f0c7c38",
-   "carried": false,
+   "carried": true,
    "pass": 14
   },
   {
@@ -5017,7 +5031,7 @@
     "all": "1bad6c706359185e"
    },
    "row_hash": "50dbf74577a813c7",
-   "carried": false,
+   "carried": true,
    "pass": 14
   },
   {
@@ -5425,7 +5439,7 @@
     "all": "1bad6c706359185e"
    },
    "row_hash": "67e48e60d5053a2e",
-   "carried": false,
+   "carried": true,
    "pass": 14
   },
   {
@@ -5703,7 +5717,7 @@
     "all": "1bad6c706359185e"
    },
    "row_hash": "310706ee076318f2",
-   "carried": false,
+   "carried": true,
    "pass": 14
   },
   {
@@ -5968,7 +5982,7 @@
     "all": "1bad6c706359185e"
    },
    "row_hash": "e78502f7aa28746d",
-   "carried": false,
+   "carried": true,
    "pass": 14
   },
   {
@@ -6344,7 +6358,7 @@
     "all": "1bad6c706359185e"
    },
    "row_hash": "56c1e6a836c774b1",
-   "carried": false,
+   "carried": true,
    "pass": 14
   },
   {
@@ -7144,7 +7158,7 @@
     "all": "1bad6c706359185e"
    },
    "row_hash": "def1348d483d0c40",
-   "carried": false,
+   "carried": true,
    "pass": 14
   },
   {
@@ -7337,7 +7351,7 @@
     "all": "1bad6c706359185e"
    },
    "row_hash": "5c890033f6ac38b8",
-   "carried": false,
+   "carried": true,
    "pass": 14
   },
   {
@@ -7530,7 +7544,7 @@
     "all": "1bad6c706359185e"
    },
    "row_hash": "265ece64add83676",
-   "carried": false,
+   "carried": true,
    "pass": 14
   },
   {
@@ -7723,7 +7737,7 @@
     "all": "1bad6c706359185e"
    },
    "row_hash": "6372efb027eb2034",
-   "carried": false,
+   "carried": true,
    "pass": 14
   },
   {
@@ -7916,7 +7930,7 @@
     "all": "1bad6c706359185e"
    },
    "row_hash": "df5ed7a36dbc74e4",
-   "carried": false,
+   "carried": true,
    "pass": 14
   },
   {
@@ -8109,7 +8123,7 @@
     "all": "1bad6c706359185e"
    },
    "row_hash": "4f83b0b5eb45f71b",
-   "carried": false,
+   "carried": true,
    "pass": 14
   },
   {
@@ -8302,7 +8316,7 @@
     "all": "1bad6c706359185e"
    },
    "row_hash": "71713a7e7ae739e7",
-   "carried": false,
+   "carried": true,
    "pass": 14
   },
   {
@@ -8495,7 +8509,7 @@
     "all": "1bad6c706359185e"
    },
    "row_hash": "d5a109f1ef88419a",
-   "carried": false,
+   "carried": true,
    "pass": 14
   },
   {
@@ -8688,7 +8702,7 @@
     "all": "1bad6c706359185e"
    },
    "row_hash": "c750f9b6ab4ace14",
-   "carried": false,
+   "carried": true,
    "pass": 14
   },
   {
@@ -8881,7 +8895,7 @@
     "all": "1bad6c706359185e"
    },
    "row_hash": "bd07273d5822f34f",
-   "carried": false,
+   "carried": true,
    "pass": 14
   },
   {
@@ -9074,7 +9088,7 @@
     "all": "1bad6c706359185e"
    },
    "row_hash": "7b2bb0dfdbcfe946",
-   "carried": false,
+   "carried": true,
    "pass": 14
   },
   {
@@ -9267,7 +9281,7 @@
     "all": "1bad6c706359185e"
    },
    "row_hash": "513927dd127fca04",
-   "carried": false,
+   "carried": true,
    "pass": 14
   },
   {
@@ -9460,7 +9474,7 @@
     "all": "1bad6c706359185e"
    },
    "row_hash": "791cd173e23fb130",
-   "carried": false,
+   "carried": true,
    "pass": 14
   },
   {
@@ -9653,7 +9667,7 @@
     "all": "1bad6c706359185e"
    },
    "row_hash": "177d1e1776fac74b",
-   "carried": false,
+   "carried": true,
    "pass": 14
   },
   {
@@ -9846,7 +9860,7 @@
     "all": "1bad6c706359185e"
    },
    "row_hash": "4e86d143688ba8e5",
-   "carried": false,
+   "carried": true,
    "pass": 14
   },
   {
@@ -10039,7 +10053,7 @@
     "all": "1bad6c706359185e"
    },
    "row_hash": "2c3ccc6bd9929d7f",
-   "carried": false,
+   "carried": true,
    "pass": 14
   },
   {
@@ -10232,7 +10246,7 @@
     "all": "1bad6c706359185e"
    },
    "row_hash": "18b0ecdf6d7fc901",
-   "carried": false,
+   "carried": true,
    "pass": 14
   },
   {
@@ -10425,7 +10439,7 @@
     "all": "1bad6c706359185e"
    },
    "row_hash": "beb57cd46fe906bf",
-   "carried": false,
+   "carried": true,
    "pass": 14
   },
   {
@@ -10618,7 +10632,7 @@
     "all": "1bad6c706359185e"
    },
    "row_hash": "1aadffd96e76381c",
-   "carried": false,
+   "carried": true,
    "pass": 14
   },
   {
@@ -10842,7 +10856,7 @@
     "all": "1bad6c706359185e"
    },
    "row_hash": "0ded4fca6fc71925",
-   "carried": false,
+   "carried": true,
    "pass": 14
   },
   {
@@ -11182,7 +11196,7 @@
     "all": "1bad6c706359185e"
    },
    "row_hash": "e64ce2672d85d2d8",
-   "carried": false,
+   "carried": true,
    "pass": 14
   },
   {
@@ -11401,7 +11415,7 @@
     "all": "1bad6c706359185e"
    },
    "row_hash": "77e6271dc896a2b3",
-   "carried": false,
+   "carried": true,
    "pass": 14
   },
   {
@@ -11443,8 +11457,8 @@
  ],
  "causes": [],
  "pending": [],
- "asked": 42,
- "answered": 42,
+ "asked": 1,
+ "answered": 1,
  "pass_items": [],
  "unowed": []
 }

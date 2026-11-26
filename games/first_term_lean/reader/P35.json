@@ -1,6 +1,6 @@
 {
  "piece": "P35",
- "pass": 15,
+ "pass": 16,
  "screens": {
   "shop_meet_nina.meet": {
    "text": "ea4eb3bb92b30114",
@@ -75,7 +75,7 @@
   "C1220": "18d85534582def9d",
   "C1221": "3835fed23cc316c7",
   "C1177": "ef9bbbe96651efc7",
-  "C1176": "7632b28c693a43a4",
+  "C1176": "655e8e2b731598c9",
   "C1189": "2afadc6bbe1996bd",
   "C1197": "d1aceeae8b5daeea",
   "C1200": "65e6616cd17c7eb3",
@@ -135,6 +135,7 @@
   "C2198": "27e6b45f50edd3ac",
   "C769": "f6b6f78a8f2e5ed7",
   "C794": "bad76e5963432385",
+  "C2201": "d119dfe665f76359",
   "C795": "34139e6a6914e171",
   "C804": "5358489178bff0a4",
   "L106": "13a714429d15f3b2",
@@ -505,18 +506,20 @@
    "row": "C1176",
    "screen": "shop_try_on.try",
    "verdict": "PASS",
-   "line": "",
-   "why": "No clothing read on a sex scene.",
+   "line": "You turn and look at your ass in the skirt longer than you mean to.",
+   "why": "not a sex scene; the skirt is the shop's, named in the try-on act",
    "cause": null,
    "note": true,
    "screen_hash": {
-    "text": "e66d70a5469f20bc",
-    "facts": "748a690297ebac40",
-    "all": "2f1c0969bf3cf205"
+    "text": "bda7f715eddbba10",
+    "traits": "01d024bf2eee28fd",
+    "facts": "861abe73330f8e00",
+    "facts2": "6fe90f26ec6d12ed",
+    "all": "6442aa25e1b725eb"
    },
-   "row_hash": "7632b28c693a43a4",
-   "carried": true,
-   "pass": 1
+   "row_hash": "655e8e2b731598c9",
+   "carried": false,
+   "pass": 16
   },
   {
    "row": "C1177",
@@ -845,7 +848,7 @@
    "note": false,
    "screen_hash": "491c3a036d302c50",
    "row_hash": "eb11e05cd75e52a9",
-   "carried": false,
+   "carried": true,
    "pass": 15
   },
   {
@@ -1578,6 +1581,19 @@
    "row_hash": "27e6b45f50edd3ac",
    "carried": true,
    "pass": 11
+  },
+  {
+   "row": "C2201",
+   "screen": "*",
+   "verdict": "N/A",
+   "line": "You take an armful into the fitting room and pull the curtain.",
+   "why": "scene and menu screens, not a place's description; the descriptions of the places they sit at read no clothes or meters (all 31 checked)",
+   "cause": null,
+   "note": false,
+   "screen_hash": "491c3a036d302c50",
+   "row_hash": "d119dfe665f76359",
+   "carried": false,
+   "pass": 16
   },
   {
    "row": "C286",
@@ -2926,8 +2942,8 @@
  ],
  "causes": [],
  "pending": [],
- "asked": 1,
- "answered": 1,
+ "asked": 2,
+ "answered": 2,
  "pass_items": [],
  "unowed": []
 }

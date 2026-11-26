@@ -1,6 +1,6 @@
 {
  "piece": "P13",
- "pass": 22,
+ "pass": 23,
  "screens": {
   "opening.wake": {
    "text": "cc3c063d9cef0f23",
@@ -47,37 +47,37 @@
   "opening.bath": {
    "text": "d00f9006696d287d",
    "traits": "74c4f68e6476ecee",
-   "facts": "00a0cc4b2413ad24",
+   "facts": "20e5495d128987a7",
    "facts2": "dc68f2478bb0beee",
-   "all": "d6df99d748d72072"
+   "all": "ab1a1939ab35335b"
   },
   "opening.hall": {
    "text": "20fd03b2cbe8ed50",
    "traits": "74c4f68e6476ecee",
-   "facts": "a48d9175e172fcd4",
+   "facts": "14e6f4470d45c19d",
    "facts2": "faa3710528b4391d",
-   "all": "e37cfcfd09a2e7e9"
+   "all": "d03e560297e53227"
   },
   "opening.room_past": {
    "text": "82c1b173aeb2608a",
    "traits": "74c4f68e6476ecee",
-   "facts": "a750571fad7d54ca",
+   "facts": "a04f16bdd648d2fe",
    "facts2": "2fdf350e1ea5b88c",
-   "all": "a27ffea7ce0a38ef"
+   "all": "06479da33e6408ab"
   },
   "opening.room_spoke": {
    "text": "2124ff3068418da1",
    "traits": "74c4f68e6476ecee",
-   "facts": "200e4791dfa8f630",
+   "facts": "3475d36018632088",
    "facts2": "eb146d82a84d7006",
-   "all": "060327233d4bbc89"
+   "all": "551480df2e50c54d"
   },
   "opening.room_waited": {
    "text": "c5a401b11c0eddc1",
    "traits": "74c4f68e6476ecee",
-   "facts": "6ceaa94af5f3a6ff",
+   "facts": "4da3877dc18bf9ca",
    "facts2": "596365ec34442151",
-   "all": "df92e7415262c5ca"
+   "all": "06f3ff36e3d5a7bd"
   },
   "opening.room": {
    "text": "38c16857e4551e5b",
@@ -114,7 +114,7 @@
    "facts2": "4a5c000f046f1be5",
    "all": "dea9963b899e2bc8"
   },
-  "*": "9dd1f46454290fc3"
+  "*": "4dafd648e4140894"
  },
  "rows": {
   "B1": "5276068df1ca6fa9",
@@ -175,7 +175,7 @@
   "C1220": "18d85534582def9d",
   "C1221": "3835fed23cc316c7",
   "C1177": "ef9bbbe96651efc7",
-  "C1176": "7632b28c693a43a4",
+  "C1176": "655e8e2b731598c9",
   "C1189": "2afadc6bbe1996bd",
   "C1197": "d1aceeae8b5daeea",
   "C1200": "65e6616cd17c7eb3",
@@ -255,6 +255,7 @@
   "C2198": "27e6b45f50edd3ac",
   "C769": "f6b6f78a8f2e5ed7",
   "C794": "bad76e5963432385",
+  "C2201": "d119dfe665f76359",
   "C795": "34139e6a6914e171",
   "C804": "5358489178bff0a4",
   "L106": "13a714429d15f3b2",
@@ -1542,23 +1543,33 @@
    "row": "C1176",
    "screen": "*",
    "verdict": "PASS",
-   "line": "\u2014",
-   "why": "No clothing read on the hall or bath screens.",
+   "line": "The towel drops off your tits, and for one second you're bare in the hall \u2026",
+   "why": "the towel is equipped by the opening's own script, not a read of her outfit; no clothing condition",
    "cause": null,
-   "screen_hash": "2553ececd707bf70",
-   "row_hash": "7632b28c693a43a4",
-   "carried": true
+   "note": true,
+   "screen_hash": "4dafd648e4140894",
+   "row_hash": "655e8e2b731598c9",
+   "carried": false,
+   "pass": 23
   },
   {
    "row": "C1176",
    "screen": "opening.room_spoke",
    "verdict": "PASS",
-   "line": "\"Thanks. Go get dressed.\"",
-   "why": "Not a sex scene; the only clothing read is his \"Go get dressed\" in the hall.",
+   "line": "Thanks. Go get dressed.",
+   "why": "not a clothing read: the towel and his line are the opening's fixed script, no condition on her outfit",
    "cause": null,
-   "screen_hash": "286b0d733d65a436",
-   "row_hash": "7632b28c693a43a4",
-   "carried": true
+   "note": true,
+   "screen_hash": {
+    "text": "2124ff3068418da1",
+    "traits": "74c4f68e6476ecee",
+    "facts": "3475d36018632088",
+    "facts2": "eb146d82a84d7006",
+    "all": "551480df2e50c54d"
+   },
+   "row_hash": "655e8e2b731598c9",
+   "carried": false,
+   "pass": 23
   },
   {
    "row": "C1177",
@@ -1906,7 +1917,7 @@
    "note": false,
    "screen_hash": "9dd1f46454290fc3",
    "row_hash": "eb11e05cd75e52a9",
-   "carried": false,
+   "carried": true,
    "pass": 22
   },
   {
@@ -1925,7 +1936,7 @@
     "all": "060327233d4bbc89"
    },
    "row_hash": "eb11e05cd75e52a9",
-   "carried": false,
+   "carried": true,
    "pass": 22
   },
   {
@@ -2904,6 +2915,19 @@
    "row_hash": "27e6b45f50edd3ac",
    "carried": true,
    "pass": 18
+  },
+  {
+   "row": "C2201",
+   "screen": "*",
+   "verdict": "N/A",
+   "line": "\u2014",
+   "why": "builds no place description (opening and people); a scene is not a place's description",
+   "cause": null,
+   "note": false,
+   "screen_hash": "4dafd648e4140894",
+   "row_hash": "d119dfe665f76359",
+   "carried": false,
+   "pass": 23
   },
   {
    "row": "C286",
@@ -8054,8 +8078,8 @@
  ],
  "causes": [],
  "pending": [],
- "asked": 2,
- "answered": 2,
+ "asked": 3,
+ "answered": 3,
  "pass_items": [],
  "unowed": []
 }

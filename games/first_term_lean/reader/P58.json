@@ -1,6 +1,6 @@
 {
  "piece": "P58",
- "pass": 8,
+ "pass": 9,
  "screens": {
   "talk_vance.hub": {
    "text": "0d740dd50c9788fe",
@@ -155,6 +155,7 @@
   "C2198": "27e6b45f50edd3ac",
   "C769": "f6b6f78a8f2e5ed7",
   "C794": "bad76e5963432385",
+  "C2201": "d119dfe665f76359",
   "C795": "34139e6a6914e171",
   "C804": "5358489178bff0a4",
   "L106": "13a714429d15f3b2",
@@ -377,7 +378,7 @@
     "all": "02c3cf9b746560e7"
    },
    "row_hash": "c1c0e2ac2588a579",
-   "carried": false,
+   "carried": true,
    "pass": 8
   },
   {
@@ -396,7 +397,7 @@
     "all": "442a9ac05e8ae507"
    },
    "row_hash": "c1c0e2ac2588a579",
-   "carried": false,
+   "carried": true,
    "pass": 8
   },
   {
@@ -684,7 +685,7 @@
     "all": "02c3cf9b746560e7"
    },
    "row_hash": "80d415cf08e0ebfe",
-   "carried": false,
+   "carried": true,
    "pass": 8
   },
   {
@@ -703,7 +704,7 @@
     "all": "442a9ac05e8ae507"
    },
    "row_hash": "80d415cf08e0ebfe",
-   "carried": false,
+   "carried": true,
    "pass": 8
   },
   {
@@ -1642,6 +1643,19 @@
    "pass": 2
   },
   {
+   "row": "C2201",
+   "screen": "*",
+   "verdict": "N/A",
+   "line": "Mr. Vance is in his chair on the porch, watching the street.",
+   "why": "scene and menu screens, not a place's description; the descriptions of the places they sit at read no clothes or meters (all 31 checked)",
+   "cause": null,
+   "note": false,
+   "screen_hash": "7e688f5974da5295",
+   "row_hash": "d119dfe665f76359",
+   "carried": false,
+   "pass": 9
+  },
+  {
    "row": "C422",
    "screen": "*",
    "verdict": "PASS",
@@ -1874,7 +1888,7 @@
     "all": "02c3cf9b746560e7"
    },
    "row_hash": "67e48e60d5053a2e",
-   "carried": false,
+   "carried": true,
    "pass": 8
   },
   {
@@ -1893,7 +1907,7 @@
     "all": "442a9ac05e8ae507"
    },
    "row_hash": "67e48e60d5053a2e",
-   "carried": false,
+   "carried": true,
    "pass": 8
   },
   {
@@ -2001,7 +2015,7 @@
     "all": "02c3cf9b746560e7"
    },
    "row_hash": "310706ee076318f2",
-   "carried": false,
+   "carried": true,
    "pass": 8
   },
   {
@@ -2020,7 +2034,7 @@
     "all": "442a9ac05e8ae507"
    },
    "row_hash": "310706ee076318f2",
-   "carried": false,
+   "carried": true,
    "pass": 8
   },
   {
@@ -2924,7 +2938,7 @@
     "all": "442a9ac05e8ae507"
    },
    "row_hash": "4e86d143688ba8e5",
-   "carried": false,
+   "carried": true,
    "pass": 8
   },
   {
@@ -3071,7 +3085,7 @@
     "all": "442a9ac05e8ae507"
    },
    "row_hash": "1aadffd96e76381c",
-   "carried": false,
+   "carried": true,
    "pass": 8
   },
   {
@@ -3192,7 +3206,7 @@
     "all": "02c3cf9b746560e7"
    },
    "row_hash": "13a714429d15f3b2",
-   "carried": false,
+   "carried": true,
    "pass": 8
   },
   {
@@ -3211,7 +3225,7 @@
     "all": "442a9ac05e8ae507"
    },
    "row_hash": "13a714429d15f3b2",
-   "carried": false,
+   "carried": true,
    "pass": 8
   },
   {
@@ -3384,7 +3398,7 @@
     "all": "442a9ac05e8ae507"
    },
    "row_hash": "e64ce2672d85d2d8",
-   "carried": false,
+   "carried": true,
    "pass": 8
   },
   {
@@ -3403,8 +3417,8 @@
  ],
  "causes": [],
  "pending": [],
- "asked": 13,
- "answered": 13,
+ "asked": 1,
+ "answered": 1,
  "pass_items": [],
  "unowed": []
 }

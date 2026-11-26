@@ -1,6 +1,6 @@
 {
  "piece": "P34",
- "pass": 23,
+ "pass": 24,
  "screens": {
   "talk_mom.hub": {
    "text": "0f4660e14b94ab43",
@@ -12,16 +12,16 @@
   "talk_mom.talk": {
    "text": "feb79fad5e3d8649",
    "traits": "ff8b9fa74641271c",
-   "facts": "600f467893ef7bb9",
+   "facts": "e75c6957e6fa4665",
    "facts2": "667847517eb6a28b",
-   "all": "66b9b16dce192c2f"
+   "all": "6dcd69d60201e8c3"
   },
   "talk_mom.eat": {
    "text": "cb5b4b6d73033d19",
    "traits": "ff8b9fa74641271c",
-   "facts": "bcd4fca1f4ccef8f",
+   "facts": "34376d1411bc4aad",
    "facts2": "508d10677899c7a7",
-   "all": "72eab913c378c469"
+   "all": "5593e1137ca9a97b"
   },
   "mark_kitchen.hub": {
    "text": "cebee1bac30c4ca9",
@@ -152,51 +152,51 @@
   "ryan_room.hub": {
    "text": "9d621fad430fa880",
    "traits": "74c4f68e6476ecee",
-   "facts": "3607ac9e4c83f599",
+   "facts": "0aa87afef7b70c76",
    "facts2": "20cb7e50f57945d6",
-   "all": "b022152d5d8242ab"
+   "all": "b23048fc5d70621d"
   },
   "ryan_room.talk": {
    "text": "166cb958fc8ae2d0",
    "traits": "74c4f68e6476ecee",
-   "facts": "a6fb6e766446d2a9",
+   "facts": "b8bf2fd142afbb61",
    "facts2": "9743f5cae6d82f4f",
-   "all": "6e6bae3cf8fb4571"
+   "all": "73fd98d65c66c5f6"
   },
   "ryan_kitchen.hub": {
    "text": "2f251e1b55595f80",
    "traits": "74c4f68e6476ecee",
-   "facts": "c2739df8bdf61c55",
+   "facts": "fc70c37809b0fc0c",
    "facts2": "b1e75d13260c5686",
-   "all": "a6a70ab289ac7cd2"
+   "all": "3ebf9b44e4f57e05"
   },
   "ryan_kitchen.talk": {
    "text": "ef2da0282311767b",
    "traits": "cbe784dabd345f8d",
-   "facts": "11c6c935c350ff61",
+   "facts": "c8acf01ad341a286",
    "facts2": "f0656c863969b3cd",
-   "all": "901dc409441ca938"
+   "all": "0f6aca405decaa22"
   },
   "ryan_living_room.hub": {
    "text": "977902cc542a93c3",
    "traits": "74c4f68e6476ecee",
-   "facts": "708c539e6a8039a9",
+   "facts": "913bc5f7676beba9",
    "facts2": "966a80b889b630f1",
-   "all": "3818cfe13af52bf4"
+   "all": "24d2b865588f1fd9"
   },
   "ryan_living_room.talk": {
    "text": "a3fd91de339b2cda",
    "traits": "cbe784dabd345f8d",
-   "facts": "76519d70d17fe391",
+   "facts": "16aa7886b557055a",
    "facts2": "e058cda41e2fb0ae",
-   "all": "636c6d5322eb7f41"
+   "all": "e073ee24e4aea961"
   },
   "home_dishes.do": {
    "text": "00dad86f6a1b7bb7",
    "traits": "ff8b9fa74641271c",
-   "facts": "7e74f00e4f7f7169",
+   "facts": "22a4f650e96fa144",
    "facts2": "382d88df7f2e79a9",
-   "all": "e6b3d660fb156c98"
+   "all": "05a9d4ad18dab571"
   },
   "home_wait.wait": {
    "text": "6df902dbd12d0ff2",
@@ -208,11 +208,11 @@
   "loop_eat.do": {
    "text": "636d07a3956c340a",
    "traits": "ff8b9fa74641271c",
-   "facts": "7e74f00e4f7f7169",
+   "facts": "22a4f650e96fa144",
    "facts2": "382d88df7f2e79a9",
-   "all": "4901fcc5436c3e2b"
+   "all": "6405fbb818a41081"
   },
-  "*": "72a5ce4487ddbdec"
+  "*": "99125118446c82c0"
  },
  "rows": {
   "B1": "5276068df1ca6fa9",
@@ -323,6 +323,7 @@
   "C2198": "27e6b45f50edd3ac",
   "C769": "f6b6f78a8f2e5ed7",
   "C794": "bad76e5963432385",
+  "C2201": "d119dfe665f76359",
   "C795": "34139e6a6914e171",
   "C804": "5358489178bff0a4",
   "L106": "13a714429d15f3b2",
@@ -641,7 +642,7 @@
     "all": "c6887cc436b371d9"
    },
    "row_hash": "c1c0e2ac2588a579",
-   "carried": false,
+   "carried": true,
    "pass": 23
   },
   {
@@ -2052,6 +2053,19 @@
    "pass": 22
   },
   {
+   "row": "C2201",
+   "screen": "*",
+   "verdict": "N/A",
+   "line": "Mom's in the kitchen. She looks up at you, and her face goes soft.",
+   "why": "Mom's look at Mom's skirt is her menu line, a person she knows noticing in her manner (clothes.md rule 8), not the kitchen's description; the kitchen and living room descriptions are plain",
+   "cause": null,
+   "note": false,
+   "screen_hash": "99125118446c82c0",
+   "row_hash": "d119dfe665f76359",
+   "carried": false,
+   "pass": 24
+  },
+  {
    "row": "C338",
    "screen": "*",
    "verdict": "N/A",
@@ -2418,7 +2432,7 @@
     "all": "c6887cc436b371d9"
    },
    "row_hash": "67e48e60d5053a2e",
-   "carried": false,
+   "carried": true,
    "pass": 23
   },
   {
@@ -3743,8 +3757,8 @@
  ],
  "causes": [],
  "pending": [],
- "asked": 2,
- "answered": 2,
+ "asked": 1,
+ "answered": 1,
  "pass_items": [],
  "unowed": []
 }

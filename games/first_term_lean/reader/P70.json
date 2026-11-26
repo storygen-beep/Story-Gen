@@ -1,6 +1,6 @@
 {
  "piece": "P70",
- "pass": 2,
+ "pass": 3,
  "screens": {
   "*": "4f53cda18c2baa0c"
  },
@@ -118,6 +118,7 @@
   "C2192": "fb8267ff01adf133",
   "C2195": "40447ff526d3f730",
   "C2196": "4ca489a2e70123f0",
+  "C2200": "414a4b008effe564",
   "walk-ins#1": "e2c5c7198fc0d5ef",
   "walk-ins#2": "23e5d0e67707aeaf",
   "walk-ins#3": "6ef8eb0271aa1f38",
@@ -169,7 +170,7 @@
    "note": false,
    "screen_hash": null,
    "row_hash": "c1c0e2ac2588a579",
-   "carried": false,
+   "carried": true,
    "pass": 2
   },
   {
@@ -680,6 +681,19 @@
    "pass": 1
   },
   {
+   "row": "C2200",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "Evening, little lady. Vance. I own your house.",
+   "why": "not a 'she gets noticed' scene: no stranger reacts to a garment she wears; noticed scenes are 5 of 34 arrival scenes, one per garment state per place",
+   "cause": null,
+   "note": false,
+   "screen_hash": "4f53cda18c2baa0c",
+   "row_hash": "414a4b008effe564",
+   "carried": false,
+   "pass": 3
+  },
+  {
    "row": "C28",
    "screen": "*",
    "verdict": "N/A",
@@ -832,7 +846,7 @@
    "note": false,
    "screen_hash": null,
    "row_hash": "beb5a109bde77305",
-   "carried": false,
+   "carried": true,
    "pass": 2
   },
   {
@@ -897,7 +911,7 @@
    "note": false,
    "screen_hash": null,
    "row_hash": "153b0804e686abae",
-   "carried": false,
+   "carried": true,
    "pass": 2
   },
   {
@@ -1729,7 +1743,7 @@
    "note": false,
    "screen_hash": null,
    "row_hash": "321cc76cff93aadb",
-   "carried": false,
+   "carried": true,
    "pass": 2
   },
   {
@@ -1917,8 +1931,8 @@
  ],
  "causes": [],
  "pending": [],
- "asked": 4,
- "answered": 4,
+ "asked": 1,
+ "answered": 1,
  "pass_items": [],
  "unowed": []
 }

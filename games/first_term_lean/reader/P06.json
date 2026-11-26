@@ -1,6 +1,6 @@
 {
  "piece": "P06",
- "pass": 14,
+ "pass": 15,
  "screens": {
   "loop_sleep.do": {
    "text": "3c1f6073c033b3c9",
@@ -12,9 +12,9 @@
   "loop_eat.do": {
    "text": "636d07a3956c340a",
    "traits": "ff8b9fa74641271c",
-   "facts": "7e74f00e4f7f7169",
+   "facts": "22a4f650e96fa144",
    "facts2": "382d88df7f2e79a9",
-   "all": "4901fcc5436c3e2b"
+   "all": "6405fbb818a41081"
   },
   "loop_shower.do": {
    "text": "839f0962e74c85d1",
@@ -23,7 +23,7 @@
    "facts2": "875ee150348bbbd9",
    "all": "34137dc5a717631d"
   },
-  "*": "61d7a895737acd44"
+  "*": "0059577e01d700ca"
  },
  "rows": {
   "B1": "5276068df1ca6fa9",
@@ -105,7 +105,7 @@
   "C1220": "e706f55f84a94a84",
   "C1221": "90572c3a26b59fc7",
   "C1177": "9002e505d1fabe59",
-  "C1176": "78d766628b4d73c2",
+  "C1176": "0e04d12a589767b0",
   "C1189": "add9e8d3fbfb9105",
   "C1197": "b4f0f994f2657396",
   "C1200": "766f516b6b8e329c",
@@ -117,7 +117,7 @@
   "clothes#5": "58e88b96e1566182",
   "clothes#6": "2564b4ed16e2c7f7",
   "clothes#7": "bb14def6ad6b8f84",
-  "clothes#8": "e75be85fc8419181",
+  "clothes#8": "cce3662a8d49bfda",
   "clothes#9": "fa33eaefa120f48c",
   "C255": "41543c0b01047eb6",
   "C256": "39401d1f8b2ac714",
@@ -171,6 +171,7 @@
   "media#7": "eff6dc1369755c34",
   "C769": "cf7d7a82afabcbbb",
   "C794": "3281d513b7f90d6e",
+  "C2201": "4745761f016db481",
   "C795": "a28152099697ac6a",
   "C804": "56bf64be29d6ea48",
   "L106": "759e6667d7fc3183",
@@ -189,13 +190,13 @@
   "C770": "dcc6bbe6fde09083",
   "C771": "d941995a226da2b4",
   "C707": "e2898bd02a9e4730",
-  "places#1": "18252966b4327f58",
+  "places#1": "378b2df4c8bf116d",
   "places#2": "e0b57720921c4523",
   "places#3": "56d056c80da49bb6",
   "places#4": "ae3ba300e1045c9f",
   "places#5": "90ec575adee9bf74",
   "places#6": "f2bc5f0f10c64c4b",
-  "places#7": "2a095bf54f175e5e",
+  "places#7": "58dab0dc035240bd",
   "places#8": "c3ea8d01465e7298",
   "places#9": "f4cd9ab5f62bc6fc",
   "places#10": "d6f0b4b357efc043",
@@ -730,15 +731,15 @@
   {
    "row": "C1176",
    "screen": "*",
-   "verdict": "N/A",
-   "line": "You eat standing at the counter: toast, whatever's in the fridge, coffee from the pot.",
-   "why": "loop_eat names no garment, equips nothing, has no dress code or door; the wardrobe is P07's",
+   "verdict": "PASS",
+   "line": "It hits your nipples cold \u2026 (loop_shower)",
+   "why": "the shower and bed screens read no garment by condition; no clothing read on a sexual screen",
    "cause": null,
-   "note": false,
-   "screen_hash": "a3cd947a82240952",
-   "row_hash": "78d766628b4d73c2",
-   "carried": true,
-   "pass": 4
+   "note": true,
+   "screen_hash": "0059577e01d700ca",
+   "row_hash": "0e04d12a589767b0",
+   "carried": false,
+   "pass": 15
   },
   {
    "row": "C1177",
@@ -1863,6 +1864,19 @@
    "row_hash": "6626e5d54fe97b40",
    "carried": true,
    "pass": 8
+  },
+  {
+   "row": "C2201",
+   "screen": "*",
+   "verdict": "N/A",
+   "line": "\u2014",
+   "why": "builds no place description (loop_sleep, loop_eat, loop_shower are acts)",
+   "cause": null,
+   "note": false,
+   "screen_hash": "0059577e01d700ca",
+   "row_hash": "4745761f016db481",
+   "carried": false,
+   "pass": 15
   },
   {
    "row": "C239",
@@ -3978,14 +3992,14 @@
    "row": "clothes#8",
    "screen": "*",
    "verdict": "N/A",
-   "line": "",
-   "why": "no garment or dress rule on this canvas",
+   "line": "\u2014",
+   "why": "no one sees her on these screens; nobody notices",
    "cause": null,
    "note": false,
-   "screen_hash": "a3cd947a82240952",
-   "row_hash": "e75be85fc8419181",
-   "carried": true,
-   "pass": 4
+   "screen_hash": "0059577e01d700ca",
+   "row_hash": "cce3662a8d49bfda",
+   "carried": false,
+   "pass": 15
   },
   {
    "row": "clothes#9",
@@ -4186,14 +4200,14 @@
    "row": "places#1",
    "screen": "*",
    "verdict": "N/A",
-   "line": "",
-   "why": "the identity line is the Kitchen's description, not this canvas",
+   "line": "\u2014",
+   "why": "the identity lines are the rooms' descriptions (P02), not these canvases",
    "cause": null,
    "note": false,
-   "screen_hash": "a3cd947a82240952",
-   "row_hash": "18252966b4327f58",
-   "carried": true,
-   "pass": 4
+   "screen_hash": "0059577e01d700ca",
+   "row_hash": "378b2df4c8bf116d",
+   "carried": false,
+   "pass": 15
   },
   {
    "row": "places#10",
@@ -4205,7 +4219,7 @@
    "note": false,
    "screen_hash": "61d7a895737acd44",
    "row_hash": "d6f0b4b357efc043",
-   "carried": false,
+   "carried": true,
    "pass": 14
   },
   {
@@ -4277,14 +4291,14 @@
    "row": "places#7",
    "screen": "*",
    "verdict": "N/A",
-   "line": "",
-   "why": "no street or hub",
+   "line": "\u2014",
+   "why": "no street or hub built",
    "cause": null,
    "note": false,
-   "screen_hash": "a3cd947a82240952",
-   "row_hash": "2a095bf54f175e5e",
-   "carried": true,
-   "pass": 4
+   "screen_hash": "0059577e01d700ca",
+   "row_hash": "58dab0dc035240bd",
+   "carried": false,
+   "pass": 15
   },
   {
    "row": "places#8",
@@ -4718,8 +4732,8 @@
  ],
  "causes": [],
  "pending": [],
- "asked": 1,
- "answered": 1,
+ "asked": 5,
+ "answered": 5,
  "pass_items": [],
  "unowed": []
 }

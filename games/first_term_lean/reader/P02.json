@@ -1,6 +1,6 @@
 {
  "piece": "P02",
- "pass": 12,
+ "pass": 13,
  "screens": {
   "*": "4f53cda18c2baa0c"
  },
@@ -82,6 +82,7 @@
   "media#7": "eff6dc1369755c34",
   "C769": "cf7d7a82afabcbbb",
   "C794": "3281d513b7f90d6e",
+  "C2201": "4745761f016db481",
   "C795": "a28152099697ac6a",
   "C804": "56bf64be29d6ea48",
   "L106": "759e6667d7fc3183",
@@ -100,13 +101,13 @@
   "C770": "dcc6bbe6fde09083",
   "C771": "d941995a226da2b4",
   "C707": "e2898bd02a9e4730",
-  "places#1": "18252966b4327f58",
+  "places#1": "378b2df4c8bf116d",
   "places#2": "e0b57720921c4523",
   "places#3": "56d056c80da49bb6",
   "places#4": "ae3ba300e1045c9f",
   "places#5": "90ec575adee9bf74",
   "places#6": "f2bc5f0f10c64c4b",
-  "places#7": "2a095bf54f175e5e",
+  "places#7": "58dab0dc035240bd",
   "places#8": "c3ea8d01465e7298",
   "places#9": "f4cd9ab5f62bc6fc",
   "places#10": "d6f0b4b357efc043",
@@ -663,6 +664,19 @@
    "row_hash": "d631d4c69f1d3b74",
    "carried": true,
    "pass": 1
+  },
+  {
+   "row": "C2201",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "The kitchen: \u2026 Nobody's here. The fridge hums.",
+   "why": "the seven rooms' lines and variants read only who is there (npc_at_location); nothing reads her clothes or meters; pages check green",
+   "cause": null,
+   "note": false,
+   "screen_hash": "4f53cda18c2baa0c",
+   "row_hash": "4745761f016db481",
+   "carried": false,
+   "pass": 13
   },
   {
    "row": "C422",
@@ -1891,13 +1905,13 @@
    "screen": "*",
    "verdict": "PASS",
    "line": "The hall. Every room in the house opens off it.",
-   "why": "identity line, same every visit",
+   "why": "identity line the same every visit; the kitchen, living room and Ryan's room change only for nobody here",
    "cause": null,
    "note": false,
    "screen_hash": "4f53cda18c2baa0c",
-   "row_hash": "18252966b4327f58",
-   "carried": true,
-   "pass": 1
+   "row_hash": "378b2df4c8bf116d",
+   "carried": false,
+   "pass": 13
   },
   {
    "row": "places#10",
@@ -1909,7 +1923,7 @@
    "note": false,
    "screen_hash": "4f53cda18c2baa0c",
    "row_hash": "d6f0b4b357efc043",
-   "carried": false,
+   "carried": true,
    "pass": 12
   },
   {
@@ -2137,14 +2151,14 @@
    "row": "places#7",
    "screen": "home_hall",
    "verdict": "PASS",
-   "line": "(doors and Exit Home only)",
-   "why": "the thoroughfare only routes",
-   "cause": "",
+   "line": "on_route = \"the bathroom's busy in the morning, so he waits in the hall\"",
+   "why": "the hall only routes (doors, Exit Home); the one row on it, Ryan's 07:12-07:25 weekdays, says why; people check green",
+   "cause": null,
    "note": false,
    "screen_hash": null,
-   "row_hash": "2a095bf54f175e5e",
-   "carried": true,
-   "pass": 2
+   "row_hash": "58dab0dc035240bd",
+   "carried": false,
+   "pass": 13
   },
   {
    "row": "places#8",
@@ -2357,8 +2371,8 @@
  ],
  "causes": [],
  "pending": [],
- "asked": 1,
- "answered": 1,
+ "asked": 3,
+ "answered": 3,
  "pass_items": [],
  "unowed": []
 }

@@ -1,6 +1,6 @@
 {
  "piece": "P09",
- "pass": 15,
+ "pass": 16,
  "screens": {
   "class_psych.class": {
    "text": "7dc50540207a762d",
@@ -140,6 +140,7 @@
   "C2198": "27e6b45f50edd3ac",
   "C769": "f6b6f78a8f2e5ed7",
   "C794": "bad76e5963432385",
+  "C2201": "d119dfe665f76359",
   "C795": "34139e6a6914e171",
   "C804": "5358489178bff0a4",
   "L106": "13a714429d15f3b2",
@@ -1457,8 +1458,21 @@
    "note": false,
    "screen_hash": "5a7502d76e7d3fb0",
    "row_hash": "27e6b45f50edd3ac",
-   "carried": false,
+   "carried": true,
    "pass": 15
+  },
+  {
+   "row": "C2201",
+   "screen": "*",
+   "verdict": "N/A",
+   "line": "\u2014",
+   "why": "builds no place description (class, study and stage acts; sidebar); a scene is not a place's description",
+   "cause": null,
+   "note": false,
+   "screen_hash": "5a7502d76e7d3fb0",
+   "row_hash": "d119dfe665f76359",
+   "carried": false,
+   "pass": 16
   },
   {
    "row": "C338",

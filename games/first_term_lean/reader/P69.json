@@ -1,6 +1,6 @@
 {
  "piece": "P69",
- "pass": 3,
+ "pass": 4,
  "screens": {
   "*": "4f53cda18c2baa0c"
  },
@@ -71,6 +71,7 @@
   "people#16": "45053c701775c75f",
   "C769": "cf7d7a82afabcbbb",
   "C794": "3281d513b7f90d6e",
+  "C2201": "4745761f016db481",
   "C795": "a28152099697ac6a",
   "C804": "56bf64be29d6ea48",
   "L106": "759e6667d7fc3183",
@@ -88,13 +89,13 @@
   "C770": "dcc6bbe6fde09083",
   "C771": "d941995a226da2b4",
   "C707": "e2898bd02a9e4730",
-  "places#1": "18252966b4327f58",
+  "places#1": "378b2df4c8bf116d",
   "places#2": "e0b57720921c4523",
   "places#3": "56d056c80da49bb6",
   "places#4": "ae3ba300e1045c9f",
   "places#5": "90ec575adee9bf74",
   "places#6": "f2bc5f0f10c64c4b",
-  "places#7": "2a095bf54f175e5e",
+  "places#7": "58dab0dc035240bd",
   "places#8": "c3ea8d01465e7298",
   "places#9": "f4cd9ab5f62bc6fc",
   "places#10": "d6f0b4b357efc043",
@@ -146,6 +147,7 @@
   "C2192": "fb8267ff01adf133",
   "C2195": "40447ff526d3f730",
   "C2196": "4ca489a2e70123f0",
+  "C2200": "414a4b008effe564",
   "walk-ins#1": "e2c5c7198fc0d5ef",
   "walk-ins#2": "23e5d0e67707aeaf",
   "walk-ins#3": "6ef8eb0271aa1f38",
@@ -275,7 +277,7 @@
    "note": false,
    "screen_hash": "4f53cda18c2baa0c",
    "row_hash": "efcbd1ac6a95e2f2",
-   "carried": false,
+   "carried": true,
    "pass": 3
   },
   {
@@ -639,7 +641,7 @@
    "note": false,
    "screen_hash": null,
    "row_hash": "4ca489a2e70123f0",
-   "carried": false,
+   "carried": true,
    "pass": 3
   },
   {
@@ -667,6 +669,32 @@
    "row_hash": "be119a385da08978",
    "carried": true,
    "pass": 2
+  },
+  {
+   "row": "C2200",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "Vance is on his porch with a shoebox of envelopes on his knee, licking his thumb, counting.",
+   "why": "not a 'she gets noticed' scene: no stranger reacts to a garment she wears; noticed scenes are 5 of 34 arrival scenes, one per garment state per place",
+   "cause": null,
+   "note": false,
+   "screen_hash": "4f53cda18c2baa0c",
+   "row_hash": "414a4b008effe564",
+   "carried": false,
+   "pass": 4
+  },
+  {
+   "row": "C2201",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "The house next door. The man who owns your family's house lives here: a porch, one chair on it, and a clear view of your front door.",
+   "why": "the description reads no clothes or meters; it changes only with who's there",
+   "cause": null,
+   "note": false,
+   "screen_hash": "4f53cda18c2baa0c",
+   "row_hash": "4745761f016db481",
+   "carried": false,
+   "pass": 4
   },
   {
    "row": "C28",
@@ -808,7 +836,7 @@
    "note": false,
    "screen_hash": null,
    "row_hash": "beb5a109bde77305",
-   "carried": false,
+   "carried": true,
    "pass": 3
   },
   {
@@ -1185,7 +1213,7 @@
    "note": false,
    "screen_hash": "4f53cda18c2baa0c",
    "row_hash": "0825e8443f9180d0",
-   "carried": false,
+   "carried": true,
    "pass": 3
   },
   {
@@ -1198,7 +1226,7 @@
    "note": false,
    "screen_hash": "4f53cda18c2baa0c",
    "row_hash": "6088d5531ecff698",
-   "carried": false,
+   "carried": true,
    "pass": 3
   },
   {
@@ -1211,7 +1239,7 @@
    "note": false,
    "screen_hash": "4f53cda18c2baa0c",
    "row_hash": "38b483431fa177b0",
-   "carried": false,
+   "carried": true,
    "pass": 3
   },
   {
@@ -1778,13 +1806,13 @@
    "screen": "*",
    "verdict": "PASS",
    "line": "The house next door. The man who owns your family's house lives here: a porch, one chair on it, and a clear view of your front door.",
-   "why": "the same identity line every visit",
+   "why": "identity line leads both variants; they add the unnamed man in the chair or 'The chair is empty.' (who is there)",
    "cause": null,
    "note": false,
    "screen_hash": "4f53cda18c2baa0c",
-   "row_hash": "18252966b4327f58",
-   "carried": true,
-   "pass": 2
+   "row_hash": "378b2df4c8bf116d",
+   "carried": false,
+   "pass": 4
   },
   {
    "row": "places#10",
@@ -1809,7 +1837,7 @@
    "note": false,
    "screen_hash": null,
    "row_hash": "e0b57720921c4523",
-   "carried": false,
+   "carried": true,
    "pass": 3
   },
   {
@@ -1868,14 +1896,14 @@
    "row": "places#7",
    "screen": "*",
    "verdict": "PASS",
-   "line": "hood_street kind = \"thoroughfare\"; no rows on it",
-   "why": "the street only routes; his porch rows sit at his house",
+   "line": "The house next door. The man who owns your family's house lives here: a porch, one chair on it, and a clear view of your front door.",
+   "why": "Vance's porch rows are at hood_next_door, not on the street; the four thoroughfare rows all carry on_route",
    "cause": null,
    "note": false,
    "screen_hash": "4f53cda18c2baa0c",
-   "row_hash": "2a095bf54f175e5e",
-   "carried": true,
-   "pass": 2
+   "row_hash": "58dab0dc035240bd",
+   "carried": false,
+   "pass": 4
   },
   {
    "row": "places#8",
@@ -1991,7 +2019,7 @@
    "note": false,
    "screen_hash": null,
    "row_hash": "321cc76cff93aadb",
-   "carried": false,
+   "carried": true,
    "pass": 3
   },
   {
@@ -2179,8 +2207,8 @@
  ],
  "causes": [],
  "pending": [],
- "asked": 8,
- "answered": 8,
+ "asked": 4,
+ "answered": 4,
  "pass_items": [],
  "unowed": []
 }
