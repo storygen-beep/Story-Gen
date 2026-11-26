@@ -2429,18 +2429,27 @@ class ChoiceCostsTests(TestCase):
         project = Project.objects.get(id=result["project_id"])
         return generator_cls().generate(project)
 
-    def _assert_costs_wired(self, twee):
+    def _assert_costs_wired(self, twee, v2=False):
         # The inner cost-affordability gate is emitted as a passage <<if>>.
         self.assertIn("<<if setup.checkCostsAffordable(", twee,
                       "per-choice cost gate must emit a checkCostsAffordable <<if>>")
         # Cost-blocked rung = greyed span with the dynamic resource message.
-        self.assertIn("<<= setup.getCostBlockedMessage(", twee,
-                      "cost-blocked rung must render getCostBlockedMessage")
+        # v2 passes the label so a price it already shows isn't repeated (LO 2026-11-27);
+        # v1 is frozen with the older inline form.
+        if v2:
+            self.assertIn("<<set _costMsg to setup.getCostBlockedMessage(", twee,
+                          "cost-blocked rung must render getCostBlockedMessage")
+            self.assertIn("<<if _costMsg>> (<<= _costMsg>>)<</if>>", twee,
+                          "cost-blocked rung shows the message only when there is one")
+        else:
+            self.assertIn("<<= setup.getCostBlockedMessage(", twee,
+                          "cost-blocked rung must render getCostBlockedMessage")
         self.assertIn('<span class="locked-choice"', twee,
                       "cost-blocked rung must be a greyed locked-choice span")
         # The rung KEEPS the action label and appends the requirement beside it
         # (doesn't replace the choice text with the bare message).
-        self.assertIn("Work a shift (<<= setup.getCostBlockedMessage(", twee,
+        self.assertIn('Work a shift<<set _costMsg to setup.getCostBlockedMessage(' if v2
+                      else "Work a shift (<<= setup.getCostBlockedMessage(", twee,
                       "cost-blocked rung must keep the choice text before the requirement")
         # The cost deducts on click (energy -15), NOT via effects.
         self.assertIn('"energy", "add", -15', twee,
@@ -2460,7 +2469,7 @@ class ChoiceCostsTests(TestCase):
         from apps.game_generation.twee_comprehensive.generators.v2 import (
             TweeComprehensiveGeneratorV2,
         )
-        self._assert_costs_wired(self._build(TweeComprehensiveGeneratorV2, with_costs=True))
+        self._assert_costs_wired(self._build(TweeComprehensiveGeneratorV2, with_costs=True), v2=True)
 
     def test_v1_choice_costs_wired(self):
         from apps.game_generation.twee_comprehensive.generators.v1 import (

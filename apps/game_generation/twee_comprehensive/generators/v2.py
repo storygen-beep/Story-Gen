@@ -6232,8 +6232,23 @@ setup.deductCosts = function(canvasId) {{
     setup.deductCostArray(setup.getCanvasCosts(canvasId));
 }};
 
-// Get a human-readable blocked message for unaffordable costs
-setup.getCostBlockedMessage = function(costs) {{
+// True when a label already shows a money price, "$5" in "Day pass ($5)", and never "$5"
+// inside "$50". The greyed tags read it so the price is never said twice (LO, 2026-11-26/27).
+setup.priceShownInLabel = function(value, label) {{
+    var priceText = '$' + Number(value), lbl = String(label || '');
+    var at = lbl.indexOf(priceText);
+    while (at !== -1) {{
+        var after = lbl.charAt(at + priceText.length);
+        if (!(after >= '0' && after <= '9')) return true;
+        at = lbl.indexOf(priceText, at + 1);
+    }}
+    return false;
+}};
+
+// Get a human-readable blocked message for unaffordable costs. With a label, a money cost
+// whose price the label already shows is left out (a greyed "Day pass ($5)" must not add
+// "Requires 5 Money"); without one, every short cost is named, as before.
+setup.getCostBlockedMessage = function(costs, label) {{
     if (!costs || costs.length === 0) return '';
     var sv = State.variables;
     var playerTraits = (sv.player && sv.player.core_traits) ? sv.player.core_traits : {{}};
@@ -6243,10 +6258,30 @@ setup.getCostBlockedMessage = function(costs) {{
         var current = Number(playerTraits[String(cost.trait)] || 0);
         var traitDisplay = setup.traitLabel(cost.trait);
         if (current < Number(cost.value)) {{
+            if (label && String(cost.trait) === 'money' && setup.priceShownInLabel(cost.value, label)) continue;
             lines.push('Requires ' + cost.value + ' ' + traitDisplay + ' (you have ' + Math.floor(current) + ')');
         }}
     }}
     return lines.join('. ');
+}};
+
+// The short tag on a greyed row: the first cost she is SHORT of, never simply the first cost
+// listed (a $5 + 20 energy row greyed for energy must not say "5 Money"). Empty when she can
+// pay everything, or when the short cost is money and the label already shows that price
+// ("Work out ($5)"), so the price never reads twice (LO, 2026-11-26). Short of that money AND
+// something else, the tag names the something else; "$5" never matches inside "$50".
+setup.blockedCostTag = function(costs, label) {{
+    if (!costs || costs.length === 0) return '';
+    var sv = State.variables;
+    var playerTraits = (sv.player && sv.player.core_traits) ? sv.player.core_traits : {{}};
+    for (var i = 0; i < costs.length; i++) {{
+        var cost = costs[i];
+        var current = Number(playerTraits[String(cost.trait)] || 0);
+        if (current >= Number(cost.value)) continue;
+        if (String(cost.trait) === 'money' && setup.priceShownInLabel(cost.value, label)) continue;
+        return cost.value + ' ' + setup.traitLabel(cost.trait);
+    }}
+    return '';
 }};
 
 // ===== Location entry-cost system (travel friction) =====
@@ -6695,10 +6730,10 @@ setup.renderNpcPortraits = function(locationId) {{
             html += '<span class="npc-portrait-name">' + npcName + '</span>';
 
             // Cost badge for blocked portraits
-            if (isBlocked && activity.costs && activity.costs.length > 0) {{
-                var costTrait = String(activity.costs[0].trait);
-                var costTraitDisplay = costTrait.charAt(0).toUpperCase() + costTrait.slice(1);
-                html += '<span class="npc-badge npc-cost-badge">' + activity.costs[0].value + ' ' + costTraitDisplay + '</span>';
+            // The portrait shows the name, not the row's label, so the price is never in it.
+            var npcCostText = isBlocked ? setup.blockedCostTag(activity.costs, '') : '';
+            if (npcCostText) {{
+                html += '<span class="npc-badge npc-cost-badge">' + npcCostText + '</span>';
             }}
 
             html += '</a>';
@@ -6786,10 +6821,9 @@ setup.renderSoloActivities = function(locationId) {{
             if (!bPassageName) continue;
 
             var costTag = '';
-            if (blocked.costs && blocked.costs.length > 0) {{
-                var ct = blocked.costs[0];
-                var ctDisplay = setup.traitLabel(ct.trait);
-                costTag = ' <span class="solo-cost-tag">(' + ct.value + ' ' + ctDisplay + ')</span>';
+            var ctText = setup.blockedCostTag(blocked.costs, bDisplayName);
+            if (ctText) {{
+                costTag = ' <span class="solo-cost-tag">(' + ctText + ')</span>';
             }}
             html += '<a class="link-internal solo-activity-btn solo-activity-blocked" data-passage="' + bPassageName + '">' + bDisplayName + costTag + '</a><br>';
         }}
@@ -17396,7 +17430,14 @@ setup.carryRent = function (due, paid) {
                             # locked_text style, e.g. "Work a shift 🍺 (Requires 15 Energy (you have 6))".
                             _esc_choice_label = choice_text.replace('"', '\\"').replace('[', '&#91;').replace(']', '&#93;')
                             passage_body += "<<else>>\n"
-                            passage_body += f'<span class="locked-choice" title="{_esc_choice_label}">{_esc_choice_label} (<<= setup.getCostBlockedMessage({choice_costs_js})>>)</span><br>\n'
+                            # The label goes in so a price it already shows isn't repeated
+                            # ("Day pass ($5)" greyed adds nothing for the $5; LO 2026-11-27).
+                            _cost_label_js = json.dumps(choice_text)
+                            passage_body += (
+                                f'<span class="locked-choice" title="{_esc_choice_label}">{_esc_choice_label}'
+                                f'<<set _costMsg to setup.getCostBlockedMessage({choice_costs_js}, {_cost_label_js})>>'
+                                f'<<if _costMsg>> (<<= _costMsg>>)<</if>></span><br>\n'
+                            )
                             passage_body += "<</if>>\n"
                         # ── Rejection / locked-visible system (main-lock tier) ──
                         if cond_expr is not None:
