@@ -1128,3 +1128,10 @@ Why for all of these: P13's reader found new FAILs on every pass, v5 to v11 (99 
   - Once a day across their rooms still holds.
 
   No script reads this.
+- **C2199: a page she is given in the story waits for the scene that gives it.** LO, typed in main-lean 2026-11-26: "Timetable is only in the sidebar / Should first open in the deans office", then "Go ahead".
+  - **The engine change, approved by LO with that "Go ahead":**
+    - A `timetable` content block: a link that opens the dialog, and with `open = true` it also opens by itself.
+    - `[ui] timetable_button_when`: the sidebar button waits for a player flag.
+  - **`craft/systems.md`:** row C2199, and an engine note.
+  - **`lists/COVERAGE.md`:** C2199.
+  - **Verified:** `apps/game_generation/tests/test_timetable.py` passes, 30 tests. Seven were added, one of them headless: the scene opens the dialog, there's no button before the flag, and the button appears after it.

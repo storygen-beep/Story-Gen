@@ -35,6 +35,7 @@ On a card with a `Does:` block (every card from 2026-11-24 on), the rows that ap
 | C1441 | a number-only result is for work (a shift); a step about a person or her body gets a scene | — | a repeatable | note |
 | C1369 | every live system is armed in the first hour, or sits readable on the sidebar | — | the plan | note |
 | C1403 | players mind grind in jobs and money, not a slow sexual climb | L80 | the plan | reader |
+| C2199 | a page she is given in the story (her timetable) is not in the sidebar before she has it: the scene that gives it opens it (a `type = "timetable"` block, `open = true`), and the sidebar button waits on the flag that scene sets (`[ui] timetable_button_when`) | first_term_lean: the Timetable button sat in the sidebar from the first minute, and the dean who hands her the timetable printed it as a paragraph. LO, typed in main-lean 2026-11-26: "Timetable is only in the sidebar / Should first open in the deans office", then "Go ahead" | the plan | reader |
 
 ## The engine (cited; `v2.py` is `apps/game_generation/twee_comprehensive/generators/v2.py`)
 
@@ -92,6 +93,8 @@ Each rule says what CoT and the field do, then whether it's **measured** or **LO
 9. **Energy throttles work and body care, never a person** (C1428). No "too tired to talk to her". A person's menu is capped by its own once-a-day flag (`craft/people.md`). *LO's rule, not measured.*
 10. **Open it on day 1, at its bottom rung,** and arm it in the first hour or show it on the sidebar (C1369). *CoT and the field agree:* 16 of 19 CoT systems are usable on day 1; 79–87% across four games. *Measured.*
 11. **Keep the job short of grind** (C1403). Grind complaints are about jobs and money; needs cause only 6 of 242. A shift pays enough that the first bill is reachable working clean (`craft/economy.md` rule 9). *Measured in the field.*
+
+- **Her timetable, given in a scene.** A content block `{ type = "timetable", props = { label = "<link text>", open = true } }` draws a link that opens the Timetable dialog (`setup.openTimetable`), and with `open = true` the dialog also opens by itself once the screen shows (v2.py `_convert_blocks_to_game_html`, the `timetable` branch). `[ui] timetable_button_when = "<flag>"` puts the sidebar button behind that player flag (the `TimetableWidgets` passage). The importer refuses a timetable block in a game with no `[[ui.timetable]]` rows, and a `timetable_button_when` without `timetable_button = true` (`apps/projects/services/template_import.py`, `_validate_timetable`). (C2199)
 
 ## Worked example
 
