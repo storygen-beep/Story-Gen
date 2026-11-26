@@ -1,55 +1,55 @@
 {
  "piece": "P49",
- "pass": 16,
+ "pass": 17,
  "screens": {
   "ryan_charger.moment": {
    "text": "313906c8298f2b26",
    "traits": "74c4f68e6476ecee",
-   "facts": "c2d1415accf79c05",
+   "facts": "28263de60f90a44c",
    "facts2": "8d63addbcec693e8",
-   "all": "abde12bfac993bae"
+   "all": "7cf04c2f7df947b0"
   },
   "ryan_charger.give": {
    "text": "74a1f5c72905b789",
    "traits": "74c4f68e6476ecee",
-   "facts": "af9643700a2e29bf",
+   "facts": "eb73493628f1fe6a",
    "facts2": "b24f726a86e87617",
-   "all": "585a226b99ee83db"
+   "all": "99fe7190af02f550"
   },
   "ryan_charger.own": {
    "text": "e789e354dcc062b6",
    "traits": "74c4f68e6476ecee",
-   "facts": "ceccd6e6fc26176a",
+   "facts": "86dde8b28bf2cb21",
    "facts2": "cf4e46f749ed8dbd",
-   "all": "5de40874824921fa"
+   "all": "8d9d6c3c179d577d"
   },
   "ryan_charger_back.moment": {
    "text": "ba4d186ba1d48c83",
    "traits": "74c4f68e6476ecee",
-   "facts": "794f3425e70e89bc",
+   "facts": "57bb58c5eba91d80",
    "facts2": "63e40120178d9641",
-   "all": "48878c52b6a0aa3c"
+   "all": "78451dc4daa9b853"
   },
   "ryan_charger_back.take": {
    "text": "88c9e004e47287aa",
    "traits": "74c4f68e6476ecee",
-   "facts": "553013c2cdb96b81",
+   "facts": "8a6c1ecb15213362",
    "facts2": "e771106eddedbf0a",
-   "all": "405e9c94dcd213f1"
+   "all": "5cdf9d9de8898e90"
   },
   "ryan_charger_back.look": {
    "text": "ca81d6cf8e22d3c8",
    "traits": "74c4f68e6476ecee",
-   "facts": "e03ae2cd56295992",
+   "facts": "1bff26002b7cd503",
    "facts2": "aa200880ec280d14",
-   "all": "1a9d24549c5e70f6"
+   "all": "259cef0ed403a0c9"
   },
   "ryan_charger_back.look2": {
    "text": "b6fc34828f2bbcde",
    "traits": "74c4f68e6476ecee",
-   "facts": "e03ae2cd56295992",
+   "facts": "1bff26002b7cd503",
    "facts2": "aa200880ec280d14",
-   "all": "acd7ba9ed82826e4"
+   "all": "9e7532cb0a25b5fa"
   },
   "mom_taste.moment": {
    "text": "a478c76abe5c1a35",
@@ -75,44 +75,44 @@
   "zoe_witness.moment": {
    "text": "f651eb67e838de7f",
    "traits": "6b1e34b018661933",
-   "facts": "55b08b7a92e09b4a",
+   "facts": "872f36fb991cf7d7",
    "facts2": "1d19261cdc6cf85d",
-   "all": "a2080fb3cbcaac95"
+   "all": "17acf3639374b6c4"
   },
   "zoe_witness.go": {
    "text": "a381f4b3c986bc40",
    "traits": "6b1e34b018661933",
-   "facts": "5bc014717ddb04d9",
+   "facts": "a3cc7b4ffeff9c5c",
    "facts2": "2f64407ac0a709fe",
-   "all": "dbfc3b56a1c7e201"
+   "all": "b521cf383803f746"
   },
   "zoe_witness.busy": {
    "text": "dfdd838040d7b106",
    "traits": "6b1e34b018661933",
-   "facts": "9cc108de644f960a",
+   "facts": "80be1fbe2eaabe99",
    "facts2": "d94ef8bcaf458ae9",
-   "all": "bb73969dcb04466d"
+   "all": "6a6fc0b81dc05e12"
   },
   "zoe_give_him.moment": {
    "text": "e049452db2317066",
    "traits": "0b1fa80c9d60647d",
-   "facts": "37fcb9425fcce652",
+   "facts": "41e92ad76009f2bf",
    "facts2": "130dd93dfc7a1cca",
-   "all": "0104d8053969fd0e"
+   "all": "764343a3af3a44e8"
   },
   "zoe_give_him.let": {
    "text": "022028c5793b53ca",
    "traits": "6b1e34b018661933",
-   "facts": "328ede71b75c0b80",
+   "facts": "ca90215ee8b1192a",
    "facts2": "3d976cb4abe6fb91",
-   "all": "8b72ccd0024c88a0"
+   "all": "3d00edff648312de"
   },
   "zoe_give_him.stop": {
    "text": "685d557c1d88406a",
    "traits": "6b1e34b018661933",
-   "facts": "0521fb2c86775d25",
+   "facts": "4dfba33715001ede",
    "facts2": "317aff3f6de89433",
-   "all": "aeedecb677ebc088"
+   "all": "902962686a7d1daf"
   },
   "vance_gutter.moment": {
    "text": "93f595e89d51f0b2",
@@ -233,7 +233,7 @@
    "facts2": "5c2a5075c1a7cd39",
    "all": "02498b18ad0f6fab"
   },
-  "*": "73afa2de3010a983"
+  "*": "2039be607205500b"
  },
  "rows": {
   "B1": "5276068df1ca6fa9",
@@ -281,7 +281,7 @@
   "C1185": "db808998ed69c649",
   "C1220": "18d85534582def9d",
   "C1221": "3835fed23cc316c7",
-  "C1176": "7632b28c693a43a4",
+  "C1176": "655e8e2b731598c9",
   "C1189": "2afadc6bbe1996bd",
   "C1200": "65e6616cd17c7eb3",
   "C1002": "657248766e62061f",
@@ -328,6 +328,7 @@
   "C2198": "27e6b45f50edd3ac",
   "C769": "f6b6f78a8f2e5ed7",
   "C794": "bad76e5963432385",
+  "C2201": "d119dfe665f76359",
   "C795": "34139e6a6914e171",
   "C804": "5358489178bff0a4",
   "L106": "13a714429d15f3b2",
@@ -384,7 +385,8 @@
   "C2188": "612394eef6826900",
   "C2189": "20748838895e4545",
   "C2195": "77083291a86791c3",
-  "C2196": "a8ae0700d13a7f9b"
+  "C2196": "a8ae0700d13a7f9b",
+  "C2200": "117a60e53de1e8a4"
  },
  "verdicts": [
   {
@@ -811,7 +813,7 @@
     "all": "ebc1932804f4e62e"
    },
    "row_hash": "c1c0e2ac2588a579",
-   "carried": false,
+   "carried": true,
    "pass": 16
   },
   {
@@ -830,7 +832,7 @@
     "all": "f679850544e33e23"
    },
    "row_hash": "c1c0e2ac2588a579",
-   "carried": false,
+   "carried": true,
    "pass": 16
   },
   {
@@ -849,7 +851,7 @@
     "all": "9f26d9a867dcac43"
    },
    "row_hash": "c1c0e2ac2588a579",
-   "carried": false,
+   "carried": true,
    "pass": 16
   },
   {
@@ -868,7 +870,7 @@
     "all": "44d6be44bb3b659c"
    },
    "row_hash": "c1c0e2ac2588a579",
-   "carried": false,
+   "carried": true,
    "pass": 16
   },
   {
@@ -887,7 +889,7 @@
     "all": "4d33bd00c62d3267"
    },
    "row_hash": "c1c0e2ac2588a579",
-   "carried": false,
+   "carried": true,
    "pass": 16
   },
   {
@@ -906,7 +908,7 @@
     "all": "0e2d71225d4248c5"
    },
    "row_hash": "c1c0e2ac2588a579",
-   "carried": false,
+   "carried": true,
    "pass": 16
   },
   {
@@ -2913,7 +2915,7 @@
     "all": "ebc1932804f4e62e"
    },
    "row_hash": "80d415cf08e0ebfe",
-   "carried": false,
+   "carried": true,
    "pass": 16
   },
   {
@@ -2932,7 +2934,7 @@
     "all": "f679850544e33e23"
    },
    "row_hash": "80d415cf08e0ebfe",
-   "carried": false,
+   "carried": true,
    "pass": 16
   },
   {
@@ -2951,7 +2953,7 @@
     "all": "9f26d9a867dcac43"
    },
    "row_hash": "80d415cf08e0ebfe",
-   "carried": false,
+   "carried": true,
    "pass": 16
   },
   {
@@ -2970,7 +2972,7 @@
     "all": "44d6be44bb3b659c"
    },
    "row_hash": "80d415cf08e0ebfe",
-   "carried": false,
+   "carried": true,
    "pass": 16
   },
   {
@@ -2989,7 +2991,7 @@
     "all": "4d33bd00c62d3267"
    },
    "row_hash": "80d415cf08e0ebfe",
-   "carried": false,
+   "carried": true,
    "pass": 16
   },
   {
@@ -3008,7 +3010,7 @@
     "all": "0e2d71225d4248c5"
    },
    "row_hash": "80d415cf08e0ebfe",
-   "carried": false,
+   "carried": true,
    "pass": 16
   },
   {
@@ -3199,15 +3201,15 @@
   {
    "row": "C1176",
    "screen": "*",
-   "verdict": "N/A",
-   "line": "\u2014",
-   "why": "no garment, dress code or spend in the piece",
+   "verdict": "PASS",
+   "line": "His eyes go to your chest, stay a second too long",
+   "why": "no garment of hers read on the charged screens",
    "cause": null,
    "note": true,
-   "screen_hash": "c685ee55a5891d3e",
-   "row_hash": "7632b28c693a43a4",
-   "carried": true,
-   "pass": 1
+   "screen_hash": "2039be607205500b",
+   "row_hash": "655e8e2b731598c9",
+   "carried": false,
+   "pass": 17
   },
   {
    "row": "C1184",
@@ -6227,7 +6229,7 @@
     "all": "f679850544e33e23"
    },
    "row_hash": "a8ae0700d13a7f9b",
-   "carried": false,
+   "carried": true,
    "pass": 16
   },
   {
@@ -6246,7 +6248,7 @@
     "all": "4d33bd00c62d3267"
    },
    "row_hash": "a8ae0700d13a7f9b",
-   "carried": false,
+   "carried": true,
    "pass": 16
   },
   {
@@ -6432,6 +6434,32 @@
    "row_hash": "27e6b45f50edd3ac",
    "carried": true,
    "pass": 13
+  },
+  {
+   "row": "C2200",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "His eyes stay on your legs the whole time you answer.",
+   "why": "kind (b), on came_to_her_today; looks from people she knows (Vance's legs, Hale's chest, Ryan's chest) are their own scenes in their manner (clothes.md rule 8), not a stranger's garment-gated notice; noticed scenes are 5 of 34 arrival scenes, one per garment state per place",
+   "cause": null,
+   "note": false,
+   "screen_hash": "2039be607205500b",
+   "row_hash": "117a60e53de1e8a4",
+   "carried": false,
+   "pass": 17
+  },
+  {
+   "row": "C2201",
+   "screen": "*",
+   "verdict": "N/A",
+   "line": "A knock. Ryan waits in the hall until you open the door",
+   "why": "scene and menu screens, not a place's description; the descriptions of the places they sit at read no clothes or meters (all 31 checked)",
+   "cause": null,
+   "note": false,
+   "screen_hash": "2039be607205500b",
+   "row_hash": "d119dfe665f76359",
+   "carried": false,
+   "pass": 17
   },
   {
    "row": "C286",
@@ -8386,7 +8414,7 @@
     "all": "ebc1932804f4e62e"
    },
    "row_hash": "67e48e60d5053a2e",
-   "carried": false,
+   "carried": true,
    "pass": 16
   },
   {
@@ -8405,7 +8433,7 @@
     "all": "f679850544e33e23"
    },
    "row_hash": "67e48e60d5053a2e",
-   "carried": false,
+   "carried": true,
    "pass": 16
   },
   {
@@ -8424,7 +8452,7 @@
     "all": "9f26d9a867dcac43"
    },
    "row_hash": "67e48e60d5053a2e",
-   "carried": false,
+   "carried": true,
    "pass": 16
   },
   {
@@ -8443,7 +8471,7 @@
     "all": "44d6be44bb3b659c"
    },
    "row_hash": "67e48e60d5053a2e",
-   "carried": false,
+   "carried": true,
    "pass": 16
   },
   {
@@ -8462,7 +8490,7 @@
     "all": "4d33bd00c62d3267"
    },
    "row_hash": "67e48e60d5053a2e",
-   "carried": false,
+   "carried": true,
    "pass": 16
   },
   {
@@ -8481,7 +8509,7 @@
     "all": "0e2d71225d4248c5"
    },
    "row_hash": "67e48e60d5053a2e",
-   "carried": false,
+   "carried": true,
    "pass": 16
   },
   {
@@ -9016,7 +9044,7 @@
     "all": "ebc1932804f4e62e"
    },
    "row_hash": "310706ee076318f2",
-   "carried": false,
+   "carried": true,
    "pass": 16
   },
   {
@@ -9035,7 +9063,7 @@
     "all": "f679850544e33e23"
    },
    "row_hash": "310706ee076318f2",
-   "carried": false,
+   "carried": true,
    "pass": 16
   },
   {
@@ -9054,7 +9082,7 @@
     "all": "9f26d9a867dcac43"
    },
    "row_hash": "310706ee076318f2",
-   "carried": false,
+   "carried": true,
    "pass": 16
   },
   {
@@ -9073,7 +9101,7 @@
     "all": "44d6be44bb3b659c"
    },
    "row_hash": "310706ee076318f2",
-   "carried": false,
+   "carried": true,
    "pass": 16
   },
   {
@@ -9092,7 +9120,7 @@
     "all": "4d33bd00c62d3267"
    },
    "row_hash": "310706ee076318f2",
-   "carried": false,
+   "carried": true,
    "pass": 16
   },
   {
@@ -9111,7 +9139,7 @@
     "all": "0e2d71225d4248c5"
    },
    "row_hash": "310706ee076318f2",
-   "carried": false,
+   "carried": true,
    "pass": 16
   },
   {
@@ -10777,7 +10805,7 @@
     "all": "ebc1932804f4e62e"
    },
    "row_hash": "4e86d143688ba8e5",
-   "carried": false,
+   "carried": true,
    "pass": 16
   },
   {
@@ -10796,7 +10824,7 @@
     "all": "9f26d9a867dcac43"
    },
    "row_hash": "4e86d143688ba8e5",
-   "carried": false,
+   "carried": true,
    "pass": 16
   },
   {
@@ -10815,7 +10843,7 @@
     "all": "44d6be44bb3b659c"
    },
    "row_hash": "4e86d143688ba8e5",
-   "carried": false,
+   "carried": true,
    "pass": 16
   },
   {
@@ -10834,7 +10862,7 @@
     "all": "0e2d71225d4248c5"
    },
    "row_hash": "4e86d143688ba8e5",
-   "carried": false,
+   "carried": true,
    "pass": 16
   },
   {
@@ -11316,7 +11344,7 @@
     "all": "ebc1932804f4e62e"
    },
    "row_hash": "1aadffd96e76381c",
-   "carried": false,
+   "carried": true,
    "pass": 16
   },
   {
@@ -11335,7 +11363,7 @@
     "all": "9f26d9a867dcac43"
    },
    "row_hash": "1aadffd96e76381c",
-   "carried": false,
+   "carried": true,
    "pass": 16
   },
   {
@@ -11354,7 +11382,7 @@
     "all": "44d6be44bb3b659c"
    },
    "row_hash": "1aadffd96e76381c",
-   "carried": false,
+   "carried": true,
    "pass": 16
   },
   {
@@ -11373,7 +11401,7 @@
     "all": "0e2d71225d4248c5"
    },
    "row_hash": "1aadffd96e76381c",
-   "carried": false,
+   "carried": true,
    "pass": 16
   },
   {
@@ -11917,7 +11945,7 @@
     "all": "ebc1932804f4e62e"
    },
    "row_hash": "13a714429d15f3b2",
-   "carried": false,
+   "carried": true,
    "pass": 16
   },
   {
@@ -11936,7 +11964,7 @@
     "all": "f679850544e33e23"
    },
    "row_hash": "13a714429d15f3b2",
-   "carried": false,
+   "carried": true,
    "pass": 16
   },
   {
@@ -11955,7 +11983,7 @@
     "all": "9f26d9a867dcac43"
    },
    "row_hash": "13a714429d15f3b2",
-   "carried": false,
+   "carried": true,
    "pass": 16
   },
   {
@@ -11974,7 +12002,7 @@
     "all": "44d6be44bb3b659c"
    },
    "row_hash": "13a714429d15f3b2",
-   "carried": false,
+   "carried": true,
    "pass": 16
   },
   {
@@ -11993,7 +12021,7 @@
     "all": "4d33bd00c62d3267"
    },
    "row_hash": "13a714429d15f3b2",
-   "carried": false,
+   "carried": true,
    "pass": 16
   },
   {
@@ -12012,7 +12040,7 @@
     "all": "0e2d71225d4248c5"
    },
    "row_hash": "13a714429d15f3b2",
-   "carried": false,
+   "carried": true,
    "pass": 16
   },
   {
@@ -12492,7 +12520,7 @@
     "all": "ebc1932804f4e62e"
    },
    "row_hash": "e64ce2672d85d2d8",
-   "carried": false,
+   "carried": true,
    "pass": 16
   },
   {
@@ -12511,7 +12539,7 @@
     "all": "9f26d9a867dcac43"
    },
    "row_hash": "e64ce2672d85d2d8",
-   "carried": false,
+   "carried": true,
    "pass": 16
   },
   {
@@ -12530,7 +12558,7 @@
     "all": "44d6be44bb3b659c"
    },
    "row_hash": "e64ce2672d85d2d8",
-   "carried": false,
+   "carried": true,
    "pass": 16
   },
   {
@@ -12549,7 +12577,7 @@
     "all": "0e2d71225d4248c5"
    },
    "row_hash": "e64ce2672d85d2d8",
-   "carried": false,
+   "carried": true,
    "pass": 16
   },
   {
@@ -12775,8 +12803,8 @@
  ],
  "causes": [],
  "pending": [],
- "asked": 44,
- "answered": 44,
+ "asked": 3,
+ "answered": 3,
  "pass_items": [],
  "unowed": []
 }

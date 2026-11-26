@@ -1,27 +1,27 @@
 {
  "piece": "P41",
- "pass": 16,
+ "pass": 17,
  "screens": {
   "walk_zoe_sam.moment": {
    "text": "c248c279bc7201af",
    "traits": "fa1a0a429fa0ea30",
-   "facts": "c3521100b11dca8e",
+   "facts": "8182ce5904bce35b",
    "facts2": "48fd486abd7e2f3c",
-   "all": "4b5691a8adc0d4ca"
+   "all": "a5c34cfb56c2f171"
   },
   "walk_zoe_sam.watch": {
    "text": "a402abbe33512b4a",
    "traits": "fa1a0a429fa0ea30",
-   "facts": "c3521100b11dca8e",
+   "facts": "8182ce5904bce35b",
    "facts2": "48fd486abd7e2f3c",
-   "all": "dcb7e858dc003ce2"
+   "all": "1a1aa14ba91ff3a2"
   },
   "walk_zoe_sam.out": {
    "text": "83285099185d7ec0",
    "traits": "6b1e34b018661933",
-   "facts": "5c0a642e2e7923fd",
+   "facts": "5ccc9ab8b606da87",
    "facts2": "f9f6cd7a1a561521",
-   "all": "74211fe6513fa873"
+   "all": "520842d24fc9f894"
   },
   "walk_sam_guitar.moment": {
    "text": "a5c3c00d64bf1a01",
@@ -47,23 +47,23 @@
   "walk_zoe_outfits.moment": {
    "text": "962bd5335cde80e6",
    "traits": "6b1e34b018661933",
-   "facts": "df3581105d9dfadd",
+   "facts": "fe10a3884cd5cdae",
    "facts2": "fc2568396f51a2d0",
-   "all": "18e9170a277b0c78"
+   "all": "66f22b0abde3b42a"
   },
   "walk_zoe_outfits.pick": {
    "text": "a1d96047e25f00b9",
    "traits": "6b1e34b018661933",
-   "facts": "df3581105d9dfadd",
+   "facts": "fe10a3884cd5cdae",
    "facts2": "fc2568396f51a2d0",
-   "all": "72993167de149740"
+   "all": "e953e558de27a4e4"
   },
   "walk_zoe_outfits.wearing": {
    "text": "a8d34059d7f2848b",
    "traits": "6b1e34b018661933",
-   "facts": "df3581105d9dfadd",
+   "facts": "fe10a3884cd5cdae",
    "facts2": "fc2568396f51a2d0",
-   "all": "7119558468a0e27e"
+   "all": "c83dfff381dae3f6"
   },
   "walk_tom_tips.moment": {
    "text": "7b9e81ca77712fc3",
@@ -110,9 +110,9 @@
   "walk_party_bathroom.moment": {
    "text": "d7e60f112115d298",
    "traits": "6b1e34b018661933",
-   "facts": "efb118c177f5057f",
+   "facts": "1cb558f3142aaa13",
    "facts2": "80e9b9b4ddb849e4",
-   "all": "48e9d529e40d5128"
+   "all": "9bac660beb2d4f57"
   },
   "walk_party_bathroom.watch": {
    "text": "0cfa779650f65b71",
@@ -128,7 +128,7 @@
    "facts2": "9a06232c9ed28deb",
    "all": "b58099853152246f"
   },
-  "*": "8635ba4a0df48600"
+  "*": "2be5e498cbc9d50e"
  },
  "rows": {
   "B1": "5276068df1ca6fa9",
@@ -180,7 +180,7 @@
   "C1220": "18d85534582def9d",
   "C1221": "3835fed23cc316c7",
   "C1177": "ef9bbbe96651efc7",
-  "C1176": "7632b28c693a43a4",
+  "C1176": "655e8e2b731598c9",
   "C1189": "2afadc6bbe1996bd",
   "C1200": "65e6616cd17c7eb3",
   "C1033": "9daf075fd3c2e30e",
@@ -240,6 +240,7 @@
   "C2198": "27e6b45f50edd3ac",
   "C769": "f6b6f78a8f2e5ed7",
   "C794": "bad76e5963432385",
+  "C2201": "d119dfe665f76359",
   "C795": "34139e6a6914e171",
   "C804": "5358489178bff0a4",
   "L106": "13a714429d15f3b2",
@@ -296,7 +297,8 @@
   "C2188": "612394eef6826900",
   "C2189": "20748838895e4545",
   "C2195": "77083291a86791c3",
-  "C2196": "a8ae0700d13a7f9b"
+  "C2196": "a8ae0700d13a7f9b",
+  "C2200": "117a60e53de1e8a4"
  },
  "verdicts": [
   {
@@ -1557,15 +1559,15 @@
   {
    "row": "C1176",
    "screen": "*",
-   "verdict": "N/A",
-   "line": "",
-   "why": "No clothing read on any sex screen",
+   "verdict": "PASS",
+   "line": "her skirt up round her waist, his fingers in her wet cunt",
+   "why": "no read of her clothes on the sex screens; the garments are the strangers'",
    "cause": null,
    "note": true,
-   "screen_hash": "645bd0331f58222d",
-   "row_hash": "7632b28c693a43a4",
-   "carried": true,
-   "pass": 1
+   "screen_hash": "2be5e498cbc9d50e",
+   "row_hash": "655e8e2b731598c9",
+   "carried": false,
+   "pass": 17
   },
   {
    "row": "C1177",
@@ -1932,7 +1934,7 @@
     "all": "48e9d529e40d5128"
    },
    "row_hash": "eb11e05cd75e52a9",
-   "carried": false,
+   "carried": true,
    "pass": 16
   },
   {
@@ -1951,7 +1953,7 @@
     "all": "4b5691a8adc0d4ca"
    },
    "row_hash": "eb11e05cd75e52a9",
-   "carried": false,
+   "carried": true,
    "pass": 16
   },
   {
@@ -3477,6 +3479,32 @@
    "row_hash": "27e6b45f50edd3ac",
    "carried": true,
    "pass": 12
+  },
+  {
+   "row": "C2200",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "Zoe's at the mirror in her underwear with three outfits on the bed behind her.",
+   "why": "not a 'she gets noticed' scene: no stranger reacts to a garment she wears; noticed scenes are 5 of 34 arrival scenes, one per garment state per place",
+   "cause": null,
+   "note": false,
+   "screen_hash": "2be5e498cbc9d50e",
+   "row_hash": "117a60e53de1e8a4",
+   "carried": false,
+   "pass": 17
+  },
+  {
+   "row": "C2201",
+   "screen": "*",
+   "verdict": "N/A",
+   "line": "Through the half-open hall door",
+   "why": "scene and menu screens, not a place's description; the descriptions of the places they sit at read no clothes or meters (all 31 checked)",
+   "cause": null,
+   "note": false,
+   "screen_hash": "2be5e498cbc9d50e",
+   "row_hash": "d119dfe665f76359",
+   "carried": false,
+   "pass": 17
   },
   {
    "row": "C286",
@@ -6663,8 +6691,8 @@
  ],
  "causes": [],
  "pending": [],
- "asked": 2,
- "answered": 2,
+ "asked": 3,
+ "answered": 3,
  "pass_items": [],
  "unowed": []
 }

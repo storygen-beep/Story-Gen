@@ -1,6 +1,6 @@
 {
  "piece": "P08",
- "pass": 10,
+ "pass": 11,
  "screens": {
   "*": "4f53cda18c2baa0c"
  },
@@ -21,7 +21,7 @@
   "C164": "b24792899ae3ac28",
   "C165": "59fe434fa706bff6",
   "C166": "d9199efed36f9625",
-  "C1176": "7632b28c693a43a4",
+  "C1176": "655e8e2b731598c9",
   "C1189": "2afadc6bbe1996bd",
   "C1033": "9daf075fd3c2e30e",
   "C1008": "7a86c32012a0b1d3",
@@ -567,15 +567,15 @@
   {
    "row": "C1176",
    "screen": "phone:text_chris",
-   "verdict": "PASS",
-   "line": "\u2014",
-   "why": "no clothing read",
+   "verdict": "N/A",
+   "line": "it's chris. couldn't stop looking at your ass, new girl. you noticed.",
+   "why": "a text, not a place or a scene that reads her clothes; no garment is read",
    "cause": null,
    "note": true,
    "screen_hash": null,
-   "row_hash": "7632b28c693a43a4",
-   "carried": true,
-   "pass": 1
+   "row_hash": "655e8e2b731598c9",
+   "carried": false,
+   "pass": 11
   },
   {
    "row": "C1189",
@@ -769,7 +769,7 @@
    "note": false,
    "screen_hash": "4f53cda18c2baa0c",
    "row_hash": "27e6b45f50edd3ac",
-   "carried": false,
+   "carried": true,
    "pass": 10
   },
   {

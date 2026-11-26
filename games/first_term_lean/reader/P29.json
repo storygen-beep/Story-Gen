@@ -1,6 +1,6 @@
 {
  "piece": "P29",
- "pass": 3,
+ "pass": 4,
  "screens": {
   "*": "4f53cda18c2baa0c"
  },
@@ -18,15 +18,12 @@
   "B11": "1e252efd0904a971",
   "B12": "fd109745c67b71d7",
   "B13": "aaf6518b64dcce55",
-  "C1158": "f40f51a0fd6cfd10",
-  "C1206": "bfff76edbee583de",
   "C1173": "541a03815a8d19c4",
   "C1184": "71c57d9a2f8fdca7",
   "C1198": "48eae9ceae06ae00",
   "C1185": "db808998ed69c649",
   "C1220": "18d85534582def9d",
   "C1221": "3835fed23cc316c7",
-  "C1177": "ef9bbbe96651efc7",
   "C1200": "65e6616cd17c7eb3",
   "C1002": "657248766e62061f",
   "C1250": "fde578d75b0d3620",
@@ -34,6 +31,7 @@
   "C620": "76250e48ada2b843",
   "C769": "f6b6f78a8f2e5ed7",
   "C794": "bad76e5963432385",
+  "C2201": "d119dfe665f76359",
   "C795": "34139e6a6914e171",
   "C804": "5358489178bff0a4",
   "L106": "13a714429d15f3b2",
@@ -405,6 +403,19 @@
    "pass": 1
   },
   {
+   "row": "C2201",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "The park: a running loop, benches, the pond. Joggers, dog walkers, mothers with prams. \u2026",
+   "why": "the street, park and gym clothing variants are gone (P72); the lines are plain, being noticed is notice_* scenes; pages check green",
+   "cause": null,
+   "note": false,
+   "screen_hash": "4f53cda18c2baa0c",
+   "row_hash": "d119dfe665f76359",
+   "carried": false,
+   "pass": 4
+  },
+  {
    "row": "C422",
    "screen": "*",
    "verdict": "PASS",
@@ -700,7 +711,7 @@
    "note": false,
    "screen_hash": "4f53cda18c2baa0c",
    "row_hash": "c3599cd09637a240",
-   "carried": false,
+   "carried": true,
    "pass": 3
   }
  ],

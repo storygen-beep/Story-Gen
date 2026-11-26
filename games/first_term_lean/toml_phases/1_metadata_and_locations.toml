@@ -44,7 +44,7 @@ flag_keys = [
   "ran_once",
   # P65 — gym passes; setting one again restarts its day (v2.py:7516-7522)
   "gym_day_pass", "gym_week_pass", "gym_month_pass",
-  # P64 — Channel 9, seen once
+  # P64 — Channel 5 After Dark (Channel 9 until P71), seen once
   "watched_after_dark",
   # P32 — met flags for the people P32 schedules (their meetings set them)
   "met_hale", "met_pratt", "met_cross", "met_nadia", "met_holt", "met_rosa", "met_frank", "met_danny", "met_marco",
@@ -77,6 +77,7 @@ flag_keys = [
   # P38 — walk-ins at home; P37 — the party, once a Saturday
   "saw_mom_and_mark", "saw_ryan_phone", "sat_with_mom_bills", "heard_mark_short", "played_with_ryan", "ryan_saw_shower", "partied_this_week",
   # P39 — walk-ins, neighbourhood
+  "noticed_street_leggings", "noticed_street_momtop", "noticed_street_skirt", "noticed_park_leggings", "noticed_gym_leggings",
   "saw_park_couple", "said_hello_vance", "saw_danny_deal", "saw_marco_squat", "told_nina_dress", "curtain_stranger",
   # P40 — walk-ins, campus
   "saw_stacks_couple", "saw_hale_note", "asked_holt_novel", "mirror_beside_brooke", "watched_cross_brooke", "cross_saw_practise",
@@ -214,20 +215,7 @@ description = "The neighbourhood: your street, the same row of houses, the corne
 clothing_rules = [
   { slots_required = ["top", "bottom", "shoes"], message = "You're not going out like this. Go back up to your room and put on a top and a bottom, or a dress, and shoes." },
 ]
-# P07 — the street notices skin, in daylight hours (worn_exposure, v2.py:5264-5272).
-description_variants = [
-  { conditions = { version = "1.0", logic = "AND", items = [
-      { type = "clothing_item", item_id = "mom_lowcut_top", operator = "equipped" },
-      { type = "time_of_day", start_time = "07:00", end_time = "21:00" },
-    ] }, text = "The neighbourhood: your street, the same row of houses, the corner shop at the end, the park across the road, the gym over the laundromat, the clothes shop, and a bus stop with its morning queue. Neighbours, dog walkers, kids on bikes. Across the road, a neighbour's eyes drop to your chest in Mom's top and stay there. Your face goes hot. You walk faster, and you can feel him still watching." },
-  { conditions = { version = "1.0", logic = "AND", items = [
-      { type = "worn_exposure", operator = "gte", value = 1 },
-      { type = "clothing_slot", slot = "legwear", operator = "unequipped" },
-      { type = "time_of_day", start_time = "07:00", end_time = "21:00" },
-    ] }, text = "The neighbourhood: your street, the same row of houses, the corner shop at the end, the park across the road, the gym over the laundromat, the clothes shop, and a bus stop with its morning queue. Neighbours, dog walkers, kids on bikes. Across the road, a neighbour's eyes drop to your bare legs and stay there. Your face goes hot. You walk faster, and you can feel him still watching." },
-  # P29 — the bus stop notices the leggings (PLAN 123, 288; after P07's two, which win).
-  { conditions = { version = "1.0", logic = "AND", items = [{ type = "clothing_item", item_id = "leggings", operator = "equipped" }, { type = "time_of_day", start_time = "07:00", end_time = "21:00" }] }, text = "The neighbourhood: your street, the same row of houses, the corner shop at the end, the park across the road, the gym over the laundromat, the clothes shop, and a bus stop with its morning queue. Neighbours, dog walkers, kids on bikes. The guys at the bus stop go quiet as you pass in your leggings. Your face goes hot, and you walk a little faster." },
-]
+# P72 — the description never reads her clothes (craft/places.md rule 1, C2201); being noticed is a scene (notice_street_*).
 parent = "neighbourhood"
 kind = "thoroughfare"
 # P03 re-check: no picture, the street only routes (craft/media.md, C1265).
@@ -266,10 +254,7 @@ closed_text = "The corner shop is shut. It opens at 7am."
 id = "hood_park"
 name = "Park"
 description = "The park: a running loop, benches, the pond. Joggers, dog walkers, mothers with prams. A sign at the gates says they open at 6am and lock at 9pm."
-# P29 — the crowd notices the leggings (PLAN 126/127, 288).
-description_variants = [
-  { conditions = { version = "1.0", logic = "AND", items = [{ type = "clothing_item", item_id = "leggings", operator = "equipped" }, { type = "time_of_day", start_time = "06:00", end_time = "21:00" }] }, text = "The park: a running loop, benches, the pond. Joggers, dog walkers, mothers with prams. A sign at the gates says they open at 6am and lock at 9pm. A jogger coming the other way looks at your leggings, then your face, then your leggings. You run the next stretch faster than you need to." },
-]
+# P72 — the description never reads her clothes (C2201); being noticed is notice_park_leggings.
 parent = "neighbourhood"
 kind = "destination"
 image = "locations/hood_park_t0.jpg"
@@ -297,10 +282,7 @@ closed_text = "The clothes shop is shut. It opens at 10am, Monday to Saturday."
 id = "hood_gym"
 name = "Gym"
 description = "The gym: weights, treadmills, mirrors on every wall. The same regulars every day. A sign on the door says it's open from 6am to 10pm."
-# P29 — the crowd notices the leggings (PLAN 126/127, 288).
-description_variants = [
-  { conditions = { version = "1.0", logic = "AND", items = [{ type = "clothing_item", item_id = "leggings", operator = "equipped" }, { type = "time_of_day", start_time = "06:00", end_time = "22:00" }] }, text = "The gym: weights, treadmills, mirrors on every wall. The same regulars every day. A sign on the door says it's open from 6am to 10pm. Two of the regulars stop between sets when you walk in. Your leggings show every line of your ass. You feel their eyes on it all the way to the treadmill." },
-]
+# P72 — the description never reads her clothes (C2201); being noticed is notice_gym_leggings.
 parent = "neighbourhood"
 kind = "destination"
 image = "locations/hood_gym_t0.jpg"
@@ -569,6 +551,8 @@ weekdays = [0, 1, 2, 3, 4]
 start_time = "07:12"
 end_time = "07:25"
 activity = "waiting for the bathroom"
+# P72 — on a thoroughfare on purpose (craft/places.md rule 7, C738; LO 2026-11-27: "your picks").
+on_route = "the bathroom's busy in the morning, so he waits in the hall"
 
 [[npcs.schedules]]
 location = "home_bathroom"
@@ -1571,6 +1555,8 @@ weekdays = [0, 2, 4]
 start_time = "13:00"
 end_time = "15:00"
 activity = "on the grass"
+# P72 — on a thoroughfare on purpose (craft/places.md rule 7, C738; LO 2026-11-27: "your picks").
+on_route = "students sit on the quad's grass between classes"
 
 [[npcs.schedules]]
 location = "campus_quad"
@@ -1578,6 +1564,8 @@ weekdays = [1, 3]
 start_time = "14:00"
 end_time = "15:00"
 activity = "on the grass"
+# P72 — on a thoroughfare on purpose (craft/places.md rule 7, C738; LO 2026-11-27: "your picks").
+on_route = "students sit on the quad's grass between classes"
 
 [[npcs.schedules]]
 location = "campus_cafeteria"
@@ -1645,6 +1633,8 @@ weekdays = [0, 1, 2, 3, 4]
 start_time = "14:00"
 end_time = "16:00"
 activity = "with his friends"
+# P72 — on a thoroughfare on purpose (craft/places.md rule 7, C738; LO 2026-11-27: "your picks").
+on_route = "students hang out on the quad's steps between classes"
 
 # P26 — Brooke, Kayla, Tess (PLAN §9d; party rows come with P37). No meter in release 1.
 [[npcs]]

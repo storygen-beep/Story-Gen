@@ -3258,6 +3258,96 @@
       "sha256": "085c15c86c9c3b977d9699a075f76c8cbb60716dc3678227d368fadb3a04509b",
       "words": "ENI for LO (delegated 2026-11-24): yes again to P70: the hello's greeting follows the hour (Morning / Evening); the hint names his weekend hours.",
       "date": "2026-11-27"
+    },
+    {
+      "card": "P71",
+      "sha256": "694749b8bfd7b0bc7809649eaa3a780690045106858028ad55645a91947ad946",
+      "words": "ENI for LO (delegated 2026-11-24): yes to P71: channels numbered 1 to 5, Channel 9 becomes 5, Turn the TV off (opening Watch TV still spends a watch; named on the card). LO 2026-11-27: \"name them channel 1 2 3 4 5 like htis and turn tv off option too\".",
+      "date": "2026-11-27"
+    },
+    {
+      "card": "P64",
+      "sha256": "da95ef0c215bb4ce30b0337138e459f1ae195b28c4f04bc75b60892f0cb9b4d6",
+      "words": "ENI for LO (delegated 2026-11-24): yes to P64's correction: Change the channel goes to a second list screen so it doesn't spend another watch.",
+      "date": "2026-11-27"
+    },
+    {
+      "card": "P64",
+      "sha256": "15dff43789abf792f94b1338c11e85e778612728c27bd168dac097805f6f92fd",
+      "words": "ENI for LO (delegated 2026-11-24): yes again to P64: Does lines for Turn the TV off and watch_more.",
+      "date": "2026-11-27"
+    },
+    {
+      "card": "P71",
+      "sha256": "3a4e5a13e7e3a90588499349ccbc5aacbbbd8d7792c9e698b00be6aa284ab70e",
+      "words": "ENI for LO (delegated 2026-11-24): yes again to P71: the TV's daily line says what was counted (\"you've had the TV on twice today.\").",
+      "date": "2026-11-27"
+    },
+    {
+      "card": "P64",
+      "sha256": "db5d8d649d0bc42c6a84522a4a42aaccd5f4dffa8258d3448822de321fc9af04",
+      "words": "ENI for LO (delegated 2026-11-24): yes again to P64: the TV's daily line says what was counted (\"you've had the TV on twice today.\").",
+      "date": "2026-11-27"
+    },
+    {
+      "card": "P34",
+      "sha256": "3c6cb93b4dc608cd5cdf7c0b774ddb1cf0d7bc1d29a1c7961613d72ec671d8cc",
+      "words": "ENI for LO (delegated 2026-11-24): yes again to P34: the TV's daily line says what was counted (\"you've had the TV on twice today.\").",
+      "date": "2026-11-27"
+    },
+    {
+      "card": "P07",
+      "sha256": "fa6cef6758d8a8a5d2d8be4e3fbdc83cef72a70b5dcbbb0665f6c31de2c48030",
+      "words": "ENI for LO (delegated 2026-11-24): yes to P07 with the P72 note (its clothing lines became she-gets-noticed scenes).",
+      "date": "2026-11-27"
+    },
+    {
+      "card": "P29",
+      "sha256": "76be52fecc1628664fe37a88cd77708562cd4b6e5aa60ac916cd5ffc065dcefe",
+      "words": "ENI for LO (delegated 2026-11-24): yes to P29 with the P72 note (its clothing lines became she-gets-noticed scenes).",
+      "date": "2026-11-27"
+    },
+    {
+      "card": "P72",
+      "sha256": "a699e3c3cfec5b4046beb23a65c8a6fde170e4a7b9afd720f2ef0b7301e3e29b",
+      "words": "ENI for LO (delegated 2026-11-24): yes to P72: plain descriptions on the street, park and gym; five she-gets-noticed scenes; on_route reasons on the four deliberate thoroughfare rows. LO 2026-11-27: \"Yes, we should align our place description to it. And for scenes like leggings ones, those should be walkins right??\", \"Make a complete proper plan\", \"your picks\".",
+      "date": "2026-11-27"
+    },
+    {
+      "card": "P13",
+      "sha256": "2db7eeb6c6fadb7941fb86afb03d7f7c3c8a52b7622f059270c9b4f4d2668237",
+      "words": "ENI for LO (delegated 2026-11-24): yes to P13 with its on_route reason (P72; LO \"your picks\", 2026-11-27).",
+      "date": "2026-11-27"
+    },
+    {
+      "card": "P20",
+      "sha256": "9f88a6673d5caba8f7b641a06edac741dff39dc6050ce3a3654f06818e8885c6",
+      "words": "ENI for LO (delegated 2026-11-24): yes to P20 with its on_route reason (P72; LO \"your picks\", 2026-11-27).",
+      "date": "2026-11-27"
+    },
+    {
+      "card": "P25",
+      "sha256": "eef50fef0ecbbd91e5d794f62fb95b19e0a58e18c4b796d03cf2b7ff9dbbddd6",
+      "words": "ENI for LO (delegated 2026-11-24): yes to P25 with its on_route reason (P72; LO \"your picks\", 2026-11-27).",
+      "date": "2026-11-27"
+    },
+    {
+      "card": "P72",
+      "sha256": "870cd096f8182a122dfbca25c2db8d0520545990d9a0c212f540c2d1c60156c8",
+      "words": "ENI for LO (delegated 2026-11-24): yes again to P72: more spoken lines from the strangers for the talk ratio; the gym Sheet rows say npc_marco (part).",
+      "date": "2026-11-27"
+    },
+    {
+      "card": "P72",
+      "sha256": "7bc6fcd83b378f1661945b6bb6f6c0e171ab8fa7731285680e85ebde2f65fbda",
+      "words": "ENI for LO (delegated 2026-11-24): yes again to P72: all five scenes rewritten with a line from him on every screen, every path under 5 : 1.",
+      "date": "2026-11-27"
+    },
+    {
+      "card": "P72",
+      "sha256": "44c5561007c54eab6960a51eb9c76b0ff1efe1851bb0e4b147c76b51733efe7b",
+      "words": "ENI for LO (delegated 2026-11-24): yes again to P72 after reader pass 1: every answer ends on his hook; Look back, not showing herself at stage 0; the gym scene only from the street; one term of address per stranger.",
+      "date": "2026-11-27"
     }
   ]
 }

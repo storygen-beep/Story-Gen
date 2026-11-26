@@ -1,6 +1,6 @@
 {
  "piece": "P68",
- "pass": 2,
+ "pass": 3,
  "screens": {
   "*": "4f53cda18c2baa0c"
  },
@@ -71,6 +71,7 @@
   "people#16": "45053c701775c75f",
   "C769": "cf7d7a82afabcbbb",
   "C794": "3281d513b7f90d6e",
+  "C2201": "4745761f016db481",
   "C795": "a28152099697ac6a",
   "C804": "56bf64be29d6ea48",
   "L106": "759e6667d7fc3183",
@@ -88,13 +89,13 @@
   "C770": "dcc6bbe6fde09083",
   "C771": "d941995a226da2b4",
   "C707": "e2898bd02a9e4730",
-  "places#1": "18252966b4327f58",
+  "places#1": "378b2df4c8bf116d",
   "places#2": "e0b57720921c4523",
   "places#3": "56d056c80da49bb6",
   "places#4": "ae3ba300e1045c9f",
   "places#5": "90ec575adee9bf74",
   "places#6": "f2bc5f0f10c64c4b",
-  "places#7": "2a095bf54f175e5e",
+  "places#7": "58dab0dc035240bd",
   "places#8": "c3ea8d01465e7298",
   "places#9": "f4cd9ab5f62bc6fc",
   "places#10": "d6f0b4b357efc043",
@@ -217,7 +218,7 @@
    "note": false,
    "screen_hash": null,
    "row_hash": "ced37cb0de6e7202",
-   "carried": false,
+   "carried": true,
    "pass": 2
   },
   {
@@ -427,6 +428,19 @@
    "row_hash": "be119a385da08978",
    "carried": true,
    "pass": 1
+  },
+  {
+   "row": "C2201",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "The neighbourhood: your street, the same row of houses, the corner shop at the end, the park across the road...",
+   "why": "the description reads no clothes or meters; it has no clothing variants",
+   "cause": null,
+   "note": false,
+   "screen_hash": "4f53cda18c2baa0c",
+   "row_hash": "4745761f016db481",
+   "carried": false,
+   "pass": 3
   },
   {
    "row": "C422",
@@ -1303,14 +1317,14 @@
    "row": "places#1",
    "screen": "*",
    "verdict": "PASS",
-   "line": "The neighbourhood: your street, the same row of houses",
-   "why": "identity line unchanged",
+   "line": "The neighbourhood: your street, the same row of houses, the corner shop at the end, the park across the road...",
+   "why": "the street's identity line, plain, no variants left",
    "cause": null,
    "note": false,
    "screen_hash": "4f53cda18c2baa0c",
-   "row_hash": "18252966b4327f58",
-   "carried": true,
-   "pass": 1
+   "row_hash": "378b2df4c8bf116d",
+   "carried": false,
+   "pass": 3
   },
   {
    "row": "places#10",
@@ -1394,14 +1408,14 @@
    "row": "places#7",
    "screen": "*",
    "verdict": "PASS",
-   "line": "kind = \"thoroughfare\"",
-   "why": "the street routes; places sit off it",
+   "line": "The neighbourhood: your street, the same row of houses, the corner shop at the end, the park across the road...",
+   "why": "the street routes; no rows on hood_street; Vance's porch rows are at hood_next_door",
    "cause": null,
    "note": false,
    "screen_hash": "4f53cda18c2baa0c",
-   "row_hash": "2a095bf54f175e5e",
-   "carried": true,
-   "pass": 1
+   "row_hash": "58dab0dc035240bd",
+   "carried": false,
+   "pass": 3
   },
   {
    "row": "places#8",
@@ -1452,7 +1466,7 @@
    "note": false,
    "screen_hash": null,
    "row_hash": "a40d4073409a2705",
-   "carried": false,
+   "carried": true,
    "pass": 2
   },
   {
@@ -1536,8 +1550,8 @@
  ],
  "causes": [],
  "pending": [],
- "asked": 2,
- "answered": 2,
+ "asked": 3,
+ "answered": 3,
  "pass_items": [],
  "unowed": []
 }

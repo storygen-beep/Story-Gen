@@ -1,6 +1,6 @@
 {
  "piece": "P04",
- "pass": 19,
+ "pass": 20,
  "screens": {
   "travel_bus_to_campus.ride": {
    "text": "b315e370a219f4ed",
@@ -180,6 +180,7 @@
   "media#7": "eff6dc1369755c34",
   "C769": "cf7d7a82afabcbbb",
   "C794": "3281d513b7f90d6e",
+  "C2201": "4745761f016db481",
   "C795": "a28152099697ac6a",
   "C804": "56bf64be29d6ea48",
   "L106": "759e6667d7fc3183",
@@ -197,13 +198,13 @@
   "C770": "dcc6bbe6fde09083",
   "C771": "d941995a226da2b4",
   "C707": "e2898bd02a9e4730",
-  "places#1": "18252966b4327f58",
+  "places#1": "378b2df4c8bf116d",
   "places#2": "e0b57720921c4523",
   "places#3": "56d056c80da49bb6",
   "places#4": "ae3ba300e1045c9f",
   "places#5": "90ec575adee9bf74",
   "places#6": "f2bc5f0f10c64c4b",
-  "places#7": "2a095bf54f175e5e",
+  "places#7": "58dab0dc035240bd",
   "places#8": "c3ea8d01465e7298",
   "places#9": "f4cd9ab5f62bc6fc",
   "places#10": "d6f0b4b357efc043",
@@ -359,7 +360,7 @@
     "all": "145cb6ccd6c225c9"
    },
    "row_hash": "c1c0e2ac2588a579",
-   "carried": false,
+   "carried": true,
    "pass": 19
   },
   {
@@ -397,7 +398,7 @@
     "all": "ce3fdbe8537c6649"
    },
    "row_hash": "c1c0e2ac2588a579",
-   "carried": false,
+   "carried": true,
    "pass": 19
   },
   {
@@ -601,7 +602,7 @@
     "all": "145cb6ccd6c225c9"
    },
    "row_hash": "80d415cf08e0ebfe",
-   "carried": false,
+   "carried": true,
    "pass": 19
   },
   {
@@ -639,7 +640,7 @@
     "all": "ce3fdbe8537c6649"
    },
    "row_hash": "80d415cf08e0ebfe",
-   "carried": false,
+   "carried": true,
    "pass": 19
   },
   {
@@ -1319,6 +1320,19 @@
    "pass": 12
   },
   {
+   "row": "C2201",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "The quad. Paths cut across the grass \u2026 Someone's pinned this week's ranking to the board by the steps \u2026",
+   "why": "campus variants read a weekday, met_brooke and who is absent; none reads her clothes or meters",
+   "cause": null,
+   "note": false,
+   "screen_hash": "570f4c04d7c6be2a",
+   "row_hash": "4745761f016db481",
+   "carried": false,
+   "pass": 20
+  },
+  {
    "row": "C239",
    "screen": "*",
    "verdict": "N/A",
@@ -1727,7 +1741,7 @@
     "all": "145cb6ccd6c225c9"
    },
    "row_hash": "beb5a109bde77305",
-   "carried": false,
+   "carried": true,
    "pass": 19
   },
   {
@@ -1765,7 +1779,7 @@
     "all": "ce3fdbe8537c6649"
    },
    "row_hash": "beb5a109bde77305",
-   "carried": false,
+   "carried": true,
    "pass": 19
   },
   {
@@ -1852,7 +1866,7 @@
     "all": "145cb6ccd6c225c9"
    },
    "row_hash": "153b0804e686abae",
-   "carried": false,
+   "carried": true,
    "pass": 19
   },
   {
@@ -1890,7 +1904,7 @@
     "all": "ce3fdbe8537c6649"
    },
    "row_hash": "153b0804e686abae",
-   "carried": false,
+   "carried": true,
    "pass": 19
   },
   {
@@ -2213,7 +2227,7 @@
     "all": "145cb6ccd6c225c9"
    },
    "row_hash": "cebb147317e10c05",
-   "carried": false,
+   "carried": true,
    "pass": 19
   },
   {
@@ -2250,7 +2264,7 @@
     "all": "ce3fdbe8537c6649"
    },
    "row_hash": "cebb147317e10c05",
-   "carried": false,
+   "carried": true,
    "pass": 19
   },
   {
@@ -2313,7 +2327,7 @@
     "all": "145cb6ccd6c225c9"
    },
    "row_hash": "1d8d188451bcb51e",
-   "carried": false,
+   "carried": true,
    "pass": 19
   },
   {
@@ -2350,7 +2364,7 @@
     "all": "ce3fdbe8537c6649"
    },
    "row_hash": "1d8d188451bcb51e",
-   "carried": false,
+   "carried": true,
    "pass": 19
   },
   {
@@ -2400,7 +2414,7 @@
     "all": "145cb6ccd6c225c9"
    },
    "row_hash": "16b066aee3c1a937",
-   "carried": false,
+   "carried": true,
    "pass": 19
   },
   {
@@ -2437,7 +2451,7 @@
     "all": "ce3fdbe8537c6649"
    },
    "row_hash": "16b066aee3c1a937",
-   "carried": false,
+   "carried": true,
    "pass": 19
   },
   {
@@ -2487,7 +2501,7 @@
     "all": "145cb6ccd6c225c9"
    },
    "row_hash": "a4ef8ce78f554d6b",
-   "carried": false,
+   "carried": true,
    "pass": 19
   },
   {
@@ -2524,7 +2538,7 @@
     "all": "ce3fdbe8537c6649"
    },
    "row_hash": "a4ef8ce78f554d6b",
-   "carried": false,
+   "carried": true,
    "pass": 19
   },
   {
@@ -2574,7 +2588,7 @@
     "all": "145cb6ccd6c225c9"
    },
    "row_hash": "66462bdbadae0c77",
-   "carried": false,
+   "carried": true,
    "pass": 19
   },
   {
@@ -2611,7 +2625,7 @@
     "all": "ce3fdbe8537c6649"
    },
    "row_hash": "66462bdbadae0c77",
-   "carried": false,
+   "carried": true,
    "pass": 19
   },
   {
@@ -2661,7 +2675,7 @@
     "all": "145cb6ccd6c225c9"
    },
    "row_hash": "263890a884329d60",
-   "carried": false,
+   "carried": true,
    "pass": 19
   },
   {
@@ -2698,7 +2712,7 @@
     "all": "ce3fdbe8537c6649"
    },
    "row_hash": "263890a884329d60",
-   "carried": false,
+   "carried": true,
    "pass": 19
   },
   {
@@ -2748,7 +2762,7 @@
     "all": "145cb6ccd6c225c9"
    },
    "row_hash": "b8d0e5793dd14e95",
-   "carried": false,
+   "carried": true,
    "pass": 19
   },
   {
@@ -2785,7 +2799,7 @@
     "all": "ce3fdbe8537c6649"
    },
    "row_hash": "b8d0e5793dd14e95",
-   "carried": false,
+   "carried": true,
    "pass": 19
   },
   {
@@ -2822,7 +2836,7 @@
     "all": "145cb6ccd6c225c9"
    },
    "row_hash": "19dcf805483efc88",
-   "carried": false,
+   "carried": true,
    "pass": 19
   },
   {
@@ -2859,7 +2873,7 @@
     "all": "ce3fdbe8537c6649"
    },
    "row_hash": "19dcf805483efc88",
-   "carried": false,
+   "carried": true,
    "pass": 19
   },
   {
@@ -2909,7 +2923,7 @@
     "all": "145cb6ccd6c225c9"
    },
    "row_hash": "48bd82911a86ecbd",
-   "carried": false,
+   "carried": true,
    "pass": 19
   },
   {
@@ -2946,7 +2960,7 @@
     "all": "ce3fdbe8537c6649"
    },
    "row_hash": "48bd82911a86ecbd",
-   "carried": false,
+   "carried": true,
    "pass": 19
   },
   {
@@ -2996,7 +3010,7 @@
     "all": "145cb6ccd6c225c9"
    },
    "row_hash": "5a326c2d5d8a0abd",
-   "carried": false,
+   "carried": true,
    "pass": 19
   },
   {
@@ -3033,7 +3047,7 @@
     "all": "ce3fdbe8537c6649"
    },
    "row_hash": "5a326c2d5d8a0abd",
-   "carried": false,
+   "carried": true,
    "pass": 19
   },
   {
@@ -3096,7 +3110,7 @@
     "all": "145cb6ccd6c225c9"
    },
    "row_hash": "06706eb2d5bad3b5",
-   "carried": false,
+   "carried": true,
    "pass": 19
   },
   {
@@ -3133,7 +3147,7 @@
     "all": "ce3fdbe8537c6649"
    },
    "row_hash": "06706eb2d5bad3b5",
-   "carried": false,
+   "carried": true,
    "pass": 19
   },
   {
@@ -3183,7 +3197,7 @@
     "all": "145cb6ccd6c225c9"
    },
    "row_hash": "e7485c9faee24e77",
-   "carried": false,
+   "carried": true,
    "pass": 19
   },
   {
@@ -3220,7 +3234,7 @@
     "all": "ce3fdbe8537c6649"
    },
    "row_hash": "e7485c9faee24e77",
-   "carried": false,
+   "carried": true,
    "pass": 19
   },
   {
@@ -3307,7 +3321,7 @@
     "all": "145cb6ccd6c225c9"
    },
    "row_hash": "19da817e808ac3d6",
-   "carried": false,
+   "carried": true,
    "pass": 19
   },
   {
@@ -3345,7 +3359,7 @@
     "all": "ce3fdbe8537c6649"
    },
    "row_hash": "19da817e808ac3d6",
-   "carried": false,
+   "carried": true,
    "pass": 19
   },
   {
@@ -3395,7 +3409,7 @@
     "all": "145cb6ccd6c225c9"
    },
    "row_hash": "ce540d1e01b7c301",
-   "carried": false,
+   "carried": true,
    "pass": 19
   },
   {
@@ -3432,7 +3446,7 @@
     "all": "ce3fdbe8537c6649"
    },
    "row_hash": "ce540d1e01b7c301",
-   "carried": false,
+   "carried": true,
    "pass": 19
   },
   {
@@ -3482,7 +3496,7 @@
     "all": "145cb6ccd6c225c9"
    },
    "row_hash": "8cd1b7e3576dc7b5",
-   "carried": false,
+   "carried": true,
    "pass": 19
   },
   {
@@ -3519,7 +3533,7 @@
     "all": "ce3fdbe8537c6649"
    },
    "row_hash": "8cd1b7e3576dc7b5",
-   "carried": false,
+   "carried": true,
    "pass": 19
   },
   {
@@ -3606,7 +3620,7 @@
     "all": "145cb6ccd6c225c9"
    },
    "row_hash": "1e009d83817fb566",
-   "carried": false,
+   "carried": true,
    "pass": 19
   },
   {
@@ -3644,7 +3658,7 @@
     "all": "ce3fdbe8537c6649"
    },
    "row_hash": "1e009d83817fb566",
-   "carried": false,
+   "carried": true,
    "pass": 19
   },
   {
@@ -3694,7 +3708,7 @@
     "all": "145cb6ccd6c225c9"
    },
    "row_hash": "799e1dd153166b6d",
-   "carried": false,
+   "carried": true,
    "pass": 19
   },
   {
@@ -3731,7 +3745,7 @@
     "all": "ce3fdbe8537c6649"
    },
    "row_hash": "799e1dd153166b6d",
-   "carried": false,
+   "carried": true,
    "pass": 19
   },
   {
@@ -3768,7 +3782,7 @@
     "all": "145cb6ccd6c225c9"
    },
    "row_hash": "b628ac285ac9c529",
-   "carried": false,
+   "carried": true,
    "pass": 19
   },
   {
@@ -3805,7 +3819,7 @@
     "all": "ce3fdbe8537c6649"
    },
    "row_hash": "b628ac285ac9c529",
-   "carried": false,
+   "carried": true,
    "pass": 19
   },
   {
@@ -3855,7 +3869,7 @@
     "all": "145cb6ccd6c225c9"
    },
    "row_hash": "97d54d350dd4ee77",
-   "carried": false,
+   "carried": true,
    "pass": 19
   },
   {
@@ -3892,7 +3906,7 @@
     "all": "ce3fdbe8537c6649"
    },
    "row_hash": "97d54d350dd4ee77",
-   "carried": false,
+   "carried": true,
    "pass": 19
   },
   {
@@ -3979,7 +3993,7 @@
     "all": "145cb6ccd6c225c9"
    },
    "row_hash": "1b8984f52b99537e",
-   "carried": false,
+   "carried": true,
    "pass": 19
   },
   {
@@ -4017,7 +4031,7 @@
     "all": "ce3fdbe8537c6649"
    },
    "row_hash": "1b8984f52b99537e",
-   "carried": false,
+   "carried": true,
    "pass": 19
   },
   {
@@ -4208,7 +4222,7 @@
     "all": "145cb6ccd6c225c9"
    },
    "row_hash": "759e6667d7fc3183",
-   "carried": false,
+   "carried": true,
    "pass": 19
   },
   {
@@ -4246,7 +4260,7 @@
     "all": "ce3fdbe8537c6649"
    },
    "row_hash": "759e6667d7fc3183",
-   "carried": false,
+   "carried": true,
    "pass": 19
   },
   {
@@ -4424,7 +4438,7 @@
     "all": "145cb6ccd6c225c9"
    },
    "row_hash": "adf7bb3f8b632ac3",
-   "carried": false,
+   "carried": true,
    "pass": 19
   },
   {
@@ -4462,7 +4476,7 @@
     "all": "ce3fdbe8537c6649"
    },
    "row_hash": "adf7bb3f8b632ac3",
-   "carried": false,
+   "carried": true,
    "pass": 19
   },
   {
@@ -5008,13 +5022,13 @@
    "screen": "*",
    "verdict": "PASS",
    "line": "The quad. Paths cut across the grass to every building on campus.",
-   "why": "identity lines fixed; the packed paths change nothing it reads",
+   "why": "identity lines fixed; variants only for the day, a story flag, or nobody here",
    "cause": null,
    "note": false,
-   "screen_hash": "d3e09853ea2f6bae",
-   "row_hash": "18252966b4327f58",
-   "carried": true,
-   "pass": 3
+   "screen_hash": "570f4c04d7c6be2a",
+   "row_hash": "378b2df4c8bf116d",
+   "carried": false,
+   "pass": 20
   },
   {
    "row": "places#10",
@@ -5215,14 +5229,14 @@
    "row": "places#7",
    "screen": "*",
    "verdict": "PASS",
-   "line": "The Quad: Cafeteria \u00b7 Lecture Hall \u00b7 Library \u00b7 Theatre \u00b7 Caf\u00e9",
-   "why": "quad is the hub, places off it; the packed paths change nothing it reads",
+   "line": "on_route = \"students sit on the quad's grass between classes\" \u00b7 on_route = \"students hang out on the quad's steps between classes\"",
+   "why": "quad is the hub; Zoe's two quad rows and Jake's 14:00-16:00 row each say why; town_square has no row; people check green",
    "cause": null,
    "note": false,
-   "screen_hash": "d3e09853ea2f6bae",
-   "row_hash": "2a095bf54f175e5e",
-   "carried": true,
-   "pass": 3
+   "screen_hash": "570f4c04d7c6be2a",
+   "row_hash": "58dab0dc035240bd",
+   "carried": false,
+   "pass": 20
   },
   {
    "row": "places#8",
@@ -5519,8 +5533,8 @@
  ],
  "causes": [],
  "pending": [],
- "asked": 52,
- "answered": 52,
+ "asked": 3,
+ "answered": 3,
  "pass_items": [],
  "unowed": []
 }

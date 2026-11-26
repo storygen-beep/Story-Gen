@@ -1,6 +1,6 @@
 {
  "piece": "P31",
- "pass": 10,
+ "pass": 11,
  "screens": {
   "cafe_window.sit": {
    "text": "38e98584690f209c",
@@ -85,6 +85,7 @@
   "C2198": "27e6b45f50edd3ac",
   "C769": "f6b6f78a8f2e5ed7",
   "C794": "bad76e5963432385",
+  "C2201": "d119dfe665f76359",
   "C795": "34139e6a6914e171",
   "C804": "5358489178bff0a4",
   "L106": "13a714429d15f3b2",
@@ -959,8 +960,21 @@
    "note": false,
    "screen_hash": "eacce623fa6b7de5",
    "row_hash": "27e6b45f50edd3ac",
-   "carried": false,
+   "carried": true,
    "pass": 10
+  },
+  {
+   "row": "C2201",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "The caf\u00e9 across from campus: \u2026 Nobody's behind the counter. The machine hisses to itself.",
+   "why": "P31's caf\u00e9 lines read only presence and story flags; cafe_window reads no clothes",
+   "cause": null,
+   "note": false,
+   "screen_hash": "eacce623fa6b7de5",
+   "row_hash": "d119dfe665f76359",
+   "carried": false,
+   "pass": 11
   },
   {
    "row": "C338",

@@ -1,6 +1,6 @@
 {
  "piece": "P59",
- "pass": 7,
+ "pass": 8,
  "screens": {
   "talk_tom.hub": {
    "text": "e27ea7c722ff2d69",
@@ -40,11 +40,11 @@
   "talk_sam.talk": {
    "text": "24fc95df70a8222b",
    "traits": "fa1a0a429fa0ea30",
-   "facts": "73322662dc17c11d",
+   "facts": "4e9063a15548cc5e",
    "facts2": "d2f21d032729cccc",
-   "all": "a79ebc75a3f89ac1"
+   "all": "3fbf4e1f2213f649"
   },
-  "*": "e365f92d63479dae"
+  "*": "8fb2408cd26130a7"
  },
  "rows": {
   "B1": "5276068df1ca6fa9",
@@ -127,6 +127,7 @@
   "C2198": "27e6b45f50edd3ac",
   "C769": "f6b6f78a8f2e5ed7",
   "C794": "bad76e5963432385",
+  "C2201": "d119dfe665f76359",
   "C795": "34139e6a6914e171",
   "C804": "5358489178bff0a4",
   "L106": "13a714429d15f3b2",
@@ -820,7 +821,7 @@
    "note": false,
    "screen_hash": "e365f92d63479dae",
    "row_hash": "eb11e05cd75e52a9",
-   "carried": false,
+   "carried": true,
    "pass": 7
   },
   {
@@ -1453,6 +1454,19 @@
    "row_hash": "27e6b45f50edd3ac",
    "carried": true,
    "pass": 2
+  },
+  {
+   "row": "C2201",
+   "screen": "*",
+   "verdict": "N/A",
+   "line": "(the talk_tom/chris/sam hubs)",
+   "why": "scene and menu screens, not a place's description; the descriptions of the places they sit at read no clothes or meters (all 31 checked)",
+   "cause": null,
+   "note": false,
+   "screen_hash": "8fb2408cd26130a7",
+   "row_hash": "d119dfe665f76359",
+   "carried": false,
+   "pass": 8
   },
   {
    "row": "C422",

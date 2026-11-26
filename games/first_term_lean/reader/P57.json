@@ -1,6 +1,6 @@
 {
  "piece": "P57",
- "pass": 8,
+ "pass": 9,
  "screens": {
   "talk_hale.hub": {
    "text": "5dd72f6d0c5397e2",
@@ -131,72 +131,72 @@
   "talk_zoe_quad.hub": {
    "text": "24fe9dda4468dca9",
    "traits": "6b1e34b018661933",
-   "facts": "6b7fd76ab4fd4b56",
+   "facts": "7a193a03c86d0f74",
    "facts2": "f08a9d78fc76b06c",
-   "all": "0b9dbde38111c94f"
+   "all": "ab9859308052bd82"
   },
   "talk_zoe_quad.talk": {
    "text": "beba698321dc49ad",
    "traits": "6b1e34b018661933",
-   "facts": "bcc281ad08f55dcb",
+   "facts": "d0252e6f2250289a",
    "facts2": "c9fcb781e7b0de07",
-   "all": "1c61ab4cb58d64f1"
+   "all": "905346f2e5b3782c"
   },
   "talk_zoe_cafeteria.hub": {
    "text": "a6459b77e28cde0b",
    "traits": "6b1e34b018661933",
-   "facts": "328b6101b66b22eb",
+   "facts": "84bf75c29ffd23b0",
    "facts2": "310c48cdcdf66188",
-   "all": "294324ac51b9f68c"
+   "all": "c9ff7ad511cd550e"
   },
   "talk_zoe_cafeteria.talk": {
    "text": "e2fdc339497469f4",
    "traits": "6b1e34b018661933",
-   "facts": "b1f3e2a1c6adc16f",
+   "facts": "bcf614f291f94877",
    "facts2": "346b8f3360288237",
-   "all": "6dcb5a4b32ba3b0c"
+   "all": "6b7e2c3c9255cee9"
   },
   "talk_zoe_flat.hub": {
    "text": "f770f8b4b4d72492",
    "traits": "6b1e34b018661933",
-   "facts": "862375cce5748455",
+   "facts": "76f7b0151ee64aaf",
    "facts2": "d828b29b5c522684",
-   "all": "3ab3f4d71e41b1ba"
+   "all": "7e4ee61b4dc5e2a2"
   },
   "talk_zoe_flat.talk": {
    "text": "98d0ebfbdbdd9d53",
    "traits": "6b1e34b018661933",
-   "facts": "4f9672af78b3a889",
+   "facts": "79837c0ab1788824",
    "facts2": "cc3fa9af62c6b585",
-   "all": "9d5fc9ff91898959"
+   "all": "2319731b31ba300c"
   },
   "talk_jake_cafeteria.hub": {
    "text": "737fbf95d9dd8b03",
    "traits": "435644be785b94c8",
-   "facts": "7e560e5df28f0e2f",
+   "facts": "c71c6dcf1146b8a8",
    "facts2": "9527918d65508408",
-   "all": "4b2fd6d90e7cd0fa"
+   "all": "4c93ceb8af5f0ad0"
   },
   "talk_jake_cafeteria.talk": {
    "text": "d020f6201638c2c9",
    "traits": "435644be785b94c8",
-   "facts": "dc56390e560596eb",
+   "facts": "b26b89e1b6ba969f",
    "facts2": "0715df81400f2bca",
-   "all": "9e002a04ba0ac2ee"
+   "all": "f8323833f7d4f67f"
   },
   "talk_jake_quad.hub": {
    "text": "d7fb30b7418d5ef6",
    "traits": "435644be785b94c8",
-   "facts": "1e915b6449fc6876",
+   "facts": "7538424f652bcbce",
    "facts2": "9d3f593401780370",
-   "all": "a4c8c3b8f2391698"
+   "all": "3c9fd6e069c60496"
   },
   "talk_jake_quad.talk": {
    "text": "653b2a5b77a01845",
    "traits": "435644be785b94c8",
-   "facts": "2f981b0245806ec0",
+   "facts": "699db935eb50fb3a",
    "facts2": "08cd3c25febe58ae",
-   "all": "587dd06c36f12a55"
+   "all": "6e61dc372690f467"
   },
   "talk_brooke.hub": {
    "text": "3283600d31d93ec7",
@@ -212,7 +212,7 @@
    "facts2": "7ec53cc1d723c2ce",
    "all": "0053465c8cf27898"
   },
-  "*": "a06502cd9b0d87a2"
+  "*": "d6a2836c125de0f6"
  },
  "rows": {
   "B1": "5276068df1ca6fa9",
@@ -295,6 +295,7 @@
   "C2198": "27e6b45f50edd3ac",
   "C769": "f6b6f78a8f2e5ed7",
   "C794": "bad76e5963432385",
+  "C2201": "d119dfe665f76359",
   "C795": "34139e6a6914e171",
   "C804": "5358489178bff0a4",
   "L106": "13a714429d15f3b2",
@@ -2381,7 +2382,7 @@
    "note": false,
    "screen_hash": "a06502cd9b0d87a2",
    "row_hash": "eb11e05cd75e52a9",
-   "carried": false,
+   "carried": true,
    "pass": 8
   },
   {
@@ -3382,6 +3383,19 @@
    "row_hash": "27e6b45f50edd3ac",
    "carried": true,
    "pass": 3
+  },
+  {
+   "row": "C2201",
+   "screen": "*",
+   "verdict": "N/A",
+   "line": "(the talk_* hub screens)",
+   "why": "scene and menu screens, not a place's description; the descriptions of the places they sit at read no clothes or meters (all 31 checked)",
+   "cause": null,
+   "note": false,
+   "screen_hash": "d6a2836c125de0f6",
+   "row_hash": "d119dfe665f76359",
+   "carried": false,
+   "pass": 9
   },
   {
    "row": "C422",

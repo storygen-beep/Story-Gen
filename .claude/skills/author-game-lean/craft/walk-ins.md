@@ -2,11 +2,12 @@
 
 Read this before you write a card for a scene that waits at a place: something she walks into (a couple behind the boathouse, a fight on the stairs), someone who walks in on her in the middle of an act (a housemate at the bathroom door), or someone who comes to her when she arrives (the neighbour waves her over at the gate). The plan's walk-ins bite (`plan.md` §8) lists them, area by area; each area's scenes are one piece.
 
-**Two kinds, our design** (LO, typed in main-lean 2026-11-26: "Yes", "One is fine for now"; the measures are the study's, `COT_DESIGN_STUDY.md` Part 9 and `playtest_study_20261109/13_random_scenes_top.md`):
+**Three kinds, our design** (LO, typed in main-lean 2026-11-26: "Yes", "One is fine for now"; the measures are the study's, `COT_DESIGN_STUDY.md` Part 9 and `playtest_study_20261109/13_random_scenes_top.md`):
 - **(a) She comes across something:** it fires by itself when she arrives, behind a chance: the couple under the bridge, her housemate's door open a crack. Her choice inside is to look or leave. It is off the shared one-a-day flag; each one is once a day on its own. Its card's Does: names `she comes across something` on its first screen.
 - **(b) Someone comes to her:** it fires by itself when she arrives, hand-written for one named person, only where that person's rows put them ("When someone comes to her", below). The world's choice to reach her. These share the one-a-day flag. When its words need her in the middle of something (lifting, eating, studying), it fires inside that act instead, never on arrival (C2196).
+- **(c) She gets noticed:** it fires by itself when she arrives, behind a chance, and only in the clothes it is about: the guys at the bus stop go quiet at her leggings. Strangers are allowed; no named person is needed. It is off the shared one-a-day flag, once a day on its own, and its card's Does: names `she gets noticed` ("When she gets noticed", below; C2200; LO, typed in main-lean 2026-11-27: "Yes, we should align our place description to it. And for scenes like leggings ones, those should be walkins right??", "dont we need skill changes").
 
-Both kinds fire on arrival and neither is a button (C2195). Why: the study's players say surprises are too rare (CoT's walk-ins fire on arrival, `COT_DESIGN_STUDY.md` Part 9), and a button she must find and press is no surprise. LO chose it, typed in main-lean 2026-11-26: "2nd one" (of: keep the buttons and mark them, fire on their own, a mix), then "Go" to the picks below. That reverses his "2 i would say button is good here" for walk-ins.
+All three fire on arrival and none is a button (C2195). Why: the study's players say surprises are too rare (CoT's walk-ins fire on arrival, `COT_DESIGN_STUDY.md` Part 9), and a button she must find and press is no surprise. LO chose it, typed in main-lean 2026-11-26: "2nd one" (of: keep the buttons and mark them, fire on their own, a mix), then "Go" to the picks below. That reverses his "2 i would say button is good here" for walk-ins.
 
 ## Must read
 
@@ -47,6 +48,7 @@ On a card with a `Does:` block (every card from 2026-11-24 on), the rows that ap
 | C2192 | release 1: 8 to 10 "comes to her" scenes, and the first steps of two or three chains, flags only | — (the count; LO's "Yes") | the plan | note |
 | C2195 | a walk-in she comes across fires by itself on arrival, never a button: `trigger_mode = "random"` at its place, `chance = 0.35` by default, `max_triggers_per_day = 1`, gated by the person's presence and hours as before; it stays off the shared "comes to her" flag, and the place rests 3 arrivals after a hit (the engine's `random_cooldown`); her choice inside is unchanged | the study's players: surprises too rare (Part 9) · kept blocking: LO, typed in main-lean 2026-11-26: "2nd one", "Go" | a walk-in | script + walkins |
 | C2196 | a scene that comes to her fits what she is doing and wearing when it fires: on arrival she has only just walked in; when its words need her in the middle of an act (lifting, eating, studying, washing), it rides on that act as a substitution rule, after the act's costs, never on arrival | first_term_lean's `marco_hips` (P49) fired on walking into the gym, with no workout, no day pass and no gym clothes, and its words fixed her squat: "Your stance is all wrong", his hands turning her hips. LO, typed in main-lean 2026-11-26: "This ones a walkin right, she didn't have gym membership yet. And she is working out in this scene. Why??", then "Go ahead." | a walk-in | reader + walkins |
+| C2200 | she gets noticed: a stranger reacts to what she is wearing, as a scene that fires by itself on arrival (`trigger_mode = "random"`, `chance = 0.35`, `max_triggers_per_day = 1`), gated by a clothing condition and the hours people are about; off the shared flag; two screens and a written way out; at most a quarter of the game's arrival scenes. Never a line in the place description (`craft/places.md` C2201) | first_term_lean: the street, park and gym descriptions noticed her leggings and Mom's things, the same words on every visit, with no choice (LO, 2026-11-27) | a walk-in | script + walkins |
 
 ## The engine (cited; `v2.py` is `apps/game_generation/twee_comprehensive/generators/v2.py`)
 
@@ -240,6 +242,45 @@ items = [{ type = "flag", subject = "player", flag_key = "came_to_her_today", op
 
 The next step of the chain waits on `neighbour_run_asked`, a day or more later (step 5).
 
+## When she gets noticed
+
+Kind (c). She arrives in something worth looking at, and a stranger looks: the guys at the bus stop, a jogger, two regulars between sets. It is CoT's way: its events are tagged with what they need to see on her (cleavage, a short skirt, no bra), and the picker refuses an event her outfit can't meet (CoT's `cot_40_events.js`, lines 137-160; 20 cleavage events, 14 skirt, 14 topless, `Great_Games_Study_20260926/round12_tease/cot.md`, line 37). CoT's place descriptions don't do this job (`craft/places.md` rule 1). Our design, after it (C2200; LO, typed in main-lean 2026-11-27: "Yes, we should align our place description to it. And for scenes like leggings ones, those should be walkins right??", "dont we need skill changes").
+
+1. **It fires on arrival, behind a chance, once a day:** `trigger_mode = "random"`, `chance = 0.35`, `max_triggers_per_day = 1`, like kind (a). It is off the shared "comes to her" flag.
+2. **Only in the clothes it is about.** Its trigger's conditions name what she wears (`clothing_item`, `clothing_slot`, `worn_exposure` or `worn_type`), and the hours when people are about. The scene names only that garment (`craft/clothes.md` rule 4).
+3. **A stranger is fine.** No named person and no schedule row are needed; a stranger speaks as `speaker = "unknown"`. A named person is allowed only where their rows put them (L97).
+4. **Two screens, and a written way out** (C792, C2188): the moment, then one answer screen per choice. One choice is plain ("Keep walking"); one stays in it ("Look back"). While her meters are still, the bolder one is a look, never her choosing to show herself. Every answer ends on his hook, a next time (C149).
+5. **On her body, short.** What he looks at, what it does to her (face hot, walking faster), one spoken line from him. In release 1 it sets a flag only.
+6. **Not too many** (L147: "69 of first_term's 82 random scenes were about her body"). At most a quarter of the game's arrival scenes are this kind, and at most one per garment state per place. `scripts/walkins.py` counts it.
+
+**H · She gets noticed** (roles): her street, 07:00–21:00, in leggings.
+
+```toml
+[canvases.trigger]
+location = "<street>"
+trigger_mode = "random"
+chance = 0.35
+is_repeatable = true
+max_triggers_per_day = 1
+
+[canvases.trigger.conditions]
+version = "1.0"
+logic = "AND"
+items = [{ type = "clothing_item", item_id = "leggings", operator = "equipped" },
+         { type = "time_of_day", start_time = "07:00", end_time = "21:00" }]
+```
+
+> The guys at the bus stop go quiet as you pass. One of them whistles, low, and his eyes stay on your ass in the leggings.
+> "Don't walk so fast, sweetheart."
+> Your face goes hot.
+
+| button | the first line after the click |
+|---|---|
+| "Keep walking" | *You don't look back. You can feel them watching until the corner.* "Same stop tomorrow, doll. We'll be here." · sets `noticed_<street>_leggings` |
+| "Look back" | *He grins when you do. You turn away first, and your face burns.* "See you tomorrow, doll." · sets `noticed_<street>_leggings` |
+
+Each answer ends on his hook, a next time (C149): he'll be here tomorrow. Each stranger has his own way of addressing her ("doll" at the bus stop, "love" across the road), never one shared word (C593). At stage 0 her bolder choice is to look back, never to show herself.
+
 ## How a walk-in grows
 
 (LO, relayed 2026-11-22: "does walkins progresses?? like she can do more in those walkins as things rises?? In the release 1 it stays basic obv. But how does top games do it??")
@@ -285,6 +326,8 @@ value = 20
 A later release appends the 0.35 and 0.70 rules with their ranges and adds their bands to `wall_housemate`; the hear band's text stays as it was.
 
 ## Not this
+
+- A place's description that notices what she wears ("…a neighbour's eyes drop to your chest in Mom's top"). The same words every visit, and no choice. It is a "she gets noticed" scene (C2200, C2201).
 
 - An area where every scene is about her body. About half are everyday: someone else's life going on (L147; C802).
 - "You walk through the park. Nothing happens." No scene at all is better (L150).

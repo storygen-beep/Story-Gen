@@ -1,6 +1,6 @@
 {
  "piece": "P21",
- "pass": 19,
+ "pass": 20,
  "screens": {
   "cafe_hire.ask": {
    "text": "a5e6e9ac50172fda",
@@ -99,7 +99,7 @@
   "C1185": "db808998ed69c649",
   "C1220": "18d85534582def9d",
   "C1221": "3835fed23cc316c7",
-  "C1176": "7632b28c693a43a4",
+  "C1176": "655e8e2b731598c9",
   "C1189": "2afadc6bbe1996bd",
   "C1200": "65e6616cd17c7eb3",
   "C1033": "9daf075fd3c2e30e",
@@ -167,6 +167,7 @@
   "C2198": "27e6b45f50edd3ac",
   "C769": "f6b6f78a8f2e5ed7",
   "C794": "bad76e5963432385",
+  "C2201": "d119dfe665f76359",
   "C795": "34139e6a6914e171",
   "C804": "5358489178bff0a4",
   "L106": "13a714429d15f3b2",
@@ -1283,32 +1284,34 @@
   {
    "row": "C1176",
    "screen": "*",
-   "verdict": "N/A",
-   "line": "\u2014",
-   "why": "no clothing read",
+   "verdict": "PASS",
+   "line": "Reaching past you for a jug, his arm drags across your chest.",
+   "why": "no clothing condition on any caf\u00e9 hire or shift screen",
    "cause": null,
    "note": true,
-   "screen_hash": "d86f270c9c58a862",
-   "row_hash": "7632b28c693a43a4",
-   "carried": true,
-   "pass": 5
+   "screen_hash": "8bde60acbb418c33",
+   "row_hash": "655e8e2b731598c9",
+   "carried": false,
+   "pass": 20
   },
   {
    "row": "C1176",
    "screen": "cafe_hire.both",
    "verdict": "N/A",
    "line": "\u2014",
-   "why": "no dress code at the Caf\u00e9 and no garment named or checked on this screen",
+   "why": "no garment named or checked on this screen",
    "cause": null,
    "note": true,
    "screen_hash": {
-    "text": "7a2e33087aeddb7d",
+    "text": "ac5c18ab5cbd26f2",
+    "traits": "7b42410c0bd9090b",
     "facts": "f7c3287ef5d44121",
-    "all": "1910d5d60f0f740b"
+    "facts2": "80ca4a1b39177ef5",
+    "all": "6dab71496dd6f5b6"
    },
-   "row_hash": "7632b28c693a43a4",
-   "carried": true,
-   "pass": 7
+   "row_hash": "655e8e2b731598c9",
+   "carried": false,
+   "pass": 20
   },
   {
    "row": "C1184",
@@ -1816,7 +1819,7 @@
    "note": false,
    "screen_hash": "8bde60acbb418c33",
    "row_hash": "eb11e05cd75e52a9",
-   "carried": false,
+   "carried": true,
    "pass": 19
   },
   {
@@ -1835,7 +1838,7 @@
     "all": "4d9f3e0bc1ef9374"
    },
    "row_hash": "eb11e05cd75e52a9",
-   "carried": false,
+   "carried": true,
    "pass": 19
   },
   {
@@ -3478,6 +3481,19 @@
    "row_hash": "27e6b45f50edd3ac",
    "carried": true,
    "pass": 15
+  },
+  {
+   "row": "C2201",
+   "screen": "*",
+   "verdict": "N/A",
+   "line": "\u2014",
+   "why": "builds no place description (cafe_hire, cafe_first_shift, people); a scene is not a place's description",
+   "cause": null,
+   "note": false,
+   "screen_hash": "8bde60acbb418c33",
+   "row_hash": "d119dfe665f76359",
+   "carried": false,
+   "pass": 20
   },
   {
    "row": "C286",
@@ -6923,8 +6939,8 @@
  ],
  "causes": [],
  "pending": [],
- "asked": 2,
- "answered": 2,
+ "asked": 3,
+ "answered": 3,
  "pass_items": [],
  "unowed": []
 }

@@ -1,6 +1,6 @@
 {
  "piece": "P30",
- "pass": 11,
+ "pass": 12,
  "screens": {
   "watch_rehearsal.watch": {
    "text": "350d7868a423a75f",
@@ -99,6 +99,7 @@
   "C2198": "27e6b45f50edd3ac",
   "C769": "f6b6f78a8f2e5ed7",
   "C794": "bad76e5963432385",
+  "C2201": "d119dfe665f76359",
   "C795": "34139e6a6914e171",
   "C804": "5358489178bff0a4",
   "L106": "13a714429d15f3b2",
@@ -1269,8 +1270,21 @@
    "note": false,
    "screen_hash": "36d1703664094e0c",
    "row_hash": "27e6b45f50edd3ac",
-   "carried": false,
+   "carried": true,
    "pass": 11
+  },
+  {
+   "row": "C2201",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "The theatre: \u2026 Nobody's on the stage. The work light's on.",
+   "why": "the four places change only for who is absent",
+   "cause": null,
+   "note": false,
+   "screen_hash": "36d1703664094e0c",
+   "row_hash": "d119dfe665f76359",
+   "carried": false,
+   "pass": 12
   },
   {
    "row": "C338",

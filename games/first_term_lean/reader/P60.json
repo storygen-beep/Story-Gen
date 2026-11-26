@@ -1,6 +1,6 @@
 {
  "piece": "P60",
- "pass": 6,
+ "pass": 7,
  "screens": {
   "talk_kayla_mirror.hub": {
    "text": "e21728782499bf58",
@@ -141,6 +141,7 @@
   "C2198": "27e6b45f50edd3ac",
   "C769": "f6b6f78a8f2e5ed7",
   "C794": "bad76e5963432385",
+  "C2201": "d119dfe665f76359",
   "C795": "34139e6a6914e171",
   "C804": "5358489178bff0a4",
   "L106": "13a714429d15f3b2",
@@ -632,7 +633,7 @@
    "note": false,
    "screen_hash": "4f52a0abae4fd4f8",
    "row_hash": "eb11e05cd75e52a9",
-   "carried": false,
+   "carried": true,
    "pass": 6
   },
   {
@@ -1152,6 +1153,19 @@
    "row_hash": "27e6b45f50edd3ac",
    "carried": true,
    "pass": 1
+  },
+  {
+   "row": "C2201",
+   "screen": "*",
+   "verdict": "N/A",
+   "line": "(the talk_kayla/tess hubs)",
+   "why": "scene and menu screens, not a place's description; the descriptions of the places they sit at read no clothes or meters (all 31 checked)",
+   "cause": null,
+   "note": false,
+   "screen_hash": "4f52a0abae4fd4f8",
+   "row_hash": "d119dfe665f76359",
+   "carried": false,
+   "pass": 7
   },
   {
    "row": "C422",

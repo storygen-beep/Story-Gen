@@ -380,3 +380,27 @@ def test_a_changed_trait_word_asks_only_the_fit_row_on_that_persons_scenes(tmp_p
     assert items and {i["row"] for i in items} == {reading.TRAIT_FIT}
     assert {i["screen"] for i in items} == {"start.a"}  # mom is on start.a only
     assert all(i["why"] == "a trait word of someone on it changed" for i in items)
+
+
+# ── C2201: a description never changes with what she wears (LO, typed in main-lean 2026-11-27) ──
+
+def _place(*variants):
+    return {"id": "street", "description_variants": [{"conditions": {"version": "1.0", "logic": "AND",
+                                                                      "items": list(v)}, "text": "x"} for v in variants]}
+
+
+def test_a_description_that_reads_her_clothes_is_red():
+    game = {"locations": [_place([{"type": "clothing_item", "item_id": "leggings", "operator": "equipped"}])]}
+    rows = pages.problems(game)
+    assert any("street" in r and "changes with what she wears" in r for r in rows)
+
+
+def test_a_nested_clothing_condition_is_red_too():
+    nested = {"type": "group", "logic": "OR", "items": [{"type": "worn_exposure", "operator": "gte", "value": 1}]}
+    assert any("worn_exposure" in r for r in pages.problems({"locations": [_place([nested])]}))
+
+
+def test_nobody_here_and_a_weekday_are_green():
+    game = {"locations": [_place([{"type": "npc_at_location", "npc_id": "npc_mom", "location_id": "street",
+                                   "operator": "is_absent"}], [{"type": "weekday", "weekdays": [6]}])]}
+    assert pages.problems(game) == []

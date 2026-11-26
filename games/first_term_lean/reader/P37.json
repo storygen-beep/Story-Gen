@@ -1,22 +1,22 @@
 {
  "piece": "P37",
- "pass": 13,
+ "pass": 14,
  "screens": {
   "zoe_party.party": {
    "text": "743043cc9ff5e804",
    "traits": "06d2567e62494596",
-   "facts": "bdb41c3bae4339c4",
+   "facts": "900fd5b7ce617089",
    "facts2": "64bc96f41ce6505b",
-   "all": "1b1cb411f6915f8d"
+   "all": "7a67bfb4c9c24484"
   },
   "zoe_party.home": {
    "text": "b02777bd9b8b50f8",
    "traits": "fa1a0a429fa0ea30",
-   "facts": "e9d76b772e3b53ca",
+   "facts": "09800759fadc671d",
    "facts2": "8486592f7b66e230",
-   "all": "bb59d48a609273e4"
+   "all": "a6c4d3bc135a7d2a"
   },
-  "*": "984247e13259e4f7"
+  "*": "8978d24607b7c34a"
  },
  "rows": {
   "B1": "5276068df1ca6fa9",
@@ -65,7 +65,7 @@
   "C1185": "db808998ed69c649",
   "C1220": "18d85534582def9d",
   "C1221": "3835fed23cc316c7",
-  "C1176": "7632b28c693a43a4",
+  "C1176": "655e8e2b731598c9",
   "C1189": "2afadc6bbe1996bd",
   "C1200": "65e6616cd17c7eb3",
   "C1002": "657248766e62061f",
@@ -129,6 +129,7 @@
   "C2198": "27e6b45f50edd3ac",
   "C769": "f6b6f78a8f2e5ed7",
   "C794": "bad76e5963432385",
+  "C2201": "d119dfe665f76359",
   "C795": "34139e6a6914e171",
   "C804": "5358489178bff0a4",
   "L106": "13a714429d15f3b2",
@@ -422,14 +423,14 @@
    "row": "C1176",
    "screen": "*",
    "verdict": "PASS",
-   "line": "\u2014",
-   "why": "No clothing read on the party screens.",
+   "line": "A guy squeezing past puts his hand on your hip to do it and leaves it there a second too long.",
+   "why": "no read of her outfit on the party screen",
    "cause": null,
    "note": true,
-   "screen_hash": "79a44230bbd20b5e",
-   "row_hash": "7632b28c693a43a4",
-   "carried": true,
-   "pass": 1
+   "screen_hash": "8978d24607b7c34a",
+   "row_hash": "655e8e2b731598c9",
+   "carried": false,
+   "pass": 14
   },
   {
    "row": "C1184",
@@ -636,7 +637,7 @@
     "all": "1b1cb411f6915f8d"
    },
    "row_hash": "eb11e05cd75e52a9",
-   "carried": false,
+   "carried": true,
    "pass": 13
   },
   {
@@ -1318,6 +1319,19 @@
    "row_hash": "27e6b45f50edd3ac",
    "carried": true,
    "pass": 9
+  },
+  {
+   "row": "C2201",
+   "screen": "*",
+   "verdict": "N/A",
+   "line": "Zoe's apartment is wall to wall: music through the floor",
+   "why": "scene and menu screens, not a place's description; the descriptions of the places they sit at read no clothes or meters (all 31 checked)",
+   "cause": null,
+   "note": false,
+   "screen_hash": "8978d24607b7c34a",
+   "row_hash": "d119dfe665f76359",
+   "carried": false,
+   "pass": 14
   },
   {
    "row": "C286",
@@ -2677,8 +2691,8 @@
  ],
  "causes": [],
  "pending": [],
- "asked": 1,
- "answered": 1,
+ "asked": 2,
+ "answered": 2,
  "pass_items": [],
  "unowed": []
 }
