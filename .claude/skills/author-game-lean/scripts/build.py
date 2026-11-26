@@ -35,7 +35,7 @@ def refusals(game_dir):
 def package(game_dir, release=False):
     """Every build goes to games/<slug>/output/, the folder LO plays from on his phone (LO, 2026-11-23:
     builds kept going to output_dev/, which he doesn't play). A dev build adds --dev and --debug, always together (LO, 2026-11-23): --debug draws the
-    grey box where a picture is still missing (v2.py:16444-16451)."""
+    grey box where a picture is still missing (v2.py:16478-16485)."""
     game_dir = Path(game_dir).resolve()
     cmd = [sys.executable, str(check.REPO / "manage.py"), "package_from_toml",
            "--file", str(game_dir / "toml_phases" / check.MERGED),

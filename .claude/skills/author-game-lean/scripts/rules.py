@@ -140,7 +140,7 @@ def seen(game):
         cid, trig = c.get("id"), c.get("trigger") or {}
         nodes, nxt, _ = scenes.graph(c)
         # The starting canvas plays once, at the start; any other canvas is repeatable unless it says
-        # is_repeatable = false (v2.py:15085).
+        # is_repeatable = false (v2.py:15119).
         rep = cid != start and str(trig.get("is_repeatable", "true")).lower() != "false"
         for node in c.get("nodes") or []:
             nid = node.get("id")

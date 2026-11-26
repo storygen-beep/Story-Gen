@@ -7,12 +7,12 @@
     [canvases.trigger] location = "<place>", trigger_mode = "random", chance = <0..1>, requires_npc = "<npc id>"
 
 A canvas with `trigger_mode = "random"` is never a button: every button path skips it (v2.py:4625, 4736, 6603,
-6726, 5946-6009), and on arrival `setup.getStoryCanvasRedirect` (v2.py:6564) runs `setup.checkRandomEncounters`
-(v2.py:6832-6952), which rolls each one's chance and sends her into the first hit. A story moment (a non-repeatable
+6726, 5946-6009), and on arrival `setup.getStoryCanvasRedirect` (v2.py:6599) runs `setup.checkRandomEncounters`
+(v2.py:6866-6986), which rolls each one's chance and sends her into the first hit. A story moment (a non-repeatable
 canvas that is not random) wins over it (v2.py:5947-5968, 6560-6566). The engine's own brakes are per place (the
-place rests `random_cooldown` arrivals, 3 by default, v2.py:6945-6947) and per canvas name
-(`max_triggers_per_day`, v2.py:6879-6888); the game-wide one-a-day brake is authored: one flag that every such
-canvas waits on and sets, cleared in `[engine.daily_tick]` (v2.py:7218-7236; author-game-v2 engine.md §7, §28).
+place rests `random_cooldown` arrivals, 3 by default, v2.py:6979-6981) and per canvas name
+(`max_triggers_per_day`, v2.py:6913-6922); the game-wide one-a-day brake is authored: one flag that every such
+canvas waits on and sets, cleared in `[engine.daily_tick]` (v2.py:7252-7270; author-game-v2 engine.md §7, §28).
 
 Red on (LO, typed in main-lean 2026-11-26: "Yes", "One is fine for now"):
   1. a "comes to her" canvas that names no person where their rows are (C2186). Either form passes:
@@ -20,7 +20,7 @@ Red on (LO, typed in main-lean 2026-11-26: "Yes", "One is fine for now"):
      - (P49, LO, typed in main-lean 2026-11-26: "Go with your picks") the person coming to her from next door: an
        `npc_at_location` `is_present` condition on an adjoining place (one sharing the scene's `parent`, or the
        scene's parent itself, the hub) with a schedule row for them there, and no `requires_npc`, which would
-       ask for them at her place (v2.py:6914-6927). The condition is read by v2.py:5428-5444.
+       ask for them at her place (v2.py:6948-6961). The condition is read by v2.py:5428-5444.
   2. one without the brake: no `is_false` condition on a flag that `[engine.daily_tick]` unsets, a choice on its
      first screen that doesn't set that flag, or two such canvases on different flags (C2187);
   3. one whose first screen has fewer than two choices: there is always a written way out (C2188);

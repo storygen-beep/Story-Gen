@@ -32,19 +32,19 @@ On a card with a `Does:` block (every card from 2026-11-24 on), the rows that ap
 
 ## The engine (cited; `v2.py` is `apps/game_generation/twee_comprehensive/generators/v2.py`)
 
-- **Fill in what's missing, never overwrite.** `setup.backfillStateDefaults` (v2.py:20528-20572) runs on every passage (v2.py:20685). It fills:
+- **Fill in what's missing, never overwrite.** `setup.backfillStateDefaults` (v2.py:20696-20740) runs on every passage (v2.py:20726). It fills:
   - missing `$flags` keys;
   - `$player`'s top-level keys and `core_traits`;
   - `$game_state` one level into each sub-map;
   - a whole new person, or the missing `core_traits` and `flags` of an existing one.
   
   It can't follow a rename, notice a removal, or reread a number whose meaning changed (C1677).
-- **A save is never refused.** `Config.saves.onLoad` notes the schema mismatch in the console and never throws (v2.py:4027-4047).
-- **Version stamps.** `origin_version` is written once at the start (v2.py:1709-1711). `last_version` and `last_schema` are restamped when the build changes (v2.py:20690-20693).
+- **A save is never refused.** `Config.saves.onLoad` notes the schema mismatch in the console and never throws (v2.py:4058-4078).
+- **Version stamps.** `origin_version` is written once at the start (v2.py:1740-1742). `last_version` and `last_schema` are restamped when the build changes (v2.py:20858-20861).
 - **The title.** SugarCube 2.30 files browser save slots under `Story.domId`, which comes from the title (`storage=SimpleStore.create(Story.domId, …)` in `~/bin/storyformats/sugarcube-2/format.js`). `Config.saves.id` is pinned to the game's slug (v2.py:3999), so an exported save still loads after a title change; a load throws on an id mismatch (`errorSaveIdMismatch`, same file). Browser slots don't survive a title change.
-- **Granting again is safe.** `setup.addToWardrobe` returns early if she already owns the item (v2.py:1745-1754).
-- **Old waits.** A flag with only `set_day` reads as set at the start of that day (v2.py:4992-4997).
-- **The footer** shows the version and the release (v2.py:20852-20860).
+- **Granting again is safe.** `setup.addToWardrobe` returns early if she already owns the item (v2.py:1776-1785).
+- **Old waits.** A flag with only `set_day` reads as set at the start of that day (v2.py:5023-5028).
+- **The footer** shows the version and the release (v2.py:20893-20901).
 - **The save check** is `check.py`'s `saves` (`scripts/scenes.py`), adapted from v2's `saves_mode` (`.claude/skills/author-game-v2/scripts/gates.py:10603`). It reads the merged TOML at the last commit of `output/index.html` (the build LO played), or `--against <git ref>`, and is red on a removed id or key, a meter whose range or bands changed, or a flag now set only by different choices (unless NOTES.md says `Same meaning: <flag>` with LO's yes). It can't tell a reworded button from a changed meaning, so it asks.
 
 ## The measures

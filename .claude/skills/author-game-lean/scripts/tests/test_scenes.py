@@ -75,6 +75,28 @@ def test_talk_judges_every_path_and_the_worst_variant():
     assert status == RED  # the silent window variant is one the player can get
 
 
+def test_a_person_in_one_group_is_company_only_in_that_variant():
+    """LO 2026-11-27, the TV list: Mom named in one group, the other group has nobody, and the next screen is hers
+    alone. The empty variant is not counted as company, so the path is green."""
+    g = clean()
+    present = {"version": "1.0", "logic": "AND", "items": [
+        {"type": "npc_at_location", "npc_id": "npc_mom", "location_id": "kitchen", "operator": "is_present"}]}
+    g["canvases"][0]["nodes"] = [
+        node("a", group(para("Mom is at the stove."), say("Eggs?"), **present),
+             group(para("You curl up at the end of the couch with the remote and find something to watch.")), to=["b"]),
+        node("b", para("You watch the screen a long time with the sound right down and your knees pulled up."))]
+    assert scenes.check_talk(g) == (GREEN, [])
+
+
+def test_a_silent_person_in_their_own_group_is_still_red():
+    g = clean()
+    g["canvases"][0]["nodes"] = [node("a", group(para(
+        "Mom stands at the window a long time with the cup in both hands and says nothing at all to you.")),
+        group(para("Nobody's in.")))]
+    status, rows = scenes.check_talk(g)
+    assert status == RED and "breakfast" in rows[0]
+
+
 def test_quoted_speech_in_a_paragraph_counts_as_speech():
     assert scenes.text_split(para('Mom looks up. "Is that mine?"')) == (3, 3)
 

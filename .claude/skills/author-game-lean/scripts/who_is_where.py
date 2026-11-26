@@ -9,9 +9,9 @@ it takes the game folder (like every lean script) instead of a slug, and the eng
 on 2026-11-20 (v2's said v2.py:4298-4327, which has drifted).
 
 How the engine decides (`setup.getNpcLocation`, v2.py:4407-4434): walk the person's rows in order; skip a row
-whose weekdays miss today, whose window misses now (`setup.isCurrentTimeSlot`, v2.py:4779-4799: end exclusive,
+whose weekdays miss today, whose window misses now (`setup.isCurrentTimeSlot`, v2.py:4793-4813: end exclusive,
 no end = start + 60 minutes, a window ending before it starts wraps past midnight), or whose `when` fails
-(`setup._scheduleRowLive`, v2.py:4396). The first row left wins; none left means nowhere.
+(`setup._scheduleRowLive`, v2.py:4427). The first row left wins; none left means nowhere.
 
 Here a row with a `when` may be live or not, so it adds its place AND lets the walk go on; a `when` that only
 waits for `<x>_met` counts as an ordinary row. Each cell is every place the person CAN be in that hour,
@@ -37,7 +37,7 @@ def minutes(s):
 
 
 def in_window(m, start, end):
-    """`setup.isCurrentTimeSlot` (v2.py:4779-4799)."""
+    """`setup.isCurrentTimeSlot` (v2.py:4793-4813)."""
     s, e = minutes(start), minutes(end) if end else None
     if s is None:
         return False

@@ -40,11 +40,11 @@ On a card with a `Does:` block (every card from 2026-11-24 on), the rows that ap
 ## The engine (cited; `v2.py` is `apps/game_generation/twee_comprehensive/generators/v2.py`)
 
 - **Energy is a player trait.** Nothing in the engine treats it specially (a grep of v2.py for `'energy'` finds nothing), so it falls only by costs and effects, and fills only by effects. Effects clamp at its range when `clamp = true`.
-- **A cost goes on the trigger:** `costs = [{ trait = "energy", value = 15 }]`, parsed at `apps/projects/services/template_import.py:2593` and taken on entry (`setup.deductCostArray`, v2.py:6188-6195).
-- **Too little energy greys the row, with its cost.** `setup.checkCostsAffordable` (v2.py:6158-6168) puts the row in the blocked list (v2.py:6726-6727). It's drawn dimmed with "(15 Energy)" (v2.py:6744-6758), and a click says "Requires 15 Energy (you have 6)" (`setup.getCostBlockedMessage`, v2.py:6203-6217).
-- **A cap per day** is `max_triggers_per_day` on the trigger (read at v2.py:15086), checked by `setup.canTriggerActivity` (v2.py:5609). A capped row is hidden, or greyed with its `cooldown_message` when `show_when_blocked = true` (v2.py:6720-6723).
-- **A cap on one choice** inside a screen is a `_today` flag set by the choice and checked by it, cleared by `[engine.daily_tick]` (v2.py:7182-7184; `.claude/skills/author-game-v2/references/engine.md:1458-1485`).
-- **The day turns at midnight.** The hour wraps past 24 (v2.py:7041-7042) and the weekday moves on (v2.py:7078-7080). The cap's day key is week and day (`setup.getCurrentDayKey`, v2.py:5445-5452), so every cap resets at midnight, not at sleep.
+- **A cost goes on the trigger:** `costs = [{ trait = "energy", value = 15 }]`, parsed at `apps/projects/services/template_import.py:2593` and taken on entry (`setup.deductCostArray`, v2.py:6219-6226).
+- **Too little energy greys the row, with its cost.** `setup.checkCostsAffordable` (v2.py:6189-6199) puts the row in the blocked list (v2.py:6796-6797). It's drawn dimmed with "(15 Energy)" (v2.py:6779-6793), and a click says "Requires 15 Energy (you have 6)" (`setup.getCostBlockedMessage`, v2.py:6248-6266).
+- **A cap per day** is `max_triggers_per_day` on the trigger (read at v2.py:15120), checked by `setup.canTriggerActivity` (v2.py:5640). A capped row is hidden, or greyed with its `cooldown_message` when `show_when_blocked = true` (v2.py:6755-6758).
+- **A cap on one choice** inside a screen is a `_today` flag set by the choice and checked by it, cleared by `[engine.daily_tick]` (v2.py:7216-7218; `.claude/skills/author-game-v2/references/engine.md:1458-1485`).
+- **The day turns at midnight.** The hour wraps past 24 (v2.py:7075-7076) and the weekday moves on (v2.py:7112-7114). The cap's day key is week and day (`setup.getCurrentDayKey`, v2.py:5476-5483), so every cap resets at midnight, not at sleep.
 - **A gate that waiting can't open** (clothes, money, a flag) greys with `locked_text` (`craft/clothes.md`).
 
 ## The measures

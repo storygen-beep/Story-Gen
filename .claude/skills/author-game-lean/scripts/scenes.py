@@ -17,7 +17,8 @@
 What these can't see is still the writer's and the reader's: whether a line is true in what it says, a screen's
 one job, a person named in narration (only speakers are placed), and the opening's own clock. `talk` counts a
 screen as having someone in it only by a line from them, a presence check, or their name or one-word role in the
-prose: a screen that has them only as "she" is not counted.
+prose: a screen that has them only as "she" is not counted. In an if/elseif chain of groups, a person counts only in
+the group that has them (`company_split`).
 """
 import json
 import re
@@ -178,6 +179,70 @@ def has_company(c, node, who):
     return any(rx.search(text) and pid not in absent for pid, rx in who)
 
 
+def _company_in(blocks, who, absent, conds=()):
+    """Someone besides her is on these blocks: a line from a person, a presence check in the conditions around them,
+    or a person's name or one-word role in the prose (unless the screen checks they're absent)."""
+    if any(i.get("type") == "npc_at_location" and i.get("operator") == "is_present" for i in items(list(conds))):
+        return True
+    for b, cond in walk(blocks):
+        props = b.get("props") or {}
+        if b.get("type") == "dialog" and props.get("speaker") not in NOT_PERSON:
+            return True
+        if any(i.get("type") == "npc_at_location" and i.get("operator") == "is_present" for i in items(list(cond))):
+            return True
+    text = " ".join(str(b.get("content") or "") for b, _ in walk(blocks))
+    return any(rx.search(text) and pid not in absent for pid, rx in who)
+
+
+def company_split(c, node, who):
+    """(narration, speech) on the worst variant of a screen that has someone in it, or None when no variant does.
+
+    Adjacent groups are one if/elseif chain, and only one shows. A person named in one group is on screen only in
+    that variant, so a chain whose other group has nobody in it doesn't count that other group as company (the TV
+    list: "Mark watches from his chair" in one group, "You curl up" alone in the other, LO 2026-11-27). A screen
+    bound to a person, or with someone in its ungrouped text, has company in every variant, as before."""
+    blocks = node.get("blocks") or []
+    absent = {i.get("npc_id") for i in items(blocks) if i.get("type") == "npc_at_location"
+              and i.get("operator") == "is_absent"}
+    trig = c.get("trigger") or {}
+    score = lambda x: x[0] - TALK_CEILING * x[1]
+    base, chains, chain = [], [], []
+    for b in list(blocks) + [None]:
+        if isinstance(b, dict) and b.get("type") == "group":
+            chain.append(b)
+            continue
+        if chain:
+            chains.append(chain)
+            chain = []
+        if isinstance(b, dict):
+            base.append(b)
+    if trig.get("npc") or trig.get("requires_npc") or _company_in(base, who, absent):
+        return screen_split(blocks)
+    bn, bs = screen_split(base)
+    variants = []  # per chain: [(narr, speech, has company)]
+    for ch in chains:
+        vs = []
+        for g in ch:
+            n, s = screen_split(children(g))
+            cond = (g.get("props") or {}).get("conditions") or g.get("conditions")
+            vs.append((n, s, _company_in(children(g), who, absent, (cond,) if cond else ())))
+        variants.append(vs)
+    worst = None
+    for k, vs in enumerate(variants):
+        with_company = [v for v in vs if v[2]]
+        if not with_company:
+            continue
+        pick = max(with_company, key=score)
+        n, s = bn + pick[0], bs + pick[1]
+        for j, other in enumerate(variants):
+            if j != k:
+                o = max(other, key=score)
+                n, s = n + o[0], s + o[1]
+        if worst is None or score((n, s)) > score(worst):
+            worst = (n, s)
+    return worst
+
+
 def graph(c):
     """{node id: [next node ids in this scene]}, and the first node."""
     nodes = {n.get("id"): n for n in c.get("nodes") or [] if n.get("id")}
@@ -224,9 +289,9 @@ def check_talk(game, dev=()):
         for p in ps:
             narr = speech = 0
             for nid in p:
-                if has_company(c, nodes[nid], who):
-                    n, s = screen_split(nodes[nid].get("blocks"))
-                    narr, speech = narr + n, speech + s
+                split = company_split(c, nodes[nid], who)
+                if split is not None:
+                    narr, speech = narr + split[0], speech + split[1]
             if not narr:
                 continue
             ratio = narr / speech if speech else float("inf")
@@ -330,7 +395,7 @@ def check_creation(game):
     rows = []
     for f in fields:
         fid = f.get("id")
-        # @player alone prints the name; @player.<id> prints a field (`_resolve_at_references`, v2.py:18628-18673)
+        # @player alone prints the name; @player.<id> prints a field (`_resolve_at_references`, v2.py:18739-18784)
         pat = r"@player(?!\w|\.\w)|@player\.name\b" if fid == "name" else rf"@player\.{re.escape(str(fid))}\b"
         if fid and not re.search(pat, shown):
             rows.append(f"creation field `{fid}` (\"{f.get('label', '')}\") is asked and never printed back (C48)")

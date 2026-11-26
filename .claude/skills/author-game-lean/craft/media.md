@@ -12,7 +12,7 @@ On a card with a `Does:` block (every card from 2026-11-24 on), the rows that ap
 | C1267 | ask of each screen what the player should see that the words can't give; if nothing much, no spot | same | a media spot | reader |
 | C1249 | the field's screen kinds: 41% of room screens in top games carry a picture | — (why a place may have one) | a media spot | note |
 | C1250 | the room card stays bare in words; media goes to sex and talk | P02–P06 | a place is entered | reader |
-| C1265 | a chore alone, a one-liner, a notice, a door, or a room or system menu (a place's buttons, the wardrobe, a shop list) gets no spot; a person's menu, opened from their face, is the exception: see C596 in `craft/people.md`. A place's `image` is not a spot of this kind: it is that place's card on the menu it's entered from (`v2.py:24793`) | P06's meals and sleep; P34's two readers split on Mom's menu picture as built and played in P42 (2026-11-24); P02b1-c1, where home_hall FAILED C1265 because its six room cards carry the six room pictures | a media spot | reader |
+| C1265 | a chore alone, a one-liner, a notice, a door, or a room or system menu (a place's buttons, the wardrobe, a shop list) gets no spot; a person's menu, opened from their face, is the exception: see C596 in `craft/people.md`. A place's `image` is not a spot of this kind: it is that place's card on the menu it's entered from (`v2.py:24930`) | P06's meals and sleep; P34's two readers split on Mom's menu picture as built and played in P42 (2026-11-24); P02b1-c1, where home_hall FAILED C1265 because its six room cards carry the six room pictures | a media spot | reader |
 | C1262 | see `craft/body-moments.md` |  |  |  |
 | C1234 | the clip sits on the beat the player is reading | L125 | a media spot | reader |
 | L121 | media by kind of screen: every body moment, one everyday picture per scene; the every-screen overshoot was cut | first_term DECISIONS 251–252 cut solo everyday pictures that only repeat the line | a media spot | reader |
@@ -32,15 +32,15 @@ On a card with a `Does:` block (every card from 2026-11-24 on), the rows that ap
 
 ## The engine (cited)
 
-- A place's picture is one file, `image` on the `[[locations]]` row, with `image_search_queries` for the missing-media page (`v2.py:490`, `v2.py:499`).
-- That file renders only as the place's card on the menu it is entered from: `_render_location_nav_card_body` is the only reader of `location_images` (`v2.py:24783`, `v2.py:24793`). The place's own screen never shows it.
-- `pool_dir` names a folder; the game finds its files on disk and cycles them, one per visit (`v2.py:16391-16396`).
+- A place's picture is one file, `image` on the `[[locations]]` row, with `image_search_queries` for the missing-media page (read at `v2.py:500-519`).
+- That file renders only as the place's card on the menu it is entered from: `_render_location_nav_card_body` is the only reader of `location_images` (`v2.py:24917`, `v2.py:24925`). The place's own screen never shows it. **A place with hours drops its picture while it is shut:** the card shows the placeholder and when it opens (`v2.py:24955-24963`, `setup.navDestOpenNow`). So the picture is only ever seen while the place is open.
+- `pool_dir` names a folder; the game finds its files on disk and cycles them, one per visit (`v2.py:16533-16561`).
 - `pool = N` is a target, not a manifest: it says how many files to aim for, so a half-filled pool reads "3 of 4" (`apps/common/media_blocks.py:18-20`). Left out, it is 4 (`apps/common/media_blocks.py:33`). That's the default L119 warns about, so always write it.
 
 ## The shape
 
 1. **Sit on the payoff.** A spot goes right after the line where her body, his look or the act happens. The screen before it carries no spot.
-2. **A place gets at most one picture: one file, tier 0, with her in it.** Never the empty room. The engine shows it as the place's card on the menu she enters it from, never on the place's own screen (`v2.py:24793`), so it is not a door or menu spot under C1265. If the place's own screen needs a picture of her, that picture is a media block in a scene there. The top games put a picture on 41% of room screens (C1249); CoT, the model for `craft/places.md`, puts none on its 126 location screens, so this rule comes from the field, not from CoT, and a picture of her in the place is what first_term's lounger fix asked for (DECISIONS 258, `games/first_term/DECISIONS.md:959`).
+2. **A place gets at most one picture: one file, tier 0, with her in it.** Never the empty room. The engine shows it as the place's card on the menu she enters it from, never on the place's own screen (`v2.py:24925`), so it is not a door or menu spot under C1265. **It shows only while the place is open** (`v2.py:24955-24963`). So it must be true of the place open, with the people its hours put there. It never says the room is empty or that she is alone while someone is always in it. One way to write it: as that person sees her, with them out of frame (one person in frame, L120; the looker's view, C1281). A place with no hours shows at every hour, so it carries no one who is ever out of it. If the place's own screen needs a picture of her, that picture is a media block in a scene there. The top games put a picture on 41% of room screens (C1249); CoT, the model for `craft/places.md`, puts none on its 126 location screens, so this rule comes from the field, not from CoT, and a picture of her in the place is what first_term's lounger fix asked for (DECISIONS 258, `games/first_term/DECISIONS.md:959`).
 3. **Chores, doors, room and system menus, and solo everyday screens get none** (C1265). A person's menu gets their one picture (C596). A moment alone with her body is not one of them: a shower, dressing or undressing, the towel, bed, the mirror each get a picture of her (`craft/body-moments.md`; first_term_lean's P06 shower picture was "the shower running, steam on the glass"). An everyday picture that only repeats the line goes (first_term DECISIONS 251–252, `games/first_term/DECISIONS.md:952-953`).
 4. **Size the pool by tier:** 4 for a repeatable explicit spot or a `_t4` body moment on a repeat (`craft/body-moments.md`), 2 for a `_t3` look on a repeat, 1 for everything else.
 5. **A look shows what he sees.** Describe her, as seen from where he stands, with no man in frame.
@@ -51,7 +51,7 @@ On a card with a `Does:` block (every card from 2026-11-24 on), the rows that ap
 
 Roles, not a world: a café as a place, the opening's lodger scene, and a repeatable act later.
 
-**The café, its one place picture.** A place's picture is not a block: it is one file on the `[[locations]]` row, `image` with `image_search_queries` (`v2.py:490`, `v2.py:499`). There is no `pool` and no description field, so the search words carry her age and the place.
+**The café, its one place picture.** A place's picture is not a block: it is one file on the `[[locations]]` row, `image` with `image_search_queries` (`v2.py:513`, `v2.py:512`). There is no `pool` and no description field, so the search words carry her age and the place.
 
 ```toml
 [[locations]]
