@@ -1,20 +1,20 @@
 {
  "piece": "P33",
- "pass": 25,
+ "pass": 26,
  "screens": {
   "body_run.run": {
-   "text": "52e231e9336395b1",
+   "text": "4af8c9843be8c35d",
    "traits": "44136fa355b3678a",
    "facts": "446c2b70de750093",
    "facts2": "446c2b70de750093",
-   "all": "c37c733bf2e1f53f"
+   "all": "749c7b42690360c2"
   },
   "body_workout.lift": {
-   "text": "b361d7bf6afb9b1e",
+   "text": "2bf04bf8541f1d11",
    "traits": "44136fa355b3678a",
    "facts": "5b71a801d7d5bb46",
    "facts2": "5b71a801d7d5bb46",
-   "all": "1477ab4f21b4e32f"
+   "all": "1535eba035af4f5f"
   },
   "body_mirror.fix": {
    "text": "b734d31c0a6da3e7",
@@ -51,7 +51,7 @@
    "facts2": "44eb5528a5afca5f",
    "all": "1cd7264031187857"
   },
-  "*": "0394ea7853ec2d39"
+  "*": "261d942d4ed452dc"
  },
  "rows": {
   "B1": "5276068df1ca6fa9",
@@ -409,20 +409,20 @@
    "row": "B10",
    "screen": "body_run.run",
    "verdict": "PASS",
-   "line": "Your tits bounce in the sports top however tight you pulled it",
-   "why": "sneakers in the trigger only gate; prose unchanged and true on every visit (ran_once groups; pass-gated 'your pass'); hours from the location",
+   "line": "Your tits bounce in the sports top however tight you pulled it, and the leggings cling to your thighs with every stride.",
+   "why": "run lines split by ran_once (first / after, each behind its flag); no person, no past, no 'first time' outside its flag; gym 'mirrors on every wall' and the pass are backed (location description; pass condition on the trigger)",
    "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "52e231e9336395b1",
+    "text": "4af8c9843be8c35d",
     "traits": "44136fa355b3678a",
     "facts": "446c2b70de750093",
     "facts2": "446c2b70de750093",
-    "all": "c37c733bf2e1f53f"
+    "all": "749c7b42690360c2"
    },
    "row_hash": "c1c0e2ac2588a579",
-   "carried": true,
-   "pass": 22
+   "carried": false,
+   "pass": 26
   },
   {
    "row": "B10",
@@ -445,20 +445,20 @@
    "row": "B10",
    "screen": "body_workout.lift",
    "verdict": "PASS",
-   "line": "You show your pass at the desk and find a bench by the mirrors.",
-   "why": "sneakers in the trigger only gate; prose unchanged and true on every visit (ran_once groups; pass-gated 'your pass'); hours from the location",
+   "line": "You bend for the kettlebell, and in the mirror the leggings pull tight across your ass.",
+   "why": "run lines split by ran_once (first / after, each behind its flag); no person, no past, no 'first time' outside its flag; gym 'mirrors on every wall' and the pass are backed (location description; pass condition on the trigger)",
    "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "b361d7bf6afb9b1e",
+    "text": "2bf04bf8541f1d11",
     "traits": "44136fa355b3678a",
     "facts": "5b71a801d7d5bb46",
     "facts2": "5b71a801d7d5bb46",
-    "all": "1477ab4f21b4e32f"
+    "all": "1535eba035af4f5f"
    },
    "row_hash": "c1c0e2ac2588a579",
-   "carried": true,
-   "pass": 22
+   "carried": false,
+   "pass": 26
   },
   {
    "row": "B11",
@@ -1301,20 +1301,20 @@
    "row": "B8",
    "screen": "body_run.run",
    "verdict": "PASS",
-   "line": "Go for a run \u2014 Needs leggings, a sports top and sneakers",
-   "why": "PLAN.md:372 now reads 'a top and a bottom, or a dress, and shoes (any pair; P67)' and PLAN.md:375 'the leggings, sports top and sneakers (P67)'; the trigger conditions (leggings, sports_top, sneakers equipped, 7_final_game.toml:5395) and the greyed line name the same three garments; no number on the screen to disagree",
+   "line": "Your tits bounce in the sports top however tight you pulled it, and the leggings cling to your thighs with every stride.",
+   "why": "every garment named (leggings, sports top) is in the trigger's clothing_item equipped conditions; 45 min / 15 energy and 1 hour / 20 energy match PLAN \u00a78b",
    "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "52e231e9336395b1",
+    "text": "4af8c9843be8c35d",
     "traits": "44136fa355b3678a",
     "facts": "446c2b70de750093",
     "facts2": "446c2b70de750093",
-    "all": "c37c733bf2e1f53f"
+    "all": "749c7b42690360c2"
    },
    "row_hash": "80d415cf08e0ebfe",
-   "carried": true,
-   "pass": 23
+   "carried": false,
+   "pass": 26
   },
   {
    "row": "B8",
@@ -1337,20 +1337,20 @@
    "row": "B8",
    "screen": "body_workout.lift",
    "verdict": "PASS",
-   "line": "Work out \u2014 Needs a gym pass from the front desk, leggings, a sports top and sneakers",
-   "why": "PLAN.md:372 now reads 'a top and a bottom, or a dress, and shoes (any pair; P67)' and PLAN.md:375 'the leggings, sports top and sneakers (P67)'; the conditions (the same three garments plus a running day/week/month pass, 7_final_game.toml:5432) match the greyed line; pass day counts lt 1 / lt 7 / lt 30 match gym_desk's",
+   "line": "You bend for the kettlebell, and in the mirror the leggings pull tight across your ass.",
+   "why": "every garment named (leggings, sports top) is in the trigger's clothing_item equipped conditions; 45 min / 15 energy and 1 hour / 20 energy match PLAN \u00a78b",
    "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "b361d7bf6afb9b1e",
+    "text": "2bf04bf8541f1d11",
     "traits": "44136fa355b3678a",
     "facts": "5b71a801d7d5bb46",
     "facts2": "5b71a801d7d5bb46",
-    "all": "1477ab4f21b4e32f"
+    "all": "1535eba035af4f5f"
    },
    "row_hash": "80d415cf08e0ebfe",
-   "carried": true,
-   "pass": 23
+   "carried": false,
+   "pass": 26
   },
   {
    "row": "B9",
@@ -1447,39 +1447,39 @@
    "row": "C1158",
    "screen": "body_run.run",
    "verdict": "PASS",
-   "line": "Your tits bounce in the sports top however tight you pulled it",
-   "why": "the only garment named (sports top, run) is in the trigger; sneakers added to the conditions, not named in prose",
+   "line": "Your tits bounce in the sports top however tight you pulled it, and the leggings cling to your thighs with every stride.",
+   "why": "leggings and sports top backed by the trigger's equipped conditions",
    "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "52e231e9336395b1",
+    "text": "4af8c9843be8c35d",
     "traits": "44136fa355b3678a",
     "facts": "446c2b70de750093",
     "facts2": "446c2b70de750093",
-    "all": "c37c733bf2e1f53f"
+    "all": "749c7b42690360c2"
    },
    "row_hash": "f40f51a0fd6cfd10",
-   "carried": true,
-   "pass": 22
+   "carried": false,
+   "pass": 26
   },
   {
    "row": "C1158",
    "screen": "body_workout.lift",
    "verdict": "PASS",
-   "line": "You show your pass at the desk and find a bench by the mirrors.",
-   "why": "no garment named; the clothes are conditions",
+   "line": "You bend for the kettlebell, and in the mirror the leggings pull tight across your ass.",
+   "why": "leggings and sports top backed by the trigger's equipped conditions",
    "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "b361d7bf6afb9b1e",
+    "text": "2bf04bf8541f1d11",
     "traits": "44136fa355b3678a",
     "facts": "5b71a801d7d5bb46",
     "facts2": "5b71a801d7d5bb46",
-    "all": "1477ab4f21b4e32f"
+    "all": "1535eba035af4f5f"
    },
    "row_hash": "f40f51a0fd6cfd10",
-   "carried": true,
-   "pass": 22
+   "carried": false,
+   "pass": 26
   },
   {
    "row": "C1173",
@@ -1504,7 +1504,7 @@
    "note": true,
    "screen_hash": "0394ea7853ec2d39",
    "row_hash": "655e8e2b731598c9",
-   "carried": false,
+   "carried": true,
    "pass": 25
   },
   {
@@ -1606,39 +1606,39 @@
    "row": "C1206",
    "screen": "body_run.run",
    "verdict": "PASS",
-   "line": "Your tits bounce in the sports top however tight you pulled it",
-   "why": "no garment she may not be wearing; she is in leggings, sports top and sneakers by the trigger",
+   "line": "Your tits bounce in the sports top however tight you pulled it, and the leggings cling to your thighs with every stride.",
+   "why": "she can only reach the screen wearing leggings, sports top and sneakers; nothing else is named",
    "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "52e231e9336395b1",
+    "text": "4af8c9843be8c35d",
     "traits": "44136fa355b3678a",
     "facts": "446c2b70de750093",
     "facts2": "446c2b70de750093",
-    "all": "c37c733bf2e1f53f"
+    "all": "749c7b42690360c2"
    },
    "row_hash": "bfff76edbee583de",
-   "carried": true,
-   "pass": 22
+   "carried": false,
+   "pass": 26
   },
   {
    "row": "C1206",
    "screen": "body_workout.lift",
    "verdict": "PASS",
-   "line": "You show your pass at the desk and find a bench by the mirrors.",
-   "why": "no garment she may not be wearing; she is in leggings, sports top and sneakers by the trigger",
+   "line": "You bend for the kettlebell, and in the mirror the leggings pull tight across your ass.",
+   "why": "she can only reach the screen wearing leggings, sports top and sneakers; nothing else is named",
    "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "b361d7bf6afb9b1e",
+    "text": "2bf04bf8541f1d11",
     "traits": "44136fa355b3678a",
     "facts": "5b71a801d7d5bb46",
     "facts2": "5b71a801d7d5bb46",
-    "all": "1477ab4f21b4e32f"
+    "all": "1535eba035af4f5f"
    },
    "row_hash": "bfff76edbee583de",
-   "carried": true,
-   "pass": 22
+   "carried": false,
+   "pass": 26
   },
   {
    "row": "C1220",
@@ -2505,7 +2505,7 @@
    "note": false,
    "screen_hash": "0394ea7853ec2d39",
    "row_hash": "d119dfe665f76359",
-   "carried": false,
+   "carried": true,
    "pass": 25
   },
   {
@@ -2958,20 +2958,20 @@
    "row": "C460",
    "screen": "body_run.run",
    "verdict": "PASS",
-   "line": "Your tits bounce in the sports top however tight you pulled it",
-   "why": "unchanged prose, still true; the new sneakers condition only narrows who reaches it",
+   "line": "Your tits bounce in the sports top however tight you pulled it, and the leggings cling to your thighs with every stride.",
+   "why": "no claim about who is there, the hour or a past; the cut removed the only person-claims",
    "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "52e231e9336395b1",
+    "text": "4af8c9843be8c35d",
     "traits": "44136fa355b3678a",
     "facts": "446c2b70de750093",
     "facts2": "446c2b70de750093",
-    "all": "c37c733bf2e1f53f"
+    "all": "749c7b42690360c2"
    },
    "row_hash": "67e48e60d5053a2e",
-   "carried": true,
-   "pass": 22
+   "carried": false,
+   "pass": 26
   },
   {
    "row": "C460",
@@ -2994,20 +2994,20 @@
    "row": "C460",
    "screen": "body_workout.lift",
    "verdict": "PASS",
-   "line": "You show your pass at the desk and find a bench by the mirrors.",
-   "why": "unchanged prose, still true; the new sneakers condition only narrows who reaches it",
+   "line": "You bend for the kettlebell, and in the mirror the leggings pull tight across your ass.",
+   "why": "no claim about who is there, the hour or a past; the cut removed the only person-claims",
    "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "b361d7bf6afb9b1e",
+    "text": "2bf04bf8541f1d11",
     "traits": "44136fa355b3678a",
     "facts": "5b71a801d7d5bb46",
     "facts2": "5b71a801d7d5bb46",
-    "all": "1477ab4f21b4e32f"
+    "all": "1535eba035af4f5f"
    },
    "row_hash": "67e48e60d5053a2e",
-   "carried": true,
-   "pass": 22
+   "carried": false,
+   "pass": 26
   },
   {
    "row": "C461",
@@ -3098,19 +3098,19 @@
    "screen": "body_run.run",
    "verdict": "PASS",
    "line": "Your legs will feel it later.",
-   "why": "texture and her opinion",
+   "why": "texture of the exercise and her body; nothing that can clash",
    "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "52e231e9336395b1",
+    "text": "4af8c9843be8c35d",
     "traits": "44136fa355b3678a",
     "facts": "446c2b70de750093",
     "facts2": "446c2b70de750093",
-    "all": "c37c733bf2e1f53f"
+    "all": "749c7b42690360c2"
    },
    "row_hash": "310706ee076318f2",
-   "carried": true,
-   "pass": 22
+   "carried": false,
+   "pass": 26
   },
   {
    "row": "C461",
@@ -3133,20 +3133,20 @@
    "row": "C461",
    "screen": "body_workout.lift",
    "verdict": "PASS",
-   "line": "Next time you'll know where to stand.",
-   "why": "texture and her opinion",
+   "line": "Next time you'll go heavier.",
+   "why": "texture of the exercise and her body; nothing that can clash",
    "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "b361d7bf6afb9b1e",
+    "text": "2bf04bf8541f1d11",
     "traits": "44136fa355b3678a",
     "facts": "5b71a801d7d5bb46",
     "facts2": "5b71a801d7d5bb46",
-    "all": "1477ab4f21b4e32f"
+    "all": "1535eba035af4f5f"
    },
    "row_hash": "310706ee076318f2",
-   "carried": true,
-   "pass": 22
+   "carried": false,
+   "pass": 26
   },
   {
    "row": "C519",
@@ -5185,19 +5185,19 @@
    "screen": "body_run.run",
    "verdict": "PASS",
    "line": "Done",
-   "why": "Done spends 45 / 60 minutes",
+   "why": "Done spends 45 (run) / 60 (workout) minutes",
    "cause": null,
    "note": true,
    "screen_hash": {
-    "text": "52e231e9336395b1",
+    "text": "4af8c9843be8c35d",
     "traits": "44136fa355b3678a",
     "facts": "446c2b70de750093",
     "facts2": "446c2b70de750093",
-    "all": "c37c733bf2e1f53f"
+    "all": "749c7b42690360c2"
    },
    "row_hash": "4e86d143688ba8e5",
-   "carried": true,
-   "pass": 22
+   "carried": false,
+   "pass": 26
   },
   {
    "row": "C927",
@@ -5221,19 +5221,19 @@
    "screen": "body_workout.lift",
    "verdict": "PASS",
    "line": "Done",
-   "why": "Done spends 45 / 60 minutes",
+   "why": "Done spends 45 (run) / 60 (workout) minutes",
    "cause": null,
    "note": true,
    "screen_hash": {
-    "text": "b361d7bf6afb9b1e",
+    "text": "2bf04bf8541f1d11",
     "traits": "44136fa355b3678a",
     "facts": "5b71a801d7d5bb46",
     "facts2": "5b71a801d7d5bb46",
-    "all": "1477ab4f21b4e32f"
+    "all": "1535eba035af4f5f"
    },
    "row_hash": "4e86d143688ba8e5",
-   "carried": true,
-   "pass": 22
+   "carried": false,
+   "pass": 26
   },
   {
    "row": "C928",
@@ -5629,19 +5629,19 @@
    "screen": "body_run.run",
    "verdict": "N/A",
    "line": "\u2014",
-   "why": "no time_of_day condition; hours are the location's (park 06-21, gym 06-22)",
+   "why": "no time_of_day condition on the screen; hours are the location's (park 06-21, gym 06-22)",
    "cause": null,
    "note": true,
    "screen_hash": {
-    "text": "52e231e9336395b1",
+    "text": "4af8c9843be8c35d",
     "traits": "44136fa355b3678a",
     "facts": "446c2b70de750093",
     "facts2": "446c2b70de750093",
-    "all": "c37c733bf2e1f53f"
+    "all": "749c7b42690360c2"
    },
    "row_hash": "1aadffd96e76381c",
-   "carried": true,
-   "pass": 22
+   "carried": false,
+   "pass": 26
   },
   {
    "row": "C931",
@@ -5665,19 +5665,19 @@
    "screen": "body_workout.lift",
    "verdict": "N/A",
    "line": "\u2014",
-   "why": "no time_of_day condition; hours are the location's (park 06-21, gym 06-22)",
+   "why": "no time_of_day condition on the screen; hours are the location's (park 06-21, gym 06-22)",
    "cause": null,
    "note": true,
    "screen_hash": {
-    "text": "b361d7bf6afb9b1e",
+    "text": "2bf04bf8541f1d11",
     "traits": "44136fa355b3678a",
     "facts": "5b71a801d7d5bb46",
     "facts2": "5b71a801d7d5bb46",
-    "all": "1477ab4f21b4e32f"
+    "all": "1535eba035af4f5f"
    },
    "row_hash": "1aadffd96e76381c",
-   "carried": true,
-   "pass": 22
+   "carried": false,
+   "pass": 26
   },
   {
    "row": "C951",
@@ -5836,20 +5836,20 @@
    "row": "L106",
    "screen": "body_run.run",
    "verdict": "PASS",
-   "line": "a guy coming the other way",
-   "why": "unnamed crowd only; no person the rows don't put there",
+   "line": "Your tits bounce in the sports top however tight you pulled it, and the leggings cling to your thighs with every stride.",
+   "why": "no line names anyone; nobody is claimed present (who_is_where: Marco 06-10, 17-21 weekdays, 08-14 Sat at the gym; not mentioned)",
    "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "52e231e9336395b1",
+    "text": "4af8c9843be8c35d",
     "traits": "44136fa355b3678a",
     "facts": "446c2b70de750093",
     "facts2": "446c2b70de750093",
-    "all": "c37c733bf2e1f53f"
+    "all": "749c7b42690360c2"
    },
    "row_hash": "13a714429d15f3b2",
-   "carried": true,
-   "pass": 22
+   "carried": false,
+   "pass": 26
   },
   {
    "row": "L106",
@@ -5872,20 +5872,20 @@
    "row": "L106",
    "screen": "body_workout.lift",
    "verdict": "PASS",
-   "line": "Two guys at the rack stop talking",
-   "why": "unnamed crowd only; no person the rows don't put there",
+   "line": "You bend for the kettlebell, and in the mirror the leggings pull tight across your ass.",
+   "why": "no line names anyone; nobody is claimed present (who_is_where: Marco 06-10, 17-21 weekdays, 08-14 Sat at the gym; not mentioned)",
    "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "b361d7bf6afb9b1e",
+    "text": "2bf04bf8541f1d11",
     "traits": "44136fa355b3678a",
     "facts": "5b71a801d7d5bb46",
     "facts2": "5b71a801d7d5bb46",
-    "all": "1477ab4f21b4e32f"
+    "all": "1535eba035af4f5f"
    },
    "row_hash": "13a714429d15f3b2",
-   "carried": true,
-   "pass": 22
+   "carried": false,
+   "pass": 26
   },
   {
    "row": "L116",
@@ -6063,15 +6063,15 @@
    "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "52e231e9336395b1",
+    "text": "4af8c9843be8c35d",
     "traits": "44136fa355b3678a",
     "facts": "446c2b70de750093",
     "facts2": "446c2b70de750093",
-    "all": "c37c733bf2e1f53f"
+    "all": "749c7b42690360c2"
    },
    "row_hash": "e64ce2672d85d2d8",
-   "carried": true,
-   "pass": 22
+   "carried": false,
+   "pass": 26
   },
   {
    "row": "L167",
@@ -6099,15 +6099,15 @@
    "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "b361d7bf6afb9b1e",
+    "text": "2bf04bf8541f1d11",
     "traits": "44136fa355b3678a",
     "facts": "5b71a801d7d5bb46",
     "facts2": "5b71a801d7d5bb46",
-    "all": "1477ab4f21b4e32f"
+    "all": "1535eba035af4f5f"
    },
    "row_hash": "e64ce2672d85d2d8",
-   "carried": true,
-   "pass": 22
+   "carried": false,
+   "pass": 26
   },
   {
    "row": "L170",
@@ -6151,8 +6151,8 @@
  ],
  "causes": [],
  "pending": [],
- "asked": 2,
- "answered": 2,
+ "asked": 20,
+ "answered": 20,
  "pass_items": [],
  "unowed": []
 }

@@ -5872,10 +5872,10 @@ id = "run"
 name = "Go for a run"
 blocks = [
   { type = "group", props = { conditions = { version = "1.0", logic = "AND", items = [{ type = "flag", subject = "player", flag_key = "ran_once", operator = "is_false" }] } }, blocks = [
-    { type = "paragraph", content = "You start slow round the loop, then faster. Your tits bounce in the sports top however tight you pulled it, and a guy coming the other way turns his head and keeps it turned until he's past you. Your face burns. You pick up the pace and don't look back. Your legs will feel it later." },
+    { type = "paragraph", content = "You start slow round the loop, then faster. Your tits bounce in the sports top however tight you pulled it, and the leggings cling to your thighs with every stride. Your face is hot by the second bend. You keep the pace. Your legs will feel it later." },
   ] },
   { type = "group", props = { conditions = { version = "1.0", logic = "AND", items = [{ type = "flag", subject = "player", flag_key = "ran_once", operator = "is_true" }] } }, blocks = [
-    { type = "paragraph", content = "Two laps of the loop, your breath loud in your ears. A dog walker's eyes follow your ass round the pond. You keep your eyes on the path, and wonder who'll be out here next time." },
+    { type = "paragraph", content = "Two laps of the loop, your breath loud in your ears. Sweat soaks the back of your sports top, and your ass aches in the leggings by the second lap. You keep your eyes on the path, and wonder how far you'll get next time." },
   ] },
   { type = "image", props = { description = "Seen from the path: a woman of 18 running toward the camera in leggings and a sports top on a park loop by a pond. No man in frame.", search_queries = ["woman 18 jogging leggings sports bra park path gif", "girl running toward camera park pond gif"], pool_dir = "look/park_run_t3", pool = 2 } },
 ]
@@ -5914,7 +5914,7 @@ conditions = { version = "1.0", logic = "AND", items = [{ type = "npc_at_locatio
 id = "lift"
 name = "Work out"
 blocks = [
-  { type = "paragraph", content = "You show your pass at the desk and find a bench by the mirrors. Two guys at the rack stop talking when you bend for the kettlebell. You feel it on the back of your thighs. You finish the set with your back to them. Next time you'll know where to stand." },
+  { type = "paragraph", content = "You show your pass at the desk and find a bench by the mirrors. You bend for the kettlebell, and in the mirror the leggings pull tight across your ass. Your thighs burn by the tenth rep. You finish the set, breathing hard. Next time you'll go heavier." },
 ]
 
 [canvases.nodes.exit_block]
