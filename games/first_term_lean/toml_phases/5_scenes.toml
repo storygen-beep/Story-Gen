@@ -4166,7 +4166,7 @@ conditions = { version = "1.0", logic = "AND", items = [{ type = "npc_at_locatio
 id = "porch"
 name = "The man on the porch"
 blocks = [
-  { type = "paragraph", content = "The man next door is in the one chair on his porch, a mug on the rail, like every Sunday. Today he puts the mug down when he sees you, and his eyes follow you up his path, taking their time over your legs, like he's got all day. Your skin prickles." },
+  { type = "paragraph", content = "The man next door is in the one chair on his porch, a mug on the rail, like every Sunday. Today he puts the mug down when he sees you, and his eyes go over you, taking their time over your legs, like he's got all day. Your skin prickles." },
   { type = "dialog", content = "Well. Look who stopped being a kid. Come here a minute, little lady.", props = { speaker = "npc", npcId = "npc_vance" } },
   { type = "image", props = { description = "Her view from the pavement (she is 18, out of frame): a man of 54 in a chair on a small front porch, a mug on the rail, watching the camera.", search_queries = ["man 54 sitting on front porch chair mug watching camera suburban street", "older man on porch looking at the street"], pool_dir = "people/vance_porch_t0", pool = 1 } },
 ]
@@ -6409,12 +6409,13 @@ name = "The man next door"
 location = "hood_next_door"
 # P55 — fires on arrival, never a button (LO 2026-11-26: "2nd one", "Go"; craft/walk-ins.md C2195).
 trigger_mode = "random"
+# P70 — weekday evenings, or a Saturday at his porch hours (his rows), so a Saturday has a hello.
 # P69 — only on walking up from the street, never on coming back from his menu (reader pass 2; v2.py checkRandomEncounters).
 entry_only_from = ["hood_street"]
 chance = 0.35
 is_repeatable = true
 max_triggers_per_day = 1
-conditions = { version = "1.0", logic = "AND", items = [{ type = "weekday", weekdays = [0, 1, 2, 3, 4] }, { type = "time_of_day", start_time = "17:00", end_time = "20:00" }, { type = "npc_at_location", npc_id = "npc_vance", location_id = "hood_next_door", operator = "is_present" }] }
+conditions = { version = "1.0", logic = "AND", items = [{ type = "group", logic = "OR", items = [{ type = "group", logic = "AND", items = [{ type = "weekday", weekdays = [0, 1, 2, 3, 4] }, { type = "time_of_day", start_time = "17:00", end_time = "20:00" }] }, { type = "weekday", weekdays = [5] }] }, { type = "npc_at_location", npc_id = "npc_vance", location_id = "hood_next_door", operator = "is_present" }] }
 
 [[canvases.nodes]]
 id = "moment"
@@ -6450,10 +6451,22 @@ id = "hello"
 name = "The man next door"
 blocks = [
   { type = "group", props = { conditions = { version = "1.0", logic = "AND", items = [{ type = "flag", subject = "player", flag_key = "met_vance", operator = "is_true" }] } }, blocks = [
-    { type = "dialog", content = "Evening, little lady.", props = { speaker = "npc", npcId = "npc_vance" } },
+    # P70 — he greets her by the hour: Saturday mornings are porch hours too (reader pass 1).
+    { type = "group", props = { conditions = { version = "1.0", logic = "AND", items = [{ type = "time_of_day", start_time = "00:00", end_time = "12:00" }] } }, blocks = [
+      { type = "dialog", content = "Morning, little lady.", props = { speaker = "npc", npcId = "npc_vance" } },
+    ] },
+    { type = "group", props = { conditions = { version = "1.0", logic = "AND", items = [{ type = "time_of_day", start_time = "12:00", end_time = "00:00" }] } }, blocks = [
+      { type = "dialog", content = "Evening, little lady.", props = { speaker = "npc", npcId = "npc_vance" } },
+    ] },
   ] },
   { type = "group", props = { conditions = { version = "1.0", logic = "AND", items = [{ type = "flag", subject = "player", flag_key = "met_vance", operator = "is_false" }] } }, blocks = [
-    { type = "dialog", content = "Evening, little lady. Vance. I own your house.", props = { speaker = "npc", npcId = "npc_vance" } },
+    # P70 — he greets her by the hour: Saturday mornings are porch hours too (reader pass 1).
+    { type = "group", props = { conditions = { version = "1.0", logic = "AND", items = [{ type = "time_of_day", start_time = "00:00", end_time = "12:00" }] } }, blocks = [
+      { type = "dialog", content = "Morning, little lady. Vance. I own your house.", props = { speaker = "npc", npcId = "npc_vance" } },
+    ] },
+    { type = "group", props = { conditions = { version = "1.0", logic = "AND", items = [{ type = "time_of_day", start_time = "12:00", end_time = "00:00" }] } }, blocks = [
+      { type = "dialog", content = "Evening, little lady. Vance. I own your house.", props = { speaker = "npc", npcId = "npc_vance" } },
+    ] },
     { type = "paragraph", content = "He looks you over, slow, from your feet up, and doesn't hide it." },
     { type = "paragraph", content = "Your skin prickles. You keep your arms at your sides." },
     { type = "dialog", content = "Your stepdad pays me Sundays. When he doesn't, I'm the one who knocks. Tell him I said hello.", props = { speaker = "npc", npcId = "npc_vance" } },

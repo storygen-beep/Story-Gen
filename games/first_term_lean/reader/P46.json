@@ -1,6 +1,6 @@
 {
  "piece": "P46",
- "pass": 12,
+ "pass": 14,
  "screens": {
   "story_hints.paying_your_way": {
    "text": "e0e3d0f456f740b4",
@@ -45,10 +45,10 @@
    "all": "ec9d9ebfffebad13"
   },
   "story_hints.the_man_next_door": {
-   "text": "c2d78b2f5fe05d4f",
-   "facts": "c2d78b2f5fe05d4f",
-   "facts2": "c2d78b2f5fe05d4f",
-   "all": "c2d78b2f5fe05d4f"
+   "text": "1bad6c706359185e",
+   "facts": "1bad6c706359185e",
+   "facts2": "1bad6c706359185e",
+   "all": "1bad6c706359185e"
   },
   "story_hints.the_clothes_shop": {
    "text": "3effc19959a4c3b0",
@@ -518,7 +518,7 @@
    "facts2": "5efc01cd393fef01",
    "all": "5efc01cd393fef01"
   },
-  "*": "d0dff5d95b87f2d8"
+  "*": "b0a27944076e58a6"
  },
  "rows": {
   "B1": "5276068df1ca6fa9",
@@ -1491,19 +1491,19 @@
    "row": "C124",
    "screen": "story_hints.the_man_next_door",
    "verdict": "PASS",
-   "line": "The man next door sits on his porch, weekday evenings 5 to 8pm and on Sundays. Go next door and say hello.",
-   "why": "slow, not lost: a Sunday visit in his hours always meets him (street_meet_vance, one-time, no chance); a weekday visit rolls 0.35 per arrival. The empty-looking porch on a missed roll is P69's places#2 cause, judged on hood_next_door",
+   "line": "The man next door sits on his porch, weekday evenings 5 to 8pm, and weekends 9am to noon and 5 to 8pm. Go next door and say hello.",
+   "why": "not lost: Sunday in his hours gives street_meet_vance (manual button, no chance) while unmet; weekday evenings and Saturday roll 0.35 per arrival from the street",
    "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "c2d78b2f5fe05d4f",
-    "facts": "c2d78b2f5fe05d4f",
-    "facts2": "c2d78b2f5fe05d4f",
-    "all": "c2d78b2f5fe05d4f"
+    "text": "1bad6c706359185e",
+    "facts": "1bad6c706359185e",
+    "facts2": "1bad6c706359185e",
+    "all": "1bad6c706359185e"
    },
    "row_hash": "6eb13e48e8502791",
    "carried": false,
-   "pass": 12
+   "pass": 14
   },
   {
    "row": "C124",
@@ -1782,19 +1782,19 @@
    "row": "C1366",
    "screen": "story_hints.the_man_next_door",
    "verdict": "PASS",
-   "line": "The man next door sits on his porch, weekday evenings 5 to 8pm and on Sundays. Go next door and say hello.",
-   "why": "names the House Next Door ('next door'), where his rows and scenes now are",
+   "line": "The man next door sits on his porch, weekday evenings 5 to 8pm, and weekends 9am to noon and 5 to 8pm. Go next door and say hello.",
+   "why": "names next door, where his rows and scenes are",
    "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "c2d78b2f5fe05d4f",
-    "facts": "c2d78b2f5fe05d4f",
-    "facts2": "c2d78b2f5fe05d4f",
-    "all": "c2d78b2f5fe05d4f"
+    "text": "1bad6c706359185e",
+    "facts": "1bad6c706359185e",
+    "facts2": "1bad6c706359185e",
+    "all": "1bad6c706359185e"
    },
    "row_hash": "bf7edbd0ddd9e7b7",
    "carried": false,
-   "pass": 12
+   "pass": 14
   },
   {
    "row": "C1366",
@@ -1975,19 +1975,19 @@
    "row": "C140",
    "screen": "story_hints.the_man_next_door",
    "verdict": "PASS",
-   "line": "end (met_vance is_true)",
-   "why": "ends 'for now'; his walk-ins and Talk recur",
+   "line": "The man next door sits on his porch, weekday evenings 5 to 8pm, and weekends 9am to noon and 5 to 8pm. Go next door and say hello.",
+   "why": "ends for now on met_vance; his walk-ins recur",
    "cause": null,
    "note": true,
    "screen_hash": {
-    "text": "c2d78b2f5fe05d4f",
-    "facts": "c2d78b2f5fe05d4f",
-    "facts2": "c2d78b2f5fe05d4f",
-    "all": "c2d78b2f5fe05d4f"
+    "text": "1bad6c706359185e",
+    "facts": "1bad6c706359185e",
+    "facts2": "1bad6c706359185e",
+    "all": "1bad6c706359185e"
    },
    "row_hash": "b83b93c2f7e2d41f",
    "carried": false,
-   "pass": 12
+   "pass": 14
   },
   {
    "row": "C140",
@@ -2233,19 +2233,19 @@
    "row": "C1619",
    "screen": "story_hints.the_man_next_door",
    "verdict": "PASS",
-   "line": "The man next door sits on his porch, weekday evenings 5 to 8pm and on Sundays. Go next door and say hello.",
-   "why": "a storyline with two steps",
+   "line": "The man next door sits on his porch, weekday evenings 5 to 8pm, and weekends 9am to noon and 5 to 8pm. Go next door and say hello.",
+   "why": "a storyline with steps: the hello, then end",
    "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "c2d78b2f5fe05d4f",
-    "facts": "c2d78b2f5fe05d4f",
-    "facts2": "c2d78b2f5fe05d4f",
-    "all": "c2d78b2f5fe05d4f"
+    "text": "1bad6c706359185e",
+    "facts": "1bad6c706359185e",
+    "facts2": "1bad6c706359185e",
+    "all": "1bad6c706359185e"
    },
    "row_hash": "80c98d00ce7d3bf8",
    "carried": false,
-   "pass": 12
+   "pass": 14
   },
   {
    "row": "C1619",
@@ -2478,19 +2478,19 @@
    "row": "C215",
    "screen": "story_hints.the_man_next_door",
    "verdict": "PASS",
-   "line": "end (met_vance is_true)",
-   "why": "'for now', never 'Arc complete'",
+   "line": "The man next door sits on his porch, weekday evenings 5 to 8pm, and weekends 9am to noon and 5 to 8pm. Go next door and say hello.",
+   "why": "never 'Arc complete'",
    "cause": null,
    "note": true,
    "screen_hash": {
-    "text": "c2d78b2f5fe05d4f",
-    "facts": "c2d78b2f5fe05d4f",
-    "facts2": "c2d78b2f5fe05d4f",
-    "all": "c2d78b2f5fe05d4f"
+    "text": "1bad6c706359185e",
+    "facts": "1bad6c706359185e",
+    "facts2": "1bad6c706359185e",
+    "all": "1bad6c706359185e"
    },
    "row_hash": "3b13472a8f7c42da",
    "carried": false,
-   "pass": 12
+   "pass": 14
   },
   {
    "row": "C215",
@@ -2671,19 +2671,19 @@
    "row": "C217",
    "screen": "story_hints.the_man_next_door",
    "verdict": "PASS",
-   "line": "end (met_vance is_true)",
-   "why": "met_vance is set on the Done of the weekday hello and of the Sunday meeting, on the way out",
+   "line": "The man next door sits on his porch, weekday evenings 5 to 8pm, and weekends 9am to noon and 5 to 8pm. Go next door and say hello.",
+   "why": "met_vance set on the way out of walk_vance_ledger.hello and street_meet_vance.after",
    "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "c2d78b2f5fe05d4f",
-    "facts": "c2d78b2f5fe05d4f",
-    "facts2": "c2d78b2f5fe05d4f",
-    "all": "c2d78b2f5fe05d4f"
+    "text": "1bad6c706359185e",
+    "facts": "1bad6c706359185e",
+    "facts2": "1bad6c706359185e",
+    "all": "1bad6c706359185e"
    },
    "row_hash": "7bb70ca4ff31e145",
    "carried": false,
-   "pass": 12
+   "pass": 14
   },
   {
    "row": "C217",
@@ -2864,19 +2864,19 @@
    "row": "C2176",
    "screen": "story_hints.the_man_next_door",
    "verdict": "PASS",
-   "line": "end (met_vance is_true)",
+   "line": "The man next door sits on his porch, weekday evenings 5 to 8pm, and weekends 9am to noon and 5 to 8pm. Go next door and say hello.",
    "why": "met_vance set by walk_vance_ledger.hello and street_meet_vance.after",
    "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "c2d78b2f5fe05d4f",
-    "facts": "c2d78b2f5fe05d4f",
-    "facts2": "c2d78b2f5fe05d4f",
-    "all": "c2d78b2f5fe05d4f"
+    "text": "1bad6c706359185e",
+    "facts": "1bad6c706359185e",
+    "facts2": "1bad6c706359185e",
+    "all": "1bad6c706359185e"
    },
    "row_hash": "03aca88c8939cd81",
    "carried": false,
-   "pass": 12
+   "pass": 14
   },
   {
    "row": "C2176",
@@ -3148,19 +3148,19 @@
    "row": "C34",
    "screen": "story_hints.the_man_next_door",
    "verdict": "PASS",
-   "line": "The man next door sits on his porch, weekday evenings 5 to 8pm and on Sundays. Go next door and say hello.",
-   "why": "no date; weekdays and Sundays as rules",
+   "line": "The man next door sits on his porch, weekday evenings 5 to 8pm, and weekends 9am to noon and 5 to 8pm. Go next door and say hello.",
+   "why": "no date; hours as rules",
    "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "c2d78b2f5fe05d4f",
-    "facts": "c2d78b2f5fe05d4f",
-    "facts2": "c2d78b2f5fe05d4f",
-    "all": "c2d78b2f5fe05d4f"
+    "text": "1bad6c706359185e",
+    "facts": "1bad6c706359185e",
+    "facts2": "1bad6c706359185e",
+    "all": "1bad6c706359185e"
    },
    "row_hash": "ba026f3c4badeca2",
    "carried": false,
-   "pass": 12
+   "pass": 14
   },
   {
    "row": "C34",
@@ -3341,19 +3341,19 @@
    "row": "C35",
    "screen": "story_hints.the_man_next_door",
    "verdict": "PASS",
-   "line": "end (met_vance is_true)",
-   "why": "points at the recurring events",
+   "line": "The man next door sits on his porch, weekday evenings 5 to 8pm, and weekends 9am to noon and 5 to 8pm. Go next door and say hello.",
+   "why": "points at the recurring porch scenes",
    "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "c2d78b2f5fe05d4f",
-    "facts": "c2d78b2f5fe05d4f",
-    "facts2": "c2d78b2f5fe05d4f",
-    "all": "c2d78b2f5fe05d4f"
+    "text": "1bad6c706359185e",
+    "facts": "1bad6c706359185e",
+    "facts2": "1bad6c706359185e",
+    "all": "1bad6c706359185e"
    },
    "row_hash": "4fe71dee68944f61",
    "carried": false,
-   "pass": 12
+   "pass": 14
   },
   {
    "row": "C35",
@@ -3534,19 +3534,19 @@
    "row": "C36",
    "screen": "story_hints.the_man_next_door",
    "verdict": "PASS",
-   "line": "end (met_vance is_true)",
+   "line": "The man next door sits on his porch, weekday evenings 5 to 8pm, and weekends 9am to noon and 5 to 8pm. Go next door and say hello.",
    "why": "the end step reads met_vance",
    "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "c2d78b2f5fe05d4f",
-    "facts": "c2d78b2f5fe05d4f",
-    "facts2": "c2d78b2f5fe05d4f",
-    "all": "c2d78b2f5fe05d4f"
+    "text": "1bad6c706359185e",
+    "facts": "1bad6c706359185e",
+    "facts2": "1bad6c706359185e",
+    "all": "1bad6c706359185e"
    },
    "row_hash": "ccf2da275f59cae3",
    "carried": false,
-   "pass": 12
+   "pass": 14
   },
   {
    "row": "C36",
@@ -3727,19 +3727,19 @@
    "row": "C37",
    "screen": "story_hints.the_man_next_door",
    "verdict": "PASS",
-   "line": "end (met_vance is_true)",
+   "line": "The man next door sits on his porch, weekday evenings 5 to 8pm, and weekends 9am to noon and 5 to 8pm. Go next door and say hello.",
    "why": "the meeting is in release 1",
    "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "c2d78b2f5fe05d4f",
-    "facts": "c2d78b2f5fe05d4f",
-    "facts2": "c2d78b2f5fe05d4f",
-    "all": "c2d78b2f5fe05d4f"
+    "text": "1bad6c706359185e",
+    "facts": "1bad6c706359185e",
+    "facts2": "1bad6c706359185e",
+    "all": "1bad6c706359185e"
    },
    "row_hash": "cee89ca03f857080",
    "carried": false,
-   "pass": 12
+   "pass": 14
   },
   {
    "row": "C37",
@@ -3992,19 +3992,19 @@
    "row": "C422",
    "screen": "story_hints.the_man_next_door",
    "verdict": "PASS",
-   "line": "The man next door sits on his porch, weekday evenings 5 to 8pm and on Sundays. Go next door and say hello.",
+   "line": "The man next door sits on his porch, weekday evenings 5 to 8pm, and weekends 9am to noon and 5 to 8pm. Go next door and say hello.",
    "why": "plain",
    "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "c2d78b2f5fe05d4f",
-    "facts": "c2d78b2f5fe05d4f",
-    "facts2": "c2d78b2f5fe05d4f",
-    "all": "c2d78b2f5fe05d4f"
+    "text": "1bad6c706359185e",
+    "facts": "1bad6c706359185e",
+    "facts2": "1bad6c706359185e",
+    "all": "1bad6c706359185e"
    },
    "row_hash": "7e128897077ecee6",
    "carried": false,
-   "pass": 12
+   "pass": 14
   },
   {
    "row": "C422",
@@ -4185,19 +4185,19 @@
    "row": "C430",
    "screen": "story_hints.the_man_next_door",
    "verdict": "PASS",
-   "line": "The man next door sits on his porch, weekday evenings 5 to 8pm and on Sundays. Go next door and say hello.",
-   "why": "says how: go next door, in his hours, and say hello; on Sundays it always comes (the Saturday gap from pass 1 is gone)",
+   "line": "The man next door sits on his porch, weekday evenings 5 to 8pm, and weekends 9am to noon and 5 to 8pm. Go next door and say hello.",
+   "why": "says how: go next door in his hours and say hello; each day kind has a hello (weekday/Saturday walk-in, Sunday button)",
    "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "c2d78b2f5fe05d4f",
-    "facts": "c2d78b2f5fe05d4f",
-    "facts2": "c2d78b2f5fe05d4f",
-    "all": "c2d78b2f5fe05d4f"
+    "text": "1bad6c706359185e",
+    "facts": "1bad6c706359185e",
+    "facts2": "1bad6c706359185e",
+    "all": "1bad6c706359185e"
    },
    "row_hash": "83f6356d6b638ebf",
    "carried": false,
-   "pass": 12
+   "pass": 14
   },
   {
    "row": "C430",
@@ -4378,19 +4378,19 @@
    "row": "C433",
    "screen": "story_hints.the_man_next_door",
    "verdict": "PASS",
-   "line": "end (met_vance is_true)",
-   "why": "'for now!'",
+   "line": "The man next door sits on his porch, weekday evenings 5 to 8pm, and weekends 9am to noon and 5 to 8pm. Go next door and say hello.",
+   "why": "'end' step; for now",
    "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "c2d78b2f5fe05d4f",
-    "facts": "c2d78b2f5fe05d4f",
-    "facts2": "c2d78b2f5fe05d4f",
-    "all": "c2d78b2f5fe05d4f"
+    "text": "1bad6c706359185e",
+    "facts": "1bad6c706359185e",
+    "facts2": "1bad6c706359185e",
+    "all": "1bad6c706359185e"
    },
    "row_hash": "d0461c156ea1bc3f",
    "carried": false,
-   "pass": 12
+   "pass": 14
   },
   {
    "row": "C433",
@@ -4643,19 +4643,19 @@
    "row": "C442",
    "screen": "story_hints.the_man_next_door",
    "verdict": "PASS",
-   "line": "The man next door sits on his porch, weekday evenings 5 to 8pm and on Sundays. Go next door and say hello.",
+   "line": "The man next door sits on his porch, weekday evenings 5 to 8pm, and weekends 9am to noon and 5 to 8pm. Go next door and say hello.",
    "why": "says it",
    "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "c2d78b2f5fe05d4f",
-    "facts": "c2d78b2f5fe05d4f",
-    "facts2": "c2d78b2f5fe05d4f",
-    "all": "c2d78b2f5fe05d4f"
+    "text": "1bad6c706359185e",
+    "facts": "1bad6c706359185e",
+    "facts2": "1bad6c706359185e",
+    "all": "1bad6c706359185e"
    },
    "row_hash": "59b8d8d24f0c7c38",
    "carried": false,
-   "pass": 12
+   "pass": 14
   },
   {
    "row": "C442",
@@ -5006,19 +5006,19 @@
    "row": "C451",
    "screen": "story_hints.the_man_next_door",
    "verdict": "PASS",
-   "line": "The man next door sits on his porch, weekday evenings 5 to 8pm and on Sundays. Go next door and say hello.",
-   "why": "porch, next door, weekday evenings, 5 to 8pm, Sundays",
+   "line": "The man next door sits on his porch, weekday evenings 5 to 8pm, and weekends 9am to noon and 5 to 8pm. Go next door and say hello.",
+   "why": "porch, next door, weekday evenings 5 to 8pm, weekends 9am to noon and 5 to 8pm",
    "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "c2d78b2f5fe05d4f",
-    "facts": "c2d78b2f5fe05d4f",
-    "facts2": "c2d78b2f5fe05d4f",
-    "all": "c2d78b2f5fe05d4f"
+    "text": "1bad6c706359185e",
+    "facts": "1bad6c706359185e",
+    "facts2": "1bad6c706359185e",
+    "all": "1bad6c706359185e"
    },
    "row_hash": "50dbf74577a813c7",
    "carried": false,
-   "pass": 12
+   "pass": 14
   },
   {
    "row": "C451",
@@ -5414,19 +5414,19 @@
    "row": "C460",
    "screen": "story_hints.the_man_next_door",
    "verdict": "PASS",
-   "line": "The man next door sits on his porch, weekday evenings 5 to 8pm and on Sundays. Go next door and say hello.",
-   "why": "true on every view: Mon-Fri 17-20 and Sun 09-12, 17-20 by who_is_where, and both days have a hello (walk_vance_ledger weekdays [0-4]; street_meet_vance weekday [6]); Saturday is left out, where nothing meets him",
+   "line": "The man next door sits on his porch, weekday evenings 5 to 8pm, and weekends 9am to noon and 5 to 8pm. Go next door and say hello.",
+   "why": "true by who_is_where: Mon-Fri 17-20, Sat and Sun 09-12 and 17-20, all at hood_next_door; a hello exists on every day kind",
    "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "c2d78b2f5fe05d4f",
-    "facts": "c2d78b2f5fe05d4f",
-    "facts2": "c2d78b2f5fe05d4f",
-    "all": "c2d78b2f5fe05d4f"
+    "text": "1bad6c706359185e",
+    "facts": "1bad6c706359185e",
+    "facts2": "1bad6c706359185e",
+    "all": "1bad6c706359185e"
    },
    "row_hash": "67e48e60d5053a2e",
    "carried": false,
-   "pass": 12
+   "pass": 14
   },
   {
    "row": "C460",
@@ -5692,19 +5692,19 @@
    "row": "C461",
    "screen": "story_hints.the_man_next_door",
    "verdict": "PASS",
-   "line": "The man next door sits on his porch, weekday evenings 5 to 8pm and on Sundays. Go next door and say hello.",
-   "why": "fits",
+   "line": "The man next door sits on his porch, weekday evenings 5 to 8pm, and weekends 9am to noon and 5 to 8pm. Go next door and say hello.",
+   "why": "fits; no texture that can clash",
    "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "c2d78b2f5fe05d4f",
-    "facts": "c2d78b2f5fe05d4f",
-    "facts2": "c2d78b2f5fe05d4f",
-    "all": "c2d78b2f5fe05d4f"
+    "text": "1bad6c706359185e",
+    "facts": "1bad6c706359185e",
+    "facts2": "1bad6c706359185e",
+    "all": "1bad6c706359185e"
    },
    "row_hash": "310706ee076318f2",
    "carried": false,
-   "pass": 12
+   "pass": 14
   },
   {
    "row": "C461",
@@ -5957,19 +5957,19 @@
    "row": "C519",
    "screen": "story_hints.the_man_next_door",
    "verdict": "PASS",
-   "line": "The man next door sits on his porch, weekday evenings 5 to 8pm and on Sundays. Go next door and say hello.",
+   "line": "The man next door sits on his porch, weekday evenings 5 to 8pm, and weekends 9am to noon and 5 to 8pm. Go next door and say hello.",
    "why": "one short line",
    "cause": null,
    "note": true,
    "screen_hash": {
-    "text": "c2d78b2f5fe05d4f",
-    "facts": "c2d78b2f5fe05d4f",
-    "facts2": "c2d78b2f5fe05d4f",
-    "all": "c2d78b2f5fe05d4f"
+    "text": "1bad6c706359185e",
+    "facts": "1bad6c706359185e",
+    "facts2": "1bad6c706359185e",
+    "all": "1bad6c706359185e"
    },
    "row_hash": "e78502f7aa28746d",
    "carried": false,
-   "pass": 12
+   "pass": 14
   },
   {
    "row": "C519",
@@ -6333,19 +6333,19 @@
    "row": "C598",
    "screen": "story_hints.the_man_next_door",
    "verdict": "PASS",
-   "line": "The man next door sits on his porch, weekday evenings 5 to 8pm and on Sundays. Go next door and say hello.",
+   "line": "The man next door sits on his porch, weekday evenings 5 to 8pm, and weekends 9am to noon and 5 to 8pm. Go next door and say hello.",
    "why": "'The man next door', never his name before met_vance",
    "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "c2d78b2f5fe05d4f",
-    "facts": "c2d78b2f5fe05d4f",
-    "facts2": "c2d78b2f5fe05d4f",
-    "all": "c2d78b2f5fe05d4f"
+    "text": "1bad6c706359185e",
+    "facts": "1bad6c706359185e",
+    "facts2": "1bad6c706359185e",
+    "all": "1bad6c706359185e"
    },
    "row_hash": "56c1e6a836c774b1",
    "carried": false,
-   "pass": 12
+   "pass": 14
   },
   {
    "row": "C598",
@@ -7133,19 +7133,19 @@
    "row": "C889",
    "screen": "story_hints.the_man_next_door",
    "verdict": "PASS",
-   "line": "The man next door sits on his porch, weekday evenings 5 to 8pm and on Sundays. Go next door and say hello.",
+   "line": "The man next door sits on his porch, weekday evenings 5 to 8pm, and weekends 9am to noon and 5 to 8pm. Go next door and say hello.",
    "why": "not a label",
    "cause": null,
    "note": true,
    "screen_hash": {
-    "text": "c2d78b2f5fe05d4f",
-    "facts": "c2d78b2f5fe05d4f",
-    "facts2": "c2d78b2f5fe05d4f",
-    "all": "c2d78b2f5fe05d4f"
+    "text": "1bad6c706359185e",
+    "facts": "1bad6c706359185e",
+    "facts2": "1bad6c706359185e",
+    "all": "1bad6c706359185e"
    },
    "row_hash": "def1348d483d0c40",
    "carried": false,
-   "pass": 12
+   "pass": 14
   },
   {
    "row": "C889",
@@ -7326,19 +7326,19 @@
    "row": "C892",
    "screen": "story_hints.the_man_next_door",
    "verdict": "PASS",
-   "line": "The man next door sits on his porch, weekday evenings 5 to 8pm and on Sundays. Go next door and say hello.",
+   "line": "The man next door sits on his porch, weekday evenings 5 to 8pm, and weekends 9am to noon and 5 to 8pm. Go next door and say hello.",
    "why": "his hours on the page, not in an act",
    "cause": null,
    "note": true,
    "screen_hash": {
-    "text": "c2d78b2f5fe05d4f",
-    "facts": "c2d78b2f5fe05d4f",
-    "facts2": "c2d78b2f5fe05d4f",
-    "all": "c2d78b2f5fe05d4f"
+    "text": "1bad6c706359185e",
+    "facts": "1bad6c706359185e",
+    "facts2": "1bad6c706359185e",
+    "all": "1bad6c706359185e"
    },
    "row_hash": "5c890033f6ac38b8",
    "carried": false,
-   "pass": 12
+   "pass": 14
   },
   {
    "row": "C892",
@@ -7519,19 +7519,19 @@
    "row": "C897",
    "screen": "story_hints.the_man_next_door",
    "verdict": "N/A",
-   "line": "The man next door sits on his porch, weekday evenings 5 to 8pm and on Sundays. Go next door and say hello.",
+   "line": "The man next door sits on his porch, weekday evenings 5 to 8pm, and weekends 9am to noon and 5 to 8pm. Go next door and say hello.",
    "why": "no travel time on a page entry",
    "cause": null,
    "note": true,
    "screen_hash": {
-    "text": "c2d78b2f5fe05d4f",
-    "facts": "c2d78b2f5fe05d4f",
-    "facts2": "c2d78b2f5fe05d4f",
-    "all": "c2d78b2f5fe05d4f"
+    "text": "1bad6c706359185e",
+    "facts": "1bad6c706359185e",
+    "facts2": "1bad6c706359185e",
+    "all": "1bad6c706359185e"
    },
    "row_hash": "265ece64add83676",
    "carried": false,
-   "pass": 12
+   "pass": 14
   },
   {
    "row": "C897",
@@ -7712,19 +7712,19 @@
    "row": "C900",
    "screen": "story_hints.the_man_next_door",
    "verdict": "PASS",
-   "line": "The man next door sits on his porch, weekday evenings 5 to 8pm and on Sundays. Go next door and say hello.",
+   "line": "The man next door sits on his porch, weekday evenings 5 to 8pm, and weekends 9am to noon and 5 to 8pm. Go next door and say hello.",
    "why": "hours as a rule, not a clock time",
    "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "c2d78b2f5fe05d4f",
-    "facts": "c2d78b2f5fe05d4f",
-    "facts2": "c2d78b2f5fe05d4f",
-    "all": "c2d78b2f5fe05d4f"
+    "text": "1bad6c706359185e",
+    "facts": "1bad6c706359185e",
+    "facts2": "1bad6c706359185e",
+    "all": "1bad6c706359185e"
    },
    "row_hash": "6372efb027eb2034",
    "carried": false,
-   "pass": 12
+   "pass": 14
   },
   {
    "row": "C900",
@@ -7905,19 +7905,19 @@
    "row": "C902",
    "screen": "story_hints.the_man_next_door",
    "verdict": "PASS",
-   "line": "The man next door sits on his porch, weekday evenings 5 to 8pm and on Sundays. Go next door and say hello.",
-   "why": "true at the last minute of each window (19:59 weekday, 11:59 and 19:59 Sunday)",
+   "line": "The man next door sits on his porch, weekday evenings 5 to 8pm, and weekends 9am to noon and 5 to 8pm. Go next door and say hello.",
+   "why": "true at 17:00 and 19:59 weekdays, 09:00 / 11:59 / 17:00 / 19:59 Saturday and Sunday",
    "cause": null,
    "note": true,
    "screen_hash": {
-    "text": "c2d78b2f5fe05d4f",
-    "facts": "c2d78b2f5fe05d4f",
-    "facts2": "c2d78b2f5fe05d4f",
-    "all": "c2d78b2f5fe05d4f"
+    "text": "1bad6c706359185e",
+    "facts": "1bad6c706359185e",
+    "facts2": "1bad6c706359185e",
+    "all": "1bad6c706359185e"
    },
    "row_hash": "df5ed7a36dbc74e4",
    "carried": false,
-   "pass": 12
+   "pass": 14
   },
   {
    "row": "C902",
@@ -8098,19 +8098,19 @@
    "row": "C903",
    "screen": "story_hints.the_man_next_door",
    "verdict": "PASS",
-   "line": "The man next door sits on his porch, weekday evenings 5 to 8pm and on Sundays. Go next door and say hello.",
-   "why": "weekdays and Sundays named as rules, true on every view",
+   "line": "The man next door sits on his porch, weekday evenings 5 to 8pm, and weekends 9am to noon and 5 to 8pm. Go next door and say hello.",
+   "why": "names weekday evenings and weekends as rules, true on every view",
    "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "c2d78b2f5fe05d4f",
-    "facts": "c2d78b2f5fe05d4f",
-    "facts2": "c2d78b2f5fe05d4f",
-    "all": "c2d78b2f5fe05d4f"
+    "text": "1bad6c706359185e",
+    "facts": "1bad6c706359185e",
+    "facts2": "1bad6c706359185e",
+    "all": "1bad6c706359185e"
    },
    "row_hash": "4f83b0b5eb45f71b",
    "carried": false,
-   "pass": 12
+   "pass": 14
   },
   {
    "row": "C903",
@@ -8291,19 +8291,19 @@
    "row": "C906",
    "screen": "story_hints.the_man_next_door",
    "verdict": "PASS",
-   "line": "The man next door sits on his porch, weekday evenings 5 to 8pm and on Sundays. Go next door and say hello.",
+   "line": "The man next door sits on his porch, weekday evenings 5 to 8pm, and weekends 9am to noon and 5 to 8pm. Go next door and say hello.",
    "why": "no 'till'",
    "cause": null,
    "note": true,
    "screen_hash": {
-    "text": "c2d78b2f5fe05d4f",
-    "facts": "c2d78b2f5fe05d4f",
-    "facts2": "c2d78b2f5fe05d4f",
-    "all": "c2d78b2f5fe05d4f"
+    "text": "1bad6c706359185e",
+    "facts": "1bad6c706359185e",
+    "facts2": "1bad6c706359185e",
+    "all": "1bad6c706359185e"
    },
    "row_hash": "71713a7e7ae739e7",
    "carried": false,
-   "pass": 12
+   "pass": 14
   },
   {
    "row": "C906",
@@ -8484,19 +8484,19 @@
    "row": "C910",
    "screen": "story_hints.the_man_next_door",
    "verdict": "PASS",
-   "line": "The man next door sits on his porch, weekday evenings 5 to 8pm and on Sundays. Go next door and say hello.",
+   "line": "The man next door sits on his porch, weekday evenings 5 to 8pm, and weekends 9am to noon and 5 to 8pm. Go next door and say hello.",
    "why": "not a button",
    "cause": null,
    "note": true,
    "screen_hash": {
-    "text": "c2d78b2f5fe05d4f",
-    "facts": "c2d78b2f5fe05d4f",
-    "facts2": "c2d78b2f5fe05d4f",
-    "all": "c2d78b2f5fe05d4f"
+    "text": "1bad6c706359185e",
+    "facts": "1bad6c706359185e",
+    "facts2": "1bad6c706359185e",
+    "all": "1bad6c706359185e"
    },
    "row_hash": "d5a109f1ef88419a",
    "carried": false,
-   "pass": 12
+   "pass": 14
   },
   {
    "row": "C910",
@@ -8677,19 +8677,19 @@
    "row": "C913",
    "screen": "story_hints.the_man_next_door",
    "verdict": "PASS",
-   "line": "The man next door sits on his porch, weekday evenings 5 to 8pm and on Sundays. Go next door and say hello.",
-   "why": "publishes his weekday hours; Sunday's (9-12, 5-8pm) are left off, and a Sunday visit outside them gets 'The chair is empty.', which says why",
+   "line": "The man next door sits on his porch, weekday evenings 5 to 8pm, and weekends 9am to noon and 5 to 8pm. Go next door and say hello.",
+   "why": "publishes his full hours now, weekends included",
    "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "c2d78b2f5fe05d4f",
-    "facts": "c2d78b2f5fe05d4f",
-    "facts2": "c2d78b2f5fe05d4f",
-    "all": "c2d78b2f5fe05d4f"
+    "text": "1bad6c706359185e",
+    "facts": "1bad6c706359185e",
+    "facts2": "1bad6c706359185e",
+    "all": "1bad6c706359185e"
    },
    "row_hash": "c750f9b6ab4ace14",
    "carried": false,
-   "pass": 12
+   "pass": 14
   },
   {
    "row": "C913",
@@ -8870,19 +8870,19 @@
    "row": "C914",
    "screen": "story_hints.the_man_next_door",
    "verdict": "N/A",
-   "line": "The man next door sits on his porch, weekday evenings 5 to 8pm and on Sundays. Go next door and say hello.",
+   "line": "The man next door sits on his porch, weekday evenings 5 to 8pm, and weekends 9am to noon and 5 to 8pm. Go next door and say hello.",
    "why": "not a row",
    "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "c2d78b2f5fe05d4f",
-    "facts": "c2d78b2f5fe05d4f",
-    "facts2": "c2d78b2f5fe05d4f",
-    "all": "c2d78b2f5fe05d4f"
+    "text": "1bad6c706359185e",
+    "facts": "1bad6c706359185e",
+    "facts2": "1bad6c706359185e",
+    "all": "1bad6c706359185e"
    },
    "row_hash": "bd07273d5822f34f",
    "carried": false,
-   "pass": 12
+   "pass": 14
   },
   {
    "row": "C914",
@@ -9063,19 +9063,19 @@
    "row": "C916",
    "screen": "story_hints.the_man_next_door",
    "verdict": "PASS",
-   "line": "The man next door sits on his porch, weekday evenings 5 to 8pm and on Sundays. Go next door and say hello.",
+   "line": "The man next door sits on his porch, weekday evenings 5 to 8pm, and weekends 9am to noon and 5 to 8pm. Go next door and say hello.",
    "why": "hours on where she goes; the walk-ins stay hidden when shut",
    "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "c2d78b2f5fe05d4f",
-    "facts": "c2d78b2f5fe05d4f",
-    "facts2": "c2d78b2f5fe05d4f",
-    "all": "c2d78b2f5fe05d4f"
+    "text": "1bad6c706359185e",
+    "facts": "1bad6c706359185e",
+    "facts2": "1bad6c706359185e",
+    "all": "1bad6c706359185e"
    },
    "row_hash": "7b2bb0dfdbcfe946",
    "carried": false,
-   "pass": 12
+   "pass": 14
   },
   {
    "row": "C916",
@@ -9256,19 +9256,19 @@
    "row": "C920",
    "screen": "story_hints.the_man_next_door",
    "verdict": "N/A",
-   "line": "The man next door sits on his porch, weekday evenings 5 to 8pm and on Sundays. Go next door and say hello.",
+   "line": "The man next door sits on his porch, weekday evenings 5 to 8pm, and weekends 9am to noon and 5 to 8pm. Go next door and say hello.",
    "why": "no move charged",
    "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "c2d78b2f5fe05d4f",
-    "facts": "c2d78b2f5fe05d4f",
-    "facts2": "c2d78b2f5fe05d4f",
-    "all": "c2d78b2f5fe05d4f"
+    "text": "1bad6c706359185e",
+    "facts": "1bad6c706359185e",
+    "facts2": "1bad6c706359185e",
+    "all": "1bad6c706359185e"
    },
    "row_hash": "513927dd127fca04",
    "carried": false,
-   "pass": 12
+   "pass": 14
   },
   {
    "row": "C920",
@@ -9449,19 +9449,19 @@
    "row": "C924",
    "screen": "story_hints.the_man_next_door",
    "verdict": "PASS",
-   "line": "The man next door sits on his porch, weekday evenings 5 to 8pm and on Sundays. Go next door and say hello.",
+   "line": "The man next door sits on his porch, weekday evenings 5 to 8pm, and weekends 9am to noon and 5 to 8pm. Go next door and say hello.",
    "why": "his hours make the timing matter",
    "cause": null,
    "note": true,
    "screen_hash": {
-    "text": "c2d78b2f5fe05d4f",
-    "facts": "c2d78b2f5fe05d4f",
-    "facts2": "c2d78b2f5fe05d4f",
-    "all": "c2d78b2f5fe05d4f"
+    "text": "1bad6c706359185e",
+    "facts": "1bad6c706359185e",
+    "facts2": "1bad6c706359185e",
+    "all": "1bad6c706359185e"
    },
    "row_hash": "791cd173e23fb130",
    "carried": false,
-   "pass": 12
+   "pass": 14
   },
   {
    "row": "C924",
@@ -9642,19 +9642,19 @@
    "row": "C926",
    "screen": "story_hints.the_man_next_door",
    "verdict": "PASS",
-   "line": "The man next door sits on his porch, weekday evenings 5 to 8pm and on Sundays. Go next door and say hello.",
+   "line": "The man next door sits on his porch, weekday evenings 5 to 8pm, and weekends 9am to noon and 5 to 8pm. Go next door and say hello.",
    "why": "nothing moves the clock",
    "cause": null,
    "note": true,
    "screen_hash": {
-    "text": "c2d78b2f5fe05d4f",
-    "facts": "c2d78b2f5fe05d4f",
-    "facts2": "c2d78b2f5fe05d4f",
-    "all": "c2d78b2f5fe05d4f"
+    "text": "1bad6c706359185e",
+    "facts": "1bad6c706359185e",
+    "facts2": "1bad6c706359185e",
+    "all": "1bad6c706359185e"
    },
    "row_hash": "177d1e1776fac74b",
    "carried": false,
-   "pass": 12
+   "pass": 14
   },
   {
    "row": "C926",
@@ -9835,19 +9835,19 @@
    "row": "C927",
    "screen": "story_hints.the_man_next_door",
    "verdict": "N/A",
-   "line": "The man next door sits on his porch, weekday evenings 5 to 8pm and on Sundays. Go next door and say hello.",
+   "line": "The man next door sits on his porch, weekday evenings 5 to 8pm, and weekends 9am to noon and 5 to 8pm. Go next door and say hello.",
    "why": "no exit on a page entry",
    "cause": null,
    "note": true,
    "screen_hash": {
-    "text": "c2d78b2f5fe05d4f",
-    "facts": "c2d78b2f5fe05d4f",
-    "facts2": "c2d78b2f5fe05d4f",
-    "all": "c2d78b2f5fe05d4f"
+    "text": "1bad6c706359185e",
+    "facts": "1bad6c706359185e",
+    "facts2": "1bad6c706359185e",
+    "all": "1bad6c706359185e"
    },
    "row_hash": "4e86d143688ba8e5",
    "carried": false,
-   "pass": 12
+   "pass": 14
   },
   {
    "row": "C927",
@@ -10028,19 +10028,19 @@
    "row": "C928",
    "screen": "story_hints.the_man_next_door",
    "verdict": "PASS",
-   "line": "The man next door sits on his porch, weekday evenings 5 to 8pm and on Sundays. Go next door and say hello.",
-   "why": "no clock printed",
+   "line": "The man next door sits on his porch, weekday evenings 5 to 8pm, and weekends 9am to noon and 5 to 8pm. Go next door and say hello.",
+   "why": "no clock printed into prose",
    "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "c2d78b2f5fe05d4f",
-    "facts": "c2d78b2f5fe05d4f",
-    "facts2": "c2d78b2f5fe05d4f",
-    "all": "c2d78b2f5fe05d4f"
+    "text": "1bad6c706359185e",
+    "facts": "1bad6c706359185e",
+    "facts2": "1bad6c706359185e",
+    "all": "1bad6c706359185e"
    },
    "row_hash": "2c3ccc6bd9929d7f",
    "carried": false,
-   "pass": 12
+   "pass": 14
   },
   {
    "row": "C928",
@@ -10221,19 +10221,19 @@
    "row": "C929",
    "screen": "story_hints.the_man_next_door",
    "verdict": "PASS",
-   "line": "The man next door sits on his porch, weekday evenings 5 to 8pm and on Sundays. Go next door and say hello.",
+   "line": "The man next door sits on his porch, weekday evenings 5 to 8pm, and weekends 9am to noon and 5 to 8pm. Go next door and say hello.",
    "why": "not a label",
    "cause": null,
    "note": true,
    "screen_hash": {
-    "text": "c2d78b2f5fe05d4f",
-    "facts": "c2d78b2f5fe05d4f",
-    "facts2": "c2d78b2f5fe05d4f",
-    "all": "c2d78b2f5fe05d4f"
+    "text": "1bad6c706359185e",
+    "facts": "1bad6c706359185e",
+    "facts2": "1bad6c706359185e",
+    "all": "1bad6c706359185e"
    },
    "row_hash": "18b0ecdf6d7fc901",
    "carried": false,
-   "pass": 12
+   "pass": 14
   },
   {
    "row": "C929",
@@ -10414,19 +10414,19 @@
    "row": "C930",
    "screen": "story_hints.the_man_next_door",
    "verdict": "N/A",
-   "line": "The man next door sits on his porch, weekday evenings 5 to 8pm and on Sundays. Go next door and say hello.",
+   "line": "The man next door sits on his porch, weekday evenings 5 to 8pm, and weekends 9am to noon and 5 to 8pm. Go next door and say hello.",
    "why": "not a row",
    "cause": null,
    "note": true,
    "screen_hash": {
-    "text": "c2d78b2f5fe05d4f",
-    "facts": "c2d78b2f5fe05d4f",
-    "facts2": "c2d78b2f5fe05d4f",
-    "all": "c2d78b2f5fe05d4f"
+    "text": "1bad6c706359185e",
+    "facts": "1bad6c706359185e",
+    "facts2": "1bad6c706359185e",
+    "all": "1bad6c706359185e"
    },
    "row_hash": "beb57cd46fe906bf",
    "carried": false,
-   "pass": 12
+   "pass": 14
   },
   {
    "row": "C930",
@@ -10607,19 +10607,19 @@
    "row": "C931",
    "screen": "story_hints.the_man_next_door",
    "verdict": "N/A",
-   "line": "The man next door sits on his porch, weekday evenings 5 to 8pm and on Sundays. Go next door and say hello.",
+   "line": "The man next door sits on his porch, weekday evenings 5 to 8pm, and weekends 9am to noon and 5 to 8pm. Go next door and say hello.",
    "why": "no time_of_day on a page entry",
    "cause": null,
    "note": true,
    "screen_hash": {
-    "text": "c2d78b2f5fe05d4f",
-    "facts": "c2d78b2f5fe05d4f",
-    "facts2": "c2d78b2f5fe05d4f",
-    "all": "c2d78b2f5fe05d4f"
+    "text": "1bad6c706359185e",
+    "facts": "1bad6c706359185e",
+    "facts2": "1bad6c706359185e",
+    "all": "1bad6c706359185e"
    },
    "row_hash": "1aadffd96e76381c",
    "carried": false,
-   "pass": 12
+   "pass": 14
   },
   {
    "row": "C931",
@@ -10831,19 +10831,19 @@
    "row": "C952",
    "screen": "story_hints.the_man_next_door",
    "verdict": "PASS",
-   "line": "The man next door sits on his porch, weekday evenings 5 to 8pm and on Sundays. Go next door and say hello.",
-   "why": "5 to 8pm weekdays and Sundays agree with PLAN:567 (weekends 9-12 and 5-8pm) and who_is_where",
+   "line": "The man next door sits on his porch, weekday evenings 5 to 8pm, and weekends 9am to noon and 5 to 8pm. Go next door and say hello.",
+   "why": "hours agree with PLAN:567 (weekdays 5-8pm, weekends 9-12 and 5-8pm) and who_is_where",
    "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "c2d78b2f5fe05d4f",
-    "facts": "c2d78b2f5fe05d4f",
-    "facts2": "c2d78b2f5fe05d4f",
-    "all": "c2d78b2f5fe05d4f"
+    "text": "1bad6c706359185e",
+    "facts": "1bad6c706359185e",
+    "facts2": "1bad6c706359185e",
+    "all": "1bad6c706359185e"
    },
    "row_hash": "0ded4fca6fc71925",
    "carried": false,
-   "pass": 12
+   "pass": 14
   },
   {
    "row": "C952",
@@ -11171,19 +11171,19 @@
    "row": "L167",
    "screen": "story_hints.the_man_next_door",
    "verdict": "N/A",
-   "line": "The man next door sits on his porch, weekday evenings 5 to 8pm and on Sundays. Go next door and say hello.",
+   "line": "The man next door sits on his porch, weekday evenings 5 to 8pm, and weekends 9am to noon and 5 to 8pm. Go next door and say hello.",
    "why": "not a row",
    "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "c2d78b2f5fe05d4f",
-    "facts": "c2d78b2f5fe05d4f",
-    "facts2": "c2d78b2f5fe05d4f",
-    "all": "c2d78b2f5fe05d4f"
+    "text": "1bad6c706359185e",
+    "facts": "1bad6c706359185e",
+    "facts2": "1bad6c706359185e",
+    "all": "1bad6c706359185e"
    },
    "row_hash": "e64ce2672d85d2d8",
    "carried": false,
-   "pass": 12
+   "pass": 14
   },
   {
    "row": "L167",
@@ -11390,19 +11390,19 @@
    "row": "L172",
    "screen": "story_hints.the_man_next_door",
    "verdict": "PASS",
-   "line": "The man next door sits on his porch, weekday evenings 5 to 8pm and on Sundays. Go next door and say hello.",
+   "line": "The man next door sits on his porch, weekday evenings 5 to 8pm, and weekends 9am to noon and 5 to 8pm. Go next door and say hello.",
    "why": "on P46's Does: (cards/P46.md)",
    "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "c2d78b2f5fe05d4f",
-    "facts": "c2d78b2f5fe05d4f",
-    "facts2": "c2d78b2f5fe05d4f",
-    "all": "c2d78b2f5fe05d4f"
+    "text": "1bad6c706359185e",
+    "facts": "1bad6c706359185e",
+    "facts2": "1bad6c706359185e",
+    "all": "1bad6c706359185e"
    },
    "row_hash": "77e6271dc896a2b3",
    "carried": false,
-   "pass": 12
+   "pass": 14
   },
   {
    "row": "L172",

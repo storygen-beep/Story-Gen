@@ -65,7 +65,7 @@ Everyone is 18 or over, and the game says so.
 | the rival | classmate | 21 | (name open) | to beat her; can report her to the dean | Brooke: -200 · 0 · 150 |
 
 - **Arrivals come in waves, not all in week one.** Day one: the house, then Hale and Nadia. First
-  week: Zoe, then Tom when she looks for work. Vance: a weekday evening hello on his porch, or the first Sunday (P68). Later: Jake, then the rival.
+  week: Zoe, then Tom when she looks for work. Vance: a hello on his porch, weekday evenings or Saturday, or the first Sunday (P68, P70). Later: Jake, then the rival.
 - **No one is named before she meets them.** Until then it's "the man next door", "a guy on the quad".
 
 **The people system** (P48; LO, typed in main-lean 2026-11-25: "Yes lets move to cot style type system", "Meter
@@ -260,7 +260,7 @@ Decided (LO, yes): all three long; release 1 gives each only step 1, the first m
 | Zoe (companion) | medium | the quad, first week: she pulls Ella into fun | parties, a dare, Zoe one step ahead | Zoe and Ella together, a shared night |
 | Dr. Hale | long | he watches her on day one; Nadia sees it | office hours, her grade, "how far will you go" | his office after hours |
 | Tom | medium | she asks for work; her first shift | flirting for tips; closing late with him | café regulars paying for more |
-| Mr. Vance | medium | a weekday evening hello, or the first Sunday, the man on the porch (P68) | she walks past slower; the family is short and he knocks | his porch when the family is short |
+| Mr. Vance | medium | a hello on his porch (weekday evenings, Saturday), or the first Sunday, the man on the porch (P68, P70) | she walks past slower; the family is short and he knocks | his porch when the family is short |
 | Jake | medium | a guy on the quad who asks her out | dates on Wednesday and Saturday; he shows her off | a normal boyfriend who doesn't know the rest; Ryan sees |
 | Nadia | short | saves her a seat; "last spring it was me" | one line about Hale each lecture | what Hale did to her, told in full |
 | Brooke (rival) | short | the classmate who wants the same part | the competition in drama and lectures | she reports Ella to the dean |
@@ -610,7 +610,7 @@ at least one (C28). Release 1: a flag each, no meter. Ryan shows nothing about h
 | scene | kind | who | everyday? | window (§9c, place hours) | how often | her choice |
 |---|---|---|---|---|---|---|
 | The park couple: a man and a woman on the grass behind the pond, seen through the bushes | she walks in on | strangers | no | every day 7–9pm, Park | once a day | Watch · Back away |
-| Vance on his porch with a ledger of envelopes, licking his thumb, counting | she walks in on | Vance | yes | weekdays 5–8pm, his house (P69) | once a day | Say hello · Leave him to it |
+| Vance on his porch with a ledger of envelopes, licking his thumb, counting | she walks in on | Vance | yes | weekdays 5–8pm and Saturday at his porch hours, his house (P69, P70) | once a day | Say hello · Leave him to it |
 | Danny selling something small out the shop's back door | she walks in on | Danny | yes | every day 9–11pm, Corner Shop | once a day | Pretend you didn't see · Ask what that was |
 | Marco "fixing" a woman's squat, hands on her hips longer than he needs | she walks in on (on arrival since P55) | Marco | no | weekdays 5–9pm, Gym | once a day | Watch from the door · Look away |
 | Nina in the fitting room in the shop's tightest dress: "Don't tell my boss. I'm the boss." | she walks in on | Nina | yes | Mon–Sat 6:45–7pm (ENI for LO 2026-11-24, after the try-on closes at 18:45), Clothes Shop | once a day | Tell her it suits her · Just browse |

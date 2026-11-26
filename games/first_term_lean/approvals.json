@@ -3222,6 +3222,42 @@
       "sha256": "495fc5bae51875a6b9680dafebec1281083ed2468a254a1dc115006339e17799",
       "words": "ENI for LO (delegated 2026-11-24): yes again to P46: hint text and P69 note updated.",
       "date": "2026-11-27"
+    },
+    {
+      "card": "P70",
+      "sha256": "27fe85f8ee98085d1080328c2910b9dbdf85acdbc6df224ccad306f5e64193fa",
+      "words": "ENI for LO (delegated 2026-11-24): yes to P70: the Sunday line true at his porch; the ledger hello also on Saturdays; the hint says weekends.",
+      "date": "2026-11-27"
+    },
+    {
+      "card": "P24",
+      "sha256": "516f6c6fbeedac89ab4bff9464b0e628d27b7aa89bf34f97f050d3e3e90b034d",
+      "words": "ENI for LO (delegated 2026-11-24): yes to P24 with the P70 notes.",
+      "date": "2026-11-27"
+    },
+    {
+      "card": "P39",
+      "sha256": "c9b111383ab31104e11e8d99b77a1b1cbb08548fc26494c787362e54e4cee143",
+      "words": "ENI for LO (delegated 2026-11-24): yes to P39 with the P70 notes.",
+      "date": "2026-11-27"
+    },
+    {
+      "card": "P46",
+      "sha256": "364f834eb82bce3d52f7d0355269e73cb4813a5100e08d8d8a9f9fafc532049c",
+      "words": "ENI for LO (delegated 2026-11-24): yes to P46 with the P70 notes.",
+      "date": "2026-11-27"
+    },
+    {
+      "card": "P39",
+      "sha256": "16871e01a57d4ce8bc62c61eaaa5ef3db08010c76ff96e391e0ecbd6e29d23b5",
+      "words": "ENI for LO (delegated 2026-11-24): yes again to P39: Sheet rows synced for the Saturday window (P70).",
+      "date": "2026-11-27"
+    },
+    {
+      "card": "P70",
+      "sha256": "085c15c86c9c3b977d9699a075f76c8cbb60716dc3678227d368fadb3a04509b",
+      "words": "ENI for LO (delegated 2026-11-24): yes again to P70: the hello's greeting follows the hour (Morning / Evening); the hint names his weekend hours.",
+      "date": "2026-11-27"
     }
   ]
 }

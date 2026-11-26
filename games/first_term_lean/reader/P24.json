@@ -1,13 +1,13 @@
 {
  "piece": "P24",
- "pass": 15,
+ "pass": 16,
  "screens": {
   "street_meet_vance.porch": {
-   "text": "540bcf0e74e245a0",
+   "text": "e69a764c83344876",
    "traits": "d9172dabbd56b049",
    "facts": "093da1921eaeb199",
    "facts2": "bfd991956d1f9064",
-   "all": "dc50d8f39532556d"
+   "all": "ec0a7ab26be8740b"
   },
   "street_meet_vance.after": {
    "text": "b681518a9dc12eea",
@@ -16,7 +16,7 @@
    "facts2": "35addffdca947460",
    "all": "198beb2011e6ab38"
   },
-  "*": "02a24fe8adc7e20c"
+  "*": "217824dcf50567f8"
  },
  "rows": {
   "B1": "5276068df1ca6fa9",
@@ -183,27 +183,27 @@
     "all": "198beb2011e6ab38"
    },
    "row_hash": "c1c0e2ac2588a579",
-   "carried": false,
+   "carried": true,
    "pass": 15
   },
   {
    "row": "B10",
    "screen": "street_meet_vance.porch",
    "verdict": "PASS",
-   "line": "The man next door is in the one chair on his porch, a mug on the rail, like every Sunday. ... his eyes follow you up his path",
-   "why": "a button at hood_next_door, Sunday, he's present and unmet; 'up his path' is true at his house; his Sat/Sun rows keep 'like every Sunday' true",
+   "line": "Today he puts the mug down when he sees you, and his eyes go over you, taking their time over your legs, like he's got all day. Your skin prickles.",
+   "why": "a button at hood_next_door on Sunday (weekday 6) while he is present (Sun 09-12, 17-20) and met_vance unset; she is at his porch, so 'when he sees you' / 'his eyes go over you' hold at every minute; 'like every Sunday' true by his weekend rows; second visit impossible (is_repeatable false)",
    "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "540bcf0e74e245a0",
+    "text": "e69a764c83344876",
     "traits": "d9172dabbd56b049",
     "facts": "093da1921eaeb199",
     "facts2": "bfd991956d1f9064",
-    "all": "dc50d8f39532556d"
+    "all": "ec0a7ab26be8740b"
    },
    "row_hash": "c1c0e2ac2588a579",
    "carried": false,
-   "pass": 15
+   "pass": 16
   },
   {
    "row": "B11",
@@ -351,27 +351,27 @@
     "all": "198beb2011e6ab38"
    },
    "row_hash": "80d415cf08e0ebfe",
-   "carried": false,
+   "carried": true,
    "pass": 15
   },
   {
    "row": "B8",
    "screen": "street_meet_vance.porch",
    "verdict": "PASS",
-   "line": "taking their time over your legs",
+   "line": "Today he puts the mug down when he sees you, and his eyes go over you, taking their time over your legs, like he's got all day. Your skin prickles.",
    "why": "names her legs, no garment; 54 in the picture agrees with PLAN:62",
    "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "540bcf0e74e245a0",
+    "text": "e69a764c83344876",
     "traits": "d9172dabbd56b049",
     "facts": "093da1921eaeb199",
     "facts2": "bfd991956d1f9064",
-    "all": "dc50d8f39532556d"
+    "all": "ec0a7ab26be8740b"
    },
    "row_hash": "80d415cf08e0ebfe",
    "carried": false,
-   "pass": 15
+   "pass": 16
   },
   {
    "row": "B9",
@@ -1328,27 +1328,27 @@
     "all": "198beb2011e6ab38"
    },
    "row_hash": "67e48e60d5053a2e",
-   "carried": false,
+   "carried": true,
    "pass": 15
   },
   {
    "row": "C460",
    "screen": "street_meet_vance.porch",
    "verdict": "PASS",
-   "line": "The man next door is in the one chair on his porch, a mug on the rail, like every Sunday. ... his eyes follow you up his path",
-   "why": "true on every Sunday minute the button shows (presence condition), unmet",
+   "line": "Today he puts the mug down when he sees you, and his eyes go over you, taking their time over your legs, like he's got all day. Your skin prickles.",
+   "why": "the old 'follow you up his path' claim is gone; every line true at 09:00, 11:59, 17:00, 19:59 on a Sunday, unmet, whether or not she left him on a Saturday walk-in ('Today' still true)",
    "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "540bcf0e74e245a0",
+    "text": "e69a764c83344876",
     "traits": "d9172dabbd56b049",
     "facts": "093da1921eaeb199",
     "facts2": "bfd991956d1f9064",
-    "all": "dc50d8f39532556d"
+    "all": "ec0a7ab26be8740b"
    },
    "row_hash": "67e48e60d5053a2e",
    "carried": false,
-   "pass": 15
+   "pass": 16
   },
   {
    "row": "C461",
@@ -1379,7 +1379,7 @@
     "all": "198beb2011e6ab38"
    },
    "row_hash": "310706ee076318f2",
-   "carried": false,
+   "carried": true,
    "pass": 15
   },
   {
@@ -1387,19 +1387,19 @@
    "screen": "street_meet_vance.porch",
    "verdict": "PASS",
    "line": "Well. Look who stopped being a kid. Come here a minute, little lady.",
-   "why": "his cast line (PLAN:141 'Come here a minute, little lady.')",
+   "why": "his cast line (PLAN:141); she grew up in the rented house (PLAN \u00a71), so 'stopped being a kid' fits",
    "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "540bcf0e74e245a0",
+    "text": "e69a764c83344876",
     "traits": "d9172dabbd56b049",
     "facts": "093da1921eaeb199",
     "facts2": "bfd991956d1f9064",
-    "all": "dc50d8f39532556d"
+    "all": "ec0a7ab26be8740b"
    },
    "row_hash": "310706ee076318f2",
    "carried": false,
-   "pass": 15
+   "pass": 16
   },
   {
    "row": "C519",
@@ -1986,7 +1986,7 @@
     "all": "198beb2011e6ab38"
    },
    "row_hash": "4e86d143688ba8e5",
-   "carried": false,
+   "carried": true,
    "pass": 15
   },
   {
@@ -2057,7 +2057,7 @@
     "all": "198beb2011e6ab38"
    },
    "row_hash": "1aadffd96e76381c",
-   "carried": false,
+   "carried": true,
    "pass": 15
   },
   {
@@ -2102,27 +2102,27 @@
     "all": "198beb2011e6ab38"
    },
    "row_hash": "13a714429d15f3b2",
-   "carried": false,
+   "carried": true,
    "pass": 15
   },
   {
    "row": "L106",
    "screen": "street_meet_vance.porch",
    "verdict": "PASS",
-   "line": "The man next door is in the one chair on his porch, a mug on the rail, like every Sunday. ... his eyes follow you up his path",
-   "why": "npc_at_location npc_vance hood_next_door is_present in the trigger; his rows put him there",
+   "line": "The man next door is in the one chair on his porch",
+   "why": "npc_at_location npc_vance hood_next_door is_present on the trigger; nobody else named",
    "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "540bcf0e74e245a0",
+    "text": "e69a764c83344876",
     "traits": "d9172dabbd56b049",
     "facts": "093da1921eaeb199",
     "facts2": "bfd991956d1f9064",
-    "all": "dc50d8f39532556d"
+    "all": "ec0a7ab26be8740b"
    },
    "row_hash": "13a714429d15f3b2",
    "carried": false,
-   "pass": 15
+   "pass": 16
   },
   {
    "row": "L119",
@@ -2225,7 +2225,7 @@
     "all": "198beb2011e6ab38"
    },
    "row_hash": "e64ce2672d85d2d8",
-   "carried": false,
+   "carried": true,
    "pass": 15
   },
   {
@@ -2288,8 +2288,8 @@
  ],
  "causes": [],
  "pending": [],
- "asked": 13,
- "answered": 13,
+ "asked": 5,
+ "answered": 5,
  "pass_items": [],
  "unowed": []
 }
