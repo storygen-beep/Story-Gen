@@ -138,3 +138,78 @@ def test_check_runs_it():
     assert "people" in check.CHECKS
     assert check.check_people(planted(person(traits=[])))[0] == check.RED
     assert check.check_people(None)[0] == check.INCOMPLETE
+
+
+# ── rule 5: everyone she has met has a menu, Talk once a day across places (C2197, C2198; LO, typed in main-lean
+# 2026-11-26: "Option B.") ──────────────────────────────────────────────────────────────────────────────────────────
+
+def meeting():
+    return {"id": "tom_meet", "trigger": {"location": "cafe", "trigger_mode": "manual", "is_repeatable": False},
+            "nodes": [{"id": "a", "exit_block": {"choices": [{"text": "Done",
+                                                               "flagEffects": [{"flag": "met_tom", "op": "set"}]}]}}]}
+
+
+def menu(cid="tom_cafe", place="cafe", flag="talked_tom_today", **trig):
+    talk_choice = {"text": "Talk", "targetType": "node", "nodeId": "talk"}
+    if flag:
+        talk_choice["flagEffects"] = [{"flag": flag, "op": "set"}]
+    t = {"location": place, "trigger_mode": "manual", "is_repeatable": True, "npc": "npc_tom",
+         "requires_npc": "npc_tom"}
+    t.update(trig)
+    return {"id": cid, "trigger": t,
+            "nodes": [{"id": "hub", "exit_block": {"choices": [talk_choice, {"text": "Leave"}]}}, {"id": "talk"}]}
+
+
+def cast(*canvases, tick=("talked_tom_today",), **kw):
+    game = {"npcs": [person(schedules=[{"location": "cafe"}, {"location": "quad"}], **kw)],
+            "canvases": [meeting(), *canvases]}
+    game["engine"] = {"daily_tick": {"flagEffects": [{"targetType": "player", "flag": f, "op": "unset"} for f in tick]}}
+    return game
+
+
+def test_a_met_person_with_a_menu_and_a_daily_talk_is_green():
+    assert people.menu_problems(cast(menu(), menu("tom_quad", "quad"))) == []
+
+
+def test_a_met_person_with_no_menu_is_red():
+    assert any("`npc_tom` is met" in r and "C2197" in r for r in people.menu_problems(cast()))
+
+
+def test_no_menu_with_a_reason_is_green():
+    assert people.menu_problems(cast(no_menu="only at the party, mid-song")) == []
+
+
+def test_a_person_not_met_needs_no_menu():
+    game = cast()
+    game["canvases"] = []
+    assert people.menu_problems(game) == []
+
+
+def test_a_walk_in_or_a_scene_on_an_act_is_not_a_menu():
+    rand = menu(trigger_mode="random")
+    sub = menu("tom_sub", substitution_only=True)
+    assert any("`npc_tom` is met" in r for r in people.menu_problems(cast(rand, sub)))
+
+
+def test_talk_is_once_a_day_by_a_flag_the_tick_clears():
+    assert any("Talk sets no `_today` flag" in r for r in people.menu_problems(cast(menu(flag=None))))
+    assert any("Talk sets no `_today` flag" in r for r in people.menu_problems(cast(menu(), tick=())))
+
+
+def test_one_flag_across_all_their_places():
+    rows = people.menu_problems(cast(menu(), menu("tom_quad", "quad", flag="talked_tom_quad_today"),
+                                     tick=("talked_tom_today", "talked_tom_quad_today")))
+    assert any("different `_today` flags" in r and "C2198" in r for r in rows)
+
+
+def test_rule_5_runs_without_the_switch_and_through_check():
+    assert any("`npc_tom` is met" in r for r in people.problems(cast()))
+
+
+def test_a_friend_met_through_someone_else_counts_as_met():
+    game = cast()
+    game["npcs"][0]["id"] = "npc_kay"
+    game["canvases"] = [{"id": "meet_bee", "nodes": [{"id": "a", "exit_block": {"choices": [
+        {"text": "Done", "flagEffects": [{"flag": "met_bee", "op": "set"}]}]}}]}]
+    game["quest_cards"] = [{"npc_id": "npc_kay", "when": [{"flag": "met_bee", "op": "is_true"}]}]
+    assert any("`npc_kay` is met (`met_bee`)" in r for r in people.menu_problems(game))

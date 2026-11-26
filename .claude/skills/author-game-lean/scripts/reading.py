@@ -184,7 +184,9 @@ def screens(game, canvas_ids, sheet_rows=None):
 # asked again when a screen's facts change and its text doesn't. A truth break from a moved fact is a line that is no
 # longer true, and every such line is judged by the truth rule (C460, C461) and scene test B10 (true on every visit),
 # which apply on every screen; so a fact change can't slip past, whatever else stays carried.
-FACT_ROWS = ("C460", "C461", "B8", "B10")
+# C2196 (a scene that comes to her fits what she is doing and wearing when it fires) reads the same facts: a moved
+# trigger or a changed outfit can make "your stance is all wrong" false (LO, typed in main-lean 2026-11-26, "Go ahead.").
+FACT_ROWS = ("C460", "C461", "B8", "B10", "C2196")
 TRAIT_FIT = "C2194"  # a person acts in character: the reader row a changed trait word re-asks (craft/people.md)
 PAGE_WHEN = {"npcs": "a person is on screen", "sidebar": "a meter is shown or paid"}  # what a page field shows
 FACT_WHEN = ("the clock moves", "a garment is named", "she dresses or undresses")  # not "a person is on screen":
@@ -192,7 +194,7 @@ FACT_WHEN = ("the clock moves", "a garment is named", "she dresses or undresses"
 FACT_CHECKS = ("presence", "sheet")
 
 
-TRUTH_ROWS = ("C460", "C461", "B8", "B10")
+TRUTH_ROWS = ("C460", "C461", "B8", "B10", "C2196")
 
 
 def reads_truth(rid, table):

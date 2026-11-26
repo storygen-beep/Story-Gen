@@ -4,7 +4,7 @@ Read this before you write a card for a scene that waits at a place: something s
 
 **Two kinds, our design** (LO, typed in main-lean 2026-11-26: "Yes", "One is fine for now"; the measures are the study's, `COT_DESIGN_STUDY.md` Part 9 and `playtest_study_20261109/13_random_scenes_top.md`):
 - **(a) She comes across something:** it fires by itself when she arrives, behind a chance: the couple under the bridge, her housemate's door open a crack. Her choice inside is to look or leave. It is off the shared one-a-day flag; each one is once a day on its own. Its card's Does: names `she comes across something` on its first screen.
-- **(b) Someone comes to her:** it fires by itself when she arrives, hand-written for one named person, only where that person's rows put them ("When someone comes to her", below). The world's choice to reach her. These share the one-a-day flag.
+- **(b) Someone comes to her:** it fires by itself when she arrives, hand-written for one named person, only where that person's rows put them ("When someone comes to her", below). The world's choice to reach her. These share the one-a-day flag. When its words need her in the middle of something (lifting, eating, studying), it fires inside that act instead, never on arrival (C2196).
 
 Both kinds fire on arrival and neither is a button (C2195). Why: the study's players say surprises are too rare (CoT's walk-ins fire on arrival, `COT_DESIGN_STUDY.md` Part 9), and a button she must find and press is no surprise. LO chose it, typed in main-lean 2026-11-26: "2nd one" (of: keep the buttons and mark them, fire on their own, a mix), then "Go" to the picks below. That reverses his "2 i would say button is good here" for walk-ins.
 
@@ -46,6 +46,7 @@ On a card with a `Does:` block (every card from 2026-11-24 on), the rows that ap
 | C2191 | bolder answers open by her level, once her meters move | — (later releases; LO's "Yes") | a release after the first | note |
 | C2192 | release 1: 8 to 10 "comes to her" scenes, and the first steps of two or three chains, flags only | — (the count; LO's "Yes") | the plan | note |
 | C2195 | a walk-in she comes across fires by itself on arrival, never a button: `trigger_mode = "random"` at its place, `chance = 0.35` by default, `max_triggers_per_day = 1`, gated by the person's presence and hours as before; it stays off the shared "comes to her" flag, and the place rests 3 arrivals after a hit (the engine's `random_cooldown`); her choice inside is unchanged | the study's players: surprises too rare (Part 9) · kept blocking: LO, typed in main-lean 2026-11-26: "2nd one", "Go" | a walk-in | script + walkins |
+| C2196 | a scene that comes to her fits what she is doing and wearing when it fires: on arrival she has only just walked in; when its words need her in the middle of an act (lifting, eating, studying, washing), it rides on that act as a substitution rule, after the act's costs, never on arrival | first_term_lean's `marco_hips` (P49) fired on walking into the gym, with no workout, no day pass and no gym clothes, and its words fixed her squat: "Your stance is all wrong", his hands turning her hips. LO, typed in main-lean 2026-11-26: "This ones a walkin right, she didn't have gym membership yet. And she is working out in this scene. Why??", then "Go ahead." | a walk-in | reader + walkins |
 
 ## The engine (cited; `v2.py` is `apps/game_generation/twee_comprehensive/generators/v2.py`)
 
@@ -204,6 +205,11 @@ Engine, cited. A random canvas at the place is rolled on every arrival (v2.py:68
 6. **A story moment is never behind a chance** (C2190, C174). A person's arc step at a place is a one-time canvas that fires when due; it is not `trigger_mode = "random"`. The check is red when a card's Does: puts "a person's arc step" on a random canvas.
 7. **Bolder answers by her level** (C2191), once meters move: a band on her level adds a choice. Release 1 has none.
 8. **Release 1** (C2192): 8 to 10 of these, and the first steps of two or three chains, each setting a flag only.
+9. **It fits what she is doing** (C2196). Before the card, answer: *what is she doing and wearing when this fires?* On arrival the answer is "she has just walked in, in whatever she had on": a wave, a word at the door, someone falling into step, a knock. When the words need her in the middle of an act (on the bench, at the table, at a desk with her books, under the water), the scene rides on that act instead:
+   - The act (the "Work out" button) gets a `[[canvases.trigger.substitutions]]` rule naming the scene, with its `chance` and the person's presence (`npc_at_location`) in the rule's conditions (read at v2.py:14776-14800). It runs at the top of the act's first screen, after the act's costs are charged (v2.py:17789-17801, the cost gate wraps the substitution check), so the day pass and the energy are paid and the act counts.
+   - The scene is `substitution_only = true` (never a button, v2.py:15229-15232), keeps its own `trigger.location` (the act's place: `setup.getCanvasById` finds only canvases listed under a place, v2.py:4151-4165), and keeps the brake and the rest on its own trigger: the engine checks the target's conditions, `max_triggers_per_day` and `requires_npc` before it swaps (`isCanvasValid`, v2.py:6132-6152; `_tryRule`, v2.py:6978-6994).
+   - Its first screen is the act and the person in it: the workout under way, then him. Its exits spend the act's time and return her where the act does.
+   It is still kind (b): one named person, the shared one-a-day flag set on every way out, a written way out. `scripts/walkins.py` checks the same rules on it, and is red when a scene that fires on arrival says "your stance", "your set" and the like (a short list; the reader is the real check).
 
 **G · Someone comes to her, everyday** (38 words). Roles: a neighbour whose morning row is the park path, 07:00–09:00.
 
@@ -301,4 +307,5 @@ A later release appends the 0.35 and 0.70 rules with their ranges and adds their
 - A person's next step behind a 1-in-3 roll on arrival. It fires when due (C2190).
 - A walk-in she comes across left as a button at the place. It fires on arrival (C2195). A button "by chance" doesn't exist either (v2.py:6444 is called from nowhere).
 - A walk-in she comes across on the shared "comes to her" flag. That flag is kind (b)'s; kind (a) is once a day on its own (C2195).
+- A scene that comes to her on arrival with words about an act she isn't doing yet: fixing her squat as she walks into the gym, sliding into the chair beside her as she comes through the library door. It rides on the act (C2196).
 - Walk-ins found only by going place by place. Ask what each person does when alone, too, or the best ones turn up only by luck.

@@ -38,10 +38,11 @@ Go place by place, one area per bite. Start from everyone LO has named so far, p
 - **other named people** there;
 - **the crowd:** unnamed, with what they notice. No first meeting and no arc;
 - **who notices her** there, and what they do about it. If nobody does, say so as a choice.
+- **what she can do with each named person there,** once she has met them: can she talk to them at this place, given what their row has them doing? Where yes, they get their menu with Talk, once a day across their places, one talk true on every visit, ending on a hook; the climb is held (`craft/people.md` rule 16; C2197, C2198). Where no anywhere, say why: it becomes their `no_menu`.
 
 Release 1 has them all, shallow.
 
-Must read: C804, C657, C589, C1531, C577, C620, L147.
+Must read: C804, C657, C589, C1531, C577, C620, L147, C2197, C2198.
 Why: the people bite took only the core cast, and the plan missed 12 people. The old game's playtest found the same empty world (L147). (NOTES gap "`plan.md` has no step that fills the world", 2026-11-20.)
 
 ## 6 · The systems bite
@@ -83,6 +84,7 @@ Why: nothing asked for each person's week before the everyday pieces were listed
 After the schedules, because a walk-in sits where that person's rows already put them (L97; v2's gate `a walk-in can happen`). One area per bite. For each place, name one or two scenes, and for each:
 - **what she sees,** and her choice: watch or leave, help or say she's late;
 - **which kind:** she comes across something (it fires by itself on arrival, `chance = 0.35`, once a day each, never a button; C2195), someone walks in on her in the middle of an act, or someone comes to her when she arrives (it fires by itself, at most one a day across the game; `craft/walk-ins.md`, "When someone comes to her");
+- **on arrival, or inside an act:** what is she doing and wearing when it fires? If the words need her in the middle of something (a workout, a meal, studying), it fires inside that act, after its costs, never on arrival (C2196);
 - **who:** half or more of an area's scenes name a person she knows (C678);
 - **everyday or not:** about half are everyday, someone's life going on without her (C802, L147); give the area's count;
 - **the window,** from the person's rows;
@@ -94,7 +96,7 @@ After the schedules, because a walk-in sits where that person's rows already put
 
 While her meters are still, a walk-in sets a flag only and never pays. A meter's first gain is never behind a chance roll (L70). A person's next arc step is never left to the dice (C174, C212). No "nothing happens" (L150). Write the scenes from `craft/walk-ins.md`. Each walk-in also names its next band and what opens it: a meter level or an arc step (`craft/walk-ins.md`, "How a walk-in grows").
 
-Must read: C788, C802, C854, C678, C212, C174, C28, L70, L97, L147, L150, L4, C2186, C2187, C2195.
+Must read: C788, C802, C854, C678, C212, C174, C28, L70, L97, L147, L150, L4, C2186, C2187, C2195, C2196.
 Why: the plan asked who notices her (§5) and what she can do (§6), but nothing asked what she walks into at a place. LO: "random scenes where she walks in, like in the old first term there was this park and library scenes... Here we dont have anything for it in the skill." (relayed by the ENI session, 2026-11-21; first_term_lean NOTES, 2026-11-21, sex scenes.) Going place by place, nobody asked what each person does alone, so a scene like old first_term's `ryan_door_ajar` (`games/first_term/toml_phases/7_final_game.toml:49479`) came up only by luck (LO, relayed 2026-11-21).
 
 ## 9 · The arcs

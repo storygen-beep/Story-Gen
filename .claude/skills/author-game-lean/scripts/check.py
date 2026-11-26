@@ -28,7 +28,8 @@ Checks:
   people     under [engine.people] system = "cot": every person has gender, attracted, a people_type or hand-set
              values, and 2 to 4 trait words, each with a row in the game's own [engine.people.traits], under
              show_traits = false; no person keeps a meter from before the switch; every
-             skill gate names one of her skills at a level 1 to 10, and no skill has a band table too (people.py).
+             skill gate names one of her skills at a level 1 to 10, and no skill has a band table too. On every
+             game: everyone she has met has a menu (or no_menu), and Talk is once a day across their places (people.py).
   walkins    every scene that comes to her (trigger_mode = "random": it fires by itself on arrival, never a
              button) names its person (requires_npc), whose rows reach its place; waits on and sets the game's one
              brake flag that [engine.daily_tick] clears; has two or more choices on its first screen; and is no

@@ -29,12 +29,24 @@ Red on (LO, typed in main-lean 2026-11-26: "Yes", "One is fine for now"):
      no substitution, left `trigger_mode = "manual"` (C2195);
   6. kind (a) on the shared brake (it waits on or sets the flag kind (b) shares), or without
      `max_triggers_per_day = 1` (C2195). Kind (a) keeps rule 3 (a way out) and rule 4; rules 1 and 2 are kind (b)'s.
+  7. (LO, typed in main-lean 2026-11-26: "she is working out in this scene. Why??", then "Go ahead.") a kind (b)
+     scene that fires on arrival whose first screen says she is in the middle of an act ("your stance", "the chair
+     beside you", ACT_WORDS): she has only just walked in, so it rides on the act instead (C2196). A short list;
+     the reader's C2196 is the real check.
+  8. kind (b) inside an act: a substitution target that waits on the shared brake. It keeps rules 1 to 3: the
+     person (`requires_npc`, or `npc_at_location` in the rule's or its own conditions), every first-screen choice
+     setting the brake, two choices; and it is `substitution_only` with the act's `trigger.location`, or the
+     engine can't find it (v2.py:4151-4165) or offers it as a button (C2196).
 """
 
 import scenes
 
 RANDOM = "random"
 FINDS = "she comes across something"  # the Rule label that marks kind (a) on a card's Does: (SKILL.md)
+# Words that put her in the middle of an act. On a scene that fires as she walks in, each is a line about something
+# she isn't doing yet (C2196; first_term_lean's marco_hips, "Your stance is all wrong", P49).
+ACT_WORDS = ("your stance", "your form", "your set", "your squat", "your reps", "your lift", "mid-set",
+             "your plate", "your fork", "your books", "your notes", "the chair beside you", "the seat beside you")
 
 
 def comes_to_her(game):
@@ -101,6 +113,34 @@ def next_door(conditions):
             and i.get("npc_id") and str(i.get("operator") or "is_present") == "is_present"]
 
 
+def first_text(canvas):
+    """The first screen's words, every block and group, lower case."""
+    nodes = canvas.get("nodes") or []
+    out = []
+
+    def walk(blocks):
+        for b in blocks or []:
+            if isinstance(b, dict):
+                if isinstance(b.get("content"), str):
+                    out.append(b["content"])
+                walk(b.get("blocks"))
+    if nodes and isinstance(nodes[0], dict):
+        walk(nodes[0].get("blocks"))
+    return " ".join(out).lower()
+
+
+def in_acts(game):
+    """[(act canvas, rule, target canvas)] for every substitution rule whose target exists."""
+    by_id = {c.get("id"): c for c in game.get("canvases") or [] if isinstance(c, dict)}
+    out = []
+    for c in by_id.values():
+        t = c.get("trigger") if isinstance(c.get("trigger"), dict) else {}
+        for r in t.get("substitutions") or []:
+            if isinstance(r, dict) and r.get("target_canvas_id") in by_id:
+                out.append((c, r, by_id[r["target_canvas_id"]]))
+    return out
+
+
 def labelled(does_by_card, label):
     """Canvas ids with a Does: screen that names the label."""
     return {screen.split(".", 1)[0] for does in (does_by_card or {}).values() for screen, trig in (does or {}).items()
@@ -164,6 +204,10 @@ def problems(game, does_by_card=None):
                         f"(craft/walk-ins.md, C2187)")
         else:
             brakes[cid] = brake
+        said = [w for w in ACT_WORDS if w in first_text(c)]
+        if said:
+            rows.append(f"{cid}: fires as she walks in, but its first screen has her mid-act (\"{said[0]}\"); put it "
+                        f"on that act as a substitution rule, after its costs (craft/walk-ins.md, C2196)")
         choices = first_choices(c)
         if len(choices) < 2:
             rows.append(f"{cid}: its first screen has {len(choices)} choice(s); she always has a written way out "
@@ -185,6 +229,35 @@ def problems(game, does_by_card=None):
         if len(choices) < 2:
             rows.append(f"{cid}: its first screen has {len(choices)} choice(s); she always has a written way out "
                         f"(C2188)")
+    for act, rule, target in in_acts(game):
+        tt = target.get("trigger") if isinstance(target.get("trigger"), dict) else {}
+        brake = waits_on(tt.get("conditions")) & shared_flags
+        if not brake or scenes.retired(target):
+            continue  # someone walking in on her, off the brake: not a scene that comes to her
+        tid = target.get("id")
+        at = (act.get("trigger") or {}).get("location")
+        who = tt.get("requires_npc")
+        near = next_door(rule.get("conditions")) + next_door(tt.get("conditions"))
+        if who and not rows_at(game, who, at):
+            rows.append(f"{tid}: `{who}` has no schedule row at `{at}`, where `{act.get('id')}` is, so it never "
+                        f"fires (C2186, L97)")
+        elif not who and not near:
+            rows.append(f"{tid}: comes to her inside `{act.get('id')}` with no person: `requires_npc`, or an "
+                        f"npc_at_location is_present on the rule (C2186)")
+        if not (tt.get("substitution_only") or target.get("substitution_only")):
+            rows.append(f"{tid}: rides on `{act.get('id')}` but isn't substitution_only, so it is a button too "
+                        f"(C2196)")
+        if tt.get("location") != at:
+            rows.append(f"{tid}: its trigger.location is `{tt.get('location')}`, not `{at}` where "
+                        f"`{act.get('id')}` is; the engine finds a target only under a place (v2.py:4151-4165, C2196)")
+        choices = first_choices(target)
+        if len(choices) < 2:
+            rows.append(f"{tid}: its first screen has {len(choices)} choice(s); she always has a written way out "
+                        f"(C2188)")
+        for i, ch in enumerate(choices):
+            if not (sets(ch) & brake):
+                rows.append(f"{tid}: choice {i + 1} (`{ch.get('text')}`) doesn't set the brake "
+                            f"`{sorted(brake)[0]}`, so a second scene can come to her today (C2187)")
     shared = set.intersection(*brakes.values()) if brakes else set()
     if len(brakes) > 1 and not shared:
         rows.append(f"the scenes that come to her wait on different flags ({sorted({f for b in brakes.values() for f in b})}); "
