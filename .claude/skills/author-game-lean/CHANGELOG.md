@@ -1138,3 +1138,11 @@ Why for all of these: P13's reader found new FAILs on every pass, v5 to v11 (99 
 - **v2.py cites moved past the Quests/People pages change.** The engine registers PersonPage and QuestsWalkthrough as info pages, which adds 6 lines at v2.py:20623. 18 lean cites past that point were remapped by the diff. None pointed inside the edited lines. The suite passes.
   - Why: LO, typed in main-lean 2026-11-26, "They should have their own page", then "Go ahead".
   - No craft rule changes: the skill never said these pages were dialogs.
+- **Each game picks its own climb meters.** LO, typed in main-lean 2026-11-26: "Go ahead", to "If you want each game to pick its own meters, that's one line to change in the skill". The skill had named CoT's four (Disinhibition, Exhibitionism, Submission, Dominance) as every lean game's meters, though the engine reads any `skill = true` row.
+  - **`craft/meters.md`:**
+    - The intro says the set is the game's own, picked on the plan, with first_term_lean's four as the worked example.
+    - Rule 1 says a meter nothing reads in a release stays off the sidebar, or is named on the plan as coming later.
+    - Rule 2 says a game with other meters writes its own ladder, in CoT's order of boldness.
+  - **`plan.md` §1:** asks which climb meters, how many and their names, with LO's words. C2181 is added to Must read.
+  - **`lists/COVERAGE.md`:** C2181 reworded to match.
+  - **first_term_lean** keeps its four, so nothing in the game changes.

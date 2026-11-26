@@ -10,7 +10,9 @@ A new game starts here. The plan is written in `games/<slug>/PLAN.md` from `temp
 
 Who she is: her age (18 or older, and written), her situation at minute zero, written character or blank slate, and **the narration person**, declared here, once, for the whole game (`[settings] narration_person`; second person is the genre standard).
 
-Must read: C39, C42, C54, C548, C503, C605.
+**Her climb meters, if any:** which, how many, and their names, with LO's words; each works as `craft/meters.md` says. Name one only if a release reads it, or say on the plan which release first does (C2181).
+
+Must read: C39, C42, C54, C548, C503, C605, C2181.
 Why: first_term_lean's P01 never declared the narration person, and it came up on P02. (NOTES gap "P01 never declared `[settings] narration_person`", 2026-11-20.)
 
 ## 2 · The want
