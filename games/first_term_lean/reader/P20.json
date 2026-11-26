@@ -1,6 +1,6 @@
 {
  "piece": "P20",
- "pass": 8,
+ "pass": 10,
  "screens": {
   "quad_meet_zoe.coffee": {
    "text": "cacb601aa799b9fd",
@@ -116,6 +116,8 @@
   "L168": "444c44970dc284f2",
   "L169": "59defccfc63b0454",
   "C1340": "b76a6583ae88c60f",
+  "C2197": "cafbb0a598dbfa97",
+  "C2198": "27e6b45f50edd3ac",
   "C769": "f6b6f78a8f2e5ed7",
   "C794": "bad76e5963432385",
   "C795": "34139e6a6914e171",
@@ -973,19 +975,6 @@
    "pass": 6
   },
   {
-   "row": "C2183",
-   "screen": "*",
-   "verdict": "PASS",
-   "line": "Zoe: Switch, Open Relationships, Dancer \u2014 lines in P37's zoe_party.home (\"dancing like the party's hers\", \"Nobody's mine\"); nothing on the quad contradicts them",
-   "why": "3 traits, two personality-kind and cited; true here",
-   "cause": null,
-   "note": false,
-   "screen_hash": "492ea00ea89995f9",
-   "row_hash": "40172c2d376bfc32",
-   "carried": true,
-   "pass": 6
-  },
-  {
    "row": "C2188",
    "screen": "quad_meet_zoe.coffee",
    "verdict": "PASS",
@@ -1050,7 +1039,7 @@
     "all": "6e049aeeb336f9ab"
    },
    "row_hash": "0c03931191c53a34",
-   "carried": false,
+   "carried": true,
    "pass": 8
   },
   {
@@ -1069,8 +1058,34 @@
     "all": "081bed1d70385580"
    },
    "row_hash": "0c03931191c53a34",
-   "carried": false,
+   "carried": true,
    "pass": 8
+  },
+  {
+   "row": "C2197",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "talk_zoe_quad, talk_zoe_cafeteria, talk_zoe_flat behind met_zoe",
+   "why": "Zoe: a menu at each place their rows put them where talking fits, behind the met flag; none where it doesn't (lecture hall, mid-rehearsal, party hours)",
+   "cause": null,
+   "note": false,
+   "screen_hash": "fdb2a1e1a6c519fe",
+   "row_hash": "cafbb0a598dbfa97",
+   "carried": true,
+   "pass": 9
+  },
+  {
+   "row": "C2198",
+   "screen": "*",
+   "verdict": "N/A",
+   "line": "",
+   "why": "quad_meet_zoe, a one-time meeting (its 'talk' node is the meeting's second screen, not a menu's Talk): no menu's Talk screen in this piece; C2198 is judged only on a person's Talk screen (the screen their menu's Talk opens)",
+   "cause": null,
+   "note": false,
+   "screen_hash": "fdb2a1e1a6c519fe",
+   "row_hash": "27e6b45f50edd3ac",
+   "carried": false,
+   "pass": 10
   },
   {
    "row": "C422",

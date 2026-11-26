@@ -1,6 +1,6 @@
 {
  "piece": "P42",
- "pass": 11,
+ "pass": 14,
  "screens": {
   "talk_mom.hub": {
    "text": "0f4660e14b94ab43",
@@ -148,6 +148,8 @@
   "L169": "7472e43cdaec19b9",
   "C2175": "72e884ab3b53f126",
   "C1340": "a335a4d228798817",
+  "C2197": "b681e73e13919ee2",
+  "C2198": "be119a385da08978",
   "people#1": "3ca322fe98f5dab6",
   "people#2": "77207820edd1c3a4",
   "people#3": "7c507f6ccfbc81b0",
@@ -163,6 +165,7 @@
   "people#13": "430f08c7c736c6db",
   "people#14": "a5525afeb491f4fc",
   "people#15": "b50727378128b19e",
+  "people#16": "45053c701775c75f",
   "C769": "cf7d7a82afabcbbb",
   "C794": "3281d513b7f90d6e",
   "C795": "a28152099697ac6a",
@@ -1778,7 +1781,7 @@
    "note": false,
    "screen_hash": "fa8a0f5220e51a33",
    "row_hash": "b14487623cb6fccb",
-   "carried": false,
+   "carried": true,
    "pass": 11
   },
   {
@@ -1791,7 +1794,7 @@
    "note": false,
    "screen_hash": "fa8a0f5220e51a33",
    "row_hash": "9c0115927a58f45d",
-   "carried": false,
+   "carried": true,
    "pass": 11
   },
   {
@@ -1834,19 +1837,6 @@
    "pass": 10
   },
   {
-   "row": "C2183",
-   "screen": "*",
-   "verdict": "PASS",
-   "line": "She pats the couch. \"Tell me one good thing. Just one. Even a small one counts.\" / Mom puts a plate of eggs in front of you",
-   "why": "Laura's Cook and Insecure are shown on day one (friendship 300 > 200) and true on every visit: she feeds her, and she keeps asking for promises and reassurance",
-   "cause": null,
-   "note": false,
-   "screen_hash": "8fedc23667492685",
-   "row_hash": "7187b816725b0ea6",
-   "carried": true,
-   "pass": 10
-  },
-  {
    "row": "C2193",
    "screen": "*",
    "verdict": "PASS",
@@ -1856,7 +1846,7 @@
    "note": false,
    "screen_hash": "fa8a0f5220e51a33",
    "row_hash": "67d1dd3f1a662064",
-   "carried": false,
+   "carried": true,
    "pass": 11
   },
   {
@@ -1869,8 +1859,59 @@
    "note": false,
    "screen_hash": "fa8a0f5220e51a33",
    "row_hash": "261bc3d5c5b53f2a",
-   "carried": false,
+   "carried": true,
    "pass": 11
+  },
+  {
+   "row": "C2197",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "talk_mom, mom_living_room behind met_laura; mark_kitchen, mark_living_room; ryan_room, ryan_kitchen, ryan_living_room",
+   "why": "the family has a menu in each room their rows put them awake (kitchen, living room, Ryan's room); none in the bathroom, hall or asleep",
+   "cause": null,
+   "note": false,
+   "screen_hash": "fa8a0f5220e51a33",
+   "row_hash": "b681e73e13919ee2",
+   "carried": true,
+   "pass": 12
+  },
+  {
+   "row": "C2198",
+   "screen": "mom_living_room.talk",
+   "verdict": "PASS",
+   "line": "Next time Mark's out, you tell me the next part. / Be home tomorrow night too. Promise me. / When it's just us, you tell me everything.",
+   "why": "same flag across both places; one fixed talk per visit context (start flag, Mark in), true on every visit (the Mark-out versions fire only Saturday 19-23; 'Next time Mark's out' and 'tomorrow night' are requests, not claims), each ending on a time or a person",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "eb78fbf9c5206259",
+    "traits": "4b9cc244e3119951",
+    "facts": "6bc79094f8d39647",
+    "facts2": "04bf141c5cb5340b",
+    "all": "13a427d6071bc370"
+   },
+   "row_hash": "be119a385da08978",
+   "carried": true,
+   "pass": 13
+  },
+  {
+   "row": "C2198",
+   "screen": "talk_mom.talk",
+   "verdict": "PASS",
+   "line": "If he does, you come to me first. Not him. Me. Promise? / When he's gone, you tell me everything. / Later, when it's quiet, you tell me about your week.",
+   "why": "one talked_mom_today, set by Talk on both her menus and unset in [engine.daily_tick]; one fixed talk per visit context (Mark in, Ryan in, neither), each true on the first and fifth visit (the opening's kitchen_rent puts the rent in every path), each ending on a person or a time (Mark, 'when he's gone', 'later, when it's quiet')",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "feb79fad5e3d8649",
+    "traits": "ff8b9fa74641271c",
+    "facts": "600f467893ef7bb9",
+    "facts2": "667847517eb6a28b",
+    "all": "66b9b16dce192c2f"
+   },
+   "row_hash": "be119a385da08978",
+   "carried": true,
+   "pass": 13
   },
   {
    "row": "C422",
@@ -6718,7 +6759,7 @@
    "note": false,
    "screen_hash": "fa8a0f5220e51a33",
    "row_hash": "430f08c7c736c6db",
-   "carried": false,
+   "carried": true,
    "pass": 11
   },
   {
@@ -6746,6 +6787,44 @@
    "row_hash": "b50727378128b19e",
    "carried": true,
    "pass": 10
+  },
+  {
+   "row": "people#16",
+   "screen": "mom_living_room.talk",
+   "verdict": "PASS",
+   "line": "Sit with me a minute, baby. ... How are your classes? Tell me everything.",
+   "why": "rule 16 bullet \"The household keeps its own talks\": her couch talk is her own for that room and needs no hook; one talked_mom_today across kitchen and living room; the Mark-absent branches can only play Saturday 19-23 (Mark out), where \"Stay in tonight\" and \"Next time Mark's out\" are true; the Mark-present branch covers every other evening",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "eb78fbf9c5206259",
+    "traits": "4b9cc244e3119951",
+    "facts": "6bc79094f8d39647",
+    "facts2": "04bf141c5cb5340b",
+    "all": "13a427d6071bc370"
+   },
+   "row_hash": "45053c701775c75f",
+   "carried": false,
+   "pass": 14
+  },
+  {
+   "row": "people#16",
+   "screen": "talk_mom.talk",
+   "verdict": "PASS",
+   "line": "Did Mark say anything else? About the rent?",
+   "why": "rule 16 bullet \"The household keeps its own talks\": a housemate may play her own talk per room, with no hook; Talk on both Mom menus sets the one talked_mom_today (cleared in daily_tick), so once a day across rooms holds; menu behind met_laura; each branch true on every visit by the rows (Mark in kitchen only 07-08 and weekend mornings, Ryan 17/18-19, never both at once), and the rent line follows the opening's rent scene",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "feb79fad5e3d8649",
+    "traits": "ff8b9fa74641271c",
+    "facts": "600f467893ef7bb9",
+    "facts2": "667847517eb6a28b",
+    "all": "66b9b16dce192c2f"
+   },
+   "row_hash": "45053c701775c75f",
+   "carried": false,
+   "pass": 14
   },
   {
    "row": "people#2",
@@ -7129,8 +7208,8 @@
  ],
  "causes": [],
  "pending": [],
- "asked": 5,
- "answered": 5,
+ "asked": 2,
+ "answered": 2,
  "pass_items": [],
  "unowed": []
 }

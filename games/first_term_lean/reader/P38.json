@@ -1,6 +1,6 @@
 {
  "piece": "P38",
- "pass": 9,
+ "pass": 12,
  "screens": {
   "walk_parents.moment": {
    "text": "7f828ca106b8bccf",
@@ -235,6 +235,8 @@
   "C2179": "47b9477e3ec8a790",
   "C2194": "0c03931191c53a34",
   "C1340": "b76a6583ae88c60f",
+  "C2197": "cafbb0a598dbfa97",
+  "C2198": "27e6b45f50edd3ac",
   "C769": "f6b6f78a8f2e5ed7",
   "C794": "bad76e5963432385",
   "C795": "34139e6a6914e171",
@@ -292,7 +294,8 @@
   "C2187": "f2b54b1dd7c15f2f",
   "C2188": "612394eef6826900",
   "C2189": "20748838895e4545",
-  "C2195": "77083291a86791c3"
+  "C2195": "77083291a86791c3",
+  "C2196": "a8ae0700d13a7f9b"
  },
  "verdicts": [
   {
@@ -400,7 +403,7 @@
     "all": "128e6f1356329d45"
    },
    "row_hash": "c1c0e2ac2588a579",
-   "carried": false,
+   "carried": true,
    "pass": 9
   },
   {
@@ -419,7 +422,7 @@
     "all": "1bed1fcf7f557de8"
    },
    "row_hash": "c1c0e2ac2588a579",
-   "carried": false,
+   "carried": true,
    "pass": 9
   },
   {
@@ -1087,7 +1090,7 @@
     "all": "128e6f1356329d45"
    },
    "row_hash": "80d415cf08e0ebfe",
-   "carried": false,
+   "carried": true,
    "pass": 9
   },
   {
@@ -1106,7 +1109,7 @@
     "all": "1bed1fcf7f557de8"
    },
    "row_hash": "80d415cf08e0ebfe",
-   "carried": false,
+   "carried": true,
    "pass": 9
   },
   {
@@ -2985,6 +2988,89 @@
    "pass": 8
   },
   {
+   "row": "C2196",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "Ryan's door is open a hand's width.",
+   "why": "walk_parents, walk_ryan_phone (passing doors in the hall at night), walk_mom_bills ('Dinner's on the stove', she comes into the kitchen), walk_mark_phone ('Listen from the hall' / 'Walk in': she is at the threshold), walk_ryan_game (on the couch, she walks in): each fires on arrival and needs her only just there, in whatever she wears, naming none of her clothes. walk_ryan_shower needs her under the water ('soap running down your tits') and rides on loop_shower as a substitution, never on arrival",
+   "cause": null,
+   "note": false,
+   "screen_hash": "60dfda327fb194f0",
+   "row_hash": "a8ae0700d13a7f9b",
+   "carried": true,
+   "pass": 10
+  },
+  {
+   "row": "C2197",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "talk_mom, mom_living_room behind met_laura; mark_kitchen, mark_living_room; ryan_room, ryan_kitchen, ryan_living_room",
+   "why": "the family has a menu in each room their rows put them awake (kitchen, living room, Ryan's room); none in the bathroom, hall or asleep",
+   "cause": null,
+   "note": false,
+   "screen_hash": "60dfda327fb194f0",
+   "row_hash": "cafbb0a598dbfa97",
+   "carried": true,
+   "pass": 11
+  },
+  {
+   "row": "C2198",
+   "screen": "walk_mark_phone.moment",
+   "verdict": "N/A",
+   "line": "",
+   "why": "a walk-in moment, not a menu's Talk screen; C2198 is judged only on the screen a person's menu's Talk opens",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "c14403bba8d4220d",
+    "traits": "a13af4c65af9f24a",
+    "facts": "643dd7b0173cb2a8",
+    "facts2": "371b14470ce23cce",
+    "all": "8840d8c240b6ef1f"
+   },
+   "row_hash": "27e6b45f50edd3ac",
+   "carried": false,
+   "pass": 12
+  },
+  {
+   "row": "C2198",
+   "screen": "walk_mom_bills.moment",
+   "verdict": "N/A",
+   "line": "",
+   "why": "a walk-in moment, not a menu's Talk screen; C2198 is judged only on the screen a person's menu's Talk opens",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "0d852b4dad8ff4ee",
+    "traits": "95f1c22815f415ed",
+    "facts": "4233727f3d0d2307",
+    "facts2": "34a8649ad7102788",
+    "all": "128e6f1356329d45"
+   },
+   "row_hash": "27e6b45f50edd3ac",
+   "carried": false,
+   "pass": 12
+  },
+  {
+   "row": "C2198",
+   "screen": "walk_ryan_phone.moment",
+   "verdict": "N/A",
+   "line": "",
+   "why": "a walk-in moment, not a menu's Talk screen; C2198 is judged only on the screen a person's menu's Talk opens",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "bc2dfd613888c1cc",
+    "traits": "74c4f68e6476ecee",
+    "facts": "24c4b946d90ccbb4",
+    "facts2": "829298a706f02a41",
+    "all": "a012f1eb60a521c0"
+   },
+   "row_hash": "27e6b45f50edd3ac",
+   "carried": false,
+   "pass": 12
+  },
+  {
    "row": "C286",
    "screen": "*",
    "verdict": "PASS",
@@ -3497,7 +3583,7 @@
     "all": "128e6f1356329d45"
    },
    "row_hash": "67e48e60d5053a2e",
-   "carried": false,
+   "carried": true,
    "pass": 9
   },
   {
@@ -3516,7 +3602,7 @@
     "all": "1bed1fcf7f557de8"
    },
    "row_hash": "67e48e60d5053a2e",
-   "carried": false,
+   "carried": true,
    "pass": 9
   },
   {
@@ -3849,7 +3935,7 @@
     "all": "128e6f1356329d45"
    },
    "row_hash": "310706ee076318f2",
-   "carried": false,
+   "carried": true,
    "pass": 9
   },
   {
@@ -3868,7 +3954,7 @@
     "all": "1bed1fcf7f557de8"
    },
    "row_hash": "310706ee076318f2",
-   "carried": false,
+   "carried": true,
    "pass": 9
   },
   {
@@ -5029,7 +5115,7 @@
     "all": "1bed1fcf7f557de8"
    },
    "row_hash": "4e86d143688ba8e5",
-   "carried": false,
+   "carried": true,
    "pass": 9
   },
   {
@@ -5361,7 +5447,7 @@
     "all": "1bed1fcf7f557de8"
    },
    "row_hash": "1aadffd96e76381c",
-   "carried": false,
+   "carried": true,
    "pass": 9
   },
   {
@@ -5671,7 +5757,7 @@
     "all": "128e6f1356329d45"
    },
    "row_hash": "13a714429d15f3b2",
-   "carried": false,
+   "carried": true,
    "pass": 9
   },
   {
@@ -5690,7 +5776,7 @@
     "all": "1bed1fcf7f557de8"
    },
    "row_hash": "13a714429d15f3b2",
-   "carried": false,
+   "carried": true,
    "pass": 9
   },
   {
@@ -6082,7 +6168,7 @@
     "all": "1bed1fcf7f557de8"
    },
    "row_hash": "e64ce2672d85d2d8",
-   "carried": false,
+   "carried": true,
    "pass": 9
   },
   {
@@ -6301,7 +6387,7 @@
     "all": "128e6f1356329d45"
    },
    "row_hash": "5d6e027964066b8b",
-   "carried": false,
+   "carried": true,
    "pass": 9
   },
   {
@@ -6364,8 +6450,8 @@
  ],
  "causes": [],
  "pending": [],
- "asked": 14,
- "answered": 14,
+ "asked": 3,
+ "answered": 3,
  "pass_items": [],
  "unowed": []
 }

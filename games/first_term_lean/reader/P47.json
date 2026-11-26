@@ -1,6 +1,6 @@
 {
  "piece": "P47",
- "pass": 6,
+ "pass": 8,
  "screens": {
   "dean_first.door": {
    "text": "21cbca984f087966",
@@ -129,6 +129,8 @@
   "L168": "444c44970dc284f2",
   "L169": "59defccfc63b0454",
   "C1340": "b76a6583ae88c60f",
+  "C2197": "cafbb0a598dbfa97",
+  "C2198": "27e6b45f50edd3ac",
   "C769": "f6b6f78a8f2e5ed7",
   "C794": "bad76e5963432385",
   "C795": "34139e6a6914e171",
@@ -183,7 +185,7 @@
     "all": "8040626dd6722770"
    },
    "row_hash": "c1c0e2ac2588a579",
-   "carried": false,
+   "carried": true,
    "pass": 6
   },
   {
@@ -202,7 +204,7 @@
     "all": "e66489400c2513f5"
    },
    "row_hash": "c1c0e2ac2588a579",
-   "carried": false,
+   "carried": true,
    "pass": 6
   },
   {
@@ -221,7 +223,7 @@
     "all": "9eebaf236fc8544a"
    },
    "row_hash": "c1c0e2ac2588a579",
-   "carried": false,
+   "carried": true,
    "pass": 6
   },
   {
@@ -240,7 +242,7 @@
     "all": "9469233f6210afe6"
    },
    "row_hash": "c1c0e2ac2588a579",
-   "carried": false,
+   "carried": true,
    "pass": 6
   },
   {
@@ -389,7 +391,7 @@
     "all": "8040626dd6722770"
    },
    "row_hash": "80d415cf08e0ebfe",
-   "carried": false,
+   "carried": true,
    "pass": 6
   },
   {
@@ -408,7 +410,7 @@
     "all": "e66489400c2513f5"
    },
    "row_hash": "80d415cf08e0ebfe",
-   "carried": false,
+   "carried": true,
    "pass": 6
   },
   {
@@ -427,7 +429,7 @@
     "all": "9eebaf236fc8544a"
    },
    "row_hash": "80d415cf08e0ebfe",
-   "carried": false,
+   "carried": true,
    "pass": 6
   },
   {
@@ -446,7 +448,7 @@
     "all": "9469233f6210afe6"
    },
    "row_hash": "80d415cf08e0ebfe",
-   "carried": false,
+   "carried": true,
    "pass": 6
   },
   {
@@ -530,7 +532,7 @@
     "all": "8040626dd6722770"
    },
    "row_hash": "f40f51a0fd6cfd10",
-   "carried": false,
+   "carried": true,
    "pass": 6
   },
   {
@@ -666,7 +668,7 @@
     "all": "8040626dd6722770"
    },
    "row_hash": "bfff76edbee583de",
-   "carried": false,
+   "carried": true,
    "pass": 6
   },
   {
@@ -1115,6 +1117,32 @@
    "pass": 5
   },
   {
+   "row": "C2197",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "talk_dean at campus_office_dean behind met_dean",
+   "why": "Dean: a menu at each place their rows put them where talking fits, behind the met flag; none where it doesn't (lecture hall, mid-rehearsal, party hours)",
+   "cause": null,
+   "note": false,
+   "screen_hash": "64d3ea48447db567",
+   "row_hash": "cafbb0a598dbfa97",
+   "carried": true,
+   "pass": 7
+  },
+  {
+   "row": "C2198",
+   "screen": "*",
+   "verdict": "N/A",
+   "line": "",
+   "why": "dean_first, a meeting: no menu's Talk screen in this piece; C2198 is judged only on a person's Talk screen (the screen their menu's Talk opens)",
+   "cause": null,
+   "note": false,
+   "screen_hash": "64d3ea48447db567",
+   "row_hash": "27e6b45f50edd3ac",
+   "carried": false,
+   "pass": 8
+  },
+  {
    "row": "C327",
    "screen": "*",
    "verdict": "PASS",
@@ -1221,7 +1249,7 @@
     "all": "8040626dd6722770"
    },
    "row_hash": "67e48e60d5053a2e",
-   "carried": false,
+   "carried": true,
    "pass": 6
   },
   {
@@ -1240,7 +1268,7 @@
     "all": "e66489400c2513f5"
    },
    "row_hash": "67e48e60d5053a2e",
-   "carried": false,
+   "carried": true,
    "pass": 6
   },
   {
@@ -1259,7 +1287,7 @@
     "all": "9eebaf236fc8544a"
    },
    "row_hash": "67e48e60d5053a2e",
-   "carried": false,
+   "carried": true,
    "pass": 6
   },
   {
@@ -1278,7 +1306,7 @@
     "all": "9469233f6210afe6"
    },
    "row_hash": "67e48e60d5053a2e",
-   "carried": false,
+   "carried": true,
    "pass": 6
   },
   {
@@ -1310,7 +1338,7 @@
     "all": "8040626dd6722770"
    },
    "row_hash": "310706ee076318f2",
-   "carried": false,
+   "carried": true,
    "pass": 6
   },
   {
@@ -1329,7 +1357,7 @@
     "all": "e66489400c2513f5"
    },
    "row_hash": "310706ee076318f2",
-   "carried": false,
+   "carried": true,
    "pass": 6
   },
   {
@@ -1348,7 +1376,7 @@
     "all": "9eebaf236fc8544a"
    },
    "row_hash": "310706ee076318f2",
-   "carried": false,
+   "carried": true,
    "pass": 6
   },
   {
@@ -1367,7 +1395,7 @@
     "all": "9469233f6210afe6"
    },
    "row_hash": "310706ee076318f2",
-   "carried": false,
+   "carried": true,
    "pass": 6
   },
   {
@@ -1934,7 +1962,7 @@
     "all": "e66489400c2513f5"
    },
    "row_hash": "4e86d143688ba8e5",
-   "carried": false,
+   "carried": true,
    "pass": 6
   },
   {
@@ -1953,7 +1981,7 @@
     "all": "9eebaf236fc8544a"
    },
    "row_hash": "4e86d143688ba8e5",
-   "carried": false,
+   "carried": true,
    "pass": 6
   },
   {
@@ -1972,7 +2000,7 @@
     "all": "9469233f6210afe6"
    },
    "row_hash": "4e86d143688ba8e5",
-   "carried": false,
+   "carried": true,
    "pass": 6
   },
   {
@@ -2043,7 +2071,7 @@
     "all": "e66489400c2513f5"
    },
    "row_hash": "1aadffd96e76381c",
-   "carried": false,
+   "carried": true,
    "pass": 6
   },
   {
@@ -2062,7 +2090,7 @@
     "all": "9eebaf236fc8544a"
    },
    "row_hash": "1aadffd96e76381c",
-   "carried": false,
+   "carried": true,
    "pass": 6
   },
   {
@@ -2081,7 +2109,7 @@
     "all": "9469233f6210afe6"
    },
    "row_hash": "1aadffd96e76381c",
-   "carried": false,
+   "carried": true,
    "pass": 6
   },
   {
@@ -2113,7 +2141,7 @@
     "all": "8040626dd6722770"
    },
    "row_hash": "13a714429d15f3b2",
-   "carried": false,
+   "carried": true,
    "pass": 6
   },
   {
@@ -2132,7 +2160,7 @@
     "all": "e66489400c2513f5"
    },
    "row_hash": "13a714429d15f3b2",
-   "carried": false,
+   "carried": true,
    "pass": 6
   },
   {
@@ -2151,7 +2179,7 @@
     "all": "9eebaf236fc8544a"
    },
    "row_hash": "13a714429d15f3b2",
-   "carried": false,
+   "carried": true,
    "pass": 6
   },
   {
@@ -2170,7 +2198,7 @@
     "all": "9469233f6210afe6"
    },
    "row_hash": "13a714429d15f3b2",
-   "carried": false,
+   "carried": true,
    "pass": 6
   },
   {
@@ -2254,7 +2282,7 @@
     "all": "e66489400c2513f5"
    },
    "row_hash": "e64ce2672d85d2d8",
-   "carried": false,
+   "carried": true,
    "pass": 6
   },
   {
@@ -2273,7 +2301,7 @@
     "all": "9eebaf236fc8544a"
    },
    "row_hash": "e64ce2672d85d2d8",
-   "carried": false,
+   "carried": true,
    "pass": 6
   },
   {
@@ -2292,7 +2320,7 @@
     "all": "9469233f6210afe6"
    },
    "row_hash": "e64ce2672d85d2d8",
-   "carried": false,
+   "carried": true,
    "pass": 6
   },
   {
@@ -2350,8 +2378,8 @@
  ],
  "causes": [],
  "pending": [],
- "asked": 31,
- "answered": 31,
+ "asked": 1,
+ "answered": 1,
  "pass_items": [],
  "unowed": []
 }

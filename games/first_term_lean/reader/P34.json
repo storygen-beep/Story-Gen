@@ -1,6 +1,6 @@
 {
  "piece": "P34",
- "pass": 15,
+ "pass": 18,
  "screens": {
   "talk_mom.hub": {
    "text": "0f4660e14b94ab43",
@@ -263,6 +263,8 @@
   "C2180": "a6c0f498d4d16271",
   "C2194": "0c03931191c53a34",
   "C1340": "b76a6583ae88c60f",
+  "C2197": "cafbb0a598dbfa97",
+  "C2198": "27e6b45f50edd3ac",
   "C769": "f6b6f78a8f2e5ed7",
   "C794": "bad76e5963432385",
   "C795": "34139e6a6914e171",
@@ -3837,19 +3839,6 @@
    "pass": 13
   },
   {
-   "row": "C2183",
-   "screen": "*",
-   "verdict": "PASS",
-   "line": "Mom puts a plate of eggs in front of you / \"Count it out where I can see it.\" / Ryan's on his bed with a controller",
-   "why": "Laura (Submissive, Cook, Insecure): Cook and Insecure shown on day one and true (meals, \"Promise?\"); Mark (Dominant, Confident, Particular): Particular true (the remote, counting the rent twice); Ryan (Submissive, Switch, Gamer): Gamer true (controller); each has 3 traits, one personality-kind",
-   "cause": null,
-   "note": false,
-   "screen_hash": "fced11e95e418963",
-   "row_hash": "40172c2d376bfc32",
-   "carried": true,
-   "pass": 13
-  },
-  {
    "row": "C2188",
    "screen": "*",
    "verdict": "N/A",
@@ -3909,7 +3898,7 @@
     "all": "e6b3d660fb156c98"
    },
    "row_hash": "0c03931191c53a34",
-   "carried": false,
+   "carried": true,
    "pass": 15
   },
   {
@@ -3928,7 +3917,7 @@
     "all": "b4055744f059dd1d"
    },
    "row_hash": "0c03931191c53a34",
-   "carried": false,
+   "carried": true,
    "pass": 15
   },
   {
@@ -3947,7 +3936,7 @@
     "all": "4901fcc5436c3e2b"
    },
    "row_hash": "0c03931191c53a34",
-   "carried": false,
+   "carried": true,
    "pass": 15
   },
   {
@@ -3966,7 +3955,7 @@
     "all": "a6f6a2b85d23b3a2"
    },
    "row_hash": "0c03931191c53a34",
-   "carried": false,
+   "carried": true,
    "pass": 15
   },
   {
@@ -3985,7 +3974,7 @@
     "all": "04bd193bb19a845c"
    },
    "row_hash": "0c03931191c53a34",
-   "carried": false,
+   "carried": true,
    "pass": 15
   },
   {
@@ -4004,7 +3993,7 @@
     "all": "e3c88a749be646e3"
    },
    "row_hash": "0c03931191c53a34",
-   "carried": false,
+   "carried": true,
    "pass": 15
   },
   {
@@ -4023,7 +4012,7 @@
     "all": "04931744b776fc09"
    },
    "row_hash": "0c03931191c53a34",
-   "carried": false,
+   "carried": true,
    "pass": 15
   },
   {
@@ -4042,7 +4031,7 @@
     "all": "3bf25ce111863764"
    },
    "row_hash": "0c03931191c53a34",
-   "carried": false,
+   "carried": true,
    "pass": 15
   },
   {
@@ -4061,7 +4050,7 @@
     "all": "6453ab1af862f835"
    },
    "row_hash": "0c03931191c53a34",
-   "carried": false,
+   "carried": true,
    "pass": 15
   },
   {
@@ -4080,7 +4069,7 @@
     "all": "49da2ec68f166d6c"
    },
    "row_hash": "0c03931191c53a34",
-   "carried": false,
+   "carried": true,
    "pass": 15
   },
   {
@@ -4099,7 +4088,7 @@
     "all": "fc5c2ab05062f34d"
    },
    "row_hash": "0c03931191c53a34",
-   "carried": false,
+   "carried": true,
    "pass": 15
   },
   {
@@ -4118,7 +4107,7 @@
     "all": "956afa2f5dda70a5"
    },
    "row_hash": "0c03931191c53a34",
-   "carried": false,
+   "carried": true,
    "pass": 15
   },
   {
@@ -4137,7 +4126,7 @@
     "all": "a6a70ab289ac7cd2"
    },
    "row_hash": "0c03931191c53a34",
-   "carried": false,
+   "carried": true,
    "pass": 15
   },
   {
@@ -4156,7 +4145,7 @@
     "all": "901dc409441ca938"
    },
    "row_hash": "0c03931191c53a34",
-   "carried": false,
+   "carried": true,
    "pass": 15
   },
   {
@@ -4175,7 +4164,7 @@
     "all": "3818cfe13af52bf4"
    },
    "row_hash": "0c03931191c53a34",
-   "carried": false,
+   "carried": true,
    "pass": 15
   },
   {
@@ -4194,7 +4183,7 @@
     "all": "636c6d5322eb7f41"
    },
    "row_hash": "0c03931191c53a34",
-   "carried": false,
+   "carried": true,
    "pass": 15
   },
   {
@@ -4213,7 +4202,7 @@
     "all": "b022152d5d8242ab"
    },
    "row_hash": "0c03931191c53a34",
-   "carried": false,
+   "carried": true,
    "pass": 15
   },
   {
@@ -4232,7 +4221,7 @@
     "all": "6e6bae3cf8fb4571"
    },
    "row_hash": "0c03931191c53a34",
-   "carried": false,
+   "carried": true,
    "pass": 15
   },
   {
@@ -4251,7 +4240,7 @@
     "all": "72eab913c378c469"
    },
    "row_hash": "0c03931191c53a34",
-   "carried": false,
+   "carried": true,
    "pass": 15
   },
   {
@@ -4270,7 +4259,7 @@
     "all": "4c25ee55de599eb7"
    },
    "row_hash": "0c03931191c53a34",
-   "carried": false,
+   "carried": true,
    "pass": 15
   },
   {
@@ -4289,8 +4278,135 @@
     "all": "66b9b16dce192c2f"
    },
    "row_hash": "0c03931191c53a34",
-   "carried": false,
+   "carried": true,
    "pass": 15
+  },
+  {
+   "row": "C2197",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "talk_mom, mom_living_room behind met_laura; mark_kitchen, mark_living_room; ryan_room, ryan_kitchen, ryan_living_room",
+   "why": "the family has a menu in each room their rows put them awake (kitchen, living room, Ryan's room); none in the bathroom, hall or asleep",
+   "cause": null,
+   "note": false,
+   "screen_hash": "b2406cb78fe432cd",
+   "row_hash": "cafbb0a598dbfa97",
+   "carried": true,
+   "pass": 16
+  },
+  {
+   "row": "C2198",
+   "screen": "mark_kitchen.talk",
+   "verdict": "PASS",
+   "line": "Whatever you say, he'll want the money again.",
+   "why": "one talked_mark_today across mark_kitchen and mark_living_room, unset in [engine.daily_tick]; one fixed talk, true on every visit ('You working, kid?' asks, claims no job); ends on the rent coming again, which Pay the rent on the same menu collects on Sundays at this table",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "fe35e365dcfda4ec",
+    "traits": "a13af4c65af9f24a",
+    "facts": "811544dad8de125f",
+    "facts2": "57f3c2e33f3edc83",
+    "all": "49da2ec68f166d6c"
+   },
+   "row_hash": "27e6b45f50edd3ac",
+   "carried": true,
+   "pass": 17
+  },
+  {
+   "row": "C2198",
+   "screen": "mark_living_room.talk",
+   "verdict": "PASS",
+   "line": "When you glance back, he's watching you instead of the screen.",
+   "why": "Talk screen of Mark's living-room menu; under rule 16 \"The household keeps its own talks\" a housemate's talk needs no hook; Talk on mark_kitchen and mark_living_room both set talked_mark_today, so once a day across rooms; nothing in it claims a past or a first time, so it is true on every visit",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "9c4eb02eda41c82b",
+    "traits": "a13af4c65af9f24a",
+    "facts": "37fda9030ed39d1b",
+    "facts2": "4244f0114f9bc150",
+    "all": "956afa2f5dda70a5"
+   },
+   "row_hash": "27e6b45f50edd3ac",
+   "carried": false,
+   "pass": 18
+  },
+  {
+   "row": "C2198",
+   "screen": "ryan_kitchen.talk",
+   "verdict": "PASS",
+   "line": "He says he'll make more tomorrow, if you're home.",
+   "why": "one talked_ryan_today across all four of Ryan's menus (ryan_room, ryan_room_weekend, ryan_kitchen, ryan_living_room), unset in [engine.daily_tick]; one fixed talk, true every visit; ends on a time and a place (tomorrow, home)",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "ef2da0282311767b",
+    "traits": "cbe784dabd345f8d",
+    "facts": "11c6c935c350ff61",
+    "facts2": "f0656c863969b3cd",
+    "all": "901dc409441ca938"
+   },
+   "row_hash": "27e6b45f50edd3ac",
+   "carried": true,
+   "pass": 17
+  },
+  {
+   "row": "C2198",
+   "screen": "ryan_living_room.talk",
+   "verdict": "PASS",
+   "line": "He says he'll save you the good end of the couch next time.",
+   "why": "same flag; one fixed talk, true every visit (Mark is in his chair every hour Ryan is on the couch); ends on a place and a time (the couch, next time)",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "a3fd91de339b2cda",
+    "traits": "cbe784dabd345f8d",
+    "facts": "76519d70d17fe391",
+    "facts2": "e058cda41e2fb0ae",
+    "all": "636c6d5322eb7f41"
+   },
+   "row_hash": "27e6b45f50edd3ac",
+   "carried": true,
+   "pass": 17
+  },
+  {
+   "row": "C2198",
+   "screen": "ryan_room.talk",
+   "verdict": "PASS",
+   "line": "It's free. I checked. ... you both know it'll happen again.",
+   "why": "same flag; one fixed talk, true every visit (his look at her chest happens again in this talk each time); ends on the bathroom he checked and a next time",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "166cb958fc8ae2d0",
+    "traits": "74c4f68e6476ecee",
+    "facts": "a6fb6e766446d2a9",
+    "facts2": "9743f5cae6d82f4f",
+    "all": "6e6bae3cf8fb4571"
+   },
+   "row_hash": "27e6b45f50edd3ac",
+   "carried": true,
+   "pass": 17
+  },
+  {
+   "row": "C2198",
+   "screen": "talk_mom.talk",
+   "verdict": "PASS",
+   "line": "When he's gone, you tell me everything.",
+   "why": "one talked_mom_today across both her menus, unset in [engine.daily_tick]; one fixed talk per visit context, true every visit, each ending on a person or a time",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "feb79fad5e3d8649",
+    "traits": "ff8b9fa74641271c",
+    "facts": "600f467893ef7bb9",
+    "facts2": "667847517eb6a28b",
+    "all": "66b9b16dce192c2f"
+   },
+   "row_hash": "27e6b45f50edd3ac",
+   "carried": true,
+   "pass": 17
   },
   {
    "row": "C338",

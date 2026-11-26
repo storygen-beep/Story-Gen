@@ -1,6 +1,6 @@
 {
  "piece": "P21",
- "pass": 13,
+ "pass": 15,
  "screens": {
   "cafe_hire.ask": {
    "text": "a5e6e9ac50172fda",
@@ -163,6 +163,8 @@
   "L168": "444c44970dc284f2",
   "L169": "59defccfc63b0454",
   "C1340": "b76a6583ae88c60f",
+  "C2197": "cafbb0a598dbfa97",
+  "C2198": "27e6b45f50edd3ac",
   "C769": "f6b6f78a8f2e5ed7",
   "C794": "bad76e5963432385",
   "C795": "34139e6a6914e171",
@@ -3203,19 +3205,6 @@
    "pass": 11
   },
   {
-   "row": "C2183",
-   "screen": "*",
-   "verdict": "PASS",
-   "line": "Tom: Forward, Confident (\"Your first one's a weekday... rookie\"); Chris: Forward, Dominant (\"Tom says you're mine to train.\")",
-   "why": "2 traits each; Forward learnable and shown",
-   "cause": null,
-   "note": false,
-   "screen_hash": "3c0282b5bb2a2efe",
-   "row_hash": "40172c2d376bfc32",
-   "carried": true,
-   "pass": 11
-  },
-  {
    "row": "C2188",
    "screen": "cafe_first_shift.start",
    "verdict": "N/A",
@@ -3365,7 +3354,7 @@
     "all": "a7317cddb57362e1"
    },
    "row_hash": "0c03931191c53a34",
-   "carried": false,
+   "carried": true,
    "pass": 13
   },
   {
@@ -3384,7 +3373,7 @@
     "all": "4d9f3e0bc1ef9374"
    },
    "row_hash": "0c03931191c53a34",
-   "carried": false,
+   "carried": true,
    "pass": 13
   },
   {
@@ -3403,7 +3392,7 @@
     "all": "42418262d722c19a"
    },
    "row_hash": "0c03931191c53a34",
-   "carried": false,
+   "carried": true,
    "pass": 13
   },
   {
@@ -3422,7 +3411,7 @@
     "all": "6dab71496dd6f5b6"
    },
    "row_hash": "0c03931191c53a34",
-   "carried": false,
+   "carried": true,
    "pass": 13
   },
   {
@@ -3441,7 +3430,7 @@
     "all": "056f7af4af82b8ef"
    },
    "row_hash": "0c03931191c53a34",
-   "carried": false,
+   "carried": true,
    "pass": 13
   },
   {
@@ -3460,8 +3449,34 @@
     "all": "7e7a7c971cf66e89"
    },
    "row_hash": "0c03931191c53a34",
-   "carried": false,
+   "carried": true,
    "pass": 13
+  },
+  {
+   "row": "C2197",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "talk_tom, talk_chris at near_cafe behind met_tom/met_chris",
+   "why": "Tom, Chris: a menu at each place their rows put them where talking fits, behind the met flag; none where it doesn't (lecture hall, mid-rehearsal, party hours)",
+   "cause": null,
+   "note": false,
+   "screen_hash": "8bde60acbb418c33",
+   "row_hash": "cafbb0a598dbfa97",
+   "carried": true,
+   "pass": 14
+  },
+  {
+   "row": "C2198",
+   "screen": "*",
+   "verdict": "N/A",
+   "line": "",
+   "why": "cafe_hire and cafe_first_shift: no menu's Talk screen in this piece; C2198 is judged only on a person's Talk screen (the screen their menu's Talk opens)",
+   "cause": null,
+   "note": false,
+   "screen_hash": "8bde60acbb418c33",
+   "row_hash": "27e6b45f50edd3ac",
+   "carried": false,
+   "pass": 15
   },
   {
    "row": "C286",

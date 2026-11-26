@@ -539,6 +539,31 @@ flagEffects = [
   { targetType = "player", flag = "came_to_her_today", op = "unset" },
   { targetType = "player", flag = "talked_mark_today", op = "unset" },
   { targetType = "player", flag = "talked_ryan_today", op = "unset" },
+  # P58 — the neighbourhood people's Talk (C2198)
+  { targetType = "player", flag = "talked_vance_today", op = "unset" },
+  { targetType = "player", flag = "talked_frank_today", op = "unset" },
+  { targetType = "player", flag = "talked_danny_today", op = "unset" },
+  { targetType = "player", flag = "talked_marco_today", op = "unset" },
+  { targetType = "player", flag = "talked_nina_today", op = "unset" },
+  # P59 — the near-campus people's Talk (C2198)
+  { targetType = "player", flag = "talked_tom_today", op = "unset" },
+  { targetType = "player", flag = "talked_chris_today", op = "unset" },
+  { targetType = "player", flag = "talked_sam_today", op = "unset" },
+  # P60 — Kayla's and Tess's Talk (C2198)
+  { targetType = "player", flag = "talked_kayla_today", op = "unset" },
+  { targetType = "player", flag = "talked_tess_today", op = "unset" },
+  # P57 — the campus people's Talk (C2198)
+  { targetType = "player", flag = "talked_hale_today", op = "unset" },
+  { targetType = "player", flag = "talked_pratt_today", op = "unset" },
+  { targetType = "player", flag = "talked_walsh_today", op = "unset" },
+  { targetType = "player", flag = "talked_dean_today", op = "unset" },
+  { targetType = "player", flag = "talked_cross_today", op = "unset" },
+  { targetType = "player", flag = "talked_holt_today", op = "unset" },
+  { targetType = "player", flag = "talked_nadia_today", op = "unset" },
+  { targetType = "player", flag = "talked_rosa_today", op = "unset" },
+  { targetType = "player", flag = "talked_zoe_today", op = "unset" },
+  { targetType = "player", flag = "talked_jake_today", op = "unset" },
+  { targetType = "player", flag = "talked_brooke_today", op = "unset" },
   { targetType = "player", flag = "ate_with_mom_today", op = "unset" },
   # P21 — "Not today." at the café parks the ask until the next day
   { targetType = "player", flag = "cafe_ask_parked", op = "unset" },
@@ -833,6 +858,115 @@ toast = false
 [[flags.labels]]
 key = "goal1_shown"
 label = "Goal1 shown"
+toast = false
+
+# P58 — the neighbourhood people's Talk flags
+[[flags.labels]]
+key = "talked_vance_today"
+label = "Talked vance today"
+toast = false
+
+[[flags.labels]]
+key = "talked_frank_today"
+label = "Talked frank today"
+toast = false
+
+[[flags.labels]]
+key = "talked_danny_today"
+label = "Talked danny today"
+toast = false
+
+[[flags.labels]]
+key = "talked_marco_today"
+label = "Talked marco today"
+toast = false
+
+[[flags.labels]]
+key = "talked_nina_today"
+label = "Talked nina today"
+toast = false
+
+# P59 — the near-campus people's Talk flags
+[[flags.labels]]
+key = "talked_tom_today"
+label = "Talked tom today"
+toast = false
+
+[[flags.labels]]
+key = "talked_chris_today"
+label = "Talked chris today"
+toast = false
+
+[[flags.labels]]
+key = "talked_sam_today"
+label = "Talked sam today"
+toast = false
+
+# P60 — Kayla's and Tess's Talk flags
+[[flags.labels]]
+key = "talked_kayla_today"
+label = "Talked kayla today"
+toast = false
+
+[[flags.labels]]
+key = "talked_tess_today"
+label = "Talked tess today"
+toast = false
+
+# P57 — the campus people's Talk flags
+[[flags.labels]]
+key = "talked_hale_today"
+label = "Talked hale today"
+toast = false
+
+[[flags.labels]]
+key = "talked_pratt_today"
+label = "Talked pratt today"
+toast = false
+
+[[flags.labels]]
+key = "talked_walsh_today"
+label = "Talked walsh today"
+toast = false
+
+[[flags.labels]]
+key = "talked_dean_today"
+label = "Talked dean today"
+toast = false
+
+[[flags.labels]]
+key = "talked_cross_today"
+label = "Talked cross today"
+toast = false
+
+[[flags.labels]]
+key = "talked_holt_today"
+label = "Talked holt today"
+toast = false
+
+[[flags.labels]]
+key = "talked_nadia_today"
+label = "Talked nadia today"
+toast = false
+
+[[flags.labels]]
+key = "talked_rosa_today"
+label = "Talked rosa today"
+toast = false
+
+[[flags.labels]]
+key = "talked_zoe_today"
+label = "Talked zoe today"
+toast = false
+
+[[flags.labels]]
+key = "talked_jake_today"
+label = "Talked jake today"
+toast = false
+
+[[flags.labels]]
+key = "talked_brooke_today"
+label = "Talked brooke today"
 toast = false
 
 [[flags.labels]]
@@ -1160,6 +1294,14 @@ flag_keys = [
   "cafe_hired", "rent_paid_once",
   # P11 — Sunday rent
   "rent_handled_this_week", "pays_her_own_way",
+  # P57 — campus: Talk once a day across their places (C2197, C2198)
+  "talked_hale_today", "talked_pratt_today", "talked_walsh_today", "talked_dean_today", "talked_cross_today", "talked_holt_today", "talked_nadia_today", "talked_rosa_today", "talked_zoe_today", "talked_jake_today", "talked_brooke_today",
+  # P58 — the neighbourhood: Talk once a day across their places (C2197, C2198)
+  "talked_vance_today", "talked_frank_today", "talked_danny_today", "talked_marco_today", "talked_nina_today",
+  # P59 — near campus: Talk once a day across their places (C2197, C2198)
+  "talked_tom_today", "talked_chris_today", "talked_sam_today",
+  # P60 — Brooke's friends: Talk once a day across their places (C2197, C2198)
+  "talked_kayla_today", "talked_tess_today",
   # P34 — Mark's and Ryan's Talk, once a day each; the day turn clears them
   "talked_mark_today", "talked_ryan_today",
   # P34 — Eat with her, once a day; the day turn clears it
@@ -5090,6 +5232,12 @@ show_when_blocked = true
 locked_text = "Needs leggings and a sports top"
 conditions = { version = "1.0", logic = "AND", items = [{ type = "clothing_item", item_id = "leggings", operator = "equipped" }, { type = "clothing_item", item_id = "sports_top", operator = "equipped" }] }
 
+# P56 — marco_hips comes to her here, inside the act (C2196; the brake and rest are on marco_hips's own trigger).
+[[canvases.trigger.substitutions]]
+target_canvas_id = "marco_hips"
+chance = 0.65
+conditions = { version = "1.0", logic = "AND", items = [{ type = "npc_at_location", npc_id = "npc_marco", location_id = "hood_gym", operator = "is_present" }] }
+
 [[canvases.nodes]]
 id = "lift"
 name = "Work out"
@@ -5843,6 +5991,12 @@ costs = [{ trait = "energy", value = 5 }]
 show_when_blocked = true
 locked_text = "you can't take in another page today."
 conditions = { version = "1.0", logic = "AND", items = [{ type = "trait", subject = "player", trait_key = "study_today", operator = "lt", value = 3 }] }
+
+# P56 — nadia_tip comes to her here, inside the act (C2196; the brake and rest are on nadia_tip's own trigger).
+[[canvases.trigger.substitutions]]
+target_canvas_id = "nadia_tip"
+chance = 0.65
+conditions = { version = "1.0", logic = "AND", items = [{ type = "npc_at_location", npc_id = "npc_nadia", location_id = "campus_library", operator = "is_present" }] }
 
 [[canvases.nodes]]
 id = "study"
@@ -8348,19 +8502,20 @@ name = "Marco has notes"
 
 [canvases.trigger]
 location = "hood_gym"
-trigger_mode = "random"
-chance = 0.65
+# P56 — rides on "Work out ($5)" (body_workout's substitution rule), after its costs and inside its gym-clothes lock
+# (craft/walk-ins.md C2196; LO 2026-11-26: "she is working out in this scene. Why??", "Go ahead.").
+trigger_mode = "manual"
+substitution_only = true
 requires_npc = "npc_marco"
 is_repeatable = true
 max_triggers_per_day = 1
-entry_only_from = ["hood_street"]
 conditions = { version = "1.0", logic = "AND", items = [{ type = "flag", subject = "player", flag_key = "came_to_her_today", operator = "is_false" }, { type = "flag", subject = "player", flag_key = "met_marco", operator = "is_true" }, { type = "group", logic = "OR", items = [{ type = "flag", subject = "player", flag_key = "marco_came", operator = "is_false" }, { type = "days_since_flag", subject = "player", flag_key = "marco_came", operator = "gte", value = 3 }] }] }
 
 [[canvases.nodes]]
 id = "moment"
 name = "Marco has notes"
 blocks = [
-  { type = "paragraph", content = "Marco catches you on your way in and looks you over." },
+  { type = "paragraph", content = "You pay at the desk for a day pass and find a bench by the mirrors. You're halfway through a set when Marco walks over and looks you over." },
   { type = "group", props = { conditions = { version = "1.0", logic = "AND", items = [{ type = "flag", subject = "player", flag_key = "marco_fixed_form", operator = "is_false" }] } }, blocks = [
     { type = "dialog", content = "You've got the build. Your stance is all wrong, though. Here.", props = { speaker = "npc", npcId = "npc_marco" } },
   ] },
@@ -8402,7 +8557,7 @@ type = "choices"
 text = "Done"
 targetType = "location"
 locationId = "hood_gym"
-time_progression_minutes = 5
+time_progression_minutes = 60
 
 [[canvases.nodes]]
 id = "got"
@@ -8420,7 +8575,7 @@ type = "choices"
 text = "Done"
 targetType = "location"
 locationId = "hood_gym"
-time_progression_minutes = 5
+time_progression_minutes = 60
 
 # P49 · Nadia, everyday; her line follows Hale (hale_called_in); each version once; rests three days.
 [[canvases]]
@@ -8429,8 +8584,9 @@ name = "Nadia sits down"
 
 [canvases.trigger]
 location = "campus_library"
-trigger_mode = "random"
-chance = 0.65
+# P56 — rides on "Study" (study_library's substitution rule), at a desk with her books (C2196).
+trigger_mode = "manual"
+substitution_only = true
 requires_npc = "npc_nadia"
 is_repeatable = true
 max_triggers_per_day = 1
@@ -8441,11 +8597,11 @@ id = "moment"
 name = "Nadia sits down"
 blocks = [
   { type = "group", props = { conditions = { version = "1.0", logic = "AND", items = [{ type = "flag", subject = "player", flag_key = "hale_called_in", operator = "is_false" }] } }, blocks = [
-    { type = "paragraph", content = "Nadia slides into the chair beside you and pushes a page across, highlighted to death." },
+    { type = "paragraph", content = "You've got your books spread across a desk on the quiet floor when Nadia slides into the chair beside you and pushes a page across, highlighted to death." },
     { type = "dialog", content = "Hale's exam's all chapter four. You didn't get it from me.", props = { speaker = "npc", npcId = "npc_nadia" } },
   ] },
   { type = "group", props = { conditions = { version = "1.0", logic = "AND", items = [{ type = "flag", subject = "player", flag_key = "hale_called_in", operator = "is_true" }] } }, blocks = [
-    { type = "paragraph", content = "Nadia slides into the chair beside you and looks at you too long." },
+    { type = "paragraph", content = "You've got your books spread across a desk on the quiet floor when Nadia slides into the chair beside you and looks at you too long." },
     { type = "dialog", content = "Hale called you in, didn't he?", props = { speaker = "npc", npcId = "npc_nadia" } },
   ] },
 ]
@@ -8499,7 +8655,8 @@ type = "choices"
 text = "Done"
 targetType = "location"
 locationId = "campus_library"
-time_progression_minutes = 5
+time_progression_minutes = 60
+effects = [{ trait = "study_today", op = "add", value = 1, clamp = false }]
 
 [[canvases.nodes]]
 id = "keep"
@@ -8516,7 +8673,8 @@ type = "choices"
 text = "Done"
 targetType = "location"
 locationId = "campus_library"
-time_progression_minutes = 5
+time_progression_minutes = 60
+effects = [{ trait = "study_today", op = "add", value = 1, clamp = false }]
 
 [[canvases.nodes]]
 id = "tell"
@@ -8533,7 +8691,8 @@ type = "choices"
 text = "Done"
 targetType = "location"
 locationId = "campus_library"
-time_progression_minutes = 5
+time_progression_minutes = 60
+effects = [{ trait = "study_today", op = "add", value = 1, clamp = false }]
 
 [[canvases.nodes]]
 id = "nothere"
@@ -8549,7 +8708,8 @@ type = "choices"
 text = "Done"
 targetType = "location"
 locationId = "campus_library"
-time_progression_minutes = 5
+time_progression_minutes = 60
+effects = [{ trait = "study_today", op = "add", value = 1, clamp = false }]
 
 
 # ── P39 · walk-ins, neighbourhood (PLAN §10b, LO "yes" 2026-11-21): a flag each, no meter. A known person's
@@ -10169,4 +10329,1659 @@ targetType = "location"
 locationId = "home_bathroom"
 time_progression_minutes = 15
 effects = [{ trait = "energy", op = "add", value = 5, clamp = true }]
+
+# ── P57 · campus: a menu for everyone she has met, one Talk a day across their places
+#    (craft/people.md rule 16, C2197, C2198; LO 2026-11-26 "Option B.", then "Take all these 3 talks to to only one."). ──
+
+# P57 · Dr. Hale's menu at campus_office_hale (Mon, Wed 14:00–17:00, in his office hours); one Talk a day (C2197, C2198).
+[[canvases]]
+id = "talk_hale"
+name = "Dr. Hale"
+
+[canvases.trigger]
+location = "campus_office_hale"
+trigger_mode = "manual"
+is_repeatable = true
+npc = "npc_hale"
+requires_npc = "npc_hale"
+conditions = { version = "1.0", logic = "AND", items = [{ type = "flag", subject = "player", flag_key = "met_hale", operator = "is_true" }] }
+
+[[canvases.nodes]]
+id = "hub"
+name = "Dr. Hale"
+blocks = [
+  { type = "paragraph", content = "Dr. Hale's at his desk with a file open. He looks at you over the top of it." },
+  { type = "image", props = { description = "A man of 39 in a shirt and tie at an office desk with an open file, looking up over it. Alone.", search_queries = ["professor 39 office desk open file looking up", "man in a tie at a desk in a small university office"], pool_dir = "everyday/hale_t0", pool = 1 } },
+]
+
+[canvases.nodes.exit_block]
+type = "choices"
+
+[[canvases.nodes.exit_block.choices]]
+text = "Talk"
+targetType = "node"
+nodeId = "talk"
+show_when_locked = true
+locked_text = "Talk — you've already talked today."
+conditions = { version = "1.0", logic = "AND", items = [{ type = "flag", subject = "player", flag_key = "talked_hale_today", operator = "is_false" }] }
+flagEffects = [{ flag = "talked_hale_today", op = "set" }]
+time_progression_minutes = 0
+
+[[canvases.nodes.exit_block.choices]]
+text = "Leave"
+targetType = "location"
+locationId = "campus_office_hale"
+time_progression_minutes = 0
+
+[[canvases.nodes]]
+id = "talk"
+name = "Talk to Dr. Hale"
+blocks = [
+  { type = "paragraph", content = "Dr. Hale points at the chair, and you sit." },
+  { type = "dialog", content = "Nobody comes to my door without a question, young lady. Ask it.", props = { speaker = "npc", npcId = "npc_hale" } },
+  { type = "dialog", content = "The reading, sir. I don't get the part about memory.", props = { speaker = "player" } },
+  { type = "dialog", content = "Nobody does at first. Read it twice. Then come back and tell me what you think it says.", props = { speaker = "npc", npcId = "npc_hale" } },
+  { type = "dialog", content = "Monday, nine o'clock. Front row. I'll be looking for you.", props = { speaker = "npc", npcId = "npc_hale" } },
+]
+
+[canvases.nodes.exit_block]
+type = "choices"
+
+[[canvases.nodes.exit_block.choices]]
+text = "Done"
+targetType = "location"
+locationId = "campus_office_hale"
+time_progression_minutes = 10
+
+# P57 · Mr. Pratt's menu at campus_office_pratt (Mon, Wed 13:00–15:00, in his office); one Talk a day (C2197, C2198).
+[[canvases]]
+id = "talk_pratt"
+name = "Mr. Pratt"
+
+[canvases.trigger]
+location = "campus_office_pratt"
+trigger_mode = "manual"
+is_repeatable = true
+npc = "npc_pratt"
+requires_npc = "npc_pratt"
+conditions = { version = "1.0", logic = "AND", items = [{ type = "flag", subject = "player", flag_key = "met_pratt", operator = "is_true" }] }
+
+[[canvases.nodes]]
+id = "hub"
+name = "Mr. Pratt"
+blocks = [
+  { type = "paragraph", content = "Mr. Pratt is at the whiteboard with a marker, and he doesn't stop writing." },
+  { type = "image", props = { description = "A man of 44 in a sweater writing equations on a crowded whiteboard in a small office. Alone.", search_queries = ["man 44 sweater writing on whiteboard office", "statistics professor at a whiteboard full of numbers"], pool_dir = "everyday/pratt_t0", pool = 1 } },
+]
+
+[canvases.nodes.exit_block]
+type = "choices"
+
+[[canvases.nodes.exit_block.choices]]
+text = "Talk"
+targetType = "node"
+nodeId = "talk"
+show_when_locked = true
+locked_text = "Talk — you've already talked today."
+conditions = { version = "1.0", logic = "AND", items = [{ type = "flag", subject = "player", flag_key = "talked_pratt_today", operator = "is_false" }] }
+flagEffects = [{ flag = "talked_pratt_today", op = "set" }]
+time_progression_minutes = 0
+
+[[canvases.nodes.exit_block.choices]]
+text = "Leave"
+targetType = "location"
+locationId = "campus_office_pratt"
+time_progression_minutes = 0
+
+[[canvases.nodes]]
+id = "talk"
+name = "Talk to Mr. Pratt"
+blocks = [
+  { type = "paragraph", content = "He caps the marker and turns round." },
+  { type = "dialog", content = "Miss @player. Sit. What is it?", props = { speaker = "npc", npcId = "npc_pratt" } },
+  { type = "dialog", content = "The problem set, sir. Number three.", props = { speaker = "player" } },
+  { type = "dialog", content = "Everyone gets three wrong. You divided before you squared.", props = { speaker = "npc", npcId = "npc_pratt" } },
+  { type = "paragraph", content = "He writes it out on the board, fast." },
+  { type = "dialog", content = "Do it again tonight. Wednesday at eleven, I'll call on you first.", props = { speaker = "npc", npcId = "npc_pratt" } },
+]
+
+[canvases.nodes.exit_block]
+type = "choices"
+
+[[canvases.nodes.exit_block.choices]]
+text = "Done"
+targetType = "location"
+locationId = "campus_office_pratt"
+time_progression_minutes = 10
+
+# P57 · Prof. Walsh's menu at campus_office_walsh (Tue, Thu 14:00–16:00, in her advisor hours); one Talk a day (C2197, C2198).
+[[canvases]]
+id = "talk_walsh"
+name = "Prof. Walsh"
+
+[canvases.trigger]
+location = "campus_office_walsh"
+trigger_mode = "manual"
+is_repeatable = true
+npc = "npc_walsh"
+requires_npc = "npc_walsh"
+conditions = { version = "1.0", logic = "AND", items = [{ type = "flag", subject = "player", flag_key = "met_walsh", operator = "is_true" }] }
+
+[[canvases.nodes]]
+id = "hub"
+name = "Prof. Walsh"
+blocks = [
+  { type = "paragraph", content = "Professor Walsh looks up from a stack of essays and smiles. The kettle on the sill is on." },
+  { type = "image", props = { description = "A woman of 48 in a cardigan at her desk in a small English professor's office, books and essays piled round her, smiling up. Alone.", search_queries = ["woman 48 cardigan desk piled with books smiling", "english professor office books kettle on windowsill"], pool_dir = "everyday/walsh_t0", pool = 1 } },
+]
+
+[canvases.nodes.exit_block]
+type = "choices"
+
+[[canvases.nodes.exit_block.choices]]
+text = "Talk"
+targetType = "node"
+nodeId = "talk"
+show_when_locked = true
+locked_text = "Talk — you've already talked today."
+conditions = { version = "1.0", logic = "AND", items = [{ type = "flag", subject = "player", flag_key = "talked_walsh_today", operator = "is_false" }] }
+flagEffects = [{ flag = "talked_walsh_today", op = "set" }]
+time_progression_minutes = 0
+
+[[canvases.nodes.exit_block.choices]]
+text = "Leave"
+targetType = "location"
+locationId = "campus_office_walsh"
+time_progression_minutes = 0
+
+[[canvases.nodes]]
+id = "talk"
+name = "Talk to Prof. Walsh"
+blocks = [
+  { type = "dialog", content = "There you are, dear. Sit. Tea? Tell me how it's really going.", props = { speaker = "npc", npcId = "npc_walsh" } },
+  { type = "dialog", content = "It's a lot. Everyone here seems to know where they're going.", props = { speaker = "player" } },
+  { type = "dialog", content = "Nobody does, dear. They're just louder about it.", props = { speaker = "npc", npcId = "npc_walsh" } },
+  { type = "paragraph", content = "She pours you a cup without waiting for an answer." },
+  { type = "dialog", content = "Bring me your essay before you hand it in, any Tuesday or Thursday afternoon. We'll read it together.", props = { speaker = "npc", npcId = "npc_walsh" } },
+]
+
+[canvases.nodes.exit_block]
+type = "choices"
+
+[[canvases.nodes.exit_block.choices]]
+text = "Done"
+targetType = "location"
+locationId = "campus_office_walsh"
+time_progression_minutes = 10
+
+# P57 · Dean Sterling's menu at campus_office_dean (weekdays 08:00–17:00, behind his desk); one Talk a day (C2197, C2198).
+[[canvases]]
+id = "talk_dean"
+name = "Dean Sterling"
+
+[canvases.trigger]
+location = "campus_office_dean"
+trigger_mode = "manual"
+is_repeatable = true
+npc = "npc_dean"
+requires_npc = "npc_dean"
+conditions = { version = "1.0", logic = "AND", items = [{ type = "flag", subject = "player", flag_key = "met_dean", operator = "is_true" }] }
+
+[[canvases.nodes]]
+id = "hub"
+name = "Dean Sterling"
+blocks = [
+  { type = "paragraph", content = "Dean Sterling is behind his desk, writing. He lets you stand there a while." },
+  { type = "image", props = { description = "A man of 58 in a dark suit writing at a large desk in a university dean's office, a window behind him, not looking up. Alone.", search_queries = ["man 58 dark suit writing at large desk window", "university dean behind big desk office"], pool_dir = "everyday/dean_t0", pool = 1 } },
+]
+
+[canvases.nodes.exit_block]
+type = "choices"
+
+[[canvases.nodes.exit_block.choices]]
+text = "Talk"
+targetType = "node"
+nodeId = "talk"
+show_when_locked = true
+locked_text = "Talk — you've already talked today."
+conditions = { version = "1.0", logic = "AND", items = [{ type = "flag", subject = "player", flag_key = "talked_dean_today", operator = "is_false" }] }
+flagEffects = [{ flag = "talked_dean_today", op = "set" }]
+time_progression_minutes = 0
+
+[[canvases.nodes.exit_block.choices]]
+text = "Leave"
+targetType = "location"
+locationId = "campus_office_dean"
+time_progression_minutes = 0
+
+[[canvases.nodes]]
+id = "talk"
+name = "Talk to Dean Sterling"
+blocks = [
+  { type = "paragraph", content = "He finishes his sentence before he looks up." },
+  { type = "dialog", content = "Child. Back in my office. I told you I don't like seeing a student twice.", props = { speaker = "npc", npcId = "npc_dean" } },
+  { type = "dialog", content = "I wanted to ask about the rules, sir. The handbook.", props = { speaker = "player" } },
+  { type = "dialog", content = "You haven't read it.", props = { speaker = "npc", npcId = "npc_dean" } },
+  { type = "dialog", content = "Not yet.", props = { speaker = "player" } },
+  { type = "dialog", content = "Then read it. Your advisor will walk you through it. That's what advisors are for.", props = { speaker = "npc", npcId = "npc_dean" } },
+]
+
+[canvases.nodes.exit_block]
+type = "choices"
+
+[[canvases.nodes.exit_block.choices]]
+text = "Done"
+targetType = "location"
+locationId = "campus_office_dean"
+time_progression_minutes = 10
+
+# P57 · Mr. Cross's menu at campus_theatre (Tue, Thu, Fri 14:00–18:00, running rehearsals (not his 11:00 class)); one Talk a day (C2197, C2198).
+[[canvases]]
+id = "talk_cross"
+name = "Mr. Cross"
+
+[canvases.trigger]
+location = "campus_theatre"
+trigger_mode = "manual"
+is_repeatable = true
+npc = "npc_cross"
+requires_npc = "npc_cross"
+conditions = { version = "1.0", logic = "AND", items = [{ type = "flag", subject = "player", flag_key = "met_cross", operator = "is_true" }, { type = "time_of_day", start_time = "14:00", end_time = "18:00" }] }
+
+[[canvases.nodes]]
+id = "hub"
+name = "Mr. Cross"
+blocks = [
+  { type = "paragraph", content = "Mr. Cross is in the front row with his feet up on the stage, watching a scene die." },
+  { type = "image", props = { description = "A man of 38 in a black t-shirt sitting in the front row of a small theatre, feet up on the stage. Alone.", search_queries = ["man 38 black t-shirt front row theatre feet on stage", "drama teacher watching rehearsal from front row"], pool_dir = "everyday/cross_t0", pool = 1 } },
+]
+
+[canvases.nodes.exit_block]
+type = "choices"
+
+[[canvases.nodes.exit_block.choices]]
+text = "Talk"
+targetType = "node"
+nodeId = "talk"
+show_when_locked = true
+locked_text = "Talk — you've already talked today."
+conditions = { version = "1.0", logic = "AND", items = [{ type = "flag", subject = "player", flag_key = "talked_cross_today", operator = "is_false" }] }
+flagEffects = [{ flag = "talked_cross_today", op = "set" }]
+time_progression_minutes = 0
+
+[[canvases.nodes.exit_block.choices]]
+text = "Leave"
+targetType = "location"
+locationId = "campus_theatre"
+time_progression_minutes = 0
+
+[[canvases.nodes]]
+id = "talk"
+name = "Talk to Mr. Cross"
+blocks = [
+  { type = "paragraph", content = "He doesn't take his feet off the stage." },
+  { type = "dialog", content = "New face. You came to watch, or to work?", props = { speaker = "npc", npcId = "npc_cross" } },
+  { type = "dialog", content = "To work. If you'll have me.", props = { speaker = "player" } },
+  { type = "dialog", content = "I'll have you when you can fill this room. Say your name. Like you're selling it.", props = { speaker = "npc", npcId = "npc_cross" } },
+  { type = "dialog", content = "@player.", props = { speaker = "player" } },
+  { type = "dialog", content = "Again. From the gut. Next rehearsal, you're on the stage, not in the seats.", props = { speaker = "npc", npcId = "npc_cross" } },
+]
+
+[canvases.nodes.exit_block]
+type = "choices"
+
+[[canvases.nodes.exit_block.choices]]
+text = "Done"
+targetType = "location"
+locationId = "campus_theatre"
+time_progression_minutes = 10
+
+# P57 · Ms. Holt's menu at campus_library (weekdays 08:00–16:00, Sat 10:00–16:00, at the desk); one Talk a day (C2197, C2198).
+[[canvases]]
+id = "talk_holt"
+name = "Ms. Holt"
+
+[canvases.trigger]
+location = "campus_library"
+trigger_mode = "manual"
+is_repeatable = true
+npc = "npc_holt"
+requires_npc = "npc_holt"
+conditions = { version = "1.0", logic = "AND", items = [{ type = "flag", subject = "player", flag_key = "met_holt", operator = "is_true" }] }
+
+[[canvases.nodes]]
+id = "hub"
+name = "Ms. Holt"
+blocks = [
+  { type = "paragraph", content = "Ms. Holt's at the desk, a paperback face-down by her elbow." },
+  { type = "image", props = { description = "A woman of 31 with glasses behind a library front desk, a paperback face-down by her elbow. Alone.", search_queries = ["woman 31 glasses library front desk paperback", "librarian behind the counter looking up"], pool_dir = "everyday/holt_t0", pool = 1 } },
+]
+
+[canvases.nodes.exit_block]
+type = "choices"
+
+[[canvases.nodes.exit_block.choices]]
+text = "Talk"
+targetType = "node"
+nodeId = "talk"
+show_when_locked = true
+locked_text = "Talk — you've already talked today."
+conditions = { version = "1.0", logic = "AND", items = [{ type = "flag", subject = "player", flag_key = "talked_holt_today", operator = "is_false" }] }
+flagEffects = [{ flag = "talked_holt_today", op = "set" }]
+time_progression_minutes = 0
+
+[[canvases.nodes.exit_block.choices]]
+text = "Leave"
+targetType = "location"
+locationId = "campus_library"
+time_progression_minutes = 0
+
+[[canvases.nodes]]
+id = "talk"
+name = "Talk to Ms. Holt"
+blocks = [
+  { type = "dialog", content = "Hon. You need something, or are you hiding?", props = { speaker = "npc", npcId = "npc_holt" } },
+  { type = "dialog", content = "A book for psychology. The ones on the chapter four list.", props = { speaker = "player" } },
+  { type = "dialog", content = "Second floor, by the window. Don't bend the spines.", props = { speaker = "npc", npcId = "npc_holt" } },
+  { type = "paragraph", content = "She slides her paperback under the counter without looking at it." },
+  { type = "dialog", content = "Saturdays it's dead in here, ten to four. Best time to find anything. Or do anything.", props = { speaker = "npc", npcId = "npc_holt" } },
+]
+
+[canvases.nodes.exit_block]
+type = "choices"
+
+[[canvases.nodes.exit_block.choices]]
+text = "Done"
+targetType = "location"
+locationId = "campus_library"
+time_progression_minutes = 10
+
+# P57 · Nadia's menu at campus_cafeteria (Mon, Wed 13:00–14:00, at lunch); one Talk a day (C2197, C2198).
+[[canvases]]
+id = "talk_nadia_cafeteria"
+name = "Nadia"
+
+[canvases.trigger]
+location = "campus_cafeteria"
+trigger_mode = "manual"
+is_repeatable = true
+npc = "npc_nadia"
+requires_npc = "npc_nadia"
+conditions = { version = "1.0", logic = "AND", items = [{ type = "flag", subject = "player", flag_key = "met_nadia", operator = "is_true" }] }
+
+[[canvases.nodes]]
+id = "hub"
+name = "Nadia"
+blocks = [
+  { type = "paragraph", content = "Nadia's at a table with a tray she isn't eating from, her notes spread beside it." },
+  { type = "image", props = { description = "A woman of 20 at a cafeteria table with a tray and notes spread out, looking up. Alone.", search_queries = ["woman 20 cafeteria table tray notes", "college student lunch table with notes"], pool_dir = "everyday/nadia_cafeteria_t0", pool = 1 } },
+]
+
+[canvases.nodes.exit_block]
+type = "choices"
+
+[[canvases.nodes.exit_block.choices]]
+text = "Talk"
+targetType = "node"
+nodeId = "talk"
+show_when_locked = true
+locked_text = "Talk — you've already talked today."
+conditions = { version = "1.0", logic = "AND", items = [{ type = "flag", subject = "player", flag_key = "talked_nadia_today", operator = "is_false" }] }
+flagEffects = [{ flag = "talked_nadia_today", op = "set" }]
+time_progression_minutes = 0
+
+[[canvases.nodes.exit_block.choices]]
+text = "Leave"
+targetType = "location"
+locationId = "campus_cafeteria"
+time_progression_minutes = 0
+
+[[canvases.nodes]]
+id = "talk"
+name = "Talk to Nadia"
+blocks = [
+  { type = "dialog", content = "Sit. You look like you're drowning.", props = { speaker = "npc", npcId = "npc_nadia" } },
+  { type = "dialog", content = "Everyone here's ahead of me.", props = { speaker = "player" } },
+  { type = "dialog", content = "They're not. Half of them are faking. I'm doing psych twice, and I'm still faking.", props = { speaker = "npc", npcId = "npc_nadia" } },
+  { type = "paragraph", content = "She pushes half her snack across to you." },
+  { type = "dialog", content = "Psych, Monday and Wednesday at nine. Sit by me, not at the back. I'll tell you which ones are faking.", props = { speaker = "npc", npcId = "npc_nadia" } },
+]
+
+[canvases.nodes.exit_block]
+type = "choices"
+
+[[canvases.nodes.exit_block.choices]]
+text = "Done"
+targetType = "location"
+locationId = "campus_cafeteria"
+time_progression_minutes = 10
+
+# P57 · Nadia's menu at campus_library (weekdays 14:00–18:00, studying); one Talk a day (C2197, C2198).
+[[canvases]]
+id = "talk_nadia_library"
+name = "Nadia"
+
+[canvases.trigger]
+location = "campus_library"
+trigger_mode = "manual"
+is_repeatable = true
+npc = "npc_nadia"
+requires_npc = "npc_nadia"
+conditions = { version = "1.0", logic = "AND", items = [{ type = "flag", subject = "player", flag_key = "met_nadia", operator = "is_true" }] }
+
+[[canvases.nodes]]
+id = "hub"
+name = "Nadia"
+blocks = [
+  { type = "paragraph", content = "Nadia's at a desk on the quiet floor, surrounded by highlighters." },
+  { type = "image", props = { description = "A woman of 20 at a library desk surrounded by highlighters and open books, looking up. Alone.", search_queries = ["woman 20 library desk highlighters open books", "college student studying in library looking up"], pool_dir = "everyday/nadia_library_t0", pool = 1 } },
+]
+
+[canvases.nodes.exit_block]
+type = "choices"
+
+[[canvases.nodes.exit_block.choices]]
+text = "Talk"
+targetType = "node"
+nodeId = "talk"
+show_when_locked = true
+locked_text = "Talk — you've already talked today."
+conditions = { version = "1.0", logic = "AND", items = [{ type = "flag", subject = "player", flag_key = "talked_nadia_today", operator = "is_false" }] }
+flagEffects = [{ flag = "talked_nadia_today", op = "set" }]
+time_progression_minutes = 0
+
+[[canvases.nodes.exit_block.choices]]
+text = "Leave"
+targetType = "location"
+locationId = "campus_library"
+time_progression_minutes = 0
+
+[[canvases.nodes]]
+id = "talk"
+name = "Talk to Nadia"
+blocks = [
+  { type = "dialog", content = "Sit. You look like you're drowning.", props = { speaker = "npc", npcId = "npc_nadia" } },
+  { type = "dialog", content = "Everyone here's ahead of me.", props = { speaker = "player" } },
+  { type = "dialog", content = "They're not. Half of them are faking. I'm doing psych twice, and I'm still faking.", props = { speaker = "npc", npcId = "npc_nadia" } },
+  { type = "paragraph", content = "She pushes half her snack across to you." },
+  { type = "dialog", content = "Psych, Monday and Wednesday at nine. Sit by me, not at the back. I'll tell you which ones are faking.", props = { speaker = "npc", npcId = "npc_nadia" } },
+]
+
+[canvases.nodes.exit_block]
+type = "choices"
+
+[[canvases.nodes.exit_block.choices]]
+text = "Done"
+targetType = "location"
+locationId = "campus_library"
+time_progression_minutes = 10
+
+# P57 · Rosa's menu at campus_cafeteria (weekdays 08:00–16:00, at the counter); one Talk a day (C2197, C2198).
+[[canvases]]
+id = "talk_rosa"
+name = "Rosa"
+
+[canvases.trigger]
+location = "campus_cafeteria"
+trigger_mode = "manual"
+is_repeatable = true
+npc = "npc_rosa"
+requires_npc = "npc_rosa"
+conditions = { version = "1.0", logic = "AND", items = [{ type = "flag", subject = "player", flag_key = "met_rosa", operator = "is_true" }] }
+
+[[canvases.nodes]]
+id = "hub"
+name = "Rosa"
+blocks = [
+  { type = "paragraph", content = "Rosa's behind the counter, ladle in hand. She sees you and points it at you." },
+  { type = "image", props = { description = "A woman of 45 in an apron behind a cafeteria counter, pointing a ladle and smiling. Alone.", search_queries = ["woman 45 apron cafeteria counter ladle smiling", "lunch lady behind counter pointing ladle"], pool_dir = "everyday/rosa_t0", pool = 1 } },
+]
+
+[canvases.nodes.exit_block]
+type = "choices"
+
+[[canvases.nodes.exit_block.choices]]
+text = "Talk"
+targetType = "node"
+nodeId = "talk"
+show_when_locked = true
+locked_text = "Talk — you've already talked today."
+conditions = { version = "1.0", logic = "AND", items = [{ type = "flag", subject = "player", flag_key = "talked_rosa_today", operator = "is_false" }] }
+flagEffects = [{ flag = "talked_rosa_today", op = "set" }]
+time_progression_minutes = 0
+
+[[canvases.nodes.exit_block.choices]]
+text = "Leave"
+targetType = "location"
+locationId = "campus_cafeteria"
+time_progression_minutes = 0
+
+[[canvases.nodes]]
+id = "talk"
+name = "Talk to Rosa"
+blocks = [
+  { type = "dialog", content = "Mija. You eating enough?", props = { speaker = "npc", npcId = "npc_rosa" } },
+  { type = "dialog", content = "A bit.", props = { speaker = "player" } },
+  { type = "dialog", content = "A bit is nothing. A bit is what birds eat.", props = { speaker = "npc", npcId = "npc_rosa" } },
+  { type = "paragraph", content = "She piles a plate before you can say no and pushes it across the counter." },
+  { type = "dialog", content = "Friday I make the soup myself, from my mother's pot. Come early, before the boys eat it all.", props = { speaker = "npc", npcId = "npc_rosa" } },
+]
+
+[canvases.nodes.exit_block]
+type = "choices"
+
+[[canvases.nodes.exit_block.choices]]
+text = "Done"
+targetType = "location"
+locationId = "campus_cafeteria"
+time_progression_minutes = 10
+
+# P57 · Zoe's menu at campus_quad (Mon, Wed, Fri 13:00–15:00, Tue, Thu 14:00–15:00, on the grass); one Talk a day (C2197, C2198).
+[[canvases]]
+id = "talk_zoe_quad"
+name = "Zoe"
+
+[canvases.trigger]
+location = "campus_quad"
+trigger_mode = "manual"
+is_repeatable = true
+npc = "npc_zoe"
+requires_npc = "npc_zoe"
+conditions = { version = "1.0", logic = "AND", items = [{ type = "flag", subject = "player", flag_key = "met_zoe", operator = "is_true" }] }
+
+[[canvases.nodes]]
+id = "hub"
+name = "Zoe"
+blocks = [
+  { type = "paragraph", content = "Zoe's stretched out on the grass in sunglasses, her skirt rucked up, and she doesn't fix it." },
+  { type = "image", props = { description = "A woman of 19 lying on the grass of a college quad in sunglasses and a short skirt. Alone.", search_queries = ["woman 19 lying on grass sunglasses short skirt campus", "college girl sunbathing on the quad"], pool_dir = "everyday/zoe_quad_t0", pool = 1 } },
+]
+
+[canvases.nodes.exit_block]
+type = "choices"
+
+[[canvases.nodes.exit_block.choices]]
+text = "Talk"
+targetType = "node"
+nodeId = "talk"
+show_when_locked = true
+locked_text = "Talk — you've already talked today."
+conditions = { version = "1.0", logic = "AND", items = [{ type = "flag", subject = "player", flag_key = "talked_zoe_today", operator = "is_false" }] }
+flagEffects = [{ flag = "talked_zoe_today", op = "set" }]
+time_progression_minutes = 0
+
+[[canvases.nodes.exit_block.choices]]
+text = "Leave"
+targetType = "location"
+locationId = "campus_quad"
+time_progression_minutes = 0
+
+[[canvases.nodes]]
+id = "talk"
+name = "Talk to Zoe"
+blocks = [
+  { type = "dialog", content = "Babe. Tell me something scandalous.", props = { speaker = "npc", npcId = "npc_zoe" } },
+  { type = "dialog", content = "I don't have anything scandalous.", props = { speaker = "player" } },
+  { type = "dialog", content = "Yet. God, everyone here is so boring.", props = { speaker = "npc", npcId = "npc_zoe" } },
+  { type = "paragraph", content = "She stretches so her top rides up, and doesn't fix it." },
+  { type = "dialog", content = "Saturday. Mine. Nine o'clock. Wear something short, and I'll show you who's worth knowing.", props = { speaker = "npc", npcId = "npc_zoe" } },
+]
+
+[canvases.nodes.exit_block]
+type = "choices"
+
+[[canvases.nodes.exit_block.choices]]
+text = "Done"
+targetType = "location"
+locationId = "campus_quad"
+time_progression_minutes = 10
+
+# P57 · Zoe's menu at campus_cafeteria (Tue, Thu 13:00–14:00, at lunch); one Talk a day (C2197, C2198).
+[[canvases]]
+id = "talk_zoe_cafeteria"
+name = "Zoe"
+
+[canvases.trigger]
+location = "campus_cafeteria"
+trigger_mode = "manual"
+is_repeatable = true
+npc = "npc_zoe"
+requires_npc = "npc_zoe"
+conditions = { version = "1.0", logic = "AND", items = [{ type = "flag", subject = "player", flag_key = "met_zoe", operator = "is_true" }] }
+
+[[canvases.nodes]]
+id = "hub"
+name = "Zoe"
+blocks = [
+  { type = "paragraph", content = "Zoe's at a table, stealing fries off a tray that isn't hers." },
+  { type = "image", props = { description = "A woman of 19 at a cafeteria table stealing fries off a tray, grinning. Alone.", search_queries = ["woman 19 cafeteria table eating fries grinning", "college girl at lunch table laughing"], pool_dir = "everyday/zoe_cafeteria_t0", pool = 1 } },
+]
+
+[canvases.nodes.exit_block]
+type = "choices"
+
+[[canvases.nodes.exit_block.choices]]
+text = "Talk"
+targetType = "node"
+nodeId = "talk"
+show_when_locked = true
+locked_text = "Talk — you've already talked today."
+conditions = { version = "1.0", logic = "AND", items = [{ type = "flag", subject = "player", flag_key = "talked_zoe_today", operator = "is_false" }] }
+flagEffects = [{ flag = "talked_zoe_today", op = "set" }]
+time_progression_minutes = 0
+
+[[canvases.nodes.exit_block.choices]]
+text = "Leave"
+targetType = "location"
+locationId = "campus_cafeteria"
+time_progression_minutes = 0
+
+[[canvases.nodes]]
+id = "talk"
+name = "Talk to Zoe"
+blocks = [
+  { type = "dialog", content = "Babe. Tell me something scandalous.", props = { speaker = "npc", npcId = "npc_zoe" } },
+  { type = "dialog", content = "I don't have anything scandalous.", props = { speaker = "player" } },
+  { type = "dialog", content = "Yet. God, everyone here is so boring.", props = { speaker = "npc", npcId = "npc_zoe" } },
+  { type = "paragraph", content = "She stretches so her top rides up, and doesn't fix it." },
+  { type = "dialog", content = "Saturday. Mine. Nine o'clock. Wear something short, and I'll show you who's worth knowing.", props = { speaker = "npc", npcId = "npc_zoe" } },
+]
+
+[canvases.nodes.exit_block]
+type = "choices"
+
+[[canvases.nodes.exit_block.choices]]
+text = "Done"
+targetType = "location"
+locationId = "campus_cafeteria"
+time_progression_minutes = 10
+
+# P57 · Zoe's menu at near_zoe_apartment (evenings 18:00–23:00 at home (not the Saturday party)); one Talk a day (C2197, C2198).
+[[canvases]]
+id = "talk_zoe_flat"
+name = "Zoe"
+
+[canvases.trigger]
+location = "near_zoe_apartment"
+trigger_mode = "manual"
+is_repeatable = true
+npc = "npc_zoe"
+requires_npc = "npc_zoe"
+conditions = { version = "1.0", logic = "AND", items = [{ type = "flag", subject = "player", flag_key = "met_zoe", operator = "is_true" }, { type = "group", logic = "OR", items = [{ type = "weekday", weekdays = [0, 1, 2, 3, 4] }, { type = "group", logic = "AND", items = [{ type = "weekday", weekdays = [5] }, { type = "time_of_day", start_time = "18:00", end_time = "21:00" }] }, { type = "group", logic = "AND", items = [{ type = "weekday", weekdays = [6] }, { type = "time_of_day", start_time = "18:00", end_time = "23:00" }] }] }] }
+
+[[canvases.nodes]]
+id = "hub"
+name = "Zoe"
+blocks = [
+  { type = "paragraph", content = "Zoe's on her couch with her feet up and her phone in her hand. She waves you in without looking up." },
+  { type = "image", props = { description = "A woman of 19 on a couch in a small apartment, feet up, phone in hand, waving. Alone.", search_queries = ["woman 19 couch apartment feet up phone", "college girl on her couch at home evening"], pool_dir = "everyday/zoe_flat_t0", pool = 1 } },
+]
+
+[canvases.nodes.exit_block]
+type = "choices"
+
+[[canvases.nodes.exit_block.choices]]
+text = "Talk"
+targetType = "node"
+nodeId = "talk"
+show_when_locked = true
+locked_text = "Talk — you've already talked today."
+conditions = { version = "1.0", logic = "AND", items = [{ type = "flag", subject = "player", flag_key = "talked_zoe_today", operator = "is_false" }] }
+flagEffects = [{ flag = "talked_zoe_today", op = "set" }]
+time_progression_minutes = 0
+
+[[canvases.nodes.exit_block.choices]]
+text = "Leave"
+targetType = "location"
+locationId = "near_zoe_apartment"
+time_progression_minutes = 0
+
+[[canvases.nodes]]
+id = "talk"
+name = "Talk to Zoe"
+blocks = [
+  { type = "dialog", content = "Babe. Tell me something scandalous.", props = { speaker = "npc", npcId = "npc_zoe" } },
+  { type = "dialog", content = "I don't have anything scandalous.", props = { speaker = "player" } },
+  { type = "dialog", content = "Yet. God, everyone here is so boring.", props = { speaker = "npc", npcId = "npc_zoe" } },
+  { type = "paragraph", content = "She stretches so her top rides up, and doesn't fix it." },
+  { type = "dialog", content = "Saturday. Mine. Nine o'clock. Wear something short, and I'll show you who's worth knowing.", props = { speaker = "npc", npcId = "npc_zoe" } },
+]
+
+[canvases.nodes.exit_block]
+type = "choices"
+
+[[canvases.nodes.exit_block.choices]]
+text = "Done"
+targetType = "location"
+locationId = "near_zoe_apartment"
+time_progression_minutes = 10
+
+# P57 · Jake's menu at campus_cafeteria (weekdays 12:00–14:00, at lunch); one Talk a day (C2197, C2198).
+[[canvases]]
+id = "talk_jake_cafeteria"
+name = "Jake"
+
+[canvases.trigger]
+location = "campus_cafeteria"
+trigger_mode = "manual"
+is_repeatable = true
+npc = "npc_jake"
+requires_npc = "npc_jake"
+conditions = { version = "1.0", logic = "AND", items = [{ type = "flag", subject = "player", flag_key = "met_jake", operator = "is_true" }] }
+
+[[canvases.nodes]]
+id = "hub"
+name = "Jake"
+blocks = [
+  { type = "paragraph", content = "Jake's at the table by the window with his friends. He sees you and sits up straighter." },
+  { type = "image", props = { description = "A man of 20 in a hoodie at a cafeteria table by a window, sitting up and smiling nervously. Alone.", search_queries = ["man 20 hoodie cafeteria table window nervous smile", "college guy at lunch table looking up"], pool_dir = "everyday/jake_cafeteria_t0", pool = 1 } },
+]
+
+[canvases.nodes.exit_block]
+type = "choices"
+
+[[canvases.nodes.exit_block.choices]]
+text = "Talk"
+targetType = "node"
+nodeId = "talk"
+show_when_locked = true
+locked_text = "Talk — you've already talked today."
+conditions = { version = "1.0", logic = "AND", items = [{ type = "flag", subject = "player", flag_key = "talked_jake_today", operator = "is_false" }] }
+flagEffects = [{ flag = "talked_jake_today", op = "set" }]
+time_progression_minutes = 0
+
+[[canvases.nodes.exit_block.choices]]
+text = "Leave"
+targetType = "location"
+locationId = "campus_cafeteria"
+time_progression_minutes = 0
+
+[[canvases.nodes]]
+id = "talk"
+name = "Talk to Jake"
+blocks = [
+  { type = "dialog", content = "Hey, trouble. You stopped.", props = { speaker = "npc", npcId = "npc_jake" } },
+  { type = "dialog", content = "Why wouldn't I?", props = { speaker = "player" } },
+  { type = "dialog", content = "The coffee thing. I thought maybe I scared you off. Did I?", props = { speaker = "npc", npcId = "npc_jake" } },
+  { type = "dialog", content = "You didn't scare me off.", props = { speaker = "player" } },
+  { type = "paragraph", content = "He rubs the back of his neck and grins at the ground." },
+  { type = "dialog", content = "Okay. Good. There's a café across from the gates. That's not me asking. Okay, it's me asking.", props = { speaker = "npc", npcId = "npc_jake" } },
+]
+
+[canvases.nodes.exit_block]
+type = "choices"
+
+[[canvases.nodes.exit_block.choices]]
+text = "Done"
+targetType = "location"
+locationId = "campus_cafeteria"
+time_progression_minutes = 10
+
+# P57 · Jake's menu at campus_quad (weekdays 14:00–16:00, with his friends); one Talk a day (C2197, C2198).
+[[canvases]]
+id = "talk_jake_quad"
+name = "Jake"
+
+[canvases.trigger]
+location = "campus_quad"
+trigger_mode = "manual"
+is_repeatable = true
+npc = "npc_jake"
+requires_npc = "npc_jake"
+conditions = { version = "1.0", logic = "AND", items = [{ type = "flag", subject = "player", flag_key = "met_jake", operator = "is_true" }] }
+
+[[canvases.nodes]]
+id = "hub"
+name = "Jake"
+blocks = [
+  { type = "paragraph", content = "Jake's on the steps with his friends. One of them elbows him as you come over." },
+  { type = "image", props = { description = "A man of 20 in a hoodie sitting on campus steps, looking up with a nervous grin. Alone.", search_queries = ["man 20 hoodie sitting on campus steps nervous grin", "college guy on the steps outside"], pool_dir = "everyday/jake_quad_t0", pool = 1 } },
+]
+
+[canvases.nodes.exit_block]
+type = "choices"
+
+[[canvases.nodes.exit_block.choices]]
+text = "Talk"
+targetType = "node"
+nodeId = "talk"
+show_when_locked = true
+locked_text = "Talk — you've already talked today."
+conditions = { version = "1.0", logic = "AND", items = [{ type = "flag", subject = "player", flag_key = "talked_jake_today", operator = "is_false" }] }
+flagEffects = [{ flag = "talked_jake_today", op = "set" }]
+time_progression_minutes = 0
+
+[[canvases.nodes.exit_block.choices]]
+text = "Leave"
+targetType = "location"
+locationId = "campus_quad"
+time_progression_minutes = 0
+
+[[canvases.nodes]]
+id = "talk"
+name = "Talk to Jake"
+blocks = [
+  { type = "dialog", content = "Hey, trouble. You stopped.", props = { speaker = "npc", npcId = "npc_jake" } },
+  { type = "dialog", content = "Why wouldn't I?", props = { speaker = "player" } },
+  { type = "dialog", content = "The coffee thing. I thought maybe I scared you off. Did I?", props = { speaker = "npc", npcId = "npc_jake" } },
+  { type = "dialog", content = "You didn't scare me off.", props = { speaker = "player" } },
+  { type = "paragraph", content = "He rubs the back of his neck and grins at the ground." },
+  { type = "dialog", content = "Okay. Good. There's a café across from the gates. That's not me asking. Okay, it's me asking.", props = { speaker = "npc", npcId = "npc_jake" } },
+]
+
+[canvases.nodes.exit_block]
+type = "choices"
+
+[[canvases.nodes.exit_block.choices]]
+text = "Done"
+targetType = "location"
+locationId = "campus_quad"
+time_progression_minutes = 10
+
+# P57 · Brooke's menu at campus_bathroom (weekdays 08:00–09:00 and 13:00–14:00, at the mirror); one Talk a day (C2197, C2198).
+[[canvases]]
+id = "talk_brooke"
+name = "Brooke"
+
+[canvases.trigger]
+location = "campus_bathroom"
+trigger_mode = "manual"
+is_repeatable = true
+npc = "npc_brooke"
+requires_npc = "npc_brooke"
+conditions = { version = "1.0", logic = "AND", items = [{ type = "flag", subject = "player", flag_key = "met_brooke", operator = "is_true" }] }
+
+[[canvases.nodes]]
+id = "hub"
+name = "Brooke"
+blocks = [
+  { type = "paragraph", content = "Brooke's at the mirror doing her lips. She watches you come in, in the glass." },
+  { type = "image", props = { description = "A woman of 21 at a bathroom mirror putting on lipstick, watching in the glass. Alone. No phone, not a selfie.", search_queries = ["woman 21 bathroom mirror lipstick", "college girl applying lipstick in mirror"], pool_dir = "everyday/brooke_t0", pool = 1 } },
+]
+
+[canvases.nodes.exit_block]
+type = "choices"
+
+[[canvases.nodes.exit_block.choices]]
+text = "Talk"
+targetType = "node"
+nodeId = "talk"
+show_when_locked = true
+locked_text = "Talk — you've already talked today."
+conditions = { version = "1.0", logic = "AND", items = [{ type = "flag", subject = "player", flag_key = "talked_brooke_today", operator = "is_false" }] }
+flagEffects = [{ flag = "talked_brooke_today", op = "set" }]
+time_progression_minutes = 0
+
+[[canvases.nodes.exit_block.choices]]
+text = "Leave"
+targetType = "location"
+locationId = "campus_bathroom"
+time_progression_minutes = 0
+
+[[canvases.nodes]]
+id = "talk"
+name = "Talk to Brooke"
+blocks = [
+  { type = "dialog", content = "Princess. Still here?", props = { speaker = "npc", npcId = "npc_brooke" } },
+  { type = "dialog", content = "I just need the mirror.", props = { speaker = "player" } },
+  { type = "dialog", content = "Wait your turn.", props = { speaker = "npc", npcId = "npc_brooke" } },
+  { type = "paragraph", content = "She takes her time with her lips, watching you in the glass." },
+  { type = "dialog", content = "Cute. I'm on that stage Tuesday, Thursday and Friday at two. Come and watch how it's done.", props = { speaker = "npc", npcId = "npc_brooke" } },
+]
+
+[canvases.nodes.exit_block]
+type = "choices"
+
+[[canvases.nodes.exit_block.choices]]
+text = "Done"
+targetType = "location"
+locationId = "campus_bathroom"
+time_progression_minutes = 10
+
+# ── P58 · the neighbourhood: a menu for everyone she has met, one Talk a day across their places
+#    (craft/people.md rule 16, C2197, C2198; LO 2026-11-26 "Option B.", then "Take all these 3 talks to to only one."). ──
+
+# P58 · Mr. Vance's menu at hood_street (weekdays 17:00–20:00, weekends 09:00–12:00 and 17:00–20:00, on his porch); one Talk a day (C2197, C2198).
+[[canvases]]
+id = "talk_vance"
+name = "Mr. Vance"
+
+[canvases.trigger]
+location = "hood_street"
+trigger_mode = "manual"
+is_repeatable = true
+npc = "npc_vance"
+requires_npc = "npc_vance"
+conditions = { version = "1.0", logic = "AND", items = [{ type = "flag", subject = "player", flag_key = "met_vance", operator = "is_true" }] }
+
+[[canvases.nodes]]
+id = "hub"
+name = "Mr. Vance"
+blocks = [
+  { type = "paragraph", content = "Mr. Vance is on his porch next door, in his chair, watching the street. He watches you come over." },
+  { type = "image", props = { description = "A man of 54 in a short-sleeved shirt sitting on a house porch with a beer, watching the street. Alone.", search_queries = ["man 54 sitting on porch with beer watching street", "older man on front porch chair suburban street"], pool_dir = "everyday/vance_t0", pool = 1 } },
+]
+
+[canvases.nodes.exit_block]
+type = "choices"
+
+[[canvases.nodes.exit_block.choices]]
+text = "Talk"
+targetType = "node"
+nodeId = "talk"
+show_when_locked = true
+locked_text = "Talk — you've already talked today."
+conditions = { version = "1.0", logic = "AND", items = [{ type = "flag", subject = "player", flag_key = "talked_vance_today", operator = "is_false" }] }
+flagEffects = [{ flag = "talked_vance_today", op = "set" }]
+time_progression_minutes = 0
+
+[[canvases.nodes.exit_block.choices]]
+text = "Leave"
+targetType = "location"
+locationId = "hood_street"
+time_progression_minutes = 0
+
+[[canvases.nodes]]
+id = "talk"
+name = "Talk to Mr. Vance"
+blocks = [
+  { type = "dialog", content = "Little lady. Come up a step. I don't bite.", props = { speaker = "npc", npcId = "npc_vance" } },
+  { type = "dialog", content = "I'm fine down here, Mr. Vance.", props = { speaker = "player" } },
+  { type = "dialog", content = "Suit yourself.", props = { speaker = "npc", npcId = "npc_vance" } },
+  { type = "paragraph", content = "He looks you over slowly, from your feet up, and doesn't pretend he isn't." },
+  { type = "dialog", content = "That house of mine looks better with you in it. Tell Mark the rent's due Sunday, same as always. He forgets.", props = { speaker = "npc", npcId = "npc_vance" } },
+]
+
+[canvases.nodes.exit_block]
+type = "choices"
+
+[[canvases.nodes.exit_block.choices]]
+text = "Done"
+targetType = "location"
+locationId = "hood_street"
+time_progression_minutes = 10
+
+# P58 · Frank's menu at hood_shop (Mon–Sat 07:00–15:00, behind the till); one Talk a day (C2197, C2198).
+[[canvases]]
+id = "talk_frank"
+name = "Frank"
+
+[canvases.trigger]
+location = "hood_shop"
+trigger_mode = "manual"
+is_repeatable = true
+npc = "npc_frank"
+requires_npc = "npc_frank"
+conditions = { version = "1.0", logic = "AND", items = [{ type = "flag", subject = "player", flag_key = "met_frank", operator = "is_true" }] }
+
+[[canvases.nodes]]
+id = "hub"
+name = "Frank"
+blocks = [
+  { type = "paragraph", content = "Frank's behind the till with the paper open, and he folds it the second you come in." },
+  { type = "image", props = { description = "A man of 52 behind a corner-shop till with a folded newspaper, looking up. Alone.", search_queries = ["man 52 corner shop till folded newspaper", "convenience store owner behind counter older man"], pool_dir = "everyday/frank_t0", pool = 1 } },
+]
+
+[canvases.nodes.exit_block]
+type = "choices"
+
+[[canvases.nodes.exit_block.choices]]
+text = "Talk"
+targetType = "node"
+nodeId = "talk"
+show_when_locked = true
+locked_text = "Talk — you've already talked today."
+conditions = { version = "1.0", logic = "AND", items = [{ type = "flag", subject = "player", flag_key = "talked_frank_today", operator = "is_false" }] }
+flagEffects = [{ flag = "talked_frank_today", op = "set" }]
+time_progression_minutes = 0
+
+[[canvases.nodes.exit_block.choices]]
+text = "Leave"
+targetType = "location"
+locationId = "hood_shop"
+time_progression_minutes = 0
+
+[[canvases.nodes]]
+id = "talk"
+name = "Talk to Frank"
+blocks = [
+  { type = "dialog", content = "Girlie. Laura's girl. What'll it be?", props = { speaker = "npc", npcId = "npc_frank" } },
+  { type = "dialog", content = "Just looking, Frank.", props = { speaker = "player" } },
+  { type = "dialog", content = "Just looking. Your stepdad says that too.", props = { speaker = "npc", npcId = "npc_frank" } },
+  { type = "paragraph", content = "He watches you down the aisle in the round mirror over the door." },
+  { type = "dialog", content = "Seven till three, girlie, Monday to Saturday. Nothing happens on this street I don't hear about.", props = { speaker = "npc", npcId = "npc_frank" } },
+]
+
+[canvases.nodes.exit_block]
+type = "choices"
+
+[[canvases.nodes.exit_block.choices]]
+text = "Done"
+targetType = "location"
+locationId = "hood_shop"
+time_progression_minutes = 10
+
+# P58 · Danny's menu at hood_shop (Mon–Sat 15:00–23:00, Sun 07:00–23:00, behind the till); one Talk a day (C2197, C2198).
+[[canvases]]
+id = "talk_danny"
+name = "Danny"
+
+[canvases.trigger]
+location = "hood_shop"
+trigger_mode = "manual"
+is_repeatable = true
+npc = "npc_danny"
+requires_npc = "npc_danny"
+conditions = { version = "1.0", logic = "AND", items = [{ type = "flag", subject = "player", flag_key = "met_danny", operator = "is_true" }] }
+
+[[canvases.nodes]]
+id = "hub"
+name = "Danny"
+blocks = [
+  { type = "paragraph", content = "Danny's leaning on the till with his phone, and he puts it face-down when he sees you." },
+  { type = "image", props = { description = "A man of 23 leaning on a corner-shop till, phone face-down, grinning. Alone.", search_queries = ["man 23 leaning on shop counter grinning", "young guy behind convenience store till evening"], pool_dir = "everyday/danny_t0", pool = 1 } },
+]
+
+[canvases.nodes.exit_block]
+type = "choices"
+
+[[canvases.nodes.exit_block.choices]]
+text = "Talk"
+targetType = "node"
+nodeId = "talk"
+show_when_locked = true
+locked_text = "Talk — you've already talked today."
+conditions = { version = "1.0", logic = "AND", items = [{ type = "flag", subject = "player", flag_key = "talked_danny_today", operator = "is_false" }] }
+flagEffects = [{ flag = "talked_danny_today", op = "set" }]
+time_progression_minutes = 0
+
+[[canvases.nodes.exit_block.choices]]
+text = "Leave"
+targetType = "location"
+locationId = "hood_shop"
+time_progression_minutes = 0
+
+[[canvases.nodes]]
+id = "talk"
+name = "Talk to Danny"
+blocks = [
+  { type = "dialog", content = "Gorgeous. Look at you.", props = { speaker = "npc", npcId = "npc_danny" } },
+  { type = "dialog", content = "Just passing, Danny.", props = { speaker = "player" } },
+  { type = "dialog", content = "Nobody just passes, gorgeous.", props = { speaker = "npc", npcId = "npc_danny" } },
+  { type = "paragraph", content = "He leans over the counter, and his fingers brush yours on it and stay." },
+  { type = "dialog", content = "Anything you need, you ask me, not the old man.", props = { speaker = "npc", npcId = "npc_danny" } },
+  { type = "dialog", content = "And if I need something now?", props = { speaker = "player" } },
+  { type = "dialog", content = "Then I'm here now. Every night till eleven, gorgeous.", props = { speaker = "npc", npcId = "npc_danny" } },
+]
+
+[canvases.nodes.exit_block]
+type = "choices"
+
+[[canvases.nodes.exit_block.choices]]
+text = "Done"
+targetType = "location"
+locationId = "hood_shop"
+time_progression_minutes = 10
+
+# P58 · Marco's menu at hood_gym (weekdays 06:00–10:00 and 17:00–21:00, Sat 08:00–14:00, training); one Talk a day (C2197, C2198).
+[[canvases]]
+id = "talk_marco"
+name = "Marco"
+
+[canvases.trigger]
+location = "hood_gym"
+trigger_mode = "manual"
+is_repeatable = true
+npc = "npc_marco"
+requires_npc = "npc_marco"
+conditions = { version = "1.0", logic = "AND", items = [{ type = "flag", subject = "player", flag_key = "met_marco", operator = "is_true" }] }
+
+[[canvases.nodes]]
+id = "hub"
+name = "Marco"
+blocks = [
+  { type = "paragraph", content = "Marco's by the rack between clients, a towel round his neck, and he watches you cross the floor." },
+  { type = "image", props = { description = "A muscular man of 29 in a tank top by a gym squat rack, towel round his neck. Alone.", search_queries = ["muscular man 29 tank top gym squat rack towel", "personal trainer standing by rack in gym"], pool_dir = "everyday/marco_t0", pool = 1 } },
+]
+
+[canvases.nodes.exit_block]
+type = "choices"
+
+[[canvases.nodes.exit_block.choices]]
+text = "Talk"
+targetType = "node"
+nodeId = "talk"
+show_when_locked = true
+locked_text = "Talk — you've already talked today."
+conditions = { version = "1.0", logic = "AND", items = [{ type = "flag", subject = "player", flag_key = "talked_marco_today", operator = "is_false" }] }
+flagEffects = [{ flag = "talked_marco_today", op = "set" }]
+time_progression_minutes = 0
+
+[[canvases.nodes.exit_block.choices]]
+text = "Leave"
+targetType = "location"
+locationId = "hood_gym"
+time_progression_minutes = 0
+
+[[canvases.nodes]]
+id = "talk"
+name = "Talk to Marco"
+blocks = [
+  { type = "dialog", content = "Champ. You training, or just looking?", props = { speaker = "npc", npcId = "npc_marco" } },
+  { type = "dialog", content = "I'm thinking about it.", props = { speaker = "player" } },
+  { type = "dialog", content = "Don't think. Lift.", props = { speaker = "npc", npcId = "npc_marco" } },
+  { type = "paragraph", content = "He pulls his shirt up to wipe his face, and lets you look at his stomach." },
+  { type = "dialog", content = "Mornings are dead, six to ten. That's when I train the ones I like. Come early.", props = { speaker = "npc", npcId = "npc_marco" } },
+  { type = "dialog", content = "And the ones you don't like?", props = { speaker = "player" } },
+  { type = "dialog", content = "Whenever. I don't notice them.", props = { speaker = "npc", npcId = "npc_marco" } },
+]
+
+[canvases.nodes.exit_block]
+type = "choices"
+
+[[canvases.nodes.exit_block.choices]]
+text = "Done"
+targetType = "location"
+locationId = "hood_gym"
+time_progression_minutes = 10
+
+# P58 · Nina's menu at hood_clothes (Mon–Sat 10:00–18:45, behind the till (not her quarter of an hour in the fitting room)); one Talk a day (C2197, C2198).
+[[canvases]]
+id = "talk_nina"
+name = "Nina"
+
+[canvases.trigger]
+location = "hood_clothes"
+trigger_mode = "manual"
+is_repeatable = true
+npc = "npc_nina"
+requires_npc = "npc_nina"
+conditions = { version = "1.0", logic = "AND", items = [{ type = "flag", subject = "player", flag_key = "met_nina", operator = "is_true" }, { type = "time_of_day", start_time = "10:00", end_time = "18:45" }] }
+
+[[canvases.nodes]]
+id = "hub"
+name = "Nina"
+blocks = [
+  { type = "paragraph", content = "Nina's behind the till in something tight and new, and she looks you up and down like she's pricing you." },
+  { type = "image", props = { description = "A woman of 26 in a tight dress behind a boutique till, looking up and smiling. Alone.", search_queries = ["woman 26 tight dress boutique counter smiling", "clothes shop owner behind till young woman"], pool_dir = "everyday/nina_t0", pool = 1 } },
+]
+
+[canvases.nodes.exit_block]
+type = "choices"
+
+[[canvases.nodes.exit_block.choices]]
+text = "Talk"
+targetType = "node"
+nodeId = "talk"
+show_when_locked = true
+locked_text = "Talk — you've already talked today."
+conditions = { version = "1.0", logic = "AND", items = [{ type = "flag", subject = "player", flag_key = "talked_nina_today", operator = "is_false" }] }
+flagEffects = [{ flag = "talked_nina_today", op = "set" }]
+time_progression_minutes = 0
+
+[[canvases.nodes.exit_block.choices]]
+text = "Leave"
+targetType = "location"
+locationId = "hood_clothes"
+time_progression_minutes = 0
+
+[[canvases.nodes]]
+id = "talk"
+name = "Talk to Nina"
+blocks = [
+  { type = "dialog", content = "Sweetie. Looking for something to get you noticed?", props = { speaker = "npc", npcId = "npc_nina" } },
+  { type = "dialog", content = "Just looking.", props = { speaker = "player" } },
+  { type = "dialog", content = "Everyone's just looking. Then they try it on.", props = { speaker = "npc", npcId = "npc_nina" } },
+  { type = "paragraph", content = "She turns side-on to the mirror and smooths her dress over her ass, slowly, for you." },
+  { type = "dialog", content = "The rack at the back is the good stuff. When you're ready for it, you'll know.", props = { speaker = "npc", npcId = "npc_nina" } },
+]
+
+[canvases.nodes.exit_block]
+type = "choices"
+
+[[canvases.nodes.exit_block.choices]]
+text = "Done"
+targetType = "location"
+locationId = "hood_clothes"
+time_progression_minutes = 10
+
+# ── P59 · near campus: a menu for everyone she has met, one Talk a day across their places
+#    (craft/people.md rule 16, C2197, C2198; LO 2026-11-26 "Option B.", then "Take all these 3 talks to to only one."). ──
+
+# P59 · Tom's menu at near_cafe (Mon–Sat 10:00–21:00, behind the counter); one Talk a day (C2197, C2198).
+[[canvases]]
+id = "talk_tom"
+name = "Tom"
+
+[canvases.trigger]
+location = "near_cafe"
+trigger_mode = "manual"
+is_repeatable = true
+npc = "npc_tom"
+requires_npc = "npc_tom"
+conditions = { version = "1.0", logic = "AND", items = [{ type = "flag", subject = "player", flag_key = "met_tom", operator = "is_true" }] }
+
+[[canvases.nodes]]
+id = "hub"
+name = "Tom"
+blocks = [
+  { type = "paragraph", content = "Tom's behind the counter with a cloth over his shoulder. He nods you over like you're on the clock." },
+  { type = "image", props = { description = "A man of 31 in a black apron behind a café counter, a cloth over his shoulder, nodding. Alone.", search_queries = ["man 31 black apron behind cafe counter", "cafe manager leaning on counter"], pool_dir = "everyday/tom_t0", pool = 1 } },
+]
+
+[canvases.nodes.exit_block]
+type = "choices"
+
+[[canvases.nodes.exit_block.choices]]
+text = "Talk"
+targetType = "node"
+nodeId = "talk"
+show_when_locked = true
+locked_text = "Talk — you've already talked today."
+conditions = { version = "1.0", logic = "AND", items = [{ type = "flag", subject = "player", flag_key = "talked_tom_today", operator = "is_false" }] }
+flagEffects = [{ flag = "talked_tom_today", op = "set" }]
+time_progression_minutes = 0
+
+[[canvases.nodes.exit_block.choices]]
+text = "Leave"
+targetType = "location"
+locationId = "near_cafe"
+time_progression_minutes = 0
+
+[[canvases.nodes]]
+id = "talk"
+name = "Talk to Tom"
+blocks = [
+  { type = "dialog", content = "Rookie. You're not on, and you're here anyway.", props = { speaker = "npc", npcId = "npc_tom" } },
+  { type = "dialog", content = "I like it in here.", props = { speaker = "player" } },
+  { type = "dialog", content = "Everyone likes it in here when they're not working.", props = { speaker = "npc", npcId = "npc_tom" } },
+  { type = "paragraph", content = "He wipes the counter where it's already clean, and watches your hands, not your face." },
+  { type = "dialog", content = "Saturdays are the busy ones, ten till nine. That's where the tips are, if you want them.", props = { speaker = "npc", npcId = "npc_tom" } },
+  { type = "dialog", content = "I might.", props = { speaker = "player" } },
+  { type = "dialog", content = "You will.", props = { speaker = "npc", npcId = "npc_tom" } },
+]
+
+[canvases.nodes.exit_block]
+type = "choices"
+
+[[canvases.nodes.exit_block.choices]]
+text = "Done"
+targetType = "location"
+locationId = "near_cafe"
+time_progression_minutes = 10
+
+# P59 · Chris's menu at near_cafe (weekdays 07:00–15:00, weekends 10:00–20:00, at the machine); one Talk a day (C2197, C2198).
+[[canvases]]
+id = "talk_chris"
+name = "Chris"
+
+[canvases.trigger]
+location = "near_cafe"
+trigger_mode = "manual"
+is_repeatable = true
+npc = "npc_chris"
+requires_npc = "npc_chris"
+conditions = { version = "1.0", logic = "AND", items = [{ type = "flag", subject = "player", flag_key = "met_chris", operator = "is_true" }] }
+
+[[canvases.nodes]]
+id = "hub"
+name = "Chris"
+blocks = [
+  { type = "paragraph", content = "Chris is at the machine, sleeves pushed up, and he doesn't stop working to look at you. He looks anyway." },
+  { type = "image", props = { description = "A man of 24 with his sleeves pushed up working an espresso machine behind a small café counter, glancing over. Alone.", search_queries = ["man 24 sleeves pushed up espresso machine barista", "barista at coffee machine glancing over shoulder"], pool_dir = "everyday/chris_t0", pool = 1 } },
+]
+
+[canvases.nodes.exit_block]
+type = "choices"
+
+[[canvases.nodes.exit_block.choices]]
+text = "Talk"
+targetType = "node"
+nodeId = "talk"
+show_when_locked = true
+locked_text = "Talk — you've already talked today."
+conditions = { version = "1.0", logic = "AND", items = [{ type = "flag", subject = "player", flag_key = "talked_chris_today", operator = "is_false" }] }
+flagEffects = [{ flag = "talked_chris_today", op = "set" }]
+time_progression_minutes = 0
+
+[[canvases.nodes.exit_block.choices]]
+text = "Leave"
+targetType = "location"
+locationId = "near_cafe"
+time_progression_minutes = 0
+
+[[canvases.nodes]]
+id = "talk"
+name = "Talk to Chris"
+blocks = [
+  { type = "dialog", content = "New girl. Off the clock?", props = { speaker = "npc", npcId = "npc_chris" } },
+  { type = "dialog", content = "I came for the coffee.", props = { speaker = "player" } },
+  { type = "dialog", content = "Liar. You came to watch me work.", props = { speaker = "npc", npcId = "npc_chris" } },
+  { type = "paragraph", content = "He knocks the grounds out hard, and his eyes go down you and back up." },
+  { type = "dialog", content = "Next Sunday, Tom's off. Come in and see what I'm like with nobody watching.", props = { speaker = "npc", npcId = "npc_chris" } },
+]
+
+[canvases.nodes.exit_block]
+type = "choices"
+
+[[canvases.nodes.exit_block.choices]]
+text = "Done"
+targetType = "location"
+locationId = "near_cafe"
+time_progression_minutes = 10
+
+# P59 · Sam's menu at near_zoe_apartment (every day 12:00–00:00 of his 12:00–02:00 row, at home (not Zoe's Saturday party)); one Talk a day (C2197, C2198).
+[[canvases]]
+id = "talk_sam"
+name = "Sam"
+
+[canvases.trigger]
+location = "near_zoe_apartment"
+trigger_mode = "manual"
+is_repeatable = true
+npc = "npc_sam"
+requires_npc = "npc_sam"
+conditions = { version = "1.0", logic = "AND", items = [{ type = "flag", subject = "player", flag_key = "met_sam", operator = "is_true" }, { type = "group", logic = "OR", items = [{ type = "group", logic = "AND", items = [{ type = "weekday", weekdays = [0, 1, 2, 3, 4, 6] }, { type = "time_of_day", start_time = "12:00", end_time = "00:00" }] }, { type = "group", logic = "AND", items = [{ type = "weekday", weekdays = [5] }, { type = "time_of_day", start_time = "12:00", end_time = "21:00" }] }] }] }
+
+[[canvases.nodes]]
+id = "hub"
+name = "Sam"
+blocks = [
+  { type = "paragraph", content = "Sam's sprawled on the sofa with his guitar, barefoot, and he lifts two fingers off the strings at you." },
+  { type = "image", props = { description = "A man of 22 sprawled barefoot on a sofa in a small shared student apartment, an acoustic guitar on his lap, lifting two fingers in a wave. Alone.", search_queries = ["man 22 barefoot on sofa acoustic guitar", "college guy lounging with guitar in apartment"], pool_dir = "everyday/sam_t0", pool = 1 } },
+]
+
+[canvases.nodes.exit_block]
+type = "choices"
+
+[[canvases.nodes.exit_block.choices]]
+text = "Talk"
+targetType = "node"
+nodeId = "talk"
+show_when_locked = true
+locked_text = "Talk — you've already talked today."
+conditions = { version = "1.0", logic = "AND", items = [{ type = "flag", subject = "player", flag_key = "talked_sam_today", operator = "is_false" }] }
+flagEffects = [{ flag = "talked_sam_today", op = "set" }]
+time_progression_minutes = 0
+
+[[canvases.nodes.exit_block.choices]]
+text = "Leave"
+targetType = "location"
+locationId = "near_zoe_apartment"
+time_progression_minutes = 0
+
+[[canvases.nodes]]
+id = "talk"
+name = "Talk to Sam"
+blocks = [
+  { type = "dialog", content = "Sunshine. Here for Zoe, or for me?", props = { speaker = "npc", npcId = "npc_sam" } },
+  { type = "dialog", content = "I haven't decided.", props = { speaker = "player" } },
+  { type = "dialog", content = "Me, then. Sit. Mind the sofa.", props = { speaker = "npc", npcId = "npc_sam" } },
+  { type = "dialog", content = "What's wrong with the sofa?", props = { speaker = "player" } },
+  { type = "dialog", content = "Ask Zoe. Then don't sit on that end.", props = { speaker = "npc", npcId = "npc_sam" } },
+  { type = "paragraph", content = "He plays three chords badly, watching your legs instead of his hands." },
+  { type = "dialog", content = "Saturday nights there's a party here. I'll be on this sofa. Come and sit on it with me.", props = { speaker = "npc", npcId = "npc_sam" } },
+]
+
+[canvases.nodes.exit_block]
+type = "choices"
+
+[[canvases.nodes.exit_block.choices]]
+text = "Done"
+targetType = "location"
+locationId = "near_zoe_apartment"
+time_progression_minutes = 10
+
+# ── P60 · Brooke's friends: a menu for everyone she has met, one Talk a day across their places
+#    (craft/people.md rule 16, C2197, C2198; LO 2026-11-26 "Option B.", then "Take all these 3 talks to to only one."). ──
+
+# P60 · Kayla's menu at campus_bathroom (weekdays 08:00–09:00 and 13:00–14:00, at the mirror with Brooke); one Talk a day (C2197, C2198).
+[[canvases]]
+id = "talk_kayla_mirror"
+name = "Kayla"
+
+[canvases.trigger]
+location = "campus_bathroom"
+trigger_mode = "manual"
+is_repeatable = true
+npc = "npc_kayla"
+requires_npc = "npc_kayla"
+conditions = { version = "1.0", logic = "AND", items = [{ type = "flag", subject = "player", flag_key = "met_brooke", operator = "is_true" }] }
+
+[[canvases.nodes]]
+id = "hub"
+name = "Kayla"
+blocks = [
+  { type = "paragraph", content = "Kayla's holding Brooke's bag at the mirror. She sees you in the glass and smirks before she's decided to." },
+  { type = "image", props = { description = "A woman of 20 at a bathroom mirror holding a make-up bag, smirking at the glass. Alone. No phone, not a selfie.", search_queries = ["woman 20 bathroom mirror holding makeup bag smirk", "college girl at bathroom mirror smirking"], pool_dir = "everyday/kayla_mirror_t0", pool = 1 } },
+]
+
+[canvases.nodes.exit_block]
+type = "choices"
+
+[[canvases.nodes.exit_block.choices]]
+text = "Talk"
+targetType = "node"
+nodeId = "talk"
+show_when_locked = true
+locked_text = "Talk — you've already talked today."
+conditions = { version = "1.0", logic = "AND", items = [{ type = "flag", subject = "player", flag_key = "talked_kayla_today", operator = "is_false" }] }
+flagEffects = [{ flag = "talked_kayla_today", op = "set" }]
+time_progression_minutes = 0
+
+[[canvases.nodes.exit_block.choices]]
+text = "Leave"
+targetType = "location"
+locationId = "campus_bathroom"
+time_progression_minutes = 0
+
+[[canvases.nodes]]
+id = "talk"
+name = "Talk to Kayla"
+blocks = [
+  { type = "paragraph", content = "Kayla tips her head at you." },
+  { type = "dialog", content = "Oh. It's you.", props = { speaker = "npc", npcId = "npc_kayla" } },
+  { type = "dialog", content = "I have a name, Kayla.", props = { speaker = "player" } },
+  { type = "dialog", content = "Sure you do.", props = { speaker = "npc", npcId = "npc_kayla" } },
+  { type = "dialog", content = "What's that supposed to mean?", props = { speaker = "player" } },
+  { type = "dialog", content = "Nothing. Relax.", props = { speaker = "npc", npcId = "npc_kayla" } },
+  { type = "paragraph", content = "She laughs, a second late, like she's waiting to see if it's allowed." },
+  { type = "dialog", content = "The middle table in the cafeteria is ours at lunch. You don't sit there. Just so you know.", props = { speaker = "npc", npcId = "npc_kayla" } },
+]
+
+[canvases.nodes.exit_block]
+type = "choices"
+
+[[canvases.nodes.exit_block.choices]]
+text = "Done"
+targetType = "location"
+locationId = "campus_bathroom"
+time_progression_minutes = 10
+
+# P60 · Kayla's menu at campus_cafeteria (weekdays 12:00–13:00, at lunch); one Talk a day (C2197, C2198).
+[[canvases]]
+id = "talk_kayla_cafeteria"
+name = "Kayla"
+
+[canvases.trigger]
+location = "campus_cafeteria"
+trigger_mode = "manual"
+is_repeatable = true
+npc = "npc_kayla"
+requires_npc = "npc_kayla"
+conditions = { version = "1.0", logic = "AND", items = [{ type = "flag", subject = "player", flag_key = "met_brooke", operator = "is_true" }] }
+
+[[canvases.nodes]]
+id = "hub"
+name = "Kayla"
+blocks = [
+  { type = "paragraph", content = "Kayla's at the middle table with Tess, picking at a salad and watching who comes in." },
+  { type = "image", props = { description = "A woman of 20 at a cafeteria table picking at a salad, watching the room. Alone.", search_queries = ["woman 20 cafeteria table salad watching", "college girl at lunch table looking over"], pool_dir = "everyday/kayla_cafeteria_t0", pool = 1 } },
+]
+
+[canvases.nodes.exit_block]
+type = "choices"
+
+[[canvases.nodes.exit_block.choices]]
+text = "Talk"
+targetType = "node"
+nodeId = "talk"
+show_when_locked = true
+locked_text = "Talk — you've already talked today."
+conditions = { version = "1.0", logic = "AND", items = [{ type = "flag", subject = "player", flag_key = "talked_kayla_today", operator = "is_false" }] }
+flagEffects = [{ flag = "talked_kayla_today", op = "set" }]
+time_progression_minutes = 0
+
+[[canvases.nodes.exit_block.choices]]
+text = "Leave"
+targetType = "location"
+locationId = "campus_cafeteria"
+time_progression_minutes = 0
+
+[[canvases.nodes]]
+id = "talk"
+name = "Talk to Kayla"
+blocks = [
+  { type = "paragraph", content = "Kayla tips her head at you." },
+  { type = "dialog", content = "Oh. It's you.", props = { speaker = "npc", npcId = "npc_kayla" } },
+  { type = "dialog", content = "I have a name, Kayla.", props = { speaker = "player" } },
+  { type = "dialog", content = "Sure you do.", props = { speaker = "npc", npcId = "npc_kayla" } },
+  { type = "dialog", content = "What's that supposed to mean?", props = { speaker = "player" } },
+  { type = "dialog", content = "Nothing. Relax.", props = { speaker = "npc", npcId = "npc_kayla" } },
+  { type = "paragraph", content = "She laughs, a second late, like she's waiting to see if it's allowed." },
+  { type = "dialog", content = "The middle table in the cafeteria is ours at lunch. You don't sit there. Just so you know.", props = { speaker = "npc", npcId = "npc_kayla" } },
+]
+
+[canvases.nodes.exit_block]
+type = "choices"
+
+[[canvases.nodes.exit_block.choices]]
+text = "Done"
+targetType = "location"
+locationId = "campus_cafeteria"
+time_progression_minutes = 10
+
+# P60 · Tess's menu at campus_bathroom (weekdays 08:00–09:00 and 13:00–14:00, at the mirror with Brooke); one Talk a day (C2197, C2198).
+[[canvases]]
+id = "talk_tess_mirror"
+name = "Tess"
+
+[canvases.trigger]
+location = "campus_bathroom"
+trigger_mode = "manual"
+is_repeatable = true
+npc = "npc_tess"
+requires_npc = "npc_tess"
+conditions = { version = "1.0", logic = "AND", items = [{ type = "flag", subject = "player", flag_key = "met_brooke", operator = "is_true" }] }
+
+[[canvases.nodes]]
+id = "hub"
+name = "Tess"
+blocks = [
+  { type = "paragraph", content = "Tess is at the mirror with a brush in her hand, doing someone else's face. She looks at you in the glass, then away." },
+  { type = "image", props = { description = "A woman of 21 at a bathroom mirror holding a make-up brush, glancing shyly at the glass. Alone. No phone, not a selfie.", search_queries = ["woman 21 bathroom mirror makeup brush shy glance", "shy college girl doing makeup at mirror"], pool_dir = "everyday/tess_mirror_t0", pool = 1 } },
+]
+
+[canvases.nodes.exit_block]
+type = "choices"
+
+[[canvases.nodes.exit_block.choices]]
+text = "Talk"
+targetType = "node"
+nodeId = "talk"
+show_when_locked = true
+locked_text = "Talk — you've already talked today."
+conditions = { version = "1.0", logic = "AND", items = [{ type = "flag", subject = "player", flag_key = "talked_tess_today", operator = "is_false" }] }
+flagEffects = [{ flag = "talked_tess_today", op = "set" }]
+time_progression_minutes = 0
+
+[[canvases.nodes.exit_block.choices]]
+text = "Leave"
+targetType = "location"
+locationId = "campus_bathroom"
+time_progression_minutes = 0
+
+[[canvases.nodes]]
+id = "talk"
+name = "Talk to Tess"
+blocks = [
+  { type = "dialog", content = "Hi, Tess.", props = { speaker = "player" } },
+  { type = "dialog", content = "Mm.", props = { speaker = "npc", npcId = "npc_tess" } },
+  { type = "dialog", content = "You're really good with that brush.", props = { speaker = "player" } },
+  { type = "dialog", content = "...Thanks.", props = { speaker = "npc", npcId = "npc_tess" } },
+  { type = "paragraph", content = "Her ears go pink, and she looks at the brush instead of you." },
+  { type = "dialog", content = "Who taught you?", props = { speaker = "player" } },
+  { type = "dialog", content = "Nobody. Me. I do Kayla's, mostly. I could do yours sometime. If you want.", props = { speaker = "npc", npcId = "npc_tess" } },
+]
+
+[canvases.nodes.exit_block]
+type = "choices"
+
+[[canvases.nodes.exit_block.choices]]
+text = "Done"
+targetType = "location"
+locationId = "campus_bathroom"
+time_progression_minutes = 10
+
+# P60 · Tess's menu at campus_cafeteria (weekdays 12:00–13:00, at lunch); one Talk a day (C2197, C2198).
+[[canvases]]
+id = "talk_tess_cafeteria"
+name = "Tess"
+
+[canvases.trigger]
+location = "campus_cafeteria"
+trigger_mode = "manual"
+is_repeatable = true
+npc = "npc_tess"
+requires_npc = "npc_tess"
+conditions = { version = "1.0", logic = "AND", items = [{ type = "flag", subject = "player", flag_key = "met_brooke", operator = "is_true" }] }
+
+[[canvases.nodes]]
+id = "hub"
+name = "Tess"
+blocks = [
+  { type = "paragraph", content = "Tess is at the end of the middle table, turning a make-up brush over in her fingers." },
+  { type = "image", props = { description = "A woman of 21 at a cafeteria table turning a make-up brush in her fingers, looking down. Alone.", search_queries = ["woman 21 cafeteria table makeup brush shy", "quiet college girl at lunch table"], pool_dir = "everyday/tess_cafeteria_t0", pool = 1 } },
+]
+
+[canvases.nodes.exit_block]
+type = "choices"
+
+[[canvases.nodes.exit_block.choices]]
+text = "Talk"
+targetType = "node"
+nodeId = "talk"
+show_when_locked = true
+locked_text = "Talk — you've already talked today."
+conditions = { version = "1.0", logic = "AND", items = [{ type = "flag", subject = "player", flag_key = "talked_tess_today", operator = "is_false" }] }
+flagEffects = [{ flag = "talked_tess_today", op = "set" }]
+time_progression_minutes = 0
+
+[[canvases.nodes.exit_block.choices]]
+text = "Leave"
+targetType = "location"
+locationId = "campus_cafeteria"
+time_progression_minutes = 0
+
+[[canvases.nodes]]
+id = "talk"
+name = "Talk to Tess"
+blocks = [
+  { type = "dialog", content = "Hi, Tess.", props = { speaker = "player" } },
+  { type = "dialog", content = "Mm.", props = { speaker = "npc", npcId = "npc_tess" } },
+  { type = "dialog", content = "You're really good with that brush.", props = { speaker = "player" } },
+  { type = "dialog", content = "...Thanks.", props = { speaker = "npc", npcId = "npc_tess" } },
+  { type = "paragraph", content = "Her ears go pink, and she looks at the brush instead of you." },
+  { type = "dialog", content = "Who taught you?", props = { speaker = "player" } },
+  { type = "dialog", content = "Nobody. Me. I do Kayla's, mostly. I could do yours sometime. If you want.", props = { speaker = "npc", npcId = "npc_tess" } },
+]
+
+[canvases.nodes.exit_block]
+type = "choices"
+
+[[canvases.nodes.exit_block.choices]]
+text = "Done"
+targetType = "location"
+locationId = "campus_cafeteria"
+time_progression_minutes = 10
 

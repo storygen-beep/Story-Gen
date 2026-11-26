@@ -1,6 +1,6 @@
 {
  "piece": "P35",
- "pass": 9,
+ "pass": 11,
  "screens": {
   "shop_meet_nina.meet": {
    "text": "ea4eb3bb92b30114",
@@ -131,6 +131,8 @@
   "L168": "444c44970dc284f2",
   "L169": "59defccfc63b0454",
   "C1340": "b76a6583ae88c60f",
+  "C2197": "cafbb0a598dbfa97",
+  "C2198": "27e6b45f50edd3ac",
   "C769": "f6b6f78a8f2e5ed7",
   "C794": "bad76e5963432385",
   "C795": "34139e6a6914e171",
@@ -1416,19 +1418,6 @@
    "pass": 7
   },
   {
-   "row": "C2183",
-   "screen": "*",
-   "verdict": "PASS",
-   "line": "Nina: Forward, Strictly Casual \u2014 \"Let me see. Come on, I won't tell.\"",
-   "why": "2 traits; Forward shown on this screen",
-   "cause": null,
-   "note": false,
-   "screen_hash": "8f3b8a1cfc9561b7",
-   "row_hash": "40172c2d376bfc32",
-   "carried": true,
-   "pass": 7
-  },
-  {
    "row": "C2189",
    "screen": "shop_meet_nina.meet",
    "verdict": "N/A",
@@ -1542,7 +1531,7 @@
     "all": "dbb4266ea86f2d20"
    },
    "row_hash": "0c03931191c53a34",
-   "carried": false,
+   "carried": true,
    "pass": 9
   },
   {
@@ -1561,8 +1550,34 @@
     "all": "6442aa25e1b725eb"
    },
    "row_hash": "0c03931191c53a34",
-   "carried": false,
+   "carried": true,
    "pass": 9
+  },
+  {
+   "row": "C2197",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "talk_nina at hood_clothes 10:00-18:45 behind met_nina",
+   "why": "Nina: a menu at each place their rows put them where talking fits, behind the met flag; none where it doesn't (lecture hall, mid-rehearsal, party hours)",
+   "cause": null,
+   "note": false,
+   "screen_hash": "491c3a036d302c50",
+   "row_hash": "cafbb0a598dbfa97",
+   "carried": true,
+   "pass": 10
+  },
+  {
+   "row": "C2198",
+   "screen": "*",
+   "verdict": "N/A",
+   "line": "",
+   "why": "shop_meet_nina and shop_try_on: no menu's Talk screen in this piece; C2198 is judged only on a person's Talk screen (the screen their menu's Talk opens)",
+   "cause": null,
+   "note": false,
+   "screen_hash": "491c3a036d302c50",
+   "row_hash": "27e6b45f50edd3ac",
+   "carried": false,
+   "pass": 11
   },
   {
    "row": "C286",

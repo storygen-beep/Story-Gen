@@ -41,6 +41,8 @@ On a card with a `Does:` block (every card from 2026-11-24 on), the rows that ap
 | L169 | a first meeting she can miss fires on any visit while the person is there, or a hint names its window | each teacher's meeting fired only in a class's first 30 minutes, twice a week, with no timetable shown (P09, P15–P17) | a first meeting | reader |
 | C2175 | under `people_page = "cot"`, every person has `stranger_name` and `people_tab` | — · kept blocking: LO's choice (2026-11-25, LO's "Go ahead") | the plan | script + pages |
 | C1340 | the household loop: each housemate is their face at their spot, Talk inside their menu, +1 a click | first_term_lean's `talk_mom`, a Talk button on the kitchen menu | a repeatable, a person is on screen | reader |
+| C2197 | every person she has met has a menu, their face, with Talk, at each place where talking fits what their row has them doing (a professor in his office, not mid-lecture); a person with no such place carries `no_menu = "<why>"` on their NPC | first_term_lean: 21 of 24 people she had met had no menu, and their face only said what their row had them doing ("Zoe is studying.", v2.py:12333-12339). LO, typed in main-lean 2026-11-26, asked what we can do about it, then "Option B." | a person is on screen | reader + people |
+| C2198 | on a person's Talk screen (the screen their menu's Talk opens; judged there only): Talk is once a day per person across all their places (one `talked_<x>_today` flag): one talk, true on a first visit and every visit after, ending on a hook (a place, a time, a person). The climb (three steps a day apart) is held: LO, typed in main-lean 2026-11-26: "I want to hold these for now. Take all these 3 talks to to only one." | the same talk replayed every day: first_term_lean's family talks were one fixed scene per room. The study's lesson "a repeat goes one step further" (COT_DESIGN_STUDY.md Part 7, lesson 8; Cupid's Way and New Lust: +1, then a day's wait). LO, typed in main-lean 2026-11-26: "Option B.", "nothing pays is fine" | a person is on screen | reader + people |
 
 ## The measures
 
@@ -97,6 +99,12 @@ Each rule is marked **measured** or **LO's choice**.
    | refuse | the feeling they asked with goes down | 25 | `EventGreekHouseHWHelpNo.txt`, line 4 (friendship); `EventSpringrilSplashPartyAnonGroperStop.txt`, line 2 (lust 25, control 15) |
 
    Her no lowers a feeling and never raises one of her skills (C961). *Measured* (2026-11-25, CoT's passages): of 922 friendship moves, 186 are ±25 and 154 are ±50; of 818 lust moves, 105 are +25 and 91 are +50; of 475 control moves, 144 are ±25 and 99 are ±50. The talk menu's moves are ranges (5–10, 15–30, 25–50), each once a day per person (`InPersonDialogueMenu.txt`, lines 1-2 and 77). *LO's choice* (same).
+16. **Everyone she has met has a menu, with one Talk** (C2197, C2198). Rule 10 holds for every person she has met, not only the household. For each place their rows put them, ask: *can she talk to them there?* A professor in his office, the clerk at the counter, a friend on the quad: yes. A professor mid-lecture: no. Where the answer is yes, they get their menu there, waiting on their met flag, so the meeting comes first. A person with no such place gets `no_menu = "<why>"` on their NPC (read only by `scripts/people.py`; the engine ignores it), and the card says why.
+   - **Once a day, across places.** One `talked_<x>_today` flag for the person, set by Talk in each of their menus, cleared in `[engine.daily_tick]`. Talking to her at the library uses up the café too.
+   - **One talk.** It plays on every visit, so it is true on the first one and every one after: no "back again", no "you keep coming". The same talk goes on every menu of that person. It ends on a hook: where they'll be and when, someone they mention, a place she hasn't been. Release 1 pays nothing.
+   - **The household keeps its own talks.** A housemate's menus (rule 10) may each play their own talk, one per room, written for what they do there (Mom at the stove is not Mom on the sofa), and their talks need no hook: they are the daily loop at home, not pointers out. They stay as LO approved and played them (first_term_lean P42, P34; LO, typed in main-lean 2026-11-26: "For the 3 talk climbs hold on to it as we are only in the release 1."). Once a day across their rooms still holds.
+   - **The climb is held** (LO, typed in main-lean 2026-11-26: "I want to hold these for now. Take all these 3 talks to to only one."). When it comes back: three steps a day apart, each needing the one before (`days_since_flag`, `operator = "gte"`, `value = 1`, read at v2.py:5199-5233), the third staying; the worked example "Talk that climbs" below shows the shape. A card that writes later steps keeps them in a Held block on the card, unbuilt.
+   - Each talk is a talk screen (C596): about 55 words, two-thirds spoken, she answers, the person true to their words (C2194), true to what their row has them doing (C2196). *The design is ours* (LO, typed in main-lean 2026-11-26: "Option B."); the held climb is the study's lesson 8.
 
 ## The old trait rules (2026-11-26)
 
@@ -111,6 +119,7 @@ Each rule is marked **measured** or **LO's choice**.
 - **One canvas per person per place.** The face opens the highest-`priority` canvas of that person there (v2.py:5954-5958). Two canvases for the same person in one room give one face, and the lower one never shows. So the person's menu is one hub canvas, and Talk and the rest are choices inside it.
 - **Who is pointed at.** Under `[ui] quests_layout = "hints"` the Quests page is `[[story_hints]]` and `[[walkthroughs]]` (`.claude/skills/author-game-v2/references/engine.md:1094-1120`). The person's `[[quest_cards]]` stay: they decide who is met, and their `tip` shows in the person's People view. A hint step points at a meeting; the card never does.
 - **The people system** is `[engine.people] system = "cot"`: the importer half is `apps/projects/services/people_system.py` (its checks at lines 570-634), the run-time half `apps/game_generation/twee_comprehensive/generators/people_system.py` (the want at lines 93-156; a lust gain dropped for a person who isn't attracted at lines 180-186). The conditions `npc_wants` and `npc_has_trait` go wherever a v1.0 conditions table goes, never on a `[[quest_cards]]` card (engine.md §54).
+- **One repeatable face-scene per person per place.** The importer warns when two repeatable, manual canvases with the same `npc` share a place and an overlapping window: "Only one repeatable canvas is allowed per location + NPC + time window" (`apps/projects/services/template_import.py:6246-6300`). Random canvases and `substitution_only` ones are left out of that check (same lines), so walk-ins and scenes riding on an act never clash with the menu. Anything else she does with them there is a choice in the menu.
 - **Once a day, by a flag.** A choice sets a `_today` flag in its `flagEffects` and is shown only while that flag is false; `[engine.daily_tick]` clears it when the day rolls (v2.py:7173-7175; `.claude/skills/author-game-v2/references/engine.md:1458-1485`). The menu itself has no daily cap, so the person never locks.
 
 ## Worked example
@@ -148,6 +157,40 @@ Picture, right after that line: her mom at the stove, looking up. Her one pictur
 Buttons: Talk (once a day) · Help her cook · Leave her to it. (Talk spends 5 minutes and cooking 15; the labels say neither.)
 
 After Talk today, the face still opens the menu. Talk is gone until tomorrow, and Help her cook and Leave her to it are still there. The `talked_mom_today` flag clears at the day turn.
+
+**Talk that climbs** (rule 16; held, the shape for when it comes back). Roles: a classmate she met on the quad, whose rows also put her in the cafeteria. Both menus carry this talk screen; Talk in each sets `talked_classmate_today`.
+
+```toml
+blocks = [
+  { type = "group", props = { conditions = { version = "1.0", logic = "AND", items = [
+      { type = "flag", subject = "player", flag_key = "talk_classmate_2", operator = "is_true" },
+      { type = "days_since_flag", subject = "player", flag_key = "talk_classmate_2", operator = "gte", value = 1 }] } }, blocks = [
+    { type = "dialog", content = "<step 3: the talk that stays, ending on a standing hook>", props = { speaker = "npc", npcId = "<npc>" } },
+  ] },
+  { type = "group", props = { conditions = { version = "1.0", logic = "AND", items = [
+      { type = "flag", subject = "player", flag_key = "talk_classmate_1", operator = "is_true" },
+      { type = "days_since_flag", subject = "player", flag_key = "talk_classmate_1", operator = "gte", value = 1 }] } }, blocks = [
+    { type = "dialog", content = "<step 2, ending on a hook>", props = { speaker = "npc", npcId = "<npc>" } },
+  ] },
+  { type = "group", props = { conditions = { version = "1.0", logic = "AND", items = [
+      { type = "flag", subject = "player", flag_key = "talk_classmate_1", operator = "is_false" }] } }, blocks = [
+    { type = "dialog", content = "<step 1, ending on a hook>", props = { speaker = "npc", npcId = "<npc>" } },
+  ] },
+]
+# Groups merge into one if/elseif chain, latest first, so one shows. Choices don't chain, so the exit's three
+# "Done" choices each need conditions that exclude the others:
+#   step 1: talk_classmate_1 is_false                                   sets talk_classmate_1
+#   step 2: talk_classmate_1 is_true, days_since gte 1, talk_classmate_2 is_false   sets talk_classmate_2
+#   step 3: talk_classmate_2 is_true                                    sets nothing new
+```
+
+| step | what it's about (roles) | the hook it ends on |
+|---|---|---|
+| 1 | she asks where you're from, and is surprised | "I'm at the café most mornings before nine." |
+| 2 | she complains about a professor, wants your side | "His office hours are Monday. Go and see what I mean." |
+| 3 | she's planning the weekend, you're half invited | "Saturday. If you're around." (stays) |
+
+No step is ever missing: on the day a step fires, Talk is greyed until the day turns, and the next day the next step's day has passed.
 
 **The type table** (rule 13). Roles, not a world; the numbers are filler, a game picks its own.
 
@@ -206,6 +249,8 @@ Adjacent groups merge into one if/else chain, so exactly one line shows. The thi
 ## Not this
 
 - A Talk button per person on the room menu. The person is their face, and Talk is inside their menu (rule 10; C1340).
+- A person she has met whose face only says what their row has them doing. She has met them; give them a menu where talking fits, or `no_menu` with the reason (rule 16; C2197).
+- A talk that is only true on a return visit ("back again", "you keep coming in"). It plays on the first visit too (rule 16; C2198).
 - A person who locks after one talk. Talk is once a day; the face and the rest of the menu stay (rule 10).
 - A person named before the meeting. Until then, the guy behind the counter (C625).
 - A meeting with one answer. Three to five, eager to refusing (C639).

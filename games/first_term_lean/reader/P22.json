@@ -1,6 +1,6 @@
 {
  "piece": "P22",
- "pass": 7,
+ "pass": 9,
  "screens": {
   "shop_meet_frank.meet": {
    "text": "91ac7305f8eebd82",
@@ -139,6 +139,8 @@
   "L168": "444c44970dc284f2",
   "L169": "59defccfc63b0454",
   "C1340": "b76a6583ae88c60f",
+  "C2197": "cafbb0a598dbfa97",
+  "C2198": "27e6b45f50edd3ac",
   "C769": "f6b6f78a8f2e5ed7",
   "C794": "bad76e5963432385",
   "C795": "34139e6a6914e171",
@@ -1158,19 +1160,6 @@
    "pass": 5
   },
   {
-   "row": "C2183",
-   "screen": "*",
-   "verdict": "PASS",
-   "line": "Frank: Dominant, Confident, Bragger (\"Small street. Everybody knows what everybody buys.\"); Danny: Forward, Strictly Casual (\"Hey, gorgeous... You grew up.\")",
-   "why": "3 and 2 traits; Bragger and Forward backed by these screens",
-   "cause": null,
-   "note": false,
-   "screen_hash": "883d0f34c9e9c17b",
-   "row_hash": "40172c2d376bfc32",
-   "carried": true,
-   "pass": 5
-  },
-  {
    "row": "C2188",
    "screen": "shop_meet_danny.meet",
    "verdict": "N/A",
@@ -1258,7 +1247,7 @@
     "all": "47bc9e90a53d753b"
    },
    "row_hash": "0c03931191c53a34",
-   "carried": false,
+   "carried": true,
    "pass": 7
   },
   {
@@ -1277,7 +1266,7 @@
     "all": "cf93f4681ff30feb"
    },
    "row_hash": "0c03931191c53a34",
-   "carried": false,
+   "carried": true,
    "pass": 7
   },
   {
@@ -1296,7 +1285,7 @@
     "all": "0edf95153887e801"
    },
    "row_hash": "0c03931191c53a34",
-   "carried": false,
+   "carried": true,
    "pass": 7
   },
   {
@@ -1315,8 +1304,34 @@
     "all": "e40aa4939390a239"
    },
    "row_hash": "0c03931191c53a34",
-   "carried": false,
+   "carried": true,
    "pass": 7
+  },
+  {
+   "row": "C2197",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "talk_frank, talk_danny at hood_shop behind met flags",
+   "why": "Frank, Danny: a menu at each place their rows put them where talking fits, behind the met flag; none where it doesn't (lecture hall, mid-rehearsal, party hours)",
+   "cause": null,
+   "note": false,
+   "screen_hash": "7ea79c3b11c7e878",
+   "row_hash": "cafbb0a598dbfa97",
+   "carried": true,
+   "pass": 8
+  },
+  {
+   "row": "C2198",
+   "screen": "*",
+   "verdict": "N/A",
+   "line": "",
+   "why": "shop meetings (Frank, Danny): no menu's Talk screen in this piece; C2198 is judged only on a person's Talk screen (the screen their menu's Talk opens)",
+   "cause": null,
+   "note": false,
+   "screen_hash": "7ea79c3b11c7e878",
+   "row_hash": "27e6b45f50edd3ac",
+   "carried": false,
+   "pass": 9
   },
   {
    "row": "C286",

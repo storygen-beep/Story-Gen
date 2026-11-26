@@ -1,6 +1,6 @@
 {
  "piece": "P23",
- "pass": 7,
+ "pass": 9,
  "screens": {
   "gym_meet_marco.meet": {
    "text": "e94048ae6551a6c3",
@@ -125,6 +125,8 @@
   "L168": "444c44970dc284f2",
   "L169": "59defccfc63b0454",
   "C1340": "b76a6583ae88c60f",
+  "C2197": "cafbb0a598dbfa97",
+  "C2198": "27e6b45f50edd3ac",
   "C769": "f6b6f78a8f2e5ed7",
   "C794": "bad76e5963432385",
   "C795": "34139e6a6914e171",
@@ -1001,19 +1003,6 @@
    "pass": 5
   },
   {
-   "row": "C2183",
-   "screen": "*",
-   "verdict": "PASS",
-   "line": "Marco: Dominant, Confident, Sporty \u2014 \"spotting someone on the bench\", \"Squats. Lots of squats.\"",
-   "why": "3 traits; Sporty shown here",
-   "cause": null,
-   "note": false,
-   "screen_hash": "b2111400bebab05c",
-   "row_hash": "40172c2d376bfc32",
-   "carried": true,
-   "pass": 5
-  },
-  {
    "row": "C2188",
    "screen": "gym_meet_marco.meet",
    "verdict": "PASS",
@@ -1065,7 +1054,7 @@
     "all": "e3bad999ee0118bd"
    },
    "row_hash": "0c03931191c53a34",
-   "carried": false,
+   "carried": true,
    "pass": 7
   },
   {
@@ -1084,8 +1073,34 @@
     "all": "060facc282a036da"
    },
    "row_hash": "0c03931191c53a34",
-   "carried": false,
+   "carried": true,
    "pass": 7
+  },
+  {
+   "row": "C2197",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "talk_marco at hood_gym behind met_marco",
+   "why": "Marco: a menu at each place their rows put them where talking fits, behind the met flag; none where it doesn't (lecture hall, mid-rehearsal, party hours)",
+   "cause": null,
+   "note": false,
+   "screen_hash": "f8a9528396e0c4a1",
+   "row_hash": "cafbb0a598dbfa97",
+   "carried": true,
+   "pass": 8
+  },
+  {
+   "row": "C2198",
+   "screen": "*",
+   "verdict": "N/A",
+   "line": "",
+   "why": "gym_meet_marco, a meeting: no menu's Talk screen in this piece; C2198 is judged only on a person's Talk screen (the screen their menu's Talk opens)",
+   "cause": null,
+   "note": false,
+   "screen_hash": "f8a9528396e0c4a1",
+   "row_hash": "27e6b45f50edd3ac",
+   "carried": false,
+   "pass": 9
   },
   {
    "row": "C286",

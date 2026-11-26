@@ -1,6 +1,6 @@
 {
  "piece": "P33",
- "pass": 14,
+ "pass": 17,
  "screens": {
   "body_run.run": {
    "text": "30c91aa93a1f5b0b",
@@ -10,11 +10,11 @@
    "all": "b184641b5e03737b"
   },
   "body_workout.lift": {
-   "text": "b0c43c3aa325a5e3",
+   "text": "c4aeda4721674d6a",
    "traits": "44136fa355b3678a",
    "facts": "c4485366da85d0a9",
    "facts2": "c4485366da85d0a9",
-   "all": "2caea444a4dc620d"
+   "all": "92711573fff64d9b"
   },
   "body_mirror.fix": {
    "text": "b734d31c0a6da3e7",
@@ -51,7 +51,7 @@
    "facts2": "44eb5528a5afca5f",
    "all": "1cd7264031187857"
   },
-  "*": "3c2bd659ec68de78"
+  "*": "7d7d28267bfb1ef6"
  },
  "rows": {
   "B1": "5276068df1ca6fa9",
@@ -168,6 +168,8 @@
   "C2180": "a6c0f498d4d16271",
   "C2194": "0c03931191c53a34",
   "C1340": "b76a6583ae88c60f",
+  "C2197": "cafbb0a598dbfa97",
+  "C2198": "27e6b45f50edd3ac",
   "C769": "f6b6f78a8f2e5ed7",
   "C794": "bad76e5963432385",
   "C795": "34139e6a6914e171",
@@ -441,17 +443,19 @@
    "screen": "body_workout.lift",
    "verdict": "PASS",
    "line": "Two guys at the rack stop talking when you bend for the kettlebell.",
-   "why": "Marco's row (weekdays 06-10, 17-21, Sat 08-14) puts him at hood_gym inside gym hours 06-22; the line names nobody, 'two guys at the rack' are unnamed regulars and do not deny or misname him; with him away (Sun, 10-17) they are still true strangers. The desk is an unnamed extra. Unmet people show no face (present faces: met only).",
+   "why": "names nobody; with Marco in by his row (weekdays 6-10, 17-21, Sat 8-14) and the 0.65 roll missing, unnamed regulars still don't deny or misname him; true on first and later visits",
    "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "b0c43c3aa325a5e3",
+    "text": "c4aeda4721674d6a",
+    "traits": "44136fa355b3678a",
     "facts": "c4485366da85d0a9",
-    "all": "2caea444a4dc620d"
+    "facts2": "c4485366da85d0a9",
+    "all": "92711573fff64d9b"
    },
    "row_hash": "c1c0e2ac2588a579",
    "carried": true,
-   "pass": 6
+   "pass": 15
   },
   {
    "row": "B11",
@@ -1329,17 +1333,19 @@
    "screen": "body_workout.lift",
    "verdict": "PASS",
    "line": "Two guys at the rack stop talking when you bend for the kettlebell.",
-   "why": "$5, 1 hour (60 min on Done), 20 energy match PLAN 229/252 and the card; no garment named in prose, leggings and sports_top are equipped conditions.",
+   "why": "$5, 20 energy, 60 min match PLAN 315/338; marco_hips exits spend 60 back to the Gym as the workout; garments are the act's leggings + sports_top conditions, none named in prose",
    "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "b0c43c3aa325a5e3",
+    "text": "c4aeda4721674d6a",
+    "traits": "44136fa355b3678a",
     "facts": "c4485366da85d0a9",
-    "all": "2caea444a4dc620d"
+    "facts2": "c4485366da85d0a9",
+    "all": "92711573fff64d9b"
    },
    "row_hash": "80d415cf08e0ebfe",
    "carried": true,
-   "pass": 6
+   "pass": 15
   },
   {
    "row": "B9",
@@ -1454,17 +1460,19 @@
    "screen": "body_workout.lift",
    "verdict": "PASS",
    "line": "Two guys at the rack stop talking when you bend for the kettlebell.",
-   "why": "Prose names no garment ('the back of your thighs' is body); trigger requires leggings and sports_top equipped.",
+   "why": "prose names no garment ('the back of your thighs' is body); the trigger requires leggings and sports_top, and the substitution only runs inside that lock",
    "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "b0c43c3aa325a5e3",
+    "text": "c4aeda4721674d6a",
+    "traits": "44136fa355b3678a",
     "facts": "c4485366da85d0a9",
-    "all": "2caea444a4dc620d"
+    "facts2": "c4485366da85d0a9",
+    "all": "92711573fff64d9b"
    },
    "row_hash": "f40f51a0fd6cfd10",
    "carried": true,
-   "pass": 6
+   "pass": 15
   },
   {
    "row": "C1173",
@@ -1609,17 +1617,19 @@
    "screen": "body_workout.lift",
    "verdict": "PASS",
    "line": "Two guys at the rack stop talking when you bend for the kettlebell.",
-   "why": "Prose names no garment ('the back of your thighs' is body); trigger requires leggings and sports_top equipped.",
+   "why": "no garment named; nothing she might not be wearing",
    "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "b0c43c3aa325a5e3",
+    "text": "c4aeda4721674d6a",
+    "traits": "44136fa355b3678a",
     "facts": "c4485366da85d0a9",
-    "all": "2caea444a4dc620d"
+    "facts2": "c4485366da85d0a9",
+    "all": "92711573fff64d9b"
    },
    "row_hash": "bfff76edbee583de",
    "carried": true,
-   "pass": 6
+   "pass": 15
   },
   {
    "row": "C1220",
@@ -1996,18 +2006,20 @@
    "row": "C1360",
    "screen": "body_workout.lift",
    "verdict": "FAIL",
-   "line": "Work out ($5, 1 hour, 20 energy) (5 Money)",
-   "why": "note row: the greyed tag is always costs[0] (v2.py:6746-6749); with $5+ but under 20 energy it still prints '(5 Money)'; unchanged as built",
+   "line": "Work out ($5) (5 Money)",
+   "why": "note row: the greyed cost tag is always costs[0] (v2.py:6780-6783); with $5+ but under 20 energy it still prints '(5 Money)'; unchanged by P56",
    "cause": null,
    "note": true,
    "screen_hash": {
-    "text": "b0c43c3aa325a5e3",
-    "facts": "c6185ad809e8ab04",
-    "all": "6bca8b39dd459470"
+    "text": "c4aeda4721674d6a",
+    "traits": "44136fa355b3678a",
+    "facts": "c4485366da85d0a9",
+    "facts2": "c4485366da85d0a9",
+    "all": "92711573fff64d9b"
    },
    "row_hash": "8c9dc844365f81a5",
    "carried": true,
-   "pass": 4
+   "pass": 15
   },
   {
    "row": "C1421",
@@ -2048,17 +2060,19 @@
    "screen": "body_workout.lift",
    "verdict": "FAIL",
    "line": "(5 Money)",
-   "why": "note row: energy-short only, the told requirement is money, not energy (v2.py:6746-6749); unchanged as built",
+   "why": "note row: short on energy only, the told requirement is money, not energy (v2.py:6780-6783); unchanged by P56",
    "cause": null,
    "note": true,
    "screen_hash": {
-    "text": "b0c43c3aa325a5e3",
-    "facts": "c6185ad809e8ab04",
-    "all": "6bca8b39dd459470"
+    "text": "c4aeda4721674d6a",
+    "traits": "44136fa355b3678a",
+    "facts": "c4485366da85d0a9",
+    "facts2": "c4485366da85d0a9",
+    "all": "92711573fff64d9b"
    },
    "row_hash": "ef34ee4a51e65d00",
    "carried": true,
-   "pass": 4
+   "pass": 15
   },
   {
    "row": "C1423",
@@ -2415,19 +2429,6 @@
    "pass": 12
   },
   {
-   "row": "C2183",
-   "screen": "*",
-   "verdict": "PASS",
-   "line": "Chris pours your coffee with a wink",
-   "why": "Tom (Forward, Confident) and Chris (Forward, Dominant) each have 2 traits, Forward personality-kind; nothing on body_coffee.drink contradicts a shown trait",
-   "cause": null,
-   "note": false,
-   "screen_hash": "4530fe64a2396078",
-   "row_hash": "40172c2d376bfc32",
-   "carried": true,
-   "pass": 12
-  },
-  {
    "row": "C2189",
    "screen": "*",
    "verdict": "N/A",
@@ -2456,8 +2457,34 @@
     "all": "78169f3a60359c09"
    },
    "row_hash": "0c03931191c53a34",
-   "carried": false,
+   "carried": true,
    "pass": 14
+  },
+  {
+   "row": "C2197",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "talk_marco at hood_gym; talk_tom, talk_chris at near_cafe",
+   "why": "Marco, Tom, Chris: a menu at each place their rows put them where talking fits, behind the met flag; none where it doesn't (lecture hall, mid-rehearsal, party hours)",
+   "cause": null,
+   "note": false,
+   "screen_hash": "7d7d28267bfb1ef6",
+   "row_hash": "cafbb0a598dbfa97",
+   "carried": true,
+   "pass": 16
+  },
+  {
+   "row": "C2198",
+   "screen": "*",
+   "verdict": "N/A",
+   "line": "",
+   "why": "body moments (body_*): no menu's Talk screen in this piece; C2198 is judged only on a person's Talk screen (the screen their menu's Talk opens)",
+   "cause": null,
+   "note": false,
+   "screen_hash": "7d7d28267bfb1ef6",
+   "row_hash": "27e6b45f50edd3ac",
+   "carried": false,
+   "pass": 17
   },
   {
    "row": "C286",
@@ -2944,17 +2971,19 @@
    "screen": "body_workout.lift",
    "verdict": "PASS",
    "line": "Two guys at the rack stop talking when you bend for the kettlebell.",
-   "why": "Marco's row (weekdays 06-10, 17-21, Sat 08-14) puts him at hood_gym inside gym hours 06-22; the line names nobody, 'two guys at the rack' are unnamed regulars and do not deny or misname him; with him away (Sun, 10-17) they are still true strangers. The desk is an unnamed extra. Unmet people show no face (present faces: met only).",
+   "why": "no claim of who is or was there; true on every playthrough that reaches it, the 0.35 miss with Marco present included",
    "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "b0c43c3aa325a5e3",
+    "text": "c4aeda4721674d6a",
+    "traits": "44136fa355b3678a",
     "facts": "c4485366da85d0a9",
-    "all": "2caea444a4dc620d"
+    "facts2": "c4485366da85d0a9",
+    "all": "92711573fff64d9b"
    },
    "row_hash": "67e48e60d5053a2e",
    "carried": true,
-   "pass": 6
+   "pass": 15
   },
   {
    "row": "C461",
@@ -3079,17 +3108,19 @@
    "screen": "body_workout.lift",
    "verdict": "PASS",
    "line": "Two guys at the rack stop talking when you bend for the kettlebell.",
-   "why": "Unnamed extras and texture only (the till, the line, two guys, a table); none can clash with whoever's row puts them there.",
+   "why": "unnamed extras and texture only; nothing can clash with a person's rows",
    "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "b0c43c3aa325a5e3",
+    "text": "c4aeda4721674d6a",
+    "traits": "44136fa355b3678a",
     "facts": "c4485366da85d0a9",
-    "all": "2caea444a4dc620d"
+    "facts2": "c4485366da85d0a9",
+    "all": "92711573fff64d9b"
    },
    "row_hash": "310706ee076318f2",
    "carried": true,
-   "pass": 6
+   "pass": 15
   },
   {
    "row": "C519",
@@ -5162,17 +5193,19 @@
    "screen": "body_workout.lift",
    "verdict": "N/A",
    "line": "Done",
-   "why": "No move or exit on this screen: Done returns to the same room with its own time.",
+   "why": "Done carries its own 60 minutes; no exit without time",
    "cause": null,
    "note": true,
    "screen_hash": {
-    "text": "b0c43c3aa325a5e3",
+    "text": "c4aeda4721674d6a",
+    "traits": "44136fa355b3678a",
     "facts": "c4485366da85d0a9",
-    "all": "2caea444a4dc620d"
+    "facts2": "c4485366da85d0a9",
+    "all": "92711573fff64d9b"
    },
    "row_hash": "4e86d143688ba8e5",
    "carried": true,
-   "pass": 6
+   "pass": 15
   },
   {
    "row": "C928",
@@ -5602,17 +5635,19 @@
    "screen": "body_workout.lift",
    "verdict": "N/A",
    "line": "show_when_blocked = true",
-   "why": "No time_of_day condition on this row; room hours only.",
+   "why": "no time_of_day on the act or on the Marco rule; marco_hips has none either; gym room hours only",
    "cause": null,
    "note": true,
    "screen_hash": {
-    "text": "b0c43c3aa325a5e3",
+    "text": "c4aeda4721674d6a",
+    "traits": "44136fa355b3678a",
     "facts": "c4485366da85d0a9",
-    "all": "2caea444a4dc620d"
+    "facts2": "c4485366da85d0a9",
+    "all": "92711573fff64d9b"
    },
    "row_hash": "1aadffd96e76381c",
    "carried": true,
-   "pass": 6
+   "pass": 15
   },
   {
    "row": "C951",
@@ -5805,18 +5840,20 @@
    "row": "L106",
    "screen": "body_workout.lift",
    "verdict": "PASS",
-   "line": "Two guys at the rack stop talking when you bend for the kettlebell.",
-   "why": "Marco's row (weekdays 06-10, 17-21, Sat 08-14) puts him at hood_gym inside gym hours 06-22; the line names nobody, 'two guys at the rack' are unnamed regulars and do not deny or misname him; with him away (Sun, 10-17) they are still true strangers. The desk is an unnamed extra. Unmet people show no face (present faces: met only).",
+   "line": "npc_at_location npc_marco hood_gym is_present",
+   "why": "the lift screen names nobody; Marco's swap is gated by his presence (rule condition + requires_npc), so he only appears where his rows put him",
    "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "b0c43c3aa325a5e3",
+    "text": "c4aeda4721674d6a",
+    "traits": "44136fa355b3678a",
     "facts": "c4485366da85d0a9",
-    "all": "2caea444a4dc620d"
+    "facts2": "c4485366da85d0a9",
+    "all": "92711573fff64d9b"
    },
    "row_hash": "13a714429d15f3b2",
    "carried": true,
-   "pass": 6
+   "pass": 15
   },
   {
    "row": "L116",
@@ -6024,17 +6061,19 @@
    "screen": "body_workout.lift",
    "verdict": "N/A",
    "line": "show_when_blocked = true",
-   "why": "No hours of its own; same room hours every day.",
+   "why": "no hours of its own; gym hours 6am-10pm every day (PLAN 175)",
    "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "b0c43c3aa325a5e3",
+    "text": "c4aeda4721674d6a",
+    "traits": "44136fa355b3678a",
     "facts": "c4485366da85d0a9",
-    "all": "2caea444a4dc620d"
+    "facts2": "c4485366da85d0a9",
+    "all": "92711573fff64d9b"
    },
    "row_hash": "e64ce2672d85d2d8",
    "carried": true,
-   "pass": 6
+   "pass": 15
   },
   {
    "row": "L170",

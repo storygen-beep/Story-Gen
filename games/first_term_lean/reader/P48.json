@@ -1,6 +1,6 @@
 {
  "piece": "P48",
- "pass": 7,
+ "pass": 9,
  "screens": {
   "sidebar.disinhibition": {
    "text": "ac50b5d02b9cf256",
@@ -203,6 +203,8 @@
   "C2180": "a6c0f498d4d16271",
   "C2194": "0c03931191c53a34",
   "C1340": "b76a6583ae88c60f",
+  "C2197": "cafbb0a598dbfa97",
+  "C2198": "27e6b45f50edd3ac",
   "L106": "13a714429d15f3b2",
   "C442": "59b8d8d24f0c7c38",
   "C451": "50dbf74577a813c7",
@@ -690,55 +692,6 @@
    "pass": 4
   },
   {
-   "row": "C2183",
-   "screen": "*",
-   "verdict": "PASS",
-   "line": "Laura: Submissive, Cook, Insecure ... Tess: Submissive, Shy",
-   "why": "all 24 have 2-4 traits with at least one personality trait; every manner trait has a written line (Cook: \"Mom's at the stove.\"; Gamer: \"on the couch with a controller\"; Nerd: \"fills three whiteboards with numbers\"; Wordsmith: \"takes it apart, line by line\"; Artistic: drama, the guitar; Bully: \"Did you get dressed in the dark?\"; Shy: \"Tess doesn't, but she doesn't stop her either\"; Bragger: \"Everybody knows what everybody buys\"; Sporty: \"spotting someone on the bench\"; Insecure: \"Tell me one good thing\", \"That you'd say no. So don't.\"; Particular, Dancer, Open Relationships as cited); nothing on screen contradicts any of them",
-   "cause": null,
-   "note": false,
-   "screen_hash": "d4438ac582dc1f3f",
-   "row_hash": "40172c2d376bfc32",
-   "carried": true,
-   "pass": 4
-  },
-  {
-   "row": "C2183",
-   "screen": "npcs.npc_holt.feelings",
-   "verdict": "PASS",
-   "line": "friendship 50, lust 100, control 150, intimacy 0, people_type faculty, gender female, attracted True",
-   "why": "the feelings leave her trait set intact: Particular is personality-kind, not hidden, cited to \"No food, no phones, no noise\"; at friendship 50 it stays unknown, so the view shows no trait to be untrue",
-   "cause": null,
-   "note": false,
-   "screen_hash": {
-    "text": "bc13dc2efc80419e",
-    "facts": "bc13dc2efc80419e",
-    "facts2": "bc13dc2efc80419e",
-    "all": "bc13dc2efc80419e"
-   },
-   "row_hash": "40172c2d376bfc32",
-   "carried": true,
-   "pass": 5
-  },
-  {
-   "row": "C2183",
-   "screen": "npcs.npc_ryan.feelings",
-   "verdict": "PASS",
-   "line": "Submissive, Switch, Gamer",
-   "why": "Lust change leaves his 3 traits as they were; Gamer is personality-kind with a written line ('Ryan's on the couch with a controller, losing loudly.'), Submissive with 'Sorry. I didn't\u2014 Sorry.'",
-   "cause": null,
-   "note": false,
-   "screen_hash": {
-    "text": "c2573ba08e7d35fa",
-    "facts": "c2573ba08e7d35fa",
-    "facts2": "c2573ba08e7d35fa",
-    "all": "c2573ba08e7d35fa"
-   },
-   "row_hash": "40172c2d376bfc32",
-   "carried": true,
-   "pass": 6
-  },
-  {
    "row": "C2194",
    "screen": "npcs.npc_brooke.feelings",
    "verdict": "PASS",
@@ -753,7 +706,7 @@
     "all": "94f3e67c634c4344"
    },
    "row_hash": "0c03931191c53a34",
-   "carried": false,
+   "carried": true,
    "pass": 7
   },
   {
@@ -771,7 +724,7 @@
     "all": "50a42bb6cb6b9e65"
    },
    "row_hash": "0c03931191c53a34",
-   "carried": false,
+   "carried": true,
    "pass": 7
   },
   {
@@ -789,7 +742,7 @@
     "all": "7e50b113c23cbe3e"
    },
    "row_hash": "0c03931191c53a34",
-   "carried": false,
+   "carried": true,
    "pass": 7
   },
   {
@@ -807,7 +760,7 @@
     "all": "ee99d7a73797c059"
    },
    "row_hash": "0c03931191c53a34",
-   "carried": false,
+   "carried": true,
    "pass": 7
   },
   {
@@ -825,7 +778,7 @@
     "all": "f72498d167e61811"
    },
    "row_hash": "0c03931191c53a34",
-   "carried": false,
+   "carried": true,
    "pass": 7
   },
   {
@@ -843,7 +796,7 @@
     "all": "8b2ab51d7967e09a"
    },
    "row_hash": "0c03931191c53a34",
-   "carried": false,
+   "carried": true,
    "pass": 7
   },
   {
@@ -861,7 +814,7 @@
     "all": "6cf40d6b379a200b"
    },
    "row_hash": "0c03931191c53a34",
-   "carried": false,
+   "carried": true,
    "pass": 7
   },
   {
@@ -879,7 +832,7 @@
     "all": "bc13dc2efc80419e"
    },
    "row_hash": "0c03931191c53a34",
-   "carried": false,
+   "carried": true,
    "pass": 7
   },
   {
@@ -897,7 +850,7 @@
     "all": "1c2920e7418f31d2"
    },
    "row_hash": "0c03931191c53a34",
-   "carried": false,
+   "carried": true,
    "pass": 7
   },
   {
@@ -915,7 +868,7 @@
     "all": "57b86a11dd40cafb"
    },
    "row_hash": "0c03931191c53a34",
-   "carried": false,
+   "carried": true,
    "pass": 7
   },
   {
@@ -933,7 +886,7 @@
     "all": "c2ece3628f705293"
    },
    "row_hash": "0c03931191c53a34",
-   "carried": false,
+   "carried": true,
    "pass": 7
   },
   {
@@ -951,7 +904,7 @@
     "all": "41164a73eb257e47"
    },
    "row_hash": "0c03931191c53a34",
-   "carried": false,
+   "carried": true,
    "pass": 7
   },
   {
@@ -969,7 +922,7 @@
     "all": "60eb96c9edf4241c"
    },
    "row_hash": "0c03931191c53a34",
-   "carried": false,
+   "carried": true,
    "pass": 7
   },
   {
@@ -987,7 +940,7 @@
     "all": "beb556b432ef1f40"
    },
    "row_hash": "0c03931191c53a34",
-   "carried": false,
+   "carried": true,
    "pass": 7
   },
   {
@@ -1005,7 +958,7 @@
     "all": "c1856207a6e35bea"
    },
    "row_hash": "0c03931191c53a34",
-   "carried": false,
+   "carried": true,
    "pass": 7
   },
   {
@@ -1023,7 +976,7 @@
     "all": "c3091ecb151fbdd0"
    },
    "row_hash": "0c03931191c53a34",
-   "carried": false,
+   "carried": true,
    "pass": 7
   },
   {
@@ -1041,7 +994,7 @@
     "all": "3c5c2838f553c03e"
    },
    "row_hash": "0c03931191c53a34",
-   "carried": false,
+   "carried": true,
    "pass": 7
   },
   {
@@ -1059,7 +1012,7 @@
     "all": "c2573ba08e7d35fa"
    },
    "row_hash": "0c03931191c53a34",
-   "carried": false,
+   "carried": true,
    "pass": 7
   },
   {
@@ -1077,7 +1030,7 @@
     "all": "3910250e4c05c4ea"
    },
    "row_hash": "0c03931191c53a34",
-   "carried": false,
+   "carried": true,
    "pass": 7
   },
   {
@@ -1095,7 +1048,7 @@
     "all": "57b86a11dd40cafb"
    },
    "row_hash": "0c03931191c53a34",
-   "carried": false,
+   "carried": true,
    "pass": 7
   },
   {
@@ -1113,7 +1066,7 @@
     "all": "a8e75982636762f5"
    },
    "row_hash": "0c03931191c53a34",
-   "carried": false,
+   "carried": true,
    "pass": 7
   },
   {
@@ -1131,7 +1084,7 @@
     "all": "9aeb4d992b31224d"
    },
    "row_hash": "0c03931191c53a34",
-   "carried": false,
+   "carried": true,
    "pass": 7
   },
   {
@@ -1149,7 +1102,7 @@
     "all": "a6a7776352906814"
    },
    "row_hash": "0c03931191c53a34",
-   "carried": false,
+   "carried": true,
    "pass": 7
   },
   {
@@ -1167,8 +1120,34 @@
     "all": "e7327b25249effb4"
    },
    "row_hash": "0c03931191c53a34",
-   "carried": false,
+   "carried": true,
    "pass": 7
+  },
+  {
+   "row": "C2197",
+   "screen": "*",
+   "verdict": "N/A",
+   "line": "",
+   "why": "the people system and People-view feelings: no person is met here; menus judged where each is met (Kayla and Tess: c2, on P26)",
+   "cause": null,
+   "note": false,
+   "screen_hash": "b48942cb4a38b838",
+   "row_hash": "cafbb0a598dbfa97",
+   "carried": true,
+   "pass": 8
+  },
+  {
+   "row": "C2198",
+   "screen": "*",
+   "verdict": "N/A",
+   "line": "",
+   "why": "people system and People-view fields: no menu's Talk screen in this piece; C2198 is judged only on a person's Talk screen (the screen their menu's Talk opens)",
+   "cause": null,
+   "note": false,
+   "screen_hash": "b48942cb4a38b838",
+   "row_hash": "27e6b45f50edd3ac",
+   "carried": false,
+   "pass": 9
   },
   {
    "row": "C338",

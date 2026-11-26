@@ -1,6 +1,6 @@
 {
  "piece": "P40",
- "pass": 12,
+ "pass": 15,
  "screens": {
   "walk_stacks.moment": {
    "text": "a37c81e3865bb04b",
@@ -230,6 +230,8 @@
   "C2179": "47b9477e3ec8a790",
   "C2194": "0c03931191c53a34",
   "C1340": "b76a6583ae88c60f",
+  "C2197": "cafbb0a598dbfa97",
+  "C2198": "27e6b45f50edd3ac",
   "C769": "f6b6f78a8f2e5ed7",
   "C794": "bad76e5963432385",
   "C795": "34139e6a6914e171",
@@ -287,7 +289,8 @@
   "C2187": "f2b54b1dd7c15f2f",
   "C2188": "612394eef6826900",
   "C2189": "20748838895e4545",
-  "C2195": "77083291a86791c3"
+  "C2195": "77083291a86791c3",
+  "C2196": "a8ae0700d13a7f9b"
  },
  "verdicts": [
   {
@@ -319,7 +322,7 @@
     "all": "6650184fae7d492b"
    },
    "row_hash": "c1c0e2ac2588a579",
-   "carried": false,
+   "carried": true,
    "pass": 12
   },
   {
@@ -563,7 +566,7 @@
     "all": "7dc3ceb52053a165"
    },
    "row_hash": "c1c0e2ac2588a579",
-   "carried": false,
+   "carried": true,
    "pass": 12
   },
   {
@@ -1196,7 +1199,7 @@
     "all": "6650184fae7d492b"
    },
    "row_hash": "80d415cf08e0ebfe",
-   "carried": false,
+   "carried": true,
    "pass": 12
   },
   {
@@ -1440,7 +1443,7 @@
     "all": "7dc3ceb52053a165"
    },
    "row_hash": "80d415cf08e0ebfe",
-   "carried": false,
+   "carried": true,
    "pass": 12
   },
   {
@@ -3194,6 +3197,127 @@
    "pass": 11
   },
   {
+   "row": "C2196",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "Dr. Hale doesn't look up when you come in.",
+   "why": "walk_hale_note says arrival outright; walk_stacks, walk_holt_novel, walk_mirror_girls ('Fix your hair beside them' is a choice, not an act in progress), walk_cross_brooke ('Watch from the back row') need her only just there and name none of her clothes. walk_cross_seats needs her mid-lines ('You've been saying your lines to nobody') and rides on stage_practise as a substitution",
+   "cause": null,
+   "note": false,
+   "screen_hash": "05042e65f38935b8",
+   "row_hash": "a8ae0700d13a7f9b",
+   "carried": true,
+   "pass": 13
+  },
+  {
+   "row": "C2197",
+   "screen": "walk_cross_brooke.moment",
+   "verdict": "PASS",
+   "line": "talk_cross 14:00-18:00; talk_brooke",
+   "why": "Cross and Brooke have menus where talking fits",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "19c927e206f3a367",
+    "traits": "e6b79f0e524c6de5",
+    "facts": "53fbf715bd6b1c0c",
+    "facts2": "7d5f431740948a39",
+    "all": "a10ecb7b5794ff26"
+   },
+   "row_hash": "cafbb0a598dbfa97",
+   "carried": true,
+   "pass": 14
+  },
+  {
+   "row": "C2197",
+   "screen": "walk_cross_seats.moment",
+   "verdict": "PASS",
+   "line": "talk_cross 14:00-18:00",
+   "why": "Cross has his menu at the theatre",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "400d1f890ad37714",
+    "traits": "2875b58584de3c6e",
+    "facts": "5654cde95f9c7420",
+    "facts2": "b88955853267c1db",
+    "all": "f2ddf0ee5bece44d"
+   },
+   "row_hash": "cafbb0a598dbfa97",
+   "carried": true,
+   "pass": 14
+  },
+  {
+   "row": "C2197",
+   "screen": "walk_hale_note.moment",
+   "verdict": "PASS",
+   "line": "talk_hale at campus_office_hale",
+   "why": "Hale has his menu in his office",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "c59deaee4d0293e1",
+    "traits": "838782b7308b47e0",
+    "facts": "54a2a2da23a1fde8",
+    "facts2": "18b1fd058dc33746",
+    "all": "49171089d0542159"
+   },
+   "row_hash": "cafbb0a598dbfa97",
+   "carried": true,
+   "pass": 14
+  },
+  {
+   "row": "C2197",
+   "screen": "walk_holt_novel.moment",
+   "verdict": "PASS",
+   "line": "talk_holt at campus_library",
+   "why": "Holt has her menu at the library",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "ccbc246ad11224a8",
+    "traits": "f6d8d0533b3ef51b",
+    "facts": "f2f993e2387bf270",
+    "facts2": "5ddca7caca4503ee",
+    "all": "68b912058fecf6ee"
+   },
+   "row_hash": "cafbb0a598dbfa97",
+   "carried": true,
+   "pass": 14
+  },
+  {
+   "row": "C2197",
+   "screen": "walk_mirror_girls.moment",
+   "verdict": "PASS",
+   "line": "Tess is doing Brooke's lashes at the mirror while Kayla holds the bag",
+   "why": "Kayla and Tess now each have a menu with Talk at this mirror (talk_kayla_mirror, talk_tess_mirror) beside Brooke's, behind met_brooke",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "3c84b237cb35c287",
+    "traits": "9e12469ed756975c",
+    "facts": "0ec0e8a07b88427d",
+    "facts2": "c3e641b9202c38c9",
+    "all": "795f50791074d0c4"
+   },
+   "row_hash": "cafbb0a598dbfa97",
+   "carried": false,
+   "pass": 15
+  },
+  {
+   "row": "C2198",
+   "screen": "*",
+   "verdict": "N/A",
+   "line": "",
+   "why": "campus walk-ins: no menu's Talk screen in this piece; C2198 is judged only on a person's Talk screen (the screen their menu's Talk opens)",
+   "cause": null,
+   "note": false,
+   "screen_hash": "05042e65f38935b8",
+   "row_hash": "27e6b45f50edd3ac",
+   "carried": false,
+   "pass": 15
+  },
+  {
    "row": "C286",
    "screen": "*",
    "verdict": "PASS",
@@ -3689,7 +3813,7 @@
     "all": "6650184fae7d492b"
    },
    "row_hash": "67e48e60d5053a2e",
-   "carried": false,
+   "carried": true,
    "pass": 12
   },
   {
@@ -3933,7 +4057,7 @@
     "all": "7dc3ceb52053a165"
    },
    "row_hash": "67e48e60d5053a2e",
-   "carried": false,
+   "carried": true,
    "pass": 12
   },
   {
@@ -4041,7 +4165,7 @@
     "all": "6650184fae7d492b"
    },
    "row_hash": "310706ee076318f2",
-   "carried": false,
+   "carried": true,
    "pass": 12
   },
   {
@@ -4285,7 +4409,7 @@
     "all": "7dc3ceb52053a165"
    },
    "row_hash": "310706ee076318f2",
-   "carried": false,
+   "carried": true,
    "pass": 12
   },
   {
@@ -5544,7 +5668,7 @@
     "all": "6650184fae7d492b"
    },
    "row_hash": "4e86d143688ba8e5",
-   "carried": false,
+   "carried": true,
    "pass": 12
   },
   {
@@ -5713,7 +5837,7 @@
     "all": "7dc3ceb52053a165"
    },
    "row_hash": "4e86d143688ba8e5",
-   "carried": false,
+   "carried": true,
    "pass": 12
   },
   {
@@ -5930,7 +6054,7 @@
     "all": "6650184fae7d492b"
    },
    "row_hash": "1aadffd96e76381c",
-   "carried": false,
+   "carried": true,
    "pass": 12
   },
   {
@@ -6099,7 +6223,7 @@
     "all": "7dc3ceb52053a165"
    },
    "row_hash": "1aadffd96e76381c",
-   "carried": false,
+   "carried": true,
    "pass": 12
   },
   {
@@ -6182,7 +6306,7 @@
     "all": "6650184fae7d492b"
    },
    "row_hash": "13a714429d15f3b2",
-   "carried": false,
+   "carried": true,
    "pass": 12
   },
   {
@@ -6426,7 +6550,7 @@
     "all": "7dc3ceb52053a165"
    },
    "row_hash": "13a714429d15f3b2",
-   "carried": false,
+   "carried": true,
    "pass": 12
   },
   {
@@ -6632,7 +6756,7 @@
     "all": "6650184fae7d492b"
    },
    "row_hash": "e64ce2672d85d2d8",
-   "carried": false,
+   "carried": true,
    "pass": 12
   },
   {
@@ -6801,7 +6925,7 @@
     "all": "7dc3ceb52053a165"
    },
    "row_hash": "e64ce2672d85d2d8",
-   "carried": false,
+   "carried": true,
    "pass": 12
   },
   {
@@ -6884,8 +7008,8 @@
  ],
  "causes": [],
  "pending": [],
- "asked": 16,
- "answered": 16,
+ "asked": 2,
+ "answered": 2,
  "pass_items": [],
  "unowed": []
 }

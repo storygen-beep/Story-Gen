@@ -21,8 +21,15 @@ package step, and it adds what the importer can't know, because it is the skill'
      a person's trait that is not friendship, lust, control or a professor's intimacy (craft/people.md rule 8);
   4. every skill gate and skill_level condition names one of her skills, at a level 1 to 10, and no skill also
      has an [engine.daily_caps] band table, which would cut it twice (craft/meters.md rules 1 and 6).
+
+Rule 5 runs on every lean game, with or without the switch (LO, typed in main-lean 2026-11-26: "Option B."):
+  5. everyone she has met has a menu (C2197): a person with schedule rows, met by a `met_<x>` flag some canvas sets
+     or by a flag their `[[quest_cards]]` `when` waits on (a friend met through someone else), has a repeatable, manual canvas with `npc` set to them (their face), or carries `no_menu = "<why>"`. Each
+     menu's Talk sets a `_today` flag that `[engine.daily_tick]` clears, and all of one person's menus share it,
+     so Talk is once a day across places (C2198). The steps and the hooks are the reader's.
 """
 import functools
+import re
 import importlib.util
 from pathlib import Path
 
@@ -70,10 +77,108 @@ def shows_traits(game):
     return raw.get("show_traits") is not False
 
 
+def _short(npc_id):
+    return re.sub(r"^npc_", "", str(npc_id))
+
+
+def met_by(game, npc_id):
+    """The flags that mean she has met this person: `met_<x>`, and every flag their `[[quest_cards]]` `when` waits on
+    being true (a person met through someone else, like a friend Brooke names: their card opens on `met_brooke`)."""
+    out = {f"met_{_short(npc_id)}"}
+    for q in game.get("quest_cards") or []:
+        if isinstance(q, dict) and str(q.get("npc_id")) == str(npc_id):
+            for w in q.get("when") or []:
+                if isinstance(w, dict) and w.get("flag") and str(w.get("op", "is_true")) == "is_true":
+                    out.add(str(w["flag"]))
+    return out
+
+
+def met_flags_set(game):
+    """Flags some canvas sets, in a flagEffects entry anywhere in it."""
+    found = set()
+
+    def visit(node, ctx):
+        for e in node.get("flagEffects") or []:
+            if isinstance(e, dict) and str(e.get("op", "set")).lower() == "set" and e.get("flag"):
+                found.add(str(e["flag"]))
+    _walk(game.get("canvases") or [], visit)
+    return found
+
+
+def _retired(c):
+    return any(str(v).lower() == "false" for v in (c.get("is_active"), (c.get("trigger") or {}).get("is_active"))
+               if v is not None)
+
+
+def menus(game):
+    """{npc id: [menu canvas]}: repeatable, manual, not substitution_only, not retired, with `npc` on the trigger."""
+    out = {}
+    for c in game.get("canvases") or []:
+        t = c.get("trigger") if isinstance(c, dict) and isinstance(c.get("trigger"), dict) else {}
+        if not t.get("npc") or not t.get("is_repeatable") or (t.get("trigger_mode") or "manual") != "manual":
+            continue
+        if t.get("substitution_only") or c.get("substitution_only") or _retired(c):
+            continue
+        out.setdefault(str(t["npc"]), []).append(c)
+    return out
+
+
+def _daily_unset(game):
+    tick = ((game.get("engine") or {}).get("daily_tick") or {}) if isinstance(game.get("engine"), dict) else {}
+    return {str(e.get("flag")) for e in tick.get("flagEffects") or []
+            if isinstance(e, dict) and str(e.get("op", "")).lower() in ("unset", "clear")}
+
+
+def talk_flags(menu, cleared):
+    """For each Talk choice in a menu: the `_today` flags it sets that the daily tick clears (empty when none)."""
+    out = []
+    for node in menu.get("nodes") or []:
+        for ch in ((node.get("exit_block") or {}).get("choices") or []) if isinstance(node, dict) else []:
+            if isinstance(ch, dict) and str(ch.get("text", "")).strip().lower() == "talk":
+                out.append({str(e.get("flag")) for e in ch.get("flagEffects") or [] if isinstance(e, dict)
+                            and str(e.get("op", "set")).lower() == "set" and str(e.get("flag", "")).endswith("_today")}
+                           & cleared)
+    return out
+
+
+def menu_problems(game):
+    """Rule 5: everyone she has met has a menu, and Talk is once a day across their places (C2197, C2198)."""
+    rows = []
+    met = met_flags_set(game)
+    by_npc = menus(game)
+    cleared = _daily_unset(game)
+    for n in game.get("npcs") or []:
+        if not isinstance(n, dict):
+            continue
+        nid = str(n.get("id"))
+        if not (met_by(game, nid) & met) or not (n.get("schedules") or []):
+            continue
+        if not by_npc.get(nid):
+            if not str(n.get("no_menu") or "").strip():
+                why = sorted(met_by(game, nid) & met)[0]
+                rows.append(f"person `{nid}` is met (`{why}`) but has no menu: their face only says what "
+                            f"their row has them doing. Give them a menu with Talk where talking fits, or "
+                            f"`no_menu = \"<why>\"` (craft/people.md rule 16; C2197)")
+            continue
+        flags = []
+        for m in by_npc[nid]:
+            for got in talk_flags(m, cleared):
+                if not got:
+                    rows.append(f"{m.get('id')}: Talk sets no `_today` flag that [engine.daily_tick] clears, so it "
+                                f"isn't once a day (craft/people.md rule 16; C2198)")
+                flags.append(got)
+        shared = set.intersection(*flags) if flags else set()
+        if len([f for f in flags if f]) > 1 and not shared:
+            rows.append(f"person `{nid}`'s menus set different `_today` flags on Talk ({sorted(set().union(*flags))}): "
+                        f"one flag for the person makes Talk once a day across places (C2198)")
+    return rows
+
+
 def problems(game, mod=None):
-    """Rows that make the people check red. Empty for a game without the switch."""
+    """Rows that make the people check red. Rule 5 runs on every game; rules 1 to 4 only under the switch."""
+    menu_rows = menu_problems(game)
     if not on(game):
-        return []
+        return menu_rows
     mod = mod or engine()
     skills = mod.skill_keys(game)
     words = own_words(game)
@@ -127,7 +232,7 @@ def problems(game, mod=None):
     for key in sorted(set(caps) & set(skills)):
         rows.append(f"skill `{key}` also has [engine.daily_caps.{key}]: CoT's cap table already cuts a skill, so the "
                     f"band table would cut it twice; drop it (craft/meters.md rule 6)")
-    return rows
+    return menu_rows + rows
 
 
 def _skill_problems(gate, skills):

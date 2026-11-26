@@ -164,3 +164,64 @@ def test_a_walk_in_she_comes_across_is_once_a_day_and_has_a_way_out():
     assert any("max_triggers_per_day = 1" in r for r in walkins.problems(planted(found(mpd=None)), FINDS))
     one = found(choices=[{"text": "Watch"}])
     assert any("1 choice(s)" in r for r in walkins.problems(planted(one), FINDS))
+
+
+# ── it fits what she is doing (C2196; LO, typed in main-lean 2026-11-26: "she is working out in this scene. Why??",
+# then "Go ahead.") ─────────────────────────────────────────────────────────────────────────────────────────────────
+
+def said(canvas, line):
+    canvas["nodes"][0]["blocks"] = [{"type": "group", "blocks": [{"type": "dialog", "content": line}]}]
+    return canvas
+
+
+def gym(rule_conds=(), sub_only=True, place="park", choices=None):
+    """A 'Work out' act at the park with Tom's notes riding on it, the way C2196 builds it."""
+    target = comes("tom_notes", choices=choices)
+    target["trigger"]["trigger_mode"] = "manual"
+    target["trigger"]["location"] = place
+    if sub_only:
+        target["trigger"]["substitution_only"] = True
+    said(target, "Your stance is all wrong. Here.")
+    act = {"id": "work_out", "trigger": {"location": "park", "trigger_mode": "manual", "substitutions": [
+        {"target_canvas_id": "tom_notes", "chance": 0.65,
+         "conditions": {"version": "1.0", "logic": "AND", "items": list(rule_conds)}}]},
+        "nodes": [{"id": "lift", "exit_block": {"choices": [{"text": "Done"}]}}]}
+    return act, target
+
+
+def test_a_scene_on_arrival_that_has_her_mid_act_is_red():
+    rows = walkins.problems(planted(said(comes(), "Your stance is all wrong, though. Here."), comes("cafe_ann", "npc_ann", "cafe")))
+    assert any("park_tom" in r and "mid-act" in r and "C2196" in r for r in rows)
+
+
+def test_a_scene_on_arrival_at_the_door_is_green():
+    door = said(comes(), "He's at the gate before you're through it. You run?")
+    assert walkins.problems(planted(door, comes("cafe_ann", "npc_ann", "cafe"))) == []
+
+
+def test_the_same_words_riding_on_the_act_are_green():
+    act, target = gym()
+    assert walkins.problems(planted(comes("cafe_ann", "npc_ann", "cafe"), act, target)) == []
+
+
+def test_a_scene_inside_an_act_keeps_the_brake_and_a_way_out():
+    leaky = [{"text": "Hold still", "flagEffects": [{"flag": "came_to_her_today", "op": "set"}]},
+             {"text": "I've got it"}]
+    act, target = gym(choices=leaky)
+    rows = walkins.problems(planted(comes("cafe_ann", "npc_ann", "cafe"), act, target))
+    assert any("tom_notes" in r and "`I've got it`" in r and "doesn't set the brake" in r for r in rows)
+
+
+def test_a_scene_inside_an_act_is_substitution_only_at_the_acts_place():
+    act, target = gym(sub_only=False)
+    rows = walkins.problems(planted(comes("cafe_ann", "npc_ann", "cafe"), act, target))
+    assert any("tom_notes" in r and "isn't substitution_only" in r for r in rows)
+    act, target = gym(place="cafe")
+    rows = walkins.problems(planted(comes("cafe_ann", "npc_ann", "cafe"), act, target))
+    assert any("tom_notes" in r and "trigger.location is `cafe`" in r for r in rows)
+
+
+def test_someone_walking_in_on_her_off_the_brake_is_not_checked_as_coming_to_her():
+    act, target = gym(sub_only=False)
+    target["trigger"]["conditions"]["items"] = []  # off the brake: the housemate at the bathroom door
+    assert walkins.problems(planted(comes("cafe_ann", "npc_ann", "cafe"), act, target)) == []

@@ -1,6 +1,6 @@
 {
  "piece": "P31",
- "pass": 8,
+ "pass": 10,
  "screens": {
   "cafe_window.sit": {
    "text": "38e98584690f209c",
@@ -81,6 +81,8 @@
   "C2180": "a6c0f498d4d16271",
   "C2194": "0c03931191c53a34",
   "C1340": "b76a6583ae88c60f",
+  "C2197": "cafbb0a598dbfa97",
+  "C2198": "27e6b45f50edd3ac",
   "C769": "f6b6f78a8f2e5ed7",
   "C794": "bad76e5963432385",
   "C795": "34139e6a6914e171",
@@ -898,19 +900,6 @@
    "pass": 5
   },
   {
-   "row": "C2183",
-   "screen": "*",
-   "verdict": "PASS",
-   "line": "Chris tops up your water without being asked",
-   "why": "Chris: Forward, Dominant (Forward shown on day one, and true: he acts first); Tom: Forward, Confident (Forward personality-kind, hidden at friendship 50); nothing here contradicts a shown trait",
-   "cause": null,
-   "note": false,
-   "screen_hash": "3faff7ee3b05bf6f",
-   "row_hash": "40172c2d376bfc32",
-   "carried": true,
-   "pass": 5
-  },
-  {
    "row": "C2189",
    "screen": "cafe_window.sit",
    "verdict": "N/A",
@@ -944,8 +933,34 @@
     "all": "805ef445741bca1c"
    },
    "row_hash": "0c03931191c53a34",
-   "carried": false,
+   "carried": true,
    "pass": 8
+  },
+  {
+   "row": "C2197",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "talk_tom, talk_chris at near_cafe",
+   "why": "Tom, Chris: a menu at each place their rows put them where talking fits, behind the met flag; none where it doesn't (lecture hall, mid-rehearsal, party hours)",
+   "cause": null,
+   "note": false,
+   "screen_hash": "eacce623fa6b7de5",
+   "row_hash": "cafbb0a598dbfa97",
+   "carried": true,
+   "pass": 9
+  },
+  {
+   "row": "C2198",
+   "screen": "*",
+   "verdict": "N/A",
+   "line": "",
+   "why": "cafe_window: no menu's Talk screen in this piece; C2198 is judged only on a person's Talk screen (the screen their menu's Talk opens)",
+   "cause": null,
+   "note": false,
+   "screen_hash": "eacce623fa6b7de5",
+   "row_hash": "27e6b45f50edd3ac",
+   "carried": false,
+   "pass": 10
   },
   {
    "row": "C338",

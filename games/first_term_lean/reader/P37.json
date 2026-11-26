@@ -1,6 +1,6 @@
 {
  "piece": "P37",
- "pass": 7,
+ "pass": 9,
  "screens": {
   "zoe_party.party": {
    "text": "743043cc9ff5e804",
@@ -125,6 +125,8 @@
   "C2180": "a6c0f498d4d16271",
   "C2194": "0c03931191c53a34",
   "C1340": "b76a6583ae88c60f",
+  "C2197": "cafbb0a598dbfa97",
+  "C2198": "27e6b45f50edd3ac",
   "C769": "f6b6f78a8f2e5ed7",
   "C794": "bad76e5963432385",
   "C795": "34139e6a6914e171",
@@ -1211,19 +1213,6 @@
    "pass": 5
   },
   {
-   "row": "C2183",
-   "screen": "*",
-   "verdict": "PASS",
-   "line": "Zoe's up on the sofa arm ... dancing like the party's hers. / Nobody's mine.",
-   "why": "people on screen: Zoe (Switch, Open Relationships, Dancer), Sam (Confident, Open Relationships, Artistic), Brooke (Forward, Dominant, Bully), Kayla (Submissive, Bully), Tess (Submissive, Shy): each 2-4 traits with a personality-kind one; nothing at the party contradicts a trait, and the new home beats now show Zoe's Dancer and Open Relationships and Sam's grin at it",
-   "cause": null,
-   "note": false,
-   "screen_hash": "a2bff43d5a224c8c",
-   "row_hash": "40172c2d376bfc32",
-   "carried": true,
-   "pass": 5
-  },
-  {
    "row": "C2188",
    "screen": "zoe_party.party",
    "verdict": "PASS",
@@ -1275,7 +1264,7 @@
     "all": "bb59d48a609273e4"
    },
    "row_hash": "0c03931191c53a34",
-   "carried": false,
+   "carried": true,
    "pass": 7
   },
   {
@@ -1294,8 +1283,40 @@
     "all": "1b1cb411f6915f8d"
    },
    "row_hash": "0c03931191c53a34",
-   "carried": false,
+   "carried": true,
    "pass": 7
+  },
+  {
+   "row": "C2197",
+   "screen": "zoe_party.party",
+   "verdict": "PASS",
+   "line": "Brooke holds court by the kitchen with Kayla and Tess",
+   "why": "Kayla and Tess now have menus at the mirror and the cafeteria behind met_brooke (P60); the party hours are zoe_party's, where nobody has a menu (Zoe's and Sam's are off then too)",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "743043cc9ff5e804",
+    "traits": "06d2567e62494596",
+    "facts": "bdb41c3bae4339c4",
+    "facts2": "64bc96f41ce6505b",
+    "all": "1b1cb411f6915f8d"
+   },
+   "row_hash": "cafbb0a598dbfa97",
+   "carried": false,
+   "pass": 9
+  },
+  {
+   "row": "C2198",
+   "screen": "*",
+   "verdict": "N/A",
+   "line": "",
+   "why": "zoe_party, a party scene: no menu's Talk screen in this piece; C2198 is judged only on a person's Talk screen (the screen their menu's Talk opens)",
+   "cause": null,
+   "note": false,
+   "screen_hash": "984247e13259e4f7",
+   "row_hash": "27e6b45f50edd3ac",
+   "carried": false,
+   "pass": 9
   },
   {
    "row": "C286",
@@ -2655,8 +2676,8 @@
  ],
  "causes": [],
  "pending": [],
- "asked": 1,
- "answered": 1,
+ "asked": 2,
+ "answered": 2,
  "pass_items": [],
  "unowed": []
 }

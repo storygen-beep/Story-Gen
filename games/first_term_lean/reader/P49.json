@@ -1,6 +1,6 @@
 {
  "piece": "P49",
- "pass": 10,
+ "pass": 13,
  "screens": {
   "ryan_charger.moment": {
    "text": "313906c8298f2b26",
@@ -178,62 +178,62 @@
    "all": "11f18506cdfd9b90"
   },
   "marco_hips.moment": {
-   "text": "a342c6199214df5d",
+   "text": "e1e2ae840eb36acf",
    "traits": "e4365d01d4eb14be",
    "facts": "f9e936b5d2f7fa16",
    "facts2": "e2ce2f969cea33c2",
-   "all": "53d52f49e07cf81c"
+   "all": "6caf8adc9e13179d"
   },
   "marco_hips.let": {
-   "text": "b4234e73d4c15393",
+   "text": "d73ea7023c6bda5d",
    "traits": "e4365d01d4eb14be",
    "facts": "7628053aa2fe64cb",
    "facts2": "49f0b57a72e77115",
-   "all": "459937785692e928"
+   "all": "db5f3e6bb8bd0c1e"
   },
   "marco_hips.got": {
-   "text": "4411ac9e8b68d194",
+   "text": "cc0f1027e210f825",
    "traits": "e4365d01d4eb14be",
    "facts": "6de6e03b516eb8da",
    "facts2": "685918bc7322558b",
-   "all": "1581a08c3a6e8b26"
+   "all": "82cf8db634015cdd"
   },
   "nadia_tip.moment": {
-   "text": "91eeef5b403409c5",
+   "text": "0dd980048f329451",
    "traits": "ef3e57a6ae056353",
    "facts": "5f454547807041f4",
    "facts2": "8e364add72f35e0d",
-   "all": "0156750b0dd46b43"
+   "all": "0571296a34379742"
   },
   "nadia_tip.thanks": {
-   "text": "8c8e7515ef396462",
+   "text": "b02a5e63b6199ade",
    "traits": "ef3e57a6ae056353",
    "facts": "f575f5a48b9744f6",
    "facts2": "1cd9907f679c9c22",
-   "all": "8e24f9b37993f5d0"
+   "all": "59cfbc748567d457"
   },
   "nadia_tip.keep": {
-   "text": "b82ac2c36a660844",
+   "text": "315505a335417ce0",
    "traits": "ef3e57a6ae056353",
    "facts": "c0dac13d87852489",
    "facts2": "23ca087ae642da1c",
-   "all": "a95b70663bf307ee"
+   "all": "c24ccef750e93226"
   },
   "nadia_tip.tell": {
-   "text": "605eb2f5c35428f6",
+   "text": "23a1af72453f674e",
    "traits": "ef3e57a6ae056353",
    "facts": "1e6bbfecfe4dcab1",
    "facts2": "e7c4669602474c5e",
-   "all": "ef8d985cb08ef38a"
+   "all": "d9d84a35665efc91"
   },
   "nadia_tip.nothere": {
-   "text": "7a26b41477264359",
+   "text": "1802f5f6332fede7",
    "traits": "ef3e57a6ae056353",
    "facts": "49cd86a96ac0bd0f",
    "facts2": "5c2a5075c1a7cd39",
-   "all": "284f41d00daf72a1"
+   "all": "02498b18ad0f6fab"
   },
-  "*": "d12e9c24872493aa"
+  "*": "be5378a297ac233d"
  },
  "rows": {
   "B1": "5276068df1ca6fa9",
@@ -294,6 +294,15 @@
   "C297": "b920ef848ab61988",
   "C1250": "fde578d75b0d3620",
   "C1284": "c3025295db7bb1d6",
+  "C2181": "74c68b4029782b5f",
+  "C381": "c661ccd26aada1f2",
+  "C188": "3a9caf43a2f2b8fd",
+  "C210": "00496c4c3aec4580",
+  "C338": "3ce0dbe053c4b2c9",
+  "C388": "fbffa0dbed63968f",
+  "C541": "880eaf1315fbaa0b",
+  "L70": "32d431db08834e70",
+  "L116": "f7a81c1d066ade25",
   "C519": "e78502f7aa28746d",
   "C311": "bad20c9f078e8b87",
   "C314": "0304731d263aed9f",
@@ -307,11 +316,16 @@
   "C613": "6f777b1fcd750dd1",
   "C639": "be0ad7093b24bc46",
   "C640": "728d95d9964ccf25",
+  "C961": "b6cf8c9e8a8ef683",
   "C644": "f5e1d79f3251dbab",
   "C596": "e5f7e6cf2d01613d",
+  "C660": "eaf957bb84e62bbf",
   "C2179": "47b9477e3ec8a790",
+  "C2180": "a6c0f498d4d16271",
   "C2194": "0c03931191c53a34",
   "C1340": "b76a6583ae88c60f",
+  "C2197": "cafbb0a598dbfa97",
+  "C2198": "27e6b45f50edd3ac",
   "C769": "f6b6f78a8f2e5ed7",
   "C794": "bad76e5963432385",
   "C795": "34139e6a6914e171",
@@ -369,7 +383,8 @@
   "C2187": "f2b54b1dd7c15f2f",
   "C2188": "612394eef6826900",
   "C2189": "20748838895e4545",
-  "C2195": "77083291a86791c3"
+  "C2195": "77083291a86791c3",
+  "C2196": "a8ae0700d13a7f9b"
  },
  "verdicts": [
   {
@@ -446,55 +461,58 @@
    "row": "B10",
    "screen": "marco_hips.got",
    "verdict": "PASS",
-   "line": "\"Suit yourself, champ.\" He goes back to the rack. \"You'll be back.\"",
-   "why": "Marco training; true",
+   "line": "\"Suit yourself, champ.\" ... \"He goes back to the rack.\"",
+   "why": "day pass and energy paid by body_workout before the swap; Marco present by requires_npc and the rule's npc_at_location; stance line behind marco_fixed_form false, \"Hips. Show me you remember.\" behind true; \"next time\" is built (the rest returns the scene)",
    "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "4411ac9e8b68d194",
+    "text": "cc0f1027e210f825",
+    "traits": "e4365d01d4eb14be",
     "facts": "6de6e03b516eb8da",
     "facts2": "685918bc7322558b",
-    "all": "1581a08c3a6e8b26"
+    "all": "82cf8db634015cdd"
    },
    "row_hash": "c1c0e2ac2588a579",
    "carried": true,
-   "pass": 2
+   "pass": 11
   },
   {
    "row": "B10",
    "screen": "marco_hips.let",
    "verdict": "PASS",
-   "line": "You hold still. His thumbs press once. \"I'll check it next time.\"",
-   "why": "the next showing does check: the marco_fixed_form version",
+   "line": "\"Feel that? That's where they go. I'll check it next time.\"",
+   "why": "day pass and energy paid by body_workout before the swap; Marco present by requires_npc and the rule's npc_at_location; stance line behind marco_fixed_form false, \"Hips. Show me you remember.\" behind true; \"next time\" is built (the rest returns the scene)",
    "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "b4234e73d4c15393",
+    "text": "d73ea7023c6bda5d",
+    "traits": "e4365d01d4eb14be",
     "facts": "7628053aa2fe64cb",
     "facts2": "49f0b57a72e77115",
-    "all": "459937785692e928"
+    "all": "db5f3e6bb8bd0c1e"
    },
    "row_hash": "c1c0e2ac2588a579",
    "carried": true,
-   "pass": 2
+   "pass": 11
   },
   {
    "row": "B10",
    "screen": "marco_hips.moment",
    "verdict": "PASS",
-   "line": "Marco catches you on your way in and looks you over. \"Your stance is all wrong\" / after: \"Hips. Show me you remember.\"",
-   "why": "Marco 'training' in hood_gym by his rows; entry_only_from hood_street, so only on the way in; the stance is read off how she stands now, no past claimed; the 'remember' line is behind marco_fixed_form",
+   "line": "\"You pay at the desk for a day pass and find a bench by the mirrors. You're halfway through a set when Marco walks over\"",
+   "why": "day pass and energy paid by body_workout before the swap; Marco present by requires_npc and the rule's npc_at_location; stance line behind marco_fixed_form false, \"Hips. Show me you remember.\" behind true; \"next time\" is built (the rest returns the scene)",
    "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "a342c6199214df5d",
+    "text": "e1e2ae840eb36acf",
+    "traits": "e4365d01d4eb14be",
     "facts": "f9e936b5d2f7fa16",
     "facts2": "e2ce2f969cea33c2",
-    "all": "53d52f49e07cf81c"
+    "all": "6caf8adc9e13179d"
    },
    "row_hash": "c1c0e2ac2588a579",
    "carried": true,
-   "pass": 2
+   "pass": 11
   },
   {
    "row": "B10",
@@ -554,91 +572,96 @@
    "row": "B10",
    "screen": "nadia_tip.keep",
    "verdict": "PASS",
-   "line": "\"Your funeral.\" She takes the page back.",
-   "why": "true",
+   "line": "\"Your funeral.\" \"She takes the page back.\"",
+   "why": "Nadia present weekdays 14:00-18:00 (her row, and the trigger's weekday/time_of_day); Hale line behind hale_called_in; each version once by nadia_offered / nadia_asked",
    "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "b82ac2c36a660844",
+    "text": "315505a335417ce0",
+    "traits": "ef3e57a6ae056353",
     "facts": "c0dac13d87852489",
     "facts2": "23ca087ae642da1c",
-    "all": "a95b70663bf307ee"
+    "all": "c24ccef750e93226"
    },
    "row_hash": "c1c0e2ac2588a579",
    "carried": true,
-   "pass": 2
+   "pass": 11
   },
   {
    "row": "B10",
    "screen": "nadia_tip.moment",
    "verdict": "PASS",
-   "line": "\"Hale's exam's all chapter four.\" / \"Hale called you in, didn't he?\"",
-   "why": "Nadia 'studying' in the library weekdays 14-18; Hale named; the offer plays only while hale_called_in and nadia_offered are false, the question only once hale_called_in is set and nadia_asked is false, and the choices carry the same gates; Hale called her in on both of his answers",
+   "line": "\"You've got your books spread across a desk on the quiet floor when Nadia slides into the chair beside you\"",
+   "why": "Nadia present weekdays 14:00-18:00 (her row, and the trigger's weekday/time_of_day); Hale line behind hale_called_in; each version once by nadia_offered / nadia_asked",
    "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "91eeef5b403409c5",
+    "text": "0dd980048f329451",
+    "traits": "ef3e57a6ae056353",
     "facts": "5f454547807041f4",
     "facts2": "8e364add72f35e0d",
-    "all": "0156750b0dd46b43"
+    "all": "0571296a34379742"
    },
    "row_hash": "c1c0e2ac2588a579",
    "carried": true,
-   "pass": 2
+   "pass": 11
   },
   {
    "row": "B10",
    "screen": "nadia_tip.nothere",
    "verdict": "PASS",
    "line": "\"Fine. But I'm right.\"",
-   "why": "true",
+   "why": "Nadia present weekdays 14:00-18:00 (her row, and the trigger's weekday/time_of_day); Hale line behind hale_called_in; each version once by nadia_offered / nadia_asked",
    "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "7a26b41477264359",
+    "text": "1802f5f6332fede7",
+    "traits": "ef3e57a6ae056353",
     "facts": "49cd86a96ac0bd0f",
     "facts2": "5c2a5075c1a7cd39",
-    "all": "284f41d00daf72a1"
+    "all": "02498b18ad0f6fab"
    },
    "row_hash": "c1c0e2ac2588a579",
    "carried": true,
-   "pass": 2
+   "pass": 11
   },
   {
    "row": "B10",
    "screen": "nadia_tip.tell",
    "verdict": "PASS",
-   "line": "She doesn't look surprised. \"Don't go in there alone.\"",
-   "why": "advice about the future, true whichever answer she gave Hale (fixes c6)",
+   "line": "\"She doesn't look surprised.\" \"Don't go in there alone.\"",
+   "why": "Nadia present weekdays 14:00-18:00 (her row, and the trigger's weekday/time_of_day); Hale line behind hale_called_in; each version once by nadia_offered / nadia_asked",
    "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "605eb2f5c35428f6",
+    "text": "23a1af72453f674e",
+    "traits": "ef3e57a6ae056353",
     "facts": "1e6bbfecfe4dcab1",
     "facts2": "e7c4669602474c5e",
-    "all": "ef8d985cb08ef38a"
+    "all": "d9d84a35665efc91"
    },
    "row_hash": "c1c0e2ac2588a579",
    "carried": true,
-   "pass": 2
+   "pass": 11
   },
   {
    "row": "B10",
    "screen": "nadia_tip.thanks",
    "verdict": "PASS",
    "line": "\"Don't thank me. Pass.\"",
-   "why": "true",
+   "why": "Nadia present weekdays 14:00-18:00 (her row, and the trigger's weekday/time_of_day); Hale line behind hale_called_in; each version once by nadia_offered / nadia_asked",
    "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "8c8e7515ef396462",
+    "text": "b02a5e63b6199ade",
+    "traits": "ef3e57a6ae056353",
     "facts": "f575f5a48b9744f6",
     "facts2": "1cd9907f679c9c22",
-    "all": "8e24f9b37993f5d0"
+    "all": "59cfbc748567d457"
    },
    "row_hash": "c1c0e2ac2588a579",
    "carried": true,
-   "pass": 2
+   "pass": 11
   },
   {
    "row": "B10",
@@ -2534,55 +2557,58 @@
    "row": "B8",
    "screen": "marco_hips.got",
    "verdict": "PASS",
-   "line": "\"Suit yourself, champ.\" He goes back to the rack. \"You'll be back.\"",
-   "why": "no number or her garment named; chance 0.65 and the 3-day rest match the card and NOTES (2026-11-26)",
+   "line": "\"Suit yourself, champ.\" ... \"He goes back to the rack.\"",
+   "why": "$5 / 20 energy / 1 hour match PLAN Gym row; exits 60 minutes; no garment named, the act's leggings-and-sports-top lock is before it",
    "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "4411ac9e8b68d194",
+    "text": "cc0f1027e210f825",
+    "traits": "e4365d01d4eb14be",
     "facts": "6de6e03b516eb8da",
     "facts2": "685918bc7322558b",
-    "all": "1581a08c3a6e8b26"
+    "all": "82cf8db634015cdd"
    },
    "row_hash": "80d415cf08e0ebfe",
    "carried": true,
-   "pass": 2
+   "pass": 11
   },
   {
    "row": "B8",
    "screen": "marco_hips.let",
    "verdict": "PASS",
-   "line": "You hold still. His thumbs press once. \"I'll check it next time.\"",
-   "why": "no number or her garment named; chance 0.65 and the 3-day rest match the card and NOTES (2026-11-26)",
+   "line": "\"Feel that? That's where they go. I'll check it next time.\"",
+   "why": "$5 / 20 energy / 1 hour match PLAN Gym row; exits 60 minutes; no garment named, the act's leggings-and-sports-top lock is before it",
    "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "b4234e73d4c15393",
+    "text": "d73ea7023c6bda5d",
+    "traits": "e4365d01d4eb14be",
     "facts": "7628053aa2fe64cb",
     "facts2": "49f0b57a72e77115",
-    "all": "459937785692e928"
+    "all": "db5f3e6bb8bd0c1e"
    },
    "row_hash": "80d415cf08e0ebfe",
    "carried": true,
-   "pass": 2
+   "pass": 11
   },
   {
    "row": "B8",
    "screen": "marco_hips.moment",
    "verdict": "PASS",
-   "line": "Marco catches you on your way in and looks you over. \"Your stance is all wrong\" / after: \"Hips. Show me you remember.\"",
-   "why": "no number or her garment named; chance 0.65 and the 3-day rest match the card and NOTES (2026-11-26)",
+   "line": "\"You pay at the desk for a day pass and find a bench by the mirrors. You're halfway through a set when Marco walks over\"",
+   "why": "$5 / 20 energy / 1 hour match PLAN Gym row; exits 60 minutes; no garment named, the act's leggings-and-sports-top lock is before it",
    "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "a342c6199214df5d",
+    "text": "e1e2ae840eb36acf",
+    "traits": "e4365d01d4eb14be",
     "facts": "f9e936b5d2f7fa16",
     "facts2": "e2ce2f969cea33c2",
-    "all": "53d52f49e07cf81c"
+    "all": "6caf8adc9e13179d"
    },
    "row_hash": "80d415cf08e0ebfe",
    "carried": true,
-   "pass": 2
+   "pass": 11
   },
   {
    "row": "B8",
@@ -2642,91 +2668,96 @@
    "row": "B8",
    "screen": "nadia_tip.keep",
    "verdict": "PASS",
-   "line": "\"Your funeral.\" She takes the page back.",
-   "why": "no number or her garment named; chance 0.65 and the 3-day rest match the card and NOTES (2026-11-26)",
+   "line": "\"Your funeral.\" \"She takes the page back.\"",
+   "why": "Study: 5 energy before it, exits 60 minutes and study_today +1, as PLAN Library \"Study (1 hour, 5 energy)\"; no garment named",
    "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "b82ac2c36a660844",
+    "text": "315505a335417ce0",
+    "traits": "ef3e57a6ae056353",
     "facts": "c0dac13d87852489",
     "facts2": "23ca087ae642da1c",
-    "all": "a95b70663bf307ee"
+    "all": "c24ccef750e93226"
    },
    "row_hash": "80d415cf08e0ebfe",
    "carried": true,
-   "pass": 2
+   "pass": 11
   },
   {
    "row": "B8",
    "screen": "nadia_tip.moment",
    "verdict": "PASS",
-   "line": "\"Hale's exam's all chapter four.\" / \"Hale called you in, didn't he?\"",
-   "why": "no number or her garment named; chance 0.65 and the 3-day rest match the card and NOTES (2026-11-26)",
+   "line": "\"You've got your books spread across a desk on the quiet floor when Nadia slides into the chair beside you\"",
+   "why": "Study: 5 energy before it, exits 60 minutes and study_today +1, as PLAN Library \"Study (1 hour, 5 energy)\"; no garment named",
    "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "91eeef5b403409c5",
+    "text": "0dd980048f329451",
+    "traits": "ef3e57a6ae056353",
     "facts": "5f454547807041f4",
     "facts2": "8e364add72f35e0d",
-    "all": "0156750b0dd46b43"
+    "all": "0571296a34379742"
    },
    "row_hash": "80d415cf08e0ebfe",
    "carried": true,
-   "pass": 2
+   "pass": 11
   },
   {
    "row": "B8",
    "screen": "nadia_tip.nothere",
    "verdict": "PASS",
    "line": "\"Fine. But I'm right.\"",
-   "why": "no number or her garment named; chance 0.65 and the 3-day rest match the card and NOTES (2026-11-26)",
+   "why": "Study: 5 energy before it, exits 60 minutes and study_today +1, as PLAN Library \"Study (1 hour, 5 energy)\"; no garment named",
    "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "7a26b41477264359",
+    "text": "1802f5f6332fede7",
+    "traits": "ef3e57a6ae056353",
     "facts": "49cd86a96ac0bd0f",
     "facts2": "5c2a5075c1a7cd39",
-    "all": "284f41d00daf72a1"
+    "all": "02498b18ad0f6fab"
    },
    "row_hash": "80d415cf08e0ebfe",
    "carried": true,
-   "pass": 2
+   "pass": 11
   },
   {
    "row": "B8",
    "screen": "nadia_tip.tell",
    "verdict": "PASS",
-   "line": "She doesn't look surprised. \"Don't go in there alone.\"",
-   "why": "no number or her garment named; chance 0.65 and the 3-day rest match the card and NOTES (2026-11-26)",
+   "line": "\"She doesn't look surprised.\" \"Don't go in there alone.\"",
+   "why": "Study: 5 energy before it, exits 60 minutes and study_today +1, as PLAN Library \"Study (1 hour, 5 energy)\"; no garment named",
    "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "605eb2f5c35428f6",
+    "text": "23a1af72453f674e",
+    "traits": "ef3e57a6ae056353",
     "facts": "1e6bbfecfe4dcab1",
     "facts2": "e7c4669602474c5e",
-    "all": "ef8d985cb08ef38a"
+    "all": "d9d84a35665efc91"
    },
    "row_hash": "80d415cf08e0ebfe",
    "carried": true,
-   "pass": 2
+   "pass": 11
   },
   {
    "row": "B8",
    "screen": "nadia_tip.thanks",
    "verdict": "PASS",
    "line": "\"Don't thank me. Pass.\"",
-   "why": "no number or her garment named; chance 0.65 and the 3-day rest match the card and NOTES (2026-11-26)",
+   "why": "Study: 5 energy before it, exits 60 minutes and study_today +1, as PLAN Library \"Study (1 hour, 5 energy)\"; no garment named",
    "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "8c8e7515ef396462",
+    "text": "b02a5e63b6199ade",
+    "traits": "ef3e57a6ae056353",
     "facts": "f575f5a48b9744f6",
     "facts2": "1cd9907f679c9c22",
-    "all": "8e24f9b37993f5d0"
+    "all": "59cfbc748567d457"
    },
    "row_hash": "80d415cf08e0ebfe",
    "carried": true,
-   "pass": 2
+   "pass": 11
   },
   {
    "row": "B8",
@@ -5156,6 +5187,32 @@
    "pass": 1
   },
   {
+   "row": "C188",
+   "screen": "*",
+   "verdict": "N/A",
+   "line": "study_today +1",
+   "why": "the only number on these screens is the hidden study counter, not a climb meter; no gate",
+   "cause": null,
+   "note": false,
+   "screen_hash": "be5378a297ac233d",
+   "row_hash": "3a9caf43a2f2b8fd",
+   "carried": true,
+   "pass": 11
+  },
+  {
+   "row": "C210",
+   "screen": "*",
+   "verdict": "N/A",
+   "line": "study_today +1",
+   "why": "no level crossed",
+   "cause": null,
+   "note": false,
+   "screen_hash": "be5378a297ac233d",
+   "row_hash": "00496c4c3aec4580",
+   "carried": true,
+   "pass": 11
+  },
+  {
    "row": "C2179",
    "screen": "*",
    "verdict": "PASS",
@@ -5186,6 +5243,32 @@
    "row_hash": "47b9477e3ec8a790",
    "carried": true,
    "pass": 7
+  },
+  {
+   "row": "C2180",
+   "screen": "*",
+   "verdict": "N/A",
+   "line": "study_today +1",
+   "why": "no feeling moves (release 1 frozen, C2182)",
+   "cause": null,
+   "note": false,
+   "screen_hash": "be5378a297ac233d",
+   "row_hash": "a6c0f498d4d16271",
+   "carried": true,
+   "pass": 11
+  },
+  {
+   "row": "C2181",
+   "screen": "*",
+   "verdict": "N/A",
+   "line": "study_today +1",
+   "why": "study_today is a daily counter, not a climb skill",
+   "cause": null,
+   "note": false,
+   "screen_hash": "be5378a297ac233d",
+   "row_hash": "74c68b4029782b5f",
+   "carried": true,
+   "pass": 11
   },
   {
    "row": "C2186",
@@ -6062,8 +6145,243 @@
    "note": false,
    "screen_hash": "d12e9c24872493aa",
    "row_hash": "77083291a86791c3",
-   "carried": false,
+   "carried": true,
    "pass": 10
+  },
+  {
+   "row": "C2196",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "each first line (see why)",
+   "why": "ryan_charger: in her room, just in from the hall (entry_only_from), any clothes; a knock fits; ryan_charger_back: in her room 23:00-24:00, any clothes; a knock fits arrival or a return from a room button; no garment named; mom_taste: just in from the hall, any clothes; fits; zoe_witness: walking onto the quad; fits; zoe_give_him: walking on the quad; \"your ass\" fits any clothes; vance_gutter: passing on the street; fits; vance_envelope: passing on the street; fits; hale_called_in: coming into his office; fits; marco_hips: mid-workout after $5 and 20 energy, in the act's leggings and sports top; words agree; nadia_tip: at a desk studying after Study's 5 energy; words agree",
+   "cause": null,
+   "note": false,
+   "screen_hash": "be5378a297ac233d",
+   "row_hash": "a8ae0700d13a7f9b",
+   "carried": true,
+   "pass": 11
+  },
+  {
+   "row": "C2196",
+   "screen": "marco_hips.moment",
+   "verdict": "PASS",
+   "line": "\"You pay at the desk for a day pass and find a bench by the mirrors. You're halfway through a set when Marco walks over\"",
+   "why": "mid-workout after $5 and 20 energy, in the act's leggings and sports top; words agree",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "e1e2ae840eb36acf",
+    "traits": "e4365d01d4eb14be",
+    "facts": "f9e936b5d2f7fa16",
+    "facts2": "e2ce2f969cea33c2",
+    "all": "6caf8adc9e13179d"
+   },
+   "row_hash": "a8ae0700d13a7f9b",
+   "carried": true,
+   "pass": 11
+  },
+  {
+   "row": "C2196",
+   "screen": "nadia_tip.moment",
+   "verdict": "PASS",
+   "line": "\"You've got your books spread across a desk on the quiet floor when Nadia slides into the chair beside you\"",
+   "why": "at a desk studying after Study's 5 energy; words agree",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "0dd980048f329451",
+    "traits": "ef3e57a6ae056353",
+    "facts": "5f454547807041f4",
+    "facts2": "8e364add72f35e0d",
+    "all": "0571296a34379742"
+   },
+   "row_hash": "a8ae0700d13a7f9b",
+   "carried": true,
+   "pass": 11
+  },
+  {
+   "row": "C2197",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "menus: ryan_*, talk_mom, talk_zoe_*, talk_vance, talk_hale, talk_marco, talk_nadia_*",
+   "why": "everyone on these screens has a menu where talking fits; the walk-ins are substitution or random, outside the one-face check",
+   "cause": null,
+   "note": false,
+   "screen_hash": "be5378a297ac233d",
+   "row_hash": "cafbb0a598dbfa97",
+   "carried": true,
+   "pass": 12
+  },
+  {
+   "row": "C2198",
+   "screen": "hale_called_in.moment",
+   "verdict": "N/A",
+   "line": "",
+   "why": "a walk-in (someone comes to her), not a menu's Talk screen; C2198 is judged only on the screen a person's menu's Talk opens",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "f1306f5ed757f9ab",
+    "traits": "825724317465730d",
+    "facts": "6ea67dc58c8d9698",
+    "facts2": "ed9eba5ccb976fe4",
+    "all": "60672e322c6eb2bc"
+   },
+   "row_hash": "27e6b45f50edd3ac",
+   "carried": false,
+   "pass": 13
+  },
+  {
+   "row": "C2198",
+   "screen": "marco_hips.moment",
+   "verdict": "N/A",
+   "line": "",
+   "why": "a walk-in (someone comes to her), not a menu's Talk screen; C2198 is judged only on the screen a person's menu's Talk opens",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "e1e2ae840eb36acf",
+    "traits": "e4365d01d4eb14be",
+    "facts": "f9e936b5d2f7fa16",
+    "facts2": "e2ce2f969cea33c2",
+    "all": "6caf8adc9e13179d"
+   },
+   "row_hash": "27e6b45f50edd3ac",
+   "carried": false,
+   "pass": 13
+  },
+  {
+   "row": "C2198",
+   "screen": "mom_taste.moment",
+   "verdict": "N/A",
+   "line": "",
+   "why": "a walk-in (someone comes to her), not a menu's Talk screen; C2198 is judged only on the screen a person's menu's Talk opens",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "a478c76abe5c1a35",
+    "traits": "95f1c22815f415ed",
+    "facts": "31c89ab386edb857",
+    "facts2": "f2def89abde9929c",
+    "all": "06f6053c7ed12440"
+   },
+   "row_hash": "27e6b45f50edd3ac",
+   "carried": false,
+   "pass": 13
+  },
+  {
+   "row": "C2198",
+   "screen": "nadia_tip.moment",
+   "verdict": "N/A",
+   "line": "",
+   "why": "a walk-in (someone comes to her), not a menu's Talk screen; C2198 is judged only on the screen a person's menu's Talk opens",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "0dd980048f329451",
+    "traits": "ef3e57a6ae056353",
+    "facts": "5f454547807041f4",
+    "facts2": "8e364add72f35e0d",
+    "all": "0571296a34379742"
+   },
+   "row_hash": "27e6b45f50edd3ac",
+   "carried": false,
+   "pass": 13
+  },
+  {
+   "row": "C2198",
+   "screen": "ryan_charger.moment",
+   "verdict": "N/A",
+   "line": "",
+   "why": "a walk-in (someone comes to her), not a menu's Talk screen; C2198 is judged only on the screen a person's menu's Talk opens",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "313906c8298f2b26",
+    "traits": "74c4f68e6476ecee",
+    "facts": "c2d1415accf79c05",
+    "facts2": "8d63addbcec693e8",
+    "all": "abde12bfac993bae"
+   },
+   "row_hash": "27e6b45f50edd3ac",
+   "carried": false,
+   "pass": 13
+  },
+  {
+   "row": "C2198",
+   "screen": "vance_envelope.moment",
+   "verdict": "N/A",
+   "line": "",
+   "why": "a walk-in (someone comes to her), not a menu's Talk screen; C2198 is judged only on the screen a person's menu's Talk opens",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "1febdaba06b391a4",
+    "traits": "40c19ab6c95d7a0e",
+    "facts": "480c3268ade1c5c6",
+    "facts2": "f7ec106b04fdf0b4",
+    "all": "90c5a314b1fbbd9d"
+   },
+   "row_hash": "27e6b45f50edd3ac",
+   "carried": false,
+   "pass": 13
+  },
+  {
+   "row": "C2198",
+   "screen": "vance_gutter.moment",
+   "verdict": "N/A",
+   "line": "",
+   "why": "a walk-in (someone comes to her), not a menu's Talk screen; C2198 is judged only on the screen a person's menu's Talk opens",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "4c7736cdae420af3",
+    "traits": "40c19ab6c95d7a0e",
+    "facts": "480c3268ade1c5c6",
+    "facts2": "f7ec106b04fdf0b4",
+    "all": "4f5299bb21a4f368"
+   },
+   "row_hash": "27e6b45f50edd3ac",
+   "carried": false,
+   "pass": 13
+  },
+  {
+   "row": "C2198",
+   "screen": "zoe_give_him.moment",
+   "verdict": "N/A",
+   "line": "",
+   "why": "a walk-in (someone comes to her), not a menu's Talk screen; C2198 is judged only on the screen a person's menu's Talk opens",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "e049452db2317066",
+    "traits": "0b1fa80c9d60647d",
+    "facts": "37fcb9425fcce652",
+    "facts2": "130dd93dfc7a1cca",
+    "all": "0104d8053969fd0e"
+   },
+   "row_hash": "27e6b45f50edd3ac",
+   "carried": false,
+   "pass": 13
+  },
+  {
+   "row": "C2198",
+   "screen": "zoe_witness.moment",
+   "verdict": "N/A",
+   "line": "",
+   "why": "a walk-in (someone comes to her), not a menu's Talk screen; C2198 is judged only on the screen a person's menu's Talk opens",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "f651eb67e838de7f",
+    "traits": "6b1e34b018661933",
+    "facts": "55b08b7a92e09b4a",
+    "facts2": "1d19261cdc6cf85d",
+    "all": "a2080fb3cbcaac95"
+   },
+   "row_hash": "27e6b45f50edd3ac",
+   "carried": false,
+   "pass": 13
   },
   {
    "row": "C286",
@@ -6371,6 +6689,45 @@
    "row_hash": "0304731d263aed9f",
    "carried": true,
    "pass": 1
+  },
+  {
+   "row": "C338",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "\"I'm fine, keep it.\"",
+   "why": "the study count is the act's own, the same on every exit; the no pays nothing extra",
+   "cause": null,
+   "note": false,
+   "screen_hash": "be5378a297ac233d",
+   "row_hash": "3ce0dbe053c4b2c9",
+   "carried": true,
+   "pass": 11
+  },
+  {
+   "row": "C381",
+   "screen": "*",
+   "verdict": "N/A",
+   "line": "study_today +1",
+   "why": "no skill gate",
+   "cause": null,
+   "note": false,
+   "screen_hash": "be5378a297ac233d",
+   "row_hash": "c661ccd26aada1f2",
+   "carried": true,
+   "pass": 11
+  },
+  {
+   "row": "C388",
+   "screen": "*",
+   "verdict": "N/A",
+   "line": "study_today +1",
+   "why": "no lock on these screens (Study's own lock carries locked_text)",
+   "cause": null,
+   "note": false,
+   "screen_hash": "be5378a297ac233d",
+   "row_hash": "fbffa0dbed63968f",
+   "carried": true,
+   "pass": 11
   },
   {
    "row": "C422",
@@ -7629,55 +7986,58 @@
    "row": "C460",
    "screen": "marco_hips.got",
    "verdict": "PASS",
-   "line": "\"Suit yourself, champ.\" He goes back to the rack. \"You'll be back.\"",
-   "why": "Marco training; true",
+   "line": "\"Suit yourself, champ.\" ... \"He goes back to the rack.\"",
+   "why": "day pass and energy paid by body_workout before the swap; Marco present by requires_npc and the rule's npc_at_location; stance line behind marco_fixed_form false, \"Hips. Show me you remember.\" behind true; \"next time\" is built (the rest returns the scene)",
    "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "4411ac9e8b68d194",
+    "text": "cc0f1027e210f825",
+    "traits": "e4365d01d4eb14be",
     "facts": "6de6e03b516eb8da",
     "facts2": "685918bc7322558b",
-    "all": "1581a08c3a6e8b26"
+    "all": "82cf8db634015cdd"
    },
    "row_hash": "67e48e60d5053a2e",
    "carried": true,
-   "pass": 2
+   "pass": 11
   },
   {
    "row": "C460",
    "screen": "marco_hips.let",
    "verdict": "PASS",
-   "line": "You hold still. His thumbs press once. \"I'll check it next time.\"",
-   "why": "the next showing does check: the marco_fixed_form version",
+   "line": "\"Feel that? That's where they go. I'll check it next time.\"",
+   "why": "day pass and energy paid by body_workout before the swap; Marco present by requires_npc and the rule's npc_at_location; stance line behind marco_fixed_form false, \"Hips. Show me you remember.\" behind true; \"next time\" is built (the rest returns the scene)",
    "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "b4234e73d4c15393",
+    "text": "d73ea7023c6bda5d",
+    "traits": "e4365d01d4eb14be",
     "facts": "7628053aa2fe64cb",
     "facts2": "49f0b57a72e77115",
-    "all": "459937785692e928"
+    "all": "db5f3e6bb8bd0c1e"
    },
    "row_hash": "67e48e60d5053a2e",
    "carried": true,
-   "pass": 2
+   "pass": 11
   },
   {
    "row": "C460",
    "screen": "marco_hips.moment",
    "verdict": "PASS",
-   "line": "Marco catches you on your way in and looks you over. \"Your stance is all wrong\" / after: \"Hips. Show me you remember.\"",
-   "why": "Marco 'training' in hood_gym by his rows; entry_only_from hood_street, so only on the way in; the stance is read off how she stands now, no past claimed; the 'remember' line is behind marco_fixed_form",
+   "line": "\"You pay at the desk for a day pass and find a bench by the mirrors. You're halfway through a set when Marco walks over\"",
+   "why": "day pass and energy paid by body_workout before the swap; Marco present by requires_npc and the rule's npc_at_location; stance line behind marco_fixed_form false, \"Hips. Show me you remember.\" behind true; \"next time\" is built (the rest returns the scene)",
    "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "a342c6199214df5d",
+    "text": "e1e2ae840eb36acf",
+    "traits": "e4365d01d4eb14be",
     "facts": "f9e936b5d2f7fa16",
     "facts2": "e2ce2f969cea33c2",
-    "all": "53d52f49e07cf81c"
+    "all": "6caf8adc9e13179d"
    },
    "row_hash": "67e48e60d5053a2e",
    "carried": true,
-   "pass": 2
+   "pass": 11
   },
   {
    "row": "C460",
@@ -7737,91 +8097,96 @@
    "row": "C460",
    "screen": "nadia_tip.keep",
    "verdict": "PASS",
-   "line": "\"Your funeral.\" She takes the page back.",
-   "why": "true",
+   "line": "\"Your funeral.\" \"She takes the page back.\"",
+   "why": "Nadia present weekdays 14:00-18:00 (her row, and the trigger's weekday/time_of_day); Hale line behind hale_called_in; each version once by nadia_offered / nadia_asked",
    "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "b82ac2c36a660844",
+    "text": "315505a335417ce0",
+    "traits": "ef3e57a6ae056353",
     "facts": "c0dac13d87852489",
     "facts2": "23ca087ae642da1c",
-    "all": "a95b70663bf307ee"
+    "all": "c24ccef750e93226"
    },
    "row_hash": "67e48e60d5053a2e",
    "carried": true,
-   "pass": 2
+   "pass": 11
   },
   {
    "row": "C460",
    "screen": "nadia_tip.moment",
    "verdict": "PASS",
-   "line": "\"Hale's exam's all chapter four.\" / \"Hale called you in, didn't he?\"",
-   "why": "Nadia 'studying' in the library weekdays 14-18; Hale named; the offer plays only while hale_called_in and nadia_offered are false, the question only once hale_called_in is set and nadia_asked is false, and the choices carry the same gates; Hale called her in on both of his answers",
+   "line": "\"You've got your books spread across a desk on the quiet floor when Nadia slides into the chair beside you\"",
+   "why": "Nadia present weekdays 14:00-18:00 (her row, and the trigger's weekday/time_of_day); Hale line behind hale_called_in; each version once by nadia_offered / nadia_asked",
    "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "91eeef5b403409c5",
+    "text": "0dd980048f329451",
+    "traits": "ef3e57a6ae056353",
     "facts": "5f454547807041f4",
     "facts2": "8e364add72f35e0d",
-    "all": "0156750b0dd46b43"
+    "all": "0571296a34379742"
    },
    "row_hash": "67e48e60d5053a2e",
    "carried": true,
-   "pass": 2
+   "pass": 11
   },
   {
    "row": "C460",
    "screen": "nadia_tip.nothere",
    "verdict": "PASS",
    "line": "\"Fine. But I'm right.\"",
-   "why": "true",
+   "why": "Nadia present weekdays 14:00-18:00 (her row, and the trigger's weekday/time_of_day); Hale line behind hale_called_in; each version once by nadia_offered / nadia_asked",
    "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "7a26b41477264359",
+    "text": "1802f5f6332fede7",
+    "traits": "ef3e57a6ae056353",
     "facts": "49cd86a96ac0bd0f",
     "facts2": "5c2a5075c1a7cd39",
-    "all": "284f41d00daf72a1"
+    "all": "02498b18ad0f6fab"
    },
    "row_hash": "67e48e60d5053a2e",
    "carried": true,
-   "pass": 2
+   "pass": 11
   },
   {
    "row": "C460",
    "screen": "nadia_tip.tell",
    "verdict": "PASS",
-   "line": "She doesn't look surprised. \"Don't go in there alone.\"",
-   "why": "advice about the future, true whichever answer she gave Hale (fixes c6)",
+   "line": "\"She doesn't look surprised.\" \"Don't go in there alone.\"",
+   "why": "Nadia present weekdays 14:00-18:00 (her row, and the trigger's weekday/time_of_day); Hale line behind hale_called_in; each version once by nadia_offered / nadia_asked",
    "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "605eb2f5c35428f6",
+    "text": "23a1af72453f674e",
+    "traits": "ef3e57a6ae056353",
     "facts": "1e6bbfecfe4dcab1",
     "facts2": "e7c4669602474c5e",
-    "all": "ef8d985cb08ef38a"
+    "all": "d9d84a35665efc91"
    },
    "row_hash": "67e48e60d5053a2e",
    "carried": true,
-   "pass": 2
+   "pass": 11
   },
   {
    "row": "C460",
    "screen": "nadia_tip.thanks",
    "verdict": "PASS",
    "line": "\"Don't thank me. Pass.\"",
-   "why": "true",
+   "why": "Nadia present weekdays 14:00-18:00 (her row, and the trigger's weekday/time_of_day); Hale line behind hale_called_in; each version once by nadia_offered / nadia_asked",
    "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "8c8e7515ef396462",
+    "text": "b02a5e63b6199ade",
+    "traits": "ef3e57a6ae056353",
     "facts": "f575f5a48b9744f6",
     "facts2": "1cd9907f679c9c22",
-    "all": "8e24f9b37993f5d0"
+    "all": "59cfbc748567d457"
    },
    "row_hash": "67e48e60d5053a2e",
    "carried": true,
-   "pass": 2
+   "pass": 11
   },
   {
    "row": "C460",
@@ -8245,55 +8610,58 @@
    "row": "C461",
    "screen": "marco_hips.got",
    "verdict": "PASS",
-   "line": "\"Suit yourself, champ.\" He goes back to the rack. \"You'll be back.\"",
-   "why": "texture that cannot clash, and dialogue that fits each person's plan entry",
+   "line": "\"Suit yourself, champ.\" ... \"He goes back to the rack.\"",
+   "why": "texture and dialogue that fit Marco's entry (Takes charge, \"his hands on her hips\")",
    "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "4411ac9e8b68d194",
+    "text": "cc0f1027e210f825",
+    "traits": "e4365d01d4eb14be",
     "facts": "6de6e03b516eb8da",
     "facts2": "685918bc7322558b",
-    "all": "1581a08c3a6e8b26"
+    "all": "82cf8db634015cdd"
    },
    "row_hash": "310706ee076318f2",
    "carried": true,
-   "pass": 2
+   "pass": 11
   },
   {
    "row": "C461",
    "screen": "marco_hips.let",
    "verdict": "PASS",
-   "line": "You hold still. His thumbs press once. \"I'll check it next time.\"",
-   "why": "texture that cannot clash, and dialogue that fits each person's plan entry",
+   "line": "\"Feel that? That's where they go. I'll check it next time.\"",
+   "why": "texture and dialogue that fit Marco's entry (Takes charge, \"his hands on her hips\")",
    "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "b4234e73d4c15393",
+    "text": "d73ea7023c6bda5d",
+    "traits": "e4365d01d4eb14be",
     "facts": "7628053aa2fe64cb",
     "facts2": "49f0b57a72e77115",
-    "all": "459937785692e928"
+    "all": "db5f3e6bb8bd0c1e"
    },
    "row_hash": "310706ee076318f2",
    "carried": true,
-   "pass": 2
+   "pass": 11
   },
   {
    "row": "C461",
    "screen": "marco_hips.moment",
    "verdict": "PASS",
-   "line": "Marco catches you on your way in and looks you over. \"Your stance is all wrong\" / after: \"Hips. Show me you remember.\"",
-   "why": "texture that cannot clash, and dialogue that fits each person's plan entry",
+   "line": "\"You pay at the desk for a day pass and find a bench by the mirrors. You're halfway through a set when Marco walks over\"",
+   "why": "texture and dialogue that fit Marco's entry (Takes charge, \"his hands on her hips\")",
    "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "a342c6199214df5d",
+    "text": "e1e2ae840eb36acf",
+    "traits": "e4365d01d4eb14be",
     "facts": "f9e936b5d2f7fa16",
     "facts2": "e2ce2f969cea33c2",
-    "all": "53d52f49e07cf81c"
+    "all": "6caf8adc9e13179d"
    },
    "row_hash": "310706ee076318f2",
    "carried": true,
-   "pass": 2
+   "pass": 11
   },
   {
    "row": "C461",
@@ -8353,91 +8721,96 @@
    "row": "C461",
    "screen": "nadia_tip.keep",
    "verdict": "PASS",
-   "line": "\"Your funeral.\" She takes the page back.",
-   "why": "texture that cannot clash, and dialogue that fits each person's plan entry",
+   "line": "\"Your funeral.\" \"She takes the page back.\"",
+   "why": "dialogue fits Nadia (retaking Hale's course, knows his history)",
    "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "b82ac2c36a660844",
+    "text": "315505a335417ce0",
+    "traits": "ef3e57a6ae056353",
     "facts": "c0dac13d87852489",
     "facts2": "23ca087ae642da1c",
-    "all": "a95b70663bf307ee"
+    "all": "c24ccef750e93226"
    },
    "row_hash": "310706ee076318f2",
    "carried": true,
-   "pass": 2
+   "pass": 11
   },
   {
    "row": "C461",
    "screen": "nadia_tip.moment",
    "verdict": "PASS",
-   "line": "\"Hale's exam's all chapter four.\" / \"Hale called you in, didn't he?\"",
-   "why": "texture that cannot clash, and dialogue that fits each person's plan entry",
+   "line": "\"You've got your books spread across a desk on the quiet floor when Nadia slides into the chair beside you\"",
+   "why": "dialogue fits Nadia (retaking Hale's course, knows his history)",
    "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "91eeef5b403409c5",
+    "text": "0dd980048f329451",
+    "traits": "ef3e57a6ae056353",
     "facts": "5f454547807041f4",
     "facts2": "8e364add72f35e0d",
-    "all": "0156750b0dd46b43"
+    "all": "0571296a34379742"
    },
    "row_hash": "310706ee076318f2",
    "carried": true,
-   "pass": 2
+   "pass": 11
   },
   {
    "row": "C461",
    "screen": "nadia_tip.nothere",
    "verdict": "PASS",
    "line": "\"Fine. But I'm right.\"",
-   "why": "texture that cannot clash, and dialogue that fits each person's plan entry",
+   "why": "dialogue fits Nadia (retaking Hale's course, knows his history)",
    "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "7a26b41477264359",
+    "text": "1802f5f6332fede7",
+    "traits": "ef3e57a6ae056353",
     "facts": "49cd86a96ac0bd0f",
     "facts2": "5c2a5075c1a7cd39",
-    "all": "284f41d00daf72a1"
+    "all": "02498b18ad0f6fab"
    },
    "row_hash": "310706ee076318f2",
    "carried": true,
-   "pass": 2
+   "pass": 11
   },
   {
    "row": "C461",
    "screen": "nadia_tip.tell",
    "verdict": "PASS",
-   "line": "She doesn't look surprised. \"Don't go in there alone.\"",
-   "why": "texture that cannot clash, and dialogue that fits each person's plan entry",
+   "line": "\"She doesn't look surprised.\" \"Don't go in there alone.\"",
+   "why": "dialogue fits Nadia (retaking Hale's course, knows his history)",
    "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "605eb2f5c35428f6",
+    "text": "23a1af72453f674e",
+    "traits": "ef3e57a6ae056353",
     "facts": "1e6bbfecfe4dcab1",
     "facts2": "e7c4669602474c5e",
-    "all": "ef8d985cb08ef38a"
+    "all": "d9d84a35665efc91"
    },
    "row_hash": "310706ee076318f2",
    "carried": true,
-   "pass": 2
+   "pass": 11
   },
   {
    "row": "C461",
    "screen": "nadia_tip.thanks",
    "verdict": "PASS",
    "line": "\"Don't thank me. Pass.\"",
-   "why": "texture that cannot clash, and dialogue that fits each person's plan entry",
+   "why": "dialogue fits Nadia (retaking Hale's course, knows his history)",
    "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "8c8e7515ef396462",
+    "text": "b02a5e63b6199ade",
+    "traits": "ef3e57a6ae056353",
     "facts": "f575f5a48b9744f6",
     "facts2": "1cd9907f679c9c22",
-    "all": "8e24f9b37993f5d0"
+    "all": "59cfbc748567d457"
    },
    "row_hash": "310706ee076318f2",
    "carried": true,
-   "pass": 2
+   "pass": 11
   },
   {
    "row": "C461",
@@ -8820,6 +9193,19 @@
    "pass": 7
   },
   {
+   "row": "C541",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "\"Don't thank me. Pass.\"",
+   "why": "each answer opens on her reaction; study_today is hidden with toast = false, no +X printed",
+   "cause": null,
+   "note": false,
+   "screen_hash": "be5378a297ac233d",
+   "row_hash": "880eaf1315fbaa0b",
+   "carried": true,
+   "pass": 11
+  },
+  {
    "row": "C593",
    "screen": "*",
    "verdict": "PASS",
@@ -9126,6 +9512,19 @@
    "row_hash": "f5e1d79f3251dbab",
    "carried": true,
    "pass": 7
+  },
+  {
+   "row": "C660",
+   "screen": "*",
+   "verdict": "N/A",
+   "line": "study_today +1",
+   "why": "no feeling shown or moved",
+   "cause": null,
+   "note": false,
+   "screen_hash": "be5378a297ac233d",
+   "row_hash": "eaf957bb84e62bbf",
+   "carried": true,
+   "pass": 11
   },
   {
    "row": "C724",
@@ -10060,37 +10459,39 @@
    "row": "C927",
    "screen": "marco_hips.got",
    "verdict": "PASS",
-   "line": "Done: time_progression_minutes = 5",
-   "why": "every exit carries its own time; first-screen choices are an explicit 0 (v2.py:17877), answer exits 5",
+   "line": "\"Suit yourself, champ.\" ... \"He goes back to the rack.\"",
+   "why": "exit spends 60 minutes (the act's hour), not 0",
    "cause": null,
    "note": true,
    "screen_hash": {
-    "text": "4411ac9e8b68d194",
+    "text": "cc0f1027e210f825",
+    "traits": "e4365d01d4eb14be",
     "facts": "6de6e03b516eb8da",
     "facts2": "685918bc7322558b",
-    "all": "1581a08c3a6e8b26"
+    "all": "82cf8db634015cdd"
    },
    "row_hash": "4e86d143688ba8e5",
    "carried": true,
-   "pass": 2
+   "pass": 11
   },
   {
    "row": "C927",
    "screen": "marco_hips.let",
    "verdict": "PASS",
-   "line": "Done: time_progression_minutes = 5",
-   "why": "every exit carries its own time; first-screen choices are an explicit 0 (v2.py:17877), answer exits 5",
+   "line": "\"Feel that? That's where they go. I'll check it next time.\"",
+   "why": "exit spends 60 minutes (the act's hour), not 0",
    "cause": null,
    "note": true,
    "screen_hash": {
-    "text": "b4234e73d4c15393",
+    "text": "d73ea7023c6bda5d",
+    "traits": "e4365d01d4eb14be",
     "facts": "7628053aa2fe64cb",
     "facts2": "49f0b57a72e77115",
-    "all": "459937785692e928"
+    "all": "db5f3e6bb8bd0c1e"
    },
    "row_hash": "4e86d143688ba8e5",
    "carried": true,
-   "pass": 2
+   "pass": 11
   },
   {
    "row": "C927",
@@ -10132,73 +10533,77 @@
    "row": "C927",
    "screen": "nadia_tip.keep",
    "verdict": "PASS",
-   "line": "Done: time_progression_minutes = 5",
-   "why": "every exit carries its own time; first-screen choices are an explicit 0 (v2.py:17877), answer exits 5",
+   "line": "\"Your funeral.\" \"She takes the page back.\"",
+   "why": "exit spends 60 minutes (the act's hour), not 0",
    "cause": null,
    "note": true,
    "screen_hash": {
-    "text": "b82ac2c36a660844",
+    "text": "315505a335417ce0",
+    "traits": "ef3e57a6ae056353",
     "facts": "c0dac13d87852489",
     "facts2": "23ca087ae642da1c",
-    "all": "a95b70663bf307ee"
+    "all": "c24ccef750e93226"
    },
    "row_hash": "4e86d143688ba8e5",
    "carried": true,
-   "pass": 2
+   "pass": 11
   },
   {
    "row": "C927",
    "screen": "nadia_tip.nothere",
    "verdict": "PASS",
-   "line": "Done: time_progression_minutes = 5",
-   "why": "every exit carries its own time; first-screen choices are an explicit 0 (v2.py:17877), answer exits 5",
+   "line": "\"Fine. But I'm right.\"",
+   "why": "exit spends 60 minutes (the act's hour), not 0",
    "cause": null,
    "note": true,
    "screen_hash": {
-    "text": "7a26b41477264359",
+    "text": "1802f5f6332fede7",
+    "traits": "ef3e57a6ae056353",
     "facts": "49cd86a96ac0bd0f",
     "facts2": "5c2a5075c1a7cd39",
-    "all": "284f41d00daf72a1"
+    "all": "02498b18ad0f6fab"
    },
    "row_hash": "4e86d143688ba8e5",
    "carried": true,
-   "pass": 2
+   "pass": 11
   },
   {
    "row": "C927",
    "screen": "nadia_tip.tell",
    "verdict": "PASS",
-   "line": "Done: time_progression_minutes = 5",
-   "why": "every exit carries its own time; first-screen choices are an explicit 0 (v2.py:17877), answer exits 5",
+   "line": "\"She doesn't look surprised.\" \"Don't go in there alone.\"",
+   "why": "exit spends 60 minutes (the act's hour), not 0",
    "cause": null,
    "note": true,
    "screen_hash": {
-    "text": "605eb2f5c35428f6",
+    "text": "23a1af72453f674e",
+    "traits": "ef3e57a6ae056353",
     "facts": "1e6bbfecfe4dcab1",
     "facts2": "e7c4669602474c5e",
-    "all": "ef8d985cb08ef38a"
+    "all": "d9d84a35665efc91"
    },
    "row_hash": "4e86d143688ba8e5",
    "carried": true,
-   "pass": 2
+   "pass": 11
   },
   {
    "row": "C927",
    "screen": "nadia_tip.thanks",
    "verdict": "PASS",
-   "line": "Done: time_progression_minutes = 5",
-   "why": "every exit carries its own time; first-screen choices are an explicit 0 (v2.py:17877), answer exits 5",
+   "line": "\"Don't thank me. Pass.\"",
+   "why": "exit spends 60 minutes (the act's hour), not 0",
    "cause": null,
    "note": true,
    "screen_hash": {
-    "text": "8c8e7515ef396462",
+    "text": "b02a5e63b6199ade",
+    "traits": "ef3e57a6ae056353",
     "facts": "f575f5a48b9744f6",
     "facts2": "1cd9907f679c9c22",
-    "all": "8e24f9b37993f5d0"
+    "all": "59cfbc748567d457"
    },
    "row_hash": "4e86d143688ba8e5",
    "carried": true,
-   "pass": 2
+   "pass": 11
   },
   {
    "row": "C927",
@@ -10589,37 +10994,39 @@
    "row": "C931",
    "screen": "marco_hips.got",
    "verdict": "PASS",
-   "line": "time_of_day windows on the trigger",
-   "why": "end exclusive (v2.py:4803-4823); 23:00-24:00 reads 1380-1439; no window wraps",
+   "line": "\"Suit yourself, champ.\" ... \"He goes back to the rack.\"",
+   "why": "no time_of_day on Marco (presence gates it); n/a beyond that",
    "cause": null,
    "note": true,
    "screen_hash": {
-    "text": "4411ac9e8b68d194",
+    "text": "cc0f1027e210f825",
+    "traits": "e4365d01d4eb14be",
     "facts": "6de6e03b516eb8da",
     "facts2": "685918bc7322558b",
-    "all": "1581a08c3a6e8b26"
+    "all": "82cf8db634015cdd"
    },
    "row_hash": "1aadffd96e76381c",
    "carried": true,
-   "pass": 2
+   "pass": 11
   },
   {
    "row": "C931",
    "screen": "marco_hips.let",
    "verdict": "PASS",
-   "line": "time_of_day windows on the trigger",
-   "why": "end exclusive (v2.py:4803-4823); 23:00-24:00 reads 1380-1439; no window wraps",
+   "line": "\"Feel that? That's where they go. I'll check it next time.\"",
+   "why": "no time_of_day on Marco (presence gates it); n/a beyond that",
    "cause": null,
    "note": true,
    "screen_hash": {
-    "text": "b4234e73d4c15393",
+    "text": "d73ea7023c6bda5d",
+    "traits": "e4365d01d4eb14be",
     "facts": "7628053aa2fe64cb",
     "facts2": "49f0b57a72e77115",
-    "all": "459937785692e928"
+    "all": "db5f3e6bb8bd0c1e"
    },
    "row_hash": "1aadffd96e76381c",
    "carried": true,
-   "pass": 2
+   "pass": 11
   },
   {
    "row": "C931",
@@ -10661,73 +11068,77 @@
    "row": "C931",
    "screen": "nadia_tip.keep",
    "verdict": "PASS",
-   "line": "time_of_day windows on the trigger",
-   "why": "end exclusive (v2.py:4803-4823); 23:00-24:00 reads 1380-1439; no window wraps",
+   "line": "\"Your funeral.\" \"She takes the page back.\"",
+   "why": "time_of_day 14:00-18:00 end exclusive matches her row",
    "cause": null,
    "note": true,
    "screen_hash": {
-    "text": "b82ac2c36a660844",
+    "text": "315505a335417ce0",
+    "traits": "ef3e57a6ae056353",
     "facts": "c0dac13d87852489",
     "facts2": "23ca087ae642da1c",
-    "all": "a95b70663bf307ee"
+    "all": "c24ccef750e93226"
    },
    "row_hash": "1aadffd96e76381c",
    "carried": true,
-   "pass": 2
+   "pass": 11
   },
   {
    "row": "C931",
    "screen": "nadia_tip.nothere",
    "verdict": "PASS",
-   "line": "time_of_day windows on the trigger",
-   "why": "end exclusive (v2.py:4803-4823); 23:00-24:00 reads 1380-1439; no window wraps",
+   "line": "\"Fine. But I'm right.\"",
+   "why": "time_of_day 14:00-18:00 end exclusive matches her row",
    "cause": null,
    "note": true,
    "screen_hash": {
-    "text": "7a26b41477264359",
+    "text": "1802f5f6332fede7",
+    "traits": "ef3e57a6ae056353",
     "facts": "49cd86a96ac0bd0f",
     "facts2": "5c2a5075c1a7cd39",
-    "all": "284f41d00daf72a1"
+    "all": "02498b18ad0f6fab"
    },
    "row_hash": "1aadffd96e76381c",
    "carried": true,
-   "pass": 2
+   "pass": 11
   },
   {
    "row": "C931",
    "screen": "nadia_tip.tell",
    "verdict": "PASS",
-   "line": "time_of_day windows on the trigger",
-   "why": "end exclusive (v2.py:4803-4823); 23:00-24:00 reads 1380-1439; no window wraps",
+   "line": "\"She doesn't look surprised.\" \"Don't go in there alone.\"",
+   "why": "time_of_day 14:00-18:00 end exclusive matches her row",
    "cause": null,
    "note": true,
    "screen_hash": {
-    "text": "605eb2f5c35428f6",
+    "text": "23a1af72453f674e",
+    "traits": "ef3e57a6ae056353",
     "facts": "1e6bbfecfe4dcab1",
     "facts2": "e7c4669602474c5e",
-    "all": "ef8d985cb08ef38a"
+    "all": "d9d84a35665efc91"
    },
    "row_hash": "1aadffd96e76381c",
    "carried": true,
-   "pass": 2
+   "pass": 11
   },
   {
    "row": "C931",
    "screen": "nadia_tip.thanks",
    "verdict": "PASS",
-   "line": "time_of_day windows on the trigger",
-   "why": "end exclusive (v2.py:4803-4823); 23:00-24:00 reads 1380-1439; no window wraps",
+   "line": "\"Don't thank me. Pass.\"",
+   "why": "time_of_day 14:00-18:00 end exclusive matches her row",
    "cause": null,
    "note": true,
    "screen_hash": {
-    "text": "8c8e7515ef396462",
+    "text": "b02a5e63b6199ade",
+    "traits": "ef3e57a6ae056353",
     "facts": "f575f5a48b9744f6",
     "facts2": "1cd9907f679c9c22",
-    "all": "8e24f9b37993f5d0"
+    "all": "59cfbc748567d457"
    },
    "row_hash": "1aadffd96e76381c",
    "carried": true,
-   "pass": 2
+   "pass": 11
   },
   {
    "row": "C931",
@@ -11000,6 +11411,19 @@
    "pass": 7
   },
   {
+   "row": "C961",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "\"Not here.\"",
+   "why": "her no raises nothing beyond the act's study count every exit shares",
+   "cause": null,
+   "note": true,
+   "screen_hash": "be5378a297ac233d",
+   "row_hash": "b6cf8c9e8a8ef683",
+   "carried": true,
+   "pass": 11
+  },
+  {
    "row": "L106",
    "screen": "*",
    "verdict": "PASS",
@@ -11073,55 +11497,58 @@
    "row": "L106",
    "screen": "marco_hips.got",
    "verdict": "PASS",
-   "line": "\"Suit yourself, champ.\" He goes back to the rack. \"You'll be back.\"",
-   "why": "who_is_where puts the person here at every minute of the trigger (Marco training; true)",
+   "line": "\"Suit yourself, champ.\" ... \"He goes back to the rack.\"",
+   "why": "Marco at hood_gym by his rows (weekdays 6-10, 5-9, Sat 8-2); nobody else named",
    "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "4411ac9e8b68d194",
+    "text": "cc0f1027e210f825",
+    "traits": "e4365d01d4eb14be",
     "facts": "6de6e03b516eb8da",
     "facts2": "685918bc7322558b",
-    "all": "1581a08c3a6e8b26"
+    "all": "82cf8db634015cdd"
    },
    "row_hash": "13a714429d15f3b2",
    "carried": true,
-   "pass": 2
+   "pass": 11
   },
   {
    "row": "L106",
    "screen": "marco_hips.let",
    "verdict": "PASS",
-   "line": "You hold still. His thumbs press once. \"I'll check it next time.\"",
-   "why": "who_is_where puts the person here at every minute of the trigger (the next showing does check: the marco_fixed_form version)",
+   "line": "\"Feel that? That's where they go. I'll check it next time.\"",
+   "why": "Marco at hood_gym by his rows (weekdays 6-10, 5-9, Sat 8-2); nobody else named",
    "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "b4234e73d4c15393",
+    "text": "d73ea7023c6bda5d",
+    "traits": "e4365d01d4eb14be",
     "facts": "7628053aa2fe64cb",
     "facts2": "49f0b57a72e77115",
-    "all": "459937785692e928"
+    "all": "db5f3e6bb8bd0c1e"
    },
    "row_hash": "13a714429d15f3b2",
    "carried": true,
-   "pass": 2
+   "pass": 11
   },
   {
    "row": "L106",
    "screen": "marco_hips.moment",
    "verdict": "PASS",
-   "line": "Marco catches you on your way in and looks you over. \"Your stance is all wrong\" / after: \"Hips. Show me you remember.\"",
-   "why": "who_is_where puts the person here at every minute of the trigger (Marco 'training' in hood_gym by his rows; entry_only_from hood_street, so only on the way in; the stance is read off how she stands now, no past claimed; the 'remember' line is behind marco_fixed_form)",
+   "line": "\"You pay at the desk for a day pass and find a bench by the mirrors. You're halfway through a set when Marco walks over\"",
+   "why": "Marco at hood_gym by his rows (weekdays 6-10, 5-9, Sat 8-2); nobody else named",
    "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "a342c6199214df5d",
+    "text": "e1e2ae840eb36acf",
+    "traits": "e4365d01d4eb14be",
     "facts": "f9e936b5d2f7fa16",
     "facts2": "e2ce2f969cea33c2",
-    "all": "53d52f49e07cf81c"
+    "all": "6caf8adc9e13179d"
    },
    "row_hash": "13a714429d15f3b2",
    "carried": true,
-   "pass": 2
+   "pass": 11
   },
   {
    "row": "L106",
@@ -11181,91 +11608,96 @@
    "row": "L106",
    "screen": "nadia_tip.keep",
    "verdict": "PASS",
-   "line": "\"Your funeral.\" She takes the page back.",
-   "why": "who_is_where puts the person here at every minute of the trigger (true)",
+   "line": "\"Your funeral.\" \"She takes the page back.\"",
+   "why": "Nadia in the library weekdays 2-6 by her row; Holt not named",
    "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "b82ac2c36a660844",
+    "text": "315505a335417ce0",
+    "traits": "ef3e57a6ae056353",
     "facts": "c0dac13d87852489",
     "facts2": "23ca087ae642da1c",
-    "all": "a95b70663bf307ee"
+    "all": "c24ccef750e93226"
    },
    "row_hash": "13a714429d15f3b2",
    "carried": true,
-   "pass": 2
+   "pass": 11
   },
   {
    "row": "L106",
    "screen": "nadia_tip.moment",
    "verdict": "PASS",
-   "line": "\"Hale's exam's all chapter four.\" / \"Hale called you in, didn't he?\"",
-   "why": "who_is_where puts the person here at every minute of the trigger (Nadia 'studying' in the library weekdays 14-18; Hale named; the offer plays only while hale_called_in and nadia_offered are false, the question only once hale_called_in is set and nadia_asked is false, and the choices carry the same gates; Hale called her in on both of his answers)",
+   "line": "\"You've got your books spread across a desk on the quiet floor when Nadia slides into the chair beside you\"",
+   "why": "Nadia in the library weekdays 2-6 by her row; Holt not named",
    "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "91eeef5b403409c5",
+    "text": "0dd980048f329451",
+    "traits": "ef3e57a6ae056353",
     "facts": "5f454547807041f4",
     "facts2": "8e364add72f35e0d",
-    "all": "0156750b0dd46b43"
+    "all": "0571296a34379742"
    },
    "row_hash": "13a714429d15f3b2",
    "carried": true,
-   "pass": 2
+   "pass": 11
   },
   {
    "row": "L106",
    "screen": "nadia_tip.nothere",
    "verdict": "PASS",
    "line": "\"Fine. But I'm right.\"",
-   "why": "who_is_where puts the person here at every minute of the trigger (true)",
+   "why": "Nadia in the library weekdays 2-6 by her row; Holt not named",
    "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "7a26b41477264359",
+    "text": "1802f5f6332fede7",
+    "traits": "ef3e57a6ae056353",
     "facts": "49cd86a96ac0bd0f",
     "facts2": "5c2a5075c1a7cd39",
-    "all": "284f41d00daf72a1"
+    "all": "02498b18ad0f6fab"
    },
    "row_hash": "13a714429d15f3b2",
    "carried": true,
-   "pass": 2
+   "pass": 11
   },
   {
    "row": "L106",
    "screen": "nadia_tip.tell",
    "verdict": "PASS",
-   "line": "She doesn't look surprised. \"Don't go in there alone.\"",
-   "why": "who_is_where puts the person here at every minute of the trigger (advice about the future, true whichever answer she gave Hale (fixes c6))",
+   "line": "\"She doesn't look surprised.\" \"Don't go in there alone.\"",
+   "why": "Nadia in the library weekdays 2-6 by her row; Holt not named",
    "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "605eb2f5c35428f6",
+    "text": "23a1af72453f674e",
+    "traits": "ef3e57a6ae056353",
     "facts": "1e6bbfecfe4dcab1",
     "facts2": "e7c4669602474c5e",
-    "all": "ef8d985cb08ef38a"
+    "all": "d9d84a35665efc91"
    },
    "row_hash": "13a714429d15f3b2",
    "carried": true,
-   "pass": 2
+   "pass": 11
   },
   {
    "row": "L106",
    "screen": "nadia_tip.thanks",
    "verdict": "PASS",
    "line": "\"Don't thank me. Pass.\"",
-   "why": "who_is_where puts the person here at every minute of the trigger (true)",
+   "why": "Nadia in the library weekdays 2-6 by her row; Holt not named",
    "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "8c8e7515ef396462",
+    "text": "b02a5e63b6199ade",
+    "traits": "ef3e57a6ae056353",
     "facts": "f575f5a48b9744f6",
     "facts2": "1cd9907f679c9c22",
-    "all": "8e24f9b37993f5d0"
+    "all": "59cfbc748567d457"
    },
    "row_hash": "13a714429d15f3b2",
    "carried": true,
-   "pass": 2
+   "pass": 11
   },
   {
    "row": "L106",
@@ -11616,6 +12048,19 @@
    "pass": 2
   },
   {
+   "row": "L116",
+   "screen": "*",
+   "verdict": "N/A",
+   "line": "study_today +1",
+   "why": "no lock",
+   "cause": null,
+   "note": false,
+   "screen_hash": "be5378a297ac233d",
+   "row_hash": "f7a81c1d066ade25",
+   "carried": true,
+   "pass": 11
+  },
+  {
    "row": "L150",
    "screen": "*",
    "verdict": "PASS",
@@ -11715,37 +12160,39 @@
    "row": "L167",
    "screen": "marco_hips.got",
    "verdict": "PASS",
-   "line": "trigger condition: one OR group of weekday x time_of_day",
-   "why": "different hours on different days are one canvas with a group, not one per day kind",
+   "line": "\"Suit yourself, champ.\" ... \"He goes back to the rack.\"",
+   "why": "no row with hours on this screen; the act rows have none and Marco's hours come from his one schedule",
    "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "4411ac9e8b68d194",
+    "text": "cc0f1027e210f825",
+    "traits": "e4365d01d4eb14be",
     "facts": "6de6e03b516eb8da",
     "facts2": "685918bc7322558b",
-    "all": "1581a08c3a6e8b26"
+    "all": "82cf8db634015cdd"
    },
    "row_hash": "e64ce2672d85d2d8",
    "carried": true,
-   "pass": 2
+   "pass": 11
   },
   {
    "row": "L167",
    "screen": "marco_hips.let",
    "verdict": "PASS",
-   "line": "trigger condition: one OR group of weekday x time_of_day",
-   "why": "different hours on different days are one canvas with a group, not one per day kind",
+   "line": "\"Feel that? That's where they go. I'll check it next time.\"",
+   "why": "no row with hours on this screen; the act rows have none and Marco's hours come from his one schedule",
    "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "b4234e73d4c15393",
+    "text": "d73ea7023c6bda5d",
+    "traits": "e4365d01d4eb14be",
     "facts": "7628053aa2fe64cb",
     "facts2": "49f0b57a72e77115",
-    "all": "459937785692e928"
+    "all": "db5f3e6bb8bd0c1e"
    },
    "row_hash": "e64ce2672d85d2d8",
    "carried": true,
-   "pass": 2
+   "pass": 11
   },
   {
    "row": "L167",
@@ -11787,73 +12234,77 @@
    "row": "L167",
    "screen": "nadia_tip.keep",
    "verdict": "PASS",
-   "line": "trigger condition: one OR group of weekday x time_of_day",
-   "why": "different hours on different days are one canvas with a group, not one per day kind",
+   "line": "\"Your funeral.\" \"She takes the page back.\"",
+   "why": "the hours sit in the trigger's conditions, one group; the Study row itself has no hours",
    "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "b82ac2c36a660844",
+    "text": "315505a335417ce0",
+    "traits": "ef3e57a6ae056353",
     "facts": "c0dac13d87852489",
     "facts2": "23ca087ae642da1c",
-    "all": "a95b70663bf307ee"
+    "all": "c24ccef750e93226"
    },
    "row_hash": "e64ce2672d85d2d8",
    "carried": true,
-   "pass": 2
+   "pass": 11
   },
   {
    "row": "L167",
    "screen": "nadia_tip.nothere",
    "verdict": "PASS",
-   "line": "trigger condition: one OR group of weekday x time_of_day",
-   "why": "different hours on different days are one canvas with a group, not one per day kind",
+   "line": "\"Fine. But I'm right.\"",
+   "why": "the hours sit in the trigger's conditions, one group; the Study row itself has no hours",
    "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "7a26b41477264359",
+    "text": "1802f5f6332fede7",
+    "traits": "ef3e57a6ae056353",
     "facts": "49cd86a96ac0bd0f",
     "facts2": "5c2a5075c1a7cd39",
-    "all": "284f41d00daf72a1"
+    "all": "02498b18ad0f6fab"
    },
    "row_hash": "e64ce2672d85d2d8",
    "carried": true,
-   "pass": 2
+   "pass": 11
   },
   {
    "row": "L167",
    "screen": "nadia_tip.tell",
    "verdict": "PASS",
-   "line": "trigger condition: one OR group of weekday x time_of_day",
-   "why": "different hours on different days are one canvas with a group, not one per day kind",
+   "line": "\"She doesn't look surprised.\" \"Don't go in there alone.\"",
+   "why": "the hours sit in the trigger's conditions, one group; the Study row itself has no hours",
    "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "605eb2f5c35428f6",
+    "text": "23a1af72453f674e",
+    "traits": "ef3e57a6ae056353",
     "facts": "1e6bbfecfe4dcab1",
     "facts2": "e7c4669602474c5e",
-    "all": "ef8d985cb08ef38a"
+    "all": "d9d84a35665efc91"
    },
    "row_hash": "e64ce2672d85d2d8",
    "carried": true,
-   "pass": 2
+   "pass": 11
   },
   {
    "row": "L167",
    "screen": "nadia_tip.thanks",
    "verdict": "PASS",
-   "line": "trigger condition: one OR group of weekday x time_of_day",
-   "why": "different hours on different days are one canvas with a group, not one per day kind",
+   "line": "\"Don't thank me. Pass.\"",
+   "why": "the hours sit in the trigger's conditions, one group; the Study row itself has no hours",
    "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "8c8e7515ef396462",
+    "text": "b02a5e63b6199ade",
+    "traits": "ef3e57a6ae056353",
     "facts": "f575f5a48b9744f6",
     "facts2": "1cd9907f679c9c22",
-    "all": "8e24f9b37993f5d0"
+    "all": "59cfbc748567d457"
    },
    "row_hash": "e64ce2672d85d2d8",
    "carried": true,
-   "pass": 2
+   "pass": 11
   },
   {
    "row": "L167",
@@ -12126,6 +12577,19 @@
    "pass": 7
   },
   {
+   "row": "L70",
+   "screen": "*",
+   "verdict": "N/A",
+   "line": "study_today +1",
+   "why": "no skill gain",
+   "cause": null,
+   "note": false,
+   "screen_hash": "be5378a297ac233d",
+   "row_hash": "32d431db08834e70",
+   "carried": true,
+   "pass": 11
+  },
+  {
    "row": "L71",
    "screen": "hale_called_in.moment",
    "verdict": "PASS",
@@ -12231,8 +12695,8 @@
  ],
  "causes": [],
  "pending": [],
- "asked": 1,
- "answered": 1,
+ "asked": 9,
+ "answered": 9,
  "pass_items": [],
  "unowed": []
 }

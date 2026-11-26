@@ -1,6 +1,6 @@
 {
  "piece": "P16",
- "pass": 8,
+ "pass": 10,
  "screens": {
   "english_first.sheet": {
    "text": "7468e6ce2c180231",
@@ -120,6 +120,8 @@
   "L168": "444c44970dc284f2",
   "L169": "59defccfc63b0454",
   "C1340": "b76a6583ae88c60f",
+  "C2197": "cafbb0a598dbfa97",
+  "C2198": "27e6b45f50edd3ac",
   "C769": "f6b6f78a8f2e5ed7",
   "C794": "bad76e5963432385",
   "C795": "34139e6a6914e171",
@@ -175,7 +177,7 @@
     "all": "63ada33a06338105"
    },
    "row_hash": "c1c0e2ac2588a579",
-   "carried": false,
+   "carried": true,
    "pass": 8
   },
   {
@@ -194,7 +196,7 @@
     "all": "3bf8554ff7efadee"
    },
    "row_hash": "c1c0e2ac2588a579",
-   "carried": false,
+   "carried": true,
    "pass": 8
   },
   {
@@ -213,7 +215,7 @@
     "all": "2a5ecc436b17d8d8"
    },
    "row_hash": "c1c0e2ac2588a579",
-   "carried": false,
+   "carried": true,
    "pass": 8
   },
   {
@@ -403,7 +405,7 @@
     "all": "63ada33a06338105"
    },
    "row_hash": "80d415cf08e0ebfe",
-   "carried": false,
+   "carried": true,
    "pass": 8
   },
   {
@@ -422,7 +424,7 @@
     "all": "3bf8554ff7efadee"
    },
    "row_hash": "80d415cf08e0ebfe",
-   "carried": false,
+   "carried": true,
    "pass": 8
   },
   {
@@ -441,7 +443,7 @@
     "all": "2a5ecc436b17d8d8"
    },
    "row_hash": "80d415cf08e0ebfe",
-   "carried": false,
+   "carried": true,
    "pass": 8
   },
   {
@@ -1140,6 +1142,32 @@
    "pass": 7
   },
   {
+   "row": "C2197",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "talk_walsh at campus_office_walsh behind met_walsh",
+   "why": "Walsh: a menu at each place their rows put them where talking fits, behind the met flag; none where it doesn't (lecture hall, mid-rehearsal, party hours)",
+   "cause": null,
+   "note": false,
+   "screen_hash": "4bc01cffe8943a48",
+   "row_hash": "cafbb0a598dbfa97",
+   "carried": true,
+   "pass": 9
+  },
+  {
+   "row": "C2198",
+   "screen": "*",
+   "verdict": "N/A",
+   "line": "",
+   "why": "english_first, a meeting: no menu's Talk screen in this piece; C2198 is judged only on a person's Talk screen (the screen their menu's Talk opens)",
+   "cause": null,
+   "note": false,
+   "screen_hash": "4bc01cffe8943a48",
+   "row_hash": "27e6b45f50edd3ac",
+   "carried": false,
+   "pass": 10
+  },
+  {
    "row": "C422",
    "screen": "*",
    "verdict": "PASS",
@@ -1233,7 +1261,7 @@
     "all": "63ada33a06338105"
    },
    "row_hash": "67e48e60d5053a2e",
-   "carried": false,
+   "carried": true,
    "pass": 8
   },
   {
@@ -1252,7 +1280,7 @@
     "all": "3bf8554ff7efadee"
    },
    "row_hash": "67e48e60d5053a2e",
-   "carried": false,
+   "carried": true,
    "pass": 8
   },
   {
@@ -1271,7 +1299,7 @@
     "all": "2a5ecc436b17d8d8"
    },
    "row_hash": "67e48e60d5053a2e",
-   "carried": false,
+   "carried": true,
    "pass": 8
   },
   {
@@ -1303,7 +1331,7 @@
     "all": "63ada33a06338105"
    },
    "row_hash": "310706ee076318f2",
-   "carried": false,
+   "carried": true,
    "pass": 8
   },
   {
@@ -1322,7 +1350,7 @@
     "all": "3bf8554ff7efadee"
    },
    "row_hash": "310706ee076318f2",
-   "carried": false,
+   "carried": true,
    "pass": 8
   },
   {
@@ -1341,7 +1369,7 @@
     "all": "2a5ecc436b17d8d8"
    },
    "row_hash": "310706ee076318f2",
-   "carried": false,
+   "carried": true,
    "pass": 8
   },
   {
@@ -1752,7 +1780,7 @@
     "all": "63ada33a06338105"
    },
    "row_hash": "def1348d483d0c40",
-   "carried": false,
+   "carried": true,
    "pass": 8
   },
   {
@@ -1771,7 +1799,7 @@
     "all": "63ada33a06338105"
    },
    "row_hash": "5c890033f6ac38b8",
-   "carried": false,
+   "carried": true,
    "pass": 8
   },
   {
@@ -1790,7 +1818,7 @@
     "all": "63ada33a06338105"
    },
    "row_hash": "265ece64add83676",
-   "carried": false,
+   "carried": true,
    "pass": 8
   },
   {
@@ -1809,7 +1837,7 @@
     "all": "63ada33a06338105"
    },
    "row_hash": "6372efb027eb2034",
-   "carried": false,
+   "carried": true,
    "pass": 8
   },
   {
@@ -1828,7 +1856,7 @@
     "all": "63ada33a06338105"
    },
    "row_hash": "df5ed7a36dbc74e4",
-   "carried": false,
+   "carried": true,
    "pass": 8
   },
   {
@@ -1847,7 +1875,7 @@
     "all": "63ada33a06338105"
    },
    "row_hash": "4f83b0b5eb45f71b",
-   "carried": false,
+   "carried": true,
    "pass": 8
   },
   {
@@ -1866,7 +1894,7 @@
     "all": "63ada33a06338105"
    },
    "row_hash": "71713a7e7ae739e7",
-   "carried": false,
+   "carried": true,
    "pass": 8
   },
   {
@@ -1885,7 +1913,7 @@
     "all": "63ada33a06338105"
    },
    "row_hash": "d5a109f1ef88419a",
-   "carried": false,
+   "carried": true,
    "pass": 8
   },
   {
@@ -1904,7 +1932,7 @@
     "all": "63ada33a06338105"
    },
    "row_hash": "c750f9b6ab4ace14",
-   "carried": false,
+   "carried": true,
    "pass": 8
   },
   {
@@ -1923,7 +1951,7 @@
     "all": "63ada33a06338105"
    },
    "row_hash": "bd07273d5822f34f",
-   "carried": false,
+   "carried": true,
    "pass": 8
   },
   {
@@ -1942,7 +1970,7 @@
     "all": "63ada33a06338105"
    },
    "row_hash": "7b2bb0dfdbcfe946",
-   "carried": false,
+   "carried": true,
    "pass": 8
   },
   {
@@ -1961,7 +1989,7 @@
     "all": "63ada33a06338105"
    },
    "row_hash": "513927dd127fca04",
-   "carried": false,
+   "carried": true,
    "pass": 8
   },
   {
@@ -1980,7 +2008,7 @@
     "all": "63ada33a06338105"
    },
    "row_hash": "791cd173e23fb130",
-   "carried": false,
+   "carried": true,
    "pass": 8
   },
   {
@@ -1999,7 +2027,7 @@
     "all": "63ada33a06338105"
    },
    "row_hash": "177d1e1776fac74b",
-   "carried": false,
+   "carried": true,
    "pass": 8
   },
   {
@@ -2018,7 +2046,7 @@
     "all": "63ada33a06338105"
    },
    "row_hash": "4e86d143688ba8e5",
-   "carried": false,
+   "carried": true,
    "pass": 8
   },
   {
@@ -2037,7 +2065,7 @@
     "all": "63ada33a06338105"
    },
    "row_hash": "2c3ccc6bd9929d7f",
-   "carried": false,
+   "carried": true,
    "pass": 8
   },
   {
@@ -2056,7 +2084,7 @@
     "all": "63ada33a06338105"
    },
    "row_hash": "18b0ecdf6d7fc901",
-   "carried": false,
+   "carried": true,
    "pass": 8
   },
   {
@@ -2075,7 +2103,7 @@
     "all": "63ada33a06338105"
    },
    "row_hash": "beb57cd46fe906bf",
-   "carried": false,
+   "carried": true,
    "pass": 8
   },
   {
@@ -2094,7 +2122,7 @@
     "all": "63ada33a06338105"
    },
    "row_hash": "1aadffd96e76381c",
-   "carried": false,
+   "carried": true,
    "pass": 8
   },
   {
@@ -2144,7 +2172,7 @@
     "all": "63ada33a06338105"
    },
    "row_hash": "13a714429d15f3b2",
-   "carried": false,
+   "carried": true,
    "pass": 8
   },
   {
@@ -2163,7 +2191,7 @@
     "all": "3bf8554ff7efadee"
    },
    "row_hash": "13a714429d15f3b2",
-   "carried": false,
+   "carried": true,
    "pass": 8
   },
   {
@@ -2182,7 +2210,7 @@
     "all": "2a5ecc436b17d8d8"
    },
    "row_hash": "13a714429d15f3b2",
-   "carried": false,
+   "carried": true,
    "pass": 8
   },
   {
@@ -2273,7 +2301,7 @@
     "all": "63ada33a06338105"
    },
    "row_hash": "e64ce2672d85d2d8",
-   "carried": false,
+   "carried": true,
    "pass": 8
   },
   {
@@ -2318,8 +2346,8 @@
  ],
  "causes": [],
  "pending": [],
- "asked": 35,
- "answered": 35,
+ "asked": 1,
+ "answered": 1,
  "pass_items": [],
  "unowed": []
 }

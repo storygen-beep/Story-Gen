@@ -1,6 +1,6 @@
 {
  "piece": "P09",
- "pass": 12,
+ "pass": 15,
  "screens": {
   "class_psych.class": {
    "text": "7dc50540207a762d",
@@ -38,11 +38,11 @@
    "all": "271a448474046e50"
   },
   "study_library.study": {
-   "text": "73e9d3e0fb10df0e",
+   "text": "98a24397919bb952",
    "traits": "44136fa355b3678a",
    "facts": "f86fc12e0253f59a",
    "facts2": "f86fc12e0253f59a",
-   "all": "97bdd08f60e3d4ea"
+   "all": "3a2e9e7bc0d88233"
   },
   "study_hall.study": {
    "text": "3bdf5d62e23fc587",
@@ -64,7 +64,7 @@
    "facts2": "ce9ea30bc0cdb549",
    "all": "ce9ea30bc0cdb549"
   },
-  "*": "c2a5cbf81927481e"
+  "*": "5a7502d76e7d3fb0"
  },
  "rows": {
   "B1": "5276068df1ca6fa9",
@@ -136,6 +136,8 @@
   "C2180": "a6c0f498d4d16271",
   "C2194": "0c03931191c53a34",
   "C1340": "b76a6583ae88c60f",
+  "C2197": "cafbb0a598dbfa97",
+  "C2198": "27e6b45f50edd3ac",
   "C769": "f6b6f78a8f2e5ed7",
   "C794": "bad76e5963432385",
   "C795": "34139e6a6914e171",
@@ -226,7 +228,7 @@
     "all": "9c9546b04dadeed5"
    },
    "row_hash": "c1c0e2ac2588a579",
-   "carried": false,
+   "carried": true,
    "pass": 12
   },
   {
@@ -245,7 +247,7 @@
     "all": "795717e099f188bf"
    },
    "row_hash": "c1c0e2ac2588a579",
-   "carried": false,
+   "carried": true,
    "pass": 12
   },
   {
@@ -264,7 +266,7 @@
     "all": "7321abea6c34b3a6"
    },
    "row_hash": "c1c0e2ac2588a579",
-   "carried": false,
+   "carried": true,
    "pass": 12
   },
   {
@@ -301,8 +303,27 @@
     "all": "7af3b184fb3786eb"
    },
    "row_hash": "c1c0e2ac2588a579",
-   "carried": false,
+   "carried": true,
    "pass": 12
+  },
+  {
+   "row": "B10",
+   "screen": "study_library.study",
+   "verdict": "PASS",
+   "line": "You take a table on the quiet floor and work through the reading until the words swim.",
+   "why": "names nobody, so it is true with Nadia (weekdays 14-18) or Holt (weekdays 8-16) in or out; on a 0.35 miss with Nadia present nothing claims she is absent; 'always more of it waiting' holds on every visit",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "98a24397919bb952",
+    "traits": "44136fa355b3678a",
+    "facts": "f86fc12e0253f59a",
+    "facts2": "f86fc12e0253f59a",
+    "all": "3a2e9e7bc0d88233"
+   },
+   "row_hash": "c1c0e2ac2588a579",
+   "carried": true,
+   "pass": 13
   },
   {
    "row": "B11",
@@ -495,7 +516,7 @@
     "all": "9c9546b04dadeed5"
    },
    "row_hash": "80d415cf08e0ebfe",
-   "carried": false,
+   "carried": true,
    "pass": 12
   },
   {
@@ -514,7 +535,7 @@
     "all": "795717e099f188bf"
    },
    "row_hash": "80d415cf08e0ebfe",
-   "carried": false,
+   "carried": true,
    "pass": 12
   },
   {
@@ -533,7 +554,7 @@
     "all": "7321abea6c34b3a6"
    },
    "row_hash": "80d415cf08e0ebfe",
-   "carried": false,
+   "carried": true,
    "pass": 12
   },
   {
@@ -570,8 +591,27 @@
     "all": "7af3b184fb3786eb"
    },
    "row_hash": "80d415cf08e0ebfe",
-   "carried": false,
+   "carried": true,
    "pass": 12
+  },
+  {
+   "row": "B8",
+   "screen": "study_library.study",
+   "verdict": "PASS",
+   "line": "You take a table on the quiet floor and work through the reading until the words swim.",
+   "why": "5 energy, 60 min, study_today +1, cap 3 match PLAN 438 (Study, 1 hour, 5 energy); nadia_tip's four exits also spend 60 and add study_today +1, chance 0.65 as P56's card; no garment named",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "98a24397919bb952",
+    "traits": "44136fa355b3678a",
+    "facts": "f86fc12e0253f59a",
+    "facts2": "f86fc12e0253f59a",
+    "all": "3a2e9e7bc0d88233"
+   },
+   "row_hash": "80d415cf08e0ebfe",
+   "carried": true,
+   "pass": 13
   },
   {
    "row": "B9",
@@ -1395,6 +1435,32 @@
    "pass": 11
   },
   {
+   "row": "C2197",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "talk_hale/pratt/walsh in their offices, none in campus_lecture_hall; talk_cross 14:00-18:00; talk_nadia_library, talk_nadia_cafeteria",
+   "why": "Hale, Pratt, Walsh, Cross, Nadia: a menu at each place their rows put them where talking fits, behind the met flag; none where it doesn't (lecture hall, mid-rehearsal, party hours)",
+   "cause": null,
+   "note": false,
+   "screen_hash": "5a7502d76e7d3fb0",
+   "row_hash": "cafbb0a598dbfa97",
+   "carried": true,
+   "pass": 14
+  },
+  {
+   "row": "C2198",
+   "screen": "*",
+   "verdict": "N/A",
+   "line": "",
+   "why": "classes, study and the grades sidebar: no menu's Talk screen in this piece; C2198 is judged only on a person's Talk screen (the screen their menu's Talk opens)",
+   "cause": null,
+   "note": false,
+   "screen_hash": "5a7502d76e7d3fb0",
+   "row_hash": "27e6b45f50edd3ac",
+   "carried": false,
+   "pass": 15
+  },
+  {
    "row": "C338",
    "screen": "sidebar.grades",
    "verdict": "N/A",
@@ -1675,7 +1741,7 @@
     "all": "9c9546b04dadeed5"
    },
    "row_hash": "67e48e60d5053a2e",
-   "carried": false,
+   "carried": true,
    "pass": 12
   },
   {
@@ -1694,7 +1760,7 @@
     "all": "795717e099f188bf"
    },
    "row_hash": "67e48e60d5053a2e",
-   "carried": false,
+   "carried": true,
    "pass": 12
   },
   {
@@ -1713,7 +1779,7 @@
     "all": "7321abea6c34b3a6"
    },
    "row_hash": "67e48e60d5053a2e",
-   "carried": false,
+   "carried": true,
    "pass": 12
   },
   {
@@ -1768,8 +1834,27 @@
     "all": "7af3b184fb3786eb"
    },
    "row_hash": "67e48e60d5053a2e",
-   "carried": false,
+   "carried": true,
    "pass": 12
+  },
+  {
+   "row": "C460",
+   "screen": "study_library.study",
+   "verdict": "PASS",
+   "line": "You take a table on the quiet floor and work through the reading until the words swim.",
+   "why": "no claim about who is there or what happened before; true on every playthrough that reaches it, with or without the new substitution",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "98a24397919bb952",
+    "traits": "44136fa355b3678a",
+    "facts": "f86fc12e0253f59a",
+    "facts2": "f86fc12e0253f59a",
+    "all": "3a2e9e7bc0d88233"
+   },
+   "row_hash": "67e48e60d5053a2e",
+   "carried": true,
+   "pass": 13
   },
   {
    "row": "C461",
@@ -1805,7 +1890,7 @@
     "all": "9c9546b04dadeed5"
    },
    "row_hash": "310706ee076318f2",
-   "carried": false,
+   "carried": true,
    "pass": 12
   },
   {
@@ -1824,7 +1909,7 @@
     "all": "795717e099f188bf"
    },
    "row_hash": "310706ee076318f2",
-   "carried": false,
+   "carried": true,
    "pass": 12
   },
   {
@@ -1843,7 +1928,7 @@
     "all": "7321abea6c34b3a6"
    },
    "row_hash": "310706ee076318f2",
-   "carried": false,
+   "carried": true,
    "pass": 12
   },
   {
@@ -1898,8 +1983,27 @@
     "all": "7af3b184fb3786eb"
    },
    "row_hash": "310706ee076318f2",
-   "carried": false,
+   "carried": true,
    "pass": 12
+  },
+  {
+   "row": "C461",
+   "screen": "study_library.study",
+   "verdict": "PASS",
+   "line": "There's always more of it waiting.",
+   "why": "texture and her opinion only; nothing can clash with a person's rows",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "98a24397919bb952",
+    "traits": "44136fa355b3678a",
+    "facts": "f86fc12e0253f59a",
+    "facts2": "f86fc12e0253f59a",
+    "all": "3a2e9e7bc0d88233"
+   },
+   "row_hash": "310706ee076318f2",
+   "carried": true,
+   "pass": 13
   },
   {
    "row": "C519",
@@ -2350,7 +2454,7 @@
     "all": "9c9546b04dadeed5"
    },
    "row_hash": "def1348d483d0c40",
-   "carried": false,
+   "carried": true,
    "pass": 12
   },
   {
@@ -2369,7 +2473,7 @@
     "all": "795717e099f188bf"
    },
    "row_hash": "def1348d483d0c40",
-   "carried": false,
+   "carried": true,
    "pass": 12
   },
   {
@@ -2388,7 +2492,7 @@
     "all": "7321abea6c34b3a6"
    },
    "row_hash": "def1348d483d0c40",
-   "carried": false,
+   "carried": true,
    "pass": 12
   },
   {
@@ -2425,7 +2529,7 @@
     "all": "7af3b184fb3786eb"
    },
    "row_hash": "def1348d483d0c40",
-   "carried": false,
+   "carried": true,
    "pass": 12
   },
   {
@@ -2462,7 +2566,7 @@
     "all": "9c9546b04dadeed5"
    },
    "row_hash": "5c890033f6ac38b8",
-   "carried": false,
+   "carried": true,
    "pass": 12
   },
   {
@@ -2481,7 +2585,7 @@
     "all": "795717e099f188bf"
    },
    "row_hash": "5c890033f6ac38b8",
-   "carried": false,
+   "carried": true,
    "pass": 12
   },
   {
@@ -2500,7 +2604,7 @@
     "all": "7321abea6c34b3a6"
    },
    "row_hash": "5c890033f6ac38b8",
-   "carried": false,
+   "carried": true,
    "pass": 12
   },
   {
@@ -2537,7 +2641,7 @@
     "all": "7af3b184fb3786eb"
    },
    "row_hash": "5c890033f6ac38b8",
-   "carried": false,
+   "carried": true,
    "pass": 12
   },
   {
@@ -2574,7 +2678,7 @@
     "all": "9c9546b04dadeed5"
    },
    "row_hash": "265ece64add83676",
-   "carried": false,
+   "carried": true,
    "pass": 12
   },
   {
@@ -2593,7 +2697,7 @@
     "all": "795717e099f188bf"
    },
    "row_hash": "265ece64add83676",
-   "carried": false,
+   "carried": true,
    "pass": 12
   },
   {
@@ -2612,7 +2716,7 @@
     "all": "7321abea6c34b3a6"
    },
    "row_hash": "265ece64add83676",
-   "carried": false,
+   "carried": true,
    "pass": 12
   },
   {
@@ -2649,7 +2753,7 @@
     "all": "7af3b184fb3786eb"
    },
    "row_hash": "265ece64add83676",
-   "carried": false,
+   "carried": true,
    "pass": 12
   },
   {
@@ -2686,7 +2790,7 @@
     "all": "9c9546b04dadeed5"
    },
    "row_hash": "6372efb027eb2034",
-   "carried": false,
+   "carried": true,
    "pass": 12
   },
   {
@@ -2705,7 +2809,7 @@
     "all": "795717e099f188bf"
    },
    "row_hash": "6372efb027eb2034",
-   "carried": false,
+   "carried": true,
    "pass": 12
   },
   {
@@ -2724,7 +2828,7 @@
     "all": "7321abea6c34b3a6"
    },
    "row_hash": "6372efb027eb2034",
-   "carried": false,
+   "carried": true,
    "pass": 12
   },
   {
@@ -2761,7 +2865,7 @@
     "all": "7af3b184fb3786eb"
    },
    "row_hash": "6372efb027eb2034",
-   "carried": false,
+   "carried": true,
    "pass": 12
   },
   {
@@ -2798,7 +2902,7 @@
     "all": "9c9546b04dadeed5"
    },
    "row_hash": "df5ed7a36dbc74e4",
-   "carried": false,
+   "carried": true,
    "pass": 12
   },
   {
@@ -2817,7 +2921,7 @@
     "all": "795717e099f188bf"
    },
    "row_hash": "df5ed7a36dbc74e4",
-   "carried": false,
+   "carried": true,
    "pass": 12
   },
   {
@@ -2836,7 +2940,7 @@
     "all": "7321abea6c34b3a6"
    },
    "row_hash": "df5ed7a36dbc74e4",
-   "carried": false,
+   "carried": true,
    "pass": 12
   },
   {
@@ -2873,7 +2977,7 @@
     "all": "7af3b184fb3786eb"
    },
    "row_hash": "df5ed7a36dbc74e4",
-   "carried": false,
+   "carried": true,
    "pass": 12
   },
   {
@@ -2910,7 +3014,7 @@
     "all": "9c9546b04dadeed5"
    },
    "row_hash": "4f83b0b5eb45f71b",
-   "carried": false,
+   "carried": true,
    "pass": 12
   },
   {
@@ -2929,7 +3033,7 @@
     "all": "795717e099f188bf"
    },
    "row_hash": "4f83b0b5eb45f71b",
-   "carried": false,
+   "carried": true,
    "pass": 12
   },
   {
@@ -2948,7 +3052,7 @@
     "all": "7321abea6c34b3a6"
    },
    "row_hash": "4f83b0b5eb45f71b",
-   "carried": false,
+   "carried": true,
    "pass": 12
   },
   {
@@ -2985,7 +3089,7 @@
     "all": "7af3b184fb3786eb"
    },
    "row_hash": "4f83b0b5eb45f71b",
-   "carried": false,
+   "carried": true,
    "pass": 12
   },
   {
@@ -3022,7 +3126,7 @@
     "all": "9c9546b04dadeed5"
    },
    "row_hash": "71713a7e7ae739e7",
-   "carried": false,
+   "carried": true,
    "pass": 12
   },
   {
@@ -3041,7 +3145,7 @@
     "all": "795717e099f188bf"
    },
    "row_hash": "71713a7e7ae739e7",
-   "carried": false,
+   "carried": true,
    "pass": 12
   },
   {
@@ -3060,7 +3164,7 @@
     "all": "7321abea6c34b3a6"
    },
    "row_hash": "71713a7e7ae739e7",
-   "carried": false,
+   "carried": true,
    "pass": 12
   },
   {
@@ -3097,7 +3201,7 @@
     "all": "7af3b184fb3786eb"
    },
    "row_hash": "71713a7e7ae739e7",
-   "carried": false,
+   "carried": true,
    "pass": 12
   },
   {
@@ -3134,7 +3238,7 @@
     "all": "9c9546b04dadeed5"
    },
    "row_hash": "d5a109f1ef88419a",
-   "carried": false,
+   "carried": true,
    "pass": 12
   },
   {
@@ -3153,7 +3257,7 @@
     "all": "795717e099f188bf"
    },
    "row_hash": "d5a109f1ef88419a",
-   "carried": false,
+   "carried": true,
    "pass": 12
   },
   {
@@ -3172,7 +3276,7 @@
     "all": "7321abea6c34b3a6"
    },
    "row_hash": "d5a109f1ef88419a",
-   "carried": false,
+   "carried": true,
    "pass": 12
   },
   {
@@ -3209,7 +3313,7 @@
     "all": "7af3b184fb3786eb"
    },
    "row_hash": "d5a109f1ef88419a",
-   "carried": false,
+   "carried": true,
    "pass": 12
   },
   {
@@ -3246,7 +3350,7 @@
     "all": "9c9546b04dadeed5"
    },
    "row_hash": "c750f9b6ab4ace14",
-   "carried": false,
+   "carried": true,
    "pass": 12
   },
   {
@@ -3265,7 +3369,7 @@
     "all": "795717e099f188bf"
    },
    "row_hash": "c750f9b6ab4ace14",
-   "carried": false,
+   "carried": true,
    "pass": 12
   },
   {
@@ -3284,7 +3388,7 @@
     "all": "7321abea6c34b3a6"
    },
    "row_hash": "c750f9b6ab4ace14",
-   "carried": false,
+   "carried": true,
    "pass": 12
   },
   {
@@ -3321,7 +3425,7 @@
     "all": "7af3b184fb3786eb"
    },
    "row_hash": "c750f9b6ab4ace14",
-   "carried": false,
+   "carried": true,
    "pass": 12
   },
   {
@@ -3358,7 +3462,7 @@
     "all": "9c9546b04dadeed5"
    },
    "row_hash": "bd07273d5822f34f",
-   "carried": false,
+   "carried": true,
    "pass": 12
   },
   {
@@ -3377,7 +3481,7 @@
     "all": "795717e099f188bf"
    },
    "row_hash": "bd07273d5822f34f",
-   "carried": false,
+   "carried": true,
    "pass": 12
   },
   {
@@ -3396,7 +3500,7 @@
     "all": "7321abea6c34b3a6"
    },
    "row_hash": "bd07273d5822f34f",
-   "carried": false,
+   "carried": true,
    "pass": 12
   },
   {
@@ -3433,7 +3537,7 @@
     "all": "7af3b184fb3786eb"
    },
    "row_hash": "bd07273d5822f34f",
-   "carried": false,
+   "carried": true,
    "pass": 12
   },
   {
@@ -3470,7 +3574,7 @@
     "all": "9c9546b04dadeed5"
    },
    "row_hash": "7b2bb0dfdbcfe946",
-   "carried": false,
+   "carried": true,
    "pass": 12
   },
   {
@@ -3489,7 +3593,7 @@
     "all": "795717e099f188bf"
    },
    "row_hash": "7b2bb0dfdbcfe946",
-   "carried": false,
+   "carried": true,
    "pass": 12
   },
   {
@@ -3508,7 +3612,7 @@
     "all": "7321abea6c34b3a6"
    },
    "row_hash": "7b2bb0dfdbcfe946",
-   "carried": false,
+   "carried": true,
    "pass": 12
   },
   {
@@ -3545,7 +3649,7 @@
     "all": "7af3b184fb3786eb"
    },
    "row_hash": "7b2bb0dfdbcfe946",
-   "carried": false,
+   "carried": true,
    "pass": 12
   },
   {
@@ -3582,7 +3686,7 @@
     "all": "9c9546b04dadeed5"
    },
    "row_hash": "513927dd127fca04",
-   "carried": false,
+   "carried": true,
    "pass": 12
   },
   {
@@ -3601,7 +3705,7 @@
     "all": "795717e099f188bf"
    },
    "row_hash": "513927dd127fca04",
-   "carried": false,
+   "carried": true,
    "pass": 12
   },
   {
@@ -3620,7 +3724,7 @@
     "all": "7321abea6c34b3a6"
    },
    "row_hash": "513927dd127fca04",
-   "carried": false,
+   "carried": true,
    "pass": 12
   },
   {
@@ -3657,7 +3761,7 @@
     "all": "7af3b184fb3786eb"
    },
    "row_hash": "513927dd127fca04",
-   "carried": false,
+   "carried": true,
    "pass": 12
   },
   {
@@ -3694,7 +3798,7 @@
     "all": "9c9546b04dadeed5"
    },
    "row_hash": "791cd173e23fb130",
-   "carried": false,
+   "carried": true,
    "pass": 12
   },
   {
@@ -3713,7 +3817,7 @@
     "all": "795717e099f188bf"
    },
    "row_hash": "791cd173e23fb130",
-   "carried": false,
+   "carried": true,
    "pass": 12
   },
   {
@@ -3732,7 +3836,7 @@
     "all": "7321abea6c34b3a6"
    },
    "row_hash": "791cd173e23fb130",
-   "carried": false,
+   "carried": true,
    "pass": 12
   },
   {
@@ -3769,7 +3873,7 @@
     "all": "7af3b184fb3786eb"
    },
    "row_hash": "791cd173e23fb130",
-   "carried": false,
+   "carried": true,
    "pass": 12
   },
   {
@@ -3806,7 +3910,7 @@
     "all": "9c9546b04dadeed5"
    },
    "row_hash": "177d1e1776fac74b",
-   "carried": false,
+   "carried": true,
    "pass": 12
   },
   {
@@ -3825,7 +3929,7 @@
     "all": "795717e099f188bf"
    },
    "row_hash": "177d1e1776fac74b",
-   "carried": false,
+   "carried": true,
    "pass": 12
   },
   {
@@ -3844,7 +3948,7 @@
     "all": "7321abea6c34b3a6"
    },
    "row_hash": "177d1e1776fac74b",
-   "carried": false,
+   "carried": true,
    "pass": 12
   },
   {
@@ -3881,7 +3985,7 @@
     "all": "7af3b184fb3786eb"
    },
    "row_hash": "177d1e1776fac74b",
-   "carried": false,
+   "carried": true,
    "pass": 12
   },
   {
@@ -3918,7 +4022,7 @@
     "all": "9c9546b04dadeed5"
    },
    "row_hash": "4e86d143688ba8e5",
-   "carried": false,
+   "carried": true,
    "pass": 12
   },
   {
@@ -3937,7 +4041,7 @@
     "all": "795717e099f188bf"
    },
    "row_hash": "4e86d143688ba8e5",
-   "carried": false,
+   "carried": true,
    "pass": 12
   },
   {
@@ -3956,7 +4060,7 @@
     "all": "7321abea6c34b3a6"
    },
    "row_hash": "4e86d143688ba8e5",
-   "carried": false,
+   "carried": true,
    "pass": 12
   },
   {
@@ -3993,8 +4097,27 @@
     "all": "7af3b184fb3786eb"
    },
    "row_hash": "4e86d143688ba8e5",
-   "carried": false,
+   "carried": true,
    "pass": 12
+  },
+  {
+   "row": "C927",
+   "screen": "study_library.study",
+   "verdict": "N/A",
+   "line": "Done",
+   "why": "the one exit carries its own 60 minutes; no exit without time",
+   "cause": null,
+   "note": true,
+   "screen_hash": {
+    "text": "98a24397919bb952",
+    "traits": "44136fa355b3678a",
+    "facts": "f86fc12e0253f59a",
+    "facts2": "f86fc12e0253f59a",
+    "all": "3a2e9e7bc0d88233"
+   },
+   "row_hash": "4e86d143688ba8e5",
+   "carried": true,
+   "pass": 13
   },
   {
    "row": "C928",
@@ -4030,7 +4153,7 @@
     "all": "9c9546b04dadeed5"
    },
    "row_hash": "2c3ccc6bd9929d7f",
-   "carried": false,
+   "carried": true,
    "pass": 12
   },
   {
@@ -4049,7 +4172,7 @@
     "all": "795717e099f188bf"
    },
    "row_hash": "2c3ccc6bd9929d7f",
-   "carried": false,
+   "carried": true,
    "pass": 12
   },
   {
@@ -4068,7 +4191,7 @@
     "all": "7321abea6c34b3a6"
    },
    "row_hash": "2c3ccc6bd9929d7f",
-   "carried": false,
+   "carried": true,
    "pass": 12
   },
   {
@@ -4105,7 +4228,7 @@
     "all": "7af3b184fb3786eb"
    },
    "row_hash": "2c3ccc6bd9929d7f",
-   "carried": false,
+   "carried": true,
    "pass": 12
   },
   {
@@ -4142,7 +4265,7 @@
     "all": "9c9546b04dadeed5"
    },
    "row_hash": "18b0ecdf6d7fc901",
-   "carried": false,
+   "carried": true,
    "pass": 12
   },
   {
@@ -4161,7 +4284,7 @@
     "all": "795717e099f188bf"
    },
    "row_hash": "18b0ecdf6d7fc901",
-   "carried": false,
+   "carried": true,
    "pass": 12
   },
   {
@@ -4180,7 +4303,7 @@
     "all": "7321abea6c34b3a6"
    },
    "row_hash": "18b0ecdf6d7fc901",
-   "carried": false,
+   "carried": true,
    "pass": 12
   },
   {
@@ -4217,7 +4340,7 @@
     "all": "7af3b184fb3786eb"
    },
    "row_hash": "18b0ecdf6d7fc901",
-   "carried": false,
+   "carried": true,
    "pass": 12
   },
   {
@@ -4254,7 +4377,7 @@
     "all": "9c9546b04dadeed5"
    },
    "row_hash": "beb57cd46fe906bf",
-   "carried": false,
+   "carried": true,
    "pass": 12
   },
   {
@@ -4273,7 +4396,7 @@
     "all": "795717e099f188bf"
    },
    "row_hash": "beb57cd46fe906bf",
-   "carried": false,
+   "carried": true,
    "pass": 12
   },
   {
@@ -4292,7 +4415,7 @@
     "all": "7321abea6c34b3a6"
    },
    "row_hash": "beb57cd46fe906bf",
-   "carried": false,
+   "carried": true,
    "pass": 12
   },
   {
@@ -4329,7 +4452,7 @@
     "all": "7af3b184fb3786eb"
    },
    "row_hash": "beb57cd46fe906bf",
-   "carried": false,
+   "carried": true,
    "pass": 12
   },
   {
@@ -4366,7 +4489,7 @@
     "all": "9c9546b04dadeed5"
    },
    "row_hash": "1aadffd96e76381c",
-   "carried": false,
+   "carried": true,
    "pass": 12
   },
   {
@@ -4385,7 +4508,7 @@
     "all": "795717e099f188bf"
    },
    "row_hash": "1aadffd96e76381c",
-   "carried": false,
+   "carried": true,
    "pass": 12
   },
   {
@@ -4404,7 +4527,7 @@
     "all": "7321abea6c34b3a6"
    },
    "row_hash": "1aadffd96e76381c",
-   "carried": false,
+   "carried": true,
    "pass": 12
   },
   {
@@ -4441,8 +4564,27 @@
     "all": "7af3b184fb3786eb"
    },
    "row_hash": "1aadffd96e76381c",
-   "carried": false,
+   "carried": true,
    "pass": 12
+  },
+  {
+   "row": "C931",
+   "screen": "study_library.study",
+   "verdict": "PASS",
+   "line": "nadia_tip time_of_day 14:00-18:00",
+   "why": "Study has no window of its own; the rule's target is re-read at the act and its 14:00-18:00 end-exclusive window sits inside Nadia's library row (weekdays 2-6, PLAN 545), so a 17:59 start still finds her there",
+   "cause": null,
+   "note": true,
+   "screen_hash": {
+    "text": "98a24397919bb952",
+    "traits": "44136fa355b3678a",
+    "facts": "f86fc12e0253f59a",
+    "facts2": "f86fc12e0253f59a",
+    "all": "3a2e9e7bc0d88233"
+   },
+   "row_hash": "1aadffd96e76381c",
+   "carried": true,
+   "pass": 13
   },
   {
    "row": "C953",
@@ -4532,7 +4674,7 @@
     "all": "9c9546b04dadeed5"
    },
    "row_hash": "13a714429d15f3b2",
-   "carried": false,
+   "carried": true,
    "pass": 12
   },
   {
@@ -4551,7 +4693,7 @@
     "all": "795717e099f188bf"
    },
    "row_hash": "13a714429d15f3b2",
-   "carried": false,
+   "carried": true,
    "pass": 12
   },
   {
@@ -4570,7 +4712,7 @@
     "all": "7321abea6c34b3a6"
    },
    "row_hash": "13a714429d15f3b2",
-   "carried": false,
+   "carried": true,
    "pass": 12
   },
   {
@@ -4607,8 +4749,27 @@
     "all": "7af3b184fb3786eb"
    },
    "row_hash": "13a714429d15f3b2",
-   "carried": false,
+   "carried": true,
    "pass": 12
+  },
+  {
+   "row": "L106",
+   "screen": "study_library.study",
+   "verdict": "PASS",
+   "line": "npc_at_location npc_nadia campus_library is_present",
+   "why": "the Study screen names nobody; Nadia's swap is gated by her presence (rule condition + requires_npc), so her scene can't claim her where her rows don't put her",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "98a24397919bb952",
+    "traits": "44136fa355b3678a",
+    "facts": "f86fc12e0253f59a",
+    "facts2": "f86fc12e0253f59a",
+    "all": "3a2e9e7bc0d88233"
+   },
+   "row_hash": "13a714429d15f3b2",
+   "carried": true,
+   "pass": 13
   },
   {
    "row": "L116",
@@ -4698,7 +4859,7 @@
     "all": "9c9546b04dadeed5"
    },
    "row_hash": "e64ce2672d85d2d8",
-   "carried": false,
+   "carried": true,
    "pass": 12
   },
   {
@@ -4717,7 +4878,7 @@
     "all": "795717e099f188bf"
    },
    "row_hash": "e64ce2672d85d2d8",
-   "carried": false,
+   "carried": true,
    "pass": 12
   },
   {
@@ -4736,7 +4897,7 @@
     "all": "7321abea6c34b3a6"
    },
    "row_hash": "e64ce2672d85d2d8",
-   "carried": false,
+   "carried": true,
    "pass": 12
   },
   {
@@ -4773,8 +4934,27 @@
     "all": "7af3b184fb3786eb"
    },
    "row_hash": "e64ce2672d85d2d8",
-   "carried": false,
+   "carried": true,
    "pass": 12
+  },
+  {
+   "row": "L167",
+   "screen": "study_library.study",
+   "verdict": "N/A",
+   "line": "show_when_blocked = true",
+   "why": "no hours of its own; library hours are the same every day (PLAN 175), only the 3-a-day cap greys it with its locked_text",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "98a24397919bb952",
+    "traits": "44136fa355b3678a",
+    "facts": "f86fc12e0253f59a",
+    "facts2": "f86fc12e0253f59a",
+    "all": "3a2e9e7bc0d88233"
+   },
+   "row_hash": "e64ce2672d85d2d8",
+   "carried": true,
+   "pass": 13
   },
   {
    "row": "L170",
@@ -4828,8 +5008,8 @@
  ],
  "causes": [],
  "pending": [],
- "asked": 100,
- "answered": 100,
+ "asked": 1,
+ "answered": 1,
  "pass_items": [],
  "unowed": []
 }

@@ -1065,3 +1065,66 @@ Why for all of these: P13's reader found new FAILs on every pass, v5 to v11 (99 
   - **`scripts/tests/test_walkins.py`:** five tests, 19 in the file.
   - **Checked:** rules.py's guard, reading.py, and the C1284 and L97 rows assume no buttons. `seen()` reads walk-ins only from card labels, so nothing else changed.
   - **Verified:** the suite passes. first_term_lean's walkins check stays green, read-only: it has no kind-(a) canvas yet, and its ten P49 scenes are kind (b).
+- **C2196: a scene that comes to her fits what she is doing when it fires.** LO, typed in main-lean 2026-11-26, on first_term_lean's `marco_hips`: "This ones a walkin right, she didn't have gym membership yet. And she is working out in this scene. Why??", then "Go ahead." to the plan. The scene fired as she walked into the gym, with no workout, no day pass and no gym clothes, and its words fixed her squat. The skill gave a "comes to her" scene only one slot, arrival, and asked what the person was doing (line 199, "they arrive doing what their row has them doing"), never what she was doing; the reader judged the words against a trigger that said only "Marco is here".
+  - **`craft/walk-ins.md`:**
+    - The kind (b) line says such a scene fires inside the act when its words need her mid-act.
+    - New row C2196.
+    - "When someone comes to her" step 9: the question to answer before the card, and how to build it. The act carries a substitution rule. The scene is `substitution_only` at the act's place and keeps the brake and the rest on its own trigger. Cited: the cost gate wraps the substitution check, so the act's costs are paid first (v2.py:17789-17801); the target's conditions, `max_triggers_per_day` and `requires_npc` are checked before the swap (v2.py:6132-6152, 6978-6994); a target is found only under a place (v2.py:4151-4165); the rule's fields are read at v2.py:14776-14800.
+    - One Not-this line.
+  - **`plan.md` §8:** each scene answers "on arrival, or inside an act?"; C2196 added to Must read.
+  - **`lists/COVERAGE.md`:** C2196 added.
+  - **`scripts/walkins.py`:**
+    - Rule 7: red on a kind (b) scene that fires on arrival when its first screen has her mid-act. It matches a short phrase list, `ACT_WORDS` ("your stance", "the chair beside you", …), and the reader's C2196 is the real check.
+    - Rule 8: a substitution target that waits on the shared brake is kind (b) inside an act. It is checked for the person, `substitution_only`, the act's `trigger.location`, two choices, and the brake on every way out. A target off the brake (someone walking in on her) is not checked.
+  - **`scripts/reading.py`:** C2196 joins `FACT_ROWS` and `TRUTH_ROWS`, so a moved trigger or changed outfit asks it again.
+  - **`scripts/tests/test_walkins.py`:** six tests, 25 in the file.
+  - **Verified:**
+    - The suite passes: 332.
+    - Two mutation copies (no phrase list; brake never checked inside an act) each fail a planted test.
+    - Every v2.py cite was re-read.
+    - first_term_lean's check is RED 2 on exactly `marco_hips` ("your stance") and `nadia_tip` ("the chair beside you"). Both go to a game card; the other eight scenes that come to her pass the phrase list.
+- **C2197 and C2198: everyone she has met has a menu, and Talk climbs.** LO, typed in main-lean 2026-11-26: after I said 21 of first_term_lean's 24 people had nothing she could do with them once met, "2 yes what can we do on it.", then "Option B." (one Talk per person, once a day, climbing). He also said "1 fine as it is the release one, so nothing pays is fine". The skill gave a menu only to the household (rule 10, C1340), so the other 21 people's faces opened only the engine's busy line ("Zoe is studying.", v2.py:12333-12339).
+  - **`craft/people.md`:**
+    - Rows C2197 and C2198.
+    - New rule 16. Every met person has a menu where talking fits what their row has them doing, or else carries `no_menu = "<why>"`. Talk is once a day across all of a person's places, through one `talked_<x>_today` flag. It climbs three steps a day apart (`days_since_flag` read at v2.py:5199-5233), each step ending on a hook, and the third step stays.
+    - A worked example of the three groups, latest first. Its three Done choices each have conditions that exclude the others, because choices don't chain the way groups do.
+    - An engine note: the importer's one-repeatable-canvas warning leaves out random and `substitution_only` canvases (`apps/projects/services/template_import.py:6246-6300`).
+    - Two Not-this lines.
+  - **`plan.md` §5:** the people pass asks what she can do with each named person at each place; C2197 and C2198 added to Must read.
+  - **`lists/COVERAGE.md`:** C2197 and C2198.
+  - **`scripts/people.py`:** rule 5 runs on every game, with or without the people switch.
+    - Red on a person who has schedule rows and a `met_<x>` flag something sets, but no repeatable manual `npc` canvas and no `no_menu`.
+    - Red on a Talk that sets no `_today` flag the daily tick clears.
+    - Red on a person whose menus use different `_today` flags.
+  - **`scripts/check.py`:** the doc line for the people check now says this.
+  - **`scripts/tests/test_people.py`:** eight tests.
+  - **Verified:**
+    - The suite passes (340 tests).
+    - Three patched versions of rule 5 were each caught by a planted test: no check at all, Talk flags always fine, and walk-ins counted as menus.
+    - The template_import.py cite was re-read.
+    - first_term_lean's check is RED 19, one row for each met person with no menu. Kayla and Tess aren't met, so they need neither. Mom, Mark and Ryan pass.
+- **people.py rule 5 now counts a friend met through someone else; C2198 now judges Talk screens only.** Both were found by first_term_lean's reader pass over the 74 items that C2197 and C2198 reopened.
+  - **Kayla and Tess:** Brooke names them in her meeting, and their `[[quest_cards]]` open on `met_brooke` (`games/first_term_lean/toml_phases/0_systems_spec.toml:503-511`). Neither has a `met_<x>` flag, so rule 5 never asked about them.
+    - `met_by()` now takes the person's `met_<x>` plus every flag their quest cards' `when` waits on.
+    - `met_flags_set()` now collects every flag a canvas sets.
+    - One new test in `scripts/tests/test_people.py`.
+  - **C2198's 7 misapplied FAILs:** they landed on screens that aren't Talk, such as the opening's kitchen and P38's phone walk-ins. Its row in `craft/people.md` now opens "on a person's Talk screen (the screen their menu's Talk opens; judged there only)".
+  - **Verified:**
+    - The suite passes: 341.
+    - first_term_lean's people check now shows `npc_kayla` and `npc_tess`, met through `met_brooke`. They go to card P60.
+- **C2198: one talk per person; the climb is held.** LO, typed in main-lean 2026-11-26: "I want to hold these for now. Take all these 3 talks to to only one."
+  - **`craft/people.md`:**
+    - The C2198 row, rule 16's title and its steps now say one talk, true on a first visit and every visit after, ending on a hook. The climb is held, with his words. A card that writes later steps keeps them in a Held block, unbuilt.
+    - The worked example "Talk that climbs" stays, marked held, as the shape for when the climb comes back.
+    - The Not-this line now names a talk that is only true on a return visit.
+  - **`plan.md` §5** and **`lists/COVERAGE.md`** match.
+  - **`scripts/people.py` is unchanged.** It checks only the menu and the once-a-day flag, never the steps.
+- **Rule 16, the household's exception.** Found by first_term_lean's reader:
+  - Rule 16's "the same talk on every menu" failed on Mom's two menus (kitchen and living room).
+  - Its "ends on a hook" failed on Mark's living-room talk.
+
+  Those talks are rule 10's, one per room, approved and played by LO (P42, P34), and LO said to keep them for release 1. `craft/people.md` rule 16 now says:
+  - A housemate's menus may each play their own talk, and the talks need no hook.
+  - Once a day across their rooms still holds.
+
+  No script reads this.

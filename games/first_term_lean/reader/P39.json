@@ -1,6 +1,6 @@
 {
  "piece": "P39",
- "pass": 11,
+ "pass": 14,
  "screens": {
   "walk_park_couple.moment": {
    "text": "9f8c3c7fe47596ff",
@@ -238,6 +238,8 @@
   "C2179": "47b9477e3ec8a790",
   "C2194": "0c03931191c53a34",
   "C1340": "b76a6583ae88c60f",
+  "C2197": "cafbb0a598dbfa97",
+  "C2198": "27e6b45f50edd3ac",
   "C769": "f6b6f78a8f2e5ed7",
   "C794": "bad76e5963432385",
   "C795": "34139e6a6914e171",
@@ -295,7 +297,8 @@
   "C2187": "f2b54b1dd7c15f2f",
   "C2188": "612394eef6826900",
   "C2189": "20748838895e4545",
-  "C2195": "77083291a86791c3"
+  "C2195": "77083291a86791c3",
+  "C2196": "a8ae0700d13a7f9b"
  },
  "verdicts": [
   {
@@ -438,7 +441,7 @@
     "all": "292cf200c13d9676"
    },
    "row_hash": "c1c0e2ac2588a579",
-   "carried": false,
+   "carried": true,
    "pass": 11
   },
   {
@@ -457,7 +460,7 @@
     "all": "0ae49aa661a7f66d"
    },
    "row_hash": "c1c0e2ac2588a579",
-   "carried": false,
+   "carried": true,
    "pass": 11
   },
   {
@@ -927,7 +930,7 @@
     "all": "292cf200c13d9676"
    },
    "row_hash": "80d415cf08e0ebfe",
-   "carried": false,
+   "carried": true,
    "pass": 11
   },
   {
@@ -946,7 +949,7 @@
     "all": "0ae49aa661a7f66d"
    },
    "row_hash": "80d415cf08e0ebfe",
-   "carried": false,
+   "carried": true,
    "pass": 11
   },
   {
@@ -2847,6 +2850,45 @@
    "pass": 9
   },
   {
+   "row": "C2196",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "Your own thighs go tight by the door. He sees that too.",
+   "why": "walk_marco_squat puts her at the door watching, not on the bench, so it fits arrival with no pass or gym clothes; walk_park_couple, walk_vance_ledger, walk_danny_deal, walk_nina_dress ('Just browse') need her only just there and name none of her clothes. walk_curtain needs her mid-try-on ('the skirt halfway up your thighs') and rides on shop_try_on, whose screen has her try a high skirt; her underwear is behind clothing_slot groups",
+   "cause": null,
+   "note": false,
+   "screen_hash": "bece9e9917a3cc7f",
+   "row_hash": "a8ae0700d13a7f9b",
+   "carried": true,
+   "pass": 12
+  },
+  {
+   "row": "C2197",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "talk_vance, talk_danny, talk_marco, talk_nina; the park couple and the curtain are strangers",
+   "why": "Vance, Danny, Marco, Nina: a menu at each place their rows put them where talking fits, behind the met flag; none where it doesn't (lecture hall, mid-rehearsal, party hours)",
+   "cause": null,
+   "note": false,
+   "screen_hash": "bece9e9917a3cc7f",
+   "row_hash": "cafbb0a598dbfa97",
+   "carried": true,
+   "pass": 13
+  },
+  {
+   "row": "C2198",
+   "screen": "*",
+   "verdict": "N/A",
+   "line": "",
+   "why": "neighbourhood walk-ins: no menu's Talk screen in this piece; C2198 is judged only on a person's Talk screen (the screen their menu's Talk opens)",
+   "cause": null,
+   "note": false,
+   "screen_hash": "bece9e9917a3cc7f",
+   "row_hash": "27e6b45f50edd3ac",
+   "carried": false,
+   "pass": 14
+  },
+  {
    "row": "C286",
    "screen": "*",
    "verdict": "PASS",
@@ -3309,7 +3351,7 @@
     "all": "292cf200c13d9676"
    },
    "row_hash": "67e48e60d5053a2e",
-   "carried": false,
+   "carried": true,
    "pass": 11
   },
   {
@@ -3328,7 +3370,7 @@
     "all": "0ae49aa661a7f66d"
    },
    "row_hash": "67e48e60d5053a2e",
-   "carried": false,
+   "carried": true,
    "pass": 11
   },
   {
@@ -3661,7 +3703,7 @@
     "all": "292cf200c13d9676"
    },
    "row_hash": "310706ee076318f2",
-   "carried": false,
+   "carried": true,
    "pass": 11
   },
   {
@@ -3680,7 +3722,7 @@
     "all": "0ae49aa661a7f66d"
    },
    "row_hash": "310706ee076318f2",
-   "carried": false,
+   "carried": true,
    "pass": 11
   },
   {
@@ -4589,7 +4631,7 @@
     "all": "292cf200c13d9676"
    },
    "row_hash": "4e86d143688ba8e5",
-   "carried": false,
+   "carried": true,
    "pass": 11
   },
   {
@@ -4867,7 +4909,7 @@
     "all": "292cf200c13d9676"
    },
    "row_hash": "1aadffd96e76381c",
-   "carried": false,
+   "carried": true,
    "pass": 11
   },
   {
@@ -5205,7 +5247,7 @@
     "all": "292cf200c13d9676"
    },
    "row_hash": "13a714429d15f3b2",
-   "carried": false,
+   "carried": true,
    "pass": 11
   },
   {
@@ -5224,7 +5266,7 @@
     "all": "0ae49aa661a7f66d"
    },
    "row_hash": "13a714429d15f3b2",
-   "carried": false,
+   "carried": true,
    "pass": 11
   },
   {
@@ -5598,7 +5640,7 @@
     "all": "292cf200c13d9676"
    },
    "row_hash": "e64ce2672d85d2d8",
-   "carried": false,
+   "carried": true,
    "pass": 11
   },
   {
@@ -5858,8 +5900,8 @@
  ],
  "causes": [],
  "pending": [],
- "asked": 13,
- "answered": 13,
+ "asked": 1,
+ "answered": 1,
  "pass_items": [],
  "unowed": []
 }

@@ -1,6 +1,6 @@
 {
  "piece": "P26",
- "pass": 7,
+ "pass": 9,
  "screens": {
   "mirror_meet_brooke.mirror": {
    "text": "c1e3f57c50f6d293",
@@ -116,6 +116,8 @@
   "L168": "444c44970dc284f2",
   "L169": "59defccfc63b0454",
   "C1340": "b76a6583ae88c60f",
+  "C2197": "cafbb0a598dbfa97",
+  "C2198": "27e6b45f50edd3ac",
   "C769": "f6b6f78a8f2e5ed7",
   "C794": "bad76e5963432385",
   "C795": "34139e6a6914e171",
@@ -973,19 +975,6 @@
    "pass": 5
   },
   {
-   "row": "C2183",
-   "screen": "*",
-   "verdict": "PASS",
-   "line": "Brooke: Forward, Dominant, Bully (\"Nice outfit, princess.\"); Kayla: Submissive, Bully (\"Kayla laughs.\"); Tess: Submissive, Shy (\"Tess doesn't, but she doesn't stop her either.\")",
-   "why": "2-3 traits each, a learnable personality trait backed on screen; Tess's snort stays passive, not a contradiction of Shy",
-   "cause": null,
-   "note": false,
-   "screen_hash": "1e9737649686555a",
-   "row_hash": "40172c2d376bfc32",
-   "carried": true,
-   "pass": 5
-  },
-  {
    "row": "C2188",
    "screen": "mirror_meet_brooke.mirror",
    "verdict": "N/A",
@@ -1076,7 +1065,7 @@
     "all": "557078cbb7f69be6"
    },
    "row_hash": "0c03931191c53a34",
-   "carried": false,
+   "carried": true,
    "pass": 7
   },
   {
@@ -1095,8 +1084,40 @@
     "all": "1f6d0a0567942779"
    },
    "row_hash": "0c03931191c53a34",
-   "carried": false,
+   "carried": true,
    "pass": 7
+  },
+  {
+   "row": "C2197",
+   "screen": "mirror_meet_brooke.mirror",
+   "verdict": "PASS",
+   "line": "talk_kayla_mirror, talk_tess_mirror (campus_bathroom); talk_kayla_cafeteria, talk_tess_cafeteria (campus_cafeteria), conditions met_brooke",
+   "why": "Kayla and Tess, met here, now each have a menu with Talk at the mirror (rows 08-09, 13-14 weekdays) and at lunch (12-13), behind met_brooke; their only other row is Zoe's Saturday party, which zoe_party owns as it does for Zoe, Sam and Brooke",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "c1e3f57c50f6d293",
+    "traits": "9e12469ed756975c",
+    "facts": "862794d34277cc92",
+    "facts2": "e0a8d361ec88aeca",
+    "all": "1f6d0a0567942779"
+   },
+   "row_hash": "cafbb0a598dbfa97",
+   "carried": false,
+   "pass": 9
+  },
+  {
+   "row": "C2198",
+   "screen": "*",
+   "verdict": "N/A",
+   "line": "",
+   "why": "mirror_meet_brooke, a meeting: no menu's Talk screen in this piece; C2198 is judged only on a person's Talk screen (the screen their menu's Talk opens)",
+   "cause": null,
+   "note": false,
+   "screen_hash": "0c4a950f844ca323",
+   "row_hash": "27e6b45f50edd3ac",
+   "carried": false,
+   "pass": 9
   },
   {
    "row": "C422",
@@ -2375,8 +2396,8 @@
  ],
  "causes": [],
  "pending": [],
- "asked": 1,
- "answered": 1,
+ "asked": 2,
+ "answered": 2,
  "pass_items": [],
  "unowed": []
 }
