@@ -1,27 +1,27 @@
 {
  "piece": "P47",
- "pass": 8,
+ "pass": 9,
  "screens": {
   "dean_first.door": {
-   "text": "21cbca984f087966",
+   "text": "3aedd6e655f7639e",
    "traits": "c6984adcd9df71b0",
    "facts": "632e8e7c3012fe0b",
    "facts2": "d324d118e7c22152",
-   "all": "8040626dd6722770"
+   "all": "a46354d832fdb9c8"
   },
   "dean_first.rules": {
    "text": "ff03086d8c90677e",
    "traits": "c6984adcd9df71b0",
-   "facts": "fd73b5b45d3f0c23",
-   "facts2": "0973ec47ecea80cf",
-   "all": "e66489400c2513f5"
+   "facts": "f58b8ccc0a2c8149",
+   "facts2": "d235039c9ad8c93a",
+   "all": "2043776368f5a26a"
   },
   "dean_first.timetable": {
-   "text": "75793a712d159a51",
-   "traits": "bd8b6c990fa6bbac",
-   "facts": "aff9c7f15c4842bf",
-   "facts2": "e8db2110417d4db6",
-   "all": "9469233f6210afe6"
+   "text": "2773635a375e3846",
+   "traits": "c6984adcd9df71b0",
+   "facts": "a1c11f63974fa8c7",
+   "facts2": "838471633de66118",
+   "all": "c649cb04651c5821"
   },
   "dean_first.sendoff": {
    "text": "40d3a4f3aa5ba807",
@@ -30,7 +30,7 @@
    "facts2": "ec5462d91cdb6930",
    "all": "9eebaf236fc8544a"
   },
-  "*": "64d3ea48447db567"
+  "*": "d2affd42d39d125e"
  },
  "rows": {
   "B1": "5276068df1ca6fa9",
@@ -174,38 +174,38 @@
    "screen": "dean_first.door",
    "verdict": "PASS",
    "line": "The dean's office: a big desk, a window, and him behind it, writing.",
-   "why": "trigger Mon-Fri 08:00-16:34 in campus_office_dean with npc_dean present; who_is_where has him there 08-17; one-time; no garment",
+   "why": "Mon-Fri 08:00-16:34, dean in 08-17 (who_is_where); the screen no longer sets met_dean and no line on it reads it.",
    "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "21cbca984f087966",
+    "text": "3aedd6e655f7639e",
     "traits": "c6984adcd9df71b0",
     "facts": "632e8e7c3012fe0b",
     "facts2": "d324d118e7c22152",
-    "all": "8040626dd6722770"
+    "all": "a46354d832fdb9c8"
    },
    "row_hash": "c1c0e2ac2588a579",
-   "carried": true,
-   "pass": 6
+   "carried": false,
+   "pass": 9
   },
   {
    "row": "B10",
    "screen": "dean_first.rules",
    "verdict": "PASS",
-   "line": "Give me a reason, and you're back in this office.",
-   "why": "shows 08:15-16:49, his row; the threat is conditional and planned (PLAN \u00a75/\u00a77)",
+   "line": "I'm Dean Sterling. Classes are not optional, child.",
+   "why": "met_dean now unset here; nothing on the screen assumes it; shows to 16:49, he's in.",
    "cause": null,
    "note": false,
    "screen_hash": {
     "text": "ff03086d8c90677e",
     "traits": "c6984adcd9df71b0",
-    "facts": "fd73b5b45d3f0c23",
-    "facts2": "0973ec47ecea80cf",
-    "all": "e66489400c2513f5"
+    "facts": "f58b8ccc0a2c8149",
+    "facts2": "d235039c9ad8c93a",
+    "all": "2043776368f5a26a"
    },
    "row_hash": "c1c0e2ac2588a579",
-   "carried": true,
-   "pass": 6
+   "carried": false,
+   "pass": 9
   },
   {
    "row": "B10",
@@ -230,20 +230,20 @@
    "row": "B10",
    "screen": "dean_first.timetable",
    "verdict": "PASS",
-   "line": "Psychology, Dr. Hale: Monday and Wednesday, 9 to 11. Statistics, Mr. Pratt: Monday and Wednesday, 11 to 1.",
-   "why": "matches who_is_where for Hale, Pratt, Walsh (lecture hall) and Cross (theatre); shows to 16:54, he's in",
+   "line": "Your timetable. Learn it.",
+   "why": "The popup opens on the live clock (Now / Next / Doors shut, day chips); on any trigger day and minute 08:20-16:54 its rows and badges are true, Friday shows the classes it has; he's in.",
    "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "75793a712d159a51",
-    "traits": "bd8b6c990fa6bbac",
-    "facts": "aff9c7f15c4842bf",
-    "facts2": "e8db2110417d4db6",
-    "all": "9469233f6210afe6"
+    "text": "2773635a375e3846",
+    "traits": "c6984adcd9df71b0",
+    "facts": "a1c11f63974fa8c7",
+    "facts2": "838471633de66118",
+    "all": "c649cb04651c5821"
    },
    "row_hash": "c1c0e2ac2588a579",
-   "carried": true,
-   "pass": 6
+   "carried": false,
+   "pass": 9
   },
   {
    "row": "B11",
@@ -380,38 +380,38 @@
    "screen": "dean_first.door",
    "verdict": "PASS",
    "line": "Is that what you're wearing to class, child?",
-   "why": "no garment named; exposure groups cover every outfit",
+   "why": "No number, no garment; exposure groups cover every outfit.",
    "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "21cbca984f087966",
+    "text": "3aedd6e655f7639e",
     "traits": "c6984adcd9df71b0",
     "facts": "632e8e7c3012fe0b",
     "facts2": "d324d118e7c22152",
-    "all": "8040626dd6722770"
+    "all": "a46354d832fdb9c8"
    },
    "row_hash": "80d415cf08e0ebfe",
-   "carried": true,
-   "pass": 6
+   "carried": false,
+   "pass": 9
   },
   {
    "row": "B8",
    "screen": "dean_first.rules",
    "verdict": "PASS",
    "line": "He taps a folder with one finger.",
-   "why": "no number, no garment",
+   "why": "No number, no garment.",
    "cause": null,
    "note": false,
    "screen_hash": {
     "text": "ff03086d8c90677e",
     "traits": "c6984adcd9df71b0",
-    "facts": "fd73b5b45d3f0c23",
-    "facts2": "0973ec47ecea80cf",
-    "all": "e66489400c2513f5"
+    "facts": "f58b8ccc0a2c8149",
+    "facts2": "d235039c9ad8c93a",
+    "all": "2043776368f5a26a"
    },
    "row_hash": "80d415cf08e0ebfe",
-   "carried": true,
-   "pass": 6
+   "carried": false,
+   "pass": 9
   },
   {
    "row": "B8",
@@ -436,20 +436,20 @@
    "row": "B8",
    "screen": "dean_first.timetable",
    "verdict": "PASS",
-   "line": "English, Prof. Walsh: Tuesday and Thursday, 9 to 11.",
-   "why": "every class time agrees with the rows, the Timetable popup (P52) and the Classes hint",
+   "line": "Psychology 9-11 AM \u00b7 Lecture Hall \u00b7 late until 9:30 AM",
+   "why": "Popup rows agree with Hale/Pratt/Walsh/Cross rows (who_is_where), the Classes hint and the send-off's 'at nine'; no garment.",
    "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "75793a712d159a51",
-    "traits": "bd8b6c990fa6bbac",
-    "facts": "aff9c7f15c4842bf",
-    "facts2": "e8db2110417d4db6",
-    "all": "9469233f6210afe6"
+    "text": "2773635a375e3846",
+    "traits": "c6984adcd9df71b0",
+    "facts": "a1c11f63974fa8c7",
+    "facts2": "838471633de66118",
+    "all": "c649cb04651c5821"
    },
    "row_hash": "80d415cf08e0ebfe",
-   "carried": true,
-   "pass": 6
+   "carried": false,
+   "pass": 9
   },
   {
    "row": "B9",
@@ -521,19 +521,19 @@
    "screen": "dean_first.door",
    "verdict": "PASS",
    "line": "Is that what you're wearing to class, child?",
-   "why": "names no garment",
+   "why": "Names no garment.",
    "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "21cbca984f087966",
+    "text": "3aedd6e655f7639e",
     "traits": "c6984adcd9df71b0",
     "facts": "632e8e7c3012fe0b",
     "facts2": "d324d118e7c22152",
-    "all": "8040626dd6722770"
+    "all": "a46354d832fdb9c8"
    },
    "row_hash": "f40f51a0fd6cfd10",
-   "carried": true,
-   "pass": 6
+   "carried": false,
+   "pass": 9
   },
   {
    "row": "C1173",
@@ -657,19 +657,19 @@
    "screen": "dean_first.door",
    "verdict": "PASS",
    "line": "Is that what you're wearing to class, child?",
-   "why": "names no garment",
+   "why": "Names no garment.",
    "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "21cbca984f087966",
+    "text": "3aedd6e655f7639e",
     "traits": "c6984adcd9df71b0",
     "facts": "632e8e7c3012fe0b",
     "facts2": "d324d118e7c22152",
-    "all": "8040626dd6722770"
+    "all": "a46354d832fdb9c8"
    },
    "row_hash": "bfff76edbee583de",
-   "carried": true,
-   "pass": 6
+   "carried": false,
+   "pass": 9
   },
   {
    "row": "C1220",
@@ -1139,7 +1139,7 @@
    "note": false,
    "screen_hash": "64d3ea48447db567",
    "row_hash": "27e6b45f50edd3ac",
-   "carried": false,
+   "carried": true,
    "pass": 8
   },
   {
@@ -1237,39 +1237,39 @@
    "row": "C460",
    "screen": "dean_first.door",
    "verdict": "PASS",
-   "line": "The dean's office: a big desk, a window, and him behind it, writing.",
-   "why": "true on every reachable minute; agrees with the room's own line (desk, window, the chair he doesn't offer)",
+   "line": "He doesn't look up, and he doesn't ask you to sit, so you stand.",
+   "why": "True on every reachable minute; no flag-backed claim.",
    "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "21cbca984f087966",
+    "text": "3aedd6e655f7639e",
     "traits": "c6984adcd9df71b0",
     "facts": "632e8e7c3012fe0b",
     "facts2": "d324d118e7c22152",
-    "all": "8040626dd6722770"
+    "all": "a46354d832fdb9c8"
    },
    "row_hash": "67e48e60d5053a2e",
-   "carried": true,
-   "pass": 6
+   "carried": false,
+   "pass": 9
   },
   {
    "row": "C460",
    "screen": "dean_first.rules",
    "verdict": "PASS",
-   "line": "Classes are not optional, child.",
-   "why": "no past claimed",
+   "line": "Your grades come to me. Complaints come to me.",
+   "why": "No past claimed; nothing reads met_dean.",
    "cause": null,
    "note": false,
    "screen_hash": {
     "text": "ff03086d8c90677e",
     "traits": "c6984adcd9df71b0",
-    "facts": "fd73b5b45d3f0c23",
-    "facts2": "0973ec47ecea80cf",
-    "all": "e66489400c2513f5"
+    "facts": "f58b8ccc0a2c8149",
+    "facts2": "d235039c9ad8c93a",
+    "all": "2043776368f5a26a"
    },
    "row_hash": "67e48e60d5053a2e",
-   "carried": true,
-   "pass": 6
+   "carried": false,
+   "pass": 9
   },
   {
    "row": "C460",
@@ -1295,19 +1295,19 @@
    "screen": "dean_first.timetable",
    "verdict": "PASS",
    "line": "He slides a printed sheet across the desk",
-   "why": "inside his row",
+   "why": "Inside his row; the sheet opens as the popup the send-off then says she has.",
    "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "75793a712d159a51",
-    "traits": "bd8b6c990fa6bbac",
-    "facts": "aff9c7f15c4842bf",
-    "facts2": "e8db2110417d4db6",
-    "all": "9469233f6210afe6"
+    "text": "2773635a375e3846",
+    "traits": "c6984adcd9df71b0",
+    "facts": "a1c11f63974fa8c7",
+    "facts2": "838471633de66118",
+    "all": "c649cb04651c5821"
    },
    "row_hash": "67e48e60d5053a2e",
-   "carried": true,
-   "pass": 6
+   "carried": false,
+   "pass": 9
   },
   {
    "row": "C461",
@@ -1327,38 +1327,38 @@
    "screen": "dean_first.door",
    "verdict": "PASS",
    "line": "like he's reading a form he means to sign.",
-   "why": "fits his cast entry (Strict, Takes charge)",
+   "why": "Fits his entry.",
    "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "21cbca984f087966",
+    "text": "3aedd6e655f7639e",
     "traits": "c6984adcd9df71b0",
     "facts": "632e8e7c3012fe0b",
     "facts2": "d324d118e7c22152",
-    "all": "8040626dd6722770"
+    "all": "a46354d832fdb9c8"
    },
    "row_hash": "310706ee076318f2",
-   "carried": true,
-   "pass": 6
+   "carried": false,
+   "pass": 9
   },
   {
    "row": "C461",
    "screen": "dean_first.rules",
    "verdict": "PASS",
    "line": "I don't like seeing a student twice.",
-   "why": "fits",
+   "why": "Fits his entry.",
    "cause": null,
    "note": false,
    "screen_hash": {
     "text": "ff03086d8c90677e",
     "traits": "c6984adcd9df71b0",
-    "facts": "fd73b5b45d3f0c23",
-    "facts2": "0973ec47ecea80cf",
-    "all": "e66489400c2513f5"
+    "facts": "f58b8ccc0a2c8149",
+    "facts2": "d235039c9ad8c93a",
+    "all": "2043776368f5a26a"
    },
    "row_hash": "310706ee076318f2",
-   "carried": true,
-   "pass": 6
+   "carried": false,
+   "pass": 9
   },
   {
    "row": "C461",
@@ -1383,20 +1383,20 @@
    "row": "C461",
    "screen": "dean_first.timetable",
    "verdict": "PASS",
-   "line": "Your timetable. Learn it.",
-   "why": "fits",
+   "line": "Fold it into your bag.",
+   "why": "Texture.",
    "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "75793a712d159a51",
-    "traits": "bd8b6c990fa6bbac",
-    "facts": "aff9c7f15c4842bf",
-    "facts2": "e8db2110417d4db6",
-    "all": "9469233f6210afe6"
+    "text": "2773635a375e3846",
+    "traits": "c6984adcd9df71b0",
+    "facts": "a1c11f63974fa8c7",
+    "facts2": "838471633de66118",
+    "all": "c649cb04651c5821"
    },
    "row_hash": "310706ee076318f2",
-   "carried": true,
-   "pass": 6
+   "carried": false,
+   "pass": 9
   },
   {
    "row": "C519",
@@ -1755,6 +1755,25 @@
    "pass": 1
   },
   {
+   "row": "C889",
+   "screen": "dean_first.rules",
+   "verdict": "PASS",
+   "line": "\"I understand.\"",
+   "why": "No clock time or duration; 5 minutes spent.",
+   "cause": null,
+   "note": true,
+   "screen_hash": {
+    "text": "ff03086d8c90677e",
+    "traits": "c6984adcd9df71b0",
+    "facts": "f58b8ccc0a2c8149",
+    "facts2": "d235039c9ad8c93a",
+    "all": "2043776368f5a26a"
+   },
+   "row_hash": "def1348d483d0c40",
+   "carried": false,
+   "pass": 9
+  },
+  {
    "row": "C892",
    "screen": "*",
    "verdict": "PASS",
@@ -1766,6 +1785,44 @@
    "row_hash": "5c890033f6ac38b8",
    "carried": true,
    "pass": 1
+  },
+  {
+   "row": "C892",
+   "screen": "dean_first.rules",
+   "verdict": "PASS",
+   "line": "",
+   "why": "The hours sit on the trigger (weekday, 08:00-16:35, his presence), not in the act.",
+   "cause": null,
+   "note": true,
+   "screen_hash": {
+    "text": "ff03086d8c90677e",
+    "traits": "c6984adcd9df71b0",
+    "facts": "f58b8ccc0a2c8149",
+    "facts2": "d235039c9ad8c93a",
+    "all": "2043776368f5a26a"
+   },
+   "row_hash": "5c890033f6ac38b8",
+   "carried": false,
+   "pass": 9
+  },
+  {
+   "row": "C897",
+   "screen": "dean_first.rules",
+   "verdict": "PASS",
+   "line": "\"I understand.\"",
+   "why": "The 5 minutes are the conversation, not a room move.",
+   "cause": null,
+   "note": true,
+   "screen_hash": {
+    "text": "ff03086d8c90677e",
+    "traits": "c6984adcd9df71b0",
+    "facts": "f58b8ccc0a2c8149",
+    "facts2": "d235039c9ad8c93a",
+    "all": "2043776368f5a26a"
+   },
+   "row_hash": "265ece64add83676",
+   "carried": false,
+   "pass": 9
   },
   {
    "row": "C897",
@@ -1799,6 +1856,25 @@
    "pass": 1
   },
   {
+   "row": "C900",
+   "screen": "dean_first.rules",
+   "verdict": "PASS",
+   "line": "Classes are not optional, child.",
+   "why": "No time of day said.",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "ff03086d8c90677e",
+    "traits": "c6984adcd9df71b0",
+    "facts": "f58b8ccc0a2c8149",
+    "facts2": "d235039c9ad8c93a",
+    "all": "2043776368f5a26a"
+   },
+   "row_hash": "6372efb027eb2034",
+   "carried": false,
+   "pass": 9
+  },
+  {
    "row": "C902",
    "screen": "*",
    "verdict": "PASS",
@@ -1810,6 +1886,25 @@
    "row_hash": "df5ed7a36dbc74e4",
    "carried": true,
    "pass": 1
+  },
+  {
+   "row": "C902",
+   "screen": "dean_first.rules",
+   "verdict": "PASS",
+   "line": "Classes are not optional, child.",
+   "why": "True at the last minute (16:49).",
+   "cause": null,
+   "note": true,
+   "screen_hash": {
+    "text": "ff03086d8c90677e",
+    "traits": "c6984adcd9df71b0",
+    "facts": "f58b8ccc0a2c8149",
+    "facts2": "d235039c9ad8c93a",
+    "all": "2043776368f5a26a"
+   },
+   "row_hash": "df5ed7a36dbc74e4",
+   "carried": false,
+   "pass": 9
   },
   {
    "row": "C903",
@@ -1825,6 +1920,25 @@
    "pass": 1
   },
   {
+   "row": "C903",
+   "screen": "dean_first.rules",
+   "verdict": "PASS",
+   "line": "",
+   "why": "No weekday named.",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "ff03086d8c90677e",
+    "traits": "c6984adcd9df71b0",
+    "facts": "f58b8ccc0a2c8149",
+    "facts2": "d235039c9ad8c93a",
+    "all": "2043776368f5a26a"
+   },
+   "row_hash": "4f83b0b5eb45f71b",
+   "carried": false,
+   "pass": 9
+  },
+  {
    "row": "C906",
    "screen": "*",
    "verdict": "PASS",
@@ -1836,6 +1950,25 @@
    "row_hash": "71713a7e7ae739e7",
    "carried": true,
    "pass": 1
+  },
+  {
+   "row": "C906",
+   "screen": "dean_first.rules",
+   "verdict": "PASS",
+   "line": "\"I understand.\"",
+   "why": "No 'till' promise.",
+   "cause": null,
+   "note": true,
+   "screen_hash": {
+    "text": "ff03086d8c90677e",
+    "traits": "c6984adcd9df71b0",
+    "facts": "f58b8ccc0a2c8149",
+    "facts2": "d235039c9ad8c93a",
+    "all": "2043776368f5a26a"
+   },
+   "row_hash": "71713a7e7ae739e7",
+   "carried": false,
+   "pass": 9
   },
   {
    "row": "C910",
@@ -1851,6 +1984,25 @@
    "pass": 1
   },
   {
+   "row": "C910",
+   "screen": "dean_first.rules",
+   "verdict": "PASS",
+   "line": "\"I understand.\"",
+   "why": "No time, energy or money on the button.",
+   "cause": null,
+   "note": true,
+   "screen_hash": {
+    "text": "ff03086d8c90677e",
+    "traits": "c6984adcd9df71b0",
+    "facts": "f58b8ccc0a2c8149",
+    "facts2": "d235039c9ad8c93a",
+    "all": "2043776368f5a26a"
+   },
+   "row_hash": "d5a109f1ef88419a",
+   "carried": false,
+   "pass": 9
+  },
+  {
    "row": "C913",
    "screen": "*",
    "verdict": "N/A",
@@ -1862,6 +2014,25 @@
    "row_hash": "c750f9b6ab4ace14",
    "carried": true,
    "pass": 1
+  },
+  {
+   "row": "C913",
+   "screen": "dean_first.rules",
+   "verdict": "N/A",
+   "line": "",
+   "why": "An event that fires on her (one-time, on entry), not an activity she picks.",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "ff03086d8c90677e",
+    "traits": "c6984adcd9df71b0",
+    "facts": "f58b8ccc0a2c8149",
+    "facts2": "d235039c9ad8c93a",
+    "all": "2043776368f5a26a"
+   },
+   "row_hash": "c750f9b6ab4ace14",
+   "carried": false,
+   "pass": 9
   },
   {
    "row": "C914",
@@ -1877,6 +2048,25 @@
    "pass": 1
   },
   {
+   "row": "C914",
+   "screen": "dean_first.rules",
+   "verdict": "N/A",
+   "line": "",
+   "why": "No row on the screen shows hours.",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "ff03086d8c90677e",
+    "traits": "c6984adcd9df71b0",
+    "facts": "f58b8ccc0a2c8149",
+    "facts2": "d235039c9ad8c93a",
+    "all": "2043776368f5a26a"
+   },
+   "row_hash": "bd07273d5822f34f",
+   "carried": false,
+   "pass": 9
+  },
+  {
    "row": "C916",
    "screen": "*",
    "verdict": "PASS",
@@ -1888,6 +2078,44 @@
    "row_hash": "7b2bb0dfdbcfe946",
    "carried": true,
    "pass": 1
+  },
+  {
+   "row": "C916",
+   "screen": "dean_first.rules",
+   "verdict": "PASS",
+   "line": "",
+   "why": "The scene is an event that happens to her; out of its window it stays hidden.",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "ff03086d8c90677e",
+    "traits": "c6984adcd9df71b0",
+    "facts": "f58b8ccc0a2c8149",
+    "facts2": "d235039c9ad8c93a",
+    "all": "2043776368f5a26a"
+   },
+   "row_hash": "7b2bb0dfdbcfe946",
+   "carried": false,
+   "pass": 9
+  },
+  {
+   "row": "C920",
+   "screen": "dean_first.rules",
+   "verdict": "N/A",
+   "line": "",
+   "why": "A node choice inside the scene, not a hop between places.",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "ff03086d8c90677e",
+    "traits": "c6984adcd9df71b0",
+    "facts": "f58b8ccc0a2c8149",
+    "facts2": "d235039c9ad8c93a",
+    "all": "2043776368f5a26a"
+   },
+   "row_hash": "513927dd127fca04",
+   "carried": false,
+   "pass": 9
   },
   {
    "row": "C920",
@@ -1921,6 +2149,25 @@
    "pass": 1
   },
   {
+   "row": "C924",
+   "screen": "dean_first.rules",
+   "verdict": "N/A",
+   "line": "",
+   "why": "No travel.",
+   "cause": null,
+   "note": true,
+   "screen_hash": {
+    "text": "ff03086d8c90677e",
+    "traits": "c6984adcd9df71b0",
+    "facts": "f58b8ccc0a2c8149",
+    "facts2": "d235039c9ad8c93a",
+    "all": "2043776368f5a26a"
+   },
+   "row_hash": "791cd173e23fb130",
+   "carried": false,
+   "pass": 9
+  },
+  {
    "row": "C926",
    "screen": "*",
    "verdict": "PASS",
@@ -1932,6 +2179,25 @@
    "row_hash": "177d1e1776fac74b",
    "carried": true,
    "pass": 1
+  },
+  {
+   "row": "C926",
+   "screen": "dean_first.rules",
+   "verdict": "PASS",
+   "line": "\"I understand.\"",
+   "why": "The clock moves by 5 minutes; nothing sets an hour.",
+   "cause": null,
+   "note": true,
+   "screen_hash": {
+    "text": "ff03086d8c90677e",
+    "traits": "c6984adcd9df71b0",
+    "facts": "f58b8ccc0a2c8149",
+    "facts2": "d235039c9ad8c93a",
+    "all": "2043776368f5a26a"
+   },
+   "row_hash": "177d1e1776fac74b",
+   "carried": false,
+   "pass": 9
   },
   {
    "row": "C927",
@@ -1951,19 +2217,19 @@
    "screen": "dean_first.rules",
    "verdict": "PASS",
    "line": "\"I understand.\"",
-   "why": "5 minutes",
+   "why": "5 minutes.",
    "cause": null,
    "note": true,
    "screen_hash": {
     "text": "ff03086d8c90677e",
     "traits": "c6984adcd9df71b0",
-    "facts": "fd73b5b45d3f0c23",
-    "facts2": "0973ec47ecea80cf",
-    "all": "e66489400c2513f5"
+    "facts": "f58b8ccc0a2c8149",
+    "facts2": "d235039c9ad8c93a",
+    "all": "2043776368f5a26a"
    },
    "row_hash": "4e86d143688ba8e5",
-   "carried": true,
-   "pass": 6
+   "carried": false,
+   "pass": 9
   },
   {
    "row": "C927",
@@ -1989,19 +2255,19 @@
    "screen": "dean_first.timetable",
    "verdict": "PASS",
    "line": "Fold it into your bag.",
-   "why": "5 minutes",
+   "why": "5 minutes; the choice now also sets met_dean.",
    "cause": null,
    "note": true,
    "screen_hash": {
-    "text": "75793a712d159a51",
-    "traits": "bd8b6c990fa6bbac",
-    "facts": "aff9c7f15c4842bf",
-    "facts2": "e8db2110417d4db6",
-    "all": "9469233f6210afe6"
+    "text": "2773635a375e3846",
+    "traits": "c6984adcd9df71b0",
+    "facts": "a1c11f63974fa8c7",
+    "facts2": "838471633de66118",
+    "all": "c649cb04651c5821"
    },
    "row_hash": "4e86d143688ba8e5",
-   "carried": true,
-   "pass": 6
+   "carried": false,
+   "pass": 9
   },
   {
    "row": "C928",
@@ -2017,6 +2283,25 @@
    "pass": 1
   },
   {
+   "row": "C928",
+   "screen": "dean_first.rules",
+   "verdict": "PASS",
+   "line": "",
+   "why": "No clock printed into prose.",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "ff03086d8c90677e",
+    "traits": "c6984adcd9df71b0",
+    "facts": "f58b8ccc0a2c8149",
+    "facts2": "d235039c9ad8c93a",
+    "all": "2043776368f5a26a"
+   },
+   "row_hash": "2c3ccc6bd9929d7f",
+   "carried": false,
+   "pass": 9
+  },
+  {
    "row": "C929",
    "screen": "*",
    "verdict": "PASS",
@@ -2030,6 +2315,25 @@
    "pass": 1
   },
   {
+   "row": "C929",
+   "screen": "dean_first.rules",
+   "verdict": "PASS",
+   "line": "\"I understand.\"",
+   "why": "No time on the label.",
+   "cause": null,
+   "note": true,
+   "screen_hash": {
+    "text": "ff03086d8c90677e",
+    "traits": "c6984adcd9df71b0",
+    "facts": "f58b8ccc0a2c8149",
+    "facts2": "d235039c9ad8c93a",
+    "all": "2043776368f5a26a"
+   },
+   "row_hash": "18b0ecdf6d7fc901",
+   "carried": false,
+   "pass": 9
+  },
+  {
    "row": "C930",
    "screen": "*",
    "verdict": "N/A",
@@ -2041,6 +2345,25 @@
    "row_hash": "beb57cd46fe906bf",
    "carried": true,
    "pass": 1
+  },
+  {
+   "row": "C930",
+   "screen": "dean_first.rules",
+   "verdict": "N/A",
+   "line": "",
+   "why": "No windowed work.",
+   "cause": null,
+   "note": true,
+   "screen_hash": {
+    "text": "ff03086d8c90677e",
+    "traits": "c6984adcd9df71b0",
+    "facts": "f58b8ccc0a2c8149",
+    "facts2": "d235039c9ad8c93a",
+    "all": "2043776368f5a26a"
+   },
+   "row_hash": "beb57cd46fe906bf",
+   "carried": false,
+   "pass": 9
   },
   {
    "row": "C931",
@@ -2060,19 +2383,19 @@
    "screen": "dean_first.rules",
    "verdict": "N/A",
    "line": "",
-   "why": "no time_of_day on this screen",
+   "why": "No time_of_day on this screen.",
    "cause": null,
    "note": true,
    "screen_hash": {
     "text": "ff03086d8c90677e",
     "traits": "c6984adcd9df71b0",
-    "facts": "fd73b5b45d3f0c23",
-    "facts2": "0973ec47ecea80cf",
-    "all": "e66489400c2513f5"
+    "facts": "f58b8ccc0a2c8149",
+    "facts2": "d235039c9ad8c93a",
+    "all": "2043776368f5a26a"
    },
    "row_hash": "1aadffd96e76381c",
-   "carried": true,
-   "pass": 6
+   "carried": false,
+   "pass": 9
   },
   {
    "row": "C931",
@@ -2098,19 +2421,19 @@
    "screen": "dean_first.timetable",
    "verdict": "N/A",
    "line": "",
-   "why": "no time_of_day on this screen",
+   "why": "No time_of_day condition on this screen; the popup's badges read the clock in JS, end exclusive ('nowMin < b').",
    "cause": null,
    "note": true,
    "screen_hash": {
-    "text": "75793a712d159a51",
-    "traits": "bd8b6c990fa6bbac",
-    "facts": "aff9c7f15c4842bf",
-    "facts2": "e8db2110417d4db6",
-    "all": "9469233f6210afe6"
+    "text": "2773635a375e3846",
+    "traits": "c6984adcd9df71b0",
+    "facts": "a1c11f63974fa8c7",
+    "facts2": "838471633de66118",
+    "all": "c649cb04651c5821"
    },
    "row_hash": "1aadffd96e76381c",
-   "carried": true,
-   "pass": 6
+   "carried": false,
+   "pass": 9
   },
   {
    "row": "C953",
@@ -2130,38 +2453,38 @@
    "screen": "dean_first.door",
    "verdict": "PASS",
    "line": "him behind it, writing",
-   "why": "trigger needs npc_dean present in campus_office_dean",
+   "why": "Trigger needs npc_dean present in campus_office_dean.",
    "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "21cbca984f087966",
+    "text": "3aedd6e655f7639e",
     "traits": "c6984adcd9df71b0",
     "facts": "632e8e7c3012fe0b",
     "facts2": "d324d118e7c22152",
-    "all": "8040626dd6722770"
+    "all": "a46354d832fdb9c8"
    },
    "row_hash": "13a714429d15f3b2",
-   "carried": true,
-   "pass": 6
+   "carried": false,
+   "pass": 9
   },
   {
    "row": "L106",
    "screen": "dean_first.rules",
    "verdict": "PASS",
    "line": "I'm Dean Sterling.",
-   "why": "latest 16:49, his row",
+   "why": "Latest 16:49, inside his 08-17 row.",
    "cause": null,
    "note": false,
    "screen_hash": {
     "text": "ff03086d8c90677e",
     "traits": "c6984adcd9df71b0",
-    "facts": "fd73b5b45d3f0c23",
-    "facts2": "0973ec47ecea80cf",
-    "all": "e66489400c2513f5"
+    "facts": "f58b8ccc0a2c8149",
+    "facts2": "d235039c9ad8c93a",
+    "all": "2043776368f5a26a"
    },
    "row_hash": "13a714429d15f3b2",
-   "carried": true,
-   "pass": 6
+   "carried": false,
+   "pass": 9
   },
   {
    "row": "L106",
@@ -2186,20 +2509,20 @@
    "row": "L106",
    "screen": "dean_first.timetable",
    "verdict": "PASS",
-   "line": "He slides a printed sheet",
-   "why": "latest 16:54, his row",
+   "line": "He slides a printed sheet across the desk",
+   "why": "Latest 16:54, inside his row.",
    "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "75793a712d159a51",
-    "traits": "bd8b6c990fa6bbac",
-    "facts": "aff9c7f15c4842bf",
-    "facts2": "e8db2110417d4db6",
-    "all": "9469233f6210afe6"
+    "text": "2773635a375e3846",
+    "traits": "c6984adcd9df71b0",
+    "facts": "a1c11f63974fa8c7",
+    "facts2": "838471633de66118",
+    "all": "c649cb04651c5821"
    },
    "row_hash": "13a714429d15f3b2",
-   "carried": true,
-   "pass": 6
+   "carried": false,
+   "pass": 9
   },
   {
    "row": "L119",
@@ -2271,19 +2594,19 @@
    "screen": "dean_first.rules",
    "verdict": "N/A",
    "line": "",
-   "why": "no row with day-varying hours",
+   "why": "No row with day-varying hours.",
    "cause": null,
    "note": false,
    "screen_hash": {
     "text": "ff03086d8c90677e",
     "traits": "c6984adcd9df71b0",
-    "facts": "fd73b5b45d3f0c23",
-    "facts2": "0973ec47ecea80cf",
-    "all": "e66489400c2513f5"
+    "facts": "f58b8ccc0a2c8149",
+    "facts2": "d235039c9ad8c93a",
+    "all": "2043776368f5a26a"
    },
    "row_hash": "e64ce2672d85d2d8",
-   "carried": true,
-   "pass": 6
+   "carried": false,
+   "pass": 9
   },
   {
    "row": "L167",
@@ -2309,19 +2632,19 @@
    "screen": "dean_first.timetable",
    "verdict": "N/A",
    "line": "",
-   "why": "no row with day-varying hours",
+   "why": "No activity row; the popup shows class hours, not a gated row.",
    "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "75793a712d159a51",
-    "traits": "bd8b6c990fa6bbac",
-    "facts": "aff9c7f15c4842bf",
-    "facts2": "e8db2110417d4db6",
-    "all": "9469233f6210afe6"
+    "text": "2773635a375e3846",
+    "traits": "c6984adcd9df71b0",
+    "facts": "a1c11f63974fa8c7",
+    "facts2": "838471633de66118",
+    "all": "c649cb04651c5821"
    },
    "row_hash": "e64ce2672d85d2d8",
-   "carried": true,
-   "pass": 6
+   "carried": false,
+   "pass": 9
   },
   {
    "row": "L168",
@@ -2378,8 +2701,8 @@
  ],
  "causes": [],
  "pending": [],
- "asked": 1,
- "answered": 1,
+ "asked": 40,
+ "answered": 40,
  "pass_items": [],
  "unowed": []
 }

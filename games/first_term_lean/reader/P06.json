@@ -1,26 +1,29 @@
 {
  "piece": "P06",
- "pass": 7,
+ "pass": 8,
  "screens": {
   "loop_sleep.do": {
    "text": "3c1f6073c033b3c9",
+   "traits": "44136fa355b3678a",
    "facts": "360f3049c5f88f27",
    "facts2": "360f3049c5f88f27",
    "all": "72c631ead2fbd500"
   },
   "loop_eat.do": {
    "text": "636d07a3956c340a",
+   "traits": "ff8b9fa74641271c",
    "facts": "7e74f00e4f7f7169",
    "facts2": "382d88df7f2e79a9",
    "all": "4901fcc5436c3e2b"
   },
   "loop_shower.do": {
    "text": "839f0962e74c85d1",
+   "traits": "44136fa355b3678a",
    "facts": "875ee150348bbbd9",
    "facts2": "875ee150348bbbd9",
    "all": "34137dc5a717631d"
   },
-  "*": "0d8207e80434a90c"
+  "*": "61d7a895737acd44"
  },
  "rows": {
   "B1": "5276068df1ca6fa9",
@@ -251,6 +254,7 @@
   "C1441": "d0678c728ad9faf0",
   "C1369": "35d5552632b315d7",
   "C1403": "4772eb5bc3a0625c",
+  "C2199": "6626e5d54fe97b40",
   "systems#1": "11a025871bd91561",
   "systems#2": "08602a299af77b30",
   "systems#3": "2d317a22b4b850f2",
@@ -1846,6 +1850,19 @@
    "row_hash": "a84bb283bdac8073",
    "carried": true,
    "pass": 4
+  },
+  {
+   "row": "C2199",
+   "screen": "*",
+   "verdict": "N/A",
+   "line": "",
+   "why": "Sleep, eat and wash give her no page and show no timetable.",
+   "cause": null,
+   "note": false,
+   "screen_hash": "61d7a895737acd44",
+   "row_hash": "6626e5d54fe97b40",
+   "carried": false,
+   "pass": 8
   },
   {
    "row": "C239",
@@ -4383,7 +4400,7 @@
    "note": false,
    "screen_hash": "0d8207e80434a90c",
    "row_hash": "b66fb813d57540d1",
-   "carried": false,
+   "carried": true,
    "pass": 7
   },
   {

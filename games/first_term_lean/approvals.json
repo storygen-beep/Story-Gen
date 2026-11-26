@@ -2790,6 +2790,30 @@
       "sha256": "272d8042c064c5bc919576a5865f9a3e1fa708ae9cdb8a528272935f7aa1f2e3",
       "words": "ENI for LO (delegated 2026-11-24): yes to the reader fixes (Sam hook ahead of her / Kayla without Chris's name for her). LO, typed in main-lean 2026-11-26: \"Take all these 3 talks to to only one.\"",
       "date": "2026-11-26"
+    },
+    {
+      "card": "P61",
+      "sha256": "925be253a048e077509d5e55e90167ea476dfe933f45b14b76d96495e4d990b9",
+      "words": "ENI for LO (delegated 2026-11-24): yes, the timetable opens in the dean's office and the sidebar button waits on met_dean (set on \"Fold it into your bag.\"). LO, typed in main-lean 2026-11-26: \"Should first open in the deans office\", \"Go ahead\"",
+      "date": "2026-11-26"
+    },
+    {
+      "card": "P47",
+      "sha256": "fc71a1d5d73f0707ff4ffe9609991e35e94d1fcec37b3daab1d4b5fc3eb8c700",
+      "words": "ENI for LO (delegated 2026-11-24): yes, the timetable opens in the dean's office and the sidebar button waits on met_dean (set on \"Fold it into your bag.\"). LO, typed in main-lean 2026-11-26: \"Should first open in the deans office\", \"Go ahead\"",
+      "date": "2026-11-26"
+    },
+    {
+      "card": "P52",
+      "sha256": "41f32d948a89f7a33f0fd1a26daea45c3e13485755b7a119d9a02d1ad93e799c",
+      "words": "ENI for LO (delegated 2026-11-24): yes, the timetable opens in the dean's office and the sidebar button waits on met_dean (set on \"Fold it into your bag.\"). LO, typed in main-lean 2026-11-26: \"Should first open in the deans office\", \"Go ahead\"",
+      "date": "2026-11-26"
+    },
+    {
+      "card": "P47",
+      "sha256": "afdf49cbb4c39461ac7a1ab4ecd55fa7f0ca8bf0b22a4eb6ea0a386879cdbe1c",
+      "words": "ENI for LO (delegated 2026-11-24): yes to the sheet and Does lines synced to met_dean on \"Fold it into your bag.\" (P61). LO, typed in main-lean 2026-11-26: \"Should first open in the deans office\", \"Go ahead\"",
+      "date": "2026-11-26"
     }
   ]
 }

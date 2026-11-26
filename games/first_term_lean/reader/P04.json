@@ -1,44 +1,50 @@
 {
  "piece": "P04",
- "pass": 11,
+ "pass": 12,
  "screens": {
   "travel_bus_to_campus.ride": {
    "text": "b315e370a219f4ed",
+   "traits": "44136fa355b3678a",
    "facts": "4bec7b370aee14bb",
    "facts2": "4bec7b370aee14bb",
    "all": "eab098c8e0d9d96b"
   },
   "travel_bus_to_campus.packed_no": {
    "text": "70e6483c3726a20d",
+   "traits": "44136fa355b3678a",
    "facts": "bda6226f38a41bb5",
    "facts2": "bda6226f38a41bb5",
    "all": "acf1689d5eba569f"
   },
   "travel_bus_to_campus.packed_quiet": {
    "text": "368129a2ff624692",
+   "traits": "44136fa355b3678a",
    "facts": "bda6226f38a41bb5",
    "facts2": "bda6226f38a41bb5",
    "all": "2069d678c15dab1b"
   },
   "travel_walk_to_campus.ride": {
    "text": "9db6c85f17af2668",
+   "traits": "44136fa355b3678a",
    "facts": "4bec7b370aee14bb",
    "facts2": "4bec7b370aee14bb",
    "all": "8b038b9e8128c7fc"
   },
   "travel_bus_home.ride": {
    "text": "df2d19d305bf312b",
+   "traits": "44136fa355b3678a",
    "facts": "3cf0347032935327",
    "facts2": "3cf0347032935327",
    "all": "529cc24d20f907de"
   },
   "travel_walk_home.ride": {
    "text": "93689c53074f6b53",
+   "traits": "44136fa355b3678a",
    "facts": "3cf0347032935327",
    "facts2": "3cf0347032935327",
    "all": "0f763af84b7c6a4c"
   },
-  "*": "0c7e096aab3e7c8f"
+  "*": "ad0693286fb79f95"
  },
  "rows": {
   "B1": "5276068df1ca6fa9",
@@ -223,6 +229,7 @@
   "C1441": "d0678c728ad9faf0",
   "C1369": "35d5552632b315d7",
   "C1403": "4772eb5bc3a0625c",
+  "C2199": "6626e5d54fe97b40",
   "systems#1": "11a025871bd91561",
   "systems#2": "08602a299af77b30",
   "systems#3": "2d317a22b4b850f2",
@@ -1289,6 +1296,19 @@
    "row_hash": "bb31891410f03faf",
    "carried": true,
    "pass": 3
+  },
+  {
+   "row": "C2199",
+   "screen": "*",
+   "verdict": "N/A",
+   "line": "",
+   "why": "No campus place, bus or walk gives her a page or shows the timetable; the lecture hall's 'Most of your classes are here.' names no times and points at no sidebar page.",
+   "cause": null,
+   "note": false,
+   "screen_hash": "ad0693286fb79f95",
+   "row_hash": "6626e5d54fe97b40",
+   "carried": false,
+   "pass": 12
   },
   {
    "row": "C239",
@@ -3349,7 +3369,7 @@
    "note": false,
    "screen_hash": "0c7e096aab3e7c8f",
    "row_hash": "e641a233b7b0e8b0",
-   "carried": false,
+   "carried": true,
    "pass": 11
   },
   {
@@ -3773,7 +3793,7 @@
    "note": false,
    "screen_hash": "0c7e096aab3e7c8f",
    "row_hash": "8f11debafcf05142",
-   "carried": false,
+   "carried": true,
    "pass": 11
   },
   {
@@ -4259,7 +4279,7 @@
    "note": false,
    "screen_hash": "0c7e096aab3e7c8f",
    "row_hash": "309f0141d342dc6f",
-   "carried": false,
+   "carried": true,
    "pass": 11
   },
   {
@@ -4751,8 +4771,8 @@
  ],
  "causes": [],
  "pending": [],
- "asked": 3,
- "answered": 3,
+ "asked": 1,
+ "answered": 1,
  "pass_items": [],
  "unowed": []
 }

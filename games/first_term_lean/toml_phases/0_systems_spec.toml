@@ -586,6 +586,9 @@ people_page = "cot"
 # P52 — LO 2026-11-26: "Timetable as the popup modal like in the old first term". From the start: the engine has no
 # `when` on the button. No lecturer on a row: it would name a teacher before she meets them.
 timetable_button = true
+# P61 — the button waits until the Dean has given her the sheet (C2199; LO 2026-11-26: "Timetable is only in the
+# sidebar / Should first open in the deans office", "Go ahead").
+timetable_button_when = "met_dean"
 
 # P52 — her four classes (the teachers' rows; the dean's sheet, P47). late_until: each class lets her in only in its
 # first 30 minutes (psych_first, class_psych and the rest), so the popup says "Doors shut" after.

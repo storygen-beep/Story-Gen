@@ -96,7 +96,7 @@ def guaranteed(conditions, kind="npc_at_location", key="npc_id", operator="is_pr
 
 def retired(c):
     """A canvas switched off on purpose (`is_active = false` on its trigger or itself): the engine never offers it
-    (v2.py:3753, 4309), and it stays in the TOML only so an old save still points at something
+    (v2.py:3762, 4309), and it stays in the TOML only so an old save still points at something
     (`craft/returning-player.md`). reach, the sheet, the Does: guard and the reader's work list skip it; the saves
     check still sees it, since it is kept for saves."""
     if not isinstance(c, dict):
@@ -330,7 +330,7 @@ def check_creation(game):
     rows = []
     for f in fields:
         fid = f.get("id")
-        # @player alone prints the name; @player.<id> prints a field (`_resolve_at_references`, v2.py:18619-18664)
+        # @player alone prints the name; @player.<id> prints a field (`_resolve_at_references`, v2.py:18628-18673)
         pat = r"@player(?!\w|\.\w)|@player\.name\b" if fid == "name" else rf"@player\.{re.escape(str(fid))}\b"
         if fid and not re.search(pat, shown):
             rows.append(f"creation field `{fid}` (\"{f.get('label', '')}\") is asked and never printed back (C48)")

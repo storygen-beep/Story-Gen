@@ -644,6 +644,9 @@ class GameTemplate:
     timetable: Any = field(default_factory=list)
     # [ui] timetable_button — the Timetable button in the sidebar (needs a timetable).
     timetable_button: bool = False
+    # [ui] timetable_button_when — a player flag: the sidebar button shows only once it
+    # is set (she has been given the timetable). Empty = always shown, as before.
+    timetable_button_when: str = ""
     # Doc 69 Item 3 — parse-time errors collected during normalize() for the
     # field-name mismatch validator. validate() prepends these to its own
     # error list. Populated only by normalize(); never mutated downstream.
@@ -3845,6 +3848,7 @@ def normalize(data: Dict[str, Any]) -> GameTemplate:
     clothes_door_raw: Any = ""
     timetable_raw: Any = []
     timetable_button = False
+    timetable_button_when_raw: Any = ""
     if isinstance(ui_raw, dict):
         sidebar_hide_raw = ui_raw.get("sidebar_hide") or []
         phone_clock = ui_raw.get("phone_clock") is True
@@ -3855,6 +3859,7 @@ def normalize(data: Dict[str, Any]) -> GameTemplate:
         clothes_door_raw = ui_raw.get("clothes_door", "")
         timetable_raw = ui_raw.get("timetable") or []
         timetable_button = ui_raw.get("timetable_button") is True
+        timetable_button_when_raw = ui_raw.get("timetable_button_when", "")
 
     # Player cheat page. Authored under [ui.cheat_page] + [[ui.cheat_page.grants]].
     # NOTE the deliberate divergence from tips_page above: an authored-but-empty
@@ -4059,6 +4064,7 @@ def normalize(data: Dict[str, Any]) -> GameTemplate:
         clothes_door=clothes_door_raw,
         timetable=timetable_raw,
         timetable_button=timetable_button,
+        timetable_button_when=timetable_button_when_raw,
         # This kwarg is the silent-no-op step: parse the block, forget the kwarg,
         # and the feature vanishes with no error anywhere. Covered by a test.
         cheat_page=cheat_page_obj,
@@ -4157,6 +4163,9 @@ def _extract_flags_set_by_canvas(canvas: TemplateCanvas) -> Set[str]:
 RECOGNIZED_CONTENT_BLOCK_TYPES = frozenset({
     "heading", "paragraph", "dialog", "thought_bubble",
     "image", "video", "cascade", "group", "block_pool", "clip",
+    # [[ui.timetable]] — a link that opens the Timetable dialog (props.label, props.open);
+    # needs a timetable (checked in _validate_timetable).
+    "timetable",
 })
 
 # Common authoring near-misses → the canonical type, for a "did you mean" hint.
@@ -7706,6 +7715,24 @@ def _validate_people_page(template) -> list[str]:
 TIMETABLE_KEYS = ("class", "place", "lecturer", "weekdays", "from", "to", "late_until")
 
 
+def _timetable_blocks(template) -> List[str]:
+    """Where each `type = "timetable"` content block sits, as "canvas <id> node <id>"."""
+    out: List[str] = []
+
+    def walk(blocks, where):
+        for b in blocks or []:
+            if isinstance(b, dict):
+                if str(b.get("type", "")).strip() == "timetable":
+                    out.append(where)
+                walk(b.get("blocks"), where)
+    for c in getattr(template, "canvases", None) or []:
+        for n in getattr(c, "nodes", None) or []:
+            blocks = n.get("blocks") if isinstance(n, dict) else getattr(n, "blocks", None)
+            nid = n.get("id") if isinstance(n, dict) else getattr(n, "id", "")
+            walk(blocks, f"canvas {getattr(c, 'id', '')} node {nid}")
+    return out
+
+
 def _validate_timetable(template) -> List[str]:
     """`[[ui.timetable]]` rows and `[ui] timetable_button`. Errors: a row the screen
     could not draw would vanish from the table without a word, and a button with no
@@ -7716,6 +7743,17 @@ def _validate_timetable(template) -> List[str]:
         return [f"[[ui.timetable]] must be a list of rows, got {type(raw).__name__}"]
     if template.timetable_button and not raw:
         errs.append("[ui] timetable_button = true needs at least one [[ui.timetable]] row")
+    import re
+
+    when = template.timetable_button_when
+    if when not in ("", None):
+        if not isinstance(when, str) or not re.fullmatch(r"[A-Za-z_][A-Za-z0-9_]*", when):
+            errs.append(f"[ui] timetable_button_when must be a flag name, got {when!r}")
+        elif not template.timetable_button:
+            errs.append("[ui] timetable_button_when needs [ui] timetable_button = true")
+    if not raw:
+        for where in _timetable_blocks(template):
+            errs.append(f"{where}: a timetable block needs at least one [[ui.timetable]] row")
     loc_ids = {l.id for l in template.locations or []}
     npc_ids = {n.id for n in template.npcs or []}
     hhmm = r"([01]\d|2[0-3]):[0-5]\d"
@@ -9471,6 +9509,8 @@ def _assemble_project_metadata(project, template):
         ]
     if template.timetable_button:
         project.metadata["timetable_button"] = True
+        if template.timetable_button_when:
+            project.metadata["timetable_button_when"] = template.timetable_button_when
     # Player cheat page. The FULL row data goes here — hints, values, caps and all.
     # Metadata never reaches the output file as a config object; each row is baked
     # into passage markup inside a check on its own unlock flag.

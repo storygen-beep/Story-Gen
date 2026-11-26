@@ -2,7 +2,7 @@
 
 author-game-lean copy. Copied from author-game-v2/scripts/reach.py (frozen at ea8f6465) on 2026-11-19, with one
 fix (LO, 2026-11-19): a live screen's exit_block.config effects (flagEffects, effects, wardrobeEffects) now count,
-whatever the exit type, as the engine applies them (v2.py:17951-17971, v2.py:18054). v2 walked only
+whatever the exit type, as the engine applies them (v2.py:17960-17980, v2.py:18063). v2 walked only
 exit_block.choices, so a flag set on a one-way "location" exit read as "nothing sets it" (the exam fixture
 billable_hours showed 49 false reds from `opening_boot`). v2's frozen copy still has this bug; first_term has no
 such exits, so its result stands.
@@ -108,7 +108,7 @@ class _World:
                     continue
                 _walk(n.get("blocks"), eff)
                 # The engine applies a screen's exit_block.config effects whatever the exit type: flagEffects and
-                # effects (v2.py:17951-17971, _get_flag_effects_for_node), wardrobeEffects (v2.py:18054).
+                # effects (v2.py:17960-17980, _get_flag_effects_for_node), wardrobeEffects (v2.py:18063).
                 _walk((n.get("exit_block") or {}).get("config"), eff)
                 for i, ch in enumerate((n.get("exit_block") or {}).get("choices") or []):
                     if live_place(cid, n.get("id"), i):
@@ -154,7 +154,7 @@ class _World:
             return None, None
         t, op = it.get("type"), it.get("operator") or it.get("op")
         if t == "group":
-            # a nested group (v2.py:5405-5413): its items under its own logic; empty or deeper than 3 never holds
+            # a nested group (v2.py:5414-5422): its items under its own logic; empty or deeper than 3 never holds
             items = [i for i in it.get("items") or [] if isinstance(i, dict)]
             if depth + 1 > 3 or not items:
                 return False, "an empty group, or one nested deeper than 3"

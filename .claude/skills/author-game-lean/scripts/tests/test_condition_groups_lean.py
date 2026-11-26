@@ -1,4 +1,4 @@
-"""Nested condition groups (`{ type = "group", logic, items }`, v2.py:5405-5413) read by the lean scripts the way the
+"""Nested condition groups (`{ type = "group", logic, items }`, v2.py:5414-5422) read by the lean scripts the way the
 engine reads them: who_is_where, presence, the sheet, the guard and reach. Each has a planted break."""
 import sys
 from pathlib import Path
