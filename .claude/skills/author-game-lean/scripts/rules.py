@@ -140,7 +140,7 @@ def seen(game):
         cid, trig = c.get("id"), c.get("trigger") or {}
         nodes, nxt, _ = scenes.graph(c)
         # The starting canvas plays once, at the start; any other canvas is repeatable unless it says
-        # is_repeatable = false (v2.py:15076).
+        # is_repeatable = false (v2.py:15085).
         rep = cid != start and str(trig.get("is_repeatable", "true")).lower() != "false"
         for node in c.get("nodes") or []:
             nid = node.get("id")
@@ -226,7 +226,7 @@ def guard(does, game):
         rows += [f"{screen} does `{t}` in the build, and its Does: line doesn't name it" for t in sorted(got)
                  if t not in trig]
     # A step she can say no to, on a one-time canvas at a place, fires by itself on entry and doesn't check the
-    # person is there (v2.py:5905-5925, 6083-6086): it must gate on presence or hours in its own conditions.
+    # person is there (v2.py:5914-5934, 6083-6086): it must gate on presence or hours in its own conditions.
     by_id = {c.get("id"): c for c in game.get("canvases") or []}
     start = (game.get("project") or {}).get("starting_canvas")
     for screen, trig in sorted(does.items()):

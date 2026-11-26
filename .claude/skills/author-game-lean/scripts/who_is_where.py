@@ -6,12 +6,12 @@ author-game-lean copy (LO, 2026-11-20). Copied from author-game-v2/scripts/who_i
 with the only parts of v2's gates.py it needs inlined (`_TR_*`, `_tr_min`, `_tr_in_window`, `_tr_days`,
 `_tr_rows_slots`, `_tr_met_only`, `_tr_where`, gates.py:13786-13870), so nothing here imports v2. Two changes:
 it takes the game folder (like every lean script) instead of a slug, and the engine cites below are re-read
-on 2026-11-20 (v2's said v2.py:4289-4318, which has drifted).
+on 2026-11-20 (v2's said v2.py:4298-4327, which has drifted).
 
-How the engine decides (`setup.getNpcLocation`, v2.py:4398-4425): walk the person's rows in order; skip a row
-whose weekdays miss today, whose window misses now (`setup.isCurrentTimeSlot`, v2.py:4770-4790: end exclusive,
+How the engine decides (`setup.getNpcLocation`, v2.py:4407-4434): walk the person's rows in order; skip a row
+whose weekdays miss today, whose window misses now (`setup.isCurrentTimeSlot`, v2.py:4779-4799: end exclusive,
 no end = start + 60 minutes, a window ending before it starts wraps past midnight), or whose `when` fails
-(`setup._scheduleRowLive`, v2.py:4387). The first row left wins; none left means nowhere.
+(`setup._scheduleRowLive`, v2.py:4396). The first row left wins; none left means nowhere.
 
 Here a row with a `when` may be live or not, so it adds its place AND lets the walk go on; a `when` that only
 waits for `<x>_met` counts as an ordinary row. Each cell is every place the person CAN be in that hour,
@@ -37,7 +37,7 @@ def minutes(s):
 
 
 def in_window(m, start, end):
-    """`setup.isCurrentTimeSlot` (v2.py:4770-4790)."""
+    """`setup.isCurrentTimeSlot` (v2.py:4779-4799)."""
     s, e = minutes(start), minutes(end) if end else None
     if s is None:
         return False
@@ -45,14 +45,14 @@ def in_window(m, start, end):
     return (m >= s or m < e) if e < s else (s <= m < e)
 
 
-GROUP_DEPTH = 3  # v2.py:5407-5413: a group deeper than 3, or empty, is false
+GROUP_DEPTH = 3  # v2.py:5416-5422: a group deeper than 3, or empty, is false
 
 
 def item_slots(item, depth=0):
     """The (day, minute) slots one condition item allows by the clock. A time_of_day item is its window
-    (`in_window`); a weekday item is its days, 0 = Monday, and an empty list never holds (v2.py:5203-5207);
+    (`in_window`); a weekday item is its days, 0 = Monday, and an empty list never holds (v2.py:5212-5216);
     a `group` item combines its own items by its own logic, recursively, and an empty group or one deeper than 3
-    never holds, as in the engine (v2.py:5405-5413); any other item can hold at any time."""
+    never holds, as in the engine (v2.py:5414-5422); any other item can hold at any time."""
     if not isinstance(item, dict):
         return set(SLOTS)
     if item.get("type") == "group":
@@ -78,7 +78,7 @@ def item_slots(item, depth=0):
 
 def when_slots(conditions):
     """The slots a condition block lets a scene show at, by the clock alone (`setup.triggerConditionsSatisfied`,
-    v2.py:5028-5035). AND intersects its items; OR is the union of its items, and since a non-clock item counts as
+    v2.py:5037-5044). AND intersects its items; OR is the union of its items, and since a non-clock item counts as
     every slot, an OR that holds any non-clock item stays every slot. So an OR never narrows below what the engine
     allows: it can only say "can show" too often, which presence and the sheet read as "could be there", never as
     a red. A block without version "1.0" or items is always satisfied in the engine, so every slot."""

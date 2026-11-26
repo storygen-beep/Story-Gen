@@ -6,13 +6,13 @@
 
     [canvases.trigger] location = "<place>", trigger_mode = "random", chance = <0..1>, requires_npc = "<npc id>"
 
-A canvas with `trigger_mode = "random"` is never a button: every button path skips it (v2.py:4616, 4736, 6603,
-6726, 5946-6009), and on arrival `setup.getStoryCanvasRedirect` (v2.py:6555) runs `setup.checkRandomEncounters`
-(v2.py:6823-6943), which rolls each one's chance and sends her into the first hit. A story moment (a non-repeatable
-canvas that is not random) wins over it (v2.py:5938-5959, 6560-6566). The engine's own brakes are per place (the
-place rests `random_cooldown` arrivals, 3 by default, v2.py:6936-6938) and per canvas name
-(`max_triggers_per_day`, v2.py:6870-6879); the game-wide one-a-day brake is authored: one flag that every such
-canvas waits on and sets, cleared in `[engine.daily_tick]` (v2.py:7209-7227; author-game-v2 engine.md §7, §28).
+A canvas with `trigger_mode = "random"` is never a button: every button path skips it (v2.py:4625, 4736, 6603,
+6726, 5946-6009), and on arrival `setup.getStoryCanvasRedirect` (v2.py:6564) runs `setup.checkRandomEncounters`
+(v2.py:6832-6952), which rolls each one's chance and sends her into the first hit. A story moment (a non-repeatable
+canvas that is not random) wins over it (v2.py:5947-5968, 6560-6566). The engine's own brakes are per place (the
+place rests `random_cooldown` arrivals, 3 by default, v2.py:6945-6947) and per canvas name
+(`max_triggers_per_day`, v2.py:6879-6888); the game-wide one-a-day brake is authored: one flag that every such
+canvas waits on and sets, cleared in `[engine.daily_tick]` (v2.py:7218-7236; author-game-v2 engine.md §7, §28).
 
 Red on (LO, typed in main-lean 2026-11-26: "Yes", "One is fine for now"):
   1. a "comes to her" canvas that names no person where their rows are (C2186). Either form passes:
@@ -20,7 +20,7 @@ Red on (LO, typed in main-lean 2026-11-26: "Yes", "One is fine for now"):
      - (P49, LO, typed in main-lean 2026-11-26: "Go with your picks") the person coming to her from next door: an
        `npc_at_location` `is_present` condition on an adjoining place (one sharing the scene's `parent`, or the
        scene's parent itself, the hub) with a schedule row for them there, and no `requires_npc`, which would
-       ask for them at her place (v2.py:6905-6918). The condition is read by v2.py:5419-5435.
+       ask for them at her place (v2.py:6914-6927). The condition is read by v2.py:5428-5444.
   2. one without the brake: no `is_false` condition on a flag that `[engine.daily_tick]` unsets, a choice on its
      first screen that doesn't set that flag, or two such canvases on different flags (C2187);
   3. one whose first screen has fewer than two choices: there is always a written way out (C2188);
@@ -36,7 +36,7 @@ Red on (LO, typed in main-lean 2026-11-26: "Yes", "One is fine for now"):
   8. kind (b) inside an act: a substitution target that waits on the shared brake. It keeps rules 1 to 3: the
      person (`requires_npc`, or `npc_at_location` in the rule's or its own conditions), every first-screen choice
      setting the brake, two choices; and it is `substitution_only` with the act's `trigger.location`, or the
-     engine can't find it (v2.py:4151-4165) or offers it as a button (C2196).
+     engine can't find it (v2.py:4160-4174) or offers it as a button (C2196).
 """
 
 import scenes
@@ -249,7 +249,7 @@ def problems(game, does_by_card=None):
                         f"(C2196)")
         if tt.get("location") != at:
             rows.append(f"{tid}: its trigger.location is `{tt.get('location')}`, not `{at}` where "
-                        f"`{act.get('id')}` is; the engine finds a target only under a place (v2.py:4151-4165, C2196)")
+                        f"`{act.get('id')}` is; the engine finds a target only under a place (v2.py:4160-4174, C2196)")
         choices = first_choices(target)
         if len(choices) < 2:
             rows.append(f"{tid}: its first screen has {len(choices)} choice(s); she always has a written way out "
