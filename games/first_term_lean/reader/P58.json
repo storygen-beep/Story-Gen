@@ -1,20 +1,20 @@
 {
  "piece": "P58",
- "pass": 7,
+ "pass": 8,
  "screens": {
   "talk_vance.hub": {
-   "text": "ec77a1eb6c65e629",
+   "text": "0d740dd50c9788fe",
    "traits": "d9172dabbd56b049",
-   "facts": "7944a2e7778ef275",
-   "facts2": "b0dcf859da62f785",
-   "all": "58a8f13a96db6a49"
+   "facts": "42672b531151f541",
+   "facts2": "a78f8cbce78be9ac",
+   "all": "02c3cf9b746560e7"
   },
   "talk_vance.talk": {
-   "text": "dcc73aca9b8999e0",
+   "text": "3caed77741619920",
    "traits": "40c19ab6c95d7a0e",
-   "facts": "67a9c54720c5688f",
-   "facts2": "bf5dbaf7173a4a37",
-   "all": "b5d6f19c098e2c33"
+   "facts": "a1b0a3eedcbe2ab5",
+   "facts2": "a9800a3e4cb0e8b9",
+   "all": "442a9ac05e8ae507"
   },
   "talk_frank.hub": {
    "text": "95eb713783ea2a92",
@@ -72,7 +72,7 @@
    "facts2": "e6d5feaeacfe9d77",
    "all": "28072aa936caeb7b"
   },
-  "*": "728b328b7c3109b5"
+  "*": "7e688f5974da5295"
  },
  "rows": {
   "B1": "5276068df1ca6fa9",
@@ -365,39 +365,39 @@
    "row": "B10",
    "screen": "talk_vance.hub",
    "verdict": "PASS",
-   "line": "",
-   "why": "true on first and last minute and second visit",
+   "line": "Mr. Vance is in his chair on the porch, watching the street. He watches you come up the path.",
+   "why": "his face shows at hood_next_door only while he's there (requires_npc); opening his menu from the house is her coming up the path, on a first and a later visit; Leave returns to his house",
    "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "ec77a1eb6c65e629",
+    "text": "0d740dd50c9788fe",
     "traits": "d9172dabbd56b049",
-    "facts": "7944a2e7778ef275",
-    "facts2": "b0dcf859da62f785",
-    "all": "58a8f13a96db6a49"
+    "facts": "42672b531151f541",
+    "facts2": "a78f8cbce78be9ac",
+    "all": "02c3cf9b746560e7"
    },
    "row_hash": "c1c0e2ac2588a579",
-   "carried": true,
-   "pass": 1
+   "carried": false,
+   "pass": 8
   },
   {
    "row": "B10",
    "screen": "talk_vance.talk",
    "verdict": "PASS",
-   "line": "Tell Mark the rent's due Sunday, same as always. He forgets.",
-   "why": "first minute (right after the meeting where possible), last minute and second-to-fifth visit: the family rents from Vance and Mark collects on Sunday mornings (PLAN, story hint); 'from your feet up' names no garment",
+   "line": "Little lady. Come up a step. I don't bite. ... That house of mine looks better with you in it. Tell Mark the rent's due Sunday, same as always.",
+   "why": "first and last minute and repeat: rent Sunday agrees with PLAN; Done returns to his house",
    "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "dcc73aca9b8999e0",
+    "text": "3caed77741619920",
     "traits": "40c19ab6c95d7a0e",
-    "facts": "67a9c54720c5688f",
-    "facts2": "bf5dbaf7173a4a37",
-    "all": "b5d6f19c098e2c33"
+    "facts": "a1b0a3eedcbe2ab5",
+    "facts2": "a9800a3e4cb0e8b9",
+    "all": "442a9ac05e8ae507"
    },
    "row_hash": "c1c0e2ac2588a579",
-   "carried": true,
-   "pass": 2
+   "carried": false,
+   "pass": 8
   },
   {
    "row": "B11",
@@ -672,39 +672,39 @@
    "row": "B8",
    "screen": "talk_vance.hub",
    "verdict": "PASS",
-   "line": "",
-   "why": "no such line on this screen",
+   "line": "Mr. Vance is in his chair on the porch, watching the street. He watches you come up the path.",
+   "why": "no garment of hers; the picture's shirt is his",
    "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "ec77a1eb6c65e629",
+    "text": "0d740dd50c9788fe",
     "traits": "d9172dabbd56b049",
-    "facts": "7944a2e7778ef275",
-    "facts2": "b0dcf859da62f785",
-    "all": "58a8f13a96db6a49"
+    "facts": "42672b531151f541",
+    "facts2": "a78f8cbce78be9ac",
+    "all": "02c3cf9b746560e7"
    },
    "row_hash": "80d415cf08e0ebfe",
-   "carried": true,
-   "pass": 1
+   "carried": false,
+   "pass": 8
   },
   {
    "row": "B8",
    "screen": "talk_vance.talk",
    "verdict": "PASS",
-   "line": "Tell Mark the rent's due Sunday, same as always. He forgets.",
-   "why": "'from your feet up' names no garment (her shoes slot can be empty); rent Sunday agrees with PLAN",
+   "line": "He looks you over slowly, from your feet up",
+   "why": "no garment named; rent Sunday agrees with PLAN",
    "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "dcc73aca9b8999e0",
+    "text": "3caed77741619920",
     "traits": "40c19ab6c95d7a0e",
-    "facts": "67a9c54720c5688f",
-    "facts2": "bf5dbaf7173a4a37",
-    "all": "b5d6f19c098e2c33"
+    "facts": "a1b0a3eedcbe2ab5",
+    "facts2": "a9800a3e4cb0e8b9",
+    "all": "442a9ac05e8ae507"
    },
    "row_hash": "80d415cf08e0ebfe",
-   "carried": true,
-   "pass": 2
+   "carried": false,
+   "pass": 8
   },
   {
    "row": "B9",
@@ -1101,7 +1101,7 @@
    "note": false,
    "screen_hash": "728b328b7c3109b5",
    "row_hash": "eb11e05cd75e52a9",
-   "carried": false,
+   "carried": true,
    "pass": 7
   },
   {
@@ -1862,39 +1862,39 @@
    "row": "C460",
    "screen": "talk_vance.hub",
    "verdict": "PASS",
-   "line": "",
-   "why": "no such line on this screen",
+   "line": "Mr. Vance is in his chair on the porch, watching the street. He watches you come up the path.",
+   "why": "true at his house while he's in",
    "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "ec77a1eb6c65e629",
+    "text": "0d740dd50c9788fe",
     "traits": "d9172dabbd56b049",
-    "facts": "7944a2e7778ef275",
-    "facts2": "b0dcf859da62f785",
-    "all": "58a8f13a96db6a49"
+    "facts": "42672b531151f541",
+    "facts2": "a78f8cbce78be9ac",
+    "all": "02c3cf9b746560e7"
    },
    "row_hash": "67e48e60d5053a2e",
-   "carried": true,
-   "pass": 1
+   "carried": false,
+   "pass": 8
   },
   {
    "row": "C460",
    "screen": "talk_vance.talk",
    "verdict": "PASS",
-   "line": "Tell Mark the rent's due Sunday, same as always. He forgets.",
-   "why": "the family rents from Vance and Mark collects on Sunday mornings (PLAN, story hint); 'from your feet up' names no garment",
+   "line": "Little lady. Come up a step. I don't bite. ... That house of mine looks better with you in it. Tell Mark the rent's due Sunday, same as always.",
+   "why": "the family rents from him, Mark pays Sundays (PLAN:26-28)",
    "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "dcc73aca9b8999e0",
+    "text": "3caed77741619920",
     "traits": "40c19ab6c95d7a0e",
-    "facts": "67a9c54720c5688f",
-    "facts2": "bf5dbaf7173a4a37",
-    "all": "b5d6f19c098e2c33"
+    "facts": "a1b0a3eedcbe2ab5",
+    "facts2": "a9800a3e4cb0e8b9",
+    "all": "442a9ac05e8ae507"
    },
    "row_hash": "67e48e60d5053a2e",
-   "carried": true,
-   "pass": 2
+   "carried": false,
+   "pass": 8
   },
   {
    "row": "C461",
@@ -1987,22 +1987,41 @@
   },
   {
    "row": "C461",
-   "screen": "talk_vance.talk",
+   "screen": "talk_vance.hub",
    "verdict": "PASS",
-   "line": "Tell Mark the rent's due Sunday, same as always. He forgets.",
-   "why": "the rest is texture and the person's own manner (trait words); nothing clashes",
+   "line": "Mr. Vance is in his chair on the porch, watching the street. He watches you come up the path.",
+   "why": "texture",
    "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "dcc73aca9b8999e0",
-    "traits": "40c19ab6c95d7a0e",
-    "facts": "67a9c54720c5688f",
-    "facts2": "bf5dbaf7173a4a37",
-    "all": "b5d6f19c098e2c33"
+    "text": "0d740dd50c9788fe",
+    "traits": "d9172dabbd56b049",
+    "facts": "42672b531151f541",
+    "facts2": "a78f8cbce78be9ac",
+    "all": "02c3cf9b746560e7"
    },
    "row_hash": "310706ee076318f2",
-   "carried": true,
-   "pass": 2
+   "carried": false,
+   "pass": 8
+  },
+  {
+   "row": "C461",
+   "screen": "talk_vance.talk",
+   "verdict": "PASS",
+   "line": "Little lady. Come up a step. I don't bite. ... That house of mine looks better with you in it. Tell Mark the rent's due Sunday, same as always.",
+   "why": "his manner (pushy, watcher), PLAN:141",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "3caed77741619920",
+    "traits": "40c19ab6c95d7a0e",
+    "facts": "a1b0a3eedcbe2ab5",
+    "facts2": "a9800a3e4cb0e8b9",
+    "all": "442a9ac05e8ae507"
+   },
+   "row_hash": "310706ee076318f2",
+   "carried": false,
+   "pass": 8
   },
   {
    "row": "C519",
@@ -2893,20 +2912,20 @@
    "row": "C927",
    "screen": "talk_vance.talk",
    "verdict": "PASS",
-   "line": "Talk 0 \u00b7 Leave 0 \u00b7 Done 10",
-   "why": "every exit states its minutes; v2.py:17877 reads the value given, so 0 stays 0 and Done is 10",
+   "line": "Done (time_progression_minutes = 10)",
+   "why": "exit states its time",
    "cause": null,
    "note": true,
    "screen_hash": {
-    "text": "dcc73aca9b8999e0",
+    "text": "3caed77741619920",
     "traits": "40c19ab6c95d7a0e",
-    "facts": "67a9c54720c5688f",
-    "facts2": "bf5dbaf7173a4a37",
-    "all": "b5d6f19c098e2c33"
+    "facts": "a1b0a3eedcbe2ab5",
+    "facts2": "a9800a3e4cb0e8b9",
+    "all": "442a9ac05e8ae507"
    },
    "row_hash": "4e86d143688ba8e5",
-   "carried": true,
-   "pass": 2
+   "carried": false,
+   "pass": 8
   },
   {
    "row": "C928",
@@ -3041,19 +3060,19 @@
    "screen": "talk_vance.talk",
    "verdict": "N/A",
    "line": "",
-   "why": "no time_of_day condition on this canvas; presence comes from the person's row",
+   "why": "no time_of_day condition; presence from his rows via requires_npc",
    "cause": null,
    "note": true,
    "screen_hash": {
-    "text": "dcc73aca9b8999e0",
+    "text": "3caed77741619920",
     "traits": "40c19ab6c95d7a0e",
-    "facts": "67a9c54720c5688f",
-    "facts2": "bf5dbaf7173a4a37",
-    "all": "b5d6f19c098e2c33"
+    "facts": "a1b0a3eedcbe2ab5",
+    "facts2": "a9800a3e4cb0e8b9",
+    "all": "442a9ac05e8ae507"
    },
    "row_hash": "1aadffd96e76381c",
-   "carried": true,
-   "pass": 2
+   "carried": false,
+   "pass": 8
   },
   {
    "row": "C953",
@@ -3159,22 +3178,41 @@
   },
   {
    "row": "L106",
-   "screen": "talk_vance.talk",
+   "screen": "talk_vance.hub",
    "verdict": "PASS",
-   "line": "Tell Mark the rent's due Sunday, same as always. He forgets.",
-   "why": "the only person placed is the menu's own, by requires_npc; Mark is named, not placed there",
+   "line": "Mr. Vance is in his chair on the porch, watching the street. He watches you come up the path.",
+   "why": "requires_npc npc_vance at hood_next_door",
    "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "dcc73aca9b8999e0",
-    "traits": "40c19ab6c95d7a0e",
-    "facts": "67a9c54720c5688f",
-    "facts2": "bf5dbaf7173a4a37",
-    "all": "b5d6f19c098e2c33"
+    "text": "0d740dd50c9788fe",
+    "traits": "d9172dabbd56b049",
+    "facts": "42672b531151f541",
+    "facts2": "a78f8cbce78be9ac",
+    "all": "02c3cf9b746560e7"
    },
    "row_hash": "13a714429d15f3b2",
-   "carried": true,
-   "pass": 2
+   "carried": false,
+   "pass": 8
+  },
+  {
+   "row": "L106",
+   "screen": "talk_vance.talk",
+   "verdict": "PASS",
+   "line": "Little lady. Come up a step. I don't bite. ... That house of mine looks better with you in it. Tell Mark the rent's due Sunday, same as always.",
+   "why": "only he is placed; Mark is named, not placed",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "3caed77741619920",
+    "traits": "40c19ab6c95d7a0e",
+    "facts": "a1b0a3eedcbe2ab5",
+    "facts2": "a9800a3e4cb0e8b9",
+    "all": "442a9ac05e8ae507"
+   },
+   "row_hash": "13a714429d15f3b2",
+   "carried": false,
+   "pass": 8
   },
   {
    "row": "L119",
@@ -3335,19 +3373,19 @@
    "screen": "talk_vance.talk",
    "verdict": "PASS",
    "line": "[canvases.trigger] one canvas per person per place",
-   "why": "one canvas whatever the day; days come from the person's row via requires_npc, not one canvas per day kind",
+   "why": "days come from his rows, not one canvas per day kind",
    "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "dcc73aca9b8999e0",
+    "text": "3caed77741619920",
     "traits": "40c19ab6c95d7a0e",
-    "facts": "67a9c54720c5688f",
-    "facts2": "bf5dbaf7173a4a37",
-    "all": "b5d6f19c098e2c33"
+    "facts": "a1b0a3eedcbe2ab5",
+    "facts2": "a9800a3e4cb0e8b9",
+    "all": "442a9ac05e8ae507"
    },
    "row_hash": "e64ce2672d85d2d8",
-   "carried": true,
-   "pass": 2
+   "carried": false,
+   "pass": 8
   },
   {
    "row": "L170",
@@ -3365,8 +3403,8 @@
  ],
  "causes": [],
  "pending": [],
- "asked": 1,
- "answered": 1,
+ "asked": 13,
+ "answered": 13,
  "pass_items": [],
  "unowed": []
 }

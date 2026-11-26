@@ -348,7 +348,7 @@ title = "The Man Next Door"
 category = "Off-campus 🏙️"
 description = "Someone on your street is always watching."
 hints = [
-  { when = [], text = "The man next door sits on his porch, weekday evenings 5 to 8pm and on Sundays. Walk down your street and say hello." },
+  { when = [], text = "The man next door sits on his porch, weekday evenings 5 to 8pm, and weekends 9am to noon and 5 to 8pm. Go next door and say hello." },
   { when = [{ flag = "met_vance", op = "is_true" }], text = "end" },
 ]
 
@@ -1313,7 +1313,7 @@ flag_keys = [
   "zoe_place_known",
   # P03 re-check: the house next door opens once she has met him (P24 sets it)
   "met_vance",
-  # P68 — the House Next Door opens in release 2; nothing sets it in release 1
+  # P68 — kept as a key a save may hold (C1656); P69 opened the House Next Door, so nothing reads it now
   "next_door_open",
   # P04 re-check: the faculty corridor opens once her advisor asks to see her (P16 sets it)
   "met_walsh",
@@ -1541,9 +1541,14 @@ description = "The house next door. The man who owns your family's house lives h
 parent = "neighbourhood"
 kind = "destination"
 image = "locations/hood_next_door_t0.jpg"
-# P03 re-check: hidden until she has met the man next door; P24 meets him on her street, on his porch.
-# P68 — hidden for all of release 1: nothing is here yet (LO 2026-11-27: "yes to all 4"); release 2 sets next_door_open.
-hidden_until = { flag = "next_door_open" }
+# P69 — open from the start: his porch is here (LO 2026-11-27, "go ahead"); next_door_open is no longer read.
+# His face shows who is there (places.md rule 2); the room text only says when the chair is empty (LO: "yes on both").
+# places.md rule 6 is waived here: the house holds only his face and scenes (LO 2026-11-27, "yes on both").
+description_variants = [
+  # P69 — before she has met him he has no face here (faces are for people she has met), so an unnamed line (rule 2 allows it).
+  { conditions = { version = "1.0", logic = "AND", items = [{ type = "npc_at_location", npc_id = "npc_vance", location_id = "hood_next_door", operator = "is_present" }, { type = "flag", subject = "player", flag_key = "met_vance", operator = "is_false" }] }, text = "The house next door. The man who owns your family's house lives here: a porch, one chair on it, and a clear view of your front door. A man sits in the porch chair, watching the street." },
+  { conditions = { version = "1.0", logic = "AND", items = [{ type = "npc_at_location", npc_id = "npc_vance", location_id = "hood_next_door", operator = "is_absent" }] }, text = "The house next door. The man who owns your family's house lives here: a porch, one chair on it, and a clear view of your front door. The chair is empty." },
+]
 image_search_queries = ["woman of 18 on the pavement in front of a neighbour's porch with one chair", "young woman at the bottom of porch steps, suburban street"]
 entry_from = "hood_street"
 
@@ -2734,21 +2739,22 @@ traits = ["Pushy", "Takes charge", "Watcher"]
 core_traits = { friendship = 100, lust = 400, control = 400 }
 
 [[npcs.schedules]]
-location = "hood_street"
+# P69 — his porch is at his own house (LO 2026-11-27: "mr vance is showing in the neighbourhood not in his home").
+location = "hood_next_door"
 weekdays = [0, 1, 2, 3, 4]
 start_time = "17:00"
 end_time = "20:00"
 activity = "on his porch"
 
 [[npcs.schedules]]
-location = "hood_street"
+location = "hood_next_door"
 weekdays = [5, 6]
 start_time = "09:00"
 end_time = "12:00"
 activity = "on his porch"
 
 [[npcs.schedules]]
-location = "hood_street"
+location = "hood_next_door"
 weekdays = [5, 6]
 start_time = "17:00"
 end_time = "20:00"
@@ -7357,20 +7363,20 @@ flagEffects = [{ flag = "met_marco", op = "set" }]
 
 [[canvases]]
 id = "street_meet_vance"
-name = "Mr. Vance"
+name = "The man on the porch"
 
 [canvases.trigger]
 # P68 — only if the weekday hello hasn't met him first: every line here is a first meeting.
-location = "hood_street"
+location = "hood_next_door"
 trigger_mode = "manual"
 is_repeatable = false
-conditions = { version = "1.0", logic = "AND", items = [{ type = "npc_at_location", npc_id = "npc_vance", location_id = "hood_street", operator = "is_present" }, { type = "weekday", weekdays = [6] }, { type = "flag", subject = "player", flag_key = "met_vance", operator = "is_false" }] }
+conditions = { version = "1.0", logic = "AND", items = [{ type = "npc_at_location", npc_id = "npc_vance", location_id = "hood_next_door", operator = "is_present" }, { type = "weekday", weekdays = [6] }, { type = "flag", subject = "player", flag_key = "met_vance", operator = "is_false" }] }
 
 [[canvases.nodes]]
 id = "porch"
-name = "Mr. Vance"
+name = "The man on the porch"
 blocks = [
-  { type = "paragraph", content = "The man next door is in the one chair on his porch, a mug on the rail, like every Sunday. Today he puts the mug down when he sees you, and his eyes follow you down the pavement, taking their time over your legs, like he's got all day. Your skin prickles." },
+  { type = "paragraph", content = "The man next door is in the one chair on his porch, a mug on the rail, like every Sunday. Today he puts the mug down when he sees you, and his eyes go over you, taking their time over your legs, like he's got all day. Your skin prickles." },
   { type = "dialog", content = "Well. Look who stopped being a kid. Come here a minute, little lady.", props = { speaker = "npc", npcId = "npc_vance" } },
   { type = "image", props = { description = "Her view from the pavement (she is 18, out of frame): a man of 54 in a chair on a small front porch, a mug on the rail, watching the camera.", search_queries = ["man 54 sitting on front porch chair mug watching camera suburban street", "older man on porch looking at the street"], pool_dir = "people/vance_porch_t0", pool = 1 } },
 ]
@@ -7386,7 +7392,7 @@ time_progression_minutes = 0
 flagEffects = [{ flag = "vance_went_over", op = "set" }]
 
 [[canvases.nodes.exit_block.choices]]
-text = "Wave and keep walking"
+text = "Wave and go"
 targetType = "node"
 nodeId = "after"
 time_progression_minutes = 0
@@ -7401,7 +7407,7 @@ flagEffects = [{ flag = "vance_silent", op = "set" }]
 
 [[canvases.nodes]]
 id = "after"
-name = "Mr. Vance"
+name = "The man on the porch"
 blocks = [
   { type = "group", props = { conditions = { version = "1.0", logic = "AND", items = [{ type = "flag", subject = "player", flag_key = "vance_went_over", operator = "is_true" }] } }, blocks = [
     { type = "paragraph", content = "You stop at the bottom of his steps. He doesn't get up." },
@@ -7414,7 +7420,7 @@ blocks = [
     { type = "paragraph", content = "You feel his eyes all the way down the street." },
   ] },
   { type = "group", props = { conditions = { version = "1.0", logic = "AND", items = [{ type = "flag", subject = "player", flag_key = "vance_silent", operator = "is_true" }] } }, blocks = [
-    { type = "paragraph", content = "You keep your eyes on the pavement. He laughs, low, like you've told him something." },
+    { type = "paragraph", content = "You keep your eyes on the path. He laughs, low, like you've told him something." },
     { type = "dialog", content = "Quiet one. I'll see you next Sunday, little lady.", props = { speaker = "npc", npcId = "npc_vance" } },
   ] },
   { type = "paragraph", content = "You don't look back at the porch. You don't have to: you know he's still watching, and you know he'll be there next week." },
@@ -9081,8 +9087,10 @@ id = "vance_gutter"
 name = "Mr. Vance calls you over"
 
 [canvases.trigger]
-location = "hood_street"
+location = "hood_next_door"
 trigger_mode = "random"
+# P69 — only on walking up from the street, never on coming back from his menu (reader pass 2; v2.py checkRandomEncounters).
+entry_only_from = ["hood_street"]
 chance = 0.65
 requires_npc = "npc_vance"
 is_repeatable = true
@@ -9094,11 +9102,11 @@ id = "moment"
 name = "Mr. Vance calls you over"
 blocks = [
   { type = "group", props = { conditions = { version = "1.0", logic = "AND", items = [{ type = "flag", subject = "player", flag_key = "vance_asked", operator = "is_false" }] } }, blocks = [
-    { type = "paragraph", content = "Mr. Vance leans over his porch rail as you pass, a beer sweating in his hand." },
+    { type = "paragraph", content = "Mr. Vance leans over his porch rail as you come up the path, a beer sweating in his hand." },
     { type = "dialog", content = "Little lady. Tell Mark the gutter's hanging off again. Tonight.", props = { speaker = "npc", npcId = "npc_vance" } },
   ] },
   { type = "group", props = { conditions = { version = "1.0", logic = "AND", items = [{ type = "flag", subject = "player", flag_key = "vance_asked", operator = "is_true" }] } }, blocks = [
-    { type = "paragraph", content = "Mr. Vance leans over his porch rail again as you pass, a beer sweating in his hand." },
+    { type = "paragraph", content = "Mr. Vance leans over his porch rail again as you come up the path, a beer sweating in his hand." },
     { type = "dialog", content = "The gutter, little lady. Mark still hasn't touched it. You tell him.", props = { speaker = "npc", npcId = "npc_vance" } },
   ] },
   { type = "paragraph", content = "His eyes stay on your legs the whole time you answer." },
@@ -9161,8 +9169,10 @@ id = "vance_envelope"
 name = "Mr. Vance has an envelope"
 
 [canvases.trigger]
-location = "hood_street"
+location = "hood_next_door"
 trigger_mode = "random"
+# P69 — only on walking up from the street, never on coming back from his menu (reader pass 2; v2.py checkRandomEncounters).
+entry_only_from = ["hood_street"]
 chance = 0.65
 requires_npc = "npc_vance"
 is_repeatable = true
@@ -9606,13 +9616,16 @@ id = "walk_vance_ledger"
 name = "The man next door"
 
 [canvases.trigger]
-location = "hood_street"
+location = "hood_next_door"
 # P55 — fires on arrival, never a button (LO 2026-11-26: "2nd one", "Go"; craft/walk-ins.md C2195).
 trigger_mode = "random"
+# P70 — weekday evenings, or a Saturday at his porch hours (his rows), so a Saturday has a hello.
+# P69 — only on walking up from the street, never on coming back from his menu (reader pass 2; v2.py checkRandomEncounters).
+entry_only_from = ["hood_street"]
 chance = 0.35
 is_repeatable = true
 max_triggers_per_day = 1
-conditions = { version = "1.0", logic = "AND", items = [{ type = "weekday", weekdays = [0, 1, 2, 3, 4] }, { type = "time_of_day", start_time = "17:00", end_time = "20:00" }, { type = "npc_at_location", npc_id = "npc_vance", location_id = "hood_street", operator = "is_present" }] }
+conditions = { version = "1.0", logic = "AND", items = [{ type = "group", logic = "OR", items = [{ type = "group", logic = "AND", items = [{ type = "weekday", weekdays = [0, 1, 2, 3, 4] }, { type = "time_of_day", start_time = "17:00", end_time = "20:00" }] }, { type = "weekday", weekdays = [5] }] }, { type = "npc_at_location", npc_id = "npc_vance", location_id = "hood_next_door", operator = "is_present" }] }
 
 [[canvases.nodes]]
 id = "moment"
@@ -9638,7 +9651,7 @@ nodeId = "hello"
 time_progression_minutes = 0
 
 [[canvases.nodes.exit_block.choices]]
-text = "Walk past"
+text = "Leave him to it"
 targetType = "node"
 nodeId = "past"
 time_progression_minutes = 0
@@ -9648,10 +9661,22 @@ id = "hello"
 name = "The man next door"
 blocks = [
   { type = "group", props = { conditions = { version = "1.0", logic = "AND", items = [{ type = "flag", subject = "player", flag_key = "met_vance", operator = "is_true" }] } }, blocks = [
-    { type = "dialog", content = "Evening, little lady.", props = { speaker = "npc", npcId = "npc_vance" } },
+    # P70 — he greets her by the hour: Saturday mornings are porch hours too (reader pass 1).
+    { type = "group", props = { conditions = { version = "1.0", logic = "AND", items = [{ type = "time_of_day", start_time = "00:00", end_time = "12:00" }] } }, blocks = [
+      { type = "dialog", content = "Morning, little lady.", props = { speaker = "npc", npcId = "npc_vance" } },
+    ] },
+    { type = "group", props = { conditions = { version = "1.0", logic = "AND", items = [{ type = "time_of_day", start_time = "12:00", end_time = "00:00" }] } }, blocks = [
+      { type = "dialog", content = "Evening, little lady.", props = { speaker = "npc", npcId = "npc_vance" } },
+    ] },
   ] },
   { type = "group", props = { conditions = { version = "1.0", logic = "AND", items = [{ type = "flag", subject = "player", flag_key = "met_vance", operator = "is_false" }] } }, blocks = [
-    { type = "dialog", content = "Evening, little lady. Vance. I own your house.", props = { speaker = "npc", npcId = "npc_vance" } },
+    # P70 — he greets her by the hour: Saturday mornings are porch hours too (reader pass 1).
+    { type = "group", props = { conditions = { version = "1.0", logic = "AND", items = [{ type = "time_of_day", start_time = "00:00", end_time = "12:00" }] } }, blocks = [
+      { type = "dialog", content = "Morning, little lady. Vance. I own your house.", props = { speaker = "npc", npcId = "npc_vance" } },
+    ] },
+    { type = "group", props = { conditions = { version = "1.0", logic = "AND", items = [{ type = "time_of_day", start_time = "12:00", end_time = "00:00" }] } }, blocks = [
+      { type = "dialog", content = "Evening, little lady. Vance. I own your house.", props = { speaker = "npc", npcId = "npc_vance" } },
+    ] },
     { type = "paragraph", content = "He looks you over, slow, from your feet up, and doesn't hide it." },
     { type = "paragraph", content = "Your skin prickles. You keep your arms at your sides." },
     { type = "dialog", content = "Your stepdad pays me Sundays. When he doesn't, I'm the one who knocks. Tell him I said hello.", props = { speaker = "npc", npcId = "npc_vance" } },
@@ -9674,7 +9699,7 @@ flagEffects = [{ flag = "said_hello_vance", op = "set" }, { flag = "met_vance", 
 id = "past"
 name = "The man next door"
 blocks = [
-  { type = "paragraph", content = "You walk past. You hear the box lid shut behind you. Number nine. You wonder who that is." },
+  { type = "paragraph", content = "You turn back down the path. You hear the box lid shut behind you. Number nine. You wonder who that is." },
 ]
 
 [canvases.nodes.exit_block]
@@ -12058,13 +12083,13 @@ time_progression_minutes = 10
 # ── P58 · the neighbourhood: a menu for everyone she has met, one Talk a day across their places
 #    (craft/people.md rule 16, C2197, C2198; LO 2026-11-26 "Option B.", then "Take all these 3 talks to to only one."). ──
 
-# P58 · Mr. Vance's menu at hood_street (weekdays 17:00–20:00, weekends 09:00–12:00 and 17:00–20:00, on his porch); one Talk a day (C2197, C2198).
+# P58 · Mr. Vance's menu at hood_next_door since P69 (weekdays 17:00–20:00, weekends 09:00–12:00 and 17:00–20:00, on his porch); one Talk a day (C2197, C2198).
 [[canvases]]
 id = "talk_vance"
 name = "Mr. Vance"
 
 [canvases.trigger]
-location = "hood_street"
+location = "hood_next_door"
 trigger_mode = "manual"
 is_repeatable = true
 npc = "npc_vance"
@@ -12075,7 +12100,7 @@ conditions = { version = "1.0", logic = "AND", items = [{ type = "flag", subject
 id = "hub"
 name = "Mr. Vance"
 blocks = [
-  { type = "paragraph", content = "Mr. Vance is on his porch next door, in his chair, watching the street. He watches you come over." },
+  { type = "paragraph", content = "Mr. Vance is in his chair on the porch, watching the street. He watches you come up the path." },
   { type = "image", props = { description = "A man of 54 in a short-sleeved shirt sitting on a house porch with a beer, watching the street. Alone.", search_queries = ["man 54 sitting on porch with beer watching street", "older man on front porch chair suburban street"], pool_dir = "everyday/vance_t0", pool = 1 } },
 ]
 
@@ -12095,7 +12120,7 @@ time_progression_minutes = 0
 [[canvases.nodes.exit_block.choices]]
 text = "Leave"
 targetType = "location"
-locationId = "hood_street"
+locationId = "hood_next_door"
 time_progression_minutes = 0
 
 [[canvases.nodes]]
@@ -12115,10 +12140,11 @@ type = "choices"
 [[canvases.nodes.exit_block.choices]]
 text = "Done"
 targetType = "location"
-locationId = "hood_street"
+locationId = "hood_next_door"
 time_progression_minutes = 10
 
 # P58 · Frank's menu at hood_shop (Mon–Sat 07:00–15:00, behind the till); one Talk a day (C2197, C2198).
+
 [[canvases]]
 id = "talk_frank"
 name = "Frank"

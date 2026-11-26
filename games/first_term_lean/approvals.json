@@ -3120,6 +3120,144 @@
       "sha256": "bd9249b3158d1242ad9573b2f9d2e2a8e5578d27f2e913288f89e060d9c93824",
       "words": "ENI for LO (delegated 2026-11-24): yes again to P68: her reaction to his look in the hello; PLAN's Vance lines name the weekday hello.",
       "date": "2026-11-27"
+    },
+    {
+      "card": "P69",
+      "sha256": "56bf6069219692701b32573e82beede6f2f161ceafd7f8bde460297f3105723f",
+      "words": "ENI for LO (delegated 2026-11-24): yes to P69, Vance at his own house, with the rent card in his window as the house's one thing to do alone. LO 2026-11-27: \"mr vance is showing in the neighbourhood not in his home and neither his home is visible\", \"go ahead\".",
+      "date": "2026-11-27"
+    },
+    {
+      "card": "P03",
+      "sha256": "7ff08bccf1410a11528d577855e09be243af1d7d476c9498de08ca9b1bab5727",
+      "words": "ENI for LO (delegated 2026-11-24): yes to P03 with the P69 notes (Vance at his own house).",
+      "date": "2026-11-27"
+    },
+    {
+      "card": "P24",
+      "sha256": "f29974b28fca770474d1a359e7777ab79d46da77685f9d9b6fd4c70d1257d61c",
+      "words": "ENI for LO (delegated 2026-11-24): yes to P24 with the P69 notes (Vance at his own house).",
+      "date": "2026-11-27"
+    },
+    {
+      "card": "P32",
+      "sha256": "f507af10d13de9acfa68a54c92edd4e212cb1e32e69ccadba5dda8a8fc9033fa",
+      "words": "ENI for LO (delegated 2026-11-24): yes to P32 with the P69 notes (Vance at his own house).",
+      "date": "2026-11-27"
+    },
+    {
+      "card": "P39",
+      "sha256": "1bb0238f0d94daa4bdfe8cbf2086b053b7fecf1eb867a2a5c1f2b3884ed0f833",
+      "words": "ENI for LO (delegated 2026-11-24): yes to P39 with the P69 notes (Vance at his own house).",
+      "date": "2026-11-27"
+    },
+    {
+      "card": "P46",
+      "sha256": "6fbeb437110226c1544283c441f263ada7c992e4bfd8edb7b0e10d5b2609ca5e",
+      "words": "ENI for LO (delegated 2026-11-24): yes to P46 with the P69 notes (Vance at his own house).",
+      "date": "2026-11-27"
+    },
+    {
+      "card": "P49",
+      "sha256": "1d5b73905062708b3382c51d43ead1ec7f606bfe5d69c96aec91c14142c0c25b",
+      "words": "ENI for LO (delegated 2026-11-24): yes to P49 with the P69 notes (Vance at his own house).",
+      "date": "2026-11-27"
+    },
+    {
+      "card": "P58",
+      "sha256": "ad5a569377acd0d45b321940cce01491e01b3b3467668ebe4c1a8afea2cbd59e",
+      "words": "ENI for LO (delegated 2026-11-24): yes to P58 with the P69 notes (Vance at his own house).",
+      "date": "2026-11-27"
+    },
+    {
+      "card": "P68",
+      "sha256": "62e9b2fa365a134182e096650e2406fdb9723f90d99496106ea4a85844c697ce",
+      "words": "ENI for LO (delegated 2026-11-24): yes to P68 with the P69 notes (Vance at his own house).",
+      "date": "2026-11-27"
+    },
+    {
+      "card": "P69",
+      "sha256": "9dc409f79972db69042e56ae7c4c9ef188a2b9327772b16e75595fea95fbe306",
+      "words": "ENI for LO (delegated 2026-11-24): yes again to P69: Builds lists next_door_window, with its Does line.",
+      "date": "2026-11-27"
+    },
+    {
+      "card": "P69",
+      "sha256": "e4b81cec2f4e1086cabfa98e9bf6521cd6e23f738126ac155b5d6a6fa74ea943",
+      "words": "ENI for LO (delegated 2026-11-24): yes again to P69: the Builds line fixed to one id.",
+      "date": "2026-11-27"
+    },
+    {
+      "card": "P24",
+      "sha256": "25fb527bf17623126e078c6f76021870cd2b119c1dcaf78eda3daba03d9f6413",
+      "words": "ENI for LO (delegated 2026-11-24): yes again to P24: Sheet rows placed at hood_next_door (P69).",
+      "date": "2026-11-27"
+    },
+    {
+      "card": "P39",
+      "sha256": "832af767448e0b3b43f7029b5cd2114996f238b424782d9e7ceef2a69bd61532",
+      "words": "ENI for LO (delegated 2026-11-24): yes again to P39: Sheet rows placed at hood_next_door (P69).",
+      "date": "2026-11-27"
+    },
+    {
+      "card": "P49",
+      "sha256": "14dd6af40061486fbdb55485bb33ea1548a9959a051142c02f02421022b70499",
+      "words": "ENI for LO (delegated 2026-11-24): yes again to P49: Sheet rows placed at hood_next_door (P69).",
+      "date": "2026-11-27"
+    },
+    {
+      "card": "P69",
+      "sha256": "810ed2ceeede91de2dc205ac8d932ac2e3e5d12ef28f136d308daae3ff7cdf52",
+      "words": "ENI for LO (delegated 2026-11-24): yes again to P69 after LO's \"yes on both\" (2026-11-27): no window card, no he's-there lines, Sunday hint.",
+      "date": "2026-11-27"
+    },
+    {
+      "card": "P69",
+      "sha256": "5dfc4a336f4f94f7d6621f3ef8b701a9e5da085e5ed6f70f66bc38b46f24541d",
+      "words": "ENI for LO (delegated 2026-11-24): yes again to P69: Vance's walk-ins fire only from the street; an unnamed stranger line before she meets him, so the house never reads empty while he's there.",
+      "date": "2026-11-27"
+    },
+    {
+      "card": "P46",
+      "sha256": "495fc5bae51875a6b9680dafebec1281083ed2468a254a1dc115006339e17799",
+      "words": "ENI for LO (delegated 2026-11-24): yes again to P46: hint text and P69 note updated.",
+      "date": "2026-11-27"
+    },
+    {
+      "card": "P70",
+      "sha256": "27fe85f8ee98085d1080328c2910b9dbdf85acdbc6df224ccad306f5e64193fa",
+      "words": "ENI for LO (delegated 2026-11-24): yes to P70: the Sunday line true at his porch; the ledger hello also on Saturdays; the hint says weekends.",
+      "date": "2026-11-27"
+    },
+    {
+      "card": "P24",
+      "sha256": "516f6c6fbeedac89ab4bff9464b0e628d27b7aa89bf34f97f050d3e3e90b034d",
+      "words": "ENI for LO (delegated 2026-11-24): yes to P24 with the P70 notes.",
+      "date": "2026-11-27"
+    },
+    {
+      "card": "P39",
+      "sha256": "c9b111383ab31104e11e8d99b77a1b1cbb08548fc26494c787362e54e4cee143",
+      "words": "ENI for LO (delegated 2026-11-24): yes to P39 with the P70 notes.",
+      "date": "2026-11-27"
+    },
+    {
+      "card": "P46",
+      "sha256": "364f834eb82bce3d52f7d0355269e73cb4813a5100e08d8d8a9f9fafc532049c",
+      "words": "ENI for LO (delegated 2026-11-24): yes to P46 with the P70 notes.",
+      "date": "2026-11-27"
+    },
+    {
+      "card": "P39",
+      "sha256": "16871e01a57d4ce8bc62c61eaaa5ef3db08010c76ff96e391e0ecbd6e29d23b5",
+      "words": "ENI for LO (delegated 2026-11-24): yes again to P39: Sheet rows synced for the Saturday window (P70).",
+      "date": "2026-11-27"
+    },
+    {
+      "card": "P70",
+      "sha256": "085c15c86c9c3b977d9699a075f76c8cbb60716dc3678227d368fadb3a04509b",
+      "words": "ENI for LO (delegated 2026-11-24): yes again to P70: the hello's greeting follows the hour (Morning / Evening); the hint names his weekend hours.",
+      "date": "2026-11-27"
     }
   ]
 }

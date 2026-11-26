@@ -1,6 +1,6 @@
 {
  "piece": "P39",
- "pass": 19,
+ "pass": 23,
  "screens": {
   "walk_park_couple.moment": {
    "text": "9f8c3c7fe47596ff",
@@ -24,25 +24,25 @@
    "all": "c85419e455c00de3"
   },
   "walk_vance_ledger.moment": {
-   "text": "2557979fbd1c0b8d",
+   "text": "99cc714efc271a25",
    "traits": "d9172dabbd56b049",
-   "facts": "c00465774a257291",
-   "facts2": "144cf636eba42a4a",
-   "all": "239ef322866e551e"
+   "facts": "b30926bba2e48d89",
+   "facts2": "c1b7d3bced5f1fa6",
+   "all": "4324df60f95b6c2e"
   },
   "walk_vance_ledger.hello": {
-   "text": "a8562f00077601b7",
+   "text": "6d5d9fb69ffff964",
    "traits": "d9172dabbd56b049",
-   "facts": "c00465774a257291",
-   "facts2": "144cf636eba42a4a",
-   "all": "1ca3bb890a4e7b2f"
+   "facts": "b30926bba2e48d89",
+   "facts2": "c1b7d3bced5f1fa6",
+   "all": "e0f587a4bfa89840"
   },
   "walk_vance_ledger.past": {
-   "text": "2c890f8a73feab69",
+   "text": "5891b7656bc80228",
    "traits": "44136fa355b3678a",
-   "facts": "978c7e388c3b3778",
-   "facts2": "978c7e388c3b3778",
-   "all": "2c7440d174a776b1"
+   "facts": "2b24101436cc0afd",
+   "facts2": "2b24101436cc0afd",
+   "all": "bd6a6636fe4df7c0"
   },
   "walk_danny_deal.moment": {
    "text": "f97cdd937a22a8b0",
@@ -128,7 +128,7 @@
    "facts2": "bc7bb076a1931a10",
    "all": "643b5204a11ac43b"
   },
-  "*": "350e1cd6097d32be"
+  "*": "6a83e802effba5c4"
  },
  "rows": {
   "B1": "5276068df1ca6fa9",
@@ -608,58 +608,58 @@
    "row": "B10",
    "screen": "walk_vance_ledger.hello",
    "verdict": "PASS",
-   "line": "Evening, little lady. Vance. I own your house. / He looks you over, slow, from your feet up, and doesn't hide it. / Your skin prickles. You keep your arms at your sides.",
-   "why": "trigger needs him on hood_street, weekdays 17-20 (who_is_where); the unmet group shows only before met_vance, the met group \"Evening, little lady.\" after (also after the Sunday meeting sets it); the new reaction line is true on any visit",
+   "line": "\"Morning, little lady.\" (00:00-12:00) / \"Evening, little lady.\" (12:00-00:00); unmet adds \"Vance. I own your house.\"",
+   "why": "trigger windows are Mon-Fri 17-20 and Sat 09-12 / 17-20 (npc_at_location + who_is_where); 09-11:59 gets Morning, 17-19:59 gets Evening; time_of_day is end-exclusive and 12:00-00:00 wraps to >=12:00 (v2.py:4812-4831), so exactly one greeting shows; unmet intro behind met_vance is_false, met line behind is_true; Say hello moves the clock 0 minutes",
    "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "a8562f00077601b7",
+    "text": "6d5d9fb69ffff964",
     "traits": "d9172dabbd56b049",
-    "facts": "c00465774a257291",
-    "facts2": "144cf636eba42a4a",
-    "all": "1ca3bb890a4e7b2f"
+    "facts": "b30926bba2e48d89",
+    "facts2": "c1b7d3bced5f1fa6",
+    "all": "e0f587a4bfa89840"
    },
    "row_hash": "c1c0e2ac2588a579",
    "carried": false,
-   "pass": 19
+   "pass": 23
   },
   {
    "row": "B10",
    "screen": "walk_vance_ledger.moment",
    "verdict": "PASS",
-   "line": "Vance is on his porch with a shoebox of envelopes on his knee, licking his thumb, counting. / Short again, number nine. Always number nine.",
-   "why": "Vance 'on his porch' at hood_street weekdays 17:00-20:00; gated npc_at_location; named only behind met_vance, 'the man next door' before; read on just stepping onto her street: he is on his porch as she passes; true at first and last minute of the window and on a second visit",
-   "cause": "",
+   "line": "The man next door is on his porch with a shoebox of envelopes on his knee, licking his thumb, counting.",
+   "why": "no time word; he is there on every minute of both windows (Mon-Fri 17-20, Sat 09-12 and 17-20 by the presence check); entry_only_from hood_street keeps her just arrived up the path",
+   "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "2557979fbd1c0b8d",
+    "text": "99cc714efc271a25",
     "traits": "d9172dabbd56b049",
-    "facts": "c00465774a257291",
-    "facts2": "144cf636eba42a4a",
-    "all": "239ef322866e551e"
+    "facts": "b30926bba2e48d89",
+    "facts2": "c1b7d3bced5f1fa6",
+    "all": "4324df60f95b6c2e"
    },
    "row_hash": "c1c0e2ac2588a579",
    "carried": true,
-   "pass": 9
+   "pass": 22
   },
   {
    "row": "B10",
    "screen": "walk_vance_ledger.past",
    "verdict": "PASS",
-   "line": "You walk past. You hear the box lid shut behind you. Number nine. You wonder who that is.",
-   "why": "Vance 'on his porch' at hood_street weekdays 17:00-20:00; gated npc_at_location; named only behind met_vance, 'the man next door' before; true at first and last minute of the window and on a second visit",
-   "cause": "",
+   "line": "You turn back down the path. You hear the box lid shut behind you. Number nine. You wonder who that is.",
+   "why": "'turn back down the path' true: she only ever arrives from the street; no time word",
+   "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "2c890f8a73feab69",
+    "text": "5891b7656bc80228",
     "traits": "44136fa355b3678a",
-    "facts": "978c7e388c3b3778",
-    "facts2": "978c7e388c3b3778",
-    "all": "2c7440d174a776b1"
+    "facts": "2b24101436cc0afd",
+    "facts2": "2b24101436cc0afd",
+    "all": "bd6a6636fe4df7c0"
    },
    "row_hash": "c1c0e2ac2588a579",
    "carried": true,
-   "pass": 9
+   "pass": 22
   },
   {
    "row": "B11",
@@ -1097,58 +1097,58 @@
    "row": "B8",
    "screen": "walk_vance_ledger.hello",
    "verdict": "PASS",
-   "line": "Your stepdad pays me Sundays. When he doesn't, I'm the one who knocks.",
-   "why": "Sunday rent agrees with PLAN:26-28; no garment of hers named, the new line names her arms only",
+   "line": "Your stepdad pays me Sundays.",
+   "why": "Sunday rent agrees with PLAN:26-28; no garment of hers named",
    "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "a8562f00077601b7",
+    "text": "6d5d9fb69ffff964",
     "traits": "d9172dabbd56b049",
-    "facts": "c00465774a257291",
-    "facts2": "144cf636eba42a4a",
-    "all": "1ca3bb890a4e7b2f"
+    "facts": "b30926bba2e48d89",
+    "facts2": "c1b7d3bced5f1fa6",
+    "all": "e0f587a4bfa89840"
    },
    "row_hash": "80d415cf08e0ebfe",
    "carried": false,
-   "pass": 19
+   "pass": 23
   },
   {
    "row": "B8",
    "screen": "walk_vance_ledger.moment",
    "verdict": "PASS",
-   "line": "Vance is on his porch with a shoebox of envelopes on his knee, licking his thumb, counting. / Short again, number nine. Always number nine.",
-   "why": "no number disagrees with PLAN (rent Sunday, Friday, number nine); the only garments named are the other people's, not hers",
-   "cause": "",
+   "line": "Short again, number nine. Always number nine.",
+   "why": "no garment, no number in conflict (PLAN:613 'number nine' texture); PLAN:613's window 'weekdays 5-8pm' is stale for the Saturday hours but no screen prints it",
+   "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "2557979fbd1c0b8d",
+    "text": "99cc714efc271a25",
     "traits": "d9172dabbd56b049",
-    "facts": "c00465774a257291",
-    "facts2": "144cf636eba42a4a",
-    "all": "239ef322866e551e"
+    "facts": "b30926bba2e48d89",
+    "facts2": "c1b7d3bced5f1fa6",
+    "all": "4324df60f95b6c2e"
    },
    "row_hash": "80d415cf08e0ebfe",
    "carried": true,
-   "pass": 9
+   "pass": 22
   },
   {
    "row": "B8",
    "screen": "walk_vance_ledger.past",
    "verdict": "PASS",
-   "line": "You walk past. You hear the box lid shut behind you. Number nine. You wonder who that is.",
-   "why": "no number disagrees with PLAN (rent Sunday, Friday, number nine); the only garments named are the other people's, not hers",
-   "cause": "",
+   "line": "You turn back down the path. You hear the box lid shut behind you. Number nine. You wonder who that is.",
+   "why": "no garment, no number in conflict",
+   "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "2c890f8a73feab69",
+    "text": "5891b7656bc80228",
     "traits": "44136fa355b3678a",
-    "facts": "978c7e388c3b3778",
-    "facts2": "978c7e388c3b3778",
-    "all": "2c7440d174a776b1"
+    "facts": "2b24101436cc0afd",
+    "facts2": "2b24101436cc0afd",
+    "all": "bd6a6636fe4df7c0"
    },
    "row_hash": "80d415cf08e0ebfe",
    "carried": true,
-   "pass": 9
+   "pass": 22
   },
   {
    "row": "B9",
@@ -2884,6 +2884,25 @@
    "pass": 12
   },
   {
+   "row": "C2196",
+   "screen": "walk_vance_ledger.moment",
+   "verdict": "PASS",
+   "line": "The man next door is on his porch with a shoebox of envelopes on his knee, licking his thumb, counting.",
+   "why": "what is she doing: she has just walked up from the street (entry_only_from hood_street), in whatever she had on; the words ask nothing of her but to see him counting; no garment named",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "99cc714efc271a25",
+    "traits": "d9172dabbd56b049",
+    "facts": "b30926bba2e48d89",
+    "facts2": "c1b7d3bced5f1fa6",
+    "all": "4324df60f95b6c2e"
+   },
+   "row_hash": "a8ae0700d13a7f9b",
+   "carried": true,
+   "pass": 22
+  },
+  {
    "row": "C2197",
    "screen": "*",
    "verdict": "PASS",
@@ -3544,58 +3563,58 @@
    "row": "C460",
    "screen": "walk_vance_ledger.hello",
    "verdict": "PASS",
-   "line": "Evening, little lady. Vance. I own your house. / He looks you over, slow, from your feet up, and doesn't hide it. / Your skin prickles. You keep your arms at your sides.",
-   "why": "true at 17:00 and 19:59 on any weekday, first visit and repeat; \"Your skin prickles\" claims nothing about her past or clothes",
+   "line": "\"Morning, little lady.\" (00:00-12:00) / \"Evening, little lady.\" (12:00-00:00); unmet adds \"Vance. I own your house.\"",
+   "why": "true on every minute the trigger opens: Saturday mornings say Morning, every evening window says Evening; met and unmet split by met_vance",
    "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "a8562f00077601b7",
+    "text": "6d5d9fb69ffff964",
     "traits": "d9172dabbd56b049",
-    "facts": "c00465774a257291",
-    "facts2": "144cf636eba42a4a",
-    "all": "1ca3bb890a4e7b2f"
+    "facts": "b30926bba2e48d89",
+    "facts2": "c1b7d3bced5f1fa6",
+    "all": "e0f587a4bfa89840"
    },
    "row_hash": "67e48e60d5053a2e",
    "carried": false,
-   "pass": 19
+   "pass": 23
   },
   {
    "row": "C460",
    "screen": "walk_vance_ledger.moment",
    "verdict": "PASS",
-   "line": "Vance is on his porch with a shoebox of envelopes on his knee, licking his thumb, counting. / Short again, number nine. Always number nine.",
-   "why": "Vance 'on his porch' at hood_street weekdays 17:00-20:00; gated npc_at_location; named only behind met_vance, 'the man next door' before; read on just stepping onto her street: he is on his porch as she passes; true at first and last minute of the window and on a second visit",
-   "cause": "",
+   "line": "The man next door is on his porch with a shoebox of envelopes on his knee, licking his thumb, counting.",
+   "why": "true on weekday evenings and both Saturday windows; nothing names an hour or a weekday",
+   "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "2557979fbd1c0b8d",
+    "text": "99cc714efc271a25",
     "traits": "d9172dabbd56b049",
-    "facts": "c00465774a257291",
-    "facts2": "144cf636eba42a4a",
-    "all": "239ef322866e551e"
+    "facts": "b30926bba2e48d89",
+    "facts2": "c1b7d3bced5f1fa6",
+    "all": "4324df60f95b6c2e"
    },
    "row_hash": "67e48e60d5053a2e",
    "carried": true,
-   "pass": 9
+   "pass": 22
   },
   {
    "row": "C460",
    "screen": "walk_vance_ledger.past",
    "verdict": "PASS",
-   "line": "You walk past. You hear the box lid shut behind you. Number nine. You wonder who that is.",
-   "why": "Vance 'on his porch' at hood_street weekdays 17:00-20:00; gated npc_at_location; named only behind met_vance, 'the man next door' before; true at first and last minute of the window and on a second visit",
-   "cause": "",
+   "line": "You turn back down the path. You hear the box lid shut behind you. Number nine. You wonder who that is.",
+   "why": "true on every showing",
+   "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "2c890f8a73feab69",
+    "text": "5891b7656bc80228",
     "traits": "44136fa355b3678a",
-    "facts": "978c7e388c3b3778",
-    "facts2": "978c7e388c3b3778",
-    "all": "2c7440d174a776b1"
+    "facts": "2b24101436cc0afd",
+    "facts2": "2b24101436cc0afd",
+    "all": "bd6a6636fe4df7c0"
    },
    "row_hash": "67e48e60d5053a2e",
    "carried": true,
-   "pass": 9
+   "pass": 22
   },
   {
    "row": "C461",
@@ -3896,58 +3915,58 @@
    "row": "C461",
    "screen": "walk_vance_ledger.hello",
    "verdict": "PASS",
-   "line": "Your skin prickles. You keep your arms at your sides.",
-   "why": "her reaction on her body, allowed under the rule; his lines fit his cast entry (PLAN:141, \"little lady\", \"I'm the one who knocks\")",
+   "line": "\"Morning, little lady.\" (00:00-12:00) / \"Evening, little lady.\" (12:00-00:00); unmet adds \"Vance. I own your house.\"",
+   "why": "the greeting is now a claim backed by a time_of_day group, not unbacked clock texture; the rest fits his cast entry (PLAN:141, 'little lady', 'I'm the one who knocks')",
    "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "a8562f00077601b7",
+    "text": "6d5d9fb69ffff964",
     "traits": "d9172dabbd56b049",
-    "facts": "c00465774a257291",
-    "facts2": "144cf636eba42a4a",
-    "all": "1ca3bb890a4e7b2f"
+    "facts": "b30926bba2e48d89",
+    "facts2": "c1b7d3bced5f1fa6",
+    "all": "e0f587a4bfa89840"
    },
    "row_hash": "310706ee076318f2",
    "carried": false,
-   "pass": 19
+   "pass": 23
   },
   {
    "row": "C461",
    "screen": "walk_vance_ledger.moment",
    "verdict": "PASS",
-   "line": "Vance is on his porch with a shoebox of envelopes on his knee, licking his thumb, counting. / Short again, number nine. Always number nine.",
-   "why": "texture and her reaction only; nothing that can clash with rows, clock or flags",
-   "cause": "",
+   "line": "The man next door is on his porch with a shoebox of envelopes on his knee, licking his thumb, counting.",
+   "why": "texture that can't clash",
+   "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "2557979fbd1c0b8d",
+    "text": "99cc714efc271a25",
     "traits": "d9172dabbd56b049",
-    "facts": "c00465774a257291",
-    "facts2": "144cf636eba42a4a",
-    "all": "239ef322866e551e"
+    "facts": "b30926bba2e48d89",
+    "facts2": "c1b7d3bced5f1fa6",
+    "all": "4324df60f95b6c2e"
    },
    "row_hash": "310706ee076318f2",
    "carried": true,
-   "pass": 9
+   "pass": 22
   },
   {
    "row": "C461",
    "screen": "walk_vance_ledger.past",
    "verdict": "PASS",
-   "line": "You walk past. You hear the box lid shut behind you. Number nine. You wonder who that is.",
-   "why": "texture and her reaction only; nothing that can clash with rows, clock or flags",
-   "cause": "",
+   "line": "You turn back down the path. You hear the box lid shut behind you. Number nine. You wonder who that is.",
+   "why": "texture and her own wondering",
+   "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "2c890f8a73feab69",
+    "text": "5891b7656bc80228",
     "traits": "44136fa355b3678a",
-    "facts": "978c7e388c3b3778",
-    "facts2": "978c7e388c3b3778",
-    "all": "2c7440d174a776b1"
+    "facts": "2b24101436cc0afd",
+    "facts2": "2b24101436cc0afd",
+    "all": "bd6a6636fe4df7c0"
    },
    "row_hash": "310706ee076318f2",
    "carried": true,
-   "pass": 9
+   "pass": 22
   },
   {
    "row": "C519",
@@ -4819,39 +4838,39 @@
    "row": "C927",
    "screen": "walk_vance_ledger.hello",
    "verdict": "PASS",
-   "line": "Done (time_progression_minutes = 5)",
-   "why": "exit costs 5 minutes",
+   "line": "text = \"Done\" ... time_progression_minutes = 5",
+   "why": "the exit states 5 minutes",
    "cause": null,
    "note": true,
    "screen_hash": {
-    "text": "a8562f00077601b7",
+    "text": "6d5d9fb69ffff964",
     "traits": "d9172dabbd56b049",
-    "facts": "c00465774a257291",
-    "facts2": "144cf636eba42a4a",
-    "all": "1ca3bb890a4e7b2f"
+    "facts": "b30926bba2e48d89",
+    "facts2": "c1b7d3bced5f1fa6",
+    "all": "e0f587a4bfa89840"
    },
    "row_hash": "4e86d143688ba8e5",
    "carried": false,
-   "pass": 19
+   "pass": 23
   },
   {
    "row": "C927",
    "screen": "walk_vance_ledger.past",
    "verdict": "PASS",
-   "line": "You walk past. You hear the box lid shut behind you. Number nine. You wonder who that is.",
-   "why": "node hops are inside the scene; Done costs time_progression_minutes = 5, no bare exit",
+   "line": "Done (time_progression_minutes = 5)",
+   "why": "the exit states 5 minutes",
    "cause": null,
    "note": true,
    "screen_hash": {
-    "text": "2c890f8a73feab69",
+    "text": "5891b7656bc80228",
     "traits": "44136fa355b3678a",
-    "facts": "978c7e388c3b3778",
-    "facts2": "978c7e388c3b3778",
-    "all": "2c7440d174a776b1"
+    "facts": "2b24101436cc0afd",
+    "facts2": "2b24101436cc0afd",
+    "all": "bd6a6636fe4df7c0"
    },
    "row_hash": "4e86d143688ba8e5",
    "carried": true,
-   "pass": 9
+   "pass": 22
   },
   {
    "row": "C928",
@@ -5097,39 +5116,39 @@
    "row": "C931",
    "screen": "walk_vance_ledger.hello",
    "verdict": "PASS",
-   "line": "time_of_day 17:00-20:00",
-   "why": "end exclusive, matches his row 17-20; \"Evening\" true across it",
+   "line": "time_of_day 00:00-12:00 / 12:00-00:00",
+   "why": "end exclusive, 12:00-00:00 wraps (endTotal < startTotal branch, v2.py:4828), no overlap and no gap at 12:00; the trigger's 17:00-20:00 matches his weekday row",
    "cause": null,
    "note": true,
    "screen_hash": {
-    "text": "a8562f00077601b7",
+    "text": "6d5d9fb69ffff964",
     "traits": "d9172dabbd56b049",
-    "facts": "c00465774a257291",
-    "facts2": "144cf636eba42a4a",
-    "all": "1ca3bb890a4e7b2f"
+    "facts": "b30926bba2e48d89",
+    "facts2": "c1b7d3bced5f1fa6",
+    "all": "e0f587a4bfa89840"
    },
    "row_hash": "1aadffd96e76381c",
    "carried": false,
-   "pass": 19
+   "pass": 23
   },
   {
    "row": "C931",
    "screen": "walk_vance_ledger.past",
    "verdict": "PASS",
-   "line": "You walk past. You hear the box lid shut behind you. Number nine. You wonder who that is.",
-   "why": "window read end-exclusive and wrapping as the rows do (23:00-01:00 on the weekday of the current day, like the schedule rows)",
+   "line": "time_of_day 17:00-20:00 inside the weekday [0-4] group",
+   "why": "same trigger; end exclusive, no wrap",
    "cause": null,
    "note": true,
    "screen_hash": {
-    "text": "2c890f8a73feab69",
+    "text": "5891b7656bc80228",
     "traits": "44136fa355b3678a",
-    "facts": "978c7e388c3b3778",
-    "facts2": "978c7e388c3b3778",
-    "all": "2c7440d174a776b1"
+    "facts": "2b24101436cc0afd",
+    "facts2": "2b24101436cc0afd",
+    "all": "bd6a6636fe4df7c0"
    },
    "row_hash": "1aadffd96e76381c",
    "carried": true,
-   "pass": 9
+   "pass": 22
   },
   {
    "row": "C951",
@@ -5492,58 +5511,58 @@
    "row": "L106",
    "screen": "walk_vance_ledger.hello",
    "verdict": "PASS",
-   "line": "Evening, little lady. Vance. I own your house. / He looks you over, slow, from your feet up, and doesn't hide it. / Your skin prickles. You keep your arms at your sides.",
-   "why": "his rows put him on hood_street at every minute the walk-in can fire",
+   "line": "Morning, little lady.",
+   "why": "npc_at_location npc_vance hood_next_door is_present on the trigger; only Vance (and the stepdad, absent, by name) appear",
    "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "a8562f00077601b7",
+    "text": "6d5d9fb69ffff964",
     "traits": "d9172dabbd56b049",
-    "facts": "c00465774a257291",
-    "facts2": "144cf636eba42a4a",
-    "all": "1ca3bb890a4e7b2f"
+    "facts": "b30926bba2e48d89",
+    "facts2": "c1b7d3bced5f1fa6",
+    "all": "e0f587a4bfa89840"
    },
    "row_hash": "13a714429d15f3b2",
    "carried": false,
-   "pass": 19
+   "pass": 23
   },
   {
    "row": "L106",
    "screen": "walk_vance_ledger.moment",
    "verdict": "PASS",
-   "line": "Vance is on his porch with a shoebox of envelopes on his knee, licking his thumb, counting. / Short again, number nine. Always number nine.",
-   "why": "Vance 'on his porch' at hood_street weekdays 17:00-20:00; gated npc_at_location; named only behind met_vance, 'the man next door' before; read on just stepping onto her street: he is on his porch as she passes; true at first and last minute of the window and on a second visit",
-   "cause": "",
+   "line": "The man next door is on his porch with a shoebox of envelopes on his knee, licking his thumb, counting.",
+   "why": "presence check on the trigger; who_is_where puts him there Mon-Fri 17-20, Sat 09-12 and 17-20",
+   "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "2557979fbd1c0b8d",
+    "text": "99cc714efc271a25",
     "traits": "d9172dabbd56b049",
-    "facts": "c00465774a257291",
-    "facts2": "144cf636eba42a4a",
-    "all": "239ef322866e551e"
+    "facts": "b30926bba2e48d89",
+    "facts2": "c1b7d3bced5f1fa6",
+    "all": "4324df60f95b6c2e"
    },
    "row_hash": "13a714429d15f3b2",
    "carried": true,
-   "pass": 9
+   "pass": 22
   },
   {
    "row": "L106",
    "screen": "walk_vance_ledger.past",
    "verdict": "PASS",
-   "line": "You walk past. You hear the box lid shut behind you. Number nine. You wonder who that is.",
-   "why": "Vance 'on his porch' at hood_street weekdays 17:00-20:00; gated npc_at_location; named only behind met_vance, 'the man next door' before; true at first and last minute of the window and on a second visit",
-   "cause": "",
+   "line": "You hear the box lid shut behind you.",
+   "why": "he is there by the same check",
+   "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "2c890f8a73feab69",
+    "text": "5891b7656bc80228",
     "traits": "44136fa355b3678a",
-    "facts": "978c7e388c3b3778",
-    "facts2": "978c7e388c3b3778",
-    "all": "2c7440d174a776b1"
+    "facts": "2b24101436cc0afd",
+    "facts2": "2b24101436cc0afd",
+    "all": "bd6a6636fe4df7c0"
    },
    "row_hash": "13a714429d15f3b2",
    "carried": true,
-   "pass": 9
+   "pass": 22
   },
   {
    "row": "L119",
@@ -5828,39 +5847,39 @@
    "row": "L167",
    "screen": "walk_vance_ledger.hello",
    "verdict": "N/A",
-   "line": "trigger_mode = \"random\", weekdays 17:00-20:00",
-   "why": "no activity row on this screen; a random walk-in, nothing greys",
+   "line": "(no activity row)",
+   "why": "a random walk-in, not a greyed row; its day kinds are one canvas with one OR group",
    "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "a8562f00077601b7",
+    "text": "6d5d9fb69ffff964",
     "traits": "d9172dabbd56b049",
-    "facts": "c00465774a257291",
-    "facts2": "144cf636eba42a4a",
-    "all": "1ca3bb890a4e7b2f"
+    "facts": "b30926bba2e48d89",
+    "facts2": "c1b7d3bced5f1fa6",
+    "all": "e0f587a4bfa89840"
    },
    "row_hash": "e64ce2672d85d2d8",
    "carried": false,
-   "pass": 19
+   "pass": 23
   },
   {
    "row": "L167",
    "screen": "walk_vance_ledger.past",
-   "verdict": "PASS",
-   "line": "You walk past. You hear the box lid shut behind you. Number nine. You wonder who that is.",
-   "why": "no activity row on this screen; as a random walk-in it stays hidden when shut (C916)",
-   "cause": "",
+   "verdict": "N/A",
+   "line": "(no activity row)",
+   "why": "a random walk-in, hidden when shut (C916); one canvas with one OR group",
+   "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "2c890f8a73feab69",
+    "text": "5891b7656bc80228",
     "traits": "44136fa355b3678a",
-    "facts": "978c7e388c3b3778",
-    "facts2": "978c7e388c3b3778",
-    "all": "2c7440d174a776b1"
+    "facts": "2b24101436cc0afd",
+    "facts2": "2b24101436cc0afd",
+    "all": "bd6a6636fe4df7c0"
    },
    "row_hash": "e64ce2672d85d2d8",
    "carried": true,
-   "pass": 9
+   "pass": 22
   },
   {
    "row": "L168",
