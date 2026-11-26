@@ -2418,6 +2418,234 @@
       "sha256": "0265b5d24036873baff27eb2ddb9cec34fe850003b713bbf3ac23e0bc819709f",
       "words": "ENI for LO (delegated 2026-11-24); LO \"yes\" (2026-11-26): twice a day; card body brought in line",
       "date": "2026-11-26"
+    },
+    {
+      "card": "P51",
+      "sha256": "58edb384e8174ce81247e1ed5701048d0422499d9abfe3cf600333ed5370eb5f",
+      "words": "ENI for LO (delegated 2026-11-24); LO \"Women bathroom to be outside lecture hall\", \"Go ahead with your picks\" (2026-11-26)",
+      "date": "2026-11-26"
+    },
+    {
+      "card": "P51",
+      "sha256": "10b8d00e634bae99fd974100b69ae6f5acfe383aca4f008979926ea8cd4839b9",
+      "words": "ENI for LO (delegated 2026-11-24); LO \"Women bathroom to be outside lecture hall\", \"Go ahead with your picks\" (2026-11-26)",
+      "date": "2026-11-26"
+    },
+    {
+      "card": "P52",
+      "sha256": "2569aed76ba0a65b90377ba5899b03cd5716f4f70464a2c5b68fdd1052e54859",
+      "words": "ENI for LO (delegated 2026-11-24); LO \"Timetable as the popup modal like in the old first term\", \"Go ahead with your picks\" (2026-11-26); shows from the start, the engine cannot gate it",
+      "date": "2026-11-26"
+    },
+    {
+      "card": "P53",
+      "sha256": "1c1109233d3e30c49beee52bfc0a9193dac09f1b5184162cb49fb31f3bf8549b",
+      "words": "ENI for LO (delegated 2026-11-24); LO \"Walk through campus door needs to be removed campus as a location in the town\", \"Go ahead with your picks\" (2026-11-26)",
+      "date": "2026-11-26"
+    },
+    {
+      "card": "P45",
+      "sha256": "938b8078de3e3ff5434b62afb8132f59a98cae01a1416482f57279b950f5d16b",
+      "words": "ENI for LO (delegated 2026-11-24): gate walks retired by P53",
+      "date": "2026-11-26"
+    },
+    {
+      "card": "P47",
+      "sha256": "45214f339195eb65a87580f20f1dfe34bacbd77a508293f9302e7a4aeae47bf1",
+      "words": "ENI for LO (delegated 2026-11-24): timing line after P53 (no gates walk)",
+      "date": "2026-11-26"
+    },
+    {
+      "card": "P45",
+      "sha256": "f07ef419542f73b5bd2e84b6d3ccbcbb1497669916b7689f962a5e5d0d841d18",
+      "words": "ENI for LO (delegated 2026-11-24): gate walks retired by P53",
+      "date": "2026-11-26"
+    },
+    {
+      "card": "P54",
+      "sha256": "032ccf773a8ba377c21bcaaf5d3df443d7ba755f2cdd6be736ea1f28e3d061f7",
+      "words": "ENI for LO (delegated 2026-11-24); LO \"Each facility to get there own office\", \"Go ahead with your picks\" (2026-11-26)",
+      "date": "2026-11-26"
+    },
+    {
+      "card": "P51",
+      "sha256": "3929bd4ff1a36b4132dc35545fb0aefb58021fe002f379a8afaf719a19c843b3",
+      "words": "ENI for LO (delegated 2026-11-24); LO \"Women bathroom to be outside lecture hall\", \"Go ahead with your picks\" (2026-11-26)",
+      "date": "2026-11-26"
+    },
+    {
+      "card": "P53",
+      "sha256": "538002cd84099a738aaeeded5433b5721bb725c12c75c0df0136bc8cb2c80ddd",
+      "words": "ENI for LO (delegated 2026-11-24); LO \"campus as a location in the town\", \"Go ahead with your picks\" (2026-11-26)",
+      "date": "2026-11-26"
+    },
+    {
+      "card": "P54",
+      "sha256": "d21cb4317d041d298b08efde685670d0e56532bc1247f85fdccb760f0abe4868",
+      "words": "ENI for LO (delegated 2026-11-24); LO \"Each facility to get there own office\", \"Go ahead with your picks\" (2026-11-26)",
+      "date": "2026-11-26"
+    },
+    {
+      "card": "P30",
+      "sha256": "6f13a370f140bc41af624f61bfd259c7e54d69672df4f6ab26dd31814529ce95",
+      "words": "ENI for LO (delegated 2026-11-24): moved into the offices by P54 (LO \"Each facility to get there own office\", 2026-11-26)",
+      "date": "2026-11-26"
+    },
+    {
+      "card": "P40",
+      "sha256": "09b22b8e4e9b955da403866e65c4121af55c1eb8c97c3123b33fcd276a2c97e4",
+      "words": "ENI for LO (delegated 2026-11-24): moved into the offices by P54 (LO \"Each facility to get there own office\", 2026-11-26)",
+      "date": "2026-11-26"
+    },
+    {
+      "card": "P47",
+      "sha256": "964c85cd651624fe7c6c2acc53090448be5e706b73c1142ef06dcc63a7d7cf58",
+      "words": "ENI for LO (delegated 2026-11-24): moved into the offices by P54 (LO \"Each facility to get there own office\", 2026-11-26)",
+      "date": "2026-11-26"
+    },
+    {
+      "card": "P49",
+      "sha256": "601fd61ef9c2eb1f40289a9e3c904802c08b5ed3b7f72de469852b4f9158c1b2",
+      "words": "ENI for LO (delegated 2026-11-24): moved into the offices by P54 (LO \"Each facility to get there own office\", 2026-11-26)",
+      "date": "2026-11-26"
+    },
+    {
+      "card": "P40",
+      "sha256": "5ac2aaa11840dac95725c6c05265e00a8131050445eec7634d90642db88e6d50",
+      "words": "ENI for LO (delegated 2026-11-24): moved into the Psychology Office by P54",
+      "date": "2026-11-26"
+    },
+    {
+      "card": "P52",
+      "sha256": "935897165d312012e4c9e5d640692f8a01a11c4304e0b4869b3c297e6096cb2f",
+      "words": "ENI for LO (delegated 2026-11-24): late_until per class (reader c1)",
+      "date": "2026-11-26"
+    },
+    {
+      "card": "P49",
+      "sha256": "0255fe29e69595e73d2ef2ee8977595e94461cb2a4d0f58a0917721ee47ff58f",
+      "words": "ENI for LO (delegated 2026-11-24): hale_called_in Done back to the corridor (reader c1, c2)",
+      "date": "2026-11-26"
+    },
+    {
+      "card": "P04",
+      "sha256": "9ab5ab4087acf1d2157dcd20d9a4a5d7bcc9ca7b73fac3b3d45090bffd3191d7",
+      "words": "ENI for LO (delegated 2026-11-24): the gates line brought up to P53",
+      "date": "2026-11-26"
+    },
+    {
+      "card": "P04",
+      "sha256": "45bc5269dcdf436e39e6a0deb017f51972334cc8c6ea07c3f63f8a605ab7d3e3",
+      "words": "ENI for LO (delegated 2026-11-24): the gates lines brought up to P53",
+      "date": "2026-11-26"
+    },
+    {
+      "card": "P04",
+      "sha256": "610b81f6d6c7498936a3ada7805c614afd37b23d2f4ff195190f34a3b01ceeb9",
+      "words": "ENI for LO (delegated 2026-11-24): the gates and travel lines brought up to P45 and P53",
+      "date": "2026-11-26"
+    },
+    {
+      "card": "P04",
+      "sha256": "a8287839b277a0801ca0abd715b030bdd3e178a04fe7e4f382302a7230ce15ef",
+      "words": "ENI for LO (delegated 2026-11-24): the gates and travel lines brought up to P45 and P53",
+      "date": "2026-11-26"
+    },
+    {
+      "card": "P55",
+      "sha256": "a4fb9768a014ace6652b25056d1762e87ec999b1f32f44235cf389f85604b473",
+      "words": "ENI for LO (delegated 2026-11-24); LO \"2nd one\", \"Go\" (2026-11-26): walk-ins fire by chance",
+      "date": "2026-11-26"
+    },
+    {
+      "card": "P04",
+      "sha256": "9dae3028e58cc0fd78d04dec535b7216b9cbd13aa8cc66606b393331df62af79",
+      "words": "ENI for LO (delegated 2026-11-24): brought up to P45, P51, P53, P54",
+      "date": "2026-11-26"
+    },
+    {
+      "card": "P38",
+      "sha256": "8ca2cec22d48c86e81a66255783bae118e91549dab60ded0ff2e18e962613fe3",
+      "words": "ENI for LO (delegated 2026-11-24); LO \"2nd one\", \"Go\" (2026-11-26): walk-ins fire by chance (P55)",
+      "date": "2026-11-26"
+    },
+    {
+      "card": "P39",
+      "sha256": "7e10e626e0230bc704de4fce91263a2b4b62586393e00d9c7af8d2e3a32337d7",
+      "words": "ENI for LO (delegated 2026-11-24); LO \"2nd one\", \"Go\" (2026-11-26): walk-ins fire by chance (P55)",
+      "date": "2026-11-26"
+    },
+    {
+      "card": "P40",
+      "sha256": "acc508941c5dd8c0ac8c910374b2efa758b46b5d54f22cd3961b6f9e5c4d13d2",
+      "words": "ENI for LO (delegated 2026-11-24); LO \"2nd one\", \"Go\" (2026-11-26): walk-ins fire by chance (P55)",
+      "date": "2026-11-26"
+    },
+    {
+      "card": "P41",
+      "sha256": "c8e0daf1c3b57f4c553d495af365b82f23c3f7f9d142563b49e34ba142150856",
+      "words": "ENI for LO (delegated 2026-11-24); LO \"2nd one\", \"Go\" (2026-11-26): walk-ins fire by chance (P55)",
+      "date": "2026-11-26"
+    },
+    {
+      "card": "P38",
+      "sha256": "b7b721c87fa2fc9797cd9f7a2400aa51c678b32717d2a57bce9336208104b14c",
+      "words": "ENI for LO (delegated 2026-11-24): reader fixes after P55 (walk-ins on arrival; L97)",
+      "date": "2026-11-26"
+    },
+    {
+      "card": "P39",
+      "sha256": "2405317a1bb7cfd1bbbcf113564eba643759b32c514a4e951fbbd3531bed2b48",
+      "words": "ENI for LO (delegated 2026-11-24): reader fixes after P55 (walk-ins on arrival; L97)",
+      "date": "2026-11-26"
+    },
+    {
+      "card": "P38",
+      "sha256": "6669f035d35a4f38b85a4bc1e1b70090be496713cbd914eb75ad6c211f5497fd",
+      "words": "ENI for LO (delegated 2026-11-24): reader fixes after P55 (walk-ins on arrival)",
+      "date": "2026-11-26"
+    },
+    {
+      "card": "P40",
+      "sha256": "37d66817be2283de3dbb04ceef0f7d1d8c9a693d3c066a880bac47f7b559103b",
+      "words": "ENI for LO (delegated 2026-11-24): reader fixes after P55 (walk-ins on arrival)",
+      "date": "2026-11-26"
+    },
+    {
+      "card": "P41",
+      "sha256": "4389f53064e0ce18f6ec64a535acbe9d189cfb514188605d9056f872c2c32744",
+      "words": "ENI for LO (delegated 2026-11-24): reader fixes after P55 (walk-ins on arrival)",
+      "date": "2026-11-26"
+    },
+    {
+      "card": "P04",
+      "sha256": "f48e369421b27fc2ef9720d53c16f7a705c017f25f72898825f4b269e2234442",
+      "words": "ENI for LO (delegated 2026-11-24): reader fixes (P55 round)",
+      "date": "2026-11-26"
+    },
+    {
+      "card": "P41",
+      "sha256": "284eb78ef2bc68047627077136c50c928b20c4b50623e4ac036e9d083b076ac5",
+      "words": "ENI for LO (delegated 2026-11-24): reader fixes (P55 round)",
+      "date": "2026-11-26"
+    },
+    {
+      "card": "P41",
+      "sha256": "15ed2a9e1655a4ab7b8e41f6e74e931d36a8fe75036607b15af11819e0694f00",
+      "words": "ENI for LO (delegated 2026-11-24): reader fixes (P55 round)",
+      "date": "2026-11-26"
+    },
+    {
+      "card": "P04",
+      "sha256": "ed05ea8923293164223f2e48f433befc674b413ee0995ba01857e3b2e8035a7b",
+      "words": "ENI for LO (delegated 2026-11-24): reader fixes (P55 round)",
+      "date": "2026-11-26"
+    },
+    {
+      "card": "P39",
+      "sha256": "76e2b523127a15063aac7307ac8e7272b46387873e1716aae16d5a9e317c4a69",
+      "words": "ENI for LO (delegated 2026-11-24): reader fixes (P55 round)",
+      "date": "2026-11-26"
     }
   ]
 }

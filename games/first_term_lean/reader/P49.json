@@ -1,6 +1,6 @@
 {
  "piece": "P49",
- "pass": 7,
+ "pass": 10,
  "screens": {
   "ryan_charger.moment": {
    "text": "313906c8298f2b26",
@@ -157,25 +157,25 @@
    "all": "8201e9c7959847d8"
   },
   "hale_called_in.moment": {
-   "text": "f4f26289fd653ba2",
+   "text": "f1306f5ed757f9ab",
    "traits": "825724317465730d",
-   "facts": "cbcf54fc4dfa6073",
-   "facts2": "2b9068e4caba1752",
-   "all": "70b96e8554cd9787"
+   "facts": "6ea67dc58c8d9698",
+   "facts2": "ed9eba5ccb976fe4",
+   "all": "60672e322c6eb2bc"
   },
   "hale_called_in.yes": {
-   "text": "f98a83957ee8b77e",
+   "text": "838b33f9e7511aca",
    "traits": "825724317465730d",
-   "facts": "913abcc6c4b17b27",
-   "facts2": "cd431bea73f6a8a7",
-   "all": "2ff3c463385990da"
+   "facts": "fd5820751f6e5a46",
+   "facts2": "c9746283a91d302d",
+   "all": "98b56092ce8bf016"
   },
   "hale_called_in.go": {
-   "text": "349f5cd13a90aeee",
+   "text": "7d6847f2c07888cd",
    "traits": "825724317465730d",
-   "facts": "913abcc6c4b17b27",
-   "facts2": "cd431bea73f6a8a7",
-   "all": "a26358848a13db3b"
+   "facts": "fd5820751f6e5a46",
+   "facts2": "c9746283a91d302d",
+   "all": "11f18506cdfd9b90"
   },
   "marco_hips.moment": {
    "text": "a342c6199214df5d",
@@ -233,7 +233,7 @@
    "facts2": "5c2a5075c1a7cd39",
    "all": "284f41d00daf72a1"
   },
-  "*": "e21f8c3e32bf52db"
+  "*": "d12e9c24872493aa"
  },
  "rows": {
   "B1": "5276068df1ca6fa9",
@@ -368,7 +368,8 @@
   "C2186": "39e6f4b48d03d606",
   "C2187": "f2b54b1dd7c15f2f",
   "C2188": "612394eef6826900",
-  "C2189": "20748838895e4545"
+  "C2189": "20748838895e4545",
+  "C2195": "77083291a86791c3"
  },
  "verdicts": [
   {
@@ -381,62 +382,65 @@
    "note": false,
    "screen_hash": "e21f8c3e32bf52db",
    "row_hash": "5276068df1ca6fa9",
-   "carried": false,
+   "carried": true,
    "pass": 7
   },
   {
    "row": "B10",
    "screen": "hale_called_in.go",
    "verdict": "PASS",
-   "line": "A knock, late. Ryan's in your doorframe with your charger.",
-   "why": "checked at first and last minute and second visit against who_is_where: Ryan in home_ryans_room 08-12 / 23-24, Laura kitchen 17-19, Zoe and Jake quad 14-15, Vance porch, Hale office 14-17, Nadia library 14-18; one-time scenes have no second visit",
+   "line": "His door stays open behind you. \u2192 Done \u2192 campus_offices",
+   "why": "Done now lands in the corridor, open weekdays 08:00-18:00; an arrival at 16:59 lands there 17:04, open; he is in his office (row 14-17) for every line; she has left, as the line says",
    "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "349f5cd13a90aeee",
-    "facts": "913abcc6c4b17b27",
-    "facts2": "cd431bea73f6a8a7",
-    "all": "a26358848a13db3b"
+    "text": "7d6847f2c07888cd",
+    "traits": "825724317465730d",
+    "facts": "fd5820751f6e5a46",
+    "facts2": "c9746283a91d302d",
+    "all": "11f18506cdfd9b90"
    },
    "row_hash": "c1c0e2ac2588a579",
    "carried": true,
-   "pass": 1
+   "pass": 9
   },
   {
    "row": "B10",
    "screen": "hale_called_in.moment",
    "verdict": "PASS",
-   "line": "A knock, late. Ryan's in your doorframe with your charger.",
-   "why": "checked at first and last minute and second visit against who_is_where: Ryan in home_ryans_room 08-12 / 23-24, Laura kitchen 17-19, Zoe and Jake quad 14-15, Vance porch, Hale office 14-17, Nadia library 14-18; one-time scenes have no second visit",
+   "line": "Dr. Hale looks up from his desk before you're through his door.",
+   "why": "fires on arrival in his office Mon/Wed 14:00-16:59, requires_npc; his row has him there 14-17",
    "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "f4f26289fd653ba2",
-    "facts": "cbcf54fc4dfa6073",
-    "facts2": "2b9068e4caba1752",
-    "all": "70b96e8554cd9787"
+    "text": "f1306f5ed757f9ab",
+    "traits": "825724317465730d",
+    "facts": "6ea67dc58c8d9698",
+    "facts2": "ed9eba5ccb976fe4",
+    "all": "60672e322c6eb2bc"
    },
    "row_hash": "c1c0e2ac2588a579",
    "carried": true,
-   "pass": 1
+   "pass": 8
   },
   {
    "row": "B10",
    "screen": "hale_called_in.yes",
    "verdict": "PASS",
-   "line": "A knock, late. Ryan's in your doorframe with your charger.",
-   "why": "checked at first and last minute and second visit against who_is_where: Ryan in home_ryans_room 08-12 / 23-24, Laura kitchen 17-19, Zoe and Jake quad 14-15, Vance porch, Hale office 14-17, Nadia library 14-18; one-time scenes have no second visit",
+   "line": "Done \u2192 campus_offices (5 min)",
+   "why": "Done now lands in the corridor, open weekdays 08:00-18:00; an arrival at 16:59 lands there 17:04, open; he is in his office (row 14-17) for every line",
    "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "f98a83957ee8b77e",
-    "facts": "913abcc6c4b17b27",
-    "facts2": "cd431bea73f6a8a7",
-    "all": "2ff3c463385990da"
+    "text": "838b33f9e7511aca",
+    "traits": "825724317465730d",
+    "facts": "fd5820751f6e5a46",
+    "facts2": "c9746283a91d302d",
+    "all": "98b56092ce8bf016"
    },
    "row_hash": "c1c0e2ac2588a579",
    "carried": true,
-   "pass": 1
+   "pass": 9
   },
   {
    "row": "B10",
@@ -652,7 +656,7 @@
     "all": "585a226b99ee83db"
    },
    "row_hash": "c1c0e2ac2588a579",
-   "carried": false,
+   "carried": true,
    "pass": 7
   },
   {
@@ -708,7 +712,7 @@
     "all": "1a9d24549c5e70f6"
    },
    "row_hash": "c1c0e2ac2588a579",
-   "carried": false,
+   "carried": true,
    "pass": 7
   },
   {
@@ -727,7 +731,7 @@
     "all": "acd7ba9ed82826e4"
    },
    "row_hash": "c1c0e2ac2588a579",
-   "carried": false,
+   "carried": true,
    "pass": 7
   },
   {
@@ -746,7 +750,7 @@
     "all": "48878c52b6a0aa3c"
    },
    "row_hash": "c1c0e2ac2588a579",
-   "carried": false,
+   "carried": true,
    "pass": 7
   },
   {
@@ -765,7 +769,7 @@
     "all": "405e9c94dcd213f1"
    },
    "row_hash": "c1c0e2ac2588a579",
-   "carried": false,
+   "carried": true,
    "pass": 7
   },
   {
@@ -1013,7 +1017,7 @@
     "all": "acd7ba9ed82826e4"
    },
    "row_hash": "1e252efd0904a971",
-   "carried": false,
+   "carried": true,
    "pass": 7
   },
   {
@@ -1068,7 +1072,7 @@
     "all": "acd7ba9ed82826e4"
    },
    "row_hash": "fd109745c67b71d7",
-   "carried": false,
+   "carried": true,
    "pass": 7
   },
   {
@@ -1154,7 +1158,7 @@
     "all": "acd7ba9ed82826e4"
    },
    "row_hash": "aaf6518b64dcce55",
-   "carried": false,
+   "carried": true,
    "pass": 7
   },
   {
@@ -1167,7 +1171,7 @@
    "note": false,
    "screen_hash": "e21f8c3e32bf52db",
    "row_hash": "4d9f2ebbce9a39cc",
-   "carried": false,
+   "carried": true,
    "pass": 7
   },
   {
@@ -1510,7 +1514,7 @@
     "all": "acd7ba9ed82826e4"
    },
    "row_hash": "4d1fce1c4523b5d4",
-   "carried": false,
+   "carried": true,
    "pass": 7
   },
   {
@@ -2105,7 +2109,7 @@
     "all": "acd7ba9ed82826e4"
    },
    "row_hash": "ced37cb0de6e7202",
-   "carried": false,
+   "carried": true,
    "pass": 7
   },
   {
@@ -2389,7 +2393,7 @@
     "all": "acd7ba9ed82826e4"
    },
    "row_hash": "efcbd1ac6a95e2f2",
-   "carried": false,
+   "carried": true,
    "pass": 7
   },
   {
@@ -2421,7 +2425,7 @@
     "all": "acd7ba9ed82826e4"
    },
    "row_hash": "0e32092e9fe64f2c",
-   "carried": false,
+   "carried": true,
    "pass": 7
   },
   {
@@ -2453,7 +2457,7 @@
     "all": "acd7ba9ed82826e4"
    },
    "row_hash": "cef53154cc971fef",
-   "carried": false,
+   "carried": true,
    "pass": 7
   },
   {
@@ -2468,6 +2472,63 @@
    "row_hash": "80d415cf08e0ebfe",
    "carried": true,
    "pass": 1
+  },
+  {
+   "row": "B8",
+   "screen": "hale_called_in.go",
+   "verdict": "PASS",
+   "line": "Of course you do.",
+   "why": "no garment, no number",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "7d6847f2c07888cd",
+    "traits": "825724317465730d",
+    "facts": "fd5820751f6e5a46",
+    "facts2": "c9746283a91d302d",
+    "all": "11f18506cdfd9b90"
+   },
+   "row_hash": "80d415cf08e0ebfe",
+   "carried": true,
+   "pass": 9
+  },
+  {
+   "row": "B8",
+   "screen": "hale_called_in.moment",
+   "verdict": "PASS",
+   "line": "His eyes go to your chest and stay there.",
+   "why": "no garment, no number",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "f1306f5ed757f9ab",
+    "traits": "825724317465730d",
+    "facts": "6ea67dc58c8d9698",
+    "facts2": "ed9eba5ccb976fe4",
+    "all": "60672e322c6eb2bc"
+   },
+   "row_hash": "80d415cf08e0ebfe",
+   "carried": true,
+   "pass": 8
+  },
+  {
+   "row": "B8",
+   "screen": "hale_called_in.yes",
+   "verdict": "PASS",
+   "line": "He smiles and goes back to his list.",
+   "why": "no garment, no number",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "838b33f9e7511aca",
+    "traits": "825724317465730d",
+    "facts": "fd5820751f6e5a46",
+    "facts2": "c9746283a91d302d",
+    "all": "98b56092ce8bf016"
+   },
+   "row_hash": "80d415cf08e0ebfe",
+   "carried": true,
+   "pass": 9
   },
   {
    "row": "B8",
@@ -2683,7 +2744,7 @@
     "all": "585a226b99ee83db"
    },
    "row_hash": "80d415cf08e0ebfe",
-   "carried": false,
+   "carried": true,
    "pass": 7
   },
   {
@@ -2739,7 +2800,7 @@
     "all": "1a9d24549c5e70f6"
    },
    "row_hash": "80d415cf08e0ebfe",
-   "carried": false,
+   "carried": true,
    "pass": 7
   },
   {
@@ -2758,7 +2819,7 @@
     "all": "acd7ba9ed82826e4"
    },
    "row_hash": "80d415cf08e0ebfe",
-   "carried": false,
+   "carried": true,
    "pass": 7
   },
   {
@@ -2777,7 +2838,7 @@
     "all": "48878c52b6a0aa3c"
    },
    "row_hash": "80d415cf08e0ebfe",
-   "carried": false,
+   "carried": true,
    "pass": 7
   },
   {
@@ -2796,7 +2857,7 @@
     "all": "405e9c94dcd213f1"
    },
    "row_hash": "80d415cf08e0ebfe",
-   "carried": false,
+   "carried": true,
    "pass": 7
   },
   {
@@ -3025,7 +3086,7 @@
    "note": false,
    "screen_hash": "e21f8c3e32bf52db",
    "row_hash": "3b1fcdf549bcc558",
-   "carried": false,
+   "carried": true,
    "pass": 7
   },
   {
@@ -3057,7 +3118,7 @@
     "all": "acd7ba9ed82826e4"
    },
    "row_hash": "657248766e62061f",
-   "carried": false,
+   "carried": true,
    "pass": 7
   },
   {
@@ -3089,7 +3150,7 @@
     "all": "acd7ba9ed82826e4"
    },
    "row_hash": "541a03815a8d19c4",
-   "carried": false,
+   "carried": true,
    "pass": 7
   },
   {
@@ -3134,7 +3195,7 @@
     "all": "acd7ba9ed82826e4"
    },
    "row_hash": "71c57d9a2f8fdca7",
-   "carried": false,
+   "carried": true,
    "pass": 7
   },
   {
@@ -3166,7 +3227,7 @@
     "all": "acd7ba9ed82826e4"
    },
    "row_hash": "db808998ed69c649",
-   "carried": false,
+   "carried": true,
    "pass": 7
   },
   {
@@ -3211,7 +3272,7 @@
     "all": "acd7ba9ed82826e4"
    },
    "row_hash": "2afadc6bbe1996bd",
-   "carried": false,
+   "carried": true,
    "pass": 7
   },
   {
@@ -3243,7 +3304,7 @@
     "all": "acd7ba9ed82826e4"
    },
    "row_hash": "48eae9ceae06ae00",
-   "carried": false,
+   "carried": true,
    "pass": 7
   },
   {
@@ -3275,7 +3336,7 @@
     "all": "acd7ba9ed82826e4"
    },
    "row_hash": "65e6616cd17c7eb3",
-   "carried": false,
+   "carried": true,
    "pass": 7
   },
   {
@@ -3307,7 +3368,7 @@
     "all": "acd7ba9ed82826e4"
    },
    "row_hash": "18d85534582def9d",
-   "carried": false,
+   "carried": true,
    "pass": 7
   },
   {
@@ -3339,7 +3400,7 @@
     "all": "acd7ba9ed82826e4"
    },
    "row_hash": "3835fed23cc316c7",
-   "carried": false,
+   "carried": true,
    "pass": 7
   },
   {
@@ -3371,7 +3432,7 @@
     "all": "acd7ba9ed82826e4"
    },
    "row_hash": "fde578d75b0d3620",
-   "carried": false,
+   "carried": true,
    "pass": 7
   },
   {
@@ -3416,7 +3477,7 @@
     "all": "acd7ba9ed82826e4"
    },
    "row_hash": "5b031a6b82899cfd",
-   "carried": false,
+   "carried": true,
    "pass": 7
   },
   {
@@ -3448,7 +3509,7 @@
     "all": "acd7ba9ed82826e4"
    },
    "row_hash": "c26c2fb5c1443dab",
-   "carried": false,
+   "carried": true,
    "pass": 7
   },
   {
@@ -3480,7 +3541,7 @@
     "all": "acd7ba9ed82826e4"
    },
    "row_hash": "9a1ab783f9ab6731",
-   "carried": false,
+   "carried": true,
    "pass": 7
   },
   {
@@ -3512,7 +3573,7 @@
     "all": "acd7ba9ed82826e4"
    },
    "row_hash": "b76a6583ae88c60f",
-   "carried": false,
+   "carried": true,
    "pass": 7
   },
   {
@@ -3544,7 +3605,7 @@
     "all": "acd7ba9ed82826e4"
    },
    "row_hash": "59e008f8733a29e2",
-   "carried": false,
+   "carried": true,
    "pass": 7
   },
   {
@@ -3576,7 +3637,7 @@
     "all": "acd7ba9ed82826e4"
    },
    "row_hash": "823e315ef0b56f94",
-   "carried": false,
+   "carried": true,
    "pass": 7
   },
   {
@@ -3608,7 +3669,7 @@
     "all": "acd7ba9ed82826e4"
    },
    "row_hash": "8c9dc844365f81a5",
-   "carried": false,
+   "carried": true,
    "pass": 7
   },
   {
@@ -3640,7 +3701,7 @@
     "all": "acd7ba9ed82826e4"
    },
    "row_hash": "ef34ee4a51e65d00",
-   "carried": false,
+   "carried": true,
    "pass": 7
   },
   {
@@ -3672,7 +3733,7 @@
     "all": "acd7ba9ed82826e4"
    },
    "row_hash": "4b77685af58632a5",
-   "carried": false,
+   "carried": true,
    "pass": 7
   },
   {
@@ -3704,7 +3765,7 @@
     "all": "acd7ba9ed82826e4"
    },
    "row_hash": "34826508394ba8c0",
-   "carried": false,
+   "carried": true,
    "pass": 7
   },
   {
@@ -3736,7 +3797,7 @@
     "all": "acd7ba9ed82826e4"
    },
    "row_hash": "68a94621cd19c13c",
-   "carried": false,
+   "carried": true,
    "pass": 7
   },
   {
@@ -3768,7 +3829,7 @@
     "all": "acd7ba9ed82826e4"
    },
    "row_hash": "cf8af3e56f435107",
-   "carried": false,
+   "carried": true,
    "pass": 7
   },
   {
@@ -3800,7 +3861,7 @@
     "all": "acd7ba9ed82826e4"
    },
    "row_hash": "aca442d29c1c8146",
-   "carried": false,
+   "carried": true,
    "pass": 7
   },
   {
@@ -3832,7 +3893,7 @@
     "all": "acd7ba9ed82826e4"
    },
    "row_hash": "ccd7a74d85c7d7fe",
-   "carried": false,
+   "carried": true,
    "pass": 7
   },
   {
@@ -3864,7 +3925,7 @@
     "all": "acd7ba9ed82826e4"
    },
    "row_hash": "f47fc5030774db86",
-   "carried": false,
+   "carried": true,
    "pass": 7
   },
   {
@@ -3896,7 +3957,7 @@
     "all": "acd7ba9ed82826e4"
    },
    "row_hash": "6ac94d11992c72ec",
-   "carried": false,
+   "carried": true,
    "pass": 7
   },
   {
@@ -3928,7 +3989,7 @@
     "all": "acd7ba9ed82826e4"
    },
    "row_hash": "e4d4d230d2bd3815",
-   "carried": false,
+   "carried": true,
    "pass": 7
   },
   {
@@ -3960,7 +4021,7 @@
     "all": "acd7ba9ed82826e4"
    },
    "row_hash": "6b5fb464471de4c7",
-   "carried": false,
+   "carried": true,
    "pass": 7
   },
   {
@@ -3992,7 +4053,7 @@
     "all": "acd7ba9ed82826e4"
    },
    "row_hash": "a08ace799dcefe85",
-   "carried": false,
+   "carried": true,
    "pass": 7
   },
   {
@@ -4245,7 +4306,7 @@
     "all": "acd7ba9ed82826e4"
    },
    "row_hash": "b8cdd5b1ce3f89ea",
-   "carried": false,
+   "carried": true,
    "pass": 7
   },
   {
@@ -4433,18 +4494,19 @@
    "screen": "hale_called_in.moment",
    "verdict": "FAIL",
    "line": "\"Young lady. In here a minute.\" / \"Front row, next class. I like to see who's listening.\"",
-   "why": "note row: two spoken lines on a repeatable",
+   "why": "note row: two spoken lines on a repeatable (unchanged by the move)",
    "cause": null,
    "note": true,
    "screen_hash": {
-    "text": "f4f26289fd653ba2",
-    "facts": "cbcf54fc4dfa6073",
-    "facts2": "2b9068e4caba1752",
-    "all": "70b96e8554cd9787"
+    "text": "f1306f5ed757f9ab",
+    "traits": "825724317465730d",
+    "facts": "6ea67dc58c8d9698",
+    "facts2": "ed9eba5ccb976fe4",
+    "all": "60672e322c6eb2bc"
    },
    "row_hash": "d5758757a709b1af",
    "carried": true,
-   "pass": 1
+   "pass": 8
   },
   {
    "row": "C151",
@@ -4678,7 +4740,7 @@
     "all": "acd7ba9ed82826e4"
    },
    "row_hash": "d5758757a709b1af",
-   "carried": false,
+   "carried": true,
    "pass": 7
   },
   {
@@ -5122,7 +5184,7 @@
     "all": "acd7ba9ed82826e4"
    },
    "row_hash": "47b9477e3ec8a790",
-   "carried": false,
+   "carried": true,
    "pass": 7
   },
   {
@@ -5360,7 +5422,7 @@
     "all": "acd7ba9ed82826e4"
    },
    "row_hash": "20748838895e4545",
-   "carried": false,
+   "carried": true,
    "pass": 7
   },
   {
@@ -5721,7 +5783,7 @@
     "all": "acd7ba9ed82826e4"
    },
    "row_hash": "0c03931191c53a34",
-   "carried": false,
+   "carried": true,
    "pass": 7
   },
   {
@@ -5989,6 +6051,19 @@
    "row_hash": "0c03931191c53a34",
    "carried": true,
    "pass": 5
+  },
+  {
+   "row": "C2195",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "ryan_charger ... nadia_tip: trigger_mode = \"random\", chance 0.65, max_triggers_per_day = 1, came_to_her_today read and set on every choice",
+   "why": "P49's ten are kind (b): each fires by itself on arrival, none is a button; C2195's kind-(a) half (off the shared flag) does not apply to them, and no kind-(a) scene reads or sets came_to_her_today (grep)",
+   "cause": null,
+   "note": false,
+   "screen_hash": "d12e9c24872493aa",
+   "row_hash": "77083291a86791c3",
+   "carried": false,
+   "pass": 10
   },
   {
    "row": "C286",
@@ -6326,7 +6401,7 @@
     "all": "acd7ba9ed82826e4"
    },
    "row_hash": "7e128897077ecee6",
-   "carried": false,
+   "carried": true,
    "pass": 7
   },
   {
@@ -6669,7 +6744,7 @@
     "all": "acd7ba9ed82826e4"
    },
    "row_hash": "59b8d8d24f0c7c38",
-   "carried": false,
+   "carried": true,
    "pass": 7
   },
   {
@@ -6953,7 +7028,7 @@
     "all": "acd7ba9ed82826e4"
    },
    "row_hash": "5f664198d19facd8",
-   "carried": false,
+   "carried": true,
    "pass": 7
   },
   {
@@ -7296,7 +7371,7 @@
     "all": "acd7ba9ed82826e4"
    },
    "row_hash": "b01ad555668aba2d",
-   "carried": false,
+   "carried": true,
    "pass": 7
   },
   {
@@ -7490,62 +7565,65 @@
     "all": "acd7ba9ed82826e4"
    },
    "row_hash": "50dbf74577a813c7",
-   "carried": false,
+   "carried": true,
    "pass": 7
   },
   {
    "row": "C460",
    "screen": "hale_called_in.go",
    "verdict": "PASS",
-   "line": "Vance leans over his porch rail (row: on his porch) \u00b7 Zoe drops onto the grass (row: on the grass)",
-   "why": "every other claim true on every reachable visit against who_is_where and the triggers",
+   "line": "His door stays open behind you.",
+   "why": "true: Done takes her out into the corridor, his door behind her",
    "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "349f5cd13a90aeee",
-    "facts": "913abcc6c4b17b27",
-    "facts2": "cd431bea73f6a8a7",
-    "all": "a26358848a13db3b"
+    "text": "7d6847f2c07888cd",
+    "traits": "825724317465730d",
+    "facts": "fd5820751f6e5a46",
+    "facts2": "c9746283a91d302d",
+    "all": "11f18506cdfd9b90"
    },
    "row_hash": "67e48e60d5053a2e",
    "carried": true,
-   "pass": 1
+   "pass": 9
   },
   {
    "row": "C460",
    "screen": "hale_called_in.moment",
    "verdict": "PASS",
-   "line": "Vance leans over his porch rail (row: on his porch) \u00b7 Zoe drops onto the grass (row: on the grass)",
-   "why": "every other claim true on every reachable visit against who_is_where and the triggers",
+   "line": "Dr. Hale looks up from his desk before you're through his door.",
+   "why": "true on every arrival it fires on",
    "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "f4f26289fd653ba2",
-    "facts": "cbcf54fc4dfa6073",
-    "facts2": "2b9068e4caba1752",
-    "all": "70b96e8554cd9787"
+    "text": "f1306f5ed757f9ab",
+    "traits": "825724317465730d",
+    "facts": "6ea67dc58c8d9698",
+    "facts2": "ed9eba5ccb976fe4",
+    "all": "60672e322c6eb2bc"
    },
    "row_hash": "67e48e60d5053a2e",
    "carried": true,
-   "pass": 1
+   "pass": 8
   },
   {
    "row": "C460",
    "screen": "hale_called_in.yes",
    "verdict": "PASS",
-   "line": "Vance leans over his porch rail (row: on his porch) \u00b7 Zoe drops onto the grass (row: on the grass)",
-   "why": "every other claim true on every reachable visit against who_is_where and the triggers",
+   "line": "He smiles and goes back to his list.",
+   "why": "true on every visit; nothing claims she stays or leaves; Done to the corridor at any arrival minute is open",
    "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "f98a83957ee8b77e",
-    "facts": "913abcc6c4b17b27",
-    "facts2": "cd431bea73f6a8a7",
-    "all": "2ff3c463385990da"
+    "text": "838b33f9e7511aca",
+    "traits": "825724317465730d",
+    "facts": "fd5820751f6e5a46",
+    "facts2": "c9746283a91d302d",
+    "all": "98b56092ce8bf016"
    },
    "row_hash": "67e48e60d5053a2e",
    "carried": true,
-   "pass": 1
+   "pass": 9
   },
   {
    "row": "C460",
@@ -7761,7 +7839,7 @@
     "all": "585a226b99ee83db"
    },
    "row_hash": "67e48e60d5053a2e",
-   "carried": false,
+   "carried": true,
    "pass": 7
   },
   {
@@ -7817,7 +7895,7 @@
     "all": "1a9d24549c5e70f6"
    },
    "row_hash": "67e48e60d5053a2e",
-   "carried": false,
+   "carried": true,
    "pass": 7
   },
   {
@@ -7836,7 +7914,7 @@
     "all": "acd7ba9ed82826e4"
    },
    "row_hash": "67e48e60d5053a2e",
-   "carried": false,
+   "carried": true,
    "pass": 7
   },
   {
@@ -7855,7 +7933,7 @@
     "all": "48878c52b6a0aa3c"
    },
    "row_hash": "67e48e60d5053a2e",
-   "carried": false,
+   "carried": true,
    "pass": 7
   },
   {
@@ -7874,7 +7952,7 @@
     "all": "405e9c94dcd213f1"
    },
    "row_hash": "67e48e60d5053a2e",
-   "carried": false,
+   "carried": true,
    "pass": 7
   },
   {
@@ -8108,6 +8186,63 @@
   },
   {
    "row": "C461",
+   "screen": "hale_called_in.go",
+   "verdict": "PASS",
+   "line": "Of course you do.",
+   "why": "dry put-down fits Hale (Strict, Takes charge); indifferent want",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "7d6847f2c07888cd",
+    "traits": "825724317465730d",
+    "facts": "fd5820751f6e5a46",
+    "facts2": "c9746283a91d302d",
+    "all": "11f18506cdfd9b90"
+   },
+   "row_hash": "310706ee076318f2",
+   "carried": true,
+   "pass": 9
+  },
+  {
+   "row": "C461",
+   "screen": "hale_called_in.moment",
+   "verdict": "PASS",
+   "line": "Front row, next class. I like to see who's listening.",
+   "why": "fits Hale (Takes charge, Strict)",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "f1306f5ed757f9ab",
+    "traits": "825724317465730d",
+    "facts": "6ea67dc58c8d9698",
+    "facts2": "ed9eba5ccb976fe4",
+    "all": "60672e322c6eb2bc"
+   },
+   "row_hash": "310706ee076318f2",
+   "carried": true,
+   "pass": 8
+  },
+  {
+   "row": "C461",
+   "screen": "hale_called_in.yes",
+   "verdict": "PASS",
+   "line": "He smiles and goes back to his list.",
+   "why": "texture that can't clash; fits",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "838b33f9e7511aca",
+    "traits": "825724317465730d",
+    "facts": "fd5820751f6e5a46",
+    "facts2": "c9746283a91d302d",
+    "all": "98b56092ce8bf016"
+   },
+   "row_hash": "310706ee076318f2",
+   "carried": true,
+   "pass": 9
+  },
+  {
+   "row": "C461",
    "screen": "marco_hips.got",
    "verdict": "PASS",
    "line": "\"Suit yourself, champ.\" He goes back to the rack. \"You'll be back.\"",
@@ -8320,7 +8455,7 @@
     "all": "585a226b99ee83db"
    },
    "row_hash": "310706ee076318f2",
-   "carried": false,
+   "carried": true,
    "pass": 7
   },
   {
@@ -8376,7 +8511,7 @@
     "all": "1a9d24549c5e70f6"
    },
    "row_hash": "310706ee076318f2",
-   "carried": false,
+   "carried": true,
    "pass": 7
   },
   {
@@ -8395,7 +8530,7 @@
     "all": "acd7ba9ed82826e4"
    },
    "row_hash": "310706ee076318f2",
-   "carried": false,
+   "carried": true,
    "pass": 7
   },
   {
@@ -8414,7 +8549,7 @@
     "all": "48878c52b6a0aa3c"
    },
    "row_hash": "310706ee076318f2",
-   "carried": false,
+   "carried": true,
    "pass": 7
   },
   {
@@ -8433,7 +8568,7 @@
     "all": "405e9c94dcd213f1"
    },
    "row_hash": "310706ee076318f2",
-   "carried": false,
+   "carried": true,
    "pass": 7
   },
   {
@@ -8681,7 +8816,7 @@
     "all": "acd7ba9ed82826e4"
    },
    "row_hash": "e78502f7aa28746d",
-   "carried": false,
+   "carried": true,
    "pass": 7
   },
   {
@@ -8713,7 +8848,7 @@
     "all": "acd7ba9ed82826e4"
    },
    "row_hash": "370371a278b9f182",
-   "carried": false,
+   "carried": true,
    "pass": 7
   },
   {
@@ -8745,7 +8880,7 @@
     "all": "acd7ba9ed82826e4"
    },
    "row_hash": "e5f7e6cf2d01613d",
-   "carried": false,
+   "carried": true,
    "pass": 7
   },
   {
@@ -8803,7 +8938,7 @@
     "all": "acd7ba9ed82826e4"
    },
    "row_hash": "76250e48ada2b843",
-   "carried": false,
+   "carried": true,
    "pass": 7
   },
   {
@@ -8835,7 +8970,7 @@
     "all": "acd7ba9ed82826e4"
    },
    "row_hash": "dc9a1fd9dbf3fb87",
-   "carried": false,
+   "carried": true,
    "pass": 7
   },
   {
@@ -8867,7 +9002,7 @@
     "all": "acd7ba9ed82826e4"
    },
    "row_hash": "8e507f7b235acc25",
-   "carried": false,
+   "carried": true,
    "pass": 7
   },
   {
@@ -8899,7 +9034,7 @@
     "all": "acd7ba9ed82826e4"
    },
    "row_hash": "5a85503d3ef5a0fb",
-   "carried": false,
+   "carried": true,
    "pass": 7
   },
   {
@@ -8931,7 +9066,7 @@
     "all": "acd7ba9ed82826e4"
    },
    "row_hash": "146e6806c6c566e3",
-   "carried": false,
+   "carried": true,
    "pass": 7
   },
   {
@@ -8989,7 +9124,7 @@
     "all": "acd7ba9ed82826e4"
    },
    "row_hash": "f5e1d79f3251dbab",
-   "carried": false,
+   "carried": true,
    "pass": 7
   },
   {
@@ -9034,7 +9169,7 @@
     "all": "acd7ba9ed82826e4"
    },
    "row_hash": "e158aaf055cb61d6",
-   "carried": false,
+   "carried": true,
    "pass": 7
   },
   {
@@ -9066,7 +9201,7 @@
     "all": "acd7ba9ed82826e4"
    },
    "row_hash": "40e85f1ae92f1e71",
-   "carried": false,
+   "carried": true,
    "pass": 7
   },
   {
@@ -9098,7 +9233,7 @@
     "all": "acd7ba9ed82826e4"
    },
    "row_hash": "f6b6f78a8f2e5ed7",
-   "carried": false,
+   "carried": true,
    "pass": 7
   },
   {
@@ -9130,7 +9265,7 @@
     "all": "acd7ba9ed82826e4"
    },
    "row_hash": "ff9aa31c11e5d50f",
-   "carried": false,
+   "carried": true,
    "pass": 7
   },
   {
@@ -9162,7 +9297,7 @@
     "all": "acd7ba9ed82826e4"
    },
    "row_hash": "563e3d25c3219dd0",
-   "carried": false,
+   "carried": true,
    "pass": 7
   },
   {
@@ -9194,7 +9329,7 @@
     "all": "acd7ba9ed82826e4"
    },
    "row_hash": "599aac6293908bc4",
-   "carried": false,
+   "carried": true,
    "pass": 7
   },
   {
@@ -9226,7 +9361,7 @@
     "all": "acd7ba9ed82826e4"
    },
    "row_hash": "4141d9e5e24362c3",
-   "carried": false,
+   "carried": true,
    "pass": 7
   },
   {
@@ -9258,7 +9393,7 @@
     "all": "acd7ba9ed82826e4"
    },
    "row_hash": "b56360a1040688cf",
-   "carried": false,
+   "carried": true,
    "pass": 7
   },
   {
@@ -9316,7 +9451,7 @@
     "all": "acd7ba9ed82826e4"
    },
    "row_hash": "bad76e5963432385",
-   "carried": false,
+   "carried": true,
    "pass": 7
   },
   {
@@ -9348,7 +9483,7 @@
     "all": "acd7ba9ed82826e4"
    },
    "row_hash": "34139e6a6914e171",
-   "carried": false,
+   "carried": true,
    "pass": 7
   },
   {
@@ -9380,7 +9515,7 @@
     "all": "acd7ba9ed82826e4"
    },
    "row_hash": "5358489178bff0a4",
-   "carried": false,
+   "carried": true,
    "pass": 7
   },
   {
@@ -9451,7 +9586,7 @@
     "all": "acd7ba9ed82826e4"
    },
    "row_hash": "def1348d483d0c40",
-   "carried": false,
+   "carried": true,
    "pass": 7
   },
   {
@@ -9483,7 +9618,7 @@
     "all": "acd7ba9ed82826e4"
    },
    "row_hash": "5c890033f6ac38b8",
-   "carried": false,
+   "carried": true,
    "pass": 7
   },
   {
@@ -9515,7 +9650,7 @@
     "all": "acd7ba9ed82826e4"
    },
    "row_hash": "265ece64add83676",
-   "carried": false,
+   "carried": true,
    "pass": 7
   },
   {
@@ -9547,7 +9682,7 @@
     "all": "acd7ba9ed82826e4"
    },
    "row_hash": "6372efb027eb2034",
-   "carried": false,
+   "carried": true,
    "pass": 7
   },
   {
@@ -9579,7 +9714,7 @@
     "all": "acd7ba9ed82826e4"
    },
    "row_hash": "df5ed7a36dbc74e4",
-   "carried": false,
+   "carried": true,
    "pass": 7
   },
   {
@@ -9611,7 +9746,7 @@
     "all": "acd7ba9ed82826e4"
    },
    "row_hash": "4f83b0b5eb45f71b",
-   "carried": false,
+   "carried": true,
    "pass": 7
   },
   {
@@ -9643,7 +9778,7 @@
     "all": "acd7ba9ed82826e4"
    },
    "row_hash": "71713a7e7ae739e7",
-   "carried": false,
+   "carried": true,
    "pass": 7
   },
   {
@@ -9675,7 +9810,7 @@
     "all": "acd7ba9ed82826e4"
    },
    "row_hash": "d5a109f1ef88419a",
-   "carried": false,
+   "carried": true,
    "pass": 7
   },
   {
@@ -9707,7 +9842,7 @@
     "all": "acd7ba9ed82826e4"
    },
    "row_hash": "c750f9b6ab4ace14",
-   "carried": false,
+   "carried": true,
    "pass": 7
   },
   {
@@ -9739,7 +9874,7 @@
     "all": "acd7ba9ed82826e4"
    },
    "row_hash": "bd07273d5822f34f",
-   "carried": false,
+   "carried": true,
    "pass": 7
   },
   {
@@ -9771,7 +9906,7 @@
     "all": "acd7ba9ed82826e4"
    },
    "row_hash": "7b2bb0dfdbcfe946",
-   "carried": false,
+   "carried": true,
    "pass": 7
   },
   {
@@ -9803,7 +9938,7 @@
     "all": "acd7ba9ed82826e4"
    },
    "row_hash": "513927dd127fca04",
-   "carried": false,
+   "carried": true,
    "pass": 7
   },
   {
@@ -9835,7 +9970,7 @@
     "all": "acd7ba9ed82826e4"
    },
    "row_hash": "791cd173e23fb130",
-   "carried": false,
+   "carried": true,
    "pass": 7
   },
   {
@@ -9867,7 +10002,7 @@
     "all": "acd7ba9ed82826e4"
    },
    "row_hash": "177d1e1776fac74b",
-   "carried": false,
+   "carried": true,
    "pass": 7
   },
   {
@@ -9882,6 +10017,44 @@
    "row_hash": "4e86d143688ba8e5",
    "carried": true,
    "pass": 1
+  },
+  {
+   "row": "C927",
+   "screen": "hale_called_in.go",
+   "verdict": "PASS",
+   "line": "Done",
+   "why": "5 minutes, not 0",
+   "cause": null,
+   "note": true,
+   "screen_hash": {
+    "text": "7d6847f2c07888cd",
+    "traits": "825724317465730d",
+    "facts": "fd5820751f6e5a46",
+    "facts2": "c9746283a91d302d",
+    "all": "11f18506cdfd9b90"
+   },
+   "row_hash": "4e86d143688ba8e5",
+   "carried": true,
+   "pass": 9
+  },
+  {
+   "row": "C927",
+   "screen": "hale_called_in.yes",
+   "verdict": "PASS",
+   "line": "Done",
+   "why": "5 minutes, not 0",
+   "cause": null,
+   "note": true,
+   "screen_hash": {
+    "text": "838b33f9e7511aca",
+    "traits": "825724317465730d",
+    "facts": "fd5820751f6e5a46",
+    "facts2": "c9746283a91d302d",
+    "all": "98b56092ce8bf016"
+   },
+   "row_hash": "4e86d143688ba8e5",
+   "carried": true,
+   "pass": 9
   },
   {
    "row": "C927",
@@ -10043,7 +10216,7 @@
     "all": "585a226b99ee83db"
    },
    "row_hash": "4e86d143688ba8e5",
-   "carried": false,
+   "carried": true,
    "pass": 7
   },
   {
@@ -10080,7 +10253,7 @@
     "all": "1a9d24549c5e70f6"
    },
    "row_hash": "4e86d143688ba8e5",
-   "carried": false,
+   "carried": true,
    "pass": 7
   },
   {
@@ -10099,7 +10272,7 @@
     "all": "acd7ba9ed82826e4"
    },
    "row_hash": "4e86d143688ba8e5",
-   "carried": false,
+   "carried": true,
    "pass": 7
   },
   {
@@ -10118,7 +10291,7 @@
     "all": "405e9c94dcd213f1"
    },
    "row_hash": "4e86d143688ba8e5",
-   "carried": false,
+   "carried": true,
    "pass": 7
   },
   {
@@ -10294,7 +10467,7 @@
     "all": "acd7ba9ed82826e4"
    },
    "row_hash": "2c3ccc6bd9929d7f",
-   "carried": false,
+   "carried": true,
    "pass": 7
   },
   {
@@ -10326,7 +10499,7 @@
     "all": "acd7ba9ed82826e4"
    },
    "row_hash": "18b0ecdf6d7fc901",
-   "carried": false,
+   "carried": true,
    "pass": 7
   },
   {
@@ -10358,7 +10531,7 @@
     "all": "acd7ba9ed82826e4"
    },
    "row_hash": "beb57cd46fe906bf",
-   "carried": false,
+   "carried": true,
    "pass": 7
   },
   {
@@ -10373,6 +10546,44 @@
    "row_hash": "1aadffd96e76381c",
    "carried": true,
    "pass": 1
+  },
+  {
+   "row": "C931",
+   "screen": "hale_called_in.go",
+   "verdict": "PASS",
+   "line": "time_of_day 14:00-17:00",
+   "why": "end-exclusive window matches his office row 14-17 and the office hours; the corridor landing is open to 18:00",
+   "cause": null,
+   "note": true,
+   "screen_hash": {
+    "text": "7d6847f2c07888cd",
+    "traits": "825724317465730d",
+    "facts": "fd5820751f6e5a46",
+    "facts2": "c9746283a91d302d",
+    "all": "11f18506cdfd9b90"
+   },
+   "row_hash": "1aadffd96e76381c",
+   "carried": true,
+   "pass": 9
+  },
+  {
+   "row": "C931",
+   "screen": "hale_called_in.yes",
+   "verdict": "PASS",
+   "line": "time_of_day 14:00-17:00",
+   "why": "end-exclusive window matches his office row 14-17 and the office hours; the corridor landing is open to 18:00",
+   "cause": null,
+   "note": true,
+   "screen_hash": {
+    "text": "838b33f9e7511aca",
+    "traits": "825724317465730d",
+    "facts": "fd5820751f6e5a46",
+    "facts2": "c9746283a91d302d",
+    "all": "98b56092ce8bf016"
+   },
+   "row_hash": "1aadffd96e76381c",
+   "carried": true,
+   "pass": 9
   },
   {
    "row": "C931",
@@ -10534,7 +10745,7 @@
     "all": "585a226b99ee83db"
    },
    "row_hash": "1aadffd96e76381c",
-   "carried": false,
+   "carried": true,
    "pass": 7
   },
   {
@@ -10571,7 +10782,7 @@
     "all": "1a9d24549c5e70f6"
    },
    "row_hash": "1aadffd96e76381c",
-   "carried": false,
+   "carried": true,
    "pass": 7
   },
   {
@@ -10590,7 +10801,7 @@
     "all": "acd7ba9ed82826e4"
    },
    "row_hash": "1aadffd96e76381c",
-   "carried": false,
+   "carried": true,
    "pass": 7
   },
   {
@@ -10609,7 +10820,7 @@
     "all": "405e9c94dcd213f1"
    },
    "row_hash": "1aadffd96e76381c",
-   "carried": false,
+   "carried": true,
    "pass": 7
   },
   {
@@ -10785,7 +10996,7 @@
     "all": "acd7ba9ed82826e4"
    },
    "row_hash": "826bf82fe26afd13",
-   "carried": false,
+   "carried": true,
    "pass": 7
   },
   {
@@ -10800,6 +11011,63 @@
    "row_hash": "13a714429d15f3b2",
    "carried": true,
    "pass": 1
+  },
+  {
+   "row": "L106",
+   "screen": "hale_called_in.go",
+   "verdict": "PASS",
+   "line": "Of course you do.",
+   "why": "requires_npc npc_hale; his row has him in campus_office_hale Mon/Wed 14-17",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "7d6847f2c07888cd",
+    "traits": "825724317465730d",
+    "facts": "fd5820751f6e5a46",
+    "facts2": "c9746283a91d302d",
+    "all": "11f18506cdfd9b90"
+   },
+   "row_hash": "13a714429d15f3b2",
+   "carried": true,
+   "pass": 9
+  },
+  {
+   "row": "L106",
+   "screen": "hale_called_in.moment",
+   "verdict": "PASS",
+   "line": "Dr. Hale looks up from his desk",
+   "why": "requires_npc; his row 14-17",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "f1306f5ed757f9ab",
+    "traits": "825724317465730d",
+    "facts": "6ea67dc58c8d9698",
+    "facts2": "ed9eba5ccb976fe4",
+    "all": "60672e322c6eb2bc"
+   },
+   "row_hash": "13a714429d15f3b2",
+   "carried": true,
+   "pass": 8
+  },
+  {
+   "row": "L106",
+   "screen": "hale_called_in.yes",
+   "verdict": "PASS",
+   "line": "He smiles and goes back to his list.",
+   "why": "he is there by his row",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "838b33f9e7511aca",
+    "traits": "825724317465730d",
+    "facts": "fd5820751f6e5a46",
+    "facts2": "c9746283a91d302d",
+    "all": "98b56092ce8bf016"
+   },
+   "row_hash": "13a714429d15f3b2",
+   "carried": true,
+   "pass": 9
   },
   {
    "row": "L106",
@@ -11015,7 +11283,7 @@
     "all": "585a226b99ee83db"
    },
    "row_hash": "13a714429d15f3b2",
-   "carried": false,
+   "carried": true,
    "pass": 7
   },
   {
@@ -11071,7 +11339,7 @@
     "all": "1a9d24549c5e70f6"
    },
    "row_hash": "13a714429d15f3b2",
-   "carried": false,
+   "carried": true,
    "pass": 7
   },
   {
@@ -11090,7 +11358,7 @@
     "all": "acd7ba9ed82826e4"
    },
    "row_hash": "13a714429d15f3b2",
-   "carried": false,
+   "carried": true,
    "pass": 7
   },
   {
@@ -11109,7 +11377,7 @@
     "all": "48878c52b6a0aa3c"
    },
    "row_hash": "13a714429d15f3b2",
-   "carried": false,
+   "carried": true,
    "pass": 7
   },
   {
@@ -11128,7 +11396,7 @@
     "all": "405e9c94dcd213f1"
    },
    "row_hash": "13a714429d15f3b2",
-   "carried": false,
+   "carried": true,
    "pass": 7
   },
   {
@@ -11389,7 +11657,7 @@
     "all": "acd7ba9ed82826e4"
    },
    "row_hash": "c12d10588197fbaf",
-   "carried": false,
+   "carried": true,
    "pass": 7
   },
   {
@@ -11404,6 +11672,44 @@
    "row_hash": "e64ce2672d85d2d8",
    "carried": true,
    "pass": 1
+  },
+  {
+   "row": "L167",
+   "screen": "hale_called_in.go",
+   "verdict": "N/A",
+   "line": "",
+   "why": "no row with hours that differ by day kind on this screen",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "7d6847f2c07888cd",
+    "traits": "825724317465730d",
+    "facts": "fd5820751f6e5a46",
+    "facts2": "c9746283a91d302d",
+    "all": "11f18506cdfd9b90"
+   },
+   "row_hash": "e64ce2672d85d2d8",
+   "carried": true,
+   "pass": 9
+  },
+  {
+   "row": "L167",
+   "screen": "hale_called_in.yes",
+   "verdict": "N/A",
+   "line": "",
+   "why": "no row with hours that differ by day kind on this screen",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "838b33f9e7511aca",
+    "traits": "825724317465730d",
+    "facts": "fd5820751f6e5a46",
+    "facts2": "c9746283a91d302d",
+    "all": "98b56092ce8bf016"
+   },
+   "row_hash": "e64ce2672d85d2d8",
+   "carried": true,
+   "pass": 9
   },
   {
    "row": "L167",
@@ -11565,7 +11871,7 @@
     "all": "585a226b99ee83db"
    },
    "row_hash": "e64ce2672d85d2d8",
-   "carried": false,
+   "carried": true,
    "pass": 7
   },
   {
@@ -11602,7 +11908,7 @@
     "all": "1a9d24549c5e70f6"
    },
    "row_hash": "e64ce2672d85d2d8",
-   "carried": false,
+   "carried": true,
    "pass": 7
   },
   {
@@ -11621,7 +11927,7 @@
     "all": "acd7ba9ed82826e4"
    },
    "row_hash": "e64ce2672d85d2d8",
-   "carried": false,
+   "carried": true,
    "pass": 7
   },
   {
@@ -11640,7 +11946,7 @@
     "all": "405e9c94dcd213f1"
    },
    "row_hash": "e64ce2672d85d2d8",
-   "carried": false,
+   "carried": true,
    "pass": 7
   },
   {
@@ -11816,7 +12122,7 @@
     "all": "acd7ba9ed82826e4"
    },
    "row_hash": "c3599cd09637a240",
-   "carried": false,
+   "carried": true,
    "pass": 7
   },
   {
@@ -11925,8 +12231,8 @@
  ],
  "causes": [],
  "pending": [],
- "asked": 127,
- "answered": 127,
+ "asked": 1,
+ "answered": 1,
  "pass_items": [],
  "unowed": []
 }

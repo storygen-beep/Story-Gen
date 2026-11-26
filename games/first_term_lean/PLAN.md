@@ -161,8 +161,8 @@ makes it risky.
 |---|---|---|
 | Home | the hall (hub, and the way out to her street; anything at the front door plays here) · kitchen · living room · shared bathroom · her bedroom (her old key locks it) · Ryan's room · the master bedroom (Laura and Mark's) | anchor |
 | Neighbourhood | her street (passes through only) · Mr. Vance's house and porch, next door · the corner shop · the clothes shop (10am–7pm, closed Sundays) · the park (walk, rest, run; not her way to campus) · the gym | satellite |
-| Campus | the quad (hub) · the lecture hall · the library · the cafeteria · the professors' offices (a corridor; Dr. Hale's is one door) · the dean's office (P47: his door on the corridor, his first-day scene in release 1) · a women's bathroom off the lecture-hall corridor · the theatre (drama studio) | satellite |
-| Town (P45, LO 2026-11-25: "New Town hub") | the high street (hub; the bus stop, the campus gates, 5 minutes to the quad) · the café · Zoe's apartment | satellite |
+| Campus | the quad (hub) · the lecture hall · the library · the cafeteria · the faculty corridor (a hub, P54) with an office each off it: the Dean's Office (P47's first day), the Psychology Office (Dr. Hale), the Statistics Office (Mr. Pratt) and the English Office (Prof. Walsh), each open in its person's hours · a women's bathroom off the quad (P51) · the theatre (drama studio) | satellite |
+| Town (P45, LO 2026-11-25: "New Town hub") | the high street (hub; the bus stop) · Campus, a place in Town (P53, 2026-11-26; no walk through the gates) · the café · Zoe's apartment | satellite |
 
 - Every place says in its own text what it is and what she can do there.
 - A room's menu holds only needs, systems and people.
@@ -219,14 +219,14 @@ both in release 2 (LO's pick A); Mark's friends later. The master bedroom gets L
 | the lecture hall | Dr. Hale (psychology), Mr. Pratt (statistics) | Nadia saves her a seat; Brooke | the class | Hale: her. Nadia: Hale looking. Pratt: if she's missing |
 | the library | Ms. Ivy Holt (31, librarian) | Nadia studying | students studying | the face: who she studies with, and when |
 | the cafeteria | Rosa Diaz (45, lunch lady) | Zoe, Jake, Brooke | the lunch crowd | the lunch crowd: who she sits with |
-| the professors' offices | Prof. Walsh (her advisor) | Hale, Pratt and Cross, each behind his own door | none | Walsh: her grades, and she calls Laura |
+| the professors' offices (P54: a corridor, and an office each for the dean, Hale, Pratt and Walsh) | Prof. Walsh (her advisor), in the English Office | Hale and Pratt in their own offices; Cross in the theatre | none | Walsh: her grades, and she calls Laura |
 | the dean's office (later) | Dean Sterling | Brooke, when she reports her | none | Sterling: what Brooke tells him |
 | the women's bathroom | none | Brooke at the mirror | girls at the mirror | the girls: her outfit, and they talk |
 | the theatre (drama studio) | Mr. Cross | Brooke, for the same part | the drama class | Cross: her under the lights |
 
 ### Town (was "Near campus", P45)
 
-| the high street (Town) | none: passes through, the bus stop, the campus gates | none | students and shoppers | none in release 1 |
+| the high street (Town) | none: passes through, the bus stop, the way onto campus | none | students and shoppers | none in release 1 |
 
 | place | face | other named people | crowd | who notices her, and what |
 |---|---|---|---|---|

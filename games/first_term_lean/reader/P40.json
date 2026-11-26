@@ -1,111 +1,111 @@
 {
  "piece": "P40",
- "pass": 8,
+ "pass": 12,
  "screens": {
   "walk_stacks.moment": {
-   "text": "8e809e12139051bc",
+   "text": "a37c81e3865bb04b",
    "traits": "44136fa355b3678a",
    "facts": "94fc5e907f77da68",
    "facts2": "94fc5e907f77da68",
-   "all": "b7d9ea415d2c4b39"
+   "all": "5e3a47aada8ed046"
   },
   "walk_stacks.watch": {
-   "text": "8b03230da292270b",
+   "text": "d6e08a8d8d4ce413",
    "traits": "44136fa355b3678a",
    "facts": "94fc5e907f77da68",
    "facts2": "94fc5e907f77da68",
-   "all": "a85a6c519be9c9cd"
+   "all": "f1c8978373b5bb51"
   },
   "walk_stacks.away": {
-   "text": "277e2ec2f9ef49e5",
+   "text": "eaaed9499adf2390",
    "traits": "44136fa355b3678a",
    "facts": "94fc5e907f77da68",
    "facts2": "94fc5e907f77da68",
-   "all": "8c0d20c57e7740c3"
+   "all": "f2d0ff23b120a8a7"
   },
   "walk_hale_note.moment": {
-   "text": "1dc73ddab0950d62",
+   "text": "c59deaee4d0293e1",
    "traits": "838782b7308b47e0",
-   "facts": "42567a3208a6dab9",
-   "facts2": "b471247d8c9ddba2",
-   "all": "13af75175d9374f8"
+   "facts": "54a2a2da23a1fde8",
+   "facts2": "18b1fd058dc33746",
+   "all": "49171089d0542159"
   },
   "walk_hale_note.knock": {
-   "text": "b2f952756bcfcfd6",
+   "text": "8c188b8b69cd4f85",
    "traits": "825724317465730d",
-   "facts": "7291ac6ca70bd782",
-   "facts2": "0d1b466dbc39c306",
-   "all": "d7cdeb3050cf2802"
+   "facts": "fcdc74cfb64c451d",
+   "facts2": "901bf129b869dfc2",
+   "all": "81dcc650852f0c17"
   },
   "walk_hale_note.walkon": {
-   "text": "6fc017edf4ddcdc0",
-   "traits": "44136fa355b3678a",
-   "facts": "ffe40e2b4d3d9199",
-   "facts2": "ffe40e2b4d3d9199",
-   "all": "b3989ddfc8341e91"
+   "text": "c89949bf43ee034e",
+   "traits": "825724317465730d",
+   "facts": "fcdc74cfb64c451d",
+   "facts2": "901bf129b869dfc2",
+   "all": "a706fdfe8fcdcf96"
   },
   "walk_holt_novel.moment": {
-   "text": "21c1635a47813e19",
+   "text": "ccbc246ad11224a8",
    "traits": "f6d8d0533b3ef51b",
    "facts": "f2f993e2387bf270",
    "facts2": "5ddca7caca4503ee",
-   "all": "1b2935b493699631"
+   "all": "68b912058fecf6ee"
   },
   "walk_holt_novel.ask": {
-   "text": "9dc023606cb8714d",
+   "text": "48082e123536c891",
    "traits": "f6d8d0533b3ef51b",
    "facts": "f2f993e2387bf270",
    "facts2": "5ddca7caca4503ee",
-   "all": "faa142475b47ad02"
+   "all": "7e74fecae1f9aa1e"
   },
   "walk_holt_novel.leave": {
-   "text": "0e2e766021935b24",
+   "text": "b48a15fced5ecfc7",
    "traits": "f6d8d0533b3ef51b",
    "facts": "f2f993e2387bf270",
    "facts2": "5ddca7caca4503ee",
-   "all": "e4a9c7e6f469f9da"
+   "all": "be12869569f44842"
   },
   "walk_mirror_girls.moment": {
-   "text": "c323d543424379ab",
+   "text": "3c84b237cb35c287",
    "traits": "9e12469ed756975c",
    "facts": "0ec0e8a07b88427d",
    "facts2": "c3e641b9202c38c9",
-   "all": "ad2df7f9e343f1a0"
+   "all": "795f50791074d0c4"
   },
   "walk_mirror_girls.beside": {
-   "text": "b41754b47ac5db86",
+   "text": "67895d5e3a3aab78",
    "traits": "ebc4051ecd3afac5",
    "facts": "63b70900fab98401",
    "facts2": "1c8286cebcac9810",
-   "all": "13cd073ccfdefb99"
+   "all": "b736e04732ec8db3"
   },
   "walk_mirror_girls.leave": {
-   "text": "324af59133152f55",
+   "text": "039bd4fefd28e38d",
    "traits": "44136fa355b3678a",
    "facts": "6b4cf4fa7c891d9f",
    "facts2": "6b4cf4fa7c891d9f",
-   "all": "e9b1f0bc5017e1da"
+   "all": "7dc3ceb52053a165"
   },
   "walk_cross_brooke.moment": {
-   "text": "734afbbfc200cb7d",
+   "text": "19c927e206f3a367",
    "traits": "e6b79f0e524c6de5",
    "facts": "53fbf715bd6b1c0c",
    "facts2": "7d5f431740948a39",
-   "all": "529f9288a0c9bf07"
+   "all": "a10ecb7b5794ff26"
   },
   "walk_cross_brooke.watch": {
-   "text": "aa9c7f832d0e0045",
+   "text": "9c0edadef72d24cb",
    "traits": "44136fa355b3678a",
    "facts": "e27a8e51e6c466bf",
    "facts2": "e27a8e51e6c466bf",
-   "all": "5021c056e338ce68"
+   "all": "e3be4f6628dae458"
   },
   "walk_cross_brooke.leave": {
-   "text": "c0112c78a7691d76",
+   "text": "d98ea6a44c7a6ac1",
    "traits": "44136fa355b3678a",
    "facts": "e27a8e51e6c466bf",
    "facts2": "e27a8e51e6c466bf",
-   "all": "524ffb2c4de245f5"
+   "all": "6650184fae7d492b"
   },
   "walk_cross_seats.moment": {
    "text": "400d1f890ad37714",
@@ -128,7 +128,7 @@
    "facts2": "b88955853267c1db",
    "all": "c49004075617357d"
   },
-  "*": "f07ac627253a5561"
+  "*": "05042e65f38935b8"
  },
  "rows": {
   "B1": "5276068df1ca6fa9",
@@ -271,8 +271,23 @@
   "C422": "7e128897077ecee6",
   "C460": "67e48e60d5053a2e",
   "C461": "310706ee076318f2",
+  "C788": "cae1598ef9cb6ff1",
+  "C855": "d3dc77f2f96e20ae",
+  "C856": "9c58ec7792f1f95a",
+  "C859": "c504ec577b14e288",
+  "C1820": "d8f9999d285c6607",
+  "C724": "37e21685569ccea7",
+  "C1821": "b9818557d5e43850",
+  "C1864": "45e669c2511d9b8e",
+  "C792": "92be110855d5a128",
+  "C302": "2ba94157c9da471e",
+  "L97": "5d6e027964066b8b",
+  "L150": "ec7af502db4f0c7e",
+  "C2186": "39e6f4b48d03d606",
+  "C2187": "f2b54b1dd7c15f2f",
   "C2188": "612394eef6826900",
-  "C2189": "20748838895e4545"
+  "C2189": "20748838895e4545",
+  "C2195": "77083291a86791c3"
  },
  "verdicts": [
   {
@@ -292,55 +307,58 @@
    "row": "B10",
    "screen": "walk_cross_brooke.leave",
    "verdict": "PASS",
-   "line": "He'll be saying it next rehearsal too.",
-   "why": "every line true at the first and last minute and on a second visit; named people gated present by their rows",
+   "line": "You slip out before the scene ends. You can still hear him: 'Again.' He'll be saying it next rehearsal too. -> Done (to the Quad)",
+   "why": "she slips out and Done now lands on the Quad, the theatre's entry_from, so the leaving is true; Cross and Brooke are in the theatre Tue/Thu/Fri 14-18, so 'next rehearsal' holds",
    "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "c0112c78a7691d76",
+    "text": "d98ea6a44c7a6ac1",
+    "traits": "44136fa355b3678a",
     "facts": "e27a8e51e6c466bf",
     "facts2": "e27a8e51e6c466bf",
-    "all": "524ffb2c4de245f5"
+    "all": "6650184fae7d492b"
    },
    "row_hash": "c1c0e2ac2588a579",
-   "carried": true,
-   "pass": 2
+   "carried": false,
+   "pass": 12
   },
   {
    "row": "B10",
    "screen": "walk_cross_brooke.moment",
    "verdict": "PASS",
-   "line": "You can feel where his hand would sit on your own waist.",
-   "why": "every line true at the first and last minute and on a second visit; named people gated present by their rows",
+   "line": "Cross is running a scene with Brooke on the empty stage, his hand on her waist to place her, staying.",
+   "why": "on arrival she walks in on a rehearsal already running; Cross and Brooke at campus_theatre Tue/Thu/Fri 14-18 by rows, both gated is_present, met_cross and met_brooke",
    "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "734afbbfc200cb7d",
+    "text": "19c927e206f3a367",
+    "traits": "e6b79f0e524c6de5",
     "facts": "53fbf715bd6b1c0c",
     "facts2": "7d5f431740948a39",
-    "all": "529f9288a0c9bf07"
+    "all": "a10ecb7b5794ff26"
    },
    "row_hash": "c1c0e2ac2588a579",
    "carried": true,
-   "pass": 2
+   "pass": 11
   },
   {
    "row": "B10",
    "screen": "walk_cross_brooke.watch",
    "verdict": "PASS",
-   "line": "One day he'll place you like that.",
-   "why": "every line true at the first and last minute and on a second visit; named people gated present by their rows",
+   "line": "You watch his hand stay on her waist through the whole scene. When they finish, he looks up into the dark seats, straight at you.",
+   "why": "she stays in the theatre, Done lands there; both still present by rows (to 18:00)",
    "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "aa9c7f832d0e0045",
+    "text": "9c0edadef72d24cb",
+    "traits": "44136fa355b3678a",
     "facts": "e27a8e51e6c466bf",
     "facts2": "e27a8e51e6c466bf",
-    "all": "5021c056e338ce68"
+    "all": "e3be4f6628dae458"
    },
    "row_hash": "c1c0e2ac2588a579",
    "carried": true,
-   "pass": 2
+   "pass": 11
   },
   {
    "row": "B10",
@@ -400,217 +418,229 @@
    "row": "B10",
    "screen": "walk_hale_note.knock",
    "verdict": "PASS",
-   "line": "Young lady. Come back with a real question, and I'll have an answer.",
-   "why": "Hale is there (trigger needs him present); 'He closes the file' true each visit; the dean's presence on the corridor touches no line.",
+   "line": "Young lady. Come back with a real question, and I'll have an answer. / He closes the file.",
+   "why": "Hale still in his office row; Done +5 lands in the corridor (open to 18:00)",
    "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "b2f952756bcfcfd6",
-    "facts": "7291ac6ca70bd782",
-    "facts2": "0d1b466dbc39c306",
-    "all": "d7cdeb3050cf2802"
+    "text": "8c188b8b69cd4f85",
+    "traits": "825724317465730d",
+    "facts": "fcdc74cfb64c451d",
+    "facts2": "901bf129b869dfc2",
+    "all": "81dcc650852f0c17"
    },
    "row_hash": "c1c0e2ac2588a579",
    "carried": true,
-   "pass": 5
+   "pass": 11
   },
   {
    "row": "B10",
    "screen": "walk_hale_note.moment",
    "verdict": "PASS",
-   "line": "Dr. Hale's door is ajar. He's alone with a file open on the desk, a yellow note stuck to it: 'Nadia \u2014 spring.'",
-   "why": "Trigger needs met_hale, Mon/Wed 14:00-17:00 and Hale present; at 14:00 and 16:59 Hale's row has him in campus_offices. The new fact, the dean on the corridor 8-17, doesn't break 'alone': Hale is alone in his own office, the dean is in his at the end. Second visit (once a day) the note and file still read true.",
+   "line": "Dr. Hale doesn't look up when you come in. He's alone with a file open on the desk",
+   "why": "written for arrival: 'when you come in' is exactly the on-arrival moment; trigger needs met_hale, Mon/Wed 14-17 and Hale present in campus_office_hale, his row by who_is_where; Nadia's name on the note is texture, not presence",
    "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "1dc73ddab0950d62",
-    "facts": "42567a3208a6dab9",
-    "facts2": "b471247d8c9ddba2",
-    "all": "13af75175d9374f8"
+    "text": "c59deaee4d0293e1",
+    "traits": "838782b7308b47e0",
+    "facts": "54a2a2da23a1fde8",
+    "facts2": "18b1fd058dc33746",
+    "all": "49171089d0542159"
    },
    "row_hash": "c1c0e2ac2588a579",
    "carried": true,
-   "pass": 5
+   "pass": 11
   },
   {
    "row": "B10",
    "screen": "walk_hale_note.walkon",
    "verdict": "PASS",
-   "line": "You walk on. You don't know what the note means. You know the name on it.",
-   "why": "No one named as present; 'You know the name on it' true: met_nadia is set with met_hale (toml line 4864), and the name is on the note she just read.",
+   "line": "Close it behind you, young lady. / You back out.",
+   "why": "she backs out and Done lands in campus_offices, the corridor outside: the line and the landing agree",
    "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "6fc017edf4ddcdc0",
-    "facts": "ffe40e2b4d3d9199",
-    "facts2": "ffe40e2b4d3d9199",
-    "all": "b3989ddfc8341e91"
+    "text": "c89949bf43ee034e",
+    "traits": "825724317465730d",
+    "facts": "fcdc74cfb64c451d",
+    "facts2": "901bf129b869dfc2",
+    "all": "a706fdfe8fcdcf96"
    },
    "row_hash": "c1c0e2ac2588a579",
    "carried": true,
-   "pass": 5
+   "pass": 11
   },
   {
    "row": "B10",
    "screen": "walk_holt_novel.ask",
    "verdict": "PASS",
-   "line": "Tomorrow you'll want to know if he did.",
-   "why": "every line true at the first and last minute and on a second visit; named people gated present by their rows",
+   "line": "Research, hon. He's about to take her on a horse. / Tomorrow you'll want to know if he did.",
+   "why": "Holt present; 'tomorrow you'll want' is her opinion, allowed under C461",
    "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "9dc023606cb8714d",
+    "text": "48082e123536c891",
+    "traits": "f6d8d0533b3ef51b",
     "facts": "f2f993e2387bf270",
     "facts2": "5ddca7caca4503ee",
-    "all": "faa142475b47ad02"
+    "all": "7e74fecae1f9aa1e"
    },
    "row_hash": "c1c0e2ac2588a579",
    "carried": true,
-   "pass": 2
+   "pass": 11
   },
   {
    "row": "B10",
    "screen": "walk_holt_novel.leave",
    "verdict": "PASS",
-   "line": "She'll be a chapter further tomorrow.",
-   "why": "Holt named after met_holt; Friday's tomorrow she's at the desk Sat 10-16",
+   "line": "You leave her to it. / Smart girl. / She'll be a chapter further tomorrow.",
+   "why": "leaving Holt to her book leaves her in the library where Done lands; future line is texture",
    "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "0e2e766021935b24",
+    "text": "b48a15fced5ecfc7",
+    "traits": "f6d8d0533b3ef51b",
     "facts": "f2f993e2387bf270",
     "facts2": "5ddca7caca4503ee",
-    "all": "e4a9c7e6f469f9da"
+    "all": "be12869569f44842"
    },
    "row_hash": "c1c0e2ac2588a579",
    "carried": true,
-   "pass": 2
+   "pass": 11
   },
   {
    "row": "B10",
    "screen": "walk_holt_novel.moment",
    "verdict": "PASS",
-   "line": "Don't you say a word, hon.",
-   "why": "every line true at the first and last minute and on a second visit; named people gated present by their rows",
+   "line": "Ms. Holt's at the desk with a fat library-science book open, and inside it, a paperback romance",
+   "why": "the desk is by the door (library description), so she sees it the moment she walks in; Holt at the library Mon-Fri 08-16 by her rows, trigger gates is_present; met_holt",
    "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "21c1635a47813e19",
+    "text": "ccbc246ad11224a8",
+    "traits": "f6d8d0533b3ef51b",
     "facts": "f2f993e2387bf270",
     "facts2": "5ddca7caca4503ee",
-    "all": "1b2935b493699631"
+    "all": "68b912058fecf6ee"
    },
    "row_hash": "c1c0e2ac2588a579",
    "carried": true,
-   "pass": 2
+   "pass": 11
   },
   {
    "row": "B10",
    "screen": "walk_mirror_girls.beside",
    "verdict": "PASS",
-   "line": "Brooke's eyes find you in the mirror on the way out. She's remembering your face.",
-   "why": "every line true at the first and last minute and on a second visit; named people gated present by their rows",
+   "line": "You fix your hair a foot from them. ... Brooke's eyes find you in the mirror on the way out.",
+   "why": "fixing her hair keeps her in the bathroom, where Done lands; the three are present by rows",
    "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "b41754b47ac5db86",
+    "text": "67895d5e3a3aab78",
+    "traits": "ebc4051ecd3afac5",
     "facts": "63b70900fab98401",
     "facts2": "1c8286cebcac9810",
-    "all": "13cd073ccfdefb99"
+    "all": "b736e04732ec8db3"
    },
    "row_hash": "c1c0e2ac2588a579",
    "carried": true,
-   "pass": 2
+   "pass": 11
   },
   {
    "row": "B10",
    "screen": "walk_mirror_girls.leave",
    "verdict": "PASS",
-   "line": "You leave. The laugh starts before the door shuts. They own that mirror. They'll be back.",
-   "why": "true at first and last minute and on a repeat visit: Brooke, Kayla, Tess all at campus_bathroom weekdays 08-09 and 13-14 by who_is_where; trigger needs all three",
+   "line": "You leave. The laugh starts before the door shuts. They own that mirror. They'll be back. -> Done (to the Quad)",
+   "why": "she leaves and Done now lands on the Quad, the bathroom's entry_from, so the leaving is true; Brooke, Kayla and Tess are in the bathroom 08-09 and 13-14 every weekday, so 'they'll be back' holds",
    "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "324af59133152f55",
+    "text": "039bd4fefd28e38d",
+    "traits": "44136fa355b3678a",
     "facts": "6b4cf4fa7c891d9f",
     "facts2": "6b4cf4fa7c891d9f",
-    "all": "e9b1f0bc5017e1da"
+    "all": "7dc3ceb52053a165"
    },
    "row_hash": "c1c0e2ac2588a579",
-   "carried": true,
-   "pass": 3
+   "carried": false,
+   "pass": 12
   },
   {
    "row": "B10",
    "screen": "walk_mirror_girls.moment",
    "verdict": "PASS",
    "line": "Tess is doing Brooke's lashes at the mirror while Kayla holds the bag",
-   "why": "every line true at the first and last minute and on a second visit; named people gated present by their rows",
+   "why": "on arrival she walks in on the three at the mirror; trigger needs all three present, rows put them in campus_bathroom weekdays 08-09 and 13-14; met_brooke",
    "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "c323d543424379ab",
+    "text": "3c84b237cb35c287",
+    "traits": "9e12469ed756975c",
     "facts": "0ec0e8a07b88427d",
     "facts2": "c3e641b9202c38c9",
-    "all": "ad2df7f9e343f1a0"
+    "all": "795f50791074d0c4"
    },
    "row_hash": "c1c0e2ac2588a579",
    "carried": true,
-   "pass": 2
+   "pass": 11
   },
   {
    "row": "B10",
    "screen": "walk_stacks.away",
    "verdict": "PASS",
    "line": "You back out of the aisle, very upright, your face still hot. You know which shelf now.",
-   "why": "walk_stacks: every day 18:00-21:55, library open 08:00-22:00; strangers; Holt (to 16:00) and Nadia (to 18:00) are gone",
+   "why": "backing out of an aisle leaves her in the library, where Done lands; 'which shelf now' true from the first visit on",
    "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "277e2ec2f9ef49e5",
+    "text": "eaaed9499adf2390",
+    "traits": "44136fa355b3678a",
     "facts": "94fc5e907f77da68",
     "facts2": "94fc5e907f77da68",
-    "all": "8c0d20c57e7740c3"
+    "all": "f2d0ff23b120a8a7"
    },
    "row_hash": "c1c0e2ac2588a579",
    "carried": true,
-   "pass": 4
+   "pass": 11
   },
   {
    "row": "B10",
    "screen": "walk_stacks.moment",
    "verdict": "PASS",
-   "line": "Through a gap in the books in the back stacks: a couple against the shelves, her skirt in his fist, her tits out of her top ... Your face goes hot.",
-   "why": "walk_stacks: every day 18:00-21:55, library open 08:00-22:00; strangers; Holt (to 16:00) and Nadia (to 18:00) are gone",
+   "line": "Through a gap in the books in the back stacks: a couple against the shelves ... Your face goes hot.",
+   "why": "fires on arrival at the library 18:00-21:55 every day (library open 08-22); she comes across it, no choice of hers assumed; strangers only, Holt (to 16:00) and Nadia (to 18:00) gone by who_is_where",
    "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "8e809e12139051bc",
+    "text": "a37c81e3865bb04b",
+    "traits": "44136fa355b3678a",
     "facts": "94fc5e907f77da68",
     "facts2": "94fc5e907f77da68",
-    "all": "b7d9ea415d2c4b39"
+    "all": "5e3a47aada8ed046"
    },
    "row_hash": "c1c0e2ac2588a579",
    "carried": true,
-   "pass": 4
+   "pass": 11
   },
   {
    "row": "B10",
    "screen": "walk_stacks.watch",
    "verdict": "PASS",
    "line": "Her eyes find yours through the gap. You're wet. A book falls, and you run.",
-   "why": "walk_stacks: every day 18:00-21:55, library open 08:00-22:00; strangers; Holt (to 16:00) and Nadia (to 18:00) are gone",
+   "why": "answer screen costs 0 min; Done +5 lands at 22:00 at latest, library still open; running out of the stacks leaves her in the library the Done returns her to",
    "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "8b03230da292270b",
+    "text": "d6e08a8d8d4ce413",
+    "traits": "44136fa355b3678a",
     "facts": "94fc5e907f77da68",
     "facts2": "94fc5e907f77da68",
-    "all": "a85a6c519be9c9cd"
+    "all": "f1c8978373b5bb51"
    },
    "row_hash": "c1c0e2ac2588a579",
    "carried": true,
-   "pass": 4
+   "pass": 11
   },
   {
    "row": "B11",
@@ -1154,55 +1184,58 @@
    "row": "B8",
    "screen": "walk_cross_brooke.leave",
    "verdict": "PASS",
-   "line": "He'll be saying it next rehearsal too.",
-   "why": "no number; no garment of hers named, or the one named is backed",
+   "line": "You slip out before the scene ends. You can still hear him: 'Again.' He'll be saying it next rehearsal too. -> Done (to the Quad)",
+   "why": "no number on screen; no garment of hers named",
    "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "c0112c78a7691d76",
+    "text": "d98ea6a44c7a6ac1",
+    "traits": "44136fa355b3678a",
     "facts": "e27a8e51e6c466bf",
     "facts2": "e27a8e51e6c466bf",
-    "all": "524ffb2c4de245f5"
+    "all": "6650184fae7d492b"
    },
    "row_hash": "80d415cf08e0ebfe",
-   "carried": true,
-   "pass": 2
+   "carried": false,
+   "pass": 12
   },
   {
    "row": "B8",
    "screen": "walk_cross_brooke.moment",
    "verdict": "PASS",
-   "line": "You can feel where his hand would sit on your own waist.",
-   "why": "no number; no garment of hers named, or the one named is backed",
+   "line": "Cross is running a scene with Brooke on the empty stage, his hand on her waist to place her, staying.",
+   "why": "no number on screen; every garment named belongs to someone she watches, none to her",
    "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "734afbbfc200cb7d",
+    "text": "19c927e206f3a367",
+    "traits": "e6b79f0e524c6de5",
     "facts": "53fbf715bd6b1c0c",
     "facts2": "7d5f431740948a39",
-    "all": "529f9288a0c9bf07"
+    "all": "a10ecb7b5794ff26"
    },
    "row_hash": "80d415cf08e0ebfe",
    "carried": true,
-   "pass": 2
+   "pass": 11
   },
   {
    "row": "B8",
    "screen": "walk_cross_brooke.watch",
    "verdict": "PASS",
-   "line": "One day he'll place you like that.",
-   "why": "no number; no garment of hers named, or the one named is backed",
+   "line": "You watch his hand stay on her waist through the whole scene. When they finish, he looks up into the dark seats, straight at you.",
+   "why": "no number on screen; every garment named belongs to someone she watches, none to her",
    "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "aa9c7f832d0e0045",
+    "text": "9c0edadef72d24cb",
+    "traits": "44136fa355b3678a",
     "facts": "e27a8e51e6c466bf",
     "facts2": "e27a8e51e6c466bf",
-    "all": "5021c056e338ce68"
+    "all": "e3be4f6628dae458"
    },
    "row_hash": "80d415cf08e0ebfe",
    "carried": true,
-   "pass": 2
+   "pass": 11
   },
   {
    "row": "B8",
@@ -1262,217 +1295,229 @@
    "row": "B8",
    "screen": "walk_hale_note.knock",
    "verdict": "PASS",
-   "line": "Young lady. Come back with a real question, and I'll have an answer.",
-   "why": "No number and no garment on the screen.",
+   "line": "Young lady. Come back with a real question, and I'll have an answer. / He closes the file.",
+   "why": "no number on screen; every garment named belongs to someone she watches, none to her",
    "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "b2f952756bcfcfd6",
-    "facts": "7291ac6ca70bd782",
-    "facts2": "0d1b466dbc39c306",
-    "all": "d7cdeb3050cf2802"
+    "text": "8c188b8b69cd4f85",
+    "traits": "825724317465730d",
+    "facts": "fcdc74cfb64c451d",
+    "facts2": "901bf129b869dfc2",
+    "all": "81dcc650852f0c17"
    },
    "row_hash": "80d415cf08e0ebfe",
    "carried": true,
-   "pass": 5
+   "pass": 11
   },
   {
    "row": "B8",
    "screen": "walk_hale_note.moment",
    "verdict": "PASS",
-   "line": "Dr. Hale's door is ajar. He's alone with a file open on the desk, a yellow note stuck to it: 'Nadia \u2014 spring.'",
-   "why": "No number and no garment on the screen.",
+   "line": "Dr. Hale doesn't look up when you come in. He's alone with a file open on the desk",
+   "why": "no number on screen; every garment named belongs to someone she watches, none to her",
    "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "1dc73ddab0950d62",
-    "facts": "42567a3208a6dab9",
-    "facts2": "b471247d8c9ddba2",
-    "all": "13af75175d9374f8"
+    "text": "c59deaee4d0293e1",
+    "traits": "838782b7308b47e0",
+    "facts": "54a2a2da23a1fde8",
+    "facts2": "18b1fd058dc33746",
+    "all": "49171089d0542159"
    },
    "row_hash": "80d415cf08e0ebfe",
    "carried": true,
-   "pass": 5
+   "pass": 11
   },
   {
    "row": "B8",
    "screen": "walk_hale_note.walkon",
    "verdict": "PASS",
-   "line": "You walk on. You don't know what the note means. You know the name on it.",
-   "why": "No number and no garment on the screen.",
+   "line": "Close it behind you, young lady. / You back out.",
+   "why": "no number on screen; every garment named belongs to someone she watches, none to her",
    "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "6fc017edf4ddcdc0",
-    "facts": "ffe40e2b4d3d9199",
-    "facts2": "ffe40e2b4d3d9199",
-    "all": "b3989ddfc8341e91"
+    "text": "c89949bf43ee034e",
+    "traits": "825724317465730d",
+    "facts": "fcdc74cfb64c451d",
+    "facts2": "901bf129b869dfc2",
+    "all": "a706fdfe8fcdcf96"
    },
    "row_hash": "80d415cf08e0ebfe",
    "carried": true,
-   "pass": 5
+   "pass": 11
   },
   {
    "row": "B8",
    "screen": "walk_holt_novel.ask",
    "verdict": "PASS",
-   "line": "Tomorrow you'll want to know if he did.",
-   "why": "no number; no garment of hers named, or the one named is backed",
+   "line": "Research, hon. He's about to take her on a horse. / Tomorrow you'll want to know if he did.",
+   "why": "no number on screen; every garment named belongs to someone she watches, none to her",
    "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "9dc023606cb8714d",
+    "text": "48082e123536c891",
+    "traits": "f6d8d0533b3ef51b",
     "facts": "f2f993e2387bf270",
     "facts2": "5ddca7caca4503ee",
-    "all": "faa142475b47ad02"
+    "all": "7e74fecae1f9aa1e"
    },
    "row_hash": "80d415cf08e0ebfe",
    "carried": true,
-   "pass": 2
+   "pass": 11
   },
   {
    "row": "B8",
    "screen": "walk_holt_novel.leave",
    "verdict": "PASS",
-   "line": "Smart girl. / She'll be a chapter further tomorrow.",
-   "why": "no number; no garment of hers named, or the one named is backed",
+   "line": "You leave her to it. / Smart girl. / She'll be a chapter further tomorrow.",
+   "why": "no number on screen; every garment named belongs to someone she watches, none to her",
    "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "0e2e766021935b24",
+    "text": "b48a15fced5ecfc7",
+    "traits": "f6d8d0533b3ef51b",
     "facts": "f2f993e2387bf270",
     "facts2": "5ddca7caca4503ee",
-    "all": "e4a9c7e6f469f9da"
+    "all": "be12869569f44842"
    },
    "row_hash": "80d415cf08e0ebfe",
    "carried": true,
-   "pass": 2
+   "pass": 11
   },
   {
    "row": "B8",
    "screen": "walk_holt_novel.moment",
    "verdict": "PASS",
-   "line": "Don't you say a word, hon.",
-   "why": "no number; no garment of hers named, or the one named is backed",
+   "line": "Ms. Holt's at the desk with a fat library-science book open, and inside it, a paperback romance",
+   "why": "no number on screen; every garment named belongs to someone she watches, none to her",
    "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "21c1635a47813e19",
+    "text": "ccbc246ad11224a8",
+    "traits": "f6d8d0533b3ef51b",
     "facts": "f2f993e2387bf270",
     "facts2": "5ddca7caca4503ee",
-    "all": "1b2935b493699631"
+    "all": "68b912058fecf6ee"
    },
    "row_hash": "80d415cf08e0ebfe",
    "carried": true,
-   "pass": 2
+   "pass": 11
   },
   {
    "row": "B8",
    "screen": "walk_mirror_girls.beside",
    "verdict": "PASS",
-   "line": "Brooke's eyes find you in the mirror on the way out. She's remembering your face.",
-   "why": "no number; no garment of hers named, or the one named is backed",
+   "line": "You fix your hair a foot from them. ... Brooke's eyes find you in the mirror on the way out.",
+   "why": "no number on screen; every garment named belongs to someone she watches, none to her",
    "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "b41754b47ac5db86",
+    "text": "67895d5e3a3aab78",
+    "traits": "ebc4051ecd3afac5",
     "facts": "63b70900fab98401",
     "facts2": "1c8286cebcac9810",
-    "all": "13cd073ccfdefb99"
+    "all": "b736e04732ec8db3"
    },
    "row_hash": "80d415cf08e0ebfe",
    "carried": true,
-   "pass": 2
+   "pass": 11
   },
   {
    "row": "B8",
    "screen": "walk_mirror_girls.leave",
    "verdict": "PASS",
-   "line": "You leave. The laugh starts before the door shuts. They own that mirror. They'll be back.",
-   "why": "no number on the screen; every garment named is another person's (or the try-on skirt and a grouped underwear line), none of hers unbacked",
+   "line": "You leave. The laugh starts before the door shuts. They own that mirror. They'll be back. -> Done (to the Quad)",
+   "why": "no number on screen; no garment of hers named",
    "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "324af59133152f55",
+    "text": "039bd4fefd28e38d",
+    "traits": "44136fa355b3678a",
     "facts": "6b4cf4fa7c891d9f",
     "facts2": "6b4cf4fa7c891d9f",
-    "all": "e9b1f0bc5017e1da"
+    "all": "7dc3ceb52053a165"
    },
    "row_hash": "80d415cf08e0ebfe",
-   "carried": true,
-   "pass": 3
+   "carried": false,
+   "pass": 12
   },
   {
    "row": "B8",
    "screen": "walk_mirror_girls.moment",
    "verdict": "PASS",
    "line": "Tess is doing Brooke's lashes at the mirror while Kayla holds the bag",
-   "why": "no number; no garment of hers named, or the one named is backed",
+   "why": "no number on screen; every garment named belongs to someone she watches, none to her",
    "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "c323d543424379ab",
+    "text": "3c84b237cb35c287",
+    "traits": "9e12469ed756975c",
     "facts": "0ec0e8a07b88427d",
     "facts2": "c3e641b9202c38c9",
-    "all": "ad2df7f9e343f1a0"
+    "all": "795f50791074d0c4"
    },
    "row_hash": "80d415cf08e0ebfe",
    "carried": true,
-   "pass": 2
+   "pass": 11
   },
   {
    "row": "B8",
    "screen": "walk_stacks.away",
    "verdict": "PASS",
    "line": "You back out of the aisle, very upright, your face still hot. You know which shelf now.",
-   "why": "no number, and no garment of hers is named",
+   "why": "no number on screen; every garment named belongs to someone she watches, none to her",
    "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "277e2ec2f9ef49e5",
+    "text": "eaaed9499adf2390",
+    "traits": "44136fa355b3678a",
     "facts": "94fc5e907f77da68",
     "facts2": "94fc5e907f77da68",
-    "all": "8c0d20c57e7740c3"
+    "all": "f2d0ff23b120a8a7"
    },
    "row_hash": "80d415cf08e0ebfe",
    "carried": true,
-   "pass": 4
+   "pass": 11
   },
   {
    "row": "B8",
    "screen": "walk_stacks.moment",
    "verdict": "PASS",
-   "line": "Through a gap in the books in the back stacks: a couple against the shelves, her skirt in his fist, her tits out of her top",
-   "why": "skirt and top are the stranger's",
+   "line": "Through a gap in the books in the back stacks: a couple against the shelves ... Your face goes hot.",
+   "why": "no number on screen; every garment named belongs to someone she watches, none to her",
    "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "8e809e12139051bc",
+    "text": "a37c81e3865bb04b",
+    "traits": "44136fa355b3678a",
     "facts": "94fc5e907f77da68",
     "facts2": "94fc5e907f77da68",
-    "all": "b7d9ea415d2c4b39"
+    "all": "5e3a47aada8ed046"
    },
    "row_hash": "80d415cf08e0ebfe",
    "carried": true,
-   "pass": 4
+   "pass": 11
   },
   {
    "row": "B8",
    "screen": "walk_stacks.watch",
    "verdict": "PASS",
    "line": "Her eyes find yours through the gap. You're wet. A book falls, and you run.",
-   "why": "no number, and no garment of hers is named",
+   "why": "no number on screen; every garment named belongs to someone she watches, none to her",
    "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "8b03230da292270b",
+    "text": "d6e08a8d8d4ce413",
+    "traits": "44136fa355b3678a",
     "facts": "94fc5e907f77da68",
     "facts2": "94fc5e907f77da68",
-    "all": "a85a6c519be9c9cd"
+    "all": "f1c8978373b5bb51"
    },
    "row_hash": "80d415cf08e0ebfe",
    "carried": true,
-   "pass": 4
+   "pass": 11
   },
   {
    "row": "B9",
@@ -1504,19 +1549,20 @@
    "row": "C1158",
    "screen": "walk_stacks.moment",
    "verdict": "PASS",
-   "line": "Through a gap in the books in the back stacks: a couple against the shelves, her skirt in his fist, her tits out of her top",
-   "why": "garments named are the stranger's",
+   "line": "her skirt in his fist, her tits out of her top",
+   "why": "the garments named are the stranger's; none of hers is named",
    "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "8e809e12139051bc",
+    "text": "a37c81e3865bb04b",
+    "traits": "44136fa355b3678a",
     "facts": "94fc5e907f77da68",
     "facts2": "94fc5e907f77da68",
-    "all": "b7d9ea415d2c4b39"
+    "all": "5e3a47aada8ed046"
    },
    "row_hash": "f40f51a0fd6cfd10",
    "carried": true,
-   "pass": 4
+   "pass": 11
   },
   {
    "row": "C1173",
@@ -1626,19 +1672,20 @@
    "row": "C1206",
    "screen": "walk_stacks.moment",
    "verdict": "PASS",
-   "line": "Through a gap in the books in the back stacks: a couple against the shelves, her skirt in his fist, her tits out of her top",
+   "line": "her skirt in his fist, her tits out of her top",
    "why": "no garment of hers named",
    "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "8e809e12139051bc",
+    "text": "a37c81e3865bb04b",
+    "traits": "44136fa355b3678a",
     "facts": "94fc5e907f77da68",
     "facts2": "94fc5e907f77da68",
-    "all": "b7d9ea415d2c4b39"
+    "all": "5e3a47aada8ed046"
    },
    "row_hash": "bfff76edbee583de",
    "carried": true,
-   "pass": 4
+   "pass": 11
   },
   {
    "row": "C1220",
@@ -2425,18 +2472,19 @@
    "screen": "walk_mirror_girls.moment",
    "verdict": "FAIL",
    "line": "Kayla: \"He said that? To you?\" Brooke: \"He says a lot of things. He'll learn.\"",
-   "why": "two spoken lines on a repeatable (note row)",
+   "why": "a note row: two spoken lines on a repeatable, not one",
    "cause": null,
    "note": true,
    "screen_hash": {
-    "text": "c323d543424379ab",
+    "text": "3c84b237cb35c287",
+    "traits": "9e12469ed756975c",
     "facts": "0ec0e8a07b88427d",
     "facts2": "c3e641b9202c38c9",
-    "all": "ad2df7f9e343f1a0"
+    "all": "795f50791074d0c4"
    },
    "row_hash": "d5758757a709b1af",
    "carried": true,
-   "pass": 2
+   "pass": 11
   },
   {
    "row": "C151",
@@ -2447,14 +2495,15 @@
    "cause": null,
    "note": true,
    "screen_hash": {
-    "text": "8e809e12139051bc",
+    "text": "a37c81e3865bb04b",
+    "traits": "44136fa355b3678a",
     "facts": "94fc5e907f77da68",
     "facts2": "94fc5e907f77da68",
-    "all": "b7d9ea415d2c4b39"
+    "all": "5e3a47aada8ed046"
    },
    "row_hash": "d5758757a709b1af",
    "carried": true,
-   "pass": 4
+   "pass": 11
   },
   {
    "row": "C164",
@@ -2496,6 +2545,45 @@
    "pass": 1
   },
   {
+   "row": "C1820",
+   "screen": "*",
+   "verdict": "N/A",
+   "line": "chance = 0.35 on each of the five",
+   "why": "release 1 is frozen (C2182): no meter moves, so there is no meter for a band to ride; each canvas is the bottom band alone (How a walk-in grows, step 6)",
+   "cause": null,
+   "note": true,
+   "screen_hash": "72fd4d0f5d0e16ec",
+   "row_hash": "d8f9999d285c6607",
+   "carried": true,
+   "pass": 11
+  },
+  {
+   "row": "C1821",
+   "screen": "*",
+   "verdict": "N/A",
+   "line": "trigger_mode = \"random\" at the place",
+   "why": "the five are on-arrival random canvases, not substitutions on an act; no router, branch or payoff applies (walk_cross_seats is the substitution, not on these screens)",
+   "cause": null,
+   "note": true,
+   "screen_hash": "72fd4d0f5d0e16ec",
+   "row_hash": "b9818557d5e43850",
+   "carried": true,
+   "pass": 11
+  },
+  {
+   "row": "C1864",
+   "screen": "*",
+   "verdict": "N/A",
+   "line": "no [[canvases.trigger.substitutions]] on these five",
+   "why": "no substitution rules and no exclusive group to band or append to",
+   "cause": null,
+   "note": true,
+   "screen_hash": "72fd4d0f5d0e16ec",
+   "row_hash": "45e669c2511d9b8e",
+   "carried": true,
+   "pass": 11
+  },
+  {
    "row": "C2179",
    "screen": "*",
    "verdict": "PASS",
@@ -2509,17 +2597,30 @@
    "pass": 6
   },
   {
-   "row": "C2183",
+   "row": "C2186",
    "screen": "*",
-   "verdict": "PASS",
-   "line": "Hale Particular (\"Come back with a real question\"); Holt Particular; Cross Artistic/Particular (\"Again. Slower. Like you mean it.\"); Brooke/Kayla Bully, Tess Shy (\"The laugh starts before the door shuts.\")",
-   "why": "every named person carries 2-4 traits with a learnable personality trait, backed in the game and not contradicted here",
+   "verdict": "N/A",
+   "line": "walk_stacks, walk_hale_note, walk_holt_novel, walk_mirror_girls, walk_cross_brooke",
+   "why": "all five are kind (a), she comes across something (Does: 'she comes across something'); C2186 is the 'someone comes to her' kind (b)",
    "cause": null,
    "note": false,
-   "screen_hash": "a8a5679d45e51806",
-   "row_hash": "40172c2d376bfc32",
+   "screen_hash": "72fd4d0f5d0e16ec",
+   "row_hash": "39e6f4b48d03d606",
    "carried": true,
-   "pass": 6
+   "pass": 11
+  },
+  {
+   "row": "C2187",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "no trigger or exit names came_to_her_today",
+   "why": "kind (a) is outside the one-a-day brake, and none of the five waits on or sets it",
+   "cause": null,
+   "note": false,
+   "screen_hash": "72fd4d0f5d0e16ec",
+   "row_hash": "f2b54b1dd7c15f2f",
+   "carried": true,
+   "pass": 11
   },
   {
    "row": "C2188",
@@ -2753,7 +2854,7 @@
     "all": "524ffb2c4de245f5"
    },
    "row_hash": "0c03931191c53a34",
-   "carried": false,
+   "carried": true,
    "pass": 8
   },
   {
@@ -2772,7 +2873,7 @@
     "all": "529f9288a0c9bf07"
    },
    "row_hash": "0c03931191c53a34",
-   "carried": false,
+   "carried": true,
    "pass": 8
   },
   {
@@ -2791,7 +2892,7 @@
     "all": "5021c056e338ce68"
    },
    "row_hash": "0c03931191c53a34",
-   "carried": false,
+   "carried": true,
    "pass": 8
   },
   {
@@ -2810,7 +2911,7 @@
     "all": "45729f9d08d27174"
    },
    "row_hash": "0c03931191c53a34",
-   "carried": false,
+   "carried": true,
    "pass": 8
   },
   {
@@ -2829,7 +2930,7 @@
     "all": "f2ddf0ee5bece44d"
    },
    "row_hash": "0c03931191c53a34",
-   "carried": false,
+   "carried": true,
    "pass": 8
   },
   {
@@ -2848,7 +2949,7 @@
     "all": "c49004075617357d"
    },
    "row_hash": "0c03931191c53a34",
-   "carried": false,
+   "carried": true,
    "pass": 8
   },
   {
@@ -2867,7 +2968,7 @@
     "all": "d7cdeb3050cf2802"
    },
    "row_hash": "0c03931191c53a34",
-   "carried": false,
+   "carried": true,
    "pass": 8
   },
   {
@@ -2886,7 +2987,7 @@
     "all": "13af75175d9374f8"
    },
    "row_hash": "0c03931191c53a34",
-   "carried": false,
+   "carried": true,
    "pass": 8
   },
   {
@@ -2905,7 +3006,7 @@
     "all": "b3989ddfc8341e91"
    },
    "row_hash": "0c03931191c53a34",
-   "carried": false,
+   "carried": true,
    "pass": 8
   },
   {
@@ -2924,7 +3025,7 @@
     "all": "faa142475b47ad02"
    },
    "row_hash": "0c03931191c53a34",
-   "carried": false,
+   "carried": true,
    "pass": 8
   },
   {
@@ -2943,7 +3044,7 @@
     "all": "e4a9c7e6f469f9da"
    },
    "row_hash": "0c03931191c53a34",
-   "carried": false,
+   "carried": true,
    "pass": 8
   },
   {
@@ -2962,7 +3063,7 @@
     "all": "1b2935b493699631"
    },
    "row_hash": "0c03931191c53a34",
-   "carried": false,
+   "carried": true,
    "pass": 8
   },
   {
@@ -2981,7 +3082,7 @@
     "all": "13cd073ccfdefb99"
    },
    "row_hash": "0c03931191c53a34",
-   "carried": false,
+   "carried": true,
    "pass": 8
   },
   {
@@ -3000,7 +3101,7 @@
     "all": "e9b1f0bc5017e1da"
    },
    "row_hash": "0c03931191c53a34",
-   "carried": false,
+   "carried": true,
    "pass": 8
   },
   {
@@ -3019,7 +3120,7 @@
     "all": "ad2df7f9e343f1a0"
    },
    "row_hash": "0c03931191c53a34",
-   "carried": false,
+   "carried": true,
    "pass": 8
   },
   {
@@ -3038,7 +3139,7 @@
     "all": "8c0d20c57e7740c3"
    },
    "row_hash": "0c03931191c53a34",
-   "carried": false,
+   "carried": true,
    "pass": 8
   },
   {
@@ -3057,7 +3158,7 @@
     "all": "b7d9ea415d2c4b39"
    },
    "row_hash": "0c03931191c53a34",
-   "carried": false,
+   "carried": true,
    "pass": 8
   },
   {
@@ -3076,8 +3177,21 @@
     "all": "a85a6c519be9c9cd"
    },
    "row_hash": "0c03931191c53a34",
-   "carried": false,
+   "carried": true,
    "pass": 8
+  },
+  {
+   "row": "C2195",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "trigger_mode = \"random\", chance = 0.35, max_triggers_per_day = 1",
+   "why": "each of the five fires on arrival at its place, at 0.35, once a day, gated by the same flags, hours and npc_at_location presence as before; no came_to_her_today; no random_cooldown override, so the engine's 3-arrival rest applies; the choices inside are unchanged",
+   "cause": null,
+   "note": false,
+   "screen_hash": "72fd4d0f5d0e16ec",
+   "row_hash": "77083291a86791c3",
+   "carried": true,
+   "pass": 11
   },
   {
    "row": "C286",
@@ -3169,6 +3283,19 @@
    "row_hash": "b920ef848ab61988",
    "carried": true,
    "pass": 1
+  },
+  {
+   "row": "C302",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "Her eyes find yours through the gap. / he looks up into the dark seats, straight at you.",
+   "why": "release 1 is the bottom stage: each scene offers look or leave, and each look sets its own flag (saw_stacks_couple, watched_cross_brooke ...) for a later 'caught' door to read",
+   "cause": null,
+   "note": true,
+   "screen_hash": "72fd4d0f5d0e16ec",
+   "row_hash": "2ba94157c9da471e",
+   "carried": true,
+   "pass": 11
   },
   {
    "row": "C311",
@@ -3550,55 +3677,58 @@
    "row": "C460",
    "screen": "walk_cross_brooke.leave",
    "verdict": "PASS",
-   "line": "He'll be saying it next rehearsal too.",
-   "why": "every claim checked against PLAN, who_is_where and the trigger; true on every reachable visit",
+   "line": "You slip out before the scene ends. You can still hear him: 'Again.' He'll be saying it next rehearsal too. -> Done (to the Quad)",
+   "why": "the line says she left, and Done puts her on the Quad (no hours, always open); the people she left stay where their rows put them",
    "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "c0112c78a7691d76",
+    "text": "d98ea6a44c7a6ac1",
+    "traits": "44136fa355b3678a",
     "facts": "e27a8e51e6c466bf",
     "facts2": "e27a8e51e6c466bf",
-    "all": "524ffb2c4de245f5"
+    "all": "6650184fae7d492b"
    },
    "row_hash": "67e48e60d5053a2e",
-   "carried": true,
-   "pass": 2
+   "carried": false,
+   "pass": 12
   },
   {
    "row": "C460",
    "screen": "walk_cross_brooke.moment",
    "verdict": "PASS",
-   "line": "You can feel where his hand would sit on your own waist.",
-   "why": "every claim checked against PLAN, who_is_where and the trigger; true on every reachable visit",
+   "line": "Cross is running a scene with Brooke on the empty stage, his hand on her waist to place her, staying.",
+   "why": "on arrival she walks in on a rehearsal already running; Cross and Brooke at campus_theatre Tue/Thu/Fri 14-18 by rows, both gated is_present, met_cross and met_brooke",
    "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "734afbbfc200cb7d",
+    "text": "19c927e206f3a367",
+    "traits": "e6b79f0e524c6de5",
     "facts": "53fbf715bd6b1c0c",
     "facts2": "7d5f431740948a39",
-    "all": "529f9288a0c9bf07"
+    "all": "a10ecb7b5794ff26"
    },
    "row_hash": "67e48e60d5053a2e",
    "carried": true,
-   "pass": 2
+   "pass": 11
   },
   {
    "row": "C460",
    "screen": "walk_cross_brooke.watch",
    "verdict": "PASS",
-   "line": "One day he'll place you like that.",
-   "why": "every claim checked against PLAN, who_is_where and the trigger; true on every reachable visit",
+   "line": "You watch his hand stay on her waist through the whole scene. When they finish, he looks up into the dark seats, straight at you.",
+   "why": "she stays in the theatre, Done lands there; both still present by rows (to 18:00)",
    "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "aa9c7f832d0e0045",
+    "text": "9c0edadef72d24cb",
+    "traits": "44136fa355b3678a",
     "facts": "e27a8e51e6c466bf",
     "facts2": "e27a8e51e6c466bf",
-    "all": "5021c056e338ce68"
+    "all": "e3be4f6628dae458"
    },
    "row_hash": "67e48e60d5053a2e",
    "carried": true,
-   "pass": 2
+   "pass": 11
   },
   {
    "row": "C460",
@@ -3658,217 +3788,229 @@
    "row": "C460",
    "screen": "walk_hale_note.knock",
    "verdict": "PASS",
-   "line": "Young lady. Come back with a real question, and I'll have an answer.",
-   "why": "Every claim true at 14:00 and 16:59 Mon/Wed with the dean now on the corridor too: nothing says the corridor is empty or that Hale is the only one on it.",
+   "line": "Young lady. Come back with a real question, and I'll have an answer. / He closes the file.",
+   "why": "Hale still in his office row; Done +5 lands in the corridor (open to 18:00)",
    "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "b2f952756bcfcfd6",
-    "facts": "7291ac6ca70bd782",
-    "facts2": "0d1b466dbc39c306",
-    "all": "d7cdeb3050cf2802"
+    "text": "8c188b8b69cd4f85",
+    "traits": "825724317465730d",
+    "facts": "fcdc74cfb64c451d",
+    "facts2": "901bf129b869dfc2",
+    "all": "81dcc650852f0c17"
    },
    "row_hash": "67e48e60d5053a2e",
    "carried": true,
-   "pass": 5
+   "pass": 11
   },
   {
    "row": "C460",
    "screen": "walk_hale_note.moment",
    "verdict": "PASS",
-   "line": "Dr. Hale's door is ajar. He's alone with a file open on the desk, a yellow note stuck to it: 'Nadia \u2014 spring.'",
-   "why": "Every claim true at 14:00 and 16:59 Mon/Wed with the dean now on the corridor too: nothing says the corridor is empty or that Hale is the only one on it.",
+   "line": "Dr. Hale doesn't look up when you come in. He's alone with a file open on the desk",
+   "why": "written for arrival: 'when you come in' is exactly the on-arrival moment; trigger needs met_hale, Mon/Wed 14-17 and Hale present in campus_office_hale, his row by who_is_where; Nadia's name on the note is texture, not presence",
    "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "1dc73ddab0950d62",
-    "facts": "42567a3208a6dab9",
-    "facts2": "b471247d8c9ddba2",
-    "all": "13af75175d9374f8"
+    "text": "c59deaee4d0293e1",
+    "traits": "838782b7308b47e0",
+    "facts": "54a2a2da23a1fde8",
+    "facts2": "18b1fd058dc33746",
+    "all": "49171089d0542159"
    },
    "row_hash": "67e48e60d5053a2e",
    "carried": true,
-   "pass": 5
+   "pass": 11
   },
   {
    "row": "C460",
    "screen": "walk_hale_note.walkon",
    "verdict": "PASS",
-   "line": "You walk on. You don't know what the note means. You know the name on it.",
-   "why": "Every claim true at 14:00 and 16:59 Mon/Wed with the dean now on the corridor too: nothing says the corridor is empty or that Hale is the only one on it.",
+   "line": "Close it behind you, young lady. / You back out.",
+   "why": "she backs out and Done lands in campus_offices, the corridor outside: the line and the landing agree",
    "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "6fc017edf4ddcdc0",
-    "facts": "ffe40e2b4d3d9199",
-    "facts2": "ffe40e2b4d3d9199",
-    "all": "b3989ddfc8341e91"
+    "text": "c89949bf43ee034e",
+    "traits": "825724317465730d",
+    "facts": "fcdc74cfb64c451d",
+    "facts2": "901bf129b869dfc2",
+    "all": "a706fdfe8fcdcf96"
    },
    "row_hash": "67e48e60d5053a2e",
    "carried": true,
-   "pass": 5
+   "pass": 11
   },
   {
    "row": "C460",
    "screen": "walk_holt_novel.ask",
    "verdict": "PASS",
-   "line": "Tomorrow you'll want to know if he did.",
-   "why": "every claim checked against PLAN, who_is_where and the trigger; true on every reachable visit",
+   "line": "Research, hon. He's about to take her on a horse. / Tomorrow you'll want to know if he did.",
+   "why": "Holt present; 'tomorrow you'll want' is her opinion, allowed under C461",
    "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "9dc023606cb8714d",
+    "text": "48082e123536c891",
+    "traits": "f6d8d0533b3ef51b",
     "facts": "f2f993e2387bf270",
     "facts2": "5ddca7caca4503ee",
-    "all": "faa142475b47ad02"
+    "all": "7e74fecae1f9aa1e"
    },
    "row_hash": "67e48e60d5053a2e",
    "carried": true,
-   "pass": 2
+   "pass": 11
   },
   {
    "row": "C460",
    "screen": "walk_holt_novel.leave",
    "verdict": "PASS",
-   "line": "Smart girl. (speaker npc_holt)",
-   "why": "Holt speaks under her name; met_holt on the trigger",
+   "line": "You leave her to it. / Smart girl. / She'll be a chapter further tomorrow.",
+   "why": "leaving Holt to her book leaves her in the library where Done lands; future line is texture",
    "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "0e2e766021935b24",
+    "text": "b48a15fced5ecfc7",
+    "traits": "f6d8d0533b3ef51b",
     "facts": "f2f993e2387bf270",
     "facts2": "5ddca7caca4503ee",
-    "all": "e4a9c7e6f469f9da"
+    "all": "be12869569f44842"
    },
    "row_hash": "67e48e60d5053a2e",
    "carried": true,
-   "pass": 2
+   "pass": 11
   },
   {
    "row": "C460",
    "screen": "walk_holt_novel.moment",
    "verdict": "PASS",
-   "line": "Don't you say a word, hon.",
-   "why": "every claim checked against PLAN, who_is_where and the trigger; true on every reachable visit",
+   "line": "Ms. Holt's at the desk with a fat library-science book open, and inside it, a paperback romance",
+   "why": "the desk is by the door (library description), so she sees it the moment she walks in; Holt at the library Mon-Fri 08-16 by her rows, trigger gates is_present; met_holt",
    "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "21c1635a47813e19",
+    "text": "ccbc246ad11224a8",
+    "traits": "f6d8d0533b3ef51b",
     "facts": "f2f993e2387bf270",
     "facts2": "5ddca7caca4503ee",
-    "all": "1b2935b493699631"
+    "all": "68b912058fecf6ee"
    },
    "row_hash": "67e48e60d5053a2e",
    "carried": true,
-   "pass": 2
+   "pass": 11
   },
   {
    "row": "C460",
    "screen": "walk_mirror_girls.beside",
    "verdict": "PASS",
-   "line": "Brooke's eyes find you in the mirror on the way out. She's remembering your face.",
-   "why": "every claim checked against PLAN, who_is_where and the trigger; true on every reachable visit",
+   "line": "You fix your hair a foot from them. ... Brooke's eyes find you in the mirror on the way out.",
+   "why": "fixing her hair keeps her in the bathroom, where Done lands; the three are present by rows",
    "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "b41754b47ac5db86",
+    "text": "67895d5e3a3aab78",
+    "traits": "ebc4051ecd3afac5",
     "facts": "63b70900fab98401",
     "facts2": "1c8286cebcac9810",
-    "all": "13cd073ccfdefb99"
+    "all": "b736e04732ec8db3"
    },
    "row_hash": "67e48e60d5053a2e",
    "carried": true,
-   "pass": 2
+   "pass": 11
   },
   {
    "row": "C460",
    "screen": "walk_mirror_girls.leave",
    "verdict": "PASS",
-   "line": "You leave. The laugh starts before the door shuts. They own that mirror. They'll be back.",
-   "why": "true at first and last minute and on a repeat visit: Brooke, Kayla, Tess all at campus_bathroom weekdays 08-09 and 13-14 by who_is_where; trigger needs all three",
+   "line": "You leave. The laugh starts before the door shuts. They own that mirror. They'll be back. -> Done (to the Quad)",
+   "why": "the line says she left, and Done puts her on the Quad (no hours, always open); the people she left stay where their rows put them",
    "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "324af59133152f55",
+    "text": "039bd4fefd28e38d",
+    "traits": "44136fa355b3678a",
     "facts": "6b4cf4fa7c891d9f",
     "facts2": "6b4cf4fa7c891d9f",
-    "all": "e9b1f0bc5017e1da"
+    "all": "7dc3ceb52053a165"
    },
    "row_hash": "67e48e60d5053a2e",
-   "carried": true,
-   "pass": 3
+   "carried": false,
+   "pass": 12
   },
   {
    "row": "C460",
    "screen": "walk_mirror_girls.moment",
    "verdict": "PASS",
    "line": "Tess is doing Brooke's lashes at the mirror while Kayla holds the bag",
-   "why": "every claim checked against PLAN, who_is_where and the trigger; true on every reachable visit",
+   "why": "on arrival she walks in on the three at the mirror; trigger needs all three present, rows put them in campus_bathroom weekdays 08-09 and 13-14; met_brooke",
    "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "c323d543424379ab",
+    "text": "3c84b237cb35c287",
+    "traits": "9e12469ed756975c",
     "facts": "0ec0e8a07b88427d",
     "facts2": "c3e641b9202c38c9",
-    "all": "ad2df7f9e343f1a0"
+    "all": "795f50791074d0c4"
    },
    "row_hash": "67e48e60d5053a2e",
    "carried": true,
-   "pass": 2
+   "pass": 11
   },
   {
    "row": "C460",
    "screen": "walk_stacks.away",
    "verdict": "PASS",
    "line": "You back out of the aisle, very upright, your face still hot. You know which shelf now.",
-   "why": "walk_stacks: every day 18:00-21:55, library open 08:00-22:00; strangers; Holt (to 16:00) and Nadia (to 18:00) are gone",
+   "why": "backing out of an aisle leaves her in the library, where Done lands; 'which shelf now' true from the first visit on",
    "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "277e2ec2f9ef49e5",
+    "text": "eaaed9499adf2390",
+    "traits": "44136fa355b3678a",
     "facts": "94fc5e907f77da68",
     "facts2": "94fc5e907f77da68",
-    "all": "8c0d20c57e7740c3"
+    "all": "f2d0ff23b120a8a7"
    },
    "row_hash": "67e48e60d5053a2e",
    "carried": true,
-   "pass": 4
+   "pass": 11
   },
   {
    "row": "C460",
    "screen": "walk_stacks.moment",
    "verdict": "PASS",
-   "line": "Through a gap in the books in the back stacks: a couple against the shelves, her skirt in his fist, her tits out of her top ... Your face goes hot.",
-   "why": "walk_stacks: every day 18:00-21:55, library open 08:00-22:00; strangers; Holt (to 16:00) and Nadia (to 18:00) are gone",
+   "line": "Through a gap in the books in the back stacks: a couple against the shelves ... Your face goes hot.",
+   "why": "fires on arrival at the library 18:00-21:55 every day (library open 08-22); she comes across it, no choice of hers assumed; strangers only, Holt (to 16:00) and Nadia (to 18:00) gone by who_is_where",
    "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "8e809e12139051bc",
+    "text": "a37c81e3865bb04b",
+    "traits": "44136fa355b3678a",
     "facts": "94fc5e907f77da68",
     "facts2": "94fc5e907f77da68",
-    "all": "b7d9ea415d2c4b39"
+    "all": "5e3a47aada8ed046"
    },
    "row_hash": "67e48e60d5053a2e",
    "carried": true,
-   "pass": 4
+   "pass": 11
   },
   {
    "row": "C460",
    "screen": "walk_stacks.watch",
    "verdict": "PASS",
    "line": "Her eyes find yours through the gap. You're wet. A book falls, and you run.",
-   "why": "walk_stacks: every day 18:00-21:55, library open 08:00-22:00; strangers; Holt (to 16:00) and Nadia (to 18:00) are gone",
+   "why": "answer screen costs 0 min; Done +5 lands at 22:00 at latest, library still open; running out of the stacks leaves her in the library the Done returns her to",
    "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "8b03230da292270b",
+    "text": "d6e08a8d8d4ce413",
+    "traits": "44136fa355b3678a",
     "facts": "94fc5e907f77da68",
     "facts2": "94fc5e907f77da68",
-    "all": "a85a6c519be9c9cd"
+    "all": "f1c8978373b5bb51"
    },
    "row_hash": "67e48e60d5053a2e",
    "carried": true,
-   "pass": 4
+   "pass": 11
   },
   {
    "row": "C461",
@@ -3887,55 +4029,58 @@
    "row": "C461",
    "screen": "walk_cross_brooke.leave",
    "verdict": "PASS",
-   "line": "He'll be saying it next rehearsal too.",
-   "why": "texture and in-character dialogue only",
+   "line": "You slip out before the scene ends. You can still hear him: 'Again.' He'll be saying it next rehearsal too. -> Done (to the Quad)",
+   "why": "texture and her reaction; Cross's 'Again' is his own line from the moment",
    "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "c0112c78a7691d76",
+    "text": "d98ea6a44c7a6ac1",
+    "traits": "44136fa355b3678a",
     "facts": "e27a8e51e6c466bf",
     "facts2": "e27a8e51e6c466bf",
-    "all": "524ffb2c4de245f5"
+    "all": "6650184fae7d492b"
    },
    "row_hash": "310706ee076318f2",
-   "carried": true,
-   "pass": 2
+   "carried": false,
+   "pass": 12
   },
   {
    "row": "C461",
    "screen": "walk_cross_brooke.moment",
    "verdict": "PASS",
-   "line": "You can feel where his hand would sit on your own waist.",
-   "why": "texture and in-character dialogue only",
+   "line": "Cross is running a scene with Brooke on the empty stage, his hand on her waist to place her, staying.",
+   "why": "what isn't a checked fact is texture or her opinion on her body, and dialogue fits each person's entry",
    "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "734afbbfc200cb7d",
+    "text": "19c927e206f3a367",
+    "traits": "e6b79f0e524c6de5",
     "facts": "53fbf715bd6b1c0c",
     "facts2": "7d5f431740948a39",
-    "all": "529f9288a0c9bf07"
+    "all": "a10ecb7b5794ff26"
    },
    "row_hash": "310706ee076318f2",
    "carried": true,
-   "pass": 2
+   "pass": 11
   },
   {
    "row": "C461",
    "screen": "walk_cross_brooke.watch",
    "verdict": "PASS",
-   "line": "One day he'll place you like that.",
-   "why": "texture and in-character dialogue only",
+   "line": "You watch his hand stay on her waist through the whole scene. When they finish, he looks up into the dark seats, straight at you.",
+   "why": "what isn't a checked fact is texture or her opinion on her body, and dialogue fits each person's entry",
    "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "aa9c7f832d0e0045",
+    "text": "9c0edadef72d24cb",
+    "traits": "44136fa355b3678a",
     "facts": "e27a8e51e6c466bf",
     "facts2": "e27a8e51e6c466bf",
-    "all": "5021c056e338ce68"
+    "all": "e3be4f6628dae458"
    },
    "row_hash": "310706ee076318f2",
    "carried": true,
-   "pass": 2
+   "pass": 11
   },
   {
    "row": "C461",
@@ -3995,217 +4140,229 @@
    "row": "C461",
    "screen": "walk_hale_note.knock",
    "verdict": "PASS",
-   "line": "Young lady. Come back with a real question, and I'll have an answer.",
-   "why": "Texture that can't clash (the yellow note, the file) and Hale's dry manner per his cast entry.",
+   "line": "Young lady. Come back with a real question, and I'll have an answer. / He closes the file.",
+   "why": "what isn't a checked fact is texture or her opinion on her body, and dialogue fits each person's entry",
    "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "b2f952756bcfcfd6",
-    "facts": "7291ac6ca70bd782",
-    "facts2": "0d1b466dbc39c306",
-    "all": "d7cdeb3050cf2802"
+    "text": "8c188b8b69cd4f85",
+    "traits": "825724317465730d",
+    "facts": "fcdc74cfb64c451d",
+    "facts2": "901bf129b869dfc2",
+    "all": "81dcc650852f0c17"
    },
    "row_hash": "310706ee076318f2",
    "carried": true,
-   "pass": 5
+   "pass": 11
   },
   {
    "row": "C461",
    "screen": "walk_hale_note.moment",
    "verdict": "PASS",
-   "line": "Dr. Hale's door is ajar. He's alone with a file open on the desk, a yellow note stuck to it: 'Nadia \u2014 spring.'",
-   "why": "Texture that can't clash (the yellow note, the file) and Hale's dry manner per his cast entry.",
+   "line": "Dr. Hale doesn't look up when you come in. He's alone with a file open on the desk",
+   "why": "what isn't a checked fact is texture or her opinion on her body, and dialogue fits each person's entry",
    "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "1dc73ddab0950d62",
-    "facts": "42567a3208a6dab9",
-    "facts2": "b471247d8c9ddba2",
-    "all": "13af75175d9374f8"
+    "text": "c59deaee4d0293e1",
+    "traits": "838782b7308b47e0",
+    "facts": "54a2a2da23a1fde8",
+    "facts2": "18b1fd058dc33746",
+    "all": "49171089d0542159"
    },
    "row_hash": "310706ee076318f2",
    "carried": true,
-   "pass": 5
+   "pass": 11
   },
   {
    "row": "C461",
    "screen": "walk_hale_note.walkon",
    "verdict": "PASS",
-   "line": "You walk on. You don't know what the note means. You know the name on it.",
-   "why": "Texture that can't clash (the yellow note, the file) and Hale's dry manner per his cast entry.",
+   "line": "Close it behind you, young lady. / You back out.",
+   "why": "what isn't a checked fact is texture or her opinion on her body, and dialogue fits each person's entry",
    "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "6fc017edf4ddcdc0",
-    "facts": "ffe40e2b4d3d9199",
-    "facts2": "ffe40e2b4d3d9199",
-    "all": "b3989ddfc8341e91"
+    "text": "c89949bf43ee034e",
+    "traits": "825724317465730d",
+    "facts": "fcdc74cfb64c451d",
+    "facts2": "901bf129b869dfc2",
+    "all": "a706fdfe8fcdcf96"
    },
    "row_hash": "310706ee076318f2",
    "carried": true,
-   "pass": 5
+   "pass": 11
   },
   {
    "row": "C461",
    "screen": "walk_holt_novel.ask",
    "verdict": "PASS",
-   "line": "Tomorrow you'll want to know if he did.",
-   "why": "texture and in-character dialogue only",
+   "line": "Research, hon. He's about to take her on a horse. / Tomorrow you'll want to know if he did.",
+   "why": "what isn't a checked fact is texture or her opinion on her body, and dialogue fits each person's entry",
    "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "9dc023606cb8714d",
+    "text": "48082e123536c891",
+    "traits": "f6d8d0533b3ef51b",
     "facts": "f2f993e2387bf270",
     "facts2": "5ddca7caca4503ee",
-    "all": "faa142475b47ad02"
+    "all": "7e74fecae1f9aa1e"
    },
    "row_hash": "310706ee076318f2",
    "carried": true,
-   "pass": 2
+   "pass": 11
   },
   {
    "row": "C461",
    "screen": "walk_holt_novel.leave",
    "verdict": "PASS",
-   "line": "Smart girl. / She'll be a chapter further tomorrow.",
-   "why": "texture and in-character dialogue only",
+   "line": "You leave her to it. / Smart girl. / She'll be a chapter further tomorrow.",
+   "why": "what isn't a checked fact is texture or her opinion on her body, and dialogue fits each person's entry",
    "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "0e2e766021935b24",
+    "text": "b48a15fced5ecfc7",
+    "traits": "f6d8d0533b3ef51b",
     "facts": "f2f993e2387bf270",
     "facts2": "5ddca7caca4503ee",
-    "all": "e4a9c7e6f469f9da"
+    "all": "be12869569f44842"
    },
    "row_hash": "310706ee076318f2",
    "carried": true,
-   "pass": 2
+   "pass": 11
   },
   {
    "row": "C461",
    "screen": "walk_holt_novel.moment",
    "verdict": "PASS",
-   "line": "Don't you say a word, hon.",
-   "why": "texture and in-character dialogue only",
+   "line": "Ms. Holt's at the desk with a fat library-science book open, and inside it, a paperback romance",
+   "why": "what isn't a checked fact is texture or her opinion on her body, and dialogue fits each person's entry",
    "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "21c1635a47813e19",
+    "text": "ccbc246ad11224a8",
+    "traits": "f6d8d0533b3ef51b",
     "facts": "f2f993e2387bf270",
     "facts2": "5ddca7caca4503ee",
-    "all": "1b2935b493699631"
+    "all": "68b912058fecf6ee"
    },
    "row_hash": "310706ee076318f2",
    "carried": true,
-   "pass": 2
+   "pass": 11
   },
   {
    "row": "C461",
    "screen": "walk_mirror_girls.beside",
    "verdict": "PASS",
-   "line": "Brooke's eyes find you in the mirror on the way out. She's remembering your face.",
-   "why": "texture and in-character dialogue only",
+   "line": "You fix your hair a foot from them. ... Brooke's eyes find you in the mirror on the way out.",
+   "why": "what isn't a checked fact is texture or her opinion on her body, and dialogue fits each person's entry",
    "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "b41754b47ac5db86",
+    "text": "67895d5e3a3aab78",
+    "traits": "ebc4051ecd3afac5",
     "facts": "63b70900fab98401",
     "facts2": "1c8286cebcac9810",
-    "all": "13cd073ccfdefb99"
+    "all": "b736e04732ec8db3"
    },
    "row_hash": "310706ee076318f2",
    "carried": true,
-   "pass": 2
+   "pass": 11
   },
   {
    "row": "C461",
    "screen": "walk_mirror_girls.leave",
    "verdict": "PASS",
-   "line": "You leave. The laugh starts before the door shuts. They own that mirror. They'll be back.",
-   "why": "texture and her reactions only; dialogue fits the cast entries (Tom runs the caf\u00e9, Nina owns the shop, Zoe 19, Sam 22)",
+   "line": "You leave. The laugh starts before the door shuts. They own that mirror. They'll be back. -> Done (to the Quad)",
+   "why": "texture and her reaction; Cross's 'Again' is his own line from the moment",
    "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "324af59133152f55",
+    "text": "039bd4fefd28e38d",
+    "traits": "44136fa355b3678a",
     "facts": "6b4cf4fa7c891d9f",
     "facts2": "6b4cf4fa7c891d9f",
-    "all": "e9b1f0bc5017e1da"
+    "all": "7dc3ceb52053a165"
    },
    "row_hash": "310706ee076318f2",
-   "carried": true,
-   "pass": 3
+   "carried": false,
+   "pass": 12
   },
   {
    "row": "C461",
    "screen": "walk_mirror_girls.moment",
    "verdict": "PASS",
    "line": "Tess is doing Brooke's lashes at the mirror while Kayla holds the bag",
-   "why": "texture and in-character dialogue only",
+   "why": "what isn't a checked fact is texture or her opinion on her body, and dialogue fits each person's entry",
    "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "c323d543424379ab",
+    "text": "3c84b237cb35c287",
+    "traits": "9e12469ed756975c",
     "facts": "0ec0e8a07b88427d",
     "facts2": "c3e641b9202c38c9",
-    "all": "ad2df7f9e343f1a0"
+    "all": "795f50791074d0c4"
    },
    "row_hash": "310706ee076318f2",
    "carried": true,
-   "pass": 2
+   "pass": 11
   },
   {
    "row": "C461",
    "screen": "walk_stacks.away",
    "verdict": "PASS",
    "line": "You back out of the aisle, very upright, your face still hot. You know which shelf now.",
-   "why": "texture and dialogue that fit the cast entries; no past or fact assumed",
+   "why": "what isn't a checked fact is texture or her opinion on her body, and dialogue fits each person's entry",
    "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "277e2ec2f9ef49e5",
+    "text": "eaaed9499adf2390",
+    "traits": "44136fa355b3678a",
     "facts": "94fc5e907f77da68",
     "facts2": "94fc5e907f77da68",
-    "all": "8c0d20c57e7740c3"
+    "all": "f2d0ff23b120a8a7"
    },
    "row_hash": "310706ee076318f2",
    "carried": true,
-   "pass": 4
+   "pass": 11
   },
   {
    "row": "C461",
    "screen": "walk_stacks.moment",
    "verdict": "PASS",
-   "line": "Through a gap in the books in the back stacks: a couple against the shelves, her skirt in his fist, her tits out of her top ... Your face goes hot.",
-   "why": "texture and dialogue that fit the cast entries; no past or fact assumed",
+   "line": "Through a gap in the books in the back stacks: a couple against the shelves ... Your face goes hot.",
+   "why": "what isn't a checked fact is texture or her opinion on her body, and dialogue fits each person's entry",
    "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "8e809e12139051bc",
+    "text": "a37c81e3865bb04b",
+    "traits": "44136fa355b3678a",
     "facts": "94fc5e907f77da68",
     "facts2": "94fc5e907f77da68",
-    "all": "b7d9ea415d2c4b39"
+    "all": "5e3a47aada8ed046"
    },
    "row_hash": "310706ee076318f2",
    "carried": true,
-   "pass": 4
+   "pass": 11
   },
   {
    "row": "C461",
    "screen": "walk_stacks.watch",
    "verdict": "PASS",
    "line": "Her eyes find yours through the gap. You're wet. A book falls, and you run.",
-   "why": "texture and dialogue that fit the cast entries; no past or fact assumed",
+   "why": "what isn't a checked fact is texture or her opinion on her body, and dialogue fits each person's entry",
    "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "8b03230da292270b",
+    "text": "d6e08a8d8d4ce413",
+    "traits": "44136fa355b3678a",
     "facts": "94fc5e907f77da68",
     "facts2": "94fc5e907f77da68",
-    "all": "a85a6c519be9c9cd"
+    "all": "f1c8978373b5bb51"
    },
    "row_hash": "310706ee076318f2",
    "carried": true,
-   "pass": 4
+   "pass": 11
   },
   {
    "row": "C519",
@@ -4428,6 +4585,19 @@
    "pass": 1
   },
   {
+   "row": "C724",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "Changed (P55): chance 0.35",
+   "why": "the flat odds are listed on the card (P55 line) with LO's words; release 1 has no climb to read (C2182)",
+   "cause": null,
+   "note": true,
+   "screen_hash": "72fd4d0f5d0e16ec",
+   "row_hash": "37e21685569ccea7",
+   "carried": true,
+   "pass": 11
+  },
+  {
    "row": "C758",
    "screen": "*",
    "verdict": "PASS",
@@ -4550,6 +4720,32 @@
    "pass": 1
   },
   {
+   "row": "C788",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "51 / 42 / 30 / 34 / 42 words",
+   "why": "moments run 30-51 words, about 45; four of five everyday (Hale, Holt, mirror, rehearsal; stacks is sex); all five carry a choice; who is there sets each tone",
+   "cause": null,
+   "note": false,
+   "screen_hash": "72fd4d0f5d0e16ec",
+   "row_hash": "cae1598ef9cb6ff1",
+   "carried": true,
+   "pass": 11
+  },
+  {
+   "row": "C792",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "moment -> watch | away (and the same shape on all five)",
+   "why": "each is two screens: the moment, then one answer screen per choice, then Done to a place",
+   "cause": null,
+   "note": true,
+   "screen_hash": "72fd4d0f5d0e16ec",
+   "row_hash": "92be110855d5a128",
+   "carried": true,
+   "pass": 11
+  },
+  {
    "row": "C794",
    "screen": "*",
    "verdict": "PASS",
@@ -4587,6 +4783,51 @@
    "row_hash": "5358489178bff0a4",
    "carried": true,
    "pass": 1
+  },
+  {
+   "row": "C855",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "met_hale + Mon/Wed 14-17 + Hale present; met_brooke + all three present",
+   "why": "each is filtered by hours and who is here (and met flags); her meters are frozen in release 1 and none of the five turns on what she wears; days-since is the once-a-day cap",
+   "cause": null,
+   "note": true,
+   "screen_hash": "72fd4d0f5d0e16ec",
+   "row_hash": "d3dc77f2f96e20ae",
+   "carried": true,
+   "pass": 11
+  },
+  {
+   "row": "C856",
+   "screen": "walk_stacks.moment",
+   "verdict": "FAIL",
+   "line": "time_of_day 18:00-21:55",
+   "why": "a note row: 4 of the 5 carry a clock window (all but the mirror), well over 'about half'",
+   "cause": null,
+   "note": true,
+   "screen_hash": {
+    "text": "a37c81e3865bb04b",
+    "traits": "44136fa355b3678a",
+    "facts": "94fc5e907f77da68",
+    "facts2": "94fc5e907f77da68",
+    "all": "5e3a47aada8ed046"
+   },
+   "row_hash": "9c58ec7792f1f95a",
+   "carried": true,
+   "pass": 11
+  },
+  {
+   "row": "C859",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "Watch / Back away; Clear your throat / Back out",
+   "why": "none is pure chance alone: each is filtered by window and presence; release 1 pays flags only (C2182), so nothing can be taken yet",
+   "cause": null,
+   "note": true,
+   "screen_hash": "72fd4d0f5d0e16ec",
+   "row_hash": "c504ec577b14e288",
+   "carried": true,
+   "pass": 11
   },
   {
    "row": "C889",
@@ -5291,37 +5532,39 @@
    "row": "C927",
    "screen": "walk_cross_brooke.leave",
    "verdict": "PASS",
-   "line": "He'll be saying it next rehearsal too.",
-   "why": "every Done states 5 minutes; node hops state 0",
+   "line": "You slip out before the scene ends. You can still hear him: 'Again.' He'll be saying it next rehearsal too. -> Done (to the Quad)",
+   "why": "Done costs time_progression_minutes = 5",
    "cause": null,
    "note": true,
    "screen_hash": {
-    "text": "c0112c78a7691d76",
+    "text": "d98ea6a44c7a6ac1",
+    "traits": "44136fa355b3678a",
     "facts": "e27a8e51e6c466bf",
     "facts2": "e27a8e51e6c466bf",
-    "all": "524ffb2c4de245f5"
+    "all": "6650184fae7d492b"
    },
    "row_hash": "4e86d143688ba8e5",
-   "carried": true,
-   "pass": 2
+   "carried": false,
+   "pass": 12
   },
   {
    "row": "C927",
    "screen": "walk_cross_brooke.watch",
    "verdict": "PASS",
-   "line": "One day he'll place you like that.",
-   "why": "every Done states 5 minutes; node hops state 0",
+   "line": "You watch his hand stay on her waist through the whole scene. When they finish, he looks up into the dark seats, straight at you.",
+   "why": "its exit, Done, costs 5 minutes",
    "cause": null,
    "note": true,
    "screen_hash": {
-    "text": "aa9c7f832d0e0045",
+    "text": "9c0edadef72d24cb",
+    "traits": "44136fa355b3678a",
     "facts": "e27a8e51e6c466bf",
     "facts2": "e27a8e51e6c466bf",
-    "all": "5021c056e338ce68"
+    "all": "e3be4f6628dae458"
    },
    "row_hash": "4e86d143688ba8e5",
    "carried": true,
-   "pass": 2
+   "pass": 11
   },
   {
    "row": "C927",
@@ -5363,145 +5606,153 @@
    "row": "C927",
    "screen": "walk_hale_note.knock",
    "verdict": "PASS",
-   "line": "Young lady. Come back with a real question, and I'll have an answer.",
-   "why": "Exit times stated (Done 5); no unstated exit.",
+   "line": "Young lady. Come back with a real question, and I'll have an answer. / He closes the file.",
+   "why": "its exit, Done, costs 5 minutes",
    "cause": null,
    "note": true,
    "screen_hash": {
-    "text": "b2f952756bcfcfd6",
-    "facts": "7291ac6ca70bd782",
-    "facts2": "0d1b466dbc39c306",
-    "all": "d7cdeb3050cf2802"
+    "text": "8c188b8b69cd4f85",
+    "traits": "825724317465730d",
+    "facts": "fcdc74cfb64c451d",
+    "facts2": "901bf129b869dfc2",
+    "all": "81dcc650852f0c17"
    },
    "row_hash": "4e86d143688ba8e5",
    "carried": true,
-   "pass": 5
+   "pass": 11
   },
   {
    "row": "C927",
    "screen": "walk_hale_note.walkon",
    "verdict": "PASS",
-   "line": "You walk on. You don't know what the note means. You know the name on it.",
-   "why": "Exit times stated (Done 5); no unstated exit.",
+   "line": "Close it behind you, young lady. / You back out.",
+   "why": "its exit, Done, costs 5 minutes",
    "cause": null,
    "note": true,
    "screen_hash": {
-    "text": "6fc017edf4ddcdc0",
-    "facts": "ffe40e2b4d3d9199",
-    "facts2": "ffe40e2b4d3d9199",
-    "all": "b3989ddfc8341e91"
+    "text": "c89949bf43ee034e",
+    "traits": "825724317465730d",
+    "facts": "fcdc74cfb64c451d",
+    "facts2": "901bf129b869dfc2",
+    "all": "a706fdfe8fcdcf96"
    },
    "row_hash": "4e86d143688ba8e5",
    "carried": true,
-   "pass": 5
+   "pass": 11
   },
   {
    "row": "C927",
    "screen": "walk_holt_novel.ask",
    "verdict": "PASS",
-   "line": "Tomorrow you'll want to know if he did.",
-   "why": "every Done states 5 minutes; node hops state 0",
+   "line": "Research, hon. He's about to take her on a horse. / Tomorrow you'll want to know if he did.",
+   "why": "its exit, Done, costs 5 minutes",
    "cause": null,
    "note": true,
    "screen_hash": {
-    "text": "9dc023606cb8714d",
+    "text": "48082e123536c891",
+    "traits": "f6d8d0533b3ef51b",
     "facts": "f2f993e2387bf270",
     "facts2": "5ddca7caca4503ee",
-    "all": "faa142475b47ad02"
+    "all": "7e74fecae1f9aa1e"
    },
    "row_hash": "4e86d143688ba8e5",
    "carried": true,
-   "pass": 2
+   "pass": 11
   },
   {
    "row": "C927",
    "screen": "walk_holt_novel.leave",
    "verdict": "PASS",
-   "line": "Smart girl. / She'll be a chapter further tomorrow.",
-   "why": "every Done states 5 minutes; node hops state 0",
+   "line": "You leave her to it. / Smart girl. / She'll be a chapter further tomorrow.",
+   "why": "its exit, Done, costs 5 minutes",
    "cause": null,
    "note": true,
    "screen_hash": {
-    "text": "0e2e766021935b24",
+    "text": "b48a15fced5ecfc7",
+    "traits": "f6d8d0533b3ef51b",
     "facts": "f2f993e2387bf270",
     "facts2": "5ddca7caca4503ee",
-    "all": "e4a9c7e6f469f9da"
+    "all": "be12869569f44842"
    },
    "row_hash": "4e86d143688ba8e5",
    "carried": true,
-   "pass": 2
+   "pass": 11
   },
   {
    "row": "C927",
    "screen": "walk_mirror_girls.beside",
    "verdict": "PASS",
-   "line": "Brooke's eyes find you in the mirror on the way out. She's remembering your face.",
-   "why": "every Done states 5 minutes; node hops state 0",
+   "line": "You fix your hair a foot from them. ... Brooke's eyes find you in the mirror on the way out.",
+   "why": "its exit, Done, costs 5 minutes",
    "cause": null,
    "note": true,
    "screen_hash": {
-    "text": "b41754b47ac5db86",
+    "text": "67895d5e3a3aab78",
+    "traits": "ebc4051ecd3afac5",
     "facts": "63b70900fab98401",
     "facts2": "1c8286cebcac9810",
-    "all": "13cd073ccfdefb99"
+    "all": "b736e04732ec8db3"
    },
    "row_hash": "4e86d143688ba8e5",
    "carried": true,
-   "pass": 2
+   "pass": 11
   },
   {
    "row": "C927",
    "screen": "walk_mirror_girls.leave",
    "verdict": "PASS",
-   "line": "You leave. The laugh starts before the door shuts. They own that mirror. They'll be back.",
-   "why": "every exit states its minutes: the choices 0, Done 5",
+   "line": "You leave. The laugh starts before the door shuts. They own that mirror. They'll be back. -> Done (to the Quad)",
+   "why": "Done costs time_progression_minutes = 5",
    "cause": null,
    "note": true,
    "screen_hash": {
-    "text": "324af59133152f55",
+    "text": "039bd4fefd28e38d",
+    "traits": "44136fa355b3678a",
     "facts": "6b4cf4fa7c891d9f",
     "facts2": "6b4cf4fa7c891d9f",
-    "all": "e9b1f0bc5017e1da"
+    "all": "7dc3ceb52053a165"
    },
    "row_hash": "4e86d143688ba8e5",
-   "carried": true,
-   "pass": 3
+   "carried": false,
+   "pass": 12
   },
   {
    "row": "C927",
    "screen": "walk_stacks.away",
    "verdict": "PASS",
-   "line": "\"Done\" (5 min)",
-   "why": "the exit states its minutes",
+   "line": "You back out of the aisle, very upright, your face still hot. You know which shelf now.",
+   "why": "its exit, Done, costs 5 minutes",
    "cause": null,
    "note": true,
    "screen_hash": {
-    "text": "277e2ec2f9ef49e5",
+    "text": "eaaed9499adf2390",
+    "traits": "44136fa355b3678a",
     "facts": "94fc5e907f77da68",
     "facts2": "94fc5e907f77da68",
-    "all": "8c0d20c57e7740c3"
+    "all": "f2d0ff23b120a8a7"
    },
    "row_hash": "4e86d143688ba8e5",
    "carried": true,
-   "pass": 4
+   "pass": 11
   },
   {
    "row": "C927",
    "screen": "walk_stacks.watch",
    "verdict": "PASS",
-   "line": "\"Done\" (5 min)",
-   "why": "the exit states its minutes",
+   "line": "Her eyes find yours through the gap. You're wet. A book falls, and you run.",
+   "why": "its exit, Done, costs 5 minutes",
    "cause": null,
    "note": true,
    "screen_hash": {
-    "text": "8b03230da292270b",
+    "text": "d6e08a8d8d4ce413",
+    "traits": "44136fa355b3678a",
     "facts": "94fc5e907f77da68",
     "facts2": "94fc5e907f77da68",
-    "all": "a85a6c519be9c9cd"
+    "all": "f1c8978373b5bb51"
    },
    "row_hash": "4e86d143688ba8e5",
    "carried": true,
-   "pass": 4
+   "pass": 11
   },
   {
    "row": "C928",
@@ -5667,37 +5918,39 @@
    "row": "C931",
    "screen": "walk_cross_brooke.leave",
    "verdict": "PASS",
-   "line": "He'll be saying it next rehearsal too.",
-   "why": "window end exclusive, inside the place's hours and the person's row",
+   "line": "You slip out before the scene ends. You can still hear him: 'Again.' He'll be saying it next rehearsal too. -> Done (to the Quad)",
+   "why": "time_of_day 14:00-18:00 end exclusive; Done +5 on the Quad, which has no hours",
    "cause": null,
    "note": true,
    "screen_hash": {
-    "text": "c0112c78a7691d76",
+    "text": "d98ea6a44c7a6ac1",
+    "traits": "44136fa355b3678a",
     "facts": "e27a8e51e6c466bf",
     "facts2": "e27a8e51e6c466bf",
-    "all": "524ffb2c4de245f5"
+    "all": "6650184fae7d492b"
    },
    "row_hash": "1aadffd96e76381c",
-   "carried": true,
-   "pass": 2
+   "carried": false,
+   "pass": 12
   },
   {
    "row": "C931",
    "screen": "walk_cross_brooke.watch",
    "verdict": "PASS",
-   "line": "One day he'll place you like that.",
-   "why": "window end exclusive, inside the place's hours and the person's row",
+   "line": "You watch his hand stay on her waist through the whole scene. When they finish, he looks up into the dark seats, straight at you.",
+   "why": "the trigger's time_of_day ends exclusive (or no clock window, presence-gated); the answer costs 0 and Done +5 still lands inside the place's hours",
    "cause": null,
    "note": true,
    "screen_hash": {
-    "text": "aa9c7f832d0e0045",
+    "text": "9c0edadef72d24cb",
+    "traits": "44136fa355b3678a",
     "facts": "e27a8e51e6c466bf",
     "facts2": "e27a8e51e6c466bf",
-    "all": "5021c056e338ce68"
+    "all": "e3be4f6628dae458"
    },
    "row_hash": "1aadffd96e76381c",
    "carried": true,
-   "pass": 2
+   "pass": 11
   },
   {
    "row": "C931",
@@ -5739,145 +5992,153 @@
    "row": "C931",
    "screen": "walk_hale_note.knock",
    "verdict": "PASS",
-   "line": "Young lady. Come back with a real question, and I'll have an answer.",
-   "why": "time_of_day 14:00-17:00, end exclusive, matches Hale's 14-17 office row exactly.",
+   "line": "Young lady. Come back with a real question, and I'll have an answer. / He closes the file.",
+   "why": "the trigger's time_of_day ends exclusive (or no clock window, presence-gated); the answer costs 0 and Done +5 still lands inside the place's hours",
    "cause": null,
    "note": true,
    "screen_hash": {
-    "text": "b2f952756bcfcfd6",
-    "facts": "7291ac6ca70bd782",
-    "facts2": "0d1b466dbc39c306",
-    "all": "d7cdeb3050cf2802"
+    "text": "8c188b8b69cd4f85",
+    "traits": "825724317465730d",
+    "facts": "fcdc74cfb64c451d",
+    "facts2": "901bf129b869dfc2",
+    "all": "81dcc650852f0c17"
    },
    "row_hash": "1aadffd96e76381c",
    "carried": true,
-   "pass": 5
+   "pass": 11
   },
   {
    "row": "C931",
    "screen": "walk_hale_note.walkon",
    "verdict": "PASS",
-   "line": "You walk on. You don't know what the note means. You know the name on it.",
-   "why": "time_of_day 14:00-17:00, end exclusive, matches Hale's 14-17 office row exactly.",
+   "line": "Close it behind you, young lady. / You back out.",
+   "why": "the trigger's time_of_day ends exclusive (or no clock window, presence-gated); the answer costs 0 and Done +5 still lands inside the place's hours",
    "cause": null,
    "note": true,
    "screen_hash": {
-    "text": "6fc017edf4ddcdc0",
-    "facts": "ffe40e2b4d3d9199",
-    "facts2": "ffe40e2b4d3d9199",
-    "all": "b3989ddfc8341e91"
+    "text": "c89949bf43ee034e",
+    "traits": "825724317465730d",
+    "facts": "fcdc74cfb64c451d",
+    "facts2": "901bf129b869dfc2",
+    "all": "a706fdfe8fcdcf96"
    },
    "row_hash": "1aadffd96e76381c",
    "carried": true,
-   "pass": 5
+   "pass": 11
   },
   {
    "row": "C931",
    "screen": "walk_holt_novel.ask",
    "verdict": "PASS",
-   "line": "Tomorrow you'll want to know if he did.",
-   "why": "window end exclusive, inside the place's hours and the person's row",
+   "line": "Research, hon. He's about to take her on a horse. / Tomorrow you'll want to know if he did.",
+   "why": "the trigger's time_of_day ends exclusive (or no clock window, presence-gated); the answer costs 0 and Done +5 still lands inside the place's hours",
    "cause": null,
    "note": true,
    "screen_hash": {
-    "text": "9dc023606cb8714d",
+    "text": "48082e123536c891",
+    "traits": "f6d8d0533b3ef51b",
     "facts": "f2f993e2387bf270",
     "facts2": "5ddca7caca4503ee",
-    "all": "faa142475b47ad02"
+    "all": "7e74fecae1f9aa1e"
    },
    "row_hash": "1aadffd96e76381c",
    "carried": true,
-   "pass": 2
+   "pass": 11
   },
   {
    "row": "C931",
    "screen": "walk_holt_novel.leave",
    "verdict": "PASS",
-   "line": "Smart girl. / She'll be a chapter further tomorrow.",
-   "why": "window end exclusive, inside the place's hours and the person's row",
+   "line": "You leave her to it. / Smart girl. / She'll be a chapter further tomorrow.",
+   "why": "the trigger's time_of_day ends exclusive (or no clock window, presence-gated); the answer costs 0 and Done +5 still lands inside the place's hours",
    "cause": null,
    "note": true,
    "screen_hash": {
-    "text": "0e2e766021935b24",
+    "text": "b48a15fced5ecfc7",
+    "traits": "f6d8d0533b3ef51b",
     "facts": "f2f993e2387bf270",
     "facts2": "5ddca7caca4503ee",
-    "all": "e4a9c7e6f469f9da"
+    "all": "be12869569f44842"
    },
    "row_hash": "1aadffd96e76381c",
    "carried": true,
-   "pass": 2
+   "pass": 11
   },
   {
    "row": "C931",
    "screen": "walk_mirror_girls.beside",
    "verdict": "PASS",
-   "line": "Brooke's eyes find you in the mirror on the way out. She's remembering your face.",
-   "why": "window end exclusive, inside the place's hours and the person's row",
+   "line": "You fix your hair a foot from them. ... Brooke's eyes find you in the mirror on the way out.",
+   "why": "the trigger's time_of_day ends exclusive (or no clock window, presence-gated); the answer costs 0 and Done +5 still lands inside the place's hours",
    "cause": null,
    "note": true,
    "screen_hash": {
-    "text": "b41754b47ac5db86",
+    "text": "67895d5e3a3aab78",
+    "traits": "ebc4051ecd3afac5",
     "facts": "63b70900fab98401",
     "facts2": "1c8286cebcac9810",
-    "all": "13cd073ccfdefb99"
+    "all": "b736e04732ec8db3"
    },
    "row_hash": "1aadffd96e76381c",
    "carried": true,
-   "pass": 2
+   "pass": 11
   },
   {
    "row": "C931",
    "screen": "walk_mirror_girls.leave",
    "verdict": "PASS",
-   "line": "You leave. The laugh starts before the door shuts. They own that mirror. They'll be back.",
-   "why": "the window ends exclusive and the answer screen costs 0 minutes, so its lines show inside the window",
+   "line": "You leave. The laugh starts before the door shuts. They own that mirror. They'll be back. -> Done (to the Quad)",
+   "why": "no clock window, presence-gated; Done +5 on the Quad, which has no hours",
    "cause": null,
    "note": true,
    "screen_hash": {
-    "text": "324af59133152f55",
+    "text": "039bd4fefd28e38d",
+    "traits": "44136fa355b3678a",
     "facts": "6b4cf4fa7c891d9f",
     "facts2": "6b4cf4fa7c891d9f",
-    "all": "e9b1f0bc5017e1da"
+    "all": "7dc3ceb52053a165"
    },
    "row_hash": "1aadffd96e76381c",
-   "carried": true,
-   "pass": 3
+   "carried": false,
+   "pass": 12
   },
   {
    "row": "C931",
    "screen": "walk_stacks.away",
    "verdict": "PASS",
-   "line": "time_of_day 18:00-21:55",
-   "why": "end exclusive; out by 21:59",
+   "line": "You back out of the aisle, very upright, your face still hot. You know which shelf now.",
+   "why": "the trigger's time_of_day ends exclusive (or no clock window, presence-gated); the answer costs 0 and Done +5 still lands inside the place's hours",
    "cause": null,
    "note": true,
    "screen_hash": {
-    "text": "277e2ec2f9ef49e5",
+    "text": "eaaed9499adf2390",
+    "traits": "44136fa355b3678a",
     "facts": "94fc5e907f77da68",
     "facts2": "94fc5e907f77da68",
-    "all": "8c0d20c57e7740c3"
+    "all": "f2d0ff23b120a8a7"
    },
    "row_hash": "1aadffd96e76381c",
    "carried": true,
-   "pass": 4
+   "pass": 11
   },
   {
    "row": "C931",
    "screen": "walk_stacks.watch",
    "verdict": "PASS",
-   "line": "time_of_day 18:00-21:55",
-   "why": "end exclusive; last start 21:54, out at 21:59, before 22:00",
+   "line": "Her eyes find yours through the gap. You're wet. A book falls, and you run.",
+   "why": "the trigger's time_of_day ends exclusive (or no clock window, presence-gated); the answer costs 0 and Done +5 still lands inside the place's hours",
    "cause": null,
    "note": true,
    "screen_hash": {
-    "text": "8b03230da292270b",
+    "text": "d6e08a8d8d4ce413",
+    "traits": "44136fa355b3678a",
     "facts": "94fc5e907f77da68",
     "facts2": "94fc5e907f77da68",
-    "all": "a85a6c519be9c9cd"
+    "all": "f1c8978373b5bb51"
    },
    "row_hash": "1aadffd96e76381c",
    "carried": true,
-   "pass": 4
+   "pass": 11
   },
   {
    "row": "C953",
@@ -5909,55 +6170,58 @@
    "row": "L106",
    "screen": "walk_cross_brooke.leave",
    "verdict": "PASS",
-   "line": "He'll be saying it next rehearsal too.",
-   "why": "everyone named is gated present by their rows (who_is_where), or a stranger",
+   "line": "You slip out before the scene ends. You can still hear him: 'Again.' He'll be saying it next rehearsal too. -> Done (to the Quad)",
+   "why": "names Cross, whom his theatre row puts there",
    "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "c0112c78a7691d76",
+    "text": "d98ea6a44c7a6ac1",
+    "traits": "44136fa355b3678a",
     "facts": "e27a8e51e6c466bf",
     "facts2": "e27a8e51e6c466bf",
-    "all": "524ffb2c4de245f5"
+    "all": "6650184fae7d492b"
    },
    "row_hash": "13a714429d15f3b2",
-   "carried": true,
-   "pass": 2
+   "carried": false,
+   "pass": 12
   },
   {
    "row": "L106",
    "screen": "walk_cross_brooke.moment",
    "verdict": "PASS",
-   "line": "You can feel where his hand would sit on your own waist.",
-   "why": "everyone named is gated present by their rows (who_is_where), or a stranger",
+   "line": "Cross is running a scene with Brooke on the empty stage, his hand on her waist to place her, staying.",
+   "why": "every person the line puts here is put here by their rows at every minute the screen can show (who_is_where), and gated is_present on the trigger",
    "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "734afbbfc200cb7d",
+    "text": "19c927e206f3a367",
+    "traits": "e6b79f0e524c6de5",
     "facts": "53fbf715bd6b1c0c",
     "facts2": "7d5f431740948a39",
-    "all": "529f9288a0c9bf07"
+    "all": "a10ecb7b5794ff26"
    },
    "row_hash": "13a714429d15f3b2",
    "carried": true,
-   "pass": 2
+   "pass": 11
   },
   {
    "row": "L106",
    "screen": "walk_cross_brooke.watch",
    "verdict": "PASS",
-   "line": "One day he'll place you like that.",
-   "why": "everyone named is gated present by their rows (who_is_where), or a stranger",
+   "line": "You watch his hand stay on her waist through the whole scene. When they finish, he looks up into the dark seats, straight at you.",
+   "why": "every person the line puts here is put here by their rows at every minute the screen can show (who_is_where), and gated is_present on the trigger",
    "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "aa9c7f832d0e0045",
+    "text": "9c0edadef72d24cb",
+    "traits": "44136fa355b3678a",
     "facts": "e27a8e51e6c466bf",
     "facts2": "e27a8e51e6c466bf",
-    "all": "5021c056e338ce68"
+    "all": "e3be4f6628dae458"
    },
    "row_hash": "13a714429d15f3b2",
    "carried": true,
-   "pass": 2
+   "pass": 11
   },
   {
    "row": "L106",
@@ -6017,217 +6281,229 @@
    "row": "L106",
    "screen": "walk_hale_note.knock",
    "verdict": "PASS",
-   "line": "Young lady. Come back with a real question, and I'll have an answer.",
-   "why": "Hale speaks; his row has him there.",
+   "line": "Young lady. Come back with a real question, and I'll have an answer. / He closes the file.",
+   "why": "every person the line puts here is put here by their rows at every minute the screen can show (who_is_where), and gated is_present on the trigger",
    "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "b2f952756bcfcfd6",
-    "facts": "7291ac6ca70bd782",
-    "facts2": "0d1b466dbc39c306",
-    "all": "d7cdeb3050cf2802"
+    "text": "8c188b8b69cd4f85",
+    "traits": "825724317465730d",
+    "facts": "fcdc74cfb64c451d",
+    "facts2": "901bf129b869dfc2",
+    "all": "81dcc650852f0c17"
    },
    "row_hash": "13a714429d15f3b2",
    "carried": true,
-   "pass": 5
+   "pass": 11
   },
   {
    "row": "L106",
    "screen": "walk_hale_note.moment",
    "verdict": "PASS",
-   "line": "Dr. Hale's door is ajar. He's alone with a file open on the desk, a yellow note stuck to it: 'Nadia \u2014 spring.'",
-   "why": "Names only Hale, whom his row puts in campus_offices Mon/Wed 14-17; the dean (also there 8-17) isn't claimed absent.",
+   "line": "Dr. Hale doesn't look up when you come in. He's alone with a file open on the desk",
+   "why": "every person the line puts here is put here by their rows at every minute the screen can show (who_is_where), and gated is_present on the trigger",
    "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "1dc73ddab0950d62",
-    "facts": "42567a3208a6dab9",
-    "facts2": "b471247d8c9ddba2",
-    "all": "13af75175d9374f8"
+    "text": "c59deaee4d0293e1",
+    "traits": "838782b7308b47e0",
+    "facts": "54a2a2da23a1fde8",
+    "facts2": "18b1fd058dc33746",
+    "all": "49171089d0542159"
    },
    "row_hash": "13a714429d15f3b2",
    "carried": true,
-   "pass": 5
+   "pass": 11
   },
   {
    "row": "L106",
    "screen": "walk_hale_note.walkon",
    "verdict": "PASS",
-   "line": "You walk on. You don't know what the note means. You know the name on it.",
-   "why": "Names nobody as present.",
+   "line": "Close it behind you, young lady. / You back out.",
+   "why": "every person the line puts here is put here by their rows at every minute the screen can show (who_is_where), and gated is_present on the trigger",
    "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "6fc017edf4ddcdc0",
-    "facts": "ffe40e2b4d3d9199",
-    "facts2": "ffe40e2b4d3d9199",
-    "all": "b3989ddfc8341e91"
+    "text": "c89949bf43ee034e",
+    "traits": "825724317465730d",
+    "facts": "fcdc74cfb64c451d",
+    "facts2": "901bf129b869dfc2",
+    "all": "a706fdfe8fcdcf96"
    },
    "row_hash": "13a714429d15f3b2",
    "carried": true,
-   "pass": 5
+   "pass": 11
   },
   {
    "row": "L106",
    "screen": "walk_holt_novel.ask",
    "verdict": "PASS",
-   "line": "Tomorrow you'll want to know if he did.",
-   "why": "everyone named is gated present by their rows (who_is_where), or a stranger",
+   "line": "Research, hon. He's about to take her on a horse. / Tomorrow you'll want to know if he did.",
+   "why": "every person the line puts here is put here by their rows at every minute the screen can show (who_is_where), and gated is_present on the trigger",
    "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "9dc023606cb8714d",
+    "text": "48082e123536c891",
+    "traits": "f6d8d0533b3ef51b",
     "facts": "f2f993e2387bf270",
     "facts2": "5ddca7caca4503ee",
-    "all": "faa142475b47ad02"
+    "all": "7e74fecae1f9aa1e"
    },
    "row_hash": "13a714429d15f3b2",
    "carried": true,
-   "pass": 2
+   "pass": 11
   },
   {
    "row": "L106",
    "screen": "walk_holt_novel.leave",
    "verdict": "PASS",
-   "line": "Smart girl. / She'll be a chapter further tomorrow.",
-   "why": "everyone named is gated present by their rows (who_is_where), or a stranger",
+   "line": "You leave her to it. / Smart girl. / She'll be a chapter further tomorrow.",
+   "why": "every person the line puts here is put here by their rows at every minute the screen can show (who_is_where), and gated is_present on the trigger",
    "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "0e2e766021935b24",
+    "text": "b48a15fced5ecfc7",
+    "traits": "f6d8d0533b3ef51b",
     "facts": "f2f993e2387bf270",
     "facts2": "5ddca7caca4503ee",
-    "all": "e4a9c7e6f469f9da"
+    "all": "be12869569f44842"
    },
    "row_hash": "13a714429d15f3b2",
    "carried": true,
-   "pass": 2
+   "pass": 11
   },
   {
    "row": "L106",
    "screen": "walk_holt_novel.moment",
    "verdict": "PASS",
-   "line": "Don't you say a word, hon.",
-   "why": "everyone named is gated present by their rows (who_is_where), or a stranger",
+   "line": "Ms. Holt's at the desk with a fat library-science book open, and inside it, a paperback romance",
+   "why": "every person the line puts here is put here by their rows at every minute the screen can show (who_is_where), and gated is_present on the trigger",
    "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "21c1635a47813e19",
+    "text": "ccbc246ad11224a8",
+    "traits": "f6d8d0533b3ef51b",
     "facts": "f2f993e2387bf270",
     "facts2": "5ddca7caca4503ee",
-    "all": "1b2935b493699631"
+    "all": "68b912058fecf6ee"
    },
    "row_hash": "13a714429d15f3b2",
    "carried": true,
-   "pass": 2
+   "pass": 11
   },
   {
    "row": "L106",
    "screen": "walk_mirror_girls.beside",
    "verdict": "PASS",
-   "line": "Brooke's eyes find you in the mirror on the way out. She's remembering your face.",
-   "why": "everyone named is gated present by their rows (who_is_where), or a stranger",
+   "line": "You fix your hair a foot from them. ... Brooke's eyes find you in the mirror on the way out.",
+   "why": "every person the line puts here is put here by their rows at every minute the screen can show (who_is_where), and gated is_present on the trigger",
    "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "b41754b47ac5db86",
+    "text": "67895d5e3a3aab78",
+    "traits": "ebc4051ecd3afac5",
     "facts": "63b70900fab98401",
     "facts2": "1c8286cebcac9810",
-    "all": "13cd073ccfdefb99"
+    "all": "b736e04732ec8db3"
    },
    "row_hash": "13a714429d15f3b2",
    "carried": true,
-   "pass": 2
+   "pass": 11
   },
   {
    "row": "L106",
    "screen": "walk_mirror_girls.leave",
    "verdict": "PASS",
-   "line": "You leave. The laugh starts before the door shuts. They own that mirror. They'll be back.",
-   "why": "every named person is where their rows put them: Brooke, Kayla, Tess all at campus_bathroom weekdays 08-09 and 13-14 by who_is_where; trigger needs all three",
+   "line": "You leave. The laugh starts before the door shuts. They own that mirror. They'll be back. -> Done (to the Quad)",
+   "why": "'they' are the three girls, whom their bathroom rows put there",
    "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "324af59133152f55",
+    "text": "039bd4fefd28e38d",
+    "traits": "44136fa355b3678a",
     "facts": "6b4cf4fa7c891d9f",
     "facts2": "6b4cf4fa7c891d9f",
-    "all": "e9b1f0bc5017e1da"
+    "all": "7dc3ceb52053a165"
    },
    "row_hash": "13a714429d15f3b2",
-   "carried": true,
-   "pass": 3
+   "carried": false,
+   "pass": 12
   },
   {
    "row": "L106",
    "screen": "walk_mirror_girls.moment",
    "verdict": "PASS",
    "line": "Tess is doing Brooke's lashes at the mirror while Kayla holds the bag",
-   "why": "everyone named is gated present by their rows (who_is_where), or a stranger",
+   "why": "every person the line puts here is put here by their rows at every minute the screen can show (who_is_where), and gated is_present on the trigger",
    "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "c323d543424379ab",
+    "text": "3c84b237cb35c287",
+    "traits": "9e12469ed756975c",
     "facts": "0ec0e8a07b88427d",
     "facts2": "c3e641b9202c38c9",
-    "all": "ad2df7f9e343f1a0"
+    "all": "795f50791074d0c4"
    },
    "row_hash": "13a714429d15f3b2",
    "carried": true,
-   "pass": 2
+   "pass": 11
   },
   {
    "row": "L106",
    "screen": "walk_stacks.away",
    "verdict": "PASS",
    "line": "You back out of the aisle, very upright, your face still hot. You know which shelf now.",
-   "why": "walk_stacks: every day 18:00-21:55, library open 08:00-22:00; strangers; Holt (to 16:00) and Nadia (to 18:00) are gone",
+   "why": "every person the line puts here is put here by their rows at every minute the screen can show (who_is_where), and gated is_present on the trigger",
    "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "277e2ec2f9ef49e5",
+    "text": "eaaed9499adf2390",
+    "traits": "44136fa355b3678a",
     "facts": "94fc5e907f77da68",
     "facts2": "94fc5e907f77da68",
-    "all": "8c0d20c57e7740c3"
+    "all": "f2d0ff23b120a8a7"
    },
    "row_hash": "13a714429d15f3b2",
    "carried": true,
-   "pass": 4
+   "pass": 11
   },
   {
    "row": "L106",
    "screen": "walk_stacks.moment",
    "verdict": "PASS",
-   "line": "Through a gap in the books in the back stacks: a couple against the shelves, her skirt in his fist, her tits out of her top ... Your face goes hot.",
-   "why": "walk_stacks: every day 18:00-21:55, library open 08:00-22:00; strangers; Holt (to 16:00) and Nadia (to 18:00) are gone",
+   "line": "Through a gap in the books in the back stacks: a couple against the shelves ... Your face goes hot.",
+   "why": "every person the line puts here is put here by their rows at every minute the screen can show (who_is_where), and gated is_present on the trigger",
    "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "8e809e12139051bc",
+    "text": "a37c81e3865bb04b",
+    "traits": "44136fa355b3678a",
     "facts": "94fc5e907f77da68",
     "facts2": "94fc5e907f77da68",
-    "all": "b7d9ea415d2c4b39"
+    "all": "5e3a47aada8ed046"
    },
    "row_hash": "13a714429d15f3b2",
    "carried": true,
-   "pass": 4
+   "pass": 11
   },
   {
    "row": "L106",
    "screen": "walk_stacks.watch",
    "verdict": "PASS",
    "line": "Her eyes find yours through the gap. You're wet. A book falls, and you run.",
-   "why": "walk_stacks: every day 18:00-21:55, library open 08:00-22:00; strangers; Holt (to 16:00) and Nadia (to 18:00) are gone",
+   "why": "every person the line puts here is put here by their rows at every minute the screen can show (who_is_where), and gated is_present on the trigger",
    "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "8b03230da292270b",
+    "text": "d6e08a8d8d4ce413",
+    "traits": "44136fa355b3678a",
     "facts": "94fc5e907f77da68",
     "facts2": "94fc5e907f77da68",
-    "all": "a85a6c519be9c9cd"
+    "all": "f1c8978373b5bb51"
    },
    "row_hash": "13a714429d15f3b2",
    "carried": true,
-   "pass": 4
+   "pass": 11
   },
   {
    "row": "L119",
@@ -6302,6 +6578,19 @@
    "pass": 1
   },
   {
+   "row": "L150",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "a couple against the shelves / a yellow note / a romance inside the textbook / the lashes / the rehearsal",
+   "why": "every scene has something happen; none is 'nothing happens'",
+   "cause": null,
+   "note": false,
+   "screen_hash": "72fd4d0f5d0e16ec",
+   "row_hash": "ec7af502db4f0c7e",
+   "carried": true,
+   "pass": 11
+  },
+  {
    "row": "L166",
    "screen": "*",
    "verdict": "PASS",
@@ -6331,37 +6620,39 @@
    "row": "L167",
    "screen": "walk_cross_brooke.leave",
    "verdict": "PASS",
-   "line": "He'll be saying it next rehearsal too.",
-   "why": "one canvas, one window; hidden when shut (an event, C916), no row per day kind",
+   "line": "You slip out before the scene ends. You can still hear him: 'Again.' He'll be saying it next rehearsal too. -> Done (to the Quad)",
+   "why": "no activity row; one trigger, and a random walk-in stays hidden out of its window",
    "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "c0112c78a7691d76",
+    "text": "d98ea6a44c7a6ac1",
+    "traits": "44136fa355b3678a",
     "facts": "e27a8e51e6c466bf",
     "facts2": "e27a8e51e6c466bf",
-    "all": "524ffb2c4de245f5"
+    "all": "6650184fae7d492b"
    },
    "row_hash": "e64ce2672d85d2d8",
-   "carried": true,
-   "pass": 2
+   "carried": false,
+   "pass": 12
   },
   {
    "row": "L167",
    "screen": "walk_cross_brooke.watch",
    "verdict": "PASS",
-   "line": "One day he'll place you like that.",
-   "why": "one canvas, one window; hidden when shut (an event, C916), no row per day kind",
+   "line": "You watch his hand stay on her waist through the whole scene. When they finish, he looks up into the dark seats, straight at you.",
+   "why": "one canvas per scene; days with different hours are one trigger with an OR group, never one row per day kind; a walk-in hides out of its window by design (C916)",
    "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "aa9c7f832d0e0045",
+    "text": "9c0edadef72d24cb",
+    "traits": "44136fa355b3678a",
     "facts": "e27a8e51e6c466bf",
     "facts2": "e27a8e51e6c466bf",
-    "all": "5021c056e338ce68"
+    "all": "e3be4f6628dae458"
    },
    "row_hash": "e64ce2672d85d2d8",
    "carried": true,
-   "pass": 2
+   "pass": 11
   },
   {
    "row": "L167",
@@ -6402,146 +6693,154 @@
   {
    "row": "L167",
    "screen": "walk_hale_note.knock",
-   "verdict": "N/A",
-   "line": "Young lady. Come back with a real question, and I'll have an answer.",
-   "why": "N/A: no schedule-like row with different hours on different days here.",
+   "verdict": "PASS",
+   "line": "Young lady. Come back with a real question, and I'll have an answer. / He closes the file.",
+   "why": "one canvas per scene; days with different hours are one trigger with an OR group, never one row per day kind; a walk-in hides out of its window by design (C916)",
    "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "b2f952756bcfcfd6",
-    "facts": "7291ac6ca70bd782",
-    "facts2": "0d1b466dbc39c306",
-    "all": "d7cdeb3050cf2802"
+    "text": "8c188b8b69cd4f85",
+    "traits": "825724317465730d",
+    "facts": "fcdc74cfb64c451d",
+    "facts2": "901bf129b869dfc2",
+    "all": "81dcc650852f0c17"
    },
    "row_hash": "e64ce2672d85d2d8",
    "carried": true,
-   "pass": 5
+   "pass": 11
   },
   {
    "row": "L167",
    "screen": "walk_hale_note.walkon",
-   "verdict": "N/A",
-   "line": "You walk on. You don't know what the note means. You know the name on it.",
-   "why": "N/A: no schedule-like row with different hours on different days here.",
+   "verdict": "PASS",
+   "line": "Close it behind you, young lady. / You back out.",
+   "why": "one canvas per scene; days with different hours are one trigger with an OR group, never one row per day kind; a walk-in hides out of its window by design (C916)",
    "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "6fc017edf4ddcdc0",
-    "facts": "ffe40e2b4d3d9199",
-    "facts2": "ffe40e2b4d3d9199",
-    "all": "b3989ddfc8341e91"
+    "text": "c89949bf43ee034e",
+    "traits": "825724317465730d",
+    "facts": "fcdc74cfb64c451d",
+    "facts2": "901bf129b869dfc2",
+    "all": "a706fdfe8fcdcf96"
    },
    "row_hash": "e64ce2672d85d2d8",
    "carried": true,
-   "pass": 5
+   "pass": 11
   },
   {
    "row": "L167",
    "screen": "walk_holt_novel.ask",
    "verdict": "PASS",
-   "line": "Tomorrow you'll want to know if he did.",
-   "why": "one canvas, one window; hidden when shut (an event, C916), no row per day kind",
+   "line": "Research, hon. He's about to take her on a horse. / Tomorrow you'll want to know if he did.",
+   "why": "one canvas per scene; days with different hours are one trigger with an OR group, never one row per day kind; a walk-in hides out of its window by design (C916)",
    "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "9dc023606cb8714d",
+    "text": "48082e123536c891",
+    "traits": "f6d8d0533b3ef51b",
     "facts": "f2f993e2387bf270",
     "facts2": "5ddca7caca4503ee",
-    "all": "faa142475b47ad02"
+    "all": "7e74fecae1f9aa1e"
    },
    "row_hash": "e64ce2672d85d2d8",
    "carried": true,
-   "pass": 2
+   "pass": 11
   },
   {
    "row": "L167",
    "screen": "walk_holt_novel.leave",
    "verdict": "PASS",
-   "line": "Smart girl. / She'll be a chapter further tomorrow.",
-   "why": "one canvas, one window; hidden when shut (an event, C916), no row per day kind",
+   "line": "You leave her to it. / Smart girl. / She'll be a chapter further tomorrow.",
+   "why": "one canvas per scene; days with different hours are one trigger with an OR group, never one row per day kind; a walk-in hides out of its window by design (C916)",
    "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "0e2e766021935b24",
+    "text": "b48a15fced5ecfc7",
+    "traits": "f6d8d0533b3ef51b",
     "facts": "f2f993e2387bf270",
     "facts2": "5ddca7caca4503ee",
-    "all": "e4a9c7e6f469f9da"
+    "all": "be12869569f44842"
    },
    "row_hash": "e64ce2672d85d2d8",
    "carried": true,
-   "pass": 2
+   "pass": 11
   },
   {
    "row": "L167",
    "screen": "walk_mirror_girls.beside",
    "verdict": "PASS",
-   "line": "Brooke's eyes find you in the mirror on the way out. She's remembering your face.",
-   "why": "one canvas, one window; hidden when shut (an event, C916), no row per day kind",
+   "line": "You fix your hair a foot from them. ... Brooke's eyes find you in the mirror on the way out.",
+   "why": "one canvas per scene; days with different hours are one trigger with an OR group, never one row per day kind; a walk-in hides out of its window by design (C916)",
    "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "b41754b47ac5db86",
+    "text": "67895d5e3a3aab78",
+    "traits": "ebc4051ecd3afac5",
     "facts": "63b70900fab98401",
     "facts2": "1c8286cebcac9810",
-    "all": "13cd073ccfdefb99"
+    "all": "b736e04732ec8db3"
    },
    "row_hash": "e64ce2672d85d2d8",
    "carried": true,
-   "pass": 2
+   "pass": 11
   },
   {
    "row": "L167",
    "screen": "walk_mirror_girls.leave",
    "verdict": "PASS",
-   "line": "You leave. The laugh starts before the door shuts. They own that mirror. They'll be back.",
-   "why": "one canvas per scene; days that differ are one trigger with a group (or the same hours every open day); a walk-in hides out of its window by design (walk-ins.md, no 'nothing happens')",
+   "line": "You leave. The laugh starts before the door shuts. They own that mirror. They'll be back. -> Done (to the Quad)",
+   "why": "no activity row; one trigger, and a random walk-in stays hidden out of its window",
    "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "324af59133152f55",
+    "text": "039bd4fefd28e38d",
+    "traits": "44136fa355b3678a",
     "facts": "6b4cf4fa7c891d9f",
     "facts2": "6b4cf4fa7c891d9f",
-    "all": "e9b1f0bc5017e1da"
+    "all": "7dc3ceb52053a165"
    },
    "row_hash": "e64ce2672d85d2d8",
-   "carried": true,
-   "pass": 3
+   "carried": false,
+   "pass": 12
   },
   {
    "row": "L167",
    "screen": "walk_stacks.away",
    "verdict": "PASS",
-   "line": "walk_stacks trigger",
-   "why": "one row, one window",
+   "line": "You back out of the aisle, very upright, your face still hot. You know which shelf now.",
+   "why": "one canvas per scene; days with different hours are one trigger with an OR group, never one row per day kind; a walk-in hides out of its window by design (C916)",
    "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "277e2ec2f9ef49e5",
+    "text": "eaaed9499adf2390",
+    "traits": "44136fa355b3678a",
     "facts": "94fc5e907f77da68",
     "facts2": "94fc5e907f77da68",
-    "all": "8c0d20c57e7740c3"
+    "all": "f2d0ff23b120a8a7"
    },
    "row_hash": "e64ce2672d85d2d8",
    "carried": true,
-   "pass": 4
+   "pass": 11
   },
   {
    "row": "L167",
    "screen": "walk_stacks.watch",
    "verdict": "PASS",
-   "line": "walk_stacks trigger",
-   "why": "one row, one window every day",
+   "line": "Her eyes find yours through the gap. You're wet. A book falls, and you run.",
+   "why": "one canvas per scene; days with different hours are one trigger with an OR group, never one row per day kind; a walk-in hides out of its window by design (C916)",
    "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "8b03230da292270b",
+    "text": "d6e08a8d8d4ce413",
+    "traits": "44136fa355b3678a",
     "facts": "94fc5e907f77da68",
     "facts2": "94fc5e907f77da68",
-    "all": "a85a6c519be9c9cd"
+    "all": "f1c8978373b5bb51"
    },
    "row_hash": "e64ce2672d85d2d8",
    "carried": true,
-   "pass": 4
+   "pass": 11
   },
   {
    "row": "L170",
@@ -6568,12 +6867,25 @@
    "row_hash": "412fb4816f34d294",
    "carried": true,
    "pass": 1
+  },
+  {
+   "row": "L97",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "He's alone with a file open on the desk / Ms. Holt's at the desk / Tess is doing Brooke's lashes / Cross is running a scene with Brooke",
+   "why": "each fires only where and when the walker's rows put them (npc_at_location is_present on the trigger) and shows what they were already doing there: Hale's office hours, Holt's desk shift, the girls' mirror slots, Cross's rehearsal; the stacks are strangers in a clock window",
+   "cause": null,
+   "note": false,
+   "screen_hash": "72fd4d0f5d0e16ec",
+   "row_hash": "5d6e027964066b8b",
+   "carried": true,
+   "pass": 11
   }
  ],
  "causes": [],
  "pending": [],
- "asked": 1,
- "answered": 1,
+ "asked": 16,
+ "answered": 16,
  "pass_items": [],
  "unowed": []
 }

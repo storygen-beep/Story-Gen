@@ -3850,7 +3850,9 @@ name = "Their door's open a crack"
 
 [canvases.trigger]
 location = "home_hall"
-trigger_mode = "manual"
+# P55 — fires on arrival, never a button (LO 2026-11-26: "2nd one", "Go"; craft/walk-ins.md C2195).
+trigger_mode = "random"
+chance = 0.35
 is_repeatable = true
 max_triggers_per_day = 1
 conditions = { version = "1.0", logic = "AND", items = [{ type = "weekday", weekdays = [0, 1, 2, 3, 4] }, { type = "time_of_day", start_time = "23:00", end_time = "01:00" }, { type = "npc_at_location", npc_id = "npc_laura", location_id = "home_master_bedroom", operator = "is_present" }, { type = "npc_at_location", npc_id = "npc_mark", location_id = "home_master_bedroom", operator = "is_present" }] }
@@ -3923,7 +3925,9 @@ name = "His door's open a crack"
 
 [canvases.trigger]
 location = "home_hall"
-trigger_mode = "manual"
+# P55 — fires on arrival, never a button (LO 2026-11-26: "2nd one", "Go"; craft/walk-ins.md C2195).
+trigger_mode = "random"
+chance = 0.35
 is_repeatable = true
 max_triggers_per_day = 1
 conditions = { version = "1.0", logic = "AND", items = [{ type = "weekday", weekdays = [0, 1, 2, 3, 4] }, { type = "time_of_day", start_time = "23:00", end_time = "01:00" }, { type = "npc_at_location", npc_id = "npc_ryan", location_id = "home_ryans_room", operator = "is_present" }] }
@@ -3995,7 +3999,9 @@ name = "Mom's at the table"
 
 [canvases.trigger]
 location = "home_kitchen"
-trigger_mode = "manual"
+# P55 — fires on arrival, never a button (LO 2026-11-26: "2nd one", "Go"; craft/walk-ins.md C2195).
+trigger_mode = "random"
+chance = 0.35
 is_repeatable = true
 max_triggers_per_day = 1
 conditions = { version = "1.0", logic = "AND", items = [{ type = "weekday", weekdays = [0, 1, 2, 3, 4] }, { type = "time_of_day", start_time = "17:00", end_time = "18:00" }, { type = "npc_at_location", npc_id = "npc_laura", location_id = "home_kitchen", operator = "is_present" }] }
@@ -4004,7 +4010,7 @@ conditions = { version = "1.0", logic = "AND", items = [{ type = "weekday", week
 id = "moment"
 name = "Mom's at the table"
 blocks = [
-  { type = "paragraph", content = "Mom's at the kitchen table with the bills spread in front of her and a pen she isn't using. She's crying without making any sound." },
+  { type = "paragraph", content = "Dinner's on the stove, and Mom's sat at the kitchen table with the bills spread in front of her and a pen she isn't using. She's crying without making any sound." },
   { type = "dialog", content = "Oh. Baby. Don't look at these.", props = { speaker = "npc", npcId = "npc_laura" } },
 ]
 
@@ -4028,7 +4034,7 @@ id = "sit"
 name = "Mom's at the table"
 blocks = [
   { type = "paragraph", content = "You sit. She wipes her face fast and pretends she wasn't." },
-  { type = "dialog", content = "It's fine, baby. It's just numbers.", props = { speaker = "npc", npcId = "npc_laura" } },
+  { type = "dialog", content = "It's fine, baby. It's just numbers. Really.", props = { speaker = "npc", npcId = "npc_laura" } },
   { type = "paragraph", content = "She squeezes your hand and doesn't let go for a long time." },
   { type = "paragraph", content = "Rent's due Sunday. She hasn't said how much is missing." },
 ]
@@ -4067,7 +4073,9 @@ name = "Mark's on the phone"
 
 [canvases.trigger]
 location = "home_living_room"
-trigger_mode = "manual"
+# P55 — fires on arrival, never a button (LO 2026-11-26: "2nd one", "Go"; craft/walk-ins.md C2195).
+trigger_mode = "random"
+chance = 0.35
 is_repeatable = true
 max_triggers_per_day = 1
 conditions = { version = "1.0", logic = "AND", items = [{ type = "weekday", weekdays = [0, 1, 2, 3, 4] }, { type = "time_of_day", start_time = "16:30", end_time = "17:00" }, { type = "npc_at_location", npc_id = "npc_mark", location_id = "home_living_room", operator = "is_present" }] }
@@ -4143,7 +4151,9 @@ name = "Ryan's on the couch"
 
 [canvases.trigger]
 location = "home_living_room"
-trigger_mode = "manual"
+# P55 — fires on arrival, never a button (LO 2026-11-26: "2nd one", "Go"; craft/walk-ins.md C2195).
+trigger_mode = "random"
+chance = 0.35
 is_repeatable = true
 max_triggers_per_day = 1
 conditions = { version = "1.0", logic = "AND", items = [{ type = "weekday", weekdays = [5, 6] }, { type = "time_of_day", start_time = "12:00", end_time = "17:00" }, { type = "npc_at_location", npc_id = "npc_ryan", location_id = "home_living_room", operator = "is_present" }] }
@@ -4446,13 +4456,15 @@ locationId = "near_cafe"
 time_progression_minutes = 30
 effects = [{ trait = "energy", op = "add", value = 5, clamp = true }]
 
-# ── P45 · Town ↔ The Quad, through the campus gates (5 minutes, no cost; LO 2026-11-25). ──
+# ── P45 · Town ↔ The Quad, through the campus gates. RETIRED by P53 (2026-11-26; is_active = false): campus is a place in
+#    Town now. Kept so a save that played them still points at something (C1656). ──
 
 [[canvases]]
 id = "travel_gates_in"
 name = "Walk through the campus gates"
 
 [canvases.trigger]
+is_active = false
 location = "town_square"
 trigger_mode = "manual"
 is_repeatable = true
@@ -4478,6 +4490,7 @@ id = "travel_gates_out"
 name = "Walk out to town"
 
 [canvases.trigger]
+is_active = false
 location = "campus_quad"
 trigger_mode = "manual"
 is_repeatable = true
@@ -4507,16 +4520,16 @@ id = "dean_first"
 name = "The dean's office"
 
 [canvases.trigger]
-location = "campus_offices"
+location = "campus_office_dean"
 trigger_mode = "manual"
 is_repeatable = false
-conditions = { version = "1.0", logic = "AND", items = [{ type = "weekday", weekdays = [0, 1, 2, 3, 4] }, { type = "time_of_day", start_time = "08:00", end_time = "16:35" }, { type = "npc_at_location", npc_id = "npc_dean", location_id = "campus_offices", operator = "is_present" }, { type = "flag", subject = "player", flag_key = "met_dean", operator = "is_false" }] }
+conditions = { version = "1.0", logic = "AND", items = [{ type = "weekday", weekdays = [0, 1, 2, 3, 4] }, { type = "time_of_day", start_time = "08:00", end_time = "16:35" }, { type = "npc_at_location", npc_id = "npc_dean", location_id = "campus_office_dean", operator = "is_present" }, { type = "flag", subject = "player", flag_key = "met_dean", operator = "is_false" }] }
 
 [[canvases.nodes]]
 id = "door"
 name = "The dean's door"
 blocks = [
-  { type = "paragraph", content = "The dean's door is at the end of the corridor, and it's open. He's writing. He doesn't look up, and he doesn't ask you to sit, so you stand." },
+  { type = "paragraph", content = "The dean's office: a big desk, a window, and him behind it, writing. He doesn't look up, and he doesn't ask you to sit, so you stand." },
   { type = "paragraph", content = "When he does look up, he takes his time: your face, then down your body, then back up, slowly, like he's reading a form he means to sign." },
   { type = "image", props = { description = "Her view across a dean's desk (she is 18, out of frame): a silver-haired man of 58 in a suit, looking up at the camera over his reading.", search_queries = ["older man dean behind desk looking up at camera", "silver haired college dean office desk looking at student"], pool_dir = "people/dean_first_t3", pool = 1 } },
   { type = "group", props = { conditions = { version = "1.0", logic = "AND", items = [{ type = "worn_exposure", operator = "gte", value = 1 }] } }, blocks = [
@@ -5234,13 +5247,13 @@ targetType = "location"
 locationId = "hood_street"
 time_progression_minutes = 5
 
-# P49 · Hale, heated; rests three days.
+# P49 · Hale, heated; rests three days. In his own office (P54, LO 2026-11-26); Done leaves to the corridor.
 [[canvases]]
 id = "hale_called_in"
-name = "Dr. Hale's door is open"
+name = "Dr. Hale looks up"
 
 [canvases.trigger]
-location = "campus_offices"
+location = "campus_office_hale"
 trigger_mode = "random"
 chance = 0.65
 requires_npc = "npc_hale"
@@ -5250,9 +5263,9 @@ conditions = { version = "1.0", logic = "AND", items = [{ type = "flag", subject
 
 [[canvases.nodes]]
 id = "moment"
-name = "Dr. Hale's door is open"
+name = "Dr. Hale looks up"
 blocks = [
-  { type = "paragraph", content = "Dr. Hale's door is open, and he sees you before you can walk past." },
+  { type = "paragraph", content = "Dr. Hale looks up from his desk before you're through his door." },
   { type = "dialog", content = "Young lady. In here a minute.", props = { speaker = "npc", npcId = "npc_hale" } },
   { type = "paragraph", content = "He's got a class list in front of him. His eyes go to your chest and stay there." },
   { type = "dialog", content = "Front row, next class. I like to see who's listening.", props = { speaker = "npc", npcId = "npc_hale" } },
@@ -5277,7 +5290,7 @@ flagEffects = [{ flag = "came_to_her_today", op = "set" }, { flag = "hale_called
 
 [[canvases.nodes]]
 id = "yes"
-name = "Dr. Hale's door is open"
+name = "Dr. Hale looks up"
 blocks = [
   { type = "paragraph", content = "He smiles and goes back to his list." },
 ]
@@ -5293,7 +5306,7 @@ time_progression_minutes = 5
 
 [[canvases.nodes]]
 id = "go"
-name = "Dr. Hale's door is open"
+name = "Dr. Hale looks up"
 blocks = [
   { type = "dialog", content = "Of course you do.", props = { speaker = "npc", npcId = "npc_hale" } },
   { type = "paragraph", content = "His door stays open behind you." },
@@ -5528,7 +5541,9 @@ name = "Behind the pond"
 
 [canvases.trigger]
 location = "hood_park"
-trigger_mode = "manual"
+# P55 — fires on arrival, never a button (LO 2026-11-26: "2nd one", "Go"; craft/walk-ins.md C2195).
+trigger_mode = "random"
+chance = 0.35
 is_repeatable = true
 max_triggers_per_day = 1
 conditions = { version = "1.0", logic = "AND", items = [{ type = "time_of_day", start_time = "19:00", end_time = "20:55" }] }
@@ -5599,7 +5614,9 @@ name = "The man next door"
 
 [canvases.trigger]
 location = "hood_street"
-trigger_mode = "manual"
+# P55 — fires on arrival, never a button (LO 2026-11-26: "2nd one", "Go"; craft/walk-ins.md C2195).
+trigger_mode = "random"
+chance = 0.35
 is_repeatable = true
 max_triggers_per_day = 1
 conditions = { version = "1.0", logic = "AND", items = [{ type = "weekday", weekdays = [0, 1, 2, 3, 4] }, { type = "time_of_day", start_time = "17:00", end_time = "20:00" }, { type = "npc_at_location", npc_id = "npc_vance", location_id = "hood_street", operator = "is_present" }] }
@@ -5674,20 +5691,22 @@ time_progression_minutes = 5
 
 [[canvases]]
 id = "walk_danny_deal"
-name = "The back door's open"
+name = "At the till"
 
 [canvases.trigger]
 location = "hood_shop"
-trigger_mode = "manual"
+# P55 — fires on arrival, never a button (LO 2026-11-26: "2nd one", "Go"; craft/walk-ins.md C2195).
+trigger_mode = "random"
+chance = 0.35
 is_repeatable = true
 max_triggers_per_day = 1
 conditions = { version = "1.0", logic = "AND", items = [{ type = "flag", subject = "player", flag_key = "met_danny", operator = "is_true" }, { type = "time_of_day", start_time = "21:00", end_time = "23:00" }, { type = "npc_at_location", npc_id = "npc_danny", location_id = "hood_shop", operator = "is_present" }] }
 
 [[canvases.nodes]]
 id = "moment"
-name = "The back door's open"
+name = "At the till"
 blocks = [
-  { type = "paragraph", content = "The back door's propped open. Danny's outside with a guy in a hood: something small goes one way, a fold of notes the other." },
+  { type = "paragraph", content = "Danny's at the till, and a guy in a hood is leaning over it: something small goes one way, a fold of notes the other." },
   { type = "dialog", content = "Same time tomorrow. Don't be late. Cash only.", props = { speaker = "npc", npcId = "npc_danny" } },
 ]
 
@@ -5708,11 +5727,11 @@ time_progression_minutes = 0
 
 [[canvases.nodes]]
 id = "pretend"
-name = "The back door's open"
+name = "At the till"
 blocks = [
   { type = "paragraph", content = "You pick up a snack you don't want and stare at the label, not at him." },
   { type = "dialog", content = "You buying that or marrying it?", props = { speaker = "npc", npcId = "npc_danny" } },
-  { type = "paragraph", content = "He'll be out back again tomorrow night." },
+  { type = "paragraph", content = "He'll be at the till again tomorrow night, and so will the guy in the hood." },
 ]
 
 [canvases.nodes.exit_block]
@@ -5727,7 +5746,7 @@ flagEffects = [{ flag = "saw_danny_deal", op = "set" }]
 
 [[canvases.nodes]]
 id = "ask"
-name = "The back door's open"
+name = "At the till"
 blocks = [
   { type = "dialog", content = "What was what, gorgeous?", props = { speaker = "npc", npcId = "npc_danny" } },
   { type = "paragraph", content = "He smiles like you've both agreed on something." },
@@ -5749,7 +5768,9 @@ name = "At the squat rack"
 
 [canvases.trigger]
 location = "hood_gym"
-trigger_mode = "manual"
+# P55 — fires on arrival, never a button (LO 2026-11-26: "2nd one", "Go"; craft/walk-ins.md C2195).
+trigger_mode = "random"
+chance = 0.35
 is_repeatable = true
 max_triggers_per_day = 1
 conditions = { version = "1.0", logic = "AND", items = [{ type = "flag", subject = "player", flag_key = "met_marco", operator = "is_true" }, { type = "weekday", weekdays = [0, 1, 2, 3, 4] }, { type = "time_of_day", start_time = "17:00", end_time = "21:00" }, { type = "npc_at_location", npc_id = "npc_marco", location_id = "hood_gym", operator = "is_present" }] }
@@ -5760,20 +5781,20 @@ name = "At the squat rack"
 blocks = [
   { type = "paragraph", content = "Marco's behind a woman at the squat rack, his hands on her hips, \"fixing\" her form long after it's fixed. She doesn't move them." },
   { type = "dialog", content = "Lower. Lower. That's it. Feel that? Good.", props = { speaker = "npc", npcId = "npc_marco" } },
-  { type = "paragraph", content = "Your own thighs go tight on the bench. He sees that too." },
+  { type = "paragraph", content = "Your own thighs go tight by the door. He sees that too." },
 ]
 
 [canvases.nodes.exit_block]
 type = "choices"
 
 [[canvases.nodes.exit_block.choices]]
-text = "Watch from the bench"
+text = "Watch from the door"
 targetType = "node"
 nodeId = "watch"
 time_progression_minutes = 0
 
 [[canvases.nodes.exit_block.choices]]
-text = "Back to your workout"
+text = "Look away"
 targetType = "node"
 nodeId = "back"
 time_progression_minutes = 0
@@ -5800,7 +5821,7 @@ flagEffects = [{ flag = "saw_marco_squat", op = "set" }]
 id = "back"
 name = "At the squat rack"
 blocks = [
-  { type = "paragraph", content = "You pick up a weight you don't want. You can feel him clocking you anyway." },
+  { type = "paragraph", content = "You look away, at the mirror, at the door, anywhere. You can feel him clocking you anyway." },
 ]
 
 [canvases.nodes.exit_block]
@@ -5818,7 +5839,9 @@ name = "Nina's in the fitting room"
 
 [canvases.trigger]
 location = "hood_clothes"
-trigger_mode = "manual"
+# P55 — fires on arrival, never a button (LO 2026-11-26: "2nd one", "Go"; craft/walk-ins.md C2195).
+trigger_mode = "random"
+chance = 0.35
 is_repeatable = true
 max_triggers_per_day = 1
 conditions = { version = "1.0", logic = "AND", items = [{ type = "flag", subject = "player", flag_key = "met_nina", operator = "is_true" }, { type = "npc_at_location", npc_id = "npc_nina", location_id = "hood_clothes", operator = "is_present" }, { type = "weekday", weekdays = [0, 1, 2, 3, 4, 5] }, { type = "time_of_day", start_time = "18:45", end_time = "18:55" }] }
@@ -5966,7 +5989,9 @@ name = "The back stacks"
 
 [canvases.trigger]
 location = "campus_library"
-trigger_mode = "manual"
+# P55 — fires on arrival, never a button (LO 2026-11-26: "2nd one", "Go"; craft/walk-ins.md C2195).
+trigger_mode = "random"
+chance = 0.35
 is_repeatable = true
 max_triggers_per_day = 1
 conditions = { version = "1.0", logic = "AND", items = [{ type = "time_of_day", start_time = "18:00", end_time = "21:55" }] }
@@ -6033,41 +6058,43 @@ time_progression_minutes = 5
 
 [[canvases]]
 id = "walk_hale_note"
-name = "A door's ajar"
+name = "He hasn't seen you"
 
 [canvases.trigger]
-location = "campus_offices"
-trigger_mode = "manual"
+location = "campus_office_hale"
+# P55 — fires on arrival, never a button (LO 2026-11-26: "2nd one", "Go"; craft/walk-ins.md C2195).
+trigger_mode = "random"
+chance = 0.35
 is_repeatable = true
 max_triggers_per_day = 1
-conditions = { version = "1.0", logic = "AND", items = [{ type = "flag", subject = "player", flag_key = "met_hale", operator = "is_true" }, { type = "weekday", weekdays = [0, 2] }, { type = "time_of_day", start_time = "14:00", end_time = "17:00" }, { type = "npc_at_location", npc_id = "npc_hale", location_id = "campus_offices", operator = "is_present" }] }
+conditions = { version = "1.0", logic = "AND", items = [{ type = "flag", subject = "player", flag_key = "met_hale", operator = "is_true" }, { type = "weekday", weekdays = [0, 2] }, { type = "time_of_day", start_time = "14:00", end_time = "17:00" }, { type = "npc_at_location", npc_id = "npc_hale", location_id = "campus_office_hale", operator = "is_present" }] }
 
 [[canvases.nodes]]
 id = "moment"
-name = "A door's ajar"
+name = "He hasn't seen you"
 blocks = [
-  { type = "paragraph", content = "Dr. Hale's door is ajar. He's alone with a file open on the desk, a yellow note stuck to it: 'Nadia — spring.' He's reading it like he's trying to remember something nice." },
-  { type = "dialog", content = "Door's open for a reason. Come in or don't.", props = { speaker = "npc", npcId = "npc_hale" } },
+  { type = "paragraph", content = "Dr. Hale doesn't look up when you come in. He's alone with a file open on the desk, a yellow note stuck to it: 'Nadia — spring.' He's reading it like he's trying to remember something nice." },
+  { type = "dialog", content = "Sit or don't. I'm busy.", props = { speaker = "npc", npcId = "npc_hale" } },
 ]
 
 [canvases.nodes.exit_block]
 type = "choices"
 
 [[canvases.nodes.exit_block.choices]]
-text = "Knock"
+text = "Clear your throat"
 targetType = "node"
 nodeId = "knock"
 time_progression_minutes = 0
 
 [[canvases.nodes.exit_block.choices]]
-text = "Walk on"
+text = "Back out"
 targetType = "node"
 nodeId = "walkon"
 time_progression_minutes = 0
 
 [[canvases.nodes]]
 id = "knock"
-name = "A door's ajar"
+name = "He hasn't seen you"
 blocks = [
   { type = "dialog", content = "Young lady. Come back with a real question, and I'll have an answer.", props = { speaker = "npc", npcId = "npc_hale" } },
   { type = "paragraph", content = "He closes the file." },
@@ -6085,9 +6112,10 @@ flagEffects = [{ flag = "saw_hale_note", op = "set" }]
 
 [[canvases.nodes]]
 id = "walkon"
-name = "A door's ajar"
+name = "He hasn't seen you"
 blocks = [
-  { type = "paragraph", content = "You walk on. You don't know what the note means. You know the name on it." },
+  { type = "dialog", content = "Close it behind you, young lady.", props = { speaker = "npc", npcId = "npc_hale" } },
+  { type = "paragraph", content = "You back out. You don't know what the note means. You know the name on it." },
 ]
 
 [canvases.nodes.exit_block]
@@ -6105,7 +6133,9 @@ name = "At the desk"
 
 [canvases.trigger]
 location = "campus_library"
-trigger_mode = "manual"
+# P55 — fires on arrival, never a button (LO 2026-11-26: "2nd one", "Go"; craft/walk-ins.md C2195).
+trigger_mode = "random"
+chance = 0.35
 is_repeatable = true
 max_triggers_per_day = 1
 conditions = { version = "1.0", logic = "AND", items = [{ type = "flag", subject = "player", flag_key = "met_holt", operator = "is_true" }, { type = "weekday", weekdays = [0, 1, 2, 3, 4] }, { type = "time_of_day", start_time = "08:00", end_time = "16:00" }, { type = "npc_at_location", npc_id = "npc_holt", location_id = "campus_library", operator = "is_present" }] }
@@ -6175,7 +6205,9 @@ name = "At the mirror"
 
 [canvases.trigger]
 location = "campus_bathroom"
-trigger_mode = "manual"
+# P55 — fires on arrival, never a button (LO 2026-11-26: "2nd one", "Go"; craft/walk-ins.md C2195).
+trigger_mode = "random"
+chance = 0.35
 is_repeatable = true
 max_triggers_per_day = 1
 conditions = { version = "1.0", logic = "AND", items = [{ type = "flag", subject = "player", flag_key = "met_brooke", operator = "is_true" }, { type = "npc_at_location", npc_id = "npc_brooke", location_id = "campus_bathroom", operator = "is_present" }, { type = "npc_at_location", npc_id = "npc_kayla", location_id = "campus_bathroom", operator = "is_present" }, { type = "npc_at_location", npc_id = "npc_tess", location_id = "campus_bathroom", operator = "is_present" }] }
@@ -6234,7 +6266,7 @@ type = "choices"
 [[canvases.nodes.exit_block.choices]]
 text = "Done"
 targetType = "location"
-locationId = "campus_bathroom"
+locationId = "campus_quad"
 time_progression_minutes = 5
 
 [[canvases]]
@@ -6243,7 +6275,9 @@ name = "A rehearsal"
 
 [canvases.trigger]
 location = "campus_theatre"
-trigger_mode = "manual"
+# P55 — fires on arrival, never a button (LO 2026-11-26: "2nd one", "Go"; craft/walk-ins.md C2195).
+trigger_mode = "random"
+chance = 0.35
 is_repeatable = true
 max_triggers_per_day = 1
 conditions = { version = "1.0", logic = "AND", items = [{ type = "flag", subject = "player", flag_key = "met_cross", operator = "is_true" }, { type = "flag", subject = "player", flag_key = "met_brooke", operator = "is_true" }, { type = "weekday", weekdays = [1, 3, 4] }, { type = "time_of_day", start_time = "14:00", end_time = "18:00" }, { type = "npc_at_location", npc_id = "npc_cross", location_id = "campus_theatre", operator = "is_present" }, { type = "npc_at_location", npc_id = "npc_brooke", location_id = "campus_theatre", operator = "is_present" }] }
@@ -6303,7 +6337,7 @@ type = "choices"
 [[canvases.nodes.exit_block.choices]]
 text = "Done"
 targetType = "location"
-locationId = "campus_theatre"
+locationId = "campus_quad"
 time_progression_minutes = 5
 
 [[canvases]]
@@ -6389,7 +6423,9 @@ name = "Through the hall door"
 
 [canvases.trigger]
 location = "near_zoe_apartment"
-trigger_mode = "manual"
+# P55 — fires on arrival, never a button (LO 2026-11-26: "2nd one", "Go"; craft/walk-ins.md C2195).
+trigger_mode = "random"
+chance = 0.35
 is_repeatable = true
 max_triggers_per_day = 1
 conditions = { version = "1.0", logic = "AND", items = [{ type = "flag", subject = "player", flag_key = "met_sam", operator = "is_true" }, { type = "group", logic = "OR", items = [{ type = "group", logic = "AND", items = [{ type = "weekday", weekdays = [0, 1, 2, 3, 4, 6] }, { type = "time_of_day", start_time = "19:00", end_time = "23:00" }] }, { type = "group", logic = "AND", items = [{ type = "weekday", weekdays = [5] }, { type = "time_of_day", start_time = "19:00", end_time = "21:00" }] }] }, { type = "npc_at_location", npc_id = "npc_zoe", location_id = "near_zoe_apartment", operator = "is_present" }, { type = "npc_at_location", npc_id = "npc_sam", location_id = "near_zoe_apartment", operator = "is_present" }] }
@@ -6461,7 +6497,9 @@ name = "Sam's got his guitar"
 
 [canvases.trigger]
 location = "near_zoe_apartment"
-trigger_mode = "manual"
+# P55 — fires on arrival, never a button (LO 2026-11-26: "2nd one", "Go"; craft/walk-ins.md C2195).
+trigger_mode = "random"
+chance = 0.35
 is_repeatable = true
 max_triggers_per_day = 1
 conditions = { version = "1.0", logic = "AND", items = [{ type = "flag", subject = "player", flag_key = "met_sam", operator = "is_true" }, { type = "time_of_day", start_time = "12:00", end_time = "18:00" }, { type = "npc_at_location", npc_id = "npc_sam", location_id = "near_zoe_apartment", operator = "is_present" }, { type = "npc_at_location", npc_id = "npc_zoe", location_id = "near_zoe_apartment", operator = "is_absent" }] }
@@ -6532,7 +6570,9 @@ name = "Help Zoe choose an outfit"
 
 [canvases.trigger]
 location = "near_zoe_apartment"
-trigger_mode = "manual"
+# P55 — fires on arrival, never a button (LO 2026-11-26: "2nd one", "Go"; craft/walk-ins.md C2195).
+trigger_mode = "random"
+chance = 0.35
 is_repeatable = true
 max_triggers_per_day = 1
 conditions = { version = "1.0", logic = "AND", items = [{ type = "time_of_day", start_time = "18:00", end_time = "19:00" }, { type = "npc_at_location", npc_id = "npc_zoe", location_id = "near_zoe_apartment", operator = "is_present" }] }
@@ -6603,7 +6643,9 @@ name = "Tom's at the tip jar"
 
 [canvases.trigger]
 location = "near_cafe"
-trigger_mode = "manual"
+# P55 — fires on arrival, never a button (LO 2026-11-26: "2nd one", "Go"; craft/walk-ins.md C2195).
+trigger_mode = "random"
+chance = 0.35
 is_repeatable = true
 max_triggers_per_day = 1
 conditions = { version = "1.0", logic = "AND", items = [{ type = "flag", subject = "player", flag_key = "met_tom", operator = "is_true" }, { type = "weekday", weekdays = [0, 1, 2, 3, 4, 5] }, { type = "time_of_day", start_time = "20:00", end_time = "20:55" }, { type = "npc_at_location", npc_id = "npc_tom", location_id = "near_cafe", operator = "is_present" }] }
@@ -6672,7 +6714,9 @@ name = "The storeroom door"
 
 [canvases.trigger]
 location = "near_cafe"
-trigger_mode = "manual"
+# P55 — fires on arrival, never a button (LO 2026-11-26: "2nd one", "Go"; craft/walk-ins.md C2195).
+trigger_mode = "random"
+chance = 0.35
 is_repeatable = true
 max_triggers_per_day = 1
 conditions = { version = "1.0", logic = "AND", items = [{ type = "flag", subject = "player", flag_key = "met_chris", operator = "is_true" }, { type = "weekday", weekdays = [5, 6] }, { type = "time_of_day", start_time = "10:00", end_time = "19:00" }, { type = "npc_at_location", npc_id = "npc_chris", location_id = "near_cafe", operator = "is_present" }] }
@@ -6740,11 +6784,13 @@ flagEffects = [{ flag = "saw_chris_store", op = "set" }]
 
 [[canvases]]
 id = "walk_party_bathroom"
-name = "Find the bathroom"
+name = "The bathroom door"
 
 [canvases.trigger]
 location = "near_zoe_apartment"
-trigger_mode = "manual"
+# P55 — fires on arrival, never a button (LO 2026-11-26: "2nd one", "Go"; craft/walk-ins.md C2195).
+trigger_mode = "random"
+chance = 0.35
 is_repeatable = true
 max_triggers_per_day = 1
 conditions = { version = "1.0", logic = "AND", items = [{ type = "flag", subject = "player", flag_key = "partied_this_week", operator = "is_false" }, { type = "group", logic = "OR", items = [{ type = "group", logic = "AND", items = [{ type = "weekday", weekdays = [5] }, { type = "time_of_day", start_time = "21:00", end_time = "00:00" }] }, { type = "group", logic = "AND", items = [{ type = "weekday", weekdays = [6] }, { type = "time_of_day", start_time = "00:00", end_time = "01:00" }] }] }] }
@@ -6753,9 +6799,9 @@ conditions = { version = "1.0", logic = "AND", items = [{ type = "flag", subject
 id = "moment"
 name = "Find the bathroom"
 blocks = [
-  { type = "paragraph", content = "The bathroom door isn't locked. A couple is on the edge of the bath, her dress round her waist, her tits out, his face buried in her cunt, licking. Your face burns." },
+  { type = "paragraph", content = "The party's loud before you're through Zoe's door, and the first thing you need is the bathroom. Its door isn't locked. A couple is on the edge of the bath, her dress round her waist, her tits out, his face buried in her cunt, licking. Your face burns." },
   { type = "image", props = { description = "Seen from a bathroom doorway: a man in his twenties going down on a woman in her twenties on the edge of a bathtub at a party, her dress pushed up. Nobody looking at the camera.", search_queries = ["guy eating out girl edge of bathtub party gif", "oral sex bathroom party walked in gif"], pool_dir = "sex/party_bathroom_t5", pool = 4 } },
-  { type = "dialog", content = "Don't stop. Someone's going to — don't stop. Please.", props = { speaker = "unknown" } },
+  { type = "dialog", content = "Don't stop. Someone's going to — don't stop. Please. Please.", props = { speaker = "unknown" } },
 ]
 
 [canvases.nodes.exit_block]
@@ -6778,7 +6824,7 @@ id = "watch"
 name = "Find the bathroom"
 blocks = [
   { type = "paragraph", content = "His tongue's buried in her cunt, his hands up on her tits, until she pulls his hair and cums, moaning over the music." },
-  { type = "dialog", content = "Fuck. Oh, fuck. Yes. Yes. God.", props = { speaker = "unknown" } },
+  { type = "dialog", content = "Fuck. Oh, fuck. Yes. Yes. God. Don't you dare stop.", props = { speaker = "unknown" } },
   { type = "paragraph", content = "You're wet. You shut the door before they see you. You know that door now." },
 ]
 

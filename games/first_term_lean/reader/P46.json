@@ -1,6 +1,6 @@
 {
  "piece": "P46",
- "pass": 5,
+ "pass": 6,
  "screens": {
   "story_hints.paying_your_way": {
    "text": "49539da5d0bdf535",
@@ -39,10 +39,10 @@
    "all": "464e61255d76bd50"
   },
   "story_hints.the_mirror": {
-   "text": "523ea9382db22aa3",
-   "facts": "523ea9382db22aa3",
-   "facts2": "523ea9382db22aa3",
-   "all": "523ea9382db22aa3"
+   "text": "ec9d9ebfffebad13",
+   "facts": "ec9d9ebfffebad13",
+   "facts2": "ec9d9ebfffebad13",
+   "all": "ec9d9ebfffebad13"
   },
   "story_hints.the_man_next_door": {
    "text": "23d54d70a3ff3511",
@@ -518,7 +518,7 @@
    "facts2": "5efc01cd393fef01",
    "all": "5efc01cd393fef01"
   },
-  "*": "3554f5b0075da203"
+  "*": "2bf25863ce034b80"
  },
  "rows": {
   "B1": "5276068df1ca6fa9",
@@ -1378,6 +1378,24 @@
    "pass": 2
   },
   {
+   "row": "C124",
+   "screen": "story_hints.the_mirror",
+   "verdict": "PASS",
+   "line": "From your second week, three girls own the mirror in the women's bathroom off the Quad, weekdays 8 to 9am and 1 to 2pm.",
+   "why": "Names the place, the door and the hours, so she knows where and when to go.",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "ec9d9ebfffebad13",
+    "facts": "ec9d9ebfffebad13",
+    "facts2": "ec9d9ebfffebad13",
+    "all": "ec9d9ebfffebad13"
+   },
+   "row_hash": "6eb13e48e8502791",
+   "carried": false,
+   "pass": 6
+  },
+  {
    "row": "C1250",
    "screen": "*",
    "verdict": "N/A",
@@ -1597,6 +1615,24 @@
    "pass": 3
   },
   {
+   "row": "C1366",
+   "screen": "story_hints.the_mirror",
+   "verdict": "N/A",
+   "line": "From your second week, three girls own the mirror in the women's bathroom off the Quad, weekdays 8 to 9am and 1 to 2pm.",
+   "why": "Not a skill's storyline step; release 1 has no level gate (C2182).",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "ec9d9ebfffebad13",
+    "facts": "ec9d9ebfffebad13",
+    "facts2": "ec9d9ebfffebad13",
+    "all": "ec9d9ebfffebad13"
+   },
+   "row_hash": "bf7edbd0ddd9e7b7",
+   "carried": false,
+   "pass": 6
+  },
+  {
    "row": "C140",
    "screen": "*",
    "verdict": "PASS",
@@ -1716,6 +1752,24 @@
    "row_hash": "b83b93c2f7e2d41f",
    "carried": true,
    "pass": 2
+  },
+  {
+   "row": "C140",
+   "screen": "story_hints.the_mirror",
+   "verdict": "PASS",
+   "line": "From your second week, three girls own the mirror in the women's bathroom off the Quad, weekdays 8 to 9am and 1 to 2pm.",
+   "why": "Its end step (met_brooke) prints CoT's \"for now\" line.",
+   "cause": null,
+   "note": true,
+   "screen_hash": {
+    "text": "ec9d9ebfffebad13",
+    "facts": "ec9d9ebfffebad13",
+    "facts2": "ec9d9ebfffebad13",
+    "all": "ec9d9ebfffebad13"
+   },
+   "row_hash": "b83b93c2f7e2d41f",
+   "carried": false,
+   "pass": 6
   },
   {
    "row": "C148",
@@ -1904,6 +1958,24 @@
    "pass": 2
   },
   {
+   "row": "C1619",
+   "screen": "story_hints.the_mirror",
+   "verdict": "PASS",
+   "line": "From your second week, three girls own the mirror in the women's bathroom off the Quad, weekdays 8 to 9am and 1 to 2pm.",
+   "why": "A storyline with steps: always, then end on met_brooke.",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "ec9d9ebfffebad13",
+    "facts": "ec9d9ebfffebad13",
+    "facts2": "ec9d9ebfffebad13",
+    "all": "ec9d9ebfffebad13"
+   },
+   "row_hash": "80c98d00ce7d3bf8",
+   "carried": false,
+   "pass": 6
+  },
+  {
    "row": "C162",
    "screen": "*",
    "verdict": "N/A",
@@ -2077,6 +2149,24 @@
    "pass": 2
   },
   {
+   "row": "C215",
+   "screen": "story_hints.the_mirror",
+   "verdict": "PASS",
+   "line": "From your second week, three girls own the mirror in the women's bathroom off the Quad, weekdays 8 to 9am and 1 to 2pm.",
+   "why": "Its end is \"for now\", never \"complete\".",
+   "cause": null,
+   "note": true,
+   "screen_hash": {
+    "text": "ec9d9ebfffebad13",
+    "facts": "ec9d9ebfffebad13",
+    "facts2": "ec9d9ebfffebad13",
+    "all": "ec9d9ebfffebad13"
+   },
+   "row_hash": "3b13472a8f7c42da",
+   "carried": false,
+   "pass": 6
+  },
+  {
    "row": "C217",
    "screen": "*",
    "verdict": "PASS",
@@ -2196,6 +2286,24 @@
    "row_hash": "7bb70ca4ff31e145",
    "carried": true,
    "pass": 2
+  },
+  {
+   "row": "C217",
+   "screen": "story_hints.the_mirror",
+   "verdict": "PASS",
+   "line": "From your second week, three girls own the mirror in the women's bathroom off the Quad, weekdays 8 to 9am and 1 to 2pm.",
+   "why": "The end step reads met_brooke, set by mirror_meet_brooke's \"Done\" on the way out (TOML line 6617).",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "ec9d9ebfffebad13",
+    "facts": "ec9d9ebfffebad13",
+    "facts2": "ec9d9ebfffebad13",
+    "all": "ec9d9ebfffebad13"
+   },
+   "row_hash": "7bb70ca4ff31e145",
+   "carried": false,
+   "pass": 6
   },
   {
    "row": "C2176",
@@ -2319,6 +2427,24 @@
    "pass": 2
   },
   {
+   "row": "C2176",
+   "screen": "story_hints.the_mirror",
+   "verdict": "PASS",
+   "line": "From your second week, three girls own the mirror in the women's bathroom off the Quad, weekdays 8 to 9am and 1 to 2pm.",
+   "why": "met_brooke has a setter (mirror_meet_brooke).",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "ec9d9ebfffebad13",
+    "facts": "ec9d9ebfffebad13",
+    "facts2": "ec9d9ebfffebad13",
+    "all": "ec9d9ebfffebad13"
+   },
+   "row_hash": "03aca88c8939cd81",
+   "carried": false,
+   "pass": 6
+  },
+  {
    "row": "C2179",
    "screen": "*",
    "verdict": "PASS",
@@ -2328,19 +2454,6 @@
    "note": false,
    "screen_hash": "3554f5b0075da203",
    "row_hash": "47b9477e3ec8a790",
-   "carried": true,
-   "pass": 3
-  },
-  {
-   "row": "C2183",
-   "screen": "*",
-   "verdict": "PASS",
-   "line": "Mom smiles, small, and slides the toast over. / \"Promise me.\"",
-   "why": "Laura's Cook (toast, dishes, \"Eat something\") and Insecure (\"Promise me\", \"She won't look at you\") are shown and true on both screens",
-   "cause": null,
-   "note": false,
-   "screen_hash": "3554f5b0075da203",
-   "row_hash": "40172c2d376bfc32",
    "carried": true,
    "pass": 3
   },
@@ -2367,7 +2480,7 @@
    "note": false,
    "screen_hash": null,
    "row_hash": "0c03931191c53a34",
-   "carried": false,
+   "carried": true,
    "pass": 5
   },
   {
@@ -2380,7 +2493,7 @@
    "note": false,
    "screen_hash": null,
    "row_hash": "0c03931191c53a34",
-   "carried": false,
+   "carried": true,
    "pass": 5
   },
   {
@@ -2518,6 +2631,24 @@
    "pass": 2
   },
   {
+   "row": "C34",
+   "screen": "story_hints.the_mirror",
+   "verdict": "PASS",
+   "line": "From your second week, three girls own the mirror in the women's bathroom off the Quad, weekdays 8 to 9am and 1 to 2pm.",
+   "why": "No date; \"second week\" and weekly hours only.",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "ec9d9ebfffebad13",
+    "facts": "ec9d9ebfffebad13",
+    "facts2": "ec9d9ebfffebad13",
+    "all": "ec9d9ebfffebad13"
+   },
+   "row_hash": "ba026f3c4badeca2",
+   "carried": false,
+   "pass": 6
+  },
+  {
    "row": "C35",
    "screen": "*",
    "verdict": "PASS",
@@ -2637,6 +2768,24 @@
    "row_hash": "4fe71dee68944f61",
    "carried": true,
    "pass": 2
+  },
+  {
+   "row": "C35",
+   "screen": "story_hints.the_mirror",
+   "verdict": "PASS",
+   "line": "From your second week, three girls own the mirror in the women's bathroom off the Quad, weekdays 8 to 9am and 1 to 2pm.",
+   "why": "The end step points at recurring events (the mirror walk-in, Brooke's menu).",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "ec9d9ebfffebad13",
+    "facts": "ec9d9ebfffebad13",
+    "facts2": "ec9d9ebfffebad13",
+    "all": "ec9d9ebfffebad13"
+   },
+   "row_hash": "4fe71dee68944f61",
+   "carried": false,
+   "pass": 6
   },
   {
    "row": "C36",
@@ -2760,6 +2909,24 @@
    "pass": 2
   },
   {
+   "row": "C36",
+   "screen": "story_hints.the_mirror",
+   "verdict": "PASS",
+   "line": "From your second week, three girls own the mirror in the women's bathroom off the Quad, weekdays 8 to 9am and 1 to 2pm.",
+   "why": "The step names met_brooke as the flag met.",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "ec9d9ebfffebad13",
+    "facts": "ec9d9ebfffebad13",
+    "facts2": "ec9d9ebfffebad13",
+    "all": "ec9d9ebfffebad13"
+   },
+   "row_hash": "ccf2da275f59cae3",
+   "carried": false,
+   "pass": 6
+  },
+  {
    "row": "C37",
    "screen": "*",
    "verdict": "N/A",
@@ -2879,6 +3046,24 @@
    "row_hash": "cee89ca03f857080",
    "carried": true,
    "pass": 2
+  },
+  {
+   "row": "C37",
+   "screen": "story_hints.the_mirror",
+   "verdict": "N/A",
+   "line": "From your second week, three girls own the mirror in the women's bathroom off the Quad, weekdays 8 to 9am and 1 to 2pm.",
+   "why": "Ends inside release 1.",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "ec9d9ebfffebad13",
+    "facts": "ec9d9ebfffebad13",
+    "facts2": "ec9d9ebfffebad13",
+    "all": "ec9d9ebfffebad13"
+   },
+   "row_hash": "cee89ca03f857080",
+   "carried": false,
+   "pass": 6
   },
   {
    "row": "C422",
@@ -3074,6 +3259,24 @@
    "pass": 2
   },
   {
+   "row": "C422",
+   "screen": "story_hints.the_mirror",
+   "verdict": "PASS",
+   "line": "From your second week, three girls own the mirror in the women's bathroom off the Quad, weekdays 8 to 9am and 1 to 2pm.",
+   "why": "Says plainly where and when.",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "ec9d9ebfffebad13",
+    "facts": "ec9d9ebfffebad13",
+    "facts2": "ec9d9ebfffebad13",
+    "all": "ec9d9ebfffebad13"
+   },
+   "row_hash": "7e128897077ecee6",
+   "carried": false,
+   "pass": 6
+  },
+  {
    "row": "C430",
    "screen": "*",
    "verdict": "PASS",
@@ -3195,6 +3398,24 @@
    "pass": 2
   },
   {
+   "row": "C430",
+   "screen": "story_hints.the_mirror",
+   "verdict": "PASS",
+   "line": "From your second week, three girls own the mirror in the women's bathroom off the Quad, weekdays 8 to 9am and 1 to 2pm.",
+   "why": "Names the place, its door (off the Quad) and the hours of the meeting.",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "ec9d9ebfffebad13",
+    "facts": "ec9d9ebfffebad13",
+    "facts2": "ec9d9ebfffebad13",
+    "all": "ec9d9ebfffebad13"
+   },
+   "row_hash": "83f6356d6b638ebf",
+   "carried": false,
+   "pass": 6
+  },
+  {
    "row": "C433",
    "screen": "*",
    "verdict": "PASS",
@@ -3314,6 +3535,24 @@
    "row_hash": "d0461c156ea1bc3f",
    "carried": true,
    "pass": 2
+  },
+  {
+   "row": "C433",
+   "screen": "story_hints.the_mirror",
+   "verdict": "PASS",
+   "line": "From your second week, three girls own the mirror in the women's bathroom off the Quad, weekdays 8 to 9am and 1 to 2pm.",
+   "why": "The end is CoT's \"for now!\".",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "ec9d9ebfffebad13",
+    "facts": "ec9d9ebfffebad13",
+    "facts2": "ec9d9ebfffebad13",
+    "all": "ec9d9ebfffebad13"
+   },
+   "row_hash": "d0461c156ea1bc3f",
+   "carried": false,
+   "pass": 6
   },
   {
    "row": "C442",
@@ -3507,6 +3746,24 @@
    "row_hash": "59b8d8d24f0c7c38",
    "carried": true,
    "pass": 2
+  },
+  {
+   "row": "C442",
+   "screen": "story_hints.the_mirror",
+   "verdict": "PASS",
+   "line": "From your second week, three girls own the mirror in the women's bathroom off the Quad, weekdays 8 to 9am and 1 to 2pm.",
+   "why": "States the place, the three girls by role and the hours outright.",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "ec9d9ebfffebad13",
+    "facts": "ec9d9ebfffebad13",
+    "facts2": "ec9d9ebfffebad13",
+    "all": "ec9d9ebfffebad13"
+   },
+   "row_hash": "59b8d8d24f0c7c38",
+   "carried": false,
+   "pass": 6
   },
   {
    "row": "C447",
@@ -3798,6 +4055,24 @@
    "row_hash": "50dbf74577a813c7",
    "carried": true,
    "pass": 2
+  },
+  {
+   "row": "C451",
+   "screen": "story_hints.the_mirror",
+   "verdict": "PASS",
+   "line": "From your second week, three girls own the mirror in the women's bathroom off the Quad, weekdays 8 to 9am and 1 to 2pm.",
+   "why": "Place, door, days and hours concrete.",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "ec9d9ebfffebad13",
+    "facts": "ec9d9ebfffebad13",
+    "facts2": "ec9d9ebfffebad13",
+    "all": "ec9d9ebfffebad13"
+   },
+   "row_hash": "50dbf74577a813c7",
+   "carried": false,
+   "pass": 6
   },
   {
    "row": "C460",
@@ -4137,6 +4412,24 @@
   },
   {
    "row": "C460",
+   "screen": "story_hints.the_mirror",
+   "verdict": "PASS",
+   "line": "From your second week, three girls own the mirror in the women's bathroom off the Quad, weekdays 8 to 9am and 1 to 2pm.",
+   "why": "campus_bathroom entry_from campus_quad (P51); Brooke, Kayla, Tess all at campus_bathroom weekdays 08\u201309 and 13\u201314 (who_is_where); bathroom open weekdays 8\u20136; mirror_meet_brooke needs all three and days_since met_laura >= 7 (met_laura on day one), so \"from your second week\" is when it can fire.",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "ec9d9ebfffebad13",
+    "facts": "ec9d9ebfffebad13",
+    "facts2": "ec9d9ebfffebad13",
+    "all": "ec9d9ebfffebad13"
+   },
+   "row_hash": "67e48e60d5053a2e",
+   "carried": false,
+   "pass": 6
+  },
+  {
+   "row": "C460",
    "screen": "walkthrough.paying_wt",
    "verdict": "PASS",
    "line": "\"\u2705 Mark told you the rent.\" / \"An hour at the caf\u00e9 pays $5; a four-hour shift pays $22.\"",
@@ -4342,6 +4635,24 @@
    "pass": 2
   },
   {
+   "row": "C461",
+   "screen": "story_hints.the_mirror",
+   "verdict": "PASS",
+   "line": "From your second week, three girls own the mirror in the women's bathroom off the Quad, weekdays 8 to 9am and 1 to 2pm.",
+   "why": "No texture that can clash.",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "ec9d9ebfffebad13",
+    "facts": "ec9d9ebfffebad13",
+    "facts2": "ec9d9ebfffebad13",
+    "all": "ec9d9ebfffebad13"
+   },
+   "row_hash": "310706ee076318f2",
+   "carried": false,
+   "pass": 6
+  },
+  {
    "row": "C519",
    "screen": "*",
    "verdict": "PASS",
@@ -4533,6 +4844,24 @@
    "row_hash": "e78502f7aa28746d",
    "carried": true,
    "pass": 2
+  },
+  {
+   "row": "C519",
+   "screen": "story_hints.the_mirror",
+   "verdict": "PASS",
+   "line": "From your second week, three girls own the mirror in the women's bathroom off the Quad, weekdays 8 to 9am and 1 to 2pm.",
+   "why": "One job, 24 words.",
+   "cause": null,
+   "note": true,
+   "screen_hash": {
+    "text": "ec9d9ebfffebad13",
+    "facts": "ec9d9ebfffebad13",
+    "facts2": "ec9d9ebfffebad13",
+    "all": "ec9d9ebfffebad13"
+   },
+   "row_hash": "e78502f7aa28746d",
+   "carried": false,
+   "pass": 6
   },
   {
    "row": "C520",
@@ -4837,6 +5166,24 @@
    "row_hash": "56c1e6a836c774b1",
    "carried": true,
    "pass": 2
+  },
+  {
+   "row": "C598",
+   "screen": "story_hints.the_mirror",
+   "verdict": "PASS",
+   "line": "From your second week, three girls own the mirror in the women's bathroom off the Quad, weekdays 8 to 9am and 1 to 2pm.",
+   "why": "Names no one; the girls by role.",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "ec9d9ebfffebad13",
+    "facts": "ec9d9ebfffebad13",
+    "facts2": "ec9d9ebfffebad13",
+    "all": "ec9d9ebfffebad13"
+   },
+   "row_hash": "56c1e6a836c774b1",
+   "carried": false,
+   "pass": 6
   },
   {
    "row": "C620",
@@ -5567,6 +5914,24 @@
    "pass": 2
   },
   {
+   "row": "C889",
+   "screen": "story_hints.the_mirror",
+   "verdict": "N/A",
+   "line": "From your second week, three girls own the mirror in the women's bathroom off the Quad, weekdays 8 to 9am and 1 to 2pm.",
+   "why": "Not a label.",
+   "cause": null,
+   "note": true,
+   "screen_hash": {
+    "text": "ec9d9ebfffebad13",
+    "facts": "ec9d9ebfffebad13",
+    "facts2": "ec9d9ebfffebad13",
+    "all": "ec9d9ebfffebad13"
+   },
+   "row_hash": "def1348d483d0c40",
+   "carried": false,
+   "pass": 6
+  },
+  {
    "row": "C892",
    "screen": "*",
    "verdict": "PASS",
@@ -5688,6 +6053,24 @@
    "pass": 2
   },
   {
+   "row": "C892",
+   "screen": "story_hints.the_mirror",
+   "verdict": "PASS",
+   "line": "From your second week, three girls own the mirror in the women's bathroom off the Quad, weekdays 8 to 9am and 1 to 2pm.",
+   "why": "Hours on the place and the people, not an act.",
+   "cause": null,
+   "note": true,
+   "screen_hash": {
+    "text": "ec9d9ebfffebad13",
+    "facts": "ec9d9ebfffebad13",
+    "facts2": "ec9d9ebfffebad13",
+    "all": "ec9d9ebfffebad13"
+   },
+   "row_hash": "5c890033f6ac38b8",
+   "carried": false,
+   "pass": 6
+  },
+  {
    "row": "C897",
    "screen": "*",
    "verdict": "N/A",
@@ -5807,6 +6190,24 @@
    "row_hash": "265ece64add83676",
    "carried": true,
    "pass": 2
+  },
+  {
+   "row": "C897",
+   "screen": "story_hints.the_mirror",
+   "verdict": "N/A",
+   "line": "From your second week, three girls own the mirror in the women's bathroom off the Quad, weekdays 8 to 9am and 1 to 2pm.",
+   "why": "No travel cost on a hint.",
+   "cause": null,
+   "note": true,
+   "screen_hash": {
+    "text": "ec9d9ebfffebad13",
+    "facts": "ec9d9ebfffebad13",
+    "facts2": "ec9d9ebfffebad13",
+    "all": "ec9d9ebfffebad13"
+   },
+   "row_hash": "265ece64add83676",
+   "carried": false,
+   "pass": 6
   },
   {
    "row": "C900",
@@ -5930,6 +6331,24 @@
    "pass": 2
   },
   {
+   "row": "C900",
+   "screen": "story_hints.the_mirror",
+   "verdict": "PASS",
+   "line": "From your second week, three girls own the mirror in the women's bathroom off the Quad, weekdays 8 to 9am and 1 to 2pm.",
+   "why": "Hours as a rule, never \"now\".",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "ec9d9ebfffebad13",
+    "facts": "ec9d9ebfffebad13",
+    "facts2": "ec9d9ebfffebad13",
+    "all": "ec9d9ebfffebad13"
+   },
+   "row_hash": "6372efb027eb2034",
+   "carried": false,
+   "pass": 6
+  },
+  {
    "row": "C902",
    "screen": "*",
    "verdict": "PASS",
@@ -6049,6 +6468,24 @@
    "row_hash": "df5ed7a36dbc74e4",
    "carried": true,
    "pass": 2
+  },
+  {
+   "row": "C902",
+   "screen": "story_hints.the_mirror",
+   "verdict": "PASS",
+   "line": "From your second week, three girls own the mirror in the women's bathroom off the Quad, weekdays 8 to 9am and 1 to 2pm.",
+   "why": "True at 08:59 and 13:59 (rows end exclusive at 09:00 and 14:00).",
+   "cause": null,
+   "note": true,
+   "screen_hash": {
+    "text": "ec9d9ebfffebad13",
+    "facts": "ec9d9ebfffebad13",
+    "facts2": "ec9d9ebfffebad13",
+    "all": "ec9d9ebfffebad13"
+   },
+   "row_hash": "df5ed7a36dbc74e4",
+   "carried": false,
+   "pass": 6
   },
   {
    "row": "C903",
@@ -6172,6 +6609,24 @@
    "pass": 2
   },
   {
+   "row": "C903",
+   "screen": "story_hints.the_mirror",
+   "verdict": "PASS",
+   "line": "From your second week, three girls own the mirror in the women's bathroom off the Quad, weekdays 8 to 9am and 1 to 2pm.",
+   "why": "\"weekdays\" is the rows' own schedule, true on every visit.",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "ec9d9ebfffebad13",
+    "facts": "ec9d9ebfffebad13",
+    "facts2": "ec9d9ebfffebad13",
+    "all": "ec9d9ebfffebad13"
+   },
+   "row_hash": "4f83b0b5eb45f71b",
+   "carried": false,
+   "pass": 6
+  },
+  {
    "row": "C906",
    "screen": "*",
    "verdict": "N/A",
@@ -6291,6 +6746,24 @@
    "row_hash": "71713a7e7ae739e7",
    "carried": true,
    "pass": 2
+  },
+  {
+   "row": "C906",
+   "screen": "story_hints.the_mirror",
+   "verdict": "N/A",
+   "line": "From your second week, three girls own the mirror in the women's bathroom off the Quad, weekdays 8 to 9am and 1 to 2pm.",
+   "why": "No label.",
+   "cause": null,
+   "note": true,
+   "screen_hash": {
+    "text": "ec9d9ebfffebad13",
+    "facts": "ec9d9ebfffebad13",
+    "facts2": "ec9d9ebfffebad13",
+    "all": "ec9d9ebfffebad13"
+   },
+   "row_hash": "71713a7e7ae739e7",
+   "carried": false,
+   "pass": 6
   },
   {
    "row": "C910",
@@ -6414,6 +6887,24 @@
    "pass": 2
   },
   {
+   "row": "C910",
+   "screen": "story_hints.the_mirror",
+   "verdict": "N/A",
+   "line": "From your second week, three girls own the mirror in the women's bathroom off the Quad, weekdays 8 to 9am and 1 to 2pm.",
+   "why": "Not a button or a reply.",
+   "cause": null,
+   "note": true,
+   "screen_hash": {
+    "text": "ec9d9ebfffebad13",
+    "facts": "ec9d9ebfffebad13",
+    "facts2": "ec9d9ebfffebad13",
+    "all": "ec9d9ebfffebad13"
+   },
+   "row_hash": "d5a109f1ef88419a",
+   "carried": false,
+   "pass": 6
+  },
+  {
    "row": "C913",
    "screen": "*",
    "verdict": "PASS",
@@ -6535,6 +7026,24 @@
    "pass": 2
   },
   {
+   "row": "C913",
+   "screen": "story_hints.the_mirror",
+   "verdict": "PASS",
+   "line": "From your second week, three girls own the mirror in the women's bathroom off the Quad, weekdays 8 to 9am and 1 to 2pm.",
+   "why": "Publishes the hours of the girls at the mirror.",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "ec9d9ebfffebad13",
+    "facts": "ec9d9ebfffebad13",
+    "facts2": "ec9d9ebfffebad13",
+    "all": "ec9d9ebfffebad13"
+   },
+   "row_hash": "c750f9b6ab4ace14",
+   "carried": false,
+   "pass": 6
+  },
+  {
    "row": "C914",
    "screen": "*",
    "verdict": "N/A",
@@ -6654,6 +7163,24 @@
    "row_hash": "bd07273d5822f34f",
    "carried": true,
    "pass": 2
+  },
+  {
+   "row": "C914",
+   "screen": "story_hints.the_mirror",
+   "verdict": "N/A",
+   "line": "From your second week, three girls own the mirror in the women's bathroom off the Quad, weekdays 8 to 9am and 1 to 2pm.",
+   "why": "Not a row.",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "ec9d9ebfffebad13",
+    "facts": "ec9d9ebfffebad13",
+    "facts2": "ec9d9ebfffebad13",
+    "all": "ec9d9ebfffebad13"
+   },
+   "row_hash": "bd07273d5822f34f",
+   "carried": false,
+   "pass": 6
   },
   {
    "row": "C916",
@@ -6777,6 +7304,24 @@
    "pass": 2
   },
   {
+   "row": "C916",
+   "screen": "story_hints.the_mirror",
+   "verdict": "N/A",
+   "line": "From your second week, three girls own the mirror in the women's bathroom off the Quad, weekdays 8 to 9am and 1 to 2pm.",
+   "why": "Not a row or event.",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "ec9d9ebfffebad13",
+    "facts": "ec9d9ebfffebad13",
+    "facts2": "ec9d9ebfffebad13",
+    "all": "ec9d9ebfffebad13"
+   },
+   "row_hash": "7b2bb0dfdbcfe946",
+   "carried": false,
+   "pass": 6
+  },
+  {
    "row": "C920",
    "screen": "*",
    "verdict": "N/A",
@@ -6896,6 +7441,24 @@
    "row_hash": "513927dd127fca04",
    "carried": true,
    "pass": 2
+  },
+  {
+   "row": "C920",
+   "screen": "story_hints.the_mirror",
+   "verdict": "N/A",
+   "line": "From your second week, three girls own the mirror in the women's bathroom off the Quad, weekdays 8 to 9am and 1 to 2pm.",
+   "why": "No hop.",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "ec9d9ebfffebad13",
+    "facts": "ec9d9ebfffebad13",
+    "facts2": "ec9d9ebfffebad13",
+    "all": "ec9d9ebfffebad13"
+   },
+   "row_hash": "513927dd127fca04",
+   "carried": false,
+   "pass": 6
   },
   {
    "row": "C924",
@@ -7019,6 +7582,24 @@
    "pass": 2
   },
   {
+   "row": "C924",
+   "screen": "story_hints.the_mirror",
+   "verdict": "N/A",
+   "line": "From your second week, three girls own the mirror in the women's bathroom off the Quad, weekdays 8 to 9am and 1 to 2pm.",
+   "why": "No travel.",
+   "cause": null,
+   "note": true,
+   "screen_hash": {
+    "text": "ec9d9ebfffebad13",
+    "facts": "ec9d9ebfffebad13",
+    "facts2": "ec9d9ebfffebad13",
+    "all": "ec9d9ebfffebad13"
+   },
+   "row_hash": "791cd173e23fb130",
+   "carried": false,
+   "pass": 6
+  },
+  {
    "row": "C926",
    "screen": "*",
    "verdict": "N/A",
@@ -7138,6 +7719,24 @@
    "row_hash": "177d1e1776fac74b",
    "carried": true,
    "pass": 2
+  },
+  {
+   "row": "C926",
+   "screen": "story_hints.the_mirror",
+   "verdict": "N/A",
+   "line": "From your second week, three girls own the mirror in the women's bathroom off the Quad, weekdays 8 to 9am and 1 to 2pm.",
+   "why": "Moves no clock.",
+   "cause": null,
+   "note": true,
+   "screen_hash": {
+    "text": "ec9d9ebfffebad13",
+    "facts": "ec9d9ebfffebad13",
+    "facts2": "ec9d9ebfffebad13",
+    "all": "ec9d9ebfffebad13"
+   },
+   "row_hash": "177d1e1776fac74b",
+   "carried": false,
+   "pass": 6
   },
   {
    "row": "C927",
@@ -7261,6 +7860,24 @@
    "pass": 2
   },
   {
+   "row": "C927",
+   "screen": "story_hints.the_mirror",
+   "verdict": "N/A",
+   "line": "From your second week, three girls own the mirror in the women's bathroom off the Quad, weekdays 8 to 9am and 1 to 2pm.",
+   "why": "No exit.",
+   "cause": null,
+   "note": true,
+   "screen_hash": {
+    "text": "ec9d9ebfffebad13",
+    "facts": "ec9d9ebfffebad13",
+    "facts2": "ec9d9ebfffebad13",
+    "all": "ec9d9ebfffebad13"
+   },
+   "row_hash": "4e86d143688ba8e5",
+   "carried": false,
+   "pass": 6
+  },
+  {
    "row": "C928",
    "screen": "*",
    "verdict": "PASS",
@@ -7380,6 +7997,24 @@
    "row_hash": "2c3ccc6bd9929d7f",
    "carried": true,
    "pass": 2
+  },
+  {
+   "row": "C928",
+   "screen": "story_hints.the_mirror",
+   "verdict": "PASS",
+   "line": "From your second week, three girls own the mirror in the women's bathroom off the Quad, weekdays 8 to 9am and 1 to 2pm.",
+   "why": "States hours, not the current time.",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "ec9d9ebfffebad13",
+    "facts": "ec9d9ebfffebad13",
+    "facts2": "ec9d9ebfffebad13",
+    "all": "ec9d9ebfffebad13"
+   },
+   "row_hash": "2c3ccc6bd9929d7f",
+   "carried": false,
+   "pass": 6
   },
   {
    "row": "C929",
@@ -7503,6 +8138,24 @@
    "pass": 2
   },
   {
+   "row": "C929",
+   "screen": "story_hints.the_mirror",
+   "verdict": "N/A",
+   "line": "From your second week, three girls own the mirror in the women's bathroom off the Quad, weekdays 8 to 9am and 1 to 2pm.",
+   "why": "Not an activity label.",
+   "cause": null,
+   "note": true,
+   "screen_hash": {
+    "text": "ec9d9ebfffebad13",
+    "facts": "ec9d9ebfffebad13",
+    "facts2": "ec9d9ebfffebad13",
+    "all": "ec9d9ebfffebad13"
+   },
+   "row_hash": "18b0ecdf6d7fc901",
+   "carried": false,
+   "pass": 6
+  },
+  {
    "row": "C930",
    "screen": "*",
    "verdict": "N/A",
@@ -7622,6 +8275,24 @@
    "row_hash": "beb57cd46fe906bf",
    "carried": true,
    "pass": 2
+  },
+  {
+   "row": "C930",
+   "screen": "story_hints.the_mirror",
+   "verdict": "N/A",
+   "line": "From your second week, three girls own the mirror in the women's bathroom off the Quad, weekdays 8 to 9am and 1 to 2pm.",
+   "why": "Not a row.",
+   "cause": null,
+   "note": true,
+   "screen_hash": {
+    "text": "ec9d9ebfffebad13",
+    "facts": "ec9d9ebfffebad13",
+    "facts2": "ec9d9ebfffebad13",
+    "all": "ec9d9ebfffebad13"
+   },
+   "row_hash": "beb57cd46fe906bf",
+   "carried": false,
+   "pass": 6
   },
   {
    "row": "C931",
@@ -7743,6 +8414,24 @@
    "row_hash": "1aadffd96e76381c",
    "carried": true,
    "pass": 2
+  },
+  {
+   "row": "C931",
+   "screen": "story_hints.the_mirror",
+   "verdict": "N/A",
+   "line": "From your second week, three girls own the mirror in the women's bathroom off the Quad, weekdays 8 to 9am and 1 to 2pm.",
+   "why": "No time_of_day condition on the page.",
+   "cause": null,
+   "note": true,
+   "screen_hash": {
+    "text": "ec9d9ebfffebad13",
+    "facts": "ec9d9ebfffebad13",
+    "facts2": "ec9d9ebfffebad13",
+    "all": "ec9d9ebfffebad13"
+   },
+   "row_hash": "1aadffd96e76381c",
+   "carried": false,
+   "pass": 6
   },
   {
    "row": "C951",
@@ -7877,6 +8566,24 @@
    "row_hash": "0ded4fca6fc71925",
    "carried": true,
    "pass": 2
+  },
+  {
+   "row": "C952",
+   "screen": "story_hints.the_mirror",
+   "verdict": "PASS",
+   "line": "From your second week, three girls own the mirror in the women's bathroom off the Quad, weekdays 8 to 9am and 1 to 2pm.",
+   "why": "Every number (8 to 9am, 1 to 2pm, second week) agrees with the rows, the place hours and the 7-day gate.",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "ec9d9ebfffebad13",
+    "facts": "ec9d9ebfffebad13",
+    "facts2": "ec9d9ebfffebad13",
+    "all": "ec9d9ebfffebad13"
+   },
+   "row_hash": "0ded4fca6fc71925",
+   "carried": false,
+   "pass": 6
   },
   {
    "row": "C953",
@@ -8111,6 +8818,24 @@
    "pass": 2
   },
   {
+   "row": "L167",
+   "screen": "story_hints.the_mirror",
+   "verdict": "N/A",
+   "line": "From your second week, three girls own the mirror in the women's bathroom off the Quad, weekdays 8 to 9am and 1 to 2pm.",
+   "why": "A hint entry, not a row.",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "ec9d9ebfffebad13",
+    "facts": "ec9d9ebfffebad13",
+    "facts2": "ec9d9ebfffebad13",
+    "all": "ec9d9ebfffebad13"
+   },
+   "row_hash": "e64ce2672d85d2d8",
+   "carried": false,
+   "pass": 6
+  },
+  {
    "row": "L170",
    "screen": "*",
    "verdict": "PASS",
@@ -8256,12 +8981,30 @@
    "row_hash": "77e6271dc896a2b3",
    "carried": true,
    "pass": 2
+  },
+  {
+   "row": "L172",
+   "screen": "story_hints.the_mirror",
+   "verdict": "PASS",
+   "line": "From your second week, three girls own the mirror in the women's bathroom off the Quad, weekdays 8 to 9am and 1 to 2pm.",
+   "why": "On P51's Does: (story_hints.the_mirror | a goal card is shown, the clock moves), and on P46's.",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "ec9d9ebfffebad13",
+    "facts": "ec9d9ebfffebad13",
+    "facts2": "ec9d9ebfffebad13",
+    "all": "ec9d9ebfffebad13"
+   },
+   "row_hash": "77e6271dc896a2b3",
+   "carried": false,
+   "pass": 6
   }
  ],
  "causes": [],
  "pending": [],
- "asked": 1,
- "answered": 1,
+ "asked": 42,
+ "answered": 42,
  "pass_items": [],
  "unowed": []
 }

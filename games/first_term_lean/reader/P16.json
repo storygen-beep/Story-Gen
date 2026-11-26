@@ -1,29 +1,29 @@
 {
  "piece": "P16",
- "pass": 7,
+ "pass": 8,
  "screens": {
   "english_first.sheet": {
    "text": "7468e6ce2c180231",
    "traits": "4fd4e58137018fb8",
-   "facts": "9023d47fc25f8eba",
-   "facts2": "134e428c1a05372c",
-   "all": "7e9cacfe01dd8242"
+   "facts": "7ffd8063c3c4f4f2",
+   "facts2": "38eb8f14064934d2",
+   "all": "2a5ecc436b17d8d8"
   },
   "english_first.class": {
    "text": "785ff5c8924349a1",
    "traits": "4fd4e58137018fb8",
-   "facts": "8ac4cd42dab2d1e7",
-   "facts2": "c9f77f5d87e1e45d",
-   "all": "6e60595cb303943c"
+   "facts": "87a81182100865cc",
+   "facts2": "e76c3ab40113286b",
+   "all": "3bf8554ff7efadee"
   },
   "english_first.after": {
    "text": "8f12677d6fe5def7",
    "traits": "4fd4e58137018fb8",
-   "facts": "5f14d357c41d70d7",
-   "facts2": "779660275a9e2dcb",
-   "all": "9198ec7fe6537ce9"
+   "facts": "4fb321a958748f83",
+   "facts2": "1a36f54122ea3e4e",
+   "all": "63ada33a06338105"
   },
-  "*": "87a4d5ee258ea914"
+  "*": "4bc01cffe8943a48"
  },
  "rows": {
   "B1": "5276068df1ca6fa9",
@@ -163,55 +163,58 @@
    "row": "B10",
    "screen": "english_first.after",
    "verdict": "PASS",
-   "line": "The faculty offices are off the quad. You already know you'll be knocking on her door.",
-   "why": "Offices row Tue/Thu 14-16 matches; Done lands 11:00-11:29 in the Lecture Hall, open to 18:00.",
+   "line": "My office, Tuesday and Thursday afternoons, two to four. \u00b7 The faculty offices are off the quad.",
+   "why": "campus_office_walsh hours Tue/Thu 14:00-16:00 and Walsh's row there Tue/Thu 14-16 match 'two to four'; the English Office is entry_from campus_offices, itself entry_from campus_quad, and the corridor shows from goal1_shown (set in the opening), so 'off the quad' and 'her door' are true",
    "cause": null,
    "note": false,
    "screen_hash": {
     "text": "8f12677d6fe5def7",
-    "facts": "5f14d357c41d70d7",
-    "facts2": "779660275a9e2dcb",
-    "all": "9198ec7fe6537ce9"
+    "traits": "4fd4e58137018fb8",
+    "facts": "4fb321a958748f83",
+    "facts2": "1a36f54122ea3e4e",
+    "all": "63ada33a06338105"
    },
    "row_hash": "c1c0e2ac2588a579",
-   "carried": true,
-   "pass": 2
+   "carried": false,
+   "pass": 8
   },
   {
    "row": "B10",
    "screen": "english_first.class",
    "verdict": "PASS",
    "line": "For the rest of the class she takes essays apart line by line",
-   "why": "Walsh's row has her in the hall 09-11 at every start minute 09:00-09:29; one-time.",
+   "why": "Walsh in the hall 09-11 at every start minute; 'Two girls behind you' unnamed classmates",
    "cause": null,
    "note": false,
    "screen_hash": {
     "text": "785ff5c8924349a1",
-    "facts": "8ac4cd42dab2d1e7",
-    "facts2": "c9f77f5d87e1e45d",
-    "all": "6e60595cb303943c"
+    "traits": "4fd4e58137018fb8",
+    "facts": "87a81182100865cc",
+    "facts2": "e76c3ab40113286b",
+    "all": "3bf8554ff7efadee"
    },
    "row_hash": "c1c0e2ac2588a579",
-   "carried": true,
-   "pass": 2
+   "carried": false,
+   "pass": 8
   },
   {
    "row": "B10",
    "screen": "english_first.sheet",
    "verdict": "PASS",
-   "line": "One essay a week, and I read every word of it. Some of you will learn to hate me for that.",
-   "why": "No course intro left; a weekly handout and the advisor line are true on any Tue/Thu 09:00-09:29 she can reach it (weekday [1,3] = Tue/Thu, v2.py:5214); one-time, no second visit; no other row lets her sit English before it.",
+   "line": "A woman in her late forties, reading glasses pushed up into grey-streaked hair, walks the front row",
+   "why": "trigger needs Walsh present (hall Tue/Thu 09-11), 09:00-09:29; 'your advisor this year' is her cast entry; one-time",
    "cause": null,
    "note": false,
    "screen_hash": {
     "text": "7468e6ce2c180231",
-    "facts": "9023d47fc25f8eba",
-    "facts2": "134e428c1a05372c",
-    "all": "7e9cacfe01dd8242"
+    "traits": "4fd4e58137018fb8",
+    "facts": "7ffd8063c3c4f4f2",
+    "facts2": "38eb8f14064934d2",
+    "all": "2a5ecc436b17d8d8"
    },
    "row_hash": "c1c0e2ac2588a579",
-   "carried": true,
-   "pass": 2
+   "carried": false,
+   "pass": 8
   },
   {
    "row": "B11",
@@ -388,55 +391,58 @@
    "row": "B8",
    "screen": "english_first.after",
    "verdict": "PASS",
-   "line": "My office, Tuesday and Thursday afternoons, two to four.",
-   "why": "Matches Walsh's offices row Tue/Thu 14-16 and PLAN.md; Done spends 120 as the card says; no garment named.",
+   "line": "My office, Tuesday and Thursday afternoons, two to four. \u00b7 The faculty offices are off the quad.",
+   "why": "'two to four' Tue/Thu agrees with Walsh's office row and campus_office_walsh hours; no garment of hers named",
    "cause": null,
    "note": false,
    "screen_hash": {
     "text": "8f12677d6fe5def7",
-    "facts": "5f14d357c41d70d7",
-    "facts2": "779660275a9e2dcb",
-    "all": "9198ec7fe6537ce9"
+    "traits": "4fd4e58137018fb8",
+    "facts": "4fb321a958748f83",
+    "facts2": "1a36f54122ea3e4e",
+    "all": "63ada33a06338105"
    },
    "row_hash": "80d415cf08e0ebfe",
-   "carried": true,
-   "pass": 2
+   "carried": false,
+   "pass": 8
   },
   {
    "row": "B8",
    "screen": "english_first.class",
    "verdict": "PASS",
-   "line": "a woman of 48 with reading glasses pushed up into grey-streaked hair",
-   "why": "48 matches PLAN.md and the cast entry; no garment named.",
+   "line": "For the rest of the class she takes essays apart line by line",
+   "why": "'late forties' fits 48; no garment of hers named",
    "cause": null,
    "note": false,
    "screen_hash": {
     "text": "785ff5c8924349a1",
-    "facts": "8ac4cd42dab2d1e7",
-    "facts2": "c9f77f5d87e1e45d",
-    "all": "6e60595cb303943c"
+    "traits": "4fd4e58137018fb8",
+    "facts": "87a81182100865cc",
+    "facts2": "e76c3ab40113286b",
+    "all": "3bf8554ff7efadee"
    },
    "row_hash": "80d415cf08e0ebfe",
-   "carried": true,
-   "pass": 2
+   "carried": false,
+   "pass": 8
   },
   {
    "row": "B8",
    "screen": "english_first.sheet",
    "verdict": "PASS",
-   "line": "A woman in her late forties, reading glasses pushed up into grey-streaked hair",
-   "why": "Late forties fits 48; no garment named; no number.",
+   "line": "A woman in her late forties, reading glasses pushed up into grey-streaked hair, walks the front row",
+   "why": "'late forties' fits 48; no garment of hers named",
    "cause": null,
    "note": false,
    "screen_hash": {
     "text": "7468e6ce2c180231",
-    "facts": "9023d47fc25f8eba",
-    "facts2": "134e428c1a05372c",
-    "all": "7e9cacfe01dd8242"
+    "traits": "4fd4e58137018fb8",
+    "facts": "7ffd8063c3c4f4f2",
+    "facts2": "38eb8f14064934d2",
+    "all": "2a5ecc436b17d8d8"
    },
    "row_hash": "80d415cf08e0ebfe",
-   "carried": true,
-   "pass": 2
+   "carried": false,
+   "pass": 8
   },
   {
    "row": "B9",
@@ -1041,19 +1047,6 @@
    "pass": 5
   },
   {
-   "row": "C2183",
-   "screen": "*",
-   "verdict": "PASS",
-   "line": "Walsh: Dominant, Confident, Wordsmith, Particular \u2014 \"she takes essays apart line by line, reading the worst sentences out loud\"",
-   "why": "4 traits; Wordsmith and Particular shown by this class's own line",
-   "cause": null,
-   "note": false,
-   "screen_hash": "35cd6e22511d534a",
-   "row_hash": "40172c2d376bfc32",
-   "carried": true,
-   "pass": 5
-  },
-  {
    "row": "C2188",
    "screen": "english_first.class",
    "verdict": "PASS",
@@ -1105,7 +1098,7 @@
     "all": "9198ec7fe6537ce9"
    },
    "row_hash": "0c03931191c53a34",
-   "carried": false,
+   "carried": true,
    "pass": 7
   },
   {
@@ -1124,7 +1117,7 @@
     "all": "6e60595cb303943c"
    },
    "row_hash": "0c03931191c53a34",
-   "carried": false,
+   "carried": true,
    "pass": 7
   },
   {
@@ -1143,7 +1136,7 @@
     "all": "7e9cacfe01dd8242"
    },
    "row_hash": "0c03931191c53a34",
-   "carried": false,
+   "carried": true,
    "pass": 7
   },
   {
@@ -1228,55 +1221,58 @@
    "row": "C460",
    "screen": "english_first.after",
    "verdict": "PASS",
-   "line": "Then come to my office instead. Tuesday or Thursday, two to four.",
-   "why": "Hours true by her row; offices are entered from the quad.",
+   "line": "My office, Tuesday and Thursday afternoons, two to four. \u00b7 The faculty offices are off the quad.",
+   "why": "Every claim true on every reachable visit: campus_office_walsh hours Tue/Thu 14:00-16:00 and Walsh's row there Tue/Thu 14-16 match 'two to four'; the English Office is entry_from campus_offices, itself entry_from campus_quad, and the corridor shows from goal1_shown (set in the opening), so 'off the quad' and 'her door' are true",
    "cause": null,
    "note": false,
    "screen_hash": {
     "text": "8f12677d6fe5def7",
-    "facts": "5f14d357c41d70d7",
-    "facts2": "779660275a9e2dcb",
-    "all": "9198ec7fe6537ce9"
+    "traits": "4fd4e58137018fb8",
+    "facts": "4fb321a958748f83",
+    "facts2": "1a36f54122ea3e4e",
+    "all": "63ada33a06338105"
    },
    "row_hash": "67e48e60d5053a2e",
-   "carried": true,
-   "pass": 2
+   "carried": false,
+   "pass": 8
   },
   {
    "row": "C460",
    "screen": "english_first.class",
    "verdict": "PASS",
-   "line": "At the end she taps your desk on her way past.",
-   "why": "True at every reachable start; Walsh there for the class; one-time.",
+   "line": "For the rest of the class she takes essays apart line by line",
+   "why": "Every claim true on every reachable visit: Walsh in the hall 09-11 at every start minute; 'Two girls behind you' unnamed classmates",
    "cause": null,
    "note": false,
    "screen_hash": {
     "text": "785ff5c8924349a1",
-    "facts": "8ac4cd42dab2d1e7",
-    "facts2": "c9f77f5d87e1e45d",
-    "all": "6e60595cb303943c"
+    "traits": "4fd4e58137018fb8",
+    "facts": "87a81182100865cc",
+    "facts2": "e76c3ab40113286b",
+    "all": "3bf8554ff7efadee"
    },
    "row_hash": "67e48e60d5053a2e",
-   "carried": true,
-   "pass": 2
+   "carried": false,
+   "pass": 8
   },
   {
    "row": "C460",
    "screen": "english_first.sheet",
    "verdict": "PASS",
-   "line": "walks the front row handing out a single sheet to each of you.",
-   "why": "No first-session claim remains; a handout fits any week.",
+   "line": "A woman in her late forties, reading glasses pushed up into grey-streaked hair, walks the front row",
+   "why": "Every claim true on every reachable visit: trigger needs Walsh present (hall Tue/Thu 09-11), 09:00-09:29; 'your advisor this year' is her cast entry; one-time",
    "cause": null,
    "note": false,
    "screen_hash": {
     "text": "7468e6ce2c180231",
-    "facts": "9023d47fc25f8eba",
-    "facts2": "134e428c1a05372c",
-    "all": "7e9cacfe01dd8242"
+    "traits": "4fd4e58137018fb8",
+    "facts": "7ffd8063c3c4f4f2",
+    "facts2": "38eb8f14064934d2",
+    "all": "2a5ecc436b17d8d8"
    },
    "row_hash": "67e48e60d5053a2e",
-   "carried": true,
-   "pass": 2
+   "carried": false,
+   "pass": 8
   },
   {
    "row": "C461",
@@ -1295,55 +1291,58 @@
    "row": "C461",
    "screen": "english_first.after",
    "verdict": "PASS",
-   "line": "She sits on the edge of the desk in front of yours.",
-   "why": "Texture that can't clash; her dialogue fits the advisor cast entry.",
+   "line": "My office, Tuesday and Thursday afternoons, two to four. \u00b7 The faculty offices are off the quad.",
+   "why": "Texture that cannot clash and dialogue that fits the cast entry (Hale \"young lady\", Pratt \"Miss @player\", Walsh \"dear\").",
    "cause": null,
    "note": false,
    "screen_hash": {
     "text": "8f12677d6fe5def7",
-    "facts": "5f14d357c41d70d7",
-    "facts2": "779660275a9e2dcb",
-    "all": "9198ec7fe6537ce9"
+    "traits": "4fd4e58137018fb8",
+    "facts": "4fb321a958748f83",
+    "facts2": "1a36f54122ea3e4e",
+    "all": "63ada33a06338105"
    },
    "row_hash": "310706ee076318f2",
-   "carried": true,
-   "pass": 2
+   "carried": false,
+   "pass": 8
   },
   {
    "row": "C461",
    "screen": "english_first.class",
    "verdict": "PASS",
-   "line": "Ma'am. Your mother raised you properly.",
-   "why": "Opinion and texture only.",
+   "line": "For the rest of the class she takes essays apart line by line",
+   "why": "Texture that cannot clash and dialogue that fits the cast entry (Hale \"young lady\", Pratt \"Miss @player\", Walsh \"dear\").",
    "cause": null,
    "note": false,
    "screen_hash": {
     "text": "785ff5c8924349a1",
-    "facts": "8ac4cd42dab2d1e7",
-    "facts2": "c9f77f5d87e1e45d",
-    "all": "6e60595cb303943c"
+    "traits": "4fd4e58137018fb8",
+    "facts": "87a81182100865cc",
+    "facts2": "e76c3ab40113286b",
+    "all": "3bf8554ff7efadee"
    },
    "row_hash": "310706ee076318f2",
-   "carried": true,
-   "pass": 2
+   "carried": false,
+   "pass": 8
   },
   {
    "row": "C461",
    "screen": "english_first.sheet",
    "verdict": "PASS",
-   "line": "I'm your advisor this year, dear, so you're stuck with me twice.",
-   "why": "Fits her cast entry: English professor and advisor.",
+   "line": "A woman in her late forties, reading glasses pushed up into grey-streaked hair, walks the front row",
+   "why": "Texture that cannot clash and dialogue that fits the cast entry (Hale \"young lady\", Pratt \"Miss @player\", Walsh \"dear\").",
    "cause": null,
    "note": false,
    "screen_hash": {
     "text": "7468e6ce2c180231",
-    "facts": "9023d47fc25f8eba",
-    "facts2": "134e428c1a05372c",
-    "all": "7e9cacfe01dd8242"
+    "traits": "4fd4e58137018fb8",
+    "facts": "7ffd8063c3c4f4f2",
+    "facts2": "38eb8f14064934d2",
+    "all": "2a5ecc436b17d8d8"
    },
    "row_hash": "310706ee076318f2",
-   "carried": true,
-   "pass": 2
+   "carried": false,
+   "pass": 8
   },
   {
    "row": "C519",
@@ -1741,343 +1740,362 @@
    "row": "C889",
    "screen": "english_first.after",
    "verdict": "PASS",
-   "line": "choice \"Done\" (120 min, back to the lecture hall)",
-   "why": "the label carries no time, energy, clock time or money; the 120 minutes are the class, not a hop",
+   "line": "Done",
+   "why": "The label names no clock time and no duration; the exit spends its minutes in the costs",
    "cause": null,
    "note": true,
    "screen_hash": {
     "text": "8f12677d6fe5def7",
-    "facts": "5f14d357c41d70d7",
-    "facts2": "779660275a9e2dcb",
-    "all": "9198ec7fe6537ce9"
+    "traits": "4fd4e58137018fb8",
+    "facts": "4fb321a958748f83",
+    "facts2": "1a36f54122ea3e4e",
+    "all": "63ada33a06338105"
    },
    "row_hash": "def1348d483d0c40",
-   "carried": true,
-   "pass": 3
+   "carried": false,
+   "pass": 8
   },
   {
    "row": "C892",
    "screen": "english_first.after",
    "verdict": "PASS",
-   "line": "",
-   "why": "Her hours are on her card's tip and the offices' sign.",
+   "line": "My office, Tuesday and Thursday afternoons, two to four. \u00b7 The faculty offices are off the quad.",
+   "why": "Her hours are on her own door now: campus_office_walsh closed_text 'Office hours: Tuesday and Thursday, 2 to 4pm.'; no hour inside the act",
    "cause": null,
    "note": true,
    "screen_hash": {
-    "text": "60e03d99ce0e8328",
-    "facts": "5f14d357c41d70d7",
-    "facts2": "779660275a9e2dcb",
-    "all": "79dba80a814bf471"
+    "text": "8f12677d6fe5def7",
+    "traits": "4fd4e58137018fb8",
+    "facts": "4fb321a958748f83",
+    "facts2": "1a36f54122ea3e4e",
+    "all": "63ada33a06338105"
    },
    "row_hash": "5c890033f6ac38b8",
-   "carried": true,
-   "pass": 1
+   "carried": false,
+   "pass": 8
   },
   {
    "row": "C897",
    "screen": "english_first.after",
    "verdict": "PASS",
-   "line": "",
-   "why": "",
+   "line": "Done",
+   "why": "No time on a room; the minutes are the activity itself, and Done returns to the same place",
    "cause": null,
    "note": true,
    "screen_hash": {
-    "text": "60e03d99ce0e8328",
-    "facts": "5f14d357c41d70d7",
-    "facts2": "779660275a9e2dcb",
-    "all": "79dba80a814bf471"
+    "text": "8f12677d6fe5def7",
+    "traits": "4fd4e58137018fb8",
+    "facts": "4fb321a958748f83",
+    "facts2": "1a36f54122ea3e4e",
+    "all": "63ada33a06338105"
    },
    "row_hash": "265ece64add83676",
-   "carried": true,
-   "pass": 1
+   "carried": false,
+   "pass": 8
   },
   {
    "row": "C900",
    "screen": "english_first.after",
    "verdict": "PASS",
-   "line": "My office, Tuesday and Thursday afternoons, two to four.",
-   "why": "States her standing hours, not the current time.",
+   "line": "My office, Tuesday and Thursday afternoons, two to four. \u00b7 The faculty offices are off the quad.",
+   "why": "Her standing office hours, not the current time; one-time screen",
    "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "60e03d99ce0e8328",
-    "facts": "5f14d357c41d70d7",
-    "facts2": "779660275a9e2dcb",
-    "all": "79dba80a814bf471"
+    "text": "8f12677d6fe5def7",
+    "traits": "4fd4e58137018fb8",
+    "facts": "4fb321a958748f83",
+    "facts2": "1a36f54122ea3e4e",
+    "all": "63ada33a06338105"
    },
    "row_hash": "6372efb027eb2034",
-   "carried": true,
-   "pass": 1
+   "carried": false,
+   "pass": 8
   },
   {
    "row": "C902",
    "screen": "english_first.after",
    "verdict": "PASS",
-   "line": "For the rest of the class",
-   "why": "True at 09:29.",
+   "line": "My office, Tuesday and Thursday afternoons, two to four. \u00b7 The faculty offices are off the quad.",
+   "why": "Read at the last start minute of its window (09:29/11:29, or 17:59 for the hall) the line still holds: campus_office_walsh hours Tue/Thu 14:00-16:00 and Walsh's row there Tue/Thu 14-16 match 'two to four'; the English Office is entry_from campus_offices, itself entry_from campus_quad, and the corridor shows from goal1_shown (set in the opening), so 'off the quad' and 'her door' are true",
    "cause": null,
    "note": true,
    "screen_hash": {
-    "text": "60e03d99ce0e8328",
-    "facts": "5f14d357c41d70d7",
-    "facts2": "779660275a9e2dcb",
-    "all": "79dba80a814bf471"
+    "text": "8f12677d6fe5def7",
+    "traits": "4fd4e58137018fb8",
+    "facts": "4fb321a958748f83",
+    "facts2": "1a36f54122ea3e4e",
+    "all": "63ada33a06338105"
    },
    "row_hash": "df5ed7a36dbc74e4",
-   "carried": true,
-   "pass": 1
+   "carried": false,
+   "pass": 8
   },
   {
    "row": "C903",
    "screen": "english_first.after",
    "verdict": "PASS",
-   "line": "Tuesday and Thursday",
-   "why": "One-time, and her hours are those days on every visit.",
+   "line": "Tuesday and Thursday afternoons",
+   "why": "One-time scene; the weekdays name her standing office hours, true on every visit",
    "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "60e03d99ce0e8328",
-    "facts": "5f14d357c41d70d7",
-    "facts2": "779660275a9e2dcb",
-    "all": "79dba80a814bf471"
+    "text": "8f12677d6fe5def7",
+    "traits": "4fd4e58137018fb8",
+    "facts": "4fb321a958748f83",
+    "facts2": "1a36f54122ea3e4e",
+    "all": "63ada33a06338105"
    },
    "row_hash": "4f83b0b5eb45f71b",
-   "carried": true,
-   "pass": 1
+   "carried": false,
+   "pass": 8
   },
   {
    "row": "C906",
    "screen": "english_first.after",
    "verdict": "PASS",
-   "line": "choice \"Done\" (120 min, back to the lecture hall)",
-   "why": "the label carries no time, energy, clock time or money; the 120 minutes are the class, not a hop",
+   "line": "Done",
+   "why": "No \"till X\" on any label",
    "cause": null,
    "note": true,
    "screen_hash": {
     "text": "8f12677d6fe5def7",
-    "facts": "5f14d357c41d70d7",
-    "facts2": "779660275a9e2dcb",
-    "all": "9198ec7fe6537ce9"
+    "traits": "4fd4e58137018fb8",
+    "facts": "4fb321a958748f83",
+    "facts2": "1a36f54122ea3e4e",
+    "all": "63ada33a06338105"
    },
    "row_hash": "71713a7e7ae739e7",
-   "carried": true,
-   "pass": 3
+   "carried": false,
+   "pass": 8
   },
   {
    "row": "C910",
    "screen": "english_first.after",
    "verdict": "PASS",
-   "line": "choice \"Done\" (120 min, back to the lecture hall)",
-   "why": "the label carries no time, energy, clock time or money; the 120 minutes are the class, not a hop",
+   "line": "Done",
+   "why": "Written labels carry no time, energy or money; a cost-blocked \"(10 Energy)\"/\"(5 Energy)\" is the engine tag rule 1 keeps",
    "cause": null,
    "note": true,
    "screen_hash": {
     "text": "8f12677d6fe5def7",
-    "facts": "5f14d357c41d70d7",
-    "facts2": "779660275a9e2dcb",
-    "all": "9198ec7fe6537ce9"
+    "traits": "4fd4e58137018fb8",
+    "facts": "4fb321a958748f83",
+    "facts2": "1a36f54122ea3e4e",
+    "all": "63ada33a06338105"
    },
    "row_hash": "d5a109f1ef88419a",
-   "carried": true,
-   "pass": 3
+   "carried": false,
+   "pass": 8
   },
   {
    "row": "C913",
    "screen": "english_first.after",
    "verdict": "PASS",
-   "line": "",
-   "why": "The class is an event that happens to her (C916); her office hours are published on her card.",
+   "line": "My office, Tuesday and Thursday afternoons, two to four. \u00b7 The faculty offices are off the quad.",
+   "why": "A one-time scene that fires on its own: an event that happens to her (C916); its class hours are in the Timetable popup and the professor's hours are on her door",
    "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "60e03d99ce0e8328",
-    "facts": "5f14d357c41d70d7",
-    "facts2": "779660275a9e2dcb",
-    "all": "79dba80a814bf471"
+    "text": "8f12677d6fe5def7",
+    "traits": "4fd4e58137018fb8",
+    "facts": "4fb321a958748f83",
+    "facts2": "1a36f54122ea3e4e",
+    "all": "63ada33a06338105"
    },
    "row_hash": "c750f9b6ab4ace14",
-   "carried": true,
-   "pass": 1
+   "carried": false,
+   "pass": 8
   },
   {
    "row": "C914",
    "screen": "english_first.after",
    "verdict": "PASS",
-   "line": "",
-   "why": "No row here.",
+   "line": "My office, Tuesday and Thursday afternoons, two to four. \u00b7 The faculty offices are off the quad.",
+   "why": "The row never shows hours, so never shows them wrongly",
    "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "60e03d99ce0e8328",
-    "facts": "5f14d357c41d70d7",
-    "facts2": "779660275a9e2dcb",
-    "all": "79dba80a814bf471"
+    "text": "8f12677d6fe5def7",
+    "traits": "4fd4e58137018fb8",
+    "facts": "4fb321a958748f83",
+    "facts2": "1a36f54122ea3e4e",
+    "all": "63ada33a06338105"
    },
    "row_hash": "bd07273d5822f34f",
-   "carried": true,
-   "pass": 1
+   "carried": false,
+   "pass": 8
   },
   {
    "row": "C916",
    "screen": "english_first.after",
    "verdict": "PASS",
-   "line": "",
-   "why": "The auto-fire stays hidden out of its window.",
+   "line": "My office, Tuesday and Thursday afternoons, two to four. \u00b7 The faculty offices are off the quad.",
+   "why": "An event that happens to her; hidden out of its window",
    "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "60e03d99ce0e8328",
-    "facts": "5f14d357c41d70d7",
-    "facts2": "779660275a9e2dcb",
-    "all": "79dba80a814bf471"
+    "text": "8f12677d6fe5def7",
+    "traits": "4fd4e58137018fb8",
+    "facts": "4fb321a958748f83",
+    "facts2": "1a36f54122ea3e4e",
+    "all": "63ada33a06338105"
    },
    "row_hash": "7b2bb0dfdbcfe946",
-   "carried": true,
-   "pass": 1
+   "carried": false,
+   "pass": 8
   },
   {
    "row": "C920",
    "screen": "english_first.after",
    "verdict": "PASS",
-   "line": "choice \"Done\" (120 min, back to the lecture hall)",
-   "why": "the label carries no time, energy, clock time or money; the 120 minutes are the class, not a hop",
+   "line": "Done",
+   "why": "No hop: Done returns to the Lecture Hall itself",
    "cause": null,
    "note": false,
    "screen_hash": {
     "text": "8f12677d6fe5def7",
-    "facts": "5f14d357c41d70d7",
-    "facts2": "779660275a9e2dcb",
-    "all": "9198ec7fe6537ce9"
+    "traits": "4fd4e58137018fb8",
+    "facts": "4fb321a958748f83",
+    "facts2": "1a36f54122ea3e4e",
+    "all": "63ada33a06338105"
    },
    "row_hash": "513927dd127fca04",
-   "carried": true,
-   "pass": 3
+   "carried": false,
+   "pass": 8
   },
   {
    "row": "C924",
    "screen": "english_first.after",
    "verdict": "PASS",
-   "line": "",
-   "why": "",
+   "line": "Done",
+   "why": "No travel on this screen; the campus-in-Town move (P53) is the nav card's, not this screen's",
    "cause": null,
    "note": true,
    "screen_hash": {
-    "text": "60e03d99ce0e8328",
-    "facts": "5f14d357c41d70d7",
-    "facts2": "779660275a9e2dcb",
-    "all": "79dba80a814bf471"
+    "text": "8f12677d6fe5def7",
+    "traits": "4fd4e58137018fb8",
+    "facts": "4fb321a958748f83",
+    "facts2": "1a36f54122ea3e4e",
+    "all": "63ada33a06338105"
    },
    "row_hash": "791cd173e23fb130",
-   "carried": true,
-   "pass": 1
+   "carried": false,
+   "pass": 8
   },
   {
    "row": "C926",
    "screen": "english_first.after",
    "verdict": "PASS",
-   "line": "time_progression_minutes = 125",
-   "why": "Minutes only.",
+   "line": "Done",
+   "why": "The clock moves only by the exit's minutes",
    "cause": null,
    "note": true,
    "screen_hash": {
-    "text": "60e03d99ce0e8328",
-    "facts": "5f14d357c41d70d7",
-    "facts2": "779660275a9e2dcb",
-    "all": "79dba80a814bf471"
+    "text": "8f12677d6fe5def7",
+    "traits": "4fd4e58137018fb8",
+    "facts": "4fb321a958748f83",
+    "facts2": "1a36f54122ea3e4e",
+    "all": "63ada33a06338105"
    },
    "row_hash": "177d1e1776fac74b",
-   "carried": true,
-   "pass": 1
+   "carried": false,
+   "pass": 8
   },
   {
    "row": "C927",
    "screen": "english_first.after",
    "verdict": "PASS",
-   "line": "time_progression_minutes = 120",
-   "why": "Every exit has an explicit time; none falls to the 3-minute default unseen.",
+   "line": "Done",
+   "why": "The exit states its own minutes (120, or 60 for study); no 3-minute default",
    "cause": null,
    "note": true,
    "screen_hash": {
     "text": "8f12677d6fe5def7",
-    "facts": "5f14d357c41d70d7",
-    "facts2": "779660275a9e2dcb",
-    "all": "9198ec7fe6537ce9"
+    "traits": "4fd4e58137018fb8",
+    "facts": "4fb321a958748f83",
+    "facts2": "1a36f54122ea3e4e",
+    "all": "63ada33a06338105"
    },
    "row_hash": "4e86d143688ba8e5",
-   "carried": true,
-   "pass": 2
+   "carried": false,
+   "pass": 8
   },
   {
    "row": "C928",
    "screen": "english_first.after",
    "verdict": "PASS",
-   "line": "",
-   "why": "No current time printed.",
+   "line": "My office, Tuesday and Thursday afternoons, two to four. \u00b7 The faculty offices are off the quad.",
+   "why": "No clock printed into prose",
    "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "60e03d99ce0e8328",
-    "facts": "5f14d357c41d70d7",
-    "facts2": "779660275a9e2dcb",
-    "all": "79dba80a814bf471"
+    "text": "8f12677d6fe5def7",
+    "traits": "4fd4e58137018fb8",
+    "facts": "4fb321a958748f83",
+    "facts2": "1a36f54122ea3e4e",
+    "all": "63ada33a06338105"
    },
    "row_hash": "2c3ccc6bd9929d7f",
-   "carried": true,
-   "pass": 1
+   "carried": false,
+   "pass": 8
   },
   {
    "row": "C929",
    "screen": "english_first.after",
    "verdict": "PASS",
-   "line": "choice \"Done\" (120 min, back to the lecture hall)",
-   "why": "the label carries no time, energy, clock time or money; the 120 minutes are the class, not a hop",
+   "line": "Done",
+   "why": "No activity time on any label",
    "cause": null,
    "note": true,
    "screen_hash": {
     "text": "8f12677d6fe5def7",
-    "facts": "5f14d357c41d70d7",
-    "facts2": "779660275a9e2dcb",
-    "all": "9198ec7fe6537ce9"
+    "traits": "4fd4e58137018fb8",
+    "facts": "4fb321a958748f83",
+    "facts2": "1a36f54122ea3e4e",
+    "all": "63ada33a06338105"
    },
    "row_hash": "18b0ecdf6d7fc901",
-   "carried": true,
-   "pass": 3
+   "carried": false,
+   "pass": 8
   },
   {
    "row": "C930",
    "screen": "english_first.after",
    "verdict": "N/A",
    "line": "",
-   "why": "Not windowed work.",
+   "why": "Not windowed work she chooses: a one-time scene that fires on entry",
    "cause": null,
    "note": true,
    "screen_hash": {
-    "text": "60e03d99ce0e8328",
-    "facts": "5f14d357c41d70d7",
-    "facts2": "779660275a9e2dcb",
-    "all": "79dba80a814bf471"
+    "text": "8f12677d6fe5def7",
+    "traits": "4fd4e58137018fb8",
+    "facts": "4fb321a958748f83",
+    "facts2": "1a36f54122ea3e4e",
+    "all": "63ada33a06338105"
    },
    "row_hash": "beb57cd46fe906bf",
-   "carried": true,
-   "pass": 1
+   "carried": false,
+   "pass": 8
   },
   {
    "row": "C931",
    "screen": "english_first.after",
    "verdict": "PASS",
    "line": "start_time = \"09:00\", end_time = \"09:30\"",
-   "why": "End exclusive: last start 09:29, +120 lands 11:29, as the card says.",
+   "why": "End exclusive: last start 09:29, inside Walsh's 09-11 row",
    "cause": null,
    "note": true,
    "screen_hash": {
     "text": "8f12677d6fe5def7",
-    "facts": "5f14d357c41d70d7",
-    "facts2": "779660275a9e2dcb",
-    "all": "9198ec7fe6537ce9"
+    "traits": "4fd4e58137018fb8",
+    "facts": "4fb321a958748f83",
+    "facts2": "1a36f54122ea3e4e",
+    "all": "63ada33a06338105"
    },
    "row_hash": "1aadffd96e76381c",
-   "carried": true,
-   "pass": 2
+   "carried": false,
+   "pass": 8
   },
   {
    "row": "C953",
@@ -2114,55 +2132,58 @@
    "row": "L106",
    "screen": "english_first.after",
    "verdict": "PASS",
-   "line": "The room empties around you. She sits on the edge of the desk",
-   "why": "Only Walsh named; her row has her in the hall 09-11 and the screen's clock is 09:00-09:29.",
+   "line": "My office, Tuesday and Thursday afternoons, two to four. \u00b7 The faculty offices are off the quad.",
+   "why": "campus_office_walsh hours Tue/Thu 14:00-16:00 and Walsh's row there Tue/Thu 14-16 match 'two to four'; the English Office is entry_from campus_offices, itself entry_from campus_quad, and the corridor shows from goal1_shown (set in the opening), so 'off the quad' and 'her door' are true",
    "cause": null,
    "note": false,
    "screen_hash": {
     "text": "8f12677d6fe5def7",
-    "facts": "5f14d357c41d70d7",
-    "facts2": "779660275a9e2dcb",
-    "all": "9198ec7fe6537ce9"
+    "traits": "4fd4e58137018fb8",
+    "facts": "4fb321a958748f83",
+    "facts2": "1a36f54122ea3e4e",
+    "all": "63ada33a06338105"
    },
    "row_hash": "13a714429d15f3b2",
-   "carried": true,
-   "pass": 2
+   "carried": false,
+   "pass": 8
   },
   {
    "row": "L106",
    "screen": "english_first.class",
    "verdict": "PASS",
-   "line": "Two girls behind you giggle",
-   "why": "Unnamed classmates; Walsh is there by her row; no named person claimed.",
+   "line": "For the rest of the class she takes essays apart line by line",
+   "why": "Walsh in the hall 09-11 at every start minute; 'Two girls behind you' unnamed classmates",
    "cause": null,
    "note": false,
    "screen_hash": {
     "text": "785ff5c8924349a1",
-    "facts": "8ac4cd42dab2d1e7",
-    "facts2": "c9f77f5d87e1e45d",
-    "all": "6e60595cb303943c"
+    "traits": "4fd4e58137018fb8",
+    "facts": "87a81182100865cc",
+    "facts2": "e76c3ab40113286b",
+    "all": "3bf8554ff7efadee"
    },
    "row_hash": "13a714429d15f3b2",
-   "carried": true,
-   "pass": 2
+   "carried": false,
+   "pass": 8
   },
   {
    "row": "L106",
    "screen": "english_first.sheet",
    "verdict": "PASS",
-   "line": "A woman in her late forties ... walks the front row",
-   "why": "Trigger requires npc_walsh is_present; her row Tue/Thu 09-11.",
+   "line": "A woman in her late forties, reading glasses pushed up into grey-streaked hair, walks the front row",
+   "why": "trigger needs Walsh present (hall Tue/Thu 09-11), 09:00-09:29; 'your advisor this year' is her cast entry; one-time",
    "cause": null,
    "note": false,
    "screen_hash": {
     "text": "7468e6ce2c180231",
-    "facts": "9023d47fc25f8eba",
-    "facts2": "134e428c1a05372c",
-    "all": "7e9cacfe01dd8242"
+    "traits": "4fd4e58137018fb8",
+    "facts": "7ffd8063c3c4f4f2",
+    "facts2": "38eb8f14064934d2",
+    "all": "2a5ecc436b17d8d8"
    },
    "row_hash": "13a714429d15f3b2",
-   "carried": true,
-   "pass": 2
+   "carried": false,
+   "pass": 8
   },
   {
    "row": "L119",
@@ -2241,18 +2262,19 @@
    "screen": "english_first.after",
    "verdict": "N/A",
    "line": "",
-   "why": "No row with hours on this screen; a one-time canvas exit only.",
+   "why": "No row with hours on this screen; a one-time canvas exit",
    "cause": null,
    "note": false,
    "screen_hash": {
     "text": "8f12677d6fe5def7",
-    "facts": "5f14d357c41d70d7",
-    "facts2": "779660275a9e2dcb",
-    "all": "9198ec7fe6537ce9"
+    "traits": "4fd4e58137018fb8",
+    "facts": "4fb321a958748f83",
+    "facts2": "1a36f54122ea3e4e",
+    "all": "63ada33a06338105"
    },
    "row_hash": "e64ce2672d85d2d8",
-   "carried": true,
-   "pass": 2
+   "carried": false,
+   "pass": 8
   },
   {
    "row": "L168",
@@ -2296,8 +2318,8 @@
  ],
  "causes": [],
  "pending": [],
- "asked": 1,
- "answered": 1,
+ "asked": 35,
+ "answered": 35,
  "pass_items": [],
  "unowed": []
 }
