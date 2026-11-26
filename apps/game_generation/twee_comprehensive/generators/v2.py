@@ -253,10 +253,16 @@ class TweeComprehensiveGeneratorV2:
         # [ui] timetable_button — its widget, only in a game that asks for it (StoryCaption
         # calls it only then, so no other game carries an empty widget).
         if self.timetable_button:
+            _tt_btn = ('<div id="timetable-btn-widget"><<link "Timetable">><<run setup.openTimetable()>>'
+                       '<</link>><span class="nav-i">🗓</span></div>')
+            if self.timetable_button_when:
+                # Only once she has it: the flag her timetable scene sets ($flags, as every
+                # player flag; an unset flag is falsy, so the button stays away).
+                _tt_btn = f'<<if $flags and $flags["{self.timetable_button_when}"]>>{_tt_btn}<</if>>'
             twee_sections.append(
                 ':: TimetableWidgets [widget nobr]\n'
                 '<<widget "timetableButton">>\n'
-                '<div id="timetable-btn-widget"><<link "Timetable">><<run setup.openTimetable()>><</link>><span class="nav-i">🗓</span></div>\n'
+                f'{_tt_btn}\n'
                 '<</widget>>\n'
             )
 
@@ -1380,6 +1386,9 @@ class TweeComprehensiveGeneratorV2:
         # timetable_button adds the sidebar button. Empty = nothing emitted.
         self.timetable = list((self.project.metadata or {}).get("timetable") or [])
         self.timetable_button = bool((self.project.metadata or {}).get("timetable_button")) and bool(self.timetable)
+        # [ui] timetable_button_when — the button waits for this player flag (she has been
+        # given the timetable). Empty = always shown, so games without it are unchanged.
+        self.timetable_button_when = str((self.project.metadata or {}).get("timetable_button_when") or "")
         # Player cheat page — empty dict = page + sidebar button not emitted.
         # Authored under [ui.cheat_page]. One build ships everywhere; which rows are
         # live is decided at runtime by the codes the player has entered.
@@ -19277,6 +19286,20 @@ setup.carryRent = function (due, paid) {
                         f'style="max-width:100%;max-height:70vh;object-fit:contain;height:auto;border-radius:8px;"></video>'
                     )
                     html_parts.append(clip_tag)
+                    continue
+
+                # [[ui.timetable]] — a timetable block: a link that opens the Timetable dialog,
+                # and with props.open = true the dialog also opens by itself once the screen
+                # shows (a 0s <<timed>>, so the passage is on screen under it). The importer
+                # refuses the block in a game with no timetable; here it just renders nothing.
+                if block_type == "timetable":
+                    if self.timetable:
+                        label = str(props.get("label") or "Look at your timetable").replace('"', "'")
+                        html_parts.append(
+                            f'<p class="timetable-open"><<link "{label}">><<run setup.openTimetable()>><</link>></p>'
+                        )
+                        if props.get("open") is True:
+                            html_parts.append("<<timed 0s>><<run setup.openTimetable()>><</timed>>")
                     continue
 
                 # Text/dialog blocks: require content

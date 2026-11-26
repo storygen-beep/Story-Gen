@@ -213,3 +213,88 @@ def test_the_timetable_button_is_styled_like_the_others():
     for sel in ("#timetable-btn-widget, #flags-btn-widget {", "#timetable-btn-widget a,",
                 "#timetable-btn-widget .nav-row {", "#timetable-btn-widget a:hover {"):
         assert sel in twee, sel
+
+
+# ── 4. given in a scene: the timetable block and timetable_button_when ───────
+# first_term_lean, LO 2026-11-26: "Timetable is only in the sidebar / Should first open in the
+# deans office", then "Go ahead". The dean's scene opens the dialog, and the sidebar button
+# waits for the flag that scene sets.
+
+
+def _gated(raw, when="started", block=None):
+    raw["ui"]["timetable_button_when"] = when
+    if block is not None:
+        raw["canvases"][0]["nodes"][0]["blocks"].append(block)
+    return raw
+
+
+def test_the_button_waits_for_its_flag():
+    twee = _twee(_gated(_raw()))
+    widget = twee.split('<<widget "timetableButton">>', 1)[1].split("<</widget>>", 1)[0]
+    assert widget.strip().startswith('<<if $flags and $flags["started"]>><div id="timetable-btn-widget">')
+    assert widget.strip().endswith("<</if>>")
+
+
+def test_without_the_flag_key_the_button_is_as_before():
+    widget = _twee(_raw()).split('<<widget "timetableButton">>', 1)[1].split("<</widget>>", 1)[0]
+    assert widget.strip().startswith('<div id="timetable-btn-widget">')
+
+
+@pytest.mark.parametrize("when, button, fragment", [
+    ("has timetable", True, "must be a flag name"),
+    (3, True, "must be a flag name"),
+    ("started", False, "needs [ui] timetable_button = true"),
+])
+def test_a_bad_button_flag_is_an_error(when, button, fragment):
+    errs = _errors(_gated(_raw(button=button), when=when))
+    assert any(fragment in e for e in errs), errs
+
+
+def test_the_timetable_block_is_a_link_and_may_open_itself():
+    block = {"type": "timetable", "props": {"label": "Read the \"sheet\"", "open": True}}
+    raw = _gated(_raw(), block=block)
+    assert _errors(raw) == []
+    twee = _twee(raw)
+    assert '<p class="timetable-open"><<link "Read the \'sheet\'">><<run setup.openTimetable()>><</link>></p>' in twee
+    assert "<<timed 0s>><<run setup.openTimetable()>><</timed>>" in twee
+
+
+def test_the_timetable_block_without_open_is_only_the_link():
+    twee = _twee(_gated(_raw(), block={"type": "timetable"}))
+    assert '<<link "Look at your timetable">><<run setup.openTimetable()>>' in twee
+    assert "<<timed 0s>><<run setup.openTimetable()>>" not in twee
+
+
+def test_a_timetable_block_needs_a_timetable():
+    raw = parse_toml(FIXTURE)
+    raw["canvases"][0]["nodes"][0]["blocks"].append({"type": "timetable"})
+    errs = _errors(raw)
+    assert any("canvas scene_start node intro: a timetable block needs at least one [[ui.timetable]] row" in e
+               for e in errs), errs
+
+
+@pytest.fixture(scope="module")
+def gated_html(tmp_path_factory):
+    out = tmp_path_factory.mktemp("timetable_gated")
+    toml = out / "fixture.toml"
+    text = open(FIXTURE).read().replace(
+        "\n[ui.cast_page]\n", '\n[ui]\ntimetable_button = true\ntimetable_button_when = "got_timetable"\n\n[ui.cast_page]\n', 1)
+    text = text.replace('blocks = [ { type = "paragraph", content = "Fixture start." } ]',
+                        'blocks = [ { type = "paragraph", content = "Fixture start." }, '
+                        '{ type = "timetable", props = { open = true } } ]', 1)
+    toml.write_text(text + TIMETABLE_TOML)
+    return build(toml, out / "out")
+
+
+@needs_browser
+def test_the_scene_opens_it_and_the_button_comes_after(gated_html):
+    with open_game(gated_html) as g:
+        g.play("StartingCanvas_scene_start_Node_intro", settle=400)
+        # The start screen carries the block: the dialog is open over it, and the button isn't there yet.
+        assert g.js("() => document.querySelector('#ui-dialog-title').textContent") == "Timetable"
+        assert g.js("() => document.querySelectorAll('#timetable-btn-widget').length") == 0
+        assert g.js("() => document.querySelectorAll('.timetable-open a').length") == 1
+        # The scene's exit sets the flag (here, by hand); from then on the sidebar has the button.
+        g.js("() => { SugarCube.Dialog.close(); SugarCube.State.variables.flags.got_timetable = true; SugarCube.UIBar.update(); }")
+        assert g.js("() => document.querySelectorAll('#timetable-btn-widget a').length") == 1
+        assert g.errors == []
