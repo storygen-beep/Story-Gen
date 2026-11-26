@@ -1346,7 +1346,7 @@ flag_keys = [
   "ran_once",
   # P65 — gym passes; setting one again restarts its day (v2.py:7516-7522)
   "gym_day_pass", "gym_week_pass", "gym_month_pass",
-  # P64 — Channel 9, seen once
+  # P64 — Channel 5 After Dark (Channel 9 until P71), seen once
   "watched_after_dark",
   # P32 — met flags for the people P32 schedules (their meetings set them)
   "met_hale", "met_pratt", "met_cross", "met_nadia", "met_holt", "met_rosa", "met_frank", "met_danny", "met_marco",
@@ -5518,7 +5518,8 @@ trigger_mode = "manual"
 is_repeatable = true
 max_triggers_per_day = 2
 show_when_blocked = true
-cooldown_message = "you've watched enough TV for one day."
+# P71 — opening it is what counts (v2.py:17063-17064), so the line says what was counted (reader pass 1).
+cooldown_message = "you've had the TV on twice today."
 
 [[canvases.nodes]]
 id = "watch"
@@ -5531,43 +5532,101 @@ blocks = [
 type = "choices"
 
 [[canvases.nodes.exit_block.choices]]
-text = "Channel 4 News"
+text = "Channel 1 — News"
 targetType = "node"
 nodeId = "news"
 time_progression_minutes = 0
 
 [[canvases.nodes.exit_block.choices]]
-text = "Flatmates"
+text = "Channel 2 — Flatmates"
 targetType = "node"
 nodeId = "sitcom"
 time_progression_minutes = 0
 
 [[canvases.nodes.exit_block.choices]]
-text = "Kitchen Rescue"
+text = "Channel 3 — Kitchen Rescue"
 targetType = "node"
 nodeId = "cooking"
 time_progression_minutes = 0
 
 [[canvases.nodes.exit_block.choices]]
-text = "The Match"
+text = "Channel 4 — The Match"
 targetType = "node"
 nodeId = "sports"
 time_progression_minutes = 0
 
-# Channel 9: 23:00-02:00 (time_of_day wraps past midnight, v2.py:4826-4829) and nobody in the room. One grey line
+# Channel 5: 23:00-02:00 (time_of_day wraps past midnight, v2.py:4826-4829) and nobody in the room. One grey line
 # for both: a choice has one locked_text (v2.py:17428-17470), and no row puts anyone here after 23:00.
 [[canvases.nodes.exit_block.choices]]
-text = "Channel 9 After Dark"
+text = "Channel 5 — After Dark"
 targetType = "node"
 nodeId = "after_dark"
 time_progression_minutes = 0
 show_when_locked = true
-locked_text = "Channel 9 After Dark — it comes on at eleven, once the living room's empty."
+locked_text = "Channel 5 — After Dark: it comes on at eleven, once the living room's empty."
 conditions = { version = "1.0", logic = "AND", items = [{ type = "time_of_day", start_time = "23:00", end_time = "02:00" }, { type = "npc_at_location", npc_id = "npc_laura", location_id = "home_living_room", operator = "is_absent" }, { type = "npc_at_location", npc_id = "npc_mark", location_id = "home_living_room", operator = "is_absent" }, { type = "npc_at_location", npc_id = "npc_ryan", location_id = "home_living_room", operator = "is_absent" }] }
+
+[[canvases.nodes.exit_block.choices]]
+text = "Turn the TV off"
+targetType = "location"
+locationId = "home_living_room"
+time_progression_minutes = 0
+
+# P71 — the list again, for "Change the channel": not the first screen, so it doesn't count another watch (v2.py:17063-17064).
+[[canvases.nodes]]
+id = "watch_more"
+name = "Watch TV"
+blocks = [
+  { type = "paragraph", content = "You curl up at the end of the couch." },
+]
+
+[canvases.nodes.exit_block]
+type = "choices"
+
+[[canvases.nodes.exit_block.choices]]
+text = "Channel 1 — News"
+targetType = "node"
+nodeId = "news"
+time_progression_minutes = 0
+
+[[canvases.nodes.exit_block.choices]]
+text = "Channel 2 — Flatmates"
+targetType = "node"
+nodeId = "sitcom"
+time_progression_minutes = 0
+
+[[canvases.nodes.exit_block.choices]]
+text = "Channel 3 — Kitchen Rescue"
+targetType = "node"
+nodeId = "cooking"
+time_progression_minutes = 0
+
+[[canvases.nodes.exit_block.choices]]
+text = "Channel 4 — The Match"
+targetType = "node"
+nodeId = "sports"
+time_progression_minutes = 0
+
+# Channel 5: 23:00-02:00 (time_of_day wraps past midnight, v2.py:4826-4829) and nobody in the room. One grey line
+# for both: a choice has one locked_text (v2.py:17428-17470), and no row puts anyone here after 23:00.
+[[canvases.nodes.exit_block.choices]]
+text = "Channel 5 — After Dark"
+targetType = "node"
+nodeId = "after_dark"
+time_progression_minutes = 0
+show_when_locked = true
+locked_text = "Channel 5 — After Dark: it comes on at eleven, once the living room's empty."
+conditions = { version = "1.0", logic = "AND", items = [{ type = "time_of_day", start_time = "23:00", end_time = "02:00" }, { type = "npc_at_location", npc_id = "npc_laura", location_id = "home_living_room", operator = "is_absent" }, { type = "npc_at_location", npc_id = "npc_mark", location_id = "home_living_room", operator = "is_absent" }, { type = "npc_at_location", npc_id = "npc_ryan", location_id = "home_living_room", operator = "is_absent" }] }
+
+[[canvases.nodes.exit_block.choices]]
+text = "Turn the TV off"
+targetType = "location"
+locationId = "home_living_room"
+time_progression_minutes = 0
 
 [[canvases.nodes]]
 id = "news"
-name = "Channel 4 News"
+name = "Channel 1 — News"
 blocks = [
   { type = "paragraph", content = "A newsreader in a sharp blazer: \"A bus strike two towns over, and a fire where nobody was hurt.\" The weatherman promises rain again." },
   { type = "group", props = { conditions = { version = "1.0", logic = "AND", items = [{ type = "npc_at_location", npc_id = "npc_mark", location_id = "home_living_room", operator = "is_present" }, { type = "npc_at_location", npc_id = "npc_ryan", location_id = "home_living_room", operator = "is_present" }] } }, blocks = [
@@ -5598,7 +5657,7 @@ effects = [{ trait = "energy", op = "add", value = 5, clamp = true }]
 
 [[canvases.nodes]]
 id = "sitcom"
-name = "Flatmates"
+name = "Channel 2 — Flatmates"
 blocks = [
   { type = "paragraph", content = "Four friends fight over a couch in an apartment too big for their jobs. \"It's my couch! Get your own couch!\" The laugh track does the rest. You laugh once, at the dog." },
   { type = "group", props = { conditions = { version = "1.0", logic = "AND", items = [{ type = "npc_at_location", npc_id = "npc_mark", location_id = "home_living_room", operator = "is_present" }, { type = "npc_at_location", npc_id = "npc_ryan", location_id = "home_living_room", operator = "is_present" }] } }, blocks = [
@@ -5629,7 +5688,7 @@ effects = [{ trait = "energy", op = "add", value = 5, clamp = true }]
 
 [[canvases.nodes]]
 id = "cooking"
-name = "Kitchen Rescue"
+name = "Channel 3 — Kitchen Rescue"
 blocks = [
   { type = "paragraph", content = "A chef shouts at a man about his risotto. \"This is glue! Glue!\" The man nearly cries into it. By the end you're starving." },
   { type = "group", props = { conditions = { version = "1.0", logic = "AND", items = [{ type = "npc_at_location", npc_id = "npc_mark", location_id = "home_living_room", operator = "is_present" }, { type = "npc_at_location", npc_id = "npc_ryan", location_id = "home_living_room", operator = "is_present" }] } }, blocks = [
@@ -5660,7 +5719,7 @@ effects = [{ trait = "energy", op = "add", value = 5, clamp = true }]
 
 [[canvases.nodes]]
 id = "sports"
-name = "The Match"
+name = "Channel 4 — The Match"
 blocks = [
   { type = "paragraph", content = "Two teams you don't follow run up and down a wet pitch. Last minute, somebody scores. \"Unbelievable! Absolutely unbelievable!\" the commentator screams." },
   { type = "group", props = { conditions = { version = "1.0", logic = "AND", items = [{ type = "npc_at_location", npc_id = "npc_mark", location_id = "home_living_room", operator = "is_present" }, { type = "npc_at_location", npc_id = "npc_ryan", location_id = "home_living_room", operator = "is_present" }] } }, blocks = [
@@ -5692,9 +5751,9 @@ effects = [{ trait = "energy", op = "add", value = 5, clamp = true }]
 # Watch only (LO "3 watch only"; release 1 is sex she sees, craft/heat.md:58): on the screen and on her body.
 [[canvases.nodes]]
 id = "after_dark"
-name = "Channel 9 After Dark"
+name = "Channel 5 — After Dark"
 blocks = [
-  { type = "paragraph", content = "You turn the sound right down and find Channel 9." },
+  { type = "paragraph", content = "You turn the sound right down and find Channel 5." },
   { type = "image", props = { description = "Her view from a dark couch: a TV screen showing a woman in her twenties on her knees with a man in his thirties, his cock in her mouth, his hand in her hair. The room lit only by the screen. Nobody looking at the camera.", search_queries = ["tv screen porn blowjob dark living room gif", "woman watching porn on tv dark room pov gif"], pool_dir = "sex/tv_after_dark_t5", pool = 4 } },
   { type = "paragraph", content = "On the screen a woman is on her knees on a hotel carpet. A man has his fist in her hair. His cock slides in and out of her mouth, slow, all the way, until she gags and he holds her there." },
   { type = "paragraph", content = "Your breath goes short. Heat pools low in your belly and spreads between your legs." },
@@ -5707,7 +5766,7 @@ blocks = [
   ] },
   { type = "paragraph", content = "You're wet. You can feel it. You press your thighs together hard and keep your hands flat on the cushion." },
   { type = "paragraph", content = "He pulls out and comes across her face. Your pulse is in your ears, and between your legs." },
-  { type = "paragraph", content = "A line crawls along the bottom of the screen: Channel 9 After Dark, every night at eleven." },
+  { type = "paragraph", content = "A line crawls along the bottom of the screen: Channel 5 After Dark, every night at eleven." },
 ]
 
 [canvases.nodes.exit_block]
@@ -5716,7 +5775,7 @@ type = "choices"
 [[canvases.nodes.exit_block.choices]]
 text = "Change the channel"
 targetType = "node"
-nodeId = "watch"
+nodeId = "watch_more"
 time_progression_minutes = 30
 flagEffects = [{ flag = "watched_after_dark", op = "set" }]
 

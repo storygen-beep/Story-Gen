@@ -44,7 +44,7 @@ flag_keys = [
   "ran_once",
   # P65 — gym passes; setting one again restarts its day (v2.py:7516-7522)
   "gym_day_pass", "gym_week_pass", "gym_month_pass",
-  # P64 — Channel 9, seen once
+  # P64 — Channel 5 After Dark (Channel 9 until P71), seen once
   "watched_after_dark",
   # P32 — met flags for the people P32 schedules (their meetings set them)
   "met_hale", "met_pratt", "met_cross", "met_nadia", "met_holt", "met_rosa", "met_frank", "met_danny", "met_marco",

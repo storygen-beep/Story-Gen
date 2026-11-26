@@ -3258,6 +3258,42 @@
       "sha256": "085c15c86c9c3b977d9699a075f76c8cbb60716dc3678227d368fadb3a04509b",
       "words": "ENI for LO (delegated 2026-11-24): yes again to P70: the hello's greeting follows the hour (Morning / Evening); the hint names his weekend hours.",
       "date": "2026-11-27"
+    },
+    {
+      "card": "P71",
+      "sha256": "694749b8bfd7b0bc7809649eaa3a780690045106858028ad55645a91947ad946",
+      "words": "ENI for LO (delegated 2026-11-24): yes to P71: channels numbered 1 to 5, Channel 9 becomes 5, Turn the TV off (opening Watch TV still spends a watch; named on the card). LO 2026-11-27: \"name them channel 1 2 3 4 5 like htis and turn tv off option too\".",
+      "date": "2026-11-27"
+    },
+    {
+      "card": "P64",
+      "sha256": "da95ef0c215bb4ce30b0337138e459f1ae195b28c4f04bc75b60892f0cb9b4d6",
+      "words": "ENI for LO (delegated 2026-11-24): yes to P64's correction: Change the channel goes to a second list screen so it doesn't spend another watch.",
+      "date": "2026-11-27"
+    },
+    {
+      "card": "P64",
+      "sha256": "15dff43789abf792f94b1338c11e85e778612728c27bd168dac097805f6f92fd",
+      "words": "ENI for LO (delegated 2026-11-24): yes again to P64: Does lines for Turn the TV off and watch_more.",
+      "date": "2026-11-27"
+    },
+    {
+      "card": "P71",
+      "sha256": "3a4e5a13e7e3a90588499349ccbc5aacbbbd8d7792c9e698b00be6aa284ab70e",
+      "words": "ENI for LO (delegated 2026-11-24): yes again to P71: the TV's daily line says what was counted (\"you've had the TV on twice today.\").",
+      "date": "2026-11-27"
+    },
+    {
+      "card": "P64",
+      "sha256": "db5d8d649d0bc42c6a84522a4a42aaccd5f4dffa8258d3448822de321fc9af04",
+      "words": "ENI for LO (delegated 2026-11-24): yes again to P64: the TV's daily line says what was counted (\"you've had the TV on twice today.\").",
+      "date": "2026-11-27"
+    },
+    {
+      "card": "P34",
+      "sha256": "3c6cb93b4dc608cd5cdf7c0b774ddb1cf0d7bc1d29a1c7961613d72ec671d8cc",
+      "words": "ENI for LO (delegated 2026-11-24): yes again to P34: the TV's daily line says what was counted (\"you've had the TV on twice today.\").",
+      "date": "2026-11-27"
     }
   ]
 }

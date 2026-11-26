@@ -1,50 +1,57 @@
 {
  "piece": "P64",
- "pass": 5,
+ "pass": 7,
  "screens": {
   "home_tv.watch": {
-   "text": "9f522cf8f7db133b",
+   "text": "421db0e327503c92",
    "traits": "44136fa355b3678a",
    "facts": "19ce9fc19f591048",
    "facts2": "19ce9fc19f591048",
-   "all": "649d519633199bb8"
+   "all": "2307f209f180b280"
+  },
+  "home_tv.watch_more": {
+   "text": "b61bf583112771ec",
+   "traits": "44136fa355b3678a",
+   "facts": "de2cb23d010830b3",
+   "facts2": "de2cb23d010830b3",
+   "all": "0cf5ddf415e24294"
   },
   "home_tv.news": {
-   "text": "f1fd2b2d75117b98",
+   "text": "d20748ba2c28ac5e",
    "traits": "cbe784dabd345f8d",
-   "facts": "a5626c9e1ce0cd10",
-   "facts2": "a5ff49eefab1fd84",
-   "all": "a3214c3b685ed344"
+   "facts": "314997266ac1c9a4",
+   "facts2": "81103bfb9d096e11",
+   "all": "2085932d6951f184"
   },
   "home_tv.sitcom": {
-   "text": "a280baa711664d70",
+   "text": "1a97638c0f45f984",
    "traits": "cbe784dabd345f8d",
-   "facts": "a5626c9e1ce0cd10",
-   "facts2": "a5ff49eefab1fd84",
-   "all": "3f71ac4a9be89851"
+   "facts": "314997266ac1c9a4",
+   "facts2": "81103bfb9d096e11",
+   "all": "77954d37266734bc"
   },
   "home_tv.cooking": {
-   "text": "9ac8f8bd1644f113",
+   "text": "80004764ac74febf",
    "traits": "cbe784dabd345f8d",
-   "facts": "a5626c9e1ce0cd10",
-   "facts2": "a5ff49eefab1fd84",
-   "all": "39ed63e7f85b2d2c"
+   "facts": "314997266ac1c9a4",
+   "facts2": "81103bfb9d096e11",
+   "all": "56a48f3e00e19f2a"
   },
   "home_tv.sports": {
-   "text": "491574ef446a3c7f",
+   "text": "09919fa69f64e5ca",
    "traits": "cbe784dabd345f8d",
-   "facts": "a5626c9e1ce0cd10",
-   "facts2": "a5ff49eefab1fd84",
-   "all": "b4ba06b4ce0f5c8e"
+   "facts": "314997266ac1c9a4",
+   "facts2": "81103bfb9d096e11",
+   "all": "df3560b13284452b"
   },
   "home_tv.after_dark": {
-   "text": "586a6e747db17e9f",
+   "text": "c958337be22edf51",
    "traits": "44136fa355b3678a",
    "facts": "8b0f7870497b38b6",
    "facts2": "8b0f7870497b38b6",
-   "all": "45b5aed28fe08031"
+   "all": "b3043cb0106c97ea"
   },
-  "*": "01050936466cd7a6"
+  "*": "0560f5676bec5ade"
  },
  "rows": {
   "B1": "5276068df1ca6fa9",
@@ -93,7 +100,7 @@
   "C1220": "18d85534582def9d",
   "C1221": "3835fed23cc316c7",
   "C1177": "ef9bbbe96651efc7",
-  "C1176": "7632b28c693a43a4",
+  "C1176": "655e8e2b731598c9",
   "C1189": "2afadc6bbe1996bd",
   "C1200": "65e6616cd17c7eb3",
   "C1002": "657248766e62061f",
@@ -155,6 +162,7 @@
   "C2198": "27e6b45f50edd3ac",
   "C769": "f6b6f78a8f2e5ed7",
   "C794": "bad76e5963432385",
+  "C2201": "d119dfe665f76359",
   "C795": "34139e6a6914e171",
   "C804": "5358489178bff0a4",
   "L106": "13a714429d15f3b2",
@@ -201,128 +209,147 @@
    "row": "B1",
    "screen": "*",
    "verdict": "PASS",
-   "line": "Don't touch the remote, kid. I'm watching this one.",
-   "why": "Mark wants the remote, Ryan wants her to see the bit, on the screen before anything; Channel 9 has no person and no act by anyone toward her",
+   "line": "Leave it on this one, kid. I'm watching too.",
+   "why": "Mark wants the channel kept, Ryan wants waking if anything happens, on the screen before anything; Channel 5 has no person and no act toward her",
    "cause": null,
    "note": false,
-   "screen_hash": "d3ce29d2170a5f3d",
+   "screen_hash": "da8ae1e29265d9e8",
    "row_hash": "5276068df1ca6fa9",
    "carried": true,
-   "pass": 1
+   "pass": 6
   },
   {
    "row": "B10",
    "screen": "home_tv.after_dark",
    "verdict": "PASS",
-   "line": "A line crawls along the bottom of the screen: Channel 9 After Dark, every night at eleven.",
-   "why": "open only 23:00-02:00 with Laura, Mark and Ryan absent from the Living Room (who_is_where: all three gone by 23:00 every day); names nobody in the room; claims no past and no 'first time'; 'every night at eleven' is true, the window is every day; the same text on a second visit reads as the channel's kind of thing",
+   "line": "A line crawls along the bottom of the screen: Channel 5 After Dark, every night at eleven.",
+   "why": "open only 23:00-02:00 with Laura, Mark and Ryan absent (who_is_where: all gone by 23:00 every day); 'Channel 5' agrees with the label and the crawl; no past, no first time; a replay from watch_more reads the same (pass 2: only the trigger's cooldown_message changed; this screen's text and facts re-read unchanged)",
    "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "586a6e747db17e9f",
+    "text": "c958337be22edf51",
     "traits": "44136fa355b3678a",
     "facts": "8b0f7870497b38b6",
     "facts2": "8b0f7870497b38b6",
-    "all": "45b5aed28fe08031"
+    "all": "b3043cb0106c97ea"
    },
    "row_hash": "c1c0e2ac2588a579",
-   "carried": true,
-   "pass": 2
+   "carried": false,
+   "pass": 7
   },
   {
    "row": "B10",
    "screen": "home_tv.cooking",
    "verdict": "PASS",
-   "line": "Leave it on this one, kid. / Not bad, actually. / Leave it on this one, kid. I'm watching too. / Wake me up if anything happens. Or if anyone comes in.",
-   "why": "one if/elseif chain (both, then Mark, then Ryan), each behind npc_at_location is_present at home_living_room; Mark there weekdays 16:30-23, Sat 10-19, Sun 12-23, Ryan weekdays 19-23, weekends 12-17 (who_is_where); no line now speaks of the remote, so nothing clashes with 'You curl up at the end of the couch with the remote.' and her picking the channel; the Ryan-alone line never shows today (Mark is always in when Ryan is) and is harmless if a row ever opens it; no past, no 'first time'",
+   "line": "Leave it on this one, kid. / Not bad, actually. / Leave it on this one, kid. I'm watching too.",
+   "why": "one if/elseif chain behind is_present at home_living_room (Mark weekdays 16:30-23, Sat 10-19, Sun 12-23; Ryan weekdays 19-23, weekends 12-17); reached from watch_more only after 23:30, when the chain shows nobody; no past, no first time; the title is the label (pass 2: only the trigger's cooldown_message changed; this screen's text and facts re-read unchanged)",
    "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "9ac8f8bd1644f113",
+    "text": "80004764ac74febf",
     "traits": "cbe784dabd345f8d",
-    "facts": "a5626c9e1ce0cd10",
-    "facts2": "a5ff49eefab1fd84",
-    "all": "39ed63e7f85b2d2c"
+    "facts": "314997266ac1c9a4",
+    "facts2": "81103bfb9d096e11",
+    "all": "56a48f3e00e19f2a"
    },
    "row_hash": "c1c0e2ac2588a579",
-   "carried": true,
-   "pass": 3
+   "carried": false,
+   "pass": 7
   },
   {
    "row": "B10",
    "screen": "home_tv.news",
    "verdict": "PASS",
-   "line": "Leave it on this one, kid. / Not bad, actually. / Leave it on this one, kid. I'm watching too. / Wake me up if anything happens. Or if anyone comes in.",
-   "why": "one if/elseif chain (both, then Mark, then Ryan), each behind npc_at_location is_present at home_living_room; Mark there weekdays 16:30-23, Sat 10-19, Sun 12-23, Ryan weekdays 19-23, weekends 12-17 (who_is_where); no line now speaks of the remote, so nothing clashes with 'You curl up at the end of the couch with the remote.' and her picking the channel; the Ryan-alone line never shows today (Mark is always in when Ryan is) and is harmless if a row ever opens it; no past, no 'first time'",
+   "line": "Leave it on this one, kid. / Not bad, actually. / Leave it on this one, kid. I'm watching too.",
+   "why": "one if/elseif chain behind is_present at home_living_room (Mark weekdays 16:30-23, Sat 10-19, Sun 12-23; Ryan weekdays 19-23, weekends 12-17); reached from watch_more only after 23:30, when the chain shows nobody; no past, no first time; the title is the label (pass 2: only the trigger's cooldown_message changed; this screen's text and facts re-read unchanged)",
    "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "f1fd2b2d75117b98",
+    "text": "d20748ba2c28ac5e",
     "traits": "cbe784dabd345f8d",
-    "facts": "a5626c9e1ce0cd10",
-    "facts2": "a5ff49eefab1fd84",
-    "all": "a3214c3b685ed344"
+    "facts": "314997266ac1c9a4",
+    "facts2": "81103bfb9d096e11",
+    "all": "2085932d6951f184"
    },
    "row_hash": "c1c0e2ac2588a579",
-   "carried": true,
-   "pass": 3
+   "carried": false,
+   "pass": 7
   },
   {
    "row": "B10",
    "screen": "home_tv.sitcom",
    "verdict": "PASS",
-   "line": "Leave it on this one, kid. / Not bad, actually. / Leave it on this one, kid. I'm watching too. / Wake me up if anything happens. Or if anyone comes in.",
-   "why": "one if/elseif chain (both, then Mark, then Ryan), each behind npc_at_location is_present at home_living_room; Mark there weekdays 16:30-23, Sat 10-19, Sun 12-23, Ryan weekdays 19-23, weekends 12-17 (who_is_where); no line now speaks of the remote, so nothing clashes with 'You curl up at the end of the couch with the remote.' and her picking the channel; the Ryan-alone line never shows today (Mark is always in when Ryan is) and is harmless if a row ever opens it; no past, no 'first time'",
+   "line": "Leave it on this one, kid. / Not bad, actually. / Leave it on this one, kid. I'm watching too.",
+   "why": "one if/elseif chain behind is_present at home_living_room (Mark weekdays 16:30-23, Sat 10-19, Sun 12-23; Ryan weekdays 19-23, weekends 12-17); reached from watch_more only after 23:30, when the chain shows nobody; no past, no first time; the title is the label (pass 2: only the trigger's cooldown_message changed; this screen's text and facts re-read unchanged)",
    "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "a280baa711664d70",
+    "text": "1a97638c0f45f984",
     "traits": "cbe784dabd345f8d",
-    "facts": "a5626c9e1ce0cd10",
-    "facts2": "a5ff49eefab1fd84",
-    "all": "3f71ac4a9be89851"
+    "facts": "314997266ac1c9a4",
+    "facts2": "81103bfb9d096e11",
+    "all": "77954d37266734bc"
    },
    "row_hash": "c1c0e2ac2588a579",
-   "carried": true,
-   "pass": 3
+   "carried": false,
+   "pass": 7
   },
   {
    "row": "B10",
    "screen": "home_tv.sports",
    "verdict": "PASS",
-   "line": "Leave it on this one, kid. / Not bad, actually. / Leave it on this one, kid. I'm watching too. / Wake me up if anything happens. Or if anyone comes in.",
-   "why": "one if/elseif chain (both, then Mark, then Ryan), each behind npc_at_location is_present at home_living_room; Mark there weekdays 16:30-23, Sat 10-19, Sun 12-23, Ryan weekdays 19-23, weekends 12-17 (who_is_where); no line now speaks of the remote, so nothing clashes with 'You curl up at the end of the couch with the remote.' and her picking the channel; the Ryan-alone line never shows today (Mark is always in when Ryan is) and is harmless if a row ever opens it; no past, no 'first time'",
+   "line": "Leave it on this one, kid. / Not bad, actually. / Leave it on this one, kid. I'm watching too.",
+   "why": "one if/elseif chain behind is_present at home_living_room (Mark weekdays 16:30-23, Sat 10-19, Sun 12-23; Ryan weekdays 19-23, weekends 12-17); reached from watch_more only after 23:30, when the chain shows nobody; no past, no first time; the title is the label (pass 2: only the trigger's cooldown_message changed; this screen's text and facts re-read unchanged)",
    "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "491574ef446a3c7f",
+    "text": "09919fa69f64e5ca",
     "traits": "cbe784dabd345f8d",
-    "facts": "a5626c9e1ce0cd10",
-    "facts2": "a5ff49eefab1fd84",
-    "all": "b4ba06b4ce0f5c8e"
+    "facts": "314997266ac1c9a4",
+    "facts2": "81103bfb9d096e11",
+    "all": "df3560b13284452b"
    },
    "row_hash": "c1c0e2ac2588a579",
-   "carried": true,
-   "pass": 3
+   "carried": false,
+   "pass": 7
   },
   {
    "row": "B10",
    "screen": "home_tv.watch",
    "verdict": "PASS",
-   "line": "You curl up at the end of the couch.",
-   "why": "names nobody, claims no past and no 'first time', no longer claims the remote (Mark's when he's in); true at any hour, with anyone or nobody in the room, and on a second visit (Ryan 'sprawls at the other end of the couch' on the channels, so her end is free)",
+   "line": "cooldown_message \"you've had the TV on twice today.\" / Turn the TV off (0 minutes, back to the Living Room)",
+   "why": "the row greys only at dayCount 2 of the day (canTriggerActivity, v2.py:5642), and each count is an opening of Watch TV (markCanvasTriggered on node 0, v2.py:17063-17064), which shows the channel list; so after two openings, even two turned straight off, she has had the TV on twice today; watch_more counts nothing, so one opening with Change the channel is still one; agrees with P64 card line 6 and P71 card line 18",
    "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "9f522cf8f7db133b",
+    "text": "421db0e327503c92",
     "traits": "44136fa355b3678a",
     "facts": "19ce9fc19f591048",
     "facts2": "19ce9fc19f591048",
-    "all": "649d519633199bb8"
+    "all": "2307f209f180b280"
    },
    "row_hash": "c1c0e2ac2588a579",
-   "carried": true,
-   "pass": 4
+   "carried": false,
+   "pass": 7
+  },
+  {
+   "row": "B10",
+   "screen": "home_tv.watch_more",
+   "verdict": "PASS",
+   "line": "You curl up at the end of the couch.",
+   "why": "reached only from Channel 5 (23:30-02:30), the room empty; she is already on the couch, and curling up there is a posture, not an arrival claim, so it holds; the grey line still true after 02:00 (pass 2: only the trigger's cooldown_message changed; this screen's text and facts re-read unchanged)",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "b61bf583112771ec",
+    "traits": "44136fa355b3678a",
+    "facts": "de2cb23d010830b3",
+    "facts2": "de2cb23d010830b3",
+    "all": "0cf5ddf415e24294"
+   },
+   "row_hash": "c1c0e2ac2588a579",
+   "carried": false,
+   "pass": 7
   },
   {
    "row": "B11",
@@ -338,6 +365,25 @@
    "pass": 1
   },
   {
+   "row": "B11",
+   "screen": "home_tv.watch_more",
+   "verdict": "PASS",
+   "line": "Channel 1 \u2014 News / Channel 2 \u2014 Flatmates / Channel 3 \u2014 Kitchen Rescue / Channel 4 \u2014 The Match / Channel 5 \u2014 After Dark / Turn the TV off",
+   "why": "each choice opens the channel it names or turns the TV off",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "8298e9a8f228ae6e",
+    "traits": "44136fa355b3678a",
+    "facts": "de2cb23d010830b3",
+    "facts2": "de2cb23d010830b3",
+    "all": "dbdc7a05fd414aa0"
+   },
+   "row_hash": "1e252efd0904a971",
+   "carried": true,
+   "pass": 6
+  },
+  {
    "row": "B12",
    "screen": "*",
    "verdict": "N/A",
@@ -349,6 +395,25 @@
    "row_hash": "fd109745c67b71d7",
    "carried": true,
    "pass": 1
+  },
+  {
+   "row": "B12",
+   "screen": "home_tv.watch_more",
+   "verdict": "N/A",
+   "line": "",
+   "why": "a channel list, not a charged scene",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "8298e9a8f228ae6e",
+    "traits": "44136fa355b3678a",
+    "facts": "de2cb23d010830b3",
+    "facts2": "de2cb23d010830b3",
+    "all": "dbdc7a05fd414aa0"
+   },
+   "row_hash": "fd109745c67b71d7",
+   "carried": true,
+   "pass": 6
   },
   {
    "row": "B13",
@@ -364,17 +429,36 @@
    "pass": 1
   },
   {
+   "row": "B13",
+   "screen": "home_tv.watch_more",
+   "verdict": "N/A",
+   "line": "",
+   "why": "not a moment alone with her body",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "8298e9a8f228ae6e",
+    "traits": "44136fa355b3678a",
+    "facts": "de2cb23d010830b3",
+    "facts2": "de2cb23d010830b3",
+    "all": "dbdc7a05fd414aa0"
+   },
+   "row_hash": "aaf6518b64dcce55",
+   "carried": true,
+   "pass": 6
+  },
+  {
    "row": "B2",
    "screen": "*",
    "verdict": "N/A",
    "line": "",
-   "why": "a solo loop verb (Watch TV, 2 a day); no person's step to go further; Channel 9 is sex she sees on a screen, not a step with anyone",
+   "why": "a solo loop verb (Watch TV, 2 a day); no person's step to take further",
    "cause": null,
    "note": false,
-   "screen_hash": "d3ce29d2170a5f3d",
+   "screen_hash": "da8ae1e29265d9e8",
    "row_hash": "4d9f2ebbce9a39cc",
    "carried": true,
-   "pass": 1
+   "pass": 6
   },
   {
    "row": "B3",
@@ -409,6 +493,25 @@
    "pass": 2
   },
   {
+   "row": "B3",
+   "screen": "home_tv.watch_more",
+   "verdict": "PASS",
+   "line": "Channel 1 \u2014 News / Channel 2 \u2014 Flatmates / Channel 3 \u2014 Kitchen Rescue / Channel 4 \u2014 The Match / Channel 5 \u2014 After Dark / Turn the TV off",
+   "why": "the list names what comes next",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "8298e9a8f228ae6e",
+    "traits": "44136fa355b3678a",
+    "facts": "de2cb23d010830b3",
+    "facts2": "de2cb23d010830b3",
+    "all": "dbdc7a05fd414aa0"
+   },
+   "row_hash": "4d1fce1c4523b5d4",
+   "carried": true,
+   "pass": 6
+  },
+  {
    "row": "B4",
    "screen": "*",
    "verdict": "PASS",
@@ -420,6 +523,25 @@
    "row_hash": "ced37cb0de6e7202",
    "carried": true,
    "pass": 1
+  },
+  {
+   "row": "B4",
+   "screen": "home_tv.watch_more",
+   "verdict": "N/A",
+   "line": "",
+   "why": "no reaction on a list screen",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "8298e9a8f228ae6e",
+    "traits": "44136fa355b3678a",
+    "facts": "de2cb23d010830b3",
+    "facts2": "de2cb23d010830b3",
+    "all": "dbdc7a05fd414aa0"
+   },
+   "row_hash": "ced37cb0de6e7202",
+   "carried": true,
+   "pass": 6
   },
   {
    "row": "B5",
@@ -435,6 +557,25 @@
    "pass": 1
   },
   {
+   "row": "B5",
+   "screen": "home_tv.watch_more",
+   "verdict": "N/A",
+   "line": "",
+   "why": "reached only after 23:30 with the room empty; nobody there to notice",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "8298e9a8f228ae6e",
+    "traits": "44136fa355b3678a",
+    "facts": "de2cb23d010830b3",
+    "facts2": "de2cb23d010830b3",
+    "all": "dbdc7a05fd414aa0"
+   },
+   "row_hash": "efcbd1ac6a95e2f2",
+   "carried": true,
+   "pass": 6
+  },
+  {
    "row": "B6",
    "screen": "*",
    "verdict": "PASS",
@@ -448,6 +589,25 @@
    "pass": 1
   },
   {
+   "row": "B6",
+   "screen": "home_tv.watch_more",
+   "verdict": "PASS",
+   "line": "Turn the TV off",
+   "why": "the list has its way out",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "8298e9a8f228ae6e",
+    "traits": "44136fa355b3678a",
+    "facts": "de2cb23d010830b3",
+    "facts2": "de2cb23d010830b3",
+    "all": "dbdc7a05fd414aa0"
+   },
+   "row_hash": "0e32092e9fe64f2c",
+   "carried": true,
+   "pass": 6
+  },
+  {
    "row": "B7",
    "screen": "*",
    "verdict": "PASS",
@@ -459,6 +619,25 @@
    "row_hash": "cef53154cc971fef",
    "carried": true,
    "pass": 1
+  },
+  {
+   "row": "B7",
+   "screen": "home_tv.watch_more",
+   "verdict": "N/A",
+   "line": "",
+   "why": "no explicit beat",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "8298e9a8f228ae6e",
+    "traits": "44136fa355b3678a",
+    "facts": "de2cb23d010830b3",
+    "facts2": "de2cb23d010830b3",
+    "all": "dbdc7a05fd414aa0"
+   },
+   "row_hash": "cef53154cc971fef",
+   "carried": true,
+   "pass": 6
   },
   {
    "row": "B8",
@@ -478,114 +657,133 @@
    "screen": "home_tv.after_dark",
    "verdict": "PASS",
    "line": "Your nipples go tight against your top.",
-   "why": "'your top' is behind clothing_slot top equipped, with 'Your nipples go tight.' under unequipped; no number; 30 minutes on each exit, no meter, no energy, as the card says",
+   "why": "30 minutes on each exit, the flag set, no meter; 'your top' behind clothing_slot top equipped (pass 2: only the trigger's cooldown_message changed; this screen's text and facts re-read unchanged)",
    "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "586a6e747db17e9f",
+    "text": "c958337be22edf51",
     "traits": "44136fa355b3678a",
     "facts": "8b0f7870497b38b6",
     "facts2": "8b0f7870497b38b6",
-    "all": "45b5aed28fe08031"
+    "all": "b3043cb0106c97ea"
    },
    "row_hash": "80d415cf08e0ebfe",
-   "carried": true,
-   "pass": 2
+   "carried": false,
+   "pass": 7
   },
   {
    "row": "B8",
    "screen": "home_tv.cooking",
    "verdict": "PASS",
-   "line": "A chef shouts at a man about his risotto. \"This is glue! Glue!\"",
-   "why": "no garment named; no number in the prose; Done spends 60 minutes and +5 energy clamped, as the card and PLAN.md:309 (TV +5) say",
+   "line": "Done: 60 minutes, energy +5",
+   "why": "matches the card: an hour, +5 energy, the cap of two on the trigger (pass 2: only the trigger's cooldown_message changed; this screen's text and facts re-read unchanged)",
    "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "9ac8f8bd1644f113",
+    "text": "80004764ac74febf",
     "traits": "cbe784dabd345f8d",
-    "facts": "a5626c9e1ce0cd10",
-    "facts2": "a5ff49eefab1fd84",
-    "all": "39ed63e7f85b2d2c"
+    "facts": "314997266ac1c9a4",
+    "facts2": "81103bfb9d096e11",
+    "all": "56a48f3e00e19f2a"
    },
    "row_hash": "80d415cf08e0ebfe",
-   "carried": true,
-   "pass": 3
+   "carried": false,
+   "pass": 7
   },
   {
    "row": "B8",
    "screen": "home_tv.news",
    "verdict": "PASS",
-   "line": "A newsreader in a sharp blazer: \"A bus strike two towns over, and a fire where nobody was hurt.\"",
-   "why": "no garment named; no number in the prose; Done spends 60 minutes and +5 energy clamped, as the card and PLAN.md:309 (TV +5) say",
+   "line": "Done: 60 minutes, energy +5",
+   "why": "matches the card: an hour, +5 energy, the cap of two on the trigger (pass 2: only the trigger's cooldown_message changed; this screen's text and facts re-read unchanged)",
    "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "f1fd2b2d75117b98",
+    "text": "d20748ba2c28ac5e",
     "traits": "cbe784dabd345f8d",
-    "facts": "a5626c9e1ce0cd10",
-    "facts2": "a5ff49eefab1fd84",
-    "all": "a3214c3b685ed344"
+    "facts": "314997266ac1c9a4",
+    "facts2": "81103bfb9d096e11",
+    "all": "2085932d6951f184"
    },
    "row_hash": "80d415cf08e0ebfe",
-   "carried": true,
-   "pass": 3
+   "carried": false,
+   "pass": 7
   },
   {
    "row": "B8",
    "screen": "home_tv.sitcom",
    "verdict": "PASS",
-   "line": "Four friends fight over a couch in an apartment too big for their jobs. \"It's my couch! Get your own couch!\"",
-   "why": "no garment named; no number in the prose; Done spends 60 minutes and +5 energy clamped, as the card and PLAN.md:309 (TV +5) say",
+   "line": "Done: 60 minutes, energy +5",
+   "why": "matches the card: an hour, +5 energy, the cap of two on the trigger (pass 2: only the trigger's cooldown_message changed; this screen's text and facts re-read unchanged)",
    "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "a280baa711664d70",
+    "text": "1a97638c0f45f984",
     "traits": "cbe784dabd345f8d",
-    "facts": "a5626c9e1ce0cd10",
-    "facts2": "a5ff49eefab1fd84",
-    "all": "3f71ac4a9be89851"
+    "facts": "314997266ac1c9a4",
+    "facts2": "81103bfb9d096e11",
+    "all": "77954d37266734bc"
    },
    "row_hash": "80d415cf08e0ebfe",
-   "carried": true,
-   "pass": 3
+   "carried": false,
+   "pass": 7
   },
   {
    "row": "B8",
    "screen": "home_tv.sports",
    "verdict": "PASS",
-   "line": "Two teams you don't follow run up and down a wet pitch. Last minute, somebody scores.",
-   "why": "no garment named; no number in the prose; Done spends 60 minutes and +5 energy clamped, as the card and PLAN.md:309 (TV +5) say",
+   "line": "Done: 60 minutes, energy +5",
+   "why": "matches the card: an hour, +5 energy, the cap of two on the trigger (pass 2: only the trigger's cooldown_message changed; this screen's text and facts re-read unchanged)",
    "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "491574ef446a3c7f",
+    "text": "09919fa69f64e5ca",
     "traits": "cbe784dabd345f8d",
-    "facts": "a5626c9e1ce0cd10",
-    "facts2": "a5ff49eefab1fd84",
-    "all": "b4ba06b4ce0f5c8e"
+    "facts": "314997266ac1c9a4",
+    "facts2": "81103bfb9d096e11",
+    "all": "df3560b13284452b"
    },
    "row_hash": "80d415cf08e0ebfe",
-   "carried": true,
-   "pass": 3
+   "carried": false,
+   "pass": 7
   },
   {
    "row": "B8",
    "screen": "home_tv.watch",
    "verdict": "PASS",
-   "line": "You curl up at the end of the couch.",
-   "why": "no number and no garment named; the five choices spend 0 minutes, the channels carry the costs as the card says",
+   "line": "max_triggers_per_day = 2",
+   "why": "the cap of two and Channel 5's 23:00-02:00 agree with the card (pass 2: only the trigger's cooldown_message changed; this screen's text and facts re-read unchanged)",
    "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "9f522cf8f7db133b",
+    "text": "421db0e327503c92",
     "traits": "44136fa355b3678a",
     "facts": "19ce9fc19f591048",
     "facts2": "19ce9fc19f591048",
-    "all": "649d519633199bb8"
+    "all": "2307f209f180b280"
    },
    "row_hash": "80d415cf08e0ebfe",
-   "carried": true,
-   "pass": 4
+   "carried": false,
+   "pass": 7
+  },
+  {
+   "row": "B8",
+   "screen": "home_tv.watch_more",
+   "verdict": "PASS",
+   "line": "Channel 5 \u2014 After Dark: time_of_day 23:00-02:00",
+   "why": "same conditions and labels as the first list (pass 2: only the trigger's cooldown_message changed; this screen's text and facts re-read unchanged)",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "b61bf583112771ec",
+    "traits": "44136fa355b3678a",
+    "facts": "de2cb23d010830b3",
+    "facts2": "de2cb23d010830b3",
+    "all": "0cf5ddf415e24294"
+   },
+   "row_hash": "80d415cf08e0ebfe",
+   "carried": false,
+   "pass": 7
   },
   {
    "row": "B9",
@@ -595,10 +793,10 @@
    "why": "PLAN.md declares no companion-rival here",
    "cause": null,
    "note": false,
-   "screen_hash": "d3ce29d2170a5f3d",
+   "screen_hash": "da8ae1e29265d9e8",
    "row_hash": "3b1fcdf549bcc558",
    "carried": true,
-   "pass": 1
+   "pass": 6
   },
   {
    "row": "C1002",
@@ -612,6 +810,25 @@
    "row_hash": "657248766e62061f",
    "carried": true,
    "pass": 1
+  },
+  {
+   "row": "C1002",
+   "screen": "home_tv.watch_more",
+   "verdict": "N/A",
+   "line": "",
+   "why": "no spend",
+   "cause": null,
+   "note": true,
+   "screen_hash": {
+    "text": "8298e9a8f228ae6e",
+    "traits": "44136fa355b3678a",
+    "facts": "de2cb23d010830b3",
+    "facts2": "de2cb23d010830b3",
+    "all": "dbdc7a05fd414aa0"
+   },
+   "row_hash": "657248766e62061f",
+   "carried": true,
+   "pass": 6
   },
   {
    "row": "C1158",
@@ -631,19 +848,19 @@
    "screen": "home_tv.after_dark",
    "verdict": "PASS",
    "line": "Your nipples go tight against your top.",
-   "why": "the one garment named sits in a group needing clothing_slot top equipped",
+   "why": "inside a group on clothing_slot top equipped; 'Your nipples go tight.' where none is (pass 2: only the trigger's cooldown_message changed; this screen's text and facts re-read unchanged)",
    "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "586a6e747db17e9f",
+    "text": "c958337be22edf51",
     "traits": "44136fa355b3678a",
     "facts": "8b0f7870497b38b6",
     "facts2": "8b0f7870497b38b6",
-    "all": "45b5aed28fe08031"
+    "all": "b3043cb0106c97ea"
    },
    "row_hash": "f40f51a0fd6cfd10",
-   "carried": true,
-   "pass": 2
+   "carried": false,
+   "pass": 7
   },
   {
    "row": "C1173",
@@ -657,6 +874,25 @@
    "row_hash": "541a03815a8d19c4",
    "carried": true,
    "pass": 1
+  },
+  {
+   "row": "C1173",
+   "screen": "home_tv.watch_more",
+   "verdict": "N/A",
+   "line": "",
+   "why": "no clothing door",
+   "cause": null,
+   "note": true,
+   "screen_hash": {
+    "text": "8298e9a8f228ae6e",
+    "traits": "44136fa355b3678a",
+    "facts": "de2cb23d010830b3",
+    "facts2": "de2cb23d010830b3",
+    "all": "dbdc7a05fd414aa0"
+   },
+   "row_hash": "541a03815a8d19c4",
+   "carried": true,
+   "pass": 6
   },
   {
    "row": "C1176",
@@ -698,6 +934,25 @@
    "pass": 1
   },
   {
+   "row": "C1184",
+   "screen": "home_tv.watch_more",
+   "verdict": "N/A",
+   "line": "",
+   "why": "no clothing refusal",
+   "cause": null,
+   "note": true,
+   "screen_hash": {
+    "text": "8298e9a8f228ae6e",
+    "traits": "44136fa355b3678a",
+    "facts": "de2cb23d010830b3",
+    "facts2": "de2cb23d010830b3",
+    "all": "dbdc7a05fd414aa0"
+   },
+   "row_hash": "71c57d9a2f8fdca7",
+   "carried": true,
+   "pass": 6
+  },
+  {
    "row": "C1185",
    "screen": "*",
    "verdict": "N/A",
@@ -709,6 +964,25 @@
    "row_hash": "db808998ed69c649",
    "carried": true,
    "pass": 1
+  },
+  {
+   "row": "C1185",
+   "screen": "home_tv.watch_more",
+   "verdict": "N/A",
+   "line": "",
+   "why": "no dress code",
+   "cause": null,
+   "note": true,
+   "screen_hash": {
+    "text": "8298e9a8f228ae6e",
+    "traits": "44136fa355b3678a",
+    "facts": "de2cb23d010830b3",
+    "facts2": "de2cb23d010830b3",
+    "all": "dbdc7a05fd414aa0"
+   },
+   "row_hash": "db808998ed69c649",
+   "carried": true,
+   "pass": 6
   },
   {
    "row": "C1189",
@@ -737,6 +1011,25 @@
    "pass": 1
   },
   {
+   "row": "C1198",
+   "screen": "home_tv.watch_more",
+   "verdict": "N/A",
+   "line": "",
+   "why": "no clothing refusal",
+   "cause": null,
+   "note": true,
+   "screen_hash": {
+    "text": "8298e9a8f228ae6e",
+    "traits": "44136fa355b3678a",
+    "facts": "de2cb23d010830b3",
+    "facts2": "de2cb23d010830b3",
+    "all": "dbdc7a05fd414aa0"
+   },
+   "row_hash": "48eae9ceae06ae00",
+   "carried": true,
+   "pass": 6
+  },
+  {
    "row": "C1200",
    "screen": "*",
    "verdict": "N/A",
@@ -748,6 +1041,25 @@
    "row_hash": "65e6616cd17c7eb3",
    "carried": true,
    "pass": 1
+  },
+  {
+   "row": "C1200",
+   "screen": "home_tv.watch_more",
+   "verdict": "N/A",
+   "line": "",
+   "why": "no clothes placed",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "8298e9a8f228ae6e",
+    "traits": "44136fa355b3678a",
+    "facts": "de2cb23d010830b3",
+    "facts2": "de2cb23d010830b3",
+    "all": "dbdc7a05fd414aa0"
+   },
+   "row_hash": "65e6616cd17c7eb3",
+   "carried": true,
+   "pass": 6
   },
   {
    "row": "C1206",
@@ -767,19 +1079,19 @@
    "screen": "home_tv.after_dark",
    "verdict": "PASS",
    "line": "Your nipples go tight against your top.",
-   "why": "no garment named outside its clothing condition; the bare variant names none",
+   "why": "the top is named only when one is worn (pass 2: only the trigger's cooldown_message changed; this screen's text and facts re-read unchanged)",
    "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "586a6e747db17e9f",
+    "text": "c958337be22edf51",
     "traits": "44136fa355b3678a",
     "facts": "8b0f7870497b38b6",
     "facts2": "8b0f7870497b38b6",
-    "all": "45b5aed28fe08031"
+    "all": "b3043cb0106c97ea"
    },
    "row_hash": "bfff76edbee583de",
-   "carried": true,
-   "pass": 2
+   "carried": false,
+   "pass": 7
   },
   {
    "row": "C1220",
@@ -795,6 +1107,25 @@
    "pass": 1
   },
   {
+   "row": "C1220",
+   "screen": "home_tv.watch_more",
+   "verdict": "N/A",
+   "line": "",
+   "why": "no dress code",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "8298e9a8f228ae6e",
+    "traits": "44136fa355b3678a",
+    "facts": "de2cb23d010830b3",
+    "facts2": "de2cb23d010830b3",
+    "all": "dbdc7a05fd414aa0"
+   },
+   "row_hash": "18d85534582def9d",
+   "carried": true,
+   "pass": 6
+  },
+  {
    "row": "C1221",
    "screen": "*",
    "verdict": "N/A",
@@ -806,6 +1137,25 @@
    "row_hash": "3835fed23cc316c7",
    "carried": true,
    "pass": 1
+  },
+  {
+   "row": "C1221",
+   "screen": "home_tv.watch_more",
+   "verdict": "N/A",
+   "line": "",
+   "why": "no dress-code exception",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "8298e9a8f228ae6e",
+    "traits": "44136fa355b3678a",
+    "facts": "de2cb23d010830b3",
+    "facts2": "de2cb23d010830b3",
+    "all": "dbdc7a05fd414aa0"
+   },
+   "row_hash": "3835fed23cc316c7",
+   "carried": true,
+   "pass": 6
   },
   {
    "row": "C1234",
@@ -860,6 +1210,25 @@
    "pass": 1
   },
   {
+   "row": "C1250",
+   "screen": "home_tv.watch_more",
+   "verdict": "PASS",
+   "line": "no media",
+   "why": "a list screen carries no spot",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "8298e9a8f228ae6e",
+    "traits": "44136fa355b3678a",
+    "facts": "de2cb23d010830b3",
+    "facts2": "de2cb23d010830b3",
+    "all": "dbdc7a05fd414aa0"
+   },
+   "row_hash": "fde578d75b0d3620",
+   "carried": true,
+   "pass": 6
+  },
+  {
    "row": "C1255",
    "screen": "*",
    "verdict": "PASS",
@@ -895,7 +1264,7 @@
    "note": false,
    "screen_hash": "01050936466cd7a6",
    "row_hash": "eb11e05cd75e52a9",
-   "carried": false,
+   "carried": true,
    "pass": 5
   },
   {
@@ -1035,6 +1404,25 @@
    "pass": 1
   },
   {
+   "row": "C1303",
+   "screen": "home_tv.watch_more",
+   "verdict": "N/A",
+   "line": "",
+   "why": "no need read here",
+   "cause": null,
+   "note": true,
+   "screen_hash": {
+    "text": "8298e9a8f228ae6e",
+    "traits": "44136fa355b3678a",
+    "facts": "de2cb23d010830b3",
+    "facts2": "de2cb23d010830b3",
+    "all": "dbdc7a05fd414aa0"
+   },
+   "row_hash": "5b031a6b82899cfd",
+   "carried": true,
+   "pass": 6
+  },
+  {
    "row": "C1313",
    "screen": "*",
    "verdict": "PASS",
@@ -1046,6 +1434,25 @@
    "row_hash": "c26c2fb5c1443dab",
    "carried": true,
    "pass": 1
+  },
+  {
+   "row": "C1313",
+   "screen": "home_tv.watch_more",
+   "verdict": "N/A",
+   "line": "",
+   "why": "the refill is the channel screens', judged there",
+   "cause": null,
+   "note": true,
+   "screen_hash": {
+    "text": "8298e9a8f228ae6e",
+    "traits": "44136fa355b3678a",
+    "facts": "de2cb23d010830b3",
+    "facts2": "de2cb23d010830b3",
+    "all": "dbdc7a05fd414aa0"
+   },
+   "row_hash": "c26c2fb5c1443dab",
+   "carried": true,
+   "pass": 6
   },
   {
    "row": "C1337",
@@ -1061,6 +1468,25 @@
    "pass": 1
   },
   {
+   "row": "C1337",
+   "screen": "home_tv.watch_more",
+   "verdict": "N/A",
+   "line": "",
+   "why": "no energy here",
+   "cause": null,
+   "note": true,
+   "screen_hash": {
+    "text": "8298e9a8f228ae6e",
+    "traits": "44136fa355b3678a",
+    "facts": "de2cb23d010830b3",
+    "facts2": "de2cb23d010830b3",
+    "all": "dbdc7a05fd414aa0"
+   },
+   "row_hash": "9a1ab783f9ab6731",
+   "carried": true,
+   "pass": 6
+  },
+  {
    "row": "C1340",
    "screen": "*",
    "verdict": "N/A",
@@ -1072,6 +1498,25 @@
    "row_hash": "b76a6583ae88c60f",
    "carried": true,
    "pass": 1
+  },
+  {
+   "row": "C1340",
+   "screen": "home_tv.watch_more",
+   "verdict": "N/A",
+   "line": "",
+   "why": "not a housemate menu",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "8298e9a8f228ae6e",
+    "traits": "44136fa355b3678a",
+    "facts": "de2cb23d010830b3",
+    "facts2": "de2cb23d010830b3",
+    "all": "dbdc7a05fd414aa0"
+   },
+   "row_hash": "b76a6583ae88c60f",
+   "carried": true,
+   "pass": 6
   },
   {
    "row": "C1342",
@@ -1087,6 +1532,25 @@
    "pass": 1
   },
   {
+   "row": "C1342",
+   "screen": "home_tv.watch_more",
+   "verdict": "N/A",
+   "line": "",
+   "why": "no need here",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "8298e9a8f228ae6e",
+    "traits": "44136fa355b3678a",
+    "facts": "de2cb23d010830b3",
+    "facts2": "de2cb23d010830b3",
+    "all": "dbdc7a05fd414aa0"
+   },
+   "row_hash": "59e008f8733a29e2",
+   "carried": true,
+   "pass": 6
+  },
+  {
    "row": "C1345",
    "screen": "*",
    "verdict": "PASS",
@@ -1098,6 +1562,25 @@
    "row_hash": "823e315ef0b56f94",
    "carried": true,
    "pass": 1
+  },
+  {
+   "row": "C1345",
+   "screen": "home_tv.watch_more",
+   "verdict": "PASS",
+   "line": "max_triggers_per_day = 2",
+   "why": "the brake stays on the way in, on the trigger; watch_more is inside one watch. Observation: from it, Channel 5 can be picked again and again until 02:00 with no further watch spent",
+   "cause": null,
+   "note": true,
+   "screen_hash": {
+    "text": "8298e9a8f228ae6e",
+    "traits": "44136fa355b3678a",
+    "facts": "de2cb23d010830b3",
+    "facts2": "de2cb23d010830b3",
+    "all": "dbdc7a05fd414aa0"
+   },
+   "row_hash": "823e315ef0b56f94",
+   "carried": true,
+   "pass": 6
   },
   {
    "row": "C1360",
@@ -1113,6 +1596,25 @@
    "pass": 1
   },
   {
+   "row": "C1360",
+   "screen": "home_tv.watch_more",
+   "verdict": "PASS",
+   "line": "Channel 5 \u2014 After Dark: it comes on at eleven, once the living room's empty.",
+   "why": "Channel 5 greys with its action as the label",
+   "cause": null,
+   "note": true,
+   "screen_hash": {
+    "text": "8298e9a8f228ae6e",
+    "traits": "44136fa355b3678a",
+    "facts": "de2cb23d010830b3",
+    "facts2": "de2cb23d010830b3",
+    "all": "dbdc7a05fd414aa0"
+   },
+   "row_hash": "8c9dc844365f81a5",
+   "carried": true,
+   "pass": 6
+  },
+  {
    "row": "C1421",
    "screen": "*",
    "verdict": "PASS",
@@ -1124,6 +1626,25 @@
    "row_hash": "ef34ee4a51e65d00",
    "carried": true,
    "pass": 1
+  },
+  {
+   "row": "C1421",
+   "screen": "home_tv.watch_more",
+   "verdict": "PASS",
+   "line": "Channel 5 \u2014 After Dark: it comes on at eleven, once the living room's empty.",
+   "why": "the grey line tells the requirement",
+   "cause": null,
+   "note": true,
+   "screen_hash": {
+    "text": "8298e9a8f228ae6e",
+    "traits": "44136fa355b3678a",
+    "facts": "de2cb23d010830b3",
+    "facts2": "de2cb23d010830b3",
+    "all": "dbdc7a05fd414aa0"
+   },
+   "row_hash": "ef34ee4a51e65d00",
+   "carried": true,
+   "pass": 6
   },
   {
    "row": "C1423",
@@ -1139,6 +1660,25 @@
    "pass": 1
   },
   {
+   "row": "C1423",
+   "screen": "home_tv.watch_more",
+   "verdict": "N/A",
+   "line": "",
+   "why": "no gate worth a price here",
+   "cause": null,
+   "note": true,
+   "screen_hash": {
+    "text": "8298e9a8f228ae6e",
+    "traits": "44136fa355b3678a",
+    "facts": "de2cb23d010830b3",
+    "facts2": "de2cb23d010830b3",
+    "all": "dbdc7a05fd414aa0"
+   },
+   "row_hash": "4b77685af58632a5",
+   "carried": true,
+   "pass": 6
+  },
+  {
    "row": "C1425",
    "screen": "*",
    "verdict": "PASS",
@@ -1150,6 +1690,25 @@
    "row_hash": "34826508394ba8c0",
    "carried": true,
    "pass": 1
+  },
+  {
+   "row": "C1425",
+   "screen": "home_tv.watch_more",
+   "verdict": "N/A",
+   "line": "",
+   "why": "pacing is the trigger's",
+   "cause": null,
+   "note": true,
+   "screen_hash": {
+    "text": "8298e9a8f228ae6e",
+    "traits": "44136fa355b3678a",
+    "facts": "de2cb23d010830b3",
+    "facts2": "de2cb23d010830b3",
+    "all": "dbdc7a05fd414aa0"
+   },
+   "row_hash": "34826508394ba8c0",
+   "carried": true,
+   "pass": 6
   },
   {
    "row": "C1427",
@@ -1165,6 +1724,25 @@
    "pass": 1
   },
   {
+   "row": "C1427",
+   "screen": "home_tv.watch_more",
+   "verdict": "N/A",
+   "line": "",
+   "why": "no time cost on this screen",
+   "cause": null,
+   "note": true,
+   "screen_hash": {
+    "text": "8298e9a8f228ae6e",
+    "traits": "44136fa355b3678a",
+    "facts": "de2cb23d010830b3",
+    "facts2": "de2cb23d010830b3",
+    "all": "dbdc7a05fd414aa0"
+   },
+   "row_hash": "68a94621cd19c13c",
+   "carried": true,
+   "pass": 6
+  },
+  {
    "row": "C1428",
    "screen": "*",
    "verdict": "PASS",
@@ -1176,6 +1754,25 @@
    "row_hash": "cf8af3e56f435107",
    "carried": true,
    "pass": 1
+  },
+  {
+   "row": "C1428",
+   "screen": "home_tv.watch_more",
+   "verdict": "N/A",
+   "line": "",
+   "why": "no energy lock",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "8298e9a8f228ae6e",
+    "traits": "44136fa355b3678a",
+    "facts": "de2cb23d010830b3",
+    "facts2": "de2cb23d010830b3",
+    "all": "dbdc7a05fd414aa0"
+   },
+   "row_hash": "cf8af3e56f435107",
+   "carried": true,
+   "pass": 6
   },
   {
    "row": "C1431",
@@ -1191,6 +1788,25 @@
    "pass": 1
   },
   {
+   "row": "C1431",
+   "screen": "home_tv.watch_more",
+   "verdict": "N/A",
+   "line": "",
+   "why": "no need",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "8298e9a8f228ae6e",
+    "traits": "44136fa355b3678a",
+    "facts": "de2cb23d010830b3",
+    "facts2": "de2cb23d010830b3",
+    "all": "dbdc7a05fd414aa0"
+   },
+   "row_hash": "aca442d29c1c8146",
+   "carried": true,
+   "pass": 6
+  },
+  {
    "row": "C1432",
    "screen": "*",
    "verdict": "PASS",
@@ -1202,6 +1818,25 @@
    "row_hash": "ccd7a74d85c7d7fe",
    "carried": true,
    "pass": 1
+  },
+  {
+   "row": "C1432",
+   "screen": "home_tv.watch_more",
+   "verdict": "N/A",
+   "line": "",
+   "why": "no need",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "8298e9a8f228ae6e",
+    "traits": "44136fa355b3678a",
+    "facts": "de2cb23d010830b3",
+    "facts2": "de2cb23d010830b3",
+    "all": "dbdc7a05fd414aa0"
+   },
+   "row_hash": "ccd7a74d85c7d7fe",
+   "carried": true,
+   "pass": 6
   },
   {
    "row": "C1433",
@@ -1217,6 +1852,25 @@
    "pass": 1
   },
   {
+   "row": "C1433",
+   "screen": "home_tv.watch_more",
+   "verdict": "N/A",
+   "line": "",
+   "why": "no need",
+   "cause": null,
+   "note": true,
+   "screen_hash": {
+    "text": "8298e9a8f228ae6e",
+    "traits": "44136fa355b3678a",
+    "facts": "de2cb23d010830b3",
+    "facts2": "de2cb23d010830b3",
+    "all": "dbdc7a05fd414aa0"
+   },
+   "row_hash": "f47fc5030774db86",
+   "carried": true,
+   "pass": 6
+  },
+  {
    "row": "C1434",
    "screen": "*",
    "verdict": "PASS",
@@ -1228,6 +1882,25 @@
    "row_hash": "6ac94d11992c72ec",
    "carried": true,
    "pass": 1
+  },
+  {
+   "row": "C1434",
+   "screen": "home_tv.watch_more",
+   "verdict": "N/A",
+   "line": "",
+   "why": "no need",
+   "cause": null,
+   "note": true,
+   "screen_hash": {
+    "text": "8298e9a8f228ae6e",
+    "traits": "44136fa355b3678a",
+    "facts": "de2cb23d010830b3",
+    "facts2": "de2cb23d010830b3",
+    "all": "dbdc7a05fd414aa0"
+   },
+   "row_hash": "6ac94d11992c72ec",
+   "carried": true,
+   "pass": 6
   },
   {
    "row": "C1438",
@@ -1243,6 +1916,25 @@
    "pass": 1
   },
   {
+   "row": "C1438",
+   "screen": "home_tv.watch_more",
+   "verdict": "N/A",
+   "line": "",
+   "why": "no need",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "8298e9a8f228ae6e",
+    "traits": "44136fa355b3678a",
+    "facts": "de2cb23d010830b3",
+    "facts2": "de2cb23d010830b3",
+    "all": "dbdc7a05fd414aa0"
+   },
+   "row_hash": "e4d4d230d2bd3815",
+   "carried": true,
+   "pass": 6
+  },
+  {
    "row": "C1441",
    "screen": "*",
    "verdict": "PASS",
@@ -1256,6 +1948,25 @@
    "pass": 1
   },
   {
+   "row": "C1441",
+   "screen": "home_tv.watch_more",
+   "verdict": "N/A",
+   "line": "",
+   "why": "no number-only result",
+   "cause": null,
+   "note": true,
+   "screen_hash": {
+    "text": "8298e9a8f228ae6e",
+    "traits": "44136fa355b3678a",
+    "facts": "de2cb23d010830b3",
+    "facts2": "de2cb23d010830b3",
+    "all": "dbdc7a05fd414aa0"
+   },
+   "row_hash": "6b5fb464471de4c7",
+   "carried": true,
+   "pass": 6
+  },
+  {
    "row": "C146",
    "screen": "*",
    "verdict": "PASS",
@@ -1267,6 +1978,25 @@
    "row_hash": "a08ace799dcefe85",
    "carried": true,
    "pass": 1
+  },
+  {
+   "row": "C146",
+   "screen": "home_tv.watch_more",
+   "verdict": "N/A",
+   "line": "",
+   "why": "no big moment",
+   "cause": null,
+   "note": true,
+   "screen_hash": {
+    "text": "8298e9a8f228ae6e",
+    "traits": "44136fa355b3678a",
+    "facts": "de2cb23d010830b3",
+    "facts2": "de2cb23d010830b3",
+    "all": "dbdc7a05fd414aa0"
+   },
+   "row_hash": "a08ace799dcefe85",
+   "carried": true,
+   "pass": 6
   },
   {
    "row": "C149",
@@ -1312,6 +2042,25 @@
    "row_hash": "d5758757a709b1af",
    "carried": true,
    "pass": 1
+  },
+  {
+   "row": "C151",
+   "screen": "home_tv.watch_more",
+   "verdict": "N/A",
+   "line": "",
+   "why": "no person on this screen",
+   "cause": null,
+   "note": true,
+   "screen_hash": {
+    "text": "8298e9a8f228ae6e",
+    "traits": "44136fa355b3678a",
+    "facts": "de2cb23d010830b3",
+    "facts2": "de2cb23d010830b3",
+    "all": "dbdc7a05fd414aa0"
+   },
+   "row_hash": "d5758757a709b1af",
+   "carried": true,
+   "pass": 6
   },
   {
    "row": "C188",
@@ -1390,6 +2139,25 @@
    "row_hash": "20748838895e4545",
    "carried": true,
    "pass": 1
+  },
+  {
+   "row": "C2189",
+   "screen": "home_tv.watch_more",
+   "verdict": "N/A",
+   "line": "",
+   "why": "her own loop verb chosen each time (P64 pass precedent, P34); C2189 governs a scene that comes to her. Observation: Channel 5 replays at once from here",
+   "cause": null,
+   "note": true,
+   "screen_hash": {
+    "text": "8298e9a8f228ae6e",
+    "traits": "44136fa355b3678a",
+    "facts": "de2cb23d010830b3",
+    "facts2": "de2cb23d010830b3",
+    "all": "dbdc7a05fd414aa0"
+   },
+   "row_hash": "20748838895e4545",
+   "carried": true,
+   "pass": 6
   },
   {
    "row": "C2194",
@@ -1600,6 +2368,25 @@
    "pass": 1
   },
   {
+   "row": "C422",
+   "screen": "home_tv.watch_more",
+   "verdict": "PASS",
+   "line": "Channel 1 \u2014 News / Channel 2 \u2014 Flatmates / Channel 3 \u2014 Kitchen Rescue / Channel 4 \u2014 The Match / Channel 5 \u2014 After Dark / Turn the TV off",
+   "why": "each label says what it opens",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "8298e9a8f228ae6e",
+    "traits": "44136fa355b3678a",
+    "facts": "de2cb23d010830b3",
+    "facts2": "de2cb23d010830b3",
+    "all": "dbdc7a05fd414aa0"
+   },
+   "row_hash": "7e128897077ecee6",
+   "carried": true,
+   "pass": 6
+  },
+  {
    "row": "C442",
    "screen": "*",
    "verdict": "PASS",
@@ -1611,6 +2398,25 @@
    "row_hash": "59b8d8d24f0c7c38",
    "carried": true,
    "pass": 1
+  },
+  {
+   "row": "C442",
+   "screen": "home_tv.watch_more",
+   "verdict": "PASS",
+   "line": "You curl up at the end of the couch.",
+   "why": "plain",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "8298e9a8f228ae6e",
+    "traits": "44136fa355b3678a",
+    "facts": "de2cb23d010830b3",
+    "facts2": "de2cb23d010830b3",
+    "all": "dbdc7a05fd414aa0"
+   },
+   "row_hash": "59b8d8d24f0c7c38",
+   "carried": true,
+   "pass": 6
   },
   {
    "row": "C447",
@@ -1684,118 +2490,156 @@
    "pass": 1
   },
   {
-   "row": "C460",
-   "screen": "home_tv.after_dark",
+   "row": "C451",
+   "screen": "home_tv.watch_more",
    "verdict": "PASS",
-   "line": "You turn the sound right down and find Channel 9.",
-   "why": "true on every reach: the room is empty by the choice's conditions and the rows, it is night, the top line is behind its garment check, and nothing claims a past",
+   "line": "Channel 3 \u2014 Kitchen Rescue",
+   "why": "concrete channel names",
    "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "586a6e747db17e9f",
+    "text": "8298e9a8f228ae6e",
+    "traits": "44136fa355b3678a",
+    "facts": "de2cb23d010830b3",
+    "facts2": "de2cb23d010830b3",
+    "all": "dbdc7a05fd414aa0"
+   },
+   "row_hash": "50dbf74577a813c7",
+   "carried": true,
+   "pass": 6
+  },
+  {
+   "row": "C460",
+   "screen": "home_tv.after_dark",
+   "verdict": "PASS",
+   "line": "A line crawls along the bottom of the screen: Channel 5 After Dark, every night at eleven.",
+   "why": "every night at eleven is true: the window is every day (pass 2: only the trigger's cooldown_message changed; this screen's text and facts re-read unchanged)",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "c958337be22edf51",
     "traits": "44136fa355b3678a",
     "facts": "8b0f7870497b38b6",
     "facts2": "8b0f7870497b38b6",
-    "all": "45b5aed28fe08031"
+    "all": "b3043cb0106c97ea"
    },
    "row_hash": "67e48e60d5053a2e",
-   "carried": true,
-   "pass": 2
+   "carried": false,
+   "pass": 7
   },
   {
    "row": "C460",
    "screen": "home_tv.cooking",
    "verdict": "PASS",
-   "line": "Leave it on this one, kid. / Not bad, actually. / Leave it on this one, kid. I'm watching too. / Wake me up if anything happens. Or if anyone comes in.",
-   "why": "every person line sits behind its presence test; Mark's 'Leave it on this one' and Ryan's lines agree with her holding the remote and choosing the channel; the channel line is texture true at any hour",
+   "line": "When it's over, you pull out your phone and count what you've got, and what it'll take.",
+   "why": "true at any hour and on any visit; person lines behind presence (pass 2: only the trigger's cooldown_message changed; this screen's text and facts re-read unchanged)",
    "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "9ac8f8bd1644f113",
+    "text": "80004764ac74febf",
     "traits": "cbe784dabd345f8d",
-    "facts": "a5626c9e1ce0cd10",
-    "facts2": "a5ff49eefab1fd84",
-    "all": "39ed63e7f85b2d2c"
+    "facts": "314997266ac1c9a4",
+    "facts2": "81103bfb9d096e11",
+    "all": "56a48f3e00e19f2a"
    },
    "row_hash": "67e48e60d5053a2e",
-   "carried": true,
-   "pass": 3
+   "carried": false,
+   "pass": 7
   },
   {
    "row": "C460",
    "screen": "home_tv.news",
    "verdict": "PASS",
-   "line": "Leave it on this one, kid. / Not bad, actually. / Leave it on this one, kid. I'm watching too. / Wake me up if anything happens. Or if anyone comes in.",
-   "why": "every person line sits behind its presence test; Mark's 'Leave it on this one' and Ryan's lines agree with her holding the remote and choosing the channel; the channel line is texture true at any hour",
+   "line": "When it's over, you pull out your phone and count what you've got, and what it'll take.",
+   "why": "true at any hour and on any visit; person lines behind presence (pass 2: only the trigger's cooldown_message changed; this screen's text and facts re-read unchanged)",
    "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "f1fd2b2d75117b98",
+    "text": "d20748ba2c28ac5e",
     "traits": "cbe784dabd345f8d",
-    "facts": "a5626c9e1ce0cd10",
-    "facts2": "a5ff49eefab1fd84",
-    "all": "a3214c3b685ed344"
+    "facts": "314997266ac1c9a4",
+    "facts2": "81103bfb9d096e11",
+    "all": "2085932d6951f184"
    },
    "row_hash": "67e48e60d5053a2e",
-   "carried": true,
-   "pass": 3
+   "carried": false,
+   "pass": 7
   },
   {
    "row": "C460",
    "screen": "home_tv.sitcom",
    "verdict": "PASS",
-   "line": "Leave it on this one, kid. / Not bad, actually. / Leave it on this one, kid. I'm watching too. / Wake me up if anything happens. Or if anyone comes in.",
-   "why": "every person line sits behind its presence test; Mark's 'Leave it on this one' and Ryan's lines agree with her holding the remote and choosing the channel; the channel line is texture true at any hour",
+   "line": "When it's over, you pull out your phone and count what you've got, and what it'll take.",
+   "why": "true at any hour and on any visit; person lines behind presence (pass 2: only the trigger's cooldown_message changed; this screen's text and facts re-read unchanged)",
    "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "a280baa711664d70",
+    "text": "1a97638c0f45f984",
     "traits": "cbe784dabd345f8d",
-    "facts": "a5626c9e1ce0cd10",
-    "facts2": "a5ff49eefab1fd84",
-    "all": "3f71ac4a9be89851"
+    "facts": "314997266ac1c9a4",
+    "facts2": "81103bfb9d096e11",
+    "all": "77954d37266734bc"
    },
    "row_hash": "67e48e60d5053a2e",
-   "carried": true,
-   "pass": 3
+   "carried": false,
+   "pass": 7
   },
   {
    "row": "C460",
    "screen": "home_tv.sports",
    "verdict": "PASS",
-   "line": "Leave it on this one, kid. / Not bad, actually. / Leave it on this one, kid. I'm watching too. / Wake me up if anything happens. Or if anyone comes in.",
-   "why": "every person line sits behind its presence test; Mark's 'Leave it on this one' and Ryan's lines agree with her holding the remote and choosing the channel; the channel line is texture true at any hour",
+   "line": "When it's over, you pull out your phone and count what you've got, and what it'll take.",
+   "why": "true at any hour and on any visit; person lines behind presence (pass 2: only the trigger's cooldown_message changed; this screen's text and facts re-read unchanged)",
    "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "491574ef446a3c7f",
+    "text": "09919fa69f64e5ca",
     "traits": "cbe784dabd345f8d",
-    "facts": "a5626c9e1ce0cd10",
-    "facts2": "a5ff49eefab1fd84",
-    "all": "b4ba06b4ce0f5c8e"
+    "facts": "314997266ac1c9a4",
+    "facts2": "81103bfb9d096e11",
+    "all": "df3560b13284452b"
    },
    "row_hash": "67e48e60d5053a2e",
-   "carried": true,
-   "pass": 3
+   "carried": false,
+   "pass": 7
   },
   {
    "row": "C460",
    "screen": "home_tv.watch",
    "verdict": "PASS",
-   "line": "You curl up at the end of the couch.",
-   "why": "true on every reach: any hour, anyone in the Living Room; the Mark/Ryan lines now sit on the channel screens behind their presence tests",
+   "line": "cooldown_message \"you've had the TV on twice today.\" / Turn the TV off (0 minutes, back to the Living Room)",
+   "why": "the row greys only at dayCount 2 of the day (canTriggerActivity, v2.py:5642), and each count is an opening of Watch TV (markCanvasTriggered on node 0, v2.py:17063-17064), which shows the channel list; so after two openings, even two turned straight off, she has had the TV on twice today; watch_more counts nothing, so one opening with Change the channel is still one; agrees with P64 card line 6 and P71 card line 18",
    "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "9f522cf8f7db133b",
+    "text": "421db0e327503c92",
     "traits": "44136fa355b3678a",
     "facts": "19ce9fc19f591048",
     "facts2": "19ce9fc19f591048",
-    "all": "649d519633199bb8"
+    "all": "2307f209f180b280"
    },
    "row_hash": "67e48e60d5053a2e",
-   "carried": true,
-   "pass": 4
+   "carried": false,
+   "pass": 7
+  },
+  {
+   "row": "C460",
+   "screen": "home_tv.watch_more",
+   "verdict": "PASS",
+   "line": "You curl up at the end of the couch.",
+   "why": "reached only after Channel 5 with the room empty; no person, no past, no clock; the grey line true at every minute it can show here (23:30-02:30) (pass 2: only the trigger's cooldown_message changed; this screen's text and facts re-read unchanged)",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "b61bf583112771ec",
+    "traits": "44136fa355b3678a",
+    "facts": "de2cb23d010830b3",
+    "facts2": "de2cb23d010830b3",
+    "all": "0cf5ddf415e24294"
+   },
+   "row_hash": "67e48e60d5053a2e",
+   "carried": false,
+   "pass": 7
   },
   {
    "row": "C461",
@@ -1814,115 +2658,134 @@
    "row": "C461",
    "screen": "home_tv.after_dark",
    "verdict": "PASS",
-   "line": "Your breath goes short. Heat pools low in your belly and spreads between your legs.",
-   "why": "her body and the screen only: texture that can't clash",
+   "line": "He tells her she's a good girl.",
+   "why": "what is on the screen; no clashing fact (pass 2: only the trigger's cooldown_message changed; this screen's text and facts re-read unchanged)",
    "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "586a6e747db17e9f",
+    "text": "c958337be22edf51",
     "traits": "44136fa355b3678a",
     "facts": "8b0f7870497b38b6",
     "facts2": "8b0f7870497b38b6",
-    "all": "45b5aed28fe08031"
+    "all": "b3043cb0106c97ea"
    },
    "row_hash": "310706ee076318f2",
-   "carried": true,
-   "pass": 2
+   "carried": false,
+   "pass": 7
   },
   {
    "row": "C461",
    "screen": "home_tv.cooking",
    "verdict": "PASS",
-   "line": "Leave it on this one, kid.",
-   "why": "Mark still takes charge of what is on (PLAN: Strict, Takes charge) without contradicting her remote; Ryan's 'Not bad, actually.' and his doze line fit his easy cast entry; the channel line is texture that can't clash",
+   "line": "The laugh track does the rest.",
+   "why": "texture and her opinion only (pass 2: only the trigger's cooldown_message changed; this screen's text and facts re-read unchanged)",
    "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "9ac8f8bd1644f113",
+    "text": "80004764ac74febf",
     "traits": "cbe784dabd345f8d",
-    "facts": "a5626c9e1ce0cd10",
-    "facts2": "a5ff49eefab1fd84",
-    "all": "39ed63e7f85b2d2c"
+    "facts": "314997266ac1c9a4",
+    "facts2": "81103bfb9d096e11",
+    "all": "56a48f3e00e19f2a"
    },
    "row_hash": "310706ee076318f2",
-   "carried": true,
-   "pass": 3
+   "carried": false,
+   "pass": 7
   },
   {
    "row": "C461",
    "screen": "home_tv.news",
    "verdict": "PASS",
-   "line": "Leave it on this one, kid.",
-   "why": "Mark still takes charge of what is on (PLAN: Strict, Takes charge) without contradicting her remote; Ryan's 'Not bad, actually.' and his doze line fit his easy cast entry; the channel line is texture that can't clash",
+   "line": "The laugh track does the rest.",
+   "why": "texture and her opinion only (pass 2: only the trigger's cooldown_message changed; this screen's text and facts re-read unchanged)",
    "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "f1fd2b2d75117b98",
+    "text": "d20748ba2c28ac5e",
     "traits": "cbe784dabd345f8d",
-    "facts": "a5626c9e1ce0cd10",
-    "facts2": "a5ff49eefab1fd84",
-    "all": "a3214c3b685ed344"
+    "facts": "314997266ac1c9a4",
+    "facts2": "81103bfb9d096e11",
+    "all": "2085932d6951f184"
    },
    "row_hash": "310706ee076318f2",
-   "carried": true,
-   "pass": 3
+   "carried": false,
+   "pass": 7
   },
   {
    "row": "C461",
    "screen": "home_tv.sitcom",
    "verdict": "PASS",
-   "line": "Leave it on this one, kid.",
-   "why": "Mark still takes charge of what is on (PLAN: Strict, Takes charge) without contradicting her remote; Ryan's 'Not bad, actually.' and his doze line fit his easy cast entry; the channel line is texture that can't clash",
+   "line": "The laugh track does the rest.",
+   "why": "texture and her opinion only (pass 2: only the trigger's cooldown_message changed; this screen's text and facts re-read unchanged)",
    "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "a280baa711664d70",
+    "text": "1a97638c0f45f984",
     "traits": "cbe784dabd345f8d",
-    "facts": "a5626c9e1ce0cd10",
-    "facts2": "a5ff49eefab1fd84",
-    "all": "3f71ac4a9be89851"
+    "facts": "314997266ac1c9a4",
+    "facts2": "81103bfb9d096e11",
+    "all": "77954d37266734bc"
    },
    "row_hash": "310706ee076318f2",
-   "carried": true,
-   "pass": 3
+   "carried": false,
+   "pass": 7
   },
   {
    "row": "C461",
    "screen": "home_tv.sports",
    "verdict": "PASS",
-   "line": "Leave it on this one, kid.",
-   "why": "Mark still takes charge of what is on (PLAN: Strict, Takes charge) without contradicting her remote; Ryan's 'Not bad, actually.' and his doze line fit his easy cast entry; the channel line is texture that can't clash",
+   "line": "The laugh track does the rest.",
+   "why": "texture and her opinion only (pass 2: only the trigger's cooldown_message changed; this screen's text and facts re-read unchanged)",
    "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "491574ef446a3c7f",
+    "text": "09919fa69f64e5ca",
     "traits": "cbe784dabd345f8d",
-    "facts": "a5626c9e1ce0cd10",
-    "facts2": "a5ff49eefab1fd84",
-    "all": "b4ba06b4ce0f5c8e"
+    "facts": "314997266ac1c9a4",
+    "facts2": "81103bfb9d096e11",
+    "all": "df3560b13284452b"
    },
    "row_hash": "310706ee076318f2",
-   "carried": true,
-   "pass": 3
+   "carried": false,
+   "pass": 7
   },
   {
    "row": "C461",
    "screen": "home_tv.watch",
    "verdict": "PASS",
    "line": "You curl up at the end of the couch.",
-   "why": "texture that can't clash",
+   "why": "texture only (pass 2: only the trigger's cooldown_message changed; this screen's text and facts re-read unchanged)",
    "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "9f522cf8f7db133b",
+    "text": "421db0e327503c92",
     "traits": "44136fa355b3678a",
     "facts": "19ce9fc19f591048",
     "facts2": "19ce9fc19f591048",
-    "all": "649d519633199bb8"
+    "all": "2307f209f180b280"
    },
    "row_hash": "310706ee076318f2",
-   "carried": true,
-   "pass": 4
+   "carried": false,
+   "pass": 7
+  },
+  {
+   "row": "C461",
+   "screen": "home_tv.watch_more",
+   "verdict": "PASS",
+   "line": "You curl up at the end of the couch.",
+   "why": "texture only (pass 2: only the trigger's cooldown_message changed; this screen's text and facts re-read unchanged)",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "b61bf583112771ec",
+    "traits": "44136fa355b3678a",
+    "facts": "de2cb23d010830b3",
+    "facts2": "de2cb23d010830b3",
+    "all": "0cf5ddf415e24294"
+   },
+   "row_hash": "310706ee076318f2",
+   "carried": false,
+   "pass": 7
   },
   {
    "row": "C519",
@@ -1936,6 +2799,25 @@
    "row_hash": "e78502f7aa28746d",
    "carried": true,
    "pass": 1
+  },
+  {
+   "row": "C519",
+   "screen": "home_tv.watch_more",
+   "verdict": "PASS",
+   "line": "You curl up at the end of the couch.",
+   "why": "one job, 7 words",
+   "cause": null,
+   "note": true,
+   "screen_hash": {
+    "text": "8298e9a8f228ae6e",
+    "traits": "44136fa355b3678a",
+    "facts": "de2cb23d010830b3",
+    "facts2": "de2cb23d010830b3",
+    "all": "dbdc7a05fd414aa0"
+   },
+   "row_hash": "e78502f7aa28746d",
+   "carried": true,
+   "pass": 6
   },
   {
    "row": "C541",
@@ -2014,6 +2896,25 @@
    "row_hash": "76250e48ada2b843",
    "carried": true,
    "pass": 1
+  },
+  {
+   "row": "C620",
+   "screen": "home_tv.watch_more",
+   "verdict": "N/A",
+   "line": "",
+   "why": "no person listed",
+   "cause": null,
+   "note": true,
+   "screen_hash": {
+    "text": "8298e9a8f228ae6e",
+    "traits": "44136fa355b3678a",
+    "facts": "de2cb23d010830b3",
+    "facts2": "de2cb23d010830b3",
+    "all": "dbdc7a05fd414aa0"
+   },
+   "row_hash": "76250e48ada2b843",
+   "carried": true,
+   "pass": 6
   },
   {
    "row": "C625",
@@ -2107,6 +3008,25 @@
    "pass": 1
   },
   {
+   "row": "C758",
+   "screen": "home_tv.watch_more",
+   "verdict": "PASS",
+   "line": "Channel 1 \u2014 News",
+   "why": "labels 3-4 words",
+   "cause": null,
+   "note": true,
+   "screen_hash": {
+    "text": "8298e9a8f228ae6e",
+    "traits": "44136fa355b3678a",
+    "facts": "de2cb23d010830b3",
+    "facts2": "de2cb23d010830b3",
+    "all": "dbdc7a05fd414aa0"
+   },
+   "row_hash": "e158aaf055cb61d6",
+   "carried": true,
+   "pass": 6
+  },
+  {
    "row": "C762",
    "screen": "*",
    "verdict": "PASS",
@@ -2118,6 +3038,25 @@
    "row_hash": "40e85f1ae92f1e71",
    "carried": true,
    "pass": 1
+  },
+  {
+   "row": "C762",
+   "screen": "home_tv.watch_more",
+   "verdict": "PASS",
+   "line": "Channel 1 \u2014 News / Channel 2 \u2014 Flatmates / Channel 3 \u2014 Kitchen Rescue / Channel 4 \u2014 The Match / Channel 5 \u2014 After Dark / Turn the TV off",
+   "why": "no 'Nothing happens'",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "8298e9a8f228ae6e",
+    "traits": "44136fa355b3678a",
+    "facts": "de2cb23d010830b3",
+    "facts2": "de2cb23d010830b3",
+    "all": "dbdc7a05fd414aa0"
+   },
+   "row_hash": "40e85f1ae92f1e71",
+   "carried": true,
+   "pass": 6
   },
   {
    "row": "C769",
@@ -2133,6 +3072,25 @@
    "pass": 1
   },
   {
+   "row": "C769",
+   "screen": "home_tv.watch_more",
+   "verdict": "N/A",
+   "line": "",
+   "why": "not a place description",
+   "cause": null,
+   "note": true,
+   "screen_hash": {
+    "text": "8298e9a8f228ae6e",
+    "traits": "44136fa355b3678a",
+    "facts": "de2cb23d010830b3",
+    "facts2": "de2cb23d010830b3",
+    "all": "dbdc7a05fd414aa0"
+   },
+   "row_hash": "f6b6f78a8f2e5ed7",
+   "carried": true,
+   "pass": 6
+  },
+  {
    "row": "C770",
    "screen": "*",
    "verdict": "N/A",
@@ -2144,6 +3102,25 @@
    "row_hash": "ff9aa31c11e5d50f",
    "carried": true,
    "pass": 1
+  },
+  {
+   "row": "C770",
+   "screen": "home_tv.watch_more",
+   "verdict": "N/A",
+   "line": "",
+   "why": "not a room screen",
+   "cause": null,
+   "note": true,
+   "screen_hash": {
+    "text": "8298e9a8f228ae6e",
+    "traits": "44136fa355b3678a",
+    "facts": "de2cb23d010830b3",
+    "facts2": "de2cb23d010830b3",
+    "all": "dbdc7a05fd414aa0"
+   },
+   "row_hash": "ff9aa31c11e5d50f",
+   "carried": true,
+   "pass": 6
   },
   {
    "row": "C771",
@@ -2159,6 +3136,25 @@
    "pass": 1
   },
   {
+   "row": "C771",
+   "screen": "home_tv.watch_more",
+   "verdict": "N/A",
+   "line": "",
+   "why": "not a first-visit screen",
+   "cause": null,
+   "note": true,
+   "screen_hash": {
+    "text": "8298e9a8f228ae6e",
+    "traits": "44136fa355b3678a",
+    "facts": "de2cb23d010830b3",
+    "facts2": "de2cb23d010830b3",
+    "all": "dbdc7a05fd414aa0"
+   },
+   "row_hash": "563e3d25c3219dd0",
+   "carried": true,
+   "pass": 6
+  },
+  {
    "row": "C773",
    "screen": "*",
    "verdict": "PASS",
@@ -2170,6 +3166,25 @@
    "row_hash": "599aac6293908bc4",
    "carried": true,
    "pass": 1
+  },
+  {
+   "row": "C773",
+   "screen": "home_tv.watch_more",
+   "verdict": "PASS",
+   "line": "Channel 1 \u2014 News / Channel 2 \u2014 Flatmates / Channel 3 \u2014 Kitchen Rescue / Channel 4 \u2014 The Match / Channel 5 \u2014 After Dark / Turn the TV off",
+   "why": "a list inside the Watch TV beat, not on the room menu",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "8298e9a8f228ae6e",
+    "traits": "44136fa355b3678a",
+    "facts": "de2cb23d010830b3",
+    "facts2": "de2cb23d010830b3",
+    "all": "dbdc7a05fd414aa0"
+   },
+   "row_hash": "599aac6293908bc4",
+   "carried": true,
+   "pass": 6
   },
   {
    "row": "C776",
@@ -2185,6 +3200,25 @@
    "pass": 1
   },
   {
+   "row": "C776",
+   "screen": "home_tv.watch_more",
+   "verdict": "PASS",
+   "line": "Watch TV",
+   "why": "the room row is one system; the channels are inside the beat",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "8298e9a8f228ae6e",
+    "traits": "44136fa355b3678a",
+    "facts": "de2cb23d010830b3",
+    "facts2": "de2cb23d010830b3",
+    "all": "dbdc7a05fd414aa0"
+   },
+   "row_hash": "4141d9e5e24362c3",
+   "carried": true,
+   "pass": 6
+  },
+  {
    "row": "C777",
    "screen": "*",
    "verdict": "PASS",
@@ -2196,6 +3230,25 @@
    "row_hash": "b56360a1040688cf",
    "carried": true,
    "pass": 1
+  },
+  {
+   "row": "C777",
+   "screen": "home_tv.watch_more",
+   "verdict": "PASS",
+   "line": "Channel 1 \u2014 News / Channel 2 \u2014 Flatmates / Channel 3 \u2014 Kitchen Rescue / Channel 4 \u2014 The Match / Channel 5 \u2014 After Dark / Turn the TV off",
+   "why": "the channels live inside the beat, not on the menu",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "8298e9a8f228ae6e",
+    "traits": "44136fa355b3678a",
+    "facts": "de2cb23d010830b3",
+    "facts2": "de2cb23d010830b3",
+    "all": "dbdc7a05fd414aa0"
+   },
+   "row_hash": "b56360a1040688cf",
+   "carried": true,
+   "pass": 6
   },
   {
    "row": "C794",
@@ -2211,6 +3264,25 @@
    "pass": 1
   },
   {
+   "row": "C794",
+   "screen": "home_tv.watch_more",
+   "verdict": "N/A",
+   "line": "",
+   "why": "not a place screen",
+   "cause": null,
+   "note": true,
+   "screen_hash": {
+    "text": "8298e9a8f228ae6e",
+    "traits": "44136fa355b3678a",
+    "facts": "de2cb23d010830b3",
+    "facts2": "de2cb23d010830b3",
+    "all": "dbdc7a05fd414aa0"
+   },
+   "row_hash": "bad76e5963432385",
+   "carried": true,
+   "pass": 6
+  },
+  {
    "row": "C795",
    "screen": "*",
    "verdict": "PASS",
@@ -2224,6 +3296,25 @@
    "pass": 1
   },
   {
+   "row": "C795",
+   "screen": "home_tv.watch_more",
+   "verdict": "N/A",
+   "line": "",
+   "why": "not a place re-entry",
+   "cause": null,
+   "note": true,
+   "screen_hash": {
+    "text": "8298e9a8f228ae6e",
+    "traits": "44136fa355b3678a",
+    "facts": "de2cb23d010830b3",
+    "facts2": "de2cb23d010830b3",
+    "all": "dbdc7a05fd414aa0"
+   },
+   "row_hash": "34139e6a6914e171",
+   "carried": true,
+   "pass": 6
+  },
+  {
    "row": "C804",
    "screen": "*",
    "verdict": "PASS",
@@ -2235,6 +3326,25 @@
    "row_hash": "5358489178bff0a4",
    "carried": true,
    "pass": 1
+  },
+  {
+   "row": "C804",
+   "screen": "home_tv.watch_more",
+   "verdict": "N/A",
+   "line": "",
+   "why": "no person at this screen",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "8298e9a8f228ae6e",
+    "traits": "44136fa355b3678a",
+    "facts": "de2cb23d010830b3",
+    "facts2": "de2cb23d010830b3",
+    "all": "dbdc7a05fd414aa0"
+   },
+   "row_hash": "5358489178bff0a4",
+   "carried": true,
+   "pass": 6
   },
   {
    "row": "C889",
@@ -2435,96 +3545,96 @@
    "row": "C927",
    "screen": "home_tv.after_dark",
    "verdict": "PASS",
-   "line": "Change the channel / Turn it off (30 minutes each)",
-   "why": "both exits carry 30 minutes",
+   "line": "time_progression_minutes = 30",
+   "why": "explicit on both exits (pass 2: only the trigger's cooldown_message changed; this screen's text and facts re-read unchanged)",
    "cause": null,
    "note": true,
    "screen_hash": {
-    "text": "586a6e747db17e9f",
+    "text": "c958337be22edf51",
     "traits": "44136fa355b3678a",
     "facts": "8b0f7870497b38b6",
     "facts2": "8b0f7870497b38b6",
-    "all": "45b5aed28fe08031"
+    "all": "b3043cb0106c97ea"
    },
    "row_hash": "4e86d143688ba8e5",
-   "carried": true,
-   "pass": 2
+   "carried": false,
+   "pass": 7
   },
   {
    "row": "C927",
    "screen": "home_tv.cooking",
    "verdict": "PASS",
-   "line": "Done (time_progression_minutes = 60)",
-   "why": "the exit sets its time; the channel choice into this screen sets 0 explicitly",
+   "line": "time_progression_minutes = 60",
+   "why": "explicit, so no default 3 (pass 2: only the trigger's cooldown_message changed; this screen's text and facts re-read unchanged)",
    "cause": null,
    "note": true,
    "screen_hash": {
-    "text": "9ac8f8bd1644f113",
+    "text": "80004764ac74febf",
     "traits": "cbe784dabd345f8d",
-    "facts": "a5626c9e1ce0cd10",
-    "facts2": "a5ff49eefab1fd84",
-    "all": "39ed63e7f85b2d2c"
+    "facts": "314997266ac1c9a4",
+    "facts2": "81103bfb9d096e11",
+    "all": "56a48f3e00e19f2a"
    },
    "row_hash": "4e86d143688ba8e5",
-   "carried": true,
-   "pass": 3
+   "carried": false,
+   "pass": 7
   },
   {
    "row": "C927",
    "screen": "home_tv.news",
    "verdict": "PASS",
-   "line": "Done (time_progression_minutes = 60)",
-   "why": "the exit sets its time; the channel choice into this screen sets 0 explicitly",
+   "line": "time_progression_minutes = 60",
+   "why": "explicit, so no default 3 (pass 2: only the trigger's cooldown_message changed; this screen's text and facts re-read unchanged)",
    "cause": null,
    "note": true,
    "screen_hash": {
-    "text": "f1fd2b2d75117b98",
+    "text": "d20748ba2c28ac5e",
     "traits": "cbe784dabd345f8d",
-    "facts": "a5626c9e1ce0cd10",
-    "facts2": "a5ff49eefab1fd84",
-    "all": "a3214c3b685ed344"
+    "facts": "314997266ac1c9a4",
+    "facts2": "81103bfb9d096e11",
+    "all": "2085932d6951f184"
    },
    "row_hash": "4e86d143688ba8e5",
-   "carried": true,
-   "pass": 3
+   "carried": false,
+   "pass": 7
   },
   {
    "row": "C927",
    "screen": "home_tv.sitcom",
    "verdict": "PASS",
-   "line": "Done (time_progression_minutes = 60)",
-   "why": "the exit sets its time; the channel choice into this screen sets 0 explicitly",
+   "line": "time_progression_minutes = 60",
+   "why": "explicit, so no default 3 (pass 2: only the trigger's cooldown_message changed; this screen's text and facts re-read unchanged)",
    "cause": null,
    "note": true,
    "screen_hash": {
-    "text": "a280baa711664d70",
+    "text": "1a97638c0f45f984",
     "traits": "cbe784dabd345f8d",
-    "facts": "a5626c9e1ce0cd10",
-    "facts2": "a5ff49eefab1fd84",
-    "all": "3f71ac4a9be89851"
+    "facts": "314997266ac1c9a4",
+    "facts2": "81103bfb9d096e11",
+    "all": "77954d37266734bc"
    },
    "row_hash": "4e86d143688ba8e5",
-   "carried": true,
-   "pass": 3
+   "carried": false,
+   "pass": 7
   },
   {
    "row": "C927",
    "screen": "home_tv.sports",
    "verdict": "PASS",
-   "line": "Done (time_progression_minutes = 60)",
-   "why": "the exit sets its time; the channel choice into this screen sets 0 explicitly",
+   "line": "time_progression_minutes = 60",
+   "why": "explicit, so no default 3 (pass 2: only the trigger's cooldown_message changed; this screen's text and facts re-read unchanged)",
    "cause": null,
    "note": true,
    "screen_hash": {
-    "text": "491574ef446a3c7f",
+    "text": "09919fa69f64e5ca",
     "traits": "cbe784dabd345f8d",
-    "facts": "a5626c9e1ce0cd10",
-    "facts2": "a5ff49eefab1fd84",
-    "all": "b4ba06b4ce0f5c8e"
+    "facts": "314997266ac1c9a4",
+    "facts2": "81103bfb9d096e11",
+    "all": "df3560b13284452b"
    },
    "row_hash": "4e86d143688ba8e5",
-   "carried": true,
-   "pass": 3
+   "carried": false,
+   "pass": 7
   },
   {
    "row": "C928",
@@ -2582,96 +3692,96 @@
    "row": "C931",
    "screen": "home_tv.after_dark",
    "verdict": "PASS",
-   "line": "Channel 9 After Dark \u2014 it comes on at eleven, once the living room's empty.",
-   "why": "its window is a time_of_day 23:00-02:00 on the Watch TV choice, re-read each time the list shows and wrapping past midnight (v2.py:4826-4829); 'Change the channel' back at 02:00 or later greys it again, end exclusive, and the grey line stays true",
+   "line": "time_of_day 23:00-02:00 (on the list's Channel 5 choice)",
+   "why": "re-read each time the list shows; end exclusive; wraps past midnight (pass 2: only the trigger's cooldown_message changed; this screen's text and facts re-read unchanged)",
    "cause": null,
    "note": true,
    "screen_hash": {
-    "text": "586a6e747db17e9f",
+    "text": "c958337be22edf51",
     "traits": "44136fa355b3678a",
     "facts": "8b0f7870497b38b6",
     "facts2": "8b0f7870497b38b6",
-    "all": "45b5aed28fe08031"
+    "all": "b3043cb0106c97ea"
    },
    "row_hash": "1aadffd96e76381c",
-   "carried": true,
-   "pass": 2
+   "carried": false,
+   "pass": 7
   },
   {
    "row": "C931",
    "screen": "home_tv.cooking",
    "verdict": "N/A",
-   "line": "\u2014",
-   "why": "no time_of_day condition on this screen; an ordinary channel is open at any hour (the 23:00-02:00 test is on the watch screen's Channel 9 choice)",
+   "line": "",
+   "why": "no time_of_day condition on this screen; ordinary channels are open at any hour (pass 2: only the trigger's cooldown_message changed; this screen's text and facts re-read unchanged)",
    "cause": null,
    "note": true,
    "screen_hash": {
-    "text": "9ac8f8bd1644f113",
+    "text": "80004764ac74febf",
     "traits": "cbe784dabd345f8d",
-    "facts": "a5626c9e1ce0cd10",
-    "facts2": "a5ff49eefab1fd84",
-    "all": "39ed63e7f85b2d2c"
+    "facts": "314997266ac1c9a4",
+    "facts2": "81103bfb9d096e11",
+    "all": "56a48f3e00e19f2a"
    },
    "row_hash": "1aadffd96e76381c",
-   "carried": true,
-   "pass": 3
+   "carried": false,
+   "pass": 7
   },
   {
    "row": "C931",
    "screen": "home_tv.news",
    "verdict": "N/A",
-   "line": "\u2014",
-   "why": "no time_of_day condition on this screen; an ordinary channel is open at any hour (the 23:00-02:00 test is on the watch screen's Channel 9 choice)",
+   "line": "",
+   "why": "no time_of_day condition on this screen; ordinary channels are open at any hour (pass 2: only the trigger's cooldown_message changed; this screen's text and facts re-read unchanged)",
    "cause": null,
    "note": true,
    "screen_hash": {
-    "text": "f1fd2b2d75117b98",
+    "text": "d20748ba2c28ac5e",
     "traits": "cbe784dabd345f8d",
-    "facts": "a5626c9e1ce0cd10",
-    "facts2": "a5ff49eefab1fd84",
-    "all": "a3214c3b685ed344"
+    "facts": "314997266ac1c9a4",
+    "facts2": "81103bfb9d096e11",
+    "all": "2085932d6951f184"
    },
    "row_hash": "1aadffd96e76381c",
-   "carried": true,
-   "pass": 3
+   "carried": false,
+   "pass": 7
   },
   {
    "row": "C931",
    "screen": "home_tv.sitcom",
    "verdict": "N/A",
-   "line": "\u2014",
-   "why": "no time_of_day condition on this screen; an ordinary channel is open at any hour (the 23:00-02:00 test is on the watch screen's Channel 9 choice)",
+   "line": "",
+   "why": "no time_of_day condition on this screen; ordinary channels are open at any hour (pass 2: only the trigger's cooldown_message changed; this screen's text and facts re-read unchanged)",
    "cause": null,
    "note": true,
    "screen_hash": {
-    "text": "a280baa711664d70",
+    "text": "1a97638c0f45f984",
     "traits": "cbe784dabd345f8d",
-    "facts": "a5626c9e1ce0cd10",
-    "facts2": "a5ff49eefab1fd84",
-    "all": "3f71ac4a9be89851"
+    "facts": "314997266ac1c9a4",
+    "facts2": "81103bfb9d096e11",
+    "all": "77954d37266734bc"
    },
    "row_hash": "1aadffd96e76381c",
-   "carried": true,
-   "pass": 3
+   "carried": false,
+   "pass": 7
   },
   {
    "row": "C931",
    "screen": "home_tv.sports",
    "verdict": "N/A",
-   "line": "\u2014",
-   "why": "no time_of_day condition on this screen; an ordinary channel is open at any hour (the 23:00-02:00 test is on the watch screen's Channel 9 choice)",
+   "line": "",
+   "why": "no time_of_day condition on this screen; ordinary channels are open at any hour (pass 2: only the trigger's cooldown_message changed; this screen's text and facts re-read unchanged)",
    "cause": null,
    "note": true,
    "screen_hash": {
-    "text": "491574ef446a3c7f",
+    "text": "09919fa69f64e5ca",
     "traits": "cbe784dabd345f8d",
-    "facts": "a5626c9e1ce0cd10",
-    "facts2": "a5ff49eefab1fd84",
-    "all": "b4ba06b4ce0f5c8e"
+    "facts": "314997266ac1c9a4",
+    "facts2": "81103bfb9d096e11",
+    "all": "df3560b13284452b"
    },
    "row_hash": "1aadffd96e76381c",
-   "carried": true,
-   "pass": 3
+   "carried": false,
+   "pass": 7
   },
   {
    "row": "C953",
@@ -2685,6 +3795,25 @@
    "row_hash": "826bf82fe26afd13",
    "carried": true,
    "pass": 1
+  },
+  {
+   "row": "C953",
+   "screen": "home_tv.watch_more",
+   "verdict": "PASS",
+   "line": "Channel 1 \u2014 News / Channel 2 \u2014 Flatmates / Channel 3 \u2014 Kitchen Rescue / Channel 4 \u2014 The Match / Channel 5 \u2014 After Dark / Turn the TV off",
+   "why": "no money cost, none shown",
+   "cause": null,
+   "note": true,
+   "screen_hash": {
+    "text": "8298e9a8f228ae6e",
+    "traits": "44136fa355b3678a",
+    "facts": "de2cb23d010830b3",
+    "facts2": "de2cb23d010830b3",
+    "all": "dbdc7a05fd414aa0"
+   },
+   "row_hash": "826bf82fe26afd13",
+   "carried": true,
+   "pass": 6
   },
   {
    "row": "C961",
@@ -2716,96 +3845,134 @@
    "row": "L106",
    "screen": "home_tv.after_dark",
    "verdict": "PASS",
-   "line": "You turn the sound right down and find Channel 9.",
-   "why": "names no person; the choice needs Laura, Mark and Ryan is_absent",
+   "line": "You turn the sound right down and find Channel 5.",
+   "why": "names nobody in the room (pass 2: only the trigger's cooldown_message changed; this screen's text and facts re-read unchanged)",
    "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "586a6e747db17e9f",
+    "text": "c958337be22edf51",
     "traits": "44136fa355b3678a",
     "facts": "8b0f7870497b38b6",
     "facts2": "8b0f7870497b38b6",
-    "all": "45b5aed28fe08031"
+    "all": "b3043cb0106c97ea"
    },
    "row_hash": "13a714429d15f3b2",
-   "carried": true,
-   "pass": 2
+   "carried": false,
+   "pass": 7
   },
   {
    "row": "L106",
    "screen": "home_tv.cooking",
    "verdict": "PASS",
-   "line": "Mark watches from his chair with his arms folded. Ryan sprawls at the other end of the couch, half watching.",
-   "why": "each line naming Mark or Ryan sits behind npc_at_location is_present for him at home_living_room; nobody in, no line",
+   "line": "Mark watches from his chair with his arms folded.",
+   "why": "every person line sits behind is_present for that person at home_living_room (pass 2: only the trigger's cooldown_message changed; this screen's text and facts re-read unchanged)",
    "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "9ac8f8bd1644f113",
+    "text": "80004764ac74febf",
     "traits": "cbe784dabd345f8d",
-    "facts": "a5626c9e1ce0cd10",
-    "facts2": "a5ff49eefab1fd84",
-    "all": "39ed63e7f85b2d2c"
+    "facts": "314997266ac1c9a4",
+    "facts2": "81103bfb9d096e11",
+    "all": "56a48f3e00e19f2a"
    },
    "row_hash": "13a714429d15f3b2",
-   "carried": true,
-   "pass": 3
+   "carried": false,
+   "pass": 7
   },
   {
    "row": "L106",
    "screen": "home_tv.news",
    "verdict": "PASS",
-   "line": "Mark watches from his chair with his arms folded. Ryan sprawls at the other end of the couch, half watching.",
-   "why": "each line naming Mark or Ryan sits behind npc_at_location is_present for him at home_living_room; nobody in, no line",
+   "line": "Mark watches from his chair with his arms folded.",
+   "why": "every person line sits behind is_present for that person at home_living_room (pass 2: only the trigger's cooldown_message changed; this screen's text and facts re-read unchanged)",
    "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "f1fd2b2d75117b98",
+    "text": "d20748ba2c28ac5e",
     "traits": "cbe784dabd345f8d",
-    "facts": "a5626c9e1ce0cd10",
-    "facts2": "a5ff49eefab1fd84",
-    "all": "a3214c3b685ed344"
+    "facts": "314997266ac1c9a4",
+    "facts2": "81103bfb9d096e11",
+    "all": "2085932d6951f184"
    },
    "row_hash": "13a714429d15f3b2",
-   "carried": true,
-   "pass": 3
+   "carried": false,
+   "pass": 7
   },
   {
    "row": "L106",
    "screen": "home_tv.sitcom",
    "verdict": "PASS",
-   "line": "Mark watches from his chair with his arms folded. Ryan sprawls at the other end of the couch, half watching.",
-   "why": "each line naming Mark or Ryan sits behind npc_at_location is_present for him at home_living_room; nobody in, no line",
+   "line": "Mark watches from his chair with his arms folded.",
+   "why": "every person line sits behind is_present for that person at home_living_room (pass 2: only the trigger's cooldown_message changed; this screen's text and facts re-read unchanged)",
    "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "a280baa711664d70",
+    "text": "1a97638c0f45f984",
     "traits": "cbe784dabd345f8d",
-    "facts": "a5626c9e1ce0cd10",
-    "facts2": "a5ff49eefab1fd84",
-    "all": "3f71ac4a9be89851"
+    "facts": "314997266ac1c9a4",
+    "facts2": "81103bfb9d096e11",
+    "all": "77954d37266734bc"
    },
    "row_hash": "13a714429d15f3b2",
-   "carried": true,
-   "pass": 3
+   "carried": false,
+   "pass": 7
   },
   {
    "row": "L106",
    "screen": "home_tv.sports",
    "verdict": "PASS",
-   "line": "Mark watches from his chair with his arms folded. Ryan sprawls at the other end of the couch, half watching.",
-   "why": "each line naming Mark or Ryan sits behind npc_at_location is_present for him at home_living_room; nobody in, no line",
+   "line": "Mark watches from his chair with his arms folded.",
+   "why": "every person line sits behind is_present for that person at home_living_room (pass 2: only the trigger's cooldown_message changed; this screen's text and facts re-read unchanged)",
    "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "491574ef446a3c7f",
+    "text": "09919fa69f64e5ca",
     "traits": "cbe784dabd345f8d",
-    "facts": "a5626c9e1ce0cd10",
-    "facts2": "a5ff49eefab1fd84",
-    "all": "b4ba06b4ce0f5c8e"
+    "facts": "314997266ac1c9a4",
+    "facts2": "81103bfb9d096e11",
+    "all": "df3560b13284452b"
    },
    "row_hash": "13a714429d15f3b2",
-   "carried": true,
-   "pass": 3
+   "carried": false,
+   "pass": 7
+  },
+  {
+   "row": "L106",
+   "screen": "home_tv.watch",
+   "verdict": "PASS",
+   "line": "You curl up at the end of the couch.",
+   "why": "names nobody (pass 2: only the trigger's cooldown_message changed; this screen's text and facts re-read unchanged)",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "421db0e327503c92",
+    "traits": "44136fa355b3678a",
+    "facts": "19ce9fc19f591048",
+    "facts2": "19ce9fc19f591048",
+    "all": "2307f209f180b280"
+   },
+   "row_hash": "13a714429d15f3b2",
+   "carried": false,
+   "pass": 7
+  },
+  {
+   "row": "L106",
+   "screen": "home_tv.watch_more",
+   "verdict": "PASS",
+   "line": "You curl up at the end of the couch.",
+   "why": "names nobody (pass 2: only the trigger's cooldown_message changed; this screen's text and facts re-read unchanged)",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "b61bf583112771ec",
+    "traits": "44136fa355b3678a",
+    "facts": "de2cb23d010830b3",
+    "facts2": "de2cb23d010830b3",
+    "all": "0cf5ddf415e24294"
+   },
+   "row_hash": "13a714429d15f3b2",
+   "carried": false,
+   "pass": 7
   },
   {
    "row": "L116",
@@ -2886,6 +4053,25 @@
    "pass": 1
   },
   {
+   "row": "L166",
+   "screen": "home_tv.watch_more",
+   "verdict": "PASS",
+   "line": "Channel 5 \u2014 After Dark: it comes on at eleven, once the living room's empty.",
+   "why": "Channel 5 has fixed hours because it is broadcast at a time, said on the card",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "8298e9a8f228ae6e",
+    "traits": "44136fa355b3678a",
+    "facts": "de2cb23d010830b3",
+    "facts2": "de2cb23d010830b3",
+    "all": "dbdc7a05fd414aa0"
+   },
+   "row_hash": "c12d10588197fbaf",
+   "carried": true,
+   "pass": 6
+  },
+  {
    "row": "L167",
    "screen": "*",
    "verdict": "PASS",
@@ -2901,97 +4087,97 @@
   {
    "row": "L167",
    "screen": "home_tv.after_dark",
-   "verdict": "PASS",
-   "line": "Channel 9 After Dark",
-   "why": "one choice with one time window, the same every day; no per-day copies",
+   "verdict": "N/A",
+   "line": "",
+   "why": "no hours that differ by day (pass 2: only the trigger's cooldown_message changed; this screen's text and facts re-read unchanged)",
    "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "586a6e747db17e9f",
+    "text": "c958337be22edf51",
     "traits": "44136fa355b3678a",
     "facts": "8b0f7870497b38b6",
     "facts2": "8b0f7870497b38b6",
-    "all": "45b5aed28fe08031"
+    "all": "b3043cb0106c97ea"
    },
    "row_hash": "e64ce2672d85d2d8",
-   "carried": true,
-   "pass": 2
+   "carried": false,
+   "pass": 7
   },
   {
    "row": "L167",
    "screen": "home_tv.cooking",
-   "verdict": "PASS",
-   "line": "Watch TV \u2014 you've watched enough TV for one day.",
-   "why": "one row, any hour, capped at 2 a day with its cooldown_message; no row per kind of day",
+   "verdict": "N/A",
+   "line": "",
+   "why": "no hours that differ by day (pass 2: only the trigger's cooldown_message changed; this screen's text and facts re-read unchanged)",
    "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "9ac8f8bd1644f113",
+    "text": "80004764ac74febf",
     "traits": "cbe784dabd345f8d",
-    "facts": "a5626c9e1ce0cd10",
-    "facts2": "a5ff49eefab1fd84",
-    "all": "39ed63e7f85b2d2c"
+    "facts": "314997266ac1c9a4",
+    "facts2": "81103bfb9d096e11",
+    "all": "56a48f3e00e19f2a"
    },
    "row_hash": "e64ce2672d85d2d8",
-   "carried": true,
-   "pass": 3
+   "carried": false,
+   "pass": 7
   },
   {
    "row": "L167",
    "screen": "home_tv.news",
-   "verdict": "PASS",
-   "line": "Watch TV \u2014 you've watched enough TV for one day.",
-   "why": "one row, any hour, capped at 2 a day with its cooldown_message; no row per kind of day",
+   "verdict": "N/A",
+   "line": "",
+   "why": "no hours that differ by day (pass 2: only the trigger's cooldown_message changed; this screen's text and facts re-read unchanged)",
    "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "f1fd2b2d75117b98",
+    "text": "d20748ba2c28ac5e",
     "traits": "cbe784dabd345f8d",
-    "facts": "a5626c9e1ce0cd10",
-    "facts2": "a5ff49eefab1fd84",
-    "all": "a3214c3b685ed344"
+    "facts": "314997266ac1c9a4",
+    "facts2": "81103bfb9d096e11",
+    "all": "2085932d6951f184"
    },
    "row_hash": "e64ce2672d85d2d8",
-   "carried": true,
-   "pass": 3
+   "carried": false,
+   "pass": 7
   },
   {
    "row": "L167",
    "screen": "home_tv.sitcom",
-   "verdict": "PASS",
-   "line": "Watch TV \u2014 you've watched enough TV for one day.",
-   "why": "one row, any hour, capped at 2 a day with its cooldown_message; no row per kind of day",
+   "verdict": "N/A",
+   "line": "",
+   "why": "no hours that differ by day (pass 2: only the trigger's cooldown_message changed; this screen's text and facts re-read unchanged)",
    "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "a280baa711664d70",
+    "text": "1a97638c0f45f984",
     "traits": "cbe784dabd345f8d",
-    "facts": "a5626c9e1ce0cd10",
-    "facts2": "a5ff49eefab1fd84",
-    "all": "3f71ac4a9be89851"
+    "facts": "314997266ac1c9a4",
+    "facts2": "81103bfb9d096e11",
+    "all": "77954d37266734bc"
    },
    "row_hash": "e64ce2672d85d2d8",
-   "carried": true,
-   "pass": 3
+   "carried": false,
+   "pass": 7
   },
   {
    "row": "L167",
    "screen": "home_tv.sports",
-   "verdict": "PASS",
-   "line": "Watch TV \u2014 you've watched enough TV for one day.",
-   "why": "one row, any hour, capped at 2 a day with its cooldown_message; no row per kind of day",
+   "verdict": "N/A",
+   "line": "",
+   "why": "no hours that differ by day (pass 2: only the trigger's cooldown_message changed; this screen's text and facts re-read unchanged)",
    "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "491574ef446a3c7f",
+    "text": "09919fa69f64e5ca",
     "traits": "cbe784dabd345f8d",
-    "facts": "a5626c9e1ce0cd10",
-    "facts2": "a5ff49eefab1fd84",
-    "all": "b4ba06b4ce0f5c8e"
+    "facts": "314997266ac1c9a4",
+    "facts2": "81103bfb9d096e11",
+    "all": "df3560b13284452b"
    },
    "row_hash": "e64ce2672d85d2d8",
-   "carried": true,
-   "pass": 3
+   "carried": false,
+   "pass": 7
   },
   {
    "row": "L170",
@@ -3005,6 +4191,25 @@
    "row_hash": "c3599cd09637a240",
    "carried": true,
    "pass": 1
+  },
+  {
+   "row": "L170",
+   "screen": "home_tv.watch_more",
+   "verdict": "N/A",
+   "line": "",
+   "why": "no hidden place",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "8298e9a8f228ae6e",
+    "traits": "44136fa355b3678a",
+    "facts": "de2cb23d010830b3",
+    "facts2": "de2cb23d010830b3",
+    "all": "dbdc7a05fd414aa0"
+   },
+   "row_hash": "c3599cd09637a240",
+   "carried": true,
+   "pass": 6
   },
   {
    "row": "L70",
@@ -3034,9 +4239,291 @@
   }
  ],
  "causes": [],
- "pending": [],
- "asked": 1,
- "answered": 1,
- "pass_items": [],
+ "pending": [
+  {
+   "row": "C1176",
+   "screen": "*",
+   "why": "its rule's text changed"
+  },
+  {
+   "row": "C2201",
+   "screen": "*",
+   "why": "never judged"
+  }
+ ],
+ "asked": 54,
+ "answered": 52,
+ "pass_items": [
+  {
+   "row": "B10",
+   "screen": "home_tv.after_dark",
+   "why": "screen changed: truth row"
+  },
+  {
+   "row": "B10",
+   "screen": "home_tv.cooking",
+   "why": "screen changed: truth row"
+  },
+  {
+   "row": "B10",
+   "screen": "home_tv.news",
+   "why": "screen changed: truth row"
+  },
+  {
+   "row": "B10",
+   "screen": "home_tv.sitcom",
+   "why": "screen changed: truth row"
+  },
+  {
+   "row": "B10",
+   "screen": "home_tv.sports",
+   "why": "screen changed: truth row"
+  },
+  {
+   "row": "B10",
+   "screen": "home_tv.watch",
+   "why": "screen changed: truth row"
+  },
+  {
+   "row": "B10",
+   "screen": "home_tv.watch_more",
+   "why": "screen changed: truth row"
+  },
+  {
+   "row": "B8",
+   "screen": "home_tv.after_dark",
+   "why": "screen changed: truth row"
+  },
+  {
+   "row": "B8",
+   "screen": "home_tv.cooking",
+   "why": "screen changed: truth row"
+  },
+  {
+   "row": "B8",
+   "screen": "home_tv.news",
+   "why": "screen changed: truth row"
+  },
+  {
+   "row": "B8",
+   "screen": "home_tv.sitcom",
+   "why": "screen changed: truth row"
+  },
+  {
+   "row": "B8",
+   "screen": "home_tv.sports",
+   "why": "screen changed: truth row"
+  },
+  {
+   "row": "B8",
+   "screen": "home_tv.watch",
+   "why": "screen changed: truth row"
+  },
+  {
+   "row": "B8",
+   "screen": "home_tv.watch_more",
+   "why": "screen changed: truth row"
+  },
+  {
+   "row": "C1158",
+   "screen": "home_tv.after_dark",
+   "why": "screen changed: truth row"
+  },
+  {
+   "row": "C1176",
+   "screen": "*",
+   "why": "its rule's text changed"
+  },
+  {
+   "row": "C1206",
+   "screen": "home_tv.after_dark",
+   "why": "screen changed: truth row"
+  },
+  {
+   "row": "C2201",
+   "screen": "*",
+   "why": "never judged"
+  },
+  {
+   "row": "C460",
+   "screen": "home_tv.after_dark",
+   "why": "screen changed: truth row"
+  },
+  {
+   "row": "C460",
+   "screen": "home_tv.cooking",
+   "why": "screen changed: truth row"
+  },
+  {
+   "row": "C460",
+   "screen": "home_tv.news",
+   "why": "screen changed: truth row"
+  },
+  {
+   "row": "C460",
+   "screen": "home_tv.sitcom",
+   "why": "screen changed: truth row"
+  },
+  {
+   "row": "C460",
+   "screen": "home_tv.sports",
+   "why": "screen changed: truth row"
+  },
+  {
+   "row": "C460",
+   "screen": "home_tv.watch",
+   "why": "screen changed: truth row"
+  },
+  {
+   "row": "C460",
+   "screen": "home_tv.watch_more",
+   "why": "screen changed: truth row"
+  },
+  {
+   "row": "C461",
+   "screen": "home_tv.after_dark",
+   "why": "screen changed: truth row"
+  },
+  {
+   "row": "C461",
+   "screen": "home_tv.cooking",
+   "why": "screen changed: truth row"
+  },
+  {
+   "row": "C461",
+   "screen": "home_tv.news",
+   "why": "screen changed: truth row"
+  },
+  {
+   "row": "C461",
+   "screen": "home_tv.sitcom",
+   "why": "screen changed: truth row"
+  },
+  {
+   "row": "C461",
+   "screen": "home_tv.sports",
+   "why": "screen changed: truth row"
+  },
+  {
+   "row": "C461",
+   "screen": "home_tv.watch",
+   "why": "screen changed: truth row"
+  },
+  {
+   "row": "C461",
+   "screen": "home_tv.watch_more",
+   "why": "screen changed: truth row"
+  },
+  {
+   "row": "C927",
+   "screen": "home_tv.after_dark",
+   "why": "screen changed: truth row"
+  },
+  {
+   "row": "C927",
+   "screen": "home_tv.cooking",
+   "why": "screen changed: truth row"
+  },
+  {
+   "row": "C927",
+   "screen": "home_tv.news",
+   "why": "screen changed: truth row"
+  },
+  {
+   "row": "C927",
+   "screen": "home_tv.sitcom",
+   "why": "screen changed: truth row"
+  },
+  {
+   "row": "C927",
+   "screen": "home_tv.sports",
+   "why": "screen changed: truth row"
+  },
+  {
+   "row": "C931",
+   "screen": "home_tv.after_dark",
+   "why": "screen changed: truth row"
+  },
+  {
+   "row": "C931",
+   "screen": "home_tv.cooking",
+   "why": "screen changed: truth row"
+  },
+  {
+   "row": "C931",
+   "screen": "home_tv.news",
+   "why": "screen changed: truth row"
+  },
+  {
+   "row": "C931",
+   "screen": "home_tv.sitcom",
+   "why": "screen changed: truth row"
+  },
+  {
+   "row": "C931",
+   "screen": "home_tv.sports",
+   "why": "screen changed: truth row"
+  },
+  {
+   "row": "L106",
+   "screen": "home_tv.after_dark",
+   "why": "screen changed: truth row"
+  },
+  {
+   "row": "L106",
+   "screen": "home_tv.cooking",
+   "why": "screen changed: truth row"
+  },
+  {
+   "row": "L106",
+   "screen": "home_tv.news",
+   "why": "screen changed: truth row"
+  },
+  {
+   "row": "L106",
+   "screen": "home_tv.sitcom",
+   "why": "screen changed: truth row"
+  },
+  {
+   "row": "L106",
+   "screen": "home_tv.sports",
+   "why": "screen changed: truth row"
+  },
+  {
+   "row": "L106",
+   "screen": "home_tv.watch",
+   "why": "screen changed: truth row"
+  },
+  {
+   "row": "L106",
+   "screen": "home_tv.watch_more",
+   "why": "screen changed: truth row"
+  },
+  {
+   "row": "L167",
+   "screen": "home_tv.after_dark",
+   "why": "screen changed: truth row"
+  },
+  {
+   "row": "L167",
+   "screen": "home_tv.cooking",
+   "why": "screen changed: truth row"
+  },
+  {
+   "row": "L167",
+   "screen": "home_tv.news",
+   "why": "screen changed: truth row"
+  },
+  {
+   "row": "L167",
+   "screen": "home_tv.sitcom",
+   "why": "screen changed: truth row"
+  },
+  {
+   "row": "L167",
+   "screen": "home_tv.sports",
+   "why": "screen changed: truth row"
+  }
+ ],
  "unowed": []
 }
