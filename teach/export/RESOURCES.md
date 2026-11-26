@@ -1,0 +1,35 @@
+# Vegetable Export (India) Resources
+
+## Knowledge
+
+- [APEDA: Fresh Fruits & Vegetables](https://apeda.gov.in/PFV)
+  The government agency that regulates and promotes fresh produce exports. Use for: product pages, export statistics, schemes.
+- [APEDA: Registration Procedure (PDF, 2026)](https://apeda.gov.in/sites/default/files/documents/2026-06/Registration_Procedure.pdf)
+  Official RCMC registration steps. Use for: the APEDA registration lesson. Check documents list here, not on consultancy blogs.
+- [APEDA AgriExchange Ready Reckoner: IEC](https://agriexchange.apeda.gov.in/Ready%20Reckoner/IEC.aspx)
+  APEDA's own step guide for exporters. Use for: IEC and first-time exporter basics.
+- [DGFT](https://www.dgft.gov.in)
+  Issues the IEC and publishes export policy notifications (bans, minimum export prices). Use for: current fees and whether a product is "free" to export today.
+- [APEDA: Fresh Onions](https://apeda.gov.in/FreshOnions)
+  Onion production shares (2023-24: Maharashtra 35.45%, Madhya Pradesh 17.17%). Use for: MP as a sourcing base.
+- [PQMS portal (Plant Quarantine)](https://pqms.cgg.gov.in/pqms-angular/home)
+  Where phytosanitary certificates are applied for. Use for: per-shipment plant health paperwork.
+- [Lok Sabha answer on phytosanitary timing (PDF)](https://eparlib.nic.in/bitstream/123456789/959741/1/AU3588.pdf)
+  States perishables are usually certified in 24-48 hours, fumigated consignments up to 3 days.
+- [Down to Earth: The garlic fields of Indore](https://www.downtoearth.org.in/agriculture/the-garlic-fields-of-indore)
+  Local context on garlic growing around Indore (Rabi season). Its 63% national share figure conflicts with other sources; treat as unconfirmed.
+- [DGFT notification removing onion MEP, Sept 2024 (via ANI/Lokmat)](https://www.lokmattimes.com/business/india-removes-minimum-export-price-on-onion/amp)
+  Example of how fast onion export policy changes (2023 ban, May 2024 MEP USD 550, MEP removed Sept 2024).
+
+## Wisdom (Communities)
+
+- DGFT Niryat Bandhu scheme ([background](https://www.commerce.gov.in/files/d-m-y/PIB2149736.pdf))
+  DGFT's free mentoring/outreach for first-time exporters, run through its Regional Authorities. Use for: asking real questions of officials. Indore-specific sessions not yet confirmed.
+- MPIDC Export Promotion Cell, Indore ([Free Press Journal](https://www.freepressjournal.in/indore/our-first-goal-is-to-create-100-new-exporters-in-100-days-says-mpidc-ed-himanshu-prajapati))
+  State body in Indore that ran "Coffee with Exporters" workshops for new exporters. Use for: meeting local exporters in person.
+
+## Gaps
+- Current onion export duty status (40% duty from May 2024; removal not confirmed).
+- Logistics from Indore: nearest ICD/container depot and air cargo options. No source found yet.
+- A trusted online forum of Indian agri exporters.
+- Real cost/margin data for a first small shipment.
