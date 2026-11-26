@@ -64,6 +64,20 @@ def test_a_hidden_place_set_beside_a_pointed_meeting_is_green():
     assert pages.problems(game) == []
 
 
+def test_a_place_cut_for_the_release_is_green():
+    """LO 2026-11-27: the House Next Door hidden in release 1. Its flag is declared and nothing sets it."""
+    places = [{"id": "next_door", "hidden_until": {"flag": "next_door_open"}}]
+    game = planted(meets=(), places=places)
+    game["player"] = {"flag_keys": ["next_door_open"]}
+    assert pages.problems(game) == []
+
+
+def test_an_undeclared_flag_nothing_sets_is_still_red():
+    places = [{"id": "next_door", "hidden_until": {"flag": "next_door_opn"}}]
+    rows = pages.problems(planted(meets=(), places=places))
+    assert any("next_door" in r and "hidden" in r for r in rows)
+
+
 def test_a_hint_flag_no_canvas_sets_is_red():
     rows = pages.problems(planted(hints=[hint("Job", "met_tom", "never_set")]))
     assert any("never_set" in r and "no canvas sets" in r for r in rows)
