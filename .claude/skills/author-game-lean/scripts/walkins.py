@@ -1,4 +1,8 @@
-"""Scenes that come to her (craft/walk-ins.md, "When someone comes to her"): check.py's `walkins` check.
+"""Walk-ins that fire on arrival (craft/walk-ins.md): check.py's `walkins` check. Two kinds, both behind a chance:
+  (a) she comes across something: Does: names "she comes across something" on its screen; no shared brake, once a
+      day by its own `max_triggers_per_day = 1` (LO, typed in main-lean 2026-11-26: "2nd one", then "Go", reversing
+      his "2 i would say button is good here");
+  (b) someone comes to her: every other random canvas at a place, written for one named person, on the shared brake.
 
     [canvases.trigger] location = "<place>", trigger_mode = "random", chance = <0..1>, requires_npc = "<npc id>"
 
@@ -20,12 +24,17 @@ Red on (LO, typed in main-lean 2026-11-26: "Yes", "One is fine for now"):
   2. one without the brake: no `is_false` condition on a flag that `[engine.daily_tick]` unsets, a choice on its
      first screen that doesn't set that flag, or two such canvases on different flags (C2187);
   3. one whose first screen has fewer than two choices: there is always a written way out (C2188);
-  4. a card whose Does: puts "a person's arc step" on one: a story moment never waits behind a chance (C2190).
+  4. a card whose Does: puts "a person's arc step" on one: a story moment never waits behind a chance (C2190);
+  5. kind (a) as a button: a canvas whose Does: says "she comes across something", or an old "a walk-in" that is
+     no substitution, left `trigger_mode = "manual"` (C2195);
+  6. kind (a) on the shared brake (it waits on or sets the flag kind (b) shares), or without
+     `max_triggers_per_day = 1` (C2195). Kind (a) keeps rule 3 (a way out) and rule 4; rules 1 and 2 are kind (b)'s.
 """
 
 import scenes
 
 RANDOM = "random"
+FINDS = "she comes across something"  # the Rule label that marks kind (a) on a card's Does: (SKILL.md)
 
 
 def comes_to_her(game):
@@ -92,13 +101,46 @@ def next_door(conditions):
             and i.get("npc_id") and str(i.get("operator") or "is_present") == "is_present"]
 
 
+def labelled(does_by_card, label):
+    """Canvas ids with a Does: screen that names the label."""
+    return {screen.split(".", 1)[0] for does in (does_by_card or {}).values() for screen, trig in (does or {}).items()
+            if label in trig}
+
+
+def substitution_canvases(game):
+    """Someone walking in on her: substitution_only canvases, substitution targets, and the acts that carry the rules."""
+    out = set()
+    for c in game.get("canvases") or []:
+        t = c.get("trigger") if isinstance(c.get("trigger"), dict) else {}
+        if t.get("substitution_only") or c.get("substitution_only"):
+            out.add(c.get("id"))
+        for r in t.get("substitutions") or []:
+            if isinstance(r, dict) and r.get("target_canvas_id"):
+                out.update({r["target_canvas_id"], c.get("id")})  # the act it rides on is no walk-in button either
+    return out
+
+
 def problems(game, does_by_card=None):
-    """Rows that make the walkins check red. does_by_card: {card id: its Does: dict}, for rule 4."""
+    """Rows that make the walkins check red. does_by_card: {card id: its Does: dict}, for rules 4 to 6."""
     rows = []
-    scenes = comes_to_her(game)
+    finds = labelled(does_by_card, FINDS)
+    walk_ins = labelled(does_by_card, "a walk-in")
+    subs = substitution_canvases(game)
+    for c in game.get("canvases") or []:
+        t = c.get("trigger") if isinstance(c.get("trigger"), dict) else {}
+        cid = c.get("id")
+        if scenes.retired(c) or t.get("trigger_mode") == RANDOM or cid in subs:
+            continue
+        if cid in finds or (cid in walk_ins and t.get("location")):
+            rows.append(f"{cid}: a walk-in she comes across is a button; it fires by itself on arrival: "
+                        f"trigger_mode = \"random\", chance (0.35 by default), max_triggers_per_day = 1 "
+                        f"(craft/walk-ins.md, C2195)")
+    every = comes_to_her(game)
+    found = [c for c in every if c.get("id") in finds]
+    scenes_b = [c for c in every if c.get("id") not in finds]
     cleared = daily_unset(game)
     brakes = {}
-    for c in scenes:
+    for c in scenes_b:
         cid, t = c.get("id"), c["trigger"]
         who, place = t.get("requires_npc"), t.get("location")
         near = next_door(t.get("conditions"))
@@ -130,11 +172,24 @@ def problems(game, does_by_card=None):
             if brake and not (sets(ch) & brake):
                 rows.append(f"{cid}: choice {i + 1} (`{ch.get('text')}`) doesn't set the brake "
                             f"`{sorted(brake)[0]}`, so a second scene can come to her today (C2187)")
+    shared_flags = {f for b in brakes.values() for f in b}
+    for c in found:
+        cid, t = c.get("id"), c["trigger"]
+        on = (waits_on(t.get("conditions")) | {f for ch in first_choices(c) for f in sets(ch)}) & shared_flags
+        if on:
+            rows.append(f"{cid}: a walk-in she comes across is on the shared brake `{sorted(on)[0]}`; that flag is "
+                        f"only for the scenes that come to her (C2195, C2187)")
+        if t.get("max_triggers_per_day") != 1:
+            rows.append(f"{cid}: a walk-in she comes across is once a day: max_triggers_per_day = 1 (C2195)")
+        choices = first_choices(c)
+        if len(choices) < 2:
+            rows.append(f"{cid}: its first screen has {len(choices)} choice(s); she always has a written way out "
+                        f"(C2188)")
     shared = set.intersection(*brakes.values()) if brakes else set()
     if len(brakes) > 1 and not shared:
         rows.append(f"the scenes that come to her wait on different flags ({sorted({f for b in brakes.values() for f in b})}); "
                     f"one flag for the whole game makes it one a day (C2187)")
-    ids = {c.get("id") for c in scenes}
+    ids = {c.get("id") for c in every}
     for card, does in sorted((does_by_card or {}).items()):
         for screen, trig in sorted((does or {}).items()):
             if screen.split(".", 1)[0] in ids and "a person's arc step" in trig:

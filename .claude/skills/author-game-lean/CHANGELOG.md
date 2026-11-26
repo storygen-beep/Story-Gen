@@ -1038,3 +1038,30 @@ Why for all of these: P13's reader found new FAILs on every pass, v5 to v11 (99 
     - `test_people.py` rewritten (17 tests): two to four words, hidden, the game's own, no job needed.
     - `test_pages.py`: no traits screen. A new test: a changed word asks only the fit row on that person's scene.
   - **Verified:** the suite passes, 321 passed.
+- **A walk-in she comes across fires on arrival, never a button** (C2195). LO, typed in main-lean 2026-11-26: "2nd one" (of: keep the buttons and mark them, fire on their own as CoT does, a mix), then "Go" to the picks. This reverses his earlier "2 i would say button is good here" for walk-ins. The lesson is the study's: CoT's walk-ins fire on arrival, and players say surprises are too rare (`COT_DESIGN_STUDY.md` Part 9).
+  - **The picks:**
+    - `chance = 0.35` per arrival, by default;
+    - `max_triggers_per_day = 1`;
+    - off the shared `came_to_her_today` flag, which stays only on kind (b);
+    - the place rests 3 arrivals after a hit (the engine's `random_cooldown`);
+    - her choice inside is unchanged.
+  - **`craft/walk-ins.md`:**
+    - The intro gives the two kinds, both random, with the why and LO's words.
+    - C2195 row added (script + walkins).
+    - The engine line for a scene she comes across cites v2.py:15077, 6870-6879, 6905-6918 and 6936-6938.
+    - The "never a button" bullet now says every walk-in at a place is random, and kind (a) and kind (b) are told apart by the label and the shared flag.
+    - Shape step 7 (how often).
+    - Examples A, B and D now fire on arrival.
+    - Step 3 of "When someone comes to her" says kind (a) stays off the flag.
+    - Two Not-this lines.
+  - **`SKILL.md`:** new rule label `she comes across something`, which marks kind (a) on a card's Does:.
+  - **`plan.md` §8 and §10:** the new kind (a), with LO's words and the reversal.
+  - **`lists/COVERAGE.md`:** C2195 added.
+  - **`scripts/walkins.py`:**
+    - Kind (a) is a random canvas whose Does: names the new label. Every other random canvas at a place is kind (b), so P49's cards need no change.
+    - Red on a kind-(a) canvas left manual. Also red on an older "a walk-in" canvas at a place that is no substitution: substitution targets, `substitution_only` canvases and the acts that carry the rules are exempt.
+    - Red on a kind-(a) canvas that waits on or sets the kind-(b) shared flag, and on one without `max_triggers_per_day = 1`.
+    - Kind (a) keeps the way-out and the arc-step rules.
+  - **`scripts/tests/test_walkins.py`:** five tests, 19 in the file.
+  - **Checked:** rules.py's guard, reading.py, and the C1284 and L97 rows assume no buttons. `seen()` reads walk-ins only from card labels, so nothing else changed.
+  - **Verified:** the suite passes. first_term_lean's walkins check stays green, read-only: it has no kind-(a) canvas yet, and its ten P49 scenes are kind (b).
