@@ -30,6 +30,16 @@
   Foreign buyers meeting Indian fresh-produce exporters at Fresh India Show 2026. Use for: where agents meet buyers.
 - [APEDA service providers directory](https://agriexchange.apeda.gov.in/Service_providers/service_providers.aspx)
   Packhouses, labs and other providers. Use for: who an agent coordinates.
+- [Agmark onion grade standard (WDRA copy)](https://wdra.gov.in/documents/d/wdra/onion_agmark)
+  Schedule XIX of the Fruits and Vegetables Grading and Marking Rules, 2004: size codes, 10% size tolerance, per-lot Agmark certificate for export. Use for: Indian onion grading.
+- [UNECE FFV-25 Onions, 2017 edition](https://www.readkong.com/page/unece-standard-ffv-25-onions-2017-edition-9746663)
+  International onion standard: minimum requirements, classes, Class II decay limit 2%. Third-party copy; official text is on unece.org.
+- [EU Regulation 1508/2001 (onions)](https://eur-lex.europa.eu/eli/reg/2001/1508/oj)
+  Size measured as maximum equatorial diameter. Older EU rule, useful for definitions.
+- [Draft Codex standard for onions and shallots](https://www.gov.br/agricultura/pt-br/assuntos/inspecao/produtos-vegetal/organismos-internacionais/arquivos-acesso-irrestrito/FIRSTPROPOSEDDRAFTCODEXSTANDARDFORONIONSANDSHALLOTS.pdf)
+  Draft only; source of the 4% visible-sprouting tolerance.
+- [APEDA onion export procedure for EU (Agmark)](https://www.apeda.gov.in/sites/default/files/documents/2024-06/ONION_AGMARK.doc)
+  Lots sampled at recognised labs, container loaded under lab supervision. Dated 2006 in origin; check if current.
 
 ## Wisdom (Communities)
 
@@ -39,6 +49,8 @@
   State body in Indore that ran "Coffee with Exporters" workshops for new exporters. Use for: meeting local exporters in person.
 
 ## Gaps
+- Official sampling plan (how many bags/bulbs) for onion lot inspection in India.
+- Full official text of UNECE FFV-25 sprouting limit.
 - Official or trade-body benchmark for fresh-produce agent commission rates.
 - Template or legal guidance for agency / non-circumvention agreements in India.
 - Current onion export duty status (40% duty from May 2024; removal not confirmed).

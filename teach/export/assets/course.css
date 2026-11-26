@@ -100,3 +100,14 @@ td.num { font-variant-numeric: tabular-nums; white-space: nowrap; }
 footer { color: var(--muted); font-size: .85rem; }
 
 @media (prefers-reduced-motion: no-preference) { .q button { transition: border-color .15s; } }
+
+/* Lot-check calculator (see lotcheck.js) */
+.lotcheck { background: var(--surface); border: 1px solid var(--line); border-radius: 6px; padding: 1rem; display: grid; gap: .7rem; }
+.lotcheck label { display: flex; flex-wrap: wrap; align-items: center; gap: .5rem; }
+.lotcheck input { font: inherit; width: 5.5rem; padding: .35rem .5rem; border: 1px solid var(--line); border-radius: 4px; background: var(--bg); color: var(--ink); font-variant-numeric: tabular-nums; }
+.lc-row { display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; gap: .5rem; border-top: 1px solid var(--line); padding-top: .6rem; }
+.lc-out { font: 500 .85rem/1.2 var(--mono); color: var(--muted); }
+.lc-out.pass, .lc-verdict.pass { color: var(--leaf); }
+.lc-out.fail, .lc-verdict.fail { color: var(--wrong); }
+.lc-verdict { font-weight: 600; }
+.lc-src { font-size: .8rem; color: var(--muted); }

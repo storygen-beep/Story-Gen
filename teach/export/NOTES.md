@@ -6,3 +6,4 @@
 - Workspace lives at teach/export/ in the Story-Gen repo (learner's choice). Lessons are also published as claude.ai artifacts so they open in the app.
 - Keep lessons short; the learner answers tersely.
 - Session 1: chose sourcing agent. Lesson 0002 gave a real-world task: ask an Indore exporter or trader how they pay agents. Ask for the result next session.
+- Session 1: lesson 0003 (mandi lot check) built with a reusable lot-check calculator (assets/lotcheck.js). Field task: check 20 onions at a mandi and bring counts. Offered garlic/potato variants.
