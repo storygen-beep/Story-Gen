@@ -804,7 +804,7 @@ conditions = { version = "1.0", logic = "AND", items = [{ type = "clothing_item"
 id = "return"
 name = "Put Mom's things back"
 blocks = [
-  { type = "paragraph", content = "You hang the skirt and the top back on her side of the wardrobe and set the heels where they were. Next time, you'll know where to find them." },
+  { type = "paragraph", content = "You hang the skirt and the top back on her side of the wardrobe and set the heels where they were, exactly as you found them." },
 ]
 
 [canvases.nodes.exit_block]
@@ -870,7 +870,7 @@ blocks = [
   { type = "paragraph", content = "He looks you over once, from your face down to your legs and back, the way you'd check a used car. Then he catches himself." },
   { type = "dialog", content = "Good answer. I'm Tom. I run the place. Four-hour shifts, five an hour, plus whatever lands in the tip jar. Call it twenty-two a shift.", props = { speaker = "npc", npcId = "npc_tom" } },
   { type = "dialog", content = "Come in when you want. An hour or a whole shift, as long as one of us is here till you're done.", props = { speaker = "npc", npcId = "npc_tom" } },
-  { type = "dialog", content = "Your first one's a weekday, when Chris is on to show you the machine, rookie.", props = { speaker = "npc", npcId = "npc_tom" } },
+  { type = "dialog", content = "Your first one's a weekday, when Chris is on to show you the machine, sugar.", props = { speaker = "npc", npcId = "npc_tom" } },
   { type = "paragraph", content = "He peels the sign off the window and drops it under the counter. Your face goes warm. You've got a job." },
 ]
 
@@ -892,7 +892,7 @@ blocks = [
   { type = "dialog", content = "Funny. I'm Tom. I run the place.", props = { speaker = "npc", npcId = "npc_tom" } },
   { type = "dialog", content = "Four-hour shifts, five an hour, plus whatever lands in the tip jar. Call it twenty-two a shift.", props = { speaker = "npc", npcId = "npc_tom" } },
   { type = "dialog", content = "Come in when you want. An hour or a whole shift, as long as one of us is here till you're done.", props = { speaker = "npc", npcId = "npc_tom" } },
-  { type = "dialog", content = "Your first one's a weekday, when Chris is on to show you the machine, rookie.", props = { speaker = "npc", npcId = "npc_tom" } },
+  { type = "dialog", content = "Your first one's a weekday, when Chris is on to show you the machine, sugar.", props = { speaker = "npc", npcId = "npc_tom" } },
   { type = "paragraph", content = "He peels the sign off the window and drops it under the counter. Your face goes warm. You've got a job." },
 ]
 
@@ -967,7 +967,7 @@ id = "end"
 name = "Closing up"
 blocks = [
   { type = "paragraph", content = "Four hours of coffee, crumbs and regulars who look everywhere but your face. When it's done, Tom counts the till and puts twenty-two in your hand." },
-  { type = "dialog", content = "Same again tomorrow, rookie, if you want it.", props = { speaker = "npc", npcId = "npc_tom" } },
+  { type = "dialog", content = "Same again tomorrow, sugar, if you want it.", props = { speaker = "npc", npcId = "npc_tom" } },
   { type = "paragraph", content = "You made $22." },
 ]
 
@@ -1003,24 +1003,24 @@ name = "Work an hour"
 blocks = [
   { type = "group", props = { conditions = { version = "1.0", logic = "AND", items = [{ type = "weekday", weekdays = [0, 1, 2, 3, 4] }, { type = "time_of_day", start_time = "07:00", end_time = "10:00" }] } }, blocks = [
     { type = "paragraph", content = "An hour of orders before the rush, the milk jug never empty for long." },
-    { type = "dialog", content = "Five, new girl. Next time I'll let you near the machine.", props = { speaker = "npc", npcId = "npc_chris" } },
+    { type = "dialog", content = "Five, pretty. Sundays it's just you and me.", props = { speaker = "npc", npcId = "npc_chris" } },
     { type = "paragraph", content = "He counts it into your hand without looking up from his phone. You made $5." },
   ] },
   { type = "group", props = { conditions = { version = "1.0", logic = "AND", items = [{ type = "weekday", weekdays = [0, 1, 2, 3, 4] }, { type = "time_of_day", start_time = "10:00", end_time = "19:56" }] } }, blocks = [
     { type = "paragraph", content = "An hour of orders and steam. Every time you bend for the milk, Tom's eyes drop to your ass and stay there." },
   { type = "paragraph", content = "You straighten up fast, your face hot. He doesn't look away." },
-    { type = "dialog", content = "Five, rookie. Not bad. Come back when you want more.", props = { speaker = "npc", npcId = "npc_tom" } },
+    { type = "dialog", content = "Five, sugar. Not bad. Come back when you want more.", props = { speaker = "npc", npcId = "npc_tom" } },
     { type = "paragraph", content = "He counts it into your hand. You made $5." },
   ] },
   { type = "group", props = { conditions = { version = "1.0", logic = "AND", items = [{ type = "weekday", weekdays = [5] }] } }, blocks = [
     { type = "paragraph", content = "An hour of orders and steam. Every time you bend for the milk, Tom's eyes drop to your ass and stay there." },
     { type = "paragraph", content = "You straighten up fast, your face hot. He doesn't look away." },
-    { type = "dialog", content = "Five, rookie. Not bad. Come back when you want more.", props = { speaker = "npc", npcId = "npc_tom" } },
+    { type = "dialog", content = "Five, sugar. Not bad. Come back when you want more.", props = { speaker = "npc", npcId = "npc_tom" } },
     { type = "paragraph", content = "He counts it into your hand. You made $5." },
   ] },
   { type = "group", props = { conditions = { version = "1.0", logic = "AND", items = [{ type = "weekday", weekdays = [6] }] } }, blocks = [
     { type = "paragraph", content = "Sundays it's you and Chris. He watches your chest when you reach for the cups." },
-    { type = "dialog", content = "Slow day, new girl. Entertain me. Go on, I'm bored.", props = { speaker = "npc", npcId = "npc_chris" } },
+    { type = "dialog", content = "Slow day, pretty. Entertain me. Go on, I'm bored.", props = { speaker = "npc", npcId = "npc_chris" } },
       { type = "dialog", content = "Not a chance.", props = { speaker = "player" } },
     { type = "paragraph", content = "He grins and doesn't move. You run the counter for an hour, and he counts five out of the till into your hand. You made $5." },
   ] },
@@ -1055,41 +1055,41 @@ name = "Work a shift"
 blocks = [
   { type = "group", props = { conditions = { version = "1.0", logic = "AND", items = [{ type = "weekday", weekdays = [0, 1, 2, 3, 4] }, { type = "time_of_day", start_time = "07:00", end_time = "10:00" }] } }, blocks = [
     { type = "paragraph", content = "Four hours behind the counter with Chris. He takes the machine and leaves you the till and the crumbs." },
-    { type = "dialog", content = "Don't break anything, new girl.", props = { speaker = "npc", npcId = "npc_chris" } },
-    { type = "dialog", content = "Twenty-two, new girl. Next time I'll let you near the machine.", props = { speaker = "npc", npcId = "npc_chris" } },
+    { type = "dialog", content = "Don't break anything, pretty.", props = { speaker = "npc", npcId = "npc_chris" } },
+    { type = "dialog", content = "Twenty-two, pretty. Sundays, it's you and me.", props = { speaker = "npc", npcId = "npc_chris" } },
     { type = "paragraph", content = "He counts it out of the till into your hand. You made $22." },
   ] },
   { type = "group", props = { conditions = { version = "1.0", logic = "AND", items = [{ type = "weekday", weekdays = [0, 1, 2, 3, 4] }, { type = "time_of_day", start_time = "10:00", end_time = "11:00" }] } }, blocks = [
     { type = "paragraph", content = "Four hours behind the counter with Chris. He takes the machine and leaves you the till and the crumbs." },
-    { type = "dialog", content = "Don't break anything, new girl.", props = { speaker = "npc", npcId = "npc_chris" } },
-    { type = "dialog", content = "Twenty-two, rookie. Good work. Same again tomorrow?", props = { speaker = "npc", npcId = "npc_tom" } },
+    { type = "dialog", content = "Don't break anything, pretty.", props = { speaker = "npc", npcId = "npc_chris" } },
+    { type = "dialog", content = "Twenty-two, sugar. Good work. Same again tomorrow?", props = { speaker = "npc", npcId = "npc_tom" } },
     { type = "paragraph", content = "He counts it into your hand. You made $22." },
   ] },
   { type = "group", props = { conditions = { version = "1.0", logic = "AND", items = [{ type = "weekday", weekdays = [0, 1, 2, 3, 4] }, { type = "time_of_day", start_time = "11:00", end_time = "15:00" }] } }, blocks = [
     { type = "paragraph", content = "Chris hands you the counter." },
-    { type = "dialog", content = "Don't break anything, new girl.", props = { speaker = "npc", npcId = "npc_chris" } },
+    { type = "dialog", content = "Don't break anything, pretty.", props = { speaker = "npc", npcId = "npc_chris" } },
     { type = "paragraph", content = "He leaves before your shift's done, with a wink you don't return. Then it's orders, steam and crumbs." },
-    { type = "dialog", content = "Twenty-two, rookie. Good work. Same again tomorrow?", props = { speaker = "npc", npcId = "npc_tom" } },
+    { type = "dialog", content = "Twenty-two, sugar. Good work. Same again tomorrow?", props = { speaker = "npc", npcId = "npc_tom" } },
     { type = "paragraph", content = "He counts it into your hand. You made $22." },
   ] },
   { type = "group", props = { conditions = { version = "1.0", logic = "AND", items = [{ type = "weekday", weekdays = [0, 1, 2, 3, 4] }, { type = "time_of_day", start_time = "15:00", end_time = "16:56" }] } }, blocks = [
     { type = "paragraph", content = "Tom has you on the till. Four hours of orders, steam and crumbs." },
-    { type = "dialog", content = "Twenty-two, rookie. Good work. Same again tomorrow?", props = { speaker = "npc", npcId = "npc_tom" } },
+    { type = "dialog", content = "Twenty-two, sugar. Good work. Same again tomorrow?", props = { speaker = "npc", npcId = "npc_tom" } },
     { type = "paragraph", content = "He counts it into your hand. You made $22." },
   ] },
   { type = "group", props = { conditions = { version = "1.0", logic = "AND", items = [{ type = "weekday", weekdays = [5] }] } }, blocks = [
     { type = "paragraph", content = "Saturdays the café is loud. Tom works the till, Chris works the machine, and you work everything else for four hours. Every time you bend for the milk, Tom's eyes drop to your ass and stay there. You straighten up fast, your face hot." },
     { type = "paragraph", content = "Chris, from the machine:" },
-    { type = "dialog", content = "Behind you, new girl.", props = { speaker = "npc", npcId = "npc_chris" } },
-    { type = "dialog", content = "Twenty-two. Good Saturday, rookie. Chris has you tomorrow.", props = { speaker = "npc", npcId = "npc_tom" } },
+    { type = "dialog", content = "Behind you, pretty. Mind the steam.", props = { speaker = "npc", npcId = "npc_chris" } },
+    { type = "dialog", content = "Twenty-two. Good Saturday, sugar. Chris has you tomorrow.", props = { speaker = "npc", npcId = "npc_tom" } },
     { type = "paragraph", content = "He counts it into your hand. You made $22." },
   ] },
   { type = "group", props = { conditions = { version = "1.0", logic = "AND", items = [{ type = "weekday", weekdays = [6] }] } }, blocks = [
     { type = "paragraph", content = "Sundays it's you and Chris. He spends half of it on his phone and the other half watching your chest when you reach for the cups." },
-    { type = "dialog", content = "Slow day, new girl. Entertain me.", props = { speaker = "npc", npcId = "npc_chris" } },
+    { type = "dialog", content = "Slow day, pretty. Entertain me.", props = { speaker = "npc", npcId = "npc_chris" } },
     { type = "dialog", content = "Grab a cloth, then.", props = { speaker = "player" } },
     { type = "paragraph", content = "He grins and doesn't move. You run the counter for four hours." },
-    { type = "dialog", content = "Twenty-two, new girl. Next Sunday you're entertaining me.", props = { speaker = "npc", npcId = "npc_chris" } },
+    { type = "dialog", content = "Twenty-two, pretty. Tom's back tomorrow, and he's no fun either.", props = { speaker = "npc", npcId = "npc_chris" } },
     { type = "paragraph", content = "He counts it out of the till into your hand. You made $22." },
   ] },
 ]
@@ -1136,7 +1136,7 @@ blocks = [
   { type = "group", props = { conditions = { version = "1.0", logic = "AND", items = [{ type = "time_of_day", start_time = "10:00", end_time = "19:56" }] } }, blocks = [
     { type = "paragraph", content = "An hour of orders and steam. Every time you bend for the milk, Tom's eyes drop to your ass and stay there." },
   { type = "paragraph", content = "You straighten up fast, your face hot. He doesn't look away." },
-    { type = "dialog", content = "Five, rookie. Not bad. Come back when you want more.", props = { speaker = "npc", npcId = "npc_tom" } },
+    { type = "dialog", content = "Five, sugar. Not bad. Come back when you want more.", props = { speaker = "npc", npcId = "npc_tom" } },
     { type = "paragraph", content = "He counts it into your hand. You made $5." },
   ] },
 ]
@@ -1169,7 +1169,7 @@ name = "Work an hour"
 blocks = [
   { type = "paragraph", content = "An hour of orders and steam. Every time you bend for the milk, Tom's eyes drop to your ass and stay there." },
   { type = "paragraph", content = "You straighten up fast, your face hot. He doesn't look away." },
-  { type = "dialog", content = "Five, rookie. Not bad. Come back when you want more.", props = { speaker = "npc", npcId = "npc_tom" } },
+  { type = "dialog", content = "Five, sugar. Not bad. Come back when you want more.", props = { speaker = "npc", npcId = "npc_tom" } },
   { type = "paragraph", content = "He counts it into your hand. You made $5." },
 ]
 
@@ -1239,19 +1239,19 @@ blocks = [
   { type = "group", props = { conditions = { version = "1.0", logic = "AND", items = [{ type = "time_of_day", start_time = "10:00", end_time = "11:00" }] } }, blocks = [
     { type = "paragraph", content = "Four hours behind the counter with Chris. He takes the machine and leaves you the till and the crumbs." },
     { type = "dialog", content = "Don't break anything, new girl.", props = { speaker = "npc", npcId = "npc_chris" } },
-    { type = "dialog", content = "Twenty-two, rookie. Good work. Same again tomorrow?", props = { speaker = "npc", npcId = "npc_tom" } },
+    { type = "dialog", content = "Twenty-two, sugar. Good work. Same again tomorrow?", props = { speaker = "npc", npcId = "npc_tom" } },
     { type = "paragraph", content = "He counts it into your hand. You made $22." },
   ] },
   { type = "group", props = { conditions = { version = "1.0", logic = "AND", items = [{ type = "time_of_day", start_time = "11:00", end_time = "15:00" }] } }, blocks = [
     { type = "paragraph", content = "Chris hands you the counter." },
     { type = "dialog", content = "Don't break anything, new girl.", props = { speaker = "npc", npcId = "npc_chris" } },
     { type = "paragraph", content = "He leaves before your shift's done, with a wink you don't return. Then it's orders, steam and crumbs." },
-    { type = "dialog", content = "Twenty-two, rookie. Good work. Same again tomorrow?", props = { speaker = "npc", npcId = "npc_tom" } },
+    { type = "dialog", content = "Twenty-two, sugar. Good work. Same again tomorrow?", props = { speaker = "npc", npcId = "npc_tom" } },
     { type = "paragraph", content = "He counts it into your hand. You made $22." },
   ] },
   { type = "group", props = { conditions = { version = "1.0", logic = "AND", items = [{ type = "time_of_day", start_time = "15:00", end_time = "16:56" }] } }, blocks = [
     { type = "paragraph", content = "Tom has you on the till. Four hours of orders, steam and crumbs." },
-    { type = "dialog", content = "Twenty-two, rookie. Good work. Same again tomorrow?", props = { speaker = "npc", npcId = "npc_tom" } },
+    { type = "dialog", content = "Twenty-two, sugar. Good work. Same again tomorrow?", props = { speaker = "npc", npcId = "npc_tom" } },
     { type = "paragraph", content = "He counts it into your hand. You made $22." },
   ] },
 ]
@@ -1285,7 +1285,7 @@ blocks = [
   { type = "paragraph", content = "Saturdays the café is loud. Tom works the till, Chris works the machine, and you work everything else for four hours. Every time you bend for the milk, Tom's eyes drop to your ass and stay there. You straighten up fast, your face hot." },
   { type = "paragraph", content = "Chris, from the machine:" },
   { type = "dialog", content = "Behind you, new girl.", props = { speaker = "npc", npcId = "npc_chris" } },
-  { type = "dialog", content = "Twenty-two. Good Saturday, rookie. Chris has you tomorrow.", props = { speaker = "npc", npcId = "npc_tom" } },
+  { type = "dialog", content = "Twenty-two. Good Saturday, sugar. Chris has you tomorrow.", props = { speaker = "npc", npcId = "npc_tom" } },
   { type = "paragraph", content = "He counts it into your hand. You made $22." },
 ]
 
@@ -2284,7 +2284,7 @@ blocks = [
   { type = "dialog", content = "Mark's got the remote. Don't even ask.", props = { speaker = "npc", npcId = "npc_ryan" } },
   { type = "dialog", content = "Like I'd ask him.", props = { speaker = "player" } },
   { type = "paragraph", content = "You sink into the couch next to him, and your shoulders come down." },
-  { type = "paragraph", content = "He says he'll save you the good end of the couch next time." },
+  { type = "paragraph", content = "He doesn't take the good end of the couch back." },
 ]
 
 [canvases.nodes.exit_block]
@@ -2675,7 +2675,7 @@ blocks = [
     { type = "paragraph", content = "You start slow round the loop, then faster. Your tits bounce in the sports top however tight you pulled it, and the leggings cling to your thighs with every stride. Your face is hot by the second bend. You keep the pace. Your legs will feel it later." },
   ] },
   { type = "group", props = { conditions = { version = "1.0", logic = "AND", items = [{ type = "flag", subject = "player", flag_key = "ran_once", operator = "is_true" }] } }, blocks = [
-    { type = "paragraph", content = "Two laps of the loop, your breath loud in your ears. Sweat soaks the back of your sports top, and your ass aches in the leggings by the second lap. You keep your eyes on the path, and wonder how far you'll get next time." },
+    { type = "paragraph", content = "Two laps of the loop, your breath loud in your ears. Sweat soaks the back of your sports top, and your ass aches in the leggings by the second lap. You keep your eyes on the path, your legs burning." },
   ] },
   { type = "image", props = { description = "Seen from the path: a woman of 18 running toward the camera in leggings and a sports top on a park loop by a pond. No man in frame.", search_queries = ["woman 18 jogging leggings sports bra park path gif", "girl running toward camera park pond gif"], pool_dir = "look/park_run_t3", pool = 2 } },
 ]
@@ -2714,7 +2714,7 @@ conditions = { version = "1.0", logic = "AND", items = [{ type = "npc_at_locatio
 id = "lift"
 name = "Work out"
 blocks = [
-  { type = "paragraph", content = "You show your pass at the desk and find a bench by the mirrors. You bend for the kettlebell, and in the mirror the leggings pull tight across your ass. Your thighs burn by the tenth rep. You finish the set, breathing hard. Next time you'll go heavier." },
+  { type = "paragraph", content = "You show your pass at the desk and find a bench by the mirrors. You bend for the kettlebell, and in the mirror the leggings pull tight across your ass. Your thighs burn by the tenth rep. You finish the set, breathing hard, your arms still shaking when you rack it." },
 ]
 
 [canvases.nodes.exit_block]
@@ -2994,12 +2994,12 @@ id = "drink"
 name = "Buy a coffee"
 blocks = [
   { type = "group", props = { conditions = { version = "1.0", logic = "AND", items = [{ type = "npc_at_location", npc_id = "npc_tom", location_id = "near_cafe", operator = "is_present" }] } }, blocks = [
-    { type = "dialog", content = "Black, rookie? Don't tell me, I know.", props = { speaker = "npc", npcId = "npc_tom" } },
+    { type = "dialog", content = "Black, sugar? Don't tell me, I know.", props = { speaker = "npc", npcId = "npc_tom" } },
     { type = "paragraph", content = "Tom pours your coffee and slides it across. You drink it by the window, and he asks when your next shift is." },
   ] },
   { type = "group", props = { conditions = { version = "1.0", logic = "AND", items = [{ type = "npc_at_location", npc_id = "npc_chris", location_id = "near_cafe", operator = "is_present" }] } }, blocks = [
-    { type = "dialog", content = "Three, new girl. For you, four.", props = { speaker = "npc", npcId = "npc_chris" } },
-    { type = "paragraph", content = "Chris pours your coffee with a wink. You drink it by the window, and he says he'll make the next one better." },
+    { type = "dialog", content = "Three, pretty. For you, four.", props = { speaker = "npc", npcId = "npc_chris" } },
+    { type = "paragraph", content = "Chris pours your coffee with a wink. You drink it by the window, and he watches you over the machine the whole time." },
   ] },
 ]
 
@@ -3133,9 +3133,9 @@ blocks = [
   { type = "group", props = { conditions = { version = "1.0", logic = "AND", items = [{ type = "npc_at_location", npc_id = "npc_nina", location_id = "hood_clothes", operator = "is_present" }] } }, blocks = [
     { type = "dialog", content = "Let me see. Come on, I won't tell.", props = { speaker = "npc", npcId = "npc_nina" } },
     { type = "dialog", content = "Not a chance.", props = { speaker = "player" } },
-    { type = "dialog", content = "Your loss, sweetie. Next time, then.", props = { speaker = "npc", npcId = "npc_nina" } },
+    { type = "dialog", content = "Your loss, sweetie. The curtain's there whenever you want it.", props = { speaker = "npc", npcId = "npc_nina" } },
   ] },
-  { type = "paragraph", content = "You put your own clothes back on, your face hot, and hang the skirt where you'll find it next time." },
+  { type = "paragraph", content = "You put your own clothes back on, your face hot, and hang the skirt back on the rail." },
 ]
 
 [canvases.nodes.exit_block]
@@ -3536,7 +3536,7 @@ blocks = [
   { type = "dialog", content = "Miss @player. Keep up.", props = { speaker = "npc", npcId = "npc_pratt" } },
   { type = "dialog", content = "I am.", props = { speaker = "player" } },
   { type = "dialog", content = "We'll see.", props = { speaker = "npc", npcId = "npc_pratt" } },
-  { type = "paragraph", content = "Next time, you'll have to prove it." },
+  { type = "paragraph", content = "Your hand aches from copying, and the numbers are still on the board when you leave." },
 ]
 
 [canvases.nodes.exit_block]
@@ -3596,9 +3596,9 @@ id = "class"
 name = "Go to drama"
 blocks = [
   { type = "paragraph", content = "Mr. Cross has you all on the stage in a line, then one by one at the front. When it's your turn, he makes you say the line three times, louder each time, until your voice fills the room and your face is burning. Everyone's watching. That's the point, he says." },
-  { type = "dialog", content = "Again. Louder, new face. Make them look at you.", props = { speaker = "npc", npcId = "npc_cross" } },
+  { type = "dialog", content = "Again. Louder, starlet. Make them look at you.", props = { speaker = "npc", npcId = "npc_cross" } },
   { type = "dialog", content = "Like this?", props = { speaker = "player" } },
-  { type = "dialog", content = "Closer. Next time, I'll show you.", props = { speaker = "npc", npcId = "npc_cross" } },
+  { type = "dialog", content = "Closer. Make them want to look.", props = { speaker = "npc", npcId = "npc_cross" } },
 ]
 
 [canvases.nodes.exit_block]
@@ -4659,7 +4659,7 @@ name = "Zoe's party"
 # P48 — Zoe's Dancer and Open Relationships, and Sam's Open Relationships, shown in play (LO 2026-11-25: "1").
 blocks = [
   { type = "paragraph", content = "Zoe's up on the sofa arm before you've finished saying it, arms over her head, dancing like the party's hers." },
-  { type = "dialog", content = "Next time, then. I'm holding you to it.", props = { speaker = "npc", npcId = "npc_zoe" } },
+  { type = "dialog", content = "Your loss, babe. There's a party here every Saturday.", props = { speaker = "npc", npcId = "npc_zoe" } },
   { type = "group", props = { conditions = { version = "1.0", logic = "AND", items = [{ type = "flag", subject = "player", flag_key = "met_sam", operator = "is_true" }] } }, blocks = [
     { type = "paragraph", content = "She jumps down, and a guy you don't know kisses her neck on his way past. She lets him. Sam's on the sofa under the coats, and he just grins." },
     { type = "dialog", content = "Don't look at Sam like that, babe. Sam's not mine. Nobody's mine.", props = { speaker = "npc", npcId = "npc_zoe" } },
@@ -4747,7 +4747,11 @@ id = "away"
 name = "Their door's open a crack"
 blocks = [
   { type = "paragraph", content = "You back down the hall on your toes. The tapping follows you all the way to your door." },
-  { type = "paragraph", content = "Their door's never quite shut. You know that now." },
+  { type = "paragraph", content = "Their door's never quite shut." },
+  # P74 — a discovery is true once: held until the seen flag is set (craft/voice.md truth rule 6, C2202).
+  { type = "group", props = { conditions = { version = "1.0", logic = "AND", items = [{ type = "flag", subject = "player", flag_key = "saw_mom_and_mark", operator = "is_false" }] } }, blocks = [
+    { type = "paragraph", content = "You know that now." },
+  ] },
 ]
 
 [canvases.nodes.exit_block]
@@ -4758,6 +4762,8 @@ text = "Done"
 targetType = "location"
 locationId = "home_her_room"
 time_progression_minutes = 5
+# P74 — backing away also counts as having seen them (NOTES: Same meaning: saw_mom_and_mark).
+flagEffects = [{ flag = "saw_mom_and_mark", op = "set" }]
 
 [[canvases]]
 id = "walk_ryan_phone"
@@ -5205,11 +5211,11 @@ blocks = [
   { type = "paragraph", content = "You stay in the back row instead of joining in. The class is in a line on the stage, saying their line louder each time." },
   { type = "group", props = { conditions = { version = "1.0", logic = "AND", items = [{ type = "flag", subject = "player", flag_key = "met_cross", operator = "is_true" }] } }, blocks = [
     { type = "paragraph", content = "Cross finds you in the back row." },
-    { type = "dialog", content = "You. Up here next time, not hiding. I mean it.", props = { speaker = "npc", npcId = "npc_cross" } },
+    { type = "dialog", content = "You. The back row's for people who've given up. Up here, with the rest of them.", props = { speaker = "npc", npcId = "npc_cross" } },
   ] },
   { type = "group", props = { conditions = { version = "1.0", logic = "AND", items = [{ type = "flag", subject = "player", flag_key = "met_cross", operator = "is_false" }] } }, blocks = [
     { type = "paragraph", content = "The drama teacher finds you in the back row." },
-    { type = "dialog", content = "You. Up here next time, not hiding. I mean it.", props = { speaker = "unknown" } },
+    { type = "dialog", content = "You. The back row's for people who've given up. Up here, with the rest of them.", props = { speaker = "unknown" } },
   ] },
   { type = "paragraph", content = "Your face goes hot all the way down your neck." },
 ]
@@ -5273,7 +5279,7 @@ blocks = [
   { type = "paragraph", content = "You take the table by the window and watch campus through the glass." },
   { type = "group", props = { conditions = { version = "1.0", logic = "AND", items = [{ type = "flag", subject = "player", flag_key = "met_chris", operator = "is_true" }, { type = "npc_at_location", npc_id = "npc_chris", location_id = "near_cafe", operator = "is_present" }] } }, blocks = [
     { type = "paragraph", content = "Chris tops up your water without being asked, and looks a second too long, like he hates that he's looking." },
-    { type = "dialog", content = "Free water, new girl. Don't get used to it. You're already eating into my hours.", props = { speaker = "npc", npcId = "npc_chris" } },
+    { type = "dialog", content = "Free water, pretty. Don't get used to it. You're already eating into my hours.", props = { speaker = "npc", npcId = "npc_chris" } },
   ] },
   { type = "group", props = { conditions = { version = "1.0", logic = "AND", items = [{ type = "flag", subject = "player", flag_key = "met_tom", operator = "is_true" }, { type = "npc_at_location", npc_id = "npc_tom", location_id = "near_cafe", operator = "is_present" }] } }, blocks = [
     { type = "paragraph", content = "Tom glances over from the till and lets you be." },
@@ -6431,7 +6437,11 @@ name = "Behind the pond"
 blocks = [
   { type = "paragraph", content = "He drives his cock into her harder, her heels digging in, until she arches and moans under him, and he pulls out and cums across her thigh." },
   { type = "dialog", content = "Fuck. Fuck, yes. Fuck.", props = { speaker = "unknown" } },
-  { type = "paragraph", content = "Your thighs clench. You know which gap in the bushes now." },
+  { type = "paragraph", content = "Your thighs clench." },
+  # P74 — a discovery is true once: held until the seen flag is set (craft/voice.md truth rule 6, C2202).
+  { type = "group", props = { conditions = { version = "1.0", logic = "AND", items = [{ type = "flag", subject = "player", flag_key = "saw_park_couple", operator = "is_false" }] } }, blocks = [
+    { type = "paragraph", content = "You know which gap in the bushes now." },
+  ] },
 ]
 
 [canvases.nodes.exit_block]
@@ -6448,7 +6458,11 @@ flagEffects = [{ flag = "saw_park_couple", op = "set" }]
 id = "away"
 name = "Behind the pond"
 blocks = [
-  { type = "paragraph", content = "You back onto the path before a twig can snap. You know that gap's there now." },
+  { type = "paragraph", content = "You back onto the path before a twig can snap." },
+  # P74 — a discovery is true once: held until the seen flag is set (craft/voice.md truth rule 6, C2202).
+  { type = "group", props = { conditions = { version = "1.0", logic = "AND", items = [{ type = "flag", subject = "player", flag_key = "saw_park_couple", operator = "is_false" }] } }, blocks = [
+    { type = "paragraph", content = "You know that gap's there now." },
+  ] },
 ]
 
 [canvases.nodes.exit_block]
@@ -6459,6 +6473,8 @@ text = "Done"
 targetType = "location"
 locationId = "hood_park"
 time_progression_minutes = 5
+# P74 — backing away also counts as having seen them (NOTES: Same meaning: saw_park_couple).
+flagEffects = [{ flag = "saw_park_couple", op = "set" }]
 
 [[canvases]]
 id = "walk_vance_ledger"
@@ -6821,7 +6837,7 @@ time_progression_minutes = 0
 id = "shut"
 name = "Try something on"
 blocks = [
-  { type = "paragraph", content = "You hold the curtain shut with both hands until your heart slows down. Next time you'll check the hooks." },
+  { type = "paragraph", content = "You hold the curtain shut with both hands until your heart slows down." },
 ]
 
 [canvases.nodes.exit_block]
@@ -6838,7 +6854,7 @@ flagEffects = [{ flag = "curtain_stranger", op = "set" }]
 id = "finish"
 name = "Try something on"
 blocks = [
-  { type = "paragraph", content = "You finish changing with your back to the curtain, fast. Next time you'll pull the curtain tighter." },
+  { type = "paragraph", content = "You finish changing with your back to the curtain, fast, your face still burning." },
 ]
 
 [canvases.nodes.exit_block]
@@ -6915,7 +6931,11 @@ flagEffects = [{ flag = "saw_stacks_couple", op = "set" }]
 id = "away"
 name = "The back stacks"
 blocks = [
-  { type = "paragraph", content = "You back out of the aisle, very upright, your face still hot. You know which shelf now." },
+  { type = "paragraph", content = "You back out of the aisle, very upright, your face still hot." },
+  # P74 — a discovery is true once: held until the seen flag is set (craft/voice.md truth rule 6, C2202).
+  { type = "group", props = { conditions = { version = "1.0", logic = "AND", items = [{ type = "flag", subject = "player", flag_key = "saw_stacks_couple", operator = "is_false" }] } }, blocks = [
+    { type = "paragraph", content = "You know which shelf now." },
+  ] },
 ]
 
 [canvases.nodes.exit_block]
@@ -6926,6 +6946,8 @@ text = "Done"
 targetType = "location"
 locationId = "campus_library"
 time_progression_minutes = 5
+# P74 — backing away also counts as having seen them (NOTES: Same meaning: saw_stacks_couple).
+flagEffects = [{ flag = "saw_stacks_couple", op = "set" }]
 
 [[canvases]]
 id = "walk_hale_note"
@@ -7182,7 +7204,7 @@ time_progression_minutes = 0
 id = "watch"
 name = "A rehearsal"
 blocks = [
-  { type = "paragraph", content = "You watch his hand stay on her waist through the whole scene. When they finish, he looks up into the dark seats, straight at you. One day he'll place you like that." },
+  { type = "paragraph", content = "You watch his hand stay on her waist through the whole scene. When they finish, he looks up into the dark seats, straight at you. Your own waist prickles where his hand would go." },
 ]
 
 [canvases.nodes.exit_block]
@@ -7253,7 +7275,7 @@ id = "again"
 name = "Practise on the empty stage"
 blocks = [
   { type = "paragraph", content = "You say it again, louder, into the dark." },
-  { type = "dialog", content = "Better. See you at two, new face.", props = { speaker = "npc", npcId = "npc_cross" } },
+  { type = "dialog", content = "Better. See you at two, starlet.", props = { speaker = "npc", npcId = "npc_cross" } },
   { type = "paragraph", content = "You're shaking when you get off the stage." },
 ]
 
@@ -7332,7 +7354,11 @@ name = "Through the hall door"
 blocks = [
   { type = "paragraph", content = "Zoe rides his cock harder, her tits bouncing in his hands, until she throws her head back and shakes on top of him, and he comes up into her cunt with a groan." },
   { type = "dialog", content = "Fuck, Sam. Fuck.", props = { speaker = "npc", npcId = "npc_zoe" } },
-  { type = "paragraph", content = "Your thighs are pressed together and your face is on fire. You know what that sofa's seen now." },
+  { type = "paragraph", content = "Your thighs are pressed together and your face is on fire." },
+  # P74 — a discovery is true once: held until the seen flag is set (craft/voice.md truth rule 6, C2202).
+  { type = "group", props = { conditions = { version = "1.0", logic = "AND", items = [{ type = "flag", subject = "player", flag_key = "saw_zoe_sam", operator = "is_false" }] } }, blocks = [
+    { type = "paragraph", content = "You know what that sofa's seen now." },
+  ] },
 ]
 
 [canvases.nodes.exit_block]
@@ -7349,7 +7375,7 @@ flagEffects = [{ flag = "saw_zoe_sam", op = "set" }]
 id = "out"
 name = "Through the hall door"
 blocks = [
-  { type = "paragraph", content = "You pull the door to, quietly. Zoe's laugh carries through it. She'll know you were there. Zoe always knows." },
+  { type = "paragraph", content = "You pull the door to, quietly. Zoe's laugh carries through it, and your face burns." },
 ]
 
 [canvases.nodes.exit_block]
@@ -7548,7 +7574,7 @@ time_progression_minutes = 0
 id = "nothing"
 name = "Tom's at the tip jar"
 blocks = [
-  { type = "paragraph", content = "You say nothing. He knows you saw. He'll be watching you next shift." },
+  { type = "paragraph", content = "You say nothing. He knows you saw, and he doesn't look away." },
 ]
 
 [canvases.nodes.exit_block]
@@ -7566,7 +7592,7 @@ id = "tips"
 name = "Tom's at the tip jar"
 blocks = [
   { type = "dialog", content = "And I'm the one who pays the rent on this place.", props = { speaker = "npc", npcId = "npc_tom" } },
-  { type = "paragraph", content = "He doesn't put them back. You'll be counting the jar next time." },
+  { type = "paragraph", content = "He doesn't put them back. You watch the jar until he's back at the till." },
 ]
 
 [canvases.nodes.exit_block]
@@ -7623,7 +7649,11 @@ blocks = [
   { type = "paragraph", content = "He fingers her faster, two deep in her cunt, until her knees buckle and she cums on his hand, her tits heaving." },
   { type = "dialog", content = "That's it. Come for me.", props = { speaker = "npc", npcId = "npc_chris" } },
   { type = "dialog", content = "Oh God. Oh God, Chris.", props = { speaker = "unknown" } },
-  { type = "paragraph", content = "Your nipples are hard. You're back out front before they come out. You know what Chris does on weekends now." },
+  { type = "paragraph", content = "Your nipples are hard. You're back out front before they come out." },
+  # P74 — a discovery is true once: held until the seen flag is set (craft/voice.md truth rule 6, C2202).
+  { type = "group", props = { conditions = { version = "1.0", logic = "AND", items = [{ type = "flag", subject = "player", flag_key = "saw_chris_store", operator = "is_false" }] } }, blocks = [
+    { type = "paragraph", content = "You know what Chris does on weekends now." },
+  ] },
 ]
 
 [canvases.nodes.exit_block]
@@ -7640,7 +7670,7 @@ flagEffects = [{ flag = "saw_chris_store", op = "set" }]
 id = "out"
 name = "The storeroom door"
 blocks = [
-  { type = "paragraph", content = "You back out into the café. The shelf rattles behind the door. It won't be the last time." },
+  { type = "paragraph", content = "You back out into the café. The shelf rattles behind the door, and keeps rattling." },
 ]
 
 [canvases.nodes.exit_block]
@@ -7696,7 +7726,11 @@ name = "Find the bathroom"
 blocks = [
   { type = "paragraph", content = "His tongue's buried in her cunt, his hands up on her tits, until she pulls his hair and cums, moaning over the music." },
   { type = "dialog", content = "Fuck. Oh, fuck. Yes. Yes. God. Don't you dare stop.", props = { speaker = "unknown" } },
-  { type = "paragraph", content = "You're wet. You shut the door before they see you. You know that door now." },
+  { type = "paragraph", content = "You're wet. You shut the door before they see you." },
+  # P74 — a discovery is true once: held until the seen flag is set (craft/voice.md truth rule 6, C2202).
+  { type = "group", props = { conditions = { version = "1.0", logic = "AND", items = [{ type = "flag", subject = "player", flag_key = "saw_party_bathroom", operator = "is_false" }] } }, blocks = [
+    { type = "paragraph", content = "You know that door now." },
+  ] },
 ]
 
 [canvases.nodes.exit_block]
@@ -7713,7 +7747,11 @@ flagEffects = [{ flag = "saw_party_bathroom", op = "set" }]
 id = "shut"
 name = "Find the bathroom"
 blocks = [
-  { type = "paragraph", content = "You shut the door. The music sounds louder than before. You know that door now." },
+  { type = "paragraph", content = "You shut the door. The music sounds louder than before." },
+  # P74 — a discovery is true once: held until the seen flag is set (craft/voice.md truth rule 6, C2202).
+  { type = "group", props = { conditions = { version = "1.0", logic = "AND", items = [{ type = "flag", subject = "player", flag_key = "saw_party_bathroom", operator = "is_false" }] } }, blocks = [
+    { type = "paragraph", content = "You know that door now." },
+  ] },
 ]
 
 [canvases.nodes.exit_block]
@@ -7782,7 +7820,7 @@ name = "Bus to town"
 blocks = [
   { type = "dialog", content = "Back off. I mean it.", props = { speaker = "player" } },
   { type = "dialog", content = "Relax, sweetheart. It's a bus.", props = { speaker = "unknown" } },
-  { type = "paragraph", content = "He shifts half an inch and no further. You step off in town with your legs shaking. Next time, you'll stand by the doors." },
+  { type = "paragraph", content = "He shifts half an inch and no further. You step off in town with your legs shaking." },
 ]
 
 [canvases.nodes.exit_block]
@@ -7799,8 +7837,8 @@ id = "packed_quiet"
 name = "Bus to town"
 blocks = [
   { type = "paragraph", content = "You say nothing, and he breathes against your neck." },
-  { type = "dialog", content = "Good girl. I'll look for you on this bus.", props = { speaker = "unknown" } },
-  { type = "paragraph", content = "You step off in town with your face burning. Next time, you'll stand by the doors." },
+  { type = "dialog", content = "Good girl. You've made my whole morning.", props = { speaker = "unknown" } },
+  { type = "paragraph", content = "You step off in town with your face burning, and you can still feel where he was." },
 ]
 
 [canvases.nodes.exit_block]
@@ -8070,8 +8108,8 @@ name = "Talk to Dr. Hale"
 blocks = [
   { type = "paragraph", content = "Dr. Hale points at the chair, and you sit." },
   { type = "dialog", content = "Nobody comes to my door without a question, young lady. Ask it.", props = { speaker = "npc", npcId = "npc_hale" } },
-  { type = "dialog", content = "The reading, sir. I don't get the part about memory.", props = { speaker = "player" } },
-  { type = "dialog", content = "Nobody does at first. Read it twice. Then come back and tell me what you think it says.", props = { speaker = "npc", npcId = "npc_hale" } },
+  { type = "dialog", content = "The reading, sir. I'm stuck on it.", props = { speaker = "player" } },
+  { type = "dialog", content = "Everyone is, at first. Read it twice, slowly, and it'll start to make sense.", props = { speaker = "npc", npcId = "npc_hale" } },
   { type = "dialog", content = "Monday, nine o'clock. Front row. I'll be looking for you.", props = { speaker = "npc", npcId = "npc_hale" } },
 ]
 
@@ -8130,10 +8168,10 @@ name = "Talk to Mr. Pratt"
 blocks = [
   { type = "paragraph", content = "He caps the marker and turns round." },
   { type = "dialog", content = "Miss @player. Sit. What is it?", props = { speaker = "npc", npcId = "npc_pratt" } },
-  { type = "dialog", content = "The problem set, sir. Number three.", props = { speaker = "player" } },
-  { type = "dialog", content = "Everyone gets three wrong. You divided before you squared.", props = { speaker = "npc", npcId = "npc_pratt" } },
-  { type = "paragraph", content = "He writes it out on the board, fast." },
-  { type = "dialog", content = "Do it again tonight. Wednesday at eleven, I'll call on you first.", props = { speaker = "npc", npcId = "npc_pratt" } },
+  { type = "dialog", content = "The problem set, sir. I'm stuck.", props = { speaker = "player" } },
+  { type = "dialog", content = "Everyone's stuck. Show me.", props = { speaker = "npc", npcId = "npc_pratt" } },
+  { type = "paragraph", content = "He reads your working upside down and taps one line with the marker." },
+  { type = "dialog", content = "There. Fix it tonight. Mondays and Wednesdays at eleven, it's more of the same.", props = { speaker = "npc", npcId = "npc_pratt" } },
 ]
 
 [canvases.nodes.exit_block]
@@ -8193,7 +8231,7 @@ blocks = [
   { type = "dialog", content = "It's a lot. Everyone here seems to know where they're going.", props = { speaker = "player" } },
   { type = "dialog", content = "Nobody does, dear. They're just louder about it.", props = { speaker = "npc", npcId = "npc_walsh" } },
   { type = "paragraph", content = "She pours you a cup without waiting for an answer." },
-  { type = "dialog", content = "Bring me your essay before you hand it in, any Tuesday or Thursday afternoon. We'll read it together.", props = { speaker = "npc", npcId = "npc_walsh" } },
+  { type = "dialog", content = "My door's open Tuesday and Thursday afternoons, dear. The kettle's always on.", props = { speaker = "npc", npcId = "npc_walsh" } },
 ]
 
 [canvases.nodes.exit_block]
@@ -8311,11 +8349,11 @@ id = "talk"
 name = "Talk to Mr. Cross"
 blocks = [
   { type = "paragraph", content = "He doesn't take his feet off the stage." },
-  { type = "dialog", content = "New face. You came to watch, or to work?", props = { speaker = "npc", npcId = "npc_cross" } },
-  { type = "dialog", content = "To work. If you'll have me.", props = { speaker = "player" } },
-  { type = "dialog", content = "I'll have you when you can fill this room. Say your name. Like you're selling it.", props = { speaker = "npc", npcId = "npc_cross" } },
-  { type = "dialog", content = "@player.", props = { speaker = "player" } },
-  { type = "dialog", content = "Again. From the gut. Next rehearsal, you're on the stage, not in the seats.", props = { speaker = "npc", npcId = "npc_cross" } },
+  { type = "dialog", content = "You again, starlet. Watching, or working?", props = { speaker = "npc", npcId = "npc_cross" } },
+  { type = "dialog", content = "Working. If you'll have me.", props = { speaker = "player" } },
+  { type = "dialog", content = "Then stop standing in the aisle like an usher. Shoulders back. Say something, like you're selling it.", props = { speaker = "npc", npcId = "npc_cross" } },
+  { type = "dialog", content = "Hello, Mr. Cross.", props = { speaker = "player" } },
+  { type = "dialog", content = "Better. From the gut. Tuesdays and Thursdays at eleven, you're on that stage with the rest of them.", props = { speaker = "npc", npcId = "npc_cross" } },
 ]
 
 [canvases.nodes.exit_block]
@@ -8435,7 +8473,7 @@ blocks = [
   { type = "dialog", content = "Everyone here's ahead of me.", props = { speaker = "player" } },
   { type = "dialog", content = "They're not. Half of them are faking. I'm doing psych twice, and I'm still faking.", props = { speaker = "npc", npcId = "npc_nadia" } },
   { type = "paragraph", content = "She pushes half her snack across to you." },
-  { type = "dialog", content = "Psych, Monday and Wednesday at nine. Sit by me, not at the back. I'll tell you which ones are faking.", props = { speaker = "npc", npcId = "npc_nadia" } },
+  { type = "dialog", content = "Psych, Monday and Wednesday at nine. Sit by me, not at the back. The back's where they fake it.", props = { speaker = "npc", npcId = "npc_nadia" } },
 ]
 
 [canvases.nodes.exit_block]
@@ -8495,7 +8533,7 @@ blocks = [
   { type = "dialog", content = "Everyone here's ahead of me.", props = { speaker = "player" } },
   { type = "dialog", content = "They're not. Half of them are faking. I'm doing psych twice, and I'm still faking.", props = { speaker = "npc", npcId = "npc_nadia" } },
   { type = "paragraph", content = "She pushes half her snack across to you." },
-  { type = "dialog", content = "Psych, Monday and Wednesday at nine. Sit by me, not at the back. I'll tell you which ones are faking.", props = { speaker = "npc", npcId = "npc_nadia" } },
+  { type = "dialog", content = "Psych, Monday and Wednesday at nine. Sit by me, not at the back. The back's where they fake it.", props = { speaker = "npc", npcId = "npc_nadia" } },
 ]
 
 [canvases.nodes.exit_block]
@@ -8791,12 +8829,12 @@ time_progression_minutes = 0
 id = "talk"
 name = "Talk to Jake"
 blocks = [
-  { type = "dialog", content = "Hey, trouble. You stopped.", props = { speaker = "npc", npcId = "npc_jake" } },
-  { type = "dialog", content = "Why wouldn't I?", props = { speaker = "player" } },
-  { type = "dialog", content = "The coffee thing. I thought maybe I scared you off. Did I?", props = { speaker = "npc", npcId = "npc_jake" } },
-  { type = "dialog", content = "You didn't scare me off.", props = { speaker = "player" } },
+  { type = "dialog", content = "Hey, trouble.", props = { speaker = "npc", npcId = "npc_jake" } },
+  { type = "dialog", content = "Hey, Jake.", props = { speaker = "player" } },
+  { type = "dialog", content = "You look like you need a break from this place. I know I do.", props = { speaker = "npc", npcId = "npc_jake" } },
   { type = "paragraph", content = "He rubs the back of his neck and grins at the ground." },
-  { type = "dialog", content = "Okay. Good. There's a café across from the gates. That's not me asking. Okay, it's me asking.", props = { speaker = "npc", npcId = "npc_jake" } },
+  { type = "dialog", content = "The café across from the gates does good coffee. That's not me asking. Okay, it's me asking.", props = { speaker = "npc", npcId = "npc_jake" } },
+  { type = "dialog", content = "Maybe.", props = { speaker = "player" } },
 ]
 
 [canvases.nodes.exit_block]
@@ -8852,12 +8890,12 @@ time_progression_minutes = 0
 id = "talk"
 name = "Talk to Jake"
 blocks = [
-  { type = "dialog", content = "Hey, trouble. You stopped.", props = { speaker = "npc", npcId = "npc_jake" } },
-  { type = "dialog", content = "Why wouldn't I?", props = { speaker = "player" } },
-  { type = "dialog", content = "The coffee thing. I thought maybe I scared you off. Did I?", props = { speaker = "npc", npcId = "npc_jake" } },
-  { type = "dialog", content = "You didn't scare me off.", props = { speaker = "player" } },
+  { type = "dialog", content = "Hey, trouble.", props = { speaker = "npc", npcId = "npc_jake" } },
+  { type = "dialog", content = "Hey, Jake.", props = { speaker = "player" } },
+  { type = "dialog", content = "You look like you need a break from this place. I know I do.", props = { speaker = "npc", npcId = "npc_jake" } },
   { type = "paragraph", content = "He rubs the back of his neck and grins at the ground." },
-  { type = "dialog", content = "Okay. Good. There's a café across from the gates. That's not me asking. Okay, it's me asking.", props = { speaker = "npc", npcId = "npc_jake" } },
+  { type = "dialog", content = "The café across from the gates does good coffee. That's not me asking. Okay, it's me asking.", props = { speaker = "npc", npcId = "npc_jake" } },
+  { type = "dialog", content = "Maybe.", props = { speaker = "player" } },
 ]
 
 [canvases.nodes.exit_block]
@@ -9284,11 +9322,11 @@ time_progression_minutes = 0
 id = "talk"
 name = "Talk to Tom"
 blocks = [
-  { type = "dialog", content = "Rookie. You're not on, and you're here anyway.", props = { speaker = "npc", npcId = "npc_tom" } },
+  { type = "dialog", content = "Sugar. You're not on, and you're here anyway.", props = { speaker = "npc", npcId = "npc_tom" } },
   { type = "dialog", content = "I like it in here.", props = { speaker = "player" } },
   { type = "dialog", content = "Everyone likes it in here when they're not working.", props = { speaker = "npc", npcId = "npc_tom" } },
   { type = "paragraph", content = "He wipes the counter where it's already clean, and watches your hands, not your face." },
-  { type = "dialog", content = "Saturdays are the busy ones, ten till nine. That's where the tips are, if you want them.", props = { speaker = "npc", npcId = "npc_tom" } },
+  { type = "dialog", content = "Saturdays are the busy ones, ten till nine. I could use the hands, if you want them.", props = { speaker = "npc", npcId = "npc_tom" } },
   { type = "dialog", content = "I might.", props = { speaker = "player" } },
   { type = "dialog", content = "You will.", props = { speaker = "npc", npcId = "npc_tom" } },
 ]
@@ -9346,11 +9384,11 @@ time_progression_minutes = 0
 id = "talk"
 name = "Talk to Chris"
 blocks = [
-  { type = "dialog", content = "New girl. Off the clock?", props = { speaker = "npc", npcId = "npc_chris" } },
+  { type = "dialog", content = "Pretty. Off the clock?", props = { speaker = "npc", npcId = "npc_chris" } },
   { type = "dialog", content = "I came for the coffee.", props = { speaker = "player" } },
   { type = "dialog", content = "Liar. You came to watch me work.", props = { speaker = "npc", npcId = "npc_chris" } },
-  { type = "paragraph", content = "He knocks the grounds out hard, and his eyes go down you and back up." },
-  { type = "dialog", content = "Next Sunday, Tom's off. Come in and see what I'm like with nobody watching.", props = { speaker = "npc", npcId = "npc_chris" } },
+  { type = "paragraph", content = "He knocks the grounds out hard, and his eyes go down your tits to your hips and back up." },
+  { type = "dialog", content = "Sundays, Tom's off. Come in and see what I'm like with nobody watching.", props = { speaker = "npc", npcId = "npc_chris" } },
 ]
 
 [canvases.nodes.exit_block]
@@ -9885,7 +9923,7 @@ name = "The van"
 blocks = [
   { type = "dialog", content = "Need a lift?", props = { speaker = "unknown" } },
   { type = "paragraph", content = "He smiles slowly when you don't answer. Your legs feel very bare." },
-  { type = "dialog", content = "Next time, then, darling.", props = { speaker = "unknown" } },
+  { type = "dialog", content = "This road, every day, darling. Think about it.", props = { speaker = "unknown" } },
 ]
 
 [canvases.nodes.exit_block]

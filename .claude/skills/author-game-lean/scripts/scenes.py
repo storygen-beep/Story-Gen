@@ -13,6 +13,9 @@
   speakers  every dialog block names its speaker, and a person speaker is a person in the game (v2's
             `speakers are named`, gates.py:9500)
   goals     a quest-card goal line reads the way it works (v2's `a goal line reads the way it works`, gates.py:18911)
+  repeats   on a repeatable scene, no person says first-meeting words ("new face", "say your name"), and no line,
+            spoken or narrated, makes a "next time" promise, unless a group holds it on a flag's is_false side
+            (C2202). A flag a tick unsets doesn't make a scene play once.
 
 What these can't see is still the writer's and the reader's: whether a line is true in what it says, a screen's
 one job, a person named in narration (only speakers are placed), and the opening's own clock. `talk` counts a
@@ -554,9 +557,92 @@ def check_goals(game):
     return (RED, rows) if rows else (GREEN, [])
 
 
+# ── repeats ───────────────────────────────────────────────────────────────────────────────────────────────
+
+# Spoken words that are true only once (craft/voice.md, the truth rule, rule 6; C2202). A first meeting: the
+# meeting scene says it, once. A promise of what happens "next time": a repeatable renews it on every visit.
+FIRST_MEETING = re.compile(r"\bnew (?:face|girl|guy|kid)\b|\b(?:say|what'?s|tell me) your name\b|\bname\?|"
+                           r"\bnice to meet you\b|\bwho are you\b", re.I)
+PROMISE = re.compile(r"\bnext (?:time|rehearsal|class|shift|lesson|session|week|\w+day),? "
+                     r"(?:i'll|i will|i'm going to|you'll|you will|you're|we'll|he'll|she'll)\b|\bnext time,? then\b|"
+                     r"\b(?:i|you|he|she|we|they)'ll\b[^.!?\"]{0,50}\bnext time\b", re.I)
+
+
+def own_sets(c):
+    """Flags a canvas sets anywhere in itself."""
+    out = set()
+
+    def visit(d):
+        if isinstance(d, dict):
+            for ef in d.get("flagEffects") or []:
+                if isinstance(ef, dict) and ef.get("flag") and ef.get("op", "set") == "set":
+                    out.add(ef["flag"])
+            for v in d.values():
+                visit(v)
+        elif isinstance(d, list):
+            for v in d:
+                visit(v)
+    visit(c)
+    return out
+
+
+def unset_anywhere(game):
+    """Flags any effect in the game unsets: a day or week tick, or a choice. Such a flag can be false again."""
+    out = set()
+
+    def visit(d):
+        if isinstance(d, dict):
+            if d.get("flag") and d.get("op") == "unset":
+                out.add(d["flag"])
+            for v in d.values():
+                visit(v)
+        elif isinstance(d, list):
+            for v in d:
+                visit(v)
+    visit(game)
+    return out
+
+
+def before_flag(conds):
+    """True when a group's conditions read a flag on its not-yet side (`is_false`): the line shows until something
+    happens, so a promise or a first-time word there stops once the flag is set."""
+    return any(i.get("type") == "flag" and i.get("operator") == "is_false" for cond in conds for i in items(cond))
+
+
+def check_repeats(game, dev=()):
+    """C2202: on a repeatable scene, no spoken first-meeting words, and no "next time" promise spoken or narrated,
+    unless a group holds the line on a flag's not-yet side. A repeatable whose own trigger waits on a flag it sets
+    plays once, unless something unsets that flag again (a day or week tick)."""
+    rows = []
+    reset = unset_anywhere(game)
+    for c in canvases(game, dev):
+        trig = c.get("trigger") or {}
+        if retired(c) or not trig.get("is_repeatable"):
+            continue
+        once = own_sets(c) - reset
+        if any(i.get("type") == "flag" and i.get("operator") == "is_false" and i.get("flag_key") in once
+               for i in items(trig.get("conditions"))):
+            continue  # it sets the flag its own trigger waits on: in play it shows once
+        for n in c.get("nodes") or []:
+            for b, conds in walk(n.get("blocks")):
+                kind = b.get("type")
+                if kind not in ("dialog", "paragraph") or before_flag(conds):
+                    continue
+                theirs = kind == "dialog" and (b.get("props") or {}).get("speaker") != "player"
+                text = str(b.get("content") or "")
+                checks = ((FIRST_MEETING, "first-meeting words"),) if theirs else ()
+                for rx, what in checks + ((PROMISE, "a \"next time\" promise"),):
+                    m = rx.search(text)
+                    if m:
+                        rows.append(f"{c['id']} · {n.get('id')}: \"{text[:60]}\" has {what} (\"{m.group(0)}\") on "
+                                    f"a scene that repeats; say it once, or hold it on a flag's is_false side "
+                                    f"(craft/voice.md, the truth rule, rule 6)")
+    return (RED, rows) if rows else (GREEN, [])
+
+
 def run(game_dir, game, dev=(), ref=None):
     """Every scene check, keyed by name. None for game means the merged TOML didn't parse."""
-    names = ("talk", "length", "presence", "creation", "saves", "speakers", "goals")
+    names = ("talk", "length", "presence", "creation", "saves", "speakers", "goals", "repeats")
     if game is None:
         return {k: (INCOMPLETE, ["the merged TOML did not parse"]) for k in names}
     dev = set(dev or ())
@@ -568,4 +654,5 @@ def run(game_dir, game, dev=(), ref=None):
         "saves": check_saves(game_dir, game, dev, ref=ref),
         "speakers": check_speakers(game, dev),
         "goals": check_goals(game),
+        "repeats": check_repeats(game, dev),
     }

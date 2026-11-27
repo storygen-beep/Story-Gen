@@ -1,6 +1,6 @@
 {
  "piece": "P30",
- "pass": 12,
+ "pass": 13,
  "screens": {
   "watch_rehearsal.watch": {
    "text": "350d7868a423a75f",
@@ -10,11 +10,11 @@
    "all": "ac58338a8ea58f94"
   },
   "watch_class.watch": {
-   "text": "da2597227fb103c0",
+   "text": "ddbfe21d30fd4527",
    "traits": "2875b58584de3c6e",
    "facts": "421a252894aad712",
    "facts2": "35c67911f123cdb4",
-   "all": "fe99757515b7f62d"
+   "all": "199840d601a6ad22"
   },
   "sit_seats.sit": {
    "text": "457a182cc8a999da",
@@ -23,7 +23,7 @@
    "facts2": "e60043bc128dc9f4",
    "all": "56633b9908841b96"
   },
-  "*": "36d1703664094e0c"
+  "*": "e0abecb5e68b2fe8"
  },
  "rows": {
   "B1": "5276068df1ca6fa9",
@@ -96,7 +96,7 @@
   "C2194": "0c03931191c53a34",
   "C1340": "b76a6583ae88c60f",
   "C2197": "cafbb0a598dbfa97",
-  "C2198": "27e6b45f50edd3ac",
+  "C2198": "73dfe095a72154a3",
   "C769": "f6b6f78a8f2e5ed7",
   "C794": "bad76e5963432385",
   "C2201": "d119dfe665f76359",
@@ -137,6 +137,7 @@
   "C450": "b01ad555668aba2d",
   "C422": "7e128897077ecee6",
   "C460": "67e48e60d5053a2e",
+  "C2202": "6e90fed7eae62131",
   "C461": "310706ee076318f2",
   "C2189": "20748838895e4545"
  },
@@ -189,20 +190,20 @@
    "row": "B10",
    "screen": "watch_class.watch",
    "verdict": "PASS",
-   "line": "Cross finds you in the back row.",
-   "why": "Trigger Tue/Thu 11:00-13:00, max 2 a day; Cross's row is campus_theatre exactly 11-13 (who_is_where); name behind met_cross, role before. A second showing the same day repeats a line that is still true (his 'next time' is a standing order).",
+   "line": "You. The back row's for people who've given up. Up here, with the rest of them.",
+   "why": "Tue/Thu 11:00-13:00; Cross at campus_theatre 11-13 the whole window; met_cross false shows \"The drama teacher\"; the new line promises nothing and is true on every visit",
    "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "da2597227fb103c0",
+    "text": "ddbfe21d30fd4527",
     "traits": "2875b58584de3c6e",
     "facts": "421a252894aad712",
     "facts2": "35c67911f123cdb4",
-    "all": "fe99757515b7f62d"
+    "all": "199840d601a6ad22"
    },
    "row_hash": "c1c0e2ac2588a579",
-   "carried": true,
-   "pass": 9
+   "carried": false,
+   "pass": 13
   },
   {
    "row": "B10",
@@ -519,20 +520,20 @@
    "row": "B8",
    "screen": "watch_class.watch",
    "verdict": "PASS",
-   "line": "weekday [1, 3], 11:00-13:00; max_triggers_per_day = 2; Done 30 minutes",
-   "why": "Matches PLAN line 544 (Cross Tue/Thu 11-1) and the card's Amendment (2 a day); Cross's tip and Drama hint say the same hours. No garment named.",
+   "line": "Done: 30 minutes; max_triggers_per_day = 2",
+   "why": "matches the card and PLAN; no garment named",
    "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "da2597227fb103c0",
+    "text": "ddbfe21d30fd4527",
     "traits": "2875b58584de3c6e",
     "facts": "421a252894aad712",
     "facts2": "35c67911f123cdb4",
-    "all": "fe99757515b7f62d"
+    "all": "199840d601a6ad22"
    },
    "row_hash": "80d415cf08e0ebfe",
-   "carried": true,
-   "pass": 9
+   "carried": false,
+   "pass": 13
   },
   {
    "row": "B8",
@@ -1265,13 +1266,13 @@
    "screen": "*",
    "verdict": "N/A",
    "line": "",
-   "why": "theatre seats and watch buttons: no menu's Talk screen in this piece; C2198 is judged only on a person's Talk screen (the screen their menu's Talk opens)",
+   "why": "no menu Talk screen among P30's canvases; C2198 is judged on a person's Talk screen only",
    "cause": null,
    "note": false,
-   "screen_hash": "36d1703664094e0c",
-   "row_hash": "27e6b45f50edd3ac",
-   "carried": true,
-   "pass": 11
+   "screen_hash": "e0abecb5e68b2fe8",
+   "row_hash": "73dfe095a72154a3",
+   "carried": false,
+   "pass": 13
   },
   {
    "row": "C2201",
@@ -1283,8 +1284,21 @@
    "note": false,
    "screen_hash": "36d1703664094e0c",
    "row_hash": "d119dfe665f76359",
-   "carried": false,
+   "carried": true,
    "pass": 12
+  },
+  {
+   "row": "C2202",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "You. The back row's for people who've given up. / Next time the stage might be yours.",
+   "why": "\"Up here next time\" is gone; sit_seats' \"might be yours\" is a hope, not a promise, and class_drama does put her on the stage; watch_rehearsal and the room texts say nothing true only once",
+   "cause": null,
+   "note": false,
+   "screen_hash": "e0abecb5e68b2fe8",
+   "row_hash": "6e90fed7eae62131",
+   "carried": false,
+   "pass": 13
   },
   {
    "row": "C338",
@@ -1479,20 +1493,20 @@
    "row": "C460",
    "screen": "watch_class.watch",
    "verdict": "PASS",
-   "line": "The class is in a line on the stage, saying their line louder each time.",
-   "why": "Shows only Tue/Thu 11-13, Cross's class slot, hidden otherwise; nothing on the screen names the hours or the count, so hiding the greyed line removes no claim and adds none.",
+   "line": "You. The back row's for people who've given up. Up here, with the rest of them.",
+   "why": "every claim (the class on the stage, Cross finding her) holds in the trigger window",
    "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "da2597227fb103c0",
+    "text": "ddbfe21d30fd4527",
     "traits": "2875b58584de3c6e",
     "facts": "421a252894aad712",
     "facts2": "35c67911f123cdb4",
-    "all": "fe99757515b7f62d"
+    "all": "199840d601a6ad22"
    },
    "row_hash": "67e48e60d5053a2e",
-   "carried": true,
-   "pass": 9
+   "carried": false,
+   "pass": 13
   },
   {
    "row": "C460",
@@ -1548,20 +1562,20 @@
    "row": "C461",
    "screen": "watch_class.watch",
    "verdict": "PASS",
-   "line": "You. Up here next time, not hiding. I mean it.",
-   "why": "Dialogue fits Cross as the drama teacher; unchanged text.",
+   "line": "You. The back row's for people who've given up. Up here, with the rest of them.",
+   "why": "dialogue that fits Cross's entry (Pushy, Takes charge)",
    "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "da2597227fb103c0",
+    "text": "ddbfe21d30fd4527",
     "traits": "2875b58584de3c6e",
     "facts": "421a252894aad712",
     "facts2": "35c67911f123cdb4",
-    "all": "fe99757515b7f62d"
+    "all": "199840d601a6ad22"
    },
    "row_hash": "310706ee076318f2",
-   "carried": true,
-   "pass": 9
+   "carried": false,
+   "pass": 13
   },
   {
    "row": "C461",
@@ -2186,19 +2200,19 @@
    "screen": "watch_class.watch",
    "verdict": "PASS",
    "line": "Done: time_progression_minutes = 30",
-   "why": "Exit time stated; matches the card's 30 minutes.",
+   "why": "every exit on the screen carries an explicit time_progression_minutes, so the 3-minute default never applies",
    "cause": null,
    "note": true,
    "screen_hash": {
-    "text": "da2597227fb103c0",
+    "text": "ddbfe21d30fd4527",
     "traits": "2875b58584de3c6e",
     "facts": "421a252894aad712",
     "facts2": "35c67911f123cdb4",
-    "all": "fe99757515b7f62d"
+    "all": "199840d601a6ad22"
    },
    "row_hash": "4e86d143688ba8e5",
-   "carried": true,
-   "pass": 9
+   "carried": false,
+   "pass": 13
   },
   {
    "row": "C927",
@@ -2293,20 +2307,20 @@
    "row": "C931",
    "screen": "watch_class.watch",
    "verdict": "PASS",
-   "line": "time_of_day 11:00-13:00, weekday [1, 3]",
-   "why": "End exclusive: at 13:00 the row and Cross's 11-13 row end together, so the button vanishes exactly when he leaves. Re-read every render, so with no show_when_blocked it hides out of hours (v2.py:6732-6745) and, once two are spent, hides by the count (v2.py:6747-6751: no showWhenBlocked, so nothing greys).",
+   "line": "time_of_day 11:00-13:00",
+   "why": "the trigger's time_of_day window is end-exclusive and every line agrees with it at its first and last minute",
    "cause": null,
    "note": true,
    "screen_hash": {
-    "text": "da2597227fb103c0",
+    "text": "ddbfe21d30fd4527",
     "traits": "2875b58584de3c6e",
     "facts": "421a252894aad712",
     "facts2": "35c67911f123cdb4",
-    "all": "fe99757515b7f62d"
+    "all": "199840d601a6ad22"
    },
    "row_hash": "1aadffd96e76381c",
-   "carried": true,
-   "pass": 9
+   "carried": false,
+   "pass": 13
   },
   {
    "row": "C931",
@@ -2389,19 +2403,19 @@
    "screen": "watch_class.watch",
    "verdict": "PASS",
    "line": "Cross finds you in the back row.",
-   "why": "His row puts him at campus_theatre for the whole trigger window (Tue/Thu 11-13).",
+   "why": "his row puts him at campus_theatre Tue/Thu 11-13",
    "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "da2597227fb103c0",
+    "text": "ddbfe21d30fd4527",
     "traits": "2875b58584de3c6e",
     "facts": "421a252894aad712",
     "facts2": "35c67911f123cdb4",
-    "all": "fe99757515b7f62d"
+    "all": "199840d601a6ad22"
    },
    "row_hash": "13a714429d15f3b2",
-   "carried": true,
-   "pass": 9
+   "carried": false,
+   "pass": 13
   },
   {
    "row": "L106",
@@ -2514,20 +2528,20 @@
    "row": "L167",
    "screen": "watch_class.watch",
    "verdict": "PASS",
-   "line": "conditions = weekday [1, 3] AND time_of_day 11:00-13:00; max_triggers_per_day = 2; no show_when_blocked",
-   "why": "One row, the same hours on each day it runs; never split per day kind. The rule's greying half yields to clock.md rule 10: a row with a clock window and a daily count does not set show_when_blocked and hides when it can't be used. The hours stay findable and true elsewhere: Drama hint 'Drama is in the Theatre, Tuesday and Thursday at 11am.', Cross's tip 'Class Tuesday and Thursday, 11am to 1pm', Brooke's tip 'drama Tuesday and Thursday'.",
+   "line": "weekday [1,3], 11:00-13:00",
+   "why": "one row for the activity; no per-day-kind duplicate rows",
    "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "da2597227fb103c0",
+    "text": "ddbfe21d30fd4527",
     "traits": "2875b58584de3c6e",
     "facts": "421a252894aad712",
     "facts2": "35c67911f123cdb4",
-    "all": "fe99757515b7f62d"
+    "all": "199840d601a6ad22"
    },
    "row_hash": "e64ce2672d85d2d8",
-   "carried": true,
-   "pass": 9
+   "carried": false,
+   "pass": 13
   },
   {
    "row": "L167",
@@ -2577,8 +2591,8 @@
  ],
  "causes": [],
  "pending": [],
- "asked": 1,
- "answered": 1,
+ "asked": 10,
+ "answered": 10,
  "pass_items": [],
  "unowed": []
 }

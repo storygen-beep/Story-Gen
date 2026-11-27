@@ -1,6 +1,6 @@
 {
  "piece": "P58",
- "pass": 9,
+ "pass": 10,
  "screens": {
   "talk_vance.hub": {
    "text": "0d740dd50c9788fe",
@@ -152,7 +152,7 @@
   "C2194": "0c03931191c53a34",
   "C1340": "b76a6583ae88c60f",
   "C2197": "cafbb0a598dbfa97",
-  "C2198": "27e6b45f50edd3ac",
+  "C2198": "73dfe095a72154a3",
   "C769": "f6b6f78a8f2e5ed7",
   "C794": "bad76e5963432385",
   "C2201": "d119dfe665f76359",
@@ -193,6 +193,7 @@
   "C450": "b01ad555668aba2d",
   "C422": "7e128897077ecee6",
   "C460": "67e48e60d5053a2e",
+  "C2202": "6e90fed7eae62131",
   "C461": "310706ee076318f2",
   "C2189": "20748838895e4545"
  },
@@ -1552,7 +1553,7 @@
    "screen": "talk_danny.talk",
    "verdict": "PASS",
    "line": "Then I'm here now. Every night till eleven, gorgeous.",
-   "why": "last pass's fault fixed: the opening no longer claims a return, so the one talk is true on the meeting's visit and every visit after; one talked_<x>_today set by Talk; ends on a hook (his hours, a time)",
+   "why": "one fixed screen behind talked_danny_today; the hook is real (his rows: hood_shop 15-23 Mon-Sat, 07-23 Sun)",
    "cause": null,
    "note": false,
    "screen_hash": {
@@ -1562,16 +1563,16 @@
     "facts2": "3d328ae9dd18c326",
     "all": "3e4396aac395e590"
    },
-   "row_hash": "27e6b45f50edd3ac",
-   "carried": true,
-   "pass": 3
+   "row_hash": "73dfe095a72154a3",
+   "carried": false,
+   "pass": 10
   },
   {
    "row": "C2198",
    "screen": "talk_frank.talk",
    "verdict": "PASS",
-   "line": "Seven till three, girlie, Monday to Saturday. Nothing happens on this street I don't hear about.",
-   "why": "one talked_x_today flag cleared in daily_tick, one talk, true on every visit, ends on a hook (a time or a person)",
+   "line": "Seven till three, girlie, Monday to Saturday.",
+   "why": "fixed screen; hook matches his rows (hood_shop 07-15 Mon-Sat)",
    "cause": null,
    "note": false,
    "screen_hash": {
@@ -1581,16 +1582,16 @@
     "facts2": "90794b16c8882ac5",
     "all": "9ba33606dbf1649e"
    },
-   "row_hash": "27e6b45f50edd3ac",
-   "carried": true,
-   "pass": 2
+   "row_hash": "73dfe095a72154a3",
+   "carried": false,
+   "pass": 10
   },
   {
    "row": "C2198",
    "screen": "talk_marco.talk",
    "verdict": "PASS",
    "line": "Mornings are dead, six to ten. That's when I train the ones I like. Come early.",
-   "why": "last pass's fault fixed: the opening no longer claims a return, so the one talk is true on the meeting's visit and every visit after; one talked_<x>_today set by Talk; ends on a hook (his hours, a time)",
+   "why": "fixed screen; hook matches his rows (hood_gym 06-10 weekdays)",
    "cause": null,
    "note": false,
    "screen_hash": {
@@ -1600,16 +1601,16 @@
     "facts2": "c24c451fa760b640",
     "all": "091f7eafd849ad35"
    },
-   "row_hash": "27e6b45f50edd3ac",
-   "carried": true,
-   "pass": 3
+   "row_hash": "73dfe095a72154a3",
+   "carried": false,
+   "pass": 10
   },
   {
    "row": "C2198",
    "screen": "talk_nina.talk",
    "verdict": "PASS",
    "line": "The rack at the back is the good stuff. When you're ready for it, you'll know.",
-   "why": "one talked_x_today flag cleared in daily_tick, one talk, true on every visit, ends on a hook (a time or a person)",
+   "why": "fixed screen; points at the shop's own rack, no promise of a date",
    "cause": null,
    "note": false,
    "screen_hash": {
@@ -1619,28 +1620,28 @@
     "facts2": "e6d5feaeacfe9d77",
     "all": "28072aa936caeb7b"
    },
-   "row_hash": "27e6b45f50edd3ac",
-   "carried": true,
-   "pass": 2
+   "row_hash": "73dfe095a72154a3",
+   "carried": false,
+   "pass": 10
   },
   {
    "row": "C2198",
    "screen": "talk_vance.talk",
    "verdict": "PASS",
    "line": "Tell Mark the rent's due Sunday, same as always. He forgets.",
-   "why": "one talked_x_today flag cleared in daily_tick, one talk, true on every visit, ends on a hook (a time or a person)",
+   "why": "fixed screen; the rent's Sunday is real",
    "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "dcc73aca9b8999e0",
+    "text": "3caed77741619920",
     "traits": "40c19ab6c95d7a0e",
-    "facts": "67a9c54720c5688f",
-    "facts2": "bf5dbaf7173a4a37",
-    "all": "b5d6f19c098e2c33"
+    "facts": "a1b0a3eedcbe2ab5",
+    "facts2": "a9800a3e4cb0e8b9",
+    "all": "442a9ac05e8ae507"
    },
-   "row_hash": "27e6b45f50edd3ac",
-   "carried": true,
-   "pass": 2
+   "row_hash": "73dfe095a72154a3",
+   "carried": false,
+   "pass": 10
   },
   {
    "row": "C2201",
@@ -1652,8 +1653,21 @@
    "note": false,
    "screen_hash": "7e688f5974da5295",
    "row_hash": "d119dfe665f76359",
-   "carried": false,
+   "carried": true,
    "pass": 9
+  },
+  {
+   "row": "C2202",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "Little lady. Come up a step. I don't bite.",
+   "why": "no first-meeting words or next-time promise on any of the five talks",
+   "cause": null,
+   "note": false,
+   "screen_hash": "7e688f5974da5295",
+   "row_hash": "6e90fed7eae62131",
+   "carried": false,
+   "pass": 10
   },
   {
    "row": "C422",
@@ -3417,8 +3431,8 @@
  ],
  "causes": [],
  "pending": [],
- "asked": 1,
- "answered": 1,
+ "asked": 6,
+ "answered": 6,
  "pass_items": [],
  "unowed": []
 }

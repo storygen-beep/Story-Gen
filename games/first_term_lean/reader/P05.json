@@ -1,6 +1,6 @@
 {
  "piece": "P05",
- "pass": 12,
+ "pass": 13,
  "screens": {
   "*": "4f53cda18c2baa0c"
  },
@@ -120,6 +120,7 @@
   "C450": "3eb18b4cefbe49d3",
   "C422": "8933f85010afbef7",
   "C460": "beb5a109bde77305",
+  "C2202": "d5592f287f5f641a",
   "C461": "153b0804e686abae",
   "L163": "00a617ab9b4e9cd4",
   "voice#1": "b8e8afcb32208b40",
@@ -590,8 +591,21 @@
    "note": false,
    "screen_hash": "4f53cda18c2baa0c",
    "row_hash": "4745761f016db481",
-   "carried": false,
+   "carried": true,
    "pass": 12
+  },
+  {
+   "row": "C2202",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "A sign on the door says it's open from 7am to 9pm. A Help Wanted sign is taped in the window.",
+   "why": "Town places: the caf\u00e9's once-only lines (Help Wanted, the first shift) are variants held on the hire and first-shift flags; nothing else is true only once",
+   "cause": null,
+   "note": false,
+   "screen_hash": "4f53cda18c2baa0c",
+   "row_hash": "d5592f287f5f641a",
+   "carried": false,
+   "pass": 13
   },
   {
    "row": "C32",
@@ -1903,7 +1917,7 @@
    "note": false,
    "screen_hash": "4f53cda18c2baa0c",
    "row_hash": "378b2df4c8bf116d",
-   "carried": false,
+   "carried": true,
    "pass": 12
   },
   {
@@ -1994,7 +2008,7 @@
    "note": false,
    "screen_hash": "4f53cda18c2baa0c",
    "row_hash": "58dab0dc035240bd",
-   "carried": false,
+   "carried": true,
    "pass": 12
   },
   {
@@ -2221,8 +2235,8 @@
  ],
  "causes": [],
  "pending": [],
- "asked": 3,
- "answered": 3,
+ "asked": 1,
+ "answered": 1,
  "pass_items": [],
  "unowed": []
 }

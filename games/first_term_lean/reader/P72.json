@@ -1,6 +1,6 @@
 {
  "piece": "P72",
- "pass": 2,
+ "pass": 4,
  "screens": {
   "notice_street_leggings.moment": {
    "text": "aaf267c7464cb012",
@@ -59,11 +59,11 @@
    "all": "d9d8f13cccb05f39"
   },
   "notice_street_skirt.look": {
-   "text": "b1e307993ba5b4b9",
+   "text": "b7ba2f99356c7095",
    "traits": "44136fa355b3678a",
    "facts": "47ffa125bb39d53d",
    "facts2": "47ffa125bb39d53d",
-   "all": "1ca3bfb65058deb9"
+   "all": "7ab415d07ad34c4d"
   },
   "notice_park_leggings.moment": {
    "text": "a7dacd53d21ac9cc",
@@ -107,7 +107,7 @@
    "facts2": "5343e0385cfac615",
    "all": "d5450dc0939b5a57"
   },
-  "*": "3838ff28b30458b0"
+  "*": "428c0871f44ca03a"
  },
  "rows": {
   "B1": "5276068df1ca6fa9",
@@ -157,7 +157,7 @@
   "C2194": "0c03931191c53a34",
   "C1340": "b76a6583ae88c60f",
   "C2197": "cafbb0a598dbfa97",
-  "C2198": "27e6b45f50edd3ac",
+  "C2198": "73dfe095a72154a3",
   "C769": "f6b6f78a8f2e5ed7",
   "C794": "bad76e5963432385",
   "C2201": "d119dfe665f76359",
@@ -198,6 +198,7 @@
   "C450": "b01ad555668aba2d",
   "C422": "7e128897077ecee6",
   "C460": "67e48e60d5053a2e",
+  "C2202": "6e90fed7eae62131",
   "C461": "310706ee076318f2",
   "C788": "cae1598ef9cb6ff1",
   "C855": "d3dc77f2f96e20ae",
@@ -262,7 +263,7 @@
     "all": "d5450dc0939b5a57"
    },
    "row_hash": "c1c0e2ac2588a579",
-   "carried": false,
+   "carried": true,
    "pass": 2
   },
   {
@@ -281,7 +282,7 @@
     "all": "a391bb62dbd0c75e"
    },
    "row_hash": "c1c0e2ac2588a579",
-   "carried": false,
+   "carried": true,
    "pass": 2
   },
   {
@@ -300,7 +301,7 @@
     "all": "1cdd61511c788191"
    },
    "row_hash": "c1c0e2ac2588a579",
-   "carried": false,
+   "carried": true,
    "pass": 2
   },
   {
@@ -319,7 +320,7 @@
     "all": "9c0050416e1b12d6"
    },
    "row_hash": "c1c0e2ac2588a579",
-   "carried": false,
+   "carried": true,
    "pass": 2
   },
   {
@@ -338,7 +339,7 @@
     "all": "12ed902d46394ce6"
    },
    "row_hash": "c1c0e2ac2588a579",
-   "carried": false,
+   "carried": true,
    "pass": 2
   },
   {
@@ -357,7 +358,7 @@
     "all": "80acab72cbb613f4"
    },
    "row_hash": "c1c0e2ac2588a579",
-   "carried": false,
+   "carried": true,
    "pass": 2
   },
   {
@@ -376,7 +377,7 @@
     "all": "28ca1297a797c6ca"
    },
    "row_hash": "c1c0e2ac2588a579",
-   "carried": false,
+   "carried": true,
    "pass": 2
   },
   {
@@ -395,7 +396,7 @@
     "all": "41fcfcaa90ca7608"
    },
    "row_hash": "c1c0e2ac2588a579",
-   "carried": false,
+   "carried": true,
    "pass": 2
   },
   {
@@ -414,7 +415,7 @@
     "all": "7005fbbdf75b6933"
    },
    "row_hash": "c1c0e2ac2588a579",
-   "carried": false,
+   "carried": true,
    "pass": 2
   },
   {
@@ -433,27 +434,27 @@
     "all": "ce1ead70b70054a1"
    },
    "row_hash": "c1c0e2ac2588a579",
-   "carried": false,
+   "carried": true,
    "pass": 2
   },
   {
    "row": "B10",
    "screen": "notice_street_skirt.look",
    "verdict": "PASS",
-   "line": "He smiles slowly when you don't answer. Your legs feel very bare. / Next time, then, darling.",
-   "why": "true 07:00-21:00 on any arrival on the street, once a day; outfit conditions are exclusive so only this one fires; no past or first-time claim; the next-time line holds on a repeat day",
+   "line": "He smiles slowly when you don't answer. Your legs feel very bare. / This road, every day, darling. Think about it.",
+   "why": "true at every minute the trigger allows and on a repeat; an unnamed driver; no schedule claim",
    "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "b1e307993ba5b4b9",
+    "text": "b7ba2f99356c7095",
     "traits": "44136fa355b3678a",
     "facts": "47ffa125bb39d53d",
     "facts2": "47ffa125bb39d53d",
-    "all": "1ca3bfb65058deb9"
+    "all": "7ab415d07ad34c4d"
    },
    "row_hash": "c1c0e2ac2588a579",
    "carried": false,
-   "pass": 2
+   "pass": 4
   },
   {
    "row": "B10",
@@ -471,7 +472,7 @@
     "all": "6580f1ad9a565062"
    },
    "row_hash": "c1c0e2ac2588a579",
-   "carried": false,
+   "carried": true,
    "pass": 2
   },
   {
@@ -490,7 +491,7 @@
     "all": "d9d8f13cccb05f39"
    },
    "row_hash": "c1c0e2ac2588a579",
-   "carried": false,
+   "carried": true,
    "pass": 2
   },
   {
@@ -561,7 +562,7 @@
     "all": "d5450dc0939b5a57"
    },
    "row_hash": "4d1fce1c4523b5d4",
-   "carried": false,
+   "carried": true,
    "pass": 2
   },
   {
@@ -580,7 +581,7 @@
     "all": "1cdd61511c788191"
    },
    "row_hash": "4d1fce1c4523b5d4",
-   "carried": false,
+   "carried": true,
    "pass": 2
   },
   {
@@ -618,7 +619,7 @@
     "all": "9c0050416e1b12d6"
    },
    "row_hash": "4d1fce1c4523b5d4",
-   "carried": false,
+   "carried": true,
    "pass": 2
   },
   {
@@ -656,7 +657,7 @@
     "all": "28ca1297a797c6ca"
    },
    "row_hash": "4d1fce1c4523b5d4",
-   "carried": false,
+   "carried": true,
    "pass": 2
   },
   {
@@ -675,7 +676,7 @@
     "all": "41fcfcaa90ca7608"
    },
    "row_hash": "4d1fce1c4523b5d4",
-   "carried": false,
+   "carried": true,
    "pass": 2
   },
   {
@@ -694,7 +695,7 @@
     "all": "ce1ead70b70054a1"
    },
    "row_hash": "4d1fce1c4523b5d4",
-   "carried": false,
+   "carried": true,
    "pass": 2
   },
   {
@@ -713,7 +714,7 @@
     "all": "1ca3bfb65058deb9"
    },
    "row_hash": "4d1fce1c4523b5d4",
-   "carried": false,
+   "carried": true,
    "pass": 2
   },
   {
@@ -732,7 +733,7 @@
     "all": "d9d8f13cccb05f39"
    },
    "row_hash": "4d1fce1c4523b5d4",
-   "carried": false,
+   "carried": true,
    "pass": 2
   },
   {
@@ -764,7 +765,7 @@
     "all": "d5450dc0939b5a57"
    },
    "row_hash": "ced37cb0de6e7202",
-   "carried": false,
+   "carried": true,
    "pass": 2
   },
   {
@@ -783,7 +784,7 @@
     "all": "41fcfcaa90ca7608"
    },
    "row_hash": "ced37cb0de6e7202",
-   "carried": false,
+   "carried": true,
    "pass": 2
   },
   {
@@ -854,7 +855,7 @@
     "all": "d5450dc0939b5a57"
    },
    "row_hash": "80d415cf08e0ebfe",
-   "carried": false,
+   "carried": true,
    "pass": 2
   },
   {
@@ -873,7 +874,7 @@
     "all": "a391bb62dbd0c75e"
    },
    "row_hash": "80d415cf08e0ebfe",
-   "carried": false,
+   "carried": true,
    "pass": 2
   },
   {
@@ -892,7 +893,7 @@
     "all": "1cdd61511c788191"
    },
    "row_hash": "80d415cf08e0ebfe",
-   "carried": false,
+   "carried": true,
    "pass": 2
   },
   {
@@ -911,7 +912,7 @@
     "all": "9c0050416e1b12d6"
    },
    "row_hash": "80d415cf08e0ebfe",
-   "carried": false,
+   "carried": true,
    "pass": 2
   },
   {
@@ -930,7 +931,7 @@
     "all": "12ed902d46394ce6"
    },
    "row_hash": "80d415cf08e0ebfe",
-   "carried": false,
+   "carried": true,
    "pass": 2
   },
   {
@@ -949,7 +950,7 @@
     "all": "80acab72cbb613f4"
    },
    "row_hash": "80d415cf08e0ebfe",
-   "carried": false,
+   "carried": true,
    "pass": 2
   },
   {
@@ -968,7 +969,7 @@
     "all": "28ca1297a797c6ca"
    },
    "row_hash": "80d415cf08e0ebfe",
-   "carried": false,
+   "carried": true,
    "pass": 2
   },
   {
@@ -987,7 +988,7 @@
     "all": "41fcfcaa90ca7608"
    },
    "row_hash": "80d415cf08e0ebfe",
-   "carried": false,
+   "carried": true,
    "pass": 2
   },
   {
@@ -1006,7 +1007,7 @@
     "all": "7005fbbdf75b6933"
    },
    "row_hash": "80d415cf08e0ebfe",
-   "carried": false,
+   "carried": true,
    "pass": 2
   },
   {
@@ -1025,27 +1026,27 @@
     "all": "ce1ead70b70054a1"
    },
    "row_hash": "80d415cf08e0ebfe",
-   "carried": false,
+   "carried": true,
    "pass": 2
   },
   {
    "row": "B8",
    "screen": "notice_street_skirt.look",
    "verdict": "PASS",
-   "line": "He smiles slowly when you don't answer. Your legs feel very bare. / Next time, then, darling.",
-   "why": "every garment named is backed by the trigger's clothing condition; no numbers; choices 0 minutes, flag only",
+   "line": "He smiles slowly when you don't answer. Your legs feel very bare. / This road, every day, darling. Think about it.",
+   "why": "'legs very bare' backed by trigger: mom_short_skirt equipped, legwear unequipped",
    "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "b1e307993ba5b4b9",
+    "text": "b7ba2f99356c7095",
     "traits": "44136fa355b3678a",
     "facts": "47ffa125bb39d53d",
     "facts2": "47ffa125bb39d53d",
-    "all": "1ca3bfb65058deb9"
+    "all": "7ab415d07ad34c4d"
    },
    "row_hash": "80d415cf08e0ebfe",
    "carried": false,
-   "pass": 2
+   "pass": 4
   },
   {
    "row": "B8",
@@ -1063,7 +1064,7 @@
     "all": "6580f1ad9a565062"
    },
    "row_hash": "80d415cf08e0ebfe",
-   "carried": false,
+   "carried": true,
    "pass": 2
   },
   {
@@ -1082,7 +1083,7 @@
     "all": "d9d8f13cccb05f39"
    },
    "row_hash": "80d415cf08e0ebfe",
-   "carried": false,
+   "carried": true,
    "pass": 2
   },
   {
@@ -1140,7 +1141,7 @@
     "all": "a391bb62dbd0c75e"
    },
    "row_hash": "f40f51a0fd6cfd10",
-   "carried": false,
+   "carried": true,
    "pass": 2
   },
   {
@@ -1159,7 +1160,7 @@
     "all": "80acab72cbb613f4"
    },
    "row_hash": "f40f51a0fd6cfd10",
-   "carried": false,
+   "carried": true,
    "pass": 2
   },
   {
@@ -1178,7 +1179,7 @@
     "all": "7005fbbdf75b6933"
    },
    "row_hash": "f40f51a0fd6cfd10",
-   "carried": false,
+   "carried": true,
    "pass": 2
   },
   {
@@ -1197,7 +1198,7 @@
     "all": "6580f1ad9a565062"
    },
    "row_hash": "f40f51a0fd6cfd10",
-   "carried": false,
+   "carried": true,
    "pass": 2
   },
   {
@@ -1320,7 +1321,7 @@
     "all": "a391bb62dbd0c75e"
    },
    "row_hash": "bfff76edbee583de",
-   "carried": false,
+   "carried": true,
    "pass": 2
   },
   {
@@ -1339,7 +1340,7 @@
     "all": "80acab72cbb613f4"
    },
    "row_hash": "bfff76edbee583de",
-   "carried": false,
+   "carried": true,
    "pass": 2
   },
   {
@@ -1358,7 +1359,7 @@
     "all": "7005fbbdf75b6933"
    },
    "row_hash": "bfff76edbee583de",
-   "carried": false,
+   "carried": true,
    "pass": 2
   },
   {
@@ -1377,7 +1378,7 @@
     "all": "6580f1ad9a565062"
    },
    "row_hash": "bfff76edbee583de",
-   "carried": false,
+   "carried": true,
    "pass": 2
   },
   {
@@ -1695,7 +1696,7 @@
     "all": "d5450dc0939b5a57"
    },
    "row_hash": "b8cdd5b1ce3f89ea",
-   "carried": false,
+   "carried": true,
    "pass": 2
   },
   {
@@ -1714,7 +1715,7 @@
     "all": "1cdd61511c788191"
    },
    "row_hash": "b8cdd5b1ce3f89ea",
-   "carried": false,
+   "carried": true,
    "pass": 2
   },
   {
@@ -1752,7 +1753,7 @@
     "all": "9c0050416e1b12d6"
    },
    "row_hash": "b8cdd5b1ce3f89ea",
-   "carried": false,
+   "carried": true,
    "pass": 2
   },
   {
@@ -1790,7 +1791,7 @@
     "all": "28ca1297a797c6ca"
    },
    "row_hash": "b8cdd5b1ce3f89ea",
-   "carried": false,
+   "carried": true,
    "pass": 2
   },
   {
@@ -1809,7 +1810,7 @@
     "all": "41fcfcaa90ca7608"
    },
    "row_hash": "b8cdd5b1ce3f89ea",
-   "carried": false,
+   "carried": true,
    "pass": 2
   },
   {
@@ -1828,7 +1829,7 @@
     "all": "ce1ead70b70054a1"
    },
    "row_hash": "b8cdd5b1ce3f89ea",
-   "carried": false,
+   "carried": true,
    "pass": 2
   },
   {
@@ -1847,7 +1848,7 @@
     "all": "1ca3bfb65058deb9"
    },
    "row_hash": "b8cdd5b1ce3f89ea",
-   "carried": false,
+   "carried": true,
    "pass": 2
   },
   {
@@ -1866,7 +1867,7 @@
     "all": "d9d8f13cccb05f39"
    },
    "row_hash": "b8cdd5b1ce3f89ea",
-   "carried": false,
+   "carried": true,
    "pass": 2
   },
   {
@@ -2080,7 +2081,7 @@
     "all": "a391bb62dbd0c75e"
    },
    "row_hash": "a8ae0700d13a7f9b",
-   "carried": false,
+   "carried": true,
    "pass": 2
   },
   {
@@ -2099,7 +2100,7 @@
     "all": "80acab72cbb613f4"
    },
    "row_hash": "a8ae0700d13a7f9b",
-   "carried": false,
+   "carried": true,
    "pass": 2
   },
   {
@@ -2118,7 +2119,7 @@
     "all": "7005fbbdf75b6933"
    },
    "row_hash": "a8ae0700d13a7f9b",
-   "carried": false,
+   "carried": true,
    "pass": 2
   },
   {
@@ -2137,7 +2138,7 @@
     "all": "6580f1ad9a565062"
    },
    "row_hash": "a8ae0700d13a7f9b",
-   "carried": false,
+   "carried": true,
    "pass": 2
   },
   {
@@ -2158,13 +2159,13 @@
    "screen": "*",
    "verdict": "N/A",
    "line": "",
-   "why": "no Talk screen",
+   "why": "she-gets-noticed walk-ins: not a menu's Talk screen; C2198 is judged only on the screen a person's menu's Talk opens",
    "cause": null,
    "note": false,
-   "screen_hash": "85bf19a6f86bfe2f",
-   "row_hash": "27e6b45f50edd3ac",
+   "screen_hash": "3838ff28b30458b0",
+   "row_hash": "73dfe095a72154a3",
    "carried": true,
-   "pass": 1
+   "pass": 3
   },
   {
    "row": "C2200",
@@ -2191,6 +2192,38 @@
    "row_hash": "d119dfe665f76359",
    "carried": true,
    "pass": 1
+  },
+  {
+   "row": "C2202",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "Same stop tomorrow, doll. We'll be here.",
+   "why": "the other answers point at a real tomorrow (the regulars, the bus stop queue)",
+   "cause": null,
+   "note": false,
+   "screen_hash": "3838ff28b30458b0",
+   "row_hash": "6e90fed7eae62131",
+   "carried": true,
+   "pass": 3
+  },
+  {
+   "row": "C2202",
+   "screen": "notice_street_skirt.look",
+   "verdict": "PASS",
+   "line": "He smiles slowly when you don't answer. Your legs feel very bare. / This road, every day, darling. Think about it.",
+   "why": "'Next time, then' replaced by a hook true on every visit: the scene shows only on this road, and his claim is his own (walk-ins.md kind (c) rule 4)",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "b7ba2f99356c7095",
+    "traits": "44136fa355b3678a",
+    "facts": "47ffa125bb39d53d",
+    "facts2": "47ffa125bb39d53d",
+    "all": "7ab415d07ad34c4d"
+   },
+   "row_hash": "6e90fed7eae62131",
+   "carried": false,
+   "pass": 4
   },
   {
    "row": "C302",
@@ -2260,7 +2293,7 @@
     "all": "d5450dc0939b5a57"
    },
    "row_hash": "b01ad555668aba2d",
-   "carried": false,
+   "carried": true,
    "pass": 2
   },
   {
@@ -2279,7 +2312,7 @@
     "all": "1cdd61511c788191"
    },
    "row_hash": "b01ad555668aba2d",
-   "carried": false,
+   "carried": true,
    "pass": 2
   },
   {
@@ -2317,7 +2350,7 @@
     "all": "9c0050416e1b12d6"
    },
    "row_hash": "b01ad555668aba2d",
-   "carried": false,
+   "carried": true,
    "pass": 2
   },
   {
@@ -2355,7 +2388,7 @@
     "all": "28ca1297a797c6ca"
    },
    "row_hash": "b01ad555668aba2d",
-   "carried": false,
+   "carried": true,
    "pass": 2
   },
   {
@@ -2374,7 +2407,7 @@
     "all": "41fcfcaa90ca7608"
    },
    "row_hash": "b01ad555668aba2d",
-   "carried": false,
+   "carried": true,
    "pass": 2
   },
   {
@@ -2393,7 +2426,7 @@
     "all": "ce1ead70b70054a1"
    },
    "row_hash": "b01ad555668aba2d",
-   "carried": false,
+   "carried": true,
    "pass": 2
   },
   {
@@ -2412,7 +2445,7 @@
     "all": "1ca3bfb65058deb9"
    },
    "row_hash": "b01ad555668aba2d",
-   "carried": false,
+   "carried": true,
    "pass": 2
   },
   {
@@ -2431,7 +2464,7 @@
     "all": "d9d8f13cccb05f39"
    },
    "row_hash": "b01ad555668aba2d",
-   "carried": false,
+   "carried": true,
    "pass": 2
   },
   {
@@ -2476,7 +2509,7 @@
     "all": "d5450dc0939b5a57"
    },
    "row_hash": "67e48e60d5053a2e",
-   "carried": false,
+   "carried": true,
    "pass": 2
   },
   {
@@ -2495,7 +2528,7 @@
     "all": "a391bb62dbd0c75e"
    },
    "row_hash": "67e48e60d5053a2e",
-   "carried": false,
+   "carried": true,
    "pass": 2
   },
   {
@@ -2514,7 +2547,7 @@
     "all": "1cdd61511c788191"
    },
    "row_hash": "67e48e60d5053a2e",
-   "carried": false,
+   "carried": true,
    "pass": 2
   },
   {
@@ -2533,7 +2566,7 @@
     "all": "9c0050416e1b12d6"
    },
    "row_hash": "67e48e60d5053a2e",
-   "carried": false,
+   "carried": true,
    "pass": 2
   },
   {
@@ -2552,7 +2585,7 @@
     "all": "12ed902d46394ce6"
    },
    "row_hash": "67e48e60d5053a2e",
-   "carried": false,
+   "carried": true,
    "pass": 2
   },
   {
@@ -2571,7 +2604,7 @@
     "all": "80acab72cbb613f4"
    },
    "row_hash": "67e48e60d5053a2e",
-   "carried": false,
+   "carried": true,
    "pass": 2
   },
   {
@@ -2590,7 +2623,7 @@
     "all": "28ca1297a797c6ca"
    },
    "row_hash": "67e48e60d5053a2e",
-   "carried": false,
+   "carried": true,
    "pass": 2
   },
   {
@@ -2609,7 +2642,7 @@
     "all": "41fcfcaa90ca7608"
    },
    "row_hash": "67e48e60d5053a2e",
-   "carried": false,
+   "carried": true,
    "pass": 2
   },
   {
@@ -2628,7 +2661,7 @@
     "all": "7005fbbdf75b6933"
    },
    "row_hash": "67e48e60d5053a2e",
-   "carried": false,
+   "carried": true,
    "pass": 2
   },
   {
@@ -2647,27 +2680,27 @@
     "all": "ce1ead70b70054a1"
    },
    "row_hash": "67e48e60d5053a2e",
-   "carried": false,
+   "carried": true,
    "pass": 2
   },
   {
    "row": "C460",
    "screen": "notice_street_skirt.look",
    "verdict": "PASS",
-   "line": "He smiles slowly when you don't answer. Your legs feel very bare. / Next time, then, darling.",
-   "why": "true 07:00-21:00 on any arrival on the street, once a day; outfit conditions are exclusive so only this one fires; no past or first-time claim; the next-time line holds on a repeat day",
+   "line": "He smiles slowly when you don't answer. Your legs feel very bare. / This road, every day, darling. Think about it.",
+   "why": "true at every minute the trigger allows and on a repeat; an unnamed driver; no schedule claim",
    "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "b1e307993ba5b4b9",
+    "text": "b7ba2f99356c7095",
     "traits": "44136fa355b3678a",
     "facts": "47ffa125bb39d53d",
     "facts2": "47ffa125bb39d53d",
-    "all": "1ca3bfb65058deb9"
+    "all": "7ab415d07ad34c4d"
    },
    "row_hash": "67e48e60d5053a2e",
    "carried": false,
-   "pass": 2
+   "pass": 4
   },
   {
    "row": "C460",
@@ -2685,7 +2718,7 @@
     "all": "6580f1ad9a565062"
    },
    "row_hash": "67e48e60d5053a2e",
-   "carried": false,
+   "carried": true,
    "pass": 2
   },
   {
@@ -2704,7 +2737,7 @@
     "all": "d9d8f13cccb05f39"
    },
    "row_hash": "67e48e60d5053a2e",
-   "carried": false,
+   "carried": true,
    "pass": 2
   },
   {
@@ -2736,7 +2769,7 @@
     "all": "d5450dc0939b5a57"
    },
    "row_hash": "310706ee076318f2",
-   "carried": false,
+   "carried": true,
    "pass": 2
   },
   {
@@ -2755,7 +2788,7 @@
     "all": "a391bb62dbd0c75e"
    },
    "row_hash": "310706ee076318f2",
-   "carried": false,
+   "carried": true,
    "pass": 2
   },
   {
@@ -2774,7 +2807,7 @@
     "all": "1cdd61511c788191"
    },
    "row_hash": "310706ee076318f2",
-   "carried": false,
+   "carried": true,
    "pass": 2
   },
   {
@@ -2793,7 +2826,7 @@
     "all": "9c0050416e1b12d6"
    },
    "row_hash": "310706ee076318f2",
-   "carried": false,
+   "carried": true,
    "pass": 2
   },
   {
@@ -2812,7 +2845,7 @@
     "all": "12ed902d46394ce6"
    },
    "row_hash": "310706ee076318f2",
-   "carried": false,
+   "carried": true,
    "pass": 2
   },
   {
@@ -2831,7 +2864,7 @@
     "all": "80acab72cbb613f4"
    },
    "row_hash": "310706ee076318f2",
-   "carried": false,
+   "carried": true,
    "pass": 2
   },
   {
@@ -2850,7 +2883,7 @@
     "all": "28ca1297a797c6ca"
    },
    "row_hash": "310706ee076318f2",
-   "carried": false,
+   "carried": true,
    "pass": 2
   },
   {
@@ -2869,7 +2902,7 @@
     "all": "41fcfcaa90ca7608"
    },
    "row_hash": "310706ee076318f2",
-   "carried": false,
+   "carried": true,
    "pass": 2
   },
   {
@@ -2888,7 +2921,7 @@
     "all": "7005fbbdf75b6933"
    },
    "row_hash": "310706ee076318f2",
-   "carried": false,
+   "carried": true,
    "pass": 2
   },
   {
@@ -2907,27 +2940,27 @@
     "all": "ce1ead70b70054a1"
    },
    "row_hash": "310706ee076318f2",
-   "carried": false,
+   "carried": true,
    "pass": 2
   },
   {
    "row": "C461",
    "screen": "notice_street_skirt.look",
    "verdict": "PASS",
-   "line": "He smiles slowly when you don't answer. Your legs feel very bare. / Next time, then, darling.",
-   "why": "texture that can't clash: an unnamed stranger's look and line, her body's reaction",
+   "line": "He smiles slowly when you don't answer. Your legs feel very bare. / This road, every day, darling. Think about it.",
+   "why": "texture and her body reaction, nothing that can clash",
    "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "b1e307993ba5b4b9",
+    "text": "b7ba2f99356c7095",
     "traits": "44136fa355b3678a",
     "facts": "47ffa125bb39d53d",
     "facts2": "47ffa125bb39d53d",
-    "all": "1ca3bfb65058deb9"
+    "all": "7ab415d07ad34c4d"
    },
    "row_hash": "310706ee076318f2",
    "carried": false,
-   "pass": 2
+   "pass": 4
   },
   {
    "row": "C461",
@@ -2945,7 +2978,7 @@
     "all": "6580f1ad9a565062"
    },
    "row_hash": "310706ee076318f2",
-   "carried": false,
+   "carried": true,
    "pass": 2
   },
   {
@@ -2964,7 +2997,7 @@
     "all": "d9d8f13cccb05f39"
    },
    "row_hash": "310706ee076318f2",
-   "carried": false,
+   "carried": true,
    "pass": 2
   },
   {
@@ -3009,7 +3042,7 @@
     "all": "1cdd61511c788191"
    },
    "row_hash": "370371a278b9f182",
-   "carried": false,
+   "carried": true,
    "pass": 2
   },
   {
@@ -3028,7 +3061,7 @@
     "all": "80acab72cbb613f4"
    },
    "row_hash": "370371a278b9f182",
-   "carried": false,
+   "carried": true,
    "pass": 2
   },
   {
@@ -3047,7 +3080,7 @@
     "all": "6580f1ad9a565062"
    },
    "row_hash": "370371a278b9f182",
-   "carried": false,
+   "carried": true,
    "pass": 2
   },
   {
@@ -3430,7 +3463,7 @@
     "all": "d5450dc0939b5a57"
    },
    "row_hash": "13a714429d15f3b2",
-   "carried": false,
+   "carried": true,
    "pass": 2
   },
   {
@@ -3449,7 +3482,7 @@
     "all": "a391bb62dbd0c75e"
    },
    "row_hash": "13a714429d15f3b2",
-   "carried": false,
+   "carried": true,
    "pass": 2
   },
   {
@@ -3468,7 +3501,7 @@
     "all": "1cdd61511c788191"
    },
    "row_hash": "13a714429d15f3b2",
-   "carried": false,
+   "carried": true,
    "pass": 2
   },
   {
@@ -3487,7 +3520,7 @@
     "all": "9c0050416e1b12d6"
    },
    "row_hash": "13a714429d15f3b2",
-   "carried": false,
+   "carried": true,
    "pass": 2
   },
   {
@@ -3506,7 +3539,7 @@
     "all": "12ed902d46394ce6"
    },
    "row_hash": "13a714429d15f3b2",
-   "carried": false,
+   "carried": true,
    "pass": 2
   },
   {
@@ -3525,7 +3558,7 @@
     "all": "80acab72cbb613f4"
    },
    "row_hash": "13a714429d15f3b2",
-   "carried": false,
+   "carried": true,
    "pass": 2
   },
   {
@@ -3544,7 +3577,7 @@
     "all": "28ca1297a797c6ca"
    },
    "row_hash": "13a714429d15f3b2",
-   "carried": false,
+   "carried": true,
    "pass": 2
   },
   {
@@ -3563,7 +3596,7 @@
     "all": "41fcfcaa90ca7608"
    },
    "row_hash": "13a714429d15f3b2",
-   "carried": false,
+   "carried": true,
    "pass": 2
   },
   {
@@ -3582,7 +3615,7 @@
     "all": "7005fbbdf75b6933"
    },
    "row_hash": "13a714429d15f3b2",
-   "carried": false,
+   "carried": true,
    "pass": 2
   },
   {
@@ -3601,27 +3634,27 @@
     "all": "ce1ead70b70054a1"
    },
    "row_hash": "13a714429d15f3b2",
-   "carried": false,
+   "carried": true,
    "pass": 2
   },
   {
    "row": "L106",
    "screen": "notice_street_skirt.look",
    "verdict": "PASS",
-   "line": "He smiles slowly when you don't answer. Your legs feel very bare. / Next time, then, darling.",
-   "why": "only unnamed strangers (speaker unknown); the place description lists them (bus stop queue, neighbours / joggers / regulars), no named person claimed",
+   "line": "He smiles slowly when you don't answer. Your legs feel very bare. / This road, every day, darling. Think about it.",
+   "why": "an unnamed driver; no schedule claim",
    "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "b1e307993ba5b4b9",
+    "text": "b7ba2f99356c7095",
     "traits": "44136fa355b3678a",
     "facts": "47ffa125bb39d53d",
     "facts2": "47ffa125bb39d53d",
-    "all": "1ca3bfb65058deb9"
+    "all": "7ab415d07ad34c4d"
    },
    "row_hash": "13a714429d15f3b2",
    "carried": false,
-   "pass": 2
+   "pass": 4
   },
   {
    "row": "L106",
@@ -3639,7 +3672,7 @@
     "all": "6580f1ad9a565062"
    },
    "row_hash": "13a714429d15f3b2",
-   "carried": false,
+   "carried": true,
    "pass": 2
   },
   {
@@ -3658,7 +3691,7 @@
     "all": "d9d8f13cccb05f39"
    },
    "row_hash": "13a714429d15f3b2",
-   "carried": false,
+   "carried": true,
    "pass": 2
   },
   {
@@ -3716,8 +3749,8 @@
  ],
  "causes": [],
  "pending": [],
- "asked": 106,
- "answered": 106,
+ "asked": 6,
+ "answered": 6,
  "pass_items": [],
  "unowed": []
 }

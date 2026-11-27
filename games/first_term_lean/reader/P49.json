@@ -1,6 +1,6 @@
 {
  "piece": "P49",
- "pass": 17,
+ "pass": 18,
  "screens": {
   "ryan_charger.moment": {
    "text": "313906c8298f2b26",
@@ -325,7 +325,7 @@
   "C2194": "0c03931191c53a34",
   "C1340": "b76a6583ae88c60f",
   "C2197": "cafbb0a598dbfa97",
-  "C2198": "27e6b45f50edd3ac",
+  "C2198": "73dfe095a72154a3",
   "C769": "f6b6f78a8f2e5ed7",
   "C794": "bad76e5963432385",
   "C2201": "d119dfe665f76359",
@@ -367,6 +367,7 @@
   "C450": "b01ad555668aba2d",
   "C422": "7e128897077ecee6",
   "C460": "67e48e60d5053a2e",
+  "C2202": "6e90fed7eae62131",
   "C461": "310706ee076318f2",
   "C788": "cae1598ef9cb6ff1",
   "C855": "d3dc77f2f96e20ae",
@@ -3208,7 +3209,7 @@
    "note": true,
    "screen_hash": "2039be607205500b",
    "row_hash": "655e8e2b731598c9",
-   "carried": false,
+   "carried": true,
    "pass": 17
   },
   {
@@ -6269,7 +6270,7 @@
    "screen": "hale_called_in.moment",
    "verdict": "N/A",
    "line": "",
-   "why": "a walk-in (someone comes to her), not a menu's Talk screen; C2198 is judged only on the screen a person's menu's Talk opens",
+   "why": "a scene that comes to her, not a menu's Talk screen",
    "cause": null,
    "note": false,
    "screen_hash": {
@@ -6279,35 +6280,35 @@
     "facts2": "ed9eba5ccb976fe4",
     "all": "60672e322c6eb2bc"
    },
-   "row_hash": "27e6b45f50edd3ac",
-   "carried": true,
-   "pass": 13
+   "row_hash": "73dfe095a72154a3",
+   "carried": false,
+   "pass": 18
   },
   {
    "row": "C2198",
    "screen": "marco_hips.moment",
    "verdict": "N/A",
    "line": "",
-   "why": "a walk-in (someone comes to her), not a menu's Talk screen; C2198 is judged only on the screen a person's menu's Talk opens",
+   "why": "a scene that comes to her, not a menu's Talk screen",
    "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "e1e2ae840eb36acf",
+    "text": "bf09273041b98acb",
     "traits": "e4365d01d4eb14be",
     "facts": "f9e936b5d2f7fa16",
     "facts2": "e2ce2f969cea33c2",
-    "all": "6caf8adc9e13179d"
+    "all": "06eb346786cec3d5"
    },
-   "row_hash": "27e6b45f50edd3ac",
-   "carried": true,
-   "pass": 13
+   "row_hash": "73dfe095a72154a3",
+   "carried": false,
+   "pass": 18
   },
   {
    "row": "C2198",
    "screen": "mom_taste.moment",
    "verdict": "N/A",
    "line": "",
-   "why": "a walk-in (someone comes to her), not a menu's Talk screen; C2198 is judged only on the screen a person's menu's Talk opens",
+   "why": "a scene that comes to her, not a menu's Talk screen",
    "cause": null,
    "note": false,
    "screen_hash": {
@@ -6317,16 +6318,16 @@
     "facts2": "f2def89abde9929c",
     "all": "06f6053c7ed12440"
    },
-   "row_hash": "27e6b45f50edd3ac",
-   "carried": true,
-   "pass": 13
+   "row_hash": "73dfe095a72154a3",
+   "carried": false,
+   "pass": 18
   },
   {
    "row": "C2198",
    "screen": "nadia_tip.moment",
    "verdict": "N/A",
    "line": "",
-   "why": "a walk-in (someone comes to her), not a menu's Talk screen; C2198 is judged only on the screen a person's menu's Talk opens",
+   "why": "a scene that comes to her, not a menu's Talk screen",
    "cause": null,
    "note": false,
    "screen_hash": {
@@ -6336,104 +6337,104 @@
     "facts2": "8e364add72f35e0d",
     "all": "0571296a34379742"
    },
-   "row_hash": "27e6b45f50edd3ac",
-   "carried": true,
-   "pass": 13
+   "row_hash": "73dfe095a72154a3",
+   "carried": false,
+   "pass": 18
   },
   {
    "row": "C2198",
    "screen": "ryan_charger.moment",
    "verdict": "N/A",
    "line": "",
-   "why": "a walk-in (someone comes to her), not a menu's Talk screen; C2198 is judged only on the screen a person's menu's Talk opens",
+   "why": "a scene that comes to her, not a menu's Talk screen",
    "cause": null,
    "note": false,
    "screen_hash": {
     "text": "313906c8298f2b26",
     "traits": "74c4f68e6476ecee",
-    "facts": "c2d1415accf79c05",
+    "facts": "28263de60f90a44c",
     "facts2": "8d63addbcec693e8",
-    "all": "abde12bfac993bae"
+    "all": "7cf04c2f7df947b0"
    },
-   "row_hash": "27e6b45f50edd3ac",
-   "carried": true,
-   "pass": 13
+   "row_hash": "73dfe095a72154a3",
+   "carried": false,
+   "pass": 18
   },
   {
    "row": "C2198",
    "screen": "vance_envelope.moment",
    "verdict": "N/A",
    "line": "",
-   "why": "a walk-in (someone comes to her), not a menu's Talk screen; C2198 is judged only on the screen a person's menu's Talk opens",
+   "why": "a scene that comes to her, not a menu's Talk screen",
    "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "1febdaba06b391a4",
+    "text": "5a30d2ab81b3d026",
     "traits": "40c19ab6c95d7a0e",
-    "facts": "480c3268ade1c5c6",
-    "facts2": "f7ec106b04fdf0b4",
-    "all": "90c5a314b1fbbd9d"
+    "facts": "2a2b552e1074f620",
+    "facts2": "f8e83b3951428fe1",
+    "all": "f679850544e33e23"
    },
-   "row_hash": "27e6b45f50edd3ac",
-   "carried": true,
-   "pass": 13
+   "row_hash": "73dfe095a72154a3",
+   "carried": false,
+   "pass": 18
   },
   {
    "row": "C2198",
    "screen": "vance_gutter.moment",
    "verdict": "N/A",
    "line": "",
-   "why": "a walk-in (someone comes to her), not a menu's Talk screen; C2198 is judged only on the screen a person's menu's Talk opens",
+   "why": "a scene that comes to her, not a menu's Talk screen",
    "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "4c7736cdae420af3",
+    "text": "93f595e89d51f0b2",
     "traits": "40c19ab6c95d7a0e",
-    "facts": "480c3268ade1c5c6",
-    "facts2": "f7ec106b04fdf0b4",
-    "all": "4f5299bb21a4f368"
+    "facts": "2a2b552e1074f620",
+    "facts2": "f8e83b3951428fe1",
+    "all": "4d33bd00c62d3267"
    },
-   "row_hash": "27e6b45f50edd3ac",
-   "carried": true,
-   "pass": 13
+   "row_hash": "73dfe095a72154a3",
+   "carried": false,
+   "pass": 18
   },
   {
    "row": "C2198",
    "screen": "zoe_give_him.moment",
    "verdict": "N/A",
    "line": "",
-   "why": "a walk-in (someone comes to her), not a menu's Talk screen; C2198 is judged only on the screen a person's menu's Talk opens",
+   "why": "a scene that comes to her, not a menu's Talk screen",
    "cause": null,
    "note": false,
    "screen_hash": {
     "text": "e049452db2317066",
     "traits": "0b1fa80c9d60647d",
-    "facts": "37fcb9425fcce652",
+    "facts": "41e92ad76009f2bf",
     "facts2": "130dd93dfc7a1cca",
-    "all": "0104d8053969fd0e"
+    "all": "764343a3af3a44e8"
    },
-   "row_hash": "27e6b45f50edd3ac",
-   "carried": true,
-   "pass": 13
+   "row_hash": "73dfe095a72154a3",
+   "carried": false,
+   "pass": 18
   },
   {
    "row": "C2198",
    "screen": "zoe_witness.moment",
    "verdict": "N/A",
    "line": "",
-   "why": "a walk-in (someone comes to her), not a menu's Talk screen; C2198 is judged only on the screen a person's menu's Talk opens",
+   "why": "a scene that comes to her, not a menu's Talk screen",
    "cause": null,
    "note": false,
    "screen_hash": {
     "text": "f651eb67e838de7f",
     "traits": "6b1e34b018661933",
-    "facts": "55b08b7a92e09b4a",
+    "facts": "872f36fb991cf7d7",
     "facts2": "1d19261cdc6cf85d",
-    "all": "a2080fb3cbcaac95"
+    "all": "17acf3639374b6c4"
    },
-   "row_hash": "27e6b45f50edd3ac",
-   "carried": true,
-   "pass": 13
+   "row_hash": "73dfe095a72154a3",
+   "carried": false,
+   "pass": 18
   },
   {
    "row": "C2200",
@@ -6445,7 +6446,7 @@
    "note": false,
    "screen_hash": "2039be607205500b",
    "row_hash": "117a60e53de1e8a4",
-   "carried": false,
+   "carried": true,
    "pass": 17
   },
   {
@@ -6458,8 +6459,21 @@
    "note": false,
    "screen_hash": "2039be607205500b",
    "row_hash": "d119dfe665f76359",
-   "carried": false,
+   "carried": true,
    "pass": 17
+  },
+  {
+   "row": "C2202",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "Feel that? That's where they go. I'll check it next time.",
+   "why": "every one of the ten scenes waits on a seen flag that every first-screen answer sets and nothing unsets (hale_called_in, marco_came, mom_taste_seen, ...), so each plays once and its next-time lines are never renewed",
+   "cause": null,
+   "note": false,
+   "screen_hash": "2039be607205500b",
+   "row_hash": "6e90fed7eae62131",
+   "carried": false,
+   "pass": 18
   },
   {
    "row": "C286",
@@ -12803,8 +12817,8 @@
  ],
  "causes": [],
  "pending": [],
- "asked": 3,
- "answered": 3,
+ "asked": 10,
+ "answered": 10,
  "pass_items": [],
  "unowed": []
 }

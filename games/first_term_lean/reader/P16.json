@@ -1,6 +1,6 @@
 {
  "piece": "P16",
- "pass": 15,
+ "pass": 16,
  "screens": {
   "english_first.sheet": {
    "text": "7468e6ce2c180231",
@@ -121,7 +121,7 @@
   "L169": "59defccfc63b0454",
   "C1340": "b76a6583ae88c60f",
   "C2197": "cafbb0a598dbfa97",
-  "C2198": "27e6b45f50edd3ac",
+  "C2198": "73dfe095a72154a3",
   "C769": "f6b6f78a8f2e5ed7",
   "C794": "bad76e5963432385",
   "C2201": "d119dfe665f76359",
@@ -1161,13 +1161,13 @@
    "screen": "*",
    "verdict": "N/A",
    "line": "",
-   "why": "english_first, a meeting: no menu's Talk screen in this piece; C2198 is judged only on a person's Talk screen (the screen their menu's Talk opens)",
+   "why": "english_first, a one-time class scene: not a menu's Talk screen; C2198 is judged only on the screen a person's menu's Talk opens",
    "cause": null,
    "note": false,
    "screen_hash": "4bc01cffe8943a48",
-   "row_hash": "27e6b45f50edd3ac",
-   "carried": true,
-   "pass": 10
+   "row_hash": "73dfe095a72154a3",
+   "carried": false,
+   "pass": 16
   },
   {
    "row": "C2201",
@@ -1179,7 +1179,7 @@
    "note": false,
    "screen_hash": "4bc01cffe8943a48",
    "row_hash": "d119dfe665f76359",
-   "carried": false,
+   "carried": true,
    "pass": 15
   },
   {

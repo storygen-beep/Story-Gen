@@ -9,7 +9,7 @@ Checks:
   builds     every canvas, place, person and sidebar item in the merged TOML is listed in the Builds: line
              of an APPROVED card (a changed card covers nothing; canvases from 6_dev_shortcuts.toml are
              skipped; a sidebar item, which has no id, is listed as `sidebar:<trait>`, or `sidebar:<label>`)
-  talk, length, presence, creation, saves, speakers, goals
+  talk, length, presence, creation, saves, speakers, goals, repeats
              the measured scene checks in scenes.py (its docstring says what each one can and can't see).
              `--against <git ref>` sets the build `saves` compares with; the default is the last commit of
              output/index.html, the build LO played.
@@ -86,7 +86,7 @@ import walkins  # noqa: E402
 GREEN, RED, INCOMPLETE = "green", "red", "incomplete"
 # Every check a craft row's `judge` may name (SKILL.md, "Rule labels").
 CHECKS = ("merge", "reach", "approvals", "builds", "release", "card", "beat", "sheet", "does",
-          "talk", "length", "presence", "creation", "saves", "speakers", "goals", "pages", "people", "walkins")
+          "talk", "length", "presence", "creation", "saves", "speakers", "goals", "repeats", "pages", "people", "walkins")
 GATES = REPO / ".claude" / "skills" / "author-game-v2" / "scripts" / "gates.py"
 BEAT_FLOOR = 3  # C254: an explicit beat has 3+ frozen-list words
 

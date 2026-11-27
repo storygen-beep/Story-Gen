@@ -1,6 +1,6 @@
 {
  "piece": "P04",
- "pass": 20,
+ "pass": 23,
  "screens": {
   "travel_bus_to_campus.ride": {
    "text": "b315e370a219f4ed",
@@ -10,18 +10,18 @@
    "all": "145cb6ccd6c225c9"
   },
   "travel_bus_to_campus.packed_no": {
-   "text": "70e6483c3726a20d",
+   "text": "c64bd8c6d1e97a1a",
    "traits": "44136fa355b3678a",
    "facts": "bda6226f38a41bb5",
    "facts2": "bda6226f38a41bb5",
-   "all": "acf1689d5eba569f"
+   "all": "5feb0f3579e6a4f1"
   },
   "travel_bus_to_campus.packed_quiet": {
-   "text": "368129a2ff624692",
+   "text": "a9963df231d1697c",
    "traits": "44136fa355b3678a",
    "facts": "bda6226f38a41bb5",
    "facts2": "bda6226f38a41bb5",
-   "all": "2069d678c15dab1b"
+   "all": "b29e49bf0298bf57"
   },
   "travel_walk_to_campus.ride": {
    "text": "9db6c85f17af2668",
@@ -44,7 +44,7 @@
    "facts2": "3cf0347032935327",
    "all": "44aedf3d6ea918ee"
   },
-  "*": "570f4c04d7c6be2a"
+  "*": "b9d71099295fb18f"
  },
  "rows": {
   "B1": "5276068df1ca6fa9",
@@ -251,6 +251,7 @@
   "C450": "3eb18b4cefbe49d3",
   "C422": "8933f85010afbef7",
   "C460": "beb5a109bde77305",
+  "C2202": "d5592f287f5f641a",
   "C461": "153b0804e686abae",
   "L163": "00a617ab9b4e9cd4",
   "voice#1": "b8e8afcb32208b40",
@@ -313,36 +314,38 @@
    "screen": "travel_bus_to_campus.packed_no",
    "verdict": "PASS",
    "line": "He shifts half an inch and no further. You step off in town with your legs shaking.",
-   "why": "true at the first and last minute and on a second visit: lands on town_square, so 'step off in town' is true; the stranger is unnamed and the screen only opens weekdays 07:00-10:00; nobody named whose rows put them elsewhere",
+   "why": "opens only weekdays 07:00-09:59 (the ride's choice conditions); lands on town_square, so 'step off in town' is true; the stranger is unnamed; the 'Next time' line is gone, nothing names a past",
    "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "70e6483c3726a20d",
+    "text": "c64bd8c6d1e97a1a",
+    "traits": "44136fa355b3678a",
     "facts": "bda6226f38a41bb5",
     "facts2": "bda6226f38a41bb5",
-    "all": "acf1689d5eba569f"
+    "all": "5feb0f3579e6a4f1"
    },
    "row_hash": "c1c0e2ac2588a579",
    "carried": true,
-   "pass": 9
+   "pass": 22
   },
   {
    "row": "B10",
    "screen": "travel_bus_to_campus.packed_quiet",
    "verdict": "PASS",
-   "line": "You step off in town with your face burning. Next time, you'll stand by the doors.",
-   "why": "true at the first and last minute and on a second visit: lands on town_square; 'Next time' is her own resolve, true on a repeat; nobody named whose rows put them elsewhere",
+   "line": "Good girl. You've made my whole morning.",
+   "why": "opens only weekdays 07:00-10:00 (choice conditions, 7_final_game.toml ~11007), so 'morning' is true on every ride; lands town_square, so 'step off in town' holds; the stranger is unnamed and promises nothing",
    "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "368129a2ff624692",
+    "text": "a9963df231d1697c",
+    "traits": "44136fa355b3678a",
     "facts": "bda6226f38a41bb5",
     "facts2": "bda6226f38a41bb5",
-    "all": "2069d678c15dab1b"
+    "all": "b29e49bf0298bf57"
    },
    "row_hash": "c1c0e2ac2588a579",
-   "carried": true,
-   "pass": 9
+   "carried": false,
+   "pass": 23
   },
   {
    "row": "B10",
@@ -555,36 +558,38 @@
    "screen": "travel_bus_to_campus.packed_no",
    "verdict": "PASS",
    "line": "He shifts half an inch and no further. You step off in town with your legs shaking.",
-   "why": "$2 and 20 minutes to Town, as PLAN and the cards say; her ass and nipples are body, no garment named",
+   "why": "$2 and 20 minutes to town, as PLAN and P04 say; no garment named, only her body",
    "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "70e6483c3726a20d",
+    "text": "c64bd8c6d1e97a1a",
+    "traits": "44136fa355b3678a",
     "facts": "bda6226f38a41bb5",
     "facts2": "bda6226f38a41bb5",
-    "all": "acf1689d5eba569f"
+    "all": "5feb0f3579e6a4f1"
    },
    "row_hash": "80d415cf08e0ebfe",
    "carried": true,
-   "pass": 9
+   "pass": 22
   },
   {
    "row": "B8",
    "screen": "travel_bus_to_campus.packed_quiet",
    "verdict": "PASS",
-   "line": "You step off in town with your face burning. Next time, you'll stand by the doors.",
-   "why": "$2 and 20 minutes to Town, as PLAN and the cards say; her ass and nipples are body, no garment named",
+   "line": "Good girl. You've made my whole morning.",
+   "why": "$2 and 20 minutes to town as PLAN and P04 say; no garment named, only her neck and body",
    "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "368129a2ff624692",
+    "text": "a9963df231d1697c",
+    "traits": "44136fa355b3678a",
     "facts": "bda6226f38a41bb5",
     "facts2": "bda6226f38a41bb5",
-    "all": "2069d678c15dab1b"
+    "all": "b29e49bf0298bf57"
    },
    "row_hash": "80d415cf08e0ebfe",
-   "carried": true,
-   "pass": 9
+   "carried": false,
+   "pass": 23
   },
   {
    "row": "B8",
@@ -1329,8 +1334,59 @@
    "note": false,
    "screen_hash": "570f4c04d7c6be2a",
    "row_hash": "4745761f016db481",
-   "carried": false,
+   "carried": true,
    "pass": 20
+  },
+  {
+   "row": "C2202",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "The walk back takes forever. Back in the neighbourhood, finally.",
+   "why": "the other travel screens and campus places say nothing true only once",
+   "cause": null,
+   "note": false,
+   "screen_hash": "570f4c04d7c6be2a",
+   "row_hash": "d5592f287f5f641a",
+   "carried": true,
+   "pass": 21
+  },
+  {
+   "row": "C2202",
+   "screen": "travel_bus_to_campus.packed_no",
+   "verdict": "PASS",
+   "line": "He shifts half an inch and no further. You step off in town with your legs shaking.",
+   "why": "the 'Next time, you'll stand by the doors' promise is cut; nothing on the screen is true only once",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "c64bd8c6d1e97a1a",
+    "traits": "44136fa355b3678a",
+    "facts": "bda6226f38a41bb5",
+    "facts2": "bda6226f38a41bb5",
+    "all": "5feb0f3579e6a4f1"
+   },
+   "row_hash": "d5592f287f5f641a",
+   "carried": true,
+   "pass": 22
+  },
+  {
+   "row": "C2202",
+   "screen": "travel_bus_to_campus.packed_quiet",
+   "verdict": "PASS",
+   "line": "Good girl. You've made my whole morning.",
+   "why": "'I'll look for you on this bus' is gone; the new line is about this ride only, true on every repeat, no promise, no first-meeting word",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "a9963df231d1697c",
+    "traits": "44136fa355b3678a",
+    "facts": "bda6226f38a41bb5",
+    "facts2": "bda6226f38a41bb5",
+    "all": "b29e49bf0298bf57"
+   },
+   "row_hash": "d5592f287f5f641a",
+   "carried": false,
+   "pass": 23
   },
   {
    "row": "C239",
@@ -1694,36 +1750,38 @@
    "screen": "travel_bus_to_campus.packed_no",
    "verdict": "PASS",
    "line": "He shifts half an inch and no further. You step off in town with your legs shaking.",
-   "why": "lands on town_square, so 'step off in town' is true; the stranger is unnamed and the screen only opens weekdays 07:00-10:00",
+   "why": "every claim holds on every packed ride: town_square is where the exit lands, the man is unnamed, nothing assumes a past",
    "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "70e6483c3726a20d",
+    "text": "c64bd8c6d1e97a1a",
+    "traits": "44136fa355b3678a",
     "facts": "bda6226f38a41bb5",
     "facts2": "bda6226f38a41bb5",
-    "all": "acf1689d5eba569f"
+    "all": "5feb0f3579e6a4f1"
    },
    "row_hash": "beb5a109bde77305",
    "carried": true,
-   "pass": 9
+   "pass": 22
   },
   {
    "row": "C460",
    "screen": "travel_bus_to_campus.packed_quiet",
    "verdict": "PASS",
-   "line": "You step off in town with your face burning. Next time, you'll stand by the doors.",
-   "why": "lands on town_square; 'Next time' is her own resolve, true on a repeat",
+   "line": "Good girl. You've made my whole morning.",
+   "why": "every claim holds on every packed ride: morning window, town_square exit, unnamed man, no past assumed",
    "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "368129a2ff624692",
+    "text": "a9963df231d1697c",
+    "traits": "44136fa355b3678a",
     "facts": "bda6226f38a41bb5",
     "facts2": "bda6226f38a41bb5",
-    "all": "2069d678c15dab1b"
+    "all": "b29e49bf0298bf57"
    },
    "row_hash": "beb5a109bde77305",
-   "carried": true,
-   "pass": 9
+   "carried": false,
+   "pass": 23
   },
   {
    "row": "C460",
@@ -1819,36 +1877,38 @@
    "screen": "travel_bus_to_campus.packed_no",
    "verdict": "PASS",
    "line": "He shifts half an inch and no further. You step off in town with your legs shaking.",
-   "why": "texture and the stranger's lines only, as before",
+   "why": "texture, her body and the stranger's lines only",
    "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "70e6483c3726a20d",
+    "text": "c64bd8c6d1e97a1a",
+    "traits": "44136fa355b3678a",
     "facts": "bda6226f38a41bb5",
     "facts2": "bda6226f38a41bb5",
-    "all": "acf1689d5eba569f"
+    "all": "5feb0f3579e6a4f1"
    },
    "row_hash": "153b0804e686abae",
    "carried": true,
-   "pass": 9
+   "pass": 22
   },
   {
    "row": "C461",
    "screen": "travel_bus_to_campus.packed_quiet",
    "verdict": "PASS",
-   "line": "You step off in town with your face burning. Next time, you'll stand by the doors.",
-   "why": "texture and the stranger's lines only, as before",
+   "line": "Good girl. You've made my whole morning.",
+   "why": "texture, her body and the stranger's line only; nothing can clash",
    "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "368129a2ff624692",
+    "text": "a9963df231d1697c",
+    "traits": "44136fa355b3678a",
     "facts": "bda6226f38a41bb5",
     "facts2": "bda6226f38a41bb5",
-    "all": "2069d678c15dab1b"
+    "all": "b29e49bf0298bf57"
    },
    "row_hash": "153b0804e686abae",
-   "carried": true,
-   "pass": 9
+   "carried": false,
+   "pass": 23
   },
   {
    "row": "C461",
@@ -3273,37 +3333,39 @@
    "row": "C921",
    "screen": "travel_bus_to_campus.packed_no",
    "verdict": "N/A",
-   "line": "He shifts half an inch and no further. You step off in town with your legs shaking.",
-   "why": "no window on this screen",
+   "line": "",
+   "why": "no schedule window on this screen",
    "cause": null,
    "note": true,
    "screen_hash": {
-    "text": "70e6483c3726a20d",
+    "text": "c64bd8c6d1e97a1a",
+    "traits": "44136fa355b3678a",
     "facts": "bda6226f38a41bb5",
     "facts2": "bda6226f38a41bb5",
-    "all": "acf1689d5eba569f"
+    "all": "5feb0f3579e6a4f1"
    },
    "row_hash": "19da817e808ac3d6",
    "carried": true,
-   "pass": 9
+   "pass": 22
   },
   {
    "row": "C921",
    "screen": "travel_bus_to_campus.packed_quiet",
    "verdict": "N/A",
-   "line": "You step off in town with your face burning. Next time, you'll stand by the doors.",
-   "why": "no window on this screen",
+   "line": "",
+   "why": "no schedule window on this screen",
    "cause": null,
    "note": true,
    "screen_hash": {
-    "text": "368129a2ff624692",
+    "text": "a9963df231d1697c",
+    "traits": "44136fa355b3678a",
     "facts": "bda6226f38a41bb5",
     "facts2": "bda6226f38a41bb5",
-    "all": "2069d678c15dab1b"
+    "all": "b29e49bf0298bf57"
    },
    "row_hash": "19da817e808ac3d6",
-   "carried": true,
-   "pass": 9
+   "carried": false,
+   "pass": 23
   },
   {
    "row": "C921",
@@ -3572,37 +3634,39 @@
    "row": "C927",
    "screen": "travel_bus_to_campus.packed_no",
    "verdict": "PASS",
-   "line": "He shifts half an inch and no further. You step off in town with your legs shaking.",
-   "why": "every exit carries its own minutes (bus 20, walk 45; the packed replies 0 then 20)",
+   "line": "Get off in town",
+   "why": "the one exit carries time_progression_minutes = 20; the reply hops are 0",
    "cause": null,
    "note": true,
    "screen_hash": {
-    "text": "70e6483c3726a20d",
+    "text": "c64bd8c6d1e97a1a",
+    "traits": "44136fa355b3678a",
     "facts": "bda6226f38a41bb5",
     "facts2": "bda6226f38a41bb5",
-    "all": "acf1689d5eba569f"
+    "all": "5feb0f3579e6a4f1"
    },
    "row_hash": "1e009d83817fb566",
    "carried": true,
-   "pass": 9
+   "pass": 22
   },
   {
    "row": "C927",
    "screen": "travel_bus_to_campus.packed_quiet",
    "verdict": "PASS",
-   "line": "You step off in town with your face burning. Next time, you'll stand by the doors.",
-   "why": "every exit carries its own minutes (bus 20, walk 45; the packed replies 0 then 20)",
+   "line": "Get off in town",
+   "why": "the one exit carries time_progression_minutes = 20",
    "cause": null,
    "note": true,
    "screen_hash": {
-    "text": "368129a2ff624692",
+    "text": "a9963df231d1697c",
+    "traits": "44136fa355b3678a",
     "facts": "bda6226f38a41bb5",
     "facts2": "bda6226f38a41bb5",
-    "all": "2069d678c15dab1b"
+    "all": "b29e49bf0298bf57"
    },
    "row_hash": "1e009d83817fb566",
-   "carried": true,
-   "pass": 9
+   "carried": false,
+   "pass": 23
   },
   {
    "row": "C927",
@@ -3945,37 +4009,39 @@
    "row": "C931",
    "screen": "travel_bus_to_campus.packed_no",
    "verdict": "N/A",
-   "line": "He shifts half an inch and no further. You step off in town with your legs shaking.",
-   "why": "no time_of_day on this screen",
+   "line": "",
+   "why": "no time_of_day on this screen (the window is on the ride's choices)",
    "cause": null,
    "note": true,
    "screen_hash": {
-    "text": "70e6483c3726a20d",
+    "text": "c64bd8c6d1e97a1a",
+    "traits": "44136fa355b3678a",
     "facts": "bda6226f38a41bb5",
     "facts2": "bda6226f38a41bb5",
-    "all": "acf1689d5eba569f"
+    "all": "5feb0f3579e6a4f1"
    },
    "row_hash": "1b8984f52b99537e",
    "carried": true,
-   "pass": 9
+   "pass": 22
   },
   {
    "row": "C931",
    "screen": "travel_bus_to_campus.packed_quiet",
    "verdict": "N/A",
-   "line": "You step off in town with your face burning. Next time, you'll stand by the doors.",
-   "why": "no time_of_day on this screen",
+   "line": "",
+   "why": "no time_of_day on this screen (the window is on the ride's choices)",
    "cause": null,
    "note": true,
    "screen_hash": {
-    "text": "368129a2ff624692",
+    "text": "a9963df231d1697c",
+    "traits": "44136fa355b3678a",
     "facts": "bda6226f38a41bb5",
     "facts2": "bda6226f38a41bb5",
-    "all": "2069d678c15dab1b"
+    "all": "b29e49bf0298bf57"
    },
    "row_hash": "1b8984f52b99537e",
-   "carried": true,
-   "pass": 9
+   "carried": false,
+   "pass": 23
   },
   {
    "row": "C931",
@@ -4175,36 +4241,38 @@
    "screen": "travel_bus_to_campus.packed_no",
    "verdict": "PASS",
    "line": "He shifts half an inch and no further. You step off in town with your legs shaking.",
-   "why": "no named person; the bus man is an unnamed stranger",
+   "why": "no named person; the man is an unnamed stranger",
    "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "70e6483c3726a20d",
+    "text": "c64bd8c6d1e97a1a",
+    "traits": "44136fa355b3678a",
     "facts": "bda6226f38a41bb5",
     "facts2": "bda6226f38a41bb5",
-    "all": "acf1689d5eba569f"
+    "all": "5feb0f3579e6a4f1"
    },
    "row_hash": "759e6667d7fc3183",
    "carried": true,
-   "pass": 9
+   "pass": 22
   },
   {
    "row": "L106",
    "screen": "travel_bus_to_campus.packed_quiet",
    "verdict": "PASS",
-   "line": "You step off in town with your face burning. Next time, you'll stand by the doors.",
-   "why": "no named person; the bus man is an unnamed stranger",
+   "line": "Good girl. You've made my whole morning.",
+   "why": "no named person; the man is an unnamed stranger",
    "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "368129a2ff624692",
+    "text": "a9963df231d1697c",
+    "traits": "44136fa355b3678a",
     "facts": "bda6226f38a41bb5",
     "facts2": "bda6226f38a41bb5",
-    "all": "2069d678c15dab1b"
+    "all": "b29e49bf0298bf57"
    },
    "row_hash": "759e6667d7fc3183",
-   "carried": true,
-   "pass": 9
+   "carried": false,
+   "pass": 23
   },
   {
    "row": "L106",
@@ -4390,37 +4458,39 @@
    "row": "L167",
    "screen": "travel_bus_to_campus.packed_no",
    "verdict": "N/A",
-   "line": "He shifts half an inch and no further. You step off in town with your legs shaking.",
+   "line": "",
    "why": "no row on this screen has hours that differ by day",
    "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "70e6483c3726a20d",
+    "text": "c64bd8c6d1e97a1a",
+    "traits": "44136fa355b3678a",
     "facts": "bda6226f38a41bb5",
     "facts2": "bda6226f38a41bb5",
-    "all": "acf1689d5eba569f"
+    "all": "5feb0f3579e6a4f1"
    },
    "row_hash": "adf7bb3f8b632ac3",
    "carried": true,
-   "pass": 9
+   "pass": 22
   },
   {
    "row": "L167",
    "screen": "travel_bus_to_campus.packed_quiet",
    "verdict": "N/A",
-   "line": "You step off in town with your face burning. Next time, you'll stand by the doors.",
+   "line": "",
    "why": "no row on this screen has hours that differ by day",
    "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "368129a2ff624692",
+    "text": "a9963df231d1697c",
+    "traits": "44136fa355b3678a",
     "facts": "bda6226f38a41bb5",
     "facts2": "bda6226f38a41bb5",
-    "all": "2069d678c15dab1b"
+    "all": "b29e49bf0298bf57"
    },
    "row_hash": "adf7bb3f8b632ac3",
-   "carried": true,
-   "pass": 9
+   "carried": false,
+   "pass": 23
   },
   {
    "row": "L167",
@@ -5027,7 +5097,7 @@
    "note": false,
    "screen_hash": "570f4c04d7c6be2a",
    "row_hash": "378b2df4c8bf116d",
-   "carried": false,
+   "carried": true,
    "pass": 20
   },
   {
@@ -5235,7 +5305,7 @@
    "note": false,
    "screen_hash": "570f4c04d7c6be2a",
    "row_hash": "58dab0dc035240bd",
-   "carried": false,
+   "carried": true,
    "pass": 20
   },
   {
@@ -5533,8 +5603,8 @@
  ],
  "causes": [],
  "pending": [],
- "asked": 3,
- "answered": 3,
+ "asked": 10,
+ "answered": 10,
  "pass_items": [],
  "unowed": []
 }

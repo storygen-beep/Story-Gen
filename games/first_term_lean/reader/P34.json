@@ -1,6 +1,6 @@
 {
  "piece": "P34",
- "pass": 24,
+ "pass": 26,
  "screens": {
   "talk_mom.hub": {
    "text": "0f4660e14b94ab43",
@@ -185,11 +185,11 @@
    "all": "24d2b865588f1fd9"
   },
   "ryan_living_room.talk": {
-   "text": "a3fd91de339b2cda",
+   "text": "9e625798d7ef2dd6",
    "traits": "cbe784dabd345f8d",
    "facts": "16aa7886b557055a",
    "facts2": "e058cda41e2fb0ae",
-   "all": "e073ee24e4aea961"
+   "all": "ff50a35cf65a16f4"
   },
   "home_dishes.do": {
    "text": "00dad86f6a1b7bb7",
@@ -212,7 +212,7 @@
    "facts2": "382d88df7f2e79a9",
    "all": "6405fbb818a41081"
   },
-  "*": "99125118446c82c0"
+  "*": "7d06a89e02d0c6db"
  },
  "rows": {
   "B1": "5276068df1ca6fa9",
@@ -320,7 +320,7 @@
   "C2194": "0c03931191c53a34",
   "C1340": "b76a6583ae88c60f",
   "C2197": "cafbb0a598dbfa97",
-  "C2198": "27e6b45f50edd3ac",
+  "C2198": "73dfe095a72154a3",
   "C769": "f6b6f78a8f2e5ed7",
   "C794": "bad76e5963432385",
   "C2201": "d119dfe665f76359",
@@ -361,6 +361,7 @@
   "C450": "b01ad555668aba2d",
   "C422": "7e128897077ecee6",
   "C460": "67e48e60d5053a2e",
+  "C2202": "6e90fed7eae62131",
   "C461": "310706ee076318f2",
   "C2188": "612394eef6826900",
   "C2189": "20748838895e4545"
@@ -684,6 +685,25 @@
    "pass": 22
   },
   {
+   "row": "B10",
+   "screen": "ryan_living_room.talk",
+   "verdict": "PASS",
+   "line": "He doesn't take the good end of the couch back.",
+   "why": "true every visit: he pulled his feet in two lines up, so he gave up the end and keeps it given; Ryan is there (requires_npc); Mark, named by 'Mark's got the remote', is in home_living_room at every hour Ryan is (who_is_where: weekdays Ryan 19-23, Mark 17-23; Sat Ryan 12-17, Mark 10-19; Sun Ryan 12-17, Mark 12-23)",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "9e625798d7ef2dd6",
+    "traits": "cbe784dabd345f8d",
+    "facts": "16aa7886b557055a",
+    "facts2": "e058cda41e2fb0ae",
+    "all": "ff50a35cf65a16f4"
+   },
+   "row_hash": "c1c0e2ac2588a579",
+   "carried": false,
+   "pass": 26
+  },
+  {
    "row": "B11",
    "screen": "*",
    "verdict": "N/A",
@@ -907,6 +927,25 @@
    "row_hash": "80d415cf08e0ebfe",
    "carried": true,
    "pass": 22
+  },
+  {
+   "row": "B8",
+   "screen": "ryan_living_room.talk",
+   "verdict": "PASS",
+   "line": "That's my hoodie.",
+   "why": "the hoodie is named only inside the ryan_hoodie equipped group; no number",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "9e625798d7ef2dd6",
+    "traits": "cbe784dabd345f8d",
+    "facts": "16aa7886b557055a",
+    "facts2": "e058cda41e2fb0ae",
+    "all": "ff50a35cf65a16f4"
+   },
+   "row_hash": "80d415cf08e0ebfe",
+   "carried": false,
+   "pass": 26
   },
   {
    "row": "B9",
@@ -2041,16 +2080,117 @@
   },
   {
    "row": "C2198",
-   "screen": "*",
+   "screen": "mark_kitchen.talk",
    "verdict": "PASS",
-   "line": "Whatever you say, he'll want the money again.",
-   "why": "one talked_mark_today across his places, one fixed talk true on every visit, ending on the rent coming back",
+   "line": "You working, kid? Rent doesn't wait.",
+   "why": "fixed screen, talked_mark_today across kitchen and living room",
    "cause": null,
    "note": false,
-   "screen_hash": "72a5ce4487ddbdec",
-   "row_hash": "27e6b45f50edd3ac",
+   "screen_hash": {
+    "text": "fe35e365dcfda4ec",
+    "traits": "a13af4c65af9f24a",
+    "facts": "811544dad8de125f",
+    "facts2": "57f3c2e33f3edc83",
+    "all": "49da2ec68f166d6c"
+   },
+   "row_hash": "73dfe095a72154a3",
    "carried": true,
-   "pass": 22
+   "pass": 25
+  },
+  {
+   "row": "C2198",
+   "screen": "mark_living_room.talk",
+   "verdict": "PASS",
+   "line": "You're standing in my light, kid.",
+   "why": "fixed screen, same flag; true every visit",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "9c4eb02eda41c82b",
+    "traits": "a13af4c65af9f24a",
+    "facts": "37fda9030ed39d1b",
+    "facts2": "4244f0114f9bc150",
+    "all": "956afa2f5dda70a5"
+   },
+   "row_hash": "73dfe095a72154a3",
+   "carried": true,
+   "pass": 25
+  },
+  {
+   "row": "C2198",
+   "screen": "ryan_kitchen.talk",
+   "verdict": "PASS",
+   "line": "There's more in the pan. Don't tell Mark I made it. / He says he'll make more tomorrow, if you're home.",
+   "why": "talked_ryan_today across three rooms; 'more tomorrow' is kept: the next kitchen talk opens on 'There's more in the pan'",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "ef2da0282311767b",
+    "traits": "cbe784dabd345f8d",
+    "facts": "c8acf01ad341a286",
+    "facts2": "f0656c863969b3cd",
+    "all": "0f6aca405decaa22"
+   },
+   "row_hash": "73dfe095a72154a3",
+   "carried": true,
+   "pass": 25
+  },
+  {
+   "row": "C2198",
+   "screen": "ryan_living_room.talk",
+   "verdict": "PASS",
+   "line": "He says he'll save you the good end of the couch next time.",
+   "why": "the next visit opens on 'He pulls his feet in so you can', so the saved seat is shown, not broken",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "a3fd91de339b2cda",
+    "traits": "cbe784dabd345f8d",
+    "facts": "16aa7886b557055a",
+    "facts2": "e058cda41e2fb0ae",
+    "all": "e073ee24e4aea961"
+   },
+   "row_hash": "73dfe095a72154a3",
+   "carried": true,
+   "pass": 25
+  },
+  {
+   "row": "C2198",
+   "screen": "ryan_room.talk",
+   "verdict": "PASS",
+   "line": "It's free. I checked.",
+   "why": "fixed screen, true every visit; no first-meeting words",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "166cb958fc8ae2d0",
+    "traits": "74c4f68e6476ecee",
+    "facts": "b8bf2fd142afbb61",
+    "facts2": "9743f5cae6d82f4f",
+    "all": "73fd98d65c66c5f6"
+   },
+   "row_hash": "73dfe095a72154a3",
+   "carried": true,
+   "pass": 25
+  },
+  {
+   "row": "C2198",
+   "screen": "talk_mom.talk",
+   "verdict": "PASS",
+   "line": "Did Mark say anything else? About the rent?",
+   "why": "household talk, fixed per context, talked_mom_today",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "feb79fad5e3d8649",
+    "traits": "ff8b9fa74641271c",
+    "facts": "e75c6957e6fa4665",
+    "facts2": "667847517eb6a28b",
+    "all": "6dcd69d60201e8c3"
+   },
+   "row_hash": "73dfe095a72154a3",
+   "carried": true,
+   "pass": 25
   },
   {
    "row": "C2201",
@@ -2062,8 +2202,21 @@
    "note": false,
    "screen_hash": "99125118446c82c0",
    "row_hash": "d119dfe665f76359",
-   "carried": false,
+   "carried": true,
    "pass": 24
+  },
+  {
+   "row": "C2202",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "Your face warms. Neither of you says it, and you both know it'll happen again.",
+   "why": "the household's talks, meals, dishes and wait say nothing true only once; every next-Sunday line is the real rent",
+   "cause": null,
+   "note": false,
+   "screen_hash": "99125118446c82c0",
+   "row_hash": "6e90fed7eae62131",
+   "carried": true,
+   "pass": 25
   },
   {
    "row": "C338",
@@ -2474,6 +2627,25 @@
    "pass": 22
   },
   {
+   "row": "C460",
+   "screen": "ryan_living_room.talk",
+   "verdict": "PASS",
+   "line": "He doesn't take the good end of the couch back.",
+   "why": "the 'save you the good end next time' promise is gone; every claim holds at every minute the menu opens",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "9e625798d7ef2dd6",
+    "traits": "cbe784dabd345f8d",
+    "facts": "16aa7886b557055a",
+    "facts2": "e058cda41e2fb0ae",
+    "all": "ff50a35cf65a16f4"
+   },
+   "row_hash": "67e48e60d5053a2e",
+   "carried": false,
+   "pass": 26
+  },
+  {
    "row": "C461",
    "screen": "*",
    "verdict": "PASS",
@@ -2580,6 +2752,25 @@
    "row_hash": "310706ee076318f2",
    "carried": true,
    "pass": 22
+  },
+  {
+   "row": "C461",
+   "screen": "ryan_living_room.talk",
+   "verdict": "PASS",
+   "line": "Sit, if you want. It's a rerun.",
+   "why": "dialogue fits Ryan's entry (on her side, easy) and her reply fits her",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "9e625798d7ef2dd6",
+    "traits": "cbe784dabd345f8d",
+    "facts": "16aa7886b557055a",
+    "facts2": "e058cda41e2fb0ae",
+    "all": "ff50a35cf65a16f4"
+   },
+   "row_hash": "310706ee076318f2",
+   "carried": false,
+   "pass": 26
   },
   {
    "row": "C519",
@@ -3209,6 +3400,25 @@
    "pass": 22
   },
   {
+   "row": "C927",
+   "screen": "ryan_living_room.talk",
+   "verdict": "PASS",
+   "line": "Done",
+   "why": "Done carries 5 minutes",
+   "cause": null,
+   "note": true,
+   "screen_hash": {
+    "text": "9e625798d7ef2dd6",
+    "traits": "cbe784dabd345f8d",
+    "facts": "16aa7886b557055a",
+    "facts2": "e058cda41e2fb0ae",
+    "all": "ff50a35cf65a16f4"
+   },
+   "row_hash": "4e86d143688ba8e5",
+   "carried": false,
+   "pass": 26
+  },
+  {
    "row": "C928",
    "screen": "*",
    "verdict": "PASS",
@@ -3335,6 +3545,25 @@
    "row_hash": "1aadffd96e76381c",
    "carried": true,
    "pass": 22
+  },
+  {
+   "row": "C931",
+   "screen": "ryan_living_room.talk",
+   "verdict": "N/A",
+   "line": "",
+   "why": "no time_of_day on this screen",
+   "cause": null,
+   "note": true,
+   "screen_hash": {
+    "text": "9e625798d7ef2dd6",
+    "traits": "cbe784dabd345f8d",
+    "facts": "16aa7886b557055a",
+    "facts2": "e058cda41e2fb0ae",
+    "all": "ff50a35cf65a16f4"
+   },
+   "row_hash": "1aadffd96e76381c",
+   "carried": false,
+   "pass": 26
   },
   {
    "row": "C951",
@@ -3508,6 +3737,25 @@
    "row_hash": "13a714429d15f3b2",
    "carried": true,
    "pass": 22
+  },
+  {
+   "row": "L106",
+   "screen": "ryan_living_room.talk",
+   "verdict": "PASS",
+   "line": "Mark's got the remote. Don't even ask.",
+   "why": "Mark is in the living room whenever Ryan is (who_is_where)",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "9e625798d7ef2dd6",
+    "traits": "cbe784dabd345f8d",
+    "facts": "16aa7886b557055a",
+    "facts2": "e058cda41e2fb0ae",
+    "all": "ff50a35cf65a16f4"
+   },
+   "row_hash": "13a714429d15f3b2",
+   "carried": false,
+   "pass": 26
   },
   {
    "row": "L116",
@@ -3729,6 +3977,25 @@
    "pass": 22
   },
   {
+   "row": "L167",
+   "screen": "ryan_living_room.talk",
+   "verdict": "N/A",
+   "line": "",
+   "why": "no hours on this screen; Talk is held by a daily flag",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "9e625798d7ef2dd6",
+    "traits": "cbe784dabd345f8d",
+    "facts": "16aa7886b557055a",
+    "facts2": "e058cda41e2fb0ae",
+    "all": "ff50a35cf65a16f4"
+   },
+   "row_hash": "e64ce2672d85d2d8",
+   "carried": false,
+   "pass": 26
+  },
+  {
    "row": "L170",
    "screen": "*",
    "verdict": "N/A",
@@ -3757,8 +4024,8 @@
  ],
  "causes": [],
  "pending": [],
- "asked": 1,
- "answered": 1,
+ "asked": 8,
+ "answered": 8,
  "pass_items": [],
  "unowed": []
 }

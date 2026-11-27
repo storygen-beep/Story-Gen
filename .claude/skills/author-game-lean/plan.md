@@ -40,7 +40,7 @@ Go place by place, one area per bite. Start from everyone LO has named so far, p
 - **other named people** there;
 - **the crowd:** unnamed, with what they notice. No first meeting and no arc;
 - **who notices her** there, and what they do about it. If nobody does, say so as a choice.
-- **what she can do with each named person there,** once she has met them: can she talk to them at this place, given what their row has them doing? Where yes, they get their menu with Talk, once a day across their places, one talk true on every visit, ending on a hook; the climb is held (`craft/people.md` rule 16; C2197, C2198). Where no anywhere, say why: it becomes their `no_menu`.
+- **what she can do with each named person there,** once she has met them: can she talk to them at this place, given what their row has them doing? Where yes, they get their menu with Talk, once a day across their places, the meeting is the first talk, then one daily talk true on every visit (no first-meeting words, no promise the game doesn't keep; C2202); the climb is held (`craft/people.md` rule 16; C2197, C2198). Where no anywhere, say why: it becomes their `no_menu`.
 
 Release 1 has them all, shallow.
 

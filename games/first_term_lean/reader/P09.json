@@ -1,6 +1,6 @@
 {
  "piece": "P09",
- "pass": 16,
+ "pass": 17,
  "screens": {
   "class_psych.class": {
    "text": "7dc50540207a762d",
@@ -10,11 +10,11 @@
    "all": "795717e099f188bf"
   },
   "class_stats.class": {
-   "text": "205929646d084121",
+   "text": "28c628ef075e885e",
    "traits": "9814f8002b787cb3",
    "facts": "f889432036343cfd",
    "facts2": "7785e4bc8bebf05e",
-   "all": "7321abea6c34b3a6"
+   "all": "b3f88d928c545565"
   },
   "class_english.class": {
    "text": "4ae514e970de642f",
@@ -24,11 +24,11 @@
    "all": "9c9546b04dadeed5"
   },
   "class_drama.class": {
-   "text": "9741365e3550a76b",
+   "text": "fab67ed08993a657",
    "traits": "2875b58584de3c6e",
    "facts": "77c5977fffe46fc8",
    "facts2": "30f91571176cc73e",
-   "all": "331e46e93c15eda9"
+   "all": "dad8cb2c0035883a"
   },
   "stage_practise.practise": {
    "text": "601103fec24e1708",
@@ -64,7 +64,7 @@
    "facts2": "ce9ea30bc0cdb549",
    "all": "ce9ea30bc0cdb549"
   },
-  "*": "5a7502d76e7d3fb0"
+  "*": "58c73635b5eae988"
  },
  "rows": {
   "B1": "5276068df1ca6fa9",
@@ -137,7 +137,7 @@
   "C2194": "0c03931191c53a34",
   "C1340": "b76a6583ae88c60f",
   "C2197": "cafbb0a598dbfa97",
-  "C2198": "27e6b45f50edd3ac",
+  "C2198": "73dfe095a72154a3",
   "C769": "f6b6f78a8f2e5ed7",
   "C794": "bad76e5963432385",
   "C2201": "d119dfe665f76359",
@@ -178,6 +178,7 @@
   "C450": "b01ad555668aba2d",
   "C422": "7e128897077ecee6",
   "C460": "67e48e60d5053a2e",
+  "C2202": "6e90fed7eae62131",
   "C461": "310706ee076318f2",
   "C2189": "20748838895e4545"
  },
@@ -199,19 +200,20 @@
    "row": "B10",
    "screen": "class_drama.class",
    "verdict": "PASS",
-   "line": "Mr. Cross has you all on the stage in a line ... Everyone's watching.",
-   "why": "Trigger is Tue/Thu 11:00-11:29 (weekdays [1,3], 0=Monday, v2.py:5214); who_is_where puts npc_cross (and npc_brooke) at campus_theatre Tue/Thu 11-13, so the class he runs is there at the first and last minute.",
+   "line": "Again. Louder, starlet. Make them look at you. / Closer. Make them want to look.",
+   "why": "Tue/Thu 11:00-11:29 + met_cross; who_is_where puts Cross at campus_theatre Tue/Thu 11-13; no promise, no past, no first-meeting word; true on visit 1 and visit 20",
    "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "9741365e3550a76b",
+    "text": "fab67ed08993a657",
+    "traits": "2875b58584de3c6e",
     "facts": "77c5977fffe46fc8",
     "facts2": "30f91571176cc73e",
-    "all": "331e46e93c15eda9"
+    "all": "dad8cb2c0035883a"
    },
    "row_hash": "c1c0e2ac2588a579",
-   "carried": true,
-   "pass": 5
+   "carried": false,
+   "pass": 17
   },
   {
    "row": "B10",
@@ -255,20 +257,20 @@
    "row": "B10",
    "screen": "class_stats.class",
    "verdict": "PASS",
-   "line": "Mr. Pratt fills three whiteboards with numbers and never once turns round.",
-   "why": "who_is_where: Pratt campus_lecture_hall Mon/Wed 11-13 (office row now campus_office_pratt 13-15); trigger Mon/Wed 11:00-11:29 + met_pratt; nobody else is claimed",
+   "line": "Your hand aches from copying, and the numbers are still on the board when you leave.",
+   "why": "Mon/Wed 11:00-11:29 + met_pratt; Pratt in campus_lecture_hall Mon/Wed 11-13; the new last line claims only what is on the board as the 2-hour class ends; true every visit",
    "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "205929646d084121",
+    "text": "28c628ef075e885e",
     "traits": "9814f8002b787cb3",
     "facts": "f889432036343cfd",
     "facts2": "7785e4bc8bebf05e",
-    "all": "7321abea6c34b3a6"
+    "all": "b3f88d928c545565"
    },
    "row_hash": "c1c0e2ac2588a579",
-   "carried": true,
-   "pass": 12
+   "carried": false,
+   "pass": 17
   },
   {
    "row": "B10",
@@ -487,19 +489,20 @@
    "row": "B8",
    "screen": "class_drama.class",
    "verdict": "PASS",
-   "line": "Mr. Cross has you all on the stage in a line ... Everyone's watching.",
-   "why": "No garment of hers is named on the screen.",
+   "line": "Again. Louder, starlet. Make them look at you. / Closer. Make them want to look.",
+   "why": "no garment of hers named; 10 energy and 120 minutes match PLAN (class 2 hours)",
    "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "9741365e3550a76b",
+    "text": "fab67ed08993a657",
+    "traits": "2875b58584de3c6e",
     "facts": "77c5977fffe46fc8",
     "facts2": "30f91571176cc73e",
-    "all": "331e46e93c15eda9"
+    "all": "dad8cb2c0035883a"
    },
    "row_hash": "80d415cf08e0ebfe",
-   "carried": true,
-   "pass": 5
+   "carried": false,
+   "pass": 17
   },
   {
    "row": "B8",
@@ -543,20 +546,20 @@
    "row": "B8",
    "screen": "class_stats.class",
    "verdict": "PASS",
-   "line": "Mr. Pratt fills three whiteboards with numbers and never once turns round.",
-   "why": "No garment of hers named; the 120/60 minutes match the card",
+   "line": "Your hand aches from copying, and the numbers are still on the board when you leave.",
+   "why": "no garment of hers named; 10 energy and 120 minutes match PLAN (class 2 hours)",
    "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "205929646d084121",
+    "text": "28c628ef075e885e",
     "traits": "9814f8002b787cb3",
     "facts": "f889432036343cfd",
     "facts2": "7785e4bc8bebf05e",
-    "all": "7321abea6c34b3a6"
+    "all": "b3f88d928c545565"
    },
    "row_hash": "80d415cf08e0ebfe",
-   "carried": true,
-   "pass": 12
+   "carried": false,
+   "pass": 17
   },
   {
    "row": "B8",
@@ -1453,13 +1456,13 @@
    "screen": "*",
    "verdict": "N/A",
    "line": "",
-   "why": "classes, study and the grades sidebar: no menu's Talk screen in this piece; C2198 is judged only on a person's Talk screen (the screen their menu's Talk opens)",
+   "why": "no menu Talk screen among P09's canvases; C2198 is judged on a person's Talk screen only",
    "cause": null,
    "note": false,
-   "screen_hash": "5a7502d76e7d3fb0",
-   "row_hash": "27e6b45f50edd3ac",
-   "carried": true,
-   "pass": 15
+   "screen_hash": "58c73635b5eae988",
+   "row_hash": "73dfe095a72154a3",
+   "carried": false,
+   "pass": 17
   },
   {
    "row": "C2201",
@@ -1471,8 +1474,21 @@
    "note": false,
    "screen_hash": "5a7502d76e7d3fb0",
    "row_hash": "d119dfe665f76359",
-   "carried": false,
+   "carried": true,
    "pass": 16
+  },
+  {
+   "row": "C2202",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "Again. Louder, starlet. / Eyes up here, young lady. You'll miss the good part. / Better. Bring me the next one.",
+   "why": "no first-meeting word and no next-time promise on any P09 repeatable: \"starlet\" doesn't mean new, \"Bring me the next one\" is the next paragraph in the same class, the study screens claim only \"there's always more\"",
+   "cause": null,
+   "note": false,
+   "screen_hash": "58c73635b5eae988",
+   "row_hash": "6e90fed7eae62131",
+   "carried": false,
+   "pass": 17
   },
   {
    "row": "C338",
@@ -1725,19 +1741,20 @@
    "row": "C460",
    "screen": "class_drama.class",
    "verdict": "PASS",
-   "line": "Mr. Cross has you all on the stage in a line ... Everyone's watching.",
-   "why": "Every claim (Cross there, the room watching, the line said three times) holds on any visit in the window; 'Next time, I'll show you.' is a promise in his voice on a repeatable.",
+   "line": "Again. Louder, starlet. Make them look at you. / Closer. Make them want to look.",
+   "why": "every claim (who is there, the stage, the board) holds on every playthrough that reaches the screen",
    "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "9741365e3550a76b",
+    "text": "fab67ed08993a657",
+    "traits": "2875b58584de3c6e",
     "facts": "77c5977fffe46fc8",
     "facts2": "30f91571176cc73e",
-    "all": "331e46e93c15eda9"
+    "all": "dad8cb2c0035883a"
    },
    "row_hash": "67e48e60d5053a2e",
-   "carried": true,
-   "pass": 5
+   "carried": false,
+   "pass": 17
   },
   {
    "row": "C460",
@@ -1781,20 +1798,20 @@
    "row": "C460",
    "screen": "class_stats.class",
    "verdict": "PASS",
-   "line": "Mr. Pratt fills three whiteboards with numbers and never once turns round.",
-   "why": "Every claim true on every reachable visit: who_is_where: Pratt campus_lecture_hall Mon/Wed 11-13 (office row now campus_office_pratt 13-15); trigger Mon/Wed 11:00-11:29 + met_pratt; nobody else is claimed",
+   "line": "Your hand aches from copying, and the numbers are still on the board when you leave.",
+   "why": "every claim (who is there, the stage, the board) holds on every playthrough that reaches the screen",
    "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "205929646d084121",
+    "text": "28c628ef075e885e",
     "traits": "9814f8002b787cb3",
     "facts": "f889432036343cfd",
     "facts2": "7785e4bc8bebf05e",
-    "all": "7321abea6c34b3a6"
+    "all": "b3f88d928c545565"
    },
    "row_hash": "67e48e60d5053a2e",
-   "carried": true,
-   "pass": 12
+   "carried": false,
+   "pass": 17
   },
   {
    "row": "C460",
@@ -1874,19 +1891,20 @@
    "row": "C461",
    "screen": "class_drama.class",
    "verdict": "PASS",
-   "line": "Again. Louder, new face. Make them look at you.",
-   "why": "Texture and Cross's own dialogue; 'new face' is his term of address, allowed under the rule.",
+   "line": "Again. Louder, starlet. Make them look at you. / Closer. Make them want to look.",
+   "why": "texture and dialogue only; the line fits Cross's/Pratt's plan entry (Pushy, \"Louder.\" / strict)",
    "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "9741365e3550a76b",
+    "text": "fab67ed08993a657",
+    "traits": "2875b58584de3c6e",
     "facts": "77c5977fffe46fc8",
     "facts2": "30f91571176cc73e",
-    "all": "331e46e93c15eda9"
+    "all": "dad8cb2c0035883a"
    },
    "row_hash": "310706ee076318f2",
-   "carried": true,
-   "pass": 5
+   "carried": false,
+   "pass": 17
   },
   {
    "row": "C461",
@@ -1930,20 +1948,20 @@
    "row": "C461",
    "screen": "class_stats.class",
    "verdict": "PASS",
-   "line": "Mr. Pratt fills three whiteboards with numbers and never once turns round.",
-   "why": "Texture that cannot clash and dialogue that fits the cast entry (Hale \"young lady\", Pratt \"Miss @player\", Walsh \"dear\").",
+   "line": "Your hand aches from copying, and the numbers are still on the board when you leave.",
+   "why": "texture and dialogue only; the line fits Cross's/Pratt's plan entry (Pushy, \"Louder.\" / strict)",
    "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "205929646d084121",
+    "text": "28c628ef075e885e",
     "traits": "9814f8002b787cb3",
     "facts": "f889432036343cfd",
     "facts2": "7785e4bc8bebf05e",
-    "all": "7321abea6c34b3a6"
+    "all": "b3f88d928c545565"
    },
    "row_hash": "310706ee076318f2",
-   "carried": true,
-   "pass": 12
+   "carried": false,
+   "pass": 17
   },
   {
    "row": "C461",
@@ -4006,19 +4024,20 @@
    "row": "C927",
    "screen": "class_drama.class",
    "verdict": "PASS",
-   "line": "Done (time_progression_minutes = 120)",
-   "why": "Its exit states its time; no 3-minute default applies.",
+   "line": "Done: time_progression_minutes = 120",
+   "why": "every exit on the screen carries an explicit time_progression_minutes, so the 3-minute default never applies",
    "cause": null,
    "note": true,
    "screen_hash": {
-    "text": "9741365e3550a76b",
+    "text": "fab67ed08993a657",
+    "traits": "2875b58584de3c6e",
     "facts": "77c5977fffe46fc8",
     "facts2": "30f91571176cc73e",
-    "all": "331e46e93c15eda9"
+    "all": "dad8cb2c0035883a"
    },
    "row_hash": "4e86d143688ba8e5",
-   "carried": true,
-   "pass": 5
+   "carried": false,
+   "pass": 17
   },
   {
    "row": "C927",
@@ -4062,20 +4081,20 @@
    "row": "C927",
    "screen": "class_stats.class",
    "verdict": "PASS",
-   "line": "Done",
-   "why": "The exit states its own minutes (120, or 60 for study); no 3-minute default",
+   "line": "Done: time_progression_minutes = 120",
+   "why": "every exit on the screen carries an explicit time_progression_minutes, so the 3-minute default never applies",
    "cause": null,
    "note": true,
    "screen_hash": {
-    "text": "205929646d084121",
+    "text": "28c628ef075e885e",
     "traits": "9814f8002b787cb3",
     "facts": "f889432036343cfd",
     "facts2": "7785e4bc8bebf05e",
-    "all": "7321abea6c34b3a6"
+    "all": "b3f88d928c545565"
    },
    "row_hash": "4e86d143688ba8e5",
-   "carried": true,
-   "pass": 12
+   "carried": false,
+   "pass": 17
   },
   {
    "row": "C927",
@@ -4474,18 +4493,19 @@
    "screen": "class_drama.class",
    "verdict": "PASS",
    "line": "time_of_day 11:00-11:30",
-   "why": "End exclusive: starts 11:00-11:29, matching 'at 11am'; Cross's row runs to 13:00, so the 120-minute class ends inside his presence.",
+   "why": "the trigger's time_of_day window is end-exclusive and every line agrees with it at its first and last minute",
    "cause": null,
    "note": true,
    "screen_hash": {
-    "text": "9741365e3550a76b",
+    "text": "fab67ed08993a657",
+    "traits": "2875b58584de3c6e",
     "facts": "77c5977fffe46fc8",
     "facts2": "30f91571176cc73e",
-    "all": "331e46e93c15eda9"
+    "all": "dad8cb2c0035883a"
    },
    "row_hash": "1aadffd96e76381c",
-   "carried": true,
-   "pass": 5
+   "carried": false,
+   "pass": 17
   },
   {
    "row": "C931",
@@ -4529,20 +4549,20 @@
    "row": "C931",
    "screen": "class_stats.class",
    "verdict": "PASS",
-   "line": "Mr. Pratt fills three whiteboards with numbers and never once turns round.",
-   "why": "time_of_day is end exclusive (last start 09:29 or 11:29), inside the teacher's row",
+   "line": "time_of_day 11:00-11:30",
+   "why": "the trigger's time_of_day window is end-exclusive and every line agrees with it at its first and last minute",
    "cause": null,
    "note": true,
    "screen_hash": {
-    "text": "205929646d084121",
+    "text": "28c628ef075e885e",
     "traits": "9814f8002b787cb3",
     "facts": "f889432036343cfd",
     "facts2": "7785e4bc8bebf05e",
-    "all": "7321abea6c34b3a6"
+    "all": "b3f88d928c545565"
    },
    "row_hash": "1aadffd96e76381c",
-   "carried": true,
-   "pass": 12
+   "carried": false,
+   "pass": 17
   },
   {
    "row": "C931",
@@ -4658,19 +4678,20 @@
    "row": "L106",
    "screen": "class_drama.class",
    "verdict": "PASS",
-   "line": "Mr. Cross has you all on the stage in a line ... Everyone's watching.",
-   "why": "Cross's rows put him at campus_theatre Tue/Thu 11-13; no one else is claimed beyond the class.",
+   "line": "Again. Louder, starlet. Make them look at you. / Closer. Make them want to look.",
+   "why": "names only the teacher whose row puts him in the room for the whole trigger window (who_is_where)",
    "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "9741365e3550a76b",
+    "text": "fab67ed08993a657",
+    "traits": "2875b58584de3c6e",
     "facts": "77c5977fffe46fc8",
     "facts2": "30f91571176cc73e",
-    "all": "331e46e93c15eda9"
+    "all": "dad8cb2c0035883a"
    },
    "row_hash": "13a714429d15f3b2",
-   "carried": true,
-   "pass": 5
+   "carried": false,
+   "pass": 17
   },
   {
    "row": "L106",
@@ -4714,20 +4735,20 @@
    "row": "L106",
    "screen": "class_stats.class",
    "verdict": "PASS",
-   "line": "Mr. Pratt fills three whiteboards with numbers and never once turns round.",
-   "why": "who_is_where: Pratt campus_lecture_hall Mon/Wed 11-13 (office row now campus_office_pratt 13-15); trigger Mon/Wed 11:00-11:29 + met_pratt; nobody else is claimed",
+   "line": "Your hand aches from copying, and the numbers are still on the board when you leave.",
+   "why": "names only the teacher whose row puts him in the room for the whole trigger window (who_is_where)",
    "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "205929646d084121",
+    "text": "28c628ef075e885e",
     "traits": "9814f8002b787cb3",
     "facts": "f889432036343cfd",
     "facts2": "7785e4bc8bebf05e",
-    "all": "7321abea6c34b3a6"
+    "all": "b3f88d928c545565"
    },
    "row_hash": "13a714429d15f3b2",
-   "carried": true,
-   "pass": 12
+   "carried": false,
+   "pass": 17
   },
   {
    "row": "L106",
@@ -4843,19 +4864,20 @@
    "row": "L167",
    "screen": "class_drama.class",
    "verdict": "PASS",
-   "line": "weekdays [1, 3] + time_of_day 11:00-11:30; \"Tuesday and Thursday at 11am.\"",
-   "why": "One row for both days (same hours), greys with show_when_blocked and a cooldown_message naming the days and the hour, in the timetable form class_psych uses.",
+   "line": "weekday [1,3] / [0,2], 11:00-11:30",
+   "why": "one row for the activity; no per-day-kind duplicate rows",
    "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "9741365e3550a76b",
+    "text": "fab67ed08993a657",
+    "traits": "2875b58584de3c6e",
     "facts": "77c5977fffe46fc8",
     "facts2": "30f91571176cc73e",
-    "all": "331e46e93c15eda9"
+    "all": "dad8cb2c0035883a"
    },
    "row_hash": "e64ce2672d85d2d8",
-   "carried": true,
-   "pass": 5
+   "carried": false,
+   "pass": 17
   },
   {
    "row": "L167",
@@ -4899,20 +4921,20 @@
    "row": "L167",
    "screen": "class_stats.class",
    "verdict": "PASS",
-   "line": "Mr. Pratt fills three whiteboards with numbers and never once turns round.",
-   "why": "One row for both days (same hours), no per-day rows; only class_psych greys, with its cooldown_message naming the full hours",
+   "line": "weekday [1,3] / [0,2], 11:00-11:30",
+   "why": "one row for the activity; no per-day-kind duplicate rows",
    "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "205929646d084121",
+    "text": "28c628ef075e885e",
     "traits": "9814f8002b787cb3",
     "facts": "f889432036343cfd",
     "facts2": "7785e4bc8bebf05e",
-    "all": "7321abea6c34b3a6"
+    "all": "b3f88d928c545565"
    },
    "row_hash": "e64ce2672d85d2d8",
-   "carried": true,
-   "pass": 12
+   "carried": false,
+   "pass": 17
   },
   {
    "row": "L167",
@@ -5022,8 +5044,8 @@
  ],
  "causes": [],
  "pending": [],
- "asked": 1,
- "answered": 1,
+ "asked": 18,
+ "answered": 18,
  "pass_items": [],
  "unowed": []
 }

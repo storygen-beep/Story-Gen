@@ -1,6 +1,6 @@
 {
  "piece": "P59",
- "pass": 8,
+ "pass": 11,
  "screens": {
   "talk_tom.hub": {
    "text": "e27ea7c722ff2d69",
@@ -10,11 +10,11 @@
    "all": "2984b87be5d177ec"
   },
   "talk_tom.talk": {
-   "text": "47211b3c78d40553",
+   "text": "f3721a92901bedd7",
    "traits": "d99594b509571563",
    "facts": "fcd201f17c17fb6d",
    "facts2": "9345dfd1d905ab0d",
-   "all": "64fc5dca6d9fc205"
+   "all": "5bef4a1012371b0b"
   },
   "talk_chris.hub": {
    "text": "8b3288047a397ac0",
@@ -24,11 +24,11 @@
    "all": "405ba5cce292fc52"
   },
   "talk_chris.talk": {
-   "text": "143b69858a3a9f2d",
+   "text": "5eec687d89588126",
    "traits": "7b42410c0bd9090b",
    "facts": "cea458c48ed61269",
    "facts2": "d6c84cc47c60dfc0",
-   "all": "5db2c9ceb3a61a06"
+   "all": "ce0845dfcb342a34"
   },
   "talk_sam.hub": {
    "text": "ae117e79ac73404b",
@@ -44,7 +44,7 @@
    "facts2": "d2f21d032729cccc",
    "all": "3fbf4e1f2213f649"
   },
-  "*": "8fb2408cd26130a7"
+  "*": "24066a8ed7480c99"
  },
  "rows": {
   "B1": "5276068df1ca6fa9",
@@ -124,7 +124,7 @@
   "C2194": "0c03931191c53a34",
   "C1340": "b76a6583ae88c60f",
   "C2197": "cafbb0a598dbfa97",
-  "C2198": "27e6b45f50edd3ac",
+  "C2198": "73dfe095a72154a3",
   "C769": "f6b6f78a8f2e5ed7",
   "C794": "bad76e5963432385",
   "C2201": "d119dfe665f76359",
@@ -165,6 +165,7 @@
   "C450": "b01ad555668aba2d",
   "C422": "7e128897077ecee6",
   "C460": "67e48e60d5053a2e",
+  "C2202": "6e90fed7eae62131",
   "C461": "310706ee076318f2",
   "C2189": "20748838895e4545"
  },
@@ -218,20 +219,20 @@
    "row": "B10",
    "screen": "talk_chris.talk",
    "verdict": "PASS",
-   "line": "New girl. Off the clock and you still can't stay away. ... Next Sunday, Tom's off.",
-   "why": "met_chris is set by 'Work the shift' (cafe_first_shift), so 'Off the clock' is true; Tom's rows are Mon-Sat, so 'Next Sunday, Tom's off' holds on every visit, a Sunday one included",
+   "line": "\"Sundays, Tom's off. Come in and see what I'm like with nobody watching.\"",
+   "why": "true every visit, Sunday included (Tom has no Sunday row)",
    "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "143b69858a3a9f2d",
+    "text": "5eec687d89588126",
     "traits": "7b42410c0bd9090b",
     "facts": "cea458c48ed61269",
     "facts2": "d6c84cc47c60dfc0",
-    "all": "5db2c9ceb3a61a06"
+    "all": "ce0845dfcb342a34"
    },
    "row_hash": "c1c0e2ac2588a579",
    "carried": true,
-   "pass": 2
+   "pass": 10
   },
   {
    "row": "B10",
@@ -275,20 +276,20 @@
    "row": "B10",
    "screen": "talk_tom.talk",
    "verdict": "PASS",
-   "line": "Rookie. You're not on, and you're here anyway.",
-   "why": "met_tom is set by cafe_hire, so 'Rookie' and 'You're not on' hold; Tom is at near_cafe Mon-Sat 10-21 by his rows; true on every visit",
+   "line": "Saturdays are the busy ones, ten till nine. I could use the hands, if you want them.",
+   "why": "Tom's Saturday row is 10-21 (who_is_where), and shifts and hours are open Saturday from 10am (PLAN.md:430-431); the hook offers work, not bigger tips, so nothing claims pay the flat $22 (PLAN.md:329) doesn't give; talk needs met_tom, set with cafe_hired (toml 4085, 4107), so 'You're not on' fits",
    "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "47211b3c78d40553",
+    "text": "f3721a92901bedd7",
     "traits": "d99594b509571563",
     "facts": "fcd201f17c17fb6d",
     "facts2": "9345dfd1d905ab0d",
-    "all": "64fc5dca6d9fc205"
+    "all": "5bef4a1012371b0b"
    },
    "row_hash": "c1c0e2ac2588a579",
-   "carried": true,
-   "pass": 2
+   "carried": false,
+   "pass": 11
   },
   {
    "row": "B11",
@@ -531,20 +532,20 @@
    "row": "B8",
    "screen": "talk_chris.talk",
    "verdict": "PASS",
-   "line": "Next Sunday, Tom's off.",
-   "why": "agrees with Tom's Mon-Sat rows; Done 10 minutes matches the card",
+   "line": "\"his eyes go down your tits to your hips\"",
+   "why": "body, not garment; no number",
    "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "143b69858a3a9f2d",
+    "text": "5eec687d89588126",
     "traits": "7b42410c0bd9090b",
     "facts": "cea458c48ed61269",
     "facts2": "d6c84cc47c60dfc0",
-    "all": "5db2c9ceb3a61a06"
+    "all": "ce0845dfcb342a34"
    },
    "row_hash": "80d415cf08e0ebfe",
    "carried": true,
-   "pass": 2
+   "pass": 10
   },
   {
    "row": "B8",
@@ -588,20 +589,20 @@
    "row": "B8",
    "screen": "talk_tom.talk",
    "verdict": "PASS",
-   "line": "Saturdays are the busy ones, ten till nine.",
-   "why": "Tom's Saturday row is 10-21 and the Saturday hour starts up to 19:56 (an hour ending by about nine); Done 10 minutes",
+   "line": "ten till nine",
+   "why": "matches Tom's Saturday row 10-21; no garment named",
    "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "47211b3c78d40553",
+    "text": "f3721a92901bedd7",
     "traits": "d99594b509571563",
     "facts": "fcd201f17c17fb6d",
     "facts2": "9345dfd1d905ab0d",
-    "all": "64fc5dca6d9fc205"
+    "all": "5bef4a1012371b0b"
    },
    "row_hash": "80d415cf08e0ebfe",
-   "carried": true,
-   "pass": 2
+   "carried": false,
+   "pass": 11
   },
   {
    "row": "B9",
@@ -1402,58 +1403,58 @@
    "row": "C2198",
    "screen": "talk_chris.talk",
    "verdict": "PASS",
-   "line": "Next Sunday, Tom's off.",
-   "why": "one talked_chris_today, unset in [engine.daily_tick]; one talk, true on the first and fifth visit; ends on a time and a person",
+   "line": "Pretty. Off the clock? / Sundays, Tom's off. Come in and see what I'm like with nobody watching.",
+   "why": "one talked_chris_today; one fixed screen with no first-meeting word (\"pretty\" doesn't mean new) and no unkept promise; the hook points at Sunday, when Chris's row is in and Tom's isn't",
    "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "143b69858a3a9f2d",
+    "text": "0a4656e4081653d4",
     "traits": "7b42410c0bd9090b",
     "facts": "cea458c48ed61269",
     "facts2": "d6c84cc47c60dfc0",
-    "all": "5db2c9ceb3a61a06"
+    "all": "11e1483ba59ccb14"
    },
-   "row_hash": "27e6b45f50edd3ac",
+   "row_hash": "73dfe095a72154a3",
    "carried": true,
-   "pass": 2
+   "pass": 9
   },
   {
    "row": "C2198",
    "screen": "talk_sam.talk",
    "verdict": "PASS",
-   "line": "Saturday nights there's a party here. I'll be on this sofa. Come and sit on it with me.",
-   "why": "one talk, one talked_sam_today, true on every visit, and it now ends on a real hook: the Saturday party, a place and a time",
+   "line": "Sunshine. Here for Zoe, or for me? ... Saturday nights there's a party here.",
+   "why": "one talked_sam_today; true every visit; the hook is zoe_party, Saturday 21:00, a real place and time",
    "cause": null,
    "note": false,
    "screen_hash": {
     "text": "24fc95df70a8222b",
     "traits": "fa1a0a429fa0ea30",
-    "facts": "73322662dc17c11d",
+    "facts": "4e9063a15548cc5e",
     "facts2": "d2f21d032729cccc",
-    "all": "a79ebc75a3f89ac1"
+    "all": "3fbf4e1f2213f649"
    },
-   "row_hash": "27e6b45f50edd3ac",
+   "row_hash": "73dfe095a72154a3",
    "carried": true,
-   "pass": 3
+   "pass": 9
   },
   {
    "row": "C2198",
    "screen": "talk_tom.talk",
    "verdict": "PASS",
-   "line": "Saturdays are the busy ones, ten till nine. That's where the tips are",
-   "why": "one talked_tom_today, unset in [engine.daily_tick]; one talk, true every visit; ends on a time (Saturdays) and the tips",
+   "line": "Saturdays are the busy ones, ten till nine. I could use the hands, if you want them.",
+   "why": "one fixed screen behind talked_tom_today; 'Sugar', no first-meeting words, no unkept promise; the hook points at a real time and place (Saturday shifts at the caf\u00e9, Tom there)",
    "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "47211b3c78d40553",
+    "text": "f3721a92901bedd7",
     "traits": "d99594b509571563",
     "facts": "fcd201f17c17fb6d",
     "facts2": "9345dfd1d905ab0d",
-    "all": "64fc5dca6d9fc205"
+    "all": "5bef4a1012371b0b"
    },
-   "row_hash": "27e6b45f50edd3ac",
-   "carried": true,
-   "pass": 2
+   "row_hash": "73dfe095a72154a3",
+   "carried": false,
+   "pass": 11
   },
   {
    "row": "C2201",
@@ -1465,8 +1466,122 @@
    "note": false,
    "screen_hash": "8fb2408cd26130a7",
    "row_hash": "d119dfe665f76359",
-   "carried": false,
+   "carried": true,
    "pass": 8
+  },
+  {
+   "row": "C2202",
+   "screen": "talk_chris.hub",
+   "verdict": "PASS",
+   "line": "Chris is at the machine, sleeves pushed up",
+   "why": "nothing true only once",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "8b3288047a397ac0",
+    "traits": "1d58a0fd6061427e",
+    "facts": "d284aaa801d53071",
+    "facts2": "4adaa3a74ad10be9",
+    "all": "405ba5cce292fc52"
+   },
+   "row_hash": "6e90fed7eae62131",
+   "carried": true,
+   "pass": 9
+  },
+  {
+   "row": "C2202",
+   "screen": "talk_chris.talk",
+   "verdict": "PASS",
+   "line": "Pretty. Off the clock? / Sundays, Tom's off. Come in and see what I'm like with nobody watching.",
+   "why": "\"New girl\" and \"Next Sunday\" are gone; \"Sundays\" is a standing fact",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "0a4656e4081653d4",
+    "traits": "7b42410c0bd9090b",
+    "facts": "cea458c48ed61269",
+    "facts2": "d6c84cc47c60dfc0",
+    "all": "11e1483ba59ccb14"
+   },
+   "row_hash": "6e90fed7eae62131",
+   "carried": true,
+   "pass": 9
+  },
+  {
+   "row": "C2202",
+   "screen": "talk_sam.hub",
+   "verdict": "PASS",
+   "line": "Sam's sprawled on the sofa with his guitar",
+   "why": "nothing true only once",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "ae117e79ac73404b",
+    "traits": "6f7af508d18adad9",
+    "facts": "4862ab148e93e845",
+    "facts2": "040b56d618107b37",
+    "all": "72b3971a0044b046"
+   },
+   "row_hash": "6e90fed7eae62131",
+   "carried": true,
+   "pass": 9
+  },
+  {
+   "row": "C2202",
+   "screen": "talk_sam.talk",
+   "verdict": "PASS",
+   "line": "Saturday nights there's a party here.",
+   "why": "no first-meeting word; the party is built",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "24fc95df70a8222b",
+    "traits": "fa1a0a429fa0ea30",
+    "facts": "4e9063a15548cc5e",
+    "facts2": "d2f21d032729cccc",
+    "all": "3fbf4e1f2213f649"
+   },
+   "row_hash": "6e90fed7eae62131",
+   "carried": true,
+   "pass": 9
+  },
+  {
+   "row": "C2202",
+   "screen": "talk_tom.hub",
+   "verdict": "PASS",
+   "line": "Tom's behind the counter with a cloth over his shoulder.",
+   "why": "nothing true only once",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "e27ea7c722ff2d69",
+    "traits": "d99594b509571563",
+    "facts": "6cd06ed52e88cc6b",
+    "facts2": "0e83f566cd32e479",
+    "all": "2984b87be5d177ec"
+   },
+   "row_hash": "6e90fed7eae62131",
+   "carried": true,
+   "pass": 9
+  },
+  {
+   "row": "C2202",
+   "screen": "talk_tom.talk",
+   "verdict": "PASS",
+   "line": "\"Sugar. You're not on, and you're here anyway.\"",
+   "why": "no first-meeting word, no 'rookie', no next-time promise",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "6b1b4c862df82c88",
+    "traits": "d99594b509571563",
+    "facts": "fcd201f17c17fb6d",
+    "facts2": "9345dfd1d905ab0d",
+    "all": "3e0f3ca87d97cdb0"
+   },
+   "row_hash": "6e90fed7eae62131",
+   "carried": true,
+   "pass": 10
   },
   {
    "row": "C422",
@@ -1613,20 +1728,20 @@
    "row": "C460",
    "screen": "talk_chris.talk",
    "verdict": "PASS",
-   "line": "Next Sunday, Tom's off.",
-   "why": "every claim holds on every visit by the rows (Tom Mon-Sat 10-21, Chris 07-15/10-20, Sam 12-02) and the met flags ('Rookie', 'Off the clock' after the hire and the first shift)",
+   "line": "\"Sundays, Tom's off. Come in and see what I'm like with nobody watching.\"",
+   "why": "Tom off Sundays, Chris on Sun 10-20",
    "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "143b69858a3a9f2d",
+    "text": "5eec687d89588126",
     "traits": "7b42410c0bd9090b",
     "facts": "cea458c48ed61269",
     "facts2": "d6c84cc47c60dfc0",
-    "all": "5db2c9ceb3a61a06"
+    "all": "ce0845dfcb342a34"
    },
    "row_hash": "67e48e60d5053a2e",
    "carried": true,
-   "pass": 2
+   "pass": 10
   },
   {
    "row": "C460",
@@ -1670,20 +1785,20 @@
    "row": "C460",
    "screen": "talk_tom.talk",
    "verdict": "PASS",
-   "line": "Saturdays are the busy ones, ten till nine.",
-   "why": "every claim holds on every visit by the rows (Tom Mon-Sat 10-21, Chris 07-15/10-20, Sam 12-02) and the met flags ('Rookie', 'Off the clock' after the hire and the first shift)",
+   "line": "Saturdays are the busy ones, ten till nine. I could use the hands, if you want them.",
+   "why": "true on every visit: Saturday hours and work exist in release 1; no tip claim left",
    "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "47211b3c78d40553",
+    "text": "f3721a92901bedd7",
     "traits": "d99594b509571563",
     "facts": "fcd201f17c17fb6d",
     "facts2": "9345dfd1d905ab0d",
-    "all": "64fc5dca6d9fc205"
+    "all": "5bef4a1012371b0b"
    },
    "row_hash": "67e48e60d5053a2e",
-   "carried": true,
-   "pass": 2
+   "carried": false,
+   "pass": 11
   },
   {
    "row": "C461",
@@ -1721,20 +1836,20 @@
    "row": "C461",
    "screen": "talk_chris.talk",
    "verdict": "PASS",
-   "line": "Next Sunday, Tom's off.",
-   "why": "texture and the person's own talk; Tom's 'that's where the tips are' is a Sly manager's pitch, Sam's 'Which is always' his joke",
+   "line": "\"Liar. You came to watch me work.\"",
+   "why": "fits Chris",
    "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "143b69858a3a9f2d",
+    "text": "5eec687d89588126",
     "traits": "7b42410c0bd9090b",
     "facts": "cea458c48ed61269",
     "facts2": "d6c84cc47c60dfc0",
-    "all": "5db2c9ceb3a61a06"
+    "all": "ce0845dfcb342a34"
    },
    "row_hash": "310706ee076318f2",
    "carried": true,
-   "pass": 2
+   "pass": 10
   },
   {
    "row": "C461",
@@ -1778,20 +1893,20 @@
    "row": "C461",
    "screen": "talk_tom.talk",
    "verdict": "PASS",
-   "line": "Saturdays are the busy ones, ten till nine.",
-   "why": "texture and the person's own talk; Tom's 'that's where the tips are' is a Sly manager's pitch, Sam's 'Which is always' his joke",
+   "line": "He wipes the counter where it's already clean, and watches your hands, not your face.",
+   "why": "texture and dialogue that fit Tom",
    "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "47211b3c78d40553",
+    "text": "f3721a92901bedd7",
     "traits": "d99594b509571563",
     "facts": "fcd201f17c17fb6d",
     "facts2": "9345dfd1d905ab0d",
-    "all": "64fc5dca6d9fc205"
+    "all": "5bef4a1012371b0b"
    },
    "row_hash": "310706ee076318f2",
-   "carried": true,
-   "pass": 2
+   "carried": false,
+   "pass": 11
   },
   {
    "row": "C519",
@@ -2296,20 +2411,20 @@
    "row": "C927",
    "screen": "talk_chris.talk",
    "verdict": "PASS",
-   "line": "Done ... time_progression_minutes = 10",
-   "why": "the one exit sets its minutes; Leave on the hub is 0",
+   "line": "Done: time_progression_minutes = 10",
+   "why": "exit names its time",
    "cause": null,
    "note": true,
    "screen_hash": {
-    "text": "143b69858a3a9f2d",
+    "text": "5eec687d89588126",
     "traits": "7b42410c0bd9090b",
     "facts": "cea458c48ed61269",
     "facts2": "d6c84cc47c60dfc0",
-    "all": "5db2c9ceb3a61a06"
+    "all": "ce0845dfcb342a34"
    },
    "row_hash": "4e86d143688ba8e5",
    "carried": true,
-   "pass": 2
+   "pass": 10
   },
   {
    "row": "C927",
@@ -2334,20 +2449,20 @@
    "row": "C927",
    "screen": "talk_tom.talk",
    "verdict": "PASS",
-   "line": "Done ... time_progression_minutes = 10",
-   "why": "the one exit sets its minutes; Leave on the hub is 0",
+   "line": "Done",
+   "why": "time_progression_minutes = 10",
    "cause": null,
    "note": true,
    "screen_hash": {
-    "text": "47211b3c78d40553",
+    "text": "f3721a92901bedd7",
     "traits": "d99594b509571563",
     "facts": "fcd201f17c17fb6d",
     "facts2": "9345dfd1d905ab0d",
-    "all": "64fc5dca6d9fc205"
+    "all": "5bef4a1012371b0b"
    },
    "row_hash": "4e86d143688ba8e5",
-   "carried": true,
-   "pass": 2
+   "carried": false,
+   "pass": 11
   },
   {
    "row": "C928",
@@ -2392,20 +2507,20 @@
    "row": "C931",
    "screen": "talk_chris.talk",
    "verdict": "PASS",
-   "line": "",
-   "why": "no time_of_day on Chris's trigger; presence by requires_npc",
+   "line": "requires_npc = \"npc_chris\"",
+   "why": "no time_of_day; presence gates it",
    "cause": null,
    "note": true,
    "screen_hash": {
-    "text": "143b69858a3a9f2d",
+    "text": "5eec687d89588126",
     "traits": "7b42410c0bd9090b",
     "facts": "cea458c48ed61269",
     "facts2": "d6c84cc47c60dfc0",
-    "all": "5db2c9ceb3a61a06"
+    "all": "ce0845dfcb342a34"
    },
    "row_hash": "1aadffd96e76381c",
    "carried": true,
-   "pass": 2
+   "pass": 10
   },
   {
    "row": "C931",
@@ -2430,20 +2545,20 @@
    "row": "C931",
    "screen": "talk_tom.talk",
    "verdict": "PASS",
-   "line": "",
-   "why": "no time_of_day on Tom's trigger",
+   "line": "requires_npc = \"npc_tom\"",
+   "why": "no time_of_day; presence gates it",
    "cause": null,
    "note": true,
    "screen_hash": {
-    "text": "47211b3c78d40553",
+    "text": "f3721a92901bedd7",
     "traits": "d99594b509571563",
     "facts": "fcd201f17c17fb6d",
     "facts2": "9345dfd1d905ab0d",
-    "all": "64fc5dca6d9fc205"
+    "all": "5bef4a1012371b0b"
    },
    "row_hash": "1aadffd96e76381c",
-   "carried": true,
-   "pass": 2
+   "carried": false,
+   "pass": 11
   },
   {
    "row": "C953",
@@ -2494,20 +2609,20 @@
    "row": "L106",
    "screen": "talk_chris.talk",
    "verdict": "PASS",
-   "line": "Next Sunday, Tom's off.",
-   "why": "nobody is said to be there whom their rows don't put there; Zoe and Tom are named only as absent or as a question",
+   "line": "\"Chris is at the machine\"",
+   "why": "requires_npc; only Chris named, plus Tom as absent on Sundays (true)",
    "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "143b69858a3a9f2d",
+    "text": "5eec687d89588126",
     "traits": "7b42410c0bd9090b",
     "facts": "cea458c48ed61269",
     "facts2": "d6c84cc47c60dfc0",
-    "all": "5db2c9ceb3a61a06"
+    "all": "ce0845dfcb342a34"
    },
    "row_hash": "13a714429d15f3b2",
    "carried": true,
-   "pass": 2
+   "pass": 10
   },
   {
    "row": "L106",
@@ -2551,20 +2666,20 @@
    "row": "L106",
    "screen": "talk_tom.talk",
    "verdict": "PASS",
-   "line": "Saturdays are the busy ones, ten till nine.",
-   "why": "nobody is said to be there whom their rows don't put there; Zoe and Tom are named only as absent or as a question",
+   "line": "Tom's behind the counter",
+   "why": "requires_npc; only Tom named",
    "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "47211b3c78d40553",
+    "text": "f3721a92901bedd7",
     "traits": "d99594b509571563",
     "facts": "fcd201f17c17fb6d",
     "facts2": "9345dfd1d905ab0d",
-    "all": "64fc5dca6d9fc205"
+    "all": "5bef4a1012371b0b"
    },
    "row_hash": "13a714429d15f3b2",
-   "carried": true,
-   "pass": 2
+   "carried": false,
+   "pass": 11
   },
   {
    "row": "L119",
@@ -2692,20 +2807,20 @@
    "row": "L167",
    "screen": "talk_chris.talk",
    "verdict": "PASS",
-   "line": "",
-   "why": "no activity here runs one row per kind of day; Sam's two day kinds are one trigger with a group condition",
+   "line": "one menu row on presence",
+   "why": "no per-day rows",
    "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "143b69858a3a9f2d",
+    "text": "5eec687d89588126",
     "traits": "7b42410c0bd9090b",
     "facts": "cea458c48ed61269",
     "facts2": "d6c84cc47c60dfc0",
-    "all": "5db2c9ceb3a61a06"
+    "all": "ce0845dfcb342a34"
    },
    "row_hash": "e64ce2672d85d2d8",
    "carried": true,
-   "pass": 2
+   "pass": 10
   },
   {
    "row": "L167",
@@ -2730,20 +2845,20 @@
    "row": "L167",
    "screen": "talk_tom.talk",
    "verdict": "PASS",
-   "line": "",
-   "why": "no activity here runs one row per kind of day; Sam's two day kinds are one trigger with a group condition",
+   "line": "one menu row on presence",
+   "why": "no per-day rows",
    "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "47211b3c78d40553",
+    "text": "f3721a92901bedd7",
     "traits": "d99594b509571563",
     "facts": "fcd201f17c17fb6d",
     "facts2": "9345dfd1d905ab0d",
-    "all": "64fc5dca6d9fc205"
+    "all": "5bef4a1012371b0b"
    },
    "row_hash": "e64ce2672d85d2d8",
-   "carried": true,
-   "pass": 2
+   "carried": false,
+   "pass": 11
   },
   {
    "row": "L170",
@@ -2761,8 +2876,8 @@
  ],
  "causes": [],
  "pending": [],
- "asked": 1,
- "answered": 1,
+ "asked": 9,
+ "answered": 9,
  "pass_items": [],
  "unowed": []
 }

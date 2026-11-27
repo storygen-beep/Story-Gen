@@ -1,6 +1,6 @@
 {
  "piece": "P11",
- "pass": 19,
+ "pass": 20,
  "screens": {
   "mark_kitchen.hub": {
    "text": "cebee1bac30c4ca9",
@@ -219,7 +219,7 @@
   "C2194": "0c03931191c53a34",
   "C1340": "b76a6583ae88c60f",
   "C2197": "cafbb0a598dbfa97",
-  "C2198": "27e6b45f50edd3ac",
+  "C2198": "73dfe095a72154a3",
   "C769": "f6b6f78a8f2e5ed7",
   "C794": "bad76e5963432385",
   "C2201": "d119dfe665f76359",
@@ -260,6 +260,7 @@
   "C450": "b01ad555668aba2d",
   "C422": "7e128897077ecee6",
   "C460": "67e48e60d5053a2e",
+  "C2202": "6e90fed7eae62131",
   "C461": "310706ee076318f2",
   "C2188": "612394eef6826900",
   "C2189": "20748838895e4545"
@@ -1900,16 +1901,22 @@
   },
   {
    "row": "C2198",
-   "screen": "*",
+   "screen": "mark_kitchen.talk",
    "verdict": "PASS",
-   "line": "Whatever you say, he'll want the money again.",
-   "why": "one talked_mark_today across his places, one fixed talk true on every visit, ending on the rent coming back",
+   "line": "You working, kid? Rent doesn't wait. And don't spend it all on coffee.",
+   "why": "one fixed screen, talked_mark_today shared with mark_living_room, true on day 2 and day 40; household talk, no hook owed",
    "cause": null,
    "note": false,
-   "screen_hash": "a39e91e49c8b67e1",
-   "row_hash": "27e6b45f50edd3ac",
-   "carried": true,
-   "pass": 17
+   "screen_hash": {
+    "text": "fe35e365dcfda4ec",
+    "traits": "a13af4c65af9f24a",
+    "facts": "811544dad8de125f",
+    "facts2": "57f3c2e33f3edc83",
+    "all": "49da2ec68f166d6c"
+   },
+   "row_hash": "73dfe095a72154a3",
+   "carried": false,
+   "pass": 20
   },
   {
    "row": "C2201",
@@ -1921,8 +1928,21 @@
    "note": false,
    "screen_hash": "a39e91e49c8b67e1",
    "row_hash": "d119dfe665f76359",
-   "carried": false,
+   "carried": true,
    "pass": 19
+  },
+  {
+   "row": "C2202",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "All there. Same time next Sunday.",
+   "why": "every next-week line is the real weekly rent; the rise to ninety is held on rent_paid_once is_false or on the paid total",
+   "cause": null,
+   "note": false,
+   "screen_hash": "a39e91e49c8b67e1",
+   "row_hash": "6e90fed7eae62131",
+   "carried": false,
+   "pass": 20
   },
   {
    "row": "C338",
@@ -3576,8 +3596,8 @@
  ],
  "causes": [],
  "pending": [],
- "asked": 1,
- "answered": 1,
+ "asked": 2,
+ "answered": 2,
  "pass_items": [],
  "unowed": []
 }

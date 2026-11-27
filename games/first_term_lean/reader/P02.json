@@ -1,6 +1,6 @@
 {
  "piece": "P02",
- "pass": 13,
+ "pass": 14,
  "screens": {
   "*": "4f53cda18c2baa0c"
  },
@@ -120,6 +120,7 @@
   "C450": "3eb18b4cefbe49d3",
   "C422": "8933f85010afbef7",
   "C460": "beb5a109bde77305",
+  "C2202": "d5592f287f5f641a",
   "C461": "153b0804e686abae",
   "L163": "00a617ab9b4e9cd4",
   "voice#1": "b8e8afcb32208b40",
@@ -675,8 +676,21 @@
    "note": false,
    "screen_hash": "4f53cda18c2baa0c",
    "row_hash": "4745761f016db481",
-   "carried": false,
+   "carried": true,
    "pass": 13
+  },
+  {
+   "row": "C2202",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "The kitchen: the table where the family eats, the fridge, a coffee pot that's always on.",
+   "why": "the house's place descriptions and their empty-room variants show on every visit and say nothing true only once: no first meeting, no next-time promise",
+   "cause": null,
+   "note": false,
+   "screen_hash": "4f53cda18c2baa0c",
+   "row_hash": "d5592f287f5f641a",
+   "carried": false,
+   "pass": 14
   },
   {
    "row": "C422",
@@ -1910,7 +1924,7 @@
    "note": false,
    "screen_hash": "4f53cda18c2baa0c",
    "row_hash": "378b2df4c8bf116d",
-   "carried": false,
+   "carried": true,
    "pass": 13
   },
   {
@@ -2157,7 +2171,7 @@
    "note": false,
    "screen_hash": null,
    "row_hash": "58dab0dc035240bd",
-   "carried": false,
+   "carried": true,
    "pass": 13
   },
   {
@@ -2371,8 +2385,8 @@
  ],
  "causes": [],
  "pending": [],
- "asked": 3,
- "answered": 3,
+ "asked": 1,
+ "answered": 1,
  "pass_items": [],
  "unowed": []
 }

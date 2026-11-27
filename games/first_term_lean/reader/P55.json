@@ -1,6 +1,6 @@
 {
  "piece": "P55",
- "pass": 6,
+ "pass": 7,
  "screens": {
   "*": "4f53cda18c2baa0c"
  },
@@ -27,6 +27,7 @@
   "C450": "3eb18b4cefbe49d3",
   "C422": "8933f85010afbef7",
   "C460": "beb5a109bde77305",
+  "C2202": "d5592f287f5f641a",
   "C461": "153b0804e686abae",
   "L163": "00a617ab9b4e9cd4",
   "voice#1": "b8e8afcb32208b40",
@@ -1266,8 +1267,21 @@
    "note": false,
    "screen_hash": "4f53cda18c2baa0c",
    "row_hash": "414a4b008effe564",
-   "carried": false,
+   "carried": true,
    "pass": 6
+  },
+  {
+   "row": "C2202",
+   "screen": "*",
+   "verdict": "N/A",
+   "line": "",
+   "why": "the piece changed only the 21 walk-ins' trigger mode; their lines are judged on P38, P39 and P41",
+   "cause": null,
+   "note": false,
+   "screen_hash": "4f53cda18c2baa0c",
+   "row_hash": "d5592f287f5f641a",
+   "carried": false,
+   "pass": 7
   },
   {
    "row": "C28",
