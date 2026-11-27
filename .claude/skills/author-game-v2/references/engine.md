@@ -1137,6 +1137,16 @@ first opened (`$hints_opened`), then reads "N new" while anything changed. A wal
 "← Quests" at the top. (Before P80: CoT's checkbox filters, $selectedHintCats / $selectedHintStatuses,
 no longer read.)
 
+**Page memory (2026-11-28, card P81).** `$hints_opened`, `$hints_seen` and `$hintCat` are the page's
+own notes, and going back through history no longer undoes them. ← Back from a scene
+(`setup.smartBack`'s `Engine.goTo`) and the sidebar's ← arrow (`Engine.backward`) restore every
+variable to an earlier moment, so before P81 the button glowed again and old changes showed as new.
+The hints script keeps the notes as they stand at each `:passageend` (and on a chip click), and on a
+`:passageinit` that lands on another moment of the same history it writes them back, into the live
+variables and that moment, so a save made then keeps them (`cot_pages.py`, `setup.pageMemoryKeys`).
+A loaded save is not a move in history (its moments are new objects), so it keeps its own notes. Only
+these keys are carried; the scene is not replayed.
+
 ### `[ui] clothes_layout = "room"` — Change Clothes and the clothes shop as a dressing room (first_term DECISIONS 196)
 
 ```toml

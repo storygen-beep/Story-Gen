@@ -5,6 +5,15 @@ same turn: what changed, why, and how it was verified.
 
 ---
 
+## 2026-11-28 — the Quests page's notes survive going back (first_term_lean card P81)
+
+- **`references/engine.md`:** a "Page memory" paragraph in the `quests_layout = "hints"` section. LO,
+  2026-11-28: "quests in the sidebar always keeps on glowing"; then "resolve it". The cause: ← Back from a
+  scene and the sidebar's ← arrow rewind history, which restored `$hints_opened` (and `$hints_seen`,
+  `$hintCat`) to before the page was opened. The engine now carries those three keys across a move in
+  history. Verified: `test_cot_hints.py::test_going_back_does_not_undo_what_the_page_remembers` fails on the
+  old code and passes on the new; 62 pass across test_cot_hints, test_cot_people, test_people_system.
+
 ## 2026-11-27 — the Quests and People pages, redesigned (first_term_lean card P80)
 
 - **`references/engine.md`:** the `quests_layout = "hints"` and `people_page = "cot"` sections now describe
