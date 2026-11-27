@@ -1,6 +1,6 @@
 {
  "piece": "P57",
- "pass": 13,
+ "pass": 14,
  "screens": {
   "talk_hale.hub": {
    "text": "5dd72f6d0c5397e2",
@@ -131,51 +131,51 @@
   "talk_zoe_quad.hub": {
    "text": "24fe9dda4468dca9",
    "traits": "6b1e34b018661933",
-   "facts": "7a193a03c86d0f74",
-   "facts2": "f08a9d78fc76b06c",
-   "all": "ab9859308052bd82"
+   "facts": "452de1c8c6a59c72",
+   "facts2": "668809d72822323b",
+   "all": "03df7c573ce79f81"
   },
   "talk_zoe_quad.talk": {
    "text": "beba698321dc49ad",
    "traits": "6b1e34b018661933",
-   "facts": "d0252e6f2250289a",
-   "facts2": "c9fcb781e7b0de07",
-   "all": "905346f2e5b3782c"
+   "facts": "14ffc9d877ef23f0",
+   "facts2": "bf15c3d65a01d55e",
+   "all": "148afb7c199f473a"
   },
   "talk_zoe_cafeteria.hub": {
    "text": "a6459b77e28cde0b",
    "traits": "6b1e34b018661933",
-   "facts": "84bf75c29ffd23b0",
-   "facts2": "310c48cdcdf66188",
-   "all": "c9ff7ad511cd550e"
+   "facts": "9fca6412c04f956f",
+   "facts2": "02abbe68e90d6f1e",
+   "all": "20515e5147116db4"
   },
   "talk_zoe_cafeteria.talk": {
    "text": "e2fdc339497469f4",
    "traits": "6b1e34b018661933",
-   "facts": "bcf614f291f94877",
-   "facts2": "346b8f3360288237",
-   "all": "6b7e2c3c9255cee9"
+   "facts": "2d933c95a9d636b2",
+   "facts2": "024adfc9d1b649f0",
+   "all": "61918f0845c9b3a3"
   },
   "talk_zoe_flat.hub": {
    "text": "f770f8b4b4d72492",
    "traits": "6b1e34b018661933",
-   "facts": "76f7b0151ee64aaf",
-   "facts2": "d828b29b5c522684",
-   "all": "7e4ee61b4dc5e2a2"
+   "facts": "c88635445c028725",
+   "facts2": "5a8033c77ed0f9b0",
+   "all": "213a3639e25bc18f"
   },
   "talk_zoe_flat.talk": {
    "text": "98d0ebfbdbdd9d53",
    "traits": "6b1e34b018661933",
-   "facts": "79837c0ab1788824",
-   "facts2": "cc3fa9af62c6b585",
-   "all": "2319731b31ba300c"
+   "facts": "49ea17bc86a34194",
+   "facts2": "141d444e639b83a5",
+   "all": "9d3473d0d362b88b"
   },
   "talk_jake_cafeteria.hub": {
-   "text": "737fbf95d9dd8b03",
+   "text": "e1596441c7ca9d4b",
    "traits": "435644be785b94c8",
    "facts": "c71c6dcf1146b8a8",
    "facts2": "9527918d65508408",
-   "all": "4c93ceb8af5f0ad0"
+   "all": "5846a92c97d1ce91"
   },
   "talk_jake_cafeteria.talk": {
    "text": "796c4fb49d962b66",
@@ -185,11 +185,11 @@
    "all": "76330b61103005c0"
   },
   "talk_jake_quad.hub": {
-   "text": "d7fb30b7418d5ef6",
+   "text": "dc69fcaa00a828e1",
    "traits": "435644be785b94c8",
    "facts": "7538424f652bcbce",
    "facts2": "9d3f593401780370",
-   "all": "3c9fd6e069c60496"
+   "all": "743b5b859a496725"
   },
   "talk_jake_quad.talk": {
    "text": "3bd3761b296f3802",
@@ -201,18 +201,18 @@
   "talk_brooke.hub": {
    "text": "3283600d31d93ec7",
    "traits": "ebc4051ecd3afac5",
-   "facts": "c3d696a70b04c83c",
-   "facts2": "9ee871ec776bd9b0",
-   "all": "7bc3f4e5c3c43f68"
+   "facts": "0ff8343267585da1",
+   "facts2": "4aa8ed9aaffe5b1e",
+   "all": "30dcb9d768cbd993"
   },
   "talk_brooke.talk": {
    "text": "5004fb531f2d4b07",
    "traits": "ebc4051ecd3afac5",
-   "facts": "0a37fcd9f9b5d70b",
-   "facts2": "7ec53cc1d723c2ce",
-   "all": "0053465c8cf27898"
+   "facts": "1dd634d44c8e102f",
+   "facts2": "29aee0845021d4db",
+   "all": "791dff81715d2875"
   },
-  "*": "62597a09bdeb293d"
+  "*": "f165ef56d10c418a"
  },
  "rows": {
   "B1": "5276068df1ca6fa9",
@@ -357,39 +357,39 @@
    "row": "B10",
    "screen": "talk_brooke.hub",
    "verdict": "PASS",
-   "line": "Brooke's at the mirror doing her lips. ... Alone. No phone, not a selfie.",
-   "why": "true at the first and last minute of the menu's window and on a second visit: Brooke's rows put her at the bathroom mirror in the menu's hours; no garment of hers named",
+   "line": "Brooke's at the mirror doing her lips. She watches you come in, in the glass.",
+   "why": "read at first and last minute and on a second visit: Brooke's rows: weekdays 08-09 and 13-14 campus_bathroom (who_is_where); requires_npc gates the menu to those hours; her Saturday rows moved to near_zoe_kitchen, which never touches this place",
    "cause": null,
    "note": false,
    "screen_hash": {
     "text": "3283600d31d93ec7",
     "traits": "ebc4051ecd3afac5",
-    "facts": "c3d696a70b04c83c",
-    "facts2": "9ee871ec776bd9b0",
-    "all": "7bc3f4e5c3c43f68"
+    "facts": "0ff8343267585da1",
+    "facts2": "4aa8ed9aaffe5b1e",
+    "all": "30dcb9d768cbd993"
    },
    "row_hash": "c1c0e2ac2588a579",
-   "carried": true,
-   "pass": 2
+   "carried": false,
+   "pass": 14
   },
   {
    "row": "B10",
    "screen": "talk_brooke.talk",
    "verdict": "PASS",
-   "line": "Princess. Still here? ... I'm on that stage Tuesday, Thursday and Friday at two.",
-   "why": "read at the meeting's own visit (menu right after the meeting), the last minute of the row and the fifth visit: the opening claims no return and no first time; Brooke's theatre row is Tue/Thu/Fri 14-18 and watch_rehearsal runs those days from 14:00; \"Still here?\" is her Mean dig (still at this college), true straight after the meeting at the mirror and on any later visit",
+   "line": "Cute. I'm on that stage Tuesday, Thursday and Friday at two. Come and watch how it's done.",
+   "why": "read at first and last minute and on a second visit: Brooke's theatre rows Tue/Thu/Fri 14-18 (who_is_where) keep the hook; 'Still here?' claims no past beyond met_brooke; screen reachable only in her bathroom hours",
    "cause": null,
    "note": false,
    "screen_hash": {
     "text": "5004fb531f2d4b07",
     "traits": "ebc4051ecd3afac5",
-    "facts": "0a37fcd9f9b5d70b",
-    "facts2": "7ec53cc1d723c2ce",
-    "all": "0053465c8cf27898"
+    "facts": "1dd634d44c8e102f",
+    "facts2": "29aee0845021d4db",
+    "all": "791dff81715d2875"
    },
    "row_hash": "c1c0e2ac2588a579",
-   "carried": true,
-   "pass": 4
+   "carried": false,
+   "pass": 14
   },
   {
    "row": "B10",
@@ -547,20 +547,20 @@
    "row": "B10",
    "screen": "talk_jake_cafeteria.hub",
    "verdict": "PASS",
-   "line": "",
-   "why": "true on first and last minute and second visit",
+   "line": "Jake's at the table by the window with his friends. He sees you and sits up straighter.",
+   "why": "read at first and last minute and on a second visit: Jake's rows: weekdays 12-14 campus_cafeteria (who_is_where); requires_npc; 'his friends' is an unnamed crowd",
    "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "737fbf95d9dd8b03",
+    "text": "e1596441c7ca9d4b",
     "traits": "435644be785b94c8",
-    "facts": "7e560e5df28f0e2f",
+    "facts": "c71c6dcf1146b8a8",
     "facts2": "9527918d65508408",
-    "all": "4b2fd6d90e7cd0fa"
+    "all": "5846a92c97d1ce91"
    },
    "row_hash": "c1c0e2ac2588a579",
-   "carried": true,
-   "pass": 1
+   "carried": false,
+   "pass": 14
   },
   {
    "row": "B10",
@@ -585,20 +585,20 @@
    "row": "B10",
    "screen": "talk_jake_quad.hub",
    "verdict": "PASS",
-   "line": "",
-   "why": "true on first and last minute and second visit",
+   "line": "Jake's on the steps with his friends. One of them elbows him as you come over.",
+   "why": "read at first and last minute and on a second visit: Jake's rows: weekdays 14-16 campus_quad (who_is_where); requires_npc; friends unnamed",
    "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "d7fb30b7418d5ef6",
+    "text": "dc69fcaa00a828e1",
     "traits": "435644be785b94c8",
-    "facts": "1e915b6449fc6876",
+    "facts": "7538424f652bcbce",
     "facts2": "9d3f593401780370",
-    "all": "a4c8c3b8f2391698"
+    "all": "743b5b859a496725"
    },
    "row_hash": "c1c0e2ac2588a579",
-   "carried": true,
-   "pass": 1
+   "carried": false,
+   "pass": 14
   },
   {
    "row": "B10",
@@ -813,115 +813,115 @@
    "row": "B10",
    "screen": "talk_zoe_cafeteria.hub",
    "verdict": "PASS",
-   "line": "",
-   "why": "true on first and last minute and second visit",
+   "line": "Zoe's at a table, stealing fries off a tray that isn't hers.",
+   "why": "read at first and last minute and on a second visit: Zoe's rows: Tue/Thu 13-14 campus_cafeteria (who_is_where), unchanged by P83; requires_npc",
    "cause": null,
    "note": false,
    "screen_hash": {
     "text": "a6459b77e28cde0b",
     "traits": "6b1e34b018661933",
-    "facts": "328b6101b66b22eb",
-    "facts2": "310c48cdcdf66188",
-    "all": "294324ac51b9f68c"
+    "facts": "9fca6412c04f956f",
+    "facts2": "02abbe68e90d6f1e",
+    "all": "20515e5147116db4"
    },
    "row_hash": "c1c0e2ac2588a579",
-   "carried": true,
-   "pass": 1
+   "carried": false,
+   "pass": 14
   },
   {
    "row": "B10",
    "screen": "talk_zoe_cafeteria.talk",
    "verdict": "PASS",
-   "line": "Saturday. Mine. Nine o'clock.",
-   "why": "first minute (right after the meeting where possible), last minute and second-to-fifth visit: zoe_party is every Saturday 21:00-01:00; Zoe's cafeteria row is Tue/Thu 13-14",
+   "line": "Saturday. Mine. Nine o'clock. Wear something short, and I'll show you who's worth knowing.",
+   "why": "read at first and last minute and on a second visit: zoe_party is every Saturday from 21:00 at her flat, living room (P83 kept it there); true on every visit Tue/Thu 13-14",
    "cause": null,
    "note": false,
    "screen_hash": {
     "text": "e2fdc339497469f4",
     "traits": "6b1e34b018661933",
-    "facts": "b1f3e2a1c6adc16f",
-    "facts2": "346b8f3360288237",
-    "all": "6dcb5a4b32ba3b0c"
+    "facts": "2d933c95a9d636b2",
+    "facts2": "024adfc9d1b649f0",
+    "all": "61918f0845c9b3a3"
    },
    "row_hash": "c1c0e2ac2588a579",
-   "carried": true,
-   "pass": 3
+   "carried": false,
+   "pass": 14
   },
   {
    "row": "B10",
    "screen": "talk_zoe_flat.hub",
    "verdict": "PASS",
-   "line": "",
-   "why": "true on first and last minute and second visit",
+   "line": "Zoe's on her couch with her feet up and her phone in her hand. She waves you in without looking up.",
+   "why": "read at first and last minute and on a second visit: after P83 Zoe is in the living room (near_zoe_apartment) 19-23 Mon-Fri/Sun and 19-24 Sat, in near_zoe_room 18-19; requires_npc reads the living room, so the menu opens only from 19:00, when she is on the couch; the trigger shuts Sat 21:00 (party) and Sun 00-01 (Sun window 18-23, weekday 6 = Sunday, v2.py:5245); Sam's face can share the room, the line claims only Zoe",
    "cause": null,
    "note": false,
    "screen_hash": {
     "text": "f770f8b4b4d72492",
     "traits": "6b1e34b018661933",
-    "facts": "862375cce5748455",
-    "facts2": "d828b29b5c522684",
-    "all": "3ab3f4d71e41b1ba"
+    "facts": "c88635445c028725",
+    "facts2": "5a8033c77ed0f9b0",
+    "all": "213a3639e25bc18f"
    },
    "row_hash": "c1c0e2ac2588a579",
-   "carried": true,
-   "pass": 1
+   "carried": false,
+   "pass": 14
   },
   {
    "row": "B10",
    "screen": "talk_zoe_flat.talk",
    "verdict": "PASS",
-   "line": "Saturday. Mine. Nine o'clock.",
-   "why": "first minute (right after the meeting where possible), last minute and second-to-fifth visit: the flat menu is off from 21:00 Saturday and only reopens Sunday 18:00, so it never plays during the party it announces",
+   "line": "Saturday. Mine. Nine o'clock. Wear something short, and I'll show you who's worth knowing.",
+   "why": "read at first and last minute and on a second visit: reachable 19-23 (Sat 19-21) now; on a Saturday 19:00-20:59 the party at nine is still ahead, and the menu is shut from 21:00 Sat to Sun 18:00, so it never plays during the party; 'She stretches so her top rides up' is Zoe's top",
    "cause": null,
    "note": false,
    "screen_hash": {
     "text": "98d0ebfbdbdd9d53",
     "traits": "6b1e34b018661933",
-    "facts": "4f9672af78b3a889",
-    "facts2": "cc3fa9af62c6b585",
-    "all": "9d5fc9ff91898959"
+    "facts": "49ea17bc86a34194",
+    "facts2": "141d444e639b83a5",
+    "all": "9d3473d0d362b88b"
    },
    "row_hash": "c1c0e2ac2588a579",
-   "carried": true,
-   "pass": 3
+   "carried": false,
+   "pass": 14
   },
   {
    "row": "B10",
    "screen": "talk_zoe_quad.hub",
    "verdict": "PASS",
-   "line": "",
-   "why": "true on first and last minute and second visit",
+   "line": "Zoe's stretched out on the grass in sunglasses, her skirt rucked up, and she doesn't fix it.",
+   "why": "read at first and last minute and on a second visit: Zoe's rows: Mon/Wed/Fri 13-15, Tue/Thu 14-15 campus_quad (who_is_where), unchanged by P83; requires_npc; the skirt is Zoe's, not hers",
    "cause": null,
    "note": false,
    "screen_hash": {
     "text": "24fe9dda4468dca9",
     "traits": "6b1e34b018661933",
-    "facts": "6b7fd76ab4fd4b56",
-    "facts2": "f08a9d78fc76b06c",
-    "all": "0b9dbde38111c94f"
+    "facts": "452de1c8c6a59c72",
+    "facts2": "668809d72822323b",
+    "all": "03df7c573ce79f81"
    },
    "row_hash": "c1c0e2ac2588a579",
-   "carried": true,
-   "pass": 1
+   "carried": false,
+   "pass": 14
   },
   {
    "row": "B10",
    "screen": "talk_zoe_quad.talk",
    "verdict": "PASS",
-   "line": "Saturday. Mine. Nine o'clock.",
-   "why": "first minute (right after the meeting where possible), last minute and second-to-fifth visit: zoe_party runs every Saturday 9pm-1am at her flat once met_zoe, so the invitation is true on every visit",
+   "line": "Saturday. Mine. Nine o'clock. Wear something short, and I'll show you who's worth knowing.",
+   "why": "read at first and last minute and on a second visit: zoe_party every Saturday from 21:00, still in the living room after P83; true on every quad visit",
    "cause": null,
    "note": false,
    "screen_hash": {
     "text": "beba698321dc49ad",
     "traits": "6b1e34b018661933",
-    "facts": "bcc281ad08f55dcb",
-    "facts2": "c9fcb781e7b0de07",
-    "all": "1c61ab4cb58d64f1"
+    "facts": "14ffc9d877ef23f0",
+    "facts2": "bf15c3d65a01d55e",
+    "all": "148afb7c199f473a"
    },
    "row_hash": "c1c0e2ac2588a579",
-   "carried": true,
-   "pass": 3
+   "carried": false,
+   "pass": 14
   },
   {
    "row": "B11",
@@ -1044,39 +1044,39 @@
    "row": "B8",
    "screen": "talk_brooke.hub",
    "verdict": "PASS",
-   "line": "Brooke's at the mirror doing her lips. ... Alone. No phone, not a selfie.",
-   "why": "no garment of hers named; every number (hours, Done 10 minutes) agrees with rows and the card",
+   "line": "Brooke's at the mirror doing her lips. She watches you come in, in the glass.",
+   "why": "no garment of hers named; every day and hour agrees with the rows (who_is_where) and the card; Done is 10 minutes as the card says",
    "cause": null,
    "note": false,
    "screen_hash": {
     "text": "3283600d31d93ec7",
     "traits": "ebc4051ecd3afac5",
-    "facts": "c3d696a70b04c83c",
-    "facts2": "9ee871ec776bd9b0",
-    "all": "7bc3f4e5c3c43f68"
+    "facts": "0ff8343267585da1",
+    "facts2": "4aa8ed9aaffe5b1e",
+    "all": "30dcb9d768cbd993"
    },
    "row_hash": "80d415cf08e0ebfe",
-   "carried": true,
-   "pass": 2
+   "carried": false,
+   "pass": 14
   },
   {
    "row": "B8",
    "screen": "talk_brooke.talk",
    "verdict": "PASS",
-   "line": "Princess. Still here? ... I'm on that stage Tuesday, Thursday and Friday at two.",
-   "why": "no garment of hers is named; Brooke's theatre row is Tue/Thu/Fri 14-18 and watch_rehearsal runs those days from 14:00; \"Still here?\" is her Mean dig (still at this college), true straight after the meeting at the mirror and on any later visit",
+   "line": "Cute. I'm on that stage Tuesday, Thursday and Friday at two. Come and watch how it's done.",
+   "why": "no garment of hers named; every day and hour agrees with the rows (who_is_where) and the card; Done is 10 minutes as the card says",
    "cause": null,
    "note": false,
    "screen_hash": {
     "text": "5004fb531f2d4b07",
     "traits": "ebc4051ecd3afac5",
-    "facts": "0a37fcd9f9b5d70b",
-    "facts2": "7ec53cc1d723c2ce",
-    "all": "0053465c8cf27898"
+    "facts": "1dd634d44c8e102f",
+    "facts2": "29aee0845021d4db",
+    "all": "791dff81715d2875"
    },
    "row_hash": "80d415cf08e0ebfe",
-   "carried": true,
-   "pass": 4
+   "carried": false,
+   "pass": 14
   },
   {
    "row": "B8",
@@ -1234,20 +1234,20 @@
    "row": "B8",
    "screen": "talk_jake_cafeteria.hub",
    "verdict": "PASS",
-   "line": "time_progression_minutes = 10",
-   "why": "the numbers match the card",
+   "line": "Jake's at the table by the window with his friends. He sees you and sits up straighter.",
+   "why": "no garment of hers named; every day and hour agrees with the rows (who_is_where) and the card; Done is 10 minutes as the card says",
    "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "737fbf95d9dd8b03",
+    "text": "e1596441c7ca9d4b",
     "traits": "435644be785b94c8",
-    "facts": "7e560e5df28f0e2f",
+    "facts": "c71c6dcf1146b8a8",
     "facts2": "9527918d65508408",
-    "all": "4b2fd6d90e7cd0fa"
+    "all": "5846a92c97d1ce91"
    },
    "row_hash": "80d415cf08e0ebfe",
-   "carried": true,
-   "pass": 1
+   "carried": false,
+   "pass": 14
   },
   {
    "row": "B8",
@@ -1272,20 +1272,20 @@
    "row": "B8",
    "screen": "talk_jake_quad.hub",
    "verdict": "PASS",
-   "line": "time_progression_minutes = 10",
-   "why": "the numbers match the card",
+   "line": "Jake's on the steps with his friends. One of them elbows him as you come over.",
+   "why": "no garment of hers named; every day and hour agrees with the rows (who_is_where) and the card; Done is 10 minutes as the card says",
    "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "d7fb30b7418d5ef6",
+    "text": "dc69fcaa00a828e1",
     "traits": "435644be785b94c8",
-    "facts": "1e915b6449fc6876",
+    "facts": "7538424f652bcbce",
     "facts2": "9d3f593401780370",
-    "all": "a4c8c3b8f2391698"
+    "all": "743b5b859a496725"
    },
    "row_hash": "80d415cf08e0ebfe",
-   "carried": true,
-   "pass": 1
+   "carried": false,
+   "pass": 14
   },
   {
    "row": "B8",
@@ -1500,115 +1500,115 @@
    "row": "B8",
    "screen": "talk_zoe_cafeteria.hub",
    "verdict": "PASS",
-   "line": "time_progression_minutes = 10",
-   "why": "the numbers match the card",
+   "line": "Zoe's at a table, stealing fries off a tray that isn't hers.",
+   "why": "no garment of hers named; every day and hour agrees with the rows (who_is_where) and the card; Done is 10 minutes as the card says",
    "cause": null,
    "note": false,
    "screen_hash": {
     "text": "a6459b77e28cde0b",
     "traits": "6b1e34b018661933",
-    "facts": "328b6101b66b22eb",
-    "facts2": "310c48cdcdf66188",
-    "all": "294324ac51b9f68c"
+    "facts": "9fca6412c04f956f",
+    "facts2": "02abbe68e90d6f1e",
+    "all": "20515e5147116db4"
    },
    "row_hash": "80d415cf08e0ebfe",
-   "carried": true,
-   "pass": 1
+   "carried": false,
+   "pass": 14
   },
   {
    "row": "B8",
    "screen": "talk_zoe_cafeteria.talk",
    "verdict": "PASS",
-   "line": "Saturday. Mine. Nine o'clock.",
-   "why": "'Wear something short' asks, it names nothing she wears; Saturday at nine agrees with zoe_party and the story hint",
+   "line": "Saturday. Mine. Nine o'clock. Wear something short, and I'll show you who's worth knowing.",
+   "why": "no garment of hers named; every day and hour agrees with the rows (who_is_where) and the card; Done is 10 minutes as the card says",
    "cause": null,
    "note": false,
    "screen_hash": {
     "text": "e2fdc339497469f4",
     "traits": "6b1e34b018661933",
-    "facts": "b1f3e2a1c6adc16f",
-    "facts2": "346b8f3360288237",
-    "all": "6dcb5a4b32ba3b0c"
+    "facts": "2d933c95a9d636b2",
+    "facts2": "024adfc9d1b649f0",
+    "all": "61918f0845c9b3a3"
    },
    "row_hash": "80d415cf08e0ebfe",
-   "carried": true,
-   "pass": 3
+   "carried": false,
+   "pass": 14
   },
   {
    "row": "B8",
    "screen": "talk_zoe_flat.hub",
    "verdict": "PASS",
-   "line": "time_progression_minutes = 10",
-   "why": "the numbers match the card",
+   "line": "Zoe's on her couch with her feet up and her phone in her hand. She waves you in without looking up.",
+   "why": "no garment of hers named; every day and hour agrees with the rows (who_is_where) and the card; Done is 10 minutes as the card says",
    "cause": null,
    "note": false,
    "screen_hash": {
     "text": "f770f8b4b4d72492",
     "traits": "6b1e34b018661933",
-    "facts": "862375cce5748455",
-    "facts2": "d828b29b5c522684",
-    "all": "3ab3f4d71e41b1ba"
+    "facts": "c88635445c028725",
+    "facts2": "5a8033c77ed0f9b0",
+    "all": "213a3639e25bc18f"
    },
    "row_hash": "80d415cf08e0ebfe",
-   "carried": true,
-   "pass": 1
+   "carried": false,
+   "pass": 14
   },
   {
    "row": "B8",
    "screen": "talk_zoe_flat.talk",
    "verdict": "PASS",
-   "line": "Saturday. Mine. Nine o'clock.",
-   "why": "'Wear something short' asks, it names nothing she wears; Saturday at nine agrees with zoe_party and the story hint",
+   "line": "Saturday. Mine. Nine o'clock. Wear something short, and I'll show you who's worth knowing.",
+   "why": "no garment of hers named; every day and hour agrees with the rows (who_is_where) and the card; Done is 10 minutes as the card says",
    "cause": null,
    "note": false,
    "screen_hash": {
     "text": "98d0ebfbdbdd9d53",
     "traits": "6b1e34b018661933",
-    "facts": "4f9672af78b3a889",
-    "facts2": "cc3fa9af62c6b585",
-    "all": "9d5fc9ff91898959"
+    "facts": "49ea17bc86a34194",
+    "facts2": "141d444e639b83a5",
+    "all": "9d3473d0d362b88b"
    },
    "row_hash": "80d415cf08e0ebfe",
-   "carried": true,
-   "pass": 3
+   "carried": false,
+   "pass": 14
   },
   {
    "row": "B8",
    "screen": "talk_zoe_quad.hub",
    "verdict": "PASS",
-   "line": "time_progression_minutes = 10",
-   "why": "the numbers match the card",
+   "line": "Zoe's stretched out on the grass in sunglasses, her skirt rucked up, and she doesn't fix it.",
+   "why": "no garment of hers named; every day and hour agrees with the rows (who_is_where) and the card; Done is 10 minutes as the card says",
    "cause": null,
    "note": false,
    "screen_hash": {
     "text": "24fe9dda4468dca9",
     "traits": "6b1e34b018661933",
-    "facts": "6b7fd76ab4fd4b56",
-    "facts2": "f08a9d78fc76b06c",
-    "all": "0b9dbde38111c94f"
+    "facts": "452de1c8c6a59c72",
+    "facts2": "668809d72822323b",
+    "all": "03df7c573ce79f81"
    },
    "row_hash": "80d415cf08e0ebfe",
-   "carried": true,
-   "pass": 1
+   "carried": false,
+   "pass": 14
   },
   {
    "row": "B8",
    "screen": "talk_zoe_quad.talk",
    "verdict": "PASS",
-   "line": "Saturday. Mine. Nine o'clock.",
-   "why": "'Wear something short' asks, it names nothing she wears; Saturday at nine agrees with zoe_party and the story hint",
+   "line": "Saturday. Mine. Nine o'clock. Wear something short, and I'll show you who's worth knowing.",
+   "why": "no garment of hers named; every day and hour agrees with the rows (who_is_where) and the card; Done is 10 minutes as the card says",
    "cause": null,
    "note": false,
    "screen_hash": {
     "text": "beba698321dc49ad",
     "traits": "6b1e34b018661933",
-    "facts": "bcc281ad08f55dcb",
-    "facts2": "c9fcb781e7b0de07",
-    "all": "1c61ab4cb58d64f1"
+    "facts": "14ffc9d877ef23f0",
+    "facts2": "bf15c3d65a01d55e",
+    "all": "148afb7c199f473a"
    },
    "row_hash": "80d415cf08e0ebfe",
-   "carried": true,
-   "pass": 3
+   "carried": false,
+   "pass": 14
   },
   {
    "row": "B9",
@@ -3436,7 +3436,7 @@
    "note": false,
    "screen_hash": "62597a09bdeb293d",
    "row_hash": "d8ebf6d6b2abf6a5",
-   "carried": false,
+   "carried": true,
    "pass": 13
   },
   {
@@ -3508,39 +3508,39 @@
    "row": "C460",
    "screen": "talk_brooke.hub",
    "verdict": "PASS",
-   "line": "Brooke's at the mirror doing her lips. ... Alone. No phone, not a selfie.",
-   "why": "Brooke's rows put her at the bathroom mirror in the menu's hours; no garment of hers named",
+   "line": "Brooke's at the mirror doing her lips. She watches you come in, in the glass.",
+   "why": "Brooke's rows: weekdays 08-09 and 13-14 campus_bathroom (who_is_where); requires_npc gates the menu to those hours; her Saturday rows moved to near_zoe_kitchen, which never touches this place",
    "cause": null,
    "note": false,
    "screen_hash": {
     "text": "3283600d31d93ec7",
     "traits": "ebc4051ecd3afac5",
-    "facts": "c3d696a70b04c83c",
-    "facts2": "9ee871ec776bd9b0",
-    "all": "7bc3f4e5c3c43f68"
+    "facts": "0ff8343267585da1",
+    "facts2": "4aa8ed9aaffe5b1e",
+    "all": "30dcb9d768cbd993"
    },
    "row_hash": "67e48e60d5053a2e",
-   "carried": true,
-   "pass": 2
+   "carried": false,
+   "pass": 14
   },
   {
    "row": "C460",
    "screen": "talk_brooke.talk",
    "verdict": "PASS",
-   "line": "Princess. Still here? ... I'm on that stage Tuesday, Thursday and Friday at two.",
-   "why": "every claim holds on every playthrough that reaches the screen: Brooke's theatre row is Tue/Thu/Fri 14-18 and watch_rehearsal runs those days from 14:00; \"Still here?\" is her Mean dig (still at this college), true straight after the meeting at the mirror and on any later visit",
+   "line": "Cute. I'm on that stage Tuesday, Thursday and Friday at two. Come and watch how it's done.",
+   "why": "Brooke's theatre rows Tue/Thu/Fri 14-18 (who_is_where) keep the hook; 'Still here?' claims no past beyond met_brooke; screen reachable only in her bathroom hours",
    "cause": null,
    "note": false,
    "screen_hash": {
     "text": "5004fb531f2d4b07",
     "traits": "ebc4051ecd3afac5",
-    "facts": "0a37fcd9f9b5d70b",
-    "facts2": "7ec53cc1d723c2ce",
-    "all": "0053465c8cf27898"
+    "facts": "1dd634d44c8e102f",
+    "facts2": "29aee0845021d4db",
+    "all": "791dff81715d2875"
    },
    "row_hash": "67e48e60d5053a2e",
-   "carried": true,
-   "pass": 4
+   "carried": false,
+   "pass": 14
   },
   {
    "row": "C460",
@@ -3698,20 +3698,20 @@
    "row": "C460",
    "screen": "talk_jake_cafeteria.hub",
    "verdict": "PASS",
-   "line": "Okay. Good. There's a caf\u00e9 across from the gates.",
-   "why": "rows agree with every hook (who_is_where); the coffee ask is on Jake's first meeting screen; Zoe's meeting sets zoe_place_known on its one Done; zoe_party is Sat 21:00-Sun 01:00",
+   "line": "Jake's at the table by the window with his friends. He sees you and sits up straighter.",
+   "why": "Jake's rows: weekdays 12-14 campus_cafeteria (who_is_where); requires_npc; 'his friends' is an unnamed crowd",
    "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "737fbf95d9dd8b03",
+    "text": "e1596441c7ca9d4b",
     "traits": "435644be785b94c8",
-    "facts": "7e560e5df28f0e2f",
+    "facts": "c71c6dcf1146b8a8",
     "facts2": "9527918d65508408",
-    "all": "4b2fd6d90e7cd0fa"
+    "all": "5846a92c97d1ce91"
    },
    "row_hash": "67e48e60d5053a2e",
-   "carried": true,
-   "pass": 1
+   "carried": false,
+   "pass": 14
   },
   {
    "row": "C460",
@@ -3736,20 +3736,20 @@
    "row": "C460",
    "screen": "talk_jake_quad.hub",
    "verdict": "PASS",
-   "line": "Okay. Good. There's a caf\u00e9 across from the gates.",
-   "why": "rows agree with every hook (who_is_where); the coffee ask is on Jake's first meeting screen; Zoe's meeting sets zoe_place_known on its one Done; zoe_party is Sat 21:00-Sun 01:00",
+   "line": "Jake's on the steps with his friends. One of them elbows him as you come over.",
+   "why": "Jake's rows: weekdays 14-16 campus_quad (who_is_where); requires_npc; friends unnamed",
    "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "d7fb30b7418d5ef6",
+    "text": "dc69fcaa00a828e1",
     "traits": "435644be785b94c8",
-    "facts": "1e915b6449fc6876",
+    "facts": "7538424f652bcbce",
     "facts2": "9d3f593401780370",
-    "all": "a4c8c3b8f2391698"
+    "all": "743b5b859a496725"
    },
    "row_hash": "67e48e60d5053a2e",
-   "carried": true,
-   "pass": 1
+   "carried": false,
+   "pass": 14
   },
   {
    "row": "C460",
@@ -3964,115 +3964,115 @@
    "row": "C460",
    "screen": "talk_zoe_cafeteria.hub",
    "verdict": "PASS",
-   "line": "Okay. Good. There's a caf\u00e9 across from the gates.",
-   "why": "rows agree with every hook (who_is_where); the coffee ask is on Jake's first meeting screen; Zoe's meeting sets zoe_place_known on its one Done; zoe_party is Sat 21:00-Sun 01:00",
+   "line": "Zoe's at a table, stealing fries off a tray that isn't hers.",
+   "why": "Zoe's rows: Tue/Thu 13-14 campus_cafeteria (who_is_where), unchanged by P83; requires_npc",
    "cause": null,
    "note": false,
    "screen_hash": {
     "text": "a6459b77e28cde0b",
     "traits": "6b1e34b018661933",
-    "facts": "328b6101b66b22eb",
-    "facts2": "310c48cdcdf66188",
-    "all": "294324ac51b9f68c"
+    "facts": "9fca6412c04f956f",
+    "facts2": "02abbe68e90d6f1e",
+    "all": "20515e5147116db4"
    },
    "row_hash": "67e48e60d5053a2e",
-   "carried": true,
-   "pass": 1
+   "carried": false,
+   "pass": 14
   },
   {
    "row": "C460",
    "screen": "talk_zoe_cafeteria.talk",
    "verdict": "PASS",
-   "line": "Saturday. Mine. Nine o'clock.",
-   "why": "zoe_party is every Saturday 21:00-01:00; Zoe's cafeteria row is Tue/Thu 13-14",
+   "line": "Saturday. Mine. Nine o'clock. Wear something short, and I'll show you who's worth knowing.",
+   "why": "zoe_party is every Saturday from 21:00 at her flat, living room (P83 kept it there); true on every visit Tue/Thu 13-14",
    "cause": null,
    "note": false,
    "screen_hash": {
     "text": "e2fdc339497469f4",
     "traits": "6b1e34b018661933",
-    "facts": "b1f3e2a1c6adc16f",
-    "facts2": "346b8f3360288237",
-    "all": "6dcb5a4b32ba3b0c"
+    "facts": "2d933c95a9d636b2",
+    "facts2": "024adfc9d1b649f0",
+    "all": "61918f0845c9b3a3"
    },
    "row_hash": "67e48e60d5053a2e",
-   "carried": true,
-   "pass": 3
+   "carried": false,
+   "pass": 14
   },
   {
    "row": "C460",
    "screen": "talk_zoe_flat.hub",
    "verdict": "PASS",
-   "line": "Okay. Good. There's a caf\u00e9 across from the gates.",
-   "why": "rows agree with every hook (who_is_where); the coffee ask is on Jake's first meeting screen; Zoe's meeting sets zoe_place_known on its one Done; zoe_party is Sat 21:00-Sun 01:00",
+   "line": "Zoe's on her couch with her feet up and her phone in her hand. She waves you in without looking up.",
+   "why": "after P83 Zoe is in the living room (near_zoe_apartment) 19-23 Mon-Fri/Sun and 19-24 Sat, in near_zoe_room 18-19; requires_npc reads the living room, so the menu opens only from 19:00, when she is on the couch; the trigger shuts Sat 21:00 (party) and Sun 00-01 (Sun window 18-23, weekday 6 = Sunday, v2.py:5245); Sam's face can share the room, the line claims only Zoe",
    "cause": null,
    "note": false,
    "screen_hash": {
     "text": "f770f8b4b4d72492",
     "traits": "6b1e34b018661933",
-    "facts": "862375cce5748455",
-    "facts2": "d828b29b5c522684",
-    "all": "3ab3f4d71e41b1ba"
+    "facts": "c88635445c028725",
+    "facts2": "5a8033c77ed0f9b0",
+    "all": "213a3639e25bc18f"
    },
    "row_hash": "67e48e60d5053a2e",
-   "carried": true,
-   "pass": 1
+   "carried": false,
+   "pass": 14
   },
   {
    "row": "C460",
    "screen": "talk_zoe_flat.talk",
    "verdict": "PASS",
-   "line": "Saturday. Mine. Nine o'clock.",
-   "why": "the flat menu is off from 21:00 Saturday and only reopens Sunday 18:00, so it never plays during the party it announces",
+   "line": "Saturday. Mine. Nine o'clock. Wear something short, and I'll show you who's worth knowing.",
+   "why": "reachable 19-23 (Sat 19-21) now; on a Saturday 19:00-20:59 the party at nine is still ahead, and the menu is shut from 21:00 Sat to Sun 18:00, so it never plays during the party; 'She stretches so her top rides up' is Zoe's top",
    "cause": null,
    "note": false,
    "screen_hash": {
     "text": "98d0ebfbdbdd9d53",
     "traits": "6b1e34b018661933",
-    "facts": "4f9672af78b3a889",
-    "facts2": "cc3fa9af62c6b585",
-    "all": "9d5fc9ff91898959"
+    "facts": "49ea17bc86a34194",
+    "facts2": "141d444e639b83a5",
+    "all": "9d3473d0d362b88b"
    },
    "row_hash": "67e48e60d5053a2e",
-   "carried": true,
-   "pass": 3
+   "carried": false,
+   "pass": 14
   },
   {
    "row": "C460",
    "screen": "talk_zoe_quad.hub",
    "verdict": "PASS",
-   "line": "Okay. Good. There's a caf\u00e9 across from the gates.",
-   "why": "rows agree with every hook (who_is_where); the coffee ask is on Jake's first meeting screen; Zoe's meeting sets zoe_place_known on its one Done; zoe_party is Sat 21:00-Sun 01:00",
+   "line": "Zoe's stretched out on the grass in sunglasses, her skirt rucked up, and she doesn't fix it.",
+   "why": "Zoe's rows: Mon/Wed/Fri 13-15, Tue/Thu 14-15 campus_quad (who_is_where), unchanged by P83; requires_npc; the skirt is Zoe's, not hers",
    "cause": null,
    "note": false,
    "screen_hash": {
     "text": "24fe9dda4468dca9",
     "traits": "6b1e34b018661933",
-    "facts": "6b7fd76ab4fd4b56",
-    "facts2": "f08a9d78fc76b06c",
-    "all": "0b9dbde38111c94f"
+    "facts": "452de1c8c6a59c72",
+    "facts2": "668809d72822323b",
+    "all": "03df7c573ce79f81"
    },
    "row_hash": "67e48e60d5053a2e",
-   "carried": true,
-   "pass": 1
+   "carried": false,
+   "pass": 14
   },
   {
    "row": "C460",
    "screen": "talk_zoe_quad.talk",
    "verdict": "PASS",
-   "line": "Saturday. Mine. Nine o'clock.",
-   "why": "zoe_party runs every Saturday 9pm-1am at her flat once met_zoe, so the invitation is true on every visit",
+   "line": "Saturday. Mine. Nine o'clock. Wear something short, and I'll show you who's worth knowing.",
+   "why": "zoe_party every Saturday from 21:00, still in the living room after P83; true on every quad visit",
    "cause": null,
    "note": false,
    "screen_hash": {
     "text": "beba698321dc49ad",
     "traits": "6b1e34b018661933",
-    "facts": "bcc281ad08f55dcb",
-    "facts2": "c9fcb781e7b0de07",
-    "all": "1c61ab4cb58d64f1"
+    "facts": "14ffc9d877ef23f0",
+    "facts2": "bf15c3d65a01d55e",
+    "all": "148afb7c199f473a"
    },
    "row_hash": "67e48e60d5053a2e",
-   "carried": true,
-   "pass": 3
+   "carried": false,
+   "pass": 14
   },
   {
    "row": "C461",
@@ -4091,39 +4091,39 @@
    "row": "C461",
    "screen": "talk_brooke.hub",
    "verdict": "PASS",
-   "line": "Brooke's at the mirror doing her lips. ... Alone. No phone, not a selfie.",
-   "why": "texture and dialogue that fit the cast entry and trait words; nothing that can clash",
+   "line": "Brooke's at the mirror doing her lips. She watches you come in, in the glass.",
+   "why": "the rest is texture and the person's own manner; nothing can clash with the plan",
    "cause": null,
    "note": false,
    "screen_hash": {
     "text": "3283600d31d93ec7",
     "traits": "ebc4051ecd3afac5",
-    "facts": "c3d696a70b04c83c",
-    "facts2": "9ee871ec776bd9b0",
-    "all": "7bc3f4e5c3c43f68"
+    "facts": "0ff8343267585da1",
+    "facts2": "4aa8ed9aaffe5b1e",
+    "all": "30dcb9d768cbd993"
    },
    "row_hash": "310706ee076318f2",
-   "carried": true,
-   "pass": 2
+   "carried": false,
+   "pass": 14
   },
   {
    "row": "C461",
    "screen": "talk_brooke.talk",
    "verdict": "PASS",
-   "line": "Princess. Still here? ... I'm on that stage Tuesday, Thursday and Friday at two.",
-   "why": "the rest is texture and the person's own manner; nothing can clash",
+   "line": "Cute. I'm on that stage Tuesday, Thursday and Friday at two. Come and watch how it's done.",
+   "why": "the rest is texture and the person's own manner; nothing can clash with the plan",
    "cause": null,
    "note": false,
    "screen_hash": {
     "text": "5004fb531f2d4b07",
     "traits": "ebc4051ecd3afac5",
-    "facts": "0a37fcd9f9b5d70b",
-    "facts2": "7ec53cc1d723c2ce",
-    "all": "0053465c8cf27898"
+    "facts": "1dd634d44c8e102f",
+    "facts2": "29aee0845021d4db",
+    "all": "791dff81715d2875"
    },
    "row_hash": "310706ee076318f2",
-   "carried": true,
-   "pass": 4
+   "carried": false,
+   "pass": 14
   },
   {
    "row": "C461",
@@ -4222,6 +4222,25 @@
   },
   {
    "row": "C461",
+   "screen": "talk_jake_cafeteria.hub",
+   "verdict": "PASS",
+   "line": "Jake's at the table by the window with his friends. He sees you and sits up straighter.",
+   "why": "the rest is texture and the person's own manner; nothing can clash with the plan",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "e1596441c7ca9d4b",
+    "traits": "435644be785b94c8",
+    "facts": "c71c6dcf1146b8a8",
+    "facts2": "9527918d65508408",
+    "all": "5846a92c97d1ce91"
+   },
+   "row_hash": "310706ee076318f2",
+   "carried": false,
+   "pass": 14
+  },
+  {
+   "row": "C461",
    "screen": "talk_jake_cafeteria.talk",
    "verdict": "PASS",
    "line": "The caf\u00e9 across from the gates does good coffee. That's not me asking. Okay, it's me asking.",
@@ -4238,6 +4257,25 @@
    "row_hash": "310706ee076318f2",
    "carried": true,
    "pass": 10
+  },
+  {
+   "row": "C461",
+   "screen": "talk_jake_quad.hub",
+   "verdict": "PASS",
+   "line": "Jake's on the steps with his friends. One of them elbows him as you come over.",
+   "why": "the rest is texture and the person's own manner; nothing can clash with the plan",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "dc69fcaa00a828e1",
+    "traits": "435644be785b94c8",
+    "facts": "7538424f652bcbce",
+    "facts2": "9d3f593401780370",
+    "all": "743b5b859a496725"
+   },
+   "row_hash": "310706ee076318f2",
+   "carried": false,
+   "pass": 14
   },
   {
    "row": "C461",
@@ -4374,60 +4412,117 @@
   },
   {
    "row": "C461",
+   "screen": "talk_zoe_cafeteria.hub",
+   "verdict": "PASS",
+   "line": "Zoe's at a table, stealing fries off a tray that isn't hers.",
+   "why": "the rest is texture and the person's own manner; nothing can clash with the plan",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "a6459b77e28cde0b",
+    "traits": "6b1e34b018661933",
+    "facts": "9fca6412c04f956f",
+    "facts2": "02abbe68e90d6f1e",
+    "all": "20515e5147116db4"
+   },
+   "row_hash": "310706ee076318f2",
+   "carried": false,
+   "pass": 14
+  },
+  {
+   "row": "C461",
    "screen": "talk_zoe_cafeteria.talk",
    "verdict": "PASS",
-   "line": "Saturday. Mine. Nine o'clock.",
-   "why": "the rest is texture and the person's own manner (trait words); nothing clashes",
+   "line": "Saturday. Mine. Nine o'clock. Wear something short, and I'll show you who's worth knowing.",
+   "why": "the rest is texture and the person's own manner; nothing can clash with the plan",
    "cause": null,
    "note": false,
    "screen_hash": {
     "text": "e2fdc339497469f4",
     "traits": "6b1e34b018661933",
-    "facts": "b1f3e2a1c6adc16f",
-    "facts2": "346b8f3360288237",
-    "all": "6dcb5a4b32ba3b0c"
+    "facts": "2d933c95a9d636b2",
+    "facts2": "024adfc9d1b649f0",
+    "all": "61918f0845c9b3a3"
    },
    "row_hash": "310706ee076318f2",
-   "carried": true,
-   "pass": 3
+   "carried": false,
+   "pass": 14
+  },
+  {
+   "row": "C461",
+   "screen": "talk_zoe_flat.hub",
+   "verdict": "PASS",
+   "line": "Zoe's on her couch with her feet up and her phone in her hand. She waves you in without looking up.",
+   "why": "the rest is texture and the person's own manner; nothing can clash with the plan",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "f770f8b4b4d72492",
+    "traits": "6b1e34b018661933",
+    "facts": "c88635445c028725",
+    "facts2": "5a8033c77ed0f9b0",
+    "all": "213a3639e25bc18f"
+   },
+   "row_hash": "310706ee076318f2",
+   "carried": false,
+   "pass": 14
   },
   {
    "row": "C461",
    "screen": "talk_zoe_flat.talk",
    "verdict": "PASS",
-   "line": "Saturday. Mine. Nine o'clock.",
-   "why": "the rest is texture and the person's own manner (trait words); nothing clashes",
+   "line": "Saturday. Mine. Nine o'clock. Wear something short, and I'll show you who's worth knowing.",
+   "why": "the rest is texture and the person's own manner; nothing can clash with the plan",
    "cause": null,
    "note": false,
    "screen_hash": {
     "text": "98d0ebfbdbdd9d53",
     "traits": "6b1e34b018661933",
-    "facts": "4f9672af78b3a889",
-    "facts2": "cc3fa9af62c6b585",
-    "all": "9d5fc9ff91898959"
+    "facts": "49ea17bc86a34194",
+    "facts2": "141d444e639b83a5",
+    "all": "9d3473d0d362b88b"
    },
    "row_hash": "310706ee076318f2",
-   "carried": true,
-   "pass": 3
+   "carried": false,
+   "pass": 14
+  },
+  {
+   "row": "C461",
+   "screen": "talk_zoe_quad.hub",
+   "verdict": "PASS",
+   "line": "Zoe's stretched out on the grass in sunglasses, her skirt rucked up, and she doesn't fix it.",
+   "why": "the rest is texture and the person's own manner; nothing can clash with the plan",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "24fe9dda4468dca9",
+    "traits": "6b1e34b018661933",
+    "facts": "452de1c8c6a59c72",
+    "facts2": "668809d72822323b",
+    "all": "03df7c573ce79f81"
+   },
+   "row_hash": "310706ee076318f2",
+   "carried": false,
+   "pass": 14
   },
   {
    "row": "C461",
    "screen": "talk_zoe_quad.talk",
    "verdict": "PASS",
-   "line": "Saturday. Mine. Nine o'clock.",
-   "why": "the rest is texture and the person's own manner (trait words); nothing clashes",
+   "line": "Saturday. Mine. Nine o'clock. Wear something short, and I'll show you who's worth knowing.",
+   "why": "the rest is texture and the person's own manner; nothing can clash with the plan",
    "cause": null,
    "note": false,
    "screen_hash": {
     "text": "beba698321dc49ad",
     "traits": "6b1e34b018661933",
-    "facts": "bcc281ad08f55dcb",
-    "facts2": "c9fcb781e7b0de07",
-    "all": "1c61ab4cb58d64f1"
+    "facts": "14ffc9d877ef23f0",
+    "facts2": "bf15c3d65a01d55e",
+    "all": "148afb7c199f473a"
    },
    "row_hash": "310706ee076318f2",
-   "carried": true,
-   "pass": 3
+   "carried": false,
+   "pass": 14
   },
   {
    "row": "C519",
@@ -5260,6 +5355,82 @@
    "pass": 1
   },
   {
+   "row": "C889",
+   "screen": "talk_brooke.talk",
+   "verdict": "PASS",
+   "line": "Talk \u00b7 Leave \u00b7 Done",
+   "why": "no label names a clock time or a duration; the spend is in the costs",
+   "cause": null,
+   "note": true,
+   "screen_hash": {
+    "text": "5004fb531f2d4b07",
+    "traits": "ebc4051ecd3afac5",
+    "facts": "1dd634d44c8e102f",
+    "facts2": "29aee0845021d4db",
+    "all": "791dff81715d2875"
+   },
+   "row_hash": "def1348d483d0c40",
+   "carried": false,
+   "pass": 14
+  },
+  {
+   "row": "C889",
+   "screen": "talk_zoe_cafeteria.talk",
+   "verdict": "PASS",
+   "line": "Talk \u00b7 Leave \u00b7 Done",
+   "why": "no label names a clock time or a duration; the spend is in the costs",
+   "cause": null,
+   "note": true,
+   "screen_hash": {
+    "text": "e2fdc339497469f4",
+    "traits": "6b1e34b018661933",
+    "facts": "2d933c95a9d636b2",
+    "facts2": "024adfc9d1b649f0",
+    "all": "61918f0845c9b3a3"
+   },
+   "row_hash": "def1348d483d0c40",
+   "carried": false,
+   "pass": 14
+  },
+  {
+   "row": "C889",
+   "screen": "talk_zoe_flat.talk",
+   "verdict": "PASS",
+   "line": "Talk \u00b7 Leave \u00b7 Done",
+   "why": "no label names a clock time or a duration; the spend is in the costs",
+   "cause": null,
+   "note": true,
+   "screen_hash": {
+    "text": "98d0ebfbdbdd9d53",
+    "traits": "6b1e34b018661933",
+    "facts": "49ea17bc86a34194",
+    "facts2": "141d444e639b83a5",
+    "all": "9d3473d0d362b88b"
+   },
+   "row_hash": "def1348d483d0c40",
+   "carried": false,
+   "pass": 14
+  },
+  {
+   "row": "C889",
+   "screen": "talk_zoe_quad.talk",
+   "verdict": "PASS",
+   "line": "Talk \u00b7 Leave \u00b7 Done",
+   "why": "no label names a clock time or a duration; the spend is in the costs",
+   "cause": null,
+   "note": true,
+   "screen_hash": {
+    "text": "beba698321dc49ad",
+    "traits": "6b1e34b018661933",
+    "facts": "14ffc9d877ef23f0",
+    "facts2": "bf15c3d65a01d55e",
+    "all": "148afb7c199f473a"
+   },
+   "row_hash": "def1348d483d0c40",
+   "carried": false,
+   "pass": 14
+  },
+  {
    "row": "C892",
    "screen": "*",
    "verdict": "PASS",
@@ -5271,6 +5442,82 @@
    "row_hash": "5c890033f6ac38b8",
    "carried": true,
    "pass": 1
+  },
+  {
+   "row": "C892",
+   "screen": "talk_brooke.talk",
+   "verdict": "PASS",
+   "line": "Cute. I'm on that stage Tuesday, Thursday and Friday at two. Come and watch how it's done.",
+   "why": "no hour put in the act; hours sit on the person's row and the trigger",
+   "cause": null,
+   "note": true,
+   "screen_hash": {
+    "text": "5004fb531f2d4b07",
+    "traits": "ebc4051ecd3afac5",
+    "facts": "1dd634d44c8e102f",
+    "facts2": "29aee0845021d4db",
+    "all": "791dff81715d2875"
+   },
+   "row_hash": "5c890033f6ac38b8",
+   "carried": false,
+   "pass": 14
+  },
+  {
+   "row": "C892",
+   "screen": "talk_zoe_cafeteria.talk",
+   "verdict": "PASS",
+   "line": "Saturday. Mine. Nine o'clock. Wear something short, and I'll show you who's worth knowing.",
+   "why": "no hour put in the act; hours sit on the person's row and the trigger",
+   "cause": null,
+   "note": true,
+   "screen_hash": {
+    "text": "e2fdc339497469f4",
+    "traits": "6b1e34b018661933",
+    "facts": "2d933c95a9d636b2",
+    "facts2": "024adfc9d1b649f0",
+    "all": "61918f0845c9b3a3"
+   },
+   "row_hash": "5c890033f6ac38b8",
+   "carried": false,
+   "pass": 14
+  },
+  {
+   "row": "C892",
+   "screen": "talk_zoe_flat.talk",
+   "verdict": "PASS",
+   "line": "Saturday. Mine. Nine o'clock. Wear something short, and I'll show you who's worth knowing.",
+   "why": "no hour put in the act; hours sit on the person's row and the trigger",
+   "cause": null,
+   "note": true,
+   "screen_hash": {
+    "text": "98d0ebfbdbdd9d53",
+    "traits": "6b1e34b018661933",
+    "facts": "49ea17bc86a34194",
+    "facts2": "141d444e639b83a5",
+    "all": "9d3473d0d362b88b"
+   },
+   "row_hash": "5c890033f6ac38b8",
+   "carried": false,
+   "pass": 14
+  },
+  {
+   "row": "C892",
+   "screen": "talk_zoe_quad.talk",
+   "verdict": "PASS",
+   "line": "Saturday. Mine. Nine o'clock. Wear something short, and I'll show you who's worth knowing.",
+   "why": "no hour put in the act; hours sit on the person's row and the trigger",
+   "cause": null,
+   "note": true,
+   "screen_hash": {
+    "text": "beba698321dc49ad",
+    "traits": "6b1e34b018661933",
+    "facts": "14ffc9d877ef23f0",
+    "facts2": "bf15c3d65a01d55e",
+    "all": "148afb7c199f473a"
+   },
+   "row_hash": "5c890033f6ac38b8",
+   "carried": false,
+   "pass": 14
   },
   {
    "row": "C897",
@@ -5286,6 +5533,82 @@
    "pass": 1
   },
   {
+   "row": "C897",
+   "screen": "talk_brooke.talk",
+   "verdict": "PASS",
+   "line": "Done (10 min in costs)",
+   "why": "no time charged on a room; the spend is the activity's, travel time stays on area crossings",
+   "cause": null,
+   "note": true,
+   "screen_hash": {
+    "text": "5004fb531f2d4b07",
+    "traits": "ebc4051ecd3afac5",
+    "facts": "1dd634d44c8e102f",
+    "facts2": "29aee0845021d4db",
+    "all": "791dff81715d2875"
+   },
+   "row_hash": "265ece64add83676",
+   "carried": false,
+   "pass": 14
+  },
+  {
+   "row": "C897",
+   "screen": "talk_zoe_cafeteria.talk",
+   "verdict": "PASS",
+   "line": "Done (10 min in costs)",
+   "why": "no time charged on a room; the spend is the activity's, travel time stays on area crossings",
+   "cause": null,
+   "note": true,
+   "screen_hash": {
+    "text": "e2fdc339497469f4",
+    "traits": "6b1e34b018661933",
+    "facts": "2d933c95a9d636b2",
+    "facts2": "024adfc9d1b649f0",
+    "all": "61918f0845c9b3a3"
+   },
+   "row_hash": "265ece64add83676",
+   "carried": false,
+   "pass": 14
+  },
+  {
+   "row": "C897",
+   "screen": "talk_zoe_flat.talk",
+   "verdict": "PASS",
+   "line": "Done (10 min in costs)",
+   "why": "no time charged on a room; the spend is the activity's, travel time stays on area crossings",
+   "cause": null,
+   "note": true,
+   "screen_hash": {
+    "text": "98d0ebfbdbdd9d53",
+    "traits": "6b1e34b018661933",
+    "facts": "49ea17bc86a34194",
+    "facts2": "141d444e639b83a5",
+    "all": "9d3473d0d362b88b"
+   },
+   "row_hash": "265ece64add83676",
+   "carried": false,
+   "pass": 14
+  },
+  {
+   "row": "C897",
+   "screen": "talk_zoe_quad.talk",
+   "verdict": "PASS",
+   "line": "Done (10 min in costs)",
+   "why": "no time charged on a room; the spend is the activity's, travel time stays on area crossings",
+   "cause": null,
+   "note": true,
+   "screen_hash": {
+    "text": "beba698321dc49ad",
+    "traits": "6b1e34b018661933",
+    "facts": "14ffc9d877ef23f0",
+    "facts2": "bf15c3d65a01d55e",
+    "all": "148afb7c199f473a"
+   },
+   "row_hash": "265ece64add83676",
+   "carried": false,
+   "pass": 14
+  },
+  {
    "row": "C900",
    "screen": "*",
    "verdict": "PASS",
@@ -5299,23 +5622,99 @@
    "pass": 1
   },
   {
+   "row": "C900",
+   "screen": "talk_brooke.talk",
+   "verdict": "PASS",
+   "line": "Cute. I'm on that stage Tuesday, Thursday and Friday at two. Come and watch how it's done.",
+   "why": "no line says what time it is now; a named hour is an event's time (a rule), true at every minute of the window",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "5004fb531f2d4b07",
+    "traits": "ebc4051ecd3afac5",
+    "facts": "1dd634d44c8e102f",
+    "facts2": "29aee0845021d4db",
+    "all": "791dff81715d2875"
+   },
+   "row_hash": "6372efb027eb2034",
+   "carried": false,
+   "pass": 14
+  },
+  {
+   "row": "C900",
+   "screen": "talk_zoe_cafeteria.talk",
+   "verdict": "PASS",
+   "line": "Saturday. Mine. Nine o'clock. Wear something short, and I'll show you who's worth knowing.",
+   "why": "no line says what time it is now; a named hour is an event's time (a rule), true at every minute of the window",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "e2fdc339497469f4",
+    "traits": "6b1e34b018661933",
+    "facts": "2d933c95a9d636b2",
+    "facts2": "024adfc9d1b649f0",
+    "all": "61918f0845c9b3a3"
+   },
+   "row_hash": "6372efb027eb2034",
+   "carried": false,
+   "pass": 14
+  },
+  {
+   "row": "C900",
+   "screen": "talk_zoe_flat.talk",
+   "verdict": "PASS",
+   "line": "Saturday. Mine. Nine o'clock. Wear something short, and I'll show you who's worth knowing.",
+   "why": "no line says what time it is now; a named hour is an event's time (a rule), true at every minute of the window",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "98d0ebfbdbdd9d53",
+    "traits": "6b1e34b018661933",
+    "facts": "49ea17bc86a34194",
+    "facts2": "141d444e639b83a5",
+    "all": "9d3473d0d362b88b"
+   },
+   "row_hash": "6372efb027eb2034",
+   "carried": false,
+   "pass": 14
+  },
+  {
+   "row": "C900",
+   "screen": "talk_zoe_quad.talk",
+   "verdict": "PASS",
+   "line": "Saturday. Mine. Nine o'clock. Wear something short, and I'll show you who's worth knowing.",
+   "why": "no line says what time it is now; a named hour is an event's time (a rule), true at every minute of the window",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "beba698321dc49ad",
+    "traits": "6b1e34b018661933",
+    "facts": "14ffc9d877ef23f0",
+    "facts2": "bf15c3d65a01d55e",
+    "all": "148afb7c199f473a"
+   },
+   "row_hash": "6372efb027eb2034",
+   "carried": false,
+   "pass": 14
+  },
+  {
    "row": "C902",
    "screen": "talk_brooke.talk",
    "verdict": "PASS",
-   "line": "",
-   "why": "no such line on this screen",
+   "line": "Cute. I'm on that stage Tuesday, Thursday and Friday at two. Come and watch how it's done.",
+   "why": "read at the last minute of the window it is still true: Brooke's theatre rows Tue/Thu/Fri 14-18 (who_is_where) keep the hook",
    "cause": null,
    "note": true,
    "screen_hash": {
-    "text": "f0fb92227ac71315",
+    "text": "5004fb531f2d4b07",
     "traits": "ebc4051ecd3afac5",
-    "facts": "0a37fcd9f9b5d70b",
-    "facts2": "7ec53cc1d723c2ce",
-    "all": "27db70e99574adf4"
+    "facts": "1dd634d44c8e102f",
+    "facts2": "29aee0845021d4db",
+    "all": "791dff81715d2875"
    },
    "row_hash": "df5ed7a36dbc74e4",
-   "carried": true,
-   "pass": 1
+   "carried": false,
+   "pass": 14
   },
   {
    "row": "C902",
@@ -5530,77 +5929,77 @@
    "row": "C902",
    "screen": "talk_zoe_cafeteria.talk",
    "verdict": "PASS",
-   "line": "",
-   "why": "no such line on this screen",
+   "line": "Saturday. Mine. Nine o'clock. Wear something short, and I'll show you who's worth knowing.",
+   "why": "read at the last minute of the window it is still true: zoe_party is every Saturday from 21:00 at her flat, living room (P83 kept it there)",
    "cause": null,
    "note": true,
    "screen_hash": {
-    "text": "7f7da3473195fefe",
+    "text": "e2fdc339497469f4",
     "traits": "6b1e34b018661933",
-    "facts": "b1f3e2a1c6adc16f",
-    "facts2": "346b8f3360288237",
-    "all": "a6bf47e4442e49a2"
+    "facts": "2d933c95a9d636b2",
+    "facts2": "024adfc9d1b649f0",
+    "all": "61918f0845c9b3a3"
    },
    "row_hash": "df5ed7a36dbc74e4",
-   "carried": true,
-   "pass": 1
+   "carried": false,
+   "pass": 14
   },
   {
    "row": "C902",
    "screen": "talk_zoe_flat.talk",
    "verdict": "PASS",
-   "line": "",
-   "why": "no such line on this screen",
+   "line": "Saturday. Mine. Nine o'clock. Wear something short, and I'll show you who's worth knowing.",
+   "why": "read at the last minute of the window it is still true: reachable 19-23 (Sat 19-21) now",
    "cause": null,
    "note": true,
    "screen_hash": {
-    "text": "38f632826a5a1980",
+    "text": "98d0ebfbdbdd9d53",
     "traits": "6b1e34b018661933",
-    "facts": "4f9672af78b3a889",
-    "facts2": "cc3fa9af62c6b585",
-    "all": "c8d8abc670333934"
+    "facts": "49ea17bc86a34194",
+    "facts2": "141d444e639b83a5",
+    "all": "9d3473d0d362b88b"
    },
    "row_hash": "df5ed7a36dbc74e4",
-   "carried": true,
-   "pass": 1
+   "carried": false,
+   "pass": 14
   },
   {
    "row": "C902",
    "screen": "talk_zoe_quad.talk",
    "verdict": "PASS",
-   "line": "",
-   "why": "no such line on this screen",
+   "line": "Saturday. Mine. Nine o'clock. Wear something short, and I'll show you who's worth knowing.",
+   "why": "read at the last minute of the window it is still true: zoe_party every Saturday from 21:00, still in the living room after P83",
    "cause": null,
    "note": true,
    "screen_hash": {
-    "text": "096bc36f99515beb",
+    "text": "beba698321dc49ad",
     "traits": "6b1e34b018661933",
-    "facts": "bcc281ad08f55dcb",
-    "facts2": "c9fcb781e7b0de07",
-    "all": "aca22aff092db92e"
+    "facts": "14ffc9d877ef23f0",
+    "facts2": "bf15c3d65a01d55e",
+    "all": "148afb7c199f473a"
    },
    "row_hash": "df5ed7a36dbc74e4",
-   "carried": true,
-   "pass": 1
+   "carried": false,
+   "pass": 14
   },
   {
    "row": "C903",
    "screen": "talk_brooke.talk",
    "verdict": "PASS",
-   "line": "",
-   "why": "no such line on this screen",
+   "line": "Cute. I'm on that stage Tuesday, Thursday and Friday at two. Come and watch how it's done.",
+   "why": "the weekday names a weekly fact (a party, a rehearsal) that is true on every visit from any day, as the voice.md 'Right' example ('Drama's Tuesday at eleven'); not a 'see you Monday' promise",
    "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "f0fb92227ac71315",
+    "text": "5004fb531f2d4b07",
     "traits": "ebc4051ecd3afac5",
-    "facts": "0a37fcd9f9b5d70b",
-    "facts2": "7ec53cc1d723c2ce",
-    "all": "27db70e99574adf4"
+    "facts": "1dd634d44c8e102f",
+    "facts2": "29aee0845021d4db",
+    "all": "791dff81715d2875"
    },
    "row_hash": "4f83b0b5eb45f71b",
-   "carried": true,
-   "pass": 1
+   "carried": false,
+   "pass": 14
   },
   {
    "row": "C903",
@@ -5815,58 +6214,58 @@
    "row": "C903",
    "screen": "talk_zoe_cafeteria.talk",
    "verdict": "PASS",
-   "line": "",
-   "why": "no such line on this screen",
+   "line": "Saturday. Mine. Nine o'clock. Wear something short, and I'll show you who's worth knowing.",
+   "why": "the weekday names a weekly fact (a party, a rehearsal) that is true on every visit from any day, as the voice.md 'Right' example ('Drama's Tuesday at eleven'); not a 'see you Monday' promise",
    "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "7f7da3473195fefe",
+    "text": "e2fdc339497469f4",
     "traits": "6b1e34b018661933",
-    "facts": "b1f3e2a1c6adc16f",
-    "facts2": "346b8f3360288237",
-    "all": "a6bf47e4442e49a2"
+    "facts": "2d933c95a9d636b2",
+    "facts2": "024adfc9d1b649f0",
+    "all": "61918f0845c9b3a3"
    },
    "row_hash": "4f83b0b5eb45f71b",
-   "carried": true,
-   "pass": 1
+   "carried": false,
+   "pass": 14
   },
   {
    "row": "C903",
    "screen": "talk_zoe_flat.talk",
    "verdict": "PASS",
-   "line": "",
-   "why": "no such line on this screen",
+   "line": "Saturday. Mine. Nine o'clock. Wear something short, and I'll show you who's worth knowing.",
+   "why": "the weekday names a weekly fact (a party, a rehearsal) that is true on every visit from any day, as the voice.md 'Right' example ('Drama's Tuesday at eleven'); not a 'see you Monday' promise",
    "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "38f632826a5a1980",
+    "text": "98d0ebfbdbdd9d53",
     "traits": "6b1e34b018661933",
-    "facts": "4f9672af78b3a889",
-    "facts2": "cc3fa9af62c6b585",
-    "all": "c8d8abc670333934"
+    "facts": "49ea17bc86a34194",
+    "facts2": "141d444e639b83a5",
+    "all": "9d3473d0d362b88b"
    },
    "row_hash": "4f83b0b5eb45f71b",
-   "carried": true,
-   "pass": 1
+   "carried": false,
+   "pass": 14
   },
   {
    "row": "C903",
    "screen": "talk_zoe_quad.talk",
    "verdict": "PASS",
-   "line": "",
-   "why": "no such line on this screen",
+   "line": "Saturday. Mine. Nine o'clock. Wear something short, and I'll show you who's worth knowing.",
+   "why": "the weekday names a weekly fact (a party, a rehearsal) that is true on every visit from any day, as the voice.md 'Right' example ('Drama's Tuesday at eleven'); not a 'see you Monday' promise",
    "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "096bc36f99515beb",
+    "text": "beba698321dc49ad",
     "traits": "6b1e34b018661933",
-    "facts": "bcc281ad08f55dcb",
-    "facts2": "c9fcb781e7b0de07",
-    "all": "aca22aff092db92e"
+    "facts": "14ffc9d877ef23f0",
+    "facts2": "bf15c3d65a01d55e",
+    "all": "148afb7c199f473a"
    },
    "row_hash": "4f83b0b5eb45f71b",
-   "carried": true,
-   "pass": 1
+   "carried": false,
+   "pass": 14
   },
   {
    "row": "C906",
@@ -5882,6 +6281,82 @@
    "pass": 1
   },
   {
+   "row": "C906",
+   "screen": "talk_brooke.talk",
+   "verdict": "PASS",
+   "line": "Done",
+   "why": "no 'till X' anywhere",
+   "cause": null,
+   "note": true,
+   "screen_hash": {
+    "text": "5004fb531f2d4b07",
+    "traits": "ebc4051ecd3afac5",
+    "facts": "1dd634d44c8e102f",
+    "facts2": "29aee0845021d4db",
+    "all": "791dff81715d2875"
+   },
+   "row_hash": "71713a7e7ae739e7",
+   "carried": false,
+   "pass": 14
+  },
+  {
+   "row": "C906",
+   "screen": "talk_zoe_cafeteria.talk",
+   "verdict": "PASS",
+   "line": "Done",
+   "why": "no 'till X' anywhere",
+   "cause": null,
+   "note": true,
+   "screen_hash": {
+    "text": "e2fdc339497469f4",
+    "traits": "6b1e34b018661933",
+    "facts": "2d933c95a9d636b2",
+    "facts2": "024adfc9d1b649f0",
+    "all": "61918f0845c9b3a3"
+   },
+   "row_hash": "71713a7e7ae739e7",
+   "carried": false,
+   "pass": 14
+  },
+  {
+   "row": "C906",
+   "screen": "talk_zoe_flat.talk",
+   "verdict": "PASS",
+   "line": "Done",
+   "why": "no 'till X' anywhere",
+   "cause": null,
+   "note": true,
+   "screen_hash": {
+    "text": "98d0ebfbdbdd9d53",
+    "traits": "6b1e34b018661933",
+    "facts": "49ea17bc86a34194",
+    "facts2": "141d444e639b83a5",
+    "all": "9d3473d0d362b88b"
+   },
+   "row_hash": "71713a7e7ae739e7",
+   "carried": false,
+   "pass": 14
+  },
+  {
+   "row": "C906",
+   "screen": "talk_zoe_quad.talk",
+   "verdict": "PASS",
+   "line": "Done",
+   "why": "no 'till X' anywhere",
+   "cause": null,
+   "note": true,
+   "screen_hash": {
+    "text": "beba698321dc49ad",
+    "traits": "6b1e34b018661933",
+    "facts": "14ffc9d877ef23f0",
+    "facts2": "bf15c3d65a01d55e",
+    "all": "148afb7c199f473a"
+   },
+   "row_hash": "71713a7e7ae739e7",
+   "carried": false,
+   "pass": 14
+  },
+  {
    "row": "C910",
    "screen": "*",
    "verdict": "PASS",
@@ -5893,6 +6368,82 @@
    "row_hash": "d5a109f1ef88419a",
    "carried": true,
    "pass": 1
+  },
+  {
+   "row": "C910",
+   "screen": "talk_brooke.talk",
+   "verdict": "PASS",
+   "line": "Talk \u00b7 Leave \u00b7 Done",
+   "why": "buttons say no time and no energy; no money cost",
+   "cause": null,
+   "note": true,
+   "screen_hash": {
+    "text": "5004fb531f2d4b07",
+    "traits": "ebc4051ecd3afac5",
+    "facts": "1dd634d44c8e102f",
+    "facts2": "29aee0845021d4db",
+    "all": "791dff81715d2875"
+   },
+   "row_hash": "d5a109f1ef88419a",
+   "carried": false,
+   "pass": 14
+  },
+  {
+   "row": "C910",
+   "screen": "talk_zoe_cafeteria.talk",
+   "verdict": "PASS",
+   "line": "Talk \u00b7 Leave \u00b7 Done",
+   "why": "buttons say no time and no energy; no money cost",
+   "cause": null,
+   "note": true,
+   "screen_hash": {
+    "text": "e2fdc339497469f4",
+    "traits": "6b1e34b018661933",
+    "facts": "2d933c95a9d636b2",
+    "facts2": "024adfc9d1b649f0",
+    "all": "61918f0845c9b3a3"
+   },
+   "row_hash": "d5a109f1ef88419a",
+   "carried": false,
+   "pass": 14
+  },
+  {
+   "row": "C910",
+   "screen": "talk_zoe_flat.talk",
+   "verdict": "PASS",
+   "line": "Talk \u00b7 Leave \u00b7 Done",
+   "why": "buttons say no time and no energy; no money cost",
+   "cause": null,
+   "note": true,
+   "screen_hash": {
+    "text": "98d0ebfbdbdd9d53",
+    "traits": "6b1e34b018661933",
+    "facts": "49ea17bc86a34194",
+    "facts2": "141d444e639b83a5",
+    "all": "9d3473d0d362b88b"
+   },
+   "row_hash": "d5a109f1ef88419a",
+   "carried": false,
+   "pass": 14
+  },
+  {
+   "row": "C910",
+   "screen": "talk_zoe_quad.talk",
+   "verdict": "PASS",
+   "line": "Talk \u00b7 Leave \u00b7 Done",
+   "why": "buttons say no time and no energy; no money cost",
+   "cause": null,
+   "note": true,
+   "screen_hash": {
+    "text": "beba698321dc49ad",
+    "traits": "6b1e34b018661933",
+    "facts": "14ffc9d877ef23f0",
+    "facts2": "bf15c3d65a01d55e",
+    "all": "148afb7c199f473a"
+   },
+   "row_hash": "d5a109f1ef88419a",
+   "carried": false,
+   "pass": 14
   },
   {
    "row": "C913",
@@ -5908,6 +6459,82 @@
    "pass": 1
   },
   {
+   "row": "C913",
+   "screen": "talk_brooke.talk",
+   "verdict": "PASS",
+   "line": "show_when_locked = true \u00b7 locked_text = \"Talk \u2014 you've already talked today.\"",
+   "why": "Talk stays greyed with its reason; the menu itself is the person's face, present only in their hours",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "5004fb531f2d4b07",
+    "traits": "ebc4051ecd3afac5",
+    "facts": "1dd634d44c8e102f",
+    "facts2": "29aee0845021d4db",
+    "all": "791dff81715d2875"
+   },
+   "row_hash": "c750f9b6ab4ace14",
+   "carried": false,
+   "pass": 14
+  },
+  {
+   "row": "C913",
+   "screen": "talk_zoe_cafeteria.talk",
+   "verdict": "PASS",
+   "line": "show_when_locked = true \u00b7 locked_text = \"Talk \u2014 you've already talked today.\"",
+   "why": "Talk stays greyed with its reason; the menu itself is the person's face, present only in their hours",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "e2fdc339497469f4",
+    "traits": "6b1e34b018661933",
+    "facts": "2d933c95a9d636b2",
+    "facts2": "024adfc9d1b649f0",
+    "all": "61918f0845c9b3a3"
+   },
+   "row_hash": "c750f9b6ab4ace14",
+   "carried": false,
+   "pass": 14
+  },
+  {
+   "row": "C913",
+   "screen": "talk_zoe_flat.talk",
+   "verdict": "PASS",
+   "line": "show_when_locked = true \u00b7 locked_text = \"Talk \u2014 you've already talked today.\"",
+   "why": "Talk stays greyed with its reason; the menu itself is the person's face, present only in their hours",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "98d0ebfbdbdd9d53",
+    "traits": "6b1e34b018661933",
+    "facts": "49ea17bc86a34194",
+    "facts2": "141d444e639b83a5",
+    "all": "9d3473d0d362b88b"
+   },
+   "row_hash": "c750f9b6ab4ace14",
+   "carried": false,
+   "pass": 14
+  },
+  {
+   "row": "C913",
+   "screen": "talk_zoe_quad.talk",
+   "verdict": "PASS",
+   "line": "show_when_locked = true \u00b7 locked_text = \"Talk \u2014 you've already talked today.\"",
+   "why": "Talk stays greyed with its reason; the menu itself is the person's face, present only in their hours",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "beba698321dc49ad",
+    "traits": "6b1e34b018661933",
+    "facts": "14ffc9d877ef23f0",
+    "facts2": "bf15c3d65a01d55e",
+    "all": "148afb7c199f473a"
+   },
+   "row_hash": "c750f9b6ab4ace14",
+   "carried": false,
+   "pass": 14
+  },
+  {
    "row": "C914",
    "screen": "*",
    "verdict": "PASS",
@@ -5919,6 +6546,82 @@
    "row_hash": "bd07273d5822f34f",
    "carried": true,
    "pass": 1
+  },
+  {
+   "row": "C914",
+   "screen": "talk_brooke.talk",
+   "verdict": "PASS",
+   "line": "locked_text = \"Talk \u2014 you've already talked today.\"",
+   "why": "no hours printed; only the daily flag greys Talk",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "5004fb531f2d4b07",
+    "traits": "ebc4051ecd3afac5",
+    "facts": "1dd634d44c8e102f",
+    "facts2": "29aee0845021d4db",
+    "all": "791dff81715d2875"
+   },
+   "row_hash": "bd07273d5822f34f",
+   "carried": false,
+   "pass": 14
+  },
+  {
+   "row": "C914",
+   "screen": "talk_zoe_cafeteria.talk",
+   "verdict": "PASS",
+   "line": "locked_text = \"Talk \u2014 you've already talked today.\"",
+   "why": "no hours printed; only the daily flag greys Talk",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "e2fdc339497469f4",
+    "traits": "6b1e34b018661933",
+    "facts": "2d933c95a9d636b2",
+    "facts2": "024adfc9d1b649f0",
+    "all": "61918f0845c9b3a3"
+   },
+   "row_hash": "bd07273d5822f34f",
+   "carried": false,
+   "pass": 14
+  },
+  {
+   "row": "C914",
+   "screen": "talk_zoe_flat.talk",
+   "verdict": "PASS",
+   "line": "locked_text = \"Talk \u2014 you've already talked today.\"",
+   "why": "no hours printed; only the daily flag greys Talk",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "98d0ebfbdbdd9d53",
+    "traits": "6b1e34b018661933",
+    "facts": "49ea17bc86a34194",
+    "facts2": "141d444e639b83a5",
+    "all": "9d3473d0d362b88b"
+   },
+   "row_hash": "bd07273d5822f34f",
+   "carried": false,
+   "pass": 14
+  },
+  {
+   "row": "C914",
+   "screen": "talk_zoe_quad.talk",
+   "verdict": "PASS",
+   "line": "locked_text = \"Talk \u2014 you've already talked today.\"",
+   "why": "no hours printed; only the daily flag greys Talk",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "beba698321dc49ad",
+    "traits": "6b1e34b018661933",
+    "facts": "14ffc9d877ef23f0",
+    "facts2": "bf15c3d65a01d55e",
+    "all": "148afb7c199f473a"
+   },
+   "row_hash": "bd07273d5822f34f",
+   "carried": false,
+   "pass": 14
   },
   {
    "row": "C916",
@@ -5934,6 +6637,82 @@
    "pass": 1
   },
   {
+   "row": "C916",
+   "screen": "talk_brooke.talk",
+   "verdict": "PASS",
+   "line": "Cute. I'm on that stage Tuesday, Thursday and Friday at two. Come and watch how it's done.",
+   "why": "an event that happens to her stays hidden when shut; nothing she chooses is hidden by the clock alone",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "5004fb531f2d4b07",
+    "traits": "ebc4051ecd3afac5",
+    "facts": "1dd634d44c8e102f",
+    "facts2": "29aee0845021d4db",
+    "all": "791dff81715d2875"
+   },
+   "row_hash": "7b2bb0dfdbcfe946",
+   "carried": false,
+   "pass": 14
+  },
+  {
+   "row": "C916",
+   "screen": "talk_zoe_cafeteria.talk",
+   "verdict": "PASS",
+   "line": "Saturday. Mine. Nine o'clock. Wear something short, and I'll show you who's worth knowing.",
+   "why": "an event that happens to her stays hidden when shut; nothing she chooses is hidden by the clock alone",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "e2fdc339497469f4",
+    "traits": "6b1e34b018661933",
+    "facts": "2d933c95a9d636b2",
+    "facts2": "024adfc9d1b649f0",
+    "all": "61918f0845c9b3a3"
+   },
+   "row_hash": "7b2bb0dfdbcfe946",
+   "carried": false,
+   "pass": 14
+  },
+  {
+   "row": "C916",
+   "screen": "talk_zoe_flat.talk",
+   "verdict": "PASS",
+   "line": "Saturday. Mine. Nine o'clock. Wear something short, and I'll show you who's worth knowing.",
+   "why": "an event that happens to her stays hidden when shut; nothing she chooses is hidden by the clock alone",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "98d0ebfbdbdd9d53",
+    "traits": "6b1e34b018661933",
+    "facts": "49ea17bc86a34194",
+    "facts2": "141d444e639b83a5",
+    "all": "9d3473d0d362b88b"
+   },
+   "row_hash": "7b2bb0dfdbcfe946",
+   "carried": false,
+   "pass": 14
+  },
+  {
+   "row": "C916",
+   "screen": "talk_zoe_quad.talk",
+   "verdict": "PASS",
+   "line": "Saturday. Mine. Nine o'clock. Wear something short, and I'll show you who's worth knowing.",
+   "why": "an event that happens to her stays hidden when shut; nothing she chooses is hidden by the clock alone",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "beba698321dc49ad",
+    "traits": "6b1e34b018661933",
+    "facts": "14ffc9d877ef23f0",
+    "facts2": "bf15c3d65a01d55e",
+    "all": "148afb7c199f473a"
+   },
+   "row_hash": "7b2bb0dfdbcfe946",
+   "carried": false,
+   "pass": 14
+  },
+  {
    "row": "C920",
    "screen": "*",
    "verdict": "PASS",
@@ -5945,6 +6724,82 @@
    "row_hash": "513927dd127fca04",
    "carried": true,
    "pass": 1
+  },
+  {
+   "row": "C920",
+   "screen": "talk_brooke.talk",
+   "verdict": "PASS",
+   "line": "Leave ... time_progression_minutes = 0",
+   "why": "Done and Leave stay in the place; no hop cost",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "5004fb531f2d4b07",
+    "traits": "ebc4051ecd3afac5",
+    "facts": "1dd634d44c8e102f",
+    "facts2": "29aee0845021d4db",
+    "all": "791dff81715d2875"
+   },
+   "row_hash": "513927dd127fca04",
+   "carried": false,
+   "pass": 14
+  },
+  {
+   "row": "C920",
+   "screen": "talk_zoe_cafeteria.talk",
+   "verdict": "PASS",
+   "line": "Leave ... time_progression_minutes = 0",
+   "why": "Done and Leave stay in the place; no hop cost",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "e2fdc339497469f4",
+    "traits": "6b1e34b018661933",
+    "facts": "2d933c95a9d636b2",
+    "facts2": "024adfc9d1b649f0",
+    "all": "61918f0845c9b3a3"
+   },
+   "row_hash": "513927dd127fca04",
+   "carried": false,
+   "pass": 14
+  },
+  {
+   "row": "C920",
+   "screen": "talk_zoe_flat.talk",
+   "verdict": "PASS",
+   "line": "Leave ... time_progression_minutes = 0",
+   "why": "Done and Leave stay in the place; no hop cost",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "98d0ebfbdbdd9d53",
+    "traits": "6b1e34b018661933",
+    "facts": "49ea17bc86a34194",
+    "facts2": "141d444e639b83a5",
+    "all": "9d3473d0d362b88b"
+   },
+   "row_hash": "513927dd127fca04",
+   "carried": false,
+   "pass": 14
+  },
+  {
+   "row": "C920",
+   "screen": "talk_zoe_quad.talk",
+   "verdict": "PASS",
+   "line": "Leave ... time_progression_minutes = 0",
+   "why": "Done and Leave stay in the place; no hop cost",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "beba698321dc49ad",
+    "traits": "6b1e34b018661933",
+    "facts": "14ffc9d877ef23f0",
+    "facts2": "bf15c3d65a01d55e",
+    "all": "148afb7c199f473a"
+   },
+   "row_hash": "513927dd127fca04",
+   "carried": false,
+   "pass": 14
   },
   {
    "row": "C924",
@@ -5960,6 +6815,82 @@
    "pass": 1
   },
   {
+   "row": "C924",
+   "screen": "talk_brooke.talk",
+   "verdict": "N/A",
+   "line": "",
+   "why": "no travel on this screen",
+   "cause": null,
+   "note": true,
+   "screen_hash": {
+    "text": "5004fb531f2d4b07",
+    "traits": "ebc4051ecd3afac5",
+    "facts": "1dd634d44c8e102f",
+    "facts2": "29aee0845021d4db",
+    "all": "791dff81715d2875"
+   },
+   "row_hash": "791cd173e23fb130",
+   "carried": false,
+   "pass": 14
+  },
+  {
+   "row": "C924",
+   "screen": "talk_zoe_cafeteria.talk",
+   "verdict": "N/A",
+   "line": "",
+   "why": "no travel on this screen",
+   "cause": null,
+   "note": true,
+   "screen_hash": {
+    "text": "e2fdc339497469f4",
+    "traits": "6b1e34b018661933",
+    "facts": "2d933c95a9d636b2",
+    "facts2": "024adfc9d1b649f0",
+    "all": "61918f0845c9b3a3"
+   },
+   "row_hash": "791cd173e23fb130",
+   "carried": false,
+   "pass": 14
+  },
+  {
+   "row": "C924",
+   "screen": "talk_zoe_flat.talk",
+   "verdict": "N/A",
+   "line": "",
+   "why": "no travel on this screen",
+   "cause": null,
+   "note": true,
+   "screen_hash": {
+    "text": "98d0ebfbdbdd9d53",
+    "traits": "6b1e34b018661933",
+    "facts": "49ea17bc86a34194",
+    "facts2": "141d444e639b83a5",
+    "all": "9d3473d0d362b88b"
+   },
+   "row_hash": "791cd173e23fb130",
+   "carried": false,
+   "pass": 14
+  },
+  {
+   "row": "C924",
+   "screen": "talk_zoe_quad.talk",
+   "verdict": "N/A",
+   "line": "",
+   "why": "no travel on this screen",
+   "cause": null,
+   "note": true,
+   "screen_hash": {
+    "text": "beba698321dc49ad",
+    "traits": "6b1e34b018661933",
+    "facts": "14ffc9d877ef23f0",
+    "facts2": "bf15c3d65a01d55e",
+    "all": "148afb7c199f473a"
+   },
+   "row_hash": "791cd173e23fb130",
+   "carried": false,
+   "pass": 14
+  },
+  {
    "row": "C926",
    "screen": "*",
    "verdict": "PASS",
@@ -5971,6 +6902,82 @@
    "row_hash": "177d1e1776fac74b",
    "carried": true,
    "pass": 1
+  },
+  {
+   "row": "C926",
+   "screen": "talk_brooke.talk",
+   "verdict": "PASS",
+   "line": "time_progression_minutes = 10",
+   "why": "the clock moves only by minutes",
+   "cause": null,
+   "note": true,
+   "screen_hash": {
+    "text": "5004fb531f2d4b07",
+    "traits": "ebc4051ecd3afac5",
+    "facts": "1dd634d44c8e102f",
+    "facts2": "29aee0845021d4db",
+    "all": "791dff81715d2875"
+   },
+   "row_hash": "177d1e1776fac74b",
+   "carried": false,
+   "pass": 14
+  },
+  {
+   "row": "C926",
+   "screen": "talk_zoe_cafeteria.talk",
+   "verdict": "PASS",
+   "line": "time_progression_minutes = 10",
+   "why": "the clock moves only by minutes",
+   "cause": null,
+   "note": true,
+   "screen_hash": {
+    "text": "e2fdc339497469f4",
+    "traits": "6b1e34b018661933",
+    "facts": "2d933c95a9d636b2",
+    "facts2": "024adfc9d1b649f0",
+    "all": "61918f0845c9b3a3"
+   },
+   "row_hash": "177d1e1776fac74b",
+   "carried": false,
+   "pass": 14
+  },
+  {
+   "row": "C926",
+   "screen": "talk_zoe_flat.talk",
+   "verdict": "PASS",
+   "line": "time_progression_minutes = 10",
+   "why": "the clock moves only by minutes",
+   "cause": null,
+   "note": true,
+   "screen_hash": {
+    "text": "98d0ebfbdbdd9d53",
+    "traits": "6b1e34b018661933",
+    "facts": "49ea17bc86a34194",
+    "facts2": "141d444e639b83a5",
+    "all": "9d3473d0d362b88b"
+   },
+   "row_hash": "177d1e1776fac74b",
+   "carried": false,
+   "pass": 14
+  },
+  {
+   "row": "C926",
+   "screen": "talk_zoe_quad.talk",
+   "verdict": "PASS",
+   "line": "time_progression_minutes = 10",
+   "why": "the clock moves only by minutes",
+   "cause": null,
+   "note": true,
+   "screen_hash": {
+    "text": "beba698321dc49ad",
+    "traits": "6b1e34b018661933",
+    "facts": "14ffc9d877ef23f0",
+    "facts2": "bf15c3d65a01d55e",
+    "all": "148afb7c199f473a"
+   },
+   "row_hash": "177d1e1776fac74b",
+   "carried": false,
+   "pass": 14
   },
   {
    "row": "C927",
@@ -5990,19 +6997,19 @@
    "screen": "talk_brooke.talk",
    "verdict": "PASS",
    "line": "Talk 0 \u00b7 Leave 0 \u00b7 Done 10",
-   "why": "every exit states its minutes (v2.py:17877 reads the value given); Done is 10",
+   "why": "every exit states its minutes",
    "cause": null,
    "note": true,
    "screen_hash": {
     "text": "5004fb531f2d4b07",
     "traits": "ebc4051ecd3afac5",
-    "facts": "0a37fcd9f9b5d70b",
-    "facts2": "7ec53cc1d723c2ce",
-    "all": "0053465c8cf27898"
+    "facts": "1dd634d44c8e102f",
+    "facts2": "29aee0845021d4db",
+    "all": "791dff81715d2875"
    },
    "row_hash": "4e86d143688ba8e5",
-   "carried": true,
-   "pass": 4
+   "carried": false,
+   "pass": 14
   },
   {
    "row": "C927",
@@ -6218,57 +7225,57 @@
    "screen": "talk_zoe_cafeteria.talk",
    "verdict": "PASS",
    "line": "Talk 0 \u00b7 Leave 0 \u00b7 Done 10",
-   "why": "every exit states its minutes; v2.py:17877 reads the value given, so 0 stays 0 and Done is 10",
+   "why": "every exit states its minutes",
    "cause": null,
    "note": true,
    "screen_hash": {
     "text": "e2fdc339497469f4",
     "traits": "6b1e34b018661933",
-    "facts": "b1f3e2a1c6adc16f",
-    "facts2": "346b8f3360288237",
-    "all": "6dcb5a4b32ba3b0c"
+    "facts": "2d933c95a9d636b2",
+    "facts2": "024adfc9d1b649f0",
+    "all": "61918f0845c9b3a3"
    },
    "row_hash": "4e86d143688ba8e5",
-   "carried": true,
-   "pass": 3
+   "carried": false,
+   "pass": 14
   },
   {
    "row": "C927",
    "screen": "talk_zoe_flat.talk",
    "verdict": "PASS",
    "line": "Talk 0 \u00b7 Leave 0 \u00b7 Done 10",
-   "why": "every exit states its minutes; v2.py:17877 reads the value given, so 0 stays 0 and Done is 10",
+   "why": "every exit states its minutes",
    "cause": null,
    "note": true,
    "screen_hash": {
     "text": "98d0ebfbdbdd9d53",
     "traits": "6b1e34b018661933",
-    "facts": "4f9672af78b3a889",
-    "facts2": "cc3fa9af62c6b585",
-    "all": "9d5fc9ff91898959"
+    "facts": "49ea17bc86a34194",
+    "facts2": "141d444e639b83a5",
+    "all": "9d3473d0d362b88b"
    },
    "row_hash": "4e86d143688ba8e5",
-   "carried": true,
-   "pass": 3
+   "carried": false,
+   "pass": 14
   },
   {
    "row": "C927",
    "screen": "talk_zoe_quad.talk",
    "verdict": "PASS",
    "line": "Talk 0 \u00b7 Leave 0 \u00b7 Done 10",
-   "why": "every exit states its minutes; v2.py:17877 reads the value given, so 0 stays 0 and Done is 10",
+   "why": "every exit states its minutes",
    "cause": null,
    "note": true,
    "screen_hash": {
     "text": "beba698321dc49ad",
     "traits": "6b1e34b018661933",
-    "facts": "bcc281ad08f55dcb",
-    "facts2": "c9fcb781e7b0de07",
-    "all": "1c61ab4cb58d64f1"
+    "facts": "14ffc9d877ef23f0",
+    "facts2": "bf15c3d65a01d55e",
+    "all": "148afb7c199f473a"
    },
    "row_hash": "4e86d143688ba8e5",
-   "carried": true,
-   "pass": 3
+   "carried": false,
+   "pass": 14
   },
   {
    "row": "C928",
@@ -6284,6 +7291,82 @@
    "pass": 1
   },
   {
+   "row": "C928",
+   "screen": "talk_brooke.talk",
+   "verdict": "PASS",
+   "line": "Cute. I'm on that stage Tuesday, Thursday and Friday at two. Come and watch how it's done.",
+   "why": "the current clock isn't printed in prose",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "5004fb531f2d4b07",
+    "traits": "ebc4051ecd3afac5",
+    "facts": "1dd634d44c8e102f",
+    "facts2": "29aee0845021d4db",
+    "all": "791dff81715d2875"
+   },
+   "row_hash": "2c3ccc6bd9929d7f",
+   "carried": false,
+   "pass": 14
+  },
+  {
+   "row": "C928",
+   "screen": "talk_zoe_cafeteria.talk",
+   "verdict": "PASS",
+   "line": "Saturday. Mine. Nine o'clock. Wear something short, and I'll show you who's worth knowing.",
+   "why": "the current clock isn't printed in prose",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "e2fdc339497469f4",
+    "traits": "6b1e34b018661933",
+    "facts": "2d933c95a9d636b2",
+    "facts2": "024adfc9d1b649f0",
+    "all": "61918f0845c9b3a3"
+   },
+   "row_hash": "2c3ccc6bd9929d7f",
+   "carried": false,
+   "pass": 14
+  },
+  {
+   "row": "C928",
+   "screen": "talk_zoe_flat.talk",
+   "verdict": "PASS",
+   "line": "Saturday. Mine. Nine o'clock. Wear something short, and I'll show you who's worth knowing.",
+   "why": "the current clock isn't printed in prose",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "98d0ebfbdbdd9d53",
+    "traits": "6b1e34b018661933",
+    "facts": "49ea17bc86a34194",
+    "facts2": "141d444e639b83a5",
+    "all": "9d3473d0d362b88b"
+   },
+   "row_hash": "2c3ccc6bd9929d7f",
+   "carried": false,
+   "pass": 14
+  },
+  {
+   "row": "C928",
+   "screen": "talk_zoe_quad.talk",
+   "verdict": "PASS",
+   "line": "Saturday. Mine. Nine o'clock. Wear something short, and I'll show you who's worth knowing.",
+   "why": "the current clock isn't printed in prose",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "beba698321dc49ad",
+    "traits": "6b1e34b018661933",
+    "facts": "14ffc9d877ef23f0",
+    "facts2": "bf15c3d65a01d55e",
+    "all": "148afb7c199f473a"
+   },
+   "row_hash": "2c3ccc6bd9929d7f",
+   "carried": false,
+   "pass": 14
+  },
+  {
    "row": "C929",
    "screen": "*",
    "verdict": "PASS",
@@ -6297,6 +7380,82 @@
    "pass": 1
   },
   {
+   "row": "C929",
+   "screen": "talk_brooke.talk",
+   "verdict": "PASS",
+   "line": "Done",
+   "why": "no activity time on a label",
+   "cause": null,
+   "note": true,
+   "screen_hash": {
+    "text": "5004fb531f2d4b07",
+    "traits": "ebc4051ecd3afac5",
+    "facts": "1dd634d44c8e102f",
+    "facts2": "29aee0845021d4db",
+    "all": "791dff81715d2875"
+   },
+   "row_hash": "18b0ecdf6d7fc901",
+   "carried": false,
+   "pass": 14
+  },
+  {
+   "row": "C929",
+   "screen": "talk_zoe_cafeteria.talk",
+   "verdict": "PASS",
+   "line": "Done",
+   "why": "no activity time on a label",
+   "cause": null,
+   "note": true,
+   "screen_hash": {
+    "text": "e2fdc339497469f4",
+    "traits": "6b1e34b018661933",
+    "facts": "2d933c95a9d636b2",
+    "facts2": "024adfc9d1b649f0",
+    "all": "61918f0845c9b3a3"
+   },
+   "row_hash": "18b0ecdf6d7fc901",
+   "carried": false,
+   "pass": 14
+  },
+  {
+   "row": "C929",
+   "screen": "talk_zoe_flat.talk",
+   "verdict": "PASS",
+   "line": "Done",
+   "why": "no activity time on a label",
+   "cause": null,
+   "note": true,
+   "screen_hash": {
+    "text": "98d0ebfbdbdd9d53",
+    "traits": "6b1e34b018661933",
+    "facts": "49ea17bc86a34194",
+    "facts2": "141d444e639b83a5",
+    "all": "9d3473d0d362b88b"
+   },
+   "row_hash": "18b0ecdf6d7fc901",
+   "carried": false,
+   "pass": 14
+  },
+  {
+   "row": "C929",
+   "screen": "talk_zoe_quad.talk",
+   "verdict": "PASS",
+   "line": "Done",
+   "why": "no activity time on a label",
+   "cause": null,
+   "note": true,
+   "screen_hash": {
+    "text": "beba698321dc49ad",
+    "traits": "6b1e34b018661933",
+    "facts": "14ffc9d877ef23f0",
+    "facts2": "bf15c3d65a01d55e",
+    "all": "148afb7c199f473a"
+   },
+   "row_hash": "18b0ecdf6d7fc901",
+   "carried": false,
+   "pass": 14
+  },
+  {
    "row": "C930",
    "screen": "*",
    "verdict": "PASS",
@@ -6308,6 +7467,82 @@
    "row_hash": "beb57cd46fe906bf",
    "carried": true,
    "pass": 1
+  },
+  {
+   "row": "C930",
+   "screen": "talk_brooke.talk",
+   "verdict": "PASS",
+   "line": "show_when_locked = true",
+   "why": "Talk stays greyed",
+   "cause": null,
+   "note": true,
+   "screen_hash": {
+    "text": "5004fb531f2d4b07",
+    "traits": "ebc4051ecd3afac5",
+    "facts": "1dd634d44c8e102f",
+    "facts2": "29aee0845021d4db",
+    "all": "791dff81715d2875"
+   },
+   "row_hash": "beb57cd46fe906bf",
+   "carried": false,
+   "pass": 14
+  },
+  {
+   "row": "C930",
+   "screen": "talk_zoe_cafeteria.talk",
+   "verdict": "PASS",
+   "line": "show_when_locked = true",
+   "why": "Talk stays greyed",
+   "cause": null,
+   "note": true,
+   "screen_hash": {
+    "text": "e2fdc339497469f4",
+    "traits": "6b1e34b018661933",
+    "facts": "2d933c95a9d636b2",
+    "facts2": "024adfc9d1b649f0",
+    "all": "61918f0845c9b3a3"
+   },
+   "row_hash": "beb57cd46fe906bf",
+   "carried": false,
+   "pass": 14
+  },
+  {
+   "row": "C930",
+   "screen": "talk_zoe_flat.talk",
+   "verdict": "PASS",
+   "line": "show_when_locked = true",
+   "why": "Talk stays greyed",
+   "cause": null,
+   "note": true,
+   "screen_hash": {
+    "text": "98d0ebfbdbdd9d53",
+    "traits": "6b1e34b018661933",
+    "facts": "49ea17bc86a34194",
+    "facts2": "141d444e639b83a5",
+    "all": "9d3473d0d362b88b"
+   },
+   "row_hash": "beb57cd46fe906bf",
+   "carried": false,
+   "pass": 14
+  },
+  {
+   "row": "C930",
+   "screen": "talk_zoe_quad.talk",
+   "verdict": "PASS",
+   "line": "show_when_locked = true",
+   "why": "Talk stays greyed",
+   "cause": null,
+   "note": true,
+   "screen_hash": {
+    "text": "beba698321dc49ad",
+    "traits": "6b1e34b018661933",
+    "facts": "14ffc9d877ef23f0",
+    "facts2": "bf15c3d65a01d55e",
+    "all": "148afb7c199f473a"
+   },
+   "row_hash": "beb57cd46fe906bf",
+   "carried": false,
+   "pass": 14
   },
   {
    "row": "C931",
@@ -6327,19 +7562,19 @@
    "screen": "talk_brooke.talk",
    "verdict": "N/A",
    "line": "",
-   "why": "no time_of_day condition on this canvas; presence comes from the person's row via requires_npc",
+   "why": "no time_of_day condition on this canvas; presence comes from the person's row",
    "cause": null,
    "note": true,
    "screen_hash": {
     "text": "5004fb531f2d4b07",
     "traits": "ebc4051ecd3afac5",
-    "facts": "0a37fcd9f9b5d70b",
-    "facts2": "7ec53cc1d723c2ce",
-    "all": "0053465c8cf27898"
+    "facts": "1dd634d44c8e102f",
+    "facts2": "29aee0845021d4db",
+    "all": "791dff81715d2875"
    },
    "row_hash": "1aadffd96e76381c",
-   "carried": true,
-   "pass": 4
+   "carried": false,
+   "pass": 14
   },
   {
    "row": "C931",
@@ -6561,32 +7796,32 @@
    "screen_hash": {
     "text": "e2fdc339497469f4",
     "traits": "6b1e34b018661933",
-    "facts": "b1f3e2a1c6adc16f",
-    "facts2": "346b8f3360288237",
-    "all": "6dcb5a4b32ba3b0c"
+    "facts": "2d933c95a9d636b2",
+    "facts2": "024adfc9d1b649f0",
+    "all": "61918f0845c9b3a3"
    },
    "row_hash": "1aadffd96e76381c",
-   "carried": true,
-   "pass": 3
+   "carried": false,
+   "pass": 14
   },
   {
    "row": "C931",
    "screen": "talk_zoe_flat.talk",
    "verdict": "PASS",
-   "line": "conditions time_of_day",
-   "why": "Sat 18:00-21:00 and Sun 18:00-23:00 end exclusive at the party and her row end",
+   "line": "time_of_day Sat 18:00-21:00 / Sun 18:00-23:00",
+   "why": "end exclusive: shuts at 21:00 Saturday when the party starts; Sunday window skips the 00-01 party tail; weekday 0 = Monday (v2.py:5245)",
    "cause": null,
    "note": true,
    "screen_hash": {
     "text": "98d0ebfbdbdd9d53",
     "traits": "6b1e34b018661933",
-    "facts": "4f9672af78b3a889",
-    "facts2": "cc3fa9af62c6b585",
-    "all": "9d5fc9ff91898959"
+    "facts": "49ea17bc86a34194",
+    "facts2": "141d444e639b83a5",
+    "all": "9d3473d0d362b88b"
    },
    "row_hash": "1aadffd96e76381c",
-   "carried": true,
-   "pass": 3
+   "carried": false,
+   "pass": 14
   },
   {
    "row": "C931",
@@ -6599,13 +7834,13 @@
    "screen_hash": {
     "text": "beba698321dc49ad",
     "traits": "6b1e34b018661933",
-    "facts": "bcc281ad08f55dcb",
-    "facts2": "c9fcb781e7b0de07",
-    "all": "1c61ab4cb58d64f1"
+    "facts": "14ffc9d877ef23f0",
+    "facts2": "bf15c3d65a01d55e",
+    "all": "148afb7c199f473a"
    },
    "row_hash": "1aadffd96e76381c",
-   "carried": true,
-   "pass": 3
+   "carried": false,
+   "pass": 14
   },
   {
    "row": "C953",
@@ -6637,39 +7872,39 @@
    "row": "L106",
    "screen": "talk_brooke.hub",
    "verdict": "PASS",
-   "line": "Brooke's at the mirror doing her lips. ... Alone. No phone, not a selfie.",
-   "why": "only the menu's person is claimed there, and their rows put them there (requires_npc); named people elsewhere are where their rows say",
+   "line": "Brooke's at the mirror doing her lips. She watches you come in, in the glass.",
+   "why": "only the screen's own person is placed there, and their rows put them there: Brooke's rows: weekdays 08-09 and 13-14 campus_bathroom (who_is_where)",
    "cause": null,
    "note": false,
    "screen_hash": {
     "text": "3283600d31d93ec7",
     "traits": "ebc4051ecd3afac5",
-    "facts": "c3d696a70b04c83c",
-    "facts2": "9ee871ec776bd9b0",
-    "all": "7bc3f4e5c3c43f68"
+    "facts": "0ff8343267585da1",
+    "facts2": "4aa8ed9aaffe5b1e",
+    "all": "30dcb9d768cbd993"
    },
    "row_hash": "13a714429d15f3b2",
-   "carried": true,
-   "pass": 2
+   "carried": false,
+   "pass": 14
   },
   {
    "row": "L106",
    "screen": "talk_brooke.talk",
    "verdict": "PASS",
-   "line": "Princess. Still here?",
-   "why": "only the menu's own person is placed (requires_npc); nobody else is said to be there",
+   "line": "Cute. I'm on that stage Tuesday, Thursday and Friday at two. Come and watch how it's done.",
+   "why": "only the screen's own person is placed there, and their rows put them there: Brooke's theatre rows Tue/Thu/Fri 14-18 (who_is_where) keep the hook",
    "cause": null,
    "note": false,
    "screen_hash": {
     "text": "5004fb531f2d4b07",
     "traits": "ebc4051ecd3afac5",
-    "facts": "0a37fcd9f9b5d70b",
-    "facts2": "7ec53cc1d723c2ce",
-    "all": "0053465c8cf27898"
+    "facts": "1dd634d44c8e102f",
+    "facts2": "29aee0845021d4db",
+    "all": "791dff81715d2875"
    },
    "row_hash": "13a714429d15f3b2",
-   "carried": true,
-   "pass": 4
+   "carried": false,
+   "pass": 14
   },
   {
    "row": "L106",
@@ -6768,6 +8003,25 @@
   },
   {
    "row": "L106",
+   "screen": "talk_jake_cafeteria.hub",
+   "verdict": "PASS",
+   "line": "Jake's at the table by the window with his friends. He sees you and sits up straighter.",
+   "why": "only the screen's own person is placed there, and their rows put them there: Jake's rows: weekdays 12-14 campus_cafeteria (who_is_where)",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "e1596441c7ca9d4b",
+    "traits": "435644be785b94c8",
+    "facts": "c71c6dcf1146b8a8",
+    "facts2": "9527918d65508408",
+    "all": "5846a92c97d1ce91"
+   },
+   "row_hash": "13a714429d15f3b2",
+   "carried": false,
+   "pass": 14
+  },
+  {
+   "row": "L106",
    "screen": "talk_jake_cafeteria.talk",
    "verdict": "PASS",
    "line": "The caf\u00e9 across from the gates does good coffee. That's not me asking. Okay, it's me asking.",
@@ -6784,6 +8038,25 @@
    "row_hash": "13a714429d15f3b2",
    "carried": true,
    "pass": 10
+  },
+  {
+   "row": "L106",
+   "screen": "talk_jake_quad.hub",
+   "verdict": "PASS",
+   "line": "Jake's on the steps with his friends. One of them elbows him as you come over.",
+   "why": "only the screen's own person is placed there, and their rows put them there: Jake's rows: weekdays 14-16 campus_quad (who_is_where)",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "dc69fcaa00a828e1",
+    "traits": "435644be785b94c8",
+    "facts": "7538424f652bcbce",
+    "facts2": "9d3f593401780370",
+    "all": "743b5b859a496725"
+   },
+   "row_hash": "13a714429d15f3b2",
+   "carried": false,
+   "pass": 14
   },
   {
    "row": "L106",
@@ -6920,60 +8193,117 @@
   },
   {
    "row": "L106",
+   "screen": "talk_zoe_cafeteria.hub",
+   "verdict": "PASS",
+   "line": "Zoe's at a table, stealing fries off a tray that isn't hers.",
+   "why": "only the screen's own person is placed there, and their rows put them there: Zoe's rows: Tue/Thu 13-14 campus_cafeteria (who_is_where), unchanged by P83",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "a6459b77e28cde0b",
+    "traits": "6b1e34b018661933",
+    "facts": "9fca6412c04f956f",
+    "facts2": "02abbe68e90d6f1e",
+    "all": "20515e5147116db4"
+   },
+   "row_hash": "13a714429d15f3b2",
+   "carried": false,
+   "pass": 14
+  },
+  {
+   "row": "L106",
    "screen": "talk_zoe_cafeteria.talk",
    "verdict": "PASS",
-   "line": "Saturday. Mine. Nine o'clock.",
-   "why": "the only person placed is the menu's own, by requires_npc; no one else is named as there",
+   "line": "Saturday. Mine. Nine o'clock. Wear something short, and I'll show you who's worth knowing.",
+   "why": "only the screen's own person is placed there, and their rows put them there: zoe_party is every Saturday from 21:00 at her flat, living room (P83 kept it there)",
    "cause": null,
    "note": false,
    "screen_hash": {
     "text": "e2fdc339497469f4",
     "traits": "6b1e34b018661933",
-    "facts": "b1f3e2a1c6adc16f",
-    "facts2": "346b8f3360288237",
-    "all": "6dcb5a4b32ba3b0c"
+    "facts": "2d933c95a9d636b2",
+    "facts2": "024adfc9d1b649f0",
+    "all": "61918f0845c9b3a3"
    },
    "row_hash": "13a714429d15f3b2",
-   "carried": true,
-   "pass": 3
+   "carried": false,
+   "pass": 14
+  },
+  {
+   "row": "L106",
+   "screen": "talk_zoe_flat.hub",
+   "verdict": "PASS",
+   "line": "Zoe's on her couch with her feet up and her phone in her hand. She waves you in without looking up.",
+   "why": "only the screen's own person is placed there, and their rows put them there: after P83 Zoe is in the living room (near_zoe_apartment) 19-23 Mon-Fri/Sun and 19-24 Sat, in near_zoe_room 18-19",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "f770f8b4b4d72492",
+    "traits": "6b1e34b018661933",
+    "facts": "c88635445c028725",
+    "facts2": "5a8033c77ed0f9b0",
+    "all": "213a3639e25bc18f"
+   },
+   "row_hash": "13a714429d15f3b2",
+   "carried": false,
+   "pass": 14
   },
   {
    "row": "L106",
    "screen": "talk_zoe_flat.talk",
    "verdict": "PASS",
-   "line": "Saturday. Mine. Nine o'clock.",
-   "why": "the only person placed is the menu's own, by requires_npc; no one else is named as there",
+   "line": "Saturday. Mine. Nine o'clock. Wear something short, and I'll show you who's worth knowing.",
+   "why": "only the screen's own person is placed there, and their rows put them there: reachable 19-23 (Sat 19-21) now",
    "cause": null,
    "note": false,
    "screen_hash": {
     "text": "98d0ebfbdbdd9d53",
     "traits": "6b1e34b018661933",
-    "facts": "4f9672af78b3a889",
-    "facts2": "cc3fa9af62c6b585",
-    "all": "9d5fc9ff91898959"
+    "facts": "49ea17bc86a34194",
+    "facts2": "141d444e639b83a5",
+    "all": "9d3473d0d362b88b"
    },
    "row_hash": "13a714429d15f3b2",
-   "carried": true,
-   "pass": 3
+   "carried": false,
+   "pass": 14
+  },
+  {
+   "row": "L106",
+   "screen": "talk_zoe_quad.hub",
+   "verdict": "PASS",
+   "line": "Zoe's stretched out on the grass in sunglasses, her skirt rucked up, and she doesn't fix it.",
+   "why": "only the screen's own person is placed there, and their rows put them there: Zoe's rows: Mon/Wed/Fri 13-15, Tue/Thu 14-15 campus_quad (who_is_where), unchanged by P83",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "24fe9dda4468dca9",
+    "traits": "6b1e34b018661933",
+    "facts": "452de1c8c6a59c72",
+    "facts2": "668809d72822323b",
+    "all": "03df7c573ce79f81"
+   },
+   "row_hash": "13a714429d15f3b2",
+   "carried": false,
+   "pass": 14
   },
   {
    "row": "L106",
    "screen": "talk_zoe_quad.talk",
    "verdict": "PASS",
-   "line": "Saturday. Mine. Nine o'clock.",
-   "why": "the only person placed is the menu's own, by requires_npc; no one else is named as there",
+   "line": "Saturday. Mine. Nine o'clock. Wear something short, and I'll show you who's worth knowing.",
+   "why": "only the screen's own person is placed there, and their rows put them there: zoe_party every Saturday from 21:00, still in the living room after P83",
    "cause": null,
    "note": false,
    "screen_hash": {
     "text": "beba698321dc49ad",
     "traits": "6b1e34b018661933",
-    "facts": "bcc281ad08f55dcb",
-    "facts2": "c9fcb781e7b0de07",
-    "all": "1c61ab4cb58d64f1"
+    "facts": "14ffc9d877ef23f0",
+    "facts2": "bf15c3d65a01d55e",
+    "all": "148afb7c199f473a"
    },
    "row_hash": "13a714429d15f3b2",
-   "carried": true,
-   "pass": 3
+   "carried": false,
+   "pass": 14
   },
   {
    "row": "L119",
@@ -7058,19 +8388,19 @@
    "screen": "talk_brooke.talk",
    "verdict": "PASS",
    "line": "[canvases.trigger] one canvas per person per place",
-   "why": "one canvas whatever the day; days come from the person's row via requires_npc, not one canvas per day kind",
+   "why": "one canvas whatever the day, day-dependent hours in one OR group where they exist; no row per day kind",
    "cause": null,
    "note": false,
    "screen_hash": {
     "text": "5004fb531f2d4b07",
     "traits": "ebc4051ecd3afac5",
-    "facts": "0a37fcd9f9b5d70b",
-    "facts2": "7ec53cc1d723c2ce",
-    "all": "0053465c8cf27898"
+    "facts": "1dd634d44c8e102f",
+    "facts2": "29aee0845021d4db",
+    "all": "791dff81715d2875"
    },
    "row_hash": "e64ce2672d85d2d8",
-   "carried": true,
-   "pass": 4
+   "carried": false,
+   "pass": 14
   },
   {
    "row": "L167",
@@ -7286,57 +8616,57 @@
    "screen": "talk_zoe_cafeteria.talk",
    "verdict": "PASS",
    "line": "[canvases.trigger] one canvas per person per place",
-   "why": "one canvas whatever the day; days come from the person's row via requires_npc, not one canvas per day kind",
+   "why": "one canvas whatever the day, day-dependent hours in one OR group where they exist; no row per day kind",
    "cause": null,
    "note": false,
    "screen_hash": {
     "text": "e2fdc339497469f4",
     "traits": "6b1e34b018661933",
-    "facts": "b1f3e2a1c6adc16f",
-    "facts2": "346b8f3360288237",
-    "all": "6dcb5a4b32ba3b0c"
+    "facts": "2d933c95a9d636b2",
+    "facts2": "024adfc9d1b649f0",
+    "all": "61918f0845c9b3a3"
    },
    "row_hash": "e64ce2672d85d2d8",
-   "carried": true,
-   "pass": 3
+   "carried": false,
+   "pass": 14
   },
   {
    "row": "L167",
    "screen": "talk_zoe_flat.talk",
    "verdict": "PASS",
    "line": "[canvases.trigger] one canvas per person per place",
-   "why": "one canvas whatever the day; days come from the person's row via requires_npc, not one canvas per day kind",
+   "why": "one canvas whatever the day, day-dependent hours in one OR group where they exist; no row per day kind",
    "cause": null,
    "note": false,
    "screen_hash": {
     "text": "98d0ebfbdbdd9d53",
     "traits": "6b1e34b018661933",
-    "facts": "4f9672af78b3a889",
-    "facts2": "cc3fa9af62c6b585",
-    "all": "9d5fc9ff91898959"
+    "facts": "49ea17bc86a34194",
+    "facts2": "141d444e639b83a5",
+    "all": "9d3473d0d362b88b"
    },
    "row_hash": "e64ce2672d85d2d8",
-   "carried": true,
-   "pass": 3
+   "carried": false,
+   "pass": 14
   },
   {
    "row": "L167",
    "screen": "talk_zoe_quad.talk",
    "verdict": "PASS",
    "line": "[canvases.trigger] one canvas per person per place",
-   "why": "one canvas whatever the day; days come from the person's row via requires_npc, not one canvas per day kind",
+   "why": "one canvas whatever the day, day-dependent hours in one OR group where they exist; no row per day kind",
    "cause": null,
    "note": false,
    "screen_hash": {
     "text": "beba698321dc49ad",
     "traits": "6b1e34b018661933",
-    "facts": "bcc281ad08f55dcb",
-    "facts2": "c9fcb781e7b0de07",
-    "all": "1c61ab4cb58d64f1"
+    "facts": "14ffc9d877ef23f0",
+    "facts2": "bf15c3d65a01d55e",
+    "all": "148afb7c199f473a"
    },
    "row_hash": "e64ce2672d85d2d8",
-   "carried": true,
-   "pass": 3
+   "carried": false,
+   "pass": 14
   },
   {
    "row": "L170",
@@ -7354,8 +8684,8 @@
  ],
  "causes": [],
  "pending": [],
- "asked": 1,
- "answered": 1,
+ "asked": 130,
+ "answered": 130,
  "pass_items": [],
  "unowed": []
 }

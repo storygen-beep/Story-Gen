@@ -1,43 +1,43 @@
 {
  "piece": "P37",
- "pass": 21,
+ "pass": 22,
  "screens": {
   "zoe_party.party": {
    "text": "3ef4c0684048a540",
    "traits": "6b1e34b018661933",
-   "facts": "b153518a6fd2602e",
-   "facts2": "adf208a6ad231fd4",
-   "all": "df32385c67bef5af"
+   "facts": "6116301392be4053",
+   "facts2": "2242d176693385da",
+   "all": "e390becca79578f9"
   },
   "zoe_party.talk": {
    "text": "f8df0b071a9b2122",
    "traits": "6b1e34b018661933",
-   "facts": "317eb61177238200",
-   "facts2": "a24d4d77cf03a707",
-   "all": "11a1c744e8ede965"
+   "facts": "69d89bb665fda3f3",
+   "facts2": "af773b42ff05b4b2",
+   "all": "aa26c8d1d2da18ea"
   },
   "zoe_party.dare": {
    "text": "6a44ad99ca8a8e9b",
    "traits": "6b1e34b018661933",
-   "facts": "b153518a6fd2602e",
-   "facts2": "adf208a6ad231fd4",
-   "all": "cf8e07000ca37c7e"
+   "facts": "6116301392be4053",
+   "facts2": "2242d176693385da",
+   "all": "15e88ad7ca45eb5e"
   },
   "zoe_party.look": {
    "text": "33dd7dfee4aa6963",
    "traits": "6b1e34b018661933",
-   "facts": "b153518a6fd2602e",
-   "facts2": "adf208a6ad231fd4",
-   "all": "ae1b2c87be069a24"
+   "facts": "6116301392be4053",
+   "facts2": "2242d176693385da",
+   "all": "99a53c181b8e7707"
   },
   "zoe_party.home": {
    "text": "d9433021c1841953",
    "traits": "6b1e34b018661933",
-   "facts": "b153518a6fd2602e",
-   "facts2": "adf208a6ad231fd4",
-   "all": "ad96c5e231bb9fa0"
+   "facts": "6116301392be4053",
+   "facts2": "2242d176693385da",
+   "all": "30d9415bfa80e05a"
   },
-  "*": "1b7f93fcb05e55a9"
+  "*": "95654974b191c3d3"
  },
  "rows": {
   "B1": "5276068df1ca6fa9",
@@ -199,60 +199,98 @@
   },
   {
    "row": "B10",
+   "screen": "zoe_party.dare",
+   "verdict": "PASS",
+   "line": "He's tall, and he's been looking at you since you came in.",
+   "why": "Zoe present; the guy is an unnamed stranger in the living room where the speaker is (the place's description); once a night on zoe_dare_done",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "6a44ad99ca8a8e9b",
+    "traits": "6b1e34b018661933",
+    "facts": "6116301392be4053",
+    "facts2": "2242d176693385da",
+    "all": "15e88ad7ca45eb5e"
+   },
+   "row_hash": "c1c0e2ac2588a579",
+   "carried": false,
+   "pass": 22
+  },
+  {
+   "row": "B10",
    "screen": "zoe_party.home",
    "verdict": "PASS",
-   "line": "Your loss, babe. There's a party here every Saturday.",
-   "why": "weekly by Zoe's Saturday rows and the weekday-5 trigger; \"back in the crowd\" true, she is there",
+   "line": "Your loss, babe. There's a party here every Saturday. / She's back in the crowd before you can answer.",
+   "why": "weekly by Zoe's Saturday rows and the weekday-5 trigger; Done stays at near_zoe_apartment (the retired Go home is not named)",
    "cause": null,
    "note": false,
    "screen_hash": {
     "text": "d9433021c1841953",
     "traits": "6b1e34b018661933",
-    "facts": "b153518a6fd2602e",
-    "facts2": "adf208a6ad231fd4",
-    "all": "ad96c5e231bb9fa0"
+    "facts": "6116301392be4053",
+    "facts2": "2242d176693385da",
+    "all": "30d9415bfa80e05a"
    },
    "row_hash": "c1c0e2ac2588a579",
-   "carried": true,
-   "pass": 18
+   "carried": false,
+   "pass": 22
   },
   {
    "row": "B10",
    "screen": "zoe_party.look",
    "verdict": "PASS",
    "line": "That's a start, babe. He's by the speaker all night, you know.",
-   "why": "Once a night (zoe_dare_done, unset Mondays, toml:581); Zoe present (requires_npc); 'all night' true to 00:00 and the end.",
+   "why": "Zoe present; 'all night' true to 00:00, where the party ends; once a night",
    "cause": null,
    "note": false,
    "screen_hash": {
     "text": "33dd7dfee4aa6963",
     "traits": "6b1e34b018661933",
-    "facts": "b153518a6fd2602e",
-    "facts2": "adf208a6ad231fd4",
-    "all": "ae1b2c87be069a24"
+    "facts": "6116301392be4053",
+    "facts2": "2242d176693385da",
+    "all": "99a53c181b8e7707"
    },
    "row_hash": "c1c0e2ac2588a579",
-   "carried": true,
-   "pass": 19
+   "carried": false,
+   "pass": 22
   },
   {
    "row": "B10",
    "screen": "zoe_party.party",
    "verdict": "PASS",
    "line": "Zoe's on the sofa arm with a bottle in her hand, and she waves it at you like a flag.",
-   "why": "Shows Sat 21:00-00:00 (wrap, v2.py:4828-4831); who_is_where puts npc_zoe at near_zoe_apartment Sat 18-24; requires_npc; true at 21:00, 23:59 and on a re-entry (Talk greys, dare hides, line still holds; party_zoe_sam also has her on the sofa arm).",
+   "why": "shows Sat 21:00-23:59; Zoe's P83 rows put her at near_zoe_apartment Sat 19-24; requires_npc npc_zoe; names nobody else",
    "cause": null,
    "note": false,
    "screen_hash": {
     "text": "3ef4c0684048a540",
     "traits": "6b1e34b018661933",
-    "facts": "b153518a6fd2602e",
-    "facts2": "adf208a6ad231fd4",
-    "all": "df32385c67bef5af"
+    "facts": "6116301392be4053",
+    "facts2": "2242d176693385da",
+    "all": "e390becca79578f9"
    },
    "row_hash": "c1c0e2ac2588a579",
-   "carried": true,
-   "pass": 20
+   "carried": false,
+   "pass": 22
+  },
+  {
+   "row": "B10",
+   "screen": "zoe_party.talk",
+   "verdict": "PASS",
+   "line": "Babe! You came. ... Look around you. Pick someone. ... Everyone here's had a drink.",
+   "why": "Zoe present by her rows and requires_npc; the crowd is unnamed; Brooke, Kayla and Tess, now in near_zoe_kitchen, are not named",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "f8df0b071a9b2122",
+    "traits": "6b1e34b018661933",
+    "facts": "69d89bb665fda3f3",
+    "facts2": "af773b42ff05b4b2",
+    "all": "aa26c8d1d2da18ea"
+   },
+   "row_hash": "c1c0e2ac2588a579",
+   "carried": false,
+   "pass": 22
   },
   {
    "row": "B11",
@@ -392,60 +430,98 @@
   },
   {
    "row": "B8",
+   "screen": "zoe_party.dare",
+   "verdict": "PASS",
+   "line": "pool_dir = \"people/zoe_party_t0\", pool = 1; she is 18",
+   "why": "matches the card's media spot; no garment",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "6a44ad99ca8a8e9b",
+    "traits": "6b1e34b018661933",
+    "facts": "6116301392be4053",
+    "facts2": "2242d176693385da",
+    "all": "15e88ad7ca45eb5e"
+   },
+   "row_hash": "80d415cf08e0ebfe",
+   "carried": false,
+   "pass": 22
+  },
+  {
+   "row": "B8",
    "screen": "zoe_party.home",
    "verdict": "PASS",
-   "line": "\u2014",
-   "why": "no garment; Done 5 minutes, sets zoe_dare_done, as card",
+   "line": "Done: 5 minutes, sets zoe_dare_done",
+   "why": "matches P75/P82 (no Go home from Zoe); no garment",
    "cause": null,
    "note": false,
    "screen_hash": {
     "text": "d9433021c1841953",
     "traits": "6b1e34b018661933",
-    "facts": "b153518a6fd2602e",
-    "facts2": "adf208a6ad231fd4",
-    "all": "ad96c5e231bb9fa0"
+    "facts": "6116301392be4053",
+    "facts2": "2242d176693385da",
+    "all": "30d9415bfa80e05a"
    },
    "row_hash": "80d415cf08e0ebfe",
-   "carried": true,
-   "pass": 18
+   "carried": false,
+   "pass": 22
   },
   {
    "row": "B8",
    "screen": "zoe_party.look",
    "verdict": "PASS",
    "line": "Done: 5 minutes, sets zoe_dare_done, zoe_dare_looked",
-   "why": "Matches the card; no garment named.",
+   "why": "matches P75; no garment",
    "cause": null,
    "note": false,
    "screen_hash": {
     "text": "33dd7dfee4aa6963",
     "traits": "6b1e34b018661933",
-    "facts": "b153518a6fd2602e",
-    "facts2": "adf208a6ad231fd4",
-    "all": "ae1b2c87be069a24"
+    "facts": "6116301392be4053",
+    "facts2": "2242d176693385da",
+    "all": "99a53c181b8e7707"
    },
    "row_hash": "80d415cf08e0ebfe",
-   "carried": true,
-   "pass": 19
+   "carried": false,
+   "pass": 22
   },
   {
    "row": "B8",
    "screen": "zoe_party.party",
    "verdict": "PASS",
    "line": "A woman of 19 perched on a sofa arm",
-   "why": "No garment named; picture's 19 matches npc_zoe age = 19 (TOML 2864) and PLAN.md:59.",
+   "why": "no garment; 19 matches npc_zoe age and PLAN.md:59",
    "cause": null,
    "note": false,
    "screen_hash": {
     "text": "3ef4c0684048a540",
     "traits": "6b1e34b018661933",
-    "facts": "b153518a6fd2602e",
-    "facts2": "adf208a6ad231fd4",
-    "all": "df32385c67bef5af"
+    "facts": "6116301392be4053",
+    "facts2": "2242d176693385da",
+    "all": "e390becca79578f9"
    },
    "row_hash": "80d415cf08e0ebfe",
-   "carried": true,
-   "pass": 20
+   "carried": false,
+   "pass": 22
+  },
+  {
+   "row": "B8",
+   "screen": "zoe_party.talk",
+   "verdict": "PASS",
+   "line": "Done: 5 minutes; Talk sets talked_zoe_today",
+   "why": "matches P75's card; no garment",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "f8df0b071a9b2122",
+    "traits": "6b1e34b018661933",
+    "facts": "69d89bb665fda3f3",
+    "facts2": "af773b42ff05b4b2",
+    "all": "aa26c8d1d2da18ea"
+   },
+   "row_hash": "80d415cf08e0ebfe",
+   "carried": false,
+   "pass": 22
   },
   {
    "row": "B9",
@@ -1368,7 +1444,7 @@
    "note": false,
    "screen_hash": "1b7f93fcb05e55a9",
    "row_hash": "d8ebf6d6b2abf6a5",
-   "carried": false,
+   "carried": true,
    "pass": 21
   },
   {
@@ -1451,60 +1527,98 @@
   },
   {
    "row": "C460",
+   "screen": "zoe_party.dare",
+   "verdict": "PASS",
+   "line": "He's tall, and he's been looking at you since you came in.",
+   "why": "every claim true on every playthrough that reaches it: Zoe present; the guy is an unnamed stranger in the living room where the speaker is (the place's description); once a night on zoe_dare_done",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "6a44ad99ca8a8e9b",
+    "traits": "6b1e34b018661933",
+    "facts": "6116301392be4053",
+    "facts2": "2242d176693385da",
+    "all": "15e88ad7ca45eb5e"
+   },
+   "row_hash": "67e48e60d5053a2e",
+   "carried": false,
+   "pass": 22
+  },
+  {
+   "row": "C460",
    "screen": "zoe_party.home",
    "verdict": "PASS",
-   "line": "There's a party here every Saturday.",
-   "why": "true by the Saturday rows and trigger",
+   "line": "Your loss, babe. There's a party here every Saturday. / She's back in the crowd before you can answer.",
+   "why": "every claim true on every playthrough that reaches it: weekly by Zoe's Saturday rows and the weekday-5 trigger; Done stays at near_zoe_apartment (the retired Go home is not named)",
    "cause": null,
    "note": false,
    "screen_hash": {
     "text": "d9433021c1841953",
     "traits": "6b1e34b018661933",
-    "facts": "b153518a6fd2602e",
-    "facts2": "adf208a6ad231fd4",
-    "all": "ad96c5e231bb9fa0"
+    "facts": "6116301392be4053",
+    "facts2": "2242d176693385da",
+    "all": "30d9415bfa80e05a"
    },
    "row_hash": "67e48e60d5053a2e",
-   "carried": true,
-   "pass": 18
+   "carried": false,
+   "pass": 22
   },
   {
    "row": "C460",
    "screen": "zoe_party.look",
    "verdict": "PASS",
-   "line": "He holds it too. Then he smiles, slow, like he knows exactly what Zoe said",
-   "why": "True on every visit it can show: once a night, the guy is by the speaker, Zoe there.",
+   "line": "That's a start, babe. He's by the speaker all night, you know.",
+   "why": "every claim true on every playthrough that reaches it: Zoe present; 'all night' true to 00:00, where the party ends; once a night",
    "cause": null,
    "note": false,
    "screen_hash": {
     "text": "33dd7dfee4aa6963",
     "traits": "6b1e34b018661933",
-    "facts": "b153518a6fd2602e",
-    "facts2": "adf208a6ad231fd4",
-    "all": "ae1b2c87be069a24"
+    "facts": "6116301392be4053",
+    "facts2": "2242d176693385da",
+    "all": "99a53c181b8e7707"
    },
    "row_hash": "67e48e60d5053a2e",
-   "carried": true,
-   "pass": 19
+   "carried": false,
+   "pass": 22
   },
   {
    "row": "C460",
    "screen": "zoe_party.party",
    "verdict": "PASS",
    "line": "Zoe's on the sofa arm with a bottle in her hand, and she waves it at you like a flag.",
-   "why": "Every claim true on every reaching playthrough: met_zoe, Saturday party hours, Zoe present.",
+   "why": "every claim true on every playthrough that reaches it: shows Sat 21:00-23:59; Zoe's P83 rows put her at near_zoe_apartment Sat 19-24; requires_npc npc_zoe; names nobody else",
    "cause": null,
    "note": false,
    "screen_hash": {
     "text": "3ef4c0684048a540",
     "traits": "6b1e34b018661933",
-    "facts": "b153518a6fd2602e",
-    "facts2": "adf208a6ad231fd4",
-    "all": "df32385c67bef5af"
+    "facts": "6116301392be4053",
+    "facts2": "2242d176693385da",
+    "all": "e390becca79578f9"
    },
    "row_hash": "67e48e60d5053a2e",
-   "carried": true,
-   "pass": 20
+   "carried": false,
+   "pass": 22
+  },
+  {
+   "row": "C460",
+   "screen": "zoe_party.talk",
+   "verdict": "PASS",
+   "line": "Babe! You came. ... Look around you. Pick someone. ... Everyone here's had a drink.",
+   "why": "every claim true on every playthrough that reaches it: Zoe present by her rows and requires_npc; the crowd is unnamed; Brooke, Kayla and Tess, now in near_zoe_kitchen, are not named",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "f8df0b071a9b2122",
+    "traits": "6b1e34b018661933",
+    "facts": "69d89bb665fda3f3",
+    "facts2": "af773b42ff05b4b2",
+    "all": "aa26c8d1d2da18ea"
+   },
+   "row_hash": "67e48e60d5053a2e",
+   "carried": false,
+   "pass": 22
   },
   {
    "row": "C461",
@@ -1521,60 +1635,98 @@
   },
   {
    "row": "C461",
+   "screen": "zoe_party.dare",
+   "verdict": "PASS",
+   "line": "He's tall, and he's been looking at you since you came in.",
+   "why": "texture, her answer aloud, Zoe's lines fit her entry (show-off, 'babe', no strings)",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "6a44ad99ca8a8e9b",
+    "traits": "6b1e34b018661933",
+    "facts": "6116301392be4053",
+    "facts2": "2242d176693385da",
+    "all": "15e88ad7ca45eb5e"
+   },
+   "row_hash": "310706ee076318f2",
+   "carried": false,
+   "pass": 22
+  },
+  {
+   "row": "C461",
    "screen": "zoe_party.home",
    "verdict": "PASS",
-   "line": "Zoe shrugs and tips her bottle at you.",
-   "why": "texture",
+   "line": "Your loss, babe. There's a party here every Saturday. / She's back in the crowd before you can answer.",
+   "why": "texture, her answer aloud, Zoe's lines fit her entry (show-off, 'babe', no strings)",
    "cause": null,
    "note": false,
    "screen_hash": {
     "text": "d9433021c1841953",
     "traits": "6b1e34b018661933",
-    "facts": "b153518a6fd2602e",
-    "facts2": "adf208a6ad231fd4",
-    "all": "ad96c5e231bb9fa0"
+    "facts": "6116301392be4053",
+    "facts2": "2242d176693385da",
+    "all": "30d9415bfa80e05a"
    },
    "row_hash": "310706ee076318f2",
-   "carried": true,
-   "pass": 18
+   "carried": false,
+   "pass": 22
   },
   {
    "row": "C461",
    "screen": "zoe_party.look",
    "verdict": "PASS",
-   "line": "your pulse loud in your throat",
-   "why": "Her body and Zoe's voice; nothing that can clash.",
+   "line": "That's a start, babe. He's by the speaker all night, you know.",
+   "why": "texture, her answer aloud, Zoe's lines fit her entry (show-off, 'babe', no strings)",
    "cause": null,
    "note": false,
    "screen_hash": {
     "text": "33dd7dfee4aa6963",
     "traits": "6b1e34b018661933",
-    "facts": "b153518a6fd2602e",
-    "facts2": "adf208a6ad231fd4",
-    "all": "ae1b2c87be069a24"
+    "facts": "6116301392be4053",
+    "facts2": "2242d176693385da",
+    "all": "99a53c181b8e7707"
    },
    "row_hash": "310706ee076318f2",
-   "carried": true,
-   "pass": 19
+   "carried": false,
+   "pass": 22
   },
   {
    "row": "C461",
    "screen": "zoe_party.party",
    "verdict": "PASS",
-   "line": "waves it at you like a flag",
-   "why": "Texture that can't clash; fits Zoe's cast entry.",
+   "line": "Zoe's on the sofa arm with a bottle in her hand, and she waves it at you like a flag.",
+   "why": "texture, her answer aloud, Zoe's lines fit her entry (show-off, 'babe', no strings)",
    "cause": null,
    "note": false,
    "screen_hash": {
     "text": "3ef4c0684048a540",
     "traits": "6b1e34b018661933",
-    "facts": "b153518a6fd2602e",
-    "facts2": "adf208a6ad231fd4",
-    "all": "df32385c67bef5af"
+    "facts": "6116301392be4053",
+    "facts2": "2242d176693385da",
+    "all": "e390becca79578f9"
    },
    "row_hash": "310706ee076318f2",
-   "carried": true,
-   "pass": 20
+   "carried": false,
+   "pass": 22
+  },
+  {
+   "row": "C461",
+   "screen": "zoe_party.talk",
+   "verdict": "PASS",
+   "line": "Babe! You came. ... Look around you. Pick someone. ... Everyone here's had a drink.",
+   "why": "texture, her answer aloud, Zoe's lines fit her entry (show-off, 'babe', no strings)",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "f8df0b071a9b2122",
+    "traits": "6b1e34b018661933",
+    "facts": "69d89bb665fda3f3",
+    "facts2": "af773b42ff05b4b2",
+    "all": "aa26c8d1d2da18ea"
+   },
+   "row_hash": "310706ee076318f2",
+   "carried": false,
+   "pass": 22
   },
   {
    "row": "C519",
@@ -1913,6 +2065,63 @@
    "pass": 18
   },
   {
+   "row": "C889",
+   "screen": "zoe_party.home",
+   "verdict": "PASS",
+   "line": "Talk / Zoe's dare / Leave / Done",
+   "why": "no clock time or duration on any label",
+   "cause": null,
+   "note": true,
+   "screen_hash": {
+    "text": "d9433021c1841953",
+    "traits": "6b1e34b018661933",
+    "facts": "6116301392be4053",
+    "facts2": "2242d176693385da",
+    "all": "30d9415bfa80e05a"
+   },
+   "row_hash": "def1348d483d0c40",
+   "carried": false,
+   "pass": 22
+  },
+  {
+   "row": "C889",
+   "screen": "zoe_party.look",
+   "verdict": "PASS",
+   "line": "Talk / Zoe's dare / Leave / Done",
+   "why": "no clock time or duration on any label",
+   "cause": null,
+   "note": true,
+   "screen_hash": {
+    "text": "33dd7dfee4aa6963",
+    "traits": "6b1e34b018661933",
+    "facts": "6116301392be4053",
+    "facts2": "2242d176693385da",
+    "all": "99a53c181b8e7707"
+   },
+   "row_hash": "def1348d483d0c40",
+   "carried": false,
+   "pass": 22
+  },
+  {
+   "row": "C889",
+   "screen": "zoe_party.talk",
+   "verdict": "PASS",
+   "line": "Talk / Zoe's dare / Leave / Done",
+   "why": "no clock time or duration on any label",
+   "cause": null,
+   "note": true,
+   "screen_hash": {
+    "text": "f8df0b071a9b2122",
+    "traits": "6b1e34b018661933",
+    "facts": "69d89bb665fda3f3",
+    "facts2": "af773b42ff05b4b2",
+    "all": "aa26c8d1d2da18ea"
+   },
+   "row_hash": "def1348d483d0c40",
+   "carried": false,
+   "pass": 22
+  },
+  {
    "row": "C892",
    "screen": "*",
    "verdict": "PASS",
@@ -1924,6 +2133,63 @@
    "row_hash": "5c890033f6ac38b8",
    "carried": true,
    "pass": 18
+  },
+  {
+   "row": "C892",
+   "screen": "zoe_party.home",
+   "verdict": "PASS",
+   "line": "\u2014",
+   "why": "no hour in the act",
+   "cause": null,
+   "note": true,
+   "screen_hash": {
+    "text": "d9433021c1841953",
+    "traits": "6b1e34b018661933",
+    "facts": "6116301392be4053",
+    "facts2": "2242d176693385da",
+    "all": "30d9415bfa80e05a"
+   },
+   "row_hash": "5c890033f6ac38b8",
+   "carried": false,
+   "pass": 22
+  },
+  {
+   "row": "C892",
+   "screen": "zoe_party.look",
+   "verdict": "PASS",
+   "line": "\u2014",
+   "why": "no hour in the act",
+   "cause": null,
+   "note": true,
+   "screen_hash": {
+    "text": "33dd7dfee4aa6963",
+    "traits": "6b1e34b018661933",
+    "facts": "6116301392be4053",
+    "facts2": "2242d176693385da",
+    "all": "99a53c181b8e7707"
+   },
+   "row_hash": "5c890033f6ac38b8",
+   "carried": false,
+   "pass": 22
+  },
+  {
+   "row": "C892",
+   "screen": "zoe_party.talk",
+   "verdict": "PASS",
+   "line": "\u2014",
+   "why": "no hour in the act",
+   "cause": null,
+   "note": true,
+   "screen_hash": {
+    "text": "f8df0b071a9b2122",
+    "traits": "6b1e34b018661933",
+    "facts": "69d89bb665fda3f3",
+    "facts2": "af773b42ff05b4b2",
+    "all": "aa26c8d1d2da18ea"
+   },
+   "row_hash": "5c890033f6ac38b8",
+   "carried": false,
+   "pass": 22
   },
   {
    "row": "C897",
@@ -1939,6 +2205,63 @@
    "pass": 18
   },
   {
+   "row": "C897",
+   "screen": "zoe_party.home",
+   "verdict": "PASS",
+   "line": "time_progression_minutes = 5",
+   "why": "an act's spend at the place, not a room toll",
+   "cause": null,
+   "note": true,
+   "screen_hash": {
+    "text": "d9433021c1841953",
+    "traits": "6b1e34b018661933",
+    "facts": "6116301392be4053",
+    "facts2": "2242d176693385da",
+    "all": "30d9415bfa80e05a"
+   },
+   "row_hash": "265ece64add83676",
+   "carried": false,
+   "pass": 22
+  },
+  {
+   "row": "C897",
+   "screen": "zoe_party.look",
+   "verdict": "PASS",
+   "line": "time_progression_minutes = 5",
+   "why": "an act's spend at the place, not a room toll",
+   "cause": null,
+   "note": true,
+   "screen_hash": {
+    "text": "33dd7dfee4aa6963",
+    "traits": "6b1e34b018661933",
+    "facts": "6116301392be4053",
+    "facts2": "2242d176693385da",
+    "all": "99a53c181b8e7707"
+   },
+   "row_hash": "265ece64add83676",
+   "carried": false,
+   "pass": 22
+  },
+  {
+   "row": "C897",
+   "screen": "zoe_party.talk",
+   "verdict": "PASS",
+   "line": "time_progression_minutes = 5",
+   "why": "an act's spend at the place, not a room toll",
+   "cause": null,
+   "note": true,
+   "screen_hash": {
+    "text": "f8df0b071a9b2122",
+    "traits": "6b1e34b018661933",
+    "facts": "69d89bb665fda3f3",
+    "facts2": "af773b42ff05b4b2",
+    "all": "aa26c8d1d2da18ea"
+   },
+   "row_hash": "265ece64add83676",
+   "carried": false,
+   "pass": 22
+  },
+  {
    "row": "C900",
    "screen": "*",
    "verdict": "PASS",
@@ -1950,6 +2273,63 @@
    "row_hash": "6372efb027eb2034",
    "carried": true,
    "pass": 18
+  },
+  {
+   "row": "C900",
+   "screen": "zoe_party.home",
+   "verdict": "PASS",
+   "line": "\u2014",
+   "why": "no beat says the time",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "d9433021c1841953",
+    "traits": "6b1e34b018661933",
+    "facts": "6116301392be4053",
+    "facts2": "2242d176693385da",
+    "all": "30d9415bfa80e05a"
+   },
+   "row_hash": "6372efb027eb2034",
+   "carried": false,
+   "pass": 22
+  },
+  {
+   "row": "C900",
+   "screen": "zoe_party.look",
+   "verdict": "PASS",
+   "line": "\u2014",
+   "why": "no beat says the time",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "33dd7dfee4aa6963",
+    "traits": "6b1e34b018661933",
+    "facts": "6116301392be4053",
+    "facts2": "2242d176693385da",
+    "all": "99a53c181b8e7707"
+   },
+   "row_hash": "6372efb027eb2034",
+   "carried": false,
+   "pass": 22
+  },
+  {
+   "row": "C900",
+   "screen": "zoe_party.talk",
+   "verdict": "PASS",
+   "line": "\u2014",
+   "why": "no beat says the time",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "f8df0b071a9b2122",
+    "traits": "6b1e34b018661933",
+    "facts": "69d89bb665fda3f3",
+    "facts2": "af773b42ff05b4b2",
+    "all": "aa26c8d1d2da18ea"
+   },
+   "row_hash": "6372efb027eb2034",
+   "carried": false,
+   "pass": 22
   },
   {
    "row": "C902",
@@ -1965,23 +2345,118 @@
    "pass": 18
   },
   {
+   "row": "C902",
+   "screen": "zoe_party.home",
+   "verdict": "PASS",
+   "line": "\u2014",
+   "why": "true at 23:59: Zoe there, the party on",
+   "cause": null,
+   "note": true,
+   "screen_hash": {
+    "text": "d9433021c1841953",
+    "traits": "6b1e34b018661933",
+    "facts": "6116301392be4053",
+    "facts2": "2242d176693385da",
+    "all": "30d9415bfa80e05a"
+   },
+   "row_hash": "df5ed7a36dbc74e4",
+   "carried": false,
+   "pass": 22
+  },
+  {
+   "row": "C902",
+   "screen": "zoe_party.look",
+   "verdict": "PASS",
+   "line": "\u2014",
+   "why": "true at 23:59: Zoe there, the party on",
+   "cause": null,
+   "note": true,
+   "screen_hash": {
+    "text": "33dd7dfee4aa6963",
+    "traits": "6b1e34b018661933",
+    "facts": "6116301392be4053",
+    "facts2": "2242d176693385da",
+    "all": "99a53c181b8e7707"
+   },
+   "row_hash": "df5ed7a36dbc74e4",
+   "carried": false,
+   "pass": 22
+  },
+  {
+   "row": "C902",
+   "screen": "zoe_party.talk",
+   "verdict": "PASS",
+   "line": "\u2014",
+   "why": "true at 23:59: Zoe there, the party on",
+   "cause": null,
+   "note": true,
+   "screen_hash": {
+    "text": "f8df0b071a9b2122",
+    "traits": "6b1e34b018661933",
+    "facts": "69d89bb665fda3f3",
+    "facts2": "af773b42ff05b4b2",
+    "all": "aa26c8d1d2da18ea"
+   },
+   "row_hash": "df5ed7a36dbc74e4",
+   "carried": false,
+   "pass": 22
+  },
+  {
    "row": "C903",
    "screen": "zoe_party.home",
    "verdict": "PASS",
    "line": "There's a party here every Saturday.",
-   "why": "weekday named behind the trigger's weekday 5 (Saturday, who_is_where)",
+   "why": "Saturday named behind the trigger's weekday 5 group",
    "cause": null,
    "note": false,
    "screen_hash": {
     "text": "d9433021c1841953",
     "traits": "6b1e34b018661933",
-    "facts": "b153518a6fd2602e",
-    "facts2": "adf208a6ad231fd4",
-    "all": "ad96c5e231bb9fa0"
+    "facts": "6116301392be4053",
+    "facts2": "2242d176693385da",
+    "all": "30d9415bfa80e05a"
    },
    "row_hash": "4f83b0b5eb45f71b",
-   "carried": true,
-   "pass": 18
+   "carried": false,
+   "pass": 22
+  },
+  {
+   "row": "C903",
+   "screen": "zoe_party.look",
+   "verdict": "PASS",
+   "line": "\u2014",
+   "why": "no weekday named on this screen",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "33dd7dfee4aa6963",
+    "traits": "6b1e34b018661933",
+    "facts": "6116301392be4053",
+    "facts2": "2242d176693385da",
+    "all": "99a53c181b8e7707"
+   },
+   "row_hash": "4f83b0b5eb45f71b",
+   "carried": false,
+   "pass": 22
+  },
+  {
+   "row": "C903",
+   "screen": "zoe_party.talk",
+   "verdict": "PASS",
+   "line": "\u2014",
+   "why": "no weekday named on this screen",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "f8df0b071a9b2122",
+    "traits": "6b1e34b018661933",
+    "facts": "69d89bb665fda3f3",
+    "facts2": "af773b42ff05b4b2",
+    "all": "aa26c8d1d2da18ea"
+   },
+   "row_hash": "4f83b0b5eb45f71b",
+   "carried": false,
+   "pass": 22
   },
   {
    "row": "C906",
@@ -1997,6 +2472,63 @@
    "pass": 18
   },
   {
+   "row": "C906",
+   "screen": "zoe_party.home",
+   "verdict": "PASS",
+   "line": "\u2014",
+   "why": "no 'till'",
+   "cause": null,
+   "note": true,
+   "screen_hash": {
+    "text": "d9433021c1841953",
+    "traits": "6b1e34b018661933",
+    "facts": "6116301392be4053",
+    "facts2": "2242d176693385da",
+    "all": "30d9415bfa80e05a"
+   },
+   "row_hash": "71713a7e7ae739e7",
+   "carried": false,
+   "pass": 22
+  },
+  {
+   "row": "C906",
+   "screen": "zoe_party.look",
+   "verdict": "PASS",
+   "line": "\u2014",
+   "why": "no 'till'",
+   "cause": null,
+   "note": true,
+   "screen_hash": {
+    "text": "33dd7dfee4aa6963",
+    "traits": "6b1e34b018661933",
+    "facts": "6116301392be4053",
+    "facts2": "2242d176693385da",
+    "all": "99a53c181b8e7707"
+   },
+   "row_hash": "71713a7e7ae739e7",
+   "carried": false,
+   "pass": 22
+  },
+  {
+   "row": "C906",
+   "screen": "zoe_party.talk",
+   "verdict": "PASS",
+   "line": "\u2014",
+   "why": "no 'till'",
+   "cause": null,
+   "note": true,
+   "screen_hash": {
+    "text": "f8df0b071a9b2122",
+    "traits": "6b1e34b018661933",
+    "facts": "69d89bb665fda3f3",
+    "facts2": "af773b42ff05b4b2",
+    "all": "aa26c8d1d2da18ea"
+   },
+   "row_hash": "71713a7e7ae739e7",
+   "carried": false,
+   "pass": 22
+  },
+  {
    "row": "C910",
    "screen": "*",
    "verdict": "PASS",
@@ -2008,6 +2540,63 @@
    "row_hash": "d5a109f1ef88419a",
    "carried": true,
    "pass": 18
+  },
+  {
+   "row": "C910",
+   "screen": "zoe_party.home",
+   "verdict": "PASS",
+   "line": "Done",
+   "why": "no time or energy on buttons",
+   "cause": null,
+   "note": true,
+   "screen_hash": {
+    "text": "d9433021c1841953",
+    "traits": "6b1e34b018661933",
+    "facts": "6116301392be4053",
+    "facts2": "2242d176693385da",
+    "all": "30d9415bfa80e05a"
+   },
+   "row_hash": "d5a109f1ef88419a",
+   "carried": false,
+   "pass": 22
+  },
+  {
+   "row": "C910",
+   "screen": "zoe_party.look",
+   "verdict": "PASS",
+   "line": "Done",
+   "why": "no time or energy on buttons",
+   "cause": null,
+   "note": true,
+   "screen_hash": {
+    "text": "33dd7dfee4aa6963",
+    "traits": "6b1e34b018661933",
+    "facts": "6116301392be4053",
+    "facts2": "2242d176693385da",
+    "all": "99a53c181b8e7707"
+   },
+   "row_hash": "d5a109f1ef88419a",
+   "carried": false,
+   "pass": 22
+  },
+  {
+   "row": "C910",
+   "screen": "zoe_party.talk",
+   "verdict": "PASS",
+   "line": "Done",
+   "why": "no time or energy on buttons",
+   "cause": null,
+   "note": true,
+   "screen_hash": {
+    "text": "f8df0b071a9b2122",
+    "traits": "6b1e34b018661933",
+    "facts": "69d89bb665fda3f3",
+    "facts2": "af773b42ff05b4b2",
+    "all": "aa26c8d1d2da18ea"
+   },
+   "row_hash": "d5a109f1ef88419a",
+   "carried": false,
+   "pass": 22
   },
   {
    "row": "C913",
@@ -2023,6 +2612,63 @@
    "pass": 18
   },
   {
+   "row": "C913",
+   "screen": "zoe_party.home",
+   "verdict": "N/A",
+   "line": "\u2014",
+   "why": "screens inside the scene; the face hides when unusable (LO 2026-11-24, NOTES:282)",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "d9433021c1841953",
+    "traits": "6b1e34b018661933",
+    "facts": "6116301392be4053",
+    "facts2": "2242d176693385da",
+    "all": "30d9415bfa80e05a"
+   },
+   "row_hash": "c750f9b6ab4ace14",
+   "carried": false,
+   "pass": 22
+  },
+  {
+   "row": "C913",
+   "screen": "zoe_party.look",
+   "verdict": "N/A",
+   "line": "\u2014",
+   "why": "screens inside the scene; the face hides when unusable (LO 2026-11-24, NOTES:282)",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "33dd7dfee4aa6963",
+    "traits": "6b1e34b018661933",
+    "facts": "6116301392be4053",
+    "facts2": "2242d176693385da",
+    "all": "99a53c181b8e7707"
+   },
+   "row_hash": "c750f9b6ab4ace14",
+   "carried": false,
+   "pass": 22
+  },
+  {
+   "row": "C913",
+   "screen": "zoe_party.talk",
+   "verdict": "N/A",
+   "line": "\u2014",
+   "why": "screens inside the scene; the face hides when unusable (LO 2026-11-24, NOTES:282)",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "f8df0b071a9b2122",
+    "traits": "6b1e34b018661933",
+    "facts": "69d89bb665fda3f3",
+    "facts2": "af773b42ff05b4b2",
+    "all": "aa26c8d1d2da18ea"
+   },
+   "row_hash": "c750f9b6ab4ace14",
+   "carried": false,
+   "pass": 22
+  },
+  {
    "row": "C914",
    "screen": "*",
    "verdict": "N/A",
@@ -2034,6 +2680,63 @@
    "row_hash": "bd07273d5822f34f",
    "carried": true,
    "pass": 18
+  },
+  {
+   "row": "C914",
+   "screen": "zoe_party.home",
+   "verdict": "N/A",
+   "line": "\u2014",
+   "why": "same (NOTES:282)",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "d9433021c1841953",
+    "traits": "6b1e34b018661933",
+    "facts": "6116301392be4053",
+    "facts2": "2242d176693385da",
+    "all": "30d9415bfa80e05a"
+   },
+   "row_hash": "bd07273d5822f34f",
+   "carried": false,
+   "pass": 22
+  },
+  {
+   "row": "C914",
+   "screen": "zoe_party.look",
+   "verdict": "N/A",
+   "line": "\u2014",
+   "why": "same (NOTES:282)",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "33dd7dfee4aa6963",
+    "traits": "6b1e34b018661933",
+    "facts": "6116301392be4053",
+    "facts2": "2242d176693385da",
+    "all": "99a53c181b8e7707"
+   },
+   "row_hash": "bd07273d5822f34f",
+   "carried": false,
+   "pass": 22
+  },
+  {
+   "row": "C914",
+   "screen": "zoe_party.talk",
+   "verdict": "N/A",
+   "line": "\u2014",
+   "why": "same (NOTES:282)",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "f8df0b071a9b2122",
+    "traits": "6b1e34b018661933",
+    "facts": "69d89bb665fda3f3",
+    "facts2": "af773b42ff05b4b2",
+    "all": "aa26c8d1d2da18ea"
+   },
+   "row_hash": "bd07273d5822f34f",
+   "carried": false,
+   "pass": 22
   },
   {
    "row": "C916",
@@ -2049,6 +2752,63 @@
    "pass": 18
   },
   {
+   "row": "C916",
+   "screen": "zoe_party.home",
+   "verdict": "N/A",
+   "line": "\u2014",
+   "why": "same (NOTES:282)",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "d9433021c1841953",
+    "traits": "6b1e34b018661933",
+    "facts": "6116301392be4053",
+    "facts2": "2242d176693385da",
+    "all": "30d9415bfa80e05a"
+   },
+   "row_hash": "7b2bb0dfdbcfe946",
+   "carried": false,
+   "pass": 22
+  },
+  {
+   "row": "C916",
+   "screen": "zoe_party.look",
+   "verdict": "N/A",
+   "line": "\u2014",
+   "why": "same (NOTES:282)",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "33dd7dfee4aa6963",
+    "traits": "6b1e34b018661933",
+    "facts": "6116301392be4053",
+    "facts2": "2242d176693385da",
+    "all": "99a53c181b8e7707"
+   },
+   "row_hash": "7b2bb0dfdbcfe946",
+   "carried": false,
+   "pass": 22
+  },
+  {
+   "row": "C916",
+   "screen": "zoe_party.talk",
+   "verdict": "N/A",
+   "line": "\u2014",
+   "why": "same (NOTES:282)",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "f8df0b071a9b2122",
+    "traits": "6b1e34b018661933",
+    "facts": "69d89bb665fda3f3",
+    "facts2": "af773b42ff05b4b2",
+    "all": "aa26c8d1d2da18ea"
+   },
+   "row_hash": "7b2bb0dfdbcfe946",
+   "carried": false,
+   "pass": 22
+  },
+  {
    "row": "C920",
    "screen": "*",
    "verdict": "PASS",
@@ -2060,6 +2820,63 @@
    "row_hash": "513927dd127fca04",
    "carried": true,
    "pass": 18
+  },
+  {
+   "row": "C920",
+   "screen": "zoe_party.home",
+   "verdict": "PASS",
+   "line": "Done to near_zoe_apartment",
+   "why": "no hop: she stays at the party; the 5 minutes is the act",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "d9433021c1841953",
+    "traits": "6b1e34b018661933",
+    "facts": "6116301392be4053",
+    "facts2": "2242d176693385da",
+    "all": "30d9415bfa80e05a"
+   },
+   "row_hash": "513927dd127fca04",
+   "carried": false,
+   "pass": 22
+  },
+  {
+   "row": "C920",
+   "screen": "zoe_party.look",
+   "verdict": "PASS",
+   "line": "Done to near_zoe_apartment",
+   "why": "no hop: she stays at the party; the 5 minutes is the act",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "33dd7dfee4aa6963",
+    "traits": "6b1e34b018661933",
+    "facts": "6116301392be4053",
+    "facts2": "2242d176693385da",
+    "all": "99a53c181b8e7707"
+   },
+   "row_hash": "513927dd127fca04",
+   "carried": false,
+   "pass": 22
+  },
+  {
+   "row": "C920",
+   "screen": "zoe_party.talk",
+   "verdict": "PASS",
+   "line": "Done to near_zoe_apartment",
+   "why": "no hop: she stays at the party; the 5 minutes is the act",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "f8df0b071a9b2122",
+    "traits": "6b1e34b018661933",
+    "facts": "69d89bb665fda3f3",
+    "facts2": "af773b42ff05b4b2",
+    "all": "aa26c8d1d2da18ea"
+   },
+   "row_hash": "513927dd127fca04",
+   "carried": false,
+   "pass": 22
   },
   {
    "row": "C924",
@@ -2075,6 +2892,63 @@
    "pass": 18
   },
   {
+   "row": "C924",
+   "screen": "zoe_party.home",
+   "verdict": "N/A",
+   "line": "\u2014",
+   "why": "no travel on this screen",
+   "cause": null,
+   "note": true,
+   "screen_hash": {
+    "text": "d9433021c1841953",
+    "traits": "6b1e34b018661933",
+    "facts": "6116301392be4053",
+    "facts2": "2242d176693385da",
+    "all": "30d9415bfa80e05a"
+   },
+   "row_hash": "791cd173e23fb130",
+   "carried": false,
+   "pass": 22
+  },
+  {
+   "row": "C924",
+   "screen": "zoe_party.look",
+   "verdict": "N/A",
+   "line": "\u2014",
+   "why": "no travel on this screen",
+   "cause": null,
+   "note": true,
+   "screen_hash": {
+    "text": "33dd7dfee4aa6963",
+    "traits": "6b1e34b018661933",
+    "facts": "6116301392be4053",
+    "facts2": "2242d176693385da",
+    "all": "99a53c181b8e7707"
+   },
+   "row_hash": "791cd173e23fb130",
+   "carried": false,
+   "pass": 22
+  },
+  {
+   "row": "C924",
+   "screen": "zoe_party.talk",
+   "verdict": "N/A",
+   "line": "\u2014",
+   "why": "no travel on this screen",
+   "cause": null,
+   "note": true,
+   "screen_hash": {
+    "text": "f8df0b071a9b2122",
+    "traits": "6b1e34b018661933",
+    "facts": "69d89bb665fda3f3",
+    "facts2": "af773b42ff05b4b2",
+    "all": "aa26c8d1d2da18ea"
+   },
+   "row_hash": "791cd173e23fb130",
+   "carried": false,
+   "pass": 22
+  },
+  {
    "row": "C926",
    "screen": "*",
    "verdict": "PASS",
@@ -2086,6 +2960,63 @@
    "row_hash": "177d1e1776fac74b",
    "carried": true,
    "pass": 18
+  },
+  {
+   "row": "C926",
+   "screen": "zoe_party.home",
+   "verdict": "PASS",
+   "line": "\u2014",
+   "why": "minutes only",
+   "cause": null,
+   "note": true,
+   "screen_hash": {
+    "text": "d9433021c1841953",
+    "traits": "6b1e34b018661933",
+    "facts": "6116301392be4053",
+    "facts2": "2242d176693385da",
+    "all": "30d9415bfa80e05a"
+   },
+   "row_hash": "177d1e1776fac74b",
+   "carried": false,
+   "pass": 22
+  },
+  {
+   "row": "C926",
+   "screen": "zoe_party.look",
+   "verdict": "PASS",
+   "line": "\u2014",
+   "why": "minutes only",
+   "cause": null,
+   "note": true,
+   "screen_hash": {
+    "text": "33dd7dfee4aa6963",
+    "traits": "6b1e34b018661933",
+    "facts": "6116301392be4053",
+    "facts2": "2242d176693385da",
+    "all": "99a53c181b8e7707"
+   },
+   "row_hash": "177d1e1776fac74b",
+   "carried": false,
+   "pass": 22
+  },
+  {
+   "row": "C926",
+   "screen": "zoe_party.talk",
+   "verdict": "PASS",
+   "line": "\u2014",
+   "why": "minutes only",
+   "cause": null,
+   "note": true,
+   "screen_hash": {
+    "text": "f8df0b071a9b2122",
+    "traits": "6b1e34b018661933",
+    "facts": "69d89bb665fda3f3",
+    "facts2": "af773b42ff05b4b2",
+    "all": "aa26c8d1d2da18ea"
+   },
+   "row_hash": "177d1e1776fac74b",
+   "carried": false,
+   "pass": 22
   },
   {
    "row": "C927",
@@ -2104,39 +3035,58 @@
    "row": "C927",
    "screen": "zoe_party.home",
    "verdict": "PASS",
-   "line": "\u2014",
-   "why": "Done carries 5",
+   "line": "time_progression_minutes = 5",
+   "why": "the exit states its time",
    "cause": null,
    "note": true,
    "screen_hash": {
     "text": "d9433021c1841953",
     "traits": "6b1e34b018661933",
-    "facts": "b153518a6fd2602e",
-    "facts2": "adf208a6ad231fd4",
-    "all": "ad96c5e231bb9fa0"
+    "facts": "6116301392be4053",
+    "facts2": "2242d176693385da",
+    "all": "30d9415bfa80e05a"
    },
    "row_hash": "4e86d143688ba8e5",
-   "carried": true,
-   "pass": 18
+   "carried": false,
+   "pass": 22
   },
   {
    "row": "C927",
    "screen": "zoe_party.look",
    "verdict": "PASS",
    "line": "time_progression_minutes = 5",
-   "why": "The exit states its time.",
+   "why": "the exit states its time",
    "cause": null,
    "note": true,
    "screen_hash": {
     "text": "33dd7dfee4aa6963",
     "traits": "6b1e34b018661933",
-    "facts": "b153518a6fd2602e",
-    "facts2": "adf208a6ad231fd4",
-    "all": "ae1b2c87be069a24"
+    "facts": "6116301392be4053",
+    "facts2": "2242d176693385da",
+    "all": "99a53c181b8e7707"
    },
    "row_hash": "4e86d143688ba8e5",
-   "carried": true,
-   "pass": 19
+   "carried": false,
+   "pass": 22
+  },
+  {
+   "row": "C927",
+   "screen": "zoe_party.talk",
+   "verdict": "PASS",
+   "line": "time_progression_minutes = 5",
+   "why": "the exit states its time",
+   "cause": null,
+   "note": true,
+   "screen_hash": {
+    "text": "f8df0b071a9b2122",
+    "traits": "6b1e34b018661933",
+    "facts": "69d89bb665fda3f3",
+    "facts2": "af773b42ff05b4b2",
+    "all": "aa26c8d1d2da18ea"
+   },
+   "row_hash": "4e86d143688ba8e5",
+   "carried": false,
+   "pass": 22
   },
   {
    "row": "C928",
@@ -2152,6 +3102,63 @@
    "pass": 18
   },
   {
+   "row": "C928",
+   "screen": "zoe_party.home",
+   "verdict": "PASS",
+   "line": "\u2014",
+   "why": "no clock in prose",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "d9433021c1841953",
+    "traits": "6b1e34b018661933",
+    "facts": "6116301392be4053",
+    "facts2": "2242d176693385da",
+    "all": "30d9415bfa80e05a"
+   },
+   "row_hash": "2c3ccc6bd9929d7f",
+   "carried": false,
+   "pass": 22
+  },
+  {
+   "row": "C928",
+   "screen": "zoe_party.look",
+   "verdict": "PASS",
+   "line": "\u2014",
+   "why": "no clock in prose",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "33dd7dfee4aa6963",
+    "traits": "6b1e34b018661933",
+    "facts": "6116301392be4053",
+    "facts2": "2242d176693385da",
+    "all": "99a53c181b8e7707"
+   },
+   "row_hash": "2c3ccc6bd9929d7f",
+   "carried": false,
+   "pass": 22
+  },
+  {
+   "row": "C928",
+   "screen": "zoe_party.talk",
+   "verdict": "PASS",
+   "line": "\u2014",
+   "why": "no clock in prose",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "f8df0b071a9b2122",
+    "traits": "6b1e34b018661933",
+    "facts": "69d89bb665fda3f3",
+    "facts2": "af773b42ff05b4b2",
+    "all": "aa26c8d1d2da18ea"
+   },
+   "row_hash": "2c3ccc6bd9929d7f",
+   "carried": false,
+   "pass": 22
+  },
+  {
    "row": "C929",
    "screen": "*",
    "verdict": "PASS",
@@ -2165,6 +3172,63 @@
    "pass": 18
   },
   {
+   "row": "C929",
+   "screen": "zoe_party.home",
+   "verdict": "PASS",
+   "line": "Done",
+   "why": "no time on the label",
+   "cause": null,
+   "note": true,
+   "screen_hash": {
+    "text": "d9433021c1841953",
+    "traits": "6b1e34b018661933",
+    "facts": "6116301392be4053",
+    "facts2": "2242d176693385da",
+    "all": "30d9415bfa80e05a"
+   },
+   "row_hash": "18b0ecdf6d7fc901",
+   "carried": false,
+   "pass": 22
+  },
+  {
+   "row": "C929",
+   "screen": "zoe_party.look",
+   "verdict": "PASS",
+   "line": "Done",
+   "why": "no time on the label",
+   "cause": null,
+   "note": true,
+   "screen_hash": {
+    "text": "33dd7dfee4aa6963",
+    "traits": "6b1e34b018661933",
+    "facts": "6116301392be4053",
+    "facts2": "2242d176693385da",
+    "all": "99a53c181b8e7707"
+   },
+   "row_hash": "18b0ecdf6d7fc901",
+   "carried": false,
+   "pass": 22
+  },
+  {
+   "row": "C929",
+   "screen": "zoe_party.talk",
+   "verdict": "PASS",
+   "line": "Done",
+   "why": "no time on the label",
+   "cause": null,
+   "note": true,
+   "screen_hash": {
+    "text": "f8df0b071a9b2122",
+    "traits": "6b1e34b018661933",
+    "facts": "69d89bb665fda3f3",
+    "facts2": "af773b42ff05b4b2",
+    "all": "aa26c8d1d2da18ea"
+   },
+   "row_hash": "18b0ecdf6d7fc901",
+   "carried": false,
+   "pass": 22
+  },
+  {
    "row": "C930",
    "screen": "*",
    "verdict": "PASS",
@@ -2176,6 +3240,63 @@
    "row_hash": "beb57cd46fe906bf",
    "carried": true,
    "pass": 18
+  },
+  {
+   "row": "C930",
+   "screen": "zoe_party.home",
+   "verdict": "PASS",
+   "line": "\u2014",
+   "why": "no show_when_blocked: Zoe's face vanishes out of hours, as LO chose",
+   "cause": null,
+   "note": true,
+   "screen_hash": {
+    "text": "d9433021c1841953",
+    "traits": "6b1e34b018661933",
+    "facts": "6116301392be4053",
+    "facts2": "2242d176693385da",
+    "all": "30d9415bfa80e05a"
+   },
+   "row_hash": "beb57cd46fe906bf",
+   "carried": false,
+   "pass": 22
+  },
+  {
+   "row": "C930",
+   "screen": "zoe_party.look",
+   "verdict": "PASS",
+   "line": "\u2014",
+   "why": "no show_when_blocked: Zoe's face vanishes out of hours, as LO chose",
+   "cause": null,
+   "note": true,
+   "screen_hash": {
+    "text": "33dd7dfee4aa6963",
+    "traits": "6b1e34b018661933",
+    "facts": "6116301392be4053",
+    "facts2": "2242d176693385da",
+    "all": "99a53c181b8e7707"
+   },
+   "row_hash": "beb57cd46fe906bf",
+   "carried": false,
+   "pass": 22
+  },
+  {
+   "row": "C930",
+   "screen": "zoe_party.talk",
+   "verdict": "PASS",
+   "line": "\u2014",
+   "why": "no show_when_blocked: Zoe's face vanishes out of hours, as LO chose",
+   "cause": null,
+   "note": true,
+   "screen_hash": {
+    "text": "f8df0b071a9b2122",
+    "traits": "6b1e34b018661933",
+    "facts": "69d89bb665fda3f3",
+    "facts2": "af773b42ff05b4b2",
+    "all": "aa26c8d1d2da18ea"
+   },
+   "row_hash": "beb57cd46fe906bf",
+   "carried": false,
+   "pass": 22
   },
   {
    "row": "C931",
@@ -2194,39 +3315,58 @@
    "row": "C931",
    "screen": "zoe_party.home",
    "verdict": "PASS",
-   "line": "\u2014",
-   "why": "same trigger",
+   "line": "weekday [5], 21:00-00:00",
+   "why": "end 00:00 wraps to day end, so 23:59 is in; a 23:59 Done lands at 00:04, where party_end takes over",
    "cause": null,
    "note": true,
    "screen_hash": {
     "text": "d9433021c1841953",
     "traits": "6b1e34b018661933",
-    "facts": "b153518a6fd2602e",
-    "facts2": "adf208a6ad231fd4",
-    "all": "ad96c5e231bb9fa0"
+    "facts": "6116301392be4053",
+    "facts2": "2242d176693385da",
+    "all": "30d9415bfa80e05a"
    },
    "row_hash": "1aadffd96e76381c",
-   "carried": true,
-   "pass": 18
+   "carried": false,
+   "pass": 22
   },
   {
    "row": "C931",
    "screen": "zoe_party.look",
    "verdict": "PASS",
-   "line": "time_of_day 21:00-00:00",
-   "why": "End exclusive; a look at 23:59 +5 lands at 00:04 where the end fires.",
+   "line": "weekday [5], 21:00-00:00",
+   "why": "end 00:00 wraps to day end, so 23:59 is in; a 23:59 Done lands at 00:04, where party_end takes over",
    "cause": null,
    "note": true,
    "screen_hash": {
     "text": "33dd7dfee4aa6963",
     "traits": "6b1e34b018661933",
-    "facts": "b153518a6fd2602e",
-    "facts2": "adf208a6ad231fd4",
-    "all": "ae1b2c87be069a24"
+    "facts": "6116301392be4053",
+    "facts2": "2242d176693385da",
+    "all": "99a53c181b8e7707"
    },
    "row_hash": "1aadffd96e76381c",
-   "carried": true,
-   "pass": 19
+   "carried": false,
+   "pass": 22
+  },
+  {
+   "row": "C931",
+   "screen": "zoe_party.talk",
+   "verdict": "PASS",
+   "line": "weekday [5], 21:00-00:00",
+   "why": "end 00:00 wraps to day end, so 23:59 is in; a 23:59 Done lands at 00:04, where party_end takes over",
+   "cause": null,
+   "note": true,
+   "screen_hash": {
+    "text": "f8df0b071a9b2122",
+    "traits": "6b1e34b018661933",
+    "facts": "69d89bb665fda3f3",
+    "facts2": "af773b42ff05b4b2",
+    "all": "aa26c8d1d2da18ea"
+   },
+   "row_hash": "1aadffd96e76381c",
+   "carried": false,
+   "pass": 22
   },
   {
    "row": "C953",
@@ -2256,60 +3396,98 @@
   },
   {
    "row": "L106",
+   "screen": "zoe_party.dare",
+   "verdict": "PASS",
+   "line": "He's tall, and he's been looking at you since you came in.",
+   "why": "names only Zoe, whom her rows put there, and unnamed strangers",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "6a44ad99ca8a8e9b",
+    "traits": "6b1e34b018661933",
+    "facts": "6116301392be4053",
+    "facts2": "2242d176693385da",
+    "all": "15e88ad7ca45eb5e"
+   },
+   "row_hash": "13a714429d15f3b2",
+   "carried": false,
+   "pass": 22
+  },
+  {
+   "row": "L106",
    "screen": "zoe_party.home",
    "verdict": "PASS",
-   "line": "\u2014",
-   "why": "Zoe there by her rows",
+   "line": "Your loss, babe. There's a party here every Saturday. / She's back in the crowd before you can answer.",
+   "why": "names only Zoe, whom her rows put there, and unnamed strangers",
    "cause": null,
    "note": false,
    "screen_hash": {
     "text": "d9433021c1841953",
     "traits": "6b1e34b018661933",
-    "facts": "b153518a6fd2602e",
-    "facts2": "adf208a6ad231fd4",
-    "all": "ad96c5e231bb9fa0"
+    "facts": "6116301392be4053",
+    "facts2": "2242d176693385da",
+    "all": "30d9415bfa80e05a"
    },
    "row_hash": "13a714429d15f3b2",
-   "carried": true,
-   "pass": 18
+   "carried": false,
+   "pass": 22
   },
   {
    "row": "L106",
    "screen": "zoe_party.look",
    "verdict": "PASS",
-   "line": "That's a start, babe.",
-   "why": "Zoe speaks; requires_npc npc_zoe and her Sat 18-24 row.",
+   "line": "That's a start, babe. He's by the speaker all night, you know.",
+   "why": "names only Zoe, whom her rows put there, and unnamed strangers",
    "cause": null,
    "note": false,
    "screen_hash": {
     "text": "33dd7dfee4aa6963",
     "traits": "6b1e34b018661933",
-    "facts": "b153518a6fd2602e",
-    "facts2": "adf208a6ad231fd4",
-    "all": "ae1b2c87be069a24"
+    "facts": "6116301392be4053",
+    "facts2": "2242d176693385da",
+    "all": "99a53c181b8e7707"
    },
    "row_hash": "13a714429d15f3b2",
-   "carried": true,
-   "pass": 19
+   "carried": false,
+   "pass": 22
   },
   {
    "row": "L106",
    "screen": "zoe_party.party",
    "verdict": "PASS",
    "line": "Zoe's on the sofa arm with a bottle in her hand, and she waves it at you like a flag.",
-   "why": "Names only Zoe, whom her Sat 18-24 row puts at near_zoe_apartment.",
+   "why": "names only Zoe, whom her rows put there, and unnamed strangers",
    "cause": null,
    "note": false,
    "screen_hash": {
     "text": "3ef4c0684048a540",
     "traits": "6b1e34b018661933",
-    "facts": "b153518a6fd2602e",
-    "facts2": "adf208a6ad231fd4",
-    "all": "df32385c67bef5af"
+    "facts": "6116301392be4053",
+    "facts2": "2242d176693385da",
+    "all": "e390becca79578f9"
    },
    "row_hash": "13a714429d15f3b2",
-   "carried": true,
-   "pass": 20
+   "carried": false,
+   "pass": 22
+  },
+  {
+   "row": "L106",
+   "screen": "zoe_party.talk",
+   "verdict": "PASS",
+   "line": "Babe! You came. ... Look around you. Pick someone. ... Everyone here's had a drink.",
+   "why": "names only Zoe, whom her rows put there, and unnamed strangers",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "f8df0b071a9b2122",
+    "traits": "6b1e34b018661933",
+    "facts": "69d89bb665fda3f3",
+    "facts2": "af773b42ff05b4b2",
+    "all": "aa26c8d1d2da18ea"
+   },
+   "row_hash": "13a714429d15f3b2",
+   "carried": false,
+   "pass": 22
   },
   {
    "row": "L119",
@@ -2417,39 +3595,58 @@
    "row": "L167",
    "screen": "zoe_party.home",
    "verdict": "PASS",
-   "line": "\u2014",
-   "why": "same",
+   "line": "weekday [5], 21:00-00:00",
+   "why": "one row, one window on one day kind; hidden when unusable (NOTES:282)",
    "cause": null,
    "note": false,
    "screen_hash": {
     "text": "d9433021c1841953",
     "traits": "6b1e34b018661933",
-    "facts": "b153518a6fd2602e",
-    "facts2": "adf208a6ad231fd4",
-    "all": "ad96c5e231bb9fa0"
+    "facts": "6116301392be4053",
+    "facts2": "2242d176693385da",
+    "all": "30d9415bfa80e05a"
    },
    "row_hash": "e64ce2672d85d2d8",
-   "carried": true,
-   "pass": 18
+   "carried": false,
+   "pass": 22
   },
   {
    "row": "L167",
    "screen": "zoe_party.look",
-   "verdict": "N/A",
-   "line": "weekday 5, 21:00-00:00",
-   "why": "One window, one day kind; the face hides out of hours (NOTES:282).",
+   "verdict": "PASS",
+   "line": "weekday [5], 21:00-00:00",
+   "why": "one row, one window on one day kind; hidden when unusable (NOTES:282)",
    "cause": null,
    "note": false,
    "screen_hash": {
     "text": "33dd7dfee4aa6963",
     "traits": "6b1e34b018661933",
-    "facts": "b153518a6fd2602e",
-    "facts2": "adf208a6ad231fd4",
-    "all": "ae1b2c87be069a24"
+    "facts": "6116301392be4053",
+    "facts2": "2242d176693385da",
+    "all": "99a53c181b8e7707"
    },
    "row_hash": "e64ce2672d85d2d8",
-   "carried": true,
-   "pass": 19
+   "carried": false,
+   "pass": 22
+  },
+  {
+   "row": "L167",
+   "screen": "zoe_party.talk",
+   "verdict": "PASS",
+   "line": "weekday [5], 21:00-00:00",
+   "why": "one row, one window on one day kind; hidden when unusable (NOTES:282)",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "f8df0b071a9b2122",
+    "traits": "6b1e34b018661933",
+    "facts": "69d89bb665fda3f3",
+    "facts2": "af773b42ff05b4b2",
+    "all": "aa26c8d1d2da18ea"
+   },
+   "row_hash": "e64ce2672d85d2d8",
+   "carried": false,
+   "pass": 22
   },
   {
    "row": "L170",
@@ -2467,8 +3664,8 @@
  ],
  "causes": [],
  "pending": [],
- "asked": 1,
- "answered": 1,
+ "asked": 85,
+ "answered": 85,
  "pass_items": [],
  "unowed": []
 }

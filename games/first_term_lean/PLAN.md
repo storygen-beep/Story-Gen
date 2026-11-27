@@ -165,7 +165,7 @@ makes it risky.
 | Home | the hall (hub, and the way out to her street; anything at the front door plays here) · kitchen · living room · shared bathroom · her bedroom (her old key locks it) · Ryan's room · the master bedroom (Laura and Mark's) | anchor |
 | Neighbourhood | her street (passes through only) · Mr. Vance's house and porch, next door · the corner shop · the clothes shop (10am–7pm, closed Sundays) · the park (walk, rest, run; not her way to campus) · the gym | satellite |
 | Campus | the quad (hub) · the lecture hall · the library · the cafeteria · the faculty corridor (a hub, P54) with an office each off it: the Dean's Office (P47's first day), the Psychology Office (Dr. Hale), the Statistics Office (Mr. Pratt) and the English Office (Prof. Walsh), each open in its person's hours · a women's bathroom off the quad (P51) · the theatre (drama studio) | satellite |
-| Town (P45, LO 2026-11-25: "New Town hub") | the high street (hub; the bus stop) · Campus, a place in Town (P53, 2026-11-26; no walk through the gates) · the café · Zoe's apartment | satellite |
+| Town (P45, LO 2026-11-25: "New Town hub") | the high street (hub; the bus stop) · Campus, a place in Town (P53, 2026-11-26; no walk through the gates) · the café · Zoe's apartment (its living room, with Zoe's Kitchen, Zoe's Room and Zoe's Bathroom off it, P83) | satellite |
 
 - Every place says in its own text what it is and what she can do there.
 - A room's menu holds only needs, systems and people.
@@ -488,7 +488,7 @@ Release 1 (LO 2026-11-21: "basic would be zoe giving very basic dare, and player
 "no pool"): a basic party at Zoe's apartment, Saturdays 9pm to midnight, then the end until 1am (P75), once she has met Zoe (P20).
 Since P75 (LO 2026-11-27: "zoe's party needs to be a bit rich"; "a yes", "b no dresss code for party its fine", "c yes
 stay stranger"): the party is a place she stays at (craft/places.md rule 11). Saturday 9pm to midnight she can Mingle,
-Get a drink, Dance, Find Zoe or Go home; coming back from any of them can bring a moment (a stranger with a drink,
+Get a drink (in Zoe's kitchen), Dance or Find Zoe, and leave by the door at any time (P82: no "Go home" button); coming back from any of them can bring a moment (a stranger with a drink,
 Brooke's look at what she's wearing, Zoe and the sofa, the bathroom couple), and the guy by the speaker can cut in
 while she dances. Zoe's dare is the same every time, "Go dance with the guy by the speaker.", and has two answers:
 "Look at him" (she holds his eyes across the room and doesn't go; LO 2026-11-27: "Keep 11-21: no accept") and "Not tonight." ("Your loss, babe. There's a party here every
@@ -496,7 +496,7 @@ Saturday."). From midnight the party thins and Zoe sends her home. Time and ener
 
 | place | alone | with a person |
 |---|---|---|
-| Zoe's Apartment | the party (Saturdays, 9pm to midnight; the end from midnight to 1am, P75) | Zoe's dare; Sam; Brooke and her friends |
+| Zoe's Apartment | the party (Saturdays, 9pm to midnight; the end from midnight to 1am, P75); Get a drink in Zoe's Kitchen (P83) | Zoe's dare; Sam; Brooke and her friends, in the kitchen (P83) |
 
 Area 7 settled (LO 2026-11-21): Brooke is the queen of campus parties, with two friends (Kayla Moore,
 20, loud, laughs at everything Brooke says; Tess Harper, 21, quiet and meaner; LO "yes names"); the three bully Ella.
@@ -641,12 +641,12 @@ librarian", "three girls" until their meeting pieces.
 
 | scene | kind | who | everyday? | window (§9c, §9d) | how often | her choice |
 |---|---|---|---|---|---|---|
-| Zoe and Sam on the sofa, Zoe on top, seen from the hall door | she walks in on | Zoe, Sam | no | every day 6–11pm, Zoe's Apartment | once a day | Watch · Back out the door |
+| Zoe and Sam on the sofa, Zoe on top, seen from the hall door | she walks in on | Zoe, Sam | no | every day 7–11pm (Saturday 7–9pm), Zoe's Apartment | once a day | Watch · Back out the door |
 | Sam alone on the sofa with a guitar he can't play: "Be honest. Was that a song?" | she walks in on | Sam | yes | afternoons 12–6pm, after P27 | once a day | Tell him the truth · Lie |
-| Zoe at the mirror with three outfits on the bed: "Which one says I don't care?" | she walks in on | Zoe | yes | every day 6–9pm, Zoe's Apartment | once a day | Pick one · Tell her the one she's wearing |
+| Zoe at the mirror with three outfits on the bed: "Which one says I don't care?" | she walks in on | Zoe | yes | every day 6–7pm, Zoe's Room (P83) | once a day | Pick one · Tell her the one she's wearing |
 | Tom counting the tip jar after close, folding two bills into his own pocket | she walks in on | Tom | yes | Mon–Sat 8–9pm, Café | once a day | Say nothing · "Those are tips." |
 | Chris in the storeroom with a regular, her skirt up, his hand under it | she walks in on | Chris | no | weekends 10am–7pm, Café | once a day | Watch from the door · Back out |
-| A couple in Zoe's bathroom at the party, door unlocked | she walks in on | strangers | no | Saturdays 9pm–midnight, at the party (P75) | once a party | Watch · Shut the door |
+| A couple in Zoe's bathroom at the party, door unlocked | she walks in on | strangers | no | Saturdays 9pm–midnight, at the party, Zoe's Bathroom (P83) | once a party | Watch · Shut the door |
 
 Count: 6 scenes, 3 everyday (C802); 5 of 6 name someone she knows (C678). Seen, not heard. Release
 1: a flag each, no meter. Zoe's apartment needs zoe_place_known (P20).

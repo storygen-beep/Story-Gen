@@ -1,22 +1,22 @@
 {
  "piece": "P27",
- "pass": 20,
+ "pass": 21,
  "screens": {
   "zoe_door_sam.door": {
    "text": "04292ed529b31c40",
    "traits": "fa1a0a429fa0ea30",
-   "facts": "7cf66ebe1e886b69",
-   "facts2": "b502d165d9d76b6e",
-   "all": "c6095d54a8c42359"
+   "facts": "90eb2da01d074848",
+   "facts2": "d6c41dbecb0893a1",
+   "all": "37301f7fe4e11fbb"
   },
   "zoe_door_sam.after": {
    "text": "ab9509986b57a493",
    "traits": "fa1a0a429fa0ea30",
-   "facts": "78efee1012776089",
-   "facts2": "b55c9dad2526575d",
-   "all": "0369fea8108d8119"
+   "facts": "477d3e1b39f513c6",
+   "facts2": "0a3f5a3f55dd11b9",
+   "all": "0d3b0553b6350eb6"
   },
-  "*": "a332cad76440d5ee"
+  "*": "7804adb5f06d81d3"
  },
  "rows": {
   "B1": "5276068df1ca6fa9",
@@ -178,38 +178,39 @@
    "row": "B10",
    "screen": "zoe_door_sam.after",
    "verdict": "PASS",
-   "line": "See you, sunshine.",
-   "why": "one group per answer (toml:7714-7730); trigger puts Sam present and Zoe absent 12:00-18:00 (toml:7670), so 'Six o'clock' and his doorway are true on the one visit (is_repeatable false)",
+   "line": "Six o'clock, sunshine. Unless you get bored of waiting.",
+   "why": "read at first and last minute and on a second visit: Zoe comes home at 18:00 every day (Zoe's Room 18-19, living room from 19, who_is_where); her People tip 'at home every evening, 6 to 11' agrees; 'six' is her return, she is home one door off the room she waits in; only Sam is claimed present (trigger npc_at_location)",
    "cause": null,
    "note": false,
    "screen_hash": {
     "text": "ab9509986b57a493",
     "traits": "fa1a0a429fa0ea30",
-    "facts": "78efee1012776089",
-    "facts2": "b55c9dad2526575d",
-    "all": "0369fea8108d8119"
+    "facts": "477d3e1b39f513c6",
+    "facts2": "0a3f5a3f55dd11b9",
+    "all": "0d3b0553b6350eb6"
    },
    "row_hash": "c1c0e2ac2588a579",
    "carried": false,
-   "pass": 20
+   "pass": 21
   },
   {
    "row": "B10",
    "screen": "zoe_door_sam.door",
    "verdict": "PASS",
-   "line": "She's out, sunshine. Back at six.",
-   "why": "Trigger needs Sam present, Zoe absent, 12:00-18:00; Sam's rows 12:00-02:00 there; Zoe's rows put her home from 18:00 every day, so 'back at six' holds at the first and last minute.",
+   "line": "You're the one Zoe won't shut up about. She's out, sunshine. Back at six.",
+   "why": "read at first and last minute and on a second visit: trigger: Sam present, Zoe absent from near_zoe_apartment, 12:00-18:00 end exclusive; Zoe has no row 15-18 and P83 puts her home (Zoe's Room) at 18:00 every day, so 'back at six' holds at 12:00 and 17:59; one-time screen; zoe_place_known set with met_zoe",
    "cause": null,
    "note": false,
    "screen_hash": {
     "text": "04292ed529b31c40",
-    "facts": "018bada602bdc7e3",
-    "facts2": "c1df94c1cf2158ee",
-    "all": "0a894faf70b5f334"
+    "traits": "fa1a0a429fa0ea30",
+    "facts": "90eb2da01d074848",
+    "facts2": "d6c41dbecb0893a1",
+    "all": "37301f7fe4e11fbb"
    },
    "row_hash": "c1c0e2ac2588a579",
-   "carried": true,
-   "pass": 3
+   "carried": false,
+   "pass": 21
   },
   {
    "row": "B11",
@@ -360,38 +361,39 @@
    "row": "B8",
    "screen": "zoe_door_sam.after",
    "verdict": "PASS",
-   "line": "Mind the guitar. And the sofa.",
-   "why": "no number, no garment of hers named in any group",
+   "line": "Six o'clock, sunshine. Unless you get bored of waiting.",
+   "why": "no garment of hers named; hours agree with the rows and the card",
    "cause": null,
    "note": false,
    "screen_hash": {
     "text": "ab9509986b57a493",
     "traits": "fa1a0a429fa0ea30",
-    "facts": "78efee1012776089",
-    "facts2": "b55c9dad2526575d",
-    "all": "0369fea8108d8119"
+    "facts": "477d3e1b39f513c6",
+    "facts2": "0a3f5a3f55dd11b9",
+    "all": "0d3b0553b6350eb6"
    },
    "row_hash": "80d415cf08e0ebfe",
    "carried": false,
-   "pass": 20
+   "pass": 21
   },
   {
    "row": "B8",
    "screen": "zoe_door_sam.door",
    "verdict": "PASS",
-   "line": "his eyes stop on your chest long enough that your nipples tighten",
-   "why": "No garment of hers named; no number on screen.",
+   "line": "his eyes stop on your chest long enough that your nipples tighten. You cross your arms.",
+   "why": "no garment of hers named; the T-shirt is Sam's; no number on screen",
    "cause": null,
    "note": false,
    "screen_hash": {
     "text": "04292ed529b31c40",
-    "facts": "018bada602bdc7e3",
-    "facts2": "c1df94c1cf2158ee",
-    "all": "0a894faf70b5f334"
+    "traits": "fa1a0a429fa0ea30",
+    "facts": "90eb2da01d074848",
+    "facts2": "d6c41dbecb0893a1",
+    "all": "37301f7fe4e11fbb"
    },
    "row_hash": "80d415cf08e0ebfe",
-   "carried": true,
-   "pass": 3
+   "carried": false,
+   "pass": 21
   },
   {
    "row": "B9",
@@ -467,19 +469,20 @@
    "row": "C1158",
    "screen": "zoe_door_sam.door",
    "verdict": "PASS",
-   "line": "his eyes stop on your chest",
-   "why": "Prose names her body, not a garment; Sam's T-shirt is his.",
+   "line": "a T-shirt he's clearly slept in",
+   "why": "no garment of hers is named; the T-shirt is his",
    "cause": null,
    "note": false,
    "screen_hash": {
     "text": "04292ed529b31c40",
-    "facts": "018bada602bdc7e3",
-    "facts2": "c1df94c1cf2158ee",
-    "all": "0a894faf70b5f334"
+    "traits": "fa1a0a429fa0ea30",
+    "facts": "90eb2da01d074848",
+    "facts2": "d6c41dbecb0893a1",
+    "all": "37301f7fe4e11fbb"
    },
    "row_hash": "f40f51a0fd6cfd10",
-   "carried": true,
-   "pass": 3
+   "carried": false,
+   "pass": 21
   },
   {
    "row": "C1173",
@@ -525,18 +528,19 @@
    "screen": "zoe_door_sam.door",
    "verdict": "PASS",
    "line": "his eyes stop on your chest long enough that your nipples tighten. You cross your arms.",
-   "why": "a note row; no garment named, she's dressed at a door, the look is the event",
+   "why": "note row: she's dressed at a door, no exposure of hers; the look is the event",
    "cause": null,
    "note": true,
    "screen_hash": {
     "text": "04292ed529b31c40",
-    "facts": "a31c2980eeb1cde3",
-    "facts2": "b502d165d9d76b6e",
-    "all": "c7ed5b6984d9681d"
+    "traits": "fa1a0a429fa0ea30",
+    "facts": "90eb2da01d074848",
+    "facts2": "d6c41dbecb0893a1",
+    "all": "37301f7fe4e11fbb"
    },
    "row_hash": "ef9bbbe96651efc7",
-   "carried": true,
-   "pass": 3
+   "carried": false,
+   "pass": 21
   },
   {
    "row": "C1184",
@@ -633,19 +637,20 @@
    "row": "C1206",
    "screen": "zoe_door_sam.door",
    "verdict": "PASS",
-   "line": "You cross your arms.",
-   "why": "No garment of hers she might not be wearing.",
+   "line": "a T-shirt he's clearly slept in",
+   "why": "no garment of hers is named; the T-shirt is his",
    "cause": null,
    "note": false,
    "screen_hash": {
     "text": "04292ed529b31c40",
-    "facts": "018bada602bdc7e3",
-    "facts2": "c1df94c1cf2158ee",
-    "all": "0a894faf70b5f334"
+    "traits": "fa1a0a429fa0ea30",
+    "facts": "90eb2da01d074848",
+    "facts2": "d6c41dbecb0893a1",
+    "all": "37301f7fe4e11fbb"
    },
    "row_hash": "bfff76edbee583de",
-   "carried": true,
-   "pass": 3
+   "carried": false,
+   "pass": 21
   },
   {
    "row": "C1220",
@@ -1210,7 +1215,7 @@
     "all": "0369fea8108d8119"
    },
    "row_hash": "d8ebf6d6b2abf6a5",
-   "carried": false,
+   "carried": true,
    "pass": 20
   },
   {
@@ -1441,37 +1446,38 @@
    "screen": "zoe_door_sam.after",
    "verdict": "PASS",
    "line": "Six o'clock, sunshine. Unless you get bored of waiting.",
-   "why": "Zoe absent until 18:00 per trigger (toml:7670); 'brush past him to get in' only in the sam_wait group, where she asked to wait",
+   "why": "Zoe comes home at 18:00 every day (Zoe's Room 18-19, living room from 19, who_is_where); her People tip 'at home every evening, 6 to 11' agrees; 'six' is her return, she is home one door off the room she waits in; only Sam is claimed present (trigger npc_at_location)",
    "cause": null,
    "note": false,
    "screen_hash": {
     "text": "ab9509986b57a493",
     "traits": "fa1a0a429fa0ea30",
-    "facts": "78efee1012776089",
-    "facts2": "b55c9dad2526575d",
-    "all": "0369fea8108d8119"
+    "facts": "477d3e1b39f513c6",
+    "facts2": "0a3f5a3f55dd11b9",
+    "all": "0d3b0553b6350eb6"
    },
    "row_hash": "67e48e60d5053a2e",
    "carried": false,
-   "pass": 20
+   "pass": 21
   },
   {
    "row": "C460",
    "screen": "zoe_door_sam.door",
    "verdict": "PASS",
-   "line": "You're the one Zoe won't shut up about.",
-   "why": "The door is hidden until zoe_place_known, set with met_zoe on Zoe's meeting (P20), so Zoe has met her on every path here; one-time screen, no past claimed beyond that.",
+   "line": "You're the one Zoe won't shut up about. She's out, sunshine. Back at six.",
+   "why": "trigger: Sam present, Zoe absent from near_zoe_apartment, 12:00-18:00 end exclusive; Zoe has no row 15-18 and P83 puts her home (Zoe's Room) at 18:00 every day, so 'back at six' holds at 12:00 and 17:59; one-time screen; zoe_place_known set with met_zoe",
    "cause": null,
    "note": false,
    "screen_hash": {
     "text": "04292ed529b31c40",
-    "facts": "018bada602bdc7e3",
-    "facts2": "c1df94c1cf2158ee",
-    "all": "0a894faf70b5f334"
+    "traits": "fa1a0a429fa0ea30",
+    "facts": "90eb2da01d074848",
+    "facts2": "d6c41dbecb0893a1",
+    "all": "37301f7fe4e11fbb"
    },
    "row_hash": "67e48e60d5053a2e",
-   "carried": true,
-   "pass": 3
+   "carried": false,
+   "pass": 21
   },
   {
    "row": "C461",
@@ -1490,38 +1496,39 @@
    "row": "C461",
    "screen": "zoe_door_sam.after",
    "verdict": "PASS",
-   "line": "Strong silent type. Zoe's going to love that.",
-   "why": "his banter fits his cast entry; Zoe already met (zoe_place_known set with met_zoe, toml:7202)",
+   "line": "Six o'clock, sunshine. Unless you get bored of waiting.",
+   "why": "the rest is texture and the person's own manner; nothing can clash with the plan",
    "cause": null,
    "note": false,
    "screen_hash": {
     "text": "ab9509986b57a493",
     "traits": "fa1a0a429fa0ea30",
-    "facts": "78efee1012776089",
-    "facts2": "b55c9dad2526575d",
-    "all": "0369fea8108d8119"
+    "facts": "477d3e1b39f513c6",
+    "facts2": "0a3f5a3f55dd11b9",
+    "all": "0d3b0553b6350eb6"
    },
    "row_hash": "310706ee076318f2",
    "carried": false,
-   "pass": 20
+   "pass": 21
   },
   {
    "row": "C461",
    "screen": "zoe_door_sam.door",
    "verdict": "PASS",
-   "line": "He grins like that's an answer.",
-   "why": "Texture and Sam's dialogue fit his cast entry (home, guitar, 'sunshine').",
+   "line": "You're the one Zoe won't shut up about. She's out, sunshine. Back at six.",
+   "why": "the rest is texture and the person's own manner; nothing can clash with the plan",
    "cause": null,
    "note": false,
    "screen_hash": {
     "text": "04292ed529b31c40",
-    "facts": "018bada602bdc7e3",
-    "facts2": "c1df94c1cf2158ee",
-    "all": "0a894faf70b5f334"
+    "traits": "fa1a0a429fa0ea30",
+    "facts": "90eb2da01d074848",
+    "facts2": "d6c41dbecb0893a1",
+    "all": "37301f7fe4e11fbb"
    },
    "row_hash": "310706ee076318f2",
-   "carried": true,
-   "pass": 3
+   "carried": false,
+   "pass": 21
   },
   {
    "row": "C519",
@@ -1904,19 +1911,20 @@
    "row": "C889",
    "screen": "zoe_door_sam.after",
    "verdict": "PASS",
-   "line": "\"Done\"",
-   "why": "labels name no clock time and no duration; the spend sits in the costs",
+   "line": "Done",
+   "why": "no label names a clock time or a duration; the spend is in the costs",
    "cause": null,
    "note": true,
    "screen_hash": {
-    "text": "277e955babba12ec",
-    "facts": "019dd13d360af645",
-    "facts2": "b55c9dad2526575d",
-    "all": "5d20a44c4b8b6796"
+    "text": "ab9509986b57a493",
+    "traits": "fa1a0a429fa0ea30",
+    "facts": "477d3e1b39f513c6",
+    "facts2": "0a3f5a3f55dd11b9",
+    "all": "0d3b0553b6350eb6"
    },
    "row_hash": "def1348d483d0c40",
-   "carried": true,
-   "pass": 3
+   "carried": false,
+   "pass": 21
   },
   {
    "row": "C892",
@@ -1936,18 +1944,19 @@
    "screen": "zoe_door_sam.after",
    "verdict": "PASS",
    "line": "Six o'clock, sunshine. Unless you get bored of waiting.",
-   "why": "no hour in the act",
+   "why": "no hour put in the act; hours sit on the person's row and the trigger",
    "cause": null,
    "note": true,
    "screen_hash": {
-    "text": "277e955babba12ec",
-    "facts": "019dd13d360af645",
-    "facts2": "b55c9dad2526575d",
-    "all": "5d20a44c4b8b6796"
+    "text": "ab9509986b57a493",
+    "traits": "fa1a0a429fa0ea30",
+    "facts": "477d3e1b39f513c6",
+    "facts2": "0a3f5a3f55dd11b9",
+    "all": "0d3b0553b6350eb6"
    },
    "row_hash": "5c890033f6ac38b8",
-   "carried": true,
-   "pass": 3
+   "carried": false,
+   "pass": 21
   },
   {
    "row": "C897",
@@ -1966,19 +1975,20 @@
    "row": "C897",
    "screen": "zoe_door_sam.after",
    "verdict": "PASS",
-   "line": "\"Done\"",
-   "why": "the only time here is the act's own, not a per-room charge",
+   "line": "Done (5 min in costs)",
+   "why": "no time charged on a room; the spend is the activity's, travel time stays on area crossings",
    "cause": null,
    "note": true,
    "screen_hash": {
-    "text": "277e955babba12ec",
-    "facts": "019dd13d360af645",
-    "facts2": "b55c9dad2526575d",
-    "all": "5d20a44c4b8b6796"
+    "text": "ab9509986b57a493",
+    "traits": "fa1a0a429fa0ea30",
+    "facts": "477d3e1b39f513c6",
+    "facts2": "0a3f5a3f55dd11b9",
+    "all": "0d3b0553b6350eb6"
    },
    "row_hash": "265ece64add83676",
-   "carried": true,
-   "pass": 3
+   "carried": false,
+   "pass": 21
   },
   {
    "row": "C900",
@@ -1998,18 +2008,19 @@
    "screen": "zoe_door_sam.after",
    "verdict": "PASS",
    "line": "Six o'clock, sunshine. Unless you get bored of waiting.",
-   "why": "names when Zoe is back, a rule her rows keep, not the current time",
+   "why": "no line says what time it is now; a named hour is an event's time (a rule), true at every minute of the window",
    "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "277e955babba12ec",
-    "facts": "019dd13d360af645",
-    "facts2": "b55c9dad2526575d",
-    "all": "5d20a44c4b8b6796"
+    "text": "ab9509986b57a493",
+    "traits": "fa1a0a429fa0ea30",
+    "facts": "477d3e1b39f513c6",
+    "facts2": "0a3f5a3f55dd11b9",
+    "all": "0d3b0553b6350eb6"
    },
    "row_hash": "6372efb027eb2034",
-   "carried": true,
-   "pass": 3
+   "carried": false,
+   "pass": 21
   },
   {
    "row": "C902",
@@ -2029,18 +2040,19 @@
    "screen": "zoe_door_sam.after",
    "verdict": "PASS",
    "line": "Six o'clock, sunshine. Unless you get bored of waiting.",
-   "why": "at 17:59, the last minute of the window, Zoe is back at six",
+   "why": "read at the last minute of the window it is still true: Zoe comes home at 18:00 every day (Zoe's Room 18-19, living room from 19, who_is_where)",
    "cause": null,
    "note": true,
    "screen_hash": {
-    "text": "277e955babba12ec",
-    "facts": "019dd13d360af645",
-    "facts2": "b55c9dad2526575d",
-    "all": "5d20a44c4b8b6796"
+    "text": "ab9509986b57a493",
+    "traits": "fa1a0a429fa0ea30",
+    "facts": "477d3e1b39f513c6",
+    "facts2": "0a3f5a3f55dd11b9",
+    "all": "0d3b0553b6350eb6"
    },
    "row_hash": "df5ed7a36dbc74e4",
-   "carried": true,
-   "pass": 3
+   "carried": false,
+   "pass": 21
   },
   {
    "row": "C903",
@@ -2064,14 +2076,15 @@
    "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "277e955babba12ec",
-    "facts": "019dd13d360af645",
-    "facts2": "b55c9dad2526575d",
-    "all": "5d20a44c4b8b6796"
+    "text": "ab9509986b57a493",
+    "traits": "fa1a0a429fa0ea30",
+    "facts": "477d3e1b39f513c6",
+    "facts2": "0a3f5a3f55dd11b9",
+    "all": "0d3b0553b6350eb6"
    },
    "row_hash": "4f83b0b5eb45f71b",
-   "carried": true,
-   "pass": 3
+   "carried": false,
+   "pass": 21
   },
   {
    "row": "C906",
@@ -2090,19 +2103,20 @@
    "row": "C906",
    "screen": "zoe_door_sam.after",
    "verdict": "PASS",
-   "line": "\"Done\"",
+   "line": "Done",
    "why": "no 'till X' anywhere",
    "cause": null,
    "note": true,
    "screen_hash": {
-    "text": "277e955babba12ec",
-    "facts": "019dd13d360af645",
-    "facts2": "b55c9dad2526575d",
-    "all": "5d20a44c4b8b6796"
+    "text": "ab9509986b57a493",
+    "traits": "fa1a0a429fa0ea30",
+    "facts": "477d3e1b39f513c6",
+    "facts2": "0a3f5a3f55dd11b9",
+    "all": "0d3b0553b6350eb6"
    },
    "row_hash": "71713a7e7ae739e7",
-   "carried": true,
-   "pass": 3
+   "carried": false,
+   "pass": 21
   },
   {
    "row": "C910",
@@ -2121,19 +2135,20 @@
    "row": "C910",
    "screen": "zoe_door_sam.after",
    "verdict": "PASS",
-   "line": "\"Done\"",
-   "why": "buttons say no time and no energy, and this act costs no money",
+   "line": "Done",
+   "why": "buttons say no time and no energy; no money cost",
    "cause": null,
    "note": true,
    "screen_hash": {
-    "text": "277e955babba12ec",
-    "facts": "019dd13d360af645",
-    "facts2": "b55c9dad2526575d",
-    "all": "5d20a44c4b8b6796"
+    "text": "ab9509986b57a493",
+    "traits": "fa1a0a429fa0ea30",
+    "facts": "477d3e1b39f513c6",
+    "facts2": "0a3f5a3f55dd11b9",
+    "all": "0d3b0553b6350eb6"
    },
    "row_hash": "d5a109f1ef88419a",
-   "carried": true,
-   "pass": 3
+   "carried": false,
+   "pass": 21
   },
   {
    "row": "C913",
@@ -2152,19 +2167,20 @@
    "row": "C913",
    "screen": "zoe_door_sam.after",
    "verdict": "PASS",
-   "line": "\"Sam\" (trigger, 12:00-18:00)",
+   "line": "trigger 12:00-18:00",
    "why": "a one-time meeting that happens to her; hidden when shut",
    "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "277e955babba12ec",
-    "facts": "019dd13d360af645",
-    "facts2": "b55c9dad2526575d",
-    "all": "5d20a44c4b8b6796"
+    "text": "ab9509986b57a493",
+    "traits": "fa1a0a429fa0ea30",
+    "facts": "477d3e1b39f513c6",
+    "facts2": "0a3f5a3f55dd11b9",
+    "all": "0d3b0553b6350eb6"
    },
    "row_hash": "c750f9b6ab4ace14",
-   "carried": true,
-   "pass": 3
+   "carried": false,
+   "pass": 21
   },
   {
    "row": "C914",
@@ -2183,19 +2199,20 @@
    "row": "C914",
    "screen": "zoe_door_sam.after",
    "verdict": "PASS",
-   "line": "\"Sam\" (trigger)",
-   "why": "no hours printed",
+   "line": "trigger",
+   "why": "no hours printed; only the daily flag greys Talk",
    "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "277e955babba12ec",
-    "facts": "019dd13d360af645",
-    "facts2": "b55c9dad2526575d",
-    "all": "5d20a44c4b8b6796"
+    "text": "ab9509986b57a493",
+    "traits": "fa1a0a429fa0ea30",
+    "facts": "477d3e1b39f513c6",
+    "facts2": "0a3f5a3f55dd11b9",
+    "all": "0d3b0553b6350eb6"
    },
    "row_hash": "bd07273d5822f34f",
-   "carried": true,
-   "pass": 3
+   "carried": false,
+   "pass": 21
   },
   {
    "row": "C916",
@@ -2214,19 +2231,20 @@
    "row": "C916",
    "screen": "zoe_door_sam.after",
    "verdict": "PASS",
-   "line": "\"Sam\" (trigger)",
-   "why": "an event stays hidden when shut",
+   "line": "Six o'clock, sunshine. Unless you get bored of waiting.",
+   "why": "an event that happens to her stays hidden when shut; nothing she chooses is hidden by the clock alone",
    "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "277e955babba12ec",
-    "facts": "019dd13d360af645",
-    "facts2": "b55c9dad2526575d",
-    "all": "5d20a44c4b8b6796"
+    "text": "ab9509986b57a493",
+    "traits": "fa1a0a429fa0ea30",
+    "facts": "477d3e1b39f513c6",
+    "facts2": "0a3f5a3f55dd11b9",
+    "all": "0d3b0553b6350eb6"
    },
    "row_hash": "7b2bb0dfdbcfe946",
-   "carried": true,
-   "pass": 3
+   "carried": false,
+   "pass": 21
   },
   {
    "row": "C920",
@@ -2245,19 +2263,20 @@
    "row": "C920",
    "screen": "zoe_door_sam.after",
    "verdict": "PASS",
-   "line": "\"Done\" (5 min) to campus_quad or the apartment",
-   "why": "the 5 minutes are the scene on both branches; the quad is a free hop from Zoe's",
+   "line": "Done (5 min) to campus_quad or near_zoe_apartment",
+   "why": "the 5 minutes are the scene's spend; the quad and the flat are both in Town (near_campus), a hop",
    "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "277e955babba12ec",
-    "facts": "019dd13d360af645",
-    "facts2": "b55c9dad2526575d",
-    "all": "5d20a44c4b8b6796"
+    "text": "ab9509986b57a493",
+    "traits": "fa1a0a429fa0ea30",
+    "facts": "477d3e1b39f513c6",
+    "facts2": "0a3f5a3f55dd11b9",
+    "all": "0d3b0553b6350eb6"
    },
    "row_hash": "513927dd127fca04",
-   "carried": true,
-   "pass": 3
+   "carried": false,
+   "pass": 21
   },
   {
    "row": "C924",
@@ -2275,20 +2294,21 @@
   {
    "row": "C924",
    "screen": "zoe_door_sam.after",
-   "verdict": "PASS",
-   "line": "\"Done\"",
-   "why": "travel cost stays on the moves between areas, not here",
+   "verdict": "N/A",
+   "line": "",
+   "why": "no travel on this screen",
    "cause": null,
    "note": true,
    "screen_hash": {
-    "text": "277e955babba12ec",
-    "facts": "019dd13d360af645",
-    "facts2": "b55c9dad2526575d",
-    "all": "5d20a44c4b8b6796"
+    "text": "ab9509986b57a493",
+    "traits": "fa1a0a429fa0ea30",
+    "facts": "477d3e1b39f513c6",
+    "facts2": "0a3f5a3f55dd11b9",
+    "all": "0d3b0553b6350eb6"
    },
    "row_hash": "791cd173e23fb130",
-   "carried": true,
-   "pass": 3
+   "carried": false,
+   "pass": 21
   },
   {
    "row": "C926",
@@ -2307,19 +2327,20 @@
    "row": "C926",
    "screen": "zoe_door_sam.after",
    "verdict": "PASS",
-   "line": "\"Done\"",
-   "why": "the clock moves only by the choice's minutes",
+   "line": "time_progression_minutes = 5",
+   "why": "the clock moves only by minutes",
    "cause": null,
    "note": true,
    "screen_hash": {
-    "text": "277e955babba12ec",
-    "facts": "019dd13d360af645",
-    "facts2": "b55c9dad2526575d",
-    "all": "5d20a44c4b8b6796"
+    "text": "ab9509986b57a493",
+    "traits": "fa1a0a429fa0ea30",
+    "facts": "477d3e1b39f513c6",
+    "facts2": "0a3f5a3f55dd11b9",
+    "all": "0d3b0553b6350eb6"
    },
    "row_hash": "177d1e1776fac74b",
-   "carried": true,
-   "pass": 3
+   "carried": false,
+   "pass": 21
   },
   {
    "row": "C927",
@@ -2338,20 +2359,20 @@
    "row": "C927",
    "screen": "zoe_door_sam.after",
    "verdict": "PASS",
-   "line": "time_progression_minutes = 5",
-   "why": "both Done exits state their minutes",
+   "line": "Done 5 \u00b7 5",
+   "why": "every exit states its minutes",
    "cause": null,
    "note": true,
    "screen_hash": {
     "text": "ab9509986b57a493",
     "traits": "fa1a0a429fa0ea30",
-    "facts": "78efee1012776089",
-    "facts2": "b55c9dad2526575d",
-    "all": "0369fea8108d8119"
+    "facts": "477d3e1b39f513c6",
+    "facts2": "0a3f5a3f55dd11b9",
+    "all": "0d3b0553b6350eb6"
    },
    "row_hash": "4e86d143688ba8e5",
    "carried": false,
-   "pass": 20
+   "pass": 21
   },
   {
    "row": "C928",
@@ -2371,18 +2392,19 @@
    "screen": "zoe_door_sam.after",
    "verdict": "PASS",
    "line": "Six o'clock, sunshine. Unless you get bored of waiting.",
-   "why": "the current clock isn't printed; 'six' is Zoe's return, true every day",
+   "why": "the current clock isn't printed in prose",
    "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "277e955babba12ec",
-    "facts": "019dd13d360af645",
-    "facts2": "b55c9dad2526575d",
-    "all": "5d20a44c4b8b6796"
+    "text": "ab9509986b57a493",
+    "traits": "fa1a0a429fa0ea30",
+    "facts": "477d3e1b39f513c6",
+    "facts2": "0a3f5a3f55dd11b9",
+    "all": "0d3b0553b6350eb6"
    },
    "row_hash": "2c3ccc6bd9929d7f",
-   "carried": true,
-   "pass": 3
+   "carried": false,
+   "pass": 21
   },
   {
    "row": "C929",
@@ -2401,19 +2423,20 @@
    "row": "C929",
    "screen": "zoe_door_sam.after",
    "verdict": "PASS",
-   "line": "\"Done\"",
-   "why": "no activity time on the label",
+   "line": "Done",
+   "why": "no activity time on a label",
    "cause": null,
    "note": true,
    "screen_hash": {
-    "text": "277e955babba12ec",
-    "facts": "019dd13d360af645",
-    "facts2": "b55c9dad2526575d",
-    "all": "5d20a44c4b8b6796"
+    "text": "ab9509986b57a493",
+    "traits": "fa1a0a429fa0ea30",
+    "facts": "477d3e1b39f513c6",
+    "facts2": "0a3f5a3f55dd11b9",
+    "all": "0d3b0553b6350eb6"
    },
    "row_hash": "18b0ecdf6d7fc901",
-   "carried": true,
-   "pass": 3
+   "carried": false,
+   "pass": 21
   },
   {
    "row": "C930",
@@ -2432,19 +2455,20 @@
    "row": "C930",
    "screen": "zoe_door_sam.after",
    "verdict": "N/A",
-   "line": "\"Done\"",
-   "why": "not work",
+   "line": "",
+   "why": "not windowed work",
    "cause": null,
    "note": true,
    "screen_hash": {
-    "text": "277e955babba12ec",
-    "facts": "019dd13d360af645",
-    "facts2": "b55c9dad2526575d",
-    "all": "5d20a44c4b8b6796"
+    "text": "ab9509986b57a493",
+    "traits": "fa1a0a429fa0ea30",
+    "facts": "477d3e1b39f513c6",
+    "facts2": "0a3f5a3f55dd11b9",
+    "all": "0d3b0553b6350eb6"
    },
    "row_hash": "beb57cd46fe906bf",
-   "carried": true,
-   "pass": 3
+   "carried": false,
+   "pass": 21
   },
   {
    "row": "C931",
@@ -2464,19 +2488,19 @@
    "screen": "zoe_door_sam.after",
    "verdict": "PASS",
    "line": "start_time = \"12:00\", end_time = \"18:00\"",
-   "why": "end exclusive: cannot fire at 18:00 when Zoe is home, so 'back at six' holds",
+   "why": "end exclusive: cannot fire at 18:00, when Zoe comes home to her room",
    "cause": null,
    "note": true,
    "screen_hash": {
     "text": "ab9509986b57a493",
     "traits": "fa1a0a429fa0ea30",
-    "facts": "78efee1012776089",
-    "facts2": "b55c9dad2526575d",
-    "all": "0369fea8108d8119"
+    "facts": "477d3e1b39f513c6",
+    "facts2": "0a3f5a3f55dd11b9",
+    "all": "0d3b0553b6350eb6"
    },
    "row_hash": "1aadffd96e76381c",
    "carried": false,
-   "pass": 20
+   "pass": 21
   },
   {
    "row": "C953",
@@ -2508,38 +2532,39 @@
    "row": "L106",
    "screen": "zoe_door_sam.after",
    "verdict": "PASS",
-   "line": "You leave him in the doorway.",
-   "why": "only Sam is claimed present, and the trigger requires him present (toml:7670)",
+   "line": "Six o'clock, sunshine. Unless you get bored of waiting.",
+   "why": "only the screen's own person is placed there, and their rows put them there: Zoe comes home at 18:00 every day (Zoe's Room 18-19, living room from 19, who_is_where)",
    "cause": null,
    "note": false,
    "screen_hash": {
     "text": "ab9509986b57a493",
     "traits": "fa1a0a429fa0ea30",
-    "facts": "78efee1012776089",
-    "facts2": "b55c9dad2526575d",
-    "all": "0369fea8108d8119"
+    "facts": "477d3e1b39f513c6",
+    "facts2": "0a3f5a3f55dd11b9",
+    "all": "0d3b0553b6350eb6"
    },
    "row_hash": "13a714429d15f3b2",
    "carried": false,
-   "pass": 20
+   "pass": 21
   },
   {
    "row": "L106",
    "screen": "zoe_door_sam.door",
    "verdict": "PASS",
-   "line": "It opens on a guy in his twenties, barefoot",
-   "why": "Only Sam is named present; npc_at_location is_present on the trigger and his rows agree; Zoe absent by condition.",
+   "line": "You're the one Zoe won't shut up about. She's out, sunshine. Back at six.",
+   "why": "only the screen's own person is placed there, and their rows put them there: trigger: Sam present, Zoe absent from near_zoe_apartment, 12:00-18:00 end exclusive",
    "cause": null,
    "note": false,
    "screen_hash": {
     "text": "04292ed529b31c40",
-    "facts": "018bada602bdc7e3",
-    "facts2": "c1df94c1cf2158ee",
-    "all": "0a894faf70b5f334"
+    "traits": "fa1a0a429fa0ea30",
+    "facts": "90eb2da01d074848",
+    "facts2": "d6c41dbecb0893a1",
+    "all": "37301f7fe4e11fbb"
    },
    "row_hash": "13a714429d15f3b2",
-   "carried": true,
-   "pass": 3
+   "carried": false,
+   "pass": 21
   },
   {
    "row": "L119",
@@ -2617,13 +2642,13 @@
    "screen_hash": {
     "text": "ab9509986b57a493",
     "traits": "fa1a0a429fa0ea30",
-    "facts": "78efee1012776089",
-    "facts2": "b55c9dad2526575d",
-    "all": "0369fea8108d8119"
+    "facts": "477d3e1b39f513c6",
+    "facts2": "0a3f5a3f55dd11b9",
+    "all": "0d3b0553b6350eb6"
    },
    "row_hash": "e64ce2672d85d2d8",
    "carried": false,
-   "pass": 20
+   "pass": 21
   },
   {
    "row": "L168",
@@ -2680,8 +2705,8 @@
  ],
  "causes": [],
  "pending": [],
- "asked": 9,
- "answered": 9,
+ "asked": 33,
+ "answered": 33,
  "pass_items": [],
  "unowed": []
 }

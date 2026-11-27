@@ -1,176 +1,169 @@
 {
  "piece": "P75",
- "pass": 5,
+ "pass": 6,
  "screens": {
   "talk_brooke_party.hub": {
-   "text": "f63d7fd0b22102fd",
+   "text": "e4c05cc54650468a",
    "traits": "ebc4051ecd3afac5",
-   "facts": "826914bbcf12120d",
-   "facts2": "9adc380166fb4552",
-   "all": "7a93117de3916bcd"
+   "facts": "9211f3fef98b48c8",
+   "facts2": "706b1ec7c4943276",
+   "all": "21ddd58f2f82242d"
   },
   "talk_brooke_party.talk": {
-   "text": "91ad49e85bb02b62",
+   "text": "dea5daa7bcb88b7a",
    "traits": "4b5299c7025e6881",
-   "facts": "d4eeaf01fa426fa2",
-   "facts2": "8257126c3576af4d",
-   "all": "df89372090fdb221"
+   "facts": "e1460e3c055c4a56",
+   "facts2": "d56e308d45dd6418",
+   "all": "970eade4458bfdbf"
   },
   "talk_kayla_party.hub": {
-   "text": "989ff0dfd5b9e748",
+   "text": "5a1221c0e90f780c",
    "traits": "d79bccff03ff73e2",
-   "facts": "d9bd044fc487e3e2",
-   "facts2": "d3a6415c2dd7208a",
-   "all": "5363d896a39e23b5"
+   "facts": "464f8631b50219da",
+   "facts2": "dc2994085a7238ab",
+   "all": "edabf330ff65a5b6"
   },
   "talk_kayla_party.talk": {
-   "text": "3c98a93a75030361",
+   "text": "7c537332ceea2866",
    "traits": "d79bccff03ff73e2",
-   "facts": "1c7a5ba6fc98b383",
-   "facts2": "6001df9778802040",
-   "all": "874578d5840dd65d"
+   "facts": "c232995192d9ddfd",
+   "facts2": "c47540a0cbd18098",
+   "all": "b1d6484cf31e4e40"
   },
   "talk_tess_party.hub": {
-   "text": "aeb9e5f25534c715",
+   "text": "6bd4ff8ef0169027",
    "traits": "0b50d642c406ca77",
-   "facts": "6a0015e0fad0b575",
-   "facts2": "0176c4f82ffee42f",
-   "all": "124e730061d01a18"
+   "facts": "642e048f7346b8d5",
+   "facts2": "3c1f586f9618a811",
+   "all": "042c95a2cb6269fb"
   },
   "talk_tess_party.talk": {
-   "text": "76c6534a3fa214e3",
+   "text": "d024d58cecc43940",
    "traits": "85bb3b602dd90b82",
-   "facts": "28f6262b4dddc21b",
-   "facts2": "15cb48e9601d908d",
-   "all": "0ada841f91cf31cb"
+   "facts": "20bca8e543752750",
+   "facts2": "255665aa2f203191",
+   "all": "efa078348f680792"
   },
   "party_mingle.mingle": {
-   "text": "60844f7b2302a991",
+   "text": "9a9985d190c041e9",
    "traits": "6b1e34b018661933",
-   "facts": "b153518a6fd2602e",
-   "facts2": "adf208a6ad231fd4",
-   "all": "e173d3ccddb4c581"
+   "facts": "6116301392be4053",
+   "facts2": "2242d176693385da",
+   "all": "6a54149924d4ad91"
   },
   "party_drink.drink": {
-   "text": "cec2150ad9555435",
+   "text": "79fc332bab40fca5",
    "traits": "44136fa355b3678a",
-   "facts": "e3a1250e29743e29",
-   "facts2": "e3a1250e29743e29",
-   "all": "2808c691c0dbbeb2"
+   "facts": "3cf1551ba33fdf73",
+   "facts2": "3cf1551ba33fdf73",
+   "all": "e198c5a4b6a73253"
   },
   "party_dance.dance": {
-   "text": "64c13cf7bfca581a",
+   "text": "66a0b954cfd9f92e",
    "traits": "6b1e34b018661933",
-   "facts": "b153518a6fd2602e",
-   "facts2": "adf208a6ad231fd4",
-   "all": "d1d502ce58e442d2"
-  },
-  "party_go_home.leave": {
-   "text": "b692caf353c36f8b",
-   "traits": "44136fa355b3678a",
-   "facts": "e3a1250e29743e29",
-   "facts2": "e3a1250e29743e29",
-   "all": "3131ee8197e2f7b1"
+   "facts": "6116301392be4053",
+   "facts2": "2242d176693385da",
+   "all": "c623174c8e8121aa"
   },
   "party_drink_guy.moment": {
-   "text": "a140d97ebfe95ab0",
+   "text": "67dd963aca350210",
    "traits": "44136fa355b3678a",
-   "facts": "e3a1250e29743e29",
-   "facts2": "e3a1250e29743e29",
-   "all": "cdbf313bfd9554e4"
+   "facts": "3cf1551ba33fdf73",
+   "facts2": "3cf1551ba33fdf73",
+   "all": "85c9a66e377061b7"
   },
   "party_drink_guy.drink": {
-   "text": "f6c5ba7bc69c1c4a",
+   "text": "5b410ffea6326a56",
    "traits": "44136fa355b3678a",
-   "facts": "e3a1250e29743e29",
-   "facts2": "e3a1250e29743e29",
-   "all": "537f0888a48e96c8"
+   "facts": "3cf1551ba33fdf73",
+   "facts2": "3cf1551ba33fdf73",
+   "all": "5d51bea7a70d11e0"
   },
   "party_drink_guy.back": {
-   "text": "00e778a0c785cc27",
+   "text": "3ec8be437a8947da",
    "traits": "44136fa355b3678a",
-   "facts": "e3a1250e29743e29",
-   "facts2": "e3a1250e29743e29",
-   "all": "2d710f2a7ec11c14"
+   "facts": "3cf1551ba33fdf73",
+   "facts2": "3cf1551ba33fdf73",
+   "all": "ad5c1e69b87bd5b7"
   },
   "party_brooke_look.moment": {
-   "text": "e0d2a248ee8b31cf",
+   "text": "6da69ea20cb08ee5",
    "traits": "06d2567e62494596",
-   "facts": "16b7bb8735b64114",
-   "facts2": "7bb3a9358ec4c0ba",
-   "all": "4c95be4e981c0bc0"
+   "facts": "4ce0fba3044615af",
+   "facts2": "5e80911123c174a9",
+   "all": "6a5b117a2881c822"
   },
   "party_brooke_look.ignore": {
-   "text": "ebb665a97063e6ad",
+   "text": "cec4c1cac0e81b48",
    "traits": "ebc4051ecd3afac5",
-   "facts": "ce08ac40cf96d3d1",
-   "facts2": "5c8d7a886c36b1a4",
-   "all": "d456c577dad09695"
+   "facts": "1676cd55e1a9d96d",
+   "facts2": "58015b8566c69a77",
+   "all": "e1455732593a2b96"
   },
   "party_brooke_look.back": {
-   "text": "35e83731f412cc66",
+   "text": "4c446143588a608b",
    "traits": "ebc4051ecd3afac5",
-   "facts": "ce08ac40cf96d3d1",
-   "facts2": "5c8d7a886c36b1a4",
-   "all": "ea0a82bb079e74f9"
+   "facts": "1676cd55e1a9d96d",
+   "facts2": "58015b8566c69a77",
+   "all": "5e455fe9f1205a7c"
   },
   "party_zoe_sam.moment": {
-   "text": "6c112b9e191c91d2",
+   "text": "039431faa1d2d7e6",
    "traits": "fa1a0a429fa0ea30",
-   "facts": "59019b9074ced338",
-   "facts2": "19cb1dcf78df28cf",
-   "all": "c445c089b4935f99"
+   "facts": "7ab7fbfd141c3724",
+   "facts2": "291e47f5fa3b7489",
+   "all": "96d16de87321606f"
   },
   "party_zoe_sam.laugh": {
    "text": "fbf0110ef615e61a",
    "traits": "6b1e34b018661933",
-   "facts": "b153518a6fd2602e",
-   "facts2": "adf208a6ad231fd4",
-   "all": "099c603e2f56bd6a"
+   "facts": "6116301392be4053",
+   "facts2": "2242d176693385da",
+   "all": "b0c7744a92375baa"
   },
   "party_zoe_sam.leave": {
    "text": "d86fa7d57a183275",
    "traits": "6b1e34b018661933",
-   "facts": "b153518a6fd2602e",
-   "facts2": "adf208a6ad231fd4",
-   "all": "60fc5a67de604c43"
+   "facts": "6116301392be4053",
+   "facts2": "2242d176693385da",
+   "all": "876750a2266f9604"
   },
   "party_speaker_guy.moment": {
-   "text": "c034ab6b47164236",
+   "text": "61955af8802ee29f",
    "traits": "44136fa355b3678a",
-   "facts": "4e36a3f9b54a7a54",
-   "facts2": "4e36a3f9b54a7a54",
-   "all": "063195eb12689e7c"
+   "facts": "7b8e6bf6d53bbfe4",
+   "facts2": "7b8e6bf6d53bbfe4",
+   "all": "347de1eb61eeb814"
   },
   "party_speaker_guy.away": {
    "text": "749c9d064d356277",
    "traits": "44136fa355b3678a",
-   "facts": "4e36a3f9b54a7a54",
-   "facts2": "4e36a3f9b54a7a54",
-   "all": "b82166cb38a039be"
+   "facts": "7b8e6bf6d53bbfe4",
+   "facts2": "7b8e6bf6d53bbfe4",
+   "all": "ae4dc515f7c37168"
   },
   "party_speaker_guy.look": {
    "text": "b33f68bb47ba059d",
    "traits": "44136fa355b3678a",
-   "facts": "4e36a3f9b54a7a54",
-   "facts2": "4e36a3f9b54a7a54",
-   "all": "aa9abb4efb5f2172"
+   "facts": "7b8e6bf6d53bbfe4",
+   "facts2": "7b8e6bf6d53bbfe4",
+   "all": "bbda197c9bef4314"
   },
   "party_end.end": {
    "text": "078da18e18b49909",
    "traits": "6b1e34b018661933",
-   "facts": "fae695d1bb14676f",
-   "facts2": "54b86e12cc442c50",
-   "all": "d6d09782897896ca"
+   "facts": "54470cc139c09bcf",
+   "facts2": "47b195b05ada2e26",
+   "all": "8416f1077e8c2445"
   },
   "party_end.stay": {
    "text": "5016eaf551f457f5",
    "traits": "6b1e34b018661933",
-   "facts": "fae695d1bb14676f",
-   "facts2": "54b86e12cc442c50",
-   "all": "48e83f9d19d73e1e"
+   "facts": "54470cc139c09bcf",
+   "facts2": "47b195b05ada2e26",
+   "all": "3ad45fffe33d465f"
   },
-  "*": "4ff56c1cc929d171"
+  "*": "c1b1709099d916aa"
  },
  "rows": {
   "B1": "5276068df1ca6fa9",
@@ -374,212 +367,440 @@
   },
   {
    "row": "B10",
-   "screen": "party_dance.dance",
+   "screen": "party_brooke_look.back",
    "verdict": "PASS",
-   "line": "You squeeze into the middle of the room where the bodies are tightest",
-   "why": "Saturday 21:00-00:00, once a week; picture claims only the dance",
+   "line": "Somebody near the fridge laughs. Brooke doesn't.",
+   "why": "true at the first and last minute and on a second visit: kitchen (fridge in the kitchen's line); Brooke's row puts her in near_zoe_kitchen Sat 21-24; Done stays in the kitchen",
    "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "64c13cf7bfca581a",
-    "traits": "6b1e34b018661933",
-    "facts": "b153518a6fd2602e",
-    "facts2": "adf208a6ad231fd4",
-    "all": "d1d502ce58e442d2"
+    "text": "4c446143588a608b",
+    "traits": "ebc4051ecd3afac5",
+    "facts": "1676cd55e1a9d96d",
+    "facts2": "58015b8566c69a77",
+    "all": "5e455fe9f1205a7c"
    },
    "row_hash": "c1c0e2ac2588a579",
-   "carried": true,
-   "pass": 4
+   "carried": false,
+   "pass": 6
+  },
+  {
+   "row": "B10",
+   "screen": "party_brooke_look.ignore",
+   "verdict": "PASS",
+   "line": "You turn your back on the kitchen. You can feel her watching you go.",
+   "why": "true at the first and last minute and on a second visit: Done now goes to the living room (near_zoe_apartment), so walking away from the kitchen is true; Brooke named only behind met_brooke",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "cec4c1cac0e81b48",
+    "traits": "ebc4051ecd3afac5",
+    "facts": "1676cd55e1a9d96d",
+    "facts2": "58015b8566c69a77",
+    "all": "e1455732593a2b96"
+   },
+   "row_hash": "c1c0e2ac2588a579",
+   "carried": false,
+   "pass": 6
+  },
+  {
+   "row": "B10",
+   "screen": "party_brooke_look.moment",
+   "verdict": "PASS",
+   "line": "The blonde girl by the counter looks you up and down, slowly, so her two friends can watch her do it.",
+   "why": "true at the first and last minute and on a second visit: trigger npc_at_location npc_brooke near_zoe_kitchen; Kayla and Tess share her kitchen rows Sat 21-24 and are named only behind met_brooke (mirror_meet_brooke names them)",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "6da69ea20cb08ee5",
+    "traits": "06d2567e62494596",
+    "facts": "4ce0fba3044615af",
+    "facts2": "5e80911123c174a9",
+    "all": "6a5b117a2881c822"
+   },
+   "row_hash": "c1c0e2ac2588a579",
+   "carried": false,
+   "pass": 6
+  },
+  {
+   "row": "B10",
+   "screen": "party_dance.dance",
+   "verdict": "PASS",
+   "line": "Babe! Don't stop, the next one's my favourite!",
+   "why": "true at the first and last minute and on a second visit: living room; Zoe's row puts her in near_zoe_apartment Sat 19-24; no one else named",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "66a0b954cfd9f92e",
+    "traits": "6b1e34b018661933",
+    "facts": "6116301392be4053",
+    "facts2": "2242d176693385da",
+    "all": "c623174c8e8121aa"
+   },
+   "row_hash": "c1c0e2ac2588a579",
+   "carried": false,
+   "pass": 6
+  },
+  {
+   "row": "B10",
+   "screen": "party_drink.drink",
+   "verdict": "PASS",
+   "line": "The kitchen floor is sticky. Someone's made a punch in a mixing bowl, bright red and mostly vodka.",
+   "why": "true at the first and last minute and on a second visit: the scene now sits in near_zoe_kitchen, so 'the kitchen floor' is where she stands; speaker unknown",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "79fc332bab40fca5",
+    "traits": "44136fa355b3678a",
+    "facts": "3cf1551ba33fdf73",
+    "facts2": "3cf1551ba33fdf73",
+    "all": "e198c5a4b6a73253"
+   },
+   "row_hash": "c1c0e2ac2588a579",
+   "carried": false,
+   "pass": 6
+  },
+  {
+   "row": "B10",
+   "screen": "party_drink_guy.back",
+   "verdict": "PASS",
+   "line": "Suit yourself. I'll be by the window.",
+   "why": "true at the first and last minute and on a second visit: unnamed stranger; Done back to the kitchen",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "3ec8be437a8947da",
+    "traits": "44136fa355b3678a",
+    "facts": "3cf1551ba33fdf73",
+    "facts2": "3cf1551ba33fdf73",
+    "all": "ad5c1e69b87bd5b7"
+   },
+   "row_hash": "c1c0e2ac2588a579",
+   "carried": false,
+   "pass": 6
+  },
+  {
+   "row": "B10",
+   "screen": "party_drink_guy.drink",
+   "verdict": "PASS",
+   "line": "Find me later, yeah? I'll be by the window.",
+   "why": "true at the first and last minute and on a second visit: unnamed stranger; Done back to the kitchen",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "5b410ffea6326a56",
+    "traits": "44136fa355b3678a",
+    "facts": "3cf1551ba33fdf73",
+    "facts2": "3cf1551ba33fdf73",
+    "all": "5d51bea7a70d11e0"
+   },
+   "row_hash": "c1c0e2ac2588a579",
+   "carried": false,
+   "pass": 6
   },
   {
    "row": "B10",
    "screen": "party_drink_guy.moment",
    "verdict": "PASS",
-   "line": "A guy you don't know puts a plastic cup in your hand and stays there",
-   "why": "an unnamed guy, Saturday night; true each visit",
+   "line": "A guy you don't know puts a plastic cup in your hand and stays there, close enough that his chest brushes your tits when he leans in to talk.",
+   "why": "true at the first and last minute and on a second visit: unnamed stranger in the kitchen, Sat 21-00; no named person",
    "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "a140d97ebfe95ab0",
+    "text": "67dd963aca350210",
     "traits": "44136fa355b3678a",
-    "facts": "e3a1250e29743e29",
-    "facts2": "e3a1250e29743e29",
-    "all": "cdbf313bfd9554e4"
+    "facts": "3cf1551ba33fdf73",
+    "facts2": "3cf1551ba33fdf73",
+    "all": "85c9a66e377061b7"
    },
    "row_hash": "c1c0e2ac2588a579",
-   "carried": true,
-   "pass": 4
+   "carried": false,
+   "pass": 6
   },
   {
    "row": "B10",
-   "screen": "party_go_home.leave",
+   "screen": "party_end.end",
    "verdict": "PASS",
-   "line": "You squeeze out through the crowd and down the stairs. ... There's a party there every Saturday.",
-   "why": "Sat 21:00-00:00 only, so the crowd is there; 'a party there every Saturday' holds by the Monday unset of partied_this_week (toml:580).",
+   "line": "It's past midnight, and the party's thinning. Half the coats are gone from the sofa, somebody's asleep in the bathtub, and Zoe's turned the music down.",
+   "why": "true at the first and last minute and on a second visit: living room Sun 00-01, requires_npc npc_zoe, Zoe's row Sun 00-01 near_zoe_apartment; the bathroom ('Nobody's in here.') can't be reached between midnight and the end: it is off the living room, whose first render after midnight fires the end (chance 1.0), and both answers send her home",
    "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "b692caf353c36f8b",
-    "traits": "44136fa355b3678a",
-    "facts": "e3a1250e29743e29",
-    "facts2": "e3a1250e29743e29",
-    "all": "3131ee8197e2f7b1"
+    "text": "078da18e18b49909",
+    "traits": "6b1e34b018661933",
+    "facts": "54470cc139c09bcf",
+    "facts2": "47b195b05ada2e26",
+    "all": "8416f1077e8c2445"
    },
    "row_hash": "c1c0e2ac2588a579",
-   "carried": true,
-   "pass": 3
+   "carried": false,
+   "pass": 6
+  },
+  {
+   "row": "B10",
+   "screen": "party_end.stay",
+   "verdict": "PASS",
+   "line": "You pick up cups with Zoe until the speaker's switched off and the flat is quiet.",
+   "why": "true at the first and last minute and on a second visit: Zoe there Sun 00-01; Go home 65 minutes, as the card says",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "5016eaf551f457f5",
+    "traits": "6b1e34b018661933",
+    "facts": "54470cc139c09bcf",
+    "facts2": "47b195b05ada2e26",
+    "all": "3ad45fffe33d465f"
+   },
+   "row_hash": "c1c0e2ac2588a579",
+   "carried": false,
+   "pass": 6
   },
   {
    "row": "B10",
    "screen": "party_mingle.mingle",
    "verdict": "PASS",
-   "line": "\"You're Zoe's friend, right?\"",
-   "why": "unknown speakers only; trigger Sat 21:00-00:00 matches the party crowd",
+   "line": "You're Zoe's friend, right? From the college? She never shuts up about you.",
+   "why": "true at the first and last minute and on a second visit: living room; strangers only, Zoe named but not claimed present; Brooke and friends (now in the kitchen) not named",
    "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "60844f7b2302a991",
+    "text": "9a9985d190c041e9",
     "traits": "6b1e34b018661933",
-    "facts": "b153518a6fd2602e",
-    "facts2": "adf208a6ad231fd4",
-    "all": "e173d3ccddb4c581"
+    "facts": "6116301392be4053",
+    "facts2": "2242d176693385da",
+    "all": "6a54149924d4ad91"
    },
    "row_hash": "c1c0e2ac2588a579",
-   "carried": true,
-   "pass": 5
+   "carried": false,
+   "pass": 6
   },
   {
    "row": "B10",
    "screen": "party_speaker_guy.away",
    "verdict": "PASS",
    "line": "I'm by the speaker all night.",
-   "why": "True while the party runs; once a day.",
+   "why": "true at the first and last minute and on a second visit: unnamed; the speaker is on the living room windowsill, where Dance happens",
    "cause": null,
    "note": false,
    "screen_hash": {
     "text": "749c9d064d356277",
     "traits": "44136fa355b3678a",
-    "facts": "4e36a3f9b54a7a54",
-    "facts2": "4e36a3f9b54a7a54",
-    "all": "b82166cb38a039be"
+    "facts": "7b8e6bf6d53bbfe4",
+    "facts2": "7b8e6bf6d53bbfe4",
+    "all": "ae4dc515f7c37168"
    },
    "row_hash": "c1c0e2ac2588a579",
-   "carried": true,
-   "pass": 2
+   "carried": false,
+   "pass": 6
   },
   {
    "row": "B10",
    "screen": "party_speaker_guy.look",
    "verdict": "PASS",
-   "line": "I'm by the speaker all night.",
-   "why": "No garment named; true every Saturday it fires.",
+   "line": "You look back over your shoulder. He's smiling down at you, and his hands spread on your stomach until the song ends.",
+   "why": "true at the first and last minute and on a second visit: unnamed; no garment of hers named",
    "cause": null,
    "note": false,
    "screen_hash": {
     "text": "b33f68bb47ba059d",
     "traits": "44136fa355b3678a",
-    "facts": "4e36a3f9b54a7a54",
-    "facts2": "4e36a3f9b54a7a54",
-    "all": "aa9abb4efb5f2172"
+    "facts": "7b8e6bf6d53bbfe4",
+    "facts2": "7b8e6bf6d53bbfe4",
+    "all": "bbda197c9bef4314"
    },
    "row_hash": "c1c0e2ac2588a579",
-   "carried": true,
-   "pass": 2
+   "carried": false,
+   "pass": 6
   },
   {
    "row": "B10",
    "screen": "party_speaker_guy.moment",
    "verdict": "PASS",
-   "line": "Halfway through the song he's behind you, his hand on your hip.",
-   "why": "substitution on party_dance after zoe_dare_done; true each visit",
+   "line": "The tall guy by the speaker has been watching you since you came in.",
+   "why": "true at the first and last minute and on a second visit: rides on party_dance in the living room, where the speaker is; unnamed",
    "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "c034ab6b47164236",
+    "text": "61955af8802ee29f",
     "traits": "44136fa355b3678a",
-    "facts": "4e36a3f9b54a7a54",
-    "facts2": "4e36a3f9b54a7a54",
-    "all": "063195eb12689e7c"
+    "facts": "7b8e6bf6d53bbfe4",
+    "facts2": "7b8e6bf6d53bbfe4",
+    "all": "347de1eb61eeb814"
    },
    "row_hash": "c1c0e2ac2588a579",
-   "carried": true,
-   "pass": 4
+   "carried": false,
+   "pass": 6
+  },
+  {
+   "row": "B10",
+   "screen": "party_zoe_sam.laugh",
+   "verdict": "PASS",
+   "line": "You laugh, and Zoe kisses your cheek, sticky with lip gloss.",
+   "why": "true at the first and last minute and on a second visit: Zoe present (requires_npc, living room Sat 19-24)",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "fbf0110ef615e61a",
+    "traits": "6b1e34b018661933",
+    "facts": "6116301392be4053",
+    "facts2": "2242d176693385da",
+    "all": "b0c7744a92375baa"
+   },
+   "row_hash": "c1c0e2ac2588a579",
+   "carried": false,
+   "pass": 6
+  },
+  {
+   "row": "B10",
+   "screen": "party_zoe_sam.leave",
+   "verdict": "PASS",
+   "line": "You slip back into the crowd.",
+   "why": "true at the first and last minute and on a second visit: Zoe present; Done to the living room",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "d86fa7d57a183275",
+    "traits": "6b1e34b018661933",
+    "facts": "6116301392be4053",
+    "facts2": "2242d176693385da",
+    "all": "876750a2266f9604"
+   },
+   "row_hash": "c1c0e2ac2588a579",
+   "carried": false,
+   "pass": 6
   },
   {
    "row": "B10",
    "screen": "party_zoe_sam.moment",
    "verdict": "PASS",
-   "line": "Zoe's up on the sofa arm, arms over her head, dancing like the party's hers.",
-   "why": "requires_npc npc_zoe; Sam named only behind met_sam",
+   "line": "Sam's on the sofa under the coats, and he just grins.",
+   "why": "true at the first and last minute and on a second visit: living room; requires_npc npc_zoe; Sam's row near_zoe_apartment 12-02 every day; Sam named only behind met_sam",
    "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "6c112b9e191c91d2",
+    "text": "039431faa1d2d7e6",
     "traits": "fa1a0a429fa0ea30",
-    "facts": "59019b9074ced338",
-    "facts2": "19cb1dcf78df28cf",
-    "all": "c445c089b4935f99"
+    "facts": "7ab7fbfd141c3724",
+    "facts2": "291e47f5fa3b7489",
+    "all": "96d16de87321606f"
    },
    "row_hash": "c1c0e2ac2588a579",
-   "carried": true,
-   "pass": 4
+   "carried": false,
+   "pass": 6
   },
   {
    "row": "B10",
    "screen": "talk_brooke_party.hub",
    "verdict": "PASS",
    "line": "Brooke's by the kitchen counter with a cup she isn't drinking from, watching the room like she owns it.",
-   "why": "Gated met_brooke + Sat 21:00-00:00; who_is_where puts npc_brooke at near_zoe_apartment Sat 21-24; requires_npc; true first/last minute and on re-entry.",
+   "why": "true at the first and last minute and on a second visit: trigger now near_zoe_kitchen, requires_npc npc_brooke, her row Sat 21-24 near_zoe_kitchen",
    "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "f63d7fd0b22102fd",
+    "text": "e4c05cc54650468a",
     "traits": "ebc4051ecd3afac5",
-    "facts": "826914bbcf12120d",
-    "facts2": "9adc380166fb4552",
-    "all": "7a93117de3916bcd"
+    "facts": "9211f3fef98b48c8",
+    "facts2": "706b1ec7c4943276",
+    "all": "21ddd58f2f82242d"
    },
    "row_hash": "c1c0e2ac2588a579",
-   "carried": true,
-   "pass": 4
+   "carried": false,
+   "pass": 6
+  },
+  {
+   "row": "B10",
+   "screen": "talk_brooke_party.talk",
+   "verdict": "PASS",
+   "line": "Enjoy it. Monday the mirror's mine again.",
+   "why": "true at the first and last minute and on a second visit: Brooke at campus_bathroom Mon 08-09 (who_is_where); Saturday trigger makes 'Monday' true; Done 10 minutes to the kitchen",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "dea5daa7bcb88b7a",
+    "traits": "4b5299c7025e6881",
+    "facts": "e1460e3c055c4a56",
+    "facts2": "d56e308d45dd6418",
+    "all": "970eade4458bfdbf"
+   },
+   "row_hash": "c1c0e2ac2588a579",
+   "carried": false,
+   "pass": 6
   },
   {
    "row": "B10",
    "screen": "talk_kayla_party.hub",
    "verdict": "PASS",
    "line": "Kayla's at Brooke's elbow, laughing a beat after Brooke does.",
-   "why": "Kayla and Brooke share Sat 21-24 at near_zoe_apartment (who_is_where), so 'at Brooke's elbow' is true whenever Kayla's face shows.",
+   "why": "true at the first and last minute and on a second visit: Kayla and Brooke both near_zoe_kitchen Sat 21-24; requires_npc npc_kayla",
    "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "989ff0dfd5b9e748",
+    "text": "5a1221c0e90f780c",
     "traits": "d79bccff03ff73e2",
-    "facts": "d9bd044fc487e3e2",
-    "facts2": "d3a6415c2dd7208a",
-    "all": "5363d896a39e23b5"
+    "facts": "464f8631b50219da",
+    "facts2": "dc2994085a7238ab",
+    "all": "edabf330ff65a5b6"
    },
    "row_hash": "c1c0e2ac2588a579",
-   "carried": true,
-   "pass": 3
+   "carried": false,
+   "pass": 6
+  },
+  {
+   "row": "B10",
+   "screen": "talk_kayla_party.talk",
+   "verdict": "PASS",
+   "line": "The punch is mostly vodka. Just so you know.",
+   "why": "true at the first and last minute and on a second visit: Kayla in the kitchen with the punch (party_drink is in the kitchen now); Done 10 minutes",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "7c537332ceea2866",
+    "traits": "d79bccff03ff73e2",
+    "facts": "c232995192d9ddfd",
+    "facts2": "c47540a0cbd18098",
+    "all": "b1d6484cf31e4e40"
+   },
+   "row_hash": "c1c0e2ac2588a579",
+   "carried": false,
+   "pass": 6
   },
   {
    "row": "B10",
    "screen": "talk_tess_party.hub",
    "verdict": "PASS",
    "line": "Tess is at the end of the counter, turning a plastic cup round and round in her hands.",
-   "why": "requires_npc npc_tess; Tess at Zoe's Sat 21-24; texture only.",
+   "why": "true at the first and last minute and on a second visit: Tess near_zoe_kitchen Sat 21-24; requires_npc npc_tess",
    "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "aeb9e5f25534c715",
+    "text": "6bd4ff8ef0169027",
     "traits": "0b50d642c406ca77",
-    "facts": "6a0015e0fad0b575",
-    "facts2": "0176c4f82ffee42f",
-    "all": "124e730061d01a18"
+    "facts": "642e048f7346b8d5",
+    "facts2": "3c1f586f9618a811",
+    "all": "042c95a2cb6269fb"
    },
    "row_hash": "c1c0e2ac2588a579",
-   "carried": true,
-   "pass": 3
+   "carried": false,
+   "pass": 6
+  },
+  {
+   "row": "B10",
+   "screen": "talk_tess_party.talk",
+   "verdict": "PASS",
+   "line": "Kayla made me come.",
+   "why": "true at the first and last minute and on a second visit: Kayla is at the party (kitchen, Sat 21-24); Done 10 minutes",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "d024d58cecc43940",
+    "traits": "85bb3b602dd90b82",
+    "facts": "20bca8e543752750",
+    "facts2": "255665aa2f203191",
+    "all": "efa078348f680792"
+   },
+   "row_hash": "c1c0e2ac2588a579",
+   "carried": false,
+   "pass": 6
   },
   {
    "row": "B11",
@@ -865,212 +1086,440 @@
   },
   {
    "row": "B8",
-   "screen": "party_dance.dance",
+   "screen": "party_brooke_look.back",
    "verdict": "PASS",
-   "line": "You squeeze into the middle of the room where the bodies are tightest",
-   "why": "no garment named in prose or picture",
+   "line": "Somebody near the fridge laughs. Brooke doesn't.",
+   "why": "no number disagrees with PLAN.md:488-499 or the card; no garment of hers named",
    "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "64c13cf7bfca581a",
-    "traits": "6b1e34b018661933",
-    "facts": "b153518a6fd2602e",
-    "facts2": "adf208a6ad231fd4",
-    "all": "d1d502ce58e442d2"
+    "text": "4c446143588a608b",
+    "traits": "ebc4051ecd3afac5",
+    "facts": "1676cd55e1a9d96d",
+    "facts2": "58015b8566c69a77",
+    "all": "5e455fe9f1205a7c"
    },
    "row_hash": "80d415cf08e0ebfe",
-   "carried": true,
-   "pass": 4
+   "carried": false,
+   "pass": 6
+  },
+  {
+   "row": "B8",
+   "screen": "party_brooke_look.ignore",
+   "verdict": "PASS",
+   "line": "You turn your back on the kitchen. You can feel her watching you go.",
+   "why": "no number disagrees with PLAN.md:488-499 or the card; no garment of hers named",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "cec4c1cac0e81b48",
+    "traits": "ebc4051ecd3afac5",
+    "facts": "1676cd55e1a9d96d",
+    "facts2": "58015b8566c69a77",
+    "all": "e1455732593a2b96"
+   },
+   "row_hash": "80d415cf08e0ebfe",
+   "carried": false,
+   "pass": 6
+  },
+  {
+   "row": "B8",
+   "screen": "party_brooke_look.moment",
+   "verdict": "PASS",
+   "line": "The blonde girl by the counter looks you up and down, slowly, so her two friends can watch her do it.",
+   "why": "the only garment of hers ('A dress') sits behind clothing_slot dress equipped and worn_exposure lt 1; the chain covers every case",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "6da69ea20cb08ee5",
+    "traits": "06d2567e62494596",
+    "facts": "4ce0fba3044615af",
+    "facts2": "5e80911123c174a9",
+    "all": "6a5b117a2881c822"
+   },
+   "row_hash": "80d415cf08e0ebfe",
+   "carried": false,
+   "pass": 6
+  },
+  {
+   "row": "B8",
+   "screen": "party_dance.dance",
+   "verdict": "PASS",
+   "line": "Babe! Don't stop, the next one's my favourite!",
+   "why": "20 minutes and 10 energy match the card; picture 'woman of 18'; no garment",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "66a0b954cfd9f92e",
+    "traits": "6b1e34b018661933",
+    "facts": "6116301392be4053",
+    "facts2": "2242d176693385da",
+    "all": "c623174c8e8121aa"
+   },
+   "row_hash": "80d415cf08e0ebfe",
+   "carried": false,
+   "pass": 6
+  },
+  {
+   "row": "B8",
+   "screen": "party_drink.drink",
+   "verdict": "PASS",
+   "line": "The kitchen floor is sticky. Someone's made a punch in a mixing bowl, bright red and mostly vodka.",
+   "why": "10 minutes matches the card; no garment",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "79fc332bab40fca5",
+    "traits": "44136fa355b3678a",
+    "facts": "3cf1551ba33fdf73",
+    "facts2": "3cf1551ba33fdf73",
+    "all": "e198c5a4b6a73253"
+   },
+   "row_hash": "80d415cf08e0ebfe",
+   "carried": false,
+   "pass": 6
+  },
+  {
+   "row": "B8",
+   "screen": "party_drink_guy.back",
+   "verdict": "PASS",
+   "line": "Suit yourself. I'll be by the window.",
+   "why": "no number disagrees with PLAN.md:488-499 or the card; no garment of hers named",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "3ec8be437a8947da",
+    "traits": "44136fa355b3678a",
+    "facts": "3cf1551ba33fdf73",
+    "facts2": "3cf1551ba33fdf73",
+    "all": "ad5c1e69b87bd5b7"
+   },
+   "row_hash": "80d415cf08e0ebfe",
+   "carried": false,
+   "pass": 6
+  },
+  {
+   "row": "B8",
+   "screen": "party_drink_guy.drink",
+   "verdict": "PASS",
+   "line": "Find me later, yeah? I'll be by the window.",
+   "why": "no number disagrees with PLAN.md:488-499 or the card; no garment of hers named",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "5b410ffea6326a56",
+    "traits": "44136fa355b3678a",
+    "facts": "3cf1551ba33fdf73",
+    "facts2": "3cf1551ba33fdf73",
+    "all": "5d51bea7a70d11e0"
+   },
+   "row_hash": "80d415cf08e0ebfe",
+   "carried": false,
+   "pass": 6
   },
   {
    "row": "B8",
    "screen": "party_drink_guy.moment",
    "verdict": "PASS",
-   "line": "A guy you don't know puts a plastic cup in your hand and stays there",
-   "why": "no garment named",
+   "line": "A guy you don't know puts a plastic cup in your hand and stays there, close enough that his chest brushes your tits when he leans in to talk.",
+   "why": "no number disagrees with PLAN.md:488-499 or the card; no garment of hers named",
    "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "a140d97ebfe95ab0",
+    "text": "67dd963aca350210",
     "traits": "44136fa355b3678a",
-    "facts": "e3a1250e29743e29",
-    "facts2": "e3a1250e29743e29",
-    "all": "cdbf313bfd9554e4"
+    "facts": "3cf1551ba33fdf73",
+    "facts2": "3cf1551ba33fdf73",
+    "all": "85c9a66e377061b7"
    },
    "row_hash": "80d415cf08e0ebfe",
-   "carried": true,
-   "pass": 4
+   "carried": false,
+   "pass": 6
   },
   {
    "row": "B8",
-   "screen": "party_go_home.leave",
+   "screen": "party_end.end",
    "verdict": "PASS",
-   "line": "You squeeze out through the crowd and down the stairs. ... There's a party there every Saturday.",
-   "why": "45 minutes matches the card's walk; no garment named.",
+   "line": "It's past midnight, and the party's thinning. Half the coats are gone from the sofa, somebody's asleep in the bathtub, and Zoe's turned the music down.",
+   "why": "45 minutes home matches the card and PLAN.md:488 (the end until 1am); no garment of hers",
    "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "b692caf353c36f8b",
-    "traits": "44136fa355b3678a",
-    "facts": "e3a1250e29743e29",
-    "facts2": "e3a1250e29743e29",
-    "all": "3131ee8197e2f7b1"
+    "text": "078da18e18b49909",
+    "traits": "6b1e34b018661933",
+    "facts": "54470cc139c09bcf",
+    "facts2": "47b195b05ada2e26",
+    "all": "8416f1077e8c2445"
    },
    "row_hash": "80d415cf08e0ebfe",
-   "carried": true,
-   "pass": 3
+   "carried": false,
+   "pass": 6
+  },
+  {
+   "row": "B8",
+   "screen": "party_end.stay",
+   "verdict": "PASS",
+   "line": "You pick up cups with Zoe until the speaker's switched off and the flat is quiet.",
+   "why": "65 minutes (20 cleaning plus the 45-minute walk) matches the card; no garment of hers",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "5016eaf551f457f5",
+    "traits": "6b1e34b018661933",
+    "facts": "54470cc139c09bcf",
+    "facts2": "47b195b05ada2e26",
+    "all": "3ad45fffe33d465f"
+   },
+   "row_hash": "80d415cf08e0ebfe",
+   "carried": false,
+   "pass": 6
   },
   {
    "row": "B8",
    "screen": "party_mingle.mingle",
    "verdict": "PASS",
-   "line": "a woman of 18 with a drink edging through the crowd",
-   "why": "no number; no garment named",
+   "line": "You're Zoe's friend, right? From the college? She never shuts up about you.",
+   "why": "Done 30 minutes matches the card; picture 'a woman of 18' matches Ella 18 (PLAN.md:8); no garment",
    "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "60844f7b2302a991",
+    "text": "9a9985d190c041e9",
     "traits": "6b1e34b018661933",
-    "facts": "b153518a6fd2602e",
-    "facts2": "adf208a6ad231fd4",
-    "all": "e173d3ccddb4c581"
+    "facts": "6116301392be4053",
+    "facts2": "2242d176693385da",
+    "all": "6a54149924d4ad91"
    },
    "row_hash": "80d415cf08e0ebfe",
-   "carried": true,
-   "pass": 5
+   "carried": false,
+   "pass": 6
   },
   {
    "row": "B8",
    "screen": "party_speaker_guy.away",
    "verdict": "PASS",
-   "line": "",
-   "why": "Numbers match the card and PLAN.md:488-495 (Sat 9pm to midnight, end to 1am; 20 min/10 energy, 45 min); no garment of hers is named.",
+   "line": "I'm by the speaker all night.",
+   "why": "no number disagrees with PLAN.md:488-499 or the card; no garment of hers named",
    "cause": null,
    "note": false,
    "screen_hash": {
     "text": "749c9d064d356277",
     "traits": "44136fa355b3678a",
-    "facts": "4e36a3f9b54a7a54",
-    "facts2": "4e36a3f9b54a7a54",
-    "all": "b82166cb38a039be"
+    "facts": "7b8e6bf6d53bbfe4",
+    "facts2": "7b8e6bf6d53bbfe4",
+    "all": "ae4dc515f7c37168"
    },
    "row_hash": "80d415cf08e0ebfe",
-   "carried": true,
-   "pass": 2
+   "carried": false,
+   "pass": 6
   },
   {
    "row": "B8",
    "screen": "party_speaker_guy.look",
    "verdict": "PASS",
-   "line": "",
-   "why": "Numbers match the card and PLAN.md:488-495 (Sat 9pm to midnight, end to 1am; 20 min/10 energy, 45 min); no garment of hers is named.",
+   "line": "You look back over your shoulder. He's smiling down at you, and his hands spread on your stomach until the song ends.",
+   "why": "no number disagrees with PLAN.md:488-499 or the card; no garment of hers named",
    "cause": null,
    "note": false,
    "screen_hash": {
     "text": "b33f68bb47ba059d",
     "traits": "44136fa355b3678a",
-    "facts": "4e36a3f9b54a7a54",
-    "facts2": "4e36a3f9b54a7a54",
-    "all": "aa9abb4efb5f2172"
+    "facts": "7b8e6bf6d53bbfe4",
+    "facts2": "7b8e6bf6d53bbfe4",
+    "all": "bbda197c9bef4314"
    },
    "row_hash": "80d415cf08e0ebfe",
-   "carried": true,
-   "pass": 2
+   "carried": false,
+   "pass": 6
   },
   {
    "row": "B8",
    "screen": "party_speaker_guy.moment",
    "verdict": "PASS",
-   "line": "Halfway through the song he's behind you, his hand on your hip.",
-   "why": "\"his jeans\" is his garment; none of hers named",
+   "line": "The tall guy by the speaker has been watching you since you came in.",
+   "why": "'his jeans' is his garment; none of hers named",
    "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "c034ab6b47164236",
+    "text": "61955af8802ee29f",
     "traits": "44136fa355b3678a",
-    "facts": "4e36a3f9b54a7a54",
-    "facts2": "4e36a3f9b54a7a54",
-    "all": "063195eb12689e7c"
+    "facts": "7b8e6bf6d53bbfe4",
+    "facts2": "7b8e6bf6d53bbfe4",
+    "all": "347de1eb61eeb814"
    },
    "row_hash": "80d415cf08e0ebfe",
-   "carried": true,
-   "pass": 4
+   "carried": false,
+   "pass": 6
+  },
+  {
+   "row": "B8",
+   "screen": "party_zoe_sam.laugh",
+   "verdict": "PASS",
+   "line": "You laugh, and Zoe kisses your cheek, sticky with lip gloss.",
+   "why": "no number disagrees with PLAN.md:488-499 or the card; no garment of hers named",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "fbf0110ef615e61a",
+    "traits": "6b1e34b018661933",
+    "facts": "6116301392be4053",
+    "facts2": "2242d176693385da",
+    "all": "b0c7744a92375baa"
+   },
+   "row_hash": "80d415cf08e0ebfe",
+   "carried": false,
+   "pass": 6
+  },
+  {
+   "row": "B8",
+   "screen": "party_zoe_sam.leave",
+   "verdict": "PASS",
+   "line": "You slip back into the crowd.",
+   "why": "no number disagrees with PLAN.md:488-499 or the card; no garment of hers named",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "d86fa7d57a183275",
+    "traits": "6b1e34b018661933",
+    "facts": "6116301392be4053",
+    "facts2": "2242d176693385da",
+    "all": "876750a2266f9604"
+   },
+   "row_hash": "80d415cf08e0ebfe",
+   "carried": false,
+   "pass": 6
   },
   {
    "row": "B8",
    "screen": "party_zoe_sam.moment",
    "verdict": "PASS",
-   "line": "Zoe's up on the sofa arm, arms over her head, dancing like the party's hers.",
-   "why": "no garment named",
+   "line": "Sam's on the sofa under the coats, and he just grins.",
+   "why": "no number disagrees with PLAN.md:488-499 or the card; no garment of hers named",
    "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "6c112b9e191c91d2",
+    "text": "039431faa1d2d7e6",
     "traits": "fa1a0a429fa0ea30",
-    "facts": "59019b9074ced338",
-    "facts2": "19cb1dcf78df28cf",
-    "all": "c445c089b4935f99"
+    "facts": "7ab7fbfd141c3724",
+    "facts2": "291e47f5fa3b7489",
+    "all": "96d16de87321606f"
    },
    "row_hash": "80d415cf08e0ebfe",
-   "carried": true,
-   "pass": 4
+   "carried": false,
+   "pass": 6
   },
   {
    "row": "B8",
    "screen": "talk_brooke_party.hub",
    "verdict": "PASS",
-   "line": "A blonde woman of 21",
-   "why": "No garment named; age 21 matches npc_brooke age = 21 (TOML 2968); blonde matches the mirror picture.",
+   "line": "Brooke's by the kitchen counter with a cup she isn't drinking from, watching the room like she owns it.",
+   "why": "picture 'A blonde woman of 21 leaning on a kitchen counter': Brooke 21, and she is at the kitchen counter now; no garment of hers",
    "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "f63d7fd0b22102fd",
+    "text": "e4c05cc54650468a",
     "traits": "ebc4051ecd3afac5",
-    "facts": "826914bbcf12120d",
-    "facts2": "9adc380166fb4552",
-    "all": "7a93117de3916bcd"
+    "facts": "9211f3fef98b48c8",
+    "facts2": "706b1ec7c4943276",
+    "all": "21ddd58f2f82242d"
    },
    "row_hash": "80d415cf08e0ebfe",
-   "carried": true,
-   "pass": 4
+   "carried": false,
+   "pass": 6
+  },
+  {
+   "row": "B8",
+   "screen": "talk_brooke_party.talk",
+   "verdict": "PASS",
+   "line": "Enjoy it. Monday the mirror's mine again.",
+   "why": "no number disagrees with PLAN.md:488-499 or the card; no garment of hers named",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "dea5daa7bcb88b7a",
+    "traits": "4b5299c7025e6881",
+    "facts": "e1460e3c055c4a56",
+    "facts2": "d56e308d45dd6418",
+    "all": "970eade4458bfdbf"
+   },
+   "row_hash": "80d415cf08e0ebfe",
+   "carried": false,
+   "pass": 6
   },
   {
    "row": "B8",
    "screen": "talk_kayla_party.hub",
    "verdict": "PASS",
    "line": "Kayla's at Brooke's elbow, laughing a beat after Brooke does.",
-   "why": "picture 'A woman of 20' matches Kayla's age 20 (npc age, PLAN.md:501-502); no garment.",
+   "why": "picture 'A woman of 20 at a house party kitchen': Kayla 20, in the kitchen; no garment",
    "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "989ff0dfd5b9e748",
+    "text": "5a1221c0e90f780c",
     "traits": "d79bccff03ff73e2",
-    "facts": "d9bd044fc487e3e2",
-    "facts2": "d3a6415c2dd7208a",
-    "all": "5363d896a39e23b5"
+    "facts": "464f8631b50219da",
+    "facts2": "dc2994085a7238ab",
+    "all": "edabf330ff65a5b6"
    },
    "row_hash": "80d415cf08e0ebfe",
-   "carried": true,
-   "pass": 3
+   "carried": false,
+   "pass": 6
+  },
+  {
+   "row": "B8",
+   "screen": "talk_kayla_party.talk",
+   "verdict": "PASS",
+   "line": "The punch is mostly vodka. Just so you know.",
+   "why": "no number disagrees with PLAN.md:488-499 or the card; no garment of hers named",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "7c537332ceea2866",
+    "traits": "d79bccff03ff73e2",
+    "facts": "c232995192d9ddfd",
+    "facts2": "c47540a0cbd18098",
+    "all": "b1d6484cf31e4e40"
+   },
+   "row_hash": "80d415cf08e0ebfe",
+   "carried": false,
+   "pass": 6
   },
   {
    "row": "B8",
    "screen": "talk_tess_party.hub",
    "verdict": "PASS",
    "line": "Tess is at the end of the counter, turning a plastic cup round and round in her hands.",
-   "why": "picture 'A shy woman of 21' matches Tess's age 21 (npc age, PLAN.md:502); no garment.",
+   "why": "picture 'A shy woman of 21 at the end of a kitchen counter': Tess 21, in the kitchen; no garment",
    "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "aeb9e5f25534c715",
+    "text": "6bd4ff8ef0169027",
     "traits": "0b50d642c406ca77",
-    "facts": "6a0015e0fad0b575",
-    "facts2": "0176c4f82ffee42f",
-    "all": "124e730061d01a18"
+    "facts": "642e048f7346b8d5",
+    "facts2": "3c1f586f9618a811",
+    "all": "042c95a2cb6269fb"
    },
    "row_hash": "80d415cf08e0ebfe",
-   "carried": true,
-   "pass": 3
+   "carried": false,
+   "pass": 6
+  },
+  {
+   "row": "B8",
+   "screen": "talk_tess_party.talk",
+   "verdict": "PASS",
+   "line": "Kayla made me come.",
+   "why": "no number disagrees with PLAN.md:488-499 or the card; no garment of hers named",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "d024d58cecc43940",
+    "traits": "85bb3b602dd90b82",
+    "facts": "20bca8e543752750",
+    "facts2": "255665aa2f203191",
+    "all": "efa078348f680792"
+   },
+   "row_hash": "80d415cf08e0ebfe",
+   "carried": false,
+   "pass": 6
   },
   {
    "row": "B9",
@@ -1132,22 +1581,41 @@
   },
   {
    "row": "C1158",
-   "screen": "party_speaker_guy.moment",
+   "screen": "party_brooke_look.moment",
    "verdict": "PASS",
-   "line": "Halfway through the song he's behind you, his hand on your hip.",
-   "why": "no garment of hers named",
+   "line": "A dress. To Zoe's. That's adorable.",
+   "why": "behind clothing_slot dress equipped and worn_exposure lt 1; 'what you're wearing' names no garment",
    "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "c034ab6b47164236",
-    "traits": "44136fa355b3678a",
-    "facts": "4e36a3f9b54a7a54",
-    "facts2": "4e36a3f9b54a7a54",
-    "all": "063195eb12689e7c"
+    "text": "6da69ea20cb08ee5",
+    "traits": "06d2567e62494596",
+    "facts": "4ce0fba3044615af",
+    "facts2": "5e80911123c174a9",
+    "all": "6a5b117a2881c822"
    },
    "row_hash": "f40f51a0fd6cfd10",
-   "carried": true,
-   "pass": 4
+   "carried": false,
+   "pass": 6
+  },
+  {
+   "row": "C1158",
+   "screen": "party_speaker_guy.moment",
+   "verdict": "PASS",
+   "line": "The tall guy by the speaker has been watching you since you came in.",
+   "why": "no garment of hers named; 'his jeans' is his",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "61955af8802ee29f",
+    "traits": "44136fa355b3678a",
+    "facts": "7b8e6bf6d53bbfe4",
+    "facts2": "7b8e6bf6d53bbfe4",
+    "all": "347de1eb61eeb814"
+   },
+   "row_hash": "f40f51a0fd6cfd10",
+   "carried": false,
+   "pass": 6
   },
   {
    "row": "C1173",
@@ -1382,22 +1850,41 @@
   },
   {
    "row": "C1206",
-   "screen": "party_speaker_guy.moment",
+   "screen": "party_brooke_look.moment",
    "verdict": "PASS",
-   "line": "Halfway through the song he's behind you, his hand on your hip.",
-   "why": "no garment of hers named",
+   "line": "A dress. To Zoe's. That's adorable.",
+   "why": "behind clothing_slot dress equipped and worn_exposure lt 1; 'what you're wearing' names no garment",
    "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "c034ab6b47164236",
-    "traits": "44136fa355b3678a",
-    "facts": "4e36a3f9b54a7a54",
-    "facts2": "4e36a3f9b54a7a54",
-    "all": "063195eb12689e7c"
+    "text": "6da69ea20cb08ee5",
+    "traits": "06d2567e62494596",
+    "facts": "4ce0fba3044615af",
+    "facts2": "5e80911123c174a9",
+    "all": "6a5b117a2881c822"
    },
    "row_hash": "bfff76edbee583de",
-   "carried": true,
-   "pass": 4
+   "carried": false,
+   "pass": 6
+  },
+  {
+   "row": "C1206",
+   "screen": "party_speaker_guy.moment",
+   "verdict": "PASS",
+   "line": "The tall guy by the speaker has been watching you since you came in.",
+   "why": "no garment of hers named; 'his jeans' is his",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "61955af8802ee29f",
+    "traits": "44136fa355b3678a",
+    "facts": "7b8e6bf6d53bbfe4",
+    "facts2": "7b8e6bf6d53bbfe4",
+    "all": "347de1eb61eeb814"
+   },
+   "row_hash": "bfff76edbee583de",
+   "carried": false,
+   "pass": 6
   },
   {
    "row": "C1220",
@@ -2653,60 +3140,98 @@
   },
   {
    "row": "C2196",
-   "screen": "party_drink_guy.moment",
+   "screen": "party_brooke_look.moment",
    "verdict": "PASS",
-   "line": "A guy you don't know puts a plastic cup in your hand and stays there",
-   "why": "fires on arrival: a cup handed to her as she comes in",
+   "line": "The blonde girl by the counter looks you up and down, slowly, so her two friends can watch her do it.",
+   "why": "fires on coming into the kitchen (or back from Get a drink/a talk): she has just walked in and Brooke looks her over, as she is",
    "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "a140d97ebfe95ab0",
-    "traits": "44136fa355b3678a",
-    "facts": "e3a1250e29743e29",
-    "facts2": "e3a1250e29743e29",
-    "all": "cdbf313bfd9554e4"
+    "text": "6da69ea20cb08ee5",
+    "traits": "06d2567e62494596",
+    "facts": "4ce0fba3044615af",
+    "facts2": "5e80911123c174a9",
+    "all": "6a5b117a2881c822"
    },
    "row_hash": "a8ae0700d13a7f9b",
-   "carried": true,
-   "pass": 4
+   "carried": false,
+   "pass": 6
+  },
+  {
+   "row": "C2196",
+   "screen": "party_drink_guy.moment",
+   "verdict": "PASS",
+   "line": "A guy you don't know puts a plastic cup in your hand and stays there, close enough that his chest brushes your tits when he leans in to talk.",
+   "why": "fires as she comes into or back to the kitchen: a cup handed to her fits having just walked in",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "67dd963aca350210",
+    "traits": "44136fa355b3678a",
+    "facts": "3cf1551ba33fdf73",
+    "facts2": "3cf1551ba33fdf73",
+    "all": "85c9a66e377061b7"
+   },
+   "row_hash": "a8ae0700d13a7f9b",
+   "carried": false,
+   "pass": 6
+  },
+  {
+   "row": "C2196",
+   "screen": "party_end.end",
+   "verdict": "PASS",
+   "line": "It's past midnight, and the party's thinning. Half the coats are gone from the sofa, somebody's asleep in the bathtub, and Zoe's turned the music down.",
+   "why": "fires on the first living-room render after midnight; Zoe sending her home fits having just walked in or come back",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "078da18e18b49909",
+    "traits": "6b1e34b018661933",
+    "facts": "54470cc139c09bcf",
+    "facts2": "47b195b05ada2e26",
+    "all": "8416f1077e8c2445"
+   },
+   "row_hash": "a8ae0700d13a7f9b",
+   "carried": false,
+   "pass": 6
   },
   {
    "row": "C2196",
    "screen": "party_speaker_guy.moment",
    "verdict": "PASS",
-   "line": "Halfway through the song he's behind you, his hand on your hip.",
-   "why": "rides on the dance (substitution), so \"Halfway through the song\" fits",
+   "line": "The tall guy by the speaker has been watching you since you came in.",
+   "why": "words need her mid-dance ('Halfway through the song'), and it rides on party_dance as a substitution, after its costs",
    "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "c034ab6b47164236",
+    "text": "61955af8802ee29f",
     "traits": "44136fa355b3678a",
-    "facts": "4e36a3f9b54a7a54",
-    "facts2": "4e36a3f9b54a7a54",
-    "all": "063195eb12689e7c"
+    "facts": "7b8e6bf6d53bbfe4",
+    "facts2": "7b8e6bf6d53bbfe4",
+    "all": "347de1eb61eeb814"
    },
    "row_hash": "a8ae0700d13a7f9b",
-   "carried": true,
-   "pass": 4
+   "carried": false,
+   "pass": 6
   },
   {
    "row": "C2196",
    "screen": "party_zoe_sam.moment",
    "verdict": "PASS",
-   "line": "Zoe's up on the sofa arm, arms over her head, dancing like the party's hers.",
-   "why": "she comes across it at the party",
+   "line": "Sam's on the sofa under the coats, and he just grins.",
+   "why": "she comes across Zoe on the sofa arm on arriving in or returning to the living room; nothing asks her to be mid-act",
    "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "6c112b9e191c91d2",
+    "text": "039431faa1d2d7e6",
     "traits": "fa1a0a429fa0ea30",
-    "facts": "59019b9074ced338",
-    "facts2": "19cb1dcf78df28cf",
-    "all": "c445c089b4935f99"
+    "facts": "7ab7fbfd141c3724",
+    "facts2": "291e47f5fa3b7489",
+    "all": "96d16de87321606f"
    },
    "row_hash": "a8ae0700d13a7f9b",
-   "carried": true,
-   "pass": 4
+   "carried": false,
+   "pass": 6
   },
   {
    "row": "C2197",
@@ -2942,7 +3467,7 @@
    "note": false,
    "screen_hash": "4ff56c1cc929d171",
    "row_hash": "d8ebf6d6b2abf6a5",
-   "carried": false,
+   "carried": true,
    "pass": 5
   },
   {
@@ -3288,212 +3813,440 @@
   },
   {
    "row": "C460",
-   "screen": "party_dance.dance",
+   "screen": "party_brooke_look.back",
    "verdict": "PASS",
-   "line": "You squeeze into the middle of the room where the bodies are tightest",
-   "why": "true on every visit",
+   "line": "Somebody near the fridge laughs. Brooke doesn't.",
+   "why": "true at the first and last minute and on a second visit: kitchen (fridge in the kitchen's line); Brooke's row puts her in near_zoe_kitchen Sat 21-24; Done stays in the kitchen",
    "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "64c13cf7bfca581a",
-    "traits": "6b1e34b018661933",
-    "facts": "b153518a6fd2602e",
-    "facts2": "adf208a6ad231fd4",
-    "all": "d1d502ce58e442d2"
+    "text": "4c446143588a608b",
+    "traits": "ebc4051ecd3afac5",
+    "facts": "1676cd55e1a9d96d",
+    "facts2": "58015b8566c69a77",
+    "all": "5e455fe9f1205a7c"
    },
    "row_hash": "67e48e60d5053a2e",
-   "carried": true,
-   "pass": 4
+   "carried": false,
+   "pass": 6
+  },
+  {
+   "row": "C460",
+   "screen": "party_brooke_look.ignore",
+   "verdict": "PASS",
+   "line": "You turn your back on the kitchen. You can feel her watching you go.",
+   "why": "true at the first and last minute and on a second visit: Done now goes to the living room (near_zoe_apartment), so walking away from the kitchen is true; Brooke named only behind met_brooke",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "cec4c1cac0e81b48",
+    "traits": "ebc4051ecd3afac5",
+    "facts": "1676cd55e1a9d96d",
+    "facts2": "58015b8566c69a77",
+    "all": "e1455732593a2b96"
+   },
+   "row_hash": "67e48e60d5053a2e",
+   "carried": false,
+   "pass": 6
+  },
+  {
+   "row": "C460",
+   "screen": "party_brooke_look.moment",
+   "verdict": "PASS",
+   "line": "The blonde girl by the counter looks you up and down, slowly, so her two friends can watch her do it.",
+   "why": "true at the first and last minute and on a second visit: trigger npc_at_location npc_brooke near_zoe_kitchen; Kayla and Tess share her kitchen rows Sat 21-24 and are named only behind met_brooke (mirror_meet_brooke names them)",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "6da69ea20cb08ee5",
+    "traits": "06d2567e62494596",
+    "facts": "4ce0fba3044615af",
+    "facts2": "5e80911123c174a9",
+    "all": "6a5b117a2881c822"
+   },
+   "row_hash": "67e48e60d5053a2e",
+   "carried": false,
+   "pass": 6
+  },
+  {
+   "row": "C460",
+   "screen": "party_dance.dance",
+   "verdict": "PASS",
+   "line": "Babe! Don't stop, the next one's my favourite!",
+   "why": "true at the first and last minute and on a second visit: living room; Zoe's row puts her in near_zoe_apartment Sat 19-24; no one else named",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "66a0b954cfd9f92e",
+    "traits": "6b1e34b018661933",
+    "facts": "6116301392be4053",
+    "facts2": "2242d176693385da",
+    "all": "c623174c8e8121aa"
+   },
+   "row_hash": "67e48e60d5053a2e",
+   "carried": false,
+   "pass": 6
+  },
+  {
+   "row": "C460",
+   "screen": "party_drink.drink",
+   "verdict": "PASS",
+   "line": "The kitchen floor is sticky. Someone's made a punch in a mixing bowl, bright red and mostly vodka.",
+   "why": "true at the first and last minute and on a second visit: the scene now sits in near_zoe_kitchen, so 'the kitchen floor' is where she stands; speaker unknown",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "79fc332bab40fca5",
+    "traits": "44136fa355b3678a",
+    "facts": "3cf1551ba33fdf73",
+    "facts2": "3cf1551ba33fdf73",
+    "all": "e198c5a4b6a73253"
+   },
+   "row_hash": "67e48e60d5053a2e",
+   "carried": false,
+   "pass": 6
+  },
+  {
+   "row": "C460",
+   "screen": "party_drink_guy.back",
+   "verdict": "PASS",
+   "line": "Suit yourself. I'll be by the window.",
+   "why": "true at the first and last minute and on a second visit: unnamed stranger; Done back to the kitchen",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "3ec8be437a8947da",
+    "traits": "44136fa355b3678a",
+    "facts": "3cf1551ba33fdf73",
+    "facts2": "3cf1551ba33fdf73",
+    "all": "ad5c1e69b87bd5b7"
+   },
+   "row_hash": "67e48e60d5053a2e",
+   "carried": false,
+   "pass": 6
+  },
+  {
+   "row": "C460",
+   "screen": "party_drink_guy.drink",
+   "verdict": "PASS",
+   "line": "Find me later, yeah? I'll be by the window.",
+   "why": "true at the first and last minute and on a second visit: unnamed stranger; Done back to the kitchen",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "5b410ffea6326a56",
+    "traits": "44136fa355b3678a",
+    "facts": "3cf1551ba33fdf73",
+    "facts2": "3cf1551ba33fdf73",
+    "all": "5d51bea7a70d11e0"
+   },
+   "row_hash": "67e48e60d5053a2e",
+   "carried": false,
+   "pass": 6
   },
   {
    "row": "C460",
    "screen": "party_drink_guy.moment",
    "verdict": "PASS",
-   "line": "A guy you don't know puts a plastic cup in your hand and stays there",
-   "why": "true on every visit",
+   "line": "A guy you don't know puts a plastic cup in your hand and stays there, close enough that his chest brushes your tits when he leans in to talk.",
+   "why": "true at the first and last minute and on a second visit: unnamed stranger in the kitchen, Sat 21-00; no named person",
    "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "a140d97ebfe95ab0",
+    "text": "67dd963aca350210",
     "traits": "44136fa355b3678a",
-    "facts": "e3a1250e29743e29",
-    "facts2": "e3a1250e29743e29",
-    "all": "cdbf313bfd9554e4"
+    "facts": "3cf1551ba33fdf73",
+    "facts2": "3cf1551ba33fdf73",
+    "all": "85c9a66e377061b7"
    },
    "row_hash": "67e48e60d5053a2e",
-   "carried": true,
-   "pass": 4
+   "carried": false,
+   "pass": 6
   },
   {
    "row": "C460",
-   "screen": "party_go_home.leave",
+   "screen": "party_end.end",
    "verdict": "PASS",
-   "line": "You squeeze out through the crowd and down the stairs. ... There's a party there every Saturday.",
-   "why": "Sat 21:00-00:00 only, so the crowd is there; 'a party there every Saturday' holds by the Monday unset of partied_this_week (toml:580).",
+   "line": "It's past midnight, and the party's thinning. Half the coats are gone from the sofa, somebody's asleep in the bathtub, and Zoe's turned the music down.",
+   "why": "true at the first and last minute and on a second visit: living room Sun 00-01, requires_npc npc_zoe, Zoe's row Sun 00-01 near_zoe_apartment; the bathroom ('Nobody's in here.') can't be reached between midnight and the end: it is off the living room, whose first render after midnight fires the end (chance 1.0), and both answers send her home",
    "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "b692caf353c36f8b",
-    "traits": "44136fa355b3678a",
-    "facts": "e3a1250e29743e29",
-    "facts2": "e3a1250e29743e29",
-    "all": "3131ee8197e2f7b1"
+    "text": "078da18e18b49909",
+    "traits": "6b1e34b018661933",
+    "facts": "54470cc139c09bcf",
+    "facts2": "47b195b05ada2e26",
+    "all": "8416f1077e8c2445"
    },
    "row_hash": "67e48e60d5053a2e",
-   "carried": true,
-   "pass": 3
+   "carried": false,
+   "pass": 6
+  },
+  {
+   "row": "C460",
+   "screen": "party_end.stay",
+   "verdict": "PASS",
+   "line": "You pick up cups with Zoe until the speaker's switched off and the flat is quiet.",
+   "why": "true at the first and last minute and on a second visit: Zoe there Sun 00-01; Go home 65 minutes, as the card says",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "5016eaf551f457f5",
+    "traits": "6b1e34b018661933",
+    "facts": "54470cc139c09bcf",
+    "facts2": "47b195b05ada2e26",
+    "all": "3ad45fffe33d465f"
+   },
+   "row_hash": "67e48e60d5053a2e",
+   "carried": false,
+   "pass": 6
   },
   {
    "row": "C460",
    "screen": "party_mingle.mingle",
    "verdict": "PASS",
-   "line": "a passing man's hand on her waist that stays a second too long",
-   "why": "the picture says what the line says, on every visit",
+   "line": "You're Zoe's friend, right? From the college? She never shuts up about you.",
+   "why": "true at the first and last minute and on a second visit: living room; strangers only, Zoe named but not claimed present; Brooke and friends (now in the kitchen) not named",
    "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "60844f7b2302a991",
+    "text": "9a9985d190c041e9",
     "traits": "6b1e34b018661933",
-    "facts": "b153518a6fd2602e",
-    "facts2": "adf208a6ad231fd4",
-    "all": "e173d3ccddb4c581"
+    "facts": "6116301392be4053",
+    "facts2": "2242d176693385da",
+    "all": "6a54149924d4ad91"
    },
    "row_hash": "67e48e60d5053a2e",
-   "carried": true,
-   "pass": 5
+   "carried": false,
+   "pass": 6
   },
   {
    "row": "C460",
    "screen": "party_speaker_guy.away",
    "verdict": "PASS",
    "line": "I'm by the speaker all night.",
-   "why": "True while the party runs; once a day.",
+   "why": "true at the first and last minute and on a second visit: unnamed; the speaker is on the living room windowsill, where Dance happens",
    "cause": null,
    "note": false,
    "screen_hash": {
     "text": "749c9d064d356277",
     "traits": "44136fa355b3678a",
-    "facts": "4e36a3f9b54a7a54",
-    "facts2": "4e36a3f9b54a7a54",
-    "all": "b82166cb38a039be"
+    "facts": "7b8e6bf6d53bbfe4",
+    "facts2": "7b8e6bf6d53bbfe4",
+    "all": "ae4dc515f7c37168"
    },
    "row_hash": "67e48e60d5053a2e",
-   "carried": true,
-   "pass": 2
+   "carried": false,
+   "pass": 6
   },
   {
    "row": "C460",
    "screen": "party_speaker_guy.look",
    "verdict": "PASS",
-   "line": "I'm by the speaker all night.",
-   "why": "No garment named; true every Saturday it fires.",
+   "line": "You look back over your shoulder. He's smiling down at you, and his hands spread on your stomach until the song ends.",
+   "why": "true at the first and last minute and on a second visit: unnamed; no garment of hers named",
    "cause": null,
    "note": false,
    "screen_hash": {
     "text": "b33f68bb47ba059d",
     "traits": "44136fa355b3678a",
-    "facts": "4e36a3f9b54a7a54",
-    "facts2": "4e36a3f9b54a7a54",
-    "all": "aa9abb4efb5f2172"
+    "facts": "7b8e6bf6d53bbfe4",
+    "facts2": "7b8e6bf6d53bbfe4",
+    "all": "bbda197c9bef4314"
    },
    "row_hash": "67e48e60d5053a2e",
-   "carried": true,
-   "pass": 2
+   "carried": false,
+   "pass": 6
   },
   {
    "row": "C460",
    "screen": "party_speaker_guy.moment",
    "verdict": "PASS",
-   "line": "Halfway through the song he's behind you, his hand on your hip.",
-   "why": "true on every visit",
+   "line": "The tall guy by the speaker has been watching you since you came in.",
+   "why": "true at the first and last minute and on a second visit: rides on party_dance in the living room, where the speaker is; unnamed",
    "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "c034ab6b47164236",
+    "text": "61955af8802ee29f",
     "traits": "44136fa355b3678a",
-    "facts": "4e36a3f9b54a7a54",
-    "facts2": "4e36a3f9b54a7a54",
-    "all": "063195eb12689e7c"
+    "facts": "7b8e6bf6d53bbfe4",
+    "facts2": "7b8e6bf6d53bbfe4",
+    "all": "347de1eb61eeb814"
    },
    "row_hash": "67e48e60d5053a2e",
-   "carried": true,
-   "pass": 4
+   "carried": false,
+   "pass": 6
+  },
+  {
+   "row": "C460",
+   "screen": "party_zoe_sam.laugh",
+   "verdict": "PASS",
+   "line": "You laugh, and Zoe kisses your cheek, sticky with lip gloss.",
+   "why": "true at the first and last minute and on a second visit: Zoe present (requires_npc, living room Sat 19-24)",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "fbf0110ef615e61a",
+    "traits": "6b1e34b018661933",
+    "facts": "6116301392be4053",
+    "facts2": "2242d176693385da",
+    "all": "b0c7744a92375baa"
+   },
+   "row_hash": "67e48e60d5053a2e",
+   "carried": false,
+   "pass": 6
+  },
+  {
+   "row": "C460",
+   "screen": "party_zoe_sam.leave",
+   "verdict": "PASS",
+   "line": "You slip back into the crowd.",
+   "why": "true at the first and last minute and on a second visit: Zoe present; Done to the living room",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "d86fa7d57a183275",
+    "traits": "6b1e34b018661933",
+    "facts": "6116301392be4053",
+    "facts2": "2242d176693385da",
+    "all": "876750a2266f9604"
+   },
+   "row_hash": "67e48e60d5053a2e",
+   "carried": false,
+   "pass": 6
   },
   {
    "row": "C460",
    "screen": "party_zoe_sam.moment",
    "verdict": "PASS",
-   "line": "Zoe's up on the sofa arm, arms over her head, dancing like the party's hers.",
-   "why": "true on every visit",
+   "line": "Sam's on the sofa under the coats, and he just grins.",
+   "why": "true at the first and last minute and on a second visit: living room; requires_npc npc_zoe; Sam's row near_zoe_apartment 12-02 every day; Sam named only behind met_sam",
    "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "6c112b9e191c91d2",
+    "text": "039431faa1d2d7e6",
     "traits": "fa1a0a429fa0ea30",
-    "facts": "59019b9074ced338",
-    "facts2": "19cb1dcf78df28cf",
-    "all": "c445c089b4935f99"
+    "facts": "7ab7fbfd141c3724",
+    "facts2": "291e47f5fa3b7489",
+    "all": "96d16de87321606f"
    },
    "row_hash": "67e48e60d5053a2e",
-   "carried": true,
-   "pass": 4
+   "carried": false,
+   "pass": 6
   },
   {
    "row": "C460",
    "screen": "talk_brooke_party.hub",
    "verdict": "PASS",
    "line": "Brooke's by the kitchen counter with a cup she isn't drinking from, watching the room like she owns it.",
-   "why": "True on every reaching playthrough: she is met and present in those hours.",
+   "why": "true at the first and last minute and on a second visit: trigger now near_zoe_kitchen, requires_npc npc_brooke, her row Sat 21-24 near_zoe_kitchen",
    "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "f63d7fd0b22102fd",
+    "text": "e4c05cc54650468a",
     "traits": "ebc4051ecd3afac5",
-    "facts": "826914bbcf12120d",
-    "facts2": "9adc380166fb4552",
-    "all": "7a93117de3916bcd"
+    "facts": "9211f3fef98b48c8",
+    "facts2": "706b1ec7c4943276",
+    "all": "21ddd58f2f82242d"
    },
    "row_hash": "67e48e60d5053a2e",
-   "carried": true,
-   "pass": 4
+   "carried": false,
+   "pass": 6
+  },
+  {
+   "row": "C460",
+   "screen": "talk_brooke_party.talk",
+   "verdict": "PASS",
+   "line": "Enjoy it. Monday the mirror's mine again.",
+   "why": "true at the first and last minute and on a second visit: Brooke at campus_bathroom Mon 08-09 (who_is_where); Saturday trigger makes 'Monday' true; Done 10 minutes to the kitchen",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "dea5daa7bcb88b7a",
+    "traits": "4b5299c7025e6881",
+    "facts": "e1460e3c055c4a56",
+    "facts2": "d56e308d45dd6418",
+    "all": "970eade4458bfdbf"
+   },
+   "row_hash": "67e48e60d5053a2e",
+   "carried": false,
+   "pass": 6
   },
   {
    "row": "C460",
    "screen": "talk_kayla_party.hub",
    "verdict": "PASS",
    "line": "Kayla's at Brooke's elbow, laughing a beat after Brooke does.",
-   "why": "Kayla and Brooke share Sat 21-24 at near_zoe_apartment (who_is_where), so 'at Brooke's elbow' is true whenever Kayla's face shows.",
+   "why": "true at the first and last minute and on a second visit: Kayla and Brooke both near_zoe_kitchen Sat 21-24; requires_npc npc_kayla",
    "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "989ff0dfd5b9e748",
+    "text": "5a1221c0e90f780c",
     "traits": "d79bccff03ff73e2",
-    "facts": "d9bd044fc487e3e2",
-    "facts2": "d3a6415c2dd7208a",
-    "all": "5363d896a39e23b5"
+    "facts": "464f8631b50219da",
+    "facts2": "dc2994085a7238ab",
+    "all": "edabf330ff65a5b6"
    },
    "row_hash": "67e48e60d5053a2e",
-   "carried": true,
-   "pass": 3
+   "carried": false,
+   "pass": 6
+  },
+  {
+   "row": "C460",
+   "screen": "talk_kayla_party.talk",
+   "verdict": "PASS",
+   "line": "The punch is mostly vodka. Just so you know.",
+   "why": "true at the first and last minute and on a second visit: Kayla in the kitchen with the punch (party_drink is in the kitchen now); Done 10 minutes",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "7c537332ceea2866",
+    "traits": "d79bccff03ff73e2",
+    "facts": "c232995192d9ddfd",
+    "facts2": "c47540a0cbd18098",
+    "all": "b1d6484cf31e4e40"
+   },
+   "row_hash": "67e48e60d5053a2e",
+   "carried": false,
+   "pass": 6
   },
   {
    "row": "C460",
    "screen": "talk_tess_party.hub",
    "verdict": "PASS",
    "line": "Tess is at the end of the counter, turning a plastic cup round and round in her hands.",
-   "why": "requires_npc npc_tess; Tess at Zoe's Sat 21-24; texture only.",
+   "why": "true at the first and last minute and on a second visit: Tess near_zoe_kitchen Sat 21-24; requires_npc npc_tess",
    "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "aeb9e5f25534c715",
+    "text": "6bd4ff8ef0169027",
     "traits": "0b50d642c406ca77",
-    "facts": "6a0015e0fad0b575",
-    "facts2": "0176c4f82ffee42f",
-    "all": "124e730061d01a18"
+    "facts": "642e048f7346b8d5",
+    "facts2": "3c1f586f9618a811",
+    "all": "042c95a2cb6269fb"
    },
    "row_hash": "67e48e60d5053a2e",
-   "carried": true,
-   "pass": 3
+   "carried": false,
+   "pass": 6
+  },
+  {
+   "row": "C460",
+   "screen": "talk_tess_party.talk",
+   "verdict": "PASS",
+   "line": "Kayla made me come.",
+   "why": "true at the first and last minute and on a second visit: Kayla is at the party (kitchen, Sat 21-24); Done 10 minutes",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "d024d58cecc43940",
+    "traits": "85bb3b602dd90b82",
+    "facts": "20bca8e543752750",
+    "facts2": "255665aa2f203191",
+    "all": "efa078348f680792"
+   },
+   "row_hash": "67e48e60d5053a2e",
+   "carried": false,
+   "pass": 6
   },
   {
    "row": "C461",
@@ -3510,212 +4263,440 @@
   },
   {
    "row": "C461",
-   "screen": "party_dance.dance",
+   "screen": "party_brooke_look.back",
    "verdict": "PASS",
-   "line": "You squeeze into the middle of the room where the bodies are tightest",
-   "why": "texture only",
+   "line": "Somebody near the fridge laughs. Brooke doesn't.",
+   "why": "texture and cast-true dialogue that can't clash: kitchen (fridge in the kitchen's line); Brooke's row puts her in near_zoe_kitchen Sat 21-24; Done stays in the kitchen",
    "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "64c13cf7bfca581a",
-    "traits": "6b1e34b018661933",
-    "facts": "b153518a6fd2602e",
-    "facts2": "adf208a6ad231fd4",
-    "all": "d1d502ce58e442d2"
+    "text": "4c446143588a608b",
+    "traits": "ebc4051ecd3afac5",
+    "facts": "1676cd55e1a9d96d",
+    "facts2": "58015b8566c69a77",
+    "all": "5e455fe9f1205a7c"
    },
    "row_hash": "310706ee076318f2",
-   "carried": true,
-   "pass": 4
+   "carried": false,
+   "pass": 6
+  },
+  {
+   "row": "C461",
+   "screen": "party_brooke_look.ignore",
+   "verdict": "PASS",
+   "line": "You turn your back on the kitchen. You can feel her watching you go.",
+   "why": "texture and cast-true dialogue that can't clash: Done now goes to the living room (near_zoe_apartment), so walking away from the kitchen is true; Brooke named only behind met_brooke",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "cec4c1cac0e81b48",
+    "traits": "ebc4051ecd3afac5",
+    "facts": "1676cd55e1a9d96d",
+    "facts2": "58015b8566c69a77",
+    "all": "e1455732593a2b96"
+   },
+   "row_hash": "310706ee076318f2",
+   "carried": false,
+   "pass": 6
+  },
+  {
+   "row": "C461",
+   "screen": "party_brooke_look.moment",
+   "verdict": "PASS",
+   "line": "The blonde girl by the counter looks you up and down, slowly, so her two friends can watch her do it.",
+   "why": "texture and cast-true dialogue that can't clash: trigger npc_at_location npc_brooke near_zoe_kitchen; Kayla and Tess share her kitchen rows Sat 21-24 and are named only behind met_brooke (mirror_meet_brooke names them)",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "6da69ea20cb08ee5",
+    "traits": "06d2567e62494596",
+    "facts": "4ce0fba3044615af",
+    "facts2": "5e80911123c174a9",
+    "all": "6a5b117a2881c822"
+   },
+   "row_hash": "310706ee076318f2",
+   "carried": false,
+   "pass": 6
+  },
+  {
+   "row": "C461",
+   "screen": "party_dance.dance",
+   "verdict": "PASS",
+   "line": "Babe! Don't stop, the next one's my favourite!",
+   "why": "texture and cast-true dialogue that can't clash: living room; Zoe's row puts her in near_zoe_apartment Sat 19-24; no one else named",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "66a0b954cfd9f92e",
+    "traits": "6b1e34b018661933",
+    "facts": "6116301392be4053",
+    "facts2": "2242d176693385da",
+    "all": "c623174c8e8121aa"
+   },
+   "row_hash": "310706ee076318f2",
+   "carried": false,
+   "pass": 6
+  },
+  {
+   "row": "C461",
+   "screen": "party_drink.drink",
+   "verdict": "PASS",
+   "line": "The kitchen floor is sticky. Someone's made a punch in a mixing bowl, bright red and mostly vodka.",
+   "why": "texture and cast-true dialogue that can't clash: the scene now sits in near_zoe_kitchen, so 'the kitchen floor' is where she stands; speaker unknown",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "79fc332bab40fca5",
+    "traits": "44136fa355b3678a",
+    "facts": "3cf1551ba33fdf73",
+    "facts2": "3cf1551ba33fdf73",
+    "all": "e198c5a4b6a73253"
+   },
+   "row_hash": "310706ee076318f2",
+   "carried": false,
+   "pass": 6
+  },
+  {
+   "row": "C461",
+   "screen": "party_drink_guy.back",
+   "verdict": "PASS",
+   "line": "Suit yourself. I'll be by the window.",
+   "why": "texture and cast-true dialogue that can't clash: unnamed stranger; Done back to the kitchen",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "3ec8be437a8947da",
+    "traits": "44136fa355b3678a",
+    "facts": "3cf1551ba33fdf73",
+    "facts2": "3cf1551ba33fdf73",
+    "all": "ad5c1e69b87bd5b7"
+   },
+   "row_hash": "310706ee076318f2",
+   "carried": false,
+   "pass": 6
+  },
+  {
+   "row": "C461",
+   "screen": "party_drink_guy.drink",
+   "verdict": "PASS",
+   "line": "Find me later, yeah? I'll be by the window.",
+   "why": "texture and cast-true dialogue that can't clash: unnamed stranger; Done back to the kitchen",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "5b410ffea6326a56",
+    "traits": "44136fa355b3678a",
+    "facts": "3cf1551ba33fdf73",
+    "facts2": "3cf1551ba33fdf73",
+    "all": "5d51bea7a70d11e0"
+   },
+   "row_hash": "310706ee076318f2",
+   "carried": false,
+   "pass": 6
   },
   {
    "row": "C461",
    "screen": "party_drink_guy.moment",
    "verdict": "PASS",
-   "line": "A guy you don't know puts a plastic cup in your hand and stays there",
-   "why": "texture only",
+   "line": "A guy you don't know puts a plastic cup in your hand and stays there, close enough that his chest brushes your tits when he leans in to talk.",
+   "why": "texture and cast-true dialogue that can't clash: unnamed stranger in the kitchen, Sat 21-00; no named person",
    "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "a140d97ebfe95ab0",
+    "text": "67dd963aca350210",
     "traits": "44136fa355b3678a",
-    "facts": "e3a1250e29743e29",
-    "facts2": "e3a1250e29743e29",
-    "all": "cdbf313bfd9554e4"
+    "facts": "3cf1551ba33fdf73",
+    "facts2": "3cf1551ba33fdf73",
+    "all": "85c9a66e377061b7"
    },
    "row_hash": "310706ee076318f2",
-   "carried": true,
-   "pass": 4
+   "carried": false,
+   "pass": 6
   },
   {
    "row": "C461",
-   "screen": "party_go_home.leave",
+   "screen": "party_end.end",
    "verdict": "PASS",
-   "line": "You squeeze out through the crowd and down the stairs. ... There's a party there every Saturday.",
-   "why": "Texture (sticky floor, sweat, crowd, cup) and dialogue that fit the cast; nothing that can clash.",
+   "line": "It's past midnight, and the party's thinning. Half the coats are gone from the sofa, somebody's asleep in the bathtub, and Zoe's turned the music down.",
+   "why": "texture and cast-true dialogue that can't clash: living room Sun 00-01, requires_npc npc_zoe, Zoe's row Sun 00-01 near_zoe_apartment; the bathroom ('Nobody's in here.') can't be reached between midnight and the end: it is off the living room, whose first render after midnight fires the end (chance 1.0), and both answers send her home",
    "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "b692caf353c36f8b",
-    "traits": "44136fa355b3678a",
-    "facts": "e3a1250e29743e29",
-    "facts2": "e3a1250e29743e29",
-    "all": "3131ee8197e2f7b1"
+    "text": "078da18e18b49909",
+    "traits": "6b1e34b018661933",
+    "facts": "54470cc139c09bcf",
+    "facts2": "47b195b05ada2e26",
+    "all": "8416f1077e8c2445"
    },
    "row_hash": "310706ee076318f2",
-   "carried": true,
-   "pass": 3
+   "carried": false,
+   "pass": 6
+  },
+  {
+   "row": "C461",
+   "screen": "party_end.stay",
+   "verdict": "PASS",
+   "line": "You pick up cups with Zoe until the speaker's switched off and the flat is quiet.",
+   "why": "texture and cast-true dialogue that can't clash: Zoe there Sun 00-01; Go home 65 minutes, as the card says",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "5016eaf551f457f5",
+    "traits": "6b1e34b018661933",
+    "facts": "54470cc139c09bcf",
+    "facts2": "47b195b05ada2e26",
+    "all": "3ad45fffe33d465f"
+   },
+   "row_hash": "310706ee076318f2",
+   "carried": false,
+   "pass": 6
   },
   {
    "row": "C461",
    "screen": "party_mingle.mingle",
    "verdict": "PASS",
-   "line": "\"Everyone's drunk, so it's easy.\"",
-   "why": "texture, can't clash",
+   "line": "You're Zoe's friend, right? From the college? She never shuts up about you.",
+   "why": "texture and cast-true dialogue that can't clash: living room; strangers only, Zoe named but not claimed present; Brooke and friends (now in the kitchen) not named",
    "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "60844f7b2302a991",
+    "text": "9a9985d190c041e9",
     "traits": "6b1e34b018661933",
-    "facts": "b153518a6fd2602e",
-    "facts2": "adf208a6ad231fd4",
-    "all": "e173d3ccddb4c581"
+    "facts": "6116301392be4053",
+    "facts2": "2242d176693385da",
+    "all": "6a54149924d4ad91"
    },
    "row_hash": "310706ee076318f2",
-   "carried": true,
-   "pass": 5
+   "carried": false,
+   "pass": 6
   },
   {
    "row": "C461",
    "screen": "party_speaker_guy.away",
    "verdict": "PASS",
    "line": "I'm by the speaker all night.",
-   "why": "True while the party runs; once a day.",
+   "why": "texture and cast-true dialogue that can't clash: unnamed; the speaker is on the living room windowsill, where Dance happens",
    "cause": null,
    "note": false,
    "screen_hash": {
     "text": "749c9d064d356277",
     "traits": "44136fa355b3678a",
-    "facts": "4e36a3f9b54a7a54",
-    "facts2": "4e36a3f9b54a7a54",
-    "all": "b82166cb38a039be"
+    "facts": "7b8e6bf6d53bbfe4",
+    "facts2": "7b8e6bf6d53bbfe4",
+    "all": "ae4dc515f7c37168"
    },
    "row_hash": "310706ee076318f2",
-   "carried": true,
-   "pass": 2
+   "carried": false,
+   "pass": 6
   },
   {
    "row": "C461",
    "screen": "party_speaker_guy.look",
    "verdict": "PASS",
-   "line": "I'm by the speaker all night.",
-   "why": "No garment named; true every Saturday it fires.",
+   "line": "You look back over your shoulder. He's smiling down at you, and his hands spread on your stomach until the song ends.",
+   "why": "texture and cast-true dialogue that can't clash: unnamed; no garment of hers named",
    "cause": null,
    "note": false,
    "screen_hash": {
     "text": "b33f68bb47ba059d",
     "traits": "44136fa355b3678a",
-    "facts": "4e36a3f9b54a7a54",
-    "facts2": "4e36a3f9b54a7a54",
-    "all": "aa9abb4efb5f2172"
+    "facts": "7b8e6bf6d53bbfe4",
+    "facts2": "7b8e6bf6d53bbfe4",
+    "all": "bbda197c9bef4314"
    },
    "row_hash": "310706ee076318f2",
-   "carried": true,
-   "pass": 2
+   "carried": false,
+   "pass": 6
   },
   {
    "row": "C461",
    "screen": "party_speaker_guy.moment",
    "verdict": "PASS",
-   "line": "Halfway through the song he's behind you, his hand on your hip.",
-   "why": "texture only",
+   "line": "The tall guy by the speaker has been watching you since you came in.",
+   "why": "texture and cast-true dialogue that can't clash: rides on party_dance in the living room, where the speaker is; unnamed",
    "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "c034ab6b47164236",
+    "text": "61955af8802ee29f",
     "traits": "44136fa355b3678a",
-    "facts": "4e36a3f9b54a7a54",
-    "facts2": "4e36a3f9b54a7a54",
-    "all": "063195eb12689e7c"
+    "facts": "7b8e6bf6d53bbfe4",
+    "facts2": "7b8e6bf6d53bbfe4",
+    "all": "347de1eb61eeb814"
    },
    "row_hash": "310706ee076318f2",
-   "carried": true,
-   "pass": 4
+   "carried": false,
+   "pass": 6
+  },
+  {
+   "row": "C461",
+   "screen": "party_zoe_sam.laugh",
+   "verdict": "PASS",
+   "line": "You laugh, and Zoe kisses your cheek, sticky with lip gloss.",
+   "why": "texture and cast-true dialogue that can't clash: Zoe present (requires_npc, living room Sat 19-24)",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "fbf0110ef615e61a",
+    "traits": "6b1e34b018661933",
+    "facts": "6116301392be4053",
+    "facts2": "2242d176693385da",
+    "all": "b0c7744a92375baa"
+   },
+   "row_hash": "310706ee076318f2",
+   "carried": false,
+   "pass": 6
+  },
+  {
+   "row": "C461",
+   "screen": "party_zoe_sam.leave",
+   "verdict": "PASS",
+   "line": "You slip back into the crowd.",
+   "why": "texture and cast-true dialogue that can't clash: Zoe present; Done to the living room",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "d86fa7d57a183275",
+    "traits": "6b1e34b018661933",
+    "facts": "6116301392be4053",
+    "facts2": "2242d176693385da",
+    "all": "876750a2266f9604"
+   },
+   "row_hash": "310706ee076318f2",
+   "carried": false,
+   "pass": 6
   },
   {
    "row": "C461",
    "screen": "party_zoe_sam.moment",
    "verdict": "PASS",
-   "line": "Zoe's up on the sofa arm, arms over her head, dancing like the party's hers.",
-   "why": "texture only",
+   "line": "Sam's on the sofa under the coats, and he just grins.",
+   "why": "texture and cast-true dialogue that can't clash: living room; requires_npc npc_zoe; Sam's row near_zoe_apartment 12-02 every day; Sam named only behind met_sam",
    "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "6c112b9e191c91d2",
+    "text": "039431faa1d2d7e6",
     "traits": "fa1a0a429fa0ea30",
-    "facts": "59019b9074ced338",
-    "facts2": "19cb1dcf78df28cf",
-    "all": "c445c089b4935f99"
+    "facts": "7ab7fbfd141c3724",
+    "facts2": "291e47f5fa3b7489",
+    "all": "96d16de87321606f"
    },
    "row_hash": "310706ee076318f2",
-   "carried": true,
-   "pass": 4
+   "carried": false,
+   "pass": 6
   },
   {
    "row": "C461",
    "screen": "talk_brooke_party.hub",
    "verdict": "PASS",
-   "line": "watching the room like she owns it",
-   "why": "Texture/opinion fitting her cast entry (Mean, Takes charge).",
+   "line": "Brooke's by the kitchen counter with a cup she isn't drinking from, watching the room like she owns it.",
+   "why": "texture and cast-true dialogue that can't clash: trigger now near_zoe_kitchen, requires_npc npc_brooke, her row Sat 21-24 near_zoe_kitchen",
    "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "f63d7fd0b22102fd",
+    "text": "e4c05cc54650468a",
     "traits": "ebc4051ecd3afac5",
-    "facts": "826914bbcf12120d",
-    "facts2": "9adc380166fb4552",
-    "all": "7a93117de3916bcd"
+    "facts": "9211f3fef98b48c8",
+    "facts2": "706b1ec7c4943276",
+    "all": "21ddd58f2f82242d"
    },
    "row_hash": "310706ee076318f2",
-   "carried": true,
-   "pass": 4
+   "carried": false,
+   "pass": 6
+  },
+  {
+   "row": "C461",
+   "screen": "talk_brooke_party.talk",
+   "verdict": "PASS",
+   "line": "Enjoy it. Monday the mirror's mine again.",
+   "why": "texture and cast-true dialogue that can't clash: Brooke at campus_bathroom Mon 08-09 (who_is_where); Saturday trigger makes 'Monday' true; Done 10 minutes to the kitchen",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "dea5daa7bcb88b7a",
+    "traits": "4b5299c7025e6881",
+    "facts": "e1460e3c055c4a56",
+    "facts2": "d56e308d45dd6418",
+    "all": "970eade4458bfdbf"
+   },
+   "row_hash": "310706ee076318f2",
+   "carried": false,
+   "pass": 6
   },
   {
    "row": "C461",
    "screen": "talk_kayla_party.hub",
    "verdict": "PASS",
    "line": "Kayla's at Brooke's elbow, laughing a beat after Brooke does.",
-   "why": "Texture (sticky floor, sweat, crowd, cup) and dialogue that fit the cast; nothing that can clash.",
+   "why": "texture and cast-true dialogue that can't clash: Kayla and Brooke both near_zoe_kitchen Sat 21-24; requires_npc npc_kayla",
    "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "989ff0dfd5b9e748",
+    "text": "5a1221c0e90f780c",
     "traits": "d79bccff03ff73e2",
-    "facts": "d9bd044fc487e3e2",
-    "facts2": "d3a6415c2dd7208a",
-    "all": "5363d896a39e23b5"
+    "facts": "464f8631b50219da",
+    "facts2": "dc2994085a7238ab",
+    "all": "edabf330ff65a5b6"
    },
    "row_hash": "310706ee076318f2",
-   "carried": true,
-   "pass": 3
+   "carried": false,
+   "pass": 6
+  },
+  {
+   "row": "C461",
+   "screen": "talk_kayla_party.talk",
+   "verdict": "PASS",
+   "line": "The punch is mostly vodka. Just so you know.",
+   "why": "texture and cast-true dialogue that can't clash: Kayla in the kitchen with the punch (party_drink is in the kitchen now); Done 10 minutes",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "7c537332ceea2866",
+    "traits": "d79bccff03ff73e2",
+    "facts": "c232995192d9ddfd",
+    "facts2": "c47540a0cbd18098",
+    "all": "b1d6484cf31e4e40"
+   },
+   "row_hash": "310706ee076318f2",
+   "carried": false,
+   "pass": 6
   },
   {
    "row": "C461",
    "screen": "talk_tess_party.hub",
    "verdict": "PASS",
    "line": "Tess is at the end of the counter, turning a plastic cup round and round in her hands.",
-   "why": "Texture (sticky floor, sweat, crowd, cup) and dialogue that fit the cast; nothing that can clash.",
+   "why": "texture and cast-true dialogue that can't clash: Tess near_zoe_kitchen Sat 21-24; requires_npc npc_tess",
    "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "aeb9e5f25534c715",
+    "text": "6bd4ff8ef0169027",
     "traits": "0b50d642c406ca77",
-    "facts": "6a0015e0fad0b575",
-    "facts2": "0176c4f82ffee42f",
-    "all": "124e730061d01a18"
+    "facts": "642e048f7346b8d5",
+    "facts2": "3c1f586f9618a811",
+    "all": "042c95a2cb6269fb"
    },
    "row_hash": "310706ee076318f2",
-   "carried": true,
-   "pass": 3
+   "carried": false,
+   "pass": 6
+  },
+  {
+   "row": "C461",
+   "screen": "talk_tess_party.talk",
+   "verdict": "PASS",
+   "line": "Kayla made me come.",
+   "why": "texture and cast-true dialogue that can't clash: Kayla is at the party (kitchen, Sat 21-24); Done 10 minutes",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "d024d58cecc43940",
+    "traits": "85bb3b602dd90b82",
+    "facts": "20bca8e543752750",
+    "facts2": "255665aa2f203191",
+    "all": "efa078348f680792"
+   },
+   "row_hash": "310706ee076318f2",
+   "carried": false,
+   "pass": 6
   },
   {
    "row": "C519",
@@ -4513,6 +5494,44 @@
    "pass": 2
   },
   {
+   "row": "C889",
+   "screen": "party_end.end",
+   "verdict": "PASS",
+   "line": "Go home",
+   "why": "labels 'Go home', 'Help Zoe clean up': no clock time, duration or energy on any label; spend is in the costs",
+   "cause": null,
+   "note": true,
+   "screen_hash": {
+    "text": "078da18e18b49909",
+    "traits": "6b1e34b018661933",
+    "facts": "54470cc139c09bcf",
+    "facts2": "47b195b05ada2e26",
+    "all": "8416f1077e8c2445"
+   },
+   "row_hash": "def1348d483d0c40",
+   "carried": false,
+   "pass": 6
+  },
+  {
+   "row": "C889",
+   "screen": "party_end.stay",
+   "verdict": "PASS",
+   "line": "Go home",
+   "why": "labels 'Go home', 'Help Zoe clean up': no clock time, duration or energy on any label; spend is in the costs",
+   "cause": null,
+   "note": true,
+   "screen_hash": {
+    "text": "5016eaf551f457f5",
+    "traits": "6b1e34b018661933",
+    "facts": "54470cc139c09bcf",
+    "facts2": "47b195b05ada2e26",
+    "all": "3ad45fffe33d465f"
+   },
+   "row_hash": "def1348d483d0c40",
+   "carried": false,
+   "pass": 6
+  },
+  {
    "row": "C892",
    "screen": "*",
    "verdict": "PASS",
@@ -4524,6 +5543,44 @@
    "row_hash": "5c890033f6ac38b8",
    "carried": true,
    "pass": 2
+  },
+  {
+   "row": "C892",
+   "screen": "party_end.end",
+   "verdict": "PASS",
+   "line": "It's past midnight, and the party's thinning. Half the coats are gone from the sofa, somebody's asleep in the bathtub, and Zoe's turned the music down.",
+   "why": "the party's hours are on the door (Mingle's dimmed line); 'past midnight' is the event's own fact, not a door rule",
+   "cause": null,
+   "note": true,
+   "screen_hash": {
+    "text": "078da18e18b49909",
+    "traits": "6b1e34b018661933",
+    "facts": "54470cc139c09bcf",
+    "facts2": "47b195b05ada2e26",
+    "all": "8416f1077e8c2445"
+   },
+   "row_hash": "5c890033f6ac38b8",
+   "carried": false,
+   "pass": 6
+  },
+  {
+   "row": "C892",
+   "screen": "party_end.stay",
+   "verdict": "PASS",
+   "line": "You pick up cups with Zoe until the speaker's switched off and the flat is quiet.",
+   "why": "the party's hours are on the door (Mingle's dimmed line); the act names no hour",
+   "cause": null,
+   "note": true,
+   "screen_hash": {
+    "text": "5016eaf551f457f5",
+    "traits": "6b1e34b018661933",
+    "facts": "54470cc139c09bcf",
+    "facts2": "47b195b05ada2e26",
+    "all": "3ad45fffe33d465f"
+   },
+   "row_hash": "5c890033f6ac38b8",
+   "carried": false,
+   "pass": 6
   },
   {
    "row": "C897",
@@ -4539,6 +5596,44 @@
    "pass": 2
   },
   {
+   "row": "C897",
+   "screen": "party_end.end",
+   "verdict": "PASS",
+   "line": "It's past midnight, and the party's thinning. Half the coats are gone from the sofa, somebody's asleep in the bathtub, and Zoe's turned the music down.",
+   "why": "time sits only on the trip home across areas (45 minutes, the walk Zoe's to her street); hops inside the flat cost nothing",
+   "cause": null,
+   "note": true,
+   "screen_hash": {
+    "text": "078da18e18b49909",
+    "traits": "6b1e34b018661933",
+    "facts": "54470cc139c09bcf",
+    "facts2": "47b195b05ada2e26",
+    "all": "8416f1077e8c2445"
+   },
+   "row_hash": "265ece64add83676",
+   "carried": false,
+   "pass": 6
+  },
+  {
+   "row": "C897",
+   "screen": "party_end.stay",
+   "verdict": "PASS",
+   "line": "You pick up cups with Zoe until the speaker's switched off and the flat is quiet.",
+   "why": "time sits only on the trip home across areas (45 minutes, the walk Zoe's to her street); hops inside the flat cost nothing",
+   "cause": null,
+   "note": true,
+   "screen_hash": {
+    "text": "5016eaf551f457f5",
+    "traits": "6b1e34b018661933",
+    "facts": "54470cc139c09bcf",
+    "facts2": "47b195b05ada2e26",
+    "all": "3ad45fffe33d465f"
+   },
+   "row_hash": "265ece64add83676",
+   "carried": false,
+   "pass": 6
+  },
+  {
    "row": "C900",
    "screen": "*",
    "verdict": "PASS",
@@ -4550,6 +5645,44 @@
    "row_hash": "6372efb027eb2034",
    "carried": true,
    "pass": 2
+  },
+  {
+   "row": "C900",
+   "screen": "party_end.end",
+   "verdict": "PASS",
+   "line": "It's past midnight, and the party's thinning.",
+   "why": "no clock time printed; 'past midnight' is true at 00:00 and at 00:59, the last minute of the window (C902), and unchanged since the last pass",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "078da18e18b49909",
+    "traits": "6b1e34b018661933",
+    "facts": "54470cc139c09bcf",
+    "facts2": "47b195b05ada2e26",
+    "all": "8416f1077e8c2445"
+   },
+   "row_hash": "6372efb027eb2034",
+   "carried": false,
+   "pass": 6
+  },
+  {
+   "row": "C900",
+   "screen": "party_end.stay",
+   "verdict": "PASS",
+   "line": "You pick up cups with Zoe until the speaker's switched off and the flat is quiet.",
+   "why": "no clock time in the prose; true at any minute of the window",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "5016eaf551f457f5",
+    "traits": "6b1e34b018661933",
+    "facts": "54470cc139c09bcf",
+    "facts2": "47b195b05ada2e26",
+    "all": "3ad45fffe33d465f"
+   },
+   "row_hash": "6372efb027eb2034",
+   "carried": false,
+   "pass": 6
   },
   {
    "row": "C902",
@@ -4565,6 +5698,44 @@
    "pass": 2
   },
   {
+   "row": "C902",
+   "screen": "party_end.end",
+   "verdict": "PASS",
+   "line": "It's past midnight, and the party's thinning.",
+   "why": "no clock time printed; 'past midnight' is true at 00:00 and at 00:59, the last minute of the window (C902), and unchanged since the last pass",
+   "cause": null,
+   "note": true,
+   "screen_hash": {
+    "text": "078da18e18b49909",
+    "traits": "6b1e34b018661933",
+    "facts": "54470cc139c09bcf",
+    "facts2": "47b195b05ada2e26",
+    "all": "8416f1077e8c2445"
+   },
+   "row_hash": "df5ed7a36dbc74e4",
+   "carried": false,
+   "pass": 6
+  },
+  {
+   "row": "C902",
+   "screen": "party_end.stay",
+   "verdict": "PASS",
+   "line": "You pick up cups with Zoe until the speaker's switched off and the flat is quiet.",
+   "why": "no clock time in the prose; true at any minute of the window",
+   "cause": null,
+   "note": true,
+   "screen_hash": {
+    "text": "5016eaf551f457f5",
+    "traits": "6b1e34b018661933",
+    "facts": "54470cc139c09bcf",
+    "facts2": "47b195b05ada2e26",
+    "all": "3ad45fffe33d465f"
+   },
+   "row_hash": "df5ed7a36dbc74e4",
+   "carried": false,
+   "pass": 6
+  },
+  {
    "row": "C903",
    "screen": "*",
    "verdict": "PASS",
@@ -4576,6 +5747,44 @@
    "row_hash": "4f83b0b5eb45f71b",
    "carried": true,
    "pass": 2
+  },
+  {
+   "row": "C903",
+   "screen": "party_end.end",
+   "verdict": "PASS",
+   "line": "It's past midnight, and the party's thinning. Half the coats are gone from the sofa, somebody's asleep in the bathtub, and Zoe's turned the music down.",
+   "why": "no weekday named on this screen",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "078da18e18b49909",
+    "traits": "6b1e34b018661933",
+    "facts": "54470cc139c09bcf",
+    "facts2": "47b195b05ada2e26",
+    "all": "8416f1077e8c2445"
+   },
+   "row_hash": "4f83b0b5eb45f71b",
+   "carried": false,
+   "pass": 6
+  },
+  {
+   "row": "C903",
+   "screen": "party_end.stay",
+   "verdict": "PASS",
+   "line": "You pick up cups with Zoe until the speaker's switched off and the flat is quiet.",
+   "why": "no weekday named on this screen",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "5016eaf551f457f5",
+    "traits": "6b1e34b018661933",
+    "facts": "54470cc139c09bcf",
+    "facts2": "47b195b05ada2e26",
+    "all": "3ad45fffe33d465f"
+   },
+   "row_hash": "4f83b0b5eb45f71b",
+   "carried": false,
+   "pass": 6
   },
   {
    "row": "C906",
@@ -4591,6 +5800,44 @@
    "pass": 2
   },
   {
+   "row": "C906",
+   "screen": "party_end.end",
+   "verdict": "PASS",
+   "line": "Go home",
+   "why": "labels 'Go home', 'Help Zoe clean up': no clock time, duration or energy on any label; spend is in the costs",
+   "cause": null,
+   "note": true,
+   "screen_hash": {
+    "text": "078da18e18b49909",
+    "traits": "6b1e34b018661933",
+    "facts": "54470cc139c09bcf",
+    "facts2": "47b195b05ada2e26",
+    "all": "8416f1077e8c2445"
+   },
+   "row_hash": "71713a7e7ae739e7",
+   "carried": false,
+   "pass": 6
+  },
+  {
+   "row": "C906",
+   "screen": "party_end.stay",
+   "verdict": "PASS",
+   "line": "Go home",
+   "why": "labels 'Go home', 'Help Zoe clean up': no clock time, duration or energy on any label; spend is in the costs",
+   "cause": null,
+   "note": true,
+   "screen_hash": {
+    "text": "5016eaf551f457f5",
+    "traits": "6b1e34b018661933",
+    "facts": "54470cc139c09bcf",
+    "facts2": "47b195b05ada2e26",
+    "all": "3ad45fffe33d465f"
+   },
+   "row_hash": "71713a7e7ae739e7",
+   "carried": false,
+   "pass": 6
+  },
+  {
    "row": "C910",
    "screen": "*",
    "verdict": "PASS",
@@ -4604,6 +5851,44 @@
    "pass": 2
   },
   {
+   "row": "C910",
+   "screen": "party_end.end",
+   "verdict": "PASS",
+   "line": "Go home",
+   "why": "labels 'Go home', 'Help Zoe clean up': no clock time, duration or energy on any label; spend is in the costs",
+   "cause": null,
+   "note": true,
+   "screen_hash": {
+    "text": "078da18e18b49909",
+    "traits": "6b1e34b018661933",
+    "facts": "54470cc139c09bcf",
+    "facts2": "47b195b05ada2e26",
+    "all": "8416f1077e8c2445"
+   },
+   "row_hash": "d5a109f1ef88419a",
+   "carried": false,
+   "pass": 6
+  },
+  {
+   "row": "C910",
+   "screen": "party_end.stay",
+   "verdict": "PASS",
+   "line": "Go home",
+   "why": "labels 'Go home', 'Help Zoe clean up': no clock time, duration or energy on any label; spend is in the costs",
+   "cause": null,
+   "note": true,
+   "screen_hash": {
+    "text": "5016eaf551f457f5",
+    "traits": "6b1e34b018661933",
+    "facts": "54470cc139c09bcf",
+    "facts2": "47b195b05ada2e26",
+    "all": "3ad45fffe33d465f"
+   },
+   "row_hash": "d5a109f1ef88419a",
+   "carried": false,
+   "pass": 6
+  },
+  {
    "row": "C913",
    "screen": "*",
    "verdict": "PASS",
@@ -4615,6 +5900,44 @@
    "row_hash": "c750f9b6ab4ace14",
    "carried": true,
    "pass": 2
+  },
+  {
+   "row": "C913",
+   "screen": "party_end.end",
+   "verdict": "PASS",
+   "line": "It's past midnight, and the party's thinning. Half the coats are gone from the sofa, somebody's asleep in the bathtub, and Zoe's turned the music down.",
+   "why": "the party's hours are published on Mingle's dimmed line and the Quests line ('9pm to 1am'); the end itself is an event (C916)",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "078da18e18b49909",
+    "traits": "6b1e34b018661933",
+    "facts": "54470cc139c09bcf",
+    "facts2": "47b195b05ada2e26",
+    "all": "8416f1077e8c2445"
+   },
+   "row_hash": "c750f9b6ab4ace14",
+   "carried": false,
+   "pass": 6
+  },
+  {
+   "row": "C913",
+   "screen": "party_end.stay",
+   "verdict": "PASS",
+   "line": "You pick up cups with Zoe until the speaker's switched off and the flat is quiet.",
+   "why": "the party's hours are published on Mingle's dimmed line and the Quests line ('9pm to 1am'); the end itself is an event (C916)",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "5016eaf551f457f5",
+    "traits": "6b1e34b018661933",
+    "facts": "54470cc139c09bcf",
+    "facts2": "47b195b05ada2e26",
+    "all": "3ad45fffe33d465f"
+   },
+   "row_hash": "c750f9b6ab4ace14",
+   "carried": false,
+   "pass": 6
   },
   {
    "row": "C913",
@@ -4649,6 +5972,44 @@
    "pass": 2
   },
   {
+   "row": "C914",
+   "screen": "party_end.end",
+   "verdict": "N/A",
+   "line": "It's past midnight, and the party's thinning. Half the coats are gone from the sofa, somebody's asleep in the bathtub, and Zoe's turned the music down.",
+   "why": "no greyed row on this screen: the end is an event that happens to her, hidden when shut",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "078da18e18b49909",
+    "traits": "6b1e34b018661933",
+    "facts": "54470cc139c09bcf",
+    "facts2": "47b195b05ada2e26",
+    "all": "8416f1077e8c2445"
+   },
+   "row_hash": "bd07273d5822f34f",
+   "carried": false,
+   "pass": 6
+  },
+  {
+   "row": "C914",
+   "screen": "party_end.stay",
+   "verdict": "N/A",
+   "line": "You pick up cups with Zoe until the speaker's switched off and the flat is quiet.",
+   "why": "no greyed row on this screen: the end is an event that happens to her, hidden when shut",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "5016eaf551f457f5",
+    "traits": "6b1e34b018661933",
+    "facts": "54470cc139c09bcf",
+    "facts2": "47b195b05ada2e26",
+    "all": "3ad45fffe33d465f"
+   },
+   "row_hash": "bd07273d5822f34f",
+   "carried": false,
+   "pass": 6
+  },
+  {
    "row": "C916",
    "screen": "*",
    "verdict": "PASS",
@@ -4681,6 +6042,44 @@
    "pass": 2
   },
   {
+   "row": "C916",
+   "screen": "party_end.end",
+   "verdict": "PASS",
+   "line": "It's past midnight, and the party's thinning. Half the coats are gone from the sofa, somebody's asleep in the bathtub, and Zoe's turned the music down.",
+   "why": "the end is random and stays hidden out of Sun 00:00-01:00",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "078da18e18b49909",
+    "traits": "6b1e34b018661933",
+    "facts": "54470cc139c09bcf",
+    "facts2": "47b195b05ada2e26",
+    "all": "8416f1077e8c2445"
+   },
+   "row_hash": "7b2bb0dfdbcfe946",
+   "carried": false,
+   "pass": 6
+  },
+  {
+   "row": "C916",
+   "screen": "party_end.stay",
+   "verdict": "PASS",
+   "line": "You pick up cups with Zoe until the speaker's switched off and the flat is quiet.",
+   "why": "the end is random and stays hidden out of Sun 00:00-01:00",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "5016eaf551f457f5",
+    "traits": "6b1e34b018661933",
+    "facts": "54470cc139c09bcf",
+    "facts2": "47b195b05ada2e26",
+    "all": "3ad45fffe33d465f"
+   },
+   "row_hash": "7b2bb0dfdbcfe946",
+   "carried": false,
+   "pass": 6
+  },
+  {
    "row": "C920",
    "screen": "*",
    "verdict": "PASS",
@@ -4692,6 +6091,44 @@
    "row_hash": "513927dd127fca04",
    "carried": true,
    "pass": 2
+  },
+  {
+   "row": "C920",
+   "screen": "party_end.end",
+   "verdict": "PASS",
+   "line": "It's past midnight, and the party's thinning. Half the coats are gone from the sofa, somebody's asleep in the bathtub, and Zoe's turned the music down.",
+   "why": "time sits only on the trip home across areas (45 minutes, the walk Zoe's to her street); hops inside the flat cost nothing",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "078da18e18b49909",
+    "traits": "6b1e34b018661933",
+    "facts": "54470cc139c09bcf",
+    "facts2": "47b195b05ada2e26",
+    "all": "8416f1077e8c2445"
+   },
+   "row_hash": "513927dd127fca04",
+   "carried": false,
+   "pass": 6
+  },
+  {
+   "row": "C920",
+   "screen": "party_end.stay",
+   "verdict": "PASS",
+   "line": "You pick up cups with Zoe until the speaker's switched off and the flat is quiet.",
+   "why": "time sits only on the trip home across areas (45 minutes, the walk Zoe's to her street); hops inside the flat cost nothing",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "5016eaf551f457f5",
+    "traits": "6b1e34b018661933",
+    "facts": "54470cc139c09bcf",
+    "facts2": "47b195b05ada2e26",
+    "all": "3ad45fffe33d465f"
+   },
+   "row_hash": "513927dd127fca04",
+   "carried": false,
+   "pass": 6
   },
   {
    "row": "C924",
@@ -4707,6 +6144,44 @@
    "pass": 2
   },
   {
+   "row": "C924",
+   "screen": "party_end.end",
+   "verdict": "PASS",
+   "line": "It's past midnight, and the party's thinning. Half the coats are gone from the sofa, somebody's asleep in the bathtub, and Zoe's turned the music down.",
+   "why": "time sits only on the trip home across areas (45 minutes, the walk Zoe's to her street); hops inside the flat cost nothing",
+   "cause": null,
+   "note": true,
+   "screen_hash": {
+    "text": "078da18e18b49909",
+    "traits": "6b1e34b018661933",
+    "facts": "54470cc139c09bcf",
+    "facts2": "47b195b05ada2e26",
+    "all": "8416f1077e8c2445"
+   },
+   "row_hash": "791cd173e23fb130",
+   "carried": false,
+   "pass": 6
+  },
+  {
+   "row": "C924",
+   "screen": "party_end.stay",
+   "verdict": "PASS",
+   "line": "You pick up cups with Zoe until the speaker's switched off and the flat is quiet.",
+   "why": "time sits only on the trip home across areas (45 minutes, the walk Zoe's to her street); hops inside the flat cost nothing",
+   "cause": null,
+   "note": true,
+   "screen_hash": {
+    "text": "5016eaf551f457f5",
+    "traits": "6b1e34b018661933",
+    "facts": "54470cc139c09bcf",
+    "facts2": "47b195b05ada2e26",
+    "all": "3ad45fffe33d465f"
+   },
+   "row_hash": "791cd173e23fb130",
+   "carried": false,
+   "pass": 6
+  },
+  {
    "row": "C926",
    "screen": "*",
    "verdict": "PASS",
@@ -4718,6 +6193,44 @@
    "row_hash": "177d1e1776fac74b",
    "carried": true,
    "pass": 2
+  },
+  {
+   "row": "C926",
+   "screen": "party_end.end",
+   "verdict": "PASS",
+   "line": "It's past midnight, and the party's thinning. Half the coats are gone from the sofa, somebody's asleep in the bathtub, and Zoe's turned the music down.",
+   "why": "the clock moves by minutes only (45, 65); nothing sets an hour",
+   "cause": null,
+   "note": true,
+   "screen_hash": {
+    "text": "078da18e18b49909",
+    "traits": "6b1e34b018661933",
+    "facts": "54470cc139c09bcf",
+    "facts2": "47b195b05ada2e26",
+    "all": "8416f1077e8c2445"
+   },
+   "row_hash": "177d1e1776fac74b",
+   "carried": false,
+   "pass": 6
+  },
+  {
+   "row": "C926",
+   "screen": "party_end.stay",
+   "verdict": "PASS",
+   "line": "You pick up cups with Zoe until the speaker's switched off and the flat is quiet.",
+   "why": "the clock moves by minutes only (45, 65); nothing sets an hour",
+   "cause": null,
+   "note": true,
+   "screen_hash": {
+    "text": "5016eaf551f457f5",
+    "traits": "6b1e34b018661933",
+    "facts": "54470cc139c09bcf",
+    "facts2": "47b195b05ada2e26",
+    "all": "3ad45fffe33d465f"
+   },
+   "row_hash": "177d1e1776fac74b",
+   "carried": false,
+   "pass": 6
   },
   {
    "row": "C927",
@@ -4736,58 +6249,153 @@
    "row": "C927",
    "screen": "party_dance.dance",
    "verdict": "PASS",
-   "line": "You squeeze into the middle of the room where the bodies are tightest",
-   "why": "\"Done\" spends 20 minutes",
+   "line": "Babe! Don't stop, the next one's my favourite!",
+   "why": "the exit states its time (20 minutes), so the 3-minute default never applies",
    "cause": null,
    "note": true,
    "screen_hash": {
-    "text": "64c13cf7bfca581a",
+    "text": "66a0b954cfd9f92e",
     "traits": "6b1e34b018661933",
-    "facts": "b153518a6fd2602e",
-    "facts2": "adf208a6ad231fd4",
-    "all": "d1d502ce58e442d2"
+    "facts": "6116301392be4053",
+    "facts2": "2242d176693385da",
+    "all": "c623174c8e8121aa"
    },
    "row_hash": "4e86d143688ba8e5",
-   "carried": true,
-   "pass": 4
+   "carried": false,
+   "pass": 6
   },
   {
    "row": "C927",
-   "screen": "party_go_home.leave",
+   "screen": "party_drink.drink",
    "verdict": "PASS",
-   "line": "time_progression_minutes = 45",
-   "why": "The exit states its time; the 3-minute default never applies.",
+   "line": "The kitchen floor is sticky. Someone's made a punch in a mixing bowl, bright red and mostly vodka.",
+   "why": "the exit states its time (10 minutes), so the 3-minute default never applies",
    "cause": null,
    "note": true,
    "screen_hash": {
-    "text": "b692caf353c36f8b",
+    "text": "79fc332bab40fca5",
     "traits": "44136fa355b3678a",
-    "facts": "e3a1250e29743e29",
-    "facts2": "e3a1250e29743e29",
-    "all": "3131ee8197e2f7b1"
+    "facts": "3cf1551ba33fdf73",
+    "facts2": "3cf1551ba33fdf73",
+    "all": "e198c5a4b6a73253"
    },
    "row_hash": "4e86d143688ba8e5",
-   "carried": true,
-   "pass": 3
+   "carried": false,
+   "pass": 6
+  },
+  {
+   "row": "C927",
+   "screen": "party_end.end",
+   "verdict": "PASS",
+   "line": "It's past midnight, and the party's thinning. Half the coats are gone from the sofa, somebody's asleep in the bathtub, and Zoe's turned the music down.",
+   "why": "the exit states its time (45 on Go home; Help Zoe clean up is a node move minutes), so the 3-minute default never applies",
+   "cause": null,
+   "note": true,
+   "screen_hash": {
+    "text": "078da18e18b49909",
+    "traits": "6b1e34b018661933",
+    "facts": "54470cc139c09bcf",
+    "facts2": "47b195b05ada2e26",
+    "all": "8416f1077e8c2445"
+   },
+   "row_hash": "4e86d143688ba8e5",
+   "carried": false,
+   "pass": 6
+  },
+  {
+   "row": "C927",
+   "screen": "party_end.stay",
+   "verdict": "PASS",
+   "line": "You pick up cups with Zoe until the speaker's switched off and the flat is quiet.",
+   "why": "the exit states its time (65 minutes), so the 3-minute default never applies",
+   "cause": null,
+   "note": true,
+   "screen_hash": {
+    "text": "5016eaf551f457f5",
+    "traits": "6b1e34b018661933",
+    "facts": "54470cc139c09bcf",
+    "facts2": "47b195b05ada2e26",
+    "all": "3ad45fffe33d465f"
+   },
+   "row_hash": "4e86d143688ba8e5",
+   "carried": false,
+   "pass": 6
   },
   {
    "row": "C927",
    "screen": "party_mingle.mingle",
    "verdict": "PASS",
-   "line": "\"Done\" time_progression_minutes = 30",
-   "why": "the exit states its time",
+   "line": "You're Zoe's friend, right? From the college? She never shuts up about you.",
+   "why": "the exit states its time (30 minutes), so the 3-minute default never applies",
    "cause": null,
    "note": true,
    "screen_hash": {
-    "text": "60844f7b2302a991",
+    "text": "9a9985d190c041e9",
     "traits": "6b1e34b018661933",
-    "facts": "b153518a6fd2602e",
-    "facts2": "adf208a6ad231fd4",
-    "all": "e173d3ccddb4c581"
+    "facts": "6116301392be4053",
+    "facts2": "2242d176693385da",
+    "all": "6a54149924d4ad91"
    },
    "row_hash": "4e86d143688ba8e5",
-   "carried": true,
-   "pass": 5
+   "carried": false,
+   "pass": 6
+  },
+  {
+   "row": "C927",
+   "screen": "talk_brooke_party.talk",
+   "verdict": "PASS",
+   "line": "Enjoy it. Monday the mirror's mine again.",
+   "why": "the exit states its time (10 minutes), so the 3-minute default never applies",
+   "cause": null,
+   "note": true,
+   "screen_hash": {
+    "text": "dea5daa7bcb88b7a",
+    "traits": "4b5299c7025e6881",
+    "facts": "e1460e3c055c4a56",
+    "facts2": "d56e308d45dd6418",
+    "all": "970eade4458bfdbf"
+   },
+   "row_hash": "4e86d143688ba8e5",
+   "carried": false,
+   "pass": 6
+  },
+  {
+   "row": "C927",
+   "screen": "talk_kayla_party.talk",
+   "verdict": "PASS",
+   "line": "The punch is mostly vodka. Just so you know.",
+   "why": "the exit states its time (10 minutes), so the 3-minute default never applies",
+   "cause": null,
+   "note": true,
+   "screen_hash": {
+    "text": "7c537332ceea2866",
+    "traits": "d79bccff03ff73e2",
+    "facts": "c232995192d9ddfd",
+    "facts2": "c47540a0cbd18098",
+    "all": "b1d6484cf31e4e40"
+   },
+   "row_hash": "4e86d143688ba8e5",
+   "carried": false,
+   "pass": 6
+  },
+  {
+   "row": "C927",
+   "screen": "talk_tess_party.talk",
+   "verdict": "PASS",
+   "line": "Kayla made me come.",
+   "why": "the exit states its time (10 minutes), so the 3-minute default never applies",
+   "cause": null,
+   "note": true,
+   "screen_hash": {
+    "text": "d024d58cecc43940",
+    "traits": "85bb3b602dd90b82",
+    "facts": "20bca8e543752750",
+    "facts2": "255665aa2f203191",
+    "all": "efa078348f680792"
+   },
+   "row_hash": "4e86d143688ba8e5",
+   "carried": false,
+   "pass": 6
   },
   {
    "row": "C928",
@@ -4803,6 +6411,44 @@
    "pass": 2
   },
   {
+   "row": "C928",
+   "screen": "party_end.end",
+   "verdict": "PASS",
+   "line": "It's past midnight, and the party's thinning.",
+   "why": "no clock time printed; 'past midnight' is true at 00:00 and at 00:59, the last minute of the window (C902), and unchanged since the last pass",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "078da18e18b49909",
+    "traits": "6b1e34b018661933",
+    "facts": "54470cc139c09bcf",
+    "facts2": "47b195b05ada2e26",
+    "all": "8416f1077e8c2445"
+   },
+   "row_hash": "2c3ccc6bd9929d7f",
+   "carried": false,
+   "pass": 6
+  },
+  {
+   "row": "C928",
+   "screen": "party_end.stay",
+   "verdict": "PASS",
+   "line": "You pick up cups with Zoe until the speaker's switched off and the flat is quiet.",
+   "why": "no clock time in the prose; true at any minute of the window",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "5016eaf551f457f5",
+    "traits": "6b1e34b018661933",
+    "facts": "54470cc139c09bcf",
+    "facts2": "47b195b05ada2e26",
+    "all": "3ad45fffe33d465f"
+   },
+   "row_hash": "2c3ccc6bd9929d7f",
+   "carried": false,
+   "pass": 6
+  },
+  {
    "row": "C929",
    "screen": "*",
    "verdict": "PASS",
@@ -4816,6 +6462,44 @@
    "pass": 2
   },
   {
+   "row": "C929",
+   "screen": "party_end.end",
+   "verdict": "PASS",
+   "line": "Go home",
+   "why": "labels 'Go home', 'Help Zoe clean up': no clock time, duration or energy on any label; spend is in the costs",
+   "cause": null,
+   "note": true,
+   "screen_hash": {
+    "text": "078da18e18b49909",
+    "traits": "6b1e34b018661933",
+    "facts": "54470cc139c09bcf",
+    "facts2": "47b195b05ada2e26",
+    "all": "8416f1077e8c2445"
+   },
+   "row_hash": "18b0ecdf6d7fc901",
+   "carried": false,
+   "pass": 6
+  },
+  {
+   "row": "C929",
+   "screen": "party_end.stay",
+   "verdict": "PASS",
+   "line": "Go home",
+   "why": "labels 'Go home', 'Help Zoe clean up': no clock time, duration or energy on any label; spend is in the costs",
+   "cause": null,
+   "note": true,
+   "screen_hash": {
+    "text": "5016eaf551f457f5",
+    "traits": "6b1e34b018661933",
+    "facts": "54470cc139c09bcf",
+    "facts2": "47b195b05ada2e26",
+    "all": "3ad45fffe33d465f"
+   },
+   "row_hash": "18b0ecdf6d7fc901",
+   "carried": false,
+   "pass": 6
+  },
+  {
    "row": "C930",
    "screen": "*",
    "verdict": "PASS",
@@ -4827,6 +6511,44 @@
    "row_hash": "beb57cd46fe906bf",
    "carried": true,
    "pass": 2
+  },
+  {
+   "row": "C930",
+   "screen": "party_end.end",
+   "verdict": "PASS",
+   "line": "It's past midnight, and the party's thinning. Half the coats are gone from the sofa, somebody's asleep in the bathtub, and Zoe's turned the music down.",
+   "why": "the end is an event, not windowed work; vanishing out of hours is what C916 wants",
+   "cause": null,
+   "note": true,
+   "screen_hash": {
+    "text": "078da18e18b49909",
+    "traits": "6b1e34b018661933",
+    "facts": "54470cc139c09bcf",
+    "facts2": "47b195b05ada2e26",
+    "all": "8416f1077e8c2445"
+   },
+   "row_hash": "beb57cd46fe906bf",
+   "carried": false,
+   "pass": 6
+  },
+  {
+   "row": "C930",
+   "screen": "party_end.stay",
+   "verdict": "PASS",
+   "line": "You pick up cups with Zoe until the speaker's switched off and the flat is quiet.",
+   "why": "the end is an event, not windowed work; vanishing out of hours is what C916 wants",
+   "cause": null,
+   "note": true,
+   "screen_hash": {
+    "text": "5016eaf551f457f5",
+    "traits": "6b1e34b018661933",
+    "facts": "54470cc139c09bcf",
+    "facts2": "47b195b05ada2e26",
+    "all": "3ad45fffe33d465f"
+   },
+   "row_hash": "beb57cd46fe906bf",
+   "carried": false,
+   "pass": 6
   },
   {
    "row": "C931",
@@ -4845,58 +6567,153 @@
    "row": "C931",
    "screen": "party_dance.dance",
    "verdict": "PASS",
-   "line": "You squeeze into the middle of the room where the bodies are tightest",
-   "why": "time_of_day 21:00-00:00 wraps to midnight via setup.isCurrentTimeSlot (v2.py:4793-4813)",
+   "line": "Babe! Don't stop, the next one's my favourite!",
+   "why": "weekday 5 + time_of_day 21:00-00:00 wraps to midnight, end exclusive (setup.isCurrentTimeSlot), so 00:00 Sunday is out and party_end takes over",
    "cause": null,
    "note": true,
    "screen_hash": {
-    "text": "64c13cf7bfca581a",
+    "text": "66a0b954cfd9f92e",
     "traits": "6b1e34b018661933",
-    "facts": "b153518a6fd2602e",
-    "facts2": "adf208a6ad231fd4",
-    "all": "d1d502ce58e442d2"
+    "facts": "6116301392be4053",
+    "facts2": "2242d176693385da",
+    "all": "c623174c8e8121aa"
    },
    "row_hash": "1aadffd96e76381c",
-   "carried": true,
-   "pass": 4
+   "carried": false,
+   "pass": 6
   },
   {
    "row": "C931",
-   "screen": "party_go_home.leave",
+   "screen": "party_drink.drink",
    "verdict": "PASS",
-   "line": "time_of_day 21:00-00:00, weekday 5",
-   "why": "End exclusive: 00:00 Sunday is out, where party_end's 00:00-01:00 window takes over; re-read on every render.",
+   "line": "The kitchen floor is sticky. Someone's made a punch in a mixing bowl, bright red and mostly vodka.",
+   "why": "weekday 5 + time_of_day 21:00-00:00 wraps to midnight, end exclusive (setup.isCurrentTimeSlot), so 00:00 Sunday is out and party_end takes over",
    "cause": null,
    "note": true,
    "screen_hash": {
-    "text": "b692caf353c36f8b",
+    "text": "79fc332bab40fca5",
     "traits": "44136fa355b3678a",
-    "facts": "e3a1250e29743e29",
-    "facts2": "e3a1250e29743e29",
-    "all": "3131ee8197e2f7b1"
+    "facts": "3cf1551ba33fdf73",
+    "facts2": "3cf1551ba33fdf73",
+    "all": "e198c5a4b6a73253"
    },
    "row_hash": "1aadffd96e76381c",
-   "carried": true,
-   "pass": 3
+   "carried": false,
+   "pass": 6
+  },
+  {
+   "row": "C931",
+   "screen": "party_end.end",
+   "verdict": "PASS",
+   "line": "It's past midnight, and the party's thinning. Half the coats are gone from the sofa, somebody's asleep in the bathtub, and Zoe's turned the music down.",
+   "why": "weekday 6 + time_of_day 00:00-01:00, end exclusive, re-read each render (v2.py:5323-5325)",
+   "cause": null,
+   "note": true,
+   "screen_hash": {
+    "text": "078da18e18b49909",
+    "traits": "6b1e34b018661933",
+    "facts": "54470cc139c09bcf",
+    "facts2": "47b195b05ada2e26",
+    "all": "8416f1077e8c2445"
+   },
+   "row_hash": "1aadffd96e76381c",
+   "carried": false,
+   "pass": 6
+  },
+  {
+   "row": "C931",
+   "screen": "party_end.stay",
+   "verdict": "PASS",
+   "line": "You pick up cups with Zoe until the speaker's switched off and the flat is quiet.",
+   "why": "weekday 6 + time_of_day 00:00-01:00, end exclusive, re-read each render",
+   "cause": null,
+   "note": true,
+   "screen_hash": {
+    "text": "5016eaf551f457f5",
+    "traits": "6b1e34b018661933",
+    "facts": "54470cc139c09bcf",
+    "facts2": "47b195b05ada2e26",
+    "all": "3ad45fffe33d465f"
+   },
+   "row_hash": "1aadffd96e76381c",
+   "carried": false,
+   "pass": 6
   },
   {
    "row": "C931",
    "screen": "party_mingle.mingle",
    "verdict": "PASS",
-   "line": "time_of_day 21:00-00:00",
-   "why": "re-read each render, wraps (v2.py:5323-5325)",
+   "line": "You're Zoe's friend, right? From the college? She never shuts up about you.",
+   "why": "weekday 5 + time_of_day 21:00-00:00 wraps to midnight, end exclusive (setup.isCurrentTimeSlot), so 00:00 Sunday is out and party_end takes over",
    "cause": null,
    "note": true,
    "screen_hash": {
-    "text": "60844f7b2302a991",
+    "text": "9a9985d190c041e9",
     "traits": "6b1e34b018661933",
-    "facts": "b153518a6fd2602e",
-    "facts2": "adf208a6ad231fd4",
-    "all": "e173d3ccddb4c581"
+    "facts": "6116301392be4053",
+    "facts2": "2242d176693385da",
+    "all": "6a54149924d4ad91"
    },
    "row_hash": "1aadffd96e76381c",
-   "carried": true,
-   "pass": 5
+   "carried": false,
+   "pass": 6
+  },
+  {
+   "row": "C931",
+   "screen": "talk_brooke_party.talk",
+   "verdict": "PASS",
+   "line": "Enjoy it. Monday the mirror's mine again.",
+   "why": "weekday 5 + time_of_day 21:00-00:00 wraps to midnight, end exclusive (setup.isCurrentTimeSlot), so 00:00 Sunday is out and party_end takes over",
+   "cause": null,
+   "note": true,
+   "screen_hash": {
+    "text": "dea5daa7bcb88b7a",
+    "traits": "4b5299c7025e6881",
+    "facts": "e1460e3c055c4a56",
+    "facts2": "d56e308d45dd6418",
+    "all": "970eade4458bfdbf"
+   },
+   "row_hash": "1aadffd96e76381c",
+   "carried": false,
+   "pass": 6
+  },
+  {
+   "row": "C931",
+   "screen": "talk_kayla_party.talk",
+   "verdict": "PASS",
+   "line": "The punch is mostly vodka. Just so you know.",
+   "why": "weekday 5 + time_of_day 21:00-00:00 wraps to midnight, end exclusive (setup.isCurrentTimeSlot), so 00:00 Sunday is out and party_end takes over",
+   "cause": null,
+   "note": true,
+   "screen_hash": {
+    "text": "7c537332ceea2866",
+    "traits": "d79bccff03ff73e2",
+    "facts": "c232995192d9ddfd",
+    "facts2": "c47540a0cbd18098",
+    "all": "b1d6484cf31e4e40"
+   },
+   "row_hash": "1aadffd96e76381c",
+   "carried": false,
+   "pass": 6
+  },
+  {
+   "row": "C931",
+   "screen": "talk_tess_party.talk",
+   "verdict": "PASS",
+   "line": "Kayla made me come.",
+   "why": "weekday 5 + time_of_day 21:00-00:00 wraps to midnight, end exclusive (setup.isCurrentTimeSlot), so 00:00 Sunday is out and party_end takes over",
+   "cause": null,
+   "note": true,
+   "screen_hash": {
+    "text": "d024d58cecc43940",
+    "traits": "85bb3b602dd90b82",
+    "facts": "20bca8e543752750",
+    "facts2": "255665aa2f203191",
+    "all": "efa078348f680792"
+   },
+   "row_hash": "1aadffd96e76381c",
+   "carried": false,
+   "pass": 6
   },
   {
    "row": "C953",
@@ -4945,212 +6762,440 @@
   },
   {
    "row": "L106",
-   "screen": "party_dance.dance",
+   "screen": "party_brooke_look.back",
    "verdict": "PASS",
-   "line": "You squeeze into the middle of the room where the bodies are tightest",
-   "why": "Zoe speaks; her rows put her at near_zoe_apartment Sat 18-24",
+   "line": "Somebody near the fridge laughs. Brooke doesn't.",
+   "why": "names only who is there: kitchen (fridge in the kitchen's line); Brooke's row puts her in near_zoe_kitchen Sat 21-24; Done stays in the kitchen",
    "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "64c13cf7bfca581a",
-    "traits": "6b1e34b018661933",
-    "facts": "b153518a6fd2602e",
-    "facts2": "adf208a6ad231fd4",
-    "all": "d1d502ce58e442d2"
+    "text": "4c446143588a608b",
+    "traits": "ebc4051ecd3afac5",
+    "facts": "1676cd55e1a9d96d",
+    "facts2": "58015b8566c69a77",
+    "all": "5e455fe9f1205a7c"
    },
    "row_hash": "13a714429d15f3b2",
-   "carried": true,
-   "pass": 4
+   "carried": false,
+   "pass": 6
+  },
+  {
+   "row": "L106",
+   "screen": "party_brooke_look.ignore",
+   "verdict": "PASS",
+   "line": "You turn your back on the kitchen. You can feel her watching you go.",
+   "why": "names only who is there: Done now goes to the living room (near_zoe_apartment), so walking away from the kitchen is true; Brooke named only behind met_brooke",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "cec4c1cac0e81b48",
+    "traits": "ebc4051ecd3afac5",
+    "facts": "1676cd55e1a9d96d",
+    "facts2": "58015b8566c69a77",
+    "all": "e1455732593a2b96"
+   },
+   "row_hash": "13a714429d15f3b2",
+   "carried": false,
+   "pass": 6
+  },
+  {
+   "row": "L106",
+   "screen": "party_brooke_look.moment",
+   "verdict": "PASS",
+   "line": "The blonde girl by the counter looks you up and down, slowly, so her two friends can watch her do it.",
+   "why": "names only who is there: trigger npc_at_location npc_brooke near_zoe_kitchen; Kayla and Tess share her kitchen rows Sat 21-24 and are named only behind met_brooke (mirror_meet_brooke names them)",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "6da69ea20cb08ee5",
+    "traits": "06d2567e62494596",
+    "facts": "4ce0fba3044615af",
+    "facts2": "5e80911123c174a9",
+    "all": "6a5b117a2881c822"
+   },
+   "row_hash": "13a714429d15f3b2",
+   "carried": false,
+   "pass": 6
+  },
+  {
+   "row": "L106",
+   "screen": "party_dance.dance",
+   "verdict": "PASS",
+   "line": "Babe! Don't stop, the next one's my favourite!",
+   "why": "names only who is there: living room; Zoe's row puts her in near_zoe_apartment Sat 19-24; no one else named",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "66a0b954cfd9f92e",
+    "traits": "6b1e34b018661933",
+    "facts": "6116301392be4053",
+    "facts2": "2242d176693385da",
+    "all": "c623174c8e8121aa"
+   },
+   "row_hash": "13a714429d15f3b2",
+   "carried": false,
+   "pass": 6
+  },
+  {
+   "row": "L106",
+   "screen": "party_drink.drink",
+   "verdict": "PASS",
+   "line": "The kitchen floor is sticky. Someone's made a punch in a mixing bowl, bright red and mostly vodka.",
+   "why": "names only who is there: the scene now sits in near_zoe_kitchen, so 'the kitchen floor' is where she stands; speaker unknown",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "79fc332bab40fca5",
+    "traits": "44136fa355b3678a",
+    "facts": "3cf1551ba33fdf73",
+    "facts2": "3cf1551ba33fdf73",
+    "all": "e198c5a4b6a73253"
+   },
+   "row_hash": "13a714429d15f3b2",
+   "carried": false,
+   "pass": 6
+  },
+  {
+   "row": "L106",
+   "screen": "party_drink_guy.back",
+   "verdict": "PASS",
+   "line": "Suit yourself. I'll be by the window.",
+   "why": "names only who is there: unnamed stranger; Done back to the kitchen",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "3ec8be437a8947da",
+    "traits": "44136fa355b3678a",
+    "facts": "3cf1551ba33fdf73",
+    "facts2": "3cf1551ba33fdf73",
+    "all": "ad5c1e69b87bd5b7"
+   },
+   "row_hash": "13a714429d15f3b2",
+   "carried": false,
+   "pass": 6
+  },
+  {
+   "row": "L106",
+   "screen": "party_drink_guy.drink",
+   "verdict": "PASS",
+   "line": "Find me later, yeah? I'll be by the window.",
+   "why": "names only who is there: unnamed stranger; Done back to the kitchen",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "5b410ffea6326a56",
+    "traits": "44136fa355b3678a",
+    "facts": "3cf1551ba33fdf73",
+    "facts2": "3cf1551ba33fdf73",
+    "all": "5d51bea7a70d11e0"
+   },
+   "row_hash": "13a714429d15f3b2",
+   "carried": false,
+   "pass": 6
   },
   {
    "row": "L106",
    "screen": "party_drink_guy.moment",
    "verdict": "PASS",
-   "line": "A guy you don't know puts a plastic cup in your hand and stays there",
-   "why": "no named person",
+   "line": "A guy you don't know puts a plastic cup in your hand and stays there, close enough that his chest brushes your tits when he leans in to talk.",
+   "why": "names only who is there: unnamed stranger in the kitchen, Sat 21-00; no named person",
    "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "a140d97ebfe95ab0",
+    "text": "67dd963aca350210",
     "traits": "44136fa355b3678a",
-    "facts": "e3a1250e29743e29",
-    "facts2": "e3a1250e29743e29",
-    "all": "cdbf313bfd9554e4"
+    "facts": "3cf1551ba33fdf73",
+    "facts2": "3cf1551ba33fdf73",
+    "all": "85c9a66e377061b7"
    },
    "row_hash": "13a714429d15f3b2",
-   "carried": true,
-   "pass": 4
+   "carried": false,
+   "pass": 6
   },
   {
    "row": "L106",
-   "screen": "party_go_home.leave",
+   "screen": "party_end.end",
    "verdict": "PASS",
-   "line": "You squeeze out through the crowd and down the stairs. ... There's a party there every Saturday.",
-   "why": "Named people on screen are there by their rows (who_is_where Sat 21-24) or by requires_npc; strangers unnamed.",
+   "line": "It's past midnight, and the party's thinning. Half the coats are gone from the sofa, somebody's asleep in the bathtub, and Zoe's turned the music down.",
+   "why": "names only who is there: living room Sun 00-01, requires_npc npc_zoe, Zoe's row Sun 00-01 near_zoe_apartment; the bathroom ('Nobody's in here.') can't be reached between midnight and the end: it is off the living room, whose first render after midnight fires the end (chance 1.0), and both answers send her home",
    "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "b692caf353c36f8b",
-    "traits": "44136fa355b3678a",
-    "facts": "e3a1250e29743e29",
-    "facts2": "e3a1250e29743e29",
-    "all": "3131ee8197e2f7b1"
+    "text": "078da18e18b49909",
+    "traits": "6b1e34b018661933",
+    "facts": "54470cc139c09bcf",
+    "facts2": "47b195b05ada2e26",
+    "all": "8416f1077e8c2445"
    },
    "row_hash": "13a714429d15f3b2",
-   "carried": true,
-   "pass": 3
+   "carried": false,
+   "pass": 6
+  },
+  {
+   "row": "L106",
+   "screen": "party_end.stay",
+   "verdict": "PASS",
+   "line": "You pick up cups with Zoe until the speaker's switched off and the flat is quiet.",
+   "why": "names only who is there: Zoe there Sun 00-01; Go home 65 minutes, as the card says",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "5016eaf551f457f5",
+    "traits": "6b1e34b018661933",
+    "facts": "54470cc139c09bcf",
+    "facts2": "47b195b05ada2e26",
+    "all": "3ad45fffe33d465f"
+   },
+   "row_hash": "13a714429d15f3b2",
+   "carried": false,
+   "pass": 6
   },
   {
    "row": "L106",
    "screen": "party_mingle.mingle",
    "verdict": "PASS",
-   "line": "speaker \"unknown\"",
-   "why": "no named person claimed",
+   "line": "You're Zoe's friend, right? From the college? She never shuts up about you.",
+   "why": "names only who is there: living room; strangers only, Zoe named but not claimed present; Brooke and friends (now in the kitchen) not named",
    "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "60844f7b2302a991",
+    "text": "9a9985d190c041e9",
     "traits": "6b1e34b018661933",
-    "facts": "b153518a6fd2602e",
-    "facts2": "adf208a6ad231fd4",
-    "all": "e173d3ccddb4c581"
+    "facts": "6116301392be4053",
+    "facts2": "2242d176693385da",
+    "all": "6a54149924d4ad91"
    },
    "row_hash": "13a714429d15f3b2",
-   "carried": true,
-   "pass": 5
+   "carried": false,
+   "pass": 6
   },
   {
    "row": "L106",
    "screen": "party_speaker_guy.away",
    "verdict": "PASS",
    "line": "I'm by the speaker all night.",
-   "why": "True while the party runs; once a day.",
+   "why": "names only who is there: unnamed; the speaker is on the living room windowsill, where Dance happens",
    "cause": null,
    "note": false,
    "screen_hash": {
     "text": "749c9d064d356277",
     "traits": "44136fa355b3678a",
-    "facts": "4e36a3f9b54a7a54",
-    "facts2": "4e36a3f9b54a7a54",
-    "all": "b82166cb38a039be"
+    "facts": "7b8e6bf6d53bbfe4",
+    "facts2": "7b8e6bf6d53bbfe4",
+    "all": "ae4dc515f7c37168"
    },
    "row_hash": "13a714429d15f3b2",
-   "carried": true,
-   "pass": 2
+   "carried": false,
+   "pass": 6
   },
   {
    "row": "L106",
    "screen": "party_speaker_guy.look",
    "verdict": "PASS",
-   "line": "I'm by the speaker all night.",
-   "why": "No garment named; true every Saturday it fires.",
+   "line": "You look back over your shoulder. He's smiling down at you, and his hands spread on your stomach until the song ends.",
+   "why": "names only who is there: unnamed; no garment of hers named",
    "cause": null,
    "note": false,
    "screen_hash": {
     "text": "b33f68bb47ba059d",
     "traits": "44136fa355b3678a",
-    "facts": "4e36a3f9b54a7a54",
-    "facts2": "4e36a3f9b54a7a54",
-    "all": "aa9abb4efb5f2172"
+    "facts": "7b8e6bf6d53bbfe4",
+    "facts2": "7b8e6bf6d53bbfe4",
+    "all": "bbda197c9bef4314"
    },
    "row_hash": "13a714429d15f3b2",
-   "carried": true,
-   "pass": 2
+   "carried": false,
+   "pass": 6
   },
   {
    "row": "L106",
    "screen": "party_speaker_guy.moment",
    "verdict": "PASS",
-   "line": "Halfway through the song he's behind you, his hand on your hip.",
-   "why": "the tall guy is unnamed",
+   "line": "The tall guy by the speaker has been watching you since you came in.",
+   "why": "names only who is there: rides on party_dance in the living room, where the speaker is; unnamed",
    "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "c034ab6b47164236",
+    "text": "61955af8802ee29f",
     "traits": "44136fa355b3678a",
-    "facts": "4e36a3f9b54a7a54",
-    "facts2": "4e36a3f9b54a7a54",
-    "all": "063195eb12689e7c"
+    "facts": "7b8e6bf6d53bbfe4",
+    "facts2": "7b8e6bf6d53bbfe4",
+    "all": "347de1eb61eeb814"
    },
    "row_hash": "13a714429d15f3b2",
-   "carried": true,
-   "pass": 4
+   "carried": false,
+   "pass": 6
+  },
+  {
+   "row": "L106",
+   "screen": "party_zoe_sam.laugh",
+   "verdict": "PASS",
+   "line": "You laugh, and Zoe kisses your cheek, sticky with lip gloss.",
+   "why": "names only who is there: Zoe present (requires_npc, living room Sat 19-24)",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "fbf0110ef615e61a",
+    "traits": "6b1e34b018661933",
+    "facts": "6116301392be4053",
+    "facts2": "2242d176693385da",
+    "all": "b0c7744a92375baa"
+   },
+   "row_hash": "13a714429d15f3b2",
+   "carried": false,
+   "pass": 6
+  },
+  {
+   "row": "L106",
+   "screen": "party_zoe_sam.leave",
+   "verdict": "PASS",
+   "line": "You slip back into the crowd.",
+   "why": "names only who is there: Zoe present; Done to the living room",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "d86fa7d57a183275",
+    "traits": "6b1e34b018661933",
+    "facts": "6116301392be4053",
+    "facts2": "2242d176693385da",
+    "all": "876750a2266f9604"
+   },
+   "row_hash": "13a714429d15f3b2",
+   "carried": false,
+   "pass": 6
   },
   {
    "row": "L106",
    "screen": "party_zoe_sam.moment",
    "verdict": "PASS",
-   "line": "Zoe's up on the sofa arm, arms over her head, dancing like the party's hers.",
-   "why": "Zoe is there (requires_npc; Sat 18-24) and Sam's rows put him there Sat 12-24",
+   "line": "Sam's on the sofa under the coats, and he just grins.",
+   "why": "names only who is there: living room; requires_npc npc_zoe; Sam's row near_zoe_apartment 12-02 every day; Sam named only behind met_sam",
    "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "6c112b9e191c91d2",
+    "text": "039431faa1d2d7e6",
     "traits": "fa1a0a429fa0ea30",
-    "facts": "59019b9074ced338",
-    "facts2": "19cb1dcf78df28cf",
-    "all": "c445c089b4935f99"
+    "facts": "7ab7fbfd141c3724",
+    "facts2": "291e47f5fa3b7489",
+    "all": "96d16de87321606f"
    },
    "row_hash": "13a714429d15f3b2",
-   "carried": true,
-   "pass": 4
+   "carried": false,
+   "pass": 6
   },
   {
    "row": "L106",
    "screen": "talk_brooke_party.hub",
    "verdict": "PASS",
    "line": "Brooke's by the kitchen counter with a cup she isn't drinking from, watching the room like she owns it.",
-   "why": "Names only Brooke, present by her Saturday row.",
+   "why": "names only who is there: trigger now near_zoe_kitchen, requires_npc npc_brooke, her row Sat 21-24 near_zoe_kitchen",
    "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "f63d7fd0b22102fd",
+    "text": "e4c05cc54650468a",
     "traits": "ebc4051ecd3afac5",
-    "facts": "826914bbcf12120d",
-    "facts2": "9adc380166fb4552",
-    "all": "7a93117de3916bcd"
+    "facts": "9211f3fef98b48c8",
+    "facts2": "706b1ec7c4943276",
+    "all": "21ddd58f2f82242d"
    },
    "row_hash": "13a714429d15f3b2",
-   "carried": true,
-   "pass": 4
+   "carried": false,
+   "pass": 6
+  },
+  {
+   "row": "L106",
+   "screen": "talk_brooke_party.talk",
+   "verdict": "PASS",
+   "line": "Enjoy it. Monday the mirror's mine again.",
+   "why": "names only who is there: Brooke at campus_bathroom Mon 08-09 (who_is_where); Saturday trigger makes 'Monday' true; Done 10 minutes to the kitchen",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "dea5daa7bcb88b7a",
+    "traits": "4b5299c7025e6881",
+    "facts": "e1460e3c055c4a56",
+    "facts2": "d56e308d45dd6418",
+    "all": "970eade4458bfdbf"
+   },
+   "row_hash": "13a714429d15f3b2",
+   "carried": false,
+   "pass": 6
   },
   {
    "row": "L106",
    "screen": "talk_kayla_party.hub",
    "verdict": "PASS",
    "line": "Kayla's at Brooke's elbow, laughing a beat after Brooke does.",
-   "why": "Named people on screen are there by their rows (who_is_where Sat 21-24) or by requires_npc; strangers unnamed.",
+   "why": "names only who is there: Kayla and Brooke both near_zoe_kitchen Sat 21-24; requires_npc npc_kayla",
    "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "989ff0dfd5b9e748",
+    "text": "5a1221c0e90f780c",
     "traits": "d79bccff03ff73e2",
-    "facts": "d9bd044fc487e3e2",
-    "facts2": "d3a6415c2dd7208a",
-    "all": "5363d896a39e23b5"
+    "facts": "464f8631b50219da",
+    "facts2": "dc2994085a7238ab",
+    "all": "edabf330ff65a5b6"
    },
    "row_hash": "13a714429d15f3b2",
-   "carried": true,
-   "pass": 3
+   "carried": false,
+   "pass": 6
+  },
+  {
+   "row": "L106",
+   "screen": "talk_kayla_party.talk",
+   "verdict": "PASS",
+   "line": "The punch is mostly vodka. Just so you know.",
+   "why": "names only who is there: Kayla in the kitchen with the punch (party_drink is in the kitchen now); Done 10 minutes",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "7c537332ceea2866",
+    "traits": "d79bccff03ff73e2",
+    "facts": "c232995192d9ddfd",
+    "facts2": "c47540a0cbd18098",
+    "all": "b1d6484cf31e4e40"
+   },
+   "row_hash": "13a714429d15f3b2",
+   "carried": false,
+   "pass": 6
   },
   {
    "row": "L106",
    "screen": "talk_tess_party.hub",
    "verdict": "PASS",
    "line": "Tess is at the end of the counter, turning a plastic cup round and round in her hands.",
-   "why": "Named people on screen are there by their rows (who_is_where Sat 21-24) or by requires_npc; strangers unnamed.",
+   "why": "names only who is there: Tess near_zoe_kitchen Sat 21-24; requires_npc npc_tess",
    "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "aeb9e5f25534c715",
+    "text": "6bd4ff8ef0169027",
     "traits": "0b50d642c406ca77",
-    "facts": "6a0015e0fad0b575",
-    "facts2": "0176c4f82ffee42f",
-    "all": "124e730061d01a18"
+    "facts": "642e048f7346b8d5",
+    "facts2": "3c1f586f9618a811",
+    "all": "042c95a2cb6269fb"
    },
    "row_hash": "13a714429d15f3b2",
-   "carried": true,
-   "pass": 3
+   "carried": false,
+   "pass": 6
+  },
+  {
+   "row": "L106",
+   "screen": "talk_tess_party.talk",
+   "verdict": "PASS",
+   "line": "Kayla made me come.",
+   "why": "names only who is there: Kayla is at the party (kitchen, Sat 21-24); Done 10 minutes",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "d024d58cecc43940",
+    "traits": "85bb3b602dd90b82",
+    "facts": "20bca8e543752750",
+    "facts2": "255665aa2f203191",
+    "all": "efa078348f680792"
+   },
+   "row_hash": "13a714429d15f3b2",
+   "carried": false,
+   "pass": 6
   },
   {
    "row": "L119",
@@ -5266,58 +7311,153 @@
    "row": "L167",
    "screen": "party_dance.dance",
    "verdict": "PASS",
-   "line": "You squeeze into the middle of the room where the bodies are tightest",
-   "why": "one row; the day and hour are one group",
+   "line": "Babe! Don't stop, the next one's my favourite!",
+   "why": "one row, the day and hour in one group; the event's hours grey once, on Mingle (card 2c)",
    "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "64c13cf7bfca581a",
+    "text": "66a0b954cfd9f92e",
     "traits": "6b1e34b018661933",
-    "facts": "b153518a6fd2602e",
-    "facts2": "adf208a6ad231fd4",
-    "all": "d1d502ce58e442d2"
+    "facts": "6116301392be4053",
+    "facts2": "2242d176693385da",
+    "all": "c623174c8e8121aa"
    },
    "row_hash": "e64ce2672d85d2d8",
-   "carried": true,
-   "pass": 4
+   "carried": false,
+   "pass": 6
   },
   {
    "row": "L167",
-   "screen": "party_go_home.leave",
-   "verdict": "N/A",
-   "line": "weekday 5, 21:00-00:00",
-   "why": "Now one window on one day kind (the end carries her home after midnight); nothing to group.",
+   "screen": "party_drink.drink",
+   "verdict": "PASS",
+   "line": "The kitchen floor is sticky. Someone's made a punch in a mixing bowl, bright red and mostly vodka.",
+   "why": "one row, the day and hour in one group; the event's hours grey once, on Mingle (card 2c)",
    "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "b692caf353c36f8b",
+    "text": "79fc332bab40fca5",
     "traits": "44136fa355b3678a",
-    "facts": "e3a1250e29743e29",
-    "facts2": "e3a1250e29743e29",
-    "all": "3131ee8197e2f7b1"
+    "facts": "3cf1551ba33fdf73",
+    "facts2": "3cf1551ba33fdf73",
+    "all": "e198c5a4b6a73253"
    },
    "row_hash": "e64ce2672d85d2d8",
-   "carried": true,
-   "pass": 3
+   "carried": false,
+   "pass": 6
+  },
+  {
+   "row": "L167",
+   "screen": "party_end.end",
+   "verdict": "N/A",
+   "line": "It's past midnight, and the party's thinning. Half the coats are gone from the sofa, somebody's asleep in the bathtub, and Zoe's turned the music down.",
+   "why": "the end is one window on one day kind (Sun 00:00-01:00); nothing to group",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "078da18e18b49909",
+    "traits": "6b1e34b018661933",
+    "facts": "54470cc139c09bcf",
+    "facts2": "47b195b05ada2e26",
+    "all": "8416f1077e8c2445"
+   },
+   "row_hash": "e64ce2672d85d2d8",
+   "carried": false,
+   "pass": 6
+  },
+  {
+   "row": "L167",
+   "screen": "party_end.stay",
+   "verdict": "N/A",
+   "line": "You pick up cups with Zoe until the speaker's switched off and the flat is quiet.",
+   "why": "the end is one window on one day kind (Sun 00:00-01:00); nothing to group",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "5016eaf551f457f5",
+    "traits": "6b1e34b018661933",
+    "facts": "54470cc139c09bcf",
+    "facts2": "47b195b05ada2e26",
+    "all": "3ad45fffe33d465f"
+   },
+   "row_hash": "e64ce2672d85d2d8",
+   "carried": false,
+   "pass": 6
   },
   {
    "row": "L167",
    "screen": "party_mingle.mingle",
    "verdict": "PASS",
-   "line": "one row, Saturday group, show_when_blocked with \"Zoe's party is Saturday, 9pm to midnight.\"",
-   "why": "one row, greys with full hours",
+   "line": "You're Zoe's friend, right? From the college? She never shuts up about you.",
+   "why": "one row, Saturday group, show_when_blocked with cooldown_message 'Zoe's party is Saturday, 9pm to midnight.'",
    "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "60844f7b2302a991",
+    "text": "9a9985d190c041e9",
     "traits": "6b1e34b018661933",
-    "facts": "b153518a6fd2602e",
-    "facts2": "adf208a6ad231fd4",
-    "all": "e173d3ccddb4c581"
+    "facts": "6116301392be4053",
+    "facts2": "2242d176693385da",
+    "all": "6a54149924d4ad91"
    },
    "row_hash": "e64ce2672d85d2d8",
-   "carried": true,
-   "pass": 5
+   "carried": false,
+   "pass": 6
+  },
+  {
+   "row": "L167",
+   "screen": "talk_brooke_party.talk",
+   "verdict": "N/A",
+   "line": "Enjoy it. Monday the mirror's mine again.",
+   "why": "the talk runs on one day kind only (Sat 21:00-00:00); nothing to group, and a talk is a face, hidden out of hours (card 2c)",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "dea5daa7bcb88b7a",
+    "traits": "4b5299c7025e6881",
+    "facts": "e1460e3c055c4a56",
+    "facts2": "d56e308d45dd6418",
+    "all": "970eade4458bfdbf"
+   },
+   "row_hash": "e64ce2672d85d2d8",
+   "carried": false,
+   "pass": 6
+  },
+  {
+   "row": "L167",
+   "screen": "talk_kayla_party.talk",
+   "verdict": "N/A",
+   "line": "The punch is mostly vodka. Just so you know.",
+   "why": "the talk runs on one day kind only (Sat 21:00-00:00); nothing to group, and a talk is a face, hidden out of hours (card 2c)",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "7c537332ceea2866",
+    "traits": "d79bccff03ff73e2",
+    "facts": "c232995192d9ddfd",
+    "facts2": "c47540a0cbd18098",
+    "all": "b1d6484cf31e4e40"
+   },
+   "row_hash": "e64ce2672d85d2d8",
+   "carried": false,
+   "pass": 6
+  },
+  {
+   "row": "L167",
+   "screen": "talk_tess_party.talk",
+   "verdict": "N/A",
+   "line": "Kayla made me come.",
+   "why": "the talk runs on one day kind only (Sat 21:00-00:00); nothing to group, and a talk is a face, hidden out of hours (card 2c)",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "d024d58cecc43940",
+    "traits": "85bb3b602dd90b82",
+    "facts": "20bca8e543752750",
+    "facts2": "255665aa2f203191",
+    "all": "efa078348f680792"
+   },
+   "row_hash": "e64ce2672d85d2d8",
+   "carried": false,
+   "pass": 6
   },
   {
    "row": "L170",
@@ -5380,8 +7520,8 @@
  ],
  "causes": [],
  "pending": [],
- "asked": 1,
- "answered": 1,
+ "asked": 182,
+ "answered": 182,
  "pass_items": [],
  "unowed": []
 }
