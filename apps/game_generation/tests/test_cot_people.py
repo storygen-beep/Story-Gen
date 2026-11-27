@@ -4,15 +4,16 @@ LO 2026-11-25 chose "CoT's shape only": the layout and behaviour of CoT's Social
 (Social.txt, SocialWidgets.txt) and its View Person dialog (DisplayNPC.txt,
 DisplayNPCWidgets.txt), filled from systems the game already has. What is checked here:
 
-  * the sidebar button reads "People (N)", N = the people at her place now;
+  * the sidebar button reads "People" and "N here", N = the people at her place now (P80);
   * 📍 People Here lists everyone present, met or not; a stranger by `stranger_name`;
   * a tab is built only when some person is filed under it (`people_tab`), in CoT's order,
     and shows CoT's empty line while nobody in it is known yet;
-  * the 🔎 search (a stranger matches by `stranger_name` only), the sort links, paging at
-    16 a page with "Page x/y";
-  * the View Person dialog: "???" and "??" for a stranger with CoT's "You're not sure who
-    this is."; for a known person the name, initials, role · relationship and their meters;
-    "💬 Talk to …" when she is with them and a Talk row is there, "💭 … again" once used today.
+  * the search (a stranger matches by `stranger_name` only), paging at 16 a page with
+    "Page x/y"; the sort links went with the redesign (card P80, LO 2026-11-27);
+  * the View Person page: "???" and "??" for a stranger with CoT's "You're not sure who
+    this is."; for a known person the name, initials, role, relationship, their meters, one
+    Schedule button and "Where to find" with the card's tip. No Talk (LO 2026-11-27: "remove
+    talk, only schedule").
 
     pytest apps/game_generation/tests/test_cot_people.py -q
 """
@@ -89,6 +90,9 @@ def test_the_people_keys_are_checked():
 
 
 # ── 2. behaviour, in the real engine ─────────────────────────────────────────
+# The pages as redesigned (card P80, LO 2026-11-27): the same words; ← Back at the top, a search
+# box always open, tabs with counts, person cards, and a View Person page whose one button is
+# Schedule ("remove talk, only schedule").
 
 
 @pytest.fixture(scope="module")
@@ -102,7 +106,11 @@ def _at(g, place, **flags):
 
 
 def _button(g):
-    return g.js("() => document.querySelector('#cast-btn-widget a').textContent.trim()")
+    """[the link's text, the "N here" beside it]."""
+    return g.js(
+        "() => [document.querySelector('#cast-btn-widget a').textContent.trim(),"
+        " (document.querySelector('#cast-btn-widget .nav-here') || {textContent: ''}).textContent.trim()]"
+    )
 
 
 def _open(g):
@@ -121,7 +129,14 @@ def _tabs(g):
     return g.js(
         "() => [...document.querySelectorAll('.passage .tabgroup-button')]"
         ".map(b => b.querySelector('.tabgroup-button-emoji').textContent + ' '"
-        " + b.querySelector('.tabgroup-button-label').textContent)"
+        " + b.querySelector('.tabgroup-button-label').textContent + ' '"
+        " + b.querySelector('.tabgroup-button-count').textContent)"
+    )
+
+
+def _active_tab(g):
+    return g.js(
+        "() => document.querySelector('.passage .tabgroup-button.active .tabgroup-button-label').textContent.trim()"
     )
 
 
@@ -157,12 +172,12 @@ def _search(g, text):
 
 
 @needs_browser
-def test_the_button_counts_the_people_here(html):
+def test_the_button_says_who_is_here(html):
     with open_game(html) as g:
         _at(g, "Location_loc_home", started=True)
-        assert _button(g) == "People (19)"
+        assert _button(g) == ["People", "19 here"]
         _at(g, "Location_loc_bar")
-        assert _button(g) == "People (1)"
+        assert _button(g) == ["People", "1 here"]
         assert g.errors == []
 
 
@@ -175,17 +190,20 @@ def test_people_here_lists_a_stranger_by_stranger_name(html):
             g.js("() => document.querySelector('.passage .cot-page-title').textContent.trim()")
             == "People"
         )
+        assert _active_tab(g) == "People Here"
         names = _names(g)
         assert names[:2] == ["guy by the window", "Laura"], names
         assert "Zed" not in names
         text = _body(g)
-        assert "People nearby:" in text and "Click a person to see more." in text
-        # The niche line is the role, and a stranger has none.
-        niches = g.js(
-            "() => [...document.querySelectorAll('.passage .view-people-person')].slice(0, 2)"
-            ".map(p => (p.querySelector('.view-people-person-niche') || {textContent: ''}).textContent.trim())"
+        assert "People nearby:" in text and "Click a person to see more." not in text
+        cards = g.js(
+            "() => [...document.querySelectorAll('.passage .view-people-person')].slice(0, 2).map(p => ["
+            "p.querySelector('.people-avatar').textContent.trim(),"
+            "(p.querySelector('.view-people-person-niche') || {textContent: ''}).textContent.trim(),"
+            "!!p.querySelector('.people-here-dot')])"
         )
-        assert niches == ["", "Mom"]
+        # A stranger: "??" and no role; Laura: her initial and her role. Both are here.
+        assert cards == [["??", "", True], ["L", "Mom", True]]
         assert g.errors == []
 
 
@@ -195,55 +213,40 @@ def test_a_stranger_is_three_question_marks(html):
         _at(g, "Location_loc_home", started=True)
         _open(g)
         _link(g, "guy by the window")
-        assert (
-            g.js("() => document.querySelector('.passage .cot-page-title').textContent.trim()")
-            == "View Person"
-        )
-        assert (
-            g.js(
-                "() => document.querySelector('.npc-display-avatar').textContent.trim()"
-            )
-            == "??"
-        )
-        assert (
-            g.js(
-                "() => document.querySelector('.npc-display-fullname').textContent.trim()"
-            )
-            == "???"
-        )
+        assert g.passage() == "PersonPage"
+        assert g.js("() => document.querySelector('.npc-display-avatar').textContent.trim()") == "??"
+        assert g.js("() => document.querySelector('.npc-display-fullname').textContent.trim()") == "???"
         text = _body(g)
         assert "A guy by the window." in text
         assert "You're not sure who this is." in text
         assert "Neighbour" not in text and "Zed" not in text
-        # Back to the people list.
+        assert "Schedule" not in text and "where to find" not in text.lower()
+        # ← People goes back to the list.
         g.js("() => document.querySelector('#view-people-backward').click()")
         g.page.wait_for_timeout(150)
-        assert (
-            g.js("() => document.querySelector('.passage .cot-page-title').textContent.trim()")
-            == "People"
-        )
+        assert g.passage() == "CastPage"
         assert g.errors == []
 
 
 @needs_browser
-def test_tabs_in_cots_order_with_cots_empty_lines(html):
+def test_tabs_in_cots_order_with_counts_and_cots_empty_lines(html):
     with open_game(html) as g:
         _at(g, "Location_loc_home", started=True)
         _open(g)
         assert _tabs(g) == [
-            "📍 People Here",
-            "😊 Friends",
-            "👋 Acquaintances",
-            "🎭 Special",
+            "📍 People Here 19",
+            "😊 Friends 0",
+            "👋 Acquaintances 17",  # the extras have no card, so they are known
+            "🎭 Special 1",
         ]
+        assert g.js(
+            "() => [...document.querySelectorAll('.passage .tabgroup-button')].map(b => b.classList.contains('is-empty'))"
+        ) == [False, True, False, False]
         _tab(g, "Friends")
         assert "You have no friends. Ouch!" in _body(g)
         _tab(g, "Special")
         assert _names(g) == ["Laura"]
-        assert "People who fill a particular niche in the story of your life:" in _body(
-            g
-        )
-        g.js("() => SugarCube.Dialog.close()")
+        assert "People who fill a particular niche in the story of your life:" in _body(g)
         _at(g, "Location_loc_home", met_tom=True)
         _open(g)
         _tab(g, "Friends")
@@ -253,34 +256,30 @@ def test_tabs_in_cots_order_with_cots_empty_lines(html):
 
 
 @needs_browser
-def test_search_and_sort(html):
+def test_it_opens_on_the_first_tab_with_someone_when_nobody_is_here(html):
+    with open_game(html) as g:
+        _at(g, "Location_loc_home", started=True, met_tom=True)
+        g.js("() => { SugarCube.State.variables.player.current_location = 'nowhere'; SugarCube.setup.peopleOpen(); }")
+        g.page.wait_for_timeout(150)
+        assert _active_tab(g) == "Friends"
+        assert _names(g) == ["Tom Baker"]
+        assert g.errors == []
+
+
+@needs_browser
+def test_search_without_the_filter_bar(html):
     with open_game(html) as g:
         _at(g, "Location_loc_home", started=True)
         _open(g)
-        assert "Filter Options" in _body(g)
-        g.js(
-            "() => document.querySelector('.passage .shop-filter-toolbar-header-minrestore a').click()"
-        )
-        g.page.wait_for_timeout(100)
+        text = _body(g)
+        assert "Filter Options" not in text and "Sort by" not in text
         _search(g, "window")
         assert _names(g) == ["guy by the window"]
         _search(g, "zed")  # a stranger matches by the stranger name only
         assert _names(g) == []
-        assert (
-            "There is no one in this category with your current filters applied."
-            in _body(g)
-        )
-        _link(g, "Clear all filters")
+        assert "There is no one in this category with your current filters applied." in _body(g)
+        _search(g, "")
         assert len(_names(g)) == 16
-
-        _link(g, "Sort by name (z -> a)")
-        assert _names(g)[0] == "Laura"
-        _link(g, "Sort by want (high → low)")
-        assert _names(g)[0] == "guy by the window"  # 90
-        _link(g, "Sort by want (low → high)")
-        assert _names(g)[0] == "Laura"  # 0
-        _link(g, "Sort by relevance")
-        assert _names(g)[:2] == ["guy by the window", "Laura"]
         assert g.errors == []
 
 
@@ -301,49 +300,26 @@ def test_paging_past_sixteen(html):
 
 
 @needs_browser
-def test_a_known_person_and_the_talk_action(html):
+def test_a_known_person_has_schedule_and_no_talk(html):
     with open_game(html) as g:
         _at(g, "Location_loc_bar", started=True, met_tom=True)
         _open(g)
         _link(g, "Tom Baker")
-        assert (
-            g.js(
-                "() => document.querySelector('.npc-display-avatar').textContent.trim()"
-            )
-            == "TB"
-        )
+        assert g.js("() => document.querySelector('.npc-display-avatar').textContent.trim()") == "TB"
         text = _body(g)
-        assert "Tom Baker" in text and "Bartender · Runs the bar." in text
+        assert "Tom Baker" in text and "Bartender" in text and "Runs the bar." in text
         assert "Want" in text and "Warmth" in text
-        assert "Actions" in text
+        assert "where to find them" in text.lower()  # no gender in the fixture
         assert "He is behind the counter all day." in text  # the card's tip
-        _link(g, "💬 Talk to Tom Baker")
-        assert not g.js("() => SugarCube.Dialog.isOpen()")
-        assert "Tom nods." in g.js("() => document.querySelector('.passage').innerText")
-        g.play("Location_loc_bar")
-        _open(g)
-        _link(g, "Tom Baker")
-        assert "💭 Talk to Tom Baker again" in _body(g)
+        assert "Talk to" not in text and "Actions" not in text and "Overview" not in text
+        assert g.js(
+            "() => [...document.querySelectorAll('.passage .person-actions a')].map(a => a.textContent.trim())"
+        ) == ["Schedule"]
         assert g.errors == []
 
 
 @needs_browser
-def test_no_talk_away_from_them(html):
-    with open_game(html) as g:
-        _at(g, "Location_loc_home", started=True, met_tom=True)
-        _open(g)
-        _tab(g, "Friends")
-        _link(g, "Tom Baker")
-        assert "Talk to" not in _body(g)
-        assert g.errors == []
-
-
-# ── pages, not dialogs (LO 2026-11-26: "They should have their own page. This design can be
-# ported into that page. And a schedule modal in the people's page should work like before.") ──
-
-
-@needs_browser
-def test_people_and_view_person_are_pages_with_back_to_the_game(html):
+def test_people_and_view_person_are_pages_with_back_at_the_top(html):
     with open_game(html) as g:
         _at(g, "Location_loc_bar", started=True, met_tom=True)
         _open(g)
@@ -352,11 +328,13 @@ def test_people_and_view_person_are_pages_with_back_to_the_game(html):
         _link(g, "Tom Baker")
         assert g.passage() == "PersonPage"
         assert not g.js("() => SugarCube.Dialog.isOpen()")
-        # ◀ goes back to the list, on the same tab; ← Back from either page goes to the game.
+        assert not g.js(
+            "() => [...document.querySelectorAll('.passage a')].some(a => a.textContent.trim() === '← Back')"
+        )
+        # ← People goes back to the list; ← Back from the list goes to the game.
         g.js("() => document.querySelector('#view-people-backward').click()")
         g.page.wait_for_timeout(150)
         assert g.passage() == "CastPage"
-        _link(g, "Tom Baker")
         _link(g, "← Back")
         assert g.passage() == "Location_loc_bar"
         assert g.errors == []
@@ -369,7 +347,7 @@ def test_the_schedule_is_the_old_pop_up(html):
         _open(g)
         _link(g, "Tom Baker")
         assert "people-accordion" not in g.js("() => document.querySelector('.passage').innerHTML")
-        _link(g, "🗓 Schedule")
+        _link(g, "Schedule")
         assert g.js("() => SugarCube.Dialog.isOpen()")
         title = g.js("() => document.querySelector('#ui-dialog-title').textContent.trim()")
         assert title.endswith("Schedule"), title

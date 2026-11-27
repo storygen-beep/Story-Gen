@@ -8,10 +8,11 @@ CoT's StoryHints passage and its <<hintlist>> widget (StoryHintWidgets.txt:7-139
   * its hint is the text of the LAST passed pair; none passed reads "Keep exploring!"; every
     pair passed with more than one pair is "Completed ✅", grey; a single passed pair stays
     In Progress; the text "end" is CoT's end-of-storyline line;
-  * "Categories" and "Progress" checkboxes, all ticked at first, kept in the save, with CoT's
-    two empty messages;
-  * the sidebar button glows until the page is first opened ($firsttime.tutorial in CoT);
-  * `[[walkthroughs]]` are CoT's *Walkthrough passages: a back button, Overview, Steps with the
+  * redesigned (card P80, LO 2026-11-27): "Next up", category chips kept in the save ($hintCat),
+    finished storylines in a "Done (N)" fold, "New" / "Updated" tags against $hints_seen;
+  * the sidebar button glows until the page is first opened ($firsttime.tutorial in CoT), then
+    reads "N new" while a line has changed;
+  * `[[walkthroughs]]` are CoT's *Walkthrough passages: ← Quests, Overview, Steps with the
     ✅ ➡️ 💡 ❓ 🛑 markers, a guard, and {days_until:N} day counts.
 
     pytest apps/game_generation/tests/test_cot_hints.py -q
@@ -122,6 +123,8 @@ def test_a_walkthrough_is_checked():
 
 
 # ── 2. behaviour, in the real engine ─────────────────────────────────────────
+# The page as redesigned (card P80, LO 2026-11-27): the same words; a "Next up" card, category
+# chips, two columns, "New" / "Updated" tags, a Done fold, ← Back at the top.
 
 
 @pytest.fixture(scope="module")
@@ -144,30 +147,57 @@ def _open(g):
 
 
 def _entries(g):
-    """[title, category, hint line, grey] for each listed entry."""
-    return g.js(
-        """() => [...document.querySelectorAll('.passage #hintlist .rounded-border')].map(b => [
-            b.querySelector('.large').textContent.trim(),
+    """{title: [category, line, done, next, tag]} for each card on the page."""
+    rows = g.js(
+        """() => [...document.querySelectorAll('.passage .hint-card')].map(b => [
+            b.querySelector('.hint-title').textContent.trim(),
             b.querySelector('.hint-category').textContent.trim(),
             b.querySelector('.hint-line').textContent.replace(/\\s+/g, ' ').trim(),
-            b.querySelector('.hint-line').getAttribute('style') || ''])"""
+            b.classList.contains('hint-done'),
+            b.classList.contains('hint-next-card'),
+            (b.querySelector('.hint-tag') || {textContent: ''}).textContent.trim()])"""
     )
+    return {r[0]: r[1:] for r in rows}
 
 
-def _list_text(g):
+def _grid(g):
+    """The open cards below "Next up", in order."""
     return g.js(
-        "() => document.querySelector('.passage #hintlist').textContent.trim()"
+        """() => [...document.querySelectorAll('.passage #hintlist .hint-card:not(.hint-done) .hint-title')]
+            .map(t => t.textContent.trim())"""
     )
 
 
-def _tick(g, label, on):
+def _chips(g):
+    return g.js(
+        "() => [...document.querySelectorAll('.passage .hint-chip')].map(c => [c.textContent.trim(), c.classList.contains('active')])"
+    )
+
+
+def _chip(g, label):
     g.js(
-        """([label, on]) => { const l = [...document.querySelectorAll('#hintfilters label')]
-            .find(x => x.textContent.trim() === label);
-            const i = l.querySelector('input'); if (i.checked !== on) i.click(); }""",
-        [label, on],
+        """(l) => [...document.querySelectorAll('.passage .hint-chip')]
+            .find(c => c.textContent.trim() === l).click()""",
+        label,
     )
     g.page.wait_for_timeout(100)
+
+
+def _fold(g):
+    return g.js(
+        "() => (document.querySelector('.passage .hint-done-toggle') || {textContent: ''}).textContent.trim()"
+    )
+
+
+def _toggle_fold(g):
+    g.js("() => document.querySelector('.passage .hint-done-toggle').click()")
+    g.page.wait_for_timeout(100)
+
+
+def _badge(g):
+    return g.js(
+        "() => (document.querySelector('#journal-btn-widget .nav-badge') || {textContent: ''}).textContent.trim()"
+    )
 
 
 @needs_browser
@@ -178,96 +208,102 @@ def test_the_ladder(html):
             g.js("() => document.querySelector('.passage .cot-page-title').textContent.trim()")
             == "Quests"
         )
-        rows = {r[0]: r for r in _entries(g)}
-        assert set(rows) == {
-            "The Job",
-            "Free Time",
-        }  # The Quad waits on `started`, Hidden never
-        assert rows["The Job"][1] == "Employment 💼"
-        assert rows["The Job"][2].startswith("Hint: Go to the bar and ask for work.")
-        # A single pair that passes stays In Progress (no grey).
-        assert rows["Free Time"][2].startswith("Hint: Visit the park.")
-        assert "#aaa" not in rows["Free Time"][3]
+        rows = _entries(g)
+        assert set(rows) == {"The Job", "Free Time"}  # The Quad waits on `started`, Hidden never
+        # No storyline is open, so the first open entry is "Next up".
+        assert rows["The Job"][0] == "Employment 💼"
+        assert rows["The Job"][1] == "Go to the bar and ask for work."
+        assert rows["The Job"][3] is True
+        # A single pair that passes stays open.
+        assert rows["Free Time"][1] == "Visit the park." and rows["Free Time"][2] is False
+        assert _grid(g) == ["Free Time"]
 
         _flags(g, started=True, job_got=True)
         _open(g)
-        rows = {r[0]: r for r in _entries(g)}
-        assert rows["The Quad"][2] == "Hint: Keep exploring!"
-        assert rows["The Job"][2].startswith("Hint: Work the shifts.")
+        rows = _entries(g)
+        assert rows["The Quad"][1] == "Keep exploring!"
+        assert rows["The Quad"][3] is True  # a Storyline entry takes "Next up"
+        assert rows["The Job"][1] == "Work the shifts."
         assert "Hidden" not in rows
+        assert _grid(g) == ["The Job", "Free Time"]
 
         _flags(g, job_done=True)
         _open(g)
-        rows = {r[0]: r for r in _entries(g)}
-        assert rows["The Job"][2].startswith("Hint: " + END_LINE), rows["The Job"]
-        assert "#aaa" in rows["The Job"][3]
-        box = g.js(
-            """() => [...document.querySelectorAll('#hintlist .rounded-border')]
-                .find(b => b.querySelector('.large').textContent.trim() === 'The Job').textContent"""
+        assert "The Job" not in _entries(g)  # folded away
+        assert _fold(g) == "▸ Done (1)"
+        assert "2 open · 1 done" in g.js("() => document.querySelector('.passage .cot-head').textContent")
+        _toggle_fold(g)
+        assert _fold(g) == "▾ Done (1)"
+        job = _entries(g)["The Job"]
+        assert job[1] == END_LINE and job[2] is True
+        assert "Done" in g.js(
+            """() => [...document.querySelectorAll('.passage .hint-card')]
+                .find(b => b.querySelector('.hint-title').textContent.trim() === 'The Job').textContent"""
         )
-        assert "✅" in box
         assert g.errors == []
 
 
 @needs_browser
-def test_the_filters_and_their_empty_lines(html):
+def test_the_chips_and_the_done_fold(html):
     with open_game(html) as g:
         _flags(g, started=True, job_got=True, job_done=True)
         _open(g)
-        labels = g.js(
-            "() => [...document.querySelectorAll('#hintfilters label')].map(l => l.textContent.trim())"
-        )
-        assert labels == [
-            "Employment 💼",
-            "Campus Life 🏫",
-            "Storyline 📖",
-            "In Progress",
-            "Completed ✅",
+        assert _chips(g) == [
+            ["All", True],
+            ["Employment 💼", False],
+            ["Campus Life 🏫", False],
+            ["Storyline 📖", False],
         ]
-        assert g.js(
-            "() => [...document.querySelectorAll('#hintfilters input')].every(i => i.checked)"
-        )
-
-        _tick(g, "In Progress", False)
-        assert [r[0] for r in _entries(g)] == ["The Job"]
-        _tick(g, "Completed ✅", False)
-        assert _list_text(g) == "Select at least one status to display!"
-        _tick(g, "In Progress", True)
-        _tick(g, "Completed ✅", True)
-        for cat in ("Employment 💼", "Campus Life 🏫", "Storyline 📖"):
-            _tick(g, cat, False)
-        assert _list_text(g) == "Select at least category to display!"
-        _tick(g, "Storyline 📖", True)
-        assert [r[0] for r in _entries(g)] == ["The Quad"]
-
+        _chip(g, "Campus Life 🏫")
+        assert _grid(g) == ["Free Time"]
+        assert _fold(g) == ""  # nothing done in that category
+        assert _entries(g)["The Quad"][3] is True  # "Next up" stays whatever the chip
+        assert g.sv("hintCat") == "Campus Life 🏫"
+        _chip(g, "Employment 💼")
+        assert _grid(g) == []
+        assert _fold(g) == "▸ Done (1)"
         # Kept in the game's state, so the page reopens as she left it.
-        assert g.sv("selectedHintCats") == {
-            "Employment 💼": False,
-            "Campus Life 🏫": False,
-            "Storyline 📖": True,
-        }
         _open(g)
-        assert [r[0] for r in _entries(g)] == ["The Quad"]
+        assert ["Employment 💼", True] in _chips(g)
+        _chip(g, "All")
+        assert g.sv("hintCat") is None
+        assert _grid(g) == ["Free Time"] and _fold(g) == "▸ Done (1)"
         assert g.errors == []
 
 
 @needs_browser
-def test_the_button_glows_until_first_opened(html):
+def test_the_button_glows_then_counts_what_changed(html):
     with open_game(html) as g:
         assert g.js("() => !!document.querySelector('#journal-btn-widget .glow')")
         _open(g)
         assert g.sv("hints_opened") is True
-        g.js("() => SugarCube.Dialog.close()")
+        # The first opening tags nothing.
+        assert all(r[4] == "" for r in _entries(g).values())
         g.play("Location_loc_home")
         assert not g.js("() => !!document.querySelector('#journal-btn-widget .glow')")
+        assert _badge(g) == ""
+
+        _flags(g, started=True)  # The Quad appears
+        g.play("Location_loc_home")
+        assert _badge(g) == "1 new"
+        _open(g)
+        assert _entries(g)["The Quad"][4] == "New"
+        g.play("Location_loc_home")
+        assert _badge(g) == ""
+
+        _flags(g, job_got=True)  # The Job's line moves on
+        g.play("Location_loc_home")
+        assert _badge(g) == "1 new"
+        _open(g)
+        rows = _entries(g)
+        assert rows["The Job"][4] == "Updated" and rows["The Quad"][4] == ""
+        g.play("Location_loc_home")
+        assert _badge(g) == ""
         assert g.errors == []
 
 
 def _walkthrough(g):
-    g.js(
-        """() => [...document.querySelectorAll('#hintlist a')]
-            .find(a => a.textContent.trim() === 'see here').click()"""
-    )
+    g.js("() => document.querySelector('.passage .hints-see-here').click()")
     g.page.wait_for_timeout(150)
     return g.js("() => document.querySelector('.passage').innerText")
 
@@ -276,12 +312,11 @@ def _walkthrough(g):
 def test_the_walkthrough(html):
     with open_game(html) as g:
         _open(g)
-        line = g.js(
-            """() => [...document.querySelectorAll('#hintlist .rounded-border')]
-                .find(b => b.querySelector('.large').textContent.trim() === 'The Job')
-                .querySelector('.hint-line').textContent.replace(/\\s+/g, ' ')"""
-        )
-        assert "For a detailed walkthrough, with potential spoilers, see here." in line
+        assert g.js(
+            """() => [...document.querySelectorAll('.passage .hint-card')]
+                .find(b => b.querySelector('.hint-title').textContent.trim() === 'The Job')
+                .querySelector('.hints-see-here').textContent.trim()"""
+        ) == "Walkthrough →"
 
         # The guard: before `started` the page says only its line.
         text = _walkthrough(g)
@@ -289,7 +324,7 @@ def test_the_walkthrough(html):
             g.js("() => document.querySelector('.passage .cot-page-title').textContent.trim()")
             == "Walkthrough: The Job"
         )
-        assert "Back to hints page" in text
+        assert "← Quests" in text
         assert "You haven't met them yet." in text and "Overview" not in text
 
         _flags(g, started=True)
@@ -325,16 +360,28 @@ def test_the_walkthrough(html):
 
 
 @needs_browser
-def test_quests_and_a_walkthrough_are_pages_with_back_to_the_game(html):
-    """LO 2026-11-26: "They should have their own page." No dialog opens; ← Back goes home."""
+def test_quests_and_a_walkthrough_are_pages_with_back_at_the_top(html):
+    """LO 2026-11-26: "They should have their own page." No dialog opens. P80: one ← Back, at
+    the top; a walkthrough's ← Quests goes to the Quests page."""
     with open_game(html) as g:
         g.play("Location_loc_home")
         _open(g)
         assert g.passage() == "QuestsPage" and not g.js("() => SugarCube.Dialog.isOpen()")
-        g.js("() => document.querySelector('#hintlist .hints-see-here').click()")
+        backs = g.js(
+            "() => [...document.querySelectorAll('.passage a')].filter(a => a.textContent.trim() === '← Back')"
+            ".map(a => !!a.closest('.cot-head'))"
+        )
+        assert backs == [True]
+        g.js("() => document.querySelector('.passage .hints-see-here').click()")
         g.page.wait_for_timeout(150)
         assert g.passage() == "QuestsWalkthrough" and not g.js("() => SugarCube.Dialog.isOpen()")
-        g.js("() => [...document.querySelectorAll('.passage a')].find(a => a.textContent.trim() === '← Back').click()")
+        assert not g.js(
+            "() => [...document.querySelectorAll('.passage a')].some(a => a.textContent.trim() === '← Back')"
+        )
+        g.js("() => document.querySelector('#help-backward').click()")
+        g.page.wait_for_timeout(150)
+        assert g.passage() == "QuestsPage"
+        g.js("() => document.querySelector('.passage .cot-back').click()")
         g.page.wait_for_timeout(150)
         assert g.passage() == "Location_loc_home"
         assert g.errors == []

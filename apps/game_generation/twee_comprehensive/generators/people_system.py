@@ -385,9 +385,20 @@ _VIEW_METERS_OLD = (
     "return setup.castTraitRows ? setup.castTraitRows(slug, npcOf(slug)) : [];"
 )
 _VIEW_METERS_NEW = "return setup.peopleSys.meterRows(slug, setup.castTraitRows ? setup.castTraitRows(slug, npcOf(slug)) : []);"
-_VIEW_TALK_OLD = "    var talk = talkOf(slug);\n"
-_VIEW_TALK_NEW = (
-    "    if (known) h += setup.peopleSys.viewHtml(slug);\n" + _VIEW_TALK_OLD
+# The View Person page marks where the personality bubbles go (cot_pages.py, P80: the Talk
+# line this anchored on went with "remove talk, only schedule", LO 2026-11-27).
+_VIEW_TRAITS_ANCHOR = (
+    "    // the personality bubbles (generators/people_system.py splices them in here)\n"
+)
+# The View Person page's "Where to find him / her": the gender is in the people system's config.
+_VIEW_GENDER = """
+setup.peopleNpcGender = function (slug) {
+    var n = ((setup.people_cfg || {}).npcs || {})[slug];
+    return n ? n.gender || "" : "";
+};
+"""
+_VIEW_TRAITS_NEW = (
+    _VIEW_TRAITS_ANCHOR + "    if (known) h += setup.peopleSys.viewHtml(slug);\n"
 )
 
 PEOPLE_VIEW_CSS = """
@@ -402,11 +413,11 @@ def people_view_js(js: str) -> str:
     """CoT's People dialog script with the people system's meters, traits and want in it.
     Each splice names the exact line it replaces, so an edit to the dialog that moves one
     fails the build here instead of silently dropping the feature."""
-    for old in (_VIEW_METERS_OLD, _VIEW_TALK_OLD):
+    for old in (_VIEW_METERS_OLD, _VIEW_TRAITS_ANCHOR):
         if js.count(old) != 1:
             raise ValueError(
                 f"people_system: the People dialog no longer has the line {old!r}"
             )
     return js.replace(_VIEW_METERS_OLD, _VIEW_METERS_NEW).replace(
-        _VIEW_TALK_OLD, _VIEW_TALK_NEW
-    )
+        _VIEW_TRAITS_ANCHOR, _VIEW_TRAITS_NEW
+    ) + _VIEW_GENDER
