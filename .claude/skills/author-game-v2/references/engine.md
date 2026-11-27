@@ -515,7 +515,7 @@ the state it makes. Two predicates express a state today:
   regions and every worn garment's own `exposure`. The upper region is bare unless `top` or `dress`
   is filled (underwear-level with only a `bra`); the lower is bare unless `bottom` or `dress` is
   filled (underwear-level with only `underwear`). **It is the only aggregate that reads an empty
-  slot.** `worn_corruption` and `worn_beauty` are `getWornStatMax` (`v2.py:1893-1894`), which skips
+  slot.** `worn_corruption` and `worn_beauty` are `getWornStatMax` (`v2.py:1900`), which skips
   an empty slot, so naked and plainly dressed read the same.
 - **`clothing_slot`** — `slot` + `equipped` / `unequipped`: "no bra" is `bra` `unequipped`, naked is
   every slot `unequipped`.
@@ -1121,10 +1121,21 @@ steps = [
 ```
 
 The quest cards stay (they decide who is met) but leave the page. CoT's rule: no pair passed reads
-*"Keep exploring!"*; every pair passed reads *"Completed ✅"* in grey, except a single pair, which
-stays In Progress. A step shows ✅ once its `when` holds, else ➡️ and nothing after it. The sidebar
-Quests button opens the page in a dialog and glows until first opened (`$hints_opened`). Both lists are
+*"Keep exploring!"*; every pair passed with more than one pair is finished, except a single pair, which
+stays open. A step shows ✅ once its `when` holds, else ➡️ and nothing after it. Both lists are
 `validate()` errors without the layout. Code: `generators/cot_pages.py`; without the key nothing changes.
+
+**The page (redesigned 2026-11-27, first_term_lean card P80; the words are the game's, the look the
+sidebar's theme variables).** A page of its own with ← Back at the top, "Quests" and "N open · N done".
+"Next up": the first open entry whose category starts "Storyline", else the first open one, in a larger
+card. Category chips ("All", then each category with a coloured dot) show one category; the choice is
+`$hintCat`. Open entries in two columns (one under 700px): title, category, description in a muted
+line, then the line itself; "Walkthrough →" where there is one. Finished entries fold into "Done (N)".
+A card whose line changed since the page was last opened is tagged "Updated" ("New" for one that just
+appeared), against `$hints_seen`; the first opening tags nothing. The sidebar Quests button glows until
+first opened (`$hints_opened`), then reads "N new" while anything changed. A walkthrough page has one
+"← Quests" at the top. (Before P80: CoT's checkbox filters, $selectedHintCats / $selectedHintStatuses,
+no longer read.)
 
 ### `[ui] clothes_layout = "room"` — Change Clothes and the clothes shop as a dressing room (first_term DECISIONS 196)
 
@@ -2060,12 +2071,21 @@ people_tab    = "friends"  # romantic_partners, friends, sexual_partners, rivals
                            # acquaintances, special (CoT's tab for story people: family), faculty
 ```
 
-The sidebar button reads *"People (N)"*, N = the people at her place. 📍 People Here lists everyone
-present, a stranger under `stranger_name`; the other tabs are built only when a person is filed under
-them and list only people she has met (the cast page's rule, the quest cards), each with CoT's empty
-line. A click opens View Person: "???" for a stranger, else the name, role · relationship, the meters,
-"💬 Talk to …" when the person's Talk row is live here, the schedule and the card's `tip`. Either NPC
-key without the page is a `validate()` error.
+The sidebar button reads *"People"* with *"N here"* beside it, N = the people at her place. 📍 People
+Here lists everyone present, a stranger under `stranger_name`; the other tabs are built only when a
+person is filed under them and list only people she has met (the cast page's rule, the quest cards),
+each with CoT's empty line. Either NPC key without the page is a `validate()` error.
+
+**The pages (redesigned 2026-11-27, first_term_lean card P80; the sidebar's theme variables).** People:
+← Back at the top, "People", a search box always open (CoT's Filter Options bar and the sort links went).
+The tabs are pills with a count; a tab with nobody in it yet is greyed and still opens. The page opens on
+People Here when someone is here, else on the first tab with someone in it. Person cards, three across
+(two, then one, on narrow screens): an initials circle ("??" for a stranger), the name, the role, a "Here"
+dot, the meters with each label beside its bar; the whole card opens the person; 16 a page. View Person:
+one "← People" at the top; the circle, name, role, relationship and the stranger line; **one button,
+Schedule** (the old pop-up, `setup.castOpenSchedule`); the meters; then "Where to find him / her / them"
+with the card's `tip` and a "Phone contact" badge when she has their number. **No Talk on the page** (LO
+2026-11-27: "remove talk, only schedule"): talking is in the room, on the portrait or the row.
 
 ### `[ui] sidebar_hide` and `[ui] phone_clock` — the sidebar, trimmed
 

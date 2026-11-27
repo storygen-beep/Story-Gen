@@ -5,6 +5,29 @@ same turn: what changed, why, and how it was verified.
 
 ---
 
+## 2026-11-27 — the Quests and People pages, redesigned (first_term_lean card P80)
+
+- **`references/engine.md`:** the `quests_layout = "hints"` and `people_page = "cot"` sections now describe
+  the redesigned pages. LO, 2026-11-27: "I like the content of those pages but I dont really like the UI of
+  it"; he signed off the mockup, then said "remove talk, only schedule" and "yes go ahead".
+  - Quests: "Next up", category chips (`$hintCat`), two columns, a "Done (N)" fold, "New" / "Updated" tags
+    against `$hints_seen`, and "N new" on the sidebar button.
+  - People: a search box always open, tab pills with counts, person cards, and "N here" on the sidebar
+    button.
+  - View Person: one Schedule button, "Where to find", and no Talk.
+- **Engine, outside the skill:** `generators/cot_pages.py` and `generators/people_system.py`. The
+  people-system splice now anchors on a marked comment, because the Talk line it used is gone; it also adds
+  `setup.peopleNpcGender`.
+- **Verified:**
+  - `test_cot_hints.py`, `test_cot_people.py` and `test_people_system.py`: 61 passed.
+  - Full `apps/game_generation/tests` before the last three fixes: 982 passed, 17 skipped.
+  - first_term_lean was built (dev+debug), and check.py is GREEN.
+  - Headless screenshots at 1280 and 390 wide showed no page errors.
+- **`references/engine.md` §worn_exposure:** a cite that had drifted, `v2.py:1893-1894`, now points at `v2.py:1900`, where
+  `setup.getWornStatMax` is defined. The pre-commit cite check found it while P80 was being committed.
+
+---
+
 ## 2026-11-25 — CoT's people system, as one opt-in engine switch
 
 - **`references/engine.md`:** new §54, `[engine.people] system = "cot"`, at the end of the file. It documents:

@@ -3900,6 +3900,12 @@
       "sha256": "70323d5052227e79656de18e41457c40074799aaabbbe2202e46ccc4f06c8ada",
       "words": "ENI for LO (delegated 2026-11-24): P79 look3 trimmed for the talk ratio (C596, voice rule 5); LO, typed in main-lean 2026-11-27: \"Yes go ahead\"",
       "date": "2026-11-27"
+    },
+    {
+      "card": "P80",
+      "sha256": "33b4c271e5418187936e2f42126ea1023d78d259ac4c3493888275a4eb9e4a2b",
+      "words": "LO 2026-11-27: \"yes go ahead\" (Builds line set to engine-only, Areas/Craft lines and the tag wording added after, see the card)",
+      "date": "2026-11-27"
     }
   ]
 }
