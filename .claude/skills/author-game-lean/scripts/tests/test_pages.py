@@ -404,3 +404,17 @@ def test_nobody_here_and_a_weekday_are_green():
     game = {"locations": [_place([{"type": "npc_at_location", "npc_id": "npc_mom", "location_id": "street",
                                    "operator": "is_absent"}], [{"type": "weekday", "weekdays": [6]}])]}
     assert pages.problems(game) == []
+
+
+@pytest.mark.parametrize("item,word", [
+    ({"type": "flag", "subject": "player", "flag_key": "met_brooke", "operator": "is_true"}, "whom she has met"),
+    ({"type": "trait", "subject": "player", "trait_key": "reputation", "operator": "gte", "value": 20}, "a meter"),
+    ({"type": "npc_at_location", "npc_id": "npc_vance", "location_id": "street", "operator": "is_present"}, "their face"),
+])
+def test_a_description_that_reads_her_knowledge_a_meter_or_a_person_is_red(item, word):
+    assert any("street" in r and word in r for r in pages.problems({"locations": [_place([item])]}))
+
+
+def test_a_story_flag_at_the_place_is_green():
+    flag = {"type": "flag", "subject": "player", "flag_key": "cafe_hired", "operator": "is_false"}
+    assert pages.problems({"locations": [_place([flag])]}) == []
