@@ -314,7 +314,7 @@ Energy is the one body need. Sources: sleep (to 100), a meal (+15), a shower (+5
 | Your Bedroom | Sleep (built) | none |
 | Bathroom | Shower (built) | the shared bathroom; walk-ins in release 1 (P38, §10a) |
 | Living Room | Watch TV (+5) | (home life) |
-| Park | Go for a run (45 min, 15 energy): the run on screen, and who looks | none in release 1 |
+| Park | Go for a run (45 min, 15 energy): the run on screen; who looks is the park's "she gets noticed" scene (P72, P73) | none in release 1 |
 | Gym | Work out (1 hour, 20 energy, needs a running pass); Front desk: day pass $5, week $20, month $60 | Marco, at his meeting |
 | Women's Bathroom (campus) | Fix your hair and make-up (10 min) | none |
 | Corner Shop | Buy a snack ($2, +10) (money bite) | Frank or Danny at the till |
