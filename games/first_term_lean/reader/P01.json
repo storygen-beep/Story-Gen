@@ -1,6 +1,6 @@
 {
  "piece": "P01",
- "pass": 8,
+ "pass": 9,
  "screens": {
   "sidebar.energy": {
    "text": "3473bd68b6c72b9a",
@@ -167,6 +167,7 @@
   "C450": "3eb18b4cefbe49d3",
   "C422": "8933f85010afbef7",
   "C460": "beb5a109bde77305",
+  "C2202": "d5592f287f5f641a",
   "C461": "153b0804e686abae",
   "L163": "00a617ab9b4e9cd4",
   "voice#1": "b8e8afcb32208b40",
@@ -1302,6 +1303,19 @@
    "row_hash": "6626e5d54fe97b40",
    "carried": true,
    "pass": 6
+  },
+  {
+   "row": "C2202",
+   "screen": "*",
+   "verdict": "N/A",
+   "line": "",
+   "why": "sidebar items only (energy, money, exhibitionism): no scene, no spoken or narrated line",
+   "cause": null,
+   "note": false,
+   "screen_hash": "94d0fedd770a24d2",
+   "row_hash": "d5592f287f5f641a",
+   "carried": false,
+   "pass": 9
   },
   {
    "row": "C285",
@@ -2895,7 +2909,7 @@
    "note": false,
    "screen_hash": "94d0fedd770a24d2",
    "row_hash": "f74d350a978e124c",
-   "carried": false,
+   "carried": true,
    "pass": 8
   },
   {

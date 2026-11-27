@@ -1,6 +1,6 @@
 {
  "piece": "P50",
- "pass": 3,
+ "pass": 4,
  "screens": {
   "*": "4f53cda18c2baa0c"
  },
@@ -30,7 +30,7 @@
   "C2194": "0c03931191c53a34",
   "C1340": "b76a6583ae88c60f",
   "C2197": "cafbb0a598dbfa97",
-  "C2198": "27e6b45f50edd3ac",
+  "C2198": "73dfe095a72154a3",
   "L106": "13a714429d15f3b2",
   "C442": "59b8d8d24f0c7c38",
   "C451": "50dbf74577a813c7",
@@ -280,13 +280,13 @@
    "screen": "*",
    "verdict": "N/A",
    "line": "",
-   "why": "trait words only, no screen of its own; C2198 is judged only on a person's Talk screen (the screen their menu's Talk opens)",
+   "why": "People page feelings fields: not a menu's Talk screen; C2198 is judged only on the screen a person's menu's Talk opens",
    "cause": null,
    "note": false,
    "screen_hash": "4f53cda18c2baa0c",
-   "row_hash": "27e6b45f50edd3ac",
+   "row_hash": "73dfe095a72154a3",
    "carried": false,
-   "pass": 3
+   "pass": 4
   },
   {
    "row": "C422",

@@ -1,6 +1,6 @@
 {
  "piece": "P73",
- "pass": 2,
+ "pass": 4,
  "screens": {
   "*": "4f53cda18c2baa0c"
  },
@@ -59,6 +59,7 @@
   "C450": "3eb18b4cefbe49d3",
   "C422": "8933f85010afbef7",
   "C460": "beb5a109bde77305",
+  "C2202": "d5592f287f5f641a",
   "C461": "153b0804e686abae",
   "L163": "00a617ab9b4e9cd4",
   "voice#1": "b8e8afcb32208b40",
@@ -185,7 +186,7 @@
    "note": false,
    "screen_hash": null,
    "row_hash": "efcbd1ac6a95e2f2",
-   "carried": false,
+   "carried": true,
    "pass": 2
   },
   {
@@ -538,6 +539,32 @@
    "row_hash": "90572c3a26b59fc7",
    "carried": true,
    "pass": 1
+  },
+  {
+   "row": "C2202",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "You keep your eyes on the path, and wonder how far you'll get next time.",
+   "why": "the run's lines are held on ran_once; 'wonder' is no promise",
+   "cause": null,
+   "note": false,
+   "screen_hash": "4f53cda18c2baa0c",
+   "row_hash": "d5592f287f5f641a",
+   "carried": true,
+   "pass": 3
+  },
+  {
+   "row": "C2202",
+   "screen": "body_workout.lift",
+   "verdict": "PASS",
+   "line": "You finish the set, breathing hard, your arms still shaking when you rack it.",
+   "why": "'Next time you'll go heavier' is cut; the set is the same every visit and so is the line",
+   "cause": null,
+   "note": false,
+   "screen_hash": null,
+   "row_hash": "d5592f287f5f641a",
+   "carried": false,
+   "pass": 4
   },
   {
    "row": "C422",

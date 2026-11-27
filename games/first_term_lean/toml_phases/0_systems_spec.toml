@@ -1207,7 +1207,7 @@ type = "message"
 sender = "npc"
 after_round = 1
 after_choice = 2
-content = "Rent says you will, rookie."
+content = "Rent says you will, sugar."
 [[phone.conversations]]
 id = "text_chris"
 app = "messages"

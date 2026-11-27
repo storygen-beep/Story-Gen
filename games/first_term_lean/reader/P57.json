@@ -1,6 +1,6 @@
 {
  "piece": "P57",
- "pass": 9,
+ "pass": 10,
  "screens": {
   "talk_hale.hub": {
    "text": "5dd72f6d0c5397e2",
@@ -10,11 +10,11 @@
    "all": "192e79d96a77a637"
   },
   "talk_hale.talk": {
-   "text": "b6cf5920a3a54390",
+   "text": "a274319a3eef2634",
    "traits": "825724317465730d",
    "facts": "b39203d5c6ab55c6",
    "facts2": "3bbe4cf22d228c02",
-   "all": "cdd895476b6d7ea9"
+   "all": "d0342a680cb5cb57"
   },
   "talk_pratt.hub": {
    "text": "89ddf25206bf9392",
@@ -24,11 +24,11 @@
    "all": "6d6246b12cd48291"
   },
   "talk_pratt.talk": {
-   "text": "83f99df97b0043c5",
+   "text": "5360c08a15b8055e",
    "traits": "9814f8002b787cb3",
    "facts": "4d74d86a042a5341",
    "facts2": "46e7e3f908cf7982",
-   "all": "78e3166bad74f461"
+   "all": "d180828636af52f8"
   },
   "talk_walsh.hub": {
    "text": "73887994d1b84343",
@@ -38,11 +38,11 @@
    "all": "cae3257cbf4e9742"
   },
   "talk_walsh.talk": {
-   "text": "ff71f8c85f4fe040",
+   "text": "c5165017b737ba05",
    "traits": "4fd4e58137018fb8",
    "facts": "12d2fa5757fd9c0c",
    "facts2": "2e25a1a07dd53d6e",
-   "all": "3679712c25e2e97d"
+   "all": "3eade12f7e04d5f3"
   },
   "talk_dean.hub": {
    "text": "0146bcb33a376773",
@@ -66,11 +66,11 @@
    "all": "96f273e457cb9fec"
   },
   "talk_cross.talk": {
-   "text": "c1716ea63bdede3d",
+   "text": "44ad3b02a0109273",
    "traits": "2875b58584de3c6e",
    "facts": "b588a7b77e8a6036",
    "facts2": "ffe52973496dcaf5",
-   "all": "d9354f5eadc7d8b3"
+   "all": "f763abdbe3fcff26"
   },
   "talk_holt.hub": {
    "text": "47d976249e5b6ee3",
@@ -94,11 +94,11 @@
    "all": "7465583bfba105e6"
   },
   "talk_nadia_cafeteria.talk": {
-   "text": "6a542c54fd3aab67",
+   "text": "4c42a00acd15bf5f",
    "traits": "ef3e57a6ae056353",
    "facts": "386c35d2a296d9ff",
    "facts2": "5dc7a5e9e1ad0148",
-   "all": "2b799ed29f1c01b6"
+   "all": "8f2494a4e8dbf396"
   },
   "talk_nadia_library.hub": {
    "text": "2b0bd955f6ab2933",
@@ -108,11 +108,11 @@
    "all": "dca286dde344c80d"
   },
   "talk_nadia_library.talk": {
-   "text": "b74c8c2d68ee0308",
+   "text": "bd8210706a940305",
    "traits": "ef3e57a6ae056353",
    "facts": "ebdbba2eae45e6e0",
    "facts2": "77e9448bff6c8621",
-   "all": "370c662d392ba480"
+   "all": "593b829c2bb3d0e5"
   },
   "talk_rosa.hub": {
    "text": "a3e55ca6f7fe7611",
@@ -178,11 +178,11 @@
    "all": "4c93ceb8af5f0ad0"
   },
   "talk_jake_cafeteria.talk": {
-   "text": "d020f6201638c2c9",
+   "text": "796c4fb49d962b66",
    "traits": "435644be785b94c8",
    "facts": "b26b89e1b6ba969f",
    "facts2": "0715df81400f2bca",
-   "all": "f8323833f7d4f67f"
+   "all": "76330b61103005c0"
   },
   "talk_jake_quad.hub": {
    "text": "d7fb30b7418d5ef6",
@@ -192,11 +192,11 @@
    "all": "3c9fd6e069c60496"
   },
   "talk_jake_quad.talk": {
-   "text": "653b2a5b77a01845",
+   "text": "3bd3761b296f3802",
    "traits": "435644be785b94c8",
    "facts": "699db935eb50fb3a",
    "facts2": "08cd3c25febe58ae",
-   "all": "6e61dc372690f467"
+   "all": "0ec5679f4cc6f003"
   },
   "talk_brooke.hub": {
    "text": "3283600d31d93ec7",
@@ -212,7 +212,7 @@
    "facts2": "7ec53cc1d723c2ce",
    "all": "0053465c8cf27898"
   },
-  "*": "d6a2836c125de0f6"
+  "*": "62597a09bdeb293d"
  },
  "rows": {
   "B1": "5276068df1ca6fa9",
@@ -292,7 +292,7 @@
   "C2194": "0c03931191c53a34",
   "C1340": "b76a6583ae88c60f",
   "C2197": "cafbb0a598dbfa97",
-  "C2198": "27e6b45f50edd3ac",
+  "C2198": "73dfe095a72154a3",
   "C769": "f6b6f78a8f2e5ed7",
   "C794": "bad76e5963432385",
   "C2201": "d119dfe665f76359",
@@ -333,6 +333,7 @@
   "C450": "b01ad555668aba2d",
   "C422": "7e128897077ecee6",
   "C460": "67e48e60d5053a2e",
+  "C2202": "6e90fed7eae62131",
   "C461": "310706ee076318f2",
   "C2189": "20748838895e4545"
  },
@@ -411,20 +412,20 @@
    "row": "B10",
    "screen": "talk_cross.talk",
    "verdict": "PASS",
-   "line": "New face. You came to watch, or to work?",
-   "why": "first minute (right after the meeting where possible), last minute and second-to-fifth visit: 'new face' is his standing name for her (drama_first, the rehearsal lines); menu 14:00-18:00 sits inside his Tue/Thu/Fri theatre row; 'next rehearsal' is always ahead",
+   "line": "Better. From the gut. Tuesdays and Thursdays at eleven, you're on that stage with the rest of them.",
+   "why": "true at first and last minute and on visit 2+: class_drama is weekdays [1,3] 11:00 at campus_theatre and puts them all on the stage; Talk waits on 14:00-18:00 and met_cross (set only by the drama meeting, so 'You again, starlet' always follows a meeting)",
    "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "c1716ea63bdede3d",
+    "text": "44ad3b02a0109273",
     "traits": "2875b58584de3c6e",
     "facts": "b588a7b77e8a6036",
     "facts2": "ffe52973496dcaf5",
-    "all": "d9354f5eadc7d8b3"
+    "all": "f763abdbe3fcff26"
    },
    "row_hash": "c1c0e2ac2588a579",
-   "carried": true,
-   "pass": 3
+   "carried": false,
+   "pass": 10
   },
   {
    "row": "B10",
@@ -488,19 +489,19 @@
    "screen": "talk_hale.talk",
    "verdict": "PASS",
    "line": "Monday, nine o'clock. Front row. I'll be looking for you.",
-   "why": "first minute (right after the meeting where possible), last minute and second-to-fifth visit: Hale lectures Mon/Wed 09-11 (psychology, the Dean's timetable); his door claim and 'Nobody does at first' hold on the first visit (met in the lecture, talk in his office) and the fifth",
+   "why": "true at first and last minute and on visit 2+: class_psych is weekdays [0,2] 09:00; Hale is in campus_lecture_hall Mon/Wed 09-11, and class_psych has him looking at her row",
    "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "b6cf5920a3a54390",
+    "text": "a274319a3eef2634",
     "traits": "825724317465730d",
     "facts": "b39203d5c6ab55c6",
     "facts2": "3bbe4cf22d228c02",
-    "all": "cdd895476b6d7ea9"
+    "all": "d0342a680cb5cb57"
    },
    "row_hash": "c1c0e2ac2588a579",
-   "carried": true,
-   "pass": 3
+   "carried": false,
+   "pass": 10
   },
   {
    "row": "B10",
@@ -563,20 +564,20 @@
    "row": "B10",
    "screen": "talk_jake_cafeteria.talk",
    "verdict": "PASS",
-   "line": "Hey, trouble. You stopped. ... The coffee thing. I thought maybe I scared you off.",
-   "why": "first minute (right after the meeting where possible), last minute and second-to-fifth visit: his meeting asked her for coffee; true after 'Sure.' or 'not now', on the first and fifth visit (his nerves, his manner)",
+   "line": "The caf\u00e9 across from the gates does good coffee. That's not me asking. Okay, it's me asking.",
+   "why": "true at first and last minute and on visit 2+: Town description has 'a caf\u00e9 on the corner across from the campus gates'; 'trouble' and asking again both come from quad_meet_jake; no date or next-time promise",
    "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "d020f6201638c2c9",
+    "text": "796c4fb49d962b66",
     "traits": "435644be785b94c8",
-    "facts": "dc56390e560596eb",
+    "facts": "b26b89e1b6ba969f",
     "facts2": "0715df81400f2bca",
-    "all": "9e002a04ba0ac2ee"
+    "all": "76330b61103005c0"
    },
    "row_hash": "c1c0e2ac2588a579",
-   "carried": true,
-   "pass": 3
+   "carried": false,
+   "pass": 10
   },
   {
    "row": "B10",
@@ -601,20 +602,20 @@
    "row": "B10",
    "screen": "talk_jake_quad.talk",
    "verdict": "PASS",
-   "line": "Hey, trouble. You stopped. ... The coffee thing. I thought maybe I scared you off.",
-   "why": "first minute (right after the meeting where possible), last minute and second-to-fifth visit: same talk as the cafeteria; Jake's quad row weekdays 14-16",
+   "line": "The caf\u00e9 across from the gates does good coffee. That's not me asking. Okay, it's me asking.",
+   "why": "true at first and last minute and on visit 2+: Town description has 'a caf\u00e9 on the corner across from the campus gates'; 'trouble' and asking again both come from quad_meet_jake; no date or next-time promise",
    "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "653b2a5b77a01845",
+    "text": "3bd3761b296f3802",
     "traits": "435644be785b94c8",
-    "facts": "2f981b0245806ec0",
+    "facts": "699db935eb50fb3a",
     "facts2": "08cd3c25febe58ae",
-    "all": "587dd06c36f12a55"
+    "all": "0ec5679f4cc6f003"
    },
    "row_hash": "c1c0e2ac2588a579",
-   "carried": true,
-   "pass": 3
+   "carried": false,
+   "pass": 10
   },
   {
    "row": "B10",
@@ -640,19 +641,19 @@
    "screen": "talk_nadia_cafeteria.talk",
    "verdict": "PASS",
    "line": "Psych, Monday and Wednesday at nine. Sit by me, not at the back.",
-   "why": "first minute (right after the meeting where possible), last minute and second-to-fifth visit: Nadia sits Hale's psychology Mon/Wed 09-11 and said at psych_first she is doing it twice; the hook names neither of her own places",
+   "why": "true at first and last minute and on visit 2+: Nadia is in campus_lecture_hall Mon/Wed 09-11 and class_psych is Mon/Wed 09:00; 'doing psych twice' matches her meeting line",
    "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "6a542c54fd3aab67",
+    "text": "4c42a00acd15bf5f",
     "traits": "ef3e57a6ae056353",
     "facts": "386c35d2a296d9ff",
     "facts2": "5dc7a5e9e1ad0148",
-    "all": "2b799ed29f1c01b6"
+    "all": "8f2494a4e8dbf396"
    },
    "row_hash": "c1c0e2ac2588a579",
-   "carried": true,
-   "pass": 3
+   "carried": false,
+   "pass": 10
   },
   {
    "row": "B10",
@@ -678,19 +679,19 @@
    "screen": "talk_nadia_library.talk",
    "verdict": "PASS",
    "line": "Psych, Monday and Wednesday at nine. Sit by me, not at the back.",
-   "why": "first minute (right after the meeting where possible), last minute and second-to-fifth visit: same talk as the cafeteria, true at the library (weekdays 14-18); the snack on the quiet floor is Nadia breaking Holt's 'No food', not a false claim",
+   "why": "true at first and last minute and on visit 2+: Nadia is in campus_lecture_hall Mon/Wed 09-11 and class_psych is Mon/Wed 09:00; 'doing psych twice' matches her meeting line",
    "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "b74c8c2d68ee0308",
+    "text": "bd8210706a940305",
     "traits": "ef3e57a6ae056353",
     "facts": "ebdbba2eae45e6e0",
     "facts2": "77e9448bff6c8621",
-    "all": "370c662d392ba480"
+    "all": "593b829c2bb3d0e5"
    },
    "row_hash": "c1c0e2ac2588a579",
-   "carried": true,
-   "pass": 3
+   "carried": false,
+   "pass": 10
   },
   {
    "row": "B10",
@@ -715,20 +716,20 @@
    "row": "B10",
    "screen": "talk_pratt.talk",
    "verdict": "PASS",
-   "line": "Do it again tonight. Wednesday at eleven, I'll call on you first.",
-   "why": "first minute (right after the meeting where possible), last minute and second-to-fifth visit: Pratt's statistics is Mon/Wed 11-13 in the Lecture Hall; on a Wednesday office visit (13-15) it is next week's; no past claimed",
+   "line": "There. Fix it tonight. Mondays and Wednesdays at eleven, it's more of the same.",
+   "why": "true at first and last minute and on visit 2+: Pratt is in campus_lecture_hall Mon/Wed 11-13 (class_stats weekdays [0,2] 11:00); 'tonight' said at 13:00-15:10 holds",
    "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "83f99df97b0043c5",
+    "text": "5360c08a15b8055e",
     "traits": "9814f8002b787cb3",
     "facts": "4d74d86a042a5341",
     "facts2": "46e7e3f908cf7982",
-    "all": "78e3166bad74f461"
+    "all": "d180828636af52f8"
    },
    "row_hash": "c1c0e2ac2588a579",
-   "carried": true,
-   "pass": 3
+   "carried": false,
+   "pass": 10
   },
   {
    "row": "B10",
@@ -791,20 +792,20 @@
    "row": "B10",
    "screen": "talk_walsh.talk",
    "verdict": "PASS",
-   "line": "Bring me your essay before you hand it in, any Tuesday or Thursday afternoon.",
-   "why": "first minute (right after the meeting where possible), last minute and second-to-fifth visit: her office row is Tue/Thu 14-16; 'There you are, dear' and the tea hold on any visit",
+   "line": "My door's open Tuesday and Thursday afternoons, dear. The kettle's always on.",
+   "why": "true at first and last minute and on visit 2+: Walsh is in campus_office_walsh Tue/Thu 14-16; hub shows the kettle on",
    "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "ff71f8c85f4fe040",
+    "text": "c5165017b737ba05",
     "traits": "4fd4e58137018fb8",
     "facts": "12d2fa5757fd9c0c",
     "facts2": "2e25a1a07dd53d6e",
-    "all": "3679712c25e2e97d"
+    "all": "3eade12f7e04d5f3"
    },
    "row_hash": "c1c0e2ac2588a579",
-   "carried": true,
-   "pass": 3
+   "carried": false,
+   "pass": 10
   },
   {
    "row": "B10",
@@ -1098,20 +1099,20 @@
    "row": "B8",
    "screen": "talk_cross.talk",
    "verdict": "PASS",
-   "line": "New face. You came to watch, or to work?",
-   "why": "no garment of hers is named; every day and hour agrees with who_is_where and the cards",
+   "line": "Better. From the gut. Tuesdays and Thursdays at eleven, you're on that stage with the rest of them.",
+   "why": "no garment named; every day and hour agrees with the class rows, the schedules and the story hint (class_drama is weekdays [1,3] 11:00 at campus_theatre and puts them all on the stage)",
    "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "c1716ea63bdede3d",
+    "text": "44ad3b02a0109273",
     "traits": "2875b58584de3c6e",
     "facts": "b588a7b77e8a6036",
     "facts2": "ffe52973496dcaf5",
-    "all": "d9354f5eadc7d8b3"
+    "all": "f763abdbe3fcff26"
    },
    "row_hash": "80d415cf08e0ebfe",
-   "carried": true,
-   "pass": 3
+   "carried": false,
+   "pass": 10
   },
   {
    "row": "B8",
@@ -1175,19 +1176,19 @@
    "screen": "talk_hale.talk",
    "verdict": "PASS",
    "line": "Monday, nine o'clock. Front row. I'll be looking for you.",
-   "why": "no garment of hers is named; every day and hour agrees with who_is_where and the cards",
+   "why": "no garment named; every day and hour agrees with the class rows, the schedules and the story hint (class_psych is weekdays [0,2] 09:00)",
    "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "b6cf5920a3a54390",
+    "text": "a274319a3eef2634",
     "traits": "825724317465730d",
     "facts": "b39203d5c6ab55c6",
     "facts2": "3bbe4cf22d228c02",
-    "all": "cdd895476b6d7ea9"
+    "all": "d0342a680cb5cb57"
    },
    "row_hash": "80d415cf08e0ebfe",
-   "carried": true,
-   "pass": 3
+   "carried": false,
+   "pass": 10
   },
   {
    "row": "B8",
@@ -1250,20 +1251,20 @@
    "row": "B8",
    "screen": "talk_jake_cafeteria.talk",
    "verdict": "PASS",
-   "line": "Hey, trouble. You stopped. ... The coffee thing. I thought maybe I scared you off.",
-   "why": "no garment of hers is named; every day and hour agrees with who_is_where and the cards",
+   "line": "The caf\u00e9 across from the gates does good coffee. That's not me asking. Okay, it's me asking.",
+   "why": "no garment named; every day and hour agrees with the class rows, the schedules and the story hint (Town description has 'a caf\u00e9 on the corner across from the campus gates')",
    "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "d020f6201638c2c9",
+    "text": "796c4fb49d962b66",
     "traits": "435644be785b94c8",
-    "facts": "dc56390e560596eb",
+    "facts": "b26b89e1b6ba969f",
     "facts2": "0715df81400f2bca",
-    "all": "9e002a04ba0ac2ee"
+    "all": "76330b61103005c0"
    },
    "row_hash": "80d415cf08e0ebfe",
-   "carried": true,
-   "pass": 3
+   "carried": false,
+   "pass": 10
   },
   {
    "row": "B8",
@@ -1288,20 +1289,20 @@
    "row": "B8",
    "screen": "talk_jake_quad.talk",
    "verdict": "PASS",
-   "line": "Hey, trouble. You stopped. ... The coffee thing. I thought maybe I scared you off.",
-   "why": "no garment of hers is named; every day and hour agrees with who_is_where and the cards",
+   "line": "The caf\u00e9 across from the gates does good coffee. That's not me asking. Okay, it's me asking.",
+   "why": "no garment named; every day and hour agrees with the class rows, the schedules and the story hint (Town description has 'a caf\u00e9 on the corner across from the campus gates')",
    "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "653b2a5b77a01845",
+    "text": "3bd3761b296f3802",
     "traits": "435644be785b94c8",
-    "facts": "2f981b0245806ec0",
+    "facts": "699db935eb50fb3a",
     "facts2": "08cd3c25febe58ae",
-    "all": "587dd06c36f12a55"
+    "all": "0ec5679f4cc6f003"
    },
    "row_hash": "80d415cf08e0ebfe",
-   "carried": true,
-   "pass": 3
+   "carried": false,
+   "pass": 10
   },
   {
    "row": "B8",
@@ -1327,19 +1328,19 @@
    "screen": "talk_nadia_cafeteria.talk",
    "verdict": "PASS",
    "line": "Psych, Monday and Wednesday at nine. Sit by me, not at the back.",
-   "why": "no garment of hers is named; every day and hour agrees with who_is_where and the cards",
+   "why": "no garment named; every day and hour agrees with the class rows, the schedules and the story hint (Nadia is in campus_lecture_hall Mon/Wed 09-11 and class_psych is Mon/Wed 09:00)",
    "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "6a542c54fd3aab67",
+    "text": "4c42a00acd15bf5f",
     "traits": "ef3e57a6ae056353",
     "facts": "386c35d2a296d9ff",
     "facts2": "5dc7a5e9e1ad0148",
-    "all": "2b799ed29f1c01b6"
+    "all": "8f2494a4e8dbf396"
    },
    "row_hash": "80d415cf08e0ebfe",
-   "carried": true,
-   "pass": 3
+   "carried": false,
+   "pass": 10
   },
   {
    "row": "B8",
@@ -1365,19 +1366,19 @@
    "screen": "talk_nadia_library.talk",
    "verdict": "PASS",
    "line": "Psych, Monday and Wednesday at nine. Sit by me, not at the back.",
-   "why": "no garment of hers is named; every day and hour agrees with who_is_where and the cards",
+   "why": "no garment named; every day and hour agrees with the class rows, the schedules and the story hint (Nadia is in campus_lecture_hall Mon/Wed 09-11 and class_psych is Mon/Wed 09:00)",
    "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "b74c8c2d68ee0308",
+    "text": "bd8210706a940305",
     "traits": "ef3e57a6ae056353",
     "facts": "ebdbba2eae45e6e0",
     "facts2": "77e9448bff6c8621",
-    "all": "370c662d392ba480"
+    "all": "593b829c2bb3d0e5"
    },
    "row_hash": "80d415cf08e0ebfe",
-   "carried": true,
-   "pass": 3
+   "carried": false,
+   "pass": 10
   },
   {
    "row": "B8",
@@ -1402,20 +1403,20 @@
    "row": "B8",
    "screen": "talk_pratt.talk",
    "verdict": "PASS",
-   "line": "Do it again tonight. Wednesday at eleven, I'll call on you first.",
-   "why": "no garment of hers is named; every day and hour agrees with who_is_where and the cards",
+   "line": "There. Fix it tonight. Mondays and Wednesdays at eleven, it's more of the same.",
+   "why": "no garment named; every day and hour agrees with the class rows, the schedules and the story hint (Pratt is in campus_lecture_hall Mon/Wed 11-13 (class_stats weekdays [0,2] 11:00))",
    "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "83f99df97b0043c5",
+    "text": "5360c08a15b8055e",
     "traits": "9814f8002b787cb3",
     "facts": "4d74d86a042a5341",
     "facts2": "46e7e3f908cf7982",
-    "all": "78e3166bad74f461"
+    "all": "d180828636af52f8"
    },
    "row_hash": "80d415cf08e0ebfe",
-   "carried": true,
-   "pass": 3
+   "carried": false,
+   "pass": 10
   },
   {
    "row": "B8",
@@ -1478,20 +1479,20 @@
    "row": "B8",
    "screen": "talk_walsh.talk",
    "verdict": "PASS",
-   "line": "Bring me your essay before you hand it in, any Tuesday or Thursday afternoon.",
-   "why": "no garment of hers is named; every day and hour agrees with who_is_where and the cards",
+   "line": "My door's open Tuesday and Thursday afternoons, dear. The kettle's always on.",
+   "why": "no garment named; every day and hour agrees with the class rows, the schedules and the story hint (Walsh is in campus_office_walsh Tue/Thu 14-16)",
    "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "ff71f8c85f4fe040",
+    "text": "c5165017b737ba05",
     "traits": "4fd4e58137018fb8",
     "facts": "12d2fa5757fd9c0c",
     "facts2": "2e25a1a07dd53d6e",
-    "all": "3679712c25e2e97d"
+    "all": "3eade12f7e04d5f3"
    },
    "row_hash": "80d415cf08e0ebfe",
-   "carried": true,
-   "pass": 3
+   "carried": false,
+   "pass": 10
   },
   {
    "row": "B8",
@@ -3375,14 +3376,14 @@
    "row": "C2198",
    "screen": "*",
    "verdict": "PASS",
-   "line": "talked_<x>_today on Talk, locked_text \"Talk \u2014 you've already talked today.\"; one talk node; Done 10",
-   "why": "all 15 menus: one flag per person shared across places (Nadia 2, Zoe 3, Jake 2), cleared in daily_tick; one talk each, true on every visit, each ending on a time, place or person (Dean: her advisor)",
+   "line": "e.g. talk_dean: \"Child. Back in my office. I told you I don't like seeing a student twice.\"",
+   "why": "all 15 P57 Talk screens: one talked_<x>_today flag per person across places (Nadia 2, Jake 2, Zoe 3), each waits on its met flag set by the meeting, no first-meeting words; every hook points at a real time/place (drama Tue/Thu 11, psych Mon/Wed 9, stats Mon/Wed 11, Walsh Tue/Thu 14-16, Holt Sat 10-16, Brooke theatre Tue/Thu/Fri 14, Zoe's party Sat 21:00); Dean's 'I told you' was said in his meeting (line 8598)",
    "cause": null,
    "note": false,
-   "screen_hash": "4419d9ac25fe000f",
-   "row_hash": "27e6b45f50edd3ac",
-   "carried": true,
-   "pass": 3
+   "screen_hash": "62597a09bdeb293d",
+   "row_hash": "73dfe095a72154a3",
+   "carried": false,
+   "pass": 10
   },
   {
    "row": "C2201",
@@ -3394,8 +3395,21 @@
    "note": false,
    "screen_hash": "d6a2836c125de0f6",
    "row_hash": "d119dfe665f76359",
-   "carried": false,
+   "carried": true,
    "pass": 9
+  },
+  {
+   "row": "C2202",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "talk_cross: \"You again, starlet. Watching, or working?\"",
+   "why": "no 'new face/new girl/say your name' and no 'next time I'll' on any P57 hub or Talk screen; Cross's 'again' always follows his meeting",
+   "cause": null,
+   "note": false,
+   "screen_hash": "62597a09bdeb293d",
+   "row_hash": "6e90fed7eae62131",
+   "carried": false,
+   "pass": 10
   },
   {
    "row": "C422",
@@ -3523,20 +3537,20 @@
    "row": "C460",
    "screen": "talk_cross.talk",
    "verdict": "PASS",
-   "line": "New face. You came to watch, or to work?",
-   "why": "'new face' is his standing name for her (drama_first, the rehearsal lines); menu 14:00-18:00 sits inside his Tue/Thu/Fri theatre row; 'next rehearsal' is always ahead",
+   "line": "Better. From the gut. Tuesdays and Thursdays at eleven, you're on that stage with the rest of them.",
+   "why": "true at first and last minute and on visit 2+: class_drama is weekdays [1,3] 11:00 at campus_theatre and puts them all on the stage; Talk waits on 14:00-18:00 and met_cross (set only by the drama meeting, so 'You again, starlet' always follows a meeting)",
    "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "c1716ea63bdede3d",
+    "text": "44ad3b02a0109273",
     "traits": "2875b58584de3c6e",
     "facts": "b588a7b77e8a6036",
     "facts2": "ffe52973496dcaf5",
-    "all": "d9354f5eadc7d8b3"
+    "all": "f763abdbe3fcff26"
    },
    "row_hash": "67e48e60d5053a2e",
-   "carried": true,
-   "pass": 3
+   "carried": false,
+   "pass": 10
   },
   {
    "row": "C460",
@@ -3600,19 +3614,19 @@
    "screen": "talk_hale.talk",
    "verdict": "PASS",
    "line": "Monday, nine o'clock. Front row. I'll be looking for you.",
-   "why": "Hale lectures Mon/Wed 09-11 (psychology, the Dean's timetable); his door claim and 'Nobody does at first' hold on the first visit (met in the lecture, talk in his office) and the fifth",
+   "why": "true at first and last minute and on visit 2+: class_psych is weekdays [0,2] 09:00; Hale is in campus_lecture_hall Mon/Wed 09-11, and class_psych has him looking at her row",
    "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "b6cf5920a3a54390",
+    "text": "a274319a3eef2634",
     "traits": "825724317465730d",
     "facts": "b39203d5c6ab55c6",
     "facts2": "3bbe4cf22d228c02",
-    "all": "cdd895476b6d7ea9"
+    "all": "d0342a680cb5cb57"
    },
    "row_hash": "67e48e60d5053a2e",
-   "carried": true,
-   "pass": 3
+   "carried": false,
+   "pass": 10
   },
   {
    "row": "C460",
@@ -3675,20 +3689,20 @@
    "row": "C460",
    "screen": "talk_jake_cafeteria.talk",
    "verdict": "PASS",
-   "line": "Hey, trouble. You stopped. ... The coffee thing. I thought maybe I scared you off.",
-   "why": "his meeting asked her for coffee; true after 'Sure.' or 'not now', on the first and fifth visit (his nerves, his manner)",
+   "line": "The caf\u00e9 across from the gates does good coffee. That's not me asking. Okay, it's me asking.",
+   "why": "true at first and last minute and on visit 2+: Town description has 'a caf\u00e9 on the corner across from the campus gates'; 'trouble' and asking again both come from quad_meet_jake; no date or next-time promise",
    "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "d020f6201638c2c9",
+    "text": "796c4fb49d962b66",
     "traits": "435644be785b94c8",
-    "facts": "dc56390e560596eb",
+    "facts": "b26b89e1b6ba969f",
     "facts2": "0715df81400f2bca",
-    "all": "9e002a04ba0ac2ee"
+    "all": "76330b61103005c0"
    },
    "row_hash": "67e48e60d5053a2e",
-   "carried": true,
-   "pass": 3
+   "carried": false,
+   "pass": 10
   },
   {
    "row": "C460",
@@ -3713,20 +3727,20 @@
    "row": "C460",
    "screen": "talk_jake_quad.talk",
    "verdict": "PASS",
-   "line": "Hey, trouble. You stopped. ... The coffee thing. I thought maybe I scared you off.",
-   "why": "same talk as the cafeteria; Jake's quad row weekdays 14-16",
+   "line": "The caf\u00e9 across from the gates does good coffee. That's not me asking. Okay, it's me asking.",
+   "why": "true at first and last minute and on visit 2+: Town description has 'a caf\u00e9 on the corner across from the campus gates'; 'trouble' and asking again both come from quad_meet_jake; no date or next-time promise",
    "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "653b2a5b77a01845",
+    "text": "3bd3761b296f3802",
     "traits": "435644be785b94c8",
-    "facts": "2f981b0245806ec0",
+    "facts": "699db935eb50fb3a",
     "facts2": "08cd3c25febe58ae",
-    "all": "587dd06c36f12a55"
+    "all": "0ec5679f4cc6f003"
    },
    "row_hash": "67e48e60d5053a2e",
-   "carried": true,
-   "pass": 3
+   "carried": false,
+   "pass": 10
   },
   {
    "row": "C460",
@@ -3752,19 +3766,19 @@
    "screen": "talk_nadia_cafeteria.talk",
    "verdict": "PASS",
    "line": "Psych, Monday and Wednesday at nine. Sit by me, not at the back.",
-   "why": "Nadia sits Hale's psychology Mon/Wed 09-11 and said at psych_first she is doing it twice; the hook names neither of her own places",
+   "why": "true at first and last minute and on visit 2+: Nadia is in campus_lecture_hall Mon/Wed 09-11 and class_psych is Mon/Wed 09:00; 'doing psych twice' matches her meeting line",
    "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "6a542c54fd3aab67",
+    "text": "4c42a00acd15bf5f",
     "traits": "ef3e57a6ae056353",
     "facts": "386c35d2a296d9ff",
     "facts2": "5dc7a5e9e1ad0148",
-    "all": "2b799ed29f1c01b6"
+    "all": "8f2494a4e8dbf396"
    },
    "row_hash": "67e48e60d5053a2e",
-   "carried": true,
-   "pass": 3
+   "carried": false,
+   "pass": 10
   },
   {
    "row": "C460",
@@ -3790,19 +3804,19 @@
    "screen": "talk_nadia_library.talk",
    "verdict": "PASS",
    "line": "Psych, Monday and Wednesday at nine. Sit by me, not at the back.",
-   "why": "same talk as the cafeteria, true at the library (weekdays 14-18); the snack on the quiet floor is Nadia breaking Holt's 'No food', not a false claim",
+   "why": "true at first and last minute and on visit 2+: Nadia is in campus_lecture_hall Mon/Wed 09-11 and class_psych is Mon/Wed 09:00; 'doing psych twice' matches her meeting line",
    "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "b74c8c2d68ee0308",
+    "text": "bd8210706a940305",
     "traits": "ef3e57a6ae056353",
     "facts": "ebdbba2eae45e6e0",
     "facts2": "77e9448bff6c8621",
-    "all": "370c662d392ba480"
+    "all": "593b829c2bb3d0e5"
    },
    "row_hash": "67e48e60d5053a2e",
-   "carried": true,
-   "pass": 3
+   "carried": false,
+   "pass": 10
   },
   {
    "row": "C460",
@@ -3827,20 +3841,20 @@
    "row": "C460",
    "screen": "talk_pratt.talk",
    "verdict": "PASS",
-   "line": "Do it again tonight. Wednesday at eleven, I'll call on you first.",
-   "why": "Pratt's statistics is Mon/Wed 11-13 in the Lecture Hall; on a Wednesday office visit (13-15) it is next week's; no past claimed",
+   "line": "There. Fix it tonight. Mondays and Wednesdays at eleven, it's more of the same.",
+   "why": "true at first and last minute and on visit 2+: Pratt is in campus_lecture_hall Mon/Wed 11-13 (class_stats weekdays [0,2] 11:00); 'tonight' said at 13:00-15:10 holds",
    "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "83f99df97b0043c5",
+    "text": "5360c08a15b8055e",
     "traits": "9814f8002b787cb3",
     "facts": "4d74d86a042a5341",
     "facts2": "46e7e3f908cf7982",
-    "all": "78e3166bad74f461"
+    "all": "d180828636af52f8"
    },
    "row_hash": "67e48e60d5053a2e",
-   "carried": true,
-   "pass": 3
+   "carried": false,
+   "pass": 10
   },
   {
    "row": "C460",
@@ -3903,20 +3917,20 @@
    "row": "C460",
    "screen": "talk_walsh.talk",
    "verdict": "PASS",
-   "line": "Bring me your essay before you hand it in, any Tuesday or Thursday afternoon.",
-   "why": "her office row is Tue/Thu 14-16; 'There you are, dear' and the tea hold on any visit",
+   "line": "My door's open Tuesday and Thursday afternoons, dear. The kettle's always on.",
+   "why": "true at first and last minute and on visit 2+: Walsh is in campus_office_walsh Tue/Thu 14-16; hub shows the kettle on",
    "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "ff71f8c85f4fe040",
+    "text": "c5165017b737ba05",
     "traits": "4fd4e58137018fb8",
     "facts": "12d2fa5757fd9c0c",
     "facts2": "2e25a1a07dd53d6e",
-    "all": "3679712c25e2e97d"
+    "all": "3eade12f7e04d5f3"
    },
    "row_hash": "67e48e60d5053a2e",
-   "carried": true,
-   "pass": 3
+   "carried": false,
+   "pass": 10
   },
   {
    "row": "C460",
@@ -4087,20 +4101,20 @@
    "row": "C461",
    "screen": "talk_cross.talk",
    "verdict": "PASS",
-   "line": "New face. You came to watch, or to work?",
-   "why": "the rest is texture and the person's own manner (trait words); nothing clashes",
+   "line": "Better. From the gut. Tuesdays and Thursdays at eleven, you're on that stage with the rest of them.",
+   "why": "the rest is texture that can't clash (stuck on the reading/problem set, tea, the aisle) and her opinions; fits the cast entries",
    "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "c1716ea63bdede3d",
+    "text": "44ad3b02a0109273",
     "traits": "2875b58584de3c6e",
     "facts": "b588a7b77e8a6036",
     "facts2": "ffe52973496dcaf5",
-    "all": "d9354f5eadc7d8b3"
+    "all": "f763abdbe3fcff26"
    },
    "row_hash": "310706ee076318f2",
-   "carried": true,
-   "pass": 3
+   "carried": false,
+   "pass": 10
   },
   {
    "row": "C461",
@@ -4145,19 +4159,19 @@
    "screen": "talk_hale.talk",
    "verdict": "PASS",
    "line": "Monday, nine o'clock. Front row. I'll be looking for you.",
-   "why": "the rest is texture and the person's own manner (trait words); nothing clashes",
+   "why": "the rest is texture that can't clash (stuck on the reading/problem set, tea, the aisle) and her opinions; fits the cast entries",
    "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "b6cf5920a3a54390",
+    "text": "a274319a3eef2634",
     "traits": "825724317465730d",
     "facts": "b39203d5c6ab55c6",
     "facts2": "3bbe4cf22d228c02",
-    "all": "cdd895476b6d7ea9"
+    "all": "d0342a680cb5cb57"
    },
    "row_hash": "310706ee076318f2",
-   "carried": true,
-   "pass": 3
+   "carried": false,
+   "pass": 10
   },
   {
    "row": "C461",
@@ -4182,96 +4196,96 @@
    "row": "C461",
    "screen": "talk_jake_cafeteria.talk",
    "verdict": "PASS",
-   "line": "Hey, trouble. You stopped. ... The coffee thing. I thought maybe I scared you off.",
-   "why": "the rest is texture and the person's own manner (trait words); nothing clashes",
+   "line": "The caf\u00e9 across from the gates does good coffee. That's not me asking. Okay, it's me asking.",
+   "why": "the rest is texture that can't clash (stuck on the reading/problem set, tea, the aisle) and her opinions; fits the cast entries",
    "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "d020f6201638c2c9",
+    "text": "796c4fb49d962b66",
     "traits": "435644be785b94c8",
-    "facts": "dc56390e560596eb",
+    "facts": "b26b89e1b6ba969f",
     "facts2": "0715df81400f2bca",
-    "all": "9e002a04ba0ac2ee"
+    "all": "76330b61103005c0"
    },
    "row_hash": "310706ee076318f2",
-   "carried": true,
-   "pass": 3
+   "carried": false,
+   "pass": 10
   },
   {
    "row": "C461",
    "screen": "talk_jake_quad.talk",
    "verdict": "PASS",
-   "line": "Hey, trouble. You stopped. ... The coffee thing. I thought maybe I scared you off.",
-   "why": "the rest is texture and the person's own manner (trait words); nothing clashes",
+   "line": "The caf\u00e9 across from the gates does good coffee. That's not me asking. Okay, it's me asking.",
+   "why": "the rest is texture that can't clash (stuck on the reading/problem set, tea, the aisle) and her opinions; fits the cast entries",
    "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "653b2a5b77a01845",
+    "text": "3bd3761b296f3802",
     "traits": "435644be785b94c8",
-    "facts": "2f981b0245806ec0",
+    "facts": "699db935eb50fb3a",
     "facts2": "08cd3c25febe58ae",
-    "all": "587dd06c36f12a55"
+    "all": "0ec5679f4cc6f003"
    },
    "row_hash": "310706ee076318f2",
-   "carried": true,
-   "pass": 3
+   "carried": false,
+   "pass": 10
   },
   {
    "row": "C461",
    "screen": "talk_nadia_cafeteria.talk",
    "verdict": "PASS",
    "line": "Psych, Monday and Wednesday at nine. Sit by me, not at the back.",
-   "why": "the rest is texture and the person's own manner (trait words); nothing clashes",
+   "why": "the rest is texture that can't clash (stuck on the reading/problem set, tea, the aisle) and her opinions; fits the cast entries",
    "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "6a542c54fd3aab67",
+    "text": "4c42a00acd15bf5f",
     "traits": "ef3e57a6ae056353",
     "facts": "386c35d2a296d9ff",
     "facts2": "5dc7a5e9e1ad0148",
-    "all": "2b799ed29f1c01b6"
+    "all": "8f2494a4e8dbf396"
    },
    "row_hash": "310706ee076318f2",
-   "carried": true,
-   "pass": 3
+   "carried": false,
+   "pass": 10
   },
   {
    "row": "C461",
    "screen": "talk_nadia_library.talk",
    "verdict": "PASS",
    "line": "Psych, Monday and Wednesday at nine. Sit by me, not at the back.",
-   "why": "the rest is texture and the person's own manner (trait words); nothing clashes",
+   "why": "the rest is texture that can't clash (stuck on the reading/problem set, tea, the aisle) and her opinions; fits the cast entries",
    "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "b74c8c2d68ee0308",
+    "text": "bd8210706a940305",
     "traits": "ef3e57a6ae056353",
     "facts": "ebdbba2eae45e6e0",
     "facts2": "77e9448bff6c8621",
-    "all": "370c662d392ba480"
+    "all": "593b829c2bb3d0e5"
    },
    "row_hash": "310706ee076318f2",
-   "carried": true,
-   "pass": 3
+   "carried": false,
+   "pass": 10
   },
   {
    "row": "C461",
    "screen": "talk_pratt.talk",
    "verdict": "PASS",
-   "line": "Do it again tonight. Wednesday at eleven, I'll call on you first.",
-   "why": "the rest is texture and the person's own manner (trait words); nothing clashes",
+   "line": "There. Fix it tonight. Mondays and Wednesdays at eleven, it's more of the same.",
+   "why": "the rest is texture that can't clash (stuck on the reading/problem set, tea, the aisle) and her opinions; fits the cast entries",
    "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "83f99df97b0043c5",
+    "text": "5360c08a15b8055e",
     "traits": "9814f8002b787cb3",
     "facts": "4d74d86a042a5341",
     "facts2": "46e7e3f908cf7982",
-    "all": "78e3166bad74f461"
+    "all": "d180828636af52f8"
    },
    "row_hash": "310706ee076318f2",
-   "carried": true,
-   "pass": 3
+   "carried": false,
+   "pass": 10
   },
   {
    "row": "C461",
@@ -4315,20 +4329,20 @@
    "row": "C461",
    "screen": "talk_walsh.talk",
    "verdict": "PASS",
-   "line": "Bring me your essay before you hand it in, any Tuesday or Thursday afternoon.",
-   "why": "the rest is texture and the person's own manner (trait words); nothing clashes",
+   "line": "My door's open Tuesday and Thursday afternoons, dear. The kettle's always on.",
+   "why": "the rest is texture that can't clash (stuck on the reading/problem set, tea, the aisle) and her opinions; fits the cast entries",
    "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "ff71f8c85f4fe040",
+    "text": "c5165017b737ba05",
     "traits": "4fd4e58137018fb8",
     "facts": "12d2fa5757fd9c0c",
     "facts2": "2e25a1a07dd53d6e",
-    "all": "3679712c25e2e97d"
+    "all": "3eade12f7e04d5f3"
    },
    "row_hash": "310706ee076318f2",
-   "carried": true,
-   "pass": 3
+   "carried": false,
+   "pass": 10
   },
   {
    "row": "C461",
@@ -5966,20 +5980,20 @@
    "row": "C927",
    "screen": "talk_cross.talk",
    "verdict": "PASS",
-   "line": "Talk 0 \u00b7 Leave 0 \u00b7 Done 10",
-   "why": "every exit states its minutes; v2.py:17877 reads the value given, so 0 stays 0 and Done is 10",
+   "line": "Talk 0 / Leave 0 / Done 10 time_progression_minutes",
+   "why": "every exit states its time, so the 3-minute default (v2.py:18105) never applies",
    "cause": null,
    "note": true,
    "screen_hash": {
-    "text": "c1716ea63bdede3d",
+    "text": "44ad3b02a0109273",
     "traits": "2875b58584de3c6e",
     "facts": "b588a7b77e8a6036",
     "facts2": "ffe52973496dcaf5",
-    "all": "d9354f5eadc7d8b3"
+    "all": "f763abdbe3fcff26"
    },
    "row_hash": "4e86d143688ba8e5",
-   "carried": true,
-   "pass": 3
+   "carried": false,
+   "pass": 10
   },
   {
    "row": "C927",
@@ -6004,20 +6018,20 @@
    "row": "C927",
    "screen": "talk_hale.talk",
    "verdict": "PASS",
-   "line": "Talk 0 \u00b7 Leave 0 \u00b7 Done 10",
-   "why": "every exit states its minutes; v2.py:17877 reads the value given, so 0 stays 0 and Done is 10",
+   "line": "Talk 0 / Leave 0 / Done 10 time_progression_minutes",
+   "why": "every exit states its time, so the 3-minute default (v2.py:18105) never applies",
    "cause": null,
    "note": true,
    "screen_hash": {
-    "text": "b6cf5920a3a54390",
+    "text": "a274319a3eef2634",
     "traits": "825724317465730d",
     "facts": "b39203d5c6ab55c6",
     "facts2": "3bbe4cf22d228c02",
-    "all": "cdd895476b6d7ea9"
+    "all": "d0342a680cb5cb57"
    },
    "row_hash": "4e86d143688ba8e5",
-   "carried": true,
-   "pass": 3
+   "carried": false,
+   "pass": 10
   },
   {
    "row": "C927",
@@ -6042,96 +6056,96 @@
    "row": "C927",
    "screen": "talk_jake_cafeteria.talk",
    "verdict": "PASS",
-   "line": "Talk 0 \u00b7 Leave 0 \u00b7 Done 10",
-   "why": "every exit states its minutes; v2.py:17877 reads the value given, so 0 stays 0 and Done is 10",
+   "line": "Talk 0 / Leave 0 / Done 10 time_progression_minutes",
+   "why": "every exit states its time, so the 3-minute default (v2.py:18105) never applies",
    "cause": null,
    "note": true,
    "screen_hash": {
-    "text": "d020f6201638c2c9",
+    "text": "796c4fb49d962b66",
     "traits": "435644be785b94c8",
-    "facts": "dc56390e560596eb",
+    "facts": "b26b89e1b6ba969f",
     "facts2": "0715df81400f2bca",
-    "all": "9e002a04ba0ac2ee"
+    "all": "76330b61103005c0"
    },
    "row_hash": "4e86d143688ba8e5",
-   "carried": true,
-   "pass": 3
+   "carried": false,
+   "pass": 10
   },
   {
    "row": "C927",
    "screen": "talk_jake_quad.talk",
    "verdict": "PASS",
-   "line": "Talk 0 \u00b7 Leave 0 \u00b7 Done 10",
-   "why": "every exit states its minutes; v2.py:17877 reads the value given, so 0 stays 0 and Done is 10",
+   "line": "Talk 0 / Leave 0 / Done 10 time_progression_minutes",
+   "why": "every exit states its time, so the 3-minute default (v2.py:18105) never applies",
    "cause": null,
    "note": true,
    "screen_hash": {
-    "text": "653b2a5b77a01845",
+    "text": "3bd3761b296f3802",
     "traits": "435644be785b94c8",
-    "facts": "2f981b0245806ec0",
+    "facts": "699db935eb50fb3a",
     "facts2": "08cd3c25febe58ae",
-    "all": "587dd06c36f12a55"
+    "all": "0ec5679f4cc6f003"
    },
    "row_hash": "4e86d143688ba8e5",
-   "carried": true,
-   "pass": 3
+   "carried": false,
+   "pass": 10
   },
   {
    "row": "C927",
    "screen": "talk_nadia_cafeteria.talk",
    "verdict": "PASS",
-   "line": "Talk 0 \u00b7 Leave 0 \u00b7 Done 10",
-   "why": "every exit states its minutes; v2.py:17877 reads the value given, so 0 stays 0 and Done is 10",
+   "line": "Talk 0 / Leave 0 / Done 10 time_progression_minutes",
+   "why": "every exit states its time, so the 3-minute default (v2.py:18105) never applies",
    "cause": null,
    "note": true,
    "screen_hash": {
-    "text": "6a542c54fd3aab67",
+    "text": "4c42a00acd15bf5f",
     "traits": "ef3e57a6ae056353",
     "facts": "386c35d2a296d9ff",
     "facts2": "5dc7a5e9e1ad0148",
-    "all": "2b799ed29f1c01b6"
+    "all": "8f2494a4e8dbf396"
    },
    "row_hash": "4e86d143688ba8e5",
-   "carried": true,
-   "pass": 3
+   "carried": false,
+   "pass": 10
   },
   {
    "row": "C927",
    "screen": "talk_nadia_library.talk",
    "verdict": "PASS",
-   "line": "Talk 0 \u00b7 Leave 0 \u00b7 Done 10",
-   "why": "every exit states its minutes; v2.py:17877 reads the value given, so 0 stays 0 and Done is 10",
+   "line": "Talk 0 / Leave 0 / Done 10 time_progression_minutes",
+   "why": "every exit states its time, so the 3-minute default (v2.py:18105) never applies",
    "cause": null,
    "note": true,
    "screen_hash": {
-    "text": "b74c8c2d68ee0308",
+    "text": "bd8210706a940305",
     "traits": "ef3e57a6ae056353",
     "facts": "ebdbba2eae45e6e0",
     "facts2": "77e9448bff6c8621",
-    "all": "370c662d392ba480"
+    "all": "593b829c2bb3d0e5"
    },
    "row_hash": "4e86d143688ba8e5",
-   "carried": true,
-   "pass": 3
+   "carried": false,
+   "pass": 10
   },
   {
    "row": "C927",
    "screen": "talk_pratt.talk",
    "verdict": "PASS",
-   "line": "Talk 0 \u00b7 Leave 0 \u00b7 Done 10",
-   "why": "every exit states its minutes; v2.py:17877 reads the value given, so 0 stays 0 and Done is 10",
+   "line": "Talk 0 / Leave 0 / Done 10 time_progression_minutes",
+   "why": "every exit states its time, so the 3-minute default (v2.py:18105) never applies",
    "cause": null,
    "note": true,
    "screen_hash": {
-    "text": "83f99df97b0043c5",
+    "text": "5360c08a15b8055e",
     "traits": "9814f8002b787cb3",
     "facts": "4d74d86a042a5341",
     "facts2": "46e7e3f908cf7982",
-    "all": "78e3166bad74f461"
+    "all": "d180828636af52f8"
    },
    "row_hash": "4e86d143688ba8e5",
-   "carried": true,
-   "pass": 3
+   "carried": false,
+   "pass": 10
   },
   {
    "row": "C927",
@@ -6156,20 +6170,20 @@
    "row": "C927",
    "screen": "talk_walsh.talk",
    "verdict": "PASS",
-   "line": "Talk 0 \u00b7 Leave 0 \u00b7 Done 10",
-   "why": "every exit states its minutes; v2.py:17877 reads the value given, so 0 stays 0 and Done is 10",
+   "line": "Talk 0 / Leave 0 / Done 10 time_progression_minutes",
+   "why": "every exit states its time, so the 3-minute default (v2.py:18105) never applies",
    "cause": null,
    "note": true,
    "screen_hash": {
-    "text": "ff71f8c85f4fe040",
+    "text": "c5165017b737ba05",
     "traits": "4fd4e58137018fb8",
     "facts": "12d2fa5757fd9c0c",
     "facts2": "2e25a1a07dd53d6e",
-    "all": "3679712c25e2e97d"
+    "all": "3eade12f7e04d5f3"
    },
    "row_hash": "4e86d143688ba8e5",
-   "carried": true,
-   "pass": 3
+   "carried": false,
+   "pass": 10
   },
   {
    "row": "C927",
@@ -6303,20 +6317,20 @@
    "row": "C931",
    "screen": "talk_cross.talk",
    "verdict": "PASS",
-   "line": "conditions time_of_day",
-   "why": "time_of_day 14:00-18:00 matches his 14-18 row end-exclusive",
+   "line": "time_of_day 14:00-18:00",
+   "why": "window matches Cross's 14-18 rehearsal row; re-read on each evaluation via setup.isCurrentTimeSlot (v2.py:4812, 5325)",
    "cause": null,
    "note": true,
    "screen_hash": {
-    "text": "c1716ea63bdede3d",
+    "text": "44ad3b02a0109273",
     "traits": "2875b58584de3c6e",
     "facts": "b588a7b77e8a6036",
     "facts2": "ffe52973496dcaf5",
-    "all": "d9354f5eadc7d8b3"
+    "all": "f763abdbe3fcff26"
    },
    "row_hash": "1aadffd96e76381c",
-   "carried": true,
-   "pass": 3
+   "carried": false,
+   "pass": 10
   },
   {
    "row": "C931",
@@ -6342,19 +6356,19 @@
    "screen": "talk_hale.talk",
    "verdict": "N/A",
    "line": "",
-   "why": "no time_of_day condition on this canvas; presence comes from the person's row",
+   "why": "the canvas has no time_of_day condition; presence comes from requires_npc and the schedule rows",
    "cause": null,
    "note": true,
    "screen_hash": {
-    "text": "b6cf5920a3a54390",
+    "text": "a274319a3eef2634",
     "traits": "825724317465730d",
     "facts": "b39203d5c6ab55c6",
     "facts2": "3bbe4cf22d228c02",
-    "all": "cdd895476b6d7ea9"
+    "all": "d0342a680cb5cb57"
    },
    "row_hash": "1aadffd96e76381c",
-   "carried": true,
-   "pass": 3
+   "carried": false,
+   "pass": 10
   },
   {
    "row": "C931",
@@ -6380,95 +6394,95 @@
    "screen": "talk_jake_cafeteria.talk",
    "verdict": "N/A",
    "line": "",
-   "why": "no time_of_day condition on this canvas; presence comes from the person's row",
+   "why": "the canvas has no time_of_day condition; presence comes from requires_npc and the schedule rows",
    "cause": null,
    "note": true,
    "screen_hash": {
-    "text": "d020f6201638c2c9",
+    "text": "796c4fb49d962b66",
     "traits": "435644be785b94c8",
-    "facts": "dc56390e560596eb",
+    "facts": "b26b89e1b6ba969f",
     "facts2": "0715df81400f2bca",
-    "all": "9e002a04ba0ac2ee"
+    "all": "76330b61103005c0"
    },
    "row_hash": "1aadffd96e76381c",
-   "carried": true,
-   "pass": 3
+   "carried": false,
+   "pass": 10
   },
   {
    "row": "C931",
    "screen": "talk_jake_quad.talk",
    "verdict": "N/A",
    "line": "",
-   "why": "no time_of_day condition on this canvas; presence comes from the person's row",
+   "why": "the canvas has no time_of_day condition; presence comes from requires_npc and the schedule rows",
    "cause": null,
    "note": true,
    "screen_hash": {
-    "text": "653b2a5b77a01845",
+    "text": "3bd3761b296f3802",
     "traits": "435644be785b94c8",
-    "facts": "2f981b0245806ec0",
+    "facts": "699db935eb50fb3a",
     "facts2": "08cd3c25febe58ae",
-    "all": "587dd06c36f12a55"
+    "all": "0ec5679f4cc6f003"
    },
    "row_hash": "1aadffd96e76381c",
-   "carried": true,
-   "pass": 3
+   "carried": false,
+   "pass": 10
   },
   {
    "row": "C931",
    "screen": "talk_nadia_cafeteria.talk",
    "verdict": "N/A",
    "line": "",
-   "why": "no time_of_day condition on this canvas; presence comes from the person's row",
+   "why": "the canvas has no time_of_day condition; presence comes from requires_npc and the schedule rows",
    "cause": null,
    "note": true,
    "screen_hash": {
-    "text": "6a542c54fd3aab67",
+    "text": "4c42a00acd15bf5f",
     "traits": "ef3e57a6ae056353",
     "facts": "386c35d2a296d9ff",
     "facts2": "5dc7a5e9e1ad0148",
-    "all": "2b799ed29f1c01b6"
+    "all": "8f2494a4e8dbf396"
    },
    "row_hash": "1aadffd96e76381c",
-   "carried": true,
-   "pass": 3
+   "carried": false,
+   "pass": 10
   },
   {
    "row": "C931",
    "screen": "talk_nadia_library.talk",
    "verdict": "N/A",
    "line": "",
-   "why": "no time_of_day condition on this canvas; presence comes from the person's row",
+   "why": "the canvas has no time_of_day condition; presence comes from requires_npc and the schedule rows",
    "cause": null,
    "note": true,
    "screen_hash": {
-    "text": "b74c8c2d68ee0308",
+    "text": "bd8210706a940305",
     "traits": "ef3e57a6ae056353",
     "facts": "ebdbba2eae45e6e0",
     "facts2": "77e9448bff6c8621",
-    "all": "370c662d392ba480"
+    "all": "593b829c2bb3d0e5"
    },
    "row_hash": "1aadffd96e76381c",
-   "carried": true,
-   "pass": 3
+   "carried": false,
+   "pass": 10
   },
   {
    "row": "C931",
    "screen": "talk_pratt.talk",
    "verdict": "N/A",
    "line": "",
-   "why": "no time_of_day condition on this canvas; presence comes from the person's row",
+   "why": "the canvas has no time_of_day condition; presence comes from requires_npc and the schedule rows",
    "cause": null,
    "note": true,
    "screen_hash": {
-    "text": "83f99df97b0043c5",
+    "text": "5360c08a15b8055e",
     "traits": "9814f8002b787cb3",
     "facts": "4d74d86a042a5341",
     "facts2": "46e7e3f908cf7982",
-    "all": "78e3166bad74f461"
+    "all": "d180828636af52f8"
    },
    "row_hash": "1aadffd96e76381c",
-   "carried": true,
-   "pass": 3
+   "carried": false,
+   "pass": 10
   },
   {
    "row": "C931",
@@ -6494,19 +6508,19 @@
    "screen": "talk_walsh.talk",
    "verdict": "N/A",
    "line": "",
-   "why": "no time_of_day condition on this canvas; presence comes from the person's row",
+   "why": "the canvas has no time_of_day condition; presence comes from requires_npc and the schedule rows",
    "cause": null,
    "note": true,
    "screen_hash": {
-    "text": "ff71f8c85f4fe040",
+    "text": "c5165017b737ba05",
     "traits": "4fd4e58137018fb8",
     "facts": "12d2fa5757fd9c0c",
     "facts2": "2e25a1a07dd53d6e",
-    "all": "3679712c25e2e97d"
+    "all": "3eade12f7e04d5f3"
    },
    "row_hash": "1aadffd96e76381c",
-   "carried": true,
-   "pass": 3
+   "carried": false,
+   "pass": 10
   },
   {
    "row": "C931",
@@ -6633,20 +6647,20 @@
    "row": "L106",
    "screen": "talk_cross.talk",
    "verdict": "PASS",
-   "line": "New face. You came to watch, or to work?",
-   "why": "the only person placed is the menu's own, by requires_npc; no one else is named as there",
+   "line": "Better. From the gut. Tuesdays and Thursdays at eleven, you're on that stage with the rest of them.",
+   "why": "names only the speaker, who is there by requires_npc; unnamed 'the rest of them'/friends only; no other named person claimed present",
    "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "c1716ea63bdede3d",
+    "text": "44ad3b02a0109273",
     "traits": "2875b58584de3c6e",
     "facts": "b588a7b77e8a6036",
     "facts2": "ffe52973496dcaf5",
-    "all": "d9354f5eadc7d8b3"
+    "all": "f763abdbe3fcff26"
    },
    "row_hash": "13a714429d15f3b2",
-   "carried": true,
-   "pass": 3
+   "carried": false,
+   "pass": 10
   },
   {
    "row": "L106",
@@ -6691,19 +6705,19 @@
    "screen": "talk_hale.talk",
    "verdict": "PASS",
    "line": "Monday, nine o'clock. Front row. I'll be looking for you.",
-   "why": "the only person placed is the menu's own, by requires_npc; no one else is named as there",
+   "why": "names only the speaker, who is there by requires_npc; unnamed 'the rest of them'/friends only; no other named person claimed present",
    "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "b6cf5920a3a54390",
+    "text": "a274319a3eef2634",
     "traits": "825724317465730d",
     "facts": "b39203d5c6ab55c6",
     "facts2": "3bbe4cf22d228c02",
-    "all": "cdd895476b6d7ea9"
+    "all": "d0342a680cb5cb57"
    },
    "row_hash": "13a714429d15f3b2",
-   "carried": true,
-   "pass": 3
+   "carried": false,
+   "pass": 10
   },
   {
    "row": "L106",
@@ -6728,96 +6742,96 @@
    "row": "L106",
    "screen": "talk_jake_cafeteria.talk",
    "verdict": "PASS",
-   "line": "Hey, trouble. You stopped. ... The coffee thing. I thought maybe I scared you off.",
-   "why": "the only person placed is the menu's own, by requires_npc; 'with his friends' is an unnamed crowd",
+   "line": "The caf\u00e9 across from the gates does good coffee. That's not me asking. Okay, it's me asking.",
+   "why": "names only the speaker, who is there by requires_npc; unnamed 'the rest of them'/friends only; no other named person claimed present",
    "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "d020f6201638c2c9",
+    "text": "796c4fb49d962b66",
     "traits": "435644be785b94c8",
-    "facts": "dc56390e560596eb",
+    "facts": "b26b89e1b6ba969f",
     "facts2": "0715df81400f2bca",
-    "all": "9e002a04ba0ac2ee"
+    "all": "76330b61103005c0"
    },
    "row_hash": "13a714429d15f3b2",
-   "carried": true,
-   "pass": 3
+   "carried": false,
+   "pass": 10
   },
   {
    "row": "L106",
    "screen": "talk_jake_quad.talk",
    "verdict": "PASS",
-   "line": "Hey, trouble. You stopped. ... The coffee thing. I thought maybe I scared you off.",
-   "why": "the only person placed is the menu's own, by requires_npc; 'with his friends' is an unnamed crowd",
+   "line": "The caf\u00e9 across from the gates does good coffee. That's not me asking. Okay, it's me asking.",
+   "why": "names only the speaker, who is there by requires_npc; unnamed 'the rest of them'/friends only; no other named person claimed present",
    "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "653b2a5b77a01845",
+    "text": "3bd3761b296f3802",
     "traits": "435644be785b94c8",
-    "facts": "2f981b0245806ec0",
+    "facts": "699db935eb50fb3a",
     "facts2": "08cd3c25febe58ae",
-    "all": "587dd06c36f12a55"
+    "all": "0ec5679f4cc6f003"
    },
    "row_hash": "13a714429d15f3b2",
-   "carried": true,
-   "pass": 3
+   "carried": false,
+   "pass": 10
   },
   {
    "row": "L106",
    "screen": "talk_nadia_cafeteria.talk",
    "verdict": "PASS",
    "line": "Psych, Monday and Wednesday at nine. Sit by me, not at the back.",
-   "why": "the only person placed is the menu's own, by requires_npc; no one else is named as there",
+   "why": "names only the speaker, who is there by requires_npc; unnamed 'the rest of them'/friends only; no other named person claimed present",
    "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "6a542c54fd3aab67",
+    "text": "4c42a00acd15bf5f",
     "traits": "ef3e57a6ae056353",
     "facts": "386c35d2a296d9ff",
     "facts2": "5dc7a5e9e1ad0148",
-    "all": "2b799ed29f1c01b6"
+    "all": "8f2494a4e8dbf396"
    },
    "row_hash": "13a714429d15f3b2",
-   "carried": true,
-   "pass": 3
+   "carried": false,
+   "pass": 10
   },
   {
    "row": "L106",
    "screen": "talk_nadia_library.talk",
    "verdict": "PASS",
    "line": "Psych, Monday and Wednesday at nine. Sit by me, not at the back.",
-   "why": "the only person placed is the menu's own, by requires_npc; no one else is named as there",
+   "why": "names only the speaker, who is there by requires_npc; unnamed 'the rest of them'/friends only; no other named person claimed present",
    "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "b74c8c2d68ee0308",
+    "text": "bd8210706a940305",
     "traits": "ef3e57a6ae056353",
     "facts": "ebdbba2eae45e6e0",
     "facts2": "77e9448bff6c8621",
-    "all": "370c662d392ba480"
+    "all": "593b829c2bb3d0e5"
    },
    "row_hash": "13a714429d15f3b2",
-   "carried": true,
-   "pass": 3
+   "carried": false,
+   "pass": 10
   },
   {
    "row": "L106",
    "screen": "talk_pratt.talk",
    "verdict": "PASS",
-   "line": "Do it again tonight. Wednesday at eleven, I'll call on you first.",
-   "why": "the only person placed is the menu's own, by requires_npc; no one else is named as there",
+   "line": "There. Fix it tonight. Mondays and Wednesdays at eleven, it's more of the same.",
+   "why": "names only the speaker, who is there by requires_npc; unnamed 'the rest of them'/friends only; no other named person claimed present",
    "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "83f99df97b0043c5",
+    "text": "5360c08a15b8055e",
     "traits": "9814f8002b787cb3",
     "facts": "4d74d86a042a5341",
     "facts2": "46e7e3f908cf7982",
-    "all": "78e3166bad74f461"
+    "all": "d180828636af52f8"
    },
    "row_hash": "13a714429d15f3b2",
-   "carried": true,
-   "pass": 3
+   "carried": false,
+   "pass": 10
   },
   {
    "row": "L106",
@@ -6861,20 +6875,20 @@
    "row": "L106",
    "screen": "talk_walsh.talk",
    "verdict": "PASS",
-   "line": "Bring me your essay before you hand it in, any Tuesday or Thursday afternoon.",
-   "why": "the only person placed is the menu's own, by requires_npc; no one else is named as there",
+   "line": "My door's open Tuesday and Thursday afternoons, dear. The kettle's always on.",
+   "why": "names only the speaker, who is there by requires_npc; unnamed 'the rest of them'/friends only; no other named person claimed present",
    "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "ff71f8c85f4fe040",
+    "text": "c5165017b737ba05",
     "traits": "4fd4e58137018fb8",
     "facts": "12d2fa5757fd9c0c",
     "facts2": "2e25a1a07dd53d6e",
-    "all": "3679712c25e2e97d"
+    "all": "3eade12f7e04d5f3"
    },
    "row_hash": "13a714429d15f3b2",
-   "carried": true,
-   "pass": 3
+   "carried": false,
+   "pass": 10
   },
   {
    "row": "L106",
@@ -7034,20 +7048,20 @@
    "row": "L167",
    "screen": "talk_cross.talk",
    "verdict": "PASS",
-   "line": "[canvases.trigger] one canvas per person per place",
-   "why": "one canvas whatever the day; days come from the person's row via requires_npc, not one canvas per day kind",
+   "line": "Better. From the gut. Tuesdays and Thursdays at eleven, you're on that stage with the rest of them.",
+   "why": "one Talk row per place, one talked_<x>_today flag across places (reset daily); no per-day-kind rows",
    "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "c1716ea63bdede3d",
+    "text": "44ad3b02a0109273",
     "traits": "2875b58584de3c6e",
     "facts": "b588a7b77e8a6036",
     "facts2": "ffe52973496dcaf5",
-    "all": "d9354f5eadc7d8b3"
+    "all": "f763abdbe3fcff26"
    },
    "row_hash": "e64ce2672d85d2d8",
-   "carried": true,
-   "pass": 3
+   "carried": false,
+   "pass": 10
   },
   {
    "row": "L167",
@@ -7072,20 +7086,20 @@
    "row": "L167",
    "screen": "talk_hale.talk",
    "verdict": "PASS",
-   "line": "[canvases.trigger] one canvas per person per place",
-   "why": "one canvas whatever the day; days come from the person's row via requires_npc, not one canvas per day kind",
+   "line": "Monday, nine o'clock. Front row. I'll be looking for you.",
+   "why": "one Talk row per place, one talked_<x>_today flag across places (reset daily); no per-day-kind rows",
    "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "b6cf5920a3a54390",
+    "text": "a274319a3eef2634",
     "traits": "825724317465730d",
     "facts": "b39203d5c6ab55c6",
     "facts2": "3bbe4cf22d228c02",
-    "all": "cdd895476b6d7ea9"
+    "all": "d0342a680cb5cb57"
    },
    "row_hash": "e64ce2672d85d2d8",
-   "carried": true,
-   "pass": 3
+   "carried": false,
+   "pass": 10
   },
   {
    "row": "L167",
@@ -7110,96 +7124,96 @@
    "row": "L167",
    "screen": "talk_jake_cafeteria.talk",
    "verdict": "PASS",
-   "line": "[canvases.trigger] one canvas per person per place",
-   "why": "one canvas whatever the day; days come from the person's row via requires_npc, not one canvas per day kind",
+   "line": "The caf\u00e9 across from the gates does good coffee. That's not me asking. Okay, it's me asking.",
+   "why": "one Talk row per place, one talked_<x>_today flag across places (reset daily); no per-day-kind rows",
    "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "d020f6201638c2c9",
+    "text": "796c4fb49d962b66",
     "traits": "435644be785b94c8",
-    "facts": "dc56390e560596eb",
+    "facts": "b26b89e1b6ba969f",
     "facts2": "0715df81400f2bca",
-    "all": "9e002a04ba0ac2ee"
+    "all": "76330b61103005c0"
    },
    "row_hash": "e64ce2672d85d2d8",
-   "carried": true,
-   "pass": 3
+   "carried": false,
+   "pass": 10
   },
   {
    "row": "L167",
    "screen": "talk_jake_quad.talk",
    "verdict": "PASS",
-   "line": "[canvases.trigger] one canvas per person per place",
-   "why": "one canvas whatever the day; days come from the person's row via requires_npc, not one canvas per day kind",
+   "line": "The caf\u00e9 across from the gates does good coffee. That's not me asking. Okay, it's me asking.",
+   "why": "one Talk row per place, one talked_<x>_today flag across places (reset daily); no per-day-kind rows",
    "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "653b2a5b77a01845",
+    "text": "3bd3761b296f3802",
     "traits": "435644be785b94c8",
-    "facts": "2f981b0245806ec0",
+    "facts": "699db935eb50fb3a",
     "facts2": "08cd3c25febe58ae",
-    "all": "587dd06c36f12a55"
+    "all": "0ec5679f4cc6f003"
    },
    "row_hash": "e64ce2672d85d2d8",
-   "carried": true,
-   "pass": 3
+   "carried": false,
+   "pass": 10
   },
   {
    "row": "L167",
    "screen": "talk_nadia_cafeteria.talk",
    "verdict": "PASS",
-   "line": "[canvases.trigger] one canvas per person per place",
-   "why": "one canvas whatever the day; days come from the person's row via requires_npc, not one canvas per day kind",
+   "line": "Psych, Monday and Wednesday at nine. Sit by me, not at the back.",
+   "why": "one Talk row per place, one talked_<x>_today flag across places (reset daily); no per-day-kind rows",
    "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "6a542c54fd3aab67",
+    "text": "4c42a00acd15bf5f",
     "traits": "ef3e57a6ae056353",
     "facts": "386c35d2a296d9ff",
     "facts2": "5dc7a5e9e1ad0148",
-    "all": "2b799ed29f1c01b6"
+    "all": "8f2494a4e8dbf396"
    },
    "row_hash": "e64ce2672d85d2d8",
-   "carried": true,
-   "pass": 3
+   "carried": false,
+   "pass": 10
   },
   {
    "row": "L167",
    "screen": "talk_nadia_library.talk",
    "verdict": "PASS",
-   "line": "[canvases.trigger] one canvas per person per place",
-   "why": "one canvas whatever the day; days come from the person's row via requires_npc, not one canvas per day kind",
+   "line": "Psych, Monday and Wednesday at nine. Sit by me, not at the back.",
+   "why": "one Talk row per place, one talked_<x>_today flag across places (reset daily); no per-day-kind rows",
    "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "b74c8c2d68ee0308",
+    "text": "bd8210706a940305",
     "traits": "ef3e57a6ae056353",
     "facts": "ebdbba2eae45e6e0",
     "facts2": "77e9448bff6c8621",
-    "all": "370c662d392ba480"
+    "all": "593b829c2bb3d0e5"
    },
    "row_hash": "e64ce2672d85d2d8",
-   "carried": true,
-   "pass": 3
+   "carried": false,
+   "pass": 10
   },
   {
    "row": "L167",
    "screen": "talk_pratt.talk",
    "verdict": "PASS",
-   "line": "[canvases.trigger] one canvas per person per place",
-   "why": "one canvas whatever the day; days come from the person's row via requires_npc, not one canvas per day kind",
+   "line": "There. Fix it tonight. Mondays and Wednesdays at eleven, it's more of the same.",
+   "why": "one Talk row per place, one talked_<x>_today flag across places (reset daily); no per-day-kind rows",
    "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "83f99df97b0043c5",
+    "text": "5360c08a15b8055e",
     "traits": "9814f8002b787cb3",
     "facts": "4d74d86a042a5341",
     "facts2": "46e7e3f908cf7982",
-    "all": "78e3166bad74f461"
+    "all": "d180828636af52f8"
    },
    "row_hash": "e64ce2672d85d2d8",
-   "carried": true,
-   "pass": 3
+   "carried": false,
+   "pass": 10
   },
   {
    "row": "L167",
@@ -7224,20 +7238,20 @@
    "row": "L167",
    "screen": "talk_walsh.talk",
    "verdict": "PASS",
-   "line": "[canvases.trigger] one canvas per person per place",
-   "why": "one canvas whatever the day; days come from the person's row via requires_npc, not one canvas per day kind",
+   "line": "My door's open Tuesday and Thursday afternoons, dear. The kettle's always on.",
+   "why": "one Talk row per place, one talked_<x>_today flag across places (reset daily); no per-day-kind rows",
    "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "ff71f8c85f4fe040",
+    "text": "c5165017b737ba05",
     "traits": "4fd4e58137018fb8",
     "facts": "12d2fa5757fd9c0c",
     "facts2": "2e25a1a07dd53d6e",
-    "all": "3679712c25e2e97d"
+    "all": "3eade12f7e04d5f3"
    },
    "row_hash": "e64ce2672d85d2d8",
-   "carried": true,
-   "pass": 3
+   "carried": false,
+   "pass": 10
   },
   {
    "row": "L167",
@@ -7312,8 +7326,8 @@
  ],
  "causes": [],
  "pending": [],
- "asked": 1,
- "answered": 1,
+ "asked": 66,
+ "answered": 66,
  "pass_items": [],
  "unowed": []
 }

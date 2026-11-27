@@ -1,22 +1,22 @@
 {
  "piece": "P10",
- "pass": 17,
+ "pass": 19,
  "screens": {
   "cafe_work_hour.work": {
-   "text": "66a5f5a25c0ef79e",
+   "text": "cf9b13f90f1a43c0",
    "traits": "7b42410c0bd9090b",
    "facts": "cdc735b0ce394f10",
    "facts2": "f4f805a56f6893db",
-   "all": "5084e0ccc55d5ee0"
+   "all": "a91c15097b0f0347"
   },
   "cafe_work_shift.shift": {
-   "text": "ebc4af007b52471c",
+   "text": "1a38b06e19594887",
    "traits": "7b42410c0bd9090b",
    "facts": "06e4e76c920e51bb",
    "facts2": "f9f482f80b2e4aad",
-   "all": "ee058de233e5e74a"
+   "all": "d0086e6102041066"
   },
-  "*": "aae1d12364012f27"
+  "*": "35902a600f119508"
  },
  "rows": {
   "B1": "5276068df1ca6fa9",
@@ -98,7 +98,7 @@
   "C2194": "0c03931191c53a34",
   "C1340": "b76a6583ae88c60f",
   "C2197": "cafbb0a598dbfa97",
-  "C2198": "27e6b45f50edd3ac",
+  "C2198": "73dfe095a72154a3",
   "C769": "f6b6f78a8f2e5ed7",
   "C794": "bad76e5963432385",
   "C2201": "d119dfe665f76359",
@@ -140,6 +140,7 @@
   "C450": "b01ad555668aba2d",
   "C422": "7e128897077ecee6",
   "C460": "67e48e60d5053a2e",
+  "C2202": "6e90fed7eae62131",
   "C461": "310706ee076318f2",
   "C2189": "20748838895e4545"
  },
@@ -161,35 +162,39 @@
    "row": "B10",
    "screen": "cafe_work_hour.work",
    "verdict": "PASS",
-   "line": "Sundays it's you and Chris. He watches your chest when you reach for the cups.",
-   "why": "Each text group names only who who_is_where puts there for the whole hour: Chris weekdays 07:00-09:55 (in 07-15), Tom weekdays from 10:00 and Saturday (in 10-21, last end 20:55), Chris Sunday (in 10-20, last end 19:55); groups cover every start the trigger allows; no past or first-time claim; repeat lines are dialogue that holds on every visit.",
+   "line": "\"Five, pretty. Sundays it's just you and me.\"",
+   "why": "every variant true at its first and last start minute; who_is_where: Chris weekdays 07-15, Sat-Sun 10-20; Tom Mon-Sat 10-21, never Sunday",
    "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "66a5f5a25c0ef79e",
+    "text": "cf9b13f90f1a43c0",
+    "traits": "7b42410c0bd9090b",
     "facts": "cdc735b0ce394f10",
-    "all": "5084e0ccc55d5ee0"
+    "facts2": "f4f805a56f6893db",
+    "all": "a91c15097b0f0347"
    },
    "row_hash": "c1c0e2ac2588a579",
-   "carried": true,
-   "pass": 9
+   "carried": false,
+   "pass": 19
   },
   {
    "row": "B10",
    "screen": "cafe_work_shift.shift",
    "verdict": "PASS",
-   "line": "He leaves before your shift's done, with a wink you don't return.",
-   "why": "Weekday 07:00-09:55 Chris pays (ends by 13:55, he's in to 15); 10:00-10:55 Chris all shift, Tom pays at end; 11:00-14:55 Chris leaves at 15:00 (exclusive end), at latest as the shift ends, Tom pays; 15:00-16:55 Tom only, ends by 20:55; Saturday both in to 19:55; Sunday Chris in to 19:55. 'Chris has you tomorrow' holds: Chris works Sunday.",
+   "line": "\"Twenty-two, pretty. Sundays, it's you and me.\" / \"Twenty-two, pretty. Tom's back tomorrow, and he's no fun either.\"",
+   "why": "same; Saturday 'Chris has you tomorrow' and Sunday 'Tom's back tomorrow' true",
    "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "ebc4af007b52471c",
+    "text": "1a38b06e19594887",
+    "traits": "7b42410c0bd9090b",
     "facts": "06e4e76c920e51bb",
-    "all": "ee058de233e5e74a"
+    "facts2": "f9f482f80b2e4aad",
+    "all": "d0086e6102041066"
    },
    "row_hash": "c1c0e2ac2588a579",
-   "carried": true,
-   "pass": 9
+   "carried": false,
+   "pass": 19
   },
   {
    "row": "B11",
@@ -375,35 +380,39 @@
    "row": "B8",
    "screen": "cafe_work_hour.work",
    "verdict": "PASS",
-   "line": "He counts it into your hand. You made $5.",
-   "why": "$5, 4 energy, 60 minutes agree with PLAN.md:340-344 and the Done effect (+5, 60 min); no garment named.",
+   "line": "\"You made $5.\"",
+   "why": "$5 per hour matches PLAN.md:430 and the money effect; no garment named (ass, chest are body)",
    "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "66a5f5a25c0ef79e",
+    "text": "cf9b13f90f1a43c0",
+    "traits": "7b42410c0bd9090b",
     "facts": "cdc735b0ce394f10",
-    "all": "5084e0ccc55d5ee0"
+    "facts2": "f4f805a56f6893db",
+    "all": "a91c15097b0f0347"
    },
    "row_hash": "80d415cf08e0ebfe",
-   "carried": true,
-   "pass": 9
+   "carried": false,
+   "pass": 19
   },
   {
    "row": "B8",
    "screen": "cafe_work_shift.shift",
    "verdict": "PASS",
-   "line": "Twenty-two, rookie. Good work. Same again tomorrow?",
-   "why": "$22, 15 energy, 240 minutes agree with PLAN.md:340-344 ($5 an hour plus $2 tips) and the Done effect (+22, 240 min); no garment named.",
+   "line": "\"You made $22.\"",
+   "why": "$22 a shift matches PLAN.md:430-431 and the effect; no garment named",
    "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "ebc4af007b52471c",
+    "text": "1a38b06e19594887",
+    "traits": "7b42410c0bd9090b",
     "facts": "06e4e76c920e51bb",
-    "all": "ee058de233e5e74a"
+    "facts2": "f9f482f80b2e4aad",
+    "all": "d0086e6102041066"
    },
    "row_hash": "80d415cf08e0ebfe",
-   "carried": true,
-   "pass": 9
+   "carried": false,
+   "pass": 19
   },
   {
    "row": "B9",
@@ -519,7 +528,7 @@
    "note": true,
    "screen_hash": "aae1d12364012f27",
    "row_hash": "655e8e2b731598c9",
-   "carried": false,
+   "carried": true,
    "pass": 17
   },
   {
@@ -928,18 +937,20 @@
    "row": "C151",
    "screen": "cafe_work_shift.shift",
    "verdict": "FAIL",
-   "line": "Slow day, new girl. Entertain me. / Grab a cloth, then. / Twenty-two, new girl. Next Sunday you're entertaining me.",
-   "why": "Note row: most versions carry two or three spoken lines (Sunday three, Saturday and weekday 07:00-14:55 two), not one; recorded as a note, no cause.",
+   "line": "\"Slow day, pretty. Entertain me.\" / \"Grab a cloth, then.\" / \"Twenty-two, pretty. Tom's back tomorrow, and he's no fun either.\"",
+   "why": "note row: variants still carry two or three spoken lines (Sunday three; weekday 07-10, 10-11, 11-15, Saturday two); recorded as a note, no cause",
    "cause": null,
    "note": true,
    "screen_hash": {
-    "text": "ebc4af007b52471c",
+    "text": "1a38b06e19594887",
+    "traits": "7b42410c0bd9090b",
     "facts": "06e4e76c920e51bb",
-    "all": "ee058de233e5e74a"
+    "facts2": "f9f482f80b2e4aad",
+    "all": "d0086e6102041066"
    },
    "row_hash": "d5758757a709b1af",
-   "carried": true,
-   "pass": 9
+   "carried": false,
+   "pass": 19
   },
   {
    "row": "C2179",
@@ -1023,13 +1034,13 @@
    "screen": "*",
    "verdict": "N/A",
    "line": "",
-   "why": "caf\u00e9 work screens: no menu's Talk screen in this piece; C2198 is judged only on a person's Talk screen (the screen their menu's Talk opens)",
+   "why": "no menu Talk screen among P10's canvases; C2198 is judged on a person's Talk screen only",
    "cause": null,
    "note": false,
-   "screen_hash": "aae1d12364012f27",
-   "row_hash": "27e6b45f50edd3ac",
+   "screen_hash": "8825fa19524737b9",
+   "row_hash": "73dfe095a72154a3",
    "carried": true,
-   "pass": 16
+   "pass": 18
   },
   {
    "row": "C2201",
@@ -1041,8 +1052,46 @@
    "note": false,
    "screen_hash": "aae1d12364012f27",
    "row_hash": "d119dfe665f76359",
-   "carried": false,
+   "carried": true,
    "pass": 17
+  },
+  {
+   "row": "C2202",
+   "screen": "cafe_work_hour.work",
+   "verdict": "PASS",
+   "line": "\"Five, sugar. Not bad. Come back when you want more.\"",
+   "why": "'rookie' now 'sugar'; no first-meeting words, no next-time promise",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "cf9b13f90f1a43c0",
+    "traits": "7b42410c0bd9090b",
+    "facts": "cdc735b0ce394f10",
+    "facts2": "f4f805a56f6893db",
+    "all": "a91c15097b0f0347"
+   },
+   "row_hash": "6e90fed7eae62131",
+   "carried": false,
+   "pass": 19
+  },
+  {
+   "row": "C2202",
+   "screen": "cafe_work_shift.shift",
+   "verdict": "PASS",
+   "line": "\"Twenty-two, sugar. Good work. Same again tomorrow?\" / \"Good Saturday, sugar. Chris has you tomorrow.\"",
+   "why": "same on all four Tom variants",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "1a38b06e19594887",
+    "traits": "7b42410c0bd9090b",
+    "facts": "06e4e76c920e51bb",
+    "facts2": "f9f482f80b2e4aad",
+    "all": "d0086e6102041066"
+   },
+   "row_hash": "6e90fed7eae62131",
+   "carried": false,
+   "pass": 19
   },
   {
    "row": "C286",
@@ -1264,35 +1313,39 @@
    "row": "C460",
    "screen": "cafe_work_hour.work",
    "verdict": "PASS",
-   "line": "start between 7am and 7:55pm on weekdays, 10am and 7:55pm on Saturdays, 10am and 6:55pm on Sundays.",
-   "why": "Greyed line matches the trigger windows (07:00-19:56 Mon-Fri, 10:00-19:56 Sat, 10:00-18:56 Sun, end exclusive v2.py:4785-4790); every prose claim true on every reachable minute (see B10).",
+   "line": "\"Five, pretty. Sundays it's just you and me.\"",
+   "why": "who and when claims match rows",
    "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "66a5f5a25c0ef79e",
+    "text": "cf9b13f90f1a43c0",
+    "traits": "7b42410c0bd9090b",
     "facts": "cdc735b0ce394f10",
-    "all": "5084e0ccc55d5ee0"
+    "facts2": "f4f805a56f6893db",
+    "all": "a91c15097b0f0347"
    },
    "row_hash": "67e48e60d5053a2e",
-   "carried": true,
-   "pass": 9
+   "carried": false,
+   "pass": 19
   },
   {
    "row": "C460",
    "screen": "cafe_work_shift.shift",
    "verdict": "PASS",
-   "line": "start between 7am and 4:55pm on weekdays, 10am and 3:55pm at weekends.",
-   "why": "Greyed line matches the trigger windows (07:00-16:56 Mon-Fri, 10:00-15:56 Sat and Sun); prose true at every reachable start (see B10).",
+   "line": "\"Twenty-two, pretty. Sundays, it's you and me.\" / \"Twenty-two, pretty. Tom's back tomorrow, and he's no fun either.\"",
+   "why": "who and when claims match rows",
    "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "ebc4af007b52471c",
+    "text": "1a38b06e19594887",
+    "traits": "7b42410c0bd9090b",
     "facts": "06e4e76c920e51bb",
-    "all": "ee058de233e5e74a"
+    "facts2": "f9f482f80b2e4aad",
+    "all": "d0086e6102041066"
    },
    "row_hash": "67e48e60d5053a2e",
-   "carried": true,
-   "pass": 9
+   "carried": false,
+   "pass": 19
   },
   {
    "row": "C461",
@@ -1311,35 +1364,39 @@
    "row": "C461",
    "screen": "cafe_work_hour.work",
    "verdict": "PASS",
-   "line": "Five, new girl. Next time I'll let you near the machine.",
-   "why": "Texture (milk jug, steam) can't clash; Tom's 'rookie' and Chris's 'new girl' fit the cast; her 'Not a chance.' is her opinion.",
+   "line": "\"He counts it into your hand without looking up from his phone.\"",
+   "why": "texture that can't clash; dialogue fits Tom and Chris",
    "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "66a5f5a25c0ef79e",
+    "text": "cf9b13f90f1a43c0",
+    "traits": "7b42410c0bd9090b",
     "facts": "cdc735b0ce394f10",
-    "all": "5084e0ccc55d5ee0"
+    "facts2": "f4f805a56f6893db",
+    "all": "a91c15097b0f0347"
    },
    "row_hash": "310706ee076318f2",
-   "carried": true,
-   "pass": 9
+   "carried": false,
+   "pass": 19
   },
   {
    "row": "C461",
    "screen": "cafe_work_shift.shift",
    "verdict": "PASS",
-   "line": "Saturdays the caf\u00e9 is loud.",
-   "why": "Texture and dialogue fit the cast entries; no invented fact.",
+   "line": "\"He takes the machine and leaves you the till and the crumbs.\"",
+   "why": "texture that can't clash",
    "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "ebc4af007b52471c",
+    "text": "1a38b06e19594887",
+    "traits": "7b42410c0bd9090b",
     "facts": "06e4e76c920e51bb",
-    "all": "ee058de233e5e74a"
+    "facts2": "f9f482f80b2e4aad",
+    "all": "d0086e6102041066"
    },
    "row_hash": "310706ee076318f2",
-   "carried": true,
-   "pass": 9
+   "carried": false,
+   "pass": 19
   },
   {
    "row": "C519",
@@ -1631,19 +1688,20 @@
    "row": "C889",
    "screen": "cafe_work_hour.work",
    "verdict": "FAIL",
-   "line": "button \"Work an hour\" (cafe_work_hour name)",
-   "why": "the label states a duration; the row says no duration either",
+   "line": "button \"Work an hour\"",
+   "why": "note row: label \"Work an hour\" (cafe_work_hour name) still carries a duration; unchanged; recorded as a note, no cause",
    "cause": null,
    "note": true,
    "screen_hash": {
-    "text": "66a5f5a25c0ef79e",
+    "text": "cf9b13f90f1a43c0",
+    "traits": "7b42410c0bd9090b",
     "facts": "cdc735b0ce394f10",
     "facts2": "f4f805a56f6893db",
-    "all": "5084e0ccc55d5ee0"
+    "all": "a91c15097b0f0347"
    },
    "row_hash": "def1348d483d0c40",
-   "carried": true,
-   "pass": 10
+   "carried": false,
+   "pass": 19
   },
   {
    "row": "C892",
@@ -1769,19 +1827,20 @@
    "row": "C910",
    "screen": "cafe_work_hour.work",
    "verdict": "FAIL",
-   "line": "button \"Work an hour\" (cafe_work_hour name)",
-   "why": "a button says no time; 'an hour' is time",
+   "line": "button \"Work an hour\"",
+   "why": "note row: label \"Work an hour\" (cafe_work_hour name) still carries a duration; unchanged; recorded as a note, no cause",
    "cause": null,
    "note": true,
    "screen_hash": {
-    "text": "66a5f5a25c0ef79e",
+    "text": "cf9b13f90f1a43c0",
+    "traits": "7b42410c0bd9090b",
     "facts": "cdc735b0ce394f10",
     "facts2": "f4f805a56f6893db",
-    "all": "5084e0ccc55d5ee0"
+    "all": "a91c15097b0f0347"
    },
    "row_hash": "d5a109f1ef88419a",
-   "carried": true,
-   "pass": 10
+   "carried": false,
+   "pass": 19
   },
   {
    "row": "C913",
@@ -1878,35 +1937,39 @@
    "row": "C927",
    "screen": "cafe_work_hour.work",
    "verdict": "PASS",
-   "line": "Done (time_progression_minutes = 60)",
-   "why": "The only exit states its time.",
+   "line": "Done: time_progression_minutes = 60",
+   "why": "exit names its time; the 3-minute default applies only when it is left out (v2.py:18105)",
    "cause": null,
    "note": true,
    "screen_hash": {
-    "text": "66a5f5a25c0ef79e",
+    "text": "cf9b13f90f1a43c0",
+    "traits": "7b42410c0bd9090b",
     "facts": "cdc735b0ce394f10",
-    "all": "5084e0ccc55d5ee0"
+    "facts2": "f4f805a56f6893db",
+    "all": "a91c15097b0f0347"
    },
    "row_hash": "4e86d143688ba8e5",
-   "carried": true,
-   "pass": 9
+   "carried": false,
+   "pass": 19
   },
   {
    "row": "C927",
    "screen": "cafe_work_shift.shift",
    "verdict": "PASS",
-   "line": "Done (time_progression_minutes = 240)",
-   "why": "The only exit states its time.",
+   "line": "Done: time_progression_minutes = 240",
+   "why": "exit names its time (v2.py:18105)",
    "cause": null,
    "note": true,
    "screen_hash": {
-    "text": "ebc4af007b52471c",
+    "text": "1a38b06e19594887",
+    "traits": "7b42410c0bd9090b",
     "facts": "06e4e76c920e51bb",
-    "all": "ee058de233e5e74a"
+    "facts2": "f9f482f80b2e4aad",
+    "all": "d0086e6102041066"
    },
    "row_hash": "4e86d143688ba8e5",
-   "carried": true,
-   "pass": 9
+   "carried": false,
+   "pass": 19
   },
   {
    "row": "C928",
@@ -1925,19 +1988,20 @@
    "row": "C929",
    "screen": "cafe_work_hour.work",
    "verdict": "FAIL",
-   "line": "button \"Work an hour\" (cafe_work_hour name)",
-   "why": "the activity's time rides on its label",
+   "line": "button \"Work an hour\"",
+   "why": "note row: label \"Work an hour\" (cafe_work_hour name) still carries a duration; unchanged; recorded as a note, no cause",
    "cause": null,
    "note": true,
    "screen_hash": {
-    "text": "66a5f5a25c0ef79e",
+    "text": "cf9b13f90f1a43c0",
+    "traits": "7b42410c0bd9090b",
     "facts": "cdc735b0ce394f10",
     "facts2": "f4f805a56f6893db",
-    "all": "5084e0ccc55d5ee0"
+    "all": "a91c15097b0f0347"
    },
    "row_hash": "18b0ecdf6d7fc901",
-   "carried": true,
-   "pass": 10
+   "carried": false,
+   "pass": 19
   },
   {
    "row": "C930",
@@ -1969,35 +2033,39 @@
    "row": "C931",
    "screen": "cafe_work_hour.work",
    "verdict": "PASS",
-   "line": "time_of_day 07:00-10:00 / 10:00-19:56",
-   "why": "Ends exclusive: trigger ends :56 for last start :55; text groups split at 10:00 with no gap or overlap.",
+   "line": "group 07:00-10:00 then 10:00-19:56",
+   "why": "end exclusive, windows abut without overlap",
    "cause": null,
    "note": true,
    "screen_hash": {
-    "text": "66a5f5a25c0ef79e",
+    "text": "cf9b13f90f1a43c0",
+    "traits": "7b42410c0bd9090b",
     "facts": "cdc735b0ce394f10",
-    "all": "5084e0ccc55d5ee0"
+    "facts2": "f4f805a56f6893db",
+    "all": "a91c15097b0f0347"
    },
    "row_hash": "1aadffd96e76381c",
-   "carried": true,
-   "pass": 9
+   "carried": false,
+   "pass": 19
   },
   {
    "row": "C931",
    "screen": "cafe_work_shift.shift",
    "verdict": "PASS",
-   "line": "time_of_day 07:00-10:00 / 10:00-11:00 / 11:00-15:00 / 15:00-16:56",
-   "why": "Contiguous exclusive-end windows cover the weekday trigger 07:00-16:56 exactly.",
+   "line": "groups 07-10, 10-11, 11-15, 15-16:56",
+   "why": "end exclusive, contiguous, no overlap",
    "cause": null,
    "note": true,
    "screen_hash": {
-    "text": "ebc4af007b52471c",
+    "text": "1a38b06e19594887",
+    "traits": "7b42410c0bd9090b",
     "facts": "06e4e76c920e51bb",
-    "all": "ee058de233e5e74a"
+    "facts2": "f9f482f80b2e4aad",
+    "all": "d0086e6102041066"
    },
    "row_hash": "1aadffd96e76381c",
-   "carried": true,
-   "pass": 9
+   "carried": false,
+   "pass": 19
   },
   {
    "row": "C951",
@@ -2052,19 +2120,20 @@
    "row": "C953",
    "screen": "cafe_work_hour.work",
    "verdict": "FAIL",
-   "line": "button \"Work an hour\" (cafe_work_hour name)",
-   "why": "the label carries time, not money",
+   "line": "button \"Work an hour\"",
+   "why": "note row: label \"Work an hour\" (cafe_work_hour name) still carries a duration; unchanged; recorded as a note, no cause",
    "cause": null,
    "note": true,
    "screen_hash": {
-    "text": "66a5f5a25c0ef79e",
+    "text": "cf9b13f90f1a43c0",
+    "traits": "7b42410c0bd9090b",
     "facts": "cdc735b0ce394f10",
     "facts2": "f4f805a56f6893db",
-    "all": "5084e0ccc55d5ee0"
+    "all": "a91c15097b0f0347"
    },
    "row_hash": "826bf82fe26afd13",
-   "carried": true,
-   "pass": 10
+   "carried": false,
+   "pass": 19
   },
   {
    "row": "C954",
@@ -2083,35 +2152,39 @@
    "row": "L106",
    "screen": "cafe_work_hour.work",
    "verdict": "PASS",
-   "line": "Every time you bend for the milk, Tom's eyes drop to your ass and stay there.",
-   "why": "Tom named only weekdays from 10:00 and Saturday, inside his 10-21 row; Chris only where his row has him (weekdays 07-15, Sunday 10-20).",
+   "line": "\"Five, pretty. Sundays it's just you and me.\"",
+   "why": "Chris alone weekdays 07-10, Tom 10-19:56 and Saturday, Chris Sunday; who_is_where: Chris weekdays 07-15, Sat-Sun 10-20; Tom Mon-Sat 10-21, never Sunday",
    "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "66a5f5a25c0ef79e",
+    "text": "cf9b13f90f1a43c0",
+    "traits": "7b42410c0bd9090b",
     "facts": "cdc735b0ce394f10",
-    "all": "5084e0ccc55d5ee0"
+    "facts2": "f4f805a56f6893db",
+    "all": "a91c15097b0f0347"
    },
    "row_hash": "13a714429d15f3b2",
-   "carried": true,
-   "pass": 9
+   "carried": false,
+   "pass": 19
   },
   {
    "row": "L106",
    "screen": "cafe_work_shift.shift",
    "verdict": "PASS",
-   "line": "Tom works the till, Chris works the machine",
-   "why": "Saturday both in (Tom 10-21, Chris 10-20); weekday 15:00+ names Tom only, Chris gone at 15; Sunday names Chris only.",
+   "line": "\"He leaves before your shift's done\"",
+   "why": "Chris's weekday row ends 15:00, inside an 11-15 start's shift; Tom alone from 15:00",
    "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "ebc4af007b52471c",
+    "text": "1a38b06e19594887",
+    "traits": "7b42410c0bd9090b",
     "facts": "06e4e76c920e51bb",
-    "all": "ee058de233e5e74a"
+    "facts2": "f9f482f80b2e4aad",
+    "all": "d0086e6102041066"
    },
    "row_hash": "13a714429d15f3b2",
-   "carried": true,
-   "pass": 9
+   "carried": false,
+   "pass": 19
   },
   {
    "row": "L166",
@@ -2143,35 +2216,39 @@
    "row": "L167",
    "screen": "cafe_work_hour.work",
    "verdict": "PASS",
-   "line": "Work an hour (1 hour, 4 energy) \u2014 start between 7am and 7:55pm on weekdays, 10am and 7:55pm on Saturdays, 10am and 6:55pm on Sundays.",
-   "why": "One row with a nested OR group of weekday+time_of_day; show_when_blocked + cooldown_message naming the full hours; group is clock-only so it greys once (onlyTheClockShut, v2.py:6068-6088); the six old rows are is_active = false with no show_when_blocked.",
+   "line": "cooldown \"start between 7am and 7:55pm on weekdays, 10am and 7:55pm on Saturdays, 10am and 6:55pm on Sundays.\"",
+   "why": "one row, one group, show_when_blocked, hours named in full and match the conditions",
    "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "66a5f5a25c0ef79e",
+    "text": "cf9b13f90f1a43c0",
+    "traits": "7b42410c0bd9090b",
     "facts": "cdc735b0ce394f10",
-    "all": "5084e0ccc55d5ee0"
+    "facts2": "f4f805a56f6893db",
+    "all": "a91c15097b0f0347"
    },
    "row_hash": "e64ce2672d85d2d8",
-   "carried": true,
-   "pass": 9
+   "carried": false,
+   "pass": 19
   },
   {
    "row": "L167",
    "screen": "cafe_work_shift.shift",
    "verdict": "PASS",
-   "line": "Work a shift (4 hours, 15 energy) \u2014 start between 7am and 4:55pm on weekdays, 10am and 3:55pm at weekends.",
-   "why": "One row, nested group, show_when_blocked with cooldown_message naming the full hours; greys once.",
+   "line": "cooldown \"start between 7am and 4:55pm on weekdays, 10am and 3:55pm at weekends.\"",
+   "why": "one row, one group, hours named in full",
    "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "ebc4af007b52471c",
+    "text": "1a38b06e19594887",
+    "traits": "7b42410c0bd9090b",
     "facts": "06e4e76c920e51bb",
-    "all": "ee058de233e5e74a"
+    "facts2": "f9f482f80b2e4aad",
+    "all": "d0086e6102041066"
    },
    "row_hash": "e64ce2672d85d2d8",
-   "carried": true,
-   "pass": 9
+   "carried": false,
+   "pass": 19
   },
   {
    "row": "L170",
@@ -2202,8 +2279,8 @@
  ],
  "causes": [],
  "pending": [],
- "asked": 2,
- "answered": 2,
+ "asked": 23,
+ "answered": 23,
  "pass_items": [],
  "unowed": []
 }

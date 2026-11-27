@@ -1,6 +1,6 @@
 {
  "piece": "P42",
- "pass": 21,
+ "pass": 22,
  "screens": {
   "talk_mom.hub": {
    "text": "0f4660e14b94ab43",
@@ -149,7 +149,7 @@
   "C2175": "72e884ab3b53f126",
   "C1340": "a335a4d228798817",
   "C2197": "a650718d44343cef",
-  "C2198": "be119a385da08978",
+  "C2198": "4b15434d4248d5f0",
   "people#1": "3ca322fe98f5dab6",
   "people#2": "77207820edd1c3a4",
   "people#3": "7c507f6ccfbc81b0",
@@ -202,6 +202,7 @@
   "C450": "3eb18b4cefbe49d3",
   "C422": "8933f85010afbef7",
   "C460": "beb5a109bde77305",
+  "C2202": "d5592f287f5f641a",
   "C461": "153b0804e686abae",
   "L163": "00a617ab9b4e9cd4",
   "voice#1": "b8e8afcb32208b40",
@@ -1882,8 +1883,8 @@
    "row": "C2198",
    "screen": "mom_living_room.talk",
    "verdict": "PASS",
-   "line": "Next time Mark's out, you tell me the next part. / Be home tomorrow night too. Promise me. / When it's just us, you tell me everything.",
-   "why": "same flag across both places; one fixed talk per visit context (start flag, Mark in), true on every visit (the Mark-out versions fire only Saturday 19-23; 'Next time Mark's out' and 'tomorrow night' are requests, not claims), each ending on a time or a person",
+   "line": "Next time Mark's out, you tell me the next part.",
+   "why": "same talked_mom_today flag; one fixed screen per start flag and Mark in/out; 'Next time Mark's out' is Mom's request, and the next Mark-out visit plays her listening again ('She listens to all of it'), so nothing promised is broken",
    "cause": null,
    "note": false,
    "screen_hash": {
@@ -1893,28 +1894,28 @@
     "facts2": "04bf141c5cb5340b",
     "all": "13a427d6071bc370"
    },
-   "row_hash": "be119a385da08978",
-   "carried": true,
-   "pass": 13
+   "row_hash": "4b15434d4248d5f0",
+   "carried": false,
+   "pass": 22
   },
   {
    "row": "C2198",
    "screen": "talk_mom.talk",
    "verdict": "PASS",
-   "line": "If he does, you come to me first. Not him. Me. Promise? / When he's gone, you tell me everything. / Later, when it's quiet, you tell me about your week.",
-   "why": "one talked_mom_today, set by Talk on both her menus and unset in [engine.daily_tick]; one fixed talk per visit context (Mark in, Ryan in, neither), each true on the first and fifth visit (the opening's kitchen_rent puts the rent in every path), each ending on a person or a time (Mark, 'when he's gone', 'later, when it's quiet')",
+   "line": "If he does, you come to me first. Not him. Me. Promise?",
+   "why": "household talk: one fixed screen per context (Mark out, Mark in, Ryan in), talked_mom_today shared with mom_living_room, no first-meeting words; household talks need no hook (craft/people.md rule 16)",
    "cause": null,
    "note": false,
    "screen_hash": {
     "text": "feb79fad5e3d8649",
     "traits": "ff8b9fa74641271c",
-    "facts": "600f467893ef7bb9",
+    "facts": "e75c6957e6fa4665",
     "facts2": "667847517eb6a28b",
-    "all": "66b9b16dce192c2f"
+    "all": "6dcd69d60201e8c3"
    },
-   "row_hash": "be119a385da08978",
-   "carried": true,
-   "pass": 13
+   "row_hash": "4b15434d4248d5f0",
+   "carried": false,
+   "pass": 22
   },
   {
    "row": "C2201",
@@ -1926,8 +1927,21 @@
    "note": false,
    "screen_hash": "cc046523f34ec607",
    "row_hash": "4745761f016db481",
-   "carried": false,
+   "carried": true,
    "pass": 21
+  },
+  {
+   "row": "C2202",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "Stay in tonight. Just tonight. For me.",
+   "why": "Mom's talks, borrow and return say nothing true only once; the opening plays once; 'Next time, you'll know where to find them' (return_mom) is kept, borrow_mom is always there",
+   "cause": null,
+   "note": false,
+   "screen_hash": "cc046523f34ec607",
+   "row_hash": "d5592f287f5f641a",
+   "carried": false,
+   "pass": 22
   },
   {
    "row": "C422",
@@ -7001,7 +7015,7 @@
    "note": false,
    "screen_hash": "cc046523f34ec607",
    "row_hash": "378b2df4c8bf116d",
-   "carried": false,
+   "carried": true,
    "pass": 21
   },
   {
@@ -7092,7 +7106,7 @@
    "note": false,
    "screen_hash": "cc046523f34ec607",
    "row_hash": "58dab0dc035240bd",
-   "carried": false,
+   "carried": true,
    "pass": 21
   },
   {

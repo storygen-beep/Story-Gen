@@ -1,6 +1,6 @@
 {
  "piece": "P64",
- "pass": 7,
+ "pass": 8,
  "screens": {
   "home_tv.watch": {
    "text": "421db0e327503c92",
@@ -159,7 +159,7 @@
   "C2194": "0c03931191c53a34",
   "C1340": "b76a6583ae88c60f",
   "C2197": "cafbb0a598dbfa97",
-  "C2198": "27e6b45f50edd3ac",
+  "C2198": "73dfe095a72154a3",
   "C769": "f6b6f78a8f2e5ed7",
   "C794": "bad76e5963432385",
   "C2201": "d119dfe665f76359",
@@ -201,6 +201,7 @@
   "C450": "b01ad555668aba2d",
   "C422": "7e128897077ecee6",
   "C460": "67e48e60d5053a2e",
+  "C2202": "6e90fed7eae62131",
   "C461": "310706ee076318f2",
   "C2189": "20748838895e4545"
  },
@@ -904,7 +905,7 @@
    "note": true,
    "screen_hash": "dcd2e4fdb1327161",
    "row_hash": "655e8e2b731598c9",
-   "carried": false,
+   "carried": true,
    "pass": 7
   },
   {
@@ -2190,13 +2191,13 @@
    "screen": "*",
    "verdict": "N/A",
    "line": "",
-   "why": "not a Talk screen",
+   "why": "home_tv channels: not a menu's Talk screen; C2198 is judged only on the screen a person's menu's Talk opens",
    "cause": null,
    "note": false,
-   "screen_hash": "d3ce29d2170a5f3d",
-   "row_hash": "27e6b45f50edd3ac",
-   "carried": true,
-   "pass": 1
+   "screen_hash": "dcd2e4fdb1327161",
+   "row_hash": "73dfe095a72154a3",
+   "carried": false,
+   "pass": 8
   },
   {
    "row": "C2201",
@@ -2208,8 +2209,21 @@
    "note": false,
    "screen_hash": "dcd2e4fdb1327161",
    "row_hash": "d119dfe665f76359",
-   "carried": false,
+   "carried": true,
    "pass": 7
+  },
+  {
+   "row": "C2202",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "A line crawls along the bottom of the screen: Channel 5 After Dark, every night at eleven.",
+   "why": "the claim is real: Channel 5 is offered 23:00-02:00; Mark's and Ryan's lines are held on presence and true every night",
+   "cause": null,
+   "note": false,
+   "screen_hash": "dcd2e4fdb1327161",
+   "row_hash": "6e90fed7eae62131",
+   "carried": false,
+   "pass": 8
   },
   {
    "row": "C286",

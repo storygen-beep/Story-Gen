@@ -1,6 +1,6 @@
 {
  "piece": "P39",
- "pass": 24,
+ "pass": 26,
  "screens": {
   "walk_park_couple.moment": {
    "text": "9f8c3c7fe47596ff",
@@ -10,18 +10,18 @@
    "all": "e9cf488728b26e5b"
   },
   "walk_park_couple.watch": {
-   "text": "599c5d32b887425e",
+   "text": "1b92d5e7c07171fa",
    "traits": "44136fa355b3678a",
    "facts": "2ce65de01af70a7d",
    "facts2": "2ce65de01af70a7d",
-   "all": "109e8e360b10d947"
+   "all": "b3a011023d28eb56"
   },
   "walk_park_couple.away": {
-   "text": "0a30fd6f753a1015",
+   "text": "80fb157dfcff6288",
    "traits": "44136fa355b3678a",
    "facts": "2ce65de01af70a7d",
    "facts2": "2ce65de01af70a7d",
-   "all": "c85419e455c00de3"
+   "all": "2626fc6db9588ed3"
   },
   "walk_vance_ledger.moment": {
    "text": "99cc714efc271a25",
@@ -115,20 +115,20 @@
    "all": "a8e5b43e286cc341"
   },
   "walk_curtain.shut": {
-   "text": "642e52e09a0f4769",
+   "text": "c2d1578594fb889b",
    "traits": "44136fa355b3678a",
    "facts": "bc7bb076a1931a10",
    "facts2": "bc7bb076a1931a10",
-   "all": "c9184004a52862f8"
+   "all": "62b636a9d51351a0"
   },
   "walk_curtain.finish": {
-   "text": "6330a95a1e2e7de4",
+   "text": "96103a79df896875",
    "traits": "44136fa355b3678a",
    "facts": "bc7bb076a1931a10",
    "facts2": "bc7bb076a1931a10",
-   "all": "643b5204a11ac43b"
+   "all": "12bea5ff7cad747f"
   },
-  "*": "6a83e802effba5c4"
+  "*": "2c2f2df61055a187"
  },
  "rows": {
   "B1": "5276068df1ca6fa9",
@@ -247,7 +247,7 @@
   "L169": "59defccfc63b0454",
   "C1340": "b76a6583ae88c60f",
   "C2197": "cafbb0a598dbfa97",
-  "C2198": "27e6b45f50edd3ac",
+  "C2198": "73dfe095a72154a3",
   "C769": "f6b6f78a8f2e5ed7",
   "C794": "bad76e5963432385",
   "C2201": "d119dfe665f76359",
@@ -289,6 +289,7 @@
   "C450": "b01ad555668aba2d",
   "C422": "7e128897077ecee6",
   "C460": "67e48e60d5053a2e",
+  "C2202": "6e90fed7eae62131",
   "C461": "310706ee076318f2",
   "C788": "cae1598ef9cb6ff1",
   "C855": "d3dc77f2f96e20ae",
@@ -328,19 +329,20 @@
    "row": "B10",
    "screen": "walk_curtain.finish",
    "verdict": "PASS",
-   "line": "You finish changing with your back to the curtain, fast. Next time you'll pull the curtain tighter.",
-   "why": "true at first and last minute and on a repeat visit: Nina present by trigger; the skirt is the one shop_try_on names on every visit",
+   "line": "You finish changing with your back to the curtain, fast, your face still burning.",
+   "why": "true at every minute the trigger allows and on a repeat; only a stranger is named; Nina present by trigger (npc_at_location)",
    "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "6330a95a1e2e7de4",
+    "text": "96103a79df896875",
+    "traits": "44136fa355b3678a",
     "facts": "bc7bb076a1931a10",
     "facts2": "bc7bb076a1931a10",
-    "all": "643b5204a11ac43b"
+    "all": "12bea5ff7cad747f"
    },
    "row_hash": "c1c0e2ac2588a579",
-   "carried": true,
-   "pass": 3
+   "carried": false,
+   "pass": 26
   },
   {
    "row": "B10",
@@ -364,19 +366,20 @@
    "row": "B10",
    "screen": "walk_curtain.shut",
    "verdict": "PASS",
-   "line": "Next time you'll check the hooks.",
-   "why": "every line true at the first and last minute and on a second visit; named people gated present by their rows",
+   "line": "You hold the curtain shut with both hands until your heart slows down.",
+   "why": "true at every minute the trigger allows and on a repeat; only a stranger is named; Nina present by trigger (npc_at_location)",
    "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "642e52e09a0f4769",
+    "text": "c2d1578594fb889b",
+    "traits": "44136fa355b3678a",
     "facts": "bc7bb076a1931a10",
     "facts2": "bc7bb076a1931a10",
-    "all": "c9184004a52862f8"
+    "all": "62b636a9d51351a0"
    },
    "row_hash": "c1c0e2ac2588a579",
-   "carried": true,
-   "pass": 2
+   "carried": false,
+   "pass": 26
   },
   {
    "row": "B10",
@@ -553,20 +556,20 @@
    "row": "B10",
    "screen": "walk_park_couple.away",
    "verdict": "PASS",
-   "line": "You back onto the path before a twig can snap. You know that gap's there now.",
-   "why": "strangers only; park open 06:00-21:00, window 19:00-20:55 ends before the gates lock; true at first and last minute of the window and on a second visit",
-   "cause": "",
+   "line": "You back onto the path before a twig can snap. [group saw_park_couple is_false] You know that gap's there now.",
+   "why": "first visit: flag false, discovery true; repeat: flag set, line hidden; rest of the line true every visit; only unnamed strangers; no schedule claim",
+   "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "0a30fd6f753a1015",
+    "text": "80fb157dfcff6288",
     "traits": "44136fa355b3678a",
     "facts": "2ce65de01af70a7d",
     "facts2": "2ce65de01af70a7d",
-    "all": "c85419e455c00de3"
+    "all": "2626fc6db9588ed3"
    },
    "row_hash": "c1c0e2ac2588a579",
-   "carried": true,
-   "pass": 9
+   "carried": false,
+   "pass": 26
   },
   {
    "row": "B10",
@@ -591,20 +594,20 @@
    "row": "B10",
    "screen": "walk_park_couple.watch",
    "verdict": "PASS",
-   "line": "He drives his cock into her harder, her heels digging in, until she arches and moans under him, and he pulls out and cums across her thigh. / Fuck. Fuck, yes. F",
-   "why": "strangers only; park open 06:00-21:00, window 19:00-20:55 ends before the gates lock; true at first and last minute of the window and on a second visit",
-   "cause": "",
+   "line": "Your thighs clench. [group saw_park_couple is_false] You know which gap in the bushes now.",
+   "why": "first visit: flag false, discovery true; repeat: flag set, line hidden; rest of the line true every visit; only unnamed strangers; no schedule claim",
+   "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "599c5d32b887425e",
+    "text": "1b92d5e7c07171fa",
     "traits": "44136fa355b3678a",
     "facts": "2ce65de01af70a7d",
     "facts2": "2ce65de01af70a7d",
-    "all": "109e8e360b10d947"
+    "all": "b3a011023d28eb56"
    },
    "row_hash": "c1c0e2ac2588a579",
-   "carried": true,
-   "pass": 9
+   "carried": false,
+   "pass": 26
   },
   {
    "row": "B10",
@@ -817,19 +820,20 @@
    "row": "B8",
    "screen": "walk_curtain.finish",
    "verdict": "PASS",
-   "line": "You finish changing with your back to the curtain, fast. Next time you'll pull the curtain tighter.",
-   "why": "no number on the screen; every garment named is another person's (or the try-on skirt and a grouped underwear line), none of hers unbacked",
+   "line": "You finish changing with your back to the curtain, fast, your face still burning.",
+   "why": "no number; 'changing' is the try-on the substitution stands in for; no garment of hers named on this screen",
    "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "6330a95a1e2e7de4",
+    "text": "96103a79df896875",
+    "traits": "44136fa355b3678a",
     "facts": "bc7bb076a1931a10",
     "facts2": "bc7bb076a1931a10",
-    "all": "643b5204a11ac43b"
+    "all": "12bea5ff7cad747f"
    },
    "row_hash": "80d415cf08e0ebfe",
-   "carried": true,
-   "pass": 3
+   "carried": false,
+   "pass": 26
   },
   {
    "row": "B8",
@@ -853,19 +857,20 @@
    "row": "B8",
    "screen": "walk_curtain.shut",
    "verdict": "PASS",
-   "line": "Next time you'll check the hooks.",
-   "why": "no number; no garment of hers named, or the one named is backed",
+   "line": "You hold the curtain shut with both hands until your heart slows down.",
+   "why": "no number; no garment named",
    "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "642e52e09a0f4769",
+    "text": "c2d1578594fb889b",
+    "traits": "44136fa355b3678a",
     "facts": "bc7bb076a1931a10",
     "facts2": "bc7bb076a1931a10",
-    "all": "c9184004a52862f8"
+    "all": "62b636a9d51351a0"
    },
    "row_hash": "80d415cf08e0ebfe",
-   "carried": true,
-   "pass": 2
+   "carried": false,
+   "pass": 26
   },
   {
    "row": "B8",
@@ -1042,20 +1047,20 @@
    "row": "B8",
    "screen": "walk_park_couple.away",
    "verdict": "PASS",
-   "line": "You back onto the path before a twig can snap. You know that gap's there now.",
-   "why": "no number disagrees with PLAN (rent Sunday, Friday, number nine); the only garments named are the other people's, not hers",
-   "cause": "",
+   "line": "You back onto the path before a twig can snap. [group saw_park_couple is_false] You know that gap's there now.",
+   "why": "no number; no garment named",
+   "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "0a30fd6f753a1015",
+    "text": "80fb157dfcff6288",
     "traits": "44136fa355b3678a",
     "facts": "2ce65de01af70a7d",
     "facts2": "2ce65de01af70a7d",
-    "all": "c85419e455c00de3"
+    "all": "2626fc6db9588ed3"
    },
    "row_hash": "80d415cf08e0ebfe",
-   "carried": true,
-   "pass": 9
+   "carried": false,
+   "pass": 26
   },
   {
    "row": "B8",
@@ -1080,20 +1085,20 @@
    "row": "B8",
    "screen": "walk_park_couple.watch",
    "verdict": "PASS",
-   "line": "He drives his cock into her harder, her heels digging in, until she arches and moans under him, and he pulls out and cums across her thigh. / Fuck. Fuck, yes. F",
-   "why": "no number disagrees with PLAN (rent Sunday, Friday, number nine); the only garments named are the other people's, not hers",
-   "cause": "",
+   "line": "Your thighs clench. [group saw_park_couple is_false] You know which gap in the bushes now.",
+   "why": "no number; only the stranger's heels; none of hers",
+   "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "599c5d32b887425e",
+    "text": "1b92d5e7c07171fa",
     "traits": "44136fa355b3678a",
     "facts": "2ce65de01af70a7d",
     "facts2": "2ce65de01af70a7d",
-    "all": "109e8e360b10d947"
+    "all": "b3a011023d28eb56"
    },
    "row_hash": "80d415cf08e0ebfe",
-   "carried": true,
-   "pass": 9
+   "carried": false,
+   "pass": 26
   },
   {
    "row": "B8",
@@ -1316,20 +1321,20 @@
    "row": "C1158",
    "screen": "walk_park_couple.watch",
    "verdict": "PASS",
-   "line": "He drives his cock into her harder, her heels digging in, until she arches and moans under him, and he pulls out and cums across her thigh. / Fuck. Fuck, yes. F",
-   "why": "garments named are the couple's / Nina's own (skirt, jeans, the shop's dress), never hers",
-   "cause": "",
+   "line": "Your thighs clench. [group saw_park_couple is_false] You know which gap in the bushes now.",
+   "why": "no garment of hers named (the heels are the stranger's)",
+   "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "599c5d32b887425e",
+    "text": "1b92d5e7c07171fa",
     "traits": "44136fa355b3678a",
     "facts": "2ce65de01af70a7d",
     "facts2": "2ce65de01af70a7d",
-    "all": "109e8e360b10d947"
+    "all": "b3a011023d28eb56"
    },
    "row_hash": "f40f51a0fd6cfd10",
-   "carried": true,
-   "pass": 9
+   "carried": false,
+   "pass": 26
   },
   {
    "row": "C1173",
@@ -1354,7 +1359,7 @@
    "note": true,
    "screen_hash": "6a83e802effba5c4",
    "row_hash": "655e8e2b731598c9",
-   "carried": false,
+   "carried": true,
    "pass": 24
   },
   {
@@ -1508,20 +1513,20 @@
    "row": "C1206",
    "screen": "walk_park_couple.watch",
    "verdict": "PASS",
-   "line": "He drives his cock into her harder, her heels digging in, until she arches and moans under him, and he pulls out and cums across her thigh. / Fuck. Fuck, yes. F",
-   "why": "garments named are the couple's / Nina's own (skirt, jeans, the shop's dress), never hers",
-   "cause": "",
+   "line": "Your thighs clench. [group saw_park_couple is_false] You know which gap in the bushes now.",
+   "why": "no garment of hers named (the heels are the stranger's)",
+   "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "599c5d32b887425e",
+    "text": "1b92d5e7c07171fa",
     "traits": "44136fa355b3678a",
     "facts": "2ce65de01af70a7d",
     "facts2": "2ce65de01af70a7d",
-    "all": "109e8e360b10d947"
+    "all": "b3a011023d28eb56"
    },
    "row_hash": "bfff76edbee583de",
-   "carried": true,
-   "pass": 9
+   "carried": false,
+   "pass": 26
   },
   {
    "row": "C1220",
@@ -2922,13 +2927,13 @@
    "screen": "*",
    "verdict": "N/A",
    "line": "",
-   "why": "neighbourhood walk-ins: no menu's Talk screen in this piece; C2198 is judged only on a person's Talk screen (the screen their menu's Talk opens)",
+   "why": "walk-ins: not a menu's Talk screen; C2198 is judged only on the screen a person's menu's Talk opens",
    "cause": null,
    "note": false,
-   "screen_hash": "bece9e9917a3cc7f",
-   "row_hash": "27e6b45f50edd3ac",
+   "screen_hash": "6a83e802effba5c4",
+   "row_hash": "73dfe095a72154a3",
    "carried": true,
-   "pass": 14
+   "pass": 25
   },
   {
    "row": "C2200",
@@ -2940,7 +2945,7 @@
    "note": false,
    "screen_hash": "6a83e802effba5c4",
    "row_hash": "117a60e53de1e8a4",
-   "carried": false,
+   "carried": true,
    "pass": 24
   },
   {
@@ -2953,8 +2958,97 @@
    "note": false,
    "screen_hash": "6a83e802effba5c4",
    "row_hash": "d119dfe665f76359",
-   "carried": false,
+   "carried": true,
    "pass": 24
+  },
+  {
+   "row": "C2202",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "Next time she might not let you just browse.",
+   "why": "the other walk-ins' lines hold on a repeat; 'might' makes Nina's line a possibility, not a promise",
+   "cause": null,
+   "note": false,
+   "screen_hash": "6a83e802effba5c4",
+   "row_hash": "6e90fed7eae62131",
+   "carried": true,
+   "pass": 25
+  },
+  {
+   "row": "C2202",
+   "screen": "walk_curtain.finish",
+   "verdict": "PASS",
+   "line": "You finish changing with your back to the curtain, fast, your face still burning.",
+   "why": "the 'next time you'll pull the curtain tighter' promise is cut; the line is true on every try-on the curtain rips back",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "96103a79df896875",
+    "traits": "44136fa355b3678a",
+    "facts": "bc7bb076a1931a10",
+    "facts2": "bc7bb076a1931a10",
+    "all": "12bea5ff7cad747f"
+   },
+   "row_hash": "6e90fed7eae62131",
+   "carried": false,
+   "pass": 26
+  },
+  {
+   "row": "C2202",
+   "screen": "walk_curtain.shut",
+   "verdict": "PASS",
+   "line": "You hold the curtain shut with both hands until your heart slows down.",
+   "why": "the 'next time you'll check the hooks' promise is cut; nothing true only once remains",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "c2d1578594fb889b",
+    "traits": "44136fa355b3678a",
+    "facts": "bc7bb076a1931a10",
+    "facts2": "bc7bb076a1931a10",
+    "all": "62b636a9d51351a0"
+   },
+   "row_hash": "6e90fed7eae62131",
+   "carried": false,
+   "pass": 26
+  },
+  {
+   "row": "C2202",
+   "screen": "walk_park_couple.away",
+   "verdict": "PASS",
+   "line": "You back onto the path before a twig can snap. [group saw_park_couple is_false] You know that gap's there now.",
+   "why": "discovery held on saw_park_couple is_false; this exit now sets it (flagEffects), nothing unsets it (grep: no op unset), so it shows on the first visit only (v2.py:18923 group, 5163 is_false)",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "80fb157dfcff6288",
+    "traits": "44136fa355b3678a",
+    "facts": "2ce65de01af70a7d",
+    "facts2": "2ce65de01af70a7d",
+    "all": "2626fc6db9588ed3"
+   },
+   "row_hash": "6e90fed7eae62131",
+   "carried": false,
+   "pass": 26
+  },
+  {
+   "row": "C2202",
+   "screen": "walk_park_couple.watch",
+   "verdict": "PASS",
+   "line": "Your thighs clench. [group saw_park_couple is_false] You know which gap in the bushes now.",
+   "why": "discovery held on saw_park_couple is_false; Done sets it, nothing unsets it, so it shows once",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "1b92d5e7c07171fa",
+    "traits": "44136fa355b3678a",
+    "facts": "2ce65de01af70a7d",
+    "facts2": "2ce65de01af70a7d",
+    "all": "b3a011023d28eb56"
+   },
+   "row_hash": "6e90fed7eae62131",
+   "carried": false,
+   "pass": 26
   },
   {
    "row": "C286",
@@ -3309,19 +3403,20 @@
    "row": "C460",
    "screen": "walk_curtain.finish",
    "verdict": "PASS",
-   "line": "You finish changing with your back to the curtain, fast. Next time you'll pull the curtain tighter.",
-   "why": "true at first and last minute and on a repeat visit: Nina present by trigger; the skirt is the one shop_try_on names on every visit",
+   "line": "You finish changing with your back to the curtain, fast, your face still burning.",
+   "why": "true at every minute the trigger allows and on a repeat; only a stranger is named; Nina present by trigger (npc_at_location)",
    "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "6330a95a1e2e7de4",
+    "text": "96103a79df896875",
+    "traits": "44136fa355b3678a",
     "facts": "bc7bb076a1931a10",
     "facts2": "bc7bb076a1931a10",
-    "all": "643b5204a11ac43b"
+    "all": "12bea5ff7cad747f"
    },
    "row_hash": "67e48e60d5053a2e",
-   "carried": true,
-   "pass": 3
+   "carried": false,
+   "pass": 26
   },
   {
    "row": "C460",
@@ -3345,19 +3440,20 @@
    "row": "C460",
    "screen": "walk_curtain.shut",
    "verdict": "PASS",
-   "line": "Next time you'll check the hooks.",
-   "why": "every claim checked against PLAN, who_is_where and the trigger; true on every reachable visit",
+   "line": "You hold the curtain shut with both hands until your heart slows down.",
+   "why": "true at every minute the trigger allows and on a repeat; only a stranger is named; Nina present by trigger (npc_at_location)",
    "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "642e52e09a0f4769",
+    "text": "c2d1578594fb889b",
+    "traits": "44136fa355b3678a",
     "facts": "bc7bb076a1931a10",
     "facts2": "bc7bb076a1931a10",
-    "all": "c9184004a52862f8"
+    "all": "62b636a9d51351a0"
    },
    "row_hash": "67e48e60d5053a2e",
-   "carried": true,
-   "pass": 2
+   "carried": false,
+   "pass": 26
   },
   {
    "row": "C460",
@@ -3534,20 +3630,20 @@
    "row": "C460",
    "screen": "walk_park_couple.away",
    "verdict": "PASS",
-   "line": "You back onto the path before a twig can snap. You know that gap's there now.",
-   "why": "strangers only; park open 06:00-21:00, window 19:00-20:55 ends before the gates lock; true at first and last minute of the window and on a second visit",
-   "cause": "",
+   "line": "You back onto the path before a twig can snap. [group saw_park_couple is_false] You know that gap's there now.",
+   "why": "first visit: flag false, discovery true; repeat: flag set, line hidden; rest of the line true every visit; only unnamed strangers; no schedule claim",
+   "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "0a30fd6f753a1015",
+    "text": "80fb157dfcff6288",
     "traits": "44136fa355b3678a",
     "facts": "2ce65de01af70a7d",
     "facts2": "2ce65de01af70a7d",
-    "all": "c85419e455c00de3"
+    "all": "2626fc6db9588ed3"
    },
    "row_hash": "67e48e60d5053a2e",
-   "carried": true,
-   "pass": 9
+   "carried": false,
+   "pass": 26
   },
   {
    "row": "C460",
@@ -3572,20 +3668,20 @@
    "row": "C460",
    "screen": "walk_park_couple.watch",
    "verdict": "PASS",
-   "line": "He drives his cock into her harder, her heels digging in, until she arches and moans under him, and he pulls out and cums across her thigh. / Fuck. Fuck, yes. F",
-   "why": "strangers only; park open 06:00-21:00, window 19:00-20:55 ends before the gates lock; true at first and last minute of the window and on a second visit",
-   "cause": "",
+   "line": "Your thighs clench. [group saw_park_couple is_false] You know which gap in the bushes now.",
+   "why": "first visit: flag false, discovery true; repeat: flag set, line hidden; rest of the line true every visit; only unnamed strangers; no schedule claim",
+   "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "599c5d32b887425e",
+    "text": "1b92d5e7c07171fa",
     "traits": "44136fa355b3678a",
     "facts": "2ce65de01af70a7d",
     "facts2": "2ce65de01af70a7d",
-    "all": "109e8e360b10d947"
+    "all": "b3a011023d28eb56"
    },
    "row_hash": "67e48e60d5053a2e",
-   "carried": true,
-   "pass": 9
+   "carried": false,
+   "pass": 26
   },
   {
    "row": "C460",
@@ -3661,19 +3757,20 @@
    "row": "C461",
    "screen": "walk_curtain.finish",
    "verdict": "PASS",
-   "line": "You finish changing with your back to the curtain, fast. Next time you'll pull the curtain tighter.",
-   "why": "texture and her reactions only; dialogue fits the cast entries (Tom runs the caf\u00e9, Nina owns the shop, Zoe 19, Sam 22)",
+   "line": "You finish changing with your back to the curtain, fast, your face still burning.",
+   "why": "texture and her body reaction, nothing that can clash",
    "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "6330a95a1e2e7de4",
+    "text": "96103a79df896875",
+    "traits": "44136fa355b3678a",
     "facts": "bc7bb076a1931a10",
     "facts2": "bc7bb076a1931a10",
-    "all": "643b5204a11ac43b"
+    "all": "12bea5ff7cad747f"
    },
    "row_hash": "310706ee076318f2",
-   "carried": true,
-   "pass": 3
+   "carried": false,
+   "pass": 26
   },
   {
    "row": "C461",
@@ -3697,19 +3794,20 @@
    "row": "C461",
    "screen": "walk_curtain.shut",
    "verdict": "PASS",
-   "line": "Next time you'll check the hooks.",
-   "why": "texture and in-character dialogue only",
+   "line": "You hold the curtain shut with both hands until your heart slows down.",
+   "why": "texture and her body reaction, nothing that can clash",
    "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "642e52e09a0f4769",
+    "text": "c2d1578594fb889b",
+    "traits": "44136fa355b3678a",
     "facts": "bc7bb076a1931a10",
     "facts2": "bc7bb076a1931a10",
-    "all": "c9184004a52862f8"
+    "all": "62b636a9d51351a0"
    },
    "row_hash": "310706ee076318f2",
-   "carried": true,
-   "pass": 2
+   "carried": false,
+   "pass": 26
   },
   {
    "row": "C461",
@@ -3886,20 +3984,20 @@
    "row": "C461",
    "screen": "walk_park_couple.away",
    "verdict": "PASS",
-   "line": "You back onto the path before a twig can snap. You know that gap's there now.",
-   "why": "texture and her reaction only; nothing that can clash with rows, clock or flags",
-   "cause": "",
+   "line": "You back onto the path before a twig can snap. [group saw_park_couple is_false] You know that gap's there now.",
+   "why": "texture and her body reaction, nothing that can clash",
+   "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "0a30fd6f753a1015",
+    "text": "80fb157dfcff6288",
     "traits": "44136fa355b3678a",
     "facts": "2ce65de01af70a7d",
     "facts2": "2ce65de01af70a7d",
-    "all": "c85419e455c00de3"
+    "all": "2626fc6db9588ed3"
    },
    "row_hash": "310706ee076318f2",
-   "carried": true,
-   "pass": 9
+   "carried": false,
+   "pass": 26
   },
   {
    "row": "C461",
@@ -3924,20 +4022,20 @@
    "row": "C461",
    "screen": "walk_park_couple.watch",
    "verdict": "PASS",
-   "line": "He drives his cock into her harder, her heels digging in, until she arches and moans under him, and he pulls out and cums across her thigh. / Fuck. Fuck, yes. F",
-   "why": "texture and her reaction only; nothing that can clash with rows, clock or flags",
-   "cause": "",
+   "line": "Your thighs clench. [group saw_park_couple is_false] You know which gap in the bushes now.",
+   "why": "texture and her body reaction, nothing that can clash",
+   "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "599c5d32b887425e",
+    "text": "1b92d5e7c07171fa",
     "traits": "44136fa355b3678a",
     "facts": "2ce65de01af70a7d",
     "facts2": "2ce65de01af70a7d",
-    "all": "109e8e360b10d947"
+    "all": "b3a011023d28eb56"
    },
    "row_hash": "310706ee076318f2",
-   "carried": true,
-   "pass": 9
+   "carried": false,
+   "pass": 26
   },
   {
    "row": "C461",
@@ -4678,37 +4776,39 @@
    "row": "C927",
    "screen": "walk_curtain.finish",
    "verdict": "PASS",
-   "line": "You finish changing with your back to the curtain, fast. Next time you'll pull the curtain tighter.",
-   "why": "every exit states its minutes: the choices 0, Done 5",
+   "line": "You finish changing with your back to the curtain, fast, your face still burning.",
+   "why": "every exit on the screen sets time_progression_minutes explicitly (5), so the 3-minute default never applies",
    "cause": null,
    "note": true,
    "screen_hash": {
-    "text": "6330a95a1e2e7de4",
+    "text": "96103a79df896875",
+    "traits": "44136fa355b3678a",
     "facts": "bc7bb076a1931a10",
     "facts2": "bc7bb076a1931a10",
-    "all": "643b5204a11ac43b"
+    "all": "12bea5ff7cad747f"
    },
    "row_hash": "4e86d143688ba8e5",
-   "carried": true,
-   "pass": 3
+   "carried": false,
+   "pass": 26
   },
   {
    "row": "C927",
    "screen": "walk_curtain.shut",
    "verdict": "PASS",
-   "line": "Next time you'll check the hooks.",
-   "why": "every Done states 5 minutes; node hops state 0",
+   "line": "You hold the curtain shut with both hands until your heart slows down.",
+   "why": "every exit on the screen sets time_progression_minutes explicitly (5), so the 3-minute default never applies",
    "cause": null,
    "note": true,
    "screen_hash": {
-    "text": "642e52e09a0f4769",
+    "text": "c2d1578594fb889b",
+    "traits": "44136fa355b3678a",
     "facts": "bc7bb076a1931a10",
     "facts2": "bc7bb076a1931a10",
-    "all": "c9184004a52862f8"
+    "all": "62b636a9d51351a0"
    },
    "row_hash": "4e86d143688ba8e5",
-   "carried": true,
-   "pass": 2
+   "carried": false,
+   "pass": 26
   },
   {
    "row": "C927",
@@ -4828,39 +4928,39 @@
    "row": "C927",
    "screen": "walk_park_couple.away",
    "verdict": "PASS",
-   "line": "You back onto the path before a twig can snap. You know that gap's there now.",
-   "why": "node hops are inside the scene; Done costs time_progression_minutes = 5, no bare exit",
+   "line": "You back onto the path before a twig can snap. [group saw_park_couple is_false] You know that gap's there now.",
+   "why": "every exit on the screen sets time_progression_minutes explicitly (5), so the 3-minute default never applies",
    "cause": null,
    "note": true,
    "screen_hash": {
-    "text": "0a30fd6f753a1015",
+    "text": "80fb157dfcff6288",
     "traits": "44136fa355b3678a",
     "facts": "2ce65de01af70a7d",
     "facts2": "2ce65de01af70a7d",
-    "all": "c85419e455c00de3"
+    "all": "2626fc6db9588ed3"
    },
    "row_hash": "4e86d143688ba8e5",
-   "carried": true,
-   "pass": 9
+   "carried": false,
+   "pass": 26
   },
   {
    "row": "C927",
    "screen": "walk_park_couple.watch",
    "verdict": "PASS",
-   "line": "He drives his cock into her harder, her heels digging in, until she arches and moans under him, and he pulls out and cums across her thigh. / Fuck. Fuck, yes. F",
-   "why": "node hops are inside the scene; Done costs time_progression_minutes = 5, no bare exit",
+   "line": "Your thighs clench. [group saw_park_couple is_false] You know which gap in the bushes now.",
+   "why": "every exit on the screen sets time_progression_minutes explicitly (5), so the 3-minute default never applies",
    "cause": null,
    "note": true,
    "screen_hash": {
-    "text": "599c5d32b887425e",
+    "text": "1b92d5e7c07171fa",
     "traits": "44136fa355b3678a",
     "facts": "2ce65de01af70a7d",
     "facts2": "2ce65de01af70a7d",
-    "all": "109e8e360b10d947"
+    "all": "b3a011023d28eb56"
    },
    "row_hash": "4e86d143688ba8e5",
-   "carried": true,
-   "pass": 9
+   "carried": false,
+   "pass": 26
   },
   {
    "row": "C927",
@@ -4956,37 +5056,39 @@
    "row": "C931",
    "screen": "walk_curtain.finish",
    "verdict": "PASS",
-   "line": "You finish changing with your back to the curtain, fast. Next time you'll pull the curtain tighter.",
-   "why": "the window ends exclusive and the answer screen costs 0 minutes, so its lines show inside the window",
+   "line": "You finish changing with your back to the curtain, fast, your face still burning.",
+   "why": "trigger window is end-exclusive; no line names a clock time that disagrees with it",
    "cause": null,
    "note": true,
    "screen_hash": {
-    "text": "6330a95a1e2e7de4",
+    "text": "96103a79df896875",
+    "traits": "44136fa355b3678a",
     "facts": "bc7bb076a1931a10",
     "facts2": "bc7bb076a1931a10",
-    "all": "643b5204a11ac43b"
+    "all": "12bea5ff7cad747f"
    },
    "row_hash": "1aadffd96e76381c",
-   "carried": true,
-   "pass": 3
+   "carried": false,
+   "pass": 26
   },
   {
    "row": "C931",
    "screen": "walk_curtain.shut",
    "verdict": "PASS",
-   "line": "Next time you'll check the hooks.",
-   "why": "window end exclusive, inside the place's hours and the person's row",
+   "line": "You hold the curtain shut with both hands until your heart slows down.",
+   "why": "trigger window is end-exclusive; no line names a clock time that disagrees with it",
    "cause": null,
    "note": true,
    "screen_hash": {
-    "text": "642e52e09a0f4769",
+    "text": "c2d1578594fb889b",
+    "traits": "44136fa355b3678a",
     "facts": "bc7bb076a1931a10",
     "facts2": "bc7bb076a1931a10",
-    "all": "c9184004a52862f8"
+    "all": "62b636a9d51351a0"
    },
    "row_hash": "1aadffd96e76381c",
-   "carried": true,
-   "pass": 2
+   "carried": false,
+   "pass": 26
   },
   {
    "row": "C931",
@@ -5106,39 +5208,39 @@
    "row": "C931",
    "screen": "walk_park_couple.away",
    "verdict": "PASS",
-   "line": "You back onto the path before a twig can snap. You know that gap's there now.",
-   "why": "window read end-exclusive and wrapping as the rows do (23:00-01:00 on the weekday of the current day, like the schedule rows)",
+   "line": "You back onto the path before a twig can snap. [group saw_park_couple is_false] You know that gap's there now.",
+   "why": "trigger window is end-exclusive; no line names a clock time that disagrees with it",
    "cause": null,
    "note": true,
    "screen_hash": {
-    "text": "0a30fd6f753a1015",
+    "text": "80fb157dfcff6288",
     "traits": "44136fa355b3678a",
     "facts": "2ce65de01af70a7d",
     "facts2": "2ce65de01af70a7d",
-    "all": "c85419e455c00de3"
+    "all": "2626fc6db9588ed3"
    },
    "row_hash": "1aadffd96e76381c",
-   "carried": true,
-   "pass": 9
+   "carried": false,
+   "pass": 26
   },
   {
    "row": "C931",
    "screen": "walk_park_couple.watch",
    "verdict": "PASS",
-   "line": "He drives his cock into her harder, her heels digging in, until she arches and moans under him, and he pulls out and cums across her thigh. / Fuck. Fuck, yes. F",
-   "why": "window read end-exclusive and wrapping as the rows do (23:00-01:00 on the weekday of the current day, like the schedule rows)",
+   "line": "Your thighs clench. [group saw_park_couple is_false] You know which gap in the bushes now.",
+   "why": "trigger window is end-exclusive; no line names a clock time that disagrees with it",
    "cause": null,
    "note": true,
    "screen_hash": {
-    "text": "599c5d32b887425e",
+    "text": "1b92d5e7c07171fa",
     "traits": "44136fa355b3678a",
     "facts": "2ce65de01af70a7d",
     "facts2": "2ce65de01af70a7d",
-    "all": "109e8e360b10d947"
+    "all": "b3a011023d28eb56"
    },
    "row_hash": "1aadffd96e76381c",
-   "carried": true,
-   "pass": 9
+   "carried": false,
+   "pass": 26
   },
   {
    "row": "C931",
@@ -5257,19 +5359,20 @@
    "row": "L106",
    "screen": "walk_curtain.finish",
    "verdict": "PASS",
-   "line": "You finish changing with your back to the curtain, fast. Next time you'll pull the curtain tighter.",
-   "why": "every named person is where their rows put them: Nina present by trigger; the skirt is the one shop_try_on names on every visit",
+   "line": "You finish changing with your back to the curtain, fast, your face still burning.",
+   "why": "only a stranger is named; Nina present by trigger (npc_at_location)",
    "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "6330a95a1e2e7de4",
+    "text": "96103a79df896875",
+    "traits": "44136fa355b3678a",
     "facts": "bc7bb076a1931a10",
     "facts2": "bc7bb076a1931a10",
-    "all": "643b5204a11ac43b"
+    "all": "12bea5ff7cad747f"
    },
    "row_hash": "13a714429d15f3b2",
-   "carried": true,
-   "pass": 3
+   "carried": false,
+   "pass": 26
   },
   {
    "row": "L106",
@@ -5293,19 +5396,20 @@
    "row": "L106",
    "screen": "walk_curtain.shut",
    "verdict": "PASS",
-   "line": "Next time you'll check the hooks.",
-   "why": "everyone named is gated present by their rows (who_is_where), or a stranger",
+   "line": "You hold the curtain shut with both hands until your heart slows down.",
+   "why": "only a stranger is named; Nina present by trigger (npc_at_location)",
    "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "642e52e09a0f4769",
+    "text": "c2d1578594fb889b",
+    "traits": "44136fa355b3678a",
     "facts": "bc7bb076a1931a10",
     "facts2": "bc7bb076a1931a10",
-    "all": "c9184004a52862f8"
+    "all": "62b636a9d51351a0"
    },
    "row_hash": "13a714429d15f3b2",
-   "carried": true,
-   "pass": 2
+   "carried": false,
+   "pass": 26
   },
   {
    "row": "L106",
@@ -5482,20 +5586,20 @@
    "row": "L106",
    "screen": "walk_park_couple.away",
    "verdict": "PASS",
-   "line": "You back onto the path before a twig can snap. You know that gap's there now.",
-   "why": "strangers only; park open 06:00-21:00, window 19:00-20:55 ends before the gates lock; true at first and last minute of the window and on a second visit",
-   "cause": "",
+   "line": "You back onto the path before a twig can snap. [group saw_park_couple is_false] You know that gap's there now.",
+   "why": "only unnamed strangers; no schedule claim",
+   "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "0a30fd6f753a1015",
+    "text": "80fb157dfcff6288",
     "traits": "44136fa355b3678a",
     "facts": "2ce65de01af70a7d",
     "facts2": "2ce65de01af70a7d",
-    "all": "c85419e455c00de3"
+    "all": "2626fc6db9588ed3"
    },
    "row_hash": "13a714429d15f3b2",
-   "carried": true,
-   "pass": 9
+   "carried": false,
+   "pass": 26
   },
   {
    "row": "L106",
@@ -5520,20 +5624,20 @@
    "row": "L106",
    "screen": "walk_park_couple.watch",
    "verdict": "PASS",
-   "line": "He drives his cock into her harder, her heels digging in, until she arches and moans under him, and he pulls out and cums across her thigh. / Fuck. Fuck, yes. F",
-   "why": "strangers only; park open 06:00-21:00, window 19:00-20:55 ends before the gates lock; true at first and last minute of the window and on a second visit",
-   "cause": "",
+   "line": "Your thighs clench. [group saw_park_couple is_false] You know which gap in the bushes now.",
+   "why": "only unnamed strangers; no schedule claim",
+   "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "599c5d32b887425e",
+    "text": "1b92d5e7c07171fa",
     "traits": "44136fa355b3678a",
     "facts": "2ce65de01af70a7d",
     "facts2": "2ce65de01af70a7d",
-    "all": "109e8e360b10d947"
+    "all": "b3a011023d28eb56"
    },
    "row_hash": "13a714429d15f3b2",
-   "carried": true,
-   "pass": 9
+   "carried": false,
+   "pass": 26
   },
   {
    "row": "L106",
@@ -5687,37 +5791,39 @@
    "row": "L167",
    "screen": "walk_curtain.finish",
    "verdict": "PASS",
-   "line": "You finish changing with your back to the curtain, fast. Next time you'll pull the curtain tighter.",
-   "why": "one canvas per scene; days that differ are one trigger with a group (or the same hours every open day); a walk-in hides out of its window by design (walk-ins.md, no 'nothing happens')",
+   "line": "You finish changing with your back to the curtain, fast, your face still burning.",
+   "why": "one trigger for the walk-in; no per-day-kind duplicate rows",
    "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "6330a95a1e2e7de4",
+    "text": "96103a79df896875",
+    "traits": "44136fa355b3678a",
     "facts": "bc7bb076a1931a10",
     "facts2": "bc7bb076a1931a10",
-    "all": "643b5204a11ac43b"
+    "all": "12bea5ff7cad747f"
    },
    "row_hash": "e64ce2672d85d2d8",
-   "carried": true,
-   "pass": 3
+   "carried": false,
+   "pass": 26
   },
   {
    "row": "L167",
    "screen": "walk_curtain.shut",
    "verdict": "PASS",
-   "line": "Next time you'll check the hooks.",
-   "why": "one canvas, one window; hidden when shut (an event, C916), no row per day kind",
+   "line": "You hold the curtain shut with both hands until your heart slows down.",
+   "why": "one trigger for the walk-in; no per-day-kind duplicate rows",
    "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "642e52e09a0f4769",
+    "text": "c2d1578594fb889b",
+    "traits": "44136fa355b3678a",
     "facts": "bc7bb076a1931a10",
     "facts2": "bc7bb076a1931a10",
-    "all": "c9184004a52862f8"
+    "all": "62b636a9d51351a0"
    },
    "row_hash": "e64ce2672d85d2d8",
-   "carried": true,
-   "pass": 2
+   "carried": false,
+   "pass": 26
   },
   {
    "row": "L167",
@@ -5837,39 +5943,39 @@
    "row": "L167",
    "screen": "walk_park_couple.away",
    "verdict": "PASS",
-   "line": "You back onto the path before a twig can snap. You know that gap's there now.",
-   "why": "no activity row on this screen; as a random walk-in it stays hidden when shut (C916)",
-   "cause": "",
+   "line": "You back onto the path before a twig can snap. [group saw_park_couple is_false] You know that gap's there now.",
+   "why": "one trigger for the walk-in; no per-day-kind duplicate rows",
+   "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "0a30fd6f753a1015",
+    "text": "80fb157dfcff6288",
     "traits": "44136fa355b3678a",
     "facts": "2ce65de01af70a7d",
     "facts2": "2ce65de01af70a7d",
-    "all": "c85419e455c00de3"
+    "all": "2626fc6db9588ed3"
    },
    "row_hash": "e64ce2672d85d2d8",
-   "carried": true,
-   "pass": 9
+   "carried": false,
+   "pass": 26
   },
   {
    "row": "L167",
    "screen": "walk_park_couple.watch",
    "verdict": "PASS",
-   "line": "He drives his cock into her harder, her heels digging in, until she arches and moans under him, and he pulls out and cums across her thigh. / Fuck. Fuck, yes. F",
-   "why": "no activity row on this screen; as a random walk-in it stays hidden when shut (C916)",
-   "cause": "",
+   "line": "Your thighs clench. [group saw_park_couple is_false] You know which gap in the bushes now.",
+   "why": "one trigger for the walk-in; no per-day-kind duplicate rows",
+   "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "599c5d32b887425e",
+    "text": "1b92d5e7c07171fa",
     "traits": "44136fa355b3678a",
     "facts": "2ce65de01af70a7d",
     "facts2": "2ce65de01af70a7d",
-    "all": "109e8e360b10d947"
+    "all": "b3a011023d28eb56"
    },
    "row_hash": "e64ce2672d85d2d8",
-   "carried": true,
-   "pass": 9
+   "carried": false,
+   "pass": 26
   },
   {
    "row": "L167",
@@ -6059,8 +6165,8 @@
  ],
  "causes": [],
  "pending": [],
- "asked": 3,
- "answered": 3,
+ "asked": 38,
+ "answered": 38,
  "pass_items": [],
  "unowed": []
 }

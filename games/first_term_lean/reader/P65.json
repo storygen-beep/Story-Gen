@@ -1,6 +1,6 @@
 {
  "piece": "P65",
- "pass": 5,
+ "pass": 6,
  "screens": {
   "gym_desk.desk": {
    "text": "335967084e0a28da",
@@ -77,7 +77,7 @@
   "C2194": "0c03931191c53a34",
   "C1340": "b76a6583ae88c60f",
   "C2197": "cafbb0a598dbfa97",
-  "C2198": "27e6b45f50edd3ac",
+  "C2198": "73dfe095a72154a3",
   "C769": "f6b6f78a8f2e5ed7",
   "C794": "bad76e5963432385",
   "C2201": "d119dfe665f76359",
@@ -118,6 +118,7 @@
   "C450": "b01ad555668aba2d",
   "C422": "7e128897077ecee6",
   "C460": "67e48e60d5053a2e",
+  "C2202": "6e90fed7eae62131",
   "C461": "310706ee076318f2",
   "C2189": "20748838895e4545"
  },
@@ -943,14 +944,14 @@
    "row": "C2198",
    "screen": "*",
    "verdict": "N/A",
-   "line": "\u2014",
-   "why": "not a Talk screen",
+   "line": "",
+   "why": "gym_desk: not a menu's Talk screen; C2198 is judged only on the screen a person's menu's Talk opens",
    "cause": null,
    "note": false,
-   "screen_hash": "398b76eb18d7dd99",
-   "row_hash": "27e6b45f50edd3ac",
-   "carried": true,
-   "pass": 1
+   "screen_hash": "8677e69089c014b6",
+   "row_hash": "73dfe095a72154a3",
+   "carried": false,
+   "pass": 6
   },
   {
    "row": "C2201",
@@ -962,8 +963,21 @@
    "note": false,
    "screen_hash": "8677e69089c014b6",
    "row_hash": "d119dfe665f76359",
-   "carried": false,
+   "carried": true,
    "pass": 5
+  },
+  {
+   "row": "C2202",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "You're paid up, champ. Go lift something. Squats first, and keep your back straight.",
+   "why": "every pass line counts the real days left; Marco's lines are held on his presence and the pass state",
+   "cause": null,
+   "note": false,
+   "screen_hash": "8677e69089c014b6",
+   "row_hash": "6e90fed7eae62131",
+   "carried": false,
+   "pass": 6
   },
   {
    "row": "C338",
@@ -1640,8 +1654,8 @@
  ],
  "causes": [],
  "pending": [],
- "asked": 1,
- "answered": 1,
+ "asked": 2,
+ "answered": 2,
  "pass_items": [],
  "unowed": []
 }

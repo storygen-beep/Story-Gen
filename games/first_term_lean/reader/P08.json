@@ -1,6 +1,6 @@
 {
  "piece": "P08",
- "pass": 11,
+ "pass": 12,
  "screens": {
   "*": "4f53cda18c2baa0c"
  },
@@ -56,7 +56,7 @@
   "C2194": "0c03931191c53a34",
   "C1340": "b76a6583ae88c60f",
   "C2197": "cafbb0a598dbfa97",
-  "C2198": "27e6b45f50edd3ac",
+  "C2198": "73dfe095a72154a3",
   "L106": "13a714429d15f3b2",
   "C953": "826bf82fe26afd13",
   "C442": "59b8d8d24f0c7c38",
@@ -574,7 +574,7 @@
    "note": true,
    "screen_hash": null,
    "row_hash": "655e8e2b731598c9",
-   "carried": false,
+   "carried": true,
    "pass": 11
   },
   {
@@ -764,13 +764,13 @@
    "screen": "*",
    "verdict": "N/A",
    "line": "",
-   "why": "phone texts only: no menu's Talk screen in this piece; C2198 is judged only on a person's Talk screen (the screen their menu's Talk opens)",
+   "why": "phone texts only: not a menu's Talk screen; C2198 is judged only on the screen a person's menu's Talk opens",
    "cause": null,
    "note": false,
    "screen_hash": "4f53cda18c2baa0c",
-   "row_hash": "27e6b45f50edd3ac",
-   "carried": true,
-   "pass": 10
+   "row_hash": "73dfe095a72154a3",
+   "carried": false,
+   "pass": 12
   },
   {
    "row": "C286",

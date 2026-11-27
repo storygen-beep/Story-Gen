@@ -1,6 +1,6 @@
 {
  "piece": "P37",
- "pass": 14,
+ "pass": 16,
  "screens": {
   "zoe_party.party": {
    "text": "743043cc9ff5e804",
@@ -10,13 +10,13 @@
    "all": "7a67bfb4c9c24484"
   },
   "zoe_party.home": {
-   "text": "b02777bd9b8b50f8",
+   "text": "fbe0ffa4aab26cc1",
    "traits": "fa1a0a429fa0ea30",
    "facts": "09800759fadc671d",
    "facts2": "8486592f7b66e230",
-   "all": "a6c4d3bc135a7d2a"
+   "all": "da488683cb0b7f17"
   },
-  "*": "8978d24607b7c34a"
+  "*": "09f16c42c8d06c3a"
  },
  "rows": {
   "B1": "5276068df1ca6fa9",
@@ -126,7 +126,7 @@
   "C2194": "0c03931191c53a34",
   "C1340": "b76a6583ae88c60f",
   "C2197": "cafbb0a598dbfa97",
-  "C2198": "27e6b45f50edd3ac",
+  "C2198": "73dfe095a72154a3",
   "C769": "f6b6f78a8f2e5ed7",
   "C794": "bad76e5963432385",
   "C2201": "d119dfe665f76359",
@@ -168,6 +168,7 @@
   "C450": "b01ad555668aba2d",
   "C422": "7e128897077ecee6",
   "C460": "67e48e60d5053a2e",
+  "C2202": "6e90fed7eae62131",
   "C461": "310706ee076318f2",
   "C2188": "612394eef6826900",
   "C2189": "20748838895e4545"
@@ -190,19 +191,20 @@
    "row": "B10",
    "screen": "zoe_party.home",
    "verdict": "PASS",
-   "line": "Sam's on the sofa under the coats, and he just grins.",
-   "why": "Zoe's rows put her at near_zoe_apartment Sat 18-24 and Sun 00-01, Sam's every day 12-02, so both are there at every minute of the 21:00-00:59 window; Sam is named only behind met_sam, the unmet variant says 'A sleepy-eyed guy' (his People-view look); the kissing guy and the guy by the speaker are unnamed crowd, true on every visit",
+   "line": "Your loss, babe. There's a party here every Saturday.",
+   "why": "true on every visit: the trigger opens Saturday 21:00 to Sunday 00:59 (weekday 5 then 6), partied_this_week is unset every Monday (7_final_game.toml:580), so there is a party here every Saturday; Zoe and Sam are there all window (who_is_where), Sam named only behind met_sam",
    "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "b02777bd9b8b50f8",
-    "facts": "e9d76b772e3b53ca",
+    "text": "fbe0ffa4aab26cc1",
+    "traits": "fa1a0a429fa0ea30",
+    "facts": "09800759fadc671d",
     "facts2": "8486592f7b66e230",
-    "all": "bb59d48a609273e4"
+    "all": "da488683cb0b7f17"
    },
    "row_hash": "c1c0e2ac2588a579",
-   "carried": true,
-   "pass": 5
+   "carried": false,
+   "pass": 16
   },
   {
    "row": "B10",
@@ -348,19 +350,20 @@
    "row": "B8",
    "screen": "zoe_party.home",
    "verdict": "PASS",
-   "line": "Go home (time_progression_minutes = 180)",
-   "why": "the new beats name no garment of hers and no number; the exit still sets partied_this_week and spends 180 minutes, as the card says",
+   "line": "Your loss, babe. There's a party here every Saturday.",
+   "why": "no garment of hers and no number; the exit still sets partied_this_week and spends 180 minutes",
    "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "b02777bd9b8b50f8",
-    "facts": "e9d76b772e3b53ca",
+    "text": "fbe0ffa4aab26cc1",
+    "traits": "fa1a0a429fa0ea30",
+    "facts": "09800759fadc671d",
     "facts2": "8486592f7b66e230",
-    "all": "bb59d48a609273e4"
+    "all": "da488683cb0b7f17"
    },
    "row_hash": "80d415cf08e0ebfe",
-   "carried": true,
-   "pass": 5
+   "carried": false,
+   "pass": 16
   },
   {
    "row": "B8",
@@ -429,7 +432,7 @@
    "note": true,
    "screen_hash": "8978d24607b7c34a",
    "row_hash": "655e8e2b731598c9",
-   "carried": false,
+   "carried": true,
    "pass": 14
   },
   {
@@ -1312,13 +1315,13 @@
    "screen": "*",
    "verdict": "N/A",
    "line": "",
-   "why": "zoe_party, a party scene: no menu's Talk screen in this piece; C2198 is judged only on a person's Talk screen (the screen their menu's Talk opens)",
+   "why": "zoe_party: not a menu's Talk screen; C2198 is judged only on the screen a person's menu's Talk opens",
    "cause": null,
    "note": false,
-   "screen_hash": "984247e13259e4f7",
-   "row_hash": "27e6b45f50edd3ac",
+   "screen_hash": "8978d24607b7c34a",
+   "row_hash": "73dfe095a72154a3",
    "carried": true,
-   "pass": 9
+   "pass": 15
   },
   {
    "row": "C2201",
@@ -1330,8 +1333,27 @@
    "note": false,
    "screen_hash": "8978d24607b7c34a",
    "row_hash": "d119dfe665f76359",
-   "carried": false,
+   "carried": true,
    "pass": 14
+  },
+  {
+   "row": "C2202",
+   "screen": "zoe_party.home",
+   "verdict": "PASS",
+   "line": "Your loss, babe. There's a party here every Saturday.",
+   "why": "the 'Next time, then. I'm holding you to it.' promise is gone; 'a party here every Saturday' is a fact the weekly trigger keeps, matching the party screen's own 'Zoe throws these every week'",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "fbe0ffa4aab26cc1",
+    "traits": "fa1a0a429fa0ea30",
+    "facts": "09800759fadc671d",
+    "facts2": "8486592f7b66e230",
+    "all": "da488683cb0b7f17"
+   },
+   "row_hash": "6e90fed7eae62131",
+   "carried": false,
+   "pass": 16
   },
   {
    "row": "C286",
@@ -1641,19 +1663,20 @@
    "row": "C460",
    "screen": "zoe_party.home",
    "verdict": "PASS",
-   "line": "She jumps down, and a guy you don't know kisses her neck on his way past. She lets him.",
-   "why": "every claim holds on every visit: Zoe and Sam present all window, the sofa and coats are the party screen's own, a stranger's kiss can't clash with any flag, 'before you've finished saying it' follows the only choice, 'Not tonight.'",
+   "line": "Your loss, babe. There's a party here every Saturday.",
+   "why": "every claim holds on every visit (see B10)",
    "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "b02777bd9b8b50f8",
-    "facts": "e9d76b772e3b53ca",
+    "text": "fbe0ffa4aab26cc1",
+    "traits": "fa1a0a429fa0ea30",
+    "facts": "09800759fadc671d",
     "facts2": "8486592f7b66e230",
-    "all": "bb59d48a609273e4"
+    "all": "da488683cb0b7f17"
    },
    "row_hash": "67e48e60d5053a2e",
-   "carried": true,
-   "pass": 5
+   "carried": false,
+   "pass": 16
   },
   {
    "row": "C460",
@@ -1690,19 +1713,20 @@
    "row": "C461",
    "screen": "zoe_party.home",
    "verdict": "PASS",
-   "line": "Don't look at Sam like that, babe. Sam's not mine. Nobody's mine.",
-   "why": "dialogue fits Zoe's cast entry (her 'babe', Sam her on-and-off boyfriend, Open Relationships) and does not contradict the P41 walk-in",
+   "line": "Your loss, babe. There's a party here every Saturday.",
+   "why": "Zoe's 'babe', her show-off and no-strings manner, as in her entry",
    "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "b02777bd9b8b50f8",
-    "facts": "e9d76b772e3b53ca",
+    "text": "fbe0ffa4aab26cc1",
+    "traits": "fa1a0a429fa0ea30",
+    "facts": "09800759fadc671d",
     "facts2": "8486592f7b66e230",
-    "all": "bb59d48a609273e4"
+    "all": "da488683cb0b7f17"
    },
    "row_hash": "310706ee076318f2",
-   "carried": true,
-   "pass": 5
+   "carried": false,
+   "pass": 16
   },
   {
    "row": "C461",
@@ -2321,19 +2345,20 @@
    "row": "C927",
    "screen": "zoe_party.home",
    "verdict": "PASS",
-   "line": "time_progression_minutes = 180",
-   "why": "the one exit carries its time; the new blocks add no exit",
+   "line": "Go home",
+   "why": "the one exit carries 180 minutes",
    "cause": null,
    "note": true,
    "screen_hash": {
-    "text": "b02777bd9b8b50f8",
-    "facts": "e9d76b772e3b53ca",
+    "text": "fbe0ffa4aab26cc1",
+    "traits": "fa1a0a429fa0ea30",
+    "facts": "09800759fadc671d",
     "facts2": "8486592f7b66e230",
-    "all": "bb59d48a609273e4"
+    "all": "da488683cb0b7f17"
    },
    "row_hash": "4e86d143688ba8e5",
-   "carried": true,
-   "pass": 5
+   "carried": false,
+   "pass": 16
   },
   {
    "row": "C927",
@@ -2401,19 +2426,20 @@
    "row": "C931",
    "screen": "zoe_party.home",
    "verdict": "PASS",
-   "line": "Sat 21:00-00:00 OR Sun 00:00-01:00",
-   "why": "trigger unchanged: end 00:00 wraps to the day end, the Sunday group covers 00:00-00:59, end exclusive",
+   "line": "",
+   "why": "trigger unchanged: 21:00-00:00 wraps to the day end, the Sunday group covers 00:00-00:59, end exclusive",
    "cause": null,
    "note": true,
    "screen_hash": {
-    "text": "b02777bd9b8b50f8",
-    "facts": "e9d76b772e3b53ca",
+    "text": "fbe0ffa4aab26cc1",
+    "traits": "fa1a0a429fa0ea30",
+    "facts": "09800759fadc671d",
     "facts2": "8486592f7b66e230",
-    "all": "bb59d48a609273e4"
+    "all": "da488683cb0b7f17"
    },
    "row_hash": "1aadffd96e76381c",
-   "carried": true,
-   "pass": 5
+   "carried": false,
+   "pass": 16
   },
   {
    "row": "C931",
@@ -2468,19 +2494,20 @@
    "row": "L106",
    "screen": "zoe_party.home",
    "verdict": "PASS",
-   "line": "Sam's on the sofa under the coats",
-   "why": "who_is_where: npc_sam at near_zoe_apartment 12-02 every day, npc_zoe Sat 18-24 and Sun 00-01; no one is claimed whose rows don't put them there",
+   "line": "Your loss, babe. There's a party here every Saturday.",
+   "why": "Zoe at near_zoe_apartment Sat 18-24 and Sun 00-01, Sam every day 12-02 (who_is_where)",
    "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "b02777bd9b8b50f8",
-    "facts": "e9d76b772e3b53ca",
+    "text": "fbe0ffa4aab26cc1",
+    "traits": "fa1a0a429fa0ea30",
+    "facts": "09800759fadc671d",
     "facts2": "8486592f7b66e230",
-    "all": "bb59d48a609273e4"
+    "all": "da488683cb0b7f17"
    },
    "row_hash": "13a714429d15f3b2",
-   "carried": true,
-   "pass": 5
+   "carried": false,
+   "pass": 16
   },
   {
    "row": "L106",
@@ -2607,19 +2634,20 @@
    "row": "L167",
    "screen": "zoe_party.home",
    "verdict": "PASS",
-   "line": "one trigger, group OR (Sat 21:00-00:00 / Sun 00:00-01:00), max_triggers_per_day = 1",
-   "why": "one row with a group; it has a clock window and a daily count, so clock.md rule 10 (LO 2026-11-24, 'button completely gone') overrides rule 9's greying: no show_when_blocked, hidden when unusable",
+   "line": "",
+   "why": "one row with a group; hidden when unusable per clock.md rule 10 (LO 2026-11-24 'button completely gone')",
    "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "b02777bd9b8b50f8",
-    "facts": "e9d76b772e3b53ca",
+    "text": "fbe0ffa4aab26cc1",
+    "traits": "fa1a0a429fa0ea30",
+    "facts": "09800759fadc671d",
     "facts2": "8486592f7b66e230",
-    "all": "bb59d48a609273e4"
+    "all": "da488683cb0b7f17"
    },
    "row_hash": "e64ce2672d85d2d8",
-   "carried": true,
-   "pass": 5
+   "carried": false,
+   "pass": 16
   },
   {
    "row": "L167",
@@ -2691,8 +2719,8 @@
  ],
  "causes": [],
  "pending": [],
- "asked": 2,
- "answered": 2,
+ "asked": 9,
+ "answered": 9,
  "pass_items": [],
  "unowed": []
 }

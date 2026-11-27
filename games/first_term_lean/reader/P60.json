@@ -1,6 +1,6 @@
 {
  "piece": "P60",
- "pass": 7,
+ "pass": 8,
  "screens": {
   "talk_kayla_mirror.hub": {
    "text": "e21728782499bf58",
@@ -138,7 +138,7 @@
   "C2194": "0c03931191c53a34",
   "C1340": "b76a6583ae88c60f",
   "C2197": "cafbb0a598dbfa97",
-  "C2198": "27e6b45f50edd3ac",
+  "C2198": "73dfe095a72154a3",
   "C769": "f6b6f78a8f2e5ed7",
   "C794": "bad76e5963432385",
   "C2201": "d119dfe665f76359",
@@ -179,6 +179,7 @@
   "C450": "b01ad555668aba2d",
   "C422": "7e128897077ecee6",
   "C460": "67e48e60d5053a2e",
+  "C2202": "6e90fed7eae62131",
   "C461": "310706ee076318f2",
   "C2189": "20748838895e4545"
  },
@@ -1083,45 +1084,45 @@
    "screen": "talk_kayla_cafeteria.talk",
    "verdict": "PASS",
    "line": "The middle table in the cafeteria is ours at lunch. You don't sit there. Just so you know.",
-   "why": "same flag and talk; true at lunch as at the mirror (she sits at that table, Brooke has no cafeteria row, 'ours' is hers and Tess's); ends on a place and a time",
+   "why": "one screen on both menus, talked_kayla_today; the hook is real (her row: cafeteria 12-13 weekdays)",
    "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "09da922b903fc8e6",
+    "text": "776db09db747ab90",
     "traits": "39038d9b4c4b47e1",
     "facts": "35753a8da1560177",
     "facts2": "bfffecabfc4fd08b",
-    "all": "f36b7a50e5a3b806"
+    "all": "2ee1353c2a56c125"
    },
-   "row_hash": "27e6b45f50edd3ac",
-   "carried": true,
-   "pass": 1
+   "row_hash": "73dfe095a72154a3",
+   "carried": false,
+   "pass": 8
   },
   {
    "row": "C2198",
    "screen": "talk_kayla_mirror.talk",
    "verdict": "PASS",
-   "line": "The middle table in the cafeteria is ours at lunch. You don't sit there. Just so you know.",
-   "why": "one talked_kayla_today set by Talk on both her menus, unset in [engine.daily_tick]; the same talk on both menus; true on the first and fifth visit; ends on a place and a time",
+   "line": "Oh. It's you.",
+   "why": "same screen as the cafeteria; true on any visit",
    "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "7cf90617cc41900e",
+    "text": "85243f6b723592fb",
     "traits": "39038d9b4c4b47e1",
     "facts": "22bab9cd12b37346",
     "facts2": "a611f0af0f1eadef",
-    "all": "f00c997a04b43fe5"
+    "all": "45aeab5c6b3e726a"
    },
-   "row_hash": "27e6b45f50edd3ac",
-   "carried": true,
-   "pass": 1
+   "row_hash": "73dfe095a72154a3",
+   "carried": false,
+   "pass": 8
   },
   {
    "row": "C2198",
    "screen": "talk_tess_cafeteria.talk",
    "verdict": "PASS",
-   "line": "Hi, Tess. ... I could do yours sometime. If you want.",
-   "why": "same flag and talk; she holds the brush at lunch too (the hub's line), so 'that brush' is true; ends on a person and a time",
+   "line": "Nobody. Me. I do Kayla's, mostly. I could do yours sometime. If you want.",
+   "why": "one screen on both menus, talked_tess_today; an offer, not a dated promise, and Kayla is really there",
    "cause": null,
    "note": false,
    "screen_hash": {
@@ -1131,16 +1132,16 @@
     "facts2": "2f2e5ab0a243d432",
     "all": "9c56d3e4ae44f0c6"
    },
-   "row_hash": "27e6b45f50edd3ac",
-   "carried": true,
-   "pass": 1
+   "row_hash": "73dfe095a72154a3",
+   "carried": false,
+   "pass": 8
   },
   {
    "row": "C2198",
    "screen": "talk_tess_mirror.talk",
    "verdict": "PASS",
-   "line": "Hi, Tess. ... I could do yours sometime. If you want.",
-   "why": "one talked_tess_today across both menus, unset in [engine.daily_tick]; the same talk on both; 'Hi, Tess.' is true on any visit; ends on her own face, sometime",
+   "line": "You're really good with that brush.",
+   "why": "same screen; true on any visit",
    "cause": null,
    "note": false,
    "screen_hash": {
@@ -1150,9 +1151,9 @@
     "facts2": "f13cfb0d5493b0a5",
     "all": "bdd93b3a4cb986e5"
    },
-   "row_hash": "27e6b45f50edd3ac",
-   "carried": true,
-   "pass": 1
+   "row_hash": "73dfe095a72154a3",
+   "carried": false,
+   "pass": 8
   },
   {
    "row": "C2201",
@@ -1164,8 +1165,21 @@
    "note": false,
    "screen_hash": "4f52a0abae4fd4f8",
    "row_hash": "d119dfe665f76359",
-   "carried": false,
+   "carried": true,
    "pass": 7
+  },
+  {
+   "row": "C2202",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "I have a name, Kayla.",
+   "why": "no first-meeting words or next-time promise",
+   "cause": null,
+   "note": false,
+   "screen_hash": "4f52a0abae4fd4f8",
+   "row_hash": "6e90fed7eae62131",
+   "carried": false,
+   "pass": 8
   },
   {
    "row": "C422",
@@ -2176,8 +2190,8 @@
  ],
  "causes": [],
  "pending": [],
- "asked": 1,
- "answered": 1,
+ "asked": 5,
+ "answered": 5,
  "pass_items": [],
  "unowed": []
 }

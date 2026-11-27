@@ -1,6 +1,6 @@
 {
  "piece": "P20",
- "pass": 15,
+ "pass": 16,
  "screens": {
   "quad_meet_zoe.coffee": {
    "text": "cacb601aa799b9fd",
@@ -117,7 +117,7 @@
   "L169": "59defccfc63b0454",
   "C1340": "b76a6583ae88c60f",
   "C2197": "cafbb0a598dbfa97",
-  "C2198": "27e6b45f50edd3ac",
+  "C2198": "73dfe095a72154a3",
   "C769": "f6b6f78a8f2e5ed7",
   "C794": "bad76e5963432385",
   "C2201": "d119dfe665f76359",
@@ -1080,13 +1080,13 @@
    "screen": "*",
    "verdict": "N/A",
    "line": "",
-   "why": "quad_meet_zoe, a one-time meeting (its 'talk' node is the meeting's second screen, not a menu's Talk): no menu's Talk screen in this piece; C2198 is judged only on a person's Talk screen (the screen their menu's Talk opens)",
+   "why": "quad_meet_zoe, a one-time meeting: not a menu's Talk screen; C2198 is judged only on the screen a person's menu's Talk opens",
    "cause": null,
    "note": false,
-   "screen_hash": "fdb2a1e1a6c519fe",
-   "row_hash": "27e6b45f50edd3ac",
-   "carried": true,
-   "pass": 10
+   "screen_hash": "501111601ee5bb96",
+   "row_hash": "73dfe095a72154a3",
+   "carried": false,
+   "pass": 16
   },
   {
    "row": "C2201",
@@ -1098,7 +1098,7 @@
    "note": false,
    "screen_hash": "501111601ee5bb96",
    "row_hash": "d119dfe665f76359",
-   "carried": false,
+   "carried": true,
    "pass": 15
   },
   {

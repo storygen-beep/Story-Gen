@@ -1,15 +1,15 @@
 {
  "piece": "P31",
- "pass": 11,
+ "pass": 12,
  "screens": {
   "cafe_window.sit": {
-   "text": "38e98584690f209c",
+   "text": "fb18baeb94070509",
    "traits": "7b42410c0bd9090b",
    "facts": "88ebfd4137b4b002",
    "facts2": "d02aec651f6e0475",
-   "all": "805ef445741bca1c"
+   "all": "62bd784915d41b9c"
   },
-  "*": "eacce623fa6b7de5"
+  "*": "089956de2784430b"
  },
  "rows": {
   "B1": "5276068df1ca6fa9",
@@ -82,7 +82,7 @@
   "C2194": "0c03931191c53a34",
   "C1340": "b76a6583ae88c60f",
   "C2197": "cafbb0a598dbfa97",
-  "C2198": "27e6b45f50edd3ac",
+  "C2198": "73dfe095a72154a3",
   "C769": "f6b6f78a8f2e5ed7",
   "C794": "bad76e5963432385",
   "C2201": "d119dfe665f76359",
@@ -123,6 +123,7 @@
   "C450": "b01ad555668aba2d",
   "C422": "7e128897077ecee6",
   "C460": "67e48e60d5053a2e",
+  "C2202": "6e90fed7eae62131",
   "C461": "310706ee076318f2",
   "C2189": "20748838895e4545"
  },
@@ -144,19 +145,20 @@
    "row": "B10",
    "screen": "cafe_window.sit",
    "verdict": "PASS",
-   "line": "Chris tops up your water without being asked, and looks a second too long, like he hates that he's looking.",
-   "why": "Chain is first-match; Chris's line gated on met_chris (set on 'Work the shift' in cafe_first_shift) and Chris present at near_cafe (who_is_where: weekdays 7-15, weekends 10-20); 'eating into my hours' is true once met_chris is set, since met_chris is set only by working a shift; true on a second visit, nothing in it is a first",
+   "line": "Free water, pretty. Don't get used to it. You're already eating into my hours.",
+   "why": "07:00-20:30; Chris's line behind met_chris + is_present, Tom's behind met_tom + is_present, the stranger behind either present, a first-match chain (v2.py:18515-18518); with nobody in (Sunday 20:00-20:30) no one is named; true every visit",
    "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "38e98584690f209c",
+    "text": "fb18baeb94070509",
+    "traits": "7b42410c0bd9090b",
     "facts": "88ebfd4137b4b002",
     "facts2": "d02aec651f6e0475",
-    "all": "805ef445741bca1c"
+    "all": "62bd784915d41b9c"
    },
    "row_hash": "c1c0e2ac2588a579",
-   "carried": true,
-   "pass": 6
+   "carried": false,
+   "pass": 12
   },
   {
    "row": "B10",
@@ -320,19 +322,20 @@
    "row": "B8",
    "screen": "cafe_window.sit",
    "verdict": "PASS",
-   "line": "Free water, new girl. Don't get used to it. You're already eating into my hours.",
-   "why": "No number on the lines; card's +5 energy, 30 minutes, 2 a day, 07:00-20:30 match the build; no garment named",
+   "line": "Done: +5 energy, 30 minutes",
+   "why": "matches the card; no garment named; \"till close\" agrees with the 9pm sign",
    "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "38e98584690f209c",
+    "text": "fb18baeb94070509",
+    "traits": "7b42410c0bd9090b",
     "facts": "88ebfd4137b4b002",
     "facts2": "d02aec651f6e0475",
-    "all": "805ef445741bca1c"
+    "all": "62bd784915d41b9c"
    },
    "row_hash": "80d415cf08e0ebfe",
-   "carried": true,
-   "pass": 6
+   "carried": false,
+   "pass": 12
   },
   {
    "row": "B9",
@@ -955,13 +958,13 @@
    "screen": "*",
    "verdict": "N/A",
    "line": "",
-   "why": "cafe_window: no menu's Talk screen in this piece; C2198 is judged only on a person's Talk screen (the screen their menu's Talk opens)",
+   "why": "no menu Talk screen in P31; C2198 is judged on a person's Talk screen only",
    "cause": null,
    "note": false,
-   "screen_hash": "eacce623fa6b7de5",
-   "row_hash": "27e6b45f50edd3ac",
-   "carried": true,
-   "pass": 10
+   "screen_hash": "089956de2784430b",
+   "row_hash": "73dfe095a72154a3",
+   "carried": false,
+   "pass": 12
   },
   {
    "row": "C2201",
@@ -973,8 +976,21 @@
    "note": false,
    "screen_hash": "eacce623fa6b7de5",
    "row_hash": "d119dfe665f76359",
-   "carried": false,
+   "carried": true,
    "pass": 11
+  },
+  {
+   "row": "C2202",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "Free water, pretty. Don't get used to it. You're already eating into my hours.",
+   "why": "\"new girl\" is gone; no promise; \"You could get used to this table\" is her opinion, true on any visit",
+   "cause": null,
+   "note": false,
+   "screen_hash": "089956de2784430b",
+   "row_hash": "6e90fed7eae62131",
+   "carried": false,
+   "pass": 12
   },
   {
    "row": "C338",
@@ -1104,19 +1120,20 @@
    "row": "C460",
    "screen": "cafe_window.sit",
    "verdict": "PASS",
-   "line": "Free water, new girl. Don't get used to it. You're already eating into my hours.",
-   "why": "Every claim holds where the group can show: he's present, she's met him, she works shifts by then (met_chris set only on the first shift), and she's at a table with water; Tom's and the stranger's lines unchanged and gated on presence",
+   "line": "Free water, pretty. Don't get used to it. You're already eating into my hours.",
+   "why": "every claim holds at every minute of the window",
    "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "38e98584690f209c",
+    "text": "fb18baeb94070509",
+    "traits": "7b42410c0bd9090b",
     "facts": "88ebfd4137b4b002",
     "facts2": "d02aec651f6e0475",
-    "all": "805ef445741bca1c"
+    "all": "62bd784915d41b9c"
    },
    "row_hash": "67e48e60d5053a2e",
-   "carried": true,
-   "pass": 6
+   "carried": false,
+   "pass": 12
   },
   {
    "row": "C460",
@@ -1148,19 +1165,20 @@
    "row": "C461",
    "screen": "cafe_window.sit",
    "verdict": "PASS",
-   "line": "Free water, new girl. Don't get used to it. You're already eating into my hours.",
-   "why": "Dialogue fits Chris's cast entry (24, barista; wants her shifts, and her) and his address 'new girl', used by him alone",
+   "line": "Take your time. Table's yours till close.",
+   "why": "dialogue that fits Chris's and Tom's entries",
    "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "38e98584690f209c",
+    "text": "fb18baeb94070509",
+    "traits": "7b42410c0bd9090b",
     "facts": "88ebfd4137b4b002",
     "facts2": "d02aec651f6e0475",
-    "all": "805ef445741bca1c"
+    "all": "62bd784915d41b9c"
    },
    "row_hash": "310706ee076318f2",
-   "carried": true,
-   "pass": 6
+   "carried": false,
+   "pass": 12
   },
   {
    "row": "C519",
@@ -1685,18 +1703,19 @@
    "screen": "cafe_window.sit",
    "verdict": "PASS",
    "line": "Done: time_progression_minutes = 30",
-   "why": "The only exit spends 30 minutes",
+   "why": "every exit on the screen carries an explicit time_progression_minutes, so the 3-minute default never applies",
    "cause": null,
    "note": true,
    "screen_hash": {
-    "text": "38e98584690f209c",
+    "text": "fb18baeb94070509",
+    "traits": "7b42410c0bd9090b",
     "facts": "88ebfd4137b4b002",
     "facts2": "d02aec651f6e0475",
-    "all": "805ef445741bca1c"
+    "all": "62bd784915d41b9c"
    },
    "row_hash": "4e86d143688ba8e5",
-   "carried": true,
-   "pass": 6
+   "carried": false,
+   "pass": 12
   },
   {
    "row": "C928",
@@ -1760,18 +1779,19 @@
    "screen": "cafe_window.sit",
    "verdict": "PASS",
    "line": "time_of_day 07:00-20:30",
-   "why": "End exclusive: last start before 20:30, so the 30 minutes end by the 21:00 close; re-read on every visit",
+   "why": "the trigger's time_of_day window is end-exclusive and every line agrees with it at its first and last minute",
    "cause": null,
    "note": true,
    "screen_hash": {
-    "text": "38e98584690f209c",
+    "text": "fb18baeb94070509",
+    "traits": "7b42410c0bd9090b",
     "facts": "88ebfd4137b4b002",
     "facts2": "d02aec651f6e0475",
-    "all": "805ef445741bca1c"
+    "all": "62bd784915d41b9c"
    },
    "row_hash": "1aadffd96e76381c",
-   "carried": true,
-   "pass": 6
+   "carried": false,
+   "pass": 12
   },
   {
    "row": "C953",
@@ -1808,19 +1828,20 @@
    "row": "L106",
    "screen": "cafe_window.sit",
    "verdict": "PASS",
-   "line": "Chris tops up your water ... / Tom glances over from the till ...",
-   "why": "Each named man's line is gated on npc_at_location is_present at near_cafe; the stranger line on either present; nobody in, no line",
+   "line": "Chris tops up your water / Tom glances over from the till",
+   "why": "each man gated is_present at near_cafe",
    "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "38e98584690f209c",
+    "text": "fb18baeb94070509",
+    "traits": "7b42410c0bd9090b",
     "facts": "88ebfd4137b4b002",
     "facts2": "d02aec651f6e0475",
-    "all": "805ef445741bca1c"
+    "all": "62bd784915d41b9c"
    },
    "row_hash": "13a714429d15f3b2",
-   "carried": true,
-   "pass": 6
+   "carried": false,
+   "pass": 12
   },
   {
    "row": "L106",
@@ -1883,19 +1904,20 @@
    "row": "L167",
    "screen": "cafe_window.sit",
    "verdict": "PASS",
-   "line": "one row, 07:00-20:30 every day",
-   "why": "Same hours every day, so one row and no per-day group; no show_when_blocked, as the card decides (a clock plus a count hides once used)",
+   "line": "one window, every day",
+   "why": "one row; the caf\u00e9's hours are the same every day (PLAN: caf\u00e9 7am-9pm)",
    "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "38e98584690f209c",
+    "text": "fb18baeb94070509",
+    "traits": "7b42410c0bd9090b",
     "facts": "88ebfd4137b4b002",
     "facts2": "d02aec651f6e0475",
-    "all": "805ef445741bca1c"
+    "all": "62bd784915d41b9c"
    },
    "row_hash": "e64ce2672d85d2d8",
-   "carried": true,
-   "pass": 6
+   "carried": false,
+   "pass": 12
   },
   {
    "row": "L170",
@@ -1926,8 +1948,8 @@
  ],
  "causes": [],
  "pending": [],
- "asked": 1,
- "answered": 1,
+ "asked": 10,
+ "answered": 10,
  "pass_items": [],
  "unowed": []
 }

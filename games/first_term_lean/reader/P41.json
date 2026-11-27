@@ -1,6 +1,6 @@
 {
  "piece": "P41",
- "pass": 17,
+ "pass": 21,
  "screens": {
   "walk_zoe_sam.moment": {
    "text": "c248c279bc7201af",
@@ -10,18 +10,18 @@
    "all": "a5c34cfb56c2f171"
   },
   "walk_zoe_sam.watch": {
-   "text": "a402abbe33512b4a",
+   "text": "ab738efb67514276",
    "traits": "fa1a0a429fa0ea30",
    "facts": "8182ce5904bce35b",
    "facts2": "48fd486abd7e2f3c",
-   "all": "1a1aa14ba91ff3a2"
+   "all": "5c2a903d10f3fd06"
   },
   "walk_zoe_sam.out": {
-   "text": "83285099185d7ec0",
+   "text": "e3141d8b045f75c0",
    "traits": "6b1e34b018661933",
    "facts": "5ccc9ab8b606da87",
    "facts2": "f9f6cd7a1a561521",
-   "all": "520842d24fc9f894"
+   "all": "57c1ef8237313358"
   },
   "walk_sam_guitar.moment": {
    "text": "a5c3c00d64bf1a01",
@@ -73,18 +73,18 @@
    "all": "993acad2e25a7062"
   },
   "walk_tom_tips.nothing": {
-   "text": "0fbb5eeccbe20ccf",
+   "text": "6c640c8edde7e68f",
    "traits": "d99594b509571563",
    "facts": "67efda545284e49f",
    "facts2": "841fd9234a0769d8",
-   "all": "2656690c21d43210"
+   "all": "fb5499498c7c386e"
   },
   "walk_tom_tips.tips": {
-   "text": "44e0b5953d16dad7",
+   "text": "471d8f43b65f5217",
    "traits": "d99594b509571563",
    "facts": "67efda545284e49f",
    "facts2": "841fd9234a0769d8",
-   "all": "c6df139551d3d6fd"
+   "all": "fbca2cae0647a9d2"
   },
   "walk_chris_store.moment": {
    "text": "faf01396c72d390e",
@@ -94,18 +94,18 @@
    "all": "eae96d8541523b7c"
   },
   "walk_chris_store.watch": {
-   "text": "46b81266d6afc734",
+   "text": "b2ead5029bba9fab",
    "traits": "1d58a0fd6061427e",
    "facts": "b6edc19b7be2164c",
    "facts2": "d822bf3cee64d8d0",
-   "all": "60d6543235c57e80"
+   "all": "296c864e1c806630"
   },
   "walk_chris_store.out": {
-   "text": "dd60049347ae6bd3",
+   "text": "d4f4b618d69f6be2",
    "traits": "44136fa355b3678a",
    "facts": "b1f7fb4ecb1af6a5",
    "facts2": "b1f7fb4ecb1af6a5",
-   "all": "ca42d5411a150ff5"
+   "all": "a5b2d19dcd53fb91"
   },
   "walk_party_bathroom.moment": {
    "text": "d7e60f112115d298",
@@ -115,20 +115,20 @@
    "all": "9bac660beb2d4f57"
   },
   "walk_party_bathroom.watch": {
-   "text": "0cfa779650f65b71",
+   "text": "7252ef5e61c71ee5",
    "traits": "44136fa355b3678a",
    "facts": "9a06232c9ed28deb",
    "facts2": "9a06232c9ed28deb",
-   "all": "ec2b03f638457ce5"
+   "all": "7bbf04a4165a002d"
   },
   "walk_party_bathroom.shut": {
-   "text": "0917e6423064b43d",
+   "text": "1510814f016a9e82",
    "traits": "44136fa355b3678a",
    "facts": "9a06232c9ed28deb",
    "facts2": "9a06232c9ed28deb",
-   "all": "b58099853152246f"
+   "all": "2a698858ae130f9c"
   },
-  "*": "2be5e498cbc9d50e"
+  "*": "c9bdf9d53272899a"
  },
  "rows": {
   "B1": "5276068df1ca6fa9",
@@ -237,7 +237,7 @@
   "C2194": "0c03931191c53a34",
   "C1340": "b76a6583ae88c60f",
   "C2197": "cafbb0a598dbfa97",
-  "C2198": "27e6b45f50edd3ac",
+  "C2198": "73dfe095a72154a3",
   "C769": "f6b6f78a8f2e5ed7",
   "C794": "bad76e5963432385",
   "C2201": "d119dfe665f76359",
@@ -279,6 +279,7 @@
   "C450": "b01ad555668aba2d",
   "C422": "7e128897077ecee6",
   "C460": "67e48e60d5053a2e",
+  "C2202": "6e90fed7eae62131",
   "C461": "310706ee076318f2",
   "C788": "cae1598ef9cb6ff1",
   "C855": "d3dc77f2f96e20ae",
@@ -337,39 +338,39 @@
    "row": "B10",
    "screen": "walk_chris_store.out",
    "verdict": "PASS",
-   "line": "You back out into the caf\u00e9. The shelf rattles behind the door.",
-   "why": "backing into the caf\u00e9 matches the Done landing",
+   "line": "You back out into the caf\u00e9. The shelf rattles behind the door, and keeps rattling.",
+   "why": "Chris and the regular are in the storeroom on this screen; 'keeps rattling' covers only the moment she leaves; Done lands near_cafe, the caf\u00e9 she backed into; the 'won't be the last time' promise is gone",
    "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "dd60049347ae6bd3",
+    "text": "d4f4b618d69f6be2",
     "traits": "44136fa355b3678a",
     "facts": "b1f7fb4ecb1af6a5",
     "facts2": "b1f7fb4ecb1af6a5",
-    "all": "ca42d5411a150ff5"
+    "all": "a5b2d19dcd53fb91"
    },
    "row_hash": "c1c0e2ac2588a579",
    "carried": true,
-   "pass": 8
+   "pass": 20
   },
   {
    "row": "B10",
    "screen": "walk_chris_store.watch",
    "verdict": "PASS",
-   "line": "Your nipples are hard. You're back out front before they come out.",
-   "why": "back out front is near_cafe, where Done lands; no garment of hers named",
+   "line": "Your nipples are hard. You're back out front before they come out. [group saw_chris_store is_false] You know what Chris does on weekends now.",
+   "why": "first visit: flag false, discovery true; repeat: flag set, line hidden; rest of the line true every visit; Chris named; trigger requires npc_chris is_present at near_cafe, Sat/Sun 10-19",
    "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "46b81266d6afc734",
+    "text": "b2ead5029bba9fab",
     "traits": "1d58a0fd6061427e",
     "facts": "b6edc19b7be2164c",
     "facts2": "d822bf3cee64d8d0",
-    "all": "60d6543235c57e80"
+    "all": "296c864e1c806630"
    },
    "row_hash": "c1c0e2ac2588a579",
    "carried": true,
-   "pass": 8
+   "pass": 19
   },
   {
    "row": "B10",
@@ -394,39 +395,39 @@
    "row": "B10",
    "screen": "walk_party_bathroom.shut",
    "verdict": "PASS",
-   "line": "You shut the door. The music sounds louder than before. You know that door now.",
-   "why": "the party's music fits the Sat 21:00-01:00 window; Done lands in the apartment",
+   "line": "You shut the door. The music sounds louder than before. [group saw_party_bathroom is_false] You know that door now.",
+   "why": "first visit: flag false, discovery true; repeat: flag set, line hidden; rest of the line true every visit; unnamed couple at Zoe's party; no named person claimed",
    "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "0917e6423064b43d",
+    "text": "1510814f016a9e82",
     "traits": "44136fa355b3678a",
     "facts": "9a06232c9ed28deb",
     "facts2": "9a06232c9ed28deb",
-    "all": "b58099853152246f"
+    "all": "2a698858ae130f9c"
    },
    "row_hash": "c1c0e2ac2588a579",
    "carried": true,
-   "pass": 8
+   "pass": 19
   },
   {
    "row": "B10",
    "screen": "walk_party_bathroom.watch",
    "verdict": "PASS",
-   "line": "His tongue's buried in her cunt... / Fuck. Oh, fuck. Yes. Yes. God. Don't you dare stop. / You're wet. You shut the door before they see you. You know that door now.",
-   "why": "the act and her reaction only; 'you know that door now' stays true on a repeat; Done lands back in the apartment inside the party",
+   "line": "You're wet. You shut the door before they see you. [group saw_party_bathroom is_false] You know that door now.",
+   "why": "first visit: flag false, discovery true; repeat: flag set, line hidden; rest of the line true every visit; unnamed couple at Zoe's party; no named person claimed",
    "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "0cfa779650f65b71",
+    "text": "7252ef5e61c71ee5",
     "traits": "44136fa355b3678a",
     "facts": "9a06232c9ed28deb",
     "facts2": "9a06232c9ed28deb",
-    "all": "ec2b03f638457ce5"
+    "all": "7bbf04a4165a002d"
    },
    "row_hash": "c1c0e2ac2588a579",
    "carried": true,
-   "pass": 9
+   "pass": 19
   },
   {
    "row": "B10",
@@ -508,39 +509,39 @@
    "row": "B10",
    "screen": "walk_tom_tips.nothing",
    "verdict": "PASS",
-   "line": "You say nothing. He knows you saw. He'll be watching you next shift.",
-   "why": "met_tom is set only with cafe_hired, so 'next shift' is built; Done +5 lands by 21:00",
+   "line": "You say nothing. He knows you saw, and he doesn't look away.",
+   "why": "fix holds: no leaving narrated, so Done to near_cafe (toml 10783-10788) no longer clashes; Tom is there by the npc_at_location condition; no past, no first time; true on every visit of the repeatable",
    "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "0fbb5eeccbe20ccf",
+    "text": "6c640c8edde7e68f",
     "traits": "d99594b509571563",
     "facts": "67efda545284e49f",
     "facts2": "841fd9234a0769d8",
-    "all": "2656690c21d43210"
+    "all": "fb5499498c7c386e"
    },
    "row_hash": "c1c0e2ac2588a579",
-   "carried": true,
-   "pass": 8
+   "carried": false,
+   "pass": 21
   },
   {
    "row": "B10",
    "screen": "walk_tom_tips.tips",
    "verdict": "PASS",
-   "line": "\"And I'm the one who pays the rent on this place.\" / He doesn't put them back.",
-   "why": "Tom present; no number named",
+   "line": "He doesn't put them back. You watch the jar until he's back at the till.",
+   "why": "he is at the jar and goes back to the till within the 5 minutes Done spends (toml 10804); no stay the clock skips; true every 20:00-20:55 visit",
    "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "44e0b5953d16dad7",
+    "text": "471d8f43b65f5217",
     "traits": "d99594b509571563",
     "facts": "67efda545284e49f",
     "facts2": "841fd9234a0769d8",
-    "all": "c6df139551d3d6fd"
+    "all": "fbca2cae0647a9d2"
    },
    "row_hash": "c1c0e2ac2588a579",
    "carried": true,
-   "pass": 8
+   "pass": 20
   },
   {
    "row": "B10",
@@ -622,39 +623,39 @@
    "row": "B10",
    "screen": "walk_zoe_sam.out",
    "verdict": "PASS",
-   "line": "You pull the door to, quietly. Zoe's laugh carries through it. She'll know you were there.",
-   "why": "pulling the hall door to leaves her in the apartment's hall, where Done lands; Zoe present",
+   "line": "You pull the door to, quietly. Zoe's laugh carries through it, and your face burns.",
+   "why": "Zoe and Sam both is_present by trigger; her laugh and her burning face are this moment only; 'She'll know... Zoe always knows' is gone",
    "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "83285099185d7ec0",
+    "text": "e3141d8b045f75c0",
     "traits": "6b1e34b018661933",
-    "facts": "5c0a642e2e7923fd",
+    "facts": "5ccc9ab8b606da87",
     "facts2": "f9f6cd7a1a561521",
-    "all": "74211fe6513fa873"
+    "all": "57c1ef8237313358"
    },
    "row_hash": "c1c0e2ac2588a579",
    "carried": true,
-   "pass": 8
+   "pass": 20
   },
   {
    "row": "B10",
    "screen": "walk_zoe_sam.watch",
    "verdict": "PASS",
-   "line": "Your thighs are pressed together and your face is on fire. You know what that sofa's seen now.",
-   "why": "she stays in the apartment, Done lands there; both present",
+   "line": "Your thighs are pressed together and your face is on fire. [group saw_zoe_sam is_false] You know what that sofa's seen now.",
+   "why": "first visit: flag false, discovery true; repeat: flag set, line hidden; rest of the line true every visit; Zoe and Sam named; trigger requires both is_present",
    "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "a402abbe33512b4a",
+    "text": "ab738efb67514276",
     "traits": "fa1a0a429fa0ea30",
-    "facts": "c3521100b11dca8e",
+    "facts": "8182ce5904bce35b",
     "facts2": "48fd486abd7e2f3c",
-    "all": "dcb7e858dc003ce2"
+    "all": "5c2a903d10f3fd06"
    },
    "row_hash": "c1c0e2ac2588a579",
    "carried": true,
-   "pass": 8
+   "pass": 19
   },
   {
    "row": "B11",
@@ -1058,39 +1059,39 @@
    "row": "B8",
    "screen": "walk_chris_store.out",
    "verdict": "PASS",
-   "line": "You back out into the caf\u00e9. The shelf rattles behind the door.",
-   "why": "no number on screen; every garment named belongs to someone she watches, none to her",
+   "line": "You back out into the caf\u00e9. The shelf rattles behind the door, and keeps rattling.",
+   "why": "no number; no garment of hers named",
    "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "dd60049347ae6bd3",
+    "text": "d4f4b618d69f6be2",
     "traits": "44136fa355b3678a",
     "facts": "b1f7fb4ecb1af6a5",
     "facts2": "b1f7fb4ecb1af6a5",
-    "all": "ca42d5411a150ff5"
+    "all": "a5b2d19dcd53fb91"
    },
    "row_hash": "80d415cf08e0ebfe",
    "carried": true,
-   "pass": 8
+   "pass": 20
   },
   {
    "row": "B8",
    "screen": "walk_chris_store.watch",
    "verdict": "PASS",
-   "line": "Your nipples are hard. You're back out front before they come out.",
-   "why": "no number on screen; every garment named belongs to someone she watches, none to her",
+   "line": "Your nipples are hard. You're back out front before they come out. [group saw_chris_store is_false] You know what Chris does on weekends now.",
+   "why": "no number; no garment of hers named",
    "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "46b81266d6afc734",
+    "text": "b2ead5029bba9fab",
     "traits": "1d58a0fd6061427e",
     "facts": "b6edc19b7be2164c",
     "facts2": "d822bf3cee64d8d0",
-    "all": "60d6543235c57e80"
+    "all": "296c864e1c806630"
    },
    "row_hash": "80d415cf08e0ebfe",
    "carried": true,
-   "pass": 8
+   "pass": 19
   },
   {
    "row": "B8",
@@ -1115,39 +1116,39 @@
    "row": "B8",
    "screen": "walk_party_bathroom.shut",
    "verdict": "PASS",
-   "line": "You shut the door. The music sounds louder than before. You know that door now.",
-   "why": "no number on screen; every garment named belongs to someone she watches, none to her",
+   "line": "You shut the door. The music sounds louder than before. [group saw_party_bathroom is_false] You know that door now.",
+   "why": "no number; no garment named",
    "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "0917e6423064b43d",
+    "text": "1510814f016a9e82",
     "traits": "44136fa355b3678a",
     "facts": "9a06232c9ed28deb",
     "facts2": "9a06232c9ed28deb",
-    "all": "b58099853152246f"
+    "all": "2a698858ae130f9c"
    },
    "row_hash": "80d415cf08e0ebfe",
    "carried": true,
-   "pass": 8
+   "pass": 19
   },
   {
    "row": "B8",
    "screen": "walk_party_bathroom.watch",
    "verdict": "PASS",
-   "line": "His tongue's buried in her cunt... / Fuck. Oh, fuck. Yes. Yes. God. Don't you dare stop. / You're wet. You shut the door before they see you. You know that door now.",
-   "why": "no number on screen; the dress is the stranger's, none of hers named",
+   "line": "You're wet. You shut the door before they see you. [group saw_party_bathroom is_false] You know that door now.",
+   "why": "no number; no garment of hers named",
    "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "0cfa779650f65b71",
+    "text": "7252ef5e61c71ee5",
     "traits": "44136fa355b3678a",
     "facts": "9a06232c9ed28deb",
     "facts2": "9a06232c9ed28deb",
-    "all": "ec2b03f638457ce5"
+    "all": "7bbf04a4165a002d"
    },
    "row_hash": "80d415cf08e0ebfe",
    "carried": true,
-   "pass": 9
+   "pass": 19
   },
   {
    "row": "B8",
@@ -1229,39 +1230,39 @@
    "row": "B8",
    "screen": "walk_tom_tips.nothing",
    "verdict": "PASS",
-   "line": "You say nothing. He knows you saw. He'll be watching you next shift.",
-   "why": "no number on screen; every garment named belongs to someone she watches, none to her",
+   "line": "You say nothing. He knows you saw, and he doesn't look away.",
+   "why": "no number; no garment named",
    "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "0fbb5eeccbe20ccf",
+    "text": "6c640c8edde7e68f",
     "traits": "d99594b509571563",
     "facts": "67efda545284e49f",
     "facts2": "841fd9234a0769d8",
-    "all": "2656690c21d43210"
+    "all": "fb5499498c7c386e"
    },
    "row_hash": "80d415cf08e0ebfe",
-   "carried": true,
-   "pass": 8
+   "carried": false,
+   "pass": 21
   },
   {
    "row": "B8",
    "screen": "walk_tom_tips.tips",
    "verdict": "PASS",
-   "line": "\"And I'm the one who pays the rent on this place.\" / He doesn't put them back.",
-   "why": "no number on screen; every garment named belongs to someone she watches, none to her",
+   "line": "He doesn't put them back. You watch the jar until he's back at the till.",
+   "why": "no number; no garment named",
    "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "44e0b5953d16dad7",
+    "text": "471d8f43b65f5217",
     "traits": "d99594b509571563",
     "facts": "67efda545284e49f",
     "facts2": "841fd9234a0769d8",
-    "all": "c6df139551d3d6fd"
+    "all": "fbca2cae0647a9d2"
    },
    "row_hash": "80d415cf08e0ebfe",
    "carried": true,
-   "pass": 8
+   "pass": 20
   },
   {
    "row": "B8",
@@ -1343,39 +1344,39 @@
    "row": "B8",
    "screen": "walk_zoe_sam.out",
    "verdict": "PASS",
-   "line": "You pull the door to, quietly. Zoe's laugh carries through it. She'll know you were there.",
-   "why": "no number on screen; every garment named belongs to someone she watches, none to her",
+   "line": "You pull the door to, quietly. Zoe's laugh carries through it, and your face burns.",
+   "why": "no number; no garment of hers named",
    "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "83285099185d7ec0",
+    "text": "e3141d8b045f75c0",
     "traits": "6b1e34b018661933",
-    "facts": "5c0a642e2e7923fd",
+    "facts": "5ccc9ab8b606da87",
     "facts2": "f9f6cd7a1a561521",
-    "all": "74211fe6513fa873"
+    "all": "57c1ef8237313358"
    },
    "row_hash": "80d415cf08e0ebfe",
    "carried": true,
-   "pass": 8
+   "pass": 20
   },
   {
    "row": "B8",
    "screen": "walk_zoe_sam.watch",
    "verdict": "PASS",
-   "line": "Your thighs are pressed together and your face is on fire. You know what that sofa's seen now.",
-   "why": "no number on screen; every garment named belongs to someone she watches, none to her",
+   "line": "Your thighs are pressed together and your face is on fire. [group saw_zoe_sam is_false] You know what that sofa's seen now.",
+   "why": "no number; no garment of hers named",
    "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "a402abbe33512b4a",
+    "text": "ab738efb67514276",
     "traits": "fa1a0a429fa0ea30",
-    "facts": "c3521100b11dca8e",
+    "facts": "8182ce5904bce35b",
     "facts2": "48fd486abd7e2f3c",
-    "all": "dcb7e858dc003ce2"
+    "all": "5c2a903d10f3fd06"
    },
    "row_hash": "80d415cf08e0ebfe",
    "carried": true,
-   "pass": 8
+   "pass": 19
   },
   {
    "row": "B9",
@@ -1566,7 +1567,7 @@
    "note": true,
    "screen_hash": "2be5e498cbc9d50e",
    "row_hash": "655e8e2b731598c9",
-   "carried": false,
+   "carried": true,
    "pass": 17
   },
   {
@@ -3472,13 +3473,13 @@
    "screen": "*",
    "verdict": "N/A",
    "line": "",
-   "why": "near-campus walk-ins: no menu's Talk screen in this piece; C2198 is judged only on a person's Talk screen (the screen their menu's Talk opens)",
+   "why": "walk-ins: not a menu's Talk screen; C2198 is judged only on the screen a person's menu's Talk opens",
    "cause": null,
    "note": false,
-   "screen_hash": "8635ba4a0df48600",
-   "row_hash": "27e6b45f50edd3ac",
+   "screen_hash": "2be5e498cbc9d50e",
+   "row_hash": "73dfe095a72154a3",
    "carried": true,
-   "pass": 12
+   "pass": 18
   },
   {
    "row": "C2200",
@@ -3490,7 +3491,7 @@
    "note": false,
    "screen_hash": "2be5e498cbc9d50e",
    "row_hash": "117a60e53de1e8a4",
-   "carried": false,
+   "carried": true,
    "pass": 17
   },
   {
@@ -3503,8 +3504,116 @@
    "note": false,
    "screen_hash": "2be5e498cbc9d50e",
    "row_hash": "d119dfe665f76359",
-   "carried": false,
+   "carried": true,
    "pass": 17
+  },
+  {
+   "row": "C2202",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "Brutal. Correct. Again tomorrow.",
+   "why": "the other lines (Sam's again tomorrow, Zoe choosing again tomorrow, 'It won't be the last time') are true on a repeat",
+   "cause": null,
+   "note": false,
+   "screen_hash": "2be5e498cbc9d50e",
+   "row_hash": "6e90fed7eae62131",
+   "carried": true,
+   "pass": 18
+  },
+  {
+   "row": "C2202",
+   "screen": "walk_chris_store.watch",
+   "verdict": "PASS",
+   "line": "Your nipples are hard. You're back out front before they come out. [group saw_chris_store is_false] You know what Chris does on weekends now.",
+   "why": "discovery held on saw_chris_store is_false; both exits set it, nothing unsets it",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "b2ead5029bba9fab",
+    "traits": "1d58a0fd6061427e",
+    "facts": "b6edc19b7be2164c",
+    "facts2": "d822bf3cee64d8d0",
+    "all": "296c864e1c806630"
+   },
+   "row_hash": "6e90fed7eae62131",
+   "carried": true,
+   "pass": 19
+  },
+  {
+   "row": "C2202",
+   "screen": "walk_party_bathroom.shut",
+   "verdict": "PASS",
+   "line": "You shut the door. The music sounds louder than before. [group saw_party_bathroom is_false] You know that door now.",
+   "why": "discovery held on saw_party_bathroom is_false; both exits set it, nothing unsets it (only partied_this_week resets weekly, line 580)",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "1510814f016a9e82",
+    "traits": "44136fa355b3678a",
+    "facts": "9a06232c9ed28deb",
+    "facts2": "9a06232c9ed28deb",
+    "all": "2a698858ae130f9c"
+   },
+   "row_hash": "6e90fed7eae62131",
+   "carried": true,
+   "pass": 19
+  },
+  {
+   "row": "C2202",
+   "screen": "walk_party_bathroom.watch",
+   "verdict": "PASS",
+   "line": "You're wet. You shut the door before they see you. [group saw_party_bathroom is_false] You know that door now.",
+   "why": "same hold on saw_party_bathroom is_false",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "7252ef5e61c71ee5",
+    "traits": "44136fa355b3678a",
+    "facts": "9a06232c9ed28deb",
+    "facts2": "9a06232c9ed28deb",
+    "all": "7bbf04a4165a002d"
+   },
+   "row_hash": "6e90fed7eae62131",
+   "carried": true,
+   "pass": 19
+  },
+  {
+   "row": "C2202",
+   "screen": "walk_tom_tips.tips",
+   "verdict": "PASS",
+   "line": "He doesn't put them back. You watch the jar for the rest of the hour.",
+   "why": "'You'll be counting the jar next time' is cut; no promise remains",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "a04caf445a1910a3",
+    "traits": "d99594b509571563",
+    "facts": "67efda545284e49f",
+    "facts2": "841fd9234a0769d8",
+    "all": "b38007daa557a9e1"
+   },
+   "row_hash": "6e90fed7eae62131",
+   "carried": true,
+   "pass": 19
+  },
+  {
+   "row": "C2202",
+   "screen": "walk_zoe_sam.watch",
+   "verdict": "PASS",
+   "line": "Your thighs are pressed together and your face is on fire. [group saw_zoe_sam is_false] You know what that sofa's seen now.",
+   "why": "discovery held on saw_zoe_sam is_false; both exits set it, nothing unsets it",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "ab738efb67514276",
+    "traits": "fa1a0a429fa0ea30",
+    "facts": "8182ce5904bce35b",
+    "facts2": "48fd486abd7e2f3c",
+    "all": "5c2a903d10f3fd06"
+   },
+   "row_hash": "6e90fed7eae62131",
+   "carried": true,
+   "pass": 19
   },
   {
    "row": "C286",
@@ -4058,39 +4167,39 @@
    "row": "C460",
    "screen": "walk_chris_store.out",
    "verdict": "PASS",
-   "line": "You back out into the caf\u00e9. The shelf rattles behind the door.",
-   "why": "backing into the caf\u00e9 matches the Done landing",
+   "line": "You back out into the caf\u00e9. The shelf rattles behind the door, and keeps rattling.",
+   "why": "every claim holds on each Sat/Sun 10-19 firing; nothing assumes a past or a future",
    "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "dd60049347ae6bd3",
+    "text": "d4f4b618d69f6be2",
     "traits": "44136fa355b3678a",
     "facts": "b1f7fb4ecb1af6a5",
     "facts2": "b1f7fb4ecb1af6a5",
-    "all": "ca42d5411a150ff5"
+    "all": "a5b2d19dcd53fb91"
    },
    "row_hash": "67e48e60d5053a2e",
    "carried": true,
-   "pass": 8
+   "pass": 20
   },
   {
    "row": "C460",
    "screen": "walk_chris_store.watch",
    "verdict": "PASS",
-   "line": "Your nipples are hard. You're back out front before they come out.",
-   "why": "back out front is near_cafe, where Done lands; no garment of hers named",
+   "line": "Your nipples are hard. You're back out front before they come out. [group saw_chris_store is_false] You know what Chris does on weekends now.",
+   "why": "first visit: flag false, discovery true; repeat: flag set, line hidden; rest of the line true every visit; Chris named; trigger requires npc_chris is_present at near_cafe, Sat/Sun 10-19",
    "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "46b81266d6afc734",
+    "text": "b2ead5029bba9fab",
     "traits": "1d58a0fd6061427e",
     "facts": "b6edc19b7be2164c",
     "facts2": "d822bf3cee64d8d0",
-    "all": "60d6543235c57e80"
+    "all": "296c864e1c806630"
    },
    "row_hash": "67e48e60d5053a2e",
    "carried": true,
-   "pass": 8
+   "pass": 19
   },
   {
    "row": "C460",
@@ -4115,39 +4224,39 @@
    "row": "C460",
    "screen": "walk_party_bathroom.shut",
    "verdict": "PASS",
-   "line": "You shut the door. The music sounds louder than before. You know that door now.",
-   "why": "the party's music fits the Sat 21:00-01:00 window; Done lands in the apartment",
+   "line": "You shut the door. The music sounds louder than before. [group saw_party_bathroom is_false] You know that door now.",
+   "why": "first visit: flag false, discovery true; repeat: flag set, line hidden; rest of the line true every visit; unnamed couple at Zoe's party; no named person claimed",
    "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "0917e6423064b43d",
+    "text": "1510814f016a9e82",
     "traits": "44136fa355b3678a",
     "facts": "9a06232c9ed28deb",
     "facts2": "9a06232c9ed28deb",
-    "all": "b58099853152246f"
+    "all": "2a698858ae130f9c"
    },
    "row_hash": "67e48e60d5053a2e",
    "carried": true,
-   "pass": 8
+   "pass": 19
   },
   {
    "row": "C460",
    "screen": "walk_party_bathroom.watch",
    "verdict": "PASS",
-   "line": "His tongue's buried in her cunt... / Fuck. Oh, fuck. Yes. Yes. God. Don't you dare stop. / You're wet. You shut the door before they see you. You know that door now.",
-   "why": "every claim is the act or her body; nobody named",
+   "line": "You're wet. You shut the door before they see you. [group saw_party_bathroom is_false] You know that door now.",
+   "why": "first visit: flag false, discovery true; repeat: flag set, line hidden; rest of the line true every visit; unnamed couple at Zoe's party; no named person claimed",
    "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "0cfa779650f65b71",
+    "text": "7252ef5e61c71ee5",
     "traits": "44136fa355b3678a",
     "facts": "9a06232c9ed28deb",
     "facts2": "9a06232c9ed28deb",
-    "all": "ec2b03f638457ce5"
+    "all": "7bbf04a4165a002d"
    },
    "row_hash": "67e48e60d5053a2e",
    "carried": true,
-   "pass": 9
+   "pass": 19
   },
   {
    "row": "C460",
@@ -4229,39 +4338,39 @@
    "row": "C460",
    "screen": "walk_tom_tips.nothing",
    "verdict": "PASS",
-   "line": "You say nothing. He knows you saw. He'll be watching you next shift.",
-   "why": "met_tom is set only with cafe_hired, so 'next shift' is built; Done +5 lands by 21:00",
+   "line": "You say nothing. He knows you saw, and he doesn't look away.",
+   "why": "fix holds: the line claims only the moment on screen, which every visit (20:00-20:55, Tom present) can reach; she is not walked to the door, so the exit back into the cafe agrees",
    "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "0fbb5eeccbe20ccf",
+    "text": "6c640c8edde7e68f",
     "traits": "d99594b509571563",
     "facts": "67efda545284e49f",
     "facts2": "841fd9234a0769d8",
-    "all": "2656690c21d43210"
+    "all": "fb5499498c7c386e"
    },
    "row_hash": "67e48e60d5053a2e",
-   "carried": true,
-   "pass": 8
+   "carried": false,
+   "pass": 21
   },
   {
    "row": "C460",
    "screen": "walk_tom_tips.tips",
    "verdict": "PASS",
-   "line": "\"And I'm the one who pays the rent on this place.\" / He doesn't put them back.",
-   "why": "Tom present; no number named",
+   "line": "He doesn't put them back. You watch the jar until he's back at the till.",
+   "why": "true on every firing: watching him return to the till fits the 5-minute exit",
    "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "44e0b5953d16dad7",
+    "text": "471d8f43b65f5217",
     "traits": "d99594b509571563",
     "facts": "67efda545284e49f",
     "facts2": "841fd9234a0769d8",
-    "all": "c6df139551d3d6fd"
+    "all": "fbca2cae0647a9d2"
    },
    "row_hash": "67e48e60d5053a2e",
    "carried": true,
-   "pass": 8
+   "pass": 20
   },
   {
    "row": "C460",
@@ -4343,39 +4452,39 @@
    "row": "C460",
    "screen": "walk_zoe_sam.out",
    "verdict": "PASS",
-   "line": "You pull the door to, quietly. Zoe's laugh carries through it. She'll know you were there.",
-   "why": "pulling the hall door to leaves her in the apartment's hall, where Done lands; Zoe present",
+   "line": "You pull the door to, quietly. Zoe's laugh carries through it, and your face burns.",
+   "why": "true on every firing; no past or promise",
    "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "83285099185d7ec0",
+    "text": "e3141d8b045f75c0",
     "traits": "6b1e34b018661933",
-    "facts": "5c0a642e2e7923fd",
+    "facts": "5ccc9ab8b606da87",
     "facts2": "f9f6cd7a1a561521",
-    "all": "74211fe6513fa873"
+    "all": "57c1ef8237313358"
    },
    "row_hash": "67e48e60d5053a2e",
    "carried": true,
-   "pass": 8
+   "pass": 20
   },
   {
    "row": "C460",
    "screen": "walk_zoe_sam.watch",
    "verdict": "PASS",
-   "line": "Your thighs are pressed together and your face is on fire. You know what that sofa's seen now.",
-   "why": "she stays in the apartment, Done lands there; both present",
+   "line": "Your thighs are pressed together and your face is on fire. [group saw_zoe_sam is_false] You know what that sofa's seen now.",
+   "why": "first visit: flag false, discovery true; repeat: flag set, line hidden; rest of the line true every visit; Zoe and Sam named; trigger requires both is_present",
    "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "a402abbe33512b4a",
+    "text": "ab738efb67514276",
     "traits": "fa1a0a429fa0ea30",
-    "facts": "c3521100b11dca8e",
+    "facts": "8182ce5904bce35b",
     "facts2": "48fd486abd7e2f3c",
-    "all": "dcb7e858dc003ce2"
+    "all": "5c2a903d10f3fd06"
    },
    "row_hash": "67e48e60d5053a2e",
    "carried": true,
-   "pass": 8
+   "pass": 19
   },
   {
    "row": "C461",
@@ -4413,39 +4522,39 @@
    "row": "C461",
    "screen": "walk_chris_store.out",
    "verdict": "PASS",
-   "line": "You back out into the caf\u00e9. The shelf rattles behind the door.",
-   "why": "what isn't a checked fact is texture or her opinion on her body, and dialogue fits each person's entry",
+   "line": "You back out into the caf\u00e9. The shelf rattles behind the door, and keeps rattling.",
+   "why": "texture that can't clash",
    "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "dd60049347ae6bd3",
+    "text": "d4f4b618d69f6be2",
     "traits": "44136fa355b3678a",
     "facts": "b1f7fb4ecb1af6a5",
     "facts2": "b1f7fb4ecb1af6a5",
-    "all": "ca42d5411a150ff5"
+    "all": "a5b2d19dcd53fb91"
    },
    "row_hash": "310706ee076318f2",
    "carried": true,
-   "pass": 8
+   "pass": 20
   },
   {
    "row": "C461",
    "screen": "walk_chris_store.watch",
    "verdict": "PASS",
-   "line": "Your nipples are hard. You're back out front before they come out.",
-   "why": "what isn't a checked fact is texture or her opinion on her body, and dialogue fits each person's entry",
+   "line": "Your nipples are hard. You're back out front before they come out. [group saw_chris_store is_false] You know what Chris does on weekends now.",
+   "why": "texture and her body reaction, nothing that can clash",
    "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "46b81266d6afc734",
+    "text": "b2ead5029bba9fab",
     "traits": "1d58a0fd6061427e",
     "facts": "b6edc19b7be2164c",
     "facts2": "d822bf3cee64d8d0",
-    "all": "60d6543235c57e80"
+    "all": "296c864e1c806630"
    },
    "row_hash": "310706ee076318f2",
    "carried": true,
-   "pass": 8
+   "pass": 19
   },
   {
    "row": "C461",
@@ -4470,39 +4579,39 @@
    "row": "C461",
    "screen": "walk_party_bathroom.shut",
    "verdict": "PASS",
-   "line": "You shut the door. The music sounds louder than before. You know that door now.",
-   "why": "what isn't a checked fact is texture or her opinion on her body, and dialogue fits each person's entry",
+   "line": "You shut the door. The music sounds louder than before. [group saw_party_bathroom is_false] You know that door now.",
+   "why": "texture and her body reaction, nothing that can clash",
    "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "0917e6423064b43d",
+    "text": "1510814f016a9e82",
     "traits": "44136fa355b3678a",
     "facts": "9a06232c9ed28deb",
     "facts2": "9a06232c9ed28deb",
-    "all": "b58099853152246f"
+    "all": "2a698858ae130f9c"
    },
    "row_hash": "310706ee076318f2",
    "carried": true,
-   "pass": 8
+   "pass": 19
   },
   {
    "row": "C461",
    "screen": "walk_party_bathroom.watch",
    "verdict": "PASS",
-   "line": "His tongue's buried in her cunt... / Fuck. Oh, fuck. Yes. Yes. God. Don't you dare stop. / You're wet. You shut the door before they see you. You know that door now.",
-   "why": "texture, her body ('Your face burns' / 'You're wet') and a stranger's lines; nothing that can clash",
+   "line": "You're wet. You shut the door before they see you. [group saw_party_bathroom is_false] You know that door now.",
+   "why": "texture and her body reaction, nothing that can clash",
    "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "0cfa779650f65b71",
+    "text": "7252ef5e61c71ee5",
     "traits": "44136fa355b3678a",
     "facts": "9a06232c9ed28deb",
     "facts2": "9a06232c9ed28deb",
-    "all": "ec2b03f638457ce5"
+    "all": "7bbf04a4165a002d"
    },
    "row_hash": "310706ee076318f2",
    "carried": true,
-   "pass": 9
+   "pass": 19
   },
   {
    "row": "C461",
@@ -4584,39 +4693,39 @@
    "row": "C461",
    "screen": "walk_tom_tips.nothing",
    "verdict": "PASS",
-   "line": "You say nothing. He knows you saw. He'll be watching you next shift.",
-   "why": "what isn't a checked fact is texture or her opinion on her body, and dialogue fits each person's entry",
+   "line": "He knows you saw, and he doesn't look away.",
+   "why": "Tom holding her eye after pocketing tips fits his cast entry and the moment screen's 'Don't look at me like that'",
    "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "0fbb5eeccbe20ccf",
+    "text": "6c640c8edde7e68f",
     "traits": "d99594b509571563",
     "facts": "67efda545284e49f",
     "facts2": "841fd9234a0769d8",
-    "all": "2656690c21d43210"
+    "all": "fb5499498c7c386e"
    },
    "row_hash": "310706ee076318f2",
-   "carried": true,
-   "pass": 8
+   "carried": false,
+   "pass": 21
   },
   {
    "row": "C461",
    "screen": "walk_tom_tips.tips",
    "verdict": "PASS",
-   "line": "\"And I'm the one who pays the rent on this place.\" / He doesn't put them back.",
-   "why": "what isn't a checked fact is texture or her opinion on her body, and dialogue fits each person's entry",
+   "line": "He doesn't put them back. You watch the jar until he's back at the till.",
+   "why": "texture and her reaction, nothing that can clash",
    "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "44e0b5953d16dad7",
+    "text": "471d8f43b65f5217",
     "traits": "d99594b509571563",
     "facts": "67efda545284e49f",
     "facts2": "841fd9234a0769d8",
-    "all": "c6df139551d3d6fd"
+    "all": "fbca2cae0647a9d2"
    },
    "row_hash": "310706ee076318f2",
    "carried": true,
-   "pass": 8
+   "pass": 20
   },
   {
    "row": "C461",
@@ -4698,39 +4807,39 @@
    "row": "C461",
    "screen": "walk_zoe_sam.out",
    "verdict": "PASS",
-   "line": "You pull the door to, quietly. Zoe's laugh carries through it. She'll know you were there.",
-   "why": "what isn't a checked fact is texture or her opinion on her body, and dialogue fits each person's entry",
+   "line": "You pull the door to, quietly. Zoe's laugh carries through it, and your face burns.",
+   "why": "texture and her body reaction",
    "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "83285099185d7ec0",
+    "text": "e3141d8b045f75c0",
     "traits": "6b1e34b018661933",
-    "facts": "5c0a642e2e7923fd",
+    "facts": "5ccc9ab8b606da87",
     "facts2": "f9f6cd7a1a561521",
-    "all": "74211fe6513fa873"
+    "all": "57c1ef8237313358"
    },
    "row_hash": "310706ee076318f2",
    "carried": true,
-   "pass": 8
+   "pass": 20
   },
   {
    "row": "C461",
    "screen": "walk_zoe_sam.watch",
    "verdict": "PASS",
-   "line": "Your thighs are pressed together and your face is on fire. You know what that sofa's seen now.",
-   "why": "what isn't a checked fact is texture or her opinion on her body, and dialogue fits each person's entry",
+   "line": "Your thighs are pressed together and your face is on fire. [group saw_zoe_sam is_false] You know what that sofa's seen now.",
+   "why": "texture and her body reaction, nothing that can clash",
    "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "a402abbe33512b4a",
+    "text": "ab738efb67514276",
     "traits": "fa1a0a429fa0ea30",
-    "facts": "c3521100b11dca8e",
+    "facts": "8182ce5904bce35b",
     "facts2": "48fd486abd7e2f3c",
-    "all": "dcb7e858dc003ce2"
+    "all": "5c2a903d10f3fd06"
    },
    "row_hash": "310706ee076318f2",
    "carried": true,
-   "pass": 8
+   "pass": 19
   },
   {
    "row": "C519",
@@ -5327,77 +5436,77 @@
    "row": "C927",
    "screen": "walk_chris_store.out",
    "verdict": "PASS",
-   "line": "You back out into the caf\u00e9. The shelf rattles behind the door.",
-   "why": "its exit, Done, costs 5 minutes",
+   "line": "Done",
+   "why": "time_progression_minutes = 5 (toml 10882)",
    "cause": null,
    "note": true,
    "screen_hash": {
-    "text": "dd60049347ae6bd3",
+    "text": "d4f4b618d69f6be2",
     "traits": "44136fa355b3678a",
     "facts": "b1f7fb4ecb1af6a5",
     "facts2": "b1f7fb4ecb1af6a5",
-    "all": "ca42d5411a150ff5"
+    "all": "a5b2d19dcd53fb91"
    },
    "row_hash": "4e86d143688ba8e5",
    "carried": true,
-   "pass": 8
+   "pass": 20
   },
   {
    "row": "C927",
    "screen": "walk_chris_store.watch",
    "verdict": "PASS",
-   "line": "Your nipples are hard. You're back out front before they come out.",
-   "why": "its exit, Done, costs 5 minutes",
+   "line": "Your nipples are hard. You're back out front before they come out. [group saw_chris_store is_false] You know what Chris does on weekends now.",
+   "why": "every exit on the screen sets time_progression_minutes explicitly (5), so the 3-minute default never applies",
    "cause": null,
    "note": true,
    "screen_hash": {
-    "text": "46b81266d6afc734",
+    "text": "b2ead5029bba9fab",
     "traits": "1d58a0fd6061427e",
     "facts": "b6edc19b7be2164c",
     "facts2": "d822bf3cee64d8d0",
-    "all": "60d6543235c57e80"
+    "all": "296c864e1c806630"
    },
    "row_hash": "4e86d143688ba8e5",
    "carried": true,
-   "pass": 8
+   "pass": 19
   },
   {
    "row": "C927",
    "screen": "walk_party_bathroom.shut",
    "verdict": "PASS",
-   "line": "You shut the door. The music sounds louder than before. You know that door now.",
-   "why": "its exit, Done, costs 5 minutes",
+   "line": "You shut the door. The music sounds louder than before. [group saw_party_bathroom is_false] You know that door now.",
+   "why": "every exit on the screen sets time_progression_minutes explicitly (5), so the 3-minute default never applies",
    "cause": null,
    "note": true,
    "screen_hash": {
-    "text": "0917e6423064b43d",
+    "text": "1510814f016a9e82",
     "traits": "44136fa355b3678a",
     "facts": "9a06232c9ed28deb",
     "facts2": "9a06232c9ed28deb",
-    "all": "b58099853152246f"
+    "all": "2a698858ae130f9c"
    },
    "row_hash": "4e86d143688ba8e5",
    "carried": true,
-   "pass": 8
+   "pass": 19
   },
   {
    "row": "C927",
    "screen": "walk_party_bathroom.watch",
    "verdict": "PASS",
-   "line": "His tongue's buried in her cunt... / Fuck. Oh, fuck. Yes. Yes. God. Don't you dare stop. / You're wet. You shut the door before they see you. You know that door now.",
-   "why": "Done costs time_progression_minutes = 5",
+   "line": "You're wet. You shut the door before they see you. [group saw_party_bathroom is_false] You know that door now.",
+   "why": "every exit on the screen sets time_progression_minutes explicitly (5), so the 3-minute default never applies",
    "cause": null,
    "note": true,
    "screen_hash": {
-    "text": "0cfa779650f65b71",
+    "text": "7252ef5e61c71ee5",
     "traits": "44136fa355b3678a",
     "facts": "9a06232c9ed28deb",
     "facts2": "9a06232c9ed28deb",
-    "all": "ec2b03f638457ce5"
+    "all": "7bbf04a4165a002d"
    },
    "row_hash": "4e86d143688ba8e5",
    "carried": true,
-   "pass": 9
+   "pass": 19
   },
   {
    "row": "C927",
@@ -5441,39 +5550,39 @@
    "row": "C927",
    "screen": "walk_tom_tips.nothing",
    "verdict": "PASS",
-   "line": "You say nothing. He knows you saw. He'll be watching you next shift.",
-   "why": "its exit, Done, costs 5 minutes",
+   "line": "Done",
+   "why": "time_progression_minutes = 5 (toml 10787)",
    "cause": null,
    "note": true,
    "screen_hash": {
-    "text": "0fbb5eeccbe20ccf",
+    "text": "6c640c8edde7e68f",
     "traits": "d99594b509571563",
     "facts": "67efda545284e49f",
     "facts2": "841fd9234a0769d8",
-    "all": "2656690c21d43210"
+    "all": "fb5499498c7c386e"
    },
    "row_hash": "4e86d143688ba8e5",
-   "carried": true,
-   "pass": 8
+   "carried": false,
+   "pass": 21
   },
   {
    "row": "C927",
    "screen": "walk_tom_tips.tips",
    "verdict": "PASS",
-   "line": "\"And I'm the one who pays the rent on this place.\" / He doesn't put them back.",
-   "why": "its exit, Done, costs 5 minutes",
+   "line": "Done",
+   "why": "time_progression_minutes = 5 (toml 10804)",
    "cause": null,
    "note": true,
    "screen_hash": {
-    "text": "44e0b5953d16dad7",
+    "text": "471d8f43b65f5217",
     "traits": "d99594b509571563",
     "facts": "67efda545284e49f",
     "facts2": "841fd9234a0769d8",
-    "all": "c6df139551d3d6fd"
+    "all": "fbca2cae0647a9d2"
    },
    "row_hash": "4e86d143688ba8e5",
    "carried": true,
-   "pass": 8
+   "pass": 20
   },
   {
    "row": "C927",
@@ -5517,39 +5626,39 @@
    "row": "C927",
    "screen": "walk_zoe_sam.out",
    "verdict": "PASS",
-   "line": "You pull the door to, quietly. Zoe's laugh carries through it. She'll know you were there.",
-   "why": "its exit, Done, costs 5 minutes",
+   "line": "Done",
+   "why": "time_progression_minutes = 5",
    "cause": null,
    "note": true,
    "screen_hash": {
-    "text": "83285099185d7ec0",
+    "text": "e3141d8b045f75c0",
     "traits": "6b1e34b018661933",
-    "facts": "5c0a642e2e7923fd",
+    "facts": "5ccc9ab8b606da87",
     "facts2": "f9f6cd7a1a561521",
-    "all": "74211fe6513fa873"
+    "all": "57c1ef8237313358"
    },
    "row_hash": "4e86d143688ba8e5",
    "carried": true,
-   "pass": 8
+   "pass": 20
   },
   {
    "row": "C927",
    "screen": "walk_zoe_sam.watch",
    "verdict": "PASS",
-   "line": "Your thighs are pressed together and your face is on fire. You know what that sofa's seen now.",
-   "why": "its exit, Done, costs 5 minutes",
+   "line": "Your thighs are pressed together and your face is on fire. [group saw_zoe_sam is_false] You know what that sofa's seen now.",
+   "why": "every exit on the screen sets time_progression_minutes explicitly (5), so the 3-minute default never applies",
    "cause": null,
    "note": true,
    "screen_hash": {
-    "text": "a402abbe33512b4a",
+    "text": "ab738efb67514276",
     "traits": "fa1a0a429fa0ea30",
-    "facts": "c3521100b11dca8e",
+    "facts": "8182ce5904bce35b",
     "facts2": "48fd486abd7e2f3c",
-    "all": "dcb7e858dc003ce2"
+    "all": "5c2a903d10f3fd06"
    },
    "row_hash": "4e86d143688ba8e5",
    "carried": true,
-   "pass": 8
+   "pass": 19
   },
   {
    "row": "C928",
@@ -5607,77 +5716,77 @@
    "row": "C931",
    "screen": "walk_chris_store.out",
    "verdict": "PASS",
-   "line": "You back out into the caf\u00e9. The shelf rattles behind the door.",
-   "why": "the trigger's time_of_day ends exclusive (or no clock window, presence-gated); the answer costs 0 and Done +5 still lands inside the place's hours",
+   "line": "time_of_day 10:00-19:00",
+   "why": "end-exclusive window; no line names a clock time",
    "cause": null,
    "note": true,
    "screen_hash": {
-    "text": "dd60049347ae6bd3",
+    "text": "d4f4b618d69f6be2",
     "traits": "44136fa355b3678a",
     "facts": "b1f7fb4ecb1af6a5",
     "facts2": "b1f7fb4ecb1af6a5",
-    "all": "ca42d5411a150ff5"
+    "all": "a5b2d19dcd53fb91"
    },
    "row_hash": "1aadffd96e76381c",
    "carried": true,
-   "pass": 8
+   "pass": 20
   },
   {
    "row": "C931",
    "screen": "walk_chris_store.watch",
    "verdict": "PASS",
-   "line": "Your nipples are hard. You're back out front before they come out.",
-   "why": "the trigger's time_of_day ends exclusive (or no clock window, presence-gated); the answer costs 0 and Done +5 still lands inside the place's hours",
+   "line": "Your nipples are hard. You're back out front before they come out. [group saw_chris_store is_false] You know what Chris does on weekends now.",
+   "why": "trigger window is end-exclusive; no line names a clock time that disagrees with it",
    "cause": null,
    "note": true,
    "screen_hash": {
-    "text": "46b81266d6afc734",
+    "text": "b2ead5029bba9fab",
     "traits": "1d58a0fd6061427e",
     "facts": "b6edc19b7be2164c",
     "facts2": "d822bf3cee64d8d0",
-    "all": "60d6543235c57e80"
+    "all": "296c864e1c806630"
    },
    "row_hash": "1aadffd96e76381c",
    "carried": true,
-   "pass": 8
+   "pass": 19
   },
   {
    "row": "C931",
    "screen": "walk_party_bathroom.shut",
    "verdict": "PASS",
-   "line": "You shut the door. The music sounds louder than before. You know that door now.",
-   "why": "the trigger's time_of_day ends exclusive (or no clock window, presence-gated); the answer costs 0 and Done +5 still lands inside the place's hours",
+   "line": "You shut the door. The music sounds louder than before. [group saw_party_bathroom is_false] You know that door now.",
+   "why": "trigger window is end-exclusive; no line names a clock time that disagrees with it",
    "cause": null,
    "note": true,
    "screen_hash": {
-    "text": "0917e6423064b43d",
+    "text": "1510814f016a9e82",
     "traits": "44136fa355b3678a",
     "facts": "9a06232c9ed28deb",
     "facts2": "9a06232c9ed28deb",
-    "all": "b58099853152246f"
+    "all": "2a698858ae130f9c"
    },
    "row_hash": "1aadffd96e76381c",
    "carried": true,
-   "pass": 8
+   "pass": 19
   },
   {
    "row": "C931",
    "screen": "walk_party_bathroom.watch",
    "verdict": "PASS",
-   "line": "His tongue's buried in her cunt... / Fuck. Oh, fuck. Yes. Yes. God. Don't you dare stop. / You're wet. You shut the door before they see you. You know that door now.",
-   "why": "two windows, 21:00-00:00 Sat and 00:00-01:00 Sun, each end exclusive, splitting the wrap as the rows do",
+   "line": "You're wet. You shut the door before they see you. [group saw_party_bathroom is_false] You know that door now.",
+   "why": "trigger window is end-exclusive; no line names a clock time that disagrees with it",
    "cause": null,
    "note": true,
    "screen_hash": {
-    "text": "0cfa779650f65b71",
+    "text": "7252ef5e61c71ee5",
     "traits": "44136fa355b3678a",
     "facts": "9a06232c9ed28deb",
     "facts2": "9a06232c9ed28deb",
-    "all": "ec2b03f638457ce5"
+    "all": "7bbf04a4165a002d"
    },
    "row_hash": "1aadffd96e76381c",
    "carried": true,
-   "pass": 9
+   "pass": 19
   },
   {
    "row": "C931",
@@ -5721,39 +5830,39 @@
    "row": "C931",
    "screen": "walk_tom_tips.nothing",
    "verdict": "PASS",
-   "line": "You say nothing. He knows you saw. He'll be watching you next shift.",
-   "why": "the trigger's time_of_day ends exclusive (or no clock window, presence-gated); the answer costs 0 and Done +5 still lands inside the place's hours",
+   "line": "time_of_day 20:00-20:55",
+   "why": "end-exclusive window read right; Done's 5 minutes keeps her inside cafe hours; nothing in the line depends on the clock",
    "cause": null,
    "note": true,
    "screen_hash": {
-    "text": "0fbb5eeccbe20ccf",
+    "text": "6c640c8edde7e68f",
     "traits": "d99594b509571563",
     "facts": "67efda545284e49f",
     "facts2": "841fd9234a0769d8",
-    "all": "2656690c21d43210"
+    "all": "fb5499498c7c386e"
    },
    "row_hash": "1aadffd96e76381c",
-   "carried": true,
-   "pass": 8
+   "carried": false,
+   "pass": 21
   },
   {
    "row": "C931",
    "screen": "walk_tom_tips.tips",
    "verdict": "PASS",
-   "line": "\"And I'm the one who pays the rent on this place.\" / He doesn't put them back.",
-   "why": "the trigger's time_of_day ends exclusive (or no clock window, presence-gated); the answer costs 0 and Done +5 still lands inside the place's hours",
+   "line": "time_of_day 20:00-20:55",
+   "why": "end-exclusive window; no line names a clock time",
    "cause": null,
    "note": true,
    "screen_hash": {
-    "text": "44e0b5953d16dad7",
+    "text": "471d8f43b65f5217",
     "traits": "d99594b509571563",
     "facts": "67efda545284e49f",
     "facts2": "841fd9234a0769d8",
-    "all": "c6df139551d3d6fd"
+    "all": "fbca2cae0647a9d2"
    },
    "row_hash": "1aadffd96e76381c",
    "carried": true,
-   "pass": 8
+   "pass": 20
   },
   {
    "row": "C931",
@@ -5797,39 +5906,39 @@
    "row": "C931",
    "screen": "walk_zoe_sam.out",
    "verdict": "PASS",
-   "line": "You pull the door to, quietly. Zoe's laugh carries through it. She'll know you were there.",
-   "why": "the trigger's time_of_day ends exclusive (or no clock window, presence-gated); the answer costs 0 and Done +5 still lands inside the place's hours",
+   "line": "time_of_day 19:00-23:00 / Sat 19:00-21:00",
+   "why": "end-exclusive windows; no line names a clock time",
    "cause": null,
    "note": true,
    "screen_hash": {
-    "text": "83285099185d7ec0",
+    "text": "e3141d8b045f75c0",
     "traits": "6b1e34b018661933",
-    "facts": "5c0a642e2e7923fd",
+    "facts": "5ccc9ab8b606da87",
     "facts2": "f9f6cd7a1a561521",
-    "all": "74211fe6513fa873"
+    "all": "57c1ef8237313358"
    },
    "row_hash": "1aadffd96e76381c",
    "carried": true,
-   "pass": 8
+   "pass": 20
   },
   {
    "row": "C931",
    "screen": "walk_zoe_sam.watch",
    "verdict": "PASS",
-   "line": "Your thighs are pressed together and your face is on fire. You know what that sofa's seen now.",
-   "why": "the trigger's time_of_day ends exclusive (or no clock window, presence-gated); the answer costs 0 and Done +5 still lands inside the place's hours",
+   "line": "Your thighs are pressed together and your face is on fire. [group saw_zoe_sam is_false] You know what that sofa's seen now.",
+   "why": "trigger window is end-exclusive; no line names a clock time that disagrees with it",
    "cause": null,
    "note": true,
    "screen_hash": {
-    "text": "a402abbe33512b4a",
+    "text": "ab738efb67514276",
     "traits": "fa1a0a429fa0ea30",
-    "facts": "c3521100b11dca8e",
+    "facts": "8182ce5904bce35b",
     "facts2": "48fd486abd7e2f3c",
-    "all": "dcb7e858dc003ce2"
+    "all": "5c2a903d10f3fd06"
    },
    "row_hash": "1aadffd96e76381c",
    "carried": true,
-   "pass": 8
+   "pass": 19
   },
   {
    "row": "C951",
@@ -5919,39 +6028,39 @@
    "row": "L106",
    "screen": "walk_chris_store.out",
    "verdict": "PASS",
-   "line": "You back out into the caf\u00e9. The shelf rattles behind the door.",
-   "why": "every person the line puts here is put here by their rows at every minute the screen can show (who_is_where), and gated is_present on the trigger",
+   "line": "You back out into the caf\u00e9. The shelf rattles behind the door, and keeps rattling.",
+   "why": "Chris required is_present at near_cafe",
    "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "dd60049347ae6bd3",
+    "text": "d4f4b618d69f6be2",
     "traits": "44136fa355b3678a",
     "facts": "b1f7fb4ecb1af6a5",
     "facts2": "b1f7fb4ecb1af6a5",
-    "all": "ca42d5411a150ff5"
+    "all": "a5b2d19dcd53fb91"
    },
    "row_hash": "13a714429d15f3b2",
    "carried": true,
-   "pass": 8
+   "pass": 20
   },
   {
    "row": "L106",
    "screen": "walk_chris_store.watch",
    "verdict": "PASS",
-   "line": "Your nipples are hard. You're back out front before they come out.",
-   "why": "every person the line puts here is put here by their rows at every minute the screen can show (who_is_where), and gated is_present on the trigger",
+   "line": "Your nipples are hard. You're back out front before they come out. [group saw_chris_store is_false] You know what Chris does on weekends now.",
+   "why": "Chris named; trigger requires npc_chris is_present at near_cafe, Sat/Sun 10-19",
    "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "46b81266d6afc734",
+    "text": "b2ead5029bba9fab",
     "traits": "1d58a0fd6061427e",
     "facts": "b6edc19b7be2164c",
     "facts2": "d822bf3cee64d8d0",
-    "all": "60d6543235c57e80"
+    "all": "296c864e1c806630"
    },
    "row_hash": "13a714429d15f3b2",
    "carried": true,
-   "pass": 8
+   "pass": 19
   },
   {
    "row": "L106",
@@ -5976,39 +6085,39 @@
    "row": "L106",
    "screen": "walk_party_bathroom.shut",
    "verdict": "PASS",
-   "line": "You shut the door. The music sounds louder than before. You know that door now.",
-   "why": "every person the line puts here is put here by their rows at every minute the screen can show (who_is_where), and gated is_present on the trigger",
+   "line": "You shut the door. The music sounds louder than before. [group saw_party_bathroom is_false] You know that door now.",
+   "why": "unnamed couple at Zoe's party; no named person claimed",
    "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "0917e6423064b43d",
+    "text": "1510814f016a9e82",
     "traits": "44136fa355b3678a",
     "facts": "9a06232c9ed28deb",
     "facts2": "9a06232c9ed28deb",
-    "all": "b58099853152246f"
+    "all": "2a698858ae130f9c"
    },
    "row_hash": "13a714429d15f3b2",
    "carried": true,
-   "pass": 8
+   "pass": 19
   },
   {
    "row": "L106",
    "screen": "walk_party_bathroom.watch",
    "verdict": "PASS",
-   "line": "His tongue's buried in her cunt... / Fuck. Oh, fuck. Yes. Yes. God. Don't you dare stop. / You're wet. You shut the door before they see you. You know that door now.",
-   "why": "names only Zoe's door and two strangers; Zoe's row puts her at her apartment in this window",
+   "line": "You're wet. You shut the door before they see you. [group saw_party_bathroom is_false] You know that door now.",
+   "why": "unnamed couple at Zoe's party; no named person claimed",
    "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "0cfa779650f65b71",
+    "text": "7252ef5e61c71ee5",
     "traits": "44136fa355b3678a",
     "facts": "9a06232c9ed28deb",
     "facts2": "9a06232c9ed28deb",
-    "all": "ec2b03f638457ce5"
+    "all": "7bbf04a4165a002d"
    },
    "row_hash": "13a714429d15f3b2",
    "carried": true,
-   "pass": 9
+   "pass": 19
   },
   {
    "row": "L106",
@@ -6090,39 +6199,39 @@
    "row": "L106",
    "screen": "walk_tom_tips.nothing",
    "verdict": "PASS",
-   "line": "You say nothing. He knows you saw. He'll be watching you next shift.",
-   "why": "every person the line puts here is put here by their rows at every minute the screen can show (who_is_where), and gated is_present on the trigger",
+   "line": "He knows you saw, and he doesn't look away.",
+   "why": "only Tom is named; trigger requires npc_tom is_present at near_cafe",
    "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "0fbb5eeccbe20ccf",
+    "text": "6c640c8edde7e68f",
     "traits": "d99594b509571563",
     "facts": "67efda545284e49f",
     "facts2": "841fd9234a0769d8",
-    "all": "2656690c21d43210"
+    "all": "fb5499498c7c386e"
    },
    "row_hash": "13a714429d15f3b2",
-   "carried": true,
-   "pass": 8
+   "carried": false,
+   "pass": 21
   },
   {
    "row": "L106",
    "screen": "walk_tom_tips.tips",
    "verdict": "PASS",
-   "line": "\"And I'm the one who pays the rent on this place.\" / He doesn't put them back.",
-   "why": "every person the line puts here is put here by their rows at every minute the screen can show (who_is_where), and gated is_present on the trigger",
+   "line": "He doesn't put them back. You watch the jar until he's back at the till.",
+   "why": "Tom required is_present at near_cafe",
    "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "44e0b5953d16dad7",
+    "text": "471d8f43b65f5217",
     "traits": "d99594b509571563",
     "facts": "67efda545284e49f",
     "facts2": "841fd9234a0769d8",
-    "all": "c6df139551d3d6fd"
+    "all": "fbca2cae0647a9d2"
    },
    "row_hash": "13a714429d15f3b2",
    "carried": true,
-   "pass": 8
+   "pass": 20
   },
   {
    "row": "L106",
@@ -6204,39 +6313,39 @@
    "row": "L106",
    "screen": "walk_zoe_sam.out",
    "verdict": "PASS",
-   "line": "You pull the door to, quietly. Zoe's laugh carries through it. She'll know you were there.",
-   "why": "every person the line puts here is put here by their rows at every minute the screen can show (who_is_where), and gated is_present on the trigger",
+   "line": "You pull the door to, quietly. Zoe's laugh carries through it, and your face burns.",
+   "why": "Zoe and Sam both required is_present",
    "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "83285099185d7ec0",
+    "text": "e3141d8b045f75c0",
     "traits": "6b1e34b018661933",
-    "facts": "5c0a642e2e7923fd",
+    "facts": "5ccc9ab8b606da87",
     "facts2": "f9f6cd7a1a561521",
-    "all": "74211fe6513fa873"
+    "all": "57c1ef8237313358"
    },
    "row_hash": "13a714429d15f3b2",
    "carried": true,
-   "pass": 8
+   "pass": 20
   },
   {
    "row": "L106",
    "screen": "walk_zoe_sam.watch",
    "verdict": "PASS",
-   "line": "Your thighs are pressed together and your face is on fire. You know what that sofa's seen now.",
-   "why": "every person the line puts here is put here by their rows at every minute the screen can show (who_is_where), and gated is_present on the trigger",
+   "line": "Your thighs are pressed together and your face is on fire. [group saw_zoe_sam is_false] You know what that sofa's seen now.",
+   "why": "Zoe and Sam named; trigger requires both is_present",
    "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "a402abbe33512b4a",
+    "text": "ab738efb67514276",
     "traits": "fa1a0a429fa0ea30",
-    "facts": "c3521100b11dca8e",
+    "facts": "8182ce5904bce35b",
     "facts2": "48fd486abd7e2f3c",
-    "all": "dcb7e858dc003ce2"
+    "all": "5c2a903d10f3fd06"
    },
    "row_hash": "13a714429d15f3b2",
    "carried": true,
-   "pass": 8
+   "pass": 19
   },
   {
    "row": "L119",
@@ -6425,77 +6534,77 @@
    "row": "L167",
    "screen": "walk_chris_store.out",
    "verdict": "PASS",
-   "line": "You back out into the caf\u00e9. The shelf rattles behind the door.",
-   "why": "one canvas per scene; days with different hours are one trigger with an OR group, never one row per day kind; a walk-in hides out of its window by design (C916)",
+   "line": "one trigger",
+   "why": "no per-day-kind duplicate rows",
    "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "dd60049347ae6bd3",
+    "text": "d4f4b618d69f6be2",
     "traits": "44136fa355b3678a",
     "facts": "b1f7fb4ecb1af6a5",
     "facts2": "b1f7fb4ecb1af6a5",
-    "all": "ca42d5411a150ff5"
+    "all": "a5b2d19dcd53fb91"
    },
    "row_hash": "e64ce2672d85d2d8",
    "carried": true,
-   "pass": 8
+   "pass": 20
   },
   {
    "row": "L167",
    "screen": "walk_chris_store.watch",
    "verdict": "PASS",
-   "line": "Your nipples are hard. You're back out front before they come out.",
-   "why": "one canvas per scene; days with different hours are one trigger with an OR group, never one row per day kind; a walk-in hides out of its window by design (C916)",
+   "line": "Your nipples are hard. You're back out front before they come out. [group saw_chris_store is_false] You know what Chris does on weekends now.",
+   "why": "one trigger for the walk-in; no per-day-kind duplicate rows",
    "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "46b81266d6afc734",
+    "text": "b2ead5029bba9fab",
     "traits": "1d58a0fd6061427e",
     "facts": "b6edc19b7be2164c",
     "facts2": "d822bf3cee64d8d0",
-    "all": "60d6543235c57e80"
+    "all": "296c864e1c806630"
    },
    "row_hash": "e64ce2672d85d2d8",
    "carried": true,
-   "pass": 8
+   "pass": 19
   },
   {
    "row": "L167",
    "screen": "walk_party_bathroom.shut",
    "verdict": "PASS",
-   "line": "You shut the door. The music sounds louder than before. You know that door now.",
-   "why": "one canvas per scene; days with different hours are one trigger with an OR group, never one row per day kind; a walk-in hides out of its window by design (C916)",
+   "line": "You shut the door. The music sounds louder than before. [group saw_party_bathroom is_false] You know that door now.",
+   "why": "one trigger for the walk-in; no per-day-kind duplicate rows",
    "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "0917e6423064b43d",
+    "text": "1510814f016a9e82",
     "traits": "44136fa355b3678a",
     "facts": "9a06232c9ed28deb",
     "facts2": "9a06232c9ed28deb",
-    "all": "b58099853152246f"
+    "all": "2a698858ae130f9c"
    },
    "row_hash": "e64ce2672d85d2d8",
    "carried": true,
-   "pass": 8
+   "pass": 19
   },
   {
    "row": "L167",
    "screen": "walk_party_bathroom.watch",
    "verdict": "PASS",
-   "line": "His tongue's buried in her cunt... / Fuck. Oh, fuck. Yes. Yes. God. Don't you dare stop. / You're wet. You shut the door before they see you. You know that door now.",
-   "why": "no activity row; one trigger with an OR group for the two day kinds",
+   "line": "You're wet. You shut the door before they see you. [group saw_party_bathroom is_false] You know that door now.",
+   "why": "one trigger for the walk-in; no per-day-kind duplicate rows",
    "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "0cfa779650f65b71",
+    "text": "7252ef5e61c71ee5",
     "traits": "44136fa355b3678a",
     "facts": "9a06232c9ed28deb",
     "facts2": "9a06232c9ed28deb",
-    "all": "ec2b03f638457ce5"
+    "all": "7bbf04a4165a002d"
    },
    "row_hash": "e64ce2672d85d2d8",
    "carried": true,
-   "pass": 9
+   "pass": 19
   },
   {
    "row": "L167",
@@ -6539,39 +6648,39 @@
    "row": "L167",
    "screen": "walk_tom_tips.nothing",
    "verdict": "PASS",
-   "line": "You say nothing. He knows you saw. He'll be watching you next shift.",
-   "why": "one canvas per scene; days with different hours are one trigger with an OR group, never one row per day kind; a walk-in hides out of its window by design (C916)",
+   "line": "one trigger",
+   "why": "one weekday-list condition, no per-day-kind duplicate rows",
    "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "0fbb5eeccbe20ccf",
+    "text": "6c640c8edde7e68f",
     "traits": "d99594b509571563",
     "facts": "67efda545284e49f",
     "facts2": "841fd9234a0769d8",
-    "all": "2656690c21d43210"
+    "all": "fb5499498c7c386e"
    },
    "row_hash": "e64ce2672d85d2d8",
-   "carried": true,
-   "pass": 8
+   "carried": false,
+   "pass": 21
   },
   {
    "row": "L167",
    "screen": "walk_tom_tips.tips",
    "verdict": "PASS",
-   "line": "\"And I'm the one who pays the rent on this place.\" / He doesn't put them back.",
-   "why": "one canvas per scene; days with different hours are one trigger with an OR group, never one row per day kind; a walk-in hides out of its window by design (C916)",
+   "line": "one trigger",
+   "why": "no per-day-kind duplicate rows",
    "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "44e0b5953d16dad7",
+    "text": "471d8f43b65f5217",
     "traits": "d99594b509571563",
     "facts": "67efda545284e49f",
     "facts2": "841fd9234a0769d8",
-    "all": "c6df139551d3d6fd"
+    "all": "fbca2cae0647a9d2"
    },
    "row_hash": "e64ce2672d85d2d8",
    "carried": true,
-   "pass": 8
+   "pass": 20
   },
   {
    "row": "L167",
@@ -6615,39 +6724,39 @@
    "row": "L167",
    "screen": "walk_zoe_sam.out",
    "verdict": "PASS",
-   "line": "You pull the door to, quietly. Zoe's laugh carries through it. She'll know you were there.",
-   "why": "one canvas per scene; days with different hours are one trigger with an OR group, never one row per day kind; a walk-in hides out of its window by design (C916)",
+   "line": "one trigger with a weekday group",
+   "why": "Zoe/Sam hours differ by day in one trigger's group, not per-day rows",
    "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "83285099185d7ec0",
+    "text": "e3141d8b045f75c0",
     "traits": "6b1e34b018661933",
-    "facts": "5c0a642e2e7923fd",
+    "facts": "5ccc9ab8b606da87",
     "facts2": "f9f6cd7a1a561521",
-    "all": "74211fe6513fa873"
+    "all": "57c1ef8237313358"
    },
    "row_hash": "e64ce2672d85d2d8",
    "carried": true,
-   "pass": 8
+   "pass": 20
   },
   {
    "row": "L167",
    "screen": "walk_zoe_sam.watch",
    "verdict": "PASS",
-   "line": "Your thighs are pressed together and your face is on fire. You know what that sofa's seen now.",
-   "why": "one canvas per scene; days with different hours are one trigger with an OR group, never one row per day kind; a walk-in hides out of its window by design (C916)",
+   "line": "Your thighs are pressed together and your face is on fire. [group saw_zoe_sam is_false] You know what that sofa's seen now.",
+   "why": "one trigger for the walk-in; no per-day-kind duplicate rows",
    "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "a402abbe33512b4a",
+    "text": "ab738efb67514276",
     "traits": "fa1a0a429fa0ea30",
-    "facts": "c3521100b11dca8e",
+    "facts": "8182ce5904bce35b",
     "facts2": "48fd486abd7e2f3c",
-    "all": "dcb7e858dc003ce2"
+    "all": "5c2a903d10f3fd06"
    },
    "row_hash": "e64ce2672d85d2d8",
    "carried": true,
-   "pass": 8
+   "pass": 19
   },
   {
    "row": "L170",
@@ -6691,8 +6800,8 @@
  ],
  "causes": [],
  "pending": [],
- "asked": 3,
- "answered": 3,
+ "asked": 8,
+ "answered": 8,
  "pass_items": [],
  "unowed": []
 }

@@ -1,6 +1,6 @@
 {
  "piece": "P52",
- "pass": 6,
+ "pass": 7,
  "screens": {
   "*": "4f53cda18c2baa0c"
  },
@@ -61,6 +61,7 @@
   "C450": "3eb18b4cefbe49d3",
   "C422": "8933f85010afbef7",
   "C460": "beb5a109bde77305",
+  "C2202": "d5592f287f5f641a",
   "C461": "153b0804e686abae",
   "L163": "00a617ab9b4e9cd4",
   "voice#1": "b8e8afcb32208b40",
@@ -241,6 +242,19 @@
    "row_hash": "3b1fcdf549bcc558",
    "carried": true,
    "pass": 1
+  },
+  {
+   "row": "C2202",
+   "screen": "*",
+   "verdict": "N/A",
+   "line": "",
+   "why": "a [ui] timetable popup: no scene, no line that repeats as story",
+   "cause": null,
+   "note": false,
+   "screen_hash": "4f53cda18c2baa0c",
+   "row_hash": "d5592f287f5f641a",
+   "carried": false,
+   "pass": 7
   },
   {
    "row": "C422",
@@ -733,7 +747,7 @@
    "note": false,
    "screen_hash": "4f53cda18c2baa0c",
    "row_hash": "77b3fafe9c2bf20c",
-   "carried": false,
+   "carried": true,
    "pass": 6
   },
   {
@@ -889,7 +903,7 @@
    "note": false,
    "screen_hash": "4f53cda18c2baa0c",
    "row_hash": "f74d350a978e124c",
-   "carried": false,
+   "carried": true,
    "pass": 6
   },
   {
@@ -934,8 +948,8 @@
  ],
  "causes": [],
  "pending": [],
- "asked": 2,
- "answered": 2,
+ "asked": 1,
+ "answered": 1,
  "pass_items": [],
  "unowed": []
 }

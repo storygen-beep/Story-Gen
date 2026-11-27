@@ -1,6 +1,6 @@
 {
  "piece": "P38",
- "pass": 17,
+ "pass": 19,
  "screens": {
   "walk_parents.moment": {
    "text": "7f828ca106b8bccf",
@@ -17,11 +17,11 @@
    "all": "d54dbe75b89f56bc"
   },
   "walk_parents.away": {
-   "text": "9ff3393e0734e1e8",
+   "text": "a318a29038d58b5b",
    "traits": "44136fa355b3678a",
    "facts": "9452bbef8a645d19",
    "facts2": "9452bbef8a645d19",
-   "all": "4ec41e5bdd3c080e"
+   "all": "6be38c302b01af17"
   },
   "walk_ryan_phone.moment": {
    "text": "bc2dfd613888c1cc",
@@ -128,7 +128,7 @@
    "facts2": "64f3c4db79ffd75c",
    "all": "c065010ed9d5b4d2"
   },
-  "*": "2a93cbd1808cfc0d"
+  "*": "280d5d74f01a6718"
  },
  "rows": {
   "B1": "5276068df1ca6fa9",
@@ -236,7 +236,7 @@
   "C2194": "0c03931191c53a34",
   "C1340": "b76a6583ae88c60f",
   "C2197": "cafbb0a598dbfa97",
-  "C2198": "27e6b45f50edd3ac",
+  "C2198": "73dfe095a72154a3",
   "C769": "f6b6f78a8f2e5ed7",
   "C794": "bad76e5963432385",
   "C2201": "d119dfe665f76359",
@@ -278,6 +278,7 @@
   "C450": "b01ad555668aba2d",
   "C422": "7e128897077ecee6",
   "C460": "67e48e60d5053a2e",
+  "C2202": "6e90fed7eae62131",
   "C461": "310706ee076318f2",
   "C788": "cae1598ef9cb6ff1",
   "C855": "d3dc77f2f96e20ae",
@@ -431,20 +432,20 @@
    "row": "B10",
    "screen": "walk_parents.away",
    "verdict": "PASS",
-   "line": "You back down the hall on your toes. The tapping follows you all the way to your door. / Their door's never quite shut. You know that now.",
-   "why": "Laura and Mark 'in bed' at home_master_bedroom 23:00-01:00 every day by their rows; trigger gates npc_at_location on both, Mon-Fri; true at first and last minute of the window and on a second visit",
-   "cause": "",
+   "line": "Their door's never quite shut. / [is_false saw_mom_and_mark] You know that now.",
+   "why": "first visit: flag false, both lines show; Done (and Watch's Done) set saw_mom_and_mark, so every later visit shows only 'Their door's never quite shut.', true on every night the walk-in fires. The group is an <<if>> read at render (v2.py:18514-18540), before Done's flagEffects. Laura and Mark are in home_master_bedroom 23:00-01:00 by their rows and the trigger",
+   "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "9ff3393e0734e1e8",
+    "text": "a318a29038d58b5b",
     "traits": "44136fa355b3678a",
     "facts": "9452bbef8a645d19",
     "facts2": "9452bbef8a645d19",
-    "all": "4ec41e5bdd3c080e"
+    "all": "6be38c302b01af17"
    },
    "row_hash": "c1c0e2ac2588a579",
-   "carried": true,
-   "pass": 8
+   "carried": false,
+   "pass": 19
   },
   {
    "row": "B10",
@@ -1118,20 +1119,20 @@
    "row": "B8",
    "screen": "walk_parents.away",
    "verdict": "PASS",
-   "line": "You back down the hall on your toes. The tapping follows you all the way to your door. / Their door's never quite shut. You know that now.",
-   "why": "no number disagrees with PLAN (rent Sunday, Friday, number nine); the only garments named are the other people's, not hers",
-   "cause": "",
+   "line": "You back down the hall on your toes.",
+   "why": "no number and no garment of hers",
+   "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "9ff3393e0734e1e8",
+    "text": "a318a29038d58b5b",
     "traits": "44136fa355b3678a",
     "facts": "9452bbef8a645d19",
     "facts2": "9452bbef8a645d19",
-    "all": "4ec41e5bdd3c080e"
+    "all": "6be38c302b01af17"
    },
    "row_hash": "80d415cf08e0ebfe",
-   "carried": true,
-   "pass": 8
+   "carried": false,
+   "pass": 19
   },
   {
    "row": "B8",
@@ -1453,7 +1454,7 @@
    "note": true,
    "screen_hash": "2a93cbd1808cfc0d",
    "row_hash": "655e8e2b731598c9",
-   "carried": false,
+   "carried": true,
    "pass": 17
   },
   {
@@ -3020,7 +3021,7 @@
    "screen": "walk_mark_phone.moment",
    "verdict": "N/A",
    "line": "",
-   "why": "a walk-in moment, not a menu's Talk screen; C2198 is judged only on the screen a person's menu's Talk opens",
+   "why": "a walk-in, not a menu's Talk screen",
    "cause": null,
    "note": false,
    "screen_hash": {
@@ -3030,16 +3031,16 @@
     "facts2": "371b14470ce23cce",
     "all": "8840d8c240b6ef1f"
    },
-   "row_hash": "27e6b45f50edd3ac",
+   "row_hash": "73dfe095a72154a3",
    "carried": true,
-   "pass": 12
+   "pass": 18
   },
   {
    "row": "C2198",
    "screen": "walk_mom_bills.moment",
    "verdict": "N/A",
    "line": "",
-   "why": "a walk-in moment, not a menu's Talk screen; C2198 is judged only on the screen a person's menu's Talk opens",
+   "why": "a walk-in, not a menu's Talk screen",
    "cause": null,
    "note": false,
    "screen_hash": {
@@ -3049,28 +3050,28 @@
     "facts2": "34a8649ad7102788",
     "all": "128e6f1356329d45"
    },
-   "row_hash": "27e6b45f50edd3ac",
+   "row_hash": "73dfe095a72154a3",
    "carried": true,
-   "pass": 12
+   "pass": 18
   },
   {
    "row": "C2198",
    "screen": "walk_ryan_phone.moment",
    "verdict": "N/A",
    "line": "",
-   "why": "a walk-in moment, not a menu's Talk screen; C2198 is judged only on the screen a person's menu's Talk opens",
+   "why": "a walk-in, not a menu's Talk screen",
    "cause": null,
    "note": false,
    "screen_hash": {
     "text": "bc2dfd613888c1cc",
     "traits": "74c4f68e6476ecee",
-    "facts": "24c4b946d90ccbb4",
+    "facts": "3fcc8bcb262e57a0",
     "facts2": "829298a706f02a41",
-    "all": "a012f1eb60a521c0"
+    "all": "c03d982b34509559"
    },
-   "row_hash": "27e6b45f50edd3ac",
+   "row_hash": "73dfe095a72154a3",
    "carried": true,
-   "pass": 12
+   "pass": 18
   },
   {
    "row": "C2200",
@@ -3082,7 +3083,7 @@
    "note": false,
    "screen_hash": "2a93cbd1808cfc0d",
    "row_hash": "117a60e53de1e8a4",
-   "carried": false,
+   "carried": true,
    "pass": 17
   },
   {
@@ -3095,8 +3096,40 @@
    "note": false,
    "screen_hash": "2a93cbd1808cfc0d",
    "row_hash": "d119dfe665f76359",
-   "carried": false,
+   "carried": true,
    "pass": 17
+  },
+  {
+   "row": "C2202",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "You'll pass his door again tomorrow night.",
+   "why": "the other walk-ins' next-time lines are true on a repeat (his row puts him there; the bills stay on the table)",
+   "cause": null,
+   "note": false,
+   "screen_hash": "2a93cbd1808cfc0d",
+   "row_hash": "6e90fed7eae62131",
+   "carried": true,
+   "pass": 18
+  },
+  {
+   "row": "C2202",
+   "screen": "walk_parents.away",
+   "verdict": "PASS",
+   "line": "Their door's never quite shut. / [is_false saw_mom_and_mark] You know that now.",
+   "why": "the discovery sits in a group on saw_mom_and_mark is_false, set by both exits; nothing ticks it off (it is only declared at 7_final_game.toml:1380, not in the daily unset list); NOTES.md:365 records Same meaning",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "a318a29038d58b5b",
+    "traits": "44136fa355b3678a",
+    "facts": "9452bbef8a645d19",
+    "facts2": "9452bbef8a645d19",
+    "all": "6be38c302b01af17"
+   },
+   "row_hash": "6e90fed7eae62131",
+   "carried": false,
+   "pass": 19
   },
   {
    "row": "C286",
@@ -3637,20 +3670,20 @@
    "row": "C460",
    "screen": "walk_parents.away",
    "verdict": "PASS",
-   "line": "You back down the hall on your toes. The tapping follows you all the way to your door. / Their door's never quite shut. You know that now.",
-   "why": "Laura and Mark 'in bed' at home_master_bedroom 23:00-01:00 every day by their rows; trigger gates npc_at_location on both, Mon-Fri; true at first and last minute of the window and on a second visit",
-   "cause": "",
+   "line": "Their door's never quite shut. / [is_false saw_mom_and_mark] You know that now.",
+   "why": "true on every visit (see B10)",
+   "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "9ff3393e0734e1e8",
+    "text": "a318a29038d58b5b",
     "traits": "44136fa355b3678a",
     "facts": "9452bbef8a645d19",
     "facts2": "9452bbef8a645d19",
-    "all": "4ec41e5bdd3c080e"
+    "all": "6be38c302b01af17"
    },
    "row_hash": "67e48e60d5053a2e",
-   "carried": true,
-   "pass": 8
+   "carried": false,
+   "pass": 19
   },
   {
    "row": "C460",
@@ -3989,20 +4022,20 @@
    "row": "C461",
    "screen": "walk_parents.away",
    "verdict": "PASS",
-   "line": "You back down the hall on your toes. The tapping follows you all the way to your door. / Their door's never quite shut. You know that now.",
-   "why": "texture and her reaction only; nothing that can clash with rows, clock or flags",
-   "cause": "",
+   "line": "Their door's never quite shut. / [is_false saw_mom_and_mark] You know that now.",
+   "why": "texture and her reaction only",
+   "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "9ff3393e0734e1e8",
+    "text": "a318a29038d58b5b",
     "traits": "44136fa355b3678a",
     "facts": "9452bbef8a645d19",
     "facts2": "9452bbef8a645d19",
-    "all": "4ec41e5bdd3c080e"
+    "all": "6be38c302b01af17"
    },
    "row_hash": "310706ee076318f2",
-   "carried": true,
-   "pass": 8
+   "carried": false,
+   "pass": 19
   },
   {
    "row": "C461",
@@ -5150,20 +5183,20 @@
    "row": "C927",
    "screen": "walk_parents.away",
    "verdict": "PASS",
-   "line": "You back down the hall on your toes. The tapping follows you all the way to your door. / Their door's never quite shut. You know that now.",
-   "why": "node hops are inside the scene; Done costs time_progression_minutes = 5, no bare exit",
+   "line": "Done",
+   "why": "Done carries 5 minutes",
    "cause": null,
    "note": true,
    "screen_hash": {
-    "text": "9ff3393e0734e1e8",
+    "text": "a318a29038d58b5b",
     "traits": "44136fa355b3678a",
     "facts": "9452bbef8a645d19",
     "facts2": "9452bbef8a645d19",
-    "all": "4ec41e5bdd3c080e"
+    "all": "6be38c302b01af17"
    },
    "row_hash": "4e86d143688ba8e5",
-   "carried": true,
-   "pass": 8
+   "carried": false,
+   "pass": 19
   },
   {
    "row": "C927",
@@ -5482,20 +5515,20 @@
    "row": "C931",
    "screen": "walk_parents.away",
    "verdict": "PASS",
-   "line": "You back down the hall on your toes. The tapping follows you all the way to your door. / Their door's never quite shut. You know that now.",
-   "why": "window read end-exclusive and wrapping as the rows do (23:00-01:00 on the weekday of the current day, like the schedule rows)",
+   "line": "",
+   "why": "window 23:00-01:00 read end-exclusive and wrapping, as the rows",
    "cause": null,
    "note": true,
    "screen_hash": {
-    "text": "9ff3393e0734e1e8",
+    "text": "a318a29038d58b5b",
     "traits": "44136fa355b3678a",
     "facts": "9452bbef8a645d19",
     "facts2": "9452bbef8a645d19",
-    "all": "4ec41e5bdd3c080e"
+    "all": "6be38c302b01af17"
    },
    "row_hash": "1aadffd96e76381c",
-   "carried": true,
-   "pass": 8
+   "carried": false,
+   "pass": 19
   },
   {
    "row": "C931",
@@ -5811,20 +5844,20 @@
    "row": "L106",
    "screen": "walk_parents.away",
    "verdict": "PASS",
-   "line": "You back down the hall on your toes. The tapping follows you all the way to your door. / Their door's never quite shut. You know that now.",
-   "why": "Laura and Mark 'in bed' at home_master_bedroom 23:00-01:00 every day by their rows; trigger gates npc_at_location on both, Mon-Fri; true at first and last minute of the window and on a second visit",
-   "cause": "",
+   "line": "The tapping follows you all the way to your door.",
+   "why": "Laura and Mark in bed at home_master_bedroom 23:00-01:00 every day; the trigger requires both present",
+   "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "9ff3393e0734e1e8",
+    "text": "a318a29038d58b5b",
     "traits": "44136fa355b3678a",
     "facts": "9452bbef8a645d19",
     "facts2": "9452bbef8a645d19",
-    "all": "4ec41e5bdd3c080e"
+    "all": "6be38c302b01af17"
    },
    "row_hash": "13a714429d15f3b2",
-   "carried": true,
-   "pass": 8
+   "carried": false,
+   "pass": 19
   },
   {
    "row": "L106",
@@ -6203,20 +6236,20 @@
    "row": "L167",
    "screen": "walk_parents.away",
    "verdict": "PASS",
-   "line": "You back down the hall on your toes. The tapping follows you all the way to your door. / Their door's never quite shut. You know that now.",
-   "why": "no activity row on this screen; as a random walk-in it stays hidden when shut (C916)",
-   "cause": "",
+   "line": "",
+   "why": "no activity row on this screen; a random walk-in, hidden when shut",
+   "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "9ff3393e0734e1e8",
+    "text": "a318a29038d58b5b",
     "traits": "44136fa355b3678a",
     "facts": "9452bbef8a645d19",
     "facts2": "9452bbef8a645d19",
-    "all": "4ec41e5bdd3c080e"
+    "all": "6be38c302b01af17"
    },
    "row_hash": "e64ce2672d85d2d8",
-   "carried": true,
-   "pass": 8
+   "carried": false,
+   "pass": 19
   },
   {
    "row": "L167",
@@ -6478,8 +6511,8 @@
  ],
  "causes": [],
  "pending": [],
- "asked": 3,
- "answered": 3,
+ "asked": 9,
+ "answered": 9,
  "pass_items": [],
  "unowed": []
 }

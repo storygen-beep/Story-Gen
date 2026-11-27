@@ -1,6 +1,6 @@
 {
  "piece": "P68",
- "pass": 3,
+ "pass": 4,
  "screens": {
   "*": "4f53cda18c2baa0c"
  },
@@ -52,7 +52,7 @@
   "C2175": "72e884ab3b53f126",
   "C1340": "a335a4d228798817",
   "C2197": "a650718d44343cef",
-  "C2198": "be119a385da08978",
+  "C2198": "4b15434d4248d5f0",
   "people#1": "3ca322fe98f5dab6",
   "people#2": "77207820edd1c3a4",
   "people#3": "7c507f6ccfbc81b0",
@@ -105,6 +105,7 @@
   "C450": "3eb18b4cefbe49d3",
   "C422": "8933f85010afbef7",
   "C460": "beb5a109bde77305",
+  "C2202": "d5592f287f5f641a",
   "C461": "153b0804e686abae",
   "L163": "00a617ab9b4e9cd4",
   "voice#1": "b8e8afcb32208b40",
@@ -421,13 +422,13 @@
    "screen": "*",
    "verdict": "N/A",
    "line": "",
-   "why": "no Talk screen among P68's changes (talk_vance is P58's, unchanged)",
+   "why": "no Talk screen among P68's changes (talk_vance is P58's, unchanged by P68)",
    "cause": null,
    "note": false,
    "screen_hash": "4f53cda18c2baa0c",
-   "row_hash": "be119a385da08978",
-   "carried": true,
-   "pass": 1
+   "row_hash": "4b15434d4248d5f0",
+   "carried": false,
+   "pass": 4
   },
   {
    "row": "C2201",
@@ -439,8 +440,21 @@
    "note": false,
    "screen_hash": "4f53cda18c2baa0c",
    "row_hash": "4745761f016db481",
-   "carried": false,
+   "carried": true,
    "pass": 3
+  },
+  {
+   "row": "C2202",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "Evening, little lady. Vance. I own your house.",
+   "why": "the meeting lines sit in groups on met_vance is_false, and street_meet_vance waits on met_vance is_false, so each plays once",
+   "cause": null,
+   "note": false,
+   "screen_hash": "4f53cda18c2baa0c",
+   "row_hash": "d5592f287f5f641a",
+   "carried": false,
+   "pass": 4
   },
   {
    "row": "C422",
@@ -1323,7 +1337,7 @@
    "note": false,
    "screen_hash": "4f53cda18c2baa0c",
    "row_hash": "378b2df4c8bf116d",
-   "carried": false,
+   "carried": true,
    "pass": 3
   },
   {
@@ -1414,7 +1428,7 @@
    "note": false,
    "screen_hash": "4f53cda18c2baa0c",
    "row_hash": "58dab0dc035240bd",
-   "carried": false,
+   "carried": true,
    "pass": 3
   },
   {
@@ -1550,8 +1564,8 @@
  ],
  "causes": [],
  "pending": [],
- "asked": 3,
- "answered": 3,
+ "asked": 2,
+ "answered": 2,
  "pass_items": [],
  "unowed": []
 }
