@@ -348,3 +348,45 @@ def test_a_rescale_without_los_words_or_date_is_refused(tmp_path):
         (tmp_path / "NOTES.md").write_text(line)
         status, rows = scenes.check_saves(tmp_path, now, baseline=clean(), ref="x")
         assert status == RED and "is refused" in rows[0]
+
+
+# ── repeats (C2202) ──
+
+def repeat_game(*blocks, trigger_items=(), sets=()):
+    g = clean()
+    c = g["canvases"][0]
+    c["trigger"]["conditions"]["items"] += list(trigger_items)
+    c["nodes"] = [node("a", para("Mom is at the stove."), *blocks)]
+    if sets:
+        c["nodes"][0]["exit_block"]["choices"] = [{"text": "Go", "targetType": "location", "locationId": "kitchen",
+                                                   "flagEffects": [{"flag": f, "op": "set"} for f in sets]}]
+    return g
+
+
+def test_repeats_clean_is_green():
+    assert scenes.check_repeats(clean()) == (GREEN, [])
+
+
+@pytest.mark.parametrize("line", ["Morning, new girl.", "Say your name. Louder.", "Next time I'll show you.",
+                                  "Next rehearsal, you're on the stage."])
+def test_planted_once_only_line_on_a_repeatable_is_red(line):
+    assert scenes.check_repeats(repeat_game(say(line)))[0] == RED
+
+
+def test_the_same_line_on_a_flags_not_yet_side_is_green():
+    held = {"version": "1.0", "items": [{"type": "flag", "subject": "player", "flag_key": "shown", "operator": "is_false"}]}
+    assert scenes.check_repeats(repeat_game(group(say("Next time I'll show you."), **held))) == (GREEN, [])
+
+
+def test_a_repeatable_that_sets_the_flag_its_trigger_waits_on_plays_once():
+    wait = {"type": "flag", "subject": "player", "flag_key": "first_done", "operator": "is_false"}
+    g = repeat_game(say("So you're the new girl."), trigger_items=[wait], sets=["first_done"])
+    assert scenes.check_repeats(g) == (GREEN, [])
+
+
+def test_her_own_line_and_a_one_time_scene_are_not_judged():
+    g = repeat_game({"type": "dialog", "content": "Next time I'll be ready.", "props": {"speaker": "player"}})
+    assert scenes.check_repeats(g) == (GREEN, [])
+    g = repeat_game(say("Nice to meet you."))
+    g["canvases"][0]["trigger"]["is_repeatable"] = False
+    assert scenes.check_repeats(g) == (GREEN, [])

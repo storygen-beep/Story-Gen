@@ -17,6 +17,7 @@ On a card with a `Does:` block (every card from 2026-11-24 on), the rows that ap
 | C450 | end a scene on a hook that points at what happens next | P13 ended on "go to breakfast" | a scene's last screen | reader |
 | C422 | labels, room names and cards say plainly what clicking does | — · kept blocking: the voice, LO's (2026-11-22) | always | reader |
 | C460 | the truth rule: every claim is true on every playthrough that can reach the screen | P13 reader pass 11: Mom's "promise me it won't be like high school", on the screen all three start choices leave from | always | reader + presence, sheet, creation |
+| C2202 | a scene that repeats says nothing true only once: no first-meeting words ("new face", "say your name") and no "next time I'll" promise, unless a group holds the line on a flag's is_false side | first_term_lean: Mr. Cross's daily Talk said "New face… Say your name" and "Next rehearsal, you're on the stage" every day; the café shift said "Next time I'll let you near the machine" every shift (LO, typed in main-lean 2026-11-27) | a repeatable | script + repeats |
 | C461 | what's allowed under it: texture that can't clash, her opinions, dialogue that fits the cast entry | — · kept blocking: the truth rule | always | reader |
 | L163 | a rule removed needs the same proof as a rule added, measured the way the player sees it | a quotes-only count once deleted a correct dialogue rule | a rule is changed | reader |
 
@@ -70,8 +71,9 @@ Ported from `.claude/skills/author-game-v2/references/register.md:89-156`, with 
 3. **A big moment is a one-time step, not a repeatable** (C146). A repeatable plays every visit, so it can't carry a reveal.
 4. **A consequence on a button is a real flag or number,** or it goes into the plan first.
 5. **Prose names her clothes only where a clothing condition, an earlier equip, or the beat that equips her backs it** (C1158; `craft/clothes.md` rule 4).
+6. **A scene that repeats says nothing that is true only once** (C2202). First-meeting words belong to the meeting, which plays once: "new face", "new girl", "say your name", "nice to meet you". A promise of what happens next time ("Next time I'll show you", "Next rehearsal, you're on the stage") is renewed on every visit and broken on every visit after, unless the game builds it: then it sits in a group on the payoff flag's `is_false` side, so it stops once it comes true. A nickname that means new ("rookie", "new girl") is a first-week word: hold it on a count or a flag, or let it go. *Measured in the field* (2026-11-27, `~/Documents/Great_Games_Study_20260926/cot_design_study_20261125/TALK_FIRST_AND_REPEAT_STUDY_20261127.md`): of five pass-list games, the two whose first talk plays once and then moves on (Shady Deals, step 0 at `shady-deals.txt`, line 11387; New Lust, `AshleyPresentation.txt`, line 31) never repeat a first meeting; one without it repeats "lucked out in the roommate situation" every chat (`in-her-own-hands.txt`, line 5724). A repeat makes a promise only when a timer keeps it: Shady Deals prints the real wait in the line (`shady-deals.txt`, line 8425). CoT's daily Chat makes none (`InPersonDialogueHobbies.txt`, lines 1-22).
 
-Who judges each rule: 1 is the reader's, helped by `presence` and `sheet` (who is where, the clock, the place); 2 to 5 are the reader's, and 5 is helped by `sheet` (what she wears). Rules 1, 2, 4 and 5 apply always (`when`); rule 3 applies on a repeatable.
+Who judges each rule: 1 is the reader's, helped by `presence` and `sheet` (who is where, the clock, the place); 2 to 5 are the reader's, and 5 is helped by `sheet` (what she wears); 6 is `repeats` for a person's spoken words, and the reader's for narration and for a promise the pattern misses ("Wednesday at eleven, I'll call on you first"). Rules 1, 2, 4 and 5 apply always (`when`); rules 3 and 6 apply on a repeatable.
 
 **A promise about the future must be built.** A line that names a future event ("next month he decides") is true only if the game builds it, or the plan has the step that reaches it. Otherwise cut the line, or drop the date.
 
@@ -88,6 +90,10 @@ Who judges each rule: 1 is the reader's, helped by `presence` and `sheet` (who i
 **One line, wrong and right.** On a repeatable scene:
 - Wrong: "Late again. Third time this week." True on the third visit, a lie on the first.
 - Right: the same line inside a group on `late_count gte 3`, with "You're late. Apron's on the hook." as the fallback.
+
+And for rule 6, on a person's daily talk:
+- Wrong: "New face. Say your name. Next rehearsal, you're on the stage." A first meeting and a promise, every day.
+- Right: "Sit, watch, learn something. Drama's Tuesday at eleven." True on day 2 and day 40, and the time is his real class.
 
 ## Worked example
 

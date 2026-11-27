@@ -26,7 +26,7 @@ Rule 5 runs on every lean game, with or without the switch (LO, typed in main-le
   5. everyone she has met has a menu (C2197): a person with schedule rows, met by a `met_<x>` flag some canvas sets
      or by a flag their `[[quest_cards]]` `when` waits on (a friend met through someone else), has a repeatable, manual canvas with `npc` set to them (their face), or carries `no_menu = "<why>"`. Each
      menu's Talk sets a `_today` flag that `[engine.daily_tick]` clears, and all of one person's menus share it,
-     so Talk is once a day across places (C2198). The steps and the hooks are the reader's.
+     so Talk is once a day across places (C2198). The talk's words are the reader's and `repeats`' (C2202).
   6. nobody's schedule row puts them on a place with `kind = "thoroughfare"`, unless the row says why it is there on
      purpose with `on_route = "<why>"` (craft/places.md rule 7, C738; LO, typed in main-lean 2026-11-27: "yes", after
      Vance's porch rows sat on her street, then "your picks").
