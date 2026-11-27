@@ -9107,7 +9107,16 @@ targetType = "node"
 nodeId = "look2"
 time_progression_minutes = 0
 flagEffects = [{ flag = "came_to_her_today", op = "set" }, { flag = "ryan_looked", op = "set" }, { flag = "ryan_back_seen", op = "set" }]
-conditions = { version = "1.0", logic = "AND", items = [{ type = "flag", subject = "player", flag_key = "ryan_back_seen", operator = "is_true" }] }
+conditions = { version = "1.0", logic = "AND", items = [{ type = "flag", subject = "player", flag_key = "ryan_back_seen", operator = "is_true" }, { type = "flag", subject = "player", flag_key = "ryan_looked", operator = "is_false" }] }
+
+# P79 — after her yes, Freeze has its own screen (the flag is set on click, so the split is here, not in look2).
+[[canvases.nodes.exit_block.choices]]
+text = "Freeze"
+targetType = "node"
+nodeId = "look3"
+time_progression_minutes = 0
+flagEffects = [{ flag = "came_to_her_today", op = "set" }, { flag = "ryan_looked", op = "set" }, { flag = "ryan_back_seen", op = "set" }]
+conditions = { version = "1.0", logic = "AND", items = [{ type = "flag", subject = "player", flag_key = "ryan_looked", operator = "is_true" }] }
 
 [[canvases.nodes]]
 id = "take"
@@ -9163,7 +9172,27 @@ targetType = "location"
 locationId = "home_her_room"
 time_progression_minutes = 5
 
+# P79 — after her yes, Freeze opens this screen (the split is on the moment's choices).
+[[canvases.nodes]]
+id = "look3"
+name = "A knock, late"
+blocks = [
+  { type = "paragraph", content = "You don't move. You can't. His eyes don't leave your chest." },
+  { type = "dialog", content = "Night. Sorry. Night. Sleep well.", props = { speaker = "npc", npcId = "npc_ryan" } },
+  { type = "paragraph", content = "His door clicks shut next door. In the morning it'll be the two of you and one bathroom again." },
+]
+
+[canvases.nodes.exit_block]
+type = "choices"
+
+[[canvases.nodes.exit_block.choices]]
+text = "Done"
+targetType = "location"
+locationId = "home_her_room"
+time_progression_minutes = 5
+
 # P49 · Mom, everyday; rests three days (LO 2026-11-26).
+
 [[canvases]]
 id = "mom_taste"
 name = "Mom at the stove"
