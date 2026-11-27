@@ -332,3 +332,12 @@ def test_file_with_no_marked_beat_is_incomplete(tmp_path):
     f = tmp_path / "plain.md"
     f.write_text(WATCH + "\n")
     assert check.main(["--beat", str(f)]) == 2
+
+
+def test_an_id_defined_twice_is_red_and_one_copy_is_green():
+    import check as chk
+    one = {"id": "talk_x", "nodes": []}
+    assert chk.duplicate_ids({"canvases": [one, {"id": "talk_y"}]}) == []
+    rows = chk.duplicate_ids({"canvases": [one, dict(one)], "npcs": [{"id": "npc_a"}, {"id": "npc_a"}]})
+    assert any("canvas id `talk_x` is defined 2 times" in r for r in rows)
+    assert any("person id `npc_a`" in r for r in rows)

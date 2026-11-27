@@ -3,7 +3,8 @@
     python3 check.py games/<slug> [--release] [--against <git ref>]
 
 Checks:
-  merge      scripts/merge_toml_phases.py runs and the merged TOML parses (--no-dev under --release)
+  merge      scripts/merge_toml_phases.py runs and the merged TOML parses (--no-dev under --release); no canvas, place,
+             person or garment id is defined twice
   reach      reach.py finds no scene, media spot or portrait that can never show
   approvals  every STATE.md piece with a built date has a current approval (approve.status == approved)
   builds     every canvas, place, person and sidebar item in the merged TOML is listed in the Builds: line
@@ -103,6 +104,20 @@ def merge(game_dir, release=False):
         last = (p.stderr.strip() or p.stdout.strip() or f"exit {p.returncode}").splitlines()[-1]
         return RED, [f"merge failed: {last}"]
     return GREEN, []
+
+
+def duplicate_ids(game):
+    """Ids used twice in the merged TOML. Every canvas, place, person and clothing id is a key the engine looks up
+    once (setup.getCanvasById builds one map by id, so a later copy replaces an earlier one, v2.py:4160-4171); a second copy is dead text or silently wins, and
+    neither the merge script nor the build says so. first_term_lean P75, 2026-11-27: three party talks pasted twice."""
+    rows = []
+    for key, label in (("canvases", "canvas"), ("locations", "place"), ("npcs", "person"), ("clothing", "garment")):
+        seen = {}
+        for x in (game or {}).get(key) or []:
+            if isinstance(x, dict) and x.get("id"):
+                seen[x["id"]] = seen.get(x["id"], 0) + 1
+        rows += [f"{label} id `{i}` is defined {n} times; keep one" for i, n in sorted(seen.items()) if n > 1]
+    return rows
 
 
 def load_merged(game_dir):
@@ -458,6 +473,9 @@ def check_sheet(game_dir, game):
 def run_all(game_dir, release=False, against=None):
     results = {"merge": merge(game_dir, release)}
     game = load_merged(game_dir) if results["merge"][0] == GREEN else None
+    dupes = duplicate_ids(game)
+    if dupes:
+        results["merge"] = (RED, dupes)
     results["reach"] = check_reach(game)
     results["approvals"] = check_approvals(game_dir)
     results["builds"] = check_builds(game_dir, game)
