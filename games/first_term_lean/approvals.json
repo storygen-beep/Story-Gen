@@ -3876,6 +3876,30 @@
       "sha256": "f733a72479d23d6803383659ec77bea57124911ea20e477d6f4c7690fe4478fb",
       "words": "ENI for LO (delegated 2026-11-24): P78 item 6, dead groups made live, each group its whole state, words unchanged (C2206, C625); LO, typed in main-lean 2026-11-27: \"yes go ahead\"",
       "date": "2026-11-27"
+    },
+    {
+      "card": "P79",
+      "sha256": "3e52e80ad898489e308b18651c548ec9377742cf23a91c9e71039a6fa3ce8fe9",
+      "words": "ENI for LO (delegated 2026-11-24): P79, Ryan's after-yes Freeze opens its own screen, look3 (L71, C2202, C2206); LO, typed in main-lean 2026-11-27: \"Yes go ahead\"",
+      "date": "2026-11-27"
+    },
+    {
+      "card": "P49",
+      "sha256": "9258ad0c427051e94c14581d208f834d2f1517b763da4dbd4eed6745b8e98aff",
+      "words": "ENI for LO (delegated 2026-11-24): P79, Ryan's after-yes Freeze opens its own screen, look3 (L71, C2202, C2206); LO, typed in main-lean 2026-11-27: \"Yes go ahead\"",
+      "date": "2026-11-27"
+    },
+    {
+      "card": "P79",
+      "sha256": "7b543b99ad7966eb56b0af36ce6bb722b5e4010e6bc567b433c90fc4647b44de",
+      "words": "ENI for LO (delegated 2026-11-24): P79 look3 trimmed for the talk ratio (C596, voice rule 5); LO, typed in main-lean 2026-11-27: \"Yes go ahead\"",
+      "date": "2026-11-27"
+    },
+    {
+      "card": "P49",
+      "sha256": "70323d5052227e79656de18e41457c40074799aaabbbe2202e46ccc4f06c8ada",
+      "words": "ENI for LO (delegated 2026-11-24): P79 look3 trimmed for the talk ratio (C596, voice rule 5); LO, typed in main-lean 2026-11-27: \"Yes go ahead\"",
+      "date": "2026-11-27"
     }
   ]
 }
