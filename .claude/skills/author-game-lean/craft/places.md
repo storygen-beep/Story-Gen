@@ -27,6 +27,7 @@ On a card with a `Does:` block (every card from 2026-11-24 on), the rows that ap
 | C808 | root the world outdoors, in more than one zone | — | the plan | note |
 | C811 | the map shapes: nested zones by default, a street or quad as each zone's hub | — | the plan | note |
 | C770 | the field's room screen: median 82 words a visit | — | a place is entered | note + length |
+| C2203 | an event (a party, a night out) is a place she stays at during its hours: things to do that spend time, moments that can happen when she comes back from one, a way home at any time, and an end; never one scene that sends her home | first_term_lean: Zoe's party was one screen whose only button was "Not tonight", then home (LO, typed in main-lean 2026-11-27: "zoe's party needs to be a bit rich") | a place is entered | reader |
 | C771 | a first-visit screen is rare (DoL only); never a place's only introduction | — | a place is entered | note |
 | C707 | world fill: one anchor holds about 30% of place prose | — | the plan | note |
 
@@ -59,6 +60,7 @@ Each rule is marked **measured** or **LO's choice**.
 8. **Short screens,** around CoT's median of 65 words. *Measured.*
 9. **Two rules from DoL only, not CoT:** a first-visit screen only for something true once (C771), and one anchor place that holds about 30% of the place prose (C707, C739). *Measured in DoL;* CoT is not their source.
 10. **A place hidden until a flag is pointed at** (L170). A place with `hidden_until = { flag = … }` stays off the menu until the flag is set, so the step that sets it is pointed at on the Quests page: the flag itself, or a flag set on the same choice (`met_zoe` beside `zoe_place_known`), is a `when` on a hint step. `check.py`'s `pages` check is red otherwise. *LO's choice* (LO, typed in main-lean 2026-11-25: "Go ahead"). A place cut for a whole release is written `hidden_until = { flag = "<x>_open" }` with the flag declared in `flag_keys` and set by nothing, plus a comment naming the release that sets it; the check passes it, since there is no step to point at (LO, 2026-11-27: "yes to all 4", the House Next Door hidden in release 1).
+11. **An event is a place she stays at** (C2203). A party, a night out, anything with hours of its own: during those hours the place *is* the event. Its screen shows the crowd and who is there (named only once met, otherwise described). Its menu holds the event's own needs and systems, each spending time: mingle, get a drink, dance, the host's dare. Coming back from any of them can bring one of the event's moments: random canvases at the place, each once a night (`max_triggers_per_day = 1`), off the one-a-day brake. A way home is always on the menu, and the event ends at its last hour with a line that sends her home. *Engine:* every render of a place rolls its random canvases again (`setup.getStoryCanvasRedirect` falls through to `setup.checkRandomEncounters`, v2.py:6599-6612), except a return from a sidebar page, so returning from an action is a new roll; `entry_only_from` would stop that, so event moments leave it out. *Measured:* CoT's house party is the house's own menu while `is_greek_party_time()` holds: "Chat with people" (25 minutes, into `GreekPartyMingle.txt`), "Grab a drink" and "Grab a snack" (2 minutes, back to the room), and "Join in" for the night's activity (`GreekHouseWidgets.txt`, lines 449-491); its party events are a table tagged "greek party", 40 rows in `_cot_js.txt` (the drink event at line 61290). *LO's choice* (LO, typed in main-lean 2026-11-27: "zoe's party needs to be a bit rich", then "a yes", and "no dresss code for party its fine").
 
 The picture of a place comes from `craft/media.md` (one picture of her, tier 0), measured across the top games as 41% of room screens (C1249). CoT is not its source: its location screens carry none.
 
@@ -76,6 +78,8 @@ Buttons: Eat something · Do the dishes · Leave the kitchen. (Eating still take
 After three meals, Eat something says: "You're not hungry right now."
 
 ## Not this
+
+- An event that is one scene and a button home: first_term_lean's Zoe's party, "Not tonight", then her room. The party is the place, for its hours (rule 11; C2203).
 
 - A description that notices what she wears: "The guys at the bus stop go quiet as you pass in your leggings." That is a scene with her choice (C2200, C2201; first_term_lean, LO 2026-11-27).
 
