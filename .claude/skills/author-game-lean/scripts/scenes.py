@@ -603,6 +603,24 @@ def unset_anywhere(game):
     return out
 
 
+def gates(conditions):
+    """The trigger's hard gates: items every firing needs, so the top level of an AND (nested ANDs included), never
+    an item inside an OR, which another branch can stand in for (marco_hips: `marco_came` is_false OR 3 days since)."""
+    out = []
+
+    def visit(d):
+        if not isinstance(d, dict):
+            return
+        if d.get("type") and d.get("type") != "group":
+            out.append(d)
+            return
+        if str(d.get("logic") or "AND").upper() == "AND":
+            for v in d.get("items") or []:
+                visit(v)
+    visit(conditions)
+    return out
+
+
 def before_flag(conds):
     """True when a group's conditions read a flag on its not-yet side (`is_false`): the line shows until something
     happens, so a promise or a first-time word there stops once the flag is set."""
@@ -621,7 +639,7 @@ def check_repeats(game, dev=()):
             continue
         once = own_sets(c) - reset
         if any(i.get("type") == "flag" and i.get("operator") == "is_false" and i.get("flag_key") in once
-               for i in items(trig.get("conditions"))):
+               for i in gates(trig.get("conditions"))):
             continue  # it sets the flag its own trigger waits on: in play it shows once
         for n in c.get("nodes") or []:
             for b, conds in walk(n.get("blocks")):

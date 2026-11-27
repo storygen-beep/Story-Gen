@@ -409,3 +409,11 @@ def test_a_flag_a_tick_unsets_does_not_make_a_scene_play_once():
     assert scenes.check_repeats(g) == (GREEN, [])
     g["engine"] = {"weekly_tick": {"flagEffects": [{"targetType": "player", "flag": "partied", "op": "unset"}]}}
     assert scenes.check_repeats(g)[0] == RED
+
+
+def test_a_flag_inside_an_or_is_not_a_plays_once_gate():
+    either = {"type": "group", "logic": "OR", "items": [
+        {"type": "flag", "subject": "player", "flag_key": "came", "operator": "is_false"},
+        {"type": "days_since_flag", "subject": "player", "flag_key": "came", "operator": "gte", "value": 3}]}
+    g = repeat_game(say("I'll check it next time."), trigger_items=[either], sets=["came"])
+    assert scenes.check_repeats(g)[0] == RED

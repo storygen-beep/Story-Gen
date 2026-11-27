@@ -22,6 +22,8 @@ Checks:
              the last screen, a first meeting, a place entered, one-time or repeatable, the opening) is named
              on that screen's Does: line. Cards without Does: are not judged. A card whose Builds: names the
              Hints page (`story_hints`, `walkthrough:<id>`) names each entry's screen on its Does: (pages.py).
+  media      every scene a card's Does: marks `something sexual shows` has a picture or clip spot in the build,
+             or the card writes `No spot: <canvas> — <why>` (C2204)
   pages      under [ui] quests_layout = "hints": every first meeting a scene sets (met_*), and every flag a
              hidden place waits on, is a `when` on some hint or walkthrough step unless the opening sets it;
              every flag a hint reads is set by some canvas. Under people_page = "cot": every person has
@@ -87,7 +89,7 @@ import walkins  # noqa: E402
 GREEN, RED, INCOMPLETE = "green", "red", "incomplete"
 # Every check a craft row's `judge` may name (SKILL.md, "Rule labels").
 CHECKS = ("merge", "reach", "approvals", "builds", "release", "card", "beat", "sheet", "does",
-          "talk", "length", "presence", "creation", "saves", "speakers", "goals", "repeats", "pages", "people", "walkins")
+          "talk", "length", "presence", "creation", "saves", "speakers", "goals", "repeats", "media", "pages", "people", "walkins")
 GATES = REPO / ".claude" / "skills" / "author-game-v2" / "scripts" / "gates.py"
 BEAT_FLOOR = 3  # C254: an explicit beat has 3+ frozen-list words
 
@@ -423,6 +425,42 @@ def check_does(game_dir, game):
     return (RED, red) if red else (GREEN, [])
 
 
+NO_SPOT = re.compile(r"^\s*No spot:\s*`?([\w.]+)`?\s*[\u2014-]+\s*\S", re.M)
+
+
+def _has_media(blocks):
+    for b in blocks or []:
+        if isinstance(b, dict) and (b.get("type") in ("image", "video") or _has_media(b.get("blocks"))):
+            return True
+    return False
+
+
+def check_media(game_dir, game):
+    """C2204: a scene a card's Does: marks `something sexual shows` has a picture or clip spot somewhere in it (at
+    its payoff, craft/media.md rule 1), unless the card writes `No spot: <canvas> — <why>`. Read from the build, so a
+    spot the card claims but the TOML lacks is still red. first_term_lean, 2026-11-27: 19 sexual scenes had none,
+    each card citing C1265 for a look, a door, or nothing (LO: "the group 2, gifs", "go ahead")."""
+    if game is None:
+        return INCOMPLETE, ["the merged TOML did not parse"]
+    canv = {c.get("id"): c for c in game.get("canvases") or [] if isinstance(c, dict)}
+    red = []
+    for path in sorted((Path(game_dir) / "cards").glob("*.md")):
+        text = path.read_text(encoding="utf-8")
+        does = rules.card_does(text)
+        if not does:
+            continue
+        excused = set(NO_SPOT.findall(text))
+        sexual = sorted({scr.split(".")[0] for scr, ts in does.items() if "something sexual shows" in ts})
+        for cid in sexual:
+            c = canv.get(cid)
+            if c is None or cid in excused:
+                continue
+            if not any(_has_media(n.get("blocks")) for n in c.get("nodes") or []):
+                red.append(f"{path.stem}: `{cid}` shows something sexual and has no picture or clip spot; add one at "
+                           f"its payoff (craft/media.md rule 8, C2204), or write `No spot: {cid} — <why>` on the card")
+    return (RED, red) if red else (GREEN, [])
+
+
 def check_pages(game):
     """The Hints page's pointers and the People dialog's keys (pages.py)."""
     if game is None:
@@ -482,6 +520,7 @@ def run_all(game_dir, release=False, against=None):
     results.update(scenes.run(game_dir, game, dev_canvases(game_dir) or {}, ref=against))
     results["sheet"] = check_sheet(game_dir, game)
     results["does"] = check_does(game_dir, game)
+    results["media"] = check_media(game_dir, game)
     results["pages"] = check_pages(game)
     results["people"] = check_people(game)
     results["walkins"] = check_walkins(game_dir, game)
