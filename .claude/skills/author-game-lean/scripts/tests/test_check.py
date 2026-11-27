@@ -364,3 +364,13 @@ def _media_card(tmp_path, extra=""):
 ])
 def test_a_sexual_scene_needs_a_spot_or_a_written_reason(tmp_path, spot, extra, status):
     assert check.check_media(_media_card(tmp_path, extra), _media_game(spot))[0] == status
+
+
+def test_a_look_the_card_forgot_to_label_is_still_red(tmp_path):
+    (tmp_path / "cards").mkdir()
+    (tmp_path / "cards" / "P01.md").write_text("PIECE P01\nDoes:\n  walk_porch.moment | a walk-in, a place is entered\n")
+    game = {"canvases": [{"id": "walk_porch", "nodes": [{"id": "moment", "blocks": [
+        {"type": "paragraph", "content": "His eyes stay on your legs the whole time you answer."}]}]}]}
+    assert check.check_media(tmp_path, game)[0] == check.RED
+    game["canvases"][0]["nodes"][0]["blocks"][0]["content"] = "He nods at the gutter and goes back inside."
+    assert check.check_media(tmp_path, game)[0] == check.GREEN

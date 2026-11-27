@@ -435,6 +435,24 @@ def _has_media(blocks):
     return False
 
 
+# Words a script can read as "something sexual shows" even when a card forgets the label (C2204): explicit words,
+# a look that lands on her body, a hand that stays on her. A helper for the Does: label, never a replacement.
+SEXUAL_WORDS = re.compile(
+    r"\b(?:cunt|cock|dick|pussy|clit|cums?|cumming|tits|nipples?)\b"
+    r"|\beyes\b[^.!?]{0,40}\b(?:on|to|over|down|at)\s+your\s+(?:legs|body|chest|ass|tits|thighs|mouth)\b"
+    r"|\blooks? you (?:over|up and down)\b|\beyes go (?:all the way )?down\b"
+    r"|\b(?:hand|hands|fingers|thumb)\b[^.!?]{0,40}\byour\s+(?:waist|hips?|ass|thighs?|chest|stomach)\b", re.I)
+
+
+def _text(blocks):
+    out = []
+    for b in blocks or []:
+        if isinstance(b, dict):
+            out.append(str(b.get("content") or ""))
+            out.append(_text(b.get("blocks")))
+    return " ".join(out)
+
+
 def check_media(game_dir, game):
     """C2204: a scene a card's Does: marks `something sexual shows` has a picture or clip spot somewhere in it (at
     its payoff, craft/media.md rule 1), unless the card writes `No spot: <canvas> — <why>`. Read from the build, so a
@@ -450,7 +468,13 @@ def check_media(game_dir, game):
         if not does:
             continue
         excused = set(NO_SPOT.findall(text))
-        sexual = sorted({scr.split(".")[0] for scr, ts in does.items() if "something sexual shows" in ts})
+        sexual = {scr.split(".")[0] for scr, ts in does.items() if "something sexual shows" in ts}
+        # A screen the card forgot to label, read from its own words (vance_gutter's "His eyes stay on your legs").
+        sexual |= {scr.split(".")[0] for scr in does
+                   if scr.split(".")[0] in canv and SEXUAL_WORDS.search(_text(next(
+                       (n.get("blocks") for n in canv[scr.split(".")[0]].get("nodes") or []
+                        if n.get("id") == scr.partition(".")[2]), [])))}
+        sexual = sorted(sexual)
         for cid in sexual:
             c = canv.get(cid)
             if c is None or cid in excused:
