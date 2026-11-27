@@ -3906,6 +3906,78 @@
       "sha256": "33b4c271e5418187936e2f42126ea1023d78d259ac4c3493888275a4eb9e4a2b",
       "words": "LO 2026-11-27: \"yes go ahead\" (Builds line set to engine-only, Areas/Craft lines and the tag wording added after, see the card)",
       "date": "2026-11-27"
+    },
+    {
+      "card": "P81",
+      "sha256": "ab0537e7589d659811cc899f61c19b226ec9be614ad86e157ff0932f33db9b2b",
+      "words": "LO 2026-11-28: \"resolve it\" (after the glow cause and three fixes, option 1 recommended)",
+      "date": "2026-11-28"
+    },
+    {
+      "card": "P82",
+      "sha256": "54f4362ddd78ae314fb706bd75162513aec098f8c6ed250142975812e92ba82a",
+      "words": "ENI for LO (delegated 2026-11-24); LO 2026-11-28: \"1 and 2 both\". Card reviewed against v2.py:25051-25057, 16859, and the schedule rows",
+      "date": "2026-11-28"
+    },
+    {
+      "card": "P83",
+      "sha256": "dece3b2fa244451b8447c3d00b0adc66fc9334cb5e5d305678ec12f7e301456e",
+      "words": "ENI for LO (delegated 2026-11-24); LO 2026-11-28: \"1 and 2 both\". Card reviewed against v2.py:25051-25057, 16859, and the schedule rows",
+      "date": "2026-11-28"
+    },
+    {
+      "card": "P82",
+      "sha256": "fa24ddf557c4cc9996f9685654c69efe363ed7e26c9d51f75c8d2ab33710a2c2",
+      "words": "ENI for LO (delegated 2026-11-24); LO 2026-11-28: \"1 and 2 both\". Changed (P82/P83) notes and Sheet rows reviewed against the applied TOML",
+      "date": "2026-11-28"
+    },
+    {
+      "card": "P27",
+      "sha256": "6ac4ef9856e636f13f4c3bb1f880425be0dc517b0c8e03e5a96dcbbae50c239a",
+      "words": "ENI for LO (delegated 2026-11-24); LO 2026-11-28: \"1 and 2 both\". Changed (P82/P83) notes and Sheet rows reviewed against the applied TOML",
+      "date": "2026-11-28"
+    },
+    {
+      "card": "P37",
+      "sha256": "3d2cb7c9c6c962d1d46de2889ff8e5b4439ea8cc01313934f104dbccd83f6611",
+      "words": "ENI for LO (delegated 2026-11-24); LO 2026-11-28: \"1 and 2 both\". Changed (P82/P83) notes and Sheet rows reviewed against the applied TOML",
+      "date": "2026-11-28"
+    },
+    {
+      "card": "P41",
+      "sha256": "068e9f10be85b72330e0e57a992b303b6eff45756ae4af4fc98569dd0d5b2ef9",
+      "words": "ENI for LO (delegated 2026-11-24); LO 2026-11-28: \"1 and 2 both\". Changed (P82/P83) notes and Sheet rows reviewed against the applied TOML",
+      "date": "2026-11-28"
+    },
+    {
+      "card": "P57",
+      "sha256": "b9778ec20fac88ccd8dd6765f976b58f7260ae18bc717589849b25357ecf7435",
+      "words": "ENI for LO (delegated 2026-11-24); LO 2026-11-28: \"1 and 2 both\". Changed (P82/P83) notes and Sheet rows reviewed against the applied TOML",
+      "date": "2026-11-28"
+    },
+    {
+      "card": "P59",
+      "sha256": "d3b9d24520de83d2002ac9b9654f1768d67154b634a067cc911b7e45cce79789",
+      "words": "ENI for LO (delegated 2026-11-24); LO 2026-11-28: \"1 and 2 both\". Changed (P82/P83) notes and Sheet rows reviewed against the applied TOML",
+      "date": "2026-11-28"
+    },
+    {
+      "card": "P75",
+      "sha256": "d95a408c08b8150f6e1efa1a3ae319c11edd86da8c614b631c441fe1e9969f18",
+      "words": "ENI for LO (delegated 2026-11-24); LO 2026-11-28: \"1 and 2 both\". Changed (P82/P83) notes and Sheet rows reviewed against the applied TOML",
+      "date": "2026-11-28"
+    },
+    {
+      "card": "P82",
+      "sha256": "0b5e62a9495bd31ae15c531194a624d007bf5d4c152f564506ebf460142c9bc7",
+      "words": "ENI for LO (delegated 2026-11-24); LO 2026-11-28: \"1 and 2 both\". party_go_home retired, not removed (C1656), as P53 did",
+      "date": "2026-11-28"
+    },
+    {
+      "card": "P75",
+      "sha256": "27bebb92e39dfcc04de6ff0053940de909c23a57d02874897ac4010ce0c65896",
+      "words": "ENI for LO (delegated 2026-11-24); LO 2026-11-28: \"1 and 2 both\". party_go_home retired, not removed (C1656), as P53 did",
+      "date": "2026-11-28"
     }
   ]
 }

@@ -529,6 +529,53 @@ description_variants = [
   { conditions = { version = "1.0", logic = "AND", items = [{ type = "group", logic = "OR", items = [{ type = "group", logic = "AND", items = [{ type = "weekday", weekdays = [5] }, { type = "time_of_day", start_time = "21:00", end_time = "00:00" }] }, { type = "group", logic = "AND", items = [{ type = "weekday", weekdays = [6] }, { type = "time_of_day", start_time = "00:00", end_time = "01:00" }] }] }] }, text = "Zoe's apartment, two streets off the high street: a sofa that's seen things, clothes on every chair, and a speaker on the windowsill. Tonight it's a party: music through the floor, the sofa buried in coats, bodies wall to wall." },
 ]
 
+# ── P83 · Zoe's apartment gets rooms (LO 2026-11-28: "should we add more rooms in the zoes apartment??", "1 and 2 both").
+# Rooms off a destination, like P54's offices: listed by the living room (entry_from, v2.py:16859-16890), each with
+# "Leave <room>" back (v2.py:25051-25057). Hidden with the flat, so no page names a room early (EN4). No hours: only
+# the living room's door is gated (v2.py:11453). ──
+
+[[locations]]
+id = "near_zoe_kitchen"
+name = "Zoe's Kitchen"
+description = "Zoe's kitchen: a sink full of mugs, takeaway menus on the fridge, and a table nobody eats at. Nobody's in here."
+# P83 — during the party it's the bar: an unnamed crowd at that hour (C2201, C2203).
+description_variants = [
+  { conditions = { version = "1.0", logic = "AND", items = [{ type = "group", logic = "OR", items = [{ type = "group", logic = "AND", items = [{ type = "weekday", weekdays = [5] }, { type = "time_of_day", start_time = "21:00", end_time = "00:00" }] }, { type = "group", logic = "AND", items = [{ type = "weekday", weekdays = [6] }, { type = "time_of_day", start_time = "00:00", end_time = "01:00" }] }] }] }, text = "Zoe's kitchen: a sink full of mugs, takeaway menus on the fridge, and a table nobody eats at. Tonight it's the bar: bottles on every counter and a crowd round the fridge." },
+]
+parent = "near_campus"
+entry_from = "near_zoe_apartment"
+kind = "destination"
+hidden_until = { flag = "zoe_place_known" }
+image = "locations/near_zoe_kitchen_t0.jpg"
+image_search_queries = ["woman of 18 leaning on a messy student kitchen counter, mugs in the sink", "young woman in a small cluttered apartment kitchen"]
+
+[[locations]]
+id = "near_zoe_room"
+name = "Zoe's Room"
+description = "Zoe's room: an unmade double bed, a full-length mirror, and a rail of clothes that's given up."
+# P83 — first match (v2.py:11893-11912): the party's coats, then an empty room says so (places.md rule 2).
+description_variants = [
+  { conditions = { version = "1.0", logic = "AND", items = [{ type = "group", logic = "OR", items = [{ type = "group", logic = "AND", items = [{ type = "weekday", weekdays = [5] }, { type = "time_of_day", start_time = "21:00", end_time = "00:00" }] }, { type = "group", logic = "AND", items = [{ type = "weekday", weekdays = [6] }, { type = "time_of_day", start_time = "00:00", end_time = "01:00" }] }] }] }, text = "Zoe's room: an unmade double bed, a full-length mirror, and a rail of clothes that's given up. Tonight there are coats piled on the bed." },
+  { conditions = { version = "1.0", logic = "AND", items = [{ type = "npc_at_location", npc_id = "npc_zoe", location_id = "near_zoe_room", operator = "is_absent" }] }, text = "Zoe's room: an unmade double bed, a full-length mirror, and a rail of clothes that's given up. Zoe's not in." },
+]
+parent = "near_campus"
+entry_from = "near_zoe_apartment"
+kind = "destination"
+hidden_until = { flag = "zoe_place_known" }
+image = "locations/near_zoe_room_t0.jpg"
+image_search_queries = ["woman of 18 sitting on an unmade double bed in a friend's messy bedroom, clothes everywhere", "young woman by a full-length mirror in a cluttered student bedroom"]
+
+[[locations]]
+id = "near_zoe_bathroom"
+name = "Zoe's Bathroom"
+description = "Zoe's bathroom: a bath with a shower curtain that won't close, and a lock that doesn't work. Nobody's in here."
+parent = "near_campus"
+entry_from = "near_zoe_apartment"
+kind = "destination"
+hidden_until = { flag = "zoe_place_known" }
+image = "locations/near_zoe_bathroom_t0.jpg"
+image_search_queries = ["woman of 18 at the mirror in a small shared apartment bathroom, no phone", "young woman by a bath with a half-open shower curtain, no phone"]
+
 # ── People. Everyone is 18 or over, and the game says so on their card. ──
 
 # P13 — Ryan, step-brother, 22. Want + Warmth (WANT.md §5); release 1 moves neither.
@@ -1587,17 +1634,33 @@ start_time = "13:00"
 end_time = "14:00"
 activity = "at lunch"
 
+# P83 — 18:00–19:00 at her mirror (walk_zoe_outfits), then the living room (walk_zoe_sam needs her there from 19:00).
+[[npcs.schedules]]
+location = "near_zoe_room"
+weekdays = [0, 1, 2, 3, 4, 6]
+start_time = "18:00"
+end_time = "19:00"
+activity = "getting ready"
+
 [[npcs.schedules]]
 location = "near_zoe_apartment"
 weekdays = [0, 1, 2, 3, 4, 6]
-start_time = "18:00"
+start_time = "19:00"
 end_time = "23:00"
 activity = "at home"
+
+# P83 — 18:00–19:00 at her mirror (walk_zoe_outfits), then the living room (walk_zoe_sam needs her there from 19:00).
+[[npcs.schedules]]
+location = "near_zoe_room"
+weekdays = [5]
+start_time = "18:00"
+end_time = "19:00"
+activity = "getting ready"
 
 [[npcs.schedules]]
 location = "near_zoe_apartment"
 weekdays = [5]
-start_time = "18:00"
+start_time = "19:00"
 end_time = "21:00"
 activity = "at home"
 
@@ -1703,14 +1766,14 @@ activity = "at rehearsal"
 
 # P37 — Zoe's Saturday party (PLAN §9d).
 [[npcs.schedules]]
-location = "near_zoe_apartment"
+location = "near_zoe_kitchen"
 weekdays = [5]
 start_time = "21:00"
 end_time = "00:00"
 activity = "at Zoe's party"
 
 [[npcs.schedules]]
-location = "near_zoe_apartment"
+location = "near_zoe_kitchen"
 weekdays = [6]
 start_time = "00:00"
 end_time = "01:00"
@@ -1755,14 +1818,14 @@ activity = "at the mirror"
 
 # P37 — Zoe's Saturday party (PLAN §9d).
 [[npcs.schedules]]
-location = "near_zoe_apartment"
+location = "near_zoe_kitchen"
 weekdays = [5]
 start_time = "21:00"
 end_time = "00:00"
 activity = "at Zoe's party"
 
 [[npcs.schedules]]
-location = "near_zoe_apartment"
+location = "near_zoe_kitchen"
 weekdays = [6]
 start_time = "00:00"
 end_time = "01:00"
@@ -1808,14 +1871,14 @@ activity = "at the mirror"
 # P27 — Sam Reed (PLAN §9d). No meter in release 1.
 # P37 — Zoe's Saturday party (PLAN §9d).
 [[npcs.schedules]]
-location = "near_zoe_apartment"
+location = "near_zoe_kitchen"
 weekdays = [5]
 start_time = "21:00"
 end_time = "00:00"
 activity = "at Zoe's party"
 
 [[npcs.schedules]]
-location = "near_zoe_apartment"
+location = "near_zoe_kitchen"
 weekdays = [6]
 start_time = "00:00"
 end_time = "01:00"

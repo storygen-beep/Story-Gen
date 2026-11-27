@@ -1,27 +1,27 @@
 {
  "piece": "P41",
- "pass": 24,
+ "pass": 25,
  "screens": {
   "walk_zoe_sam.moment": {
-   "text": "c248c279bc7201af",
+   "text": "db73f4e22b7ca4a4",
    "traits": "fa1a0a429fa0ea30",
-   "facts": "8182ce5904bce35b",
-   "facts2": "48fd486abd7e2f3c",
-   "all": "a5c34cfb56c2f171"
+   "facts": "87496d6b62f3e92f",
+   "facts2": "f847c3bfcf338e31",
+   "all": "980507932521afaa"
   },
   "walk_zoe_sam.watch": {
    "text": "ab738efb67514276",
    "traits": "fa1a0a429fa0ea30",
-   "facts": "8182ce5904bce35b",
-   "facts2": "48fd486abd7e2f3c",
-   "all": "5c2a903d10f3fd06"
+   "facts": "87496d6b62f3e92f",
+   "facts2": "f847c3bfcf338e31",
+   "all": "8ed238b7fe8c6955"
   },
   "walk_zoe_sam.out": {
    "text": "e3141d8b045f75c0",
    "traits": "6b1e34b018661933",
-   "facts": "5ccc9ab8b606da87",
-   "facts2": "f9f6cd7a1a561521",
-   "all": "57c1ef8237313358"
+   "facts": "4ae042a05a9e14ff",
+   "facts2": "4d55dbcf69c3d492",
+   "all": "04a5facaf5f1fd64"
   },
   "walk_sam_guitar.moment": {
    "text": "a5c3c00d64bf1a01",
@@ -45,25 +45,25 @@
    "all": "97c75dee640a3734"
   },
   "walk_zoe_outfits.moment": {
-   "text": "962bd5335cde80e6",
+   "text": "425efc7e51575d65",
    "traits": "6b1e34b018661933",
-   "facts": "fe10a3884cd5cdae",
-   "facts2": "fc2568396f51a2d0",
-   "all": "66f22b0abde3b42a"
+   "facts": "06634feae140e938",
+   "facts2": "30fbbccf95ef2f4a",
+   "all": "5242a309407d79c8"
   },
   "walk_zoe_outfits.pick": {
-   "text": "a1d96047e25f00b9",
+   "text": "689019c72b1bc1f1",
    "traits": "6b1e34b018661933",
-   "facts": "fe10a3884cd5cdae",
-   "facts2": "fc2568396f51a2d0",
-   "all": "e953e558de27a4e4"
+   "facts": "06634feae140e938",
+   "facts2": "30fbbccf95ef2f4a",
+   "all": "5d54b9fb75438015"
   },
   "walk_zoe_outfits.wearing": {
-   "text": "a8d34059d7f2848b",
+   "text": "67339d25c34916dd",
    "traits": "6b1e34b018661933",
-   "facts": "fe10a3884cd5cdae",
-   "facts2": "fc2568396f51a2d0",
-   "all": "c83dfff381dae3f6"
+   "facts": "06634feae140e938",
+   "facts2": "30fbbccf95ef2f4a",
+   "all": "b81dd9ec92fee4d9"
   },
   "walk_tom_tips.moment": {
    "text": "7b9e81ca77712fc3",
@@ -94,11 +94,11 @@
    "all": "eae96d8541523b7c"
   },
   "walk_chris_store.watch": {
-   "text": "ec357c61aa9ea0f3",
+   "text": "b2fda71c9cf8bb29",
    "traits": "1d58a0fd6061427e",
    "facts": "b6edc19b7be2164c",
    "facts2": "d822bf3cee64d8d0",
-   "all": "9ab3d9d43765db77"
+   "all": "2e17fb33bee2814a"
   },
   "walk_chris_store.out": {
    "text": "d4f4b618d69f6be2",
@@ -108,27 +108,27 @@
    "all": "a5b2d19dcd53fb91"
   },
   "walk_party_bathroom.moment": {
-   "text": "596f9c3c88774612",
+   "text": "90431b1808f6f971",
    "traits": "44136fa355b3678a",
-   "facts": "508ba626ee181f48",
-   "facts2": "508ba626ee181f48",
-   "all": "15e8c3f8b94d892e"
+   "facts": "24db73bfc2494c60",
+   "facts2": "24db73bfc2494c60",
+   "all": "02a845cb5f6493f0"
   },
   "walk_party_bathroom.watch": {
-   "text": "2fb69aab14c4b1c7",
+   "text": "d6603d685b3399dd",
    "traits": "44136fa355b3678a",
-   "facts": "508ba626ee181f48",
-   "facts2": "508ba626ee181f48",
-   "all": "d96ea4c637fd764e"
+   "facts": "24db73bfc2494c60",
+   "facts2": "24db73bfc2494c60",
+   "all": "d5b454f786b91d18"
   },
   "walk_party_bathroom.shut": {
-   "text": "d3cb1c2bd040cc7b",
+   "text": "47e9fc002aae45fc",
    "traits": "44136fa355b3678a",
-   "facts": "508ba626ee181f48",
-   "facts2": "508ba626ee181f48",
-   "all": "7177b2858b4fe286"
+   "facts": "24db73bfc2494c60",
+   "facts2": "24db73bfc2494c60",
+   "all": "db702e44225938b2"
   },
-  "*": "7ba39246d3c32ed1"
+  "*": "b89f96e5e77f2c88"
  },
  "rows": {
   "B1": "5276068df1ca6fa9",
@@ -361,77 +361,77 @@
    "row": "B10",
    "screen": "walk_chris_store.watch",
    "verdict": "PASS",
-   "line": "He fingers her faster, two deep in her cunt, until her knees buckle and she cums on his hand",
-   "why": "\"You know what Chris does on weekends now.\" sits behind saw_chris_store is_false, set on Done; trigger Sat/Sun 10-19 with Chris present",
+   "line": "Your nipples are hard. You're back out front before they come out. [saw_chris_store is_false] You know what Chris does on weekends now.",
+   "why": "trigger Sat/Sun 10:00-19:00, Chris at near_cafe Sat/Sun 10-20; 'weekends' sits behind weekday [5,6]; discovery line held on saw_chris_store; Done to near_cafe ('out front')",
    "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "ec357c61aa9ea0f3",
+    "text": "b2fda71c9cf8bb29",
     "traits": "1d58a0fd6061427e",
     "facts": "b6edc19b7be2164c",
     "facts2": "d822bf3cee64d8d0",
-    "all": "9ab3d9d43765db77"
+    "all": "2e17fb33bee2814a"
    },
    "row_hash": "c1c0e2ac2588a579",
-   "carried": true,
-   "pass": 23
+   "carried": false,
+   "pass": 25
   },
   {
    "row": "B10",
    "screen": "walk_party_bathroom.moment",
    "verdict": "PASS",
    "line": "You need the bathroom, and you push through the crowd to it. Its door isn't locked.",
-   "why": "rolls Sat 21:00-23:59 only (weekday 5 group), random_cooldown 0, once a day; strangers only, no named person; true on arrival and on a return from an act, and on a later Saturday",
+   "why": "fires in near_zoe_bathroom Sat 21:00-23:59 only (weekday 5 group), the party's hours by Zoe's Sat row; strangers only; the room's own text says the lock doesn't work",
    "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "596f9c3c88774612",
+    "text": "90431b1808f6f971",
     "traits": "44136fa355b3678a",
-    "facts": "508ba626ee181f48",
-    "facts2": "508ba626ee181f48",
-    "all": "15e8c3f8b94d892e"
+    "facts": "24db73bfc2494c60",
+    "facts2": "24db73bfc2494c60",
+    "all": "02a845cb5f6493f0"
    },
    "row_hash": "c1c0e2ac2588a579",
-   "carried": true,
-   "pass": 22
+   "carried": false,
+   "pass": 25
   },
   {
    "row": "B10",
    "screen": "walk_party_bathroom.shut",
    "verdict": "PASS",
-   "line": "You know that door now.",
-   "why": "the discovery line is held on saw_party_bathroom is_false; the music line is true while the party runs",
+   "line": "You shut the door. The music sounds louder than before.",
+   "why": "the music is true Sat 21-00; Done to near_zoe_apartment matches shutting the door from outside (P83); discovery line held on the seen flag",
    "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "d3cb1c2bd040cc7b",
+    "text": "47e9fc002aae45fc",
     "traits": "44136fa355b3678a",
-    "facts": "508ba626ee181f48",
-    "facts2": "508ba626ee181f48",
-    "all": "7177b2858b4fe286"
+    "facts": "24db73bfc2494c60",
+    "facts2": "24db73bfc2494c60",
+    "all": "db702e44225938b2"
    },
    "row_hash": "c1c0e2ac2588a579",
-   "carried": true,
-   "pass": 22
+   "carried": false,
+   "pass": 25
   },
   {
    "row": "B10",
    "screen": "walk_party_bathroom.watch",
    "verdict": "PASS",
-   "line": "You know that door now.",
-   "why": "same hold; 'moaning over the music' true at every party minute",
+   "line": "You're wet. You shut the door before they see you. [saw_party_bathroom is_false] You know that door now.",
+   "why": "strangers only; 'moaning over the music' true at every party minute; discovery line held on the seen flag; Done lands in the living room, outside the door she shut (P83)",
    "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "2fb69aab14c4b1c7",
+    "text": "d6603d685b3399dd",
     "traits": "44136fa355b3678a",
-    "facts": "508ba626ee181f48",
-    "facts2": "508ba626ee181f48",
-    "all": "d96ea4c637fd764e"
+    "facts": "24db73bfc2494c60",
+    "facts2": "24db73bfc2494c60",
+    "all": "d5b454f786b91d18"
    },
    "row_hash": "c1c0e2ac2588a579",
-   "carried": true,
-   "pass": 22
+   "carried": false,
+   "pass": 25
   },
   {
    "row": "B10",
@@ -552,114 +552,114 @@
    "screen": "walk_zoe_outfits.moment",
    "verdict": "PASS",
    "line": "Zoe's at the mirror in her underwear with three outfits on the bed behind her.",
-   "why": "on arrival she walks in on Zoe choosing; Zoe present 18-19 by rows and gated is_present; the underwear is Zoe's, not hers; Sam present by rows and the line doesn't say Zoe's alone",
+   "why": "fires in near_zoe_room 18:00-19:00; Zoe's P83 row is near_zoe_room 18-19 every day ('getting ready'), gated is_present; the room has the full-length mirror (its description)",
    "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "962bd5335cde80e6",
+    "text": "425efc7e51575d65",
     "traits": "6b1e34b018661933",
-    "facts": "df3581105d9dfadd",
-    "facts2": "fc2568396f51a2d0",
-    "all": "18e9170a277b0c78"
+    "facts": "06634feae140e938",
+    "facts2": "30fbbccf95ef2f4a",
+    "all": "5242a309407d79c8"
    },
    "row_hash": "c1c0e2ac2588a579",
-   "carried": true,
-   "pass": 8
+   "carried": false,
+   "pass": 25
   },
   {
    "row": "B10",
    "screen": "walk_zoe_outfits.pick",
    "verdict": "PASS",
-   "line": "You point at the black one. / \"Obviously. You get me.\"",
-   "why": "Zoe present; the black one is one of the three on the bed",
+   "line": "You point at the black one. / She'll be choosing again tomorrow.",
+   "why": "Zoe present; 'again tomorrow' is true by her 18-19 getting-ready row on all seven days",
    "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "a1d96047e25f00b9",
+    "text": "689019c72b1bc1f1",
     "traits": "6b1e34b018661933",
-    "facts": "df3581105d9dfadd",
-    "facts2": "fc2568396f51a2d0",
-    "all": "72993167de149740"
+    "facts": "06634feae140e938",
+    "facts2": "30fbbccf95ef2f4a",
+    "all": "5d54b9fb75438015"
    },
    "row_hash": "c1c0e2ac2588a579",
-   "carried": true,
-   "pass": 8
+   "carried": false,
+   "pass": 25
   },
   {
    "row": "B10",
    "screen": "walk_zoe_outfits.wearing",
    "verdict": "PASS",
-   "line": "\"Ha. Bitch. You're right.\" / She doesn't put anything on.",
-   "why": "consistent with Zoe in her underwear on the moment",
+   "line": "\"Ha. Bitch. You're right.\" / She doesn't put anything on. She'll be choosing again tomorrow.",
+   "why": "fits Zoe in her underwear on the moment; 'again tomorrow' true by her daily 18-19 row",
    "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "a8d34059d7f2848b",
+    "text": "67339d25c34916dd",
     "traits": "6b1e34b018661933",
-    "facts": "df3581105d9dfadd",
-    "facts2": "fc2568396f51a2d0",
-    "all": "7119558468a0e27e"
+    "facts": "06634feae140e938",
+    "facts2": "30fbbccf95ef2f4a",
+    "all": "b81dd9ec92fee4d9"
    },
    "row_hash": "c1c0e2ac2588a579",
-   "carried": true,
-   "pass": 8
+   "carried": false,
+   "pass": 25
   },
   {
    "row": "B10",
    "screen": "walk_zoe_sam.moment",
    "verdict": "PASS",
    "line": "Through the half-open hall door: Zoe on top of Sam on the sofa ... Your nipples go hard.",
-   "why": "on arrival she comes in to the hall and sees through its door; Zoe 18-23 (Sat 18-24) and Sam 12-02 at near_zoe_apartment by rows, both gated is_present; Sat window ends 21:00 before the party; met_sam",
+   "why": "fires on arrival in the living room, 19:00-23:00 Sun-Fri and 19:00-21:00 Sat; who_is_where after P83 puts Zoe at near_zoe_apartment 19-23 (Sat 19-24) and Sam 12-02; both gated is_present; met_sam",
    "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "c248c279bc7201af",
+    "text": "db73f4e22b7ca4a4",
     "traits": "fa1a0a429fa0ea30",
-    "facts": "c3521100b11dca8e",
-    "facts2": "48fd486abd7e2f3c",
-    "all": "4b5691a8adc0d4ca"
+    "facts": "87496d6b62f3e92f",
+    "facts2": "f847c3bfcf338e31",
+    "all": "980507932521afaa"
    },
    "row_hash": "c1c0e2ac2588a579",
-   "carried": true,
-   "pass": 8
+   "carried": false,
+   "pass": 25
   },
   {
    "row": "B10",
    "screen": "walk_zoe_sam.out",
    "verdict": "PASS",
    "line": "You pull the door to, quietly. Zoe's laugh carries through it, and your face burns.",
-   "why": "Zoe and Sam both is_present by trigger; her laugh and her burning face are this moment only; 'She'll know... Zoe always knows' is gone",
+   "why": "Zoe present at every minute the trigger allows (19:00-22:59, Sat 19:00-20:59); a this-moment line, no past, no time",
    "cause": null,
    "note": false,
    "screen_hash": {
     "text": "e3141d8b045f75c0",
     "traits": "6b1e34b018661933",
-    "facts": "5ccc9ab8b606da87",
-    "facts2": "f9f6cd7a1a561521",
-    "all": "57c1ef8237313358"
+    "facts": "4ae042a05a9e14ff",
+    "facts2": "4d55dbcf69c3d492",
+    "all": "04a5facaf5f1fd64"
    },
    "row_hash": "c1c0e2ac2588a579",
-   "carried": true,
-   "pass": 20
+   "carried": false,
+   "pass": 25
   },
   {
    "row": "B10",
    "screen": "walk_zoe_sam.watch",
    "verdict": "PASS",
-   "line": "Your thighs are pressed together and your face is on fire. [group saw_zoe_sam is_false] You know what that sofa's seen now.",
-   "why": "first visit: flag false, discovery true; repeat: flag set, line hidden; rest of the line true every visit; Zoe and Sam named; trigger requires both is_present",
+   "line": "Your thighs are pressed together and your face is on fire. [saw_zoe_sam is_false] You know what that sofa's seen now.",
+   "why": "Zoe and Sam present by rows and trigger at every minute of both windows; the discovery line held on saw_zoe_sam is_false, set on Done",
    "cause": null,
    "note": false,
    "screen_hash": {
     "text": "ab738efb67514276",
     "traits": "fa1a0a429fa0ea30",
-    "facts": "8182ce5904bce35b",
-    "facts2": "48fd486abd7e2f3c",
-    "all": "5c2a903d10f3fd06"
+    "facts": "87496d6b62f3e92f",
+    "facts2": "f847c3bfcf338e31",
+    "all": "8ed238b7fe8c6955"
    },
    "row_hash": "c1c0e2ac2588a579",
-   "carried": true,
-   "pass": 19
+   "carried": false,
+   "pass": 25
   },
   {
    "row": "B11",
@@ -1082,77 +1082,77 @@
    "row": "B8",
    "screen": "walk_chris_store.watch",
    "verdict": "PASS",
-   "line": "He fingers her faster, two deep in her cunt, until her knees buckle and she cums on his hand",
-   "why": "\"her skirt\" is the regular's, not hers; no garment of hers named",
+   "line": "pool_dir = \"sex/chris_store_t5\", pool = 4",
+   "why": "matches P77 (t5, after the payoff line); Done 5 minutes, sets saw_chris_store; skirt and top are Chris's",
    "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "ec357c61aa9ea0f3",
+    "text": "b2fda71c9cf8bb29",
     "traits": "1d58a0fd6061427e",
     "facts": "b6edc19b7be2164c",
     "facts2": "d822bf3cee64d8d0",
-    "all": "9ab3d9d43765db77"
+    "all": "2e17fb33bee2814a"
    },
    "row_hash": "80d415cf08e0ebfe",
-   "carried": true,
-   "pass": 23
+   "carried": false,
+   "pass": 25
   },
   {
    "row": "B8",
    "screen": "walk_party_bathroom.moment",
    "verdict": "PASS",
-   "line": "her dress round her waist",
-   "why": "the dress is the stranger's, matched by the picture ('her dress pushed up'); none of hers named; no numbers",
+   "line": "location = \"near_zoe_bathroom\"; Sat 21:00-00:00; pool sex/party_bathroom_t5, pool 4",
+   "why": "matches P75 (Sat 21-00, cooldown 0) and P83; the dress is the stranger's",
    "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "596f9c3c88774612",
+    "text": "90431b1808f6f971",
     "traits": "44136fa355b3678a",
-    "facts": "508ba626ee181f48",
-    "facts2": "508ba626ee181f48",
-    "all": "15e8c3f8b94d892e"
+    "facts": "24db73bfc2494c60",
+    "facts2": "24db73bfc2494c60",
+    "all": "02a845cb5f6493f0"
    },
    "row_hash": "80d415cf08e0ebfe",
-   "carried": true,
-   "pass": 22
+   "carried": false,
+   "pass": 25
   },
   {
    "row": "B8",
    "screen": "walk_party_bathroom.shut",
    "verdict": "PASS",
-   "line": "time_progression_minutes = 5",
-   "why": "5 minutes and saw_party_bathroom match P41's card; no garment",
+   "line": "Done to near_zoe_apartment, 5 minutes, sets saw_party_bathroom",
+   "why": "matches P83",
    "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "d3cb1c2bd040cc7b",
+    "text": "47e9fc002aae45fc",
     "traits": "44136fa355b3678a",
-    "facts": "508ba626ee181f48",
-    "facts2": "508ba626ee181f48",
-    "all": "7177b2858b4fe286"
+    "facts": "24db73bfc2494c60",
+    "facts2": "24db73bfc2494c60",
+    "all": "db702e44225938b2"
    },
    "row_hash": "80d415cf08e0ebfe",
-   "carried": true,
-   "pass": 22
+   "carried": false,
+   "pass": 25
   },
   {
    "row": "B8",
    "screen": "walk_party_bathroom.watch",
    "verdict": "PASS",
-   "line": "time_progression_minutes = 5",
-   "why": "same; no garment of hers",
+   "line": "Done to near_zoe_apartment, 5 minutes, sets saw_party_bathroom",
+   "why": "matches P83 (both Done to the living room)",
    "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "2fb69aab14c4b1c7",
+    "text": "d6603d685b3399dd",
     "traits": "44136fa355b3678a",
-    "facts": "508ba626ee181f48",
-    "facts2": "508ba626ee181f48",
-    "all": "d96ea4c637fd764e"
+    "facts": "24db73bfc2494c60",
+    "facts2": "24db73bfc2494c60",
+    "all": "d5b454f786b91d18"
    },
    "row_hash": "80d415cf08e0ebfe",
-   "carried": true,
-   "pass": 22
+   "carried": false,
+   "pass": 25
   },
   {
    "row": "B8",
@@ -1272,115 +1272,115 @@
    "row": "B8",
    "screen": "walk_zoe_outfits.moment",
    "verdict": "PASS",
-   "line": "Zoe's at the mirror in her underwear with three outfits on the bed behind her.",
-   "why": "no number on screen; every garment named belongs to someone she watches, none to her",
+   "line": "location = \"near_zoe_room\"; 18:00-19:00",
+   "why": "matches P83's change and the sheet row; the underwear is Zoe's, NPC clothes are not tracked; nothing of hers named",
    "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "962bd5335cde80e6",
+    "text": "425efc7e51575d65",
     "traits": "6b1e34b018661933",
-    "facts": "df3581105d9dfadd",
-    "facts2": "fc2568396f51a2d0",
-    "all": "18e9170a277b0c78"
+    "facts": "06634feae140e938",
+    "facts2": "30fbbccf95ef2f4a",
+    "all": "5242a309407d79c8"
    },
    "row_hash": "80d415cf08e0ebfe",
-   "carried": true,
-   "pass": 8
+   "carried": false,
+   "pass": 25
   },
   {
    "row": "B8",
    "screen": "walk_zoe_outfits.pick",
    "verdict": "PASS",
-   "line": "You point at the black one. / \"Obviously. You get me.\"",
-   "why": "no number on screen; every garment named belongs to someone she watches, none to her",
+   "line": "Done to near_zoe_room, 5 minutes, sets zoe_outfit",
+   "why": "matches the card and P83",
    "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "a1d96047e25f00b9",
+    "text": "689019c72b1bc1f1",
     "traits": "6b1e34b018661933",
-    "facts": "df3581105d9dfadd",
-    "facts2": "fc2568396f51a2d0",
-    "all": "72993167de149740"
+    "facts": "06634feae140e938",
+    "facts2": "30fbbccf95ef2f4a",
+    "all": "5d54b9fb75438015"
    },
    "row_hash": "80d415cf08e0ebfe",
-   "carried": true,
-   "pass": 8
+   "carried": false,
+   "pass": 25
   },
   {
    "row": "B8",
    "screen": "walk_zoe_outfits.wearing",
    "verdict": "PASS",
-   "line": "\"Ha. Bitch. You're right.\" / She doesn't put anything on.",
-   "why": "no number on screen; every garment named belongs to someone she watches, none to her",
+   "line": "Done to near_zoe_room, 5 minutes, sets zoe_outfit",
+   "why": "matches the card and P83",
    "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "a8d34059d7f2848b",
+    "text": "67339d25c34916dd",
     "traits": "6b1e34b018661933",
-    "facts": "df3581105d9dfadd",
-    "facts2": "fc2568396f51a2d0",
-    "all": "7119558468a0e27e"
+    "facts": "06634feae140e938",
+    "facts2": "30fbbccf95ef2f4a",
+    "all": "b81dd9ec92fee4d9"
    },
    "row_hash": "80d415cf08e0ebfe",
-   "carried": true,
-   "pass": 8
+   "carried": false,
+   "pass": 25
   },
   {
    "row": "B8",
    "screen": "walk_zoe_sam.moment",
    "verdict": "PASS",
-   "line": "Through the half-open hall door: Zoe on top of Sam on the sofa ... Your nipples go hard.",
-   "why": "no number on screen; every garment named belongs to someone she watches, none to her",
+   "line": "pool_dir = \"sex/zoe_sam_sofa_t5\", pool = 4; a woman of 19 riding a man of 22",
+   "why": "windows [0,1,2,3,4,6] 19-23 and [5] 19-21 match the card; ages match Zoe 19 / Sam 22 (TOML, PLAN.md:237); the garments named are Zoe's, not hers",
    "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "c248c279bc7201af",
+    "text": "db73f4e22b7ca4a4",
     "traits": "fa1a0a429fa0ea30",
-    "facts": "c3521100b11dca8e",
-    "facts2": "48fd486abd7e2f3c",
-    "all": "4b5691a8adc0d4ca"
+    "facts": "87496d6b62f3e92f",
+    "facts2": "f847c3bfcf338e31",
+    "all": "980507932521afaa"
    },
    "row_hash": "80d415cf08e0ebfe",
-   "carried": true,
-   "pass": 8
+   "carried": false,
+   "pass": 25
   },
   {
    "row": "B8",
    "screen": "walk_zoe_sam.out",
    "verdict": "PASS",
-   "line": "You pull the door to, quietly. Zoe's laugh carries through it, and your face burns.",
-   "why": "no number; no garment of hers named",
+   "line": "Done: 5 minutes, sets saw_zoe_sam",
+   "why": "matches the card; no garment named",
    "cause": null,
    "note": false,
    "screen_hash": {
     "text": "e3141d8b045f75c0",
     "traits": "6b1e34b018661933",
-    "facts": "5ccc9ab8b606da87",
-    "facts2": "f9f6cd7a1a561521",
-    "all": "57c1ef8237313358"
+    "facts": "4ae042a05a9e14ff",
+    "facts2": "4d55dbcf69c3d492",
+    "all": "04a5facaf5f1fd64"
    },
    "row_hash": "80d415cf08e0ebfe",
-   "carried": true,
-   "pass": 20
+   "carried": false,
+   "pass": 25
   },
   {
    "row": "B8",
    "screen": "walk_zoe_sam.watch",
    "verdict": "PASS",
-   "line": "Your thighs are pressed together and your face is on fire. [group saw_zoe_sam is_false] You know what that sofa's seen now.",
-   "why": "no number; no garment of hers named",
+   "line": "Done: 5 minutes, sets saw_zoe_sam",
+   "why": "matches the card; no garment of hers named",
    "cause": null,
    "note": false,
    "screen_hash": {
     "text": "ab738efb67514276",
     "traits": "fa1a0a429fa0ea30",
-    "facts": "8182ce5904bce35b",
-    "facts2": "48fd486abd7e2f3c",
-    "all": "5c2a903d10f3fd06"
+    "facts": "87496d6b62f3e92f",
+    "facts2": "f847c3bfcf338e31",
+    "all": "8ed238b7fe8c6955"
    },
    "row_hash": "80d415cf08e0ebfe",
-   "carried": true,
-   "pass": 19
+   "carried": false,
+   "pass": 25
   },
   {
    "row": "B9",
@@ -1514,39 +1514,39 @@
    "row": "C1158",
    "screen": "walk_party_bathroom.moment",
    "verdict": "PASS",
-   "line": "her dress round her waist",
-   "why": "names only the stranger's dress, which is the scene's own fact; her clothes aren't named",
+   "line": "You need the bathroom, and you push through the crowd to it. Its door isn't locked.",
+   "why": "the only garments named are someone else's (Zoe's underwear / the stranger's dress); none of hers is named",
    "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "596f9c3c88774612",
+    "text": "90431b1808f6f971",
     "traits": "44136fa355b3678a",
-    "facts": "508ba626ee181f48",
-    "facts2": "508ba626ee181f48",
-    "all": "15e8c3f8b94d892e"
+    "facts": "24db73bfc2494c60",
+    "facts2": "24db73bfc2494c60",
+    "all": "02a845cb5f6493f0"
    },
    "row_hash": "f40f51a0fd6cfd10",
-   "carried": true,
-   "pass": 22
+   "carried": false,
+   "pass": 25
   },
   {
    "row": "C1158",
    "screen": "walk_zoe_outfits.moment",
    "verdict": "PASS",
-   "line": "Zoe's at the mirror in her underwear",
-   "why": "the underwear is Zoe's; no garment of hers named",
+   "line": "Zoe's at the mirror in her underwear with three outfits on the bed behind her.",
+   "why": "the only garments named are someone else's (Zoe's underwear / the stranger's dress); none of hers is named",
    "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "962bd5335cde80e6",
+    "text": "425efc7e51575d65",
     "traits": "6b1e34b018661933",
-    "facts": "df3581105d9dfadd",
-    "facts2": "fc2568396f51a2d0",
-    "all": "18e9170a277b0c78"
+    "facts": "06634feae140e938",
+    "facts2": "30fbbccf95ef2f4a",
+    "all": "5242a309407d79c8"
    },
    "row_hash": "f40f51a0fd6cfd10",
-   "carried": true,
-   "pass": 8
+   "carried": false,
+   "pass": 25
   },
   {
    "row": "C1173",
@@ -1693,39 +1693,39 @@
    "row": "C1206",
    "screen": "walk_party_bathroom.moment",
    "verdict": "PASS",
-   "line": "her dress round her waist",
-   "why": "no garment she may not be wearing: the dress is the other woman's",
+   "line": "You need the bathroom, and you push through the crowd to it. Its door isn't locked.",
+   "why": "names no garment of hers",
    "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "596f9c3c88774612",
+    "text": "90431b1808f6f971",
     "traits": "44136fa355b3678a",
-    "facts": "508ba626ee181f48",
-    "facts2": "508ba626ee181f48",
-    "all": "15e8c3f8b94d892e"
+    "facts": "24db73bfc2494c60",
+    "facts2": "24db73bfc2494c60",
+    "all": "02a845cb5f6493f0"
    },
    "row_hash": "bfff76edbee583de",
-   "carried": true,
-   "pass": 22
+   "carried": false,
+   "pass": 25
   },
   {
    "row": "C1206",
    "screen": "walk_zoe_outfits.moment",
    "verdict": "PASS",
-   "line": "Zoe's at the mirror in her underwear",
-   "why": "no garment of hers named",
+   "line": "Zoe's at the mirror in her underwear with three outfits on the bed behind her.",
+   "why": "names no garment of hers",
    "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "962bd5335cde80e6",
+    "text": "425efc7e51575d65",
     "traits": "6b1e34b018661933",
-    "facts": "df3581105d9dfadd",
-    "facts2": "fc2568396f51a2d0",
-    "all": "18e9170a277b0c78"
+    "facts": "06634feae140e938",
+    "facts2": "30fbbccf95ef2f4a",
+    "all": "5242a309407d79c8"
    },
    "row_hash": "bfff76edbee583de",
-   "carried": true,
-   "pass": 8
+   "carried": false,
+   "pass": 25
   },
   {
    "row": "C1220",
@@ -2744,19 +2744,19 @@
    "screen": "walk_zoe_sam.moment",
    "verdict": "FAIL",
    "line": "\"Don't you dare come yet...\" / \"Then stop doing that. Fuck.\"",
-   "why": "a note row: the repeatable moment carries two spoken lines, not one",
+   "why": "a note row: the repeatable moment still carries two spoken lines, not one",
    "cause": null,
    "note": true,
    "screen_hash": {
-    "text": "c248c279bc7201af",
+    "text": "db73f4e22b7ca4a4",
     "traits": "fa1a0a429fa0ea30",
-    "facts": "c3521100b11dca8e",
-    "facts2": "48fd486abd7e2f3c",
-    "all": "4b5691a8adc0d4ca"
+    "facts": "87496d6b62f3e92f",
+    "facts2": "f847c3bfcf338e31",
+    "all": "980507932521afaa"
    },
    "row_hash": "d5758757a709b1af",
-   "carried": true,
-   "pass": 8
+   "carried": false,
+   "pass": 25
   },
   {
    "row": "C164",
@@ -3464,19 +3464,57 @@
    "screen": "walk_party_bathroom.moment",
    "verdict": "PASS",
    "line": "You need the bathroom, and you push through the crowd to it. Its door isn't locked.",
-   "why": "fits what she's doing when it fires: on arrival or back from Mingle, Get a drink or Dance she can need the bathroom; names nothing she wears",
+   "why": "fires as she arrives at the bathroom; the words are her going to it and opening the door, the arrival itself; nothing about what she wears",
    "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "596f9c3c88774612",
+    "text": "90431b1808f6f971",
     "traits": "44136fa355b3678a",
-    "facts": "508ba626ee181f48",
-    "facts2": "508ba626ee181f48",
-    "all": "15e8c3f8b94d892e"
+    "facts": "24db73bfc2494c60",
+    "facts2": "24db73bfc2494c60",
+    "all": "02a845cb5f6493f0"
    },
    "row_hash": "a8ae0700d13a7f9b",
-   "carried": true,
-   "pass": 22
+   "carried": false,
+   "pass": 25
+  },
+  {
+   "row": "C2196",
+   "screen": "walk_zoe_outfits.moment",
+   "verdict": "PASS",
+   "line": "Zoe's at the mirror in her underwear with three outfits on the bed behind her.",
+   "why": "fires as she walks into Zoe's room; she finds Zoe at the mirror, no act of hers needed",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "425efc7e51575d65",
+    "traits": "6b1e34b018661933",
+    "facts": "06634feae140e938",
+    "facts2": "30fbbccf95ef2f4a",
+    "all": "5242a309407d79c8"
+   },
+   "row_hash": "a8ae0700d13a7f9b",
+   "carried": false,
+   "pass": 25
+  },
+  {
+   "row": "C2196",
+   "screen": "walk_zoe_sam.moment",
+   "verdict": "PASS",
+   "line": "Through the half-open hall door",
+   "why": "fires on arrival; she sees through the hall door as she comes in, no act of hers needed",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "db73f4e22b7ca4a4",
+    "traits": "fa1a0a429fa0ea30",
+    "facts": "87496d6b62f3e92f",
+    "facts2": "f847c3bfcf338e31",
+    "all": "980507932521afaa"
+   },
+   "row_hash": "a8ae0700d13a7f9b",
+   "carried": false,
+   "pass": 25
   },
   {
    "row": "C2197",
@@ -3687,7 +3725,7 @@
    "note": false,
    "screen_hash": "7ba39246d3c32ed1",
    "row_hash": "d8ebf6d6b2abf6a5",
-   "carried": false,
+   "carried": true,
    "pass": 24
   },
   {
@@ -4261,77 +4299,77 @@
    "row": "C460",
    "screen": "walk_chris_store.watch",
    "verdict": "PASS",
-   "line": "He fingers her faster, two deep in her cunt, until her knees buckle and she cums on his hand",
-   "why": "every claim holds at every visit the trigger allows",
+   "line": "Your nipples are hard. You're back out front before they come out. [saw_chris_store is_false] You know what Chris does on weekends now.",
+   "why": "every claim true on every playthrough that reaches it: trigger Sat/Sun 10:00-19:00, Chris at near_cafe Sat/Sun 10-20; 'weekends' sits behind weekday [5,6]; discovery line held on saw_chris_store; Done to near_cafe ('out front')",
    "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "ec357c61aa9ea0f3",
+    "text": "b2fda71c9cf8bb29",
     "traits": "1d58a0fd6061427e",
     "facts": "b6edc19b7be2164c",
     "facts2": "d822bf3cee64d8d0",
-    "all": "9ab3d9d43765db77"
+    "all": "2e17fb33bee2814a"
    },
    "row_hash": "67e48e60d5053a2e",
-   "carried": true,
-   "pass": 23
+   "carried": false,
+   "pass": 25
   },
   {
    "row": "C460",
    "screen": "walk_party_bathroom.moment",
    "verdict": "PASS",
    "line": "You need the bathroom, and you push through the crowd to it. Its door isn't locked.",
-   "why": "every claim true on every reachable visit (Sat 21-00, the party on by Zoe's rows)",
+   "why": "every claim true on every playthrough that reaches it: fires in near_zoe_bathroom Sat 21:00-23:59 only (weekday 5 group), the party's hours by Zoe's Sat row; strangers only; the room's own text says the lock doesn't work",
    "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "596f9c3c88774612",
+    "text": "90431b1808f6f971",
     "traits": "44136fa355b3678a",
-    "facts": "508ba626ee181f48",
-    "facts2": "508ba626ee181f48",
-    "all": "15e8c3f8b94d892e"
+    "facts": "24db73bfc2494c60",
+    "facts2": "24db73bfc2494c60",
+    "all": "02a845cb5f6493f0"
    },
    "row_hash": "67e48e60d5053a2e",
-   "carried": true,
-   "pass": 22
+   "carried": false,
+   "pass": 25
   },
   {
    "row": "C460",
    "screen": "walk_party_bathroom.shut",
    "verdict": "PASS",
    "line": "You shut the door. The music sounds louder than before.",
-   "why": "true",
+   "why": "every claim true on every playthrough that reaches it: the music is true Sat 21-00; Done to near_zoe_apartment matches shutting the door from outside (P83); discovery line held on the seen flag",
    "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "d3cb1c2bd040cc7b",
+    "text": "47e9fc002aae45fc",
     "traits": "44136fa355b3678a",
-    "facts": "508ba626ee181f48",
-    "facts2": "508ba626ee181f48",
-    "all": "7177b2858b4fe286"
+    "facts": "24db73bfc2494c60",
+    "facts2": "24db73bfc2494c60",
+    "all": "db702e44225938b2"
    },
    "row_hash": "67e48e60d5053a2e",
-   "carried": true,
-   "pass": 22
+   "carried": false,
+   "pass": 25
   },
   {
    "row": "C460",
    "screen": "walk_party_bathroom.watch",
    "verdict": "PASS",
-   "line": "You're wet. You shut the door before they see you.",
-   "why": "true; the past line is behind its flag",
+   "line": "You're wet. You shut the door before they see you. [saw_party_bathroom is_false] You know that door now.",
+   "why": "every claim true on every playthrough that reaches it: strangers only; 'moaning over the music' true at every party minute; discovery line held on the seen flag; Done lands in the living room, outside the door she shut (P83)",
    "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "2fb69aab14c4b1c7",
+    "text": "d6603d685b3399dd",
     "traits": "44136fa355b3678a",
-    "facts": "508ba626ee181f48",
-    "facts2": "508ba626ee181f48",
-    "all": "d96ea4c637fd764e"
+    "facts": "24db73bfc2494c60",
+    "facts2": "24db73bfc2494c60",
+    "all": "d5b454f786b91d18"
    },
    "row_hash": "67e48e60d5053a2e",
-   "carried": true,
-   "pass": 22
+   "carried": false,
+   "pass": 25
   },
   {
    "row": "C460",
@@ -4452,114 +4490,114 @@
    "screen": "walk_zoe_outfits.moment",
    "verdict": "PASS",
    "line": "Zoe's at the mirror in her underwear with three outfits on the bed behind her.",
-   "why": "on arrival she walks in on Zoe choosing; Zoe present 18-19 by rows and gated is_present; the underwear is Zoe's, not hers; Sam present by rows and the line doesn't say Zoe's alone",
+   "why": "every claim true on every playthrough that reaches it: fires in near_zoe_room 18:00-19:00; Zoe's P83 row is near_zoe_room 18-19 every day ('getting ready'), gated is_present; the room has the full-length mirror (its description)",
    "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "962bd5335cde80e6",
+    "text": "425efc7e51575d65",
     "traits": "6b1e34b018661933",
-    "facts": "df3581105d9dfadd",
-    "facts2": "fc2568396f51a2d0",
-    "all": "18e9170a277b0c78"
+    "facts": "06634feae140e938",
+    "facts2": "30fbbccf95ef2f4a",
+    "all": "5242a309407d79c8"
    },
    "row_hash": "67e48e60d5053a2e",
-   "carried": true,
-   "pass": 8
+   "carried": false,
+   "pass": 25
   },
   {
    "row": "C460",
    "screen": "walk_zoe_outfits.pick",
    "verdict": "PASS",
-   "line": "You point at the black one. / \"Obviously. You get me.\"",
-   "why": "Zoe present; the black one is one of the three on the bed",
+   "line": "You point at the black one. / She'll be choosing again tomorrow.",
+   "why": "every claim true on every playthrough that reaches it: Zoe present; 'again tomorrow' is true by her 18-19 getting-ready row on all seven days",
    "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "a1d96047e25f00b9",
+    "text": "689019c72b1bc1f1",
     "traits": "6b1e34b018661933",
-    "facts": "df3581105d9dfadd",
-    "facts2": "fc2568396f51a2d0",
-    "all": "72993167de149740"
+    "facts": "06634feae140e938",
+    "facts2": "30fbbccf95ef2f4a",
+    "all": "5d54b9fb75438015"
    },
    "row_hash": "67e48e60d5053a2e",
-   "carried": true,
-   "pass": 8
+   "carried": false,
+   "pass": 25
   },
   {
    "row": "C460",
    "screen": "walk_zoe_outfits.wearing",
    "verdict": "PASS",
-   "line": "\"Ha. Bitch. You're right.\" / She doesn't put anything on.",
-   "why": "consistent with Zoe in her underwear on the moment",
+   "line": "\"Ha. Bitch. You're right.\" / She doesn't put anything on. She'll be choosing again tomorrow.",
+   "why": "every claim true on every playthrough that reaches it: fits Zoe in her underwear on the moment; 'again tomorrow' true by her daily 18-19 row",
    "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "a8d34059d7f2848b",
+    "text": "67339d25c34916dd",
     "traits": "6b1e34b018661933",
-    "facts": "df3581105d9dfadd",
-    "facts2": "fc2568396f51a2d0",
-    "all": "7119558468a0e27e"
+    "facts": "06634feae140e938",
+    "facts2": "30fbbccf95ef2f4a",
+    "all": "b81dd9ec92fee4d9"
    },
    "row_hash": "67e48e60d5053a2e",
-   "carried": true,
-   "pass": 8
+   "carried": false,
+   "pass": 25
   },
   {
    "row": "C460",
    "screen": "walk_zoe_sam.moment",
    "verdict": "PASS",
    "line": "Through the half-open hall door: Zoe on top of Sam on the sofa ... Your nipples go hard.",
-   "why": "on arrival she comes in to the hall and sees through its door; Zoe 18-23 (Sat 18-24) and Sam 12-02 at near_zoe_apartment by rows, both gated is_present; Sat window ends 21:00 before the party; met_sam",
+   "why": "every claim true on every playthrough that reaches it: fires on arrival in the living room, 19:00-23:00 Sun-Fri and 19:00-21:00 Sat; who_is_where after P83 puts Zoe at near_zoe_apartment 19-23 (Sat 19-24) and Sam 12-02; both gated is_present; met_sam",
    "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "c248c279bc7201af",
+    "text": "db73f4e22b7ca4a4",
     "traits": "fa1a0a429fa0ea30",
-    "facts": "c3521100b11dca8e",
-    "facts2": "48fd486abd7e2f3c",
-    "all": "4b5691a8adc0d4ca"
+    "facts": "87496d6b62f3e92f",
+    "facts2": "f847c3bfcf338e31",
+    "all": "980507932521afaa"
    },
    "row_hash": "67e48e60d5053a2e",
-   "carried": true,
-   "pass": 8
+   "carried": false,
+   "pass": 25
   },
   {
    "row": "C460",
    "screen": "walk_zoe_sam.out",
    "verdict": "PASS",
    "line": "You pull the door to, quietly. Zoe's laugh carries through it, and your face burns.",
-   "why": "true on every firing; no past or promise",
+   "why": "every claim true on every playthrough that reaches it: Zoe present at every minute the trigger allows (19:00-22:59, Sat 19:00-20:59); a this-moment line, no past, no time",
    "cause": null,
    "note": false,
    "screen_hash": {
     "text": "e3141d8b045f75c0",
     "traits": "6b1e34b018661933",
-    "facts": "5ccc9ab8b606da87",
-    "facts2": "f9f6cd7a1a561521",
-    "all": "57c1ef8237313358"
+    "facts": "4ae042a05a9e14ff",
+    "facts2": "4d55dbcf69c3d492",
+    "all": "04a5facaf5f1fd64"
    },
    "row_hash": "67e48e60d5053a2e",
-   "carried": true,
-   "pass": 20
+   "carried": false,
+   "pass": 25
   },
   {
    "row": "C460",
    "screen": "walk_zoe_sam.watch",
    "verdict": "PASS",
-   "line": "Your thighs are pressed together and your face is on fire. [group saw_zoe_sam is_false] You know what that sofa's seen now.",
-   "why": "first visit: flag false, discovery true; repeat: flag set, line hidden; rest of the line true every visit; Zoe and Sam named; trigger requires both is_present",
+   "line": "Your thighs are pressed together and your face is on fire. [saw_zoe_sam is_false] You know what that sofa's seen now.",
+   "why": "every claim true on every playthrough that reaches it: Zoe and Sam present by rows and trigger at every minute of both windows; the discovery line held on saw_zoe_sam is_false, set on Done",
    "cause": null,
    "note": false,
    "screen_hash": {
     "text": "ab738efb67514276",
     "traits": "fa1a0a429fa0ea30",
-    "facts": "8182ce5904bce35b",
-    "facts2": "48fd486abd7e2f3c",
-    "all": "5c2a903d10f3fd06"
+    "facts": "87496d6b62f3e92f",
+    "facts2": "f847c3bfcf338e31",
+    "all": "8ed238b7fe8c6955"
    },
    "row_hash": "67e48e60d5053a2e",
-   "carried": true,
-   "pass": 19
+   "carried": false,
+   "pass": 25
   },
   {
    "row": "C461",
@@ -4616,77 +4654,77 @@
    "row": "C461",
    "screen": "walk_chris_store.watch",
    "verdict": "PASS",
-   "line": "He fingers her faster, two deep in her cunt, until her knees buckle and she cums on his hand",
-   "why": "texture and her reaction only",
+   "line": "Your nipples are hard. You're back out front before they come out. [saw_chris_store is_false] You know what Chris does on weekends now.",
+   "why": "texture and her body only; Zoe/Sam/Chris lines fit their PLAN entries (Zoe 'babe', Sam the on-and-off boyfriend always home)",
    "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "ec357c61aa9ea0f3",
+    "text": "b2fda71c9cf8bb29",
     "traits": "1d58a0fd6061427e",
     "facts": "b6edc19b7be2164c",
     "facts2": "d822bf3cee64d8d0",
-    "all": "9ab3d9d43765db77"
+    "all": "2e17fb33bee2814a"
    },
    "row_hash": "310706ee076318f2",
-   "carried": true,
-   "pass": 23
+   "carried": false,
+   "pass": 25
   },
   {
    "row": "C461",
    "screen": "walk_party_bathroom.moment",
    "verdict": "PASS",
-   "line": "Your face burns.",
-   "why": "texture and her reaction on her body",
+   "line": "You need the bathroom, and you push through the crowd to it. Its door isn't locked.",
+   "why": "texture and her body only; Zoe/Sam/Chris lines fit their PLAN entries (Zoe 'babe', Sam the on-and-off boyfriend always home)",
    "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "596f9c3c88774612",
+    "text": "90431b1808f6f971",
     "traits": "44136fa355b3678a",
-    "facts": "508ba626ee181f48",
-    "facts2": "508ba626ee181f48",
-    "all": "15e8c3f8b94d892e"
+    "facts": "24db73bfc2494c60",
+    "facts2": "24db73bfc2494c60",
+    "all": "02a845cb5f6493f0"
    },
    "row_hash": "310706ee076318f2",
-   "carried": true,
-   "pass": 22
+   "carried": false,
+   "pass": 25
   },
   {
    "row": "C461",
    "screen": "walk_party_bathroom.shut",
    "verdict": "PASS",
    "line": "You shut the door. The music sounds louder than before.",
-   "why": "texture that can't clash",
+   "why": "texture and her body only; Zoe/Sam/Chris lines fit their PLAN entries (Zoe 'babe', Sam the on-and-off boyfriend always home)",
    "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "d3cb1c2bd040cc7b",
+    "text": "47e9fc002aae45fc",
     "traits": "44136fa355b3678a",
-    "facts": "508ba626ee181f48",
-    "facts2": "508ba626ee181f48",
-    "all": "7177b2858b4fe286"
+    "facts": "24db73bfc2494c60",
+    "facts2": "24db73bfc2494c60",
+    "all": "db702e44225938b2"
    },
    "row_hash": "310706ee076318f2",
-   "carried": true,
-   "pass": 22
+   "carried": false,
+   "pass": 25
   },
   {
    "row": "C461",
    "screen": "walk_party_bathroom.watch",
    "verdict": "PASS",
-   "line": "You're wet.",
-   "why": "her reaction on her body",
+   "line": "You're wet. You shut the door before they see you. [saw_party_bathroom is_false] You know that door now.",
+   "why": "texture and her body only; Zoe/Sam/Chris lines fit their PLAN entries (Zoe 'babe', Sam the on-and-off boyfriend always home)",
    "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "2fb69aab14c4b1c7",
+    "text": "d6603d685b3399dd",
     "traits": "44136fa355b3678a",
-    "facts": "508ba626ee181f48",
-    "facts2": "508ba626ee181f48",
-    "all": "d96ea4c637fd764e"
+    "facts": "24db73bfc2494c60",
+    "facts2": "24db73bfc2494c60",
+    "all": "d5b454f786b91d18"
    },
    "row_hash": "310706ee076318f2",
-   "carried": true,
-   "pass": 22
+   "carried": false,
+   "pass": 25
   },
   {
    "row": "C461",
@@ -4807,114 +4845,114 @@
    "screen": "walk_zoe_outfits.moment",
    "verdict": "PASS",
    "line": "Zoe's at the mirror in her underwear with three outfits on the bed behind her.",
-   "why": "what isn't a checked fact is texture or her opinion on her body, and dialogue fits each person's entry",
+   "why": "texture and her body only; Zoe/Sam/Chris lines fit their PLAN entries (Zoe 'babe', Sam the on-and-off boyfriend always home)",
    "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "962bd5335cde80e6",
+    "text": "425efc7e51575d65",
     "traits": "6b1e34b018661933",
-    "facts": "df3581105d9dfadd",
-    "facts2": "fc2568396f51a2d0",
-    "all": "18e9170a277b0c78"
+    "facts": "06634feae140e938",
+    "facts2": "30fbbccf95ef2f4a",
+    "all": "5242a309407d79c8"
    },
    "row_hash": "310706ee076318f2",
-   "carried": true,
-   "pass": 8
+   "carried": false,
+   "pass": 25
   },
   {
    "row": "C461",
    "screen": "walk_zoe_outfits.pick",
    "verdict": "PASS",
-   "line": "You point at the black one. / \"Obviously. You get me.\"",
-   "why": "what isn't a checked fact is texture or her opinion on her body, and dialogue fits each person's entry",
+   "line": "You point at the black one. / She'll be choosing again tomorrow.",
+   "why": "texture and her body only; Zoe/Sam/Chris lines fit their PLAN entries (Zoe 'babe', Sam the on-and-off boyfriend always home)",
    "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "a1d96047e25f00b9",
+    "text": "689019c72b1bc1f1",
     "traits": "6b1e34b018661933",
-    "facts": "df3581105d9dfadd",
-    "facts2": "fc2568396f51a2d0",
-    "all": "72993167de149740"
+    "facts": "06634feae140e938",
+    "facts2": "30fbbccf95ef2f4a",
+    "all": "5d54b9fb75438015"
    },
    "row_hash": "310706ee076318f2",
-   "carried": true,
-   "pass": 8
+   "carried": false,
+   "pass": 25
   },
   {
    "row": "C461",
    "screen": "walk_zoe_outfits.wearing",
    "verdict": "PASS",
-   "line": "\"Ha. Bitch. You're right.\" / She doesn't put anything on.",
-   "why": "what isn't a checked fact is texture or her opinion on her body, and dialogue fits each person's entry",
+   "line": "\"Ha. Bitch. You're right.\" / She doesn't put anything on. She'll be choosing again tomorrow.",
+   "why": "texture and her body only; Zoe/Sam/Chris lines fit their PLAN entries (Zoe 'babe', Sam the on-and-off boyfriend always home)",
    "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "a8d34059d7f2848b",
+    "text": "67339d25c34916dd",
     "traits": "6b1e34b018661933",
-    "facts": "df3581105d9dfadd",
-    "facts2": "fc2568396f51a2d0",
-    "all": "7119558468a0e27e"
+    "facts": "06634feae140e938",
+    "facts2": "30fbbccf95ef2f4a",
+    "all": "b81dd9ec92fee4d9"
    },
    "row_hash": "310706ee076318f2",
-   "carried": true,
-   "pass": 8
+   "carried": false,
+   "pass": 25
   },
   {
    "row": "C461",
    "screen": "walk_zoe_sam.moment",
    "verdict": "PASS",
    "line": "Through the half-open hall door: Zoe on top of Sam on the sofa ... Your nipples go hard.",
-   "why": "what isn't a checked fact is texture or her opinion on her body, and dialogue fits each person's entry",
+   "why": "texture and her body only; Zoe/Sam/Chris lines fit their PLAN entries (Zoe 'babe', Sam the on-and-off boyfriend always home)",
    "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "c248c279bc7201af",
+    "text": "db73f4e22b7ca4a4",
     "traits": "fa1a0a429fa0ea30",
-    "facts": "c3521100b11dca8e",
-    "facts2": "48fd486abd7e2f3c",
-    "all": "4b5691a8adc0d4ca"
+    "facts": "87496d6b62f3e92f",
+    "facts2": "f847c3bfcf338e31",
+    "all": "980507932521afaa"
    },
    "row_hash": "310706ee076318f2",
-   "carried": true,
-   "pass": 8
+   "carried": false,
+   "pass": 25
   },
   {
    "row": "C461",
    "screen": "walk_zoe_sam.out",
    "verdict": "PASS",
    "line": "You pull the door to, quietly. Zoe's laugh carries through it, and your face burns.",
-   "why": "texture and her body reaction",
+   "why": "texture and her body only; Zoe/Sam/Chris lines fit their PLAN entries (Zoe 'babe', Sam the on-and-off boyfriend always home)",
    "cause": null,
    "note": false,
    "screen_hash": {
     "text": "e3141d8b045f75c0",
     "traits": "6b1e34b018661933",
-    "facts": "5ccc9ab8b606da87",
-    "facts2": "f9f6cd7a1a561521",
-    "all": "57c1ef8237313358"
+    "facts": "4ae042a05a9e14ff",
+    "facts2": "4d55dbcf69c3d492",
+    "all": "04a5facaf5f1fd64"
    },
    "row_hash": "310706ee076318f2",
-   "carried": true,
-   "pass": 20
+   "carried": false,
+   "pass": 25
   },
   {
    "row": "C461",
    "screen": "walk_zoe_sam.watch",
    "verdict": "PASS",
-   "line": "Your thighs are pressed together and your face is on fire. [group saw_zoe_sam is_false] You know what that sofa's seen now.",
-   "why": "texture and her body reaction, nothing that can clash",
+   "line": "Your thighs are pressed together and your face is on fire. [saw_zoe_sam is_false] You know what that sofa's seen now.",
+   "why": "texture and her body only; Zoe/Sam/Chris lines fit their PLAN entries (Zoe 'babe', Sam the on-and-off boyfriend always home)",
    "cause": null,
    "note": false,
    "screen_hash": {
     "text": "ab738efb67514276",
     "traits": "fa1a0a429fa0ea30",
-    "facts": "8182ce5904bce35b",
-    "facts2": "48fd486abd7e2f3c",
-    "all": "5c2a903d10f3fd06"
+    "facts": "87496d6b62f3e92f",
+    "facts2": "f847c3bfcf338e31",
+    "all": "8ed238b7fe8c6955"
    },
    "row_hash": "310706ee076318f2",
-   "carried": true,
-   "pass": 19
+   "carried": false,
+   "pass": 25
   },
   {
    "row": "C519",
@@ -5285,19 +5323,19 @@
    "screen": "walk_zoe_sam.moment",
    "verdict": "FAIL",
    "line": "time_of_day 19:00-23:00 / 19:00-21:00",
-   "why": "a note row: all 6 of the 6 carry a clock window, not 'about half'",
+   "why": "a note row: all 6 of P41's 6 walk-ins carry a clock window, not 'about half'",
    "cause": null,
    "note": true,
    "screen_hash": {
-    "text": "c248c279bc7201af",
+    "text": "db73f4e22b7ca4a4",
     "traits": "fa1a0a429fa0ea30",
-    "facts": "c3521100b11dca8e",
-    "facts2": "48fd486abd7e2f3c",
-    "all": "4b5691a8adc0d4ca"
+    "facts": "87496d6b62f3e92f",
+    "facts2": "f847c3bfcf338e31",
+    "all": "980507932521afaa"
    },
    "row_hash": "9c58ec7792f1f95a",
-   "carried": true,
-   "pass": 8
+   "carried": false,
+   "pass": 25
   },
   {
    "row": "C859",
@@ -5326,6 +5364,44 @@
    "pass": 1
   },
   {
+   "row": "C889",
+   "screen": "walk_zoe_sam.out",
+   "verdict": "PASS",
+   "line": "Watch / Back out the door / Done",
+   "why": "no label promises a clock time or duration",
+   "cause": null,
+   "note": true,
+   "screen_hash": {
+    "text": "e3141d8b045f75c0",
+    "traits": "6b1e34b018661933",
+    "facts": "4ae042a05a9e14ff",
+    "facts2": "4d55dbcf69c3d492",
+    "all": "04a5facaf5f1fd64"
+   },
+   "row_hash": "def1348d483d0c40",
+   "carried": false,
+   "pass": 25
+  },
+  {
+   "row": "C889",
+   "screen": "walk_zoe_sam.watch",
+   "verdict": "PASS",
+   "line": "Watch / Back out the door / Done",
+   "why": "no label promises a clock time or duration",
+   "cause": null,
+   "note": true,
+   "screen_hash": {
+    "text": "ab738efb67514276",
+    "traits": "fa1a0a429fa0ea30",
+    "facts": "87496d6b62f3e92f",
+    "facts2": "f847c3bfcf338e31",
+    "all": "8ed238b7fe8c6955"
+   },
+   "row_hash": "def1348d483d0c40",
+   "carried": false,
+   "pass": 25
+  },
+  {
    "row": "C892",
    "screen": "*",
    "verdict": "PASS",
@@ -5337,6 +5413,44 @@
    "row_hash": "5c890033f6ac38b8",
    "carried": true,
    "pass": 1
+  },
+  {
+   "row": "C892",
+   "screen": "walk_zoe_sam.out",
+   "verdict": "PASS",
+   "line": "Done (5 minutes)",
+   "why": "no hour in the act",
+   "cause": null,
+   "note": true,
+   "screen_hash": {
+    "text": "e3141d8b045f75c0",
+    "traits": "6b1e34b018661933",
+    "facts": "4ae042a05a9e14ff",
+    "facts2": "4d55dbcf69c3d492",
+    "all": "04a5facaf5f1fd64"
+   },
+   "row_hash": "5c890033f6ac38b8",
+   "carried": false,
+   "pass": 25
+  },
+  {
+   "row": "C892",
+   "screen": "walk_zoe_sam.watch",
+   "verdict": "PASS",
+   "line": "Done (5 minutes)",
+   "why": "no hour in the act",
+   "cause": null,
+   "note": true,
+   "screen_hash": {
+    "text": "ab738efb67514276",
+    "traits": "fa1a0a429fa0ea30",
+    "facts": "87496d6b62f3e92f",
+    "facts2": "f847c3bfcf338e31",
+    "all": "8ed238b7fe8c6955"
+   },
+   "row_hash": "5c890033f6ac38b8",
+   "carried": false,
+   "pass": 25
   },
   {
    "row": "C897",
@@ -5352,6 +5466,44 @@
    "pass": 1
   },
   {
+   "row": "C897",
+   "screen": "walk_zoe_sam.out",
+   "verdict": "PASS",
+   "line": "time_progression_minutes = 5",
+   "why": "the act's own spend, not a toll on a room",
+   "cause": null,
+   "note": true,
+   "screen_hash": {
+    "text": "e3141d8b045f75c0",
+    "traits": "6b1e34b018661933",
+    "facts": "4ae042a05a9e14ff",
+    "facts2": "4d55dbcf69c3d492",
+    "all": "04a5facaf5f1fd64"
+   },
+   "row_hash": "265ece64add83676",
+   "carried": false,
+   "pass": 25
+  },
+  {
+   "row": "C897",
+   "screen": "walk_zoe_sam.watch",
+   "verdict": "PASS",
+   "line": "time_progression_minutes = 5",
+   "why": "the act's own spend, not a toll on a room",
+   "cause": null,
+   "note": true,
+   "screen_hash": {
+    "text": "ab738efb67514276",
+    "traits": "fa1a0a429fa0ea30",
+    "facts": "87496d6b62f3e92f",
+    "facts2": "f847c3bfcf338e31",
+    "all": "8ed238b7fe8c6955"
+   },
+   "row_hash": "265ece64add83676",
+   "carried": false,
+   "pass": 25
+  },
+  {
    "row": "C900",
    "screen": "*",
    "verdict": "PASS",
@@ -5363,6 +5515,44 @@
    "row_hash": "6372efb027eb2034",
    "carried": true,
    "pass": 1
+  },
+  {
+   "row": "C900",
+   "screen": "walk_zoe_sam.out",
+   "verdict": "PASS",
+   "line": "\u2014",
+   "why": "no beat says what time it is",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "e3141d8b045f75c0",
+    "traits": "6b1e34b018661933",
+    "facts": "4ae042a05a9e14ff",
+    "facts2": "4d55dbcf69c3d492",
+    "all": "04a5facaf5f1fd64"
+   },
+   "row_hash": "6372efb027eb2034",
+   "carried": false,
+   "pass": 25
+  },
+  {
+   "row": "C900",
+   "screen": "walk_zoe_sam.watch",
+   "verdict": "PASS",
+   "line": "\u2014",
+   "why": "no beat says what time it is",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "ab738efb67514276",
+    "traits": "fa1a0a429fa0ea30",
+    "facts": "87496d6b62f3e92f",
+    "facts2": "f847c3bfcf338e31",
+    "all": "8ed238b7fe8c6955"
+   },
+   "row_hash": "6372efb027eb2034",
+   "carried": false,
+   "pass": 25
   },
   {
    "row": "C902",
@@ -5378,6 +5568,44 @@
    "pass": 1
   },
   {
+   "row": "C902",
+   "screen": "walk_zoe_sam.out",
+   "verdict": "PASS",
+   "line": "\u2014",
+   "why": "read at 22:59 (Sat 20:59): Zoe and Sam still there by rows; the Sat 20:59 Done lands at 21:04 in the party, and nothing on the screen says otherwise",
+   "cause": null,
+   "note": true,
+   "screen_hash": {
+    "text": "e3141d8b045f75c0",
+    "traits": "6b1e34b018661933",
+    "facts": "4ae042a05a9e14ff",
+    "facts2": "4d55dbcf69c3d492",
+    "all": "04a5facaf5f1fd64"
+   },
+   "row_hash": "df5ed7a36dbc74e4",
+   "carried": false,
+   "pass": 25
+  },
+  {
+   "row": "C902",
+   "screen": "walk_zoe_sam.watch",
+   "verdict": "PASS",
+   "line": "\u2014",
+   "why": "read at 22:59 (Sat 20:59): Zoe and Sam still there by rows; the Sat 20:59 Done lands at 21:04 in the party, and nothing on the screen says otherwise",
+   "cause": null,
+   "note": true,
+   "screen_hash": {
+    "text": "ab738efb67514276",
+    "traits": "fa1a0a429fa0ea30",
+    "facts": "87496d6b62f3e92f",
+    "facts2": "f847c3bfcf338e31",
+    "all": "8ed238b7fe8c6955"
+   },
+   "row_hash": "df5ed7a36dbc74e4",
+   "carried": false,
+   "pass": 25
+  },
+  {
    "row": "C903",
    "screen": "*",
    "verdict": "PASS",
@@ -5389,6 +5617,44 @@
    "row_hash": "4f83b0b5eb45f71b",
    "carried": true,
    "pass": 1
+  },
+  {
+   "row": "C903",
+   "screen": "walk_zoe_sam.out",
+   "verdict": "PASS",
+   "line": "\u2014",
+   "why": "names no weekday",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "e3141d8b045f75c0",
+    "traits": "6b1e34b018661933",
+    "facts": "4ae042a05a9e14ff",
+    "facts2": "4d55dbcf69c3d492",
+    "all": "04a5facaf5f1fd64"
+   },
+   "row_hash": "4f83b0b5eb45f71b",
+   "carried": false,
+   "pass": 25
+  },
+  {
+   "row": "C903",
+   "screen": "walk_zoe_sam.watch",
+   "verdict": "PASS",
+   "line": "\u2014",
+   "why": "names no weekday",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "ab738efb67514276",
+    "traits": "fa1a0a429fa0ea30",
+    "facts": "87496d6b62f3e92f",
+    "facts2": "f847c3bfcf338e31",
+    "all": "8ed238b7fe8c6955"
+   },
+   "row_hash": "4f83b0b5eb45f71b",
+   "carried": false,
+   "pass": 25
   },
   {
    "row": "C906",
@@ -5404,6 +5670,44 @@
    "pass": 1
   },
   {
+   "row": "C906",
+   "screen": "walk_zoe_sam.out",
+   "verdict": "PASS",
+   "line": "\u2014",
+   "why": "no 'till'",
+   "cause": null,
+   "note": true,
+   "screen_hash": {
+    "text": "e3141d8b045f75c0",
+    "traits": "6b1e34b018661933",
+    "facts": "4ae042a05a9e14ff",
+    "facts2": "4d55dbcf69c3d492",
+    "all": "04a5facaf5f1fd64"
+   },
+   "row_hash": "71713a7e7ae739e7",
+   "carried": false,
+   "pass": 25
+  },
+  {
+   "row": "C906",
+   "screen": "walk_zoe_sam.watch",
+   "verdict": "PASS",
+   "line": "\u2014",
+   "why": "no 'till'",
+   "cause": null,
+   "note": true,
+   "screen_hash": {
+    "text": "ab738efb67514276",
+    "traits": "fa1a0a429fa0ea30",
+    "facts": "87496d6b62f3e92f",
+    "facts2": "f847c3bfcf338e31",
+    "all": "8ed238b7fe8c6955"
+   },
+   "row_hash": "71713a7e7ae739e7",
+   "carried": false,
+   "pass": 25
+  },
+  {
    "row": "C910",
    "screen": "*",
    "verdict": "PASS",
@@ -5415,6 +5719,44 @@
    "row_hash": "d5a109f1ef88419a",
    "carried": true,
    "pass": 1
+  },
+  {
+   "row": "C910",
+   "screen": "walk_zoe_sam.out",
+   "verdict": "PASS",
+   "line": "Done",
+   "why": "no time, no energy on the button",
+   "cause": null,
+   "note": true,
+   "screen_hash": {
+    "text": "e3141d8b045f75c0",
+    "traits": "6b1e34b018661933",
+    "facts": "4ae042a05a9e14ff",
+    "facts2": "4d55dbcf69c3d492",
+    "all": "04a5facaf5f1fd64"
+   },
+   "row_hash": "d5a109f1ef88419a",
+   "carried": false,
+   "pass": 25
+  },
+  {
+   "row": "C910",
+   "screen": "walk_zoe_sam.watch",
+   "verdict": "PASS",
+   "line": "Done",
+   "why": "no time, no energy on the button",
+   "cause": null,
+   "note": true,
+   "screen_hash": {
+    "text": "ab738efb67514276",
+    "traits": "fa1a0a429fa0ea30",
+    "facts": "87496d6b62f3e92f",
+    "facts2": "f847c3bfcf338e31",
+    "all": "8ed238b7fe8c6955"
+   },
+   "row_hash": "d5a109f1ef88419a",
+   "carried": false,
+   "pass": 25
   },
   {
    "row": "C913",
@@ -5430,6 +5772,44 @@
    "pass": 1
   },
   {
+   "row": "C913",
+   "screen": "walk_zoe_sam.out",
+   "verdict": "N/A",
+   "line": "\u2014",
+   "why": "an event that happens to her, not a thing she chooses; C916 governs",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "e3141d8b045f75c0",
+    "traits": "6b1e34b018661933",
+    "facts": "4ae042a05a9e14ff",
+    "facts2": "4d55dbcf69c3d492",
+    "all": "04a5facaf5f1fd64"
+   },
+   "row_hash": "c750f9b6ab4ace14",
+   "carried": false,
+   "pass": 25
+  },
+  {
+   "row": "C913",
+   "screen": "walk_zoe_sam.watch",
+   "verdict": "N/A",
+   "line": "\u2014",
+   "why": "an event that happens to her, not a thing she chooses; C916 governs",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "ab738efb67514276",
+    "traits": "fa1a0a429fa0ea30",
+    "facts": "87496d6b62f3e92f",
+    "facts2": "f847c3bfcf338e31",
+    "all": "8ed238b7fe8c6955"
+   },
+   "row_hash": "c750f9b6ab4ace14",
+   "carried": false,
+   "pass": 25
+  },
+  {
    "row": "C914",
    "screen": "*",
    "verdict": "PASS",
@@ -5441,6 +5821,44 @@
    "row_hash": "bd07273d5822f34f",
    "carried": true,
    "pass": 1
+  },
+  {
+   "row": "C914",
+   "screen": "walk_zoe_sam.out",
+   "verdict": "N/A",
+   "line": "\u2014",
+   "why": "no row to grey: a walk-in that fires by itself",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "e3141d8b045f75c0",
+    "traits": "6b1e34b018661933",
+    "facts": "4ae042a05a9e14ff",
+    "facts2": "4d55dbcf69c3d492",
+    "all": "04a5facaf5f1fd64"
+   },
+   "row_hash": "bd07273d5822f34f",
+   "carried": false,
+   "pass": 25
+  },
+  {
+   "row": "C914",
+   "screen": "walk_zoe_sam.watch",
+   "verdict": "N/A",
+   "line": "\u2014",
+   "why": "no row to grey: a walk-in that fires by itself",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "ab738efb67514276",
+    "traits": "fa1a0a429fa0ea30",
+    "facts": "87496d6b62f3e92f",
+    "facts2": "f847c3bfcf338e31",
+    "all": "8ed238b7fe8c6955"
+   },
+   "row_hash": "bd07273d5822f34f",
+   "carried": false,
+   "pass": 25
   },
   {
    "row": "C916",
@@ -5456,6 +5874,44 @@
    "pass": 1
   },
   {
+   "row": "C916",
+   "screen": "walk_zoe_sam.out",
+   "verdict": "PASS",
+   "line": "trigger_mode = \"random\"",
+   "why": "the walk-in stays hidden out of its window",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "e3141d8b045f75c0",
+    "traits": "6b1e34b018661933",
+    "facts": "4ae042a05a9e14ff",
+    "facts2": "4d55dbcf69c3d492",
+    "all": "04a5facaf5f1fd64"
+   },
+   "row_hash": "7b2bb0dfdbcfe946",
+   "carried": false,
+   "pass": 25
+  },
+  {
+   "row": "C916",
+   "screen": "walk_zoe_sam.watch",
+   "verdict": "PASS",
+   "line": "trigger_mode = \"random\"",
+   "why": "the walk-in stays hidden out of its window",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "ab738efb67514276",
+    "traits": "fa1a0a429fa0ea30",
+    "facts": "87496d6b62f3e92f",
+    "facts2": "f847c3bfcf338e31",
+    "all": "8ed238b7fe8c6955"
+   },
+   "row_hash": "7b2bb0dfdbcfe946",
+   "carried": false,
+   "pass": 25
+  },
+  {
    "row": "C920",
    "screen": "*",
    "verdict": "N/A",
@@ -5467,6 +5923,44 @@
    "row_hash": "513927dd127fca04",
    "carried": true,
    "pass": 1
+  },
+  {
+   "row": "C920",
+   "screen": "walk_zoe_sam.out",
+   "verdict": "PASS",
+   "line": "Done to near_zoe_apartment, 5 minutes",
+   "why": "no hop: she stays in the living room; the 5 minutes is the act",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "e3141d8b045f75c0",
+    "traits": "6b1e34b018661933",
+    "facts": "4ae042a05a9e14ff",
+    "facts2": "4d55dbcf69c3d492",
+    "all": "04a5facaf5f1fd64"
+   },
+   "row_hash": "513927dd127fca04",
+   "carried": false,
+   "pass": 25
+  },
+  {
+   "row": "C920",
+   "screen": "walk_zoe_sam.watch",
+   "verdict": "PASS",
+   "line": "Done to near_zoe_apartment, 5 minutes",
+   "why": "no hop: she stays in the living room; the 5 minutes is the act",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "ab738efb67514276",
+    "traits": "fa1a0a429fa0ea30",
+    "facts": "87496d6b62f3e92f",
+    "facts2": "f847c3bfcf338e31",
+    "all": "8ed238b7fe8c6955"
+   },
+   "row_hash": "513927dd127fca04",
+   "carried": false,
+   "pass": 25
   },
   {
    "row": "C924",
@@ -5482,6 +5976,44 @@
    "pass": 1
   },
   {
+   "row": "C924",
+   "screen": "walk_zoe_sam.out",
+   "verdict": "N/A",
+   "line": "\u2014",
+   "why": "no travel on these screens",
+   "cause": null,
+   "note": true,
+   "screen_hash": {
+    "text": "e3141d8b045f75c0",
+    "traits": "6b1e34b018661933",
+    "facts": "4ae042a05a9e14ff",
+    "facts2": "4d55dbcf69c3d492",
+    "all": "04a5facaf5f1fd64"
+   },
+   "row_hash": "791cd173e23fb130",
+   "carried": false,
+   "pass": 25
+  },
+  {
+   "row": "C924",
+   "screen": "walk_zoe_sam.watch",
+   "verdict": "N/A",
+   "line": "\u2014",
+   "why": "no travel on these screens",
+   "cause": null,
+   "note": true,
+   "screen_hash": {
+    "text": "ab738efb67514276",
+    "traits": "fa1a0a429fa0ea30",
+    "facts": "87496d6b62f3e92f",
+    "facts2": "f847c3bfcf338e31",
+    "all": "8ed238b7fe8c6955"
+   },
+   "row_hash": "791cd173e23fb130",
+   "carried": false,
+   "pass": 25
+  },
+  {
    "row": "C926",
    "screen": "*",
    "verdict": "PASS",
@@ -5493,6 +6025,44 @@
    "row_hash": "177d1e1776fac74b",
    "carried": true,
    "pass": 1
+  },
+  {
+   "row": "C926",
+   "screen": "walk_zoe_sam.out",
+   "verdict": "PASS",
+   "line": "\u2014",
+   "why": "minutes only",
+   "cause": null,
+   "note": true,
+   "screen_hash": {
+    "text": "e3141d8b045f75c0",
+    "traits": "6b1e34b018661933",
+    "facts": "4ae042a05a9e14ff",
+    "facts2": "4d55dbcf69c3d492",
+    "all": "04a5facaf5f1fd64"
+   },
+   "row_hash": "177d1e1776fac74b",
+   "carried": false,
+   "pass": 25
+  },
+  {
+   "row": "C926",
+   "screen": "walk_zoe_sam.watch",
+   "verdict": "PASS",
+   "line": "\u2014",
+   "why": "minutes only",
+   "cause": null,
+   "note": true,
+   "screen_hash": {
+    "text": "ab738efb67514276",
+    "traits": "fa1a0a429fa0ea30",
+    "facts": "87496d6b62f3e92f",
+    "facts2": "f847c3bfcf338e31",
+    "all": "8ed238b7fe8c6955"
+   },
+   "row_hash": "177d1e1776fac74b",
+   "carried": false,
+   "pass": 25
   },
   {
    "row": "C927",
@@ -5530,58 +6100,58 @@
    "row": "C927",
    "screen": "walk_chris_store.watch",
    "verdict": "PASS",
-   "line": "He fingers her faster, two deep in her cunt, until her knees buckle and she cums on his hand",
-   "why": "\"Done\" spends 5 minutes, stated",
+   "line": "time_progression_minutes = 5",
+   "why": "the exit states its time",
    "cause": null,
    "note": true,
    "screen_hash": {
-    "text": "ec357c61aa9ea0f3",
+    "text": "b2fda71c9cf8bb29",
     "traits": "1d58a0fd6061427e",
     "facts": "b6edc19b7be2164c",
     "facts2": "d822bf3cee64d8d0",
-    "all": "9ab3d9d43765db77"
+    "all": "2e17fb33bee2814a"
    },
    "row_hash": "4e86d143688ba8e5",
-   "carried": true,
-   "pass": 23
+   "carried": false,
+   "pass": 25
   },
   {
    "row": "C927",
    "screen": "walk_party_bathroom.shut",
    "verdict": "PASS",
    "line": "time_progression_minutes = 5",
-   "why": "the exit carries 5",
+   "why": "the exit states its time",
    "cause": null,
    "note": true,
    "screen_hash": {
-    "text": "d3cb1c2bd040cc7b",
+    "text": "47e9fc002aae45fc",
     "traits": "44136fa355b3678a",
-    "facts": "508ba626ee181f48",
-    "facts2": "508ba626ee181f48",
-    "all": "7177b2858b4fe286"
+    "facts": "24db73bfc2494c60",
+    "facts2": "24db73bfc2494c60",
+    "all": "db702e44225938b2"
    },
    "row_hash": "4e86d143688ba8e5",
-   "carried": true,
-   "pass": 22
+   "carried": false,
+   "pass": 25
   },
   {
    "row": "C927",
    "screen": "walk_party_bathroom.watch",
    "verdict": "PASS",
    "line": "time_progression_minutes = 5",
-   "why": "the exit carries 5",
+   "why": "the exit states its time",
    "cause": null,
    "note": true,
    "screen_hash": {
-    "text": "2fb69aab14c4b1c7",
+    "text": "d6603d685b3399dd",
     "traits": "44136fa355b3678a",
-    "facts": "508ba626ee181f48",
-    "facts2": "508ba626ee181f48",
-    "all": "d96ea4c637fd764e"
+    "facts": "24db73bfc2494c60",
+    "facts2": "24db73bfc2494c60",
+    "all": "d5b454f786b91d18"
    },
    "row_hash": "4e86d143688ba8e5",
-   "carried": true,
-   "pass": 22
+   "carried": false,
+   "pass": 25
   },
   {
    "row": "C927",
@@ -5663,77 +6233,77 @@
    "row": "C927",
    "screen": "walk_zoe_outfits.pick",
    "verdict": "PASS",
-   "line": "You point at the black one. / \"Obviously. You get me.\"",
-   "why": "its exit, Done, costs 5 minutes",
+   "line": "time_progression_minutes = 5",
+   "why": "the exit states its time",
    "cause": null,
    "note": true,
    "screen_hash": {
-    "text": "a1d96047e25f00b9",
+    "text": "689019c72b1bc1f1",
     "traits": "6b1e34b018661933",
-    "facts": "df3581105d9dfadd",
-    "facts2": "fc2568396f51a2d0",
-    "all": "72993167de149740"
+    "facts": "06634feae140e938",
+    "facts2": "30fbbccf95ef2f4a",
+    "all": "5d54b9fb75438015"
    },
    "row_hash": "4e86d143688ba8e5",
-   "carried": true,
-   "pass": 8
+   "carried": false,
+   "pass": 25
   },
   {
    "row": "C927",
    "screen": "walk_zoe_outfits.wearing",
    "verdict": "PASS",
-   "line": "\"Ha. Bitch. You're right.\" / She doesn't put anything on.",
-   "why": "its exit, Done, costs 5 minutes",
+   "line": "time_progression_minutes = 5",
+   "why": "the exit states its time",
    "cause": null,
    "note": true,
    "screen_hash": {
-    "text": "a8d34059d7f2848b",
+    "text": "67339d25c34916dd",
     "traits": "6b1e34b018661933",
-    "facts": "df3581105d9dfadd",
-    "facts2": "fc2568396f51a2d0",
-    "all": "7119558468a0e27e"
+    "facts": "06634feae140e938",
+    "facts2": "30fbbccf95ef2f4a",
+    "all": "b81dd9ec92fee4d9"
    },
    "row_hash": "4e86d143688ba8e5",
-   "carried": true,
-   "pass": 8
+   "carried": false,
+   "pass": 25
   },
   {
    "row": "C927",
    "screen": "walk_zoe_sam.out",
    "verdict": "PASS",
-   "line": "Done",
-   "why": "time_progression_minutes = 5",
+   "line": "time_progression_minutes = 5",
+   "why": "the exit states its time",
    "cause": null,
    "note": true,
    "screen_hash": {
     "text": "e3141d8b045f75c0",
     "traits": "6b1e34b018661933",
-    "facts": "5ccc9ab8b606da87",
-    "facts2": "f9f6cd7a1a561521",
-    "all": "57c1ef8237313358"
+    "facts": "4ae042a05a9e14ff",
+    "facts2": "4d55dbcf69c3d492",
+    "all": "04a5facaf5f1fd64"
    },
    "row_hash": "4e86d143688ba8e5",
-   "carried": true,
-   "pass": 20
+   "carried": false,
+   "pass": 25
   },
   {
    "row": "C927",
    "screen": "walk_zoe_sam.watch",
    "verdict": "PASS",
-   "line": "Your thighs are pressed together and your face is on fire. [group saw_zoe_sam is_false] You know what that sofa's seen now.",
-   "why": "every exit on the screen sets time_progression_minutes explicitly (5), so the 3-minute default never applies",
+   "line": "time_progression_minutes = 5",
+   "why": "the exit states its time",
    "cause": null,
    "note": true,
    "screen_hash": {
     "text": "ab738efb67514276",
     "traits": "fa1a0a429fa0ea30",
-    "facts": "8182ce5904bce35b",
-    "facts2": "48fd486abd7e2f3c",
-    "all": "5c2a903d10f3fd06"
+    "facts": "87496d6b62f3e92f",
+    "facts2": "f847c3bfcf338e31",
+    "all": "8ed238b7fe8c6955"
    },
    "row_hash": "4e86d143688ba8e5",
-   "carried": true,
-   "pass": 19
+   "carried": false,
+   "pass": 25
   },
   {
    "row": "C928",
@@ -5749,6 +6319,44 @@
    "pass": 1
   },
   {
+   "row": "C928",
+   "screen": "walk_zoe_sam.out",
+   "verdict": "PASS",
+   "line": "\u2014",
+   "why": "no clock in prose",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "e3141d8b045f75c0",
+    "traits": "6b1e34b018661933",
+    "facts": "4ae042a05a9e14ff",
+    "facts2": "4d55dbcf69c3d492",
+    "all": "04a5facaf5f1fd64"
+   },
+   "row_hash": "2c3ccc6bd9929d7f",
+   "carried": false,
+   "pass": 25
+  },
+  {
+   "row": "C928",
+   "screen": "walk_zoe_sam.watch",
+   "verdict": "PASS",
+   "line": "\u2014",
+   "why": "no clock in prose",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "ab738efb67514276",
+    "traits": "fa1a0a429fa0ea30",
+    "facts": "87496d6b62f3e92f",
+    "facts2": "f847c3bfcf338e31",
+    "all": "8ed238b7fe8c6955"
+   },
+   "row_hash": "2c3ccc6bd9929d7f",
+   "carried": false,
+   "pass": 25
+  },
+  {
    "row": "C929",
    "screen": "*",
    "verdict": "PASS",
@@ -5762,6 +6370,44 @@
    "pass": 1
   },
   {
+   "row": "C929",
+   "screen": "walk_zoe_sam.out",
+   "verdict": "PASS",
+   "line": "Done",
+   "why": "no time on the label",
+   "cause": null,
+   "note": true,
+   "screen_hash": {
+    "text": "e3141d8b045f75c0",
+    "traits": "6b1e34b018661933",
+    "facts": "4ae042a05a9e14ff",
+    "facts2": "4d55dbcf69c3d492",
+    "all": "04a5facaf5f1fd64"
+   },
+   "row_hash": "18b0ecdf6d7fc901",
+   "carried": false,
+   "pass": 25
+  },
+  {
+   "row": "C929",
+   "screen": "walk_zoe_sam.watch",
+   "verdict": "PASS",
+   "line": "Done",
+   "why": "no time on the label",
+   "cause": null,
+   "note": true,
+   "screen_hash": {
+    "text": "ab738efb67514276",
+    "traits": "fa1a0a429fa0ea30",
+    "facts": "87496d6b62f3e92f",
+    "facts2": "f847c3bfcf338e31",
+    "all": "8ed238b7fe8c6955"
+   },
+   "row_hash": "18b0ecdf6d7fc901",
+   "carried": false,
+   "pass": 25
+  },
+  {
    "row": "C930",
    "screen": "*",
    "verdict": "PASS",
@@ -5773,6 +6419,44 @@
    "row_hash": "beb57cd46fe906bf",
    "carried": true,
    "pass": 1
+  },
+  {
+   "row": "C930",
+   "screen": "walk_zoe_sam.out",
+   "verdict": "PASS",
+   "line": "\u2014",
+   "why": "no show_when_blocked: it vanishes out of hours, as a walk-in should",
+   "cause": null,
+   "note": true,
+   "screen_hash": {
+    "text": "e3141d8b045f75c0",
+    "traits": "6b1e34b018661933",
+    "facts": "4ae042a05a9e14ff",
+    "facts2": "4d55dbcf69c3d492",
+    "all": "04a5facaf5f1fd64"
+   },
+   "row_hash": "beb57cd46fe906bf",
+   "carried": false,
+   "pass": 25
+  },
+  {
+   "row": "C930",
+   "screen": "walk_zoe_sam.watch",
+   "verdict": "PASS",
+   "line": "\u2014",
+   "why": "no show_when_blocked: it vanishes out of hours, as a walk-in should",
+   "cause": null,
+   "note": true,
+   "screen_hash": {
+    "text": "ab738efb67514276",
+    "traits": "fa1a0a429fa0ea30",
+    "facts": "87496d6b62f3e92f",
+    "facts2": "f847c3bfcf338e31",
+    "all": "8ed238b7fe8c6955"
+   },
+   "row_hash": "beb57cd46fe906bf",
+   "carried": false,
+   "pass": 25
   },
   {
    "row": "C931",
@@ -5810,58 +6494,58 @@
    "row": "C931",
    "screen": "walk_chris_store.watch",
    "verdict": "PASS",
-   "line": "He fingers her faster, two deep in her cunt, until her knees buckle and she cums on his hand",
-   "why": "time_of_day 10:00-19:00 on the trigger, end exclusive (v2.py:5323-5325)",
+   "line": "weekday [5,6], 10:00-19:00",
+   "why": "one window on one day kind (weekends); Chris there to 20:00",
    "cause": null,
    "note": true,
    "screen_hash": {
-    "text": "ec357c61aa9ea0f3",
+    "text": "b2fda71c9cf8bb29",
     "traits": "1d58a0fd6061427e",
     "facts": "b6edc19b7be2164c",
     "facts2": "d822bf3cee64d8d0",
-    "all": "9ab3d9d43765db77"
+    "all": "2e17fb33bee2814a"
    },
    "row_hash": "1aadffd96e76381c",
-   "carried": true,
-   "pass": 23
+   "carried": false,
+   "pass": 25
   },
   {
    "row": "C931",
    "screen": "walk_party_bathroom.shut",
    "verdict": "PASS",
-   "line": "start_time = \"21:00\", end_time = \"00:00\"",
-   "why": "re-read each render, wraps to the day end, end exclusive",
+   "line": "weekday [5], 21:00-00:00",
+   "why": "the end 00:00 wraps to day end, so 23:59 is in; one window",
    "cause": null,
    "note": true,
    "screen_hash": {
-    "text": "d3cb1c2bd040cc7b",
+    "text": "47e9fc002aae45fc",
     "traits": "44136fa355b3678a",
-    "facts": "508ba626ee181f48",
-    "facts2": "508ba626ee181f48",
-    "all": "7177b2858b4fe286"
+    "facts": "24db73bfc2494c60",
+    "facts2": "24db73bfc2494c60",
+    "all": "db702e44225938b2"
    },
    "row_hash": "1aadffd96e76381c",
-   "carried": true,
-   "pass": 22
+   "carried": false,
+   "pass": 25
   },
   {
    "row": "C931",
    "screen": "walk_party_bathroom.watch",
    "verdict": "PASS",
-   "line": "start_time = \"21:00\", end_time = \"00:00\"",
-   "why": "same",
+   "line": "weekday [5], 21:00-00:00",
+   "why": "the end 00:00 wraps to day end; one window",
    "cause": null,
    "note": true,
    "screen_hash": {
-    "text": "2fb69aab14c4b1c7",
+    "text": "d6603d685b3399dd",
     "traits": "44136fa355b3678a",
-    "facts": "508ba626ee181f48",
-    "facts2": "508ba626ee181f48",
-    "all": "d96ea4c637fd764e"
+    "facts": "24db73bfc2494c60",
+    "facts2": "24db73bfc2494c60",
+    "all": "d5b454f786b91d18"
    },
    "row_hash": "1aadffd96e76381c",
-   "carried": true,
-   "pass": 22
+   "carried": false,
+   "pass": 25
   },
   {
    "row": "C931",
@@ -5943,77 +6627,77 @@
    "row": "C931",
    "screen": "walk_zoe_outfits.pick",
    "verdict": "PASS",
-   "line": "You point at the black one. / \"Obviously. You get me.\"",
-   "why": "the trigger's time_of_day ends exclusive (or no clock window, presence-gated); the answer costs 0 and Done +5 still lands inside the place's hours",
+   "line": "time_of_day 18:00-19:00",
+   "why": "end exclusive; one window every day, matching Zoe's 18-19 row",
    "cause": null,
    "note": true,
    "screen_hash": {
-    "text": "a1d96047e25f00b9",
+    "text": "689019c72b1bc1f1",
     "traits": "6b1e34b018661933",
-    "facts": "df3581105d9dfadd",
-    "facts2": "fc2568396f51a2d0",
-    "all": "72993167de149740"
+    "facts": "06634feae140e938",
+    "facts2": "30fbbccf95ef2f4a",
+    "all": "5d54b9fb75438015"
    },
    "row_hash": "1aadffd96e76381c",
-   "carried": true,
-   "pass": 8
+   "carried": false,
+   "pass": 25
   },
   {
    "row": "C931",
    "screen": "walk_zoe_outfits.wearing",
    "verdict": "PASS",
-   "line": "\"Ha. Bitch. You're right.\" / She doesn't put anything on.",
-   "why": "the trigger's time_of_day ends exclusive (or no clock window, presence-gated); the answer costs 0 and Done +5 still lands inside the place's hours",
+   "line": "time_of_day 18:00-19:00",
+   "why": "end exclusive; one window every day, matching Zoe's 18-19 row",
    "cause": null,
    "note": true,
    "screen_hash": {
-    "text": "a8d34059d7f2848b",
+    "text": "67339d25c34916dd",
     "traits": "6b1e34b018661933",
-    "facts": "df3581105d9dfadd",
-    "facts2": "fc2568396f51a2d0",
-    "all": "7119558468a0e27e"
+    "facts": "06634feae140e938",
+    "facts2": "30fbbccf95ef2f4a",
+    "all": "b81dd9ec92fee4d9"
    },
    "row_hash": "1aadffd96e76381c",
-   "carried": true,
-   "pass": 8
+   "carried": false,
+   "pass": 25
   },
   {
    "row": "C931",
    "screen": "walk_zoe_sam.out",
    "verdict": "PASS",
-   "line": "time_of_day 19:00-23:00 / Sat 19:00-21:00",
-   "why": "end-exclusive windows; no line names a clock time",
+   "line": "time_of_day 19:00-23:00 / 19:00-21:00",
+   "why": "end exclusive, re-read each evaluation, matches Zoe's split rows",
    "cause": null,
    "note": true,
    "screen_hash": {
     "text": "e3141d8b045f75c0",
     "traits": "6b1e34b018661933",
-    "facts": "5ccc9ab8b606da87",
-    "facts2": "f9f6cd7a1a561521",
-    "all": "57c1ef8237313358"
+    "facts": "4ae042a05a9e14ff",
+    "facts2": "4d55dbcf69c3d492",
+    "all": "04a5facaf5f1fd64"
    },
    "row_hash": "1aadffd96e76381c",
-   "carried": true,
-   "pass": 20
+   "carried": false,
+   "pass": 25
   },
   {
    "row": "C931",
    "screen": "walk_zoe_sam.watch",
    "verdict": "PASS",
-   "line": "Your thighs are pressed together and your face is on fire. [group saw_zoe_sam is_false] You know what that sofa's seen now.",
-   "why": "trigger window is end-exclusive; no line names a clock time that disagrees with it",
+   "line": "time_of_day 19:00-23:00 / 19:00-21:00",
+   "why": "end exclusive, re-read each evaluation, matches Zoe's split rows",
    "cause": null,
    "note": true,
    "screen_hash": {
     "text": "ab738efb67514276",
     "traits": "fa1a0a429fa0ea30",
-    "facts": "8182ce5904bce35b",
-    "facts2": "48fd486abd7e2f3c",
-    "all": "5c2a903d10f3fd06"
+    "facts": "87496d6b62f3e92f",
+    "facts2": "f847c3bfcf338e31",
+    "all": "8ed238b7fe8c6955"
    },
    "row_hash": "1aadffd96e76381c",
-   "carried": true,
-   "pass": 19
+   "carried": false,
+   "pass": 25
   },
   {
    "row": "C951",
@@ -6122,77 +6806,77 @@
    "row": "L106",
    "screen": "walk_chris_store.watch",
    "verdict": "PASS",
-   "line": "He fingers her faster, two deep in her cunt, until her knees buckle and she cums on his hand",
-   "why": "Chris is there: trigger checks npc_at_location near_cafe; his rows put him there Sat/Sun 10-20",
+   "line": "Your nipples are hard. You're back out front before they come out. [saw_chris_store is_false] You know what Chris does on weekends now.",
+   "why": "names only who who_is_where puts there: trigger Sat/Sun 10:00-19:00, Chris at near_cafe Sat/Sun 10-20; 'weekends' sits behind weekday [5,6]; discovery line held on saw_chris_store; Done to near_cafe ('out front')",
    "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "ec357c61aa9ea0f3",
+    "text": "b2fda71c9cf8bb29",
     "traits": "1d58a0fd6061427e",
     "facts": "b6edc19b7be2164c",
     "facts2": "d822bf3cee64d8d0",
-    "all": "9ab3d9d43765db77"
+    "all": "2e17fb33bee2814a"
    },
    "row_hash": "13a714429d15f3b2",
-   "carried": true,
-   "pass": 23
+   "carried": false,
+   "pass": 25
   },
   {
    "row": "L106",
    "screen": "walk_party_bathroom.moment",
    "verdict": "PASS",
-   "line": "A couple is on the edge of the bath",
-   "why": "strangers only; no named person claimed",
+   "line": "You need the bathroom, and you push through the crowd to it. Its door isn't locked.",
+   "why": "names only who who_is_where puts there: fires in near_zoe_bathroom Sat 21:00-23:59 only (weekday 5 group), the party's hours by Zoe's Sat row; strangers only; the room's own text says the lock doesn't work",
    "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "596f9c3c88774612",
+    "text": "90431b1808f6f971",
     "traits": "44136fa355b3678a",
-    "facts": "508ba626ee181f48",
-    "facts2": "508ba626ee181f48",
-    "all": "15e8c3f8b94d892e"
+    "facts": "24db73bfc2494c60",
+    "facts2": "24db73bfc2494c60",
+    "all": "02a845cb5f6493f0"
    },
    "row_hash": "13a714429d15f3b2",
-   "carried": true,
-   "pass": 22
+   "carried": false,
+   "pass": 25
   },
   {
    "row": "L106",
    "screen": "walk_party_bathroom.shut",
    "verdict": "PASS",
    "line": "You shut the door. The music sounds louder than before.",
-   "why": "no person claimed",
+   "why": "names only who who_is_where puts there: the music is true Sat 21-00; Done to near_zoe_apartment matches shutting the door from outside (P83); discovery line held on the seen flag",
    "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "d3cb1c2bd040cc7b",
+    "text": "47e9fc002aae45fc",
     "traits": "44136fa355b3678a",
-    "facts": "508ba626ee181f48",
-    "facts2": "508ba626ee181f48",
-    "all": "7177b2858b4fe286"
+    "facts": "24db73bfc2494c60",
+    "facts2": "24db73bfc2494c60",
+    "all": "db702e44225938b2"
    },
    "row_hash": "13a714429d15f3b2",
-   "carried": true,
-   "pass": 22
+   "carried": false,
+   "pass": 25
   },
   {
    "row": "L106",
    "screen": "walk_party_bathroom.watch",
    "verdict": "PASS",
-   "line": "His tongue's buried in her cunt, his hands up on her tits, until she pulls his hair and cums, moaning over the music.",
-   "why": "the strangers only",
+   "line": "You're wet. You shut the door before they see you. [saw_party_bathroom is_false] You know that door now.",
+   "why": "names only who who_is_where puts there: strangers only; 'moaning over the music' true at every party minute; discovery line held on the seen flag; Done lands in the living room, outside the door she shut (P83)",
    "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "2fb69aab14c4b1c7",
+    "text": "d6603d685b3399dd",
     "traits": "44136fa355b3678a",
-    "facts": "508ba626ee181f48",
-    "facts2": "508ba626ee181f48",
-    "all": "d96ea4c637fd764e"
+    "facts": "24db73bfc2494c60",
+    "facts2": "24db73bfc2494c60",
+    "all": "d5b454f786b91d18"
    },
    "row_hash": "13a714429d15f3b2",
-   "carried": true,
-   "pass": 22
+   "carried": false,
+   "pass": 25
   },
   {
    "row": "L106",
@@ -6313,114 +6997,114 @@
    "screen": "walk_zoe_outfits.moment",
    "verdict": "PASS",
    "line": "Zoe's at the mirror in her underwear with three outfits on the bed behind her.",
-   "why": "every person the line puts here is put here by their rows at every minute the screen can show (who_is_where), and gated is_present on the trigger",
+   "why": "names only who who_is_where puts there: fires in near_zoe_room 18:00-19:00; Zoe's P83 row is near_zoe_room 18-19 every day ('getting ready'), gated is_present; the room has the full-length mirror (its description)",
    "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "962bd5335cde80e6",
+    "text": "425efc7e51575d65",
     "traits": "6b1e34b018661933",
-    "facts": "df3581105d9dfadd",
-    "facts2": "fc2568396f51a2d0",
-    "all": "18e9170a277b0c78"
+    "facts": "06634feae140e938",
+    "facts2": "30fbbccf95ef2f4a",
+    "all": "5242a309407d79c8"
    },
    "row_hash": "13a714429d15f3b2",
-   "carried": true,
-   "pass": 8
+   "carried": false,
+   "pass": 25
   },
   {
    "row": "L106",
    "screen": "walk_zoe_outfits.pick",
    "verdict": "PASS",
-   "line": "You point at the black one. / \"Obviously. You get me.\"",
-   "why": "every person the line puts here is put here by their rows at every minute the screen can show (who_is_where), and gated is_present on the trigger",
+   "line": "You point at the black one. / She'll be choosing again tomorrow.",
+   "why": "names only who who_is_where puts there: Zoe present; 'again tomorrow' is true by her 18-19 getting-ready row on all seven days",
    "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "a1d96047e25f00b9",
+    "text": "689019c72b1bc1f1",
     "traits": "6b1e34b018661933",
-    "facts": "df3581105d9dfadd",
-    "facts2": "fc2568396f51a2d0",
-    "all": "72993167de149740"
+    "facts": "06634feae140e938",
+    "facts2": "30fbbccf95ef2f4a",
+    "all": "5d54b9fb75438015"
    },
    "row_hash": "13a714429d15f3b2",
-   "carried": true,
-   "pass": 8
+   "carried": false,
+   "pass": 25
   },
   {
    "row": "L106",
    "screen": "walk_zoe_outfits.wearing",
    "verdict": "PASS",
-   "line": "\"Ha. Bitch. You're right.\" / She doesn't put anything on.",
-   "why": "every person the line puts here is put here by their rows at every minute the screen can show (who_is_where), and gated is_present on the trigger",
+   "line": "\"Ha. Bitch. You're right.\" / She doesn't put anything on. She'll be choosing again tomorrow.",
+   "why": "names only who who_is_where puts there: fits Zoe in her underwear on the moment; 'again tomorrow' true by her daily 18-19 row",
    "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "a8d34059d7f2848b",
+    "text": "67339d25c34916dd",
     "traits": "6b1e34b018661933",
-    "facts": "df3581105d9dfadd",
-    "facts2": "fc2568396f51a2d0",
-    "all": "7119558468a0e27e"
+    "facts": "06634feae140e938",
+    "facts2": "30fbbccf95ef2f4a",
+    "all": "b81dd9ec92fee4d9"
    },
    "row_hash": "13a714429d15f3b2",
-   "carried": true,
-   "pass": 8
+   "carried": false,
+   "pass": 25
   },
   {
    "row": "L106",
    "screen": "walk_zoe_sam.moment",
    "verdict": "PASS",
    "line": "Through the half-open hall door: Zoe on top of Sam on the sofa ... Your nipples go hard.",
-   "why": "every person the line puts here is put here by their rows at every minute the screen can show (who_is_where), and gated is_present on the trigger",
+   "why": "names only who who_is_where puts there: fires on arrival in the living room, 19:00-23:00 Sun-Fri and 19:00-21:00 Sat; who_is_where after P83 puts Zoe at near_zoe_apartment 19-23 (Sat 19-24) and Sam 12-02; both gated is_present; met_sam",
    "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "c248c279bc7201af",
+    "text": "db73f4e22b7ca4a4",
     "traits": "fa1a0a429fa0ea30",
-    "facts": "c3521100b11dca8e",
-    "facts2": "48fd486abd7e2f3c",
-    "all": "4b5691a8adc0d4ca"
+    "facts": "87496d6b62f3e92f",
+    "facts2": "f847c3bfcf338e31",
+    "all": "980507932521afaa"
    },
    "row_hash": "13a714429d15f3b2",
-   "carried": true,
-   "pass": 8
+   "carried": false,
+   "pass": 25
   },
   {
    "row": "L106",
    "screen": "walk_zoe_sam.out",
    "verdict": "PASS",
    "line": "You pull the door to, quietly. Zoe's laugh carries through it, and your face burns.",
-   "why": "Zoe and Sam both required is_present",
+   "why": "names only who who_is_where puts there: Zoe present at every minute the trigger allows (19:00-22:59, Sat 19:00-20:59); a this-moment line, no past, no time",
    "cause": null,
    "note": false,
    "screen_hash": {
     "text": "e3141d8b045f75c0",
     "traits": "6b1e34b018661933",
-    "facts": "5ccc9ab8b606da87",
-    "facts2": "f9f6cd7a1a561521",
-    "all": "57c1ef8237313358"
+    "facts": "4ae042a05a9e14ff",
+    "facts2": "4d55dbcf69c3d492",
+    "all": "04a5facaf5f1fd64"
    },
    "row_hash": "13a714429d15f3b2",
-   "carried": true,
-   "pass": 20
+   "carried": false,
+   "pass": 25
   },
   {
    "row": "L106",
    "screen": "walk_zoe_sam.watch",
    "verdict": "PASS",
-   "line": "Your thighs are pressed together and your face is on fire. [group saw_zoe_sam is_false] You know what that sofa's seen now.",
-   "why": "Zoe and Sam named; trigger requires both is_present",
+   "line": "Your thighs are pressed together and your face is on fire. [saw_zoe_sam is_false] You know what that sofa's seen now.",
+   "why": "names only who who_is_where puts there: Zoe and Sam present by rows and trigger at every minute of both windows; the discovery line held on saw_zoe_sam is_false, set on Done",
    "cause": null,
    "note": false,
    "screen_hash": {
     "text": "ab738efb67514276",
     "traits": "fa1a0a429fa0ea30",
-    "facts": "8182ce5904bce35b",
-    "facts2": "48fd486abd7e2f3c",
-    "all": "5c2a903d10f3fd06"
+    "facts": "87496d6b62f3e92f",
+    "facts2": "f847c3bfcf338e31",
+    "all": "8ed238b7fe8c6955"
    },
    "row_hash": "13a714429d15f3b2",
-   "carried": true,
-   "pass": 19
+   "carried": false,
+   "pass": 25
   },
   {
    "row": "L119",
@@ -6628,58 +7312,58 @@
    "row": "L167",
    "screen": "walk_chris_store.watch",
    "verdict": "PASS",
-   "line": "He fingers her faster, two deep in her cunt, until her knees buckle and she cums on his hand",
-   "why": "one row with a weekday condition, not one per day kind",
+   "line": "weekday [5,6], 10:00-19:00",
+   "why": "one trigger row, one window; greying N/A for a walk-in (C916)",
    "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "ec357c61aa9ea0f3",
+    "text": "b2fda71c9cf8bb29",
     "traits": "1d58a0fd6061427e",
     "facts": "b6edc19b7be2164c",
     "facts2": "d822bf3cee64d8d0",
-    "all": "9ab3d9d43765db77"
+    "all": "2e17fb33bee2814a"
    },
    "row_hash": "e64ce2672d85d2d8",
-   "carried": true,
-   "pass": 23
+   "carried": false,
+   "pass": 25
   },
   {
    "row": "L167",
    "screen": "walk_party_bathroom.shut",
    "verdict": "PASS",
-   "line": "{ type = \"group\", logic = \"AND\", ... weekdays = [5] ... }",
-   "why": "one row, one day kind; a scene that happens to her stays hidden when shut (C916)",
+   "line": "weekday [5], 21:00-00:00",
+   "why": "one trigger row, one window; greying N/A for a walk-in (C916)",
    "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "d3cb1c2bd040cc7b",
+    "text": "47e9fc002aae45fc",
     "traits": "44136fa355b3678a",
-    "facts": "508ba626ee181f48",
-    "facts2": "508ba626ee181f48",
-    "all": "7177b2858b4fe286"
+    "facts": "24db73bfc2494c60",
+    "facts2": "24db73bfc2494c60",
+    "all": "db702e44225938b2"
    },
    "row_hash": "e64ce2672d85d2d8",
-   "carried": true,
-   "pass": 22
+   "carried": false,
+   "pass": 25
   },
   {
    "row": "L167",
    "screen": "walk_party_bathroom.watch",
    "verdict": "PASS",
-   "line": "{ type = \"group\", logic = \"AND\", ... weekdays = [5] ... }",
-   "why": "same",
+   "line": "weekday [5], 21:00-00:00",
+   "why": "one trigger row, one window; greying N/A for a walk-in (C916)",
    "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "2fb69aab14c4b1c7",
+    "text": "d6603d685b3399dd",
     "traits": "44136fa355b3678a",
-    "facts": "508ba626ee181f48",
-    "facts2": "508ba626ee181f48",
-    "all": "d96ea4c637fd764e"
+    "facts": "24db73bfc2494c60",
+    "facts2": "24db73bfc2494c60",
+    "all": "d5b454f786b91d18"
    },
    "row_hash": "e64ce2672d85d2d8",
-   "carried": true,
-   "pass": 22
+   "carried": false,
+   "pass": 25
   },
   {
    "row": "L167",
@@ -6761,77 +7445,77 @@
    "row": "L167",
    "screen": "walk_zoe_outfits.pick",
    "verdict": "PASS",
-   "line": "You point at the black one. / \"Obviously. You get me.\"",
-   "why": "one canvas per scene; days with different hours are one trigger with an OR group, never one row per day kind; a walk-in hides out of its window by design (C916)",
+   "line": "time_of_day 18:00-19:00",
+   "why": "one trigger row, one window; greying N/A for a walk-in (C916)",
    "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "a1d96047e25f00b9",
+    "text": "689019c72b1bc1f1",
     "traits": "6b1e34b018661933",
-    "facts": "df3581105d9dfadd",
-    "facts2": "fc2568396f51a2d0",
-    "all": "72993167de149740"
+    "facts": "06634feae140e938",
+    "facts2": "30fbbccf95ef2f4a",
+    "all": "5d54b9fb75438015"
    },
    "row_hash": "e64ce2672d85d2d8",
-   "carried": true,
-   "pass": 8
+   "carried": false,
+   "pass": 25
   },
   {
    "row": "L167",
    "screen": "walk_zoe_outfits.wearing",
    "verdict": "PASS",
-   "line": "\"Ha. Bitch. You're right.\" / She doesn't put anything on.",
-   "why": "one canvas per scene; days with different hours are one trigger with an OR group, never one row per day kind; a walk-in hides out of its window by design (C916)",
+   "line": "time_of_day 18:00-19:00",
+   "why": "one trigger row, one window; greying N/A for a walk-in (C916)",
    "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "a8d34059d7f2848b",
+    "text": "67339d25c34916dd",
     "traits": "6b1e34b018661933",
-    "facts": "df3581105d9dfadd",
-    "facts2": "fc2568396f51a2d0",
-    "all": "7119558468a0e27e"
+    "facts": "06634feae140e938",
+    "facts2": "30fbbccf95ef2f4a",
+    "all": "b81dd9ec92fee4d9"
    },
    "row_hash": "e64ce2672d85d2d8",
-   "carried": true,
-   "pass": 8
+   "carried": false,
+   "pass": 25
   },
   {
    "row": "L167",
    "screen": "walk_zoe_sam.out",
    "verdict": "PASS",
-   "line": "one trigger with a weekday group",
-   "why": "Zoe/Sam hours differ by day in one trigger's group, not per-day rows",
+   "line": "group OR of [Sun-Fri 19-23] and [Sat 19-21]",
+   "why": "different hours on different days in one trigger group; greying N/A for a walk-in (C916)",
    "cause": null,
    "note": false,
    "screen_hash": {
     "text": "e3141d8b045f75c0",
     "traits": "6b1e34b018661933",
-    "facts": "5ccc9ab8b606da87",
-    "facts2": "f9f6cd7a1a561521",
-    "all": "57c1ef8237313358"
+    "facts": "4ae042a05a9e14ff",
+    "facts2": "4d55dbcf69c3d492",
+    "all": "04a5facaf5f1fd64"
    },
    "row_hash": "e64ce2672d85d2d8",
-   "carried": true,
-   "pass": 20
+   "carried": false,
+   "pass": 25
   },
   {
    "row": "L167",
    "screen": "walk_zoe_sam.watch",
    "verdict": "PASS",
-   "line": "Your thighs are pressed together and your face is on fire. [group saw_zoe_sam is_false] You know what that sofa's seen now.",
-   "why": "one trigger for the walk-in; no per-day-kind duplicate rows",
+   "line": "group OR of [Sun-Fri 19-23] and [Sat 19-21]",
+   "why": "different hours on different days in one trigger group; greying N/A for a walk-in (C916)",
    "cause": null,
    "note": false,
    "screen_hash": {
     "text": "ab738efb67514276",
     "traits": "fa1a0a429fa0ea30",
-    "facts": "8182ce5904bce35b",
-    "facts2": "48fd486abd7e2f3c",
-    "all": "5c2a903d10f3fd06"
+    "facts": "87496d6b62f3e92f",
+    "facts2": "f847c3bfcf338e31",
+    "all": "8ed238b7fe8c6955"
    },
    "row_hash": "e64ce2672d85d2d8",
-   "carried": true,
-   "pass": 19
+   "carried": false,
+   "pass": 25
   },
   {
    "row": "L170",
@@ -6875,8 +7559,8 @@
  ],
  "causes": [],
  "pending": [],
- "asked": 1,
- "answered": 1,
+ "asked": 114,
+ "answered": 114,
  "pass_items": [],
  "unowed": []
 }

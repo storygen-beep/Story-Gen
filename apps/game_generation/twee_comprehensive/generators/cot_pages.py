@@ -289,6 +289,39 @@ jQuery(document).on("click", "#help-backward", function () { Engine.play("Quests
 // ← Back at the top of the Quests and People pages: back to the game, as the old bottom link did.
 // Bound under one name, so the People script (which binds it too) never doubles it.
 jQuery(document).off("click.cotback").on("click.cotback", ".cot-back", function () { setup.smartBack(); });
+
+// Page memory (P81). The page's own notes - Quests opened, each storyline's last-seen line, the
+// chosen chip - must not be undone by a rewind. ← Back from a scene and the sidebar's ← arrow
+// move back through history (setup.smartBack's Engine.goTo, Engine.backward), and that restores
+// every variable as it was, so the button glowed again and old changes showed as new. The notes
+// are kept here as they stand and put back when the game moves to another moment in history.
+// A save load is not a move in history (its moments are new objects), so a loaded save keeps
+// its own notes. Only these keys are carried; the scene's own effects are never re-run.
+setup.pageMemoryKeys = ["hints_opened", "hints_seen", "hintCat"];
+var memory = null, memoryMoment = null;
+function noteMemory() {
+    var v = State.variables;
+    memory = {};
+    setup.pageMemoryKeys.forEach(function (k) {
+        if (v[k] !== undefined) memory[k] = clone(v[k]);
+    });
+    memoryMoment = State.history[State.activeIndex];
+}
+setup.notePageMemory = noteMemory;
+jQuery(document).on(":passageinit", function () {
+    if (!memory) return;
+    var at = State.history.indexOf(memoryMoment);
+    if (at === -1 || at === State.activeIndex) return;
+    var targets = [State.variables, State.history[State.activeIndex].variables];
+    targets.forEach(function (vars) {
+        setup.pageMemoryKeys.forEach(function (k) {
+            if (memory.hasOwnProperty(k)) vars[k] = clone(memory[k]);
+            else delete vars[k];
+        });
+    });
+});
+jQuery(document).on(":passageend", noteMemory);
+jQuery(document).on("click", "#hintfilters .hint-chip", noteMemory);
 })();
 """
 

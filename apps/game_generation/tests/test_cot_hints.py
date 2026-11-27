@@ -385,3 +385,43 @@ def test_quests_and_a_walkthrough_are_pages_with_back_at_the_top(html):
         g.page.wait_for_timeout(150)
         assert g.passage() == "Location_loc_home"
         assert g.errors == []
+
+
+def _glows(g):
+    return g.js("() => !!document.querySelector('#journal-btn-widget .glow')")
+
+
+@needs_browser
+def test_going_back_does_not_undo_what_the_page_remembers(html):
+    """P81, LO 2026-11-28 ("quests in the sidebar always keeps on glowing"): going back through
+    history (the sidebar's ← arrow, and ← Back from a scene) restored every variable, so the
+    glow, the "Updated" tags and the chosen chip came back. The page's notes now ride along; a
+    loaded save keeps its own."""
+    with open_game(html) as g:
+        g.play("Location_loc_home")
+        g.js("() => SugarCube.Save.slots.save(0)")
+        _open(g)
+        _chip(g, _chips(g)[1][0])
+        cat = g.sv("hintCat")
+        assert cat
+        g.js("() => SugarCube.Engine.backward()")
+        g.page.wait_for_timeout(150)
+        assert g.passage() == "Location_loc_home"
+        assert not _glows(g) and g.sv("hints_opened") is True and g.sv("hintCat") == cat
+        # The note is in the history moment too, so a save made now keeps it.
+        assert g.js(
+            "() => SugarCube.State.history[SugarCube.State.activeIndex].variables.hints_opened"
+        ) is True
+
+        _flags(g, job_got=True)  # The Job's line moves on
+        g.play("Location_loc_home")
+        _open(g)
+        assert _entries(g)["The Job"][4] == "Updated"
+        g.js("() => SugarCube.Engine.backward()")
+        g.page.wait_for_timeout(150)
+        assert _badge(g) == ""  # seen, and the rewind did not un-see it
+
+        g.js("() => SugarCube.Save.slots.load(0)")
+        g.page.wait_for_timeout(300)
+        assert _glows(g) and g.sv("hints_opened") is None
+        assert g.errors == []
