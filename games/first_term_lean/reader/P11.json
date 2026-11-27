@@ -1,6 +1,6 @@
 {
  "piece": "P11",
- "pass": 20,
+ "pass": 23,
  "screens": {
   "mark_kitchen.hub": {
    "text": "cebee1bac30c4ca9",
@@ -178,7 +178,7 @@
   "C1267": "f0db81b801577bf2",
   "C1249": "a843f9b57e43a020",
   "C1250": "fde578d75b0d3620",
-  "C1265": "eb11e05cd75e52a9",
+  "C1265": "689fd05a4bcbd8be",
   "C1234": "1b2a2d5f05b10331",
   "L121": "45842b25d0708a15",
   "L125": "1fca3bfe1d0c2419",
@@ -222,7 +222,7 @@
   "C2198": "73dfe095a72154a3",
   "C769": "f6b6f78a8f2e5ed7",
   "C794": "bad76e5963432385",
-  "C2201": "d119dfe665f76359",
+  "C2201": "7fddf5e17dbdaaf9",
   "C795": "34139e6a6914e171",
   "C804": "5358489178bff0a4",
   "L106": "13a714429d15f3b2",
@@ -234,6 +234,7 @@
   "C762": "40e85f1ae92f1e71",
   "L170": "c3599cd09637a240",
   "C770": "ff9aa31c11e5d50f",
+  "C2203": "365a29fd77f6b765",
   "C771": "563e3d25c3219dd0",
   "L166": "c12d10588197fbaf",
   "C1303": "5b031a6b82899cfd",
@@ -261,6 +262,7 @@
   "C422": "7e128897077ecee6",
   "C460": "67e48e60d5053a2e",
   "C2202": "6e90fed7eae62131",
+  "C2206": "d8ebf6d6b2abf6a5",
   "C461": "310706ee076318f2",
   "C2188": "612394eef6826900",
   "C2189": "20748838895e4545"
@@ -1213,7 +1215,7 @@
    "screen": "mark_kitchen.hub",
    "verdict": "PASS",
    "line": "Mark's at the table with his coffee. He looks at you over the rim.",
-   "why": "a person's menu opened from his face: the C596 exception; one picture right after the first line",
+   "why": "a person's menu opened from his face: the C596 exception",
    "cause": null,
    "note": false,
    "screen_hash": {
@@ -1223,9 +1225,9 @@
     "facts2": "8ff6682bbd8fcf1c",
     "all": "a6f6a2b85d23b3a2"
    },
-   "row_hash": "eb11e05cd75e52a9",
+   "row_hash": "689fd05a4bcbd8be",
    "carried": true,
-   "pass": 17
+   "pass": 22
   },
   {
    "row": "C1267",
@@ -1915,7 +1917,7 @@
     "all": "49da2ec68f166d6c"
    },
    "row_hash": "73dfe095a72154a3",
-   "carried": false,
+   "carried": true,
    "pass": 20
   },
   {
@@ -1923,13 +1925,13 @@
    "screen": "*",
    "verdict": "N/A",
    "line": "\u2014",
-   "why": "builds no place description (mark_kitchen); a scene is not a place's description",
+   "why": "builds no place description; its screens are scenes or menus, and a scene is not a place's description",
    "cause": null,
    "note": false,
    "screen_hash": "a39e91e49c8b67e1",
-   "row_hash": "d119dfe665f76359",
+   "row_hash": "7fddf5e17dbdaaf9",
    "carried": true,
-   "pass": 19
+   "pass": 21
   },
   {
    "row": "C2202",
@@ -1941,8 +1943,34 @@
    "note": false,
    "screen_hash": "a39e91e49c8b67e1",
    "row_hash": "6e90fed7eae62131",
-   "carried": false,
+   "carried": true,
    "pass": 20
+  },
+  {
+   "row": "C2203",
+   "screen": "*",
+   "verdict": "N/A",
+   "line": "\u2014",
+   "why": "no event at its places: nothing here has hours of its own as a party or night out; Zoe's party (C2203) is P75's and P05's place",
+   "cause": null,
+   "note": false,
+   "screen_hash": "a39e91e49c8b67e1",
+   "row_hash": "365a29fd77f6b765",
+   "carried": true,
+   "pass": 21
+  },
+  {
+   "row": "C2206",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "mark_kitchen",
+   "why": "mark_kitchen.rent: 25 groups, 18 conditions (check skips it); read by hand: each bucket (rent_paid_total band x rent_weeks_owed 0-3) has a money-short group then its catch-all, disjoint, every group can show",
+   "cause": null,
+   "note": false,
+   "screen_hash": "a39e91e49c8b67e1",
+   "row_hash": "d8ebf6d6b2abf6a5",
+   "carried": false,
+   "pass": 23
   },
   {
    "row": "C338",
@@ -3596,8 +3624,8 @@
  ],
  "causes": [],
  "pending": [],
- "asked": 2,
- "answered": 2,
+ "asked": 1,
+ "answered": 1,
  "pass_items": [],
  "unowed": []
 }

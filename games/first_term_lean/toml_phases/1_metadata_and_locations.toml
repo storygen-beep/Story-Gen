@@ -76,6 +76,10 @@ flag_keys = [
   "met_sam", "sam_later", "sam_wait", "sam_silent",
   # P38 — walk-ins at home; P37 — the party, once a Saturday
   "saw_mom_and_mark", "saw_ryan_phone", "sat_with_mom_bills", "heard_mark_short", "played_with_ryan", "ryan_saw_shower", "partied_this_week",
+  # P75 — the party's moments and the dare's answer
+  "zoe_dare_looked",
+  "zoe_dare_done",
+  "zoe_dare_danced", "party_drink_guy_seen", "party_brooke_seen", "party_zoe_sam_seen", "party_speaker_danced",
   # P39 — walk-ins, neighbourhood
   "noticed_street_leggings", "noticed_street_momtop", "noticed_street_skirt", "noticed_park_leggings", "noticed_gym_leggings",
   "saw_park_couple", "said_hello_vance", "saw_danny_deal", "saw_marco_squat", "told_nina_dress", "curtain_stranger",
@@ -209,11 +213,16 @@ default_entry = "hood_street"
 [[locations]]
 id = "hood_street"
 name = "Neighbourhood"
-description = "The neighbourhood: your street, the same row of houses, the corner shop at the end, the park across the road, the gym over the laundromat, the clothes shop, and a bus stop with its morning queue. Neighbours, dog walkers, kids on bikes."
+description = "The neighbourhood: your street, the same row of houses, the corner shop at the end, the park across the road, the gym over the laundromat, the clothes shop, and a bus stop."
 # P07 — the leave rule: a top and a bottom, or a dress (a dress counts for both, v2.py:2261).
 # P67 — and shoes, any pair (LO 2026-11-27); shoes are checked on their own (v2.py:2262).
 clothing_rules = [
   { slots_required = ["top", "bottom", "shoes"], message = "You're not going out like this. Go back up to your room and put on a top and a bottom, or a dress, and shoes." },
+]
+# P76 — the crowd only in its hours (C2201: an hour and an unnamed crowd); the two cover every hour.
+description_variants = [
+  { conditions = { version = "1.0", logic = "AND", items = [{ type = "time_of_day", start_time = "07:00", end_time = "21:00" }] }, text = "The neighbourhood: your street, the same row of houses, the corner shop at the end, the park across the road, the gym over the laundromat, the clothes shop, and a bus stop. Neighbours, dog walkers, kids on bikes." },
+  { conditions = { version = "1.0", logic = "AND", items = [{ type = "time_of_day", start_time = "21:00", end_time = "07:00" }] }, text = "The neighbourhood: your street, the same row of houses, the corner shop at the end, the park across the road, the gym over the laundromat, the clothes shop, and a bus stop. The street's dark. Curtains drawn, the bus stop empty." },
 ]
 # P72 — the description never reads her clothes (craft/places.md rule 1, C2201); being noticed is a scene (notice_street_*).
 parent = "neighbourhood"
@@ -231,8 +240,6 @@ image = "locations/hood_next_door_t0.jpg"
 # His face shows who is there (places.md rule 2); the room text only says when the chair is empty (LO: "yes on both").
 # places.md rule 6 is waived here: the house holds only his face and scenes (LO 2026-11-27, "yes on both").
 description_variants = [
-  # P69 — before she has met him he has no face here (faces are for people she has met), so an unnamed line (rule 2 allows it).
-  { conditions = { version = "1.0", logic = "AND", items = [{ type = "npc_at_location", npc_id = "npc_vance", location_id = "hood_next_door", operator = "is_present" }, { type = "flag", subject = "player", flag_key = "met_vance", operator = "is_false" }] }, text = "The house next door. The man who owns your family's house lives here: a porch, one chair on it, and a clear view of your front door. A man sits in the porch chair, watching the street." },
   { conditions = { version = "1.0", logic = "AND", items = [{ type = "npc_at_location", npc_id = "npc_vance", location_id = "hood_next_door", operator = "is_absent" }] }, text = "The house next door. The man who owns your family's house lives here: a porch, one chair on it, and a clear view of your front door. The chair is empty." },
 ]
 image_search_queries = ["woman of 18 on the pavement in front of a neighbour's porch with one chair", "young woman at the bottom of porch steps, suburban street"]
@@ -241,7 +248,12 @@ entry_from = "hood_street"
 [[locations]]
 id = "hood_shop"
 name = "Corner Shop"
-description = "The corner shop: snacks, cigarettes behind the counter, the till by the door. Locals in for milk, kids in for sweets. A sign on the door says it's open from 7am to 11pm."
+description = "The corner shop: snacks, cigarettes behind the counter, the till by the door. A sign on the door says it's open from 7am to 11pm."
+# P76 — the crowd only in its hours (C2201).
+description_variants = [
+  { conditions = { version = "1.0", logic = "AND", items = [{ type = "time_of_day", start_time = "07:00", end_time = "21:00" }] }, text = "The corner shop: snacks, cigarettes behind the counter, the till by the door. Locals in for milk, kids in for sweets. A sign on the door says it's open from 7am to 11pm." },
+  { conditions = { version = "1.0", logic = "AND", items = [{ type = "time_of_day", start_time = "21:00", end_time = "23:00" }] }, text = "The corner shop: snacks, cigarettes behind the counter, the till by the door. It's quiet this late, just the fridges humming. A sign on the door says it's open from 7am to 11pm." },
+]
 parent = "neighbourhood"
 kind = "destination"
 image = "locations/hood_shop_t0.jpg"
@@ -308,9 +320,9 @@ id = "campus_quad"
 name = "The Quad"
 description = "The quad. Paths cut across the grass to every building on campus."
 # P36 — the Sunday ranking board (PLAN 411): Brooke on top, Ella not on it; never changes in release 1.
+# P76 — Sunday only, the board and nothing about who is on it (C2201); "Read the board" shows the list (quad_board).
 description_variants = [
-  { conditions = { version = "1.0", logic = "AND", items = [{ type = "weekday", weekdays = [6] }, { type = "flag", subject = "player", flag_key = "met_brooke", operator = "is_true" }] }, text = "The quad. Paths cut across the grass to every building on campus. Someone's pinned this week's ranking to the board by the steps again. Brooke's name is at the top, in bigger letters than anyone needs. Yours isn't on it." },
-  { conditions = { version = "1.0", logic = "AND", items = [{ type = "weekday", weekdays = [6] }] }, text = "The quad. Paths cut across the grass to every building on campus. Someone's pinned this week's ranking to the board by the steps: a list of names, a blonde girl's photo at the top. Yours isn't on it." },
+  { conditions = { version = "1.0", logic = "AND", items = [{ type = "weekday", weekdays = [6] }] }, text = "The quad. Paths cut across the grass to every building on campus. Someone's pinned this week's ranking to the board by the steps." },
 ]
 parent = "campus"
 kind = "thoroughfare"
@@ -483,14 +495,11 @@ description = "The café across from campus: the coffee machine hissing, a long 
 description_variants = [
   # P31 — nobody behind the counter (places.md rule 2; LO 2026-11-24): each carries the line it replaces.
   { conditions = { version = "1.0", logic = "AND", items = [{ type = "npc_at_location", npc_id = "npc_tom", location_id = "near_cafe", operator = "is_absent" }, { type = "npc_at_location", npc_id = "npc_chris", location_id = "near_cafe", operator = "is_absent" }, { type = "flag", subject = "player", flag_key = "cafe_hired", operator = "is_false" }] }, text = "The café across from campus: the coffee machine hissing, a long counter, a tip jar by the till. A sign on the door says it's open from 7am to 9pm. A Help Wanted sign is taped in the window. Nobody's behind the counter. The machine hisses to itself." },
-  { conditions = { version = "1.0", logic = "AND", items = [{ type = "npc_at_location", npc_id = "npc_tom", location_id = "near_cafe", operator = "is_absent" }, { type = "npc_at_location", npc_id = "npc_chris", location_id = "near_cafe", operator = "is_absent" }, { type = "flag", subject = "player", flag_key = "cafe_first_shift_done", operator = "is_false" }] }, text = "The café across from campus: the coffee machine hissing, a long counter, a tip jar by the till. A sign on the door says it's open from 7am to 9pm. Your first shift starts on a weekday, between 10am and 3pm, while Tom and Chris are both in. Nobody's behind the counter. The machine hisses to itself." },
   { conditions = { version = "1.0", logic = "AND", items = [{ type = "npc_at_location", npc_id = "npc_tom", location_id = "near_cafe", operator = "is_absent" }, { type = "npc_at_location", npc_id = "npc_chris", location_id = "near_cafe", operator = "is_absent" }] }, text = "The café across from campus: the coffee machine hissing, a long counter, a tip jar by the till. A sign on the door says it's open from 7am to 9pm. Nobody's behind the counter. The machine hisses to itself." },
   { conditions = { version = "1.0", logic = "AND", items = [
       { type = "flag", subject = "player", flag_key = "cafe_hired", operator = "is_false" },
     ] }, text = "The café across from campus: the coffee machine hissing, a long counter, a tip jar by the till. A sign on the door says it's open from 7am to 9pm. A Help Wanted sign is taped in the window." },
-  { conditions = { version = "1.0", logic = "AND", items = [
-      { type = "flag", subject = "player", flag_key = "cafe_first_shift_done", operator = "is_false" },
-    ] }, text = "The café across from campus: the coffee machine hissing, a long counter, a tip jar by the till. A sign on the door says it's open from 7am to 9pm. Your first shift starts on a weekday, between 10am and 3pm, while Tom and Chris are both in." },
+
 ]
 parent = "near_campus"
 entry_from = "town_square"
@@ -515,6 +524,10 @@ hidden_until = { flag = "zoe_place_known" }
 # P27 — what opens the door (LO, NOTES 41): someone home to answer, every day 12:00–02:00 (Sam's row).
 hours = [{ weekdays = [], open = "12:00", close = "02:00" }]
 closed_text = "You knock on the green door. Nobody answers."
+# P75 — during the party the place is the party: its opening, the hour and an unnamed crowd only (C2201, C2203).
+description_variants = [
+  { conditions = { version = "1.0", logic = "AND", items = [{ type = "group", logic = "OR", items = [{ type = "group", logic = "AND", items = [{ type = "weekday", weekdays = [5] }, { type = "time_of_day", start_time = "21:00", end_time = "00:00" }] }, { type = "group", logic = "AND", items = [{ type = "weekday", weekdays = [6] }, { type = "time_of_day", start_time = "00:00", end_time = "01:00" }] }] }] }, text = "Zoe's apartment, two streets off the high street: a sofa that's seen things, clothes on every chair, and a speaker on the windowsill. Tonight it's a party: music through the floor, the sofa buried in coats, bodies wall to wall." },
+]
 
 # ── People. Everyone is 18 or over, and the game says so on their card. ──
 

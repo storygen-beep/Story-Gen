@@ -1,6 +1,6 @@
 {
  "piece": "P04",
- "pass": 23,
+ "pass": 28,
  "screens": {
   "travel_bus_to_campus.ride": {
    "text": "b315e370a219f4ed",
@@ -10,18 +10,18 @@
    "all": "145cb6ccd6c225c9"
   },
   "travel_bus_to_campus.packed_no": {
-   "text": "c64bd8c6d1e97a1a",
+   "text": "48d198fb47badb0f",
    "traits": "44136fa355b3678a",
    "facts": "bda6226f38a41bb5",
    "facts2": "bda6226f38a41bb5",
-   "all": "5feb0f3579e6a4f1"
+   "all": "304d2d4842f4069e"
   },
   "travel_bus_to_campus.packed_quiet": {
-   "text": "a9963df231d1697c",
+   "text": "cc0a5b49f8bf5689",
    "traits": "44136fa355b3678a",
    "facts": "bda6226f38a41bb5",
    "facts2": "bda6226f38a41bb5",
-   "all": "b29e49bf0298bf57"
+   "all": "83f8558b2df58807"
   },
   "travel_walk_to_campus.ride": {
    "text": "9db6c85f17af2668",
@@ -44,7 +44,7 @@
    "facts2": "3cf0347032935327",
    "all": "44aedf3d6ea918ee"
   },
-  "*": "b9d71099295fb18f"
+  "*": "585c4e0d237d7b58"
  },
  "rows": {
   "B1": "5276068df1ca6fa9",
@@ -154,7 +154,8 @@
   "C1267": "6bafcadf3d586d5a",
   "C1249": "604706399d2f1194",
   "C1250": "8384cc6bcbd67c07",
-  "C1265": "fe36d5bbc01da9a6",
+  "C1265": "1a90f309614f963a",
+  "C2204": "85e333f5b3cbcb0f",
   "C1262": "2946d2fe0b7dc28f",
   "C1234": "7dc492e03732757e",
   "L121": "cddfa55c18e5c7b7",
@@ -173,14 +174,15 @@
   "L97": "2bfb9527e76ad93b",
   "media#1": "3641bf707d9adfce",
   "media#2": "69a8103be1e1032a",
-  "media#3": "8c75b0d488b188e2",
+  "media#3": "6632678381731161",
   "media#4": "03599fc0722690b6",
   "media#5": "2cf5e3607ccecd4a",
   "media#6": "3016751837a9b0a0",
   "media#7": "eff6dc1369755c34",
+  "media#8": "599313c7948d2a50",
   "C769": "cf7d7a82afabcbbb",
   "C794": "3281d513b7f90d6e",
-  "C2201": "4745761f016db481",
+  "C2201": "1137a7018841fcb3",
   "C795": "a28152099697ac6a",
   "C804": "56bf64be29d6ea48",
   "L106": "759e6667d7fc3183",
@@ -196,9 +198,10 @@
   "C808": "73aff7401d6970a5",
   "C811": "ded1858e52e3be3a",
   "C770": "dcc6bbe6fde09083",
+  "C2203": "232300ee41804a6c",
   "C771": "d941995a226da2b4",
   "C707": "e2898bd02a9e4730",
-  "places#1": "378b2df4c8bf116d",
+  "places#1": "6daf4c28bcefc631",
   "places#2": "e0b57720921c4523",
   "places#3": "56d056c80da49bb6",
   "places#4": "ae3ba300e1045c9f",
@@ -208,6 +211,7 @@
   "places#8": "c3ea8d01465e7298",
   "places#9": "f4cd9ab5f62bc6fc",
   "places#10": "d6f0b4b357efc043",
+  "places#11": "969f86a77815f52d",
   "C1446": "bb31891410f03faf",
   "L166": "4e530707de7da850",
   "C1386": "4a3df70ba62ff0c1",
@@ -252,6 +256,7 @@
   "C422": "8933f85010afbef7",
   "C460": "beb5a109bde77305",
   "C2202": "d5592f287f5f641a",
+  "C2206": "99ccaf869af30473",
   "C461": "153b0804e686abae",
   "L163": "00a617ab9b4e9cd4",
   "voice#1": "b8e8afcb32208b40",
@@ -313,39 +318,39 @@
    "row": "B10",
    "screen": "travel_bus_to_campus.packed_no",
    "verdict": "PASS",
-   "line": "He shifts half an inch and no further. You step off in town with your legs shaking.",
-   "why": "opens only weekdays 07:00-09:59 (the ride's choice conditions); lands on town_square, so 'step off in town' is true; the stranger is unnamed; the 'Next time' line is gone, nothing names a past",
+   "line": "He shifts half an inch and no further. [spot] You step off in town with your legs shaking.",
+   "why": "only an unnamed stranger is claimed; the screen is reached only from the weekday 07:00-10:00 packed choice; the split paragraph adds no new claim",
    "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "c64bd8c6d1e97a1a",
+    "text": "48d198fb47badb0f",
     "traits": "44136fa355b3678a",
     "facts": "bda6226f38a41bb5",
     "facts2": "bda6226f38a41bb5",
-    "all": "5feb0f3579e6a4f1"
+    "all": "304d2d4842f4069e"
    },
    "row_hash": "c1c0e2ac2588a579",
    "carried": true,
-   "pass": 22
+   "pass": 27
   },
   {
    "row": "B10",
    "screen": "travel_bus_to_campus.packed_quiet",
    "verdict": "PASS",
-   "line": "Good girl. You've made my whole morning.",
-   "why": "opens only weekdays 07:00-10:00 (choice conditions, 7_final_game.toml ~11007), so 'morning' is true on every ride; lands town_square, so 'step off in town' holds; the stranger is unnamed and promises nothing",
+   "line": "You say nothing, and he breathes against your neck.",
+   "why": "reached only from the weekday 07:00-10:00 choice (same condition as the packed group); the stranger is unnamed; the added picture claims only what the screen says",
    "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "a9963df231d1697c",
+    "text": "cc0a5b49f8bf5689",
     "traits": "44136fa355b3678a",
     "facts": "bda6226f38a41bb5",
     "facts2": "bda6226f38a41bb5",
-    "all": "b29e49bf0298bf57"
+    "all": "83f8558b2df58807"
    },
    "row_hash": "c1c0e2ac2588a579",
-   "carried": false,
-   "pass": 23
+   "carried": true,
+   "pass": 26
   },
   {
    "row": "B10",
@@ -557,39 +562,39 @@
    "row": "B8",
    "screen": "travel_bus_to_campus.packed_no",
    "verdict": "PASS",
-   "line": "He shifts half an inch and no further. You step off in town with your legs shaking.",
-   "why": "$2 and 20 minutes to town, as PLAN and P04 say; no garment named, only her body",
+   "line": "He shifts half an inch and no further. [spot] You step off in town with your legs shaking.",
+   "why": "no number shown; no garment named in the prose or the picture description",
    "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "c64bd8c6d1e97a1a",
+    "text": "48d198fb47badb0f",
     "traits": "44136fa355b3678a",
     "facts": "bda6226f38a41bb5",
     "facts2": "bda6226f38a41bb5",
-    "all": "5feb0f3579e6a4f1"
+    "all": "304d2d4842f4069e"
    },
    "row_hash": "80d415cf08e0ebfe",
    "carried": true,
-   "pass": 22
+   "pass": 27
   },
   {
    "row": "B8",
    "screen": "travel_bus_to_campus.packed_quiet",
    "verdict": "PASS",
-   "line": "Good girl. You've made my whole morning.",
-   "why": "$2 and 20 minutes to town as PLAN and P04 say; no garment named, only her neck and body",
+   "line": "You say nothing, and he breathes against your neck.",
+   "why": "no garment in the prose or the picture description; no number shown",
    "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "a9963df231d1697c",
+    "text": "cc0a5b49f8bf5689",
     "traits": "44136fa355b3678a",
     "facts": "bda6226f38a41bb5",
     "facts2": "bda6226f38a41bb5",
-    "all": "b29e49bf0298bf57"
+    "all": "83f8558b2df58807"
    },
    "row_hash": "80d415cf08e0ebfe",
-   "carried": false,
-   "pass": 23
+   "carried": true,
+   "pass": 26
   },
   {
    "row": "B8",
@@ -925,14 +930,14 @@
    "row": "C1265",
    "screen": "*",
    "verdict": "PASS",
-   "line": "travel_*.ride: no media block; place images on campus rooms",
-   "why": "four travel screens are doors/one-liners with no spot; the campus rooms' images are place cards, not spots",
+   "line": "packed_no <<look/bus_packed_no_t3>>, packed_quiet <<touch/bus_packed_quiet_t4>>; other travel screens none",
+   "why": "spots sit on a touch on her, never a chore, door or menu; the other travel screens are one-liners with none; place pictures are cards",
    "cause": null,
    "note": false,
-   "screen_hash": "d3c2d7277327c09d",
-   "row_hash": "fe36d5bbc01da9a6",
+   "screen_hash": "9f889c3df92c0fb1",
+   "row_hash": "1a90f309614f963a",
    "carried": true,
-   "pass": 18
+   "pass": 26
   },
   {
    "row": "C1267",
@@ -1328,14 +1333,27 @@
    "row": "C2201",
    "screen": "*",
    "verdict": "PASS",
-   "line": "The quad. Paths cut across the grass \u2026 Someone's pinned this week's ranking to the board by the steps \u2026",
-   "why": "campus variants read a weekday, met_brooke and who is absent; none reads her clothes or meters",
+   "line": "The library: long tables... The desk by the door is empty. Nobody's checking cards.",
+   "why": "lecture hall, library, theatre, offices change only for nobody here; signs give hours",
    "cause": null,
    "note": false,
-   "screen_hash": "570f4c04d7c6be2a",
-   "row_hash": "4745761f016db481",
+   "screen_hash": "b9d71099295fb18f",
+   "row_hash": "1137a7018841fcb3",
    "carried": true,
-   "pass": 20
+   "pass": 24
+  },
+  {
+   "row": "C2201",
+   "screen": "campus_quad",
+   "verdict": "PASS",
+   "line": "Someone's pinned this week's ranking to the board by the steps.",
+   "why": "one Sunday-only variant, a notice at the place; met_brooke read gone; what she reads is the Read the board button (quad_board, 7_final_game.toml:13547)",
+   "cause": null,
+   "note": false,
+   "screen_hash": null,
+   "row_hash": "1137a7018841fcb3",
+   "carried": true,
+   "pass": 25
   },
   {
    "row": "C2202",
@@ -1385,8 +1403,47 @@
     "all": "b29e49bf0298bf57"
    },
    "row_hash": "d5592f287f5f641a",
-   "carried": false,
+   "carried": true,
    "pass": 23
+  },
+  {
+   "row": "C2203",
+   "screen": "*",
+   "verdict": "N/A",
+   "line": "\u2014",
+   "why": "no event at its places: nothing here has hours of its own as a party or night out; Zoe's party (C2203) is P75's and P05's place",
+   "cause": null,
+   "note": false,
+   "screen_hash": "b9d71099295fb18f",
+   "row_hash": "232300ee41804a6c",
+   "carried": true,
+   "pass": 24
+  },
+  {
+   "row": "C2204",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "\"You say nothing, and he breathes against your neck.\" <<touch/bus_packed_quiet_t4>>",
+   "why": "the packed bus, the one sexual scene here, has a gif spot on each answer, tiered t3/t4 (check.py media green)",
+   "cause": null,
+   "note": false,
+   "screen_hash": "9f889c3df92c0fb1",
+   "row_hash": "85e333f5b3cbcb0f",
+   "carried": true,
+   "pass": 26
+  },
+  {
+   "row": "C2206",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "travel_bus_to_campus, travel_walk_to_campus, travel_bus_home, travel_walk_home",
+   "why": "1 side-by-side group chain(s) across 4 canvas(es); scenes.check_chains green on them and each atom set read for correlated conditions",
+   "cause": null,
+   "note": false,
+   "screen_hash": "585c4e0d237d7b58",
+   "row_hash": "99ccaf869af30473",
+   "carried": false,
+   "pass": 28
   },
   {
    "row": "C239",
@@ -1749,39 +1806,39 @@
    "row": "C460",
    "screen": "travel_bus_to_campus.packed_no",
    "verdict": "PASS",
-   "line": "He shifts half an inch and no further. You step off in town with your legs shaking.",
-   "why": "every claim holds on every packed ride: town_square is where the exit lands, the man is unnamed, nothing assumes a past",
+   "line": "He shifts half an inch and no further. [spot] You step off in town with your legs shaking.",
+   "why": "the picture (her glaring back on the packed bus) is true at the moment it sits: after his half inch, before she steps off",
    "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "c64bd8c6d1e97a1a",
+    "text": "48d198fb47badb0f",
     "traits": "44136fa355b3678a",
     "facts": "bda6226f38a41bb5",
     "facts2": "bda6226f38a41bb5",
-    "all": "5feb0f3579e6a4f1"
+    "all": "304d2d4842f4069e"
    },
    "row_hash": "beb5a109bde77305",
    "carried": true,
-   "pass": 22
+   "pass": 27
   },
   {
    "row": "C460",
    "screen": "travel_bus_to_campus.packed_quiet",
    "verdict": "PASS",
-   "line": "Good girl. You've made my whole morning.",
-   "why": "every claim holds on every packed ride: morning window, town_square exit, unnamed man, no past assumed",
+   "line": "You say nothing, and he breathes against your neck.",
+   "why": "true on every visit: the choice that leads here carries the packed-bus clock condition",
    "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "a9963df231d1697c",
+    "text": "cc0a5b49f8bf5689",
     "traits": "44136fa355b3678a",
     "facts": "bda6226f38a41bb5",
     "facts2": "bda6226f38a41bb5",
-    "all": "b29e49bf0298bf57"
+    "all": "83f8558b2df58807"
    },
    "row_hash": "beb5a109bde77305",
-   "carried": false,
-   "pass": 23
+   "carried": true,
+   "pass": 26
   },
   {
    "row": "C460",
@@ -1876,39 +1933,39 @@
    "row": "C461",
    "screen": "travel_bus_to_campus.packed_no",
    "verdict": "PASS",
-   "line": "He shifts half an inch and no further. You step off in town with your legs shaking.",
-   "why": "texture, her body and the stranger's lines only",
+   "line": "\"Relax, sweetheart. It's a bus.\"",
+   "why": "texture and her reaction only; nothing that can clash",
    "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "c64bd8c6d1e97a1a",
+    "text": "48d198fb47badb0f",
     "traits": "44136fa355b3678a",
     "facts": "bda6226f38a41bb5",
     "facts2": "bda6226f38a41bb5",
-    "all": "5feb0f3579e6a4f1"
+    "all": "304d2d4842f4069e"
    },
    "row_hash": "153b0804e686abae",
    "carried": true,
-   "pass": 22
+   "pass": 27
   },
   {
    "row": "C461",
    "screen": "travel_bus_to_campus.packed_quiet",
    "verdict": "PASS",
-   "line": "Good girl. You've made my whole morning.",
-   "why": "texture, her body and the stranger's line only; nothing can clash",
+   "line": "You say nothing, and he breathes against your neck.",
+   "why": "texture and her reaction only; nothing that can clash",
    "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "a9963df231d1697c",
+    "text": "cc0a5b49f8bf5689",
     "traits": "44136fa355b3678a",
     "facts": "bda6226f38a41bb5",
     "facts2": "bda6226f38a41bb5",
-    "all": "b29e49bf0298bf57"
+    "all": "83f8558b2df58807"
    },
    "row_hash": "153b0804e686abae",
-   "carried": false,
-   "pass": 23
+   "carried": true,
+   "pass": 26
   },
   {
    "row": "C461",
@@ -3332,40 +3389,40 @@
   {
    "row": "C921",
    "screen": "travel_bus_to_campus.packed_no",
-   "verdict": "N/A",
-   "line": "",
-   "why": "no schedule window on this screen",
+   "verdict": "PASS",
+   "line": "off-peak branch 10:00-07:00",
+   "why": "wrapping window handled by setup.isCurrentTimeSlot (v2.py:4793-4813)",
    "cause": null,
    "note": true,
    "screen_hash": {
-    "text": "c64bd8c6d1e97a1a",
+    "text": "48d198fb47badb0f",
     "traits": "44136fa355b3678a",
     "facts": "bda6226f38a41bb5",
     "facts2": "bda6226f38a41bb5",
-    "all": "5feb0f3579e6a4f1"
+    "all": "304d2d4842f4069e"
    },
    "row_hash": "19da817e808ac3d6",
    "carried": true,
-   "pass": 22
+   "pass": 27
   },
   {
    "row": "C921",
    "screen": "travel_bus_to_campus.packed_quiet",
-   "verdict": "N/A",
-   "line": "",
-   "why": "no schedule window on this screen",
+   "verdict": "PASS",
+   "line": "off-peak group time_of_day 10:00-07:00",
+   "why": "the wrapping window is handled by setup.isCurrentTimeSlot (v2.py:4793-4813); no row here wraps wrongly",
    "cause": null,
    "note": true,
    "screen_hash": {
-    "text": "a9963df231d1697c",
+    "text": "cc0a5b49f8bf5689",
     "traits": "44136fa355b3678a",
     "facts": "bda6226f38a41bb5",
     "facts2": "bda6226f38a41bb5",
-    "all": "b29e49bf0298bf57"
+    "all": "83f8558b2df58807"
    },
    "row_hash": "19da817e808ac3d6",
-   "carried": false,
-   "pass": 23
+   "carried": true,
+   "pass": 26
   },
   {
    "row": "C921",
@@ -3634,39 +3691,39 @@
    "row": "C927",
    "screen": "travel_bus_to_campus.packed_no",
    "verdict": "PASS",
-   "line": "Get off in town",
-   "why": "the one exit carries time_progression_minutes = 20; the reply hops are 0",
+   "line": "\"Get off in town\" time_progression_minutes = 20",
+   "why": "the exit states its time",
    "cause": null,
    "note": true,
    "screen_hash": {
-    "text": "c64bd8c6d1e97a1a",
+    "text": "48d198fb47badb0f",
     "traits": "44136fa355b3678a",
     "facts": "bda6226f38a41bb5",
     "facts2": "bda6226f38a41bb5",
-    "all": "5feb0f3579e6a4f1"
+    "all": "304d2d4842f4069e"
    },
    "row_hash": "1e009d83817fb566",
    "carried": true,
-   "pass": 22
+   "pass": 27
   },
   {
    "row": "C927",
    "screen": "travel_bus_to_campus.packed_quiet",
    "verdict": "PASS",
-   "line": "Get off in town",
-   "why": "the one exit carries time_progression_minutes = 20",
+   "line": "\"Get off in town\" time_progression_minutes = 20",
+   "why": "the exit states its time; 0-minute choices into this screen are set, not left out",
    "cause": null,
    "note": true,
    "screen_hash": {
-    "text": "a9963df231d1697c",
+    "text": "cc0a5b49f8bf5689",
     "traits": "44136fa355b3678a",
     "facts": "bda6226f38a41bb5",
     "facts2": "bda6226f38a41bb5",
-    "all": "b29e49bf0298bf57"
+    "all": "83f8558b2df58807"
    },
    "row_hash": "1e009d83817fb566",
-   "carried": false,
-   "pass": 23
+   "carried": true,
+   "pass": 26
   },
   {
    "row": "C927",
@@ -4008,40 +4065,40 @@
   {
    "row": "C931",
    "screen": "travel_bus_to_campus.packed_no",
-   "verdict": "N/A",
-   "line": "",
-   "why": "no time_of_day on this screen (the window is on the ride's choices)",
+   "verdict": "PASS",
+   "line": "time_of_day 07:00-10:00 on the choice into this screen",
+   "why": "re-read each render, end exclusive (v2.py:5323-5325)",
    "cause": null,
    "note": true,
    "screen_hash": {
-    "text": "c64bd8c6d1e97a1a",
+    "text": "48d198fb47badb0f",
     "traits": "44136fa355b3678a",
     "facts": "bda6226f38a41bb5",
     "facts2": "bda6226f38a41bb5",
-    "all": "5feb0f3579e6a4f1"
+    "all": "304d2d4842f4069e"
    },
    "row_hash": "1b8984f52b99537e",
    "carried": true,
-   "pass": 22
+   "pass": 27
   },
   {
    "row": "C931",
    "screen": "travel_bus_to_campus.packed_quiet",
-   "verdict": "N/A",
-   "line": "",
-   "why": "no time_of_day on this screen (the window is on the ride's choices)",
+   "verdict": "PASS",
+   "line": "time_of_day 07:00-10:00 on the choice",
+   "why": "re-read on each render, end exclusive (v2.py:5323-5325); 10:00 falls to the off-peak branch",
    "cause": null,
    "note": true,
    "screen_hash": {
-    "text": "a9963df231d1697c",
+    "text": "cc0a5b49f8bf5689",
     "traits": "44136fa355b3678a",
     "facts": "bda6226f38a41bb5",
     "facts2": "bda6226f38a41bb5",
-    "all": "b29e49bf0298bf57"
+    "all": "83f8558b2df58807"
    },
    "row_hash": "1b8984f52b99537e",
-   "carried": false,
-   "pass": 23
+   "carried": true,
+   "pass": 26
   },
   {
    "row": "C931",
@@ -4240,39 +4297,39 @@
    "row": "L106",
    "screen": "travel_bus_to_campus.packed_no",
    "verdict": "PASS",
-   "line": "He shifts half an inch and no further. You step off in town with your legs shaking.",
-   "why": "no named person; the man is an unnamed stranger",
+   "line": "speaker \"unknown\"",
+   "why": "no named person is claimed",
    "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "c64bd8c6d1e97a1a",
+    "text": "48d198fb47badb0f",
     "traits": "44136fa355b3678a",
     "facts": "bda6226f38a41bb5",
     "facts2": "bda6226f38a41bb5",
-    "all": "5feb0f3579e6a4f1"
+    "all": "304d2d4842f4069e"
    },
    "row_hash": "759e6667d7fc3183",
    "carried": true,
-   "pass": 22
+   "pass": 27
   },
   {
    "row": "L106",
    "screen": "travel_bus_to_campus.packed_quiet",
    "verdict": "PASS",
-   "line": "Good girl. You've made my whole morning.",
-   "why": "no named person; the man is an unnamed stranger",
+   "line": "\"Relax, sweetheart. It's a bus.\" (speaker unknown)",
+   "why": "only an unnamed stranger is claimed",
    "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "a9963df231d1697c",
+    "text": "cc0a5b49f8bf5689",
     "traits": "44136fa355b3678a",
     "facts": "bda6226f38a41bb5",
     "facts2": "bda6226f38a41bb5",
-    "all": "b29e49bf0298bf57"
+    "all": "83f8558b2df58807"
    },
    "row_hash": "759e6667d7fc3183",
-   "carried": false,
-   "pass": 23
+   "carried": true,
+   "pass": 26
   },
   {
    "row": "L106",
@@ -4457,40 +4514,40 @@
   {
    "row": "L167",
    "screen": "travel_bus_to_campus.packed_no",
-   "verdict": "N/A",
-   "line": "",
-   "why": "no row on this screen has hours that differ by day",
+   "verdict": "PASS",
+   "line": "one bus row, travel_bus_to_campus",
+   "why": "weekday and hour are conditions inside one row, not a row per day kind",
    "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "c64bd8c6d1e97a1a",
+    "text": "48d198fb47badb0f",
     "traits": "44136fa355b3678a",
     "facts": "bda6226f38a41bb5",
     "facts2": "bda6226f38a41bb5",
-    "all": "5feb0f3579e6a4f1"
+    "all": "304d2d4842f4069e"
    },
    "row_hash": "adf7bb3f8b632ac3",
    "carried": true,
-   "pass": 22
+   "pass": 27
   },
   {
    "row": "L167",
    "screen": "travel_bus_to_campus.packed_quiet",
-   "verdict": "N/A",
-   "line": "",
-   "why": "no row on this screen has hours that differ by day",
+   "verdict": "PASS",
+   "line": "one bus row; weekday and time are conditions inside it",
+   "why": "no row per kind of day",
    "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "a9963df231d1697c",
+    "text": "cc0a5b49f8bf5689",
     "traits": "44136fa355b3678a",
     "facts": "bda6226f38a41bb5",
     "facts2": "bda6226f38a41bb5",
-    "all": "b29e49bf0298bf57"
+    "all": "83f8558b2df58807"
    },
    "row_hash": "adf7bb3f8b632ac3",
-   "carried": false,
-   "pass": 23
+   "carried": true,
+   "pass": 26
   },
   {
    "row": "L167",
@@ -5026,14 +5083,14 @@
    "row": "media#3",
    "screen": "*",
    "verdict": "PASS",
-   "line": "no spot on travel, the quad or menus",
-   "why": "holds on every screen it fires on; the packed paths change nothing it reads",
+   "line": "travel_walk_*/bus_home: no spot",
+   "why": "one-liner travel screens and the quad carry none",
    "cause": null,
    "note": false,
-   "screen_hash": "d3e09853ea2f6bae",
-   "row_hash": "8c75b0d488b188e2",
+   "screen_hash": "9f889c3df92c0fb1",
+   "row_hash": "6632678381731161",
    "carried": true,
-   "pass": 3
+   "pass": 26
   },
   {
    "row": "media#4",
@@ -5088,17 +5145,43 @@
    "pass": 3
   },
   {
+   "row": "media#8",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "packed_quiet: touch/..._t4, pool 4, gif search words",
+   "why": "each answer gets a gif spot right after its payoff line, pool by tier",
+   "cause": null,
+   "note": false,
+   "screen_hash": "9f889c3df92c0fb1",
+   "row_hash": "599313c7948d2a50",
+   "carried": true,
+   "pass": 26
+  },
+  {
    "row": "places#1",
    "screen": "*",
    "verdict": "PASS",
-   "line": "The quad. Paths cut across the grass to every building on campus.",
-   "why": "identity lines fixed; variants only for the day, a story flag, or nobody here",
+   "line": "The library: long tables... The desk by the door is empty. Nobody's checking cards.",
+   "why": "lecture hall, library, theatre, offices change only for nobody here; signs give hours",
    "cause": null,
    "note": false,
-   "screen_hash": "570f4c04d7c6be2a",
-   "row_hash": "378b2df4c8bf116d",
+   "screen_hash": "b9d71099295fb18f",
+   "row_hash": "6daf4c28bcefc631",
    "carried": true,
-   "pass": 20
+   "pass": 24
+  },
+  {
+   "row": "places#1",
+   "screen": "campus_quad",
+   "verdict": "PASS",
+   "line": "Someone's pinned this week's ranking to the board by the steps.",
+   "why": "one Sunday-only variant, a notice at the place; met_brooke read gone; what she reads is the Read the board button (quad_board, 7_final_game.toml:13547)",
+   "cause": null,
+   "note": false,
+   "screen_hash": null,
+   "row_hash": "6daf4c28bcefc631",
+   "carried": true,
+   "pass": 25
   },
   {
    "row": "places#10",
@@ -5112,6 +5195,19 @@
    "row_hash": "d6f0b4b357efc043",
    "carried": true,
    "pass": 18
+  },
+  {
+   "row": "places#11",
+   "screen": "*",
+   "verdict": "N/A",
+   "line": "\u2014",
+   "why": "shape step 11 is for an event place; none among its places",
+   "cause": null,
+   "note": false,
+   "screen_hash": "b9d71099295fb18f",
+   "row_hash": "969f86a77815f52d",
+   "carried": true,
+   "pass": 24
   },
   {
    "row": "places#2",
@@ -5603,8 +5699,8 @@
  ],
  "causes": [],
  "pending": [],
- "asked": 10,
- "answered": 10,
+ "asked": 1,
+ "answered": 1,
  "pass_items": [],
  "unowed": []
 }

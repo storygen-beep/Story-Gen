@@ -1,6 +1,6 @@
 {
  "piece": "P42",
- "pass": 22,
+ "pass": 25,
  "screens": {
   "talk_mom.hub": {
    "text": "0f4660e14b94ab43",
@@ -91,7 +91,8 @@
   "C1267": "6bafcadf3d586d5a",
   "C1249": "604706399d2f1194",
   "C1250": "8384cc6bcbd67c07",
-  "C1265": "fe36d5bbc01da9a6",
+  "C1265": "1a90f309614f963a",
+  "C2204": "85e333f5b3cbcb0f",
   "C1262": "2946d2fe0b7dc28f",
   "C1234": "7dc492e03732757e",
   "L121": "cddfa55c18e5c7b7",
@@ -110,11 +111,12 @@
   "L97": "2bfb9527e76ad93b",
   "media#1": "3641bf707d9adfce",
   "media#2": "69a8103be1e1032a",
-  "media#3": "8c75b0d488b188e2",
+  "media#3": "6632678381731161",
   "media#4": "03599fc0722690b6",
   "media#5": "2cf5e3607ccecd4a",
   "media#6": "3016751837a9b0a0",
   "media#7": "eff6dc1369755c34",
+  "media#8": "599313c7948d2a50",
   "C618": "cf04982ff36d5fee",
   "C619": "9abaf79b00480069",
   "C622": "3a5a94bef3bdb5d2",
@@ -168,7 +170,7 @@
   "people#16": "45053c701775c75f",
   "C769": "cf7d7a82afabcbbb",
   "C794": "3281d513b7f90d6e",
-  "C2201": "4745761f016db481",
+  "C2201": "1137a7018841fcb3",
   "C795": "a28152099697ac6a",
   "C804": "56bf64be29d6ea48",
   "L106": "759e6667d7fc3183",
@@ -184,9 +186,10 @@
   "C808": "73aff7401d6970a5",
   "C811": "ded1858e52e3be3a",
   "C770": "dcc6bbe6fde09083",
+  "C2203": "232300ee41804a6c",
   "C771": "d941995a226da2b4",
   "C707": "e2898bd02a9e4730",
-  "places#1": "378b2df4c8bf116d",
+  "places#1": "6daf4c28bcefc631",
   "places#2": "e0b57720921c4523",
   "places#3": "56d056c80da49bb6",
   "places#4": "ae3ba300e1045c9f",
@@ -196,6 +199,7 @@
   "places#8": "c3ea8d01465e7298",
   "places#9": "f4cd9ab5f62bc6fc",
   "places#10": "d6f0b4b357efc043",
+  "places#11": "969f86a77815f52d",
   "C442": "a2b07f40e1a9e908",
   "C449": "ac5932d70cd775a1",
   "C451": "6b0fd679047fc9b8",
@@ -203,6 +207,7 @@
   "C422": "8933f85010afbef7",
   "C460": "beb5a109bde77305",
   "C2202": "d5592f287f5f641a",
+  "C2206": "99ccaf869af30473",
   "C461": "153b0804e686abae",
   "L163": "00a617ab9b4e9cd4",
   "voice#1": "b8e8afcb32208b40",
@@ -1292,21 +1297,21 @@
    "row": "C1265",
    "screen": "*",
    "verdict": "PASS",
-   "line": "talk_mom.hub <<everyday/mom_kitchen_t0>>; mom_living_room.hub <<everyday/mom_living_t0>>",
-   "why": "her picture is on each menu right after its first line, the C596 exception; talk and eat screens have none",
+   "line": "talk_mom.hub, mom_living_room.hub pictures",
+   "why": "her menus' pictures, the C596 exception; talk and eat screens none",
    "cause": null,
    "note": false,
-   "screen_hash": "fa8a0f5220e51a33",
-   "row_hash": "fe36d5bbc01da9a6",
+   "screen_hash": "cc046523f34ec607",
+   "row_hash": "1a90f309614f963a",
    "carried": true,
-   "pass": 20
+   "pass": 24
   },
   {
    "row": "C1265",
    "screen": "mom_living_room.talk",
    "verdict": "PASS",
    "line": "\"Sit with me a minute, baby.\"",
-   "why": "no spot on the talk screen; the picture sits on the hub",
+   "why": "talk under the menu, no picture",
    "cause": null,
    "note": false,
    "screen_hash": {
@@ -1316,28 +1321,28 @@
     "facts2": "04bf141c5cb5340b",
     "all": "13a427d6071bc370"
    },
-   "row_hash": "fe36d5bbc01da9a6",
+   "row_hash": "1a90f309614f963a",
    "carried": true,
-   "pass": 20
+   "pass": 24
   },
   {
    "row": "C1265",
    "screen": "talk_mom.eat",
    "verdict": "PASS",
-   "line": "\"Mom puts a plate of eggs in front of you\"",
-   "why": "no spot on the meal; it is with Mom, not a chore alone, and carries none either way",
+   "line": "\"Eat. You're too thin.\"",
+   "why": "a meal with Mom carries no spot",
    "cause": null,
    "note": false,
    "screen_hash": {
     "text": "cb5b4b6d73033d19",
     "traits": "ff8b9fa74641271c",
-    "facts": "bcd4fca1f4ccef8f",
+    "facts": "34376d1411bc4aad",
     "facts2": "508d10677899c7a7",
-    "all": "72eab913c378c469"
+    "all": "5593e1137ca9a97b"
    },
-   "row_hash": "fe36d5bbc01da9a6",
+   "row_hash": "1a90f309614f963a",
    "carried": true,
-   "pass": 20
+   "pass": 24
   },
   {
    "row": "C1267",
@@ -1895,7 +1900,7 @@
     "all": "13a427d6071bc370"
    },
    "row_hash": "4b15434d4248d5f0",
-   "carried": false,
+   "carried": true,
    "pass": 22
   },
   {
@@ -1914,21 +1919,21 @@
     "all": "6dcd69d60201e8c3"
    },
    "row_hash": "4b15434d4248d5f0",
-   "carried": false,
+   "carried": true,
    "pass": 22
   },
   {
    "row": "C2201",
    "screen": "*",
    "verdict": "PASS",
-   "line": "The kitchen: the table where the family eats, the fridge, a coffee pot that's always on.",
-   "why": "the description reads no clothes or meters; it changes only with who's there",
+   "line": "The kitchen: ... Nobody's here. The fridge hums.",
+   "why": "kitchen and living room change only for nobody here; Mom is her face and menu",
    "cause": null,
    "note": false,
    "screen_hash": "cc046523f34ec607",
-   "row_hash": "4745761f016db481",
+   "row_hash": "1137a7018841fcb3",
    "carried": true,
-   "pass": 21
+   "pass": 23
   },
   {
    "row": "C2202",
@@ -1940,8 +1945,47 @@
    "note": false,
    "screen_hash": "cc046523f34ec607",
    "row_hash": "d5592f287f5f641a",
-   "carried": false,
+   "carried": true,
    "pass": 22
+  },
+  {
+   "row": "C2203",
+   "screen": "*",
+   "verdict": "N/A",
+   "line": "\u2014",
+   "why": "no event at its places: nothing here has hours of its own as a party or night out; Zoe's party (C2203) is P75's and P05's place",
+   "cause": null,
+   "note": false,
+   "screen_hash": "cc046523f34ec607",
+   "row_hash": "232300ee41804a6c",
+   "carried": true,
+   "pass": 23
+  },
+  {
+   "row": "C2204",
+   "screen": "*",
+   "verdict": "N/A",
+   "line": "",
+   "why": "no screen in this piece shows arousal, a look, a touch or sex; the row never fires",
+   "cause": null,
+   "note": false,
+   "screen_hash": "cc046523f34ec607",
+   "row_hash": "85e333f5b3cbcb0f",
+   "carried": true,
+   "pass": 24
+  },
+  {
+   "row": "C2206",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "talk_mom, mom_living_room",
+   "why": "8 side-by-side group chain(s) across 2 canvas(es); scenes.check_chains green on them and each atom set read for correlated conditions",
+   "cause": null,
+   "note": false,
+   "screen_hash": "cc046523f34ec607",
+   "row_hash": "99ccaf869af30473",
+   "carried": false,
+   "pass": 25
   },
   {
    "row": "C422",
@@ -6670,14 +6714,14 @@
    "row": "media#3",
    "screen": "*",
    "verdict": "PASS",
-   "line": "everyday/mom_living_t0",
-   "why": "Her menu gets her one picture; talk screens and the Eat screen (no new moment) get none.",
+   "line": "talk/eat screens: no picture",
+   "why": "no chore or menu spot beyond the person's menu",
    "cause": null,
    "note": false,
-   "screen_hash": "ad3f6be4b295a67a",
-   "row_hash": "8c75b0d488b188e2",
+   "screen_hash": "cc046523f34ec607",
+   "row_hash": "6632678381731161",
    "carried": true,
-   "pass": 5
+   "pass": 24
   },
   {
    "row": "media#4",
@@ -6730,6 +6774,19 @@
    "row_hash": "eff6dc1369755c34",
    "carried": true,
    "pass": 5
+  },
+  {
+   "row": "media#8",
+   "screen": "*",
+   "verdict": "N/A",
+   "line": "",
+   "why": "no screen in this piece shows arousal, a look, a touch or sex; the row never fires",
+   "cause": null,
+   "note": false,
+   "screen_hash": "cc046523f34ec607",
+   "row_hash": "599313c7948d2a50",
+   "carried": true,
+   "pass": 24
   },
   {
    "row": "people#1",
@@ -7009,14 +7066,14 @@
    "row": "places#1",
    "screen": "*",
    "verdict": "PASS",
-   "line": "The kitchen: the table where the family eats, the fridge, a coffee pot that's always on.",
-   "why": "kitchen and living room: the identity line is fixed; the only variant adds 'Nobody's here.'",
+   "line": "The living room: the couch, the TV, and Mark's big armchair.",
+   "why": "identity line fixed; the one variant adds nobody here",
    "cause": null,
    "note": false,
    "screen_hash": "cc046523f34ec607",
-   "row_hash": "378b2df4c8bf116d",
+   "row_hash": "6daf4c28bcefc631",
    "carried": true,
-   "pass": 21
+   "pass": 23
   },
   {
    "row": "places#10",
@@ -7030,6 +7087,19 @@
    "row_hash": "d6f0b4b357efc043",
    "carried": true,
    "pass": 20
+  },
+  {
+   "row": "places#11",
+   "screen": "*",
+   "verdict": "N/A",
+   "line": "\u2014",
+   "why": "shape step 11 is for an event place; none among its places",
+   "cause": null,
+   "note": false,
+   "screen_hash": "cc046523f34ec607",
+   "row_hash": "969f86a77815f52d",
+   "carried": true,
+   "pass": 23
   },
   {
    "row": "places#2",
@@ -7242,8 +7312,8 @@
  ],
  "causes": [],
  "pending": [],
- "asked": 3,
- "answered": 3,
+ "asked": 1,
+ "answered": 1,
  "pass_items": [],
  "unowed": []
 }

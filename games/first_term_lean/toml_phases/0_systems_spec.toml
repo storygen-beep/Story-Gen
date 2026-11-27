@@ -570,6 +570,7 @@ flagEffects = [
   # P11 — the rent week: cleared on Tuesday, after Monday's check has read it
   { targetType = "player", flag = "rent_handled_this_week", op = "unset", conditions = { version = "1.0", logic = "AND", items = [{ type = "weekday", weekdays = [1] }] } },
   { targetType = "player", flag = "partied_this_week", op = "unset", conditions = { version = "1.0", logic = "AND", items = [{ type = "weekday", weekdays = [0] }] } },
+  { targetType = "player", flag = "zoe_dare_done", op = "unset", conditions = { version = "1.0", logic = "AND", items = [{ type = "weekday", weekdays = [0] }] } },
 ]
 traitEffects = [
   # P66 — a Sunday she never brought to Mark is a short one too: on Monday, an unhandled week adds a week owed

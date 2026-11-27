@@ -1,6 +1,6 @@
 {
  "piece": "P40",
- "pass": 23,
+ "pass": 26,
  "screens": {
   "walk_stacks.moment": {
    "text": "a37c81e3865bb04b",
@@ -87,11 +87,11 @@
    "all": "7dc3ceb52053a165"
   },
   "walk_cross_brooke.moment": {
-   "text": "19c927e206f3a367",
+   "text": "93de1f62bd6e2438",
    "traits": "e6b79f0e524c6de5",
    "facts": "53fbf715bd6b1c0c",
    "facts2": "7d5f431740948a39",
-   "all": "a10ecb7b5794ff26"
+   "all": "08ccfba95d43e44f"
   },
   "walk_cross_brooke.watch": {
    "text": "2cfe618dcf94cc7a",
@@ -128,7 +128,7 @@
    "facts2": "b88955853267c1db",
    "all": "c49004075617357d"
   },
-  "*": "a361df5425b453b6"
+  "*": "32d190af146bdcb6"
  },
  "rows": {
   "B1": "5276068df1ca6fa9",
@@ -197,7 +197,8 @@
   "C1267": "f0db81b801577bf2",
   "C1249": "a843f9b57e43a020",
   "C1250": "fde578d75b0d3620",
-  "C1265": "eb11e05cd75e52a9",
+  "C1265": "689fd05a4bcbd8be",
+  "C2204": "3231b5a8a46eaa49",
   "C1234": "1b2a2d5f05b10331",
   "L121": "45842b25d0708a15",
   "L125": "1fca3bfe1d0c2419",
@@ -234,7 +235,7 @@
   "C2198": "73dfe095a72154a3",
   "C769": "f6b6f78a8f2e5ed7",
   "C794": "bad76e5963432385",
-  "C2201": "d119dfe665f76359",
+  "C2201": "7fddf5e17dbdaaf9",
   "C795": "34139e6a6914e171",
   "C804": "5358489178bff0a4",
   "L106": "13a714429d15f3b2",
@@ -246,6 +247,7 @@
   "C762": "40e85f1ae92f1e71",
   "L170": "c3599cd09637a240",
   "C770": "ff9aa31c11e5d50f",
+  "C2203": "365a29fd77f6b765",
   "C771": "563e3d25c3219dd0",
   "L166": "c12d10588197fbaf",
   "C1303": "5b031a6b82899cfd",
@@ -274,6 +276,7 @@
   "C422": "7e128897077ecee6",
   "C460": "67e48e60d5053a2e",
   "C2202": "6e90fed7eae62131",
+  "C2206": "d8ebf6d6b2abf6a5",
   "C461": "310706ee076318f2",
   "C788": "cae1598ef9cb6ff1",
   "C855": "d3dc77f2f96e20ae",
@@ -291,7 +294,8 @@
   "C2187": "f2b54b1dd7c15f2f",
   "C2188": "612394eef6826900",
   "C2189": "20748838895e4545",
-  "C2195": "77083291a86791c3",
+  "C2205": "44b9341eed4268bc",
+  "C2195": "211dd40ccf98aea0",
   "C2196": "a8ae0700d13a7f9b",
   "C2200": "117a60e53de1e8a4"
  },
@@ -333,19 +337,19 @@
    "screen": "walk_cross_brooke.moment",
    "verdict": "PASS",
    "line": "Cross is running a scene with Brooke on the empty stage, his hand on her waist to place her, staying.",
-   "why": "on arrival she walks in on a rehearsal already running; Cross and Brooke at campus_theatre Tue/Thu/Fri 14-18 by rows, both gated is_present, met_cross and met_brooke",
+   "why": "fires Tue/Thu/Fri 14:00-18:00 with Cross and Brooke present; the picture gives Cross 38, Brooke 21, as npcs says",
    "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "19c927e206f3a367",
+    "text": "93de1f62bd6e2438",
     "traits": "e6b79f0e524c6de5",
     "facts": "53fbf715bd6b1c0c",
     "facts2": "7d5f431740948a39",
-    "all": "a10ecb7b5794ff26"
+    "all": "08ccfba95d43e44f"
    },
    "row_hash": "c1c0e2ac2588a579",
    "carried": true,
-   "pass": 11
+   "pass": 25
   },
   {
    "row": "B10",
@@ -608,7 +612,7 @@
     "all": "6cfaa860f192116a"
    },
    "row_hash": "c1c0e2ac2588a579",
-   "carried": false,
+   "carried": true,
    "pass": 23
   },
   {
@@ -1211,19 +1215,19 @@
    "screen": "walk_cross_brooke.moment",
    "verdict": "PASS",
    "line": "Cross is running a scene with Brooke on the empty stage, his hand on her waist to place her, staying.",
-   "why": "no number on screen; every garment named belongs to someone she watches, none to her",
+   "why": "no garment named",
    "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "19c927e206f3a367",
+    "text": "93de1f62bd6e2438",
     "traits": "e6b79f0e524c6de5",
     "facts": "53fbf715bd6b1c0c",
     "facts2": "7d5f431740948a39",
-    "all": "a10ecb7b5794ff26"
+    "all": "08ccfba95d43e44f"
    },
    "row_hash": "80d415cf08e0ebfe",
    "carried": true,
-   "pass": 11
+   "pass": 25
   },
   {
    "row": "B8",
@@ -1486,7 +1490,7 @@
     "all": "6cfaa860f192116a"
    },
    "row_hash": "80d415cf08e0ebfe",
-   "carried": false,
+   "carried": true,
    "pass": 23
   },
   {
@@ -1841,8 +1845,8 @@
    "row": "C1265",
    "screen": "walk_stacks.moment",
    "verdict": "PASS",
-   "line": "\"a couple against the shelves, her skirt in his fist\" <<sex/stacks_couple_t5>>",
-   "why": "an explicit walk-in moment, not a chore or notice",
+   "line": "\"a couple against the shelves ... his cock fucks into her\" <<sex/stacks_couple_t5>>",
+   "why": "sex she sees, never a C1265 kind",
    "cause": null,
    "note": false,
    "screen_hash": {
@@ -1852,9 +1856,9 @@
     "facts2": "94fc5e907f77da68",
     "all": "5e3a47aada8ed046"
    },
-   "row_hash": "eb11e05cd75e52a9",
+   "row_hash": "689fd05a4bcbd8be",
    "carried": true,
-   "pass": 19
+   "pass": 25
   },
   {
    "row": "C1267",
@@ -3193,14 +3197,14 @@
    "row": "C2195",
    "screen": "*",
    "verdict": "PASS",
-   "line": "trigger_mode = \"random\", chance = 0.35, max_triggers_per_day = 1",
-   "why": "each of the five fires on arrival at its place, at 0.35, once a day, gated by the same flags, hours and npc_at_location presence as before; no came_to_her_today; no random_cooldown override, so the engine's 3-arrival rest applies; the choices inside are unchanged",
+   "line": "walk_stacks: trigger_mode = \"random\", chance = 0.35, max_triggers_per_day = 1",
+   "why": "library, office, bathroom, theatre walk-ins random 0.35, once a day, gated, off the shared flag; walk_cross_seats a substitution, not a button",
    "cause": null,
    "note": false,
-   "screen_hash": "72fd4d0f5d0e16ec",
-   "row_hash": "77083291a86791c3",
+   "screen_hash": "a361df5425b453b6",
+   "row_hash": "211dd40ccf98aea0",
    "carried": true,
-   "pass": 11
+   "pass": 24
   },
   {
    "row": "C2196",
@@ -3214,6 +3218,25 @@
    "row_hash": "a8ae0700d13a7f9b",
    "carried": true,
    "pass": 13
+  },
+  {
+   "row": "C2196",
+   "screen": "walk_cross_brooke.moment",
+   "verdict": "PASS",
+   "line": "Cross is running a scene with Brooke on the empty stage, his hand on her waist to place her, staying.",
+   "why": "she comes across it from the seats; nothing asks her mid-act",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "93de1f62bd6e2438",
+    "traits": "e6b79f0e524c6de5",
+    "facts": "53fbf715bd6b1c0c",
+    "facts2": "7d5f431740948a39",
+    "all": "08ccfba95d43e44f"
+   },
+   "row_hash": "a8ae0700d13a7f9b",
+   "carried": true,
+   "pass": 25
   },
   {
    "row": "C2197",
@@ -3340,14 +3363,14 @@
    "row": "C2201",
    "screen": "*",
    "verdict": "N/A",
-   "line": "Through a gap in the books in the back stacks",
-   "why": "scene and menu screens, not a place's description; the descriptions of the places they sit at read no clothes or meters (all 31 checked)",
+   "line": "\u2014",
+   "why": "builds no place description; its screens are scenes or menus, and a scene is not a place's description",
    "cause": null,
    "note": false,
-   "screen_hash": "05042e65f38935b8",
-   "row_hash": "d119dfe665f76359",
+   "screen_hash": "a361df5425b453b6",
+   "row_hash": "7fddf5e17dbdaaf9",
    "carried": true,
-   "pass": 20
+   "pass": 24
   },
   {
    "row": "C2202",
@@ -3690,6 +3713,64 @@
    "row_hash": "6e90fed7eae62131",
    "carried": true,
    "pass": 21
+  },
+  {
+   "row": "C2203",
+   "screen": "*",
+   "verdict": "N/A",
+   "line": "\u2014",
+   "why": "no event at its places: nothing here has hours of its own as a party or night out; Zoe's party (C2203) is P75's and P05's place",
+   "cause": null,
+   "note": false,
+   "screen_hash": "a361df5425b453b6",
+   "row_hash": "365a29fd77f6b765",
+   "carried": true,
+   "pass": 24
+  },
+  {
+   "row": "C2204",
+   "screen": "walk_cross_seats.moment",
+   "verdict": "PASS",
+   "line": "\"Your face goes hot down your neck, your nipples tight.\" <<people/cross_seats_t3>>",
+   "why": "a look at her with a _t3 spot right after the payoff line, pool 2, a still (she is held mid-line); the spot is in HEAD's build, so last pass's no-spot reading was wrong",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "400d1f890ad37714",
+    "traits": "2875b58584de3c6e",
+    "facts": "5654cde95f9c7420",
+    "facts2": "b88955853267c1db",
+    "all": "f2ddf0ee5bece44d"
+   },
+   "row_hash": "3231b5a8a46eaa49",
+   "carried": true,
+   "pass": 26
+  },
+  {
+   "row": "C2205",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "is_repeatable = true",
+   "why": "the six walk-ins repeat; none is a chain step or ends for good",
+   "cause": null,
+   "note": false,
+   "screen_hash": "32d190af146bdcb6",
+   "row_hash": "44b9341eed4268bc",
+   "carried": true,
+   "pass": 26
+  },
+  {
+   "row": "C2206",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "walk_stacks, walk_hale_note, walk_holt_novel, walk_mirror_girls, walk_cross_brooke, walk_cross_seats",
+   "why": "no side-by-side groups on its 6 canvas(es); nothing can be covered",
+   "cause": null,
+   "note": false,
+   "screen_hash": "32d190af146bdcb6",
+   "row_hash": "d8ebf6d6b2abf6a5",
+   "carried": false,
+   "pass": 26
   },
   {
    "row": "C286",
@@ -4195,19 +4276,19 @@
    "screen": "walk_cross_brooke.moment",
    "verdict": "PASS",
    "line": "Cross is running a scene with Brooke on the empty stage, his hand on her waist to place her, staying.",
-   "why": "on arrival she walks in on a rehearsal already running; Cross and Brooke at campus_theatre Tue/Thu/Fri 14-18 by rows, both gated is_present, met_cross and met_brooke",
+   "why": "true on every visit the trigger allows",
    "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "19c927e206f3a367",
+    "text": "93de1f62bd6e2438",
     "traits": "e6b79f0e524c6de5",
     "facts": "53fbf715bd6b1c0c",
     "facts2": "7d5f431740948a39",
-    "all": "a10ecb7b5794ff26"
+    "all": "08ccfba95d43e44f"
    },
    "row_hash": "67e48e60d5053a2e",
    "carried": true,
-   "pass": 11
+   "pass": 25
   },
   {
    "row": "C460",
@@ -4470,7 +4551,7 @@
     "all": "6cfaa860f192116a"
    },
    "row_hash": "67e48e60d5053a2e",
-   "carried": false,
+   "carried": true,
    "pass": 23
   },
   {
@@ -4548,19 +4629,19 @@
    "screen": "walk_cross_brooke.moment",
    "verdict": "PASS",
    "line": "Cross is running a scene with Brooke on the empty stage, his hand on her waist to place her, staying.",
-   "why": "what isn't a checked fact is texture or her opinion on her body, and dialogue fits each person's entry",
+   "why": "texture and her reaction only",
    "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "19c927e206f3a367",
+    "text": "93de1f62bd6e2438",
     "traits": "e6b79f0e524c6de5",
     "facts": "53fbf715bd6b1c0c",
     "facts2": "7d5f431740948a39",
-    "all": "a10ecb7b5794ff26"
+    "all": "08ccfba95d43e44f"
    },
    "row_hash": "310706ee076318f2",
    "carried": true,
-   "pass": 11
+   "pass": 25
   },
   {
    "row": "C461",
@@ -4823,7 +4904,7 @@
     "all": "6cfaa860f192116a"
    },
    "row_hash": "310706ee076318f2",
-   "carried": false,
+   "carried": true,
    "pass": 23
   },
   {
@@ -6233,7 +6314,7 @@
     "all": "6cfaa860f192116a"
    },
    "row_hash": "4e86d143688ba8e5",
-   "carried": false,
+   "carried": true,
    "pass": 23
   },
   {
@@ -6620,7 +6701,7 @@
     "all": "6cfaa860f192116a"
    },
    "row_hash": "1aadffd96e76381c",
-   "carried": false,
+   "carried": true,
    "pass": 23
   },
   {
@@ -6692,19 +6773,19 @@
    "screen": "walk_cross_brooke.moment",
    "verdict": "PASS",
    "line": "Cross is running a scene with Brooke on the empty stage, his hand on her waist to place her, staying.",
-   "why": "every person the line puts here is put here by their rows at every minute the screen can show (who_is_where), and gated is_present on the trigger",
+   "why": "both named people are there: trigger checks both, and who_is_where puts them in campus_theatre 14-18 those days",
    "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "19c927e206f3a367",
+    "text": "93de1f62bd6e2438",
     "traits": "e6b79f0e524c6de5",
     "facts": "53fbf715bd6b1c0c",
     "facts2": "7d5f431740948a39",
-    "all": "a10ecb7b5794ff26"
+    "all": "08ccfba95d43e44f"
    },
    "row_hash": "13a714429d15f3b2",
    "carried": true,
-   "pass": 11
+   "pass": 25
   },
   {
    "row": "L106",
@@ -6967,7 +7048,7 @@
     "all": "6cfaa860f192116a"
    },
    "row_hash": "13a714429d15f3b2",
-   "carried": false,
+   "carried": true,
    "pass": 23
   },
   {
@@ -7324,7 +7405,7 @@
     "all": "6cfaa860f192116a"
    },
    "row_hash": "e64ce2672d85d2d8",
-   "carried": false,
+   "carried": true,
    "pass": 23
   },
   {
@@ -7388,8 +7469,8 @@
  ],
  "causes": [],
  "pending": [],
- "asked": 8,
- "answered": 8,
+ "asked": 1,
+ "answered": 1,
  "pass_items": [],
  "unowed": []
 }

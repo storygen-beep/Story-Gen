@@ -1,6 +1,6 @@
 {
  "piece": "P48",
- "pass": 10,
+ "pass": 11,
  "screens": {
   "sidebar.disinhibition": {
    "text": "ac50b5d02b9cf256",
@@ -212,6 +212,7 @@
   "C593": "370371a278b9f182",
   "C422": "7e128897077ecee6",
   "C460": "67e48e60d5053a2e",
+  "C2206": "d8ebf6d6b2abf6a5",
   "C461": "310706ee076318f2"
  },
  "verdicts": [
@@ -1146,8 +1147,21 @@
    "note": false,
    "screen_hash": "b48942cb4a38b838",
    "row_hash": "73dfe095a72154a3",
-   "carried": false,
+   "carried": true,
    "pass": 10
+  },
+  {
+   "row": "C2206",
+   "screen": "*",
+   "verdict": "N/A",
+   "line": "Builds: engine:people, sidebar:disinhibition, sidebar:submission, sidebar:dominance",
+   "why": "Builds names no canvas in 7_final_game.toml (locations, sidebar, phone, people or none); no group chain to judge",
+   "cause": null,
+   "note": false,
+   "screen_hash": "b48942cb4a38b838",
+   "row_hash": "d8ebf6d6b2abf6a5",
+   "carried": false,
+   "pass": 11
   },
   {
    "row": "C338",

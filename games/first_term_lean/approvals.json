@@ -3570,6 +3570,312 @@
       "sha256": "48460dc2da07014b969b318775cb03f64f60217e32381b7132a68dc590b7b3dd",
       "words": "ENI for LO (delegated 2026-11-24): P74 round 3, walk_tom_tips.nothing stays true when Done returns her to the café (B10, C460); LO, typed in main-lean 2026-11-27: \"Lets do it complete CoT aligned\"",
       "date": "2026-11-27"
+    },
+    {
+      "card": "P75",
+      "sha256": "f7bb2e6b706d4deaadf47dc75c561e130c3ac399b77a6870d51097d06cd46ee1",
+      "words": "ENI for LO (delegated 2026-11-24): P75, Zoe's party is a place she stays at (C2203); LO, typed in main-lean 2026-11-27: \"a yes\", \"no dresss code for party its fine\", \"yes stay stranger\"",
+      "date": "2026-11-27"
+    },
+    {
+      "card": "P37",
+      "sha256": "e4af151e3a72c0714b4ab60f2bd6f698ed4af9412c1db16482040081527d8b3f",
+      "words": "ENI for LO (delegated 2026-11-24): P75, Zoe's party is a place she stays at (C2203); LO, typed in main-lean 2026-11-27: \"a yes\", \"no dresss code for party its fine\", \"yes stay stranger\"",
+      "date": "2026-11-27"
+    },
+    {
+      "card": "P41",
+      "sha256": "17fe5b94e915337c09e8df1670601fa7cad434815baebdc19a4abf702aac2b6c",
+      "words": "ENI for LO (delegated 2026-11-24): P75, Zoe's party is a place she stays at (C2203); LO, typed in main-lean 2026-11-27: \"a yes\", \"no dresss code for party its fine\", \"yes stay stranger\"",
+      "date": "2026-11-27"
+    },
+    {
+      "card": "P75",
+      "sha256": "245e30d425d87bb6f6b843243a3e6e6ab3862ea2d500c04f5682f663e5ecd367",
+      "words": "ENI for LO (delegated 2026-11-24): P75 build fixes (talk ratio by speech only, moments off the partied_this_week brake, party_end two answers, Sheet rows computed); LO, typed in main-lean 2026-11-27: \"a yes\"",
+      "date": "2026-11-27"
+    },
+    {
+      "card": "P37",
+      "sha256": "f41572f30154e460bef5b91073046a2d15306fea440a530c4866a3047e6956de",
+      "words": "ENI for LO (delegated 2026-11-24): P75 build fixes (talk ratio by speech only, moments off the partied_this_week brake, party_end two answers, Sheet rows computed); LO, typed in main-lean 2026-11-27: \"a yes\"",
+      "date": "2026-11-27"
+    },
+    {
+      "card": "P41",
+      "sha256": "32c9ebbac6a20647469bdad1ac20ce0bb4cf449aef6dc736f4f7afff885fe720",
+      "words": "ENI for LO (delegated 2026-11-24): P75 build fixes (talk ratio by speech only, moments off the partied_this_week brake, party_end two answers, Sheet rows computed); LO, typed in main-lean 2026-11-27: \"a yes\"",
+      "date": "2026-11-27"
+    },
+    {
+      "card": "P76",
+      "sha256": "67511188d220b72c41964b237f94b3aae91f6782d0c299c91234b045d5ea9dff",
+      "words": "ENI for LO (delegated 2026-11-24): P76, place descriptions only the state of the place (C2201); LO, typed in main-lean 2026-11-27: \"go ahead, cut vance line, keep bedroom lines\"",
+      "date": "2026-11-27"
+    },
+    {
+      "card": "P03",
+      "sha256": "a397114925a66abc5c339c0868ae23d469241eae209ab4c3e02144038bef9591",
+      "words": "ENI for LO (delegated 2026-11-24): P76 owner note, place descriptions only the state of the place (C2201); LO, typed in main-lean 2026-11-27: \"go ahead, cut vance line, keep bedroom lines\"",
+      "date": "2026-11-27"
+    },
+    {
+      "card": "P04",
+      "sha256": "d575652dc826d0fca2bf4d63be611dcc76a5f63524fb6b48a0bcd0812be06178",
+      "words": "ENI for LO (delegated 2026-11-24): P76 owner note, place descriptions only the state of the place (C2201); LO, typed in main-lean 2026-11-27: \"go ahead, cut vance line, keep bedroom lines\"",
+      "date": "2026-11-27"
+    },
+    {
+      "card": "P05",
+      "sha256": "f0bf46f7ebf3262f44643ab83e595b25ef9c4743ec2db6363783088a948aedae",
+      "words": "ENI for LO (delegated 2026-11-24): P76 owner note, place descriptions only the state of the place (C2201); LO, typed in main-lean 2026-11-27: \"go ahead, cut vance line, keep bedroom lines\"",
+      "date": "2026-11-27"
+    },
+    {
+      "card": "P36",
+      "sha256": "2b23fdc58969af03393c74e5bfe1867941aa8d7c5eaf6c9b4eb6473023da6d97",
+      "words": "ENI for LO (delegated 2026-11-24): P76 owner note, place descriptions only the state of the place (C2201); LO, typed in main-lean 2026-11-27: \"go ahead, cut vance line, keep bedroom lines\"",
+      "date": "2026-11-27"
+    },
+    {
+      "card": "P69",
+      "sha256": "a93778066df426144b16c8d36c0f97f423ae328afcb478eff7613acbb64faa92",
+      "words": "ENI for LO (delegated 2026-11-24): P76 owner note, place descriptions only the state of the place (C2201); LO, typed in main-lean 2026-11-27: \"go ahead, cut vance line, keep bedroom lines\"",
+      "date": "2026-11-27"
+    },
+    {
+      "card": "P75",
+      "sha256": "215e37f83d1ad07c1b644d38e4f30dce1d094c7768f160b631060e9fa6ff824a",
+      "words": "ENI for LO (delegated 2026-11-24): P75 round 3 (dare is a look, LO: \"Keep 11-21: no accept\"; party faces with menus; speaker guy opens on his want) and P76's board line; LO, typed in main-lean 2026-11-27",
+      "date": "2026-11-27"
+    },
+    {
+      "card": "P37",
+      "sha256": "ca129ad57fe388dfbff1b1d0acd907d82c3990cf2f04bef257dccccd837cb394",
+      "words": "ENI for LO (delegated 2026-11-24): P75 round 3 (dare is a look, LO: \"Keep 11-21: no accept\"; party faces with menus; speaker guy opens on his want) and P76's board line; LO, typed in main-lean 2026-11-27",
+      "date": "2026-11-27"
+    },
+    {
+      "card": "P59",
+      "sha256": "a572b300a4d39a990b9eef8251fd7fc5efbc4c71ed22cabbcaac78948b831ada",
+      "words": "ENI for LO (delegated 2026-11-24): P75 round 3 (dare is a look, LO: \"Keep 11-21: no accept\"; party faces with menus; speaker guy opens on his want) and P76's board line; LO, typed in main-lean 2026-11-27",
+      "date": "2026-11-27"
+    },
+    {
+      "card": "P76",
+      "sha256": "ea361cf4b931c79da143bd404e1d067fc950afaa12c3770ec59c8830e76b3609",
+      "words": "ENI for LO (delegated 2026-11-24): P75 round 3 (dare is a look, LO: \"Keep 11-21: no accept\"; party faces with menus; speaker guy opens on his want) and P76's board line; LO, typed in main-lean 2026-11-27",
+      "date": "2026-11-27"
+    },
+    {
+      "card": "P75",
+      "sha256": "9105f381c4bf4960f5402c0e9d8c719b366cc35cbe33502b9dbc14c67edf9c06",
+      "words": "ENI for LO (delegated 2026-11-24): P75/P76 pass-2 fixes (board once a day and dimmed, her reaction, speaker guy after the dare, Go home one window, party menu picture spots without files); LO, typed in main-lean 2026-11-27",
+      "date": "2026-11-27"
+    },
+    {
+      "card": "P37",
+      "sha256": "594f2ea10ea152779032f54f15a82c90444b08eb4b5e7f534c6c88eb0501fa93",
+      "words": "ENI for LO (delegated 2026-11-24): P75/P76 pass-2 fixes (board once a day and dimmed, her reaction, speaker guy after the dare, Go home one window, party menu picture spots without files); LO, typed in main-lean 2026-11-27",
+      "date": "2026-11-27"
+    },
+    {
+      "card": "P59",
+      "sha256": "7c18e22745aa2353b78a0da6bf19966981fd9fa4afe9fc0740ae71aa091cfd81",
+      "words": "ENI for LO (delegated 2026-11-24): P75/P76 pass-2 fixes (board once a day and dimmed, her reaction, speaker guy after the dare, Go home one window, party menu picture spots without files); LO, typed in main-lean 2026-11-27",
+      "date": "2026-11-27"
+    },
+    {
+      "card": "P76",
+      "sha256": "0efae71f675d2f7bf3e87809ec19dc3bf84c8c1f9f3762dcb82f73f9eef0c733",
+      "words": "ENI for LO (delegated 2026-11-24): P75/P76 pass-2 fixes (board once a day and dimmed, her reaction, speaker guy after the dare, Go home one window, party menu picture spots without files); LO, typed in main-lean 2026-11-27",
+      "date": "2026-11-27"
+    },
+    {
+      "card": "P75",
+      "sha256": "94e2a22de7eb8c9b78c45a7e350f662ad4f8898f49392501d4a812e198c45f07",
+      "words": "ENI for LO (delegated 2026-11-24): pass-3 fixes (picture ages match the NPC age field, the board re-readable and dimmed only off-Sunday, C914); LO, typed in main-lean 2026-11-27",
+      "date": "2026-11-27"
+    },
+    {
+      "card": "P37",
+      "sha256": "39e3513de55338d5eee68dc5b15f4b7fa436358de0b3dc7ff50a95f39eebf61a",
+      "words": "ENI for LO (delegated 2026-11-24): pass-3 fixes (picture ages match the NPC age field, the board re-readable and dimmed only off-Sunday, C914); LO, typed in main-lean 2026-11-27",
+      "date": "2026-11-27"
+    },
+    {
+      "card": "P76",
+      "sha256": "3b91629c6f1cacf0cef22899ab82a49568cceba59a631aeb9a26547421330b3f",
+      "words": "ENI for LO (delegated 2026-11-24): pass-3 fixes (picture ages match the NPC age field, the board re-readable and dimmed only off-Sunday, C914); LO, typed in main-lean 2026-11-27",
+      "date": "2026-11-27"
+    },
+    {
+      "card": "P77",
+      "sha256": "8832e3814c6d06a7b5cb2fdba751649657992c1cdf0053cf9c86c434a0f057dc",
+      "words": "ENI for LO (delegated 2026-11-24): P77, a spot on every sexual scene (C2204), the cafe's No spot lines, marco_hips true every visit (C2202); LO, typed in main-lean 2026-11-27: \"the group 2, gifs\", \"go ahead\"",
+      "date": "2026-11-27"
+    },
+    {
+      "card": "P04",
+      "sha256": "6aee056e2f656c283c397810e5ea2ba56b249c251f395d88fa160b91bc3c15cd",
+      "words": "ENI for LO (delegated 2026-11-24): P77, a spot on every sexual scene (C2204), the cafe's No spot lines, marco_hips true every visit (C2202); LO, typed in main-lean 2026-11-27: \"the group 2, gifs\", \"go ahead\"",
+      "date": "2026-11-27"
+    },
+    {
+      "card": "P33",
+      "sha256": "b5799cf47186fbf1331a5b0e1842393cfdd606c7eacf3c5a64cdfcf76d9e3fde",
+      "words": "ENI for LO (delegated 2026-11-24): P77, a spot on every sexual scene (C2204), the cafe's No spot lines, marco_hips true every visit (C2202); LO, typed in main-lean 2026-11-27: \"the group 2, gifs\", \"go ahead\"",
+      "date": "2026-11-27"
+    },
+    {
+      "card": "P39",
+      "sha256": "13496cc4a727421128e3db2dd15b42252fb9e09fa19f96d674a46d35017e56a6",
+      "words": "ENI for LO (delegated 2026-11-24): P77, a spot on every sexual scene (C2204), the cafe's No spot lines, marco_hips true every visit (C2202); LO, typed in main-lean 2026-11-27: \"the group 2, gifs\", \"go ahead\"",
+      "date": "2026-11-27"
+    },
+    {
+      "card": "P40",
+      "sha256": "9111ab04855422f486c7ea0b2ade85fc8b64b2fabb52c21d4a715ffd9765c6c1",
+      "words": "ENI for LO (delegated 2026-11-24): P77, a spot on every sexual scene (C2204), the cafe's No spot lines, marco_hips true every visit (C2202); LO, typed in main-lean 2026-11-27: \"the group 2, gifs\", \"go ahead\"",
+      "date": "2026-11-27"
+    },
+    {
+      "card": "P41",
+      "sha256": "49da0260f33b021689c456008bccc3ca5720f25569f372049cb6209d106295c7",
+      "words": "ENI for LO (delegated 2026-11-24): P77, a spot on every sexual scene (C2204), the cafe's No spot lines, marco_hips true every visit (C2202); LO, typed in main-lean 2026-11-27: \"the group 2, gifs\", \"go ahead\"",
+      "date": "2026-11-27"
+    },
+    {
+      "card": "P49",
+      "sha256": "b0470a5bc7c5d1c29266c144e5b7efc2ced036cb9de8fa056ffeb2fd09400041",
+      "words": "ENI for LO (delegated 2026-11-24): P77, a spot on every sexual scene (C2204), the cafe's No spot lines, marco_hips true every visit (C2202); LO, typed in main-lean 2026-11-27: \"the group 2, gifs\", \"go ahead\"",
+      "date": "2026-11-27"
+    },
+    {
+      "card": "P72",
+      "sha256": "ba85ef45934e7770a1b188ffb60c8498ad2e68903195af36d73e2301be061f7b",
+      "words": "ENI for LO (delegated 2026-11-24): P77, a spot on every sexual scene (C2204), the cafe's No spot lines, marco_hips true every visit (C2202); LO, typed in main-lean 2026-11-27: \"the group 2, gifs\", \"go ahead\"",
+      "date": "2026-11-27"
+    },
+    {
+      "card": "P75",
+      "sha256": "c2fc311fc5fcb310ae56b2b1d88c3cb2bdb7ed4e6e71a5fee80560db48f72768",
+      "words": "ENI for LO (delegated 2026-11-24): P77, a spot on every sexual scene (C2204), the cafe's No spot lines, marco_hips true every visit (C2202); LO, typed in main-lean 2026-11-27: \"the group 2, gifs\", \"go ahead\"",
+      "date": "2026-11-27"
+    },
+    {
+      "card": "P10",
+      "sha256": "212e6a807e572071c95ca991f39d055ac9aaeed4959d5ded5231c6a2f22937c1",
+      "words": "ENI for LO (delegated 2026-11-24): P77, a spot on every sexual scene (C2204), the cafe's No spot lines, marco_hips true every visit (C2202); LO, typed in main-lean 2026-11-27: \"the group 2, gifs\", \"go ahead\"",
+      "date": "2026-11-27"
+    },
+    {
+      "card": "P77",
+      "sha256": "f9a8eb2d4162953d3e450a2341aa7102375f17d3f00ac77f7fe8a719fce538c6",
+      "words": "ENI for LO (delegated 2026-11-24): P77 round 2 (spots on the unlabelled looks, No spot lines, moving gifs, Vance's meeting keeps his face per LO \"A keep his face\"); LO, typed in main-lean 2026-11-27",
+      "date": "2026-11-27"
+    },
+    {
+      "card": "P04",
+      "sha256": "bf00a677eb28b69abce0c09dba396b23b1a6483da8bdb013a083533f32ac495f",
+      "words": "ENI for LO (delegated 2026-11-24): P77 round 2 (spots on the unlabelled looks, No spot lines, moving gifs, Vance's meeting keeps his face per LO \"A keep his face\"); LO, typed in main-lean 2026-11-27",
+      "date": "2026-11-27"
+    },
+    {
+      "card": "P08",
+      "sha256": "f844e49eafa52c510e231c56d154ae691ade3cc4715502b5106dd9c03aafed91",
+      "words": "ENI for LO (delegated 2026-11-24): P77 round 2 (spots on the unlabelled looks, No spot lines, moving gifs, Vance's meeting keeps his face per LO \"A keep his face\"); LO, typed in main-lean 2026-11-27",
+      "date": "2026-11-27"
+    },
+    {
+      "card": "P33",
+      "sha256": "900bde54ba54074b359230068af9152bf3f5cc96d6662d51d1d09e5fc134e502",
+      "words": "ENI for LO (delegated 2026-11-24): P77 round 2 (spots on the unlabelled looks, No spot lines, moving gifs, Vance's meeting keeps his face per LO \"A keep his face\"); LO, typed in main-lean 2026-11-27",
+      "date": "2026-11-27"
+    },
+    {
+      "card": "P39",
+      "sha256": "482178743dcf800daadbbc3623c3f651d2c9e02fcc70ccdcad71405d70c9af00",
+      "words": "ENI for LO (delegated 2026-11-24): P77 round 2 (spots on the unlabelled looks, No spot lines, moving gifs, Vance's meeting keeps his face per LO \"A keep his face\"); LO, typed in main-lean 2026-11-27",
+      "date": "2026-11-27"
+    },
+    {
+      "card": "P49",
+      "sha256": "f37f3e13090760034c6b7f9a1b26c95a040b286105b6e091de42d1da82741747",
+      "words": "ENI for LO (delegated 2026-11-24): P77 round 2 (spots on the unlabelled looks, No spot lines, moving gifs, Vance's meeting keeps his face per LO \"A keep his face\"); LO, typed in main-lean 2026-11-27",
+      "date": "2026-11-27"
+    },
+    {
+      "card": "P75",
+      "sha256": "3b5b3658c46b2cc09ba75291038177ea15e02b465fdf692a70447fe15d316e3a",
+      "words": "ENI for LO (delegated 2026-11-24): P77 round 2 (spots on the unlabelled looks, No spot lines, moving gifs, Vance's meeting keeps his face per LO \"A keep his face\"); LO, typed in main-lean 2026-11-27",
+      "date": "2026-11-27"
+    },
+    {
+      "card": "P78",
+      "sha256": "c20e9cd4d6480340ac194466a99c87996ea9cef882089b73094eee46870c1d7f",
+      "words": "ENI for LO (delegated 2026-11-24): P78, a chain's last step stays every 7 days (C2205), after-yes words true on repeat; LO, typed in main-lean 2026-11-27: \"yes loop the last step, every 7 days\"",
+      "date": "2026-11-27"
+    },
+    {
+      "card": "P78",
+      "sha256": "7fd699dafa444c1108d03423a66ab7ac1e348bb8ff8d4578aca43a2b2349dc73",
+      "words": "ENI for LO (delegated 2026-11-24): P78 (the last step every 7 days, C2205; Vance strokes; Ryan's after-yes line for talk) and Chris's meeting keeps his face (LO \"A keep his face\"); LO, typed in main-lean 2026-11-27",
+      "date": "2026-11-27"
+    },
+    {
+      "card": "P21",
+      "sha256": "7e352c48dfc6812e71a1a44eca967a66cd930286131b724d49f1af07e8e6007d",
+      "words": "ENI for LO (delegated 2026-11-24): P78 (the last step every 7 days, C2205; Vance strokes; Ryan's after-yes line for talk) and Chris's meeting keeps his face (LO \"A keep his face\"); LO, typed in main-lean 2026-11-27",
+      "date": "2026-11-27"
+    },
+    {
+      "card": "P49",
+      "sha256": "f60266d2fa6bba24532a4a13c66c51b23cf95ddfef24f013e0a841a315e0edb6",
+      "words": "ENI for LO (delegated 2026-11-24): P78 (the last step every 7 days, C2205; Vance strokes; Ryan's after-yes line for talk) and Chris's meeting keeps his face (LO \"A keep his face\"); LO, typed in main-lean 2026-11-27",
+      "date": "2026-11-27"
+    },
+    {
+      "card": "P78",
+      "sha256": "7103fce25350f2e91e28e177acd86bb07380929a33972c952f8a94f1ec7e6941",
+      "words": "ENI for LO (delegated 2026-11-24): P78 item 4, zoe_give_him's groups made one per state so Zoe's line renders (words unchanged); LO, typed in main-lean 2026-11-27",
+      "date": "2026-11-27"
+    },
+    {
+      "card": "P49",
+      "sha256": "5f43991819e7e612b581550c84cdf0a2e86404fb029efa91c1aff8c55d73d4fa",
+      "words": "ENI for LO (delegated 2026-11-24): P78 item 4, zoe_give_him's groups made one per state so Zoe's line renders (words unchanged); LO, typed in main-lean 2026-11-27",
+      "date": "2026-11-27"
+    },
+    {
+      "card": "P78",
+      "sha256": "76b5124b1ff89be17119d025fa9a18c9326c5b4f26f356ec99fd9a2e81f1e540",
+      "words": "ENI for LO (delegated 2026-11-24): P78 item 4, Ryan's after-yes knock true either way, each version its own picture (C1238, C1255); LO, typed in main-lean 2026-11-27",
+      "date": "2026-11-27"
+    },
+    {
+      "card": "P49",
+      "sha256": "dbffd57cb5f0639c04bc39b9b5a9f5840d2495ab1c5d6ea1b4b19d41567f12cf",
+      "words": "ENI for LO (delegated 2026-11-24): P78 item 4, Ryan's after-yes knock true either way, each version its own picture (C1238, C1255); LO, typed in main-lean 2026-11-27",
+      "date": "2026-11-27"
+    },
+    {
+      "card": "P78",
+      "sha256": "6fad5967aeb008253bd339750eb27f0cb27fcea3e9a17fbc29feb133279d707b",
+      "words": "ENI for LO (delegated 2026-11-24): P78 item 6, dead groups made live, each group its whole state, words unchanged (C2206, C625); LO, typed in main-lean 2026-11-27: \"yes go ahead\"",
+      "date": "2026-11-27"
+    },
+    {
+      "card": "P36",
+      "sha256": "9f265780386f7383bf3b40025c1af660b94491ae12159f0c0b4fafa10df4ba38",
+      "words": "ENI for LO (delegated 2026-11-24): P78 item 6, dead groups made live, each group its whole state, words unchanged (C2206, C625); LO, typed in main-lean 2026-11-27: \"yes go ahead\"",
+      "date": "2026-11-27"
+    },
+    {
+      "card": "P27",
+      "sha256": "f733a72479d23d6803383659ec77bea57124911ea20e477d6f4c7690fe4478fb",
+      "words": "ENI for LO (delegated 2026-11-24): P78 item 6, dead groups made live, each group its whole state, words unchanged (C2206, C625); LO, typed in main-lean 2026-11-27: \"yes go ahead\"",
+      "date": "2026-11-27"
     }
   ]
 }

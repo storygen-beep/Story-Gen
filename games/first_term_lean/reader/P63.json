@@ -1,6 +1,6 @@
 {
  "piece": "P63",
- "pass": 7,
+ "pass": 9,
  "screens": {
   "*": "4f53cda18c2baa0c"
  },
@@ -22,7 +22,8 @@
   "C1267": "6bafcadf3d586d5a",
   "C1249": "604706399d2f1194",
   "C1250": "8384cc6bcbd67c07",
-  "C1265": "fe36d5bbc01da9a6",
+  "C1265": "1a90f309614f963a",
+  "C2204": "85e333f5b3cbcb0f",
   "C1262": "2946d2fe0b7dc28f",
   "C1234": "7dc492e03732757e",
   "L121": "cddfa55c18e5c7b7",
@@ -41,11 +42,12 @@
   "L97": "2bfb9527e76ad93b",
   "media#1": "3641bf707d9adfce",
   "media#2": "69a8103be1e1032a",
-  "media#3": "8c75b0d488b188e2",
+  "media#3": "6632678381731161",
   "media#4": "03599fc0722690b6",
   "media#5": "2cf5e3607ccecd4a",
   "media#6": "3016751837a9b0a0",
   "media#7": "eff6dc1369755c34",
+  "media#8": "599313c7948d2a50",
   "C442": "a2b07f40e1a9e908",
   "C449": "ac5932d70cd775a1",
   "C451": "6b0fd679047fc9b8",
@@ -56,6 +58,7 @@
   "C422": "8933f85010afbef7",
   "C460": "beb5a109bde77305",
   "C2202": "d5592f287f5f641a",
+  "C2206": "99ccaf869af30473",
   "C461": "153b0804e686abae",
   "L163": "00a617ab9b4e9cd4",
   "voice#1": "b8e8afcb32208b40",
@@ -410,14 +413,14 @@
    "row": "C1265",
    "screen": "*",
    "verdict": "PASS",
-   "line": "campus_office_* image = locations/campus_office_*_t0.jpg",
-   "why": "the four office pictures are place cards on the corridor menu, which C1265 says are not spots of this kind",
+   "line": "four office place images",
+   "why": "a place's `image` is its card on the menu it's entered from, not a spot of this kind (C1265; v2.py:24930)",
    "cause": null,
    "note": false,
    "screen_hash": "4f53cda18c2baa0c",
-   "row_hash": "fe36d5bbc01da9a6",
+   "row_hash": "1a90f309614f963a",
    "carried": true,
-   "pass": 6
+   "pass": 8
   },
   {
    "row": "C1267",
@@ -533,8 +536,34 @@
    "note": false,
    "screen_hash": "4f53cda18c2baa0c",
    "row_hash": "d5592f287f5f641a",
-   "carried": false,
+   "carried": true,
    "pass": 7
+  },
+  {
+   "row": "C2204",
+   "screen": "*",
+   "verdict": "N/A",
+   "line": "",
+   "why": "no screen in this piece shows arousal, a look, a touch or sex; the row never fires (place pictures only)",
+   "cause": null,
+   "note": false,
+   "screen_hash": "4f53cda18c2baa0c",
+   "row_hash": "85e333f5b3cbcb0f",
+   "carried": true,
+   "pass": 8
+  },
+  {
+   "row": "C2206",
+   "screen": "*",
+   "verdict": "N/A",
+   "line": "Builds: none",
+   "why": "Builds names no canvas in 7_final_game.toml (locations, sidebar, phone, people or none); no group chain to judge",
+   "cause": null,
+   "note": false,
+   "screen_hash": "4f53cda18c2baa0c",
+   "row_hash": "99ccaf869af30473",
+   "carried": false,
+   "pass": 9
   },
   {
    "row": "C422",
@@ -813,14 +842,14 @@
    "row": "media#3",
    "screen": "*",
    "verdict": "PASS",
-   "line": "image on the [[locations]] row",
-   "why": "place picture is not a menu spot; no other spot added",
+   "line": "no media block on any office screen",
+   "why": "place cards only",
    "cause": null,
    "note": false,
    "screen_hash": "4f53cda18c2baa0c",
-   "row_hash": "8c75b0d488b188e2",
+   "row_hash": "6632678381731161",
    "carried": true,
-   "pass": 1
+   "pass": 8
   },
   {
    "row": "media#4",
@@ -873,6 +902,19 @@
    "row_hash": "eff6dc1369755c34",
    "carried": true,
    "pass": 1
+  },
+  {
+   "row": "media#8",
+   "screen": "*",
+   "verdict": "N/A",
+   "line": "",
+   "why": "no screen in this piece shows arousal, a look, a touch or sex; the row never fires",
+   "cause": null,
+   "note": false,
+   "screen_hash": "4f53cda18c2baa0c",
+   "row_hash": "599313c7948d2a50",
+   "carried": true,
+   "pass": 8
   },
   {
    "row": "voice#1",

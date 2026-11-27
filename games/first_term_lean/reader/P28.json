@@ -1,6 +1,6 @@
 {
  "piece": "P28",
- "pass": 3,
+ "pass": 5,
  "screens": {
   "*": "4f53cda18c2baa0c"
  },
@@ -31,7 +31,7 @@
   "C620": "76250e48ada2b843",
   "C769": "f6b6f78a8f2e5ed7",
   "C794": "bad76e5963432385",
-  "C2201": "d119dfe665f76359",
+  "C2201": "7fddf5e17dbdaaf9",
   "C795": "34139e6a6914e171",
   "C804": "5358489178bff0a4",
   "L106": "13a714429d15f3b2",
@@ -43,11 +43,13 @@
   "C762": "40e85f1ae92f1e71",
   "L170": "c3599cd09637a240",
   "C770": "ff9aa31c11e5d50f",
+  "C2203": "365a29fd77f6b765",
   "C771": "563e3d25c3219dd0",
   "C442": "59b8d8d24f0c7c38",
   "C451": "50dbf74577a813c7",
   "C422": "7e128897077ecee6",
   "C460": "67e48e60d5053a2e",
+  "C2206": "d8ebf6d6b2abf6a5",
   "C461": "310706ee076318f2"
  },
  "verdicts": [
@@ -367,14 +369,40 @@
    "row": "C2201",
    "screen": "*",
    "verdict": "PASS",
-   "line": "Ryan's room. \u2026 Ryan's not here. His bed's unmade.",
+   "line": "The living room: the couch, the TV, and Mark's big armchair. Nobody's here.",
    "why": "the three rooms change only for nobody here",
    "cause": null,
    "note": false,
    "screen_hash": "4f53cda18c2baa0c",
-   "row_hash": "d119dfe665f76359",
+   "row_hash": "7fddf5e17dbdaaf9",
+   "carried": true,
+   "pass": 4
+  },
+  {
+   "row": "C2203",
+   "screen": "*",
+   "verdict": "N/A",
+   "line": "\u2014",
+   "why": "no event at its places: nothing here has hours of its own as a party or night out; Zoe's party (C2203) is P75's and P05's place",
+   "cause": null,
+   "note": false,
+   "screen_hash": "4f53cda18c2baa0c",
+   "row_hash": "365a29fd77f6b765",
+   "carried": true,
+   "pass": 4
+  },
+  {
+   "row": "C2206",
+   "screen": "*",
+   "verdict": "N/A",
+   "line": "Builds: location:home_kitchen, location:home_living_room, location:home_ryans_room",
+   "why": "Builds names no canvas in 7_final_game.toml (locations, sidebar, phone, people or none); no group chain to judge",
+   "cause": null,
+   "note": false,
+   "screen_hash": "4f53cda18c2baa0c",
+   "row_hash": "d8ebf6d6b2abf6a5",
    "carried": false,
-   "pass": 3
+   "pass": 5
   },
   {
    "row": "C422",

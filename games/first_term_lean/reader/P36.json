@@ -1,13 +1,13 @@
 {
  "piece": "P36",
- "pass": 11,
+ "pass": 15,
  "screens": {
   "rep_mirror.listen": {
-   "text": "37e65552ab36cb26",
+   "text": "4727bf6c4b4ed33a",
    "traits": "ebc4051ecd3afac5",
    "facts": "a2c742f13651416e",
    "facts2": "805ffde1713f555a",
-   "all": "805814c4c2d77826"
+   "all": "1d48c2b3be46d559"
   },
   "rep_table.listen": {
    "text": "0756a10c45c782eb",
@@ -22,7 +22,7 @@
    "facts2": "09e109c3aa6c7876",
    "all": "09e109c3aa6c7876"
   },
-  "*": "7319d66e81a8029a"
+  "*": "d0c9bdf30724385f"
  },
  "rows": {
   "B1": "5276068df1ca6fa9",
@@ -86,7 +86,7 @@
   "C2198": "73dfe095a72154a3",
   "C769": "f6b6f78a8f2e5ed7",
   "C794": "bad76e5963432385",
-  "C2201": "d119dfe665f76359",
+  "C2201": "7fddf5e17dbdaaf9",
   "C795": "34139e6a6914e171",
   "C804": "5358489178bff0a4",
   "L106": "13a714429d15f3b2",
@@ -98,6 +98,7 @@
   "C762": "40e85f1ae92f1e71",
   "L170": "c3599cd09637a240",
   "C770": "ff9aa31c11e5d50f",
+  "C2203": "365a29fd77f6b765",
   "C771": "563e3d25c3219dd0",
   "L166": "c12d10588197fbaf",
   "C1303": "5b031a6b82899cfd",
@@ -125,6 +126,7 @@
   "C422": "7e128897077ecee6",
   "C460": "67e48e60d5053a2e",
   "C2202": "6e90fed7eae62131",
+  "C2206": "d8ebf6d6b2abf6a5",
   "C461": "310706ee076318f2",
   "C2189": "20748838895e4545"
  },
@@ -146,19 +148,20 @@
    "row": "B10",
    "screen": "rep_mirror.listen",
    "verdict": "PASS",
-   "line": "Two girls you don't know are doing their lips at the far end of the mirror",
-   "why": "the strangers have no rows; Kayla and Tess are at the bathroom only with Brooke (who_is_where 08-09, 13-14), and the row is hidden while Brooke is there; names gated on met_brooke/met_cross; 'Not yet' true at Reputation 0",
+   "line": "That blonde from drama's telling everyone she's getting the lead in Cross's play.",
+   "why": "four groups, met_brooke x met_cross (toml:7769-7787): a name shows only behind its met flag (C625; setters toml:6700, 7657); Brooke is blonde (toml:7599) and absent by trigger; repeat visits make no first-time claim",
    "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "37e65552ab36cb26",
+    "text": "4727bf6c4b4ed33a",
+    "traits": "ebc4051ecd3afac5",
     "facts": "a2c742f13651416e",
     "facts2": "805ffde1713f555a",
-    "all": "805814c4c2d77826"
+    "all": "1d48c2b3be46d559"
    },
    "row_hash": "c1c0e2ac2588a579",
-   "carried": true,
-   "pass": 2
+   "carried": false,
+   "pass": 15
   },
   {
    "row": "B10",
@@ -358,19 +361,20 @@
    "row": "B8",
    "screen": "rep_mirror.listen",
    "verdict": "PASS",
-   "line": "",
+   "line": "Two girls you don't know",
    "why": "no number, no garment of hers",
    "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "37e65552ab36cb26",
+    "text": "4727bf6c4b4ed33a",
+    "traits": "ebc4051ecd3afac5",
     "facts": "a2c742f13651416e",
     "facts2": "805ffde1713f555a",
-    "all": "805814c4c2d77826"
+    "all": "1d48c2b3be46d559"
    },
    "row_hash": "80d415cf08e0ebfe",
-   "carried": true,
-   "pass": 2
+   "carried": false,
+   "pass": 15
   },
   {
    "row": "B8",
@@ -934,21 +938,21 @@
    "note": false,
    "screen_hash": "7319d66e81a8029a",
    "row_hash": "73dfe095a72154a3",
-   "carried": false,
+   "carried": true,
    "pass": 11
   },
   {
    "row": "C2201",
-   "screen": "*",
-   "verdict": "N/A",
-   "line": "Two girls you don't know are doing their lips at the far end of the mirror",
-   "why": "scene and menu screens, not a place's description; the descriptions of the places they sit at read no clothes or meters (all 31 checked)",
+   "screen": "campus_quad",
+   "verdict": "PASS",
+   "line": "Someone's pinned this week's ranking to the board by the steps.",
+   "why": "one Sunday-only variant, a notice at the place; met_brooke read gone; what she reads is the Read the board button (quad_board, 7_final_game.toml:13547)",
    "cause": null,
    "note": false,
-   "screen_hash": "7319d66e81a8029a",
-   "row_hash": "d119dfe665f76359",
+   "screen_hash": null,
+   "row_hash": "7fddf5e17dbdaaf9",
    "carried": true,
-   "pass": 10
+   "pass": 13
   },
   {
    "row": "C2202",
@@ -960,8 +964,59 @@
    "note": false,
    "screen_hash": "7319d66e81a8029a",
    "row_hash": "6e90fed7eae62131",
-   "carried": false,
+   "carried": true,
    "pass": 11
+  },
+  {
+   "row": "C2203",
+   "screen": "*",
+   "verdict": "N/A",
+   "line": "\u2014",
+   "why": "no event at its places: nothing here has hours of its own as a party or night out; Zoe's party (C2203) is P75's and P05's place",
+   "cause": null,
+   "note": false,
+   "screen_hash": "7319d66e81a8029a",
+   "row_hash": "365a29fd77f6b765",
+   "carried": true,
+   "pass": 12
+  },
+  {
+   "row": "C2206",
+   "screen": "rep_mirror.listen",
+   "verdict": "PASS",
+   "line": "met_brooke is_false, met_cross is_true",
+   "why": "four disjoint groups covering all four states, each the first match in its own (v2.py:18922-18928); check.py GREEN",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "4727bf6c4b4ed33a",
+    "traits": "ebc4051ecd3afac5",
+    "facts": "a2c742f13651416e",
+    "facts2": "805ffde1713f555a",
+    "all": "1d48c2b3be46d559"
+   },
+   "row_hash": "d8ebf6d6b2abf6a5",
+   "carried": false,
+   "pass": 15
+  },
+  {
+   "row": "C2206",
+   "screen": "rep_table.listen",
+   "verdict": "PASS",
+   "line": "met_hale is_true / is_false",
+   "why": "two complementary groups, both show",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "0756a10c45c782eb",
+    "traits": "ef3e57a6ae056353",
+    "facts": "c661925bd9a85198",
+    "facts2": "c3911e4c6ac514f2",
+    "all": "bc96e0a4f6b4b457"
+   },
+   "row_hash": "d8ebf6d6b2abf6a5",
+   "carried": true,
+   "pass": 14
   },
   {
    "row": "C422",
@@ -1086,19 +1141,20 @@
    "row": "C460",
    "screen": "rep_mirror.listen",
    "verdict": "PASS",
-   "line": "Brooke's telling everyone she's getting the lead in Cross's play.",
-   "why": "behind met_brooke AND met_cross; else 'That blonde from drama's...'; true at every visit",
+   "line": "Nobody's saying your name in here. Not yet.",
+   "why": "nothing in the build moves reputation (only toml:195/240 declare it), so true on every visit; Cross named only after met_cross",
    "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "37e65552ab36cb26",
+    "text": "4727bf6c4b4ed33a",
+    "traits": "ebc4051ecd3afac5",
     "facts": "a2c742f13651416e",
     "facts2": "805ffde1713f555a",
-    "all": "805814c4c2d77826"
+    "all": "1d48c2b3be46d559"
    },
    "row_hash": "67e48e60d5053a2e",
-   "carried": true,
-   "pass": 2
+   "carried": false,
+   "pass": 15
   },
   {
    "row": "C460",
@@ -1153,19 +1209,20 @@
    "row": "C461",
    "screen": "rep_mirror.listen",
    "verdict": "PASS",
-   "line": "She tells everyone everything. That's how you know it's not true.",
-   "why": "stranger gossip that fits; texture that can't clash",
+   "line": "Brooke tells everyone everything. That's how you know it's not true.",
+   "why": "stranger gossip fitting PLAN:228/266 (Brooke wants Cross's part)",
    "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "37e65552ab36cb26",
+    "text": "4727bf6c4b4ed33a",
+    "traits": "ebc4051ecd3afac5",
     "facts": "a2c742f13651416e",
     "facts2": "805ffde1713f555a",
-    "all": "805814c4c2d77826"
+    "all": "1d48c2b3be46d559"
    },
    "row_hash": "310706ee076318f2",
-   "carried": true,
-   "pass": 2
+   "carried": false,
+   "pass": 15
   },
   {
    "row": "C461",
@@ -1772,19 +1829,20 @@
    "row": "C927",
    "screen": "rep_mirror.listen",
    "verdict": "PASS",
-   "line": "Done",
-   "why": "Done spends 10 minutes",
+   "line": "time_progression_minutes = 10",
+   "why": "Done states its minutes",
    "cause": null,
    "note": true,
    "screen_hash": {
-    "text": "37e65552ab36cb26",
+    "text": "4727bf6c4b4ed33a",
+    "traits": "ebc4051ecd3afac5",
     "facts": "a2c742f13651416e",
     "facts2": "805ffde1713f555a",
-    "all": "805814c4c2d77826"
+    "all": "1d48c2b3be46d559"
    },
    "row_hash": "4e86d143688ba8e5",
-   "carried": true,
-   "pass": 2
+   "carried": false,
+   "pass": 15
   },
   {
    "row": "C927",
@@ -1861,18 +1919,19 @@
    "screen": "rep_mirror.listen",
    "verdict": "N/A",
    "line": "",
-   "why": "no time_of_day on rep_mirror; the bathroom's hours are the place's",
+   "why": "rep_mirror has no time_of_day condition (toml:7761)",
    "cause": null,
    "note": true,
    "screen_hash": {
-    "text": "37e65552ab36cb26",
+    "text": "4727bf6c4b4ed33a",
+    "traits": "ebc4051ecd3afac5",
     "facts": "a2c742f13651416e",
     "facts2": "805ffde1713f555a",
-    "all": "805814c4c2d77826"
+    "all": "1d48c2b3be46d559"
    },
    "row_hash": "1aadffd96e76381c",
-   "carried": true,
-   "pass": 2
+   "carried": false,
+   "pass": 15
   },
   {
    "row": "C931",
@@ -1923,18 +1982,19 @@
    "screen": "rep_mirror.listen",
    "verdict": "PASS",
    "line": "Two girls you don't know",
-   "why": "unnamed strangers, no rows; no met person claimed",
+   "why": "only unnamed strangers claimed present; Brooke's absence is a trigger condition",
    "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "37e65552ab36cb26",
+    "text": "4727bf6c4b4ed33a",
+    "traits": "ebc4051ecd3afac5",
     "facts": "a2c742f13651416e",
     "facts2": "805ffde1713f555a",
-    "all": "805814c4c2d77826"
+    "all": "1d48c2b3be46d559"
    },
    "row_hash": "13a714429d15f3b2",
-   "carried": true,
-   "pass": 2
+   "carried": false,
+   "pass": 15
   },
   {
    "row": "L106",
@@ -1989,14 +2049,15 @@
    "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "37e65552ab36cb26",
+    "text": "4727bf6c4b4ed33a",
+    "traits": "ebc4051ecd3afac5",
     "facts": "a2c742f13651416e",
     "facts2": "805ffde1713f555a",
-    "all": "805814c4c2d77826"
+    "all": "1d48c2b3be46d559"
    },
    "row_hash": "e64ce2672d85d2d8",
-   "carried": true,
-   "pass": 2
+   "carried": false,
+   "pass": 15
   },
   {
    "row": "L167",
@@ -2032,8 +2093,8 @@
  ],
  "causes": [],
  "pending": [],
- "asked": 2,
- "answered": 2,
+ "asked": 9,
+ "answered": 9,
  "pass_items": [],
  "unowed": []
 }

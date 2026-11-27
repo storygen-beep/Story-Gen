@@ -1,6 +1,6 @@
 {
  "piece": "P01",
- "pass": 9,
+ "pass": 10,
  "screens": {
   "sidebar.energy": {
    "text": "3473bd68b6c72b9a",
@@ -168,6 +168,7 @@
   "C422": "8933f85010afbef7",
   "C460": "beb5a109bde77305",
   "C2202": "d5592f287f5f641a",
+  "C2206": "99ccaf869af30473",
   "C461": "153b0804e686abae",
   "L163": "00a617ab9b4e9cd4",
   "voice#1": "b8e8afcb32208b40",
@@ -1314,8 +1315,21 @@
    "note": false,
    "screen_hash": "94d0fedd770a24d2",
    "row_hash": "d5592f287f5f641a",
-   "carried": false,
+   "carried": true,
    "pass": 9
+  },
+  {
+   "row": "C2206",
+   "screen": "*",
+   "verdict": "N/A",
+   "line": "Builds: sidebar:energy, sidebar:money, sidebar:exhibitionism",
+   "why": "Builds names no canvas in 7_final_game.toml (locations, sidebar, phone, people or none); no group chain to judge",
+   "cause": null,
+   "note": false,
+   "screen_hash": "94d0fedd770a24d2",
+   "row_hash": "99ccaf869af30473",
+   "carried": false,
+   "pass": 10
   },
   {
    "row": "C285",

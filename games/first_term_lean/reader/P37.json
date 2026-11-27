@@ -1,22 +1,43 @@
 {
  "piece": "P37",
- "pass": 16,
+ "pass": 21,
  "screens": {
   "zoe_party.party": {
-   "text": "743043cc9ff5e804",
-   "traits": "06d2567e62494596",
-   "facts": "900fd5b7ce617089",
-   "facts2": "64bc96f41ce6505b",
-   "all": "7a67bfb4c9c24484"
+   "text": "3ef4c0684048a540",
+   "traits": "6b1e34b018661933",
+   "facts": "b153518a6fd2602e",
+   "facts2": "adf208a6ad231fd4",
+   "all": "df32385c67bef5af"
+  },
+  "zoe_party.talk": {
+   "text": "f8df0b071a9b2122",
+   "traits": "6b1e34b018661933",
+   "facts": "317eb61177238200",
+   "facts2": "a24d4d77cf03a707",
+   "all": "11a1c744e8ede965"
+  },
+  "zoe_party.dare": {
+   "text": "6a44ad99ca8a8e9b",
+   "traits": "6b1e34b018661933",
+   "facts": "b153518a6fd2602e",
+   "facts2": "adf208a6ad231fd4",
+   "all": "cf8e07000ca37c7e"
+  },
+  "zoe_party.look": {
+   "text": "33dd7dfee4aa6963",
+   "traits": "6b1e34b018661933",
+   "facts": "b153518a6fd2602e",
+   "facts2": "adf208a6ad231fd4",
+   "all": "ae1b2c87be069a24"
   },
   "zoe_party.home": {
-   "text": "fbe0ffa4aab26cc1",
-   "traits": "fa1a0a429fa0ea30",
-   "facts": "09800759fadc671d",
-   "facts2": "8486592f7b66e230",
-   "all": "da488683cb0b7f17"
+   "text": "d9433021c1841953",
+   "traits": "6b1e34b018661933",
+   "facts": "b153518a6fd2602e",
+   "facts2": "adf208a6ad231fd4",
+   "all": "ad96c5e231bb9fa0"
   },
-  "*": "09f16c42c8d06c3a"
+  "*": "1b7f93fcb05e55a9"
  },
  "rows": {
   "B1": "5276068df1ca6fa9",
@@ -65,22 +86,14 @@
   "C1185": "db808998ed69c649",
   "C1220": "18d85534582def9d",
   "C1221": "3835fed23cc316c7",
-  "C1176": "655e8e2b731598c9",
   "C1189": "2afadc6bbe1996bd",
   "C1200": "65e6616cd17c7eb3",
   "C1002": "657248766e62061f",
-  "C291": "53bd56cf597f7ee3",
-  "C296": "d702aa9200d2154d",
-  "C286": "23fc75bfc032d31c",
-  "C287": "480f7e9a025db5b0",
-  "C288": "7b5399adec567cd4",
-  "C289": "3952eba1e2267f12",
-  "C297": "b920ef848ab61988",
   "C1261": "536e26b5fdc76194",
   "C1267": "f0db81b801577bf2",
   "C1249": "a843f9b57e43a020",
   "C1250": "fde578d75b0d3620",
-  "C1265": "eb11e05cd75e52a9",
+  "C1265": "689fd05a4bcbd8be",
   "C1234": "1b2a2d5f05b10331",
   "L121": "45842b25d0708a15",
   "L125": "1fca3bfe1d0c2419",
@@ -95,41 +108,24 @@
   "C1277": "ee51917c5fb43c13",
   "C1238": "6fd430204e984124",
   "C1255": "803b4c46f1e9d7c7",
-  "C2181": "74c68b4029782b5f",
-  "C381": "c661ccd26aada1f2",
-  "C188": "3a9caf43a2f2b8fd",
-  "C210": "00496c4c3aec4580",
-  "C338": "3ce0dbe053c4b2c9",
-  "C388": "fbffa0dbed63968f",
-  "C541": "880eaf1315fbaa0b",
-  "L70": "32d431db08834e70",
-  "L116": "f7a81c1d066ade25",
   "C519": "e78502f7aa28746d",
-  "C311": "bad20c9f078e8b87",
-  "C314": "0304731d263aed9f",
-  "C601": "c73aabbce8afa4bc",
-  "L71": "412fb4816f34d294",
   "C625": "dc9a1fd9dbf3fb87",
   "C626": "8e507f7b235acc25",
   "C630": "5a85503d3ef5a0fb",
   "C632": "146e6806c6c566e3",
   "C620": "76250e48ada2b843",
-  "C613": "6f777b1fcd750dd1",
   "C639": "be0ad7093b24bc46",
   "C640": "728d95d9964ccf25",
-  "C961": "b6cf8c9e8a8ef683",
   "C644": "f5e1d79f3251dbab",
   "C596": "e5f7e6cf2d01613d",
-  "C660": "eaf957bb84e62bbf",
   "C2179": "47b9477e3ec8a790",
-  "C2180": "a6c0f498d4d16271",
   "C2194": "0c03931191c53a34",
   "C1340": "b76a6583ae88c60f",
   "C2197": "cafbb0a598dbfa97",
   "C2198": "73dfe095a72154a3",
   "C769": "f6b6f78a8f2e5ed7",
   "C794": "bad76e5963432385",
-  "C2201": "d119dfe665f76359",
+  "C2201": "7fddf5e17dbdaaf9",
   "C795": "34139e6a6914e171",
   "C804": "5358489178bff0a4",
   "L106": "13a714429d15f3b2",
@@ -141,6 +137,7 @@
   "C762": "40e85f1ae92f1e71",
   "L170": "c3599cd09637a240",
   "C770": "ff9aa31c11e5d50f",
+  "C2203": "365a29fd77f6b765",
   "C771": "563e3d25c3219dd0",
   "L166": "c12d10588197fbaf",
   "C1303": "5b031a6b82899cfd",
@@ -161,7 +158,6 @@
   "C1421": "ef34ee4a51e65d00",
   "C1441": "6b5fb464471de4c7",
   "C442": "59b8d8d24f0c7c38",
-  "C449": "e33f3e7fed17fa30",
   "C451": "50dbf74577a813c7",
   "C447": "5f664198d19facd8",
   "C593": "370371a278b9f182",
@@ -169,6 +165,7 @@
   "C422": "7e128897077ecee6",
   "C460": "67e48e60d5053a2e",
   "C2202": "6e90fed7eae62131",
+  "C2206": "d8ebf6d6b2abf6a5",
   "C461": "310706ee076318f2",
   "C2188": "612394eef6826900",
   "C2189": "20748838895e4545"
@@ -178,2549 +175,2300 @@
    "row": "B1",
    "screen": "*",
    "verdict": "PASS",
-   "line": "There she is. Okay, babe. Dare. Go dance with the guy by the speaker.",
-   "why": "Zoe wants the dare; the tall guy's want is on his body ('looking at you since you came in'); the hip hand is a stranger's brush, the lowest rung (C286), so no earlier canvas is needed. Checked zoe_00 meeting (P20) for Zoe.",
+   "line": "Okay, babe. Dare. Go dance with the guy by the speaker. / He's tall, and he's been looking at you since you came in.",
+   "why": "Zoe wants her to go (the dare, 'Pick someone'), and the guy's wanting is on screen before the look; no sexual act on this canvas. Checked zoe_party.party, .talk, .dare, .look.",
    "cause": null,
    "note": false,
-   "screen_hash": "79a44230bbd20b5e",
+   "screen_hash": "c14fa16f8d097100",
    "row_hash": "5276068df1ca6fa9",
    "carried": true,
-   "pass": 1
+   "pass": 19
+  },
+  {
+   "row": "B10",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "He's tall, and he's been looking at you since you came in.",
+   "why": "Zoe present Sat 21-24 (who_is_where); the dare and its answers are once a night (zoe_dare_done, unset Mondays, toml:581); true after party_speaker_guy too: nothing claims she has not met him",
+   "cause": null,
+   "note": false,
+   "screen_hash": "2c8f0e8afcdfc2f5",
+   "row_hash": "c1c0e2ac2588a579",
+   "carried": true,
+   "pass": 18
   },
   {
    "row": "B10",
    "screen": "zoe_party.home",
    "verdict": "PASS",
    "line": "Your loss, babe. There's a party here every Saturday.",
-   "why": "true on every visit: the trigger opens Saturday 21:00 to Sunday 00:59 (weekday 5 then 6), partied_this_week is unset every Monday (7_final_game.toml:580), so there is a party here every Saturday; Zoe and Sam are there all window (who_is_where), Sam named only behind met_sam",
+   "why": "weekly by Zoe's Saturday rows and the weekday-5 trigger; \"back in the crowd\" true, she is there",
    "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "fbe0ffa4aab26cc1",
-    "traits": "fa1a0a429fa0ea30",
-    "facts": "09800759fadc671d",
-    "facts2": "8486592f7b66e230",
-    "all": "da488683cb0b7f17"
+    "text": "d9433021c1841953",
+    "traits": "6b1e34b018661933",
+    "facts": "b153518a6fd2602e",
+    "facts2": "adf208a6ad231fd4",
+    "all": "ad96c5e231bb9fa0"
    },
    "row_hash": "c1c0e2ac2588a579",
-   "carried": false,
-   "pass": 16
+   "carried": true,
+   "pass": 18
+  },
+  {
+   "row": "B10",
+   "screen": "zoe_party.look",
+   "verdict": "PASS",
+   "line": "That's a start, babe. He's by the speaker all night, you know.",
+   "why": "Once a night (zoe_dare_done, unset Mondays, toml:581); Zoe present (requires_npc); 'all night' true to 00:00 and the end.",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "33dd7dfee4aa6963",
+    "traits": "6b1e34b018661933",
+    "facts": "b153518a6fd2602e",
+    "facts2": "adf208a6ad231fd4",
+    "all": "ae1b2c87be069a24"
+   },
+   "row_hash": "c1c0e2ac2588a579",
+   "carried": true,
+   "pass": 19
   },
   {
    "row": "B10",
    "screen": "zoe_party.party",
    "verdict": "PASS",
-   "line": "Brooke holds court by the kitchen with Kayla and Tess",
-   "why": "behind met_brooke (Kayla and Tess named at that meeting); all three Sat 21-24, Sun 00-01 at near_zoe_apartment; the unmet variant names nobody",
+   "line": "Zoe's on the sofa arm with a bottle in her hand, and she waves it at you like a flag.",
+   "why": "Shows Sat 21:00-00:00 (wrap, v2.py:4828-4831); who_is_where puts npc_zoe at near_zoe_apartment Sat 18-24; requires_npc; true at 21:00, 23:59 and on a re-entry (Talk greys, dare hides, line still holds; party_zoe_sam also has her on the sofa arm).",
    "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "743043cc9ff5e804",
-    "facts": "bdb41c3bae4339c4",
-    "facts2": "64bc96f41ce6505b",
-    "all": "1b1cb411f6915f8d"
+    "text": "3ef4c0684048a540",
+    "traits": "6b1e34b018661933",
+    "facts": "b153518a6fd2602e",
+    "facts2": "adf208a6ad231fd4",
+    "all": "df32385c67bef5af"
    },
    "row_hash": "c1c0e2ac2588a579",
    "carried": true,
-   "pass": 3
+   "pass": 20
   },
   {
    "row": "B11",
    "screen": "*",
    "verdict": "PASS",
-   "line": "Go to Zoe's party",
-   "why": "Spends 15 energy and 180 minutes and shows the party it names.",
+   "line": "You don't go over. You look at him across the room, and you hold it.",
+   "why": "each button shows what it names: Talk talks, the look is shown and sets zoe_dare_looked",
    "cause": null,
    "note": false,
-   "screen_hash": "79a44230bbd20b5e",
+   "screen_hash": "2c8f0e8afcdfc2f5",
    "row_hash": "1e252efd0904a971",
    "carried": true,
-   "pass": 1
+   "pass": 18
   },
   {
    "row": "B12",
-   "screen": "*",
+   "screen": "zoe_party.look",
    "verdict": "PASS",
-   "line": "puts his hand on your hip ... leaves it there a second too long / Not tonight.",
-   "why": "Names her hip, writes his reaction (the hand stays; the tall guy staring), holds a 'not yet' and a hook. Her missing body reaction is judged at B4.",
+   "line": "You look at him across the room, and you hold it, your pulse loud in your throat.",
+   "why": "Her body now named (pulse, throat), his reaction written (holds it, smiles, looks away), and the 'not yet' held (she doesn't go; 'That's a start').",
    "cause": null,
    "note": false,
-   "screen_hash": "79a44230bbd20b5e",
+   "screen_hash": {
+    "text": "33dd7dfee4aa6963",
+    "traits": "6b1e34b018661933",
+    "facts": "b153518a6fd2602e",
+    "facts2": "adf208a6ad231fd4",
+    "all": "ae1b2c87be069a24"
+   },
    "row_hash": "fd109745c67b71d7",
    "carried": true,
-   "pass": 1
+   "pass": 19
   },
   {
    "row": "B13",
    "screen": "*",
    "verdict": "N/A",
    "line": "\u2014",
-   "why": "No moment alone with her body.",
+   "why": "no moment alone with her body",
    "cause": null,
    "note": false,
-   "screen_hash": "79a44230bbd20b5e",
+   "screen_hash": "2c8f0e8afcdfc2f5",
    "row_hash": "aaf6518b64dcce55",
    "carried": true,
-   "pass": 1
+   "pass": 18
   },
   {
    "row": "B2",
    "screen": "*",
    "verdict": "PASS",
-   "line": "Dare. Go dance with the guy by the speaker.",
-   "why": "After P20's coffee meeting, Zoe's first dare is one step further; the repeat stays fixed by LO's PLAN \u00a78h.",
+   "line": "That's a start, babe.",
+   "why": "one step past P37's bare refusal: she holds his eyes, Zoe marks it; still no accept (LO \"Keep 11-21: no accept\")",
    "cause": null,
    "note": false,
-   "screen_hash": "79a44230bbd20b5e",
+   "screen_hash": "2c8f0e8afcdfc2f5",
    "row_hash": "4d9f2ebbce9a39cc",
    "carried": true,
-   "pass": 1
+   "pass": 18
   },
   {
    "row": "B3",
    "screen": "*",
    "verdict": "PASS",
-   "line": "Next time, then. I'm holding you to it.",
-   "why": "Hook names the next party; the guy watches her leave.",
+   "line": "He's by the speaker all night, you know.",
+   "why": "look ends on him and the speaker; home on next Saturday; talk on \"Pick someone\"",
    "cause": null,
    "note": false,
-   "screen_hash": "79a44230bbd20b5e",
+   "screen_hash": "2c8f0e8afcdfc2f5",
    "row_hash": "4d1fce1c4523b5d4",
    "carried": true,
-   "pass": 1
+   "pass": 18
   },
   {
    "row": "B4",
-   "screen": "zoe_party.party",
+   "screen": "*",
    "verdict": "PASS",
-   "line": "Your skin prickles where his hand was, and you're not sure you hated it.",
-   "why": "The hip touch now gets a reaction on her skin; at stage 0 she doesn't choose an act, and her no ('Not tonight.') is the pushback. Fixes P37a1-c3.",
+   "line": "You don't go over.",
+   "why": "level 0: she refuses or only looks, never goes; no act chosen (L71), LO's no-accept held",
    "cause": null,
    "note": false,
-   "screen_hash": {
-    "text": "6cb5a9c3f7e2344d",
-    "facts": "ce41b69cfaedf1e4",
-    "facts2": "01e438ef5e9fa813",
-    "all": "7f9988eae2193477"
-   },
+   "screen_hash": "2c8f0e8afcdfc2f5",
    "row_hash": "ced37cb0de6e7202",
    "carried": true,
-   "pass": 2
+   "pass": 18
   },
   {
    "row": "B5",
    "screen": "*",
    "verdict": "PASS",
-   "line": "The guy by the speaker watches you leave.",
-   "why": "He notices her leaving; Brooke 'makes sure you see her not looking at you'.",
+   "line": "That's a start, babe.",
+   "why": "Zoe reacts to each answer; he holds the look and smiles",
    "cause": null,
    "note": false,
-   "screen_hash": "79a44230bbd20b5e",
+   "screen_hash": "2c8f0e8afcdfc2f5",
    "row_hash": "efcbd1ac6a95e2f2",
    "carried": true,
-   "pass": 1
+   "pass": 18
   },
   {
    "row": "B6",
    "screen": "*",
    "verdict": "PASS",
-   "line": "Not tonight. / Next time, then. I'm holding you to it.",
-   "why": "The no is written and lands on Zoe's reply and the walk home; it parks the dare to next Saturday.",
+   "line": "Not tonight.",
+   "why": "written no, lands on Zoe's \"Your loss, babe\" and back to the party; parked till next Saturday",
    "cause": null,
    "note": false,
-   "screen_hash": "79a44230bbd20b5e",
+   "screen_hash": "2c8f0e8afcdfc2f5",
    "row_hash": "0e32092e9fe64f2c",
    "carried": true,
-   "pass": 1
+   "pass": 18
   },
   {
    "row": "B7",
    "screen": "*",
    "verdict": "N/A",
    "line": "\u2014",
-   "why": "No explicit beat in P37.",
+   "why": "no explicit beat on this canvas",
    "cause": null,
    "note": false,
-   "screen_hash": "79a44230bbd20b5e",
+   "screen_hash": "2c8f0e8afcdfc2f5",
    "row_hash": "cef53154cc971fef",
    "carried": true,
-   "pass": 1
+   "pass": 18
+  },
+  {
+   "row": "B8",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "\u2014",
+   "why": "no garment named; hub 0 minutes, look/home/talk 5 minutes, as P75's card",
+   "cause": null,
+   "note": false,
+   "screen_hash": "2c8f0e8afcdfc2f5",
+   "row_hash": "80d415cf08e0ebfe",
+   "carried": true,
+   "pass": 18
   },
   {
    "row": "B8",
    "screen": "zoe_party.home",
    "verdict": "PASS",
-   "line": "Your loss, babe. There's a party here every Saturday.",
-   "why": "no garment of hers and no number; the exit still sets partied_this_week and spends 180 minutes",
+   "line": "\u2014",
+   "why": "no garment; Done 5 minutes, sets zoe_dare_done, as card",
    "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "fbe0ffa4aab26cc1",
-    "traits": "fa1a0a429fa0ea30",
-    "facts": "09800759fadc671d",
-    "facts2": "8486592f7b66e230",
-    "all": "da488683cb0b7f17"
+    "text": "d9433021c1841953",
+    "traits": "6b1e34b018661933",
+    "facts": "b153518a6fd2602e",
+    "facts2": "adf208a6ad231fd4",
+    "all": "ad96c5e231bb9fa0"
    },
    "row_hash": "80d415cf08e0ebfe",
-   "carried": false,
-   "pass": 16
+   "carried": true,
+   "pass": 18
+  },
+  {
+   "row": "B8",
+   "screen": "zoe_party.look",
+   "verdict": "PASS",
+   "line": "Done: 5 minutes, sets zoe_dare_done, zoe_dare_looked",
+   "why": "Matches the card; no garment named.",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "33dd7dfee4aa6963",
+    "traits": "6b1e34b018661933",
+    "facts": "b153518a6fd2602e",
+    "facts2": "adf208a6ad231fd4",
+    "all": "ae1b2c87be069a24"
+   },
+   "row_hash": "80d415cf08e0ebfe",
+   "carried": true,
+   "pass": 19
   },
   {
    "row": "B8",
    "screen": "zoe_party.party",
    "verdict": "PASS",
-   "line": "Zoe throws these every week",
-   "why": "agrees with partied_this_week reset Monday and the Saturday window; no garment of hers named",
+   "line": "A woman of 19 perched on a sofa arm",
+   "why": "No garment named; picture's 19 matches npc_zoe age = 19 (TOML 2864) and PLAN.md:59.",
    "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "743043cc9ff5e804",
-    "facts": "bdb41c3bae4339c4",
-    "facts2": "64bc96f41ce6505b",
-    "all": "1b1cb411f6915f8d"
+    "text": "3ef4c0684048a540",
+    "traits": "6b1e34b018661933",
+    "facts": "b153518a6fd2602e",
+    "facts2": "adf208a6ad231fd4",
+    "all": "df32385c67bef5af"
    },
    "row_hash": "80d415cf08e0ebfe",
    "carried": true,
-   "pass": 3
+   "pass": 20
   },
   {
    "row": "B9",
    "screen": "*",
    "verdict": "N/A",
    "line": "\u2014",
-   "why": "PLAN \u00a78h/\u00a79d declare no companion who is the rival here.",
+   "why": "PLAN declares no companion who is the rival at the party",
    "cause": null,
    "note": false,
-   "screen_hash": "79a44230bbd20b5e",
+   "screen_hash": "2c8f0e8afcdfc2f5",
    "row_hash": "3b1fcdf549bcc558",
    "carried": true,
-   "pass": 1
+   "pass": 18
   },
   {
    "row": "C1002",
    "screen": "*",
    "verdict": "N/A",
    "line": "\u2014",
-   "why": "No money spent.",
+   "why": "no money spent",
    "cause": null,
    "note": true,
-   "screen_hash": "79a44230bbd20b5e",
+   "screen_hash": "2c8f0e8afcdfc2f5",
    "row_hash": "657248766e62061f",
    "carried": true,
-   "pass": 1
+   "pass": 18
   },
   {
    "row": "C1173",
    "screen": "*",
    "verdict": "N/A",
    "line": "\u2014",
-   "why": "Zoe's Apartment has no clothing door.",
+   "why": "no clothing door (LO: \"b no dresss code for party its fine\")",
    "cause": null,
    "note": true,
-   "screen_hash": "79a44230bbd20b5e",
+   "screen_hash": "2c8f0e8afcdfc2f5",
    "row_hash": "541a03815a8d19c4",
    "carried": true,
-   "pass": 1
-  },
-  {
-   "row": "C1176",
-   "screen": "*",
-   "verdict": "PASS",
-   "line": "A guy squeezing past puts his hand on your hip to do it and leaves it there a second too long.",
-   "why": "no read of her outfit on the party screen",
-   "cause": null,
-   "note": true,
-   "screen_hash": "8978d24607b7c34a",
-   "row_hash": "655e8e2b731598c9",
-   "carried": true,
-   "pass": 14
+   "pass": 18
   },
   {
    "row": "C1184",
    "screen": "*",
    "verdict": "N/A",
    "line": "\u2014",
-   "why": "No clothing refusal.",
+   "why": "no clothing refusal",
    "cause": null,
    "note": true,
-   "screen_hash": "79a44230bbd20b5e",
+   "screen_hash": "2c8f0e8afcdfc2f5",
    "row_hash": "71c57d9a2f8fdca7",
    "carried": true,
-   "pass": 1
+   "pass": 18
   },
   {
    "row": "C1185",
    "screen": "*",
    "verdict": "N/A",
    "line": "\u2014",
-   "why": "No dress code.",
+   "why": "no dress code (LO, P75)",
    "cause": null,
    "note": true,
-   "screen_hash": "79a44230bbd20b5e",
+   "screen_hash": "2c8f0e8afcdfc2f5",
    "row_hash": "db808998ed69c649",
    "carried": true,
-   "pass": 1
+   "pass": 18
   },
   {
    "row": "C1189",
    "screen": "*",
    "verdict": "N/A",
    "line": "\u2014",
-   "why": "No clothing state noticed here.",
+   "why": "no clothing state noticed on this canvas",
    "cause": null,
    "note": true,
-   "screen_hash": "79a44230bbd20b5e",
+   "screen_hash": "2c8f0e8afcdfc2f5",
    "row_hash": "2afadc6bbe1996bd",
    "carried": true,
-   "pass": 1
+   "pass": 18
   },
   {
    "row": "C1198",
    "screen": "*",
    "verdict": "N/A",
    "line": "\u2014",
-   "why": "No clothing refusal.",
+   "why": "no clothing refusal",
    "cause": null,
    "note": true,
-   "screen_hash": "79a44230bbd20b5e",
+   "screen_hash": "2c8f0e8afcdfc2f5",
    "row_hash": "48eae9ceae06ae00",
    "carried": true,
-   "pass": 1
+   "pass": 18
   },
   {
    "row": "C1200",
    "screen": "*",
    "verdict": "PASS",
    "line": "\u2014",
-   "why": "The party asks for no clothes, and gates on none.",
+   "why": "the party asks for no clothes and gates on none, as LO chose",
    "cause": null,
    "note": false,
-   "screen_hash": "79a44230bbd20b5e",
+   "screen_hash": "2c8f0e8afcdfc2f5",
    "row_hash": "65e6616cd17c7eb3",
    "carried": true,
-   "pass": 1
+   "pass": 18
   },
   {
    "row": "C1220",
    "screen": "*",
    "verdict": "N/A",
    "line": "\u2014",
-   "why": "No dress code at near_zoe_apartment or on the exit to home_her_room.",
+   "why": "no dress code at near_zoe_apartment",
    "cause": null,
    "note": false,
-   "screen_hash": "79a44230bbd20b5e",
+   "screen_hash": "2c8f0e8afcdfc2f5",
    "row_hash": "18d85534582def9d",
    "carried": true,
-   "pass": 1
+   "pass": 18
   },
   {
    "row": "C1221",
    "screen": "*",
    "verdict": "N/A",
    "line": "\u2014",
-   "why": "No dress-code exception.",
+   "why": "no dress-code exception",
    "cause": null,
    "note": false,
-   "screen_hash": "79a44230bbd20b5e",
+   "screen_hash": "2c8f0e8afcdfc2f5",
    "row_hash": "3835fed23cc316c7",
    "carried": true,
-   "pass": 1
+   "pass": 18
   },
   {
    "row": "C1234",
-   "screen": "zoe_party.party",
+   "screen": "zoe_party.dare",
    "verdict": "PASS",
-   "line": "He's tall, he's already looking at you, and he's been looking at you since you came in. [image]",
-   "why": "The picture of the tall man looking now sits right after the line that says his look. Fixes P37a1-c4.",
+   "line": "He's tall, and he's been looking at you since you came in.",
+   "why": "the still sits right after the line about him",
    "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "6cb5a9c3f7e2344d",
-    "facts": "ce41b69cfaedf1e4",
-    "facts2": "01e438ef5e9fa813",
-    "all": "7f9988eae2193477"
+    "text": "6a44ad99ca8a8e9b",
+    "traits": "6b1e34b018661933",
+    "facts": "b153518a6fd2602e",
+    "facts2": "adf208a6ad231fd4",
+    "all": "cf8e07000ca37c7e"
    },
    "row_hash": "1b2a2d5f05b10331",
    "carried": true,
-   "pass": 2
+   "pass": 18
   },
   {
    "row": "C1238",
-   "screen": "zoe_party.party",
+   "screen": "zoe_party.dare",
    "verdict": "PASS",
-   "line": "He's been looking at you since you came in.",
-   "why": "The man watching is true at every visit, so the picture never contradicts a line.",
+   "line": "a tall man by the speaker looking at the camera through the crowd",
+   "why": "matches the line on every visit",
    "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "e96d129b23eb539b",
-    "facts": "56cf78cd7a9fca4a",
-    "facts2": "aea11acdfe12ca7e",
-    "all": "ff74b017858b4d01"
+    "text": "6a44ad99ca8a8e9b",
+    "traits": "6b1e34b018661933",
+    "facts": "b153518a6fd2602e",
+    "facts2": "adf208a6ad231fd4",
+    "all": "cf8e07000ca37c7e"
    },
    "row_hash": "6fd430204e984124",
    "carried": true,
-   "pass": 1
+   "pass": 18
   },
   {
    "row": "C1249",
-   "screen": "*",
+   "screen": "zoe_party.dare",
    "verdict": "PASS",
    "line": "\u2014",
-   "why": "One picture on a scene screen.",
+   "why": "one picture on a scene screen",
    "cause": null,
    "note": true,
-   "screen_hash": "79a44230bbd20b5e",
+   "screen_hash": {
+    "text": "6a44ad99ca8a8e9b",
+    "traits": "6b1e34b018661933",
+    "facts": "b153518a6fd2602e",
+    "facts2": "adf208a6ad231fd4",
+    "all": "cf8e07000ca37c7e"
+   },
    "row_hash": "a843f9b57e43a020",
    "carried": true,
-   "pass": 1
+   "pass": 18
   },
   {
    "row": "C1250",
    "screen": "*",
    "verdict": "PASS",
-   "line": "Zoe's apartment, two streets from campus: a sofa that's seen things...",
-   "why": "The place description stays bare; the picture is on the party scene.",
+   "line": "\u2014",
+   "why": "the place's description stays words only; the spot is on the dare",
    "cause": null,
    "note": false,
-   "screen_hash": "79a44230bbd20b5e",
+   "screen_hash": "2c8f0e8afcdfc2f5",
    "row_hash": "fde578d75b0d3620",
    "carried": true,
-   "pass": 1
+   "pass": 18
   },
   {
    "row": "C1255",
-   "screen": "zoe_party.party",
+   "screen": "zoe_party.dare",
    "verdict": "PASS",
    "line": "pool_dir = \"people/zoe_party_t0\"",
-   "why": "Used once in the build.",
+   "why": "one block uses this pool (grep: 1)",
    "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "e96d129b23eb539b",
-    "facts": "56cf78cd7a9fca4a",
-    "facts2": "aea11acdfe12ca7e",
-    "all": "ff74b017858b4d01"
+    "text": "6a44ad99ca8a8e9b",
+    "traits": "6b1e34b018661933",
+    "facts": "b153518a6fd2602e",
+    "facts2": "adf208a6ad231fd4",
+    "all": "cf8e07000ca37c7e"
    },
    "row_hash": "803b4c46f1e9d7c7",
    "carried": true,
-   "pass": 1
+   "pass": 18
   },
   {
    "row": "C1261",
-   "screen": "zoe_party.party",
+   "screen": "zoe_party.dare",
    "verdict": "PASS",
    "line": "\u2014",
-   "why": "The packed room and the man watching her are where the player wants to look.",
+   "why": "the spot is the man the dare is about, where the player wants to look",
    "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "e96d129b23eb539b",
-    "facts": "56cf78cd7a9fca4a",
-    "facts2": "aea11acdfe12ca7e",
-    "all": "ff74b017858b4d01"
+    "text": "6a44ad99ca8a8e9b",
+    "traits": "6b1e34b018661933",
+    "facts": "b153518a6fd2602e",
+    "facts2": "adf208a6ad231fd4",
+    "all": "cf8e07000ca37c7e"
    },
    "row_hash": "536e26b5fdc76194",
    "carried": true,
-   "pass": 1
+   "pass": 18
   },
   {
    "row": "C1265",
-   "screen": "zoe_party.party",
+   "screen": "zoe_party.dare",
    "verdict": "PASS",
-   "line": "\"He's tall, he's already looking at you\" <<people/zoe_party_t0>>",
-   "why": "a party scene with Zoe's dare, not a chore or menu",
+   "line": "\"He's tall, and he's been looking at you since you came in.\" <<people/zoe_party_t0>>",
+   "why": "a look at her, never a C1265 kind; the spot belongs",
    "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "743043cc9ff5e804",
-    "traits": "06d2567e62494596",
-    "facts": "bdb41c3bae4339c4",
-    "facts2": "64bc96f41ce6505b",
-    "all": "1b1cb411f6915f8d"
+    "text": "6a44ad99ca8a8e9b",
+    "traits": "6b1e34b018661933",
+    "facts": "b153518a6fd2602e",
+    "facts2": "adf208a6ad231fd4",
+    "all": "cf8e07000ca37c7e"
    },
-   "row_hash": "eb11e05cd75e52a9",
+   "row_hash": "689fd05a4bcbd8be",
    "carried": true,
-   "pass": 13
+   "pass": 20
   },
   {
    "row": "C1267",
-   "screen": "zoe_party.party",
+   "screen": "zoe_party.dare",
    "verdict": "PASS",
    "line": "\u2014",
-   "why": "The crowd and the man give what the words can't.",
+   "why": "the picture gives his look across the room, which the words only name",
    "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "e96d129b23eb539b",
-    "facts": "56cf78cd7a9fca4a",
-    "facts2": "aea11acdfe12ca7e",
-    "all": "ff74b017858b4d01"
+    "text": "6a44ad99ca8a8e9b",
+    "traits": "6b1e34b018661933",
+    "facts": "b153518a6fd2602e",
+    "facts2": "adf208a6ad231fd4",
+    "all": "cf8e07000ca37c7e"
    },
    "row_hash": "f0db81b801577bf2",
    "carried": true,
-   "pass": 1
+   "pass": 18
   },
   {
    "row": "C1274",
-   "screen": "zoe_party.party",
+   "screen": "zoe_party.dare",
    "verdict": "PASS",
-   "line": "people/zoe_party_t0",
-   "why": "Her view of the room, tier 0 (NOTES 276).",
+   "line": "zoe_party_t0",
+   "why": "her view of a room and a man, tier 0",
    "cause": null,
    "note": true,
    "screen_hash": {
-    "text": "e96d129b23eb539b",
-    "facts": "56cf78cd7a9fca4a",
-    "facts2": "aea11acdfe12ca7e",
-    "all": "ff74b017858b4d01"
+    "text": "6a44ad99ca8a8e9b",
+    "traits": "6b1e34b018661933",
+    "facts": "b153518a6fd2602e",
+    "facts2": "adf208a6ad231fd4",
+    "all": "cf8e07000ca37c7e"
    },
    "row_hash": "f44d59a3bd6bb921",
    "carried": true,
-   "pass": 1
+   "pass": 18
   },
   {
    "row": "C1275",
-   "screen": "zoe_party.party",
+   "screen": "zoe_party.dare",
    "verdict": "PASS",
-   "line": "a tall man by the speaker looking at the camera",
-   "why": "A held look in a room: a still is right.",
+   "line": "\u2014",
+   "why": "he stands and looks; nothing happens, a still is right",
    "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "e96d129b23eb539b",
-    "facts": "56cf78cd7a9fca4a",
-    "facts2": "aea11acdfe12ca7e",
-    "all": "ff74b017858b4d01"
+    "text": "6a44ad99ca8a8e9b",
+    "traits": "6b1e34b018661933",
+    "facts": "b153518a6fd2602e",
+    "facts2": "adf208a6ad231fd4",
+    "all": "cf8e07000ca37c7e"
    },
    "row_hash": "ef82ef3fdf215191",
    "carried": true,
-   "pass": 1
+   "pass": 18
   },
   {
    "row": "C1277",
-   "screen": "zoe_party.party",
+   "screen": "zoe_party.dare",
    "verdict": "PASS",
    "line": "a packed student party in a small apartment",
-   "why": "Names the party apartment.",
+   "why": "names the party at the apartment",
    "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "e96d129b23eb539b",
-    "facts": "56cf78cd7a9fca4a",
-    "facts2": "aea11acdfe12ca7e",
-    "all": "ff74b017858b4d01"
+    "text": "6a44ad99ca8a8e9b",
+    "traits": "6b1e34b018661933",
+    "facts": "b153518a6fd2602e",
+    "facts2": "adf208a6ad231fd4",
+    "all": "cf8e07000ca37c7e"
    },
    "row_hash": "ee51917c5fb43c13",
    "carried": true,
-   "pass": 1
+   "pass": 18
   },
   {
    "row": "C1278",
-   "screen": "zoe_party.party",
+   "screen": "zoe_party.dare",
    "verdict": "PASS",
    "line": "(she is 18, out of frame)",
-   "why": "Age given.",
+   "why": "age given",
    "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "e96d129b23eb539b",
-    "facts": "56cf78cd7a9fca4a",
-    "facts2": "aea11acdfe12ca7e",
-    "all": "ff74b017858b4d01"
+    "text": "6a44ad99ca8a8e9b",
+    "traits": "6b1e34b018661933",
+    "facts": "b153518a6fd2602e",
+    "facts2": "adf208a6ad231fd4",
+    "all": "cf8e07000ca37c7e"
    },
    "row_hash": "4d23ccfdc4e41cd9",
    "carried": true,
-   "pass": 1
+   "pass": 18
   },
   {
    "row": "C1279",
-   "screen": "zoe_party.party",
+   "screen": "zoe_party.dare",
    "verdict": "N/A",
    "line": "\u2014",
-   "why": "No mirror.",
+   "why": "no mirror",
    "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "e96d129b23eb539b",
-    "facts": "56cf78cd7a9fca4a",
-    "facts2": "aea11acdfe12ca7e",
-    "all": "ff74b017858b4d01"
+    "text": "6a44ad99ca8a8e9b",
+    "traits": "6b1e34b018661933",
+    "facts": "b153518a6fd2602e",
+    "facts2": "adf208a6ad231fd4",
+    "all": "cf8e07000ca37c7e"
    },
    "row_hash": "534032f000706830",
    "carried": true,
-   "pass": 1
+   "pass": 18
   },
   {
    "row": "C1280",
-   "screen": "zoe_party.party",
+   "screen": "zoe_party.dare",
    "verdict": "PASS",
    "line": "pool = 1",
-   "why": "Tier 0 everyday spot: 1.",
+   "why": "a room/person spot on a repeat, 1, written",
    "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "e96d129b23eb539b",
-    "facts": "56cf78cd7a9fca4a",
-    "facts2": "aea11acdfe12ca7e",
-    "all": "ff74b017858b4d01"
+    "text": "6a44ad99ca8a8e9b",
+    "traits": "6b1e34b018661933",
+    "facts": "b153518a6fd2602e",
+    "facts2": "adf208a6ad231fd4",
+    "all": "cf8e07000ca37c7e"
    },
    "row_hash": "a709f257162373b0",
    "carried": true,
-   "pass": 1
+   "pass": 18
   },
   {
    "row": "C1281",
-   "screen": "zoe_party.party",
+   "screen": "zoe_party.dare",
    "verdict": "PASS",
-   "line": "a tall man by the speaker looking at the camera",
-   "why": "The looker alone, looking at the camera; she is out of frame.",
+   "line": "she is 18, out of frame",
+   "why": "her view, the looker alone in frame",
    "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "e96d129b23eb539b",
-    "facts": "56cf78cd7a9fca4a",
-    "facts2": "aea11acdfe12ca7e",
-    "all": "ff74b017858b4d01"
+    "text": "6a44ad99ca8a8e9b",
+    "traits": "6b1e34b018661933",
+    "facts": "b153518a6fd2602e",
+    "facts2": "adf208a6ad231fd4",
+    "all": "cf8e07000ca37c7e"
    },
    "row_hash": "4e5683077291be1f",
    "carried": true,
-   "pass": 1
+   "pass": 18
   },
   {
    "row": "C1284",
-   "screen": "zoe_party.party",
+   "screen": "zoe_party.dare",
    "verdict": "N/A",
    "line": "\u2014",
-   "why": "Not a walk-in.",
+   "why": "not a walk-in",
    "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "e96d129b23eb539b",
-    "facts": "56cf78cd7a9fca4a",
-    "facts2": "aea11acdfe12ca7e",
-    "all": "ff74b017858b4d01"
+    "text": "6a44ad99ca8a8e9b",
+    "traits": "6b1e34b018661933",
+    "facts": "b153518a6fd2602e",
+    "facts2": "adf208a6ad231fd4",
+    "all": "cf8e07000ca37c7e"
    },
    "row_hash": "c3025295db7bb1d6",
    "carried": true,
-   "pass": 1
+   "pass": 18
   },
   {
    "row": "C1303",
    "screen": "*",
-   "verdict": "PASS",
-   "line": "costs = [{ trait = \"energy\", value = 15 }]",
-   "why": "Energy is read by this cost.",
+   "verdict": "N/A",
+   "line": "\u2014",
+   "why": "no need spent",
    "cause": null,
    "note": true,
-   "screen_hash": "79a44230bbd20b5e",
+   "screen_hash": "2c8f0e8afcdfc2f5",
    "row_hash": "5b031a6b82899cfd",
    "carried": true,
-   "pass": 1
+   "pass": 18
   },
   {
    "row": "C1313",
    "screen": "*",
    "verdict": "N/A",
    "line": "\u2014",
-   "why": "Not a refill.",
+   "why": "not a refill",
    "cause": null,
    "note": true,
-   "screen_hash": "79a44230bbd20b5e",
+   "screen_hash": "2c8f0e8afcdfc2f5",
    "row_hash": "c26c2fb5c1443dab",
    "carried": true,
-   "pass": 1
+   "pass": 18
   },
   {
    "row": "C1337",
    "screen": "*",
-   "verdict": "PASS",
+   "verdict": "N/A",
    "line": "\u2014",
-   "why": "Energy is spent here and read by the trigger's cost.",
+   "why": "no energy on zoe_party",
    "cause": null,
    "note": true,
-   "screen_hash": "79a44230bbd20b5e",
+   "screen_hash": "2c8f0e8afcdfc2f5",
    "row_hash": "9a1ab783f9ab6731",
    "carried": true,
-   "pass": 1
+   "pass": 18
   },
   {
    "row": "C1340",
    "screen": "*",
    "verdict": "N/A",
    "line": "\u2014",
-   "why": "No housemate here.",
+   "why": "Zoe is not a housemate",
    "cause": null,
    "note": false,
-   "screen_hash": "79a44230bbd20b5e",
+   "screen_hash": "2c8f0e8afcdfc2f5",
    "row_hash": "b76a6583ae88c60f",
    "carried": true,
-   "pass": 1
+   "pass": 18
   },
   {
    "row": "C1342",
    "screen": "*",
-   "verdict": "PASS",
+   "verdict": "N/A",
    "line": "\u2014",
-   "why": "Energy, the need it spends, is refilled by sleep in her bedroom, where Go home lands.",
+   "why": "spends no need",
    "cause": null,
    "note": false,
-   "screen_hash": "79a44230bbd20b5e",
+   "screen_hash": "2c8f0e8afcdfc2f5",
    "row_hash": "59e008f8733a29e2",
    "carried": true,
-   "pass": 1
+   "pass": 18
   },
   {
    "row": "C1345",
-   "screen": "zoe_party.party",
+   "screen": "*",
    "verdict": "PASS",
-   "line": "partied_this_week is_false ... flagEffects = [{ flag = \"partied_this_week\", op = \"set\" }]",
-   "why": "Note row. The brake is on the way in: the trigger requires partied_this_week false; 'Go home' is the only exit of the party and sets it; the Monday tick unsets it (daily_tick weekday 0). The Sunday 00:00-01:00 re-entry the last pass found is shut.",
+   "line": "\u2014",
+   "why": "brake on the way in: Talk once a day (talked_zoe_today), dare once a night (zoe_dare_done)",
    "cause": null,
    "note": true,
-   "screen_hash": {
-    "text": "6cb5a9c3f7e2344d",
-    "facts": "ce41b69cfaedf1e4",
-    "facts2": "01e438ef5e9fa813",
-    "all": "7f9988eae2193477"
-   },
+   "screen_hash": "2c8f0e8afcdfc2f5",
    "row_hash": "823e315ef0b56f94",
    "carried": true,
-   "pass": 2
+   "pass": 18
   },
   {
    "row": "C1360",
-   "screen": "*",
+   "screen": "zoe_party.party",
    "verdict": "PASS",
-   "line": "Saturdays, 9pm to 1am.",
-   "why": "Greys with its label and the clock line; energy shortfall shows the engine's cost tag.",
+   "line": "Talk \u2014 you've already talked today.",
+   "why": "greyed with its action as label",
    "cause": null,
    "note": true,
-   "screen_hash": "79a44230bbd20b5e",
+   "screen_hash": {
+    "text": "831a67e1d7284f01",
+    "traits": "6b1e34b018661933",
+    "facts": "b153518a6fd2602e",
+    "facts2": "adf208a6ad231fd4",
+    "all": "c70be0cf8b715d91"
+   },
    "row_hash": "8c9dc844365f81a5",
    "carried": true,
-   "pass": 1
+   "pass": 18
   },
   {
    "row": "C1421",
-   "screen": "*",
+   "screen": "zoe_party.party",
    "verdict": "PASS",
-   "line": "Saturdays, 9pm to 1am.",
-   "why": "The requirement is told.",
+   "line": "Talk \u2014 you've already talked today.",
+   "why": "the requirement is told",
    "cause": null,
    "note": true,
-   "screen_hash": "79a44230bbd20b5e",
+   "screen_hash": {
+    "text": "831a67e1d7284f01",
+    "traits": "6b1e34b018661933",
+    "facts": "b153518a6fd2602e",
+    "facts2": "adf208a6ad231fd4",
+    "all": "c70be0cf8b715d91"
+   },
    "row_hash": "ef34ee4a51e65d00",
    "carried": true,
-   "pass": 1
+   "pass": 18
   },
   {
    "row": "C1423",
    "screen": "*",
    "verdict": "PASS",
    "line": "\u2014",
-   "why": "15 energy plus 180 minutes.",
+   "why": "daily cap plus 5 minutes",
    "cause": null,
    "note": true,
-   "screen_hash": "79a44230bbd20b5e",
+   "screen_hash": "2c8f0e8afcdfc2f5",
    "row_hash": "4b77685af58632a5",
    "carried": true,
-   "pass": 1
+   "pass": 18
   },
   {
    "row": "C1425",
    "screen": "*",
    "verdict": "PASS",
    "line": "\u2014",
-   "why": "Fixed window, time cost, daily cap, energy.",
+   "why": "weekly window, nightly cap, 5 minutes",
    "cause": null,
    "note": true,
-   "screen_hash": "79a44230bbd20b5e",
+   "screen_hash": "2c8f0e8afcdfc2f5",
    "row_hash": "34826508394ba8c0",
    "carried": true,
-   "pass": 1
+   "pass": 18
   },
   {
    "row": "C1427",
    "screen": "*",
    "verdict": "PASS",
    "line": "\u2014",
-   "why": "180 minutes in a 4-hour window.",
+   "why": "5 minutes in a 3-hour window, once a night",
    "cause": null,
    "note": true,
-   "screen_hash": "79a44230bbd20b5e",
+   "screen_hash": "2c8f0e8afcdfc2f5",
    "row_hash": "68a94621cd19c13c",
    "carried": true,
-   "pass": 1
+   "pass": 18
   },
   {
    "row": "C1428",
    "screen": "*",
    "verdict": "PASS",
    "line": "\u2014",
-   "why": "Energy throttles a night out, not a person's menu.",
+   "why": "no energy lock on Zoe or the guy",
    "cause": null,
    "note": false,
-   "screen_hash": "79a44230bbd20b5e",
+   "screen_hash": "2c8f0e8afcdfc2f5",
    "row_hash": "cf8af3e56f435107",
    "carried": true,
-   "pass": 1
+   "pass": 18
   },
   {
    "row": "C1431",
    "screen": "*",
-   "verdict": "PASS",
+   "verdict": "N/A",
    "line": "\u2014",
-   "why": "Energy is spent here; empty, the row greys.",
+   "why": "spends no need",
    "cause": null,
    "note": false,
-   "screen_hash": "79a44230bbd20b5e",
+   "screen_hash": "2c8f0e8afcdfc2f5",
    "row_hash": "aca442d29c1c8146",
    "carried": true,
-   "pass": 1
+   "pass": 18
   },
   {
    "row": "C1432",
    "screen": "*",
-   "verdict": "PASS",
+   "verdict": "N/A",
    "line": "\u2014",
-   "why": "Energy's drain and refill are declared in the game; this row spends it.",
+   "why": "spends no need",
    "cause": null,
    "note": false,
-   "screen_hash": "79a44230bbd20b5e",
+   "screen_hash": "2c8f0e8afcdfc2f5",
    "row_hash": "ccd7a74d85c7d7fe",
    "carried": true,
-   "pass": 1
+   "pass": 18
   },
   {
    "row": "C1433",
    "screen": "*",
-   "verdict": "PASS",
+   "verdict": "N/A",
    "line": "\u2014",
-   "why": "Short of 15 energy, the party greys.",
+   "why": "spends no need",
    "cause": null,
    "note": true,
-   "screen_hash": "79a44230bbd20b5e",
+   "screen_hash": "2c8f0e8afcdfc2f5",
    "row_hash": "f47fc5030774db86",
    "carried": true,
-   "pass": 1
+   "pass": 18
   },
   {
    "row": "C1434",
    "screen": "*",
    "verdict": "N/A",
    "line": "\u2014",
-   "why": "Not a refill place.",
+   "why": "not a refill place",
    "cause": null,
    "note": true,
-   "screen_hash": "79a44230bbd20b5e",
+   "screen_hash": "2c8f0e8afcdfc2f5",
    "row_hash": "6ac94d11992c72ec",
    "carried": true,
-   "pass": 1
+   "pass": 18
   },
   {
    "row": "C1438",
    "screen": "*",
-   "verdict": "PASS",
+   "verdict": "N/A",
    "line": "\u2014",
-   "why": "Energy spent by use here.",
+   "why": "spends no need",
    "cause": null,
    "note": false,
-   "screen_hash": "79a44230bbd20b5e",
+   "screen_hash": "2c8f0e8afcdfc2f5",
    "row_hash": "e4d4d230d2bd3815",
    "carried": true,
-   "pass": 1
+   "pass": 18
   },
   {
    "row": "C1441",
    "screen": "*",
    "verdict": "PASS",
    "line": "\u2014",
-   "why": "A step with people gets a scene.",
+   "why": "a step with a person gets a scene, not a number",
    "cause": null,
    "note": true,
-   "screen_hash": "79a44230bbd20b5e",
+   "screen_hash": "2c8f0e8afcdfc2f5",
    "row_hash": "6b5fb464471de4c7",
    "carried": true,
-   "pass": 1
+   "pass": 18
   },
   {
    "row": "C146",
    "screen": "*",
    "verdict": "PASS",
    "line": "\u2014",
-   "why": "No reveal on the repeatable.",
+   "why": "no big moment on the repeatable",
    "cause": null,
    "note": true,
-   "screen_hash": "79a44230bbd20b5e",
+   "screen_hash": "2c8f0e8afcdfc2f5",
    "row_hash": "a08ace799dcefe85",
    "carried": true,
-   "pass": 1
+   "pass": 18
   },
   {
    "row": "C149",
-   "screen": "zoe_party.home",
+   "screen": "*",
    "verdict": "PASS",
-   "line": "Next time, then. I'm holding you to it.",
-   "why": "Points at the next party.",
+   "line": "He's by the speaker all night, you know.",
+   "why": "each last screen points on: him, next Saturday, \"Pick someone\"",
    "cause": null,
    "note": false,
-   "screen_hash": {
-    "text": "731bd30c4909323f",
-    "facts": "f2652b41679446db",
-    "facts2": "2ee81abd453dd216",
-    "all": "d559ceb7a13e5a31"
-   },
+   "screen_hash": "2c8f0e8afcdfc2f5",
    "row_hash": "b8cdd5b1ce3f89ea",
    "carried": true,
-   "pass": 1
+   "pass": 18
   },
   {
    "row": "C151",
-   "screen": "*",
+   "screen": "zoe_party.look",
    "verdict": "PASS",
-   "line": "\u2014",
-   "why": "Short: one dare and one visible want.",
+   "line": "That's a start, babe. He's by the speaker all night, you know.",
+   "why": "One spoken line now, and one visible want (Zoe pushing her at him).",
    "cause": null,
    "note": true,
-   "screen_hash": "79a44230bbd20b5e",
+   "screen_hash": {
+    "text": "33dd7dfee4aa6963",
+    "traits": "6b1e34b018661933",
+    "facts": "b153518a6fd2602e",
+    "facts2": "adf208a6ad231fd4",
+    "all": "ae1b2c87be069a24"
+   },
    "row_hash": "d5758757a709b1af",
    "carried": true,
-   "pass": 1
+   "pass": 19
   },
   {
    "row": "C164",
-   "screen": "zoe_party.party",
+   "screen": "zoe_party.dare",
    "verdict": "PASS",
-   "line": "Next time, then.",
-   "why": "Her no parks the dare to the next party.",
+   "line": "Not tonight.",
+   "why": "parked: zoe_dare_done unsets Monday (toml:581), the dare is back next Saturday",
    "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "e96d129b23eb539b",
-    "facts": "56cf78cd7a9fca4a",
-    "facts2": "aea11acdfe12ca7e",
-    "all": "ff74b017858b4d01"
+    "text": "6a44ad99ca8a8e9b",
+    "traits": "6b1e34b018661933",
+    "facts": "b153518a6fd2602e",
+    "facts2": "adf208a6ad231fd4",
+    "all": "cf8e07000ca37c7e"
    },
    "row_hash": "b24792899ae3ac28",
    "carried": true,
-   "pass": 1
+   "pass": 18
   },
   {
    "row": "C165",
-   "screen": "zoe_party.party",
+   "screen": "zoe_party.dare",
    "verdict": "PASS",
    "line": "\u2014",
-   "why": "No final no.",
+   "why": "no final no",
    "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "e96d129b23eb539b",
-    "facts": "56cf78cd7a9fca4a",
-    "facts2": "aea11acdfe12ca7e",
-    "all": "ff74b017858b4d01"
+    "text": "6a44ad99ca8a8e9b",
+    "traits": "6b1e34b018661933",
+    "facts": "b153518a6fd2602e",
+    "facts2": "adf208a6ad231fd4",
+    "all": "cf8e07000ca37c7e"
    },
    "row_hash": "59fe434fa706bff6",
    "carried": true,
-   "pass": 1
+   "pass": 18
   },
   {
    "row": "C166",
-   "screen": "zoe_party.party",
+   "screen": "zoe_party.dare",
    "verdict": "PASS",
    "line": "\u2014",
-   "why": "No final no.",
+   "why": "no final no",
    "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "e96d129b23eb539b",
-    "facts": "56cf78cd7a9fca4a",
-    "facts2": "aea11acdfe12ca7e",
-    "all": "ff74b017858b4d01"
+    "text": "6a44ad99ca8a8e9b",
+    "traits": "6b1e34b018661933",
+    "facts": "b153518a6fd2602e",
+    "facts2": "adf208a6ad231fd4",
+    "all": "cf8e07000ca37c7e"
    },
    "row_hash": "d9199efed36f9625",
    "carried": true,
-   "pass": 1
-  },
-  {
-   "row": "C188",
-   "screen": "zoe_party.home",
-   "verdict": "N/A",
-   "line": "",
-   "why": "no level gate on this canvas in release 1 (no skill_gate, 'Do it' is out of scope), so no 'not yet' talk below a gate is owed here",
-   "cause": null,
-   "note": false,
-   "screen_hash": {
-    "text": "b02777bd9b8b50f8",
-    "facts": "e9d76b772e3b53ca",
-    "facts2": "8486592f7b66e230",
-    "all": "bb59d48a609273e4"
-   },
-   "row_hash": "3a9caf43a2f2b8fd",
-   "carried": true,
-   "pass": 5
-  },
-  {
-   "row": "C210",
-   "screen": "zoe_party.home",
-   "verdict": "N/A",
-   "line": "",
-   "why": "no skill moves and no level is crossed on this screen",
-   "cause": null,
-   "note": false,
-   "screen_hash": {
-    "text": "b02777bd9b8b50f8",
-    "facts": "e9d76b772e3b53ca",
-    "facts2": "8486592f7b66e230",
-    "all": "bb59d48a609273e4"
-   },
-   "row_hash": "00496c4c3aec4580",
-   "carried": true,
-   "pass": 5
+   "pass": 18
   },
   {
    "row": "C2179",
    "screen": "*",
    "verdict": "PASS",
-   "line": "Next time, then. I'm holding you to it.",
-   "why": "Zoe's reaction to her no is one line, but her want is computed from frozen feelings and cannot differ in release 1 (P48 'Frozen', C2182), so rule 14's 'a person whose want the story fixes gets one line' applies; no other line on either screen reacts to her choice",
+   "line": "That's a start, babe.",
+   "why": "release 1 frozen (C2182): Zoe's want cannot differ; the guy is an unnamed stranger",
    "cause": null,
    "note": false,
-   "screen_hash": "a2bff43d5a224c8c",
+   "screen_hash": "2c8f0e8afcdfc2f5",
    "row_hash": "47b9477e3ec8a790",
    "carried": true,
-   "pass": 5
-  },
-  {
-   "row": "C2180",
-   "screen": "*",
-   "verdict": "N/A",
-   "line": "",
-   "why": "'Not tonight.' moves no feeling; release 1 moves none (plan.md \u00a710, C2182)",
-   "cause": null,
-   "note": false,
-   "screen_hash": "a2bff43d5a224c8c",
-   "row_hash": "a6c0f498d4d16271",
-   "carried": true,
-   "pass": 5
-  },
-  {
-   "row": "C2181",
-   "screen": "*",
-   "verdict": "N/A",
-   "line": "",
-   "why": "no bold act and no skill_gate on this canvas; the dare's 'Do it' comes in a later release",
-   "cause": null,
-   "note": false,
-   "screen_hash": "a2bff43d5a224c8c",
-   "row_hash": "74c68b4029782b5f",
-   "carried": true,
-   "pass": 5
+   "pass": 18
   },
   {
    "row": "C2188",
-   "screen": "zoe_party.party",
+   "screen": "zoe_party.dare",
    "verdict": "PASS",
-   "line": "'Not tonight.' -> 'Next time, then. I'm holding you to it.'",
-   "why": "the no is written with its own screen and costs nothing (partied_this_week only); one fixed answer is LO's plan (PLAN \u00a78h)",
+   "line": "Not tonight.",
+   "why": "a written way out with Zoe's line, free",
    "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "743043cc9ff5e804",
-    "facts": "bdb41c3bae4339c4",
-    "facts2": "64bc96f41ce6505b",
-    "all": "1b1cb411f6915f8d"
+    "text": "6a44ad99ca8a8e9b",
+    "traits": "6b1e34b018661933",
+    "facts": "b153518a6fd2602e",
+    "facts2": "adf208a6ad231fd4",
+    "all": "cf8e07000ca37c7e"
    },
    "row_hash": "612394eef6826900",
    "carried": true,
-   "pass": 6
+   "pass": 18
   },
   {
    "row": "C2189",
-   "screen": "zoe_party.party",
+   "screen": "*",
    "verdict": "PASS",
-   "line": "partied_this_week, unset Sunday (toml:547); max_triggers_per_day = 1",
-   "why": "the party rests a week; never replays at once",
+   "line": "\u2014",
+   "why": "once a night, Saturdays; never replays at once",
    "cause": null,
    "note": true,
-   "screen_hash": {
-    "text": "743043cc9ff5e804",
-    "facts": "bdb41c3bae4339c4",
-    "facts2": "64bc96f41ce6505b",
-    "all": "1b1cb411f6915f8d"
-   },
+   "screen_hash": "2c8f0e8afcdfc2f5",
    "row_hash": "20748838895e4545",
    "carried": true,
-   "pass": 6
+   "pass": 18
   },
   {
    "row": "C2194",
-   "screen": "zoe_party.home",
+   "screen": "*",
    "verdict": "PASS",
-   "line": "Sam's not mine. Nobody's mine.",
-   "why": "Zoe: Show-off (on the sofa arm, dancing like the party's hers), No strings (lets a stranger kiss her neck; 'Nobody's mine.'). Sam: No strings (just grins).",
+   "line": "She waves her bottle at the room like she's offering you all of it.",
+   "why": "Show-off (waving the bottle like a flag) and No strings (\"Nobody's going to remember\")",
    "cause": null,
    "note": false,
-   "screen_hash": {
-    "text": "b02777bd9b8b50f8",
-    "traits": "fa1a0a429fa0ea30",
-    "facts": "e9d76b772e3b53ca",
-    "facts2": "8486592f7b66e230",
-    "all": "bb59d48a609273e4"
-   },
+   "screen_hash": "2c8f0e8afcdfc2f5",
    "row_hash": "0c03931191c53a34",
    "carried": true,
-   "pass": 7
-  },
-  {
-   "row": "C2194",
-   "screen": "zoe_party.party",
-   "verdict": "PASS",
-   "line": "Okay, babe. Dare. Go dance with the guy by the speaker.",
-   "why": "Zoe: Show-off (her party, the dare). Brooke: Mean ('makes sure you see her not looking at you'). Kayla and Tess named in passing, show none, fine.",
-   "cause": null,
-   "note": false,
-   "screen_hash": {
-    "text": "743043cc9ff5e804",
-    "traits": "06d2567e62494596",
-    "facts": "bdb41c3bae4339c4",
-    "facts2": "64bc96f41ce6505b",
-    "all": "1b1cb411f6915f8d"
-   },
-   "row_hash": "0c03931191c53a34",
-   "carried": true,
-   "pass": 7
+   "pass": 18
   },
   {
    "row": "C2197",
    "screen": "zoe_party.party",
    "verdict": "PASS",
-   "line": "Brooke holds court by the kitchen with Kayla and Tess",
-   "why": "Kayla and Tess now have menus at the mirror and the cafeteria behind met_brooke (P60); the party hours are zoe_party's, where nobody has a menu (Zoe's and Sam's are off then too)",
+   "line": "Talk",
+   "why": "Zoe has her face at the party with Talk",
    "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "743043cc9ff5e804",
-    "traits": "06d2567e62494596",
-    "facts": "bdb41c3bae4339c4",
-    "facts2": "64bc96f41ce6505b",
-    "all": "1b1cb411f6915f8d"
+    "text": "831a67e1d7284f01",
+    "traits": "6b1e34b018661933",
+    "facts": "b153518a6fd2602e",
+    "facts2": "adf208a6ad231fd4",
+    "all": "c70be0cf8b715d91"
    },
    "row_hash": "cafbb0a598dbfa97",
    "carried": true,
-   "pass": 9
+   "pass": 18
   },
   {
    "row": "C2198",
-   "screen": "*",
-   "verdict": "N/A",
-   "line": "",
-   "why": "zoe_party: not a menu's Talk screen; C2198 is judged only on the screen a person's menu's Talk opens",
+   "screen": "zoe_party.talk",
+   "verdict": "PASS",
+   "line": "Babe! You came. Tell me something scandalous.",
+   "why": "one talked_zoe_today across her four places (toml:7859, 12095, 12155, 12215); fixed, true on every visit (she has come), no meeting words, no promise; hook \"Pick someone\" points at people there",
    "cause": null,
    "note": false,
-   "screen_hash": "8978d24607b7c34a",
+   "screen_hash": {
+    "text": "f8df0b071a9b2122",
+    "traits": "6b1e34b018661933",
+    "facts": "317eb61177238200",
+    "facts2": "a24d4d77cf03a707",
+    "all": "11a1c744e8ede965"
+   },
    "row_hash": "73dfe095a72154a3",
    "carried": true,
-   "pass": 15
+   "pass": 18
   },
   {
    "row": "C2201",
    "screen": "*",
-   "verdict": "N/A",
-   "line": "Zoe's apartment is wall to wall: music through the floor",
-   "why": "scene and menu screens, not a place's description; the descriptions of the places they sit at read no clothes or meters (all 31 checked)",
+   "verdict": "PASS",
+   "line": "Tonight it's a party: music through the floor, the sofa buried in coats, bodies wall to wall.",
+   "why": "variant reads only weekday and hour (toml:1831), keeps the opening, adds an unnamed crowd",
    "cause": null,
    "note": false,
-   "screen_hash": "8978d24607b7c34a",
-   "row_hash": "d119dfe665f76359",
+   "screen_hash": "2c8f0e8afcdfc2f5",
+   "row_hash": "7fddf5e17dbdaaf9",
    "carried": true,
-   "pass": 14
+   "pass": 18
   },
   {
    "row": "C2202",
-   "screen": "zoe_party.home",
+   "screen": "*",
    "verdict": "PASS",
-   "line": "Your loss, babe. There's a party here every Saturday.",
-   "why": "the 'Next time, then. I'm holding you to it.' promise is gone; 'a party here every Saturday' is a fact the weekly trigger keeps, matching the party screen's own 'Zoe throws these every week'",
+   "line": "\u2014",
+   "why": "check.py GREEN at 581bc08f; no first-meeting words, no promise",
    "cause": null,
    "note": false,
-   "screen_hash": {
-    "text": "fbe0ffa4aab26cc1",
-    "traits": "fa1a0a429fa0ea30",
-    "facts": "09800759fadc671d",
-    "facts2": "8486592f7b66e230",
-    "all": "da488683cb0b7f17"
-   },
+   "screen_hash": "2c8f0e8afcdfc2f5",
    "row_hash": "6e90fed7eae62131",
+   "carried": true,
+   "pass": 18
+  },
+  {
+   "row": "C2203",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "\u2014",
+   "why": "zoe_party returns to the party (Done/Leave to near_zoe_apartment); the event has Mingle/Drink/Dance, moments, Go home and party_end",
+   "cause": null,
+   "note": false,
+   "screen_hash": "2c8f0e8afcdfc2f5",
+   "row_hash": "365a29fd77f6b765",
+   "carried": true,
+   "pass": 18
+  },
+  {
+   "row": "C2206",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "zoe_party",
+   "why": "no side-by-side groups on its 1 canvas(es); nothing can be covered",
+   "cause": null,
+   "note": false,
+   "screen_hash": "1b7f93fcb05e55a9",
+   "row_hash": "d8ebf6d6b2abf6a5",
    "carried": false,
-   "pass": 16
-  },
-  {
-   "row": "C286",
-   "screen": "zoe_party.party",
-   "verdict": "PASS",
-   "line": "puts his hand on your hip ... a second too long",
-   "why": "A stranger's brush: stage 1.",
-   "cause": null,
-   "note": true,
-   "screen_hash": {
-    "text": "e96d129b23eb539b",
-    "facts": "56cf78cd7a9fca4a",
-    "facts2": "aea11acdfe12ca7e",
-    "all": "ff74b017858b4d01"
-   },
-   "row_hash": "23fc75bfc032d31c",
-   "carried": true,
-   "pass": 1
-  },
-  {
-   "row": "C287",
-   "screen": "zoe_party.party",
-   "verdict": "PASS",
-   "line": "Dare. Go dance with the guy by the speaker.",
-   "why": "The dare is offered and refused; she does no stage-2 act.",
-   "cause": null,
-   "note": true,
-   "screen_hash": {
-    "text": "e96d129b23eb539b",
-    "facts": "56cf78cd7a9fca4a",
-    "facts2": "aea11acdfe12ca7e",
-    "all": "ff74b017858b4d01"
-   },
-   "row_hash": "480f7e9a025db5b0",
-   "carried": true,
-   "pass": 1
-  },
-  {
-   "row": "C288",
-   "screen": "zoe_party.party",
-   "verdict": "N/A",
-   "line": "\u2014",
-   "why": "No private contact.",
-   "cause": null,
-   "note": true,
-   "screen_hash": {
-    "text": "e96d129b23eb539b",
-    "facts": "56cf78cd7a9fca4a",
-    "facts2": "aea11acdfe12ca7e",
-    "all": "ff74b017858b4d01"
-   },
-   "row_hash": "7b5399adec567cd4",
-   "carried": true,
-   "pass": 1
-  },
-  {
-   "row": "C289",
-   "screen": "zoe_party.party",
-   "verdict": "N/A",
-   "line": "\u2014",
-   "why": "Nothing bare.",
-   "cause": null,
-   "note": false,
-   "screen_hash": {
-    "text": "e96d129b23eb539b",
-    "facts": "56cf78cd7a9fca4a",
-    "facts2": "aea11acdfe12ca7e",
-    "all": "ff74b017858b4d01"
-   },
-   "row_hash": "3952eba1e2267f12",
-   "carried": true,
-   "pass": 1
-  },
-  {
-   "row": "C291",
-   "screen": "zoe_party.party",
-   "verdict": "PASS",
-   "line": "\u2014",
-   "why": "A hand on a clothed hip: stage 1 however full the room.",
-   "cause": null,
-   "note": true,
-   "screen_hash": {
-    "text": "e96d129b23eb539b",
-    "facts": "56cf78cd7a9fca4a",
-    "facts2": "aea11acdfe12ca7e",
-    "all": "ff74b017858b4d01"
-   },
-   "row_hash": "53bd56cf597f7ee3",
-   "carried": true,
-   "pass": 1
-  },
-  {
-   "row": "C296",
-   "screen": "zoe_party.party",
-   "verdict": "PASS",
-   "line": "\u2014",
-   "why": "The dare's low version opens low.",
-   "cause": null,
-   "note": true,
-   "screen_hash": {
-    "text": "e96d129b23eb539b",
-    "facts": "56cf78cd7a9fca4a",
-    "facts2": "aea11acdfe12ca7e",
-    "all": "ff74b017858b4d01"
-   },
-   "row_hash": "d702aa9200d2154d",
-   "carried": true,
-   "pass": 1
-  },
-  {
-   "row": "C297",
-   "screen": "zoe_party.party",
-   "verdict": "N/A",
-   "line": "\u2014",
-   "why": "No housemate.",
-   "cause": null,
-   "note": true,
-   "screen_hash": {
-    "text": "e96d129b23eb539b",
-    "facts": "56cf78cd7a9fca4a",
-    "facts2": "aea11acdfe12ca7e",
-    "all": "ff74b017858b4d01"
-   },
-   "row_hash": "b920ef848ab61988",
-   "carried": true,
-   "pass": 1
-  },
-  {
-   "row": "C311",
-   "screen": "zoe_party.party",
-   "verdict": "PASS",
-   "line": "puts his hand on your hip / he's been looking at you since you came in / Not tonight.",
-   "why": "Body part, his reaction, a not-yet, a hook.",
-   "cause": null,
-   "note": false,
-   "screen_hash": {
-    "text": "e96d129b23eb539b",
-    "facts": "56cf78cd7a9fca4a",
-    "facts2": "aea11acdfe12ca7e",
-    "all": "ff74b017858b4d01"
-   },
-   "row_hash": "bad20c9f078e8b87",
-   "carried": true,
-   "pass": 1
-  },
-  {
-   "row": "C314",
-   "screen": "zoe_party.party",
-   "verdict": "PASS",
-   "line": "\u2014",
-   "why": "Not talk only: the hip and the stare.",
-   "cause": null,
-   "note": false,
-   "screen_hash": {
-    "text": "e96d129b23eb539b",
-    "facts": "56cf78cd7a9fca4a",
-    "facts2": "aea11acdfe12ca7e",
-    "all": "ff74b017858b4d01"
-   },
-   "row_hash": "0304731d263aed9f",
-   "carried": true,
-   "pass": 1
-  },
-  {
-   "row": "C338",
-   "screen": "zoe_party.home",
-   "verdict": "PASS",
-   "line": "\u2014",
-   "why": "The way out ('Not tonight.') is always there and pays nothing.",
-   "cause": null,
-   "note": false,
-   "screen_hash": {
-    "text": "731bd30c4909323f",
-    "facts": "f2652b41679446db",
-    "facts2": "2ee81abd453dd216",
-    "all": "d559ceb7a13e5a31"
-   },
-   "row_hash": "3ce0dbe053c4b2c9",
-   "carried": true,
-   "pass": 1
-  },
-  {
-   "row": "C381",
-   "screen": "zoe_party.home",
-   "verdict": "N/A",
-   "line": "",
-   "why": "no gate on this screen, greyed or otherwise",
-   "cause": null,
-   "note": false,
-   "screen_hash": {
-    "text": "b02777bd9b8b50f8",
-    "facts": "e9d76b772e3b53ca",
-    "facts2": "8486592f7b66e230",
-    "all": "bb59d48a609273e4"
-   },
-   "row_hash": "c661ccd26aada1f2",
-   "carried": true,
-   "pass": 5
-  },
-  {
-   "row": "C388",
-   "screen": "zoe_party.party",
-   "verdict": "PASS",
-   "line": "Go to Zoe's party (15 Energy)",
-   "why": "out of hours and after she's been the row is hidden (no show_when_blocked, clock.md rule 10), so no silent locked door shows; short on energy it dims with the engine's cost tag and the passage prints 'Requires 15 Energy (you have N)' (v2.py:6780-6785, 6227-6240)",
-   "cause": null,
-   "note": false,
-   "screen_hash": {
-    "text": "743043cc9ff5e804",
-    "facts": "bdb41c3bae4339c4",
-    "facts2": "64bc96f41ce6505b",
-    "all": "1b1cb411f6915f8d"
-   },
-   "row_hash": "fbffa0dbed63968f",
-   "carried": true,
-   "pass": 5
+   "pass": 21
   },
   {
    "row": "C422",
    "screen": "*",
    "verdict": "PASS",
-   "line": "Go to Zoe's party \u00b7 Not tonight. \u00b7 Go home",
-   "why": "Labels say what clicking does.",
+   "line": "Talk / Zoe's dare / Leave / Look at him / Not tonight.",
+   "why": "labels say what clicking does",
    "cause": null,
    "note": false,
-   "screen_hash": "79a44230bbd20b5e",
+   "screen_hash": "2c8f0e8afcdfc2f5",
    "row_hash": "7e128897077ecee6",
    "carried": true,
-   "pass": 1
+   "pass": 18
   },
   {
    "row": "C442",
    "screen": "*",
    "verdict": "PASS",
-   "line": "leaves it there a second too long",
-   "why": "Says what happens.",
+   "line": "\u2014",
+   "why": "says what happens",
    "cause": null,
    "note": false,
-   "screen_hash": "79a44230bbd20b5e",
+   "screen_hash": "2c8f0e8afcdfc2f5",
    "row_hash": "59b8d8d24f0c7c38",
    "carried": true,
-   "pass": 1
+   "pass": 18
   },
   {
    "row": "C447",
    "screen": "*",
    "verdict": "PASS",
-   "line": "There she is. Okay, babe.",
-   "why": "Zoe holds her manner and 'babe' from P20; Brooke holds her cold watch.",
+   "line": "\u2014",
+   "why": "Zoe keeps \"babe\" and her manner",
    "cause": null,
    "note": false,
-   "screen_hash": "79a44230bbd20b5e",
+   "screen_hash": "2c8f0e8afcdfc2f5",
    "row_hash": "5f664198d19facd8",
    "carried": true,
-   "pass": 1
-  },
-  {
-   "row": "C449",
-   "screen": "zoe_party.party",
-   "verdict": "PASS",
-   "line": "He's tall, he's already looking at you, and he's been looking at you since you came in.",
-   "why": "The tension is named.",
-   "cause": null,
-   "note": false,
-   "screen_hash": {
-    "text": "e96d129b23eb539b",
-    "facts": "56cf78cd7a9fca4a",
-    "facts2": "aea11acdfe12ca7e",
-    "all": "ff74b017858b4d01"
-   },
-   "row_hash": "e33f3e7fed17fa30",
-   "carried": true,
-   "pass": 1
+   "pass": 18
   },
   {
    "row": "C450",
-   "screen": "zoe_party.home",
+   "screen": "*",
    "verdict": "PASS",
-   "line": "Next time, then. I'm holding you to it.",
-   "why": "Ends on a hook.",
+   "line": "He's by the speaker all night, you know.",
+   "why": "last screens end on a hook",
    "cause": null,
    "note": false,
-   "screen_hash": {
-    "text": "731bd30c4909323f",
-    "facts": "f2652b41679446db",
-    "facts2": "2ee81abd453dd216",
-    "all": "d559ceb7a13e5a31"
-   },
+   "screen_hash": "2c8f0e8afcdfc2f5",
    "row_hash": "b01ad555668aba2d",
    "carried": true,
-   "pass": 1
+   "pass": 18
   },
   {
    "row": "C451",
    "screen": "*",
    "verdict": "PASS",
-   "line": "the sofa buried in coats ... the guy by the speaker",
-   "why": "Concrete detail.",
+   "line": "a bottle in her hand",
+   "why": "concrete detail",
    "cause": null,
    "note": false,
-   "screen_hash": "79a44230bbd20b5e",
+   "screen_hash": "2c8f0e8afcdfc2f5",
    "row_hash": "50dbf74577a813c7",
    "carried": true,
-   "pass": 1
+   "pass": 18
+  },
+  {
+   "row": "C460",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "\u2014",
+   "why": "every claim true Sat 21:00-23:59, every visit; Zoe present by her rows",
+   "cause": null,
+   "note": false,
+   "screen_hash": "2c8f0e8afcdfc2f5",
+   "row_hash": "67e48e60d5053a2e",
+   "carried": true,
+   "pass": 18
   },
   {
    "row": "C460",
    "screen": "zoe_party.home",
    "verdict": "PASS",
-   "line": "Your loss, babe. There's a party here every Saturday.",
-   "why": "every claim holds on every visit (see B10)",
+   "line": "There's a party here every Saturday.",
+   "why": "true by the Saturday rows and trigger",
    "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "fbe0ffa4aab26cc1",
-    "traits": "fa1a0a429fa0ea30",
-    "facts": "09800759fadc671d",
-    "facts2": "8486592f7b66e230",
-    "all": "da488683cb0b7f17"
+    "text": "d9433021c1841953",
+    "traits": "6b1e34b018661933",
+    "facts": "b153518a6fd2602e",
+    "facts2": "adf208a6ad231fd4",
+    "all": "ad96c5e231bb9fa0"
    },
    "row_hash": "67e48e60d5053a2e",
-   "carried": false,
-   "pass": 16
+   "carried": true,
+   "pass": 18
+  },
+  {
+   "row": "C460",
+   "screen": "zoe_party.look",
+   "verdict": "PASS",
+   "line": "He holds it too. Then he smiles, slow, like he knows exactly what Zoe said",
+   "why": "True on every visit it can show: once a night, the guy is by the speaker, Zoe there.",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "33dd7dfee4aa6963",
+    "traits": "6b1e34b018661933",
+    "facts": "b153518a6fd2602e",
+    "facts2": "adf208a6ad231fd4",
+    "all": "ae1b2c87be069a24"
+   },
+   "row_hash": "67e48e60d5053a2e",
+   "carried": true,
+   "pass": 19
   },
   {
    "row": "C460",
    "screen": "zoe_party.party",
    "verdict": "PASS",
-   "line": "There she is. Okay, babe. Dare.",
-   "why": "every claim holds 21:00-00:59; the row is gone when used or out of hours, so no false hours line",
+   "line": "Zoe's on the sofa arm with a bottle in her hand, and she waves it at you like a flag.",
+   "why": "Every claim true on every reaching playthrough: met_zoe, Saturday party hours, Zoe present.",
    "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "743043cc9ff5e804",
-    "facts": "bdb41c3bae4339c4",
-    "facts2": "64bc96f41ce6505b",
-    "all": "1b1cb411f6915f8d"
+    "text": "3ef4c0684048a540",
+    "traits": "6b1e34b018661933",
+    "facts": "b153518a6fd2602e",
+    "facts2": "adf208a6ad231fd4",
+    "all": "df32385c67bef5af"
    },
    "row_hash": "67e48e60d5053a2e",
    "carried": true,
-   "pass": 3
+   "pass": 20
   },
   {
    "row": "C461",
    "screen": "*",
    "verdict": "PASS",
-   "line": "Zoe throws these every week and still acts surprised when people come.",
-   "why": "Texture that fits Zoe's weekly party row.",
+   "line": "\u2014",
+   "why": "texture, her answers aloud, Zoe's lines fit her entry",
    "cause": null,
    "note": false,
-   "screen_hash": "79a44230bbd20b5e",
+   "screen_hash": "2c8f0e8afcdfc2f5",
    "row_hash": "310706ee076318f2",
    "carried": true,
-   "pass": 1
+   "pass": 18
   },
   {
    "row": "C461",
    "screen": "zoe_party.home",
    "verdict": "PASS",
-   "line": "Your loss, babe. There's a party here every Saturday.",
-   "why": "Zoe's 'babe', her show-off and no-strings manner, as in her entry",
+   "line": "Zoe shrugs and tips her bottle at you.",
+   "why": "texture",
    "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "fbe0ffa4aab26cc1",
-    "traits": "fa1a0a429fa0ea30",
-    "facts": "09800759fadc671d",
-    "facts2": "8486592f7b66e230",
-    "all": "da488683cb0b7f17"
+    "text": "d9433021c1841953",
+    "traits": "6b1e34b018661933",
+    "facts": "b153518a6fd2602e",
+    "facts2": "adf208a6ad231fd4",
+    "all": "ad96c5e231bb9fa0"
    },
    "row_hash": "310706ee076318f2",
-   "carried": false,
-   "pass": 16
+   "carried": true,
+   "pass": 18
+  },
+  {
+   "row": "C461",
+   "screen": "zoe_party.look",
+   "verdict": "PASS",
+   "line": "your pulse loud in your throat",
+   "why": "Her body and Zoe's voice; nothing that can clash.",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "33dd7dfee4aa6963",
+    "traits": "6b1e34b018661933",
+    "facts": "b153518a6fd2602e",
+    "facts2": "adf208a6ad231fd4",
+    "all": "ae1b2c87be069a24"
+   },
+   "row_hash": "310706ee076318f2",
+   "carried": true,
+   "pass": 19
   },
   {
    "row": "C461",
    "screen": "zoe_party.party",
    "verdict": "PASS",
-   "line": "He's tall, he's already looking at you",
-   "why": "texture of an unnamed guest",
+   "line": "waves it at you like a flag",
+   "why": "Texture that can't clash; fits Zoe's cast entry.",
    "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "743043cc9ff5e804",
-    "facts": "bdb41c3bae4339c4",
-    "facts2": "64bc96f41ce6505b",
-    "all": "1b1cb411f6915f8d"
+    "text": "3ef4c0684048a540",
+    "traits": "6b1e34b018661933",
+    "facts": "b153518a6fd2602e",
+    "facts2": "adf208a6ad231fd4",
+    "all": "df32385c67bef5af"
    },
    "row_hash": "310706ee076318f2",
    "carried": true,
-   "pass": 3
+   "pass": 20
   },
   {
    "row": "C519",
    "screen": "*",
    "verdict": "PASS",
    "line": "\u2014",
-   "why": "Party 134 words, one job; home 46.",
+   "why": "every screen one job, under about 50 words",
    "cause": null,
    "note": true,
-   "screen_hash": "79a44230bbd20b5e",
+   "screen_hash": "2c8f0e8afcdfc2f5",
    "row_hash": "e78502f7aa28746d",
    "carried": true,
-   "pass": 1
-  },
-  {
-   "row": "C541",
-   "screen": "zoe_party.home",
-   "verdict": "PASS",
-   "line": "Next time, then. I'm holding you to it.",
-   "why": "Zoe's reaction opens the next node.",
-   "cause": null,
-   "note": false,
-   "screen_hash": {
-    "text": "731bd30c4909323f",
-    "facts": "f2652b41679446db",
-    "facts2": "2ee81abd453dd216",
-    "all": "d559ceb7a13e5a31"
-   },
-   "row_hash": "880eaf1315fbaa0b",
-   "carried": true,
-   "pass": 1
+   "pass": 18
   },
   {
    "row": "C593",
    "screen": "*",
    "verdict": "PASS",
    "line": "babe",
-   "why": "Only Zoe says 'babe' in the build.",
+   "why": "only Zoe says \"babe\" (grep)",
    "cause": null,
    "note": false,
-   "screen_hash": "79a44230bbd20b5e",
+   "screen_hash": "2c8f0e8afcdfc2f5",
    "row_hash": "370371a278b9f182",
    "carried": true,
-   "pass": 1
+   "pass": 18
   },
   {
    "row": "C596",
-   "screen": "*",
+   "screen": "zoe_party.party",
    "verdict": "PASS",
-   "line": "meeting screen, picture in it",
-   "why": "a first meeting is a new moment, so its picture is allowed; no face-opened menu is built here, and no talk screen carries a picture",
+   "line": "image pool_dir everyday/zoe_party_t0, right after the first line",
+   "why": "Zoe's party menu now carries her one picture after its first line; talk screen has none.",
    "cause": null,
    "note": true,
-   "screen_hash": "6a30f3843ae1f11a",
+   "screen_hash": {
+    "text": "25b7cd505608b9c0",
+    "traits": "6b1e34b018661933",
+    "facts": "b153518a6fd2602e",
+    "facts2": "adf208a6ad231fd4",
+    "all": "3e6e7b832caf1dcd"
+   },
    "row_hash": "e5f7e6cf2d01613d",
    "carried": true,
-   "pass": 2
-  },
-  {
-   "row": "C601",
-   "screen": "zoe_party.party",
-   "verdict": "PASS",
-   "line": "he's been looking at you since you came in",
-   "why": "His look shows and she sees it; he's no housemate, so no cover needed.",
-   "cause": null,
-   "note": false,
-   "screen_hash": {
-    "text": "e96d129b23eb539b",
-    "facts": "56cf78cd7a9fca4a",
-    "facts2": "aea11acdfe12ca7e",
-    "all": "ff74b017858b4d01"
-   },
-   "row_hash": "c73aabbce8afa4bc",
-   "carried": true,
-   "pass": 1
-  },
-  {
-   "row": "C613",
-   "screen": "zoe_party.party",
-   "verdict": "PASS",
-   "line": "he's been looking at you since you came in",
-   "why": "His want shows before anything; he never acts.",
-   "cause": null,
-   "note": true,
-   "screen_hash": {
-    "text": "e96d129b23eb539b",
-    "facts": "56cf78cd7a9fca4a",
-    "facts2": "aea11acdfe12ca7e",
-    "all": "ff74b017858b4d01"
-   },
-   "row_hash": "6f777b1fcd750dd1",
-   "carried": true,
-   "pass": 1
+   "pass": 19
   },
   {
    "row": "C620",
    "screen": "*",
    "verdict": "PASS",
-   "line": "A blonde girl holds court by the kitchen with two friends",
-   "why": "Unmet Brooke stays a description.",
+   "line": "\u2014",
+   "why": "Zoe met (met_zoe) and there (requires_npc)",
    "cause": null,
    "note": true,
-   "screen_hash": "79a44230bbd20b5e",
+   "screen_hash": "2c8f0e8afcdfc2f5",
    "row_hash": "76250e48ada2b843",
    "carried": true,
-   "pass": 1
+   "pass": 18
   },
   {
    "row": "C625",
    "screen": "*",
    "verdict": "PASS",
-   "line": "A blonde girl ... / Brooke holds court",
-   "why": "Role before name, by met_brooke.",
+   "line": "the guy by the speaker",
+   "why": "stays a stranger (LO \"c yes stay stranger\")",
    "cause": null,
    "note": true,
-   "screen_hash": "79a44230bbd20b5e",
+   "screen_hash": "2c8f0e8afcdfc2f5",
    "row_hash": "dc9a1fd9dbf3fb87",
    "carried": true,
-   "pass": 1
+   "pass": 18
   },
   {
    "row": "C626",
    "screen": "*",
-   "verdict": "PASS",
+   "verdict": "N/A",
    "line": "\u2014",
-   "why": "Name swaps in on met_brooke.",
+   "why": "no met swap: Zoe is met by trigger, the guy stays a stranger",
    "cause": null,
    "note": true,
-   "screen_hash": "79a44230bbd20b5e",
+   "screen_hash": "2c8f0e8afcdfc2f5",
    "row_hash": "8e507f7b235acc25",
    "carried": true,
-   "pass": 1
+   "pass": 18
   },
   {
    "row": "C630",
    "screen": "*",
    "verdict": "PASS",
    "line": "\u2014",
-   "why": "Every named person got name and relation at their meeting (Zoe P20, Brooke/Kayla/Tess P26); unmet Brooke is a description.",
+   "why": "Zoe got name and relation at P20",
    "cause": null,
    "note": false,
-   "screen_hash": "79a44230bbd20b5e",
+   "screen_hash": "2c8f0e8afcdfc2f5",
    "row_hash": "5a85503d3ef5a0fb",
    "carried": true,
-   "pass": 1
+   "pass": 18
   },
   {
    "row": "C632",
    "screen": "*",
-   "verdict": "PASS",
+   "verdict": "N/A",
    "line": "\u2014",
-   "why": "No role label on these screens.",
+   "why": "no role label",
    "cause": null,
    "note": true,
-   "screen_hash": "79a44230bbd20b5e",
+   "screen_hash": "2c8f0e8afcdfc2f5",
    "row_hash": "146e6806c6c566e3",
    "carried": true,
-   "pass": 1
+   "pass": 18
+  },
+  {
+   "row": "C639",
+   "screen": "zoe_party.dare",
+   "verdict": "FAIL",
+   "line": "Look at him / Not tonight.",
+   "why": "note row: two answers to Zoe's dare, not three to five",
+   "cause": null,
+   "note": true,
+   "screen_hash": {
+    "text": "6a44ad99ca8a8e9b",
+    "traits": "6b1e34b018661933",
+    "facts": "b153518a6fd2602e",
+    "facts2": "adf208a6ad231fd4",
+    "all": "cf8e07000ca37c7e"
+   },
+   "row_hash": "be0ad7093b24bc46",
+   "carried": true,
+   "pass": 18
   },
   {
    "row": "C639",
    "screen": "zoe_party.party",
-   "verdict": "FAIL",
-   "line": "Not tonight.",
-   "why": "note row: still one answer to Zoe's dare, not three to five (LO set it, PLAN 8h)",
+   "verdict": "N/A",
+   "line": "\u2014",
+   "why": "no offer on this screen now; the dare moved to zoe_party.dare",
    "cause": null,
    "note": true,
    "screen_hash": {
-    "text": "743043cc9ff5e804",
-    "facts": "bdb41c3bae4339c4",
-    "facts2": "64bc96f41ce6505b",
-    "all": "1b1cb411f6915f8d"
+    "text": "831a67e1d7284f01",
+    "traits": "6b1e34b018661933",
+    "facts": "b153518a6fd2602e",
+    "facts2": "adf208a6ad231fd4",
+    "all": "c70be0cf8b715d91"
    },
    "row_hash": "be0ad7093b24bc46",
    "carried": true,
-   "pass": 3
+   "pass": 18
   },
   {
    "row": "C640",
-   "screen": "zoe_party.party",
+   "screen": "zoe_party.home",
    "verdict": "PASS",
-   "line": "Next time, then. I'm holding you to it.",
-   "why": "The no lands on a reply and the walk home.",
+   "line": "Your loss, babe.",
+   "why": "the no is content and removes the dare from the menu for the night",
    "cause": null,
    "note": true,
    "screen_hash": {
-    "text": "e96d129b23eb539b",
-    "facts": "56cf78cd7a9fca4a",
-    "facts2": "aea11acdfe12ca7e",
-    "all": "ff74b017858b4d01"
+    "text": "d9433021c1841953",
+    "traits": "6b1e34b018661933",
+    "facts": "b153518a6fd2602e",
+    "facts2": "adf208a6ad231fd4",
+    "all": "ad96c5e231bb9fa0"
    },
    "row_hash": "728d95d9964ccf25",
    "carried": true,
-   "pass": 1
+   "pass": 18
   },
   {
    "row": "C644",
    "screen": "*",
    "verdict": "PASS",
-   "line": "Zoe throws these every week",
-   "why": "Zoe owns the parties.",
+   "line": "\u2014",
+   "why": "Zoe owns the parties",
    "cause": null,
    "note": true,
-   "screen_hash": "79a44230bbd20b5e",
+   "screen_hash": "2c8f0e8afcdfc2f5",
    "row_hash": "f5e1d79f3251dbab",
    "carried": true,
-   "pass": 1
-  },
-  {
-   "row": "C660",
-   "screen": "zoe_party.home",
-   "verdict": "N/A",
-   "line": "",
-   "why": "no person's feeling is shown or paid on this screen; Zoe's and Sam's People views use Friendship / Lust / Her Dominance (p48_rendered2.txt)",
-   "cause": null,
-   "note": false,
-   "screen_hash": {
-    "text": "b02777bd9b8b50f8",
-    "facts": "e9d76b772e3b53ca",
-    "facts2": "8486592f7b66e230",
-    "all": "bb59d48a609273e4"
-   },
-   "row_hash": "eaf957bb84e62bbf",
-   "carried": true,
-   "pass": 5
+   "pass": 18
   },
   {
    "row": "C758",
    "screen": "*",
    "verdict": "PASS",
-   "line": "Go to Zoe's party \u00b7 Not tonight. \u00b7 Go home",
-   "why": "Short labels.",
+   "line": "\u2014",
+   "why": "short labels",
    "cause": null,
    "note": true,
-   "screen_hash": "79a44230bbd20b5e",
+   "screen_hash": "2c8f0e8afcdfc2f5",
    "row_hash": "e158aaf055cb61d6",
    "carried": true,
-   "pass": 1
+   "pass": 18
   },
   {
    "row": "C762",
    "screen": "*",
    "verdict": "PASS",
    "line": "\u2014",
-   "why": "Not used.",
+   "why": "no \"Nothing happens.\"",
    "cause": null,
    "note": false,
-   "screen_hash": "79a44230bbd20b5e",
+   "screen_hash": "2c8f0e8afcdfc2f5",
    "row_hash": "40e85f1ae92f1e71",
    "carried": true,
-   "pass": 1
+   "pass": 18
   },
   {
    "row": "C769",
    "screen": "*",
    "verdict": "PASS",
    "line": "\u2014",
-   "why": "The place keeps its own description.",
+   "why": "the description says what the place is and what is happening",
    "cause": null,
    "note": true,
-   "screen_hash": "79a44230bbd20b5e",
+   "screen_hash": "2c8f0e8afcdfc2f5",
    "row_hash": "f6b6f78a8f2e5ed7",
    "carried": true,
-   "pass": 1
+   "pass": 18
   },
   {
    "row": "C770",
    "screen": "*",
    "verdict": "PASS",
    "line": "\u2014",
-   "why": "Scene screens 134 and 46 words.",
+   "why": "about 38 words; check.py length green",
    "cause": null,
    "note": true,
-   "screen_hash": "79a44230bbd20b5e",
+   "screen_hash": "2c8f0e8afcdfc2f5",
    "row_hash": "ff9aa31c11e5d50f",
    "carried": true,
-   "pass": 1
+   "pass": 18
   },
   {
    "row": "C771",
    "screen": "*",
    "verdict": "PASS",
    "line": "\u2014",
-   "why": "No first-visit screen.",
+   "why": "no first-visit screen",
    "cause": null,
    "note": true,
-   "screen_hash": "79a44230bbd20b5e",
+   "screen_hash": "2c8f0e8afcdfc2f5",
    "row_hash": "563e3d25c3219dd0",
    "carried": true,
-   "pass": 1
+   "pass": 18
   },
   {
    "row": "C773",
    "screen": "*",
    "verdict": "PASS",
-   "line": "Go to Zoe's party",
-   "why": "One activity, not a browse list.",
+   "line": "\u2014",
+   "why": "not a browse list",
    "cause": null,
    "note": false,
-   "screen_hash": "79a44230bbd20b5e",
+   "screen_hash": "2c8f0e8afcdfc2f5",
    "row_hash": "599aac6293908bc4",
    "carried": true,
-   "pass": 1
+   "pass": 18
   },
   {
    "row": "C776",
    "screen": "*",
    "verdict": "PASS",
-   "line": "Go to Zoe's party",
-   "why": "A place activity (an outing) on the menu.",
+   "line": "\u2014",
+   "why": "Zoe's face is a person on the menu",
    "cause": null,
    "note": false,
-   "screen_hash": "79a44230bbd20b5e",
+   "screen_hash": "2c8f0e8afcdfc2f5",
    "row_hash": "4141d9e5e24362c3",
    "carried": true,
-   "pass": 1
+   "pass": 18
   },
   {
    "row": "C777",
    "screen": "*",
    "verdict": "PASS",
    "line": "\u2014",
-   "why": "Everything else is inside the beat.",
+   "why": "the rest sits inside beats",
    "cause": null,
    "note": false,
-   "screen_hash": "79a44230bbd20b5e",
+   "screen_hash": "2c8f0e8afcdfc2f5",
    "row_hash": "b56360a1040688cf",
    "carried": true,
-   "pass": 1
+   "pass": 18
   },
   {
    "row": "C794",
    "screen": "*",
    "verdict": "PASS",
    "line": "\u2014",
-   "why": "The place's identity line doesn't change.",
+   "why": "identity sentence verbatim in the variant",
    "cause": null,
    "note": true,
-   "screen_hash": "79a44230bbd20b5e",
+   "screen_hash": "2c8f0e8afcdfc2f5",
    "row_hash": "bad76e5963432385",
    "carried": true,
-   "pass": 1
+   "pass": 18
   },
   {
    "row": "C795",
    "screen": "*",
    "verdict": "PASS",
-   "line": "no room text in this piece's screens",
-   "why": "its screens are scenes, not a place's room text; no line per person is added to any room",
+   "line": "\u2014",
+   "why": "re-entry change is the crowd and faces only",
    "cause": null,
    "note": true,
-   "screen_hash": "6a30f3843ae1f11a",
+   "screen_hash": "2c8f0e8afcdfc2f5",
    "row_hash": "34139e6a6914e171",
    "carried": true,
-   "pass": 2
+   "pass": 18
   },
   {
    "row": "C804",
    "screen": "*",
    "verdict": "PASS",
-   "line": "no room text in this piece's screens",
-   "why": "its screens are scenes, not a place's room text; no line per person is added to any room",
+   "line": "\u2014",
+   "why": "people are faces; one unnamed crowd line",
    "cause": null,
    "note": false,
-   "screen_hash": "6a30f3843ae1f11a",
+   "screen_hash": "2c8f0e8afcdfc2f5",
    "row_hash": "5358489178bff0a4",
    "carried": true,
-   "pass": 2
+   "pass": 18
   },
   {
    "row": "C889",
    "screen": "*",
    "verdict": "PASS",
-   "line": "Go to Zoe's party \u00b7 Go home",
-   "why": "No clock time, no duration.",
+   "line": "\u2014",
+   "why": "no clock or duration on labels",
    "cause": null,
    "note": true,
-   "screen_hash": "79a44230bbd20b5e",
+   "screen_hash": "2c8f0e8afcdfc2f5",
    "row_hash": "def1348d483d0c40",
    "carried": true,
-   "pass": 1
+   "pass": 18
   },
   {
    "row": "C892",
    "screen": "*",
    "verdict": "PASS",
-   "line": "Saturdays, 9pm to 1am.",
-   "why": "The hours are on the door.",
+   "line": "\u2014",
+   "why": "no hour in the act",
    "cause": null,
    "note": true,
-   "screen_hash": "79a44230bbd20b5e",
+   "screen_hash": "2c8f0e8afcdfc2f5",
    "row_hash": "5c890033f6ac38b8",
    "carried": true,
-   "pass": 1
+   "pass": 18
   },
   {
    "row": "C897",
    "screen": "*",
    "verdict": "PASS",
    "line": "\u2014",
-   "why": "Time on the trip home only.",
+   "why": "5 minutes is an act's spend, not a room toll",
    "cause": null,
    "note": true,
-   "screen_hash": "79a44230bbd20b5e",
+   "screen_hash": "2c8f0e8afcdfc2f5",
    "row_hash": "265ece64add83676",
    "carried": true,
-   "pass": 1
+   "pass": 18
   },
   {
    "row": "C900",
-   "screen": "zoe_party.party",
+   "screen": "*",
    "verdict": "PASS",
-   "line": "Not tonight.",
-   "why": "No time in the beats; 'tonight' is true at every minute of 21:00\u201301:00.",
+   "line": "\u2014",
+   "why": "no time in the beats",
    "cause": null,
    "note": false,
-   "screen_hash": {
-    "text": "e96d129b23eb539b",
-    "facts": "56cf78cd7a9fca4a",
-    "facts2": "aea11acdfe12ca7e",
-    "all": "ff74b017858b4d01"
-   },
+   "screen_hash": "2c8f0e8afcdfc2f5",
    "row_hash": "6372efb027eb2034",
    "carried": true,
-   "pass": 1
+   "pass": 18
   },
   {
    "row": "C902",
-   "screen": "zoe_party.party",
+   "screen": "*",
    "verdict": "PASS",
-   "line": "Not tonight.",
-   "why": "Still true at Sun 00:59.",
+   "line": "\u2014",
+   "why": "true at 23:59",
    "cause": null,
    "note": true,
-   "screen_hash": {
-    "text": "e96d129b23eb539b",
-    "facts": "56cf78cd7a9fca4a",
-    "facts2": "aea11acdfe12ca7e",
-    "all": "ff74b017858b4d01"
-   },
+   "screen_hash": "2c8f0e8afcdfc2f5",
    "row_hash": "df5ed7a36dbc74e4",
    "carried": true,
-   "pass": 1
+   "pass": 18
   },
   {
    "row": "C903",
-   "screen": "zoe_party.party",
+   "screen": "zoe_party.home",
    "verdict": "PASS",
-   "line": "Saturdays, 9pm to 1am.",
-   "why": "The weekday is a rule on the greyed row; no beat names one.",
+   "line": "There's a party here every Saturday.",
+   "why": "weekday named behind the trigger's weekday 5 (Saturday, who_is_where)",
    "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "e96d129b23eb539b",
-    "facts": "56cf78cd7a9fca4a",
-    "facts2": "aea11acdfe12ca7e",
-    "all": "ff74b017858b4d01"
+    "text": "d9433021c1841953",
+    "traits": "6b1e34b018661933",
+    "facts": "b153518a6fd2602e",
+    "facts2": "adf208a6ad231fd4",
+    "all": "ad96c5e231bb9fa0"
    },
    "row_hash": "4f83b0b5eb45f71b",
    "carried": true,
-   "pass": 1
+   "pass": 18
   },
   {
    "row": "C906",
    "screen": "*",
    "verdict": "PASS",
    "line": "\u2014",
-   "why": "No 'till' on a label.",
+   "why": "no \"till\"",
    "cause": null,
    "note": true,
-   "screen_hash": "79a44230bbd20b5e",
+   "screen_hash": "2c8f0e8afcdfc2f5",
    "row_hash": "71713a7e7ae739e7",
    "carried": true,
-   "pass": 1
+   "pass": 18
   },
   {
    "row": "C910",
    "screen": "*",
    "verdict": "PASS",
-   "line": "Not tonight. \u00b7 Go home",
-   "why": "No time or energy.",
+   "line": "\u2014",
+   "why": "no time or energy on buttons",
    "cause": null,
    "note": true,
-   "screen_hash": "79a44230bbd20b5e",
+   "screen_hash": "2c8f0e8afcdfc2f5",
    "row_hash": "d5a109f1ef88419a",
    "carried": true,
-   "pass": 1
+   "pass": 18
   },
   {
    "row": "C913",
-   "screen": "zoe_party.party",
-   "verdict": "PASS",
-   "line": "show_when_blocked = true",
-   "why": "Out of hours it stays dimmed with its hours (onlyTheClockShut, v2.py:6076).",
+   "screen": "*",
+   "verdict": "N/A",
+   "line": "\u2014",
+   "why": "screens inside the scene; the face hides when unusable (LO 2026-11-24, NOTES:282)",
    "cause": null,
    "note": false,
-   "screen_hash": {
-    "text": "e96d129b23eb539b",
-    "facts": "56cf78cd7a9fca4a",
-    "facts2": "aea11acdfe12ca7e",
-    "all": "ff74b017858b4d01"
-   },
+   "screen_hash": "2c8f0e8afcdfc2f5",
    "row_hash": "c750f9b6ab4ace14",
    "carried": true,
-   "pass": 1
+   "pass": 18
   },
   {
    "row": "C914",
-   "screen": "zoe_party.party",
-   "verdict": "PASS",
+   "screen": "*",
+   "verdict": "N/A",
    "line": "\u2014",
-   "why": "Before met_zoe the flag hides it; only the clock greys it.",
+   "why": "same",
    "cause": null,
    "note": false,
-   "screen_hash": {
-    "text": "e96d129b23eb539b",
-    "facts": "56cf78cd7a9fca4a",
-    "facts2": "aea11acdfe12ca7e",
-    "all": "ff74b017858b4d01"
-   },
+   "screen_hash": "2c8f0e8afcdfc2f5",
    "row_hash": "bd07273d5822f34f",
    "carried": true,
-   "pass": 1
+   "pass": 18
   },
   {
    "row": "C916",
-   "screen": "zoe_party.party",
-   "verdict": "PASS",
+   "screen": "*",
+   "verdict": "N/A",
    "line": "\u2014",
-   "why": "She chooses it; its hours are shown.",
+   "why": "same",
    "cause": null,
    "note": false,
-   "screen_hash": {
-    "text": "e96d129b23eb539b",
-    "facts": "56cf78cd7a9fca4a",
-    "facts2": "aea11acdfe12ca7e",
-    "all": "ff74b017858b4d01"
-   },
+   "screen_hash": "2c8f0e8afcdfc2f5",
    "row_hash": "7b2bb0dfdbcfe946",
    "carried": true,
-   "pass": 1
+   "pass": 18
   },
   {
    "row": "C920",
-   "screen": "zoe_party.home",
+   "screen": "*",
    "verdict": "PASS",
-   "line": "time_progression_minutes = 180",
-   "why": "Not a hop: the party plus the trip between areas.",
+   "line": "\u2014",
+   "why": "acts at the place, no hop toll",
    "cause": null,
    "note": false,
-   "screen_hash": {
-    "text": "731bd30c4909323f",
-    "facts": "f2652b41679446db",
-    "facts2": "2ee81abd453dd216",
-    "all": "d559ceb7a13e5a31"
-   },
+   "screen_hash": "2c8f0e8afcdfc2f5",
    "row_hash": "513927dd127fca04",
    "carried": true,
-   "pass": 1
+   "pass": 18
   },
   {
    "row": "C924",
-   "screen": "zoe_party.home",
+   "screen": "*",
    "verdict": "PASS",
    "line": "\u2014",
-   "why": "The 180 minutes spend the night.",
+   "why": "no travel here",
    "cause": null,
    "note": true,
-   "screen_hash": {
-    "text": "731bd30c4909323f",
-    "facts": "f2652b41679446db",
-    "facts2": "2ee81abd453dd216",
-    "all": "d559ceb7a13e5a31"
-   },
+   "screen_hash": "2c8f0e8afcdfc2f5",
    "row_hash": "791cd173e23fb130",
    "carried": true,
-   "pass": 1
+   "pass": 18
   },
   {
    "row": "C926",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "\u2014",
+   "why": "minutes only",
+   "cause": null,
+   "note": true,
+   "screen_hash": "2c8f0e8afcdfc2f5",
+   "row_hash": "177d1e1776fac74b",
+   "carried": true,
+   "pass": 18
+  },
+  {
+   "row": "C927",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "\u2014",
+   "why": "exits carry 5 minutes",
+   "cause": null,
+   "note": true,
+   "screen_hash": "2c8f0e8afcdfc2f5",
+   "row_hash": "4e86d143688ba8e5",
+   "carried": true,
+   "pass": 18
+  },
+  {
+   "row": "C927",
    "screen": "zoe_party.home",
    "verdict": "PASS",
    "line": "\u2014",
-   "why": "Minutes only.",
+   "why": "Done carries 5",
    "cause": null,
    "note": true,
    "screen_hash": {
-    "text": "731bd30c4909323f",
-    "facts": "f2652b41679446db",
-    "facts2": "2ee81abd453dd216",
-    "all": "d559ceb7a13e5a31"
-   },
-   "row_hash": "177d1e1776fac74b",
-   "carried": true,
-   "pass": 1
-  },
-  {
-   "row": "C927",
-   "screen": "zoe_party.home",
-   "verdict": "PASS",
-   "line": "Go home",
-   "why": "the one exit carries 180 minutes",
-   "cause": null,
-   "note": true,
-   "screen_hash": {
-    "text": "fbe0ffa4aab26cc1",
-    "traits": "fa1a0a429fa0ea30",
-    "facts": "09800759fadc671d",
-    "facts2": "8486592f7b66e230",
-    "all": "da488683cb0b7f17"
-   },
-   "row_hash": "4e86d143688ba8e5",
-   "carried": false,
-   "pass": 16
-  },
-  {
-   "row": "C927",
-   "screen": "zoe_party.party",
-   "verdict": "PASS",
-   "line": "time_progression_minutes = 0",
-   "why": "The no's move is explicit 0.",
-   "cause": null,
-   "note": true,
-   "screen_hash": {
-    "text": "e96d129b23eb539b",
-    "facts": "56cf78cd7a9fca4a",
-    "facts2": "aea11acdfe12ca7e",
-    "all": "ff74b017858b4d01"
+    "text": "d9433021c1841953",
+    "traits": "6b1e34b018661933",
+    "facts": "b153518a6fd2602e",
+    "facts2": "adf208a6ad231fd4",
+    "all": "ad96c5e231bb9fa0"
    },
    "row_hash": "4e86d143688ba8e5",
    "carried": true,
-   "pass": 1
+   "pass": 18
+  },
+  {
+   "row": "C927",
+   "screen": "zoe_party.look",
+   "verdict": "PASS",
+   "line": "time_progression_minutes = 5",
+   "why": "The exit states its time.",
+   "cause": null,
+   "note": true,
+   "screen_hash": {
+    "text": "33dd7dfee4aa6963",
+    "traits": "6b1e34b018661933",
+    "facts": "b153518a6fd2602e",
+    "facts2": "adf208a6ad231fd4",
+    "all": "ae1b2c87be069a24"
+   },
+   "row_hash": "4e86d143688ba8e5",
+   "carried": true,
+   "pass": 19
   },
   {
    "row": "C928",
    "screen": "*",
    "verdict": "PASS",
    "line": "\u2014",
-   "why": "No clock in the prose.",
+   "why": "no clock in prose",
    "cause": null,
    "note": false,
-   "screen_hash": "79a44230bbd20b5e",
+   "screen_hash": "2c8f0e8afcdfc2f5",
    "row_hash": "2c3ccc6bd9929d7f",
    "carried": true,
-   "pass": 1
+   "pass": 18
   },
   {
    "row": "C929",
    "screen": "*",
    "verdict": "PASS",
    "line": "\u2014",
-   "why": "No time tagged on a label.",
+   "why": "no time on labels",
    "cause": null,
    "note": true,
-   "screen_hash": "79a44230bbd20b5e",
+   "screen_hash": "2c8f0e8afcdfc2f5",
    "row_hash": "18b0ecdf6d7fc901",
    "carried": true,
-   "pass": 1
+   "pass": 18
   },
   {
    "row": "C930",
-   "screen": "zoe_party.party",
+   "screen": "*",
    "verdict": "PASS",
-   "line": "show_when_blocked = true",
-   "why": "Set.",
+   "line": "\u2014",
+   "why": "no show_when_blocked: vanishes out of hours, as LO chose",
    "cause": null,
    "note": true,
-   "screen_hash": {
-    "text": "e96d129b23eb539b",
-    "facts": "56cf78cd7a9fca4a",
-    "facts2": "aea11acdfe12ca7e",
-    "all": "ff74b017858b4d01"
-   },
+   "screen_hash": "2c8f0e8afcdfc2f5",
    "row_hash": "beb57cd46fe906bf",
    "carried": true,
-   "pass": 1
+   "pass": 18
+  },
+  {
+   "row": "C931",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "\u2014",
+   "why": "time_of_day re-read each evaluation (v2.py:5325-5329); 21:00-00:00 wraps to day end",
+   "cause": null,
+   "note": true,
+   "screen_hash": "2c8f0e8afcdfc2f5",
+   "row_hash": "1aadffd96e76381c",
+   "carried": true,
+   "pass": 18
   },
   {
    "row": "C931",
    "screen": "zoe_party.home",
    "verdict": "PASS",
-   "line": "",
-   "why": "trigger unchanged: 21:00-00:00 wraps to the day end, the Sunday group covers 00:00-00:59, end exclusive",
+   "line": "\u2014",
+   "why": "same trigger",
    "cause": null,
    "note": true,
    "screen_hash": {
-    "text": "fbe0ffa4aab26cc1",
-    "traits": "fa1a0a429fa0ea30",
-    "facts": "09800759fadc671d",
-    "facts2": "8486592f7b66e230",
-    "all": "da488683cb0b7f17"
-   },
-   "row_hash": "1aadffd96e76381c",
-   "carried": false,
-   "pass": 16
-  },
-  {
-   "row": "C931",
-   "screen": "zoe_party.party",
-   "verdict": "PASS",
-   "line": "start_time = \"21:00\", end_time = \"00:00\"",
-   "why": "Wraps and ends exclusive (v2.py:4796-4799); Sat 23:30 and Sun 00:30 live, Sun 01:30 shut, matching the headless play.",
-   "cause": null,
-   "note": true,
-   "screen_hash": {
-    "text": "e96d129b23eb539b",
-    "facts": "56cf78cd7a9fca4a",
-    "facts2": "aea11acdfe12ca7e",
-    "all": "ff74b017858b4d01"
+    "text": "d9433021c1841953",
+    "traits": "6b1e34b018661933",
+    "facts": "b153518a6fd2602e",
+    "facts2": "adf208a6ad231fd4",
+    "all": "ad96c5e231bb9fa0"
    },
    "row_hash": "1aadffd96e76381c",
    "carried": true,
-   "pass": 1
+   "pass": 18
+  },
+  {
+   "row": "C931",
+   "screen": "zoe_party.look",
+   "verdict": "PASS",
+   "line": "time_of_day 21:00-00:00",
+   "why": "End exclusive; a look at 23:59 +5 lands at 00:04 where the end fires.",
+   "cause": null,
+   "note": true,
+   "screen_hash": {
+    "text": "33dd7dfee4aa6963",
+    "traits": "6b1e34b018661933",
+    "facts": "b153518a6fd2602e",
+    "facts2": "adf208a6ad231fd4",
+    "all": "ae1b2c87be069a24"
+   },
+   "row_hash": "1aadffd96e76381c",
+   "carried": true,
+   "pass": 19
   },
   {
    "row": "C953",
    "screen": "*",
    "verdict": "PASS",
    "line": "\u2014",
-   "why": "No money, time or energy on labels.",
+   "why": "no money, time or energy on labels",
    "cause": null,
    "note": true,
-   "screen_hash": "79a44230bbd20b5e",
+   "screen_hash": "2c8f0e8afcdfc2f5",
    "row_hash": "826bf82fe26afd13",
    "carried": true,
-   "pass": 1
+   "pass": 18
   },
   {
-   "row": "C961",
-   "screen": "zoe_party.party",
+   "row": "L106",
+   "screen": "*",
    "verdict": "PASS",
    "line": "\u2014",
-   "why": "Her no moves nothing.",
+   "why": "Zoe at near_zoe_apartment Sat 21-24 (who_is_where); the guy is an unnamed stranger",
    "cause": null,
-   "note": true,
-   "screen_hash": {
-    "text": "e96d129b23eb539b",
-    "facts": "56cf78cd7a9fca4a",
-    "facts2": "aea11acdfe12ca7e",
-    "all": "ff74b017858b4d01"
-   },
-   "row_hash": "b6cf8c9e8a8ef683",
+   "note": false,
+   "screen_hash": "2c8f0e8afcdfc2f5",
+   "row_hash": "13a714429d15f3b2",
    "carried": true,
-   "pass": 1
+   "pass": 18
   },
   {
    "row": "L106",
    "screen": "zoe_party.home",
    "verdict": "PASS",
-   "line": "Your loss, babe. There's a party here every Saturday.",
-   "why": "Zoe at near_zoe_apartment Sat 18-24 and Sun 00-01, Sam every day 12-02 (who_is_where)",
+   "line": "\u2014",
+   "why": "Zoe there by her rows",
    "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "fbe0ffa4aab26cc1",
-    "traits": "fa1a0a429fa0ea30",
-    "facts": "09800759fadc671d",
-    "facts2": "8486592f7b66e230",
-    "all": "da488683cb0b7f17"
+    "text": "d9433021c1841953",
+    "traits": "6b1e34b018661933",
+    "facts": "b153518a6fd2602e",
+    "facts2": "adf208a6ad231fd4",
+    "all": "ad96c5e231bb9fa0"
    },
    "row_hash": "13a714429d15f3b2",
-   "carried": false,
-   "pass": 16
+   "carried": true,
+   "pass": 18
+  },
+  {
+   "row": "L106",
+   "screen": "zoe_party.look",
+   "verdict": "PASS",
+   "line": "That's a start, babe.",
+   "why": "Zoe speaks; requires_npc npc_zoe and her Sat 18-24 row.",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "33dd7dfee4aa6963",
+    "traits": "6b1e34b018661933",
+    "facts": "b153518a6fd2602e",
+    "facts2": "adf208a6ad231fd4",
+    "all": "ae1b2c87be069a24"
+   },
+   "row_hash": "13a714429d15f3b2",
+   "carried": true,
+   "pass": 19
   },
   {
    "row": "L106",
    "screen": "zoe_party.party",
    "verdict": "PASS",
-   "line": "Then Zoe's arm is round your neck",
-   "why": "Zoe, Brooke, Kayla, Tess all there by their rows",
+   "line": "Zoe's on the sofa arm with a bottle in her hand, and she waves it at you like a flag.",
+   "why": "Names only Zoe, whom her Sat 18-24 row puts at near_zoe_apartment.",
    "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "743043cc9ff5e804",
-    "facts": "bdb41c3bae4339c4",
-    "facts2": "64bc96f41ce6505b",
-    "all": "1b1cb411f6915f8d"
+    "text": "3ef4c0684048a540",
+    "traits": "6b1e34b018661933",
+    "facts": "b153518a6fd2602e",
+    "facts2": "adf208a6ad231fd4",
+    "all": "df32385c67bef5af"
    },
    "row_hash": "13a714429d15f3b2",
    "carried": true,
-   "pass": 3
-  },
-  {
-   "row": "L116",
-   "screen": "zoe_party.party",
-   "verdict": "N/A",
-   "line": "",
-   "why": "no skill lock on this canvas; the only lock is the energy cost tag",
-   "cause": null,
-   "note": false,
-   "screen_hash": {
-    "text": "743043cc9ff5e804",
-    "facts": "bdb41c3bae4339c4",
-    "facts2": "64bc96f41ce6505b",
-    "all": "1b1cb411f6915f8d"
-   },
-   "row_hash": "f7a81c1d066ade25",
-   "carried": true,
-   "pass": 5
+   "pass": 20
   },
   {
    "row": "L119",
-   "screen": "zoe_party.party",
+   "screen": "zoe_party.dare",
    "verdict": "PASS",
    "line": "pool = 1",
-   "why": "Written.",
+   "why": "pool written",
    "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "e96d129b23eb539b",
-    "facts": "56cf78cd7a9fca4a",
-    "facts2": "aea11acdfe12ca7e",
-    "all": "ff74b017858b4d01"
+    "text": "6a44ad99ca8a8e9b",
+    "traits": "6b1e34b018661933",
+    "facts": "b153518a6fd2602e",
+    "facts2": "adf208a6ad231fd4",
+    "all": "cf8e07000ca37c7e"
    },
    "row_hash": "faf4c46f7b59480a",
    "carried": true,
-   "pass": 1
+   "pass": 18
   },
   {
    "row": "L120",
-   "screen": "zoe_party.party",
+   "screen": "zoe_party.dare",
    "verdict": "PASS",
-   "line": "a tall man by the speaker looking at the camera",
-   "why": "One man looking at the camera, not at her in frame.",
+   "line": "looking at the camera",
+   "why": "the looker alone, her view; no man-looking-at-her frame",
    "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "e96d129b23eb539b",
-    "facts": "56cf78cd7a9fca4a",
-    "facts2": "aea11acdfe12ca7e",
-    "all": "ff74b017858b4d01"
+    "text": "6a44ad99ca8a8e9b",
+    "traits": "6b1e34b018661933",
+    "facts": "b153518a6fd2602e",
+    "facts2": "adf208a6ad231fd4",
+    "all": "cf8e07000ca37c7e"
    },
    "row_hash": "4b62583ae03681c7",
    "carried": true,
-   "pass": 1
+   "pass": 18
   },
   {
    "row": "L121",
-   "screen": "zoe_party.party",
+   "screen": "zoe_party.dare",
    "verdict": "PASS",
    "line": "\u2014",
-   "why": "One everyday picture in the scene.",
+   "why": "one picture in the scene",
    "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "e96d129b23eb539b",
-    "facts": "56cf78cd7a9fca4a",
-    "facts2": "aea11acdfe12ca7e",
-    "all": "ff74b017858b4d01"
+    "text": "6a44ad99ca8a8e9b",
+    "traits": "6b1e34b018661933",
+    "facts": "b153518a6fd2602e",
+    "facts2": "adf208a6ad231fd4",
+    "all": "cf8e07000ca37c7e"
    },
    "row_hash": "45842b25d0708a15",
    "carried": true,
-   "pass": 1
+   "pass": 18
   },
   {
    "row": "L125",
-   "screen": "zoe_party.party",
-   "verdict": "PASS",
-   "line": "[image] last block, after 'He's tall, he's already looking at you'",
-   "why": "The picture comes after the dare and the look, not at the top, so it doesn't spoil the payoff.",
+   "screen": "zoe_party.dare",
+   "verdict": "N/A",
+   "line": "\u2014",
+   "why": "a still, not a clip",
    "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "6cb5a9c3f7e2344d",
-    "facts": "ce41b69cfaedf1e4",
-    "facts2": "01e438ef5e9fa813",
-    "all": "7f9988eae2193477"
+    "text": "6a44ad99ca8a8e9b",
+    "traits": "6b1e34b018661933",
+    "facts": "b153518a6fd2602e",
+    "facts2": "adf208a6ad231fd4",
+    "all": "cf8e07000ca37c7e"
    },
    "row_hash": "1fca3bfe1d0c2419",
    "carried": true,
-   "pass": 2
+   "pass": 18
   },
   {
    "row": "L166",
    "screen": "*",
    "verdict": "PASS",
-   "line": "Saturdays, 9pm to 1am.",
-   "why": "A party really happens at a time, said on the card.",
+   "line": "\u2014",
+   "why": "the party really happens Saturdays, said on the card",
    "cause": null,
    "note": false,
-   "screen_hash": "79a44230bbd20b5e",
+   "screen_hash": "2c8f0e8afcdfc2f5",
    "row_hash": "c12d10588197fbaf",
    "carried": true,
-   "pass": 1
+   "pass": 18
+  },
+  {
+   "row": "L167",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "\u2014",
+   "why": "one group row; hidden when unusable (LO, NOTES:282)",
+   "cause": null,
+   "note": false,
+   "screen_hash": "2c8f0e8afcdfc2f5",
+   "row_hash": "e64ce2672d85d2d8",
+   "carried": true,
+   "pass": 18
   },
   {
    "row": "L167",
    "screen": "zoe_party.home",
    "verdict": "PASS",
-   "line": "",
-   "why": "one row with a group; hidden when unusable per clock.md rule 10 (LO 2026-11-24 'button completely gone')",
+   "line": "\u2014",
+   "why": "same",
    "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "fbe0ffa4aab26cc1",
-    "traits": "fa1a0a429fa0ea30",
-    "facts": "09800759fadc671d",
-    "facts2": "8486592f7b66e230",
-    "all": "da488683cb0b7f17"
-   },
-   "row_hash": "e64ce2672d85d2d8",
-   "carried": false,
-   "pass": 16
-  },
-  {
-   "row": "L167",
-   "screen": "zoe_party.party",
-   "verdict": "PASS",
-   "line": "{ type = \"group\", logic = \"OR\", ... }",
-   "why": "One row with a group, show_when_blocked, full hours in the cooldown_message.",
-   "cause": null,
-   "note": false,
-   "screen_hash": {
-    "text": "e96d129b23eb539b",
-    "facts": "56cf78cd7a9fca4a",
-    "facts2": "aea11acdfe12ca7e",
-    "all": "ff74b017858b4d01"
+    "text": "d9433021c1841953",
+    "traits": "6b1e34b018661933",
+    "facts": "b153518a6fd2602e",
+    "facts2": "adf208a6ad231fd4",
+    "all": "ad96c5e231bb9fa0"
    },
    "row_hash": "e64ce2672d85d2d8",
    "carried": true,
-   "pass": 1
+   "pass": 18
+  },
+  {
+   "row": "L167",
+   "screen": "zoe_party.look",
+   "verdict": "N/A",
+   "line": "weekday 5, 21:00-00:00",
+   "why": "One window, one day kind; the face hides out of hours (NOTES:282).",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "33dd7dfee4aa6963",
+    "traits": "6b1e34b018661933",
+    "facts": "b153518a6fd2602e",
+    "facts2": "adf208a6ad231fd4",
+    "all": "ae1b2c87be069a24"
+   },
+   "row_hash": "e64ce2672d85d2d8",
+   "carried": true,
+   "pass": 19
   },
   {
    "row": "L170",
    "screen": "*",
    "verdict": "PASS",
-   "line": "Zoe lives in town, two streets off the high street. Knock in the afternoon, or come to her party on a Saturday, 9pm to 1am.",
-   "why": "Zoe's Apartment is hidden_until zoe_place_known, set on the same choice as met_zoe (quad_meet_zoe); met_zoe is the when of a Someone on the Quad step, whose first step points at the quad weekdays 2 to 3 (Zoe's row 13/14-15)",
+   "line": "\u2014",
+   "why": "check.py GREEN (pages)",
    "cause": null,
    "note": false,
-   "screen_hash": "393ba7e7b05ffb18",
+   "screen_hash": "2c8f0e8afcdfc2f5",
    "row_hash": "c3599cd09637a240",
    "carried": true,
-   "pass": 4
-  },
-  {
-   "row": "L70",
-   "screen": "zoe_party.home",
-   "verdict": "N/A",
-   "line": "",
-   "why": "no skill gain on this canvas in release 1",
-   "cause": null,
-   "note": false,
-   "screen_hash": {
-    "text": "b02777bd9b8b50f8",
-    "facts": "e9d76b772e3b53ca",
-    "facts2": "8486592f7b66e230",
-    "all": "bb59d48a609273e4"
-   },
-   "row_hash": "32d431db08834e70",
-   "carried": true,
-   "pass": 5
-  },
-  {
-   "row": "L71",
-   "screen": "zoe_party.party",
-   "verdict": "PASS",
-   "line": "puts his hand on your hip / Not tonight.",
-   "why": "It happens to her; she chooses nothing sexual.",
-   "cause": null,
-   "note": false,
-   "screen_hash": {
-    "text": "e96d129b23eb539b",
-    "facts": "56cf78cd7a9fca4a",
-    "facts2": "aea11acdfe12ca7e",
-    "all": "ff74b017858b4d01"
-   },
-   "row_hash": "412fb4816f34d294",
-   "carried": true,
-   "pass": 1
+   "pass": 18
   }
  ],
  "causes": [],
  "pending": [],
- "asked": 9,
- "answered": 9,
+ "asked": 1,
+ "answered": 1,
  "pass_items": [],
  "unowed": []
 }

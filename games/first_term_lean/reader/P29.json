@@ -1,6 +1,6 @@
 {
  "piece": "P29",
- "pass": 4,
+ "pass": 7,
  "screens": {
   "*": "4f53cda18c2baa0c"
  },
@@ -31,7 +31,7 @@
   "C620": "76250e48ada2b843",
   "C769": "f6b6f78a8f2e5ed7",
   "C794": "bad76e5963432385",
-  "C2201": "d119dfe665f76359",
+  "C2201": "7fddf5e17dbdaaf9",
   "C795": "34139e6a6914e171",
   "C804": "5358489178bff0a4",
   "L106": "13a714429d15f3b2",
@@ -43,11 +43,13 @@
   "C762": "40e85f1ae92f1e71",
   "L170": "c3599cd09637a240",
   "C770": "ff9aa31c11e5d50f",
+  "C2203": "365a29fd77f6b765",
   "C771": "563e3d25c3219dd0",
   "C442": "59b8d8d24f0c7c38",
   "C451": "50dbf74577a813c7",
   "C422": "7e128897077ecee6",
   "C460": "67e48e60d5053a2e",
+  "C2206": "d8ebf6d6b2abf6a5",
   "C461": "310706ee076318f2"
  },
  "verdicts": [
@@ -260,19 +262,6 @@
    "pass": 1
   },
   {
-   "row": "C1158",
-   "screen": "*",
-   "verdict": "PASS",
-   "line": "your leggings",
-   "why": "backed by clothing_item leggings equipped on each variant",
-   "cause": null,
-   "note": false,
-   "screen_hash": "4f53cda18c2baa0c",
-   "row_hash": "f40f51a0fd6cfd10",
-   "carried": true,
-   "pass": 1
-  },
-  {
    "row": "C1173",
    "screen": "*",
    "verdict": "N/A",
@@ -282,19 +271,6 @@
    "note": true,
    "screen_hash": "4f53cda18c2baa0c",
    "row_hash": "541a03815a8d19c4",
-   "carried": true,
-   "pass": 1
-  },
-  {
-   "row": "C1177",
-   "screen": "*",
-   "verdict": "PASS",
-   "line": "A jogger coming the other way looks at your leggings, then your face, then your leggings.",
-   "why": "leggings matter on the street, park and gym because a crowd is there",
-   "cause": null,
-   "note": true,
-   "screen_hash": "4f53cda18c2baa0c",
-   "row_hash": "ef9bbbe96651efc7",
    "carried": true,
    "pass": 1
   },
@@ -351,19 +327,6 @@
    "pass": 1
   },
   {
-   "row": "C1206",
-   "screen": "*",
-   "verdict": "PASS",
-   "line": "in your leggings",
-   "why": "the leggings are named only while equipped; no other garment named",
-   "cause": null,
-   "note": false,
-   "screen_hash": "4f53cda18c2baa0c",
-   "row_hash": "bfff76edbee583de",
-   "carried": true,
-   "pass": 1
-  },
-  {
    "row": "C1220",
    "screen": "location:hood_street",
    "verdict": "PASS",
@@ -404,16 +367,68 @@
   },
   {
    "row": "C2201",
-   "screen": "*",
+   "screen": "hood_gym",
    "verdict": "PASS",
-   "line": "The park: a running loop, benches, the pond. Joggers, dog walkers, mothers with prams. \u2026",
-   "why": "the street, park and gym clothing variants are gone (P72); the lines are plain, being noticed is notice_* scenes; pages check green",
+   "line": "The same regulars every day.",
+   "why": "crowd line true at all open hours; no variants",
+   "cause": null,
+   "note": false,
+   "screen_hash": null,
+   "row_hash": "7fddf5e17dbdaaf9",
+   "carried": true,
+   "pass": 5
+  },
+  {
+   "row": "C2201",
+   "screen": "hood_park",
+   "verdict": "PASS",
+   "line": "Joggers, dog walkers, mothers with prams.",
+   "why": "crowd shows only in open hours 06:00-21:00, true there",
+   "cause": null,
+   "note": false,
+   "screen_hash": null,
+   "row_hash": "7fddf5e17dbdaaf9",
+   "carried": true,
+   "pass": 5
+  },
+  {
+   "row": "C2201",
+   "screen": "hood_street",
+   "verdict": "PASS",
+   "line": "The street's dark. Curtains drawn, the bus stop empty.",
+   "why": "daytime crowd only 07:00-21:00, night line 21:00-07:00 (wraps, v2.py:4826-4829), first-match chain v2.py:11893-11912; no clothes, met_ or presence read; identity line kept",
+   "cause": null,
+   "note": false,
+   "screen_hash": null,
+   "row_hash": "7fddf5e17dbdaaf9",
+   "carried": true,
+   "pass": 6
+  },
+  {
+   "row": "C2203",
+   "screen": "*",
+   "verdict": "N/A",
+   "line": "\u2014",
+   "why": "no event at its places: nothing here has hours of its own as a party or night out; Zoe's party (C2203) is P75's and P05's place",
    "cause": null,
    "note": false,
    "screen_hash": "4f53cda18c2baa0c",
-   "row_hash": "d119dfe665f76359",
+   "row_hash": "365a29fd77f6b765",
+   "carried": true,
+   "pass": 5
+  },
+  {
+   "row": "C2206",
+   "screen": "*",
+   "verdict": "N/A",
+   "line": "Builds: location:hood_street, location:hood_park, location:hood_gym",
+   "why": "Builds names no canvas in 7_final_game.toml (locations, sidebar, phone, people or none); no group chain to judge",
+   "cause": null,
+   "note": false,
+   "screen_hash": "4f53cda18c2baa0c",
+   "row_hash": "d8ebf6d6b2abf6a5",
    "carried": false,
-   "pass": 4
+   "pass": 7
   },
   {
    "row": "C422",
