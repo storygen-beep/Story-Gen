@@ -147,13 +147,18 @@ One page = one goal. Secondary links (docs, login) stay visually quiet.
 
 ## 6. Recommended Claude Code skill stack
 
-Installed in this repo:
+**Installed in this repo (2026-11-27):** `awesome-design-skills` plus all eight below, vendored into
+`.claude/skills/` — `frontend-design`; `impeccable`; `cro`, `copywriting`, `signup`, `pricing`, `popups`,
+`ab-testing`, `marketing-psychology`; `ui-ux-pro-max`; `web-design-guidelines`; Emil Kowalski's 20 skills
+(`emil-design-eng`, `animate`, `review-animations`, `break-ui`, `apple-design`, …); AccessLint's
+`accessibility-scan|inspect|audit|fix|diff`; `taste-skill` (`design-taste-frontend`). Each carries a `CHANGELOG.md`
+naming its upstream commit.
 
-| skill | role |
-|---|---|
-| `awesome-design-skills` (bergside, 67 styles) | visual style library — pick a look, apply its tokens and gates |
+Notes: impeccable's launcher downloads its checksum-verified engine binary on first run, and its upstream installer's
+auto-detect hook was **not** installed (that edits settings). AccessLint skills run `npx -y @accesslint/...@latest`
+at use time.
 
-Recommended next, in priority order (verified on GitHub 2026-11-27; star counts approximate):
+Priority order and install commands, for reference (verified on GitHub 2026-11-27; star counts approximate):
 
 | # | skill | what it adds | install |
 |---|---|---|---|
