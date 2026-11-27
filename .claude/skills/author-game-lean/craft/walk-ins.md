@@ -249,7 +249,7 @@ Kind (c). She arrives in something worth looking at, and a stranger looks: the g
 1. **It fires on arrival, behind a chance, once a day:** `trigger_mode = "random"`, `chance = 0.35`, `max_triggers_per_day = 1`, like kind (a). It is off the shared "comes to her" flag.
 2. **Only in the clothes it is about.** Its trigger's conditions name what she wears (`clothing_item`, `clothing_slot`, `worn_exposure` or `worn_type`), and the hours when people are about. The scene names only that garment (`craft/clothes.md` rule 4).
 3. **A stranger is fine.** No named person and no schedule row are needed; a stranger speaks as `speaker = "unknown"`. A named person is allowed only where their rows put them (L97).
-4. **Two screens, and a written way out** (C792, C2188): the moment, then one answer screen per choice. One choice is plain ("Keep walking"); one stays in it ("Look back"). While her meters are still, the bolder one is a look, never her choosing to show herself. Every answer ends on his hook, a next time (C149).
+4. **Two screens, and a written way out** (C792, C2188): the moment, then one answer screen per choice. One choice is plain ("Keep walking"); one stays in it ("Look back"). While her meters are still, the bolder one is a look, never her choosing to show herself. Every answer ends on his hook (C149), true on every visit: where he is and when ("Same stop tomorrow, doll. We'll be here."), never a promise nothing builds ("Next time, then, darling."; `craft/voice.md`, the truth rule, rule 6; C2202).
 5. **On her body, short.** What he looks at, what it does to her (face hot, walking faster), one spoken line from him. In release 1 it sets a flag only.
 6. **Not too many** (L147: "69 of first_term's 82 random scenes were about her body"). At most a quarter of the game's arrival scenes are this kind, and at most one per garment state per place. `scripts/walkins.py` counts it.
 
@@ -279,7 +279,7 @@ items = [{ type = "clothing_item", item_id = "leggings", operator = "equipped" }
 | "Keep walking" | *You don't look back. You can feel them watching until the corner.* "Same stop tomorrow, doll. We'll be here." · sets `noticed_<street>_leggings` |
 | "Look back" | *He grins when you do. You turn away first, and your face burns.* "See you tomorrow, doll." · sets `noticed_<street>_leggings` |
 
-Each answer ends on his hook, a next time (C149): he'll be here tomorrow. Each stranger has his own way of addressing her ("doll" at the bus stop, "love" across the road), never one shared word (C593). At stage 0 her bolder choice is to look back, never to show herself.
+Each answer ends on his hook (C149): he'll be here tomorrow, which is true, since the scene shows only when he is. Never "next time, then": the scene repeats, so a promise there is broken on every visit after (C2202; first_term_lean P72, 2026-11-27). Each stranger has his own way of addressing her ("doll" at the bus stop, "love" across the road), never one shared word (C593). At stage 0 her bolder choice is to look back, never to show herself.
 
 ## How a walk-in grows
 

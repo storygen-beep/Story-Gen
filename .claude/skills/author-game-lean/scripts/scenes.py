@@ -13,8 +13,9 @@
   speakers  every dialog block names its speaker, and a person speaker is a person in the game (v2's
             `speakers are named`, gates.py:9500)
   goals     a quest-card goal line reads the way it works (v2's `a goal line reads the way it works`, gates.py:18911)
-  repeats   on a repeatable scene, no person says first-meeting words ("new face", "say your name") or a
-            "next time I'll" promise, unless a group holds the line on a flag's is_false side (C2202)
+  repeats   on a repeatable scene, no person says first-meeting words ("new face", "say your name"), and no line,
+            spoken or narrated, makes a "next time" promise, unless a group holds it on a flag's is_false side
+            (C2202). A flag a tick unsets doesn't make a scene play once.
 
 What these can't see is still the writer's and the reader's: whether a line is true in what it says, a screen's
 one job, a person named in narration (only speakers are placed), and the opening's own clock. `talk` counts a
@@ -563,7 +564,8 @@ def check_goals(game):
 FIRST_MEETING = re.compile(r"\bnew (?:face|girl|guy|kid)\b|\b(?:say|what'?s|tell me) your name\b|\bname\?|"
                            r"\bnice to meet you\b|\bwho are you\b", re.I)
 PROMISE = re.compile(r"\bnext (?:time|rehearsal|class|shift|lesson|session|week|\w+day),? "
-                     r"(?:i'll|i will|i'm going to|you'll|you will|you're|we'll)\b", re.I)
+                     r"(?:i'll|i will|i'm going to|you'll|you will|you're|we'll|he'll|she'll)\b|\bnext time,? then\b|"
+                     r"\b(?:i|you|he|she|we|they)'ll\b[^.!?\"]{0,50}\bnext time\b", re.I)
 
 
 def own_sets(c):
@@ -584,6 +586,23 @@ def own_sets(c):
     return out
 
 
+def unset_anywhere(game):
+    """Flags any effect in the game unsets: a day or week tick, or a choice. Such a flag can be false again."""
+    out = set()
+
+    def visit(d):
+        if isinstance(d, dict):
+            if d.get("flag") and d.get("op") == "unset":
+                out.add(d["flag"])
+            for v in d.values():
+                visit(v)
+        elif isinstance(d, list):
+            for v in d:
+                visit(v)
+    visit(game)
+    return out
+
+
 def before_flag(conds):
     """True when a group's conditions read a flag on its not-yet side (`is_false`): the line shows until something
     happens, so a promise or a first-time word there stops once the flag is set."""
@@ -591,25 +610,28 @@ def before_flag(conds):
 
 
 def check_repeats(game, dev=()):
-    """C2202: on a repeatable scene, no spoken first-meeting words and no "next time I'll" promise, unless a group
-    holds the line on a flag's not-yet side. A repeatable whose own trigger waits on a flag it sets plays once."""
+    """C2202: on a repeatable scene, no spoken first-meeting words, and no "next time" promise spoken or narrated,
+    unless a group holds the line on a flag's not-yet side. A repeatable whose own trigger waits on a flag it sets
+    plays once, unless something unsets that flag again (a day or week tick)."""
     rows = []
+    reset = unset_anywhere(game)
     for c in canvases(game, dev):
         trig = c.get("trigger") or {}
         if retired(c) or not trig.get("is_repeatable"):
             continue
-        once = own_sets(c)
+        once = own_sets(c) - reset
         if any(i.get("type") == "flag" and i.get("operator") == "is_false" and i.get("flag_key") in once
                for i in items(trig.get("conditions"))):
             continue  # it sets the flag its own trigger waits on: in play it shows once
         for n in c.get("nodes") or []:
             for b, conds in walk(n.get("blocks")):
-                if b.get("type") != "dialog" or (b.get("props") or {}).get("speaker") == "player":
+                kind = b.get("type")
+                if kind not in ("dialog", "paragraph") or before_flag(conds):
                     continue
-                if before_flag(conds):
-                    continue
+                theirs = kind == "dialog" and (b.get("props") or {}).get("speaker") != "player"
                 text = str(b.get("content") or "")
-                for rx, what in ((FIRST_MEETING, "first-meeting words"), (PROMISE, "a \"next time\" promise")):
+                checks = ((FIRST_MEETING, "first-meeting words"),) if theirs else ()
+                for rx, what in checks + ((PROMISE, "a \"next time\" promise"),):
                     m = rx.search(text)
                     if m:
                         rows.append(f"{c['id']} · {n.get('id')}: \"{text[:60]}\" has {what} (\"{m.group(0)}\") on "

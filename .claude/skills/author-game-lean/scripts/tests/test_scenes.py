@@ -385,8 +385,27 @@ def test_a_repeatable_that_sets_the_flag_its_trigger_waits_on_plays_once():
 
 
 def test_her_own_line_and_a_one_time_scene_are_not_judged():
-    g = repeat_game({"type": "dialog", "content": "Next time I'll be ready.", "props": {"speaker": "player"}})
+    g = repeat_game({"type": "dialog", "content": "I'm the new girl.", "props": {"speaker": "player"}})
     assert scenes.check_repeats(g) == (GREEN, [])
     g = repeat_game(say("Nice to meet you."))
     g["canvases"][0]["trigger"]["is_repeatable"] = False
     assert scenes.check_repeats(g) == (GREEN, [])
+
+
+@pytest.mark.parametrize("block", [say("Next time, then, darling."), say("You'll be counting the jar next time."),
+                                   para("You step off with your face hot. Next time, you'll stand by the doors.")])
+def test_planted_promise_in_any_form_or_in_narration_is_red(block):
+    assert scenes.check_repeats(repeat_game(block))[0] == RED
+
+
+def test_a_kept_appointment_and_her_first_meeting_words_in_narration_are_green():
+    g = repeat_game(say("Short. Next Sunday, then. Both weeks."), para("He calls you the new girl."))
+    assert scenes.check_repeats(g) == (GREEN, [])
+
+
+def test_a_flag_a_tick_unsets_does_not_make_a_scene_play_once():
+    wait = {"type": "flag", "subject": "player", "flag_key": "partied", "operator": "is_false"}
+    g = repeat_game(say("Next time, then. I'm holding you to it."), trigger_items=[wait], sets=["partied"])
+    assert scenes.check_repeats(g) == (GREEN, [])
+    g["engine"] = {"weekly_tick": {"flagEffects": [{"targetType": "player", "flag": "partied", "op": "unset"}]}}
+    assert scenes.check_repeats(g)[0] == RED
