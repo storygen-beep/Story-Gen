@@ -95,6 +95,7 @@ Mechanical — read from `check.json`:
 - [ ] `fontsFailed` empty, `consoleErrors` empty
 - [ ] accessibility scan: no critical or serious violations
 - [ ] `impeccable detect`: no findings, or each one a deliberate choice recorded in `decisions`
+- [ ] `designmd lint` on the site's `DESIGN.md`: no errors, no contrast warnings
 
 Judgement — look at the page:
 - [ ] Five-second test: headline and picture alone say what is sold

@@ -154,6 +154,13 @@ One page = one goal. Secondary links (docs, login) stay visually quiet.
 `accessibility-scan|inspect|audit|fix|diff`; `taste-skill` (`design-taste-frontend`). Each carries a `CHANGELOG.md`
 naming its upstream commit.
 
+Added later the same day for `/design-site`'s reference stack: `better-colors` and `better-typography`
+(jakubkrehel/skills), plus files vendored inside `.claude/skills/design-site/references/` — a typeface-selection
+guide and an inspiration-sources guide (agshinrajabov/no-slop-design), the DESIGN.md format spec
+(google-labs-code/design.md, checked with `npx -p @google/design.md designmd lint`), Open Props easings and shadows,
+Radix Colors neutral scales, and the modern-font-stacks table. Considered and rejected: brand-clone DESIGN.md
+collections (VoltAgent/awesome-design-md and derivatives), gallery scrapers, and paid real-site reference connectors.
+
 Notes: impeccable's launcher downloads its checksum-verified engine binary on first run, and its upstream installer's
 auto-detect hook was **not** installed (that edits settings). AccessLint skills run `npx -y @accesslint/...@latest`
 at use time.

@@ -3,7 +3,7 @@
  * Screenshot a page at phone, tablet and desktop widths and measure the things the
  * conversion rules can be checked for mechanically. Prints one JSON report.
  *
- *   node check.cjs <index.html | url> <out_dir>
+ *   node check.cjs <index.html[#tab] | url> <out_dir>
  *
  * It measures; it does not judge. The skill decides what a number means.
  */
@@ -93,7 +93,9 @@ function measure() {
     process.exit(2);
   }
   fs.mkdirSync(outDir, { recursive: true });
-  const url = /^https?:/.test(target) ? target : pathToFileURL(path.resolve(target)).href;
+  // A "#name" suffix on a file path is kept, so one tab of the options page can be shown: index.html#b
+  const [filePart, hash] = target.split('#');
+  const url = /^https?:/.test(target) ? target : pathToFileURL(path.resolve(filePart)).href + (hash ? `#${hash}` : '');
 
   // The container reaches the web through a proxy; Chromium does not read the env vars itself.
   const proxyServer = process.env.HTTPS_PROXY || process.env.https_proxy;

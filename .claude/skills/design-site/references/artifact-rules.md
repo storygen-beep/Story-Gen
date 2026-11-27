@@ -82,7 +82,10 @@ One artifact, three directions, switched by tabs:
 
 - Each direction's tokens live under its own class (`.opt-a { --bg: ...; --fg: ...; --accent: ... }`)
   and every rule for that direction is prefixed with the class, so the three never bleed into each other.
-- Toggle with the `hidden` attribute. Remember the last tab in `localStorage` inside try/catch.
+- Toggle with the `hidden` attribute. On load, show the tab named in `location.hash` (`#a`, `#b`,
+  `#c`) if there is one — the checker uses this to screenshot each direction — otherwise the last tab
+  remembered in `localStorage` (inside try/catch), otherwise A.
+- Each direction's tokens are copied from its `DESIGN.md`; the page and the sheet must agree.
 - The tab bar is the only shared chrome: keep it small, neutral and sticky
   (`top: env(safe-area-inset-top, 0px)`), with one line under each name saying who the direction suits.
 - Same headline, subhead and button in all three, so the user compares looks and not words.

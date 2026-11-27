@@ -29,8 +29,9 @@ and ends with one line: `Strongest thing about this page: ...` so the merge keep
 > You are reviewing a web page's visual design. Read `.claude/skills/impeccable/reference/critique-rubric.md`
 > and the "AI-generated tells" list in `.claude/skills/design-site/references/conversion-rules.md`.
 > Then look at the screenshots at `<shots>` (read the image files — fold and full, phone and desktop),
-> the source at `<page>`, the detector output at `<work>/detect.txt`, and the intended direction in
-> `<brief>` under `look`.
+> the source at `<page>`, the detector output at `<work>/detect.txt`, and the design sheet at
+> `<work>/DESIGN.md` — the page is supposed to follow it, so report every place it does not (a colour,
+> size, radius or font that is not in the sheet).
 >
 > Judge: visual hierarchy (is the most important thing the most prominent), typography (scale, line
 > length, pairing), spacing rhythm, colour and contrast, consistency of repeated elements, whether the
