@@ -267,16 +267,44 @@ var saveAs=saveAs||navigator.msSaveBlob&&navigator.msSaveBlob.bind(navigator)||f
     50% { box-shadow: 0 0 10px 3px rgba(255, 214, 102, 0.85); }
 }
 .glow { display: inline-block; border-radius: 4px; animation: hints-glow 1.6s ease-in-out infinite; }
-.hints-dialog .rounded-border { border: 1px solid var(--theme-border, #555); border-radius: 10px; padding: 10px 12px; }
-.hints-dialog .large { font-size: 1.25em; }
-.hints-dialog .indent { margin-left: 1.25em; }
-.hints-dialog .notice { color: var(--theme-accent, #7ec8e3); }
-.hints-dialog .highlight { color: var(--theme-accent, #7ec8e3); font-weight: bold; }
-.hints-dialog .options-table td { vertical-align: top; padding: 2px 6px; }
-.hints-dialog .options-col-label { font-weight: bold; white-space: nowrap; }
-.hints-dialog .hint-category-label { display: inline-block; margin: 0 14px 4px 0; white-space: nowrap; }
-.hints-dialog #help-backward { cursor: pointer; padding: 2px 8px; }
-.cot-page-title { margin: 0 0 12px; }
+/* "N new" sits on the button's right edge, beside the icon, like the icon an overlay that lets
+   clicks through to the link (v2.py's sidebar button family). */
+.nav-badge { position: absolute; right: 34px; top: 50%; transform: translateY(-50%); pointer-events: none; padding: 0 7px; border-radius: 9px; font-size: 11px; font-weight: bold; line-height: 18px; background: var(--theme-warning, #e8b04b); color: #16151d; }
+.nav-badge:last-child { right: 10px; }
+
+.cot-head { display: flex; align-items: center; gap: 14px; flex-wrap: wrap; margin: 0 0 18px; }
+.cot-head .cot-page-title { margin: 0; font-size: 1.6em; }
+.cot-head > a.link-internal { display: inline-flex; align-items: center; min-height: 40px; padding: 0 14px; border-radius: 10px; background: var(--theme-surface, #262536); border: 1px solid var(--theme-border, #383650); color: var(--theme-text, inherit); text-decoration: none; font-weight: bold; cursor: pointer; }
+.cot-head > a.link-internal:hover { background: var(--theme-surface-hover, #2f2d48); }
+.cot-head-meta { margin-left: auto; color: var(--theme-text-muted, #a9a6bd); font-size: 0.9em; }
+
+.hints-page .notice { color: var(--theme-accent, #7ec8e3); }
+.hints-page .highlight { color: var(--theme-accent, #7ec8e3); font-weight: bold; }
+.hints-page .hint-next { display: flex; flex-direction: column; gap: 6px; margin-bottom: 18px; }
+.hints-page .hint-next-label { font-size: 11px; letter-spacing: 0.08em; text-transform: uppercase; font-weight: bold; color: var(--theme-warning, #e8b04b); }
+.hints-page .hint-card { background: var(--theme-surface, #1f1e29); border: 1px solid var(--theme-border, #383650); border-radius: 12px; padding: 14px 16px; display: flex; flex-direction: column; gap: 6px; min-width: 0; }
+.hints-page .hint-next-card { border-color: var(--theme-accent, #7ec8e3); background: var(--theme-surface-hover, #2a2840); padding: 18px 20px; }
+.hints-page .hint-next-card .hint-title { font-size: 1.35em; }
+.hints-page .hint-next-card .hint-line { font-size: 1.1em; }
+.hints-page .hint-card-head { display: flex; align-items: center; gap: 8px; flex-wrap: wrap; }
+.hints-page .hint-title { font-weight: bold; font-size: 1.05em; color: var(--theme-text-strong, inherit); }
+.hints-page .hint-tag { font-size: 11px; font-weight: bold; padding: 1px 8px; border-radius: 999px; background: var(--theme-warning, #e8b04b); color: #16151d; }
+.hints-page .hint-done-mark { font-size: 12px; font-weight: bold; color: var(--theme-success, #3ecfb8); }
+.hints-page .hint-category { margin-left: auto; display: inline-flex; align-items: center; gap: 6px; font-size: 12px; color: var(--theme-text-muted, #a9a6bd); }
+.hints-page .hint-dot { display: inline-block; width: 8px; height: 8px; border-radius: 50%; flex-shrink: 0; }
+.hints-page .hint-desc { font-size: 0.88em; color: var(--theme-text-muted, #a9a6bd); }
+.hints-page .hint-line { line-height: 1.5; }
+.hints-page .hint-wt { margin-top: 4px; background: transparent; border: 1px solid var(--theme-accent, #7ec8e3); color: var(--theme-text, inherit); border-radius: 8px; padding: 6px 12px; cursor: pointer; font: inherit; font-size: 0.9em; }
+.hints-page .hint-chips { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 16px; }
+.hints-page .hint-chip { display: inline-flex; align-items: center; gap: 7px; min-height: 36px; padding: 0 14px; border-radius: 999px; cursor: pointer; font: inherit; font-size: 0.9em; font-weight: bold; background: var(--theme-surface, #1f1e29); color: var(--theme-text, inherit); border: 1px solid var(--theme-border, #383650); }
+.hints-page .hint-chip.active { background: var(--theme-text, #ece9f5); color: var(--theme-bg, #16151d); border-color: var(--theme-text, #ece9f5); }
+.hints-page .hint-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px; }
+.hints-page .hint-empty { color: var(--theme-text-muted, #a9a6bd); padding: 12px 0; }
+.hints-page .hint-done-fold { margin-top: 18px; padding-top: 10px; border-top: 1px solid var(--theme-border, #383650); }
+.hints-page .hint-done-toggle { background: transparent; border: 0; color: var(--theme-text-muted, #a9a6bd); font: inherit; font-weight: bold; cursor: pointer; min-height: 40px; padding: 0; margin-bottom: 8px; }
+.hints-page .hint-done { opacity: 0.6; }
+.hints-page .hint-step { line-height: 1.5; }
+@media (max-width: 700px) { .hints-page .hint-grid { grid-template-columns: minmax(0, 1fr); } }
 /* twine-user-stylesheet #3: "StoryJournalStyles" */
 /* Story Journal Styles - Immersive narrative presentation */
 .journal-container {
@@ -447,45 +475,62 @@ var saveAs=saveAs||navigator.msSaveBlob&&navigator.msSaveBlob.bind(navigator)||f
     border-top: 1px solid var(--journal-border);
 }
 /* twine-user-stylesheet #4: "PeopleCotStyles" */
-/* [ui] people_page = "cot": CoT's People and View Person dialogs. */
-.social .shop-filter-toolbar { border: 1px solid var(--theme-border, #555); border-radius: 8px; padding: 6px 10px; cursor: pointer; }
-.social .shop-filter-toolbar-header { display: flex; justify-content: space-between; align-items: center; }
-.social .shop-filter-toolbar-header-minrestore a { font-family: "tme-fa-icons"; text-decoration: none; }
-.social .shop-search { display: flex; align-items: center; gap: 6px; margin-top: 8px; cursor: default; }
-.social .social-search-input { flex: 1; }
-.social .social-search-input input { width: 100%; box-sizing: border-box; }
-.social #social-sort a { display: inline-block; margin: 4px 10px 0 0; }
-.social .social-sort-relevance { display: inline-block; }
-.social .tabgroup-bar, .view-person .tabgroup-bar { display: flex; flex-wrap: wrap; gap: 4px; border-bottom: 1px solid var(--theme-border, #555); }
-.social .tabgroup-button, .view-person .tabgroup-button { background: transparent; border: 1px solid transparent; border-bottom: none; border-radius: 6px 6px 0 0; padding: 6px 10px; cursor: pointer; color: inherit; }
-.social .tabgroup-button.active, .view-person .tabgroup-button.active { border-color: var(--theme-border, #555); background: rgba(255, 255, 255, 0.06); }
-.social .tabgroup-button-emoji { margin-right: 4px; }
-.social .tabgroup-content, .view-person .tabgroup-content { padding-top: 10px; }
-.social .view-people-title { display: flex; align-items: center; gap: 10px; margin-bottom: 8px; }
+/* [ui] people_page = "cot": the People and View Person pages, in the sidebar's look (P80). */
+/* "N here", on the button's right edge (as .nav-badge on Quests). */
+.nav-here { position: absolute; right: 34px; top: 50%; transform: translateY(-50%); pointer-events: none; font-size: 12px; color: var(--theme-text-muted, #a9a6bd); }
+.nav-here:last-child { right: 10px; }
+
+.cot-head { display: flex; align-items: center; gap: 14px; flex-wrap: wrap; margin: 0 0 18px; }
+.cot-head .cot-page-title { margin: 0; font-size: 1.6em; }
+.cot-head > a.link-internal { display: inline-flex; align-items: center; min-height: 40px; padding: 0 14px; border-radius: 10px; background: var(--theme-surface, #262536); border: 1px solid var(--theme-border, #383650); color: var(--theme-text, inherit); text-decoration: none; font-weight: bold; cursor: pointer; }
+.cot-head > a.link-internal:hover { background: var(--theme-surface-hover, #2f2d48); }
+.cot-head-meta { margin-left: auto; color: var(--theme-text-muted, #a9a6bd); font-size: 0.9em; }
+
+.social .social-search-input { margin-left: auto; display: flex; align-items: center; gap: 8px; min-height: 40px; padding: 0 12px; width: 240px; max-width: 100%; box-sizing: border-box; border-radius: 10px; background: var(--theme-surface, #1f1e29); border: 1px solid var(--theme-border, #383650); color: var(--theme-text-muted, #a9a6bd); }
+.social .social-search-input input { flex: 1; min-width: 0; background: transparent; border: 0; outline: none; color: var(--theme-text, inherit); font: inherit; padding: 0; }
+.social .tabgroup-bar { display: flex; flex-wrap: wrap; gap: 6px; padding-bottom: 10px; border-bottom: 1px solid var(--theme-border, #383650); }
+.social .tabgroup-button { display: inline-flex; align-items: center; gap: 6px; min-height: 38px; padding: 0 14px; border-radius: 999px; cursor: pointer; font: inherit; font-size: 0.9em; font-weight: bold; background: var(--theme-surface, #1f1e29); color: var(--theme-text, inherit); border: 1px solid var(--theme-border, #383650); }
+.social .tabgroup-button.active { background: var(--theme-text, #ece9f5); color: var(--theme-bg, #16151d); border-color: var(--theme-text, #ece9f5); }
+.social .tabgroup-button.is-empty:not(.active) { background: transparent; opacity: 0.55; }
+.social .tabgroup-button-count { font-size: 0.85em; padding: 0 7px; border-radius: 999px; background: rgba(127, 127, 127, 0.22); }
+.social .tabgroup-content { padding-top: 14px; }
+.social .view-people-title { display: flex; align-items: center; gap: 10px; margin-bottom: 10px; color: var(--theme-text-muted, #a9a6bd); font-size: 0.9em; }
 .social .view-people-title > div:first-child { flex: 1; }
-.social .view-people-page-button-container button, .view-person #view-people-backward { cursor: pointer; padding: 2px 8px; }
-.social .view-people-list { display: grid; grid-template-columns: repeat(auto-fill, minmax(190px, 1fr)); gap: 8px; }
-.social .view-people-person { border: 1px solid var(--theme-border, #555); border-radius: 8px; padding: 8px 10px; cursor: pointer; }
+.social .view-people-page-button-container button { cursor: pointer; min-height: 32px; padding: 0 10px; border-radius: 8px; }
+.social .view-people-list { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 12px; }
+.social .view-people-person { background: var(--theme-surface, #1f1e29); border: 1px solid var(--theme-border, #383650); border-radius: 12px; padding: 14px; cursor: pointer; display: flex; flex-direction: column; gap: 10px; min-width: 0; }
+.social .view-people-person:hover, .social .view-people-person:focus { background: var(--theme-surface-hover, #2a2840); outline: none; }
+.social .view-people-person-header { display: flex; align-items: center; gap: 12px; }
+.social .people-avatar { width: 44px; height: 44px; border-radius: 50%; flex-shrink: 0; display: flex; align-items: center; justify-content: center; font-weight: bold; background: var(--theme-surface-alt, #34324c); }
+.social .people-card-id { display: flex; flex-direction: column; min-width: 0; }
 .social .view-people-person-name { font-weight: bold; }
-.social .view-people-person-niche { font-size: 0.85em; opacity: 0.7; }
-.social .view-people-list-footer, .social .view-people-empty { margin-top: 10px; opacity: 0.8; }
-.social .status-meter-labeled, .view-person .status-meter-labeled { display: grid; grid-template-columns: auto 1fr; gap: 2px 8px; align-items: center; margin-top: 6px; font-size: 0.85em; }
-.view-person .npc-display-status-meters { display: flex; flex-wrap: wrap; gap: 12px; }
-.view-person .npc-display-status-meter-container { flex: 1; min-width: 120px; }
-.people-meter { display: inline-block; width: 100%; height: 8px; border-radius: 4px; background: rgba(255, 255, 255, 0.12); overflow: hidden; vertical-align: middle; }
-.people-meter-fill { display: block; height: 100%; background: var(--theme-accent, #7ec8e3); }
-.view-person .npc-display-identity { display: flex; align-items: center; gap: 12px; margin: 8px 0; }
-.view-person .npc-display-avatar { width: 56px; height: 56px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 1.3em; font-weight: bold; background: rgba(255, 255, 255, 0.12); flex-shrink: 0; }
-.view-person .npc-display-fullname { font-size: 1.3em; font-weight: bold; }
-.view-person .npc-display-subtitles { font-size: 0.9em; opacity: 0.85; }
-.view-person .npc-display-infobubble-container { display: flex; flex-wrap: wrap; gap: 6px; margin-bottom: 6px; }
-.view-person .npc-display-infobubble { border: 1px solid var(--theme-border, #555); border-radius: 12px; padding: 2px 10px; font-size: 0.85em; }
-.view-person .display-npc-action-header { font-weight: bold; margin: 12px 0 6px; }
-.view-person .display-npc-button { display: inline-block; margin-right: 10px; }
-.view-person .people-talk-blocked { opacity: 0.45; }
-.view-person .people-schedule-link { margin-top: 12px; font-weight: bold; }
-.cot-page-title { margin: 0 0 12px; }
-.view-person .people-tip { margin-top: 10px; }
+.social .view-people-person-name a { color: var(--theme-text-strong, inherit); text-decoration: none; }
+.social .view-people-person-niche { font-size: 0.85em; color: var(--theme-text-muted, #a9a6bd); }
+.social .people-here-dot { margin-left: auto; display: inline-flex; align-items: center; gap: 6px; font-size: 12px; font-weight: bold; color: var(--theme-success, #3ecfb8); }
+.social .people-here-dot::before { content: ""; width: 8px; height: 8px; border-radius: 50%; background: currentColor; }
+.social .view-people-empty { color: var(--theme-text-muted, #a9a6bd); padding: 12px 0; }
+.status-meter-labeled { display: grid; grid-template-columns: max-content minmax(0, 1fr); gap: 6px 10px; align-items: center; font-size: 0.82em; color: var(--theme-text-muted, #a9a6bd); }
+.people-meter { display: block; width: 100%; height: 6px; border-radius: 3px; background: rgba(127, 127, 127, 0.25); overflow: hidden; }
+.people-meter-fill { display: block; height: 100%; background: var(--theme-accent, #3ecfb8); }
+.view-person .npc-display-container { display: flex; flex-direction: column; gap: 14px; max-width: 760px; }
+.view-person .person-card, .view-person .person-where { background: var(--theme-surface, #1f1e29); border: 1px solid var(--theme-border, #383650); border-radius: 14px; padding: 20px 22px; display: flex; flex-direction: column; gap: 16px; }
+.view-person .npc-display-identity { display: flex; align-items: center; gap: 16px; }
+.view-person .npc-display-avatar { width: 72px; height: 72px; border-radius: 50%; flex-shrink: 0; display: flex; align-items: center; justify-content: center; font-size: 1.5em; font-weight: bold; background: var(--theme-surface-alt, #34324c); }
+.view-person .npc-display-identity-contents { display: flex; flex-direction: column; gap: 2px; min-width: 0; }
+.view-person .npc-display-fullname { font-size: 1.5em; font-weight: bold; color: var(--theme-text-strong, inherit); }
+.view-person .npc-display-relationship { font-size: 0.9em; color: var(--theme-text-muted, #a9a6bd); }
+.view-person .npc-display-anonname { font-size: 0.9em; font-style: italic; color: var(--theme-text-muted, #a9a6bd); }
+.view-person .person-actions { display: flex; flex-wrap: wrap; gap: 10px; }
+.view-person .person-btn { display: inline-flex; align-items: center; gap: 8px; min-height: 44px; padding: 0 18px; border-radius: 10px; background: var(--theme-surface-hover, #262536); border: 1px solid var(--theme-accent, #5a56a0); color: var(--theme-text, inherit); text-decoration: none; font-weight: bold; cursor: pointer; }
+.view-person .npc-display-status-meters { font-size: 0.9em; color: var(--theme-text, inherit); gap: 10px 14px; }
+.view-person .npc-display-status-meters .people-meter { height: 8px; border-radius: 4px; }
+.view-person .person-where { gap: 10px; padding: 16px 22px; }
+.view-person .person-where-label { font-size: 11px; letter-spacing: 0.08em; text-transform: uppercase; font-weight: bold; color: var(--theme-text-muted, #a9a6bd); }
+.view-person .npc-display-infobubble-container { display: flex; flex-wrap: wrap; gap: 6px; }
+.view-person .npc-display-infobubble { align-self: flex-start; border: 1px solid var(--theme-border, #383650); border-radius: 999px; padding: 2px 12px; font-size: 0.85em; }
+.view-person .person-unknown { color: var(--theme-text-muted, #a9a6bd); }
+@media (max-width: 900px) { .social .view-people-list { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+@media (max-width: 700px) { .social .view-people-list { grid-template-columns: minmax(0, 1fr); } .social .social-search-input { width: 100%; } }
 
 /* [engine.people] system = "cot": the Personality bubbles and the want line. */
 .view-person .personality-traits-container { margin-top: 10px; }
@@ -10291,17 +10336,44 @@ setup.hintCategories = function () {
     return out;
 };
 
-// $selectedHintCats / $selectedHintStatuses, every box ticked at first (StoryHints.txt).
-// A category added by a later release starts ticked in an old save too.
-function filters() {
-    var v = State.variables;
-    if (!v.selectedHintCats) v.selectedHintCats = {};
-    setup.hintCategories().forEach(function (c) { if (v.selectedHintCats[c] === undefined) v.selectedHintCats[c] = true; });
-    if (!v.selectedHintStatuses) {
-        v.selectedHintStatuses = {};
-        STATUSES.forEach(function (s) { v.selectedHintStatuses[s] = true; });
-    }
+// The redesign (LO 2026-11-27, card P80): the same words in the sidebar's look. A coloured dot
+// per category, by its place in the file, so a category keeps its colour.
+var DOTS = ["#e8b04b", "#7aa2f7", "#3ecfb8", "#c792ea", "#f28fad", "#f2a65a", "#9bd36b", "#e07a7a"];
+function dot(cat) {
+    var i = Math.max(0, setup.hintCategories().indexOf(cat));
+    return '<span class="hint-dot" style="background:' + DOTS[i % DOTS.length] + '"></span>';
 }
+// What the page lists right now: every entry whose `when` holds, with its state.
+function visible() {
+    return setup.story_hints.filter(function (e) { return holds(e.when); })
+        .map(function (e) { return { entry: e, st: setup.hintState(e) }; });
+}
+function lineOf(x) { return x.st.text === "end" ? END_LINE : x.st.text; }
+function isDone(x) { return x.st.status === STATUSES[1]; }
+// $hints_seen: each storyline's line as she last saw it. Before the first opening nothing is
+// seen and nothing counts as changed, so a new game opens with no tags.
+setup.hintsChanged = function () {
+    var v = State.variables;
+    if (!v.hints_opened || !v.hints_seen) return {};
+    var out = {};
+    visible().forEach(function (x) {
+        var seen = v.hints_seen[x.entry.title];
+        if (seen !== lineOf(x)) out[x.entry.title] = seen === undefined ? "New" : "Updated";
+    });
+    return out;
+};
+function markSeen() {
+    var seen = {};
+    visible().forEach(function (x) { seen[x.entry.title] = lineOf(x); });
+    State.variables.hints_seen = seen;
+}
+// The sidebar's "N new", shown once the page has been opened (before that the button glows).
+setup.hintsBadgeHtml = function () {
+    var n = Object.keys(setup.hintsChanged()).length;
+    return n > 0 ? '<span class="nav-badge">' + n + ' new</span>' : '';
+};
+// The tags and the Done fold hold while she is on the page; the chips redraw without re-reading.
+setup.hintsUi = { tags: {}, doneOpen: false };
 
 // CoT's display rule (StoryHintWidgets.txt:7-90): walk the pairs; at the first that fails,
 // show the text of the last that passed, or "Keep exploring!" when none did. When all pass,
@@ -10317,70 +10389,78 @@ setup.hintState = function (entry) {
     return { status: "Completed ✅", text: prev, single: false };
 };
 
-// <<displaystoryhint>>: "Hint:", the text ("end" is CoT's line), then the walkthrough link.
-function hintLine(entry, text, color) {
-    var h = '<br><div class="indent hint-line" style="' + color + '"><b>Hint:</b> ' + (text === "end" ? END_LINE : text);
-    if (entry.walkthrough && setup.walkthroughs[entry.walkthrough]) {
-        h += '<br><br>For a detailed walkthrough, with potential spoilers, <a class="link-internal hints-see-here" data-wt="' +
-            esc(entry.walkthrough) + '">see here</a>.';
+// One storyline's card: the title, a tag when its line changed, the category with its dot, the
+// description in one muted line, then the line itself ("end" is CoT's end line), and a
+// "Walkthrough →" button where the storyline has one.
+function cardHtml(x, cls) {
+    var e = x.entry, tag = setup.hintsUi.tags[e.title], done = isDone(x);
+    var h = '<article class="hint-card' + (cls ? ' ' + cls : '') + (done ? ' hint-done' : '') + '" data-title="' + esc(e.title) + '">' +
+        '<div class="hint-card-head"><span class="hint-title">' + e.title + '</span>' +
+        (tag ? '<span class="hint-tag">' + tag + '</span>' : '') +
+        (done ? '<span class="hint-done-mark">Done</span>' : '') +
+        '<span class="hint-category">' + dot(e.category) + e.category + '</span></div>';
+    if (e.description) h += '<div class="hint-desc">' + e.description + '</div>';
+    h += '<div class="hint-line">' + lineOf(x) + '</div>';
+    if (!done && e.walkthrough && setup.walkthroughs[e.walkthrough]) {
+        h += '<div><button type="button" class="hint-wt hints-see-here" data-wt="' + esc(e.walkthrough) + '">Walkthrough →</button></div>';
     }
-    return h + '</div>';
+    return h + '</article>';
 }
 
-// <<statichinttext>>: the title, the category on the right, the description.
-function staticText(entry, color) {
-    return '<span style="' + color + '"><span class="large">' + entry.title + '</span>' +
-        '<span class="hint-category" style="float: right">' + entry.category + '</span><br><br>' +
-        '<div class="indent">' + (entry.description || "") + '<br></div></span>';
+// "Next up": the first open storyline whose category starts "Storyline", else the first open one.
+function nextUp(open) {
+    for (var i = 0; i < open.length; i++) if (/^Storyline/.test(open[i].entry.category)) return open[i];
+    return open[0] || null;
+}
+function chosenCat() {
+    var c = State.variables.hintCat;
+    return c && setup.hintCategories().indexOf(c) !== -1 ? c : "All";
 }
 
-// <<hintlist>>.
+// The chips, the open cards and the Done fold, redrawn when a chip or the fold is pressed.
 setup.hintsListHtml = function () {
-    filters();
-    var v = State.variables;
-    var anyStatus = STATUSES.some(function (s) { return v.selectedHintStatuses[s] === true; });
-    var anyCat = Object.keys(v.selectedHintCats).some(function (c) { return v.selectedHintCats[c] === true; });
-    if (!anyStatus) return "Select at least one status to display!";
-    if (!anyCat) return "Select at least category to display!";
-    var out = "";
-    setup.story_hints.forEach(function (entry) {
-        if (v.selectedHintCats[entry.category] !== true) return;
-        if (!holds(entry.when)) return;
-        var st = setup.hintState(entry);
-        if (v.selectedHintStatuses[st.status] !== true) return;
-        if (st.status === "Completed ✅") {
-            var grey = "color: #aaa";
-            out += '<div class="rounded-border" style="overflow: hidden">' + staticText(entry, grey) +
-                '<div><span style="float: right">✅</span><span>' + hintLine(entry, st.text, grey) + '</span></div></div><br>';
-        } else {
-            var c = "color: inherit";
-            out += '<div class="rounded-border">' + staticText(entry, c) + hintLine(entry, st.text, c) +
-                (st.single ? '<br>' : '') + '</div><br>';
-        }
-    });
-    return out;
+    var all = visible(), cat = chosenCat();
+    var open = all.filter(function (x) { return !isDone(x); });
+    var next = nextUp(open);
+    var inCat = function (x) { return cat === "All" || x.entry.category === cat; };
+    var cards = open.filter(function (x) { return x !== next && inCat(x); });
+    var done = all.filter(function (x) { return isDone(x) && inCat(x); });
+    var h = '';
+    if (cards.length) h += '<div class="hint-grid">' + cards.map(function (x) { return cardHtml(x); }).join("") + '</div>';
+    else if (!done.length) h += '<div class="hint-empty">Keep exploring!</div>';
+    if (done.length) {
+        var on = setup.hintsUi.doneOpen;
+        h += '<div class="hint-done-fold"><button type="button" class="hint-done-toggle" aria-expanded="' + on + '">' +
+            (on ? '▾' : '▸') + ' Done (' + done.length + ')</button>';
+        if (on) h += '<div class="hint-grid">' + done.map(function (x) { return cardHtml(x); }).join("") + '</div>';
+        h += '</div>';
+    }
+    return h;
 };
-
-function box(label, attr, on) {
-    return '<span class="hint-category-label"><label><input type="checkbox" ' + attr + (on ? ' checked' : '') +
-        '> ' + label + '</label></span>';
+function chipsHtml() {
+    var cats = [];
+    visible().forEach(function (x) { if (cats.indexOf(x.entry.category) === -1) cats.push(x.entry.category); });
+    var cur = chosenCat();
+    return ["All"].concat(cats).map(function (c) {
+        return '<button type="button" class="hint-chip' + (c === cur ? ' active' : '') + '" aria-pressed="' + (c === cur) +
+            '" data-hint-cat="' + esc(c) + '">' + (c === "All" ? '' : dot(c)) + c + '</button>';
+    }).join("");
 }
 
-// StoryHints: the filter table, then the list.
+// The whole page: the header (← Back, "Quests", the counts), "Next up", the chips and the list.
+// Opening it reads which lines changed since last time, then marks them all seen.
 setup.hintsHtml = function () {
-    filters();
-    var v = State.variables;
-    var cats = setup.hintCategories().map(function (c) {
-        return box(c, 'data-hint-cat="' + esc(c) + '"', v.selectedHintCats[c] === true);
-    }).join("");
-    var stats = STATUSES.map(function (s) {
-        return box(s, 'data-hint-status="' + esc(s) + '"', v.selectedHintStatuses[s] === true);
-    }).join("");
-    return '<div id="hintfilters"><table class="options-table">' +
-        '<tr><td class="options-col-label">Categories</td><td>' + cats + '</td></tr>' +
-        '<tr><td>&nbsp;</td></tr>' +
-        '<tr><td class="options-col-label">Progress</td><td>' + stats + '</td></tr>' +
-        '</table></div><br><br><div id="hintlist" class="nokeys">' + setup.hintsListHtml() + '</div>';
+    setup.hintsUi.tags = setup.hintsChanged();
+    markSeen();
+    var all = visible();
+    var open = all.filter(function (x) { return !isDone(x); });
+    var next = nextUp(open);
+    var h = '<div class="cot-head"><a class="link-internal cot-back" tabindex="0">← Back</a>' +
+        '<h2 class="cot-page-title">Quests</h2><span class="cot-head-meta">' + open.length + ' open · ' +
+        (all.length - open.length) + ' done</span></div>';
+    if (next) h += '<section class="hint-next"><div class="hint-next-label">Next up</div>' + cardHtml(next, 'hint-next-card') + '</section>';
+    return h + '<div id="hintfilters" class="hint-chips">' + chipsHtml() + '</div>' +
+        '<div id="hintlist" class="nokeys">' + setup.hintsListHtml() + '</div>';
 };
 
 // The sidebar button goes to the Quests page, which marks itself seen (CoT's
@@ -10408,7 +10488,9 @@ var MARK = { done: "✅", todo: "➡️", idea: "💡", up_to_you: "❓", stop: 
 // shows yet; an idea / up-to-you / stop line shows while its `when` holds, and a stop ends it.
 setup.walkthroughHtml = function (id) {
     var w = setup.walkthroughs[id];
-    var h = '<br><button id="help-backward" tabindex="0" title="Back to hints page" aria-label="Back to hints page" type="button" role="button">◀</button> <b>Back to hints page</b><br>';
+    // One back, at the top: to the Quests page (P80).
+    var h = '<div class="cot-head"><a class="link-internal" id="help-backward" tabindex="0">← Quests</a>' +
+        '<h2 class="cot-page-title">' + esc(setup.walkthroughTitle(id)) + '</h2></div>';
     if (!w) return h;
     if (w.guard && !holds(w.guard.when)) return h + '<div>' + days(w.guard.text) + '</div>';
     h += '<div><span class="notice" style="font-size: larger">Overview</span><br><br>' + days(w.overview) +
@@ -10439,19 +10521,25 @@ setup.walkthroughTitle = function (id) {
     return "Walkthrough: " + (w ? w.title : "");
 };
 
-// A box redraws the list (StoryHints.txt's change handler).
-jQuery(document).on("change", "#hintfilters input", function () {
-    filters();
-    var v = State.variables;
+// A chip shows one category ($hintCat; "All" clears it) and redraws the chips and the list.
+jQuery(document).on("click", "#hintfilters .hint-chip", function () {
     var cat = this.getAttribute("data-hint-cat");
-    if (cat !== null) v.selectedHintCats[cat] = this.checked;
-    else v.selectedHintStatuses[this.getAttribute("data-hint-status")] = this.checked;
+    if (cat === "All") delete State.variables.hintCat;
+    else State.variables.hintCat = cat;
+    jQuery("#hintfilters").empty().append(chipsHtml());
     jQuery("#hintlist").empty().append(setup.hintsListHtml());
 });
-jQuery(document).on("click", "#hintlist .hints-see-here", function () {
+jQuery(document).on("click", "#hintlist .hint-done-toggle", function () {
+    setup.hintsUi.doneOpen = !setup.hintsUi.doneOpen;
+    jQuery("#hintlist").empty().append(setup.hintsListHtml());
+});
+jQuery(document).on("click", ".hints-page .hints-see-here", function () {
     setup.openWalkthrough(this.getAttribute("data-wt"));
 });
 jQuery(document).on("click", "#help-backward", function () { Engine.play("QuestsPage"); });
+// ← Back at the top of the Quests and People pages: back to the game, as the old bottom link did.
+// Bound under one name, so the People script (which binds it too) never doubles it.
+jQuery(document).off("click.cotback").on("click.cotback", ".cot-back", function () { setup.smartBack(); });
 })();
 /* twine-user-script #6: "PeopleCotScript" */
 (function () {
@@ -10502,10 +10590,15 @@ setup.peopleHere = function () {
     var at = setup.getNpcsAtLocation(loc);
     return setup.people_order.filter(function (s) { return at.indexOf(s) !== -1 && !hiddenNpc(s) && npcOf(s); });
 };
-// "People (N)" where the passage is a place (CoT's passage_safe), else "People".
-setup.peopleButtonLabel = function () {
+// The sidebar button reads "People", with "N here" beside it where the passage is a place
+// (CoT's passage_safe) and someone is here (P80; it was "People (N)").
+setup.peopleHereCount = function () {
     var safe = setup.isRerenderSafe ? setup.isRerenderSafe(State.passage) : true;
-    return safe ? "People (" + setup.peopleHere().length + ")" : "People";
+    return safe ? setup.peopleHere().length : 0;
+};
+setup.peopleHereBadgeHtml = function () {
+    var n = setup.peopleHereCount();
+    return n > 0 ? '<span class="nav-here">' + n + ' here</span>' : '';
 };
 setup.peopleTabMembers = function (tabId) {
     if (tabId === "here") return setup.peopleHere();
@@ -10514,22 +10607,7 @@ setup.peopleTabMembers = function (tabId) {
     });
 };
 
-function traitValue(slug, key) {
-    var t = (npcOf(slug) || {}).core_traits || {};
-    return Number(t[key]) || 0;
-}
-// <<sortpeople>>: the sort links' orders; relevance is the file order.
-function sorted(list) {
-    var by = State.variables.socialsort;
-    if (!by || by === "relevance") return list.slice();
-    var m = /^(.*) (high-low|low-high)$/.exec(by);
-    return list.slice().sort(function (a, b) {
-        if (by === "alpha") return setup.peopleShownName(a).localeCompare(setup.peopleShownName(b));
-        if (by === "z-alpha") return setup.peopleShownName(b).localeCompare(setup.peopleShownName(a));
-        if (m) return m[2] === "high-low" ? traitValue(b, m[1]) - traitValue(a, m[1]) : traitValue(a, m[1]) - traitValue(b, m[1]);
-        return 0;
-    });
-}
+// The list is in file order (CoT's "relevance"); the sort links went with P80.
 function meterRows(slug) {
     return setup.peopleSys.meterRows(slug, setup.castTraitRows ? setup.castTraitRows(slug, npcOf(slug)) : []);
 }
@@ -10540,7 +10618,8 @@ function meter(pct) {
 // <<displaypeoplebody>>.
 setup.peopleBodyHtml = function () {
     var tab = setup.people_tabs[setup.peopleUi.tab] || setup.people_tabs[0];
-    var list = sorted(setup.peopleTabMembers(tab.id));
+    var list = setup.peopleTabMembers(tab.id);
+    var hereNow = setup.peopleHere();
     var q = (setup.peopleUi.search || "").toLowerCase();
     if (q) list = list.filter(function (s) { return setup.peopleShownName(s).toLowerCase().indexOf(q) !== -1; });
     if (list.length === 0) {
@@ -10562,54 +10641,44 @@ setup.peopleBodyHtml = function () {
     }
     h += '</div><div class="view-people-list">';
     shown.forEach(function (slug) {
-        var known = setup.peopleKnown(slug), npc = npcOf(slug) || {};
-        h += '<div class="view-people-person" data-slug="' + esc(slug) + '"><div class="view-people-person-header">' +
-            '<div class="view-people-person-name"><a class="link-internal" data-slug="' + esc(slug) + '">' + esc(setup.peopleShownName(slug)) + '</a></div></div>';
-        if (known && info(slug).role) h += '<div class="view-people-person-niche faded small">' + esc(info(slug).role) + '</div>';
-        h += '<div class="status-meter-labeled">';
+        var known = setup.peopleKnown(slug), name = setup.peopleShownName(slug);
+        // A card (P80): the initials circle ("??" for a stranger), the name, the role, a "Here"
+        // dot when they are in her room, then the meters, each label beside its bar.
+        h += '<div class="view-people-person" data-slug="' + esc(slug) + '" tabindex="0"><div class="view-people-person-header">' +
+            '<div class="people-avatar" aria-hidden="true">' + (known ? esc(initials(name)) : "??") + '</div>' +
+            '<div class="people-card-id"><div class="view-people-person-name"><a class="link-internal" data-slug="' + esc(slug) + '">' + esc(name) + '</a></div>';
+        if (known && info(slug).role) h += '<div class="view-people-person-niche">' + esc(info(slug).role) + '</div>';
+        h += '</div>';
+        if (hereNow.indexOf(slug) !== -1) h += '<span class="people-here-dot">Here</span>';
+        h += '</div><div class="status-meter-labeled">';
         meterRows(slug).forEach(function (r) { h += '<span class="status-meter-label">' + esc(r.label) + '</span>' + meter(r.pct); });
         h += '</div></div>';
     });
-    return h + '</div><div class="view-people-list-footer">Click a person to see more.</div>';
+    return h + '</div>';
 };
 
+// The tabs as pills with a count (P80). A tab with no one in it yet is greyed, and still opens
+// to show its empty line.
 function tabBarHtml() {
     return setup.people_tabs.map(function (t, i) {
-        var on = i === setup.peopleUi.tab;
-        return '<button class="tabgroup-button' + (on ? ' active' : '') + '" data-tab-index="' + i +
+        var on = i === setup.peopleUi.tab, n = setup.peopleTabMembers(t.id).length;
+        return '<button class="tabgroup-button' + (on ? ' active' : '') + (n === 0 ? ' is-empty' : '') + '" data-tab-index="' + i +
             '" type="button" role="tab" aria-selected="' + on + '"><span class="tabgroup-button-emoji">' + t.emoji +
-            '</span><span class="tabgroup-button-label">' + esc(t.label) + '</span></button>';
+            '</span><span class="tabgroup-button-label">' + esc(t.label) + '</span><span class="tabgroup-button-count">' + n + '</span></button>';
     }).join("");
 }
 
-// <<socialfiltertoolbar>>: "Filter Options", folded until opened; the search, "Clear all
-// filters" and the sort links. CoT's badge and personality filters are left out (no system).
-function toolbarHtml() {
-    var open = !!State.variables.showsocialfilter;
-    var h = '<div id="social-filter-toolbar-content"><br><div id="shop-filter-toolbar" class="shop-filter-toolbar">' +
-        '<div class="shop-filter-toolbar-header"><span class="shop-filter-toolbar-header-text bold">Filter Options</span>' +
-        '<span id="social-filter-minrestore" class="shop-filter-toolbar-header-minrestore nokeys"><a class="link-internal">' +
-        (open ? "" : "") + '</a></span></div>';
-    if (open) {
-        h += '<div class="shop-search-container nokeys"><div class="shop-search"><div class="shop-search-icon">🔎</div>' +
-            '<div class="social-search-input"><input type="text" autocomplete="off" value="' + esc(setup.peopleUi.search) + '"></div>' +
-            '<div class="shop-clear-button"><a class="link-internal people-search-clear">×</a></div></div></div>';
-        h += '<br><a class="link-internal people-clear-filters">Clear all filters</a><br>';
-        var sorts = [["alpha", "Sort by name (a -> z)"], ["z-alpha", "Sort by name (z -> a)"]];
-        (setup.cast_show_traits || []).forEach(function (k) {
-            var label = (setup.traitLabel ? setup.traitLabel(k) : k).toLowerCase();
-            sorts.push([k + " high-low", "Sort by " + label + " (high → low)"]);
-            sorts.push([k + " low-high", "Sort by " + label + " (low → high)"]);
-        });
-        h += '<div id="social-sort">' + sorts.map(function (s) {
-            return '<a class="link-internal people-sort" data-sort="' + esc(s[0]) + '">' + esc(s[1]) + '</a>';
-        }).join(" ") + ' <span class="social-sort-relevance"><a class="link-internal people-sort" data-sort="relevance">Sort by relevance</a></span></div>';
-    }
-    return h + '</div></div>';
+// The header (P80): ← Back, "People", and the search box on the right, always open. CoT's
+// "Filter Options" bar and its sort links went.
+function headHtml() {
+    return '<div class="cot-head"><a class="link-internal cot-back" tabindex="0">← Back</a><h2 class="cot-page-title">People</h2>' +
+        '<label class="social-search-input"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">' +
+        '<circle cx="11" cy="11" r="7"></circle><path d="M20 20l-4-4"></path></svg>' +
+        '<input type="text" autocomplete="off" placeholder="Search" aria-label="Search people" value="' + esc(setup.peopleUi.search) + '"></label></div>';
 }
 
 setup.peopleDialogHtml = function () {
-    return toolbarHtml() + '<br><div class="tabgroup tabgroup-people"><div class="tabgroup-bar">' + tabBarHtml() +
+    return headHtml() + '<div class="tabgroup tabgroup-people"><div class="tabgroup-bar" role="tablist">' + tabBarHtml() +
         '</div><div class="tabgroup-content" role="tabpanel"><div id="display-people-body">' + setup.peopleBodyHtml() + '</div></div></div>';
 };
 
@@ -10619,15 +10688,20 @@ function showPeople() {
     setup.peopleUi.page = 0;
     Engine.play("CastPage");
 }
-// The sidebar button opens on People Here with a clear search.
+// The sidebar button opens with a clear search, on People Here when someone is here, else on the
+// first tab with someone in it (P80).
 setup.peopleOpen = function () {
-    setup.peopleUi.tab = 0;
+    var tabs = setup.people_tabs, pick = 0;
+    for (var i = 0; i < tabs.length; i++) {
+        if (setup.peopleTabMembers(tabs[i].id).length > 0) { pick = i; break; }
+    }
+    setup.peopleUi.tab = pick;
     setup.peopleUi.search = "";
     showPeople();
 };
 function redrawBody() { jQuery("#display-people-body").empty().append(setup.peopleBodyHtml()); }
 
-// ── View Person (DisplayNPC.txt) ──
+// ── View Person (DisplayNPC.txt), redesigned (P80) ──
 function initials(name) {
     var parts = String(name || "").trim().split(/\s+/);
     return (parts[0] || "").charAt(0) + (parts.length > 1 ? parts[parts.length - 1].charAt(0) : "");
@@ -10639,81 +10713,59 @@ function hasPhoneThread(slug) {
     var convs = (setup.phone_data && setup.phone_data.conversations) || [];
     return convs.some(function (c) { return c.npc === slug && trig[c.id]; });
 }
-// <<displaynpctalkto>>: with them, where a Talk row is; greyed when its costs are short, as
-// the portrait is; "again" once used today (CoT's $interactionstoday).
-function talkOf(slug) {
-    if (setup.isRerenderSafe && !setup.isRerenderSafe(State.passage)) return null;
-    var loc = here();
-    if (!loc || setup.getNpcsAtLocation(loc).indexOf(slug) === -1) return null;
-    var pick = (setup.selectNpcPortraitCanvasesForLocation(loc) || {})[slug];
-    if (pick) {
-        var rec = ((State.variables.game_state || {}).trigger_history || {})[String(pick.id)];
-        return { passage: pick.passageName, blocked: false,
-                 again: !!(rec && rec.dayKey === setup.getCurrentDayKey() && rec.dayCount > 0) };
-    }
-    var list = ((setup.help_data || {}).locationCanvases || {})[loc] || [];
-    for (var i = 0; i < list.length; i++) {
-        var c = list[i];
-        if (!c.isRepeatable || (c.triggerMode || "manual") === "random" || c.npcId !== slug || c.hiddenFromLocation) continue;
-        if (!setup.isCanvasSelectable(c) || !setup.canTriggerActivity(c.name || c.id, c.maxPerDay)) continue;
-        if (c.costs && c.costs.length > 0 && !setup.checkCostsAffordable(c.costs)) return { passage: c.passageName, blocked: true, again: false };
-    }
-    return null;
+// The gender is on the person, or comes from the people system when it is on
+// (setup.peopleNpcGender, generators/people_system.py).
+function pronoun(npc, slug) {
+    var g = String((npc || {}).gender || (setup.peopleNpcGender ? setup.peopleNpcGender(slug) : "") || "").toLowerCase();
+    return g === "male" ? "him" : g === "female" ? "her" : "them";
 }
 
+// One "← People" at the top; the identity (circle, name, role, relationship, the stranger line);
+// one button, Schedule (LO 2026-11-27: "remove talk, only schedule"; talking stays in the room);
+// the meters, label beside bar; then "Where to find <him/her>": the card's tip and the phone badge.
 setup.peopleViewHtml = function (slug) {
     var npc = npcOf(slug) || {}, known = setup.peopleKnown(slug), stranger = info(slug).stranger_name || "";
     var name = npc.name || slug;
-    var h = '<div class="npc-display-container"><div class="npc-display-header"><div class="npc-display-header-buttons">' +
-        '<button id="view-people-backward" tabindex="0" title="Return to nearby people menu" aria-label="Return to nearby people menu" type="button" role="button">◀</button></div>' +
-        '<div class="npc-display-identity"><div class="npc-display-avatar">' + (known ? esc(initials(name)) : "??") + '</div>' +
+    var h = '<div class="cot-head"><a class="link-internal" id="view-people-backward" tabindex="0">← People</a></div>' +
+        '<div class="npc-display-container"><section class="person-card">' +
+        '<div class="npc-display-identity"><div class="npc-display-avatar" aria-hidden="true">' + (known ? esc(initials(name)) : "??") + '</div>' +
         '<div class="npc-display-identity-contents">';
     h += known ? '<div class="npc-display-fullname npc-display-fullname-known">' + esc(name) + '</div>'
                : '<div class="npc-display-fullname npc-display-fullname-unknown">???</div>';
     if (known) {
-        var subs = [info(slug).role, npc.relationship].filter(Boolean).map(function (s) {
-            return '<span class="npc-display-subtitle">' + esc(s) + '</span>';
-        });
-        if (subs.length) h += '<div class="npc-display-subtitles">' + subs.join(" · ") + '</div>';
+        if (info(slug).role) h += '<div class="npc-display-subtitle">' + esc(info(slug).role) + '</div>';
+        if (npc.relationship) h += '<div class="npc-display-relationship">' + esc(npc.relationship) + '</div>';
     }
-    if (stranger) h += '<div class="npc-display-anonname" style="font-style: italic; font-size: 0.85em;">' + aOrAn(stranger) + ' ' + esc(stranger) + '.</div>';
+    if (stranger) h += '<div class="npc-display-anonname">' + aOrAn(stranger) + ' ' + esc(stranger) + '.</div>';
     h += '</div></div>';
-    if (known && hasPhoneThread(slug)) {
-        h += '<div class="npc-display-infobubble-container"><div class="npc-display-infobubble npc-display-infobubble-contact" title="You have their number and you can call or text them.">' +
-            '<span class="npc-display-infobubble-emoji">📱</span> Phone contact</div></div>';
+    if (known && setup.castHasSchedule && setup.castHasSchedule(slug)) {
+        h += '<div class="person-actions"><a class="link-internal person-btn people-schedule" data-slug="' + esc(slug) + '" tabindex="0">' +
+            '<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">' +
+            '<rect x="3" y="5" width="18" height="16" rx="2"></rect><path d="M3 10h18M8 3v4M16 3v4"></path></svg>Schedule</a></div>';
     }
-    h += '</div><div class="tabgroup"><div class="tabgroup-bar"><button class="tabgroup-button active" type="button" role="tab" aria-selected="true">' +
-        '<span class="tabgroup-button-label">Overview</span></button></div><div class="tabgroup-content" role="tabpanel">';
     if (known) {
         var rows = meterRows(slug);
         if (rows.length) {
             h += '<div class="status-meter-labeled npc-display-status-meters">' + rows.map(function (r) {
-                return '<div class="npc-display-status-meter-container"><div class="npc-display-status-meter"><span class="status-meter-label">' +
-                    esc(r.label) + '</span><br><br>' + meter(r.pct) + '</div></div>';
+                return '<span class="status-meter-label">' + esc(r.label) + '</span>' + meter(r.pct);
             }).join("") + '</div>';
         }
     }
+    // the personality bubbles (generators/people_system.py splices them in here)
     if (known) h += setup.peopleSys.viewHtml(slug);
-    var talk = talkOf(slug);
-    h += '<div class="display-npc-contact-container">';
-    if (talk) {
-        var who = known ? name : "them";
-        var text = (talk.again ? "💭 " : "💬 ") + "Talk to " + who + (talk.again ? " again" : "");
-        h += '<div class="display-npc-action-header">Actions</div><span class="display-npc-button">' + (talk.blocked
-            ? '<span class="people-talk-blocked">' + esc(text) + '</span>'
-            : '<a class="link-internal people-talk" data-passage-to="' + esc(talk.passage) + '">' + esc(text) + '</a>') + '</span>';
-    }
-    h += '</div>';
+    h += '</section>';
     if (known) {
-        if (setup.castHasSchedule && setup.castHasSchedule(slug)) {
-            h += '<div class="people-schedule-link"><a class="link-internal people-schedule" data-slug="' + esc(slug) + '">🗓 Schedule</a></div>';
+        var card = setup.pickQuestsCard(slug), phone = hasPhoneThread(slug);
+        if ((card && card.tip) || phone) {
+            h += '<section class="person-where"><div class="person-where-label">Where to find ' + pronoun(npc, slug) + '</div>';
+            if (card && card.tip) h += '<div class="people-tip">' + esc(card.tip) + '</div>';
+            if (phone) h += '<div class="npc-display-infobubble npc-display-infobubble-contact" title="You have their number and you can call or text them.">Phone contact</div>';
+            h += '</section>';
         }
-        var card = setup.pickQuestsCard(slug);
-        if (card && card.tip) h += '<div class="people-tip">' + esc(card.tip) + '</div>';
     } else {
-        h += "You're not sure who this is.";
+        h += '<div class="person-unknown">You\'re not sure who this is.</div>';
     }
-    return h + '</div></div></div>';
+    return h + '</div>';
 };
 
 setup.peopleView = function (slug) {
@@ -10733,48 +10785,32 @@ $d.on("click", ".social .tabgroup-button", function () {
 });
 // The whole card opens the person (SocialWidgets.txt: the card clicks its name).
 $d.on("click", ".social .view-people-person", function () { setup.peopleView(this.getAttribute("data-slug")); });
+$d.on("keydown", ".social .view-people-person", function (ev) {
+    if (ev.key === "Enter" || ev.key === " ") { ev.preventDefault(); setup.peopleView(this.getAttribute("data-slug")); }
+});
 $d.on("click", "#view-people-page-backward", function () { setup.peopleUi.page -= 1; redrawBody(); });
 $d.on("click", "#view-people-page-forward", function () { setup.peopleUi.page += 1; redrawBody(); });
 $d.on("click", "#view-people-backward", function () { showPeople(); });
-$d.on("click", ".social .shop-filter-toolbar-header-minrestore a", function () {
-    State.variables.showsocialfilter = !State.variables.showsocialfilter;
-    jQuery("#social-filter-toolbar-content").replaceWith(toolbarHtml());
-});
-// A click on the toolbar's bare background folds or opens it too.
-$d.on("click", ".social .shop-filter-toolbar", function (ev) {
-    if (jQuery(ev.target).is("input, label, select, textarea, .link-internal")) return;
-    jQuery(this).find(".shop-filter-toolbar-header-minrestore a").trigger("click");
-});
 var debounce = null;
 $d.on("input", ".social .social-search-input input[type=text]", function () {
     setup.peopleUi.search = jQuery(this).val();
     clearTimeout(debounce);
     debounce = setTimeout(function () { setup.peopleUi.page = 0; redrawBody(); }, 250);
 });
-function clearSearch() {
-    jQuery(".social-search-input input[type=text]").val("");
-    setup.peopleUi.search = "";
-    setup.peopleUi.page = 0;
-    redrawBody();
-}
-$d.on("click", ".social .people-search-clear", clearSearch);
-$d.on("click", ".social .people-clear-filters", clearSearch);
-$d.on("click", ".social .people-sort", function () {
-    var by = this.getAttribute("data-sort");
-    if (by === "relevance") delete State.variables.socialsort;
-    else State.variables.socialsort = by;
-    setup.peopleUi.page = 0;
-    redrawBody();
-});
-$d.on("click", ".view-person .people-talk", function () {
-    Engine.play(this.getAttribute("data-passage-to"));
-});
 // The schedule is the old pop-up (setup.castOpenSchedule): day chips, today picked
 // (LO 2026-11-26: "a schedule modal in the people's page should work like before").
 $d.on("click", ".view-person .people-schedule", function () {
     setup.castOpenSchedule(this.getAttribute("data-slug"));
 });
+// ← Back at the top: back to the game. Bound under one name, so the Quests script (which binds it
+// too) never doubles it.
+$d.off("click.cotback").on("click.cotback", ".cot-back", function () { setup.smartBack(); });
 })();
+
+setup.peopleNpcGender = function (slug) {
+    var n = ((setup.people_cfg || {}).npcs || {})[slug];
+    return n ? n.gender || "" : "";
+};
 /* twine-user-script #7: "DevPageScript" */
 /* The dev screen (dev builds only). Renders into #dev-root on :passageend, so nothing on it
    is wikified; every button is a .dev-act with data-*, caught by one delegated listener. */
@@ -11782,9 +11818,9 @@ document.addEventListener("click", function (ev) {
 &lt;&lt;/widget&gt;&gt;
 
 &lt;&lt;widget &quot;journalButton&quot;&gt;&gt;
-&lt;!-- Quests - CoT&#39;s Hints page in a dialog; the button glows until it is first opened --&gt;
+&lt;!-- Quests - the button glows until it is first opened, then shows &quot;N new&quot; (P80) --&gt;
 &lt;div id=&quot;journal-btn-widget&quot;&gt;
-  &lt;&lt;if $hints_opened&gt;&gt;&lt;&lt;link &quot;Quests&quot;&gt;&gt;&lt;&lt;run setup.openHints()&gt;&gt;&lt;&lt;/link&gt;&gt;&lt;&lt;else&gt;&gt;&lt;span class=&quot;glow&quot;&gt;&lt;&lt;link &quot;Quests&quot;&gt;&gt;&lt;&lt;run setup.openHints()&gt;&gt;&lt;&lt;/link&gt;&gt;&lt;/span&gt;&lt;&lt;/if&gt;&gt;&lt;span class=&quot;nav-i&quot;&gt;📋&lt;/span&gt;
+  &lt;&lt;if $hints_opened&gt;&gt;&lt;&lt;link &quot;Quests&quot;&gt;&gt;&lt;&lt;run setup.openHints()&gt;&gt;&lt;&lt;/link&gt;&gt;&lt;&lt;print setup.hintsBadgeHtml()&gt;&gt;&lt;&lt;else&gt;&gt;&lt;span class=&quot;glow&quot;&gt;&lt;&lt;link &quot;Quests&quot;&gt;&gt;&lt;&lt;run setup.openHints()&gt;&gt;&lt;&lt;/link&gt;&gt;&lt;/span&gt;&lt;&lt;/if&gt;&gt;&lt;span class=&quot;nav-i&quot;&gt;📋&lt;/span&gt;
 &lt;/div&gt;
 &lt;&lt;/widget&gt;&gt;
 
@@ -14308,9 +14344,7 @@ document.addEventListener("click", function (ev) {
     &lt;&lt;if _card.tip&gt;&gt;&lt;div class=&quot;quests-tip&quot;&gt;💡 &lt;&lt;print _card.tip&gt;&gt;&lt;/div&gt;&lt;&lt;/if&gt;&gt;
   &lt;/div&gt;
 &lt;&lt;/if&gt;&gt;
-&lt;&lt;/widget&gt;&gt;</tw-passagedata><tw-passagedata pid="8" name="QuestsPage" tags="" position="975,100" size="100,100">&lt;&lt;nobr&gt;&gt;&lt;&lt;run State.variables.hints_opened = true&gt;&gt;&lt;h2 class=&quot;cot-page-title&quot;&gt;Quests&lt;/h2&gt;&lt;div class=&quot;hints-dialog hints-page&quot;&gt;&lt;&lt;print setup.hintsHtml()&gt;&gt;&lt;/div&gt;&lt;&lt;/nobr&gt;&gt;
-&lt;&lt;link &quot;← Back&quot;&gt;&gt;&lt;&lt;run setup.smartBack()&gt;&gt;&lt;&lt;/link&gt;&gt;</tw-passagedata><tw-passagedata pid="9" name="QuestsWalkthrough" tags="" position="1100,100" size="100,100">&lt;&lt;nobr&gt;&gt;&lt;h2 class=&quot;cot-page-title&quot;&gt;&lt;&lt;print setup.walkthroughTitle($hints_walkthrough)&gt;&gt;&lt;/h2&gt;&lt;div class=&quot;hints-dialog hints-page&quot;&gt;&lt;&lt;print setup.walkthroughHtml($hints_walkthrough)&gt;&gt;&lt;/div&gt;&lt;&lt;/nobr&gt;&gt;
-&lt;&lt;link &quot;← Back&quot;&gt;&gt;&lt;&lt;run setup.smartBack()&gt;&gt;&lt;&lt;/link&gt;&gt;</tw-passagedata><tw-passagedata pid="10" name="TipsPage" tags="" position="1225,100" size="100,100">&lt;&lt;nobr&gt;&gt;
+&lt;&lt;/widget&gt;&gt;</tw-passagedata><tw-passagedata pid="8" name="QuestsPage" tags="" position="975,100" size="100,100">&lt;&lt;nobr&gt;&gt;&lt;&lt;run State.variables.hints_opened = true&gt;&gt;&lt;div class=&quot;hints-page&quot;&gt;&lt;&lt;print setup.hintsHtml()&gt;&gt;&lt;/div&gt;&lt;&lt;/nobr&gt;&gt;</tw-passagedata><tw-passagedata pid="9" name="QuestsWalkthrough" tags="" position="1100,100" size="100,100">&lt;&lt;nobr&gt;&gt;&lt;div class=&quot;hints-page&quot;&gt;&lt;&lt;print setup.walkthroughHtml($hints_walkthrough)&gt;&gt;&lt;/div&gt;&lt;&lt;/nobr&gt;&gt;</tw-passagedata><tw-passagedata pid="10" name="TipsPage" tags="" position="1225,100" size="100,100">&lt;&lt;nobr&gt;&gt;
 &lt;&lt;set _tp = setup.tips_page || {}&gt;&gt;
 &lt;h2&gt;&lt;&lt;print _tp.title || &quot;Tips&quot;&gt;&gt;&lt;/h2&gt;
 &lt;div class=&quot;npc-section&quot;&gt;
@@ -18081,11 +18115,9 @@ try {
 
 &lt;&lt;link &quot;← Back&quot;&gt;&gt;&lt;&lt;run setup.smartBack()&gt;&gt;&lt;&lt;/link&gt;&gt;</tw-passagedata><tw-passagedata pid="401" name="NpcBusyPage" tags="" position="100,5100" size="100,100">&lt;&lt;nobr&gt;&gt;&lt;p&gt;&lt;&lt;print setup.presentFaceLine($npc_busy_slug)&gt;&gt;&lt;/p&gt;&lt;p&gt;&lt;&lt;link &quot;← Back&quot;&gt;&gt;&lt;&lt;run setup.smartBack()&gt;&gt;&lt;&lt;/link&gt;&gt;&lt;/p&gt;&lt;&lt;/nobr&gt;&gt;</tw-passagedata><tw-passagedata pid="402" name="CastWidgets" tags="widget nobr" position="225,5100" size="100,100">&lt;&lt;widget &quot;castButton&quot;&gt;&gt;
 &lt;div id=&quot;cast-btn-widget&quot;&gt;
-  &lt;&lt;set _peopleLabel to setup.peopleButtonLabel()&gt;&gt;&lt;&lt;link _peopleLabel&gt;&gt;&lt;&lt;run setup.peopleOpen()&gt;&gt;&lt;&lt;/link&gt;&gt;
+  &lt;&lt;link &quot;People&quot;&gt;&gt;&lt;&lt;run setup.peopleOpen()&gt;&gt;&lt;&lt;/link&gt;&gt;&lt;&lt;print setup.peopleHereBadgeHtml()&gt;&gt;
 &lt;/div&gt;
-&lt;&lt;/widget&gt;&gt;</tw-passagedata><tw-passagedata pid="403" name="CastPage" tags="" position="350,5100" size="100,100">&lt;&lt;nobr&gt;&gt;&lt;h2 class=&quot;cot-page-title&quot;&gt;People&lt;/h2&gt;&lt;div class=&quot;social cot-page&quot;&gt;&lt;&lt;print setup.peopleDialogHtml()&gt;&gt;&lt;/div&gt;&lt;&lt;/nobr&gt;&gt;
-&lt;&lt;link &quot;← Back&quot;&gt;&gt;&lt;&lt;run setup.smartBack()&gt;&gt;&lt;&lt;/link&gt;&gt;</tw-passagedata><tw-passagedata pid="404" name="PersonPage" tags="" position="475,5100" size="100,100">&lt;&lt;nobr&gt;&gt;&lt;h2 class=&quot;cot-page-title&quot;&gt;View Person&lt;/h2&gt;&lt;div class=&quot;view-person cot-page&quot;&gt;&lt;&lt;print setup.peopleViewHtml($people_view_slug)&gt;&gt;&lt;/div&gt;&lt;&lt;/nobr&gt;&gt;
-&lt;&lt;link &quot;← Back&quot;&gt;&gt;&lt;&lt;run setup.smartBack()&gt;&gt;&lt;&lt;/link&gt;&gt;</tw-passagedata><tw-passagedata pid="405" name="DevPageWidgets" tags="widget nobr" position="600,5100" size="100,100">&lt;&lt;widget &quot;devButton&quot;&gt;&gt;
+&lt;&lt;/widget&gt;&gt;</tw-passagedata><tw-passagedata pid="403" name="CastPage" tags="" position="350,5100" size="100,100">&lt;&lt;nobr&gt;&gt;&lt;div class=&quot;social cot-page&quot;&gt;&lt;&lt;print setup.peopleDialogHtml()&gt;&gt;&lt;/div&gt;&lt;&lt;/nobr&gt;&gt;</tw-passagedata><tw-passagedata pid="404" name="PersonPage" tags="" position="475,5100" size="100,100">&lt;&lt;nobr&gt;&gt;&lt;div class=&quot;view-person cot-page&quot;&gt;&lt;&lt;print setup.peopleViewHtml($people_view_slug)&gt;&gt;&lt;/div&gt;&lt;&lt;/nobr&gt;&gt;</tw-passagedata><tw-passagedata pid="405" name="DevPageWidgets" tags="widget nobr" position="600,5100" size="100,100">&lt;&lt;widget &quot;devButton&quot;&gt;&gt;
 &lt;div id=&quot;dev-btn-widget&quot; style=&quot;margin:4px 0 8px;&quot;&gt;&lt;&lt;if passage() isnot &quot;DevPage&quot;&gt;&gt;&lt;&lt;link &quot;&amp;#128295; Dev screen&quot; &quot;DevPage&quot;&gt;&gt;&lt;&lt;/link&gt;&gt;&lt;&lt;else&gt;&gt;&lt;span&gt;&amp;#128295; Dev screen&lt;/span&gt;&lt;&lt;/if&gt;&gt;&lt;/div&gt;
 &lt;&lt;/widget&gt;&gt;</tw-passagedata><tw-passagedata pid="406" name="DevPage" tags="" position="725,5100" size="100,100">&lt;&lt;nobr&gt;&gt;
 &lt;div class=&quot;cast-top&quot;&gt;&lt;&lt;link &quot;&amp;#8592; Back&quot;&gt;&gt;&lt;&lt;run setup.smartBack()&gt;&gt;&lt;&lt;/link&gt;&gt;&lt;/div&gt;
