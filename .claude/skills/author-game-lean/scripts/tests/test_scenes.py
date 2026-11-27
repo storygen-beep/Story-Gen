@@ -417,3 +417,44 @@ def test_a_flag_inside_an_or_is_not_a_plays_once_gate():
         {"type": "days_since_flag", "subject": "player", "flag_key": "came", "operator": "gte", "value": 3}]}
     g = repeat_game(say("I'll check it next time."), trigger_items=[either], sets=["came"])
     assert scenes.check_repeats(g)[0] == RED
+
+
+# ── chains (C2206) ──
+
+def _g(*items, logic="AND"):
+    return {"version": "1.0", "logic": logic, "items": list(items)}
+
+
+def _f(key, op="is_true"):
+    return {"type": "flag", "subject": "player", "flag_key": key, "operator": op}
+
+
+def chain_game(*groups):
+    g = clean()
+    g["canvases"][0]["nodes"] = [node("a", para("Mom is at the stove."), *groups)]
+    return g
+
+
+def test_a_chain_whose_groups_split_the_states_is_green():
+    g = chain_game(group(say("Hi, love."), **_g(_f("met"))), group(say("Who are you?"), **_g(_f("met", "is_false"))))
+    assert scenes.check_chains(g) == (GREEN, [])
+
+
+def test_a_repeated_condition_is_red():
+    g = chain_game(group(say("One."), **_g(_f("later"))), group(say("Two."), **_g(_f("wait"))),
+                   group(say("See you."), **_g(_f("later"))))
+    assert scenes.check_chains(g)[0] == RED
+
+
+def test_two_ladders_side_by_side_are_red():
+    g = chain_game(group(say("A, both met."), **_g(_f("b"), _f("c"))),
+                   group(say("A, not both."), **_g(_f("b", "is_false"), _f("c", "is_false"), logic="OR")),
+                   group(say("B, met."), **_g(_f("b"))), group(say("B, not met."), **_g(_f("b", "is_false"))))
+    rows = scenes.check_chains(g)[1]
+    assert len(rows) == 2 and all("never shows" in r for r in rows)
+
+
+def test_a_plain_block_between_ladders_breaks_the_chain():
+    g = chain_game(group(say("A."), **_g(_f("b"))), group(say("A, not."), **_g(_f("b", "is_false"))), para("Then."),
+                   group(say("B."), **_g(_f("b"))), group(say("B, not."), **_g(_f("b", "is_false"))))
+    assert scenes.check_chains(g) == (GREEN, [])

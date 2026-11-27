@@ -16,6 +16,8 @@
   repeats   on a repeatable scene, no person says first-meeting words ("new face", "say your name"), and no line,
             spoken or narrated, makes a "next time" promise, unless a group holds it on a flag's is_false side
             (C2202). A flag a tick unsets doesn't make a scene play once.
+  chains    no group in a run of side-by-side groups (one if/elseif chain, v2.py:18922-18928) is dead: each can
+            show in some state where no earlier group holds
 
 What these can't see is still the writer's and the reader's: whether a line is true in what it says, a screen's
 one job, a person named in narration (only speakers are placed), and the opening's own clock. `talk` counts a
@@ -658,9 +660,100 @@ def check_repeats(game, dev=()):
     return (RED, rows) if rows else (GREEN, [])
 
 
+# ── chains ────────────────────────────────────────────────────────────────────────────────────────────────
+
+# Side-by-side group blocks compile into ONE if/elseif chain, first match wins (v2.py:18922-18928, rendered by
+# _render_group_chain at 18514). A later group is dead when, in every state where its conditions hold, an earlier
+# group's hold too. first_term_lean's zoe_give_him: four opening groups, then Zoe's three line groups, so her line
+# never showed (P78, 2026-11-27).
+NEGATE = {"is_false": "is_true", "is_absent": "is_present", "not_equipped": "equipped", "lt": "gte", "lte": "gt"}
+CHAIN_VARS = 14  # past this many distinct conditions the chain is not judged (2^14 states)
+
+
+def _atom(i):
+    """(key, polarity): one condition as a yes/no question, so is_true and is_false of a flag are one question."""
+    op = i.get("operator")
+    base = {k: v for k, v in i.items() if k != "operator"}
+    pos = op not in NEGATE
+    op = op if pos else NEGATE[op]
+    return json.dumps(dict(base, operator=op), sort_keys=True), pos
+
+
+def _atoms(cond, out):
+    for i in (cond or {}).get("items") or []:
+        if isinstance(i, dict) and i.get("type") == "group":
+            _atoms(i, out)
+        elif isinstance(i, dict) and i.get("type"):
+            out.add(_atom(i)[0])
+    return out
+
+
+def _holds(cond, state):
+    items = [i for i in (cond or {}).get("items") or [] if isinstance(i, dict) and i.get("type")]
+    if not items:
+        return True
+    vals = []
+    for i in items:
+        if i.get("type") == "group":
+            vals.append(_holds(i, state))
+        else:
+            key, pos = _atom(i)
+            vals.append(state[key] == pos)
+    return any(vals) if str((cond or {}).get("logic") or "AND").upper() == "OR" else all(vals)
+
+
+def _chains(blocks):
+    """Each run of side-by-side group blocks, and the chains nested inside groups."""
+    run = []
+    for b in list(blocks or []) + [None]:
+        if isinstance(b, dict) and b.get("type") == "group":
+            run.append(b)
+            continue
+        if run:
+            yield run
+            for g in run:
+                yield from _chains(children(g))
+            run = []
+
+
+def _cond(g):
+    return (g.get("props") or {}).get("conditions") or g.get("conditions")
+
+
+def check_chains(game, dev=()):
+    """No group in a chain is dead: each can show in some state where no earlier group in its chain holds."""
+    import itertools
+    rows = []
+    for c in canvases(game, dev):
+        if retired(c):
+            continue
+        for n in c.get("nodes") or []:
+            for chain in _chains(n.get("blocks")):
+                if len(chain) < 2:
+                    continue
+                keys = sorted(set().union(*[_atoms(_cond(g), set()) for g in chain]))
+                if len(keys) > CHAIN_VARS:
+                    continue
+                for k, g in enumerate(chain[1:], start=1):
+                    alive = False
+                    for bits in itertools.product((False, True), repeat=len(keys)):
+                        state = dict(zip(keys, bits))
+                        if _holds(_cond(g), state) and not any(_holds(_cond(e), state) for e in chain[:k]):
+                            alive = True
+                            break
+                    if not alive:
+                        first = next((str(b.get("content") or "")[:50] for b, _ in walk(children(g))
+                                      if b.get("content")), "")
+                        rows.append(f"{c['id']} · {n.get('id')}: group {k + 1} of {len(chain)} in one chain never "
+                                    f"shows (\"{first}\"): side-by-side groups are one if/elseif chain, and an "
+                                    f"earlier group always matches first (v2.py:18922-18928); put a non-group block "
+                                    f"between them, or make each group carry its whole state")
+    return (RED, rows) if rows else (GREEN, [])
+
+
 def run(game_dir, game, dev=(), ref=None):
     """Every scene check, keyed by name. None for game means the merged TOML didn't parse."""
-    names = ("talk", "length", "presence", "creation", "saves", "speakers", "goals", "repeats")
+    names = ("talk", "length", "presence", "creation", "saves", "speakers", "goals", "repeats", "chains")
     if game is None:
         return {k: (INCOMPLETE, ["the merged TOML did not parse"]) for k in names}
     dev = set(dev or ())
@@ -673,4 +766,5 @@ def run(game_dir, game, dev=(), ref=None):
         "speakers": check_speakers(game, dev),
         "goals": check_goals(game),
         "repeats": check_repeats(game, dev),
+        "chains": check_chains(game, dev),
     }
