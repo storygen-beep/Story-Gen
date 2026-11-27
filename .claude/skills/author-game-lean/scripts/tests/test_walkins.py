@@ -286,3 +286,16 @@ def test_kind_c_as_a_button_is_red():
 def test_kind_c_over_a_quarter_is_red():
     rows = walkins.problems(planted(noticed("a"), noticed("b"), comes()), does("a", "b"))
     assert any("at most a quarter" in r for r in rows)
+
+
+def test_a_last_step_that_switches_itself_off_is_red_and_one_that_stays_is_green():
+    done = {"type": "flag", "subject": "player", "flag_key": "tom_done", "operator": "is_false"}
+    yes = [{"text": "Yes", "flagEffects": [{"flag": "came_to_her_today", "op": "set"}, {"flag": "tom_done", "op": "set"}]},
+           {"text": "No", "flagEffects": [{"flag": "came_to_her_today", "op": "set"}]}]
+    assert any("C2205" in r for r in walkins.problems(planted(comes(conds=(BRAKE, done), choices=yes))))
+    stays = {"type": "group", "logic": "OR", "items": [done, {"type": "days_since_flag", "subject": "player",
+                                                               "flag_key": "tom_done", "operator": "gte", "value": 7}]}
+    assert not any("C2205" in r for r in walkins.problems(planted(comes(conds=(BRAKE, stays), choices=yes))))
+    nxt = comes("park_tom_2", conds=(BRAKE, {"type": "flag", "subject": "player", "flag_key": "tom_done",
+                                             "operator": "is_true"}))
+    assert not any("C2205" in r for r in walkins.problems(planted(comes(conds=(BRAKE, done), choices=yes), nxt)))
