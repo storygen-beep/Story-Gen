@@ -1,6 +1,6 @@
 {
  "piece": "P25",
- "pass": 15,
+ "pass": 19,
  "screens": {
   "quad_meet_jake.ask": {
    "text": "8894fc030db920d6",
@@ -87,7 +87,8 @@
   "C1267": "f0db81b801577bf2",
   "C1249": "a843f9b57e43a020",
   "C1250": "fde578d75b0d3620",
-  "C1265": "eb11e05cd75e52a9",
+  "C1265": "689fd05a4bcbd8be",
+  "C2204": "3231b5a8a46eaa49",
   "C1234": "1b2a2d5f05b10331",
   "L121": "45842b25d0708a15",
   "L125": "1fca3bfe1d0c2419",
@@ -132,7 +133,7 @@
   "C2198": "73dfe095a72154a3",
   "C769": "f6b6f78a8f2e5ed7",
   "C794": "bad76e5963432385",
-  "C2201": "d119dfe665f76359",
+  "C2201": "7fddf5e17dbdaaf9",
   "C795": "34139e6a6914e171",
   "C804": "5358489178bff0a4",
   "L106": "13a714429d15f3b2",
@@ -144,6 +145,7 @@
   "C762": "40e85f1ae92f1e71",
   "L170": "c3599cd09637a240",
   "C770": "ff9aa31c11e5d50f",
+  "C2203": "365a29fd77f6b765",
   "C771": "563e3d25c3219dd0",
   "C442": "59b8d8d24f0c7c38",
   "C449": "e33f3e7fed17fa30",
@@ -153,6 +155,7 @@
   "C450": "b01ad555668aba2d",
   "C422": "7e128897077ecee6",
   "C460": "67e48e60d5053a2e",
+  "C2206": "d8ebf6d6b2abf6a5",
   "C461": "310706ee076318f2",
   "C2188": "612394eef6826900",
   "C2190": "452a5657d7527351"
@@ -698,20 +701,20 @@
    "row": "C1265",
    "screen": "quad_meet_jake.after",
    "verdict": "PASS",
-   "line": "\"You feel them all looking at you\" <<people/jake_quad_t0>>",
-   "why": "a scene moment with Jake, not a chore, notice or door",
+   "line": "<<people/jake_quad_t0>> after \"And I'm asking again.\"",
+   "why": "a person's first scene, not a chore, door or menu",
    "cause": null,
    "note": false,
    "screen_hash": {
     "text": "56a2a1e9b53909ca",
     "traits": "435644be785b94c8",
-    "facts": "2bb99faa28c46fca",
+    "facts": "29db4ec2f8f4b7d9",
     "facts2": "679fc34857b92f9e",
-    "all": "59df2443b3100c69"
+    "all": "785056cbbffc4241"
    },
-   "row_hash": "eb11e05cd75e52a9",
+   "row_hash": "689fd05a4bcbd8be",
    "carried": true,
-   "pass": 13
+   "pass": 17
   },
   {
    "row": "C1267",
@@ -1125,7 +1128,7 @@
    "note": false,
    "screen_hash": "c77673dc0f621531",
    "row_hash": "73dfe095a72154a3",
-   "carried": false,
+   "carried": true,
    "pass": 15
   },
   {
@@ -1133,13 +1136,58 @@
    "screen": "*",
    "verdict": "N/A",
    "line": "\u2014",
-   "why": "builds no place description (quad_meet_jake, npc_jake); a scene is not a place's description",
+   "why": "builds no place description; its screens are scenes or menus, and a scene is not a place's description",
    "cause": null,
    "note": false,
    "screen_hash": "c77673dc0f621531",
-   "row_hash": "d119dfe665f76359",
+   "row_hash": "7fddf5e17dbdaaf9",
    "carried": true,
-   "pass": 14
+   "pass": 16
+  },
+  {
+   "row": "C2203",
+   "screen": "*",
+   "verdict": "N/A",
+   "line": "\u2014",
+   "why": "no event at its places: nothing here has hours of its own as a party or night out; Zoe's party (C2203) is P75's and P05's place",
+   "cause": null,
+   "note": false,
+   "screen_hash": "c77673dc0f621531",
+   "row_hash": "365a29fd77f6b765",
+   "carried": true,
+   "pass": 16
+  },
+  {
+   "row": "C2204",
+   "screen": "quad_meet_jake.ask",
+   "verdict": "PASS",
+   "line": "<<people/jake_quad_t0>> on quad_meet_jake.after; the look (\"His eyes drop to your mouth\") stays in the words",
+   "why": "a first meeting: media.md:50 (rule 8, 79413e76) keeps the person's face, _t0, as the meeting's picture and leaves his look in the words (LO: \"A keep his face\")",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "8894fc030db920d6",
+    "traits": "435644be785b94c8",
+    "facts": "7de260999fbd510a",
+    "facts2": "d12e3bf8fad210ea",
+    "all": "0f7f4c6ba71dc46e"
+   },
+   "row_hash": "3231b5a8a46eaa49",
+   "carried": true,
+   "pass": 18
+  },
+  {
+   "row": "C2206",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "quad_meet_jake",
+   "why": "1 side-by-side group chain(s) across 1 canvas(es); scenes.check_chains green on them and each atom set read for correlated conditions",
+   "cause": null,
+   "note": false,
+   "screen_hash": "c77673dc0f621531",
+   "row_hash": "d8ebf6d6b2abf6a5",
+   "carried": false,
+   "pass": 19
   },
   {
    "row": "C286",

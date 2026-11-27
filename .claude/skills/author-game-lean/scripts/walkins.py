@@ -232,6 +232,25 @@ def problems(game, does_by_card=None):
             if brake and not (sets(ch) & brake):
                 rows.append(f"{cid}: choice {i + 1} (`{ch.get('text')}`) doesn't set the brake "
                             f"`{sorted(brake)[0]}`, so a second scene can come to her today (C2187)")
+    # Rule 5: a chain's last step stays (C2205). A scene that comes to her and switches itself off for good (an AND
+    # gate `<flag> is_false` on a flag it sets itself, which no tick unsets and no other canvas's trigger reads) ends
+    # the person's visits; it comes back on the game's long rest instead (LO, 2026-11-27: "every 7 days").
+    reset = scenes.unset_anywhere(game)
+    read_elsewhere = {}
+    for o in game.get("canvases") or []:
+        for i in scenes.items(((o.get("trigger") or {}) if isinstance(o.get("trigger"), dict) else {}).get("conditions")):
+            if i.get("type") in ("flag", "days_since_flag", "hours_since_flag") and i.get("operator") != "is_false":
+                read_elsewhere.setdefault(i.get("flag_key"), set()).add(o.get("id"))
+    for c in scenes_b:
+        cid, t = c.get("id"), c["trigger"]
+        own = scenes.own_sets(c)
+        for i in scenes.gates(t.get("conditions")):
+            f = i.get("flag_key")
+            if (i.get("type") == "flag" and i.get("operator") == "is_false" and f in own and f not in cleared
+                    and f not in reset and not (read_elsewhere.get(f, set()) - {cid})):
+                rows.append(f"{cid}: its own `{f}` switches it off for good and nothing follows; a chain's last step "
+                            f"stays, coming back on the long rest (a `days_since_flag` `{f}` gte branch), never back "
+                            f"to step one (craft/walk-ins.md, rule 5; C2205)")
     shared_flags = {f for b in brakes.values() for f in b}
     for c in found:
         cid, t = c.get("id"), c["trigger"]

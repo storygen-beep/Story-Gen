@@ -1,6 +1,6 @@
 {
  "piece": "P65",
- "pass": 6,
+ "pass": 8,
  "screens": {
   "gym_desk.desk": {
    "text": "335967084e0a28da",
@@ -80,7 +80,7 @@
   "C2198": "73dfe095a72154a3",
   "C769": "f6b6f78a8f2e5ed7",
   "C794": "bad76e5963432385",
-  "C2201": "d119dfe665f76359",
+  "C2201": "7fddf5e17dbdaaf9",
   "C795": "34139e6a6914e171",
   "C804": "5358489178bff0a4",
   "L106": "13a714429d15f3b2",
@@ -92,6 +92,7 @@
   "C762": "40e85f1ae92f1e71",
   "L170": "c3599cd09637a240",
   "C770": "ff9aa31c11e5d50f",
+  "C2203": "365a29fd77f6b765",
   "C771": "563e3d25c3219dd0",
   "L166": "c12d10588197fbaf",
   "C1303": "5b031a6b82899cfd",
@@ -119,6 +120,7 @@
   "C422": "7e128897077ecee6",
   "C460": "67e48e60d5053a2e",
   "C2202": "6e90fed7eae62131",
+  "C2206": "d8ebf6d6b2abf6a5",
   "C461": "310706ee076318f2",
   "C2189": "20748838895e4545"
  },
@@ -950,21 +952,21 @@
    "note": false,
    "screen_hash": "8677e69089c014b6",
    "row_hash": "73dfe095a72154a3",
-   "carried": false,
+   "carried": true,
    "pass": 6
   },
   {
    "row": "C2201",
    "screen": "*",
    "verdict": "N/A",
-   "line": "Your day pass is good till closing.",
-   "why": "scene and menu screens, not a place's description; the descriptions of the places they sit at read no clothes or meters (all 31 checked)",
+   "line": "\u2014",
+   "why": "builds no place description; its screens are scenes or menus, and a scene is not a place's description",
    "cause": null,
    "note": false,
    "screen_hash": "8677e69089c014b6",
-   "row_hash": "d119dfe665f76359",
+   "row_hash": "7fddf5e17dbdaaf9",
    "carried": true,
-   "pass": 5
+   "pass": 7
   },
   {
    "row": "C2202",
@@ -976,8 +978,34 @@
    "note": false,
    "screen_hash": "8677e69089c014b6",
    "row_hash": "6e90fed7eae62131",
-   "carried": false,
+   "carried": true,
    "pass": 6
+  },
+  {
+   "row": "C2203",
+   "screen": "*",
+   "verdict": "N/A",
+   "line": "\u2014",
+   "why": "no event at its places: nothing here has hours of its own as a party or night out; Zoe's party (C2203) is P75's and P05's place",
+   "cause": null,
+   "note": false,
+   "screen_hash": "8677e69089c014b6",
+   "row_hash": "365a29fd77f6b765",
+   "carried": true,
+   "pass": 7
+  },
+  {
+   "row": "C2206",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "gym_desk",
+   "why": "gym_desk desk and paid: 17 groups, 21 conditions (check skips them); read by hand: day pass, week days 0-6, month <23 and 23-29, then no pass; days_since_flag fails closed when unset (v2.py:5253), so each group shows in its own state",
+   "cause": null,
+   "note": false,
+   "screen_hash": "8677e69089c014b6",
+   "row_hash": "d8ebf6d6b2abf6a5",
+   "carried": false,
+   "pass": 8
   },
   {
    "row": "C338",
@@ -1654,8 +1682,8 @@
  ],
  "causes": [],
  "pending": [],
- "asked": 2,
- "answered": 2,
+ "asked": 1,
+ "answered": 1,
  "pass_items": [],
  "unowed": []
 }

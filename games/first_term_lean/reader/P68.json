@@ -1,6 +1,6 @@
 {
  "piece": "P68",
- "pass": 4,
+ "pass": 7,
  "screens": {
   "*": "4f53cda18c2baa0c"
  },
@@ -71,7 +71,7 @@
   "people#16": "45053c701775c75f",
   "C769": "cf7d7a82afabcbbb",
   "C794": "3281d513b7f90d6e",
-  "C2201": "4745761f016db481",
+  "C2201": "1137a7018841fcb3",
   "C795": "a28152099697ac6a",
   "C804": "56bf64be29d6ea48",
   "L106": "759e6667d7fc3183",
@@ -87,9 +87,10 @@
   "C808": "73aff7401d6970a5",
   "C811": "ded1858e52e3be3a",
   "C770": "dcc6bbe6fde09083",
+  "C2203": "232300ee41804a6c",
   "C771": "d941995a226da2b4",
   "C707": "e2898bd02a9e4730",
-  "places#1": "378b2df4c8bf116d",
+  "places#1": "6daf4c28bcefc631",
   "places#2": "e0b57720921c4523",
   "places#3": "56d056c80da49bb6",
   "places#4": "ae3ba300e1045c9f",
@@ -99,6 +100,7 @@
   "places#8": "c3ea8d01465e7298",
   "places#9": "f4cd9ab5f62bc6fc",
   "places#10": "d6f0b4b357efc043",
+  "places#11": "969f86a77815f52d",
   "C442": "a2b07f40e1a9e908",
   "C449": "ac5932d70cd775a1",
   "C451": "6b0fd679047fc9b8",
@@ -106,6 +108,7 @@
   "C422": "8933f85010afbef7",
   "C460": "beb5a109bde77305",
   "C2202": "d5592f287f5f641a",
+  "C2206": "99ccaf869af30473",
   "C461": "153b0804e686abae",
   "L163": "00a617ab9b4e9cd4",
   "voice#1": "b8e8afcb32208b40",
@@ -427,21 +430,34 @@
    "note": false,
    "screen_hash": "4f53cda18c2baa0c",
    "row_hash": "4b15434d4248d5f0",
-   "carried": false,
+   "carried": true,
    "pass": 4
   },
   {
    "row": "C2201",
-   "screen": "*",
+   "screen": "hood_next_door",
    "verdict": "PASS",
-   "line": "The neighbourhood: your street, the same row of houses, the corner shop at the end, the park across the road...",
-   "why": "the description reads no clothes or meters; it has no clothing variants",
+   "line": "The chair is empty.",
+   "why": "cut the is_present/met_vance variant; only is_absent ('nobody here') left, allowed by C2201 and places rule 1; identity line same every visit (7_final_game.toml:1544)",
    "cause": null,
    "note": false,
-   "screen_hash": "4f53cda18c2baa0c",
-   "row_hash": "4745761f016db481",
+   "screen_hash": null,
+   "row_hash": "1137a7018841fcb3",
    "carried": true,
-   "pass": 3
+   "pass": 6
+  },
+  {
+   "row": "C2201",
+   "screen": "hood_street",
+   "verdict": "PASS",
+   "line": "The street's dark. Curtains drawn, the bus stop empty.",
+   "why": "daytime crowd only 07:00-21:00, night line 21:00-07:00 (wraps, v2.py:4826-4829), first-match chain v2.py:11893-11912; no clothes, met_ or presence read; identity line kept",
+   "cause": null,
+   "note": false,
+   "screen_hash": null,
+   "row_hash": "1137a7018841fcb3",
+   "carried": true,
+   "pass": 6
   },
   {
    "row": "C2202",
@@ -453,8 +469,34 @@
    "note": false,
    "screen_hash": "4f53cda18c2baa0c",
    "row_hash": "d5592f287f5f641a",
-   "carried": false,
+   "carried": true,
    "pass": 4
+  },
+  {
+   "row": "C2203",
+   "screen": "*",
+   "verdict": "N/A",
+   "line": "\u2014",
+   "why": "no event at its places: nothing here has hours of its own as a party or night out; Zoe's party (C2203) is P75's and P05's place",
+   "cause": null,
+   "note": false,
+   "screen_hash": "4f53cda18c2baa0c",
+   "row_hash": "232300ee41804a6c",
+   "carried": true,
+   "pass": 5
+  },
+  {
+   "row": "C2206",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "street_meet_vance",
+   "why": "1 side-by-side group chain(s) across 1 canvas(es); scenes.check_chains green on them and each atom set read for correlated conditions",
+   "cause": null,
+   "note": false,
+   "screen_hash": "4f53cda18c2baa0c",
+   "row_hash": "99ccaf869af30473",
+   "carried": false,
+   "pass": 7
   },
   {
    "row": "C422",
@@ -1329,16 +1371,29 @@
   },
   {
    "row": "places#1",
-   "screen": "*",
+   "screen": "hood_next_door",
    "verdict": "PASS",
-   "line": "The neighbourhood: your street, the same row of houses, the corner shop at the end, the park across the road...",
-   "why": "the street's identity line, plain, no variants left",
+   "line": "The chair is empty.",
+   "why": "cut the is_present/met_vance variant; only is_absent ('nobody here') left, allowed by C2201 and places rule 1; identity line same every visit (7_final_game.toml:1544)",
    "cause": null,
    "note": false,
-   "screen_hash": "4f53cda18c2baa0c",
-   "row_hash": "378b2df4c8bf116d",
+   "screen_hash": null,
+   "row_hash": "6daf4c28bcefc631",
    "carried": true,
-   "pass": 3
+   "pass": 6
+  },
+  {
+   "row": "places#1",
+   "screen": "hood_street",
+   "verdict": "PASS",
+   "line": "The street's dark. Curtains drawn, the bus stop empty.",
+   "why": "daytime crowd only 07:00-21:00, night line 21:00-07:00 (wraps, v2.py:4826-4829), first-match chain v2.py:11893-11912; no clothes, met_ or presence read; identity line kept",
+   "cause": null,
+   "note": false,
+   "screen_hash": null,
+   "row_hash": "6daf4c28bcefc631",
+   "carried": true,
+   "pass": 6
   },
   {
    "row": "places#10",
@@ -1352,6 +1407,19 @@
    "row_hash": "d6f0b4b357efc043",
    "carried": true,
    "pass": 1
+  },
+  {
+   "row": "places#11",
+   "screen": "*",
+   "verdict": "N/A",
+   "line": "\u2014",
+   "why": "shape step 11 is for an event place; none among its places",
+   "cause": null,
+   "note": false,
+   "screen_hash": "4f53cda18c2baa0c",
+   "row_hash": "969f86a77815f52d",
+   "carried": true,
+   "pass": 5
   },
   {
    "row": "places#2",
@@ -1564,8 +1632,8 @@
  ],
  "causes": [],
  "pending": [],
- "asked": 2,
- "answered": 2,
+ "asked": 1,
+ "answered": 1,
  "pass_items": [],
  "unowed": []
 }

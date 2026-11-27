@@ -1,6 +1,6 @@
 {
  "piece": "P67",
- "pass": 5,
+ "pass": 6,
  "screens": {
   "*": "4f53cda18c2baa0c"
  },
@@ -60,6 +60,7 @@
   "C422": "8933f85010afbef7",
   "C460": "beb5a109bde77305",
   "C2202": "d5592f287f5f641a",
+  "C2206": "99ccaf869af30473",
   "C461": "153b0804e686abae",
   "L163": "00a617ab9b4e9cd4",
   "voice#1": "b8e8afcb32208b40",
@@ -563,8 +564,21 @@
    "note": false,
    "screen_hash": "4f53cda18c2baa0c",
    "row_hash": "d5592f287f5f641a",
-   "carried": false,
+   "carried": true,
    "pass": 5
+  },
+  {
+   "row": "C2206",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "body_run",
+   "why": "1 side-by-side group chain(s) across 1 canvas(es); scenes.check_chains green on them and each atom set read for correlated conditions",
+   "cause": null,
+   "note": false,
+   "screen_hash": "4f53cda18c2baa0c",
+   "row_hash": "99ccaf869af30473",
+   "carried": false,
+   "pass": 6
   },
   {
    "row": "C422",

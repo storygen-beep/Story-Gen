@@ -1,6 +1,6 @@
 {
  "piece": "P49",
- "pass": 18,
+ "pass": 21,
  "screens": {
   "ryan_charger.moment": {
    "text": "313906c8298f2b26",
@@ -24,32 +24,32 @@
    "all": "8d9d6c3c179d577d"
   },
   "ryan_charger_back.moment": {
-   "text": "ba4d186ba1d48c83",
+   "text": "8684d5fd4d83ce86",
    "traits": "74c4f68e6476ecee",
    "facts": "57bb58c5eba91d80",
    "facts2": "63e40120178d9641",
-   "all": "78451dc4daa9b853"
+   "all": "232af7ec976a7b35"
   },
   "ryan_charger_back.take": {
-   "text": "88c9e004e47287aa",
+   "text": "5d13cd1dfbb8b123",
    "traits": "74c4f68e6476ecee",
    "facts": "8a6c1ecb15213362",
    "facts2": "e771106eddedbf0a",
-   "all": "5cdf9d9de8898e90"
+   "all": "dccec9bb1923fac9"
   },
   "ryan_charger_back.look": {
-   "text": "ca81d6cf8e22d3c8",
+   "text": "57b3817f5fc7b0fa",
    "traits": "74c4f68e6476ecee",
    "facts": "1bff26002b7cd503",
    "facts2": "aa200880ec280d14",
-   "all": "259cef0ed403a0c9"
+   "all": "cfea766e5cbf606f"
   },
   "ryan_charger_back.look2": {
-   "text": "b6fc34828f2bbcde",
+   "text": "40c1e7c29169bd2b",
    "traits": "74c4f68e6476ecee",
    "facts": "1bff26002b7cd503",
    "facts2": "aa200880ec280d14",
-   "all": "9e7532cb0a25b5fa"
+   "all": "01f2925ca70e9a75"
   },
   "mom_taste.moment": {
    "text": "a478c76abe5c1a35",
@@ -94,32 +94,32 @@
    "all": "6a6fc0b81dc05e12"
   },
   "zoe_give_him.moment": {
-   "text": "e049452db2317066",
+   "text": "38785647e7812e6c",
    "traits": "0b1fa80c9d60647d",
    "facts": "41e92ad76009f2bf",
    "facts2": "130dd93dfc7a1cca",
-   "all": "764343a3af3a44e8"
+   "all": "7cd6af22ff9096cf"
   },
   "zoe_give_him.let": {
-   "text": "022028c5793b53ca",
+   "text": "8b9959afe1af0603",
    "traits": "6b1e34b018661933",
    "facts": "ca90215ee8b1192a",
    "facts2": "3d976cb4abe6fb91",
-   "all": "3d00edff648312de"
+   "all": "e618fd7399931ba1"
   },
   "zoe_give_him.stop": {
-   "text": "685d557c1d88406a",
+   "text": "e14ec4e6e5f44ee7",
    "traits": "6b1e34b018661933",
    "facts": "4dfba33715001ede",
    "facts2": "317aff3f6de89433",
-   "all": "902962686a7d1daf"
+   "all": "46aedc9ee817a56c"
   },
   "vance_gutter.moment": {
-   "text": "93f595e89d51f0b2",
+   "text": "a4a4a3a82864b462",
    "traits": "40c19ab6c95d7a0e",
    "facts": "2a2b552e1074f620",
    "facts2": "f8e83b3951428fe1",
-   "all": "4d33bd00c62d3267"
+   "all": "ccf250e3fa860c49"
   },
   "vance_gutter.tell": {
    "text": "7e9b1adbe0b27175",
@@ -136,32 +136,32 @@
    "all": "44d6be44bb3b659c"
   },
   "vance_envelope.moment": {
-   "text": "5a30d2ab81b3d026",
+   "text": "b9664c1c74622be0",
    "traits": "40c19ab6c95d7a0e",
    "facts": "2a2b552e1074f620",
    "facts2": "f8e83b3951428fe1",
-   "all": "f679850544e33e23"
+   "all": "2cc8a2700e88a866"
   },
   "vance_envelope.take": {
-   "text": "1d9ef8679337ad7e",
+   "text": "1d5dfd90237c85a4",
    "traits": "d9172dabbd56b049",
    "facts": "8c4b6fab19cda4be",
    "facts2": "5a97becef6878ec1",
-   "all": "9f26d9a867dcac43"
+   "all": "9a2ba97713b0d98c"
   },
   "vance_envelope.himself": {
-   "text": "628b4dab6aec748a",
+   "text": "2b47d5c1d872feb8",
    "traits": "40c19ab6c95d7a0e",
    "facts": "fdf5e1f42084f178",
    "facts2": "ed9b77bc3be33ebd",
-   "all": "ebc1932804f4e62e"
+   "all": "032c0303d46900cd"
   },
   "hale_called_in.moment": {
-   "text": "f1306f5ed757f9ab",
+   "text": "0c6963f571ba385d",
    "traits": "825724317465730d",
    "facts": "6ea67dc58c8d9698",
    "facts2": "ed9eba5ccb976fe4",
-   "all": "60672e322c6eb2bc"
+   "all": "a5596f5e12b35e56"
   },
   "hale_called_in.yes": {
    "text": "838b33f9e7511aca",
@@ -178,18 +178,18 @@
    "all": "11f18506cdfd9b90"
   },
   "marco_hips.moment": {
-   "text": "bf09273041b98acb",
+   "text": "b5927efcb8ec8179",
    "traits": "e4365d01d4eb14be",
    "facts": "f9e936b5d2f7fa16",
    "facts2": "e2ce2f969cea33c2",
-   "all": "06eb346786cec3d5"
+   "all": "42f61fe25f478963"
   },
   "marco_hips.let": {
-   "text": "d73ea7023c6bda5d",
+   "text": "eeaf671d49d92788",
    "traits": "e4365d01d4eb14be",
    "facts": "7628053aa2fe64cb",
    "facts2": "49f0b57a72e77115",
-   "all": "db5f3e6bb8bd0c1e"
+   "all": "59a4c404c27b7603"
   },
   "marco_hips.got": {
    "text": "cc0f1027e210f825",
@@ -233,7 +233,7 @@
    "facts2": "5c2a5075c1a7cd39",
    "all": "02498b18ad0f6fab"
   },
-  "*": "2039be607205500b"
+  "*": "ea7ff8cc1cbd9a00"
  },
  "rows": {
   "B1": "5276068df1ca6fa9",
@@ -255,6 +255,7 @@
   "C164": "b24792899ae3ac28",
   "C165": "59fe434fa706bff6",
   "C166": "d9199efed36f9625",
+  "C1279": "534032f000706830",
   "C889": "def1348d483d0c40",
   "C906": "71713a7e7ae739e7",
   "C926": "177d1e1776fac74b",
@@ -292,8 +293,26 @@
   "C288": "7b5399adec567cd4",
   "C289": "3952eba1e2267f12",
   "C297": "b920ef848ab61988",
+  "C1261": "536e26b5fdc76194",
+  "C1267": "f0db81b801577bf2",
+  "C1249": "a843f9b57e43a020",
   "C1250": "fde578d75b0d3620",
+  "C1265": "689fd05a4bcbd8be",
+  "C2204": "3231b5a8a46eaa49",
+  "C1234": "1b2a2d5f05b10331",
+  "L121": "45842b25d0708a15",
+  "L125": "1fca3bfe1d0c2419",
+  "C1280": "a709f257162373b0",
+  "L119": "faf4c46f7b59480a",
+  "C1281": "4e5683077291be1f",
   "C1284": "c3025295db7bb1d6",
+  "L120": "4b62583ae03681c7",
+  "C1275": "ef82ef3fdf215191",
+  "C1274": "f44d59a3bd6bb921",
+  "C1278": "4d23ccfdc4e41cd9",
+  "C1277": "ee51917c5fb43c13",
+  "C1238": "6fd430204e984124",
+  "C1255": "803b4c46f1e9d7c7",
   "C2181": "74c68b4029782b5f",
   "C381": "c661ccd26aada1f2",
   "C188": "3a9caf43a2f2b8fd",
@@ -328,7 +347,7 @@
   "C2198": "73dfe095a72154a3",
   "C769": "f6b6f78a8f2e5ed7",
   "C794": "bad76e5963432385",
-  "C2201": "d119dfe665f76359",
+  "C2201": "7fddf5e17dbdaaf9",
   "C795": "34139e6a6914e171",
   "C804": "5358489178bff0a4",
   "L106": "13a714429d15f3b2",
@@ -340,6 +359,7 @@
   "C762": "40e85f1ae92f1e71",
   "L170": "c3599cd09637a240",
   "C770": "ff9aa31c11e5d50f",
+  "C2203": "365a29fd77f6b765",
   "C771": "563e3d25c3219dd0",
   "L166": "c12d10588197fbaf",
   "C1303": "5b031a6b82899cfd",
@@ -368,6 +388,7 @@
   "C422": "7e128897077ecee6",
   "C460": "67e48e60d5053a2e",
   "C2202": "6e90fed7eae62131",
+  "C2206": "d8ebf6d6b2abf6a5",
   "C461": "310706ee076318f2",
   "C788": "cae1598ef9cb6ff1",
   "C855": "d3dc77f2f96e20ae",
@@ -385,7 +406,8 @@
   "C2187": "f2b54b1dd7c15f2f",
   "C2188": "612394eef6826900",
   "C2189": "20748838895e4545",
-  "C2195": "77083291a86791c3",
+  "C2205": "44b9341eed4268bc",
+  "C2195": "211dd40ccf98aea0",
   "C2196": "a8ae0700d13a7f9b",
   "C2200": "117a60e53de1e8a4"
  },
@@ -426,20 +448,20 @@
    "row": "B10",
    "screen": "hale_called_in.moment",
    "verdict": "PASS",
-   "line": "Dr. Hale looks up from his desk before you're through his door.",
-   "why": "fires on arrival in his office Mon/Wed 14:00-16:59, requires_npc; his row has him there 14-17",
+   "line": "He's got a class list in front of him. His eyes go to your chest and stay there.",
+   "why": "every person named is placed by the trigger (requires_npc / npc_at_location); second-showing lines sit behind the seen flag; nothing claims a past no flag records",
    "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "f1306f5ed757f9ab",
+    "text": "0c6963f571ba385d",
     "traits": "825724317465730d",
     "facts": "6ea67dc58c8d9698",
     "facts2": "ed9eba5ccb976fe4",
-    "all": "60672e322c6eb2bc"
+    "all": "a5596f5e12b35e56"
    },
    "row_hash": "c1c0e2ac2588a579",
    "carried": true,
-   "pass": 8
+   "pass": 20
   },
   {
    "row": "B10",
@@ -483,39 +505,39 @@
    "row": "B10",
    "screen": "marco_hips.let",
    "verdict": "PASS",
-   "line": "\"Feel that? That's where they go. I'll check it next time.\"",
-   "why": "day pass and energy paid by body_workout before the swap; Marco present by requires_npc and the rule's npc_at_location; stance line behind marco_fixed_form false, \"Hips. Show me you remember.\" behind true; \"next time\" is built (the rest returns the scene)",
+   "line": "You hold still. His thumbs press once, and stay. / Feel that? That's where they go.",
+   "why": "the cut promise is gone; both lines true on the first and every later visit",
    "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "d73ea7023c6bda5d",
+    "text": "eeaf671d49d92788",
     "traits": "e4365d01d4eb14be",
     "facts": "7628053aa2fe64cb",
     "facts2": "49f0b57a72e77115",
-    "all": "db5f3e6bb8bd0c1e"
+    "all": "59a4c404c27b7603"
    },
    "row_hash": "c1c0e2ac2588a579",
    "carried": true,
-   "pass": 11
+   "pass": 20
   },
   {
    "row": "B10",
    "screen": "marco_hips.moment",
    "verdict": "PASS",
-   "line": "You show your pass at the desk and find a bench by the mirrors. You're halfway through a set when Marco walks over and looks you over.",
-   "why": "fires only as body_workout's substitution (substitution_only), after its costs and inside its clothing and pass lock, with Marco present (rule condition + requires_npc, who_is_where: weekdays 06-10, 17-21, Sat 08-14); 'your pass' true with any pass; the two opening lines are split by marco_fixed_form, so the 'remember' line shows only after he fixed her form",
+   "line": "His hands land on your hips and turn them, and stay. [image: in leggings and a sports top]",
+   "why": "every person named is placed by the trigger (requires_npc / npc_at_location); second-showing lines sit behind the seen flag; nothing claims a past no flag records",
    "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "bf09273041b98acb",
+    "text": "b5927efcb8ec8179",
     "traits": "e4365d01d4eb14be",
     "facts": "f9e936b5d2f7fa16",
     "facts2": "e2ce2f969cea33c2",
-    "all": "06eb346786cec3d5"
+    "all": "42f61fe25f478963"
    },
    "row_hash": "c1c0e2ac2588a579",
    "carried": true,
-   "pass": 14
+   "pass": 20
   },
   {
    "row": "B10",
@@ -726,134 +748,134 @@
    "row": "B10",
    "screen": "ryan_charger_back.look",
    "verdict": "PASS",
-   "line": "Then he sets the charger down just inside your door without looking up. \"Charger's there. Night. Sorry. Night. Sleep well.\" His door clicks shut next door.",
-   "why": "look shows only on the first showing (ryan_back_seen false), when he has her charger (step 1's yes a day or more before), so setting it down is true; his door next door matches his 23-24 rows Mon-Fri, Sun; the bathroom line holds by his morning rows; no arrival claim",
+   "line": "You don't move. You can't. He looks again, slower, at your chest. Then he sets the charger down just inside your door without looking up.",
+   "why": "true on first, last minute and repeat; repeats return per the OR rests",
    "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "ca81d6cf8e22d3c8",
+    "text": "57b3817f5fc7b0fa",
     "traits": "74c4f68e6476ecee",
-    "facts": "e03ae2cd56295992",
+    "facts": "1bff26002b7cd503",
     "facts2": "aa200880ec280d14",
-    "all": "1a9d24549c5e70f6"
+    "all": "cfea766e5cbf606f"
    },
    "row_hash": "c1c0e2ac2588a579",
    "carried": true,
-   "pass": 7
+   "pass": 21
   },
   {
    "row": "B10",
    "screen": "ryan_charger_back.look2",
    "verdict": "PASS",
-   "line": "His door clicks shut next door. In the morning it'll be the two of you and one bathroom again.",
-   "why": "look2 shows only on a second-or-later showing (Freeze with ryan_back_seen true), 23:00-23:59 Mon-Fri and Sun; who_is_where puts npc_ryan in home_ryans_room 23-24 those days, so his door next door is true; next morning he has a home_bathroom row every day (Mon-Fri 07-08, Sat/Sun 10-11); \"looks again\" follows the moment's second-showing line \"His eyes go to your chest and snap to the floor\"; no line says she just walked in, true whether she came from the hall or from a room button",
+   "line": "You don't move. You can't. He looks again, slower, at your chest.",
+   "why": "true on first, last minute and repeat; repeats return per the OR rests",
    "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "b6fc34828f2bbcde",
+    "text": "40c1e7c29169bd2b",
     "traits": "74c4f68e6476ecee",
-    "facts": "e03ae2cd56295992",
+    "facts": "1bff26002b7cd503",
     "facts2": "aa200880ec280d14",
-    "all": "acd7ba9ed82826e4"
+    "all": "01f2925ca70e9a75"
    },
    "row_hash": "c1c0e2ac2588a579",
    "carried": true,
-   "pass": 7
+   "pass": 21
   },
   {
    "row": "B10",
    "screen": "ryan_charger_back.moment",
    "verdict": "PASS",
-   "line": "A knock, late. Ryan waits until you open, your charger held out. His eyes go to your chest, stay a second too long, then snap to the floor. / again: A knock, late. Ryan waits until you open, nothing in his hands this time. ... \"Just. Saying night. That's all. I couldn't sleep.\"",
-   "why": "first lines behind ryan_back_seen false: he has the charger from step 1 (days_since_flag ryan_charger gte 1); second lines behind ryan_back_seen true, reachable only after \"Take it and shut the door\" (look sets ryan_looked and stops the canvas), so \"nothing in his hands\" is true; \"A knock ... waits until you open\" holds whether she came from the hall or from a room button; Ryan next door 23-24 by his rows; \"I couldn't sleep\" is his own word, dialogue",
+   "line": "A knock, late. Ryan, in your doorway again, and this time he doesn't pretend it's about anything. His eyes go to your chest and stay there.",
+   "why": "three groups exclusive on ryan_back_seen/ryan_looked (7_final_game.toml:9055-9066); each line and picture true at 23:00 and 23:59 and on a repeat; the cut 'He knows you won't shut the door.' no longer claims her answer; 'again' on a repeatable is allowed (voice.md truth table)",
    "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "ba4d186ba1d48c83",
+    "text": "8684d5fd4d83ce86",
     "traits": "74c4f68e6476ecee",
-    "facts": "794f3425e70e89bc",
+    "facts": "57bb58c5eba91d80",
     "facts2": "63e40120178d9641",
-    "all": "48878c52b6a0aa3c"
+    "all": "232af7ec976a7b35"
    },
    "row_hash": "c1c0e2ac2588a579",
-   "carried": true,
-   "pass": 7
+   "carried": false,
+   "pass": 21
   },
   {
    "row": "B10",
    "screen": "ryan_charger_back.take",
    "verdict": "PASS",
-   "line": "You shut the door on him. \"Right. Night. You know where I am.\" His own door clicks a second later.",
-   "why": "every line fits both showings (door shut on him whether he brought the charger or only said night); his door next door matches his rows",
+   "line": "His own door clicks a second later. He'll knock again. You know he will.",
+   "why": "true on first, last minute and repeat; repeats return per the OR rests",
    "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "88c9e004e47287aa",
+    "text": "5d13cd1dfbb8b123",
     "traits": "74c4f68e6476ecee",
-    "facts": "553013c2cdb96b81",
+    "facts": "8a6c1ecb15213362",
     "facts2": "e771106eddedbf0a",
-    "all": "405e9c94dcd213f1"
+    "all": "dccec9bb1923fac9"
    },
    "row_hash": "c1c0e2ac2588a579",
    "carried": true,
-   "pass": 7
+   "pass": 21
   },
   {
    "row": "B10",
    "screen": "vance_envelope.himself",
    "verdict": "PASS",
-   "line": "You pull your hand back. He tucks it into his shirt pocket.",
-   "why": "true; his line and Done to the street fit",
+   "line": "Suit yourself, little lady. Mark'll hear I asked you nicely.",
+   "why": "true on first, last minute and repeat; repeats return per the OR rests",
    "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "628b4dab6aec748a",
+    "text": "2b47d5c1d872feb8",
     "traits": "40c19ab6c95d7a0e",
     "facts": "fdf5e1f42084f178",
     "facts2": "ed9b77bc3be33ebd",
-    "all": "ebc1932804f4e62e"
+    "all": "032c0303d46900cd"
    },
    "row_hash": "c1c0e2ac2588a579",
    "carried": true,
-   "pass": 16
+   "pass": 21
   },
   {
    "row": "B10",
    "screen": "vance_envelope.moment",
    "verdict": "PASS",
-   "line": "Vance is at the bottom of his steps with an envelope held out. When you reach for it, he doesn't let go.",
-   "why": "'the bottom of his steps' is his house, met as she comes up from the street (entry_only_from = [\"hood_street\"] (built as entryOnlyFromPassages [\"Location_hood_street\"], read against previous() at v2.py:6927), so it fires only when she walks up from the street, never on a return from talk_vance); 'the same envelope' only behind vance_env_seen; requires_npc npc_vance; who_is_where puts him at hood_next_door Mon-Fri 17-20 and Sat-Sun 09-12 and 17-20, the trigger's windows",
+   "line": "Vance is at the bottom of his steps with another envelope. ... His thumb strokes the inside of your wrist.",
+   "why": "\"another envelope\" only behind vance_envelope; \"the same envelope\" only after a no, when he pocketed it",
    "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "5a30d2ab81b3d026",
+    "text": "b9664c1c74622be0",
     "traits": "40c19ab6c95d7a0e",
     "facts": "2a2b552e1074f620",
     "facts2": "f8e83b3951428fe1",
-    "all": "f679850544e33e23"
+    "all": "2cc8a2700e88a866"
    },
    "row_hash": "c1c0e2ac2588a579",
    "carried": true,
-   "pass": 16
+   "pass": 21
   },
   {
    "row": "B10",
    "screen": "vance_envelope.take",
    "verdict": "PASS",
    "line": "He lets go. / Tell him I'm counting.",
-   "why": "true; Done to the street after she leaves him",
+   "why": "true on first, last minute and repeat; repeats return per the OR rests",
    "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "1d9ef8679337ad7e",
+    "text": "1d5dfd90237c85a4",
     "traits": "d9172dabbd56b049",
     "facts": "8c4b6fab19cda4be",
     "facts2": "5a97becef6878ec1",
-    "all": "9f26d9a867dcac43"
+    "all": "9a2ba97713b0d98c"
    },
    "row_hash": "c1c0e2ac2588a579",
    "carried": true,
-   "pass": 16
+   "pass": 21
   },
   {
    "row": "B10",
@@ -878,20 +900,20 @@
    "row": "B10",
    "screen": "vance_gutter.moment",
    "verdict": "PASS",
-   "line": "Mr. Vance leans over his porch rail as you come up the path, a beer sweating in his hand.",
-   "why": "'as you come up the path' is now true on every showing: entry_only_from = [\"hood_street\"] (built as entryOnlyFromPassages [\"Location_hood_street\"], read against previous() at v2.py:6927), so it fires only when she walks up from the street, never on a return from talk_vance; 'again' only behind vance_asked; requires_npc npc_vance; who_is_where puts him at hood_next_door Mon-Fri 17-20 and Sat-Sun 09-12 and 17-20, the trigger's windows",
+   "line": "\"Mr. Vance leans over his porch rail again\"",
+   "why": "Vance by requires_npc; 'again' and 'Mark still hasn't touched it' sit behind vance_asked",
    "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "93f595e89d51f0b2",
+    "text": "a4a4a3a82864b462",
     "traits": "40c19ab6c95d7a0e",
     "facts": "2a2b552e1074f620",
     "facts2": "f8e83b3951428fe1",
-    "all": "4d33bd00c62d3267"
+    "all": "ccf250e3fa860c49"
    },
    "row_hash": "c1c0e2ac2588a579",
    "carried": true,
-   "pass": 16
+   "pass": 21
   },
   {
    "row": "B10",
@@ -917,54 +939,57 @@
    "screen": "zoe_give_him.let",
    "verdict": "PASS",
    "line": "You laugh, and you don't pull away. Behind you somebody whistles.",
-   "why": "Jake's side of the quad is behind her once turned",
+   "why": "true on first, last minute and repeat; repeats return per the OR rests",
    "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "022028c5793b53ca",
-    "facts": "328ede71b75c0b80",
+    "text": "8b9959afe1af0603",
+    "traits": "6b1e34b018661933",
+    "facts": "ca90215ee8b1192a",
     "facts2": "3d976cb4abe6fb91",
-    "all": "8b72ccd0024c88a0"
+    "all": "e618fd7399931ba1"
    },
    "row_hash": "c1c0e2ac2588a579",
    "carried": true,
-   "pass": 2
+   "pass": 21
   },
   {
    "row": "B10",
    "screen": "zoe_give_him.moment",
    "verdict": "PASS",
-   "line": "Zoe falls into step beside you and nods at the steps, where Jake [a tall guy with an easy smile] is watching you",
-   "why": "Jake 'with his friends' on the quad 14-16 (npc_at_location gate), Zoe 14-15; name swaps on met_jake; staging is one: walking, turned by the hips, held still",
+   "line": "He's looking again. You know how this goes.",
+   "why": "six exclusive, exhaustive groups (met_jake x dared/turned); \"again\" and \"You know how this goes\" only after zoe_turned_her; Jake placed by npc_at_location",
    "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "e049452db2317066",
-    "facts": "37fcb9425fcce652",
+    "text": "38785647e7812e6c",
+    "traits": "0b1fa80c9d60647d",
+    "facts": "41e92ad76009f2bf",
     "facts2": "130dd93dfc7a1cca",
-    "all": "0104d8053969fd0e"
+    "all": "7cd6af22ff9096cf"
    },
    "row_hash": "c1c0e2ac2588a579",
    "carried": true,
-   "pass": 2
+   "pass": 21
   },
   {
    "row": "B10",
    "screen": "zoe_give_him.stop",
    "verdict": "PASS",
-   "line": "She lets go, grinning, and you walk on with your face on fire.",
-   "why": "matches the walking staging",
+   "line": "Fine. Prude. He'd have loved it. You'd have loved it.",
+   "why": "true on first, last minute and repeat; repeats return per the OR rests",
    "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "685d557c1d88406a",
-    "facts": "0521fb2c86775d25",
+    "text": "e14ec4e6e5f44ee7",
+    "traits": "6b1e34b018661933",
+    "facts": "4dfba33715001ede",
     "facts2": "317aff3f6de89433",
-    "all": "aeedecb677ebc088"
+    "all": "46aedc9ee817a56c"
    },
    "row_hash": "c1c0e2ac2588a579",
    "carried": true,
-   "pass": 2
+   "pass": 21
   },
   {
    "row": "B10",
@@ -2528,20 +2553,20 @@
    "row": "B8",
    "screen": "hale_called_in.moment",
    "verdict": "PASS",
-   "line": "His eyes go to your chest and stay there.",
-   "why": "no garment, no number",
+   "line": "He's got a class list in front of him. His eyes go to your chest and stay there.",
+   "why": "no number, and no garment named in prose or picture",
    "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "f1306f5ed757f9ab",
+    "text": "0c6963f571ba385d",
     "traits": "825724317465730d",
     "facts": "6ea67dc58c8d9698",
     "facts2": "ed9eba5ccb976fe4",
-    "all": "60672e322c6eb2bc"
+    "all": "a5596f5e12b35e56"
    },
    "row_hash": "80d415cf08e0ebfe",
    "carried": true,
-   "pass": 8
+   "pass": 20
   },
   {
    "row": "B8",
@@ -2585,39 +2610,39 @@
    "row": "B8",
    "screen": "marco_hips.let",
    "verdict": "PASS",
-   "line": "\"Feel that? That's where they go. I'll check it next time.\"",
-   "why": "$5 / 20 energy / 1 hour match PLAN Gym row; exits 60 minutes; no garment named, the act's leggings-and-sports-top lock is before it",
+   "line": "You hold still. His thumbs press once, and stay. / Feel that? That's where they go.",
+   "why": "no number, and no garment named in prose or picture",
    "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "d73ea7023c6bda5d",
+    "text": "eeaf671d49d92788",
     "traits": "e4365d01d4eb14be",
     "facts": "7628053aa2fe64cb",
     "facts2": "49f0b57a72e77115",
-    "all": "db5f3e6bb8bd0c1e"
+    "all": "59a4c404c27b7603"
    },
    "row_hash": "80d415cf08e0ebfe",
    "carried": true,
-   "pass": 11
+   "pass": 20
   },
   {
    "row": "B8",
    "screen": "marco_hips.moment",
    "verdict": "PASS",
-   "line": "His hands land on your hips and turn them, and stay.",
-   "why": "no garment named; no number; both exits spend 60 minutes, the workout's hour",
+   "line": "His hands land on your hips and turn them, and stay. [image: in leggings and a sports top]",
+   "why": "the picture's leggings and sports top are guaranteed: body_workout's conditions equip both (7_final_game.toml body_workout trigger), and marco_hips only substitutes inside it",
    "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "bf09273041b98acb",
+    "text": "b5927efcb8ec8179",
     "traits": "e4365d01d4eb14be",
     "facts": "f9e936b5d2f7fa16",
     "facts2": "e2ce2f969cea33c2",
-    "all": "06eb346786cec3d5"
+    "all": "42f61fe25f478963"
    },
    "row_hash": "80d415cf08e0ebfe",
    "carried": true,
-   "pass": 14
+   "pass": 20
   },
   {
    "row": "B8",
@@ -2828,134 +2853,134 @@
    "row": "B8",
    "screen": "ryan_charger_back.look",
    "verdict": "PASS",
-   "line": "He looks again, slower, at your chest.",
-   "why": "no number and no garment named; chest is body",
+   "line": "You don't move. You can't. He looks again, slower, at your chest. Then he sets the charger down just inside your door without looking up.",
+   "why": "no garment of hers named; 7-day and 3-day rests match cards P49 and P78",
    "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "ca81d6cf8e22d3c8",
+    "text": "57b3817f5fc7b0fa",
     "traits": "74c4f68e6476ecee",
-    "facts": "e03ae2cd56295992",
+    "facts": "1bff26002b7cd503",
     "facts2": "aa200880ec280d14",
-    "all": "1a9d24549c5e70f6"
+    "all": "cfea766e5cbf606f"
    },
    "row_hash": "80d415cf08e0ebfe",
    "carried": true,
-   "pass": 7
+   "pass": 21
   },
   {
    "row": "B8",
    "screen": "ryan_charger_back.look2",
    "verdict": "PASS",
    "line": "You don't move. You can't. He looks again, slower, at your chest.",
-   "why": "no number and no garment named; chest is body, not clothes",
+   "why": "no garment of hers named; 7-day and 3-day rests match cards P49 and P78",
    "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "b6fc34828f2bbcde",
+    "text": "40c1e7c29169bd2b",
     "traits": "74c4f68e6476ecee",
-    "facts": "e03ae2cd56295992",
+    "facts": "1bff26002b7cd503",
     "facts2": "aa200880ec280d14",
-    "all": "acd7ba9ed82826e4"
+    "all": "01f2925ca70e9a75"
    },
    "row_hash": "80d415cf08e0ebfe",
    "carried": true,
-   "pass": 7
+   "pass": 21
   },
   {
    "row": "B8",
    "screen": "ryan_charger_back.moment",
    "verdict": "PASS",
-   "line": "A knock, late. Ryan waits until you open, your charger held out. His eyes go to your chest, stay a second too long, then snap to the floor.",
-   "why": "no number and no garment of hers named; chance 0.65 and the three-day rest match the card",
+   "line": "A knock, late. Ryan, in your doorway again, and this time he doesn't pretend it's about anything. His eyes go to your chest and stay there.",
+   "why": "no garment of hers named; 7-day yes rest and 3-day no rest in the trigger match P78 card and NOTES",
    "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "ba4d186ba1d48c83",
+    "text": "8684d5fd4d83ce86",
     "traits": "74c4f68e6476ecee",
-    "facts": "794f3425e70e89bc",
+    "facts": "57bb58c5eba91d80",
     "facts2": "63e40120178d9641",
-    "all": "48878c52b6a0aa3c"
+    "all": "232af7ec976a7b35"
    },
    "row_hash": "80d415cf08e0ebfe",
-   "carried": true,
-   "pass": 7
+   "carried": false,
+   "pass": 21
   },
   {
    "row": "B8",
    "screen": "ryan_charger_back.take",
    "verdict": "PASS",
-   "line": "You shut the door on him. \"Right. Night. You know where I am.\" His own door clicks a second later.",
-   "why": "no number and no garment named",
+   "line": "His own door clicks a second later. He'll knock again. You know he will.",
+   "why": "no garment of hers named; 7-day and 3-day rests match cards P49 and P78",
    "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "88c9e004e47287aa",
+    "text": "5d13cd1dfbb8b123",
     "traits": "74c4f68e6476ecee",
-    "facts": "553013c2cdb96b81",
+    "facts": "8a6c1ecb15213362",
     "facts2": "e771106eddedbf0a",
-    "all": "405e9c94dcd213f1"
+    "all": "dccec9bb1923fac9"
    },
    "row_hash": "80d415cf08e0ebfe",
    "carried": true,
-   "pass": 7
+   "pass": 21
   },
   {
    "row": "B8",
    "screen": "vance_envelope.himself",
    "verdict": "PASS",
-   "line": "You pull your hand back. He tucks it into his shirt pocket.",
-   "why": "his shirt, not hers; no number",
+   "line": "Suit yourself, little lady. Mark'll hear I asked you nicely.",
+   "why": "no garment of hers named; 7-day and 3-day rests match cards P49 and P78",
    "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "628b4dab6aec748a",
+    "text": "2b47d5c1d872feb8",
     "traits": "40c19ab6c95d7a0e",
     "facts": "fdf5e1f42084f178",
     "facts2": "ed9b77bc3be33ebd",
-    "all": "ebc1932804f4e62e"
+    "all": "032c0303d46900cd"
    },
    "row_hash": "80d415cf08e0ebfe",
    "carried": true,
-   "pass": 16
+   "pass": 21
   },
   {
    "row": "B8",
    "screen": "vance_envelope.moment",
    "verdict": "PASS",
-   "line": "Vance is at the bottom of his steps with an envelope held out. When you reach for it, he doesn't let go.",
-   "why": "no garment of hers, no number",
+   "line": "Vance is at the bottom of his steps with another envelope. ... His thumb strokes the inside of your wrist.",
+   "why": "no garment of hers named; 7-day and 3-day rests match cards P49 and P78",
    "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "5a30d2ab81b3d026",
+    "text": "b9664c1c74622be0",
     "traits": "40c19ab6c95d7a0e",
     "facts": "2a2b552e1074f620",
     "facts2": "f8e83b3951428fe1",
-    "all": "f679850544e33e23"
+    "all": "2cc8a2700e88a866"
    },
    "row_hash": "80d415cf08e0ebfe",
    "carried": true,
-   "pass": 16
+   "pass": 21
   },
   {
    "row": "B8",
    "screen": "vance_envelope.take",
    "verdict": "PASS",
    "line": "He lets go. / Tell him I'm counting.",
-   "why": "no garment of hers, no number",
+   "why": "no garment of hers named; 7-day and 3-day rests match cards P49 and P78",
    "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "1d9ef8679337ad7e",
+    "text": "1d5dfd90237c85a4",
     "traits": "d9172dabbd56b049",
     "facts": "8c4b6fab19cda4be",
     "facts2": "5a97becef6878ec1",
-    "all": "9f26d9a867dcac43"
+    "all": "9a2ba97713b0d98c"
    },
    "row_hash": "80d415cf08e0ebfe",
    "carried": true,
-   "pass": 16
+   "pass": 21
   },
   {
    "row": "B8",
@@ -2980,20 +3005,20 @@
    "row": "B8",
    "screen": "vance_gutter.moment",
    "verdict": "PASS",
-   "line": "Mr. Vance leans over his porch rail as you come up the path, a beer sweating in his hand.",
-   "why": "names her legs only, no garment, no number",
+   "line": "framed at her legs as his eyes stay on them",
+   "why": "no number; no garment named",
    "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "93f595e89d51f0b2",
+    "text": "a4a4a3a82864b462",
     "traits": "40c19ab6c95d7a0e",
     "facts": "2a2b552e1074f620",
     "facts2": "f8e83b3951428fe1",
-    "all": "4d33bd00c62d3267"
+    "all": "ccf250e3fa860c49"
    },
    "row_hash": "80d415cf08e0ebfe",
    "carried": true,
-   "pass": 16
+   "pass": 21
   },
   {
    "row": "B8",
@@ -3019,54 +3044,57 @@
    "screen": "zoe_give_him.let",
    "verdict": "PASS",
    "line": "You laugh, and you don't pull away. Behind you somebody whistles.",
-   "why": "no number or her garment named; chance 0.65 and the 3-day rest match the card and NOTES (2026-11-26)",
+   "why": "no garment of hers named; 7-day and 3-day rests match cards P49 and P78",
    "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "022028c5793b53ca",
-    "facts": "328ede71b75c0b80",
+    "text": "8b9959afe1af0603",
+    "traits": "6b1e34b018661933",
+    "facts": "ca90215ee8b1192a",
     "facts2": "3d976cb4abe6fb91",
-    "all": "8b72ccd0024c88a0"
+    "all": "e618fd7399931ba1"
    },
    "row_hash": "80d415cf08e0ebfe",
    "carried": true,
-   "pass": 2
+   "pass": 21
   },
   {
    "row": "B8",
    "screen": "zoe_give_him.moment",
    "verdict": "PASS",
-   "line": "Zoe falls into step beside you and nods at the steps, where Jake [a tall guy with an easy smile] is watching you",
-   "why": "no number or her garment named; chance 0.65 and the 3-day rest match the card and NOTES (2026-11-26)",
+   "line": "He's looking again. You know how this goes.",
+   "why": "no garment of hers named; 7-day and 3-day rests match cards P49 and P78",
    "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "e049452db2317066",
-    "facts": "37fcb9425fcce652",
+    "text": "38785647e7812e6c",
+    "traits": "0b1fa80c9d60647d",
+    "facts": "41e92ad76009f2bf",
     "facts2": "130dd93dfc7a1cca",
-    "all": "0104d8053969fd0e"
+    "all": "7cd6af22ff9096cf"
    },
    "row_hash": "80d415cf08e0ebfe",
    "carried": true,
-   "pass": 2
+   "pass": 21
   },
   {
    "row": "B8",
    "screen": "zoe_give_him.stop",
    "verdict": "PASS",
-   "line": "She lets go, grinning, and you walk on with your face on fire.",
-   "why": "no number or her garment named; chance 0.65 and the 3-day rest match the card and NOTES (2026-11-26)",
+   "line": "Fine. Prude. He'd have loved it. You'd have loved it.",
+   "why": "no garment of hers named; 7-day and 3-day rests match cards P49 and P78",
    "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "685d557c1d88406a",
-    "facts": "0521fb2c86775d25",
+    "text": "e14ec4e6e5f44ee7",
+    "traits": "6b1e34b018661933",
+    "facts": "4dfba33715001ede",
     "facts2": "317aff3f6de89433",
-    "all": "aeedecb677ebc088"
+    "all": "46aedc9ee817a56c"
    },
    "row_hash": "80d415cf08e0ebfe",
    "carried": true,
-   "pass": 2
+   "pass": 21
   },
   {
    "row": "B8",
@@ -3450,6 +3478,45 @@
    "pass": 7
   },
   {
+   "row": "C1234",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "His eyes go to your chest and stay there. [image]",
+   "why": "each spot follows its payoff line; ryan_charger_back and vance_envelope sit after both versions so one block serves both (C1255)",
+   "cause": null,
+   "note": false,
+   "screen_hash": "7c6eb9c518e434a3",
+   "row_hash": "1b2a2d5f05b10331",
+   "carried": true,
+   "pass": 20
+  },
+  {
+   "row": "C1238",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "[image] a woman's wrist ... his thumb resting on the inside of it, an envelope",
+   "why": "each picture shows only what both versions of its screen say; garments named only where the act's conditions guarantee them",
+   "cause": null,
+   "note": false,
+   "screen_hash": "7c6eb9c518e434a3",
+   "row_hash": "6fd430204e984124",
+   "carried": true,
+   "pass": 20
+  },
+  {
+   "row": "C1249",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "\u2014",
+   "why": "note: the spots go to looks and touches, not rooms",
+   "cause": null,
+   "note": true,
+   "screen_hash": "7c6eb9c518e434a3",
+   "row_hash": "a843f9b57e43a020",
+   "carried": true,
+   "pass": 20
+  },
+  {
    "row": "C1250",
    "screen": "*",
    "verdict": "N/A",
@@ -3480,6 +3547,149 @@
    "row_hash": "fde578d75b0d3620",
    "carried": true,
    "pass": 7
+  },
+  {
+   "row": "C1255",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "pool_dir touch/marco_hips_t4 etc.",
+   "why": "five blocks, five distinct pool_dirs; no pool_dir repeats in the build",
+   "cause": null,
+   "note": false,
+   "screen_hash": "7c6eb9c518e434a3",
+   "row_hash": "803b4c46f1e9d7c7",
+   "carried": true,
+   "pass": 20
+  },
+  {
+   "row": "C1261",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "His eyes go to your chest and stay there.",
+   "why": "each spot is where the player wants to look: the look or the touch",
+   "cause": null,
+   "note": false,
+   "screen_hash": "7c6eb9c518e434a3",
+   "row_hash": "536e26b5fdc76194",
+   "carried": true,
+   "pass": 20
+  },
+  {
+   "row": "C1265",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "\u2014",
+   "why": "no spot sits on a chore, one-liner, notice, door or menu",
+   "cause": null,
+   "note": false,
+   "screen_hash": "7c6eb9c518e434a3",
+   "row_hash": "689fd05a4bcbd8be",
+   "carried": true,
+   "pass": 20
+  },
+  {
+   "row": "C1267",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "She takes you by the hips and turns you, slow, so he gets your ass.",
+   "why": "each picture gives the body the words only name",
+   "cause": null,
+   "note": false,
+   "screen_hash": "7c6eb9c518e434a3",
+   "row_hash": "f0db81b801577bf2",
+   "carried": true,
+   "pass": 20
+  },
+  {
+   "row": "C1274",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "look/..._t3, touch/..._t4",
+   "why": "note: looks t3 (hale, ryan), touches t4 (marco, vance, zoe)",
+   "cause": null,
+   "note": true,
+   "screen_hash": "7c6eb9c518e434a3",
+   "row_hash": "f44d59a3bd6bb921",
+   "carried": true,
+   "pass": 20
+  },
+  {
+   "row": "C1275",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "... gif",
+   "why": "all gifs with 'gif' in the search words, per LO's 'the group 2, gifs'",
+   "cause": null,
+   "note": false,
+   "screen_hash": "7c6eb9c518e434a3",
+   "row_hash": "ef82ef3fdf215191",
+   "carried": true,
+   "pass": 20
+  },
+  {
+   "row": "C1277",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "psychology office / bedroom door / porch's steps / college quad / gym bench",
+   "why": "every description names its place",
+   "cause": null,
+   "note": false,
+   "screen_hash": "7c6eb9c518e434a3",
+   "row_hash": "ee51917c5fb43c13",
+   "carried": true,
+   "pass": 20
+  },
+  {
+   "row": "C1278",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "a woman of 18",
+   "why": "every description gives her age",
+   "cause": null,
+   "note": false,
+   "screen_hash": "7c6eb9c518e434a3",
+   "row_hash": "4d23ccfdc4e41cd9",
+   "carried": true,
+   "pass": 20
+  },
+  {
+   "row": "C1279",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "At a gym bench by the mirrors",
+   "why": "no mirror shot of her; nothing needs 'No phone'",
+   "cause": null,
+   "note": false,
+   "screen_hash": "7c6eb9c518e434a3",
+   "row_hash": "534032f000706830",
+   "carried": true,
+   "pass": 20
+  },
+  {
+   "row": "C1280",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "pool = 2 (t3) / pool = 4 (t4)",
+   "why": "repeatable t3 looks 2, repeatable t4 touches 4",
+   "cause": null,
+   "note": false,
+   "screen_hash": "7c6eb9c518e434a3",
+   "row_hash": "a709f257162373b0",
+   "carried": true,
+   "pass": 20
+  },
+  {
+   "row": "C1281",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "His view ... No man in frame.",
+   "why": "looks are the looker's view, no looker in frame",
+   "cause": null,
+   "note": false,
+   "screen_hash": "7c6eb9c518e434a3",
+   "row_hash": "4e5683077291be1f",
+   "carried": true,
+   "pass": 20
   },
   {
    "row": "C1284",
@@ -4540,19 +4750,19 @@
    "screen": "hale_called_in.moment",
    "verdict": "FAIL",
    "line": "\"Young lady. In here a minute.\" / \"Front row, next class. I like to see who's listening.\"",
-   "why": "note row: two spoken lines on a repeatable (unchanged by the move)",
+   "why": "note row: still two spoken lines on a repeatable; the picture added changes nothing",
    "cause": null,
    "note": true,
    "screen_hash": {
-    "text": "f1306f5ed757f9ab",
+    "text": "0c6963f571ba385d",
     "traits": "825724317465730d",
     "facts": "6ea67dc58c8d9698",
     "facts2": "ed9eba5ccb976fe4",
-    "all": "60672e322c6eb2bc"
+    "all": "a5596f5e12b35e56"
    },
    "row_hash": "d5758757a709b1af",
    "carried": true,
-   "pass": 8
+   "pass": 20
   },
   {
    "row": "C151",
@@ -6154,14 +6364,14 @@
    "row": "C2195",
    "screen": "*",
    "verdict": "PASS",
-   "line": "ryan_charger ... nadia_tip: trigger_mode = \"random\", chance 0.65, max_triggers_per_day = 1, came_to_her_today read and set on every choice",
-   "why": "P49's ten are kind (b): each fires by itself on arrival, none is a button; C2195's kind-(a) half (off the shared flag) does not apply to them, and no kind-(a) scene reads or sets came_to_her_today (grep)",
+   "line": "came_to_her_today is_false",
+   "why": "these ten are 'comes to her' scenes (kind b), which keep the shared flag; C2195 bars only kind (a) from it, and none of P49's scenes is a kind-(a) walk-in; marco_hips/nadia_tip are substitutions",
    "cause": null,
    "note": false,
-   "screen_hash": "d12e9c24872493aa",
-   "row_hash": "77083291a86791c3",
+   "screen_hash": "2039be607205500b",
+   "row_hash": "211dd40ccf98aea0",
    "carried": true,
-   "pass": 10
+   "pass": 19
   },
   {
    "row": "C2196",
@@ -6178,22 +6388,41 @@
   },
   {
    "row": "C2196",
-   "screen": "marco_hips.moment",
+   "screen": "hale_called_in.moment",
    "verdict": "PASS",
-   "line": "You show your pass at the desk and find a bench by the mirrors. You're halfway through a set when Marco walks over and looks you over.",
-   "why": "what she is doing and wearing when it fires: mid-workout, after the act's 20 energy is taken, in leggings and a sports top (the act's conditions); the words put her in the act ('halfway through a set') and her stance fits; it never fires on arrival (substitution_only; headless 2026-11-27: fires inside the workout)",
+   "line": "He's got a class list in front of him. His eyes go to your chest and stay there.",
+   "why": "she arrives at his office door; the look and the call-in fit her just walking in",
    "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "bf09273041b98acb",
-    "traits": "e4365d01d4eb14be",
-    "facts": "f9e936b5d2f7fa16",
-    "facts2": "e2ce2f969cea33c2",
-    "all": "06eb346786cec3d5"
+    "text": "0c6963f571ba385d",
+    "traits": "825724317465730d",
+    "facts": "6ea67dc58c8d9698",
+    "facts2": "ed9eba5ccb976fe4",
+    "all": "a5596f5e12b35e56"
    },
    "row_hash": "a8ae0700d13a7f9b",
    "carried": true,
-   "pass": 14
+   "pass": 20
+  },
+  {
+   "row": "C2196",
+   "screen": "marco_hips.moment",
+   "verdict": "PASS",
+   "line": "His hands land on your hips and turn them, and stay. [image: in leggings and a sports top]",
+   "why": "rides on the workout as a substitution, mid-set, in the act's clothes",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "b5927efcb8ec8179",
+    "traits": "e4365d01d4eb14be",
+    "facts": "f9e936b5d2f7fa16",
+    "facts2": "e2ce2f969cea33c2",
+    "all": "42f61fe25f478963"
+   },
+   "row_hash": "a8ae0700d13a7f9b",
+   "carried": true,
+   "pass": 20
   },
   {
    "row": "C2196",
@@ -6216,41 +6445,79 @@
   },
   {
    "row": "C2196",
-   "screen": "vance_envelope.moment",
+   "screen": "ryan_charger_back.moment",
    "verdict": "PASS",
-   "line": "Vance is at the bottom of his steps with an envelope held out. When you reach for it, he doesn't let go.",
-   "why": "what is she doing: she has just walked up from the street, the only way it can fire (entry_only_from = [\"hood_street\"] (built as entryOnlyFromPassages [\"Location_hood_street\"], read against previous() at v2.py:6927), so it fires only when she walks up from the street, never on a return from talk_vance); wearing: anything, the words name no garment; they agree",
+   "line": "A knock, late.",
+   "why": "fires in her room at night; a knock at her door needs no act of hers",
    "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "5a30d2ab81b3d026",
+    "text": "8684d5fd4d83ce86",
+    "traits": "74c4f68e6476ecee",
+    "facts": "57bb58c5eba91d80",
+    "facts2": "63e40120178d9641",
+    "all": "232af7ec976a7b35"
+   },
+   "row_hash": "a8ae0700d13a7f9b",
+   "carried": false,
+   "pass": 21
+  },
+  {
+   "row": "C2196",
+   "screen": "vance_envelope.moment",
+   "verdict": "PASS",
+   "line": "Vance is at the bottom of his steps with another envelope. ... His thumb strokes the inside of your wrist.",
+   "why": "she has just walked up from the street (entry_only_from); he is at his steps",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "b9664c1c74622be0",
     "traits": "40c19ab6c95d7a0e",
     "facts": "2a2b552e1074f620",
     "facts2": "f8e83b3951428fe1",
-    "all": "f679850544e33e23"
+    "all": "2cc8a2700e88a866"
    },
    "row_hash": "a8ae0700d13a7f9b",
    "carried": true,
-   "pass": 16
+   "pass": 21
   },
   {
    "row": "C2196",
    "screen": "vance_gutter.moment",
    "verdict": "PASS",
-   "line": "Mr. Vance leans over his porch rail as you come up the path, a beer sweating in his hand.",
-   "why": "what is she doing: she has just walked up from the street, the only way it can fire (entry_only_from = [\"hood_street\"] (built as entryOnlyFromPassages [\"Location_hood_street\"], read against previous() at v2.py:6927), so it fires only when she walks up from the street, never on a return from talk_vance); wearing: anything, the words name only her legs; they agree",
+   "line": "\"as you come up the path\"",
+   "why": "entry_only_from hood_street: arrival words for an arrival",
    "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "93f595e89d51f0b2",
+    "text": "a4a4a3a82864b462",
     "traits": "40c19ab6c95d7a0e",
     "facts": "2a2b552e1074f620",
     "facts2": "f8e83b3951428fe1",
-    "all": "4d33bd00c62d3267"
+    "all": "ccf250e3fa860c49"
    },
    "row_hash": "a8ae0700d13a7f9b",
    "carried": true,
-   "pass": 16
+   "pass": 21
+  },
+  {
+   "row": "C2196",
+   "screen": "zoe_give_him.moment",
+   "verdict": "PASS",
+   "line": "He's looking again. You know how this goes.",
+   "why": "walking the quad; Zoe falls into step",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "38785647e7812e6c",
+    "traits": "0b1fa80c9d60647d",
+    "facts": "41e92ad76009f2bf",
+    "facts2": "130dd93dfc7a1cca",
+    "all": "7cd6af22ff9096cf"
+   },
+   "row_hash": "a8ae0700d13a7f9b",
+   "carried": true,
+   "pass": 21
   },
   {
    "row": "C2197",
@@ -6281,7 +6548,7 @@
     "all": "60672e322c6eb2bc"
    },
    "row_hash": "73dfe095a72154a3",
-   "carried": false,
+   "carried": true,
    "pass": 18
   },
   {
@@ -6300,7 +6567,7 @@
     "all": "06eb346786cec3d5"
    },
    "row_hash": "73dfe095a72154a3",
-   "carried": false,
+   "carried": true,
    "pass": 18
   },
   {
@@ -6319,7 +6586,7 @@
     "all": "06f6053c7ed12440"
    },
    "row_hash": "73dfe095a72154a3",
-   "carried": false,
+   "carried": true,
    "pass": 18
   },
   {
@@ -6338,7 +6605,7 @@
     "all": "0571296a34379742"
    },
    "row_hash": "73dfe095a72154a3",
-   "carried": false,
+   "carried": true,
    "pass": 18
   },
   {
@@ -6357,7 +6624,7 @@
     "all": "7cf04c2f7df947b0"
    },
    "row_hash": "73dfe095a72154a3",
-   "carried": false,
+   "carried": true,
    "pass": 18
   },
   {
@@ -6376,7 +6643,7 @@
     "all": "f679850544e33e23"
    },
    "row_hash": "73dfe095a72154a3",
-   "carried": false,
+   "carried": true,
    "pass": 18
   },
   {
@@ -6395,7 +6662,7 @@
     "all": "4d33bd00c62d3267"
    },
    "row_hash": "73dfe095a72154a3",
-   "carried": false,
+   "carried": true,
    "pass": 18
   },
   {
@@ -6414,7 +6681,7 @@
     "all": "764343a3af3a44e8"
    },
    "row_hash": "73dfe095a72154a3",
-   "carried": false,
+   "carried": true,
    "pass": 18
   },
   {
@@ -6433,7 +6700,7 @@
     "all": "17acf3639374b6c4"
    },
    "row_hash": "73dfe095a72154a3",
-   "carried": false,
+   "carried": true,
    "pass": 18
   },
   {
@@ -6453,14 +6720,14 @@
    "row": "C2201",
    "screen": "*",
    "verdict": "N/A",
-   "line": "A knock. Ryan waits in the hall until you open the door",
-   "why": "scene and menu screens, not a place's description; the descriptions of the places they sit at read no clothes or meters (all 31 checked)",
+   "line": "\u2014",
+   "why": "builds no place description; its screens are scenes or menus, and a scene is not a place's description",
    "cause": null,
    "note": false,
    "screen_hash": "2039be607205500b",
-   "row_hash": "d119dfe665f76359",
+   "row_hash": "7fddf5e17dbdaaf9",
    "carried": true,
-   "pass": 17
+   "pass": 19
   },
   {
    "row": "C2202",
@@ -6472,8 +6739,66 @@
    "note": false,
    "screen_hash": "2039be607205500b",
    "row_hash": "6e90fed7eae62131",
-   "carried": false,
+   "carried": true,
    "pass": 18
+  },
+  {
+   "row": "C2203",
+   "screen": "*",
+   "verdict": "N/A",
+   "line": "\u2014",
+   "why": "no event at its places: nothing here has hours of its own as a party or night out; Zoe's party (C2203) is P75's and P05's place",
+   "cause": null,
+   "note": false,
+   "screen_hash": "2039be607205500b",
+   "row_hash": "365a29fd77f6b765",
+   "carried": true,
+   "pass": 19
+  },
+  {
+   "row": "C2204",
+   "screen": "vance_gutter.moment",
+   "verdict": "PASS",
+   "line": "\"His eyes stay on your legs the whole time you answer.\" <<look/vance_gutter_t3>>",
+   "why": "a look at her, _t3, pool 2, a gif (she walks), right after the payoff line; Does now names something sexual shows (P49.md:190)",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "a4a4a3a82864b462",
+    "traits": "40c19ab6c95d7a0e",
+    "facts": "2a2b552e1074f620",
+    "facts2": "f8e83b3951428fe1",
+    "all": "ccf250e3fa860c49"
+   },
+   "row_hash": "3231b5a8a46eaa49",
+   "carried": true,
+   "pass": 21
+  },
+  {
+   "row": "C2205",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "{ type = \"days_since_flag\", flag_key = \"ryan_looked\", operator = \"gte\", value = 7 }",
+   "why": "all three last steps OR is_false with days_since_flag gte 7 on the yes flag, restamped by every set (v2.py:7527-7529); step ones stay is_false; after-yes words read the flag",
+   "cause": null,
+   "note": false,
+   "screen_hash": "b86043502358b972",
+   "row_hash": "44b9341eed4268bc",
+   "carried": true,
+   "pass": 21
+  },
+  {
+   "row": "C2206",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "",
+   "why": "scenes.check_chains over P49's ten canvases: every chain under CHAIN_VARS 14 (ryan_charger_back 3 groups/2 vars, zoe_give_him 6/3, vance_envelope 3/2), none red; only reds are zoe_door_sam and rep_mirror, outside these pieces (v2.py:18922-18928)",
+   "cause": null,
+   "note": false,
+   "screen_hash": "ea7ff8cc1cbd9a00",
+   "row_hash": "d8ebf6d6b2abf6a5",
+   "carried": false,
+   "pass": 21
   },
   {
    "row": "C286",
@@ -6509,20 +6834,21 @@
   {
    "row": "C287",
    "screen": "zoe_give_him.moment",
-   "verdict": "FAIL",
-   "line": "\"He's looking at you. Go on. Give him something.\" / \"Give him something this time.\"",
-   "why": "note row: still a first dare (stage 2) put to her, though Zoe now does the turning and her answer is a reaction",
+   "verdict": "PASS",
+   "line": "He's looking at you. Go on. Give him something.",
+   "why": "Zoe's basic dare; she never acts on it herself, Zoe turns her (LO, NOTES.md:69 \"zoe giving very basic dare, and player doesnt accept it\"; :372 \"Keep 11-21: no accept\")",
    "cause": null,
    "note": true,
    "screen_hash": {
-    "text": "e049452db2317066",
-    "facts": "37fcb9425fcce652",
+    "text": "38785647e7812e6c",
+    "traits": "0b1fa80c9d60647d",
+    "facts": "41e92ad76009f2bf",
     "facts2": "130dd93dfc7a1cca",
-    "all": "0104d8053969fd0e"
+    "all": "7cd6af22ff9096cf"
    },
    "row_hash": "480f7e9a025db5b0",
    "carried": true,
-   "pass": 2
+   "pass": 21
   },
   {
    "row": "C288",
@@ -8040,20 +8366,20 @@
    "row": "C460",
    "screen": "hale_called_in.moment",
    "verdict": "PASS",
-   "line": "Dr. Hale looks up from his desk before you're through his door.",
-   "why": "true on every arrival it fires on",
+   "line": "He's got a class list in front of him. His eyes go to your chest and stay there.",
+   "why": "every claim checks against the trigger, the sheet and the card; the new picture says only what the screen says",
    "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "f1306f5ed757f9ab",
+    "text": "0c6963f571ba385d",
     "traits": "825724317465730d",
     "facts": "6ea67dc58c8d9698",
     "facts2": "ed9eba5ccb976fe4",
-    "all": "60672e322c6eb2bc"
+    "all": "a5596f5e12b35e56"
    },
    "row_hash": "67e48e60d5053a2e",
    "carried": true,
-   "pass": 8
+   "pass": 20
   },
   {
    "row": "C460",
@@ -8097,39 +8423,39 @@
    "row": "C460",
    "screen": "marco_hips.let",
    "verdict": "PASS",
-   "line": "\"Feel that? That's where they go. I'll check it next time.\"",
-   "why": "day pass and energy paid by body_workout before the swap; Marco present by requires_npc and the rule's npc_at_location; stance line behind marco_fixed_form false, \"Hips. Show me you remember.\" behind true; \"next time\" is built (the rest returns the scene)",
+   "line": "You hold still. His thumbs press once, and stay. / Feel that? That's where they go.",
+   "why": "every claim checks against the trigger, the sheet and the card; the new picture says only what the screen says",
    "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "d73ea7023c6bda5d",
+    "text": "eeaf671d49d92788",
     "traits": "e4365d01d4eb14be",
     "facts": "7628053aa2fe64cb",
     "facts2": "49f0b57a72e77115",
-    "all": "db5f3e6bb8bd0c1e"
+    "all": "59a4c404c27b7603"
    },
    "row_hash": "67e48e60d5053a2e",
    "carried": true,
-   "pass": 11
+   "pass": 20
   },
   {
    "row": "C460",
    "screen": "marco_hips.moment",
    "verdict": "PASS",
-   "line": "You show your pass at the desk and find a bench by the mirrors. You're halfway through a set when Marco walks over and looks you over.",
-   "why": "every claim holds on every reach: the pass is running, she is lifting, Marco is there by rule and row, met_marco is set; no past without its flag",
+   "line": "His hands land on your hips and turn them, and stay. [image: in leggings and a sports top]",
+   "why": "every claim checks against the trigger, the sheet and the card; the new picture says only what the screen says",
    "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "bf09273041b98acb",
+    "text": "b5927efcb8ec8179",
     "traits": "e4365d01d4eb14be",
     "facts": "f9e936b5d2f7fa16",
     "facts2": "e2ce2f969cea33c2",
-    "all": "06eb346786cec3d5"
+    "all": "42f61fe25f478963"
    },
    "row_hash": "67e48e60d5053a2e",
    "carried": true,
-   "pass": 14
+   "pass": 20
   },
   {
    "row": "C460",
@@ -8340,134 +8666,134 @@
    "row": "C460",
    "screen": "ryan_charger_back.look",
    "verdict": "PASS",
-   "line": "Then he sets the charger down just inside your door without looking up. \"Charger's there. Night. Sorry. Night. Sleep well.\" His door clicks shut next door.",
-   "why": "true on the only showing it can render on (the first, charger in hand); Ryan next door 23-24; one bathroom is the house's design; his bathroom row every next morning",
+   "line": "You don't move. You can't. He looks again, slower, at your chest. Then he sets the charger down just inside your door without looking up.",
+   "why": "every claim true on every reachable visit, including the 7-day repeat",
    "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "ca81d6cf8e22d3c8",
+    "text": "57b3817f5fc7b0fa",
     "traits": "74c4f68e6476ecee",
-    "facts": "e03ae2cd56295992",
+    "facts": "1bff26002b7cd503",
     "facts2": "aa200880ec280d14",
-    "all": "1a9d24549c5e70f6"
+    "all": "cfea766e5cbf606f"
    },
    "row_hash": "67e48e60d5053a2e",
    "carried": true,
-   "pass": 7
+   "pass": 21
   },
   {
    "row": "C460",
    "screen": "ryan_charger_back.look2",
    "verdict": "PASS",
-   "line": "His door clicks shut next door. In the morning it'll be the two of you and one bathroom again.",
-   "why": "every claim true on every reach: Ryan next door 23-24 by his rows; his bathroom row every next morning (incl. Saturday 10-11 after a Friday); one bathroom is the house's design (home_bathroom description); no arrival claim, so true when she came from a room button",
+   "line": "You don't move. You can't. He looks again, slower, at your chest.",
+   "why": "every claim true on every reachable visit, including the 7-day repeat",
    "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "b6fc34828f2bbcde",
+    "text": "40c1e7c29169bd2b",
     "traits": "74c4f68e6476ecee",
-    "facts": "e03ae2cd56295992",
+    "facts": "1bff26002b7cd503",
     "facts2": "aa200880ec280d14",
-    "all": "acd7ba9ed82826e4"
+    "all": "01f2925ca70e9a75"
    },
    "row_hash": "67e48e60d5053a2e",
    "carried": true,
-   "pass": 7
+   "pass": 21
   },
   {
    "row": "C460",
    "screen": "ryan_charger_back.moment",
    "verdict": "PASS",
-   "line": "A knock, late. Ryan waits until you open, your charger held out. His eyes go to your chest, stay a second too long, then snap to the floor. / again: A knock, late. Ryan waits until you open, nothing in his hands this time. ... \"Just. Saying night. That's all. I couldn't sleep.\"",
-   "why": "every claim holds at 23:00 and 23:59 on both showings and whichever way she reached her room; the knock shows him coming from next door, no line says she just walked in",
+   "line": "A knock, late. Ryan, in your doorway again, and this time he doesn't pretend it's about anything. His eyes go to your chest and stay there.",
+   "why": "no claim the same screen's 'Shut the door' can falsify; after-yes picture look/ryan_knock_stays_t3 says 'settling on her chest and staying there', matching the line",
    "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "ba4d186ba1d48c83",
+    "text": "8684d5fd4d83ce86",
     "traits": "74c4f68e6476ecee",
-    "facts": "794f3425e70e89bc",
+    "facts": "57bb58c5eba91d80",
     "facts2": "63e40120178d9641",
-    "all": "48878c52b6a0aa3c"
+    "all": "232af7ec976a7b35"
    },
    "row_hash": "67e48e60d5053a2e",
-   "carried": true,
-   "pass": 7
+   "carried": false,
+   "pass": 21
   },
   {
    "row": "C460",
    "screen": "ryan_charger_back.take",
    "verdict": "PASS",
-   "line": "You shut the door on him. \"Right. Night. You know where I am.\" His own door clicks a second later.",
-   "why": "true after both showings; \"He'll knock again\" is built (step 2 returns after 3 days on ryan_back_seen until ryan_looked)",
+   "line": "His own door clicks a second later. He'll knock again. You know he will.",
+   "why": "every claim true on every reachable visit, including the 7-day repeat",
    "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "88c9e004e47287aa",
+    "text": "5d13cd1dfbb8b123",
     "traits": "74c4f68e6476ecee",
-    "facts": "553013c2cdb96b81",
+    "facts": "8a6c1ecb15213362",
     "facts2": "e771106eddedbf0a",
-    "all": "405e9c94dcd213f1"
+    "all": "dccec9bb1923fac9"
    },
    "row_hash": "67e48e60d5053a2e",
    "carried": true,
-   "pass": 7
+   "pass": 21
   },
   {
    "row": "C460",
    "screen": "vance_envelope.himself",
    "verdict": "PASS",
-   "line": "You pull your hand back. He tucks it into his shirt pocket.",
-   "why": "true",
+   "line": "Suit yourself, little lady. Mark'll hear I asked you nicely.",
+   "why": "every claim true on every reachable visit, including the 7-day repeat",
    "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "628b4dab6aec748a",
+    "text": "2b47d5c1d872feb8",
     "traits": "40c19ab6c95d7a0e",
     "facts": "fdf5e1f42084f178",
     "facts2": "ed9b77bc3be33ebd",
-    "all": "ebc1932804f4e62e"
+    "all": "032c0303d46900cd"
    },
    "row_hash": "67e48e60d5053a2e",
    "carried": true,
-   "pass": 16
+   "pass": 21
   },
   {
    "row": "C460",
    "screen": "vance_envelope.moment",
    "verdict": "PASS",
-   "line": "Vance is at the bottom of his steps with an envelope held out. When you reach for it, he doesn't let go.",
-   "why": "true at his house in every window minute; 'Short again' is his claim, fitting PLAN:28",
+   "line": "Vance is at the bottom of his steps with another envelope. ... His thumb strokes the inside of your wrist.",
+   "why": "every claim true on every reachable visit, including the 7-day repeat",
    "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "5a30d2ab81b3d026",
+    "text": "b9664c1c74622be0",
     "traits": "40c19ab6c95d7a0e",
     "facts": "2a2b552e1074f620",
     "facts2": "f8e83b3951428fe1",
-    "all": "f679850544e33e23"
+    "all": "2cc8a2700e88a866"
    },
    "row_hash": "67e48e60d5053a2e",
    "carried": true,
-   "pass": 16
+   "pass": 21
   },
   {
    "row": "C460",
    "screen": "vance_envelope.take",
    "verdict": "PASS",
    "line": "He lets go. / Tell him I'm counting.",
-   "why": "true",
+   "why": "every claim true on every reachable visit, including the 7-day repeat",
    "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "1d9ef8679337ad7e",
+    "text": "1d5dfd90237c85a4",
     "traits": "d9172dabbd56b049",
     "facts": "8c4b6fab19cda4be",
     "facts2": "5a97becef6878ec1",
-    "all": "9f26d9a867dcac43"
+    "all": "9a2ba97713b0d98c"
    },
    "row_hash": "67e48e60d5053a2e",
    "carried": true,
-   "pass": 16
+   "pass": 21
   },
   {
    "row": "C460",
@@ -8492,20 +8818,20 @@
    "row": "C460",
    "screen": "vance_gutter.moment",
    "verdict": "PASS",
-   "line": "Mr. Vance leans over his porch rail as you come up the path, a beer sweating in his hand.",
-   "why": "true on every path in: the gate stops it firing after Talk, the case that failed last pass; 'Tonight' holds in both windows",
+   "line": "\"His eyes stay on your legs the whole time you answer.\" <<look/vance_gutter_t3>>",
+   "why": "the picture of her legs walking up the path is what he sees on every visit",
    "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "93f595e89d51f0b2",
+    "text": "a4a4a3a82864b462",
     "traits": "40c19ab6c95d7a0e",
     "facts": "2a2b552e1074f620",
     "facts2": "f8e83b3951428fe1",
-    "all": "4d33bd00c62d3267"
+    "all": "ccf250e3fa860c49"
    },
    "row_hash": "67e48e60d5053a2e",
    "carried": true,
-   "pass": 16
+   "pass": 21
   },
   {
    "row": "C460",
@@ -8531,54 +8857,57 @@
    "screen": "zoe_give_him.let",
    "verdict": "PASS",
    "line": "You laugh, and you don't pull away. Behind you somebody whistles.",
-   "why": "Jake's side of the quad is behind her once turned",
+   "why": "every claim true on every reachable visit, including the 7-day repeat",
    "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "022028c5793b53ca",
-    "facts": "328ede71b75c0b80",
+    "text": "8b9959afe1af0603",
+    "traits": "6b1e34b018661933",
+    "facts": "ca90215ee8b1192a",
     "facts2": "3d976cb4abe6fb91",
-    "all": "8b72ccd0024c88a0"
+    "all": "e618fd7399931ba1"
    },
    "row_hash": "67e48e60d5053a2e",
    "carried": true,
-   "pass": 2
+   "pass": 21
   },
   {
    "row": "C460",
    "screen": "zoe_give_him.moment",
    "verdict": "PASS",
-   "line": "Zoe falls into step beside you and nods at the steps, where Jake [a tall guy with an easy smile] is watching you",
-   "why": "Jake 'with his friends' on the quad 14-16 (npc_at_location gate), Zoe 14-15; name swaps on met_jake; staging is one: walking, turned by the hips, held still",
+   "line": "He's looking again. You know how this goes.",
+   "why": "every claim true on every reachable visit, including the 7-day repeat",
    "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "e049452db2317066",
-    "facts": "37fcb9425fcce652",
+    "text": "38785647e7812e6c",
+    "traits": "0b1fa80c9d60647d",
+    "facts": "41e92ad76009f2bf",
     "facts2": "130dd93dfc7a1cca",
-    "all": "0104d8053969fd0e"
+    "all": "7cd6af22ff9096cf"
    },
    "row_hash": "67e48e60d5053a2e",
    "carried": true,
-   "pass": 2
+   "pass": 21
   },
   {
    "row": "C460",
    "screen": "zoe_give_him.stop",
    "verdict": "PASS",
-   "line": "She lets go, grinning, and you walk on with your face on fire.",
-   "why": "matches the walking staging",
+   "line": "Fine. Prude. He'd have loved it. You'd have loved it.",
+   "why": "every claim true on every reachable visit, including the 7-day repeat",
    "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "685d557c1d88406a",
-    "facts": "0521fb2c86775d25",
+    "text": "e14ec4e6e5f44ee7",
+    "traits": "6b1e34b018661933",
+    "facts": "4dfba33715001ede",
     "facts2": "317aff3f6de89433",
-    "all": "aeedecb677ebc088"
+    "all": "46aedc9ee817a56c"
    },
    "row_hash": "67e48e60d5053a2e",
    "carried": true,
-   "pass": 2
+   "pass": 21
   },
   {
    "row": "C460",
@@ -8670,20 +8999,20 @@
    "row": "C461",
    "screen": "hale_called_in.moment",
    "verdict": "PASS",
-   "line": "Front row, next class. I like to see who's listening.",
-   "why": "fits Hale (Takes charge, Strict)",
+   "line": "He's got a class list in front of him. His eyes go to your chest and stay there.",
+   "why": "texture and dialogue fit the cast entries",
    "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "f1306f5ed757f9ab",
+    "text": "0c6963f571ba385d",
     "traits": "825724317465730d",
     "facts": "6ea67dc58c8d9698",
     "facts2": "ed9eba5ccb976fe4",
-    "all": "60672e322c6eb2bc"
+    "all": "a5596f5e12b35e56"
    },
    "row_hash": "310706ee076318f2",
    "carried": true,
-   "pass": 8
+   "pass": 20
   },
   {
    "row": "C461",
@@ -8727,39 +9056,39 @@
    "row": "C461",
    "screen": "marco_hips.let",
    "verdict": "PASS",
-   "line": "\"Feel that? That's where they go. I'll check it next time.\"",
-   "why": "texture and dialogue that fit Marco's entry (Takes charge, \"his hands on her hips\")",
+   "line": "You hold still. His thumbs press once, and stay. / Feel that? That's where they go.",
+   "why": "texture and dialogue fit the cast entries",
    "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "d73ea7023c6bda5d",
+    "text": "eeaf671d49d92788",
     "traits": "e4365d01d4eb14be",
     "facts": "7628053aa2fe64cb",
     "facts2": "49f0b57a72e77115",
-    "all": "db5f3e6bb8bd0c1e"
+    "all": "59a4c404c27b7603"
    },
    "row_hash": "310706ee076318f2",
    "carried": true,
-   "pass": 11
+   "pass": 20
   },
   {
    "row": "C461",
    "screen": "marco_hips.moment",
    "verdict": "PASS",
-   "line": "Hips. Show me you remember.",
-   "why": "dialogue fits Marco (Takes charge, Sporty) and sits behind marco_fixed_form is_true",
+   "line": "His hands land on your hips and turn them, and stay. [image: in leggings and a sports top]",
+   "why": "texture and dialogue fit the cast entries",
    "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "bf09273041b98acb",
+    "text": "b5927efcb8ec8179",
     "traits": "e4365d01d4eb14be",
     "facts": "f9e936b5d2f7fa16",
     "facts2": "e2ce2f969cea33c2",
-    "all": "06eb346786cec3d5"
+    "all": "42f61fe25f478963"
    },
    "row_hash": "310706ee076318f2",
    "carried": true,
-   "pass": 14
+   "pass": 20
   },
   {
    "row": "C461",
@@ -8970,134 +9299,134 @@
    "row": "C461",
    "screen": "ryan_charger_back.look",
    "verdict": "PASS",
-   "line": "Then he sets the charger down just inside your door without looking up. \"Charger's there. Night. Sorry. Night. Sleep well.\" His door clicks shut next door.",
-   "why": "his flustered cover fits his entry; the charger \"just inside your door\" is texture that cannot clash",
+   "line": "You don't move. You can't. He looks again, slower, at your chest. Then he sets the charger down just inside your door without looking up.",
+   "why": "texture and lines fit the cast entries",
    "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "ca81d6cf8e22d3c8",
+    "text": "57b3817f5fc7b0fa",
     "traits": "74c4f68e6476ecee",
-    "facts": "e03ae2cd56295992",
+    "facts": "1bff26002b7cd503",
     "facts2": "aa200880ec280d14",
-    "all": "1a9d24549c5e70f6"
+    "all": "cfea766e5cbf606f"
    },
    "row_hash": "310706ee076318f2",
    "carried": true,
-   "pass": 7
+   "pass": 21
   },
   {
    "row": "C461",
    "screen": "ryan_charger_back.look2",
    "verdict": "PASS",
-   "line": "\"Night. Sorry. Night. Sleep well.\"",
-   "why": "his flustered cover fits his entry; \"the two of you and one bathroom\" is texture on a built fact",
+   "line": "You don't move. You can't. He looks again, slower, at your chest.",
+   "why": "texture and lines fit the cast entries",
    "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "b6fc34828f2bbcde",
+    "text": "40c1e7c29169bd2b",
     "traits": "74c4f68e6476ecee",
-    "facts": "e03ae2cd56295992",
+    "facts": "1bff26002b7cd503",
     "facts2": "aa200880ec280d14",
-    "all": "acd7ba9ed82826e4"
+    "all": "01f2925ca70e9a75"
    },
    "row_hash": "310706ee076318f2",
    "carried": true,
-   "pass": 7
+   "pass": 21
   },
   {
    "row": "C461",
    "screen": "ryan_charger_back.moment",
    "verdict": "PASS",
-   "line": "A knock, late. Ryan waits until you open, your charger held out. His eyes go to your chest, stay a second too long, then snap to the floor.",
-   "why": "ears pink, eyes snapping away: texture that fits his Shy entry; \"I couldn't sleep\" is dialogue a person may say",
+   "line": "Hey. Couldn't sleep. Again. You don't mind me looking, do you?",
+   "why": "Ryan halting and shy turned bolder after her yes; fits his cast entry",
    "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "ba4d186ba1d48c83",
+    "text": "8684d5fd4d83ce86",
     "traits": "74c4f68e6476ecee",
-    "facts": "794f3425e70e89bc",
+    "facts": "57bb58c5eba91d80",
     "facts2": "63e40120178d9641",
-    "all": "48878c52b6a0aa3c"
+    "all": "232af7ec976a7b35"
    },
    "row_hash": "310706ee076318f2",
-   "carried": true,
-   "pass": 7
+   "carried": false,
+   "pass": 21
   },
   {
    "row": "C461",
    "screen": "ryan_charger_back.take",
    "verdict": "PASS",
-   "line": "You shut the door on him. \"Right. Night. You know where I am.\" His own door clicks a second later.",
-   "why": "dialogue fits Ryan's entry (gives way, backs off)",
+   "line": "His own door clicks a second later. He'll knock again. You know he will.",
+   "why": "texture and lines fit the cast entries",
    "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "88c9e004e47287aa",
+    "text": "5d13cd1dfbb8b123",
     "traits": "74c4f68e6476ecee",
-    "facts": "553013c2cdb96b81",
+    "facts": "8a6c1ecb15213362",
     "facts2": "e771106eddedbf0a",
-    "all": "405e9c94dcd213f1"
+    "all": "dccec9bb1923fac9"
    },
    "row_hash": "310706ee076318f2",
    "carried": true,
-   "pass": 7
+   "pass": 21
   },
   {
    "row": "C461",
    "screen": "vance_envelope.himself",
    "verdict": "PASS",
-   "line": "You pull your hand back. He tucks it into his shirt pocket.",
-   "why": "his manner fits PLAN:141",
+   "line": "Suit yourself, little lady. Mark'll hear I asked you nicely.",
+   "why": "texture and lines fit the cast entries",
    "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "628b4dab6aec748a",
+    "text": "2b47d5c1d872feb8",
     "traits": "40c19ab6c95d7a0e",
     "facts": "fdf5e1f42084f178",
     "facts2": "ed9b77bc3be33ebd",
-    "all": "ebc1932804f4e62e"
+    "all": "032c0303d46900cd"
    },
    "row_hash": "310706ee076318f2",
    "carried": true,
-   "pass": 16
+   "pass": 21
   },
   {
    "row": "C461",
    "screen": "vance_envelope.moment",
    "verdict": "PASS",
-   "line": "Vance is at the bottom of his steps with an envelope held out. When you reach for it, he doesn't let go.",
-   "why": "texture (the beer) can't clash; his manner fits PLAN:141",
+   "line": "Vance is at the bottom of his steps with another envelope. ... His thumb strokes the inside of your wrist.",
+   "why": "texture and lines fit the cast entries",
    "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "5a30d2ab81b3d026",
+    "text": "b9664c1c74622be0",
     "traits": "40c19ab6c95d7a0e",
     "facts": "2a2b552e1074f620",
     "facts2": "f8e83b3951428fe1",
-    "all": "f679850544e33e23"
+    "all": "2cc8a2700e88a866"
    },
    "row_hash": "310706ee076318f2",
    "carried": true,
-   "pass": 16
+   "pass": 21
   },
   {
    "row": "C461",
    "screen": "vance_envelope.take",
    "verdict": "PASS",
    "line": "He lets go. / Tell him I'm counting.",
-   "why": "his manner fits PLAN:141",
+   "why": "texture and lines fit the cast entries",
    "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "1d9ef8679337ad7e",
+    "text": "1d5dfd90237c85a4",
     "traits": "d9172dabbd56b049",
     "facts": "8c4b6fab19cda4be",
     "facts2": "5a97becef6878ec1",
-    "all": "9f26d9a867dcac43"
+    "all": "9a2ba97713b0d98c"
    },
    "row_hash": "310706ee076318f2",
    "carried": true,
-   "pass": 16
+   "pass": 21
   },
   {
    "row": "C461",
@@ -9122,20 +9451,20 @@
    "row": "C461",
    "screen": "vance_gutter.moment",
    "verdict": "PASS",
-   "line": "Mr. Vance leans over his porch rail as you come up the path, a beer sweating in his hand.",
-   "why": "texture (the beer) can't clash; his manner fits PLAN:141",
+   "line": "\"The gutter, little lady.\"",
+   "why": "fits Vance's cast entry and term of address",
    "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "93f595e89d51f0b2",
+    "text": "a4a4a3a82864b462",
     "traits": "40c19ab6c95d7a0e",
     "facts": "2a2b552e1074f620",
     "facts2": "f8e83b3951428fe1",
-    "all": "4d33bd00c62d3267"
+    "all": "ccf250e3fa860c49"
    },
    "row_hash": "310706ee076318f2",
    "carried": true,
-   "pass": 16
+   "pass": 21
   },
   {
    "row": "C461",
@@ -9161,54 +9490,57 @@
    "screen": "zoe_give_him.let",
    "verdict": "PASS",
    "line": "You laugh, and you don't pull away. Behind you somebody whistles.",
-   "why": "texture that cannot clash, and dialogue that fits each person's plan entry",
+   "why": "texture and lines fit the cast entries",
    "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "022028c5793b53ca",
-    "facts": "328ede71b75c0b80",
+    "text": "8b9959afe1af0603",
+    "traits": "6b1e34b018661933",
+    "facts": "ca90215ee8b1192a",
     "facts2": "3d976cb4abe6fb91",
-    "all": "8b72ccd0024c88a0"
+    "all": "e618fd7399931ba1"
    },
    "row_hash": "310706ee076318f2",
    "carried": true,
-   "pass": 2
+   "pass": 21
   },
   {
    "row": "C461",
    "screen": "zoe_give_him.moment",
    "verdict": "PASS",
-   "line": "Zoe falls into step beside you and nods at the steps, where Jake [a tall guy with an easy smile] is watching you",
-   "why": "texture that cannot clash, and dialogue that fits each person's plan entry",
+   "line": "He's looking again. You know how this goes.",
+   "why": "texture and lines fit the cast entries",
    "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "e049452db2317066",
-    "facts": "37fcb9425fcce652",
+    "text": "38785647e7812e6c",
+    "traits": "0b1fa80c9d60647d",
+    "facts": "41e92ad76009f2bf",
     "facts2": "130dd93dfc7a1cca",
-    "all": "0104d8053969fd0e"
+    "all": "7cd6af22ff9096cf"
    },
    "row_hash": "310706ee076318f2",
    "carried": true,
-   "pass": 2
+   "pass": 21
   },
   {
    "row": "C461",
    "screen": "zoe_give_him.stop",
    "verdict": "PASS",
-   "line": "She lets go, grinning, and you walk on with your face on fire.",
-   "why": "texture that cannot clash, and dialogue that fits each person's plan entry",
+   "line": "Fine. Prude. He'd have loved it. You'd have loved it.",
+   "why": "texture and lines fit the cast entries",
    "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "685d557c1d88406a",
-    "facts": "0521fb2c86775d25",
+    "text": "e14ec4e6e5f44ee7",
+    "traits": "6b1e34b018661933",
+    "facts": "4dfba33715001ede",
     "facts2": "317aff3f6de89433",
-    "all": "aeedecb677ebc088"
+    "all": "46aedc9ee817a56c"
    },
    "row_hash": "310706ee076318f2",
    "carried": true,
-   "pass": 2
+   "pass": 21
   },
   {
    "row": "C461",
@@ -10582,20 +10914,20 @@
    "row": "C927",
    "screen": "marco_hips.let",
    "verdict": "PASS",
-   "line": "\"Feel that? That's where they go. I'll check it next time.\"",
-   "why": "exit spends 60 minutes (the act's hour), not 0",
+   "line": "Done (time_progression_minutes = 60)",
+   "why": "the exit states its time",
    "cause": null,
    "note": true,
    "screen_hash": {
-    "text": "d73ea7023c6bda5d",
+    "text": "eeaf671d49d92788",
     "traits": "e4365d01d4eb14be",
     "facts": "7628053aa2fe64cb",
     "facts2": "49f0b57a72e77115",
-    "all": "db5f3e6bb8bd0c1e"
+    "all": "59a4c404c27b7603"
    },
    "row_hash": "4e86d143688ba8e5",
    "carried": true,
-   "pass": 11
+   "pass": 20
   },
   {
    "row": "C927",
@@ -10750,96 +11082,96 @@
    "row": "C927",
    "screen": "ryan_charger_back.look",
    "verdict": "PASS",
-   "line": "Done: time_progression_minutes = 5",
-   "why": "the only exit carries its own 5 minutes",
+   "line": "You don't move. You can't. He looks again, slower, at your chest. Then he sets the charger down just inside your door without looking up.",
+   "why": "exits cost 5 minutes; in-canvas choices at 0",
    "cause": null,
    "note": true,
    "screen_hash": {
-    "text": "ca81d6cf8e22d3c8",
+    "text": "57b3817f5fc7b0fa",
     "traits": "74c4f68e6476ecee",
-    "facts": "e03ae2cd56295992",
+    "facts": "1bff26002b7cd503",
     "facts2": "aa200880ec280d14",
-    "all": "1a9d24549c5e70f6"
+    "all": "cfea766e5cbf606f"
    },
    "row_hash": "4e86d143688ba8e5",
    "carried": true,
-   "pass": 7
+   "pass": 21
   },
   {
    "row": "C927",
    "screen": "ryan_charger_back.look2",
    "verdict": "PASS",
-   "line": "Done: time_progression_minutes = 5",
-   "why": "the only exit carries its own 5 minutes",
+   "line": "You don't move. You can't. He looks again, slower, at your chest.",
+   "why": "exits cost 5 minutes; in-canvas choices at 0",
    "cause": null,
    "note": true,
    "screen_hash": {
-    "text": "b6fc34828f2bbcde",
+    "text": "40c1e7c29169bd2b",
     "traits": "74c4f68e6476ecee",
-    "facts": "e03ae2cd56295992",
+    "facts": "1bff26002b7cd503",
     "facts2": "aa200880ec280d14",
-    "all": "acd7ba9ed82826e4"
+    "all": "01f2925ca70e9a75"
    },
    "row_hash": "4e86d143688ba8e5",
    "carried": true,
-   "pass": 7
+   "pass": 21
   },
   {
    "row": "C927",
    "screen": "ryan_charger_back.take",
    "verdict": "PASS",
-   "line": "Done: time_progression_minutes = 5",
-   "why": "the only exit carries its own 5 minutes",
+   "line": "His own door clicks a second later. He'll knock again. You know he will.",
+   "why": "exits cost 5 minutes; in-canvas choices at 0",
    "cause": null,
    "note": true,
    "screen_hash": {
-    "text": "88c9e004e47287aa",
+    "text": "5d13cd1dfbb8b123",
     "traits": "74c4f68e6476ecee",
-    "facts": "553013c2cdb96b81",
+    "facts": "8a6c1ecb15213362",
     "facts2": "e771106eddedbf0a",
-    "all": "405e9c94dcd213f1"
+    "all": "dccec9bb1923fac9"
    },
    "row_hash": "4e86d143688ba8e5",
    "carried": true,
-   "pass": 7
+   "pass": 21
   },
   {
    "row": "C927",
    "screen": "vance_envelope.himself",
    "verdict": "PASS",
-   "line": "Done (time_progression_minutes = 5)",
-   "why": "the exit states its time",
+   "line": "Suit yourself, little lady. Mark'll hear I asked you nicely.",
+   "why": "exits cost 5 minutes; in-canvas choices at 0",
    "cause": null,
    "note": true,
    "screen_hash": {
-    "text": "628b4dab6aec748a",
+    "text": "2b47d5c1d872feb8",
     "traits": "40c19ab6c95d7a0e",
     "facts": "fdf5e1f42084f178",
     "facts2": "ed9b77bc3be33ebd",
-    "all": "ebc1932804f4e62e"
+    "all": "032c0303d46900cd"
    },
    "row_hash": "4e86d143688ba8e5",
    "carried": true,
-   "pass": 16
+   "pass": 21
   },
   {
    "row": "C927",
    "screen": "vance_envelope.take",
    "verdict": "PASS",
-   "line": "Done (time_progression_minutes = 5)",
-   "why": "the exit states its time",
+   "line": "He lets go. / Tell him I'm counting.",
+   "why": "exits cost 5 minutes; in-canvas choices at 0",
    "cause": null,
    "note": true,
    "screen_hash": {
-    "text": "1d9ef8679337ad7e",
+    "text": "1d5dfd90237c85a4",
     "traits": "d9172dabbd56b049",
     "facts": "8c4b6fab19cda4be",
     "facts2": "5a97becef6878ec1",
-    "all": "9f26d9a867dcac43"
+    "all": "9a2ba97713b0d98c"
    },
    "row_hash": "4e86d143688ba8e5",
    "carried": true,
-   "pass": 16
+   "pass": 21
   },
   {
    "row": "C927",
@@ -10883,37 +11215,39 @@
    "row": "C927",
    "screen": "zoe_give_him.let",
    "verdict": "PASS",
-   "line": "Done: time_progression_minutes = 5",
-   "why": "every exit carries its own time; first-screen choices are an explicit 0 (v2.py:17877), answer exits 5",
+   "line": "You laugh, and you don't pull away. Behind you somebody whistles.",
+   "why": "exits cost 5 minutes; in-canvas choices at 0",
    "cause": null,
    "note": true,
    "screen_hash": {
-    "text": "022028c5793b53ca",
-    "facts": "328ede71b75c0b80",
+    "text": "8b9959afe1af0603",
+    "traits": "6b1e34b018661933",
+    "facts": "ca90215ee8b1192a",
     "facts2": "3d976cb4abe6fb91",
-    "all": "8b72ccd0024c88a0"
+    "all": "e618fd7399931ba1"
    },
    "row_hash": "4e86d143688ba8e5",
    "carried": true,
-   "pass": 2
+   "pass": 21
   },
   {
    "row": "C927",
    "screen": "zoe_give_him.stop",
    "verdict": "PASS",
-   "line": "Done: time_progression_minutes = 5",
-   "why": "every exit carries its own time; first-screen choices are an explicit 0 (v2.py:17877), answer exits 5",
+   "line": "Fine. Prude. He'd have loved it. You'd have loved it.",
+   "why": "exits cost 5 minutes; in-canvas choices at 0",
    "cause": null,
    "note": true,
    "screen_hash": {
-    "text": "685d557c1d88406a",
-    "facts": "0521fb2c86775d25",
+    "text": "e14ec4e6e5f44ee7",
+    "traits": "6b1e34b018661933",
+    "facts": "4dfba33715001ede",
     "facts2": "317aff3f6de89433",
-    "all": "aeedecb677ebc088"
+    "all": "46aedc9ee817a56c"
    },
    "row_hash": "4e86d143688ba8e5",
    "carried": true,
-   "pass": 2
+   "pass": 21
   },
   {
    "row": "C927",
@@ -11121,20 +11455,20 @@
    "row": "C931",
    "screen": "marco_hips.let",
    "verdict": "PASS",
-   "line": "\"Feel that? That's where they go. I'll check it next time.\"",
-   "why": "no time_of_day on Marco (presence gates it); n/a beyond that",
+   "line": "Done (time_progression_minutes = 60)",
+   "why": "no time_of_day condition on this screen to misread; the trigger is the workout's substitution",
    "cause": null,
    "note": true,
    "screen_hash": {
-    "text": "d73ea7023c6bda5d",
+    "text": "eeaf671d49d92788",
     "traits": "e4365d01d4eb14be",
     "facts": "7628053aa2fe64cb",
     "facts2": "49f0b57a72e77115",
-    "all": "db5f3e6bb8bd0c1e"
+    "all": "59a4c404c27b7603"
    },
    "row_hash": "1aadffd96e76381c",
    "carried": true,
-   "pass": 11
+   "pass": 20
   },
   {
    "row": "C931",
@@ -11289,96 +11623,96 @@
    "row": "C931",
    "screen": "ryan_charger_back.look",
    "verdict": "PASS",
-   "line": "time_of_day 23:00-24:00",
-   "why": "end exclusive, 1380-1439, no wrap",
+   "line": "You don't move. You can't. He looks again, slower, at your chest. Then he sets the charger down just inside your door without looking up.",
+   "why": "time_of_day end exclusive inside the person's rows",
    "cause": null,
    "note": true,
    "screen_hash": {
-    "text": "ca81d6cf8e22d3c8",
+    "text": "57b3817f5fc7b0fa",
     "traits": "74c4f68e6476ecee",
-    "facts": "e03ae2cd56295992",
+    "facts": "1bff26002b7cd503",
     "facts2": "aa200880ec280d14",
-    "all": "1a9d24549c5e70f6"
+    "all": "cfea766e5cbf606f"
    },
    "row_hash": "1aadffd96e76381c",
    "carried": true,
-   "pass": 7
+   "pass": 21
   },
   {
    "row": "C931",
    "screen": "ryan_charger_back.look2",
    "verdict": "PASS",
-   "line": "time_of_day 23:00-24:00",
-   "why": "end exclusive, 1380-1439, no wrap",
+   "line": "You don't move. You can't. He looks again, slower, at your chest.",
+   "why": "time_of_day end exclusive inside the person's rows",
    "cause": null,
    "note": true,
    "screen_hash": {
-    "text": "b6fc34828f2bbcde",
+    "text": "40c1e7c29169bd2b",
     "traits": "74c4f68e6476ecee",
-    "facts": "e03ae2cd56295992",
+    "facts": "1bff26002b7cd503",
     "facts2": "aa200880ec280d14",
-    "all": "acd7ba9ed82826e4"
+    "all": "01f2925ca70e9a75"
    },
    "row_hash": "1aadffd96e76381c",
    "carried": true,
-   "pass": 7
+   "pass": 21
   },
   {
    "row": "C931",
    "screen": "ryan_charger_back.take",
    "verdict": "PASS",
-   "line": "time_of_day 23:00-24:00",
-   "why": "end exclusive, 1380-1439, no wrap",
+   "line": "His own door clicks a second later. He'll knock again. You know he will.",
+   "why": "time_of_day end exclusive inside the person's rows",
    "cause": null,
    "note": true,
    "screen_hash": {
-    "text": "88c9e004e47287aa",
+    "text": "5d13cd1dfbb8b123",
     "traits": "74c4f68e6476ecee",
-    "facts": "553013c2cdb96b81",
+    "facts": "8a6c1ecb15213362",
     "facts2": "e771106eddedbf0a",
-    "all": "405e9c94dcd213f1"
+    "all": "dccec9bb1923fac9"
    },
    "row_hash": "1aadffd96e76381c",
    "carried": true,
-   "pass": 7
+   "pass": 21
   },
   {
    "row": "C931",
    "screen": "vance_envelope.himself",
    "verdict": "PASS",
-   "line": "You pull your hand back. He tucks it into his shirt pocket.",
-   "why": "time_of_day 17:00-20:00 and 09:00-12:00 end exclusive, the same as his rows; no wrap",
+   "line": "Suit yourself, little lady. Mark'll hear I asked you nicely.",
+   "why": "time_of_day end exclusive inside the person's rows",
    "cause": null,
    "note": true,
    "screen_hash": {
-    "text": "628b4dab6aec748a",
+    "text": "2b47d5c1d872feb8",
     "traits": "40c19ab6c95d7a0e",
     "facts": "fdf5e1f42084f178",
     "facts2": "ed9b77bc3be33ebd",
-    "all": "ebc1932804f4e62e"
+    "all": "032c0303d46900cd"
    },
    "row_hash": "1aadffd96e76381c",
    "carried": true,
-   "pass": 16
+   "pass": 21
   },
   {
    "row": "C931",
    "screen": "vance_envelope.take",
    "verdict": "PASS",
    "line": "He lets go. / Tell him I'm counting.",
-   "why": "time_of_day 17:00-20:00 and 09:00-12:00 end exclusive, the same as his rows; no wrap",
+   "why": "time_of_day end exclusive inside the person's rows",
    "cause": null,
    "note": true,
    "screen_hash": {
-    "text": "1d9ef8679337ad7e",
+    "text": "1d5dfd90237c85a4",
     "traits": "d9172dabbd56b049",
     "facts": "8c4b6fab19cda4be",
     "facts2": "5a97becef6878ec1",
-    "all": "9f26d9a867dcac43"
+    "all": "9a2ba97713b0d98c"
    },
    "row_hash": "1aadffd96e76381c",
    "carried": true,
-   "pass": 16
+   "pass": 21
   },
   {
    "row": "C931",
@@ -11422,37 +11756,39 @@
    "row": "C931",
    "screen": "zoe_give_him.let",
    "verdict": "PASS",
-   "line": "time_of_day windows on the trigger",
-   "why": "end exclusive (v2.py:4803-4823); 23:00-24:00 reads 1380-1439; no window wraps",
+   "line": "You laugh, and you don't pull away. Behind you somebody whistles.",
+   "why": "time_of_day end exclusive inside the person's rows",
    "cause": null,
    "note": true,
    "screen_hash": {
-    "text": "022028c5793b53ca",
-    "facts": "328ede71b75c0b80",
+    "text": "8b9959afe1af0603",
+    "traits": "6b1e34b018661933",
+    "facts": "ca90215ee8b1192a",
     "facts2": "3d976cb4abe6fb91",
-    "all": "8b72ccd0024c88a0"
+    "all": "e618fd7399931ba1"
    },
    "row_hash": "1aadffd96e76381c",
    "carried": true,
-   "pass": 2
+   "pass": 21
   },
   {
    "row": "C931",
    "screen": "zoe_give_him.stop",
    "verdict": "PASS",
-   "line": "time_of_day windows on the trigger",
-   "why": "end exclusive (v2.py:4803-4823); 23:00-24:00 reads 1380-1439; no window wraps",
+   "line": "Fine. Prude. He'd have loved it. You'd have loved it.",
+   "why": "time_of_day end exclusive inside the person's rows",
    "cause": null,
    "note": true,
    "screen_hash": {
-    "text": "685d557c1d88406a",
-    "facts": "0521fb2c86775d25",
+    "text": "e14ec4e6e5f44ee7",
+    "traits": "6b1e34b018661933",
+    "facts": "4dfba33715001ede",
     "facts2": "317aff3f6de89433",
-    "all": "aeedecb677ebc088"
+    "all": "46aedc9ee817a56c"
    },
    "row_hash": "1aadffd96e76381c",
    "carried": true,
-   "pass": 2
+   "pass": 21
   },
   {
    "row": "C931",
@@ -11571,20 +11907,20 @@
    "row": "L106",
    "screen": "hale_called_in.moment",
    "verdict": "PASS",
-   "line": "Dr. Hale looks up from his desk",
-   "why": "requires_npc; his row 14-17",
+   "line": "He's got a class list in front of him. His eyes go to your chest and stay there.",
+   "why": "only the trigger's person (and Jake, by npc_at_location campus_quad) is named; the rest are an unnamed friend or nobody",
    "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "f1306f5ed757f9ab",
+    "text": "0c6963f571ba385d",
     "traits": "825724317465730d",
     "facts": "6ea67dc58c8d9698",
     "facts2": "ed9eba5ccb976fe4",
-    "all": "60672e322c6eb2bc"
+    "all": "a5596f5e12b35e56"
    },
    "row_hash": "13a714429d15f3b2",
    "carried": true,
-   "pass": 8
+   "pass": 20
   },
   {
    "row": "L106",
@@ -11628,39 +11964,39 @@
    "row": "L106",
    "screen": "marco_hips.let",
    "verdict": "PASS",
-   "line": "\"Feel that? That's where they go. I'll check it next time.\"",
-   "why": "Marco at hood_gym by his rows (weekdays 6-10, 5-9, Sat 8-2); nobody else named",
+   "line": "You hold still. His thumbs press once, and stay. / Feel that? That's where they go.",
+   "why": "only the trigger's person (and Jake, by npc_at_location campus_quad) is named; the rest are an unnamed friend or nobody",
    "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "d73ea7023c6bda5d",
+    "text": "eeaf671d49d92788",
     "traits": "e4365d01d4eb14be",
     "facts": "7628053aa2fe64cb",
     "facts2": "49f0b57a72e77115",
-    "all": "db5f3e6bb8bd0c1e"
+    "all": "59a4c404c27b7603"
    },
    "row_hash": "13a714429d15f3b2",
    "carried": true,
-   "pass": 11
+   "pass": 20
   },
   {
    "row": "L106",
    "screen": "marco_hips.moment",
    "verdict": "PASS",
-   "line": "Marco walks over",
-   "why": "Marco named only where the substitution rule's npc_at_location and the trigger's requires_npc put him at hood_gym",
+   "line": "His hands land on your hips and turn them, and stay. [image: in leggings and a sports top]",
+   "why": "only the trigger's person (and Jake, by npc_at_location campus_quad) is named; the rest are an unnamed friend or nobody",
    "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "bf09273041b98acb",
+    "text": "b5927efcb8ec8179",
     "traits": "e4365d01d4eb14be",
     "facts": "f9e936b5d2f7fa16",
     "facts2": "e2ce2f969cea33c2",
-    "all": "06eb346786cec3d5"
+    "all": "42f61fe25f478963"
    },
    "row_hash": "13a714429d15f3b2",
    "carried": true,
-   "pass": 14
+   "pass": 20
   },
   {
    "row": "L106",
@@ -11871,134 +12207,134 @@
    "row": "L106",
    "screen": "ryan_charger_back.look",
    "verdict": "PASS",
-   "line": "His door clicks shut next door.",
-   "why": "who_is_where: npc_ryan home_ryans_room 23-24 Mon-Fri and Sun; trigger gates is_present",
+   "line": "You don't move. You can't. He looks again, slower, at your chest. Then he sets the charger down just inside your door without looking up.",
+   "why": "Ryan in home_ryans_room 23-24 Mon-Fri and Sun, matching weekdays [0,1,2,3,4,6] 23:00-24:00 and the npc_at_location gate",
    "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "ca81d6cf8e22d3c8",
+    "text": "57b3817f5fc7b0fa",
     "traits": "74c4f68e6476ecee",
-    "facts": "e03ae2cd56295992",
+    "facts": "1bff26002b7cd503",
     "facts2": "aa200880ec280d14",
-    "all": "1a9d24549c5e70f6"
+    "all": "cfea766e5cbf606f"
    },
    "row_hash": "13a714429d15f3b2",
    "carried": true,
-   "pass": 7
+   "pass": 21
   },
   {
    "row": "L106",
    "screen": "ryan_charger_back.look2",
    "verdict": "PASS",
-   "line": "His door clicks shut next door.",
-   "why": "who_is_where: npc_ryan home_ryans_room 23-24 Mon-Fri and Sun; trigger gates npc_at_location home_ryans_room is_present; weekdays [0,1,2,3,4,6] drop Saturday, when he is asleep (home_ryans_roomz)",
+   "line": "You don't move. You can't. He looks again, slower, at your chest.",
+   "why": "Ryan in home_ryans_room 23-24 Mon-Fri and Sun, matching weekdays [0,1,2,3,4,6] 23:00-24:00 and the npc_at_location gate",
    "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "b6fc34828f2bbcde",
+    "text": "40c1e7c29169bd2b",
     "traits": "74c4f68e6476ecee",
-    "facts": "e03ae2cd56295992",
+    "facts": "1bff26002b7cd503",
     "facts2": "aa200880ec280d14",
-    "all": "acd7ba9ed82826e4"
+    "all": "01f2925ca70e9a75"
    },
    "row_hash": "13a714429d15f3b2",
    "carried": true,
-   "pass": 7
+   "pass": 21
   },
   {
    "row": "L106",
    "screen": "ryan_charger_back.moment",
    "verdict": "PASS",
-   "line": "A knock, late. Ryan waits until you open, your charger held out. His eyes go to your chest, stay a second too long, then snap to the floor.",
-   "why": "Ryan in home_ryans_room at every minute the trigger can fire; the knock shows him coming to her door, not already in her room",
+   "line": "A knock, late. Ryan, in your doorway again, and this time he doesn't pretend it's about anything. His eyes go to your chest and stay there.",
+   "why": "who_is_where: Ryan in home_ryans_room 23-24 Mon-Fri and Sun; trigger weekdays [0,1,2,3,4,6] 23:00-24:00 plus npc_at_location gate",
    "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "ba4d186ba1d48c83",
+    "text": "8684d5fd4d83ce86",
     "traits": "74c4f68e6476ecee",
-    "facts": "794f3425e70e89bc",
+    "facts": "57bb58c5eba91d80",
     "facts2": "63e40120178d9641",
-    "all": "48878c52b6a0aa3c"
+    "all": "232af7ec976a7b35"
    },
    "row_hash": "13a714429d15f3b2",
-   "carried": true,
-   "pass": 7
+   "carried": false,
+   "pass": 21
   },
   {
    "row": "L106",
    "screen": "ryan_charger_back.take",
    "verdict": "PASS",
-   "line": "His own door clicks a second later.",
-   "why": "his rows put him next door 23-24 on every day the trigger runs",
+   "line": "His own door clicks a second later. He'll knock again. You know he will.",
+   "why": "Ryan in home_ryans_room 23-24 Mon-Fri and Sun, matching weekdays [0,1,2,3,4,6] 23:00-24:00 and the npc_at_location gate",
    "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "88c9e004e47287aa",
+    "text": "5d13cd1dfbb8b123",
     "traits": "74c4f68e6476ecee",
-    "facts": "553013c2cdb96b81",
+    "facts": "8a6c1ecb15213362",
     "facts2": "e771106eddedbf0a",
-    "all": "405e9c94dcd213f1"
+    "all": "dccec9bb1923fac9"
    },
    "row_hash": "13a714429d15f3b2",
    "carried": true,
-   "pass": 7
+   "pass": 21
   },
   {
    "row": "L106",
    "screen": "vance_envelope.himself",
    "verdict": "PASS",
-   "line": "You pull your hand back. He tucks it into his shirt pocket.",
-   "why": "requires_npc npc_vance; who_is_where puts him at hood_next_door Mon-Fri 17-20 and Sat-Sun 09-12 and 17-20, the trigger's windows",
+   "line": "Suit yourself, little lady. Mark'll hear I asked you nicely.",
+   "why": "Vance at hood_next_door 17-20 daily and 09-12 Sat/Sun via requires_npc (v2.py:6072-6084), matching the trigger's two windows",
    "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "628b4dab6aec748a",
+    "text": "2b47d5c1d872feb8",
     "traits": "40c19ab6c95d7a0e",
     "facts": "fdf5e1f42084f178",
     "facts2": "ed9b77bc3be33ebd",
-    "all": "ebc1932804f4e62e"
+    "all": "032c0303d46900cd"
    },
    "row_hash": "13a714429d15f3b2",
    "carried": true,
-   "pass": 16
+   "pass": 21
   },
   {
    "row": "L106",
    "screen": "vance_envelope.moment",
    "verdict": "PASS",
-   "line": "Vance is at the bottom of his steps with an envelope held out. When you reach for it, he doesn't let go.",
-   "why": "requires_npc npc_vance; who_is_where puts him at hood_next_door Mon-Fri 17-20 and Sat-Sun 09-12 and 17-20, the trigger's windows",
+   "line": "Vance is at the bottom of his steps with another envelope. ... His thumb strokes the inside of your wrist.",
+   "why": "Vance at hood_next_door 17-20 daily and 09-12 Sat/Sun via requires_npc (v2.py:6072-6084), matching the trigger's two windows",
    "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "5a30d2ab81b3d026",
+    "text": "b9664c1c74622be0",
     "traits": "40c19ab6c95d7a0e",
     "facts": "2a2b552e1074f620",
     "facts2": "f8e83b3951428fe1",
-    "all": "f679850544e33e23"
+    "all": "2cc8a2700e88a866"
    },
    "row_hash": "13a714429d15f3b2",
    "carried": true,
-   "pass": 16
+   "pass": 21
   },
   {
    "row": "L106",
    "screen": "vance_envelope.take",
    "verdict": "PASS",
    "line": "He lets go. / Tell him I'm counting.",
-   "why": "requires_npc npc_vance; who_is_where puts him at hood_next_door Mon-Fri 17-20 and Sat-Sun 09-12 and 17-20, the trigger's windows",
+   "why": "Vance at hood_next_door 17-20 daily and 09-12 Sat/Sun via requires_npc (v2.py:6072-6084), matching the trigger's two windows",
    "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "1d9ef8679337ad7e",
+    "text": "1d5dfd90237c85a4",
     "traits": "d9172dabbd56b049",
     "facts": "8c4b6fab19cda4be",
     "facts2": "5a97becef6878ec1",
-    "all": "9f26d9a867dcac43"
+    "all": "9a2ba97713b0d98c"
    },
    "row_hash": "13a714429d15f3b2",
    "carried": true,
-   "pass": 16
+   "pass": 21
   },
   {
    "row": "L106",
@@ -12023,20 +12359,20 @@
    "row": "L106",
    "screen": "vance_gutter.moment",
    "verdict": "PASS",
-   "line": "Mr. Vance leans over his porch rail as you come up the path, a beer sweating in his hand.",
-   "why": "requires_npc npc_vance; who_is_where puts him at hood_next_door Mon-Fri 17-20 and Sat-Sun 09-12 and 17-20, the trigger's windows",
+   "line": "\"Tell Mark the gutter's hanging off again.\"",
+   "why": "Mark named, not claimed present",
    "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "93f595e89d51f0b2",
+    "text": "a4a4a3a82864b462",
     "traits": "40c19ab6c95d7a0e",
     "facts": "2a2b552e1074f620",
     "facts2": "f8e83b3951428fe1",
-    "all": "4d33bd00c62d3267"
+    "all": "ccf250e3fa860c49"
    },
    "row_hash": "13a714429d15f3b2",
    "carried": true,
-   "pass": 16
+   "pass": 21
   },
   {
    "row": "L106",
@@ -12062,54 +12398,57 @@
    "screen": "zoe_give_him.let",
    "verdict": "PASS",
    "line": "You laugh, and you don't pull away. Behind you somebody whistles.",
-   "why": "who_is_where puts the person here at every minute of the trigger (Jake's side of the quad is behind her once turned)",
+   "why": "Zoe on campus_quad 14-15 weekdays via requires_npc (read on random, v2.py:6072-6084); Jake 14-16 by npc_at_location",
    "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "022028c5793b53ca",
-    "facts": "328ede71b75c0b80",
+    "text": "8b9959afe1af0603",
+    "traits": "6b1e34b018661933",
+    "facts": "ca90215ee8b1192a",
     "facts2": "3d976cb4abe6fb91",
-    "all": "8b72ccd0024c88a0"
+    "all": "e618fd7399931ba1"
    },
    "row_hash": "13a714429d15f3b2",
    "carried": true,
-   "pass": 2
+   "pass": 21
   },
   {
    "row": "L106",
    "screen": "zoe_give_him.moment",
    "verdict": "PASS",
-   "line": "Zoe falls into step beside you and nods at the steps, where Jake [a tall guy with an easy smile] is watching you",
-   "why": "who_is_where puts the person here at every minute of the trigger (Jake 'with his friends' on the quad 14-16 (npc_at_location gate), Zoe 14-15; name swaps on met_jake; staging is one: walking, turned by the hips, held still)",
+   "line": "He's looking again. You know how this goes.",
+   "why": "Zoe on campus_quad 14-15 weekdays via requires_npc (read on random, v2.py:6072-6084); Jake 14-16 by npc_at_location",
    "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "e049452db2317066",
-    "facts": "37fcb9425fcce652",
+    "text": "38785647e7812e6c",
+    "traits": "0b1fa80c9d60647d",
+    "facts": "41e92ad76009f2bf",
     "facts2": "130dd93dfc7a1cca",
-    "all": "0104d8053969fd0e"
+    "all": "7cd6af22ff9096cf"
    },
    "row_hash": "13a714429d15f3b2",
    "carried": true,
-   "pass": 2
+   "pass": 21
   },
   {
    "row": "L106",
    "screen": "zoe_give_him.stop",
    "verdict": "PASS",
-   "line": "She lets go, grinning, and you walk on with your face on fire.",
-   "why": "who_is_where puts the person here at every minute of the trigger (matches the walking staging)",
+   "line": "Fine. Prude. He'd have loved it. You'd have loved it.",
+   "why": "Zoe on campus_quad 14-15 weekdays via requires_npc (read on random, v2.py:6072-6084); Jake 14-16 by npc_at_location",
    "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "685d557c1d88406a",
-    "facts": "0521fb2c86775d25",
+    "text": "e14ec4e6e5f44ee7",
+    "traits": "6b1e34b018661933",
+    "facts": "4dfba33715001ede",
     "facts2": "317aff3f6de89433",
-    "all": "aeedecb677ebc088"
+    "all": "46aedc9ee817a56c"
    },
    "row_hash": "13a714429d15f3b2",
    "carried": true,
-   "pass": 2
+   "pass": 21
   },
   {
    "row": "L106",
@@ -12177,6 +12516,58 @@
    "row_hash": "f7a81c1d066ade25",
    "carried": true,
    "pass": 11
+  },
+  {
+   "row": "L119",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "pool = 2 / pool = 4",
+   "why": "every block writes its pool",
+   "cause": null,
+   "note": false,
+   "screen_hash": "7c6eb9c518e434a3",
+   "row_hash": "faf4c46f7b59480a",
+   "carried": true,
+   "pass": 20
+  },
+  {
+   "row": "L120",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "No man in frame. / Only his hands in frame.",
+   "why": "no man-looking frames; the touches show only the toucher's hands",
+   "cause": null,
+   "note": false,
+   "screen_hash": "7c6eb9c518e434a3",
+   "row_hash": "4b62583ae03681c7",
+   "carried": true,
+   "pass": 20
+  },
+  {
+   "row": "L121",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "\u2014",
+   "why": "one spot per scene, no every-screen overshoot",
+   "cause": null,
+   "note": false,
+   "screen_hash": "7c6eb9c518e434a3",
+   "row_hash": "45842b25d0708a15",
+   "carried": true,
+   "pass": 20
+  },
+  {
+   "row": "L125",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "\u2014",
+   "why": "no spot opens its screen; each follows the payoff",
+   "cause": null,
+   "note": false,
+   "screen_hash": "7c6eb9c518e434a3",
+   "row_hash": "1fca3bfe1d0c2419",
+   "carried": true,
+   "pass": 20
   },
   {
    "row": "L150",
@@ -12296,21 +12687,21 @@
   {
    "row": "L167",
    "screen": "marco_hips.let",
-   "verdict": "PASS",
-   "line": "\"Feel that? That's where they go. I'll check it next time.\"",
-   "why": "no row with hours on this screen; the act rows have none and Marco's hours come from his one schedule",
+   "verdict": "N/A",
+   "line": "\u2014",
+   "why": "no schedule row or hours on this screen; marco_hips is a substitution inside body_workout",
    "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "d73ea7023c6bda5d",
+    "text": "eeaf671d49d92788",
     "traits": "e4365d01d4eb14be",
     "facts": "7628053aa2fe64cb",
     "facts2": "49f0b57a72e77115",
-    "all": "db5f3e6bb8bd0c1e"
+    "all": "59a4c404c27b7603"
    },
    "row_hash": "e64ce2672d85d2d8",
    "carried": true,
-   "pass": 11
+   "pass": 20
   },
   {
    "row": "L167",
@@ -12465,96 +12856,96 @@
    "row": "L167",
    "screen": "ryan_charger_back.look",
    "verdict": "PASS",
-   "line": "weekday [0,1,2,3,4,6] AND time_of_day 23:00-24:00",
-   "why": "one window on every day it runs; not a greyed row",
+   "line": "You don't move. You can't. He looks again, slower, at your chest. Then he sets the charger down just inside your door without looking up.",
+   "why": "one row per scene; Vance's weekend hours are a group condition, not a second row",
    "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "ca81d6cf8e22d3c8",
+    "text": "57b3817f5fc7b0fa",
     "traits": "74c4f68e6476ecee",
-    "facts": "e03ae2cd56295992",
+    "facts": "1bff26002b7cd503",
     "facts2": "aa200880ec280d14",
-    "all": "1a9d24549c5e70f6"
+    "all": "cfea766e5cbf606f"
    },
    "row_hash": "e64ce2672d85d2d8",
    "carried": true,
-   "pass": 7
+   "pass": 21
   },
   {
    "row": "L167",
    "screen": "ryan_charger_back.look2",
    "verdict": "PASS",
-   "line": "weekday [0,1,2,3,4,6] AND time_of_day 23:00-24:00",
-   "why": "one canvas, one window on every day it runs; a random scene, not a greyed row",
+   "line": "You don't move. You can't. He looks again, slower, at your chest.",
+   "why": "one row per scene; Vance's weekend hours are a group condition, not a second row",
    "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "b6fc34828f2bbcde",
+    "text": "40c1e7c29169bd2b",
     "traits": "74c4f68e6476ecee",
-    "facts": "e03ae2cd56295992",
+    "facts": "1bff26002b7cd503",
     "facts2": "aa200880ec280d14",
-    "all": "acd7ba9ed82826e4"
+    "all": "01f2925ca70e9a75"
    },
    "row_hash": "e64ce2672d85d2d8",
    "carried": true,
-   "pass": 7
+   "pass": 21
   },
   {
    "row": "L167",
    "screen": "ryan_charger_back.take",
    "verdict": "PASS",
-   "line": "weekday [0,1,2,3,4,6] AND time_of_day 23:00-24:00",
-   "why": "one window on every day it runs; not a greyed row",
+   "line": "His own door clicks a second later. He'll knock again. You know he will.",
+   "why": "one row per scene; Vance's weekend hours are a group condition, not a second row",
    "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "88c9e004e47287aa",
+    "text": "5d13cd1dfbb8b123",
     "traits": "74c4f68e6476ecee",
-    "facts": "553013c2cdb96b81",
+    "facts": "8a6c1ecb15213362",
     "facts2": "e771106eddedbf0a",
-    "all": "405e9c94dcd213f1"
+    "all": "dccec9bb1923fac9"
    },
    "row_hash": "e64ce2672d85d2d8",
    "carried": true,
-   "pass": 7
+   "pass": 21
   },
   {
    "row": "L167",
    "screen": "vance_envelope.himself",
    "verdict": "PASS",
-   "line": "You pull your hand back. He tucks it into his shirt pocket.",
-   "why": "one canvas, one OR group for the day kinds; not one canvas per day kind",
+   "line": "Suit yourself, little lady. Mark'll hear I asked you nicely.",
+   "why": "one row per scene; Vance's weekend hours are a group condition, not a second row",
    "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "628b4dab6aec748a",
+    "text": "2b47d5c1d872feb8",
     "traits": "40c19ab6c95d7a0e",
     "facts": "fdf5e1f42084f178",
     "facts2": "ed9b77bc3be33ebd",
-    "all": "ebc1932804f4e62e"
+    "all": "032c0303d46900cd"
    },
    "row_hash": "e64ce2672d85d2d8",
    "carried": true,
-   "pass": 16
+   "pass": 21
   },
   {
    "row": "L167",
    "screen": "vance_envelope.take",
    "verdict": "PASS",
    "line": "He lets go. / Tell him I'm counting.",
-   "why": "one canvas, one OR group for the day kinds; not one canvas per day kind",
+   "why": "one row per scene; Vance's weekend hours are a group condition, not a second row",
    "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "1d9ef8679337ad7e",
+    "text": "1d5dfd90237c85a4",
     "traits": "d9172dabbd56b049",
     "facts": "8c4b6fab19cda4be",
     "facts2": "5a97becef6878ec1",
-    "all": "9f26d9a867dcac43"
+    "all": "9a2ba97713b0d98c"
    },
    "row_hash": "e64ce2672d85d2d8",
    "carried": true,
-   "pass": 16
+   "pass": 21
   },
   {
    "row": "L167",
@@ -12598,37 +12989,39 @@
    "row": "L167",
    "screen": "zoe_give_him.let",
    "verdict": "PASS",
-   "line": "trigger condition: one OR group of weekday x time_of_day",
-   "why": "different hours on different days are one canvas with a group, not one per day kind",
+   "line": "You laugh, and you don't pull away. Behind you somebody whistles.",
+   "why": "one row per scene; Vance's weekend hours are a group condition, not a second row",
    "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "022028c5793b53ca",
-    "facts": "328ede71b75c0b80",
+    "text": "8b9959afe1af0603",
+    "traits": "6b1e34b018661933",
+    "facts": "ca90215ee8b1192a",
     "facts2": "3d976cb4abe6fb91",
-    "all": "8b72ccd0024c88a0"
+    "all": "e618fd7399931ba1"
    },
    "row_hash": "e64ce2672d85d2d8",
    "carried": true,
-   "pass": 2
+   "pass": 21
   },
   {
    "row": "L167",
    "screen": "zoe_give_him.stop",
    "verdict": "PASS",
-   "line": "trigger condition: one OR group of weekday x time_of_day",
-   "why": "different hours on different days are one canvas with a group, not one per day kind",
+   "line": "Fine. Prude. He'd have loved it. You'd have loved it.",
+   "why": "one row per scene; Vance's weekend hours are a group condition, not a second row",
    "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "685d557c1d88406a",
-    "facts": "0521fb2c86775d25",
+    "text": "e14ec4e6e5f44ee7",
+    "traits": "6b1e34b018661933",
+    "facts": "4dfba33715001ede",
     "facts2": "317aff3f6de89433",
-    "all": "aeedecb677ebc088"
+    "all": "46aedc9ee817a56c"
    },
    "row_hash": "e64ce2672d85d2d8",
    "carried": true,
-   "pass": 2
+   "pass": 21
   },
   {
    "row": "L167",
@@ -12815,10 +13208,19 @@
    "pass": 1
   }
  ],
- "causes": [],
+ "causes": [
+  {
+   "id": "c1",
+   "what": "ryan_charger_back's one picture shows his eyes dropping to her chest and snapping away, but the after-yes version says his eyes stay there"
+  },
+  {
+   "id": "c2",
+   "what": "ryan_charger_back's after-yes opening states as fact \"He knows you won't shut the door.\", then offers \"Shut the door\", which makes it false"
+  }
+ ],
  "pending": [],
- "asked": 10,
- "answered": 10,
+ "asked": 7,
+ "answered": 7,
  "pass_items": [],
  "unowed": []
 }

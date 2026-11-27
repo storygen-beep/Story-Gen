@@ -1,6 +1,6 @@
 {
  "piece": "P38",
- "pass": 19,
+ "pass": 22,
  "screens": {
   "walk_parents.moment": {
    "text": "7f828ca106b8bccf",
@@ -202,7 +202,8 @@
   "C1267": "f0db81b801577bf2",
   "C1249": "a843f9b57e43a020",
   "C1250": "fde578d75b0d3620",
-  "C1265": "eb11e05cd75e52a9",
+  "C1265": "689fd05a4bcbd8be",
+  "C2204": "3231b5a8a46eaa49",
   "C1234": "1b2a2d5f05b10331",
   "L121": "45842b25d0708a15",
   "L125": "1fca3bfe1d0c2419",
@@ -239,7 +240,7 @@
   "C2198": "73dfe095a72154a3",
   "C769": "f6b6f78a8f2e5ed7",
   "C794": "bad76e5963432385",
-  "C2201": "d119dfe665f76359",
+  "C2201": "7fddf5e17dbdaaf9",
   "C795": "34139e6a6914e171",
   "C804": "5358489178bff0a4",
   "L106": "13a714429d15f3b2",
@@ -251,6 +252,7 @@
   "C762": "40e85f1ae92f1e71",
   "L170": "c3599cd09637a240",
   "C770": "ff9aa31c11e5d50f",
+  "C2203": "365a29fd77f6b765",
   "C771": "563e3d25c3219dd0",
   "L166": "c12d10588197fbaf",
   "C1303": "5b031a6b82899cfd",
@@ -279,6 +281,7 @@
   "C422": "7e128897077ecee6",
   "C460": "67e48e60d5053a2e",
   "C2202": "6e90fed7eae62131",
+  "C2206": "d8ebf6d6b2abf6a5",
   "C461": "310706ee076318f2",
   "C788": "cae1598ef9cb6ff1",
   "C855": "d3dc77f2f96e20ae",
@@ -296,7 +299,8 @@
   "C2187": "f2b54b1dd7c15f2f",
   "C2188": "612394eef6826900",
   "C2189": "20748838895e4545",
-  "C2195": "77083291a86791c3",
+  "C2205": "44b9341eed4268bc",
+  "C2195": "211dd40ccf98aea0",
   "C2196": "a8ae0700d13a7f9b",
   "C2200": "117a60e53de1e8a4"
  },
@@ -444,7 +448,7 @@
     "all": "6be38c302b01af17"
    },
    "row_hash": "c1c0e2ac2588a579",
-   "carried": false,
+   "carried": true,
    "pass": 19
   },
   {
@@ -1131,7 +1135,7 @@
     "all": "6be38c302b01af17"
    },
    "row_hash": "80d415cf08e0ebfe",
-   "carried": false,
+   "carried": true,
    "pass": 19
   },
   {
@@ -1648,14 +1652,14 @@
    "row": "C1265",
    "screen": "*",
    "verdict": "PASS",
-   "line": "walk_parents/ryan_phone/ryan_shower moment pictures; walk_mom_bills, walk_mark_phone, walk_ryan_game none",
-   "why": "spots only on charged walk-ins; none on a chore, door or menu",
+   "line": "walk_parents, walk_ryan_phone, walk_ryan_shower spots; the three everyday walk-ins none",
+   "why": "spots on sex she sees and her body; none on a chore, door or menu",
    "cause": null,
    "note": false,
-   "screen_hash": "60dfda327fb194f0",
-   "row_hash": "eb11e05cd75e52a9",
+   "screen_hash": "280d5d74f01a6718",
+   "row_hash": "689fd05a4bcbd8be",
    "carried": true,
-   "pass": 16
+   "pass": 21
   },
   {
    "row": "C1267",
@@ -2981,14 +2985,14 @@
    "row": "C2195",
    "screen": "*",
    "verdict": "PASS",
-   "line": "trigger_mode = \"random\", chance = 0.35, max_triggers_per_day = 1",
-   "why": "every kind-(a) walk-in is random 0.35 once a day, gated by the person's rows and window as before, no random_cooldown override (engine default 3), never on came_to_her_today; the substitution walk-in is a different kind",
-   "cause": "",
+   "line": "walk_parents: trigger_mode = \"random\", chance = 0.35, max_triggers_per_day = 1",
+   "why": "five home walk-ins random 0.35, once a day, presence+hours gated, off came_to_her_today, default 3-arrival rest (v2.py:6979-6981); walk_ryan_shower is a substitution on her act, not a button; across-midnight firing kept by LO (NOTES 374: \"Leave it\")",
+   "cause": null,
    "note": false,
-   "screen_hash": "4593e0a3f0277f14",
-   "row_hash": "77083291a86791c3",
+   "screen_hash": "280d5d74f01a6718",
+   "row_hash": "211dd40ccf98aea0",
    "carried": true,
-   "pass": 8
+   "pass": 20
   },
   {
    "row": "C2196",
@@ -3090,14 +3094,14 @@
    "row": "C2201",
    "screen": "*",
    "verdict": "N/A",
-   "line": "Their door hasn't caught.",
-   "why": "scene and menu screens, not a place's description; the descriptions of the places they sit at read no clothes or meters (all 31 checked)",
+   "line": "\u2014",
+   "why": "builds no place description; its screens are scenes or menus, and a scene is not a place's description",
    "cause": null,
    "note": false,
-   "screen_hash": "2a93cbd1808cfc0d",
-   "row_hash": "d119dfe665f76359",
+   "screen_hash": "280d5d74f01a6718",
+   "row_hash": "7fddf5e17dbdaaf9",
    "carried": true,
-   "pass": 17
+   "pass": 20
   },
   {
    "row": "C2202",
@@ -3128,8 +3132,60 @@
     "all": "6be38c302b01af17"
    },
    "row_hash": "6e90fed7eae62131",
-   "carried": false,
+   "carried": true,
    "pass": 19
+  },
+  {
+   "row": "C2203",
+   "screen": "*",
+   "verdict": "N/A",
+   "line": "\u2014",
+   "why": "no event at its places: nothing here has hours of its own as a party or night out; Zoe's party (C2203) is P75's and P05's place",
+   "cause": null,
+   "note": false,
+   "screen_hash": "280d5d74f01a6718",
+   "row_hash": "365a29fd77f6b765",
+   "carried": true,
+   "pass": 20
+  },
+  {
+   "row": "C2204",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "walk_parents.moment <<sex/parents_door_t5>>",
+   "why": "each sexual scene has a tiered spot; the other three show nothing sexual",
+   "cause": null,
+   "note": false,
+   "screen_hash": "280d5d74f01a6718",
+   "row_hash": "3231b5a8a46eaa49",
+   "carried": true,
+   "pass": 21
+  },
+  {
+   "row": "C2205",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "is_repeatable = true",
+   "why": "the six home walk-ins are repeatable with no seen flag; none is a chain step, none switches off for good",
+   "cause": null,
+   "note": false,
+   "screen_hash": "280d5d74f01a6718",
+   "row_hash": "44b9341eed4268bc",
+   "carried": true,
+   "pass": 22
+  },
+  {
+   "row": "C2206",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "walk_parents, walk_ryan_phone, walk_mom_bills, walk_mark_phone, walk_ryan_game, walk_ryan_shower",
+   "why": "1 side-by-side group chain(s) across 6 canvas(es); scenes.check_chains green on them and each atom set read for correlated conditions",
+   "cause": null,
+   "note": false,
+   "screen_hash": "280d5d74f01a6718",
+   "row_hash": "d8ebf6d6b2abf6a5",
+   "carried": false,
+   "pass": 22
   },
   {
    "row": "C286",
@@ -3682,7 +3738,7 @@
     "all": "6be38c302b01af17"
    },
    "row_hash": "67e48e60d5053a2e",
-   "carried": false,
+   "carried": true,
    "pass": 19
   },
   {
@@ -4034,7 +4090,7 @@
     "all": "6be38c302b01af17"
    },
    "row_hash": "310706ee076318f2",
-   "carried": false,
+   "carried": true,
    "pass": 19
   },
   {
@@ -5195,7 +5251,7 @@
     "all": "6be38c302b01af17"
    },
    "row_hash": "4e86d143688ba8e5",
-   "carried": false,
+   "carried": true,
    "pass": 19
   },
   {
@@ -5527,7 +5583,7 @@
     "all": "6be38c302b01af17"
    },
    "row_hash": "1aadffd96e76381c",
-   "carried": false,
+   "carried": true,
    "pass": 19
   },
   {
@@ -5856,7 +5912,7 @@
     "all": "6be38c302b01af17"
    },
    "row_hash": "13a714429d15f3b2",
-   "carried": false,
+   "carried": true,
    "pass": 19
   },
   {
@@ -6248,7 +6304,7 @@
     "all": "6be38c302b01af17"
    },
    "row_hash": "e64ce2672d85d2d8",
-   "carried": false,
+   "carried": true,
    "pass": 19
   },
   {
@@ -6511,8 +6567,8 @@
  ],
  "causes": [],
  "pending": [],
- "asked": 9,
- "answered": 9,
+ "asked": 1,
+ "answered": 1,
  "pass_items": [],
  "unowed": []
 }

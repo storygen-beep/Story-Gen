@@ -1,6 +1,6 @@
 {
  "piece": "P10",
- "pass": 19,
+ "pass": 22,
  "screens": {
   "cafe_work_hour.work": {
    "text": "cf9b13f90f1a43c0",
@@ -81,6 +81,7 @@
   "C289": "3952eba1e2267f12",
   "C297": "b920ef848ab61988",
   "C1250": "fde578d75b0d3620",
+  "C2204": "3231b5a8a46eaa49",
   "C519": "e78502f7aa28746d",
   "C311": "bad20c9f078e8b87",
   "C314": "0304731d263aed9f",
@@ -101,7 +102,7 @@
   "C2198": "73dfe095a72154a3",
   "C769": "f6b6f78a8f2e5ed7",
   "C794": "bad76e5963432385",
-  "C2201": "d119dfe665f76359",
+  "C2201": "7fddf5e17dbdaaf9",
   "C795": "34139e6a6914e171",
   "C804": "5358489178bff0a4",
   "L106": "13a714429d15f3b2",
@@ -113,6 +114,7 @@
   "C762": "40e85f1ae92f1e71",
   "L170": "c3599cd09637a240",
   "C770": "ff9aa31c11e5d50f",
+  "C2203": "365a29fd77f6b765",
   "C771": "563e3d25c3219dd0",
   "L166": "c12d10588197fbaf",
   "C1303": "5b031a6b82899cfd",
@@ -141,6 +143,7 @@
   "C422": "7e128897077ecee6",
   "C460": "67e48e60d5053a2e",
   "C2202": "6e90fed7eae62131",
+  "C2206": "d8ebf6d6b2abf6a5",
   "C461": "310706ee076318f2",
   "C2189": "20748838895e4545"
  },
@@ -174,7 +177,7 @@
     "all": "a91c15097b0f0347"
    },
    "row_hash": "c1c0e2ac2588a579",
-   "carried": false,
+   "carried": true,
    "pass": 19
   },
   {
@@ -193,7 +196,7 @@
     "all": "d0086e6102041066"
    },
    "row_hash": "c1c0e2ac2588a579",
-   "carried": false,
+   "carried": true,
    "pass": 19
   },
   {
@@ -392,7 +395,7 @@
     "all": "a91c15097b0f0347"
    },
    "row_hash": "80d415cf08e0ebfe",
-   "carried": false,
+   "carried": true,
    "pass": 19
   },
   {
@@ -411,7 +414,7 @@
     "all": "d0086e6102041066"
    },
    "row_hash": "80d415cf08e0ebfe",
-   "carried": false,
+   "carried": true,
    "pass": 19
   },
   {
@@ -949,7 +952,7 @@
     "all": "d0086e6102041066"
    },
    "row_hash": "d5758757a709b1af",
-   "carried": false,
+   "carried": true,
    "pass": 19
   },
   {
@@ -1047,13 +1050,13 @@
    "screen": "*",
    "verdict": "N/A",
    "line": "\u2014",
-   "why": "builds no place description (caf\u00e9 work canvases); a scene is not a place's description",
+   "why": "builds no place description; its screens are scenes or menus, and a scene is not a place's description",
    "cause": null,
    "note": false,
-   "screen_hash": "aae1d12364012f27",
-   "row_hash": "d119dfe665f76359",
+   "screen_hash": "35902a600f119508",
+   "row_hash": "7fddf5e17dbdaaf9",
    "carried": true,
-   "pass": 17
+   "pass": 20
   },
   {
    "row": "C2202",
@@ -1071,7 +1074,7 @@
     "all": "a91c15097b0f0347"
    },
    "row_hash": "6e90fed7eae62131",
-   "carried": false,
+   "carried": true,
    "pass": 19
   },
   {
@@ -1090,8 +1093,47 @@
     "all": "d0086e6102041066"
    },
    "row_hash": "6e90fed7eae62131",
-   "carried": false,
+   "carried": true,
    "pass": 19
+  },
+  {
+   "row": "C2203",
+   "screen": "*",
+   "verdict": "N/A",
+   "line": "\u2014",
+   "why": "no event at its places: nothing here has hours of its own as a party or night out; Zoe's party (C2203) is P75's and P05's place",
+   "cause": null,
+   "note": false,
+   "screen_hash": "35902a600f119508",
+   "row_hash": "365a29fd77f6b765",
+   "carried": true,
+   "pass": 20
+  },
+  {
+   "row": "C2204",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "No spot: cafe_work_hour \u2014 a shift is a chore ... (LO 2026-11-27, group 3 left out; C2204)",
+   "why": "both sexual screens carry a `No spot:` line; LO's standing call: the cafe shifts get no spot; old rows are is_active = false",
+   "cause": null,
+   "note": false,
+   "screen_hash": "35902a600f119508",
+   "row_hash": "3231b5a8a46eaa49",
+   "carried": true,
+   "pass": 21
+  },
+  {
+   "row": "C2206",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "cafe_work_hour, cafe_work_shift, cafe_hour_weekday, cafe_hour_saturday, cafe_hour_sunday, cafe_shift_weekday, cafe_shift_weekend_am, cafe_shift_weekend_pm",
+   "why": "cafe shift/hour chains: disjoint weekday and time_of_day bands, every group shows",
+   "cause": null,
+   "note": false,
+   "screen_hash": "35902a600f119508",
+   "row_hash": "d8ebf6d6b2abf6a5",
+   "carried": false,
+   "pass": 22
   },
   {
    "row": "C286",
@@ -1325,7 +1367,7 @@
     "all": "a91c15097b0f0347"
    },
    "row_hash": "67e48e60d5053a2e",
-   "carried": false,
+   "carried": true,
    "pass": 19
   },
   {
@@ -1344,7 +1386,7 @@
     "all": "d0086e6102041066"
    },
    "row_hash": "67e48e60d5053a2e",
-   "carried": false,
+   "carried": true,
    "pass": 19
   },
   {
@@ -1376,7 +1418,7 @@
     "all": "a91c15097b0f0347"
    },
    "row_hash": "310706ee076318f2",
-   "carried": false,
+   "carried": true,
    "pass": 19
   },
   {
@@ -1395,7 +1437,7 @@
     "all": "d0086e6102041066"
    },
    "row_hash": "310706ee076318f2",
-   "carried": false,
+   "carried": true,
    "pass": 19
   },
   {
@@ -1700,7 +1742,7 @@
     "all": "a91c15097b0f0347"
    },
    "row_hash": "def1348d483d0c40",
-   "carried": false,
+   "carried": true,
    "pass": 19
   },
   {
@@ -1839,7 +1881,7 @@
     "all": "a91c15097b0f0347"
    },
    "row_hash": "d5a109f1ef88419a",
-   "carried": false,
+   "carried": true,
    "pass": 19
   },
   {
@@ -1949,7 +1991,7 @@
     "all": "a91c15097b0f0347"
    },
    "row_hash": "4e86d143688ba8e5",
-   "carried": false,
+   "carried": true,
    "pass": 19
   },
   {
@@ -1968,7 +2010,7 @@
     "all": "d0086e6102041066"
    },
    "row_hash": "4e86d143688ba8e5",
-   "carried": false,
+   "carried": true,
    "pass": 19
   },
   {
@@ -2000,7 +2042,7 @@
     "all": "a91c15097b0f0347"
    },
    "row_hash": "18b0ecdf6d7fc901",
-   "carried": false,
+   "carried": true,
    "pass": 19
   },
   {
@@ -2045,7 +2087,7 @@
     "all": "a91c15097b0f0347"
    },
    "row_hash": "1aadffd96e76381c",
-   "carried": false,
+   "carried": true,
    "pass": 19
   },
   {
@@ -2064,7 +2106,7 @@
     "all": "d0086e6102041066"
    },
    "row_hash": "1aadffd96e76381c",
-   "carried": false,
+   "carried": true,
    "pass": 19
   },
   {
@@ -2132,7 +2174,7 @@
     "all": "a91c15097b0f0347"
    },
    "row_hash": "826bf82fe26afd13",
-   "carried": false,
+   "carried": true,
    "pass": 19
   },
   {
@@ -2164,7 +2206,7 @@
     "all": "a91c15097b0f0347"
    },
    "row_hash": "13a714429d15f3b2",
-   "carried": false,
+   "carried": true,
    "pass": 19
   },
   {
@@ -2183,7 +2225,7 @@
     "all": "d0086e6102041066"
    },
    "row_hash": "13a714429d15f3b2",
-   "carried": false,
+   "carried": true,
    "pass": 19
   },
   {
@@ -2228,7 +2270,7 @@
     "all": "a91c15097b0f0347"
    },
    "row_hash": "e64ce2672d85d2d8",
-   "carried": false,
+   "carried": true,
    "pass": 19
   },
   {
@@ -2247,7 +2289,7 @@
     "all": "d0086e6102041066"
    },
    "row_hash": "e64ce2672d85d2d8",
-   "carried": false,
+   "carried": true,
    "pass": 19
   },
   {
@@ -2279,8 +2321,8 @@
  ],
  "causes": [],
  "pending": [],
- "asked": 23,
- "answered": 23,
+ "asked": 1,
+ "answered": 1,
  "pass_items": [],
  "unowed": []
 }

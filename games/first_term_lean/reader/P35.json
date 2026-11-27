@@ -1,6 +1,6 @@
 {
  "piece": "P35",
- "pass": 18,
+ "pass": 21,
  "screens": {
   "shop_meet_nina.meet": {
    "text": "ea4eb3bb92b30114",
@@ -92,7 +92,8 @@
   "C1267": "f0db81b801577bf2",
   "C1249": "a843f9b57e43a020",
   "C1250": "fde578d75b0d3620",
-  "C1265": "eb11e05cd75e52a9",
+  "C1265": "689fd05a4bcbd8be",
+  "C2204": "3231b5a8a46eaa49",
   "C1234": "1b2a2d5f05b10331",
   "L121": "45842b25d0708a15",
   "L125": "1fca3bfe1d0c2419",
@@ -135,7 +136,7 @@
   "C2198": "73dfe095a72154a3",
   "C769": "f6b6f78a8f2e5ed7",
   "C794": "bad76e5963432385",
-  "C2201": "d119dfe665f76359",
+  "C2201": "7fddf5e17dbdaaf9",
   "C795": "34139e6a6914e171",
   "C804": "5358489178bff0a4",
   "L106": "13a714429d15f3b2",
@@ -147,6 +148,7 @@
   "C762": "40e85f1ae92f1e71",
   "L170": "c3599cd09637a240",
   "C770": "ff9aa31c11e5d50f",
+  "C2203": "365a29fd77f6b765",
   "C771": "563e3d25c3219dd0",
   "L166": "c12d10588197fbaf",
   "C1303": "5b031a6b82899cfd",
@@ -175,6 +177,7 @@
   "C422": "7e128897077ecee6",
   "C460": "67e48e60d5053a2e",
   "C2202": "6e90fed7eae62131",
+  "C2206": "d8ebf6d6b2abf6a5",
   "C461": "310706ee076318f2",
   "C2189": "20748838895e4545",
   "C2190": "452a5657d7527351"
@@ -227,7 +230,7 @@
     "all": "c90704be4c3d937c"
    },
    "row_hash": "c1c0e2ac2588a579",
-   "carried": false,
+   "carried": true,
    "pass": 18
   },
   {
@@ -393,7 +396,7 @@
     "all": "c90704be4c3d937c"
    },
    "row_hash": "80d415cf08e0ebfe",
-   "carried": false,
+   "carried": true,
    "pass": 18
   },
   {
@@ -472,7 +475,7 @@
     "all": "c90704be4c3d937c"
    },
    "row_hash": "f40f51a0fd6cfd10",
-   "carried": false,
+   "carried": true,
    "pass": 18
   },
   {
@@ -659,7 +662,7 @@
     "all": "c90704be4c3d937c"
    },
    "row_hash": "bfff76edbee583de",
-   "carried": false,
+   "carried": true,
    "pass": 18
   },
   {
@@ -847,14 +850,14 @@
    "row": "C1265",
    "screen": "*",
    "verdict": "PASS",
-   "line": "shop_meet_nina.meet <<people/nina_till_t0>>; shop_try_on.try <<body/fitting_room_t3>>; hood_clothes place image",
-   "why": "the fitting room is a body moment (dressing, the mirror); the place image is a card, not a spot",
+   "line": "shop_try_on.try <<body/fitting_room_t3>>; shop_meet_nina.meet <<people/nina_till_t0>>",
+   "why": "a mirror body moment and a first meeting; no chore, door or menu spot",
    "cause": null,
    "note": false,
-   "screen_hash": "491c3a036d302c50",
-   "row_hash": "eb11e05cd75e52a9",
+   "screen_hash": "07c1da58abb84646",
+   "row_hash": "689fd05a4bcbd8be",
    "carried": true,
-   "pass": 15
+   "pass": 20
   },
   {
    "row": "C1267",
@@ -1359,7 +1362,7 @@
     "all": "c90704be4c3d937c"
    },
    "row_hash": "d5758757a709b1af",
-   "carried": false,
+   "carried": true,
    "pass": 18
   },
   {
@@ -1590,16 +1593,16 @@
   },
   {
    "row": "C2201",
-   "screen": "*",
-   "verdict": "N/A",
-   "line": "You take an armful into the fitting room and pull the curtain.",
-   "why": "scene and menu screens, not a place's description; the descriptions of the places they sit at read no clothes or meters (all 31 checked)",
+   "screen": "hood_clothes",
+   "verdict": "PASS",
+   "line": "Girls from campus browse the rails in pairs.",
+   "why": "crowd line inside open hours Mon-Sat 10:00-19:00; no variants",
    "cause": null,
    "note": false,
-   "screen_hash": "491c3a036d302c50",
-   "row_hash": "d119dfe665f76359",
+   "screen_hash": null,
+   "row_hash": "7fddf5e17dbdaaf9",
    "carried": true,
-   "pass": 16
+   "pass": 19
   },
   {
    "row": "C2202",
@@ -1617,8 +1620,47 @@
     "all": "c90704be4c3d937c"
    },
    "row_hash": "6e90fed7eae62131",
-   "carried": false,
+   "carried": true,
    "pass": 18
+  },
+  {
+   "row": "C2203",
+   "screen": "*",
+   "verdict": "N/A",
+   "line": "\u2014",
+   "why": "no event at its places: nothing here has hours of its own as a party or night out; Zoe's party (C2203) is P75's and P05's place",
+   "cause": null,
+   "note": false,
+   "screen_hash": "07c1da58abb84646",
+   "row_hash": "365a29fd77f6b765",
+   "carried": true,
+   "pass": 19
+  },
+  {
+   "row": "C2204",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "\"You turn and look at your ass in the skirt longer than you mean to.\" <<body/fitting_room_t3>>",
+   "why": "the sexual screen has its spot right after the payoff",
+   "cause": null,
+   "note": false,
+   "screen_hash": "07c1da58abb84646",
+   "row_hash": "3231b5a8a46eaa49",
+   "carried": true,
+   "pass": 20
+  },
+  {
+   "row": "C2206",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "shop_meet_nina, shop_try_on",
+   "why": "no side-by-side groups on its 2 canvas(es); nothing can be covered",
+   "cause": null,
+   "note": false,
+   "screen_hash": "07c1da58abb84646",
+   "row_hash": "d8ebf6d6b2abf6a5",
+   "carried": false,
+   "pass": 21
   },
   {
    "row": "C286",
@@ -1927,7 +1969,7 @@
     "all": "c90704be4c3d937c"
    },
    "row_hash": "67e48e60d5053a2e",
-   "carried": false,
+   "carried": true,
    "pass": 18
   },
   {
@@ -1977,7 +2019,7 @@
     "all": "c90704be4c3d937c"
    },
    "row_hash": "310706ee076318f2",
-   "carried": false,
+   "carried": true,
    "pass": 18
   },
   {
@@ -2687,7 +2729,7 @@
     "all": "c90704be4c3d937c"
    },
    "row_hash": "4e86d143688ba8e5",
-   "carried": false,
+   "carried": true,
    "pass": 18
   },
   {
@@ -2760,7 +2802,7 @@
     "all": "c90704be4c3d937c"
    },
    "row_hash": "1aadffd96e76381c",
-   "carried": false,
+   "carried": true,
    "pass": 18
   },
   {
@@ -2823,7 +2865,7 @@
     "all": "c90704be4c3d937c"
    },
    "row_hash": "13a714429d15f3b2",
-   "carried": false,
+   "carried": true,
    "pass": 18
   },
   {
@@ -2911,7 +2953,7 @@
     "all": "c90704be4c3d937c"
    },
    "row_hash": "e64ce2672d85d2d8",
-   "carried": false,
+   "carried": true,
    "pass": 18
   },
   {
@@ -2973,8 +3015,8 @@
  ],
  "causes": [],
  "pending": [],
- "asked": 12,
- "answered": 12,
+ "asked": 1,
+ "answered": 1,
  "pass_items": [],
  "unowed": []
 }

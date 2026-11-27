@@ -1,6 +1,6 @@
 {
  "piece": "P08",
- "pass": 12,
+ "pass": 15,
  "screens": {
   "*": "4f53cda18c2baa0c"
  },
@@ -38,6 +38,7 @@
   "C288": "7b5399adec567cd4",
   "C289": "3952eba1e2267f12",
   "C297": "b920ef848ab61988",
+  "C2204": "3231b5a8a46eaa49",
   "C519": "e78502f7aa28746d",
   "C311": "bad20c9f078e8b87",
   "C314": "0304731d263aed9f",
@@ -66,6 +67,7 @@
   "C593": "370371a278b9f182",
   "C422": "7e128897077ecee6",
   "C460": "67e48e60d5053a2e",
+  "C2206": "d8ebf6d6b2abf6a5",
   "C461": "310706ee076318f2",
   "C2188": "612394eef6826900"
  },
@@ -769,8 +771,34 @@
    "note": false,
    "screen_hash": "4f53cda18c2baa0c",
    "row_hash": "73dfe095a72154a3",
-   "carried": false,
+   "carried": true,
    "pass": 12
+  },
+  {
+   "row": "C2204",
+   "screen": "phone:text_chris",
+   "verdict": "PASS",
+   "line": "No spot: phone:text_chris \u2014 a text thread is words; the phone shows no picture (C2204).",
+   "why": "P08.md:61 gives a No spot line whose why is not C1265; true of the engine: a conversation message block renders text only (v2.py:3208-3214), and PLAN \u00a78e keeps the camera and gallery for later",
+   "cause": null,
+   "note": false,
+   "screen_hash": null,
+   "row_hash": "3231b5a8a46eaa49",
+   "carried": true,
+   "pass": 14
+  },
+  {
+   "row": "C2206",
+   "screen": "*",
+   "verdict": "N/A",
+   "line": "Builds: phone:text_laura, phone:text_ryan, phone:text_mark, phone:text_tom, phone:text_chris, phone:text_nina",
+   "why": "Builds names no canvas in 7_final_game.toml (locations, sidebar, phone, people or none); no group chain to judge",
+   "cause": null,
+   "note": false,
+   "screen_hash": "4f53cda18c2baa0c",
+   "row_hash": "d8ebf6d6b2abf6a5",
+   "carried": false,
+   "pass": 15
   },
   {
    "row": "C286",

@@ -15,7 +15,7 @@ Sheet:
 Does:
   <canvas>.<node> | <what the screen does, from SKILL.md's Rule labels, comma-separated; never "always">
 Changes: <flags set, traits moved, items, doors opened — by name>
-Media: <n> spots. <spot>: <what it shows>, <tier>, <view>
+Media: <n> spots. <spot>: <what it shows>, <tier>, <view>. Every screen the Does: marks `something sexual shows` has a spot, or a line `No spot: <canvas> — <why>` (craft/media.md rule 8, C2204)
 Earlier releases: <what changes in shipped content, or "none">
 Out of scope: <what this piece does not do>. Events only: never the body of a moment this piece builds. An adoption card (existing canvases, nothing new) always ends: LO has not read these scenes; this yes means 'keep as it is', not 'read and approved'.
 Builds: <canvas, place and person ids, and `sidebar:<trait>` for a sidebar item, this piece adds or edits, comma-separated>

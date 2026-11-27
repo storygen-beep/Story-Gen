@@ -332,3 +332,45 @@ def test_file_with_no_marked_beat_is_incomplete(tmp_path):
     f = tmp_path / "plain.md"
     f.write_text(WATCH + "\n")
     assert check.main(["--beat", str(f)]) == 2
+
+
+def test_an_id_defined_twice_is_red_and_one_copy_is_green():
+    import check as chk
+    one = {"id": "talk_x", "nodes": []}
+    assert chk.duplicate_ids({"canvases": [one, {"id": "talk_y"}]}) == []
+    rows = chk.duplicate_ids({"canvases": [one, dict(one)], "npcs": [{"id": "npc_a"}, {"id": "npc_a"}]})
+    assert any("canvas id `talk_x` is defined 2 times" in r for r in rows)
+    assert any("person id `npc_a`" in r for r in rows)
+
+
+def _media_game(with_spot):
+    blocks = [{"type": "paragraph", "content": "He fingers her against the shelves."}]
+    if with_spot:
+        blocks.append({"type": "image", "props": {"pool_dir": "sex/store_t5", "pool": 4}})
+    return {"canvases": [{"id": "walk_store", "nodes": [{"id": "moment", "blocks": blocks}]}]}
+
+
+def _media_card(tmp_path, extra=""):
+    (tmp_path / "cards").mkdir(exist_ok=True)
+    (tmp_path / "cards" / "P01.md").write_text(
+        "PIECE P01\nDoes:\n  walk_store.moment | a walk-in, something sexual shows, a place is entered\n" + extra)
+    return tmp_path
+
+
+@pytest.mark.parametrize("spot,extra,status", [
+    (False, "", check.RED),
+    (True, "", check.GREEN),
+    (False, "No spot: walk_store — she only hears it through the door\n", check.GREEN),
+])
+def test_a_sexual_scene_needs_a_spot_or_a_written_reason(tmp_path, spot, extra, status):
+    assert check.check_media(_media_card(tmp_path, extra), _media_game(spot))[0] == status
+
+
+def test_a_look_the_card_forgot_to_label_is_still_red(tmp_path):
+    (tmp_path / "cards").mkdir()
+    (tmp_path / "cards" / "P01.md").write_text("PIECE P01\nDoes:\n  walk_porch.moment | a walk-in, a place is entered\n")
+    game = {"canvases": [{"id": "walk_porch", "nodes": [{"id": "moment", "blocks": [
+        {"type": "paragraph", "content": "His eyes stay on your legs the whole time you answer."}]}]}]}
+    assert check.check_media(tmp_path, game)[0] == check.RED
+    game["canvases"][0]["nodes"][0]["blocks"][0]["content"] = "He nods at the gutter and goes back inside."
+    assert check.check_media(tmp_path, game)[0] == check.GREEN

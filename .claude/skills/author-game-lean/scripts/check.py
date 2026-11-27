@@ -3,13 +3,14 @@
     python3 check.py games/<slug> [--release] [--against <git ref>]
 
 Checks:
-  merge      scripts/merge_toml_phases.py runs and the merged TOML parses (--no-dev under --release)
+  merge      scripts/merge_toml_phases.py runs and the merged TOML parses (--no-dev under --release); no canvas, place,
+             person or garment id is defined twice
   reach      reach.py finds no scene, media spot or portrait that can never show
   approvals  every STATE.md piece with a built date has a current approval (approve.status == approved)
   builds     every canvas, place, person and sidebar item in the merged TOML is listed in the Builds: line
              of an APPROVED card (a changed card covers nothing; canvases from 6_dev_shortcuts.toml are
              skipped; a sidebar item, which has no id, is listed as `sidebar:<trait>`, or `sidebar:<label>`)
-  talk, length, presence, creation, saves, speakers, goals, repeats
+  talk, length, presence, creation, saves, speakers, goals, repeats, chains
              the measured scene checks in scenes.py (its docstring says what each one can and can't see).
              `--against <git ref>` sets the build `saves` compares with; the default is the last commit of
              output/index.html, the build LO played.
@@ -21,6 +22,8 @@ Checks:
              the last screen, a first meeting, a place entered, one-time or repeatable, the opening) is named
              on that screen's Does: line. Cards without Does: are not judged. A card whose Builds: names the
              Hints page (`story_hints`, `walkthrough:<id>`) names each entry's screen on its Does: (pages.py).
+  media      every scene a card's Does: marks `something sexual shows` has a picture or clip spot in the build,
+             or the card writes `No spot: <canvas> — <why>` (C2204)
   pages      under [ui] quests_layout = "hints": every first meeting a scene sets (met_*), and every flag a
              hidden place waits on, is a `when` on some hint or walkthrough step unless the opening sets it;
              every flag a hint reads is set by some canvas. Under people_page = "cot": every person has
@@ -86,7 +89,7 @@ import walkins  # noqa: E402
 GREEN, RED, INCOMPLETE = "green", "red", "incomplete"
 # Every check a craft row's `judge` may name (SKILL.md, "Rule labels").
 CHECKS = ("merge", "reach", "approvals", "builds", "release", "card", "beat", "sheet", "does",
-          "talk", "length", "presence", "creation", "saves", "speakers", "goals", "repeats", "pages", "people", "walkins")
+          "talk", "length", "presence", "creation", "saves", "speakers", "goals", "repeats", "chains", "media", "pages", "people", "walkins")
 GATES = REPO / ".claude" / "skills" / "author-game-v2" / "scripts" / "gates.py"
 BEAT_FLOOR = 3  # C254: an explicit beat has 3+ frozen-list words
 
@@ -103,6 +106,20 @@ def merge(game_dir, release=False):
         last = (p.stderr.strip() or p.stdout.strip() or f"exit {p.returncode}").splitlines()[-1]
         return RED, [f"merge failed: {last}"]
     return GREEN, []
+
+
+def duplicate_ids(game):
+    """Ids used twice in the merged TOML. Every canvas, place, person and clothing id is a key the engine looks up
+    once (setup.getCanvasById builds one map by id, so a later copy replaces an earlier one, v2.py:4160-4171); a second copy is dead text or silently wins, and
+    neither the merge script nor the build says so. first_term_lean P75, 2026-11-27: three party talks pasted twice."""
+    rows = []
+    for key, label in (("canvases", "canvas"), ("locations", "place"), ("npcs", "person"), ("clothing", "garment")):
+        seen = {}
+        for x in (game or {}).get(key) or []:
+            if isinstance(x, dict) and x.get("id"):
+                seen[x["id"]] = seen.get(x["id"], 0) + 1
+        rows += [f"{label} id `{i}` is defined {n} times; keep one" for i, n in sorted(seen.items()) if n > 1]
+    return rows
 
 
 def load_merged(game_dir):
@@ -408,6 +425,66 @@ def check_does(game_dir, game):
     return (RED, red) if red else (GREEN, [])
 
 
+NO_SPOT = re.compile(r"^\s*No spot:\s*`?([\w.]+)`?\s*[\u2014-]+\s*\S", re.M)
+
+
+def _has_media(blocks):
+    for b in blocks or []:
+        if isinstance(b, dict) and (b.get("type") in ("image", "video") or _has_media(b.get("blocks"))):
+            return True
+    return False
+
+
+# Words a script can read as "something sexual shows" even when a card forgets the label (C2204): explicit words,
+# a look that lands on her body, a hand that stays on her. A helper for the Does: label, never a replacement.
+SEXUAL_WORDS = re.compile(
+    r"\b(?:cunt|cock|dick|pussy|clit|cums?|cumming|tits|nipples?)\b"
+    r"|\beyes\b[^.!?]{0,40}\b(?:on|to|over|down|at)\s+your\s+(?:legs|body|chest|ass|tits|thighs|mouth)\b"
+    r"|\blooks? you (?:over|up and down)\b|\beyes go (?:all the way )?down\b"
+    r"|\b(?:hand|hands|fingers|thumb)\b[^.!?]{0,40}\byour\s+(?:waist|hips?|ass|thighs?|chest|stomach)\b", re.I)
+
+
+def _text(blocks):
+    out = []
+    for b in blocks or []:
+        if isinstance(b, dict):
+            out.append(str(b.get("content") or ""))
+            out.append(_text(b.get("blocks")))
+    return " ".join(out)
+
+
+def check_media(game_dir, game):
+    """C2204: a scene a card's Does: marks `something sexual shows` has a picture or clip spot somewhere in it (at
+    its payoff, craft/media.md rule 1), unless the card writes `No spot: <canvas> — <why>`. Read from the build, so a
+    spot the card claims but the TOML lacks is still red. first_term_lean, 2026-11-27: 19 sexual scenes had none,
+    each card citing C1265 for a look, a door, or nothing (LO: "the group 2, gifs", "go ahead")."""
+    if game is None:
+        return INCOMPLETE, ["the merged TOML did not parse"]
+    canv = {c.get("id"): c for c in game.get("canvases") or [] if isinstance(c, dict)}
+    red = []
+    for path in sorted((Path(game_dir) / "cards").glob("*.md")):
+        text = path.read_text(encoding="utf-8")
+        does = rules.card_does(text)
+        if not does:
+            continue
+        excused = set(NO_SPOT.findall(text))
+        sexual = {scr.split(".")[0] for scr, ts in does.items() if "something sexual shows" in ts}
+        # A screen the card forgot to label, read from its own words (vance_gutter's "His eyes stay on your legs").
+        sexual |= {scr.split(".")[0] for scr in does
+                   if scr.split(".")[0] in canv and SEXUAL_WORDS.search(_text(next(
+                       (n.get("blocks") for n in canv[scr.split(".")[0]].get("nodes") or []
+                        if n.get("id") == scr.partition(".")[2]), [])))}
+        sexual = sorted(sexual)
+        for cid in sexual:
+            c = canv.get(cid)
+            if c is None or cid in excused:
+                continue
+            if not any(_has_media(n.get("blocks")) for n in c.get("nodes") or []):
+                red.append(f"{path.stem}: `{cid}` shows something sexual and has no picture or clip spot; add one at "
+                           f"its payoff (craft/media.md rule 8, C2204), or write `No spot: {cid} — <why>` on the card")
+    return (RED, red) if red else (GREEN, [])
+
+
 def check_pages(game):
     """The Hints page's pointers and the People dialog's keys (pages.py)."""
     if game is None:
@@ -458,12 +535,16 @@ def check_sheet(game_dir, game):
 def run_all(game_dir, release=False, against=None):
     results = {"merge": merge(game_dir, release)}
     game = load_merged(game_dir) if results["merge"][0] == GREEN else None
+    dupes = duplicate_ids(game)
+    if dupes:
+        results["merge"] = (RED, dupes)
     results["reach"] = check_reach(game)
     results["approvals"] = check_approvals(game_dir)
     results["builds"] = check_builds(game_dir, game)
     results.update(scenes.run(game_dir, game, dev_canvases(game_dir) or {}, ref=against))
     results["sheet"] = check_sheet(game_dir, game)
     results["does"] = check_does(game_dir, game)
+    results["media"] = check_media(game_dir, game)
     results["pages"] = check_pages(game)
     results["people"] = check_people(game)
     results["walkins"] = check_walkins(game_dir, game)

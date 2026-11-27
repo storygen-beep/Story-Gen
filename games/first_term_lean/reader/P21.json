@@ -1,6 +1,6 @@
 {
  "piece": "P21",
- "pass": 22,
+ "pass": 26,
  "screens": {
   "cafe_hire.ask": {
    "text": "a5e6e9ac50172fda",
@@ -31,11 +31,11 @@
    "all": "056f7af4af82b8ef"
   },
   "cafe_first_shift.start": {
-   "text": "1c9ba64c14c54dbc",
+   "text": "a4cf7c7d5f869ada",
    "traits": "7b42410c0bd9090b",
    "facts": "465e6155df58dbcc",
    "facts2": "98aa2cec72d0253b",
-   "all": "4d9f3e0bc1ef9374"
+   "all": "69c6377a16064329"
   },
   "cafe_first_shift.end": {
    "text": "232b773017a0047b",
@@ -44,7 +44,7 @@
    "facts2": "57c2e70b1e486388",
    "all": "709e6352b7dd2fc7"
   },
-  "*": "ad7e0e3f51dbb507"
+  "*": "1ad9676177e68dce"
  },
  "rows": {
   "B1": "5276068df1ca6fa9",
@@ -122,7 +122,8 @@
   "C1267": "f0db81b801577bf2",
   "C1249": "a843f9b57e43a020",
   "C1250": "fde578d75b0d3620",
-  "C1265": "eb11e05cd75e52a9",
+  "C1265": "689fd05a4bcbd8be",
+  "C2204": "3231b5a8a46eaa49",
   "C1234": "1b2a2d5f05b10331",
   "L121": "45842b25d0708a15",
   "L125": "1fca3bfe1d0c2419",
@@ -167,7 +168,7 @@
   "C2198": "73dfe095a72154a3",
   "C769": "f6b6f78a8f2e5ed7",
   "C794": "bad76e5963432385",
-  "C2201": "d119dfe665f76359",
+  "C2201": "7fddf5e17dbdaaf9",
   "C795": "34139e6a6914e171",
   "C804": "5358489178bff0a4",
   "L106": "13a714429d15f3b2",
@@ -179,6 +180,7 @@
   "C762": "40e85f1ae92f1e71",
   "L170": "c3599cd09637a240",
   "C770": "ff9aa31c11e5d50f",
+  "C2203": "365a29fd77f6b765",
   "C771": "563e3d25c3219dd0",
   "L166": "c12d10588197fbaf",
   "C1303": "5b031a6b82899cfd",
@@ -207,6 +209,7 @@
   "C422": "7e128897077ecee6",
   "C460": "67e48e60d5053a2e",
   "C2202": "6e90fed7eae62131",
+  "C2206": "d8ebf6d6b2abf6a5",
   "C461": "310706ee076318f2",
   "C2188": "612394eef6826900",
   "C2189": "20748838895e4545",
@@ -262,25 +265,27 @@
     "all": "709e6352b7dd2fc7"
    },
    "row_hash": "c1c0e2ac2588a579",
-   "carried": false,
+   "carried": true,
    "pass": 22
   },
   {
    "row": "B10",
    "screen": "cafe_first_shift.start",
    "verdict": "PASS",
-   "line": "Tom, from the till: \"Chris. Customers.\"",
-   "why": "start opens 10:00-14:55 weekdays; Chris at near_cafe 07-15, Tom 10-21 (who_is_where); one visit only (cafe_first_shift_done)",
+   "line": "So you're the new girl. Tom says you're mine to train.",
+   "why": "plays once (cafe_first_shift_done); Chris 07-15 and Tom 10-21 at near_cafe cover the 10:00-14:55 weekday trigger; met_chris set on its exit, no earlier Chris line",
    "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "1c9ba64c14c54dbc",
+    "text": "a4cf7c7d5f869ada",
+    "traits": "7b42410c0bd9090b",
     "facts": "465e6155df58dbcc",
-    "all": "4d9f3e0bc1ef9374"
+    "facts2": "98aa2cec72d0253b",
+    "all": "69c6377a16064329"
    },
    "row_hash": "c1c0e2ac2588a579",
    "carried": true,
-   "pass": 5
+   "pass": 26
   },
   {
    "row": "B10",
@@ -315,7 +320,7 @@
     "all": "87abb20d5897398a"
    },
    "row_hash": "c1c0e2ac2588a579",
-   "carried": false,
+   "carried": true,
    "pass": 22
   },
   {
@@ -351,7 +356,7 @@
     "all": "293b551d5c9561cb"
    },
    "row_hash": "c1c0e2ac2588a579",
-   "carried": false,
+   "carried": true,
    "pass": 22
   },
   {
@@ -779,8 +784,27 @@
     "all": "709e6352b7dd2fc7"
    },
    "row_hash": "80d415cf08e0ebfe",
-   "carried": false,
+   "carried": true,
    "pass": 22
+  },
+  {
+   "row": "B8",
+   "screen": "cafe_first_shift.start",
+   "verdict": "PASS",
+   "line": "Reaching past you for a jug, his arm drags across your chest.",
+   "why": "no garment named; $22 and 15 energy match the card",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "a4cf7c7d5f869ada",
+    "traits": "7b42410c0bd9090b",
+    "facts": "465e6155df58dbcc",
+    "facts2": "98aa2cec72d0253b",
+    "all": "69c6377a16064329"
+   },
+   "row_hash": "80d415cf08e0ebfe",
+   "carried": true,
+   "pass": 26
   },
   {
    "row": "B8",
@@ -815,7 +839,7 @@
     "all": "87abb20d5897398a"
    },
    "row_hash": "80d415cf08e0ebfe",
-   "carried": false,
+   "carried": true,
    "pass": 22
   },
   {
@@ -851,7 +875,7 @@
     "all": "293b551d5c9561cb"
    },
    "row_hash": "80d415cf08e0ebfe",
-   "carried": false,
+   "carried": true,
    "pass": 22
   },
   {
@@ -1827,20 +1851,20 @@
    "screen": "*",
    "verdict": "PASS",
    "line": "cafe_hire.ask <<people/tom_counter_t0>>; cafe_first_shift.start <<look/chris_wand_t3>>",
-   "why": "spots on two people's scenes; no chore, door or menu has one",
+   "why": "a meeting and a touch; neither a chore, door nor menu",
    "cause": null,
    "note": false,
-   "screen_hash": "8bde60acbb418c33",
-   "row_hash": "eb11e05cd75e52a9",
+   "screen_hash": "ad7e0e3f51dbb507",
+   "row_hash": "689fd05a4bcbd8be",
    "carried": true,
-   "pass": 19
+   "pass": 24
   },
   {
    "row": "C1265",
    "screen": "cafe_first_shift.start",
    "verdict": "PASS",
-   "line": "\"his arm drags across your chest. He doesn't say sorry.\"",
-   "why": "Chris's brush is a moment with a person, not a chore; the spot belongs",
+   "line": "\"Reaching past you for a jug, his arm drags across your chest.\"",
+   "why": "a touch on her: C1265 never covers it; the spot belongs",
    "cause": null,
    "note": false,
    "screen_hash": {
@@ -1850,9 +1874,9 @@
     "facts2": "98aa2cec72d0253b",
     "all": "4d9f3e0bc1ef9374"
    },
-   "row_hash": "eb11e05cd75e52a9",
+   "row_hash": "689fd05a4bcbd8be",
    "carried": true,
-   "pass": 19
+   "pass": 24
   },
   {
    "row": "C1267",
@@ -3500,13 +3524,13 @@
    "screen": "*",
    "verdict": "N/A",
    "line": "\u2014",
-   "why": "builds no place description (cafe_hire, cafe_first_shift, people); a scene is not a place's description",
+   "why": "builds no place description; its screens are scenes or menus, and a scene is not a place's description",
    "cause": null,
    "note": false,
-   "screen_hash": "8bde60acbb418c33",
-   "row_hash": "d119dfe665f76359",
+   "screen_hash": "ad7e0e3f51dbb507",
+   "row_hash": "7fddf5e17dbdaaf9",
    "carried": true,
-   "pass": 20
+   "pass": 23
   },
   {
    "row": "C2202",
@@ -3520,6 +3544,70 @@
    "row_hash": "6e90fed7eae62131",
    "carried": true,
    "pass": 21
+  },
+  {
+   "row": "C2203",
+   "screen": "*",
+   "verdict": "N/A",
+   "line": "\u2014",
+   "why": "no event at its places: nothing here has hours of its own as a party or night out; Zoe's party (C2203) is P75's and P05's place",
+   "cause": null,
+   "note": false,
+   "screen_hash": "ad7e0e3f51dbb507",
+   "row_hash": "365a29fd77f6b765",
+   "carried": true,
+   "pass": 23
+  },
+  {
+   "row": "C2204",
+   "screen": "cafe_first_shift.start",
+   "verdict": "PASS",
+   "line": "pool_dir = \"people/chris_meet_t0\"",
+   "why": "his first meeting: the face, _t0, a still, right after the touch line, per media.md rule 8 (LO 2026-11-27: \"A keep his face\")",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "a4cf7c7d5f869ada",
+    "traits": "7b42410c0bd9090b",
+    "facts": "465e6155df58dbcc",
+    "facts2": "98aa2cec72d0253b",
+    "all": "69c6377a16064329"
+   },
+   "row_hash": "3231b5a8a46eaa49",
+   "carried": true,
+   "pass": 26
+  },
+  {
+   "row": "C2204",
+   "screen": "cafe_hire.both",
+   "verdict": "PASS",
+   "line": "<<people/tom_counter_t0>> on cafe_hire.ask; \"His eyes go to your mouth, then down to the till, fast.\"",
+   "why": "Tom's first meeting; rule 8 (media.md:50) keeps his face, _t0, as the meeting's picture, and the canvas has it",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "9b9bc4ace412688f",
+    "traits": "7b42410c0bd9090b",
+    "facts": "f7c3287ef5d44121",
+    "facts2": "80ca4a1b39177ef5",
+    "all": "87abb20d5897398a"
+   },
+   "row_hash": "3231b5a8a46eaa49",
+   "carried": true,
+   "pass": 25
+  },
+  {
+   "row": "C2206",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "cafe_hire, cafe_first_shift",
+   "why": "no side-by-side groups on its 2 canvas(es); nothing can be covered",
+   "cause": null,
+   "note": false,
+   "screen_hash": "1ad9676177e68dce",
+   "row_hash": "d8ebf6d6b2abf6a5",
+   "carried": false,
+   "pass": 26
   },
   {
    "row": "C286",
@@ -4132,8 +4220,27 @@
     "all": "709e6352b7dd2fc7"
    },
    "row_hash": "67e48e60d5053a2e",
-   "carried": false,
+   "carried": true,
    "pass": 22
+  },
+  {
+   "row": "C460",
+   "screen": "cafe_first_shift.start",
+   "verdict": "PASS",
+   "line": "He doesn't say sorry. He watches you notice.",
+   "why": "every claim holds on its one showing; picture spec matches Chris, 24 (npc_chris age)",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "a4cf7c7d5f869ada",
+    "traits": "7b42410c0bd9090b",
+    "facts": "465e6155df58dbcc",
+    "facts2": "98aa2cec72d0253b",
+    "all": "69c6377a16064329"
+   },
+   "row_hash": "67e48e60d5053a2e",
+   "carried": true,
+   "pass": 26
   },
   {
    "row": "C460",
@@ -4168,7 +4275,7 @@
     "all": "87abb20d5897398a"
    },
    "row_hash": "67e48e60d5053a2e",
-   "carried": false,
+   "carried": true,
    "pass": 22
   },
   {
@@ -4204,7 +4311,7 @@
     "all": "293b551d5c9561cb"
    },
    "row_hash": "67e48e60d5053a2e",
-   "carried": false,
+   "carried": true,
    "pass": 22
   },
   {
@@ -4236,8 +4343,27 @@
     "all": "709e6352b7dd2fc7"
    },
    "row_hash": "310706ee076318f2",
-   "carried": false,
+   "carried": true,
    "pass": 22
+  },
+  {
+   "row": "C461",
+   "screen": "cafe_first_shift.start",
+   "verdict": "PASS",
+   "line": "Sure you do.",
+   "why": "texture and dialogue fit the cast entry (Pushy, takes charge)",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "a4cf7c7d5f869ada",
+    "traits": "7b42410c0bd9090b",
+    "facts": "465e6155df58dbcc",
+    "facts2": "98aa2cec72d0253b",
+    "all": "69c6377a16064329"
+   },
+   "row_hash": "310706ee076318f2",
+   "carried": true,
+   "pass": 26
   },
   {
    "row": "C461",
@@ -4272,7 +4398,7 @@
     "all": "87abb20d5897398a"
    },
    "row_hash": "310706ee076318f2",
-   "carried": false,
+   "carried": true,
    "pass": 22
   },
   {
@@ -4308,7 +4434,7 @@
     "all": "293b551d5c9561cb"
    },
    "row_hash": "310706ee076318f2",
-   "carried": false,
+   "carried": true,
    "pass": 22
   },
   {
@@ -6257,8 +6383,27 @@
     "all": "709e6352b7dd2fc7"
    },
    "row_hash": "4e86d143688ba8e5",
-   "carried": false,
+   "carried": true,
    "pass": 22
+  },
+  {
+   "row": "C927",
+   "screen": "cafe_first_shift.start",
+   "verdict": "PASS",
+   "line": "time_progression_minutes = 240",
+   "why": "the shift costs 240; Done at 0 costs the engine's 3",
+   "cause": null,
+   "note": true,
+   "screen_hash": {
+    "text": "a4cf7c7d5f869ada",
+    "traits": "7b42410c0bd9090b",
+    "facts": "465e6155df58dbcc",
+    "facts2": "98aa2cec72d0253b",
+    "all": "69c6377a16064329"
+   },
+   "row_hash": "4e86d143688ba8e5",
+   "carried": true,
+   "pass": 26
   },
   {
    "row": "C927",
@@ -6293,7 +6438,7 @@
     "all": "87abb20d5897398a"
    },
    "row_hash": "4e86d143688ba8e5",
-   "carried": false,
+   "carried": true,
    "pass": 22
   },
   {
@@ -6312,7 +6457,7 @@
     "all": "293b551d5c9561cb"
    },
    "row_hash": "4e86d143688ba8e5",
-   "carried": false,
+   "carried": true,
    "pass": 22
   },
   {
@@ -6487,8 +6632,27 @@
     "all": "709e6352b7dd2fc7"
    },
    "row_hash": "1aadffd96e76381c",
-   "carried": false,
+   "carried": true,
    "pass": 22
+  },
+  {
+   "row": "C931",
+   "screen": "cafe_first_shift.start",
+   "verdict": "PASS",
+   "line": "end_time = \"14:56\"",
+   "why": "end exclusive: last start 14:55, inside Chris's 07-15 row",
+   "cause": null,
+   "note": true,
+   "screen_hash": {
+    "text": "a4cf7c7d5f869ada",
+    "traits": "7b42410c0bd9090b",
+    "facts": "465e6155df58dbcc",
+    "facts2": "98aa2cec72d0253b",
+    "all": "69c6377a16064329"
+   },
+   "row_hash": "1aadffd96e76381c",
+   "carried": true,
+   "pass": 26
   },
   {
    "row": "C931",
@@ -6523,7 +6687,7 @@
     "all": "87abb20d5897398a"
    },
    "row_hash": "1aadffd96e76381c",
-   "carried": false,
+   "carried": true,
    "pass": 22
   },
   {
@@ -6542,7 +6706,7 @@
     "all": "293b551d5c9561cb"
    },
    "row_hash": "1aadffd96e76381c",
-   "carried": false,
+   "carried": true,
    "pass": 22
   },
   {
@@ -6766,8 +6930,27 @@
     "all": "709e6352b7dd2fc7"
    },
    "row_hash": "13a714429d15f3b2",
-   "carried": false,
+   "carried": true,
    "pass": 22
+  },
+  {
+   "row": "L106",
+   "screen": "cafe_first_shift.start",
+   "verdict": "PASS",
+   "line": "Tom, from the till:",
+   "why": "who_is_where: Tom and Chris both at near_cafe at every trigger minute",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "a4cf7c7d5f869ada",
+    "traits": "7b42410c0bd9090b",
+    "facts": "465e6155df58dbcc",
+    "facts2": "98aa2cec72d0253b",
+    "all": "69c6377a16064329"
+   },
+   "row_hash": "13a714429d15f3b2",
+   "carried": true,
+   "pass": 26
   },
   {
    "row": "L106",
@@ -6802,7 +6985,7 @@
     "all": "87abb20d5897398a"
    },
    "row_hash": "13a714429d15f3b2",
-   "carried": false,
+   "carried": true,
    "pass": 22
   },
   {
@@ -6838,7 +7021,7 @@
     "all": "293b551d5c9561cb"
    },
    "row_hash": "13a714429d15f3b2",
-   "carried": false,
+   "carried": true,
    "pass": 22
   },
   {
@@ -6956,25 +7139,27 @@
     "all": "709e6352b7dd2fc7"
    },
    "row_hash": "e64ce2672d85d2d8",
-   "carried": false,
+   "carried": true,
    "pass": 22
   },
   {
    "row": "L167",
    "screen": "cafe_first_shift.start",
    "verdict": "PASS",
-   "line": "Tom and Chris are both in from 10am to 3pm on weekdays.",
-   "why": "one row, full hours named",
+   "line": "cooldown_message = \"Tom and Chris are both in from 10am to 3pm on weekdays.\"",
+   "why": "one row, same hours each weekday, greys with show_when_blocked naming the hours",
    "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "1c9ba64c14c54dbc",
+    "text": "a4cf7c7d5f869ada",
+    "traits": "7b42410c0bd9090b",
     "facts": "465e6155df58dbcc",
-    "all": "4d9f3e0bc1ef9374"
+    "facts2": "98aa2cec72d0253b",
+    "all": "69c6377a16064329"
    },
    "row_hash": "e64ce2672d85d2d8",
    "carried": true,
-   "pass": 7
+   "pass": 26
   },
   {
    "row": "L167",
@@ -7009,7 +7194,7 @@
     "all": "87abb20d5897398a"
    },
    "row_hash": "e64ce2672d85d2d8",
-   "carried": false,
+   "carried": true,
    "pass": 22
   },
   {
@@ -7028,7 +7213,7 @@
     "all": "293b551d5c9561cb"
    },
    "row_hash": "e64ce2672d85d2d8",
-   "carried": false,
+   "carried": true,
    "pass": 22
   },
   {
@@ -7103,8 +7288,8 @@
  ],
  "causes": [],
  "pending": [],
- "asked": 24,
- "answered": 24,
+ "asked": 1,
+ "answered": 1,
  "pass_items": [],
  "unowed": []
 }

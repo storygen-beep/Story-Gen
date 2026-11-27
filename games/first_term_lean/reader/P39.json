@@ -1,6 +1,6 @@
 {
  "piece": "P39",
- "pass": 26,
+ "pass": 29,
  "screens": {
   "walk_park_couple.moment": {
    "text": "9f8c3c7fe47596ff",
@@ -31,11 +31,11 @@
    "all": "4324df60f95b6c2e"
   },
   "walk_vance_ledger.hello": {
-   "text": "6d5d9fb69ffff964",
+   "text": "d6ca8fb9c03b1bcd",
    "traits": "d9172dabbd56b049",
    "facts": "b30926bba2e48d89",
    "facts2": "c1b7d3bced5f1fa6",
-   "all": "e0f587a4bfa89840"
+   "all": "49a58593407c7c2b"
   },
   "walk_vance_ledger.past": {
    "text": "5891b7656bc80228",
@@ -66,11 +66,11 @@
    "all": "19effe31b7c3eac6"
   },
   "walk_marco_squat.moment": {
-   "text": "ed1d60a71171d96c",
+   "text": "a91109516e1c78c2",
    "traits": "e4365d01d4eb14be",
    "facts": "8965fc400ca80c26",
    "facts2": "fc909c0a076152b4",
-   "all": "0ae49aa661a7f66d"
+   "all": "c3b5dd3f6e035897"
   },
   "walk_marco_squat.watch": {
    "text": "b8170a0eb7937980",
@@ -128,7 +128,7 @@
    "facts2": "bc7bb076a1931a10",
    "all": "12bea5ff7cad747f"
   },
-  "*": "2c2f2df61055a187"
+  "*": "d22a9799a5db49be"
  },
  "rows": {
   "B1": "5276068df1ca6fa9",
@@ -205,7 +205,8 @@
   "C1267": "f0db81b801577bf2",
   "C1249": "a843f9b57e43a020",
   "C1250": "fde578d75b0d3620",
-  "C1265": "eb11e05cd75e52a9",
+  "C1265": "689fd05a4bcbd8be",
+  "C2204": "3231b5a8a46eaa49",
   "C1234": "1b2a2d5f05b10331",
   "L121": "45842b25d0708a15",
   "L125": "1fca3bfe1d0c2419",
@@ -250,7 +251,7 @@
   "C2198": "73dfe095a72154a3",
   "C769": "f6b6f78a8f2e5ed7",
   "C794": "bad76e5963432385",
-  "C2201": "d119dfe665f76359",
+  "C2201": "7fddf5e17dbdaaf9",
   "C795": "34139e6a6914e171",
   "C804": "5358489178bff0a4",
   "L106": "13a714429d15f3b2",
@@ -262,6 +263,7 @@
   "C762": "40e85f1ae92f1e71",
   "L170": "c3599cd09637a240",
   "C770": "ff9aa31c11e5d50f",
+  "C2203": "365a29fd77f6b765",
   "C771": "563e3d25c3219dd0",
   "L166": "c12d10588197fbaf",
   "C1303": "5b031a6b82899cfd",
@@ -290,6 +292,7 @@
   "C422": "7e128897077ecee6",
   "C460": "67e48e60d5053a2e",
   "C2202": "6e90fed7eae62131",
+  "C2206": "d8ebf6d6b2abf6a5",
   "C461": "310706ee076318f2",
   "C788": "cae1598ef9cb6ff1",
   "C855": "d3dc77f2f96e20ae",
@@ -307,7 +310,8 @@
   "C2187": "f2b54b1dd7c15f2f",
   "C2188": "612394eef6826900",
   "C2189": "20748838895e4545",
-  "C2195": "77083291a86791c3",
+  "C2205": "44b9341eed4268bc",
+  "C2195": "211dd40ccf98aea0",
   "C2196": "a8ae0700d13a7f9b",
   "C2200": "117a60e53de1e8a4"
  },
@@ -341,7 +345,7 @@
     "all": "12bea5ff7cad747f"
    },
    "row_hash": "c1c0e2ac2588a579",
-   "carried": false,
+   "carried": true,
    "pass": 26
   },
   {
@@ -378,7 +382,7 @@
     "all": "62b636a9d51351a0"
    },
    "row_hash": "c1c0e2ac2588a579",
-   "carried": false,
+   "carried": true,
    "pass": 26
   },
   {
@@ -461,20 +465,20 @@
    "row": "B10",
    "screen": "walk_marco_squat.moment",
    "verdict": "PASS",
-   "line": "Marco's behind a woman at the squat rack... / Your own thighs go tight by the door. He sees that too. / -> Watch from the door \u00b7 Look away",
-   "why": "Marco at hood_gym weekdays 17-21 (who_is_where); trigger gates met_marco, weekdays 0-4, 17:00-21:00, npc_at_location Marco at hood_gym; gym open 6am-10pm; 'by the door' reads true on arrival; both choices are acts open in any clothes and at any money: watching and looking away; the old 'Go and start your workout' (needed leggings, sports top, $5) is gone",
+   "line": "Marco's behind a woman at the squat rack, his hands on her hips, \"fixing\" her form long after it's fixed.",
+   "why": "fires only weekdays 17:00-21:00 with Marco present (trigger); picture names Marco's age 29, as npcs says",
    "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "ed1d60a71171d96c",
+    "text": "a91109516e1c78c2",
     "traits": "e4365d01d4eb14be",
     "facts": "8965fc400ca80c26",
     "facts2": "fc909c0a076152b4",
-    "all": "0ae49aa661a7f66d"
+    "all": "c3b5dd3f6e035897"
    },
    "row_hash": "c1c0e2ac2588a579",
    "carried": true,
-   "pass": 11
+   "pass": 28
   },
   {
    "row": "B10",
@@ -568,7 +572,7 @@
     "all": "2626fc6db9588ed3"
    },
    "row_hash": "c1c0e2ac2588a579",
-   "carried": false,
+   "carried": true,
    "pass": 26
   },
   {
@@ -606,27 +610,27 @@
     "all": "b3a011023d28eb56"
    },
    "row_hash": "c1c0e2ac2588a579",
-   "carried": false,
+   "carried": true,
    "pass": 26
   },
   {
    "row": "B10",
    "screen": "walk_vance_ledger.hello",
    "verdict": "PASS",
-   "line": "\"Morning, little lady.\" (00:00-12:00) / \"Evening, little lady.\" (12:00-00:00); unmet adds \"Vance. I own your house.\"",
-   "why": "trigger windows are Mon-Fri 17-20 and Sat 09-12 / 17-20 (npc_at_location + who_is_where); 09-11:59 gets Morning, 17-19:59 gets Evening; time_of_day is end-exclusive and 12:00-00:00 wraps to >=12:00 (v2.py:4812-4831), so exactly one greeting shows; unmet intro behind met_vance is_false, met line behind is_true; Say hello moves the clock 0 minutes",
+   "line": "\"Evening, little lady. Vance. I own your house.\"",
+   "why": "Vance is placed by npc_at_location hood_next_door; the trigger (weekdays 17-20, Saturday) meets his rows (Sat 09-12, 17-20), so Morning/Evening groups are true; the face sits inside the met_vance false group",
    "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "6d5d9fb69ffff964",
+    "text": "d6ca8fb9c03b1bcd",
     "traits": "d9172dabbd56b049",
     "facts": "b30926bba2e48d89",
     "facts2": "c1b7d3bced5f1fa6",
-    "all": "e0f587a4bfa89840"
+    "all": "49a58593407c7c2b"
    },
    "row_hash": "c1c0e2ac2588a579",
    "carried": true,
-   "pass": 23
+   "pass": 29
   },
   {
    "row": "B10",
@@ -832,7 +836,7 @@
     "all": "12bea5ff7cad747f"
    },
    "row_hash": "80d415cf08e0ebfe",
-   "carried": false,
+   "carried": true,
    "pass": 26
   },
   {
@@ -869,7 +873,7 @@
     "all": "62b636a9d51351a0"
    },
    "row_hash": "80d415cf08e0ebfe",
-   "carried": false,
+   "carried": true,
    "pass": 26
   },
   {
@@ -952,20 +956,20 @@
    "row": "B8",
    "screen": "walk_marco_squat.moment",
    "verdict": "PASS",
-   "line": "Marco's behind a woman at the squat rack... / Your own thighs go tight by the door. He sees that too. / -> Watch from the door \u00b7 Look away",
-   "why": "no number on screen; only the woman's form and her own thighs, no garment of hers named",
+   "line": "Marco's behind a woman at the squat rack, his hands on her hips, \"fixing\" her form long after it's fixed.",
+   "why": "no garment of hers named; none in the picture",
    "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "ed1d60a71171d96c",
+    "text": "a91109516e1c78c2",
     "traits": "e4365d01d4eb14be",
     "facts": "8965fc400ca80c26",
     "facts2": "fc909c0a076152b4",
-    "all": "0ae49aa661a7f66d"
+    "all": "c3b5dd3f6e035897"
    },
    "row_hash": "80d415cf08e0ebfe",
    "carried": true,
-   "pass": 11
+   "pass": 28
   },
   {
    "row": "B8",
@@ -1059,7 +1063,7 @@
     "all": "2626fc6db9588ed3"
    },
    "row_hash": "80d415cf08e0ebfe",
-   "carried": false,
+   "carried": true,
    "pass": 26
   },
   {
@@ -1097,27 +1101,27 @@
     "all": "b3a011023d28eb56"
    },
    "row_hash": "80d415cf08e0ebfe",
-   "carried": false,
+   "carried": true,
    "pass": 26
   },
   {
    "row": "B8",
    "screen": "walk_vance_ledger.hello",
    "verdict": "PASS",
-   "line": "Your stepdad pays me Sundays.",
-   "why": "Sunday rent agrees with PLAN:26-28; no garment of hers named",
+   "line": "A man of 54 in a porch chair with a beer",
+   "why": "no garment on her named; Vance's age 54 agrees with PLAN.md:62",
    "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "6d5d9fb69ffff964",
+    "text": "d6ca8fb9c03b1bcd",
     "traits": "d9172dabbd56b049",
     "facts": "b30926bba2e48d89",
     "facts2": "c1b7d3bced5f1fa6",
-    "all": "e0f587a4bfa89840"
+    "all": "49a58593407c7c2b"
    },
    "row_hash": "80d415cf08e0ebfe",
    "carried": true,
-   "pass": 23
+   "pass": 29
   },
   {
    "row": "B8",
@@ -1333,7 +1337,7 @@
     "all": "b3a011023d28eb56"
    },
    "row_hash": "f40f51a0fd6cfd10",
-   "carried": false,
+   "carried": true,
    "pass": 26
   },
   {
@@ -1525,7 +1529,7 @@
     "all": "b3a011023d28eb56"
    },
    "row_hash": "bfff76edbee583de",
-   "carried": false,
+   "carried": true,
    "pass": 26
   },
   {
@@ -1654,14 +1658,14 @@
    "row": "C1265",
    "screen": "*",
    "verdict": "PASS",
-   "line": "walk_park_couple.moment and walk_curtain.moment carry a picture; the Vance, Danny, Marco, Nina walk-ins none",
-   "why": "the two spots are moments, not chores, notices, doors or menus; no menu or one-liner has a spot",
+   "line": "park_couple t5, marco_squat t4, curtain t4; ledger, deal, dress none",
+   "why": "every spot is sex she sees, a touch, or her body; none on a chore, door or menu",
    "cause": null,
    "note": false,
-   "screen_hash": "f11a440966f7020c",
-   "row_hash": "eb11e05cd75e52a9",
+   "screen_hash": "7aec130c793d600c",
+   "row_hash": "689fd05a4bcbd8be",
    "carried": true,
-   "pass": 18
+   "pass": 28
   },
   {
    "row": "C1267",
@@ -2868,14 +2872,14 @@
    "row": "C2195",
    "screen": "*",
    "verdict": "PASS",
-   "line": "trigger_mode = \"random\", chance = 0.35, max_triggers_per_day = 1",
-   "why": "every kind-(a) walk-in is random 0.35 once a day, gated by the person's rows and window as before, no random_cooldown override (engine default 3), never on came_to_her_today; the substitution walk-in is a different kind",
-   "cause": "",
+   "line": "walk_vance_ledger: trigger_mode = \"random\", chance = 0.35, max_triggers_per_day = 1",
+   "why": "park, next door, shop, gym, clothes walk-ins all random 0.35, once a day, gated by presence/hours, off the shared flag; walk_curtain a substitution, not a button",
+   "cause": null,
    "note": false,
-   "screen_hash": "bb75fdf914fa7a4f",
-   "row_hash": "77083291a86791c3",
+   "screen_hash": "2c2f2df61055a187",
+   "row_hash": "211dd40ccf98aea0",
    "carried": true,
-   "pass": 9
+   "pass": 27
   },
   {
    "row": "C2196",
@@ -2889,6 +2893,25 @@
    "row_hash": "a8ae0700d13a7f9b",
    "carried": true,
    "pass": 12
+  },
+  {
+   "row": "C2196",
+   "screen": "walk_marco_squat.moment",
+   "verdict": "PASS",
+   "line": "Marco's behind a woman at the squat rack, his hands on her hips, \"fixing\" her form long after it's fixed.",
+   "why": "she comes across it at the door, in whatever she wears: \"Your own thighs go tight by the door.\"",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "a91109516e1c78c2",
+    "traits": "e4365d01d4eb14be",
+    "facts": "8965fc400ca80c26",
+    "facts2": "fc909c0a076152b4",
+    "all": "c3b5dd3f6e035897"
+   },
+   "row_hash": "a8ae0700d13a7f9b",
+   "carried": true,
+   "pass": 28
   },
   {
    "row": "C2196",
@@ -2952,14 +2975,14 @@
    "row": "C2201",
    "screen": "*",
    "verdict": "N/A",
-   "line": "Through the bushes behind the pond",
-   "why": "scene and menu screens, not a place's description; the descriptions of the places they sit at read no clothes or meters (all 31 checked)",
+   "line": "\u2014",
+   "why": "builds no place description; its screens are scenes or menus, and a scene is not a place's description",
    "cause": null,
    "note": false,
-   "screen_hash": "6a83e802effba5c4",
-   "row_hash": "d119dfe665f76359",
+   "screen_hash": "2c2f2df61055a187",
+   "row_hash": "7fddf5e17dbdaaf9",
    "carried": true,
-   "pass": 24
+   "pass": 27
   },
   {
    "row": "C2202",
@@ -2990,7 +3013,7 @@
     "all": "12bea5ff7cad747f"
    },
    "row_hash": "6e90fed7eae62131",
-   "carried": false,
+   "carried": true,
    "pass": 26
   },
   {
@@ -3009,7 +3032,7 @@
     "all": "62b636a9d51351a0"
    },
    "row_hash": "6e90fed7eae62131",
-   "carried": false,
+   "carried": true,
    "pass": 26
   },
   {
@@ -3028,7 +3051,7 @@
     "all": "2626fc6db9588ed3"
    },
    "row_hash": "6e90fed7eae62131",
-   "carried": false,
+   "carried": true,
    "pass": 26
   },
   {
@@ -3047,8 +3070,66 @@
     "all": "b3a011023d28eb56"
    },
    "row_hash": "6e90fed7eae62131",
-   "carried": false,
+   "carried": true,
    "pass": 26
+  },
+  {
+   "row": "C2203",
+   "screen": "*",
+   "verdict": "N/A",
+   "line": "\u2014",
+   "why": "no event at its places: nothing here has hours of its own as a party or night out; Zoe's party (C2203) is P75's and P05's place",
+   "cause": null,
+   "note": false,
+   "screen_hash": "2c2f2df61055a187",
+   "row_hash": "365a29fd77f6b765",
+   "carried": true,
+   "pass": 27
+  },
+  {
+   "row": "C2204",
+   "screen": "walk_vance_ledger.hello",
+   "verdict": "PASS",
+   "line": "He looks you over, slow, from your feet up... <<people/vance_hello_t0>>",
+   "why": "a first meeting: rule 8 (media.md:50) gives it his face, _t0, a still, pool 1, after his look, inside the unmet group",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "d6ca8fb9c03b1bcd",
+    "traits": "d9172dabbd56b049",
+    "facts": "b30926bba2e48d89",
+    "facts2": "c1b7d3bced5f1fa6",
+    "all": "49a58593407c7c2b"
+   },
+   "row_hash": "3231b5a8a46eaa49",
+   "carried": true,
+   "pass": 29
+  },
+  {
+   "row": "C2205",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "is_repeatable = true",
+   "why": "the six walk-ins repeat (met_ flags only gate the first); none is a chain step or ends for good",
+   "cause": null,
+   "note": false,
+   "screen_hash": "d22a9799a5db49be",
+   "row_hash": "44b9341eed4268bc",
+   "carried": true,
+   "pass": 29
+  },
+  {
+   "row": "C2206",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "walk_park_couple, walk_vance_ledger, walk_danny_deal, walk_marco_squat, walk_nina_dress, walk_curtain",
+   "why": "walk_curtain.moment equipped/unequipped underwear, and walk_vance_ledger's met_vance and time ladders: complementary, both sides show",
+   "cause": null,
+   "note": false,
+   "screen_hash": "d22a9799a5db49be",
+   "row_hash": "d8ebf6d6b2abf6a5",
+   "carried": false,
+   "pass": 29
   },
   {
    "row": "C286",
@@ -3415,7 +3496,7 @@
     "all": "12bea5ff7cad747f"
    },
    "row_hash": "67e48e60d5053a2e",
-   "carried": false,
+   "carried": true,
    "pass": 26
   },
   {
@@ -3452,7 +3533,7 @@
     "all": "62b636a9d51351a0"
    },
    "row_hash": "67e48e60d5053a2e",
-   "carried": false,
+   "carried": true,
    "pass": 26
   },
   {
@@ -3535,20 +3616,20 @@
    "row": "C460",
    "screen": "walk_marco_squat.moment",
    "verdict": "PASS",
-   "line": "Marco's behind a woman at the squat rack... / Your own thighs go tight by the door. He sees that too. / -> Watch from the door \u00b7 Look away",
-   "why": "Marco there by row and trigger; 'by the door' true on arrival; no choice promises an act the game can refuse her (no workout claimed)",
+   "line": "Marco's behind a woman at the squat rack, his hands on her hips, \"fixing\" her form long after it's fixed.",
+   "why": "true on every visit the trigger allows",
    "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "ed1d60a71171d96c",
+    "text": "a91109516e1c78c2",
     "traits": "e4365d01d4eb14be",
     "facts": "8965fc400ca80c26",
     "facts2": "fc909c0a076152b4",
-    "all": "0ae49aa661a7f66d"
+    "all": "c3b5dd3f6e035897"
    },
    "row_hash": "67e48e60d5053a2e",
    "carried": true,
-   "pass": 11
+   "pass": 28
   },
   {
    "row": "C460",
@@ -3642,7 +3723,7 @@
     "all": "2626fc6db9588ed3"
    },
    "row_hash": "67e48e60d5053a2e",
-   "carried": false,
+   "carried": true,
    "pass": 26
   },
   {
@@ -3680,27 +3761,27 @@
     "all": "b3a011023d28eb56"
    },
    "row_hash": "67e48e60d5053a2e",
-   "carried": false,
+   "carried": true,
    "pass": 26
   },
   {
    "row": "C460",
    "screen": "walk_vance_ledger.hello",
    "verdict": "PASS",
-   "line": "\"Morning, little lady.\" (00:00-12:00) / \"Evening, little lady.\" (12:00-00:00); unmet adds \"Vance. I own your house.\"",
-   "why": "true on every minute the trigger opens: Saturday mornings say Morning, every evening window says Evening; met and unmet split by met_vance",
+   "line": "A man of 54 in a porch chair with a beer, looking straight at the camera.",
+   "why": "the face fits the screen (he is sitting on his porch); the beer is texture that cannot clash",
    "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "6d5d9fb69ffff964",
+    "text": "d6ca8fb9c03b1bcd",
     "traits": "d9172dabbd56b049",
     "facts": "b30926bba2e48d89",
     "facts2": "c1b7d3bced5f1fa6",
-    "all": "e0f587a4bfa89840"
+    "all": "49a58593407c7c2b"
    },
    "row_hash": "67e48e60d5053a2e",
    "carried": true,
-   "pass": 23
+   "pass": 29
   },
   {
    "row": "C460",
@@ -3769,7 +3850,7 @@
     "all": "12bea5ff7cad747f"
    },
    "row_hash": "310706ee076318f2",
-   "carried": false,
+   "carried": true,
    "pass": 26
   },
   {
@@ -3806,7 +3887,7 @@
     "all": "62b636a9d51351a0"
    },
    "row_hash": "310706ee076318f2",
-   "carried": false,
+   "carried": true,
    "pass": 26
   },
   {
@@ -3889,20 +3970,20 @@
    "row": "C461",
    "screen": "walk_marco_squat.moment",
    "verdict": "PASS",
-   "line": "Marco's behind a woman at the squat rack... / Your own thighs go tight by the door. He sees that too. / -> Watch from the door \u00b7 Look away",
-   "why": "Marco's line fits his cast entry (takes charge, sporty); her thighs and his noticing are texture that can't clash; the labels claim nothing the sheet can contradict",
+   "line": "Marco's behind a woman at the squat rack, his hands on her hips, \"fixing\" her form long after it's fixed.",
+   "why": "texture and her reaction only",
    "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "ed1d60a71171d96c",
+    "text": "a91109516e1c78c2",
     "traits": "e4365d01d4eb14be",
     "facts": "8965fc400ca80c26",
     "facts2": "fc909c0a076152b4",
-    "all": "0ae49aa661a7f66d"
+    "all": "c3b5dd3f6e035897"
    },
    "row_hash": "310706ee076318f2",
    "carried": true,
-   "pass": 11
+   "pass": 28
   },
   {
    "row": "C461",
@@ -3996,7 +4077,7 @@
     "all": "2626fc6db9588ed3"
    },
    "row_hash": "310706ee076318f2",
-   "carried": false,
+   "carried": true,
    "pass": 26
   },
   {
@@ -4034,27 +4115,27 @@
     "all": "b3a011023d28eb56"
    },
    "row_hash": "310706ee076318f2",
-   "carried": false,
+   "carried": true,
    "pass": 26
   },
   {
    "row": "C461",
    "screen": "walk_vance_ledger.hello",
    "verdict": "PASS",
-   "line": "\"Morning, little lady.\" (00:00-12:00) / \"Evening, little lady.\" (12:00-00:00); unmet adds \"Vance. I own your house.\"",
-   "why": "the greeting is now a claim backed by a time_of_day group, not unbacked clock texture; the rest fits his cast entry (PLAN:141, 'little lady', 'I'm the one who knocks')",
+   "line": "\"Your stepdad pays me Sundays. When he doesn't, I'm the one who knocks.\"",
+   "why": "fits his cast entry (PLAN.md:141, Takes charge)",
    "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "6d5d9fb69ffff964",
+    "text": "d6ca8fb9c03b1bcd",
     "traits": "d9172dabbd56b049",
     "facts": "b30926bba2e48d89",
     "facts2": "c1b7d3bced5f1fa6",
-    "all": "e0f587a4bfa89840"
+    "all": "49a58593407c7c2b"
    },
    "row_hash": "310706ee076318f2",
    "carried": true,
-   "pass": 23
+   "pass": 29
   },
   {
    "row": "C461",
@@ -4788,7 +4869,7 @@
     "all": "12bea5ff7cad747f"
    },
    "row_hash": "4e86d143688ba8e5",
-   "carried": false,
+   "carried": true,
    "pass": 26
   },
   {
@@ -4807,7 +4888,7 @@
     "all": "62b636a9d51351a0"
    },
    "row_hash": "4e86d143688ba8e5",
-   "carried": false,
+   "carried": true,
    "pass": 26
   },
   {
@@ -4940,7 +5021,7 @@
     "all": "2626fc6db9588ed3"
    },
    "row_hash": "4e86d143688ba8e5",
-   "carried": false,
+   "carried": true,
    "pass": 26
   },
   {
@@ -4959,27 +5040,27 @@
     "all": "b3a011023d28eb56"
    },
    "row_hash": "4e86d143688ba8e5",
-   "carried": false,
+   "carried": true,
    "pass": 26
   },
   {
    "row": "C927",
    "screen": "walk_vance_ledger.hello",
    "verdict": "PASS",
-   "line": "text = \"Done\" ... time_progression_minutes = 5",
-   "why": "the exit states 5 minutes",
+   "line": "\"Done\" time_progression_minutes = 5",
+   "why": "the exit states its time",
    "cause": null,
    "note": true,
    "screen_hash": {
-    "text": "6d5d9fb69ffff964",
+    "text": "d6ca8fb9c03b1bcd",
     "traits": "d9172dabbd56b049",
     "facts": "b30926bba2e48d89",
     "facts2": "c1b7d3bced5f1fa6",
-    "all": "e0f587a4bfa89840"
+    "all": "49a58593407c7c2b"
    },
    "row_hash": "4e86d143688ba8e5",
    "carried": true,
-   "pass": 23
+   "pass": 29
   },
   {
    "row": "C927",
@@ -5068,7 +5149,7 @@
     "all": "12bea5ff7cad747f"
    },
    "row_hash": "1aadffd96e76381c",
-   "carried": false,
+   "carried": true,
    "pass": 26
   },
   {
@@ -5087,7 +5168,7 @@
     "all": "62b636a9d51351a0"
    },
    "row_hash": "1aadffd96e76381c",
-   "carried": false,
+   "carried": true,
    "pass": 26
   },
   {
@@ -5220,7 +5301,7 @@
     "all": "2626fc6db9588ed3"
    },
    "row_hash": "1aadffd96e76381c",
-   "carried": false,
+   "carried": true,
    "pass": 26
   },
   {
@@ -5239,7 +5320,7 @@
     "all": "b3a011023d28eb56"
    },
    "row_hash": "1aadffd96e76381c",
-   "carried": false,
+   "carried": true,
    "pass": 26
   },
   {
@@ -5247,19 +5328,19 @@
    "screen": "walk_vance_ledger.hello",
    "verdict": "PASS",
    "line": "time_of_day 00:00-12:00 / 12:00-00:00",
-   "why": "end exclusive, 12:00-00:00 wraps (endTotal < startTotal branch, v2.py:4828), no overlap and no gap at 12:00; the trigger's 17:00-20:00 matches his weekday row",
+   "why": "re-read each render, end exclusive (v2.py:5323-5325)",
    "cause": null,
    "note": true,
    "screen_hash": {
-    "text": "6d5d9fb69ffff964",
+    "text": "d6ca8fb9c03b1bcd",
     "traits": "d9172dabbd56b049",
     "facts": "b30926bba2e48d89",
     "facts2": "c1b7d3bced5f1fa6",
-    "all": "e0f587a4bfa89840"
+    "all": "49a58593407c7c2b"
    },
    "row_hash": "1aadffd96e76381c",
    "carried": true,
-   "pass": 23
+   "pass": 29
   },
   {
    "row": "C931",
@@ -5371,7 +5452,7 @@
     "all": "12bea5ff7cad747f"
    },
    "row_hash": "13a714429d15f3b2",
-   "carried": false,
+   "carried": true,
    "pass": 26
   },
   {
@@ -5408,7 +5489,7 @@
     "all": "62b636a9d51351a0"
    },
    "row_hash": "13a714429d15f3b2",
-   "carried": false,
+   "carried": true,
    "pass": 26
   },
   {
@@ -5491,20 +5572,20 @@
    "row": "L106",
    "screen": "walk_marco_squat.moment",
    "verdict": "PASS",
-   "line": "Marco's behind a woman at the squat rack... / Your own thighs go tight by the door. He sees that too. / -> Watch from the door \u00b7 Look away",
-   "why": "names Marco, there by his 17-21 row and the trigger condition; the woman is an unnamed stranger",
+   "line": "Marco's behind a woman at the squat rack, his hands on her hips, \"fixing\" her form long after it's fixed.",
+   "why": "Marco is there: the trigger checks npc_at_location hood_gym, and his rows put him there 17-21 weekdays",
    "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "ed1d60a71171d96c",
+    "text": "a91109516e1c78c2",
     "traits": "e4365d01d4eb14be",
     "facts": "8965fc400ca80c26",
     "facts2": "fc909c0a076152b4",
-    "all": "0ae49aa661a7f66d"
+    "all": "c3b5dd3f6e035897"
    },
    "row_hash": "13a714429d15f3b2",
    "carried": true,
-   "pass": 11
+   "pass": 28
   },
   {
    "row": "L106",
@@ -5598,7 +5679,7 @@
     "all": "2626fc6db9588ed3"
    },
    "row_hash": "13a714429d15f3b2",
-   "carried": false,
+   "carried": true,
    "pass": 26
   },
   {
@@ -5636,27 +5717,27 @@
     "all": "b3a011023d28eb56"
    },
    "row_hash": "13a714429d15f3b2",
-   "carried": false,
+   "carried": true,
    "pass": 26
   },
   {
    "row": "L106",
    "screen": "walk_vance_ledger.hello",
    "verdict": "PASS",
-   "line": "Morning, little lady.",
-   "why": "npc_at_location npc_vance hood_next_door is_present on the trigger; only Vance (and the stepdad, absent, by name) appear",
+   "line": "Vance on his porch",
+   "why": "only Vance is named, and his rows put him at hood_next_door at every minute the trigger allows",
    "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "6d5d9fb69ffff964",
+    "text": "d6ca8fb9c03b1bcd",
     "traits": "d9172dabbd56b049",
     "facts": "b30926bba2e48d89",
     "facts2": "c1b7d3bced5f1fa6",
-    "all": "e0f587a4bfa89840"
+    "all": "49a58593407c7c2b"
    },
    "row_hash": "13a714429d15f3b2",
    "carried": true,
-   "pass": 23
+   "pass": 29
   },
   {
    "row": "L106",
@@ -5803,7 +5884,7 @@
     "all": "12bea5ff7cad747f"
    },
    "row_hash": "e64ce2672d85d2d8",
-   "carried": false,
+   "carried": true,
    "pass": 26
   },
   {
@@ -5822,7 +5903,7 @@
     "all": "62b636a9d51351a0"
    },
    "row_hash": "e64ce2672d85d2d8",
-   "carried": false,
+   "carried": true,
    "pass": 26
   },
   {
@@ -5955,7 +6036,7 @@
     "all": "2626fc6db9588ed3"
    },
    "row_hash": "e64ce2672d85d2d8",
-   "carried": false,
+   "carried": true,
    "pass": 26
   },
   {
@@ -5974,27 +6055,27 @@
     "all": "b3a011023d28eb56"
    },
    "row_hash": "e64ce2672d85d2d8",
-   "carried": false,
+   "carried": true,
    "pass": 26
   },
   {
    "row": "L167",
    "screen": "walk_vance_ledger.hello",
-   "verdict": "N/A",
-   "line": "(no activity row)",
-   "why": "a random walk-in, not a greyed row; its day kinds are one canvas with one OR group",
+   "verdict": "PASS",
+   "line": "one trigger with an OR group (weekdays 17-20, or Saturday)",
+   "why": "one row, a group, not a row per day kind",
    "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "6d5d9fb69ffff964",
+    "text": "d6ca8fb9c03b1bcd",
     "traits": "d9172dabbd56b049",
     "facts": "b30926bba2e48d89",
     "facts2": "c1b7d3bced5f1fa6",
-    "all": "e0f587a4bfa89840"
+    "all": "49a58593407c7c2b"
    },
    "row_hash": "e64ce2672d85d2d8",
    "carried": true,
-   "pass": 23
+   "pass": 29
   },
   {
    "row": "L167",
@@ -6165,8 +6246,8 @@
  ],
  "causes": [],
  "pending": [],
- "asked": 38,
- "answered": 38,
+ "asked": 1,
+ "answered": 1,
  "pass_items": [],
  "unowed": []
 }

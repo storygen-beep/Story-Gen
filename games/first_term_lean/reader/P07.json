@@ -1,6 +1,6 @@
 {
  "piece": "P07",
- "pass": 22,
+ "pass": 26,
  "screens": {
   "opening.wake": {
    "text": "cc3c063d9cef0f23",
@@ -304,7 +304,8 @@
   "C1267": "6bafcadf3d586d5a",
   "C1249": "604706399d2f1194",
   "C1250": "8384cc6bcbd67c07",
-  "C1265": "fe36d5bbc01da9a6",
+  "C1265": "1a90f309614f963a",
+  "C2204": "85e333f5b3cbcb0f",
   "C1234": "7dc492e03732757e",
   "L121": "cddfa55c18e5c7b7",
   "L125": "259dda0a0553e751",
@@ -318,11 +319,12 @@
   "L97": "2bfb9527e76ad93b",
   "media#1": "3641bf707d9adfce",
   "media#2": "69a8103be1e1032a",
-  "media#3": "8c75b0d488b188e2",
+  "media#3": "6632678381731161",
   "media#4": "03599fc0722690b6",
   "media#5": "2cf5e3607ccecd4a",
   "media#6": "3016751837a9b0a0",
   "media#7": "eff6dc1369755c34",
+  "media#8": "599313c7948d2a50",
   "C520": "59faa2198bb751e1",
   "C519": "ff5e8d6189f0899a",
   "C1626": "e2077b8b174e635b",
@@ -399,7 +401,7 @@
   "people#16": "45053c701775c75f",
   "C769": "cf7d7a82afabcbbb",
   "C794": "3281d513b7f90d6e",
-  "C2201": "4745761f016db481",
+  "C2201": "1137a7018841fcb3",
   "C795": "a28152099697ac6a",
   "C804": "56bf64be29d6ea48",
   "L106": "759e6667d7fc3183",
@@ -415,9 +417,10 @@
   "C808": "73aff7401d6970a5",
   "C811": "ded1858e52e3be3a",
   "C770": "dcc6bbe6fde09083",
+  "C2203": "232300ee41804a6c",
   "C771": "d941995a226da2b4",
   "C707": "e2898bd02a9e4730",
-  "places#1": "378b2df4c8bf116d",
+  "places#1": "6daf4c28bcefc631",
   "places#2": "e0b57720921c4523",
   "places#3": "56d056c80da49bb6",
   "places#4": "ae3ba300e1045c9f",
@@ -427,6 +430,7 @@
   "places#8": "c3ea8d01465e7298",
   "places#9": "f4cd9ab5f62bc6fc",
   "places#10": "d6f0b4b357efc043",
+  "places#11": "969f86a77815f52d",
   "C442": "a2b07f40e1a9e908",
   "C449": "ac5932d70cd775a1",
   "C451": "6b0fd679047fc9b8",
@@ -434,6 +438,7 @@
   "C422": "8933f85010afbef7",
   "C460": "beb5a109bde77305",
   "C2202": "d5592f287f5f641a",
+  "C2206": "99ccaf869af30473",
   "C461": "153b0804e686abae",
   "L163": "00a617ab9b4e9cd4",
   "voice#1": "b8e8afcb32208b40",
@@ -854,7 +859,7 @@
     "all": "4516d0eddae64654"
    },
    "row_hash": "c1c0e2ac2588a579",
-   "carried": false,
+   "carried": true,
    "pass": 22
   },
   {
@@ -1482,7 +1487,7 @@
     "all": "4516d0eddae64654"
    },
    "row_hash": "80d415cf08e0ebfe",
-   "carried": false,
+   "carried": true,
    "pass": 22
   },
   {
@@ -1986,7 +1991,7 @@
     "all": "4516d0eddae64654"
    },
    "row_hash": "212d17eda04f2799",
-   "carried": false,
+   "carried": true,
    "pass": 22
   },
   {
@@ -2216,7 +2221,7 @@
     "all": "4516d0eddae64654"
    },
    "row_hash": "6fbed55f60b39ebd",
-   "carried": false,
+   "carried": true,
    "pass": 22
   },
   {
@@ -2638,7 +2643,7 @@
     "all": "4516d0eddae64654"
    },
    "row_hash": "4fec6fc9a8793a0f",
-   "carried": false,
+   "carried": true,
    "pass": 22
   },
   {
@@ -3049,7 +3054,7 @@
     "all": "4516d0eddae64654"
    },
    "row_hash": "6b4e6ea1fe51ab17",
-   "carried": false,
+   "carried": true,
    "pass": 22
   },
   {
@@ -3330,21 +3335,21 @@
    "row": "C1265",
    "screen": "*",
    "verdict": "PASS",
-   "line": "talk_mom.hub <<everyday/mom_kitchen_t0>>; borrow/return screens no media",
-   "why": "Mom's picture is on her menu (the C596 exception C1265 points to); the borrow and return chores have none; opening pictures are body moments",
+   "line": "talk_mom.hub <<everyday/mom_kitchen_t0>>; borrow/return screens none",
+   "why": "Mom's menu picture is the C596 exception; chores have none; opening pictures are body moments",
    "cause": null,
    "note": false,
-   "screen_hash": "1cd3b560243bdeb3",
-   "row_hash": "fe36d5bbc01da9a6",
+   "screen_hash": "06cb345f563fcf4d",
+   "row_hash": "1a90f309614f963a",
    "carried": true,
-   "pass": 19
+   "pass": 25
   },
   {
    "row": "C1265",
    "screen": "borrow_hoodie.take",
    "verdict": "PASS",
    "line": "\"You take the grey one. It smells like him.\"",
-   "why": "a chore alone, one line, and it carries no spot",
+   "why": "a chore alone, no spot",
    "cause": null,
    "note": false,
    "screen_hash": {
@@ -3354,16 +3359,16 @@
     "facts2": "77447b04892972f0",
     "all": "55c8ae3da3cebd49"
    },
-   "row_hash": "fe36d5bbc01da9a6",
+   "row_hash": "1a90f309614f963a",
    "carried": true,
-   "pass": 19
+   "pass": 25
   },
   {
    "row": "C1265",
    "screen": "mom_living_room.talk",
    "verdict": "PASS",
    "line": "\"Sit with me a minute, baby.\"",
-   "why": "the talk screen has no picture; her one picture sits on the hub menu, as C1265 and C596 say",
+   "why": "talk under the menu, no picture (C596)",
    "cause": null,
    "note": false,
    "screen_hash": {
@@ -3373,9 +3378,9 @@
     "facts2": "04bf141c5cb5340b",
     "all": "13a427d6071bc370"
    },
-   "row_hash": "fe36d5bbc01da9a6",
+   "row_hash": "1a90f309614f963a",
    "carried": true,
-   "pass": 19
+   "pass": 25
   },
   {
    "row": "C1267",
@@ -3993,7 +3998,7 @@
     "all": "4516d0eddae64654"
    },
    "row_hash": "45d1f77e233e111c",
-   "carried": false,
+   "carried": true,
    "pass": 22
   },
   {
@@ -4233,16 +4238,29 @@
   },
   {
    "row": "C2201",
-   "screen": "*",
+   "screen": "home_her_room",
    "verdict": "PASS",
-   "line": "The neighbourhood: your street, \u2026 Neighbours, dog walkers, kids on bikes.",
-   "why": "hood_street and home_her_room descriptions are plain; P07's two street clothing lines are gone (P72)",
+   "line": "Your bedroom. The same single bed since you were twelve...",
+   "why": "plain line, no variants (LO: keep bedroom lines)",
    "cause": null,
    "note": false,
-   "screen_hash": "72257d8323b2505b",
-   "row_hash": "4745761f016db481",
+   "screen_hash": null,
+   "row_hash": "1137a7018841fcb3",
    "carried": true,
-   "pass": 20
+   "pass": 23
+  },
+  {
+   "row": "C2201",
+   "screen": "hood_street",
+   "verdict": "PASS",
+   "line": "The street's dark. Curtains drawn, the bus stop empty.",
+   "why": "daytime crowd only 07:00-21:00, night line 21:00-07:00 (wraps, v2.py:4826-4829), first-match chain v2.py:11893-11912; no clothes, met_ or presence read; identity line kept",
+   "cause": null,
+   "note": false,
+   "screen_hash": null,
+   "row_hash": "1137a7018841fcb3",
+   "carried": true,
+   "pass": 24
   },
   {
    "row": "C2202",
@@ -4256,6 +4274,45 @@
    "row_hash": "d5592f287f5f641a",
    "carried": true,
    "pass": 21
+  },
+  {
+   "row": "C2203",
+   "screen": "*",
+   "verdict": "N/A",
+   "line": "\u2014",
+   "why": "no event at its places: nothing here has hours of its own as a party or night out; Zoe's party (C2203) is P75's and P05's place",
+   "cause": null,
+   "note": false,
+   "screen_hash": "06cb345f563fcf4d",
+   "row_hash": "232300ee41804a6c",
+   "carried": true,
+   "pass": 23
+  },
+  {
+   "row": "C2204",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "opening.hall \"His eyes drop to where the towel ends on your wet thighs.\" <<look/hall_towel_t3>>",
+   "why": "every sexual opening screen has a spot after its payoff; Mom's skirt glance is not sexual",
+   "cause": null,
+   "note": false,
+   "screen_hash": "06cb345f563fcf4d",
+   "row_hash": "85e333f5b3cbcb0f",
+   "carried": true,
+   "pass": 25
+  },
+  {
+   "row": "C2206",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "opening, talk_mom, mom_living_room, borrow_mom, borrow_hoodie, return_mom, return_hoodie",
+   "why": "talk_mom/mom_living_room ladders: presence, start flag, time and mom's-garment groups, each shows in its own state",
+   "cause": null,
+   "note": false,
+   "screen_hash": "06cb345f563fcf4d",
+   "row_hash": "99ccaf869af30473",
+   "carried": false,
+   "pass": 26
   },
   {
    "row": "C239",
@@ -5026,7 +5083,7 @@
     "all": "4516d0eddae64654"
    },
    "row_hash": "beb5a109bde77305",
-   "carried": false,
+   "carried": true,
    "pass": 22
   },
   {
@@ -5491,7 +5548,7 @@
     "all": "4516d0eddae64654"
    },
    "row_hash": "153b0804e686abae",
-   "carried": false,
+   "carried": true,
    "pass": 22
   },
   {
@@ -7815,7 +7872,7 @@
     "all": "4516d0eddae64654"
    },
    "row_hash": "19da817e808ac3d6",
-   "carried": false,
+   "carried": true,
    "pass": 22
   },
   {
@@ -8486,7 +8543,7 @@
     "all": "4516d0eddae64654"
    },
    "row_hash": "1e009d83817fb566",
-   "carried": false,
+   "carried": true,
    "pass": 22
   },
   {
@@ -9260,7 +9317,7 @@
     "all": "4516d0eddae64654"
    },
    "row_hash": "1b8984f52b99537e",
-   "carried": false,
+   "carried": true,
    "pass": 22
   },
   {
@@ -9764,7 +9821,7 @@
     "all": "4516d0eddae64654"
    },
    "row_hash": "759e6667d7fc3183",
-   "carried": false,
+   "carried": true,
    "pass": 22
   },
   {
@@ -10307,7 +10364,7 @@
     "all": "4516d0eddae64654"
    },
    "row_hash": "adf7bb3f8b632ac3",
-   "carried": false,
+   "carried": true,
    "pass": 22
   },
   {
@@ -10743,7 +10800,7 @@
     "all": "4516d0eddae64654"
    },
    "row_hash": "468c4283220dd743",
-   "carried": false,
+   "carried": true,
    "pass": 22
   },
   {
@@ -10971,14 +11028,14 @@
    "row": "media#3",
    "screen": "*",
    "verdict": "PASS",
-   "line": "",
-   "why": "a solo chore gets no picture",
+   "line": "borrow_mom/return_* : no picture",
+   "why": "chores get none",
    "cause": null,
    "note": false,
-   "screen_hash": "219040e682a0b26e",
-   "row_hash": "8c75b0d488b188e2",
+   "screen_hash": "06cb345f563fcf4d",
+   "row_hash": "6632678381731161",
    "carried": true,
-   "pass": 4
+   "pass": 25
   },
   {
    "row": "media#4",
@@ -11031,6 +11088,19 @@
    "row_hash": "eff6dc1369755c34",
    "carried": true,
    "pass": 4
+  },
+  {
+   "row": "media#8",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "opening.room <<body/opening_dressing_t4>>",
+   "why": "sexual screens carry tiered spots",
+   "cause": null,
+   "note": false,
+   "screen_hash": "06cb345f563fcf4d",
+   "row_hash": "599313c7948d2a50",
+   "carried": true,
+   "pass": 25
   },
   {
    "row": "opening#1",
@@ -11371,16 +11441,29 @@
   },
   {
    "row": "places#1",
-   "screen": "*",
+   "screen": "home_her_room",
    "verdict": "PASS",
-   "line": "Your bedroom. The same single bed since you were twelve, \u2026",
-   "why": "street and bedroom identity lines the same every visit, no clothing variant",
+   "line": "Your bedroom. The same single bed since you were twelve...",
+   "why": "plain line, no variants (LO: keep bedroom lines)",
    "cause": null,
    "note": false,
-   "screen_hash": "72257d8323b2505b",
-   "row_hash": "378b2df4c8bf116d",
+   "screen_hash": null,
+   "row_hash": "6daf4c28bcefc631",
    "carried": true,
-   "pass": 20
+   "pass": 23
+  },
+  {
+   "row": "places#1",
+   "screen": "hood_street",
+   "verdict": "PASS",
+   "line": "The street's dark. Curtains drawn, the bus stop empty.",
+   "why": "daytime crowd only 07:00-21:00, night line 21:00-07:00 (wraps, v2.py:4826-4829), first-match chain v2.py:11893-11912; no clothes, met_ or presence read; identity line kept",
+   "cause": null,
+   "note": false,
+   "screen_hash": null,
+   "row_hash": "6daf4c28bcefc631",
+   "carried": true,
+   "pass": 24
   },
   {
    "row": "places#10",
@@ -11394,6 +11477,19 @@
    "row_hash": "d6f0b4b357efc043",
    "carried": true,
    "pass": 19
+  },
+  {
+   "row": "places#11",
+   "screen": "*",
+   "verdict": "N/A",
+   "line": "\u2014",
+   "why": "shape step 11 is for an event place; none among its places",
+   "cause": null,
+   "note": false,
+   "screen_hash": "06cb345f563fcf4d",
+   "row_hash": "969f86a77815f52d",
+   "carried": true,
+   "pass": 23
   },
   {
    "row": "places#2",
@@ -11652,8 +11748,8 @@
  ],
  "causes": [],
  "pending": [],
- "asked": 15,
- "answered": 15,
+ "asked": 1,
+ "answered": 1,
  "pass_items": [],
  "unowed": []
 }

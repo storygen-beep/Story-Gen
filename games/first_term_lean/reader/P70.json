@@ -1,6 +1,6 @@
 {
  "piece": "P70",
- "pass": 4,
+ "pass": 6,
  "screens": {
   "*": "4f53cda18c2baa0c"
  },
@@ -76,6 +76,7 @@
   "C422": "8933f85010afbef7",
   "C460": "beb5a109bde77305",
   "C2202": "d5592f287f5f641a",
+  "C2206": "99ccaf869af30473",
   "C461": "153b0804e686abae",
   "L163": "00a617ab9b4e9cd4",
   "voice#1": "b8e8afcb32208b40",
@@ -114,10 +115,11 @@
   "C2187": "d621c4772fef8f82",
   "C2188": "fbe14a2b0c34106e",
   "C2189": "04fb06f35934002e",
+  "C2205": "7f07ec6185cc3341",
   "C2190": "7e4f552f7679a5f9",
   "C2191": "71b59bd8f960bc11",
   "C2192": "fb8267ff01adf133",
-  "C2195": "40447ff526d3f730",
+  "C2195": "dff1aebbf2483684",
   "C2196": "4ca489a2e70123f0",
   "C2200": "414a4b008effe564",
   "walk-ins#1": "e2c5c7198fc0d5ef",
@@ -633,14 +635,14 @@
    "row": "C2195",
    "screen": "*",
    "verdict": "PASS",
-   "line": "",
-   "why": "trigger_mode random, chance 0.35, max_triggers_per_day 1, gated on his presence, off the shared flag",
+   "line": "((wd Mon-Fri AND 17:00-20:00) OR Saturday) AND npc_vance@hood_next_door is_present",
+   "why": "Saturday hours added, still 0.35, once a day, presence-gated, from the street, off the shared flag",
    "cause": null,
    "note": false,
    "screen_hash": "4f53cda18c2baa0c",
-   "row_hash": "40447ff526d3f730",
+   "row_hash": "dff1aebbf2483684",
    "carried": true,
-   "pass": 1
+   "pass": 5
   },
   {
    "row": "C2196",
@@ -678,7 +680,7 @@
    "note": false,
    "screen_hash": "4f53cda18c2baa0c",
    "row_hash": "4b15434d4248d5f0",
-   "carried": false,
+   "carried": true,
    "pass": 4
   },
   {
@@ -704,8 +706,34 @@
    "note": false,
    "screen_hash": "4f53cda18c2baa0c",
    "row_hash": "d5592f287f5f641a",
-   "carried": false,
+   "carried": true,
    "pass": 4
+  },
+  {
+   "row": "C2205",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "is_repeatable = true",
+   "why": "vance_gutter's Saturday hours only; step one ends into vance_envelope, which repeats every 7 days after a yes",
+   "cause": null,
+   "note": false,
+   "screen_hash": "4f53cda18c2baa0c",
+   "row_hash": "7f07ec6185cc3341",
+   "carried": true,
+   "pass": 6
+  },
+  {
+   "row": "C2206",
+   "screen": "*",
+   "verdict": "N/A",
+   "line": "Builds: none",
+   "why": "Builds names no canvas in 7_final_game.toml (locations, sidebar, phone, people or none); no group chain to judge",
+   "cause": null,
+   "note": false,
+   "screen_hash": "4f53cda18c2baa0c",
+   "row_hash": "99ccaf869af30473",
+   "carried": false,
+   "pass": 6
   },
   {
    "row": "C28",
@@ -1945,8 +1973,8 @@
  ],
  "causes": [],
  "pending": [],
- "asked": 2,
- "answered": 2,
+ "asked": 1,
+ "answered": 1,
  "pass_items": [],
  "unowed": []
 }

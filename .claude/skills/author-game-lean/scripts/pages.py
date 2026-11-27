@@ -210,20 +210,48 @@ def _cond_types(d):
     return out
 
 
+def _cond_items(d):
+    """Every condition item with a type, flattened."""
+    out = []
+    if isinstance(d, dict):
+        if d.get("type"):
+            out.append(d)
+        for v in d.values():
+            out += _cond_items(v)
+    elif isinstance(d, list):
+        for v in d:
+            out += _cond_items(v)
+    return out
+
+
 def description_problems(game):
-    """A place's description never changes with what she wears (craft/places.md rule 1, C2201). LO, typed in
-    main-lean 2026-11-27: "Yes, we should align our place description to it." A stranger noticing her clothes is a
-    "she gets noticed" scene (craft/walk-ins.md, C2200)."""
+    """A place's description says where she is and what is here, and changes only with the state of the place
+    (craft/places.md rule 1, C2201): never with what she wears, whom she has met, or her meters, and never to show a
+    person who is there, who is their face (rule 2, C795). LO, typed in main-lean 2026-11-27: "Yes, we should align
+    our place description to it."; then "go ahead" (the Sunday board read `met_brooke`; Vance's porch line read his
+    presence). A stranger noticing her clothes is a "she gets noticed" scene (craft/walk-ins.md, C2200)."""
     rows = []
     for loc in game.get("locations") or []:
         if not isinstance(loc, dict):
             continue
         for i, v in enumerate(loc.get("description_variants") or []):
-            hit = sorted(_cond_types((v or {}).get("conditions")) & CLOTH)
+            where = f"place `{loc.get('id')}`'s description variant {i + 1}"
+            conds = (v or {}).get("conditions")
+            hit = sorted(_cond_types(conds) & CLOTH)
             if hit:
-                rows.append(f"place `{loc.get('id')}`'s description variant {i + 1} changes with what she wears "
-                            f"(`{hit[0]}`): a description says where she is and what is here; make it a 'she gets "
-                            f"noticed' scene (craft/places.md rule 1, C2201)")
+                rows.append(f"{where} changes with what she wears (`{hit[0]}`): a description says where she is and "
+                            f"what is here; make it a 'she gets noticed' scene (craft/places.md rule 1, C2201)")
+            for it in _cond_items(conds):
+                if it.get("type") == "flag" and str(it.get("flag_key") or "").startswith("met_"):
+                    rows.append(f"{where} changes with whom she has met (`{it['flag_key']}`): what she knows goes in "
+                                f"a scene or a button, not the description (craft/places.md rule 1, C2201)")
+                elif it.get("type") == "trait":
+                    rows.append(f"{where} changes with a meter (`{it.get('trait_key')}`): a description changes only "
+                                f"with the state of the place (craft/places.md rule 1, C2201)")
+                elif it.get("type") == "npc_at_location" and it.get("operator") == "is_present":
+                    rows.append(f"{where} shows `{it.get('npc_id')}` being there: a person at a place is their face, "
+                                f"never a room-text line; 'nobody here' (is_absent) is fine (craft/places.md rule 2, "
+                                f"C795)")
     return rows
 
 

@@ -1,6 +1,6 @@
 {
  "piece": "P59",
- "pass": 11,
+ "pass": 16,
  "screens": {
   "talk_tom.hub": {
    "text": "e27ea7c722ff2d69",
@@ -31,20 +31,20 @@
    "all": "ce0845dfcb342a34"
   },
   "talk_sam.hub": {
-   "text": "ae117e79ac73404b",
+   "text": "94ad064133e4989d",
    "traits": "6f7af508d18adad9",
-   "facts": "4862ab148e93e845",
-   "facts2": "040b56d618107b37",
-   "all": "72b3971a0044b046"
+   "facts": "6b74a07564473739",
+   "facts2": "4f2e14ff3d929de8",
+   "all": "5c4684c51378796c"
   },
   "talk_sam.talk": {
-   "text": "24fc95df70a8222b",
+   "text": "79941b1b988cab94",
    "traits": "fa1a0a429fa0ea30",
-   "facts": "4e9063a15548cc5e",
-   "facts2": "d2f21d032729cccc",
-   "all": "3fbf4e1f2213f649"
+   "facts": "ae36424fe2a364c5",
+   "facts2": "22fd4b57898cbf3e",
+   "all": "406b179194cf9bab"
   },
-  "*": "24066a8ed7480c99"
+  "*": "92fbf088a1fa948f"
  },
  "rows": {
   "B1": "5276068df1ca6fa9",
@@ -97,7 +97,7 @@
   "C1267": "f0db81b801577bf2",
   "C1249": "a843f9b57e43a020",
   "C1250": "fde578d75b0d3620",
-  "C1265": "eb11e05cd75e52a9",
+  "C1265": "689fd05a4bcbd8be",
   "C1234": "1b2a2d5f05b10331",
   "L121": "45842b25d0708a15",
   "L125": "1fca3bfe1d0c2419",
@@ -127,7 +127,7 @@
   "C2198": "73dfe095a72154a3",
   "C769": "f6b6f78a8f2e5ed7",
   "C794": "bad76e5963432385",
-  "C2201": "d119dfe665f76359",
+  "C2201": "7fddf5e17dbdaaf9",
   "C795": "34139e6a6914e171",
   "C804": "5358489178bff0a4",
   "L106": "13a714429d15f3b2",
@@ -139,6 +139,7 @@
   "C762": "40e85f1ae92f1e71",
   "L170": "c3599cd09637a240",
   "C770": "ff9aa31c11e5d50f",
+  "C2203": "365a29fd77f6b765",
   "C771": "563e3d25c3219dd0",
   "L166": "c12d10588197fbaf",
   "C1303": "5b031a6b82899cfd",
@@ -166,6 +167,7 @@
   "C422": "7e128897077ecee6",
   "C460": "67e48e60d5053a2e",
   "C2202": "6e90fed7eae62131",
+  "C2206": "d8ebf6d6b2abf6a5",
   "C461": "310706ee076318f2",
   "C2189": "20748838895e4545"
  },
@@ -238,39 +240,39 @@
    "row": "B10",
    "screen": "talk_sam.hub",
    "verdict": "PASS",
-   "line": "Sam's sprawled on the sofa with his guitar, barefoot",
-   "why": "Sam's rows put him at near_zoe_apartment 12-02 daily; the menu opens 12:00-00:00 (Sat 12:00-21:00), inside them",
+   "line": "Sam's sprawled on the sofa with his guitar, barefoot, and he lifts two fingers off the strings at you. / picture without 'Alone.'",
+   "why": "requires_npc npc_sam (always home 12-02); the picture no longer says Alone, so it holds at the party too ('Sam's on the sofa under the coats', party_zoe_sam).",
    "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "ae117e79ac73404b",
+    "text": "94ad064133e4989d",
     "traits": "6f7af508d18adad9",
-    "facts": "4862ab148e93e845",
-    "facts2": "040b56d618107b37",
-    "all": "72b3971a0044b046"
+    "facts": "6b74a07564473739",
+    "facts2": "4f2e14ff3d929de8",
+    "all": "5c4684c51378796c"
    },
    "row_hash": "c1c0e2ac2588a579",
    "carried": true,
-   "pass": 2
+   "pass": 14
   },
   {
    "row": "B10",
    "screen": "talk_sam.talk",
    "verdict": "PASS",
-   "line": "Sunshine. Here for Zoe, or for me? ... Saturday nights there's a party here. I'll be on this sofa. Come and sit on it with me.",
-   "why": "read at the meeting's own visit (menu right after the meeting), the last minute of the row and the fifth visit: the opening claims no return and no first time; zoe_party runs at near_zoe_apartment Saturday 21:00-01:00 every week (partied_this_week), and its home node puts Sam on the sofa under the coats; his menu shuts at 21:00 on Saturday, so the talk always points at a party that has not started; Zoe is named only as a question",
+   "line": "Saturday nights there's a party here. I'll be on this sofa.",
+   "why": "true at 12:00 and 23:59 on any day, and on a second visit; Sam is there (who_is_where)",
    "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "24fc95df70a8222b",
+    "text": "79941b1b988cab94",
     "traits": "fa1a0a429fa0ea30",
-    "facts": "73322662dc17c11d",
-    "facts2": "d2f21d032729cccc",
-    "all": "a79ebc75a3f89ac1"
+    "facts": "ae36424fe2a364c5",
+    "facts2": "22fd4b57898cbf3e",
+    "all": "406b179194cf9bab"
    },
    "row_hash": "c1c0e2ac2588a579",
    "carried": true,
-   "pass": 3
+   "pass": 13
   },
   {
    "row": "B10",
@@ -288,7 +290,7 @@
     "all": "5bef4a1012371b0b"
    },
    "row_hash": "c1c0e2ac2588a579",
-   "carried": false,
+   "carried": true,
    "pass": 11
   },
   {
@@ -551,39 +553,39 @@
    "row": "B8",
    "screen": "talk_sam.hub",
    "verdict": "PASS",
-   "line": "A man of 22 sprawled barefoot on a sofa in a small shared student apartment",
-   "why": "age 22 matches; no garment of hers; hours agree with the card (12:00-00:00, Sat 12:00-21:00)",
+   "line": "A man of 22 sprawled barefoot on a sofa",
+   "why": "Sam is 22 (npc age, PLAN.md:237); no garment of hers named.",
    "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "ae117e79ac73404b",
+    "text": "94ad064133e4989d",
     "traits": "6f7af508d18adad9",
-    "facts": "4862ab148e93e845",
-    "facts2": "040b56d618107b37",
-    "all": "72b3971a0044b046"
+    "facts": "6b74a07564473739",
+    "facts2": "4f2e14ff3d929de8",
+    "all": "5c4684c51378796c"
    },
    "row_hash": "80d415cf08e0ebfe",
    "carried": true,
-   "pass": 2
+   "pass": 14
   },
   {
    "row": "B8",
    "screen": "talk_sam.talk",
    "verdict": "PASS",
-   "line": "Sunshine. Here for Zoe, or for me? ... Saturday nights there's a party here. I'll be on this sofa. Come and sit on it with me.",
-   "why": "no garment of hers is named; zoe_party runs at near_zoe_apartment Saturday 21:00-01:00 every week (partied_this_week), and its home node puts Sam on the sofa under the coats; his menu shuts at 21:00 on Saturday, so the talk always points at a party that has not started; Zoe is named only as a question",
+   "line": "He plays three chords badly, watching your legs instead of his hands.",
+   "why": "no garment of hers named, no number",
    "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "24fc95df70a8222b",
+    "text": "79941b1b988cab94",
     "traits": "fa1a0a429fa0ea30",
-    "facts": "73322662dc17c11d",
-    "facts2": "d2f21d032729cccc",
-    "all": "a79ebc75a3f89ac1"
+    "facts": "ae36424fe2a364c5",
+    "facts2": "22fd4b57898cbf3e",
+    "all": "406b179194cf9bab"
    },
    "row_hash": "80d415cf08e0ebfe",
    "carried": true,
-   "pass": 3
+   "pass": 13
   },
   {
    "row": "B8",
@@ -601,7 +603,7 @@
     "all": "5bef4a1012371b0b"
    },
    "row_hash": "80d415cf08e0ebfe",
-   "carried": false,
+   "carried": true,
    "pass": 11
   },
   {
@@ -816,14 +818,14 @@
    "row": "C1265",
    "screen": "*",
    "verdict": "PASS",
-   "line": "talk_tom/chris/sam .hub pictures",
-   "why": "on menus only, the C596 exception",
+   "line": "talk_tom/chris/sam.hub pictures",
+   "why": "person menus, the C596 exception",
    "cause": null,
    "note": false,
-   "screen_hash": "e365f92d63479dae",
-   "row_hash": "eb11e05cd75e52a9",
+   "screen_hash": "92fbf088a1fa948f",
+   "row_hash": "689fd05a4bcbd8be",
    "carried": true,
-   "pass": 7
+   "pass": 15
   },
   {
    "row": "C1267",
@@ -1453,21 +1455,21 @@
     "all": "5bef4a1012371b0b"
    },
    "row_hash": "73dfe095a72154a3",
-   "carried": false,
+   "carried": true,
    "pass": 11
   },
   {
    "row": "C2201",
    "screen": "*",
    "verdict": "N/A",
-   "line": "(the talk_tom/chris/sam hubs)",
-   "why": "scene and menu screens, not a place's description; the descriptions of the places they sit at read no clothes or meters (all 31 checked)",
+   "line": "\u2014",
+   "why": "builds no place description; its screens are scenes or menus, and a scene is not a place's description",
    "cause": null,
    "note": false,
-   "screen_hash": "8fb2408cd26130a7",
-   "row_hash": "d119dfe665f76359",
+   "screen_hash": "24066a8ed7480c99",
+   "row_hash": "7fddf5e17dbdaaf9",
    "carried": true,
-   "pass": 8
+   "pass": 12
   },
   {
    "row": "C2202",
@@ -1582,6 +1584,32 @@
    "row_hash": "6e90fed7eae62131",
    "carried": true,
    "pass": 10
+  },
+  {
+   "row": "C2203",
+   "screen": "*",
+   "verdict": "N/A",
+   "line": "\u2014",
+   "why": "no event at its places: nothing here has hours of its own as a party or night out; Zoe's party (C2203) is P75's and P05's place",
+   "cause": null,
+   "note": false,
+   "screen_hash": "24066a8ed7480c99",
+   "row_hash": "365a29fd77f6b765",
+   "carried": true,
+   "pass": 12
+  },
+  {
+   "row": "C2206",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "talk_tom, talk_chris, talk_sam",
+   "why": "no side-by-side groups on its 3 canvas(es); nothing can be covered",
+   "cause": null,
+   "note": false,
+   "screen_hash": "92fbf088a1fa948f",
+   "row_hash": "d8ebf6d6b2abf6a5",
+   "carried": false,
+   "pass": 16
   },
   {
    "row": "C422",
@@ -1747,39 +1775,39 @@
    "row": "C460",
    "screen": "talk_sam.hub",
    "verdict": "PASS",
-   "line": "Sam's sprawled on the sofa with his guitar",
-   "why": "every claim holds on every visit by the rows (Tom Mon-Sat 10-21, Chris 07-15/10-20, Sam 12-02) and the met flags ('Rookie', 'Off the clock' after the hire and the first shift)",
+   "line": "Sam's sprawled on the sofa with his guitar, barefoot, and he lifts two fingers off the strings at you.",
+   "why": "True on every day 12:00-00:00 including the party; the 'Alone.' that was false at the party is gone.",
    "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "ae117e79ac73404b",
+    "text": "94ad064133e4989d",
     "traits": "6f7af508d18adad9",
-    "facts": "4862ab148e93e845",
-    "facts2": "040b56d618107b37",
-    "all": "72b3971a0044b046"
+    "facts": "6b74a07564473739",
+    "facts2": "4f2e14ff3d929de8",
+    "all": "5c4684c51378796c"
    },
    "row_hash": "67e48e60d5053a2e",
    "carried": true,
-   "pass": 2
+   "pass": 14
   },
   {
    "row": "C460",
    "screen": "talk_sam.talk",
    "verdict": "PASS",
-   "line": "Sunshine. Here for Zoe, or for me? ... Saturday nights there's a party here. I'll be on this sofa. Come and sit on it with me.",
-   "why": "every claim holds on every playthrough that reaches the screen: zoe_party runs at near_zoe_apartment Saturday 21:00-01:00 every week (partied_this_week), and its home node puts Sam on the sofa under the coats; his menu shuts at 21:00 on Saturday, so the talk always points at a party that has not started; Zoe is named only as a question",
+   "line": "Saturday nights there's a party here. I'll be on this sofa. Come and sit on it with me.",
+   "why": "true at the party too: it is Saturday, there is a party, he is on the sofa (party_zoe_sam)",
    "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "24fc95df70a8222b",
+    "text": "79941b1b988cab94",
     "traits": "fa1a0a429fa0ea30",
-    "facts": "73322662dc17c11d",
-    "facts2": "d2f21d032729cccc",
-    "all": "a79ebc75a3f89ac1"
+    "facts": "ae36424fe2a364c5",
+    "facts2": "22fd4b57898cbf3e",
+    "all": "406b179194cf9bab"
    },
    "row_hash": "67e48e60d5053a2e",
    "carried": true,
-   "pass": 3
+   "pass": 13
   },
   {
    "row": "C460",
@@ -1797,7 +1825,7 @@
     "all": "5bef4a1012371b0b"
    },
    "row_hash": "67e48e60d5053a2e",
-   "carried": false,
+   "carried": true,
    "pass": 11
   },
   {
@@ -1855,39 +1883,39 @@
    "row": "C461",
    "screen": "talk_sam.hub",
    "verdict": "PASS",
-   "line": "Sam's sprawled on the sofa with his guitar",
-   "why": "texture and the person's own talk; Tom's 'that's where the tips are' is a Sly manager's pitch, Sam's 'Which is always' his joke",
+   "line": "Sam's sprawled on the sofa with his guitar, barefoot, and he lifts two fingers off the strings at you.",
+   "why": "Texture that fits his cast entry.",
    "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "ae117e79ac73404b",
+    "text": "94ad064133e4989d",
     "traits": "6f7af508d18adad9",
-    "facts": "4862ab148e93e845",
-    "facts2": "040b56d618107b37",
-    "all": "72b3971a0044b046"
+    "facts": "6b74a07564473739",
+    "facts2": "4f2e14ff3d929de8",
+    "all": "5c4684c51378796c"
    },
    "row_hash": "310706ee076318f2",
    "carried": true,
-   "pass": 2
+   "pass": 14
   },
   {
    "row": "C461",
    "screen": "talk_sam.talk",
    "verdict": "PASS",
-   "line": "Sunshine. Here for Zoe, or for me? ... Saturday nights there's a party here. I'll be on this sofa. Come and sit on it with me.",
-   "why": "the rest is texture and the person's own manner; nothing can clash",
+   "line": "Ask Zoe. Then don't sit on that end.",
+   "why": "dialogue that fits his cast entry",
    "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "24fc95df70a8222b",
+    "text": "79941b1b988cab94",
     "traits": "fa1a0a429fa0ea30",
-    "facts": "73322662dc17c11d",
-    "facts2": "d2f21d032729cccc",
-    "all": "a79ebc75a3f89ac1"
+    "facts": "ae36424fe2a364c5",
+    "facts2": "22fd4b57898cbf3e",
+    "all": "406b179194cf9bab"
    },
    "row_hash": "310706ee076318f2",
    "carried": true,
-   "pass": 3
+   "pass": 13
   },
   {
    "row": "C461",
@@ -1905,7 +1933,7 @@
     "all": "5bef4a1012371b0b"
    },
    "row_hash": "310706ee076318f2",
-   "carried": false,
+   "carried": true,
    "pass": 11
   },
   {
@@ -2430,20 +2458,20 @@
    "row": "C927",
    "screen": "talk_sam.talk",
    "verdict": "PASS",
-   "line": "Talk 0 \u00b7 Leave 0 \u00b7 Done 10",
-   "why": "every exit states its minutes (v2.py:17877 reads the value given); Done is 10",
+   "line": "Done: time_progression_minutes = 10",
+   "why": "exit states its 10 minutes; nothing relies on the 3-minute default",
    "cause": null,
    "note": true,
    "screen_hash": {
-    "text": "24fc95df70a8222b",
+    "text": "79941b1b988cab94",
     "traits": "fa1a0a429fa0ea30",
-    "facts": "73322662dc17c11d",
-    "facts2": "d2f21d032729cccc",
-    "all": "a79ebc75a3f89ac1"
+    "facts": "ae36424fe2a364c5",
+    "facts2": "22fd4b57898cbf3e",
+    "all": "406b179194cf9bab"
    },
    "row_hash": "4e86d143688ba8e5",
    "carried": true,
-   "pass": 3
+   "pass": 13
   },
   {
    "row": "C927",
@@ -2461,7 +2489,7 @@
     "all": "5bef4a1012371b0b"
    },
    "row_hash": "4e86d143688ba8e5",
-   "carried": false,
+   "carried": true,
    "pass": 11
   },
   {
@@ -2526,20 +2554,20 @@
    "row": "C931",
    "screen": "talk_sam.talk",
    "verdict": "PASS",
-   "line": "{ weekday [0-4,6], 12:00-00:00 } OR { weekday [5], 12:00-21:00 }",
-   "why": "end 00:00 wraps to the end of the day (v2.py:4818-4822); Saturday ends at 21:00, end exclusive, when zoe_party opens",
+   "line": "time_of_day 21:00-00:00",
+   "why": "21:00-00:00 wraps (end 0 < start, v2.py:4826-4829), end exclusive, so Sunday 00:00 is outside",
    "cause": null,
    "note": true,
    "screen_hash": {
-    "text": "24fc95df70a8222b",
+    "text": "79941b1b988cab94",
     "traits": "fa1a0a429fa0ea30",
-    "facts": "73322662dc17c11d",
-    "facts2": "d2f21d032729cccc",
-    "all": "a79ebc75a3f89ac1"
+    "facts": "ae36424fe2a364c5",
+    "facts2": "22fd4b57898cbf3e",
+    "all": "406b179194cf9bab"
    },
    "row_hash": "1aadffd96e76381c",
    "carried": true,
-   "pass": 3
+   "pass": 13
   },
   {
    "row": "C931",
@@ -2557,7 +2585,7 @@
     "all": "5bef4a1012371b0b"
    },
    "row_hash": "1aadffd96e76381c",
-   "carried": false,
+   "carried": true,
    "pass": 11
   },
   {
@@ -2628,39 +2656,39 @@
    "row": "L106",
    "screen": "talk_sam.hub",
    "verdict": "PASS",
-   "line": "Sam's sprawled on the sofa with his guitar",
-   "why": "nobody is said to be there whom their rows don't put there; Zoe and Tom are named only as absent or as a question",
+   "line": "Sam's sprawled on the sofa with his guitar, barefoot, and he lifts two fingers off the strings at you.",
+   "why": "requires_npc npc_sam; his row puts him at Zoe's 12-24 every day.",
    "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "ae117e79ac73404b",
+    "text": "94ad064133e4989d",
     "traits": "6f7af508d18adad9",
-    "facts": "4862ab148e93e845",
-    "facts2": "040b56d618107b37",
-    "all": "72b3971a0044b046"
+    "facts": "6b74a07564473739",
+    "facts2": "4f2e14ff3d929de8",
+    "all": "5c4684c51378796c"
    },
    "row_hash": "13a714429d15f3b2",
    "carried": true,
-   "pass": 2
+   "pass": 14
   },
   {
    "row": "L106",
    "screen": "talk_sam.talk",
    "verdict": "PASS",
-   "line": "Here for Zoe, or for me? ... Ask Zoe.",
-   "why": "only the menu's own person is placed (requires_npc); nobody else is said to be there",
+   "line": "Sunshine. Here for Zoe, or for me?",
+   "why": "names only Sam and Zoe as people she might be here for; Sam is there",
    "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "24fc95df70a8222b",
+    "text": "79941b1b988cab94",
     "traits": "fa1a0a429fa0ea30",
-    "facts": "73322662dc17c11d",
-    "facts2": "d2f21d032729cccc",
-    "all": "a79ebc75a3f89ac1"
+    "facts": "ae36424fe2a364c5",
+    "facts2": "22fd4b57898cbf3e",
+    "all": "406b179194cf9bab"
    },
    "row_hash": "13a714429d15f3b2",
    "carried": true,
-   "pass": 3
+   "pass": 13
   },
   {
    "row": "L106",
@@ -2678,7 +2706,7 @@
     "all": "5bef4a1012371b0b"
    },
    "row_hash": "13a714429d15f3b2",
-   "carried": false,
+   "carried": true,
    "pass": 11
   },
   {
@@ -2826,20 +2854,20 @@
    "row": "L167",
    "screen": "talk_sam.talk",
    "verdict": "PASS",
-   "line": "[canvases.trigger] one group condition, two day kinds",
-   "why": "Sam's two day kinds are one trigger with a group condition, not one canvas per day kind",
+   "line": "one trigger row, group conditions",
+   "why": "Saturday hours ride one row's OR group, not one row per day kind",
    "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "24fc95df70a8222b",
+    "text": "79941b1b988cab94",
     "traits": "fa1a0a429fa0ea30",
-    "facts": "73322662dc17c11d",
-    "facts2": "d2f21d032729cccc",
-    "all": "a79ebc75a3f89ac1"
+    "facts": "ae36424fe2a364c5",
+    "facts2": "22fd4b57898cbf3e",
+    "all": "406b179194cf9bab"
    },
    "row_hash": "e64ce2672d85d2d8",
    "carried": true,
-   "pass": 3
+   "pass": 13
   },
   {
    "row": "L167",
@@ -2857,7 +2885,7 @@
     "all": "5bef4a1012371b0b"
    },
    "row_hash": "e64ce2672d85d2d8",
-   "carried": false,
+   "carried": true,
    "pass": 11
   },
   {
@@ -2876,8 +2904,8 @@
  ],
  "causes": [],
  "pending": [],
- "asked": 9,
- "answered": 9,
+ "asked": 1,
+ "answered": 1,
  "pass_items": [],
  "unowed": []
 }
