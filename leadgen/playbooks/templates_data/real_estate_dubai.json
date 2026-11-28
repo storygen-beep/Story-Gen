@@ -1,0 +1,60 @@
+{
+  "profile": {
+    "business_name": "",
+    "what_we_sell": "Residential property in Dubai: off-plan, resale and rentals",
+    "areas": ["Dubai Marina", "JVC", "Downtown Dubai", "Business Bay", "Palm Jumeirah"],
+    "languages": ["en", "ar"],
+    "working_hours": {"days": "Mon-Sat", "from": "09:00", "to": "20:00"}
+  },
+  "goal": {
+    "primary": "book_viewing_or_call",
+    "fallback": "send_matching_listings_and_nurture"
+  },
+  "questions": [
+    {"key": "intent", "ask": "Are you looking to buy or rent?", "required": true, "options": ["buy", "rent"]},
+    {"key": "budget_aed", "ask": "What budget range are you working with?", "required": true, "type": "number"},
+    {"key": "area", "ask": "Which area or community do you have in mind?", "required": true},
+    {"key": "property_type", "ask": "What type of property, and how many bedrooms?", "required": true},
+    {"key": "financing", "ask": "Would this be a cash purchase or with a mortgage?", "required": true, "only_if": {"intent": "buy"}, "options": ["cash", "mortgage"]},
+    {"key": "timeline_months", "ask": "When are you hoping to move or buy?", "required": true, "type": "number"},
+    {"key": "location", "ask": "Are you in the UAE at the moment, or abroad?", "required": true, "options": ["in_uae", "abroad"]},
+    {"key": "purpose", "ask": "Is this to live in or as an investment?", "required": false, "options": ["live", "invest"]}
+  ],
+  "scoring": {
+    "hot": {"all_required_answered": true, "timeline_months_max": 3, "budget_aed_min": 0},
+    "warm": {"timeline_months_max": 12},
+    "cold": {"otherwise": true, "no_reply_hours": 72}
+  },
+  "handoff": {
+    "routing": "by_area_then_round_robin",
+    "accept_within_minutes": 10,
+    "on_timeout": "backup_agent_then_alert_owner",
+    "tell_lead": "{agent_name}, our {area} specialist, will call you shortly."
+  },
+  "voice": {
+    "persona_name": "Sara",
+    "formality": "friendly_professional",
+    "emoji": false,
+    "max_sentences_per_reply": 3,
+    "mention_listing_by_name": true
+  },
+  "rules": [
+    "Never promise rental yields, returns or price growth.",
+    "Never give mortgage, legal or visa advice; offer to connect them with the agent.",
+    "Never discuss commission or fees unless it is in the knowledge base.",
+    "Only state prices and facts found in the knowledge base; otherwise say the agent will confirm.",
+    "Hand off to a human immediately if the lead is angry or asks for a person.",
+    "If the lead says stop or unsubscribe, opt them out and send nothing further."
+  ],
+  "quiet_hours": {"from": "22:00", "to": "08:00"},
+  "follow_up": {
+    "max_unanswered": 3,
+    "steps": [
+      {"after_days": 1, "action": "send_3_matching_listings"},
+      {"after_days": 3, "action": "check_in"},
+      {"after_days": 7, "action": "send_new_listings"},
+      {"after_days": 21, "action": "check_in", "repeat_every_days": 14}
+    ],
+    "stop_on_reply": true
+  }
+}
