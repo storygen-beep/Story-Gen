@@ -14,6 +14,10 @@ Endpoints (under /api/v1/dev/media-review/):
                                + shelf depth (options_count / options_total)
 - POST reviews?game=<slug>  -> upsert one {file, status, note} into media_reviews.json
                                status: approved | disapproved | not_needed | null
+                               and/or {findability}: green | yellow | red | null — how
+                               easy the right media was to find on the shelf (LO,
+                               2026-11-28). Each key is written only when the body
+                               carries it, so a colour never clobbers a verdict.
 """
 
 import json
@@ -34,6 +38,9 @@ from apps.common.media_band import is_nsfw
 from .game_review import GAMES_ROOT, _extract_missing_media, _resolve_final_toml
 
 # Display order for lanes in the review UI. Lanes not listed fall to the end.
+# How easy the right media was to find on its shelf (media_reviews.json `findability`).
+FINDABILITY = ("green", "yellow", "red")
+
 LANE_ORDER = [
     "location",
     "npc",
@@ -274,6 +281,9 @@ def _enumerate(game: str, game_dir: Path) -> dict | None:
             rev = reviews.get(item.get("slot_key") or item.get("file"), {})
             item["status"] = rev.get("status")  # "approved" | "disapproved" | "not_needed" | None
             item["note"] = rev.get("note", "")
+            # Green: found on the shelf easily and it matches. Yellow: hard to find.
+            # Red: impossible. A finding about the SEARCH, kept apart from the verdict.
+            item["findability"] = rev.get("findability")
 
             # Shelf depth, read under the same key as the verdict. Attached BEFORE
             # the dedupe below so the surviving row of a reused asset keeps its own
@@ -317,6 +327,9 @@ def _enumerate(game: str, game_dir: Path) -> dict | None:
             "not_needed": sum(1 for i in items if not i["found"] and i["status"] == NOT_NEEDED),
             "approved": sum(1 for i in items if i["status"] == "approved"),
             "disapproved": sum(1 for i in items if i["status"] == "disapproved"),
+            "findability": {
+                c: sum(1 for i in items if i.get("findability") == c) for c in FINDABILITY
+            },
             # Shelf state: work waiting on the HUMAN vs work waiting on the SEARCH.
             "ready_to_pick": sum(
                 1 for i in items
@@ -378,18 +391,32 @@ def post_review(request):
     file_ = body.get("slot_key") or body.get("file")
     if not file_:
         return JsonResponse({"error": "Missing 'file'"}, status=400)
+    if "status" not in body and "findability" not in body:
+        return JsonResponse({"error": "Send 'status' or 'findability'"}, status=400)
     status = body.get("status")
     if status not in ("approved", "disapproved", NOT_NEEDED, None):
         return JsonResponse(
             {"error": "status must be approved, disapproved, not_needed, or null"}, status=400
         )
-    note = body.get("note", "")
+    findability = body.get("findability")
+    if findability not in FINDABILITY + (None,):
+        return JsonResponse({"error": "findability must be green, yellow, red, or null"}, status=400)
 
     with _reviews_lock(game_dir):
         ledger = _read_reviews(game_dir)
         now = datetime.now(timezone.utc).isoformat()
         entry = ledger["reviews"].get(file_, {})
-        entry.update({"status": status, "note": note, "updated_at": now})
+        # Only the keys the body carries change: the colour buttons send findability
+        # alone, the verdict buttons send status and note, and neither wipes the other.
+        changes = {"updated_at": now}
+        if "status" in body:
+            changes["status"] = status
+            changes["note"] = body.get("note", "")
+        elif "note" in body:
+            changes["note"] = body.get("note", "")
+        if "findability" in body:
+            changes["findability"] = findability
+        entry.update(changes)
         ledger["reviews"][file_] = entry
         ledger["game"] = game
         ledger["updated_at"] = now

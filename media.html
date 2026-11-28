@@ -74,6 +74,13 @@
         { key: "missing", label: "Missing", test: function (i) { return !i.found && !notNeeded(i); } },
         { key: "notneeded", label: "Not needed", test: notNeeded }
       ]},
+      { id: "find", label: "Findability", options: [
+        { key: "all", label: "All", test: function () { return true; } },
+        { key: "green", label: "Easy", test: function (i) { return i.findability === "green"; } },
+        { key: "yellow", label: "Hard", test: function (i) { return i.findability === "yellow"; } },
+        { key: "red", label: "Impossible", test: function (i) { return i.findability === "red"; } },
+        { key: "unmarked", label: "Unmarked", test: function (i) { return !i.findability; } }
+      ]},
       { id: "band", label: "Content", options: [
         { key: "all", label: "All", test: function () { return true; } },
         { key: "sfw", label: "SFW", test: function (i) { return !isNsfw(i); } },
@@ -94,7 +101,7 @@
 
     var state = {
       items: [], laneOrder: [], toml: "", counts: {}, expanded: new Set(),
-      filters: { status: "all", band: "all", shape: "all" }
+      filters: { status: "all", find: "all", band: "all", shape: "all" }
     };
 
     function axisById(id) {
@@ -346,12 +353,55 @@
       });
     }
 
+    // Findability (LO, 2026-11-28): green = the right media was easy to find on the
+    // shelf and matches, yellow = hard to find, red = impossible. Saved on its own, so
+    // it never touches the verdict or the note.
+    var FIND = [["green", "Easy"], ["yellow", "Hard"], ["red", "Impossible"]];
+    function saveFindability(item, colour, tickEl, onOk) {
+      var prev = item.findability || null;
+      item.findability = colour;
+      if (tickEl) tickEl.textContent = "saving…";
+      return fetch(API + "/api/v1/dev/media-review/reviews?game=" + encodeURIComponent(GAME), {
+        method: "POST",
+        body: JSON.stringify({ file: item.file, slot_key: item.slot_key || item.file, findability: colour })
+      }).then(function (r) {
+        if (!r.ok) throw new Error("save failed");
+        if (tickEl) { tickEl.textContent = "saved ✓"; setTimeout(function () { tickEl.textContent = ""; }, 1400); }
+        if (onOk) onOk();
+      }).catch(function () {
+        item.findability = prev;   // roll back — nothing was persisted
+        if (tickEl) tickEl.textContent = "save failed — is the server up?";
+        if (onOk) onOk();
+      });
+    }
+
     function buildCard(item) {
       var card = el("div", "media-card");
       function reflectStatus() {
         card.classList.toggle("approved", item.status === "approved");
         card.classList.toggle("disapproved", item.status === "disapproved");
         card.classList.toggle("not-needed", notNeeded(item));
+        FIND.forEach(function (f) { card.classList.toggle("find-" + f[0], item.findability === f[0]); });
+      }
+      // The three findability buttons, on every card: a slot with nothing found can be red.
+      function findRow(tickEl) {
+        var row = el("div", "find-row");
+        row.appendChild(el("span", "k", "on the shelf:"));
+        var btns = FIND.map(function (f) {
+          var b = el("button", "find-btn " + f[0], f[1]);
+          b.title = { green: "easy to find, and it matches", yellow: "hard to find", red: "impossible to find" }[f[0]];
+          b.addEventListener("click", function () {
+            var next = item.findability === f[0] ? null : f[0];
+            saveFindability(item, next, tickEl, function () { reflect(); reflectStatus(); renderSub(); });
+          });
+          row.appendChild(b);
+          return b;
+        });
+        function reflect() {
+          btns.forEach(function (b, k) { b.classList.toggle("on", item.findability === FIND[k][0]); });
+        }
+        reflect();
+        return row;
       }
 
       // media / placeholder
@@ -489,7 +539,7 @@
         });
 
         row.append(approve, disapprove);
-        body.append(row, note, tick);
+        body.append(row, findRow(tick), note, tick);
         reflectButtons();
       } else {
         // A missing spot: one button to say no media is wanted here. Clicking it
@@ -512,7 +562,7 @@
           if (nNote.value !== (item.note || "")) saveReview(item, item.status || null, nNote.value, nTick);
         });
         nRow.appendChild(nBtn);
-        body.append(nRow, nNote, nTick);
+        body.append(nRow, findRow(nTick), nNote, nTick);
       }
 
       // Find media — on every card (fill a missing slot, or replace this one).
@@ -648,6 +698,9 @@
         n(notNeeded) + " not needed · " +
         n(function (i) { return i.status === "approved"; }) + " approved · " +
         n(function (i) { return i.status === "disapproved"; }) + " disapproved · " +
+        n(function (i) { return i.findability === "green"; }) + " easy / " +
+        n(function (i) { return i.findability === "yellow"; }) + " hard / " +
+        n(function (i) { return i.findability === "red"; }) + " impossible · " +
         n(readyToPick) + " ready to pick / " + n(unworked) + " not worked · " +
         (c.nsfw || 0) + " nsfw / " + (c.sfw || 0) + " sfw · " +
         (c.pool || 0) + " pools / " + (c.single || 0) + " single" +
